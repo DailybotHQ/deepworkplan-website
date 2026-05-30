@@ -57,7 +57,7 @@ function closeAllDropdowns() {
 
 <svelte:window on:click={closeAllDropdowns} />
 
-<header class="bg-main text-white sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300">
+<header class="bg-paper text-ink dark:bg-main dark:text-white sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
   <nav class="main-container flex items-center justify-between">
     <a
       href={prefix || '/'}
@@ -65,11 +65,20 @@ function closeAllDropdowns() {
       aria-label="Deep Work Plan"
     >
       <img
-        class="h-7 w-auto md:h-8"
-        src="/images/logo_small_version_white.svg"
+        class="h-7 w-auto md:h-8 block dark:hidden"
+        src="/images/brand/dwp-mark-light.png"
         alt=""
-        width={952}
-        height={168}
+        width={241}
+        height={160}
+        loading="eager"
+        fetchpriority="high"
+      />
+      <img
+        class="h-7 w-auto md:h-8 hidden dark:block"
+        src="/images/brand/dwp-mark-dark.png"
+        alt=""
+        width={241}
+        height={160}
         loading="eager"
         fetchpriority="high"
       />
