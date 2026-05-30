@@ -1,5 +1,10 @@
 <div align="center">
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/images/brand/dwp-mark-dark.png" />
+  <img alt="Deep Work Plan" src="./public/images/brand/dwp-mark-light.png" width="200" />
+</picture>
+
 # Deep Work Plan
 
 **The methodology site for planning and executing complex software work with AI coding agents.**
