@@ -47,7 +47,7 @@ ICO_SIZES = [16, 32, 48]
 APPLE_TOUCH_SIZE = 180
 PWA_SIZES = [192, 512]
 TILE_RADIUS_FRAC = 0.22   # rounded-corner radius as fraction of tile size
-TILE_LOGO_FRAC = 0.70     # logo occupies this fraction of the tile
+TILE_LOGO_FRAC = 0.90     # logo occupies this fraction of the tile
 
 
 def hex_to_rgb(h: str) -> tuple[int, int, int]:

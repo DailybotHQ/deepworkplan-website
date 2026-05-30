@@ -45,7 +45,7 @@ const ICO_SIZES = [16, 32, 48];
 const APPLE_TOUCH = 180;
 const PWA_SIZES = [192, 512];
 const TILE_RADIUS_FRAC = 0.22;
-const TILE_LOGO_FRAC = 0.7;
+const TILE_LOGO_FRAC = 0.9;
 
 function parseArgs(argv) {
   const a = { ...DEFAULTS };
