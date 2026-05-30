@@ -22,6 +22,28 @@
    * Warm paper + ink, hairline rules, a single restrained oxblood accent.
    * Token API kept backward-compatible: `--color-main` = warm ink base
    * (branded/dark surfaces), `--color-secondary`/`--color-accent` = oxblood. */
+
+  /* Typography — serif-led "true newsprint" type system.
+   * Decision: serif for BOTH headings AND body (the editorial direction calls
+   * for a journal/broadsheet feel). This sandbox has NO network access to
+   * download a webfont woff2, so we ship a robust, self-contained SYSTEM serif
+   * stack instead of an @font-face download — zero extra requests, zero FOUT,
+   * no layout shift. The stack prefers high-quality reading serifs that ship
+   * with macOS/iOS/Windows/Linux, degrading to Georgia / Times / serif.
+   * If a self-hosted serif woff2 is added to public/fonts/ later, declare an
+   * @font-face above and prepend its family name here. */
+  --font-serif:
+    "Iowan Old Style", "Newsreader", "Source Serif 4", "Charter", "Spectral",
+    "Georgia", "Times New Roman", "Times", serif;
+  /* Atkinson Hyperlegible is kept available as a highly legible UI fallback
+   * (e.g. small labels) but the site default is the serif stack above. */
+  --font-sans:
+    "Atkinson", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono:
+    ui-monospace, "SFMono-Regular", "Menlo", "Consolas", "Liberation Mono",
+    monospace;
+
   --color-paper: #f7f4ec; /* Warm newsprint paper — light background */
   --color-ink: #1b1a17; /* Warm near-black ink — body text (light) */
   --color-muted: #57534b; /* Secondary ink text (light, WCAG AA) */
@@ -53,6 +75,81 @@
     @apply max-w-7xl mx-auto py-4 px-4 md:px-8;
   }
 
+  /* ---------------------------------------------------------------------- *
+   * Editorial type scale & primitives ("The Broadsheet")
+   * Serif display headings, small-caps kickers, tabular figures for data.
+   * ---------------------------------------------------------------------- */
+
+  /* Serif display headings — applied to readers and the .prose container.
+   * Tight leading + subtle negative tracking for a journal masthead feel. */
+  .font-display {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  /* Tabular figures for data tables / metrics / datelines. */
+  .nums-tabular {
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+
+  /* Small-caps kicker / eyebrow label. */
+  .kicker {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-variant-caps: small-caps;
+    color: var(--color-muted);
+  }
+
+  /* Lead paragraph — larger measure-aware intro copy. */
+  .lead {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: var(--color-ink);
+    max-width: 66ch;
+  }
+
+  /* Drop cap utility for reader lead paragraphs. Reduced-motion safe by
+   * design (it is purely typographic — no animation). */
+  .drop-cap::first-letter {
+    float: left;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 3.4em;
+    line-height: 0.82;
+    padding: 0.04em 0.08em 0 0;
+    margin-right: 0.02em;
+    color: var(--color-secondary);
+  }
+
+  /* Editorial figure caption. */
+  .fig-caption {
+    @apply text-sm mt-3;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+
+  /* Footnote / citation reference list item. */
+  .reference-item {
+    font-family: var(--font-serif);
+    @apply text-sm;
+    color: var(--color-muted);
+    line-height: 1.55;
+  }
+  .reference-item a {
+    color: var(--color-secondary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
   /* step-2-get-started.png: half width on desktop */
   .prose .prose-img-narrow {
     @apply md:max-w-[50%];
@@ -61,6 +158,38 @@
   /* Image captions inside blog posts */
   .prose figcaption {
     @apply text-sm text-center text-gray-600 dark:text-gray-300 mt-3;
+  }
+
+  /* Editorial serif type scale applied to reader prose.
+   * Body copy is serif (true newsprint); headings use the display family with
+   * tighter leading and subtle negative tracking. Tabular figures for data. */
+  .prose {
+    font-family: var(--font-serif);
+  }
+  .prose :where(h1, h2, h3, h4) {
+    font-family: var(--font-serif);
+    letter-spacing: -0.012em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+  .prose :where(h1) {
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 2.85rem);
+    font-weight: 700;
+  }
+  .prose :where(h2) {
+    font-size: clamp(1.5rem, 1.2rem + 1.4vw, 1.9rem);
+    font-weight: 700;
+  }
+  .prose :where(h3) {
+    font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.4rem);
+    font-weight: 600;
+  }
+  .prose :where(table) {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  /* Keep code/pre in a mono stack, not the serif. */
+  .prose :where(code, pre, kbd, samp) {
+    font-family: var(--font-mono);
   }
 
   /* Mobile horizontal scroll for wide tables.

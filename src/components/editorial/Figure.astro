@@ -1,0 +1,31 @@
+---
+/**
+ * Figure — editorial <figure> with caption.
+ *
+ * Wraps arbitrary figure content (image, diagram, code sample) in a semantic
+ * <figure> and renders an optional <figcaption> styled with the editorial
+ * caption treatment (--color-muted, dark-mode aware, WCAG AA). The caption is
+ * provided via the `caption` prop or the `caption` named slot — no hardcoded
+ * copy. Figure body goes in the default slot.
+ */
+interface Props {
+  /** Optional plain-text caption. Use the `caption` slot for rich content. */
+  caption?: string;
+  class?: string;
+}
+
+const { caption, class: className = '' } = Astro.props;
+const hasCaptionSlot = Astro.slots.has('caption');
+---
+
+<figure class:list={['my-8', className]}>
+  <slot />
+  {
+    (caption || hasCaptionSlot) && (
+      <figcaption class="fig-caption">
+        {caption}
+        <slot name="caption" />
+      </figcaption>
+    )
+  }
+</figure>

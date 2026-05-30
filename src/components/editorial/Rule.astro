@@ -1,0 +1,26 @@
+---
+/**
+ * Rule — hairline editorial divider.
+ *
+ * A thin separator using the --color-line token (dark-mode aware). Two
+ * variants: `full` (spans the container) and `short` (a brief centered or
+ * leading mark, useful between editorial blocks). Decorative by default
+ * (role="separator" gives it semantics without announcing content).
+ */
+interface Props {
+  variant?: 'full' | 'short';
+  /** Vertical spacing helper; pass Tailwind margin classes to override. */
+  class?: string;
+}
+
+const { variant = 'full', class: className = 'my-8' } = Astro.props;
+---
+
+<hr
+  role="separator"
+  class:list={[
+    'border-0 h-px bg-line',
+    variant === 'short' ? 'w-16' : 'w-full',
+    className,
+  ]}
+/>

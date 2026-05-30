@@ -1,0 +1,21 @@
+---
+/**
+ * Lead — editorial lead (standfirst) paragraph.
+ *
+ * The larger intro paragraph that opens a reader article, with an optional
+ * drop cap on its first letter (CSS ::first-letter — purely typographic, so
+ * it is reduced-motion safe by construction). Content via the default slot;
+ * no hardcoded copy. Dark-mode aware (uses --color-ink) and WCAG AA.
+ */
+interface Props {
+  /** Enable the oxblood drop cap on the first letter. */
+  dropCap?: boolean;
+  class?: string;
+}
+
+const { dropCap = false, class: className = '' } = Astro.props;
+---
+
+<p class:list={['lead', dropCap && 'drop-cap', className]}>
+  <slot />
+</p>

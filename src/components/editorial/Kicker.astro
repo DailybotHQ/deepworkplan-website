@@ -1,0 +1,25 @@
+---
+/**
+ * Kicker — editorial eyebrow / overline.
+ *
+ * A small-caps label followed by a short oxblood rule, used above section
+ * headings to signal the kind of content ("Methodology", "Reference", ...).
+ * Dark-mode aware via design tokens; WCAG AA (uses --color-muted for the
+ * label and --color-secondary for the rule). No hardcoded copy — the label
+ * is provided via the default slot or the `text` prop.
+ */
+interface Props {
+  /** Optional label text. Prefer the default slot for rich/translated content. */
+  text?: string;
+  /** Render as a different element when not part of a heading group. */
+  as?: 'p' | 'span' | 'div';
+  class?: string;
+}
+
+const { text, as: Tag = 'p', class: className = '' } = Astro.props;
+---
+
+<Tag class:list={['kicker', 'flex items-center gap-3', className]}>
+  <span>{text}<slot /></span>
+  <span class="h-px w-8 shrink-0 bg-secondary" aria-hidden="true"></span>
+</Tag>

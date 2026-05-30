@@ -1,0 +1,25 @@
+---
+/**
+ * Reference — footnote / citation-style list item.
+ *
+ * Renders a single reference as an <li> with an optional marker (number or
+ * symbol) and the citation content via the default slot. Intended to be used
+ * inside an <ol class="reference-list"> or <ul>. Styling uses the editorial
+ * reference treatment (--color-muted text, --color-secondary links), dark-mode
+ * aware and WCAG AA. No hardcoded copy.
+ */
+interface Props {
+  /** Optional explicit marker (e.g. "1", "*"). Omit to use the list's own. */
+  marker?: string;
+  /** Optional anchor id so footnote links can target this reference. */
+  id?: string;
+  class?: string;
+}
+
+const { marker, id, class: className = '' } = Astro.props;
+---
+
+<li id={id} class:list={['reference-item flex gap-2', className]}>
+  {marker && <span class="shrink-0 nums-tabular text-secondary">{marker}.</span>}
+  <span><slot /></span>
+</li>
