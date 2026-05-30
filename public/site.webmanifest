@@ -4,8 +4,8 @@
   "description": "Open methodology and reference kit for structured, validated, resumable multi-hour AI-agent execution.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#0e1116",
+  "background_color": "#f7f4ec",
+  "theme_color": "#14140f",
   "icons": [
     {
       "src": "/icons/icon-192x192.png",

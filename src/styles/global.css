@@ -18,27 +18,34 @@
 }
 
 @theme {
-  /* DeepWorkPlan — "Ink & Paper + Indigo" design system.
-   * Token API kept backward-compatible: `--color-main` = ink (dark base /
-   * branded surfaces), `--color-secondary` = indigo accent. */
-  --color-main: #0e1116; /* Ink — dark base / branded surfaces */
-  --color-secondary: #4f46e5; /* Indigo — accent (light mode) */
-  --color-accent: #4f46e5; /* Alias for the accent */
-  --color-ink: #14171c; /* Near-black body text (light mode) */
-  --color-paper: #fafaf7; /* Warm paper — light background */
-  --color-line: #e4e2db; /* Hairline borders (light mode) */
-  --color-muted: #5b6470; /* Secondary text (light mode, WCAG AA) */
-  --color-gray-50: #fafaf7; /* Elevated light surface = paper */
+  /* DeepWorkPlan — "The Broadsheet" editorial / newsprint design system.
+   * Warm paper + ink, hairline rules, a single restrained oxblood accent.
+   * Token API kept backward-compatible: `--color-main` = warm ink base
+   * (branded/dark surfaces), `--color-secondary`/`--color-accent` = oxblood. */
+  --color-paper: #f7f4ec; /* Warm newsprint paper — light background */
+  --color-ink: #1b1a17; /* Warm near-black ink — body text (light) */
+  --color-muted: #57534b; /* Secondary ink text (light, WCAG AA) */
+  --color-line: #d9d3c5; /* Hairline rules / borders (light) */
+  --color-main: #14140f; /* Warm near-black — branded/dark surfaces */
+  --color-secondary: #7a1f1f; /* Oxblood — masthead accent (light) */
+  --color-accent: #7a1f1f; /* Alias for the accent */
+  --color-gray-50: #f7f4ec; /* Elevated light surface = paper */
+  --color-gray-100: #efeadd; /* Slightly deeper paper tint */
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Dark theme: paper-on-ink with a brighter indigo accent for contrast. */
+/* Dark "ink" theme: warm near-black ground, paper-colored text,
+ * a brighter oxblood accent for contrast. */
 .dark {
-  --color-secondary: #818cf8; /* Indigo, lightened for dark surfaces */
-  --color-accent: #818cf8;
-  --color-line: #232831; /* Hairline borders (dark mode) */
-  --color-muted: #9aa3af; /* Secondary text (dark mode, WCAG AA) */
+  --color-paper: #14140f; /* Ink ground — dark background */
+  --color-ink: #ece7da; /* Paper-colored text (dark) */
+  --color-muted: #a8a296; /* Secondary text (dark, WCAG AA) */
+  --color-line: #2a2820; /* Hairline rules / borders (dark) */
+  --color-secondary: #c2554d; /* Oxblood, lightened for dark surfaces */
+  --color-accent: #c2554d;
+  --color-gray-50: #1c1b15; /* Elevated dark surface */
+  --color-gray-100: #232118; /* Slightly raised dark surface */
 }
 
 @layer components {
@@ -87,7 +94,7 @@
   select,
   textarea,
   [role="button"] {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-paper;
   }
 }
 
