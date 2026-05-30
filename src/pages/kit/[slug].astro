@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import KitReader from '@/components/pages/KitReader.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('kit');
+  return entries
+    .filter((entry) => entry.data.lang === 'en')
+    .map((entry) => ({
+      params: { slug: entry.id.replace(/^en\//, '') },
+      props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+---
+
+<KitReader lang="en" entry={entry} variant="kit" />

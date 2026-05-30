@@ -1,0 +1,72 @@
+{
+  "name": "deepworkplan-website",
+  "description": "Deep Work Plan — the official website for the DWP methodology for planning and executing complex software work with AI coding agents",
+  "author": "DailyBot, Inc.",
+  "license": "MIT",
+  "homepage": "https://deepworkplan.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DailybotHQ/deepworkplan-website"
+  },
+  "type": "module",
+  "version": "1.0.37",
+  "packageManager": "pnpm@11.1.2",
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "prebuild": "node scripts/generate-agent-skills-index.mjs",
+    "generate:agent-skills-index": "node scripts/generate-agent-skills-index.mjs",
+    "astro": "astro",
+    "astro:check": "astro check",
+    "astro:preview": "astro preview",
+    "biome:check": "biome check",
+    "biome:fix": "biome check --write",
+    "biome:fix:unsafe": "biome check --write --unsafe",
+    "ncu:check": "ncu",
+    "ncu:upgrade": "ncu -u",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "images:optimize": "node scripts/optimize-images.mjs",
+    "images:optimize:slides": "node scripts/optimize-images.mjs --target=slides",
+    "images:webp": "echo 'All images are natively WebP — no generation needed'",
+    "search:budgets": "node scripts/check-search-performance-budgets.mjs",
+    "md:check": "node scripts/check-md-parity.mjs",
+    "md:check:strict": "node scripts/check-md-parity.mjs --strict",
+    "lighthouse": "lhci autorun",
+    "lighthouse:full": "lhci autorun --config=lighthouserc.full.cjs",
+    "release": "bash .github/scripts/prepare_release.sh"
+  },
+  "dependencies": {
+    "@astrojs/check": "0.9.9",
+    "@astrojs/compiler-rs": "0.2.0",
+    "@astrojs/mdx": "5.0.4",
+    "@astrojs/rss": "4.0.18",
+    "@astrojs/sitemap": "3.7.2",
+    "@astrojs/svelte": "8.1.0",
+    "astro": "6.3.1",
+    "fuse.js": "7.3.0",
+    "rehype-external-links": "3.0.0",
+    "reveal.js": "^6.0.1",
+    "svelte": "5.55.5",
+    "tailwindcss": "4.3.0",
+    "typescript": "6.0.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.15",
+    "@lhci/cli": "0.15.1",
+    "@sveltejs/vite-plugin-svelte": "7.1.2",
+    "@tailwindcss/typography": "0.5.19",
+    "@tailwindcss/vite": "4.3.0",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/svelte": "5.3.1",
+    "@vitest/coverage-v8": "4.1.6",
+    "happy-dom": "20.9.0",
+    "npm-check-updates": "22.2.0",
+    "sharp": "0.34.5",
+    "vitest": "4.1.6"
+  }
+}

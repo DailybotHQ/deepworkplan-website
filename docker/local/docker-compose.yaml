@@ -1,0 +1,37 @@
+name: dwpwebsitelocal
+
+services:
+  dwpwebsitevscode:
+    container_name: dwpwebsite
+    init: true
+    build:
+      context: .
+      dockerfile: ./dwpwebsite/Dockerfile
+    working_dir: /app
+    volumes:
+      - ../..:/app
+      # Persistent data volumes for the node user (the only user that runs the AI CLIs)
+      - claude_data:/home/node/.claude_data
+      - codex_data:/home/node/.codex_data
+      - cursor_data:/home/node/.cursor_data
+      - gh_data:/home/node/.gh_data
+      - ${HOME}/.ssh:/home/node/.ssh_host:ro
+      - ${HOME}/.gitconfig:/home/node/.gitconfig:ro
+    ports:
+      # Use 5555 on host to avoid conflict with macOS AirPlay Receiver (port 5555)
+      - '5555:5555'
+    env_file:
+      - dwpwebsite/.env
+    environment:
+      - DOCKER_DEV_ENV=vscode
+    command:
+      - /bin/sh
+      - -c
+      - |
+        sleep infinity
+
+volumes:
+  claude_data: {}        # Claude CLI session/auth (symlinked to ~/.claude)
+  codex_data: {}         # Codex CLI session/auth (symlinked to ~/.codex)
+  cursor_data: {}        # Cursor CLI session/auth (symlinked to ~/.cursor)
+  gh_data: {}            # GitHub CLI session/auth (symlinked to ~/.config/gh)

@@ -1,0 +1,26 @@
+{
+  "name": "Deep Work Plan — structured execution for AI coding agents",
+  "short_name": "Deep Work Plan",
+  "description": "Open methodology and reference kit for structured, validated, resumable multi-hour AI-agent execution.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f1124",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

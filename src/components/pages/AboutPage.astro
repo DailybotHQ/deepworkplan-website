@@ -1,0 +1,117 @@
+---
+import JsonLd from '@/components/JsonLd.astro';
+import HighlightCard from '@/components/pages/HighlightCard.astro';
+import PageHero from '@/components/pages/PageHero.astro';
+import PageSection from '@/components/pages/PageSection.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const a = t.aboutPage;
+const prefix = getUrlPrefix(lang);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: a.title,
+  description: a.description,
+  url: `${siteUrl}${prefix}/about`,
+  about: {
+    '@type': 'SoftwareApplication',
+    name: 'Deep Work Plan',
+    applicationCategory: 'DeveloperApplication',
+    license: 'https://opensource.org/licenses/MIT',
+    author: {
+      '@type': 'Organization',
+      name: 'DailyBot',
+      url: 'https://dailybot.com',
+    },
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${siteUrl}${prefix}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: a.title,
+      item: `${siteUrl}${prefix}/about`,
+    },
+  ],
+};
+---
+
+<MainLayout
+  lang={lang}
+  title={a.title}
+  description={a.description}
+  keywords={lang === 'en'
+    ? ['Deep Work Plan methodology', 'AI coding agents methodology', 'open source MIT methodology', 'agent-agnostic engineering workflow', 'DailyBot Deep Work Plan']
+    : ['metodología Deep Work Plan', 'metodología para agentes de IA', 'metodología open source MIT', 'flujo de ingeniería agnóstico de agentes', 'DailyBot Deep Work Plan']}
+>
+  <Fragment slot="head">
+    <JsonLd data={aboutSchema} />
+    <JsonLd data={breadcrumbSchema} />
+  </Fragment>
+
+  <PageHero title={a.title} subtitle={a.subtitle} description={a.heroDescription} />
+
+  <PageSection background="white" title={a.bioTitle} description={a.bioText} />
+
+  <PageSection background="gray" title={a.passionsTitle}>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {a.passions.map((principle) => (
+        <HighlightCard
+          title={principle.title}
+          description={principle.description}
+          icon={principle.icon}
+          link={`${prefix}${principle.link}`}
+        />
+      ))}
+    </div>
+  </PageSection>
+
+  <PageSection background="white" title={a.quickFactsTitle}>
+    <ul class="space-y-3 max-w-2xl">
+      {a.quickFacts.map((fact) => (
+        <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+          <span class="text-secondary mt-0.5 flex-shrink-0">&#10003;</span>
+          <span>{fact}</span>
+        </li>
+      ))}
+    </ul>
+  </PageSection>
+
+  <PageSection background="gray" title={a.ctaTitle} description={a.ctaDescription}>
+    <div class="flex flex-wrap gap-4 mt-4">
+      <a
+        href={`${prefix}/methodology`}
+        class="inline-flex items-center px-6 py-3 rounded-lg bg-secondary text-white font-semibold hover:bg-secondary/90 transition-colors duration-200"
+      >
+        {a.ctaCv}
+      </a>
+      <a
+        href={`${prefix}/quickstart`}
+        class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-secondary text-secondary dark:text-secondary font-semibold hover:bg-secondary/10 transition-colors duration-200"
+      >
+        {a.ctaContact}
+      </a>
+    </div>
+  </PageSection>
+</MainLayout>

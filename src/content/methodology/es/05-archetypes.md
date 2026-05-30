@@ -1,0 +1,48 @@
+---
+title: Arquetipos de repositorio
+description: "Los arquetipos de repositorio individual y centro orquestador, la heurística para clasificar un repositorio y cómo difieren la incorporación y el alcance del plan entre ellos."
+order: 5
+lang: es
+summary: Por qué el arquetipo de un repositorio determina cómo se incorpora un agente y cómo acota los planes.
+icon: layers
+---
+
+# Arquetipos de repositorio
+
+DWP reconoce dos arquetipos de repositorio. El arquetipo que un agente infiere determina cómo se incorpora y cómo acota los planes, de modo que identificarlo correctamente es la primera decisión de cualquier intervención.
+
+## Repositorio individual
+
+Una base de código autónoma: una aplicación, una biblioteca o un servicio. Los planes operan directamente sobre el código del repositorio, y la incorporación lee la propia estructura y convenciones del repositorio.
+
+Características:
+
+- Una única base de código coherente.
+- Los planes modifican archivos de este repositorio.
+- El espacio de trabajo `.dwp/` vive en la raíz del repositorio.
+
+## Centro orquestador
+
+Un repositorio de coordinación que gestiona varios repositorios hijos. Los planes pueden generar planes hijos en subrepositorios, y la incorporación lee el registro de repositorios gestionados del centro en lugar de una sola base de código.
+
+Características:
+
+- Coordina varios subrepositorios.
+- Los planes pueden delegar en planes hijos.
+- Mantiene un registro de repositorios gestionados.
+- El espacio de trabajo `.dwp/` en la raíz del centro rastrea el estado entre repositorios.
+
+## Heurística de clasificación
+
+Un agente debería clasificar un repositorio como centro orquestador cuando encuentra varios repositorios git anidados o submódulos, un registro o manifiesto de repositorios gestionados, o configuración que apunta a repositorios externos. En ausencia de esas señales, lo trata como un repositorio individual.
+
+## Cómo difiere la incorporación
+
+| Aspecto | Individual | Orquestador |
+|---------|------------|-------------|
+| Alcance | Este repositorio | Varios repositorios |
+| Incorporación | Estructura del repositorio | Registro del centro |
+| Objetivo del plan | Archivos locales | Planes hijos |
+| Estado | `.dwp/` local | `.dwp/` entre repositorios |
+
+El efecto práctico es que un agente de repositorio individual razona sobre una base de código de principio a fin, mientras que un agente orquestador razona sobre la coordinación: qué repositorio hijo es responsable de qué trabajo y cómo se mantiene coherente el estado entre repositorios.

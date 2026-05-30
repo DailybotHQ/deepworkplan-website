@@ -1,0 +1,51 @@
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# pnpm
+.pnpm-store/
+
+
+# test coverage
+coverage/
+
+# Lighthouse CI local results
+.lighthouseci/
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# VSCode (local editor settings)
+.vscode/
+
+# devcontainer (local dev setup)
+.devcontainer/
+
+# Agent Deep Work Plans (execution results, not templates)
+.agent_commands/agent_deep_work_plans/results/drafts/
+.agent_commands/agent_deep_work_plans/results/plans/PLAN_*/
+.agent_commands/agent_deep_work_plans/results/plans/old/
+
+# Temporary workspace (agent outputs, scratch files, ephemeral content)
+tmp/*
+!tmp/.gitkeep
+
+english.png
+spanish.png

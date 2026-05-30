@@ -1,0 +1,240 @@
+---
+import ShowcaseLayout from '@/layouts/ShowcaseLayout.astro';
+
+const primaryColors = [
+  {
+    name: 'Main (Ink)',
+    hex: '#0e1116',
+    tailwind: 'bg-main',
+    textClass: 'text-main',
+    usage: 'Dark base, branded surfaces, primary buttons',
+  },
+  {
+    name: 'Secondary (Indigo)',
+    hex: '#4f46e5',
+    tailwind: 'bg-secondary',
+    textClass: 'text-secondary',
+    usage: 'Accent color, CTAs, links, focus rings',
+  },
+  {
+    name: 'Secondary (Indigo, Dark)',
+    hex: '#818cf8',
+    tailwind: 'dark:bg-secondary',
+    textClass: '',
+    usage: 'Brighter indigo accent in dark mode',
+  },
+  {
+    name: 'Paper',
+    hex: '#fafaf7',
+    tailwind: 'bg-gray-50',
+    textClass: '',
+    usage: 'Warm paper light background, subtle surfaces',
+  },
+];
+
+const grayScale = [
+  { name: 'Gray 100', hex: '#f1f5f9', tailwind: 'bg-gray-100' },
+  { name: 'Gray 200', hex: '#e2e8f0', tailwind: 'bg-gray-200' },
+  { name: 'Gray 300', hex: '#cbd5e1', tailwind: 'bg-gray-300' },
+  { name: 'Gray 600', hex: '#475569', tailwind: 'bg-gray-600' },
+  { name: 'Gray 700', hex: '#334155', tailwind: 'bg-gray-700' },
+  { name: 'Gray 800', hex: '#1e293b', tailwind: 'bg-gray-800' },
+  { name: 'Gray 900', hex: '#0f172a', tailwind: 'bg-gray-900' },
+];
+
+const approvedPairings = [
+  {
+    context: 'Primary text',
+    light: 'text-gray-900',
+    dark: 'dark:text-gray-100',
+    status: 'approved',
+  },
+  {
+    context: 'Secondary text',
+    light: 'text-gray-600',
+    dark: 'dark:text-gray-300',
+    status: 'approved',
+  },
+  {
+    context: 'Body text',
+    light: 'text-gray-600',
+    dark: 'dark:text-gray-300',
+    status: 'approved',
+  },
+];
+
+const forbiddenPairings = [
+  {
+    classes: 'text-gray-400',
+    reason: 'Fails WCAG AA contrast on white background',
+  },
+  {
+    classes: 'text-gray-500 (alone)',
+    reason: 'Fails WCAG AA contrast on white background',
+  },
+  {
+    classes: 'dark:text-gray-400',
+    reason: 'Fails WCAG AA contrast on gray-900 background',
+  },
+  {
+    classes: 'dark:text-gray-500',
+    reason: 'Fails WCAG AA contrast on gray-900 background',
+  },
+];
+
+const semanticColors = [
+  {
+    name: 'Success',
+    light: 'bg-green-100 text-green-700',
+    dark: 'dark:bg-green-900 dark:text-green-300',
+  },
+  {
+    name: 'Warning',
+    light: 'bg-amber-100 text-amber-700',
+    dark: 'dark:bg-amber-900 dark:text-amber-300',
+  },
+  {
+    name: 'Error',
+    light: 'bg-red-100 text-red-700',
+    dark: 'dark:bg-red-900 dark:text-red-300',
+  },
+  {
+    name: 'Info',
+    light: 'bg-blue-100 text-blue-700',
+    dark: 'dark:bg-blue-900 dark:text-blue-300',
+  },
+];
+---
+
+<ShowcaseLayout title="Colors" description="Primary palette, grey scale, and semantic colors" section="colors">
+
+  <!-- Primary Colors -->
+  <section class="mb-12" data-component="primary-colors">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Primary Colors</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {primaryColors.map((color) => (
+        <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <div class="h-24" style={`background-color: ${color.hex}`} />
+          <div class="p-4">
+            <div class="font-semibold">{color.name}</div>
+            <code class="text-xs text-gray-600 dark:text-gray-300">{color.hex}</code>
+            <div class="mt-1"><code class="text-xs text-gray-600 dark:text-gray-300">{color.tailwind}</code></div>
+            <p class="text-xs text-gray-600 dark:text-gray-300 mt-1">{color.usage}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Gray Scale -->
+  <section class="mb-12" data-component="gray-scale">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Gray Scale</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+      {grayScale.map((color) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <div class="h-16" style={`background-color: ${color.hex}`} />
+          <div class="p-2 text-center">
+            <div class="text-xs font-medium">{color.name}</div>
+            <code class="text-xs text-gray-600 dark:text-gray-300">{color.hex}</code>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Approved Text Color Pairings -->
+  <section class="mb-12" data-component="text-pairings">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Approved Text Color Pairings</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      These pairings meet WCAG 2.1 AA contrast requirements (4.5:1 for normal text).
+    </p>
+    <div class="space-y-3">
+      {approvedPairings.map((p) => (
+        <div class="flex items-center gap-4 rounded-lg border border-green-200 dark:border-green-800 p-4 bg-green-50 dark:bg-green-900/20">
+          <span class="text-green-600 dark:text-green-400 font-bold text-sm">PASS</span>
+          <div>
+            <div class="font-medium text-sm">{p.context}</div>
+            <code class="text-xs text-gray-600 dark:text-gray-300">{p.light} {p.dark}</code>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Forbidden Pairings -->
+  <section class="mb-12" data-component="forbidden-pairings">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Forbidden Text Colors</h2>
+    <div class="space-y-3">
+      {forbiddenPairings.map((p) => (
+        <div class="flex items-center gap-4 rounded-lg border border-red-200 dark:border-red-800 p-4 bg-red-50 dark:bg-red-900/20">
+          <span class="text-red-600 dark:text-red-400 font-bold text-sm">FAIL</span>
+          <div>
+            <code class="text-xs font-medium">{p.classes}</code>
+            <p class="text-xs text-gray-600 dark:text-gray-300 mt-0.5">{p.reason}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Semantic Colors -->
+  <section class="mb-12" data-component="semantic-colors">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Semantic Colors</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {semanticColors.map((color) => (
+        <div class="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+          <div class:list={['p-4 text-center font-semibold', color.light, color.dark]}>
+            {color.name}
+          </div>
+          <div class="p-3 text-center">
+            <code class="text-xs text-gray-600 dark:text-gray-300">{color.light}</code>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Code Example -->
+  <section class="mb-12" data-component="usage-examples">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Usage</h2>
+    <details class="rounded-lg border border-gray-200 dark:border-gray-700">
+      <summary class="px-4 py-3 cursor-pointer text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800">
+        Show code
+      </summary>
+      <pre class="p-4 text-xs overflow-x-auto bg-gray-50 dark:bg-gray-800"><code>&lt;!-- Primary background --&gt;
+&lt;div class="bg-main text-white"&gt;Dark content&lt;/div&gt;
+
+&lt;!-- Accent/CTA --&gt;
+&lt;button class="bg-secondary text-white"&gt;Action&lt;/button&gt;
+
+&lt;!-- Text hierarchy --&gt;
+&lt;h1 class="text-gray-900 dark:text-gray-100"&gt;Title&lt;/h1&gt;
+&lt;p class="text-gray-600 dark:text-gray-300"&gt;Body text&lt;/p&gt;</code></pre>
+    </details>
+  </section>
+
+  <!-- Agent Reference -->
+  <section class="mt-16 border-t border-gray-200 dark:border-gray-700 pt-8" data-agent-reference="true">
+    <h2 class="text-lg font-bold mb-4">Agent Reference</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700 text-left">
+            <th class="py-2 pr-4 font-semibold">Token</th>
+            <th class="py-2 pr-4 font-semibold">Value</th>
+            <th class="py-2 font-semibold">Tailwind Class</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+          {primaryColors.map((c) => (
+            <tr>
+              <td class="py-2 pr-4 font-medium">{c.name}</td>
+              <td class="py-2 pr-4"><code class="text-xs">{c.hex}</code></td>
+              <td class="py-2"><code class="text-xs">{c.tailwind}</code></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</ShowcaseLayout>

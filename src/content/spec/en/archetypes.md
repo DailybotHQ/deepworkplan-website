@@ -1,0 +1,51 @@
+---
+title: Archetypes
+description: "The normative description of DWP repository archetypes, the individual repository and orchestrator hub, the classification heuristic, and how onboarding differs between them."
+order: 4
+lang: en
+section: Archetypes
+---
+
+# Archetypes
+
+**Version 1.0.** DWP recognizes two repository archetypes. The archetype determines how an agent onboards and how plans are scoped.
+
+## Individual repository
+
+A self-contained codebase — an application, a library, or a service. Plans operate directly on the code.
+
+Characteristics:
+
+- Single coherent codebase.
+- Plans modify files in this repository.
+- `.dwp/` workspace at the repository root.
+
+## Orchestrator hub
+
+A coordination repository that manages multiple child repositories. Plans may spawn child plans in sub-repositories.
+
+Characteristics:
+
+- Coordinates multiple sub-repositories.
+- Plans may delegate to child plans.
+- Maintains a registry of managed repositories.
+- `.dwp/` workspace at the hub root tracks cross-repository state.
+
+## Classification heuristic
+
+An agent SHOULD classify a repository as an orchestrator hub if it finds:
+
+- Multiple nested git repositories or submodules.
+- A registry or manifest of managed repositories.
+- Configuration pointing to external repositories.
+
+Otherwise, treat it as an individual repository.
+
+## Onboarding differences
+
+| Aspect | Individual | Orchestrator |
+|--------|------------|--------------|
+| Scope | This repository | Multiple repositories |
+| Onboarding | Repository structure | Hub registry |
+| Plan target | Local files | Child plans |
+| State | Local `.dwp/` | Cross-repository `.dwp/` |

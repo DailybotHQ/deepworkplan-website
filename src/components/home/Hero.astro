@@ -1,0 +1,51 @@
+---
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+const h = t.home.hero;
+---
+
+<section class="relative overflow-hidden border-b border-gray-200 dark:border-gray-800">
+  <div
+    class="pointer-events-none absolute inset-x-0 -top-32 mx-auto h-[480px] max-w-4xl bg-[radial-gradient(ellipse_at_center,theme(colors.indigo.500/15%),transparent_70%)]"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="relative mx-auto max-w-4xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <span
+      class="inline-block rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-semibold tracking-wide text-indigo-700 dark:border-indigo-800/60 dark:bg-indigo-950/40 dark:text-indigo-300"
+    >
+      {h.badge}
+    </span>
+    <h1
+      class="mt-6 text-balance text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl dark:text-gray-50"
+    >
+      {h.title}{' '}
+      <span class="text-indigo-600 dark:text-indigo-400">{h.titleEmphasis}</span>
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+      {h.subtitle}
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a
+        href={`${prefix}/methodology`}
+        class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400"
+      >
+        {h.primaryCta}
+      </a>
+      <a
+        href={`${prefix}/spec`}
+        class="inline-flex items-center justify-center rounded-lg border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-800 transition-colors hover:border-gray-400 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-100 dark:hover:border-gray-600 dark:hover:bg-gray-900"
+      >
+        {h.secondaryCta}
+      </a>
+    </div>
+  </div>
+</section>

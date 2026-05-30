@@ -1,0 +1,51 @@
+name: Code Check
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+      - 'dev'
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  code_check:
+    name: 'Code Check'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.15.0'
+      - name: Step 0 - 📁 Get pnpm store path
+        id: pnpm-store
+        run: |
+          STORE_PATH=$(corepack pnpm store path --silent)
+          echo "STORE_PATH=${STORE_PATH}" >> "$GITHUB_OUTPUT"
+      - name: Step 0a - 📁 Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-store.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Step 1 - ⚙️ Install Dependencies
+        run: corepack pnpm install --frozen-lockfile
+      - name: Step 2 - 🧪 Run astro checks
+        run: corepack pnpm run astro:check
+      - name: Step 3 - 🧪🧪 Run biome checks
+        run: corepack pnpm run biome:check
+      - name: Step 4 - 🧪🧪🧪 Run tests
+        run: corepack pnpm run test
+      - name: Step 5 - 🏗️ Build site
+        run: corepack pnpm run build
+      - name: Step 6 - 📏 Check search performance budgets
+        run: corepack pnpm run search:budgets
+      - name: Step 7 - 🔦 Run Lighthouse audit
+        run: corepack pnpm run lighthouse

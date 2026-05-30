@@ -1,0 +1,19 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://deepworkplan.com/api/",
+      "links": [
+        {
+          "rel": "service-desc",
+          "href": "https://deepworkplan.com/openapi.json",
+          "type": "application/json"
+        },
+        {
+          "rel": "service-doc",
+          "href": "https://deepworkplan.com/llms.txt",
+          "type": "text/plain"
+        }
+      ]
+    }
+  ]
+}

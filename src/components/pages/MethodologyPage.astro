@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import JsonLd from '@/components/JsonLd.astro';
+import PageHero from '@/components/pages/PageHero.astro';
+import PageSection from '@/components/pages/PageSection.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const m = t.methodologyPage;
+const prefix = getUrlPrefix(lang);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+
+function slugOf(id: string): string {
+  return id.replace(/^(en|es)\//, '');
+}
+
+const chapters = (await getCollection('methodology'))
+  .filter((c) => c.data.lang === lang)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: m.title,
+  itemListElement: chapters.map((ch, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: ch.data.title,
+    url: `${siteUrl}${prefix}/methodology/${slugOf(ch.id)}`,
+  })),
+};
+---
+
+<MainLayout lang={lang} title={m.meta.title} description={m.meta.description}>
+  <JsonLd slot="head" data={itemListSchema} />
+  <PageHero title={m.title} subtitle={m.eyebrow} description={m.intro} />
+
+  <PageSection background="white">
+    <ol class="max-w-3xl mx-auto space-y-6">
+      {
+        chapters.map((ch, i) => (
+          <li>
+            <a
+              href={`${prefix}/methodology/${slugOf(ch.id)}`}
+              class="group block rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-6 hover:border-secondary hover:shadow-lg transition-all duration-300"
+            >
+              <p class="text-xs font-semibold uppercase tracking-wider text-secondary mb-2">
+                {m.chapterLabel} {i + 1}
+              </p>
+              <h2 class="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-secondary transition-colors">
+                {ch.data.title}
+              </h2>
+              <p class="mt-2 text-gray-600 dark:text-gray-300">
+                {ch.data.summary ?? ch.data.description}
+              </p>
+              <span class="mt-3 inline-flex items-center text-sm font-medium text-secondary">
+                {m.readChapter} &rarr;
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </PageSection>
+</MainLayout>

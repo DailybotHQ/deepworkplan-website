@@ -1,0 +1,74 @@
+---
+import { getUrlPrefix } from '@/lib/i18n';
+import type { Language } from '@/lib/translations';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = getTranslations(lang as Language);
+const prefix = getUrlPrefix(lang as Language);
+
+const githubUrl = 'https://github.com/DailybotHQ/deepworkplan-website';
+
+const links = [
+  { href: `${prefix}/methodology`, label: t.nav.methodology },
+  { href: `${prefix}/spec`, label: t.nav.spec },
+  { href: `${prefix}/kit`, label: t.nav.kit },
+  { href: `${prefix}/examples`, label: t.nav.examples },
+  { href: `${prefix}/about`, label: t.nav.about },
+  { href: `${prefix}/contact`, label: t.nav.contact },
+];
+---
+
+<footer
+  class="bg-gray-50 dark:bg-gray-900 pt-12 pb-8 border-t border-gray-200 dark:border-gray-800 text-sm text-gray-600 dark:text-gray-300"
+>
+  <div class="max-w-5xl mx-auto px-4 flex flex-col items-center gap-6">
+    <a
+      href={prefix || '/'}
+      class="flex items-center gap-2 font-bold text-base text-gray-900 dark:text-white hover:text-secondary transition-colors"
+    >
+      <img
+        class="h-6 w-auto"
+        src="/images/logo_small_version_white.svg"
+        alt=""
+        width="952"
+        height="168"
+      />
+      <span>Deep Work Plan</span>
+    </a>
+
+    <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2" aria-label="Footer">
+      {
+        links.map((link) => (
+          <a href={link.href} class="hover:text-secondary transition-colors">
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href={githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-secondary transition-colors"
+      >
+        {t.nav.github}
+      </a>
+      <a
+        href="https://opensource.org/licenses/MIT"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-secondary transition-colors"
+      >
+        MIT
+      </a>
+    </nav>
+
+    <div class="text-center">
+      &copy; <span id="copyright-year">{new Date().getFullYear()}</span> Deep Work Plan. {t.footer.allRightsReserved}
+    </div>
+  </div>
+</footer>

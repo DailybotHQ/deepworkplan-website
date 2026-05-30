@@ -1,0 +1,55 @@
+---
+title: Especificación de DWP
+description: "La especificación normativa de Deep Work Plan: la estructura del plan, la anatomía de tarea de nueve secciones, el ciclo de cinco operaciones, el espacio de trabajo y el versionado."
+order: 2
+lang: es
+section: Workflow
+---
+
+# Especificación de DWP
+
+**Versión 1.0. Estado: estable.** Este documento es la especificación normativa de la metodología Deep Work Plan (DWP). Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
+
+## Definición
+
+Un Deep Work Plan es un artefacto estructurado, basado solo en Markdown, que describe una tarea de ingeniería compleja descompuesta en unidades de trabajo secuenciales y revisables, diseñado para ser creado, ejecutado y mantenido por agentes de programación con IA que trabajan de forma autónoma.
+
+## Estructura del plan
+
+Un plan DEBE ser un directorio bajo `.dwp/plans/` llamado `PLAN_<slug>/`. El directorio DEBE contener:
+
+- `README.md`: resumen del plan, objetivo, tabla de tareas y estado.
+- Un archivo por tarea, con el nombre `<n>.task_<slug>.md`.
+- `PROGRESS.md`: un registro continuo de la ejecución.
+
+## Anatomía de la tarea
+
+Cada archivo de tarea DEBE contener estas nueve secciones, en orden:
+
+1. **Objetivo**: una declaración de un párrafo de lo que logra la tarea.
+2. **Contexto**: antecedentes, enlaces y por qué existe esta tarea.
+3. **Pasos**: acciones concretas y ordenadas que ejecutar.
+4. **Criterios de aceptación**: una lista de condiciones que definen lo terminado.
+5. **Validación**: comandos o pruebas que ejecutar para verificar.
+6. **Archivos**: rutas que se espera crear o modificar.
+7. **Dependencias**: otras tareas o requisitos externos.
+8. **Riesgos**: qué podría salir mal y sus mitigaciones.
+9. **Finalización y registro**: un marcador de estado más notas cronológicas.
+
+## El ciclo de ejecución
+
+DWP define cinco operaciones:
+
+- **crear**: generar un plan nuevo a partir de un objetivo.
+- **ejecutar**: recorrer el plan tarea por tarea.
+- **refinar**: modificar un plan existente.
+- **reanudar**: continuar un plan interrumpido.
+- **estado**: reportar el estado del plan sin ejecutar.
+
+## Espacio de trabajo de salida
+
+Todos los artefactos de DWP DEBEN vivir bajo un directorio `.dwp/` ignorado por git en la raíz del repositorio.
+
+## Versionado
+
+Esta especificación sigue el versionado semántico.

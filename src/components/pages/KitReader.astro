@@ -1,0 +1,86 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import JsonLd from '@/components/JsonLd.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+  entry: CollectionEntry<'kit'>;
+  // Where the "back" link points: the kit index or the examples gallery.
+  variant?: 'kit' | 'examples';
+}
+
+const { lang, entry, variant = 'kit' } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+
+const { Content } = await render(entry);
+
+function slugOf(id: string): string {
+  return id.replace(/^(en|es)\//, '');
+}
+
+const backHref =
+  variant === 'examples' ? `${prefix}/examples` : `${prefix}/kit`;
+const backLabel =
+  variant === 'examples' ? t.examplesPage.backToGallery : t.kitPage.backToIndex;
+const baseSegment = variant === 'examples' ? 'examples' : 'kit';
+
+// Surface a few well-known passthrough metadata fields when present.
+const data = entry.data as Record<string, unknown>;
+const metaBadges = [
+  typeof data.usage === 'string'
+    ? { label: 'Usage', value: data.usage as string }
+    : null,
+  typeof data.agent === 'string'
+    ? { label: 'Agent', value: data.agent as string }
+    : null,
+  typeof data.stack === 'string'
+    ? { label: 'Stack', value: data.stack as string }
+    : null,
+  typeof data.support === 'string'
+    ? { label: 'Support', value: data.support as string }
+    : null,
+].filter((b): b is { label: string; value: string } => b !== null);
+
+const techArticleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: entry.data.title,
+  description: entry.data.description,
+  url: `${siteUrl}${prefix}/${baseSegment}/${slugOf(entry.id)}`,
+};
+---
+
+<MainLayout lang={lang} title={entry.data.title} description={entry.data.description}>
+  <JsonLd slot="head" data={techArticleSchema} />
+  <article class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl pt-16 pb-20">
+    <a
+      href={backHref}
+      class="inline-flex items-center text-sm font-medium text-secondary hover:underline mb-6"
+    >
+      &larr; {backLabel}
+    </a>
+
+    {
+      metaBadges.length > 0 && (
+        <div class="mb-6 flex flex-wrap gap-2">
+          {metaBadges.map((badge) => (
+            <span class="inline-flex items-center gap-1 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-3 py-1 text-xs text-gray-700 dark:text-gray-300">
+              <span class="font-semibold text-gray-900 dark:text-white">{badge.label}:</span>
+              {badge.value}
+            </span>
+          ))}
+        </div>
+      )
+    }
+
+    <div class="prose prose-lg prose-slate max-w-none dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-secondary">
+      <Content />
+    </div>
+  </article>
+</MainLayout>

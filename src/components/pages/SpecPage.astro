@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+import JsonLd from '@/components/JsonLd.astro';
+import PageHero from '@/components/pages/PageHero.astro';
+import PageSection from '@/components/pages/PageSection.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const s = t.specPage;
+const prefix = getUrlPrefix(lang);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+
+function slugOf(id: string): string {
+  return id.replace(/^(en|es)\//, '');
+}
+
+const docs = (await getCollection('spec'))
+  .filter((d) => d.data.lang === lang)
+  .sort((a, b) => a.data.order - b.data.order);
+
+// Group by section, preserving the order documents first appear.
+const sections: { name: string; docs: typeof docs }[] = [];
+for (const doc of docs) {
+  const name = doc.data.section ?? 'General';
+  let group = sections.find((g) => g.name === name);
+  if (!group) {
+    group = { name, docs: [] };
+    sections.push(group);
+  }
+  group.docs.push(doc);
+}
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: s.title,
+  itemListElement: docs.map((doc, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: doc.data.title,
+    url: `${siteUrl}${prefix}/spec/${slugOf(doc.id)}`,
+  })),
+};
+---
+
+<MainLayout lang={lang} title={s.meta.title} description={s.meta.description}>
+  <JsonLd slot="head" data={itemListSchema} />
+  <PageHero title={s.title} subtitle={s.eyebrow} description={s.intro} />
+
+  <PageSection background="white">
+    <div class="max-w-3xl mx-auto space-y-12">
+      {
+        sections.map((group) => (
+          <div>
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-secondary mb-4">
+              {group.name}
+            </h2>
+            <ul class="space-y-4">
+              {group.docs.map((doc) => (
+                <li>
+                  <a
+                    href={`${prefix}/spec/${slugOf(doc.id)}`}
+                    class="group block rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-5 hover:border-secondary hover:shadow-lg transition-all duration-300"
+                  >
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-secondary transition-colors">
+                      {doc.data.title}
+                    </h3>
+                    <p class="mt-1 text-gray-600 dark:text-gray-300">{doc.data.description}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </PageSection>
+</MainLayout>

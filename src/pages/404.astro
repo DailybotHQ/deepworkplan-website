@@ -1,0 +1,8 @@
+---
+import NotFoundPage from '@/components/pages/NotFoundPage.astro';
+
+// Ensure correct 404 status (fixes dev server "invalid response" issues)
+Astro.response.status = 404;
+Astro.response.statusText = 'Not Found';
+---
+<NotFoundPage lang="en" />

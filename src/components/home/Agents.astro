@@ -1,0 +1,55 @@
+---
+import { type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const a = t.home.agents;
+---
+
+<section class="py-16 sm:py-20">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <span class="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
+        {a.badge}
+      </span>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+        {a.title}
+      </h2>
+      <p class="mt-4 text-base leading-relaxed text-gray-600 dark:text-gray-300">{a.subtitle}</p>
+    </div>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        a.items.map((agent) => (
+          <article
+            class:list={[
+              'rounded-xl border p-5',
+              agent.support === 'full'
+                ? 'border-indigo-200 bg-white dark:border-indigo-900/60 dark:bg-gray-900'
+                : 'border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900',
+            ]}
+          >
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-base font-bold text-gray-900 dark:text-gray-100">{agent.name}</h3>
+              <span
+                class:list={[
+                  'rounded-full border px-2.5 py-0.5 text-[0.62rem] font-bold uppercase tracking-wider',
+                  agent.support === 'full'
+                    ? 'border-green-300 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950/40 dark:text-green-300'
+                    : 'border-amber-300 bg-amber-50 text-amber-700 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300',
+                ]}
+              >
+                {agent.support === 'full' ? a.fullLabel : a.partialLabel}
+              </span>
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">{agent.note}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

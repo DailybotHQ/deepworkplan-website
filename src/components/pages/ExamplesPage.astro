@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import JsonLd from '@/components/JsonLd.astro';
+import PageHero from '@/components/pages/PageHero.astro';
+import PageSection from '@/components/pages/PageSection.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const e = t.examplesPage;
+const prefix = getUrlPrefix(lang);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+
+function slugOf(id: string): string {
+  return id.replace(/^(en|es)\//, '');
+}
+
+const examples = (await getCollection('kit'))
+  .filter((entry) => entry.data.lang === lang && entry.data.kind === 'example')
+  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: e.title,
+  itemListElement: examples.map((entry, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: entry.data.title,
+    url: `${siteUrl}${prefix}/examples/${slugOf(entry.id)}`,
+  })),
+};
+---
+
+<MainLayout lang={lang} title={e.meta.title} description={e.meta.description}>
+  <JsonLd slot="head" data={itemListSchema} />
+  <PageHero title={e.title} subtitle={e.eyebrow} description={e.intro} />
+
+  <PageSection background="white">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      {
+        examples.map((entry) => (
+          <a
+            href={`${prefix}/examples/${slugOf(entry.id)}`}
+            class="group flex flex-col gap-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-6 hover:border-secondary hover:shadow-lg transition-all duration-300"
+          >
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-secondary transition-colors">
+              {entry.data.title}
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300">{entry.data.description}</p>
+            <span class="mt-auto pt-2 text-sm font-medium text-secondary">
+              {e.viewExample} &rarr;
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </PageSection>
+</MainLayout>

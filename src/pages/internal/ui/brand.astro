@@ -1,0 +1,235 @@
+---
+import ShowcaseLayout from '@/layouts/ShowcaseLayout.astro';
+
+const brandColors = [
+  {
+    name: 'Main (Ink)',
+    hex: '#0e1116',
+    css: '--color-main',
+    tailwind: 'bg-main',
+    usage: 'Dark base, branded surfaces, primary buttons',
+  },
+  {
+    name: 'Secondary (Indigo)',
+    hex: '#4f46e5',
+    css: '--color-secondary',
+    tailwind: 'bg-secondary',
+    usage: 'Accent, CTAs, links, focus rings, hover states',
+  },
+  {
+    name: 'Secondary (Indigo, Dark)',
+    hex: '#818cf8',
+    css: '--color-secondary (dark)',
+    tailwind: 'dark:bg-secondary',
+    usage: 'Brighter indigo accent for dark mode contexts',
+  },
+];
+
+const socialIcons = [
+  {
+    name: 'GitHub',
+    light: '/icons/github.svg',
+    dark: '/icons/github_white.svg',
+  },
+  {
+    name: 'LinkedIn',
+    light: '/icons/linkedin.svg',
+    dark: '/icons/linkedin_white.svg',
+  },
+  {
+    name: 'Instagram',
+    light: '/icons/instagram.svg',
+    dark: '/icons/instagram_white.svg',
+  },
+  { name: 'X (Twitter)', light: '/icons/x.svg', dark: '/icons/x_white.svg' },
+];
+
+const iconSizes = [
+  { name: 'Favicon', size: '32x32', file: 'favicon.svg' },
+  { name: 'Apple Touch', size: '180x180', file: 'apple-touch-icon.png' },
+  { name: 'PWA Small', size: '192x192', file: 'icon-192x192.png' },
+  { name: 'PWA Large', size: '512x512', file: 'icon-512x512.png' },
+  { name: 'Social Icons', size: '24x24 (w-6 h-6)', file: '/icons/*.svg' },
+  { name: 'Logo Mark', size: 'Responsive', file: '/images/isologo.svg' },
+];
+---
+
+<ShowcaseLayout title="Brand" description="Logo variants, brand colors, social icons" section="brand">
+
+  <!-- Logo -->
+  <section class="mb-12" data-component="logo">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Logo / Favicon</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-6 flex flex-col items-center bg-white dark:bg-gray-800">
+        <img src="/favicon.svg" alt="Deep Work Plan logo" width="80" height="80" class="mb-4" />
+        <div class="font-semibold">Light Background</div>
+        <code class="text-xs text-gray-600 dark:text-gray-300 mt-1">/favicon.svg</code>
+      </div>
+      <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-6 flex flex-col items-center bg-main">
+        <img src="/favicon.svg" alt="Deep Work Plan logo on dark" width="80" height="80" class="mb-4" />
+        <div class="font-semibold text-white">Dark Background</div>
+        <code class="text-xs text-gray-300 mt-1">/favicon.svg</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Colors -->
+  <section class="mb-12" data-component="brand-colors">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Brand Colors</h2>
+    <div class="space-y-4">
+      {brandColors.map((color) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col sm:flex-row">
+          <div class="w-full sm:w-32 h-20 sm:h-auto shrink-0" style={`background-color: ${color.hex}`} />
+          <div class="p-4 flex-1">
+            <div class="font-semibold">{color.name}</div>
+            <div class="flex flex-wrap gap-x-4 gap-y-1 mt-1">
+              <code class="text-xs text-gray-600 dark:text-gray-300">{color.hex}</code>
+              <code class="text-xs text-gray-600 dark:text-gray-300">{color.css}</code>
+              <code class="text-xs text-gray-600 dark:text-gray-300">{color.tailwind}</code>
+            </div>
+            <p class="text-xs text-gray-600 dark:text-gray-300 mt-1">{color.usage}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Brand Name -->
+  <section class="mb-12" data-component="brand-name">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Brand Name</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
+      <div class="text-4xl font-bold mb-2">Deep Work Plan</div>
+      <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+        Always written as "Deep Work Plan" (or the short form "DWP"). Used in:
+      </p>
+      <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1 list-disc list-inside">
+        <li>Site title and meta tags</li>
+        <li>Header navigation</li>
+        <li>Footer branding</li>
+        <li>Social media profiles</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Social Icons -->
+  <section class="mb-12" data-component="social-icons">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Social Icons</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Paired light/dark variants in <code class="text-xs">/public/icons/</code>. Light version for dark backgrounds, dark version for light backgrounds.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+        <div class="text-sm font-medium mb-3">Light Mode (dark icons)</div>
+        <div class="flex gap-4 items-center">
+          {socialIcons.map((icon) => (
+            <div class="text-center">
+              <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                <img src={icon.light} alt={icon.name} width="24" height="24" />
+              </div>
+              <div class="text-xs text-gray-600 dark:text-gray-300 mt-1">{icon.name}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 bg-gray-900">
+        <div class="text-sm font-medium mb-3 text-white">Dark Mode (light icons)</div>
+        <div class="flex gap-4 items-center">
+          {socialIcons.map((icon) => (
+            <div class="text-center">
+              <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">
+                <img src={icon.dark} alt={`${icon.name} (white)`} width="24" height="24" />
+              </div>
+              <div class="text-xs text-gray-300 mt-1">{icon.name}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Profile Image -->
+  <section class="mb-12" data-component="profile-image">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Profile Image</h2>
+    <div class="flex items-center gap-6 flex-wrap">
+      <div class="text-center">
+        <img src="/images/isologo.svg" alt="Brand logo example" width="80" height="80" class="rounded-full shadow-lg border-4 border-white/10" />
+        <div class="text-xs text-gray-600 dark:text-gray-300 mt-2">80px</div>
+      </div>
+      <div class="text-center">
+        <img src="/images/isologo.svg" alt="Brand logo example" width="120" height="120" class="rounded-full shadow-lg border-4 border-white/10" />
+        <div class="text-xs text-gray-600 dark:text-gray-300 mt-2">120px</div>
+      </div>
+      <div class="text-center">
+        <img src="/images/isologo.svg" alt="Brand logo example" width="160" height="160" class="rounded-full shadow-lg border-4 border-white/10" />
+        <div class="text-xs text-gray-600 dark:text-gray-300 mt-2">160px</div>
+      </div>
+    </div>
+    <div class="mt-4 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+      <div class="text-sm font-medium mb-1">Standard styling</div>
+      <code class="text-xs text-gray-600 dark:text-gray-300">rounded-full shadow-2xl border-4 border-white/10</code>
+      <p class="text-xs text-gray-600 dark:text-gray-300 mt-1">From PageHero.astro — responsive sizes: w-48 sm:w-64 lg:w-80</p>
+    </div>
+  </section>
+
+  <!-- Icon Sizes -->
+  <section class="mb-12" data-component="icon-sizes">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Icon & Asset Sizes</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Asset</th>
+              <th class="text-left py-3 px-4 font-semibold">Size</th>
+              <th class="text-left py-3 px-4 font-semibold">File</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {iconSizes.map((icon) => (
+              <tr>
+                <td class="py-3 px-4 font-medium">{icon.name}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{icon.size}</td>
+                <td class="py-3 px-4"><code class="text-xs text-gray-600 dark:text-gray-300">{icon.file}</code></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agent Reference -->
+  <section class="mt-16 border-t border-gray-200 dark:border-gray-700 pt-8" data-agent-reference="true">
+    <h2 class="text-lg font-bold mb-4">Agent Reference</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700 text-left">
+            <th class="py-2 pr-4 font-semibold">Asset</th>
+            <th class="py-2 pr-4 font-semibold">Value</th>
+            <th class="py-2 font-semibold">Usage</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+          {brandColors.map((c) => (
+            <tr>
+              <td class="py-2 pr-4 font-medium">{c.name}</td>
+              <td class="py-2 pr-4"><code class="text-xs">{c.hex}</code></td>
+              <td class="py-2 text-gray-600 dark:text-gray-300">{c.usage}</td>
+            </tr>
+          ))}
+          <tr>
+            <td class="py-2 pr-4 font-medium">Brand Name</td>
+            <td class="py-2 pr-4"><code class="text-xs">Deep Work Plan</code></td>
+            <td class="py-2 text-gray-600 dark:text-gray-300">Short form: DWP</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-medium">Font</td>
+            <td class="py-2 pr-4"><code class="text-xs">Atkinson Hyperlegible</code></td>
+            <td class="py-2 text-gray-600 dark:text-gray-300">400 (Regular), 700 (Bold)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</ShowcaseLayout>

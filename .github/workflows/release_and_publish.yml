@@ -1,0 +1,146 @@
+name: Release and Publish
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check_pr_size_label:
+    if: github.event.pull_request.merged == true
+    name: 'Check PR Size Label'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 - Check pr size label
+        id: check_pr_size_label_step
+        env:
+          ENV_LABELS: ${{ toJSON(github.event.pull_request.labels) }}
+          SIZE_LABELS: >-
+            "Size - XS","Size - S","Size - M","Size - L","Size - XL","Size - XXL"
+        run: |
+          IFS=',' read -ra SIZE_LABELS_ARR <<< "$SIZE_LABELS"
+          # Remove the quotes from SIZE_LABELS_ARR
+          SIZE_LABELS_ARR=("${SIZE_LABELS_ARR[@]//\"}")
+
+          # Get PR Labels
+          FOUND_LABELS_JSON=$(echo "$ENV_LABELS" | jq -r '.[] | .name')
+
+          readarray -t FOUND_LABELS <<<"$FOUND_LABELS_JSON"
+
+          echo "FOUND LABELS:"
+          printf '%s\n' "${FOUND_LABELS[@]}"
+
+          # Check if any of the labels in FOUND_LABELS is in SIZE_LABELS_ARR
+          SIZE_LABEL_FOUND=''
+          for found_label in "${FOUND_LABELS[@]}"; do
+            for size_label in "${SIZE_LABELS_ARR[@]}"; do
+              if [[ "$found_label" == "$size_label" ]]; then
+                SIZE_LABEL_FOUND=$found_label
+                echo "Label 'SIZE_LABEL_FOUND' found in SIZE_LABELS"
+              fi
+            done
+          done
+
+          SIZE_LABEL_FOUND_EMOJI="❓"
+          if [ "$SIZE_LABEL_FOUND" == "Size - XS" ]; then
+            SIZE_LABEL_FOUND_EMOJI="🟢"
+          elif [ "$SIZE_LABEL_FOUND" == "Size - S" ]; then
+            SIZE_LABEL_FOUND_EMOJI="🟢"
+          elif [ "$SIZE_LABEL_FOUND" == "Size - M" ]; then
+            SIZE_LABEL_FOUND_EMOJI="🟡"
+          elif [ "$SIZE_LABEL_FOUND" == "Size - L" ]; then
+            SIZE_LABEL_FOUND_EMOJI="🟠"
+          elif [ "$SIZE_LABEL_FOUND" == "Size - XL" ]; then
+            SIZE_LABEL_FOUND_EMOJI="🔴"
+          elif [ "$SIZE_LABEL_FOUND" == "Size - XXL" ]; then
+            SIZE_LABEL_FOUND_EMOJI="🔴"
+          fi
+          SIZE_LABEL_FOUND_RESULT="$SIZE_LABEL_FOUND_EMOJI $SIZE_LABEL_FOUND"
+          echo "size_label_found=$SIZE_LABEL_FOUND_RESULT" >> $GITHUB_OUTPUT
+
+    outputs:
+      size_label_found: ${{ steps.check_pr_size_label_step.outputs.size_label_found }}
+
+  release_and_publish:
+    needs: check_pr_size_label
+    name: 'Release and Publish'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: '30'
+          token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.15.0'
+          registry-url: https://registry.npmjs.org/
+      - name: Step 0 - 📁 Get pnpm store path
+        id: pnpm-store
+        run: |
+          STORE_PATH=$(corepack pnpm store path --silent)
+          echo "STORE_PATH=${STORE_PATH}" >> "$GITHUB_OUTPUT"
+      - name: Step 0a - 📁 Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-store.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Step 1 - ⚙️ Setup GitHub Config
+        run: |
+          git config user.name "deepworkplan-bot"
+          git config user.email "bot@deepworkplan.com"
+          git config advice.skippedCherryPicks false
+      - name: Step 2 - 📄 Set GitHub release content "BODY" env var
+        run: |
+          bash .github/scripts/get_github_release_log.sh
+          if [[ ! -f git_logs_output.txt ]]; then
+            echo "⚠️ No description found for release body content."
+            exit 1
+          fi
+      - name: Step 3 - 🔄 Prepare release
+        run: |
+          corepack pnpm install --frozen-lockfile
+          corepack pnpm run release
+          git push --follow-tags origin main
+      - name: Step 4 - 🏷️ Set GitHub release "TAG" env vars
+        run: |
+          GITHUB_RELEASE_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+          if [[ -z $GITHUB_RELEASE_TAG ]]; then
+            echo "⚠️ No release tag found."
+            exit 1
+          fi
+          echo "::set-env name=GITHUB_RELEASE_TAG::$GITHUB_RELEASE_TAG"
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+      - name: Step 5 - 🚀 Publish GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          name: Release ${{ env.GITHUB_RELEASE_TAG }}
+          tag: ${{ env.GITHUB_RELEASE_TAG }}
+          bodyFile: git_logs_output.txt
+          token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+
+    outputs:
+      package_version: ${{ steps.publish_npm_package.outputs.package_version }}
+
+  cleanup_caches:
+    needs: release_and_publish
+    name: 'Cleanup caches'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 - 🗑️ Trigger cleanup caches workflow
+        run: |
+          curl --location "https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches" \
+            --header "Authorization: token ${{ secrets.AUTOMATION_GITHUB_TOKEN }}" \
+            --header "Content-Type: application/json" \
+            --data '{
+                "event_type": "cleanup_caches",
+                "client_payload": {}
+            }'

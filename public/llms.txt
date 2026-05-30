@@ -1,0 +1,52 @@
+# Deep Work Plan
+
+> Deep Work Plan (DWP) is an open, MIT-licensed methodology and reference kit for running structured, validated, resumable multi-hour work with AI coding agents. Maintained by DailyBot and the open-source community.
+
+## About
+
+Deep Work Plan applies Cal Newport's idea of deep work to AI coding agents. It defines how to turn a goal into an agreed plan, break that plan into atomic and independently verifiable tasks, and run each task in a focused loop that ends with an explicit validation gate. The plan, tasks, and running log are all plain Markdown — readable, reviewable, and version-controlled. DWP is framework- and agent-agnostic: adapters map the same core loop to Claude, Cursor, Copilot, Codex, Gemini, and more.
+
+## Core Sections
+
+- Home: /
+- Methodology: /methodology — what DWP is, its principles, and how to adopt it
+- Specification: /spec — the normative DWP standard (task anatomy, validation gates, completion protocol, archetypes, addons)
+- Kit: /kit — presets, adapters, and commands for installing DWP into a repository
+- Examples: /examples — worked examples of the methodology in practice
+- Quickstart: /quickstart — get DWP running in a repo quickly
+- About: /about — what DWP is and who maintains it (DailyBot)
+- Contact: /contact — how to engage with the project on GitHub
+
+## Repository
+
+- GitHub: https://github.com/DailybotHQ/deepworkplan-website
+
+## Languages
+
+- English (default): /
+- Spanish: /es/
+
+## Agent-Friendly Markdown
+
+Every rendered page is available as native source Markdown for AI agents:
+
+- Page Markdown: /{page}.md (EN), /es/{page}.md (ES)
+- Content Negotiation: send `Accept: text/markdown` to get Markdown for any page
+- Content-Type: text/markdown; charset=utf-8
+- Source Markdown — not HTML-to-Markdown conversion
+
+## Machine-Readable Feeds
+
+- Sitemap: /sitemap-index.xml
+- RSS (English): /rss.xml
+- RSS (Spanish): /es/rss.xml
+
+## Crawling Guidance
+
+- All public content is intended for indexing by search engines and LLM systems.
+- Prefer canonical URLs and language-specific routes.
+- Structured data (JSON-LD) is embedded on all pages for machine consumption.
+
+## Detailed Version
+
+For comprehensive content descriptions, see: /llms-full.txt

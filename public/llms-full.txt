@@ -1,0 +1,127 @@
+# Deep Work Plan - Full Site Description
+
+> Deep Work Plan (DWP) is an open, MIT-licensed methodology and reference kit for structured, validated, resumable multi-hour AI-agent execution. Maintained by DailyBot and the open-source community.
+
+## What Deep Work Plan Is
+
+Deep Work Plan applies Cal Newport's concept of deep work to AI coding agents. It is a methodology, not a product. DWP defines how to turn a goal into an agreed plan, decompose that plan into atomic and independently verifiable tasks, and run each task in a focused loop that ends with an explicit check before the next task begins.
+
+DWP is deliberately agnostic about which AI agent or stack you use. Adapters translate the same core loop to Claude, Cursor, Copilot, Codex, Gemini, and more. The plan, the tasks, and the running log are all plain Markdown, so the work stays readable, reviewable, and version-controlled. There is no runtime and no lock-in.
+
+The methodology, specification, and kit are released under the MIT license — free to use, adapt, and build on.
+
+## Who Maintains It
+
+Deep Work Plan grew out of real engineering work at DailyBot and is now maintained by DailyBot together with the open-source community.
+
+- DailyBot: https://www.dailybot.com
+- Repository: https://github.com/DailybotHQ/deepworkplan-website
+
+## Core Principles
+
+- Plan before execution — no code is written until the plan is agreed. The plan is a contract between you and the agent.
+- Tasks are atomic — each task is scoped so it can be executed and verified on its own, then committed atomically.
+- Verify everything — every task ends with an explicit validation gate before the next one begins, with progress recorded in git.
+
+## Site Structure
+
+### Pages
+
+- **Home** (/) — Overview of the Deep Work Plan methodology and how to get started
+- **Methodology** (/methodology) — The narrative methodology: what DWP is, its principles, the workflow, and how to adopt it
+- **Specification** (/spec) — The readable, normative DWP standard: task anatomy, validation gates, completion protocol, mandatory final tasks, archetypes, and addons
+- **Kit** (/kit) — The kit catalog: presets, adapters, and commands available for installing DWP into a repository
+- **Examples** (/examples) — Worked examples that show the methodology applied to real engineering work
+- **Quickstart** (/quickstart) — A short path to getting DWP running in a repository
+- **About** (/about) — What Deep Work Plan is, its core principles, and who maintains it
+- **Contact** (/contact) — How to engage with the project: source, issues, and discussions on GitHub
+
+### Languages
+
+All pages are available in:
+- English (default): /
+- Spanish: /es/
+
+Each language has its own RSS feed and full page set.
+
+## Content Model
+
+- Bilingual routing: English base routes (`/`, `/methodology`, `/spec`, etc.) and Spanish routes under `/es/`
+- Methodology, spec, and kit content authored with Astro Content Collections supporting Markdown and MDX
+- All pages use structured data (JSON-LD) for machine readability
+- The blog engine exists but is dormant, reserved for future case studies
+
+## Topic Areas
+
+- Structured execution for AI coding agents
+- Planning and decomposing engineering work into atomic, verifiable tasks
+- Validation gates and completion protocols
+- Agent-agnostic workflows (Claude, Cursor, Copilot, Codex, Gemini, and more)
+- Markdown-based, version-controlled plans and running logs
+- Resumable multi-hour agent execution
+
+## Tech Stack
+
+- Astro (static site generator with islands architecture)
+- Svelte (interactive components)
+- TypeScript
+- Tailwind CSS (with dark mode support)
+- MDX (enhanced Markdown)
+- Biome (linter and formatter)
+- Deployed on Cloudflare Pages
+
+## Agent-Friendly Markdown Endpoints
+
+Every rendered page is available as clean, native Markdown for AI agents. This content is served directly from the original source Markdown — not converted from rendered HTML — preserving full fidelity of code blocks, links, and formatting.
+
+### URL Patterns
+
+- **Pages**: `/{page}.md` (EN), `/es/{page}.md` (ES)
+  - Examples: `/methodology.md`, `/spec.md`, `/kit.md`, `/es/methodology.md`
+
+### Response Format
+
+Each Markdown response includes:
+- H1 title
+- Description (blockquote)
+- Metadata: Language, Canonical URL (HTML version), Last Updated
+- Separator
+- Original Markdown body content
+
+Content-Type: `text/markdown; charset=utf-8`
+
+### Content Negotiation
+
+Agents can request Markdown without changing URLs by sending `Accept: text/markdown`:
+
+```
+curl -H "Accept: text/markdown" https://deepworkplan.com/methodology
+→ Returns Markdown with Content-Type: text/markdown; charset=utf-8
+→ Response includes Vary: Accept header for proper caching
+```
+
+### Why Native Markdown
+
+- Content is served from the original source files, not HTML→Markdown conversion
+- More token-efficient for AI consumption (no HTML tag residue)
+- Code blocks, links, and formatting preserved exactly as authored
+- Canonical URL always points to the HTML version for human readers
+- Internal cross-links between pages enable agents to discover the full site structure
+
+## Feeds & Discovery
+
+- RSS Feed (English): /rss.xml
+- RSS Feed (Spanish): /es/rss.xml
+- Sitemap: /sitemap-index.xml
+- robots.txt: /robots.txt
+- This file: /llms-full.txt
+- Short version: /llms.txt
+
+## Structured Data
+
+The site includes JSON-LD structured data on all pages:
+- WebSite schema (site-level identity)
+- SoftwareApplication schema (Deep Work Plan, free, authored and published by DailyBot)
+- Organization schema (DailyBot)
+- BreadcrumbList schema (navigation hierarchy)
+- AboutPage and ContactPage schema where applicable

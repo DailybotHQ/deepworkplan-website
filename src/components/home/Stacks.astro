@@ -1,0 +1,41 @@
+---
+import { type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const s = t.home.stacks;
+---
+
+<section class="bg-gray-50 py-16 sm:py-20 dark:bg-gray-900">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <span class="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
+        {s.badge}
+      </span>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+        {s.title}
+      </h2>
+      <p class="mt-4 text-base leading-relaxed text-gray-600 dark:text-gray-300">{s.subtitle}</p>
+    </div>
+    <ul
+      class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5"
+      role="list"
+    >
+      {
+        s.items.map((stack) => (
+          <li class="rounded-lg border border-gray-200 bg-white px-4 py-3 dark:border-gray-800 dark:bg-gray-950">
+            <span class="block text-sm font-semibold text-gray-900 dark:text-gray-100">
+              {stack.name}
+            </span>
+            <span class="block font-mono text-xs text-gray-600 dark:text-gray-300">{stack.sub}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

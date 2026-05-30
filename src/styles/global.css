@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: "Atkinson";
+  src: url("/fonts/atkinson-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atkinson";
+  src: url("/fonts/atkinson-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* DeepWorkPlan — "Ink & Paper + Indigo" design system.
+   * Token API kept backward-compatible: `--color-main` = ink (dark base /
+   * branded surfaces), `--color-secondary` = indigo accent. */
+  --color-main: #0e1116; /* Ink — dark base / branded surfaces */
+  --color-secondary: #4f46e5; /* Indigo — accent (light mode) */
+  --color-accent: #4f46e5; /* Alias for the accent */
+  --color-ink: #14171c; /* Near-black body text (light mode) */
+  --color-paper: #fafaf7; /* Warm paper — light background */
+  --color-line: #e4e2db; /* Hairline borders (light mode) */
+  --color-muted: #5b6470; /* Secondary text (light mode, WCAG AA) */
+  --color-gray-50: #fafaf7; /* Elevated light surface = paper */
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Dark theme: paper-on-ink with a brighter indigo accent for contrast. */
+.dark {
+  --color-secondary: #818cf8; /* Indigo, lightened for dark surfaces */
+  --color-accent: #818cf8;
+  --color-line: #232831; /* Hairline borders (dark mode) */
+  --color-muted: #9aa3af; /* Secondary text (dark mode, WCAG AA) */
+}
+
+@layer components {
+  .main-container {
+    @apply max-w-7xl mx-auto py-4 px-4 md:px-8;
+  }
+
+  /* step-2-get-started.png: half width on desktop */
+  .prose .prose-img-narrow {
+    @apply md:max-w-[50%];
+  }
+
+  /* Image captions inside blog posts */
+  .prose figcaption {
+    @apply text-sm text-center text-gray-600 dark:text-gray-300 mt-3;
+  }
+
+  /* Mobile horizontal scroll for wide tables.
+   * The !important rules below override Tailwind Typography's `.prose table`
+   * styles, which have equal or higher specificity than `.table-responsive`
+   * once nested inside a prose container. Without !important, prose wins. */
+  @media (max-width: 768px) {
+    .table-responsive {
+      /* biome-ignore lint/complexity/noImportantStyles: overrides equal-specificity Tailwind Typography `.prose table` rules nested inside prose containers */
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch;
+    }
+    .table-responsive > table,
+    .table-responsive > :where(table) {
+      /* biome-ignore lint/complexity/noImportantStyles: overrides equal-specificity Tailwind Typography `.prose table` rules nested inside prose containers */
+      width: max-content !important;
+      min-width: 100%;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  [role="button"] {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900;
+  }
+}
+
+@keyframes chevron-bounce {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(32px);
+  }
+  90% {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+}
+
+.animate-chevron-bounce {
+  animation: chevron-bounce 2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    scroll-behavior: auto;
+    transition-duration: 0.01ms;
+  }
+
+  .animate-chevron-bounce {
+    animation: none;
+  }
+}
+
+/* Constrained centered figures for blog post diagrams.
+ * Mobile: image fills full content width.
+ * Desktop (>= 768px): image is constrained for breathing room.
+ */
+.fig-narrow img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .fig-narrow-70 img {
+    max-width: 70%;
+  }
+  .fig-narrow-60 img {
+    max-width: 60%;
+  }
+}

@@ -1,0 +1,36 @@
+---
+title: dwp-execute
+description: "Ejecuta un Deep Work Plan existente tarea por tarea. El agente lee el plan completo, recorre cada tarea en orden, actualiza el avance y marca la finalización con exactitud."
+kind: command
+lang: es
+order: 2
+usage: /dwp-execute [plan]
+aliases:
+  - dwp:execute
+---
+
+# dwp-execute
+
+Ejecuta un Deep Work Plan existente.
+
+## Qué hace
+
+`dwp-execute` recorre un plan existente tarea por tarea. Lee el plan completo, ejecuta cada tarea en orden, actualiza `PROGRESS.md` y marca el estado de finalización de cada tarea.
+
+## Uso
+
+```
+/dwp-execute [plan]
+```
+
+## Comportamiento
+
+1. Lee el plan completo antes de empezar.
+2. Ejecuta las tareas en orden.
+3. Actualiza `PROGRESS.md` tras cada tarea.
+4. Marca el estado de la tarea con exactitud.
+5. Se detiene y pregunta cuando está bloqueado.
+
+## Alias
+
+- `dwp:execute`

@@ -1,0 +1,25 @@
+{
+  "name": "DWP Website - Astro",
+  "dockerComposeFile": "../docker/local/docker-compose.yaml",
+  "service": "dwpwebsitevscode",
+  "workspaceFolder": "/app",
+  "runServices": ["dwpwebsitevscode"],
+  "remoteUser": "node",
+  "customizations": {
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "vscode": {
+      "extensions": [
+        "eamodio.gitlens",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "vscode-icons-team.vscode-icons",
+        "biomejs.biome",
+        "unifiedjs.vscode-mdx",
+        "astro-build.astro-vscode",
+        "bradlc.vscode-tailwindcss",
+        "svelte.svelte-vscode"
+      ]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+---
+title: Manifiesto
+description: "Qué es un Deep Work Plan, por qué importa la ejecución autónoma estructurada y cómo la idea de trabajo profundo de Cal Newport se traslada a los agentes de IA."
+order: 1
+lang: es
+summary: El argumento a favor de la ejecución guiada por un plan con agentes de IA.
+icon: compass
+---
+
+# Manifiesto
+
+Un Deep Work Plan (DWP) es una metodología basada solo en Markdown para la ejecución estructurada y autónoma por parte de agentes de programación con IA. Convierte un objetivo difuso en un plan revisable que un agente puede ejecutar, pausar, reanudar y reportar, sin perder contexto ni improvisar hasta llegar a resultados inconsistentes.
+
+## Trabajo profundo, para agentes
+
+El nombre es un guiño deliberado a *Deep Work* de Cal Newport: la práctica del esfuerzo concentrado y sin distracciones en tareas cognitivamente exigentes. El argumento de Newport trata sobre las personas: la capacidad de concentrarse sin distracción es cada vez más escasa y cada vez más valiosa. DWP aplica el mismo principio a los agentes de programación con IA.
+
+Un agente sin un plan se comporta como un trabajador del conocimiento que nunca reserva tiempo, nunca anota nada y cambia de contexto ante cada interrupción. Un Deep Work Plan le da al agente el equivalente a una agenda bloqueada y un encargo escrito: un alcance acotado, una secuencia clara y un lugar donde registrar el avance.
+
+## Por qué importa la ejecución autónoma estructurada
+
+Los agentes de programación con IA modernos son capaces, pero carecen de dirección. Dirige uno hacia una tarea no trivial y tenderá a empezar a editar archivos de inmediato, perder la noción de lo que cambió y producir trabajo difícil de revisar e imposible de reanudar.
+
+DWP impone una estructura ligera que aborda cada fallo de forma directa:
+
+- **Tareas revisables**: el trabajo se descompone en unidades secuenciales, cada una con un alcance y criterios de aceptación explícitos.
+- **Estado persistido**: el avance se escribe para que el trabajo sobreviva a las interrupciones y pueda reanudarse entre sesiones.
+- **Documentación estandarizada**: personas y agentes comparten el mismo modelo mental mediante un formato común.
+- **Portabilidad entre agentes**: la metodología funciona con cualquier agente mediante adaptadores ligeros, no reimplementaciones.
+
+## Markdown de principio a fin
+
+DWP define una estructura, no un software. No hay un entorno de ejecución que instalar, ni un árbol de dependencias, ni dependencia de un proveedor. El plan, las tareas y el registro de avance son Markdown plano que cualquier agente puede leer, cualquier persona puede revisar y cualquier sistema de control de versiones puede rastrear con limpieza. El resultado es una ejecución que se puede leer, auditar y en la que se puede confiar.

@@ -1,0 +1,57 @@
+---
+title: Agent protocol
+description: "The normative behavioral contract for AI coding agents working with Deep Work Plans, covering onboarding, planning, execution, refinement, resumption, communication, and safety."
+order: 3
+lang: en
+section: Protocol
+---
+
+# Agent protocol
+
+**Version 1.0.** This protocol defines how an AI coding agent MUST behave when working with Deep Work Plans. The keywords MUST, SHOULD, and MAY follow RFC 2119.
+
+## Onboarding
+
+Before creating or executing a plan, an agent MUST onboard to the repository. Onboarding is reasoning-based, not script-based: the agent reads the repository structure, documentation, and configuration to build a mental model.
+
+The agent SHOULD identify:
+
+- The repository archetype (individual versus orchestrator).
+- The build, test, and lint commands.
+- Existing conventions for style, structure, and naming.
+- Available skills and agents.
+
+## Planning
+
+When creating a plan, the agent MUST:
+
+- Decompose the goal into sequential, reviewable tasks.
+- Write each task with the nine-section anatomy.
+- End with the two mandatory final tasks.
+- Ask clarifying questions when the goal is ambiguous.
+
+## Execution
+
+During execution, the agent MUST:
+
+- Read the full plan before starting.
+- Execute tasks in order unless dependencies allow otherwise.
+- Update `PROGRESS.md` after each task.
+- Mark task status accurately.
+- Stop and ask when blocked rather than guessing.
+
+## Refinement
+
+When refining, the agent MUST preserve completed work, update the task table, and record what changed.
+
+## Resumption
+
+When resuming, the agent MUST reconstruct state from `PROGRESS.md` and the task files before continuing.
+
+## Communication
+
+Agents SHOULD report concisely. Status reports MUST distinguish completed, in-progress, and pending work.
+
+## Safety
+
+Agents MUST NOT commit secrets, MUST keep `.dwp/` gitignored, and SHOULD ask before destructive operations.

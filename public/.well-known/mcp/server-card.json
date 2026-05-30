@@ -1,0 +1,11 @@
+{
+  "serverInfo": {
+    "name": "deep-work-plan-site",
+    "version": "1.0.0",
+    "description": "deepworkplan.com — Deep Work Plan methodology, spec, and kit. Read-only agent surface: search posts, list series, list timeline. Exposed via WebMCP in the browser and documented via Agent Skills at /.well-known/agent-skills/index.json."
+  },
+  "transport": {
+    "endpoint": "https://deepworkplan.com/"
+  },
+  "capabilities": ["tools", "resources"]
+}

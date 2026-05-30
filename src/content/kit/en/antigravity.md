@@ -1,0 +1,35 @@
+---
+title: Antigravity
+description: "The DWP adapter for Antigravity, with partial support through markdown command procedures and the hash prefix. The agent reads the procedures and runs the sequential workflow."
+kind: adapter
+lang: en
+order: 6
+agent: Antigravity
+support: partial
+prefix: '#'
+---
+
+# Antigravity adapter
+
+Antigravity supports DWP through markdown command procedures.
+
+## Support level
+
+**Partial** — core commands work through procedure files.
+
+## Installation
+
+DWP commands live as markdown procedures the agent reads on invocation.
+
+## Invocation
+
+Use the `#` prefix:
+
+```
+#dwp-create <goal>
+#dwp-execute
+```
+
+## Notes
+
+Antigravity reads procedure files and executes the sequential DWP workflow.
