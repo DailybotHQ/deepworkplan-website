@@ -1,5 +1,6 @@
 ---
-import { type Language } from '@/lib/i18n';
+import Kicker from '@/components/editorial/Kicker.astro';
+import type { Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -11,38 +12,59 @@ const t = getTranslations(lang);
 const c = t.home.comparison;
 ---
 
-<section class="bg-gray-50 py-16 sm:py-20 dark:bg-gray-900">
-  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-    <div class="max-w-2xl">
-      <span class="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
-        {c.badge}
-      </span>
-      <h2 class="mt-3 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+<section
+  class="border-b py-16 md:py-20"
+  style="border-color: var(--color-line); background-color: color-mix(in srgb, var(--color-ink) 3%, var(--color-paper));"
+>
+  <div class="main-container">
+    <div class="max-w-3xl">
+      <Kicker>{c.badge}</Kicker>
+      <h2
+        class="font-display mt-3 text-3xl font-bold md:text-4xl"
+        style="color: var(--color-ink);"
+      >
         {c.title}
       </h2>
-      <p class="mt-4 text-base leading-relaxed text-gray-600 dark:text-gray-300">{c.subtitle}</p>
+      <p class="lead mt-4">{c.subtitle}</p>
     </div>
-    <div class="mt-10 overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-800">
-      <table class="w-full border-collapse text-left text-sm">
+    <div class="mt-10 overflow-x-auto table-responsive">
+      <table
+        class="w-full border-collapse text-left text-sm nums-tabular"
+      >
         <thead>
-          <tr class="border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950">
-            <th class="px-4 py-3 font-semibold text-gray-600 dark:text-gray-300"><span class="sr-only">{c.badge}</span></th>
-            <th class="px-4 py-3 font-bold text-indigo-700 dark:text-indigo-300">{c.colDwp}</th>
-            <th class="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300">{c.colOthers}</th>
+          <tr class="border-b-2" style="border-color: var(--color-ink);">
+            <th class="px-4 py-3"><span class="sr-only">{c.badge}</span></th>
+            <th
+              class="font-display px-4 py-3 font-semibold"
+              style="color: var(--color-secondary);"
+            >
+              {c.colDwp}
+            </th>
+            <th
+              class="font-display px-4 py-3 font-semibold"
+              style="color: var(--color-ink);"
+            >
+              {c.colOthers}
+            </th>
           </tr>
         </thead>
         <tbody>
           {
             c.rows.map((row) => (
-              <tr class="border-b border-gray-200 last:border-0 odd:bg-white even:bg-gray-50/50 dark:border-gray-800 dark:odd:bg-gray-950 dark:even:bg-gray-900/50">
+              <tr class="border-b" style="border-color: var(--color-line);">
                 <th
                   scope="row"
-                  class="px-4 py-3 font-semibold text-gray-900 dark:text-gray-100"
+                  class="px-4 py-3 font-semibold"
+                  style="color: var(--color-ink);"
                 >
                   {row.label}
                 </th>
-                <td class="px-4 py-3 text-gray-700 dark:text-gray-200">{row.dwp}</td>
-                <td class="px-4 py-3 text-gray-600 dark:text-gray-300">{row.others}</td>
+                <td class="px-4 py-3" style="color: var(--color-ink);">
+                  {row.dwp}
+                </td>
+                <td class="px-4 py-3" style="color: var(--color-muted);">
+                  {row.others}
+                </td>
               </tr>
             ))
           }

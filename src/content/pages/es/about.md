@@ -27,7 +27,7 @@ Es deliberadamente agnóstica respecto al agente de IA o stack que uses — los 
 - Mantenida por DailyBot y la comunidad
 - Incluye una especificación, comandos, adaptadores, presets y ejemplos
 - Solo Markdown — sin runtime, sin dependencias forzadas
-- Basada en la idea de trabajo profundo de Cal Newport, aplicada a agentes
+- Convierte cualquier repositorio en un código AI-first, pilotable por agentes
 
 ---
 

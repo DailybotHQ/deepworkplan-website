@@ -94,6 +94,7 @@ export interface SiteTranslations {
       title: string;
       titleEmphasis: string;
       subtitle: string;
+      pullQuote: string;
       primaryCta: string;
       secondaryCta: string;
     };

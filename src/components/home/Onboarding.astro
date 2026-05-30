@@ -1,5 +1,6 @@
 ---
-import { type Language } from '@/lib/i18n';
+import Kicker from '@/components/editorial/Kicker.astro';
+import type { Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -11,33 +12,40 @@ const t = getTranslations(lang);
 const o = t.home.onboarding;
 ---
 
-<section class="bg-gray-50 py-16 sm:py-20 dark:bg-gray-900">
-  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-    <div class="max-w-2xl">
-      <span class="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
-        {o.badge}
-      </span>
-      <h2 class="mt-3 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+<section
+  class="border-b py-16 md:py-20"
+  style="border-color: var(--color-line); background-color: color-mix(in srgb, var(--color-ink) 3%, var(--color-paper));"
+>
+  <div class="main-container">
+    <div class="max-w-3xl">
+      <Kicker>{o.badge}</Kicker>
+      <h2
+        class="font-display mt-3 text-3xl font-bold md:text-4xl"
+        style="color: var(--color-ink);"
+      >
         {o.title}
       </h2>
-      <p class="mt-4 text-base leading-relaxed text-gray-600 dark:text-gray-300">{o.subtitle}</p>
+      <p class="lead mt-4">{o.subtitle}</p>
     </div>
-    <ol class="mt-10 grid gap-8 sm:grid-cols-2" role="list">
+    <ol class="mt-12 grid gap-8 sm:grid-cols-2" role="list">
       {
         o.steps.map((step, i) => (
-          <li class="flex gap-4">
+          <li class="border-t pt-4" style="border-color: var(--color-line);">
             <span
-              class="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-indigo-100 font-mono text-sm font-bold text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300"
-              aria-hidden="true"
+              class="font-display nums-tabular text-3xl font-bold"
+              style="color: var(--color-secondary);"
             >
-              {i + 1}
+              {String(i + 1).padStart(2, '0')}
             </span>
-            <div>
-              <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">{step.title}</h3>
-              <p class="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
-                {step.description}
-              </p>
-            </div>
+            <h3
+              class="font-display mt-3 text-lg font-semibold"
+              style="color: var(--color-ink);"
+            >
+              {step.title}
+            </h3>
+            <p class="mt-2 leading-relaxed" style="color: var(--color-muted);">
+              {step.description}
+            </p>
           </li>
         ))
       }

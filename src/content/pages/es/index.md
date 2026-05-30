@@ -1,49 +1,58 @@
 ---
-title: "Deep Work Plan — ejecución estructurada para agentes de IA"
-description: "Deep Work Plan: una metodología abierta y kit de referencia para ejecución estructurada, validada y reanudable de agentes de IA durante varias horas."
+title: "Deep Work Plan — convierte cualquier repositorio en un código AI-first"
+description: "Deep Work Plan convierte cualquier repositorio en un código AI-first, pilotable por agentes. Una metodología abierta con licencia MIT y un kit de referencia para una ejecución estructurada, validada y reanudable."
 lastUpdated: 2026-05-30
 ---
 
-## El trabajo profundo de Cal Newport, aplicado a los agentes de IA
+## Convierte cualquier repositorio en un código AI-first
 
-Deep Work Plan (DWP) es una metodología abierta con licencia MIT y un kit de referencia para ejecutar trabajo estructurado, validado y reanudable de varias horas con agentes de IA. Convierte un objetivo en un plan acordado, divide ese plan en tareas atómicas y verificables de forma independiente, y ejecuta cada tarea en un ciclo enfocado que termina con una verificación explícita.
+Deep Work Plan (DWP) es una metodología y un kit abiertos, con licencia MIT, para planificar y ejecutar trabajo de software complejo con agentes de IA. Documenta tu repositorio — AGENTS.md, docs y un hogar de skills `.agents/` — y produce planes de largo alcance que cualquier agente puede pilotar, validar y reanudar.
 
-DWP es agnóstica de framework y de agente. El plan, las tareas y el registro de ejecución son todo Markdown plano — legible, revisable y versionado. Sin runtime, sin dependencias forzadas.
+> Deep Work Plan es desarrollo guiado por especificación donde el propio repositorio se convierte en el harness.
 
-- [Leer la metodología](/es/methodology)
 - [Inicio rápido](/es/quickstart)
-
----
-
-## La metodología
-
-La metodología narrativa explica qué es DWP, los principios que la sustentan, el flujo de trabajo que define y cómo adoptarla en tu propio repositorio. Es el contenido formativo principal del sitio.
-
 - [Leer la metodología](/es/methodology)
 
 ---
 
-## La especificación
+## El problema y la respuesta
 
-La especificación legible es el estándar normativo de DWP: anatomía de tareas, puertas de validación, el protocolo de finalización, tareas finales obligatorias, arquetipos y addons. Define con precisión cómo se ve un Deep Work Plan conforme.
+Los agentes de programación de IA son muy eficaces en ráfagas cortas. En trabajo de largo alcance — una migración, un subsistema nuevo, una refactorización en decenas de archivos — se desvían: el contexto se llena, las decisiones se olvidan y las tareas de varias horas se abandonan a medio camino.
 
-- [Leer la especificación](/es/spec)
+Deep Work Plan responde con **desarrollo guiado por especificación**: el plan es la fuente de verdad duradera y los agentes ejecutan contra criterios de aceptación y puertas de validación explícitos. La desviación baja, el trabajo se mantiene verificable y cualquier agente puede reanudarlo entre sesiones. A diferencia de las herramientas guiadas por especificación atadas a un IDE o proveedor (GitHub Spec Kit, Amazon Kiro, Tessl), DWP es independiente de la herramienta y nativa del repositorio.
 
----
-
-## El kit
-
-El catálogo del kit ofrece presets, adaptadores y comandos para instalar DWP en un repositorio. Los adaptadores traducen el mismo ciclo central a agentes como Claude, Cursor, Copilot, Codex y Gemini.
-
-- [Explorar el kit](/es/kit)
+También es **ingeniería de harness** hecha portable. Un harness de agente es el andamiaje alrededor de un modelo — contexto, herramientas, bucle de control, barreras, estado reanudable — que lo hace fiable. Deep Work Plan instala ese harness en el propio repositorio, para que cualquier agente pueda pilotar cualquier repo.
 
 ---
 
-## Ejemplos
+## Qué obtienes
 
-Los ejemplos prácticos muestran la metodología aplicada a trabajo de ingeniería real — cómo un objetivo se convierte en un plan, cómo se delimitan y verifican las tareas, y cómo se registra el progreso.
+- AGENTS.md en la raíz del repositorio, razonado a partir de tu stack y comandos reales.
+- `docs/` categorizado y documentación por módulo.
+- Un directorio `.agents/` (skills, agentes, comandos) con el enlace simbólico `.claude` a `.agents`.
+- El skill de Deep Work Plan, instalado una sola vez para cada agente.
+- Planes de largo alcance y reanudables en una carpeta `.dwp/` ignorada por git.
 
-- [Ver ejemplos](/es/examples)
+---
+
+## Cómo adoptarlo
+
+1. Instala el skill desde `DailybotHQ/deepworkplan-skill`.
+2. Genera un plan a partir de tu iniciativa.
+3. Ejecuta con cualquier agente — Claude Code, Cursor, Codex, Gemini o Copilot.
+
+```
+npx skills add DailybotHQ/deepworkplan-skill
+```
+
+---
+
+## La metodología, la especificación y el kit
+
+- [Leer la metodología](/es/methodology) — qué es DWP, los principios, el flujo de trabajo y cómo adoptarla.
+- [Leer la especificación](/es/spec) — anatomía de tareas, puertas de validación, el protocolo de finalización, arquetipos y addons.
+- [Explorar el kit](/es/kit) — presets, adaptadores y comandos para instalar DWP en un repositorio.
+- [Ver ejemplos](/es/examples) — recorridos de antes y después de trabajo de ingeniería real.
 
 ---
 

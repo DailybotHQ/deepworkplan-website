@@ -37,27 +37,29 @@ export const es: SiteTranslations = {
   home: {
     meta: {
       title:
-        'Deep Work Plan — ejecución enfocada y reanudable para agentes de IA',
+        'Deep Work Plan — convierte cualquier repositorio en un código AI-first',
       description:
-        'El Deep Work de Cal Newport, aplicado a los agentes de IA. Una metodología abierta con licencia MIT y un kit de referencia para una ejecución estructurada, validada y reanudable de tareas de varias horas.',
+        'Deep Work Plan convierte cualquier repositorio en un código AI-first, pilotable por agentes. Una metodología abierta con licencia MIT y un kit de referencia para una ejecución estructurada, validada y reanudable.',
     },
     hero: {
       badge: 'Metodología abierta · MIT · Independiente del agente',
-      title: 'El Deep Work de Cal Newport, aplicado a los',
-      titleEmphasis: 'agentes de IA',
+      title: 'Convierte cualquier repositorio en un',
+      titleEmphasis: 'código AI-first',
       subtitle:
-        'Deep Work Plan es la metodología abierta y el kit de referencia para orquestar la ejecución autónoma, enfocada y de varias horas de los agentes. Estructurada, validada y reanudable, con un historial de git que demuestra el trabajo.',
+        'Deep Work Plan es una metodología y un kit para planificar y ejecutar trabajo de software complejo con agentes de IA. Documenta tu repositorio — AGENTS.md, docs, skills — y produce planes de largo alcance que cualquier agente puede pilotar, validar y reanudar.',
+      pullQuote:
+        'Deep Work Plan es desarrollo guiado por especificación donde el propio repositorio se convierte en el harness.',
       primaryCta: 'Leer la metodología',
       secondaryCta: 'Leer la especificación',
     },
     pitch: {
       kicker: 'El problema y la respuesta',
       problem:
-        'El Deep Work de Cal Newport (2016) definió cómo las personas hacen un trabajo enfocado y sin distracciones. Los agentes de programación de IA ahora enfrentan el mismo problema a escala: divagan, pierden contexto y abandonan tareas de varias horas a medio camino.',
+        'Los agentes de programación de IA son muy eficaces en ráfagas cortas. En trabajo de largo alcance — una migración, un subsistema nuevo, una refactorización en decenas de archivos — se desvían: el contexto se llena, las decisiones se olvidan y las tareas de varias horas se abandonan a medio camino.',
       answer:
-        'Los Deep Work Plans son la respuesta: sesiones de ejecución estructuradas, validadas y reanudables que permiten a los agentes trabajar de forma autónoma durante horas con un progreso medible y un historial de git que lo demuestra.',
+        'Deep Work Plan responde con desarrollo guiado por especificación: el plan es la fuente de verdad duradera y los agentes ejecutan contra criterios de aceptación y puertas de validación explícitos. La desviación baja, el trabajo se mantiene verificable y cualquier agente puede reanudarlo entre sesiones.',
       origin:
-        'Nació en DailyBot a través de repositorios de producción, se puso a prueba durante meses y se publicó como una metodología abierta con una implementación de referencia.',
+        'También es ingeniería de harness hecha portable. Un harness de agente es el andamiaje alrededor de un modelo — contexto, herramientas, bucle de control, barreras, estado reanudable — que lo hace fiable. Deep Work Plan instala ese harness en el propio repositorio (AGENTS.md, docs, el hogar de skills .agents/, el skill de DWP), para que cualquier agente pueda pilotar cualquier repo. Nació en DailyBot, se probó durante meses y se publicó como la DailybotHQ/deepworkplan-skill.',
     },
     onboarding: {
       badge: 'Incorporación basada en razonamiento',
@@ -283,7 +285,7 @@ export const es: SiteTranslations = {
     origin: {
       badge: 'Origen',
       quote:
-        'Creado por DailyBot, la empresa detrás de los standups asincrónicos para equipos distribuidos. Internamente usamos Deep Work Plans en repositorios de producción que abarcan Django, Vue, Lambda de TypeScript y Astro. Tras meses de uso en producción, liberamos la metodología bajo licencia MIT.',
+        'Creado por DailyBot, la empresa detrás de los standups asincrónicos para equipos distribuidos. Internamente usamos Deep Work Plans para hacer pilotables por agentes repositorios de producción que abarcan Django, Vue, Lambda de TypeScript y Astro. Tras meses de uso en producción, liberamos la metodología bajo licencia MIT.',
       attribution: 'El equipo de ingeniería de DailyBot',
     },
     finalCta: {
@@ -460,7 +462,7 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
       'Mantenida por DailyBot y la comunidad',
       'Incluye especificación, comandos, adaptadores, presets y ejemplos',
       'Solo Markdown — sin runtime, sin lock-in',
-      'Basada en la idea de trabajo profundo de Cal Newport, aplicada a agentes',
+      'Convierte cualquier repositorio en un código AI-first, pilotable por agentes',
     ],
     ctaTitle: 'Quién la mantiene',
     ctaDescription:

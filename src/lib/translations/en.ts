@@ -36,27 +36,29 @@ export const en: SiteTranslations = {
   // Deep Work Plan homepage
   home: {
     meta: {
-      title: 'Deep Work Plan — focused, resumable execution for AI agents',
+      title: 'Deep Work Plan — turn any repository into an AI-first codebase',
       description:
-        "Cal Newport's Deep Work, applied to AI agents. An open, MIT-licensed methodology and reference kit for structured, validated, resumable multi-hour agent execution.",
+        'A methodology and kit for planning and executing complex software work with AI agents: it documents your repo, produces long-horizon plans, and lets any agent pilot, validate, and resume the work.',
     },
     hero: {
       badge: 'Open methodology · MIT · Agent-agnostic',
-      title: "Cal Newport's Deep Work, applied to",
-      titleEmphasis: 'AI agents',
+      title: 'Turn any repository into an',
+      titleEmphasis: 'AI-first codebase',
       subtitle:
-        'Deep Work Plan is the open methodology and reference kit for orchestrating focused, multi-hour, autonomous agent execution. Structured, validated, resumable — with a git history that proves the work.',
+        'Deep Work Plan is a methodology and kit for planning and executing complex software work with AI agents. It documents your repo — AGENTS.md, docs, skills — and produces long-horizon plans any agent can pilot, validate, and resume.',
+      pullQuote:
+        'Deep Work Plan is spec-driven development where the repository itself becomes the harness.',
       primaryCta: 'Read the methodology',
       secondaryCta: 'Read the spec',
     },
     pitch: {
       kicker: 'The problem and the answer',
       problem:
-        "Cal Newport's Deep Work (2016) defined how humans do focused, distraction-free work. AI coding agents now face the same problem at scale: they wander, lose context, and abandon multi-hour tasks halfway through.",
+        'AI coding agents are remarkably effective in short bursts. On long-horizon work — a migration, a new subsystem, a refactor across dozens of files — they drift: context fills up, decisions are forgotten, and multi-hour tasks are abandoned halfway through.',
       answer:
-        'Deep Work Plans are the answer — structured, validated, resumable execution sessions that let agents work autonomously for hours with measurable progress and a git history that proves it.',
+        'Deep Work Plan answers with spec-driven development: the plan is the durable source of truth, and agents execute against explicit acceptance criteria and validation gates. Drift drops, the work stays verifiable, and any agent can resume it across sessions.',
       origin:
-        'Born at DailyBot across production repositories, battle-tested for months, and released as an open methodology with a reference implementation.',
+        'It is also harness engineering made portable. An agent harness is the scaffolding around a model — context, tools, control loop, guardrails, resumable state — that makes it reliable. Deep Work Plan installs that harness into the repository itself (AGENTS.md, docs, the .agents/ skills home, the DWP skill), so any agent can pilot any repo. Born at DailyBot, battle-tested for months, and released as the DailybotHQ/deepworkplan-skill.',
     },
     onboarding: {
       badge: 'Reasoning-based onboarding',
@@ -281,7 +283,7 @@ export const en: SiteTranslations = {
     origin: {
       badge: 'Origin',
       quote:
-        'Built by DailyBot — the company behind asynchronous standups for distributed teams. Internally we used Deep Work Plans across production repositories spanning Django, Vue, TypeScript Lambda, and Astro. After months of production use, we open-sourced the methodology under MIT.',
+        'Built by DailyBot — the company behind asynchronous standups for distributed teams. Internally we used Deep Work Plans to make production repositories spanning Django, Vue, TypeScript Lambda, and Astro agent-pilotable. After months of production use, we open-sourced the methodology under MIT.',
       attribution: 'The DailyBot engineering team',
     },
     finalCta: {
@@ -458,7 +460,7 @@ I currently focus on AI applications, developer productivity, and high-impact pr
       'Maintained by DailyBot and the community',
       'Includes a spec, commands, adapters, presets, and examples',
       'Markdown-only — no runtime, no lock-in',
-      'Built on Cal Newport\u2019s idea of deep work, applied to agents',
+      'Turns any repository into an AI-first, agent-pilotable codebase',
     ],
     ctaTitle: 'Who maintains it',
     ctaDescription:

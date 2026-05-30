@@ -27,7 +27,7 @@ It is deliberately agnostic about which AI agent or stack you use — adapters t
 - Maintained by DailyBot and the community
 - Includes a spec, commands, adapters, presets, and examples
 - Markdown-only — no runtime, no lock-in
-- Built on Cal Newport's idea of deep work, applied to agents
+- Turns any repository into an AI-first, agent-pilotable codebase
 
 ---
 

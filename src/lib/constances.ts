@@ -3,7 +3,7 @@ export const SITE_TIMEZONE = 'America/Bogota';
 
 export const SITE_TITLE: string = 'Deep Work Plan';
 export const SITE_DESCRIPTION: string =
-  'Cal Newport’s Deep Work, applied to AI agents. An open, MIT-licensed methodology and reference kit for structured, validated, resumable multi-hour agent execution.';
+  'Deep Work Plan turns any repository into an AI-first, agent-pilotable codebase. An open, MIT-licensed methodology and reference kit for structured, validated, resumable agent execution.';
 export const BLOG_PAGE_SIZE: number = 30;
 
 // Analytics configuration — scripts load only when IDs are provided

@@ -1,6 +1,6 @@
 ---
 title: Manifesto
-description: "What a Deep Work Plan is, why structured autonomous execution matters, and how Cal Newport's idea of deep work carries over to AI coding agents."
+description: "What a Deep Work Plan is, why structured autonomous execution matters, and how it turns any repository into an AI-first, agent-pilotable codebase."
 order: 1
 lang: en
 summary: The case for plan-driven execution with AI coding agents.
@@ -13,7 +13,7 @@ A Deep Work Plan (DWP) is a markdown-only methodology for structured, autonomous
 
 ## Deep work, for agents
 
-The name is a deliberate nod to Cal Newport's *Deep Work*: the practice of focused, distraction-free effort on cognitively demanding tasks. Newport's argument is about people — the ability to concentrate without distraction is increasingly rare and increasingly valuable. DWP applies the same principle to AI coding agents.
+The name describes the practice itself: focused, sustained effort on cognitively demanding tasks, held together by structure rather than willpower. The same principle that makes deep work valuable for people — concentration without distraction — is what AI coding agents need to finish long-horizon work. DWP gives agents that structure, and turns the repository into an AI-first, agent-pilotable codebase.
 
 An agent without a plan behaves like a knowledge worker who never blocks time, never writes anything down, and context-switches on every interruption. A Deep Work Plan gives the agent the equivalent of a blocked calendar and a written brief: a bounded scope, a clear sequence, and a place to record progress.
 

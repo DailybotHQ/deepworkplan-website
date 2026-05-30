@@ -1,5 +1,7 @@
 ---
-import { getUrlPrefix, type Language } from '@/lib/i18n';
+import Kicker from '@/components/editorial/Kicker.astro';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -12,40 +14,40 @@ const prefix = getUrlPrefix(lang);
 const h = t.home.hero;
 ---
 
-<section class="relative overflow-hidden border-b border-gray-200 dark:border-gray-800">
-  <div
-    class="pointer-events-none absolute inset-x-0 -top-32 mx-auto h-[480px] max-w-4xl bg-[radial-gradient(ellipse_at_center,theme(colors.indigo.500/15%),transparent_70%)]"
-    aria-hidden="true"
-  >
-  </div>
-  <div class="relative mx-auto max-w-4xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-    <span
-      class="inline-block rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-semibold tracking-wide text-indigo-700 dark:border-indigo-800/60 dark:bg-indigo-950/40 dark:text-indigo-300"
-    >
-      {h.badge}
-    </span>
-    <h1
-      class="mt-6 text-balance text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl dark:text-gray-50"
-    >
-      {h.title}{' '}
-      <span class="text-indigo-600 dark:text-indigo-400">{h.titleEmphasis}</span>
-    </h1>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-      {h.subtitle}
-    </p>
-    <div class="mt-8 flex flex-wrap gap-4">
-      <a
-        href={`${prefix}/methodology`}
-        class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400"
+<section class="border-b" style="border-color: var(--color-line);">
+  <div class="main-container py-16 md:py-24">
+    <div class="max-w-3xl">
+      <Kicker>{h.badge}</Kicker>
+      <h1
+        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
+        style="color: var(--color-ink);"
       >
-        {h.primaryCta}
-      </a>
-      <a
-        href={`${prefix}/spec`}
-        class="inline-flex items-center justify-center rounded-lg border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-800 transition-colors hover:border-gray-400 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-100 dark:hover:border-gray-600 dark:hover:bg-gray-900"
+        {h.title}{' '}
+        <span style="color: var(--color-secondary);">{h.titleEmphasis}</span>
+      </h1>
+      <p class="lead mt-6">{h.subtitle}</p>
+      <p
+        class="font-display mt-6 max-w-2xl border-l-2 pl-4 text-xl italic"
+        style="border-color: var(--color-secondary); color: var(--color-ink);"
       >
-        {h.secondaryCta}
-      </a>
+        {h.pullQuote}
+      </p>
+      <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+        <a
+          href={`${prefix}/quickstart`}
+          class="inline-flex items-center justify-center rounded-sm px-6 py-3 text-base font-semibold transition hover:opacity-90"
+          style="background-color: var(--color-ink); color: var(--color-paper);"
+        >
+          {t.home.quickstart.badge}
+        </a>
+        <a
+          href={`${prefix}/methodology`}
+          class="inline-flex items-center justify-center rounded-sm border px-6 py-3 text-base font-semibold transition hover:opacity-80"
+          style="border-color: var(--color-line); color: var(--color-ink);"
+        >
+          {h.primaryCta}
+        </a>
+      </div>
     </div>
   </div>
 </section>
