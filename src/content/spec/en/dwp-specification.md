@@ -14,6 +14,8 @@ section: Workflow
 
 A Deep Work Plan is a structured, markdown-only artifact that describes a complex engineering task decomposed into sequential, reviewable units of work, designed to be created, executed, and maintained by AI coding agents working autonomously.
 
+DWP is spec-driven: the plan is the specification, and agents MUST execute against its explicit acceptance criteria and validation gates rather than improvising. The specification — not a chat transcript — is the durable source of truth, so the work is verifiable and resumable across sessions and agents. It is also harness engineering made portable: the context, control loop, guardrails, and resumable state that make an agent reliable are installed into the repository itself as plain markdown, so any conformant agent MAY pilot the repository without a tool-specific framework.
+
 ## Plan structure
 
 A plan MUST be a directory under `.dwp/plans/` named `PLAN_<slug>/`. The directory MUST contain:

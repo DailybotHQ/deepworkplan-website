@@ -11,6 +11,8 @@ icon: refresh
 
 DWP define cinco operaciones que llevan un plan desde un objetivo hasta un trabajo terminado y revisable: **crear → ejecutar → refinar → reanudar → estado**. Juntas forman el ciclo que un agente sigue durante toda la vida de un plan. Los agentes ejecutan una tarea a la vez y validan cada paso antes de avanzar.
 
+Este ciclo es la forma operativa del desarrollo guiado por especificación. El plan es la especificación contra la que ejecuta un agente, cada tarea lleva criterios de aceptación explícitos, y el paso de validación es la puerta que convierte una afirmación de finalización en evidencia de ella. Como el plan y su registro de avance viven en el repositorio, el ciclo es reanudable entre sesiones y agentes.
+
 ## Las cinco operaciones
 
 - **crear**: generar un plan nuevo a partir de un objetivo. El agente analiza el objetivo, lo descompone en tareas secuenciales y escribe los archivos del plan. Debe formular preguntas aclaratorias antes de escribir cuando el objetivo es ambiguo.

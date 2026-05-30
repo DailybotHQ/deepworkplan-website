@@ -11,6 +11,8 @@ icon: refresh
 
 DWP defines five operations that move a plan from a goal to completed, reviewable work: **create → execute → refine → resume → status**. Together they form the loop an agent follows throughout a plan's life. Agents execute one task at a time, validating each step before moving on.
 
+This loop is the operational form of spec-driven development. The plan is the specification an agent executes against, each task carries explicit acceptance criteria, and the validation step is the gate that turns a claim of completion into evidence of it. Because the plan and its progress log live in the repository, the loop is resumable across sessions and agents.
+
 ## The five operations
 
 - **create** — Generate a new plan from a goal. The agent analyzes the goal, decomposes it into sequential tasks, and writes the plan files. It should ask clarifying questions before writing when the goal is ambiguous.

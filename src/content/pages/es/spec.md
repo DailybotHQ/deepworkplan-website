@@ -6,7 +6,7 @@ lastUpdated: 2026-05-30
 
 ## Especificación de Deep Work Plan
 
-La especificación es la definición precisa y legible de la metodología — las estructuras y protocolos que comparten las personas y los agentes. Está organizada en documentos ordenados:
+La especificación es la definición precisa y legible de la metodología — las estructuras y protocolos que comparten las personas y los agentes. Establece, en términos normativos RFC-2119, cómo se estructura un plan guiado por especificación y cómo un agente debe ejecutar contra él: el plan es la fuente de verdad, las puertas de validación son binarias y el propio repositorio lleva el harness que un agente necesita. Está organizada en documentos ordenados:
 
 - **Estándar de documentación** — la estructura de repositorio AI-first.
 - **Especificación DWP** — estructura del plan, anatomía de las tareas y el bucle de ejecución.

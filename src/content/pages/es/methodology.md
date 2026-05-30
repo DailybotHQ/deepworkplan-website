@@ -8,6 +8,8 @@ lastUpdated: 2026-05-30
 
 Deep Work Plan (DWP) es una metodología abierta y agnóstica de frameworks para ejecutar trabajo de ingeniería estructurado y autónomo con agentes de programación con IA. Convierte un objetivo difuso en un plan revisable que un agente puede ejecutar, pausar, reanudar y reportar — sin perder el contexto.
 
+DWP está guiada por especificación: el plan es la fuente de verdad duradera y los agentes ejecutan contra criterios de aceptación y puertas de validación explícitos. Es además ingeniería de harness hecha portable: la metodología instala en el propio repositorio el contexto, las salvaguardas y el estado reanudable que un agente necesita, de modo que cualquier agente puede pilotar cualquier repo. Independiente de herramientas y nativa del repositorio, se distingue de los sistemas guiados por especificación atados a una herramienta como GitHub Spec Kit, Amazon Kiro y Tessl.
+
 La metodología se explica en cinco capítulos:
 
 1. **Manifiesto** — qué es un Deep Work Plan y por qué importa la ejecución estructurada.

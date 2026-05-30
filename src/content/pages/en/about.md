@@ -8,6 +8,8 @@ lastUpdated: 2026-05-30
 
 Deep Work Plan (DWP) is a methodology, not a product. It defines how to turn a goal into an agreed plan, break that plan into atomic and independently verifiable tasks, and run each task in a focused loop that ends with a check.
 
+It is a spec-driven methodology: the plan is the durable source of truth, and agents execute against explicit acceptance criteria and validation gates. Unlike tool-bound spec-driven systems such as GitHub Spec Kit, Amazon Kiro, or Tessl, DWP is tool-agnostic and repo-native. It is also harness engineering made portable — the context, guardrails, and resumable state that make an agent reliable are installed into the repository itself (AGENTS.md, docs, the .agents/ skills home, the DWP skill), so any agent can pilot any repo.
+
 It is deliberately agnostic about which AI agent or stack you use — adapters translate the same core loop to Claude, Cursor, Copilot, Codex, Gemini, and more. The plan, the tasks, and the running log are all plain Markdown, so the work stays readable, reviewable, and version-controlled.
 
 ---
