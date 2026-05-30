@@ -93,7 +93,9 @@
   /* Tabular figures for data tables / metrics / datelines. */
   .nums-tabular {
     font-variant-numeric: tabular-nums lining-nums;
-    font-feature-settings: "tnum" 1, "lnum" 1;
+    font-feature-settings:
+      "tnum" 1,
+      "lnum" 1;
   }
 
   /* Small-caps kicker / eyebrow label. */
@@ -144,7 +146,7 @@
     color: var(--color-muted);
     line-height: 1.55;
   }
-  .reference-item a {
+  .reference-item :where(a) {
     color: var(--color-secondary);
     text-decoration: underline;
     text-underline-offset: 2px;
@@ -215,6 +217,14 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Serif-led editorial default (true newsprint). The body inherits the
+     * system serif stack defined by --font-serif in @theme above; see that
+     * token's comment for the no-webfont rationale. */
+    font-family: var(--font-serif);
+  }
+
+  body {
+    font-family: var(--font-serif);
   }
 
   a,

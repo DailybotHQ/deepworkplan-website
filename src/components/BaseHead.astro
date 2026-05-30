@@ -85,21 +85,13 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 />
 <meta name="generator" content={Astro.generator} />
 
-<!-- Font preloads -->
-<link
-	rel="preload"
-	href="/fonts/atkinson-regular.woff"
-	as="font"
-	type="font/woff"
-	crossorigin
-/>
-<link
-	rel="preload"
-	href="/fonts/atkinson-bold.woff"
-	as="font"
-	type="font/woff"
-	crossorigin
-/>
+<!--
+	Fonts: the editorial type system uses a self-hosted-free SYSTEM serif stack
+	(see --font-serif in global.css) so there is nothing to preload for the
+	default face — zero font requests, zero FOUT, no layout shift. If a serif
+	woff2 is self-hosted later, add its preload here.
+-->
+
 
 <!-- Header logo preload (prevents alt text flash on navigation) -->
 <link rel="preload" href="/images/brand/dwp-mark-light.png" as="image" type="image/png" media="(prefers-color-scheme: light)" />

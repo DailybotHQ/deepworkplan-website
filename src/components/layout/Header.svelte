@@ -57,13 +57,15 @@ function closeAllDropdowns() {
 
 <svelte:window on:click={closeAllDropdowns} />
 
-<header class="bg-paper text-ink dark:bg-main dark:text-white sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+<header class="bg-paper text-ink dark:bg-main dark:text-white sticky top-0 z-50 border-b border-line transition-colors duration-300">
   <nav class="main-container flex items-center justify-between">
+    <!-- Masthead lockup: B&W mark + serif wordmark -->
     <a
       href={prefix || '/'}
-      class="font-extrabold text-2xl md:text-3xl tracking-tight text-blue-600 select-none"
+      class="flex items-center gap-3 select-none"
       aria-label="Deep Work Plan"
     >
+      <!-- Per-mode logo switch (light/dark). Do not regress. -->
       <img
         class="h-7 w-auto md:h-8 block dark:hidden"
         src="/images/brand/dwp-mark-light.png"
@@ -82,6 +84,14 @@ function closeAllDropdowns() {
         loading="eager"
         fetchpriority="high"
       />
+      <span class="hidden sm:flex flex-col leading-none">
+        <span class="masthead-wordmark text-lg md:text-xl font-bold tracking-tight text-ink dark:text-white">
+          Deep Work Plan
+        </span>
+        <span class="kicker masthead-strapline mt-1">
+          {t.nav.methodology} &middot; {t.nav.spec} &middot; {t.nav.kit}
+        </span>
+      </span>
     </a>
     <!-- Desktop menu -->
     <div class="hidden md:flex items-center gap-8">
@@ -159,3 +169,16 @@ function closeAllDropdowns() {
   </nav>
   <MobileMenu {lang} {open} {toggleMenu} />
 </header>
+
+<style>
+  /* Newspaper masthead lockup. The wordmark uses the editorial serif display
+   * stack (see --font-serif in global.css); the strapline reuses the global
+   * .kicker treatment, only sized down for the header. */
+  .masthead-wordmark {
+    font-family: var(--font-serif);
+  }
+  .masthead-strapline {
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+  }
+</style>

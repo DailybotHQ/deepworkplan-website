@@ -16,7 +16,7 @@ interface Props {
   class?: string;
 }
 
-const { text, as: Tag = 'p', class: className = '' } = Astro.props;
+const { text, as: Tag = 'p', class: className = '' } = Astro.props as Props;
 ---
 
 <Tag class:list={['kicker', 'flex items-center gap-3', className]}>
