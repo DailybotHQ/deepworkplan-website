@@ -49,3 +49,9 @@ tmp/*
 
 english.png
 spanish.png
+
+# Deep Work Plan output (working state, not tracked)
+.dwp/
+
+# DeepWorkPlan skill — installed via npx skills / setup.sh, not vendored
+.agents/skills/deepworkplan/
