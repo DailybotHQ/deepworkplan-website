@@ -87,7 +87,7 @@ onDestroy(() => {
 </script>
 
 {#if open}
-  <div class="fixed inset-0 z-50 bg-main/95 flex flex-col items-center justify-start pt-20 gap-6 overflow-y-auto overscroll-contain transition-all duration-300 md:hidden">
+  <div class="fixed inset-0 z-50 bg-main text-white flex flex-col items-center justify-start pt-20 gap-6 overflow-y-auto overscroll-contain transition-all duration-300 md:hidden">
     <button
       class="absolute top-6 right-6 p-2"
       aria-label={t.nav.closeMenu}
@@ -99,13 +99,15 @@ onDestroy(() => {
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
       </svg>
     </button>
-    <a href="{prefix}/methodology" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'methodology', source: 'mobile' })}>{t.nav.methodology}</a>
-    <a href="{prefix}/spec" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'spec', source: 'mobile' })}>{t.nav.spec}</a>
-    <a href="{prefix}/kit" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'kit', source: 'mobile' })}>{t.nav.kit}</a>
-    <a href="{prefix}/examples" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'examples', source: 'mobile' })}>{t.nav.examples}</a>
-    <a href="https://github.com/DailybotHQ/deepworkplan-website" target="_blank" rel="noopener noreferrer" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'github', source: 'mobile' })}>{t.nav.github}</a>
+    <span class="masthead-wordmark text-2xl font-bold tracking-tight">Deep Work Plan</span>
+    <span class="h-px w-12 bg-secondary" aria-hidden="true"></span>
+    <a href="{prefix}/methodology" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'methodology', source: 'mobile' })}>{t.nav.methodology}</a>
+    <a href="{prefix}/spec" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'spec', source: 'mobile' })}>{t.nav.spec}</a>
+    <a href="{prefix}/kit" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'kit', source: 'mobile' })}>{t.nav.kit}</a>
+    <a href="{prefix}/examples" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'examples', source: 'mobile' })}>{t.nav.examples}</a>
+    <a href="https://github.com/DailybotHQ/deepworkplan-website" target="_blank" rel="noopener noreferrer" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'github', source: 'mobile' })}>{t.nav.github}</a>
     <button
-      class="nav-link text-xl text-center flex items-center justify-center gap-2 focus:outline-none cursor-pointer"
+      class="masthead-link text-xl text-center flex items-center justify-center gap-2 focus:outline-none cursor-pointer"
       on:click={() => languageOpen = !languageOpen}
       aria-expanded={languageOpen}
       aria-controls="language-dropdown"
@@ -133,7 +135,7 @@ onDestroy(() => {
         transition:fade={{ duration: 150 }}
       >
         {#each alternateLanguageUrls as alt}
-          <a href={alt.url} class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-blue-400 transition flex items-center gap-2" on:click={() => { trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang }); toggleMenu(); }}>
+          <a href={alt.url} class="masthead-link text-base sm:text-lg text-center py-1 transition flex items-center gap-2" on:click={() => { trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang }); toggleMenu(); }}>
             {alt.nativeName}
           </a>
         {/each}
@@ -141,3 +143,20 @@ onDestroy(() => {
     {/if}
   </div>
 {/if}
+
+<style>
+  /* Editorial mobile menu: serif wordmark + paper-on-ink links with an
+   * oxblood hover, matching the masthead header. The overlay is always the
+   * dark ink ground, so links use the paper text color. */
+  .masthead-wordmark {
+    font-family: var(--font-serif);
+  }
+  .masthead-link {
+    font-family: var(--font-serif);
+    color: #ece7da;
+    transition: color 0.2s;
+  }
+  .masthead-link:hover {
+    color: var(--color-secondary);
+  }
+</style>

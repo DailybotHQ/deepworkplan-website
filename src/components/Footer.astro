@@ -24,58 +24,71 @@ const links = [
 ---
 
 <footer
-  class="bg-gray-50 dark:bg-gray-900 pt-12 pb-8 border-t border-gray-200 dark:border-gray-800 text-sm text-gray-600 dark:text-gray-300"
+  class="bg-paper text-ink dark:bg-main dark:text-white border-t border-line transition-colors duration-300"
 >
-  <div class="max-w-5xl mx-auto px-4 flex flex-col items-center gap-6">
-    <a
-      href={prefix || '/'}
-      class="flex items-center hover:opacity-80 transition-opacity"
-      aria-label="Deep Work Plan"
-    >
-      <img
-        class="h-7 w-auto block dark:hidden"
-        src="/images/brand/dwp-mark-light.png"
-        alt="Deep Work Plan"
-        width="60"
-        height="40"
-      />
-      <img
-        class="h-7 w-auto hidden dark:block"
-        src="/images/brand/dwp-mark-dark.png"
-        alt="Deep Work Plan"
-        width="60"
-        height="40"
-      />
-    </a>
-
-    <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2" aria-label="Footer">
-      {
-        links.map((link) => (
-          <a href={link.href} class="hover:text-secondary transition-colors">
-            {link.label}
-          </a>
-        ))
-      }
+  <div class="main-container py-12">
+    <div class="flex flex-col items-center gap-6 text-sm">
+      <!-- Footer logo-only treatment (per-mode light/dark). Do not regress. -->
       <a
-        href={githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hover:text-secondary transition-colors"
+        href={prefix || '/'}
+        class="flex items-center hover:opacity-80 transition-opacity"
+        aria-label="Deep Work Plan"
       >
-        {t.nav.github}
+        <img
+          class="h-7 w-auto block dark:hidden"
+          src="/images/brand/dwp-mark-light.png"
+          alt="Deep Work Plan"
+          width="60"
+          height="40"
+        />
+        <img
+          class="h-7 w-auto hidden dark:block"
+          src="/images/brand/dwp-mark-dark.png"
+          alt="Deep Work Plan"
+          width="60"
+          height="40"
+        />
       </a>
-      <a
-        href="https://opensource.org/licenses/MIT"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hover:text-secondary transition-colors"
-      >
-        MIT
-      </a>
-    </nav>
 
-    <div class="text-center">
-      &copy; <span id="copyright-year">{new Date().getFullYear()}</span> Deep Work Plan. {t.footer.allRightsReserved}
+      <nav
+        class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
+        aria-label="Footer"
+      >
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="hover:text-secondary transition-colors"
+              style="color: var(--color-muted);"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-secondary transition-colors"
+          style="color: var(--color-muted);"
+        >
+          {t.nav.github}
+        </a>
+        <a
+          href="https://opensource.org/licenses/MIT"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-secondary transition-colors"
+          style="color: var(--color-muted);"
+        >
+          MIT
+        </a>
+      </nav>
+
+      <div class="kicker text-center">
+        &copy; <span id="copyright-year">{new Date().getFullYear()}</span> Deep Work
+        Plan &middot; {t.footer.allRightsReserved}
+      </div>
     </div>
   </div>
 </footer>

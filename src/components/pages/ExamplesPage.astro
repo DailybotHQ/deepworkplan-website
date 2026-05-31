@@ -1,8 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
+import Kicker from '@/components/editorial/Kicker.astro';
+import Lead from '@/components/editorial/Lead.astro';
+import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
-import PageHero from '@/components/pages/PageHero.astro';
-import PageSection from '@/components/pages/PageSection.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
@@ -40,26 +41,47 @@ const itemListSchema = {
 
 <MainLayout lang={lang} title={e.meta.title} description={e.meta.description}>
   <JsonLd slot="head" data={itemListSchema} />
-  <PageHero title={e.title} subtitle={e.eyebrow} description={e.intro} />
 
-  <PageSection background="white">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+  <article class="main-container py-16 md:py-24">
+    <header class="max-w-3xl">
+      <Kicker>{e.eyebrow}</Kicker>
+      <h1
+        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl"
+        style="color: var(--color-ink);"
+      >
+        {e.title}
+      </h1>
+      <Lead class="mt-6">{e.intro}</Lead>
+    </header>
+
+    <Rule class="my-12" />
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
       {
         examples.map((entry) => (
           <a
             href={`${prefix}/examples/${slugOf(entry.id)}`}
-            class="group flex flex-col gap-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-6 hover:border-secondary hover:shadow-lg transition-all duration-300"
+            class="group flex flex-col gap-3 border p-6 transition hover:opacity-90"
+            style="border-color: var(--color-line);"
           >
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-secondary transition-colors">
+            <h2
+              class="font-display text-xl font-semibold"
+              style="color: var(--color-ink);"
+            >
               {entry.data.title}
             </h2>
-            <p class="text-gray-600 dark:text-gray-300">{entry.data.description}</p>
-            <span class="mt-auto pt-2 text-sm font-medium text-secondary">
+            <p class="leading-relaxed" style="color: var(--color-muted);">
+              {entry.data.description}
+            </p>
+            <span
+              class="kicker mt-auto pt-2"
+              style="color: var(--color-secondary);"
+            >
               {e.viewExample} &rarr;
             </span>
           </a>
         ))
       }
     </div>
-  </PageSection>
+  </article>
 </MainLayout>

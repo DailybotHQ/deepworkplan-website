@@ -565,6 +565,16 @@ export interface SiteTranslations {
     eyebrow: string;
     title: string;
     intro: string;
+    sequenceTitle: string;
+    codeLabel: string;
+    orLabel: string;
+    steps: {
+      title: string;
+      description: string;
+      commands?: string[];
+    }[];
+    outcomeTitle: string;
+    outcome: string;
     nextStepsTitle: string;
     nextSteps: { label: string; href: string }[];
   };

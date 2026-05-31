@@ -1,19 +1,41 @@
 ---
 title: "Inicio rápido — Deep Work Plan"
-description: "Tres formas de incorporar Deep Work Plan a tu flujo de trabajo: instalar la skill multi-agente, usar OpenClaw o clonar el repositorio y ejecutar el script de instalación."
-lastUpdated: 2026-05-30
+description: "Instala el kit, genera un plan y ejecútalo con cualquier agente: tres pasos que vuelven tu repositorio spec-driven y pilotable por agentes."
+lastUpdated: 2026-05-31
 ---
 
 ## Inicio rápido
 
-Hay tres formas de incorporar Deep Work Plan a tu flujo de trabajo:
+Instala el kit, genera un plan y ejecútalo con cualquier agente: tres pasos que vuelven tu repositorio spec-driven y pilotable por agentes.
 
-- **Instalar la skill** (recomendado) — `npx skills add DailybotHQ/deepworkplan-skill`. Un comando instala el pack de skill multi-agente para Claude Code, Cursor, Codex, Gemini y Copilot.
-- **OpenClaw** — `openclaw skills install deepworkplan`. El pack se carga de forma nativa en cada sesión elegible.
-- **Clonar y configurar** — clona el repositorio y ejecuta `./setup.sh`. Cualquier agente que lea Markdown puede ejecutar un plan.
+## El camino de adopción
 
-Después de instalarlo, apunta tu agente a cualquier repositorio y deja que lo vuelva AI-first.
+### 1. Instala la skill de Deep Work Plan
 
-- [Abrir el inicio rápido](/es/quickstart)
-- [Explorar el kit](/es/kit)
-- [Leer la metodología](/es/methodology)
+Añade la skill a tu repositorio. Usa la CLI de Skills para el camino más rápido:
+
+```bash
+npx skills add DailybotHQ/deepworkplan-skill
+```
+
+O clona el repositorio y ejecuta el setup donde tengas git y una shell:
+
+```bash
+git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh
+```
+
+### 2. Genera un plan
+
+Describe un objetivo y deja que la metodología lo convierta en un Deep Work Plan: tareas atómicas, criterios de aceptación explícitos y compuertas de validación que cualquier agente puede verificar.
+
+### 3. Ejecuta con cualquier agente
+
+Un agente compatible ejecuta el plan tarea por tarea, validando cada compuerta y reanudando entre sesiones — pilotando el repositorio contra su propia especificación.
+
+## El resultado
+
+Tu repositorio se vuelve spec-driven y pilotable por agentes: el plan es la fuente de verdad duradera, y el repositorio mismo se convierte en el harness contra el que corre cualquier agente.
+
+- [Leer la metodología](/methodology)
+- [Ver la especificación](/spec)
+- [Explorar el kit](/kit)

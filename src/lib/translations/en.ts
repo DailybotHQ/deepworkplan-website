@@ -908,7 +908,34 @@ I currently focus on AI applications, developer productivity, and high-impact pr
     eyebrow: 'Quickstart',
     title: 'Start in minutes',
     intro:
-      'Three ways to bring Deep Work Plan into your workflow. Pick the path that matches your setup.',
+      'Install the kit, generate a plan, and execute it with any agent — three steps that make your repository spec-driven and agent-pilotable.',
+    sequenceTitle: 'The adoption path',
+    codeLabel: 'Terminal',
+    orLabel: 'or',
+    steps: [
+      {
+        title: 'Install the Deep Work Plan skill',
+        description:
+          'Add the skill to your repository. Use the Skills CLI for the fastest path, or clone the repo and run setup where git and a shell are available.',
+        commands: [
+          'npx skills add DailybotHQ/deepworkplan-skill',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
+        ],
+      },
+      {
+        title: 'Generate a plan',
+        description:
+          'Describe a goal and let the methodology turn it into a Deep Work Plan: atomic tasks, explicit acceptance criteria, and validation gates that any agent can verify.',
+      },
+      {
+        title: 'Execute with any agent',
+        description:
+          'A compatible agent executes the plan task by task, validating each gate and resuming across sessions — piloting the repository against its own spec.',
+      },
+    ],
+    outcomeTitle: 'The outcome',
+    outcome:
+      'Your repository becomes spec-driven and agent-pilotable: the plan is the durable source of truth, and the repository itself becomes the harness any agent runs against.',
     nextStepsTitle: 'Next steps',
     nextSteps: [
       { label: 'Read the methodology', href: '/methodology' },

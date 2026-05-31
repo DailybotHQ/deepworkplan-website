@@ -1,10 +1,11 @@
 ---
-import JsonLd from "@/components/JsonLd.astro";
-import PageHero from "@/components/pages/PageHero.astro";
-import PageSection from "@/components/pages/PageSection.astro";
-import MainLayout from "@/layouts/MainLayout.astro";
-import { getUrlPrefix, type Language } from "@/lib/i18n";
-import { getTranslations } from "@/lib/translations";
+import Kicker from '@/components/editorial/Kicker.astro';
+import Lead from '@/components/editorial/Lead.astro';
+import Rule from '@/components/editorial/Rule.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   lang: Language;
@@ -14,68 +15,68 @@ const { lang } = Astro.props;
 const t = getTranslations(lang);
 const c = t.contactPage;
 const prefix = getUrlPrefix(lang);
-const siteUrl = Astro.site?.href?.replace(/\/$/, "") ?? "";
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
 
-const githubUrl = "https://github.com/DailybotHQ/deepworkplan-website";
+const githubUrl = 'https://github.com/DailybotHQ/deepworkplan-website';
 
 const channels = [
   {
-    title: lang === "en" ? "GitHub repository" : "Repositorio en GitHub",
+    title: lang === 'en' ? 'GitHub repository' : 'Repositorio en GitHub',
     description:
-      lang === "en"
-        ? "Source, issues, and pull requests for the methodology and kit."
-        : "Código fuente, issues y pull requests de la metodología y el kit.",
-    handle: "DailybotHQ/deepworkplan-website",
+      lang === 'en'
+        ? 'Source, issues, and pull requests for the methodology and kit.'
+        : 'Código fuente, issues y pull requests de la metodología y el kit.',
+    handle: 'DailybotHQ/deepworkplan-website',
     href: githubUrl,
-    icon: "github",
+    icon: 'github',
   },
   {
-    title: lang === "en" ? "Issues & discussions" : "Issues y discusiones",
+    title: lang === 'en' ? 'Issues & discussions' : 'Issues y discusiones',
     description:
-      lang === "en"
-        ? "Report bugs, request features, or propose changes to the spec."
-        : "Reporta errores, solicita funciones o propón cambios a la especificación.",
-    handle: lang === "en" ? "Open an issue" : "Abrir un issue",
+      lang === 'en'
+        ? 'Report bugs, request features, or propose changes to the spec.'
+        : 'Reporta errores, solicita funciones o propón cambios a la especificación.',
+    handle: lang === 'en' ? 'Open an issue' : 'Abrir un issue',
     href: `${githubUrl}/issues`,
-    icon: "issues",
+    icon: 'issues',
   },
   {
-    title: "Dailybot",
+    title: 'Dailybot',
     description:
-      lang === "en"
-        ? "The team that created and maintains Deep Work Plan."
-        : "El equipo que creó y mantiene Deep Work Plan.",
-    handle: "dailybot.com",
-    href: "https://dailybot.com",
-    icon: "dailybot",
+      lang === 'en'
+        ? 'The team that created and maintains Deep Work Plan.'
+        : 'El equipo que creó y mantiene Deep Work Plan.',
+    handle: 'dailybot.com',
+    href: 'https://dailybot.com',
+    icon: 'dailybot',
   },
 ] as const;
 
 const iconPaths: Record<string, string> = {
-  issues: "M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
-  dailybot: "M13 10V3L4 14h7v7l9-11h-7z",
+  issues: 'M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  dailybot: 'M13 10V3L4 14h7v7l9-11h-7z',
 };
 
 const contactPageSchema = {
-  "@context": "https://schema.org",
-  "@type": "ContactPage",
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
   name: c.title,
   description: c.description,
   url: `${siteUrl}${prefix}/contact`,
 };
 
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
   itemListElement: [
     {
-      "@type": "ListItem",
+      '@type': 'ListItem',
       position: 1,
-      name: "Home",
+      name: 'Home',
       item: `${siteUrl}${prefix}/`,
     },
     {
-      "@type": "ListItem",
+      '@type': 'ListItem',
       position: 2,
       name: c.title,
       item: `${siteUrl}${prefix}/contact`,
@@ -90,69 +91,97 @@ const breadcrumbSchema = {
     <JsonLd data={breadcrumbSchema} />
   </Fragment>
 
-  <PageHero
-    title={c.title}
-    subtitle={c.subtitle}
-    description={c.heroDescription}
-  />
+  <article class="main-container py-16 md:py-24">
+    <header class="max-w-3xl">
+      <Kicker>{c.subtitle}</Kicker>
+      <h1
+        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl"
+        style="color: var(--color-ink);"
+      >
+        {c.title}
+      </h1>
+      <Lead class="mt-6">{c.heroDescription}</Lead>
+    </header>
 
-  <PageSection background="white" title={c.socialTitle}>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {
-        channels.map((channel) => (
-          <a
-            href={channel.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group flex flex-col gap-3 p-6 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-          >
-            <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center">
-              {channel.icon === "github" ? (
-                <svg
-                  class="w-6 h-6 text-secondary"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                </svg>
-              ) : (
-                <svg
-                  class="w-6 h-6 text-secondary"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d={iconPaths[channel.icon]}
-                  />
-                </svg>
-              )}
-            </div>
-            <div>
-              <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-secondary transition-colors">
-                {channel.title}
-              </h3>
-              <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                {channel.description}
-              </p>
-              <p class="mt-2 text-sm font-medium text-secondary">
-                {channel.handle}
-              </p>
-            </div>
-          </a>
-        ))
-      }
-    </div>
-  </PageSection>
+    <Rule class="my-12" />
 
-  <PageSection
-    title={c.locationTitle}
-    background="gray"
-    description={c.locationText}
-  />
+    <section>
+      <Kicker>{c.socialTitle}</Kicker>
+      <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+        {
+          channels.map((channel) => (
+            <a
+              href={channel.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex flex-col gap-3 border p-6 transition hover:opacity-90"
+              style="border-color: var(--color-line);"
+            >
+              <span
+                class="flex h-10 w-10 items-center justify-center"
+                style="color: var(--color-secondary);"
+              >
+                {channel.icon === 'github' ? (
+                  <svg
+                    class="h-6 w-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                  </svg>
+                ) : (
+                  <svg
+                    class="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d={iconPaths[channel.icon]}
+                    />
+                  </svg>
+                )}
+              </span>
+              <div>
+                <h3
+                  class="font-display text-lg font-semibold"
+                  style="color: var(--color-ink);"
+                >
+                  {channel.title}
+                </h3>
+                <p class="mt-1 text-sm" style="color: var(--color-muted);">
+                  {channel.description}
+                </p>
+                <p
+                  class="mt-2 text-sm font-medium"
+                  style="color: var(--color-secondary);"
+                >
+                  {channel.handle}
+                </p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <Rule class="my-12" />
+
+    <section class="max-w-3xl">
+      <h2
+        class="font-display text-2xl font-bold md:text-3xl"
+        style="color: var(--color-ink);"
+      >
+        {c.locationTitle}
+      </h2>
+      <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-muted);">
+        {c.locationText}
+      </p>
+    </section>
+  </article>
 </MainLayout>

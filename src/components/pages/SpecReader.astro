@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
+import Kicker from '@/components/editorial/Kicker.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
@@ -36,16 +37,19 @@ const techArticleSchema = {
 
 <MainLayout lang={lang} title={entry.data.title} description={entry.data.description}>
   <JsonLd slot="head" data={techArticleSchema} />
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20">
+  <div class="main-container py-16 md:py-20">
     <a
       href={`${prefix}/spec`}
-      class="inline-flex items-center text-sm font-medium text-secondary hover:underline mb-6"
+      class="kicker inline-flex items-center hover:opacity-80"
+      style="color: var(--color-secondary);"
     >
       &larr; {s.backToIndex}
     </a>
-    <div class="lg:grid lg:grid-cols-[1fr_16rem] lg:gap-12">
+    <div class="mt-6 lg:grid lg:grid-cols-[1fr_16rem] lg:gap-12">
       <article class="min-w-0 max-w-3xl">
-        <div class="prose prose-lg prose-slate max-w-none dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-secondary">
+        <div
+          class="prose prose-lg max-w-none dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-secondary"
+        >
           <Content />
         </div>
       </article>
@@ -53,15 +57,14 @@ const techArticleSchema = {
         toc.length > 0 && (
           <aside class="mt-12 lg:mt-0">
             <div class="lg:sticky lg:top-24">
-              <p class="text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-gray-300 mb-3">
-                {s.tocTitle}
-              </p>
-              <ul class="space-y-2 border-l border-gray-200 dark:border-gray-700">
+              <Kicker>{s.tocTitle}</Kicker>
+              <ul class="mt-3 space-y-2 border-l" style="border-color: var(--color-line);">
                 {toc.map((h) => (
                   <li>
                     <a
                       href={`#${h.slug}`}
-                      class="block border-l-2 border-transparent -ml-px pl-3 text-sm text-gray-600 dark:text-gray-300 hover:border-secondary hover:text-secondary transition-colors"
+                      class="-ml-px block border-l-2 border-transparent pl-3 text-sm transition hover:border-secondary hover:text-secondary"
+                      style="color: var(--color-muted);"
                     >
                       {h.text}
                     </a>

@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
+import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
@@ -43,59 +44,70 @@ const articleSchema = {
 
 <MainLayout lang={lang} title={entry.data.title} description={entry.data.description}>
   <JsonLd slot="head" data={articleSchema} />
-  <article class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl pt-16 pb-20">
-    <a
-      href={`${prefix}/methodology`}
-      class="inline-flex items-center text-sm font-medium text-secondary hover:underline mb-6"
-    >
-      &larr; {m.backToIndex}
-    </a>
-    <p class="text-sm font-semibold uppercase tracking-wider text-secondary mb-4">
-      {m.chapterLabel} {entry.data.order}
-    </p>
+  <div class="main-container py-16 md:py-20">
+    <article class="max-w-3xl">
+      <a
+        href={`${prefix}/methodology`}
+        class="kicker inline-flex items-center hover:opacity-80"
+        style="color: var(--color-secondary);"
+      >
+        &larr; {m.backToIndex}
+      </a>
+      <p class="kicker mt-6">
+        {m.chapterLabel} {String(entry.data.order).padStart(2, '0')}
+      </p>
 
-    <div class="prose prose-lg prose-slate max-w-none dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-secondary">
-      <Content />
-    </div>
+      <div
+        class="prose prose-lg max-w-none dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-secondary mt-4"
+      >
+        <Content />
+      </div>
 
-    <nav
-      class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row justify-between gap-4"
-      aria-label="Chapter"
-    >
-      {
-        prev ? (
-          <a
-            href={`${prefix}/methodology/${slugOf(prev.id)}`}
-            class="group flex-1 rounded-xl border border-gray-200 dark:border-gray-700 p-4 hover:border-secondary transition-colors"
-          >
-            <span class="text-xs uppercase tracking-wider text-gray-600 dark:text-gray-300">
-              &larr; {m.prev}
-            </span>
-            <span class="block font-semibold text-gray-900 dark:text-white group-hover:text-secondary transition-colors">
-              {prev.data.title}
-            </span>
-          </a>
-        ) : (
-          <span class="flex-1" />
-        )
-      }
-      {
-        next ? (
-          <a
-            href={`${prefix}/methodology/${slugOf(next.id)}`}
-            class="group flex-1 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-right hover:border-secondary transition-colors"
-          >
-            <span class="text-xs uppercase tracking-wider text-gray-600 dark:text-gray-300">
-              {m.next} &rarr;
-            </span>
-            <span class="block font-semibold text-gray-900 dark:text-white group-hover:text-secondary transition-colors">
-              {next.data.title}
-            </span>
-          </a>
-        ) : (
-          <span class="flex-1" />
-        )
-      }
-    </nav>
-  </article>
+      <Rule class="mt-16 mb-8" />
+
+      <nav
+        class="flex flex-col justify-between gap-4 sm:flex-row"
+        aria-label="Chapter"
+      >
+        {
+          prev ? (
+            <a
+              href={`${prefix}/methodology/${slugOf(prev.id)}`}
+              class="group flex-1 border p-4 transition hover:opacity-90"
+              style="border-color: var(--color-line);"
+            >
+              <span class="kicker">&larr; {m.prev}</span>
+              <span
+                class="font-display mt-1 block font-semibold"
+                style="color: var(--color-ink);"
+              >
+                {prev.data.title}
+              </span>
+            </a>
+          ) : (
+            <span class="flex-1" />
+          )
+        }
+        {
+          next ? (
+            <a
+              href={`${prefix}/methodology/${slugOf(next.id)}`}
+              class="group flex-1 border p-4 text-right transition hover:opacity-90"
+              style="border-color: var(--color-line);"
+            >
+              <span class="kicker justify-end">{m.next} &rarr;</span>
+              <span
+                class="font-display mt-1 block font-semibold"
+                style="color: var(--color-ink);"
+              >
+                {next.data.title}
+              </span>
+            </a>
+          ) : (
+            <span class="flex-1" />
+          )
+        }
+      </nav>
+    </article>
+  </div>
 </MainLayout>

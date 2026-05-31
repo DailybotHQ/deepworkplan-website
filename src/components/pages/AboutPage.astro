@@ -1,12 +1,12 @@
 ---
-import JsonLd from "@/components/JsonLd.astro";
-import HighlightCard from "@/components/pages/HighlightCard.astro";
-import PageHero from "@/components/pages/PageHero.astro";
-import PageSection from "@/components/pages/PageSection.astro";
-import MainLayout from "@/layouts/MainLayout.astro";
-import type { Language } from "@/lib/i18n";
-import { getUrlPrefix } from "@/lib/i18n";
-import { getTranslations } from "@/lib/translations";
+import Kicker from '@/components/editorial/Kicker.astro';
+import Lead from '@/components/editorial/Lead.astro';
+import Rule from '@/components/editorial/Rule.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   lang: Language;
@@ -16,39 +16,39 @@ const { lang } = Astro.props;
 const t = getTranslations(lang);
 const a = t.aboutPage;
 const prefix = getUrlPrefix(lang);
-const siteUrl = Astro.site?.href?.replace(/\/$/, "") ?? "";
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
 
 const aboutSchema = {
-  "@context": "https://schema.org",
-  "@type": "AboutPage",
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
   name: a.title,
   description: a.description,
   url: `${siteUrl}${prefix}/about`,
   about: {
-    "@type": "SoftwareApplication",
-    name: "Deep Work Plan",
-    applicationCategory: "DeveloperApplication",
-    license: "https://opensource.org/licenses/MIT",
+    '@type': 'SoftwareApplication',
+    name: 'Deep Work Plan',
+    applicationCategory: 'DeveloperApplication',
+    license: 'https://opensource.org/licenses/MIT',
     author: {
-      "@type": "Organization",
-      name: "Dailybot",
-      url: "https://dailybot.com",
+      '@type': 'Organization',
+      name: 'Dailybot',
+      url: 'https://dailybot.com',
     },
   },
 };
 
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
   itemListElement: [
     {
-      "@type": "ListItem",
+      '@type': 'ListItem',
       position: 1,
-      name: "Home",
+      name: 'Home',
       item: `${siteUrl}${prefix}/`,
     },
     {
-      "@type": "ListItem",
+      '@type': 'ListItem',
       position: 2,
       name: a.title,
       item: `${siteUrl}${prefix}/about`,
@@ -61,20 +61,20 @@ const breadcrumbSchema = {
   lang={lang}
   title={a.title}
   description={a.description}
-  keywords={lang === "en"
+  keywords={lang === 'en'
     ? [
-        "Deep Work Plan methodology",
-        "AI coding agents methodology",
-        "open source MIT methodology",
-        "agent-agnostic engineering workflow",
-        "Dailybot Deep Work Plan",
+        'Deep Work Plan methodology',
+        'AI coding agents methodology',
+        'open source MIT methodology',
+        'agent-agnostic engineering workflow',
+        'Dailybot Deep Work Plan',
       ]
     : [
-        "metodología Deep Work Plan",
-        "metodología para agentes de IA",
-        "metodología open source MIT",
-        "flujo de ingeniería agnóstico de agentes",
-        "Dailybot Deep Work Plan",
+        'metodología Deep Work Plan',
+        'metodología para agentes de IA',
+        'metodología open source MIT',
+        'flujo de ingeniería agnóstico de agentes',
+        'Dailybot Deep Work Plan',
       ]}
 >
   <Fragment slot="head">
@@ -82,60 +82,115 @@ const breadcrumbSchema = {
     <JsonLd data={breadcrumbSchema} />
   </Fragment>
 
-  <PageHero
-    title={a.title}
-    subtitle={a.subtitle}
-    description={a.heroDescription}
-  />
-
-  <PageSection background="white" title={a.bioTitle} description={a.bioText} />
-
-  <PageSection background="gray" title={a.passionsTitle}>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {
-        a.passions.map((principle) => (
-          <HighlightCard
-            title={principle.title}
-            description={principle.description}
-            icon={principle.icon}
-            link={`${prefix}${principle.link}`}
-          />
-        ))
-      }
-    </div>
-  </PageSection>
-
-  <PageSection background="white" title={a.quickFactsTitle}>
-    <ul class="space-y-3 max-w-2xl">
-      {
-        a.quickFacts.map((fact) => (
-          <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
-            <span class="text-secondary mt-0.5 flex-shrink-0">&#10003;</span>
-            <span>{fact}</span>
-          </li>
-        ))
-      }
-    </ul>
-  </PageSection>
-
-  <PageSection
-    background="gray"
-    title={a.ctaTitle}
-    description={a.ctaDescription}
-  >
-    <div class="flex flex-wrap gap-4 mt-4">
-      <a
-        href={`${prefix}/methodology`}
-        class="inline-flex items-center px-6 py-3 rounded-lg bg-secondary text-white font-semibold hover:bg-secondary/90 transition-colors duration-200"
+  <article class="main-container py-16 md:py-24">
+    <header class="max-w-3xl">
+      <Kicker>{a.subtitle}</Kicker>
+      <h1
+        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl"
+        style="color: var(--color-ink);"
       >
-        {a.ctaCv}
-      </a>
-      <a
-        href={`${prefix}/quickstart`}
-        class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-secondary text-secondary dark:text-secondary font-semibold hover:bg-secondary/10 transition-colors duration-200"
+        {a.title}
+      </h1>
+      <Lead dropCap class="mt-6">{a.heroDescription}</Lead>
+    </header>
+
+    <Rule class="my-12" />
+
+    <section class="max-w-3xl">
+      <h2
+        class="font-display text-2xl font-bold md:text-3xl"
+        style="color: var(--color-ink);"
       >
-        {a.ctaContact}
-      </a>
-    </div>
-  </PageSection>
+        {a.bioTitle}
+      </h2>
+      <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-ink);">
+        {a.bioText}
+      </p>
+    </section>
+
+    <Rule class="my-12" />
+
+    <section>
+      <Kicker>{a.passionsTitle}</Kicker>
+      <div class="mt-6 grid gap-6 md:grid-cols-3">
+        {
+          a.passions.map((principle) => (
+            <a
+              href={`${prefix}${principle.link}`}
+              class="group flex flex-col border p-6 transition hover:opacity-90"
+              style="border-color: var(--color-line);"
+            >
+              <h3
+                class="font-display text-xl font-semibold"
+                style="color: var(--color-ink);"
+              >
+                {principle.title}
+              </h3>
+              <p class="mt-3 leading-relaxed" style="color: var(--color-muted);">
+                {principle.description}
+              </p>
+              <span
+                class="kicker mt-4"
+                style="color: var(--color-secondary);"
+              >
+                {a.ctaCv} &rarr;
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <Rule class="my-12" />
+
+    <section class="max-w-3xl">
+      <Kicker>{a.quickFactsTitle}</Kicker>
+      <ul class="mt-6 space-y-3">
+        {
+          a.quickFacts.map((fact) => (
+            <li class="flex items-start gap-3" style="color: var(--color-ink);">
+              <span
+                class="mt-1 shrink-0"
+                style="color: var(--color-secondary);"
+                aria-hidden="true"
+              >
+                &#9656;
+              </span>
+              <span>{fact}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <Rule class="my-12" />
+
+    <section class="max-w-3xl">
+      <h2
+        class="font-display text-2xl font-bold md:text-3xl"
+        style="color: var(--color-ink);"
+      >
+        {a.ctaTitle}
+      </h2>
+      <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-muted);">
+        {a.ctaDescription}
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a
+          href={`${prefix}/methodology`}
+          class="inline-flex items-center rounded-sm px-6 py-3 font-semibold transition hover:opacity-90"
+          style="background-color: var(--color-ink); color: var(--color-paper);"
+        >
+          {a.ctaCv}
+        </a>
+        <a
+          href={`${prefix}/quickstart`}
+          class="inline-flex items-center rounded-sm border px-6 py-3 font-semibold transition hover:opacity-80"
+          style="border-color: var(--color-line); color: var(--color-ink);"
+        >
+          {a.ctaContact}
+        </a>
+      </div>
+    </section>
+  </article>
 </MainLayout>

@@ -1,8 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
+import Kicker from '@/components/editorial/Kicker.astro';
+import Lead from '@/components/editorial/Lead.astro';
+import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
-import PageHero from '@/components/pages/PageHero.astro';
-import PageSection from '@/components/pages/PageSection.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
@@ -52,34 +53,50 @@ const itemListSchema = {
 
 <MainLayout lang={lang} title={s.meta.title} description={s.meta.description}>
   <JsonLd slot="head" data={itemListSchema} />
-  <PageHero title={s.title} subtitle={s.eyebrow} description={s.intro} />
 
-  <PageSection background="white">
-    <div class="max-w-3xl mx-auto space-y-12">
+  <article class="main-container py-16 md:py-24">
+    <header class="max-w-3xl">
+      <Kicker>{s.eyebrow}</Kicker>
+      <h1
+        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl"
+        style="color: var(--color-ink);"
+      >
+        {s.title}
+      </h1>
+      <Lead class="mt-6">{s.intro}</Lead>
+    </header>
+
+    <Rule class="my-12" />
+
+    <div class="space-y-12">
       {
         sections.map((group) => (
-          <div>
-            <h2 class="text-sm font-semibold uppercase tracking-wider text-secondary mb-4">
-              {group.name}
-            </h2>
-            <ul class="space-y-4">
+          <section>
+            <Kicker>{group.name}</Kicker>
+            <ul class="mt-6 space-y-4">
               {group.docs.map((doc) => (
                 <li>
                   <a
                     href={`${prefix}/spec/${slugOf(doc.id)}`}
-                    class="group block rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-5 hover:border-secondary hover:shadow-lg transition-all duration-300"
+                    class="group block border p-5 transition hover:opacity-90"
+                    style="border-color: var(--color-line);"
                   >
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-secondary transition-colors">
+                    <h2
+                      class="font-display text-lg font-semibold"
+                      style="color: var(--color-ink);"
+                    >
                       {doc.data.title}
-                    </h3>
-                    <p class="mt-1 text-gray-600 dark:text-gray-300">{doc.data.description}</p>
+                    </h2>
+                    <p class="mt-1 leading-relaxed" style="color: var(--color-muted);">
+                      {doc.data.description}
+                    </p>
                   </a>
                 </li>
               ))}
             </ul>
-          </div>
+          </section>
         ))
       }
     </div>
-  </PageSection>
+  </article>
 </MainLayout>

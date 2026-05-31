@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import PageHero from '@/components/pages/PageHero.astro';
-import PageSection from '@/components/pages/PageSection.astro';
+import Kicker from '@/components/editorial/Kicker.astro';
+import Lead from '@/components/editorial/Lead.astro';
+import Rule from '@/components/editorial/Rule.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
@@ -39,32 +40,56 @@ const groups = [
 ---
 
 <MainLayout lang={lang} title={k.meta.title} description={k.meta.description}>
-  <PageHero title={k.title} subtitle={k.eyebrow} description={k.intro} />
-
-  {
-    groups.map((group, i) => (
-      <PageSection
-        background={i % 2 === 0 ? 'white' : 'gray'}
-        title={group.meta.title}
-        description={group.meta.description}
+  <article class="main-container py-16 md:py-24">
+    <header class="max-w-3xl">
+      <Kicker>{k.eyebrow}</Kicker>
+      <h1
+        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl"
+        style="color: var(--color-ink);"
       >
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {group.items.map((entry) => (
-            <a
-              href={`${prefix}/kit/${slugOf(entry.id)}`}
-              class="group flex flex-col gap-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-5 hover:border-secondary hover:shadow-lg transition-all duration-300"
-            >
-              <h3 class="text-base font-semibold text-gray-900 dark:text-white group-hover:text-secondary transition-colors">
-                {entry.data.title}
-              </h3>
-              <p class="text-sm text-gray-600 dark:text-gray-300">{entry.data.description}</p>
-              <span class="mt-auto pt-2 text-sm font-medium text-secondary">
-                {k.viewDetail} &rarr;
-              </span>
-            </a>
-          ))}
-        </div>
-      </PageSection>
-    ))
-  }
+        {k.title}
+      </h1>
+      <Lead class="mt-6">{k.intro}</Lead>
+    </header>
+
+    <Rule class="my-12" />
+
+    <div class="space-y-12">
+      {
+        groups.map((group) => (
+          <section>
+            <Kicker>{group.meta.title}</Kicker>
+            <p class="mt-3 max-w-3xl leading-relaxed" style="color: var(--color-muted);">
+              {group.meta.description}
+            </p>
+            <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {group.items.map((entry) => (
+                <a
+                  href={`${prefix}/kit/${slugOf(entry.id)}`}
+                  class="group flex flex-col gap-2 border p-5 transition hover:opacity-90"
+                  style="border-color: var(--color-line);"
+                >
+                  <h2
+                    class="font-display text-base font-semibold"
+                    style="color: var(--color-ink);"
+                  >
+                    {entry.data.title}
+                  </h2>
+                  <p class="text-sm leading-relaxed" style="color: var(--color-muted);">
+                    {entry.data.description}
+                  </p>
+                  <span
+                    class="kicker mt-auto pt-2"
+                    style="color: var(--color-secondary);"
+                  >
+                    {k.viewDetail} &rarr;
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </article>
 </MainLayout>

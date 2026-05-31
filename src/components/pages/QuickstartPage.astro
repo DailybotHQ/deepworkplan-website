@@ -1,7 +1,8 @@
 ---
+import Kicker from '@/components/editorial/Kicker.astro';
+import Lead from '@/components/editorial/Lead.astro';
+import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
-import PageHero from '@/components/pages/PageHero.astro';
-import PageSection from '@/components/pages/PageSection.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
@@ -13,7 +14,6 @@ interface Props {
 const { lang } = Astro.props;
 const t = getTranslations(lang);
 const q = t.quickstartPage;
-const qs = t.home.quickstart;
 const prefix = getUrlPrefix(lang);
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
 
@@ -23,70 +23,111 @@ const howToSchema = {
   name: q.meta.title,
   description: q.meta.description,
   url: `${siteUrl}${prefix}/quickstart`,
-  step: qs.paths.map((path, i) => ({
+  step: q.steps.map((step, i) => ({
     '@type': 'HowToStep',
     position: i + 1,
-    name: path.title,
-    text: path.note,
+    name: step.title,
+    text: step.description,
   })),
 };
 ---
 
 <MainLayout lang={lang} title={q.meta.title} description={q.meta.description}>
   <JsonLd slot="head" data={howToSchema} />
-  <PageHero title={q.title} subtitle={q.eyebrow} description={q.intro} />
 
-  <PageSection background="white">
-    <div class="grid gap-6 lg:grid-cols-3 max-w-5xl mx-auto">
-      {
-        qs.paths.map((path) => (
-          <article
-            class:list={[
-              'flex flex-col gap-4 rounded-xl border p-6',
-              path.highlight
-                ? 'border-indigo-300 bg-indigo-50/50 dark:border-indigo-700 dark:bg-indigo-950/20'
-                : 'border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900',
-            ]}
-          >
-            <div class="flex items-center justify-between gap-2">
-              <span class="font-mono text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-gray-300">
-                {path.tag}
+  <article class="main-container py-16 md:py-24">
+    <header class="max-w-3xl">
+      <Kicker>{q.eyebrow}</Kicker>
+      <h1
+        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl"
+        style="color: var(--color-ink);"
+      >
+        {q.title}
+      </h1>
+      <Lead class="mt-6">{q.intro}</Lead>
+    </header>
+
+    <Rule class="my-12" />
+
+    <section class="max-w-3xl">
+      <Kicker>{q.sequenceTitle}</Kicker>
+      <ol class="mt-8 space-y-12">
+        {
+          q.steps.map((step, i) => (
+            <li class="border-t pt-5" style="border-color: var(--color-secondary);">
+              <span
+                class="font-display text-3xl font-bold"
+                style="color: var(--color-secondary);"
+              >
+                {String(i + 1).padStart(2, '0')}
               </span>
-              {path.highlight && (
-                <span class="rounded-full bg-indigo-600 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wide text-white dark:bg-indigo-500">
-                  {qs.recommended}
-                </span>
+              <h2
+                class="font-display mt-2 text-2xl font-semibold"
+                style="color: var(--color-ink);"
+              >
+                {step.title}
+              </h2>
+              <p class="mt-3 text-lg leading-relaxed" style="color: var(--color-muted);">
+                {step.description}
+              </p>
+              {step.commands && (
+                <div class="mt-5 space-y-3">
+                  {step.commands.map((command, ci) => (
+                    <div>
+                      {ci > 0 && (
+                        <p class="kicker mb-2">{q.orLabel}</p>
+                      )}
+                      <div
+                        class="overflow-hidden border"
+                        style="border-color: var(--color-line);"
+                      >
+                        <div
+                          class="border-b px-3 py-1.5"
+                          style="border-color: var(--color-line); background-color: var(--color-gray-100);"
+                        >
+                          <span class="kicker">{q.codeLabel}</span>
+                        </div>
+                        <pre class="overflow-x-auto px-3 py-3" style="background-color: var(--color-gray-100);"><code class="font-mono text-xs leading-relaxed" style="color: var(--color-ink);">{command}</code></pre>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               )}
-            </div>
-            <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100">{path.title}</h2>
-            <p class="text-sm text-gray-600 dark:text-gray-300">{path.tagline}</p>
-            <div class="mt-auto overflow-hidden rounded-lg border border-gray-200 bg-gray-950 dark:border-gray-800">
-              <div class="border-b border-white/10 px-3 py-1.5">
-                <span class="font-mono text-[0.65rem] uppercase tracking-wide text-gray-600 dark:text-gray-300">
-                  {qs.codeLabel}
-                </span>
-              </div>
-              <pre class="overflow-x-auto px-3 py-3"><code class="font-mono text-xs leading-relaxed text-gray-100">{path.command}</code></pre>
-            </div>
-            <p class="text-sm leading-relaxed text-gray-600 dark:text-gray-300">{path.note}</p>
-          </article>
-        ))
-      }
-    </div>
-  </PageSection>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
 
-  <PageSection background="gray" title={q.nextStepsTitle}>
-    <div class="flex flex-wrap gap-4 justify-center">
-      {
-        q.nextSteps.map((step) => (
-          <a
-            href={`${prefix}${step.href}`}
-            class="inline-flex items-center px-5 py-3 rounded-lg border-2 border-secondary text-secondary font-semibold hover:bg-secondary/10 transition-colors duration-200"
-          >
-            {step.label}
-          </a>
-        ))
-      }
-    </div>
-  </PageSection>
+    <Rule class="my-12" />
+
+    <section class="max-w-3xl">
+      <Kicker>{q.outcomeTitle}</Kicker>
+      <p
+        class="font-display mt-6 border-l-2 pl-4 text-xl italic"
+        style="border-color: var(--color-secondary); color: var(--color-ink);"
+      >
+        {q.outcome}
+      </p>
+    </section>
+
+    <Rule class="my-12" />
+
+    <section>
+      <Kicker>{q.nextStepsTitle}</Kicker>
+      <div class="mt-6 flex flex-wrap gap-4">
+        {
+          q.nextSteps.map((step) => (
+            <a
+              href={`${prefix}${step.href}`}
+              class="inline-flex items-center rounded-sm border px-5 py-3 font-semibold transition hover:opacity-80"
+              style="border-color: var(--color-line); color: var(--color-ink);"
+            >
+              {step.label}
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </article>
 </MainLayout>
