@@ -46,9 +46,25 @@ Update Tailwind CSS styles in components or global CSS with proper dark mode sup
 ## Brand Reference
 
 > **Always consult [Brand Guide](../../../docs/BRAND_GUIDE.md)** for the official color palette, dark mode pairing rules, and typography scale before making styling decisions.
->
-> **Key tokens:** `bg-main` (Void Black `#0F1124`), `bg-secondary`/`text-secondary` (Crimson Strike `#E51641`)
-> **Full palette:** Ninja Navy `#152E45`, Shadow Steel `#637996`, Pure White `#FFFFFF`
+
+### Editorial Design System ("The Broadsheet")
+
+This site uses an editorial newsprint design system. Prefer its semantic tokens over raw grays
+or generic blues.
+
+- **Palette tokens** (defined via `@theme`/`.dark` in `src/styles/global.css`): paper `#F7F4EC` /
+  ink `#1B1A17` in light; warm near-black `#14140F` ground + paper-colored text `#ECE7DA` in dark.
+  The oxblood accent is mapped to `--color-secondary` (`#7A1F1F` light / `#C2554D` dark) and is
+  reserved for links, kicker rules, and small marks. Use `bg-paper text-ink` and `text-secondary`.
+- **No indigo, no multi-color accents, no radial glows, no `prose-slate`** — and no
+  `xergioalex`/personal residue.
+- **Typography:** serif is the body + heading default (`--font-serif`); `--font-sans`/`--font-mono`
+  exist as tokens. Use the `.font-display` utility for serif display headings.
+- **Width & measure:** align page content to the masthead with `.main-container`; keep a ~66ch
+  reading measure (e.g. `max-w-3xl`) for long-form prose.
+- **Editorial primitives** live in `src/components/editorial/` — `Kicker`, `Rule`, `Figure`,
+  `Lead` (optional drop cap), `Reference`. Reuse them instead of hand-rolling eyebrows, hairline
+  rules, captions, or drop caps.
 
 ## Key Concepts
 
@@ -92,18 +108,24 @@ Update Tailwind CSS styles in components or global CSS with proper dark mode sup
 
 ### Theme Colors
 
-From `src/styles/global.css`:
+From `src/styles/global.css` (editorial "Broadsheet" palette):
 
 ```css
 @theme {
-  --color-main: #0f1124;
-  --color-secondary: #e41541;
+  --color-paper: #f7f4ec; /* warm newsprint paper — light background */
+  --color-ink: #1b1a17; /* warm near-black ink — body text (light) */
+  --color-secondary: #7a1f1f; /* oxblood accent (light) */
+}
+.dark {
+  --color-paper: #14140f; /* ink ground — dark background */
+  --color-ink: #ece7da; /* paper-colored text (dark) */
+  --color-secondary: #c2554d; /* oxblood, lightened for dark surfaces */
 }
 ```
 
 Usage:
 ```html
-<div class="bg-main text-white">
+<div class="bg-paper text-ink">
 <span class="text-secondary">
 ```
 

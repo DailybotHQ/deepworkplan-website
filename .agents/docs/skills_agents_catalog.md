@@ -361,9 +361,9 @@ All skills and agents are adapted for this Astro repository:
 
 | Date | Change | Details |
 |------|--------|---------|
+| 2026-05-31 | editorial-system guidance added | Skills & Agents Discovery for the editorial redesign. Updated existing skills/agents to reference "The Broadsheet" editorial system rather than creating speculative new ones: `update-styles` + `add-component` (paper/ink + oxblood tokens, serif `.font-display`, `src/components/editorial/` primitives), `add-page` (middleware allowlist gotcha + editorial system + `types.ts`), `content-writer` (paper/specification voice for the live site vs. the dormant-blog voice; pillars; no "Cal Newport"), `reviewer` (editorial design-system review block). No new skills/agents and no generator changes needed; counts unchanged. |
 | 2026-05-30 | removed-surface skills deleted | Deleted `add-slide-deck` and `add-timeline-page` skills (slides and timeline pages are removed surfaces in the Deep Work Plan site). Removed the Slides & Presentations domain section and renumbered domain sections. |
 | 2026-03-23 | audit-series skill added | New Tier 2 skill for pre-publication blog series auditing — 9-step review covering series definition, post discovery, ordering validation, cross-post consistency, i18n parity, individual post summary checks, build validation, and final report. Companion to audit-post. |
-| 2026-03-23 | audit-post skill added | New Tier 2 skill for pre-publication blog post auditing — 10-step comprehensive review covering frontmatter, SEO, AEO, images, accessibility, content quality, i18n parity, resources, build validation. |
 
 ---
 

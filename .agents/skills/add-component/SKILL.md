@@ -74,6 +74,19 @@ Create new Astro (`.astro`) or Svelte (`.svelte`) components following project p
 | `src/components/blog/` | Blog-related components |
 | `src/components/home/` | Homepage sections |
 | `src/components/layout/` | Layout (Header, Menu) |
+| `src/components/editorial/` | Editorial primitives (Kicker, Rule, Figure, Lead, Reference) |
+| `src/components/pages/` | Shared `*Page.astro` page components |
+
+## Editorial Design System
+
+This site uses "The Broadsheet" editorial newsprint system. New components should fit it:
+
+- **Reuse the editorial primitives** in `src/components/editorial/` (Kicker, Rule, Figure, Lead,
+  Reference) instead of re-implementing eyebrows, hairline rules, captions, or drop caps.
+- Use the paper/ink palette tokens (`bg-paper text-ink`) and the oxblood `--color-secondary`
+  accent (`text-secondary`) — **no indigo, no multi-color, no glow, no `prose-slate`**.
+- Headings use serif `.font-display`; page-width wrappers use `.main-container`.
+- See the [`update-styles`](../update-styles/SKILL.md) skill for the full token + primitive reference.
 
 ## Steps
 

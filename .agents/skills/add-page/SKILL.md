@@ -124,6 +124,28 @@ import {Name}Page from '@/components/pages/{Name}Page.astro';
 - The `lang` prop is passed as a **string literal** (`"en"`, `"es"`), not a variable
 - If the page introduces new UI text, add entries to `src/lib/translations/en.ts` and `src/lib/translations/es.ts`
 
+### Step 3b: Register the Route in the Middleware Allowlist (MANDATORY for top-level routes)
+
+`src/middleware.ts` uses a **hardcoded allowlist** (`KNOWN_ROOT_PATHS` / `KNOWN_ES_PATHS`). A new
+single-segment route (`/foo`, `/es/foo`) returns a `(rewrite)` 404 until you add it:
+
+1. Add `'foo'` to `KNOWN_ROOT_PATHS`.
+2. For the Spanish route, add `'foo'` to `KNOWN_ES_PATHS` too.
+
+Multi-segment paths (`/foo/bar`) and paths containing `.` bypass the rule, so only single-segment
+top-level routes need this. Symptom if forgotten: dev log shows `[404] (rewrite) /foo`. See
+CLAUDE.md "Middleware Allowlist".
+
+### Step 3c: Stay in the Editorial Design System
+
+New pages must fit "The Broadsheet" editorial system:
+
+- `.main-container` page width; serif `.font-display` headings; paper/ink tokens (`bg-paper text-ink`)
+  and the oxblood `--color-secondary` accent — **no indigo, multi-color, glow, or `prose-slate`**.
+- Reuse `src/components/editorial/` primitives (Kicker, Rule, Figure, Lead, Reference).
+- Add any new translation keys to `src/lib/translations/types.ts` as well as `en.ts`/`es.ts`.
+- See the [`update-styles`](../update-styles/SKILL.md) skill for token/primitive details.
+
 ### Step 4: Create Agent-Friendly Markdown (MANDATORY)
 
 Create Markdown source files for the new page's `.md` endpoint (Markdown for Agents):

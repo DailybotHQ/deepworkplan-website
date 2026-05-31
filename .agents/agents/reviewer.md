@@ -18,7 +18,7 @@ can-modify-files: false
 
 A meticulous code reviewer focused on code quality, maintainability, and adherence to best practices. This agent reviews code with a critical but constructive eye, providing actionable feedback.
 
-**Adapted for this Astro repository:** Follow AGENTS.md and docs/STANDARDS.md. Check for TypeScript strict mode compliance, proper Astro/Svelte patterns, Tailwind dark mode support, import order conventions.
+**Adapted for this Astro repository (deepworkplan.com):** Follow AGENTS.md and docs/STANDARDS.md. Check for TypeScript strict mode compliance, proper Astro/Svelte patterns, Tailwind dark mode support, import order conventions, and conformance to "The Broadsheet" editorial design system.
 
 This agent is a specialized **code review expert** that focuses on:
 
@@ -83,6 +83,16 @@ For this Astro repository, check:
 - [ ] Dark mode support (`dark:` variants)
 - [ ] Responsive design considered
 - [ ] Consistent with existing styling patterns
+
+### Editorial Design System ("The Broadsheet")
+- [ ] Paper/ink palette tokens (`bg-paper text-ink`) + oxblood `--color-secondary` accent
+      (`text-secondary`) — **no indigo, multi-color, radial glow, or `prose-slate`**
+- [ ] Serif `.font-display` headings; `.main-container` page width with a ~66ch (`max-w-3xl`) prose measure
+- [ ] Reuses `src/components/editorial/` primitives (Kicker, Rule, Figure, Lead, Reference) rather than
+      hand-rolled eyebrows / rules / captions
+- [ ] New top-level routes registered in the `src/middleware.ts` allowlist
+      (`KNOWN_ROOT_PATHS` / `KNOWN_ES_PATHS`)
+- [ ] No `xergioalex`/personal residue; "Dailybot" casing; no "Cal Newport" reference
 
 ### Responsive Design (if styling changes)
 - [ ] Mobile breakpoint coverage (sm:, md:, lg: present where applicable)
