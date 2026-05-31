@@ -86,7 +86,7 @@ scripts/                 # Build utilities (image optimization)
 docs/                    # Project documentation
 .agents/                 # Cross-agent skills, commands, agents, settings (canonical)
 .claude → .agents        # Backward-compat symlink for Claude Code
-.agent_commands/         # Deep work plan templates and skill/agent generators
+.dwp/                    # Deep Work Plan output (plans/drafts) — git-ignored working state
 tmp/                     # Temporary workspace (git-ignored, see below)
 ```
 

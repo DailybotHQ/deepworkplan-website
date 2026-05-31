@@ -59,15 +59,14 @@ Tracking documentation coverage for deepworkplan.com.
 | [src/content/README.md](../src/content/README.md) | ✅ Current | Content Collections |
 | [src/styles/README.md](../src/styles/README.md) | ✅ Current | Styling guide |
 
-### .agent_commands/ Documentation
+### Deep Work Plan Documentation
 
 | File | Status | Description |
 |------|--------|-------------|
-| [README.md](../.agent_commands/README.md) | ✅ Current | Agent commands overview |
-| [agent_skills_generator/](../.agent_commands/agent_skills_generator/) | ✅ Current | Skills creation system |
-| [agent_deep_work_plans/](../.agent_commands/agent_deep_work_plans/) | ✅ Current | Deep work plans system |
-| [agent_library_upgrades/](../.agent_commands/agent_library_upgrades/) | ✅ Current | Library upgrade system |
-| [PLAN_EXAMPLE_add_blog_feature/](../.agent_commands/agent_deep_work_plans/example_prompts/PLAN_EXAMPLE_add_blog_feature/) | ✅ Current | Astro-specific example plan |
+| [deepworkplan skill](../.agents/skills/deepworkplan/) | ✅ Current | Installed DWP skill (create/execute/refine/resume plans) — git-ignored, not vendored |
+| [author sub-skill](../.agents/skills/deepworkplan/author/SKILL.md) | ✅ Current | Skills/agents/commands creation system |
+| [dependency-upgrade addon](../.agents/skills/deepworkplan/addons/dependency-upgrade/SKILL.md) | ✅ Current | Dependency upgrade addon |
+| `.dwp/` | ✅ Current | Deep Work Plan output (plans/drafts) — git-ignored working state |
 
 ### .agents/ Documentation
 

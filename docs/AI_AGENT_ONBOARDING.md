@@ -33,7 +33,7 @@ deepworkplan.com/
 │   └── styles/          # Global CSS
 ├── public/              # Static assets
 ├── docs/                # Documentation
-├── .agent_commands/     # AI agent automation
+├── .dwp/                # Deep Work Plan output (git-ignored)
 └── .agents/             # Skills and agents
 ```
 
