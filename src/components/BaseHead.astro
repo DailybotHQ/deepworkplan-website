@@ -1,9 +1,9 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import '../styles/global.css';
-import JsonLd from '@/components/JsonLd.astro';
-import { ANALYTICS, SITE_DESCRIPTION, SITE_TITLE } from '@/lib/constances';
+import "../styles/global.css";
+import JsonLd from "@/components/JsonLd.astro";
+import { ANALYTICS, SITE_DESCRIPTION, SITE_TITLE } from "@/lib/constances";
 import {
   DEFAULT_LANGUAGE,
   getAlternateUrls,
@@ -11,7 +11,7 @@ import {
   getSupportedLanguages,
   getUrlPrefix,
   type Language,
-} from '@/lib/i18n';
+} from "@/lib/i18n";
 
 interface Props {
   title: string;
@@ -31,24 +31,24 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const {
   title,
   description,
-  image = '/images/og-default.png',
-  lang = 'en',
+  image = "/images/og-default.png",
+  lang = "en",
   keywords,
   prevPage,
   nextPage,
-  ogType = 'website',
+  ogType = "website",
   ogImageWidth = 1200,
   ogImageHeight = 630,
 } = Astro.props;
 const absoluteImageUrl = new URL(image, Astro.site ?? Astro.url).href;
-const imageExtension = image.split('.').pop()?.toLowerCase();
+const imageExtension = image.split(".").pop()?.toLowerCase();
 const imageMimeType =
-  imageExtension === 'png'
-    ? 'image/png'
-    : imageExtension === 'jpg' || imageExtension === 'jpeg'
-      ? 'image/jpeg'
-      : imageExtension === 'webp'
-        ? 'image/webp'
+  imageExtension === "png"
+    ? "image/png"
+    : imageExtension === "jpg" || imageExtension === "jpeg"
+      ? "image/jpeg"
+      : imageExtension === "webp"
+        ? "image/webp"
         : undefined;
 
 // Compute hreflang URLs for multilingual SEO
@@ -64,7 +64,7 @@ const alternateLocales = getSupportedLanguages()
   .filter((l) => l !== lang)
   .map((l) => getOGLocale(l));
 const langPrefix = getUrlPrefix(lang as Language);
-const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
+const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ""), Astro.site);
 ---
 
 <!-- Global Metadata -->
@@ -78,10 +78,10 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link
-	rel="alternate"
-	type="application/rss+xml"
-	title={SITE_TITLE}
-	href={rssHref}
+  rel="alternate"
+  type="application/rss+xml"
+  title={SITE_TITLE}
+  href={rssHref}
 />
 <meta name="generator" content={Astro.generator} />
 
@@ -92,35 +92,63 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 	woff2 is self-hosted later, add its preload here.
 -->
 
-
 <!-- Header logo preload (prevents alt text flash on navigation) -->
-<link rel="preload" href="/images/brand/dwp-mark-light.png" as="image" type="image/png" media="(prefers-color-scheme: light)" />
-<link rel="preload" href="/images/brand/dwp-mark-dark.png" as="image" type="image/png" media="(prefers-color-scheme: dark)" />
+<link
+  rel="preload"
+  href="/images/brand/dwp-mark-light.png"
+  as="image"
+  type="image/png"
+  media="(prefers-color-scheme: light)"
+/>
+<link
+  rel="preload"
+  href="/images/brand/dwp-mark-dark.png"
+  as="image"
+  type="image/png"
+  media="(prefers-color-scheme: dark)"
+/>
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Hreflang for multilingual SEO -->
-{alternateUrls.map((alt) => (
-  <link rel="alternate" hreflang={alt.lang} href={alt.href} />
-))}
+{
+  alternateUrls.map((alt) => (
+    <link rel="alternate" hreflang={alt.lang} href={alt.href} />
+  ))
+}
 <link rel="alternate" hreflang="x-default" href={defaultHref} />
 
 <!-- Search engine verification -->
-{ANALYTICS.verification.bing && (
-  <meta name="msvalidate.01" content={ANALYTICS.verification.bing} />
-)}
+{
+  ANALYTICS.verification.bing && (
+    <meta name="msvalidate.01" content={ANALYTICS.verification.bing} />
+  )
+}
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
-<meta name="keywords" content={keywords && keywords.length > 0 ? keywords.join(', ') : "Deep Work Plan, DWP methodology, AI coding agents, structured agent execution, agent workflow, validation gates, software methodology, deepworkplan"} />
+<meta
+  name="keywords"
+  content={keywords && keywords.length > 0
+    ? keywords.join(", ")
+    : "Deep Work Plan, DWP methodology, AI coding agents, structured agent execution, agent workflow, validation gates, software methodology, deepworkplan"}
+/>
 <meta name="author" content="Deep Work Plan" />
 
 <!-- Theme color for browser chrome -->
-<meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#14140f" media="(prefers-color-scheme: dark)" />
+<meta
+  name="theme-color"
+  content="#f7f4ec"
+  media="(prefers-color-scheme: light)"
+/>
+<meta
+  name="theme-color"
+  content="#14140f"
+  media="(prefers-color-scheme: dark)"
+/>
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={ogType} />
@@ -135,9 +163,11 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 <meta property="og:image:height" content={String(ogImageHeight)} />
 <meta property="og:site_name" content={SITE_TITLE} />
 <meta property="og:locale" content={currentLocale} />
-{alternateLocales.map((locale) => (
-  <meta property="og:locale:alternate" content={locale} />
-))}
+{
+  alternateLocales.map((locale) => (
+    <meta property="og:locale:alternate" content={locale} />
+  ))
+}
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -154,11 +184,11 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 <!-- JSON-LD: WebSite -->
 <JsonLd
   data={{
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
+    "@context": "https://schema.org",
+    "@type": "WebSite",
     name: SITE_TITLE,
     url: Astro.site?.href,
-    inLanguage: ['en', 'es'],
+    inLanguage: ["en", "es"],
     description: SITE_DESCRIPTION,
   }}
 />
@@ -166,52 +196,54 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 <!-- JSON-LD: SoftwareApplication (Deep Work Plan) -->
 <JsonLd
   data={{
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: 'Deep Work Plan',
-    applicationCategory: 'DeveloperApplication',
-    operatingSystem: 'Any',
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Deep Work Plan",
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Any",
     url: Astro.site?.href,
     description: SITE_DESCRIPTION,
     offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
     },
     author: {
-      '@type': 'Organization',
-      name: 'DailyBot',
-      url: 'https://www.dailybot.com',
+      "@type": "Organization",
+      name: "Dailybot",
+      url: "https://www.dailybot.com",
     },
     publisher: {
-      '@type': 'Organization',
-      name: 'DailyBot',
-      url: 'https://www.dailybot.com',
+      "@type": "Organization",
+      name: "Dailybot",
+      url: "https://www.dailybot.com",
     },
   }}
 />
 
-<!-- JSON-LD: Organization (DailyBot) -->
+<!-- JSON-LD: Organization (Dailybot) -->
 <JsonLd
   data={{
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'DailyBot',
-    url: 'https://www.dailybot.com',
-    description: 'AI-powered platform for asynchronous team collaboration',
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Dailybot",
+    url: "https://www.dailybot.com",
+    description: "AI-powered platform for asynchronous team collaboration",
     sameAs: [
-      'https://twitter.com/dailybotHQ',
-      'https://www.linkedin.com/company/dailybot',
+      "https://twitter.com/dailybotHQ",
+      "https://www.linkedin.com/company/dailybot",
     ],
   }}
 />
 
 <!-- Analytics: Umami (cookieless, privacy-first) -->
-{ANALYTICS.umami.websiteId && (
-  <script
-    is:inline
-    defer
-    src={ANALYTICS.umami.scriptUrl}
-    data-website-id={ANALYTICS.umami.websiteId}
-  />
-)}
+{
+  ANALYTICS.umami.websiteId && (
+    <script
+      is:inline
+      defer
+      src={ANALYTICS.umami.scriptUrl}
+      data-website-id={ANALYTICS.umami.websiteId}
+    />
+  )
+}

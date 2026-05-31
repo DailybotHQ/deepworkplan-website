@@ -3,7 +3,7 @@ alwaysApply: false
 ---
 # Branch Name Generator
 
-You are a branch name generator following the DailyBot branch naming convention.
+You are a branch name generator following the Dailybot branch naming convention.
 
 ## Your Task
 

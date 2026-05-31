@@ -14,7 +14,7 @@ lastUpdated: 2026-05-30
 
 - **Repositorio en GitHub** — Código fuente, issues y pull requests de la metodología y el kit. [DailybotHQ/deepworkplan-website](https://github.com/DailybotHQ/deepworkplan-website)
 - **Issues y discusiones** — Reporta errores, solicita funciones o propón cambios a la especificación. [Abrir un issue](https://github.com/DailybotHQ/deepworkplan-website/issues)
-- **DailyBot** — El equipo que creó y mantiene Deep Work Plan. [dailybot.com](https://www.dailybot.com)
+- **Dailybot** — El equipo que creó y mantiene Deep Work Plan. [dailybot.com](https://www.dailybot.com)
 
 ---
 

@@ -106,7 +106,7 @@ For custom OG images, pass `image` prop:
 |--------|----------|-------|
 | WebSite | `BaseHead.astro` | Global (all pages) |
 | Person | `BaseHead.astro` | Global (all pages) |
-| Organization | `BaseHead.astro` | Global (DailyBot) |
+| Organization | `BaseHead.astro` | Global (Dailybot) |
 | Person (enhanced) | `AboutPage.astro` | About page only |
 | BlogPosting | `BlogPostPage.astro` | Individual blog posts |
 | BreadcrumbList | Most page components | Per-page navigation hierarchy |

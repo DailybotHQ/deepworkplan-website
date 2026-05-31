@@ -398,7 +398,7 @@ order: 1                                         # sort order within tier
 | `portfolio` | 3 | Portfolio/branding | Projects showcase |
 | `talks` | 4 | Conference talks | Speaking events |
 | `trading` | 5 | Trading content | Financial/trading |
-| `dailybot` | 6 | DailyBot product | Product-specific |
+| `dailybot` | 6 | Dailybot product | Product-specific |
 | `demo` | 99 | Demo posts | Dev only (`_demo/` folders) |
 
 #### Secondary Tags (11) — Content/Technology Topics

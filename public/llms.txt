@@ -1,6 +1,6 @@
 # Deep Work Plan
 
-> Deep Work Plan (DWP) is an open, MIT-licensed methodology and reference kit for running structured, validated, resumable multi-hour work with AI coding agents. Maintained by DailyBot and the open-source community.
+> Deep Work Plan (DWP) is an open, MIT-licensed methodology and reference kit for running structured, validated, resumable multi-hour work with AI coding agents. Maintained by Dailybot and the open-source community.
 
 ## About
 
@@ -14,7 +14,7 @@ Deep Work Plan applies Cal Newport's idea of deep work to AI coding agents. It d
 - Kit: /kit — presets, adapters, and commands for installing DWP into a repository
 - Examples: /examples — worked examples of the methodology in practice
 - Quickstart: /quickstart — get DWP running in a repo quickly
-- About: /about — what DWP is and who maintains it (DailyBot)
+- About: /about — what DWP is and who maintains it (Dailybot)
 - Contact: /contact — how to engage with the project on GitHub
 
 ## Repository

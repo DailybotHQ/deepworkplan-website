@@ -26,7 +26,7 @@ Es deliberadamente agnóstica respecto al agente de IA o stack que uses — los 
 
 - Metodología abierta, con licencia MIT
 - Agnóstica de framework y de agente
-- Mantenida por DailyBot y la comunidad
+- Mantenida por Dailybot y la comunidad
 - Incluye una especificación, comandos, adaptadores, presets y ejemplos
 - Solo Markdown — sin runtime, sin dependencias forzadas
 - Convierte cualquier repositorio en un código AI-first, pilotable por agentes
@@ -35,7 +35,7 @@ Es deliberadamente agnóstica respecto al agente de IA o stack que uses — los 
 
 ## Quién la mantiene
 
-Deep Work Plan surgió del trabajo de ingeniería real en [DailyBot](https://www.dailybot.com) y ahora es mantenida por DailyBot junto con la comunidad de código abierto. La metodología, la especificación y el kit se publican bajo la licencia MIT — libres para usar, adaptar y construir sobre ellos.
+Deep Work Plan surgió del trabajo de ingeniería real en [Dailybot](https://www.dailybot.com) y ahora es mantenida por Dailybot junto con la comunidad de código abierto. La metodología, la especificación y el kit se publican bajo la licencia MIT — libres para usar, adaptar y construir sobre ellos.
 
 - [Leer la metodología](/es/methodology)
 - [Inicio rápido](/es/quickstart)

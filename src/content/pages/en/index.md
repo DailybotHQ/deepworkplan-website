@@ -58,7 +58,7 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ## Who builds it
 
-Deep Work Plan grew out of real engineering work at [DailyBot](https://www.dailybot.com) and is maintained by DailyBot together with the open-source community.
+Deep Work Plan grew out of real engineering work at [Dailybot](https://www.dailybot.com) and is maintained by Dailybot together with the open-source community.
 
 - [About the methodology](/about)
 - [Community & contact](/contact)

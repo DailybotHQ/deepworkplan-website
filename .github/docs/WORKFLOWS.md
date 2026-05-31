@@ -83,7 +83,7 @@ For L/XL/XXL PRs, a warning comment is automatically posted.
 |------|------|-------------|
 | — | Checkout | `actions/checkout@v4` with `AUTOMATION_GITHUB_TOKEN` |
 | — | Setup Node | 24.15.0 with npm registry |
-| 1 | Setup GitHub Config | Commits as "DailyBot" |
+| 1 | Setup GitHub Config | Commits as "Dailybot" |
 | 2 | Check/create branch | Creates `feature__packages_versions_update` if it doesn't exist |
 | 3 | Install Dependencies | `corepack pnpm install --frozen-lockfile` |
 | 4 | Check Packages | Runs `scripts/get_packages_upgrades.sh` |

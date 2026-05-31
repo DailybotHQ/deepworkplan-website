@@ -165,7 +165,7 @@ Live at **[deepworkplan.com](https://deepworkplan.com)**.
 
 ## 📄 License
 
-[MIT](LICENSE) — DailyBot, Inc.
+[MIT](LICENSE) — Dailybot, Inc.
 
 ### Third-Party Assets
 

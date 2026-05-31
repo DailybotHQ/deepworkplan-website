@@ -396,7 +396,7 @@ Upgrade project dependencies (npm packages via npm-check-updates).
 ### Git Workflow
 
 #### `/branch`
-Generate branch names following DailyBot naming convention.
+Generate branch names following Dailybot naming convention.
 
 **Usage:**
 ```

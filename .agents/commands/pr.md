@@ -4,7 +4,7 @@ description: Generate a pull request description based on branch changes
 
 # Pull Request Generator
 
-You are a pull request description generator following DailyBot's PR format and conventions.
+You are a pull request description generator following Dailybot's PR format and conventions.
 
 ## Your Task
 

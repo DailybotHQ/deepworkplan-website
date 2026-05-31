@@ -58,7 +58,7 @@ export const en: SiteTranslations = {
       answer:
         'Deep Work Plan answers with spec-driven development: the plan is the durable source of truth, and agents execute against explicit acceptance criteria and validation gates. Drift drops, the work stays verifiable, and any agent can resume it across sessions.',
       origin:
-        'It is also harness engineering made portable. An agent harness is the scaffolding around a model — context, tools, control loop, guardrails, resumable state — that makes it reliable. Deep Work Plan installs that harness into the repository itself (AGENTS.md, docs, the .agents/ skills home, the DWP skill), so any agent can pilot any repo. Born at DailyBot, battle-tested for months, and released as the DailybotHQ/deepworkplan-skill.',
+        'It is also harness engineering made portable. An agent harness is the scaffolding around a model — context, tools, control loop, guardrails, resumable state — that makes it reliable. Deep Work Plan installs that harness into the repository itself (AGENTS.md, docs, the .agents/ skills home, the DWP skill), so any agent can pilot any repo. Born at Dailybot, battle-tested for months, and released as the DailybotHQ/deepworkplan-skill.',
     },
     onboarding: {
       badge: 'Reasoning-based onboarding',
@@ -283,8 +283,8 @@ export const en: SiteTranslations = {
     origin: {
       badge: 'Origin',
       quote:
-        'Built by DailyBot — the company behind asynchronous standups for distributed teams. Internally we used Deep Work Plans to make production repositories spanning Django, Vue, TypeScript Lambda, and Astro agent-pilotable. After months of production use, we open-sourced the methodology under MIT.',
-      attribution: 'The DailyBot engineering team',
+        'Built by Dailybot — the company behind asynchronous standups for distributed teams. Internally we used Deep Work Plans to make production repositories spanning Django, Vue, TypeScript Lambda, and Astro agent-pilotable. After months of production use, we open-sourced the methodology under MIT.',
+      attribution: 'The Dailybot engineering team',
     },
     finalCta: {
       title: 'Give your agents deep work.',
@@ -298,11 +298,11 @@ export const en: SiteTranslations = {
 
   // Homepage hero
   hero: {
-    tagline: 'CTO at DailyBot (YC S21) · Builder of Digital Products',
+    tagline: 'CTO at Dailybot (YC S21) · Builder of Digital Products',
     description:
-      'I build technology that empowers teams. CTO & Co-founder at <a href="https://dailybot.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors underline">DailyBot (YC S21)</a>, a collaboration platform where human teams and AI agents work together. 14+ years shipping digital products, from AI-powered platforms to open source tools.',
+      'I build technology that empowers teams. CTO & Co-founder at <a href="https://dailybot.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors underline">Dailybot (YC S21)</a>, a collaboration platform where human teams and AI agents work together. 14+ years shipping digital products, from AI-powered platforms to open source tools.',
     typewriterWords: [
-      'CTO at DailyBot (YC S21)',
+      'CTO at Dailybot (YC S21)',
       'Builder of Digital Products',
       'Community Founder',
       'AI & Tech Explorer',
@@ -314,18 +314,18 @@ export const en: SiteTranslations = {
   homeSections: {
     about: {
       title: "Hello, I'm <span class='text-secondary'>Sergio</span>",
-      description: `Today I lead engineering at DailyBot (YC S21), a modern collaboration platform that enables human teams and AI agents to work together seamlessly. I focus on product strategy, AI-powered workflows, and reliable systems that help hybrid teams move faster.<br /><br />
+      description: `Today I lead engineering at Dailybot (YC S21), a modern collaboration platform that enables human teams and AI agents to work together seamlessly. I focus on product strategy, AI-powered workflows, and reliable systems that help hybrid teams move faster.<br /><br />
 My strengths are turning complex ideas into simple products, scaling engineering teams, and shipping end-to-end: architecture, execution, and iteration based on real user feedback.<br /><br />
 I currently focus on AI applications, developer productivity, and high-impact products that combine speed, quality, and measurable business results.`,
       cta: 'Learn more about me',
       cta2: 'View my CV',
     },
     dailybot: {
-      title: 'DailyBot (YC S21)',
+      title: 'Dailybot (YC S21)',
       subtitle: 'CTO & Cofounder',
       description:
         'I have led the development of a modern collaboration platform that enables both human teams and AI agents to work together seamlessly. It provides unified transparency and visibility into work across hybrid teams and intelligent workflows—supporting async standups, peer recognition, and AI agents reporting on progress—all inside Slack, Microsoft Teams, and Google Chat. In 2021, we were selected by Y Combinator, which accelerated our growth and reinforced our focus on customer satisfaction. \u{1F680}',
-      cta: 'Learn more about DailyBot',
+      cta: 'Learn more about Dailybot',
     },
     techTalks: {
       title: 'Tech Talks',
@@ -338,7 +338,7 @@ I currently focus on AI applications, developer productivity, and high-impact pr
       title: 'What I Built',
       subtitle: 'Entrepreneur, maker & tech enthusiast',
       description:
-        "Beyond DailyBot, I'm an entrepreneur and maker passionate about technology. I build side projects, explore AI, and contribute to open source — from Moltbot (AI on Raspberry Pi) to Syntro (AI-powered support) to SysPrompt (LLM prompt management). With 113+ repositories on GitHub, I believe the best way to learn is to build something real.",
+        "Beyond Dailybot, I'm an entrepreneur and maker passionate about technology. I build side projects, explore AI, and contribute to open source — from Moltbot (AI on Raspberry Pi) to Syntro (AI-powered support) to SysPrompt (LLM prompt management). With 113+ repositories on GitHub, I believe the best way to learn is to build something real.",
       cta: 'View portfolio',
     },
     portfolio: {
@@ -373,7 +373,7 @@ I currently focus on AI applications, developer productivity, and high-impact pr
       title: 'What I Build',
       subtitle: 'From AI-powered platforms to open source tools',
       description:
-        'Building is what I do best. As CTO of <a href="https://dailybot.com" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white font-semibold underline hover:no-underline">DailyBot (YC S21)</a>, I\'ve architected a modern collaboration platform that enables human teams and AI agents to work together seamlessly—with unified transparency across hybrid teams and intelligent workflows. Beyond DailyBot, I\'m constantly shipping side projects \u2014 from Moltbot (AI on Raspberry Pi) to Syntro (AI-powered support) to SysPrompt (LLM prompt management).<br /><br />With 113+ repositories on GitHub and projects spanning Python, Go, TypeScript, and more, I believe the best way to learn new technology is to build something real with it.',
+        'Building is what I do best. As CTO of <a href="https://dailybot.com" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white font-semibold underline hover:no-underline">Dailybot (YC S21)</a>, I\'ve architected a modern collaboration platform that enables human teams and AI agents to work together seamlessly—with unified transparency across hybrid teams and intelligent workflows. Beyond Dailybot, I\'m constantly shipping side projects \u2014 from Moltbot (AI on Raspberry Pi) to Syntro (AI-powered support) to SysPrompt (LLM prompt management).<br /><br />With 113+ repositories on GitHub and projects spanning Python, Go, TypeScript, and more, I believe the best way to learn new technology is to build something real with it.',
       cta: 'Explore my projects',
     },
     community: {
@@ -398,9 +398,9 @@ I currently focus on AI applications, developer productivity, and high-impact pr
     techTalksPostsTitle: 'Recent Tech Talks',
     techTalksPostsViewAll: 'View all tech talks',
     techTalksPostsEmpty: 'More talks coming soon.',
-    dailybotPostsTitle: 'Latest DailyBot Articles',
-    dailybotPostsViewAll: 'View all DailyBot articles',
-    dailybotPostsEmpty: 'DailyBot articles coming soon.',
+    dailybotPostsTitle: 'Latest Dailybot Articles',
+    dailybotPostsViewAll: 'View all Dailybot articles',
+    dailybotPostsEmpty: 'Dailybot articles coming soon.',
     tradingPostsTitle: 'Trading Journal',
     tradingPostsViewAll: 'View all trading entries',
     tradingPostsEmpty: 'Trading journal entries coming soon.',
@@ -457,14 +457,14 @@ I currently focus on AI applications, developer productivity, and high-impact pr
     quickFacts: [
       'Open methodology, MIT licensed',
       'Framework- and agent-agnostic',
-      'Maintained by DailyBot and the community',
+      'Maintained by Dailybot and the community',
       'Includes a spec, commands, adapters, presets, and examples',
       'Markdown-only — no runtime, no lock-in',
       'Turns any repository into an AI-first, agent-pilotable codebase',
     ],
     ctaTitle: 'Who maintains it',
     ctaDescription:
-      'Deep Work Plan grew out of real engineering work at DailyBot and is now maintained by DailyBot together with the open-source community. The methodology, specification, and kit are released under the MIT license — free to use, adapt, and build on.',
+      'Deep Work Plan grew out of real engineering work at Dailybot and is now maintained by Dailybot together with the open-source community. The methodology, specification, and kit are released under the MIT license — free to use, adapt, and build on.',
     ctaCv: 'Read the methodology',
     ctaContact: 'Quickstart',
   },
@@ -489,7 +489,7 @@ I currently focus on AI applications, developer productivity, and high-impact pr
       { value: 'tech-talk', label: 'Tech talk / Speaking invitation' },
       { value: 'collaboration', label: 'Collaboration / Partnership' },
       { value: 'project', label: 'Project / Work inquiry' },
-      { value: 'dailybot', label: 'Question about DailyBot' },
+      { value: 'dailybot', label: 'Question about Dailybot' },
       { value: 'trading', label: 'Questions about my trading' },
       {
         value: 'the-library-of-tomorrow',
@@ -524,7 +524,7 @@ I currently focus on AI applications, developer productivity, and high-impact pr
       startupCollaboration: 'Startup Collaboration Opportunity',
       techTalkInvitation: 'Tech Talk Speaking Invitation',
       tradingQuestion: 'Trading Question',
-      dailybotQuestion: 'Question About DailyBot',
+      dailybotQuestion: 'Question About Dailybot',
     },
   },
 
@@ -637,7 +637,7 @@ I currently focus on AI applications, developer productivity, and high-impact pr
     talks: 'Talks',
     trading: 'Trading',
     portfolio: 'Portfolio',
-    dailybot: 'DailyBot',
+    dailybot: 'Dailybot',
     entrepreneur: 'Entrepreneur',
     // Secondary tags (topics)
     'web-development': 'Web Development',
@@ -673,7 +673,7 @@ I currently focus on AI applications, developer productivity, and high-impact pr
     trading: 'Trading journal, analysis, and learnings.',
     portfolio: 'Personal projects, software, robotics, and open source work.',
     dailybot:
-      'DailyBot articles: collaboration platform for human teams and AI agents, workflow automation, and hybrid team productivity.',
+      'Dailybot articles: collaboration platform for human teams and AI agents, workflow automation, and hybrid team productivity.',
     entrepreneur:
       'Entrepreneurship journey, ventures, and startup experiences.',
     // Secondary tags (topics)

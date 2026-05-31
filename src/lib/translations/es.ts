@@ -59,7 +59,7 @@ export const es: SiteTranslations = {
       answer:
         'Deep Work Plan responde con desarrollo guiado por especificación: el plan es la fuente de verdad duradera y los agentes ejecutan contra criterios de aceptación y puertas de validación explícitos. La desviación baja, el trabajo se mantiene verificable y cualquier agente puede reanudarlo entre sesiones.',
       origin:
-        'También es ingeniería de harness hecha portable. Un harness de agente es el andamiaje alrededor de un modelo — contexto, herramientas, bucle de control, barreras, estado reanudable — que lo hace fiable. Deep Work Plan instala ese harness en el propio repositorio (AGENTS.md, docs, el hogar de skills .agents/, el skill de DWP), para que cualquier agente pueda pilotar cualquier repo. Nació en DailyBot, se probó durante meses y se publicó como la DailybotHQ/deepworkplan-skill.',
+        'También es ingeniería de harness hecha portable. Un harness de agente es el andamiaje alrededor de un modelo — contexto, herramientas, bucle de control, barreras, estado reanudable — que lo hace fiable. Deep Work Plan instala ese harness en el propio repositorio (AGENTS.md, docs, el hogar de skills .agents/, el skill de DWP), para que cualquier agente pueda pilotar cualquier repo. Nació en Dailybot, se probó durante meses y se publicó como la DailybotHQ/deepworkplan-skill.',
     },
     onboarding: {
       badge: 'Incorporación basada en razonamiento',
@@ -285,8 +285,8 @@ export const es: SiteTranslations = {
     origin: {
       badge: 'Origen',
       quote:
-        'Creado por DailyBot, la empresa detrás de los standups asincrónicos para equipos distribuidos. Internamente usamos Deep Work Plans para hacer pilotables por agentes repositorios de producción que abarcan Django, Vue, Lambda de TypeScript y Astro. Tras meses de uso en producción, liberamos la metodología bajo licencia MIT.',
-      attribution: 'El equipo de ingeniería de DailyBot',
+        'Creado por Dailybot, la empresa detrás de los standups asincrónicos para equipos distribuidos. Internamente usamos Deep Work Plans para hacer pilotables por agentes repositorios de producción que abarcan Django, Vue, Lambda de TypeScript y Astro. Tras meses de uso en producción, liberamos la metodología bajo licencia MIT.',
+      attribution: 'El equipo de ingeniería de Dailybot',
     },
     finalCta: {
       title: 'Dale deep work a tus agentes.',
@@ -300,11 +300,11 @@ export const es: SiteTranslations = {
 
   // Homepage hero
   hero: {
-    tagline: 'CTO en DailyBot (YC S21) · Creador de productos digitales',
+    tagline: 'CTO en Dailybot (YC S21) · Creador de productos digitales',
     description:
-      'Construyo tecnología que empodera equipos. CTO y Cofundador en <a href="https://dailybot.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors underline">DailyBot (YC S21)</a>, una plataforma de colaboración donde equipos humanos y agentes de IA trabajan juntos. Más de 10 años creando productos digitales, desde plataformas potenciadas por IA hasta herramientas open source.',
+      'Construyo tecnología que empodera equipos. CTO y Cofundador en <a href="https://dailybot.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors underline">Dailybot (YC S21)</a>, una plataforma de colaboración donde equipos humanos y agentes de IA trabajan juntos. Más de 10 años creando productos digitales, desde plataformas potenciadas por IA hasta herramientas open source.',
     typewriterWords: [
-      'CTO en DailyBot (YC S21)',
+      'CTO en Dailybot (YC S21)',
       'Creador de productos digitales',
       'Fundador de comunidades',
       'Explorador de IA & tech',
@@ -316,18 +316,18 @@ export const es: SiteTranslations = {
   homeSections: {
     about: {
       title: "Hola, soy <span class='text-secondary'>Sergio</span>",
-      description: `Hoy lidero ingenier\u00EDa en DailyBot (YC S21), una plataforma de colaboraci\u00F3n moderna que permite que equipos humanos y agentes de IA trabajen juntos sin fricciones. Me enfoco en estrategia de producto, flujos potenciados por IA y sistemas confiables que ayudan a los equipos h\u00EDbridos a avanzar m\u00E1s r\u00E1pido.<br /><br />
+      description: `Hoy lidero ingenier\u00EDa en Dailybot (YC S21), una plataforma de colaboraci\u00F3n moderna que permite que equipos humanos y agentes de IA trabajen juntos sin fricciones. Me enfoco en estrategia de producto, flujos potenciados por IA y sistemas confiables que ayudan a los equipos h\u00EDbridos a avanzar m\u00E1s r\u00E1pido.<br /><br />
 Mis fortalezas están en convertir ideas complejas en productos simples, escalar equipos de ingeniería y ejecutar end-to-end: arquitectura, implementación e iteración basada en feedback real de usuarios.<br /><br />
 Actualmente estoy enfocado en aplicaciones de IA, productividad para developers y productos de alto impacto que combinan velocidad, calidad y resultados de negocio medibles.`,
       cta: 'Conoce m\u00E1s sobre m\u00ED',
       cta2: 'Ver mi CV',
     },
     dailybot: {
-      title: 'DailyBot (YC S21)',
+      title: 'Dailybot (YC S21)',
       subtitle: 'CTO & Cofundador',
       description:
         'He liderado el desarrollo de una plataforma de colaboraci\u00F3n moderna que permite que equipos humanos y agentes de IA trabajen juntos sin fricciones. Ofrece transparencia y visibilidad unificadas sobre el trabajo en equipos h\u00EDbridos y flujos inteligentes — desde standups as\u00EDncronos y reconocimiento entre pares hasta agentes de IA reportando progreso — todo dentro de Slack, Microsoft Teams y Google Chat. En 2021 fuimos seleccionados por Y Combinator, lo que aceler\u00F3 nuestro crecimiento y reforz\u00F3 nuestro enfoque en la satisfacci\u00F3n del cliente. \u{1F680}',
-      cta: 'Conoce m\u00E1s sobre DailyBot',
+      cta: 'Conoce m\u00E1s sobre Dailybot',
     },
     techTalks: {
       title: 'Tech Talks',
@@ -340,7 +340,7 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
       title: 'Lo que he construido',
       subtitle: 'Emprendedor, maker y entusiasta de la tecnolog\u00EDa',
       description:
-        'M\u00E1s all\u00E1 de DailyBot, soy emprendedor y maker apasionado por la tecnolog\u00EDa. Construyo proyectos paralelos, exploro IA y contribuyo al open source \u2014 desde Moltbot (IA en Raspberry Pi) hasta Syntro (soporte con IA) y SysPrompt (gesti\u00F3n de prompts para LLMs). Con 113+ repositorios en GitHub, creo que la mejor forma de aprender es construir algo real.',
+        'M\u00E1s all\u00E1 de Dailybot, soy emprendedor y maker apasionado por la tecnolog\u00EDa. Construyo proyectos paralelos, exploro IA y contribuyo al open source \u2014 desde Moltbot (IA en Raspberry Pi) hasta Syntro (soporte con IA) y SysPrompt (gesti\u00F3n de prompts para LLMs). Con 113+ repositorios en GitHub, creo que la mejor forma de aprender es construir algo real.',
       cta: 'Ver portafolio',
     },
     portfolio: {
@@ -375,7 +375,7 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
       title: 'Lo que construyo',
       subtitle: 'Desde plataformas con IA hasta herramientas open source',
       description:
-        'Construir es lo que mejor hago. Como CTO de <a href="https://dailybot.com" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white font-semibold underline hover:no-underline">DailyBot (YC S21)</a>, he dise\u00F1ado la arquitectura de una plataforma de colaboraci\u00F3n moderna que permite que equipos humanos y agentes de IA trabajen juntos sin fricciones, con transparencia unificada en equipos h\u00EDbridos y flujos inteligentes. M\u00E1s all\u00E1 de DailyBot, estoy constantemente lanzando proyectos \u2014 desde Moltbot (IA en Raspberry Pi) hasta Syntro (soporte con IA) y SysPrompt (gesti\u00F3n de prompts para LLMs).<br /><br />Con 113+ repositorios en GitHub y proyectos en Python, Go, TypeScript y m\u00E1s, creo que la mejor forma de aprender nueva tecnolog\u00EDa es construir algo real con ella.',
+        'Construir es lo que mejor hago. Como CTO de <a href="https://dailybot.com" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white font-semibold underline hover:no-underline">Dailybot (YC S21)</a>, he dise\u00F1ado la arquitectura de una plataforma de colaboraci\u00F3n moderna que permite que equipos humanos y agentes de IA trabajen juntos sin fricciones, con transparencia unificada en equipos h\u00EDbridos y flujos inteligentes. M\u00E1s all\u00E1 de Dailybot, estoy constantemente lanzando proyectos \u2014 desde Moltbot (IA en Raspberry Pi) hasta Syntro (soporte con IA) y SysPrompt (gesti\u00F3n de prompts para LLMs).<br /><br />Con 113+ repositorios en GitHub y proyectos en Python, Go, TypeScript y m\u00E1s, creo que la mejor forma de aprender nueva tecnolog\u00EDa es construir algo real con ella.',
       cta: 'Explorar mis proyectos',
     },
     community: {
@@ -400,9 +400,9 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
     techTalksPostsTitle: 'Charlas recientes',
     techTalksPostsViewAll: 'Ver todas las charlas',
     techTalksPostsEmpty: 'Próximamente más charlas.',
-    dailybotPostsTitle: 'Últimos artículos de DailyBot',
-    dailybotPostsViewAll: 'Ver todos los artículos de DailyBot',
-    dailybotPostsEmpty: 'Próximamente artículos de DailyBot.',
+    dailybotPostsTitle: 'Últimos artículos de Dailybot',
+    dailybotPostsViewAll: 'Ver todos los artículos de Dailybot',
+    dailybotPostsEmpty: 'Próximamente artículos de Dailybot.',
     tradingPostsTitle: 'Diario de Trading',
     tradingPostsViewAll: 'Ver todas las entradas de trading',
     tradingPostsEmpty: 'Próximamente entradas del diario de trading.',
@@ -459,14 +459,14 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
     quickFacts: [
       'Metodología abierta, licencia MIT',
       'Agnóstica de frameworks y de agentes',
-      'Mantenida por DailyBot y la comunidad',
+      'Mantenida por Dailybot y la comunidad',
       'Incluye especificación, comandos, adaptadores, presets y ejemplos',
       'Solo Markdown — sin runtime, sin lock-in',
       'Convierte cualquier repositorio en un código AI-first, pilotable por agentes',
     ],
     ctaTitle: 'Quién la mantiene',
     ctaDescription:
-      'Deep Work Plan surgió del trabajo real de ingeniería en DailyBot y hoy lo mantienen DailyBot junto con la comunidad de código abierto. La metodología, la especificación y el kit se publican bajo licencia MIT — libres de usar, adaptar y construir sobre ellos.',
+      'Deep Work Plan surgió del trabajo real de ingeniería en Dailybot y hoy lo mantienen Dailybot junto con la comunidad de código abierto. La metodología, la especificación y el kit se publican bajo licencia MIT — libres de usar, adaptar y construir sobre ellos.',
     ctaCv: 'Leer la metodología',
     ctaContact: 'Inicio rápido',
   },
@@ -491,7 +491,7 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
       { value: 'tech-talk', label: 'Charla tech / Invitación a hablar' },
       { value: 'collaboration', label: 'Colaboración / Partnership' },
       { value: 'project', label: 'Proyecto / Consulta laboral' },
-      { value: 'dailybot', label: 'Pregunta sobre DailyBot' },
+      { value: 'dailybot', label: 'Pregunta sobre Dailybot' },
       { value: 'trading', label: 'Preguntas sobre mi trading' },
       {
         value: 'the-library-of-tomorrow',
@@ -526,7 +526,7 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
       startupCollaboration: 'Oportunidad de Colaboración Startup',
       techTalkInvitation: 'Invitación a Charla Tech',
       tradingQuestion: 'Pregunta de Trading',
-      dailybotQuestion: 'Pregunta sobre DailyBot',
+      dailybotQuestion: 'Pregunta sobre Dailybot',
     },
   },
 
@@ -642,7 +642,7 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
     talks: 'Charlas',
     trading: 'Trading',
     portfolio: 'Portafolio',
-    dailybot: 'DailyBot',
+    dailybot: 'Dailybot',
     entrepreneur: 'Emprendimiento',
     // Secondary tags (topics)
     'web-development': 'Desarrollo Web',
@@ -679,7 +679,7 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
     portfolio:
       'Proyectos personales, software, robótica y trabajo open source.',
     dailybot:
-      'Artículos sobre DailyBot: plataforma de colaboración para equipos humanos y agentes de IA, automatización de flujos y productividad de equipos híbridos.',
+      'Artículos sobre Dailybot: plataforma de colaboración para equipos humanos y agentes de IA, automatización de flujos y productividad de equipos híbridos.',
     entrepreneur: 'Viaje emprendedor, aventuras y experiencias de startups.',
     // Secondary tags (topics)
     'web-development':

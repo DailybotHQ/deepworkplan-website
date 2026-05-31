@@ -1,6 +1,6 @@
 # Deep Work Plan - Full Site Description
 
-> Deep Work Plan (DWP) is an open, MIT-licensed methodology and reference kit for structured, validated, resumable multi-hour AI-agent execution. Maintained by DailyBot and the open-source community.
+> Deep Work Plan (DWP) is an open, MIT-licensed methodology and reference kit for structured, validated, resumable multi-hour AI-agent execution. Maintained by Dailybot and the open-source community.
 
 ## What Deep Work Plan Is
 
@@ -12,9 +12,9 @@ The methodology, specification, and kit are released under the MIT license — f
 
 ## Who Maintains It
 
-Deep Work Plan grew out of real engineering work at DailyBot and is now maintained by DailyBot together with the open-source community.
+Deep Work Plan grew out of real engineering work at Dailybot and is now maintained by Dailybot together with the open-source community.
 
-- DailyBot: https://www.dailybot.com
+- Dailybot: https://www.dailybot.com
 - Repository: https://github.com/DailybotHQ/deepworkplan-website
 
 ## Core Principles
@@ -121,7 +121,7 @@ curl -H "Accept: text/markdown" https://deepworkplan.com/methodology
 
 The site includes JSON-LD structured data on all pages:
 - WebSite schema (site-level identity)
-- SoftwareApplication schema (Deep Work Plan, free, authored and published by DailyBot)
-- Organization schema (DailyBot)
+- SoftwareApplication schema (Deep Work Plan, free, authored and published by Dailybot)
+- Organization schema (Dailybot)
 - BreadcrumbList schema (navigation hierarchy)
 - AboutPage and ContactPage schema where applicable

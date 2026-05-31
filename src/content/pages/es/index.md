@@ -58,7 +58,7 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ## Quién lo construye
 
-Deep Work Plan surgió del trabajo de ingeniería real en [DailyBot](https://www.dailybot.com) y es mantenida por DailyBot junto con la comunidad de código abierto.
+Deep Work Plan surgió del trabajo de ingeniería real en [Dailybot](https://www.dailybot.com) y es mantenida por Dailybot junto con la comunidad de código abierto.
 
 - [Sobre la metodología](/es/about)
 - [Comunidad y contacto](/es/contact)

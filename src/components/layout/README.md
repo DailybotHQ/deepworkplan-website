@@ -42,7 +42,7 @@ The main navigation header component with desktop and mobile navigation.
 - Language switcher
 
 **About Dropdown Sub-pages:**
-- About Me, CV, DailyBot, Entrepreneur, Tech Talks, Maker/Builder, Trading, Foodie Enthusiast, Hobbies
+- About Me, CV, Dailybot, Entrepreneur, Tech Talks, Maker/Builder, Trading, Foodie Enthusiast, Hobbies
 
 **Usage in MainLayout:**
 
@@ -131,7 +131,7 @@ Header
 │   ├── About (dropdown)
 │   │   ├── About Me
 │   │   ├── CV
-│   │   ├── DailyBot
+│   │   ├── Dailybot
 │   │   ├── Entrepreneur
 │   │   ├── Tech Talks
 │   │   ├── Maker / Builder

@@ -381,7 +381,7 @@ Platforms: x, linkedin
 🐦 TWITTER/X THREAD
 
 [Tweet 1]
-🧵 Getting into Y Combinator changed everything for DailyBot.
+🧵 Getting into Y Combinator changed everything for Dailybot.
 
 But the application process? Way more intense than I expected.
 
@@ -408,7 +408,7 @@ https://deepworkplan.com/blog/how-we-got-into-y-combinator/
 
 💼 LINKEDIN
 
-Getting into Y Combinator changed the trajectory of DailyBot.
+Getting into Y Combinator changed the trajectory of Dailybot.
 
 But here's what nobody tells you...
 {...}

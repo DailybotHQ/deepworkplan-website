@@ -95,7 +95,7 @@ Site images for branding, sections, and profile. Located directly in `public/ima
 |-------|-----:|---------|---------------|
 | `trading.png` | 416 KB | Trading section | HomePage |
 | `techtalks.png` | 296 KB | Tech talks section | HomePage |
-| `dailybotyc.png` | 252 KB | DailyBot YC image | HomePage, DailybotPage |
+| `dailybotyc.png` | 252 KB | Dailybot YC image | HomePage, DailybotPage |
 | `foddie.png` | 200 KB | Foodie section | HomePage |
 | `bicycle.png` | 184 KB | Hobbies section | HomePage |
 | `ia.png` | 120 KB | AI/ML section | HomePage |

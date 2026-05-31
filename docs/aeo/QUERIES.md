@@ -35,7 +35,7 @@ Queries where users are evaluating tools, approaches, or comparing options.
 | 15 | "free analytics alternatives Google Analytics" | /blog/measuring-what-matters-free-analytics/ | Yes |
 | 16 | "manual vs algorithmic trading" | /blog/from-manual-to-algorithmic-trading/ | Yes |
 | 17 | "building a multilingual website" | /blog/building-multilingual-website/ | Yes |
-| 18 | "DailyBot Y Combinator experience" | /blog/how-we-got-into-y-combinator/ | Yes |
+| 18 | "Dailybot Y Combinator experience" | /blog/how-we-got-into-y-combinator/ | Yes |
 | 19 | "Google Forms submit without redirect" | /blog/google-forms-postman-ajax/ | Yes |
 | 20 | "WebVR A-Frame projects" | /blog/webvr-aframe/ | Yes |
 

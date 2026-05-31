@@ -26,7 +26,7 @@ It is deliberately agnostic about which AI agent or stack you use — adapters t
 
 - Open methodology, MIT licensed
 - Framework- and agent-agnostic
-- Maintained by DailyBot and the community
+- Maintained by Dailybot and the community
 - Includes a spec, commands, adapters, presets, and examples
 - Markdown-only — no runtime, no lock-in
 - Turns any repository into an AI-first, agent-pilotable codebase
@@ -35,7 +35,7 @@ It is deliberately agnostic about which AI agent or stack you use — adapters t
 
 ## Who maintains it
 
-Deep Work Plan grew out of real engineering work at [DailyBot](https://www.dailybot.com) and is now maintained by DailyBot together with the open-source community. The methodology, specification, and kit are released under the MIT license — free to use, adapt, and build on.
+Deep Work Plan grew out of real engineering work at [Dailybot](https://www.dailybot.com) and is now maintained by Dailybot together with the open-source community. The methodology, specification, and kit are released under the MIT license — free to use, adapt, and build on.
 
 - [Read the methodology](/methodology)
 - [Quickstart](/quickstart)

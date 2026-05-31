@@ -85,11 +85,11 @@ name: the Deep Work Plan team
 slug: sergio-florez
 avatar: /images/authors/sergio-florez.webp
 role:
-  en: CTO & Co-founder at DailyBot
-  es: CTO y Cofundador en DailyBot
+  en: CTO & Co-founder at Dailybot
+  es: CTO y Cofundador en Dailybot
 bio:
-  en: CTO & Co-founder at DailyBot (YC S21). I write about building products, startups, and the craft of software engineering.
-  es: CTO y Cofundador en DailyBot (YC S21). Escribo sobre desarrollo de productos, startups y el arte de la ingeniería de software.
+  en: CTO & Co-founder at Dailybot (YC S21). I write about building products, startups, and the craft of software engineering.
+  es: CTO y Cofundador en Dailybot (YC S21). Escribo sobre desarrollo de productos, startups y el arte de la ingeniería de software.
 social:
   x: https://x.com/Deep Work Plan
   linkedin: https://www.deepworkplan.com/

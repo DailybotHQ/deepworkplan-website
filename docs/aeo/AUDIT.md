@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-deepworkplan.com is **exceptionally well-prepared** for Answer Engine Optimization. The site already implements the vast majority of AEO best practices: comprehensive JSON-LD structured data (8 schema types across pages), explicit AI crawler permissions in robots.txt (12 bots), dedicated LLM discovery files (llms.txt + llms-full.txt), bilingual RSS feeds, proper hreflang, and strong E-E-A-T signals (YC S21 alumnus, CTO at DailyBot, 14+ years experience).
+deepworkplan.com is **exceptionally well-prepared** for Answer Engine Optimization. The site already implements the vast majority of AEO best practices: comprehensive JSON-LD structured data (8 schema types across pages), explicit AI crawler permissions in robots.txt (12 bots), dedicated LLM discovery files (llms.txt + llms-full.txt), bilingual RSS feeds, proper hreflang, and strong E-E-A-T signals (YC S21 alumnus, CTO at Dailybot, 14+ years experience).
 
 The remaining gaps are minor but impactful: the sitemap lacks `lastmod` timestamps (hurting crawl efficiency), the llms.txt files may be slightly stale after recent content additions, and the BlogPosting schema is missing `author.image`. These are low-effort, high-impact fixes.
 
@@ -57,7 +57,7 @@ The remaining gaps are minor but impactful: the sitemap lacks `lastmod` timestam
   |--------|----------|---------|
   | WebSite | BaseHead.astro (global) | Complete: name, url, description, inLanguage, potentialAction (SearchAction) |
   | Person | BaseHead.astro (global) | Complete: name, url, image, jobTitle, worksFor, alumniOf, sameAs (4 profiles) |
-  | Organization | BaseHead.astro (global) | Complete: DailyBot with url, logo, description, sameAs |
+  | Organization | BaseHead.astro (global) | Complete: Dailybot with url, logo, description, sameAs |
   | Person (enhanced) | AboutPage.astro | Complete: name, alternateName, url, jobTitle, sameAs |
   | BlogPosting | BlogPostPage.astro | Strong: headline, description, image, dates, author, publisher, keywords, wordCount, timeRequired, inLanguage, articleSection |
   | BreadcrumbList | Multiple pages | Consistent across blog posts, about, contact |
@@ -83,10 +83,10 @@ The remaining gaps are minor but impactful: the sitemap lacks `lastmod` timestam
 - **Author Identity:**
   - Consistent name: "the Deep Work Plan team" / "Deep Work Plan" across all schemas
   - Default image: `/images/og-default.png`
-  - Maintainer: DailyBot
+  - Maintainer: Dailybot
   - Social profiles: GitHub, LinkedIn, X (`sameAs` links)
 - **Institutional Signals:**
-  - Organization schema for DailyBot
+  - Organization schema for Dailybot
   - Y Combinator S21 (`alumniOf` in Person schema)
   - 14+ years experience referenced
 - **About Page:** Full bio, passions, quick facts, CV link, contact CTA

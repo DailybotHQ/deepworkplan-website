@@ -22,7 +22,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Step 1 - ⚙️ Setup GitHub Config
         run: |
-          git config user.name "🤖 DailyBot"
+          git config user.name "🤖 Dailybot"
           git config user.email "ops@dailybot.com"
       - name: Step 2 - ⚙️ Download changes from branch with upgrades
         id: creating_pr_step
