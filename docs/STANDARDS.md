@@ -292,7 +292,7 @@ Use the registered brand tokens for brand-consistent styling:
 <!-- Dark branded background (Ink) -->
 <div class="bg-main text-white">
 
-<!-- Accent elements (Indigo) -->
+<!-- Accent elements (oxblood) -->
 <button class="bg-secondary hover:bg-secondary/90 text-white">
 <a class="text-secondary hover:opacity-85">
 ```

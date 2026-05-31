@@ -334,8 +334,6 @@ Umami custom events are used to track specific user interactions beyond page vie
 | `social_click` | Footer social link | `{ platform }` | Footer.astro |
 | `outbound_click` | External link click | `{ url }` | MainLayout.astro (delegated) |
 | `scroll_depth` | Scroll milestone | `{ depth }` | BlogPostPage.astro |
-| `scroll_to_timeline` | Scroll-to-timeline button | — | ScrollToTimeline.svelte |
-| `timeline_click` | Timeline card title click | `{ page, slug }` | PortfolioTimeline, DailyBotTimeline, EntrepreneurTimeline, TechTalksTimeline, TradingTimeline |
 | `ai_bot_visit` | AI crawler page visit (server-side) | `{ bot, path, method }` | `functions/_middleware.ts` (edge middleware) |
 | `markdown_request` | Markdown endpoint request (server-side) | `{ bot, path, source, user_agent }` | `functions/_middleware.ts` (edge middleware) |
 
@@ -362,7 +360,6 @@ Umami custom events are used to track specific user interactions beyond page vie
 | `contact_form_submit` | Submit the contact form | `reason: "project"` |
 | `social_click` | Click GitHub/LinkedIn in footer | `platform: "github"` |
 | `scroll_depth` | Scroll to bottom of a blog post | `depth: "100"` |
-| `timeline_click` | Click a post title in any timeline | `page: "portfolio"`, `slug: "..."` |
 
 ### How to Add New Events
 

@@ -23,6 +23,30 @@ import InternalLayout from '@/layouts/InternalLayout.astro';
     </div>
   </section>
 
+  <!-- Project context: editorial design + /init adoption -->
+  <section class="mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-5">
+        <div class="text-lg font-semibold mb-2">Editorial design system</div>
+        <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+          The site uses the "Broadsheet" editorial palette — warm paper backgrounds, ink text, and a
+          restrained oxblood accent — with serif display and body typography (and a monospace face for
+          code). Tokens live in <code>src/styles/global.css</code>; primitives in
+          <code>src/components/editorial/</code>. See the UI Design System for swatches and type specimens.
+        </p>
+      </div>
+      <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-5">
+        <div class="text-lg font-semibold mb-2">/init adoption endpoint</div>
+        <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+          DWP is AI-first and agent-pilotable: the repository becomes the harness. <code>/init</code>
+          is the canonical adoption surface (with <code>/setup</code> and <code>/onboarding</code>
+          redirects and a <code>/init.md</code> agent prompt). The installable kit/preset lives in the
+          <code>DailybotHQ/deepworkplan-skill</code> repository, which the site documents and links to.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Quick Start -->
   <section class="mb-12">
     <h2 class="text-2xl md:text-3xl font-bold mb-6">Quick Start</h2>
@@ -60,7 +84,7 @@ import InternalLayout from '@/layouts/InternalLayout.astro';
       <a href="/internal/guide" class="rounded-2xl border border-gray-200 dark:border-gray-700 p-5 hover:shadow-md transition-shadow group">
         <div class="text-xl font-semibold mb-2 group-hover:underline">Staff Guide</div>
         <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-          Complete guide to working with this repository: tech stack, slides, blog, i18n, SEO, AI tools, and more.
+          Complete guide to working with this repository: tech stack, content collections, i18n, SEO, AI tools, and more.
         </p>
         <span class="inline-block mt-3 text-xs font-medium text-gray-600 dark:text-gray-300">9 pages</span>
       </a>

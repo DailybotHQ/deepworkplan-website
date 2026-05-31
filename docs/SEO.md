@@ -249,6 +249,14 @@ Every page and blog post serves native Markdown for AI consumption:
 | `public/llms-full.txt` | Comprehensive site description | Major content or structure changes |
 | `public/robots.txt` | AI crawler allow directives | New AI crawlers emerge |
 
+### Agent adoption endpoint
+
+The canonical adoption surface ships an agent-facing Markdown prompt at **`/init.md`** (and `/es/init.md`),
+generated from `src/content/pages/{en,es}/init.md` via the dynamic `[page].md.ts` route. It is a
+self-contained "give this to your agent" onboarding prompt: install the `DailybotHQ/deepworkplan-skill`,
+onboard the agent, and generate/execute long-horizon plans. `llms.txt` lists both `/init` and `/init.md`
+so crawlers and agents can discover it.
+
 ### Maintenance
 
 When adding a new page section:

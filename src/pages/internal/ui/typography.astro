@@ -70,24 +70,56 @@ const textSizes = [
 
 <ShowcaseLayout title="Typography" description="Type scale, font weights, and hierarchy patterns" section="typography">
 
-  <!-- Font Family -->
+  <!-- Font Families — "The Broadsheet" editorial type system -->
   <section class="mb-12" data-component="font-family">
-    <h2 class="text-xl md:text-2xl font-bold mb-4">Font Family</h2>
-    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
-      <div class="text-3xl font-bold mb-2">Atkinson Hyperlegible</div>
-      <p class="text-gray-600 dark:text-gray-300 mb-4">
-        Designed for maximum legibility. Two weights loaded: Regular (400) and Bold (700).
-      </p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div class="p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
-          <div class="text-sm text-gray-600 dark:text-gray-300 mb-1">Regular (400)</div>
-          <div class="text-2xl font-normal">The quick brown fox jumps over the lazy dog</div>
-        </div>
-        <div class="p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
-          <div class="text-sm text-gray-600 dark:text-gray-300 mb-1">Bold (700)</div>
-          <div class="text-2xl font-bold">The quick brown fox jumps over the lazy dog</div>
-        </div>
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Font Families</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Serif-led "Broadsheet" type system. Tokens live in <code>src/styles/global.css</code>
+      (<code>--font-serif</code> / <code>--font-sans</code> / <code>--font-mono</code>), mapped to
+      Tailwind's <code>font-serif</code> / <code>font-sans</code> / <code>font-mono</code> utilities.
+    </p>
+    <div class="space-y-4">
+      <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
+        <div class="text-sm text-secondary font-semibold uppercase tracking-widest mb-1">Serif — display + body (--font-serif)</div>
+        <p class="text-xs text-gray-600 dark:text-gray-300 mb-3">
+          The site default. Used for headings and long-form body in the methodology, spec, and kit readers.
+          Self-contained system serif stack (Iowan Old Style / Newsreader / Source Serif 4 / Georgia).
+        </p>
+        <div class="font-serif text-3xl mb-1">The quick brown fox jumps over the lazy dog</div>
+        <div class="font-serif text-base">The quick brown fox jumps over the lazy dog. 0123456789.</div>
       </div>
+      <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
+        <div class="text-sm text-secondary font-semibold uppercase tracking-widest mb-1">Sans — UI chrome (--font-sans)</div>
+        <p class="text-xs text-gray-600 dark:text-gray-300 mb-3">
+          Atkinson Hyperlegible fallback for navigation, buttons, and small labels.
+        </p>
+        <div class="font-sans text-2xl mb-1">The quick brown fox jumps over the lazy dog</div>
+        <div class="font-sans text-base">The quick brown fox jumps over the lazy dog. 0123456789.</div>
+      </div>
+      <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
+        <div class="text-sm text-secondary font-semibold uppercase tracking-widest mb-1">Mono — code (--font-mono)</div>
+        <p class="text-xs text-gray-600 dark:text-gray-300 mb-3">Code blocks and inline code.</p>
+        <div class="font-mono text-base">const repository = harness; // 0123456789</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial primitives -->
+  <section class="mb-12" data-component="editorial-primitives">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Editorial primitives</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Kickers, drop caps, pull quotes, hairline rules, figure captions, and references are styled in
+      <code>src/styles/global.css</code> (utilities <code>.kicker</code>, <code>.lead</code>,
+      <code>.drop-cap</code>, <code>.font-display</code>, <code>.fig-caption</code>,
+      <code>.reference-item</code>) and exposed as components in <code>src/components/editorial/</code>
+      (<code>Kicker</code>, <code>Rule</code>, <code>Lead</code>, <code>Figure</code>, <code>Reference</code>).
+    </p>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-6 space-y-4">
+      <div class="kicker">Specification</div>
+      <p class="lead drop-cap">
+        The repository becomes the harness — the plan, the validation gates, and the completion
+        protocol travel with the code so any agent can be piloted against it.
+      </p>
     </div>
   </section>
 

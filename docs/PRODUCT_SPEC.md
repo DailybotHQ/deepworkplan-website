@@ -41,7 +41,7 @@ Build a fast, accessible, bilingual site that:
 
 **Purpose:** Communicate what DWP is, who it is for, and where to go next — fast.
 
-**Sections:** A hero that states the methodology and value proposition; a concise "what is a Deep Work Plan" explainer; the core principles (single-task focus, validation-first, git-native, resume-safe); entry points into the methodology reader, the spec reader, and the kit catalog; and a clear primary call to action.
+**Sections:** A hero that states the AI-first / agent-pilotable positioning and value proposition; a concise "what is a Deep Work Plan" explainer; the two narrative pillars (spec-driven development, harness engineering); the core principles (single-task focus, validation-first, git-native, resume-safe); entry points into the methodology reader, the spec reader, the kit catalog, and the `/init` adoption endpoint; and a clear primary call to action.
 
 ### 2. Methodology Reader
 
@@ -70,8 +70,19 @@ Build a fast, accessible, bilingual site that:
 - Bilingual content collection (`kit/{en,es}/`)
 - Presets, adapters, and commands (`/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`)
 - Guidance for installing DWP into an existing repo
+- Cross-links to the companion skill repo [`DailybotHQ/deepworkplan-skill`](https://github.com/DailybotHQ/deepworkplan-skill)
 
-### 5. Agent-Friendly Markdown Endpoints (AEO)
+### 5. Adoption Endpoint (`/init`)
+
+**Purpose:** Give humans and agents a single canonical place to start adopting DWP.
+
+**Features:**
+- HTML page at `/init` (and `/es/init`) with a "Give this to your agent" handoff block and a numbered install → onboard → plan/execute sequence framed by the two narrative pillars
+- A self-contained, copy-pasteable agent onboarding prompt at `/init.md` (and `/es/init.md`)
+- Permanent redirects from `/setup` and `/onboarding` (plus `/es/` variants) to `/init`
+- Stays in sync with the companion skill repo `DailybotHQ/deepworkplan-skill`
+
+### 6. Agent-Friendly Markdown Endpoints (AEO)
 
 **Purpose:** Make site content natively accessible to AI agents and LLMs.
 
@@ -83,7 +94,7 @@ Build a fast, accessible, bilingual site that:
 
 **Technical details:** See [Markdown for Agents](aeo/MARKDOWN_FOR_AGENTS.md)
 
-### 6. Bilingual Support
+### 7. Bilingual Support
 
 **Purpose:** Reach a broader audience at full parity.
 
@@ -96,7 +107,7 @@ Build a fast, accessible, bilingual site that:
 - `lang` prop passed to page components (page-wrapper pattern)
 - Spanish content carries full diacritics (`ñ`, tildes, `¿`/`¡`)
 
-### 7. Blog Engine (Dormant)
+### 8. Blog Engine (Dormant)
 
 **Purpose:** Reserved for future **case studies** about applying the methodology.
 
@@ -120,7 +131,7 @@ The blog engine (MDX posts, series, multi-author, tag taxonomy, RSS, search) is 
 
 ### Color Palette & Typography
 
-See **[Brand Guide](BRAND_GUIDE.md)** for the complete palette (Ink & Paper neutrals + Indigo accent), typography system, logo, and usage guidelines.
+See **[Brand Guide](BRAND_GUIDE.md)** for the complete "Broadsheet" palette (warm paper + ink + oxblood accent), serif typography system, logo, and usage guidelines.
 
 ## Technical Requirements
 

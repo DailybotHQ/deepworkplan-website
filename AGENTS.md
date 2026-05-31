@@ -24,7 +24,7 @@
 | Security | [Security](docs/SECURITY.md) | Static site security best practices |
 | Documentation | [Documentation Guide](docs/DOCUMENTATION_GUIDE.md) | When and how to update docs |
 | Product | [Product Spec](docs/PRODUCT_SPEC.md) | Product vision, features, website goals |
-| Brand | [Brand Guide](docs/BRAND_GUIDE.md) | Visual identity, colors, typography |
+| Brand | [Brand Guide](docs/BRAND_GUIDE.md) | "Broadsheet" editorial identity: warm paper, ink serif, oxblood accent, editorial primitives |
 | Analytics | [Analytics](docs/ANALYTICS.md) | Tracking, GSC, verification |
 | AI Agents | [Agent Onboarding](docs/AI_AGENT_ONBOARDING.md), [Agent Collaboration](docs/AI_AGENT_COLLAB.md) | Setup, handoff, coordination |
 | Skills/Agents | [Skills & Agents Catalog](.agents/docs/skills_agents_catalog.md) | Available skills and agents |
@@ -32,9 +32,16 @@
 
 ## Project Overview
 
-**Deep Work Plan** ([deepworkplan.com](https://deepworkplan.com)) — The official website for the Deep Work Plan (DWP) methodology: a structured approach to planning and executing complex software work with AI coding agents. A serious, neutral, fast documentation-and-marketing site built with Astro. Modern design with dark mode, bilingual content (en/es), static site architecture deployed to Cloudflare Pages.
+**Deep Work Plan** ([deepworkplan.com](https://deepworkplan.com)) — The official website for the Deep Work Plan (DWP) methodology: the methodology that turns any repository into an **AI-first, agent-pilotable** codebase. DWP documents a repo (AGENTS.md, docs, `.agents/` skills, the DWP skill), enables **long-horizon plans**, and lets **any agent pilot the repo** against explicit acceptance criteria and validation gates. A serious, neutral, fast documentation-and-marketing site built with Astro, in the **"Broadsheet" editorial design system** (warm paper, ink serif display, hairline rules, restrained oxblood accent), with dark mode, bilingual content (en/es), static site architecture deployed to Cloudflare Pages.
 
-The site explains and sells the DWP methodology, hosts the readable specification and kit catalog, and ships agent-friendly Markdown endpoints. The repository **dogfoods** the methodology it documents.
+The site explains and positions the DWP methodology, hosts the readable specification and kit catalog, ships agent-friendly Markdown endpoints, and exposes a canonical adoption endpoint at **`/init`**. The repository **dogfoods** the methodology it documents.
+
+**Positioning — two narrative pillars** (weave through all copy):
+
+1. **Spec-driven development (SDD).** The plan/spec is the durable source of truth; agents execute against explicit acceptance criteria and validation gates (reduces drift, enables verification, survives across sessions/agents). DWP's plan → atomic tasks → gates → completion loop *is* SDD — and unlike tool-bound SDD (GitHub Spec Kit, Amazon Kiro, Tessl), DWP is **tool-agnostic and repo-native**.
+2. **Harness engineering — the repository is the harness.** DWP delivers the agent scaffolding (context, tools, control loop, guardrails, state/resumability) as a **portable methodology + kit installed into the repository**, not a per-tool framework — so any agent can pilot any repo. One-liner: *"Deep Work Plan is spec-driven development where the repository itself becomes the harness."*
+
+**Companion skill repo:** the site is paired with **[`DailybotHQ/deepworkplan-skill`](https://github.com/DailybotHQ/deepworkplan-skill)** (DWP packaged as an installable agent skill). Adoption messaging (the `/init` endpoint, methodology, and kit) stays in sync with that repo: install the skill → onboard the agent → generate and execute long-horizon plans. Do **not** reference "Cal Newport"; the DWP name stands on its own (focused, long-horizon agent execution). Design-system reference: **[Brand Guide](docs/BRAND_GUIDE.md)** (palette + serif type + editorial primitives in `src/components/editorial/`).
 
 **Content model:** methodology documentation is primary; the blog engine is kept **dormant** (hidden from navigation, available later for case studies); slides/tech-talks and personal pages have been removed.
 
@@ -428,7 +435,7 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 21. **Use Spanish slugs for blog posts or series** — all slugs (filenames, series names, image directories) MUST be in English, even for Spanish content
 22. **Re-introduce removed surfaces** — slides/tech-talks and the personal pages (cv, portfolio, dailybot, foodie, hobbies, trading, entrepreneur) have been removed from this site. Do not add them back or reference them.
 23. **Publish blog posts during the methodology build** — the blog engine is dormant and hidden from nav; only reactivate it for case studies when explicitly asked.
-24. **Add a new top-level page without updating `src/middleware.ts`** — the middleware has a hardcoded allowlist (`KNOWN_ROOT_PATHS` / `KNOWN_ES_PATHS`). New top-level routes (`/foo`, `/es/foo`) return 404 until added to the allowlist. Symptom: dev log shows `[404] (rewrite) /foo` (the `(rewrite)` is the smoking gun — it comes from `context.rewrite()` in the middleware, not from Astro routing). Multi-segment paths like `/foo/bar` and any path containing `.` bypass the rule, which is why deck detail pages can work while the listing page 404s. See [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
+24. **Add a new top-level page without updating `src/middleware.ts`** — the middleware has a hardcoded allowlist (`KNOWN_ROOT_PATHS` / `KNOWN_ES_PATHS`). New top-level routes (`/foo`, `/es/foo`) return 404 until added to the allowlist. Symptom: dev log shows `[404] (rewrite) /foo` (the `(rewrite)` is the smoking gun — it comes from `context.rewrite()` in the middleware, not from Astro routing). Multi-segment paths like `/foo/bar` and any path containing `.` bypass the rule, which is why deck detail pages can work while the listing page 404s. The canonical adoption endpoint `/init` (plus its `/setup` and `/onboarding` redirects) and their `/es/` variants are already in the allowlist; keep them there. See [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
 
 ### DO:
 

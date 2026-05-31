@@ -176,12 +176,12 @@ Custom theme colors in `global.css`:
 ```css
 @theme {
   --color-main: #0e1116;      /* Ink — dark base / branded surfaces */
-  --color-secondary: #4f46e5; /* Indigo — light mode accent */
+  --color-secondary: #7a1f1f; /* Oxblood — light mode accent */
   --color-gray-50: #f1f5f9;   /* Slightly stronger light surface contrast */
 }
 
 .dark {
-  --color-secondary: #818cf8; /* Lightened indigo for dark mode readability */
+  --color-secondary: #c2554d; /* Lightened oxblood for dark mode readability */
 }
 ```
 
@@ -189,23 +189,23 @@ Use in Tailwind:
 
 ```html
 <div class="bg-main">Dark branded background (Ink)</div>
-<span class="text-secondary">Accent text (Indigo)</span>
+<span class="text-secondary">Accent text (oxblood)</span>
 ```
 
 ### Accent Token Behavior by Theme
 
 | Token | Light Mode | Dark Mode | Why |
 |-------|-----------|-----------|-----|
-| `--color-secondary` | `#4F46E5` | `#818CF8` | Keeps brand identity while improving readability on dark backgrounds |
+| `--color-secondary` | `#7A1F1F` | `#C2554D` | Restrained oxblood masthead accent; lightened in dark mode for readability |
 | `--color-gray-50` | `#F1F5F9` | N/A | Improves separation between adjacent light surfaces |
 
 Implementation note:
 
 - Components should keep using `bg-secondary`, `text-secondary`, and `border-secondary`.
-- Avoid hardcoding accent shades (e.g. `text-indigo-*`) for primary accent elements.
+- Avoid hardcoding accent shades (e.g. `text-red-*`) for primary accent elements; use `text-secondary`.
 - The dark accent adjustment is global and automatic via `.dark`.
 
-> **Full palette:** See **[Brand Guide](../BRAND_GUIDE.md)** for the complete color system (Ink, Indigo, neutral grays, Pure White), dark/light mode pairing rules, and usage guidelines.
+> **Full palette:** See **[Brand Guide](../BRAND_GUIDE.md)** for the complete "Broadsheet" color system (warm paper, ink, oxblood accent, hairline rules), dark/light mode pairing rules, and usage guidelines.
 
 ## Storage
 

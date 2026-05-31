@@ -103,8 +103,12 @@ src/
 │   │   ├── ProjectsSection.astro
 │   │   └── SkillsSection.astro
 │   │
+│   ├── editorial/          # Editorial primitives (Kicker, Rule, Lead, Figure, Reference)
+│   │
+│   ├── pages/              # Shared page components (*Page.astro, InitPage)
+│   │
 │   └── layout/
-│       ├── Header.svelte        # Main navigation
+│       ├── Header.svelte        # Masthead navigation
 │       └── MobileMenu.svelte    # Mobile nav menu
 │
 ├── content/                 # Content Collections
@@ -470,6 +474,14 @@ When you add a new top-level page (e.g. `/slides`, `/foo`), you MUST also add `'
 
 The bypass conditions (path contains `.` or starts with `/_astro/`, `/__vite`, `/@`) exist to let assets, HMR, and build artifacts through.
 
+**Adoption endpoint `/init`.** The canonical adoption surface lives at `/init` (EN) and `/es/init` (ES),
+served by `InitPage.astro` + thin wrappers. `init` is present in both `KNOWN_ROOT_PATHS` and
+`KNOWN_ES_PATHS`. Its agent prompt is published at `/init.md` (and `/es/init.md`) through the dynamic
+`[page].md.ts` route, sourced from `src/content/pages/{en,es}/init.md`. `/setup` and `/onboarding` (plus
+`/es/` variants) are permanent 301 redirects to `/init`, configured in `astro.config.mjs`; the redirect
+source paths are also in the allowlist. ES redirect destinations use absolute URLs because Astro strips the
+`/es` locale segment from relative redirect targets.
+
 ## API Routes
 
 ### Endpoint Pattern
@@ -612,8 +624,13 @@ export default {
 @import 'tailwindcss';
 
 @theme {
-  --color-main: #0f1124;
-  --color-secondary: #e41541;
+  --color-paper: #f7f4ec; /* Warm newsprint paper (light bg) */
+  --color-ink: #1b1a17; /* Warm near-black ink (body text) */
+  --color-main: #14140f; /* Branded / dark surfaces (masthead) */
+  --color-secondary: #7a1f1f; /* Restrained oxblood accent */
+  --font-serif: "Newsreader", Georgia, serif; /* Serif display + body */
+  --font-sans: "Atkinson", system-ui, sans-serif; /* Legible fallback */
+  --font-mono: ui-monospace, monospace;
 }
 
 /* Global utilities */
@@ -621,6 +638,18 @@ export default {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 }
 ```
+
+### Editorial design system
+
+The site uses the "Broadsheet" editorial system — serif-led, warm paper, ink type, hairline rules, and a
+single restrained oxblood accent. `@theme` defines `--font-serif` (a self-contained system serif stack used
+for both headings and body), `--font-sans` (Atkinson Hyperlegible fallback), and `--font-mono`, mapped to
+Tailwind's `font-serif` / `font-sans` / `font-mono` utilities. `global.css` also adds editorial utilities
+(`.font-display`, `.kicker`, `.lead`, `.drop-cap`, `.fig-caption`, `.reference-item`, `.nums-tabular`,
+`.main-container`). Reusable primitives live in **`src/components/editorial/`**: `Kicker.astro`,
+`Rule.astro`, `Lead.astro`, `Figure.astro`, and `Reference.astro` — all dark-mode aware and WCAG AA. The
+header (`Header.svelte`) renders as a newspaper masthead with a hairline rule. See the
+[Brand Guide](BRAND_GUIDE.md) for the full palette and type system.
 
 ### Dark Mode
 
