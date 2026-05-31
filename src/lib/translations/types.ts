@@ -72,6 +72,7 @@ export interface SiteTranslations {
     spec: string;
     kit: string;
     examples: string;
+    init: string;
     github: string;
     menu: string;
     closeMenu: string;
@@ -567,6 +568,32 @@ export interface SiteTranslations {
     intro: string;
     sequenceTitle: string;
     codeLabel: string;
+    orLabel: string;
+    steps: {
+      title: string;
+      description: string;
+      commands?: string[];
+    }[];
+    outcomeTitle: string;
+    outcome: string;
+    nextStepsTitle: string;
+    nextSteps: { label: string; href: string }[];
+  };
+
+  // Deep Work Plan — Init / adoption endpoint
+  initPage: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    intro: string;
+    handoffTitle: string;
+    handoffBody: string;
+    handoffInstruction: string;
+    handoffMdLabel: string;
+    codeLabel: string;
+    whatTitle: string;
+    whatBody: string[];
+    sequenceTitle: string;
     orLabel: string;
     steps: {
       title: string;

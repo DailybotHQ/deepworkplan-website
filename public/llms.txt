@@ -14,6 +14,7 @@ Deep Work Plan applies Cal Newport's idea of deep work to AI coding agents. It d
 - Kit: /kit — presets, adapters, and commands for installing DWP into a repository
 - Examples: /examples — worked examples of the methodology in practice
 - Quickstart: /quickstart — get DWP running in a repo quickly
+- Init / Adoption: /init — make any repository AI-first: install the skill, onboard the repo, then plan and execute. Self-contained agent prompt at /init.md
 - About: /about — what DWP is and who maintains it (Dailybot)
 - Contact: /contact — how to engage with the project on GitHub
 
@@ -31,6 +32,7 @@ Deep Work Plan applies Cal Newport's idea of deep work to AI coding agents. It d
 Every rendered page is available as native source Markdown for AI agents:
 
 - Page Markdown: /{page}.md (EN), /es/{page}.md (ES)
+- Onboarding prompt: /init.md — a self-contained prompt you can paste into an agent to make a repository AI-first
 - Content Negotiation: send `Accept: text/markdown` to get Markdown for any page
 - Content-Type: text/markdown; charset=utf-8
 - Source Markdown — not HTML-to-Markdown conversion

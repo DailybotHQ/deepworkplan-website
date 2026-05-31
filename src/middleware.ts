@@ -37,6 +37,9 @@ const KNOWN_ROOT_PATHS = new Set([
   'kit',
   'examples',
   'quickstart',
+  'init',
+  'setup',
+  'onboarding',
   'api',
   'es',
   'internal',
@@ -56,6 +59,9 @@ const KNOWN_ES_PATHS = new Set([
   'kit',
   'examples',
   'quickstart',
+  'init',
+  'setup',
+  'onboarding',
   'rss.xml',
 ]);
 

@@ -22,6 +22,7 @@ export const es: SiteTranslations = {
     spec: 'Especificación',
     kit: 'Kit',
     examples: 'Ejemplos',
+    init: 'Init',
     github: 'GitHub',
     menu: 'Abrir menú',
     closeMenu: 'Cerrar menú',
@@ -949,6 +950,64 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
       { label: 'Leer la metodología', href: '/methodology' },
       { label: 'Explorar el kit', href: '/kit' },
       { label: 'Ver ejemplos', href: '/examples' },
+    ],
+  },
+
+  // Deep Work Plan — Init / endpoint de adopción
+  initPage: {
+    meta: {
+      title: 'Init — Convierte tu repositorio en AI-first',
+      description:
+        'Adopta la metodología Deep Work Plan en cualquier repositorio. Instala la skill, ejecuta la incorporación del agente y luego planifica y ejecuta con cualquier agente de programación de IA.',
+    },
+    eyebrow: 'Adopción',
+    title: 'Convierte este repositorio en AI-first',
+    intro:
+      'Un solo endpoint para convertir cualquier repositorio en una base de código guiada por especificación y lista para agentes. Instala la skill, deja que un agente incorpore el repo y luego planifica y ejecuta trabajo estructurado con cualquier agente de programación.',
+    handoffTitle: 'Dale esto a tu agente',
+    handoffBody:
+      'Pega la línea de abajo en tu agente de programación con IA. Leerá la metodología y la especificación, instalará la skill e incorporará este repositorio para los Deep Work Plans.',
+    handoffInstruction:
+      'Sigue las instrucciones en https://deepworkplan.com/init para convertir este repositorio en AI-first.',
+    handoffMdLabel: 'Instrucción autocontenida para el agente',
+    codeLabel: 'agente',
+    whatTitle: 'Qué hace esto',
+    whatBody: [
+      'La adopción cambia el repositorio de dos maneras duraderas: los pilares de la metodología.',
+      'Primero, el repositorio se vuelve guiado por especificación: el trabajo comienza desde un plan y una especificación escritos, no desde prompts improvisados. Segundo, el repositorio mismo se convierte en el harness del agente: un AGENTS.md, una base de conocimiento docs/ y un hogar de skills .agents/ dan a cada agente el contexto y los comandos que necesita.',
+    ],
+    sequenceTitle: 'La secuencia de adopción',
+    orLabel: 'o',
+    steps: [
+      {
+        title: 'Instala la skill',
+        description:
+          'Añade la skill de Deep Work Plan a tu entorno para que cualquier agente pueda planificar y ejecutar trabajo estructurado.',
+        commands: [
+          'npx skills add DailybotHQ/deepworkplan-skill',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
+        ],
+      },
+      {
+        title: 'Ejecuta la incorporación',
+        description:
+          'Pide al agente que incorpore el repositorio. Escribe un AGENTS.md que describe cómo trabajan los agentes aquí, siembra docs/ con el conocimiento del proyecto que los agentes necesitan e instala el hogar de skills .agents/ con los comandos de Deep Work Plan ya conectados.',
+      },
+      {
+        title: 'Planifica y ejecuta',
+        description:
+          'Genera Deep Work Plans para cualquier tarea y ejecútalos con cualquier agente de programación. El plan lleva tareas numeradas, compuertas de validación y un protocolo de finalización para que el trabajo siga siendo estructurado y verificable.',
+      },
+    ],
+    outcomeTitle: 'El resultado',
+    outcome:
+      'El repositorio se vuelve guiado por especificación y el repositorio mismo se convierte en el harness del agente: el contexto y los comandos viajan con el código.',
+    nextStepsTitle: 'Lee a continuación',
+    nextSteps: [
+      { label: 'Inicio rápido', href: '/quickstart' },
+      { label: 'Metodología', href: '/methodology' },
+      { label: 'Especificación', href: '/spec' },
+      { label: 'Kit', href: '/kit' },
     ],
   },
 };

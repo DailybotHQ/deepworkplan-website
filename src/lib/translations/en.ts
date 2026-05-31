@@ -22,6 +22,7 @@ export const en: SiteTranslations = {
     spec: 'Spec',
     kit: 'Kit',
     examples: 'Examples',
+    init: 'Init',
     github: 'GitHub',
     menu: 'Open menu',
     closeMenu: 'Close menu',
@@ -941,6 +942,64 @@ I currently focus on AI applications, developer productivity, and high-impact pr
       { label: 'Read the methodology', href: '/methodology' },
       { label: 'Browse the kit', href: '/kit' },
       { label: 'See examples', href: '/examples' },
+    ],
+  },
+
+  // Deep Work Plan — Init / adoption endpoint
+  initPage: {
+    meta: {
+      title: 'Init — Make your repository AI-first',
+      description:
+        'Adopt the Deep Work Plan methodology in any repository. Install the skill, run agent onboarding, then plan and execute with any AI coding agent.',
+    },
+    eyebrow: 'Adoption',
+    title: 'Make this repository AI-first',
+    intro:
+      'One endpoint to turn any repository into a spec-driven, agent-ready codebase. Install the skill, let an agent onboard the repo, then plan and execute structured work with any coding agent.',
+    handoffTitle: 'Give this to your agent',
+    handoffBody:
+      'Paste the line below into your AI coding agent. It will read the methodology and specification, install the skill, and onboard this repository for Deep Work Plans.',
+    handoffInstruction:
+      'Follow the instructions at https://deepworkplan.com/init to make this repository AI-first.',
+    handoffMdLabel: 'Self-contained agent prompt',
+    codeLabel: 'agent',
+    whatTitle: 'What this does',
+    whatBody: [
+      'Adoption changes the repository in two durable ways — the pillars of the methodology.',
+      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, and a .agents/ skill home give every agent the context and commands it needs.',
+    ],
+    sequenceTitle: 'The adoption sequence',
+    orLabel: 'or',
+    steps: [
+      {
+        title: 'Install the skill',
+        description:
+          'Add the Deep Work Plan skill to your environment so any agent can plan and execute structured work.',
+        commands: [
+          'npx skills add DailybotHQ/deepworkplan-skill',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
+        ],
+      },
+      {
+        title: 'Run onboarding',
+        description:
+          'Ask the agent to onboard the repository. It writes AGENTS.md describing how agents work here, seeds docs/ with the project knowledge agents need, and installs the .agents/ skill home with the Deep Work Plan commands wired in.',
+      },
+      {
+        title: 'Plan and execute',
+        description:
+          'Generate Deep Work Plans for any task and execute them with any coding agent. The plan carries numbered tasks, validation gates, and a completion protocol so work stays structured and verifiable.',
+      },
+    ],
+    outcomeTitle: 'The outcome',
+    outcome:
+      'The repository becomes spec-driven and the repository itself becomes the agent harness — context and commands travel with the code.',
+    nextStepsTitle: 'Read next',
+    nextSteps: [
+      { label: 'Quickstart', href: '/quickstart' },
+      { label: 'Methodology', href: '/methodology' },
+      { label: 'Spec', href: '/spec' },
+      { label: 'Kit', href: '/kit' },
     ],
   },
 };

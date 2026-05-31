@@ -25,6 +25,15 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
+  // /init is the canonical adoption endpoint. /setup and /onboarding (and their
+  // /es/ variants) are permanent redirects to it — one page, one .md endpoint,
+  // no canonical/AEO duplication.
+  redirects: {
+    '/setup': { status: 301, destination: '/init' },
+    '/onboarding': { status: 301, destination: '/init' },
+    '/es/setup': { status: 301, destination: '/es/init' },
+    '/es/onboarding': { status: 301, destination: '/es/init' },
+  },
   markdown: {
     rehypePlugins: [
       [
