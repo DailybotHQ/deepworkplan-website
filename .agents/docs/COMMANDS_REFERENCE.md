@@ -29,13 +29,18 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 
 ## Deep Work Plans
 
+> The `dwp-*` command files are **thin delegators**: each routes to the installed
+> `deepworkplan` skill (`.agents/skills/deepworkplan/SKILL.md` and its create/execute/
+> refine/resume/status sub-skills), which holds the canonical procedure. Plans and
+> drafts land in the gitignored `.dwp/` (`.dwp/plans/`, `.dwp/drafts/`).
+
 | Command | Procedure File | Description |
 |---------|---------------|-------------|
-| `/dwp-create` | `.agents/commands/dwp-create.md` | Create a deep work plan (unified flow: info, draft, refine, final) |
-| `/dwp-execute` | `.agents/commands/dwp-execute.md` | Execute an existing deep work plan |
-| `/dwp-refine` | `.agents/commands/dwp-refine.md` | Refine a draft or modify an existing final plan |
-| `/dwp-resume` | `.agents/commands/dwp-resume.md` | Resume an interrupted deep work plan |
-| `/dwp-status` | `.agents/commands/dwp-status.md` | Check status of deep work plans without executing |
+| `/dwp-create` | `.agents/commands/dwp-create.md` → `.agents/skills/deepworkplan/SKILL.md` | Create a deep work plan (unified flow: info, draft, refine, final) |
+| `/dwp-execute` | `.agents/commands/dwp-execute.md` → `.agents/skills/deepworkplan/SKILL.md` | Execute an existing deep work plan |
+| `/dwp-refine` | `.agents/commands/dwp-refine.md` → `.agents/skills/deepworkplan/SKILL.md` | Refine a draft or modify an existing final plan |
+| `/dwp-resume` | `.agents/commands/dwp-resume.md` → `.agents/skills/deepworkplan/SKILL.md` | Resume an interrupted deep work plan |
+| `/dwp-status` | `.agents/commands/dwp-status.md` → `.agents/skills/deepworkplan/SKILL.md` | Check status of deep work plans without executing |
 
 ## Git & Version Control
 
@@ -90,15 +95,15 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 
 | Command | Procedure File | Description |
 |---------|---------------|-------------|
-| `/lib-upgrade` | `.agents/commands/lib-upgrade.md` | Upgrade project dependencies (npm packages via ncu) |
+| `/lib-upgrade` | `.agents/commands/lib-upgrade.md` → `.agents/skills/deepworkplan/addons/dependency-upgrade/SKILL.md` | Upgrade project dependencies (addon-provided thin delegator to the dependency-upgrade addon) |
 
 ## Skills & Agents Management
 
 | Command | Procedure File | Description |
 |---------|---------------|-------------|
-| `/skill-create` | `.agents/commands/skill-create.md` | Create a new skill with guided workflow |
+| `/skill-create` | `.agents/commands/skill-create.md` → `.agents/skills/deepworkplan/author/SKILL.md` | Create a new skill (thin delegator to the `deepworkplan-author` sub-skill) |
 | `/skill-list` | `.agents/commands/skill-list.md` | List all available skills with tier and description |
-| `/agent-create` | `.agents/commands/agent-create.md` | Create a new agent with guided workflow |
+| `/agent-create` | `.agents/commands/agent-create.md` → `.agents/skills/deepworkplan/author/SKILL.md` | Create a new agent (thin delegator to the `deepworkplan-author` sub-skill) |
 | `/agent-list` | `.agents/commands/agent-list.md` | List all available agents with tier and description |
 
 ---
