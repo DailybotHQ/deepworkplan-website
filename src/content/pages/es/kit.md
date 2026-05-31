@@ -1,17 +1,61 @@
 ---
 title: "El Kit de Deep Work Plan"
-description: "Comandos, adaptadores, presets y ejemplos que hacen ejecutable la metodología Deep Work Plan en distintos agentes de programación con IA y stacks tecnológicos."
-lastUpdated: 2026-05-30
+description: "La skill y sus siete sub-skills, comandos de barra, adaptadores de agente, presets de incorporación, addons opcionales y ejemplos que hacen ejecutable la metodología Deep Work Plan en distintos agentes y stacks."
+lastUpdated: 2026-05-31
 ---
 
 ## El Kit de Deep Work Plan
 
-El kit es todo lo que necesitas para ejecutar la metodología en la práctica:
+El kit es todo lo que necesitas para ejecutar la metodología en la práctica. Se instala desde
+`DailybotHQ/deepworkplan-skill`:
 
-- **Comandos** — comandos de barra (`dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`) que impulsan el bucle planificar-ejecutar-verificar.
-- **Adaptadores** — integraciones ligeras por agente para Claude Code, Cursor, Codex, Copilot, Gemini y Antigravity.
-- **Presets** — adaptaciones por stack para Django, FastAPI, React, Vue, Astro, Go, Rust y más.
-- **Ejemplos** — recorridos resueltos de antes y después.
+```bash
+npx skills add DailybotHQ/deepworkplan-skill
+```
+
+### La skill y sus sub-skills
+
+La skill de Deep Work Plan es un enrutador más siete sub-skills:
+
+- **create** — descompone un objetivo en un plan estructurado (`/dwp-create`).
+- **execute** — ejecuta un plan tarea por tarea, validando cada compuerta (`/dwp-execute`).
+- **refine** — agrega, quita o reordena tareas preservando el trabajo completado (`/dwp-refine`).
+- **resume** — reconstruye el estado y continúa un plan interrumpido (`/dwp-resume`).
+- **status** — reporta el avance sin hacer cambios (`/dwp-status`).
+- **onboard** — convierte un repositorio en AI-first (`/deepworkplan-onboard`).
+- **author** — crea o evoluciona las skills, agentes y comandos del propio repo (`/skill-create`, `/agent-create`).
+
+### Comandos
+
+Comandos de barra ligeros delegan en las sub-skills y los addons:
+
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status` — el bucle planificar-ejecutar-verificar.
+- `skill-create`, `agent-create` — delegan en la sub-skill author.
+- `lib-upgrade` — delega en el addon dependency-upgrade (se instala solo cuando se acepta ese addon).
+
+### Adaptadores
+
+Integraciones ligeras por agente para Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini
+y Antigravity.
+
+### Presets de incorporación
+
+Guías de razonamiento por stack que el flujo de onboard usa para adaptar docs, skills y comandos de
+validación — nunca plantillas. Seis presets: Django, Vue + Vite, Astro/Svelte, servicio Node/TS,
+paquete/CLI de Python y una reserva genérica.
+
+### Addons (opcionales)
+
+Capacidades opcionales que el flujo de onboard puede sumar a un repo — nunca forman parte de la base
+AI-first:
+
+- **Devcontainer** — un contenedor de desarrollo reproducible y aislado con autenticación de CLI de IA persistente.
+- **Dailybot** — reportes de avance e hitos de mejor esfuerzo para equipos que usan Dailybot.
+- **Actualización de dependencias** — actualizaciones agnósticas del gestor de paquetes, por lotes, validadas y reversibles.
+
+### Ejemplos
+
+Recorridos resueltos de antes y después.
 
 - [Explorar el kit](/es/kit)
 - [Inicio rápido](/es/quickstart)

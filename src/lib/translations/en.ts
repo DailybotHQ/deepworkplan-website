@@ -860,11 +860,12 @@ I currently focus on AI applications, developer productivity, and high-impact pr
     eyebrow: 'Kit',
     title: 'The Kit',
     intro:
-      'Everything you need to run the methodology: slash commands, agent adapters, stack presets, and worked examples.',
+      'Everything you need to run the methodology: the skill and its sub-skills, slash commands, agent adapters, onboarding presets, opt-in addons, and worked examples.',
     groups: {
       command: {
-        title: 'Commands',
-        description: 'Slash commands that drive the plan-execute-verify loop.',
+        title: 'Sub-skills & commands',
+        description:
+          'The skill router and its sub-skills (create, execute, refine, resume, status, onboard, author), plus the thin slash commands that delegate to them.',
       },
       adapter: {
         title: 'Adapters',
@@ -872,12 +873,18 @@ I currently focus on AI applications, developer productivity, and high-impact pr
           'Thin per-agent integrations for Claude, Cursor, Codex, and more.',
       },
       preset: {
-        title: 'Presets',
-        description: 'Stack-specific adaptations of the methodology.',
+        title: 'Onboarding presets',
+        description:
+          'Per-stack reasoning guides the onboard flow uses to adapt docs, skills, and validation commands to your repository.',
       },
       example: {
         title: 'Examples',
         description: 'Worked, before-and-after walkthroughs.',
+      },
+      addon: {
+        title: 'Addons (opt-in)',
+        description:
+          'Optional capabilities the onboard flow can layer onto a repo — never part of the AI-first baseline.',
       },
     },
     viewDetail: 'View details',
@@ -904,12 +911,12 @@ I currently focus on AI applications, developer productivity, and high-impact pr
     meta: {
       title: 'Quickstart — Deep Work Plan',
       description:
-        'Three ways to bring Deep Work Plan into your workflow: install the skill, use OpenClaw, or clone the repository.',
+        'Install the skill, onboard your repository, then plan and execute with any agent — the steps that make your repository spec-driven and agent-pilotable.',
     },
     eyebrow: 'Quickstart',
     title: 'Start in minutes',
     intro:
-      'Install the kit, generate a plan, and execute it with any agent — three steps that make your repository spec-driven and agent-pilotable.',
+      'Install the skill, onboard your repository, then plan and execute with any agent — the steps that make your repository spec-driven and agent-pilotable.',
     sequenceTitle: 'The adoption path',
     codeLabel: 'Terminal',
     orLabel: 'or',
@@ -917,21 +924,28 @@ I currently focus on AI applications, developer productivity, and high-impact pr
       {
         title: 'Install the Deep Work Plan skill',
         description:
-          'Add the skill to your repository. Use the Skills CLI for the fastest path, or clone the repo and run setup where git and a shell are available.',
+          'Add the skill to your repository — a router plus seven sub-skills (create, execute, refine, resume, status, onboard, author). Use the Skills CLI for the fastest path, or clone the repo and run setup where git and a shell are available.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
-        title: 'Generate a plan',
+        title: 'Onboard the repository',
         description:
-          'Describe a goal and let the methodology turn it into a Deep Work Plan: atomic tasks, explicit acceptance criteria, and validation gates that any agent can verify.',
+          'Run the onboard sub-skill and let the agent reason about your actual repo. It generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents symlink), wires the thin dwp-* commands, and scaffolds a gitignored .dwp/.',
+        commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Execute with any agent',
+        title: 'Evolve the kit and accept addons',
         description:
-          'A compatible agent executes the plan task by task, validating each gate and resuming across sessions — piloting the repository against its own spec.',
+          'Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands. Onboarding also offers three opt-in addons — devcontainer, Dailybot, and dependency-upgrade — that you accept only when they fit.',
+      },
+      {
+        title: 'Plan and execute',
+        description:
+          'Generate a Deep Work Plan and run it task by task, validating each gate and resuming across sessions — piloting the repository against its own spec.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
     ],
     outcomeTitle: 'The outcome',
@@ -966,7 +980,7 @@ I currently focus on AI applications, developer productivity, and high-impact pr
     whatTitle: 'What this does',
     whatBody: [
       'Adoption changes the repository in two durable ways — the pillars of the methodology.',
-      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, and a .agents/ skill home give every agent the context and commands it needs.',
+      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, per-module docs, and a .agents/ skill home (with the .claude → .agents symlink) give every agent the context and commands it needs.',
     ],
     sequenceTitle: 'The adoption sequence',
     orLabel: 'or',
@@ -974,21 +988,27 @@ I currently focus on AI applications, developer productivity, and high-impact pr
       {
         title: 'Install the skill',
         description:
-          'Add the Deep Work Plan skill to your environment so any agent can plan and execute structured work.',
+          'Add the Deep Work Plan skill so any agent can plan and execute structured work. The skill ships a router plus seven sub-skills — create, execute, refine, resume, status, onboard, and author.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
-        title: 'Run onboarding',
+        title: 'Run repository onboarding',
         description:
-          'Ask the agent to onboard the repository. It writes AGENTS.md describing how agents work here, seeds docs/ with the project knowledge agents need, and installs the .agents/ skill home with the Deep Work Plan commands wired in.',
+          'Invoke the onboard sub-skill and let the agent reason about the actual repo — its stack, package manager, and real validation commands. It then generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents symlink), wires the thin dwp-* commands, and scaffolds a gitignored .dwp/ for plans and drafts. Nothing is templated; everything is adapted to your repository.',
+        commands: ['/deepworkplan-onboard'],
+      },
+      {
+        title: 'Evolve the kit and accept addons',
+        description:
+          'Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands. Onboarding also offers three opt-in addons — devcontainer, Dailybot, and dependency-upgrade — that you accept only when they fit. A repo is fully conformant with zero addons.',
       },
       {
         title: 'Plan and execute',
         description:
-          'Generate Deep Work Plans for any task and execute them with any coding agent. The plan carries numbered tasks, validation gates, and a completion protocol so work stays structured and verifiable.',
+          'Generate Deep Work Plans with /dwp-create and run them with /dwp-execute, then /dwp-status, /dwp-refine, and /dwp-resume as work proceeds. Each plan carries numbered tasks, validation gates, and a completion protocol so work stays structured, reviewable, and resumable across sessions.',
       },
     ],
     outcomeTitle: 'The outcome',

@@ -867,12 +867,12 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
     eyebrow: 'Kit',
     title: 'El Kit',
     intro:
-      'Todo lo que necesitas para ejecutar la metodología: comandos de barra, adaptadores de agente, presets de stack y ejemplos resueltos.',
+      'Todo lo que necesitas para ejecutar la metodología: la skill y sus sub-skills, comandos de barra, adaptadores de agente, presets de incorporación, addons opcionales y ejemplos resueltos.',
     groups: {
       command: {
-        title: 'Comandos',
+        title: 'Sub-skills y comandos',
         description:
-          'Comandos de barra que impulsan el bucle planificar-ejecutar-verificar.',
+          'El enrutador de la skill y sus sub-skills (create, execute, refine, resume, status, onboard, author), más los comandos de barra ligeros que delegan en ellos.',
       },
       adapter: {
         title: 'Adaptadores',
@@ -880,12 +880,18 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
           'Integraciones ligeras por agente para Claude, Cursor, Codex y más.',
       },
       preset: {
-        title: 'Presets',
-        description: 'Adaptaciones de la metodología por stack.',
+        title: 'Presets de incorporación',
+        description:
+          'Guías de razonamiento por stack que el flujo de onboard usa para adaptar docs, skills y comandos de validación a tu repositorio.',
       },
       example: {
         title: 'Ejemplos',
         description: 'Recorridos resueltos de antes y después.',
+      },
+      addon: {
+        title: 'Addons (opcionales)',
+        description:
+          'Capacidades opcionales que el flujo de onboard puede sumar a un repo — nunca forman parte de la base AI-first.',
       },
     },
     viewDetail: 'Ver detalles',
@@ -912,12 +918,12 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
     meta: {
       title: 'Inicio rápido — Deep Work Plan',
       description:
-        'Tres formas de incorporar Deep Work Plan a tu flujo de trabajo: instalar la skill, usar OpenClaw o clonar el repositorio.',
+        'Instala la skill, incorpora tu repositorio y luego planifica y ejecuta con cualquier agente: los pasos que vuelven tu repositorio spec-driven y pilotable por agentes.',
     },
     eyebrow: 'Inicio rápido',
     title: 'Empieza en minutos',
     intro:
-      'Instala el kit, genera un plan y ejecútalo con cualquier agente: tres pasos que vuelven tu repositorio spec-driven y pilotable por agentes.',
+      'Instala la skill, incorpora tu repositorio y luego planifica y ejecuta con cualquier agente: los pasos que vuelven tu repositorio spec-driven y pilotable por agentes.',
     sequenceTitle: 'El camino de adopción',
     codeLabel: 'Terminal',
     orLabel: 'o',
@@ -925,21 +931,28 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
       {
         title: 'Instala la skill de Deep Work Plan',
         description:
-          'Añade la skill a tu repositorio. Usa la CLI de Skills para el camino más rápido, o clona el repositorio y ejecuta el setup donde tengas git y una shell.',
+          'Añade la skill a tu repositorio — un enrutador y siete sub-skills (create, execute, refine, resume, status, onboard, author). Usa la CLI de Skills para el camino más rápido, o clona el repositorio y ejecuta el setup donde tengas git y una shell.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
-        title: 'Genera un plan',
+        title: 'Incorpora el repositorio',
         description:
-          'Describe un objetivo y deja que la metodología lo convierta en un Deep Work Plan: tareas atómicas, criterios de aceptación explícitos y compuertas de validación que cualquier agente puede verificar.',
+          'Ejecuta la sub-skill de onboard y deja que el agente razone sobre tu repositorio real. Genera AGENTS.md, una base de conocimiento docs/, docs por módulo y un hogar multiagente .agents/ (con el enlace simbólico .claude → .agents), conecta los comandos ligeros dwp-* y crea un .dwp/ ignorado por git.',
+        commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Ejecuta con cualquier agente',
+        title: 'Evoluciona el kit y acepta addons',
         description:
-          'Un agente compatible ejecuta el plan tarea por tarea, validando cada compuerta y reanudando entre sesiones — pilotando el repositorio contra su propia especificación.',
+          'Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos adaptados a tu stack. La incorporación también ofrece tres addons opcionales — devcontainer, Dailybot y dependency-upgrade — que aceptas solo cuando encajan.',
+      },
+      {
+        title: 'Planifica y ejecuta',
+        description:
+          'Genera un Deep Work Plan y ejecútalo tarea por tarea, validando cada compuerta y reanudando entre sesiones — pilotando el repositorio contra su propia especificación.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
     ],
     outcomeTitle: 'El resultado',
@@ -974,7 +987,7 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
     whatTitle: 'Qué hace esto',
     whatBody: [
       'La adopción cambia el repositorio de dos maneras duraderas: los pilares de la metodología.',
-      'Primero, el repositorio se vuelve guiado por especificación: el trabajo comienza desde un plan y una especificación escritos, no desde prompts improvisados. Segundo, el repositorio mismo se convierte en el harness del agente: un AGENTS.md, una base de conocimiento docs/ y un hogar de skills .agents/ dan a cada agente el contexto y los comandos que necesita.',
+      'Primero, el repositorio se vuelve guiado por especificación: el trabajo comienza desde un plan y una especificación escritos, no desde prompts improvisados. Segundo, el repositorio mismo se convierte en el harness del agente: un AGENTS.md, una base de conocimiento docs/, docs por módulo y un hogar de skills .agents/ (con el enlace simbólico .claude → .agents) dan a cada agente el contexto y los comandos que necesita.',
     ],
     sequenceTitle: 'La secuencia de adopción',
     orLabel: 'o',
@@ -982,21 +995,27 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
       {
         title: 'Instala la skill',
         description:
-          'Añade la skill de Deep Work Plan a tu entorno para que cualquier agente pueda planificar y ejecutar trabajo estructurado.',
+          'Añade la skill de Deep Work Plan para que cualquier agente pueda planificar y ejecutar trabajo estructurado. La skill incluye un enrutador y siete sub-skills: create, execute, refine, resume, status, onboard y author.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
-        title: 'Ejecuta la incorporación',
+        title: 'Ejecuta la incorporación del repositorio',
         description:
-          'Pide al agente que incorpore el repositorio. Escribe un AGENTS.md que describe cómo trabajan los agentes aquí, siembra docs/ con el conocimiento del proyecto que los agentes necesitan e instala el hogar de skills .agents/ con los comandos de Deep Work Plan ya conectados.',
+          'Invoca la sub-skill de onboard y deja que el agente razone sobre el repositorio real: su stack, su gestor de paquetes y sus comandos de validación reales. Luego genera AGENTS.md, una base de conocimiento docs/, docs por módulo y un hogar multiagente .agents/ (con el enlace simbólico .claude → .agents), conecta los comandos ligeros dwp-* y crea un .dwp/ ignorado por git para planes y borradores. Nada se copia de una plantilla; todo se adapta a tu repositorio.',
+        commands: ['/deepworkplan-onboard'],
+      },
+      {
+        title: 'Evoluciona el kit y acepta addons',
+        description:
+          'Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos adaptados a tu stack. La incorporación también ofrece tres addons opcionales — devcontainer, Dailybot y dependency-upgrade — que aceptas solo cuando encajan. Un repo es plenamente conforme con cero addons.',
       },
       {
         title: 'Planifica y ejecuta',
         description:
-          'Genera Deep Work Plans para cualquier tarea y ejecútalos con cualquier agente de programación. El plan lleva tareas numeradas, compuertas de validación y un protocolo de finalización para que el trabajo siga siendo estructurado y verificable.',
+          'Genera Deep Work Plans con /dwp-create y ejecútalos con /dwp-execute; luego usa /dwp-status, /dwp-refine y /dwp-resume a medida que avanza el trabajo. Cada plan lleva tareas numeradas, compuertas de validación y un protocolo de finalización para que el trabajo siga siendo estructurado, revisable y reanudable entre sesiones.',
       },
     ],
     outcomeTitle: 'El resultado',

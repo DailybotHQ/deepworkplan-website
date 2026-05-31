@@ -1,6 +1,6 @@
 ---
 title: Django
-description: "El preset de DWP para proyectos Django, con valores por defecto conscientes de la pila para apps, migraciones, pruebas, ajustes y comandos de administración del diseño estándar."
+description: "Un preset de incorporación para proyectos Django, con pistas de razonamiento para apps, migraciones, ajustes, comandos de administración y el ejecutor de pruebas, siguiendo el diseño de proyecto estándar."
 kind: preset
 lang: es
 order: 1
@@ -9,14 +9,18 @@ stack: Django
 
 # Preset de Django
 
-Valores por defecto conscientes de la pila para proyectos Django.
+Una guía de razonamiento que el flujo de onboard usa para proyectos Django. Es una lista de verificación, no una plantilla — la realidad detectada gana.
 
-## Qué adapta
+## Señales
 
-- Comando de prueba: `python manage.py test`
-- Convenciones de apps y migraciones
-- Disposición de ajustes y entorno
-- Patrones de comandos de administración
+- `manage.py` y `settings.py`; apps con `models.py`, `views.py`, `migrations/`.
+- Gestor de paquetes y ejecutor de pruebas inferidos del manifiesto y el lockfile que existen.
+
+## Qué razonar
+
+- El comando de prueba real (a menudo `python manage.py test` o `pytest`) y cualquier compuerta de lint/tipos — capturado al pie de la letra.
+- Convenciones de apps y migraciones, la disposición de ajustes y entorno, y los patrones de comandos de administración.
+- Skills adaptadas para apps, modelos, vistas y migraciones.
 
 ## Notas
 

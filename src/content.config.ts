@@ -109,7 +109,7 @@ const kit = defineCollection({
     .object({
       title: z.string(),
       description: z.string(),
-      kind: z.enum(['command', 'adapter', 'preset', 'example']),
+      kind: z.enum(['command', 'adapter', 'preset', 'example', 'addon']),
       lang: z.enum(['en', 'es']),
       order: z.number().optional(),
     })

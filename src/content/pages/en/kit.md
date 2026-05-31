@@ -1,17 +1,60 @@
 ---
 title: "The Deep Work Plan Kit"
-description: "Commands, adapters, presets, and examples that make the Deep Work Plan methodology runnable across AI coding agents and technology stacks."
-lastUpdated: 2026-05-30
+description: "The skill and its seven sub-skills, slash commands, agent adapters, onboarding presets, opt-in addons, and examples that make the Deep Work Plan methodology runnable across AI coding agents and stacks."
+lastUpdated: 2026-05-31
 ---
 
 ## The Deep Work Plan Kit
 
-The kit is everything you need to run the methodology in practice:
+The kit is everything you need to run the methodology in practice. It is installed from
+`DailybotHQ/deepworkplan-skill`:
 
-- **Commands** — slash commands (`dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`) that drive the plan-execute-verify loop.
-- **Adapters** — thin per-agent integrations for Claude Code, Cursor, Codex, Copilot, Gemini, and Antigravity.
-- **Presets** — stack-specific adaptations for Django, FastAPI, React, Vue, Astro, Go, Rust, and more.
-- **Examples** — worked, before-and-after walkthroughs.
+```bash
+npx skills add DailybotHQ/deepworkplan-skill
+```
+
+### The skill and its sub-skills
+
+The Deep Work Plan skill is a router plus seven sub-skills:
+
+- **create** — decompose a goal into a structured plan (`/dwp-create`).
+- **execute** — run a plan task by task, validating each gate (`/dwp-execute`).
+- **refine** — add, remove, or reorder tasks while preserving completed work (`/dwp-refine`).
+- **resume** — reconstruct state and continue an interrupted plan (`/dwp-resume`).
+- **status** — report progress without making changes (`/dwp-status`).
+- **onboard** — make a repository AI-first (`/deepworkplan-onboard`).
+- **author** — create or evolve the repo's own skills, agents, and commands (`/skill-create`, `/agent-create`).
+
+### Commands
+
+Thin slash commands delegate to the sub-skills and addons:
+
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status` — the plan-execute-verify loop.
+- `skill-create`, `agent-create` — delegate to the author sub-skill.
+- `lib-upgrade` — delegates to the dependency-upgrade addon (installed only when that addon is accepted).
+
+### Adapters
+
+Thin per-agent integrations for Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, and
+Antigravity.
+
+### Onboarding presets
+
+Per-stack reasoning guides the onboard flow uses to adapt docs, skills, and validation commands —
+never templates. Six presets: Django, Vue + Vite, Astro/Svelte, Node/TS service, Python package/CLI,
+and a generic fallback.
+
+### Addons (opt-in)
+
+Optional capabilities the onboard flow can layer onto a repo — never part of the AI-first baseline:
+
+- **Devcontainer** — a reproducible, isolated dev container with persistent AI-CLI auth.
+- **Dailybot** — best-effort progress and milestone reporting for teams using Dailybot.
+- **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades.
+
+### Examples
+
+Worked, before-and-after walkthroughs.
 
 - [Browse the kit](/kit)
 - [Quickstart](/quickstart)

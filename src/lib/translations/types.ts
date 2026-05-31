@@ -545,6 +545,7 @@ export interface SiteTranslations {
       adapter: { title: string; description: string };
       preset: { title: string; description: string };
       example: { title: string; description: string };
+      addon: { title: string; description: string };
     };
     viewDetail: string;
     backToIndex: string;

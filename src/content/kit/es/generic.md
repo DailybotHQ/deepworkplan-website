@@ -1,22 +1,22 @@
 ---
 title: Genérico
-description: "El preset de DWP para cualquier proyecto, con valores por defecto agnósticos de la pila que detectan los comandos de compilación y prueba del repositorio cuando no aplica ningún preset."
+description: "El preset de incorporación de reserva para cualquier proyecto, con pistas de razonamiento agnósticas de la pila que detectan los comandos de compilación y prueba del repositorio cuando no aplica ningún preset específico."
 kind: preset
 lang: es
-order: 10
+order: 6
 stack: Generic
 ---
 
 # Preset genérico
 
-Valores por defecto agnósticos de la pila para cualquier proyecto.
+La guía de razonamiento de reserva que el flujo de onboard usa cuando no aplica ningún preset específico de pila. Es una lista de verificación, no una plantilla — la realidad detectada gana.
 
-## Qué adapta
+## Qué razonar
 
-- Detecta los comandos de compilación y prueba del repositorio
-- Aplica convenciones generales
-- No hace suposiciones específicas de la pila
+- Detecta los comandos reales de compilación y prueba a partir del manifiesto, el Makefile o la CI — capturados al pie de la letra.
+- Aplica convenciones generales; no hagas suposiciones específicas de la pila.
+- Genera solo las skills, los agentes y los docs que coinciden con los flujos de trabajo reales del repo.
 
 ## Notas
 
-El preset de reserva cuando no aplica ningún preset específico de pila.
+La reserva cuando ninguno de Django, Vue + Vite, Astro/Svelte, servicio Node/TS o paquete/CLI de Python coincide.

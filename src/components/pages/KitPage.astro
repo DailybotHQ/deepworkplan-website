@@ -24,18 +24,19 @@ const entries = (await getCollection('kit')).filter(
   (e) => e.data.lang === lang
 );
 
-function byKind(kind: 'command' | 'adapter' | 'preset' | 'example') {
+function byKind(kind: 'command' | 'adapter' | 'preset' | 'example' | 'addon') {
   return entries
     .filter((e) => e.data.kind === kind)
     .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 }
 
 // Examples have their own gallery page; the kit index covers commands,
-// adapters, and presets.
+// adapters, presets, and opt-in addons.
 const groups = [
   { meta: k.groups.command, items: byKind('command') },
   { meta: k.groups.adapter, items: byKind('adapter') },
   { meta: k.groups.preset, items: byKind('preset') },
+  { meta: k.groups.addon, items: byKind('addon') },
 ];
 ---
 
