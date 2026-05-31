@@ -115,7 +115,7 @@ function getHeroImage(series: SeriesListingEntry): string | null {
                   height="400"
                 />
               {:else}
-                <div class="w-full h-56 md:h-full bg-gradient-to-br from-blue-100 via-indigo-50 to-purple-100 dark:from-blue-900/40 dark:via-indigo-900/30 dark:to-purple-900/20 flex items-center justify-center">
+                <div class="w-full h-56 md:h-full bg-gradient-to-br from-stone-100 via-stone-50 to-stone-100 dark:from-stone-900/40 dark:via-stone-900/30 dark:to-stone-900/20 flex items-center justify-center">
                   <svg class="w-16 h-16 text-blue-300 dark:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>
@@ -180,7 +180,7 @@ function getHeroImage(series: SeriesListingEntry): string | null {
                     height="400"
                   />
                 {:else}
-                  <div class="w-full h-56 lg:h-full lg:min-h-[280px] bg-gradient-to-br from-blue-100 via-indigo-50 to-purple-100 dark:from-blue-900/40 dark:via-indigo-900/30 dark:to-purple-900/20 flex items-center justify-center">
+                  <div class="w-full h-56 lg:h-full lg:min-h-[280px] bg-gradient-to-br from-stone-100 via-stone-50 to-stone-100 dark:from-stone-900/40 dark:via-stone-900/30 dark:to-stone-900/20 flex items-center justify-center">
                     <svg class="w-16 h-16 text-blue-300 dark:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
@@ -218,7 +218,7 @@ function getHeroImage(series: SeriesListingEntry): string | null {
               {#if hero}
                 <img src={hero} alt="" class="w-full h-48 object-cover" loading="lazy" width="400" height="192" />
               {:else}
-                <div class="w-full h-48 bg-gradient-to-br from-blue-100 via-indigo-50 to-purple-100 dark:from-blue-900/40 dark:via-indigo-900/30 dark:to-purple-900/20 flex items-center justify-center">
+                <div class="w-full h-48 bg-gradient-to-br from-stone-100 via-stone-50 to-stone-100 dark:from-stone-900/40 dark:via-stone-900/30 dark:to-stone-900/20 flex items-center justify-center">
                   <svg class="w-14 h-14 text-blue-300 dark:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>
@@ -289,7 +289,7 @@ function getHeroImage(series: SeriesListingEntry): string | null {
   <!-- All loaded end cap -->
   {#if allLoaded && renderedSeries.length > 0}
     <div class="flex flex-col items-center pt-12 pb-6">
-      <div class="w-12 h-12 mb-4 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 flex items-center justify-center shadow-sm">
+      <div class="w-12 h-12 mb-4 rounded-full bg-gradient-to-br from-stone-100 to-stone-200 dark:from-stone-900/30 dark:to-stone-800/30 flex items-center justify-center shadow-sm">
         <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
         </svg>

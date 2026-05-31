@@ -360,7 +360,7 @@ const SUBTOPIC_ACCENT_BY_PARENT: Record<string, string> = {
   blockchain: 'text-green-500 dark:text-green-400',
   design: 'text-pink-500 dark:text-pink-400',
   iot: 'text-cyan-500 dark:text-cyan-400',
-  database: 'text-indigo-500 dark:text-indigo-400',
+  database: 'text-stone-500 dark:text-stone-400',
   university: 'text-rose-500 dark:text-rose-400',
 };
 

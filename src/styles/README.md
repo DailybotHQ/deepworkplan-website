@@ -30,7 +30,7 @@ The main stylesheet that imports Tailwind and defines global styles.
 /* 2. Theme Variables */
 @theme {
   --color-main: #0e1116;
-  --color-secondary: #4f46e5;
+  --color-secondary: #7a1f1f;
 }
 
 /* 3. Dark Mode Configuration */
@@ -53,19 +53,19 @@ The main stylesheet that imports Tailwind and defines global styles.
 | Variable | Value (light) | Value (dark) | Brand Name | Usage |
 |----------|---------------|--------------|-----------|-------|
 | `--color-main` | `#0e1116` | `#0e1116` | Ink | Dark base / branded surfaces |
-| `--color-secondary` / `--color-accent` | `#4f46e5` | `#818cf8` | Indigo | Accent — highlights, CTAs, interactive elements |
+| `--color-secondary` / `--color-accent` | `#7a1f1f` | `#c2554d` | Oxblood | Accent — links, kicker rules, and small marks |
 | `--color-ink` | `#14171c` | — | Ink (text) | Near-black body text (light mode) |
 | `--color-paper` | `#fafaf7` | — | Paper | Warm paper light background |
 | `--color-line` | `#e4e2db` | `#232831` | Line | Hairline borders |
 | `--color-muted` | `#5b6470` | `#9aa3af` | Muted | Secondary text (WCAG AA) |
 
-> **Full palette and usage rules:** See **[Brand Guide](../../docs/BRAND_GUIDE.md)** for the complete Ink & Paper + Indigo system, pairing rules, and logo guidelines.
+> **Full palette and usage rules:** See **[Brand Guide](../../docs/BRAND_GUIDE.md)** for the complete Broadsheet editorial system (warm paper, ink serif, oxblood accent), pairing rules, and logo guidelines.
 
 Use in Tailwind classes:
 
 ```html
 <div class="bg-main text-white">Ink surface</div>
-<span class="text-secondary">Accent text (Indigo)</span>
+<span class="text-secondary">Accent text (Oxblood)</span>
 ```
 
 ### Custom Components
@@ -230,8 +230,8 @@ In `global.css`:
 ```css
 @theme {
   --color-main: #0e1116;
-  --color-secondary: #4f46e5;
-  --color-accent: #4f46e5;  /* Indigo accent */
+  --color-secondary: #7a1f1f;
+  --color-accent: #7a1f1f;  /* Oxblood accent */
 }
 ```
 

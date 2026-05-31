@@ -4,7 +4,7 @@
 
 ## About
 
-Deep Work Plan applies Cal Newport's idea of deep work to AI coding agents. It defines how to turn a goal into an agreed plan, break that plan into atomic and independently verifiable tasks, and run each task in a focused loop that ends with an explicit validation gate. The plan, tasks, and running log are all plain Markdown — readable, reviewable, and version-controlled. DWP is framework- and agent-agnostic: adapters map the same core loop to Claude, Cursor, Copilot, Codex, Gemini, and more.
+Deep Work Plan is the methodology that turns any repository into an AI-first, agent-pilotable codebase. It is spec-driven development where the repository itself becomes the agent harness: a goal becomes an agreed plan, the plan is decomposed into atomic, independently verifiable tasks, and each task runs in a focused loop that ends with an explicit validation gate. The plan, tasks, and running log are all plain Markdown — readable, reviewable, and version-controlled. DWP is tool-agnostic and repo-native: the methodology and kit install into the repository (AGENTS.md, docs, the .agents/ skills home, the DWP skill) so any agent — Claude, Cursor, Copilot, Codex, Gemini, and more — can pilot the repo.
 
 ## Core Sections
 

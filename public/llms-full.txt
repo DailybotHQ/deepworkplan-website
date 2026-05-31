@@ -1,10 +1,10 @@
 # Deep Work Plan - Full Site Description
 
-> Deep Work Plan (DWP) is an open, MIT-licensed methodology and reference kit for structured, validated, resumable multi-hour AI-agent execution. Maintained by Dailybot and the open-source community.
+> Deep Work Plan (DWP) is an open, MIT-licensed methodology and reference kit that turns any repository into an AI-first, agent-pilotable codebase — spec-driven development where the repository itself becomes the agent harness. Maintained by Dailybot and the open-source community.
 
 ## What Deep Work Plan Is
 
-Deep Work Plan applies Cal Newport's concept of deep work to AI coding agents. It is a methodology, not a product. DWP defines how to turn a goal into an agreed plan, decompose that plan into atomic and independently verifiable tasks, and run each task in a focused loop that ends with an explicit check before the next task begins.
+Deep Work Plan is the methodology that turns any repository into an AI-first, agent-pilotable codebase. It is a methodology, not a product. DWP is spec-driven development where the repository itself becomes the agent harness: it defines how to turn a goal into an agreed plan, decompose that plan into atomic and independently verifiable tasks, and run each task in a focused loop that ends with an explicit validation gate before the next task begins. The methodology and kit install into the repository (AGENTS.md, docs, the .agents/ skills home, the DWP skill) so the work is durable and any agent can pilot the repo.
 
 DWP is deliberately agnostic about which AI agent or stack you use. Adapters translate the same core loop to Claude, Cursor, Copilot, Codex, Gemini, and more. The plan, the tasks, and the running log are all plain Markdown, so the work stays readable, reviewable, and version-controlled. There is no runtime and no lock-in.
 
@@ -33,6 +33,7 @@ Deep Work Plan grew out of real engineering work at Dailybot and is now maintain
 - **Kit** (/kit) — The kit catalog: presets, adapters, and commands available for installing DWP into a repository
 - **Examples** (/examples) — Worked examples that show the methodology applied to real engineering work
 - **Quickstart** (/quickstart) — A short path to getting DWP running in a repository
+- **Init / Adoption** (/init) — Make any repository AI-first: install the skill, onboard the repo, then plan and execute. Includes a self-contained onboarding prompt at /init.md to hand to an agent
 - **About** (/about) — What Deep Work Plan is, its core principles, and who maintains it
 - **Contact** (/contact) — How to engage with the project: source, issues, and discussions on GitHub
 
@@ -77,7 +78,8 @@ Every rendered page is available as clean, native Markdown for AI agents. This c
 ### URL Patterns
 
 - **Pages**: `/{page}.md` (EN), `/es/{page}.md` (ES)
-  - Examples: `/methodology.md`, `/spec.md`, `/kit.md`, `/es/methodology.md`
+  - Examples: `/methodology.md`, `/spec.md`, `/kit.md`, `/init.md`, `/es/methodology.md`
+- **Onboarding prompt**: `/init.md` — a self-contained prompt you can paste into an agent to make a repository AI-first
 
 ### Response Format
 
