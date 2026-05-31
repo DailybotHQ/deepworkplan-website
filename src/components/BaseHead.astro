@@ -1,9 +1,9 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import "../styles/global.css";
-import JsonLd from "@/components/JsonLd.astro";
-import { ANALYTICS, SITE_DESCRIPTION, SITE_TITLE } from "@/lib/constances";
+import '../styles/global.css';
+import JsonLd from '@/components/JsonLd.astro';
+import { ANALYTICS, SITE_DESCRIPTION, SITE_TITLE } from '@/lib/constances';
 import {
   DEFAULT_LANGUAGE,
   getAlternateUrls,
@@ -11,7 +11,7 @@ import {
   getSupportedLanguages,
   getUrlPrefix,
   type Language,
-} from "@/lib/i18n";
+} from '@/lib/i18n';
 
 interface Props {
   title: string;
@@ -31,24 +31,24 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const {
   title,
   description,
-  image = "/images/og-default.png",
-  lang = "en",
+  image = '/images/og-default.png',
+  lang = 'en',
   keywords,
   prevPage,
   nextPage,
-  ogType = "website",
+  ogType = 'website',
   ogImageWidth = 1200,
   ogImageHeight = 630,
 } = Astro.props;
 const absoluteImageUrl = new URL(image, Astro.site ?? Astro.url).href;
-const imageExtension = image.split(".").pop()?.toLowerCase();
+const imageExtension = image.split('.').pop()?.toLowerCase();
 const imageMimeType =
-  imageExtension === "png"
-    ? "image/png"
-    : imageExtension === "jpg" || imageExtension === "jpeg"
-      ? "image/jpeg"
-      : imageExtension === "webp"
-        ? "image/webp"
+  imageExtension === 'png'
+    ? 'image/png'
+    : imageExtension === 'jpg' || imageExtension === 'jpeg'
+      ? 'image/jpeg'
+      : imageExtension === 'webp'
+        ? 'image/webp'
         : undefined;
 
 // Compute hreflang URLs for multilingual SEO
@@ -64,7 +64,7 @@ const alternateLocales = getSupportedLanguages()
   .filter((l) => l !== lang)
   .map((l) => getOGLocale(l));
 const langPrefix = getUrlPrefix(lang as Language);
-const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ""), Astro.site);
+const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 ---
 
 <!-- Global Metadata -->
