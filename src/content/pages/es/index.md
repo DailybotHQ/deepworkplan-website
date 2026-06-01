@@ -30,7 +30,7 @@ También es **ingeniería de harness** hecha portable. Un harness de agente es e
 - AGENTS.md en la raíz del repositorio, razonado a partir de tu stack y comandos reales.
 - `docs/` categorizado y documentación por módulo.
 - Un directorio `.agents/` (skills, agentes, comandos) con el enlace simbólico `.claude` a `.agents`.
-- El skill de Deep Work Plan, instalado una sola vez para cada agente.
+- El skill de Deep Work Plan, instalado una sola vez para cada agente — incluida la subhabilidad author, para que el repositorio pueda crear sus propias habilidades, agentes y comandos, además de complementos de mantenimiento opcionales como dependency-upgrade.
 - Planes de largo alcance y reanudables en una carpeta `.dwp/` ignorada por git.
 
 ---

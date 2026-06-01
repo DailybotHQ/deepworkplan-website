@@ -30,7 +30,7 @@ It is also **harness engineering** made portable. An agent harness is the scaffo
 - AGENTS.md at the repository root, reasoned from your real stack and commands.
 - Categorized `docs/` and per-module documentation.
 - An `.agents/` directory (skills, agents, commands) with the `.claude` to `.agents` symlink.
-- The Deep Work Plan skill, installed once for every agent.
+- The Deep Work Plan skill, installed once for every agent — including the author sub-skill, so the repository can grow its own skills, agents, and commands, plus opt-in maintenance add-ons such as dependency-upgrade.
 - Long-horizon, resumable plans in a gitignored `.dwp/` folder.
 
 ---

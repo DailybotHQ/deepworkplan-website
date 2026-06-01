@@ -15,7 +15,7 @@ The methodology is explained in five chapters:
 1. **Manifesto** — what a Deep Work Plan is and why structured execution matters.
 2. **Core loop** — the plan-execute-verify cycle that drives every task.
 3. **Templates** — the plan and task structures agents and humans share.
-4. **Skills & agents** — how commands and agent roles fit together.
+4. **Skills & agents** — how commands and agent roles fit together, the living kit (how a repository grows its own skills via the author sub-skill), and opt-in maintenance add-ons such as dependency-upgrade.
 5. **Archetypes** — adapting the methodology to individual repos and orchestrator hubs.
 
 - [Read the methodology](/methodology)

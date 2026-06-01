@@ -12,7 +12,7 @@ La especificación es la definición precisa y legible de la metodología — la
 - **Especificación DWP** — estructura del plan, anatomía de las tareas y el bucle de ejecución.
 - **Protocolo de agentes** — el comportamiento requerido entre agentes y el mapeo de comandos.
 - **Arquetipos** — repos individuales frente a hubs orquestadores.
-- **Complementos** — el mecanismo opcional para añadir capacidades.
+- **Complementos** — el mecanismo opcional para añadir capacidades, incluida la subhabilidad author (para que un repositorio cree su propio kit) y los complementos de mantenimiento como dependency-upgrade.
 
 - [Leer la especificación](/es/spec)
 - [Leer la metodología](/es/methodology)
