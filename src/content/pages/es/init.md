@@ -1,121 +1,158 @@
 ---
-title: Init — Convierte tu repositorio en AI-first
-description: Adopta la metodología Deep Work Plan en cualquier repositorio. Instala la skill, ejecuta la incorporación del agente, evoluciona el kit y planifica y ejecuta trabajo estructurado con cualquier agente de IA.
+title: Init — Haz que tu repositorio sea AI-first
+description: El prompt de incorporación ejecutable para agentes de IA. Adopta la metodología Deep Work Plan en cualquier repositorio — analiza, documenta, instala el skill, construye un kit razonado y deja el repo totalmente pilotable por IA, sin sobrescribir el trabajo existente.
 ---
 
-# Init — Instrucción de incorporación para agentes de IA
+# Init — Prompt de incorporación para agentes de IA
 
-Eres un agente de programación con IA. Tu tarea es convertir el repositorio actual en **AI-first**
-y **guiado por especificación** adoptando la metodología Deep Work Plan (DWP). Sigue estos pasos en
-orden. Razona sobre el repositorio real: nunca copies una plantilla ni dejes un marcador de posición.
-Detente e informa si un paso falla.
+Eres un agente de programación de IA. Lee primero todo este prompt y luego haz que el repositorio
+actual sea **AI-first**, **guiado por especificación** y **pilotable por agentes** adoptando la
+metodología Deep Work Plan (DWP). Trátalo como una tarea de ingeniería estructurada — un Deep Work
+Plan — no como una edición rápida.
+
+## Principios operativos (léelos antes de cambiar nada)
+
+1. **Razona sobre *este* repositorio.** Nunca copies una plantilla ni dejes un marcador de posición.
+   Cada archivo que escribas debe reflejar los lenguajes, frameworks, comandos y estructura reales del
+   repositorio. Un esbozo genérico es un fallo, no un entregable.
+2. **Sé no destructivo: pregunta antes de reemplazar.** El repositorio puede tener ya un `AGENTS.md`,
+   un árbol `docs/`, una configuración `.agents/` o de skills, un `CLAUDE.md` o sus propias
+   convenciones. **No** sobrescribas, muevas ni elimines trabajo existente en silencio. Detecta qué
+   existe, léelo y **reconcília**: fusiona y mejora en el sitio siempre que sea posible. Antes de
+   reemplazar o eliminar algo que el usuario ya tiene, explica qué y por qué, y obtén su aprobación
+   explícita.
+3. **Propón el plan y luego ejecuta.** Tras el reconocimiento, presenta un plan breve — qué crearás,
+   qué modificarás y cualquier cosa existente que propongas reconciliar o reemplazar — y espera a que
+   el usuario confirme antes de hacer cambios grandes o destructivos.
+4. **Trabaja en incrementos seguros y revisables.** Confirma de forma lógica, mantén diffs legibles, no
+   toques secretos y deja el código no relacionado en paz.
+5. **Detente e informa** si un paso falla o el estado del repositorio es ambiguo.
 
 ## 0. Lee la metodología y la especificación
 
-Antes de cambiar nada, lee las fuentes canónicas para entender el estándar que vas a adoptar:
+Antes de cambiar nada, lee las fuentes canónicas para entender el estándar que estás adoptando:
 
 - Metodología: https://deepworkplan.com/methodology.md
 - Especificación: https://deepworkplan.com/spec.md
 - Catálogo del kit: https://deepworkplan.com/kit.md
 
-## 1. Instala la skill de Deep Work Plan
+## 1. Reconocimiento y un plan para aprobar
 
-Instala la skill para que los agentes de este repositorio puedan planificar y ejecutar trabajo
-estructurado. La skill incluye un enrutador y siete sub-skills: `create`, `execute`, `refine`,
-`resume`, `status`, `onboard` y `author`.
+Primero entiende el repositorio, luego propón qué harás.
+
+- **Detecta el stack.** Lenguajes, frameworks, el gestor de paquetes (a partir del lockfile que
+  realmente existe), los comandos reales de build/test/lint/type-check, los módulos de origen, la
+  convención de pruebas y la forma de despliegue.
+- **Clasifica el arquetipo.** Un repositorio individual (el caso común) o un hub orquestador, con la
+  evidencia.
+- **Inventaría lo que ya existe.** `AGENTS.md`, `CLAUDE.md`, `docs/`, cualquier configuración
+  `.agents/` o de skills/agentes, `.dwp/` y `.gitignore`. Anota lo que ya cumpla parte de este trabajo.
+- **Propón el plan de incorporación.** Presenta una lista concisa: archivos que crearás, archivos que
+  modificarás y cualquier cosa existente que propongas reconciliar o reemplazar — y luego **pide al
+  usuario que confirme** antes de continuar. Para un repositorio grande, captura este plan con
+  `/dwp-create` y ejecútalo como un Deep Work Plan.
+
+## 2. Instala el skill de Deep Work Plan
+
+Instala el skill para que los agentes de este repositorio puedan planificar y ejecutar trabajo
+estructurado. Incluye un router más siete sub-skills — `create`, `execute`, `refine`, `resume`,
+`status`, `onboard` y `author`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
 ```
 
-O clona y ejecuta el script de instalación:
+O clona y ejecuta el script de configuración:
 
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh
 ```
 
-## 2. Ejecuta la incorporación del repositorio
+## 3. Incorpora el repositorio (razonado y no destructivo)
 
-Invoca la sub-skill de onboard (`/deepworkplan-onboard`). No copies una plantilla: **razona sobre el
-repositorio real** y adáptalo todo a él. El flujo:
+Invoca la sub-skill onboard (`/deepworkplan-onboard`). Razona sobre el repo real y adáptalo todo a él.
+Para cada artefacto de abajo, **si ya existe, reconcílialo** (fusiona, mejora, alínealo con la
+metodología) en vez de sobrescribir — y confirma con el usuario antes de reemplazar nada.
 
-1. **Reconocimiento.** Detecta los lenguajes, los frameworks, el gestor de paquetes (a partir del
-   lockfile que realmente existe), los comandos reales de compilación/pruebas/lint/verificación de
-   tipos, los módulos de código, la convención de pruebas y la forma de despliegue. Usa el preset de
-   incorporación más cercano (Django, Vue + Vite, Astro/Svelte, servicio Node/TS, paquete/CLI de
-   Python o genérico) como guía de razonamiento — la realidad detectada siempre gana.
-2. **Arquetipo.** Clasifica el repo como repositorio individual (el caso común) o como hub
-   orquestador, y registra la evidencia.
-3. **`AGENTS.md` + `CLAUDE.md`.** Genera un `AGENTS.md` en la raíz: un índice, las reglas obligatorias
-   (solo inglés, commits convencionales, el patrón de pruebas real del repo y sus puertas de revisión)
-   y un bloque de Comandos rápidos con los comandos **reales y ejecutables** del repo. Crea el enlace
-   simbólico `CLAUDE.md → AGENTS.md`.
-4. **`docs/`.** Genera las categorías estándar con contenido real y específico del repo:
+1. **`AGENTS.md` + `CLAUDE.md`.** Produce un `AGENTS.md` en la raíz — un índice, las reglas
+   obligatorias (solo inglés, commits convencionales, el patrón de pruebas real del repo y las puertas
+   de revisión) y un bloque de Comandos Rápidos con los comandos **reales y ejecutables** del repo. Si
+   ya existe un `AGENTS.md`, fusiónate con él en vez de reemplazarlo. Crea el enlace simbólico
+   `CLAUDE.md → AGENTS.md` (no pises un `CLAUDE.md` existente sin preguntar).
+2. **`docs/`.** Completa las categorías estándar con contenido real y específico del repo:
    `ARCHITECTURE.md`, `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, además de `PERFORMANCE.md` y un índice
-   `docs/README.md`.
-5. **Docs por módulo.** Añade un `README.md` (y una subcarpeta `docs/` para módulos complejos) dentro
-   de cada módulo de código importante descubierto en el reconocimiento.
-6. **`.agents/` + `.claude → .agents`.** Crea el hogar canónico y multiagente: `agents/` razonados,
-   `skills/` adaptadas al stack, `commands/` con delegadores ligeros `dwp-*` que delegan en la skill
-   instalada, un catálogo `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) que coincide
-   con lo que creaste y `settings.json`. Añade el enlace simbólico `.claude → .agents`.
-7. **Skill + `.dwp/`.** Haz que la skill sea descubrible en el repo y crea un `.dwp/` ignorado por git
-   con `plans/` y `drafts/`, más un espacio de trabajo `tmp/` — ambos añadidos a `.gitignore` sin
-   sobrescribir.
+   `docs/README.md`. Si ya existen docs, intégralos y amplíalos — no los dupliques.
+3. **Docs por módulo.** Añade un `README.md` (y una subcarpeta `docs/` para módulos complejos) dentro
+   de cada módulo de origen principal descubierto en el reconocimiento.
+4. **`.agents/` + `.claude → .agents`.** Crea el hogar canónico y multiagente: un catálogo **razonado**
+   de `agents/`, `skills/` apropiadas para el stack y `commands/` `dwp-*` finos que delegan en el skill
+   instalado — cada entrada justificada para *este* repositorio, no copiada de otro. Añade un catálogo
+   `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) que coincida con lo que hay en disco,
+   más `settings.json`, y el enlace simbólico `.claude → .agents`. Integra cualquier skill/agente
+   existente en el catálogo.
+5. **El skill de DWP, adaptado.** El skill instalado es el motor; el propio kit del repositorio
+   (skills, agentes, comandos) debe estar **razonado para este repo** — nunca un copia y pega del kit
+   de otro repositorio.
+6. **`.dwp/` + `tmp/`.** Crea un `.dwp/` ignorado por git con `plans/` y `drafts/`, más un espacio de
+   trabajo `tmp/` — ambos añadidos a `.gitignore` de forma no destructiva (añadir, nunca reescribir).
 
-## 3. Evoluciona el kit (sub-skill author)
+## 4. Haz evolucionar el kit (sub-skill author)
 
-Usa la sub-skill `author` para hacer crecer el kit del propio repositorio. Los delegadores ligeros
-`/skill-create` y `/agent-create` enrutan a ella. Crea una **skill** para un procedimiento repetible
-en sesión, un **agente** para un rol recurrente con su propia gama de modelo y herramientas, y un
-**comando** solo como delegador ligero. Mantén el catálogo `.agents/docs/` sincronizado con lo que
-existe en disco.
+Usa la sub-skill `author` para hacer crecer el kit propio del repositorio. Los delegadores finos
+`/skill-create` y `/agent-create` enrutan hacia ella. Crea una **skill** para un procedimiento
+repetible dentro de una sesión, un **agente** para un rol recurrente con su propio nivel de modelo y
+herramientas, y un **comando** solo como delegador fino. Mantén el catálogo `.agents/docs/`
+sincronizado con lo que hay en disco.
 
-## 4. Ofrece los addons opcionales
+## 5. Ofrece los addons opcionales
 
-Tras la base, enumera los tres addons y ofrece cada uno como una opción explícita. Un repo es
-plenamente conforme con **cero** addons — nunca los instales automáticamente para todos.
+Tras la base, enumera los tres addons y ofrece cada uno como una opción explícita. Un repositorio es
+totalmente conforme con **cero** addons — nunca los instales automáticamente.
 
 - **Soporte de devcontainer** — un contenedor de desarrollo reproducible y aislado con autenticación
   de CLI de IA persistente.
-- **Integración con Dailybot** — reportes de avance/hito de mejor esfuerzo para equipos que ya usan
-  Dailybot. La metodología central tiene cero dependencia de Dailybot.
-- **Actualización de dependencias** — actualizaciones agnósticas del gestor de paquetes, por lotes,
-  validadas y reversibles. Cuando se acepta, instala el comando `/lib-upgrade`.
+- **Integración con Dailybot** — informes de progreso/hitos de mejor esfuerzo para equipos que ya usan
+  Dailybot. La metodología central no tiene dependencia de Dailybot.
+- **Actualización de dependencias** — actualizaciones independientes del gestor de paquetes, por lotes,
+  validadas y revertibles. Cuando se acepta, instala el comando `/lib-upgrade`.
 
-## 5. Planifica y ejecuta
+## 6. Planifica y ejecuta
 
 Genera Deep Work Plans para cualquier tarea y ejecútalos tarea por tarea:
 
-- `/dwp-create <goal>` — descompone un objetivo en tareas numeradas y secuenciales con compuertas de
+- `/dwp-create <objetivo>` — descompón un objetivo en tareas numeradas y secuenciales con puertas de
   validación.
-- `/dwp-execute` — ejecuta el plan tarea por tarea, actualizando el avance y validando cada compuerta.
-- `/dwp-status` — reporta el avance sin hacer cambios.
-- `/dwp-refine` — agrega, quita o reordena tareas preservando el trabajo completado.
+- `/dwp-execute` — ejecuta el plan tarea por tarea, actualizando el progreso y validando cada puerta.
+- `/dwp-status` — informa del progreso sin hacer cambios.
+- `/dwp-refine` — añade, elimina o reordena tareas preservando el trabajo completado.
 - `/dwp-resume` — reconstruye el estado y continúa un plan interrumpido.
 
-## 6. Verifica
+## 7. Verifica
 
 Confirma que el repositorio ya está listo para agentes:
 
-- [ ] La skill está instalada y se puede resolver, con las siete sub-skills disponibles.
-- [ ] `AGENTS.md` existe en la raíz con un bloque de Comandos rápidos real; `CLAUDE.md` resuelve a él.
+- [ ] El skill está instalado y es resoluble, con las siete sub-skills disponibles.
+- [ ] `AGENTS.md` existe en la raíz con un bloque de Comandos Rápidos real; `CLAUDE.md` resuelve a él.
 - [ ] `docs/` contiene las categorías estándar con contenido real y específico del repo; los módulos
-      importantes tienen un `README.md`.
-- [ ] `.agents/` existe con `agents/`, `commands/` (delegadores ligeros `dwp-*`), `skills/` y un
-      catálogo que coincide con la realidad; `.claude → .agents` resuelve.
-- [ ] `.dwp/` existe, está ignorado por git y tiene `plans/` y `drafts/`; `tmp/` existe y está
-      ignorado por git.
-- [ ] Puedes generar un Deep Work Plan y ejecutarlo tarea por tarea, validando cada compuerta.
+      principales tienen un `README.md`.
+- [ ] `.agents/` existe con `agents/`, `commands/` (delegadores `dwp-*` finos), `skills/` y un catálogo
+      que coincide con la realidad; `.claude → .agents` resuelve.
+- [ ] `.dwp/` existe, está ignorado por git y tiene `plans/` y `drafts/`; `tmp/` existe y está ignorado.
+- [ ] El contenido existente del usuario se preservó o reconcilió con su consentimiento — nada se
+      destruyó en silencio.
+- [ ] Puedes generar un Deep Work Plan y ejecutarlo tarea por tarea, validando cada puerta.
 
 ## Resultado
 
-Cuando la incorporación se completa, el repositorio queda cambiado de dos maneras duraderas — los
-pilares de la metodología:
+Cuando la incorporación termina, el repositorio cambia de dos maneras duraderas — los pilares de la
+metodología:
 
-1. **El repositorio es guiado por especificación.** El trabajo comienza desde un plan y una
-   especificación escritos, no desde prompts improvisados.
-2. **El repositorio mismo es el harness del agente.** `AGENTS.md`, `docs/`, las docs por módulo y el
+1. **El repositorio está guiado por especificación.** El trabajo parte de un plan y una especificación
+   escritos, no de prompts improvisados.
+2. **El propio repositorio es el harness del agente.** `AGENTS.md`, `docs/`, los docs por módulo y el
    hogar de skills `.agents/` dan a cada agente el contexto y los comandos que necesita para hacer
    trabajo estructurado y verificable.
+
+Cualquiera puede ejecutar este prompt en cualquier repositorio — y terminar con una base de código que
+cualquier agente de IA puede pilotar.

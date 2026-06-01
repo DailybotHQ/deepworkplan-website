@@ -1,14 +1,30 @@
 ---
 title: Init — Make your repository AI-first
-description: Adopt the Deep Work Plan methodology in any repository. Install the skill, run agent onboarding, evolve the kit, and plan and execute structured work with any AI coding agent.
+description: The executable onboarding prompt for AI agents. Adopt the Deep Work Plan methodology in any repository — analyze, document, install the skill, build a reasoned kit, and leave the repo fully agent-pilotable, without overwriting existing work.
 ---
 
 # Init — Onboarding prompt for AI agents
 
-You are an AI coding agent. Your task is to make the current repository **AI-first** and
-**spec-driven** by adopting the Deep Work Plan (DWP) methodology. Follow these steps in order.
-Do not skip steps. Reason about the actual repository — never copy a template or leave a
-placeholder. Stop and report if a step fails.
+You are an AI coding agent. Read this entire prompt first, then make the current repository
+**AI-first**, **spec-driven**, and **agent-pilotable** by adopting the Deep Work Plan (DWP)
+methodology. Treat this as a structured engineering task — a Deep Work Plan — not a quick edit.
+
+## Operating principles (read before changing anything)
+
+1. **Reason about *this* repository.** Never copy a template or leave a placeholder. Every file you
+   write must reflect the repository's real languages, frameworks, commands, and structure. A generic
+   stub is a failure, not a deliverable.
+2. **Be non-destructive — ask before you replace.** The repository may already have an `AGENTS.md`, a
+   `docs/` tree, a `.agents/` or skills setup, a `CLAUDE.md`, or its own conventions. Do **not**
+   overwrite, move, or delete existing work silently. Detect what exists, read it, and **reconcile**:
+   merge and improve in place wherever possible. Before replacing or removing anything the user
+   already has, explain what and why, and get their explicit approval.
+3. **Propose the plan, then execute.** After reconnaissance, present a short plan — what you will
+   create, what you will modify, and anything existing you propose to reconcile or replace — and wait
+   for the user to confirm before making large or destructive changes.
+4. **Work in safe, reviewable increments.** Commit logically, keep diffs readable, touch no secrets,
+   and leave unrelated code alone.
+5. **Stop and report** if a step fails or the repository state is ambiguous.
 
 ## 0. Read the methodology and specification
 
@@ -18,11 +34,26 @@ Before changing anything, read the canonical sources so you understand the stand
 - Specification: https://deepworkplan.com/spec.md
 - Kit catalog: https://deepworkplan.com/kit.md
 
-## 1. Install the Deep Work Plan skill
+## 1. Reconnaissance and a plan to approve
 
-Install the skill so this repository's agents can plan and execute structured work. The skill ships a
-router plus seven sub-skills — `create`, `execute`, `refine`, `resume`, `status`, `onboard`, and
-`author`.
+First understand the repository, then propose what you will do.
+
+- **Detect the stack.** Languages, frameworks, the package manager (from the lockfile that actually
+  exists), the real build/test/lint/type-check commands, the source modules, the test convention, and
+  the deployment shape.
+- **Classify the archetype.** An individual repository (the common case) or an orchestrator hub, with
+  the evidence.
+- **Inventory what already exists.** `AGENTS.md`, `CLAUDE.md`, `docs/`, any `.agents/` or skills/agents
+  setup, `.dwp/`, and `.gitignore`. Note anything that already does part of this job.
+- **Propose the onboarding plan.** Present a concise list: files you will create, files you will
+  modify, and anything existing you propose to reconcile or replace — then **ask the user to confirm**
+  before proceeding. For a large repository, capture this plan with `/dwp-create` and execute it as a
+  Deep Work Plan.
+
+## 2. Install the Deep Work Plan skill
+
+Install the skill so this repository's agents can plan and execute structured work. It ships a router
+plus seven sub-skills — `create`, `execute`, `refine`, `resume`, `status`, `onboard`, and `author`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -34,53 +65,54 @@ Or clone and run the setup script:
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh
 ```
 
-## 2. Run repository onboarding
+## 3. Onboard the repository (reasoned and non-destructive)
 
-Invoke the onboard sub-skill (`/deepworkplan-onboard`). Do not template the output — **reason about
-the real repo** and adapt everything to it. The flow:
+Invoke the onboard sub-skill (`/deepworkplan-onboard`). Reason about the real repo and adapt everything
+to it. For every artifact below, **if it already exists, reconcile it** (merge, improve, align to the
+methodology) instead of overwriting — and confirm with the user before replacing anything.
 
-1. **Reconnaissance.** Detect the languages, frameworks, package manager (from the lockfile that
-   actually exists), the real build/test/lint/type-check commands, the source modules, the test
-   convention, and the deployment shape. Match the closest onboarding preset (Django, Vue + Vite,
-   Astro/Svelte, Node/TS service, Python package/CLI, or generic) as a reasoning aid — detected
-   reality always wins.
-2. **Archetype.** Classify the repo as an individual repository (the common case) or an orchestrator
-   hub, and record the evidence.
-3. **`AGENTS.md` + `CLAUDE.md`.** Generate an `AGENTS.md` at the root — an index, the mandatory rules
+1. **`AGENTS.md` + `CLAUDE.md`.** Produce an `AGENTS.md` at the root — an index, the mandatory rules
    (English-only, conventional commits, the repo's real test pattern and review gates), and a Quick
-   Commands block with the repo's **real, runnable** commands. Create the `CLAUDE.md → AGENTS.md`
-   symlink.
-4. **`docs/`.** Generate the standard categories filled with real, repo-specific content:
-   `ARCHITECTURE.md`, `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   Commands block with the repo's **real, runnable** commands. If an `AGENTS.md` already exists, merge
+   into it rather than replacing it. Create the `CLAUDE.md → AGENTS.md` symlink (do not clobber an
+   existing `CLAUDE.md` without asking).
+2. **`docs/`.** Fill the standard categories with real, repo-specific content: `ARCHITECTURE.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, plus `PERFORMANCE.md` and a `docs/README.md` index.
-5. **Per-module docs.** Add a `README.md` (and a `docs/` subfolder for complex modules) inside each
+   If docs already exist, integrate and extend them — do not duplicate.
+3. **Per-module docs.** Add a `README.md` (and a `docs/` subfolder for complex modules) inside each
    major source module discovered in recon.
-6. **`.agents/` + `.claude → .agents`.** Create the canonical, cross-agent home: reasoned `agents/`,
-   stack-appropriate `skills/`, thin `dwp-*` `commands/` that delegate to the installed skill, a
-   `docs/` catalog (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) that matches what you
-   created, and `settings.json`. Add the `.claude → .agents` symlink.
-7. **Skill + `.dwp/`.** Make the skill discoverable in the repo and scaffold a gitignored `.dwp/` with
-   `plans/` and `drafts/`, plus a `tmp/` scratch space — both added to `.gitignore` non-destructively.
+4. **`.agents/` + `.claude → .agents`.** Create the canonical, cross-agent home: a **reasoned** catalog
+   of `agents/`, stack-appropriate `skills/`, and thin `dwp-*` `commands/` that delegate to the
+   installed skill — every entry justified for *this* repository, not copied from another. Add a
+   `docs/` catalog (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) that matches what exists on
+   disk, plus `settings.json`, and the `.claude → .agents` symlink. Fold any existing skills/agents
+   into the catalog.
+5. **The DWP skill, adapted.** The installed skill is the engine; the repository's own kit
+   (skills, agents, commands) must be **reasoned for this repo** — never a copy-paste of another
+   repository's kit.
+6. **`.dwp/` + `tmp/`.** Scaffold a gitignored `.dwp/` with `plans/` and `drafts/`, plus a `tmp/`
+   scratch space — both added to `.gitignore` non-destructively (append, never rewrite).
 
-## 3. Evolve the kit (author sub-skill)
+## 4. Evolve the kit (author sub-skill)
 
 Use the `author` sub-skill to grow the repository's own kit. The thin delegators `/skill-create` and
-`/agent-create` route to it. Create a **skill** for a repeatable in-session procedure, an **agent**
-for a recurring role with its own model tier and tools, and a **command** only as a thin delegator.
-Keep the `.agents/docs/` catalog in sync with what exists on disk.
+`/agent-create` route to it. Create a **skill** for a repeatable in-session procedure, an **agent** for
+a recurring role with its own model tier and tools, and a **command** only as a thin delegator. Keep
+the `.agents/docs/` catalog in sync with what exists on disk.
 
-## 4. Offer the opt-in addons
+## 5. Offer the opt-in addons
 
-After the baseline, enumerate the three addons and offer each as an explicit opt-in. A repo is fully
-conformant with **zero** addons — never auto-install them for everyone.
+After the baseline, enumerate the three addons and offer each as an explicit opt-in. A repository is
+fully conformant with **zero** addons — never auto-install them.
 
 - **Devcontainer support** — a reproducible, isolated dev container with persistent AI-CLI auth.
-- **Dailybot integration** — best-effort progress/milestone reporting for teams already using
-  Dailybot. The core methodology has zero Dailybot dependency.
+- **Dailybot integration** — best-effort progress/milestone reporting for teams already using Dailybot.
+  The core methodology has zero Dailybot dependency.
 - **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades. When
   accepted, it installs the `/lib-upgrade` command.
 
-## 5. Plan and execute
+## 6. Plan and execute
 
 Generate Deep Work Plans for any task and run them task by task:
 
@@ -90,7 +122,7 @@ Generate Deep Work Plans for any task and run them task by task:
 - `/dwp-refine` — add, remove, or reorder tasks while preserving completed work.
 - `/dwp-resume` — reconstruct state and continue an interrupted plan.
 
-## 6. Verify
+## 7. Verify
 
 Confirm the repository is now agent-ready:
 
@@ -98,9 +130,10 @@ Confirm the repository is now agent-ready:
 - [ ] `AGENTS.md` exists at the root with a real Quick Commands block; `CLAUDE.md` resolves to it.
 - [ ] `docs/` holds the standard categories with real, repo-specific content; major modules have a
       `README.md`.
-- [ ] `.agents/` exists with `agents/`, `commands/` (thin `dwp-*` delegators), `skills/`, and a
-      catalog that matches reality; `.claude → .agents` resolves.
+- [ ] `.agents/` exists with `agents/`, `commands/` (thin `dwp-*` delegators), `skills/`, and a catalog
+      that matches reality; `.claude → .agents` resolves.
 - [ ] `.dwp/` exists, is gitignored, and has `plans/` and `drafts/`; `tmp/` exists and is gitignored.
+- [ ] Existing user content was preserved or reconciled with consent — nothing was destroyed silently.
 - [ ] You can generate a Deep Work Plan and execute it task by task, validating each gate.
 
 ## Outcome
@@ -113,3 +146,5 @@ methodology:
 2. **The repository itself is the agent harness.** `AGENTS.md`, `docs/`, per-module docs, and the
    `.agents/` skill home give every agent the context and commands it needs to do structured,
    verifiable work.
+
+Anyone can run this prompt on any repository — and end with a codebase any AI agent can pilot.

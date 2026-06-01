@@ -47,7 +47,7 @@ export const en: SiteTranslations = {
       titleEmphasis: 'Give your agent one instruction.',
       instructionLabel: 'Give your agent this',
       instruction:
-        'Read and follow the instructions at https://deepworkplan.com/init to make this repository AI-first.',
+        'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
       instructionCaption:
         'Your agent reads the plan, installs the kit, and onboards your repository — reasoning about your actual stack, never pasting a template.',
       copyLabel: 'Copy',
@@ -1003,7 +1003,7 @@ I currently focus on AI applications, developer productivity, and high-impact pr
     handoffBody:
       'Paste the line below into your AI coding agent. It will read the methodology and specification, install the skill, and onboard this repository for Deep Work Plans.',
     handoffInstruction:
-      'Read and follow the instructions at https://deepworkplan.com/init to make this repository AI-first.',
+      'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
     handoffMdLabel: 'Self-contained agent prompt',
     codeLabel: 'agent',
     whatTitle: 'What this does',
