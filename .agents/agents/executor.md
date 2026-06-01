@@ -62,7 +62,6 @@ This agent focuses on:
 3. **Validate everything** — Run `pnpm run biome:check` and `pnpm run astro:check` after each change.
 4. **Commit incrementally** — Don't accumulate changes.
 5. **Stop on ambiguity** — Don't guess; escalate.
-6. **Enforce blog workflow policy** — New posts in `src/content/blog/` must be created with `/add-blog-post`.
 
 ## Workflow
 
@@ -159,13 +158,6 @@ pnpm run dev
    - Handle `MainLayout`, `getTranslations(lang)`, and content internally
 2. Create thin wrappers in `src/pages/{name}.astro` and `src/pages/es/{name}.astro`
    - Each wrapper is 3 lines: import + render with `lang` as string literal
-
-### Creating a Blog Post (Mandatory Skill Flow)
-
-1. Invoke `/add-blog-post` (do not manually scaffold new post files)
-2. Ensure both `src/content/blog/en/` and `src/content/blog/es/` are created/updated
-3. Confirm frontmatter parity (including `series` and `seriesOrder` when present)
-4. Run `pnpm run build`
    - Wrappers never import `MainLayout`
 3. Add translation keys to `src/lib/translations/` for all languages if needed
 4. Run validation

@@ -29,14 +29,14 @@ const tiers = [
     model: 'sonnet',
     description:
       'Multi-file tasks requiring context. Content creation, refactoring, testing. Balanced cost/quality.',
-    examples: 'add-blog-post, write-tests, refactor-safe, translate-sync',
+    examples: 'write-tests, refactor-safe, translate-sync',
   },
   {
     tier: 'Tier 3 — Heavy',
     model: 'opus',
     description:
       'Complex analysis and architectural tasks. Security audits, PR reviews, architecture decisions. Highest quality.',
-    examples: 'pr-review-lite, security-check, audit-post, audit-series',
+    examples: 'pr-review-lite, security-check, architect',
   },
 ];
 
@@ -72,24 +72,6 @@ const skills = [
     description: 'Update Tailwind styles with dark mode support',
   },
   {
-    name: 'optimize-image',
-    tier: 1,
-    command: '#optimize-image',
-    description: 'Convert and optimize images to WebP',
-  },
-  {
-    name: 'add-blog-post',
-    tier: 2,
-    command: '#add-blog-post',
-    description: 'Create blog posts (mandatory for new posts)',
-  },
-  {
-    name: 'add-slide-deck',
-    tier: 2,
-    command: '#add-slide-deck',
-    description: 'Create slide decks (mandatory for new decks)',
-  },
-  {
     name: 'add-component',
     tier: 2,
     command: '#add-component',
@@ -100,12 +82,6 @@ const skills = [
     tier: 2,
     command: '#add-page',
     description: 'Create new pages with correct routing and layout',
-  },
-  {
-    name: 'add-timeline-page',
-    tier: 2,
-    command: '#add-timeline-page',
-    description: 'Add a tag-filtered infinite-scroll timeline page',
   },
   {
     name: 'write-tests',
@@ -126,12 +102,6 @@ const skills = [
     description: 'Synchronize content between EN and ES',
   },
   {
-    name: 'promote-post',
-    tier: 2,
-    command: '#promote-post',
-    description: 'Generate social media content for blog posts',
-  },
-  {
     name: 'git-commit-push',
     tier: 2,
     command: '#git-commit-push',
@@ -148,18 +118,6 @@ const skills = [
     tier: 3,
     command: '#security-check',
     description: 'Security checklist for secrets, input, logging',
-  },
-  {
-    name: 'audit-post',
-    tier: 3,
-    command: '#audit-post',
-    description: 'Comprehensive pre-publication blog post audit',
-  },
-  {
-    name: 'audit-series',
-    tier: 3,
-    command: '#audit-series',
-    description: 'Pre-publication audit for entire blog series',
   },
 ];
 
@@ -192,24 +150,25 @@ const agents = [
     scope:
       'Translation quality specialist and multilingual consistency enforcer',
   },
-  {
-    name: 'content-writer',
-    tier: 2,
-    scope: 'Expert multilingual content writer for blog posts and articles',
-  },
 ];
 
 const mandatoryPolicies = [
   {
-    skill: '/add-blog-post',
+    skill: 'New pages',
     policy:
-      'All new blog posts MUST use this skill. Do not create blog post files manually. The skill handles frontmatter, i18n sync, image setup, and validation.',
+      'New top-level routes MUST use the page-wrapper pattern (shared *Page.astro + thin per-language wrappers) and be added to the src/middleware.ts allowlist (KNOWN_ROOT_PATHS / KNOWN_ES_PATHS), or they 404.',
     severity: 'Mandatory',
   },
   {
-    skill: '/add-slide-deck',
+    skill: 'Agent endpoints',
     policy:
-      'All new slide decks MUST use this skill. Do not create slide deck files manually. The skill handles type selection, frontmatter, i18n sync, and asset setup.',
+      'Every rendered HTML page MUST have a matching src/content/pages/{en,es}/*.md endpoint kept in sync. Verify with pnpm run md:check:strict.',
+    severity: 'Mandatory',
+  },
+  {
+    skill: 'Bilingual parity',
+    policy:
+      'All content and UI strings MUST exist in both EN and ES, with correct Spanish diacritics. No hardcoded user-visible text.',
     severity: 'Mandatory',
   },
 ];
@@ -218,25 +177,25 @@ const invocations = [
   {
     agent: 'Claude Code',
     prefix: '/',
-    example: '/add-blog-post',
+    example: '/dwp-create',
     notes: 'Native slash command support',
   },
   {
     agent: 'Cursor AI',
     prefix: '#',
-    example: '#add-blog-post',
+    example: '#dwp-create',
     notes: 'Cursor intercepts / for system commands',
   },
   {
     agent: 'OpenAI Codex',
     prefix: '#',
-    example: '#add-blog-post',
+    example: '#dwp-create',
     notes: 'Codex intercepts / for system commands',
   },
   {
     agent: 'Gemini / Others',
     prefix: '#',
-    example: '#add-blog-post',
+    example: '#dwp-create',
     notes: 'Use # or write command name in plain text',
   },
 ];

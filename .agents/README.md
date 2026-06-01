@@ -40,11 +40,11 @@ This project includes reusable **Skills** (procedures) and **Agents** (specializ
 
 | Type   | Tier 1 (Light) | Tier 2 (Standard) | Tier 3 (Heavy) | Total |
 |--------|:--------------:|:------------------:|:--------------:|:-----:|
-| Skills | 12             | 2                  | 0              | 14    |
+| Skills | 11             | 2                  | 0              | 13    |
 | Agents | 0              | 4                  | 1              | 5     |
-| **Total** | **12**      | **6**              | **1**          | **19** |
+| **Total** | **11**      | **6**              | **1**          | **18** |
 
-### Available Skills (14)
+### Available Skills (13)
 
 | Skill | Invocation | Tier | Description |
 |-------|-----------|------|-------------|
@@ -57,7 +57,6 @@ This project includes reusable **Skills** (procedures) and **Agents** (specializ
 | git-commit-push | `/git-commit-push` | 1 | Commit all changes and push to remote |
 | add-component | `/add-component` | 1 | Create new Astro or Svelte component with correct patterns |
 | add-page | `/add-page` | 1 | Create new page with routing and MainLayout |
-| add-blog-post | `/add-blog-post` | 1 | Create blog post with Content Collections frontmatter |
 | translate-sync | `/translate-sync` | 1 | Synchronize content between English and Spanish versions |
 | update-styles | `/update-styles` | 1 | Update Tailwind styles with dark mode support |
 | write-tests | `/write-tests` | 2 | Add or expand tests (Vitest/Playwright when configured) |

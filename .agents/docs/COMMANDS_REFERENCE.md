@@ -1,7 +1,7 @@
 # Commands Reference
 
 > **Auto-maintained.** Update this file whenever a skill or command is added or removed.
-> This repository (deepworkplan.com) has its own commands tailored to an Astro blog with multilingual content.
+> This repository (deepworkplan.com) has its own commands tailored to an Astro documentation-and-marketing site with multilingual content.
 > See [Skills & Agents Catalog](skills_agents_catalog.md) for detailed tiers, capabilities, and domain guides.
 
 ---
@@ -12,12 +12,12 @@ Different agents use different prefixes — **the behavior is identical, only th
 
 | Agent | Prefix | Example |
 |-------|--------|---------|
-| **Claude Code** | `/` (native) | `/add-blog-post` |
-| **OpenAI Codex** | `#` | `#add-blog-post` |
-| **Cursor AI** | `#` | `#add-blog-post` |
-| **Gemini / others** | `#` | `#add-blog-post` |
+| **Claude Code** | `/` (native) | `/dwp-create` |
+| **OpenAI Codex** | `#` | `#dwp-create` |
+| **Cursor AI** | `#` | `#dwp-create` |
+| **Gemini / others** | `#` | `#dwp-create` |
 
-> **Why `#` for non-Claude agents?** Most AI CLIs (Codex, Cursor) intercept `/` as their own system commands, so `/add-blog-post` never reaches the AI. Using `#` avoids that interception. You can also just write the command name in plain text: "run add-blog-post".
+> **Why `#` for non-Claude agents?** Most AI CLIs (Codex, Cursor) intercept `/` as their own system commands, so `/dwp-create` never reaches the AI. Using `#` avoids that interception. You can also just write the command name in plain text: "run dwp-create".
 
 When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 
@@ -62,16 +62,10 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 | `/quick-fix` | `.agents/skills/quick-fix/SKILL.md` | Fix small bugs in 1-3 files following existing patterns |
 | `/security-check` | `.agents/skills/security-check/SKILL.md` | Quick security checklist (secrets, API routes, client exposure) |
 
-## Blog & Content
+## Documentation
 
 | Command | Procedure File | Description |
 |---------|---------------|-------------|
-| `/new-post` | `.agents/commands/new-post.md` | Create a new blog post (interactive guided flow) |
-| `/add-blog-post` | `.agents/skills/add-blog-post/SKILL.md` | Create blog posts — topic mode (writes content) or content mode (scaffolding) |
-| `/promote-post` | `.agents/skills/promote-post/SKILL.md` | Generate social media content for blog posts across multiple platforms |
-| `/optimize-image` | `.agents/skills/optimize-image/SKILL.md` | Convert and optimize images to WebP for blog posts |
-| `/audit-post` | `.agents/skills/audit-post/SKILL.md` | Pre-publication audit for blog posts (SEO, AEO, accessibility, images, content quality, i18n) |
-| `/audit-series` | `.agents/skills/audit-series/SKILL.md` | Pre-publication audit for blog series (definition, ordering, cross-post consistency, navigation) |
 | `/doc` | `.agents/commands/doc.md` | Document a module following the documentation guide |
 | `/doc-edit` | `.agents/skills/doc-edit/SKILL.md` | Update documentation files (README, comments, MDX, markdown) |
 

@@ -22,7 +22,6 @@ Create new pages in the Astro application with correct file-based routing, MainL
 ## Non-Goals
 
 - Does NOT create components (use add-component skill)
-- Does NOT create blog posts (use add-blog-post skill)
 - Does NOT create API endpoints (separate concern)
 - Does NOT modify existing pages
 
@@ -281,7 +280,6 @@ $DYNAMIC: true
 ## Related
 
 - [add-component](../add-component/SKILL.md) - Create components
-- [add-blog-post](../add-blog-post/SKILL.md) - Create blog posts
 - [translate-sync](../translate-sync/SKILL.md) - Synchronize translations
 - docs/ARCHITECTURE.md - Routing details
 - src/pages/README.md - Page patterns

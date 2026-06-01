@@ -21,7 +21,7 @@ Synchronize content between English (en) and Spanish (es) versions of pages, blo
 
 ## Non-Goals
 
-- Does NOT create new pages or posts from scratch (use `add-page` or `add-blog-post`)
+- Does NOT create new pages from scratch (use `add-page`)
 - Does NOT modify the translation system architecture
 - Does NOT add new languages to `src/lib/i18n.ts` (only syncs existing active languages)
 - Does NOT change Content Collection schemas or `content.config.ts`
@@ -243,7 +243,6 @@ $CONTENT_TYPE: translation-strings
 
 ## Related
 
-- [add-blog-post](../add-blog-post/SKILL.md) - Create multilingual blog posts
 - [add-page](../add-page/SKILL.md) - Create multilingual pages
 - [add-component](../add-component/SKILL.md) - Create components with i18n support
 - `i18n-guardian` agent - Translation quality specialist

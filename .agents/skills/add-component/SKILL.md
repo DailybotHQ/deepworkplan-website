@@ -24,7 +24,6 @@ Create new Astro (`.astro`) or Svelte (`.svelte`) components following project p
 - Does NOT create entire features (just components)
 - Does NOT modify existing components
 - Does NOT create pages (use add-page skill)
-- Does NOT create blog posts (use add-blog-post skill)
 
 ## Tier Classification
 
@@ -244,7 +243,6 @@ $PURPOSE: Toggle between light and dark mode
 ## Related
 
 - [add-page](../add-page/SKILL.md) - Create pages
-- [add-blog-post](../add-blog-post/SKILL.md) - Create blog posts
 - [translate-sync](../translate-sync/SKILL.md) - Synchronize translations
 - [update-styles](../update-styles/SKILL.md) - Style modifications
 - [reviewer](../../agents/reviewer.md) - Review components
