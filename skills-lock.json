@@ -1,11 +1,11 @@
 {
-  "lockfileVersion": 1,
+  "version": 1,
   "skills": {
     "deepworkplan": {
       "source": "DailybotHQ/deepworkplan-skill",
-      "path": ".agents/skills/deepworkplan",
-      "version": "2.0.2",
-      "install": "npx skills add DailybotHQ/deepworkplan-skill"
+      "sourceType": "github",
+      "skillPath": "skills/deepworkplan/SKILL.md",
+      "computedHash": "9df4f5da90eb0108eadd03544e00931cd032dee56fc6e42318c521a0deeb5cfe"
     }
   }
 }
