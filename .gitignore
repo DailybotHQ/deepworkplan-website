@@ -50,3 +50,6 @@ spanish.png
 
 # DeepWorkPlan skill — installed via npx skills / setup.sh, not vendored
 .agents/skills/deepworkplan/
+
+# Scheduler runtime lock (ephemeral, not tracked)
+.agents/scheduled_tasks.lock
