@@ -55,8 +55,8 @@ Primero entiende el repositorio, luego propón qué harás.
 ## 2. Instala el skill de Deep Work Plan
 
 Instala el skill para que los agentes de este repositorio puedan planificar y ejecutar trabajo
-estructurado. Incluye un router más siete sub-skills — `create`, `execute`, `refine`, `resume`,
-`status`, `onboard` y `author`.
+estructurado. Incluye un router más ocho sub-skills — `create`, `execute`, `refine`, `resume`,
+`status`, `verify`, `onboard` y `author`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -134,7 +134,7 @@ Ejecuta `/dwp-verify` para obtener un informe objetivo de conformidad
 (aprobado/fallido) — comprueba los criterios del [documento de Conformidad de la
 especificación](https://deepworkplan.com/spec) — y luego confirma:
 
-- [ ] El skill está instalado y es resoluble, con las siete sub-skills disponibles.
+- [ ] El skill está instalado y es resoluble, con las ocho sub-skills disponibles.
 - [ ] `AGENTS.md` existe en la raíz con un bloque de Comandos Rápidos real; `CLAUDE.md` resuelve a él.
 - [ ] `docs/` contiene las categorías estándar con contenido real y específico del repo; los módulos
       principales tienen un `README.md`.

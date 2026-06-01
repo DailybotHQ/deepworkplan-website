@@ -111,7 +111,7 @@ export const es: SiteTranslations = {
         {
           title: 'Instala el skill de Deep Work Plan',
           description:
-            'El skill es el motor — el mismo en todos los repositorios. Un comando trae el router y sus sub-skills (create, execute, refine, resume, status, onboard, author) para Claude Code, Cursor, Codex, Gemini y Copilot.',
+            'El skill es el motor — el mismo en todos los repositorios. Un comando trae el router y sus sub-skills (create, execute, refine, resume, status, verify, onboard, author) para Claude Code, Cursor, Codex, Gemini y Copilot.',
         },
         {
           title: 'Adapta tu repositorio',
@@ -880,7 +880,7 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
       command: {
         title: 'Sub-skills y comandos',
         description:
-          'El enrutador de la skill y sus sub-skills (create, execute, refine, resume, status, onboard, author), más los comandos de barra ligeros que delegan en ellos.',
+          'El enrutador de la skill y sus sub-skills (create, execute, refine, resume, status, verify, onboard, author), más los comandos de barra ligeros que delegan en ellos.',
       },
       adapter: {
         title: 'Adaptadores',
@@ -939,7 +939,7 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
       {
         title: 'Instala la skill de Deep Work Plan',
         description:
-          'Añade la skill a tu repositorio — un enrutador y siete sub-skills (create, execute, refine, resume, status, onboard, author). Usa la CLI de Skills para el camino más rápido, o clona el repositorio y ejecuta el setup donde tengas git y una shell.',
+          'Añade la skill a tu repositorio — un enrutador y ocho sub-skills (create, execute, refine, resume, status, verify, onboard, author). Usa la CLI de Skills para el camino más rápido, o clona el repositorio y ejecuta el setup donde tengas git y una shell.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -1003,7 +1003,7 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
       {
         title: 'Instala la skill',
         description:
-          'Añade la skill de Deep Work Plan para que cualquier agente pueda planificar y ejecutar trabajo estructurado. La skill incluye un enrutador y siete sub-skills: create, execute, refine, resume, status, onboard y author.',
+          'Añade la skill de Deep Work Plan para que cualquier agente pueda planificar y ejecutar trabajo estructurado. La skill incluye un enrutador y ocho sub-skills: create, execute, refine, resume, status, verify, onboard y author.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',

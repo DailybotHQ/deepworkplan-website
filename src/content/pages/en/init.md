@@ -53,7 +53,7 @@ First understand the repository, then propose what you will do.
 ## 2. Install the Deep Work Plan skill
 
 Install the skill so this repository's agents can plan and execute structured work. It ships a router
-plus seven sub-skills — `create`, `execute`, `refine`, `resume`, `status`, `onboard`, and `author`.
+plus eight sub-skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, and `author`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -128,7 +128,7 @@ Run `/dwp-verify` for an objective pass/fail conformance report (it checks the
 criteria in the [specification's Conformance document](https://deepworkplan.com/spec)),
 then confirm:
 
-- [ ] The skill is installed and resolvable, with all seven sub-skills available.
+- [ ] The skill is installed and resolvable, with all eight sub-skills available.
 - [ ] `AGENTS.md` exists at the root with a real Quick Commands block; `CLAUDE.md` resolves to it.
 - [ ] `docs/` holds the standard categories with real, repo-specific content; major modules have a
       `README.md`.

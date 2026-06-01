@@ -42,7 +42,7 @@ It is also **harness engineering** made portable. An agent harness is the scaffo
 ## What happens when you run it
 
 1. **Your agent opens [/init.md](/init.md)** — it reads the onboarding prompt and the methodology, spec, and kit it links to.
-2. **It installs the Deep Work Plan skill** — the engine, identical in every repository: the router plus its sub-skills (create, execute, refine, resume, status, onboard, author), for Claude Code, Cursor, Codex, Gemini, and Copilot.
+2. **It installs the Deep Work Plan skill** — the engine, identical in every repository: the router plus its sub-skills (create, execute, refine, resume, status, verify, onboard, author), for Claude Code, Cursor, Codex, Gemini, and Copilot.
 3. **It adapts your repository** — reasoning about your real stack (never copy-pasting), it writes AGENTS.md, `docs/`, per-module READMEs, a reasoned `.agents/` kit, and a gitignored `.dwp/`. Your repository becomes the harness.
 4. **You plan and execute** — long-horizon Deep Work Plans, run step by step against explicit acceptance criteria and validation gates, autonomously for hours.
 

@@ -110,7 +110,7 @@ export const en: SiteTranslations = {
         {
           title: 'It installs the Deep Work Plan skill',
           description:
-            'The skill is the engine — the same in every repository. One command pulls in the router and its sub-skills (create, execute, refine, resume, status, onboard, author) for Claude Code, Cursor, Codex, Gemini, and Copilot.',
+            'The skill is the engine — the same in every repository. One command pulls in the router and its sub-skills (create, execute, refine, resume, status, verify, onboard, author) for Claude Code, Cursor, Codex, Gemini, and Copilot.',
         },
         {
           title: 'It adapts your repository',
@@ -873,7 +873,7 @@ I currently focus on AI applications, developer productivity, and high-impact pr
       command: {
         title: 'Sub-skills & commands',
         description:
-          'The skill router and its sub-skills (create, execute, refine, resume, status, onboard, author), plus the thin slash commands that delegate to them.',
+          'The skill router and its sub-skills (create, execute, refine, resume, status, verify, onboard, author), plus the thin slash commands that delegate to them.',
       },
       adapter: {
         title: 'Adapters',
@@ -932,7 +932,7 @@ I currently focus on AI applications, developer productivity, and high-impact pr
       {
         title: 'Install the Deep Work Plan skill',
         description:
-          'Add the skill to your repository — a router plus seven sub-skills (create, execute, refine, resume, status, onboard, author). Use the Skills CLI for the fastest path, or clone the repo and run setup where git and a shell are available.',
+          'Add the skill to your repository — a router plus eight sub-skills (create, execute, refine, resume, status, verify, onboard, author). Use the Skills CLI for the fastest path, or clone the repo and run setup where git and a shell are available.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -996,7 +996,7 @@ I currently focus on AI applications, developer productivity, and high-impact pr
       {
         title: 'Install the skill',
         description:
-          'Add the Deep Work Plan skill so any agent can plan and execute structured work. The skill ships a router plus seven sub-skills — create, execute, refine, resume, status, onboard, and author.',
+          'Add the Deep Work Plan skill so any agent can plan and execute structured work. The skill ships a router plus eight sub-skills — create, execute, refine, resume, status, verify, onboard, and author.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',

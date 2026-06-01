@@ -13,8 +13,8 @@ your repository spec-driven and agent-pilotable.
 
 ### 1. Install the Deep Work Plan skill
 
-Add the skill to your repository. It ships a router plus seven sub-skills — create, execute, refine,
-resume, status, onboard, and author. Use the Skills CLI for the fastest path:
+Add the skill to your repository. It ships a router plus eight sub-skills — create, execute, refine,
+resume, status, verify, onboard, and author. Use the Skills CLI for the fastest path:
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
