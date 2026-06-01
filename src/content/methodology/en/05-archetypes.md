@@ -46,3 +46,5 @@ An agent should classify a repository as an orchestrator hub when it finds multi
 | State | Local `.dwp/` | Cross-repository `.dwp/` |
 
 The practical effect is that an individual-repository agent reasons about one codebase end to end, while an orchestrator agent reasons about coordination — which child repository owns which work, and how cross-repository state stays consistent.
+
+Getting the archetype right is what lets an agent work autonomously for hours without supervision: it scopes plans, onboarding, and state to the right boundary, so the agent operates on the correct surface from the first task to the last.

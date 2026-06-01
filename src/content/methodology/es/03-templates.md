@@ -21,7 +21,7 @@ Un plan es un directorio bajo `.dwp/plans/` llamado `PLAN_<slug>/`. Contiene:
 
 ## Estructura del archivo de tarea
 
-Cada archivo de tarea se llama `<n>.task_<slug>.md` y sigue la anatomía de nueve secciones: Objetivo, Contexto, Pasos, Criterios de aceptación, Validación, Archivos, Dependencias, Riesgos y Finalización y registro. Las secciones aparecen siempre en ese orden para que cualquier lector sepa dónde mirar.
+Cada archivo de tarea se llama `<n>.task_<slug>.md` y sigue la anatomía de nueve secciones: Objetivo, Contexto, Pasos, Criterios de aceptación, Validación, Archivos, Dependencias, Riesgos y Finalización y registro. Las secciones aparecen siempre en ese orden para que cualquier lector sepa dónde mirar. Cada tarea se reancla al objetivo del plan antes de actuar, lo que evita que un agente se desvíe en un horizonte largo de varias horas.
 
 ## Las dos tareas finales obligatorias
 

@@ -46,3 +46,5 @@ Un agente debería clasificar un repositorio como centro orquestador cuando encu
 | Estado | `.dwp/` local | `.dwp/` entre repositorios |
 
 El efecto práctico es que un agente de repositorio individual razona sobre una base de código de principio a fin, mientras que un agente orquestador razona sobre la coordinación: qué repositorio hijo es responsable de qué trabajo y cómo se mantiene coherente el estado entre repositorios.
+
+Acertar el arquetipo es lo que permite a un agente trabajar de forma autónoma durante horas sin supervisión: acota los planes, la incorporación y el estado al límite correcto, de modo que el agente opera sobre la superficie adecuada desde la primera tarea hasta la última.

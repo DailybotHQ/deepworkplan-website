@@ -24,7 +24,7 @@ A useful shorthand: a skill is *how* to do a recurring task; an agent is *who* i
 
 Onboarding turns a repository into the agent harness; it does not freeze it. The kit is meant to **grow** as the repository's workflows become clear. DWP provides an **author** sub-skill — invoked through `/skill-create` and `/agent-create` — that reasons about the repository's existing `.agents/` layout and conventions, then writes a new skill, agent, or thin command delegator that matches them. The repository authors its own kit rather than inheriting a generic one.
 
-The author sub-skill is deliberate about fit. It creates a skill for a repeatable procedure people run by hand, an agent for a recurring role with distinct model or tool needs, and a command only as a thin entry point that routes to a skill or agent. It skips anything generic that does not match a real workflow, and it keeps the `.agents/docs/` catalog in sync with whatever it adds. The same sub-skill backs the mandatory Skills & Agents Discovery task, which reconciles the catalog against what is actually on disk.
+The author sub-skill is deliberate about fit. It creates a skill for a repeatable procedure people run by hand, an agent for a recurring role with distinct model or tool needs, and a command only as a thin entry point that routes to a skill or agent. It skips anything generic that does not match a real workflow, and it keeps the `.agents/docs/` catalog in sync with whatever it adds. The same sub-skill backs the mandatory Skills & Agents Discovery task, which reconciles the catalog against what is actually on disk — and `/dwp-verify` confirms that reconciliation objectively, failing if the catalog and the files diverge.
 
 ## Maintenance add-ons
 

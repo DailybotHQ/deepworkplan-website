@@ -21,7 +21,7 @@ A plan is a directory under `.dwp/plans/` named `PLAN_<slug>/`. It contains:
 
 ## Task file structure
 
-Each task file is named `<n>.task_<slug>.md` and follows the nine-section anatomy: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, and Completion & Log. The sections always appear in that order so any reader knows where to look.
+Each task file is named `<n>.task_<slug>.md` and follows the nine-section anatomy: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, and Completion & Log. The sections always appear in that order so any reader knows where to look. Each task re-anchors to the plan's goal before it acts, which keeps an agent from drifting over a long, multi-hour horizon.
 
 ## The two mandatory final tasks
 
