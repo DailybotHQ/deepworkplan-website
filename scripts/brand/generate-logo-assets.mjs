@@ -45,7 +45,7 @@ const ICO_SIZES = [16, 32, 48];
 const APPLE_TOUCH = 180;
 const PWA_SIZES = [192, 512];
 const TILE_RADIUS_FRAC = 0.22;
-const TILE_LOGO_FRAC = 0.9;
+const TILE_LOGO_FRAC = 0.94;
 
 function parseArgs(argv) {
   const a = { ...DEFAULTS };
@@ -252,30 +252,19 @@ async function main() {
     log(p, s, s);
   }
 
-  // theme-aware favicon.svg (paper tile + ink glyph; ink tile + paper glyph in dark)
+  // favicon.svg — always a light paper tile + ink glyph (NOT theme-aware, so it
+  // stays black-on-paper even when the browser/tab chrome is in dark mode).
   const glyphPx = Math.round(64 * TILE_LOGO_FRAC);
   const off = Math.round((64 - glyphPx) / 2);
   const inkUri = `data:image/png;base64,${(await sharp(inkMaster).resize(192, 192).png().toBuffer()).toString('base64')}`;
-  const paperUri = `data:image/png;base64,${(await sharp(paperMaster).resize(192, 192).png().toBuffer()).toString('base64')}`;
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Deep Work Plan">
-  <style>
-    .tile { fill: ${hex(PAPER)}; }
-    .g-light { display: inline; }
-    .g-dark { display: none; }
-    @media (prefers-color-scheme: dark) {
-      .tile { fill: ${hex(INK)}; }
-      .g-light { display: none; }
-      .g-dark { display: inline; }
-    }
-  </style>
-  <rect class="tile" x="0" y="0" width="64" height="64" rx="14"/>
-  <image class="g-light" x="${off}" y="${off}" width="${glyphPx}" height="${glyphPx}" href="${inkUri}"/>
-  <image class="g-dark" x="${off}" y="${off}" width="${glyphPx}" height="${glyphPx}" href="${paperUri}"/>
+  <rect x="0" y="0" width="64" height="64" rx="14" fill="${hex(PAPER)}"/>
+  <image x="${off}" y="${off}" width="${glyphPx}" height="${glyphPx}" href="${inkUri}"/>
 </svg>
 `;
   const svgPath = `${args.public}/favicon.svg`;
   writeFileSync(svgPath, svg);
-  console.log(`  ✓ ${svgPath}  (theme-aware SVG)`);
+  console.log(`  ✓ ${svgPath}  (fixed light tile + ink glyph)`);
 
   console.log('\nDone.');
 }
