@@ -150,7 +150,12 @@ export const es: SiteTranslations = {
         {
           label: 'El skill de Deep Work Plan, instalado',
           detail:
-            'crear, ejecutar, refinar, reanudar, estado e incorporar, disponibles para tu agente como un único paquete de skills, sin copia por repositorio.',
+            'create, execute, refine, resume, status, verify, onboard y author, disponibles para tu agente como un único paquete de skills, sin copia por repositorio.',
+        },
+        {
+          label: 'Conformidad que puedes comprobar',
+          detail:
+            '/dwp-verify produce un informe objetivo de aprobado/fallido frente a la especificación, de modo que "AI-first" se verifica, no se afirma — y es reverificable tras cada plan.',
         },
         {
           label: 'Dos arquetipos, gestionados',
