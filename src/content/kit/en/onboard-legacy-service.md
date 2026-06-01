@@ -1,0 +1,28 @@
+---
+title: "Onboarding a legacy service"
+description: "An illustrative walkthrough of pointing an agent at an undocumented legacy repository and leaving it AI-first — reasoned, non-destructive, and verifiable."
+kind: example
+lang: en
+order: 4
+---
+
+# Onboarding a legacy service
+
+An illustrative walkthrough of the first thing most teams do: take an existing, under-documented repository and make it agent-pilotable — without disturbing what already works.
+
+## The goal
+
+"Make this five-year-old service AI-first." It already has a partial `README`, some scattered docs, and no `AGENTS.md`.
+
+## The run
+
+The developer hands their agent one line — *read and follow [`/init.md`](/init.md)* — and the onboarding flow:
+
+1. **Reconnaissance.** Detects the real language, package manager (from the lockfile that exists), and the actual build, test, and lint commands — by reading the repo, not by assuming.
+2. **Proposes a plan and asks.** Because artifacts already exist, it is non-destructive: it lists what it will create versus what it will reconcile, and waits for approval before touching the partial `README` or scattered docs.
+3. **Generates the harness.** A reasoned `AGENTS.md` with the service's real Quick Commands, a categorized `docs/` tree that absorbs the existing notes rather than duplicating them, per-module READMEs, the `.agents/` kit, and a gitignored `.dwp/`.
+4. **Verifies.** `/dwp-verify` returns an objective pass/fail report against the conformance criteria.
+
+## Outcome
+
+The legacy service becomes AI-first with nothing destroyed: existing work is merged, not overwritten, and the result is checkable rather than asserted. From here the team plans and executes real work with `/dwp-create` and `/dwp-execute`.

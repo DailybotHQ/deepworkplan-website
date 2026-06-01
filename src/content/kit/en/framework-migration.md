@@ -1,0 +1,35 @@
+---
+title: "A framework migration"
+description: "An illustrative walkthrough of a long-horizon framework migration run as a Deep Work Plan — the kind of multi-hour, multi-file work where agents usually drift."
+kind: example
+lang: en
+order: 3
+---
+
+# A framework migration
+
+An illustrative walkthrough of the work DWP is built for: a migration that spans dozens of files and several hours — long enough that an unguided agent loses the thread.
+
+## The goal
+
+"Migrate the data layer from the legacy ORM to the new one across the whole service."
+
+## Without a plan
+
+An agent edits models until its context fills with half-finished changes, forgets which call sites it has already converted, and leaves the build red with no record of what remains. Resuming means reconstructing its own train of thought from a chat log.
+
+## As a Deep Work Plan
+
+`/dwp-create` decomposes the goal into atomic, ordered tasks, each with acceptance criteria and a validation gate:
+
+1. Introduce the new ORM alongside the old one (no behavior change; gate: build + tests green).
+2. Migrate module A's models and call sites (gate: module A tests green).
+3. Repeat per module, one task each — progress recorded after every task.
+4. Remove the legacy ORM and its shims (gate: no references remain; full suite green).
+5. Update docs and the per-module READMEs.
+
+`/dwp-execute` runs the tasks in order, committing after each passing gate and updating `PROGRESS.md`. If the context window resets midway, `/dwp-resume` reads the plan and progress from disk and continues at the next unchecked task.
+
+## Outcome
+
+The migration lands as a sequence of small, reviewable, individually-validated commits — and survives interruptions, because the plan, not the conversation, is the source of truth.
