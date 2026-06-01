@@ -82,6 +82,7 @@ export interface SiteTranslations {
   footer: {
     copyright: string;
     allRightsReserved: string;
+    poweredBy: string;
   };
 
   // Deep Work Plan homepage
@@ -172,6 +173,7 @@ export interface SiteTranslations {
       badge: string;
       quote: string;
       attribution: string;
+      dailybotCta: string;
     };
     finalCta: {
       badge: string;

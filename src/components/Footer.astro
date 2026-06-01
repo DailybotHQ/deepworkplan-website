@@ -86,6 +86,33 @@ const links = [
         </a>
       </nav>
 
+      <!-- Engineering as marketing: give Dailybot visibility -->
+      <a
+        href="https://www.dailybot.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 hover:opacity-80 transition-opacity"
+        aria-label="Powered by Dailybot"
+      >
+        <span class="kicker" style="color: var(--color-muted);"
+          >{t.footer.poweredBy}</span
+        >
+        <img
+          class="h-5 w-auto block dark:hidden"
+          src="/images/dailybot/logo-horizontal-black.svg"
+          alt="Dailybot"
+          width="82"
+          height="20"
+        />
+        <img
+          class="h-5 w-auto hidden dark:block"
+          src="/images/dailybot/logo-horizontal-white.svg"
+          alt="Dailybot"
+          width="82"
+          height="20"
+        />
+      </a>
+
       <div class="kicker text-center">
         &copy; <span id="copyright-year">{new Date().getFullYear()}</span> Deep Work
         Plan &middot; {t.footer.allRightsReserved}

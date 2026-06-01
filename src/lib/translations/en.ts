@@ -32,6 +32,7 @@ export const en: SiteTranslations = {
   footer: {
     copyright: 'Deep Work Plan',
     allRightsReserved: 'All rights reserved.',
+    poweredBy: 'Powered by',
   },
 
   // Deep Work Plan homepage
@@ -291,6 +292,7 @@ export const en: SiteTranslations = {
       quote:
         'Built by Dailybot — the company behind asynchronous standups for distributed teams. Internally we used Deep Work Plans to make production repositories spanning Django, Vue, TypeScript Lambda, and Astro agent-pilotable. After months of production use, we open-sourced the methodology under MIT.',
       attribution: 'The Dailybot engineering team',
+      dailybotCta: 'Learn about Dailybot',
     },
     finalCta: {
       badge: 'Make your repository AI-first',

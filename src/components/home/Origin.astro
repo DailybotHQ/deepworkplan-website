@@ -28,6 +28,31 @@ const o = t.home.origin;
         </p>
       </blockquote>
       <figcaption class="fig-caption mt-4">— {o.attribution}</figcaption>
+      <a
+        href="https://www.dailybot.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-6 inline-flex items-center gap-2 hover:opacity-80 transition-opacity"
+        aria-label={o.dailybotCta}
+      >
+        <img
+          class="h-6 w-auto block dark:hidden"
+          src="/images/dailybot/logo-horizontal-black.svg"
+          alt="Dailybot"
+          width="98"
+          height="24"
+        />
+        <img
+          class="h-6 w-auto hidden dark:block"
+          src="/images/dailybot/logo-horizontal-white.svg"
+          alt="Dailybot"
+          width="98"
+          height="24"
+        />
+        <span class="kicker" style="color: var(--color-secondary);"
+          >{o.dailybotCta} &rarr;</span
+        >
+      </a>
     </figure>
   </div>
 </section>
