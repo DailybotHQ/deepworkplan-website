@@ -23,12 +23,24 @@ Crea un nuevo Deep Work Plan a partir de un objetivo de alto nivel.
 /dwp-create <goal>
 ```
 
+## Modos
+
+`dwp-create` usa por defecto el modo **guiado**: reúne contexto, escribe un único borrador refinado, **te lo muestra y pide confirmación antes de generar el plan final** — de modo que siempre lees el plan antes de que se cree. Es el valor por defecto recomendado, sobre todo las primeras veces.
+
+Añade **`trust`** (o `auto`) como última palabra para omitir las confirmaciones — el agente escribe el borrador refinado y pasa directo al plan final:
+
+```
+/dwp-create <goal> trust
+```
+
+El modo trust es el atajo para usuarios avanzados una vez que confías en el flujo; el modo guiado mantiene a una persona en el bucle por defecto.
+
 ## Comportamiento
 
 1. Analiza el objetivo y el contexto del repositorio.
 2. Formula preguntas aclaratorias si es ambiguo.
-3. Descompone en tareas secuenciales.
-4. Escribe README, archivos de tarea y PROGRESS.
+3. Escribe un borrador refinado en `.dwp/drafts/` (en modo guiado, revísalo y confírmalo).
+4. Descompone en tareas secuenciales y escribe el README, los archivos de tarea y PROGRESS.
 5. Termina con las dos tareas finales obligatorias.
 
 ## Alias
