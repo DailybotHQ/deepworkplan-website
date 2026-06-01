@@ -13,6 +13,7 @@ La especificación es la definición precisa y legible de la metodología — la
 - **Protocolo de agentes** — el comportamiento requerido entre agentes y el mapeo de comandos.
 - **Arquetipos** — repos individuales frente a hubs orquestadores.
 - **Complementos** — el mecanismo opcional para añadir capacidades, incluida la subhabilidad author (para que un repositorio cree su propio kit) y los complementos de mantenimiento como dependency-upgrade.
+- **Conformidad** — la definición normativa de un repositorio AI-first: los artefactos que un repositorio DEBE y DEBERÍA tener, qué hace que un plan esté bien formado y cómo verificarlo de forma objetiva con `/dwp-verify`.
 
 - [Leer la especificación](/es/spec)
 - [Leer la metodología](/es/methodology)
