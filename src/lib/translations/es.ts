@@ -157,6 +157,11 @@ export const es: SiteTranslations = {
             'La incorporación clasifica tu repositorio como repo individual (el caso común) o como hub orquestador que coordina planes hijos entre repositorios.',
         },
         {
+          label: 'Un kit vivo que tu repositorio crea',
+          detail:
+            'La subhabilidad author (skill-create, agent-create) permite al repositorio crear sus propias habilidades, agentes y comandos; los complementos de mantenimiento opcionales como dependency-upgrade ayudan a mantenerlo actualizado.',
+        },
+        {
           label: 'Nativo de git, reanudable, .dwp/',
           detail:
             'Sin demonios ni estado externo. Los planes y borradores quedan en una carpeta .dwp/ ignorada por git, y cualquier tarea se reanuda solo desde git, incluso tras un desbordamiento de contexto.',

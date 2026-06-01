@@ -6,6 +6,15 @@
 
 The site has three jobs: (1) explain and sell the methodology, (2) host the readable specification, and (3) catalog the kit (presets, adapters, commands) used to install DWP into a repository. It is a fast, fully bilingual (English + Spanish) static site, and it **dogfoods** the methodology it documents.
 
+Beyond turning a repository AI-first, DWP lets that repository **evolve its own kit** and **maintain itself**:
+
+- **The author sub-skill** — invoked through `/skill-create` and `/agent-create`, it reasons about the repository's existing `.agents/` layout and conventions and authors new skills, agents, or thin command delegators that match them, keeping the catalog in sync. The repository grows its own kit instead of inheriting a generic one. The same sub-skill backs the mandatory Skills & Agents Discovery task.
+- **Maintenance add-ons** — opt-in extensions, never required for conformance. The **dependency-upgrade** add-on reasons about the repository's actual package manager (not assuming npm) and upgrades dependencies in small, validated, revertible batches, running the repository's real gate after each batch.
+
+### This repository dogfoods DWP
+
+The website repository practices the methodology it documents. The official DeepWorkPlan skill is installed under `.agents/skills/deepworkplan/` using a **reference-install model**: the skill source is gitignored (not vendored), and a committed `skills-lock.json` pins the reference. What is committed is the thin `dwp-*` command delegators (`/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`), the `/skill-create` and `/agent-create` delegators that route to the author sub-skill, the `/lib-upgrade` delegator for the dependency-upgrade add-on, the `/init` adoption flow, and the docs. All Deep Work Plan output lives in the gitignored `.dwp/` directory (`.dwp/plans/`, `.dwp/drafts/`). The legacy homegrown command engine has been retired in favor of this install. See [Architecture → Dogfooding DWP](ARCHITECTURE.md#dogfooding-dwp) for the install and `.dwp/` details.
+
 ## Positioning
 
 **Primary identity:** The methodology site for planning and executing complex software work with AI coding agents.

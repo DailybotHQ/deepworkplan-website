@@ -425,4 +425,32 @@ const keyFiles = [
     </div>
   </section>
 
+  <!-- Dogfooding DWP -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Dogfooding DWP</h2>
+    <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        This repository runs on the methodology it documents. The official
+        DeepWorkPlan skill is installed under
+        <code class="text-xs">.agents/skills/deepworkplan/</code> as a
+        <strong>reference install</strong>: the skill source is gitignored and
+        pinned by a committed <code class="text-xs">skills-lock.json</code>. What
+        is committed is the thin <code class="text-xs">dwp-*</code> command
+        delegators that route to the skill's sub-skills, plus
+        <code class="text-xs">/skill-create</code> and
+        <code class="text-xs">/agent-create</code> (which route to the
+        <strong>author</strong> sub-skill that grows the repo's own skills,
+        agents, and commands) and <code class="text-xs">/lib-upgrade</code> (the
+        opt-in <strong>dependency-upgrade</strong> add-on).
+      </p>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        All Deep Work Plan output lives in the gitignored
+        <code class="text-xs">.dwp/</code> directory
+        (<code class="text-xs">.dwp/plans/</code>,
+        <code class="text-xs">.dwp/drafts/</code>). The legacy homegrown
+        command engine has been retired in favor of the installed skill.
+      </p>
+    </div>
+  </section>
+
 </InternalLayout>

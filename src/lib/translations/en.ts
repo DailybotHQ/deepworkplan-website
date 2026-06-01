@@ -156,6 +156,11 @@ export const en: SiteTranslations = {
             'Onboarding classifies your repository as an individual repo (the common case) or an orchestrator hub that coordinates child plans across repositories.',
         },
         {
+          label: 'A living kit your repository grows',
+          detail:
+            'The author sub-skill (skill-create, agent-create) lets the repository evolve its own skills, agents, and commands; opt-in maintenance add-ons such as dependency-upgrade help it keep itself up to date.',
+        },
+        {
           label: 'Git-native, resumable, .dwp/',
           detail:
             'No daemon and no external state. Plans and drafts land in a gitignored .dwp/ folder, and any task resumes from git alone — even after context overflows.',
