@@ -121,15 +121,7 @@ export interface SiteTranslations {
       title: string;
       subtitle: string;
       steps: { title: string; description: string }[];
-      installTitle: string;
-      installNote: string;
-      codeLabel: string;
-      installOptions: {
-        tag: string;
-        title: string;
-        command: string;
-        note: string;
-      }[];
+      note: string;
     };
     outcomes: {
       badge: string;
@@ -182,6 +174,7 @@ export interface SiteTranslations {
       attribution: string;
     };
     finalCta: {
+      badge: string;
       title: string;
       subtitle: string;
       primaryCta: string;

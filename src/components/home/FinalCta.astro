@@ -17,7 +17,7 @@ const f = t.home.finalCta;
 <section class="py-16 md:py-24">
   <div class="main-container">
     <div class="max-w-3xl">
-      <Kicker>{t.home.quickstart.badge}</Kicker>
+      <Kicker>{f.badge}</Kicker>
       <h2
         class="font-display mt-3 text-3xl font-bold md:text-4xl"
         style="color: var(--color-ink);"
@@ -27,14 +27,14 @@ const f = t.home.finalCta;
       <p class="lead mt-4">{f.subtitle}</p>
       <div class="mt-8 flex flex-col gap-4 sm:flex-row">
         <a
-          href={`${prefix}/methodology`}
+          href={`${prefix}/init`}
           class="inline-flex items-center justify-center rounded-sm px-6 py-3 text-base font-semibold transition hover:opacity-90"
           style="background-color: var(--color-ink); color: var(--color-paper);"
         >
           {f.primaryCta}
         </a>
         <a
-          href={`${prefix}/spec`}
+          href={`${prefix}/methodology`}
           class="inline-flex items-center justify-center rounded-sm border px-6 py-3 text-base font-semibold transition hover:opacity-80"
           style="border-color: var(--color-line); color: var(--color-ink);"
         >

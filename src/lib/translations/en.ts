@@ -99,54 +99,30 @@ export const en: SiteTranslations = {
       badge: 'What happens when you run it',
       title: 'One instruction. The repository does the rest.',
       subtitle:
-        'You do not pick an install method or copy a template. You hand your agent one line, and it follows the /init plan end to end.',
+        'You do not pick an install method or copy a template. You hand your agent one line; it installs the skill — the reusable engine — and adapts your repository to it.',
       steps: [
         {
-          title: 'Your agent opens /init',
+          title: 'Your agent opens /init.md',
           description:
-            'It fetches the onboarding prompt at deepworkplan.com/init and reads the methodology, specification, and kit it links to — the standard it is about to adopt.',
+            'It reads the onboarding prompt at deepworkplan.com/init.md and the methodology, specification, and kit it links to — the standard it is about to adopt.',
         },
         {
           title: 'It installs the Deep Work Plan skill',
           description:
-            'One command pulls in the router and its sub-skills — create, execute, refine, resume, status, onboard, and author — available to Claude Code, Cursor, Codex, Gemini, and Copilot.',
+            'The skill is the engine — the same in every repository. One command pulls in the router and its sub-skills (create, execute, refine, resume, status, onboard, author) for Claude Code, Cursor, Codex, Gemini, and Copilot.',
         },
         {
-          title: 'It onboards your repository',
+          title: 'It adapts your repository',
           description:
-            'Reasoning about your real stack, it writes AGENTS.md, a categorized docs/ tree, per-module READMEs, the cross-agent .agents/ kit, and a gitignored .dwp/ — your repository becomes the harness. No templates, no placeholders.',
+            'Reasoning about your real stack — never copy-pasting — it writes AGENTS.md, a categorized docs/ tree, per-module READMEs, a reasoned .agents/ kit, and a gitignored .dwp/. Your repository becomes the harness.',
         },
         {
           title: 'You plan and execute',
           description:
-            'Generate long-horizon Deep Work Plans for any task and run them step by step, with explicit acceptance criteria, validation gates, and resumable state.',
+            'Generate long-horizon Deep Work Plans for any task and run them step by step, with explicit acceptance criteria, validation gates, and resumable state — autonomously, for hours.',
         },
       ],
-      installTitle: 'Prefer to install the skill yourself?',
-      installNote:
-        'The instruction above does this for you. If you would rather install the skill directly, any of these work — then tell your agent to make the repository AI-first.',
-      codeLabel: 'paste into your terminal',
-      installOptions: [
-        {
-          tag: 'Skills CLI',
-          title: 'Cross-agent skill pack',
-          command: 'npx skills add DailybotHQ/deepworkplan-skill',
-          note: 'Installs once for Claude Code, Cursor, Codex, Gemini, and Copilot.',
-        },
-        {
-          tag: 'OpenClaw',
-          title: 'Native registry',
-          command: 'openclaw skills install deepworkplan',
-          note: 'Loaded natively on every eligible session — no trigger setup required.',
-        },
-        {
-          tag: 'Git clone',
-          title: 'No package manager',
-          command:
-            'git clone https://github.com/DailybotHQ/deepworkplan-skill.git\ncd deepworkplan-skill\n./setup.sh',
-          note: 'The skill is just Markdown and Bash; setup symlinks it into your agent’s skills directory.',
-        },
-      ],
+      note: 'The skill is installed identically everywhere; what is adapted is your repository — the AGENTS.md, docs, and reasoned .agents/ kit generated for your stack. That split is what makes the methodology a reusable standard rather than a one-off scaffold.',
     },
     outcomes: {
       badge: 'What you get',
@@ -317,11 +293,12 @@ export const en: SiteTranslations = {
       attribution: 'The Dailybot engineering team',
     },
     finalCta: {
+      badge: 'Make your repository AI-first',
       title: 'Give your agents deep work.',
       subtitle:
-        'Read the methodology, then install the skill and tell your agent to make the repository AI-first. It reasons about your stack and commits a complete AGENTS.md hierarchy — and you run Deep Work Plans from there.',
-      primaryCta: 'Read the methodology',
-      secondaryCta: 'Read the spec',
+        'Hand your agent one line — point it at /init.md — and it makes your repository AI-first: it installs the skill, reasons about your stack, and commits a complete AGENTS.md hierarchy. From there you create and execute Deep Work Plans that run autonomously for hours.',
+      primaryCta: 'Open the /init prompt',
+      secondaryCta: 'Read the methodology',
       meta: 'MIT-licensed · zero telemetry · outputs to a gitignored .dwp/ folder.',
     },
   },

@@ -100,54 +100,30 @@ export const es: SiteTranslations = {
       badge: 'Qué ocurre cuando lo ejecutas',
       title: 'Una sola instrucción. El repositorio hace el resto.',
       subtitle:
-        'No eliges un método de instalación ni copias una plantilla. Le das a tu agente una sola línea y él sigue el plan de /init de principio a fin.',
+        'No eliges un método de instalación ni copias una plantilla. Le das a tu agente una sola línea; instala el skill — el motor reutilizable — y adapta tu repositorio a él.',
       steps: [
         {
-          title: 'Tu agente abre /init',
+          title: 'Tu agente abre /init.md',
           description:
-            'Obtiene el prompt de incorporación en deepworkplan.com/init y lee la metodología, la especificación y el kit que enlaza: el estándar que está a punto de adoptar.',
+            'Lee el prompt de incorporación en deepworkplan.com/init.md y la metodología, la especificación y el kit que enlaza: el estándar que está a punto de adoptar.',
         },
         {
           title: 'Instala el skill de Deep Work Plan',
           description:
-            'Un comando trae el router y sus sub-skills — create, execute, refine, resume, status, onboard y author — disponibles para Claude Code, Cursor, Codex, Gemini y Copilot.',
+            'El skill es el motor — el mismo en todos los repositorios. Un comando trae el router y sus sub-skills (create, execute, refine, resume, status, onboard, author) para Claude Code, Cursor, Codex, Gemini y Copilot.',
         },
         {
-          title: 'Incorpora tu repositorio',
+          title: 'Adapta tu repositorio',
           description:
-            'Razonando sobre tu stack real, escribe AGENTS.md, un árbol docs/ categorizado, READMEs por módulo, el kit multiagente .agents/ y un .dwp/ ignorado por git: tu repositorio se convierte en el harness. Sin plantillas, sin marcadores de posición.',
+            'Razonando sobre tu stack real — nunca copiando y pegando — escribe AGENTS.md, un árbol docs/ categorizado, READMEs por módulo, un kit .agents/ razonado y un .dwp/ ignorado por git. Tu repositorio se convierte en el harness.',
         },
         {
           title: 'Planificas y ejecutas',
           description:
-            'Genera Deep Work Plans de largo alcance para cualquier tarea y ejecútalos paso a paso, con criterios de aceptación explícitos, puertas de validación y estado reanudable.',
+            'Genera Deep Work Plans de largo alcance para cualquier tarea y ejecútalos paso a paso, con criterios de aceptación explícitos, puertas de validación y estado reanudable — de forma autónoma, durante horas.',
         },
       ],
-      installTitle: '¿Prefieres instalar el skill tú mismo?',
-      installNote:
-        'La instrucción de arriba lo hace por ti. Si prefieres instalar el skill directamente, cualquiera de estas opciones funciona; luego pídele a tu agente que haga el repositorio AI-first.',
-      codeLabel: 'pega esto en tu terminal',
-      installOptions: [
-        {
-          tag: 'Skills CLI',
-          title: 'Paquete multiagente',
-          command: 'npx skills add DailybotHQ/deepworkplan-skill',
-          note: 'Se instala una vez para Claude Code, Cursor, Codex, Gemini y Copilot.',
-        },
-        {
-          tag: 'OpenClaw',
-          title: 'Registro nativo',
-          command: 'openclaw skills install deepworkplan',
-          note: 'Se carga de forma nativa en cada sesión elegible, sin configurar disparadores.',
-        },
-        {
-          tag: 'Clonar git',
-          title: 'Sin gestor de paquetes',
-          command:
-            'git clone https://github.com/DailybotHQ/deepworkplan-skill.git\ncd deepworkplan-skill\n./setup.sh',
-          note: 'El skill es solo Markdown y Bash; setup lo enlaza al directorio de skills de tu agente.',
-        },
-      ],
+      note: 'El skill se instala idéntico en todas partes; lo que se adapta es tu repositorio — el AGENTS.md, los docs y el kit .agents/ razonado generados para tu stack. Esa separación es lo que hace de la metodología un estándar reutilizable y no un andamiaje de una sola vez.',
     },
     outcomes: {
       badge: 'Lo que obtienes',
@@ -319,11 +295,12 @@ export const es: SiteTranslations = {
       attribution: 'El equipo de ingeniería de Dailybot',
     },
     finalCta: {
+      badge: 'Haz que tu repositorio sea AI-first',
       title: 'Dale deep work a tus agentes.',
       subtitle:
-        'Lee la metodología, luego instala el skill y pídele a tu agente que haga el repositorio AI-first. Razona sobre tu stack y confirma una jerarquía completa de AGENTS.md, y desde ahí ejecutas Deep Work Plans.',
-      primaryCta: 'Leer la metodología',
-      secondaryCta: 'Leer la especificación',
+        'Dale a tu agente una sola línea — apúntalo a /init.md — y hace que tu repositorio sea AI-first: instala el skill, razona sobre tu stack y confirma una jerarquía completa de AGENTS.md. Desde ahí creas y ejecutas Deep Work Plans que corren de forma autónoma durante horas.',
+      primaryCta: 'Abrir el prompt de /init',
+      secondaryCta: 'Leer la metodología',
       meta: 'Con licencia MIT · sin telemetría · los resultados van a una carpeta .dwp/ ignorada por git.',
     },
   },

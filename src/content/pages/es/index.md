@@ -41,18 +41,12 @@ También es **ingeniería de harness** hecha portable. Un harness de agente es e
 
 ## Qué ocurre cuando lo ejecutas
 
-1. **Tu agente abre [/init](/es/init)** — lee el prompt de incorporación y la metodología, la especificación y el kit que enlaza.
-2. **Instala el skill de Deep Work Plan** — el router más sus sub-skills (create, execute, refine, resume, status, onboard, author), para Claude Code, Cursor, Codex, Gemini y Copilot.
-3. **Incorpora tu repositorio** — razonando sobre tu stack real, escribe AGENTS.md, `docs/`, READMEs por módulo, el kit `.agents/` y un `.dwp/` ignorado por git. Sin plantillas, sin marcadores de posición.
-4. **Planificas y ejecutas** — Deep Work Plans de largo alcance, ejecutados paso a paso contra criterios de aceptación y puertas de validación explícitos.
+1. **Tu agente abre [/init.md](/es/init.md)** — lee el prompt de incorporación y la metodología, la especificación y el kit que enlaza.
+2. **Instala el skill de Deep Work Plan** — el motor, idéntico en todos los repositorios: el router más sus sub-skills (create, execute, refine, resume, status, onboard, author), para Claude Code, Cursor, Codex, Gemini y Copilot.
+3. **Adapta tu repositorio** — razonando sobre tu stack real (nunca copiando y pegando), escribe AGENTS.md, `docs/`, READMEs por módulo, un kit `.agents/` razonado y un `.dwp/` ignorado por git. Tu repositorio se convierte en el harness.
+4. **Planificas y ejecutas** — Deep Work Plans de largo alcance, ejecutados paso a paso contra criterios de aceptación y puertas de validación explícitos, de forma autónoma durante horas.
 
-¿Prefieres instalar el skill tú mismo? La instrucción de arriba lo hace por ti, pero cualquiera de estas opciones funciona; luego pídele a tu agente que haga el repositorio AI-first:
-
-```
-npx skills add DailybotHQ/deepworkplan-skill
-openclaw skills install deepworkplan
-git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh
-```
+El skill es el motor reutilizable, instalado igual en todas partes; lo que se adapta es tu repositorio. La mecánica de instalación (Skills CLI, OpenClaw o git clone) vive en el prompt [/init.md](/es/init.md) y en el [inicio rápido](/es/quickstart).
 
 ---
 

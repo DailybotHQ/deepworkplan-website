@@ -57,55 +57,12 @@ const q = t.home.quickstart;
       }
     </ol>
 
-    <!-- Install methods, demoted: the instruction handles this for most users -->
-    <details class="mt-8 max-w-3xl">
-      <summary
-        class="cursor-pointer text-base font-semibold transition hover:opacity-80"
-        style="color: var(--color-ink);"
-      >
-        {q.installTitle}
-      </summary>
-      <p class="mt-3" style="color: var(--color-muted);">{q.installNote}</p>
-      <div class="mt-6 grid gap-6 lg:grid-cols-3">
-        {
-          q.installOptions.map((opt) => (
-            <article
-              class="flex flex-col gap-3 rounded-sm border p-5"
-              style="border-color: var(--color-line);"
-            >
-              <span class="kicker" style="color: var(--color-muted);">
-                {opt.tag}
-              </span>
-              <h4
-                class="font-display text-base font-semibold"
-                style="color: var(--color-ink);"
-              >
-                {opt.title}
-              </h4>
-              <div
-                class="mt-auto overflow-hidden rounded-sm border"
-                style="border-color: var(--color-line);"
-              >
-                <div
-                  class="border-b px-3 py-1.5"
-                  style="border-color: var(--color-line); background-color: color-mix(in srgb, var(--color-ink) 5%, var(--color-paper));"
-                >
-                  <span class="kicker" style="color: var(--color-muted);">
-                    {q.codeLabel}
-                  </span>
-                </div>
-                <pre
-                  class="overflow-x-auto px-3 py-3"
-                  style="font-family: var(--font-mono); background-color: color-mix(in srgb, var(--color-ink) 4%, var(--color-paper));"
-                ><code class="text-xs leading-relaxed" style="color: var(--color-ink);">{opt.command}</code></pre>
-              </div>
-              <p class="leading-relaxed" style="color: var(--color-muted);">
-                {opt.note}
-              </p>
-            </article>
-          ))
-        }
-      </div>
-    </details>
+    <!-- The skill is the engine; the repository is what gets adapted -->
+    <p
+      class="mt-8 max-w-3xl border-l-2 pl-4 leading-relaxed"
+      style="border-color: var(--color-secondary); color: var(--color-muted);"
+    >
+      {q.note}
+    </p>
   </div>
 </section>
