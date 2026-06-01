@@ -361,9 +361,9 @@ All skills and agents are adapted for this Astro repository:
 
 | Date | Change | Details |
 |------|--------|---------|
-| 2026-05-31 | editorial-system guidance added | Skills & Agents Discovery for the editorial redesign. Updated existing skills/agents to reference "The Broadsheet" editorial system rather than creating speculative new ones: `update-styles` + `add-component` (paper/ink + oxblood tokens, serif `.font-display`, `src/components/editorial/` primitives), `add-page` (middleware allowlist gotcha + editorial system + `types.ts`), `content-writer` (paper/specification voice for the live site vs. the dormant-blog voice; pillars; no "Cal Newport"), `reviewer` (editorial design-system review block). No new skills/agents and no generator changes needed; counts unchanged. |
+| 2026-06-01 | dogfooding cutover (no new skills/agents) | Skills & Agents Discovery for the DWP dogfooding migration. The legacy `.agent_commands/` generator/plan engine was retired in favour of the installed `deepworkplan` skill (reference install pinned by `skills-lock.json`); `dwp-*`, `/skill-create`, `/agent-create`, and `/lib-upgrade` are now thin delegators. Catalog updated to add the dependency-upgrade add-on link and confirm no dead generator links remain. The relocated generator is now the skill's `author` sub-skill — assessed complete for this repo. No new top-level skills/agents and no project-side generator changes warranted; counts unchanged. |
+| 2026-05-31 | editorial-system guidance added | Skills & Agents Discovery for the editorial redesign. Updated existing skills/agents to reference "The Broadsheet" editorial system rather than creating speculative new ones: `update-styles` + `add-component` (paper/ink + oxblood tokens, serif `.font-display`, `src/components/editorial/` primitives), `add-page` (middleware allowlist gotcha + editorial system + `types.ts`), `content-writer` (paper/specification voice for the live site vs. the dormant-blog voice; pillars), `reviewer` (editorial design-system review block). No new skills/agents and no generator changes needed; counts unchanged. |
 | 2026-05-30 | removed-surface skills deleted | Deleted `add-slide-deck` and `add-timeline-page` skills (slides and timeline pages are removed surfaces in the Deep Work Plan site). Removed the Slides & Presentations domain section and renumbered domain sections. |
-| 2026-03-23 | audit-series skill added | New Tier 2 skill for pre-publication blog series auditing — 9-step review covering series definition, post discovery, ordering validation, cross-post consistency, i18n parity, individual post summary checks, build validation, and final report. Companion to audit-post. |
 
 ---
 
@@ -374,5 +374,6 @@ All skills and agents are adapted for this Astro repository:
 - [Skill template](../skills/deepworkplan/author/templates/SKILL_TEMPLATE.md)
 - [Agent template](../skills/deepworkplan/author/templates/AGENT_TEMPLATE.md)
 - [DeepWorkPlan skill (dwp-* flows)](../skills/deepworkplan/SKILL.md) — backs `/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`
+- [Dependency-upgrade add-on](../skills/deepworkplan/addons/dependency-upgrade/SKILL.md) — opt-in maintenance add-on shipped with the `deepworkplan` skill; backs `/lib-upgrade` (package-manager agnostic, validated revertible batches)
 - [AGENTS.md](../../AGENTS.md) - Main AI agent guidance
 - [docs/STANDARDS.md](../../docs/STANDARDS.md) - Coding standards
