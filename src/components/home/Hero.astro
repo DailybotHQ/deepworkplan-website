@@ -25,20 +25,56 @@ const h = t.home.hero;
         {h.title}{' '}
         <span style="color: var(--color-secondary);">{h.titleEmphasis}</span>
       </h1>
-      <p class="lead mt-6">{h.subtitle}</p>
+
+      <!-- The happy path: one instruction your agent follows -->
+      <div
+        class="mt-10 overflow-hidden rounded-sm border"
+        style="border-color: var(--color-secondary);"
+      >
+        <div
+          class="flex items-center justify-between border-b px-4 py-2"
+          style="border-color: var(--color-line); background-color: color-mix(in srgb, var(--color-ink) 5%, var(--color-paper));"
+        >
+          <span class="kicker" style="color: var(--color-muted);"
+            >{h.instructionLabel}</span
+          >
+          <button
+            type="button"
+            class="copy-btn kicker inline-flex items-center gap-1.5 rounded-sm px-2 py-1 transition hover:opacity-80"
+            style="color: var(--color-secondary);"
+            data-copy={h.instruction}
+            data-label={h.copyLabel}
+            data-copied={h.copiedLabel}
+            aria-label={h.copyLabel}
+          >
+            {h.copyLabel}
+          </button>
+        </div>
+        <p
+          class="px-4 py-4 text-base leading-relaxed sm:text-lg"
+          style="font-family: var(--font-mono); color: var(--color-ink);"
+        >
+          {h.instruction}
+        </p>
+      </div>
+      <p class="mt-4 max-w-2xl" style="color: var(--color-muted);">
+        {h.instructionCaption}
+      </p>
+
       <p
-        class="font-display mt-6 max-w-2xl border-l-2 pl-4 text-xl italic"
+        class="font-display mt-8 max-w-2xl border-l-2 pl-4 text-xl italic"
         style="border-color: var(--color-secondary); color: var(--color-ink);"
       >
         {h.pullQuote}
       </p>
-      <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+
+      <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
         <a
-          href={`${prefix}/quickstart`}
+          href={`${prefix}/init`}
           class="inline-flex items-center justify-center rounded-sm px-6 py-3 text-base font-semibold transition hover:opacity-90"
           style="background-color: var(--color-ink); color: var(--color-paper);"
         >
-          {t.home.quickstart.badge}
+          {h.viewInitCta}
         </a>
         <a
           href={`${prefix}/methodology`}
@@ -47,7 +83,34 @@ const h = t.home.hero;
         >
           {h.primaryCta}
         </a>
+        <a
+          href={`${prefix}/spec`}
+          class="inline-flex items-center text-base font-semibold transition hover:opacity-70 sm:px-2"
+          style="color: var(--color-secondary);"
+        >
+          {h.secondaryCta} &rarr;
+        </a>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  // Progressive enhancement: copy the instruction to the clipboard.
+  document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy ?? '';
+      const label = btn.dataset.label ?? 'Copy';
+      const copied = btn.dataset.copied ?? 'Copied';
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = copied;
+        window.setTimeout(() => {
+          btn.textContent = label;
+        }, 2000);
+      } catch {
+        /* clipboard unavailable — no-op */
+      }
+    });
+  });
+</script>

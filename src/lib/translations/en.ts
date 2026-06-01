@@ -43,10 +43,16 @@ export const en: SiteTranslations = {
     },
     hero: {
       badge: 'Open methodology · MIT · Agent-agnostic',
-      title: 'Turn any repository into an',
-      titleEmphasis: 'AI-first codebase',
-      subtitle:
-        'Deep Work Plan is a methodology and kit for planning and executing complex software work with AI agents. It documents your repo — AGENTS.md, docs, skills — and produces long-horizon plans any agent can pilot, validate, and resume.',
+      title: 'Make any repository AI-first.',
+      titleEmphasis: 'Give your agent one instruction.',
+      instructionLabel: 'Give your agent this',
+      instruction:
+        'Please follow the instructions at https://deepworkplan.com/init to make this repository AI-first.',
+      instructionCaption:
+        'Your agent reads the plan, installs the kit, and onboards your repository — reasoning about your actual stack, never pasting a template.',
+      copyLabel: 'Copy',
+      copiedLabel: 'Copied',
+      viewInitCta: 'View the full /init prompt',
       pullQuote:
         'Deep Work Plan is spec-driven development where the repository itself becomes the harness.',
       primaryCta: 'Read the methodology',
@@ -90,37 +96,55 @@ export const en: SiteTranslations = {
       ],
     },
     quickstart: {
-      badge: 'Quickstart',
-      title: 'Three paths. Pick the one that fits your setup.',
+      badge: 'What happens when you run it',
+      title: 'One instruction. The repository does the rest.',
       subtitle:
-        'The fastest way is path A — install the skill pack with one command, then point your agent at any repository. Outputs land in a gitignored .dwp/ folder.',
-      recommended: 'Recommended',
-      codeLabel: 'paste into your agent',
-      paths: [
+        'You do not pick an install method or copy a template. You hand your agent one line, and it follows the /init plan end to end.',
+      steps: [
         {
-          tag: 'Path A',
-          title: 'Install the skill',
-          tagline: 'Cross-agent skill pack.',
+          title: 'Your agent opens /init',
+          description:
+            'It fetches the onboarding prompt at deepworkplan.com/init and reads the methodology, specification, and kit it links to — the standard it is about to adopt.',
+        },
+        {
+          title: 'It installs the Deep Work Plan skill',
+          description:
+            'One command pulls in the router and its sub-skills — create, execute, refine, resume, status, onboard, and author — available to Claude Code, Cursor, Codex, Gemini, and Copilot.',
+        },
+        {
+          title: 'It onboards your repository',
+          description:
+            'Reasoning about your real stack, it writes AGENTS.md, a categorized docs/ tree, per-module READMEs, the cross-agent .agents/ kit, and a gitignored .dwp/ — your repository becomes the harness. No templates, no placeholders.',
+        },
+        {
+          title: 'You plan and execute',
+          description:
+            'Generate long-horizon Deep Work Plans for any task and run them step by step, with explicit acceptance criteria, validation gates, and resumable state.',
+        },
+      ],
+      installTitle: 'Prefer to install the skill yourself?',
+      installNote:
+        'The instruction above does this for you. If you would rather install the skill directly, any of these work — then tell your agent to make the repository AI-first.',
+      codeLabel: 'paste into your terminal',
+      installOptions: [
+        {
+          tag: 'Skills CLI',
+          title: 'Cross-agent skill pack',
           command: 'npx skills add DailybotHQ/deepworkplan-skill',
-          note: 'The Deep Work Plan skill installs once for Claude Code, Cursor, Codex, Gemini, and Copilot. Then tell your agent to make the repository AI-first — it reasons about your stack and writes a filled AGENTS.md.',
-          highlight: true,
+          note: 'Installs once for Claude Code, Cursor, Codex, Gemini, and Copilot.',
         },
         {
-          tag: 'Path B',
-          title: 'OpenClaw',
-          tagline: 'Native registry, loaded every session.',
+          tag: 'OpenClaw',
+          title: 'Native registry',
           command: 'openclaw skills install deepworkplan',
-          note: 'OpenClaw loads the pack natively on every eligible session — no trigger setup required.',
-          highlight: false,
+          note: 'Loaded natively on every eligible session — no trigger setup required.',
         },
         {
-          tag: 'Path C',
-          title: 'Git clone and setup',
-          tagline: 'No package manager, full control.',
+          tag: 'Git clone',
+          title: 'No package manager',
           command:
             'git clone https://github.com/DailybotHQ/deepworkplan-skill.git\ncd deepworkplan-skill\n./setup.sh',
-          note: 'Any agent that reads Markdown can run a plan — the skill is just Markdown and Bash. This path symlinks it into your agent’s skills directory.',
-          highlight: false,
+          note: 'The skill is just Markdown and Bash; setup symlinks it into your agent’s skills directory.',
         },
       ],
     },

@@ -4,13 +4,17 @@ description: "Deep Work Plan convierte cualquier repositorio en un código AI-fi
 lastUpdated: 2026-05-30
 ---
 
-## Convierte cualquier repositorio en un código AI-first
+## Haz que cualquier repositorio sea AI-first. Dale a tu agente una sola instrucción.
 
-Deep Work Plan (DWP) es una metodología y un kit abiertos, con licencia MIT, para planificar y ejecutar trabajo de software complejo con agentes de IA. Documenta tu repositorio — AGENTS.md, docs y un hogar de skills `.agents/` — y produce planes de largo alcance que cualquier agente puede pilotar, validar y reanudar.
+Deep Work Plan (DWP) es una metodología y un kit abiertos, con licencia MIT, para planificar y ejecutar trabajo de software complejo con agentes de IA. No eliges un método de instalación ni copias una plantilla: le das a tu agente una sola línea:
+
+> Por favor sigue las instrucciones en https://deepworkplan.com/init para hacer este repositorio AI-first.
+
+Tu agente lee el plan, instala el kit e incorpora tu repositorio, razonando sobre tu stack real, sin pegar una plantilla.
 
 > Deep Work Plan es desarrollo guiado por especificación donde el propio repositorio se convierte en el harness.
 
-- [Inicio rápido](/es/quickstart)
+- [Abrir el prompt de /init](/es/init)
 - [Leer la metodología](/es/methodology)
 
 ---
@@ -35,14 +39,19 @@ También es **ingeniería de harness** hecha portable. Un harness de agente es e
 
 ---
 
-## Cómo adoptarlo
+## Qué ocurre cuando lo ejecutas
 
-1. Instala el skill desde `DailybotHQ/deepworkplan-skill`.
-2. Genera un plan a partir de tu iniciativa.
-3. Ejecuta con cualquier agente — Claude Code, Cursor, Codex, Gemini o Copilot.
+1. **Tu agente abre [/init](/es/init)** — lee el prompt de incorporación y la metodología, la especificación y el kit que enlaza.
+2. **Instala el skill de Deep Work Plan** — el router más sus sub-skills (create, execute, refine, resume, status, onboard, author), para Claude Code, Cursor, Codex, Gemini y Copilot.
+3. **Incorpora tu repositorio** — razonando sobre tu stack real, escribe AGENTS.md, `docs/`, READMEs por módulo, el kit `.agents/` y un `.dwp/` ignorado por git. Sin plantillas, sin marcadores de posición.
+4. **Planificas y ejecutas** — Deep Work Plans de largo alcance, ejecutados paso a paso contra criterios de aceptación y puertas de validación explícitos.
+
+¿Prefieres instalar el skill tú mismo? La instrucción de arriba lo hace por ti, pero cualquiera de estas opciones funciona; luego pídele a tu agente que haga el repositorio AI-first:
 
 ```
 npx skills add DailybotHQ/deepworkplan-skill
+openclaw skills install deepworkplan
+git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh
 ```
 
 ---

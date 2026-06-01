@@ -94,7 +94,12 @@ export interface SiteTranslations {
       badge: string;
       title: string;
       titleEmphasis: string;
-      subtitle: string;
+      instructionLabel: string;
+      instruction: string;
+      instructionCaption: string;
+      copyLabel: string;
+      copiedLabel: string;
+      viewInitCta: string;
       pullQuote: string;
       primaryCta: string;
       secondaryCta: string;
@@ -115,15 +120,15 @@ export interface SiteTranslations {
       badge: string;
       title: string;
       subtitle: string;
-      recommended: string;
+      steps: { title: string; description: string }[];
+      installTitle: string;
+      installNote: string;
       codeLabel: string;
-      paths: {
+      installOptions: {
         tag: string;
         title: string;
-        tagline: string;
         command: string;
         note: string;
-        highlight: boolean;
       }[];
     };
     outcomes: {

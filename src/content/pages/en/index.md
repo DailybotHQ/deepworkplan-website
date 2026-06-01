@@ -4,13 +4,17 @@ description: "Deep Work Plan turns any repository into an AI-first, agent-pilota
 lastUpdated: 2026-05-30
 ---
 
-## Turn any repository into an AI-first codebase
+## Make any repository AI-first. Give your agent one instruction.
 
-Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning and executing complex software work with AI agents. It documents your repository — AGENTS.md, docs, and an `.agents/` skills home — and produces long-horizon plans any agent can pilot, validate, and resume.
+Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning and executing complex software work with AI agents. You do not pick an install method or copy a template — you hand your agent one line:
+
+> Please follow the instructions at https://deepworkplan.com/init to make this repository AI-first.
+
+Your agent reads the plan, installs the kit, and onboards your repository — reasoning about your actual stack, never pasting a template.
 
 > Deep Work Plan is spec-driven development where the repository itself becomes the harness.
 
-- [Quickstart](/quickstart)
+- [Open the /init prompt](/init)
 - [Read the methodology](/methodology)
 
 ---
@@ -35,14 +39,19 @@ It is also **harness engineering** made portable. An agent harness is the scaffo
 
 ---
 
-## How to adopt
+## What happens when you run it
 
-1. Install the skill from `DailybotHQ/deepworkplan-skill`.
-2. Generate a plan from your initiative.
-3. Execute with any agent — Claude Code, Cursor, Codex, Gemini, or Copilot.
+1. **Your agent opens [/init](/init)** — it reads the onboarding prompt and the methodology, spec, and kit it links to.
+2. **It installs the Deep Work Plan skill** — the router plus its sub-skills (create, execute, refine, resume, status, onboard, author), for Claude Code, Cursor, Codex, Gemini, and Copilot.
+3. **It onboards your repository** — reasoning about your real stack, it writes AGENTS.md, `docs/`, per-module READMEs, the `.agents/` kit, and a gitignored `.dwp/`. No templates, no placeholders.
+4. **You plan and execute** — long-horizon Deep Work Plans, run step by step against explicit acceptance criteria and validation gates.
+
+Prefer to install the skill yourself? The instruction above does it for you, but any of these work — then tell your agent to make the repository AI-first:
 
 ```
 npx skills add DailybotHQ/deepworkplan-skill
+openclaw skills install deepworkplan
+git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh
 ```
 
 ---

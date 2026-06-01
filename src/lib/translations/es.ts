@@ -44,10 +44,16 @@ export const es: SiteTranslations = {
     },
     hero: {
       badge: 'Metodología abierta · MIT · Independiente del agente',
-      title: 'Convierte cualquier repositorio en un',
-      titleEmphasis: 'código AI-first',
-      subtitle:
-        'Deep Work Plan es una metodología y un kit para planificar y ejecutar trabajo de software complejo con agentes de IA. Documenta tu repositorio — AGENTS.md, docs, skills — y produce planes de largo alcance que cualquier agente puede pilotar, validar y reanudar.',
+      title: 'Haz que cualquier repositorio sea AI-first.',
+      titleEmphasis: 'Dale a tu agente una sola instrucción.',
+      instructionLabel: 'Dale esto a tu agente',
+      instruction:
+        'Por favor sigue las instrucciones en https://deepworkplan.com/init para hacer este repositorio AI-first.',
+      instructionCaption:
+        'Tu agente lee el plan, instala el kit e incorpora tu repositorio, razonando sobre tu stack real, sin pegar una plantilla.',
+      copyLabel: 'Copiar',
+      copiedLabel: 'Copiado',
+      viewInitCta: 'Ver el prompt completo de /init',
       pullQuote:
         'Deep Work Plan es desarrollo guiado por especificación donde el propio repositorio se convierte en el harness.',
       primaryCta: 'Leer la metodología',
@@ -91,37 +97,55 @@ export const es: SiteTranslations = {
       ],
     },
     quickstart: {
-      badge: 'Inicio rápido',
-      title: 'Tres caminos. Elige el que se ajuste a tu configuración.',
+      badge: 'Qué ocurre cuando lo ejecutas',
+      title: 'Una sola instrucción. El repositorio hace el resto.',
       subtitle:
-        'La forma más rápida es el camino A: instala el paquete de skills con un solo comando y luego apunta tu agente a cualquier repositorio. Los resultados quedan en una carpeta .dwp/ ignorada por git.',
-      recommended: 'Recomendado',
-      codeLabel: 'pega esto en tu agente',
-      paths: [
+        'No eliges un método de instalación ni copias una plantilla. Le das a tu agente una sola línea y él sigue el plan de /init de principio a fin.',
+      steps: [
         {
-          tag: 'Camino A',
-          title: 'Instalar el skill',
-          tagline: 'Paquete de skills multiagente.',
+          title: 'Tu agente abre /init',
+          description:
+            'Obtiene el prompt de incorporación en deepworkplan.com/init y lee la metodología, la especificación y el kit que enlaza: el estándar que está a punto de adoptar.',
+        },
+        {
+          title: 'Instala el skill de Deep Work Plan',
+          description:
+            'Un comando trae el router y sus sub-skills — create, execute, refine, resume, status, onboard y author — disponibles para Claude Code, Cursor, Codex, Gemini y Copilot.',
+        },
+        {
+          title: 'Incorpora tu repositorio',
+          description:
+            'Razonando sobre tu stack real, escribe AGENTS.md, un árbol docs/ categorizado, READMEs por módulo, el kit multiagente .agents/ y un .dwp/ ignorado por git: tu repositorio se convierte en el harness. Sin plantillas, sin marcadores de posición.',
+        },
+        {
+          title: 'Planificas y ejecutas',
+          description:
+            'Genera Deep Work Plans de largo alcance para cualquier tarea y ejecútalos paso a paso, con criterios de aceptación explícitos, puertas de validación y estado reanudable.',
+        },
+      ],
+      installTitle: '¿Prefieres instalar el skill tú mismo?',
+      installNote:
+        'La instrucción de arriba lo hace por ti. Si prefieres instalar el skill directamente, cualquiera de estas opciones funciona; luego pídele a tu agente que haga el repositorio AI-first.',
+      codeLabel: 'pega esto en tu terminal',
+      installOptions: [
+        {
+          tag: 'Skills CLI',
+          title: 'Paquete multiagente',
           command: 'npx skills add DailybotHQ/deepworkplan-skill',
-          note: 'El skill de Deep Work Plan se instala una sola vez para Claude Code, Cursor, Codex, Gemini y Copilot. Luego pídele a tu agente que haga el repositorio AI-first: razona sobre tu stack y escribe un AGENTS.md completo.',
-          highlight: true,
+          note: 'Se instala una vez para Claude Code, Cursor, Codex, Gemini y Copilot.',
         },
         {
-          tag: 'Camino B',
-          title: 'OpenClaw',
-          tagline: 'Registro nativo, cargado en cada sesión.',
+          tag: 'OpenClaw',
+          title: 'Registro nativo',
           command: 'openclaw skills install deepworkplan',
-          note: 'OpenClaw carga el paquete de forma nativa en cada sesión elegible, sin necesidad de configurar disparadores.',
-          highlight: false,
+          note: 'Se carga de forma nativa en cada sesión elegible, sin configurar disparadores.',
         },
         {
-          tag: 'Camino C',
-          title: 'Clonar git y configurar',
-          tagline: 'Sin gestor de paquetes, control total.',
+          tag: 'Clonar git',
+          title: 'Sin gestor de paquetes',
           command:
             'git clone https://github.com/DailybotHQ/deepworkplan-skill.git\ncd deepworkplan-skill\n./setup.sh',
-          note: 'Cualquier agente que lea Markdown puede ejecutar un plan: el skill es solo Markdown y Bash. Este camino lo enlaza simbólicamente al directorio de skills de tu agente.',
-          highlight: false,
+          note: 'El skill es solo Markdown y Bash; setup lo enlaza al directorio de skills de tu agente.',
         },
       ],
     },
