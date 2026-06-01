@@ -1,6 +1,6 @@
 ---
 title: "The Deep Work Plan Kit"
-description: "The skill and its seven sub-skills, slash commands, agent adapters, onboarding presets, opt-in addons, and examples that make the Deep Work Plan methodology runnable across AI coding agents and stacks."
+description: "The skill and its eight sub-skills, slash commands, agent adapters, onboarding presets, opt-in addons, and examples that make the Deep Work Plan methodology runnable across AI coding agents and stacks."
 lastUpdated: 2026-05-31
 ---
 
@@ -15,13 +15,14 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ### The skill and its sub-skills
 
-The Deep Work Plan skill is a router plus seven sub-skills:
+The Deep Work Plan skill is a router plus eight sub-skills:
 
 - **create** — decompose a goal into a structured plan (`/dwp-create`).
 - **execute** — run a plan task by task, validating each gate (`/dwp-execute`).
 - **refine** — add, remove, or reorder tasks while preserving completed work (`/dwp-refine`).
 - **resume** — reconstruct state and continue an interrupted plan (`/dwp-resume`).
 - **status** — report progress without making changes (`/dwp-status`).
+- **verify** — objectively check repository and plan conformance (`/dwp-verify`).
 - **onboard** — make a repository AI-first (`/deepworkplan-onboard`).
 - **author** — create or evolve the repo's own skills, agents, and commands (`/skill-create`, `/agent-create`).
 
@@ -29,7 +30,7 @@ The Deep Work Plan skill is a router plus seven sub-skills:
 
 Thin slash commands delegate to the sub-skills and addons:
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status` — the plan-execute-verify loop.
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — the plan-execute-verify loop.
 - `skill-create`, `agent-create` — delegate to the author sub-skill.
 - `lib-upgrade` — delegates to the dependency-upgrade addon (installed only when that addon is accepted).
 

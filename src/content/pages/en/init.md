@@ -124,7 +124,9 @@ Generate Deep Work Plans for any task and run them task by task:
 
 ## 7. Verify
 
-Confirm the repository is now agent-ready:
+Run `/dwp-verify` for an objective pass/fail conformance report (it checks the
+criteria in the [specification's Conformance document](https://deepworkplan.com/spec)),
+then confirm:
 
 - [ ] The skill is installed and resolvable, with all seven sub-skills available.
 - [ ] `AGENTS.md` exists at the root with a real Quick Commands block; `CLAUDE.md` resolves to it.

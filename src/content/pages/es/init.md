@@ -130,7 +130,9 @@ Genera Deep Work Plans para cualquier tarea y ejecútalos tarea por tarea:
 
 ## 7. Verifica
 
-Confirma que el repositorio ya está listo para agentes:
+Ejecuta `/dwp-verify` para obtener un informe objetivo de conformidad
+(aprobado/fallido) — comprueba los criterios del [documento de Conformidad de la
+especificación](https://deepworkplan.com/spec) — y luego confirma:
 
 - [ ] El skill está instalado y es resoluble, con las siete sub-skills disponibles.
 - [ ] `AGENTS.md` existe en la raíz con un bloque de Comandos Rápidos real; `CLAUDE.md` resuelve a él.
