@@ -20,6 +20,16 @@ Es fácil confundirlos, pero cumplen propósitos distintos:
 
 Una regla útil: una habilidad es *cómo* hacer una tarea recurrente; un agente es *quién* se responsabiliza de una clase de trabajo.
 
+## Un kit vivo: el repositorio crea sus propias habilidades
+
+La incorporación convierte un repositorio en el entorno del agente; no lo congela. El kit está pensado para **crecer** a medida que los flujos de trabajo del repositorio se hacen evidentes. DWP ofrece una subhabilidad **author** (autor) (invocada mediante `/skill-create` y `/agent-create`) que razona sobre el esquema `.agents/` existente y sus convenciones, y luego escribe una nueva habilidad, agente o comando delegador ligero que encaja con ellas. El repositorio crea su propio kit en lugar de heredar uno genérico.
+
+La subhabilidad author es deliberada respecto al encaje. Crea una habilidad para un procedimiento repetible que las personas ejecutan a mano, un agente para un rol recurrente con necesidades distintas de modelo o herramientas, y un comando solo como punto de entrada ligero que enruta hacia una habilidad o un agente. Omite cualquier cosa genérica que no corresponda a un flujo real y mantiene el catálogo de `.agents/docs/` sincronizado con lo que añade. Esta misma subhabilidad respalda la tarea obligatoria de Descubrimiento de Habilidades y Agentes, que reconcilia el catálogo con lo que realmente hay en disco.
+
+## Complementos de mantenimiento
+
+Más allá de la autoría, DWP incluye **complementos de mantenimiento opcionales** (nunca obligatorios para que un repositorio sea AI-first). El complemento **dependency-upgrade** (actualización de dependencias) es el ejemplo canónico: razona sobre el gestor de paquetes *real* del repositorio (npm, pnpm o yarn con `ncu`; pip, poetry o uv; Cargo; módulos de Go; Bundler; Composer) en lugar de asumir uno, y luego actualiza en lotes pequeños, ejecuta el control de validación real del repositorio después de cada lote, revierte cualquier lote que falle y resume sin confirmar automáticamente. Los complementos se aceptan de forma explícita durante la incorporación; rechazar uno deja el repositorio plenamente conforme.
+
 ## Incorporación al repositorio basada en razonamiento
 
 Antes de crear o ejecutar un plan, un agente se incorpora al repositorio. La incorporación es **basada en razonamiento, no en scripts**: el agente lee la estructura, la documentación y la configuración del repositorio para construir un modelo mental, en lugar de ejecutar un script de configuración fijo.
