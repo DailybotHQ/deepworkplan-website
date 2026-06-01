@@ -48,7 +48,7 @@ export const es: SiteTranslations = {
       titleEmphasis: 'Dale a tu agente una sola instrucción.',
       instructionLabel: 'Dale esto a tu agente',
       instruction:
-        'Por favor sigue las instrucciones en https://deepworkplan.com/init para hacer este repositorio AI-first.',
+        'Lee y sigue las instrucciones en https://deepworkplan.com/init para hacer este repositorio AI-first.',
       instructionCaption:
         'Tu agente lee el plan, instala el kit e incorpora tu repositorio, razonando sobre tu stack real, sin pegar una plantilla.',
       copyLabel: 'Copiar',
@@ -1010,7 +1010,7 @@ Actualmente estoy enfocado en aplicaciones de IA, productividad para developers 
     handoffBody:
       'Pega la línea de abajo en tu agente de programación con IA. Leerá la metodología y la especificación, instalará la skill e incorporará este repositorio para los Deep Work Plans.',
     handoffInstruction:
-      'Sigue las instrucciones en https://deepworkplan.com/init para convertir este repositorio en AI-first.',
+      'Lee y sigue las instrucciones en https://deepworkplan.com/init para hacer este repositorio AI-first.',
     handoffMdLabel: 'Instrucción autocontenida para el agente',
     codeLabel: 'agente',
     whatTitle: 'Qué hace esto',

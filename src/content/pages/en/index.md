@@ -8,7 +8,7 @@ lastUpdated: 2026-05-30
 
 Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning and executing complex software work with AI agents. You do not pick an install method or copy a template — you hand your agent one line:
 
-> Please follow the instructions at https://deepworkplan.com/init to make this repository AI-first.
+> Read and follow the instructions at https://deepworkplan.com/init to make this repository AI-first.
 
 Your agent reads the plan, installs the kit, and onboards your repository — reasoning about your actual stack, never pasting a template.
 
