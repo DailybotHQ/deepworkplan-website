@@ -1,6 +1,6 @@
 ---
 title: "Caso de estudio: este sitio web"
-description: "Cómo deepworkplan.com se hizo AI-first con Deep Work Plan — un antes y después real de adoptar la metodología en un repositorio Astro de producción."
+description: "Cómo deepworkplan.com funciona sobre Deep Work Plan — un relato real de un repositorio Astro de producción hecho AI-first con la metodología que documenta."
 kind: example
 lang: es
 order: 2
@@ -8,21 +8,21 @@ order: 2
 
 # Caso de estudio: este sitio web
 
-El sitio que estás leyendo aplica a sí mismo la metodología que documenta. Este es un relato real, no hipotético.
+El sitio que estás leyendo funciona sobre la metodología que documenta. Aplica Deep Work Plan a sí mismo: el mismo skill, el mismo flujo de `/init`, los mismos planes en `.dwp/` que usaría cualquier otro repositorio. Este es un relato real, no hipotético.
 
 ## Antes
 
-El repositorio tenía un sistema de "deep work plan" hecho a medida y mantenido a mano dentro de `.agent_commands/` — procedimientos en prosa que solo funcionaban aquí, se desviaban del código y no podían viajar a otro repo. Incorporar un agente nuevo significaba volver a explicar el proyecto en cada sesión.
+Como la mayoría de los repositorios, este no estaba hecho para agentes. El contexto vivía en la cabeza de las personas y en notas dispersas, no había una única fuente de verdad que un agente pudiera leer, e incorporar un agente nuevo significaba volver a explicar el proyecto en cada sesión. El trabajo de largo alcance se desviaba.
 
-## El plan
+## Adoptar DWP
 
-Un solo Deep Work Plan guió la migración, descompuesto en tareas atómicas con puertas de validación:
+El repositorio se hizo AI-first con un solo Deep Work Plan, descompuesto en tareas atómicas con puertas de validación:
 
-1. Promover los generadores a medida al skill instalable (la sub-skill `author`).
-2. Instalar el skill de Deep Work Plan como instalación por referencia, fijada por `skills-lock.json`.
-3. Reemplazar los comandos caseros por delegadores `dwp-*` finos.
-4. Retirar `.agent_commands/`; pasar toda la salida de planes a un `.dwp/` ignorado por git.
-5. Documentar el resultado en `AGENTS.md`, `docs/` y el catálogo `.agents/`.
+1. Instalar el skill de Deep Work Plan como instalación por referencia, fijada por `skills-lock.json`.
+2. Ejecutar la incorporación para generar un `AGENTS.md` razonado, el árbol `docs/` y la documentación por módulo a partir del stack real del repositorio.
+3. Construir el kit multiagente `.agents/` — delegadores de comando `dwp-*` finos y un catálogo que coincide con lo que hay en disco.
+4. Crear el espacio `.dwp/` ignorado por git para planes y borradores.
+5. Verificar la conformidad con `/dwp-verify`.
 
 Cada tarea se validó contra las puertas reales del repositorio — `biome`, `astro:check`, la suite de pruebas, el build de producción y la comprobación de paridad de endpoints para agentes — antes de marcarse como completada.
 
@@ -32,4 +32,4 @@ El repositorio ahora es AI-first según su propia especificación: un `AGENTS.md
 
 ## Resultado
 
-La metodología se demostró sobre su propio código. Lo que era maquinaria específica del repo se convirtió en un estándar portable que el repositorio simplemente *usa* — el mismo estándar que cualquier otro repositorio adopta siguiendo [`/init.md`](/es/init.md).
+La metodología se demuestra sobre su propio código: este sitio se construye y se mantiene de la misma forma que te dice que construyas el tuyo — siguiendo [`/init.md`](/es/init.md). Si el estándar funciona aquí, en producción, también funciona para tu repositorio.

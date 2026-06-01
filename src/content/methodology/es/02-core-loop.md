@@ -1,25 +1,26 @@
 ---
 title: El ciclo central
-description: "El flujo de crear, ejecutar, refinar, reanudar y estado; el directorio de salida .dwp ignorado por git; la anatomía de tarea de nueve secciones, y la validación y reanudación."
+description: "El flujo de crear, ejecutar, refinar, reanudar, estado y verificar; el directorio de salida .dwp ignorado por git; la anatomía de tarea de nueve secciones, y la validación y reanudación."
 order: 2
 lang: es
-summary: Cómo las cinco operaciones de DWP llevan un plan desde el objetivo hasta su finalización.
+summary: Cómo las operaciones centrales de DWP llevan un plan desde el objetivo hasta su finalización verificada.
 icon: refresh
 ---
 
 # El ciclo central
 
-DWP define cinco operaciones que llevan un plan desde un objetivo hasta un trabajo terminado y revisable: **crear → ejecutar → refinar → reanudar → estado**. Juntas forman el ciclo que un agente sigue durante toda la vida de un plan. Los agentes ejecutan una tarea a la vez y validan cada paso antes de avanzar.
+DWP define un conjunto reducido de operaciones que llevan un plan desde un objetivo hasta un trabajo terminado y revisable: **crear → ejecutar → refinar → reanudar → estado**, con **verificar** como la comprobación de conformidad que confirma el resultado. Juntas forman el ciclo que un agente sigue durante toda la vida de un plan. Los agentes ejecutan una tarea a la vez y validan cada paso antes de avanzar.
 
 Este ciclo es la forma operativa del desarrollo guiado por especificación. El plan es la especificación contra la que ejecuta un agente, cada tarea lleva criterios de aceptación explícitos, y el paso de validación es la puerta que convierte una afirmación de finalización en evidencia de ella. Como el plan y su registro de avance viven en el repositorio, el ciclo es reanudable entre sesiones y agentes.
 
-## Las cinco operaciones
+## Las operaciones
 
 - **crear**: generar un plan nuevo a partir de un objetivo. El agente analiza el objetivo, lo descompone en tareas secuenciales y escribe los archivos del plan. Debe formular preguntas aclaratorias antes de escribir cuando el objetivo es ambiguo.
 - **ejecutar**: recorrer el plan tarea por tarea. El agente actualiza el registro de avance tras cada tarea y marca su estado de finalización. No debe omitir tareas sin registrar el motivo.
 - **refinar**: modificar un plan existente. El agente puede agregar, quitar o reordenar tareas, pero debe preservar el trabajo completado y actualizar la tabla de tareas.
 - **reanudar**: continuar un plan interrumpido. El agente lee el registro de avance y los archivos de tarea para reconstruir el estado, y luego continúa desde la primera tarea incompleta.
 - **estado**: reportar el avance sin ejecutar. El agente resume las tareas completadas, en curso y pendientes, y no cambia nada.
+- **verificar**: comprobar la conformidad sin cambiar nada. El agente reporta si el repositorio cumple el estándar y si un plan está bien formado — cada tarea con criterios de aceptación y una puerta de validación. Consulta el [documento de Conformidad de la especificación](/es/spec).
 
 ## El directorio de salida `.dwp/`
 

@@ -1,25 +1,26 @@
 ---
 title: The core loop
-description: "The create, execute, refine, resume, and status workflow, the gitignored .dwp output directory, the nine-section task anatomy, and how validation and resumption work."
+description: "The create, execute, refine, resume, status, and verify workflow, the gitignored .dwp output directory, the nine-section task anatomy, and how validation and resumption work."
 order: 2
 lang: en
-summary: How the five DWP operations drive a plan from goal to completion.
+summary: How the core DWP operations drive a plan from goal to verified completion.
 icon: refresh
 ---
 
 # The core loop
 
-DWP defines five operations that move a plan from a goal to completed, reviewable work: **create → execute → refine → resume → status**. Together they form the loop an agent follows throughout a plan's life. Agents execute one task at a time, validating each step before moving on.
+DWP defines a small set of operations that move a plan from a goal to completed, reviewable work: **create → execute → refine → resume → status**, with **verify** as the conformance check that confirms the result. Together they form the loop an agent follows throughout a plan's life. Agents execute one task at a time, validating each step before moving on.
 
 This loop is the operational form of spec-driven development. The plan is the specification an agent executes against, each task carries explicit acceptance criteria, and the validation step is the gate that turns a claim of completion into evidence of it. Because the plan and its progress log live in the repository, the loop is resumable across sessions and agents.
 
-## The five operations
+## The operations
 
 - **create** — Generate a new plan from a goal. The agent analyzes the goal, decomposes it into sequential tasks, and writes the plan files. It should ask clarifying questions before writing when the goal is ambiguous.
 - **execute** — Run the plan task by task. The agent updates the progress log after each task and marks the task's completion status. It must not skip tasks without recording why.
 - **refine** — Modify an existing plan. The agent may add, remove, or reorder tasks, but it must preserve completed work and update the task table.
 - **resume** — Continue an interrupted plan. The agent reads the progress log and the task files to reconstruct state, then continues from the first incomplete task.
 - **status** — Report progress without executing. The agent summarizes completed, in-progress, and pending tasks and changes nothing.
+- **verify** — Check conformance without changing anything. The agent reports whether the repository meets the standard and whether a plan is well-formed — every task carrying acceptance criteria and a validation gate. See the [specification's Conformance document](/spec).
 
 ## The `.dwp/` output directory
 
