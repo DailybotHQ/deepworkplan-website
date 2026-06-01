@@ -56,14 +56,14 @@ Contains the `SiteTranslations` interface and all sub-interfaces:
 export interface SiteTranslations {
   siteTitle: string;
   siteDescription: string;
-  nav: { home: string; blog: string; about: string; contact: string; /* ... */ };
-  footer: { copyright: string; allRightsReserved: string; };
-  hero: { description: string; typewriterWords: string[]; };
-  homeSections: { about: { /* ... */ }; dailybot: { /* ... */ }; /* ... */ };
+  nav: { home: string; methodology: string; spec: string; kit: string; /* ... */ };
+  footer: { copyright: string; allRightsReserved: string; poweredBy: string; };
+  home: { hero: { /* ... */ }; quickstart: { /* ... */ }; outcomes: { /* ... */ }; /* ... */ };
   contact: { title: string; nameLabel: string; /* ... */ };
-  searchPlaceholder: string;
-  resultsFound: (count: number) => string;
-  noResults: (query: string) => string;
+  methodologyPage: { /* ... */ };
+  specPage: { /* ... */ };
+  kitPage: { /* ... */ };
+  initPage: { /* ... */ };
   // ... more translation keys
 }
 ```

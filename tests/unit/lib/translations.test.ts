@@ -46,7 +46,7 @@ describe('getTranslations', () => {
     const t = getTranslations('en');
     expect(t).toHaveProperty('nav');
     expect(t).toHaveProperty('footer');
-    expect(t).toHaveProperty('hero');
+    expect(t).toHaveProperty('home');
     expect(t).toHaveProperty('siteTitle');
     expect(t).toHaveProperty('siteDescription');
     expect(t).toHaveProperty('contact');
