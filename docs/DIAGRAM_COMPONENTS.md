@@ -151,6 +151,13 @@ Rules:
 > This is the core advantage over per-language image generation: diagram
 > translation is a text change in the codebase, reviewable in a normal diff.
 
+**Live proof.** `CoreLoop.astro` ships a third language key (`pt`, Português)
+alongside `en`/`es` as a concrete demonstration: the diagram is already fully
+translated to Portuguese — the only remaining step to show it is enabling `pt` as
+a site locale (a separate, site-wide routing change). Adding the other ~10
+languages to every diagram is the same one-key-per-component edit, ideal for
+`/translate-sync` or an automated pass seeded from the EN keys.
+
 ---
 
 ## 5. Embedding mechanism
@@ -203,29 +210,29 @@ Status: `todo` → `built`. Spec column → entry in `docs/visuals/prompts/`.
 | ID | Component | Area dir | Spec | Status |
 | :-- | :-- | :-- | :-- | :-- |
 | ME-02 | `CoreLoop` (reference) | methodology | 02-methodology#me-02 | **built** |
-| ME-01 | `RepoAsHarness` | methodology | 02-methodology#me-01 | todo |
-| ME-03 | `TaskAnatomy` | methodology | 02-methodology#me-03 | todo |
-| ME-04 | `PlanTree` | methodology | 02-methodology#me-04 | todo |
-| ME-05 | `SkillsAgents` | methodology | 02-methodology#me-05 | todo |
-| ME-06 | `ArchetypesTree` | methodology | 02-methodology#me-06 | todo |
-| SP-01 | `AgentLifecycle` | spec | 03-spec#sp-01 | todo |
-| SP-04 | `OutputWorkspace` | spec | 03-spec#sp-04 | todo |
-| SP-02 | reuse `TaskAnatomy` | spec | 03-spec#sp-02 | todo |
-| SP-03 | reuse `CoreLoop` | spec | 03-spec#sp-03 | todo |
-| SP-05 | reuse `ArchetypesTree` | spec | 03-spec#sp-05 | todo |
-| KT-01 | `MigrationBeforeAfter` | kit | 04-kit#kt-01 | todo |
-| KT-02 | `UnguidedVsDwp` | kit | 04-kit#kt-02 | todo |
-| KT-03 | `OnboardFlow` | kit | 04-kit#kt-03 | todo |
-| KT-04 | `CmdCreate` | kit | 04-kit#kt-04 | todo |
-| KT-05 | `CmdExecute` | kit | 04-kit#kt-05 | todo |
-| KT-06 | `CmdRefine` | kit | 04-kit#kt-06 | todo |
-| KT-07 | `CmdResume` | kit | 04-kit#kt-07 | todo |
-| KT-08 | `CmdVerify` | kit | 04-kit#kt-08 | todo |
-| KT-09 | `CmdStatus` | kit | 04-kit#kt-09 | todo |
-| KT-10 | `KitComposition` | kit | 04-kit#kt-10 | todo |
-| HP-03 | `QuickstartFlow` | home | 01-homepage#hp-03 | todo |
-| HP-04 | `OnboardingSequence` | home | 01-homepage#hp-04 | todo |
-| HP-05 | `ArchetypesCompare` | home | 01-homepage#hp-05 | todo |
+| ME-01 | `RepoAsHarness` | methodology | 02-methodology#me-01 | built |
+| ME-03 | `TaskAnatomy` | methodology | 02-methodology#me-03 | built |
+| ME-04 | `PlanTree` | methodology | 02-methodology#me-04 | built |
+| ME-05 | `SkillsAgents` | methodology | 02-methodology#me-05 | built |
+| ME-06 | `ArchetypesTree` | methodology | 02-methodology#me-06 | built |
+| SP-01 | `AgentLifecycle` | spec | 03-spec#sp-01 | built |
+| SP-04 | `OutputWorkspace` | spec | 03-spec#sp-04 | built |
+| SP-02 | reuse `TaskAnatomy` | spec | 03-spec#sp-02 | built |
+| SP-03 | reuse `CoreLoop` | spec | 03-spec#sp-03 | built |
+| SP-05 | reuse `ArchetypesTree` | spec | 03-spec#sp-05 | built |
+| KT-01 | `MigrationBeforeAfter` | kit | 04-kit#kt-01 | built |
+| KT-02 | `UnguidedVsDwp` | kit | 04-kit#kt-02 | built |
+| KT-03 | `OnboardFlow` | kit | 04-kit#kt-03 | built |
+| KT-04 | `CmdCreate` | kit | 04-kit#kt-04 | built |
+| KT-05 | `CmdExecute` | kit | 04-kit#kt-05 | built |
+| KT-06 | `CmdRefine` | kit | 04-kit#kt-06 | built |
+| KT-07 | `CmdResume` | kit | 04-kit#kt-07 | built |
+| KT-08 | `CmdVerify` | kit | 04-kit#kt-08 | built |
+| KT-09 | `CmdStatus` | kit | 04-kit#kt-09 | built |
+| KT-10 | `KitComposition` | kit | 04-kit#kt-10 | built |
+| HP-03 | `QuickstartFlow` | home | 01-homepage#hp-03 | built |
+| HP-04 | `OnboardingSequence` | home | 01-homepage#hp-04 | built |
+| HP-05 | `ArchetypesCompare` | home | 01-homepage#hp-05 | built |
 
 **Illustrations kept as images (not in this system):** HP-01 (faro hero), HP-02,
 HP-06, HP-07, HP-08, HP-09 — see `docs/visuals/`.

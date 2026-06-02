@@ -45,7 +45,20 @@ const i18n = {
     caption:
       'El bucle principal de DWP: cinco operaciones llevan un plan del objetivo al trabajo completado, con Verificar como puerta de conformidad.',
   },
-  // Add a language here → the diagram renders in it. Falls back to `en`.
+  // Proof that a new language = one added key (the diagram renders in it once the
+  // site enables the locale; unknown langs fall back to `en`). Português:
+  pt: {
+    ariaLabel:
+      'O ciclo principal de DWP: Criar, Executar, Refinar, Retomar e Status dispostos no sentido horário em um ciclo, com Verificar no centro como verificação de conformidade.',
+    create: 'Criar',
+    execute: 'Executar',
+    refine: 'Refinar',
+    resume: 'Retomar',
+    status: 'Status',
+    verify: 'Verificar',
+    caption:
+      'O ciclo principal de DWP: cinco operações levam um plano do objetivo ao trabalho concluído, com Verificar como porta de conformidade.',
+  },
 } as const;
 
 const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
