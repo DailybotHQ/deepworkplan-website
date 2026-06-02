@@ -1,7 +1,12 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
 import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
+import RepoAsHarness from '@/components/diagrams/methodology/RepoAsHarness.astro';
+import SkillsAgents from '@/components/diagrams/methodology/SkillsAgents.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
 import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
@@ -33,7 +38,11 @@ function slugOf(id: string): string {
  */
 type DiagramComponent = (typeof CoreLoop)[];
 const diagramsBySlug: Record<string, DiagramComponent> = {
-  '02-core-loop': [CoreLoop],
+  '01-manifesto': [RepoAsHarness],
+  '02-core-loop': [CoreLoop, TaskAnatomy],
+  '03-templates': [PlanTree],
+  '04-skills-agents': [SkillsAgents],
+  '05-archetypes': [ArchetypesTree],
 };
 const chapterDiagrams = diagramsBySlug[slugOf(entry.id)] ?? [];
 

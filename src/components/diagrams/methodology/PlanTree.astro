@@ -1,0 +1,117 @@
+---
+/**
+ * PlanTree (ME-04) — the `.dwp/plans/PLAN_<slug>/` directory structure.
+ * Spec: docs/visuals/prompts/02-methodology.md#me-04. HTML/CSS file tree; paths
+ * are mono (technical, stay English), annotations localized. role="img"; dark
+ * mode; zero JS. See docs/DIAGRAM_COMPONENTS.md.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'The .dwp/plans/PLAN_slug/ directory: a README, a PROGRESS log, and numbered task files.',
+    title: 'Plan directory',
+    ann: {
+      readme: 'goal · task table · status',
+      progress: 'append-only execution log',
+      task: 'task file (nine sections)',
+    },
+    caption:
+      'A DWP plan is a directory of Markdown files: a README overview, an append-only PROGRESS log, and one file per task.',
+  },
+  es: {
+    ariaLabel:
+      'El directorio .dwp/plans/PLAN_slug/: un README, un registro PROGRESS y archivos de tarea numerados.',
+    title: 'Directorio del plan',
+    ann: {
+      readme: 'objetivo · tabla de tareas · estado',
+      progress: 'registro de ejecución (solo anexar)',
+      task: 'archivo de tarea (nueve secciones)',
+    },
+    caption:
+      'Un plan de DWP es un directorio de archivos Markdown: un README de resumen, un registro PROGRESS de solo anexar y un archivo por tarea.',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+
+// depth: indentation level; accent: highlight the PLAN_ grouping node.
+const rows = [
+  { depth: 0, path: '.dwp/', ann: '' },
+  { depth: 1, path: 'plans/', ann: '' },
+  { depth: 2, path: 'PLAN_<slug>/', ann: '', accent: true },
+  { depth: 3, path: 'README.md', ann: t.ann.readme },
+  { depth: 3, path: 'PROGRESS.md', ann: t.ann.progress },
+  { depth: 3, path: '1.task_<slug>.md', ann: t.ann.task },
+  { depth: 3, path: '2.task_<slug>.md', ann: '' },
+];
+---
+
+<figure class={`editorial-asset plantree ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <span class="ea-label plantree-title">{t.title}</span>
+    <ul class="plantree-list">
+      {
+        rows.map((r) => (
+          <li class={`plantree-row${r.accent ? ' plantree-row--accent' : ''}`} style={`--depth:${r.depth}`}>
+            <code class="plantree-path">{r.path}</code>
+            {r.ann && <span class="plantree-ann">{r.ann}</span>}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .plantree {
+    color: var(--color-ink);
+  }
+  .plantree-title {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+  .plantree-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .plantree-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    padding: 0.3rem 0;
+    padding-left: calc(var(--depth) * 1.4rem);
+    border-left: 1px solid var(--color-line);
+  }
+  .plantree-row--accent {
+    border-left-color: var(--color-secondary);
+  }
+  .plantree-path {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-ink);
+  }
+  .plantree-row--accent .plantree-path {
+    color: var(--color-secondary);
+    font-weight: 600;
+  }
+  .plantree-ann {
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--color-muted);
+  }
+</style>

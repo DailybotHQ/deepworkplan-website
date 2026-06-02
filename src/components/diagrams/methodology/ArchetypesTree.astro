@@ -1,0 +1,179 @@
+---
+/**
+ * ArchetypesTree (ME-06) — classify a repository: individual vs orchestrator hub.
+ * Spec: docs/visuals/prompts/02-methodology.md#me-06. HTML/CSS decision diagram;
+ * the orchestrator branch carries the oxblood accent. Language-keyed i18n (en
+ * fallback); role="img"; dark mode; zero JS. See docs/DIAGRAM_COMPONENTS.md.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Decision tree: a repository is either an Individual Repository (single codebase) or an Orchestrator Hub (coordinates sub-repositories).',
+    root: 'Repository',
+    question: 'Multiple nested repos or a hub registry?',
+    no: 'No',
+    yes: 'Yes',
+    individual: 'Individual repository',
+    orchestrator: 'Orchestrator hub',
+    indPoints: [
+      'single codebase',
+      'plans modify local files',
+      '.dwp/ at repo root',
+    ],
+    orcPoints: [
+      'coordinates sub-repos',
+      'plans delegate to child plans',
+      'cross-repo .dwp/ state',
+    ],
+    caption:
+      'Classify the repository first: an Individual Repository scopes plans to its own files; an Orchestrator Hub coordinates plans across sub-repositories.',
+  },
+  es: {
+    ariaLabel:
+      'Árbol de decisión: un repositorio es un Repositorio Individual (código base único) o un Hub Orquestador (coordina sub-repositorios).',
+    root: 'Repositorio',
+    question: '¿Múltiples repositorios anidados o un registro de hub?',
+    no: 'No',
+    yes: 'Sí',
+    individual: 'Repositorio individual',
+    orchestrator: 'Hub orquestador',
+    indPoints: [
+      'código base único',
+      'los planes modifican archivos locales',
+      '.dwp/ en la raíz del repositorio',
+    ],
+    orcPoints: [
+      'coordina sub-repositorios',
+      'los planes delegan en planes hijos',
+      'estado .dwp/ entre repositorios',
+    ],
+    caption:
+      'Clasifica primero el repositorio: un Repositorio Individual delimita los planes a sus propios archivos; un Hub Orquestador coordina planes entre múltiples sub-repositorios.',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<figure class={`editorial-asset arch ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <div class="arch-root">{t.root}</div>
+    <div class="arch-stem" aria-hidden="true"></div>
+    <div class="arch-question">{t.question}</div>
+    <div class="arch-branches">
+      <div class="arch-branch">
+        <span class="ea-label arch-edge">{t.no}</span>
+        <div class="arch-leaf">
+          <h4 class="arch-h">{t.individual}</h4>
+          <ul class="arch-points">
+            {t.indPoints.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
+      </div>
+      <div class="arch-branch">
+        <span class="ea-label arch-edge">{t.yes}</span>
+        <div class="arch-leaf arch-leaf--accent">
+          <h4 class="arch-h">{t.orchestrator}</h4>
+          <ul class="arch-points">
+            {t.orcPoints.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .arch {
+    color: var(--color-ink);
+  }
+  .arch-root {
+    width: max-content;
+    margin: 0 auto;
+    border: 1.5px solid var(--color-ink);
+    border-radius: 6px;
+    padding: 0.45rem 1.4rem;
+    font-family: var(--font-serif);
+    font-weight: 700;
+  }
+  .arch-stem {
+    width: 1px;
+    height: 1rem;
+    margin: 0 auto;
+    background-color: var(--color-line);
+  }
+  .arch-question {
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .arch-branches {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    margin-top: 1rem;
+  }
+  @media (min-width: 560px) {
+    .arch-branches {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .arch-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+  }
+  .arch-edge {
+    font-size: 0.72rem;
+    color: var(--color-muted);
+    text-align: center;
+  }
+  .arch-leaf {
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.85rem;
+    background-color: var(--color-paper);
+    height: 100%;
+  }
+  .arch-leaf--accent {
+    border-color: var(--color-secondary);
+  }
+  .arch-h {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0 0 0.5rem;
+  }
+  .arch-leaf--accent .arch-h {
+    color: var(--color-secondary);
+  }
+  .arch-points {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+  .arch-points li {
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--color-muted);
+  }
+</style>
