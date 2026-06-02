@@ -64,7 +64,6 @@ export interface SiteTranslations {
   // Navigation
   nav: {
     home: string;
-    blog: string;
     about: string;
     contact: string;
     // Deep Work Plan IA
@@ -264,110 +263,8 @@ export interface SiteTranslations {
     ctaLink: string;
   };
 
-  // Search input
-  searchPlaceholder: string;
-  searchHint: string;
-  clearSearch: string;
-  resultsFound: (count: number) => string;
-
-  // Loading states
-  loadingIndex: string;
-  searching: string;
-
-  // Results
-  noResults: (query: string) => string;
-  noResultsSuggestion: string;
-  noPostsAvailable: string;
-
-  // Pagination
-  previous: string;
-  next: string;
-  pageOf: (current: number, total: number) => string;
-
-  // Blog header
-  blogTitle: string;
-  blogHeading: string;
-  blogDescription: string;
-  allPosts: string;
-  showingArticles: (showing: number, total: number) => string;
-  articlesAvailable: (total: number) => string;
-  lastUpdatedOn: string;
-  readingTime: (minutes: number) => string;
-  relatedArticles: string;
-  relatedArticlesDescription: string;
-
-  // Series navigation
-  seriesPartOf: string;
-  seriesChapter: (n: number) => string;
-  seriesPrevious: string;
-  seriesNext: string;
-  seriesToC: string;
-  seriesChapterOf: (current: number, total: number) => string;
-
-  // Cross-content floating indicators (blog ↔ slide)
-  slideIndicator: {
-    label: string;
-    subtitle: string;
-    ariaLabel: string;
-  };
-  postIndicator: {
-    label: string;
-    subtitle: string;
-    ariaLabel: string;
-  };
-
-  // Series pages
-  seriesPage: {
-    title: string;
-    breadcrumb: string;
-    chapters: string;
-    chapter: string;
-    progress: (current: number, total: number) => string;
-    readChapter: string;
-    emptyState: string;
-    backToSeries: string;
-    backToBlog: string;
-    startReading: string;
-    continueReading: string;
-  };
-  seriesListingPage: {
-    title: string;
-    description: string;
-    heading: string;
-    postsCount: (count: number) => string;
-    exploreSeries: string;
-    emptyState: string;
-  };
-
-  // Scheduled posts (dev-only indicators)
-  scheduledBadge: string;
-  scheduledBannerTitle: string;
-  scheduledBannerMessage: (date: string) => string;
-
-  // Draft posts (dev + preview indicators)
-  draftBadge: string;
-  draftBannerTitle: string;
-  draftBannerMessage: string;
-
-  // Tags (unified — covers primary, secondary, and subtopic tiers)
-  postsTagged: (tag: string) => string;
-  allTags: string;
-  tagNames: Record<string, string>;
-  tagDescriptions: Record<string, string>;
-
-  // Series names and descriptions (keyed by series slug)
-  seriesNames: Record<string, string>;
-  seriesDescriptions: Record<string, string>;
-
   // Date formatting
   dateLocale: string;
-
-  // Read more
-  readMore: string;
-
-  // Scroll to timeline
-  scrollToTimeline: string;
-  viewLabel: (label: string) => string;
 
   // 404 page
   notFoundPage: {
@@ -376,48 +273,8 @@ export interface SiteTranslations {
     heading: string;
     message: string;
     backHome: string;
-    searchBlog: string;
+    exploreMethodology: string;
   };
-
-  // Blog post engagement
-  engagement: {
-    // Share buttons
-    shareTitle: string;
-    shareSeriesTitle: string;
-    shareOnTwitter: string;
-    shareOnLinkedIn: string;
-    shareOnWhatsApp: string;
-    copyLink: string;
-    linkCopied: string;
-
-    // Newsletter
-    newsletterTitle: string;
-    newsletterDescription: string;
-    newsletterPlaceholder: string;
-    newsletterButton: string;
-    newsletterSubmitting: string;
-    newsletterSuccessTitle: string;
-    newsletterSuccessMessage: string;
-    newsletterInvalidEmail: string;
-    newsletterAlreadySubscribed: string;
-    newsletterResubscribe: string;
-    newsletterPrivacy: string;
-
-    // End-of-post CTA
-    ctaTitle: string;
-    ctaDescription: string;
-  };
-
-  // Blog engagement (author + share)
-  blogEngagement: {
-    aboutAuthor: string;
-    writtenBy: string;
-  };
-
-  // Errors
-  searchError: string;
-  loadError: string;
-  retry: string;
 
   // Deep Work Plan — Methodology index + chapter reader
   methodologyPage: {

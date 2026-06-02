@@ -45,7 +45,7 @@ The repository practices the methodology it documents. The official DeepWorkPlan
 | 🔍 **SEO + AEO** | Sitemap, Open Graph, structured data, agent-friendly Markdown endpoints |
 | 🤖 **Agent-friendly** | Shared `.agents/` home for skills, commands, and agent definitions across Claude Code, Codex, Cursor, Gemini |
 
-> **Note:** The blog engine (MDX posts, series, multi-author, tag taxonomy, RSS, search) is fully built but kept **dormant** — hidden from navigation and reserved for future case studies about applying the methodology. Slides/tech-talks and personal pages have been removed.
+> **Note:** The site focuses on the methodology, specification, and kit readers plus agent-friendly Markdown endpoints. Earlier blog, slides/tech-talks, and personal pages have been removed.
 
 ---
 
@@ -96,7 +96,6 @@ Visit **http://localhost:5555** to preview.
 | `pnpm run test:coverage` | Tests with coverage report |
 | `pnpm run images:optimize` | Convert staged images to WebP |
 | `pnpm run md:check` | Verify HTML / Markdown agent-endpoint parity |
-| `pnpm run search:budgets` | Check search index performance budgets |
 | `pnpm run lighthouse` | Run Lighthouse CI audit |
 | `pnpm run ncu:check` | Check for dependency updates |
 | `pnpm run release` | Bump version and create release commit |
@@ -113,11 +112,7 @@ Visit **http://localhost:5555** to preview.
 │   │   ├── methodology/  # Methodology docs by language (en/, es/) — primary content
 │   │   ├── spec/         # Specification reader content (en/, es/)
 │   │   ├── kit/          # Kit catalog: presets, adapters, commands (en/, es/)
-│   │   ├── pages/        # Agent-friendly Markdown endpoints (en/, es/)
-│   │   ├── authors/      # Author definitions (.yaml) — used by dormant blog
-│   │   ├── blog/         # Blog posts by language (en/, es/) — DORMANT engine
-│   │   ├── series/       # Blog series definitions — DORMANT engine
-│   │   └── tags/         # Tag taxonomy with tiers — DORMANT engine
+│   │   └── pages/        # Agent-friendly Markdown endpoints (en/, es/)
 │   ├── layouts/        # MainLayout, InternalLayout, ...
 │   ├── lib/            # Utilities, types, translations
 │   ├── pages/          # File-based routing (EN root, ES in /es/)
@@ -151,7 +146,6 @@ Visit **http://localhost:5555** to preview.
 | [Security](./docs/SECURITY.md) | Security best practices |
 | [AI Agent Onboarding](./docs/AI_AGENT_ONBOARDING.md) | Setup for AI coding assistants |
 | [Skills & Agents Catalog](./.agents/docs/skills_agents_catalog.md) | Available skills and agents |
-| [Blog Posts (dormant)](./docs/features/BLOG_POSTS.md) | Blog engine reference, reserved for future case studies |
 
 ---
 

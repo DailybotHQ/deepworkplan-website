@@ -224,12 +224,12 @@ Working tree is clean. No changes to commit.
 
 ### Example 1: Component Update
 
-**Context:** User updated a blog component
+**Context:** User updated the methodology reader navigation
 
 **Execution:**
 ```bash
 git add -A
-git commit -m "fix(blog): handle empty search query gracefully"
+git commit -m "fix(methodology): keep active section in sync while scrolling"
 git push
 ```
 
@@ -238,10 +238,10 @@ git push
 ## ✅ Committed and Pushed
 
 ### Commit
-`a1b2c3d` fix(blog): handle empty search query gracefully
+`a1b2c3d` fix(methodology): keep active section in sync while scrolling
 
 ### Branch
-fix/blog-search → origin/fix/blog-search
+fix/methodology-nav → origin/fix/methodology-nav
 
 ### Changes
 - 2 files changed

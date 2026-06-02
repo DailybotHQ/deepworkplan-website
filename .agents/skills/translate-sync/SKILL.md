@@ -17,7 +17,7 @@ max-loc: 500
 
 ## Objective
 
-Synchronize content between English (en) and Spanish (es) versions of pages, blog posts, and translation strings. Ensures multilingual parity across the entire site.
+Synchronize content between English (en) and Spanish (es) versions of pages, methodology/spec/kit docs, and translation strings. Ensures multilingual parity across the entire site.
 
 ## Non-Goals
 
@@ -41,12 +41,12 @@ Synchronize content between English (en) and Spanish (es) versions of pages, blo
 ### Optional Parameters
 
 - `$TARGET_LANG`: Target language to sync to (default: auto-detect the opposite language from source path)
-- `$CONTENT_TYPE`: Type of content: `page`, `blog`, `translation-strings` (default: auto-detect from file path)
+- `$CONTENT_TYPE`: Type of content: `page`, `content-doc` (methodology/spec/kit), `translation-strings` (default: auto-detect from file path)
 
 ## Prerequisites
 
 - [ ] Source file exists and is valid
-- [ ] For blog posts: understand Content Collection schema in `content.config.ts`
+- [ ] For content docs: understand the relevant Content Collection schema in `content.config.ts`
 - [ ] For translation strings: understand `src/lib/translations/` modular structure
 
 ## Steps
@@ -59,8 +59,10 @@ Determine the source language and content type from the file path:
 |---|---|---|
 | `src/pages/es/**` | Spanish | page |
 | `src/pages/**` (not es/) | English | page |
-| `src/content/blog/es/**` | Spanish | blog |
-| `src/content/blog/en/**` | English | blog |
+| `src/content/{methodology,spec,kit}/es/**` | Spanish | content-doc |
+| `src/content/{methodology,spec,kit}/en/**` | English | content-doc |
+| `src/content/pages/es/**` | Spanish | content-doc (page .md) |
+| `src/content/pages/en/**` | English | content-doc (page .md) |
 | `src/lib/translations/en.ts` | English | translation-strings |
 | `src/lib/translations/es.ts` | Spanish | translation-strings |
 
@@ -74,8 +76,8 @@ Map source to target path:
 |---|---|
 | `src/pages/{path}.astro` | `src/pages/es/{path}.astro` |
 | `src/pages/es/{path}.astro` | `src/pages/{path}.astro` |
-| `src/content/blog/en/{slug}.md` | `src/content/blog/es/{slug}.md` |
-| `src/content/blog/es/{slug}.md` | `src/content/blog/en/{slug}.md` |
+| `src/content/{collection}/en/{slug}.md` | `src/content/{collection}/es/{slug}.md` |
+| `src/content/{collection}/es/{slug}.md` | `src/content/{collection}/en/{slug}.md` |
 
 If the target file does not exist, create it using the source as a template. If it exists, update it to match the source structure.
 
@@ -83,9 +85,9 @@ If the target file does not exist, create it using the source as a template. If 
 
 Translate the content following these rules:
 
-**For blog posts:**
+**For content docs (methodology / spec / kit / page .md):**
 - Translate: `title`, `description`, and body content
-- Preserve exactly: `pubDate`, `updatedDate`, `heroImage`, `tags`, code blocks, frontmatter structure
+- Preserve exactly: `order`, `lang` (set to the target language), structural frontmatter fields, code blocks
 - Use natural, idiomatic translations (not literal word-for-word)
 - Preserve all markdown formatting, headings, lists, links
 - Do NOT translate code blocks, terminal commands, or technical identifiers
@@ -125,7 +127,7 @@ pnpm run build
 ### Source
 - File: {source_file}
 - Language: {en|es}
-- Type: {page|blog|translation-strings}
+- Type: {page|content-doc|translation-strings}
 
 ### Target
 - File: {target_file}
@@ -172,7 +174,7 @@ Stop and ask if:
 ## Definition of Done
 
 - [ ] Target file exists with translated content
-- [ ] Frontmatter structure matches source (for blog posts)
+- [ ] Frontmatter structure matches source (for content docs)
 - [ ] All user-visible text is translated
 - [ ] Code blocks, commands, and technical content are preserved untranslated
 - [ ] `lang` value is correct in target page files
@@ -192,21 +194,21 @@ Escalate to higher tier if:
 
 ## Examples
 
-### Example 1: Sync a New English Blog Post to Spanish
+### Example 1: Sync a New English Methodology Doc to Spanish
 
 **Input:**
 ```
-$SOURCE_FILE: src/content/blog/en/getting-started-with-astro.md
+$SOURCE_FILE: src/content/methodology/en/introduction.md
 ```
 
 **Actions:**
-1. Detect: English blog post
-2. Target: `src/content/blog/es/getting-started-with-astro.md`
+1. Detect: English methodology doc
+2. Target: `src/content/methodology/es/introduction.md`
 3. Translate title, description, and body to Spanish
-4. Preserve frontmatter dates, tags, hero image
+4. Preserve `order`, set `lang: es`, keep frontmatter structure
 5. Validate and report
 
-**Creates:** `src/content/blog/es/getting-started-with-astro.md`
+**Creates:** `src/content/methodology/es/introduction.md`
 
 ### Example 2: Sync a Modified Spanish Page to English
 

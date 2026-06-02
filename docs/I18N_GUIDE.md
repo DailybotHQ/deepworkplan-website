@@ -8,7 +8,7 @@ deepworkplan.com is a fully bilingual site supporting English and Spanish. The i
 
 1. **Centralized translations** via `src/lib/translations.ts`
 2. **Route-based language routing** (English at `/`, Spanish at `/es/`)
-3. **Language-split content collections** for blog posts (`en/` and `es/` folders)
+3. **Language-split content collections** for methodology/spec/kit docs (`en/` and `es/` folders)
 
 | Language | Code | Route Prefix | Status |
 |----------|------|-------------|--------|
@@ -32,12 +32,10 @@ The file is organized into logical sections:
 ```typescript
 export interface SiteTranslations {
   // Site metadata: siteTitle, siteDescription
-  // Navigation: nav.home, nav.blog, nav.about, ...
+  // Navigation: nav.home, nav.methodology, nav.about, ...
   // Footer: footer.copyright, footer.allRightsReserved
   // Homepage: hero, homeSections, contact
-  // Content pages: aboutPage, cvPage, dailybotPage, ...
-  // Blog: blogTitle, blogDescription, allPosts, postsTagged(), ...
-  // Tags: tagNames, tagDescriptions
+  // Content pages: aboutPage, contactPage, examplesPage, ...
   // Dates: dateLocale
 }
 ```
@@ -56,8 +54,8 @@ const lang: string = 'en'; // or from props/URL
 const t = getTranslations(lang);
 ---
 
-<h1>{t.blogTitle}</h1>
-<p>{t.blogDescription}</p>
+<h1>{t.aboutPage.title}</h1>
+<p>{t.aboutPage.description}</p>
 ```
 
 **Svelte components (.svelte):**
@@ -70,7 +68,7 @@ export let lang = 'en';
 $: t = getTranslations(lang);
 </script>
 
-<h1>{t.blogTitle}</h1>
+<h1>{t.aboutPage.title}</h1>
 ```
 
 ### Adding New Translation Keys
@@ -106,173 +104,53 @@ For function-based translations (with parameters):
 
 ```typescript
 // Interface
-postsTagged: (tag: string) => string;
+itemsInSection: (section: string) => string;
 
 // English
-postsTagged: (tag) => `Posts tagged "${tag}"`,
+itemsInSection: (section) => `Items in "${section}"`,
 
 // Spanish
-postsTagged: (tag) => `Posts etiquetados con "${tag}"`,
+itemsInSection: (section) => `Elementos en "${section}"`,
 ```
-
-## Tag Localization
-
-### Architecture Decision
-
-Tags use **centralized translations** (not bilingual frontmatter). This means:
-
-- Tag **slugs** are language-neutral identifiers (`tech`, `personal`, `talks`, `trading`, `portfolio`)
-- Tag **display names** come from `t.tagNames[slug]` in `translations.ts`
-- Tag **descriptions** come from `t.tagDescriptions[slug]` in `translations.ts`
-- Tag **URLs** always use the slug: `/blog/tag/tech/`, `/es/blog/tag/tech/`
-
-This approach was chosen because:
-- Consistent with the existing centralized translation system
-- Tags are metadata, not content — they belong in the translation system
-- Minimal code changes across components
-- Single source of truth for all tag translations
-
-### Tag Content Collection
-
-Tags are defined as a content collection in `src/content/tags/*.md`:
-
-```
-src/content/tags/
-├── tech.md
-├── personal.md
-├── talks.md
-├── trading.md
-└── portfolio.md
-```
-
-Each file has a simple schema:
-
-```markdown
----
-name: "tech"
-description: "Tutorials, guides, and technical articles."
----
-```
-
-The `name` field is the slug identifier. The `description` field serves as a default/reference but is **not used for display** — localized descriptions come from `translations.ts`.
-
-### Tag Display Pattern
-
-All components display tags using this pattern:
-
-```svelte
-#{t.tagNames[tag] || tag}
-```
-
-The fallback `|| tag` ensures raw slug display if a translation is missing.
-
-For tag page titles:
-
-```astro
-title={t.postsTagged(t.tagNames[tag] || tag)}
-```
-
-For tag descriptions (e.g., in SEO metadata):
-
-```astro
-description={t.tagDescriptions[tag] || `Articles tagged as ${t.tagNames[tag] || tag}.`}
-```
-
-### Current Tag Translations
-
-| Slug | English Name | Spanish Name |
-|------|-------------|-------------|
-| `tech` | Tech | Tecnologia |
-| `personal` | Personal | Personal |
-| `talks` | Talks | Charlas |
-| `trading` | Trading | Trading |
-| `portfolio` | Portfolio | Portafolio |
-
-### Adding a New Tag
-
-To add a new tag (e.g., `tutorials`):
-
-1. **Create the content file** `src/content/tags/tutorials.md`:
-   ```markdown
-   ---
-   name: "tutorials"
-   description: "Step-by-step tutorials and how-to guides."
-   ---
-   ```
-
-2. **Add translations** to `src/lib/translations.ts`:
-   ```typescript
-   // In EN tagNames:
-   tagNames: { ..., tutorials: 'Tutorials' },
-   // In EN tagDescriptions:
-   tagDescriptions: { ..., tutorials: 'Step-by-step tutorials and how-to guides.' },
-   // In ES tagNames:
-   tagNames: { ..., tutorials: 'Tutoriales' },
-   // In ES tagDescriptions:
-   tagDescriptions: { ..., tutorials: 'Tutoriales paso a paso y guias practicas.' },
-   ```
-
-3. **Use in blog posts** by adding to the `tags` array in frontmatter:
-   ```markdown
-   ---
-   tags: ["tutorials", "tech"]
-   ---
-   ```
-
-No component changes are needed — the tag will automatically appear with its localized name wherever tags are displayed.
 
 ## Bilingual Content
 
-### Blog Posts
+### Methodology / Spec / Kit Docs
 
-Blog posts are organized in language-specific folders:
+Documentation content is organized in language-specific folders inside each collection:
 
 ```
-src/content/blog/
+src/content/methodology/
 ├── en/
-│   ├── first-post.md
-│   ├── second-post.md
+│   ├── introduction.md
+│   ├── adoption.md
 │   └── ...
 └── es/
-    ├── first-post.md
-    ├── second-post.md
+    ├── introduction.md
+    ├── adoption.md
     └── ...
 ```
 
-Language filtering works by post ID prefix in `src/lib/blog.ts`:
+The same pattern applies to `src/content/spec/` and `src/content/kit/`. Each doc carries a `lang` field in its frontmatter, and language filtering uses it:
 
 ```typescript
-// English posts
-const posts = allPosts.filter((post) => post.id.startsWith('en/'));
+// English docs
+const enDocs = await getCollection('methodology', ({ data }) => data.lang === 'en');
 
-// Spanish posts
-const posts = allPosts.filter((post) => post.id.startsWith('es/'));
+// Spanish docs
+const esDocs = await getCollection('methodology', ({ data }) => data.lang === 'es');
 ```
 
 **Frontmatter requirements:**
 
 - `title` and `description` must be translated
-- `pubDate`, `updatedDate`, `heroImage`, `tags`, and `author` must be identical between language pairs
-- Post filenames must match between `en/` and `es/` folders
+- `order` (and `lang`-neutral structural fields) must stay consistent between language pairs
+- Filenames must match between `en/` and `es/` folders (slugs are always English)
 
 **Spanish content voice:**
 
 - Use **tuteo** (tú/tienes/puedes), NOT **voseo** (vos/tenés/podés) — the register is informal-professional with Colombian Spanish phrasing
 - Proper diacritical marks are mandatory (see [Standards](STANDARDS.md))
-
-### Authors
-
-Authors are defined in `src/content/authors/{slug}.yaml`. The localization happens **inside the YAML** (not at the post level): each author has `role.en` / `role.es` and `bio.en` / `bio.es`. Blog posts reference an author by slug, so the same `author:` value applies to both EN and ES versions of a post.
-
-**Translation requirements:**
-
-- Both `role.en` and `role.es` are mandatory by the schema — a missing language fails the Zod validation at build time
-- Both `bio.en` and `bio.es` are mandatory by the schema
-- Spanish role / bio must use proper diacritics (`Cofundador`, `años`, `diseño`, etc.) and tuteo register
-- The `name` field is the same in all languages (proper names don't translate)
-- Social URLs are language-agnostic
-
-See [features/AUTHORS.md](./features/AUTHORS.md) for the full schema and validation checklist.
 
 ### Pages
 
@@ -280,27 +158,25 @@ Pages follow a route-based approach:
 
 ```
 src/pages/
-├── index.astro          # English (lang="en")
-├── about.astro          # English
-├── contact.astro        # English
-├── blog/                # English blog routes
-│   ├── index.astro
-│   ├── [...slug].astro
-│   ├── page/[page].astro
-│   └── tag/
-│       ├── [tag].astro
-│       └── [tag]/page/[page].astro
+├── index.astro            # English (lang="en")
+├── about.astro            # English
+├── contact.astro          # English
+├── methodology/           # English methodology routes
+│   └── [slug].astro
+├── spec/                  # English spec routes
+│   └── [slug].astro
+├── kit/                   # English kit routes
+│   └── [slug].astro
 └── es/
-    ├── index.astro      # Spanish (lang="es")
-    ├── about.astro      # Spanish
-    ├── contact.astro    # Spanish
-    └── blog/            # Spanish blog routes (mirrors EN structure)
-        ├── index.astro
-        ├── [...slug].astro
-        ├── page/[page].astro
-        └── tag/
-            ├── [tag].astro
-            └── [tag]/page/[page].astro
+    ├── index.astro        # Spanish (lang="es")
+    ├── about.astro        # Spanish
+    ├── contact.astro      # Spanish
+    ├── methodology/       # Spanish methodology routes (mirrors EN)
+    │   └── [slug].astro
+    ├── spec/
+    │   └── [slug].astro
+    └── kit/
+        └── [slug].astro
 ```
 
 Every English page must have a Spanish equivalent under `es/`, and vice versa.
@@ -416,20 +292,17 @@ const locale = lang === 'es' ? 'es-ES' : 'en-US';
 The header includes a language switcher that toggles between English and Spanish. It maps current route paths between language versions:
 
 - `/about/` ↔ `/es/about/`
-- `/blog/` ↔ `/es/blog/`
-- `/blog/tag/tech/` ↔ `/es/blog/tag/tech/`
+- `/methodology/introduction/` ↔ `/es/methodology/introduction/`
+- `/kit/` ↔ `/es/kit/`
 
 ## Bilingual Compliance Checklist
 
 Before committing any content change, verify:
 
 - [ ] All new/modified pages exist in both `src/pages/` and `src/pages/es/`
-- [ ] All new/modified blog posts exist in both `src/content/blog/en/` and `src/content/blog/es/`
-- [ ] When introducing or updating an author, both `role.en`/`role.es` and `bio.en`/`bio.es` are populated in `src/content/authors/{slug}.yaml`
-- [ ] Same `author` slug used in EN and ES versions of a post
+- [ ] All new/modified methodology/spec/kit docs exist in both `{collection}/en/` and `{collection}/es/`
 - [ ] All new UI strings in `translations.ts` have both English and Spanish values
 - [ ] No hardcoded user-visible text in components (use `getTranslations()`)
-- [ ] Tag names use `t.tagNames[slug] || slug` pattern for display
 - [ ] Date formatting uses locale-aware formatting with `lang` prop
 - [ ] Page titles and SEO descriptions use translation keys
 - [ ] The `lang` prop is passed through the full component hierarchy
@@ -438,9 +311,7 @@ Before committing any content change, verify:
 
 ## Known Limitations
 
-1. **Homepage sections** — Education, Experience, Projects, and Skills sections have content that needs dedicated bilingual translation work (large structured content blocks)
-2. **Portfolio translations** — `portfolioPage` translations are referenced in code but not yet defined in `translations.ts` (pre-existing from portfolio feature branch)
-3. **Minor aria-labels** — Some accessibility attributes (ThemeToggle, BlogPagination) have hardcoded English text
+1. **Minor aria-labels** — Some accessibility attributes (e.g., ThemeToggle) may have hardcoded English text; prefer `getTranslations(lang)` when adding new ones.
 
 ## Resources
 

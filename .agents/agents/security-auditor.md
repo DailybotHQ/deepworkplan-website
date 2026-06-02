@@ -146,7 +146,7 @@ This agent focuses on:
    ```
 
 3. **Sensitive data in Content Collections:**
-   - Ensure blog posts don't contain internal data
+   - Ensure methodology/spec/kit docs don't contain internal data
    - Check frontmatter for sensitive fields
 
 ## Stop Conditions

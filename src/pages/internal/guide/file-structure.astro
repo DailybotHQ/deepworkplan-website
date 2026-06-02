@@ -8,7 +8,7 @@ const importantFiles = [
   },
   {
     file: 'src/content.config.ts',
-    purpose: 'Content Collection schemas (blog, slides, tags, series, pages)',
+    purpose: 'Content Collection schemas (pages, methodology, spec, kit)',
   },
   {
     file: 'src/styles/global.css',
@@ -20,12 +20,8 @@ const importantFiles = [
     purpose: 'Translation system public API',
   },
   {
-    file: 'src/lib/blog.ts',
-    purpose: 'Post fetching, pagination, slug helpers',
-  },
-  {
-    file: 'src/lib/slides.ts',
-    purpose: 'Deck fetching, type guards, slug helpers',
+    file: 'src/lib/markdown-for-agents.ts',
+    purpose: 'Agent-friendly Markdown endpoint helpers (AEO)',
   },
   {
     file: 'src/lib/constances.ts',
@@ -48,29 +44,24 @@ const importantFiles = [
 
 const namingConventions = [
   {
-    context: 'Blog posts',
-    pattern: 'YYYY-MM-DD_slug.md',
-    example: '2024-03-15_my-awesome-post.md',
-  },
-  {
     context: 'Methodology docs',
     pattern: 'slug.md',
     example: 'overview.md',
   },
   {
-    context: 'Blog images',
-    pattern: '/images/blog/posts/{slug}/hero.ext',
-    example: '/images/blog/posts/my-post/hero.webp',
+    context: 'Spec docs',
+    pattern: 'slug.md',
+    example: 'task-anatomy.md',
   },
   {
-    context: 'Slide images',
-    pattern: '/images/slides/{slug}/hero.ext',
-    example: '/images/slides/my-deck/hero.webp',
+    context: 'Kit entries',
+    pattern: 'slug.md',
+    example: 'commit.md',
   },
   {
     context: 'Components',
     pattern: 'PascalCase.astro / PascalCase.svelte',
-    example: 'BlogCard.svelte',
+    example: 'PageHero.astro',
   },
   {
     context: 'Page components',
@@ -82,11 +73,11 @@ const namingConventions = [
     pattern: 'kebab-case.astro',
     example: 'methodology.astro',
   },
-  { context: 'Utilities', pattern: 'camelCase.ts', example: 'blog.ts' },
+  { context: 'Utilities', pattern: 'camelCase.ts', example: 'i18n.ts' },
   {
     context: 'Test files',
     pattern: '*.test.ts',
-    example: 'slides.test.ts',
+    example: 'i18n.test.ts',
   },
 ];
 ---
@@ -101,48 +92,45 @@ const namingConventions = [
 │   ├── BaseHead.astro       # SEO meta tags, Open Graph
 │   ├── Footer.astro         # Site footer
 │   ├── JsonLd.astro         # Structured data injection
-│   ├── blog/                # Blog components (BlogCard, BlogGrid, Search)
-│   ├── home/                # Homepage sections (Hero, Blog Preview, Projects)
+│   ├── editorial/           # Editorial primitives (Broadsheet design system)
+│   ├── home/                # Homepage sections (Hero, Pitch, Onboarding, ...)
 │   ├── layout/              # Header.svelte, MobileMenu.svelte
-│   ├── pages/               # Shared page components (*Page.astro)
-│   └── slides/              # Slide components (RevealDeck, SlideCard, TypeBadge)
+│   └── pages/               # Shared page components (*Page.astro + readers)
 ├── content/                 # Content Collections
-│   ├── blog/{'{en,es}'}/         # Blog posts by language
-│   ├── slides/{'{en,es}'}/       # Slide decks by language
-│   ├── slides/_layouts/     # 19 reusable layout snippets
-│   ├── tags/                # Tag definitions (tier, order)
-│   ├── series/              # Series definitions
+│   ├── methodology/{'{en,es}'}/  # Methodology docs by language
+│   ├── spec/{'{en,es}'}/         # Readable specification by language
+│   ├── kit/{'{en,es}'}/          # Kit catalog (commands, adapters, presets)
 │   └── pages/{'{en,es}'}/        # Markdown twins for AI agents
-├── layouts/                 # MainLayout, SlideLayout, InternalLayout
+├── layouts/                 # MainLayout, InternalLayout, ShowcaseLayout
 ├── lib/                     # Utility functions
-│   ├── blog.ts              # Post fetching, pagination
-│   ├── slides.ts            # Deck fetching, type guards
 │   ├── i18n.ts              # Language config, URL helpers
+│   ├── markdown-for-agents.ts # Agent-friendly Markdown endpoints
+│   ├── analytics.ts         # Event tracking helpers
 │   ├── constances.ts        # Site constants
 │   └── translations/        # en.ts, es.ts, types.ts, index.ts
 ├── pages/                   # File-based routing
 │   ├── index.astro          # Homepage (EN)
 │   ├── es/                  # Spanish page wrappers
-│   ├── blog/                # Blog routes
-│   ├── slides/              # Slide deck routes + .md twins
+│   ├── methodology/         # Reader routes (index, [slug]) + .md twins
+│   ├── spec/                # Reader routes (index, [slug]) + .md twins
+│   ├── kit/                 # Reader routes (index, [slug]) + .md twins
+│   ├── examples/            # Reader routes (index, [slug]) + .md twins
+│   ├── init/                # Canonical adoption endpoint
 │   ├── internal/            # Internal Hub (dev-only)
-│   │   ├── ui/              # Design System Showcase (10 pages)
-│   │   └── guide/           # Staff Guide (9 pages)
-│   └── api/                 # JSON endpoints (posts)
+│   │   ├── ui/              # Design System Showcase
+│   │   └── guide/           # Staff Guide
+│   └── [page].md.ts         # Top-level Markdown twins for AI agents
 ├── styles/
 │   └── global.css           # Global styles, design tokens
 └── middleware.ts             # Route allowlist
 
 public/                      # Static assets
-├── images/
-│   ├── blog/posts/{'{slug}'}/   # Per-post image folders
-│   ├── slides/{'{slug}'}/       # Per-deck image folders
-│   └── blog/_staging/       # Incoming images for optimization
+├── images/                  # Site imagery, OG cards
 ├── icons/                   # Social icons (light/dark pairs)
 ├── fonts/                   # Atkinson Hyperlegible
-.claude/                     # AI Skills & Agents
-├── skills/                  # 20 reusable skill procedures
-├── agents/                  # 6 specialized agent personas
+.agents/                     # AI Skills & Agents (.claude → .agents symlink)
+├── skills/                  # Reusable skill procedures
+├── agents/                  # Specialized agent personas
 └── docs/                    # Skills catalog, commands reference</code></pre>
   </section>
 
@@ -155,11 +143,10 @@ public/                      # Static assets
           src/components/
         </summary>
         <div class="px-4 pb-4 text-sm text-gray-600 dark:text-gray-300 space-y-2">
-          <p><code class="text-xs">blog/</code> — BlogCard.svelte, BlogGrid.svelte, BlogPagination.svelte, StaticBlogSearch.svelte</p>
-          <p><code class="text-xs">slides/</code> — RevealDeck.svelte, SlideCard.astro, SlidesCatalog.astro, TypeBadge.astro, ExternalView.astro</p>
-          <p><code class="text-xs">home/</code> — HeroSection/, BlogPreviewSection, ContactSection, ProjectsSection, and other homepage sections</p>
+          <p><code class="text-xs">editorial/</code> — Editorial primitives for the Broadsheet design system</p>
+          <p><code class="text-xs">home/</code> — Hero, Pitch, Onboarding, Quickstart, Archetypes, Comparison, and other homepage sections</p>
           <p><code class="text-xs">layout/</code> — Header.svelte (main nav, interactive), MobileMenu.svelte</p>
-          <p><code class="text-xs">pages/</code> — Shared *Page.astro components (HomePage, AboutPage, SlideDeckPage, SlidesPage, etc.)</p>
+          <p><code class="text-xs">pages/</code> — Shared *Page.astro components plus collection readers (MethodologyReader, SpecReader, KitReader)</p>
           <p>Root files: BaseHead.astro (SEO), Footer.astro, JsonLd.astro (structured data)</p>
         </div>
       </details>
@@ -169,14 +156,11 @@ public/                      # Static assets
           src/content/
         </summary>
         <div class="px-4 pb-4 text-sm text-gray-600 dark:text-gray-300 space-y-2">
-          <p><code class="text-xs">blog/{'{en,es}'}/</code> — Blog posts by language, date-prefix naming (YYYY-MM-DD_slug.md)</p>
-          <p><code class="text-xs">blog/{'{lang}'}/_demo/</code> — Demo posts (dev-only, never in production)</p>
-          <p><code class="text-xs">slides/{'{en,es}'}/</code> — Slide decks by language, same naming convention</p>
-          <p><code class="text-xs">slides/_layouts/</code> — 19 reusable layout snippets + 8 background modes</p>
-          <p><code class="text-xs">tags/</code> — Tag definitions with tier (primary/secondary) and order</p>
-          <p><code class="text-xs">series/</code> — Series definitions (name, title, description, order)</p>
+          <p><code class="text-xs">methodology/{'{en,es}'}/</code> — Methodology docs by language (slug.md)</p>
+          <p><code class="text-xs">spec/{'{en,es}'}/</code> — Readable specification by language</p>
+          <p><code class="text-xs">kit/{'{en,es}'}/</code> — Kit catalog (commands, adapters, presets, examples, addons)</p>
           <p><code class="text-xs">pages/{'{en,es}'}/</code> — Markdown twins for AI agents (AEO)</p>
-          <p>Schema in <code class="text-xs">src/content.config.ts</code> — Zod validation (blog, slides discriminated union, tags, series)</p>
+          <p>Schema in <code class="text-xs">src/content.config.ts</code> — Zod validation (pages, methodology, spec, kit)</p>
         </div>
       </details>
 
@@ -185,13 +169,12 @@ public/                      # Static assets
           src/pages/
         </summary>
         <div class="px-4 pb-4 text-sm text-gray-600 dark:text-gray-300 space-y-2">
-          <p>Root: EN page wrappers (index.astro, about.astro, contact.astro, etc.)</p>
+          <p>Root: EN page wrappers (index.astro, about.astro, contact.astro, quickstart, init, etc.)</p>
           <p><code class="text-xs">es/</code> — Spanish page wrappers (same structure, <code class="text-xs">lang="es"</code>)</p>
-          <p><code class="text-xs">blog/</code> — Blog listing, dynamic [...slug].astro, pagination, tag routes</p>
-          <p><code class="text-xs">slides/</code> — Slide catalog, dynamic [...slug].astro, .md twins for AEO</p>
+          <p><code class="text-xs">methodology/, spec/, kit/, examples/</code> — Reader routes (index.astro, [slug].astro) + [slug].md.ts twins for AEO</p>
+          <p><code class="text-xs">init/</code> — Canonical adoption endpoint (with /setup and /onboarding redirects)</p>
           <p><code class="text-xs">internal/</code> — Internal Hub pages (excluded from production builds)</p>
-          <p><code class="text-xs">api/</code> — JSON endpoints (posts.json.ts, slides-timeline/[lang].json.ts)</p>
-          <p>rss.xml.js — RSS feed generation</p>
+          <p><code class="text-xs">[page].md.ts</code> — Top-level Markdown twins for AI agents (AEO)</p>
         </div>
       </details>
 
@@ -200,9 +183,8 @@ public/                      # Static assets
           src/lib/
         </summary>
         <div class="px-4 pb-4 text-sm text-gray-600 dark:text-gray-300 space-y-2">
-          <p><code class="text-xs">blog.ts</code> — getBlogPosts(), getPostSlug(), pagination utilities</p>
-          <p><code class="text-xs">slides.ts</code> — getSlideDecks(), getDeckSlug(), type guards (isNativeDeck, isExternalDeck)</p>
           <p><code class="text-xs">i18n.ts</code> — Language type, LANGUAGES registry, getUrlPrefix()</p>
+          <p><code class="text-xs">markdown-for-agents.ts</code> — Agent-friendly Markdown endpoint helpers (AEO)</p>
           <p><code class="text-xs">translations/</code> — Modular system: en.ts, es.ts, types.ts, index.ts</p>
           <p><code class="text-xs">constances.ts</code> — SITE_TITLE, SITE_DESCRIPTION, social URLs</p>
           <p><code class="text-xs">analytics.ts</code> — Event tracking, analytics helpers</p>
@@ -214,10 +196,7 @@ public/                      # Static assets
           public/
         </summary>
         <div class="px-4 pb-4 text-sm text-gray-600 dark:text-gray-300 space-y-2">
-          <p><code class="text-xs">images/blog/posts/{'{slug}'}/</code> — Per-post image folders (hero.webp, inline images)</p>
-          <p><code class="text-xs">images/blog/_staging/</code> — Incoming blog images for optimization</p>
-          <p><code class="text-xs">images/slides/{'{slug}'}/</code> — Per-deck image folders (hero.webp)</p>
-          <p><code class="text-xs">images/slides/_staging/</code> — Incoming slide images for optimization</p>
+          <p><code class="text-xs">images/</code> — Site imagery and Open Graph cards</p>
           <p><code class="text-xs">icons/</code> — Social icons in light/dark pairs (github.svg, github_white.svg)</p>
           <p><code class="text-xs">fonts/</code> — Atkinson Hyperlegible (Regular 400, Bold 700)</p>
           <p>Root: favicon.svg, robots.txt, llms.txt, manifest.webmanifest</p>

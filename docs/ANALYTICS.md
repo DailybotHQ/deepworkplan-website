@@ -64,7 +64,7 @@ These tools require no code changes — only dashboard configuration.
 
 **Setup:** Verify ownership via Domain property DNS TXT in Search Console. Submit sitemap at `/sitemap-index.xml`.
 
-**Unique value:** The most direct signal for blog content performance in organic search. Shows which queries drive traffic to which specific blog posts, trending content, and indexation issues.
+**Unique value:** The most direct signal for content performance in organic search. Shows which queries drive traffic to which specific pages, trending content, and indexation issues.
 
 #### Bing Webmaster Tools
 
@@ -100,7 +100,7 @@ These tools add small tracking scripts to `BaseHead.astro`. Scripts load conditi
 
 **Setup:** Register at [umami.is](https://umami.is), create a website, copy the Website ID. Set `PUBLIC_UMAMI_WEBSITE_ID` in environment variables.
 
-**Unique value:** Privacy-first GA4 alternative with a clean, fast dashboard. Top Pages view directly shows which blog content gets the most traction. Custom events track specific interactions (external link clicks, language switches).
+**Unique value:** Privacy-first GA4 alternative with a clean, fast dashboard. Top Pages view directly shows which content gets the most traction. Custom events track specific interactions (external link clicks, language switches).
 
 **Why Umami over GA4:** ~2KB vs ~70KB script, no cookies, no consent banner needed, GDPR compliant by default. Covers the same traffic analytics use cases without the privacy and performance debt.
 
@@ -206,13 +206,13 @@ Bots in the watchlist are currently ignored but should be reviewed periodically 
   "type": "event",
   "payload": {
     "website": "<UMAMI_WEBSITE_ID>",
-    "url": "/blog/post-slug",
+    "url": "/methodology/introduction",
     "hostname": "deepworkplan.com",
     "language": "en-US",
     "name": "ai_bot_visit",
     "data": {
       "bot": "GPTBot",
-      "path": "/blog/post-slug",
+      "path": "/methodology/introduction",
       "method": "GET"
     }
   }
@@ -308,7 +308,6 @@ Umami custom events are used to track specific user interactions beyond page vie
 
 - **No PII is ever tracked** — no emails, names, phone numbers, or message content
 - Contact form tracks validation failure field names (e.g., `{ fields: "name,email" }`) but never field values
-- Newsletter form tracks the subscribe event but not the email address
 - Umami is cookieless and GDPR-compliant by default
 
 ### Event Catalog
@@ -319,21 +318,12 @@ Umami custom events are used to track specific user interactions beyond page vie
 | `language_switch` | Language toggle | `{ from, to }` | Header.svelte, MobileMenu.svelte |
 | `mobile_menu_toggle` | Hamburger menu open/close | `{ action }` | Header.svelte |
 | `theme_toggle` | Dark/light mode switch | `{ theme }` | ThemeToggle.astro |
-| `blog_search` | Blog search query | `{ query, results }` | StaticBlogSearch.svelte |
-| `tag_filter` | Tag/topic filter click | `{ tag }` | BlogHeader.svelte |
-| `blog_card_click` | Blog post card click | `{ slug }` | BlogCard.svelte |
-| `pagination_click` | Blog pagination | `{ page }` | BlogPagination.svelte |
-| `share_click` | Social share button | `{ platform }` | ShareButtons.astro |
 | `copy_link` | Copy link button | — | CopyLinkButton.svelte |
-| `series_nav` | Series navigation | `{ action }` | SeriesNavigation.astro |
-| `series_indicator_click` | Series indicator scroll | — | SeriesIndicator.svelte |
-| `lightbox_open` | Image lightbox opened | — | BlogImageLightbox.svelte |
 | `contact_form_submit` | Contact form submitted | `{ reason }` | ContactForm.svelte |
 | `contact_form_error` | Form validation failure | `{ field_count }` | ContactForm.svelte |
-| `newsletter_subscribe` | Newsletter signup | — | NewsletterForm.svelte |
 | `social_click` | Footer social link | `{ platform }` | Footer.astro |
 | `outbound_click` | External link click | `{ url }` | MainLayout.astro (delegated) |
-| `scroll_depth` | Scroll milestone | `{ depth }` | BlogPostPage.astro |
+| `scroll_depth` | Scroll milestone | `{ depth }` | content pages (long-form readers) |
 | `ai_bot_visit` | AI crawler page visit (server-side) | `{ bot, path, method }` | `functions/_middleware.ts` (edge middleware) |
 | `markdown_request` | Markdown endpoint request (server-side) | `{ bot, path, source, user_agent }` | `functions/_middleware.ts` (edge middleware) |
 
@@ -350,16 +340,12 @@ Umami custom events are used to track specific user interactions beyond page vie
 
 | Event | How to Trigger | Expected Data |
 |-------|---------------|---------------|
-| `nav_click` | Click any nav link in header | `item: "blog"`, `source: "desktop"` |
+| `nav_click` | Click any nav link in header | `item: "methodology"`, `source: "desktop"` |
 | `language_switch` | Click EN/ES toggle | `from: "en"`, `to: "es"` |
 | `theme_toggle` | Click sun/moon button | `theme: "dark"` or `"light"` |
-| `blog_search` | Type 2+ chars in blog search | `query: "astro"`, `results: 3` |
-| `tag_filter` | Click a tag on the blog page | `tag: "tech"` |
-| `blog_card_click` | Click a blog post title | `slug: "astro-in-action"` |
-| `share_click` | Click a share button on a post | `platform: "twitter"` |
 | `contact_form_submit` | Submit the contact form | `reason: "project"` |
 | `social_click` | Click GitHub/LinkedIn in footer | `platform: "github"` |
-| `scroll_depth` | Scroll to bottom of a blog post | `depth: "100"` |
+| `scroll_depth` | Scroll to bottom of a long page | `depth: "100"` |
 
 ### How to Add New Events
 
@@ -376,11 +362,11 @@ Umami custom events are used to track specific user interactions beyond page vie
 | Question | Answered By |
 |----------|-------------|
 | How much traffic does the site get? | Cloudflare Web Analytics + Umami |
-| Which blog posts have the most traction? | Umami (Top Pages) |
+| Which pages have the most traction? | Umami (Top Pages) |
 | Where does traffic come from? | Umami (Referrers) + Cloudflare |
 | What do people search on Google to find the site? | Google Search Console |
 | Is the content cited in AI tools (Copilot)? | Bing Webmaster Tools (AI Performance) |
-| Do readers finish blog posts? | Umami events + content metrics (time on page, bounce rate) |
+| Do readers finish long pages? | Umami events + content metrics (time on page, bounce rate) |
 | Where do users click on pages? | Umami custom click events |
 | What frustrates users? | Funnel drop-off + custom UX events |
 | Is the site fast for real users? | Cloudflare Web Analytics (Core Web Vitals RUM) |
@@ -452,7 +438,7 @@ All analytics-related environment variables:
 
 ### Weekly (~5 minutes)
 
-1. **Umami** → Top Pages: which blog posts are getting traction?
+1. **Umami** → Top Pages: which pages are getting traction?
 2. **Umami** → Referrers: where is traffic coming from?
 3. **Umami** → Event breakdown: are key CTAs getting clicks?
 4. **Cloudflare** → Core Web Vitals trends: any real-user regressions?

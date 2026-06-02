@@ -203,11 +203,11 @@ $FILES: src/components/Footer.astro
 
 **Input:**
 ```
-$ISSUE: Blog pagination is broken across all tag pages
-$FILES: src/pages/blog/tag/...
+$ISSUE: Methodology reader navigation is broken across all sections
+$FILES: src/components/pages/MethodologyPage.astro + reader components
 ```
 
-**Result:** Escalate — involves multiple files and complex routing logic; use Tier 2.
+**Result:** Escalate — involves multiple files and complex rendering logic; use Tier 2.
 
 ## Related
 

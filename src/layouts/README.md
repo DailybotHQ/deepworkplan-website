@@ -142,26 +142,24 @@ For specialized pages, you can create additional layouts:
 
 ```astro
 ---
-// src/layouts/BlogLayout.astro
+// src/layouts/ReaderLayout.astro
 import MainLayout from './MainLayout.astro';
 
 interface Props {
   lang: string;
   title: string;
   description: string;
-  pubDate: Date;
-  author?: string;
+  section?: string;
 }
 
-const { lang, title, description, pubDate, author } = Astro.props;
+const { lang, title, description, section } = Astro.props;
 ---
 
 <MainLayout lang={lang} title={title} description={description}>
   <article class="main-container py-24">
     <header class="mb-8">
+      {section && <p class="text-sm uppercase tracking-wide">{section}</p>}
       <h1 class="text-4xl font-bold">{title}</h1>
-      <time>{pubDate.toLocaleDateString()}</time>
-      {author && <p>By {author}</p>}
     </header>
     <slot />
   </article>

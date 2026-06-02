@@ -44,7 +44,7 @@ Add or expand tests for existing code. This skill creates or extends test files 
 
 ### Required Parameters
 
-- `$TARGET`: File(s) or module to add tests for (e.g., `src/components/blog/BlogCard.svelte`)
+- `$TARGET`: File(s) or module to add tests for (e.g., `src/lib/i18n.ts`)
 - `$SCOPE`: What to cover (e.g., "unit for props", "interaction tests", "edge cases for null")
 
 ### Optional Parameters
@@ -54,7 +54,7 @@ Add or expand tests for existing code. This skill creates or extends test files 
 ## Prerequisites
 
 - [ ] Target code is stable (no pending refactors)
-- [ ] Test fixtures understood (`tests/fixtures/posts.ts`)
+- [ ] Test fixtures understood (`tests/fixtures/`)
 - [ ] Vitest config reviewed if testing new module types
 
 ## Test Infrastructure
@@ -73,20 +73,16 @@ Add or expand tests for existing code. This skill creates or extends test files 
 ```
 tests/
 ├── unit/
-│   ├── lib/                    # Utility function tests
-│   │   ├── blog.test.ts
+│   ├── lib/                            # Utility function tests
 │   │   ├── i18n.test.ts
-│   │   ├── search.test.ts
+│   │   ├── markdown-for-agents.test.ts
 │   │   └── translations.test.ts
-│   └── components/             # Svelte component tests
-│       ├── BlogCard.test.ts
-│       └── BlogPagination.test.ts
-├── fixtures/
-│   └── posts.ts                # Mock blog post data
+│   └── components/                     # Svelte component tests
+├── fixtures/                           # Shared mock data
 ├── helpers/
-│   └── setup.ts                # Test setup (jest-dom matchers)
+│   └── setup.ts                        # Test setup (jest-dom matchers)
 └── mocks/
-    └── astro-content.ts        # Mock for astro:content virtual module
+    └── astro-content.ts                # Mock for astro:content virtual module
 ```
 
 ### Key Patterns
@@ -94,11 +90,11 @@ tests/
 **Utility function tests:**
 ```typescript
 import { describe, expect, it } from 'vitest';
-import { getPostSlug } from '@/lib/blog';
+import { getUrlPrefix } from '@/lib/i18n';
 
-describe('getPostSlug', () => {
-  it('strips date prefix from post ID', () => {
-    expect(getPostSlug('en/2024-03-15_my-post')).toBe('my-post');
+describe('getUrlPrefix', () => {
+  it('returns /es for Spanish', () => {
+    expect(getUrlPrefix('es')).toBe('/es');
   });
 });
 ```
@@ -107,21 +103,22 @@ describe('getPostSlug', () => {
 ```typescript
 import { render, screen } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
-import BlogCard from '@/components/blog/BlogCard.svelte';
-import { publishedEnglishPost } from '../../fixtures/posts';
+import MethodologyCard from '@/components/MethodologyCard.svelte';
 
-describe('BlogCard', () => {
-  it('renders post title', () => {
-    render(BlogCard, { props: { post: publishedEnglishPost as never } });
-    expect(screen.getByText('My Awesome Post')).toBeDefined();
+const doc = { data: { title: 'Introduction', order: 1, lang: 'en' } };
+
+describe('MethodologyCard', () => {
+  it('renders doc title', () => {
+    render(MethodologyCard, { props: { doc: doc as never } });
+    expect(screen.getByText('Introduction')).toBeDefined();
   });
 });
 ```
 
 **Important notes:**
-- Use `as never` cast for mock posts passed to functions expecting `CollectionEntry<'blog'>`
+- Use `as never` cast for mock entries passed to functions expecting a `CollectionEntry`
 - Svelte 5 components require `resolve.conditions: ['browser']` in vitest config
-- Do NOT test async functions that depend on `astro:content` (e.g., `getBlogPosts`)
+- Do NOT test async functions that depend on `astro:content` directly — mock the collection instead
 
 ## Steps
 

@@ -25,10 +25,9 @@ function getPageType(url: string): 'internal' | 'api' | 'dynamic' | 'page' {
 function getSection(url: string): string {
   if (url === '/') return 'Home';
   if (url.startsWith('/internal')) return 'Internal';
-  if (url.startsWith('/es/blog') || url.startsWith('/blog')) return 'Blog';
   if (url.startsWith('/es/')) return 'Spanish';
   if (url.startsWith('/api') || url.endsWith('.json') || url.endsWith('.xml'))
-    return 'API & Feeds';
+    return 'API';
   return 'Pages';
 }
 
@@ -54,14 +53,7 @@ for (const page of pages) {
   sections.set(page.section, existing);
 }
 
-const sectionOrder = [
-  'Home',
-  'Pages',
-  'Blog',
-  'Spanish',
-  'Internal',
-  'API & Feeds',
-];
+const sectionOrder = ['Home', 'Pages', 'Spanish', 'Internal', 'API'];
 const orderedSections = sectionOrder
   .filter((s) => sections.has(s))
   .map((s) => [s, sections.get(s) ?? []] as const);

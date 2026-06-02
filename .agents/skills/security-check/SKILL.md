@@ -151,7 +151,7 @@ For Astro static sites:
 1. **Build output** - Ensure `docs/` doesn't contain sensitive data
 2. **API routes** - Check `src/pages/api/` endpoints for data exposure
 3. **Environment variables** - Only `PUBLIC_*` vars available on client
-4. **Content** - Blog posts don't accidentally include sensitive info
+4. **Content** - Methodology/spec/kit docs don't accidentally include sensitive info
 
 ## Related
 

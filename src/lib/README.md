@@ -6,17 +6,17 @@ This directory contains utility functions, constants, types, and enums used thro
 
 ```
 lib/
-├── blog.ts        # Blog-related utility functions
-├── i18n.ts        # Centralized i18n config & utilities
-├── constances.ts  # Site-wide constants
-├── enum.ts        # Shared enumerations
-├── search.ts      # Search utilities (ranked substring matching)
-├── translations/  # Modular i18n translation system
-│   ├── index.ts   # Public API barrel: getTranslations(), re-exports
-│   ├── types.ts   # SiteTranslations interface + all sub-interfaces
-│   ├── en.ts      # English translations
-│   └── es.ts      # Spanish translations
-└── types.ts       # TypeScript type definitions
+├── i18n.ts                    # Centralized i18n config & utilities
+├── constances.ts              # Site-wide constants
+├── enum.ts                    # Shared enumerations
+├── analytics.ts               # Event tracking helpers and EVENTS map
+├── markdown-for-agents.ts     # Serialize pages/reader entries to agent Markdown
+├── rehype-responsive-tables.mjs  # Rehype plugin for responsive tables
+└── translations/              # Modular i18n translation system
+    ├── index.ts               # Public API barrel: getTranslations(), re-exports
+    ├── types.ts               # SiteTranslations interface + all sub-interfaces
+    ├── en.ts                  # English translations
+    └── es.ts                  # Spanish translations
 ```
 
 ## File Overview
@@ -92,9 +92,9 @@ import { getTranslations, type Language } from '@/lib/translations';
 const lang: Language = 'es';
 const t = getTranslations(lang);
 
-console.log(t.searchPlaceholder); // "Buscar artículos..."
-console.log(t.noResults('test')); // "No se encontraron resultados para 'test'"
-console.log(t.resultsFound(5));   // "5 resultados encontrados"
+console.log(t.nav.methodology); // "Metodología"
+console.log(t.nav.spec);        // "Especificación"
+console.log(t.nav.kit);         // "Kit"
 ```
 
 #### Adding a New Language
@@ -116,134 +116,38 @@ console.log(t.resultsFound(5));   // "5 resultados encontrados"
 
 ---
 
-### search.ts
+### i18n.ts
 
-Search functionality using ranked exact substring matching and lightweight indexing.
+Centralized i18n configuration and helpers. Defines the `Language` type and the
+canonical helpers used across the site.
 
-#### Types
-
-```typescript
-export interface SearchablePost {
-  id: string;
-  slug: string;
-  lang: string;
-  title: string;
-  description: string;
-  tags: string[];
-  pubDate: string;
-  heroImage?: string;
-}
-
-export interface SearchResult {
-  item: SearchablePost;
-  score: number;
-  matches?: ReadonlyArray<{
-    key: string;
-    value?: string;
-    indices: ReadonlyArray<readonly [number, number]>;
-  }>;
-}
-```
-
-#### Functions
-
-| Function | Description |
-|----------|-------------|
-| `createSearchIndex(posts)` | Create in-memory index from posts |
-| `searchPosts(index, query, limit)` | Perform ranked substring search |
-| `highlightMatches(text, indices)` | Highlight matched text |
-| `getHighlightedField(result, field, original)` | Get field with highlights |
-
-#### Usage
-
-```typescript
-import { 
-  createSearchIndex, 
-  searchPosts, 
-  getHighlightedField,
-  type SearchablePost 
-} from '@/lib/search';
-
-// Create index from posts (language shard)
-const posts: SearchablePost[] = await fetch('/api/posts-en.json').then(r => r.json());
-const index = createSearchIndex(posts);
-
-// Perform search
-const results = searchPosts(index, 'javascript');
-
-// Get highlighted text for display
-results.forEach(result => {
-  const title = getHighlightedField(result, 'title', result.item.title);
-  console.log(title); // "Learn <mark>JavaScript</mark> basics"
-});
-```
-
-#### Ranking Rules
-
-```typescript
-// Score: lower is better
-// title: 0.0, tags: 0.1, topics: 0.15, description: 0.2
-```
+| Export | Description |
+|--------|-------------|
+| `Language` type | Union of active language codes (`'en' \| 'es'`) |
+| `isValidLanguage(lang)` | Type guard for valid language codes |
+| `getDefaultLanguage()` | Returns the default language (`'en'`) |
+| `getUrlPrefix(lang)` | URL prefix for a language (`''` for EN, `'/es'` for ES) |
 
 ---
 
-### blog.ts
+### markdown-for-agents.ts
 
-Blog data fetching and pagination utilities.
-
-#### Functions
+Serializes pages and reader entries into agent-friendly Markdown, powering the
+`.md` endpoints (e.g. `/methodology/[slug].md.ts`, `/[page].md.ts`).
 
 | Function | Description |
 |----------|-------------|
-| `getBlogPosts(params)` | Fetch posts with pagination |
-| `getPostSlug(postId)` | Strip language prefix from ID |
-| `getPostLanguage(postId)` | Extract language from ID |
+| `serializePageToAgentMarkdown(...)` | Serialize a static page to agent Markdown |
+| `serializeReaderEntryToAgentMarkdown(...)` | Serialize a methodology/spec/kit entry to agent Markdown |
 
-#### `getBlogPosts(params: BlogParamsType): Promise<BlogPostsResultType>`
+---
 
-Fetches and filters blog posts with pagination support.
+### analytics.ts
 
-**Parameters:**
-
-| Param | Type | Default | Description |
-|-------|------|---------|-------------|
-| `lang` | `string` | `'en'` | Language filter |
-| `tag` | `string` | - | Filter posts by tag |
-| `page` | `number` | `1` | Page number |
-| `pageSize` | `number` | `BLOG_PAGE_SIZE` | Posts per page |
-
-**Returns:** `BlogPostsResultType`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `tagsResult` | `CollectionEntry<'tags'>[]` | Available tags |
-| `postsResult` | `CollectionEntry<'blog'>[]` | Posts for current page |
-| `totalPages` | `number` | Total number of pages |
-| `currentPage` | `number` | Current page number |
-| `pageSize` | `number` | Posts per page |
-| `totalPostsAvailable` | `number` | Total posts count |
-
-**Usage:**
-
-```typescript
-import { getBlogPosts } from '@/lib/blog';
-
-// Get English posts
-const result = await getBlogPosts({ lang: 'en', page: 1 });
-
-// Get Spanish posts filtered by tag
-const techPosts = await getBlogPosts({ lang: 'es', tag: 'tech', page: 1 });
-```
-
-#### Helper Functions
-
-```typescript
-// Get slug without language prefix
-getPostSlug('en/first-post'); // Returns: 'first-post'
-
-// Get language from post ID
-getPostLanguage('es/my-article'); // Returns: 'es'
-```
+Privacy-friendly event tracking helpers and the `EVENTS` map. Tracked events:
+`NAV_CLICK`, `LANGUAGE_SWITCH`, `MOBILE_MENU_TOGGLE`, `THEME_TOGGLE`,
+`CONTACT_FORM_SUBMIT`, `CONTACT_FORM_ERROR`, `SOCIAL_CLICK`, `OUTBOUND_CLICK`,
+`SCROLL_DEPTH`, `AI_BOT_VISIT`.
 
 ---
 
@@ -251,50 +155,17 @@ getPostLanguage('es/my-article'); // Returns: 'es'
 
 Site-wide constants.
 
-| Constant | Type | Value | Description |
-|----------|------|-------|-------------|
-| `SITE_TITLE` | `string` | `'Astro Blog'` | Site title (meta tags) |
-| `SITE_DESCRIPTION` | `string` | `'Welcome to my website!'` | Default description |
-| `BLOG_PAGE_SIZE` | `number` | `30` | Default posts per page |
+| Constant | Type | Description |
+|----------|------|-------------|
+| `SITE_TITLE` | `string` | Site title (meta tags) |
+| `SITE_DESCRIPTION` | `string` | Default meta description |
+| `ANALYTICS` | `object` | Umami + verification config (env-driven) |
+| `CONTACT_FORM` | `object` | Google Forms contact endpoint config |
 
 **Usage:**
 
 ```typescript
-import { SITE_TITLE, SITE_DESCRIPTION, BLOG_PAGE_SIZE } from '@/lib/constances';
-```
-
----
-
-### types.ts
-
-TypeScript type definitions for the application.
-
-#### `BlogParamsType`
-
-Parameters for `getBlogPosts()` function.
-
-```typescript
-export type BlogParamsType = {
-  lang?: string;     // Language code (e.g., 'en', 'es')
-  tag?: string;      // Tag to filter by
-  page?: number;     // Page number (1-indexed)
-  pageSize?: number; // Posts per page
-};
-```
-
-#### `BlogPostsResultType`
-
-Return type of `getBlogPosts()` function.
-
-```typescript
-export type BlogPostsResultType = {
-  tagsResult: CollectionEntry<'tags'>[];
-  postsResult: CollectionEntry<'blog'>[];
-  totalPages: number;
-  currentPage: number;
-  pageSize: number;
-  totalPostsAvailable: number;
-};
+import { SITE_TITLE, SITE_DESCRIPTION, ANALYTICS, CONTACT_FORM } from '@/lib/constances';
 ```
 
 ---
@@ -320,14 +191,12 @@ All lib files can be imported using the `@/lib/` alias:
 
 ```typescript
 // Using alias (recommended)
-import { getBlogPosts } from '@/lib/blog';
 import { getTranslations } from '@/lib/translations';
-import { createSearchIndex, searchPosts } from '@/lib/search';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { SITE_TITLE } from '@/lib/constances';
-import type { BlogParamsType } from '@/lib/types';
 
 // Using relative path
-import { getBlogPosts } from '../lib/blog';
+import { getTranslations } from '../lib/translations';
 ```
 
 The alias is configured in `tsconfig.json`:
@@ -350,7 +219,7 @@ The alias is configured in `tsconfig.json`:
 
 1. Create or edit the appropriate file in `src/lib/`
 2. Export the function
-3. Add TypeScript types in `types.ts` if needed
+3. Add explicit TypeScript types on the function signature
 
 ```typescript
 // src/lib/utils.ts
@@ -393,15 +262,14 @@ export const es: SiteTranslations = {
 1. Add to `Language` type in `src/lib/i18n.ts`: `type Language = 'en' | 'es' | 'fr';`
 2. Create new locale file `src/lib/translations/fr.ts` exporting a complete `SiteTranslations` object
 3. Import it in `src/lib/translations/index.ts` and add to the `translations` record
-4. Create routes at `/[lang]/blog/`
-5. Add content folder `src/content/blog/[lang]/`
+4. Create routes under `src/pages/[lang]/` (or update the existing readers)
+5. Add content folders `src/content/{methodology,spec,kit,pages}/[lang]/`
 
 ---
 
 ## Related Documentation
 
 - [Content Collections](../content/README.md)
-- [Blog Components](../components/blog/README.md)
-- [Features: Blog Search](../../docs/features/BLOG_SEARCH.md)
-- [API Reference](../../docs/API_REFERENCE.md)
+- [Components](../components/README.md)
+- [i18n Guide](../../docs/I18N_GUIDE.md)
 - [Architecture](../../docs/ARCHITECTURE.md)

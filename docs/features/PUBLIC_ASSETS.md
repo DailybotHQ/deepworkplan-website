@@ -2,42 +2,32 @@
 
 Static assets served directly without processing. Files are copied as-is to the build output.
 
-**Post-audit state (2026-02-16):** 84 files, ~5.5 MB total across 4 top-level directories.
-
 ## Directory Structure
 
 ```
 public/
 ├── favicon.ico                        # ICO favicon fallback
 ├── favicon.svg                        # SVG favicon (primary)
+├── favicon-16.png / -32.png / -48.png # Raster favicon sizes
 ├── llms.txt                           # LLM-readable site summary
 ├── llms-full.txt                      # LLM-readable full content
 ├── robots.txt                         # Search engine crawling rules
-├── fonts/                             # Custom web fonts (2 files, 48 KB)
+├── site.webmanifest                   # PWA manifest
+├── openapi.json                       # API description for agents
+├── _headers / _redirects              # Cloudflare Pages config
+├── .well-known/                       # Agent/MCP discovery files
+├── fonts/                             # Custom web fonts
 │   ├── atkinson-bold.woff
 │   └── atkinson-regular.woff
-├── icons/                             # Social/UI icons with dark mode variants (10 files, 40 KB)
+├── icons/                             # Social/UI icons + PWA icons
 │   ├── {name}.svg                     # Light background variant
 │   └── {name}_white.svg               # Dark background variant
-├── images/                            # All site images (~5.4 MB)
-│   ├── (root-level images)            # Brand, section, and profile images (10 files)
-│   └── blog/                          # Blog-specific images
-│       ├── posts/{slug}/              # Per-post image folders (10 folders)
-│       ├── shared/                    # Shared placeholders (6 files, 200 KB)
-│       └── _staging/                  # Drop zone for new images (README only)
-└── scripts/                           # (empty; theme script is inlined in layouts)
+└── images/                            # Site images
+    ├── og-default.png                 # Default Open Graph / social card
+    ├── authors/                       # Author avatars
+    ├── brand/                         # Deep Work Plan logos and marks
+    └── dailybot/                      # Dailybot logos
 ```
-
-## Format Breakdown
-
-| Format | Count | Primary Use |
-|--------|------:|-------------|
-| WebP   | 34    | Blog inline images |
-| JPG    | 16    | Blog hero images, placeholders |
-| SVG    | 14    | Icons, logos |
-| PNG    | 12    | Section images, blog assets |
-| WOFF   | 2     | Fonts |
-| Other  | 6     | JS, TXT, MD, ICO |
 
 ## Asset Categories
 
@@ -45,11 +35,15 @@ public/
 
 | File | Purpose |
 |------|---------|
-| `favicon.svg` | Primary site favicon (SVG, same as `images/isologo.svg`) |
+| `favicon.svg` | Primary site favicon (SVG) |
 | `favicon.ico` | ICO fallback for older browsers |
 | `robots.txt` | Search engine crawling rules |
 | `llms.txt` | LLM-readable site summary |
 | `llms-full.txt` | LLM-readable full content |
+| `site.webmanifest` | PWA metadata and icons |
+| `openapi.json` | Machine-readable API description |
+| `_headers`, `_redirects` | Cloudflare Pages headers and redirects |
+| `.well-known/` | Agent skills, MCP, and OAuth discovery files |
 
 ### Fonts
 
@@ -69,7 +63,7 @@ Preloaded in `BaseHead.astro`:
 
 ### Icons
 
-Social media and UI icons with light/dark paired variants.
+Social media and UI icons with light/dark paired variants, plus PWA icons.
 
 **Naming Convention:** `{name}.svg` (dark icon, light backgrounds) + `{name}_white.svg` (light icon, dark backgrounds)
 
@@ -79,7 +73,8 @@ Social media and UI icons with light/dark paired variants.
 | LinkedIn | `linkedin.svg` | `linkedin_white.svg` |
 | Instagram | `instagram.svg` | `instagram_white.svg` |
 | X (Twitter) | `x.svg` | `x_white.svg` |
-| Chevron | `chevron_down.svg` | `chevron_down_white.svg` |
+
+PWA icons (`icon-192x192.png`, `icon-512x512.png`, `apple-touch-icon.png`) are referenced from `site.webmanifest` and `BaseHead.astro`.
 
 **Usage:**
 
@@ -87,111 +82,43 @@ Social media and UI icons with light/dark paired variants.
 <img src="/icons/github_white.svg" alt="GitHub" class="w-7 h-7" />
 ```
 
-### Root Images
+### Images
 
-Site images for branding, sections, and profile. Located directly in `public/images/`.
-
-| Image | Size | Purpose | Referenced By |
-|-------|-----:|---------|---------------|
-| `trading.png` | 416 KB | Trading section | HomePage |
-| `techtalks.png` | 296 KB | Tech talks section | HomePage |
-| `dailybotyc.png` | 252 KB | Dailybot YC image | HomePage, DailybotPage |
-| `foddie.png` | 200 KB | Foodie section | HomePage |
-| `bicycle.png` | 184 KB | Hobbies section | HomePage |
-| `ia.png` | 120 KB | AI/ML section | HomePage |
-| `logo_full.svg` | 88 KB | Full logo (hero section) | HeroSection |
-| `logo_small_version_white.svg` | 52 KB | Compact logo (header) | Header |
-| `og-default.png` | — | Default Open Graph / social card image | BaseHead (default) |
-| `isologo.svg` | 16 KB | Brand mark (avatars) | Components |
+| Image | Purpose | Referenced By |
+|-------|---------|---------------|
+| `og-default.png` | Default Open Graph / social card image | BaseHead (default) |
+| `brand/dwp-logo-{light,dark}.png` | Deep Work Plan logo | Header, Footer |
+| `brand/dwp-mark-{light,dark}.png` | Brand mark | Components |
+| `dailybot/logo-horizontal-{black,white}.svg` | Dailybot logo | About / Contact |
+| `authors/{slug}.webp` | Author avatars | About page |
 
 See **[Brand Guide](../BRAND_GUIDE.md)** for logo usage rules and color pairing guidelines.
 
-**Note:** Some legacy `.png` assets contain JPEG data internally. They display correctly in all browsers. Do not rename them (would break references).
+### Image Optimization
 
-### Blog Images
+New raster images should be optimized before committing. See **[Image Optimization](./IMAGE_OPTIMIZATION.md)** for the staging workflow, bulk optimizer, and quality settings.
 
-Organized in per-post folders under `public/images/blog/`:
+| Category | Max Width | Max File Size | Format |
+|----------|----------:|-------------:|--------|
+| Content images | 1400px | 300 KB | WebP preferred |
+| Logos / marks | N/A | 100 KB | SVG / PNG |
+| Icons | N/A | 5 KB each | SVG |
 
-```
-public/images/blog/
-├── posts/{slug}/        # Per-post image folders
-│   ├── hero.{ext}       # Hero/cover image
-│   └── {name}.{ext}     # Inline images
-├── shared/              # Shared placeholder images
-└── _staging/            # Drop zone for new images (processed by optimizer)
-```
+### Theme Script
 
-**Current blog post image folders (10 of 51 posts have images):**
-
-| Post Slug | Files | Size | Formats |
-|-----------|------:|-----:|---------|
-| `nodeschool-day-pereira` | 10 | 1.1 MB | JPG + WebP |
-| `blockchain-industrial-revolution` | 13 | 1020 KB | JPG + WebP |
-| `adopting-dwp-case-study` | 5 | 412 KB | WebP |
-| `internet-of-things` | 5 | 304 KB | JPG + WebP |
-| `webvr-aframe` | 4 | 268 KB | JPG + WebP |
-| `what-is-blockchain` | 3 | 192 KB | JPG + WebP |
-| `blockchain-ethereum` | 3 | 172 KB | JPG + WebP |
-| `tensorflow` | 3 | 140 KB | JPG + WebP |
-| `introduction-to-meteorjs` | 1 | 28 KB | PNG |
-| `nosql-and-mongodb` | 1 | 20 KB | PNG |
-
-**Shared placeholders** (`images/blog/shared/`, 6 files, 200 KB):
-
-| File | Purpose |
-|------|---------|
-| `blog-placeholder-1.jpg` through `blog-placeholder-5.jpg` | Default post placeholders |
-| `blog-placeholder-about.jpg` | About page placeholder |
-
-### Scripts
-
-| Script | Purpose |
-|--------|---------|
-| (inline in layouts) | Theme script inlined — checks `localStorage` then system `prefers-color-scheme`, applies `dark` class to `<html>` (no external file) |
-
-Loaded inline in `MainLayout.astro` to prevent flash of wrong theme:
+The theme script is inlined in `MainLayout.astro` to prevent a flash of the wrong theme — checks `localStorage`, then system `prefers-color-scheme`, then applies the `dark` class to `<html>`:
 
 ```html
 <script is:inline>(function(){var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');})();</script>
 ```
 
-## Blog Image Conventions
-
-- **Hero images:** `hero.{jpg,png,webp}` — max 1400px wide
-- **Inline images:** `{descriptive-name}.{ext}` (lowercase, kebab-case) — max 1200px wide
-- **Folder name** matches the post slug (without date prefix)
-- **Hero path in frontmatter:** `/images/blog/posts/{slug}/hero.jpg`
-
-**New images** should be added via the staging workflow. See **[Image Optimization](./IMAGE_OPTIMIZATION.md)** for the complete workflow.
-
-## Image Size Guidelines
-
-After the 2026-02-16 audit, all images follow these targets:
-
-| Category | Max Width | Max File Size | Format |
-|----------|----------:|-------------:|--------|
-| Blog heroes | 1400px | 300 KB | JPG, WebP |
-| Blog inline | 1200px | 200 KB | WebP preferred |
-| Root section images | 800px | 500 KB | PNG |
-| Icons | N/A | 5 KB each | SVG |
-| Logos | N/A | 100 KB | SVG |
-
-**Optimization scripts:** `scripts/optimize-images.mjs` (staging workflow), `scripts/optimize-existing-images.mjs` (bulk). See **[Image Optimization](./IMAGE_OPTIMIZATION.md)**.
-
 ## Adding New Assets
-
-### Adding a Blog Image
-
-1. Name with staging convention: `{slug}--{name}.{ext}`
-2. Drop into `public/images/blog/_staging/`
-3. Run `pnpm run images:optimize`
-4. Reference in post frontmatter or body
 
 ### Adding a Site Image
 
-1. Optimize before adding (compress, resize to max 800px for section images)
-2. Place in `public/images/`
-3. Reference in component: `<img src="/images/my-image.png" alt="Description" />`
+1. Optimize before adding (convert to WebP, resize sensibly)
+2. Place in the relevant subfolder of `public/images/`
+3. Reference in component: `<img src="/images/brand/dwp-logo-light.png" alt="Description" width="..." height="..." />`
 
 ### Adding an Icon
 
@@ -211,9 +138,8 @@ After the 2026-02-16 audit, all images follow these targets:
 
 - Check for orphaned images (files not referenced in any source code)
 - Check for duplicates (files with identical SHA-256 hashes)
-- Check for oversized images (> 500 KB for blog, > 1 MB for anything)
+- Check for oversized images
 - Remove `.DS_Store` files (covered by `.gitignore`)
-- Verify all blog post image folders match existing post slugs
 
 ### URL Mapping
 
@@ -223,11 +149,10 @@ Files in `public/` are served from the site root:
 |---------------|-----|
 | `public/favicon.svg` | `/favicon.svg` |
 | `public/images/og-default.png` | `/images/og-default.png` |
-| `public/images/blog/posts/my-post/hero.jpg` | `/images/blog/posts/my-post/hero.jpg` |
+| `public/images/brand/dwp-logo-light.png` | `/images/brand/dwp-logo-light.png` |
 
 ## Related Documentation
 
 - **[Image Optimization](./IMAGE_OPTIMIZATION.md)** - Staging workflow, bulk optimizer, quality settings
-- **[Blog Posts](./BLOG_POSTS.md)** - Blog post structure, naming, hero layouts
 - **[Brand Guide](../BRAND_GUIDE.md)** - Logo usage rules and color pairing
 - **[Performance Guide](../PERFORMANCE.md)** - Site performance best practices

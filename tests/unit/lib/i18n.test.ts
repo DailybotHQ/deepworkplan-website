@@ -191,7 +191,9 @@ describe('getLocalizedUrl', () => {
   });
 
   it('handles nested paths', () => {
-    expect(getLocalizedUrl('/blog/my-post', 'es')).toBe('/es/blog/my-post');
+    expect(getLocalizedUrl('/methodology/my-post', 'es')).toBe(
+      '/es/methodology/my-post'
+    );
   });
 });
 
@@ -219,7 +221,9 @@ describe('stripLangPrefix', () => {
   });
 
   it('strips prefix from nested paths', () => {
-    expect(stripLangPrefix('/es/blog/my-post')).toBe('/blog/my-post');
+    expect(stripLangPrefix('/es/methodology/my-post')).toBe(
+      '/methodology/my-post'
+    );
   });
 });
 
@@ -246,12 +250,12 @@ describe('getLangFromUrl', () => {
     expect(getLangFromUrl('/es/')).toBe('es');
   });
 
-  it('returns "en" for blog paths without language prefix', () => {
-    expect(getLangFromUrl('/blog/my-post')).toBe('en');
+  it('returns "en" for methodology paths without language prefix', () => {
+    expect(getLangFromUrl('/methodology/my-post')).toBe('en');
   });
 
-  it('returns "es" for Spanish blog paths', () => {
-    expect(getLangFromUrl('/es/blog/my-post')).toBe('es');
+  it('returns "es" for Spanish methodology paths', () => {
+    expect(getLangFromUrl('/es/methodology/my-post')).toBe('es');
   });
 });
 
@@ -288,7 +292,7 @@ describe('getAlternateUrls', () => {
   });
 
   it('each entry has lang and url properties', () => {
-    const urls = getAlternateUrls('/blog');
+    const urls = getAlternateUrls('/methodology');
     for (const entry of urls) {
       expect(entry).toHaveProperty('lang');
       expect(entry).toHaveProperty('url');

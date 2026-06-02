@@ -80,13 +80,13 @@ import heroImage from '../assets/hero.jpg';
 
 ### Hero Images
 
-For blog hero images, optimize for LCP:
+For above-the-fold hero images, optimize for LCP:
 
 ```astro
 <!-- Above-fold: eager loading -->
 <Image
   src={heroImage}
-  alt={post.data.title}
+  alt="Deep Work Plan"
   width={1200}
   height={630}
   loading="eager"
@@ -112,11 +112,11 @@ Choose the right hydration directive:
 <!-- Header needs immediate interactivity -->
 <Header client:load />
 
-<!-- Blog grid can wait until visible -->
-<BlogGrid client:visible />
+<!-- Below-fold section can wait until visible -->
+<ScrollSpyNav client:visible />
 
-<!-- Newsletter can wait for idle -->
-<Newsletter client:idle />
+<!-- Theme toggle can wait for idle -->
+<ThemeToggle client:idle />
 
 <!-- Mobile menu only on small screens -->
 <MobileMenu client:media="(max-width: 768px)" />
@@ -177,10 +177,10 @@ Astro inlines critical CSS automatically. For additional optimization:
 Cloudflare Pages provides edge caching. Set appropriate cache headers for API routes:
 
 ```typescript
-// src/pages/api/posts.json.ts
-return new Response(JSON.stringify(data), {
+// e.g. src/pages/[page].md.ts (agent Markdown endpoint)
+return new Response(markdown, {
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'text/markdown; charset=utf-8',
     'Cache-Control': 'public, max-age=3600', // 1 hour
   },
 });
@@ -230,24 +230,9 @@ du -sh dist/_astro/
 
 ## Content Performance
 
-### Pagination
+### Static-First Content
 
-The blog uses pagination to limit page size:
-
-```typescript
-// src/lib/blog.ts
-export const BLOG_PAGE_SIZE = 30; // Posts per page
-```
-
-### Search Optimization
-
-Client-side search loads lightweight metadata shards on demand:
-
-```typescript
-// Search index shard is cached and loaded once
-const response = await fetch('/api/posts-en.json'); // or /api/posts-es.json
-const posts = await response.json();
-```
+Methodology, spec, and kit content is rendered to static HTML at build time from content collections — no client-side data fetching or pagination. Keep readers static (`.astro`) and reserve Svelte islands for genuinely interactive UI (theme toggle, mobile menu, scroll-spy navigation).
 
 ## Monitoring
 
@@ -256,24 +241,14 @@ const posts = await response.json();
 | Diagnostic | Mitigation |
 |------------|------------|
 | **Render-blocking requests** | Theme script inlined in MainLayout; CSS inlined via `build.inlineStylesheets: 'always'` |
-| **Improve image delivery** | WebP pipeline (`pnpm run images:webp`): homepage, blog shared, blog post heroes; `<picture>` with `source type="image/webp"` in BlogHeroImage, HomeSectionImage, PageHero |
+| **Improve image delivery** | Site images ship as WebP; `<picture>`/`source type="image/webp"` where a PNG/JPG fallback is still present |
 | **LCP request discovery** | Preload hero logo on homepage; `fetchpriority="high"` on above-fold images |
 | **Forced reflow** | MobileMenu: scroll lock deferred with `requestAnimationFrame`; `transition:fade` instead of `transition:slide` |
 | **Network dependency tree** | Typewriter replaced with CSS-only `TypewriterWords.astro` (zero JS, no critical chain) |
 
 ### Image Optimization Pipeline
 
-The project uses a **WebP generation pipeline** that runs automatically before builds:
-
-| Script | Scope | Output |
-|--------|-------|--------|
-| `generate-webp-homepage.mjs` | `public/images/` (profile, dailybotyc, ia, techtalks, trading, foddie, bicycle) | `.webp` alongside originals; dailybotyc and ia get responsive 280/360/480px variants for `srcset` |
-| `generate-webp-blog-shared.mjs` | `public/images/blog/shared/` (placeholders) | `.webp` at 400px width |
-| `generate-webp-blog-posts.mjs` | `public/images/blog/posts/{slug}/hero.*` | `hero.webp` at 1020px max width |
-
-**When it runs:** `prebuild` hook (before `pnpm run build`), `images:webp` script, and `codecheck` (Docker). Scripts skip images that already have a valid `.webp` (same or newer mtime).
-
-**Components using WebP:** `BlogHeroImage.astro`, `HomeSectionImage.astro`, `PageHero.astro`, `BlogCard.svelte`, timeline components (TradingTimeline, etc.) — all use `<picture>` with WebP source when the image is PNG/JPG.
+Most site images are authored directly as WebP, so no generation step is required (`pnpm run images:webp` is a no-op). For source images that still need optimizing, use the Sharp-based staging optimizer — see **[Image Optimization](features/IMAGE_OPTIMIZATION.md)**.
 
 ### Lighthouse Audits
 
@@ -323,7 +298,7 @@ pnpm exec lighthouse https://deepworkplan.com --view
 3. **Preload critical fonts**
 4. **Set image dimensions** to prevent CLS
 5. **Minimize third-party scripts**
-6. **Run `pnpm run images:webp`** before deploy (or rely on `prebuild`) — generates WebP for homepage, blog shared, and blog post heroes (~1.3 MB total savings)
+6. **Author images as WebP** (or run the Sharp staging optimizer) before committing
 
 ## Accessibility & Performance Overlap
 

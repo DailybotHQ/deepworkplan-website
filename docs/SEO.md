@@ -11,12 +11,9 @@ The site uses a layered SEO architecture:
 | Global head | `src/components/BaseHead.astro` | Meta tags, OG, Twitter, hreflang, JSON-LD (WebSite, Person, Organization) |
 | JSON-LD injector | `src/components/JsonLd.astro` | Reusable `<script type="application/ld+json">` component |
 | Page components | `src/components/pages/*Page.astro` | Page-specific schemas (BreadcrumbList, ContactPage, etc.) |
-| Blog schemas | `src/components/pages/blog/BlogPostPage.astro` | BlogPosting + BreadcrumbList |
-| Blog listing | `src/components/pages/blog/BlogListingPage.astro` | CollectionPage schema |
 | Crawl control | `public/robots.txt` | Crawler directives + AI bot allows |
 | AI guidance | `public/llms.txt`, `public/llms-full.txt` | LLM/AI engine discovery files |
 | Sitemap | Auto-generated via `@astrojs/sitemap` | All pages in both languages |
-| RSS feeds | `src/pages/rss.xml.js`, `src/pages/es/rss.xml.js` | Per-language RSS |
 | Manifest | `public/site.webmanifest` | PWA metadata and icons |
 | i18n config | `src/lib/i18n.ts` | Language config, hreflang helpers, URL utilities |
 | Constants | `src/lib/constances.ts` | SITE_TITLE, SITE_DESCRIPTION |
@@ -33,7 +30,7 @@ Every page automatically gets these tags through `MainLayout` → `BaseHead`:
 - `<meta name="viewport">` — fixed: `width=device-width,initial-scale=1`
 - `<meta charset="utf-8">`
 - `<meta name="author">` — fixed: the Deep Work Plan team
-- `<meta name="keywords">` — per-post keywords (from frontmatter `keywords` array) or global fallback
+- `<meta name="keywords">` — global site keywords
 
 ### Character Length Guidelines
 
@@ -55,7 +52,6 @@ Every page automatically gets these tags through `MainLayout` → `BaseHead`:
 |-------------|----------|-------|
 | Pages | `src/lib/translations/{lang}.ts` | `{pageName}.description` |
 | Site default | `src/lib/constances.ts` | `SITE_DESCRIPTION` |
-| Blog posts | `src/content/blog/{lang}/*.md` | `description` frontmatter |
 
 **Rules for writing meta descriptions:**
 1. **Length:** 130-160 characters (count BEFORE committing)
@@ -66,23 +62,9 @@ Every page automatically gets these tags through `MainLayout` → `BaseHead`:
 6. **Both languages:** EN and ES descriptions must both be in range independently
 7. **Not literal translations:** ES descriptions should be semantically equivalent but natural in Colombian Spanish
 
-### Keywords (Dynamic)
+### Keywords
 
-Blog posts can provide per-post keywords via the `keywords` frontmatter field. These are specific search phrases (distinct from categorical tags) that match how users search for the content.
-
-- **Blog posts with `keywords`:** Rendered as `<meta name="keywords" content="phrase 1, phrase 2, ...">`
-- **Pages without `keywords`:** Falls back to global site keywords (Deep Work Plan, DWP methodology, AI coding agents, etc.)
-- **JSON-LD:** BlogPosting `keywords` field uses the `keywords` array when present, tags as fallback
-
-**Tags vs Keywords:**
-
-| Aspect | Tags | Keywords |
-|--------|------|----------|
-| Purpose | Categorical navigation | SEO search discovery |
-| Source | Controlled taxonomy (18 tags) | Free-form per post |
-| Example | `tech`, `web-development` | `replace ESLint with Biome`, `Biome linter setup` |
-| Internationalized | No (same slugs in EN/ES) | Yes (adapted per language) |
-| Used in | Filtering, navigation, search index | `<meta name="keywords">`, JSON-LD |
+Every page renders the global site keywords via `<meta name="keywords">` (Deep Work Plan, DWP methodology, AI coding agents, spec-driven development, etc.), defined alongside `SITE_DESCRIPTION` in `src/lib/constances.ts`.
 
 ### Customizing Per-Page
 
@@ -108,9 +90,7 @@ For custom OG images, pass `image` prop:
 | Person | `BaseHead.astro` | Global (all pages) |
 | Organization | `BaseHead.astro` | Global (Dailybot) |
 | Person (enhanced) | `AboutPage.astro` | About page only |
-| BlogPosting | `BlogPostPage.astro` | Individual blog posts |
 | BreadcrumbList | Most page components | Per-page navigation hierarchy |
-| CollectionPage | `BlogListingPage.astro` | Blog listing pages |
 | ContactPage | `ContactPage.astro` | Contact page |
 
 ### Adding a New Schema
@@ -139,7 +119,7 @@ const mySchema = {
 
 ### BreadcrumbList Pattern
 
-Every non-blog page should have a BreadcrumbList. Standard pattern:
+Every page should have a BreadcrumbList. Standard pattern:
 
 ```astro
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
@@ -164,10 +144,10 @@ const breadcrumbSchema = {
 
 ### Languages
 
-| Language | Code | URL Prefix | OG Locale | RSS Feed |
-|----------|------|------------|-----------|----------|
-| English | `en` | (none) | `en_US` | `/rss.xml` |
-| Spanish | `es` | `/es` | `es_ES` | `/es/rss.xml` |
+| Language | Code | URL Prefix | OG Locale |
+|----------|------|------------|-----------|
+| English | `en` | (none) | `en_US` |
+| Spanish | `es` | `/es` | `es_ES` |
 
 ### Hreflang
 
@@ -177,10 +157,6 @@ Automatically generated in `BaseHead.astro` using `getAlternateUrls()` from `src
 - `<link rel="alternate" hreflang="es" href="...">` — Spanish version
 - `<link rel="alternate" hreflang="x-default" href="...">` — Points to English (default)
 
-### RSS Discovery
-
-The RSS `<link>` tag in BaseHead is language-aware: English pages discover `/rss.xml`, Spanish pages discover `/es/rss.xml`.
-
 ### Canonical URLs
 
 Built from `Astro.url.pathname` + `Astro.site`. Each language version has its own canonical URL (no cross-language canonicals).
@@ -189,7 +165,7 @@ Built from `Astro.url.pathname` + `Astro.site`. Each language version has its ow
 
 All content MUST exist in both languages:
 - Pages: `src/pages/` (EN) + `src/pages/es/` (ES)
-- Blog posts: `src/content/blog/en/` + `src/content/blog/es/`
+- Methodology/spec/kit content: `src/content/{methodology,spec,kit}/en/` + `.../es/`
 - Translations: `src/lib/translations/en.ts` + `src/lib/translations/es.ts`
 
 ## Social Media (OG + Twitter)
@@ -217,29 +193,25 @@ All content MUST exist in both languages:
 
 - Recommended: 1200x630px
 - Default fallback: `/images/og-default.png`
-- For blog posts: can set `heroImage` in frontmatter
+- Per-page override: pass the `image` prop to `MainLayout`
 
 ## AI Engine Optimization (AEO)
 
 For comprehensive AEO documentation, see `docs/aeo/`:
-- **[AEO Audit](aeo/AUDIT.md)** — Full audit grading 4 AEO dimensions (Discoverability, Extractability, Trust, Citability)
-- **[Target Queries](aeo/QUERIES.md)** — 30 target queries mapped to site URLs (TOFU/MOFU/BOFU)
 - **[Monthly Checklist](aeo/CHECKLIST.md)** — Maintenance checklist for ongoing AEO health
 - **[Markdown for Agents](aeo/MARKDOWN_FOR_AGENTS.md)** — Native Markdown endpoints for AI agent consumption
 
 ### Markdown for Agents (Endpoints & Content Negotiation)
 
-Every page and blog post serves native Markdown for AI consumption:
+Every page serves native Markdown for AI consumption:
 
 | Type | URL pattern (EN) | URL pattern (ES) |
 |------|------------------|-------------------|
 | Pages | `/{page}.md` | `/es/{page}.md` |
-| Blog posts | `/blog/{slug}.md` | `/es/blog/{slug}.md` |
-| Blog index | `/blog/index.md` | `/es/blog/index.md` |
 
 **Content Negotiation:** Agents can send `Accept: text/markdown` header to get Markdown without changing URLs. The Cloudflare Pages middleware (`functions/_middleware.ts`) resolves the `.md` path and serves it with `Content-Type: text/markdown; charset=utf-8` and `Vary: Accept`.
 
-**Maintenance:** When page components or translation strings change, update corresponding files in `src/content/pages/{en,es}/`. Blog posts auto-sync from `post.body`. See **[Markdown for Agents](aeo/MARKDOWN_FOR_AGENTS.md)** for details.
+**Maintenance:** When page components or translation strings change, update corresponding files in `src/content/pages/{en,es}/`. See **[Markdown for Agents](aeo/MARKDOWN_FOR_AGENTS.md)** for details.
 
 ### Files
 
@@ -288,9 +260,11 @@ Always include `width` and `height` attributes to prevent CLS (Cumulative Layout
 ### Optimization Workflow
 
 ```bash
-# Drop images in public/images/blog/_staging/ with naming: {slug}--{name}.{ext}
+# Drop staged images into the optimizer's staging directory, then run:
 pnpm run images:optimize
 ```
+
+See **[Image Optimization](features/IMAGE_OPTIMIZATION.md)** for the full workflow.
 
 ## PageSpeed & Core Web Vitals
 
@@ -365,16 +339,12 @@ Structure:
 - [ ] Verify hreflang in generated HTML
 - [ ] Verify OG tags in generated HTML
 
-### New Blog Post SEO Checklist
+### New Content Doc SEO Checklist (methodology / spec / kit)
 
-- [ ] Frontmatter complete: title, description, pubDate, tags, keywords, heroImage
-- [ ] Description frontmatter is 130-160 characters (EN and ES independently)
-- [ ] Keywords: 5-8 specific search phrases per language version
-- [ ] ES keywords adapted to Spanish search behavior (not literal translations)
-- [ ] Hero image optimized and in `public/images/blog/posts/{slug}/`
-- [ ] Post exists in both `src/content/blog/en/` and `src/content/blog/es/`
-- [ ] Tags are valid (defined in tags collection)
-- [ ] BlogPosting + BreadcrumbList schemas auto-generated (verify in HTML)
+- [ ] Doc exists in both `src/content/{collection}/en/` and `.../es/` (same English slug)
+- [ ] Spanish content carries correct diacritics (ñ, tildes, ¿/¡)
+- [ ] Matching `src/content/pages/{en,es}/*.md` endpoint stays in sync (`pnpm run md:check`)
+- [ ] BreadcrumbList schema auto-generated (verify in HTML)
 
 ### Pre-Deploy SEO Checklist
 

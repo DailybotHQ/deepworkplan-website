@@ -3,30 +3,30 @@ import ShowcaseLayout from '@/layouts/ShowcaseLayout.astro';
 
 const breadcrumbExamples = [
   {
-    name: 'Blog Post',
-    description: 'Used on individual blog post pages (BlogPostPage.astro)',
+    name: 'Methodology Chapter',
+    description:
+      'Used on individual methodology chapter pages (methodology/[slug].astro)',
     items: [
       { label: 'Home', href: '#', isLink: true },
-      { label: 'Blog', href: '#', isLink: true },
-      { label: 'Why I Ditched ESLint for Biome', href: null, isLink: false },
+      { label: 'Methodology', href: '#', isLink: true },
+      { label: 'The Manifesto', href: null, isLink: false },
     ],
   },
   {
-    name: 'Series Listing',
-    description:
-      'Used on the series listing page (BlogSeriesListingPage.astro)',
+    name: 'Spec Index',
+    description: 'Used on the specification reader index (spec/index.astro)',
     items: [
-      { label: 'Blog', href: '#', isLink: true },
-      { label: 'Series', href: null, isLink: false },
+      { label: 'Home', href: '#', isLink: true },
+      { label: 'Specification', href: null, isLink: false },
     ],
   },
   {
-    name: 'Series Detail',
-    description: 'Used on individual series pages (BlogSeriesPage.astro)',
+    name: 'Kit Entry',
+    description: 'Used on individual kit catalog entries (kit/[slug].astro)',
     items: [
-      { label: 'Blog', href: '#', isLink: true },
-      { label: 'Series', href: '#', isLink: true },
-      { label: 'Building Deep Work Plan', href: null, isLink: false },
+      { label: 'Home', href: '#', isLink: true },
+      { label: 'Kit', href: '#', isLink: true },
+      { label: 'Generic Preset', href: null, isLink: false },
     ],
   },
 ];
@@ -114,12 +114,12 @@ const breadcrumbExamples = [
     /
   &lt;/span&gt;
   &lt;a
-    href=&#123;blogUrl&#125;
+    href=&#123;methodologyUrl&#125;
     class="font-semibold text-gray-600 transition-colors
            hover:text-blue-600
            dark:text-gray-300 dark:hover:text-blue-400"
   &gt;
-    Blog
+    Methodology
   &lt;/a&gt;
   &lt;span
     class="font-semibold text-gray-600 dark:text-gray-300 select-none"

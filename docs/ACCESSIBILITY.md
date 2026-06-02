@@ -164,7 +164,7 @@ CSS classes still control the visual size. The `width`/`height` attributes tell 
 | **Informative** | Descriptive text | `alt="Deep Work Plan Logo"` |
 | **Decorative** | Empty string | `alt=""` |
 | **Icon in labeled link** | Empty string | `alt=""` (parent `<a>` has `aria-label`) |
-| **Blog hero** | Post title | `alt={post.data.title}` |
+| **Content hero** | Doc title | `alt={doc.data.title}` |
 
 ## Keyboard Accessibility
 
