@@ -84,13 +84,13 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL;
 
 ## Content Security
 
-### User-Generated Content
+### Authored Content
 
-Blog posts are authored in Markdown/MDX. While you control the content, follow these practices:
+Methodology, spec, and kit docs are authored in Markdown/MDX. While you control the content, follow these practices:
 
 ```markdown
 <!-- ✅ Safe - standard markdown -->
-# My Post
+# Introduction
 This is safe content.
 
 <!-- ⚠️ Careful with raw HTML in MDX -->
@@ -103,10 +103,12 @@ Zod schemas validate content at build time:
 
 ```typescript
 // src/content.config.ts
-const blog = defineCollection({
+const methodology = defineCollection({
   schema: z.object({
-    title: z.string().max(200),  // Limit length
-    description: z.string().max(500),
+    title: z.string(),
+    description: z.string(),
+    order: z.number(),
+    lang: z.enum(['en', 'es']),
     // Validates structure, prevents malformed data
   }),
 });
@@ -127,31 +129,30 @@ When linking to external sites:
 
 ### Current Endpoints
 
-The site has minimal API routes:
+The site has minimal dynamic routes (all static, build-time generated):
 
 | Endpoint | Purpose | Security |
 |----------|---------|----------|
-| `/api/posts-en.json` | Blog search index (EN shard) | Public, cached |
-| `/api/posts-es.json` | Blog search index (ES shard) | Public, cached |
-| `/api/posts.json` | Blog search index (compatibility) | Public, cached |
-| `/rss.xml` | RSS feed | Public |
+| `/{page}.md`, `/es/{page}.md` | Agent-friendly Markdown for pages | Public, cached |
+| `/methodology/{slug}.md`, `/spec/{slug}.md`, `/kit/{slug}.md` | Agent-friendly Markdown for docs | Public, cached |
+| `/sitemap-index.xml` | Sitemap | Public |
 
 ### API Route Best Practices
 
 ```typescript
-// src/pages/api/posts-en.json.ts (same pattern for posts-es.json)
+// src/pages/[page].md.ts (agent Markdown endpoint)
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async () => {
   try {
     // Validate and sanitize any inputs
     // Return only necessary data
-    const data = await getPublicPosts();
-    
-    return new Response(JSON.stringify(data), {
+    const markdown = await getPageMarkdown();
+
+    return new Response(markdown, {
       status: 200,
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'text/markdown; charset=utf-8',
         'Cache-Control': 'public, max-age=3600',
       },
     });

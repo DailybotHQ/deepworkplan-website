@@ -116,12 +116,6 @@ Build a fast, accessible, bilingual site that:
 - `lang` prop passed to page components (page-wrapper pattern)
 - Spanish content carries full diacritics (`ñ`, tildes, `¿`/`¡`)
 
-### 8. Blog Engine (Dormant)
-
-**Purpose:** Reserved for future **case studies** about applying the methodology.
-
-The blog engine (MDX posts, series, multi-author, tag taxonomy, RSS, search) is fully built but **hidden from navigation**. It is not part of the launch content set and should only be reactivated for case studies when explicitly requested. See [Blog Posts](features/BLOG_POSTS.md).
-
 ## Design Principles
 
 ### Visual Design

@@ -37,12 +37,17 @@ Tracking documentation coverage for deepworkplan.com.
 | File | Status | Description |
 |------|--------|-------------|
 | [README.md](features/README.md) | ✅ Current | Features index |
-| [BLOG_SEARCH.md](features/BLOG_SEARCH.md) | ✅ Current | Client-side search functionality |
 | [DARK_MODE.md](features/DARK_MODE.md) | ✅ Current | Theme toggle and persistence |
+| [IMAGE_OPTIMIZATION.md](features/IMAGE_OPTIMIZATION.md) | ✅ Current | Sharp-based image pipeline |
 | [I18N.md](features/I18N.md) | ✅ Current | Multi-language support |
-| [PAGINATION.md](features/PAGINATION.md) | ✅ Current | Blog post pagination |
 | [PUBLIC_ASSETS.md](features/PUBLIC_ASSETS.md) | ✅ Current | Static assets structure |
-| [RSS_FEED.md](features/RSS_FEED.md) | ✅ Current | RSS feed generation |
+
+### docs/aeo/ Folder
+
+| File | Status | Description |
+|------|--------|-------------|
+| [CHECKLIST.md](aeo/CHECKLIST.md) | ✅ Current | AEO monthly maintenance checklist |
+| [MARKDOWN_FOR_AGENTS.md](aeo/MARKDOWN_FOR_AGENTS.md) | ✅ Current | Native Markdown endpoints for agents |
 
 ### src/ README Files
 
@@ -50,8 +55,6 @@ Tracking documentation coverage for deepworkplan.com.
 |------|--------|-------------|
 | [src/README.md](../src/README.md) | ✅ Current | Source folder overview |
 | [src/components/README.md](../src/components/README.md) | ✅ Current | Components overview |
-| [src/components/blog/README.md](../src/components/blog/README.md) | ✅ Current | Blog components |
-| [src/components/home/README.md](../src/components/home/README.md) | ✅ Current | Home page sections |
 | [src/components/layout/README.md](../src/components/layout/README.md) | ✅ Current | Layout components |
 | [src/lib/README.md](../src/lib/README.md) | ✅ Current | Utility functions |
 | [src/pages/README.md](../src/pages/README.md) | ✅ Current | Routing and pages |
@@ -85,16 +88,17 @@ Tracking documentation coverage for deepworkplan.com.
 |----------|-------|----------|
 | Core | 3 | 100% |
 | docs/ | 15 | 100% |
-| docs/features/ | 6 | 100% |
-| src/ READMEs | 10 | 100% |
+| docs/features/ | 5 | 100% |
+| docs/aeo/ | 2 | 100% |
+| src/ READMEs | 8 | 100% |
 | public/ | 1 | 100% |
 | Agent Commands | 5 | 100% |
 | Claude System | 4 | 100% |
 
 ### Total
 
-- **Documentation Files:** 44
-- **Current:** 44
+- **Documentation Files:** ~43
+- **Current:** all
 - **Needs Review:** 0
 
 ## AI Interoperability Checklist
@@ -104,7 +108,7 @@ Tracking documentation coverage for deepworkplan.com.
 | Root Documentation | ✅ | AGENTS.md, CLAUDE.md, README.md |
 | Architecture Docs | ✅ | Full technical documentation |
 | Component Docs | ✅ | README.md in each component folder |
-| Feature Docs | ✅ | docs/features/ with 5 feature docs |
+| Feature Docs | ✅ | docs/features/ feature docs |
 | Agent Commands | ✅ | Deep work plans, skills, upgrades |
 | Skills & Agents | ✅ | 9 skills, 4 agents documented |
 | Example Plans | ✅ | Astro-specific example plan |
@@ -113,14 +117,20 @@ Tracking documentation coverage for deepworkplan.com.
 
 ## Recently Removed Files
 
-The following serverless-specific files were removed:
+Blog-engine documentation was removed when the blog functionality was retired:
+
+- `features/BLOG_POSTS.md`, `features/BLOG_CONTENT_LIFECYCLE.md`, `features/BLOG_SEARCH.md`
+- `features/AUTHORS.md`, `features/RSS_FEED.md`, `features/PAGINATION.md`
+- `WRITING_CRAFT_GUIDE.md`, `WRITING_VOICE_GUIDE.md` - blog article writing craft/voice
+- `aeo/AUDIT.md`, `aeo/QUERIES.md` - stale point-in-time blog/personal-site AEO artifacts
+
+Earlier, the following serverless-specific files were removed:
 
 - `DATABASE_SCHEMAS.md` - DynamoDB (not applicable)
 - `SERVERLESS_CONFIGURATION.md` - Not applicable
 - `API_ENDPOINTS.md` - Replaced by API_REFERENCE.md
 - `ERROR_HANDLING.md` - Generic patterns in STANDARDS.md
 - `ENVIRONMENT_VARIABLES.md` - Minimal env vars for static site
-- `features/` (old) - Serverless feature docs (4 files)
 
 ## Documentation Maintenance
 

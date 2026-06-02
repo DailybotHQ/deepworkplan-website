@@ -1,10 +1,6 @@
-/** Timezone for scheduled post detection — build and badge use this consistently */
-export const SITE_TIMEZONE = 'America/Bogota';
-
 export const SITE_TITLE: string = 'Deep Work Plan';
 export const SITE_DESCRIPTION: string =
   'Deep Work Plan is a spec-driven, tool-agnostic methodology and kit that turns any repository into an AI-first, agent-pilotable codebase. Open, MIT-licensed.';
-export const BLOG_PAGE_SIZE: number = 30;
 
 // Analytics configuration — scripts load only when IDs are provided
 export const ANALYTICS = {
@@ -14,17 +10,6 @@ export const ANALYTICS = {
   },
   verification: {
     bing: import.meta.env.PUBLIC_BING_SITE_VERIFICATION || '',
-  },
-} as const;
-
-// Newsletter configuration — Google Forms direct POST
-export const NEWSLETTER = {
-  googleForms: {
-    formUrl:
-      'https://docs.google.com/forms/d/e/1FAIpQLSedegaN0_5eZWLIuizdKPCV1pAUm8vTatHo_ny07IXd8_xIfw/formResponse',
-    entries: {
-      email: 'entry.903587259',
-    },
   },
 } as const;
 

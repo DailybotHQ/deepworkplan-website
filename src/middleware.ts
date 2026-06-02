@@ -30,7 +30,6 @@ import { defineMiddleware } from 'astro:middleware';
 const KNOWN_ROOT_PATHS = new Set([
   '',
   'about',
-  'blog',
   'contact',
   'methodology',
   'spec',
@@ -47,12 +46,10 @@ const KNOWN_ROOT_PATHS = new Set([
   'favicon.ico',
   'favicon.svg',
   'sitemap-index.xml',
-  'rss.xml',
 ]);
 
 const KNOWN_ES_PATHS = new Set([
   'about',
-  'blog',
   'contact',
   'methodology',
   'spec',
@@ -62,7 +59,6 @@ const KNOWN_ES_PATHS = new Set([
   'init',
   'setup',
   'onboarding',
-  'rss.xml',
 ]);
 
 export const onRequest = defineMiddleware((context, next) => {

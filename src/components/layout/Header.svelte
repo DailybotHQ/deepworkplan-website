@@ -70,7 +70,7 @@ function closeAllDropdowns() {
         class="h-7 w-auto md:h-8 block dark:hidden"
         src="/images/brand/dwp-mark-light.png"
         alt=""
-        width={241}
+        width={270}
         height={160}
         loading="eager"
         fetchpriority="high"
@@ -79,7 +79,7 @@ function closeAllDropdowns() {
         class="h-7 w-auto md:h-8 hidden dark:block"
         src="/images/brand/dwp-mark-dark.png"
         alt=""
-        width={241}
+        width={270}
         height={160}
         loading="eager"
         fetchpriority="high"
@@ -88,7 +88,10 @@ function closeAllDropdowns() {
         <span class="masthead-wordmark text-lg md:text-xl font-bold tracking-tight text-ink dark:text-white">
           Deep Work Plan
         </span>
-        <span class="kicker masthead-strapline mt-1">
+        <!-- Decorative strapline: hidden from the accessibility tree so the link's
+             accessible name (aria-label "Deep Work Plan") matches its visible label
+             (fixes Lighthouse label-content-name-mismatch). -->
+        <span class="kicker masthead-strapline mt-1" aria-hidden="true">
           {t.nav.methodology} &middot; {t.nav.spec} &middot; {t.nav.kit}
         </span>
       </span>

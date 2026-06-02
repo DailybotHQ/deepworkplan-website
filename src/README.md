@@ -7,20 +7,25 @@ This is the main source directory for the Deep Work Plan Astro website. All appl
 ```
 src/
 ├── components/          # Reusable UI components (Astro + Svelte)
-│   ├── blog/           # Blog-related components
 │   ├── home/           # Homepage section components
-│   └── layout/         # Layout components (Header, MobileMenu)
-├── content/            # Content Collections (blog posts, tags)
-│   ├── blog/           # Blog posts (Markdown/MDX)
-│   └── tags/           # Tag definitions
+│   ├── editorial/      # Editorial design-system primitives
+│   ├── layout/         # Layout components (Header, MobileMenu)
+│   └── pages/          # Shared page components (Page wrapper pattern)
+├── content/            # Content Collections
+│   ├── methodology/    # Methodology docs (en/, es/) — primary content
+│   ├── spec/           # Specification reader content (en/, es/)
+│   ├── kit/            # Kit catalog: commands, adapters, presets (en/, es/)
+│   └── pages/          # Agent-friendly Markdown endpoints (en/, es/)
 ├── layouts/            # Page layouts
 │   └── MainLayout.astro
 ├── lib/                # Utility functions, types, constants
 ├── pages/              # File-based routing (all routes)
-│   ├── api/            # API endpoints
-│   ├── blog/           # Blog routes
+│   ├── methodology/    # Methodology reader routes
+│   ├── spec/           # Specification reader routes
+│   ├── kit/            # Kit catalog routes
 │   └── es/             # Spanish language routes
 ├── styles/             # Global styles and Tailwind
+├── middleware.ts       # Route allowlist & rewrites
 └── content.config.ts   # Content Collections schema
 ```
 
@@ -29,7 +34,7 @@ src/
 | Folder | Purpose | Tech |
 |--------|---------|------|
 | `components/` | Reusable UI components | Astro (.astro) + Svelte (.svelte) |
-| `content/` | Blog posts and tags | Markdown, MDX, Content Collections |
+| `content/` | Methodology, spec, kit, and page Markdown | Markdown, MDX, Content Collections |
 | `layouts/` | Page wrapper layouts | Astro |
 | `lib/` | Utilities, types, constants | TypeScript |
 | `pages/` | Routes (file-based) | Astro |
@@ -39,7 +44,7 @@ src/
 
 | File | Description |
 |------|-------------|
-| `content.config.ts` | Defines Content Collections schemas for blog and tags |
+| `content.config.ts` | Defines Content Collections schemas (`methodology`, `spec`, `kit`, `pages`) |
 | `env.d.ts` | TypeScript environment declarations |
 
 ## Quick Start Guide
@@ -65,15 +70,15 @@ import MainLayout from '../layouts/MainLayout.astro';
 
 ### Adding a New Component
 
-1. Choose the appropriate folder (`blog/`, `home/`, `layout/`, or root)
+1. Choose the appropriate folder (`home/`, `editorial/`, `layout/`, `pages/`, or root)
 2. Use `.astro` for static components, `.svelte` for interactive ones
 3. Follow naming conventions (PascalCase)
 
-### Adding a Blog Post
+### Adding Content
 
-1. Create a new `.md` or `.mdx` file in `content/blog/`
-2. Include required frontmatter (title, description, pubDate)
-3. See `content/README.md` for schema details
+1. Create a new `.md` (or `.mdx`) file in the relevant collection: `content/methodology/{en,es}/`, `content/spec/{en,es}/`, or `content/kit/{en,es}/`
+2. Include the required frontmatter for that collection (see `content/README.md`)
+3. Add both the EN and ES versions with the same English slug
 
 ## Related Documentation
 

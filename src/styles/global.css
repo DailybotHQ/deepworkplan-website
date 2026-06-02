@@ -157,7 +157,7 @@
     @apply md:max-w-[50%];
   }
 
-  /* Image captions inside blog posts */
+  /* Image captions inside prose content */
   .prose figcaption {
     @apply text-sm text-center text-gray-600 dark:text-gray-300 mt-3;
   }
@@ -276,7 +276,7 @@
   }
 }
 
-/* Constrained centered figures for blog post diagrams.
+/* Constrained centered figures for content diagrams.
  * Mobile: image fills full content width.
  * Desktop (>= 768px): image is constrained for breathing room.
  */

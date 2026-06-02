@@ -11,11 +11,11 @@ Quick start guide for AI coding assistants (Cursor AI, Claude Code, ChatGPT, Gem
 | **TypeScript** | 5.9.3 | Type-safe development |
 | **Tailwind CSS** | 4.1.18 | Utility-first CSS framework |
 | **Biome** | 2.3.11 | Linter and formatter |
-| **MDX** | 4.3.13 | Enhanced Markdown for blog |
+| **MDX** | 4.3.13 | Enhanced Markdown for content collections |
 
 ## Project Type
 
-- **Personal website and blog** for deepworkplan.com
+- **Methodology documentation and marketing site** for deepworkplan.com
 - **Static Site Generation (SSG)** - builds to static HTML
 - **Multilingual** - English (default) and Spanish
 - **Deployed to** Cloudflare Pages
@@ -26,7 +26,7 @@ Quick start guide for AI coding assistants (Cursor AI, Claude Code, ChatGPT, Gem
 deepworkplan.com/
 ├── src/
 │   ├── components/      # UI components (.astro, .svelte)
-│   ├── content/         # Blog posts and tags (Markdown/MDX)
+│   ├── content/         # Content collections: methodology, spec, kit, pages
 │   ├── layouts/         # Page layouts
 │   ├── lib/             # Utilities and types
 │   ├── pages/           # File-based routing
@@ -94,28 +94,16 @@ Always support dark mode:
 <div class="bg-white dark:bg-gray-900 text-black dark:text-white">
 ```
 
-### 7. Blog Post Creation Workflow
+### 7. Content Creation Workflow
 
-New blog posts MUST be created with the `/add-blog-post` skill (not manual file scaffolding).
+Methodology/spec/kit docs live in bilingual content collections.
 
-- Create both language files in the same task: `src/content/blog/en/` and `src/content/blog/es/`
-- Use date-prefix naming: `YYYY-MM-DD_slug.md`
-- Keep frontmatter synchronized across languages (`pubDate`, `heroImage`, `heroLayout`, `tags`, `series`, `seriesOrder`)
+- Create both language files in the same task: `src/content/{collection}/en/` and `.../es/` (same English slug)
+- Spanish content MUST carry correct diacritics (ñ, tildes, ¿/¡)
+- Keep the matching `src/content/pages/{en,es}/*.md` endpoint in sync (`pnpm run md:check`)
 - Validate with `pnpm run build`
 
-### 8. Blog Search Performance Guardrails
-
-- Keep search static-only and language-sharded (`/api/posts-en.json`, `/api/posts-es.json`)
-- Do **not** inline full search index data into blog listing/tag page HTML
-- Keep search index metadata-only (no full markdown body)
-- For search-related changes, run:
-
-```bash
-pnpm run build
-pnpm run search:budgets
-```
-
-### 9. Analytics Verification Policy
+### 8. Analytics Verification Policy
 
 - Google Search Console verification is DNS-based (Domain property TXT), not meta-tag based.
 - Do not add `PUBLIC_GOOGLE_SITE_VERIFICATION` or `google-site-verification` meta tags.
@@ -142,14 +130,14 @@ pnpm run build            # Production build (Cloudflare Pages)
 
 ### Content Collections
 
-Blog posts in `src/content/blog/`:
+Methodology docs in `src/content/methodology/{en,es}/`:
 
 ```yaml
 ---
-title: "Post Title"
+title: "Introduction"
 description: "Description"
-pubDate: 2024-01-15
-tags: ["tech"]
+order: 1
+lang: "en"
 ---
 ```
 
@@ -197,11 +185,11 @@ export const GET: APIRoute = async () => {
 
 ## Common Tasks
 
-### Add a Blog Post
+### Add a Methodology / Spec / Kit Doc
 
-1. Use `/add-blog-post` (mandatory workflow)
-2. Ensure EN + ES files are both created/updated in `src/content/blog/{lang}/`
-3. Verify frontmatter includes required fields and optional series fields when applicable
+1. Create EN + ES files in the same task under `src/content/{collection}/{en,es}/` (same English slug)
+2. Verify frontmatter includes required fields (`title`, `description`, `order`, `lang`)
+3. Keep the matching `src/content/pages/{en,es}/*.md` endpoint in sync (`pnpm run md:check`)
 4. Run `pnpm run build` to validate Content Collections
 
 ### Add a Component

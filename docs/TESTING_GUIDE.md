@@ -30,20 +30,16 @@ pnpm run test:coverage
 ```
 tests/
 ├── unit/
-│   ├── lib/                    # Utility function tests
-│   │   ├── blog.test.ts        # Blog utility functions (41 tests)
-│   │   ├── i18n.test.ts        # i18n utility functions (46 tests)
-│   │   ├── search.test.ts      # Search/Fuse.js functions (26 tests)
-│   │   └── translations.test.ts # Translation system (14 tests)
-│   └── components/             # Svelte component tests
-│       ├── BlogCard.test.ts    # Blog card rendering (14 tests)
-│       └── BlogPagination.test.ts # Pagination logic (17 tests)
-├── fixtures/
-│   └── posts.ts                # Mock blog post data
+│   ├── lib/                            # Utility function tests
+│   │   ├── i18n.test.ts                # i18n utility functions
+│   │   ├── markdown-for-agents.test.ts # Markdown endpoint serialization
+│   │   └── translations.test.ts        # Translation system
+│   └── components/                     # Svelte component tests
+├── fixtures/                           # Shared mock data
 ├── helpers/
-│   └── setup.ts                # Test setup (jest-dom matchers)
+│   └── setup.ts                        # Test setup (jest-dom matchers)
 └── mocks/
-    └── astro-content.ts        # Mock for astro:content virtual module
+    └── astro-content.ts                # Mock for astro:content virtual module
 ```
 
 ## Writing New Tests
@@ -88,13 +84,16 @@ describe('MyComponent', () => {
 
 ### Using Fixtures
 
-Import mock data from `tests/fixtures/posts.ts`:
+Place shared mock data in `tests/fixtures/` and import it into tests. For Svelte components that expect a content-collection entry, build a minimal mock and cast it:
 
 ```typescript
-import { publishedEnglishPost, demoEnglishPost } from '../../fixtures/posts';
+import { render } from '@testing-library/svelte';
+import MethodologyCard from '@/components/MethodologyCard.svelte';
+
+const doc = { data: { title: 'Introduction', order: 1, lang: 'en' } };
 
 // Use `as never` for CollectionEntry type compatibility
-render(BlogCard, { props: { post: publishedEnglishPost as never } });
+render(MethodologyCard, { props: { doc: doc as never } });
 ```
 
 ## Configuration
@@ -122,10 +121,10 @@ Svelte 5 components require `resolve.conditions: ['browser']` in the Vitest conf
 
 ## Test Conventions
 
-- Use descriptive `describe`/`it` blocks: `describe('getPostSlug')` + `it('strips date prefix from post ID')`
+- Use descriptive `describe`/`it` blocks: `describe('getUrlPrefix')` + `it('returns /es for Spanish')`
 - Prefer `expect().toBe()` for primitives, `expect().toEqual()` for objects
 - Test edge cases: empty strings, undefined values, boundary conditions
-- Do **not** test async functions that depend on `astro:content` (e.g., `getBlogPosts`, `getRelatedPosts`)
+- Do **not** test async functions that depend on `astro:content` directly — mock the collection instead
 - Import order: vitest > testing-library > source modules > fixtures
 
 ## Testing Best Practices

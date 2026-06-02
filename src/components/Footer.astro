@@ -39,15 +39,17 @@ const links = [
           class="h-7 w-auto block dark:hidden"
           src="/images/brand/dwp-mark-light.png"
           alt="Deep Work Plan"
-          width="60"
-          height="40"
+          width="270"
+          height="160"
+          loading="lazy"
         />
         <img
           class="h-7 w-auto hidden dark:block"
           src="/images/brand/dwp-mark-dark.png"
           alt="Deep Work Plan"
-          width="60"
-          height="40"
+          width="270"
+          height="160"
+          loading="lazy"
         />
       </a>
 
@@ -92,24 +94,29 @@ const links = [
         target="_blank"
         rel="noopener noreferrer"
         class="flex items-center gap-2 hover:opacity-80 transition-opacity"
-        aria-label="Powered by Dailybot"
+        aria-label={`${t.footer.poweredBy} Dailybot`}
       >
         <span class="kicker" style="color: var(--color-muted);"
           >{t.footer.poweredBy}</span
         >
+        <!-- Decorative within this labeled link (localized aria-label conveys the
+             purpose). alt="" so the logo doesn't add a token that mismatches the
+             localized accessible name (fixes label-content-name-mismatch on /es/). -->
         <img
           class="h-5 w-auto block dark:hidden"
           src="/images/dailybot/logo-horizontal-black.svg"
-          alt="Dailybot"
+          alt=""
           width="82"
           height="20"
+          loading="lazy"
         />
         <img
           class="h-5 w-auto hidden dark:block"
           src="/images/dailybot/logo-horizontal-white.svg"
-          alt="Dailybot"
+          alt=""
           width="82"
           height="20"
+          loading="lazy"
         />
       </a>
 

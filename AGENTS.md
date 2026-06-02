@@ -10,11 +10,6 @@
 |----------|-------|---------|
 | Architecture | [Architecture](docs/ARCHITECTURE.md) | Components, Content Collections, Svelte integration, project structure |
 | Standards | [Standards](docs/STANDARDS.md) | Canonical coding rules, orthography, import order |
-| Blog (dormant) | [Blog Posts](docs/features/BLOG_POSTS.md) | Tags, series, hero layouts, images — engine kept dormant for future case studies |
-| Blog Lifecycle (dormant) | [Blog Content Lifecycle](docs/features/BLOG_CONTENT_LIFECYCLE.md) | End-to-end blog workflow (reserved for future case studies) |
-| Authors | [Authors](docs/features/AUTHORS.md) | Multi-author support, YAML schema, AuthorCard, JSON-LD |
-| Writing Voice | [Writing Voice Guide](docs/WRITING_VOICE_GUIDE.md) | Anti-AI-slop checklist, author voice, vocabulary blocklist |
-| Writing Craft | [Writing Craft Guide](docs/WRITING_CRAFT_GUIDE.md) | Narrative structure, fact verification, quote handling, figure markup, refinement patterns, case studies |
 | Testing | [Testing](docs/TESTING_GUIDE.md) | Vitest setup, conventions, writing tests |
 | Commands | [Development Commands](docs/DEVELOPMENT_COMMANDS.md) | npm scripts, Astro CLI, build workflows |
 | i18n | [I18N Guide](docs/I18N_GUIDE.md) | Adding languages, translation workflow |
@@ -43,7 +38,7 @@ The site explains and positions the DWP methodology, hosts the readable specific
 
 **Companion skill repo:** the site is paired with **[`DailybotHQ/deepworkplan-skill`](https://github.com/DailybotHQ/deepworkplan-skill)** (DWP packaged as an installable agent skill). Adoption messaging (the `/init` endpoint, methodology, and kit) stays in sync with that repo: install the skill → onboard the agent → generate and execute long-horizon plans. Do **not** attribute the DWP name to any external author or popular-productivity source; the DWP name stands on its own (focused, long-horizon agent execution). Design-system reference: **[Brand Guide](docs/BRAND_GUIDE.md)** (palette + serif type + editorial primitives in `src/components/editorial/`).
 
-**Content model:** methodology documentation is primary; the blog engine is kept **dormant** (hidden from navigation, available later for case studies); slides/tech-talks and personal pages have been removed.
+**Content model:** methodology documentation is primary, paired with the specification reader and kit catalog. The blog engine, slides/tech-talks, and personal pages have been removed — this is a focused methodology-and-marketing site.
 
 **Technology Stack:**
 
@@ -52,7 +47,7 @@ The site explains and positions the DWP methodology, hosts the readable specific
 - **TypeScript 5.9.3** — Type-safe development
 - **Tailwind CSS 4.1.18** — Utility-first styling with dark mode
 - **Biome 2.3.11** — Linter and formatter (replaces ESLint + Prettier)
-- **MDX** — Enhanced Markdown for blog posts
+- **MDX** — Enhanced Markdown for content collections
 
 ## Project Structure
 
@@ -61,27 +56,22 @@ The site explains and positions the DWP methodology, hosts the readable specific
 ```
 src/
 ├── components/          # UI components (Astro + Svelte)
-│   ├── blog/            # Blog components (BlogCard, BlogGrid, Search)
-│   ├── home/            # Homepage sections (Hero, Projects, Blog preview)
+│   ├── home/            # Homepage sections (Hero, Pitch, Outcomes, ...)
+│   ├── editorial/       # Editorial primitives (Broadsheet design system)
 │   ├── layout/          # Header.svelte, MobileMenu.svelte
 │   └── pages/           # Shared page components (*Page.astro)
-├── content/             # Content Collections (methodology, spec, kit, pages, blog[dormant])
+├── content/             # Content Collections (methodology, spec, kit, pages)
 │   ├── methodology/{en,es}/  # Methodology docs (primary content)
 │   ├── spec/{en,es}/         # Specification reader content
 │   ├── kit/{en,es}/          # Kit catalog (presets, adapters, commands)
-│   ├── pages/{en,es}/        # Agent-friendly Markdown endpoints (AEO)
-│   ├── authors/         # Author definitions (.yaml files) — used by dormant blog
-│   ├── blog/{en,es}/    # Blog posts (DORMANT engine — hidden from nav)
-│   ├── tags/            # Tag definitions (.md files with tier/order)
-│   └── series/          # Series definitions
+│   └── pages/{en,es}/        # Agent-friendly Markdown endpoints (AEO)
 ├── layouts/             # MainLayout, InternalLayout, ShowcaseLayout
-├── lib/                 # Utilities (blog.ts, i18n.ts, translations/)
+├── lib/                 # Utilities (i18n.ts, translations/, markdown-for-agents.ts)
 ├── pages/               # File-based routing (EN root, ES in /es/)
 │   ├── internal/        # Dev-only hub (excluded from production)
 │   └── api/             # JSON endpoints
 └── styles/              # global.css (Tailwind config)
 
-public/images/blog/      # Blog images: posts/{slug}/, shared/, _staging/
 scripts/                 # Build utilities (image optimization)
 docs/                    # Project documentation
 .agents/                 # Cross-agent skills, commands, agents, settings (canonical)
@@ -113,7 +103,7 @@ The `.agents/` directory is the **canonical, cross-agent home** for everything t
 .agents/
 ├── agents/        # Agent definitions (architect, executor, reviewer, ...)
 ├── commands/      # Slash commands (commit, pr, branch, dwp-*, ...)
-├── skills/        # Skill procedures (add-blog-post, fix-lint, ...)
+├── skills/        # Skill procedures (fix-lint, translate-sync, ...)
 ├── docs/          # Catalogs and references (skills_agents_catalog.md, COMMANDS_REFERENCE.md)
 ├── README.md      # Conventions for authoring skills, agents, and commands
 ├── settings.json           # Claude Code env (env vars, experimental flags)
@@ -153,8 +143,8 @@ This means every `.claude/...` path (e.g., `.claude/skills/foo/SKILL.md`) resolv
 **Quick validation** before committing Spanish text:
 
 ```bash
-grep -rn 'pequeno\|tamano\|diseno\|espanol\|manana' src/content/blog/es/ src/lib/translations/es.ts
-grep -rn 'analisis\|numero\|codigo\|ejecucion\|version\|pagina\|titulo' src/content/blog/es/ src/lib/translations/es.ts
+grep -rn 'pequeno\|tamano\|diseno\|espanol\|manana' src/content/methodology/es/ src/content/spec/es/ src/lib/translations/es.ts
+grep -rn 'analisis\|numero\|codigo\|ejecucion\|version\|pagina\|titulo' src/content/methodology/es/ src/content/spec/es/ src/lib/translations/es.ts
 ```
 
 If any match is found, fix it before committing. Full word lists in **[Standards Guide](docs/STANDARDS.md)**.
@@ -172,7 +162,7 @@ import { z } from 'astro:content';
 // 3. Internal project modules (using @ alias)
 import Header from '@/components/layout/Header.svelte';
 import { SITE_TITLE } from '@/lib/constances';
-import { getBlogPosts } from '@/lib/blog';
+import { getTranslations } from '@/lib/translations';
 
 // 4. Type imports (separate group)
 import type { APIRoute } from 'astro';
@@ -210,8 +200,7 @@ Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on `src/lib
 **Content type rules:**
 
 - **Pages:** Create 1 shared `*Page.astro` in `src/components/pages/` + thin 3-line wrappers in `src/pages/` and `src/pages/es/` passing `lang` as string literal
-- **Blog Posts:** Both `src/content/blog/en/` and `src/content/blog/es/` MUST have the equivalent post. Translate `title`, `description`, and body. Preserve `pubDate`, `heroImage`, `tags`, `author`, code blocks. **Use `/add-blog-post` skill for new posts.**
-- **Authors:** Defined as YAML in `src/content/authors/{slug}.yaml`. Localization lives inside the YAML — both `role.en`/`role.es` and `bio.en`/`bio.es` are required by the schema. Posts reference an author by slug; the same slug applies to EN and ES versions. See [Authors](docs/features/AUTHORS.md).
+- **Methodology / Spec / Kit:** Every document MUST exist in both `{en,es}/` of its collection, sharing the same English slug. Translate `title`, `description`, and body; preserve `order`, `lang`, and code blocks. Use the `/translate-sync` skill.
 - **Translation Strings:** Add to BOTH `src/lib/translations/en.ts` and `es.ts`. Update `types.ts` with any new interface keys
 - **Components:** Use `getTranslations(lang)` from `@/lib/translations`. Never hardcode user-visible strings
 - **Agent-Friendly Markdown (MANDATORY):** When page or translation content changes, update the corresponding `src/content/pages/{en,es}/*.md` files. These serve as Markdown endpoints for AI agents and MUST stay in sync with the HTML content. See **[Markdown for Agents](docs/aeo/MARKDOWN_FOR_AGENTS.md)**.
@@ -219,9 +208,7 @@ Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on `src/lib
 **Compliance checklist:**
 
 - [ ] Pages exist in both `src/pages/` and `src/pages/es/`
-- [ ] Blog posts exist in both `src/content/blog/en/` and `src/content/blog/es/`
-- [ ] Same `author` slug used in EN and ES versions of a post
-- [ ] New/updated authors have both `role.en`/`role.es` and `bio.en`/`bio.es` filled in (`src/content/authors/`)
+- [ ] Methodology/spec/kit docs exist in both `{en,es}/` with the same English slug
 - [ ] UI strings in both `en.ts` and `es.ts`
 - [ ] No hardcoded user-visible text
 - [ ] Page Markdown files updated in both `src/content/pages/en/` and `src/content/pages/es/`
@@ -309,7 +296,7 @@ const { title, count = 5 } = Astro.props;
 
 ### 2. Content Collections
 
-Methodology, spec, and kit content (plus the dormant blog, tags, and series) use Astro Content Collections with Zod schemas defined in `src/content.config.ts`.
+Methodology, spec, kit, and pages content use Astro Content Collections with Zod schemas defined in `src/content.config.ts`.
 
 ### 3. Svelte Integration
 
@@ -362,30 +349,6 @@ English pages at root (`src/pages/`), Spanish in `src/pages/es/`. Page component
 
 Dev-only portal at `/internal/`. Uses `InternalLayout` or `ShowcaseLayout` (never `MainLayout`). English-only, no Page Wrapper pattern. Automatically excluded from production builds via three layers (post-build deletion, sitemap filter, noindex meta).
 
-## Blog Post Conventions (Dormant Engine)
-
-> Full reference: **[Blog Posts Guide](docs/features/BLOG_POSTS.md)**
-
-> **Status: DORMANT.** The blog engine is fully built but hidden from navigation. It is reserved for future **case studies** about applying the Deep Work Plan methodology. Do not add blog posts during the methodology-site build unless explicitly asked. The conventions below remain accurate for when the engine is reactivated.
-
-**File naming:** `YYYY-MM-DD_slug.{md,mdx}` in `src/content/blog/{en,es}/`. Date prefix stripped from URLs. **Slugs MUST always be in English** — both `en/` and `es/` versions use the same English slug.
-
-**Tags:** Flat `tags` array in frontmatter. Three tiers (primary / secondary / subtopic) resolved at build time from `src/content/tags/*.md`. Max 5 tags per post (1-2 primary + 0-3 secondary + 0-3 subtopic; max 3 subtopics; ≥ 1 primary required). Never auto-create tags without user approval — propose with [`/audit-taxonomy`](.agents/skills/audit-taxonomy/SKILL.md) and let the user approve. See [Tag Taxonomy in BLOG_POSTS.md](docs/features/BLOG_POSTS.md#tag-taxonomy-unified-collection) for the full tier table.
-
-**Series:** Posts reference `series: "{slug}"` and `seriesOrder: {n}` in frontmatter. Series defined in `src/content/series/`. Navigation renders automatically. **Series slugs MUST be in English** (e.g., `the-library-of-tomorrow`, not `la-biblioteca-del-manana`).
-
-**Authors:** Posts reference `author: "{slug}"` (optional). Authors defined as YAML in `src/content/authors/{slug}.yaml` with localized `role`/`bio` (en/es) and avatar at `public/images/authors/{slug}.webp`. Both EN and ES versions of a post must use the same `author` slug. Full reference: [features/AUTHORS.md](docs/features/AUTHORS.md). Internal directory: `/internal/authors`.
-
-**Resources section:** Include external links (docs, repos, tools). Do NOT list related articles or previous chapters — they appear in the series navigation below.
-
-**Hero layouts:** `banner` (default, landscape), `side-by-side` (square), `minimal` (thumbnail), `none` (text-only). Set based on image aspect ratio.
-
-**Demo posts:** In `_demo/` folders only. Never shown in listings/search. Accessible by direct URL in dev only.
-
-**Images:** Stored in `public/images/blog/posts/{slug}/`. Hero: `hero.{ext}`. Use `pnpm run images:optimize` for staged images.
-
-**New post workflow:** Use `/add-blog-post` skill (mandatory). Do not create blog post files manually.
-
 ## Methodology Content Conventions
 
 Methodology documentation is the **primary content** of the site. It lives in bilingual content collections and is rendered by the methodology, spec, and kit readers.
@@ -400,7 +363,7 @@ Methodology documentation is the **primary content** of the site. It lives in bi
 
 **Bilingual parity:** Every methodology/spec/kit document MUST exist in both `en/` and `es/`. Spanish content MUST carry correct diacritics (`ñ`, tildes, `¿`/`¡`). Use the `/translate-sync` skill and `i18n-guardian` agent.
 
-**Voice:** Serious, neutral, technical. No hype, no exclamation marks in body copy, sentence-case headings. This is a specification-and-methodology site, not a personal blog.
+**Voice:** Serious, neutral, technical. No hype, no exclamation marks in body copy, sentence-case headings. This is a specification-and-methodology site.
 
 **Agent-friendly Markdown:** Every rendered HTML page MUST have a matching `src/content/pages/{en,es}/*.md` endpoint kept in sync (`pnpm run md:check`). See [Markdown for Agents](docs/aeo/MARKDOWN_FOR_AGENTS.md).
 
@@ -426,16 +389,11 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 12. Use `MainLayout` for internal hub pages (use `InternalLayout` or `ShowcaseLayout`)
 13. Add multilingual variants for internal pages (English-only, dev-only)
 14. Reference `/internal/` pages from public pages
-15. Name blog post files without date prefix (use `YYYY-MM-DD_slug.md`)
-16. Put blog images outside `public/images/blog/posts/{slug}/`
-17. Put demo posts outside `_demo/` folders
-18. Write Spanish content without proper accents/tildes/ñ
-19. List related articles or previous chapters in the Resources section when the post belongs to a series — they already appear in `#series-navigation` below; listing them is redundant
-20. **Leave placeholder content in blog posts** — `[AUTHOR: ...]`, `[TODO: ...]`, `[TBD]`, or any bracketed "fill in later" text. Published posts must be complete. Zero tolerance.
-21. **Use Spanish slugs for blog posts or series** — all slugs (filenames, series names, image directories) MUST be in English, even for Spanish content
-22. **Re-introduce removed surfaces** — slides/tech-talks and the personal pages (cv, portfolio, dailybot, foodie, hobbies, trading, entrepreneur) have been removed from this site. Do not add them back or reference them.
-23. **Publish blog posts during the methodology build** — the blog engine is dormant and hidden from nav; only reactivate it for case studies when explicitly asked.
-24. **Add a new top-level page without updating `src/middleware.ts`** — the middleware has a hardcoded allowlist (`KNOWN_ROOT_PATHS` / `KNOWN_ES_PATHS`). New top-level routes (`/foo`, `/es/foo`) return 404 until added to the allowlist. Symptom: dev log shows `[404] (rewrite) /foo` (the `(rewrite)` is the smoking gun — it comes from `context.rewrite()` in the middleware, not from Astro routing). Multi-segment paths like `/foo/bar` and any path containing `.` bypass the rule, which is why deck detail pages can work while the listing page 404s. The canonical adoption endpoint `/init` (plus its `/setup` and `/onboarding` redirects) and their `/es/` variants are already in the allowlist; keep them there. See [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
+15. Write Spanish content without proper accents/tildes/ñ
+16. **Leave placeholder content in published content** — `[AUTHOR: ...]`, `[TODO: ...]`, `[TBD]`, or any bracketed "fill in later" text. Published pages must be complete. Zero tolerance.
+17. **Use Spanish slugs for content collections** — all slugs (methodology/spec/kit filenames) MUST be in English, even for Spanish content
+18. **Re-introduce removed surfaces** — the blog engine, slides/tech-talks, and the personal pages (cv, portfolio, dailybot, foodie, hobbies, trading, entrepreneur) have been removed from this site. Do not add them back or reference them.
+19. **Add a new top-level page without updating `src/middleware.ts`** — the middleware has a hardcoded allowlist (`KNOWN_ROOT_PATHS` / `KNOWN_ES_PATHS`). New top-level routes (`/foo`, `/es/foo`) return 404 until added to the allowlist. Symptom: dev log shows `[404] (rewrite) /foo` (the `(rewrite)` is the smoking gun — it comes from `context.rewrite()` in the middleware, not from Astro routing). Multi-segment paths like `/foo/bar` and any path containing `.` bypass the rule, which is why deck detail pages can work while the listing page 404s. The canonical adoption endpoint `/init` (plus its `/setup` and `/onboarding` redirects) and their `/es/` variants are already in the allowlist; keep them there. See [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
 
 ### DO:
 
@@ -447,11 +405,10 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 6. Create/update content in all active languages
 7. Use `text-gray-600 dark:text-gray-300` for secondary text (WCAG AA)
 8. Include `width` and `height` on all `<img>` elements
-9. Use date-prefix naming for blog posts (`YYYY-MM-DD_slug.md`)
-10. Verify Spanish diacritical marks before committing
-11. Ensure no placeholder content in published pages (`grep -rn '\[AUTHOR:\|\[AUTOR:\|\[TODO:\|\[TBD\]\|\[FIXME\]' src/content/` → zero matches)
-12. Add both EN and ES versions for all methodology, spec, and kit content
-13. Keep matching `src/content/pages/{en,es}/*.md` endpoints in sync with every rendered page
+9. Verify Spanish diacritical marks before committing
+10. Ensure no placeholder content in published pages (`grep -rn '\[AUTHOR:\|\[AUTOR:\|\[TODO:\|\[TBD\]\|\[FIXME\]' src/content/` → zero matches)
+11. Add both EN and ES versions for all methodology, spec, and kit content
+12. Keep matching `src/content/pages/{en,es}/*.md` endpoints in sync with every rendered page
 
 ## Pre-Commit Checklist
 
@@ -464,8 +421,8 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 - [ ] Content in both English and Spanish
 - [ ] Translation strings in both locale files
 - [ ] Spanish content has correct diacritical marks
-- [ ] No placeholder content in blog posts (`[AUTHOR:`, `[TODO:`, etc.)
-- [ ] Meta descriptions: 130-160 characters (pages in translations, blog posts in frontmatter)
+- [ ] No placeholder content in published pages (`[AUTHOR:`, `[TODO:`, etc.)
+- [ ] Meta descriptions: 130-160 characters (pages in translations, collection docs in frontmatter)
 - [ ] Accessibility: approved text contrast, image dimensions, heading hierarchy
 - [ ] Performance: lightest hydration, minimal JS
 - [ ] Commit message in English (conventional format)
@@ -474,7 +431,7 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 
 - **Skills** — Reusable procedures via slash commands: `quick-fix`, `doc-edit`, `pr-review-lite`, `fix-lint`, `write-tests`, `type-fix`, `refactor-safe`, `security-check`, `git-commit-push`, `translate-sync`, `add-component`, `add-page`, `optimize-image`
 - **Agents** — Specialized workers: `reviewer`, `executor`, `architect`, `security-auditor`, `i18n-guardian`, `content-writer`
-- **Critical policy:** All content changes MUST cover both EN and ES; new pages MUST use the page-wrapper pattern and update the `src/middleware.ts` allowlist. The blog engine is dormant — only the `/add-blog-post` skill applies when case studies are reactivated.
+- **Critical policy:** All content changes MUST cover both EN and ES; new pages MUST use the page-wrapper pattern and update the `src/middleware.ts` allowlist.
 - **Management:** `/skill-list`, `/agent-list`, `/skill-create`, `/agent-create`
 - **Full catalog:** [Skills & Agents Catalog](.agents/docs/skills_agents_catalog.md)
 
@@ -497,12 +454,12 @@ See [Team Agents Reference](docs/technical/TEAM_AGENTS_REFERENCE.md) for details
 
 | Agent | Prefix | Example |
 |-------|--------|---------|
-| **Claude Code** | `/` (native) | `/add-blog-post` |
-| **OpenAI Codex** | `#` | `#add-blog-post` |
-| **Cursor AI** | `#` | `#add-blog-post` |
-| **Gemini / others** | `#` | `#add-blog-post` |
+| **Claude Code** | `/` (native) | `/translate-sync` |
+| **OpenAI Codex** | `#` | `#translate-sync` |
+| **Cursor AI** | `#` | `#translate-sync` |
+| **Gemini / others** | `#` | `#translate-sync` |
 
-> **Why `#` for non-Claude agents?** Most AI CLIs (Codex, Cursor) intercept `/` as their own system commands. Using `#` avoids interception. You can also write the command name in plain text: "run add-blog-post".
+> **Why `#` for non-Claude agents?** Most AI CLIs (Codex, Cursor) intercept `/` as their own system commands. Using `#` avoids interception. You can also write the command name in plain text: "run translate-sync".
 
 When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 
@@ -511,7 +468,7 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 3. **FOLLOW** its step-by-step instructions exactly
 4. **DO NOT** improvise or skip steps — the procedure file IS the spec
 
-> **If a user prompt starts with `#`** (e.g., `#add-blog-post`, `#quick-fix`), treat it as a command invocation — look up the command name (without `#`) in the [Commands Reference](.agents/docs/COMMANDS_REFERENCE.md) and execute its procedure.
+> **If a user prompt starts with `#`** (e.g., `#translate-sync`, `#quick-fix`), treat it as a command invocation — look up the command name (without `#`) in the [Commands Reference](.agents/docs/COMMANDS_REFERENCE.md) and execute its procedure.
 
 ## Conventional Commits
 
@@ -519,4 +476,4 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 
 **Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`
 
-Examples: `feat: add blog search functionality`, `fix: resolve dark mode toggle on mobile`
+Examples: `feat: add kit catalog filtering`, `fix: resolve dark mode toggle on mobile`

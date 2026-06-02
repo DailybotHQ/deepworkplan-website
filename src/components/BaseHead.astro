@@ -9,7 +9,6 @@ import {
   getAlternateUrls,
   getOGLocale,
   getSupportedLanguages,
-  getUrlPrefix,
   type Language,
 } from '@/lib/i18n';
 
@@ -63,8 +62,6 @@ const currentLocale = getOGLocale(lang as Language);
 const alternateLocales = getSupportedLanguages()
   .filter((l) => l !== lang)
   .map((l) => getOGLocale(l));
-const langPrefix = getUrlPrefix(lang as Language);
-const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 ---
 
 <!-- Global Metadata -->
@@ -77,12 +74,6 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="sitemap" href="/sitemap-index.xml" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  title={SITE_TITLE}
-  href={rssHref}
-/>
 <meta name="generator" content={Astro.generator} />
 
 <!--
@@ -138,17 +129,9 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 />
 <meta name="author" content="Deep Work Plan" />
 
-<!-- Theme color for browser chrome -->
-<meta
-  name="theme-color"
-  content="#f7f4ec"
-  media="(prefers-color-scheme: light)"
-/>
-<meta
-  name="theme-color"
-  content="#14140f"
-  media="(prefers-color-scheme: dark)"
-/>
+<!-- Theme color for browser chrome. Light by default (independent of the
+     device's prefers-color-scheme); the theme scripts sync it to the chosen theme. -->
+<meta name="theme-color" content="#f7f4ec" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={ogType} />

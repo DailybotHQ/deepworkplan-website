@@ -36,7 +36,7 @@ Refactor code in a bounded scope (1-10 files, up to ~500 LOC) without changing o
 
 ### Required Parameters
 
-- `$TARGET`: File(s) or directory to refactor (e.g., `src/components/blog/`)
+- `$TARGET`: File(s) or directory to refactor (e.g., `src/components/pages/`)
 - `$GOAL`: What to refactor (e.g., "extract helper", "rename for clarity", "split into smaller components")
 
 ### Optional Parameters
@@ -140,13 +140,13 @@ refactor: {brief description}
 
 **Input:**
 ```
-$TARGET: src/components/blog/BlogGrid.svelte
+$TARGET: src/components/pages/MethodologyPage.astro
 $GOAL: Extract date formatting to lib/
 ```
 
 **Execution:**
 1. Create `src/lib/date.ts` with `formatDate` function
-2. Update `BlogGrid.svelte` to import from lib/
+2. Update `MethodologyPage.astro` to import from lib/
 3. Run validation
 4. Commit with `refactor: extract date formatting to lib/`
 

@@ -12,6 +12,7 @@ import { defineConfig } from 'astro/config';
 import rehypeExternalLinks from 'rehype-external-links';
 
 import excludeInternal from './src/integrations/exclude-internal';
+import rehypeResponsiveTables from './src/lib/rehype-responsive-tables.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,6 +44,9 @@ export default defineConfig({
           rel: ['noopener', 'noreferrer'],
         },
       ],
+      // Wrap reader Markdown tables in .table-responsive so they scroll on mobile
+      // instead of overflowing the page (methodology/spec/kit are table-heavy).
+      rehypeResponsiveTables,
     ],
   },
   integrations: [

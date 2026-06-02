@@ -53,7 +53,7 @@ Create new Astro (`.astro`) or Svelte (`.svelte`) components following project p
 - Wrapping other components (layouts, containers)
 - No user interactions needed
 
-**Examples:** `Footer.astro`, `BlogContainer.astro`, `HeroSection.astro`
+**Examples:** `Footer.astro`, `MethodologyCard.astro`, `HeroSection.astro`
 
 ### Use Svelte (`.svelte`) When:
 
@@ -63,14 +63,13 @@ Create new Astro (`.astro`) or Svelte (`.svelte`) components following project p
 - Real-time updates
 - Form inputs with validation
 
-**Examples:** `Header.svelte`, `BlogSearchInput.svelte`, `MobileMenu.svelte`
+**Examples:** `Header.svelte`, `ScrollSpyNav.svelte`, `MobileMenu.svelte`
 
 ## Component Locations
 
 | Location | Purpose |
 |----------|---------|
 | `src/components/` | Standalone utilities |
-| `src/components/blog/` | Blog-related components |
 | `src/components/home/` | Homepage sections |
 | `src/components/layout/` | Layout (Header, Menu) |
 | `src/components/editorial/` | Editorial primitives (Kicker, Rule, Figure, Lead, Reference) |

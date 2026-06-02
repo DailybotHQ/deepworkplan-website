@@ -1,201 +1,101 @@
 # Content Collections (`src/content/`)
 
-This directory contains Content Collections for blog posts and tags. Astro's Content Collections provide type-safe frontmatter validation and easy querying of content.
+This directory contains the site's Content Collections. Astro's Content Collections provide type-safe frontmatter validation and easy querying of content. The schemas are defined in `src/content.config.ts`:
 
-**Detailed guides:**
-
-- **[Blog Posts](../../docs/features/BLOG_POSTS.md)** - File naming, frontmatter schema, hero layouts, image organization
-- **[Blog Content Lifecycle](../../docs/features/BLOG_CONTENT_LIFECYCLE.md)** - Draft, scheduled, demo posts, preview mode
-- **[Image Optimization](../../docs/features/IMAGE_OPTIMIZATION.md)** - Image pipeline and staging workflow
+```typescript
+export const collections = { pages, methodology, spec, kit };
+```
 
 ## Directory Structure
 
 ```
 content/
-├── blog/
-│   ├── en/                              # English posts
-│   │   ├── _demo/                       # Demo posts (dev only)
-│   │   │   ├── 2025-01-01_demo-hero-banner.md
-│   │   │   ├── 2025-01-02_demo-hero-side-by-side.md
-│   │   │   └── ...
-│   │   ├── 2025-01-15_dwp-case-study.md
-│   │   ├── 2022-07-08_first-post.md
-│   │   └── ...
-│   └── es/                              # Spanish posts (matching filenames)
-│       ├── _demo/                       # Demo posts (matching en/_demo/)
-│       │   └── ...
-│       ├── 2025-01-15_dwp-case-study.md
-│       └── ...
-└── tags/                                # Tag definitions
-    ├── tech.md
-    ├── personal.md
-    ├── talks.md
-    ├── trading.md
-    ├── portfolio.md
-    └── demo.md                          # Dev-only tag for demo posts
+├── methodology/        # Methodology chapters (primary content)
+│   ├── en/             # English chapters (e.g. 01-manifesto.md, 02-core-loop.md)
+│   └── es/             # Spanish chapters (matching English slugs)
+├── spec/               # Readable specification, split into ordered sections
+│   ├── en/
+│   └── es/
+├── kit/                # Kit catalog: commands, adapters, presets, examples, addons
+│   ├── en/
+│   └── es/
+└── pages/              # Agent-friendly Markdown endpoints (one per rendered page)
+    ├── en/
+    └── es/
 ```
 
-## Blog Collection
+**Bilingual requirement:** Every entry **must** exist in both `en/` and `es/` with the **same English slug**. Spanish content must carry correct diacritics (`ñ`, tildes, `¿`/`¡`).
 
-### File Naming
+## Collections
 
-**Format:** `YYYY-MM-DD_slug.{md,mdx}` (underscore separator)
+### `methodology`
 
-The date prefix uses `pubDate` and is stripped from URLs (clean slugs: `/blog/my-post/`).
-
-**Bilingual requirement:** Every post **must** exist in both `en/` and `es/` with the **same filename**.
-
-### Schema
-
-Defined in `src/content.config.ts`:
-
-```typescript
-schema: z.object({
-  title: z.string(),
-  description: z.string(),
-  pubDate: z.coerce.date(),
-  updatedDate: z.coerce.date().optional(),
-  heroImage: z.string().optional(),
-  heroLayout: z.enum(['banner', 'side-by-side', 'minimal', 'none'])
-    .default('banner').optional(),
-  tags: z.array(z.string()).optional(),
-  draft: z.boolean().default(false).optional(),
-})
-```
-
-| Field | Required | Description |
-|-------|----------|-------------|
-| `title` | Yes | Post title |
-| `description` | Yes | Post excerpt (50-160 chars for SEO) |
-| `pubDate` | Yes | Publication date. Future dates = **scheduled** post |
-| `updatedDate` | No | Last update date |
-| `heroImage` | No | Path: `/images/blog/posts/{slug}/hero.{ext}` |
-| `heroLayout` | No | `banner` (default), `side-by-side`, `minimal`, `none` |
-| `tags` | No | Array of tag IDs from `src/content/tags/` |
-| `draft` | No | `true` = **draft** post (hidden from production). Default: `false` |
-
-### Content Lifecycle
-
-Posts have visibility states based on `draft` and `pubDate`:
-
-| State | How to create | Production | Dev `?preview=all` |
-|-------|--------------|:----------:|:------------------:|
-| Published | `draft: false` + past `pubDate` | Visible | Visible |
-| Draft | `draft: true` | Hidden | Visible (amber badge) |
-| Scheduled | Future `pubDate` | Hidden | Visible (blue badge) |
-| Demo | File in `_demo/` folder | Hidden | Visible (purple badge) |
-
-**Preview mode:** Visit `/blog/?preview=all` in dev to see all posts including hidden ones.
-
-See **[Blog Content Lifecycle](../../docs/features/BLOG_CONTENT_LIFECYCLE.md)** for the complete guide.
-
-### Frontmatter Examples
-
-**Published post:**
-
-```markdown
----
-title: 'My Post Title'
-description: 'A brief description.'
-pubDate: '2026-01-31'
-heroImage: '/images/blog/posts/my-post/hero.jpg'
-heroLayout: 'banner'
-tags: ['tech']
----
-```
-
-**Draft post:**
-
-```markdown
----
-title: 'Work in Progress'
-description: 'Still drafting this.'
-pubDate: '2026-02-15'
-tags: ['tech']
-draft: true
----
-```
-
-**Scheduled post:**
-
-```markdown
----
-title: 'Coming Soon'
-description: 'This publishes automatically on rebuild after the date.'
-pubDate: '2026-06-15'
-tags: ['tech']
----
-```
-
-### Demo Posts
-
-Demo posts are stored in `_demo/` subdirectories and showcase blog features (hero layouts, MDX, formatting, syntax highlighting). They are **never** visible in production.
-
-- Always include the `demo` tag: `tags: ['tech', 'demo']`
-- Must exist in both `en/_demo/` and `es/_demo/`
-- See [Blog Content Lifecycle](../../docs/features/BLOG_CONTENT_LIFECYCLE.md#demo-posts) for details
-
-## Tags Collection
-
-### Schema
+The human-facing chapters that explain the Deep Work Plan methodology. This is the primary teaching content, rendered by the methodology reader.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `name` | `string` | Yes | Tag identifier (matches `tags` array in blog posts) |
-| `description` | `string` | No | Tag description |
+| `title` | `string` | Yes | Chapter title |
+| `description` | `string` | Yes | Short description (SEO + listing) |
+| `order` | `number` | Yes | Sort order within the reader |
+| `lang` | `'en' \| 'es'` | Yes | Language of the entry |
+| `summary` | `string` | No | Optional summary for cards/listings |
+| `icon` | `string` | No | Optional icon identifier |
 
-### Current Tags
+### `spec`
 
-| Tag | Description | Visibility |
-|-----|-------------|------------|
-| `tech` | Technical tutorials and guides | Always |
-| `personal` | Personal posts and experiences | Always |
-| `talks` | Conference talks and presentations | Always |
-| `trading` | Trading and finance content | Always |
-| `portfolio` | Portfolio/branding | Always |
-| `demo` | Demo posts showcasing blog features | Dev only |
+The readable specification of the methodology, split into ordered sections (task anatomy, validation gates, completion protocol, archetypes, addons).
 
-Tag display names are localized in `src/lib/translations.ts` via `t.tagNames[tag]`.
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | `string` | Yes | Section title |
+| `description` | `string` | Yes | Short description |
+| `order` | `number` | Yes | Sort order within the spec |
+| `lang` | `'en' \| 'es'` | Yes | Language of the entry |
+| `section` | `string` | No | Optional grouping/section label |
 
-### Creating a New Tag
+### `kit`
 
-1. Create `src/content/tags/{tag-name}.md`:
+The catalog of commands, adapters, presets, examples, and addons that make up the DWP kit. The schema is `.loose()`, so kind-specific fields are allowed via passthrough.
 
-```markdown
----
-name: "tag-name"
-description: "Description of this tag."
----
-```
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | `string` | Yes | Entry title |
+| `description` | `string` | Yes | Short description |
+| `kind` | `'command' \| 'adapter' \| 'preset' \| 'example' \| 'addon'` | Yes | Catalog category |
+| `lang` | `'en' \| 'es'` | Yes | Language of the entry |
+| `order` | `number` | No | Optional sort order |
 
-2. Add translations in `src/lib/translations.ts` (both EN and ES):
+### `pages`
 
-```typescript
-tagNames: { ..., 'tag-name': 'Display Name' },
-tagDescriptions: { ..., 'tag-name': 'Description shown on tag page.' },
-```
+Markdown source files backing the agent-friendly `.md` endpoints for static pages. Every rendered HTML page has a matching entry here, kept in sync via `pnpm run md:check`.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | `string` | Yes | Page title |
+| `description` | `string` | Yes | Page description |
+| `lastUpdated` | `date` | No | Optional last-updated date |
 
 ## Querying Collections
 
 ```typescript
 import { getCollection } from 'astro:content';
 
-// All posts
-const allPosts = await getCollection('blog');
+// All English methodology chapters, sorted by order
+const chapters = (await getCollection('methodology', ({ data }) => data.lang === 'en'))
+  .sort((a, b) => a.data.order - b.data.order);
 
-// Posts by tag
-const techPosts = await getCollection('blog', ({ data }) =>
-  data.tags?.includes('tech')
+// Kit entries of a given kind
+const presets = await getCollection('kit', ({ data }) =>
+  data.lang === 'en' && data.kind === 'preset'
 );
 
-// Using the blog utility (recommended — handles filtering, pagination, sorting)
-import { getBlogPosts } from '@/lib/blog';
-const result = await getBlogPosts({ lang: 'en', tag: 'tech', page: 1 });
+// All spec sections for a language
+const spec = await getCollection('spec', ({ data }) => data.lang === 'es');
 ```
 
 ## Related Documentation
 
-- [Blog Posts Feature Guide](../../docs/features/BLOG_POSTS.md) - Full reference
-- [Blog Content Lifecycle](../../docs/features/BLOG_CONTENT_LIFECYCLE.md) - Draft, scheduled, demo, preview mode
-- [Blog Components](../components/blog/README.md)
-- [Library Functions](../lib/README.md) - `getBlogPosts()` utility
+- [Image Optimization](../../docs/features/IMAGE_OPTIMIZATION.md) - Image pipeline and staging workflow
+- [Library Functions](../lib/README.md)
+- [Pages & Routing](../pages/README.md)
+- [Architecture Guide](../../docs/ARCHITECTURE.md)

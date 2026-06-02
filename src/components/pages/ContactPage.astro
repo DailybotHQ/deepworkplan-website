@@ -148,12 +148,15 @@ const breadcrumbSchema = {
                 )}
               </span>
               <div>
-                <h3
+                <!-- h2 (not h3): the social Kicker is a decorative eyebrow, not a
+                     heading, so h3 here skipped a level (Lighthouse heading-order).
+                     text-lg styling keeps the visual identical. -->
+                <h2
                   class="font-display text-lg font-semibold"
                   style="color: var(--color-ink);"
                 >
                   {channel.title}
-                </h3>
+                </h2>
                 <p class="mt-1 text-sm" style="color: var(--color-muted);">
                   {channel.description}
                 </p>

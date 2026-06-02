@@ -40,8 +40,6 @@ Every rendered page is available as native source Markdown for AI agents:
 ## Machine-Readable Feeds
 
 - Sitemap: /sitemap-index.xml
-- RSS (English): /rss.xml
-- RSS (Spanish): /es/rss.xml
 
 ## Crawling Guidance
 

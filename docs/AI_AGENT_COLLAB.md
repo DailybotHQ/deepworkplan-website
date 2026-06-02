@@ -46,21 +46,21 @@ Before stopping:
 ## Handoff Notes
 
 ### Completed
-- [x] Added BlogSearch component
+- [x] Added MethodologyReader component
 - [x] Updated content.config.ts
 
 ### In Progress
-- [ ] Search pagination (50% done)
+- [ ] Scroll-spy navigation (50% done)
 
 ### Blocked
-- Waiting for API design decision
+- Waiting for content structure decision
 
 ### Files Changed
-- src/components/blog/BlogSearch.svelte
+- src/components/pages/MethodologyPage.astro
 - src/content.config.ts
 
 ### Next Steps
-1. Complete pagination logic
+1. Complete scroll-spy logic
 2. Add loading states
 3. Write documentation
 ```
@@ -72,7 +72,7 @@ Don't leave uncommitted work:
 ```bash
 # Commit before handoff
 git add -A
-git commit -m "wip: blog search - pagination in progress"
+git commit -m "wip: methodology reader - scroll-spy in progress"
 ```
 
 ### 3. Clear Context Transfer
@@ -91,8 +91,8 @@ New agent should:
 Use clear TODO comments:
 
 ```typescript
-// TODO: Add error handling for API failures
-// NOTE: This pattern matches BlogCard - keep consistent
+// TODO: Add error handling for fetch failures
+// NOTE: This pattern matches MethodologyCard - keep consistent
 // FIXME: Dark mode not working on mobile
 ```
 
@@ -102,14 +102,14 @@ Use conventional commits with clear context:
 
 ```bash
 # Good - clear what and why
-git commit -m "feat: add blog search with debounced input
+git commit -m "feat: add scroll-spy nav to methodology reader
 
-- Uses /api/posts-{lang}.json shard endpoints for search index
-- Debounces input by 300ms
-- Filters by title, description, and tags"
+- Highlights the active section while scrolling
+- Uses IntersectionObserver (no scroll listener)
+- Bilingual labels via getTranslations(lang)"
 
 # Bad - vague
-git commit -m "add search"
+git commit -m "add nav"
 ```
 
 ### PR Descriptions
@@ -118,20 +118,20 @@ Include context for reviewers (human or AI):
 
 ```markdown
 ## Summary
-Added client-side blog search functionality.
+Added scroll-spy navigation to the methodology reader.
 
 ## Changes
-- New BlogSearch.svelte component
-- Language-sharded search endpoints (`/api/posts-en.json`, `/api/posts-es.json`)
+- New ScrollSpyNav.svelte component (IntersectionObserver-based)
+- Wired into MethodologyPage.astro with bilingual labels
 
 ## Testing
-- [x] Search filters correctly
-- [x] Works with empty query
+- [x] Active section highlights correctly
+- [x] Works at the top and bottom of the page
 - [x] Dark mode supported
 
 ## Notes for Reviewers
-Search is static-first and shard-based for scale. Keep
-`pnpm run search:budgets` green to avoid payload regressions.
+Navigation is static-first; the only JS is the IntersectionObserver
+island. No scroll listeners, no layout shift.
 ```
 
 ## Conflict Resolution

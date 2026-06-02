@@ -124,16 +124,16 @@ The layout integrates these components:
 
 The theme script (inlined in layout) runs before the body renders to:
 
-1. Check `localStorage` for saved theme preference
-2. Check system preference via `prefers-color-scheme`
-3. Apply `dark` class to `<html>` element
-4. Prevent flash of wrong theme
+1. Check `localStorage` for a saved theme preference
+2. Default to **light** on first visit (the device's `prefers-color-scheme` is intentionally ignored — light is always the default until the user toggles)
+3. Apply the `dark` class to `<html>` only when the stored theme is `dark`
+4. Sync the `theme-color` meta (browser chrome) to the chosen theme
+5. Prevent a flash of the wrong theme
 
 ```javascript
-// Simplified theme logic
-const theme = localStorage.getItem('theme') || 
-  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-document.documentElement.classList.toggle('dark', theme === 'dark');
+// Simplified theme logic: light by default, dark only when explicitly stored.
+const isDark = localStorage.getItem('theme') === 'dark';
+document.documentElement.classList.toggle('dark', isDark);
 ```
 
 ## Creating a New Layout
@@ -142,26 +142,24 @@ For specialized pages, you can create additional layouts:
 
 ```astro
 ---
-// src/layouts/BlogLayout.astro
+// src/layouts/ReaderLayout.astro
 import MainLayout from './MainLayout.astro';
 
 interface Props {
   lang: string;
   title: string;
   description: string;
-  pubDate: Date;
-  author?: string;
+  section?: string;
 }
 
-const { lang, title, description, pubDate, author } = Astro.props;
+const { lang, title, description, section } = Astro.props;
 ---
 
 <MainLayout lang={lang} title={title} description={description}>
   <article class="main-container py-24">
     <header class="mb-8">
+      {section && <p class="text-sm uppercase tracking-wide">{section}</p>}
       <h1 class="text-4xl font-bold">{title}</h1>
-      <time>{pubDate.toLocaleDateString()}</time>
-      {author && <p>By {author}</p>}
     </header>
     <slot />
   </article>

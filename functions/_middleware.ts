@@ -220,7 +220,7 @@ const MARKDOWN_EXCLUDED_EXTENSIONS =
  * Resolve the `.md` asset path for a given URL pathname.
  * - /about       → /about.md
  * - /about/      → /about.md
- * - /blog/post   → /blog/post.md
+ * - /methodology/x → /methodology/x.md
  * - /es/about    → /es/about.md
  * - /            → /index.md
  */
@@ -266,7 +266,7 @@ async function tryServeMarkdown(
       new Request(mdUrl.toString())
     );
 
-    // Fallback: /path.md → /path/index.md (for directory-style paths like /es/, /blog/)
+    // Fallback: /path.md → /path/index.md (for directory-style paths like /es/, /methodology/)
     if (!assetResponse.ok && !mdPath.endsWith('/index.md')) {
       const indexMdPath = `${mdPath.replace(/\.md$/, '')}/index.md`;
       const indexMdUrl = new URL(indexMdPath, url.origin);
@@ -355,7 +355,7 @@ export async function onRequest(context: EventContext): Promise<Response> {
     return markdownResponse;
   }
 
-  // 2. Track direct .md URL requests (e.g., /about.md, /blog/post.md)
+  // 2. Track direct .md URL requests (e.g., /about.md, /methodology/x.md)
   const url = new URL(context.request.url);
   if (isDirectMarkdownUrl(url.pathname)) {
     trackMarkdownRequest(context, 'direct_url');

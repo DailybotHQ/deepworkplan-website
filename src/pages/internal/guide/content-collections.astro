@@ -3,30 +3,23 @@ import InternalLayout from '@/layouts/InternalLayout.astro';
 
 const collections = [
   {
-    name: 'blog',
-    path: 'src/content/blog/{en,es}/',
+    name: 'methodology',
+    path: 'src/content/methodology/{en,es}/',
     description:
-      'Blog posts in English and Spanish with full frontmatter schema',
+      'Narrative methodology chapters that explain Deep Work Plan, per language',
     fileCount: 'Per language',
   },
   {
-    name: 'slides',
-    path: 'src/content/slides/{en,es}/',
-    description: 'Presentation decks — native or external types',
+    name: 'spec',
+    path: 'src/content/spec/{en,es}/',
+    description: 'Readable specification split into ordered sections',
     fileCount: 'Per language',
   },
   {
-    name: 'tags',
-    path: 'src/content/tags/',
-    description:
-      'Tag definitions with tier (primary/secondary/subtopic) and display order',
-    fileCount: 'Shared',
-  },
-  {
-    name: 'series',
-    path: 'src/content/series/',
-    description: 'Blog series definitions with ordering and descriptions',
-    fileCount: 'Shared',
+    name: 'kit',
+    path: 'src/content/kit/{en,es}/',
+    description: 'Kit catalog — commands, adapters, presets, examples, addons',
+    fileCount: 'Per language',
   },
   {
     name: 'pages',
@@ -36,12 +29,12 @@ const collections = [
   },
 ];
 
-const blogFields = [
+const methodologyFields = [
   {
     field: 'title',
     type: 'string',
     required: true,
-    description: 'Post title (translated per language)',
+    description: 'Document title (translated per language)',
   },
   {
     field: 'description',
@@ -50,198 +43,142 @@ const blogFields = [
     description: 'Meta description, 130-160 characters',
   },
   {
-    field: 'pubDate',
-    type: 'date',
-    required: true,
-    description: 'Publication date (ISO format)',
-  },
-  {
-    field: 'updatedDate',
-    type: 'date',
-    required: false,
-    description: 'Last update date',
-  },
-  {
-    field: 'heroImage',
-    type: 'string',
-    required: false,
-    description: 'Path to hero image (relative to public/)',
-  },
-  {
-    field: 'heroLayout',
-    type: 'enum',
-    required: false,
-    description: 'banner | side-by-side | minimal | none (default: banner)',
-  },
-  {
-    field: 'tags',
-    type: 'string[]',
-    required: true,
-    description: 'Array of tag slugs (max 5 per post)',
-  },
-  {
-    field: 'keywords',
-    type: 'string[]',
-    required: false,
-    description: 'SEO keywords, 5-8 per language',
-  },
-  {
-    field: 'series',
-    type: 'string',
-    required: false,
-    description: 'Series slug (English only)',
-  },
-  {
-    field: 'seriesOrder',
-    type: 'number',
-    required: false,
-    description: 'Position within the series (1-based)',
-  },
-  {
-    field: 'draft',
-    type: 'boolean',
-    required: false,
-    description: 'If true, excluded from production build',
-  },
-];
-
-const slidesBaseFields = [
-  { field: 'title', type: 'string', required: true, description: 'Deck title' },
-  {
-    field: 'description',
-    type: 'string',
-    required: true,
-    description: 'Brief deck description',
-  },
-  {
-    field: 'pubDate',
-    type: 'date',
-    required: true,
-    description: 'Publication/presentation date',
-  },
-  {
-    field: 'type',
-    type: 'enum',
-    required: true,
-    description: 'native | external (discriminant)',
-  },
-  {
-    field: 'heroImage',
-    type: 'string',
-    required: false,
-    description: 'Cover image for the deck',
-  },
-  {
-    field: 'tags',
-    type: 'string[]',
-    required: true,
-    description: 'Array of tag slugs',
-  },
-  {
-    field: 'event',
-    type: 'string',
-    required: false,
-    description: 'Event or conference name',
-  },
-  {
-    field: 'draft',
-    type: 'boolean',
-    required: false,
-    description: 'If true, excluded from production',
-  },
-];
-
-const slidesTypeFields = [
-  {
-    type: 'native',
-    field: '(body)',
-    description: 'Markdown content with slide separators',
-  },
-  {
-    type: 'external',
-    field: 'externalUrl',
-    description: 'URL linking to the external slide deck',
-  },
-];
-
-const tagsFields = [
-  {
-    field: 'name',
-    type: 'string',
-    required: true,
-    description: 'Display name of the tag',
-  },
-  {
-    field: 'tier',
-    type: 'enum',
-    required: true,
-    description: 'primary | secondary | subtopic',
-  },
-  {
     field: 'order',
     type: 'number',
     required: true,
-    description: 'Sort order within the tier',
+    description: 'Sort order within the methodology reader',
   },
   {
-    field: 'description',
+    field: 'lang',
+    type: "enum('en'|'es')",
+    required: true,
+    description: 'Language of the document',
+  },
+  {
+    field: 'summary',
     type: 'string',
     required: false,
-    description: 'Brief tag description',
+    description: 'Short summary surfaced in the reader index',
+  },
+  {
+    field: 'icon',
+    type: 'string',
+    required: false,
+    description: 'Optional icon key for the document',
   },
 ];
 
-const seriesFields = [
-  {
-    field: 'name',
-    type: 'string',
-    required: true,
-    description: 'Internal reference name',
-  },
+const specFields = [
   {
     field: 'title',
     type: 'string',
     required: true,
-    description: 'Display title for the series',
+    description: 'Section title',
   },
   {
     field: 'description',
     type: 'string',
     required: true,
-    description: 'Series description',
+    description: 'Meta description, 130-160 characters',
   },
   {
     field: 'order',
     type: 'number',
     required: true,
-    description: 'Global sort order among series',
+    description: 'Sort order within the spec reader',
+  },
+  {
+    field: 'lang',
+    type: "enum('en'|'es')",
+    required: true,
+    description: 'Language of the document',
+  },
+  {
+    field: 'section',
+    type: 'string',
+    required: false,
+    description: 'Optional grouping label for the section',
+  },
+];
+
+const kitFields = [
+  {
+    field: 'title',
+    type: 'string',
+    required: true,
+    description: 'Kit entry title',
+  },
+  {
+    field: 'description',
+    type: 'string',
+    required: true,
+    description: 'Meta description, 130-160 characters',
+  },
+  {
+    field: 'kind',
+    type: 'enum',
+    required: true,
+    description: 'command | adapter | preset | example | addon',
+  },
+  {
+    field: 'lang',
+    type: "enum('en'|'es')",
+    required: true,
+    description: 'Language of the document',
+  },
+  {
+    field: 'order',
+    type: 'number',
+    required: false,
+    description: 'Sort order within its kind',
+  },
+];
+
+const pagesFields = [
+  {
+    field: 'title',
+    type: 'string',
+    required: true,
+    description: 'Page title for the Markdown twin',
+  },
+  {
+    field: 'description',
+    type: 'string',
+    required: true,
+    description: 'Meta description, 130-160 characters',
+  },
+  {
+    field: 'lastUpdated',
+    type: 'date',
+    required: false,
+    description: 'Last update date (coerced)',
   },
 ];
 
 const fileNaming = [
   {
-    collection: 'blog',
-    pattern: 'YYYY-MM-DD_slug.md',
-    example: '2026-04-20_my-first-post.md',
-    notes: 'Date prefix stripped from URL; slug always in English',
-  },
-  {
-    collection: 'slides',
-    pattern: 'YYYY-MM-DD_slug.md',
-    example: '2026-04-25_demo-revealjs-features.md',
-    notes: 'Date prefix stripped from URL; slug always in English',
-  },
-  {
-    collection: 'tags',
+    collection: 'methodology',
     pattern: 'slug.md',
-    example: 'javascript.md',
-    notes: 'Slug = filename without extension',
+    example: 'overview.md',
+    notes: 'Slug always in English; same slug for EN and ES',
   },
   {
-    collection: 'series',
+    collection: 'spec',
     pattern: 'slug.md',
-    example: 'the-library-of-tomorrow.md',
-    notes: 'Slug always in English, even for Spanish series',
+    example: 'task-anatomy.md',
+    notes: 'Slug always in English; same slug for EN and ES',
+  },
+  {
+    collection: 'kit',
+    pattern: 'slug.md',
+    example: 'commit.md',
+    notes: 'Slug always in English; same slug for EN and ES',
+  },
+  {
+    collection: 'pages',
+    pattern: 'slug.md',
+    example: 'about.md',
+    notes: 'Mirrors the HTML route it backs',
   },
 ];
 
@@ -250,17 +187,21 @@ const keyFiles = [
     path: 'src/content.config.ts',
     description: 'All Zod schemas and collection definitions',
   },
-  { path: 'src/content/blog/en/', description: 'English blog posts' },
-  { path: 'src/content/blog/es/', description: 'Spanish blog posts' },
-  { path: 'src/content/slides/en/', description: 'English slide decks' },
-  { path: 'src/content/slides/es/', description: 'Spanish slide decks' },
   {
-    path: 'src/content/tags/',
-    description: 'Tag definitions (shared, no language split)',
+    path: 'src/content/methodology/{en,es}/',
+    description: 'Methodology chapters per language',
   },
   {
-    path: 'src/content/series/',
-    description: 'Series definitions (shared, no language split)',
+    path: 'src/content/spec/{en,es}/',
+    description: 'Specification sections per language',
+  },
+  {
+    path: 'src/content/kit/{en,es}/',
+    description: 'Kit catalog entries per language',
+  },
+  {
+    path: 'src/content/pages/{en,es}/',
+    description: 'Markdown twins for AI agents per language',
   },
 ];
 ---
@@ -287,9 +228,9 @@ const keyFiles = [
     </div>
   </section>
 
-  <!-- Blog Schema -->
+  <!-- Methodology Schema -->
   <section class="mb-12">
-    <h2 class="text-xl md:text-2xl font-bold mb-4">Blog Schema</h2>
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Methodology Schema</h2>
     <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
@@ -302,7 +243,7 @@ const keyFiles = [
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-            {blogFields.map((f) => (
+            {methodologyFields.map((f) => (
               <tr>
                 <td class="py-3 px-4"><code class="text-xs font-medium">{f.field}</code></td>
                 <td class="py-3 px-4"><code class="text-xs">{f.type}</code></td>
@@ -316,65 +257,41 @@ const keyFiles = [
     </div>
   </section>
 
-  <!-- Slides Schema -->
+  <!-- Spec Schema -->
   <section class="mb-12">
-    <h2 class="text-xl md:text-2xl font-bold mb-4">Slides Schema</h2>
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Spec Schema</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Field</th>
+              <th class="text-left py-3 px-4 font-semibold">Type</th>
+              <th class="text-left py-3 px-4 font-semibold">Required</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {specFields.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.field}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{f.type}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.required ? 'Yes' : 'No'}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kit Schema -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Kit Schema</h2>
     <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-      Discriminated union on the <code class="text-xs">type</code> field. All types share base fields; each type adds its own.
+      Schema is <code class="text-xs">.loose()</code> — kind-specific fields beyond the base set are allowed for individual kit entries.
     </p>
-    <h3 class="font-semibold mb-3">Base Fields (all types)</h3>
-    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-              <th class="text-left py-3 px-4 font-semibold">Field</th>
-              <th class="text-left py-3 px-4 font-semibold">Type</th>
-              <th class="text-left py-3 px-4 font-semibold">Required</th>
-              <th class="text-left py-3 px-4 font-semibold">Description</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-            {slidesBaseFields.map((f) => (
-              <tr>
-                <td class="py-3 px-4"><code class="text-xs font-medium">{f.field}</code></td>
-                <td class="py-3 px-4"><code class="text-xs">{f.type}</code></td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.required ? 'Yes' : 'No'}</td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <h3 class="font-semibold mb-3">Type-Specific Fields</h3>
-    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-              <th class="text-left py-3 px-4 font-semibold">Type</th>
-              <th class="text-left py-3 px-4 font-semibold">Field</th>
-              <th class="text-left py-3 px-4 font-semibold">Description</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-            {slidesTypeFields.map((f) => (
-              <tr>
-                <td class="py-3 px-4"><code class="text-xs font-medium">{f.type}</code></td>
-                <td class="py-3 px-4"><code class="text-xs font-medium">{f.field}</code></td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tags Schema -->
-  <section class="mb-12">
-    <h2 class="text-xl md:text-2xl font-bold mb-4">Tags Schema</h2>
     <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
@@ -387,7 +304,7 @@ const keyFiles = [
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-            {tagsFields.map((f) => (
+            {kitFields.map((f) => (
               <tr>
                 <td class="py-3 px-4"><code class="text-xs font-medium">{f.field}</code></td>
                 <td class="py-3 px-4"><code class="text-xs">{f.type}</code></td>
@@ -401,9 +318,12 @@ const keyFiles = [
     </div>
   </section>
 
-  <!-- Series Schema -->
+  <!-- Pages Schema -->
   <section class="mb-12">
-    <h2 class="text-xl md:text-2xl font-bold mb-4">Series Schema</h2>
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Pages Schema</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Backs the agent-friendly Markdown endpoints (AEO) — one Markdown twin per HTML route.
+    </p>
     <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
@@ -416,7 +336,7 @@ const keyFiles = [
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-            {seriesFields.map((f) => (
+            {pagesFields.map((f) => (
               <tr>
                 <td class="py-3 px-4"><code class="text-xs font-medium">{f.field}</code></td>
                 <td class="py-3 px-4"><code class="text-xs">{f.type}</code></td>

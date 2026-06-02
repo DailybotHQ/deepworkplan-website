@@ -42,7 +42,7 @@ This agent focuses on:
 - Implementing code changes as specified
 - Creating Astro/Svelte components
 - Creating pages with routing
-- Adding blog posts with Content Collections
+- Adding methodology/spec/kit docs with Content Collections
 - Running validation commands
 - Committing changes incrementally
 - Reporting progress and blockers

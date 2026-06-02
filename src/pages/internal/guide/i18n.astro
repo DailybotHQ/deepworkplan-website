@@ -60,19 +60,14 @@ const parityRules = [
     example: 'src/pages/about.astro + src/pages/es/about.astro',
   },
   {
-    area: 'Blog Posts',
-    rule: 'Every post must exist in both src/content/blog/en/ and src/content/blog/es/ with identical slugs',
-    example: 'en/2026-04-20_my-post.md + es/2026-04-20_my-post.md',
+    area: 'Methodology / Spec / Kit',
+    rule: 'Every methodology, spec, and kit document must exist in both en/ and es/ with identical slugs',
+    example: 'methodology/en/overview.md + methodology/es/overview.md',
   },
   {
     area: 'UI Strings',
     rule: 'Every key in en.ts must also exist in es.ts. New keys must be added to types.ts first.',
     example: 'aboutPage.title in en.ts and es.ts',
-  },
-  {
-    area: 'Slide Decks',
-    rule: 'Every slide deck must exist in both src/content/slides/en/ and src/content/slides/es/',
-    example: 'en/2026-04-25_demo.md + es/2026-04-25_demo.md',
   },
   {
     area: 'Agent Markdown',
@@ -121,7 +116,7 @@ const spanishRules = [
   {
     rule: 'English slugs',
     description:
-      'All filenames, series slugs, and image dirs use English slugs, even for ES content.',
+      'All content filenames use English slugs, even for ES content (same slug for EN and ES).',
     severity: 'Mandatory',
   },
 ];
@@ -129,12 +124,12 @@ const spanishRules = [
 const validationCommands = [
   {
     command:
-      "grep -rn 'pequeno\\|tamano\\|diseno\\|espanol\\|manana' src/content/blog/es/ src/lib/translations/es.ts",
+      "grep -rn 'pequeno\\|tamano\\|diseno\\|espanol\\|manana' src/content/**/es/ src/lib/translations/es.ts",
     description: 'Check for missing ñ in common words',
   },
   {
     command:
-      "grep -rn 'analisis\\|numero\\|codigo\\|ejecucion\\|version\\|pagina\\|titulo' src/content/blog/es/ src/lib/translations/es.ts",
+      "grep -rn 'analisis\\|numero\\|codigo\\|ejecucion\\|version\\|pagina\\|titulo' src/content/**/es/ src/lib/translations/es.ts",
     description: 'Check for missing accent marks',
   },
 ];
