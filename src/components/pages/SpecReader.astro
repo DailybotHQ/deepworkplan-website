@@ -1,6 +1,11 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
+import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 import Kicker from '@/components/editorial/Kicker.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
@@ -26,6 +31,19 @@ const { Content, headings } = await render(entry);
 // In-page TOC: top-level (h2) headings only.
 const toc = headings.filter((h) => h.depth === 2);
 
+/**
+ * Diagram components per spec document (Editorial Interactive Asset system — see
+ * docs/DIAGRAM_COMPONENTS.md). SP-01/SP-04 are spec-specific; SP-02/SP-03/SP-05
+ * reuse the methodology components rather than duplicating art.
+ */
+type DiagramComponent = (typeof AgentLifecycle)[];
+const diagramsBySlug: Record<string, DiagramComponent> = {
+  'agent-protocol': [AgentLifecycle], // SP-01
+  'dwp-specification': [CoreLoop, TaskAnatomy, OutputWorkspace], // SP-03, SP-02, SP-04
+  archetypes: [ArchetypesTree], // SP-05
+};
+const docDiagrams = diagramsBySlug[slugOf(entry.id)] ?? [];
+
 const techArticleSchema = {
   '@context': 'https://schema.org',
   '@type': 'TechArticle',
@@ -47,6 +65,15 @@ const techArticleSchema = {
     </a>
     <div class="mt-6 lg:grid lg:grid-cols-[1fr_16rem] lg:gap-12">
       <article class="min-w-0 max-w-3xl">
+        {
+          docDiagrams.length > 0 && (
+            <div class="mb-8 space-y-8">
+              {docDiagrams.map((Diagram) => (
+                <Diagram lang={lang} />
+              ))}
+            </div>
+          )
+        }
         <div
           class="prose prose-lg max-w-none dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-secondary"
         >

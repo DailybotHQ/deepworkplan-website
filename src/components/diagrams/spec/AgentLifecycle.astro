@@ -1,0 +1,142 @@
+---
+/**
+ * AgentLifecycle (SP-01) — the agent protocol's phases, with Communication
+ * throughout and Safety governing every phase. Spec:
+ * docs/visuals/prompts/03-spec.md#sp-01. Restrained normative register. HTML/CSS;
+ * language-keyed i18n (en fallback); role="img"; dark mode; zero JS.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Agent protocol lifecycle: Onboarding, Planning, Execution, Refinement, and Resumption in sequence (Resumption returns to Execution), with Communication throughout and Safety governing every phase.',
+    communication: 'Communication',
+    phases: ['Onboarding', 'Planning', 'Execution', 'Refinement', 'Resumption'],
+    returns: 'resumes execution',
+    safety: 'Safety',
+    safetyNote: 'governs every phase',
+    caption:
+      'The agent protocol as a lifecycle: ordered phases, a resumable loop, communication throughout, and safety governing every step.',
+  },
+  es: {
+    ariaLabel:
+      'Ciclo de vida del protocolo del agente: Incorporación, Planificación, Ejecución, Refinamiento y Reanudación en secuencia (Reanudación regresa a Ejecución), con Comunicación a lo largo de todo el proceso y Seguridad gobernando cada fase.',
+    communication: 'Comunicación',
+    phases: [
+      'Incorporación',
+      'Planificación',
+      'Ejecución',
+      'Refinamiento',
+      'Reanudación',
+    ],
+    returns: 'reanuda la ejecución',
+    safety: 'Seguridad',
+    safetyNote: 'gobierna cada fase',
+    caption:
+      'El protocolo del agente como ciclo de vida: fases ordenadas, un bucle reanudable, comunicación constante y seguridad que gobierna cada paso.',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<figure class={`editorial-asset lifecycle ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <span class="ea-label lifecycle-top">{t.communication}</span>
+    <ol class="lifecycle-row">
+      {
+        t.phases.map((p, i) => (
+          <li class="lifecycle-phase">
+            <span class="lifecycle-name">{p}</span>
+            {i < t.phases.length - 1 && (
+              <span class="lifecycle-arrow" aria-hidden="true">
+                →
+              </span>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+    <p class="lifecycle-return ea-accent">↩ {t.returns}</p>
+    <div class="lifecycle-safety">
+      <span class="ea-label">{t.safety}</span>
+      <span class="lifecycle-safety-note">{t.safetyNote}</span>
+    </div>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .lifecycle {
+    color: var(--color-ink);
+  }
+  .lifecycle-top {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--color-muted);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .lifecycle-row {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem 0.5rem;
+  }
+  .lifecycle-phase {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem 0.5rem;
+  }
+  .lifecycle-name {
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.4rem 0.7rem;
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    background-color: var(--color-paper);
+    white-space: nowrap;
+  }
+  .lifecycle-arrow {
+    color: var(--color-muted);
+  }
+  .lifecycle-return {
+    text-align: center;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.8rem;
+    margin: 0.6rem 0 0.85rem;
+  }
+  .lifecycle-safety {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.6rem;
+    border: 1px solid var(--color-secondary);
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+  }
+  .lifecycle-safety .ea-label {
+    color: var(--color-secondary);
+    font-size: 0.85rem;
+  }
+  .lifecycle-safety-note {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+  }
+</style>
