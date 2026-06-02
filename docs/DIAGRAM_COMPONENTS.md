@@ -170,9 +170,17 @@ diagram at the right spot:
   Pro: no content-file changes. Con: placement is section-level, not arbitrary
   inline.
 
-**Decision:** Task 2 implements the chosen mechanism end-to-end with `CoreLoop` and
-documents the exact seam here. Homepage diagrams (HP-03/04/05) don't need this —
-they're placed directly in the `.astro` home sections, which already receive `lang`.
+**Decision (Task 2): Option B — reader slug→component map.** Each reader
+(`MethodologyReader`/`SpecReader`/`KitReader`) holds a `diagramsBySlug` map keyed
+by chapter slug (`slugOf(entry.id)`, e.g. `02-core-loop`) → an array of diagram
+components, rendered as **lead figure(s)** between the chapter label and the prose,
+each receiving `lang`. Proven end-to-end with `CoreLoop`: the EN page renders
+"Verify", the ES page "Verificar" — one component, per-language output, no MDX
+prop-propagation risk, no content-file changes. Each area owns its own reader map
+(no shared registry → no cross-task contention). A doc with several diagrams lists
+them in order; precise mid-prose placement via MDX remains a future option.
+Homepage diagrams (HP-03/04/05) don't use this — they're placed directly in the
+`.astro` home sections, which already receive `lang`.
 
 ---
 
@@ -194,7 +202,7 @@ Status: `todo` → `built`. Spec column → entry in `docs/visuals/prompts/`.
 
 | ID | Component | Area dir | Spec | Status |
 | :-- | :-- | :-- | :-- | :-- |
-| ME-02 | `CoreLoop` (reference) | methodology | 02-methodology#me-02 | todo |
+| ME-02 | `CoreLoop` (reference) | methodology | 02-methodology#me-02 | **built** |
 | ME-01 | `RepoAsHarness` | methodology | 02-methodology#me-01 | todo |
 | ME-03 | `TaskAnatomy` | methodology | 02-methodology#me-03 | todo |
 | ME-04 | `PlanTree` | methodology | 02-methodology#me-04 | todo |
