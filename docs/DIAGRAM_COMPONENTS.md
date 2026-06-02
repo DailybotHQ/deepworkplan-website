@@ -177,17 +177,21 @@ diagram at the right spot:
   Pro: no content-file changes. Con: placement is section-level, not arbitrary
   inline.
 
-**Decision (Task 2): Option B — reader slug→component map.** Each reader
-(`MethodologyReader`/`SpecReader`/`KitReader`) holds a `diagramsBySlug` map keyed
-by chapter slug (`slugOf(entry.id)`, e.g. `02-core-loop`) → an array of diagram
-components, rendered as **lead figure(s)** between the chapter label and the prose,
-each receiving `lang`. Proven end-to-end with `CoreLoop`: the EN page renders
-"Verify", the ES page "Verificar" — one component, per-language output, no MDX
-prop-propagation risk, no content-file changes. Each area owns its own reader map
-(no shared registry → no cross-task contention). A doc with several diagrams lists
-them in order; precise mid-prose placement via MDX remains a future option.
-Homepage diagrams (HP-03/04/05) don't use this — they're placed directly in the
-`.astro` home sections, which already receive `lang`.
+**Decision (final): Option A — MDX, in-body at the narrative anchor.** Diagrams
+must sit *where the reader meets the concept*, after the title and a short lead —
+never before the title. So each methodology/spec/kit document is authored as
+**`.mdx`**: it imports its diagram component(s) and places them at the right point
+in the prose. Because `en/` and `es/` are separate files, each hardcodes its own
+language (`<CoreLoop lang="en" />` in the EN file, `lang="es"` in the ES file) — no
+prop-propagation needed, and translation is still one map key per language. Wrap
+each embed with `class="not-prose my-10"` so the figure is isolated from prose
+typography. Collections glob `**/*.{md,mdx}`; the readers render `<Content />`
+unchanged (no slug→component injection — that earlier lead-figure approach was
+dropped because it rendered the diagram before the document title). Placement
+guide: **overview** diagrams go right after the lead; **section figures** go at
+the heading of the section that explains them. Homepage diagrams (HP-03/04/05) are
+placed directly in the `.astro` home sections (after each section's title +
+subtitle), which already receive `lang`.
 
 ---
 

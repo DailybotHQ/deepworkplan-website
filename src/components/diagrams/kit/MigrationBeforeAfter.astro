@@ -50,14 +50,14 @@ const tasks = [1, 2, 3, 4, 5];
     <p class="mba-header ea-label">{t.header}</p>
     <div class="mba-cols">
       <section class="mba-panel">
-        <h4 class="mba-h">{t.withoutTitle}</h4>
+        <p class="mba-h">{t.withoutTitle}</p>
         <div class="mba-big">
           <span>{t.bigChange}</span>
           <span class="mba-fail ea-accent">✗ {t.fails}</span>
         </div>
       </section>
       <section class="mba-panel">
-        <h4 class="mba-h">{t.withTitle}</h4>
+        <p class="mba-h">{t.withTitle}</p>
         <ol class="mba-tasks">
           {
             tasks.map((n) => (

@@ -49,13 +49,13 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
     <p class="uvd-header ea-label">{t.header}</p>
     <div class="uvd-cols">
       <section class="uvd-panel">
-        <h4 class="uvd-h">{t.beforeTitle}</h4>
+        <p class="uvd-h">{t.beforeTitle}</p>
         <ul class="uvd-list uvd-list--before">
           {t.before.map((x) => <li>{x}</li>)}
         </ul>
       </section>
       <section class="uvd-panel uvd-panel--after">
-        <h4 class="uvd-h">{t.afterTitle}</h4>
+        <p class="uvd-h">{t.afterTitle}</p>
         <ul class="uvd-list uvd-list--after">
           {t.after.map((x) => <li>{x}</li>)}
         </ul>

@@ -74,7 +74,7 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
       <div class="arch-branch">
         <span class="ea-label arch-edge">{t.no}</span>
         <div class="arch-leaf">
-          <h4 class="arch-h">{t.individual}</h4>
+          <p class="arch-h">{t.individual}</p>
           <ul class="arch-points">
             {t.indPoints.map((p) => <li>{p}</li>)}
           </ul>
@@ -83,7 +83,7 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
       <div class="arch-branch">
         <span class="ea-label arch-edge">{t.yes}</span>
         <div class="arch-leaf arch-leaf--accent">
-          <h4 class="arch-h">{t.orchestrator}</h4>
+          <p class="arch-h">{t.orchestrator}</p>
           <ul class="arch-points">
             {t.orcPoints.map((p) => <li>{p}</li>)}
           </ul>
