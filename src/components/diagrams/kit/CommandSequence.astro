@@ -1,0 +1,102 @@
+---
+/**
+ * CommandSequence — shared LAYOUT primitive for the six dwp-* command diagrams
+ * (KT-04…KT-09). Not used directly in pages; each command component composes it
+ * with its own content (one component per use case — see docs/DIAGRAM_COMPONENTS.md).
+ * Renders an input → process → output band; the OUTPUT panel carries the accent.
+ * Presentational only — all strings are passed in (already localized by the caller).
+ */
+interface Props {
+  cmd: string;
+  input: string;
+  process: string;
+  output: string;
+  ariaLabel: string;
+  caption: string;
+  class?: string;
+}
+
+const {
+  cmd,
+  input,
+  process,
+  output,
+  ariaLabel,
+  caption,
+  class: className = '',
+} = Astro.props;
+const stages = [
+  { key: 'input', label: input },
+  { key: 'process', label: process },
+  { key: 'output', label: output },
+];
+---
+
+<figure class={`editorial-asset cmdseq ${className}`} role="img" aria-label={ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <code class="cmdseq-kicker">{cmd}</code>
+    <ol class="cmdseq-row">
+      {
+        stages.map((s, i) => (
+          <li class="cmdseq-stage">
+            <span class={`cmdseq-panel${s.key === 'output' ? ' cmdseq-panel--out' : ''}`}>{s.label}</span>
+            {i < stages.length - 1 && (
+              <span class="cmdseq-arrow" aria-hidden="true">
+                →
+              </span>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+  <figcaption class="fig-caption">{caption}</figcaption>
+</figure>
+
+<style>
+  .cmdseq {
+    color: var(--color-ink);
+  }
+  .cmdseq-kicker {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-secondary);
+    margin-bottom: 0.85rem;
+  }
+  .cmdseq-row {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .cmdseq-stage {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 1 auto;
+  }
+  .cmdseq-panel {
+    flex: 1;
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.7rem 0.6rem;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+    line-height: 1.25;
+    background-color: var(--color-paper);
+  }
+  .cmdseq-panel--out {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+  }
+  .cmdseq-arrow {
+    color: var(--color-muted);
+    flex: 0 0 auto;
+  }
+</style>

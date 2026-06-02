@@ -1,0 +1,46 @@
+---
+/**
+ * CmdResume (KT-07) — /dwp-resume as input → process → output.
+ * Spec: docs/visuals/prompts/04-kit.md#kt-07. Composes CommandSequence.
+ */
+import type { Language } from '@/lib/i18n';
+import CommandSequence from './CommandSequence.astro';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'dwp-resume: an interrupted plan has its state read to find the first unchecked task, and execution continues.',
+    input: 'Interrupted plan',
+    process: 'Read state · find first [ ] task',
+    output: 'Execution continues',
+    caption:
+      '/dwp-resume reconstructs state and continues from the first unfinished task.',
+  },
+  es: {
+    ariaLabel:
+      'dwp-resume: a un plan interrumpido se le lee el estado para encontrar la primera tarea sin marcar, y la ejecución continúa.',
+    input: 'Plan interrumpido',
+    process: 'Leer estado · encontrar primera tarea [ ]',
+    output: 'La ejecución continúa',
+    caption:
+      '/dwp-resume reconstruye el estado y continúa desde la primera tarea sin terminar.',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<CommandSequence
+  cmd="/dwp-resume"
+  input={t.input}
+  process={t.process}
+  output={t.output}
+  ariaLabel={t.ariaLabel}
+  caption={t.caption}
+  class={className}
+/>

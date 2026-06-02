@@ -1,0 +1,46 @@
+---
+/**
+ * CmdStatus (KT-09) — /dwp-status as input → process → output (read-only).
+ * Spec: docs/visuals/prompts/04-kit.md#kt-09. Composes CommandSequence.
+ */
+import type { Language } from '@/lib/i18n';
+import CommandSequence from './CommandSequence.astro';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'dwp-status: a plan’s checkboxes and git log are read without executing, producing a status report.',
+    input: 'Plan',
+    process: 'Read checkboxes + git log (read-only)',
+    output: 'Status report',
+    caption:
+      '/dwp-status reports progress read-only — it never executes tasks.',
+  },
+  es: {
+    ariaLabel:
+      'dwp-status: se leen las casillas y el registro git de un plan sin ejecutar, produciendo un informe de estado.',
+    input: 'Plan',
+    process: 'Leer casillas + registro git (solo lectura)',
+    output: 'Informe de estado',
+    caption:
+      '/dwp-status informa del progreso en modo solo lectura — nunca ejecuta tareas.',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<CommandSequence
+  cmd="/dwp-status"
+  input={t.input}
+  process={t.process}
+  output={t.output}
+  ariaLabel={t.ariaLabel}
+  caption={t.caption}
+  class={className}
+/>

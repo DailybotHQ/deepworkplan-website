@@ -1,0 +1,46 @@
+---
+/**
+ * CmdExecute (KT-05) — /dwp-execute as input → process → output.
+ * Spec: docs/visuals/prompts/04-kit.md#kt-05. Composes CommandSequence.
+ */
+import type { Language } from '@/lib/i18n';
+import CommandSequence from './CommandSequence.astro';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'dwp-execute: a plan runs task by task through validate-and-commit, producing completed, committed work.',
+    input: 'Plan',
+    process: 'Task → validate → commit',
+    output: 'Completed, committed work',
+    caption:
+      '/dwp-execute runs the plan task by task, validating and committing each.',
+  },
+  es: {
+    ariaLabel:
+      'dwp-execute: un plan se ejecuta tarea por tarea mediante validar-y-confirmar, produciendo trabajo completado y confirmado.',
+    input: 'Plan',
+    process: 'Tarea → validar → commit',
+    output: 'Trabajo completado y confirmado',
+    caption:
+      '/dwp-execute ejecuta el plan tarea por tarea, validando y confirmando cada una.',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<CommandSequence
+  cmd="/dwp-execute"
+  input={t.input}
+  process={t.process}
+  output={t.output}
+  ariaLabel={t.ariaLabel}
+  caption={t.caption}
+  class={className}
+/>

@@ -1,6 +1,12 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
+import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
+import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
+import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
+import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
+import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
@@ -23,6 +29,22 @@ const { Content } = await render(entry);
 function slugOf(id: string): string {
   return id.replace(/^(en|es)\//, '');
 }
+
+/**
+ * Diagram components per kit document (Editorial Interactive Asset system — see
+ * docs/DIAGRAM_COMPONENTS.md). The six dwp-* command sequences (KT-04…KT-09);
+ * kit feature diagrams (KT-01/02/03/10) are added by their task.
+ */
+type DiagramComponent = (typeof CmdCreate)[];
+const diagramsBySlug: Record<string, DiagramComponent> = {
+  'dwp-create': [CmdCreate],
+  'dwp-execute': [CmdExecute],
+  'dwp-refine': [CmdRefine],
+  'dwp-resume': [CmdResume],
+  'dwp-verify': [CmdVerify],
+  'dwp-status': [CmdStatus],
+};
+const docDiagrams = diagramsBySlug[slugOf(entry.id)] ?? [];
 
 const backHref =
   variant === 'examples' ? `${prefix}/examples` : `${prefix}/kit`;
@@ -81,6 +103,16 @@ const techArticleSchema = {
                 </span>
                 {badge.value}
               </span>
+            ))}
+          </div>
+        )
+      }
+
+      {
+        docDiagrams.length > 0 && (
+          <div class="mt-8 space-y-8">
+            {docDiagrams.map((Diagram) => (
+              <Diagram lang={lang} />
             ))}
           </div>
         )
