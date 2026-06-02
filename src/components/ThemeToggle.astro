@@ -12,6 +12,8 @@
       const isDark = html.classList.toggle("dark");
       const newTheme = isDark ? "dark" : "light";
       localStorage.setItem("theme", newTheme);
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", isDark ? "#14140f" : "#f7f4ec");
       // Event name must match EVENTS.THEME_TOGGLE in src/lib/analytics.ts
       if (window.umami) { window.umami.track("theme_toggle", { theme: newTheme }); }
     };

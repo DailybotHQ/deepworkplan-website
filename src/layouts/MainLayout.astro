@@ -49,7 +49,10 @@ const {
     />
     <slot name="head" />
     <script is:inline>
-  (function(){var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');})();
+  // Default to light on first visit (ignore the device's prefers-color-scheme);
+  // only go dark when the user has explicitly chosen it via the toggle. Sync the
+  // browser-chrome theme-color to the chosen theme.
+  (function(){var d=localStorage.getItem('theme')==='dark';document.documentElement.classList[d?'add':'remove']('dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',d?'#14140f':'#f7f4ec');})();
 </script>
   </head>
   <body
