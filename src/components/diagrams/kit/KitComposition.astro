@@ -1,0 +1,111 @@
+---
+/**
+ * KitComposition (KT-10) — presets + adapters + commands + add-ons compose into
+ * an installed kit applied to your repository. Spec:
+ * docs/visuals/prompts/04-kit.md#kt-10. HTML/CSS; language-keyed i18n (en
+ * fallback); role="img"; dark mode; zero JS.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Presets, adapters, commands, and add-ons combine into an installed kit that is applied to your repository.',
+    sources: ['Presets', 'Adapters', 'Commands', 'Add-ons'],
+    kit: 'Installed kit',
+    repo: 'Your repository',
+    caption:
+      'The kit composes presets, adapters, commands, and add-ons into one installed kit for your repository.',
+  },
+  es: {
+    ariaLabel:
+      'Presets, adaptadores, comandos y complementos se combinan en un kit instalado que se aplica a tu repositorio.',
+    sources: ['Presets', 'Adaptadores', 'Comandos', 'Complementos'],
+    kit: 'Kit instalado',
+    repo: 'Tu repositorio',
+    caption:
+      'El kit compone presets, adaptadores, comandos y complementos en un único kit instalado para tu repositorio.',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<figure class={`editorial-asset kitcomp ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body kitcomp-flow">
+    <ul class="kitcomp-sources">
+      {t.sources.map((s) => <li class="kitcomp-source">{s}</li>)}
+    </ul>
+    <span class="kitcomp-arrow ea-accent" aria-hidden="true">→</span>
+    <div class="kitcomp-kit ea-accent">{t.kit}</div>
+    <span class="kitcomp-arrow" aria-hidden="true">→</span>
+    <div class="kitcomp-repo">{t.repo}</div>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .kitcomp {
+    color: var(--color-ink);
+  }
+  .kitcomp-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  @media (min-width: 720px) {
+    .kitcomp-flow {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+  .kitcomp-sources {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .kitcomp-source {
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.5rem 0.8rem;
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    text-align: center;
+    background-color: var(--color-paper);
+  }
+  .kitcomp-arrow {
+    font-size: 1.2rem;
+    transform: rotate(90deg);
+  }
+  @media (min-width: 720px) {
+    .kitcomp-arrow {
+      transform: none;
+    }
+  }
+  .kitcomp-kit {
+    border: 1.5px solid var(--color-secondary);
+    border-radius: 6px;
+    padding: 0.7rem 1.1rem;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    text-align: center;
+  }
+  .kitcomp-repo {
+    border: 1px solid var(--color-ink);
+    border-radius: 6px;
+    padding: 0.7rem 1.1rem;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    text-align: center;
+  }
+</style>

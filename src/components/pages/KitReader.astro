@@ -7,6 +7,9 @@ import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
 import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
 import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
+import MigrationBeforeAfter from '@/components/diagrams/kit/MigrationBeforeAfter.astro';
+import OnboardFlow from '@/components/diagrams/kit/OnboardFlow.astro';
+import UnguidedVsDwp from '@/components/diagrams/kit/UnguidedVsDwp.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
@@ -43,6 +46,9 @@ const diagramsBySlug: Record<string, DiagramComponent> = {
   'dwp-resume': [CmdResume],
   'dwp-verify': [CmdVerify],
   'dwp-status': [CmdStatus],
+  'framework-migration': [MigrationBeforeAfter], // KT-01
+  'before-after': [UnguidedVsDwp], // KT-02
+  'onboard-legacy-service': [OnboardFlow], // KT-03
 };
 const docDiagrams = diagramsBySlug[slugOf(entry.id)] ?? [];
 

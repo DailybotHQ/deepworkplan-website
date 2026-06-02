@@ -1,0 +1,133 @@
+---
+/**
+ * UnguidedVsDwp (KT-02) — an unguided agent drifts vs a DWP-guided agent executing
+ * ordered, logged, gated work. Spec: docs/visuals/prompts/04-kit.md#kt-02.
+ * Two-panel HTML/CSS; language-keyed i18n (en fallback); role="img"; dark; zero JS.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Before DWP an agent drifts with lost context and a failing build; after DWP the agent advances along ordered tasks with logged progress and passing validation gates.',
+    header: 'Drift → directed execution',
+    beforeTitle: 'Before DWP',
+    before: ['Context window full', 'Decisions forgotten', 'Build ✗'],
+    afterTitle: 'After DWP',
+    after: ['Ordered tasks', 'PROGRESS.md logged', 'Gates pass'],
+    caption:
+      'Without structure, agents drift; with a Deep Work Plan, execution is ordered, logged, and gated.',
+  },
+  es: {
+    ariaLabel:
+      'Antes de DWP un agente se desvía con contexto perdido y un build que falla; después de DWP el agente avanza por tareas ordenadas con progreso registrado y compuertas de validación superadas.',
+    header: 'Desvío → ejecución dirigida',
+    beforeTitle: 'Antes de DWP',
+    before: ['Ventana de contexto llena', 'Decisiones olvidadas', 'Build ✗'],
+    afterTitle: 'Después de DWP',
+    after: [
+      'Tareas ordenadas',
+      'PROGRESS.md registrado',
+      'Compuertas superadas',
+    ],
+    caption:
+      'Sin estructura, los agentes se desvían; con un Deep Work Plan, la ejecución es ordenada, registrada y con compuertas.',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<figure class={`editorial-asset uvd ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <p class="uvd-header ea-label">{t.header}</p>
+    <div class="uvd-cols">
+      <section class="uvd-panel">
+        <h4 class="uvd-h">{t.beforeTitle}</h4>
+        <ul class="uvd-list uvd-list--before">
+          {t.before.map((x) => <li>{x}</li>)}
+        </ul>
+      </section>
+      <section class="uvd-panel uvd-panel--after">
+        <h4 class="uvd-h">{t.afterTitle}</h4>
+        <ul class="uvd-list uvd-list--after">
+          {t.after.map((x) => <li>{x}</li>)}
+        </ul>
+      </section>
+    </div>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .uvd {
+    color: var(--color-ink);
+  }
+  .uvd-header {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    margin-bottom: 0.85rem;
+  }
+  .uvd-cols {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  @media (min-width: 600px) {
+    .uvd-cols {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .uvd-panel {
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.9rem;
+    background-color: var(--color-paper);
+  }
+  .uvd-panel--after {
+    border-color: var(--color-secondary);
+  }
+  .uvd-h {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin: 0 0 0.6rem;
+  }
+  .uvd-panel--after .uvd-h {
+    color: var(--color-secondary);
+  }
+  .uvd-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+  }
+  .uvd-list li {
+    padding-left: 1.1rem;
+    position: relative;
+  }
+  .uvd-list--before li::before {
+    content: '·';
+    position: absolute;
+    left: 0.3rem;
+    color: var(--color-muted);
+  }
+  .uvd-list--after li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+    font-weight: 700;
+  }
+</style>

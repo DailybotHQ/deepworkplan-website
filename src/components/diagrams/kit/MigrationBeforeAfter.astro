@@ -1,0 +1,158 @@
+---
+/**
+ * MigrationBeforeAfter (KT-01) — a framework migration as one big risky change vs
+ * decomposed, gated tasks. Spec: docs/visuals/prompts/04-kit.md#kt-01.
+ * Two-panel HTML/CSS; language-keyed i18n (en fallback); role="img"; dark; zero JS.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Without a plan, a framework migration is one big tangled change that fails the build; as a Deep Work Plan, the same goal is decomposed into ordered tasks with validation gates that pass.',
+    header: 'One big change → ordered, gated tasks',
+    withoutTitle: 'Without a plan',
+    bigChange: 'Big migration',
+    fails: 'Build fails',
+    withTitle: 'As a Deep Work Plan',
+    task: 'Task',
+    gate: 'gate',
+    caption:
+      'A migration as one big change drifts and breaks; the same migration as ordered, gated tasks lands safely and auditably.',
+  },
+  es: {
+    ariaLabel:
+      'Sin un plan, una migración de framework es un gran cambio enredado que rompe el build; como un Deep Work Plan, el mismo objetivo se descompone en tareas ordenadas con compuertas de validación que se superan.',
+    header: 'Un gran cambio → tareas ordenadas y con compuertas',
+    withoutTitle: 'Sin un plan',
+    bigChange: 'Gran migración',
+    fails: 'El build falla',
+    withTitle: 'Como un Deep Work Plan',
+    task: 'Tarea',
+    gate: 'compuerta',
+    caption:
+      'Una migración como un único gran cambio se desvía y se rompe; la misma migración como tareas ordenadas y con compuertas llega de forma segura y auditable.',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+const tasks = [1, 2, 3, 4, 5];
+---
+
+<figure class={`editorial-asset mba ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <p class="mba-header ea-label">{t.header}</p>
+    <div class="mba-cols">
+      <section class="mba-panel">
+        <h4 class="mba-h">{t.withoutTitle}</h4>
+        <div class="mba-big">
+          <span>{t.bigChange}</span>
+          <span class="mba-fail ea-accent">✗ {t.fails}</span>
+        </div>
+      </section>
+      <section class="mba-panel">
+        <h4 class="mba-h">{t.withTitle}</h4>
+        <ol class="mba-tasks">
+          {
+            tasks.map((n) => (
+              <li class="mba-task">
+                <span class="mba-check ea-accent" aria-hidden="true">
+                  ✓
+                </span>
+                <span>
+                  {t.task} {n}
+                </span>
+                <span class="mba-gate" aria-hidden="true">
+                  ⬡ {t.gate}
+                </span>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+    </div>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .mba {
+    color: var(--color-ink);
+  }
+  .mba-header {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    margin-bottom: 0.85rem;
+  }
+  .mba-cols {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  @media (min-width: 600px) {
+    .mba-cols {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .mba-panel {
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.9rem;
+    background-color: var(--color-paper);
+  }
+  .mba-h {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin: 0 0 0.7rem;
+  }
+  .mba-big {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 8rem;
+    border: 1.5px dashed var(--color-line);
+    border-radius: 4px;
+    font-family: var(--font-serif);
+    font-weight: 600;
+  }
+  .mba-fail {
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .mba-tasks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .mba-task {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.4rem 0.6rem;
+  }
+  .mba-check {
+    font-weight: 700;
+  }
+  .mba-gate {
+    margin-left: auto;
+    font-size: 0.72rem;
+    color: var(--color-muted);
+  }
+</style>
