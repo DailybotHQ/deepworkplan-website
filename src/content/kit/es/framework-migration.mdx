@@ -1,0 +1,38 @@
+---
+title: "Una migración de framework"
+description: "Un recorrido ilustrativo de una migración de framework de largo alcance ejecutada como un Deep Work Plan — el tipo de trabajo de varias horas y muchos archivos donde los agentes suelen desviarse."
+kind: example
+lang: es
+order: 3
+---
+import MigrationBeforeAfter from '@/components/diagrams/kit/MigrationBeforeAfter.astro';
+
+# Una migración de framework
+
+Un recorrido ilustrativo del trabajo para el que DWP está hecho: una migración que abarca decenas de archivos y varias horas — lo bastante larga como para que un agente sin guía pierda el hilo.
+
+## El objetivo
+
+<MigrationBeforeAfter lang="es" class="not-prose my-10" />
+
+"Migrar la capa de datos del ORM antiguo al nuevo en todo el servicio."
+
+## Sin un plan
+
+Un agente edita modelos hasta que su contexto se llena de cambios a medio terminar, olvida qué sitios de llamada ya convirtió y deja el build en rojo sin registro de lo que falta. Reanudar significa reconstruir su propio razonamiento a partir de un registro de chat.
+
+## Como un Deep Work Plan
+
+`/dwp-create` descompone el objetivo en tareas atómicas y ordenadas, cada una con criterios de aceptación y una puerta de validación:
+
+1. Introducir el nuevo ORM junto al antiguo (sin cambio de comportamiento; puerta: build + pruebas en verde).
+2. Migrar los modelos y sitios de llamada del módulo A (puerta: pruebas del módulo A en verde).
+3. Repetir por módulo, una tarea cada uno — el progreso se registra tras cada tarea.
+4. Eliminar el ORM antiguo y sus adaptadores (puerta: no quedan referencias; suite completa en verde).
+5. Actualizar los docs y los READMEs por módulo.
+
+`/dwp-execute` ejecuta las tareas en orden, confirmando tras cada puerta superada y actualizando `PROGRESS.md`. Si la ventana de contexto se reinicia a mitad de camino, `/dwp-resume` lee el plan y el progreso desde el disco y continúa en la siguiente tarea sin marcar.
+
+## Resultado
+
+La migración aterriza como una secuencia de commits pequeños, revisables y validados de forma individual — y sobrevive a las interrupciones, porque el plan, no la conversación, es la fuente de verdad.

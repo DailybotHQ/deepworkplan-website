@@ -1,0 +1,44 @@
+---
+title: Plan and task templates
+description: "The structure of plan and task files, the two mandatory final tasks every plan must end with, and the README and PROGRESS conventions that keep a plan readable."
+order: 3
+lang: en
+summary: How plans and tasks are structured on disk, and the conventions that keep them readable.
+icon: document
+---
+import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
+
+# Plan and task templates
+
+A Deep Work Plan is a directory of markdown files. The shape of that directory — and of each file inside it — is what makes a plan reviewable by both humans and agents.
+
+## Plan structure
+
+<PlanTree lang="en" class="not-prose my-10" />
+
+A plan is a directory under `.dwp/plans/` named `PLAN_<slug>/`. It contains:
+
+- `README.md` — the plan overview: goal, source material, task table, and status.
+- One file per task, named `<n>.task_<slug>.md`.
+- `PROGRESS.md` — a running log of execution.
+
+## Task file structure
+
+Each task file is named `<n>.task_<slug>.md` and follows the nine-section anatomy: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, and Completion & Log. The sections always appear in that order so any reader knows where to look. Each task re-anchors to the plan's goal before it acts, which keeps an agent from drifting over a long, multi-hour horizon.
+
+## The two mandatory final tasks
+
+Every plan must end with two standard tasks. They ensure that knowledge is captured and that stakeholders are informed:
+
+1. **Skills & Agents Discovery** — identify the reusable skills and agents created during the plan, so the work compounds beyond this single effort.
+2. **Executive Report** — a concise summary of outcomes written for stakeholders, distinguishing what was delivered from what remains.
+
+## README and PROGRESS conventions
+
+The plan `README.md` must contain a title (`# Deep Work Plan: <name>`), a prose goal statement, an optional source-material section, a task table (number, task name, status checkbox), and a plan-status line in the form `<n>/<total> tasks complete`.
+
+`PROGRESS.md` is an append-only execution log. Each entry records an ISO 8601 timestamp, the task number and name, what was done, and any deviations or skip reasons. Because it only ever grows, it is a reliable history of how the plan actually unfolded.
+
+## Headings and cross-references
+
+All headings use sentence case, and documents avoid marketing language and exclamation marks. These conventions keep plans consistent across agents and over time.

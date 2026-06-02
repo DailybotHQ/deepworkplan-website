@@ -1,12 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
-import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
-import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
-import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
-import RepoAsHarness from '@/components/diagrams/methodology/RepoAsHarness.astro';
-import SkillsAgents from '@/components/diagrams/methodology/SkillsAgents.astro';
-import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
 import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
@@ -30,21 +24,8 @@ function slugOf(id: string): string {
   return id.replace(/^(en|es)\//, '');
 }
 
-/**
- * Diagram components embedded per methodology chapter (Editorial Interactive
- * Asset system — see docs/DIAGRAM_COMPONENTS.md). Keyed by chapter slug; each
- * mapped component renders as a lead figure and receives `lang` for its inline
- * i18n. Extend this map as diagram components are added.
- */
-type DiagramComponent = (typeof CoreLoop)[];
-const diagramsBySlug: Record<string, DiagramComponent> = {
-  '01-manifesto': [RepoAsHarness],
-  '02-core-loop': [CoreLoop, TaskAnatomy],
-  '03-templates': [PlanTree],
-  '04-skills-agents': [SkillsAgents],
-  '05-archetypes': [ArchetypesTree],
-};
-const chapterDiagrams = diagramsBySlug[slugOf(entry.id)] ?? [];
+// Diagram components are embedded in-body via MDX at the right point in each
+// chapter's narrative (see docs/DIAGRAM_COMPONENTS.md §5) — not injected here.
 
 const chapters = (await getCollection('methodology'))
   .filter((c) => c.data.lang === lang)
@@ -78,16 +59,6 @@ const articleSchema = {
       <p class="kicker mt-6">
         {m.chapterLabel} {String(entry.data.order).padStart(2, '0')}
       </p>
-
-      {
-        chapterDiagrams.length > 0 && (
-          <div class="mt-8 space-y-8">
-            {chapterDiagrams.map((Diagram) => (
-              <Diagram lang={lang} />
-            ))}
-          </div>
-        )
-      }
 
       <div
         class="prose prose-lg max-w-none dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-secondary mt-4"
