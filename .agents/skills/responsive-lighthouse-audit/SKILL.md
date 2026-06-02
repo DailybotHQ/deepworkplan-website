@@ -44,10 +44,18 @@ IETF Content-Signal directive, which Lighthouse's RFC-9309 audit rejects, droppi
 SEO to ~0.92. That is a **config artifact, not a defect**; never "fix" it by editing
 robots.txt or lowering SEO.
 
+Each form factor has a **base** config (4 core URLs — the fast CI gate) and a
+**full** config (14 URLs — manual/thorough sweep). CI runs only the base configs so
+GitHub Actions stays fast; run the full ones locally before merging big UI changes.
+
 ```bash
-pnpm run build           # Lighthouse audits dist/ — always build first
-pnpm run lighthouse      # mobile (lighthouserc.cjs)
-pnpm run lighthouse:desktop  # desktop (lighthouserc.desktop.cjs)
+pnpm run build                  # Lighthouse audits dist/ — always build first
+# Base (CI gate, 4 core URLs, asserts 1.0):
+pnpm run lighthouse             # mobile  (lighthouserc.cjs)
+pnpm run lighthouse:desktop     # desktop (lighthouserc.desktop.cjs)
+# Full (manual, 14 URLs):
+pnpm run lighthouse:full          # mobile  (lighthouserc.full.cjs)
+pnpm run lighthouse:desktop:full  # desktop (lighthouserc.desktop.full.cjs)
 ```
 
 Lighthouse asserts on the **median** of N runs — a single bad run (e.g. a TBT/FID

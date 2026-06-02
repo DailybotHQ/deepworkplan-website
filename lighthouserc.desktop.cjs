@@ -2,29 +2,10 @@ module.exports = {
   ci: {
     collect: {
       staticDistDir: './dist',
-      url: [
-        // Base pages
-        '/',
-        '/about/',
-        // Methodology reader (primary DWP content): index + a chapter
-        '/methodology/',
-        '/methodology/01-manifesto/',
-        // Specification reader: index + a normative doc (TOC island)
-        '/spec/',
-        '/spec/dwp-specification/',
-        // Kit catalog: index + a detail entry
-        '/kit/',
-        '/kit/generic/',
-        // Examples gallery + quickstart
-        '/examples/',
-        '/quickstart/',
-        // Form page (contact)
-        '/contact/',
-        // i18n parity (Spanish home + reader index + chapter)
-        '/es/',
-        '/es/methodology/',
-        '/es/spec/',
-      ],
+      // Lean CI gate: the 4 core URLs (mirrors lighthouserc.cjs mobile set) so the
+      // desktop run stays fast in GitHub Actions. For the full URL sweep use
+      // `lighthouse:desktop:full` (lighthouserc.desktop.full.cjs).
+      url: ['/', '/about/', '/methodology/', '/es/'],
       numberOfRuns: 3,
       settings: {
         // Desktop emulation (LHCI defaults to mobile). Mirrors lighthouserc.cjs

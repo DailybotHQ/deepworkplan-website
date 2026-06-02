@@ -37,6 +37,7 @@
     "lighthouse": "lhci autorun",
     "lighthouse:full": "lhci autorun --config=lighthouserc.full.cjs",
     "lighthouse:desktop": "lhci autorun --config=lighthouserc.desktop.cjs",
+    "lighthouse:desktop:full": "lhci autorun --config=lighthouserc.desktop.full.cjs",
     "release": "bash .github/scripts/prepare_release.sh"
   },
   "dependencies": {
