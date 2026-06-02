@@ -104,7 +104,7 @@ For this Astro repository, check:
 ### Documentation
 - [ ] Complex code is documented
 - [ ] README updated if adding to folder
-- [ ] Frontmatter complete for blog posts
+- [ ] Frontmatter complete for methodology/spec/kit docs
 
 ## Workflow
 

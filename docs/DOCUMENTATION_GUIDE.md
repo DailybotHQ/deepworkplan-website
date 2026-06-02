@@ -47,10 +47,10 @@ docs/
 For complex components, add README:
 
 ```
-src/components/blog/
+src/components/layout/
 ├── README.md              # Component overview
-├── BlogCard.svelte
-├── BlogGrid.svelte
+├── Header.svelte
+├── MobileMenu.svelte
 └── ...
 ```
 
@@ -124,19 +124,19 @@ Always include:
 3. **Complete examples** that work
 
 ```markdown
-### Creating a Blog Post
+### Creating a Methodology Doc
 
-Create a new file in `src/content/blog/`:
+Create a new file in `src/content/methodology/{en,es}/`:
 
 \`\`\`markdown
 ---
-title: "My Post Title"
+title: "Introduction"
 description: "Brief description"
-pubDate: 2024-01-15
-tags: ["tech"]
+order: 1
+lang: "en"
 ---
 
-Post content here...
+Doc content here...
 \`\`\`
 ```
 
@@ -176,8 +176,8 @@ docs/
 ├── STANDARDS.md               # ✅ UPPER_SNAKE_CASE
 └── features/
     ├── README.md              # Index (exception: always README.md)
-    ├── BLOG_SEARCH.md         # ✅ UPPER_SNAKE_CASE
     ├── DARK_MODE.md           # ✅ UPPER_SNAKE_CASE
+    ├── IMAGE_OPTIMIZATION.md  # ✅ UPPER_SNAKE_CASE
     └── PUBLIC_ASSETS.md       # ✅ UPPER_SNAKE_CASE
 ```
 

@@ -12,7 +12,7 @@ const metaTags = [
     tag: 'meta description',
     source: 'BaseHead.astro',
     description:
-      'From page translations or blog frontmatter. Target: 130-160 characters.',
+      'From page translations or content frontmatter. Target: 130-160 characters.',
   },
   {
     tag: 'og:title',
@@ -28,17 +28,17 @@ const metaTags = [
     tag: 'og:image',
     source: 'BaseHead.astro',
     description:
-      'Social sharing image. Blog posts use heroImage; pages use default OG image.',
+      'Social sharing image. Pages use the on-brand default OG card.',
   },
   {
     tag: 'og:type',
     source: 'BaseHead.astro',
-    description: '"article" for blog posts, "website" for other pages',
+    description: '"article" for methodology/spec articles, "website" otherwise',
   },
   {
     tag: 'twitter:card',
     source: 'BaseHead.astro',
-    description: 'summary_large_image for posts with hero, summary otherwise',
+    description: 'summary_large_image with the OG card image',
   },
   {
     tag: 'twitter:title',
@@ -54,30 +54,36 @@ const metaTags = [
 
 const jsonLdTypes = [
   {
-    type: 'Article',
-    usedOn: 'Blog post pages',
+    type: 'WebSite + Organization',
+    usedOn: 'All pages (BaseHead.astro)',
     description:
-      'Structured data for individual blog posts with author, datePublished, dateModified, image',
+      'Site-level structured data with name, URL, and publisher Organization',
+    schema: 'schema.org/WebSite',
+  },
+  {
+    type: 'Article',
+    usedOn: 'Methodology reader pages',
+    description:
+      'Structured data for methodology articles (title, description, dates)',
     schema: 'schema.org/Article',
   },
   {
-    type: 'PresentationDigitalDocument',
-    usedOn: 'Slide deck pages',
-    description:
-      'Structured data for presentation decks with event, date, description',
-    schema: 'schema.org/PresentationDigitalDocument',
+    type: 'TechArticle',
+    usedOn: 'Spec and kit reader pages',
+    description: 'Structured data for specification sections and kit entries',
+    schema: 'schema.org/TechArticle',
+  },
+  {
+    type: 'HowTo',
+    usedOn: 'Quickstart and /init pages',
+    description: 'Step-by-step adoption instructions as HowToStep items',
+    schema: 'schema.org/HowTo',
   },
   {
     type: 'BreadcrumbList',
-    usedOn: 'All pages with breadcrumbs',
+    usedOn: 'Reader pages with breadcrumbs',
     description: 'Navigation breadcrumb trail for search engines',
     schema: 'schema.org/BreadcrumbList',
-  },
-  {
-    type: 'WebSite',
-    usedOn: 'Homepage',
-    description: 'Site-level structured data with name, URL, search action',
-    schema: 'schema.org/WebSite',
   },
 ];
 
@@ -86,16 +92,6 @@ const markdownTwins = [
     htmlPath: '/about',
     mdPath: '/about.md',
     contentPath: 'src/content/pages/{en,es}/about.md',
-  },
-  {
-    htmlPath: '/blog',
-    mdPath: '/blog.md',
-    contentPath: 'src/content/pages/{en,es}/blog.md',
-  },
-  {
-    htmlPath: '/blog/{slug}',
-    mdPath: '/blog/{slug}.md',
-    contentPath: 'Auto-generated from blog content',
   },
   {
     htmlPath: '/methodology',
@@ -112,6 +108,16 @@ const markdownTwins = [
     mdPath: '/spec.md',
     contentPath: 'src/content/pages/{en,es}/spec.md',
   },
+  {
+    htmlPath: '/spec/{slug}',
+    mdPath: '/spec/{slug}.md',
+    contentPath: 'Auto-generated from spec content',
+  },
+  {
+    htmlPath: '/kit/{slug}',
+    mdPath: '/kit/{slug}.md',
+    contentPath: 'Auto-generated from kit content',
+  },
 ];
 
 const sitemapRules = [
@@ -126,12 +132,8 @@ const sitemapRules = [
       'Pages under /internal/ are filtered out via sitemap configuration',
   },
   {
-    rule: 'Demo posts excluded',
-    description: 'Posts in _demo/ folders are not included in the sitemap',
-  },
-  {
-    rule: 'Draft posts excluded',
-    description: 'Posts with draft: true are excluded from the sitemap',
+    rule: 'Markdown twins excluded',
+    description: 'The .md agent endpoints are not listed in the sitemap',
   },
   {
     rule: 'Both languages included',
@@ -180,19 +182,18 @@ const verificationRules = [
 
 const keywordsRules = [
   {
-    rule: '5-8 keywords per post',
+    rule: 'Optional keywords prop',
     description:
-      'Each blog post frontmatter includes a keywords array with 5-8 targeted terms',
+      'BaseHead.astro accepts an optional keywords array and renders a <meta name="keywords"> tag',
   },
   {
     rule: 'Per-language keywords',
-    description:
-      'EN and ES posts have independently chosen keywords appropriate to each language',
+    description: 'EN and ES pages choose keywords appropriate to each language',
   },
   {
-    rule: 'Frontmatter array',
+    rule: 'String array',
     description:
-      'keywords: ["astro", "static site", "blog", "web development", "performance"]',
+      'keywords: ["deep work plan", "spec-driven development", "agent harness", "ai-first repo"]',
   },
 ];
 ---
@@ -203,7 +204,7 @@ const keywordsRules = [
   <section class="mb-12">
     <h2 class="text-xl md:text-2xl font-bold mb-4">Meta Tags</h2>
     <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-      All meta tags are rendered by <code class="text-xs">BaseHead.astro</code> inside <code class="text-xs">MainLayout</code>. Blog posts and pages pass title, description, and image props.
+      All meta tags are rendered by <code class="text-xs">BaseHead.astro</code> inside <code class="text-xs">MainLayout</code>. Pages and reader articles pass title, description, and image props.
     </p>
     <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
       <div class="overflow-x-auto">

@@ -43,14 +43,13 @@ All pages are available in:
 - English (default): /
 - Spanish: /es/
 
-Each language has its own RSS feed and full page set.
+Each language has its own full page set.
 
 ## Content Model
 
 - Bilingual routing: English base routes (`/`, `/methodology`, `/spec`, etc.) and Spanish routes under `/es/`
 - Methodology, spec, and kit content authored with Astro Content Collections supporting Markdown and MDX
 - All pages use structured data (JSON-LD) for machine readability
-- The blog engine exists but is dormant, reserved for future case studies
 
 ## Topic Areas
 
@@ -112,8 +111,6 @@ curl -H "Accept: text/markdown" https://deepworkplan.com/methodology
 
 ## Feeds & Discovery
 
-- RSS Feed (English): /rss.xml
-- RSS Feed (Spanish): /es/rss.xml
 - Sitemap: /sitemap-index.xml
 - robots.txt: /robots.txt
 - This file: /llms-full.txt

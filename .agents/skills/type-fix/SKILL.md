@@ -134,8 +134,8 @@ import type { APIRoute } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 
 // Content Collection types
-type BlogPost = CollectionEntry<'blog'>;
-type TagEntry = CollectionEntry<'tags'>;
+type MethodologyDoc = CollectionEntry<'methodology'>;
+type KitEntry = CollectionEntry<'kit'>;
 
 // Component props
 interface Props {

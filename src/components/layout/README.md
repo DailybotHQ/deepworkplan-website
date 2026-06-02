@@ -22,27 +22,23 @@ The main navigation header component with desktop and mobile navigation.
 
 **Features:**
 - Sticky positioning (stays at top when scrolling)
-- Desktop navigation with dropdown menus
+- Desktop navigation links
 - Mobile hamburger menu trigger
-- Language switcher (EN/ES)
+- Language switcher (EN/ES) disclosure dropdown
 - Logo link to homepage
-- About section dropdown with sub-pages
 - Dark mode compatible
 
 **Internal State:**
 - `open` - Mobile menu visibility
-- `aboutOpen` - About dropdown visibility
 - `languageOpen` - Language dropdown visibility
 
 **Desktop Navigation Links:**
-- Home (`/`)
-- Blog (`/blog`)
-- About (dropdown with sub-pages)
-- Contact (`/contact`)
-- Language switcher
-
-**About Dropdown Sub-pages:**
-- About Me, CV, Dailybot, Entrepreneur, Tech Talks, Maker/Builder, Trading, Foodie Enthusiast, Hobbies
+- Methodology (`/methodology`)
+- Spec (`/spec`)
+- Kit (`/kit`)
+- Examples (`/examples`)
+- GitHub (external repo link)
+- Language switcher (EN/ES)
 
 **Usage in MainLayout:**
 
@@ -74,7 +70,6 @@ Full-screen mobile navigation overlay menu.
 - Background opacity effect
 
 **Internal State:**
-- `aboutOpen` - About section expanded
 - `languageOpen` - Language section expanded
 
 **Transitions:**
@@ -126,19 +121,11 @@ Both components use:
 Header
 ├── Logo (link to /)
 ├── Desktop Navigation (hidden on mobile)
-│   ├── Home
-│   ├── Blog
-│   ├── About (dropdown)
-│   │   ├── About Me
-│   │   ├── CV
-│   │   ├── Dailybot
-│   │   ├── Entrepreneur
-│   │   ├── Tech Talks
-│   │   ├── Maker / Builder
-│   │   ├── Trading
-│   │   ├── Foodie Enthusiast
-│   │   └── Hobbies
-│   ├── Contact
+│   ├── Methodology
+│   ├── Spec
+│   ├── Kit
+│   ├── Examples
+│   ├── GitHub (external)
 │   └── Language Switcher
 │       ├── 🇬🇧 EN
 │       └── 🇪🇸 ES
@@ -151,8 +138,7 @@ Header
 
 - `aria-label` on buttons
 - `aria-expanded` for dropdown states
-- `aria-controls` linking buttons to dropdowns
-- `role="menu"` on dropdown containers
+- Disclosure pattern for the language dropdown (not `role="menu"`)
 - Keyboard navigation support via `tabindex`
 - Screen reader text for icons
 

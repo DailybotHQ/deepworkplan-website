@@ -9,18 +9,18 @@ This document defines the **canonical coding rules** for all contributors and AI
 **ALL code, comments, documentation, and commit messages MUST be in English.**
 
 ✅ **Do:**
-- Variable names: `pageTitle`, `blogPosts`, `isMenuOpen`
-- Comments: `// Fetch blog posts sorted by date`
+- Variable names: `pageTitle`, `methodologyDocs`, `isMenuOpen`
+- Comments: `// Fetch methodology docs sorted by order`
 - Commit messages: `feat: add dark mode toggle`
 
 ❌ **Don't:**
-- Variable names: `tituloPagina`, `publicaciones`
-- Comments: `// Obtener publicaciones del blog`
+- Variable names: `tituloPagina`, `documentos`
+- Comments: `// Obtener los documentos de la metodología`
 - Commit messages: `feat: agregar modo oscuro`
 
 ### Orthography & Diacritical Marks (MANDATORY)
 
-**Correct spelling is essential in ALL languages.** Every piece of user-facing text — blog posts, translation strings, UI labels, descriptions — MUST use proper orthography, including diacritical marks (accents, tildes, ñ).
+**Correct spelling is essential in ALL languages.** Every piece of user-facing text — methodology/spec/kit content, translation strings, UI labels, descriptions — MUST use proper orthography, including diacritical marks (accents, tildes, ñ).
 
 **Spanish orthography rules:**
 
@@ -37,7 +37,7 @@ This document defines the **canonical coding rules** for all contributors and AI
 
 **Pre-commit check for Spanish content:**
 
-Before committing any Spanish text (blog posts, translations, UI strings), verify:
+Before committing any Spanish text (methodology/spec/kit content, translations, UI strings), verify:
 - [ ] All ñ characters are present (search for `pequeno`, `tamano`, `ano`, `diseno`, `espanol`)
 - [ ] All accented vowels are present (search for `analisis`, `numero`, `codigo`, `ejecucion`, `version`)
 - [ ] Question words have accents when interrogative (`cómo`, `qué`, `dónde`)
@@ -59,12 +59,12 @@ function formatDate(date: Date): string {
 interface Props {
   title: string;
   description?: string;
-  tags?: string[];
+  order?: number;
 }
 
 // Good: Use Astro's built-in types
 import type { CollectionEntry } from 'astro:content';
-type BlogPost = CollectionEntry<'blog'>;
+type MethodologyDoc = CollectionEntry<'methodology'>;
 ```
 
 ### Type Inference
@@ -73,7 +73,7 @@ Let TypeScript infer types when obvious:
 
 ```typescript
 // Good: Inferred as string
-const title = 'My Blog Post';
+const title = 'Methodology Overview';
 
 // Good: Inferred as number[]
 const numbers = [1, 2, 3];
@@ -112,7 +112,7 @@ import { getCollection } from 'astro:content';
 // 3. Internal project modules (using @ alias)
 import Header from '@/components/layout/Header.svelte';
 import { SITE_TITLE, SITE_DESCRIPTION } from '@/lib/constances';
-import { getBlogPosts } from '@/lib/blog';
+import { getTranslations } from '@/lib/translations';
 
 // 4. Type imports (separate group)
 import type { APIRoute } from 'astro';
@@ -182,7 +182,7 @@ interface Props {
 const { title, description = 'Default description' } = Astro.props;
 
 // 4. Data fetching and logic
-const posts = await getCollection('blog');
+const docs = await getCollection('methodology', ({ data }) => data.lang === 'en');
 ---
 
 <!-- 5. Template -->
@@ -208,24 +208,27 @@ Use for interactive, client-side components:
 <script lang="ts">
   // 1. Imports
   import { onMount } from 'svelte';
-  import type { BlogPost } from '@/lib/types';
 
   // 2. Props with TypeScript
+  interface NavItem {
+    title: string;
+    href: string;
+  }
   interface Props {
-    posts: BlogPost[];
-    initialPage?: number;
+    items: NavItem[];
+    initialOpen?: boolean;
   }
 
-  let { posts, initialPage = 1 }: Props = $props();
+  let { items, initialOpen = false }: Props = $props();
 
   // 3. State
-  let currentPage = $state(initialPage);
-  let searchQuery = $state('');
+  let isOpen = $state(initialOpen);
+  let query = $state('');
 
   // 4. Derived values
-  let filteredPosts = $derived(
-    posts.filter(post => 
-      post.title.toLowerCase().includes(searchQuery.toLowerCase())
+  let filteredItems = $derived(
+    items.filter(item =>
+      item.title.toLowerCase().includes(query.toLowerCase())
     )
   );
 
@@ -236,15 +239,15 @@ Use for interactive, client-side components:
 </script>
 
 <!-- 6. Template -->
-<div class="blog-grid">
-  {#each filteredPosts as post}
-    <article>{post.title}</article>
+<nav class="nav-list">
+  {#each filteredItems as item}
+    <a href={item.href}>{item.title}</a>
   {/each}
-</div>
+</nav>
 
 <!-- 7. Styles -->
 <style>
-  .blog-grid {
+  .nav-list {
     display: grid;
     gap: 1rem;
   }
@@ -260,10 +263,10 @@ Always specify hydration directive for Svelte components:
 <Header client:load lang={lang} />
 
 <!-- Hydrate when visible in viewport -->
-<BlogGrid client:visible posts={posts} />
+<ScrollSpyNav client:visible items={items} />
 
 <!-- Hydrate only on idle -->
-<Newsletter client:idle />
+<ThemeToggle client:idle />
 
 <!-- No hydration (static) -->
 <StaticComponent />
@@ -372,7 +375,7 @@ All UI code must meet **WCAG 2.1 AA** compliance. Key rules:
 
 ### Components
 
-- **Astro components**: `PascalCase.astro` (e.g., `BlogCard.astro`)
+- **Astro components**: `PascalCase.astro` (e.g., `MethodologyCard.astro`)
 - **Svelte components**: `PascalCase.svelte` (e.g., `Header.svelte`)
 - **Component folders**: `PascalCase/` (e.g., `HeroSection/`)
 
@@ -384,53 +387,40 @@ All UI code must meet **WCAG 2.1 AA** compliance. Key rules:
 
 ### Utilities
 
-- **Library files**: `camelCase.ts` (e.g., `blog.ts`, `types.ts`)
+- **Library files**: `camelCase.ts` (e.g., `i18n.ts`, `types.ts`)
 - **Constants**: `constances.ts` (note: intentional spelling)
 
 ### Content
 
-- **Blog posts**: `YYYY-MM-DD_slug.md` or `YYYY-MM-DD_slug.mdx` (date prefix required)
-- **Tags**: `kebab-case.md`
+- **Methodology/spec/kit docs**: `slug.md` in the relevant `{en,es}/` directory
+- **Page Markdown endpoints**: `slug.md` in `src/content/pages/{en,es}/`
 
 ## Content Collection Standards
 
-### Blog Post Frontmatter
+### Methodology Doc Frontmatter
 
 Required and optional fields:
 
 ```yaml
 ---
-title: "My Blog Post Title"                              # Required
-description: "A brief description"                        # Required
-pubDate: 2024-01-15                                       # Required (YYYY-MM-DD)
-updatedDate: 2024-01-20                                   # Optional
-heroImage: "/images/blog/posts/my-blog-post/hero.jpg"    # Optional
-heroLayout: "banner"                                      # Optional (banner|side-by-side|minimal|none)
-tags: ["tech"]                                            # Optional
-series: "series-slug"                                     # Optional
-seriesOrder: 1                                            # Optional (required when series is set)
+title: "Introduction"                # Required
+description: "A brief description"    # Required
+order: 1                             # Required (controls reader ordering)
+lang: "en"                           # Required (en|es)
+summary: "One-line summary"          # Optional
+icon: "compass"                      # Optional
 ---
 ```
 
-**File naming:** `YYYY-MM-DD_slug.{md,mdx}` (date prefix stripped from URLs). **Slugs MUST always be in English** — both `en/` and `es/` versions share the same English slug. Series slugs must also be in English.
+**File naming:** `slug.md` in `src/content/methodology/{en,es}/`. **Slugs MUST always be in English** — both `en/` and `es/` versions share the same English slug. The same rule applies to the `spec` and `kit` collections.
 
-### Blog Post Creation Workflow (MANDATORY)
+### Content Creation Workflow (MANDATORY)
 
-- Use `/add-blog-post` for creating new posts in `src/content/blog/`.
-- Never create a new blog post in only one language.
-- For EN/ES, create or update both versions in the same task.
-- Preserve synchronized frontmatter across locales: `pubDate`, `updatedDate`, `heroImage`, `heroLayout`, `tags`, `series`, `seriesOrder`.
+- Never create methodology/spec/kit content in only one language.
+- For EN/ES, create or update both versions in the same task (use the `/translate-sync` skill).
+- Keep matching `src/content/pages/{en,es}/*.md` endpoints in sync (`pnpm run md:check`).
 
-For complete blog post conventions, see **[Blog Posts Feature Guide](features/BLOG_POSTS.md)**.
-
-### Tag Definition
-
-```yaml
----
-name: "Technology"
-description: "Posts about technology and programming"
----
-```
+For collection schemas, see **[Architecture Guide](ARCHITECTURE.md)** and `src/content.config.ts`.
 
 ## Git Standards
 
@@ -459,21 +449,21 @@ Use conventional commit format:
 
 **Examples:**
 ```
-feat: add blog search functionality
+feat: add kit catalog filtering
 fix: resolve dark mode toggle on mobile
 docs: update architecture guide
 style: format components with Biome
-refactor: extract blog utilities to lib/
+refactor: extract i18n utilities to lib/
 perf: optimize image loading
 ```
 
 ### Branch Naming
 
 ```
-feature/add-blog-search
+feature/add-kit-filtering
 fix/dark-mode-toggle
 docs/update-readme
-refactor/blog-components
+refactor/methodology-reader
 ```
 
 ## Error Handling
@@ -518,7 +508,7 @@ Testing is not yet configured. When implemented:
 
 ## Meta Description Length (MANDATORY)
 
-All page and blog post meta descriptions MUST be 130-160 characters (both EN and ES independently). See [SEO Guide](SEO.md#meta-description-standards-mandatory) for full rules, locations, and writing guidelines.
+All page meta descriptions MUST be 130-160 characters (both EN and ES independently). See [SEO Guide](SEO.md#meta-description-standards-mandatory) for full rules, locations, and writing guidelines.
 
 ## Documentation Standards
 
@@ -543,6 +533,6 @@ Before committing, verify:
 - [ ] `pnpm run biome:check` passes
 - [ ] `pnpm run astro:check` passes
 - [ ] Dark mode is supported in new UI
-- [ ] Meta descriptions are 130-160 characters (pages in translations, blog posts in frontmatter)
+- [ ] Meta descriptions are 130-160 characters (pages in translations)
 - [ ] Documentation is updated if needed
 - [ ] Commit message follows conventional format

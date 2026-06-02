@@ -35,7 +35,8 @@ const coreTech = [
   {
     name: 'MDX',
     version: '5.0.4',
-    description: 'Enhanced Markdown with component support for blog posts',
+    description:
+      'Enhanced Markdown with component support for content collections',
     role: 'Content',
   },
 ];
@@ -56,8 +57,8 @@ const patterns = [
   {
     name: 'Content Collections',
     description:
-      'Blog posts and tags use Astro Content Collections with Zod schemas. Glob-based loading from src/content/.',
-    example: "const posts = await getCollection('blog');",
+      'Methodology, spec, and kit content use Astro Content Collections with Zod schemas. Glob-based loading from src/content/.',
+    example: "const docs = await getCollection('methodology');",
   },
   {
     name: 'Page Wrapper Pattern',
@@ -77,12 +78,10 @@ const keyLibraries = [
   {
     name: '@astrojs/mdx',
     version: '5.0.4',
-    purpose: 'MDX support for blog posts',
+    purpose: 'MDX support for content collections',
   },
   { name: '@astrojs/sitemap', version: '3.7.0', purpose: 'Sitemap generation' },
-  { name: '@astrojs/rss', version: '4.0.15', purpose: 'RSS feed generation' },
   { name: '@astrojs/svelte', version: '7.2.5', purpose: 'Svelte integration' },
-  { name: 'fuse.js', version: '7.1.0', purpose: 'Client-side fuzzy search' },
   { name: 'sharp', version: '0.34.x', purpose: 'Image optimization pipeline' },
 ];
 ---
@@ -196,7 +195,7 @@ const keyLibraries = [
             <tr>
               <td class="py-3 px-4"><code class="text-xs">client:load</code></td>
               <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Immediately on page load</td>
-              <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Header, search, theme toggle</td>
+              <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Header, theme toggle</td>
             </tr>
             <tr>
               <td class="py-3 px-4"><code class="text-xs">client:idle</code></td>
@@ -206,7 +205,7 @@ const keyLibraries = [
             <tr>
               <td class="py-3 px-4"><code class="text-xs">client:visible</code></td>
               <td class="py-3 px-4 text-gray-600 dark:text-gray-300">When scrolled into viewport</td>
-              <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Below-fold components, blog grid</td>
+              <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Below-fold components, homepage sections</td>
             </tr>
           </tbody>
         </table>

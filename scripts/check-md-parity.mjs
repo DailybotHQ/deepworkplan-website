@@ -18,10 +18,7 @@
  *   - /internal/*    — dev-only pages, already excluded from prod build
  *   - /404           — error page
  *   - /api/*         — JSON/text API endpoints
- *   - /rss.xml       — RSS feed
  *   - /.well-known/* — agent-readiness endpoints (api-catalog, mcp/*, etc.)
- *   - /blog/page/*   — pagination pages
- *   - /blog/tag/*    — tag listing pages
  *   - /_astro/*      — Astro asset bundle directory
  *   - /images/*      — static image assets
  */
@@ -36,13 +33,10 @@ const EXCLUDED_PATTERNS = [
   /^internal(\/|$)/,
   /^404/,
   /^api\//,
-  /^rss\.xml/,
   /^README$/,
   /^\.well-known(\/|$)/,
   /^_astro(\/|$)/,
   /^images(\/|$)/,
-  /\/page\/\d+/,
-  /\/tag\//,
 ];
 
 /**
@@ -174,7 +168,9 @@ if (missing.length > 0 && STRICT) {
   console.log(
     '\n💡 To fix: add .md endpoints in src/pages/ or src/content/pages/{en,es}/'
   );
-  console.log('   Blog posts auto-generate via src/pages/blog/[slug].md.ts');
+  console.log(
+    '   Reader entries auto-generate via src/pages/{methodology,spec,kit}/[slug].md.ts'
+  );
   console.log(
     '   Static pages use src/content/pages/{en,es}/*.md + src/pages/*.md.ts\n'
   );

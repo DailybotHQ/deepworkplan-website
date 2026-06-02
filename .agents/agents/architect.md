@@ -120,9 +120,10 @@ When designing for this Astro repository, consider:
    - Svelte for interactive UI, client-side state, event handlers
 
 2. **Component Location:**
-   - `src/components/blog/` - Blog-related
+   - `src/components/pages/` - Shared `*Page.astro` page components
    - `src/components/home/` - Homepage sections
    - `src/components/layout/` - Layout components
+   - `src/components/editorial/` - Editorial design primitives
    - `src/components/` root - Standalone utilities
 
 3. **Styling:**
@@ -131,8 +132,8 @@ When designing for this Astro repository, consider:
    - Custom components in `@layer components`
 
 4. **Content:**
-   - Blog posts in `src/content/blog/`
-   - Follow schema in `content.config.ts`
+   - Methodology/spec/kit docs in `src/content/{methodology,spec,kit}/{en,es}/`
+   - Follow schemas in `content.config.ts`
 
 ## Stop Conditions
 

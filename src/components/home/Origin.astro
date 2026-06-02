@@ -35,22 +35,25 @@ const o = t.home.origin;
         class="mt-6 inline-flex items-center gap-2 hover:opacity-80 transition-opacity"
         aria-label={o.dailybotCta}
       >
+        <!-- Decorative within this labeled link (aria-label + visible CTA text
+             convey the purpose). alt="" so the logo doesn't add a conflicting
+             token to the accessible name (fixes label-content-name-mismatch). -->
         <img
           class="h-6 w-auto block dark:hidden"
           src="/images/dailybot/logo-horizontal-black.svg"
-          alt="Dailybot"
+          alt=""
           width="98"
           height="24"
         />
         <img
           class="h-6 w-auto hidden dark:block"
           src="/images/dailybot/logo-horizontal-white.svg"
-          alt="Dailybot"
+          alt=""
           width="98"
           height="24"
         />
         <span class="kicker" style="color: var(--color-secondary);"
-          >{o.dailybotCta} &rarr;</span
+          >{o.dailybotCta} <span aria-hidden="true">&rarr;</span></span
         >
       </a>
     </figure>

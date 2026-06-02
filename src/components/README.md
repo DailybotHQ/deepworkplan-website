@@ -10,30 +10,24 @@ components/
 │   ├── HomePage.astro      # Handles MainLayout internally, receives lang prop
 │   ├── AboutPage.astro
 │   ├── ContactPage.astro
-│   ├── CvPage.astro
-│   ├── PortfolioPage.astro
-│   ├── blog/               # Shared blog page components
-│   │   ├── BlogListingPage.astro
-│   │   └── BlogPostPage.astro
-│   └── ...
-├── blog/               # Blog-related components
-│   ├── BlogCard.svelte
-│   ├── BlogContainer.astro
-│   ├── BlogGrid.svelte
-│   ├── BlogHeader.svelte
-│   ├── BlogPagination.svelte
-│   ├── BlogSearchInput.svelte
-│   ├── SearchResults.svelte
-│   └── StaticBlogSearch.svelte
+│   ├── MethodologyPage.astro / MethodologyReader.astro
+│   ├── SpecPage.astro / SpecReader.astro
+│   ├── KitPage.astro / KitReader.astro
+│   ├── ExamplesPage.astro
+│   ├── QuickstartPage.astro
+│   ├── InitPage.astro
+│   └── NotFoundPage.astro
 ├── home/               # Homepage section components
-│   ├── BlogPreviewSection.astro
-│   ├── ContactSection.astro
-│   ├── EducationSection.astro
-│   ├── ExperienceSection.astro
-│   ├── HeroSection/
-│   ├── HomeSection/
-│   ├── ProjectsSection.astro
-│   └── SkillsSection.astro
+│   ├── Hero.astro
+│   ├── Pitch.astro
+│   ├── Quickstart.astro
+│   ├── Outcomes.astro
+│   ├── Archetypes.astro
+│   ├── Comparison.astro
+│   ├── Onboarding.astro
+│   └── ...
+├── editorial/          # Editorial design-system primitives
+├── contact/            # ContactForm.svelte
 ├── layout/             # Layout components
 │   ├── Header.svelte
 │   └── MobileMenu.svelte
@@ -41,6 +35,7 @@ components/
 ├── Footer.astro        # Site footer
 ├── FormattedDate.astro # Date formatting utility
 ├── HeaderLink.astro    # Navigation link
+├── JsonLd.astro        # Structured data
 └── ThemeToggle.astro   # Dark mode toggle
 ```
 
@@ -55,10 +50,10 @@ Shared page components in `pages/` handle `MainLayout`, translations, and conten
 | `pages/HomePage.astro` | Astro | Homepage with all sections |
 | `pages/AboutPage.astro` | Astro | About page |
 | `pages/ContactPage.astro` | Astro | Contact page |
-| `pages/CvPage.astro` | Astro | CV/Resume page |
-| `pages/PortfolioPage.astro` | Astro | Portfolio page |
-| `pages/blog/BlogListingPage.astro` | Astro | Blog listing with pagination |
-| `pages/blog/BlogPostPage.astro` | Astro | Individual blog post |
+| `pages/MethodologyPage.astro` | Astro | Methodology reader (uses `MethodologyReader.astro`) |
+| `pages/SpecPage.astro` | Astro | Specification reader (uses `SpecReader.astro`) |
+| `pages/KitPage.astro` | Astro | Kit catalog (uses `KitReader.astro`) |
+| `pages/InitPage.astro` | Astro | Canonical `/init` adoption endpoint |
 
 **Key:** Each `*Page.astro` component accepts a `lang: Language` prop and wraps content in `MainLayout` internally.
 
@@ -70,33 +65,23 @@ Shared page components in `pages/` handle `MainLayout`, translations, and conten
 | `Footer.astro` | Astro | Site footer with social links |
 | `FormattedDate.astro` | Astro | Formats dates consistently |
 | `HeaderLink.astro` | Astro | Navigation link with active state |
+| `JsonLd.astro` | Astro | Structured-data (JSON-LD) injection |
 | `ThemeToggle.astro` | Astro | Dark/light mode toggle button |
-
-### Blog Components
-
-| Component | Type | Description |
-|-----------|------|-------------|
-| `BlogCard.svelte` | Svelte | Individual blog post card |
-| `BlogContainer.astro` | Astro | Blog page wrapper |
-| `BlogGrid.svelte` | Svelte | Grid layout for blog posts |
-| `BlogHeader.svelte` | Svelte | Blog section header with title |
-| `BlogPagination.svelte` | Svelte | Page navigation for blog |
-| `BlogSearchInput.svelte` | Svelte | Search input field |
-| `SearchResults.svelte` | Svelte | Search results display |
-| `StaticBlogSearch.svelte` | Svelte | Complete search functionality |
 
 ### Home Components
 
+Section components composing the homepage. Each is a self-contained `.astro` section consumed by `pages/HomePage.astro`.
+
 | Component | Type | Description |
 |-----------|------|-------------|
-| `BlogPreviewSection.astro` | Astro | Recent blog posts preview |
-| `ContactSection.astro` | Astro | Contact information |
-| `EducationSection.astro` | Astro | Education history |
-| `ExperienceSection.astro` | Astro | Work experience timeline |
-| `HeroSection/` | Mixed | Hero with typewriter effect |
-| `HomeSection/` | Mixed | Reusable section wrapper |
-| `ProjectsSection.astro` | Astro | Featured projects |
-| `SkillsSection.astro` | Astro | Technical skills |
+| `Hero.astro` | Astro | Homepage hero |
+| `Pitch.astro` | Astro | Positioning pitch (SDD + harness) |
+| `Quickstart.astro` | Astro | Quickstart steps preview |
+| `Outcomes.astro` | Astro | Outcomes / benefits |
+| `Archetypes.astro` | Astro | Plan archetypes overview |
+| `Comparison.astro` | Astro | Comparison with tool-bound SDD |
+| `Onboarding.astro` | Astro | Agent onboarding overview |
+| `Stacks.astro` | Astro | Supported stacks/adapters |
 
 ### Layout Components
 
@@ -115,7 +100,7 @@ Shared page components in `pages/` handle `MainLayout`, translations, and conten
 - No user interactions needed
 - Component wraps other components (layouts)
 
-**Examples:** `BaseHead.astro`, `Footer.astro`, `BlogContainer.astro`
+**Examples:** `BaseHead.astro`, `Footer.astro`, `home/Hero.astro`
 
 ### Use Svelte (`.svelte`) When:
 
@@ -125,7 +110,7 @@ Shared page components in `pages/` handle `MainLayout`, translations, and conten
 - Real-time updates are necessary
 - Complex event handling
 
-**Examples:** `Header.svelte` (mobile menu toggle), `BlogSearchInput.svelte` (search state)
+**Examples:** `Header.svelte` (mobile menu toggle), `contact/ContactForm.svelte` (form state)
 
 ## Component Props Pattern
 
@@ -190,7 +175,7 @@ import Header from '../components/layout/Header.svelte';
 ## Creating a New Component
 
 1. **Choose the right type** (Astro vs Svelte)
-2. **Choose the right folder** (blog/, home/, layout/, or root)
+2. **Choose the right folder** (home/, editorial/, layout/, pages/, or root)
 3. **Follow naming conventions** (PascalCase)
 4. **Add TypeScript types** for props
 5. **Use Tailwind** for styling
@@ -200,14 +185,12 @@ import Header from '../components/layout/Header.svelte';
 # Example: Creating a new Astro component
 touch src/components/NewComponent.astro
 
-# Example: Creating a new Svelte component in blog/
-touch src/components/blog/NewBlogComponent.svelte
+# Example: Creating a new Svelte component in layout/
+touch src/components/layout/NewLayoutComponent.svelte
 ```
 
 ## Related Documentation
 
-- [Blog Components](./blog/README.md)
-- [Home Components](./home/README.md)
 - [Layout Components](./layout/README.md)
 - [Styling Guide](../styles/README.md)
 - [Architecture Guide](../../docs/ARCHITECTURE.md)

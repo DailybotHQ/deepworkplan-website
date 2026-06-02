@@ -4,16 +4,15 @@
 
 ## 1. Content Freshness
 
-- [ ] Check if `public/llms.txt` includes all recent blog posts and series chapters
+- [ ] Check if `public/llms.txt` includes all current pages and content sections (methodology, spec, kit)
 - [ ] Check if `public/llms-full.txt` has accurate descriptions and URLs
-- [ ] Verify blog post count in llms files matches actual content (`ls src/content/blog/en/ | grep -v _demo | wc -l`)
-- [ ] If new blog posts were added, verify they have complete frontmatter (`title`, `description`, `pubDate`, `tags`, `heroImage`)
+- [ ] If new methodology/spec/kit docs were added, verify they have complete frontmatter and a matching `.md` endpoint (`pnpm run md:check`)
 
 ## 2. Indexation Health
 
 - [ ] Check Google Search Console for crawl errors: https://search.google.com/search-console
 - [ ] Check Bing Webmaster Tools: https://www.bing.com/webmasters
-- [ ] Verify indexed page count matches expected (pages + blog posts in both languages)
+- [ ] Verify indexed page count matches expected (pages in both languages)
 - [ ] Check for any pages showing "Excluded" or "Not indexed" status
 
 ## 3. Sitemap & Robots
@@ -27,14 +26,14 @@
 
 - [ ] Run Rich Results Test on 2-3 pages:
   - Homepage: https://search.google.com/test/rich-results?url=https://deepworkplan.com/
-  - A blog post: https://search.google.com/test/rich-results?url=https://deepworkplan.com/blog/building-multilingual-website/
   - About page: https://search.google.com/test/rich-results?url=https://deepworkplan.com/about/
+  - Contact page: https://search.google.com/test/rich-results?url=https://deepworkplan.com/contact/
 - [ ] Verify JSON-LD is valid (no warnings or errors)
-- [ ] Check that BlogPosting schema has: headline, description, datePublished, dateModified, author (with image), publisher
+- [ ] Check that WebSite, Person, and Organization schemas are present and complete
 
 ## 5. LLM Testing
 
-Test 5 target queries from `docs/aeo/QUERIES.md` across AI engines:
+Test 5 target queries across AI engines (e.g. "what is spec-driven development", "how to make a repo AI-agent-ready", "Deep Work Plan methodology"):
 
 - [ ] **ChatGPT**: Ask 5 queries. Note: Does it mention deepworkplan.com? Does it cite a specific URL?
 - [ ] **Claude**: Same 5 queries. Note results.
@@ -54,28 +53,20 @@ Record results:
 - [ ] Check Core Web Vitals in Google Search Console
 - [ ] Verify no new JS was accidentally added (check bundle size)
 
-## 7. RSS & Feeds
+## 7. Markdown for Agents
 
-- [ ] Verify English RSS: `curl -s https://deepworkplan.com/rss.xml | head -20`
-- [ ] Verify Spanish RSS: `curl -s https://deepworkplan.com/es/rss.xml | head -20`
-- [ ] Confirm latest posts appear in feeds
-
-## 8. Markdown for Agents
-
-- [ ] Verify `.md` endpoints are generated: `find dist -name "*.md" | wc -l` (should be 100+)
-- [ ] Spot-check a blog post `.md` endpoint: `cat dist/blog/building-multilingual-website.md | head -15`
-- [ ] Verify content-type is set in endpoint source: `grep "text/markdown" src/pages/blog/\[slug\].md.ts`
-- [ ] Check page endpoints exist: `ls dist/about.md dist/cv.md dist/es/about.md`
-- [ ] Verify blog index: `cat dist/blog/index.md | head -20`
+- [ ] Verify `.md` endpoints are generated: `find dist -name "*.md" | wc -l`
+- [ ] Check page endpoints exist: `ls dist/about.md dist/contact.md dist/es/about.md`
+- [ ] Verify content-type is set in endpoint source: `grep "text/markdown" src/pages/\[page\].md.ts`
 - [ ] Ensure `llms.txt` references Markdown endpoints: `grep "\.md" public/llms.txt`
 - [ ] Verify content negotiation middleware: `grep "text/markdown" functions/_middleware.ts`
-- [ ] **Sync check:** Compare page `.md` files against HTML content — no major sections missing
+- [ ] **Sync check:** Compare page `.md` files against HTML content — no major sections missing (`pnpm run md:check`)
 - [ ] **Bilingual sync:** EN and ES `.md` files cover the same sections (`ls src/content/pages/en/ src/content/pages/es/`)
 - [ ] **Analytics:** Verify `markdown_request` events appear in Umami (Events tab → filter `markdown_request`)
 - [ ] **Analytics sources:** Check both `content_negotiation` and `direct_url` sources are being captured
 - [ ] Full docs: [Markdown for Agents](MARKDOWN_FOR_AGENTS.md)
 
-## 9. Quick Local Validation
+## 8. Quick Local Validation
 
 Run these commands before deploying:
 
@@ -89,9 +80,6 @@ ls -la dist/llms.txt dist/llms-full.txt
 # Verify sitemap has lastmod
 grep "lastmod" dist/sitemap-0.xml | head -3
 
-# Check schema in a built blog post
-grep "BlogPosting" dist/blog/building-multilingual-website/index.html | head -1
-
 # Verify Markdown endpoints generated
 find dist -name "*.md" | wc -l
 ```
@@ -100,6 +88,5 @@ find dist -name "*.md" | wc -l
 
 | Frequency | Tasks |
 |-----------|-------|
-| Every deploy | Section 9 (local validation) |
-| Monthly | Sections 1-8 (full checklist) |
-| Quarterly | Full audit refresh (re-run `/dwp-execute aeo_llm_discoverability` Task 1) |
+| Every deploy | Section 8 (local validation) |
+| Monthly | Sections 1-7 (full checklist) |

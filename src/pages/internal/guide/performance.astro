@@ -5,9 +5,9 @@ const pageSpeedOptimizations = [
   {
     area: 'Image Delivery',
     mitigations: [
-      'WebP pipeline: homepage, blog shared, blog post heroes (~1.3 MB savings)',
-      'Scripts: generate-webp-homepage.mjs, generate-webp-blog-shared.mjs, generate-webp-blog-posts.mjs',
-      'Components: BlogHeroImage, HomeSectionImage, PageHero use <picture> with WebP',
+      'Images are natively WebP — no per-build regeneration needed',
+      'Script: generate-webp-homepage.mjs for any non-WebP homepage source',
+      'Components: PageHero and homepage sections use <picture> with WebP',
       'Skips regeneration when .webp exists and is newer than source',
     ],
   },

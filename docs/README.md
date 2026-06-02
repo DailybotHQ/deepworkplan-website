@@ -54,7 +54,7 @@ Welcome to the **deepworkplan.com** documentation. This guide helps developers a
 deepworkplan.com/
 ├── src/
 │   ├── components/      # Reusable UI components (.astro, .svelte)
-│   ├── content/         # Content Collections (blog/, tags/)
+│   ├── content/         # Content Collections (methodology/, spec/, kit/, pages/)
 │   ├── layouts/         # Page layouts (MainLayout.astro)
 │   ├── lib/             # Utility functions and types
 │   ├── pages/           # File-based routing
@@ -85,13 +85,13 @@ pnpm run build            # Production build (Cloudflare Pages)
 
 ### Content Collections
 
-Blog posts live in `src/content/blog/` as Markdown/MDX files. The schema is defined in `src/content.config.ts`:
+Methodology, spec, and kit docs live in `src/content/{methodology,spec,kit}/{en,es}/` as Markdown files. Schemas are defined in `src/content.config.ts`. For example, the `methodology` schema:
 
-- **title** - Post title (required)
-- **description** - Post summary (required)
-- **pubDate** - Publication date (required)
-- **heroImage** - Featured image (optional)
-- **tags** - Array of tag names (optional)
+- **title** - Doc title (required)
+- **description** - Doc summary (required)
+- **order** - Reader ordering (required)
+- **lang** - `en` or `es` (required)
+- **summary** / **icon** - Optional metadata
 
 ### Component Types
 

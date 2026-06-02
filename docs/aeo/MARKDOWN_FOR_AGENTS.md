@@ -1,6 +1,6 @@
 # Markdown for Agents
 
-Native Markdown delivery layer for AI agents. Every page and blog post on the site has a `.md` endpoint serving clean, agent-friendly Markdown from the original source content.
+Native Markdown delivery layer for AI agents. Every page on the site has a `.md` endpoint serving clean, agent-friendly Markdown from the original source content.
 
 ## Architecture
 
@@ -23,43 +23,24 @@ Cloudflare offers [Markdown for Agents](https://blog.cloudflare.com/markdown-for
 
 ## Endpoints
 
-### Blog Posts
-
-| Pattern | Example |
-|---------|---------|
-| `/blog/{slug}.md` (EN) | `/blog/adopting-dwp-case-study.md` |
-| `/es/blog/{slug}.md` (ES) | `/es/blog/adopting-dwp-case-study.md` |
-
-Source: `post.body` from Astro content collection (raw Markdown without frontmatter).
-
-### Blog Index
-
-| Pattern | Description |
-|---------|-------------|
-| `/blog/index.md` (EN) | Lists all EN posts with `.md` links |
-| `/es/blog/index.md` (ES) | Lists all ES posts with `.md` links |
-
 ### Pages
 
 | Pattern | Example |
 |---------|---------|
-| `/{page}.md` (EN) | `/about.md`, `/cv.md`, `/dailybot.md` |
-| `/es/{page}.md` (ES) | `/es/about.md`, `/es/cv.md` |
+| `/{page}.md` (EN) | `/about.md`, `/contact.md`, `/init.md` |
+| `/es/{page}.md` (ES) | `/es/about.md`, `/es/init.md` |
 
 Source: `src/content/pages/{en,es}/` content collection.
 
 ## Response Format
 
 ```markdown
-# Post Title
+# Page Title
 
 > Description text
 
-Published: 2026-03-09
-Updated: 2026-03-10
 Language: en
-Canonical: https://deepworkplan.com/blog/post-slug
-Tags: tag1, tag2
+Canonical: https://deepworkplan.com/about
 
 ---
 
@@ -81,10 +62,6 @@ Tags: tag1, tag2
 |------|---------|
 | `functions/_middleware.ts` | Content negotiation (Accept: text/markdown) |
 | `src/lib/markdown-for-agents.ts` | Serialization helpers |
-| `src/pages/blog/[slug].md.ts` | EN blog post endpoint |
-| `src/pages/es/blog/[slug].md.ts` | ES blog post endpoint |
-| `src/pages/blog/index.md.ts` | EN blog index |
-| `src/pages/es/blog/index.md.ts` | ES blog index |
 | `src/pages/[page].md.ts` | EN page endpoint |
 | `src/pages/es/[page].md.ts` | ES page endpoint |
 | `src/content/pages/{en,es}/` | Page Markdown source files |
@@ -93,10 +70,7 @@ Tags: tag1, tag2
 
 ### Serialization Functions
 
-- `serializePostToAgentMarkdown(post, { slug, lang })` — blog posts
-- `serializeBlogIndexToMarkdown(entries, { lang, title, description })` — blog index
-- `serializeSeriesIndexToMarkdown(entries, { slug, seriesTitle, seriesDescription, lang })` — series index
-- `serializePageToAgentMarkdown(page, { slug, lang })` — non-blog pages
+- `serializePageToAgentMarkdown(page, { slug, lang })` — site pages
 
 ### Site Navigation Partial
 
@@ -114,12 +88,10 @@ The navigation is generated programmatically by `generateSiteNavigation(lang)` i
 
 ### Content Collections
 
-- **Blog posts**: Existing `blog` collection. `post.body` provides raw Markdown.
-- **Pages**: New `pages` collection in `src/content/pages/`. Each page has EN and ES versions.
+- **Pages**: `pages` collection in `src/content/pages/`. Each page has EN and ES versions.
 
 ## Scalability
 
-- **New blog post** → Automatically gets a `.md` endpoint (no code changes)
 - **New page** → Add a `.md` file to `src/content/pages/{en,es}/` and a `.md` endpoint is generated
 - **Content updates** → Reflected on next build automatically
 
@@ -143,7 +115,7 @@ The Cloudflare Pages middleware (`functions/_middleware.ts`) supports automatic 
 | `/` | `/index.md` |
 | `/about` | `/about.md` |
 | `/about/` | `/about.md` |
-| `/blog/my-post` | `/blog/my-post.md` |
+| `/init` | `/init.md` |
 | `/es/about` | `/es/about.md` |
 
 **Excluded paths:** `/api/*`, `/internal/*`, `/_*`, and any path with a file extension (`.js`, `.css`, `.png`, etc.).
@@ -183,7 +155,6 @@ Each event captures: bot name (or `"unknown"`), requested path, source, and User
 
 ## Maintenance
 
-- **No ongoing maintenance for blog posts** — endpoints auto-generated from `post.body` (always in sync)
 - **Page Markdown MUST stay in sync with HTML content** — when translation strings (`en.ts`/`es.ts`) or page components (`*Page.astro`) change, update the corresponding files in `src/content/pages/{en,es}/`
 - **Both languages required** — every change to an EN `.md` must be reflected in the ES `.md` (and vice versa)
 - **Include internal links** — page Markdown should contain links to other site pages so agents can discover the full site structure

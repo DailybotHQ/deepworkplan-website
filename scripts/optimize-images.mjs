@@ -1,32 +1,23 @@
 #!/usr/bin/env node
 
 /**
- * Image Optimizer (blog posts + slide decks)
+ * Image Optimizer
  *
- * Processes images from a target collection's `_staging/` directory and
- * optimizes them for production use, mirroring the same conventions across
- * blog posts and slide decks.
+ * Processes images from a `_staging/` directory and optimizes them for
+ * production use.
  *
  * Staging file naming convention:
  *   {slug}--hero.{ext}     -> {output}/{slug}/hero.{ext optimized}
  *   {slug}--{name}.{ext}   -> {output}/{slug}/{name.ext optimized}
  *
- * Per-language slide hero images live in the same slug folder, e.g.:
- *   slug--hero-en.png  -> images/slides/slug/hero-en.png
- *   slug--hero-es.png  -> images/slides/slug/hero-es.png
- *
  * Targets (--target):
- *   blog (default) — staging at public/images/blog/_staging/
- *                    output  at public/images/blog/posts/{slug}/
- *   slides         — staging at public/images/slides/_staging/
- *                    output  at public/images/slides/{slug}/
+ *   content (default) — staging at public/images/_staging/
+ *                       output  at public/images/{slug}/
  *
  * Usage:
- *   pnpm run images:optimize                          # Blog (default)
- *   pnpm run images:optimize -- --webp                # Blog with WebP variants
- *   pnpm run images:optimize -- --dry-run             # Preview blog work
- *   pnpm run images:optimize:slides                   # Slides
- *   pnpm run images:optimize:slides -- --webp         # Slides with WebP
+ *   pnpm run images:optimize                          # Content (default)
+ *   pnpm run images:optimize -- --webp                # With WebP variants
+ *   pnpm run images:optimize -- --dry-run             # Preview work
  */
 
 import { existsSync, mkdirSync, readdirSync, rmSync, statSync } from 'node:fs';
@@ -36,17 +27,11 @@ import sharp from 'sharp';
 const ROOT = resolve(import.meta.dirname, '..');
 
 const TARGETS = {
-  blog: {
-    staging: join(ROOT, 'public/images/blog/_staging'),
-    output: join(ROOT, 'public/images/blog/posts'),
-    label: 'Blog',
-    outputLabel: 'posts',
-  },
-  slides: {
-    staging: join(ROOT, 'public/images/slides/_staging'),
-    output: join(ROOT, 'public/images/slides'),
-    label: 'Slides',
-    outputLabel: 'slides',
+  content: {
+    staging: join(ROOT, 'public/images/_staging'),
+    output: join(ROOT, 'public/images'),
+    label: 'Content',
+    outputLabel: 'images',
   },
 };
 
@@ -65,7 +50,7 @@ const WEBP_QUALITY = 80;
 function parseArgs() {
   const args = process.argv.slice(2);
   const targetArg = args.find((a) => a.startsWith('--target='));
-  const target = targetArg ? targetArg.slice('--target='.length) : 'blog';
+  const target = targetArg ? targetArg.slice('--target='.length) : 'content';
   if (!TARGETS[target]) {
     console.error(
       `Unknown --target=${target}. Valid: ${Object.keys(TARGETS).join(', ')}`

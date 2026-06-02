@@ -6,9 +6,9 @@ This document serves as the central reference for all available Skills and Agent
 
 | Type   | Tier 1 (Light) | Tier 2 (Standard) | Tier 3 (Heavy) | Total |
 |--------|:--------------:|:------------------:|:--------------:|:-----:|
-| Skills | 11             | 2                  | 0              | 13    |
+| Skills | 11             | 3                  | 0              | 14    |
 | Agents | 0              | 4                  | 1              | 5     |
-| **Total** | **11**      | **6**              | **1**          | **18** |
+| **Total** | **11**      | **7**              | **1**          | **19** |
 
 ---
 
@@ -42,6 +42,7 @@ Everyday development work.
 |---------------|----------|------------------|--------|--------------------------------------------------------------------------|
 | write-tests   | tests    | `/write-tests`   | sonnet | Add or expand tests (*.test.ts) - Vitest/Playwright when configured      |
 | refactor-safe | execute  | `/refactor-safe` | sonnet | Safe refactor in bounded scope (1-10 files, no behavior change)          |
+| responsive-lighthouse-audit | audit | `/responsive-lighthouse-audit` | sonnet | Audit responsiveness across breakpoints + drive Lighthouse to near-100 on mobile & desktop |
 
 ### Tier 3 (Heavy/Reasoning)
 
@@ -336,6 +337,7 @@ All skills and agents are adapted for this Astro repository:
 
 | Date | Change | Details |
 |------|--------|---------|
+| 2026-06-02 | `responsive-lighthouse-audit` skill added | Skills & Agents Discovery for PLAN_responsive_quality_audit. Captured the battle-tested procedure (desktop Lighthouse config + dual-form-factor sweep, the breakpoint walk, and the fix playbook: `.table-responsive` table wrapping, `label-content-name-mismatch`, `heading-order`, lazy below-fold images, the intentional `robots-txt`/SEO skip). New Tier-2 skill (skills 13 → 14). No agent changes warranted. |
 | 2026-06-01 | legacy blog skills + agent removed | Deleted the blog/content-marketing skills that no longer fit a methodology site: `add-blog-post`, `audit-post`, `audit-series`, `audit-taxonomy`, `promote-post`, `optimize-image`, plus the `/new-post` command (skills 21 → 13). Also deleted the `content-writer` agent — a personal-blog/portfolio author coupled to the removed blog engine (agents 6 → 5). Catalog, COMMANDS_REFERENCE, kept-skill cross-links, executor agent, and the internal hub updated to match. |
 | 2026-06-01 | dogfooding cutover (no new skills/agents) | Skills & Agents Discovery for the DWP dogfooding migration. The legacy `.agent_commands/` generator/plan engine was retired in favour of the installed `deepworkplan` skill (reference install pinned by `skills-lock.json`); `dwp-*`, `/skill-create`, `/agent-create`, and `/lib-upgrade` are now thin delegators. The relocated generator is now the skill's `author` sub-skill. No new top-level skills/agents warranted. |
 | 2026-05-31 | editorial-system guidance added | Skills & Agents Discovery for the editorial redesign. Updated existing skills/agents to reference "The Broadsheet" editorial system: `update-styles` + `add-component` (paper/ink + oxblood tokens, serif `.font-display`, `src/components/editorial/` primitives), `add-page` (middleware allowlist gotcha + editorial system + `types.ts`), `content-writer` (specification voice; pillars), `reviewer` (editorial design-system review block). No new skills/agents needed. |

@@ -1,6 +1,6 @@
 # Architecture Guide
 
-This document describes the technical architecture of deepworkplan.com, a personal website and blog built with Astro.
+This document describes the technical architecture of deepworkplan.com, the methodology-and-marketing site for the Deep Work Plan (DWP) methodology, built with Astro.
 
 ## High-Level Architecture
 
@@ -77,16 +77,6 @@ src/
 │   ├── FormattedDate.astro  # Date formatting
 │   ├── HeaderLink.astro     # Navigation link
 │   │
-│   ├── blog/                # Blog-specific components
-│   │   ├── BlogCard.svelte      # Post preview card
-│   │   ├── BlogContainer.astro  # Blog page wrapper
-│   │   ├── BlogGrid.svelte      # Posts grid layout
-│   │   ├── BlogHeader.svelte    # Blog section header
-│   │   ├── BlogPagination.svelte
-│   │   ├── BlogSearchInput.svelte
-│   │   ├── SearchResults.svelte
-│   │   └── StaticBlogSearch.svelte
-│   │
 │   ├── home/                # Homepage sections
 │   │   ├── HeroSection/
 │   │   │   ├── HeroSection.astro
@@ -96,42 +86,41 @@ src/
 │   │   │   ├── HomeSectionContent.astro
 │   │   │   ├── HomeSectionImage.astro
 │   │   │   └── enum.ts
-│   │   ├── BlogPreviewSection.astro
-│   │   ├── ContactSection.astro
-│   │   ├── EducationSection.astro
-│   │   ├── ExperienceSection.astro
-│   │   ├── ProjectsSection.astro
-│   │   └── SkillsSection.astro
+│   │   └── ...                  # Methodology / spec / kit preview sections
 │   │
 │   ├── editorial/          # Editorial primitives (Kicker, Rule, Lead, Figure, Reference)
 │   │
-│   ├── pages/              # Shared page components (*Page.astro, InitPage)
+│   ├── pages/              # Shared page components (*Page.astro, InitPage, readers)
 │   │
 │   └── layout/
 │       ├── Header.svelte        # Masthead navigation
 │       └── MobileMenu.svelte    # Mobile nav menu
 │
 ├── content/                 # Content Collections
-│   ├── authors/             # Author definitions (YAML, one per author)
-│   ├── blog/                # Blog posts (auto-generates .md endpoints)
-│   ├── pages/               # Page Markdown for AI agents
-│   │   ├── en/              # English page content (.md endpoints)
-│   │   └── es/              # Spanish page content (.md endpoints)
-│   ├── series/              # Blog series definitions
-│   └── tags/                # Tag definitions
+│   ├── methodology/         # Methodology docs (primary content)
+│   │   ├── en/              # English (.md)
+│   │   └── es/              # Spanish (.md)
+│   ├── spec/                # Readable specification
+│   │   ├── en/
+│   │   └── es/
+│   ├── kit/                 # Kit catalog (presets, adapters, commands, examples, addons)
+│   │   ├── en/
+│   │   └── es/
+│   └── pages/               # Page Markdown for AI agents
+│       ├── en/              # English page content (.md endpoints)
+│       └── es/              # Spanish page content (.md endpoints)
 │
-├── content.config.ts        # Collection schemas (blog, tags, series, slides, pages, authors)
+├── content.config.ts        # Collection schemas (methodology, spec, kit, pages)
 ├── env.d.ts                 # TypeScript environment
 │
 ├── layouts/
 │   └── MainLayout.astro     # Base page layout
 │
 ├── lib/                     # Utilities
-│   ├── blog.ts              # Blog fetching/pagination
 │   ├── i18n.ts              # Centralized i18n config & utilities
+│   ├── markdown-for-agents.ts  # Helpers for the agent-friendly .md endpoints
+│   ├── analytics.ts         # Analytics helpers
 │   ├── constances.ts        # Site constants
-│   ├── enum.ts              # Shared enums
-│   ├── types.ts             # TypeScript types
 │   └── translations/        # Modular translation system
 │       ├── index.ts         # Public API barrel: getTranslations(), re-exports
 │       ├── types.ts         # SiteTranslations interface + all sub-interfaces
@@ -143,16 +132,17 @@ src/
 │   ├── es/index.astro       # Home (Spanish)
 │   ├── about.astro
 │   ├── contact.astro
-│   ├── blog/
-│   │   ├── index.astro
-│   │   ├── [...slug].astro
-│   │   ├── page/[page].astro
-│   │   └── tag/
-│   │       ├── [tag].astro
-│   │       └── [tag]/page/[page].astro
-│   ├── api/
-│   │   └── posts.json.ts
-│   └── rss.xml.js
+│   ├── examples.astro
+│   ├── quickstart.astro
+│   ├── init.astro
+│   ├── methodology/
+│   │   ├── index.astro      # Methodology reader index
+│   │   ├── [slug].astro     # Methodology document
+│   │   └── [page].md.ts     # Agent-friendly .md endpoint
+│   ├── spec/                # Spec reader (index + [slug] + [page].md.ts)
+│   ├── kit/                 # Kit reader (index + [slug] + [page].md.ts)
+│   ├── internal/            # Dev-only hub (excluded from production)
+│   └── api/                 # JSON endpoints
 │
 └── styles/
     └── global.css           # Global styles, Tailwind
@@ -173,21 +163,21 @@ src/
 ---
 // Component Script (server-side, build-time)
 import { getCollection } from 'astro:content';
-import BlogCard from '@/components/blog/BlogCard.svelte';
 
 // Props interface
 interface Props {
   title: string;
+  lang: 'en' | 'es';
   limit?: number;
 }
 
 // Destructure with defaults
-const { title, limit = 5 } = Astro.props;
+const { title, lang, limit = 5 } = Astro.props;
 
 // Data fetching (runs at build time)
-const allPosts = await getCollection('blog');
-const posts = allPosts
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+const allDocs = await getCollection('methodology', ({ data }) => data.lang === lang);
+const docs = allDocs
+  .sort((a, b) => a.data.order - b.data.order)
   .slice(0, limit);
 ---
 
@@ -195,8 +185,11 @@ const posts = allPosts
 <section class="py-12">
   <h2 class="text-3xl font-bold mb-8">{title}</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {posts.map((post) => (
-      <BlogCard client:visible post={post} />
+    {docs.map((doc) => (
+      <a href={`/methodology/${doc.id}`} class="reader-card">
+        <h3>{doc.data.title}</h3>
+        <p>{doc.data.description}</p>
+      </a>
     ))}
   </div>
 </section>
@@ -220,21 +213,15 @@ const posts = allPosts
 
   // Props (Svelte 5 runes)
   interface Props {
-    post: CollectionEntry<'blog'>;
+    doc: CollectionEntry<'methodology'>;
   }
-  let { post }: Props = $props();
+  let { doc }: Props = $props();
 
   // State
   let isHovered = $state(false);
 
   // Derived values
-  let formattedDate = $derived(
-    post.data.pubDate.toLocaleDateString('en-us', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    })
-  );
+  let summary = $derived(doc.data.summary ?? doc.data.description);
 </script>
 
 <article
@@ -243,9 +230,8 @@ const posts = allPosts
   onmouseenter={() => isHovered = true}
   onmouseleave={() => isHovered = false}
 >
-  <h3>{post.data.title}</h3>
-  <time>{formattedDate}</time>
-  <p>{post.data.description}</p>
+  <h3>{doc.data.title}</h3>
+  <p>{summary}</p>
 </article>
 
 <style>
@@ -276,11 +262,11 @@ Control when Svelte components load JavaScript:
 <!-- Header needs immediate interactivity -->
 <Header client:load lang={lang} />
 
-<!-- Blog grid can wait until visible -->
-<BlogGrid client:visible posts={posts} />
+<!-- Mobile menu can wait until visible -->
+<MobileMenu client:visible lang={lang} />
 
-<!-- Newsletter can wait for idle -->
-<Newsletter client:idle />
+<!-- Theme toggle can wait for idle -->
+<ThemeToggle client:idle />
 ```
 
 ## Content Collections
@@ -292,111 +278,108 @@ Control when Svelte components load JavaScript:
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const blog = defineCollection({
-  loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
+const methodology = defineCollection({
+  loader: glob({ base: './src/content/methodology', pattern: '**/*.md' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    pubDate: z.coerce.date(),
-    updatedDate: z.coerce.date().optional(),
-    heroImage: z.string().optional(),
-    heroLayout: z.enum(['banner', 'side-by-side', 'minimal', 'none'])
-      .default('banner').optional(),
-    tags: z.array(z.string()).optional(),
-    author: z.string().default('sergio-florez'),
+    order: z.number(),
+    lang: z.enum(['en', 'es']),
+    summary: z.string().optional(),
+    icon: z.string().optional(),
   }),
 });
 
-const tags = defineCollection({
+const spec = defineCollection({
+  loader: glob({ base: './src/content/spec', pattern: '**/*.md' }),
   schema: z.object({
-    name: z.string(),
-    description: z.string().optional(),
+    title: z.string(),
+    description: z.string(),
+    order: z.number(),
+    lang: z.enum(['en', 'es']),
+    section: z.string().optional(),
   }),
 });
 
-const authors = defineCollection({
-  loader: glob({ base: './src/content/authors', pattern: '**/*.yaml' }),
+const kit = defineCollection({
+  loader: glob({ base: './src/content/kit', pattern: '**/*.md' }),
+  schema: z
+    .object({
+      title: z.string(),
+      description: z.string(),
+      kind: z.enum(['command', 'adapter', 'preset', 'example', 'addon']),
+      lang: z.enum(['en', 'es']),
+      order: z.number().optional(),
+    })
+    .loose(),
+});
+
+const pages = defineCollection({
+  loader: glob({
+    base: './src/content/pages',
+    pattern: '**/*.md',
+    generateId: ({ entry }) => entry.replace(/\.md$/, ''),
+  }),
   schema: z.object({
-    name: z.string(),
-    slug: z.string(),
-    avatar: z.string(),
-    role: z.object({ en: z.string(), es: z.string() }),
-    bio: z.object({ en: z.string(), es: z.string() }),
-    social: z.object({
-      x: z.string().optional(),
-      linkedin: z.string().optional(),
-      github: z.string().optional(),
-      instagram: z.string().optional(),
-      website: z.string().optional(),
-    }).optional(),
+    title: z.string(),
+    description: z.string(),
+    lastUpdated: z.coerce.date().optional(),
   }),
 });
 
-export const collections = { blog, tags, series, slides, pages, authors };
+export const collections = { pages, methodology, spec, kit };
 ```
-
-> **See:** [Authors](./features/AUTHORS.md) for the full multi-author guide.
 
 ### Querying Content
 
 ```typescript
 import { getCollection } from 'astro:content';
 
-// Get all posts
-const allPosts = await getCollection('blog');
+// Get all methodology docs
+const allDocs = await getCollection('methodology');
 
-// Filter by tag
-const techPosts = await getCollection('blog', ({ data }) =>
-  data.tags?.includes('tech')
+// Filter by language
+const enDocs = await getCollection('methodology', ({ data }) =>
+  data.lang === 'en'
 );
 
-// Sort by date
-const sortedPosts = allPosts.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+// Sort by order
+const orderedDocs = enDocs.sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+// Filter the kit catalog by kind
+const presets = await getCollection('kit', ({ data }) =>
+  data.lang === 'en' && data.kind === 'preset'
 );
 ```
 
 ### Content File Structure
 
-Files use date-prefix naming: `YYYY-MM-DD_slug.{md,mdx}`. The date prefix is stripped from URLs.
+Methodology, spec, and kit content is split by language folder. Slugs are in English on both
+languages; the EN and ES versions of a document share the same English slug.
 
 ```
 src/content/
-├── authors/
-│   └── sergio-florez.yaml               # One YAML file per author
-├── blog/
-│   ├── en/                              # English posts
-│   │   ├── 2026-01-15_adopting-dwp-case-study.md
-│   │   ├── 2022-07-08_first-post.md
+├── methodology/
+│   ├── en/                              # English docs
+│   │   ├── what-is-dwp.md
+│   │   ├── adopting-dwp.md
 │   │   └── ...
-│   └── es/                              # Spanish posts (matching filenames)
-│       ├── 2026-01-15_adopting-dwp-case-study.md
-│       ├── 2022-07-08_first-post.md
+│   └── es/                              # Spanish docs (matching slugs)
+│       ├── what-is-dwp.md
+│       ├── adopting-dwp.md
 │       └── ...
-└── tags/
-    ├── tech.md
-    ├── personal.md
-    ├── talks.md
-    ├── trading.md
-    └── portfolio.md
+├── spec/
+│   ├── en/
+│   └── es/
+├── kit/
+│   ├── en/
+│   └── es/
+└── pages/
+    ├── en/                              # Agent-friendly .md endpoints
+    └── es/
 ```
-
-### Blog Post Format
-
-```markdown
----
-title: "My Blog Post"
-description: "A description of the post"
-pubDate: 2024-01-15
-heroImage: "/images/blog/posts/my-blog-post/hero.jpg"
-heroLayout: "banner"
-tags: ["tech"]
----
-
-Post content in Markdown or MDX...
-```
-
-For complete blog post documentation including hero layouts, image organization, and naming conventions, see **[Blog Posts Feature Guide](features/BLOG_POSTS.md)**.
 
 ## Routing System
 
@@ -407,44 +390,43 @@ src/pages/
 ├── index.astro          → /
 ├── about.astro          → /about
 ├── contact.astro        → /contact
-├── es/
-│   └── index.astro      → /es
-└── blog/
-    ├── index.astro      → /blog
-    ├── [...slug].astro  → /blog/post-slug
-    ├── page/
-    │   └── [page].astro → /blog/page/2
-    └── tag/
-        ├── [tag].astro  → /blog/tag/tech
-        └── [tag]/
-            └── page/
-                └── [page].astro → /blog/tag/tech/page/2
+├── examples.astro       → /examples
+├── quickstart.astro     → /quickstart
+├── init.astro           → /init
+├── methodology/
+│   ├── index.astro      → /methodology
+│   ├── [slug].astro     → /methodology/what-is-dwp
+│   └── [page].md.ts     → /methodology/what-is-dwp.md
+├── spec/                → /spec, /spec/[slug], /spec/[page].md
+├── kit/                 → /kit, /kit/[slug], /kit/[page].md
+└── es/
+    └── ...              → Spanish mirror (/es/...)
 ```
 
 ### Dynamic Routes
 
 ```astro
 ---
-// src/pages/blog/[...slug].astro
+// src/pages/methodology/[slug].astro
 import { getCollection, render } from 'astro:content';
 import MainLayout from '@/layouts/MainLayout.astro';
 
-// Generate static paths at build time
+// Generate static paths at build time (English docs)
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: { post },
+  const docs = await getCollection('methodology', ({ data }) => data.lang === 'en');
+  return docs.map((doc) => ({
+    params: { slug: doc.id },
+    props: { doc },
   }));
 }
 
-const { post } = Astro.props;
-const { Content } = await render(post);
+const { doc } = Astro.props;
+const { Content } = await render(doc);
 ---
 
-<MainLayout lang="en" title={post.data.title} description={post.data.description}>
+<MainLayout lang="en" title={doc.data.title} description={doc.data.description}>
   <article>
-    <h1>{post.data.title}</h1>
+    <h1>{doc.data.title}</h1>
     <Content />
   </article>
 </MainLayout>
@@ -456,7 +438,7 @@ const { Content } = await render(post);
 
 **Why it matters when adding a new page:**
 
-When you add a new top-level page (e.g. `/slides`, `/foo`), you MUST also add `'<name>'` to:
+When you add a new top-level page (e.g. `/guides`, `/foo`), you MUST also add `'<name>'` to:
 
 - `KNOWN_ROOT_PATHS` — for the English version (`/<name>`)
 - `KNOWN_ES_PATHS` — for the Spanish version (`/es/<name>`), if it exists
@@ -487,20 +469,19 @@ source paths are also in the allowlist. ES redirect destinations use absolute UR
 ### Endpoint Pattern
 
 ```typescript
-// src/pages/api/posts.json.ts
+// src/pages/api/kit.json.ts
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 
 export const GET: APIRoute = async () => {
   try {
-    const posts = await getCollection('blog');
-    
-    const data = posts.map((post) => ({
-      id: post.id,
-      title: post.data.title,
-      description: post.data.description,
-      pubDate: post.data.pubDate.toISOString(),
-      tags: post.data.tags || [],
+    const entries = await getCollection('kit', ({ data }) => data.lang === 'en');
+
+    const data = entries.map((entry) => ({
+      id: entry.id,
+      title: entry.data.title,
+      description: entry.data.description,
+      kind: entry.data.kind,
     }));
 
     return new Response(JSON.stringify(data), {
@@ -683,13 +664,10 @@ src/components/pages/           # Shared page components (handle MainLayout inte
 ├── HomePage.astro              # Receives lang prop, wraps in MainLayout
 ├── AboutPage.astro
 ├── ContactPage.astro
-├── CvPage.astro
-├── PortfolioPage.astro
-├── blog/
-│   ├── BlogListingPage.astro
-│   ├── BlogPostPage.astro
-│   └── ...
-└── ...
+├── ExamplesPage.astro
+├── QuickstartPage.astro
+├── InitPage.astro
+└── ...                         # Methodology / spec / kit readers
 
 src/pages/                      # Thin routing wrappers (3 lines each)
 ├── index.astro                 # <HomePage lang="en" />
@@ -714,12 +692,16 @@ src/pages/
 ├── index.astro          # English (default)
 ├── about.astro
 ├── contact.astro
-├── blog/                # English blog routes
+├── methodology/         # English methodology/spec/kit readers
+├── spec/
+├── kit/
 └── es/
     ├── index.astro      # Spanish
     ├── about.astro
     ├── contact.astro
-    └── blog/            # Spanish blog routes
+    ├── methodology/     # Spanish readers
+    ├── spec/
+    └── kit/
 ```
 
 ### Translation System
@@ -747,7 +729,7 @@ interface Props { lang: Language; }
 const { lang } = Astro.props;
 const t = getTranslations(lang);
 ---
-<MainLayout lang={lang} title={t.blogTitle} description={t.blogDescription}>
+<MainLayout lang={lang} title={t.methodologyPage.meta.title} description={t.methodologyPage.meta.description}>
   <!-- Content using t.* for all user-visible text -->
 </MainLayout>
 ```
@@ -766,21 +748,16 @@ Page wrappers in `src/pages/` never use translations directly — they just pass
 2. Add translations to both `src/lib/translations/en.ts` and `src/lib/translations/es.ts`
 3. Use the new key via `getTranslations(lang)` in components
 
-### Blog Content Collections
+### Localized Content Collections
 
-Blog posts are split by language folder:
+Methodology, spec, and kit content is split by language folder; the EN and ES versions of a
+document share the same English slug:
 
 ```
-src/content/blog/
-├── en/    # English posts
-└── es/    # Spanish posts (matching filenames)
+src/content/methodology/
+├── en/    # English docs
+└── es/    # Spanish docs (matching slugs)
 ```
-
-### Tag Localization
-
-Tags use slug-based identifiers with localized display names from `translations.ts`:
-- URLs: `/blog/tag/tech/` (slug-based, language-neutral)
-- Display: `t.tagNames[tag]` (localized per language)
 
 ## Dogfooding DWP
 
@@ -814,9 +791,9 @@ pnpm run build            # Build to dist/ folder (prebuild runs images:webp)
 dist/                    # Build output (Cloudflare Pages)
 ├── index.html
 ├── about/index.html
-├── blog/
+├── methodology/
 │   ├── index.html
-│   └── [posts]/
+│   └── [docs]/
 ├── _astro/              # Bundled assets
 │   ├── *.css
 │   └── *.js
@@ -842,4 +819,3 @@ dist/                    # Build output (Cloudflare Pages)
 - **Testing**: Vitest for units, Playwright for E2E
 - **CMS Integration**: Potential headless CMS for content
 - **More Languages**: Additional i18n support
-- **RSS Improvements**: Category-specific feeds

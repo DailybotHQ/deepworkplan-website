@@ -1,14 +1,14 @@
 # Image Optimization
 
-Pipeline for optimizing blog images using [sharp](https://sharp.pixelplumbing.com/). Includes a staging workflow for new images, a bulk optimizer for existing images, and a WebP conversion workflow for AI agents.
+Pipeline for optimizing site images using [sharp](https://sharp.pixelplumbing.com/). Includes a staging workflow for new images, a bulk optimizer for existing images, and a WebP conversion workflow for AI agents.
 
 ## WebP-First Policy
 
-**All blog images MUST be in WebP format.** When adding any image to the blog (hero, inline, or shared), convert it to WebP before committing. If an image cannot be converted (e.g., BMP with unsupported channels, corrupted files, or formats sharp can't process), keep it in the best available format (JPG preferred over PNG for photos) and document the exception.
+**All site images MUST be in WebP format.** When adding any image, convert it to WebP before committing. If an image cannot be converted (e.g., BMP with unsupported channels, corrupted files, or formats sharp can't process), keep it in the best available format (JPG preferred over PNG for photos) and document the exception.
 
 ## Overview
 
-The project uses two Node.js scripts powered by `sharp` (installed as a dev dependency) to resize and compress blog images:
+The project uses two Node.js scripts powered by `sharp` (installed as a dev dependency) to resize and compress images:
 
 | Script | Command | Purpose |
 |--------|---------|---------|
@@ -17,28 +17,28 @@ The project uses two Node.js scripts powered by `sharp` (installed as a dev depe
 
 ## Staging Workflow
 
-The primary workflow for adding new blog images.
+The primary workflow for adding new images.
 
 ### How It Works
 
-1. Drop images into `public/images/blog/_staging/` using the naming convention
+1. Drop images into `public/images/_staging/` using the naming convention
 2. Run `pnpm run images:optimize`
-3. Images are resized, compressed, and moved to `public/images/blog/posts/{slug}/`
+3. Images are resized, compressed, and moved to `public/images/{group}/`
 4. Staging files are deleted after successful processing
 
 ### Staging File Naming Convention
 
-**Format:** `{slug}--{name}.{ext}`
+**Format:** `{group}--{name}.{ext}`
 
-The double-dash (`--`) separates the post slug from the image name.
+The double-dash (`--`) separates the output group/folder from the image name.
 
 | Staging filename | Output path |
 |-----------------|-------------|
-| `my-post--hero.jpg` | `posts/my-post/hero.webp` (converted to WebP) |
-| `my-post--screenshot.png` | `posts/my-post/screenshot.webp` (converted to WebP) |
-| `my-post--diagram.webp` | `posts/my-post/diagram.webp` (already WebP) |
+| `home--hero.jpg` | `home/hero.webp` (converted to WebP) |
+| `home--screenshot.png` | `home/screenshot.webp` (converted to WebP) |
+| `home--diagram.webp` | `home/diagram.webp` (already WebP) |
 
-> **Note:** Always use the `--webp` flag or convert to WebP before staging. All blog images must be in WebP format.
+> **Note:** Always use the `--webp` flag or convert to WebP before staging. All images must be in WebP format.
 
 **Invalid names** (missing `--` separator) are skipped with a warning.
 
@@ -61,17 +61,17 @@ pnpm run images:optimize -- --dry-run --webp
 ### Example Output
 
 ```
-Blog Image Optimizer
+Image Optimizer
 ====================
 
 Found 3 image(s) to process:
 
-  Processing: my-post--hero.jpg
-    -> posts/my-post/hero.jpg
+  Processing: home--hero.jpg
+    -> home/hero.jpg
     120.5KB -> 45.2KB (62.5% reduction)
 
-  Processing: my-post--screenshot.png
-    -> posts/my-post/screenshot.jpg
+  Processing: home--screenshot.png
+    -> home/screenshot.jpg
     744.0KB -> 61.3KB (91.8% reduction)
 
 --------------------
@@ -111,10 +111,10 @@ The staging optimizer auto-selects a preset based on the image name and aspect r
 
 ## Bulk Optimizer (Existing Images)
 
-For one-off optimization of images already in `public/images/blog/`:
+For one-off optimization of images already in `public/images/`:
 
 ```bash
-# Optimize all existing blog images in-place
+# Optimize all existing images in-place
 node scripts/optimize-existing-images.mjs
 
 # Preview what would happen
@@ -125,9 +125,9 @@ node scripts/optimize-existing-images.mjs --dry-run
 
 | Aspect | Staging (`images:optimize`) | Bulk (`optimize-existing-images`) |
 |--------|---------------------------|----------------------------------|
-| Input dir | `_staging/` | `posts/` and `shared/` |
-| Output | Moves to `posts/{slug}/` | Overwrites in-place |
-| Naming | Requires `{slug}--{name}.{ext}` | Uses existing filenames |
+| Input dir | `_staging/` | image group folders |
+| Output | Moves to `{group}/` | Overwrites in-place |
+| Naming | Requires `{group}--{name}.{ext}` | Uses existing filenames |
 | Safety | Deletes staging file after | Only replaces if size reduced |
 | Usage | Ongoing workflow | One-off cleanup |
 
@@ -146,7 +146,7 @@ The bulk optimizer writes to a temporary file first, then only replaces the orig
 
 ## Agent Conversion Workflow
 
-**For AI agents adding images to blog posts.** When the user provides an image (PNG, JPG, etc.), convert it to WebP using this inline Node.js script before placing it in the post folder.
+**For AI agents adding images to the site.** When the user provides an image (PNG, JPG, etc.), convert it to WebP using this inline Node.js script before placing it in its destination folder.
 
 ### Quick Conversion Script
 
@@ -167,7 +167,7 @@ sharp(input)
   .toFile(output)
   .then(info => console.log('Converted:', info.width + 'x' + info.height, info.size + ' bytes'))
   .catch(err => console.error('Error:', err.message));
-" /path/to/source.png public/images/blog/posts/{slug}/hero.webp
+" /path/to/source.png public/images/{group}/hero.webp
 ```
 
 ### Conversion Parameters
@@ -177,7 +177,6 @@ sharp(input)
 | Image type | Max width | Quality | Fit | Height |
 |------------|-----------|---------|-----|--------|
 | Hero | 1400px | 80 | inside | auto (preserve ratio) |
-| Series hero | 1400px | 80 | inside | auto (preserve ratio) |
 | Inline/content | 1200px | 80 | inside | auto (preserve ratio) |
 
 ### Full Conversion Script (file-based)
@@ -206,7 +205,7 @@ try {
 
 ```bash
 # Run from project root (so sharp is found in node_modules)
-node /tmp/convert-to-webp.mjs /path/to/source.png public/images/blog/posts/{slug}/hero.webp 1400
+node /tmp/convert-to-webp.mjs /path/to/source.png public/images/{group}/hero.webp 1400
 ```
 
 ### Error Handling
@@ -225,54 +224,44 @@ If sharp fails to convert an image (e.g., unsupported format, BMP with unusual c
 - The `withoutEnlargement: true` option prevents upscaling small images
 - WebP at quality 80 provides excellent quality-to-size ratio for web use
 
-## Adding Images to a New Blog Post
+## Adding Images to the Site
 
-Complete workflow for adding images when creating a new blog post:
+Complete workflow for adding a new image:
 
 1. **Prepare images** — convert to WebP first (see [Agent Conversion Workflow](#agent-conversion-workflow) above):
    ```bash
    # Convert hero image to WebP
-   node -e "require('sharp')('source-hero.jpg').resize({width:1400,withoutEnlargement:true}).webp({quality:80}).toFile('public/images/blog/posts/my-new-post/hero.webp').then(i=>console.log('OK',i.size+'B'))"
+   node -e "require('sharp')('source-hero.jpg').resize({width:1400,withoutEnlargement:true}).webp({quality:80}).toFile('public/images/home/hero.webp').then(i=>console.log('OK',i.size+'B'))"
    ```
 
 2. **Or use the staging pipeline** (for multiple images):
    ```
-   my-new-post--hero.jpg
-   my-new-post--diagram.png
+   home--hero.jpg
+   home--diagram.png
    ```
    ```bash
-   cp my-new-post--hero.jpg public/images/blog/_staging/
+   cp home--hero.jpg public/images/_staging/
    pnpm run images:optimize -- --webp
    ```
 
 3. **Verify output:**
    ```bash
-   ls public/images/blog/posts/my-new-post/
+   ls public/images/home/
    # hero.webp
    ```
 
-4. **Reference in frontmatter:**
-   ```markdown
-   ---
-   heroImage: '/images/blog/posts/my-new-post/hero.webp'
-   heroLayout: 'banner'
-   ---
-
-   ![Diagram](/images/blog/posts/my-new-post/diagram.webp)
-   ```
+4. **Reference it** in the relevant component or page (use an absolute `/images/...` path and include `width`/`height`).
 
 ## Directory Structure
 
 ```
-public/images/blog/
-├── posts/                    # Optimized per-post images (output)
-│   ├── {slug}/
-│   │   ├── hero.webp         # Hero image (WebP only)
-│   │   └── {name}.webp       # Inline images (WebP only)
-│   └── ...
-├── shared/                   # Shared images (placeholders, common)
+public/images/
+├── {group}/                  # Optimized image groups (output)
+│   ├── hero.webp             # Hero image (WebP only)
+│   └── {name}.webp           # Inline images (WebP only)
+├── brand/                    # Brand marks (logos)
 └── _staging/                 # Drop zone for new images (input)
-    └── {slug}--{name}.{ext}  # Any format (converted to WebP on optimize)
+    └── {group}--{name}.{ext} # Any format (converted to WebP on optimize)
 
 scripts/
 ├── optimize-images.mjs       # Staging workflow optimizer
@@ -281,6 +270,5 @@ scripts/
 
 ## Related Documentation
 
-- [Blog Posts](./BLOG_POSTS.md) - Blog post structure, naming, and hero layouts
 - [Public Assets](./PUBLIC_ASSETS.md) - General static assets structure
 - [Performance Guide](../PERFORMANCE.md) - Site performance best practices

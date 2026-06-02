@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * One-off script to optimize existing blog images in-place.
+ * One-off script to optimize existing site images in-place.
  *
- * Scans public/images/blog/posts/ and public/images/blog/shared/
- * and optimizes all images (resize, compress). Overwrites originals.
+ * Scans public/images/ and optimizes all images (resize, compress).
+ * Only overwrites an original when the optimized version is smaller.
  *
  * Usage:
  *   node scripts/optimize-existing-images.mjs
@@ -16,7 +16,7 @@ import { extname, join, resolve } from 'node:path';
 import sharp from 'sharp';
 
 const ROOT = resolve(import.meta.dirname, '..');
-const BLOG_IMAGES_DIR = join(ROOT, 'public/images/blog');
+const IMAGES_DIR = join(ROOT, 'public/images');
 
 const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif']);
 
@@ -64,7 +64,7 @@ async function optimizeImage(imagePath) {
   const needsResize = metadata.width > maxWidth;
 
   if (dryRun) {
-    const relativePath = imagePath.replace(`${BLOG_IMAGES_DIR}/`, '');
+    const relativePath = imagePath.replace(`${IMAGES_DIR}/`, '');
     console.log(`  [DRY RUN] ${relativePath} (${formatSize(inputSize)})`);
     if (needsResize) {
       console.log(
@@ -124,12 +124,12 @@ async function optimizeImage(imagePath) {
 
 async function main() {
   console.log('');
-  console.log('Existing Blog Image Optimizer');
+  console.log('Existing Image Optimizer');
   console.log('=============================');
   if (dryRun) console.log('(DRY RUN - no files will be modified)');
   console.log('');
 
-  const images = collectImages(BLOG_IMAGES_DIR);
+  const images = collectImages(IMAGES_DIR);
 
   if (images.length === 0) {
     console.log('No images found.');
@@ -142,7 +142,7 @@ async function main() {
   let totalOutputSize = 0;
 
   for (const imagePath of images) {
-    const relativePath = imagePath.replace(`${BLOG_IMAGES_DIR}/`, '');
+    const relativePath = imagePath.replace(`${IMAGES_DIR}/`, '');
 
     try {
       const result = await optimizeImage(imagePath);

@@ -54,7 +54,7 @@ pnpm run build
 ```
 
 This command:
-1. Runs `prebuild` (generates WebP variants via `images:webp`)
+1. Runs `prebuild` (regenerates the agent skills index via `generate-agent-skills-index.mjs`)
 2. Runs TypeScript checking (`astro check`)
 3. Builds to `dist/` directory
 
@@ -63,7 +63,7 @@ This command:
 dist/
 ├── index.html
 ├── about/index.html
-├── blog/
+├── methodology/
 │   └── ...
 ├── _astro/
 │   ├── *.css
@@ -112,7 +112,7 @@ pnpm run md:check:strict   # Same, but exits 1 on missing (for CI)
 - Scans `dist/` for every `index.html` and checks it has a matching `.md` counterpart
 - Catches agent-markdown coverage gaps before deployment (`MARKDOWN_FOR_AGENTS.md` endpoints)
 - Requires `pnpm run build` to run first (operates on the build output)
-- Excludes: `/internal/*`, `/api/*`, `/.well-known/*`, `/_astro/*`, `/images/*`, `/404`, `/rss.xml`, pagination, tag listings, and redirect pages
+- Excludes: `/internal/*`, `/api/*`, `/.well-known/*`, `/_astro/*`, `/images/*`, `/404`, and redirect pages
 - When missing files appear, the report lists them by language (EN / ES)
 - Script lives at `scripts/check-md-parity.mjs`
 
@@ -153,7 +153,7 @@ pnpm run lighthouse
 - Runs Lighthouse CI against the built `dist/` folder
 - Requires a prior `pnpm run build` (the `dist/` directory must exist)
 - Requires Chrome installed locally
-- Tests pages defined in `lighthouserc.cjs`: `/`, `/about/`, `/blog/`, `/es/`
+- Tests pages defined in `lighthouserc.cjs`: `/`, `/about/`, `/methodology/`, `/es/`
 - Asserts performance budgets: Performance >= 95, Accessibility = 100, Best Practices >= 95, SEO >= 95
 
 ## Release
@@ -301,7 +301,7 @@ Full `package.json` scripts:
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
-    "prebuild": "node scripts/generate-webp-homepage.mjs && node scripts/generate-webp-blog-shared.mjs && node scripts/generate-webp-blog-posts.mjs",
+    "prebuild": "node scripts/generate-agent-skills-index.mjs",
     "astro": "astro",
     "astro:check": "astro check",
     "astro:preview": "astro preview",
