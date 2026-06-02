@@ -1,6 +1,6 @@
 ---
 title: Init — Make your repository AI-first
-description: The executable onboarding prompt for AI agents. Adopt the Deep Work Plan methodology in any repository — analyze, document, install the skill, build a reasoned kit, and leave the repo fully agent-pilotable, without overwriting existing work.
+description: "The executable onboarding prompt for AI agents: adopt Deep Work Plan in any repository — analyze, document, install the skill, and leave it agent-pilotable."
 ---
 
 # Init — Onboarding prompt for AI agents

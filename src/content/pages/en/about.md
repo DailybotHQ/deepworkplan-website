@@ -1,6 +1,6 @@
 ---
 title: "About the methodology"
-description: "Deep Work Plan is an open, framework-agnostic methodology for running serious engineering work with AI coding agents. Learn where it came from and who maintains it."
+description: "Deep Work Plan is an open, framework-agnostic methodology for serious engineering work with AI coding agents. Where it came from and who maintains it."
 lastUpdated: 2026-05-30
 ---
 

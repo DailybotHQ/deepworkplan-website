@@ -1,6 +1,6 @@
 ---
 title: "La Metodología Deep Work Plan"
-description: "Cinco capítulos del manifiesto a los arquetipos: los principios, el bucle central, las plantillas, las skills y las adaptaciones de la metodología Deep Work Plan."
+description: "Cinco capítulos, del manifiesto a los arquetipos: principios, bucle central, plantillas, skills y adaptaciones de la metodología Deep Work Plan."
 lastUpdated: 2026-05-30
 ---
 

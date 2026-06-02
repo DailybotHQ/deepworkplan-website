@@ -1,6 +1,6 @@
 ---
 title: "Inicio rápido — Deep Work Plan"
-description: "Instala la skill, incorpora tu repositorio y luego planifica y ejecuta con cualquier agente: los pasos que vuelven tu repositorio spec-driven y pilotable por agentes."
+description: "Instala la skill, incorpora tu repositorio y planifica y ejecuta con cualquier agente: los pasos que vuelven tu repo spec-driven y pilotable por agentes."
 lastUpdated: 2026-05-31
 ---
 

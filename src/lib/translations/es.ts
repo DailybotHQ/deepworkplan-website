@@ -41,7 +41,7 @@ export const es: SiteTranslations = {
       title:
         'Deep Work Plan — convierte cualquier repositorio en un código AI-first',
       description:
-        'Deep Work Plan convierte cualquier repositorio en un código AI-first, pilotable por agentes. Una metodología abierta con licencia MIT y un kit de referencia para una ejecución estructurada, validada y reanudable.',
+        'Una metodología y kit abiertos con licencia MIT que hacen cualquier repositorio AI-first: instala un skill y cualquier agente planifica, ejecuta y reanuda.',
     },
     hero: {
       badge: 'Metodología abierta · MIT · Independiente del agente',
@@ -328,7 +328,7 @@ export const es: SiteTranslations = {
     title: 'Acerca de la metodología',
     subtitle: 'Metodología abierta · Licencia MIT',
     description:
-      'Deep Work Plan es una metodología abierta y agnóstica de frameworks para ejecutar trabajo de ingeniería serio con agentes de programación con IA. Conoce su origen y quién la mantiene.',
+      'Deep Work Plan es una metodología abierta y agnóstica de framework para trabajo de ingeniería serio con agentes de IA. De dónde viene y quién la mantiene.',
     heroDescription:
       'Una estructura repetible para planificar, ejecutar y verificar trabajo profundo con agentes de programación con IA: construida en abierto y de uso libre.',
     bioTitle: 'Qué es',
@@ -749,7 +749,7 @@ export const es: SiteTranslations = {
     meta: {
       title: 'Especificación de Deep Work Plan',
       description:
-        'La especificación legible de la metodología Deep Work Plan: el formato DWP, el protocolo de agentes, los arquetipos, el estándar de documentación y los complementos.',
+        'La especificación legible de Deep Work Plan: el formato DWP, el protocolo de agentes, los arquetipos, el estándar de documentación y los complementos.',
     },
     eyebrow: 'Especificación',
     title: 'Especificación',
@@ -764,7 +764,7 @@ export const es: SiteTranslations = {
     meta: {
       title: 'El Kit de Deep Work Plan',
       description:
-        'Comandos, adaptadores, presets y ejemplos que hacen ejecutable la metodología Deep Work Plan en distintos agentes y stacks.',
+        'La skill y sus ocho sub-skills, comandos, adaptadores, presets, addons opcionales y ejemplos que hacen ejecutable Deep Work Plan en cualquier agente y stack.',
     },
     eyebrow: 'Kit',
     title: 'El Kit',
@@ -805,7 +805,7 @@ export const es: SiteTranslations = {
     meta: {
       title: 'Ejemplos de Deep Work Plan',
       description:
-        'Recorridos de antes y después que muestran la misma tarea de ingeniería con y sin un Deep Work Plan.',
+        'Recorridos de antes y después que muestran la misma tarea de ingeniería con y sin un Deep Work Plan — y la diferencia en fiabilidad y revisión.',
     },
     eyebrow: 'Ejemplos',
     title: 'Ejemplos',
@@ -820,7 +820,7 @@ export const es: SiteTranslations = {
     meta: {
       title: 'Inicio rápido — Deep Work Plan',
       description:
-        'Instala la skill, incorpora tu repositorio y luego planifica y ejecuta con cualquier agente: los pasos que vuelven tu repositorio spec-driven y pilotable por agentes.',
+        'Instala la skill, incorpora tu repositorio y planifica y ejecuta con cualquier agente: los pasos que vuelven tu repo spec-driven y pilotable por agentes.',
     },
     eyebrow: 'Inicio rápido',
     title: 'Empieza en minutos',
@@ -873,7 +873,7 @@ export const es: SiteTranslations = {
     meta: {
       title: 'Init — Convierte tu repositorio en AI-first',
       description:
-        'Adopta la metodología Deep Work Plan en cualquier repositorio. Instala la skill, ejecuta la incorporación del agente y luego planifica y ejecuta con cualquier agente de programación de IA.',
+        'Adopta Deep Work Plan en cualquier repositorio: instala la skill, ejecuta la incorporación y luego planifica y ejecuta con cualquier agente de IA.',
     },
     eyebrow: 'Adopción',
     title: 'Convierte este repositorio en AI-first',

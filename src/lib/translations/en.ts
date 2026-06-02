@@ -40,7 +40,7 @@ export const en: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — turn any repository into an AI-first codebase',
       description:
-        'A methodology and kit for planning and executing complex software work with AI agents: it documents your repo, produces long-horizon plans, and lets any agent pilot, validate, and resume the work.',
+        'An open, MIT-licensed methodology and kit that makes any repository AI-first: install one skill, and any agent can plan, execute, verify, and resume work.',
     },
     hero: {
       badge: 'Open methodology · MIT · Agent-agnostic',
@@ -326,7 +326,7 @@ export const en: SiteTranslations = {
     title: 'About the methodology',
     subtitle: 'Open methodology · MIT licensed',
     description:
-      'Deep Work Plan is an open, framework-agnostic methodology for running serious engineering work with AI coding agents. Learn where it came from and who maintains it.',
+      'Deep Work Plan is an open, framework-agnostic methodology for serious engineering work with AI coding agents. Where it came from and who maintains it.',
     heroDescription:
       'A repeatable structure for planning, executing, and verifying deep work with AI coding agents — built in the open and free to use.',
     bioTitle: 'What it is',
@@ -377,7 +377,7 @@ export const en: SiteTranslations = {
     title: 'Community & contact',
     subtitle: 'Open source · Community-driven',
     description:
-      'Deep Work Plan is built in the open. Find the source, open an issue, or join the conversation through the channels below.',
+      'Deep Work Plan is built in the open. Find the source, open an issue, or join the conversation through the channels below — contributions are welcome.',
     heroDescription:
       'Questions, ideas, or improvements? Deep Work Plan is developed in public — here is where to reach the project and its maintainers.',
     formTitle: 'Send a Message',
@@ -724,7 +724,7 @@ export const en: SiteTranslations = {
     meta: {
       title: 'The Deep Work Plan Methodology',
       description:
-        'Five chapters from manifesto to archetypes: the principles, core loop, templates, skills, and adaptations behind Deep Work Plan.',
+        'Five chapters from manifesto to archetypes: the principles, the core loop, templates, skills and agents, and the adaptations behind Deep Work Plan.',
     },
     eyebrow: 'Methodology',
     title: 'The Deep Work Plan Methodology',
@@ -757,7 +757,7 @@ export const en: SiteTranslations = {
     meta: {
       title: 'The Deep Work Plan Kit',
       description:
-        'Commands, adapters, presets, and examples that make the Deep Work Plan methodology runnable across agents and stacks.',
+        'The skill and its eight sub-skills, commands, adapters, presets, opt-in add-ons, and examples that make Deep Work Plan runnable across agents and stacks.',
     },
     eyebrow: 'Kit',
     title: 'The Kit',
@@ -798,7 +798,7 @@ export const en: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan Examples',
       description:
-        'Before-and-after walkthroughs showing the same engineering task with and without a Deep Work Plan.',
+        'Before-and-after walkthroughs showing the same engineering task with and without a Deep Work Plan — and the difference in reliability and review.',
     },
     eyebrow: 'Examples',
     title: 'Examples',

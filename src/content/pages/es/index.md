@@ -1,6 +1,6 @@
 ---
 title: "Deep Work Plan — convierte cualquier repositorio en un código AI-first"
-description: "Deep Work Plan convierte cualquier repositorio en un código AI-first, pilotable por agentes. Una metodología abierta con licencia MIT y un kit de referencia para una ejecución estructurada, validada y reanudable."
+description: "Una metodología y kit abiertos con licencia MIT que hacen cualquier repositorio AI-first: instala un skill y cualquier agente planifica, ejecuta y reanuda."
 lastUpdated: 2026-05-30
 ---
 

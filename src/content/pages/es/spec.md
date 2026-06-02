@@ -1,6 +1,6 @@
 ---
 title: "Especificación de Deep Work Plan"
-description: "La especificación legible de la metodología Deep Work Plan: el formato DWP, el protocolo de agentes, los arquetipos, el estándar de documentación y los complementos."
+description: "La especificación legible de Deep Work Plan: el formato DWP, el protocolo de agentes, los arquetipos, el estándar de documentación y los complementos."
 lastUpdated: 2026-05-30
 ---
 

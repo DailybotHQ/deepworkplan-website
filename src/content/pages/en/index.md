@@ -1,6 +1,6 @@
 ---
 title: "Deep Work Plan — turn any repository into an AI-first codebase"
-description: "Deep Work Plan turns any repository into an AI-first, agent-pilotable codebase. An open, MIT-licensed methodology and reference kit for structured, validated, resumable agent execution."
+description: "An open, MIT-licensed methodology and kit that makes any repository AI-first: install one skill, and any agent can plan, execute, verify, and resume work."
 lastUpdated: 2026-05-30
 ---
 

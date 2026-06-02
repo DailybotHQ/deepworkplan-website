@@ -1,6 +1,6 @@
 ---
 title: Init — Haz que tu repositorio sea AI-first
-description: El prompt de incorporación ejecutable para agentes de IA. Adopta la metodología Deep Work Plan en cualquier repositorio — analiza, documenta, instala el skill, construye un kit razonado y deja el repo totalmente pilotable por IA, sin sobrescribir el trabajo existente.
+description: "El prompt de incorporación ejecutable: adopta Deep Work Plan en cualquier repositorio — analiza, documenta, instala el skill y déjalo pilotable por IA."
 ---
 
 # Init — Prompt de incorporación para agentes de IA

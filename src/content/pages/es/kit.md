@@ -1,6 +1,6 @@
 ---
 title: "El Kit de Deep Work Plan"
-description: "La skill y sus ocho sub-skills, comandos de barra, adaptadores de agente, presets de incorporación, addons opcionales y ejemplos que hacen ejecutable la metodología Deep Work Plan en distintos agentes y stacks."
+description: "La skill y sus ocho sub-skills, comandos, adaptadores, presets de incorporación, addons opcionales y ejemplos que hacen ejecutable DWP en cualquier stack."
 lastUpdated: 2026-05-31
 ---
 

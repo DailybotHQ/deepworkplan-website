@@ -1,6 +1,6 @@
 ---
 title: "The Deep Work Plan Kit"
-description: "The skill and its eight sub-skills, slash commands, agent adapters, onboarding presets, opt-in addons, and examples that make the Deep Work Plan methodology runnable across AI coding agents and stacks."
+description: "The skill and its eight sub-skills, commands, agent adapters, onboarding presets, opt-in add-ons, and examples that make Deep Work Plan runnable anywhere."
 lastUpdated: 2026-05-31
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Sobre la metodología"
-description: "Deep Work Plan es una metodología abierta y agnóstica de framework para ejecutar trabajo de ingeniería serio con agentes de IA. Conoce de dónde viene y quién la mantiene."
+description: "Deep Work Plan es una metodología abierta y agnóstica de framework para trabajo de ingeniería serio con agentes de IA. De dónde viene y quién la mantiene."
 lastUpdated: 2026-05-30
 ---
 

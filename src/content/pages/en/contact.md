@@ -1,6 +1,6 @@
 ---
 title: "Community & contact"
-description: "Deep Work Plan is built in the open. Find the source, open an issue, or join the conversation through the channels below."
+description: "Deep Work Plan is built in the open. Find the source, open an issue, or join the conversation through the channels below — contributions are welcome."
 lastUpdated: 2026-05-30
 ---
 
