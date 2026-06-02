@@ -6,8 +6,14 @@
 > cross-checked in Task 6). See [STYLE_GUIDE.md](./STYLE_GUIDE.md) for the schema,
 > palette, dimensions, and light/dark + EN/ES policies.
 
+> **⚠️ Diagrams (▦) are now components.** Per `PLAN_interactive_diagram_components`,
+> every ▦ diagram slot (HP-03/04/05, all ME/SP/KT) is built as an HTML/CSS component
+> under `src/components/diagrams/` (see [`docs/DIAGRAM_COMPONENTS.md`](../DIAGRAM_COMPONENTS.md));
+> these prompt entries are kept as the **component specs / i18n seed**. Only the
+> 🖼 illustrations (HP-01, HP-02, HP-06–09) are generated as images.
+
 **Priority key:** ★ flagship · H high · M medium · L low.
-**Type:** 🖼 illustration · ▦ diagram.
+**Type:** 🖼 illustration (→ image) · ▦ diagram (→ component).
 **Status:** `todo` (no prompt yet) · `done` (schema-complete prompt written) ·
 `skip` (intentionally no visual — reason noted).
 

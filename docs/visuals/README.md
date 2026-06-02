@@ -10,6 +10,16 @@ The visual identity follows the "Broadsheet" editorial system: warm-paper,
 ink-line **engraving** style anchored to the existing lighthouse in
 `public/images/og-default.png`.
 
+> **⚠️ Update — diagrams are now components, not images.** Following
+> `PLAN_interactive_diagram_components`, the **24 diagrams** in this pack
+> (HP-03/04/05, all ME, SP, KT) are being built as **HTML/CSS components** under
+> `src/components/diagrams/` (text in the codebase → cheap multi-language), per
+> [`docs/DIAGRAM_COMPONENTS.md`](../DIAGRAM_COMPONENTS.md). The diagram prompt
+> entries below are kept as the **component specs** (their nodes, arrows, and EN/ES
+> labels seed each component's i18n map). Only the **6 illustrations** — HP-01 (the
+> faro hero), HP-02, HP-06, HP-07, HP-08, HP-09 — remain **AI-generated images**;
+> generate those with your image agent using the prompts here.
+
 ## Contents
 
 | File | What it is |
