@@ -38,6 +38,7 @@
     "md:check:strict": "node scripts/check-md-parity.mjs --strict",
     "lighthouse": "lhci autorun",
     "lighthouse:full": "lhci autorun --config=lighthouserc.full.cjs",
+    "lighthouse:desktop": "lhci autorun --config=lighthouserc.desktop.cjs",
     "release": "bash .github/scripts/prepare_release.sh"
   },
   "dependencies": {
