@@ -7,7 +7,7 @@ import { z } from 'astro/zod';
  * methodology. Bilingual files live under `src/content/methodology/{en,es}`.
  */
 const methodology = defineCollection({
-  loader: glob({ base: './src/content/methodology', pattern: '**/*.md' }),
+  loader: glob({ base: './src/content/methodology', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -23,7 +23,7 @@ const methodology = defineCollection({
  * sections. Bilingual files live under `src/content/spec/{en,es}`.
  */
 const spec = defineCollection({
-  loader: glob({ base: './src/content/spec', pattern: '**/*.md' }),
+  loader: glob({ base: './src/content/spec', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -38,7 +38,7 @@ const spec = defineCollection({
  * the DWP kit. Kind-specific fields are allowed via `.passthrough()`.
  */
 const kit = defineCollection({
-  loader: glob({ base: './src/content/kit', pattern: '**/*.md' }),
+  loader: glob({ base: './src/content/kit', pattern: '**/*.{md,mdx}' }),
   schema: z
     .object({
       title: z.string(),
@@ -54,7 +54,7 @@ const pages = defineCollection({
   // Markdown source files for agent-friendly .md endpoints (static pages)
   loader: glob({
     base: './src/content/pages',
-    pattern: '**/*.md',
+    pattern: '**/*.{md,mdx}',
     generateId: ({ entry }) => entry.replace(/\.md$/i, ''),
   }),
   schema: z.object({
