@@ -1,4 +1,5 @@
 ---
+import OnboardingSequence from '@/components/diagrams/home/OnboardingSequence.astro';
 import Kicker from '@/components/editorial/Kicker.astro';
 import type { Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
@@ -27,6 +28,7 @@ const o = t.home.onboarding;
       </h2>
       <p class="lead mt-4">{o.subtitle}</p>
     </div>
+    <OnboardingSequence lang={lang} class="mt-10" />
     <ol class="mt-12 grid gap-8 sm:grid-cols-2" role="list">
       {
         o.steps.map((step, i) => (

@@ -1,0 +1,99 @@
+---
+/**
+ * ArchetypesCompare (HP-05) — individual repository vs orchestrator hub, compact
+ * homepage register. Spec: docs/visuals/prompts/01-homepage.md#hp-05. HTML/CSS;
+ * language-keyed i18n (en fallback); role="img"; dark mode; zero JS.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Two archetypes: an individual repository (one self-contained codebase) versus an orchestrator hub (coordinates sub-repositories).',
+    individual: 'Individual repository',
+    individualSub: 'one self-contained codebase',
+    orchestrator: 'Orchestrator hub',
+    orchestratorSub: 'coordinates sub-repositories',
+  },
+  es: {
+    ariaLabel:
+      'Dos arquetipos: un repositorio individual (un código base autónomo) frente a un hub orquestador (coordina sub-repositorios).',
+    individual: 'Repositorio individual',
+    individualSub: 'un código base autónomo',
+    orchestrator: 'Hub orquestador',
+    orchestratorSub: 'coordina sub-repositorios',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<figure class={`editorial-asset acomp ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body acomp-cols">
+    <div class="acomp-card">
+      <span class="acomp-mark" aria-hidden="true">▢</span>
+      <h4 class="acomp-h">{t.individual}</h4>
+      <p class="acomp-sub">{t.individualSub}</p>
+    </div>
+    <div class="acomp-card acomp-card--accent">
+      <span class="acomp-mark ea-accent" aria-hidden="true">⬡⬡⬡</span>
+      <h4 class="acomp-h">{t.orchestrator}</h4>
+      <p class="acomp-sub">{t.orchestratorSub}</p>
+    </div>
+  </div>
+</figure>
+
+<style>
+  .acomp {
+    color: var(--color-ink);
+  }
+  .acomp-cols {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  @media (min-width: 560px) {
+    .acomp-cols {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .acomp-card {
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 1rem;
+    text-align: center;
+    background-color: var(--color-paper);
+  }
+  .acomp-card--accent {
+    border-color: var(--color-secondary);
+  }
+  .acomp-mark {
+    display: block;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.4rem;
+    color: var(--color-muted);
+  }
+  .acomp-h {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0;
+  }
+  .acomp-card--accent .acomp-h {
+    color: var(--color-secondary);
+  }
+  .acomp-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    margin: 0.25rem 0 0;
+  }
+</style>
