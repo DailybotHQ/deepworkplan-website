@@ -12,6 +12,16 @@
 > **Flagship:** HP-01 — the Hero right-column illustration — gets the richest
 > treatment and is the single highest-value asset on the site.
 
+> **🔤 ILLUSTRATIONS ARE WORDLESS — and only some entries here are illustrations.**
+> Generated illustrations must contain **ZERO text** (no words, letters, numbers,
+> or labels), because they are a single asset reused for **every language** — we
+> never want to regenerate art per locale. **Generate as images only:** HP-01,
+> HP-02, HP-06, HP-07, HP-08, HP-09 (all wordless). **Do NOT generate:** HP-03,
+> HP-04, HP-05 — those need text labels, so they are **diagrams built as HTML/CSS
+> components** (`src/components/diagrams/home/`), already live on the homepage and
+> translated from the codebase. Rule of thumb: **needs text → HTML/CSS component;
+> wordless vibe art → generated image.**
+
 > **⚠️ UNIVERSAL EDGES & FRAMING RULE (applies to every illustration below).**
 > No image may have a **border, frame, rectangle, box, or outline** around it, and
 > **nothing may touch or be cut off by the edges**. The artwork sits centered with
@@ -93,6 +103,12 @@
 
 ### HP-03 — Quickstart flow (the four steps)
 
+> **⚠️ DIAGRAM — NOT an illustration. Do NOT generate this as an image.** It is
+> already **built as a live component** at
+> `src/components/diagrams/home/QuickstartFlow.astro` and rendered in the Quickstart
+> section. Diagrams *have text labels by design* and are HTML/CSS in the codebase
+> (so they translate for free). This entry is kept only as the component's spec.
+
 - **Target surface:** `src/components/home/Quickstart.astro` → above or beside the four numbered steps.
 - **Type:** diagram
 - **Priority:** high
@@ -118,6 +134,10 @@
 
 ### HP-04 — Onboarding sequence (reasoning, not copy-paste)
 
+> **⚠️ DIAGRAM — NOT an illustration. Do NOT generate this as an image.** Already
+> **built as a component** at `src/components/diagrams/home/OnboardingSequence.astro`
+> and rendered in the Onboarding section. Entry kept only as the component's spec.
+
 - **Target surface:** `src/components/home/Onboarding.astro` → beside the numbered onboarding steps ("Point it at any repository. It reasons — it does not copy-paste.").
 - **Type:** diagram
 - **Priority:** medium
@@ -142,6 +162,10 @@
 ---
 
 ### HP-05 — Archetypes comparison (individual vs orchestrator)
+
+> **⚠️ DIAGRAM — NOT an illustration. Do NOT generate this as an image.** Already
+> **built as a component** at `src/components/diagrams/home/ArchetypesCompare.astro`
+> and rendered in the Archetypes section. Entry kept only as the component's spec.
 
 - **Target surface:** `src/components/home/Archetypes.astro` → between the two archetype cards (Individual vs Orchestrator).
 - **Type:** diagram
