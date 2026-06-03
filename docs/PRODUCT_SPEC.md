@@ -50,7 +50,7 @@ Build a fast, accessible, bilingual site that:
 
 **Purpose:** Communicate what DWP is, who it is for, and where to go next — fast.
 
-**Sections:** A hero that states the AI-first / agent-pilotable positioning and value proposition; a concise "what is a Deep Work Plan" explainer; the two narrative pillars (spec-driven development, harness engineering); the core principles (single-task focus, validation-first, git-native, resume-safe); entry points into the methodology reader, the spec reader, the kit catalog, and the `/init` adoption endpoint; and a clear primary call to action.
+**Sections:** A hero that leads with the context-over-models / structured-environment positioning — *"Models matter. Context matters more."* — framing the repository as the environment (context, guardrails, durable plan) where any agent executes reliably, anchored by the harness thesis (*"the repository itself becomes the harness"*); a concise "what is a Deep Work Plan" explainer; the two narrative pillars (spec-driven development, harness engineering); the core principles (single-task focus, validation-first, git-native, resume-safe); entry points into the methodology reader, the spec reader, the kit catalog, and the `/init` adoption endpoint; and a clear primary call to action.
 
 ### 2. Methodology Reader
 

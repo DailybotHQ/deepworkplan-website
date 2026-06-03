@@ -40,12 +40,14 @@ export const es: SiteTranslations = {
       title:
         'Deep Work Plan — convierte cualquier repositorio en un código AI-first',
       description:
-        'Una metodología y kit abiertos con licencia MIT que hacen cualquier repositorio AI-first: instala un skill y cualquier agente planifica, ejecuta y reanuda.',
+        'Haz cualquier repositorio AI-first: un entorno estructurado — contexto, guardrails y un plan — donde cualquier agente de código ejecuta de forma fiable.',
     },
     hero: {
       badge: 'Metodología abierta · MIT · Independiente del agente',
-      title: 'Haz que cualquier repositorio sea AI-first.',
-      titleEmphasis: 'Dale a tu agente una sola instrucción.',
+      title: 'Los modelos importan.',
+      titleEmphasis: 'El contexto importa más.',
+      subtitle:
+        'Deep Work Plan convierte cualquier repositorio en un entorno estructurado — contexto, guardrails y un plan duradero — donde cualquier agente de código ejecuta con precisión y completa el trabajo de largo aliento.',
       instructionLabel: 'Dale esto a tu agente',
       instruction:
         'Lee y sigue las instrucciones en https://deepworkplan.com/init.md para hacer este repositorio AI-first.',
@@ -489,6 +491,8 @@ export const es: SiteTranslations = {
     intro:
       'La especificación precisa y legible de la metodología: las estructuras y protocolos que comparten las personas y los agentes.',
     tocTitle: 'En esta página',
+    prev: 'Anterior',
+    next: 'Siguiente',
     backToIndex: 'Todos los documentos',
   },
 
@@ -530,6 +534,8 @@ export const es: SiteTranslations = {
       },
     },
     viewDetail: 'Ver detalles',
+    prev: 'Anterior',
+    next: 'Siguiente',
     backToIndex: 'Volver al kit',
   },
 
@@ -545,6 +551,8 @@ export const es: SiteTranslations = {
     intro:
       'Mira la metodología en acción: recorridos concretos de antes y después de tareas de ingeniería reales.',
     viewExample: 'Leer el recorrido',
+    prev: 'Anterior',
+    next: 'Siguiente',
     backToGallery: 'Todos los ejemplos',
   },
 

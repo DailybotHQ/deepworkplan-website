@@ -94,6 +94,7 @@ export interface SiteTranslations {
       badge: string;
       title: string;
       titleEmphasis: string;
+      subtitle: string;
       instructionLabel: string;
       instruction: string;
       instructionCaption: string;
@@ -298,6 +299,8 @@ export interface SiteTranslations {
     title: string;
     intro: string;
     tocTitle: string;
+    prev: string;
+    next: string;
     backToIndex: string;
   };
 
@@ -315,6 +318,8 @@ export interface SiteTranslations {
       addon: { title: string; description: string };
     };
     viewDetail: string;
+    prev: string;
+    next: string;
     backToIndex: string;
   };
 
@@ -325,6 +330,8 @@ export interface SiteTranslations {
     title: string;
     intro: string;
     viewExample: string;
+    prev: string;
+    next: string;
     backToGallery: string;
   };
 
