@@ -1,0 +1,96 @@
+---
+/**
+ * WebMcp — exposes deepworkplan.com's read-only tools to in-browser AI agents via
+ * the WebMCP API (navigator.modelContext) on every page. Progressive enhancement:
+ * a no-op in browsers without WebMCP support. Tools are read-only / low-cognitive
+ * (get the /init adoption prompt, list sections, navigate). Documented in
+ * /.well-known/mcp/server-card.json and the agent-skills index.
+ *
+ * is:inline so it is present verbatim in the HTML and runs on page load.
+ */
+---
+
+<script is:inline>
+  (() => {
+    try {
+      const mc = navigator.modelContext;
+      if (!mc) return;
+
+      const es =
+        location.pathname === '/es' || location.pathname.indexOf('/es/') === 0;
+      const prefix = es ? '/es' : '';
+      const origin = location.origin;
+      const url = (path) =>
+        origin + prefix + (path === '/' ? '/' : path + '/');
+
+      const sections = [
+        { key: 'home', name: 'Home', path: '/' },
+        { key: 'methodology', name: 'Methodology', path: '/methodology' },
+        { key: 'spec', name: 'Specification', path: '/spec' },
+        { key: 'kit', name: 'Kit', path: '/kit' },
+        { key: 'examples', name: 'Examples', path: '/examples' },
+        { key: 'init', name: 'Adoption (/init)', path: '/init' },
+      ];
+
+      const text = (t) => ({ content: [{ type: 'text', text: t }] });
+
+      const tools = [
+        {
+          name: 'get_init_prompt',
+          description:
+            'Return the canonical one-line instruction that makes any repository AI-first with Deep Work Plan (the /init.md adoption prompt).',
+          inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+          execute: () =>
+            text(
+              'Read and follow the instructions at ' +
+                origin + prefix + '/init.md' +
+                ' to make this repository AI-first.'
+            ),
+        },
+        {
+          name: 'list_site_sections',
+          description:
+            'List the main sections of deepworkplan.com (methodology, specification, kit, examples, init) with their URLs.',
+          inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+          execute: () =>
+            text(sections.map((s) => s.name + ': ' + url(s.path)).join('\n')),
+        },
+        {
+          name: 'open_section',
+          description:
+            'Navigate the current browser tab to a section of deepworkplan.com.',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              section: { type: 'string', enum: sections.map((s) => s.key) },
+            },
+            required: ['section'],
+            additionalProperties: false,
+          },
+          execute: (args) => {
+            const s =
+              sections.find((x) => x.key === (args && args.section)) ||
+              sections[0];
+            const dest = prefix + (s.path === '/' ? '/' : s.path);
+            location.href = dest;
+            return text('Navigating to ' + s.name + ' (' + dest + ').');
+          },
+        },
+      ];
+
+      if (typeof mc.provideContext === 'function') {
+        mc.provideContext({ tools });
+      } else if (typeof mc.registerTool === 'function') {
+        for (const t of tools) {
+          mc.registerTool(t.name, {
+            description: t.description,
+            inputSchema: t.inputSchema,
+            execute: t.execute,
+          });
+        }
+      }
+    } catch {
+      /* WebMCP unsupported — no-op */
+    }
+  })();
+</script>

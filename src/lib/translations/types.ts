@@ -103,12 +103,14 @@ export interface SiteTranslations {
       pullQuote: string;
       primaryCta: string;
       secondaryCta: string;
+      illustrationAlt: string;
     };
     pitch: {
       kicker: string;
       problem: string;
       answer: string;
       origin: string;
+      illustrationAlt: string;
     };
     onboarding: {
       badge: string;

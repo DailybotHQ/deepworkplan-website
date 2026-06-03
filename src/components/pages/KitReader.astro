@@ -24,6 +24,9 @@ function slugOf(id: string): string {
   return id.replace(/^(en|es)\//, '');
 }
 
+// Diagram components are embedded in-body via MDX at the right point in each kit
+// document's narrative (see docs/DIAGRAM_COMPONENTS.md §5) — not injected here.
+
 const backHref =
   variant === 'examples' ? `${prefix}/examples` : `${prefix}/kit`;
 const backLabel =

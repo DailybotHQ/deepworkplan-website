@@ -6,9 +6,9 @@ This document serves as the central reference for all available Skills and Agent
 
 | Type   | Tier 1 (Light) | Tier 2 (Standard) | Tier 3 (Heavy) | Total |
 |--------|:--------------:|:------------------:|:--------------:|:-----:|
-| Skills | 11             | 3                  | 0              | 14    |
+| Skills | 11             | 4                  | 0              | 15    |
 | Agents | 0              | 4                  | 1              | 5     |
-| **Total** | **11**      | **7**              | **1**          | **19** |
+| **Total** | **11**      | **8**              | **1**          | **20** |
 
 ---
 
@@ -43,6 +43,7 @@ Everyday development work.
 | write-tests   | tests    | `/write-tests`   | sonnet | Add or expand tests (*.test.ts) - Vitest/Playwright when configured      |
 | refactor-safe | execute  | `/refactor-safe` | sonnet | Safe refactor in bounded scope (1-10 files, no behavior change)          |
 | responsive-lighthouse-audit | audit | `/responsive-lighthouse-audit` | sonnet | Audit responsiveness across breakpoints + drive Lighthouse to near-100 on mobile & desktop |
+| add-diagram-component | create | `/add-diagram-component` | sonnet | Create an editorial HTML/CSS/SVG diagram component (i18n in-code) and embed it in-body via MDX |
 
 ### Tier 3 (Heavy/Reasoning)
 
@@ -337,10 +338,9 @@ All skills and agents are adapted for this Astro repository:
 
 | Date | Change | Details |
 |------|--------|---------|
-| 2026-06-02 | `responsive-lighthouse-audit` skill added | Skills & Agents Discovery for PLAN_responsive_quality_audit. Captured the battle-tested procedure (desktop Lighthouse config + dual-form-factor sweep, the breakpoint walk, and the fix playbook: `.table-responsive` table wrapping, `label-content-name-mismatch`, `heading-order`, lazy below-fold images, the intentional `robots-txt`/SEO skip). New Tier-2 skill (skills 13 → 14). No agent changes warranted. |
-| 2026-06-01 | legacy blog skills + agent removed | Deleted the blog/content-marketing skills that no longer fit a methodology site: `add-blog-post`, `audit-post`, `audit-series`, `audit-taxonomy`, `promote-post`, `optimize-image`, plus the `/new-post` command (skills 21 → 13). Also deleted the `content-writer` agent — a personal-blog/portfolio author coupled to the removed blog engine (agents 6 → 5). Catalog, COMMANDS_REFERENCE, kept-skill cross-links, executor agent, and the internal hub updated to match. |
-| 2026-06-01 | dogfooding cutover (no new skills/agents) | Skills & Agents Discovery for the DWP dogfooding migration. The legacy `.agent_commands/` generator/plan engine was retired in favour of the installed `deepworkplan` skill (reference install pinned by `skills-lock.json`); `dwp-*`, `/skill-create`, `/agent-create`, and `/lib-upgrade` are now thin delegators. The relocated generator is now the skill's `author` sub-skill. No new top-level skills/agents warranted. |
-| 2026-05-31 | editorial-system guidance added | Skills & Agents Discovery for the editorial redesign. Updated existing skills/agents to reference "The Broadsheet" editorial system: `update-styles` + `add-component` (paper/ink + oxblood tokens, serif `.font-display`, `src/components/editorial/` primitives), `add-page` (middleware allowlist gotcha + editorial system + `types.ts`), `content-writer` (specification voice; pillars), `reviewer` (editorial design-system review block). No new skills/agents needed. |
+| 2026-06-02 | `add-diagram-component` skill added | Skills & Agents Discovery for PLAN_interactive_diagram_components. Captured the Editorial Interactive Asset system (`docs/DIAGRAM_COMPONENTS.md`): diagrams as HTML/CSS/SVG components with inline language-keyed i18n (en fallback) + `lang`, `role="img"` + localized aria-label, `.editorial-asset-*` Broadsheet styling, static-first, and **in-body MDX embedding at narrative anchors** (overview after the lead; section figures at their heading; never before the title). New Tier-2 skill (skills 14 → 15). No agent changes warranted (`i18n-guardian`/`translate-sync` already cover the i18n maps). |
+| 2026-06-02 | Visual Prompt Pack — no new skills/agents (proposal deferred) | Skills & Agents Discovery for PLAN_site_visual_prompt_pack. Evaluated a reusable `visual-prompt-pack` skill (house-style block + slot inventory + schema-driven AI-image prompts + integration guide). **Deferred creation** — the procedure lives in `docs/visuals/STYLE_GUIDE.md` and had been exercised once; `doc-edit` covers the authoring mechanics. A `/skill-create` candidate for later. |
+| 2026-06-02 | `responsive-lighthouse-audit` skill added | Skills & Agents Discovery for PLAN_responsive_quality_audit. Captured the battle-tested procedure (desktop Lighthouse config + dual-form-factor sweep, the breakpoint walk, and the fix playbook). New Tier-2 skill (skills 13 → 14). No agent changes warranted. |
 
 ---
 

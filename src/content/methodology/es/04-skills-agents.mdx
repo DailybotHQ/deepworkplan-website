@@ -1,0 +1,53 @@
+---
+title: Habilidades y agentes
+description: "La diferencia entre habilidades y agentes, la incorporación al repositorio basada en razonamiento y el directorio .agents con su convención de enlace simbólico .claude a .agents."
+order: 4
+lang: es
+summary: Cómo encajan las habilidades reutilizables, los agentes especializados y la incorporación al repositorio.
+icon: users
+---
+import SkillsAgents from '@/components/diagrams/methodology/SkillsAgents.astro';
+
+# Habilidades y agentes
+
+DWP es agnóstico respecto al agente, pero espera dos bloques de construcción recurrentes (habilidades y agentes) y una forma deliberada de orientarse en un repositorio antes de empezar cualquier trabajo.
+
+## Habilidades frente a agentes
+
+<SkillsAgents lang="es" class="not-prose my-10" />
+
+Es fácil confundirlos, pero cumplen propósitos distintos:
+
+- Las **habilidades** son procedimientos reutilizables que se invocan por nombre. Una habilidad empaqueta un flujo de trabajo repetible (ejecutar pruebas, corregir el linter, crear un componente) para que agentes y personas lo invoquen siempre de la misma manera.
+- Los **agentes** son trabajadores especializados con un rol definido: revisor, ejecutor, arquitecto. Cada agente tiene una responsabilidad acotada y opera dentro de su ámbito.
+
+Una regla útil: una habilidad es *cómo* hacer una tarea recurrente; un agente es *quién* se responsabiliza de una clase de trabajo.
+
+## Un kit vivo: el repositorio crea sus propias habilidades
+
+La incorporación convierte un repositorio en el entorno del agente; no lo congela. El kit está pensado para **crecer** a medida que los flujos de trabajo del repositorio se hacen evidentes. DWP ofrece una subhabilidad **author** (autor) (invocada mediante `/skill-create` y `/agent-create`) que razona sobre el esquema `.agents/` existente y sus convenciones, y luego escribe una nueva habilidad, agente o comando delegador ligero que encaja con ellas. El repositorio crea su propio kit en lugar de heredar uno genérico.
+
+La subhabilidad author es deliberada respecto al encaje. Crea una habilidad para un procedimiento repetible que las personas ejecutan a mano, un agente para un rol recurrente con necesidades distintas de modelo o herramientas, y un comando solo como punto de entrada ligero que enruta hacia una habilidad o un agente. Omite cualquier cosa genérica que no corresponda a un flujo real y mantiene el catálogo de `.agents/docs/` sincronizado con lo que añade. Esta misma subhabilidad respalda la tarea obligatoria de Descubrimiento de Habilidades y Agentes, que reconcilia el catálogo con lo que realmente hay en disco — y `/dwp-verify` confirma esa reconciliación de forma objetiva, fallando si el catálogo y los archivos divergen.
+
+## Complementos de mantenimiento
+
+Más allá de la autoría, DWP incluye **complementos de mantenimiento opcionales** (nunca obligatorios para que un repositorio sea AI-first). El complemento **dependency-upgrade** (actualización de dependencias) es el ejemplo canónico: razona sobre el gestor de paquetes *real* del repositorio (npm, pnpm o yarn con `ncu`; pip, poetry o uv; Cargo; módulos de Go; Bundler; Composer) en lugar de asumir uno, y luego actualiza en lotes pequeños, ejecuta el control de validación real del repositorio después de cada lote, revierte cualquier lote que falle y resume sin confirmar automáticamente. Los complementos se aceptan de forma explícita durante la incorporación; rechazar uno deja el repositorio plenamente conforme.
+
+## Incorporación al repositorio basada en razonamiento
+
+Antes de crear o ejecutar un plan, un agente se incorpora al repositorio. La incorporación es **basada en razonamiento, no en scripts**: el agente lee la estructura, la documentación y la configuración del repositorio para construir un modelo mental, en lugar de ejecutar un script de configuración fijo.
+
+Durante la incorporación, el agente identifica el arquetipo del repositorio (individual u orquestador), los comandos de compilación, prueba y linter, las convenciones existentes de estilo, estructura y nombrado, y las habilidades y agentes ya disponibles. Esta comprensión es lo que le permite planificar y ejecutar de una forma que encaja con el repositorio en lugar de luchar contra él.
+
+## El directorio `.agents/` y el enlace simbólico `.claude → .agents`
+
+DWP reúne todo lo que define el comportamiento de los agentes (habilidades, comandos, definiciones de agentes, documentación interna y ajustes) bajo un único directorio canónico, `.agents/`. El nombre indica que el contenido se comparte entre agentes en lugar de estar atado a una sola herramienta.
+
+Por compatibilidad con herramientas que históricamente leían desde `.claude/`, esa ruta es un enlace simbólico a `.agents/`:
+
+```bash
+ls -la .claude
+# .claude -> .agents
+```
+
+Cada ruta `.claude/...` se resuelve de forma transparente a su equivalente `.agents/...`, de modo que las herramientas antiguas siguen funcionando mientras el contenido nuevo referencia la ubicación canónica `.agents/`. Las habilidades y los agentes se editan a través de los archivos reales bajo `.agents/`, nunca a través del enlace simbólico.

@@ -1,0 +1,186 @@
+---
+/**
+ * CoreLoop — the DWP core loop as an editorial SVG diagram (REFERENCE component).
+ *
+ * Five operations on a ring (create → execute → refine → resume → status) with
+ * verify at the centre. Spec: ME-02 (docs/visuals/prompts/02-methodology.md).
+ * Reference implementation for docs/DIAGRAM_COMPONENTS.md — match its patterns.
+ *
+ * Diagram-as-code: SVG <text> is real, selectable, translatable text driven by an
+ * inline language-keyed i18n map with an `en` fallback. Adding a language = adding
+ * a key. role="img" + localized aria-label; the SVG is aria-hidden (the label
+ * conveys it). Dark mode follows --color-* via currentColor. No JS, no motion.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'The DWP core loop: Create, Execute, Refine, Resume and Status arranged clockwise in a cycle, with Verify at the centre as the conformance check.',
+    create: 'Create',
+    execute: 'Execute',
+    refine: 'Refine',
+    resume: 'Resume',
+    status: 'Status',
+    verify: 'Verify',
+    caption:
+      'The DWP core loop: five operations move a plan from goal to completed work, with Verify as the conformance gate.',
+  },
+  es: {
+    ariaLabel:
+      'El bucle principal de DWP: Crear, Ejecutar, Refinar, Reanudar y Estado dispuestos en sentido horario en un ciclo, con Verificar en el centro como comprobación de conformidad.',
+    create: 'Crear',
+    execute: 'Ejecutar',
+    refine: 'Refinar',
+    resume: 'Reanudar',
+    status: 'Estado',
+    verify: 'Verificar',
+    caption:
+      'El bucle principal de DWP: cinco operaciones llevan un plan del objetivo al trabajo completado, con Verificar como puerta de conformidad.',
+  },
+  // Proof that a new language = one added key (the diagram renders in it once the
+  // site enables the locale; unknown langs fall back to `en`). Português:
+  pt: {
+    ariaLabel:
+      'O ciclo principal de DWP: Criar, Executar, Refinar, Retomar e Status dispostos no sentido horário em um ciclo, com Verificar no centro como verificação de conformidade.',
+    create: 'Criar',
+    execute: 'Executar',
+    refine: 'Refinar',
+    resume: 'Retomar',
+    status: 'Status',
+    verify: 'Verificar',
+    caption:
+      'O ciclo principal de DWP: cinco operações levam um plano do objetivo ao trabalho concluído, com Verificar como porta de conformidade.',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+
+// ---- Build-time geometry (keeps the SVG correct + maintainable) ----
+const C = 320; // centre
+const R = 210; // node ring radius
+const ops = [t.create, t.execute, t.refine, t.resume, t.status];
+const rad = (d: number): number => (d * Math.PI) / 180;
+const px = (a: number): number => C + R * Math.cos(rad(a));
+const py = (a: number): number => C + R * Math.sin(rad(a));
+
+const nodes = ops.map((label, i) => {
+  const a = -90 + i * 72; // clockwise from top
+  return { label, x: px(a), y: py(a) };
+});
+
+const gap = 26; // degrees trimmed at each end so arrows clear the node boxes
+const arcs = ops.map((_, i) => {
+  const a1 = -90 + i * 72 + gap;
+  const a2 = -90 + (i + 1) * 72 - gap;
+  return `M ${px(a1).toFixed(1)} ${py(a1).toFixed(1)} A ${R} ${R} 0 0 1 ${px(a2).toFixed(1)} ${py(a2).toFixed(1)}`;
+});
+
+const nodeW = 138;
+const nodeH = 48;
+---
+
+<figure class={`editorial-asset coreloop ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <svg viewBox="0 0 640 640" aria-hidden="true" focusable="false">
+      <defs>
+        <marker
+          id="coreloop-arrow"
+          viewBox="0 0 10 10"
+          refX="8"
+          refY="5"
+          markerWidth="7"
+          markerHeight="7"
+          orient="auto-start-reverse"
+        >
+          <path d="M 0 0 L 10 5 L 0 10 z" class="coreloop-arrowhead"></path>
+        </marker>
+      </defs>
+
+      {/* clockwise arrows along the ring */}
+      {arcs.map((d) => <path d={d} class="coreloop-arrow" marker-end="url(#coreloop-arrow)" />)}
+
+      {/* dashed oxblood spoke: verify (centre) governs the loop */}
+      <line x1={C} y1={C - 34} x2={nodes[0].x} y2={nodes[0].y + nodeH / 2} class="coreloop-spoke"></line>
+
+      {/* operation nodes */}
+      {
+        nodes.map((n) => (
+          <g>
+            <rect
+              x={n.x - nodeW / 2}
+              y={n.y - nodeH / 2}
+              width={nodeW}
+              height={nodeH}
+              rx="5"
+              class="coreloop-node"
+            />
+            <text x={n.x} y={n.y} class="coreloop-label">
+              {n.label}
+            </text>
+          </g>
+        ))
+      }
+
+      {/* verify badge at the centre (oxblood) */}
+      <rect x={C - 56} y={C - 30} width="112" height="60" rx="6" class="coreloop-center"></rect>
+      <text x={C} y={C} class="coreloop-label coreloop-center-label">{t.verify}</text>
+    </svg>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .coreloop {
+    color: var(--color-ink);
+    max-width: 560px;
+    margin-inline: auto;
+  }
+  .coreloop svg {
+    aspect-ratio: 1 / 1;
+  }
+  .coreloop-node {
+    fill: var(--color-paper);
+    stroke: currentColor;
+    stroke-width: 1.5;
+  }
+  .coreloop-arrow {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+  }
+  .coreloop-arrowhead {
+    fill: currentColor;
+  }
+  .coreloop-label {
+    fill: currentColor;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 19px;
+    text-anchor: middle;
+    dominant-baseline: central;
+    font-variant-caps: small-caps;
+    letter-spacing: 0.04em;
+  }
+  .coreloop-center {
+    fill: var(--color-paper);
+    stroke: var(--color-secondary);
+    stroke-width: 1.6;
+  }
+  .coreloop-spoke {
+    stroke: var(--color-secondary);
+    stroke-width: 1.3;
+    stroke-dasharray: 5 5;
+  }
+  .coreloop-center-label {
+    fill: var(--color-secondary);
+  }
+</style>

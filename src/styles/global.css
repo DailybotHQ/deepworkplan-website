@@ -212,6 +212,69 @@
       font-size: 0.875rem;
     }
   }
+
+  /* ---------------------------------------------------------------------- *
+   * Editorial Interactive Asset primitives (diagram components)
+   * Shared frame + label + grid so HTML/CSS/SVG diagrams cohere with the
+   * Broadsheet system. See docs/DIAGRAM_COMPONENTS.md. Tokens only; dark-mode
+   * follows --color-* automatically; no animation (reduced-motion safe).
+   * ---------------------------------------------------------------------- */
+
+  /* Framed figure wrapper — a hairline "plate" the diagram sits on. */
+  .editorial-asset {
+    position: relative;
+    margin: 0;
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: clamp(0.75rem, 2vw, 1.5rem);
+    background-color: var(--color-gray-50);
+    color: var(--color-ink);
+    overflow: hidden;
+  }
+
+  /* Faint dot grid behind diagram content (subtle, low-contrast). */
+  .editorial-asset__grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(var(--color-line) 1px, transparent 1px);
+    background-size: 16px 16px;
+    opacity: 0.35;
+  }
+
+  /* The diagram body sits above the grid. */
+  .editorial-asset__body {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Diagram SVG: scales to the container, height from viewBox. */
+  .editorial-asset svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Small-caps editorial label inside a diagram (reuses kicker styling). */
+  .ea-label {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-variant-caps: small-caps;
+  }
+
+  /* Outline node panel (for HTML-based diagrams; SVG diagrams stroke directly). */
+  .ea-node {
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    background-color: transparent;
+  }
+  /* The single restrained oxblood accent. */
+  .ea-accent {
+    color: var(--color-secondary);
+  }
 }
 
 @layer base {

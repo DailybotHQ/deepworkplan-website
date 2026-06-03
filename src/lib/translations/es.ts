@@ -58,6 +58,8 @@ export const es: SiteTranslations = {
         'Deep Work Plan es desarrollo guiado por especificación donde el propio repositorio se convierte en el harness.',
       primaryCta: 'Leer la metodología',
       secondaryCta: 'Leer la especificación',
+      illustrationAlt:
+        'Un faro en una costa rocosa proyecta un único haz que guía a una pequeña embarcación — un grabado que evoca el repositorio como un harness estable que guía a cualquier agente.',
     },
     pitch: {
       kicker: 'El problema y la respuesta',
@@ -67,6 +69,8 @@ export const es: SiteTranslations = {
         'Deep Work Plan responde con desarrollo guiado por especificación: el plan es la fuente de verdad duradera y los agentes ejecutan contra criterios de aceptación y puertas de validación explícitos. La desviación baja, el trabajo se mantiene verificable y cualquier agente puede reanudarlo entre sesiones.',
       origin:
         'También es ingeniería de harness hecha portable. Un harness de agente es el andamiaje alrededor de un modelo — contexto, herramientas, bucle de control, barreras, estado reanudable — que lo hace fiable. Deep Work Plan instala ese harness en el propio repositorio (AGENTS.md, docs, el hogar de skills .agents/, el skill de DWP), para que cualquier agente pueda pilotar cualquier repo. Nació en Dailybot, se probó durante meses y se publicó como la DailybotHQ/deepworkplan-skill.',
+      illustrationAlt:
+        'Una carta náutica con un único rumbo trazado que sortea los peligros con seguridad — un grabado que evoca el plan como la dirección que mantiene el trabajo en curso.',
     },
     onboarding: {
       badge: 'Incorporación basada en razonamiento',

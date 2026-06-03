@@ -7,5 +7,14 @@
   "grant_types_supported": ["authorization_code"],
   "response_types_supported": ["code"],
   "scopes_supported": [],
-  "token_endpoint_auth_methods_supported": ["none"]
+  "token_endpoint_auth_methods_supported": ["none"],
+  "agent_auth": {
+    "_comment": "Agent-registration metadata (auth.md convention). The site has no protected resources today, so access is open and no registration is required; register_uri points to the readable instructions at /auth.md.",
+    "register_uri": "https://deepworkplan.com/auth.md",
+    "auth_required": false,
+    "identity_types_supported": ["none", "anonymous"],
+    "credential_types_supported": ["none"],
+    "claims_uri": null,
+    "revocation_uri": null
+  }
 }

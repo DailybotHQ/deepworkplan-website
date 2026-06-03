@@ -24,6 +24,9 @@ function slugOf(id: string): string {
   return id.replace(/^(en|es)\//, '');
 }
 
+// Diagram components are embedded in-body via MDX at the right point in each
+// chapter's narrative (see docs/DIAGRAM_COMPONENTS.md §5) — not injected here.
+
 const chapters = (await getCollection('methodology'))
   .filter((c) => c.data.lang === lang)
   .sort((a, b) => a.data.order - b.data.order);

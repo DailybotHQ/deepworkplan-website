@@ -1,0 +1,46 @@
+---
+/**
+ * CmdVerify (KT-08) — /dwp-verify as input → process → output.
+ * Spec: docs/visuals/prompts/04-kit.md#kt-08. Composes CommandSequence.
+ */
+import type { Language } from '@/lib/i18n';
+import CommandSequence from './CommandSequence.astro';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'dwp-verify: a repository or plan is checked against the specification, producing a pass/fail conformance report.',
+    input: 'Repository or plan',
+    process: 'Check against spec',
+    output: 'Pass / fail report',
+    caption:
+      '/dwp-verify produces an objective pass/fail report against the spec.',
+  },
+  es: {
+    ariaLabel:
+      'dwp-verify: un repositorio o plan se comprueba contra la especificación, produciendo un informe de conformidad aprobado/fallido.',
+    input: 'Repositorio o plan',
+    process: 'Comprobar contra la especificación',
+    output: 'Informe aprobado / fallido',
+    caption:
+      '/dwp-verify produce un informe objetivo de aprobado/fallido contra la especificación.',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<CommandSequence
+  cmd="/dwp-verify"
+  input={t.input}
+  process={t.process}
+  output={t.output}
+  ariaLabel={t.ariaLabel}
+  caption={t.caption}
+  class={className}
+/>

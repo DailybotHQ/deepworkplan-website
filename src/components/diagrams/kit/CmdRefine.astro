@@ -1,0 +1,44 @@
+---
+/**
+ * CmdRefine (KT-06) — /dwp-refine as input → process → output.
+ * Spec: docs/visuals/prompts/04-kit.md#kt-06. Composes CommandSequence.
+ */
+import type { Language } from '@/lib/i18n';
+import CommandSequence from './CommandSequence.astro';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'dwp-refine: a draft or plan is modified while completed tasks are preserved, producing a revised plan.',
+    input: 'Draft or plan',
+    process: 'Modify · preserve done tasks',
+    output: 'Revised plan',
+    caption: '/dwp-refine edits the plan without losing completed work.',
+  },
+  es: {
+    ariaLabel:
+      'dwp-refine: un borrador o plan se modifica preservando las tareas completadas, produciendo un plan revisado.',
+    input: 'Borrador o plan',
+    process: 'Modificar · preservar tareas hechas',
+    output: 'Plan revisado',
+    caption: '/dwp-refine edita el plan sin perder el trabajo completado.',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<CommandSequence
+  cmd="/dwp-refine"
+  input={t.input}
+  process={t.process}
+  output={t.output}
+  ariaLabel={t.ariaLabel}
+  caption={t.caption}
+  class={className}
+/>

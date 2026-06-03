@@ -1,0 +1,96 @@
+---
+/**
+ * OnboardingSequence (HP-04) — reasoning-based onboarding: reason about the stack
+ * → generate AGENTS.md & docs → scaffold .agents/ → verify. Spec:
+ * docs/visuals/prompts/01-homepage.md#hp-04. HTML/CSS; language-keyed i18n (en
+ * fallback); role="img"; dark mode; zero JS.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Four-stage onboarding: reason about your stack, generate AGENTS.md and docs, scaffold the .agents directory, then verify conformance.',
+    steps: [
+      'Reason about your stack',
+      'Generate AGENTS.md & docs',
+      'Scaffold .agents/',
+      'Verify conformance',
+    ],
+  },
+  es: {
+    ariaLabel:
+      'Incorporación en cuatro etapas: razonar sobre tu stack, generar AGENTS.md y documentación, andamiar el directorio .agents y luego verificar la conformidad.',
+    steps: [
+      'Razonar sobre tu stack',
+      'Generar AGENTS.md y docs',
+      'Andamiar .agents/',
+      'Verificar conformidad',
+    ],
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<figure class={`editorial-asset oseq ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <ol class="editorial-asset__body oseq-row">
+    {
+      t.steps.map((s, i) => (
+        <li class={`oseq-step${i === t.steps.length - 1 ? ' oseq-step--accent' : ''}`}>
+          <span class="oseq-num nums-tabular">{String(i + 1).padStart(2, '0')}</span>
+          <span class="oseq-name">{s}</span>
+        </li>
+      ))
+    }
+  </ol>
+</figure>
+
+<style>
+  .oseq {
+    color: var(--color-ink);
+  }
+  .oseq-row {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    counter-reset: none;
+  }
+  @media (min-width: 640px) {
+    .oseq-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .oseq-step {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    border-left: 2px solid var(--color-line);
+    padding: 0.4rem 0 0.4rem 0.75rem;
+  }
+  .oseq-step--accent {
+    border-left-color: var(--color-secondary);
+  }
+  .oseq-num {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+  .oseq-step--accent .oseq-num {
+    color: var(--color-secondary);
+  }
+  .oseq-name {
+    font-family: var(--font-serif);
+    font-size: 0.92rem;
+    line-height: 1.3;
+  }
+</style>

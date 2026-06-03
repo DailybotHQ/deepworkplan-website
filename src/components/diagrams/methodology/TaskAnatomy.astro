@@ -1,0 +1,130 @@
+---
+/**
+ * TaskAnatomy (ME-03) — the nine ordered sections of a task file.
+ * Spec: docs/visuals/prompts/02-methodology.md#me-03. HTML/CSS panels; the ninth
+ * (Completion & Log) carries the oxblood accent. Language-keyed i18n (en
+ * fallback); role="img"; dark mode; zero JS. See docs/DIAGRAM_COMPONENTS.md.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'The nine ordered sections of a DWP task file: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, and Completion & Log.',
+    title: 'Task file',
+    sections: [
+      'Goal',
+      'Context',
+      'Steps',
+      'Acceptance criteria',
+      'Validation',
+      'Files',
+      'Dependencies',
+      'Risks',
+      'Completion & Log',
+    ],
+    caption:
+      'Every task file follows the same nine ordered sections, so each unit of work is self-contained and reviewable.',
+  },
+  es: {
+    ariaLabel:
+      'Las nueve secciones ordenadas de un archivo de tarea de DWP: Objetivo, Contexto, Pasos, Criterios de aceptación, Validación, Archivos, Dependencias, Riesgos y Finalización y registro.',
+    title: 'Archivo de tarea',
+    sections: [
+      'Objetivo',
+      'Contexto',
+      'Pasos',
+      'Criterios de aceptación',
+      'Validación',
+      'Archivos',
+      'Dependencias',
+      'Riesgos',
+      'Finalización y registro',
+    ],
+    caption:
+      'Cada archivo de tarea sigue las mismas nueve secciones ordenadas, para que cada unidad de trabajo sea autónoma y revisable.',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<figure class={`editorial-asset anatomy ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <span class="ea-label anatomy-title">{t.title}</span>
+    <ol class="anatomy-grid">
+      {
+        t.sections.map((s, i) => (
+          <li class={`anatomy-cell${i === t.sections.length - 1 ? ' anatomy-cell--last' : ''}`}>
+            <span class="anatomy-num nums-tabular">{String(i + 1).padStart(2, '0')}</span>
+            <span class="anatomy-name">{s}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .anatomy {
+    color: var(--color-ink);
+  }
+  .anatomy-title {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+  .anatomy-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  @media (min-width: 560px) {
+    .anatomy-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 860px) {
+    .anatomy-grid {
+      grid-template-columns: repeat(9, 1fr);
+    }
+  }
+  .anatomy-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.55rem 0.5rem;
+    background-color: var(--color-paper);
+    min-height: 4.25rem;
+  }
+  .anatomy-cell--last {
+    border-color: var(--color-secondary);
+  }
+  .anatomy-num {
+    font-size: 0.72rem;
+    color: var(--color-muted);
+    font-weight: 600;
+  }
+  .anatomy-cell--last .anatomy-num {
+    color: var(--color-secondary);
+  }
+  .anatomy-name {
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+</style>
