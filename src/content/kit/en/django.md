@@ -1,6 +1,6 @@
 ---
 title: Django
-description: "An onboarding preset for Django projects, with reasoning cues for apps, migrations, settings, management commands, and the test runner, following the standard project layout."
+description: "An onboarding preset for Django projects, with reasoning cues for apps, migrations, settings, management commands, and the test runner."
 kind: preset
 lang: en
 order: 1

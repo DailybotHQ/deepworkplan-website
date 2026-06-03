@@ -43,10 +43,36 @@ const articleSchema = {
   url: `${siteUrl}${prefix}/methodology/${slugOf(entry.id)}`,
   isPartOf: { '@type': 'CreativeWork', name: m.title },
 };
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${siteUrl}${prefix}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: m.title,
+      item: `${siteUrl}${prefix}/methodology`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: entry.data.title,
+      item: `${siteUrl}${prefix}/methodology/${slugOf(entry.id)}`,
+    },
+  ],
+};
 ---
 
 <MainLayout lang={lang} title={entry.data.title} description={entry.data.description}>
   <JsonLd slot="head" data={articleSchema} />
+  <JsonLd slot="head" data={breadcrumbSchema} />
   <div class="main-container py-16 md:py-20">
     <article class="max-w-3xl">
       <a

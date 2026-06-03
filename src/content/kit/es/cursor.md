@@ -1,6 +1,6 @@
 ---
 title: Cursor
-description: "El adaptador de DWP para Cursor AI, con soporte completo mediante el sistema de reglas del proyecto y el prefijo de comando almohadilla, ya que Cursor reserva la barra para sus comandos."
+description: "El adaptador de DWP para Cursor AI, con soporte completo mediante el sistema de reglas del proyecto y el prefijo almohadilla, ya que Cursor reserva la barra."
 kind: adapter
 lang: es
 order: 2

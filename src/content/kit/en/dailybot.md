@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "An opt-in addon that connects an AI-first repo to a Dailybot team, wiring a best-effort progress and milestone report into plan execution. Never required and never blocks the work."
+description: "An opt-in addon that connects an AI-first repo to a Dailybot team, wiring a best-effort progress and milestone report into plan execution."
 kind: addon
 lang: en
 order: 2

@@ -1,6 +1,6 @@
 ---
 title: Paquete / CLI de Python
-description: "Un preset de incorporación para paquetes y herramientas CLI de Python, con pistas de razonamiento para la disposición del paquete, los puntos de entrada de consola, el árbol de comandos y la compuerta de validación basada en pytest."
+description: "Un preset de incorporación para paquetes y herramientas CLI de Python, con pistas para la disposición del paquete, los puntos de entrada y la compuerta pytest."
 kind: preset
 lang: es
 order: 5

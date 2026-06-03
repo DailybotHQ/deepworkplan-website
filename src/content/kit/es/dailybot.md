@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Un addon opcional que conecta un repo AI-first con un equipo de Dailybot, conectando un reporte de avance e hitos de mejor esfuerzo en la ejecución del plan. Nunca es obligatorio y nunca bloquea el trabajo."
+description: "Un addon opcional que conecta un repo AI-first con un equipo de Dailybot, integrando un reporte de avance e hitos de mejor esfuerzo en la ejecución del plan."
 kind: addon
 lang: es
 order: 2

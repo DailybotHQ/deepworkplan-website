@@ -1,6 +1,6 @@
 ---
 title: Actualización de dependencias
-description: "Un addon opcional y agnóstico del gestor de paquetes que actualiza las dependencias de un repo en lotes validados y reversibles — detectando el gestor real en lugar de asumir npm. Instala el comando /lib-upgrade cuando se acepta."
+description: "Addon opcional y agnóstico del gestor que actualiza las dependencias de un repo en lotes validados y reversibles, detectando el gestor real, sin asumir npm."
 kind: addon
 lang: es
 order: 3

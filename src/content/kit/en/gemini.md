@@ -1,6 +1,6 @@
 ---
 title: Google Gemini
-description: "The DWP adapter for Google Gemini, with partial support through markdown command procedures and the hash prefix. Gemini reads the procedures and runs the sequential workflow."
+description: "The DWP adapter for Google Gemini, with partial support through markdown command procedures and the hash prefix that drive the sequential workflow."
 kind: adapter
 lang: en
 order: 5

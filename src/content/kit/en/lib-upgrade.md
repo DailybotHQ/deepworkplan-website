@@ -1,6 +1,6 @@
 ---
 title: lib-upgrade
-description: "Safely upgrade a repository's dependencies in validated, revertible batches by delegating to the dependency-upgrade addon. Installed only when that opt-in addon is accepted."
+description: "Safely upgrade a repository's dependencies in validated, revertible batches via the dependency-upgrade addon. Installed only when that addon is accepted."
 kind: command
 lang: en
 order: 9

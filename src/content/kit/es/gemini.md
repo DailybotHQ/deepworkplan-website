@@ -1,6 +1,6 @@
 ---
 title: Google Gemini
-description: "El adaptador de DWP para Google Gemini, con soporte parcial mediante procedimientos en Markdown y el prefijo almohadilla. Gemini lee los procedimientos y ejecuta el flujo secuencial."
+description: "El adaptador de DWP para Google Gemini, con soporte parcial mediante procedimientos en Markdown y el prefijo almohadilla que guían el flujo secuencial."
 kind: adapter
 lang: es
 order: 5

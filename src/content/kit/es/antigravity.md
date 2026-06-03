@@ -1,6 +1,6 @@
 ---
 title: Antigravity
-description: "El adaptador de DWP para Antigravity, con soporte parcial mediante procedimientos en Markdown y el prefijo almohadilla. El agente lee los procedimientos y ejecuta el flujo secuencial."
+description: "El adaptador de DWP para Antigravity, con soporte parcial mediante procedimientos en Markdown y el prefijo almohadilla que guían el flujo secuencial."
 kind: adapter
 lang: es
 order: 6

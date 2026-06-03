@@ -1,6 +1,6 @@
 ---
 title: OpenAI Codex
-description: "El adaptador de DWP para OpenAI Codex, con soporte parcial mediante procedimientos en Markdown y el prefijo almohadilla. Los comandos básicos funcionan; los agentes de equipo no están disponibles."
+description: "El adaptador de DWP para OpenAI Codex, con soporte parcial mediante procedimientos en Markdown y el prefijo almohadilla; sin agentes de equipo."
 kind: adapter
 lang: es
 order: 3

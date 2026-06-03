@@ -1,6 +1,6 @@
 ---
 title: Generic
-description: "The fallback onboarding preset for any project, with stack-agnostic reasoning cues that detect build and test commands from the repository when no stack-specific preset applies."
+description: "The fallback onboarding preset for any project, with stack-agnostic reasoning cues that detect build and test commands from the repository."
 kind: preset
 lang: en
 order: 6

@@ -1,6 +1,6 @@
 export const SITE_TITLE: string = 'Deep Work Plan';
 export const SITE_DESCRIPTION: string =
-  'Deep Work Plan is a spec-driven, tool-agnostic methodology and kit that turns any repository into an AI-first, agent-pilotable codebase. Open, MIT-licensed.';
+  'Context matters more than models. Deep Work Plan turns any repository into a structured, agent-pilotable environment. Open, MIT-licensed, tool-agnostic.';
 
 // Analytics configuration — scripts load only when IDs are provided
 export const ANALYTICS = {

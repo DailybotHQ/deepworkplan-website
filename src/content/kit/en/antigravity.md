@@ -1,6 +1,6 @@
 ---
 title: Antigravity
-description: "The DWP adapter for Antigravity, with partial support through markdown command procedures and the hash prefix. The agent reads the procedures and runs the sequential workflow."
+description: "The DWP adapter for Antigravity, with partial support through markdown command procedures and the hash prefix that drive the sequential workflow."
 kind: adapter
 lang: en
 order: 6

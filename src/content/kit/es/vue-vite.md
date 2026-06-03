@@ -1,6 +1,6 @@
 ---
 title: Vue + Vite
-description: "Un preset de incorporación para proyectos Vue + Vite, con pistas de razonamiento para componentes de un solo archivo, la Composition API, stores de Pinia, el router y las pruebas de componentes con Vitest."
+description: "Un preset de incorporación para proyectos Vue + Vite, con pistas para componentes de un solo archivo, la Composition API, stores de Pinia y pruebas con Vitest."
 kind: preset
 lang: es
 order: 2
