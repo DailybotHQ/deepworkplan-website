@@ -12,7 +12,17 @@
 > **Flagship:** HP-01 — the Hero right-column illustration — gets the richest
 > treatment and is the single highest-value asset on the site.
 
----
+> **⚠️ UNIVERSAL EDGES & FRAMING RULE (applies to every illustration below).**
+> No image may have a **border, frame, rectangle, box, or outline** around it, and
+> **nothing may touch or be cut off by the edges**. The artwork sits centered with
+> generous margin and its detail **fades / feathers softly into the background** on
+> all sides so it blends seamlessly into the page:
+> - **Filled illustrations** (hero, pitch): background is a solid, even fill of the
+>   exact page color (light `#F7F4EC` / dark `#14140F`) and the art vignettes into
+>   that same color at the edges — no visible boundary.
+> - **Marks / icons / ornaments** (transparent): a true **transparent background**,
+>   soft (not hard-cropped) edges, centered with margin.
+> This is the default for the whole pack — already folded into each prompt below.
 
 ### HP-01 — Hero illustration (repository as harness / guiding light)
 
@@ -25,9 +35,11 @@
 - **Prompt:**
   > **HOUSE STYLE —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome warm ink (`#1B1A17`) on warm off-white newsprint paper (`#F7F4EC`), with a single restrained **oxblood** accent (`#7A1F1F`) — used only for one small mark (e.g. the beam or a single hairline rule), never as a fill. Subtle paper grain. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows.
   >
-  > **Subject:** A portrait 4:5 frontispiece vignette. A tall lighthouse rendered in fine engraved line work stands on a rocky promontory; from its lantern a single calm beam sweeps across the composition, the beam picked out as the lone **oxblood** accent. Below and around the base, suggest — in the same engraved idiom, subtly, not literally — the idea of an ordered repository: a few neat stacked strata / shelves / ledger lines that read as structured foundations the lighthouse rests on. A small sailing vessel (the "agent") is guided by the beam toward safe passage. A fine double-rule editorial frame borders the vignette with generous margins. No text inside the image. Quiet, balanced, timeless.
+  > **EDGES / BACKGROUND (important):** No border, frame, rectangle, or outline. The background is a solid even fill of the exact page color (LIGHT `#F7F4EC` / DARK `#14140F`) and the scene **fades / feathers softly into that background** on all four sides — the edges dissolve into the page with no visible boundary. Keep the whole scene comfortably inside with generous margin; **nothing touches or is cut off by any edge**.
   >
-  > **AVOID —** gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy or cluttered backgrounds, watermark, signature, extra logos, garbled/misspelled text, lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+  > **Subject:** A portrait 4:5 frontispiece vignette. A tall lighthouse rendered in fine engraved line work stands on a rocky promontory; from its lantern a single calm beam sweeps across the composition, the beam picked out as the lone **oxblood** accent. Below and around the base, suggest — in the same engraved idiom, subtly, not literally — the idea of an ordered repository: a few neat stacked strata / shelves / ledger lines that read as structured foundations the lighthouse rests on. A small sailing vessel (the "agent") is guided by the beam toward safe passage. No text inside the image. Quiet, balanced, timeless.
+  >
+  > **AVOID —** any border / frame / rectangle / outline / box, elements touching or clipped by the edges, hard straight edges, gradients (other than the soft edge-fade into the background), glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy or cluttered backgrounds, watermark, signature, extra logos, garbled/misspelled text, lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
 - **In-image text (EN):** none (atmospheric illustration)
 - **In-image text (ES):** none (single asset serves both languages)
 - **Suggested asset path:** `public/images/visuals/home/hero-harness.webp` (light) · `public/images/visuals/home/hero-harness-dark.webp` (dark)
@@ -39,31 +51,30 @@
 
 ---
 
-### HP-02 — Pitch mark (chaos → an ordered, checked plan)
+### HP-02 — Pitch illustration (nautical chart with a plotted course)
 
-- **Target surface:** `src/components/home/Pitch.astro` → beside the "problem and the answer" copy (problem: agents drift on long-horizon work; answer: the plan is the durable source of truth).
+- **Target surface:** `src/components/home/Pitch.astro` → **right column** of a two-column layout (text left, illustration right), mirroring the hero faro. Fills the empty right-side space of the "problem and the answer" section.
 - **Type:** illustration
 - **Priority:** medium
-- **Purpose / trust rationale:** A small **before → after** vignette that reads instantly: a tangled scribble (an agent drifting) becomes a neat, checked plan document. It mirrors the Pitch's "problem → answer" structure at a glance and is concrete enough to understand without the surrounding copy.
-- **Aspect & dimensions:** 2:1 landscape · 200 × 100 px displayed · generate @2x (400 × 200 px)
-- **Light/dark strategy:** transparent (ink line art on alpha; the integrator recolors for dark mode via CSS).
+- **Purpose / trust rationale:** A second "vibe" illustration in the faro's maritime engraving family. Meaning: agents **drift** on long-horizon work (the problem); the **plan/spec is the chart that gives direction** (the answer) — a single confident plotted course threads safely past the hazards. Reinforces "the plan is the durable source of truth" and visually rhymes with the lighthouse.
+- **Aspect & dimensions:** 4:5 portrait · ~420 × 525 px displayed · generate @2x (≥ 1040 × 1300 px)
+- **Light/dark strategy:** light + dark pair (filled background that blends with the page) — `pitch-chart.webp` (ink on warm paper `#F7F4EC`) and `pitch-chart-dark.webp` (paper-ink `#ECE7DA` on `#14140F`). Same approach as the hero faro.
 - **Prompt:**
-  > **HOUSE STYLE —** Fine ink-line engraving / etched hairlines, in the manner of a 19th-century scientific broadsheet — the SAME style as the site's lighthouse illustration. Monochrome warm ink (`#1B1A17`) on a **transparent background**, with a single restrained **oxblood** (`#7A1F1F`) accent (only the checkmarks). Calm, editorial, flat 2D, print-quality line work. No gradients, no shadows, no 3D, no color besides the one oxblood accent.
+  > **HOUSE STYLE —** Fine ink-line engraving / etched hairlines, in the manner of a 19th-century nautical chart or scientific broadsheet — the SAME engraving style and family as the site's lighthouse illustration. **LIGHT version:** warm sepia-ink line work on warm off-white paper (`#F7F4EC`). **(For the dark version: paper-colored ink lines `#ECE7DA` on a warm near-black ground `#14140F`.)** A single restrained **oxblood** (`#7A1F1F`) accent — used ONLY for the plotted course line. Calm, authoritative, editorial, detailed line engraving with subtle paper grain. No gradients, no glossy 3D, no photographic realism, no extra colors.
   >
-  > **Subject:** A small horizontal "before → after" vignette, read left to right, with a slim engraved arrow (→) separating two halves.
-  > **LEFT (the problem):** a messy, tangled ball of scribbled line — a knot of overlapping loops going nowhere, a few loose ends fraying off. It clearly reads as "chaos / lost direction."
-  > **RIGHT (the answer):** a tidy upright document/plan card drawn in clean engraved hairlines, containing three or four short evenly-ruled horizontal lines (representing ordered tasks), each with a small **oxblood** checkmark to its left. Neat, aligned, calm — the visual opposite of the tangle.
-  > The contrast between the chaotic knot and the orderly checked plan is the whole message. Balanced composition, generous margins, no text/letters anywhere.
+  > **EDGES / BACKGROUND (important):** The background is a solid, even fill of the exact page color (LIGHT `#F7F4EC` / DARK `#14140F`). There is **NO border, NO frame, NO rectangle, NO outline** around the artwork. The illustration sits in the center and its detail **fades / feathers / vignettes softly and gradually into the background** on all four sides, so the edges dissolve seamlessly into the page with no visible boundary. Keep ALL elements (compass rose, dividers, the full course) comfortably inside the frame with generous empty margin — **nothing touches or is cut off by any edge**. The corners and outer margins are pure background color.
   >
-  > **AVOID —** gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, any text or numbers or letters, lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+  > **Subject:** An antique engraved **nautical sea chart** scene, portrait 4:5, with soft faded edges (no border). Within it: a faint latitude/longitude hairline grid that fades out toward the margins; an ornate **compass rose** in the upper area; lightly stippled coastlines, a small island or two, and scattered depth-sounding dots and tiny hazard marks (rocks) — all kept well away from the edges. Across the chart runs a single confident **plotted course** — a clean line in **oxblood** with small waypoint crosses/dots — threading safely from a start point, past the hazards, to a destination (a small anchor or harbor mark). Optionally a pair of brass dividers / parallel rule resting on the chart, fully inside the margins. The course line is the only oxblood element and the clear focal point. **No readable words, numbers, or letters anywhere** — only decorative engraved marks.
+  >
+  > **AVOID —** any border / frame / rectangle / outline / box around the image, elements touching or clipped by the edges, hard straight edges, gradients (other than the soft edge-fade into the background), glossy/3D render, photographic realism, neon or saturated colors, drop shadows, watermark, signature, extra logos, any readable text / numbers / letters / labels, lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
 - **In-image text (EN):** none (wordless)
 - **In-image text (ES):** none
-- **Suggested asset path:** `public/images/visuals/home/pitch-mark.webp`
-- **Alt text (EN):** `alt=""` (decorative; the adjacent Pitch text carries the meaning)
-- **Alt text (ES):** `alt=""` (decorativo)
-- **Caption (EN):** —
+- **Suggested asset path:** `public/images/visuals/home/pitch-chart.webp` (light) · `public/images/visuals/home/pitch-chart-dark.webp` (dark)
+- **Alt text (EN):** A nautical chart with a single plotted course threading safely past hazards — an engraving evoking the plan as the direction that keeps work on course.
+- **Alt text (ES):** Una carta náutica con un único rumbo trazado que sortea los peligros con seguridad — un grabado que evoca el plan como la dirección que mantiene el trabajo en curso.
+- **Caption (EN):** — (standalone right-column illustration)
 - **Caption (ES):** —
-- **Integration note:** Optional accent beside the Pitch copy. Decorative, so `alt=""`. Displayed ~200×100 (`width="400" height="200"`, `class="h-auto"`).
+- **Integration note:** Place in the Pitch right column (two-column grid on `lg`, like the hero); `<picture>`/dual-img light-dark swap. Replaces the earlier small inline "pitch-mark". `width="1040" height="1300"`, displayed ~420px wide.
 
 ---
 
@@ -151,11 +162,11 @@
 - **Aspect & dimensions:** 1:1 · 96 × 96 px displayed · generate @2x (192 × 192 px) — produce as one cohesive set.
 - **Light/dark strategy:** transparent (ink on alpha, invertible).
 - **Prompt:**
-  > **HOUSE STYLE —** Fine ink-line engraving emblem set, monochrome warm ink (`#1B1A17`) on a **transparent background**, no accent (or one shared hairline). Editorial, flat 2D, print-quality, consistent stroke weight across the set. No gradients, no shadows, no 3D.
+  > **HOUSE STYLE —** Fine ink-line engraving emblem set, monochrome warm ink (`#1B1A17`) on a **transparent background**, no accent (or one shared hairline). Editorial, flat 2D, print-quality, consistent stroke weight across the set. **No border, frame, box, or rectangle around the image or around any glyph; nothing touches or is clipped by the edges; soft edges; each glyph centered with generous margin.** No gradients, no shadows, no 3D.
   >
   > **Subject:** A set of small square 1:1 emblem glyphs in one consistent engraved style, one per agent role: a magnifier-over-page (reviewer), a gear-in-motion (executor), a compass/drafting-square (architect), a globe-with-speech-marks (i18n-guardian), a shield (security-auditor). Each glyph centered, minimal, legible at 96px, no text. Deliver as separate files or a sprite sheet.
   >
-  > **AVOID —** gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, extra logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
+  > **AVOID —** any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, extra logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
 - **In-image text (EN):** none
 - **In-image text (ES):** none
 - **Suggested asset path:** `public/images/visuals/home/agent-glyphs.webp` (sprite) or `public/images/visuals/home/agent-{role}.webp`
@@ -176,11 +187,11 @@
 - **Aspect & dimensions:** 1:1 · 96 × 96 px displayed · generate @2x (192 × 192 px) — cohesive set.
 - **Light/dark strategy:** transparent (ink on alpha, invertible).
 - **Prompt:**
-  > **HOUSE STYLE —** Fine ink-line engraving emblem set, monochrome warm ink (`#1B1A17`) on a **transparent background**, consistent stroke weight, no accent. Editorial, flat 2D, print-quality. No gradients, no shadows, no 3D.
+  > **HOUSE STYLE —** Fine ink-line engraving emblem set, monochrome warm ink (`#1B1A17`) on a **transparent background**, consistent stroke weight, no accent. Editorial, flat 2D, print-quality. **No border, frame, box, or rectangle around the image or around any glyph; nothing touches or is clipped by the edges; soft edges; each element centered with generous margin.** No gradients, no shadows, no 3D.
   >
   > **Subject:** A cohesive set of small 1:1 glyphs: a labelled document (AGENTS.md), a categorized folder tree (docs/), a small directory with a dashed symlink arrow (.agents/ + .claude), a stacked package (the installed skill), a checkmark-in-hexagon (conformance). Minimal, centered, legible at 96px, no text.
   >
-  > **AVOID —** gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, extra logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
+  > **AVOID —** any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, extra logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
 - **In-image text (EN):** none
 - **In-image text (ES):** none
 - **Suggested asset path:** `public/images/visuals/home/outcome-marks.webp` (sprite) or per-item files
@@ -201,11 +212,11 @@
 - **Aspect & dimensions:** 1:1 · 96 × 96 px displayed · generate @2x (192 × 192 px) — cohesive set.
 - **Light/dark strategy:** transparent (ink on alpha, invertible).
 - **Prompt:**
-  > **HOUSE STYLE —** Fine ink-line engraving emblem set, monochrome warm ink (`#1B1A17`) on a **transparent background**, consistent stroke weight, no accent. Editorial, flat 2D, print-quality. No gradients, no shadows, no 3D.
+  > **HOUSE STYLE —** Fine ink-line engraving emblem set, monochrome warm ink (`#1B1A17`) on a **transparent background**, consistent stroke weight, no accent. Editorial, flat 2D, print-quality. **No border, frame, box, or rectangle around the image or around any glyph; nothing touches or is clipped by the edges; soft edges; each element centered with generous margin.** No gradients, no shadows, no 3D.
   >
   > **Subject:** A cohesive set of small abstract 1:1 emblems suggesting "any agent / any tool" — e.g. a terminal prompt caret, a cursor arrow, a code bracket pair, a chat glyph, a plug/adapter. Neutral and original (do NOT reproduce any company's actual logo). Minimal, centered, legible at 96px, no text.
   >
-  > **AVOID —** gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, real third-party brand logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
+  > **AVOID —** any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, real third-party brand logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
 - **In-image text (EN):** none
 - **In-image text (ES):** none
 - **Suggested asset path:** `public/images/visuals/home/stack-marks.webp` (sprite) or per-item files
@@ -226,11 +237,11 @@
 - **Aspect & dimensions:** 16:9 (thin band) · 880 × 495 px displayed (use top portion) · generate @2x (1760 × 990 px); or a wide thin ornament 880 × 120.
 - **Light/dark strategy:** transparent (ink on alpha, invertible).
 - **Prompt:**
-  > **HOUSE STYLE —** Fine ink-line engraving ornament, monochrome warm ink (`#1B1A17`) on a **transparent background**, one small **oxblood** (`#7A1F1F`) center mark. Editorial, flat 2D, print-quality. No gradients, no shadows, no 3D.
+  > **HOUSE STYLE —** Fine ink-line engraving ornament, monochrome warm ink (`#1B1A17`) on a **transparent background**, one small **oxblood** (`#7A1F1F`) center mark. Editorial, flat 2D, print-quality. **No border, frame, box, or rectangle; nothing touches or is clipped by the edges; soft edges that fade out, centered with generous horizontal margin.** No gradients, no shadows, no 3D.
   >
   > **Subject:** A wide, slim editorial rule/ornament — a centered engraved compass-rose or small lighthouse-beam motif flanked by symmetric hairline filigree tapering to the edges, the center mark in **oxblood**. Echoes the hero. No text. Lots of horizontal breathing room.
   >
-  > **AVOID —** gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, extra logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
+  > **AVOID —** any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, extra logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
 - **In-image text (EN):** none
 - **In-image text (ES):** none
 - **Suggested asset path:** `public/images/visuals/home/finalcta-accent.webp`

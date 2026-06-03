@@ -64,6 +64,24 @@ every prompt must pick one:
 State the chosen strategy in the entry's **Light/dark** field. Default to (A) for
 diagrams, (B) for atmospheric illustrations (like the hero).
 
+### Edges & framing (MANDATORY — applies to every illustration)
+
+No illustration may have a **border, frame, rectangle, box, or outline** around it,
+and **nothing may touch or be cut off by the edges**. The artwork is centered with
+generous margin and its detail **fades / feathers softly into the background** on
+all sides, so it blends seamlessly into the page with no visible boundary:
+
+- **Filled illustrations (strategy B):** the background is a solid, even fill of the
+  exact page color (light `#F7F4EC` / dark `#14140F`) and the art vignettes into
+  that same color at the edges.
+- **Transparent assets (strategy A):** a true transparent background with soft (not
+  hard-cropped) edges, centered with margin.
+
+Every prompt MUST state this in an **EDGES / BACKGROUND** line and reinforce it in
+the **AVOID** list (`any border / frame / rectangle / box / outline; elements
+touching or clipped by the edges; hard straight edges`). This is why the hero faro
+blends in — its ground matches the page and it has no frame.
+
 ---
 
 ## 4. Typography Inside Images
@@ -143,10 +161,13 @@ The `/es/` site must show Spanish-labeled diagrams. For any diagram **with text*
 
 ## 9. Negative Prompt Boilerplate (append to every prompt)
 
-> **AVOID —** gradients, glossy/3D render, photographic realism, neon or saturated
-> colors, drop shadows, busy or cluttered backgrounds, watermark, signature, extra
-> logos (only the provided DWP mark if asked), garbled/misspelled text, lorem
-> ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+> **AVOID —** any border / frame / rectangle / box / outline around the image,
+> elements touching or clipped by the edges, hard straight edges, gradients (other
+> than the soft edge-fade into the background), glossy/3D render, photographic
+> realism, neon or saturated colors, drop shadows, busy or cluttered backgrounds,
+> watermark, signature, extra logos (only the provided DWP mark if asked),
+> garbled/misspelled text, lorem ipsum, modern flat-vector "corporate memphis"
+> style, clip-art, emoji.
 
 ---
 
