@@ -3,5 +3,5 @@
   "resource": "https://deepworkplan.com",
   "authorization_servers": ["https://deepworkplan.com"],
   "scopes_supported": [],
-  "bearer_methods_supported": []
+  "bearer_methods_supported": ["header"]
 }

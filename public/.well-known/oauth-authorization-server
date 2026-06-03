@@ -9,12 +9,14 @@
   "scopes_supported": [],
   "token_endpoint_auth_methods_supported": ["none"],
   "agent_auth": {
-    "_comment": "Agent-registration metadata (auth.md convention). The site has no protected resources today, so access is open and no registration is required; register_uri points to the readable instructions at /auth.md.",
+    "_comment": "Agent-registration metadata (auth.md convention). The site is public with no protected resources today: access is anonymous and requires no registration. register_uri/claim_uri point to the readable instructions at /auth.md.",
+    "skill": "https://isitagentready.com/.well-known/agent-skills/auth-md/SKILL.md",
     "register_uri": "https://deepworkplan.com/auth.md",
     "auth_required": false,
-    "identity_types_supported": ["none", "anonymous"],
-    "credential_types_supported": ["none"],
-    "claims_uri": null,
-    "revocation_uri": null
+    "identity_types_supported": ["anonymous"],
+    "anonymous": {
+      "credential_types_supported": ["none"]
+    },
+    "claim_uri": "https://deepworkplan.com/auth.md"
   }
 }
