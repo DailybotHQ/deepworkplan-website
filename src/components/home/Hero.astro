@@ -14,8 +14,11 @@ const prefix = getUrlPrefix(lang);
 const h = t.home.hero;
 ---
 
-<section class="border-b" style="border-color: var(--color-line);">
-  <div class="main-container py-10 md:py-14">
+<section
+  class="border-b lg:flex lg:min-h-[calc(100vh-4.5rem)] lg:items-center"
+  style="border-color: var(--color-line);"
+>
+  <div class="main-container w-full py-12 lg:py-8">
     <div
       class="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,480px)] lg:items-center lg:gap-10"
     >
@@ -31,7 +34,7 @@ const h = t.home.hero;
 
       <!-- The happy path: one instruction your agent follows -->
       <div
-        class="mt-8 overflow-hidden rounded-sm border"
+        class="mt-6 overflow-hidden rounded-sm border"
         style="border-color: var(--color-secondary);"
       >
         <div
@@ -71,7 +74,7 @@ const h = t.home.hero;
         {h.pullQuote}
       </p>
 
-      <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+      <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
         <a
           href={`${prefix}/init`}
           class="inline-flex items-center justify-center rounded-sm px-6 py-3 text-base font-semibold transition hover:opacity-90"
