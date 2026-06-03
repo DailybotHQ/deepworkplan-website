@@ -186,8 +186,11 @@ All content MUST exist in both languages:
 ### Twitter Card Tags
 
 - `twitter:card` — `summary_large_image`
-- `twitter:site` — `@deepworkplan`
-- `twitter:creator` — `@deepworkplan`
+- `twitter:url`, `twitter:title`, `twitter:description`, `twitter:image`, `twitter:image:alt`
+
+> `twitter:site` / `twitter:creator` are intentionally **not** emitted: the
+> project has no official X/Twitter account to attribute. Add them only if a
+> real handle is created.
 
 ### OG Image Guidelines
 

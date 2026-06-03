@@ -1,6 +1,6 @@
 ---
 title: GitHub Copilot
-description: "El adaptador de DWP para GitHub Copilot, con soporte parcial mediante procedimientos en Markdown y el prefijo almohadilla. Los comandos básicos funcionan, con algo de automatización manual."
+description: "El adaptador de DWP para GitHub Copilot, con soporte parcial mediante procedimientos en Markdown y el prefijo almohadilla; parte de la automatización es manual."
 kind: adapter
 lang: es
 order: 4

@@ -1,6 +1,6 @@
 ---
 title: deepworkplan-onboard
-description: "Convierte un repositorio en AI-first razonando sobre su stack y arquetipo, y luego genera un AGENTS.md adaptado, docs/, docs por módulo, .agents/, el enlace simbólico .claude a .agents y un .dwp/ ignorado por git."
+description: "Convierte un repositorio en AI-first razonando sobre su stack y arquetipo, y luego genera un AGENTS.md adaptado, docs/, .agents/ y un .dwp/ ignorado por git."
 kind: command
 lang: es
 order: 6

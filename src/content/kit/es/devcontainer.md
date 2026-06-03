@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Un addon opcional que agrega o reconcilia un devcontainer basado en compose razonado a partir del stack detectado, con autenticación de CLI de IA persistente que sobrevive a las reconstrucciones. Nunca es obligatorio para que un repo sea AI-first."
+description: "Un addon opcional que agrega o reconcilia un devcontainer de compose desde el stack detectado, con autenticación de CLI de IA persistente tras reconstrucciones."
 kind: addon
 lang: es
 order: 1

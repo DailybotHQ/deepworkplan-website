@@ -1,6 +1,6 @@
 ---
 title: skill-create
-description: "Create a new reusable skill in the current repository — a parameterized, in-session procedure — by delegating to the author sub-skill, following the repo's local conventions and keeping the catalog in sync."
+description: "Create a new reusable skill in the current repository — a parameterized, in-session procedure — via the author sub-skill, keeping the catalog in sync."
 kind: command
 lang: en
 order: 7

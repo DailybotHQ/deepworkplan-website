@@ -1,6 +1,6 @@
 ---
 title: deepworkplan-onboard
-description: "Make a repository AI-first by reasoning about its stack and archetype, then generating an adapted AGENTS.md, docs/, per-module docs, .agents/, the .claude to .agents symlink, and a gitignored .dwp/."
+description: "Make a repository AI-first by reasoning about its stack and archetype, then generating an adapted AGENTS.md, docs/, .agents/, and a gitignored .dwp/."
 kind: command
 lang: en
 order: 6

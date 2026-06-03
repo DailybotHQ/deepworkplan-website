@@ -1,6 +1,6 @@
 ---
 title: OpenAI Codex
-description: "The DWP adapter for OpenAI Codex, with partial support through markdown command procedures and the hash prefix. Core commands work; team-agent features are unavailable."
+description: "The DWP adapter for OpenAI Codex, with partial support through markdown command procedures and the hash prefix; team-agent features are unavailable."
 kind: adapter
 lang: en
 order: 3

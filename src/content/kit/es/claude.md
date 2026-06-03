@@ -1,6 +1,6 @@
 ---
 title: Claude Code
-description: "El adaptador de DWP para Claude Code, con soporte completo mediante comandos slash nativos y habilidades, incluidos subagentes y agentes de equipo para el conjunto completo."
+description: "El adaptador de DWP para Claude Code, con soporte completo mediante comandos slash nativos y habilidades, incluidos subagentes y agentes de equipo."
 kind: adapter
 lang: es
 order: 1

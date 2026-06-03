@@ -1,6 +1,6 @@
 # Deep Work Plan - Full Site Description
 
-> Deep Work Plan (DWP) is an open, MIT-licensed methodology and reference kit that turns any repository into an AI-first, agent-pilotable codebase — spec-driven development where the repository itself becomes the agent harness. Maintained by Dailybot and the open-source community.
+> Context matters more than models. Deep Work Plan (DWP) is an open, MIT-licensed methodology and reference kit that turns any repository into a structured, agent-pilotable environment — context, guardrails, and a durable plan — where the repository itself becomes the agent harness, so any coding agent can finish long-horizon work. Spec-driven, tool-agnostic, repo-native. Maintained by Dailybot and the open-source community.
 
 ## What Deep Work Plan Is
 

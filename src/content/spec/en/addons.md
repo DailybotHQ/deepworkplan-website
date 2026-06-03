@@ -1,6 +1,6 @@
 ---
 title: Add-ons
-description: "The optional extensions to the core DWP methodology, including skills, agents, presets, adapters, and examples, and how each one extends the workflow without being required."
+description: "Optional extensions to the core DWP methodology: skills, agents, presets, adapters, and examples, and how each extends the workflow without being required."
 order: 5
 lang: en
 section: Addons

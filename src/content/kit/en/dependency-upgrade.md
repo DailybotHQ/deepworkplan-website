@@ -1,6 +1,6 @@
 ---
 title: Dependency upgrade
-description: "An opt-in, package-manager-agnostic addon that upgrades a repo's dependencies in validated, revertible batches — detecting the real manager rather than assuming npm. Installs the /lib-upgrade command when accepted."
+description: "An opt-in, package-manager-agnostic addon that upgrades a repo's dependencies in validated, revertible batches, detecting the real manager, not assuming npm."
 kind: addon
 lang: en
 order: 3

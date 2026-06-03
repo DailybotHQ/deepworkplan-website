@@ -1,6 +1,6 @@
 ---
 title: Estándar de documentación
-description: "El estándar normativo de cómo los Deep Work Plans documentan su estructura, tareas y avance, con los requisitos del README, los marcadores de estado y las tareas finales obligatorias."
+description: "Estándar normativo de cómo los Deep Work Plans documentan estructura, tareas y avance: README, marcadores de estado y las dos tareas finales obligatorias."
 order: 1
 lang: es
 section: Standard

@@ -1,6 +1,6 @@
 ---
 title: Conformance
-description: "The normative definition of a Deep Work Plan-conformant, AI-first repository: the artifacts a repository MUST and SHOULD have, what makes a plan well-formed, and how to verify it objectively."
+description: "The normative definition of a DWP-conformant, AI-first repository: the artifacts it MUST and SHOULD have, what makes a plan well-formed, and how to verify it."
 order: 6
 lang: en
 section: Conformance

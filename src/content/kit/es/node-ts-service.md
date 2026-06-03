@@ -1,6 +1,6 @@
 ---
 title: Servicio Node / TS
-description: "Un preset de incorporación para servicios y APIs serverless de Node y TypeScript, con pistas de razonamiento para el ciclo de vida de la solicitud o el evento, las integraciones, la verificación de tipos y la convención de pruebas."
+description: "Un preset de incorporación para servicios y APIs serverless de Node y TypeScript, con pistas para el ciclo de vida de la solicitud, integraciones y pruebas."
 kind: preset
 lang: es
 order: 4

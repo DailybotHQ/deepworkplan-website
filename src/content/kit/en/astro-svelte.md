@@ -1,6 +1,6 @@
 ---
 title: Astro / Svelte
-description: "An onboarding preset for Astro sites, optionally with Svelte islands, with reasoning cues for content collections, schema validation, island hydration, and static-site output."
+description: "An onboarding preset for Astro sites, optionally with Svelte islands, with reasoning cues for content collections, schema validation, and island hydration."
 kind: preset
 lang: en
 order: 3

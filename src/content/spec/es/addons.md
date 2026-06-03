@@ -1,6 +1,6 @@
 ---
 title: Complementos
-description: "Las extensiones opcionales de la metodología DWP central: habilidades, agentes, presets, adaptadores y ejemplos, y cómo cada una amplía el flujo de trabajo sin ser obligatoria."
+description: "Extensiones opcionales de la metodología DWP central: habilidades, agentes, presets, adaptadores y ejemplos, y cómo amplían el flujo sin ser obligatorias."
 order: 5
 lang: es
 section: Addons

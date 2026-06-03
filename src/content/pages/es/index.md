@@ -1,6 +1,6 @@
 ---
 title: "Deep Work Plan — convierte cualquier repositorio en un código AI-first"
-description: "Haz cualquier repositorio AI-first: un entorno estructurado — contexto, guardrails y un plan — donde cualquier agente de código ejecuta de forma fiable."
+description: "El contexto importa más que el modelo. Deep Work Plan hace de cualquier repositorio un entorno estructurado donde un agente completa trabajo de largo aliento."
 lastUpdated: 2026-06-03
 ---
 

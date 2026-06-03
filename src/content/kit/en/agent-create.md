@@ -1,6 +1,6 @@
 ---
 title: agent-create
-description: "Create a new agent in the current repository — a specialized worker with its own model tier and tools — by delegating to the author sub-skill, following the repo's local conventions and keeping the catalog in sync."
+description: "Create a new agent in the current repository — a specialized worker with its own model tier and tools — via the author sub-skill, keeping the catalog in sync."
 kind: command
 lang: en
 order: 8
