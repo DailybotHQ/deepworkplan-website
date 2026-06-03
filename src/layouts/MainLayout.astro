@@ -4,6 +4,7 @@ import BaseHead from '@/components/BaseHead.astro';
 import Footer from '@/components/Footer.astro';
 import Header from '@/components/layout/Header.svelte';
 import ThemeToggle from '@/components/ThemeToggle.astro';
+import WebMcp from '@/components/WebMcp.astro';
 
 interface Props {
   lang: string;
@@ -72,5 +73,6 @@ const {
       import { setupOutboundTracking } from '@/lib/analytics';
       setupOutboundTracking();
     </script>
+    <WebMcp />
   </body>
 </html>

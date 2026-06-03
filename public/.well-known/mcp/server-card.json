@@ -2,10 +2,24 @@
   "serverInfo": {
     "name": "deep-work-plan-site",
     "version": "1.0.0",
-    "description": "deepworkplan.com — Deep Work Plan methodology, spec, and kit. Read-only agent surface: search posts, list series, list timeline. Exposed via WebMCP in the browser and documented via Agent Skills at /.well-known/agent-skills/index.json."
+    "description": "deepworkplan.com — the Deep Work Plan methodology, specification, and kit. Read-only agent surface exposing the canonical /init adoption prompt and navigation to the methodology, spec, kit, and examples. Exposed in the browser via WebMCP (navigator.modelContext) on every page and documented via Agent Skills at /.well-known/agent-skills/index.json."
   },
   "transport": {
     "endpoint": "https://deepworkplan.com/"
   },
-  "capabilities": ["tools", "resources"]
+  "capabilities": ["tools", "resources"],
+  "tools": [
+    {
+      "name": "get_init_prompt",
+      "description": "Return the canonical one-line instruction that makes any repository AI-first with Deep Work Plan (the /init.md adoption prompt)."
+    },
+    {
+      "name": "list_site_sections",
+      "description": "List the main sections of deepworkplan.com (methodology, specification, kit, examples, init) with their URLs."
+    },
+    {
+      "name": "open_section",
+      "description": "Navigate the current browser tab to a section of deepworkplan.com (home, methodology, spec, kit, examples, or init)."
+    }
+  ]
 }
