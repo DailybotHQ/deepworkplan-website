@@ -16,9 +16,9 @@ ink-line **engraving** style anchored to the existing lighthouse in
 > `src/components/diagrams/` (text in the codebase → cheap multi-language), per
 > [`docs/DIAGRAM_COMPONENTS.md`](../DIAGRAM_COMPONENTS.md). The diagram prompt
 > entries below are kept as the **component specs** (their nodes, arrows, and EN/ES
-> labels seed each component's i18n map). Only the **6 illustrations** — HP-01 (the
-> faro hero), HP-02, HP-06, HP-07, HP-08, HP-09 — remain **AI-generated images**;
-> generate those with your image agent using the prompts here.
+> labels seed each component's i18n map). Only the **illustrations** — HP-01 (the
+> faro hero), HP-02 (the pitch chart), and the optional HP-06 ornament — remain
+> **AI-generated images**; generate those with your image agent using the prompts here.
 
 ## Contents
 
@@ -26,7 +26,7 @@ ink-line **engraving** style anchored to the existing lighthouse in
 | :-- | :-- |
 | [STYLE_GUIDE.md](./STYLE_GUIDE.md) | The canonical **house style** (engraving look, exact palette, light/dark + EN/ES policies, dimensions, asset paths) and the **prompt entry schema** every prompt follows. |
 | [VISUAL_INVENTORY.md](./VISUAL_INVENTORY.md) | Master list of every visual **slot** across the site, each with a stable ID, type, priority, size, and status. |
-| [prompts/01-homepage.md](./prompts/01-homepage.md) | Homepage prompts (HP-01 … HP-09). |
+| [prompts/01-homepage.md](./prompts/01-homepage.md) | Homepage prompts (HP-01 … HP-06). |
 | [prompts/02-methodology.md](./prompts/02-methodology.md) | Methodology prompts (ME-01 … ME-06). |
 | [prompts/03-spec.md](./prompts/03-spec.md) | Spec figures (SP-01 … SP-05). |
 | [prompts/04-kit.md](./prompts/04-kit.md) | Kit prompts (KT-01 … KT-10). |
@@ -59,11 +59,11 @@ ink-line **engraving** style anchored to the existing lighthouse in
 
 | Area | Slots with prompts | Flagships | Skips |
 | :-- | :-: | :-- | :-- |
-| Homepage | 9 (HP-01…HP-09) | HP-01 | `Comparison.astro` (table → CSS ticks), `Origin.astro` (already has logo) |
+| Homepage | 6 (HP-01…HP-06) | HP-01 | `Comparison.astro` (table → CSS ticks), `Origin.astro` (already has logo) |
 | Methodology | 6 (ME-01…ME-06) | ME-01, ME-02 | — |
 | Spec | 5 (SP-01…SP-05) | — | SP-02/03/05 reuse methodology assets |
 | Kit | 10 (KT-01…KT-10) | KT-01 | — |
-| **Total** | **30** | **4** | **2 (homepage)** |
+| **Total** | **27** | **4** | **2 (homepage)** |
 
 Coverage cross-check (Task 6): every inventory slot ID maps to a schema-complete
 prompt entry; EN/ES label, alt, and caption fields are balanced across all four

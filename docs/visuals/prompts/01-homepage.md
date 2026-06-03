@@ -6,8 +6,9 @@
 > boilerplate (§9), and the prompt entry schema (§10). Every entry below is
 > schema-complete; each **Prompt** field is copy-paste-ready.
 >
-> **Slots covered:** HP-01 … HP-09 (from VISUAL_INVENTORY.md) + skip decisions
-> for `Comparison.astro` and `Origin.astro`.
+> **Slots covered:** HP-01, HP-02 (illustrations) · HP-03, HP-04, HP-05 (diagram
+> components) · HP-06 (ornament) + skip decisions for `Comparison.astro` and
+> `Origin.astro`.
 >
 > **Flagship:** HP-01 — the Hero right-column illustration — gets the richest
 > treatment and is the single highest-value asset on the site.
@@ -16,7 +17,7 @@
 > Generated illustrations must contain **ZERO text** (no words, letters, numbers,
 > or labels), because they are a single asset reused for **every language** — we
 > never want to regenerate art per locale. **Generate as images only:** HP-01,
-> HP-02, HP-06, HP-07, HP-08, HP-09 (all wordless). **Do NOT generate:** HP-03,
+> HP-02, HP-06 (all wordless). **Do NOT generate:** HP-03,
 > HP-04, HP-05 — those need text labels, so they are **diagrams built as HTML/CSS
 > components** (`src/components/diagrams/home/`), already live on the homepage and
 > translated from the codebase. Rule of thumb: **needs text → HTML/CSS component;
@@ -190,82 +191,7 @@
 
 ---
 
-### HP-06 — Agent glyphs (role marks)
-
-- **Target surface:** `src/components/home/Agents.astro` → a small glyph beside each agent-type card.
-- **Type:** illustration
-- **Priority:** low
-- **Purpose / trust rationale:** Tiny role glyphs differentiate the agent types (reviewer, executor, architect, …) and add quiet visual rhythm to a text-heavy card grid.
-- **Aspect & dimensions:** 1:1 · 96 × 96 px displayed · generate @2x (192 × 192 px) — produce as one cohesive set.
-- **Light/dark strategy:** transparent (ink on alpha, invertible).
-- **Prompt:**
-  > **HOUSE STYLE —** Fine ink-line engraving emblem set, monochrome warm ink (`#1B1A17`) on a **transparent background**, no accent (or one shared hairline). Editorial, flat 2D, print-quality, consistent stroke weight across the set. **No border, frame, box, or rectangle around the image or around any glyph; nothing touches or is clipped by the edges; soft edges; each glyph centered with generous margin.** No gradients, no shadows, no 3D.
-  >
-  > **Subject:** A set of small square 1:1 emblem glyphs in one consistent engraved style, one per agent role: a magnifier-over-page (reviewer), a gear-in-motion (executor), a compass/drafting-square (architect), a globe-with-speech-marks (i18n-guardian), a shield (security-auditor). Each glyph centered, minimal, legible at 96px, no text. Deliver as separate files or a sprite sheet.
-  >
-  > **AVOID —** any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, extra logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
-- **In-image text (EN):** none
-- **In-image text (ES):** none
-- **Suggested asset path:** `public/images/visuals/home/agent-glyphs.webp` (sprite) or `public/images/visuals/home/agent-{role}.webp`
-- **Alt text (EN):** `alt=""` (decorative role glyph; the card label names the agent)
-- **Alt text (ES):** `alt=""` (decorativo)
-- **Caption (EN):** —
-- **Caption (ES):** —
-- **Integration note:** One glyph per Agents card; decorative, so `alt=""`. `width="96" height="96"`.
-
----
-
-### HP-07 — Outcome marks
-
-- **Target surface:** `src/components/home/Outcomes.astro` → a small mark beside each outcome item ("What you get").
-- **Type:** illustration
-- **Priority:** low
-- **Purpose / trust rationale:** Light marks beside each deliverable (AGENTS.md, docs/, .agents/, the skill, conformance) make the "what you get" list scannable and concrete.
-- **Aspect & dimensions:** 1:1 · 96 × 96 px displayed · generate @2x (192 × 192 px) — cohesive set.
-- **Light/dark strategy:** transparent (ink on alpha, invertible).
-- **Prompt:**
-  > **HOUSE STYLE —** Fine ink-line engraving emblem set, monochrome warm ink (`#1B1A17`) on a **transparent background**, consistent stroke weight, no accent. Editorial, flat 2D, print-quality. **No border, frame, box, or rectangle around the image or around any glyph; nothing touches or is clipped by the edges; soft edges; each element centered with generous margin.** No gradients, no shadows, no 3D.
-  >
-  > **Subject:** A cohesive set of small 1:1 glyphs: a labelled document (AGENTS.md), a categorized folder tree (docs/), a small directory with a dashed symlink arrow (.agents/ + .claude), a stacked package (the installed skill), a checkmark-in-hexagon (conformance). Minimal, centered, legible at 96px, no text.
-  >
-  > **AVOID —** any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, extra logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
-- **In-image text (EN):** none
-- **In-image text (ES):** none
-- **Suggested asset path:** `public/images/visuals/home/outcome-marks.webp` (sprite) or per-item files
-- **Alt text (EN):** `alt=""` (decorative; outcome label carries meaning)
-- **Alt text (ES):** `alt=""` (decorativo)
-- **Caption (EN):** —
-- **Caption (ES):** —
-- **Integration note:** One mark per Outcomes item; decorative, `alt=""`. `width="96" height="96"`.
-
----
-
-### HP-08 — Stack marks
-
-- **Target surface:** `src/components/home/Stacks.astro` → a small mark beside each supported tool (Claude Code, Cursor, Codex, Gemini, Copilot).
-- **Type:** illustration
-- **Priority:** low
-- **Purpose / trust rationale:** Quiet, brand-neutral engraved marks signal breadth ("agent-agnostic") without importing third-party logos that would clash with the editorial palette.
-- **Aspect & dimensions:** 1:1 · 96 × 96 px displayed · generate @2x (192 × 192 px) — cohesive set.
-- **Light/dark strategy:** transparent (ink on alpha, invertible).
-- **Prompt:**
-  > **HOUSE STYLE —** Fine ink-line engraving emblem set, monochrome warm ink (`#1B1A17`) on a **transparent background**, consistent stroke weight, no accent. Editorial, flat 2D, print-quality. **No border, frame, box, or rectangle around the image or around any glyph; nothing touches or is clipped by the edges; soft edges; each element centered with generous margin.** No gradients, no shadows, no 3D.
-  >
-  > **Subject:** A cohesive set of small abstract 1:1 emblems suggesting "any agent / any tool" — e.g. a terminal prompt caret, a cursor arrow, a code bracket pair, a chat glyph, a plug/adapter. Neutral and original (do NOT reproduce any company's actual logo). Minimal, centered, legible at 96px, no text.
-  >
-  > **AVOID —** any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, real third-party brand logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
-- **In-image text (EN):** none
-- **In-image text (ES):** none
-- **Suggested asset path:** `public/images/visuals/home/stack-marks.webp` (sprite) or per-item files
-- **Alt text (EN):** `alt=""` (decorative; tool name is in adjacent text)
-- **Alt text (ES):** `alt=""` (decorativo)
-- **Caption (EN):** —
-- **Caption (ES):** —
-- **Integration note:** One mark per Stacks item; decorative, `alt=""`. Use neutral marks, never real vendor logos. `width="96" height="96"`.
-
----
-
-### HP-09 — Final CTA accent
+### HP-06 — Final CTA accent
 
 - **Target surface:** `src/components/home/FinalCta.astro` → a slim accent above the closing CTAs.
 - **Type:** illustration
@@ -296,7 +222,7 @@
   comparison **table**; status/check marks are best rendered as CSS/inline SVG
   ticks for crispness and dark-mode parity, not a generated raster. Recommend
   styling the existing table rather than commissioning an image. (Revisit only if
-  a decorative section header mark is wanted — that would reuse the HP-09 idiom.)
+  a decorative section header mark is wanted — that would reuse the HP-06 idiom.)
 - **`Origin.astro` — SKIP (already visual).** This section already carries the
   Dailybot logo (light/dark SVG). Adding a generated illustration would compete
   with that brand mark. No new asset.
@@ -305,11 +231,13 @@
 
 ## Coverage (homepage)
 
-| ID | Status | ID | Status |
-| :-- | :-- | :-- | :-- |
-| HP-01 | done (flagship) | HP-06 | done |
-| HP-02 | done | HP-07 | done |
-| HP-03 | done | HP-08 | done |
-| HP-04 | done | HP-09 | done |
-| HP-05 | done | Comparison | skip (table → CSS ticks) |
-| | | Origin | skip (already has logo) |
+| ID | Kind | Status |
+| :-- | :-- | :-- |
+| HP-01 | illustration (image) | done — hero faro |
+| HP-02 | illustration (image) | done — pitch chart |
+| HP-03 | diagram (component) | done — `QuickstartFlow` |
+| HP-04 | diagram (component) | done — `OnboardingSequence` |
+| HP-05 | diagram (component) | done — `ArchetypesCompare` |
+| HP-06 | illustration (image) | optional ornament |
+| Comparison | — | skip (table → CSS ticks) |
+| Origin | — | skip (already has logo) |

@@ -10,7 +10,7 @@
 > every ▦ diagram slot (HP-03/04/05, all ME/SP/KT) is built as an HTML/CSS component
 > under `src/components/diagrams/` (see [`docs/DIAGRAM_COMPONENTS.md`](../DIAGRAM_COMPONENTS.md));
 > these prompt entries are kept as the **component specs / i18n seed**. Only the
-> 🖼 illustrations (HP-01, HP-02, HP-06–09) are generated as images.
+> 🖼 illustrations (HP-01, HP-02, HP-06) are generated as images.
 
 **Priority key:** ★ flagship · H high · M medium · L low.
 **Type:** 🖼 illustration (→ image) · ▦ diagram (→ component).
@@ -24,14 +24,11 @@
 | ID | Surface | Type | Pri | Aspect/size | Light/dark | Asset path | Status |
 | :-- | :-- | :-: | :-: | :-- | :-- | :-- | :-- |
 | HP-01 | `Hero.astro` → right column (empty on `lg`; currently `max-w-3xl` text — needs a grid to expose the column) | 🖼 | ★ | 4:5 · 520×650 | pair | `home/hero-harness.webp` | done |
-| HP-02 | `Pitch.astro` → beside problem→answer copy | 🖼 | M | 1:1 · 96×96 | transparent | `home/pitch-mark.webp` | done |
+| HP-02 | `Pitch.astro` → right column (nautical chart) | 🖼 | M | 4:5 · 760×950 | pair | `home/pitch-chart.webp` | done |
 | HP-03 | `Quickstart.astro` → above/beside the 4 steps | ▦ | H | 16:9 · 880×495 | transparent | `home/quickstart-flow.webp` | done |
 | HP-04 | `Onboarding.astro` → beside numbered steps | ▦ | M | 16:9 · 880×495 | transparent | `home/onboarding-sequence.webp` | done |
 | HP-05 | `Archetypes.astro` → between the two cards | ▦ | M | 1:1 · 640×640 | transparent | `home/archetypes-compare.webp` | done |
-| HP-06 | `Agents.astro` → per-card glyphs | 🖼 | L | 1:1 · 96×96 | transparent | `home/agent-glyphs.webp` | done |
-| HP-07 | `Outcomes.astro` → benefit marks | 🖼 | L | 1:1 · 96×96 | transparent | `home/outcome-marks.webp` | done |
-| HP-08 | `Stacks.astro` → tech marks | 🖼 | L | 1:1 · 96×96 | transparent | `home/stack-marks.webp` | done |
-| HP-09 | `FinalCta.astro` → accent above CTAs | 🖼 | L | 16:9 · 880×495 | transparent | `home/finalcta-accent.webp` | done |
+| HP-06 | `FinalCta.astro` → accent above CTAs | 🖼 | L | 16:9 · 880×495 | transparent | `home/finalcta-accent.webp` | done |
 
 > `Comparison.astro` and `Origin.astro`: candidate `skip` — Comparison is a table
 > (status marks may be CSS, not an asset); Origin already carries the Dailybot
@@ -92,13 +89,12 @@
 
 | Area | Slots | Flagships | Done | Skip |
 | :-- | :-: | :-- | :-: | :-: |
-| Homepage | 9 (+2 candidates) | HP-01 | 9 | 2 (Comparison → CSS ticks; Origin → has logo) |
+| Homepage | 6 | HP-01 | 6 | 2 (Comparison → CSS ticks; Origin → has logo) |
 | Methodology | 6 | ME-01, ME-02 | 6 | — |
 | Spec | 5 | — | 5 (SP-02/03/05 reuse ME assets) | — |
 | Kit | 10 | KT-01 | 10 | — |
-| **Total** | **30 (+2)** | **4** | **30** | **2** |
+| **Total** | **27** | **4** | **27** | **2** |
 
-_Reconciled in Task 6 (2026-06-02): every inventory slot ID maps to a
-schema-complete prompt entry; EN/ES label, alt, and caption fields are balanced
-across all four prompt files (9 / 6 / 5 / 10). The two homepage candidates are
-intentional skips. SP-02/SP-03/SP-05 reuse methodology assets ME-03/ME-02/ME-06._
+_Homepage = HP-01/HP-02 (illustrations, images) · HP-03/04/05 (diagram components)
+· HP-06 (optional ornament). SP-02/SP-03/SP-05 reuse methodology components
+ME-03/ME-02/ME-06. All diagrams (▦) are HTML/CSS components, not images._
