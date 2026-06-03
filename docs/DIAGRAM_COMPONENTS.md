@@ -29,8 +29,8 @@ exactly the model the user wants. Assessment per diagram class:
 | Lifecycle / state | SP-01 | ✅ good | linear states + return arrow |
 | Distinction + annotation | ME-05, ME-06, KT-10 | ✅ good | two-column / decision branch |
 
-No diagram class requires raster. **Illustrations** (the faro hero HP-01, the
-pitch chart HP-02, and the HP-06 ornament) stay AI-generated images — line art and
+No diagram class requires raster. **Illustrations** (the faro hero HP-01 and the
+pitch chart HP-02) stay AI-generated images — line art and
 atmosphere are not a good HTML/CSS fit, and the team generates those with an image
 agent. See `docs/visuals/` for those prompts.
 
@@ -238,5 +238,5 @@ Status: `todo` → `built`. Spec column → entry in `docs/visuals/prompts/`.
 | HP-04 | `OnboardingSequence` | home | 01-homepage#hp-04 | built |
 | HP-05 | `ArchetypesCompare` | home | 01-homepage#hp-05 | built |
 
-**Illustrations kept as images (not in this system):** HP-01 (faro hero), HP-02
-(pitch chart), HP-06 (ornament) — see `docs/visuals/`.
+**Illustrations kept as images (not in this system):** HP-01 (faro hero) and HP-02
+(pitch chart) — see `docs/visuals/`.

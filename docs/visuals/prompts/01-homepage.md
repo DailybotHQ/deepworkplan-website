@@ -7,8 +7,7 @@
 > schema-complete; each **Prompt** field is copy-paste-ready.
 >
 > **Slots covered:** HP-01, HP-02 (illustrations) · HP-03, HP-04, HP-05 (diagram
-> components) · HP-06 (ornament) + skip decisions for `Comparison.astro` and
-> `Origin.astro`.
+> components) + skip decisions for `Comparison.astro` and `Origin.astro`.
 >
 > **Flagship:** HP-01 — the Hero right-column illustration — gets the richest
 > treatment and is the single highest-value asset on the site.
@@ -16,8 +15,8 @@
 > **🔤 ILLUSTRATIONS ARE WORDLESS — and only some entries here are illustrations.**
 > Generated illustrations must contain **ZERO text** (no words, letters, numbers,
 > or labels), because they are a single asset reused for **every language** — we
-> never want to regenerate art per locale. **Generate as images only:** HP-01,
-> HP-02, HP-06 (all wordless). **Do NOT generate:** HP-03,
+> never want to regenerate art per locale. **Generate as images only:** HP-01 and
+> HP-02 (both wordless). **Do NOT generate:** HP-03,
 > HP-04, HP-05 — those need text labels, so they are **diagrams built as HTML/CSS
 > components** (`src/components/diagrams/home/`), already live on the homepage and
 > translated from the codebase. Rule of thumb: **needs text → HTML/CSS component;
@@ -191,38 +190,12 @@
 
 ---
 
-### HP-06 — Final CTA accent
-
-- **Target surface:** `src/components/home/FinalCta.astro` → a slim accent above the closing CTAs.
-- **Type:** illustration
-- **Priority:** low
-- **Purpose / trust rationale:** A restrained engraved rule/ornament closes the page with the same editorial gravity it opened with, echoing the hero lighthouse motif.
-- **Aspect & dimensions:** 16:9 (thin band) · 880 × 495 px displayed (use top portion) · generate @2x (1760 × 990 px); or a wide thin ornament 880 × 120.
-- **Light/dark strategy:** transparent (ink on alpha, invertible).
-- **Prompt:**
-  > **HOUSE STYLE —** Fine ink-line engraving ornament, monochrome warm ink (`#1B1A17`) on a **transparent background**, one small **oxblood** (`#7A1F1F`) center mark. Editorial, flat 2D, print-quality. **No border, frame, box, or rectangle; nothing touches or is clipped by the edges; soft edges that fade out, centered with generous horizontal margin.** No gradients, no shadows, no 3D.
-  >
-  > **Subject:** A wide, slim editorial rule/ornament — a centered engraved compass-rose or small lighthouse-beam motif flanked by symmetric hairline filigree tapering to the edges, the center mark in **oxblood**. Echoes the hero. No text. Lots of horizontal breathing room.
-  >
-  > **AVOID —** any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, extra logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
-- **In-image text (EN):** none
-- **In-image text (ES):** none
-- **Suggested asset path:** `public/images/visuals/home/finalcta-accent.webp`
-- **Alt text (EN):** `alt=""` (decorative ornament)
-- **Alt text (ES):** `alt=""` (decorativo)
-- **Caption (EN):** —
-- **Caption (ES):** —
-- **Integration note:** Centered above the FinalCta buttons; decorative, `alt=""`. One asset serves both languages. `width="880" height="120"` (or crop to band).
-
----
-
 ## Skip decisions
 
 - **`Comparison.astro` — SKIP (no image asset).** This section is a feature
   comparison **table**; status/check marks are best rendered as CSS/inline SVG
   ticks for crispness and dark-mode parity, not a generated raster. Recommend
-  styling the existing table rather than commissioning an image. (Revisit only if
-  a decorative section header mark is wanted — that would reuse the HP-06 idiom.)
+  styling the existing table rather than commissioning an image.
 - **`Origin.astro` — SKIP (already visual).** This section already carries the
   Dailybot logo (light/dark SVG). Adding a generated illustration would compete
   with that brand mark. No new asset.
@@ -238,6 +211,5 @@
 | HP-03 | diagram (component) | done — `QuickstartFlow` |
 | HP-04 | diagram (component) | done — `OnboardingSequence` |
 | HP-05 | diagram (component) | done — `ArchetypesCompare` |
-| HP-06 | illustration (image) | optional ornament |
 | Comparison | — | skip (table → CSS ticks) |
 | Origin | — | skip (already has logo) |

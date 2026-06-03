@@ -94,8 +94,7 @@ the left, leaving the right side empty on `lg`. To place HP-01:
 ## 6. Accessibility checklist (per asset)
 
 - [ ] Explicit `width`/`height` set (values from the entry).
-- [ ] Meaningful `alt` for informative visuals (HP-01 hero, HP-02 chart);
-      `alt=""` for the decorative HP-06 ornament.
+- [ ] Meaningful `alt` for informative visuals (HP-01 hero, HP-02 chart).
 - [ ] EN alt in `en.ts`, ES alt in `es.ts`.
 - [ ] Contrast holds on both paper and ink grounds.
 - [ ] Caption (if used) is bilingual and not redundant with surrounding prose.
@@ -103,8 +102,8 @@ the left, leaving the right side empty on `lg`. To place HP-01:
 ## 7. Per-area integration checklist
 
 - [ ] **Homepage** — HP-01 hero grid + `<picture>` swap; HP-02 pitch chart (right
-      column); HP-03/04/05 diagram components (already live); HP-06 ornament
-      (`alt=""`); Comparison/Origin: no asset (skip).
+      column); HP-03/04/05 diagram components (already live); Comparison/Origin: no
+      asset (skip).
 - [ ] **Methodology** — ME-01…ME-06 as `Figure`s in the methodology reader at the
       noted section anchors; EN/ES asset per page language.
 - [ ] **Spec** — SP-01 + SP-04 new figures; SP-02/03/05 reuse the methodology
