@@ -19,6 +19,24 @@ const p = t.home.pitch;
       <Kicker>{p.kicker}</Kicker>
       <div class="mt-6 space-y-5">
         <Lead dropCap>{p.problem}</Lead>
+        <div class="py-2">
+          <img
+            src="/images/visuals/home/pitch-mark.webp"
+            alt=""
+            width="480"
+            height="240"
+            loading="lazy"
+            class="mx-auto h-auto w-full max-w-[360px] dark:hidden"
+          />
+          <img
+            src="/images/visuals/home/pitch-mark-dark.webp"
+            alt=""
+            width="480"
+            height="240"
+            loading="lazy"
+            class="mx-auto hidden h-auto w-full max-w-[360px] dark:block"
+          />
+        </div>
         <p class="text-lg leading-relaxed" style="color: var(--color-ink);">
           {p.answer}
         </p>

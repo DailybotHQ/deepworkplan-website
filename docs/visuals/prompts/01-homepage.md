@@ -39,28 +39,31 @@
 
 ---
 
-### HP-02 — Pitch mark (drift → durable plan)
+### HP-02 — Pitch mark (chaos → an ordered, checked plan)
 
 - **Target surface:** `src/components/home/Pitch.astro` → beside the "problem and the answer" copy (problem: agents drift on long-horizon work; answer: the plan is the durable source of truth).
 - **Type:** illustration
 - **Priority:** medium
-- **Purpose / trust rationale:** A small conceptual mark that contrasts drift (a wandering, fraying line) with a durable, anchored plan reinforces the pitch at a glance without competing with the prose.
-- **Aspect & dimensions:** 1:1 · 96 × 96 px displayed · generate @2x (192 × 192 px)
-- **Light/dark strategy:** transparent (simple ink line mark on alpha; integrator recolors for dark mode via CSS).
+- **Purpose / trust rationale:** A small **before → after** vignette that reads instantly: a tangled scribble (an agent drifting) becomes a neat, checked plan document. It mirrors the Pitch's "problem → answer" structure at a glance and is concrete enough to understand without the surrounding copy.
+- **Aspect & dimensions:** 2:1 landscape · 200 × 100 px displayed · generate @2x (400 × 200 px)
+- **Light/dark strategy:** transparent (ink line art on alpha; the integrator recolors for dark mode via CSS).
 - **Prompt:**
-  > **HOUSE STYLE —** Fine ink-line engraving, monochrome warm ink (`#1B1A17`) on a **transparent background**, one small **oxblood** (`#7A1F1F`) accent only. Editorial, flat 2D, print-quality. No gradients, no shadows, no 3D.
+  > **HOUSE STYLE —** Fine ink-line engraving / etched hairlines, in the manner of a 19th-century scientific broadsheet — the SAME style as the site's lighthouse illustration. Monochrome warm ink (`#1B1A17`) on a **transparent background**, with a single restrained **oxblood** (`#7A1F1F`) accent (only the checkmarks). Calm, editorial, flat 2D, print-quality line work. No gradients, no shadows, no 3D, no color besides the one oxblood accent.
   >
-  > **Subject:** A tiny square emblem, 1:1. On the left, a loose, fraying, wandering line that loses its way (drift). It resolves on the right into a single firm horizontal rule pinned by a small **oxblood** anchor mark or pin (the durable plan). Minimal, iconographic, no text. Reads clearly at small size.
+  > **Subject:** A small horizontal "before → after" vignette, read left to right, with a slim engraved arrow (→) separating two halves.
+  > **LEFT (the problem):** a messy, tangled ball of scribbled line — a knot of overlapping loops going nowhere, a few loose ends fraying off. It clearly reads as "chaos / lost direction."
+  > **RIGHT (the answer):** a tidy upright document/plan card drawn in clean engraved hairlines, containing three or four short evenly-ruled horizontal lines (representing ordered tasks), each with a small **oxblood** checkmark to its left. Neat, aligned, calm — the visual opposite of the tangle.
+  > The contrast between the chaotic knot and the orderly checked plan is the whole message. Balanced composition, generous margins, no text/letters anywhere.
   >
-  > **AVOID —** gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, extra logos, garbled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
-- **In-image text (EN):** none
+  > **AVOID —** gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, any text or numbers or letters, lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+- **In-image text (EN):** none (wordless)
 - **In-image text (ES):** none
 - **Suggested asset path:** `public/images/visuals/home/pitch-mark.webp`
-- **Alt text (EN):** `alt=""` (decorative emblem; the adjacent text carries the meaning)
+- **Alt text (EN):** `alt=""` (decorative; the adjacent Pitch text carries the meaning)
 - **Alt text (ES):** `alt=""` (decorativo)
 - **Caption (EN):** —
 - **Caption (ES):** —
-- **Integration note:** Optional accent beside the Pitch heading or in the section margin. Decorative, so `alt=""`. `width="96" height="96"`.
+- **Integration note:** Optional accent beside the Pitch copy. Decorative, so `alt=""`. Displayed ~200×100 (`width="400" height="200"`, `class="h-auto"`).
 
 ---
 
