@@ -68,6 +68,8 @@ export const en: SiteTranslations = {
         'Deep Work Plan answers with spec-driven development: the plan is the durable source of truth, and agents execute against explicit acceptance criteria and validation gates. Drift drops, the work stays verifiable, and any agent can resume it across sessions.',
       origin:
         'It is also harness engineering made portable. An agent harness is the scaffolding around a model — context, tools, control loop, guardrails, resumable state — that makes it reliable. Deep Work Plan installs that harness into the repository itself (AGENTS.md, docs, the .agents/ skills home, the DWP skill), so any agent can pilot any repo. Born at Dailybot, battle-tested for months, and released as the DailybotHQ/deepworkplan-skill.',
+      illustrationAlt:
+        'A nautical chart with a single plotted course threading safely past hazards — an engraving evoking the plan as the direction that keeps work on course.',
     },
     onboarding: {
       badge: 'Reasoning-based onboarding',

@@ -15,34 +15,39 @@ const p = t.home.pitch;
 
 <section class="border-b py-16 md:py-20" style="border-color: var(--color-line);">
   <div class="main-container">
-    <div class="max-w-3xl">
-      <Kicker>{p.kicker}</Kicker>
-      <div class="mt-6 space-y-5">
-        <Lead dropCap>{p.problem}</Lead>
-        <div class="py-2">
-          <img
-            src="/images/visuals/home/pitch-mark.webp"
-            alt=""
-            width="480"
-            height="240"
-            loading="lazy"
-            class="mx-auto h-auto w-full max-w-[360px] dark:hidden"
-          />
-          <img
-            src="/images/visuals/home/pitch-mark-dark.webp"
-            alt=""
-            width="480"
-            height="240"
-            loading="lazy"
-            class="mx-auto hidden h-auto w-full max-w-[360px] dark:block"
-          />
+    <div
+      class="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:items-center lg:gap-12"
+    >
+      <div class="max-w-3xl">
+        <Kicker>{p.kicker}</Kicker>
+        <div class="mt-6 space-y-5">
+          <Lead dropCap>{p.problem}</Lead>
+          <p class="text-lg leading-relaxed" style="color: var(--color-ink);">
+            {p.answer}
+          </p>
+          <p class="leading-relaxed" style="color: var(--color-muted);">
+            {p.origin}
+          </p>
         </div>
-        <p class="text-lg leading-relaxed" style="color: var(--color-ink);">
-          {p.answer}
-        </p>
-        <p class="leading-relaxed" style="color: var(--color-muted);">
-          {p.origin}
-        </p>
+      </div>
+
+      <div class="mt-10 hidden md:block lg:mt-0">
+        <img
+          src="/images/visuals/home/pitch-chart.webp"
+          alt={p.illustrationAlt}
+          width="760"
+          height="950"
+          loading="lazy"
+          class="mx-auto h-auto w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] dark:hidden"
+        />
+        <img
+          src="/images/visuals/home/pitch-chart-dark.webp"
+          alt={p.illustrationAlt}
+          width="760"
+          height="950"
+          loading="lazy"
+          class="mx-auto hidden h-auto w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] dark:block"
+        />
       </div>
     </div>
   </div>

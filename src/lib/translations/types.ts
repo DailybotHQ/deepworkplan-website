@@ -110,6 +110,7 @@ export interface SiteTranslations {
       problem: string;
       answer: string;
       origin: string;
+      illustrationAlt: string;
     };
     onboarding: {
       badge: string;
