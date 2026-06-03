@@ -30,7 +30,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const {
   title,
   description,
-  image = '/images/og-default.png',
+  image: imageProp,
   lang = 'en',
   keywords,
   prevPage,
@@ -39,6 +39,12 @@ const {
   ogImageWidth = 1200,
   ogImageHeight = 630,
 } = Astro.props;
+// Default OG image is language-specific (Spanish pages share the same
+// Broadsheet composition with translated copy); an explicit `image` prop
+// from a page always wins.
+const image =
+  imageProp ??
+  (lang === 'es' ? '/images/og-default-es.png' : '/images/og-default.png');
 const absoluteImageUrl = new URL(image, Astro.site ?? Astro.url).href;
 const imageExtension = image.split('.').pop()?.toLowerCase();
 const imageMimeType =
