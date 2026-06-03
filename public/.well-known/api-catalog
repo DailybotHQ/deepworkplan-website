@@ -1,17 +1,23 @@
 {
+  "_comment": "RFC 9727 API catalog. deepworkplan.com is a static content site with no REST API; the machine-readable 'service' is the site's LLM guidance and MCP surface. Links point only to resources that exist.",
   "linkset": [
     {
-      "anchor": "https://deepworkplan.com/api/",
+      "anchor": "https://deepworkplan.com/",
       "links": [
-        {
-          "rel": "service-desc",
-          "href": "https://deepworkplan.com/openapi.json",
-          "type": "application/json"
-        },
         {
           "rel": "service-doc",
           "href": "https://deepworkplan.com/llms.txt",
           "type": "text/plain"
+        },
+        {
+          "rel": "service-doc",
+          "href": "https://deepworkplan.com/llms-full.txt",
+          "type": "text/plain"
+        },
+        {
+          "rel": "describedby",
+          "href": "https://deepworkplan.com/.well-known/mcp/server-card.json",
+          "type": "application/json"
         }
       ]
     }

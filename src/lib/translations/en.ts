@@ -39,12 +39,14 @@ export const en: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — turn any repository into an AI-first codebase',
       description:
-        'An open, MIT-licensed methodology and kit that makes any repository AI-first: install one skill, and any agent can plan, execute, verify, and resume work.',
+        'Make any repository AI-first: Deep Work Plan turns it into a structured environment — context, guardrails, and a plan — where any coding agent executes reliably.',
     },
     hero: {
       badge: 'Open methodology · MIT · Agent-agnostic',
-      title: 'Make any repository AI-first.',
-      titleEmphasis: 'Give your agent one instruction.',
+      title: 'Models matter.',
+      titleEmphasis: 'Context matters more.',
+      subtitle:
+        'Deep Work Plan turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and finishes long-horizon work.',
       instructionLabel: 'Give your agent this',
       instruction:
         'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
@@ -57,6 +59,8 @@ export const en: SiteTranslations = {
         'Deep Work Plan is spec-driven development where the repository itself becomes the harness.',
       primaryCta: 'Read the methodology',
       secondaryCta: 'Read the spec',
+      illustrationAlt:
+        'A lighthouse on a rocky shore casts a single beam guiding a small vessel — an engraving evoking the repository as a steady harness that guides any agent.',
     },
     pitch: {
       kicker: 'The problem and the answer',
@@ -66,6 +70,8 @@ export const en: SiteTranslations = {
         'Deep Work Plan answers with spec-driven development: the plan is the durable source of truth, and agents execute against explicit acceptance criteria and validation gates. Drift drops, the work stays verifiable, and any agent can resume it across sessions.',
       origin:
         'It is also harness engineering made portable. An agent harness is the scaffolding around a model — context, tools, control loop, guardrails, resumable state — that makes it reliable. Deep Work Plan installs that harness into the repository itself (AGENTS.md, docs, the .agents/ skills home, the DWP skill), so any agent can pilot any repo. Born at Dailybot, battle-tested for months, and released as the DailybotHQ/deepworkplan-skill.',
+      illustrationAlt:
+        'A nautical chart with a single plotted course threading safely past hazards — an engraving evoking the plan as the direction that keeps work on course.',
     },
     onboarding: {
       badge: 'Reasoning-based onboarding',
@@ -483,6 +489,8 @@ export const en: SiteTranslations = {
     intro:
       'The precise, readable specification of the methodology — the structures and protocols that humans and agents share.',
     tocTitle: 'On this page',
+    prev: 'Previous',
+    next: 'Next',
     backToIndex: 'All spec documents',
   },
 
@@ -524,6 +532,8 @@ export const en: SiteTranslations = {
       },
     },
     viewDetail: 'View details',
+    prev: 'Previous',
+    next: 'Next',
     backToIndex: 'Back to the kit',
   },
 
@@ -539,6 +549,8 @@ export const en: SiteTranslations = {
     intro:
       'See the methodology in action — concrete, before-and-after walkthroughs of real engineering tasks.',
     viewExample: 'Read the walkthrough',
+    prev: 'Previous',
+    next: 'Next',
     backToGallery: 'All examples',
   },
 

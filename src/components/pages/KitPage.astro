@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import KitComposition from '@/components/diagrams/kit/KitComposition.astro';
 import Kicker from '@/components/editorial/Kicker.astro';
 import Lead from '@/components/editorial/Lead.astro';
 import Rule from '@/components/editorial/Rule.astro';
@@ -52,6 +53,8 @@ const groups = [
       </h1>
       <Lead class="mt-6">{k.intro}</Lead>
     </header>
+
+    <KitComposition lang={lang} class="mt-10 max-w-3xl" />
 
     <Rule class="my-12" />
 

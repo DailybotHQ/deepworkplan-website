@@ -1,0 +1,38 @@
+---
+title: dwp-resume
+description: "Reanuda un Deep Work Plan interrumpido reconstruyendo el estado a partir del registro de avance y los archivos de tarea, y continúa desde la primera tarea incompleta."
+kind: command
+lang: es
+order: 4
+usage: /dwp-resume [plan]
+aliases:
+  - dwp:resume
+---
+import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
+
+# dwp-resume
+
+Reanuda un Deep Work Plan interrumpido.
+
+<CmdResume lang="es" class="not-prose my-8" />
+
+## Qué hace
+
+`dwp-resume` continúa un plan interrumpido. Reconstruye el estado a partir de `PROGRESS.md` y los archivos de tarea, y luego continúa desde la primera tarea incompleta.
+
+## Uso
+
+```
+/dwp-resume [plan]
+```
+
+## Comportamiento
+
+1. Lee `PROGRESS.md` y los archivos de tarea.
+2. Reconstruye el estado de ejecución.
+3. Continúa desde la primera tarea incompleta.
+4. Actualiza el avance a medida que progresa.
+
+## Alias
+
+- `dwp:resume`

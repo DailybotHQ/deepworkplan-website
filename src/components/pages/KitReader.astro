@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { render } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
@@ -24,11 +25,41 @@ function slugOf(id: string): string {
   return id.replace(/^(en|es)\//, '');
 }
 
+// Diagram components are embedded in-body via MDX at the right point in each kit
+// document's narrative (see docs/DIAGRAM_COMPONENTS.md §5) — not injected here.
+
 const backHref =
   variant === 'examples' ? `${prefix}/examples` : `${prefix}/kit`;
 const backLabel =
   variant === 'examples' ? t.examplesPage.backToGallery : t.kitPage.backToIndex;
 const baseSegment = variant === 'examples' ? 'examples' : 'kit';
+const nav =
+  variant === 'examples'
+    ? { prev: t.examplesPage.prev, next: t.examplesPage.next }
+    : { prev: t.kitPage.prev, next: t.kitPage.next };
+
+// Sequential prev/next across sibling entries, matching the index order.
+// Examples are their own gallery; the kit index lists commands, adapters,
+// presets, and addons in that group order.
+const KIT_KIND_ORDER = ['command', 'adapter', 'preset', 'addon'];
+const siblings = (await getCollection('kit'))
+  .filter((c) =>
+    variant === 'examples'
+      ? c.data.lang === lang && c.data.kind === 'example'
+      : c.data.lang === lang && c.data.kind !== 'example'
+  )
+  .sort((a, b) => {
+    if (variant !== 'examples') {
+      const ka = KIT_KIND_ORDER.indexOf(a.data.kind);
+      const kb = KIT_KIND_ORDER.indexOf(b.data.kind);
+      if (ka !== kb) return ka - kb;
+    }
+    return ((a.data.order as number) ?? 0) - ((b.data.order as number) ?? 0);
+  });
+
+const index = siblings.findIndex((c) => c.id === entry.id);
+const prev = index > 0 ? siblings[index - 1] : null;
+const next = index < siblings.length - 1 ? siblings[index + 1] : null;
 
 // Surface a few well-known passthrough metadata fields when present.
 const data = entry.data as Record<string, unknown>;
@@ -91,6 +122,52 @@ const techArticleSchema = {
       >
         <Content />
       </div>
+
+      <Rule class="mt-16 mb-8" />
+
+      <nav
+        class="flex flex-col justify-between gap-4 sm:flex-row"
+        aria-label={variant === 'examples' ? 'Example' : 'Kit entry'}
+      >
+        {
+          prev ? (
+            <a
+              href={`${prefix}/${baseSegment}/${slugOf(prev.id)}`}
+              class="group flex-1 border p-4 transition hover:opacity-90"
+              style="border-color: var(--color-line);"
+            >
+              <span class="kicker">&larr; {nav.prev}</span>
+              <span
+                class="font-display mt-1 block font-semibold"
+                style="color: var(--color-ink);"
+              >
+                {prev.data.title}
+              </span>
+            </a>
+          ) : (
+            <span class="flex-1" />
+          )
+        }
+        {
+          next ? (
+            <a
+              href={`${prefix}/${baseSegment}/${slugOf(next.id)}`}
+              class="group flex-1 border p-4 text-right transition hover:opacity-90"
+              style="border-color: var(--color-line);"
+            >
+              <span class="kicker justify-end">{nav.next} &rarr;</span>
+              <span
+                class="font-display mt-1 block font-semibold"
+                style="color: var(--color-ink);"
+              >
+                {next.data.title}
+              </span>
+            </a>
+          ) : (
+            <span class="flex-1" />
+          )
+        }
+      </nav>
     </article>
   </div>
 </MainLayout>

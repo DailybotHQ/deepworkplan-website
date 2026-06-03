@@ -1,0 +1,160 @@
+---
+/**
+ * SkillsAgents (ME-05) — skills (how) vs agents (who) + the .claude → .agents
+ * symlink. Spec: docs/visuals/prompts/02-methodology.md#me-05. Two-panel HTML/CSS;
+ * skill/agent names + paths are technical (stay English), headings localized.
+ * role="img"; dark mode; zero JS. See docs/DIAGRAM_COMPONENTS.md.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Skills are reusable procedures (how); agents are specialized workers (who). Both live under .agents/, which .claude aliases via symlink.',
+    blocks: 'Building blocks',
+    skill: 'Skill',
+    skillSub: 'how — a reusable procedure',
+    agent: 'Agent',
+    agentSub: 'who — a specialized worker',
+    symlink: 'symlink → backward compatibility',
+    caption:
+      'Skills define how to do recurring work; agents define who is responsible. Both live under `.agents/`, which `.claude` aliases for backward compatibility.',
+  },
+  es: {
+    ariaLabel:
+      'Los skills son procedimientos reutilizables (cómo); los agentes son trabajadores especializados (quién). Ambos residen en .agents/, al que .claude apunta como alias mediante un enlace simbólico.',
+    blocks: 'Componentes',
+    skill: 'Skill',
+    skillSub: 'cómo — un procedimiento reutilizable',
+    agent: 'Agente',
+    agentSub: 'quién — un trabajador especializado',
+    symlink: 'enlace simbólico → compatibilidad retroactiva',
+    caption:
+      'Los skills definen cómo realizar el trabajo recurrente; los agentes definen quién es responsable. Ambos residen en `.agents/`, al que `.claude` apunta como alias para compatibilidad retroactiva.',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+
+const skillExamples = [
+  'fix-lint',
+  'add-component',
+  'translate-sync',
+  'dwp-create',
+];
+const agentExamples = ['reviewer', 'executor', 'architect', 'i18n-guardian'];
+---
+
+<figure class={`editorial-asset skagents ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <span class="ea-label skagents-kicker">{t.blocks}</span>
+    <div class="skagents-cols">
+      <div class="skagents-card">
+        <p class="skagents-h">{t.skill}</p>
+        <p class="skagents-sub">{t.skillSub}</p>
+        <ul class="skagents-list">
+          {skillExamples.map((s) => <li><code>{s}</code></li>)}
+        </ul>
+      </div>
+      <div class="skagents-card">
+        <p class="skagents-h">{t.agent}</p>
+        <p class="skagents-sub">{t.agentSub}</p>
+        <ul class="skagents-list">
+          {agentExamples.map((a) => <li><code>{a}</code></li>)}
+        </ul>
+      </div>
+    </div>
+    <div class="skagents-symlink">
+      <code>.claude</code>
+      <span class="skagents-arrow ea-accent" aria-hidden="true">→</span>
+      <code>.agents</code>
+      <span class="skagents-note">{t.symlink}</span>
+    </div>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .skagents {
+    color: var(--color-ink);
+  }
+  .skagents-kicker {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+  .skagents-cols {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  @media (min-width: 560px) {
+    .skagents-cols {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .skagents-card {
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.9rem;
+    background-color: var(--color-paper);
+  }
+  .skagents-h {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 0;
+  }
+  .skagents-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    margin: 0.15rem 0 0.6rem;
+  }
+  .skagents-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .skagents-list li code {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    border: 1px solid var(--color-line);
+    border-radius: 3px;
+    padding: 0.1rem 0.4rem;
+  }
+  .skagents-symlink {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-line);
+  }
+  .skagents-symlink code {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+  .skagents-arrow {
+    font-size: 1.1rem;
+  }
+  .skagents-note {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+  }
+</style>

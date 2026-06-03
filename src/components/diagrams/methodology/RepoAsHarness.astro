@@ -1,0 +1,140 @@
+---
+/**
+ * RepoAsHarness (ME-01) — the repository encloses the five harness elements, with
+ * the agent piloting it. Spec: docs/visuals/prompts/02-methodology.md#me-01.
+ * HTML/CSS editorial diagram; language-keyed i18n (en fallback); role="img";
+ * dark mode via tokens; zero JS. See docs/DIAGRAM_COMPONENTS.md.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'The repository encloses five harness elements — Context, Tools, Control loop, Guardrails, and State/Resumability — and an agent pilots it.',
+    repository: 'Repository',
+    elements: [
+      'Context',
+      'Tools',
+      'Control loop',
+      'Guardrails',
+      'State / Resumability',
+    ],
+    agent: 'Agent',
+    pilots: 'pilots',
+    caption:
+      'The repository as harness: five structural elements give any agent the context, tools, and control to operate autonomously.',
+  },
+  es: {
+    ariaLabel:
+      'El repositorio contiene cinco elementos de harness — Contexto, Herramientas, Bucle de control, Barreras y Estado/Reanudabilidad — y un agente lo opera.',
+    repository: 'Repositorio',
+    elements: [
+      'Contexto',
+      'Herramientas',
+      'Bucle de control',
+      'Barreras',
+      'Estado / Reanudabilidad',
+    ],
+    agent: 'Agente',
+    pilots: 'opera',
+    caption:
+      'El repositorio como harness: cinco elementos estructurales dan a cualquier agente el contexto, las herramientas y el control para operar de forma autónoma.',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<figure class={`editorial-asset rah ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <div class="rah-repo">
+      <span class="ea-label rah-repo-label">{t.repository}</span>
+      <ul class="rah-grid">
+        {t.elements.map((el) => <li class="rah-cell">{el}</li>)}
+      </ul>
+    </div>
+    <div class="rah-link" aria-hidden="true">
+      <span class="rah-arrow">↑</span>
+      <span class="ea-label rah-pilots">{t.pilots}</span>
+    </div>
+    <div class="rah-agent ea-accent">{t.agent}</div>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .rah {
+    color: var(--color-ink);
+  }
+  .rah-repo {
+    position: relative;
+    border: 1.5px solid var(--color-ink);
+    border-radius: 6px;
+    padding: 1.75rem 1rem 1rem;
+  }
+  .rah-repo-label {
+    position: absolute;
+    top: -0.7rem;
+    left: 1rem;
+    padding: 0 0.4rem;
+    background-color: var(--color-gray-50);
+    font-size: 0.8rem;
+  }
+  .rah-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+  @media (min-width: 640px) {
+    .rah-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .rah-cell {
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.7rem 0.6rem;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    line-height: 1.25;
+    background-color: var(--color-paper);
+  }
+  .rah-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    margin: 0.5rem 0;
+  }
+  .rah-arrow {
+    color: var(--color-secondary);
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+  .rah-pilots {
+    font-size: 0.72rem;
+    color: var(--color-muted);
+  }
+  .rah-agent {
+    margin: 0 auto;
+    width: max-content;
+    border: 1.5px solid currentColor;
+    border-radius: 999px;
+    padding: 0.4rem 1.4rem;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    text-align: center;
+  }
+</style>

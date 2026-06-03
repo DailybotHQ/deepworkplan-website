@@ -1,0 +1,122 @@
+---
+/**
+ * OutputWorkspace (SP-04) — the gitignored `.dwp/` workspace root: drafts/ and
+ * plans/PLAN_<name>/ with its analysis outputs. Spec:
+ * docs/visuals/prompts/03-spec.md#sp-04. HTML/CSS file tree; paths mono (stay
+ * English), annotations localized. role="img"; dark mode; zero JS.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'The gitignored .dwp/ output workspace: a drafts/ folder and a plans/ folder containing PLAN_name/ with README, PROGRESS, task files, and an analysis_results folder.',
+    title: 'Output workspace',
+    ann: {
+      root: 'gitignored · disposable',
+      drafts: 'refined draft staging',
+      results: 'reports',
+      report: 'executive report',
+    },
+    caption:
+      'All plan output lives under a gitignored `.dwp/` workspace — drafts and plans kept separate from tracked source.',
+  },
+  es: {
+    ariaLabel:
+      'El espacio de trabajo de salida .dwp/ (ignorado por git): una carpeta drafts/ y una carpeta plans/ que contiene PLAN_name/ con README, PROGRESS, archivos de tarea y una carpeta analysis_results.',
+    title: 'Espacio de trabajo de salida',
+    ann: {
+      root: 'ignorado por git · desechable',
+      drafts: 'preparación del borrador refinado',
+      results: 'informes',
+      report: 'informe ejecutivo',
+    },
+    caption:
+      'Toda la salida de los planes reside en un espacio de trabajo `.dwp/` ignorado por git — borradores y planes separados del código versionado.',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+
+const rows = [
+  { depth: 0, path: '.dwp/', ann: t.ann.root, accent: true },
+  { depth: 1, path: 'drafts/', ann: t.ann.drafts },
+  { depth: 1, path: 'plans/', ann: '' },
+  { depth: 2, path: 'PLAN_<name>/', ann: '' },
+  { depth: 3, path: 'README.md', ann: '' },
+  { depth: 3, path: 'PROGRESS.md', ann: '' },
+  { depth: 3, path: '<n>.task_<slug>.md', ann: '' },
+  { depth: 3, path: 'analysis_results/', ann: t.ann.results },
+  { depth: 4, path: 'EXECUTIVE_REPORT.md', ann: t.ann.report },
+];
+---
+
+<figure class={`editorial-asset workspace ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <span class="ea-label workspace-title">{t.title}</span>
+    <ul class="workspace-list">
+      {
+        rows.map((r) => (
+          <li
+            class={`workspace-row${r.accent ? ' workspace-row--accent' : ''}`}
+            style={`--depth:${r.depth}`}
+          >
+            <code class="workspace-path">{r.path}</code>
+            {r.ann && <span class="workspace-ann">{r.ann}</span>}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .workspace {
+    color: var(--color-ink);
+  }
+  .workspace-title {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+  .workspace-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .workspace-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    padding: 0.3rem 0;
+    padding-left: calc(var(--depth) * 1.4rem);
+    border-left: 1px solid var(--color-line);
+  }
+  .workspace-row--accent {
+    border-left-color: var(--color-secondary);
+  }
+  .workspace-path {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+  }
+  .workspace-row--accent .workspace-path {
+    color: var(--color-secondary);
+    font-weight: 600;
+  }
+  .workspace-ann {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+  }
+</style>

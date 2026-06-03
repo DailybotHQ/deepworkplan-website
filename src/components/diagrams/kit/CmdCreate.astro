@@ -1,0 +1,44 @@
+---
+/**
+ * CmdCreate (KT-04) — /dwp-create as input → process → output.
+ * Spec: docs/visuals/prompts/04-kit.md#kt-04. Composes CommandSequence.
+ */
+import type { Language } from '@/lib/i18n';
+import CommandSequence from './CommandSequence.astro';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'dwp-create: a goal and context are decomposed into a refined draft, producing a plan on disk.',
+    input: 'Goal + context',
+    process: 'Decompose → refined draft',
+    output: 'Plan on disk',
+    caption: '/dwp-create turns a goal into an ordered plan.',
+  },
+  es: {
+    ariaLabel:
+      'dwp-create: un objetivo y contexto se descomponen en un borrador refinado, produciendo un plan en disco.',
+    input: 'Objetivo + contexto',
+    process: 'Descomponer → borrador refinado',
+    output: 'Plan en disco',
+    caption: '/dwp-create convierte un objetivo en un plan ordenado.',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<CommandSequence
+  cmd="/dwp-create"
+  input={t.input}
+  process={t.process}
+  output={t.output}
+  ariaLabel={t.ariaLabel}
+  caption={t.caption}
+  class={className}
+/>

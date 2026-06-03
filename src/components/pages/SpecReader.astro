@@ -1,7 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { render } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Kicker from '@/components/editorial/Kicker.astro';
+import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
@@ -25,6 +26,18 @@ function slugOf(id: string): string {
 const { Content, headings } = await render(entry);
 // In-page TOC: top-level (h2) headings only.
 const toc = headings.filter((h) => h.depth === 2);
+
+// Sequential prev/next across the spec documents in reading order.
+const documents = (await getCollection('spec'))
+  .filter((c) => c.data.lang === lang)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const index = documents.findIndex((c) => c.id === entry.id);
+const prev = index > 0 ? documents[index - 1] : null;
+const next = index < documents.length - 1 ? documents[index + 1] : null;
+
+// Diagram components are embedded in-body via MDX at the right point in each spec
+// document's narrative (see docs/DIAGRAM_COMPONENTS.md §5) — not injected here.
 
 const techArticleSchema = {
   '@context': 'https://schema.org',
@@ -52,6 +65,52 @@ const techArticleSchema = {
         >
           <Content />
         </div>
+
+        <Rule class="mt-16 mb-8" />
+
+        <nav
+          class="flex flex-col justify-between gap-4 sm:flex-row"
+          aria-label="Spec document"
+        >
+          {
+            prev ? (
+              <a
+                href={`${prefix}/spec/${slugOf(prev.id)}`}
+                class="group flex-1 border p-4 transition hover:opacity-90"
+                style="border-color: var(--color-line);"
+              >
+                <span class="kicker">&larr; {s.prev}</span>
+                <span
+                  class="font-display mt-1 block font-semibold"
+                  style="color: var(--color-ink);"
+                >
+                  {prev.data.title}
+                </span>
+              </a>
+            ) : (
+              <span class="flex-1" />
+            )
+          }
+          {
+            next ? (
+              <a
+                href={`${prefix}/spec/${slugOf(next.id)}`}
+                class="group flex-1 border p-4 text-right transition hover:opacity-90"
+                style="border-color: var(--color-line);"
+              >
+                <span class="kicker justify-end">{s.next} &rarr;</span>
+                <span
+                  class="font-display mt-1 block font-semibold"
+                  style="color: var(--color-ink);"
+                >
+                  {next.data.title}
+                </span>
+              </a>
+            ) : (
+              <span class="flex-1" />
+            )
+          }
+        </nav>
       </article>
       {
         toc.length > 0 && (

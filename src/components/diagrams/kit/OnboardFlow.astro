@@ -1,0 +1,118 @@
+---
+/**
+ * OnboardFlow (KT-03) — onboarding a legacy service: analyze → reason → onboard
+ * (non-destructive) → verify. Spec: docs/visuals/prompts/04-kit.md#kt-03.
+ * HTML/CSS flow; language-keyed i18n (en fallback); role="img"; dark mode; zero JS.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Legacy onboarding flow: analyze, reason about the stack, onboard non-destructively (reconcile, never overwrite), then verify.',
+    steps: ['Analyze', 'Reason', 'Onboard', 'Verify'],
+    note: 'reconcile, never overwrite',
+    caption:
+      'Legacy onboarding reasons about the real codebase and reconciles rather than overwriting — then verifies conformance.',
+  },
+  es: {
+    ariaLabel:
+      'Flujo de incorporación de código heredado: analizar, razonar sobre el stack, incorporar de forma no destructiva (reconciliar, nunca sobrescribir) y luego verificar.',
+    steps: ['Analizar', 'Razonar', 'Incorporar', 'Verificar'],
+    note: 'reconciliar, nunca sobrescribir',
+    caption:
+      'La incorporación de código heredado razona sobre el código real y reconcilia en lugar de sobrescribir — luego verifica la conformidad.',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<figure class={`editorial-asset onboard ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <ol class="onboard-row">
+      {
+        t.steps.map((s, i) => (
+          <li class="onboard-step">
+            <span class={`onboard-chip${i === t.steps.length - 1 ? ' onboard-chip--accent' : ''}`}>
+              <span class="onboard-num nums-tabular">{String(i + 1).padStart(2, '0')}</span>
+              {s}
+            </span>
+            {i < t.steps.length - 1 && (
+              <span class="onboard-arrow" aria-hidden="true">
+                →
+              </span>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+    <p class="onboard-note">{t.note}</p>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .onboard {
+    color: var(--color-ink);
+  }
+  .onboard-row {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .onboard-step {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 1 auto;
+  }
+  .onboard-chip {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.65rem 0.6rem;
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    background-color: var(--color-paper);
+    white-space: nowrap;
+  }
+  .onboard-chip--accent {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+  }
+  .onboard-num {
+    font-size: 0.7rem;
+    color: var(--color-muted);
+    font-weight: 600;
+  }
+  .onboard-chip--accent .onboard-num {
+    color: var(--color-secondary);
+  }
+  .onboard-arrow {
+    color: var(--color-muted);
+    flex: 0 0 auto;
+  }
+  .onboard-note {
+    margin: 0.85rem 0 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    text-align: center;
+  }
+</style>

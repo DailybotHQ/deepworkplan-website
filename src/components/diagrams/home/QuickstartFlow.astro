@@ -1,0 +1,111 @@
+---
+/**
+ * QuickstartFlow (HP-03) — the four adoption steps: open /init.md → install the
+ * skill → adapt your repo → plan & execute. Spec:
+ * docs/visuals/prompts/01-homepage.md#hp-03. HTML/CSS; language-keyed i18n (en
+ * fallback); role="img"; dark mode; zero JS. (Distinct from the core loop.)
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Four adoption steps: open /init.md, install the skill, adapt your repository, then plan and execute.',
+    steps: [
+      'Open /init.md',
+      'Install the skill',
+      'Adapt your repo',
+      'Plan & execute',
+    ],
+  },
+  es: {
+    ariaLabel:
+      'Cuatro pasos de adopción: abrir /init.md, instalar el skill, adaptar tu repositorio y luego planificar y ejecutar.',
+    steps: [
+      'Abrir /init.md',
+      'Instalar el skill',
+      'Adaptar tu repo',
+      'Planificar y ejecutar',
+    ],
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<figure class={`editorial-asset qflow ${className}`} role="img" aria-label={t.ariaLabel}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <ol class="editorial-asset__body qflow-row">
+    {
+      t.steps.map((s, i) => (
+        <li class="qflow-step">
+          <span class={`qflow-chip${i === t.steps.length - 1 ? ' qflow-chip--accent' : ''}`}>
+            <span class="qflow-num nums-tabular">{String(i + 1).padStart(2, '0')}</span>
+            <span class="qflow-name">{s}</span>
+          </span>
+          {i < t.steps.length - 1 && (
+            <span class="qflow-arrow" aria-hidden="true">
+              →
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</figure>
+
+<style>
+  .qflow {
+    color: var(--color-ink);
+  }
+  .qflow-row {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .qflow-step {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 1 9rem;
+  }
+  .qflow-chip {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.65rem 0.7rem;
+    background-color: var(--color-paper);
+  }
+  .qflow-chip--accent {
+    border-color: var(--color-secondary);
+  }
+  .qflow-num {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+  .qflow-chip--accent .qflow-num {
+    color: var(--color-secondary);
+  }
+  .qflow-name {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+  .qflow-arrow {
+    color: var(--color-muted);
+    flex: 0 0 auto;
+  }
+</style>
