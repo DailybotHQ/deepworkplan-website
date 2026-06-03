@@ -58,6 +58,8 @@ export const es: SiteTranslations = {
         'Deep Work Plan es desarrollo guiado por especificación donde el propio repositorio se convierte en el harness.',
       primaryCta: 'Leer la metodología',
       secondaryCta: 'Leer la especificación',
+      illustrationAlt:
+        'Un faro en una costa rocosa proyecta un único haz que guía a una pequeña embarcación — un grabado que evoca el repositorio como un harness estable que guía a cualquier agente.',
     },
     pitch: {
       kicker: 'El problema y la respuesta',

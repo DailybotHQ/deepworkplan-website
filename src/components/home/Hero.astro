@@ -16,7 +16,10 @@ const h = t.home.hero;
 
 <section class="border-b" style="border-color: var(--color-line);">
   <div class="main-container py-16 md:py-24">
-    <div class="max-w-3xl">
+    <div
+      class="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:items-center lg:gap-12"
+    >
+      <div class="max-w-3xl">
       <Kicker>{h.badge}</Kicker>
       <h1
         class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
@@ -90,6 +93,26 @@ const h = t.home.hero;
         >
           {h.secondaryCta} &rarr;
         </a>
+      </div>
+      </div>
+
+      <div class="mt-12 hidden lg:mt-0 lg:block">
+        <img
+          src="/images/visuals/home/hero-harness.webp"
+          alt={h.illustrationAlt}
+          width="760"
+          height="950"
+          class="mx-auto h-auto w-full max-w-[360px] dark:hidden"
+          loading="lazy"
+        />
+        <img
+          src="/images/visuals/home/hero-harness-dark.webp"
+          alt={h.illustrationAlt}
+          width="760"
+          height="950"
+          class="mx-auto hidden h-auto w-full max-w-[360px] dark:block"
+          loading="lazy"
+        />
       </div>
     </div>
   </div>

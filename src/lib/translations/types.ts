@@ -103,6 +103,7 @@ export interface SiteTranslations {
       pullQuote: string;
       primaryCta: string;
       secondaryCta: string;
+      illustrationAlt: string;
     };
     pitch: {
       kicker: string;

@@ -57,6 +57,8 @@ export const en: SiteTranslations = {
         'Deep Work Plan is spec-driven development where the repository itself becomes the harness.',
       primaryCta: 'Read the methodology',
       secondaryCta: 'Read the spec',
+      illustrationAlt:
+        'A lighthouse on a rocky shore casts a single beam guiding a small vessel — an engraving evoking the repository as a steady harness that guides any agent.',
     },
     pitch: {
       kicker: 'The problem and the answer',
