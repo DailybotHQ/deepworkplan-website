@@ -15,14 +15,14 @@ const h = t.home.hero;
 ---
 
 <section class="border-b" style="border-color: var(--color-line);">
-  <div class="main-container py-16 md:py-24">
+  <div class="main-container py-10 md:py-14">
     <div
-      class="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:items-center lg:gap-12"
+      class="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,480px)] lg:items-center lg:gap-10"
     >
       <div class="max-w-3xl">
       <Kicker>{h.badge}</Kicker>
       <h1
-        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
+        class="font-display mt-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
         style="color: var(--color-ink);"
       >
         {h.title}{' '}
@@ -31,7 +31,7 @@ const h = t.home.hero;
 
       <!-- The happy path: one instruction your agent follows -->
       <div
-        class="mt-10 overflow-hidden rounded-sm border"
+        class="mt-8 overflow-hidden rounded-sm border"
         style="border-color: var(--color-secondary);"
       >
         <div
@@ -65,13 +65,13 @@ const h = t.home.hero;
       </p>
 
       <p
-        class="font-display mt-8 max-w-2xl border-l-2 pl-4 text-xl italic"
+        class="font-display mt-6 max-w-2xl border-l-2 pl-4 text-lg italic md:text-xl"
         style="border-color: var(--color-secondary); color: var(--color-ink);"
       >
         {h.pullQuote}
       </p>
 
-      <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+      <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
         <a
           href={`${prefix}/init`}
           class="inline-flex items-center justify-center rounded-sm px-6 py-3 text-base font-semibold transition hover:opacity-90"
@@ -96,13 +96,13 @@ const h = t.home.hero;
       </div>
       </div>
 
-      <div class="mt-12 hidden lg:mt-0 lg:block">
+      <div class="mt-10 hidden md:block lg:mt-0">
         <img
           src="/images/visuals/home/hero-harness.webp"
           alt={h.illustrationAlt}
           width="760"
           height="950"
-          class="mx-auto h-auto w-full max-w-[360px] dark:hidden"
+          class="mx-auto h-auto w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[480px] dark:hidden"
           loading="lazy"
         />
         <img
@@ -110,7 +110,7 @@ const h = t.home.hero;
           alt={h.illustrationAlt}
           width="760"
           height="950"
-          class="mx-auto hidden h-auto w-full max-w-[360px] dark:block"
+          class="mx-auto hidden h-auto w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[480px] dark:block"
           loading="lazy"
         />
       </div>
