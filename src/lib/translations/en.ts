@@ -39,12 +39,14 @@ export const en: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — turn any repository into an AI-first codebase',
       description:
-        'An open, MIT-licensed methodology and kit that makes any repository AI-first: install one skill, and any agent can plan, execute, verify, and resume work.',
+        'Make any repository AI-first: Deep Work Plan turns it into a structured environment — context, guardrails, and a plan — where any coding agent executes reliably.',
     },
     hero: {
       badge: 'Open methodology · MIT · Agent-agnostic',
-      title: 'Make any repository AI-first.',
-      titleEmphasis: 'Give your agent one instruction.',
+      title: 'Models matter.',
+      titleEmphasis: 'Context matters more.',
+      subtitle:
+        'Deep Work Plan turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and finishes long-horizon work.',
       instructionLabel: 'Give your agent this',
       instruction:
         'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
@@ -487,6 +489,8 @@ export const en: SiteTranslations = {
     intro:
       'The precise, readable specification of the methodology — the structures and protocols that humans and agents share.',
     tocTitle: 'On this page',
+    prev: 'Previous',
+    next: 'Next',
     backToIndex: 'All spec documents',
   },
 
@@ -528,6 +532,8 @@ export const en: SiteTranslations = {
       },
     },
     viewDetail: 'View details',
+    prev: 'Previous',
+    next: 'Next',
     backToIndex: 'Back to the kit',
   },
 
@@ -543,6 +549,8 @@ export const en: SiteTranslations = {
     intro:
       'See the methodology in action — concrete, before-and-after walkthroughs of real engineering tasks.',
     viewExample: 'Read the walkthrough',
+    prev: 'Previous',
+    next: 'Next',
     backToGallery: 'All examples',
   },
 

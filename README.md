@@ -24,6 +24,8 @@
 
 [deepworkplan.com](https://deepworkplan.com) is the official website for the **Deep Work Plan (DWP)** methodology — a structured, agent-agnostic approach to executing complex, multi-step software work reliably with AI coding agents.
 
+**Models matter; context matters more.** DWP turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and finishes long-horizon work. Put another way: *Deep Work Plan is spec-driven development where the repository itself becomes the harness.*
+
 The site is a fast, fully bilingual (English + Spanish) static site built with [Astro](https://astro.build). It explains and sells the methodology, hosts the readable specification, and catalogs the kit (presets, adapters, commands) for installing DWP into any repository. The repository **dogfoods** the methodology it documents.
 
 The tone is serious, neutral, and technical — this is a specification-and-methodology site, not a personal blog.
