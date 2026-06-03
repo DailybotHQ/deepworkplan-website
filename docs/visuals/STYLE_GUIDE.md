@@ -56,10 +56,13 @@ every prompt must pick one:
   otherwise prefer a near-neutral dark line that reads on both — and note it.
   Simplest when the line work is the whole image and there's no filled ground.
 - **(B) Matched light + dark pair.** When the visual needs a filled paper ground,
-  texture, or tonal shading, generate **two** assets — a light version (ink on
-  `#F7F4EC`) and a dark version (paper-ink on `#14140F`) — saved as
-  `{slug}.webp` and `{slug}-dark.webp`. The site swaps them by color scheme
-  (same mechanism the brand logos use).
+  texture, or tonal shading, generate **two** assets — saved as `{slug}.webp` and
+  `{slug}-dark.webp`. **The canvas must be filled edge-to-edge with the EXACT page
+  hex** so the feathered edges vanish into the page: the **light** asset's
+  background is exactly **`#F7F4EC`** (warm off-white — NOT pure white `#FFFFFF`,
+  not grey, not beige); the **dark** asset's background is exactly **`#14140F`**
+  (warm near-black — NOT pure black `#000000`, not blue-black). The site swaps them
+  by color scheme (same mechanism the brand logos use).
 
 State the chosen strategy in the entry's **Light/dark** field. Default to (A) for
 diagrams, (B) for atmospheric illustrations (like the hero).
@@ -71,9 +74,11 @@ and **nothing may touch or be cut off by the edges**. The artwork is centered wi
 generous margin and its detail **fades / feathers softly into the background** on
 all sides, so it blends seamlessly into the page with no visible boundary:
 
-- **Filled illustrations (strategy B):** the background is a solid, even fill of the
-  exact page color (light `#F7F4EC` / dark `#14140F`) and the art vignettes into
-  that same color at the edges.
+- **Filled illustrations (strategy B):** the background is filled edge-to-edge with
+  the **EXACT** page hex — light **`#F7F4EC`** (NOT white `#FFFFFF`/grey/beige),
+  dark **`#14140F`** (NOT black `#000000`/blue-black) — and the art vignettes into
+  that same exact color at the edges (corners must equal the hex). This is the #1
+  thing to get right; a wrong fill leaves a visible rectangle/halo on the page.
 - **Transparent assets (strategy A):** a true transparent background with soft (not
   hard-cropped) edges, centered with margin.
 

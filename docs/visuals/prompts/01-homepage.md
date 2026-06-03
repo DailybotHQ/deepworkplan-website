@@ -16,12 +16,25 @@
 > No image may have a **border, frame, rectangle, box, or outline** around it, and
 > **nothing may touch or be cut off by the edges**. The artwork sits centered with
 > generous margin and its detail **fades / feathers softly into the background** on
-> all sides so it blends seamlessly into the page:
-> - **Filled illustrations** (hero, pitch): background is a solid, even fill of the
->   exact page color (light `#F7F4EC` / dark `#14140F`) and the art vignettes into
->   that same color at the edges — no visible boundary.
-> - **Marks / icons / ornaments** (transparent): a true **transparent background**,
->   soft (not hard-cropped) edges, centered with margin.
+> all sides so it blends seamlessly into the page.
+>
+> **🎯 EXACT BACKGROUND COLOR (this is the #1 thing agents get wrong — read carefully).**
+> For every **filled** illustration you generate **two separate images**, and the
+> background must be filled **edge-to-edge (every pixel, all four corners and
+> margins) with these EXACT hex colors — not approximations:**
+> - **`light.png` → background EXACTLY `#F7F4EC`** (a warm off-white / cream paper).
+>   **NOT** pure white `#FFFFFF`, **not** bright white, **not** grey, **not** generic
+>   beige. It must read as `#F7F4EC`.
+> - **`dark.png` → background EXACTLY `#14140F`** (a warm near-black). **NOT** pure
+>   black `#000000`, **not** a cool/blue black, **not** dark grey. It must read as
+>   `#14140F`.
+> The faded edges must dissolve into that exact color so the image is
+> indistinguishable from the site's page background (test: the corners must equal
+> the hex). Getting this wrong leaves a visible rectangle/halo on the page.
+>
+> - **Marks / icons / ornaments** (transparent): instead of a color fill, use a
+>   **true transparent background** (alpha) — no off-white or grey fill at all —
+>   with soft (not hard-cropped) edges, centered with margin.
 > This is the default for the whole pack — already folded into each prompt below.
 
 ### HP-01 — Hero illustration (repository as harness / guiding light)
@@ -35,7 +48,7 @@
 - **Prompt:**
   > **HOUSE STYLE —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome warm ink (`#1B1A17`) on warm off-white newsprint paper (`#F7F4EC`), with a single restrained **oxblood** accent (`#7A1F1F`) — used only for one small mark (e.g. the beam or a single hairline rule), never as a fill. Subtle paper grain. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows.
   >
-  > **EDGES / BACKGROUND (important):** No border, frame, rectangle, or outline. The background is a solid even fill of the exact page color (LIGHT `#F7F4EC` / DARK `#14140F`) and the scene **fades / feathers softly into that background** on all four sides — the edges dissolve into the page with no visible boundary. Keep the whole scene comfortably inside with generous margin; **nothing touches or is cut off by any edge**.
+  > **EDGES / BACKGROUND (critical — generate TWO images):** No border, frame, rectangle, or outline. Fill the **entire** canvas (every pixel, all four corners and margins) with the EXACT page color — **LIGHT version: exactly `#F7F4EC`** (warm off-white paper, NOT pure white `#FFFFFF`, not grey); **DARK version: exactly `#14140F`** (warm near-black, NOT pure black `#000000`, not blue-black). The scene **fades / feathers softly into that exact background** on all four sides — the edges dissolve into the page with no visible boundary or halo. Keep the whole scene comfortably inside with generous margin; **nothing touches or is cut off by any edge**.
   >
   > **Subject:** A portrait 4:5 frontispiece vignette. A tall lighthouse rendered in fine engraved line work stands on a rocky promontory; from its lantern a single calm beam sweeps across the composition, the beam picked out as the lone **oxblood** accent. Below and around the base, suggest — in the same engraved idiom, subtly, not literally — the idea of an ordered repository: a few neat stacked strata / shelves / ledger lines that read as structured foundations the lighthouse rests on. A small sailing vessel (the "agent") is guided by the beam toward safe passage. No text inside the image. Quiet, balanced, timeless.
   >
@@ -62,7 +75,7 @@
 - **Prompt:**
   > **HOUSE STYLE —** Fine ink-line engraving / etched hairlines, in the manner of a 19th-century nautical chart or scientific broadsheet — the SAME engraving style and family as the site's lighthouse illustration. **LIGHT version:** warm sepia-ink line work on warm off-white paper (`#F7F4EC`). **(For the dark version: paper-colored ink lines `#ECE7DA` on a warm near-black ground `#14140F`.)** A single restrained **oxblood** (`#7A1F1F`) accent — used ONLY for the plotted course line. Calm, authoritative, editorial, detailed line engraving with subtle paper grain. No gradients, no glossy 3D, no photographic realism, no extra colors.
   >
-  > **EDGES / BACKGROUND (important):** The background is a solid, even fill of the exact page color (LIGHT `#F7F4EC` / DARK `#14140F`). There is **NO border, NO frame, NO rectangle, NO outline** around the artwork. The illustration sits in the center and its detail **fades / feathers / vignettes softly and gradually into the background** on all four sides, so the edges dissolve seamlessly into the page with no visible boundary. Keep ALL elements (compass rose, dividers, the full course) comfortably inside the frame with generous empty margin — **nothing touches or is cut off by any edge**. The corners and outer margins are pure background color.
+  > **EDGES / BACKGROUND (critical — generate TWO images):** There is **NO border, NO frame, NO rectangle, NO outline** around the artwork. Fill the **entire** canvas (every pixel, all four corners and margins) with the EXACT page color — **LIGHT version: exactly `#F7F4EC`** (warm off-white paper, NOT pure white `#FFFFFF`, not grey, not beige); **DARK version: exactly `#14140F`** (warm near-black, NOT pure black `#000000`, not blue-black). The illustration sits centered and its detail **fades / feathers / vignettes softly into that exact background** on all four sides, dissolving seamlessly into the page with no visible boundary or halo. Keep ALL elements (compass rose, dividers, the full course) comfortably inside with generous margin — **nothing touches or is cut off by any edge**. The corners must equal the exact background hex.
   >
   > **Subject:** An antique engraved **nautical sea chart** scene, portrait 4:5, with soft faded edges (no border). Within it: a faint latitude/longitude hairline grid that fades out toward the margins; an ornate **compass rose** in the upper area; lightly stippled coastlines, a small island or two, and scattered depth-sounding dots and tiny hazard marks (rocks) — all kept well away from the edges. Across the chart runs a single confident **plotted course** — a clean line in **oxblood** with small waypoint crosses/dots — threading safely from a start point, past the hazards, to a destination (a small anchor or harbor mark). Optionally a pair of brass dividers / parallel rule resting on the chart, fully inside the margins. The course line is the only oxblood element and the clear focal point. **No readable words, numbers, or letters anywhere** — only decorative engraved marks.
   >
