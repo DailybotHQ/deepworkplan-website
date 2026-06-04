@@ -160,11 +160,11 @@ function closeAllDropdowns() {
             ></div>
             <div
               id="language-dropdown"
-              class="absolute right-0 top-full min-w-[12rem] max-h-80 overflow-y-auto bg-white dark:bg-gray-800 text-black dark:text-gray-200 rounded shadow-lg z-50 transition-all duration-200"
+              class="absolute right-0 top-full min-w-[12rem] max-h-80 overflow-y-auto bg-paper dark:bg-main text-ink dark:text-white border border-line rounded shadow-lg z-50 transition-all duration-200"
               style="pointer-events: auto; opacity: 1; transform: translateY(12px);"
             >
               {#each alternateLanguageUrls as alt}
-                <a href={alt.url} lang={alt.lang} class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang })}>
+                <a href={alt.url} lang={alt.lang} class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-ink dark:text-white transition" on:click={() => trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang })}>
                   {alt.label}
                 </a>
               {/each}
