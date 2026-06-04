@@ -44,14 +44,14 @@ const {
   ogImageHeight = 630,
 } = Astro.props;
 // Default OG image is language-specific when a localized composition exists
-// (`/images/og-default-{lang}.png`); otherwise it falls back to the English
+// (`/images/og/og-default-{lang}.png`); otherwise it falls back to the English
 // default. Presence is detected at build time so adding a localized image is
 // zero-config. An explicit `image` prop from a page always wins.
 function resolveDefaultOgImage(language: string): string {
-  if (isDefaultLanguage(language as Language)) return '/images/og-default.png';
-  const localized = `/images/og-default-${language}.png`;
+  if (isDefaultLanguage(language as Language)) return '/images/og/og-default.png';
+  const localized = `/images/og/og-default-${language}.png`;
   const onDisk = join(process.cwd(), 'public', localized);
-  return existsSync(onDisk) ? localized : '/images/og-default.png';
+  return existsSync(onDisk) ? localized : '/images/og/og-default.png';
 }
 const image = imageProp ?? resolveDefaultOgImage(lang);
 const absoluteImageUrl = new URL(image, Astro.site ?? Astro.url).href;

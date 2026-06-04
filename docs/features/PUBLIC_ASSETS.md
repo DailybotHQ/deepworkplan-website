@@ -148,7 +148,7 @@ Files in `public/` are served from the site root:
 | File Location | URL |
 |---------------|-----|
 | `public/favicon.svg` | `/favicon.svg` |
-| `public/images/og-default.png` | `/images/og-default.png` |
+| `public/images/og/og-default.png` | `/images/og/og-default.png` |
 | `public/images/brand/dwp-logo-light.png` | `/images/brand/dwp-logo-light.png` |
 
 ## Related Documentation
