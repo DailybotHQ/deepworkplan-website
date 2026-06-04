@@ -68,7 +68,8 @@ const nextItem =
     {description && <meta name="description" content={description} />}
     <script is:inline>
   // Default to light on first visit; only go dark when explicitly chosen.
-  (function(){var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');})();
+  // Wrapped: Safari Private Mode throws on localStorage access.
+  (function(){var t=null;try{t=localStorage.getItem('theme');}catch(e){}if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');})();
 </script>
   </head>
   <body class="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans antialiased transition-colors duration-300">

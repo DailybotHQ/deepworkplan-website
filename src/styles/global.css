@@ -15,6 +15,28 @@
  * If a translator ever needs a class that doesn't appear elsewhere, add an
  * `@source` line here or hoist the class into a shared component.
  */
+/* Cross-browser baseline that Tailwind/Preflight doesn't cover:
+ * - color-scheme advertises both themes so native widgets (scrollbars, form
+ *   controls, ::selection) adapt to dark mode without per-element styling.
+ * - -webkit-tap-highlight-color removes iOS Safari's grey tap rectangle (the
+ *   editorial palette has no place for it; our buttons already give clear
+ *   :active feedback).
+ * - text-size-adjust:100% keeps iOS Safari from inflating text after landscape
+ *   rotation (the default 'auto' is jarring on long-form pages).
+ * - overflow-wrap protects narrow phones from horizontal overflow when a long
+ *   URL or unhyphenated word ends up in body copy / code spans. */
+:root {
+  color-scheme: light dark;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  -webkit-tap-highlight-color: transparent;
+  overflow-wrap: break-word;
+}
+
 @source not "../content/**/es/**";
 @source not "../content/**/pt/**";
 @source not "../content/**/zh/**";
@@ -102,8 +124,20 @@
 }
 
 @layer components {
+  /* Inline horizontal padding combines Tailwind's base px with iPhone landscape
+   * safe-area-insets (notch side), so edge-anchored content never sits under
+   * the notch when the device is rotated. max(px, env(...)) falls back to the
+   * base padding on browsers that don't understand env(). */
   .main-container {
-    @apply max-w-7xl mx-auto py-4 px-4 md:px-8;
+    @apply max-w-7xl mx-auto py-4;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+  @media (min-width: 768px) {
+    .main-container {
+      padding-left: max(2rem, env(safe-area-inset-left));
+      padding-right: max(2rem, env(safe-area-inset-right));
+    }
   }
 
   /* ---------------------------------------------------------------------- *
