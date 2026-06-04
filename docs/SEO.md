@@ -176,7 +176,7 @@ All content MUST exist in both languages:
 - `og:url` — current page URL
 - `og:title` — page title
 - `og:description` — page description
-- `og:image` — defaults to `/images/og-default.png`, customizable via `image` prop
+- `og:image` — defaults to `/images/og/og-default.png`, customizable via `image` prop
 - `og:image:width` — `1200`
 - `og:image:height` — `630`
 - `og:site_name` — from SITE_TITLE
@@ -195,7 +195,7 @@ All content MUST exist in both languages:
 ### OG Image Guidelines
 
 - Recommended: 1200x630px
-- Default fallback: `/images/og-default.png`
+- Default fallback: `/images/og/og-default.png`
 - Per-page override: pass the `image` prop to `MainLayout`
 
 ## AI Engine Optimization (AEO)
