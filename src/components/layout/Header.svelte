@@ -199,4 +199,25 @@ function closeAllDropdowns() {
     font-size: 0.6rem;
     letter-spacing: 0.22em;
   }
+  /* Style the language-dropdown scrollbar to blend with the editorial paper
+   * palette instead of the browser's default white/grey, which clashed against
+   * the warm cream surface. Uses :global() because pseudo-elements need to
+   * skip Svelte's scope hashing. */
+  :global(#language-dropdown) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line) transparent;
+  }
+  :global(#language-dropdown::-webkit-scrollbar) {
+    width: 6px;
+  }
+  :global(#language-dropdown::-webkit-scrollbar-track) {
+    background: transparent;
+  }
+  :global(#language-dropdown::-webkit-scrollbar-thumb) {
+    background-color: var(--color-line);
+    border-radius: 3px;
+  }
+  :global(#language-dropdown::-webkit-scrollbar-thumb:hover) {
+    background-color: var(--color-muted);
+  }
 </style>
