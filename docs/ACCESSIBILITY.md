@@ -134,12 +134,21 @@ The site uses a **disclosure pattern** (not menu pattern) for navigation dropdow
 
 ### Theme Toggle
 
-```html
-<button id="theme-toggle" aria-label="Toggle dark mode">
-  <span class="block dark:hidden" aria-hidden="true">☀️</span>
-  <span class="hidden dark:block" aria-hidden="true">🌙</span>
+The theme toggle is an inline hurricane-lamp `<button>` in `src/components/layout/Header.svelte` (no longer a standalone `ThemeToggle.astro` component). It uses an `<img>` with empty `alt=""` (decorative; the button's accessible name comes from the locale-aware `aria-label`), a `:focus-visible` ring in the oxblood accent, and respects `prefers-reduced-motion` for the lamp transition. The button derives its label and image source from the current theme:
+
+```svelte
+<button
+  type="button"
+  class="theme-toggle-lamp ..."
+  aria-label={lampLabel}
+  title={lampLabel}
+  on:click={toggleTheme}
+>
+  <img src={lampSrc} alt="" width="..." height="..." />
 </button>
 ```
+
+Theme persistence uses `localStorage` wrapped in `try/catch` so Safari Private Mode (which throws `SecurityError` on storage access) does not abort the inline init script — the default theme still applies, the toggle still functions, only the choice does not persist across sessions.
 
 ## Images
 

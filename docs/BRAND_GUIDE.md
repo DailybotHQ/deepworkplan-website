@@ -54,6 +54,18 @@ kicker/eyebrow with an oxblood rule, hairline section rules, `<figure>` + captio
 references, and lead paragraphs with optional drop caps. Headers render as a **masthead** with a
 hairline bottom rule.
 
+## Theme toggle — hurricane lamp
+
+Dark mode is toggled by an inline **hurricane-lamp `<button>`** in the masthead (`src/components/layout/Header.svelte`), not a floating control. The lamp is a hand-etched line illustration shipped as four transparent PNGs under `public/images/ui/`: `lamp-off.png` (dark wick, daytime / light theme), `lamp-on.png` (lit flame, night / dark theme), and `lamp-hover.png` (preview state on first hover).
+
+Design discipline:
+
+- **Flame color is amber (`#c44a1f`)**, deliberately warmer than the site oxblood (`--color-secondary` = `#7a1f1f`). The amber reads as physical fire; the oxblood remains the editorial accent. They are not interchangeable.
+- **Hover preview** flips the state-displayed image once on first hover (light → lit, dark → dimmed) so the user can preview the destination before clicking. A `justToggled` flag suppresses re-priming until `mouseleave`, so a user who toggles while still inside the lamp does not see the lamp re-light during the click.
+- The button uses a `:focus-visible` ring in `--color-secondary` (oxblood); cursor is `pointer`; the lamp respects `prefers-reduced-motion` (no cross-fade).
+- In dark mode the PNG silhouette gets a 1px ink-colored `drop-shadow()` filter so the line art doesn't disappear against the dark ground.
+- The masthead container itself receives `padding-left: max(2rem, env(safe-area-inset-left))` (and `…-right`) via `.main-container` so the lamp + logo never sit under an iPhone notch in landscape.
+
 ## Accessibility
 
 All combinations meet WCAG AA on the paper palette. Never use `text-gray-400`/`text-gray-500` (or

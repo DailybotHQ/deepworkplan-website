@@ -1,0 +1,153 @@
+---
+import ShowcaseLayout from '@/layouts/ShowcaseLayout.astro';
+
+const states = [
+  {
+    name: 'Light, idle',
+    description: 'Default light mode — the lamp is unlit (it is daytime).',
+    src: '/images/ui/lamp-off.png',
+    bg: 'var(--color-paper)',
+    border: 'var(--color-line)',
+  },
+  {
+    name: 'Light, hover',
+    description:
+      'First hover in light mode shows the lit flame — a one-shot preview of the destination state.',
+    src: '/images/ui/lamp-on.png',
+    bg: 'var(--color-paper)',
+    border: 'var(--color-line)',
+  },
+  {
+    name: 'Dark, idle',
+    description:
+      'Default dark mode — the lamp is lit (it is night). In dark mode the PNG gets a 1px ink-colored drop-shadow so the silhouette reads against the dark ground.',
+    src: '/images/ui/lamp-on.png',
+    bg: '#14140f',
+    border: '#2a2820',
+    invert: true,
+  },
+  {
+    name: 'Dark, hover',
+    description:
+      'First hover in dark mode shows the unlit lamp — preview of returning to light mode.',
+    src: '/images/ui/lamp-off.png',
+    bg: '#14140f',
+    border: '#2a2820',
+    invert: true,
+  },
+];
+---
+
+<ShowcaseLayout
+  title="Theme Toggle — Hurricane Lamp"
+  description="Inline hurricane-lamp button that toggles light/dark mode in the masthead. Replaces the deleted floating ThemeToggle.astro."
+  section="ui"
+>
+  <header class="mb-10">
+    <h1 class="text-2xl font-bold mb-3">Theme Toggle — Hurricane Lamp</h1>
+    <p class="text-sm leading-relaxed text-gray-600 dark:text-gray-300 max-w-3xl">
+      The site theme toggle is an inline <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">&lt;button&gt;</code> in
+      <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">src/components/layout/Header.svelte</code> — not a floating
+      bottom-right control and not a separate component. The standalone
+      <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">ThemeToggle.astro</code> was removed; theme switching ships
+      as part of the masthead and inherits the Header's
+      <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">client:load</code> directive.
+    </p>
+  </header>
+
+  <!-- The four states -->
+  <section class="mb-12" data-component="lamp-states">
+    <h2 class="text-lg font-semibold mb-4">States (4 PNGs)</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      {states.map((s) => (
+        <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <div
+            class="flex items-center justify-center p-6"
+            style={`background-color: ${s.bg}; border-bottom: 1px solid ${s.border};`}
+          >
+            <img
+              src={s.src}
+              alt=""
+              width="96"
+              height="96"
+              style={s.invert ? 'filter: drop-shadow(0 0 0.5px #ece7da) drop-shadow(0 0 1px #ece7da);' : ''}
+            />
+          </div>
+          <div class="p-3">
+            <div class="text-xs font-semibold mb-1">{s.name}</div>
+            <p class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{s.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Design discipline -->
+  <section class="mb-12" data-component="design-discipline">
+    <h2 class="text-lg font-semibold mb-4">Design discipline</h2>
+    <ul class="text-sm leading-relaxed text-gray-700 dark:text-gray-300 space-y-2 list-disc list-inside">
+      <li>
+        <strong>Flame color is amber (<code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">#c44a1f</code>)</strong>, deliberately
+        warmer than the site oxblood
+        (<code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">--color-secondary = #7a1f1f</code>). Amber reads as
+        physical fire; oxblood remains the editorial accent. They are not interchangeable.
+      </li>
+      <li>
+        <strong>One-shot hover preview.</strong> First hover flips the image to the destination state so the user
+        previews what clicking will do. A <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">justToggled</code>
+        flag suppresses re-priming until <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">mouseleave</code>,
+        so the user does not see the lamp re-light during the click itself.
+      </li>
+      <li>
+        <strong>Focus ring</strong> uses <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">--color-secondary</code>
+        (oxblood) via <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">:focus-visible</code>; cursor is
+        <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">pointer</code>.
+      </li>
+      <li>
+        <strong>Dark-mode silhouette.</strong> In dark mode the PNG gets a 1px ink-colored
+        <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">drop-shadow()</code> filter so the line art does not vanish
+        against the dark ground.
+      </li>
+      <li>
+        <strong><code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">prefers-reduced-motion</code>:</strong>
+        the lamp respects user motion preferences (no cross-fade).
+      </li>
+      <li>
+        <strong>Safe-area insets.</strong> The masthead container uses
+        <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">padding-left: max(2rem, env(safe-area-inset-left))</code>
+        via <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">.main-container</code>, so the lamp + logo never sit under an
+        iPhone notch in landscape.
+      </li>
+    </ul>
+  </section>
+
+  <!-- localStorage safety -->
+  <section class="mb-12" data-component="storage-safety">
+    <h2 class="text-lg font-semibold mb-4">Persistence (Safari Private Mode-safe)</h2>
+    <p class="text-sm leading-relaxed text-gray-700 dark:text-gray-300 mb-4 max-w-3xl">
+      The chosen theme is persisted in <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">localStorage['theme']</code>.
+      Every read and write is wrapped in <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">try/catch</code> because
+      Safari Private Mode throws <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">SecurityError</code> on storage
+      access. Without the guard the inline init script in <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">MainLayout.astro</code>
+      would abort before applying the
+      <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">html.dark</code> class and updating the
+      <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">&lt;meta name="theme-color"&gt;</code>.
+    </p>
+    <pre class="text-xs bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-x-auto"><code>// MainLayout.astro inline init (excerpt)
+var d = false;
+try {'{'} d = localStorage.getItem('theme') === 'dark'; {'}'} catch (e) {'{}'}
+document.documentElement.classList[d ? 'add' : 'remove']('dark');</code></pre>
+  </section>
+
+  <!-- Where it lives -->
+  <section class="mb-12" data-component="references">
+    <h2 class="text-lg font-semibold mb-4">References</h2>
+    <ul class="text-sm space-y-1.5 text-gray-700 dark:text-gray-300 list-disc list-inside">
+      <li>Component: <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">src/components/layout/Header.svelte</code> (theme-toggle-lamp button)</li>
+      <li>Init script: <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">src/layouts/MainLayout.astro</code> (inline; before-paint theme class)</li>
+      <li>Assets: <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">public/images/ui/{'{'}lamp-off,lamp-on,lamp-hover{'}'}.png</code></li>
+      <li>Prompt for re-generating the lamp PNGs: <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">docs/visuals/prompts/07-theme-toggle-lamp.md</code></li>
+      <li>Brand discipline: <a class="underline" href="https://github.com/DailybotHQ/deepworkplan-website/blob/main/docs/BRAND_GUIDE.md#theme-toggle--hurricane-lamp">docs/BRAND_GUIDE.md → Theme toggle</a></li>
+    </ul>
+  </section>
+</ShowcaseLayout>

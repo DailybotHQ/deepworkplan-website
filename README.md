@@ -10,7 +10,7 @@
 **The methodology site for planning and executing complex software work with AI coding agents.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Astro](https://img.shields.io/badge/Astro-5.x-FF5D01?logo=astro)](https://astro.build)
+[![Astro](https://img.shields.io/badge/Astro-6.x-FF5D01?logo=astro)](https://astro.build)
 [![Svelte](https://img.shields.io/badge/Svelte-5.x-FF3E00?logo=svelte)](https://svelte.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38BDF8?logo=tailwindcss)](https://tailwindcss.com)
 
@@ -26,7 +26,7 @@
 
 **Models matter; context matters more.** DWP turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and finishes long-horizon work. Put another way: *Deep Work Plan is spec-driven development where the repository itself becomes the harness.*
 
-The site is a fast, fully bilingual (English + Spanish) static site built with [Astro](https://astro.build). It explains and sells the methodology, hosts the readable specification, and catalogs the kit (presets, adapters, commands) for installing DWP into any repository. The repository **dogfoods** the methodology it documents.
+The site is a fast, fully multilingual static site built with [Astro](https://astro.build) — 17 languages ship today (English, Spanish, Portuguese, Chinese, Japanese, German, French, Korean, Russian, Italian, Turkish, Indonesian, Vietnamese, Hindi, Polish, Ukrainian, Thai). It explains and sells the methodology, hosts the readable specification, and catalogs the kit (presets, adapters, commands) for installing DWP into any repository. The repository **dogfoods** the methodology it documents.
 
 The tone is serious, neutral, and technical — this is a specification-and-methodology site, not a personal blog.
 
@@ -41,8 +41,8 @@ The repository practices the methodology it documents. The official DeepWorkPlan
 | 📚 **Methodology reader** | The DWP methodology, principles, and adoption workflow |
 | 📐 **Specification reader** | The normative DWP standard: task anatomy, validation gates, archetypes |
 | 🧰 **Kit catalog** | Presets, adapters, and commands for installing DWP into a repo |
-| 🌐 **Bilingual** | Full English & Spanish with route parity |
-| 🌙 **Dark mode** | System-aware theme toggle with persistence |
+| 🌐 **Multilingual** | 17 languages (en, es, pt, zh, ja, de, fr, ko, ru, it, tr, id, vi, hi, pl, uk, th) with route parity |
+| 🌙 **Dark mode** | Inline hurricane-lamp toggle in the masthead with localStorage persistence |
 | ⚡ **Performance-first** | Static site, minimal JS, optimized assets, 90+ Lighthouse |
 | 🔍 **SEO + AEO** | Sitemap, Open Graph, structured data, agent-friendly Markdown endpoints |
 | 🤖 **Agent-friendly** | Shared `.agents/` home for skills, commands, and agent definitions across Claude Code, Codex, Cursor, Gemini |
@@ -55,10 +55,10 @@ The repository practices the methodology it documents. The official DeepWorkPlan
 
 | Layer | Technology |
 | :---- | :--------- |
-| Framework | [Astro](https://astro.build) 5.x |
+| Framework | [Astro](https://astro.build) 6.x |
 | UI | [Svelte](https://svelte.dev) 5.x |
 | Styling | [Tailwind CSS](https://tailwindcss.com) 4.x |
-| Language | [TypeScript](https://www.typescriptlang.org) 5.x |
+| Language | [TypeScript](https://www.typescriptlang.org) 6.x |
 | Linting | [Biome](https://biomejs.dev) 2.x |
 | Testing | [Vitest](https://vitest.dev) + Testing Library |
 | Content | Markdown, MDX |
@@ -88,7 +88,7 @@ Visit **http://localhost:5555** to preview.
 | Command | Description |
 | :------ | :---------- |
 | `pnpm run dev` | Start dev server at `localhost:5555` |
-| `pnpm run build` | Production build with type check |
+| `pnpm run build` | Production build (prebuild regenerates `.agents/skills/index.json`, then `astro check && astro build`) |
 | `pnpm run astro:preview` | Preview production build locally |
 | `pnpm run biome:check` | Lint and format check |
 | `pnpm run biome:fix` | Auto-fix lint and format issues |
@@ -98,7 +98,11 @@ Visit **http://localhost:5555** to preview.
 | `pnpm run test:coverage` | Tests with coverage report |
 | `pnpm run images:optimize` | Convert staged images to WebP |
 | `pnpm run md:check` | Verify HTML / Markdown agent-endpoint parity |
-| `pnpm run lighthouse` | Run Lighthouse CI audit |
+| `pnpm run md:check:strict` | Same as `md:check`; exits 1 on missing (for CI) |
+| `pnpm run i18n:check` | Verify translation parity across all 17 active languages |
+| `pnpm run i18n:scaffold` | Scaffold strings + content for a new language code |
+| `pnpm run lighthouse` | Run Lighthouse CI audit (mobile) |
+| `pnpm run lighthouse:desktop` | Run Lighthouse CI audit (desktop) |
 | `pnpm run ncu:check` | Check for dependency updates |
 | `pnpm run release` | Bump version and create release commit |
 
@@ -110,15 +114,15 @@ Visit **http://localhost:5555** to preview.
 ├── public/             # Static assets (images, fonts, icons, robots.txt)
 ├── src/
 │   ├── components/     # Astro & Svelte components
-│   ├── content/        # Content Collections
-│   │   ├── methodology/  # Methodology docs by language (en/, es/) — primary content
-│   │   ├── spec/         # Specification reader content (en/, es/)
-│   │   ├── kit/          # Kit catalog: presets, adapters, commands (en/, es/)
-│   │   └── pages/        # Agent-friendly Markdown endpoints (en/, es/)
+│   ├── content/        # Content Collections (17 language folders per collection)
+│   │   ├── methodology/  # Methodology docs by language (en/, es/, pt/, zh/, …) — primary content
+│   │   ├── spec/         # Specification reader content (en/, es/, pt/, zh/, …)
+│   │   ├── kit/          # Kit catalog: presets, adapters, commands (en/, es/, pt/, zh/, …)
+│   │   └── pages/        # Agent-friendly Markdown endpoints (en/, es/, pt/, zh/, …)
 │   ├── layouts/        # MainLayout, InternalLayout, ...
-│   ├── lib/            # Utilities, types, translations
-│   ├── pages/          # File-based routing (EN root, ES in /es/)
-│   ├── middleware.ts   # Route allowlist & rewrites
+│   ├── lib/            # Utilities, types, translations (one `<code>.ts` per active language)
+│   ├── pages/          # File-based routing (EN at root, non-EN under /[lang]/ dynamic tree)
+│   ├── middleware.ts   # Route allowlist & rewrites (derived from the language registry)
 │   └── styles/         # Global CSS (Tailwind 4)
 ├── functions/          # Cloudflare Pages Functions (edge middleware)
 ├── tests/              # Vitest unit & integration tests
@@ -156,7 +160,7 @@ Visit **http://localhost:5555** to preview.
 Deployed to **Cloudflare Pages** on every push to `main`:
 
 1. Cloudflare triggers a build
-2. Runs `pnpm run build` (WebP generation + Astro build)
+2. Runs `pnpm run build` (regenerates the agent-skills index, then `astro check && astro build`)
 3. Serves the `dist/` folder from its global CDN
 
 Live at **[deepworkplan.com](https://deepworkplan.com)**.

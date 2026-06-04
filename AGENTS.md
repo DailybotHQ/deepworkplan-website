@@ -27,7 +27,7 @@
 
 ## Project Overview
 
-**Deep Work Plan** ([deepworkplan.com](https://deepworkplan.com)) — The official website for the Deep Work Plan (DWP) methodology: the methodology that turns any repository into an **AI-first, agent-pilotable** codebase. DWP documents a repo (AGENTS.md, docs, `.agents/` skills, the DWP skill), enables **long-horizon plans**, and lets **any agent pilot the repo** against explicit acceptance criteria and validation gates. A serious, neutral, fast documentation-and-marketing site built with Astro, in the **"Broadsheet" editorial design system** (warm paper, ink serif display, hairline rules, restrained oxblood accent), with dark mode, bilingual content (en/es), static site architecture deployed to Cloudflare Pages.
+**Deep Work Plan** ([deepworkplan.com](https://deepworkplan.com)) — The official website for the Deep Work Plan (DWP) methodology: the methodology that turns any repository into an **AI-first, agent-pilotable** codebase. DWP documents a repo (AGENTS.md, docs, `.agents/` skills, the DWP skill), enables **long-horizon plans**, and lets **any agent pilot the repo** against explicit acceptance criteria and validation gates. A serious, neutral, fast documentation-and-marketing site built with Astro, in the **"Broadsheet" editorial design system** (warm paper, ink serif display, hairline rules, restrained oxblood accent), with dark mode, multilingual content in 17 languages (en, es, pt, zh, ja, de, fr, ko, ru, it, tr, id, vi, hi, pl, uk, th), static site architecture deployed to Cloudflare Pages.
 
 The site explains and positions the DWP methodology, hosts the readable specification and kit catalog, ships agent-friendly Markdown endpoints, and exposes a canonical adoption endpoint at **`/init`**. The repository **dogfoods** the methodology it documents.
 
@@ -42,12 +42,12 @@ The site explains and positions the DWP methodology, hosts the readable specific
 
 **Technology Stack:**
 
-- **Astro 5.16.15** — Static site generator (islands architecture)
-- **Svelte 5.48.0** — Interactive components
-- **TypeScript 5.9.3** — Type-safe development
-- **Tailwind CSS 4.1.18** — Utility-first styling with dark mode
-- **Biome 2.3.11** — Linter and formatter (replaces ESLint + Prettier)
-- **MDX** — Enhanced Markdown for content collections
+- **Astro 6.4.4** — Static site generator (islands architecture)
+- **Svelte 5.56.1** — Interactive components
+- **TypeScript 6.0.3** — Type-safe development
+- **Tailwind CSS 4.3.0** — Utility-first styling with dark mode
+- **Biome 2.4.16** — Linter and formatter (replaces ESLint + Prettier)
+- **MDX** — Enhanced Markdown for content collections (via `@astrojs/markdown-remark`)
 
 ## Project Structure
 
@@ -60,14 +60,15 @@ src/
 │   ├── editorial/       # Editorial primitives (Broadsheet design system)
 │   ├── layout/          # Header.svelte, MobileMenu.svelte
 │   └── pages/           # Shared page components (*Page.astro)
-├── content/             # Content Collections (methodology, spec, kit, pages)
-│   ├── methodology/{en,es}/  # Methodology docs (primary content)
-│   ├── spec/{en,es}/         # Specification reader content
-│   ├── kit/{en,es}/          # Kit catalog (presets, adapters, commands)
-│   └── pages/{en,es}/        # Agent-friendly Markdown endpoints (AEO)
+├── content/             # Content Collections (methodology, spec, kit, pages — 17 lang folders each)
+│   ├── methodology/{en,es,pt,zh,…}/  # Methodology docs (primary content)
+│   ├── spec/{en,es,pt,zh,…}/         # Specification reader content
+│   ├── kit/{en,es,pt,zh,…}/          # Kit catalog (presets, adapters, commands)
+│   └── pages/{en,es,pt,zh,…}/        # Agent-friendly Markdown endpoints (AEO)
 ├── layouts/             # MainLayout, InternalLayout, ShowcaseLayout
-├── lib/                 # Utilities (i18n.ts, translations/, markdown-for-agents.ts)
-├── pages/               # File-based routing (EN root, ES in /es/)
+├── lib/                 # Utilities (i18n.ts, language-codes.ts, translations/, markdown-for-agents.ts)
+├── pages/               # File-based routing (EN at root, non-EN under /[lang]/ dynamic tree)
+│   ├── [lang]/          # Single dynamic tree serving all non-default languages
 │   ├── internal/        # Dev-only hub (excluded from production)
 │   └── api/             # JSON endpoints
 └── styles/              # global.css (Tailwind config)
@@ -195,25 +196,25 @@ Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on `src/lib
 
 ### 7. Multilingual Content Synchronization (MANDATORY)
 
-**ALL content changes MUST be synchronized across all active languages (en/es).** No exceptions.
+**ALL content changes MUST be synchronized across every active language.** The site ships 17 languages today (en, es, pt, zh, ja, de, fr, ko, ru, it, tr, id, vi, hi, pl, uk, th). The list of active languages is **derived** from `src/lib/translations/*.ts` — dropping a new `<code>.ts` file under `src/lib/translations/` auto-registers it through `getActiveLanguages()` in `src/lib/i18n.ts`. No exceptions.
 
 **Content type rules:**
 
-- **Pages:** Create 1 shared `*Page.astro` in `src/components/pages/` + thin 3-line wrappers in `src/pages/` and `src/pages/es/` passing `lang` as string literal
-- **Methodology / Spec / Kit:** Every document MUST exist in both `{en,es}/` of its collection, sharing the same English slug. Translate `title`, `description`, and body; preserve `order`, `lang`, and code blocks. Use the `/translate-sync` skill.
-- **Translation Strings:** Add to BOTH `src/lib/translations/en.ts` and `es.ts`. Update `types.ts` with any new interface keys
-- **Components:** Use `getTranslations(lang)` from `@/lib/translations`. Never hardcode user-visible strings
-- **Agent-Friendly Markdown (MANDATORY):** When page or translation content changes, update the corresponding `src/content/pages/{en,es}/*.md` files. These serve as Markdown endpoints for AI agents and MUST stay in sync with the HTML content. See **[Markdown for Agents](docs/aeo/MARKDOWN_FOR_AGENTS.md)**.
+- **Pages:** Create 1 shared `*Page.astro` in `src/components/pages/` + a 3-line wrapper in `src/pages/<name>.astro` (default-lang, passes `lang="en"`) + a single dynamic wrapper in `src/pages/[lang]/<name>.astro` that derives `lang` from `Astro.params`. One dynamic file covers all 16 non-default languages — never duplicate per-language wrappers.
+- **Methodology / Spec / Kit:** Every document MUST exist in every active language folder of its collection (`{en,es,pt,zh,…}/`), sharing the same English slug. Translate `title`, `description`, and body; preserve `order`, `lang`, and code blocks. Use the `/translate-sync` skill.
+- **Translation Strings:** Add to EVERY locale file under `src/lib/translations/` (en.ts, es.ts, pt.ts, zh.ts, …). Update `types.ts` with any new interface keys. Run `pnpm run i18n:check` to verify parity.
+- **Components:** Use `getTranslations(lang)` from `@/lib/translations`. Never hardcode user-visible strings.
+- **Agent-Friendly Markdown (MANDATORY):** When page or translation content changes, update the corresponding `src/content/pages/{en,es,pt,zh,…}/*.md` files in every active language. These serve as Markdown endpoints for AI agents and MUST stay in sync with the HTML content. See **[Markdown for Agents](docs/aeo/MARKDOWN_FOR_AGENTS.md)**.
 
 **Compliance checklist:**
 
-- [ ] Pages exist in both `src/pages/` and `src/pages/es/`
-- [ ] Methodology/spec/kit docs exist in both `{en,es}/` with the same English slug
-- [ ] UI strings in both `en.ts` and `es.ts`
+- [ ] One `src/pages/<name>.astro` (default-lang) + one `src/pages/[lang]/<name>.astro` (all non-default)
+- [ ] Methodology/spec/kit doc exists in every active language folder with the same English slug
+- [ ] UI strings exist in every `src/lib/translations/*.ts` file (`pnpm run i18n:check` passes)
 - [ ] No hardcoded user-visible text
-- [ ] Page Markdown files updated in both `src/content/pages/en/` and `src/content/pages/es/`
+- [ ] Page Markdown files updated in every `src/content/pages/<lang>/` (`pnpm run md:check` passes)
 
-**Tools:** `/translate-sync` skill, `i18n-guardian` agent. Adding a new language: see **[I18N Guide](docs/I18N_GUIDE.md)**.
+**Tools:** `/translate-sync` skill, `i18n-guardian` agent, `pnpm run i18n:scaffold <code>` for new languages. Adding a new language: see **[I18N Guide](docs/I18N_GUIDE.md)**.
 
 ### 8. Performance-First Mindset (MANDATORY)
 
@@ -224,7 +225,7 @@ Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on `src/lib
 5. **Optimize images** — always include dimensions, lazy load below-fold content
 6. **Avoid layout shifts** — reserve space for async content, `font-display: swap`
 7. **Keep search payload lean** — use language-sharded endpoints, minimal index schema
-8. **Protect Lighthouse scores** — run `pnpm run search:budgets` after search changes
+8. **Protect Lighthouse scores** — run `pnpm run lighthouse` (mobile) and `pnpm run lighthouse:desktop` after performance-sensitive changes
 
 See **[Performance Guide](docs/PERFORMANCE.md)**.
 
@@ -255,7 +256,7 @@ Multiple AI agents collaborate on this codebase. When updating agent guidance, m
 
 ```bash
 pnpm run dev                # Dev server (http://localhost:5555)
-pnpm run build              # Production build (prebuild runs images:webp)
+pnpm run build              # Production build (prebuild regenerates .agents/skills/index.json)
 pnpm run astro:preview      # Preview production build
 pnpm run biome:check        # Lint and format check
 pnpm run biome:fix          # Auto-fix lint issues
@@ -265,7 +266,10 @@ pnpm run test:coverage      # Tests with coverage
 pnpm run images:optimize    # Process staged images
 pnpm run md:check           # Verify every HTML page has a matching .md for agents
 pnpm run md:check:strict    # Same as above; exits 1 on missing (for CI)
-pnpm run lighthouse         # Lighthouse audit
+pnpm run i18n:check         # Verify translation parity across all 17 active languages
+pnpm run i18n:scaffold <code>  # Scaffold strings + content for a new language code
+pnpm run lighthouse         # Lighthouse CI audit (mobile)
+pnpm run lighthouse:desktop # Lighthouse CI audit (desktop)
 pnpm run release            # Bump version and release commit
 pnpm run ncu:check          # Check for package updates
 ```
@@ -304,14 +308,15 @@ Use Svelte for interactive components. Always include a `client:*` directive (`c
 
 ### 4. Page Wrapper Pattern (MANDATORY)
 
-Pages in `src/pages/` are ultra-minimal 3-line routing wrappers. All logic lives in `*Page.astro` components in `src/components/pages/`.
+Pages in `src/pages/` are ultra-minimal routing wrappers. All logic lives in `*Page.astro` components in `src/components/pages/`. Adding a new page is exactly **two** wrappers regardless of how many languages ship: one default-language file at the root and one dynamic `[lang]` file that covers all 16 (or N) non-default languages.
 
 **Key rules:**
 
 - Page components handle `MainLayout` internally — wrappers **never** import `MainLayout`
-- The `lang` prop is passed as a **string literal** (`"en"`, `"es"`), not a variable
-- For a new page: create **1 `*Page.astro` component** + **N thin wrappers** (one per language)
+- The default-language wrapper passes `lang="en"` as a string literal; the dynamic wrapper derives `lang` from `Astro.params`
+- For a new page: create **1 `*Page.astro` component** + **1 default-lang wrapper** + **1 `[lang]` dynamic wrapper** (regardless of how many languages exist)
 - All user-visible text uses `getTranslations(lang)`, all URLs use `getUrlPrefix(lang)`
+- Add the new page's slug to `KNOWN_BASE_PATHS` in `src/middleware.ts` — one entry covers every language
 
 **Page component** (`src/components/pages/AboutPage.astro`):
 
@@ -332,7 +337,7 @@ const prefix = getUrlPrefix(lang);
 </MainLayout>
 ```
 
-**Wrapper** (`src/pages/about.astro` — 3 lines):
+**Default-lang wrapper** (`src/pages/about.astro` — 3 lines):
 
 ```astro
 ---
@@ -341,9 +346,25 @@ import AboutPage from '@/components/pages/AboutPage.astro';
 <AboutPage lang="en" />
 ```
 
+**Dynamic `[lang]` wrapper** (`src/pages/[lang]/about.astro` — covers all non-default languages):
+
+```astro
+---
+import AboutPage from '@/components/pages/AboutPage.astro';
+import { getActiveNonDefaultLanguages, type Language } from '@/lib/i18n';
+
+export function getStaticPaths() {
+  return getActiveNonDefaultLanguages().map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Language };
+---
+<AboutPage lang={lang} />
+```
+
 ### 5. i18n Routing
 
-English pages at root (`src/pages/`), Spanish in `src/pages/es/`. Page components in `src/components/pages/` receive `lang` and handle translations internally.
+The default language (English) is served from `src/pages/` at the root. Every non-default active language is served from the single dynamic `src/pages/[lang]/**` tree — `getStaticPaths()` enumerates the registry via `getActiveNonDefaultLanguages()`, so adding a new language requires zero edits in `src/pages/`. Page components in `src/components/pages/` receive `lang` and handle translations internally.
 
 ### 6. Internal Hub (Dev-Only)
 
@@ -351,17 +372,17 @@ Dev-only portal at `/internal/`. Uses `InternalLayout` or `ShowcaseLayout` (neve
 
 ## Methodology Content Conventions
 
-Methodology documentation is the **primary content** of the site. It lives in bilingual content collections and is rendered by the methodology, spec, and kit readers.
+Methodology documentation is the **primary content** of the site. It lives in multilingual content collections (17 active languages) and is rendered by the methodology, spec, and kit readers.
 
 **Collections:**
 
-- **`methodology/{en,es}/`** — The narrative methodology docs (what DWP is, how to adopt it, principles, workflow). Primary marketing-and-teaching content.
-- **`spec/{en,es}/`** — The readable specification (the normative DWP standard: task anatomy, validation gates, completion protocol, mandatory final tasks, archetypes, addons).
-- **`kit/{en,es}/`** — The kit catalog: presets, adapters, and commands available for installing DWP into a repo.
+- **`methodology/{en,es,pt,zh,…}/`** — The narrative methodology docs (what DWP is, how to adopt it, principles, workflow). Primary marketing-and-teaching content.
+- **`spec/{en,es,pt,zh,…}/`** — The readable specification (the normative DWP standard: task anatomy, validation gates, completion protocol, mandatory final tasks, archetypes, addons).
+- **`kit/{en,es,pt,zh,…}/`** — The kit catalog: presets, adapters, and commands available for installing DWP into a repo.
 
-**File naming:** `slug.md` (or `.mdx`) in the relevant `{en,es}/` directory. **Slugs MUST be in English** on both languages; EN and ES versions share the same English slug.
+**File naming:** `slug.md` (or `.mdx`) in the relevant `<lang>/` directory. **Slugs MUST be in English** in every language; all language versions share the same English slug.
 
-**Bilingual parity:** Every methodology/spec/kit document MUST exist in both `en/` and `es/`. Spanish content MUST carry correct diacritics (`ñ`, tildes, `¿`/`¡`). Use the `/translate-sync` skill and `i18n-guardian` agent.
+**Multilingual parity:** Every methodology/spec/kit document MUST exist in every active language folder. Non-English content MUST carry correct diacritics, scripts, and punctuation for its language (Spanish `ñ`/tildes/`¿`/`¡`; CJK full-width punctuation; etc.). Use the `/translate-sync` skill and `i18n-guardian` agent.
 
 **Voice:** Serious, neutral, technical. No hype, no exclamation marks in body copy, sentence-case headings. This is a specification-and-methodology site.
 
@@ -389,11 +410,11 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 12. Use `MainLayout` for internal hub pages (use `InternalLayout` or `ShowcaseLayout`)
 13. Add multilingual variants for internal pages (English-only, dev-only)
 14. Reference `/internal/` pages from public pages
-15. Write Spanish content without proper accents/tildes/ñ
+15. Write non-English content without proper diacritics/punctuation for its language (Spanish ñ/tildes/¿/¡; CJK full-width punctuation; etc.)
 16. **Leave placeholder content in published content** — `[AUTHOR: ...]`, `[TODO: ...]`, `[TBD]`, or any bracketed "fill in later" text. Published pages must be complete. Zero tolerance.
-17. **Use Spanish slugs for content collections** — all slugs (methodology/spec/kit filenames) MUST be in English, even for Spanish content
+17. **Use non-English slugs for content collections** — all slugs (methodology/spec/kit filenames) MUST be in English, even for non-English content
 18. **Re-introduce removed surfaces** — the blog engine, slides/tech-talks, and the personal pages (cv, portfolio, dailybot, foodie, hobbies, trading, entrepreneur) have been removed from this site. Do not add them back or reference them.
-19. **Add a new top-level page without updating `src/middleware.ts`** — the middleware has a hardcoded allowlist (`KNOWN_ROOT_PATHS` / `KNOWN_ES_PATHS`). New top-level routes (`/foo`, `/es/foo`) return 404 until added to the allowlist. Symptom: dev log shows `[404] (rewrite) /foo` (the `(rewrite)` is the smoking gun — it comes from `context.rewrite()` in the middleware, not from Astro routing). Multi-segment paths like `/foo/bar` and any path containing `.` bypass the rule, which is why deck detail pages can work while the listing page 404s. The canonical adoption endpoint `/init` (plus its `/setup` and `/onboarding` redirects) and their `/es/` variants are already in the allowlist; keep them there. See [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
+19. **Add a new top-level page without updating `src/middleware.ts`** — the middleware allowlist is derived from one set: `KNOWN_BASE_PATHS` (per-language page slugs). Adding `'foo'` to that set covers every language — `/foo`, `/es/foo`, `/pt/foo`, `/zh/foo`, etc. — at once; the prefixed-language list comes from the registry (`getActiveNonDefaultLanguages()`), so new languages need no edit. New top-level routes return 404 until their slug is added. Symptom: dev log shows `[404] (rewrite) /foo` (the `(rewrite)` is the smoking gun — it comes from `context.rewrite()` in the middleware, not from Astro routing). Multi-segment paths like `/foo/bar` and any path containing `.` bypass the rule. The canonical adoption endpoint `/init` (plus its `/setup` and `/onboarding` redirects) is already in `KNOWN_BASE_PATHS`; keep it there. See [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
 
 ### DO:
 
@@ -405,10 +426,10 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 6. Create/update content in all active languages
 7. Use `text-gray-600 dark:text-gray-300` for secondary text (WCAG AA)
 8. Include `width` and `height` on all `<img>` elements
-9. Verify Spanish diacritical marks before committing
+9. Verify non-English diacritics/scripts before committing (`pnpm run i18n:check`)
 10. Ensure no placeholder content in published pages (`grep -rn '\[AUTHOR:\|\[AUTOR:\|\[TODO:\|\[TBD\]\|\[FIXME\]' src/content/` → zero matches)
-11. Add both EN and ES versions for all methodology, spec, and kit content
-12. Keep matching `src/content/pages/{en,es}/*.md` endpoints in sync with every rendered page
+11. Add a version for every active language for all methodology, spec, and kit content
+12. Keep matching `src/content/pages/<lang>/*.md` endpoints in sync with every rendered page (`pnpm run md:check`)
 
 ## Pre-Commit Checklist
 
@@ -418,9 +439,9 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 - [ ] `pnpm run astro:check` passes
 - [ ] `pnpm run build` succeeds
 - [ ] Dark mode works in new components
-- [ ] Content in both English and Spanish
-- [ ] Translation strings in both locale files
-- [ ] Spanish content has correct diacritical marks
+- [ ] Content present in every active language (`pnpm run i18n:check` passes)
+- [ ] Translation strings present in every `src/lib/translations/*.ts` file
+- [ ] Non-English content has correct diacritics/scripts/punctuation for its language
 - [ ] No placeholder content in published pages (`[AUTHOR:`, `[TODO:`, etc.)
 - [ ] Meta descriptions: 130-160 characters (pages in translations, collection docs in frontmatter)
 - [ ] Accessibility: approved text contrast, image dimensions, heading hierarchy
@@ -429,9 +450,9 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 
 ## Skills & Agents
 
-- **Skills** — Reusable procedures via slash commands: `quick-fix`, `doc-edit`, `pr-review-lite`, `fix-lint`, `write-tests`, `type-fix`, `refactor-safe`, `security-check`, `git-commit-push`, `translate-sync`, `add-component`, `add-page`, `optimize-image`
-- **Agents** — Specialized workers: `reviewer`, `executor`, `architect`, `security-auditor`, `i18n-guardian`, `content-writer`
-- **Critical policy:** All content changes MUST cover both EN and ES; new pages MUST use the page-wrapper pattern and update the `src/middleware.ts` allowlist.
+- **Skills** — Reusable procedures via slash commands: `quick-fix`, `doc-edit`, `pr-review-lite`, `fix-lint`, `write-tests`, `type-fix`, `refactor-safe`, `security-check`, `git-commit-push`, `translate-sync`, `add-component`, `add-page`, `add-diagram-component`, `add-language`, `update-styles`, `responsive-lighthouse-audit`, plus the installed `deepworkplan` skill (DWP itself)
+- **Agents** — Specialized workers: `reviewer`, `executor`, `architect`, `security-auditor`, `i18n-guardian`
+- **Critical policy:** All content changes MUST cover every active language (`pnpm run i18n:check`); new pages MUST use the page-wrapper pattern (1 component + 1 root wrapper + 1 `[lang]` dynamic wrapper) and add the page slug to `KNOWN_BASE_PATHS` in `src/middleware.ts`.
 - **Management:** `/skill-list`, `/agent-list`, `/skill-create`, `/agent-create`
 - **Full catalog:** [Skills & Agents Catalog](.agents/docs/skills_agents_catalog.md)
 

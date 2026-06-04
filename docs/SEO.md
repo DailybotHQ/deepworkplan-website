@@ -144,29 +144,52 @@ const breadcrumbSchema = {
 
 ### Languages
 
-| Language | Code | URL Prefix | OG Locale |
-|----------|------|------------|-----------|
-| English | `en` | (none) | `en_US` |
-| Spanish | `es` | `/es` | `es_ES` |
+17 languages ship today. The list is **derived** from `src/lib/translations/*.ts` via `getActiveLanguages()` in `src/lib/i18n.ts`, so adding a new language auto-registers it across hreflang, sitemap, and `og:locale:alternate`.
+
+| Language | Code | URL Prefix | hreflang | OG Locale |
+|----------|------|------------|----------|-----------|
+| English (default) | `en` | (none) | `en` | `en_US` |
+| Spanish | `es` | `/es` | `es` | `es_ES` |
+| Portuguese | `pt` | `/pt` | `pt` | `pt_BR` |
+| Chinese | `zh` | `/zh` | `zh` | `zh_CN` |
+| Japanese | `ja` | `/ja` | `ja` | `ja_JP` |
+| German | `de` | `/de` | `de` | `de_DE` |
+| French | `fr` | `/fr` | `fr` | `fr_FR` |
+| Korean | `ko` | `/ko` | `ko` | `ko_KR` |
+| Russian | `ru` | `/ru` | `ru` | `ru_RU` |
+| Italian | `it` | `/it` | `it` | `it_IT` |
+| Turkish | `tr` | `/tr` | `tr` | `tr_TR` |
+| Indonesian | `id` | `/id` | `id` | `id_ID` |
+| Vietnamese | `vi` | `/vi` | `vi` | `vi_VN` |
+| Hindi | `hi` | `/hi` | `hi` | `hi_IN` |
+| Polish | `pl` | `/pl` | `pl` | `pl_PL` |
+| Ukrainian | `uk` | `/uk` | `uk` | `uk_UA` |
+| Thai | `th` | `/th` | `th` | `th_TH` |
 
 ### Hreflang
 
-Automatically generated in `BaseHead.astro` using `getAlternateUrls()` from `src/lib/i18n.ts`. Every page gets:
-
-- `<link rel="alternate" hreflang="en" href="...">` — English version
-- `<link rel="alternate" hreflang="es" href="...">` — Spanish version
-- `<link rel="alternate" hreflang="x-default" href="...">` — Points to English (default)
+Automatically generated in `BaseHead.astro` using `getAlternateUrls()` from `src/lib/i18n.ts`. The function enumerates the active language registry, so every page gets one `<link rel="alternate" hreflang="<code>">` per active language plus a `hreflang="x-default"` pointing to the default-language (English) URL. Today that's 17 `hreflang` links + 1 `x-default` per page.
 
 ### Canonical URLs
 
 Built from `Astro.url.pathname` + `Astro.site`. Each language version has its own canonical URL (no cross-language canonicals).
 
+**Exception — agent endpoint `/init.md`:** the agent prompt is always served from the canonical English URL `https://deepworkplan.com/init.md` regardless of which locale the user is browsing. The methodology, spec, and skill stay in English; only the human-facing `/init` page is translated. See `CANONICAL_INIT_MD_PATH` / `getCanonicalInitMdUrl()` in `src/lib/i18n.ts`.
+
+### Open Graph alternate locales
+
+`<meta property="og:locale" content="...">` carries the current page's region-qualified locale (e.g. `pt_BR`), and one `<meta property="og:locale:alternate" content="...">` is emitted per *other* active language. Today that's 1 `og:locale` + 16 `og:locale:alternate` tags per page, all derived from the registry — no manual edit when languages are added.
+
+### JSON-LD `inLanguage`
+
+The WebSite and SoftwareApplication JSON-LD blocks include an `inLanguage` array enumerating every active language (BCP-47 codes). Source: `getActiveLanguages().map(getHreflang)` in `BaseHead.astro`.
+
 ### Content Parity
 
-All content MUST exist in both languages:
-- Pages: `src/pages/` (EN) + `src/pages/es/` (ES)
-- Methodology/spec/kit content: `src/content/{methodology,spec,kit}/en/` + `.../es/`
-- Translations: `src/lib/translations/en.ts` + `src/lib/translations/es.ts`
+All content MUST exist in every active language:
+- Page wrappers: `src/pages/<slug>.astro` (default-lang) + `src/pages/[lang]/<slug>.astro` (all non-default). One dynamic file covers all 16 non-default languages.
+- Methodology/spec/kit/pages content: `src/content/{methodology,spec,kit,pages}/<lang>/<slug>.md` for every active `<lang>`
+- Translations: every `src/lib/translations/<lang>.ts` file (`pnpm run i18n:check` enforces parity)
 
 ## Social Media (OG + Twitter)
 
@@ -180,8 +203,8 @@ All content MUST exist in both languages:
 - `og:image:width` — `1200`
 - `og:image:height` — `630`
 - `og:site_name` — from SITE_TITLE
-- `og:locale` — language-specific (en_US / es_ES)
-- `og:locale:alternate` — the other language
+- `og:locale` — region-qualified locale for the current page (e.g. `en_US`, `es_ES`, `pt_BR`, `zh_CN`)
+- `og:locale:alternate` — one entry per other active language (16 today), derived from the registry
 
 ### Twitter Card Tags
 
