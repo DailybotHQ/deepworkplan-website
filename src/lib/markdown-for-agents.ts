@@ -1,10 +1,9 @@
 import type { CollectionEntry } from 'astro:content';
+import { REPO_URLS } from '@/lib/constants/repos';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
 const SITE_URL = 'https://deepworkplan.com';
-
-const GITHUB_URL = 'https://github.com/DailybotHQ/deepworkplan-website';
 
 /**
  * Generate a site-wide navigation section for agent markdown.
@@ -47,7 +46,10 @@ function generateSiteNavigation(lang: string): string {
     },
     {
       title: t.agentNav.sections.connect,
-      links: [{ label: t.nav.github, path: GITHUB_URL, external: true }],
+      links: [
+        { label: t.nav.repo.website, path: REPO_URLS.website, external: true },
+        { label: t.nav.repo.skill, path: REPO_URLS.skill, external: true },
+      ],
     },
   ];
 

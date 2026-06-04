@@ -29,6 +29,13 @@ export const ru: SiteTranslations = {
     init: 'Init',
     quickstart: 'Быстрый старт',
     github: 'GitHub',
+    repo: {
+      label: 'Исходный код',
+      website: 'Репозиторий сайта',
+      websiteDesc: 'Этот сайт',
+      skill: 'Репозиторий навыка',
+      skillDesc: 'Устанавливаемый навык',
+    },
     menu: 'Открыть меню',
     closeMenu: 'Закрыть меню',
   },

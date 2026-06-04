@@ -28,6 +28,13 @@ export const zh: SiteTranslations = {
     init: 'Init',
     quickstart: '快速开始',
     github: 'GitHub',
+    repo: {
+      label: '源代码',
+      website: '网站仓库',
+      websiteDesc: '本站点',
+      skill: '技能仓库',
+      skillDesc: '可安装的技能',
+    },
     menu: '打开菜单',
     closeMenu: '关闭菜单',
   },

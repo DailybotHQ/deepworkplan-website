@@ -28,6 +28,13 @@ export const hi: SiteTranslations = {
     init: 'Init',
     quickstart: 'त्वरित शुरुआत',
     github: 'GitHub',
+    repo: {
+      label: 'सोर्स कोड',
+      website: 'वेबसाइट रिपॉज़िटरी',
+      websiteDesc: 'यह साइट',
+      skill: 'स्किल रिपॉज़िटरी',
+      skillDesc: 'इंस्टॉल करने योग्य स्किल',
+    },
     menu: 'मेनू खोलें',
     closeMenu: 'मेनू बंद करें',
   },

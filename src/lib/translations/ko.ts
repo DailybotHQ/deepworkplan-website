@@ -28,6 +28,13 @@ export const ko: SiteTranslations = {
     init: 'Init',
     quickstart: '빠른 시작',
     github: 'GitHub',
+    repo: {
+      label: '소스 코드',
+      website: '웹사이트 저장소',
+      websiteDesc: '이 사이트',
+      skill: '스킬 저장소',
+      skillDesc: '설치 가능한 스킬',
+    },
     menu: '메뉴 열기',
     closeMenu: '메뉴 닫기',
   },

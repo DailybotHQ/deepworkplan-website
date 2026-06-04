@@ -29,6 +29,13 @@ export const tr: SiteTranslations = {
     init: 'Init',
     quickstart: 'Hızlı başlangıç',
     github: 'GitHub',
+    repo: {
+      label: 'Kaynak kod',
+      website: 'Web sitesi deposu',
+      websiteDesc: 'Bu site',
+      skill: 'Beceri deposu',
+      skillDesc: 'Kurulabilir beceri',
+    },
     menu: 'Menüyü aç',
     closeMenu: 'Menüyü kapat',
   },

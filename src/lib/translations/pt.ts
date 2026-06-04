@@ -29,6 +29,13 @@ export const pt: SiteTranslations = {
     init: 'Init',
     quickstart: 'Início rápido',
     github: 'GitHub',
+    repo: {
+      label: 'Código-fonte',
+      website: 'Repositório do site',
+      websiteDesc: 'Este site',
+      skill: 'Repositório da skill',
+      skillDesc: 'A skill instalável',
+    },
     menu: 'Abrir menu',
     closeMenu: 'Fechar menu',
   },

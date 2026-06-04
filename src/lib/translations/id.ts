@@ -28,6 +28,13 @@ export const id: SiteTranslations = {
     init: 'Init',
     quickstart: 'Mulai Cepat',
     github: 'GitHub',
+    repo: {
+      label: 'Kode sumber',
+      website: 'Repositori situs web',
+      websiteDesc: 'Situs ini',
+      skill: 'Repositori skill',
+      skillDesc: 'Skill yang dapat dipasang',
+    },
     menu: 'Buka menu',
     closeMenu: 'Tutup menu',
   },

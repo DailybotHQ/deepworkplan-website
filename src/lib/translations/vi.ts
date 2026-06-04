@@ -29,6 +29,13 @@ export const vi: SiteTranslations = {
     init: 'Init',
     quickstart: 'Khởi động nhanh',
     github: 'GitHub',
+    repo: {
+      label: 'Mã nguồn',
+      website: 'Kho lưu trữ trang web',
+      websiteDesc: 'Trang web này',
+      skill: 'Kho lưu trữ skill',
+      skillDesc: 'Skill có thể cài đặt',
+    },
     menu: 'Mở menu',
     closeMenu: 'Đóng menu',
   },

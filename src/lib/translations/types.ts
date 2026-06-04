@@ -74,6 +74,14 @@ export interface SiteTranslations {
     init: string;
     quickstart: string;
     github: string;
+    // Source-code repo selector (header + mobile)
+    repo: {
+      label: string;
+      website: string;
+      websiteDesc: string;
+      skill: string;
+      skillDesc: string;
+    };
     menu: string;
     closeMenu: string;
   };

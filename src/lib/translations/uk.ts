@@ -29,6 +29,13 @@ export const uk: SiteTranslations = {
     init: 'Init',
     quickstart: 'Швидкий старт',
     github: 'GitHub',
+    repo: {
+      label: 'Початковий код',
+      website: 'Репозиторій сайту',
+      websiteDesc: 'Цей сайт',
+      skill: 'Репозиторій навички',
+      skillDesc: 'Встановлювана навичка',
+    },
     menu: 'Відкрити меню',
     closeMenu: 'Закрити меню',
   },

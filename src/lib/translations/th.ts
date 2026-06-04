@@ -28,6 +28,13 @@ export const th: SiteTranslations = {
     init: 'เริ่มต้น',
     quickstart: 'เริ่มใช้งานเร็ว',
     github: 'GitHub',
+    repo: {
+      label: 'ซอร์สโค้ด',
+      website: 'ที่เก็บโค้ดเว็บไซต์',
+      websiteDesc: 'เว็บไซต์นี้',
+      skill: 'ที่เก็บโค้ดสกิล',
+      skillDesc: 'สกิลที่ติดตั้งได้',
+    },
     menu: 'เปิดเมนู',
     closeMenu: 'ปิดเมนู',
   },

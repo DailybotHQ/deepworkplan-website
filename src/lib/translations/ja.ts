@@ -29,6 +29,13 @@ export const ja: SiteTranslations = {
     init: 'Init',
     quickstart: 'クイックスタート',
     github: 'GitHub',
+    repo: {
+      label: 'ソースコード',
+      website: 'ウェブサイトのリポジトリ',
+      websiteDesc: 'このサイト',
+      skill: 'スキルのリポジトリ',
+      skillDesc: 'インストール可能なスキル',
+    },
     menu: 'メニューを開く',
     closeMenu: 'メニューを閉じる',
   },
