@@ -1,0 +1,39 @@
+---
+title: dwp-execute
+description: "既存の Deep Work Plan をタスクごとに実行する。エージェントは計画全体を読み、各タスクを順序どおりに実行し、進捗を更新し、完了を正確に記す。"
+kind: command
+lang: ja
+order: 2
+usage: /dwp-execute [plan]
+aliases:
+  - dwp:execute
+---
+import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
+
+# dwp-execute
+
+既存の Deep Work Plan を実行します。
+
+<CmdExecute lang="ja" class="not-prose my-8" />
+
+## 何をするか
+
+`dwp-execute` は既存の計画をタスクごとに実行します。計画全体を読み、各タスクを順序どおりに実行し、`PROGRESS.md` を更新し、各タスクの完了状態を記します。
+
+## 使い方
+
+```
+/dwp-execute [plan]
+```
+
+## 振る舞い
+
+1. 開始前に計画全体を読む。
+2. タスクを順序どおりに実行する。
+3. 各タスクのあとに `PROGRESS.md` を更新する。
+4. タスクの状態を正確に記す。
+5. 阻害されたときは止まって尋ねる。
+
+## エイリアス
+
+- `dwp:execute`

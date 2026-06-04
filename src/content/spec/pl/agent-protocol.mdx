@@ -1,0 +1,60 @@
+---
+title: Protokół agenta
+description: "Normatywny kontrakt behawioralny dla agentów kodujących AI pracujących z Deep Work Plans: onboarding, planowanie, realizacja, dopracowanie, wznowienie i bezpieczeństwo."
+order: 3
+lang: pl
+section: Protocol
+---
+import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
+
+# Protokół agenta
+
+**Wersja 1.0.** Ten protokół definiuje, jak agent kodujący AI MUSI się zachowywać podczas pracy z Deep Work Plans. Słowa kluczowe MUST (MUSI), SHOULD (POWINIEN) i MAY (MOŻE) zgodne są z RFC 2119.
+
+<AgentLifecycle lang="pl" class="not-prose my-10" />
+
+## Onboarding
+
+Przed utworzeniem lub realizacją planu agent MUSI przeprowadzić onboarding repozytorium. Onboarding jest oparty na rozumowaniu, nie na skrypcie: agent czyta strukturę, dokumentację i konfigurację repozytorium, by zbudować model myślowy.
+
+Agent POWINIEN zidentyfikować:
+
+- Archetyp repozytorium (pojedyncze kontra orkiestrator).
+- Polecenia budowania, testów i lintowania.
+- Istniejące konwencje stylu, struktury i nazewnictwa.
+- Dostępne skille i agentów.
+
+## Planowanie
+
+Tworząc plan, agent MUSI:
+
+- Rozłożyć cel na sekwencyjne, podatne na przegląd zadania.
+- Zapisać każde zadanie zgodnie z dziewięciosekcyjną anatomią.
+- Zakończyć dwoma obowiązkowymi zadaniami końcowymi.
+- Zadać pytania doprecyzowujące, gdy cel jest niejednoznaczny.
+
+## Realizacja
+
+Podczas realizacji agent MUSI:
+
+- Przeczytać cały plan przed rozpoczęciem.
+- Wykonywać zadania w kolejności, o ile zależności nie pozwalają inaczej.
+- Aktualizować `PROGRESS.md` po każdym zadaniu.
+- Trafnie oznaczać status zadania.
+- Zatrzymać się i zapytać, gdy jest zablokowany, zamiast zgadywać.
+
+## Dopracowanie
+
+Podczas dopracowywania agent MUSI zachować ukończoną pracę, zaktualizować tabelę zadań i zapisać, co się zmieniło.
+
+## Wznowienie
+
+Podczas wznawiania agent MUSI odtworzyć stan z `PROGRESS.md` i plików zadań przed kontynuacją.
+
+## Komunikacja
+
+Agenci POWINNI raportować zwięźle. Raporty statusu MUSZĄ odróżniać pracę ukończoną, w toku i oczekującą.
+
+## Bezpieczeństwo
+
+Agenci NIE MOGĄ zatwierdzać sekretów, MUSZĄ utrzymywać `.dwp/` ignorowane przez git i POWINNI pytać przed operacjami destrukcyjnymi.

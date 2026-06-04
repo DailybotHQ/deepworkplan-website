@@ -3,8 +3,8 @@ import { onDestroy, onMount } from 'svelte';
 import { fade } from 'svelte/transition';
 import { EVENTS, trackEvent } from '@/lib/analytics';
 import {
+  getActiveLanguages,
   getLanguageConfig,
-  getSupportedLanguages,
   getUrlPrefix,
   stripLangPrefix,
 } from '@/lib/i18n';
@@ -17,10 +17,17 @@ let languageOpen = false;
 let lockedScrollY = 0;
 let isScrollLocked = false;
 
+// Dropdown label: full native name + Title-case code, e.g. "Português (Pt)".
+function languageLabel(code: string, nativeName: string): string {
+  const titleCode = code.charAt(0).toUpperCase() + code.slice(1);
+  return `${nativeName} (${titleCode})`;
+}
+
 $: t = getTranslations(lang);
 $: prefix = getUrlPrefix(lang);
 $: currentLangConfig = getLanguageConfig(lang);
-$: otherLanguages = getSupportedLanguages().filter((l) => l !== lang);
+// Only active (translated) languages appear in the switcher.
+$: otherLanguages = getActiveLanguages().filter((l) => l !== lang);
 
 function lockBodyScroll() {
   if (isScrollLocked) return;
@@ -63,6 +70,7 @@ let alternateLanguageUrls: {
   url: string;
   flag: string;
   nativeName: string;
+  label: string;
 }[] = [];
 
 onMount(() => {
@@ -75,7 +83,13 @@ onMount(() => {
       basePath === '/'
         ? config.urlPrefix || '/'
         : `${config.urlPrefix}${basePath}`;
-    return { lang: l, url, flag: config.flag, nativeName: config.nativeName };
+    return {
+      lang: l,
+      url,
+      flag: config.flag,
+      nativeName: config.nativeName,
+      label: languageLabel(l, config.nativeName),
+    };
   });
 });
 
@@ -135,8 +149,8 @@ onDestroy(() => {
         transition:fade={{ duration: 150 }}
       >
         {#each alternateLanguageUrls as alt}
-          <a href={alt.url} class="masthead-link text-base sm:text-lg text-center py-1 transition flex items-center gap-2" on:click={() => { trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang }); toggleMenu(); }}>
-            {alt.nativeName}
+          <a href={alt.url} lang={alt.lang} class="masthead-link text-base sm:text-lg text-center py-1 transition flex items-center gap-2" on:click={() => { trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang }); toggleMenu(); }}>
+            {alt.label}
           </a>
         {/each}
       </div>

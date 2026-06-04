@@ -4,28 +4,96 @@ Guide for implementing and maintaining multilingual support in deepworkplan.com.
 
 ## Overview
 
-deepworkplan.com is a fully bilingual site supporting English and Spanish. The i18n system is built on three pillars:
+deepworkplan.com is a multilingual site engineered to scale to **N languages**.
+The registry targets **16 languages**; a language goes **live only when its
+translation files exist** (availability is derived from file presence — see
+`getActiveLanguages()`). The i18n system is built on four pillars:
 
-1. **Centralized translations** via `src/lib/translations.ts`
-2. **Route-based language routing** (English at `/`, Spanish at `/es/`)
-3. **Language-split content collections** for methodology/spec/kit docs (`en/` and `es/` folders)
+1. **Centralized registry** in `src/lib/i18n.ts` (`LANGUAGE_CODES`, `LANGUAGES`,
+   helpers) + the dependency-free `src/lib/language-codes.ts` (shared with the
+   Astro config).
+2. **Per-file translations** auto-discovered in `src/lib/translations/` (one
+   `<code>.ts` per language, loaded via `import.meta.glob`).
+3. **Dynamic `[lang]` routing** — English at `/`, every other active language
+   under `/[lang]/` from a single dynamic route tree (no per-language wrappers).
+4. **Language-split content collections** for methodology/spec/kit/pages docs
+   (`en/`, `es/`, `pt/`, … folders sharing English slugs).
 
 | Language | Code | Route Prefix | Status |
 |----------|------|-------------|--------|
-| English  | `en` | `/` (root)  | Default |
-| Spanish  | `es` | `/es/`      | Secondary |
+| English | `en` | `/` (root) | Default (canonical) |
+| Spanish | `es` | `/es/` | Live |
+| Portuguese | `pt` | `/pt/` | Target |
+| Chinese (Simplified) | `zh` | `/zh/` | Target |
+| Japanese | `ja` | `/ja/` | Target |
+| German | `de` | `/de/` | Target |
+| French | `fr` | `/fr/` | Target |
+| Korean | `ko` | `/ko/` | Target |
+| Russian | `ru` | `/ru/` | Target |
+| Italian | `it` | `/it/` | Target |
+| Turkish | `tr` | `/tr/` | Target |
+| Indonesian | `id` | `/id/` | Target |
+| Vietnamese | `vi` | `/vi/` | Target |
+| Hindi | `hi` | `/hi/` | Target |
+| Polish | `pl` | `/pl/` | Target |
+| Ukrainian | `uk` | `/uk/` | Target |
+| Thai | `th` | `/th/` | Target |
+
+> "Target" languages are registered but go live only once their
+> `src/lib/translations/<code>.ts` + content files exist. Bare BCP-47 codes are
+> used in URLs/IDs; region-qualified forms (`ogLocale` `pt_BR`, `dateLocale`
+> `pt-BR`) live in the registry. Arabic (RTL) is a planned future wave.
+
+## Adding a New Language
+
+1. The 16 target languages are already in `LANGUAGE_CODES` / `LANGUAGES`
+   (`src/lib/i18n.ts`). For a brand-new language beyond those, add its code to
+   `src/lib/language-codes.ts` and a `LANGUAGES` entry (name, nativeName,
+   hreflang, ogLocale, dateLocale, urlPrefix, flag).
+2. Scaffold the English-seeded skeleton:
+   ```bash
+   pnpm run i18n:scaffold <code>   # creates <code>.ts + content/{coll}/<code>/
+   ```
+3. Translate every string value and content body following the **translation
+   style guide** (brand voice, glossary, do-not-translate list, locale
+   conventions, two-pass review). Keep English slugs, code, and the
+   `https://deepworkplan.com/init.md` bootstrap URL.
+4. Validate:
+   ```bash
+   pnpm run i18n:check      # content parity + script sanity
+   pnpm run astro:check     # string-key parity (SiteTranslations interface)
+   pnpm run md:check:strict # agent .md endpoints
+   pnpm run build
+   ```
+
+No route files, middleware edits, or registry plumbing are needed per language —
+routing, the switcher, hreflang, sitemap, and the middleware allowlist all derive
+from the registry + active-language detection.
 
 ## Translation System
 
-### translations.ts Structure
+### translations/ Structure
 
-The central translation file at `src/lib/translations.ts` contains all UI strings for both languages. It exports:
+Translations live in `src/lib/translations/` — one file per language plus shared
+plumbing:
 
-- **`Language` type** — `'en' | 'es'`
-- **`SiteTranslations` interface** — Full type definition for all translation keys
-- **`getTranslations(lang)` function** — Returns the translation object for a given language
-- **`isValidLanguage(lang)` function** — Type guard to validate language strings
-- **`getDefaultLanguage()` function** — Returns `'en'`
+- **`types.ts`** — the `SiteTranslations` interface (the shape every locale must
+  satisfy; TypeScript enforces string-key parity across languages).
+- **`<code>.ts`** — one per language (`en.ts`, `es.ts`, `pt.ts`, …), each
+  exporting a `SiteTranslations` object named after its code (`export const pt`).
+- **`index.ts`** — auto-discovers every `<code>.ts` via `import.meta.glob` and
+  exposes `getTranslations(lang)` (falls back to English).
+
+Language configuration lives in `src/lib/i18n.ts`:
+
+- **`Language` type** — derived from the `LANGUAGE_CODES` tuple
+- **`getTranslations(lang)`** — translation object for a language (English fallback)
+- **`isValidLanguage(lang)`** — type guard for registered codes
+- **`getDefaultLanguage()`** — returns `'en'`
+- **`getActiveLanguages()` / `getActiveNonDefaultLanguages()`** — languages that
+  actually have a strings file (drive routing, switcher, hreflang)
+- **`CANONICAL_INIT_MD_PATH` / `getCanonicalInitMdUrl()`** — the always-English
+  `/init.md` bootstrap endpoint
 
 The file is organized into logical sections:
 
@@ -75,10 +143,11 @@ $: t = getTranslations(lang);
 
 When adding a new user-visible string:
 
-1. **Add the type** to `SiteTranslations` interface
-2. **Add the English value** to the `en` object
-3. **Add the Spanish value** to the `es` object — MUST be added simultaneously
-4. **Use it in components** via `getTranslations(lang)`
+1. **Add the type** to the `SiteTranslations` interface (`types.ts`)
+2. **Add the value** to **every active locale file** (`en.ts`, `es.ts`, and any
+   other live `<code>.ts`). TypeScript fails the build until each satisfies the
+   interface, so `pnpm run astro:check` is your key-parity gate.
+3. **Use it in components** via `getTranslations(lang)`
 
 ```typescript
 // 1. In the interface
@@ -154,32 +223,31 @@ const esDocs = await getCollection('methodology', ({ data }) => data.lang === 'e
 
 ### Pages
 
-Pages follow a route-based approach:
+English pages live at the root; **all other languages are served by a single
+dynamic `[lang]` route tree** (no per-language mirror directories):
 
 ```
 src/pages/
 ├── index.astro            # English (lang="en")
 ├── about.astro            # English
-├── contact.astro          # English
-├── methodology/           # English methodology routes
-│   └── [slug].astro
-├── spec/                  # English spec routes
-│   └── [slug].astro
-├── kit/                   # English kit routes
-│   └── [slug].astro
-└── es/
-    ├── index.astro        # Spanish (lang="es")
-    ├── about.astro        # Spanish
-    ├── contact.astro      # Spanish
-    ├── methodology/       # Spanish methodology routes (mirrors EN)
-    │   └── [slug].astro
-    ├── spec/
-    │   └── [slug].astro
-    └── kit/
-        └── [slug].astro
+├── methodology/[slug].astro   # English methodology routes
+├── spec/[slug].astro
+├── kit/[slug].astro
+└── [lang]/                # ALL non-default active languages (es, pt, zh, …)
+    ├── index.astro            # getStaticPaths → getActiveNonDefaultLanguages()
+    ├── about.astro
+    ├── methodology/[slug].astro   # cross-product: langs × entries
+    ├── spec/[slug].astro
+    ├── kit/[slug].astro
+    ├── examples/[slug].astro
+    ├── [page].md.ts               # agent .md endpoints, per language
+    └── …
 ```
 
-Every English page must have a Spanish equivalent under `es/`, and vice versa.
+Each dynamic route's `getStaticPaths` enumerates `getActiveNonDefaultLanguages()`,
+so a registered-but-untranslated language emits nothing (no broken pages), and a
+newly-translated language lights up its full route set automatically. English
+keeps its unprefixed root URLs; there is no `/en/` tree.
 
 ### Page Wrapper Pattern
 
@@ -289,19 +357,21 @@ const locale = lang === 'es' ? 'es-ES' : 'en-US';
 
 ## Language Switcher
 
-The header includes a language switcher that toggles between English and Spanish. It maps current route paths between language versions:
-
-- `/about/` ↔ `/es/about/`
-- `/methodology/introduction/` ↔ `/es/methodology/introduction/`
-- `/kit/` ↔ `/es/kit/`
+The header (and mobile menu) include a language switcher built from
+`getActiveLanguages()`. The collapsed trigger shows the **current language code
+only** (e.g. `EN`); the open dropdown lists every other active language as
+**`Native name (Code)`** — e.g. `Español (Es)`, `Português (Pt)`, `中文 (Zh)` —
+so codes aren't cryptic at 16 languages. It maps the current path to each
+language version (preserving the page), e.g. `/about` ↔ `/es/about` ↔ `/pt/about`.
 
 ## Bilingual Compliance Checklist
 
 Before committing any content change, verify:
 
-- [ ] All new/modified pages exist in both `src/pages/` and `src/pages/es/`
-- [ ] All new/modified methodology/spec/kit docs exist in both `{collection}/en/` and `{collection}/es/`
-- [ ] All new UI strings in `translations.ts` have both English and Spanish values
+- [ ] New pages added to the root (EN) and the shared `src/pages/[lang]/` tree (all other languages — one dynamic route, not per-language wrappers)
+- [ ] All new/modified methodology/spec/kit docs exist in every active language folder (`{collection}/{code}/`) with matching English slugs
+- [ ] All new UI strings exist in every active locale file (`en.ts`, `es.ts`, …) — `pnpm run astro:check` enforces key parity
+- [ ] `pnpm run i18n:check` passes (content parity + script sanity)
 - [ ] No hardcoded user-visible text in components (use `getTranslations()`)
 - [ ] Date formatting uses locale-aware formatting with `lang` prop
 - [ ] Page titles and SEO descriptions use translation keys

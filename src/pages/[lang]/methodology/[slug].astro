@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import MethodologyReader from '@/components/pages/MethodologyReader.astro';
+import { getActiveNonDefaultLanguages, type Language } from '@/lib/i18n';
+
+export async function getStaticPaths() {
+  const langs = getActiveNonDefaultLanguages();
+  const entries = await getCollection('methodology');
+  return entries
+    .filter((entry) => langs.includes(entry.data.lang as Language))
+    .map((entry) => ({
+      params: {
+        lang: entry.data.lang,
+        slug: entry.id.replace(new RegExp(`^${entry.data.lang}/`), ''),
+      },
+      props: { entry },
+    }));
+}
+
+const { lang } = Astro.params as { lang: Language };
+const { entry } = Astro.props;
+---
+
+<MethodologyReader lang={lang} entry={entry} />

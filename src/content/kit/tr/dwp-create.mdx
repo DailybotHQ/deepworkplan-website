@@ -1,0 +1,51 @@
+---
+title: dwp-create
+description: "Üst düzey bir hedeften yeni bir Deep Work Plan oluşturur. Ajan hedefi analiz eder, işi görevlere ayrıştırır ve plan dosyalarını .dwp altına yazar."
+kind: command
+lang: tr
+order: 1
+usage: /dwp-create <goal>
+aliases:
+  - dwp:create
+---
+import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
+
+# dwp-create
+
+Üst düzey bir hedeften yeni bir Deep Work Plan oluşturun.
+
+<CmdCreate lang="tr" class="not-prose my-8" />
+
+## Ne yapar
+
+`dwp-create`, üst düzey bir hedefi alır ve onu yapılandırılmış bir plana dönüştürür. Hedefi analiz eder, gerekirse açıklayıcı sorular sorar, işi sıralı görevlere ayrıştırır ve plan dosyalarını yazar.
+
+## Kullanım
+
+```
+/dwp-create <goal>
+```
+
+## Modlar
+
+`dwp-create`, varsayılan olarak **rehberli** modda çalışır: bağlamı toplar, tek bir rafine taslak yazar, **bunu size gösterir ve nihai planı oluşturmadan önce onay ister** — böylece planı oluşturulmadan önce her zaman okursunuz. Bu, özellikle ilk birkaç kullanımda önerilen varsayılandır.
+
+Onayları atlamak için son sözcük olarak **`trust`** (ya da `auto`) ekleyin — ajan rafine taslağı yazar ve doğrudan nihai plana geçer:
+
+```
+/dwp-create <goal> trust
+```
+
+Trust modu, akışa güvendiğinizde güçlü kullanıcılara yönelik bir kısayoldur; rehberli mod ise varsayılan olarak döngüde bir insan tutar.
+
+## Davranış
+
+1. Hedefi ve depo bağlamını analiz edin.
+2. Belirsizse açıklayıcı sorular sorun.
+3. `.dwp/drafts/` içine bir rafine taslak yazın (rehberli modda bunu inceleyip onaylayın).
+4. Sıralı görevlere ayrıştırın ve README, görev dosyaları ile PROGRESS dosyasını yazın.
+5. İki zorunlu nihai görevle tamamlayın.
+
+## Takma adlar
+
+- `dwp:create`

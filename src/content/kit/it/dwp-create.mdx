@@ -1,0 +1,51 @@
+---
+title: dwp-create
+description: "Crea un nuovo Deep Work Plan da un obiettivo di alto livello. L’agente analizza l’obiettivo, scompone il lavoro in attività e scrive i file del piano sotto .dwp."
+kind: command
+lang: it
+order: 1
+usage: /dwp-create <goal>
+aliases:
+  - dwp:create
+---
+import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
+
+# dwp-create
+
+Crea un nuovo Deep Work Plan da un obiettivo di alto livello.
+
+<CmdCreate lang="it" class="not-prose my-8" />
+
+## Cosa fa
+
+`dwp-create` prende un obiettivo di alto livello e lo trasforma in un piano strutturato. Analizza l’obiettivo, pone domande di chiarimento se necessario, scompone il lavoro in attività sequenziali e scrive i file del piano.
+
+## Uso
+
+```
+/dwp-create <goal>
+```
+
+## Modalità
+
+`dwp-create` usa per impostazione predefinita la modalità **guidata**: raccoglie il contesto, scrive un’unica bozza raffinata, **gliela mostra e chiede conferma prima di generare il piano finale** — così Lei legge sempre il piano prima che venga creato. È l’impostazione predefinita consigliata, soprattutto le prime volte.
+
+Aggiunga **`trust`** (o `auto`) come ultima parola per saltare le conferme — l’agente scrive la bozza raffinata e passa direttamente al piano finale:
+
+```
+/dwp-create <goal> trust
+```
+
+La modalità trust è la scorciatoia per utenti esperti, una volta che si fida del flusso; la modalità guidata mantiene per impostazione predefinita una persona nel ciclo.
+
+## Comportamento
+
+1. Analizza l’obiettivo e il contesto del repository.
+2. Pone domande di chiarimento se ambiguo.
+3. Scrive una bozza raffinata in `.dwp/drafts/` (in modalità guidata, la revisiona e la conferma).
+4. Scompone in attività sequenziali e scrive il README, i file delle attività e PROGRESS.
+5. Conclude con le due attività finali obbligatorie.
+
+## Alias
+
+- `dwp:create`

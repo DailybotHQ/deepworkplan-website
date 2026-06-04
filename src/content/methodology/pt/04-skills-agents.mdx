@@ -1,0 +1,53 @@
+---
+title: Skills e agents
+description: "A diferença entre skills e agents, o onboarding de repositório baseado em raciocínio e o diretório .agents com sua convenção de symlink de .claude para .agents."
+order: 4
+lang: pt
+summary: Como skills reutilizáveis, agents especializados e o onboarding do repositório se encaixam.
+icon: users
+---
+import SkillsAgents from '@/components/diagrams/methodology/SkillsAgents.astro';
+
+# Skills e agents
+
+O DWP é independente de agente, mas espera dois blocos de construção recorrentes — skills e agents — e uma forma deliberada de se orientar em um repositório antes que qualquer trabalho comece.
+
+## Skills versus agents
+
+<SkillsAgents lang="pt" class="not-prose my-10" />
+
+Os dois são fáceis de confundir, mas servem a propósitos diferentes:
+
+- **Skills** são procedimentos reutilizáveis invocados pelo nome. Uma skill empacota um fluxo de trabalho repetível — executar testes, corrigir lint, criar um componente — para que agentes e humanos a invoquem da mesma forma todas as vezes.
+- **Agents** são trabalhadores especializados com um papel definido — reviewer, executor, architect. Cada agent tem uma responsabilidade focada e opera dentro de seu escopo.
+
+Uma forma útil de resumir: uma skill é *como* fazer uma tarefa recorrente; um agent é *quem* é responsável por uma classe de trabalho.
+
+## Um kit vivo: o repositório faz crescer suas próprias skills
+
+O onboarding transforma um repositório no harness do agente; ele não o congela. O kit foi feito para **crescer** à medida que os fluxos de trabalho do repositório se tornam claros. O DWP fornece uma sub-skill **author** — invocada por meio de `/skill-create` e `/agent-create` — que raciocina sobre o layout e as convenções existentes em `.agents/` do repositório e, em seguida, escreve uma nova skill, agent ou delegador de comando enxuto que combine com eles. O repositório cria seu próprio kit em vez de herdar um genérico.
+
+A sub-skill author é deliberada quanto à adequação. Ela cria uma skill para um procedimento repetível que as pessoas executam manualmente, um agent para um papel recorrente com necessidades distintas de modelo ou ferramenta, e um command apenas como um ponto de entrada enxuto que encaminha para uma skill ou agent. Ela ignora qualquer coisa genérica que não corresponda a um fluxo de trabalho real e mantém o catálogo `.agents/docs/` em sincronia com o que quer que adicione. A mesma sub-skill sustenta a tarefa obrigatória Skills & Agents Discovery, que reconcilia o catálogo com o que está realmente em disco — e o `/dwp-verify` confirma essa reconciliação de forma objetiva, falhando se o catálogo e os arquivos divergirem.
+
+## Addons de manutenção
+
+Além da autoria, o DWP fornece **addons de manutenção opcionais** — nunca exigidos para que um repositório seja AI-first. O addon **dependency-upgrade** é o exemplo canônico: ele raciocina sobre o gerenciador de pacotes *real* do repositório (npm, pnpm ou yarn com `ncu`; pip, poetry ou uv; Cargo; Go modules; Bundler; Composer) em vez de presumir um, e então atualiza em pequenos lotes, executa o validation gate real do repositório após cada lote, reverte qualquer lote que falhe e resume sem comitar automaticamente. Os addons são aceitos explicitamente durante o onboarding; recusar um deixa o repositório totalmente conforme.
+
+## Onboarding de repositório baseado em raciocínio
+
+Antes de criar ou executar um plano, um agente faz o onboarding ao repositório. O onboarding é **baseado em raciocínio, não baseado em script**: o agente lê a estrutura, a documentação e a configuração do repositório para construir um modelo mental, em vez de executar um script de configuração fixo.
+
+Durante o onboarding, o agente identifica o arquétipo do repositório (individual versus orquestrador), os comandos de build, teste e lint, as convenções existentes de estilo, estrutura e nomenclatura, e as skills e agents já disponíveis. Esse entendimento é o que permite ao agente planejar e executar de uma forma que se ajuste ao repositório em vez de lutar contra ele.
+
+## O diretório `.agents/` e o symlink `.claude → .agents`
+
+O DWP reúne tudo o que define o comportamento dos agentes — skills, commands, definições de agents, documentação interna e configurações — em um único diretório canônico, `.agents/`. O nome sinaliza que o conteúdo é compartilhado entre agentes, em vez de atrelado a uma única ferramenta.
+
+Para compatibilidade retroativa com ferramentas que historicamente liam de `.claude/`, esse caminho é um symlink para `.agents/`:
+
+```bash
+ls -la .claude
+# .claude -> .agents
+```
+
+Todo caminho `.claude/...` resolve de forma transparente para seu equivalente `.agents/...`, de modo que ferramentas mais antigas continuam funcionando enquanto o novo conteúdo referencia o local canônico `.agents/`. Skills e agents são editados por meio dos arquivos reais em `.agents/`, nunca por meio do symlink.

@@ -1,0 +1,39 @@
+---
+title: dwp-execute
+description: "ดำเนิน Deep Work Plan ที่มีอยู่ทีละ task โดย agent อ่านแผนทั้งหมด รันแต่ละ task ตามลำดับ อัปเดตความคืบหน้า และทำเครื่องหมายความเสร็จอย่างแม่นยำ"
+kind: command
+lang: th
+order: 2
+usage: /dwp-execute [plan]
+aliases:
+  - dwp:execute
+---
+import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
+
+# dwp-execute
+
+ดำเนิน Deep Work Plan ที่มีอยู่
+
+<CmdExecute lang="en" class="not-prose my-8" />
+
+## สิ่งที่มันทำ
+
+`dwp-execute` รันแผนที่มีอยู่ทีละ task มันอ่านแผนทั้งหมด ดำเนินแต่ละ task ตามลำดับ อัปเดต `PROGRESS.md` และทำเครื่องหมายสถานะความเสร็จของแต่ละ task
+
+## วิธีใช้
+
+```
+/dwp-execute [plan]
+```
+
+## พฤติกรรม
+
+1. อ่านแผนทั้งหมดก่อนเริ่ม
+2. ดำเนิน task ตามลำดับ
+3. อัปเดต `PROGRESS.md` หลังแต่ละ task
+4. ทำเครื่องหมายสถานะ task อย่างแม่นยำ
+5. หยุดและถามเมื่อติดขัด
+
+## ชื่อแทน
+
+- `dwp:execute`

@@ -5,7 +5,11 @@ import Kicker from '@/components/editorial/Kicker.astro';
 import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { getUrlPrefix, type Language } from '@/lib/i18n';
+import {
+  getUrlPrefix,
+  type Language,
+  stripEntryLangPrefix as slugOf,
+} from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -18,10 +22,6 @@ const t = getTranslations(lang);
 const s = t.specPage;
 const prefix = getUrlPrefix(lang);
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
-
-function slugOf(id: string): string {
-  return id.replace(/^(en|es)\//, '');
-}
 
 const { Content, headings } = await render(entry);
 // In-page TOC: top-level (h2) headings only.

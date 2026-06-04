@@ -31,7 +31,7 @@ Fast, low-risk, pattern-following tasks.
 | git-commit-push | execute| `/git-commit-push`| haiku  | Commit all changes and push to remote                                       |
 | add-component   | create | `/add-component`  | haiku  | Create new Astro or Svelte component with correct patterns                  |
 | add-page        | create | `/add-page`       | haiku  | Create new page with routing and MainLayout                                 |
-| translate-sync  | execute| `/translate-sync` | haiku  | Synchronize content between English and Spanish versions                    |
+| translate-sync  | execute| `/translate-sync` | haiku  | Synchronize content from English across all active languages                |
 | update-styles   | fix    | `/update-styles`  | haiku  | Update Tailwind styles with dark mode support                               |
 
 ### Tier 2 (Standard)
@@ -44,6 +44,7 @@ Everyday development work.
 | refactor-safe | execute  | `/refactor-safe` | sonnet | Safe refactor in bounded scope (1-10 files, no behavior change)          |
 | responsive-lighthouse-audit | audit | `/responsive-lighthouse-audit` | sonnet | Audit responsiveness across breakpoints + drive Lighthouse to near-100 on mobile & desktop |
 | add-diagram-component | create | `/add-diagram-component` | sonnet | Create an editorial HTML/CSS/SVG diagram component (i18n in-code) and embed it in-body via MDX |
+| add-language  | create   | `/add-language`  | sonnet | Add a new language end-to-end (scaffold → translate → native review → QA) |
 
 ### Tier 3 (Heavy/Reasoning)
 
@@ -160,13 +161,15 @@ content ships in both EN and ES with correct diacritics, and every rendered page
 
 ### 2. i18n & Translation
 
-Resources for multilingual content management (currently English/Spanish, N-language ready).
+Resources for multilingual content management (17 active languages, N-language ready).
 
 | Resource | Type | Description |
 |----------|------|-------------|
-| translate-sync | Skill (T1) | Synchronize content across active languages |
+| add-language | Skill (T2) | Add a new language end-to-end (scaffold → translate → native review → QA) |
+| translate-sync | Skill (T1) | Synchronize content from English across active languages |
 | add-page | Skill (T1) | Create multilingual pages with shared components + thin wrappers |
 | i18n-guardian | Agent (T2) | Translation quality specialist; multilingual consistency enforcer |
+| i18n:scaffold / i18n:check | Tooling | `scripts/i18n/` — scaffold a locale skeleton; QA content parity + script sanity |
 
 ### 3. Code Quality & Review
 

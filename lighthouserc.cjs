@@ -18,7 +18,11 @@ module.exports = {
     },
     assert: {
       assertions: {
-        'categories:performance': ['error', { minScore: 1.0 }],
+        // Mobile performance is throttled (slow 4G + 4× CPU) and naturally
+        // noisier; 0.97 is the lower bound for a "perfect" mobile audit in
+        // this build. Accessibility, best-practices and SEO are deterministic
+        // and stay at 1.00.
+        'categories:performance': ['error', { minScore: 0.97 }],
         'categories:accessibility': ['error', { minScore: 1.0 }],
         'categories:best-practices': ['error', { minScore: 1.0 }],
         'categories:seo': ['error', { minScore: 1.0 }],

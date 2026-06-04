@@ -1,0 +1,39 @@
+---
+title: dwp-status
+description: "报告一份 Deep Work Plan 的状态而不执行它。代理阅读计划与进展日志，然后汇总已完成、进行中与待办的工作。"
+kind: command
+lang: zh
+order: 5
+usage: /dwp-status [plan]
+aliases:
+  - dwp:status
+---
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
+
+# dwp-status
+
+报告 Deep Work Plan 的状态而不执行。
+
+<CmdStatus lang="en" class="not-prose my-8" />
+
+## 它做了什么
+
+`dwp-status` 汇总计划的进展而不做任何改动。它会报告已完成、进行中与待办的任务。
+
+## 用法
+
+```
+/dwp-status [plan]
+```
+
+## 行为
+
+1. 阅读计划与 `PROGRESS.md`。
+2. 汇总已完成的任务。
+3. 汇总进行中的任务。
+4. 汇总待办的任务。
+5. 报告而不修改任何东西。
+
+## 别名
+
+- `dwp:status`

@@ -1,0 +1,39 @@
+---
+title: dwp-execute
+description: "Wykonaj istniejący Deep Work Plan zadanie po zadaniu. Agent czyta cały plan, wykonuje każde zadanie po kolei, aktualizuje postęp i wiernie odnotowuje ukończenie."
+kind: command
+lang: pl
+order: 2
+usage: /dwp-execute [plan]
+aliases:
+  - dwp:execute
+---
+import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
+
+# dwp-execute
+
+Wykonaj istniejący Deep Work Plan.
+
+<CmdExecute lang="pl" class="not-prose my-8" />
+
+## Co robi
+
+`dwp-execute` wykonuje istniejący plan zadanie po zadaniu. Czyta cały plan, wykonuje każde zadanie po kolei, aktualizuje `PROGRESS.md` i odnotowuje status ukończenia każdego zadania.
+
+## Użycie
+
+```
+/dwp-execute [plan]
+```
+
+## Zachowanie
+
+1. Przeczytanie całego planu przed rozpoczęciem.
+2. Wykonywanie zadań po kolei.
+3. Aktualizacja `PROGRESS.md` po każdym zadaniu.
+4. Wierne odnotowanie statusu zadania.
+5. Zatrzymanie się i zapytanie w razie zablokowania.
+
+## Aliasy
+
+- `dwp:execute`

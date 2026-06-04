@@ -1,0 +1,39 @@
+---
+title: dwp-refine
+description: "Var olan bir Deep Work Plan’i, tamamlanan işi koruyup görev tablosunu değişiklikleri yansıtacak şekilde güncelleyerek görev ekleyip çıkararak ya da sıralayarak iyileştirir."
+kind: command
+lang: tr
+order: 3
+usage: /dwp-refine [plan]
+aliases:
+  - dwp:refine
+---
+import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
+
+# dwp-refine
+
+Var olan bir Deep Work Plan’i iyileştirin.
+
+<CmdRefine lang="tr" class="not-prose my-8" />
+
+## Ne yapar
+
+`dwp-refine`, var olan bir planı değiştirir. Tamamlanan işi korurken ve görev tablosunu güncellerken görev ekleyebilir, çıkarabilir ya da yeniden sıralayabilir.
+
+## Kullanım
+
+```
+/dwp-refine [plan]
+```
+
+## Davranış
+
+1. Var olan planı okuyun.
+2. Görev ekleyin, çıkarın ya da yeniden sıralayın.
+3. Tamamlanan işi koruyun.
+4. Görev tablosunu güncelleyin.
+5. Neyin neden değiştiğini kaydedin.
+
+## Takma adlar
+
+- `dwp:refine`

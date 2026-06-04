@@ -1,0 +1,76 @@
+---
+title: Manifesto
+description: "O que é um Deep Work Plan, por que a execução autônoma estruturada importa e como ele transforma qualquer repositório em uma base de código AI-first, pilotável por agentes."
+order: 1
+lang: pt
+summary: A defesa da execução orientada a planos com agentes de código de IA.
+icon: compass
+---
+import RepoAsHarness from '@/components/diagrams/methodology/RepoAsHarness.astro';
+
+# Manifesto
+
+Um Deep Work Plan (DWP) é uma metodologia exclusivamente em markdown para execução estruturada e autônoma por agentes de código de IA. Ele transforma um objetivo vago em um plano revisável — uma especificação — que um agente pode executar, pausar, retomar e relatar sem perder o contexto nem improvisar até chegar a resultados inconsistentes.
+
+## Deep work, para agentes
+
+O nome descreve a prática que ele produz: esforço focado e sustentado em trabalho cognitivamente exigente, mantido coeso pela estrutura e não pela força de vontade. A mesma propriedade que torna o deep work valioso para as pessoas — concentração sem distração, sustentada ao longo de um horizonte extenso — é o que um agente de código de IA precisa para concluir um trabalho que se estende por horas ou dias. Um Deep Work Plan fornece essa estrutura e, ao fazê-lo, transforma o repositório em uma base de código AI-first, pilotável por agentes.
+
+Um agente sem um plano se comporta como um trabalhador do conhecimento que nunca reserva tempo, nunca anota nada e troca de contexto a cada interrupção. Um Deep Work Plan dá ao agente o equivalente a uma agenda com horários reservados e a um briefing escrito: um escopo delimitado, uma sequência clara e um lugar duradouro para registrar o progresso.
+
+## A direção é o multiplicador
+
+A capacidade de um agente de código de IA depende menos do modelo do que da qualidade da direção que lhe é dada. Um modelo capaz apontado para uma solicitação ambígua amplifica a ambiguidade; o mesmo modelo apontado para uma especificação precisa amplifica a precisão. À medida que os modelos melhoram, essa diferença se amplia em vez de se fechar — o gargalo se desloca para montante, de escrever o código para definir o trabalho. A habilidade relevante já não é a execução; é a direção.
+
+Isso reformula o que significa delegar bem. Boa delegação não é pedir trabalho a um agente — é definir o trabalho com clareza suficiente para que ele possa ser executado corretamente: o objetivo, as restrições, o contexto que o agente de outra forma não teria e os critérios que decidem se ele foi bem-sucedido. A maior parte do valor é criada antes de a execução começar.
+
+O Deep Work Plan é a disciplina de fazer esse trabalho de montante de forma duradoura e repetível. Seus dois pilares são as duas metades de uma boa direção: uma **especificação** declara como é o "correto" e um **harness** dá ao agente o contexto e as ferramentas para alcançá-lo. Juntos, eles convertem a habilidade bruta de um modelo em engenharia confiável — sustentada ao longo de uma tarefa que dura horas e preservada entre agentes que mudam de uma sessão para outra.
+
+## Orientado a especificação por design
+
+Este é o primeiro pilar da metodologia e, assim como "harness", vale a pena defini-lo com clareza.
+
+**O que é o desenvolvimento orientado a especificação.** No trabalho comum orientado a prompts, a fonte de verdade é uma conversa: você pede algo a um agente, ele edita arquivos e o único registro da intenção é uma transcrição de chat que rola para fora da tela e nunca mais é revisada. O desenvolvimento orientado a especificação (SDD) inverte isso. Você primeiro escreve *o que* deve ser verdadeiro — o objetivo, o escopo, os critérios de aceitação, as verificações que provam que está concluído — e essa especificação escrita, e não a conversa, é a fonte de verdade. O agente então executa *contra* a especificação, em vez de improvisar a partir de um prompt de uma linha.
+
+**Como o DWP a incorpora.** No Deep Work Plan, o plano *é* a especificação. Um objetivo se torna um plano revisável; o plano se decompõe em tarefas atômicas; cada tarefa carrega critérios de aceitação e validation gates explícitos; e um protocolo de conclusão confirma o trabalho em relação a eles. Plano → tarefas → gates → conclusão é o SDD tornado concreto e executável.
+
+**Por que isso importa.** Escrever a especificação primeiro compensa de três maneiras: **reduz a deriva**, porque o agente é medido contra critérios declarados, em vez de uma lembrança que se esvai da solicitação; torna o trabalho **verificável**, porque cada gate é aprovado ou reprovado; e torna o trabalho **retomável**, porque a especificação sobrevive a qualquer sessão ou agente individual — outro agente pode assumi-lo amanhã e saber exatamente o que significa "concluído".
+
+**Como o DWP se diferencia.** Formou-se um movimento mais amplo de desenvolvimento orientado a especificação em torno dessa ideia, incluindo GitHub Spec Kit, Amazon Kiro e Tessl. Essas abordagens tendem a estar atreladas a uma ferramenta ou plataforma específica. O DWP é deliberadamente diferente: é independente de ferramenta e nativo do repositório. A especificação vive no repositório como markdown puro, de modo que viaja com o código em vez de com o produto de um fornecedor — e compõe-se diretamente com o segundo pilar, já que a própria especificação faz parte do harness que o repositório carrega.
+
+## O repositório se torna o harness
+
+Este é o segundo pilar da metodologia e merece uma definição clara — "harness" tornou-se um termo carregado, e boa parte do setor o usa sem dizer o que ele significa.
+
+**O que é um harness de agente.** Um grande modelo de linguagem, por si só, é apenas um preditor de texto. O que o transforma em um engenheiro confiável é tudo o que o envolve: o contexto que lhe é dado, as ferramentas que ele pode chamar, o loop de controle que decide o que fazer em seguida, as salvaguardas que detectam erros e o estado persistente que lhe permite parar e retomar. Esse andaime ao redor é o *harness*. O modelo é o motor; o harness é o chassi, a direção e os freios que tornam o motor seguro para dirigir.
+
+**O que é engenharia de harness.** A maioria das equipes constrói esse andaime de forma implícita, dentro de uma única ferramenta — uma IDE específica, um produto de agente ou um framework sob medida — de modo que ele só funciona ali e desaparece no momento em que você troca de ferramenta. A engenharia de harness é a disciplina de projetar esse andaime deliberadamente, como um artefato de primeira classe. O Deep Work Plan adota uma posição firme sobre onde ele deve residir: **não em uma ferramenta, mas no próprio repositório.**
+
+**Por que o repositório é o lugar certo.** Quando o harness vive no repositório, ele viaja com o código, todo agente que abre o repositório o herda, e ele é versionado, revisado e aprimorado como qualquer outro código. O DWP instala cada parte do harness como um artefato concreto e duradouro:
+
+| Elemento do harness | O que ele fornece | Onde o DWP o coloca no seu repositório |
+|---|---|---|
+| **Contexto** | o que o agente precisa saber | `AGENTS.md`, `docs/` e READMEs por módulo |
+| **Ferramentas** | o que o agente pode fazer | as skills e agents de `.agents/` e os comandos `dwp-*` |
+| **Loop de controle** | como o trabalho avança | o Deep Work Plan: plano → tarefas atômicas → gates → conclusão |
+| **Salvaguardas** | o que o mantém correto | critérios de aceitação e validation gates explícitos |
+| **Estado** | como ele sobrevive à interrupção | os planos, rascunhos e o registro de progresso em `.dwp/`, ignorado pelo git |
+
+<RepoAsHarness lang="pt" class="not-prose my-10" />
+
+Como cada elemento é um arquivo no repositório, e não um recurso de uma ferramenta, o harness é portátil por construção. Essa é a afirmação de uma linha sobre a qual o restante da metodologia se apoia: *o próprio repositório se torna o harness*, de modo que qualquer agente pode pilotar qualquer repositório — sem nenhum framework sob medida por ferramenta.
+
+## Por que a execução autônoma estruturada importa
+
+Os agentes de código de IA modernos são capazes, mas sem direção. Aponte um deles para uma tarefa não trivial e ele tende a começar a editar arquivos imediatamente, perder o controle do que alterou e produzir um trabalho difícil de revisar e impossível de retomar.
+
+O DWP impõe uma estrutura leve que aborda cada falha diretamente:
+
+- **Tarefas revisáveis** — o trabalho é decomposto em unidades sequenciais, cada uma com um escopo explícito e critérios de aceitação.
+- **Estado persistido** — o progresso é registrado para que o trabalho sobreviva à interrupção e possa ser retomado entre sessões e agentes.
+- **Documentação padronizada** — humanos e agentes compartilham um modelo mental por meio de um formato comum.
+- **Portabilidade entre agentes** — a metodologia funciona com qualquer agente por meio de adaptadores enxutos, não de reimplementações.
+
+## Markdown até o fim
+
+O DWP define estrutura, não software. Não há runtime para instalar, nem árvore de dependências, nem lock-in. O plano, as tarefas e o registro de execução são todos markdown puro que qualquer agente pode ler, qualquer pessoa pode revisar e qualquer sistema de controle de versão pode rastrear com clareza. O resultado é uma execução que você pode ler, auditar e na qual pode confiar.

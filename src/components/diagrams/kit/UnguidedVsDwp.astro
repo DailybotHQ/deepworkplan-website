@@ -39,6 +39,195 @@ const i18n = {
     caption:
       'Sin estructura, los agentes se desvían; con un Deep Work Plan, la ejecución es ordenada, registrada y con compuertas.',
   },
+  pt: {
+    ariaLabel:
+      'Antes do DWP um agente se desvia com contexto perdido e um build que falha; depois do DWP o agente avança por tarefas ordenadas com progresso registrado e portões de validação aprovados.',
+    header: 'Desvio → execução dirigida',
+    beforeTitle: 'Antes do DWP',
+    before: ['Janela de contexto cheia', 'Decisões esquecidas', 'Build ✗'],
+    afterTitle: 'Depois do DWP',
+    after: ['Tarefas ordenadas', 'PROGRESS.md registrado', 'Portões aprovados'],
+    caption:
+      'Sem estrutura, os agentes se desviam; com um Deep Work Plan, a execução é ordenada, registrada e controlada por portões.',
+  },
+  zh: {
+    ariaLabel:
+      '采用 DWP 之前，智能体会因上下文丢失和构建失败而偏离方向；采用 DWP 之后，智能体沿着有序的任务推进，进度被记录，验证关卡顺利通过。',
+    header: '偏离 → 定向执行',
+    beforeTitle: '采用 DWP 之前',
+    before: ['上下文窗口已满', '决策被遗忘', '构建 ✗'],
+    afterTitle: '采用 DWP 之后',
+    after: ['任务有序排列', 'PROGRESS.md 已记录', '关卡通过'],
+    caption:
+      '缺乏结构时，智能体会偏离方向；借助 Deep Work Plan，执行过程有序、可记录且受关卡约束。',
+  },
+  ja: {
+    ariaLabel:
+      'DWP 導入前のエージェントは、コンテキストを失いビルドが失敗して迷走します。DWP 導入後のエージェントは、順序立てられたタスクを進め、進捗が記録され、検証ゲートを通過します。',
+    header: '迷走から方向づけられた実行へ',
+    beforeTitle: 'DWP 導入前',
+    before: [
+      'コンテキストウィンドウが満杯です',
+      '決定事項が忘れられます',
+      'ビルド ✗',
+    ],
+    afterTitle: 'DWP 導入後',
+    after: [
+      '順序立てられたタスク',
+      'PROGRESS.md に記録されます',
+      'ゲートを通過します',
+    ],
+    caption:
+      '構造がなければエージェントは迷走します。Deep Work Plan があれば、実行は順序立てられ、記録され、ゲートで管理されます。',
+  },
+  de: {
+    ariaLabel:
+      'Vor DWP gerät ein Agent ins Driften, verliert den Kontext und der Build schlägt fehl. Nach DWP arbeitet der Agent geordnete Aufgaben ab, der Fortschritt wird protokolliert und die Validierungs-Gates werden bestanden.',
+    header: 'Drift → gerichtete Ausführung',
+    beforeTitle: 'Vor DWP',
+    before: ['Kontextfenster voll', 'Entscheidungen vergessen', 'Build ✗'],
+    afterTitle: 'Nach DWP',
+    after: [
+      'Geordnete Aufgaben',
+      'PROGRESS.md protokolliert',
+      'Gates bestanden',
+    ],
+    caption:
+      'Ohne Struktur geraten Agenten ins Driften; mit einem Deep Work Plan verläuft die Ausführung geordnet, protokolliert und gate-gesteuert.',
+  },
+  fr: {
+    ariaLabel:
+      'Avant DWP, un agent dérive avec un contexte perdu et un build en échec ; après DWP, l’agent progresse selon des tâches ordonnées, avec un avancement journalisé et des portes de validation franchies.',
+    header: 'Dérive → exécution dirigée',
+    beforeTitle: 'Avant DWP',
+    before: ['Fenêtre de contexte saturée', 'Décisions oubliées', 'Build ✗'],
+    afterTitle: 'Après DWP',
+    after: ['Tâches ordonnées', 'PROGRESS.md journalisé', 'Portes franchies'],
+    caption:
+      'Sans structure, les agents dérivent ; avec un Deep Work Plan, l’exécution est ordonnée, journalisée et contrôlée par des portes.',
+  },
+  ko: {
+    ariaLabel:
+      'DWP 도입 전에는 에이전트가 컨텍스트를 잃고 빌드가 실패하며 표류합니다. DWP 도입 후에는 에이전트가 정렬된 작업을 따라 진행되고, 진행 상황이 기록되며 검증 게이트를 통과합니다.',
+    header: '표류에서 방향성 있는 실행으로',
+    beforeTitle: 'DWP 도입 전',
+    before: ['컨텍스트 윈도가 가득 찼어요', '결정이 잊혀요', '빌드 ✗'],
+    afterTitle: 'DWP 도입 후',
+    after: ['정렬된 작업', 'PROGRESS.md에 기록돼요', '게이트를 통과해요'],
+    caption:
+      '구조가 없으면 에이전트는 표류합니다. Deep Work Plan이 있으면 실행이 정렬되고, 기록되며, 게이트로 관리됩니다.',
+  },
+  ru: {
+    ariaLabel:
+      'До DWP агент сбивается с курса, теряет контекст и сборка падает; после DWP агент продвигается по упорядоченным задачам, прогресс журналируется, а ворота валидации проходятся успешно.',
+    header: 'Дрейф → направленное выполнение',
+    beforeTitle: 'До DWP',
+    before: ['Окно контекста переполнено', 'Решения забыты', 'Сборка ✗'],
+    afterTitle: 'После DWP',
+    after: ['Упорядоченные задачи', 'PROGRESS.md ведётся', 'Ворота пройдены'],
+    caption:
+      'Без структуры агенты дрейфуют; с Deep Work Plan выполнение становится упорядоченным, журналируемым и контролируемым воротами.',
+  },
+  it: {
+    ariaLabel:
+      'Prima di DWP un agente va alla deriva con il contesto perso e una build fallita; dopo DWP l’agente avanza lungo attività ordinate, con il progresso registrato e i gate di validazione superati.',
+    header: 'Deriva → esecuzione diretta',
+    beforeTitle: 'Prima di DWP',
+    before: ['Finestra di contesto piena', 'Decisioni dimenticate', 'Build ✗'],
+    afterTitle: 'Dopo DWP',
+    after: ['Attività ordinate', 'PROGRESS.md registrato', 'Gate superati'],
+    caption:
+      'Senza struttura gli agenti vanno alla deriva; con un Deep Work Plan l’esecuzione è ordinata, registrata e controllata da gate.',
+  },
+  tr: {
+    ariaLabel:
+      'DWP öncesinde bir ajan bağlamı kaybederek sürüklenir ve derleme başarısız olur; DWP sonrasında ajan sıralı görevlerde ilerler, ilerleme kayda alınır ve doğrulama kapıları geçilir.',
+    header: 'Sürüklenmeden yönlendirilmiş yürütmeye',
+    beforeTitle: 'DWP öncesi',
+    before: ['Bağlam penceresi dolu', 'Kararlar unutuldu', 'Derleme ✗'],
+    afterTitle: 'DWP sonrası',
+    after: ['Sıralı görevler', 'PROGRESS.md kaydedildi', 'Kapılar geçildi'],
+    caption:
+      'Yapı olmadan ajanlar sürüklenir; bir Deep Work Plan ile yürütme sıralı, kayıtlı ve kapılarla denetlenir.',
+  },
+  id: {
+    ariaLabel:
+      'Sebelum DWP sebuah agen melenceng dengan konteks hilang dan build gagal; setelah DWP agen melaju melalui tugas-tugas yang terurut, dengan kemajuan tercatat dan gerbang validasi terlewati.',
+    header: 'Melenceng → eksekusi terarah',
+    beforeTitle: 'Sebelum DWP',
+    before: ['Jendela konteks penuh', 'Keputusan terlupakan', 'Build ✗'],
+    afterTitle: 'Setelah DWP',
+    after: ['Tugas terurut', 'PROGRESS.md tercatat', 'Gerbang terlewati'],
+    caption:
+      'Tanpa struktur, agen melenceng; dengan Deep Work Plan, eksekusi menjadi terurut, tercatat, dan terkontrol oleh gerbang.',
+  },
+  vi: {
+    ariaLabel:
+      'Trước khi áp dụng DWP, tác tử lệch hướng với ngữ cảnh bị mất và bản build thất bại; sau khi áp dụng DWP, tác tử tiến theo các tác vụ có thứ tự, tiến độ được ghi lại và các cổng kiểm định được thông qua.',
+    header: 'Lệch hướng → thực thi có định hướng',
+    beforeTitle: 'Trước DWP',
+    before: ['Cửa sổ ngữ cảnh đầy', 'Quyết định bị quên', 'Build ✗'],
+    afterTitle: 'Sau DWP',
+    after: [
+      'Tác vụ có thứ tự',
+      'PROGRESS.md được ghi lại',
+      'Các cổng được thông qua',
+    ],
+    caption:
+      'Không có cấu trúc, các tác tử sẽ lệch hướng; với một Deep Work Plan, việc thực thi trở nên có thứ tự, được ghi lại và được kiểm soát bằng các cổng.',
+  },
+  hi: {
+    ariaLabel:
+      'DWP से पहले एक एजेंट संदर्भ खोकर भटक जाता है और बिल्ड विफल हो जाता है; DWP के बाद एजेंट क्रमबद्ध कार्यों पर आगे बढ़ता है, प्रगति दर्ज होती है और सत्यापन द्वार पार होते हैं।',
+    header: 'भटकाव से दिशात्मक निष्पादन तक',
+    beforeTitle: 'DWP से पहले',
+    before: ['संदर्भ विंडो भर गई', 'निर्णय भुला दिए गए', 'बिल्ड ✗'],
+    afterTitle: 'DWP के बाद',
+    after: ['क्रमबद्ध कार्य', 'PROGRESS.md में दर्ज', 'द्वार पार हुए'],
+    caption:
+      'बिना संरचना के एजेंट भटकते हैं; Deep Work Plan के साथ निष्पादन क्रमबद्ध, दर्ज और द्वार-नियंत्रित होता है।',
+  },
+  pl: {
+    ariaLabel:
+      'Przed DWP agent dryfuje z utraconym kontekstem i nieudaną kompilacją; po DWP agent postępuje przez uporządkowane zadania, postęp jest rejestrowany, a bramki walidacyjne są zaliczane.',
+    header: 'Dryf → ukierunkowane wykonanie',
+    beforeTitle: 'Przed DWP',
+    before: ['Okno kontekstu pełne', 'Decyzje zapomniane', 'Build ✗'],
+    afterTitle: 'Po DWP',
+    after: [
+      'Uporządkowane zadania',
+      'PROGRESS.md zapisany',
+      'Bramki zaliczone',
+    ],
+    caption:
+      'Bez struktury agenci dryfują; z Deep Work Plan wykonanie jest uporządkowane, rejestrowane i kontrolowane przez bramki.',
+  },
+  uk: {
+    ariaLabel:
+      'До DWP агент дрейфує з утраченим контекстом і збіркою, що падає; після DWP агент просувається впорядкованими завданнями, прогрес записується, а ворота валідації пройдені.',
+    header: 'Дрейф → спрямоване виконання',
+    beforeTitle: 'До DWP',
+    before: ['Вікно контексту переповнене', 'Рішення забуті', 'Збірка ✗'],
+    afterTitle: 'Після DWP',
+    after: [
+      'Впорядковані завдання',
+      'PROGRESS.md записується',
+      'Ворота пройдені',
+    ],
+    caption:
+      'Без структури агенти дрейфують; з Deep Work Plan виконання стає впорядкованим, журнальованим і контрольованим воротами.',
+  },
+  th: {
+    ariaLabel:
+      'ก่อนใช้ DWP เอเจนต์จะหลงทิศโดยสูญเสียบริบทและบิลด์ล้มเหลว หลังใช้ DWP เอเจนต์จะเดินตามงานที่จัดลำดับไว้ มีการบันทึกความคืบหน้า และผ่านประตูตรวจสอบความถูกต้อง',
+    header: 'จากการหลงทิศสู่การทำงานอย่างมีทิศทาง',
+    beforeTitle: 'ก่อน DWP',
+    before: ['หน้าต่างบริบทเต็มแล้ว', 'การตัดสินใจถูกลืม', 'บิลด์ ✗'],
+    afterTitle: 'หลัง DWP',
+    after: ['งานเรียงลำดับชัดเจน', 'บันทึกใน PROGRESS.md แล้ว', 'ผ่านประตูตรวจสอบ'],
+    caption:
+      'เมื่อไม่มีโครงสร้าง เอเจนต์จะหลงทิศ แต่เมื่อมี Deep Work Plan การทำงานจะเป็นลำดับ มีการบันทึก และควบคุมด้วยประตูตรวจสอบ',
+  },
 } as const;
 const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
 ---

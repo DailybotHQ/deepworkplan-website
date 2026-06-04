@@ -4,7 +4,11 @@ import { getCollection, render } from 'astro:content';
 import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { getUrlPrefix, type Language } from '@/lib/i18n';
+import {
+  getUrlPrefix,
+  type Language,
+  stripEntryLangPrefix as slugOf,
+} from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -20,10 +24,6 @@ const prefix = getUrlPrefix(lang);
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
 
 const { Content } = await render(entry);
-
-function slugOf(id: string): string {
-  return id.replace(/^(en|es)\//, '');
-}
 
 // Diagram components are embedded in-body via MDX at the right point in each kit
 // document's narrative (see docs/DIAGRAM_COMPONENTS.md §5) — not injected here.

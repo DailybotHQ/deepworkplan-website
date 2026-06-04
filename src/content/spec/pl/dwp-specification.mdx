@@ -1,0 +1,66 @@
+---
+title: Specyfikacja DWP
+description: "Normatywna specyfikacja Deep Work Plan: struktura planu, dziewięciosekcyjna anatomia zadania, pięciooperacyjna pętla realizacji, przestrzeń robocza wyników oraz wersjonowanie."
+order: 2
+lang: pl
+section: Workflow
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
+
+# Specyfikacja DWP
+
+**Wersja 1.0. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
+
+## Definicja
+
+Deep Work Plan to uporządkowany artefakt oparty wyłącznie na Markdown, opisujący złożone zadanie inżynierskie rozłożone na sekwencyjne, podatne na przegląd jednostki pracy, zaprojektowany tak, by tworzyły go, realizowały i utrzymywały agenci kodujący AI pracujący autonomicznie.
+
+DWP jest spec-driven: plan jest specyfikacją, a agenci MUSZĄ pracować w odniesieniu do jej jawnych kryteriów akceptacji i bramek walidacyjnych, zamiast improwizować. Specyfikacja — a nie transkrypcja czatu — jest trwałym źródłem prawdy, dzięki czemu praca jest weryfikowalna i wznawialna między sesjami i agentami. To także harness engineering w przenośnej formie: kontekst, pętla sterująca, zabezpieczenia i wznawialny stan, które czynią agenta niezawodnym, instalowane są w samym repozytorium jako zwykły Markdown, więc każdy zgodny agent MOŻE pilotować repozytorium bez frameworka właściwego dla narzędzia.
+
+## Struktura planu
+
+Plan MUSI być katalogiem w `.dwp/plans/` o nazwie `PLAN_<slug>/`. Katalog MUSI zawierać:
+
+- `README.md` — przegląd planu, cel, tabelę zadań i status.
+- Jeden plik na zadanie, o nazwie `<n>.task_<slug>.md`.
+- `PROGRESS.md` — bieżący dziennik realizacji.
+
+## Anatomia zadania
+
+<TaskAnatomy lang="pl" class="not-prose my-10" />
+
+Każdy plik zadania MUSI zawierać te dziewięć sekcji, w kolejności:
+
+1. **Cel** — jednoakapitowe sformułowanie tego, co zadanie osiąga.
+2. **Kontekst** — tło, odnośniki i powód istnienia tego zadania.
+3. **Kroki** — uporządkowane, konkretne działania do wykonania.
+4. **Kryteria akceptacji** — lista warunków definiujących ukończenie.
+5. **Walidacja** — polecenia lub testy do uruchomienia w celu weryfikacji.
+6. **Pliki** — ścieżki, które mają zostać utworzone lub zmodyfikowane.
+7. **Zależności** — inne zadania lub zewnętrzne wymagania wstępne.
+8. **Ryzyka** — co może pójść nie tak oraz środki zaradcze.
+9. **Ukończenie i dziennik** — znacznik statusu plus chronologiczne notatki.
+
+## Pętla realizacji
+
+<CoreLoop lang="pl" class="not-prose my-10" />
+
+DWP definiuje pięć operacji:
+
+- **create** — Wygeneruj nowy plan na podstawie celu.
+- **execute** — Realizuj plan zadanie po zadaniu.
+- **refine** — Zmodyfikuj istniejący plan.
+- **resume** — Wznów przerwany plan.
+- **status** — Raportuj status planu bez realizacji.
+
+## Przestrzeń robocza wyników
+
+<OutputWorkspace lang="pl" class="not-prose my-10" />
+
+Wszystkie artefakty DWP MUSZĄ żyć w ignorowanym przez git katalogu `.dwp/` w głównym katalogu repozytorium.
+
+## Wersjonowanie
+
+Ta specyfikacja podąża za wersjonowaniem semantycznym.

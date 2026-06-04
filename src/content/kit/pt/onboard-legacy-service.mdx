@@ -1,0 +1,31 @@
+---
+title: "Onboarding de um serviço legado"
+description: "Um passo a passo ilustrativo de apontar um agente para um repositório legado sem documentação e deixá-lo AI-first — fundamentado, não destrutivo e verificável."
+kind: example
+lang: pt
+order: 4
+---
+import OnboardFlow from '@/components/diagrams/kit/OnboardFlow.astro';
+
+# Onboarding de um serviço legado
+
+Um passo a passo ilustrativo da primeira coisa que a maioria das equipes faz: pegar um repositório existente e mal documentado e torná-lo pilotável por agentes — sem perturbar o que já funciona.
+
+<OnboardFlow lang="pt" class="not-prose my-10" />
+
+## O objetivo
+
+"Tornar este serviço de cinco anos AI-first." Ele já tem um `README` parcial, alguns docs dispersos e nenhum `AGENTS.md`.
+
+## A execução
+
+O desenvolvedor entrega ao seu agente uma linha — *leia e siga [`/init.md`](/init.md)* — e o fluxo de onboarding:
+
+1. **Reconhecimento.** Detecta a linguagem real, o gerenciador de pacotes (a partir do lockfile existente) e os comandos reais de build, teste e lint — lendo o repositório, não presumindo.
+2. **Propõe um plano e pergunta.** Como já existem artefatos, ele é não destrutivo: lista o que vai criar versus o que vai reconciliar e aguarda aprovação antes de tocar no `README` parcial ou nos docs dispersos.
+3. **Gera o harness.** Um `AGENTS.md` fundamentado com os Quick Commands reais do serviço, uma árvore `docs/` categorizada que absorve as notas existentes em vez de duplicá-las, READMEs por módulo, o kit `.agents/` e um `.dwp/` ignorado pelo git.
+4. **Verifica.** O `/dwp-verify` retorna um relatório objetivo de aprovado/reprovado em relação aos critérios de conformidade.
+
+## Resultado
+
+O serviço legado se torna AI-first sem nada destruído: o trabalho existente é mesclado, não sobrescrito, e o resultado é verificável, e não apenas afirmado. A partir daqui, a equipe planeja e executa trabalho real com `/dwp-create` e `/dwp-execute`.

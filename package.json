@@ -9,7 +9,7 @@
     "url": "https://github.com/DailybotHQ/deepworkplan-website"
   },
   "type": "module",
-  "version": "1.0.42",
+  "version": "1.0.43",
   "packageManager": "pnpm@11.1.2",
   "engines": {
     "node": ">=24.15.0"
@@ -34,6 +34,8 @@
     "images:webp": "echo 'All images are natively WebP — no generation needed'",
     "md:check": "node scripts/check-md-parity.mjs",
     "md:check:strict": "node scripts/check-md-parity.mjs --strict",
+    "i18n:check": "node scripts/i18n/check.mjs",
+    "i18n:scaffold": "node scripts/i18n/scaffold-language.mjs",
     "lighthouse": "lhci autorun",
     "lighthouse:full": "lhci autorun --config=lighthouserc.full.cjs",
     "lighthouse:desktop": "lhci autorun --config=lighthouserc.desktop.cjs",
@@ -42,29 +44,30 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
-    "@astrojs/compiler-rs": "0.2.0",
-    "@astrojs/mdx": "5.0.4",
-    "@astrojs/sitemap": "3.7.2",
-    "@astrojs/svelte": "8.1.0",
-    "astro": "6.3.1",
+    "@astrojs/compiler-rs": "0.2.1",
+    "@astrojs/markdown-remark": "^7.2.0",
+    "@astrojs/mdx": "6.0.2",
+    "@astrojs/sitemap": "3.7.3",
+    "@astrojs/svelte": "8.1.2",
+    "astro": "6.4.4",
     "rehype-external-links": "3.0.0",
     "reveal.js": "^6.0.1",
-    "svelte": "5.55.5",
+    "svelte": "5.56.1",
     "tailwindcss": "4.3.0",
     "typescript": "6.0.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.15",
+    "@biomejs/biome": "2.4.16",
     "@lhci/cli": "0.15.1",
     "@sveltejs/vite-plugin-svelte": "7.1.2",
     "@tailwindcss/typography": "0.5.19",
     "@tailwindcss/vite": "4.3.0",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/svelte": "5.3.1",
-    "@vitest/coverage-v8": "4.1.6",
+    "@vitest/coverage-v8": "4.1.8",
     "happy-dom": "20.9.0",
     "npm-check-updates": "22.2.0",
     "sharp": "0.34.5",
-    "vitest": "4.1.6"
+    "vitest": "4.1.8"
   }
 }

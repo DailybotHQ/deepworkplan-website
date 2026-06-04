@@ -1,0 +1,39 @@
+---
+title: dwp-status
+description: "Deep Work Plan을 실행하지 않고 그 상태를 보고합니다. 에이전트가 계획과 진행 로그를 읽은 뒤 완료, 진행 중, 대기 작업을 요약합니다."
+kind: command
+lang: ko
+order: 5
+usage: /dwp-status [plan]
+aliases:
+  - dwp:status
+---
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
+
+# dwp-status
+
+Deep Work Plan을 실행하지 않고 상태를 보고합니다.
+
+<CmdStatus lang="ko" class="not-prose my-8" />
+
+## 하는 일
+
+`dwp-status`는 변경 없이 계획 진행 상황을 요약합니다. 완료, 진행 중, 대기 task를 보고합니다.
+
+## 사용법
+
+```
+/dwp-status [plan]
+```
+
+## 동작
+
+1. 계획과 `PROGRESS.md`를 읽습니다.
+2. 완료된 task를 요약합니다.
+3. 진행 중인 task를 요약합니다.
+4. 대기 task를 요약합니다.
+5. 아무것도 수정하지 않고 보고합니다.
+
+## 별칭
+
+- `dwp:status`

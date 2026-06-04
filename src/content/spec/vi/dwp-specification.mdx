@@ -1,0 +1,66 @@
+---
+title: Đặc tả DWP
+description: "Đặc tả Deep Work Plan có tính quy phạm: cấu trúc kế hoạch, cấu trúc tác vụ chín phần, vòng lặp thực thi năm thao tác, không gian làm việc đầu ra và phiên bản hóa."
+order: 2
+lang: vi
+section: Workflow
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
+
+# Đặc tả DWP
+
+**Phiên bản 1.0. Trạng thái: Ổn định.** Tài liệu này là đặc tả quy phạm cho phương pháp luận Deep Work Plan (DWP). Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
+
+## Định nghĩa
+
+Một Deep Work Plan là một thành phần có cấu trúc, chỉ dùng markdown, mô tả một tác vụ kỹ thuật phức tạp được phân rã thành các đơn vị công việc tuần tự, rà soát được, thiết kế để được tạo ra, thực thi và duy trì bởi các agent lập trình AI làm việc tự chủ.
+
+DWP dựa trên đặc tả: kế hoạch là đặc tả, và các agent PHẢI (MUST) thực thi dựa trên tiêu chí chấp nhận rõ ràng và các cổng kiểm chứng của nó thay vì tùy hứng. Đặc tả — chứ không phải một bản chép cuộc chat — là nguồn chân lý bền vững, nên công việc kiểm chứng được và tiếp tục được qua các phiên và các agent. Đó cũng là kỹ thuật harness được làm cho dễ mang theo: ngữ cảnh, vòng điều khiển, hàng rào bảo vệ và trạng thái có thể tiếp tục giúp một agent đáng tin cậy được cài vào chính repository dưới dạng markdown thuần, nên mọi agent tuân thủ ĐỀU CÓ THỂ (MAY) điều khiển repository mà không cần một framework gắn với công cụ cụ thể.
+
+## Cấu trúc kế hoạch
+
+Một kế hoạch PHẢI là một thư mục dưới `.dwp/plans/` được đặt tên `PLAN_<slug>/`. Thư mục PHẢI chứa:
+
+- `README.md` — tổng quan kế hoạch, mục tiêu, bảng tác vụ và trạng thái.
+- Một tệp cho mỗi tác vụ, đặt tên `<n>.task_<slug>.md`.
+- `PROGRESS.md` — một nhật ký chạy của quá trình thực thi.
+
+## Cấu trúc tác vụ
+
+<TaskAnatomy lang="vi" class="not-prose my-10" />
+
+Mỗi tệp tác vụ PHẢI chứa chín phần này, theo thứ tự:
+
+1. **Goal** — một câu phát biểu một đoạn về điều tác vụ đạt được.
+2. **Context** — bối cảnh, liên kết và lý do tác vụ này tồn tại.
+3. **Steps** — các hành động cụ thể, có thứ tự cần thực hiện.
+4. **Acceptance criteria** — một danh sách kiểm các điều kiện định nghĩa thế nào là xong.
+5. **Validation** — các lệnh hoặc test cần chạy để kiểm chứng.
+6. **Files** — các đường dẫn dự kiến được tạo hoặc sửa đổi.
+7. **Dependencies** — các tác vụ khác hoặc điều kiện tiên quyết bên ngoài.
+8. **Risks** — điều gì có thể sai, và các biện pháp giảm thiểu.
+9. **Completion & Log** — một dấu trạng thái cùng các ghi chú theo trình tự thời gian.
+
+## Vòng lặp thực thi
+
+<CoreLoop lang="vi" class="not-prose my-10" />
+
+DWP định nghĩa năm thao tác:
+
+- **create** — Sinh ra một kế hoạch mới từ một mục tiêu.
+- **execute** — Thực thi kế hoạch từng tác vụ một.
+- **refine** — Sửa đổi một kế hoạch hiện có.
+- **resume** — Tiếp tục một kế hoạch bị gián đoạn.
+- **status** — Báo cáo trạng thái kế hoạch mà không thực thi.
+
+## Không gian làm việc đầu ra
+
+<OutputWorkspace lang="vi" class="not-prose my-10" />
+
+Tất cả thành phần DWP PHẢI sống dưới một thư mục `.dwp/` được gitignore tại gốc repository.
+
+## Phiên bản hóa
+
+Đặc tả này tuân theo phiên bản hóa ngữ nghĩa (semantic versioning).

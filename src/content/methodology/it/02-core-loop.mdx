@@ -1,0 +1,61 @@
+---
+title: Il core loop
+description: "Il flusso create, execute, refine, resume, status e verify, la directory di output .dwp esclusa da git, l’anatomia in nove sezioni di un’attività e come funziona la validazione."
+order: 2
+lang: it
+summary: Come le operazioni fondamentali di DWP guidano un piano dall’obiettivo al completamento verificato.
+icon: refresh
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+
+# Il core loop
+
+DWP definisce un piccolo insieme di operazioni che portano un piano da un obiettivo a lavoro completato e revisionabile: **create → execute → refine → resume → status**, con **verify** come verifica di conformità che conferma il risultato. Insieme formano il ciclo che un agente segue per tutta la vita di un piano. Gli agenti eseguono un’attività alla volta, validando ogni passo prima di proseguire.
+
+Questo ciclo è la forma operativa dello spec-driven development. Il piano è la specifica rispetto a cui un agente esegue, ogni attività porta con sé criteri di accettazione espliciti e il passo di validazione è il gate che trasforma una dichiarazione di completamento nella sua prova. Poiché il piano e il suo log dei progressi vivono nel repository, il ciclo è ripristinabile tra sessioni e agenti.
+
+## Le operazioni
+
+<CoreLoop lang="it" class="not-prose my-10" />
+
+- **create** — Genera un nuovo piano da un obiettivo. L’agente analizza l’obiettivo, lo scompone in attività sequenziali e scrive i file del piano. Dovrebbe porre domande di chiarimento prima di scrivere quando l’obiettivo è ambiguo.
+- **execute** — Esegue il piano attività per attività. L’agente aggiorna il log dei progressi dopo ogni attività e ne segna lo stato di completamento. Non deve saltare attività senza registrarne il motivo.
+- **refine** — Modifica un piano esistente. L’agente può aggiungere, rimuovere o riordinare attività, ma deve preservare il lavoro completato e aggiornare la tabella delle attività.
+- **resume** — Continua un piano interrotto. L’agente legge il log dei progressi e i file delle attività per ricostruire lo stato, poi prosegue dalla prima attività incompleta.
+- **status** — Riferisce sui progressi senza eseguire. L’agente riassume le attività completate, in corso e in sospeso e non cambia nulla.
+- **verify** — Verifica la conformità senza cambiare nulla. L’agente riferisce se il repository soddisfa lo standard e se un piano è ben formato — con ogni attività che porta con sé criteri di accettazione e un validation gate. Veda il [documento di conformità della specifica](/spec).
+
+## La directory di output `.dwp/`
+
+Tutti gli artefatti DWP vivono in una directory `.dwp/` esclusa da git nella radice del repository. Tenere il workspace fuori dal controllo di versione significa che lo stato di lavoro di un piano non inquina mai la storia del progetto.
+
+```
+.dwp/
+├── plans/
+│   └── PLAN_<slug>/
+│       ├── README.md
+│       ├── PROGRESS.md
+│       └── <n>.task_<slug>.md
+└── config.yaml
+```
+
+## L’anatomia in nove sezioni di un’attività
+
+<TaskAnatomy lang="it" class="not-prose my-10" />
+
+Ogni file di attività contiene queste nove sezioni, nell’ordine. La struttura garantisce che ogni unità di lavoro sia autosufficiente e revisionabile:
+
+1. **Goal** — un paragrafo che dichiara cosa l’attività realizza.
+2. **Context** — contesto, link e il perché questa attività esiste.
+3. **Steps** — azioni ordinate e concrete da svolgere.
+4. **Acceptance criteria** — una checklist di condizioni che definiscono il completamento.
+5. **Validation** — comandi o test da eseguire per verificare il lavoro.
+6. **Files** — percorsi che ci si aspetta vengano creati o modificati.
+7. **Dependencies** — altre attività o prerequisiti esterni.
+8. **Risks** — cosa potrebbe andare storto e le relative mitigazioni.
+9. **Completion & Log** — un marcatore di stato più note cronologiche.
+
+## Validazione, completamento e ripresa
+
+La validazione è parte dell’attività, non un ripensamento: ogni attività indica i comandi o i test che ne provano il completamento e l’agente li esegue prima di segnare il completamento. Il completamento è registrato con un marcatore di stato esplicito (`[ ]` non iniziata, `[~]` in corso, `[x]` completata, `[!]` bloccata) nella sezione Completion & Log. La ripresa si basa su questi marcatori e sul log dei progressi — un agente può ricostruire esattamente dove il piano si è fermato e proseguire dalla prima attività incompleta senza rifare il lavoro già concluso.

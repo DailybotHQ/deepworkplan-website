@@ -1,0 +1,76 @@
+---
+title: Tuyên ngôn
+description: "Deep Work Plan là gì, vì sao thực thi tự chủ có cấu trúc lại quan trọng, và cách nó biến mọi repository thành một codebase AI-first, điều khiển được bằng agent."
+order: 1
+lang: vi
+summary: Lập luận cho việc thực thi dựa trên kế hoạch với các agent lập trình AI.
+icon: compass
+---
+import RepoAsHarness from '@/components/diagrams/methodology/RepoAsHarness.astro';
+
+# Tuyên ngôn
+
+Deep Work Plan (DWP) là một phương pháp luận chỉ dùng markdown để các agent lập trình AI thực thi tự chủ, có cấu trúc. Nó biến một mục tiêu mơ hồ thành một kế hoạch rà soát được — một đặc tả — mà agent có thể thực thi, tạm dừng, tiếp tục và báo cáo mà không đánh mất ngữ cảnh hay tùy hứng dẫn tới những kết quả thiếu nhất quán.
+
+## Deep work, cho agent
+
+Cái tên mô tả chính thực hành mà nó tạo ra: nỗ lực tập trung, bền bỉ vào công việc đòi hỏi nhiều suy nghĩ, được giữ vững nhờ cấu trúc chứ không phải ý chí. Cùng một đặc tính khiến deep work có giá trị với con người — sự tập trung không bị phân tâm, được duy trì qua một chân trời dài — là điều một agent lập trình AI cần để hoàn thành công việc kéo dài hàng giờ hoặc hàng ngày. Deep Work Plan cung cấp cấu trúc đó, và qua đó biến repository thành một codebase AI-first, điều khiển được bằng agent.
+
+Một agent không có kế hoạch hành xử như một người lao động tri thức không bao giờ dành thời gian tập trung, không bao giờ ghi chép gì, và chuyển ngữ cảnh sau mỗi lần bị gián đoạn. Deep Work Plan trao cho agent thứ tương đương một lịch làm việc được khóa và một bản tóm tắt viết ra: một phạm vi giới hạn, một trình tự rõ ràng và một nơi bền vững để ghi lại tiến độ.
+
+## Định hướng là hệ số nhân
+
+Năng lực của một agent lập trình AI phụ thuộc vào chất lượng định hướng được trao cho nó nhiều hơn là vào mô hình. Một mô hình mạnh hướng vào một yêu cầu mập mờ sẽ khuếch đại sự mập mờ; cũng mô hình đó hướng vào một đặc tả chính xác sẽ khuếch đại sự chính xác. Khi các mô hình tiến bộ, khoảng cách này nới rộng ra thay vì khép lại — nút thắt cổ chai dịch lên thượng nguồn, từ việc viết mã sang việc định nghĩa công việc. Kỹ năng cốt yếu không còn là thực thi nữa; đó là định hướng.
+
+Điều này định hình lại ý nghĩa của việc ủy thác tốt. Ủy thác tốt không phải là yêu cầu agent làm việc — mà là định nghĩa công việc đủ rõ ràng để nó được thực thi đúng đắn: mục tiêu, các ràng buộc, ngữ cảnh mà agent ắt sẽ thiếu, và các tiêu chí quyết định nó thành công hay không. Phần lớn giá trị được tạo ra trước khi việc thực thi bắt đầu.
+
+Deep Work Plan là kỷ luật thực hiện phần việc thượng nguồn đó dưới một hình thức bền vững, lặp lại được. Hai trụ cột của nó là hai nửa của một định hướng tốt: một **đặc tả** nói rõ "đúng" trông như thế nào, và một **harness** trao cho agent ngữ cảnh và công cụ để đạt tới đó. Cùng nhau, chúng chuyển hóa năng lực thô của mô hình thành kỹ thuật đáng tin cậy — được duy trì xuyên suốt một tác vụ chạy hàng giờ, và được bảo toàn qua các agent thay đổi giữa các phiên.
+
+## Dựa trên đặc tả ngay từ thiết kế
+
+Đây là trụ cột thứ nhất của phương pháp luận, và giống như "harness", nó đáng được định nghĩa một cách rõ ràng.
+
+**Phát triển dựa trên đặc tả là gì.** Trong công việc dựa trên lời nhắc thông thường, nguồn chân lý là một cuộc trò chuyện: bạn yêu cầu agent làm gì đó, nó chỉnh sửa tệp, và bản ghi duy nhất về ý định là một bản chép cuộc chat trôi đi và không bao giờ được rà soát lại. Phát triển dựa trên đặc tả (SDD) đảo ngược điều đó. Trước hết bạn viết ra *điều gì* phải đúng — mục tiêu, phạm vi, tiêu chí chấp nhận, các bước kiểm tra chứng minh nó đã xong — và đặc tả viết ra đó, chứ không phải cuộc trò chuyện, mới là nguồn chân lý. Agent sau đó thực thi *dựa trên* đặc tả thay vì tùy hứng từ một lời nhắc một dòng.
+
+**DWP thể hiện điều đó như thế nào.** Trong Deep Work Plan, kế hoạch *chính là* đặc tả. Một mục tiêu trở thành một kế hoạch rà soát được; kế hoạch phân rã thành các tác vụ nguyên tử; mỗi tác vụ mang tiêu chí chấp nhận rõ ràng và các cổng kiểm chứng; và một giao thức hoàn tất xác nhận công việc so với chúng. Kế hoạch → tác vụ → cổng → hoàn tất chính là SDD được làm cho cụ thể và thực thi được.
+
+**Vì sao điều này quan trọng.** Viết đặc tả trước mang lại ba lợi ích: nó **giảm trôi dạt**, vì agent được đo lường so với các tiêu chí được nêu thay vì một ký ức nhạt dần về yêu cầu; nó làm công việc **kiểm chứng được**, vì mỗi cổng hoặc đạt hoặc không đạt; và nó làm công việc **tiếp tục được**, vì đặc tả sống lâu hơn bất kỳ phiên hay agent đơn lẻ nào — một agent khác có thể tiếp nhận nó vào ngày mai và biết chính xác "xong" nghĩa là gì.
+
+**DWP khác biệt như thế nào.** Một phong trào dựa trên đặc tả rộng hơn đã hình thành quanh ý tưởng này, gồm GitHub Spec Kit, Amazon Kiro và Tessl. Các cách tiếp cận đó thường bị ràng buộc vào một công cụ hay nền tảng cụ thể. DWP cố ý khác biệt: nó độc lập với công cụ và thuần repo. Đặc tả sống trong repository dưới dạng markdown thuần, nên nó đi theo mã nguồn chứ không theo sản phẩm của một nhà cung cấp — và nó kết hợp trực tiếp với trụ cột thứ hai, bởi bản thân đặc tả là một phần của harness mà repository mang theo.
+
+## Repository trở thành harness
+
+Đây là trụ cột thứ hai của phương pháp luận, và nó xứng đáng có một định nghĩa rõ ràng — "harness" đã trở thành một thuật ngữ nặng nề, và phần lớn ngành dùng nó mà không nói rõ nó nghĩa là gì.
+
+**Một harness agent là gì.** Một mô hình ngôn ngữ lớn, tự thân nó, chỉ là một bộ dự đoán văn bản. Thứ biến nó thành một kỹ sư đáng tin cậy là tất cả những gì bao quanh nó: ngữ cảnh nó được trao, các công cụ nó có thể gọi, vòng điều khiển quyết định việc tiếp theo, các hàng rào bảo vệ bắt lỗi, và trạng thái bền vững cho phép nó dừng lại và tiếp tục. Khung giàn bao quanh đó chính là *harness*. Mô hình là động cơ; harness là khung gầm, hệ lái và phanh giúp động cơ an toàn để vận hành.
+
+**Kỹ thuật harness là gì.** Hầu hết các đội xây dựng khung giàn đó một cách ngầm định, bên trong một công cụ duy nhất — một IDE cụ thể, một sản phẩm agent, hay một framework đặt riêng — nên nó chỉ hoạt động ở đó và biến mất ngay khi bạn đổi công cụ. Kỹ thuật harness là kỷ luật thiết kế khung giàn đó một cách có chủ đích, như một thành phần hạng nhất. Deep Work Plan giữ một lập trường mạnh mẽ về nơi nó nên ở: **không phải trong một công cụ, mà trong chính repository.**
+
+**Vì sao repository là nơi đúng đắn.** Khi harness sống trong repo, nó đi theo mã nguồn, mọi agent mở repo đều kế thừa nó, và nó được quản lý phiên bản, rà soát và cải thiện như mọi đoạn mã khác. DWP cài mỗi phần của harness dưới dạng một thành phần cụ thể, bền vững:
+
+| Thành phần harness | Nó cung cấp gì | DWP đặt nó ở đâu trong repo của bạn |
+|---|---|---|
+| **Ngữ cảnh** | điều agent cần biết | `AGENTS.md`, `docs/` và các README cho từng mô-đun |
+| **Công cụ** | điều agent có thể làm | các skill, agent trong `.agents/` và các command `dwp-*` |
+| **Vòng điều khiển** | cách công việc tiến triển | Deep Work Plan: kế hoạch → tác vụ nguyên tử → cổng → hoàn tất |
+| **Hàng rào bảo vệ** | điều giữ cho nó đúng | tiêu chí chấp nhận rõ ràng và các cổng kiểm chứng |
+| **Trạng thái** | cách nó vượt qua gián đoạn | các kế hoạch, bản nháp và nhật ký tiến độ trong `.dwp/` được gitignore |
+
+<RepoAsHarness lang="vi" class="not-prose my-10" />
+
+Vì mỗi thành phần là một tệp trong repository chứ không phải một tính năng của một công cụ, harness có tính di động ngay từ cách dựng. Đó là tuyên bố một dòng mà phần còn lại của phương pháp luận đặt nền tảng lên: *bản thân repository trở thành harness*, nên mọi agent đều có thể điều khiển mọi repo — không cần framework đặt riêng cho từng công cụ.
+
+## Vì sao thực thi tự chủ có cấu trúc lại quan trọng
+
+Các agent lập trình AI hiện đại có năng lực nhưng thiếu định hướng. Hướng một agent vào một tác vụ không tầm thường và nó có xu hướng bắt đầu chỉnh sửa tệp ngay lập tức, đánh mất dấu vết những gì đã thay đổi, và tạo ra công việc khó rà soát và không thể tiếp tục.
+
+DWP áp đặt một cấu trúc nhẹ nhàng giải quyết trực tiếp từng thất bại:
+
+- **Tác vụ rà soát được** — công việc được phân rã thành các đơn vị tuần tự, mỗi đơn vị có một phạm vi rõ ràng và tiêu chí chấp nhận.
+- **Trạng thái được lưu giữ** — tiến độ được ghi ra để công việc vượt qua gián đoạn và có thể tiếp tục qua các phiên và các agent.
+- **Tài liệu chuẩn hóa** — con người và agent chia sẻ một mô hình tư duy chung qua một định dạng thống nhất.
+- **Tính di động của agent** — phương pháp luận hoạt động với mọi agent thông qua các bộ chuyển đổi mỏng, không phải các bản dựng lại.
+
+## Markdown từ trên xuống dưới
+
+DWP định nghĩa cấu trúc, không phải phần mềm. Không có runtime nào để cài, không có cây phụ thuộc, và không có sự khóa chặt. Kế hoạch, các tác vụ và nhật ký chạy đều là markdown thuần mà mọi agent đều đọc được, mọi người đều rà soát được, và mọi hệ thống kiểm soát phiên bản đều theo dõi gọn gàng được. Kết quả là một quá trình thực thi mà bạn có thể đọc, kiểm toán và tin tưởng.

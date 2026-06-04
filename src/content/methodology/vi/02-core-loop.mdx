@@ -1,0 +1,61 @@
+---
+title: Vòng lặp lõi
+description: "Quy trình create, execute, refine, resume, status và verify, thư mục đầu ra .dwp được gitignore, cấu trúc tác vụ chín phần, và cách kiểm chứng hoạt động."
+order: 2
+lang: vi
+summary: Cách các thao tác lõi của DWP đưa một kế hoạch từ mục tiêu tới hoàn tất đã kiểm chứng.
+icon: refresh
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+
+# Vòng lặp lõi
+
+DWP định nghĩa một tập hợp nhỏ các thao tác đưa một kế hoạch từ một mục tiêu tới công việc đã hoàn tất, rà soát được: **create → execute → refine → resume → status**, với **verify** là bước kiểm tra tuân thủ xác nhận kết quả. Cùng nhau, chúng tạo thành vòng lặp mà agent tuân theo suốt vòng đời của một kế hoạch. Các agent thực thi từng tác vụ một, kiểm chứng mỗi bước trước khi đi tiếp.
+
+Vòng lặp này là hình thức vận hành của phát triển dựa trên đặc tả. Kế hoạch là đặc tả mà agent thực thi dựa vào, mỗi tác vụ mang tiêu chí chấp nhận rõ ràng, và bước kiểm chứng là cổng biến một tuyên bố hoàn tất thành bằng chứng của nó. Vì kế hoạch và nhật ký tiến độ của nó sống trong repository, vòng lặp có thể tiếp tục qua các phiên và các agent.
+
+## Các thao tác
+
+<CoreLoop lang="vi" class="not-prose my-10" />
+
+- **create** — Sinh ra một kế hoạch mới từ một mục tiêu. Agent phân tích mục tiêu, phân rã nó thành các tác vụ tuần tự và viết các tệp kế hoạch. Nó nên đặt câu hỏi làm rõ trước khi viết khi mục tiêu còn mập mờ.
+- **execute** — Chạy kế hoạch từng tác vụ một. Agent cập nhật nhật ký tiến độ sau mỗi tác vụ và đánh dấu trạng thái hoàn tất của tác vụ. Nó không được bỏ qua tác vụ mà không ghi lại lý do.
+- **refine** — Sửa đổi một kế hoạch hiện có. Agent có thể thêm, bớt hoặc sắp xếp lại các tác vụ, nhưng phải giữ nguyên công việc đã hoàn tất và cập nhật bảng tác vụ.
+- **resume** — Tiếp tục một kế hoạch bị gián đoạn. Agent đọc nhật ký tiến độ và các tệp tác vụ để tái dựng trạng thái, rồi tiếp tục từ tác vụ chưa hoàn tất đầu tiên.
+- **status** — Báo cáo tiến độ mà không thực thi. Agent tóm tắt các tác vụ đã xong, đang làm và đang chờ, và không thay đổi gì.
+- **verify** — Kiểm tra tuân thủ mà không thay đổi gì. Agent báo cáo liệu repository có đạt tiêu chuẩn hay không và liệu một kế hoạch có chỉnh dạng hay không — mỗi tác vụ mang tiêu chí chấp nhận và một cổng kiểm chứng. Xem [tài liệu Tuân thủ của đặc tả](/spec).
+
+## Thư mục đầu ra `.dwp/`
+
+Tất cả thành phần DWP sống dưới một thư mục `.dwp/` được gitignore tại gốc repository. Giữ không gian làm việc ngoài hệ kiểm soát phiên bản nghĩa là trạng thái làm việc của một kế hoạch không bao giờ làm vẩn đục lịch sử dự án.
+
+```
+.dwp/
+├── plans/
+│   └── PLAN_<slug>/
+│       ├── README.md
+│       ├── PROGRESS.md
+│       └── <n>.task_<slug>.md
+└── config.yaml
+```
+
+## Cấu trúc tác vụ chín phần
+
+<TaskAnatomy lang="vi" class="not-prose my-10" />
+
+Mỗi tệp tác vụ chứa chín phần này, theo thứ tự. Cấu trúc bảo đảm rằng mỗi đơn vị công việc đều khép kín và rà soát được:
+
+1. **Goal** — một đoạn nêu rõ tác vụ đạt được điều gì.
+2. **Context** — bối cảnh, liên kết và lý do tác vụ này tồn tại.
+3. **Steps** — các hành động cụ thể, có thứ tự cần thực hiện.
+4. **Acceptance criteria** — một danh sách kiểm các điều kiện định nghĩa thế nào là xong.
+5. **Validation** — các lệnh hoặc test cần chạy để kiểm chứng công việc.
+6. **Files** — các đường dẫn dự kiến được tạo hoặc sửa đổi.
+7. **Dependencies** — các tác vụ khác hoặc điều kiện tiên quyết bên ngoài.
+8. **Risks** — điều gì có thể sai, và các biện pháp giảm thiểu.
+9. **Completion & Log** — một dấu trạng thái cùng các ghi chú theo trình tự thời gian.
+
+## Kiểm chứng, hoàn tất và tiếp tục
+
+Kiểm chứng là một phần của tác vụ, không phải điều nghĩ thêm sau: mỗi tác vụ nêu tên các lệnh hoặc test chứng minh nó đã xong, và agent chạy chúng trước khi đánh dấu hoàn tất. Việc hoàn tất được ghi lại bằng một dấu trạng thái rõ ràng (`[ ]` chưa bắt đầu, `[~]` đang làm, `[x]` đã xong, `[!]` bị chặn) trong phần Completion & Log. Việc tiếp tục dựa vào các dấu này và nhật ký tiến độ — một agent có thể tái dựng chính xác nơi kế hoạch dừng lại và tiếp tục từ tác vụ chưa hoàn tất đầu tiên mà không làm lại công việc đã xong.

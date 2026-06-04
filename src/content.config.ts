@@ -1,6 +1,10 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { LANGUAGE_CODES } from './lib/i18n';
+
+/** Zod enum of all target language codes, derived from the i18n registry. */
+const langEnum = z.enum(LANGUAGE_CODES as unknown as [string, ...string[]]);
 
 /**
  * Methodology — the human-facing chapters that explain the Deep Work Plan
@@ -12,7 +16,7 @@ const methodology = defineCollection({
     title: z.string(),
     description: z.string(),
     order: z.number(),
-    lang: z.enum(['en', 'es']),
+    lang: langEnum,
     summary: z.string().optional(),
     icon: z.string().optional(),
   }),
@@ -28,7 +32,7 @@ const spec = defineCollection({
     title: z.string(),
     description: z.string(),
     order: z.number(),
-    lang: z.enum(['en', 'es']),
+    lang: langEnum,
     section: z.string().optional(),
   }),
 });
@@ -44,7 +48,7 @@ const kit = defineCollection({
       title: z.string(),
       description: z.string(),
       kind: z.enum(['command', 'adapter', 'preset', 'example', 'addon']),
-      lang: z.enum(['en', 'es']),
+      lang: langEnum,
       order: z.number().optional(),
     })
     .loose(),

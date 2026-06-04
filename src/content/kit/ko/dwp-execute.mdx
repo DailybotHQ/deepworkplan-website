@@ -1,0 +1,39 @@
+---
+title: dwp-execute
+description: "기존 Deep Work Plan을 task 단위로 실행합니다. 에이전트가 전체 계획을 읽고, 각 task를 순서대로 실행하며, 진행 상황을 갱신하고, 완료를 정확하게 표시합니다."
+kind: command
+lang: ko
+order: 2
+usage: /dwp-execute [plan]
+aliases:
+  - dwp:execute
+---
+import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
+
+# dwp-execute
+
+기존 Deep Work Plan을 실행합니다.
+
+<CmdExecute lang="ko" class="not-prose my-8" />
+
+## 하는 일
+
+`dwp-execute`는 기존 계획을 task 단위로 실행합니다. 전체 계획을 읽고, 각 task를 순서대로 실행하며, `PROGRESS.md`를 갱신하고, 각 task의 완료 상태를 표시합니다.
+
+## 사용법
+
+```
+/dwp-execute [plan]
+```
+
+## 동작
+
+1. 시작하기 전에 전체 계획을 읽습니다.
+2. task를 순서대로 실행합니다.
+3. 각 task 후 `PROGRESS.md`를 갱신합니다.
+4. task 상태를 정확하게 표시합니다.
+5. 차단되었을 때는 멈추고 질문합니다.
+
+## 별칭
+
+- `dwp:execute`

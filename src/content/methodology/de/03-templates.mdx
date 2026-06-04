@@ -1,0 +1,44 @@
+---
+title: Plan- und Aufgabenvorlagen
+description: "Die Struktur von Plan- und Aufgabendateien, die zwei verpflichtenden Abschlussaufgaben, mit denen jeder Plan enden muss, und die README- und PROGRESS-Konventionen, die einen Plan lesbar halten."
+order: 3
+lang: de
+summary: Wie Pläne und Aufgaben auf der Festplatte strukturiert sind und die Konventionen, die sie lesbar halten.
+icon: document
+---
+import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
+
+# Plan- und Aufgabenvorlagen
+
+Ein Deep Work Plan ist ein Verzeichnis von Markdown-Dateien. Die Form dieses Verzeichnisses — und jeder Datei darin — ist das, was einen Plan sowohl für Menschen als auch für Agenten prüfbar macht.
+
+## Planstruktur
+
+<PlanTree lang="en" class="not-prose my-10" />
+
+Ein Plan ist ein Verzeichnis unter `.dwp/plans/` mit dem Namen `PLAN_<slug>/`. Es enthält:
+
+- `README.md` — die Planübersicht: Ziel, Quellmaterial, Aufgabentabelle und Status.
+- Eine Datei je Aufgabe, benannt `<n>.task_<slug>.md`.
+- `PROGRESS.md` — ein laufendes Protokoll der Ausführung.
+
+## Struktur der Aufgabendatei
+
+Jede Aufgabendatei trägt den Namen `<n>.task_<slug>.md` und folgt der neunteiligen Anatomie: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks und Completion & Log. Die Abschnitte erscheinen stets in dieser Reihenfolge, sodass jeder Leser weiß, wo er nachschauen muss. Jede Aufgabe verankert sich vor dem Handeln erneut am Ziel des Plans, was einen Agenten daran hindert, über einen langen, mehrstündigen Horizont abzudriften.
+
+## Die zwei verpflichtenden Abschlussaufgaben
+
+Jeder Plan muss mit zwei Standardaufgaben enden. Sie stellen sicher, dass Wissen erfasst wird und dass Stakeholder informiert sind:
+
+1. **Skills & Agents Discovery** — die wiederverwendbaren Skills und Agenten identifizieren, die während des Plans erstellt wurden, sodass die Arbeit über diese eine Anstrengung hinaus Wirkung entfaltet.
+2. **Executive Report** — eine prägnante Zusammenfassung der Ergebnisse, für Stakeholder verfasst, die unterscheidet, was geliefert wurde und was noch offen ist.
+
+## README- und PROGRESS-Konventionen
+
+Die Plan-`README.md` muss einen Titel (`# Deep Work Plan: <name>`), eine prosaische Zielformulierung, einen optionalen Abschnitt zum Quellmaterial, eine Aufgabentabelle (Nummer, Aufgabenname, Status-Checkbox) und eine Planstatus-Zeile in der Form `<n>/<total> tasks complete` enthalten.
+
+`PROGRESS.md` ist ein reines Anhänge-Ausführungsprotokoll. Jeder Eintrag hält einen ISO-8601-Zeitstempel, die Aufgabennummer und den Aufgabennamen, was getan wurde sowie etwaige Abweichungen oder Übersprung-Gründe fest. Weil es nur jemals wächst, ist es eine zuverlässige Historie dessen, wie der Plan sich tatsächlich entfaltet hat.
+
+## Überschriften und Querverweise
+
+Alle Überschriften verwenden Satzschreibweise (sentence case), und Dokumente vermeiden Marketing-Sprache und Ausrufezeichen. Diese Konventionen halten Pläne über Agenten hinweg und über die Zeit konsistent.

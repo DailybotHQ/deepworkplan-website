@@ -1,0 +1,39 @@
+---
+title: dwp-execute
+description: "Eksekusi Deep Work Plan yang sudah ada, tugas demi tugas. Agent membaca seluruh rencana, menjalankan tiap tugas berurutan, memperbarui progres, dan menandai penyelesaian secara akurat."
+kind: command
+lang: id
+order: 2
+usage: /dwp-execute [plan]
+aliases:
+  - dwp:execute
+---
+import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
+
+# dwp-execute
+
+Eksekusi Deep Work Plan yang sudah ada.
+
+<CmdExecute lang="en" class="not-prose my-8" />
+
+## Fungsinya
+
+`dwp-execute` menjalankan rencana yang sudah ada, tugas demi tugas. Ia membaca seluruh rencana, mengeksekusi tiap tugas secara berurutan, memperbarui `PROGRESS.md`, dan menandai status penyelesaian setiap tugas.
+
+## Penggunaan
+
+```
+/dwp-execute [plan]
+```
+
+## Perilaku
+
+1. Baca seluruh rencana sebelum memulai.
+2. Eksekusi tugas secara berurutan.
+3. Perbarui `PROGRESS.md` setelah tiap tugas.
+4. Tandai status tugas secara akurat.
+5. Berhenti dan bertanya saat terhambat.
+
+## Alias
+
+- `dwp:execute`

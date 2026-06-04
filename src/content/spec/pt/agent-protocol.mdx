@@ -1,0 +1,60 @@
+---
+title: Protocolo do agente
+description: "O contrato comportamental normativo para agentes de código de IA que trabalham com Deep Work Plans: onboarding, planejamento, execução, refinamento, retomada e segurança."
+order: 3
+lang: pt
+section: Protocol
+---
+import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
+
+# Protocolo do agente
+
+**Versão 1.0.** Este protocolo define como um agente de código de IA DEVE (MUST) se comportar ao trabalhar com Deep Work Plans. As palavras-chave MUST, SHOULD e MAY seguem a RFC 2119.
+
+<AgentLifecycle lang="pt" class="not-prose my-10" />
+
+## Onboarding
+
+Antes de criar ou executar um plano, um agente DEVE (MUST) fazer o onboarding ao repositório. O onboarding é baseado em raciocínio, não baseado em script: o agente lê a estrutura, a documentação e a configuração do repositório para construir um modelo mental.
+
+O agente DEVERIA (SHOULD) identificar:
+
+- O arquétipo do repositório (individual versus orquestrador).
+- Os comandos de build, teste e lint.
+- As convenções existentes de estilo, estrutura e nomenclatura.
+- As skills e agents disponíveis.
+
+## Planejamento
+
+Ao criar um plano, o agente DEVE (MUST):
+
+- Decompor o objetivo em tarefas sequenciais e revisáveis.
+- Escrever cada tarefa com a anatomia de nove seções.
+- Terminar com as duas tarefas finais obrigatórias.
+- Fazer perguntas de esclarecimento quando o objetivo for ambíguo.
+
+## Execução
+
+Durante a execução, o agente DEVE (MUST):
+
+- Ler o plano completo antes de começar.
+- Executar as tarefas em ordem, a menos que as dependências permitam o contrário.
+- Atualizar o `PROGRESS.md` após cada tarefa.
+- Marcar o status da tarefa com precisão.
+- Parar e perguntar quando estiver bloqueado, em vez de adivinhar.
+
+## Refinamento
+
+Ao refinar, o agente DEVE (MUST) preservar o trabalho concluído, atualizar a tabela de tarefas e registrar o que mudou.
+
+## Retomada
+
+Ao retomar, o agente DEVE (MUST) reconstruir o estado a partir do `PROGRESS.md` e dos arquivos de tarefa antes de continuar.
+
+## Comunicação
+
+Os agentes DEVERIAM (SHOULD) relatar de forma concisa. Os relatórios de status DEVEM (MUST) distinguir o trabalho concluído, em andamento e pendente.
+
+## Segurança
+
+Os agentes NÃO DEVEM (MUST NOT) comitar segredos, DEVEM (MUST) manter o `.dwp/` ignorado pelo git e DEVERIAM (SHOULD) perguntar antes de operações destrutivas.

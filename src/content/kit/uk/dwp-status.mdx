@@ -1,0 +1,39 @@
+---
+title: dwp-status
+description: "Звіт про стан Deep Work Plan без його виконання. Агент читає план і журнал прогресу, а потім підсумовує завершену, поточну й заплановану роботу."
+kind: command
+lang: uk
+order: 5
+usage: /dwp-status [plan]
+aliases:
+  - dwp:status
+---
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
+
+# dwp-status
+
+Звітує про стан Deep Work Plan без його виконання.
+
+<CmdStatus lang="uk" class="not-prose my-8" />
+
+## Що це робить
+
+`dwp-status` підсумовує прогрес плану, не вносячи змін. Він звітує про завершені, поточні й заплановані задачі.
+
+## Використання
+
+```
+/dwp-status [plan]
+```
+
+## Поведінка
+
+1. Прочитати план і `PROGRESS.md`.
+2. Підсумувати завершені задачі.
+3. Підсумувати поточні задачі.
+4. Підсумувати заплановані задачі.
+5. Звітувати, нічого не змінюючи.
+
+## Аліаси
+
+- `dwp:status`

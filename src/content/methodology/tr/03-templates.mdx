@@ -1,0 +1,44 @@
+---
+title: Plan ve görev şablonları
+description: "Plan ve görev dosyalarının yapısı, her planın bitmesi gereken iki zorunlu son görev ve bir planı okunabilir tutan README ile PROGRESS kuralları."
+order: 3
+lang: tr
+summary: Planların ve görevlerin diskte nasıl yapılandırıldığı ve onları okunabilir tutan kurallar.
+icon: document
+---
+import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
+
+# Plan ve görev şablonları
+
+Bir Deep Work Plan, Markdown dosyalarından oluşan bir dizindir. O dizinin — ve içindeki her dosyanın — biçimi, bir planı hem insanlar hem de ajanlar tarafından gözden geçirilebilir kılan şeydir.
+
+## Plan yapısı
+
+<PlanTree lang="tr" class="not-prose my-10" />
+
+Bir plan, `.dwp/plans/` altında `PLAN_<slug>/` olarak adlandırılmış bir dizindir. Şunları içerir:
+
+- `README.md` — plan genel görünümü: hedef, kaynak materyal, görev tablosu ve durum.
+- Görev başına bir dosya, `<n>.task_<slug>.md` olarak adlandırılır.
+- `PROGRESS.md` — yürütmenin çalışan bir günlüğü.
+
+## Görev dosyası yapısı
+
+Her görev dosyası `<n>.task_<slug>.md` olarak adlandırılır ve dokuz bölümlü anatomiyi izler: Hedef, Bağlam, Adımlar, Kabul kriterleri, Doğrulama, Dosyalar, Bağımlılıklar, Riskler ve Tamamlama ve Günlük. Bölümler her zaman bu sırayla görünür; böylece her okuyucu nereye bakacağını bilir. Her görev, harekete geçmeden önce planın hedefine yeniden bağlanır; bu da bir ajanın uzun, çok saatlik bir ufukta yönünü kaybetmesini önler.
+
+## İki zorunlu son görev
+
+Her plan iki standart görevle bitmelidir. Bunlar, bilginin yakalanmasını ve paydaşların bilgilendirilmesini sağlar:
+
+1. **Skills & Agents Discovery** — plan sırasında oluşturulan yeniden kullanılabilir skill’leri ve ajanları belirler; böylece iş, bu tek çabanın ötesinde birikir.
+2. **Executive Report** — paydaşlar için yazılmış, teslim edileni geriye kalandan ayıran özlü bir sonuç özeti.
+
+## README ve PROGRESS kuralları
+
+Plan `README.md` dosyası bir başlık (`# Deep Work Plan: <name>`), düzyazı bir hedef bildirimi, isteğe bağlı bir kaynak materyal bölümü, bir görev tablosu (numara, görev adı, durum onay kutusu) ve `<n>/<total> tasks complete` biçiminde bir plan-durum satırı içermelidir.
+
+`PROGRESS.md`, yalnızca ekleme yapılan bir yürütme günlüğüdür. Her giriş, bir ISO 8601 zaman damgasını, görev numarasını ve adını, ne yapıldığını ve varsa sapmaları veya atlama nedenlerini kaydeder. Yalnızca büyüdüğü için, planın gerçekte nasıl ilerlediğine dair güvenilir bir geçmiştir.
+
+## Başlıklar ve çapraz referanslar
+
+Tüm başlıklar cümle düzeninde yazılır ve belgeler pazarlama dilinden ve ünlem işaretlerinden kaçınır. Bu kurallar, planları ajanlar arasında ve zaman içinde tutarlı tutar.

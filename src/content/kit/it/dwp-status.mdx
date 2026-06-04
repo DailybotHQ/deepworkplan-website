@@ -1,0 +1,39 @@
+---
+title: dwp-status
+description: "Riferisce sullo stato di un Deep Work Plan senza eseguirlo. L’agente legge il piano e il log dei progressi, poi riassume il lavoro completato, in corso e in sospeso."
+kind: command
+lang: it
+order: 5
+usage: /dwp-status [plan]
+aliases:
+  - dwp:status
+---
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
+
+# dwp-status
+
+Riferisce sullo stato di un Deep Work Plan senza eseguirlo.
+
+<CmdStatus lang="it" class="not-prose my-8" />
+
+## Cosa fa
+
+`dwp-status` riassume i progressi del piano senza apportare modifiche. Riferisce sulle attività completate, in corso e in sospeso.
+
+## Uso
+
+```
+/dwp-status [plan]
+```
+
+## Comportamento
+
+1. Legge il piano e `PROGRESS.md`.
+2. Riassume le attività completate.
+3. Riassume le attività in corso.
+4. Riassume le attività in sospeso.
+5. Riferisce senza modificare nulla.
+
+## Alias
+
+- `dwp:status`

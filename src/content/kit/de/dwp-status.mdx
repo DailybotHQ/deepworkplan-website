@@ -1,0 +1,39 @@
+---
+title: dwp-status
+description: "Den Status eines Deep Work Plan berichten, ohne ihn auszuführen. Der Agent liest den Plan und das Fortschrittsprotokoll und fasst dann abgeschlossene, laufende und ausstehende Arbeit zusammen."
+kind: command
+lang: de
+order: 5
+usage: /dwp-status [plan]
+aliases:
+  - dwp:status
+---
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
+
+# dwp-status
+
+Den Status eines Deep Work Plan berichten, ohne auszuführen.
+
+<CmdStatus lang="en" class="not-prose my-8" />
+
+## Was es tut
+
+`dwp-status` fasst den Planfortschritt zusammen, ohne Änderungen vorzunehmen. Es berichtet abgeschlossene, laufende und ausstehende Aufgaben.
+
+## Verwendung
+
+```
+/dwp-status [plan]
+```
+
+## Verhalten
+
+1. Den Plan und `PROGRESS.md` lesen.
+2. Abgeschlossene Aufgaben zusammenfassen.
+3. Laufende Aufgaben zusammenfassen.
+4. Ausstehende Aufgaben zusammenfassen.
+5. Berichten, ohne etwas zu verändern.
+
+## Aliase
+
+- `dwp:status`

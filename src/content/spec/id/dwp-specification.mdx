@@ -1,0 +1,66 @@
+---
+title: DWP specification
+description: "Spesifikasi normatif Deep Work Plan: struktur rencana, anatomi tugas sembilan bagian, loop eksekusi lima operasi, ruang kerja keluaran, dan pemberian versi."
+order: 2
+lang: id
+section: Workflow
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
+
+# DWP specification
+
+**Versi 1.0. Status: Stabil.** Dokumen ini adalah spesifikasi normatif untuk metodologi Deep Work Plan (DWP). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
+
+## Definisi
+
+Sebuah Deep Work Plan adalah artefak terstruktur berbasis Markdown saja yang menggambarkan tugas teknik yang kompleks yang terurai menjadi unit-unit pekerjaan yang berurutan dan dapat ditinjau, dirancang untuk dibuat, dieksekusi, dan dipelihara oleh AI coding agent yang bekerja secara otonom.
+
+DWP bersifat spec-driven: rencana adalah spesifikasi, dan agent MUST mengeksekusi terhadap acceptance criteria dan validation gate-nya yang eksplisit alih-alih berimprovisasi. Spesifikasi — bukan transkrip obrolan — adalah sumber kebenaran yang tahan lama, sehingga pekerjaan dapat diverifikasi dan dapat dilanjutkan lintas sesi dan agent. Ia juga harness engineering yang dibuat portabel: konteks, control loop, pengaman, dan status yang dapat dilanjutkan yang membuat agent andal dipasang ke dalam repositori itu sendiri sebagai Markdown polos, sehingga agent konforman mana pun MAY mengemudikan repositori tanpa framework khusus alat.
+
+## Struktur rencana
+
+Sebuah rencana MUST berupa sebuah direktori di bawah `.dwp/plans/` bernama `PLAN_<slug>/`. Direktori itu MUST berisi:
+
+- `README.md` — ikhtisar rencana, tujuan, tabel tugas, dan status.
+- Satu berkas per tugas, bernama `<n>.task_<slug>.md`.
+- `PROGRESS.md` — log eksekusi yang berjalan.
+
+## Anatomi tugas
+
+<TaskAnatomy lang="en" class="not-prose my-10" />
+
+Setiap berkas tugas MUST berisi sembilan bagian ini, secara berurutan:
+
+1. **Goal** — pernyataan satu paragraf tentang apa yang dicapai tugas.
+2. **Context** — latar belakang, tautan, dan mengapa tugas ini ada.
+3. **Steps** — tindakan konkret yang berurutan untuk dilakukan.
+4. **Acceptance criteria** — daftar periksa kondisi yang mendefinisikan selesai.
+5. **Validation** — perintah atau test yang dijalankan untuk memverifikasi.
+6. **Files** — path yang diperkirakan akan dibuat atau diubah.
+7. **Dependencies** — tugas lain atau prasyarat eksternal.
+8. **Risks** — apa yang bisa salah, dan mitigasinya.
+9. **Completion & Log** — penanda status ditambah catatan kronologis.
+
+## Loop eksekusi
+
+<CoreLoop lang="en" class="not-prose my-10" />
+
+DWP mendefinisikan lima operasi:
+
+- **create** — Menghasilkan rencana baru dari sebuah tujuan.
+- **execute** — Mengeksekusi rencana tugas demi tugas.
+- **refine** — Memodifikasi rencana yang ada.
+- **resume** — Melanjutkan rencana yang terhenti.
+- **status** — Melaporkan status rencana tanpa mengeksekusi.
+
+## Ruang kerja keluaran
+
+<OutputWorkspace lang="en" class="not-prose my-10" />
+
+Semua artefak DWP MUST berada di bawah direktori `.dwp/` yang di-gitignore di akar repositori.
+
+## Pemberian versi
+
+Spesifikasi ini mengikuti semantic versioning.

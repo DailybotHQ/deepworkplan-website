@@ -5,7 +5,11 @@ import Kicker from '@/components/editorial/Kicker.astro';
 import Lead from '@/components/editorial/Lead.astro';
 import Rule from '@/components/editorial/Rule.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { getUrlPrefix, type Language } from '@/lib/i18n';
+import {
+  getUrlPrefix,
+  type Language,
+  stripEntryLangPrefix as slugOf,
+} from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -16,10 +20,6 @@ const { lang } = Astro.props;
 const t = getTranslations(lang);
 const k = t.kitPage;
 const prefix = getUrlPrefix(lang);
-
-function slugOf(id: string): string {
-  return id.replace(/^(en|es)\//, '');
-}
 
 const entries = (await getCollection('kit')).filter(
   (e) => e.data.lang === lang

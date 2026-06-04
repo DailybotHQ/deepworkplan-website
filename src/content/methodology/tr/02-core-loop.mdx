@@ -1,0 +1,61 @@
+---
+title: Çekirdek döngü
+description: "create, execute, refine, resume, status ve verify iş akışı, gitignore’lanmış .dwp çıktı dizini, dokuz bölümlü görev anatomisi ve doğrulamanın nasıl çalıştığı."
+order: 2
+lang: tr
+summary: Çekirdek DWP işlemlerinin bir planı hedeften doğrulanmış tamamlanmaya nasıl götürdüğü.
+icon: refresh
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+
+# Çekirdek döngü
+
+DWP, bir planı hedeften tamamlanmış, gözden geçirilebilir işe taşıyan küçük bir işlemler kümesi tanımlar: **create → execute → refine → resume → status**, sonucu doğrulayan uyumluluk denetimi olarak **verify** ile birlikte. Birlikte, bir ajanın bir planın ömrü boyunca izlediği döngüyü oluştururlar. Ajanlar her seferinde tek bir görev yürütür ve devam etmeden önce her adımı doğrular.
+
+Bu döngü, spec odaklı geliştirmenin işlevsel biçimidir. Plan, bir ajanın karşısında çalıştığı spesifikasyondur, her görev açık kabul kriterleri taşır ve doğrulama adımı, bir tamamlanma iddiasını onun kanıtına dönüştüren kapıdır. Plan ve ilerleme günlüğü depoda yaşadığı için döngü, oturumlar ve ajanlar arasında kaldığı yerden sürdürülebilir.
+
+## İşlemler
+
+<CoreLoop lang="tr" class="not-prose my-10" />
+
+- **create** — Bir hedeften yeni bir plan üretir. Ajan, hedefi analiz eder, ardışık görevlere ayırır ve plan dosyalarını yazar. Hedef belirsiz olduğunda yazmadan önce açıklayıcı sorular sormalıdır.
+- **execute** — Planı görev görev çalıştırır. Ajan, her görevden sonra ilerleme günlüğünü günceller ve görevin tamamlanma durumunu işaretler. Nedenini kaydetmeden görevleri atlamamalıdır.
+- **refine** — Mevcut bir planı değiştirir. Ajan görev ekleyebilir, kaldırabilir veya yeniden sıralayabilir, ancak tamamlanmış işi korumalı ve görev tablosunu güncellemelidir.
+- **resume** — Kesintiye uğramış bir planı sürdürür. Ajan, durumu yeniden oluşturmak için ilerleme günlüğünü ve görev dosyalarını okur, ardından ilk tamamlanmamış görevden devam eder.
+- **status** — Yürütmeden ilerlemeyi raporlar. Ajan, tamamlanan, devam eden ve bekleyen görevleri özetler ve hiçbir şeyi değiştirmez.
+- **verify** — Hiçbir şeyi değiştirmeden uyumluluğu denetler. Ajan, deponun standardı karşılayıp karşılamadığını ve bir planın iyi biçimlendirilmiş olup olmadığını — her görevin kabul kriterleri ve bir doğrulama kapısı taşıyıp taşımadığını — raporlar. [Spesifikasyonun Uyumluluk belgesine](/spec) bakın.
+
+## `.dwp/` çıktı dizini
+
+Tüm DWP yapıları, depo kökündeki gitignore’lanmış bir `.dwp/` dizini altında yaşar. Çalışma alanını sürüm denetiminin dışında tutmak, bir planın çalışma durumunun proje geçmişini hiçbir zaman kirletmemesi anlamına gelir.
+
+```
+.dwp/
+├── plans/
+│   └── PLAN_<slug>/
+│       ├── README.md
+│       ├── PROGRESS.md
+│       └── <n>.task_<slug>.md
+└── config.yaml
+```
+
+## Dokuz bölümlü görev anatomisi
+
+<TaskAnatomy lang="tr" class="not-prose my-10" />
+
+Her görev dosyası, sırasıyla bu dokuz bölümü içerir. Bu yapı, her iş biriminin kendi kendine yeten ve gözden geçirilebilir olmasını garanti eder:
+
+1. **Hedef** — görevin neyi başardığını belirten bir paragraf.
+2. **Bağlam** — arka plan, bağlantılar ve bu görevin neden var olduğu.
+3. **Adımlar** — gerçekleştirilecek sıralı, somut eylemler.
+4. **Kabul kriterleri** — “bitti”yi tanımlayan koşulların bir kontrol listesi.
+5. **Doğrulama** — işi doğrulamak için çalıştırılacak komutlar veya testler.
+6. **Dosyalar** — oluşturulması veya değiştirilmesi beklenen yollar.
+7. **Bağımlılıklar** — diğer görevler veya harici ön koşullar.
+8. **Riskler** — neyin ters gidebileceği ve azaltıcı önlemler.
+9. **Tamamlama ve Günlük** — bir durum işareti ile kronolojik notlar.
+
+## Doğrulama, tamamlama ve kaldığı yerden sürdürme
+
+Doğrulama, sonradan akla gelen bir şey değil, görevin bir parçasıdır: her görev, bittiğini kanıtlayan komutları veya testleri adlandırır ve ajan, tamamlandı olarak işaretlemeden önce bunları çalıştırır. Tamamlama, Tamamlama ve Günlük bölümünde açık bir durum işaretiyle (`[ ]` başlanmadı, `[~]` devam ediyor, `[x]` bitti, `[!]` engellendi) kaydedilir. Kaldığı yerden sürdürme bu işaretlere ve ilerleme günlüğüne dayanır — bir ajan, planın tam olarak nerede durduğunu yeniden oluşturabilir ve bitmiş işi yeniden yapmadan ilk tamamlanmamış görevden devam edebilir.

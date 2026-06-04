@@ -1,0 +1,44 @@
+---
+title: Plan and task templates
+description: "Struktur berkas rencana dan tugas, dua tugas akhir wajib yang harus mengakhiri setiap rencana, serta konvensi README dan PROGRESS yang menjaga rencana tetap mudah dibaca."
+order: 3
+lang: id
+summary: Bagaimana rencana dan tugas distrukturkan di disk, dan konvensi yang menjaganya tetap mudah dibaca.
+icon: document
+---
+import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
+
+# Plan and task templates
+
+Sebuah Deep Work Plan adalah sebuah direktori berkas Markdown. Bentuk direktori itu — dan setiap berkas di dalamnya — adalah yang membuat rencana dapat ditinjau baik oleh manusia maupun agent.
+
+## Struktur rencana
+
+<PlanTree lang="en" class="not-prose my-10" />
+
+Sebuah rencana adalah sebuah direktori di bawah `.dwp/plans/` bernama `PLAN_<slug>/`. Ia berisi:
+
+- `README.md` — ikhtisar rencana: tujuan, materi sumber, tabel tugas, dan status.
+- Satu berkas per tugas, bernama `<n>.task_<slug>.md`.
+- `PROGRESS.md` — log eksekusi yang berjalan.
+
+## Struktur berkas tugas
+
+Setiap berkas tugas bernama `<n>.task_<slug>.md` dan mengikuti anatomi sembilan bagian: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, dan Completion & Log. Bagian-bagian itu selalu muncul dalam urutan tersebut sehingga setiap pembaca tahu di mana harus mencari. Setiap tugas berlabuh kembali ke tujuan rencana sebelum ia bertindak, yang mencegah agent menyimpang sepanjang rentang panjang yang berjam-jam.
+
+## Dua tugas akhir wajib
+
+Setiap rencana harus diakhiri dengan dua tugas standar. Keduanya memastikan bahwa pengetahuan tertangkap dan bahwa pemangku kepentingan diberi tahu:
+
+1. **Skills & Agents Discovery** — mengidentifikasi skill dan agent yang dapat dipakai ulang yang dibuat selama rencana, sehingga pekerjaan berlipat melampaui upaya tunggal ini.
+2. **Executive Report** — ringkasan padat tentang hasil yang ditulis untuk pemangku kepentingan, membedakan apa yang sudah diserahkan dari apa yang tersisa.
+
+## Konvensi README dan PROGRESS
+
+`README.md` rencana harus berisi sebuah judul (`# Deep Work Plan: <name>`), pernyataan tujuan dalam prosa, bagian materi sumber yang opsional, tabel tugas (nomor, nama tugas, kotak centang status), dan baris status rencana dalam bentuk `<n>/<total> tasks complete`.
+
+`PROGRESS.md` adalah log eksekusi yang hanya bisa ditambahi (append-only). Setiap entri mencatat stempel waktu ISO 8601, nomor dan nama tugas, apa yang dilakukan, serta penyimpangan atau alasan pelewatan apa pun. Karena ia hanya pernah bertambah, ia adalah riwayat yang andal tentang bagaimana rencana sebenarnya terbentang.
+
+## Judul dan rujukan silang
+
+Semua judul menggunakan sentence case, dan dokumen menghindari bahasa pemasaran dan tanda seru. Konvensi ini menjaga rencana tetap konsisten lintas agent dan dari waktu ke waktu.

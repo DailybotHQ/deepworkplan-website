@@ -1,0 +1,38 @@
+---
+title: dwp-resume
+description: "進捗ログとタスクファイルから状態を再構築し、最初の未完了タスクから続行することで、中断された Deep Work Plan を再開する。"
+kind: command
+lang: ja
+order: 4
+usage: /dwp-resume [plan]
+aliases:
+  - dwp:resume
+---
+import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
+
+# dwp-resume
+
+中断された Deep Work Plan を再開します。
+
+<CmdResume lang="ja" class="not-prose my-8" />
+
+## 何をするか
+
+`dwp-resume` は中断された計画を続行します。`PROGRESS.md` とタスクファイルから状態を再構築し、最初の未完了タスクから続行します。
+
+## 使い方
+
+```
+/dwp-resume [plan]
+```
+
+## 振る舞い
+
+1. `PROGRESS.md` とタスクファイルを読む。
+2. 実行状態を再構築する。
+3. 最初の未完了タスクから続行する。
+4. 進行に応じて進捗を更新する。
+
+## エイリアス
+
+- `dwp:resume`

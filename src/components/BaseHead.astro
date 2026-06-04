@@ -1,14 +1,18 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import '../styles/global.css';
 import JsonLd from '@/components/JsonLd.astro';
 import { ANALYTICS, SITE_DESCRIPTION, SITE_TITLE } from '@/lib/constances';
 import {
   DEFAULT_LANGUAGE,
+  getActiveLanguages,
   getAlternateUrls,
+  getHreflang,
   getOGLocale,
-  getSupportedLanguages,
+  isDefaultLanguage,
   type Language,
 } from '@/lib/i18n';
 
@@ -39,12 +43,17 @@ const {
   ogImageWidth = 1200,
   ogImageHeight = 630,
 } = Astro.props;
-// Default OG image is language-specific (Spanish pages share the same
-// Broadsheet composition with translated copy); an explicit `image` prop
-// from a page always wins.
-const image =
-  imageProp ??
-  (lang === 'es' ? '/images/og-default-es.png' : '/images/og-default.png');
+// Default OG image is language-specific when a localized composition exists
+// (`/images/og-default-{lang}.png`); otherwise it falls back to the English
+// default. Presence is detected at build time so adding a localized image is
+// zero-config. An explicit `image` prop from a page always wins.
+function resolveDefaultOgImage(language: string): string {
+  if (isDefaultLanguage(language as Language)) return '/images/og-default.png';
+  const localized = `/images/og-default-${language}.png`;
+  const onDisk = join(process.cwd(), 'public', localized);
+  return existsSync(onDisk) ? localized : '/images/og-default.png';
+}
+const image = imageProp ?? resolveDefaultOgImage(lang);
 const absoluteImageUrl = new URL(image, Astro.site ?? Astro.url).href;
 const imageExtension = image.split('.').pop()?.toLowerCase();
 const imageMimeType =
@@ -65,9 +74,11 @@ const defaultHref =
   alternateUrls.find((a) => a.lang === DEFAULT_LANGUAGE)?.href ??
   canonicalURL.href;
 const currentLocale = getOGLocale(lang as Language);
-const alternateLocales = getSupportedLanguages()
+const alternateLocales = getActiveLanguages()
   .filter((l) => l !== lang)
   .map((l) => getOGLocale(l));
+// JSON-LD inLanguage reflects the languages actually published.
+const inLanguage = getActiveLanguages().map((l) => getHreflang(l));
 ---
 
 <!-- Global Metadata -->
@@ -177,7 +188,7 @@ const alternateLocales = getSupportedLanguages()
     "@type": "WebSite",
     name: SITE_TITLE,
     url: Astro.site?.href,
-    inLanguage: ["en", "es"],
+    inLanguage,
     description: SITE_DESCRIPTION,
   }}
 />

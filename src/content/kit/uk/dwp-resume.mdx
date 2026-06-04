@@ -1,0 +1,38 @@
+---
+title: dwp-resume
+description: "Продовження перерваного Deep Work Plan: відновлення стану з журналу прогресу й файлів задач, а потім продовження з першої незавершеної задачі."
+kind: command
+lang: uk
+order: 4
+usage: /dwp-resume [plan]
+aliases:
+  - dwp:resume
+---
+import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
+
+# dwp-resume
+
+Продовжує перерваний Deep Work Plan.
+
+<CmdResume lang="uk" class="not-prose my-8" />
+
+## Що це робить
+
+`dwp-resume` продовжує перерваний план. Він відновлює стан із `PROGRESS.md` і файлів задач, а потім продовжує з першої незавершеної задачі.
+
+## Використання
+
+```
+/dwp-resume [plan]
+```
+
+## Поведінка
+
+1. Прочитати `PROGRESS.md` і файли задач.
+2. Відновити стан виконання.
+3. Продовжити з першої незавершеної задачі.
+4. Оновлювати прогрес по ходу роботи.
+
+## Аліаси
+
+- `dwp:resume`

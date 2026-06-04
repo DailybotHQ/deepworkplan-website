@@ -1,0 +1,60 @@
+---
+title: 代理协议
+description: "面向使用 Deep Work Plan 的 AI 编码代理的规范性行为契约：接入、规划、执行、精炼、恢复与安全。"
+order: 3
+lang: zh
+section: Protocol
+---
+import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
+
+# 代理协议
+
+**版本 1.0。** 本协议界定了 AI 编码代理在使用 Deep Work Plan 时 MUST 如何行事。关键词 MUST、SHOULD 与 MAY 遵循 RFC 2119。
+
+<AgentLifecycle lang="en" class="not-prose my-10" />
+
+## 接入
+
+在创建或执行一份计划之前，代理 MUST 接入代码仓库。接入是基于推理的，而非基于脚本的：代理读取仓库的结构、文档与配置以构建一套心智模型。
+
+代理 SHOULD 识别：
+
+- 仓库的原型（单一对比编排）。
+- 构建、测试与 lint 命令。
+- 关于风格、结构与命名的既有约定。
+- 可用的技能与代理。
+
+## 规划
+
+在创建一份计划时，代理 MUST：
+
+- 把目标分解为一系列连续、可审阅的任务。
+- 以九段式结构撰写每一项任务。
+- 以两项强制收尾任务作结。
+- 当目标含糊时提出澄清性的问题。
+
+## 执行
+
+在执行过程中，代理 MUST：
+
+- 在开始之前阅读完整的计划。
+- 按顺序执行任务，除非依赖关系另有许可。
+- 在每项任务后更新 `PROGRESS.md`。
+- 准确标记任务状态。
+- 受阻时停下并询问，而非猜测。
+
+## 精炼
+
+在精炼时，代理 MUST 保全已完成的工作、更新任务表，并记录改动了什么。
+
+## 恢复
+
+在恢复时，代理 MUST 在继续之前，从 `PROGRESS.md` 与任务文件重建状态。
+
+## 沟通
+
+代理 SHOULD 简明地报告。状态报告 MUST 区分已完成、进行中与待办的工作。
+
+## 安全
+
+代理 MUST NOT 提交机密信息，MUST 让 `.dwp/` 保持被 gitignore，并 SHOULD 在执行破坏性操作之前先行询问。

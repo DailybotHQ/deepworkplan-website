@@ -1,0 +1,53 @@
+---
+title: Archetypy repozytoriów
+description: "Archetypy pojedynczego repozytorium i huba orkiestratora, heurystyka klasyfikacji repozytorium oraz to, czym różnią się między nimi onboarding i zakres planu."
+order: 5
+lang: pl
+summary: Dlaczego archetyp repozytorium decyduje o tym, jak agent przeprowadza onboarding i wyznacza zakres planów.
+icon: layers
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Archetypy repozytoriów
+
+DWP rozpoznaje dwa archetypy repozytoriów. Archetyp, który wywnioskuje agent, decyduje o tym, jak przeprowadza onboarding i jak wyznacza zakres planów, więc poprawne jego rozpoznanie jest pierwszą decyzją w każdym zaangażowaniu.
+
+## Pojedyncze repozytorium
+
+Samowystarczalna baza kodu — aplikacja, biblioteka lub usługa. Plany działają bezpośrednio na kodzie w repozytorium, a onboarding czyta własną strukturę i konwencje repozytorium.
+
+Cechy:
+
+- Pojedyncza, spójna baza kodu.
+- Plany modyfikują pliki w tym repozytorium.
+- Przestrzeń robocza `.dwp/` żyje w głównym katalogu repozytorium.
+
+## Hub orkiestratora
+
+Repozytorium koordynujące, które zarządza wieloma repozytoriami potomnymi. Plany mogą uruchamiać plany potomne w podrepozytoriach, a onboarding czyta rejestr zarządzanych repozytoriów huba, a nie pojedynczą bazę kodu.
+
+Cechy:
+
+- Koordynuje wiele podrepozytoriów.
+- Plany mogą delegować do planów potomnych.
+- Utrzymuje rejestr zarządzanych repozytoriów.
+- Przestrzeń robocza `.dwp/` w głównym katalogu huba śledzi stan międzyrepozytoryjny.
+
+## Heurystyka klasyfikacji
+
+<ArchetypesTree lang="pl" class="not-prose my-10" />
+
+Agent powinien sklasyfikować repozytorium jako hub orkiestratora, gdy znajdzie wiele zagnieżdżonych repozytoriów git lub submodułów, rejestr lub manifest zarządzanych repozytoriów albo konfigurację wskazującą na zewnętrzne repozytoria. Wobec braku tych sygnałów traktuje repozytorium jako pojedyncze repozytorium.
+
+## Czym różni się onboarding
+
+| Aspekt | Pojedyncze | Orkiestrator |
+|--------|------------|--------------|
+| Zakres | To repozytorium | Wiele repozytoriów |
+| Onboarding | Struktura repozytorium | Rejestr huba |
+| Cel planu | Pliki lokalne | Plany potomne |
+| Stan | Lokalny `.dwp/` | Międzyrepozytoryjny `.dwp/` |
+
+Praktyczny efekt jest taki, że agent pojedynczego repozytorium rozumuje o jednej bazie kodu od początku do końca, podczas gdy agent orkiestratora rozumuje o koordynacji — które repozytorium potomne odpowiada za którą pracę i jak stan międzyrepozytoryjny pozostaje spójny.
+
+Trafne rozpoznanie archetypu pozwala agentowi pracować autonomicznie godzinami bez nadzoru: wyznacza zakres planów, onboardingu i stanu do właściwej granicy, dzięki czemu agent działa na poprawnej powierzchni od pierwszego do ostatniego zadania.

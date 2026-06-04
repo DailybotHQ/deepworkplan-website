@@ -1,0 +1,40 @@
+---
+title: dwp-verify
+description: "リポジトリが DeepWorkPlan に適合（AI-first）し、その計画がよく形成されているかを、仕様に照らした客観的な合否の適合性レポートとともに検証する。"
+kind: command
+lang: ja
+order: 5.5
+usage: /dwp-verify [plan <name> | all]
+aliases:
+  - dwp:verify
+---
+import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
+
+# dwp-verify
+
+リポジトリと計画の適合性を客観的に確認します。読み取り専用です。
+
+<CmdVerify lang="ja" class="not-prose my-8" />
+
+## 何をするか
+
+`dwp-verify` は、リポジトリが AI-first（DeepWorkPlan に適合）か、そしてその計画がよく形成されているかを機械的に確認し、合否を報告します。何も変更しません。
+
+## 使い方
+
+```
+/dwp-verify            # verify the repository
+/dwp-verify plan auth  # also verify a specific plan
+/dwp-verify all        # repository + every plan
+```
+
+## 振る舞い
+
+1. リポジトリを確認する。実際に実行可能なコマンドを備えた `AGENTS.md`、`CLAUDE.md` の解決、`docs/` のカテゴリ、ディスクと一致する `.agents/` のカタログ、薄い `dwp-*` 委譲、gitignore された `.dwp/` と `tmp/`、解決可能なスキル。
+2. 計画を確認する（求められたとき)。すべてのタスクが受け入れ基準と検証ゲートを備え、進捗が永続化され、二つの必須最終タスクが存在し、タスクが目標へと改めて立ち返っているか。
+3. **CONFORMANT** または **NOT CONFORMANT** を、各失敗を列挙して報告する。
+4. 不足を Deep Work Plan として捕捉することを提案する。決して黙って修正しない。
+
+## エイリアス
+
+- `dwp:verify`

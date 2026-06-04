@@ -1,0 +1,60 @@
+---
+title: Ajan protokolü
+description: "Deep Work Plan’lerle çalışan yapay zeka kodlama ajanları için normatif davranış sözleşmesi: kuruluma alma, planlama, yürütme, iyileştirme, kaldığı yerden sürdürme ve güvenlik."
+order: 3
+lang: tr
+section: Protocol
+---
+import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
+
+# Ajan protokolü
+
+**Sürüm 1.0.** Bu protokol, bir yapay zeka kodlama ajanının Deep Work Plan’lerle çalışırken nasıl davranMASI GEREKTİĞİNİ tanımlar. MUST, SHOULD ve MAY anahtar kelimeleri RFC 2119’u izler.
+
+<AgentLifecycle lang="tr" class="not-prose my-10" />
+
+## Kuruluma alma
+
+Bir planı oluşturmadan veya yürütmeden önce, bir ajan depoya kuruluma alınMALIDIR. Kuruluma alma betiğe değil, akıl yürütmeye dayalıdır: ajan, bir zihinsel model oluşturmak için depo yapısını, dokümantasyonunu ve yapılandırmasını okur.
+
+Ajan şunları belirleMELİDİR:
+
+- Depo arketipi (bireysel ile orkestratör).
+- Derleme, test ve lint komutları.
+- Stil, yapı ve adlandırmaya ilişkin mevcut kurallar.
+- Mevcut skill’ler ve ajanlar.
+
+## Planlama
+
+Bir plan oluştururken, ajan ŞUNLARI YAPMALIDIR:
+
+- Hedefi ardışık, gözden geçirilebilir görevlere ayırmak.
+- Her görevi dokuz bölümlü anatomiyle yazmak.
+- İki zorunlu son görevle bitirmek.
+- Hedef belirsiz olduğunda açıklayıcı sorular sormak.
+
+## Yürütme
+
+Yürütme sırasında, ajan ŞUNLARI YAPMALIDIR:
+
+- Başlamadan önce planın tamamını okumak.
+- Bağımlılıklar aksine izin vermedikçe görevleri sırayla yürütmek.
+- Her görevden sonra `PROGRESS.md` dosyasını güncellemek.
+- Görev durumunu doğru biçimde işaretlemek.
+- Tahmin yürütmek yerine engellendiğinde durup sormak.
+
+## İyileştirme
+
+İyileştirirken, ajan tamamlanmış işi koruMALI, görev tablosunu güncelleMELİ ve neyin değiştiğini kaydetMELİDİR.
+
+## Kaldığı yerden sürdürme
+
+Kaldığı yerden sürdürürken, ajan devam etmeden önce durumu `PROGRESS.md` ve görev dosyalarından yeniden oluşturMALIDIR.
+
+## İletişim
+
+Ajanlar özlü biçimde raporlamALIDIR. Durum raporları, tamamlanan, devam eden ve bekleyen işi ayırT ETMELİDİR.
+
+## Güvenlik
+
+Ajanlar sırları işleMEMELİ, `.dwp/` dizinini gitignore’lanmış tutMALI ve yıkıcı işlemlerden önce sorMALIDIR.

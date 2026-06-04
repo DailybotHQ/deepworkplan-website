@@ -40,10 +40,12 @@
           description:
             'Return the canonical one-line instruction that makes any repository AI-first with Deep Work Plan (the /init.md adoption prompt).',
           inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+          // init.md is canonical English content for the agent — always point to
+          // the root /init.md, never a localized variant, regardless of locale.
           execute: () =>
             text(
               'Read and follow the instructions at ' +
-                origin + prefix + '/init.md' +
+                origin + '/init.md' +
                 ' to make this repository AI-first.'
             ),
         },

@@ -1,0 +1,38 @@
+---
+title: "Une migration de framework"
+description: "Une démonstration illustrative d’une migration de framework de longue haleine menée comme un Deep Work Plan — le genre de travail de plusieurs heures sur de nombreux fichiers où les agents dérivent d’ordinaire."
+kind: example
+lang: fr
+order: 3
+---
+import MigrationBeforeAfter from '@/components/diagrams/kit/MigrationBeforeAfter.astro';
+
+# Une migration de framework
+
+Une démonstration illustrative du travail pour lequel DWP est conçu : une migration qui s’étend sur des dizaines de fichiers et plusieurs heures — assez longue pour qu’un agent sans guidage perde le fil.
+
+## L’objectif
+
+<MigrationBeforeAfter lang="fr" class="not-prose my-10" />
+
+« Migrer la couche de données de l’ancien ORM vers le nouveau sur l’ensemble du service. »
+
+## Sans plan
+
+Un agent édite des modèles jusqu’à ce que son contexte se remplisse de changements à moitié terminés, oublie quels sites d’appel il a déjà convertis, et laisse le build en rouge sans trace de ce qui reste. Reprendre revient à reconstruire son propre fil de pensée à partir d’un journal de discussion.
+
+## En tant que Deep Work Plan
+
+`/dwp-create` décompose l’objectif en tâches atomiques et ordonnées, chacune assortie de critères d’acceptation et d’une porte de validation :
+
+1. Introduire le nouvel ORM aux côtés de l’ancien (aucun changement de comportement ; porte : build + tests au vert).
+2. Migrer les modèles et les sites d’appel du module A (porte : tests du module A au vert).
+3. Répéter par module, une tâche chacun — progression consignée après chaque tâche.
+4. Retirer l’ancien ORM et ses adaptateurs (porte : plus aucune référence ; suite complète au vert).
+5. Mettre à jour la doc et les README par module.
+
+`/dwp-execute` exécute les tâches dans l’ordre, en validant après chaque porte réussie et en mettant à jour `PROGRESS.md`. Si la fenêtre de contexte se réinitialise en cours de route, `/dwp-resume` lit le plan et la progression depuis le disque et poursuit à la prochaine tâche non cochée.
+
+## Résultat
+
+La migration atterrit sous forme d’une suite de commits petits, relisibles et validés individuellement — et survit aux interruptions, parce que le plan, et non la conversation, est la source de vérité.

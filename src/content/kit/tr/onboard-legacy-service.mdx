@@ -1,0 +1,31 @@
+---
+title: "Eski bir servisi onboarding etmek"
+description: "Bir ajanı belgelenmemiş eski bir depoya yönlendirip onu AI-first bırakmanın örnek anlatımı — gerekçeli, tahrip etmeyen ve doğrulanabilir."
+kind: example
+lang: tr
+order: 4
+---
+import OnboardFlow from '@/components/diagrams/kit/OnboardFlow.astro';
+
+# Eski bir servisi onboarding etmek
+
+Çoğu ekibin yaptığı ilk şeyin örnek bir anlatımı: var olan, yeterince belgelenmemiş bir depoyu alıp onu ajanla pilotlanabilir hâle getirmek — zaten çalışan şeyi bozmadan.
+
+<OnboardFlow lang="tr" class="not-prose my-10" />
+
+## Hedef
+
+"Bu beş yıllık servisi AI-first yap." Servisin halihazırda kısmi bir `README`’si, dağınık birkaç dokümanı ve hiç `AGENTS.md`’si yok.
+
+## Yürütme
+
+Geliştirici ajanına tek bir satır verir — *[`/init.md`](/init.md) dosyasını oku ve izle* — ve onboarding akışı şunları yapar:
+
+1. **Keşif.** Gerçek dili, paket yöneticisini (var olan lockfile’dan) ve asıl build, test ve lint komutlarını saptar — varsayımla değil, depoyu okuyarak.
+2. **Bir plan önerir ve sorar.** Artefaktlar zaten var olduğundan, tahrip edici değildir: neyi oluşturacağını ve neyi uzlaştıracağını listeler ve kısmi `README`’ye ya da dağınık dokümanlara dokunmadan önce onay bekler.
+3. **Harness’ı üretir.** Servisin gerçek Hızlı Komutlarını içeren gerekçeli bir `AGENTS.md`, var olan notları çoğaltmak yerine içine alan kategorize edilmiş bir `docs/` ağacı, modül başına README dosyaları, `.agents/` kiti ve gitignore’lu bir `.dwp/`.
+4. **Doğrular.** `/dwp-verify`, uyumluluk ölçütlerine karşı nesnel bir geçti/kaldı raporu döndürür.
+
+## Sonuç
+
+Eski servis, hiçbir şey tahrip edilmeden AI-first hâle gelir: var olan iş üzerine yazılmaz, birleştirilir ve sonuç iddia edilmek yerine denetlenebilir olur. Buradan itibaren ekip, gerçek işi `/dwp-create` ve `/dwp-execute` ile planlar ve yürütür.

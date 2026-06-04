@@ -1,0 +1,60 @@
+---
+title: Agent protocol
+description: "Kontrak perilaku normatif untuk AI coding agent yang bekerja dengan Deep Work Plan: onboarding, perencanaan, eksekusi, penyempurnaan, pelanjutan, dan keamanan."
+order: 3
+lang: id
+section: Protocol
+---
+import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
+
+# Agent protocol
+
+**Versi 1.0.** Protokol ini mendefinisikan bagaimana sebuah AI coding agent MUST berperilaku saat bekerja dengan Deep Work Plan. Kata kunci MUST, SHOULD, dan MAY mengikuti RFC 2119.
+
+<AgentLifecycle lang="en" class="not-prose my-10" />
+
+## Onboarding
+
+Sebelum membuat atau mengeksekusi sebuah rencana, sebuah agent MUST meng-onboard ke repositori. Onboarding bersifat berbasis penalaran, bukan berbasis skrip: agent membaca struktur, dokumentasi, dan konfigurasi repositori untuk membangun model mental.
+
+Agent SHOULD mengidentifikasi:
+
+- Arketipe repositori (individual versus orchestrator).
+- Perintah build, test, dan lint.
+- Konvensi yang ada untuk gaya, struktur, dan penamaan.
+- Skill dan agent yang tersedia.
+
+## Perencanaan
+
+Saat membuat sebuah rencana, agent MUST:
+
+- Menguraikan tujuan menjadi tugas-tugas berurutan yang dapat ditinjau.
+- Menulis setiap tugas dengan anatomi sembilan bagian.
+- Mengakhiri dengan dua tugas akhir wajib.
+- Mengajukan pertanyaan klarifikasi ketika tujuannya ambigu.
+
+## Eksekusi
+
+Selama eksekusi, agent MUST:
+
+- Membaca seluruh rencana sebelum memulai.
+- Mengeksekusi tugas secara berurutan kecuali dependensi mengizinkan sebaliknya.
+- Memperbarui `PROGRESS.md` setelah setiap tugas.
+- Menandai status tugas secara akurat.
+- Berhenti dan bertanya saat terhambat alih-alih menebak.
+
+## Penyempurnaan
+
+Saat menyempurnakan, agent MUST mempertahankan pekerjaan yang selesai, memperbarui tabel tugas, dan mencatat apa yang berubah.
+
+## Pelanjutan
+
+Saat melanjutkan, agent MUST merekonstruksi status dari `PROGRESS.md` dan berkas tugas sebelum melanjutkan.
+
+## Komunikasi
+
+Agent SHOULD melapor secara padat. Laporan status MUST membedakan pekerjaan yang selesai, sedang berjalan, dan tertunda.
+
+## Keamanan
+
+Agent MUST NOT meng-commit secret, MUST menjaga `.dwp/` tetap di-gitignore, dan SHOULD bertanya sebelum operasi yang destruktif.

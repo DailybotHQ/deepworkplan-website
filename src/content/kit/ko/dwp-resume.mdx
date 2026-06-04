@@ -1,0 +1,38 @@
+---
+title: dwp-resume
+description: "진행 로그와 task 파일로부터 상태를 재구성한 뒤 완료되지 않은 첫 task부터 계속하여, 중단된 Deep Work Plan을 재개합니다."
+kind: command
+lang: ko
+order: 4
+usage: /dwp-resume [plan]
+aliases:
+  - dwp:resume
+---
+import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
+
+# dwp-resume
+
+중단된 Deep Work Plan을 재개합니다.
+
+<CmdResume lang="ko" class="not-prose my-8" />
+
+## 하는 일
+
+`dwp-resume`는 중단된 계획을 이어 갑니다. `PROGRESS.md`와 task 파일로부터 상태를 재구성한 뒤, 완료되지 않은 첫 task부터 계속합니다.
+
+## 사용법
+
+```
+/dwp-resume [plan]
+```
+
+## 동작
+
+1. `PROGRESS.md`와 task 파일을 읽습니다.
+2. 실행 상태를 재구성합니다.
+3. 완료되지 않은 첫 task부터 계속합니다.
+4. 진행하면서 진행 상황을 갱신합니다.
+
+## 별칭
+
+- `dwp:resume`

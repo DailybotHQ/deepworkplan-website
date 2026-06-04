@@ -1,0 +1,53 @@
+---
+title: Skille i agenci
+description: "Różnica między skillami a agentami, onboarding repozytorium oparty na rozumowaniu oraz katalog .agents wraz z konwencją dowiązania .claude do .agents."
+order: 4
+lang: pl
+summary: Jak wielokrotnego użytku skille, wyspecjalizowani agenci i onboarding repo łączą się ze sobą.
+icon: users
+---
+import SkillsAgents from '@/components/diagrams/methodology/SkillsAgents.astro';
+
+# Skille i agenci
+
+DWP jest niezależny od agenta, ale zakłada dwa powracające elementy konstrukcyjne — skille i agentów — oraz celowy sposób zorientowania się w repozytorium, zanim rozpocznie się jakakolwiek praca.
+
+## Skille kontra agenci
+
+<SkillsAgents lang="pl" class="not-prose my-10" />
+
+Te dwa pojęcia łatwo pomylić, ale służą różnym celom:
+
+- **Skille** to wielokrotnego użytku procedury wywoływane po nazwie. Skill pakuje powtarzalny przepływ pracy — uruchamianie testów, naprawianie lintu, tworzenie komponentu — tak aby agenci i ludzie wywoływali go za każdym razem w ten sam sposób.
+- **Agenci** to wyspecjalizowani wykonawcy o określonej roli — reviewer, executor, architect. Każdy agent ma sprecyzowaną odpowiedzialność i działa w obrębie swojego zakresu.
+
+Przydatny skrót myślowy: skill to *jak* wykonać powracające zadanie; agent to *kto* odpowiada za pewną klasę pracy.
+
+## Żywy zestaw: repozytorium rozwija własne skille
+
+Onboarding zamienia repozytorium w harness agenta; nie zamraża go. Zestaw ma **rosnąć**, w miarę jak przepływy pracy repozytorium stają się jasne. DWP udostępnia sub-skill **author** — wywoływany przez `/skill-create` i `/agent-create` — który przeprowadza rozumowanie o istniejącym układzie `.agents/` i konwencjach repozytorium, a następnie pisze nowy skill, agenta lub cienki delegator polecenia, który do nich pasuje. Repozytorium tworzy własny zestaw, zamiast dziedziczyć ogólnikowy.
+
+Sub-skill author jest staranny co do dopasowania. Tworzy skill dla powtarzalnej procedury wykonywanej ręcznie, agenta dla powracającej roli o odrębnych potrzebach modelowych lub narzędziowych, a polecenie wyłącznie jako cienki punkt wejścia kierujący do skilla lub agenta. Pomija wszystko, co ogólnikowe i co nie odpowiada rzeczywistemu przepływowi pracy, oraz utrzymuje katalog `.agents/docs/` w synchronizacji z tym, co dodaje. Ten sam sub-skill stoi za obowiązkowym zadaniem Skills & Agents Discovery, które uzgadnia katalog z tym, co faktycznie jest na dysku — a `/dwp-verify` potwierdza to uzgodnienie obiektywnie, nie zaliczając, jeśli katalog i pliki się rozjeżdżają.
+
+## Dodatki utrzymaniowe
+
+Poza tworzeniem zestawu DWP dostarcza **dobrowolne dodatki utrzymaniowe** — nigdy niewymagane, by repozytorium było AI-first. Dodatek **dependency-upgrade** jest przykładem kanonicznym: rozumuje o *rzeczywistym* menedżerze pakietów repozytorium (npm, pnpm lub yarn z `ncu`; pip, poetry lub uv; Cargo; moduły Go; Bundler; Composer), zamiast go zakładać, a następnie aktualizuje w małych partiach, uruchamia rzeczywistą bramkę walidacyjną repozytorium po każdej partii, wycofuje każdą partię, która zawiedzie, i podsumowuje bez automatycznego zatwierdzania. Dodatki przyjmowane są jawnie podczas onboardingu; odrzucenie któregoś pozostawia repozytorium w pełni zgodne.
+
+## Onboarding repozytorium oparty na rozumowaniu
+
+Przed utworzeniem lub realizacją planu agent przeprowadza onboarding repozytorium. Onboarding jest **oparty na rozumowaniu, nie na skrypcie**: agent czyta strukturę, dokumentację i konfigurację repozytorium, by zbudować model myślowy, zamiast uruchamiać sztywny skrypt konfiguracyjny.
+
+Podczas onboardingu agent identyfikuje archetyp repozytorium (pojedyncze kontra orkiestrator), polecenia budowania, testów i lintowania, istniejące konwencje stylu, struktury i nazewnictwa oraz skille i agentów już dostępnych. To zrozumienie pozwala agentowi planować i realizować w sposób pasujący do repozytorium, zamiast z nim walczyć.
+
+## Katalog `.agents/` i dowiązanie `.claude → .agents`
+
+DWP gromadzi wszystko, co definiuje zachowanie agenta — skille, polecenia, definicje agentów, dokumentację wewnętrzną i ustawienia — w jednym kanonicznym katalogu `.agents/`. Nazwa sygnalizuje, że zawartość jest współdzielona między agentami, a nie związana z jednym narzędziem.
+
+Dla zachowania wstecznej zgodności z narzędziami, które historycznie czytały z `.claude/`, ta ścieżka jest dowiązaniem symbolicznym do `.agents/`:
+
+```bash
+ls -la .claude
+# .claude -> .agents
+```
+
+Każda ścieżka `.claude/...` rozwija się przezroczyście do swojego odpowiednika `.agents/...`, więc starsze narzędzia działają nadal, podczas gdy nowa zawartość odwołuje się do kanonicznej lokalizacji `.agents/`. Skille i agenci edytowani są poprzez rzeczywiste pliki w `.agents/`, nigdy poprzez dowiązanie.

@@ -1,0 +1,44 @@
+---
+title: Template di piani e attività
+description: "La struttura dei file di piano e di attività, le due attività finali obbligatorie con cui ogni piano deve concludersi e le convenzioni di README e PROGRESS che mantengono un piano leggibile."
+order: 3
+lang: it
+summary: Come piani e attività sono strutturati su disco e le convenzioni che li mantengono leggibili.
+icon: document
+---
+import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
+
+# Template di piani e attività
+
+Un Deep Work Plan è una directory di file Markdown. La forma di quella directory — e di ciascun file al suo interno — è ciò che rende un piano revisionabile sia dalle persone sia dagli agenti.
+
+## Struttura del piano
+
+<PlanTree lang="it" class="not-prose my-10" />
+
+Un piano è una directory sotto `.dwp/plans/` denominata `PLAN_<slug>/`. Contiene:
+
+- `README.md` — la panoramica del piano: obiettivo, materiale di origine, tabella delle attività e stato.
+- Un file per attività, denominato `<n>.task_<slug>.md`.
+- `PROGRESS.md` — un log di esecuzione continuo.
+
+## Struttura del file di attività
+
+Ogni file di attività è denominato `<n>.task_<slug>.md` e segue l’anatomia in nove sezioni: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks e Completion & Log. Le sezioni compaiono sempre in quell’ordine, così ogni lettore sa dove guardare. Ogni attività si riancora all’obiettivo del piano prima di agire, il che impedisce a un agente di andare alla deriva su un orizzonte lungo, di più ore.
+
+## Le due attività finali obbligatorie
+
+Ogni piano deve concludersi con due attività standard. Garantiscono che la conoscenza sia catturata e che gli stakeholder siano informati:
+
+1. **Skills & Agents Discovery** — identificare le skill e gli agenti riutilizzabili creati durante il piano, così il lavoro si capitalizza oltre questo singolo sforzo.
+2. **Executive Report** — un riassunto conciso degli esiti scritto per gli stakeholder, che distingue ciò che è stato consegnato da ciò che resta.
+
+## Convenzioni di README e PROGRESS
+
+Il `README.md` del piano deve contenere un titolo (`# Deep Work Plan: <name>`), una dichiarazione discorsiva dell’obiettivo, una sezione facoltativa sul materiale di origine, una tabella delle attività (numero, nome dell’attività, casella di stato) e una riga di stato del piano nella forma `<n>/<total> tasks complete`.
+
+`PROGRESS.md` è un log di esecuzione a sola aggiunta. Ogni voce registra un timestamp ISO 8601, il numero e il nome dell’attività, cosa è stato fatto e qualsiasi deviazione o motivo di salto. Poiché non fa che crescere, è una cronologia affidabile di come il piano si è effettivamente svolto.
+
+## Intestazioni e riferimenti incrociati
+
+Tutte le intestazioni usano lo stile a frase (sentence case) e i documenti evitano il linguaggio di marketing e i punti esclamativi. Queste convenzioni mantengono i piani coerenti tra gli agenti e nel tempo.

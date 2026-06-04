@@ -1,0 +1,36 @@
+---
+title: Przed i po
+description: "Przykład „przed i po” pokazujący, jak Deep Work Plan zmienia zachowanie agenta przy zadaniu wieloetapowym, zamieniając improwizację w wykonanie poddające się przeglądowi."
+kind: example
+lang: pl
+order: 1
+---
+import UnguidedVsDwp from '@/components/diagrams/kit/UnguidedVsDwp.astro';
+
+# Przed i po
+
+Konkretne porównanie zachowania agenta bez DWP i z DWP.
+
+<UnguidedVsDwp lang="pl" class="not-prose my-10" />
+
+## Przed DWP
+
+Wobec polecenia „dodaj uwierzytelnianie do aplikacji" agent:
+
+- Natychmiast zaczyna edytować pliki.
+- Traci kontrolę nad tym, co zmienił.
+- Tworzy niespójny, trudny do przejrzenia rezultat.
+- Nie potrafi wznowić pracy po przerwaniu.
+
+## Po DWP
+
+Wobec tego samego celu agent sterowany przez DWP:
+
+- Tworzy plan: schemat, endpointy, middleware, testy, dokumentacja.
+- Wykonuje pracę zadanie po zadaniu, aktualizując postęp.
+- Tworzy zmiany przyrostowe, poddające się przeglądowi.
+- Czysto wznawia pracę po przerwaniu.
+
+## Rezultat
+
+Ten sam model tworzy bardziej niezawodną, łatwiejszą do przejrzenia pracę, gdy jest prowadzony przez plan.

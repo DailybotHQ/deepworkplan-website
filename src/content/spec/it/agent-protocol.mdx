@@ -1,0 +1,60 @@
+---
+title: Protocollo degli agenti
+description: "Il contratto comportamentale normativo per gli agenti di coding AI che lavorano con i Deep Work Plan: onboarding, pianificazione, esecuzione, raffinamento, ripresa e sicurezza."
+order: 3
+lang: it
+section: Protocol
+---
+import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
+
+# Protocollo degli agenti
+
+**Versione 1.0.** Questo protocollo definisce come un agente di coding AI DEVE comportarsi quando lavora con i Deep Work Plan. Le parole chiave MUST, SHOULD e MAY seguono la RFC 2119.
+
+<AgentLifecycle lang="it" class="not-prose my-10" />
+
+## Onboarding
+
+Prima di creare o eseguire un piano, un agente DEVE fare l’onboarding al repository. L’onboarding è basato sul ragionamento, non su script: l’agente legge la struttura, la documentazione e la configurazione del repository per costruire un modello mentale.
+
+L’agente DOVREBBE identificare:
+
+- L’archetipo del repository (individuale contro orchestratore).
+- I comandi di build, test e lint.
+- Le convenzioni esistenti per stile, struttura e denominazione.
+- Le skill e gli agenti disponibili.
+
+## Pianificazione
+
+Quando crea un piano, l’agente DEVE:
+
+- Scomporre l’obiettivo in attività sequenziali e revisionabili.
+- Scrivere ogni attività con l’anatomia in nove sezioni.
+- Concludere con le due attività finali obbligatorie.
+- Porre domande di chiarimento quando l’obiettivo è ambiguo.
+
+## Esecuzione
+
+Durante l’esecuzione, l’agente DEVE:
+
+- Leggere l’intero piano prima di iniziare.
+- Eseguire le attività in ordine, a meno che le dipendenze non consentano altrimenti.
+- Aggiornare `PROGRESS.md` dopo ogni attività.
+- Segnare lo stato dell’attività in modo accurato.
+- Fermarsi e chiedere quando è bloccato anziché tirare a indovinare.
+
+## Raffinamento
+
+Quando raffina, l’agente DEVE preservare il lavoro completato, aggiornare la tabella delle attività e registrare cosa è cambiato.
+
+## Ripresa
+
+Quando riprende, l’agente DEVE ricostruire lo stato da `PROGRESS.md` e dai file delle attività prima di proseguire.
+
+## Comunicazione
+
+Gli agenti DOVREBBERO riferire in modo conciso. I report di stato DEVONO distinguere il lavoro completato, in corso e in sospeso.
+
+## Sicurezza
+
+Gli agenti NON DEVONO eseguire il commit di segreti, DEVONO mantenere `.dwp/` escluso da git e DOVREBBERO chiedere prima di operazioni distruttive.

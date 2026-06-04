@@ -4,7 +4,11 @@ import Lead from '@/components/editorial/Lead.astro';
 import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { getUrlPrefix, type Language } from '@/lib/i18n';
+import {
+  CANONICAL_INIT_MD_PATH,
+  getUrlPrefix,
+  type Language,
+} from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -16,7 +20,9 @@ const t = getTranslations(lang);
 const p = t.initPage;
 const prefix = getUrlPrefix(lang);
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
-const mdHref = `${prefix}/init.md`;
+// The bootstrap endpoint is always the root, English /init.md (canonical
+// first-class agent content) — never a localized variant.
+const mdHref = CANONICAL_INIT_MD_PATH;
 
 const howToSchema = {
   '@context': 'https://schema.org',

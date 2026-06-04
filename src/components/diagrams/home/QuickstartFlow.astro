@@ -34,6 +34,146 @@ const i18n = {
       'Planificar y ejecutar',
     ],
   },
+  pt: {
+    ariaLabel:
+      'Quatro passos de adoção: abrir /init.md, instalar a skill, adaptar seu repositório e então planejar e executar.',
+    steps: [
+      'Abrir /init.md',
+      'Instalar a skill',
+      'Adaptar seu repo',
+      'Planejar e executar',
+    ],
+  },
+  zh: {
+    ariaLabel:
+      '四个采用步骤：打开 /init.md、安装该技能、适配你的仓库，然后规划并执行。',
+    steps: ['打开 /init.md', '安装该技能', '适配你的仓库', '规划并执行'],
+  },
+  ja: {
+    ariaLabel:
+      '導入の4つのステップです。/init.md を開き、スキルをインストールし、リポジトリを適合させ、計画して実行します。',
+    steps: [
+      '/init.md を開く',
+      'スキルをインストール',
+      'リポジトリを適合',
+      '計画して実行',
+    ],
+  },
+  de: {
+    ariaLabel:
+      'Vier Adaptionsschritte: /init.md öffnen, das Skill installieren, Ihr Repository anpassen und anschließend planen und ausführen.',
+    steps: [
+      '/init.md öffnen',
+      'Skill installieren',
+      'Repository anpassen',
+      'Planen und ausführen',
+    ],
+  },
+  fr: {
+    ariaLabel:
+      'Quatre étapes d’adoption : ouvrir /init.md, installer la compétence, adapter votre dépôt, puis planifier et exécuter.',
+    steps: [
+      'Ouvrir /init.md',
+      'Installer la compétence',
+      'Adapter votre dépôt',
+      'Planifier et exécuter',
+    ],
+  },
+  ko: {
+    ariaLabel:
+      '도입을 위한 네 가지 단계입니다. /init.md를 열고, 스킬을 설치하고, 저장소를 맞추고, 계획해서 실행해요.',
+    steps: [
+      '/init.md 열기',
+      '스킬 설치하기',
+      '저장소 맞추기',
+      '계획하고 실행하기',
+    ],
+  },
+  ru: {
+    ariaLabel:
+      'Четыре шага внедрения: откройте /init.md, установите навык, адаптируйте репозиторий, затем спланируйте и выполните.',
+    steps: [
+      'Открыть /init.md',
+      'Установить навык',
+      'Адаптировать репозиторий',
+      'Спланировать и выполнить',
+    ],
+  },
+  it: {
+    ariaLabel:
+      'Quattro passi di adozione: aprire /init.md, installare la skill, adattare il Suo repository e poi pianificare ed eseguire.',
+    steps: [
+      'Aprire /init.md',
+      'Installare la skill',
+      'Adattare il repo',
+      'Pianificare ed eseguire',
+    ],
+  },
+  tr: {
+    ariaLabel:
+      'Dört benimseme adımı: /init.md dosyasını açın, beceriyi kurun, deponuzu uyarlayın, ardından planlayın ve yürütün.',
+    steps: [
+      '/init.md dosyasını aç',
+      'Beceriyi kur',
+      'Deponu uyarla',
+      'Planla ve yürüt',
+    ],
+  },
+  id: {
+    ariaLabel:
+      'Empat langkah adopsi: buka /init.md, pasang skill, sesuaikan repositori Anda, lalu rencanakan dan eksekusi.',
+    steps: [
+      'Buka /init.md',
+      'Pasang skill',
+      'Sesuaikan repo',
+      'Rencanakan dan eksekusi',
+    ],
+  },
+  vi: {
+    ariaLabel:
+      'Bốn bước áp dụng: mở /init.md, cài đặt skill, điều chỉnh kho mã của bạn, sau đó lập kế hoạch và thực thi.',
+    steps: [
+      'Mở /init.md',
+      'Cài đặt skill',
+      'Điều chỉnh kho mã',
+      'Lập kế hoạch và thực thi',
+    ],
+  },
+  hi: {
+    ariaLabel:
+      'अपनाने के चार चरण: /init.md खोलें, स्किल इंस्टॉल करें, अपने रिपॉज़िटरी को अनुकूलित करें, फिर योजना बनाकर निष्पादित करें।',
+    steps: [
+      '/init.md खोलें',
+      'स्किल इंस्टॉल करें',
+      'अपना रिपो अनुकूलित करें',
+      'योजना बनाएँ और निष्पादित करें',
+    ],
+  },
+  pl: {
+    ariaLabel:
+      'Cztery kroki wdrożenia: otwórz /init.md, zainstaluj umiejętność, dostosuj swoje repozytorium, a następnie zaplanuj i wykonaj.',
+    steps: [
+      'Otwórz /init.md',
+      'Zainstaluj umiejętność',
+      'Dostosuj repozytorium',
+      'Zaplanuj i wykonaj',
+    ],
+  },
+  uk: {
+    ariaLabel:
+      'Чотири кроки впровадження: відкрийте /init.md, установіть навичку, адаптуйте свій репозиторій, далі сплануйте та виконайте.',
+    steps: [
+      'Відкрити /init.md',
+      'Установити навичку',
+      'Адаптувати репозиторій',
+      'Спланувати та виконати',
+    ],
+  },
+  th: {
+    ariaLabel:
+      'สี่ขั้นตอนการนำไปใช้: เปิด /init.md ติดตั้งสกิล ปรับให้เข้ากับรีโพของคุณ จากนั้นวางแผนและดำเนินการ',
+    steps: ['เปิด /init.md', 'ติดตั้งสกิล', 'ปรับรีโพของคุณ', 'วางแผนและดำเนินการ'],
+  },
 } as const;
 const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
 ---

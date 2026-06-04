@@ -1,0 +1,39 @@
+---
+title: dwp-refine
+description: "Sempurnakan Deep Work Plan yang sudah ada dengan menambah, menghapus, atau menata ulang tugas sambil menjaga pekerjaan yang selesai dan memperbarui tabel tugas sesuai perubahan."
+kind: command
+lang: id
+order: 3
+usage: /dwp-refine [plan]
+aliases:
+  - dwp:refine
+---
+import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
+
+# dwp-refine
+
+Sempurnakan Deep Work Plan yang sudah ada.
+
+<CmdRefine lang="en" class="not-prose my-8" />
+
+## Fungsinya
+
+`dwp-refine` memodifikasi rencana yang sudah ada. Ia dapat menambah, menghapus, atau menata ulang tugas sambil menjaga pekerjaan yang sudah selesai dan memperbarui tabel tugas.
+
+## Penggunaan
+
+```
+/dwp-refine [plan]
+```
+
+## Perilaku
+
+1. Baca rencana yang sudah ada.
+2. Tambah, hapus, atau tata ulang tugas.
+3. Jaga pekerjaan yang sudah selesai.
+4. Perbarui tabel tugas.
+5. Catat apa yang berubah dan alasannya.
+
+## Alias
+
+- `dwp:refine`
