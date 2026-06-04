@@ -1,6 +1,6 @@
 ---
 name: translate-sync
-description: Synchronize content between English and Spanish versions. Use proactively when content needs multilingual synchronization.
+description: Synchronize content from English across all active languages. Use proactively when content needs multilingual synchronization.
 # === Universal (Claude Code + Cursor + Codex) ===
 disable-model-invocation: false
 # === Claude Code specific ===
@@ -17,7 +17,7 @@ max-loc: 500
 
 ## Objective
 
-Synchronize content between English (en) and Spanish (es) versions of pages, methodology/spec/kit docs, and translation strings. Ensures multilingual parity across the entire site.
+Synchronize content from English (en) across all active languages — pages, methodology/spec/kit docs, and translation strings. Ensures multilingual parity across the entire site. (The site is N-language ready; to add a brand-new locale use the `add-language` skill.)
 
 ## Non-Goals
 
