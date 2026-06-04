@@ -61,6 +61,47 @@ function toggleMenu() {
   trackEvent(EVENTS.MOBILE_MENU_TOGGLE, { action: open ? 'open' : 'close' });
 }
 
+// Theme toggle (hurricane lamp). Replaces the floating bottom-right toggle.
+// Hover shows a *preview* of what clicking will do (lit on hover in light;
+// off on hover in dark). After a click while still hovering, the visual
+// freezes on the NEW idle state and only re-enables preview when the cursor
+// leaves and re-enters — otherwise the lamp would feel like it's lighting,
+// then snapping off, the moment you confirm the toggle.
+let isDark = false;
+let themeHovered = false;
+let justToggled = false;
+onMount(() => {
+  isDark = document.documentElement.classList.contains('dark');
+});
+function toggleTheme() {
+  const html = document.documentElement;
+  isDark = html.classList.toggle('dark');
+  justToggled = true;
+  const newTheme = isDark ? 'dark' : 'light';
+  localStorage.setItem('theme', newTheme);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', isDark ? '#14140f' : '#f7f4ec');
+  trackEvent(EVENTS.THEME_TOGGLE, { theme: newTheme });
+}
+function onLampEnter() {
+  themeHovered = true;
+}
+function onLampLeave() {
+  themeHovered = false;
+  // Reset so the NEXT fresh hover engages the preview again.
+  justToggled = false;
+}
+// Preview only when hovering AND we haven't just toggled while still inside.
+$: showPreview = themeHovered && !justToggled;
+$: lampSrc = showPreview
+  ? isDark
+    ? '/images/ui/lamp-off.png'
+    : '/images/ui/lamp-on.png'
+  : isDark
+    ? '/images/ui/lamp-on.png'
+    : '/images/ui/lamp-off.png';
+$: lampLabel = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+
 function openDropdown(which: string) {
   languageOpen = which === 'language';
 }
@@ -74,6 +115,7 @@ function closeAllDropdowns() {
 
 <header class="bg-paper text-ink dark:bg-main dark:text-white sticky top-0 z-50 border-b border-line transition-colors duration-300">
   <nav class="main-container flex items-center justify-between">
+    <div class="flex items-center gap-2 md:gap-3">
     <!-- Masthead lockup: B&W mark + serif wordmark -->
     <a
       href={prefix || '/'}
@@ -111,6 +153,30 @@ function closeAllDropdowns() {
         </span>
       </span>
     </a>
+      <!-- Theme toggle: hurricane lamp inline with the masthead. Lights when
+           the site goes dark, dims when it goes back to light. Replaces the
+           old floating bottom-right toggle. -->
+      <button
+        type="button"
+        class="theme-toggle-lamp inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 -ml-1 rounded cursor-pointer transition focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+        aria-label={lampLabel}
+        title={lampLabel}
+        on:click={toggleTheme}
+        on:mouseenter={onLampEnter}
+        on:mouseleave={onLampLeave}
+        on:focus={onLampEnter}
+        on:blur={onLampLeave}
+      >
+        <img
+          src={lampSrc}
+          alt=""
+          width="64"
+          height="64"
+          class="h-10 w-auto md:h-12"
+          loading="eager"
+        />
+      </button>
+    </div>
     <!-- Desktop menu -->
     <div class="hidden md:flex items-center gap-8">
       <div class="flex gap-6">
@@ -198,6 +264,23 @@ function closeAllDropdowns() {
   .masthead-strapline {
     font-size: 0.6rem;
     letter-spacing: 0.22em;
+  }
+  /* The lamp is etched in dark ink (transparent PNG). On the dark-mode ink
+   * background the body would visually disappear; a subtle paper-tinted
+   * drop-shadow gives it just enough silhouette to read without altering
+   * the warm flame inside the globe. Light-mode renders the lamp unmodified
+   * (dark ink on warm paper has plenty of contrast). */
+  .theme-toggle-lamp:hover {
+    opacity: 0.92;
+  }
+  :global(.dark) .theme-toggle-lamp img {
+    filter: drop-shadow(0 0 0.5px var(--color-ink))
+      drop-shadow(0 0 1px var(--color-ink));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle-lamp {
+      transition: none;
+    }
   }
   /* Style the language-dropdown scrollbar to blend with the editorial paper
    * palette instead of the browser's default white/grey, which clashed against
