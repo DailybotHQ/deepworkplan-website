@@ -84,6 +84,17 @@
 
 ---
 
+## Standalone pages — `src/components/pages/` → prompts/[05-pages.md](./prompts/05-pages.md)
+
+| ID | Surface | Type | Pri | Aspect/size | Light/dark | Asset path | Status |
+| :-- | :-- | :-: | :-: | :-- | :-- | :-- | :-- |
+| PG-01 | `NotFoundPage.astro` → right column (404 / sailed off the chart) | 🖼 | M | 1:1 · 720×720 (square) | pair | `pages/not-found-offmap.webp` | done |
+
+> New `pages` asset area for standalone routes outside home/methodology/spec/kit
+> (extends STYLE_GUIDE §6). PG-01 is wordless, so one light/dark pair serves EN+ES.
+
+---
+
 ## Coverage summary (updated in Task 6)
 
 | Area | Slots | Flagships | Done | Skip |

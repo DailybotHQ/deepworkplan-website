@@ -16,36 +16,61 @@ const n = t.notFoundPage;
 
 <MainLayout lang={lang} title={n.title} description={n.description}>
   <section class="main-container flex min-h-[60vh] items-center py-16 md:py-24">
-    <div class="max-w-2xl">
-      <Kicker>{n.heading}</Kicker>
-      <p
-        class="font-display mt-4 text-7xl font-bold sm:text-8xl"
-        style="color: var(--color-secondary);"
-      >
-        404
-      </p>
-      <h1
-        class="font-display mt-4 text-3xl font-bold sm:text-4xl"
-        style="color: var(--color-ink);"
-      >
-        {n.heading}
-      </h1>
-      <p class="lead mt-4">{n.message}</p>
-      <div class="mt-10 flex flex-col gap-4 sm:flex-row">
-        <a
-          href={`${prefix}/`}
-          class="inline-flex items-center justify-center rounded-sm px-6 py-3 text-base font-semibold transition hover:opacity-90"
-          style="background-color: var(--color-ink); color: var(--color-paper);"
+    <div
+      class="w-full lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,480px)] lg:items-center lg:gap-10"
+    >
+      <div class="max-w-2xl">
+        <Kicker>{n.heading}</Kicker>
+        <p
+          class="font-display mt-4 text-7xl font-bold sm:text-8xl"
+          style="color: var(--color-secondary);"
         >
-          {n.backHome}
-        </a>
-        <a
-          href={`${prefix}/methodology`}
-          class="inline-flex items-center justify-center rounded-sm border px-6 py-3 text-base font-semibold transition hover:opacity-80"
-          style="border-color: var(--color-line); color: var(--color-ink);"
+          404
+        </p>
+        <h1
+          class="font-display mt-4 text-3xl font-bold sm:text-4xl"
+          style="color: var(--color-ink);"
         >
-          {n.exploreMethodology}
-        </a>
+          {n.heading}
+        </h1>
+        <p class="lead mt-4">{n.message}</p>
+        <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+          <a
+            href={`${prefix}/`}
+            class="inline-flex items-center justify-center rounded-sm px-6 py-3 text-base font-semibold transition hover:opacity-90"
+            style="background-color: var(--color-ink); color: var(--color-paper);"
+          >
+            {n.backHome}
+          </a>
+          <a
+            href={`${prefix}/methodology`}
+            class="inline-flex items-center justify-center rounded-sm border px-6 py-3 text-base font-semibold transition hover:opacity-80"
+            style="border-color: var(--color-line); color: var(--color-ink);"
+          >
+            {n.exploreMethodology}
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-12 hidden md:block lg:mt-0">
+        <img
+          src="/images/visuals/pages/not-found-offmap.webp"
+          alt=""
+          width="720"
+          height="720"
+          loading="lazy"
+          decoding="async"
+          class="mx-auto h-auto w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[420px] dark:hidden"
+        />
+        <img
+          src="/images/visuals/pages/not-found-offmap-dark.webp"
+          alt=""
+          width="720"
+          height="720"
+          loading="lazy"
+          decoding="async"
+          class="mx-auto hidden h-auto w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[420px] dark:block"
+        />
       </div>
     </div>
   </section>
