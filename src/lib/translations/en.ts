@@ -37,7 +37,7 @@ export const en: SiteTranslations = {
   // Deep Work Plan homepage
   home: {
     meta: {
-      title: 'Deep Work Plan — turn any repository into an AI-first codebase',
+      title: 'Deep Work Plan — structured execution for AI coding agents',
       description:
         'Context matters more than models. Deep Work Plan turns any repository into a structured environment where any coding agent finishes long-horizon work.',
     },
