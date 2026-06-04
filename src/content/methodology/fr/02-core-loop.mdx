@@ -1,0 +1,61 @@
+---
+title: La boucle centrale
+description: "Le workflow create, execute, refine, resume, status et verify, le répertoire de sortie .dwp ignoré par git, l’anatomie d’une tâche en neuf sections, et comment fonctionne la validation."
+order: 2
+lang: fr
+summary: Comment les opérations centrales du DWP mènent un plan de l’objectif à un achèvement vérifié.
+icon: refresh
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+
+# La boucle centrale
+
+DWP définit un petit ensemble d’opérations qui font passer un plan d’un objectif à un travail achevé et relisible : **create → execute → refine → resume → status**, avec **verify** comme vérification de conformité qui confirme le résultat. Ensemble, elles forment la boucle qu’un agent suit tout au long de la vie d’un plan. Les agents exécutent une tâche à la fois, en validant chaque étape avant de poursuivre.
+
+Cette boucle est la forme opérationnelle du développement piloté par la spécification. Le plan est la spécification face à laquelle un agent s’exécute, chaque tâche porte des critères d’acceptation explicites, et l’étape de validation est la porte qui transforme une affirmation d’achèvement en preuve de celui-ci. Comme le plan et son journal de progression résident dans le dépôt, la boucle est reprenable d’une session et d’un agent à l’autre.
+
+## Les opérations
+
+<CoreLoop lang="fr" class="not-prose my-10" />
+
+- **create** — Génère un nouveau plan à partir d’un objectif. L’agent analyse l’objectif, le décompose en tâches séquentielles et écrit les fichiers du plan. Il doit poser des questions de clarification avant d’écrire lorsque l’objectif est ambigu.
+- **execute** — Exécute le plan tâche par tâche. L’agent met à jour le journal de progression après chaque tâche et marque le statut d’achèvement de la tâche. Il ne doit pas sauter de tâches sans en consigner la raison.
+- **refine** — Modifie un plan existant. L’agent peut ajouter, retirer ou réordonner des tâches, mais il doit préserver le travail achevé et mettre à jour le tableau des tâches.
+- **resume** — Poursuit un plan interrompu. L’agent lit le journal de progression et les fichiers de tâche pour reconstruire l’état, puis reprend à partir de la première tâche inachevée.
+- **status** — Rend compte de la progression sans exécuter. L’agent résume les tâches achevées, en cours et en attente et ne change rien.
+- **verify** — Vérifie la conformité sans rien modifier. L’agent indique si le dépôt respecte le standard et si un plan est bien formé — chaque tâche portant des critères d’acceptation et une porte de validation. Voir le [document de conformité de la spécification](/spec).
+
+## Le répertoire de sortie `.dwp/`
+
+Tous les artefacts DWP résident sous un répertoire `.dwp/` ignoré par git, à la racine du dépôt. Garder l’espace de travail hors de la gestion de versions signifie que l’état de travail d’un plan ne pollue jamais l’historique du projet.
+
+```
+.dwp/
+├── plans/
+│   └── PLAN_<slug>/
+│       ├── README.md
+│       ├── PROGRESS.md
+│       └── <n>.task_<slug>.md
+└── config.yaml
+```
+
+## L’anatomie d’une tâche en neuf sections
+
+<TaskAnatomy lang="fr" class="not-prose my-10" />
+
+Chaque fichier de tâche contient ces neuf sections, dans l’ordre. La structure garantit que chaque unité de travail est autonome et relisible :
+
+1. **Goal** — un paragraphe énonçant ce que la tâche accomplit.
+2. **Context** — le contexte, les liens et la raison d’être de cette tâche.
+3. **Steps** — des actions ordonnées et concrètes à réaliser.
+4. **Acceptance criteria** — une liste de contrôle des conditions qui définissent « fait ».
+5. **Validation** — les commandes ou tests à exécuter pour vérifier le travail.
+6. **Files** — les chemins censés être créés ou modifiés.
+7. **Dependencies** — les autres tâches ou prérequis externes.
+8. **Risks** — ce qui pourrait mal tourner, et les mesures d’atténuation.
+9. **Completion & Log** — un marqueur de statut accompagné de notes chronologiques.
+
+## Validation, achèvement et reprise
+
+La validation fait partie de la tâche, ce n’est pas un ajout après coup : chaque tâche nomme les commandes ou tests qui prouvent qu’elle est faite, et l’agent les exécute avant de marquer l’achèvement. L’achèvement est consigné avec un marqueur de statut explicite (`[ ]` non commencé, `[~]` en cours, `[x]` fait, `[!]` bloqué) dans la section Completion & Log. La reprise s’appuie sur ces marqueurs et sur le journal de progression — un agent peut reconstruire exactement où le plan s’est arrêté et poursuivre à partir de la première tâche inachevée sans refaire le travail terminé.

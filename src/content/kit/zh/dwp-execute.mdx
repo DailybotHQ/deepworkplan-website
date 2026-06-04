@@ -1,0 +1,39 @@
+---
+title: dwp-execute
+description: "逐任务执行一份现有的 Deep Work Plan。代理阅读完整的计划、按顺序运行每项任务、更新进展，并准确标记完成情况。"
+kind: command
+lang: zh
+order: 2
+usage: /dwp-execute [plan]
+aliases:
+  - dwp:execute
+---
+import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
+
+# dwp-execute
+
+执行一份现有的 Deep Work Plan。
+
+<CmdExecute lang="en" class="not-prose my-8" />
+
+## 它做了什么
+
+`dwp-execute` 逐任务运行一份现有的计划。它会阅读完整的计划、按顺序执行每项任务、更新 `PROGRESS.md`，并标记每项任务的完成状态。
+
+## 用法
+
+```
+/dwp-execute [plan]
+```
+
+## 行为
+
+1. 在开始之前阅读完整的计划。
+2. 按顺序执行任务。
+3. 在每项任务后更新 `PROGRESS.md`。
+4. 准确标记任务状态。
+5. 受阻时停下并询问。
+
+## 别名
+
+- `dwp:execute`

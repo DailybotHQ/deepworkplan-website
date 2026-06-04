@@ -1,0 +1,36 @@
+---
+title: Prima e dopo
+description: "Un esempio prima-e-dopo che mostra come un Deep Work Plan cambia il comportamento di un agente su un’attività in più passi, trasformando l’improvvisazione in esecuzione revisionabile."
+kind: example
+lang: it
+order: 1
+---
+import UnguidedVsDwp from '@/components/diagrams/kit/UnguidedVsDwp.astro';
+
+# Prima e dopo
+
+Un confronto concreto del comportamento di un agente senza e con DWP.
+
+<UnguidedVsDwp lang="it" class="not-prose my-10" />
+
+## Prima di DWP
+
+Dato «aggiungi l’autenticazione all’app», un agente:
+
+- Inizia subito a modificare i file.
+- Perde traccia di ciò che ha cambiato.
+- Produce output incoerente e difficile da revisionare.
+- Non può riprendere se interrotto.
+
+## Dopo DWP
+
+Dato lo stesso obiettivo, un agente guidato da DWP:
+
+- Crea un piano: schema, endpoint, middleware, test, docs.
+- Esegue attività per attività, aggiornando i progressi.
+- Produce modifiche revisionabili e incrementali.
+- Riprende in modo pulito dopo un’interruzione.
+
+## Risultato
+
+Lo stesso modello produce lavoro più affidabile e revisionabile quando è guidato da un piano.

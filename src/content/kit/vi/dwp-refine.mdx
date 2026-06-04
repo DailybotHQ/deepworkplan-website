@@ -1,0 +1,39 @@
+---
+title: dwp-refine
+description: "Tinh chỉnh một Deep Work Plan sẵn có bằng cách thêm, bớt hoặc sắp xếp lại tác vụ trong khi giữ nguyên công việc đã hoàn thành và cập nhật bảng tác vụ cho khớp."
+kind: command
+lang: vi
+order: 3
+usage: /dwp-refine [plan]
+aliases:
+  - dwp:refine
+---
+import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
+
+# dwp-refine
+
+Tinh chỉnh một Deep Work Plan sẵn có.
+
+<CmdRefine lang="vi" class="not-prose my-8" />
+
+## Tác dụng
+
+`dwp-refine` chỉnh sửa một kế hoạch sẵn có. Nó có thể thêm, bớt hoặc sắp xếp lại tác vụ trong khi giữ nguyên công việc đã hoàn thành và cập nhật bảng tác vụ.
+
+## Cách dùng
+
+```
+/dwp-refine [plan]
+```
+
+## Hành vi
+
+1. Đọc kế hoạch sẵn có.
+2. Thêm, bớt hoặc sắp xếp lại tác vụ.
+3. Giữ nguyên công việc đã hoàn thành.
+4. Cập nhật bảng tác vụ.
+5. Ghi lại những gì đã thay đổi và lý do.
+
+## Bí danh
+
+- `dwp:refine`

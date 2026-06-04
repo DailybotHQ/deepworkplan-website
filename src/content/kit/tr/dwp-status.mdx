@@ -1,0 +1,39 @@
+---
+title: dwp-status
+description: "Bir Deep Work Plan’i yürütmeden durumunu raporlar. Ajan planı ve ilerleme günlüğünü okur, ardından tamamlanan, süren ve bekleyen işleri özetler."
+kind: command
+lang: tr
+order: 5
+usage: /dwp-status [plan]
+aliases:
+  - dwp:status
+---
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
+
+# dwp-status
+
+Bir Deep Work Plan durumunu yürütmeden raporlayın.
+
+<CmdStatus lang="tr" class="not-prose my-8" />
+
+## Ne yapar
+
+`dwp-status`, değişiklik yapmadan plan ilerlemesini özetler. Tamamlanan, süren ve bekleyen görevleri raporlar.
+
+## Kullanım
+
+```
+/dwp-status [plan]
+```
+
+## Davranış
+
+1. Planı ve `PROGRESS.md` dosyasını okuyun.
+2. Tamamlanan görevleri özetleyin.
+3. Süren görevleri özetleyin.
+4. Bekleyen görevleri özetleyin.
+5. Hiçbir şeyi değiştirmeden raporlayın.
+
+## Takma adlar
+
+- `dwp:status`

@@ -1,0 +1,38 @@
+---
+title: "Eine Framework-Migration"
+description: "Eine veranschaulichende Anleitung einer langfristigen Framework-Migration, ausgeführt als Deep Work Plan — die Art mehrstündiger Arbeit über viele Dateien, bei der Agenten üblicherweise abdriften."
+kind: example
+lang: de
+order: 3
+---
+import MigrationBeforeAfter from '@/components/diagrams/kit/MigrationBeforeAfter.astro';
+
+# Eine Framework-Migration
+
+Eine veranschaulichende Anleitung der Arbeit, für die DWP gebaut ist: eine Migration, die sich über Dutzende Dateien und mehrere Stunden erstreckt — lang genug, dass ein ungeführter Agent den Faden verliert.
+
+## Das Ziel
+
+<MigrationBeforeAfter lang="en" class="not-prose my-10" />
+
+„Migriere die Datenschicht über den gesamten Service hinweg vom alten ORM zum neuen.“
+
+## Ohne Plan
+
+Ein Agent bearbeitet Models, bis sich sein Kontext mit halbfertigen Änderungen füllt, vergisst, welche Aufrufstellen er bereits konvertiert hat, und lässt den Build rot zurück, ohne eine Aufzeichnung dessen, was übrig bleibt. Wiederaufnehmen heißt, den eigenen Gedankengang aus einem Chat-Protokoll zu rekonstruieren.
+
+## Als Deep Work Plan
+
+`/dwp-create` zerlegt das Ziel in atomare, geordnete Aufgaben, jede mit Akzeptanzkriterien und einem Validierungs-Gate:
+
+1. Das neue ORM neben dem alten einführen (keine Verhaltensänderung; Gate: Build + Tests grün).
+2. Die Models und Aufrufstellen von Modul A migrieren (Gate: Tests von Modul A grün).
+3. Pro Modul wiederholen, je eine Aufgabe — Fortschritt nach jeder Aufgabe festgehalten.
+4. Das alte ORM und seine Shims entfernen (Gate: keine Verweise mehr; vollständige Suite grün).
+5. Die Dokumentation und die READMEs je Modul aktualisieren.
+
+`/dwp-execute` führt die Aufgaben der Reihe nach aus, committet nach jedem bestandenen Gate und aktualisiert `PROGRESS.md`. Setzt das Kontextfenster auf halbem Weg zurück, liest `/dwp-resume` den Plan und den Fortschritt von der Festplatte und setzt bei der nächsten nicht abgehakten Aufgabe fort.
+
+## Ergebnis
+
+Die Migration landet als Folge kleiner, prüfbarer, einzeln validierter Commits — und übersteht Unterbrechungen, weil der Plan, nicht das Gespräch, die Quelle der Wahrheit ist.

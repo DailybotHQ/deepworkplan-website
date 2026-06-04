@@ -1,0 +1,38 @@
+---
+title: dwp-resume
+description: "ทำงานต่อ Deep Work Plan ที่ถูกขัดจังหวะ ด้วยการสร้างสถานะขึ้นใหม่จาก progress log และไฟล์ task แล้วดำเนินต่อจาก task แรกที่ยังไม่เสร็จ"
+kind: command
+lang: th
+order: 4
+usage: /dwp-resume [plan]
+aliases:
+  - dwp:resume
+---
+import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
+
+# dwp-resume
+
+ทำงานต่อ Deep Work Plan ที่ถูกขัดจังหวะ
+
+<CmdResume lang="en" class="not-prose my-8" />
+
+## สิ่งที่มันทำ
+
+`dwp-resume` ดำเนินแผนที่ถูกขัดจังหวะต่อ มันสร้างสถานะขึ้นใหม่จาก `PROGRESS.md` และไฟล์ task แล้วดำเนินต่อจาก task แรกที่ยังไม่เสร็จ
+
+## วิธีใช้
+
+```
+/dwp-resume [plan]
+```
+
+## พฤติกรรม
+
+1. อ่าน `PROGRESS.md` และไฟล์ task
+2. สร้างสถานะการดำเนินงานขึ้นใหม่
+3. ดำเนินต่อจาก task แรกที่ยังไม่เสร็จ
+4. อัปเดตความคืบหน้าไปตลอดทาง
+
+## ชื่อแทน
+
+- `dwp:resume`

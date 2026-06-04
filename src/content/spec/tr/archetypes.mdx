@@ -1,0 +1,54 @@
+---
+title: Arketipler
+description: "DWP depo arketiplerinin normatif açıklaması: bireysel depo ve orkestratör merkezi, sınıflandırma sezgisel kuralı ve kuruluma almanın nasıl farklılaştığı."
+order: 4
+lang: tr
+section: Archetypes
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Arketipler
+
+**Sürüm 1.0.** DWP iki depo arketipi tanır. Arketip, bir ajanın nasıl kuruluma alındığını ve planların nasıl kapsamlandırıldığını belirler.
+
+## Bireysel depo
+
+Kendi kendine yeten bir kod tabanı — bir uygulama, bir kütüphane veya bir servis. Planlar doğrudan kod üzerinde çalışır.
+
+Özellikler:
+
+- Tek, tutarlı kod tabanı.
+- Planlar bu depodaki dosyaları değiştirir.
+- `.dwp/` çalışma alanı depo kökünde.
+
+## Orkestratör merkezi
+
+Birden çok alt depoyu yöneten bir koordinasyon deposu. Planlar alt depolarda alt planlar başlatabilir.
+
+Özellikler:
+
+- Birden çok alt depoyu koordine eder.
+- Planlar alt planlara devredebilir.
+- Yönetilen depoların bir kaydını tutar.
+- Merkez kökündeki `.dwp/` çalışma alanı depolar arası durumu izler.
+
+## Sınıflandırma sezgisel kuralı
+
+<ArchetypesTree lang="tr" class="not-prose my-10" />
+
+Bir ajan, şunları bulursa bir depoyu orkestratör merkezi olarak sınıflandırMALIDIR:
+
+- Birden çok iç içe git deposu veya alt modül.
+- Yönetilen depoların bir kaydı veya manifesti.
+- Harici depolara işaret eden yapılandırma.
+
+Aksi takdirde, onu bireysel bir depo olarak ele alın.
+
+## Kuruluma alma farkları
+
+| Yön | Bireysel | Orkestratör |
+|--------|------------|--------------|
+| Kapsam | Bu depo | Birden çok depo |
+| Kuruluma alma | Depo yapısı | Merkez kaydı |
+| Plan hedefi | Yerel dosyalar | Alt planlar |
+| Durum | Yerel `.dwp/` | Depolar arası `.dwp/` |

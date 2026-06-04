@@ -1,0 +1,53 @@
+---
+title: Skill’ler ve ajanlar
+description: "Skill’ler ile ajanlar arasındaki fark, akıl yürütmeye dayalı depo kuruluma alması ve .agents dizini ile .claude → .agents sembolik bağ kuralı."
+order: 4
+lang: tr
+summary: Yeniden kullanılabilir skill’lerin, uzman ajanların ve depo kuruluma almasının nasıl bir araya geldiği.
+icon: users
+---
+import SkillsAgents from '@/components/diagrams/methodology/SkillsAgents.astro';
+
+# Skill’ler ve ajanlar
+
+DWP ajandan bağımsızdır, ancak iki yinelenen yapı taşı — skill’ler ve ajanlar — ile herhangi bir iş başlamadan önce bir depoda yön bulmanın kasıtlı bir yolunu bekler.
+
+## Skill’ler ile ajanlar karşılaştırması
+
+<SkillsAgents lang="tr" class="not-prose my-10" />
+
+İkisi kolayca karıştırılır ama farklı amaçlara hizmet eder:
+
+- **Skill’ler**, adıyla çağrılan yeniden kullanılabilir prosedürlerdir. Bir skill, tekrarlanabilir bir iş akışını — testleri çalıştırma, lint düzeltme, bir bileşen oluşturma — paketler; böylece ajanlar ve insanlar onu her seferinde aynı şekilde çağırır.
+- **Ajanlar**, tanımlı bir role sahip uzman çalışanlardır — reviewer, executor, architect. Her ajanın odaklanmış bir sorumluluğu vardır ve kendi kapsamı içinde çalışır.
+
+Faydalı bir kısaltma: bir skill, yinelenen bir görevin *nasıl* yapılacağıdır; bir ajan, bir iş sınıfından *kimin* sorumlu olduğudur.
+
+## Yaşayan bir kit: depo kendi skill’lerini büyütür
+
+Kuruluma alma, bir depoyu ajan harness’ına dönüştürür; onu dondurmaz. Kit, deponun iş akışları netleştikçe **büyümek** içindir. DWP, `/skill-create` ve `/agent-create` aracılığıyla çağrılan bir **author** alt skill’i sağlar; bu alt skill, deponun mevcut `.agents/` düzeni ve kuralları hakkında akıl yürütür, ardından bunlara uyan yeni bir skill, ajan veya ince komut yönlendiricisi yazar. Depo, genel bir kiti devralmak yerine kendi kitini yazar.
+
+author alt skill’i uygunluk konusunda özenlidir. İnsanların elle çalıştırdığı tekrarlanabilir bir prosedür için bir skill, ayrı model veya araç ihtiyaçları olan yinelenen bir rol için bir ajan ve yalnızca bir skill’e ya da ajana yönlendiren ince bir giriş noktası olarak bir komut oluşturur. Gerçek bir iş akışına uymayan genel her şeyi atlar ve eklediği her şeyle `.agents/docs/` kataloğunu eşitler. Aynı alt skill, kataloğu diskte gerçekte olanla bağdaştıran zorunlu Skills & Agents Discovery görevini de destekler — ve `/dwp-verify` bu bağdaştırmayı nesnel olarak doğrular, katalog ile dosyalar ayrıştığında kalır.
+
+## Bakım eklentileri
+
+Yazımın ötesinde, DWP **tercihe dayalı bakım eklentileri** ile gelir — bir deponun AI-first olması için asla gerekli değildir. **dependency-upgrade** eklentisi kanonik örnektir: bir paket yöneticisi varsaymak yerine deponun *gerçek* paket yöneticisi (npm, pnpm veya `ncu` ile yarn; pip, poetry veya uv; Cargo; Go modules; Bundler; Composer) hakkında akıl yürütür, ardından küçük gruplar halinde yükseltir, her gruptan sonra deponun gerçek doğrulama kapısını çalıştırır, başarısız olan herhangi bir grubu geri alır ve otomatik işleme yapmadan özetler. Eklentiler, kuruluma alma sırasında açıkça kabul edilir; birini reddetmek depoyu tamamen uyumlu bırakır.
+
+## Akıl yürütmeye dayalı depo kuruluma alması
+
+Bir planı oluşturmadan veya yürütmeden önce, bir ajan depoya kuruluma alınır. Kuruluma alma **betiğe değil, akıl yürütmeye dayalıdır**: ajan, sabit bir kurulum betiği çalıştırmak yerine bir zihinsel model oluşturmak için deponun yapısını, dokümantasyonunu ve yapılandırmasını okur.
+
+Kuruluma alma sırasında ajan, depo arketipini (bireysel ile orkestratör), derleme, test ve lint komutlarını, stil, yapı ve adlandırmaya ilişkin mevcut kuralları ve zaten mevcut olan skill’ler ile ajanları belirler. Bu anlayış, ajanın depoya karşı savaşmak yerine ona uyacak biçimde planlamasını ve yürütmesini sağlayan şeydir.
+
+## `.agents/` dizini ve `.claude → .agents` sembolik bağı
+
+DWP, ajan davranışını tanımlayan her şeyi — skill’ler, komutlar, ajan tanımları, dahili dokümantasyon ve ayarlar — tek bir kanonik dizin, `.agents/` altında toplar. İsim, içeriğin herhangi bir araca bağlı olmaktan çok ajanlar arasında paylaşıldığını gösterir.
+
+Geçmişte `.claude/` üzerinden okuyan araçlarla geriye dönük uyumluluk için, o yol `.agents/` dizinine bir sembolik bağdır:
+
+```bash
+ls -la .claude
+# .claude -> .agents
+```
+
+Her `.claude/...` yolu, şeffaf biçimde `.agents/...` karşılığına çözümlenir; böylece eski araçlar çalışmaya devam ederken yeni içerik kanonik `.agents/` konumuna başvurur. Skill’ler ve ajanlar, sembolik bağ üzerinden değil, `.agents/` altındaki gerçek dosyalar aracılığıyla düzenlenir.

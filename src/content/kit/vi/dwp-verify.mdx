@@ -1,0 +1,40 @@
+---
+title: dwp-verify
+description: "Kiểm chứng một repository tuân thủ DeepWorkPlan (AI-first) và các kế hoạch của nó được định dạng đúng, với báo cáo Conformance pass/fail khách quan đối chiếu spec."
+kind: command
+lang: vi
+order: 5.5
+usage: /dwp-verify [plan <name> | all]
+aliases:
+  - dwp:verify
+---
+import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
+
+# dwp-verify
+
+Kiểm tra khách quan sự tuân thủ của repository và kế hoạch — chỉ đọc.
+
+<CmdVerify lang="vi" class="not-prose my-8" />
+
+## Tác dụng
+
+`dwp-verify` kiểm tra một cách máy móc xem một repository có phải là AI-first (tuân thủ DeepWorkPlan) hay không và các kế hoạch của nó có được định dạng đúng hay không, rồi báo cáo pass/fail. Nó không thay đổi gì cả.
+
+## Cách dùng
+
+```
+/dwp-verify            # verify the repository
+/dwp-verify plan auth  # also verify a specific plan
+/dwp-verify all        # repository + every plan
+```
+
+## Hành vi
+
+1. Kiểm tra repository: `AGENTS.md` với các lệnh thực, chạy được; sự phân giải `CLAUDE.md`; các hạng mục `docs/`; catalog `.agents/` khớp với ổ đĩa; các bộ ủy nhiệm `dwp-*` gọn nhẹ; `.dwp/` và `tmp/` được gitignore; một skill có thể phân giải.
+2. Kiểm tra một kế hoạch (khi được yêu cầu): mỗi tác vụ đều có acceptance criteria và một validation gate, tiến độ được lưu lại, hai tác vụ cuối bắt buộc đều hiện diện, và các tác vụ neo lại vào mục tiêu.
+3. Báo cáo **CONFORMANT** hoặc **NOT CONFORMANT** kèm liệt kê từng lỗi.
+4. Đề nghị ghi nhận các thiếu sót thành một Deep Work Plan; không bao giờ tự ý sửa trong im lặng.
+
+## Bí danh
+
+- `dwp:verify`

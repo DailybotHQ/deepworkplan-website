@@ -1,0 +1,38 @@
+---
+title: dwp-resume
+description: "progress log और task फ़ाइलों से स्थिति का पुनर्निर्माण करके, फिर पहले अपूर्ण कार्य से जारी रखकर एक बाधित Deep Work Plan को फिर से शुरू करें।"
+kind: command
+lang: hi
+order: 4
+usage: /dwp-resume [plan]
+aliases:
+  - dwp:resume
+---
+import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
+
+# dwp-resume
+
+एक बाधित Deep Work Plan फिर से शुरू करें।
+
+<CmdResume lang="en" class="not-prose my-8" />
+
+## यह क्या करता है
+
+`dwp-resume` एक बाधित योजना को जारी रखता है। यह `PROGRESS.md` और task फ़ाइलों से स्थिति का पुनर्निर्माण करता है, फिर पहले अपूर्ण कार्य से जारी रखता है।
+
+## उपयोग
+
+```
+/dwp-resume [plan]
+```
+
+## व्यवहार
+
+1. `PROGRESS.md` और task फ़ाइलें पढ़ें।
+2. निष्पादन स्थिति का पुनर्निर्माण करें।
+3. पहले अपूर्ण कार्य से जारी रखें।
+4. आगे बढ़ते हुए प्रगति अपडेट करें।
+
+## उपनाम
+
+- `dwp:resume`

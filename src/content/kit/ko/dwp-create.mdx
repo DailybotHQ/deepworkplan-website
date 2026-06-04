@@ -1,0 +1,51 @@
+---
+title: dwp-create
+description: "상위 수준 목표로부터 새 Deep Work Plan을 생성합니다. 에이전트가 목표를 분석하고 작업을 task로 분해한 뒤 .dwp 아래에 계획 파일을 작성합니다."
+kind: command
+lang: ko
+order: 1
+usage: /dwp-create <goal>
+aliases:
+  - dwp:create
+---
+import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
+
+# dwp-create
+
+상위 수준 목표로부터 새 Deep Work Plan을 생성합니다.
+
+<CmdCreate lang="ko" class="not-prose my-8" />
+
+## 하는 일
+
+`dwp-create`는 상위 수준 목표를 받아 구조화된 계획으로 바꿉니다. 목표를 분석하고, 필요하면 명확히 하는 질문을 하며, 작업을 순차적 task로 분해한 뒤 계획 파일을 작성합니다.
+
+## 사용법
+
+```
+/dwp-create <goal>
+```
+
+## 모드
+
+`dwp-create`는 기본적으로 **가이드(guided)** 모드입니다. 컨텍스트를 수집하고, 정제된 단일 초안을 작성하며, **그것을 보여 주고 최종 계획을 생성하기 전에 확인을 요청합니다** — 그래서 계획이 생성되기 전에 항상 그것을 읽을 수 있습니다. 이것이 권장 기본값이며, 특히 처음 몇 번에 좋습니다.
+
+마지막 단어로 **`trust`**(또는 `auto`)를 덧붙이면 확인을 건너뜁니다 — 에이전트가 정제된 초안을 작성하고 곧바로 최종 계획으로 진행합니다.
+
+```
+/dwp-create <goal> trust
+```
+
+trust 모드는 흐름을 신뢰하게 된 뒤의 파워 유저 단축 경로이고, 가이드 모드는 기본적으로 사람을 루프 안에 둡니다.
+
+## 동작
+
+1. 목표와 리포지토리 컨텍스트를 분석합니다.
+2. 모호하면 명확히 하는 질문을 합니다.
+3. 정제된 초안을 `.dwp/drafts/`에 작성합니다(가이드 모드에서는 검토하고 확인합니다).
+4. 순차적 task로 분해하고 README, task 파일, PROGRESS를 작성합니다.
+5. 두 개의 필수 최종 작업으로 끝맺습니다.
+
+## 별칭
+
+- `dwp:create`

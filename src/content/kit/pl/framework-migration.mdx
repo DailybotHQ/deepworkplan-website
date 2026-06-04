@@ -1,0 +1,38 @@
+---
+title: "Migracja frameworka"
+description: "Poglądowe przejście przez długodystansową migrację frameworka prowadzoną jako Deep Work Plan — wielogodzinną, wieloplikową pracę, w której agenci zwykle tracą wątek."
+kind: example
+lang: pl
+order: 3
+---
+import MigrationBeforeAfter from '@/components/diagrams/kit/MigrationBeforeAfter.astro';
+
+# Migracja frameworka
+
+Poglądowe przejście przez pracę, do której stworzono DWP: migrację obejmującą dziesiątki plików i kilka godzin — na tyle długą, że nieprowadzony agent gubi wątek.
+
+## Cel
+
+<MigrationBeforeAfter lang="pl" class="not-prose my-10" />
+
+„Zmigruj warstwę danych ze starego ORM do nowego w całej usłudze."
+
+## Bez planu
+
+Agent edytuje modele, aż jego kontekst zapełnia się na wpół ukończonymi zmianami, zapomina, które miejsca wywołań już przekonwertował, i pozostawia czerwony build bez śladu tego, co jeszcze pozostało. Wznowienie pracy oznacza odtwarzanie własnego toku myślenia z logu czatu.
+
+## Jako Deep Work Plan
+
+`/dwp-create` rozkłada cel na atomowe, uporządkowane zadania, każde z kryteriami akceptacji i bramką walidacji:
+
+1. Wprowadzenie nowego ORM obok starego (bez zmiany zachowania; bramka: zielony build + testy).
+2. Migracja modeli i miejsc wywołań modułu A (bramka: zielone testy modułu A).
+3. Powtórzenie dla każdego modułu, po jednym zadaniu — postęp zapisywany po każdym zadaniu.
+4. Usunięcie starego ORM i jego nakładek (bramka: brak pozostałych odniesień; zielony cały zestaw testów).
+5. Aktualizacja dokumentacji i plików README poszczególnych modułów.
+
+`/dwp-execute` wykonuje zadania po kolei, commitując po każdej zaliczonej bramce i aktualizując `PROGRESS.md`. Jeśli okno kontekstu zresetuje się w połowie pracy, `/dwp-resume` odczytuje plan i postęp z dysku i kontynuuje od kolejnego niezaznaczonego zadania.
+
+## Rezultat
+
+Migracja zostaje wdrożona jako sekwencja małych, poddających się przeglądowi, indywidualnie zwalidowanych commitów — i przetrwa przerwania, ponieważ to plan, a nie rozmowa, jest źródłem prawdy.

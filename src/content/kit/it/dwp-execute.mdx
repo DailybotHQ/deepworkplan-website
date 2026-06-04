@@ -1,0 +1,39 @@
+---
+title: dwp-execute
+description: "Esegue un Deep Work Plan esistente attività per attività. L’agente legge l’intero piano, esegue ogni attività in ordine, aggiorna i progressi e segna il completamento in modo accurato."
+kind: command
+lang: it
+order: 2
+usage: /dwp-execute [plan]
+aliases:
+  - dwp:execute
+---
+import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
+
+# dwp-execute
+
+Esegue un Deep Work Plan esistente.
+
+<CmdExecute lang="it" class="not-prose my-8" />
+
+## Cosa fa
+
+`dwp-execute` esegue un piano esistente attività per attività. Legge l’intero piano, esegue ogni attività in ordine, aggiorna `PROGRESS.md` e segna lo stato di completamento di ciascuna attività.
+
+## Uso
+
+```
+/dwp-execute [plan]
+```
+
+## Comportamento
+
+1. Legge l’intero piano prima di iniziare.
+2. Esegue le attività in ordine.
+3. Aggiorna `PROGRESS.md` dopo ogni attività.
+4. Segna lo stato dell’attività in modo accurato.
+5. Si ferma e chiede quando è bloccato.
+
+## Alias
+
+- `dwp:execute`

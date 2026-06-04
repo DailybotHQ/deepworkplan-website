@@ -1,0 +1,51 @@
+---
+title: dwp-create
+description: "Buat Deep Work Plan baru dari tujuan tingkat tinggi. Agent menganalisis tujuan, menguraikan pekerjaan menjadi tugas, dan menulis file rencana di bawah .dwp."
+kind: command
+lang: id
+order: 1
+usage: /dwp-create <goal>
+aliases:
+  - dwp:create
+---
+import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
+
+# dwp-create
+
+Buat Deep Work Plan baru dari tujuan tingkat tinggi.
+
+<CmdCreate lang="en" class="not-prose my-8" />
+
+## Fungsinya
+
+`dwp-create` mengambil tujuan tingkat tinggi dan mengubahnya menjadi rencana terstruktur. Ia menganalisis tujuan, mengajukan pertanyaan klarifikasi bila perlu, menguraikan pekerjaan menjadi tugas-tugas sekuensial, dan menulis file rencana.
+
+## Penggunaan
+
+```
+/dwp-create <goal>
+```
+
+## Mode
+
+`dwp-create` secara default berjalan dalam mode **guided**: ia mengumpulkan konteks, menulis satu draf yang telah disempurnakan, **menunjukkannya kepada Anda, dan meminta konfirmasi sebelum menghasilkan rencana final** — sehingga Anda selalu membaca rencana sebelum dibuat. Ini adalah default yang direkomendasikan, terutama pada beberapa kali pertama.
+
+Tambahkan **`trust`** (atau `auto`) sebagai kata terakhir untuk melewati konfirmasi — agent menulis draf yang telah disempurnakan dan langsung menuju rencana final:
+
+```
+/dwp-create <goal> trust
+```
+
+Mode trust adalah pintasan bagi power user setelah Anda memercayai alurnya; mode guided menjaga manusia tetap terlibat secara default.
+
+## Perilaku
+
+1. Analisis tujuan dan konteks repositori.
+2. Ajukan pertanyaan klarifikasi bila ambigu.
+3. Tulis draf yang telah disempurnakan ke `.dwp/drafts/` (dalam mode guided, tinjau dan konfirmasi).
+4. Uraikan menjadi tugas-tugas sekuensial dan tulis README, file tugas, serta PROGRESS.
+5. Akhiri dengan dua tugas final yang wajib.
+
+## Alias
+
+- `dwp:create`

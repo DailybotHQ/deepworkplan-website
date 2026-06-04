@@ -1,0 +1,31 @@
+---
+title: "接入一个遗留服务"
+description: "一次把代理指向一个无文档的遗留仓库、并让其变得 AI-first 的示范演示——经过推理、非破坏性，且可验证。"
+kind: example
+lang: zh
+order: 4
+---
+import OnboardFlow from '@/components/diagrams/kit/OnboardFlow.astro';
+
+# 接入一个遗留服务
+
+一次对大多数团队首先要做之事的示范演示：拿来一个既有的、文档不足的仓库，并让它变得可被代理驾驭——而不扰动已经能正常工作的部分。
+
+<OnboardFlow lang="en" class="not-prose my-10" />
+
+## 目标
+
+“让这个有五年历史的服务 AI-first。”它已经有了一份不完整的 `README`、一些零散的文档，以及没有 `AGENTS.md`。
+
+## 这次运行
+
+开发者把一行交给他们的代理——*阅读并遵循 [`/init.md`](/init.md)*——接入流程随即：
+
+1. **勘察。** 检测真实的语言、包管理器（从存在的锁文件判断），以及实际的 build、test 与 lint 命令——靠阅读仓库，而非靠假定。
+2. **提议一份计划并询问。** 由于产物已经存在，它是非破坏性的：它列出将创建什么、对照将协调什么，并在触碰那份不完整的 `README` 或零散的文档之前等待批准。
+3. **生成 harness。** 一份带有该服务真实 Quick Commands 的、经过推理的 `AGENTS.md`，一套吸纳既有笔记而非将其重复的、分类的 `docs/` 树，各模块的 README、`.agents/` 套件，以及一个被 gitignore 的 `.dwp/`。
+4. **验证。** `/dwp-verify` 返回一份针对符合性标准的客观通过/未通过报告。
+
+## 成果
+
+这个遗留服务在没有任何东西被销毁的情况下变得 AI-first：既有的工作被合并，而非被覆盖，其结果是可核查的，而非被声称的。从这里起，团队便用 `/dwp-create` 与 `/dwp-execute` 规划并执行真正的工作。

@@ -1,0 +1,40 @@
+---
+title: dwp-verify
+description: "리포지토리가 DeepWorkPlan 적합(AI-first)인지와 계획이 잘 구성되었는지를, 스펙에 대비한 객관적 합격/불합격 적합성 보고서로 검증합니다."
+kind: command
+lang: ko
+order: 5.5
+usage: /dwp-verify [plan <name> | all]
+aliases:
+  - dwp:verify
+---
+import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
+
+# dwp-verify
+
+리포지토리와 계획의 적합성을 객관적으로 확인합니다 — 읽기 전용.
+
+<CmdVerify lang="ko" class="not-prose my-8" />
+
+## 하는 일
+
+`dwp-verify`는 리포지토리가 AI-first(DeepWorkPlan 적합)인지와 그 계획이 잘 구성되었는지를 기계적으로 확인한 뒤 합격/불합격을 보고합니다. 아무것도 바꾸지 않습니다.
+
+## 사용법
+
+```
+/dwp-verify            # 리포지토리 검증
+/dwp-verify plan auth  # 특정 계획도 함께 검증
+/dwp-verify all        # 리포지토리 + 모든 계획
+```
+
+## 동작
+
+1. 리포지토리를 확인합니다: 실제로 실행 가능한 명령을 갖춘 `AGENTS.md`, `CLAUDE.md` 해석, `docs/` 범주, 디스크와 일치하는 `.agents/` 카탈로그, 얇은 `dwp-*` 위임자, gitignore된 `.dwp/`와 `tmp/`, 해석 가능한 스킬.
+2. 계획을 확인합니다(요청 시): 모든 task가 인수 기준과 검증 게이트를 가지고, 진행 상황이 영속화되며, 두 개의 필수 최종 작업이 존재하고, task가 목표에 다시 닻을 내리는지.
+3. 각 실패를 나열하며 **CONFORMANT** 또는 **NOT CONFORMANT**를 보고합니다.
+4. 미비점을 Deep Work Plan으로 포착하도록 제안합니다. 조용히 고치는 일은 결코 없습니다.
+
+## 별칭
+
+- `dwp:verify`

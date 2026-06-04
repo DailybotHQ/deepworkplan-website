@@ -1,0 +1,66 @@
+---
+title: Specifica DWP
+description: "Specifica normativa di Deep Work Plan: struttura del piano, anatomia in nove sezioni di un’attività, ciclo di esecuzione a cinque operazioni, workspace di output e versionamento."
+order: 2
+lang: it
+section: Workflow
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
+
+# Specifica DWP
+
+**Versione 1.0. Stato: Stabile.** Questo documento è la specifica normativa per la metodologia Deep Work Plan (DWP). Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
+
+## Definizione
+
+Un Deep Work Plan è un artefatto strutturato e solo-Markdown che descrive un’attività di ingegneria complessa scomposta in unità di lavoro sequenziali e revisionabili, progettato per essere creato, eseguito e mantenuto da agenti di coding AI che operano in autonomia.
+
+DWP è spec-driven: il piano è la specifica e gli agenti DEVONO eseguire rispetto ai suoi criteri di accettazione e validation gate espliciti anziché improvvisare. La specifica — non una trascrizione di chat — è la fonte di verità duratura, così il lavoro è verificabile e ripristinabile tra sessioni e agenti. È anche harness engineering reso portabile: il contesto, il ciclo di controllo, le salvaguardie e lo stato ripristinabile che rendono un agente affidabile vengono installati nel repository stesso come semplice Markdown, così qualsiasi agente conforme PUÒ pilotare il repository senza un framework specifico per uno strumento.
+
+## Struttura del piano
+
+Un piano DEVE essere una directory sotto `.dwp/plans/` denominata `PLAN_<slug>/`. La directory DEVE contenere:
+
+- `README.md` — panoramica del piano, obiettivo, tabella delle attività e stato.
+- Un file per attività, denominato `<n>.task_<slug>.md`.
+- `PROGRESS.md` — un log di esecuzione continuo.
+
+## Anatomia dell’attività
+
+<TaskAnatomy lang="it" class="not-prose my-10" />
+
+Ogni file di attività DEVE contenere queste nove sezioni, nell’ordine:
+
+1. **Goal** — una dichiarazione di un paragrafo su cosa l’attività realizza.
+2. **Context** — contesto, link e il perché questa attività esiste.
+3. **Steps** — azioni ordinate e concrete da svolgere.
+4. **Acceptance criteria** — una checklist di condizioni che definiscono il completamento.
+5. **Validation** — comandi o test da eseguire per verificare.
+6. **Files** — percorsi che ci si aspetta vengano creati o modificati.
+7. **Dependencies** — altre attività o prerequisiti esterni.
+8. **Risks** — cosa potrebbe andare storto e le relative mitigazioni.
+9. **Completion & Log** — un marcatore di stato più note cronologiche.
+
+## Il ciclo di esecuzione
+
+<CoreLoop lang="it" class="not-prose my-10" />
+
+DWP definisce cinque operazioni:
+
+- **create** — Genera un nuovo piano da un obiettivo.
+- **execute** — Esegue il piano attività per attività.
+- **refine** — Modifica un piano esistente.
+- **resume** — Riprende un piano interrotto.
+- **status** — Riferisce sullo stato del piano senza eseguire.
+
+## Workspace di output
+
+<OutputWorkspace lang="it" class="not-prose my-10" />
+
+Tutti gli artefatti DWP DEVONO vivere in una directory `.dwp/` esclusa da git nella radice del repository.
+
+## Versionamento
+
+Questa specifica segue il versionamento semantico.

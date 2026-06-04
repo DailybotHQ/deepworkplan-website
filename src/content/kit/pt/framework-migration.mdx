@@ -1,0 +1,38 @@
+---
+title: "Uma migração de framework"
+description: "Um passo a passo ilustrativo de uma migração de framework de longo prazo executada como um Deep Work Plan — o tipo de trabalho de várias horas e vários arquivos em que os agentes costumam derivar."
+kind: example
+lang: pt
+order: 3
+---
+import MigrationBeforeAfter from '@/components/diagrams/kit/MigrationBeforeAfter.astro';
+
+# Uma migração de framework
+
+Um passo a passo ilustrativo do trabalho para o qual o DWP foi feito: uma migração que abrange dezenas de arquivos e várias horas — tempo suficiente para que um agente sem orientação perca o fio da meada.
+
+## O objetivo
+
+<MigrationBeforeAfter lang="pt" class="not-prose my-10" />
+
+"Migrar a camada de dados do ORM legado para o novo em todo o serviço."
+
+## Sem um plano
+
+Um agente edita os models até que seu contexto se encha de alterações pela metade, esquece quais pontos de chamada já converteu e deixa o build vermelho sem registro do que falta. Retomar significa reconstruir o próprio raciocínio a partir de um log de chat.
+
+## Como um Deep Work Plan
+
+O `/dwp-create` decompõe o objetivo em tarefas atômicas e ordenadas, cada uma com critérios de aceitação e um validation gate:
+
+1. Introduzir o novo ORM ao lado do antigo (sem mudança de comportamento; gate: build + testes verdes).
+2. Migrar os models e os pontos de chamada do módulo A (gate: testes do módulo A verdes).
+3. Repetir por módulo, uma tarefa para cada — progresso registrado após cada tarefa.
+4. Remover o ORM legado e seus shims (gate: nenhuma referência permanece; suíte completa verde).
+5. Atualizar os docs e os READMEs por módulo.
+
+O `/dwp-execute` executa as tarefas em ordem, comitando após cada gate aprovado e atualizando o `PROGRESS.md`. Se a janela de contexto for reiniciada no meio do caminho, o `/dwp-resume` lê o plano e o progresso a partir do disco e continua na próxima tarefa não marcada.
+
+## Resultado
+
+A migração é entregue como uma sequência de commits pequenos, revisáveis e validados individualmente — e sobrevive a interrupções, porque o plano, e não a conversa, é a fonte de verdade.

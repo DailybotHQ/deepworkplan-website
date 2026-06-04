@@ -1,0 +1,38 @@
+---
+title: "Một cuộc di trú framework"
+description: "Một minh họa từng bước về một cuộc di trú framework dài hơi chạy như một Deep Work Plan — loại công việc nhiều giờ, nhiều file mà agent thường hay trôi dạt."
+kind: example
+lang: vi
+order: 3
+---
+import MigrationBeforeAfter from '@/components/diagrams/kit/MigrationBeforeAfter.astro';
+
+# Một cuộc di trú framework
+
+Một minh họa từng bước về loại công việc mà DWP được tạo ra để xử lý: một cuộc di trú trải dài hàng chục file và vài giờ đồng hồ — đủ dài để một agent không được dẫn dắt sẽ lạc mất mạch.
+
+## Mục tiêu
+
+<MigrationBeforeAfter lang="vi" class="not-prose my-10" />
+
+"Di trú tầng dữ liệu từ ORM cũ sang ORM mới trên toàn bộ dịch vụ."
+
+## Khi không có kế hoạch
+
+Một agent chỉnh sửa các model cho đến khi bối cảnh của nó đầy ắp những thay đổi dang dở, quên mất nó đã chuyển đổi những điểm gọi nào, và để bản build đỏ lòm mà không ghi lại những gì còn sót. Tiếp tục công việc nghĩa là phải dựng lại chính mạch suy nghĩ của mình từ một nhật ký trò chuyện.
+
+## Khi là một Deep Work Plan
+
+`/dwp-create` phân rã mục tiêu thành các tác vụ nguyên tử, có thứ tự, mỗi tác vụ kèm acceptance criteria và một validation gate:
+
+1. Đưa ORM mới vào song song với ORM cũ (không thay đổi hành vi; gate: build + test đều xanh).
+2. Di trú các model và điểm gọi của module A (gate: test của module A xanh).
+3. Lặp lại cho từng module, mỗi module một tác vụ — tiến độ được ghi lại sau mỗi tác vụ.
+4. Gỡ bỏ ORM cũ và các lớp đệm của nó (gate: không còn tham chiếu nào; toàn bộ bộ test xanh).
+5. Cập nhật tài liệu và các README của từng module.
+
+`/dwp-execute` chạy các tác vụ theo thứ tự, commit sau mỗi gate vượt qua và cập nhật `PROGRESS.md`. Nếu cửa sổ bối cảnh bị đặt lại giữa chừng, `/dwp-resume` đọc kế hoạch và tiến độ từ ổ đĩa và tiếp tục ở tác vụ chưa hoàn thành kế tiếp.
+
+## Kết quả
+
+Cuộc di trú hoàn tất dưới dạng một chuỗi các commit nhỏ, có thể rà soát, được kiểm chứng độc lập — và vượt qua được các lần gián đoạn, bởi vì kế hoạch, chứ không phải cuộc trò chuyện, mới là nguồn chân lý.

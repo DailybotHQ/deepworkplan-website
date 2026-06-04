@@ -1,0 +1,60 @@
+---
+title: Giao thức agent
+description: "Hợp đồng hành vi quy phạm cho các agent lập trình AI làm việc với Deep Work Plan: khởi tạo, lập kế hoạch, thực thi, tinh chỉnh, tiếp tục và an toàn."
+order: 3
+lang: vi
+section: Protocol
+---
+import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
+
+# Giao thức agent
+
+**Phiên bản 1.0.** Giao thức này định nghĩa cách một agent lập trình AI PHẢI (MUST) hành xử khi làm việc với Deep Work Plan. Các từ khóa MUST, SHOULD và MAY tuân theo RFC 2119.
+
+<AgentLifecycle lang="vi" class="not-prose my-10" />
+
+## Khởi tạo
+
+Trước khi tạo hay thực thi một kế hoạch, một agent PHẢI khởi tạo với repository. Khởi tạo dựa trên suy luận, không dựa trên script: agent đọc cấu trúc, tài liệu và cấu hình của repository để xây dựng một mô hình tư duy.
+
+Agent NÊN (SHOULD) xác định:
+
+- Kiểu hình của repository (độc lập so với điều phối).
+- Các lệnh build, test và lint.
+- Các quy ước hiện có về phong cách, cấu trúc và đặt tên.
+- Các skill và agent sẵn có.
+
+## Lập kế hoạch
+
+Khi tạo một kế hoạch, agent PHẢI:
+
+- Phân rã mục tiêu thành các tác vụ tuần tự, rà soát được.
+- Viết mỗi tác vụ theo cấu trúc chín phần.
+- Kết thúc bằng hai tác vụ cuối bắt buộc.
+- Đặt câu hỏi làm rõ khi mục tiêu còn mập mờ.
+
+## Thực thi
+
+Trong quá trình thực thi, agent PHẢI:
+
+- Đọc toàn bộ kế hoạch trước khi bắt đầu.
+- Thực thi các tác vụ theo thứ tự trừ khi các phụ thuộc cho phép khác đi.
+- Cập nhật `PROGRESS.md` sau mỗi tác vụ.
+- Đánh dấu trạng thái tác vụ một cách chính xác.
+- Dừng lại và hỏi khi bị chặn thay vì phỏng đoán.
+
+## Tinh chỉnh
+
+Khi tinh chỉnh, agent PHẢI giữ nguyên công việc đã hoàn tất, cập nhật bảng tác vụ và ghi lại điều đã thay đổi.
+
+## Tiếp tục
+
+Khi tiếp tục, agent PHẢI tái dựng trạng thái từ `PROGRESS.md` và các tệp tác vụ trước khi đi tiếp.
+
+## Giao tiếp
+
+Các agent NÊN báo cáo súc tích. Các báo cáo trạng thái PHẢI phân biệt công việc đã xong, đang làm và đang chờ.
+
+## An toàn
+
+Các agent KHÔNG ĐƯỢC (MUST NOT) commit các bí mật, PHẢI giữ `.dwp/` được gitignore, và NÊN hỏi trước khi thực hiện các thao tác phá hủy.

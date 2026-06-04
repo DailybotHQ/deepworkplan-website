@@ -1,0 +1,54 @@
+---
+title: Archétypes
+description: "Description normative des archétypes de dépôt DWP : le dépôt individuel et le hub orchestrateur, l’heuristique de classification, et en quoi l’onboarding diffère."
+order: 4
+lang: fr
+section: Archetypes
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Archétypes
+
+**Version 1.0.** DWP reconnaît deux archétypes de dépôt. L’archétype détermine la façon dont un agent s’intègre et dont les plans sont cadrés.
+
+## Dépôt individuel
+
+Une base de code autonome — une application, une bibliothèque ou un service. Les plans opèrent directement sur le code.
+
+Caractéristiques :
+
+- Une base de code unique et cohérente.
+- Les plans modifient les fichiers de ce dépôt.
+- Espace de travail `.dwp/` à la racine du dépôt.
+
+## Hub orchestrateur
+
+Un dépôt de coordination qui gère plusieurs dépôts enfants. Les plans peuvent lancer des plans enfants dans des sous-dépôts.
+
+Caractéristiques :
+
+- Coordonne plusieurs sous-dépôts.
+- Les plans peuvent déléguer à des plans enfants.
+- Maintient un registre des dépôts gérés.
+- L’espace de travail `.dwp/` à la racine du hub suit l’état inter-dépôts.
+
+## Heuristique de classification
+
+<ArchetypesTree lang="fr" class="not-prose my-10" />
+
+Un agent SHOULD classer un dépôt comme hub orchestrateur s’il trouve :
+
+- Plusieurs dépôts git imbriqués ou des sous-modules.
+- Un registre ou un manifeste de dépôts gérés.
+- Une configuration pointant vers des dépôts externes.
+
+Sinon, il le traite comme un dépôt individuel.
+
+## Différences d’onboarding
+
+| Aspect | Individuel | Orchestrateur |
+|--------|------------|--------------|
+| Périmètre | Ce dépôt | Plusieurs dépôts |
+| Onboarding | Structure du dépôt | Registre du hub |
+| Cible du plan | Fichiers locaux | Plans enfants |
+| État | `.dwp/` local | `.dwp/` inter-dépôts |

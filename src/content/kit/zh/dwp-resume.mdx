@@ -1,0 +1,38 @@
+---
+title: dwp-resume
+description: "通过从进展日志与任务文件重建状态来恢复一份被中断的 Deep Work Plan，然后从第一项未完成的任务继续。"
+kind: command
+lang: zh
+order: 4
+usage: /dwp-resume [plan]
+aliases:
+  - dwp:resume
+---
+import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
+
+# dwp-resume
+
+恢复一份被中断的 Deep Work Plan。
+
+<CmdResume lang="en" class="not-prose my-8" />
+
+## 它做了什么
+
+`dwp-resume` 继续一份被中断的计划。它会从 `PROGRESS.md` 与任务文件重建状态，然后从第一项未完成的任务继续。
+
+## 用法
+
+```
+/dwp-resume [plan]
+```
+
+## 行为
+
+1. 阅读 `PROGRESS.md` 与任务文件。
+2. 重建执行状态。
+3. 从第一项未完成的任务继续。
+4. 随进展更新进度。
+
+## 别名
+
+- `dwp:resume`

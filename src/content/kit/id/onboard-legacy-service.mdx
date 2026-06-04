@@ -1,0 +1,31 @@
+---
+title: "Onboarding service warisan"
+description: "Panduan ilustratif mengarahkan agent ke repositori warisan tanpa dokumentasi dan menjadikannya AI-first — bernalar, non-destruktif, dan dapat diverifikasi."
+kind: example
+lang: id
+order: 4
+---
+import OnboardFlow from '@/components/diagrams/kit/OnboardFlow.astro';
+
+# Onboarding service warisan
+
+Panduan ilustratif untuk hal pertama yang dilakukan sebagian besar tim: mengambil repositori yang sudah ada dan minim dokumentasi lalu menjadikannya dapat dipiloti agent — tanpa mengganggu apa yang sudah berfungsi.
+
+<OnboardFlow lang="en" class="not-prose my-10" />
+
+## Tujuan
+
+"Jadikan service berumur lima tahun ini AI-first." Service ini sudah punya `README` yang parsial, beberapa dokumen yang terserak, dan belum ada `AGENTS.md`.
+
+## Prosesnya
+
+Developer menyerahkan satu baris kepada agent-nya — *baca dan ikuti [`/init.md`](/init.md)* — lalu alur onboarding:
+
+1. **Reconnaissance.** Mendeteksi bahasa nyata, package manager (dari lockfile yang ada), serta command build, test, dan lint yang sebenarnya — dengan membaca repositori, bukan dengan mengasumsikan.
+2. **Mengusulkan rencana dan bertanya.** Karena artefak sudah ada, prosesnya non-destruktif: ia mendaftar apa yang akan dibuat versus apa yang akan direkonsiliasi, dan menunggu persetujuan sebelum menyentuh `README` parsial atau dokumen yang terserak.
+3. **Menghasilkan harness.** `AGENTS.md` yang bernalar dengan Quick Commands nyata service, pohon `docs/` terkategori yang menyerap catatan yang ada alih-alih menggandakannya, README per modul, kit `.agents/`, dan `.dwp/` yang ber-gitignore.
+4. **Memverifikasi.** `/dwp-verify` mengembalikan laporan lulus/gagal yang objektif terhadap kriteria konformansi.
+
+## Hasil
+
+Service warisan menjadi AI-first tanpa ada yang dihancurkan: pekerjaan yang ada digabungkan, bukan ditimpa, dan hasilnya dapat diperiksa alih-alih sekadar diklaim. Dari sini tim merencanakan dan mengeksekusi pekerjaan nyata dengan `/dwp-create` dan `/dwp-execute`.

@@ -1,0 +1,44 @@
+---
+title: 计划与任务模板
+description: "计划与任务文件的结构、每份计划都必须以之收尾的两项强制收尾任务，以及让计划保持可读的 README 与 PROGRESS 约定。"
+order: 3
+lang: zh
+summary: 计划与任务在磁盘上如何组织，以及让它们保持可读的各项约定。
+icon: document
+---
+import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
+
+# 计划与任务模板
+
+一份 Deep Work Plan 是一个由 Markdown 文件构成的目录。该目录——以及其中每个文件——的形态，正是使一份计划能被人类与代理共同审阅的关键。
+
+## 计划结构
+
+<PlanTree lang="en" class="not-prose my-10" />
+
+一份计划是 `.dwp/plans/` 下一个名为 `PLAN_<slug>/` 的目录。它包含：
+
+- `README.md` —— 计划概览：目标、源材料、任务表与状态。
+- 每项任务一个文件，命名为 `<n>.task_<slug>.md`。
+- `PROGRESS.md` —— 一份持续的执行日志。
+
+## 任务文件结构
+
+每个任务文件命名为 `<n>.task_<slug>.md`，并遵循九段式结构：Goal、Context、Steps、Acceptance criteria、Validation、Files、Dependencies、Risks 以及 Completion & Log。这些段落始终按该顺序出现，于是任何读者都知道该往哪里看。每项任务在行动之前都会重新锚定到计划的目标，这能防止代理在漫长的、长达数小时的周期里发生漂移。
+
+## 两项强制收尾任务
+
+每份计划都必须以两项标准任务收尾。它们确保知识被捕获、利益相关者被告知：
+
+1. **Skills & Agents Discovery（技能与代理盘点）** —— 识别在计划过程中创建的可复用技能与代理，使工作的成果超越这一次单独的努力而不断累积。
+2. **Executive Report（执行摘要）** —— 一份面向利益相关者撰写的简明成果总结，区分已交付之物与尚待完成之物。
+
+## README 与 PROGRESS 约定
+
+计划的 `README.md` 必须包含一个标题（`# Deep Work Plan: <name>`）、一段散文式的目标陈述、一个可选的源材料段落、一个任务表（编号、任务名、状态复选框），以及一行形如 `<n>/<total> tasks complete` 的计划状态。
+
+`PROGRESS.md` 是一份只追加的执行日志。每条记录都记下一个 ISO 8601 时间戳、任务编号与名称、做了什么，以及任何偏差或跳过的原因。由于它只会不断增长，它是计划实际如何展开的可靠历史。
+
+## 标题与交叉引用
+
+所有标题都采用首字母句式（sentence case），文档避免使用营销式语言与感叹号。这些约定让计划在不同代理之间、在时间推移中保持一致。

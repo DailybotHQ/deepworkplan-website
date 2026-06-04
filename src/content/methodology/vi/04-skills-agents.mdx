@@ -1,0 +1,53 @@
+---
+title: Skill và agent
+description: "Sự khác biệt giữa skill và agent, khởi tạo repository dựa trên suy luận, và thư mục .agents cùng quy ước symlink .claude tới .agents của nó."
+order: 4
+lang: vi
+summary: Cách các skill tái sử dụng, các agent chuyên biệt và việc khởi tạo repo ăn khớp với nhau.
+icon: users
+---
+import SkillsAgents from '@/components/diagrams/methodology/SkillsAgents.astro';
+
+# Skill và agent
+
+DWP độc lập với agent, nhưng nó kỳ vọng hai khối xây dựng lặp lại — skill và agent — và một cách định hướng có chủ đích trong một repository trước khi bất kỳ công việc nào bắt đầu.
+
+## Skill so với agent
+
+<SkillsAgents lang="vi" class="not-prose my-10" />
+
+Hai khái niệm này dễ bị nhầm lẫn nhưng phục vụ những mục đích khác nhau:
+
+- **Skill** là các quy trình tái sử dụng được gọi theo tên. Một skill đóng gói một quy trình lặp lại được — chạy test, sửa lint, tạo một component — để agent và con người gọi nó theo cùng một cách mỗi lần.
+- **Agent** là các nhân công chuyên biệt với một vai trò xác định — người rà soát, người thực thi, kiến trúc sư. Mỗi agent có một trách nhiệm tập trung và hoạt động trong phạm vi của nó.
+
+Một cách nói tắt hữu ích: một skill là *cách* làm một tác vụ lặp lại; một agent là *ai* chịu trách nhiệm cho một loại công việc.
+
+## Một bộ kit sống: repository nuôi lớn skill của riêng nó
+
+Khởi tạo biến một repository thành harness của agent; nó không đóng băng repository lại. Bộ kit được dụng ý để **lớn lên** khi các quy trình của repository trở nên rõ ràng. DWP cung cấp một sub-skill **author** — được gọi qua `/skill-create` và `/agent-create` — suy luận về bố cục và quy ước `.agents/` hiện có của repository, rồi viết một skill, agent, hay bộ ủy thác command mỏng phù hợp với chúng. Repository tự sáng tác bộ kit của riêng nó thay vì kế thừa một bộ chung chung.
+
+Sub-skill author rất có dụng ý về sự phù hợp. Nó tạo một skill cho một quy trình lặp lại mà người ta chạy bằng tay, một agent cho một vai trò lặp lại với nhu cầu mô hình hay công cụ riêng biệt, và một command chỉ như một điểm vào mỏng định tuyến tới một skill hay agent. Nó bỏ qua bất cứ thứ gì chung chung không khớp với một quy trình thực, và nó giữ catalog `.agents/docs/` đồng bộ với bất cứ thứ gì nó thêm vào. Cùng sub-skill đó hậu thuẫn cho tác vụ Skills & Agents Discovery bắt buộc, vốn đối chiếu catalog với những gì thực sự có trên đĩa — và `/dwp-verify` xác nhận sự đối chiếu đó một cách khách quan, báo không đạt nếu catalog và các tệp lệch nhau.
+
+## Các addon bảo trì
+
+Ngoài việc sáng tác, DWP còn đi kèm **các addon bảo trì tự nguyện** — không bao giờ bắt buộc để một repository trở thành AI-first. Addon **dependency-upgrade** là ví dụ tiêu biểu: nó suy luận về trình quản lý gói *thực tế* của repository (npm, pnpm, hay yarn với `ncu`; pip, poetry, hay uv; Cargo; Go modules; Bundler; Composer) thay vì giả định một loại, rồi nâng cấp theo các lô nhỏ, chạy cổng kiểm chứng thực của repository sau mỗi lô, hoàn nguyên bất kỳ lô nào thất bại, và tóm tắt mà không tự động commit. Các addon được chấp nhận một cách tường minh trong quá trình khởi tạo; từ chối một addon vẫn để lại repository hoàn toàn tuân thủ.
+
+## Khởi tạo repository dựa trên suy luận
+
+Trước khi tạo hay thực thi một kế hoạch, một agent khởi tạo với repository. Khởi tạo là **dựa trên suy luận, không dựa trên script**: agent đọc cấu trúc, tài liệu và cấu hình của repository để xây dựng một mô hình tư duy thay vì chạy một script cài đặt cố định.
+
+Trong quá trình khởi tạo, agent xác định kiểu hình của repository (độc lập so với điều phối), các lệnh build, test và lint, các quy ước hiện có về phong cách, cấu trúc và đặt tên, cùng các skill và agent đã sẵn có. Sự thấu hiểu này là điều cho phép agent lập kế hoạch và thực thi theo cách phù hợp với repository thay vì chống lại nó.
+
+## Thư mục `.agents/` và symlink `.claude → .agents`
+
+DWP gom tất cả những gì định nghĩa hành vi agent — skill, command, định nghĩa agent, tài liệu nội bộ và thiết lập — dưới một thư mục chuẩn duy nhất, `.agents/`. Cái tên báo hiệu rằng nội dung được chia sẻ giữa các agent thay vì gắn với bất kỳ một công cụ nào.
+
+Để tương thích ngược với các công cụ trước nay đọc từ `.claude/`, đường dẫn đó là một symlink tới `.agents/`:
+
+```bash
+ls -la .claude
+# .claude -> .agents
+```
+
+Mọi đường dẫn `.claude/...` phân giải trong suốt tới phần tương đương `.agents/...` của nó, nên công cụ cũ vẫn hoạt động trong khi nội dung mới tham chiếu vị trí chuẩn `.agents/`. Skill và agent được chỉnh sửa qua các tệp thực dưới `.agents/`, không bao giờ qua symlink.

@@ -1,0 +1,53 @@
+---
+title: Repository-Archetypen
+description: "Die Archetypen Einzel-Repository und Orchestrator-Hub, die Heuristik zur Klassifizierung eines Repositorys und wie sich Onboarding und Planumfang zwischen ihnen unterscheiden."
+order: 5
+lang: de
+summary: Warum der Archetyp eines Repositorys bestimmt, wie ein Agent onboardet und Pläne zuschneidet.
+icon: layers
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Repository-Archetypen
+
+DWP erkennt zwei Repository-Archetypen. Der Archetyp, den ein Agent ableitet, bestimmt, wie er onboardet und wie er Pläne zuschneidet, sodass seine korrekte Identifizierung die erste Entscheidung in jedem Einsatz ist.
+
+## Einzel-Repository
+
+Eine in sich geschlossene Codebasis — eine Anwendung, eine Bibliothek oder ein Service. Pläne operieren direkt auf dem Code im Repository, und das Onboarding liest die eigene Struktur und die Konventionen des Repositorys.
+
+Merkmale:
+
+- Eine einzige zusammenhängende Codebasis.
+- Pläne ändern Dateien in diesem Repository.
+- Der `.dwp/`-Arbeitsbereich liegt im Repository-Stammverzeichnis.
+
+## Orchestrator-Hub
+
+Ein Koordinations-Repository, das mehrere untergeordnete Repositorys verwaltet. Pläne können untergeordnete Pläne in Sub-Repositorys erzeugen, und das Onboarding liest das Register der verwalteten Repositorys des Hubs statt einer einzelnen Codebasis.
+
+Merkmale:
+
+- Koordiniert mehrere Sub-Repositorys.
+- Pläne können an untergeordnete Pläne delegieren.
+- Pflegt ein Register der verwalteten Repositorys.
+- Der `.dwp/`-Arbeitsbereich im Hub-Stammverzeichnis verfolgt repository-übergreifenden Zustand.
+
+## Klassifizierungsheuristik
+
+<ArchetypesTree lang="en" class="not-prose my-10" />
+
+Ein Agent sollte ein Repository als Orchestrator-Hub klassifizieren, wenn er mehrere verschachtelte git-Repositorys oder Submodule, ein Register oder Manifest verwalteter Repositorys oder Konfiguration findet, die auf externe Repositorys verweist. Fehlen diese Signale, behandelt er das Repository als Einzel-Repository.
+
+## Wie sich das Onboarding unterscheidet
+
+| Aspekt | Individual | Orchestrator |
+|--------|------------|--------------|
+| Umfang | Dieses Repository | Mehrere Repositorys |
+| Onboarding | Repository-Struktur | Hub-Register |
+| Planziel | Lokale Dateien | Untergeordnete Pläne |
+| Zustand | Lokales `.dwp/` | Repository-übergreifendes `.dwp/` |
+
+Der praktische Effekt ist, dass ein Einzel-Repository-Agent über eine Codebasis von Anfang bis Ende schlussfolgert, während ein Orchestrator-Agent über Koordination schlussfolgert — welches untergeordnete Repository welche Arbeit besitzt und wie der repository-übergreifende Zustand konsistent bleibt.
+
+Den Archetyp richtig zu treffen ist es, was einen Agenten in die Lage versetzt, stundenlang ohne Aufsicht autonom zu arbeiten: Er schneidet Pläne, Onboarding und Zustand auf die richtige Grenze zu, sodass der Agent von der ersten bis zur letzten Aufgabe auf der korrekten Oberfläche operiert.

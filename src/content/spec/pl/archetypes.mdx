@@ -1,0 +1,54 @@
+---
+title: Archetypy
+description: "Normatywny opis archetypów repozytoriów DWP: pojedyncze repozytorium i hub orkiestratora, heurystyka klasyfikacji oraz to, czym różni się onboarding."
+order: 4
+lang: pl
+section: Archetypes
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Archetypy
+
+**Wersja 1.0.** DWP rozpoznaje dwa archetypy repozytoriów. Archetyp decyduje o tym, jak agent przeprowadza onboarding i jak wyznaczany jest zakres planów.
+
+## Pojedyncze repozytorium
+
+Samowystarczalna baza kodu — aplikacja, biblioteka lub usługa. Plany działają bezpośrednio na kodzie.
+
+Cechy:
+
+- Pojedyncza, spójna baza kodu.
+- Plany modyfikują pliki w tym repozytorium.
+- Przestrzeń robocza `.dwp/` w głównym katalogu repozytorium.
+
+## Hub orkiestratora
+
+Repozytorium koordynujące, które zarządza wieloma repozytoriami potomnymi. Plany mogą uruchamiać plany potomne w podrepozytoriach.
+
+Cechy:
+
+- Koordynuje wiele podrepozytoriów.
+- Plany mogą delegować do planów potomnych.
+- Utrzymuje rejestr zarządzanych repozytoriów.
+- Przestrzeń robocza `.dwp/` w głównym katalogu huba śledzi stan międzyrepozytoryjny.
+
+## Heurystyka klasyfikacji
+
+<ArchetypesTree lang="pl" class="not-prose my-10" />
+
+Agent POWINIEN sklasyfikować repozytorium jako hub orkiestratora, jeśli znajdzie:
+
+- Wiele zagnieżdżonych repozytoriów git lub submodułów.
+- Rejestr lub manifest zarządzanych repozytoriów.
+- Konfigurację wskazującą na zewnętrzne repozytoria.
+
+W przeciwnym razie traktuje je jako pojedyncze repozytorium.
+
+## Różnice w onboardingu
+
+| Aspekt | Pojedyncze | Orkiestrator |
+|--------|------------|--------------|
+| Zakres | To repozytorium | Wiele repozytoriów |
+| Onboarding | Struktura repozytorium | Rejestr huba |
+| Cel planu | Pliki lokalne | Plany potomne |
+| Stan | Lokalny `.dwp/` | Międzyrepozytoryjny `.dwp/` |

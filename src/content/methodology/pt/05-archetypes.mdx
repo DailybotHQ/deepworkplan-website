@@ -1,0 +1,53 @@
+---
+title: Arquétipos de repositório
+description: "Os arquétipos de repositório individual e hub orquestrador, a heurística para classificar um repositório e como o onboarding e o escopo dos planos diferem entre eles."
+order: 5
+lang: pt
+summary: Por que o arquétipo de um repositório determina como um agente faz o onboarding e define o escopo dos planos.
+icon: layers
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Arquétipos de repositório
+
+O DWP reconhece dois arquétipos de repositório. O arquétipo que um agente infere determina como ele faz o onboarding e como define o escopo dos planos, de modo que identificá-lo corretamente é a primeira decisão em qualquer trabalho.
+
+## Repositório individual
+
+Uma base de código autocontida — uma aplicação, uma biblioteca ou um serviço. Os planos operam diretamente sobre o código no repositório, e o onboarding lê a estrutura e as convenções do próprio repositório.
+
+Características:
+
+- Uma única base de código coerente.
+- Os planos modificam arquivos neste repositório.
+- O espaço de trabalho `.dwp/` vive na raiz do repositório.
+
+## Hub orquestrador
+
+Um repositório de coordenação que gerencia múltiplos repositórios filhos. Os planos podem criar planos filhos em sub-repositórios, e o onboarding lê o registro de repositórios gerenciados do hub em vez de uma única base de código.
+
+Características:
+
+- Coordena múltiplos sub-repositórios.
+- Os planos podem delegar a planos filhos.
+- Mantém um registro de repositórios gerenciados.
+- O espaço de trabalho `.dwp/` na raiz do hub rastreia o estado entre repositórios.
+
+## Heurística de classificação
+
+<ArchetypesTree lang="pt" class="not-prose my-10" />
+
+Um agente deve classificar um repositório como um hub orquestrador quando encontra múltiplos repositórios git aninhados ou submódulos, um registro ou manifesto de repositórios gerenciados, ou configuração que aponta para repositórios externos. Na ausência desses sinais, ele trata o repositório como um repositório individual.
+
+## Como o onboarding difere
+
+| Aspecto | Individual | Orquestrador |
+|--------|------------|--------------|
+| Escopo | Este repositório | Múltiplos repositórios |
+| Onboarding | Estrutura do repositório | Registro do hub |
+| Alvo do plano | Arquivos locais | Planos filhos |
+| Estado | `.dwp/` local | `.dwp/` entre repositórios |
+
+O efeito prático é que um agente de repositório individual raciocina sobre uma base de código de ponta a ponta, enquanto um agente orquestrador raciocina sobre coordenação — qual repositório filho é dono de qual trabalho e como o estado entre repositórios permanece consistente.
+
+Acertar o arquétipo é o que permite a um agente trabalhar de forma autônoma por horas sem supervisão: ele ajusta os planos, o onboarding e o estado à fronteira certa, de modo que o agente opere sobre a superfície correta da primeira à última tarefa.

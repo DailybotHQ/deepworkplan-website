@@ -1,0 +1,40 @@
+---
+title: dwp-verify
+description: "Verifica che un repository sia conforme a DeepWorkPlan (AI-first) e che i suoi piani siano ben formati, con un report di conformità oggettivo di esito positivo/negativo rispetto alla spec."
+kind: command
+lang: it
+order: 5.5
+usage: /dwp-verify [plan <name> | all]
+aliases:
+  - dwp:verify
+---
+import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
+
+# dwp-verify
+
+Verifica in modo oggettivo la conformità di repository e piani — sola lettura.
+
+<CmdVerify lang="it" class="not-prose my-8" />
+
+## Cosa fa
+
+`dwp-verify` verifica, in modo meccanico, se un repository è AI-first (conforme a DeepWorkPlan) e se i suoi piani sono ben formati, poi riferisce l’esito positivo/negativo. Non cambia nulla.
+
+## Uso
+
+```
+/dwp-verify            # verifica il repository
+/dwp-verify plan auth  # verifica anche un piano specifico
+/dwp-verify all        # repository + ogni piano
+```
+
+## Comportamento
+
+1. Verifica il repository: `AGENTS.md` con comandi reali ed eseguibili; risoluzione di `CLAUDE.md`; categorie `docs/`; catalogo `.agents/` che corrisponde al disco; sottili delegatori `dwp-*`; `.dwp/` e `tmp/` esclusi da git; una skill risolvibile.
+2. Verifica un piano (quando richiesto): ogni attività ha criteri di accettazione e un validation gate, i progressi sono persistiti, le due attività finali obbligatorie sono presenti e le attività si riancorano all’obiettivo.
+3. Riferisce **CONFORMANT** o **NOT CONFORMANT** con ogni fallimento elencato.
+4. Propone di catturare le lacune come un Deep Work Plan; non corregge mai in silenzio.
+
+## Alias
+
+- `dwp:verify`

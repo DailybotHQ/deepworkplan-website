@@ -1,0 +1,54 @@
+---
+title: Archetypes
+description: "Deskripsi normatif arketipe repositori DWP: repositori individual dan orchestrator hub, heuristik klasifikasi, dan bagaimana onboarding berbeda."
+order: 4
+lang: id
+section: Archetypes
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Archetypes
+
+**Versi 1.0.** DWP mengenali dua arketipe repositori. Arketipe menentukan cara sebuah agent meng-onboard dan cara rencana ditetapkan lingkupnya.
+
+## Repositori individual
+
+Sebuah basis kode yang mandiri — sebuah aplikasi, sebuah pustaka, atau sebuah layanan. Rencana beroperasi langsung pada kode.
+
+Karakteristik:
+
+- Satu basis kode yang koheren.
+- Rencana memodifikasi berkas di repositori ini.
+- Ruang kerja `.dwp/` di akar repositori.
+
+## Orchestrator hub
+
+Sebuah repositori koordinasi yang mengelola beberapa repositori turunan. Rencana dapat memunculkan rencana turunan di sub-repositori.
+
+Karakteristik:
+
+- Mengoordinasikan beberapa sub-repositori.
+- Rencana dapat mendelegasikan ke rencana turunan.
+- Memelihara sebuah registri repositori yang dikelola.
+- Ruang kerja `.dwp/` di akar hub melacak status lintas repositori.
+
+## Heuristik klasifikasi
+
+<ArchetypesTree lang="en" class="not-prose my-10" />
+
+Sebuah agent SHOULD mengklasifikasikan sebuah repositori sebagai orchestrator hub jika ia menemukan:
+
+- Beberapa repositori git bersarang atau submodule.
+- Sebuah registri atau manifes repositori yang dikelola.
+- Konfigurasi yang menunjuk ke repositori eksternal.
+
+Jika tidak, perlakukan sebagai repositori individual.
+
+## Perbedaan onboarding
+
+| Aspek | Individual | Orchestrator |
+|--------|------------|--------------|
+| Lingkup | Repositori ini | Beberapa repositori |
+| Onboarding | Struktur repositori | Registri hub |
+| Target rencana | Berkas lokal | Rencana turunan |
+| Status | `.dwp/` lokal | `.dwp/` lintas repositori |

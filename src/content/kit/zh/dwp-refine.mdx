@@ -1,0 +1,39 @@
+---
+title: dwp-refine
+description: "通过增加、删除或重排任务来精炼一份现有的 Deep Work Plan，同时保全已完成的工作并更新任务表以反映这些改动。"
+kind: command
+lang: zh
+order: 3
+usage: /dwp-refine [plan]
+aliases:
+  - dwp:refine
+---
+import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
+
+# dwp-refine
+
+精炼一份现有的 Deep Work Plan。
+
+<CmdRefine lang="en" class="not-prose my-8" />
+
+## 它做了什么
+
+`dwp-refine` 修改一份现有的计划。它可以增加、删除或重排任务，同时保全已完成的工作并更新任务表。
+
+## 用法
+
+```
+/dwp-refine [plan]
+```
+
+## 行为
+
+1. 阅读现有的计划。
+2. 增加、删除或重排任务。
+3. 保全已完成的工作。
+4. 更新任务表。
+5. 记录改动了什么以及为什么。
+
+## 别名
+
+- `dwp:refine`

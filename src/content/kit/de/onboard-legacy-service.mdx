@@ -1,0 +1,31 @@
+---
+title: "Ein Legacy-Service im Onboarding"
+description: "Eine veranschaulichende Anleitung, einen Agenten auf ein undokumentiertes Legacy-Repository zu richten und es AI-first zu hinterlassen — durchdacht, nicht-destruktiv und verifizierbar."
+kind: example
+lang: de
+order: 4
+---
+import OnboardFlow from '@/components/diagrams/kit/OnboardFlow.astro';
+
+# Ein Legacy-Service im Onboarding
+
+Eine veranschaulichende Anleitung des Ersten, was die meisten Teams tun: ein bestehendes, unzureichend dokumentiertes Repository nehmen und es agenten-steuerbar machen — ohne zu stören, was bereits funktioniert.
+
+<OnboardFlow lang="en" class="not-prose my-10" />
+
+## Das Ziel
+
+„Mach diesen fünf Jahre alten Service AI-first.“ Er hat bereits eine unvollständige `README`, einige verstreute Dokumente und keine `AGENTS.md`.
+
+## Der Durchlauf
+
+Der Entwickler gibt seinem Agenten eine Zeile — *lies und folge [`/init.md`](/init.md)* — und der Onboarding-Ablauf:
+
+1. **Erkundung.** Erkennt die echte Sprache, den Paketmanager (aus der vorhandenen Lockfile) und die tatsächlichen Build-, Test- und Lint-Befehle — durch Lesen des Repositorys, nicht durch Annahmen.
+2. **Schlägt einen Plan vor und fragt nach.** Weil bereits Artefakte existieren, ist er nicht-destruktiv: Er listet auf, was er erstellen versus was er abgleichen wird, und wartet auf Freigabe, bevor er die unvollständige `README` oder die verstreuten Dokumente anrührt.
+3. **Erzeugt das Harness.** Eine durchdachte `AGENTS.md` mit den echten Quick Commands des Services, einen kategorisierten `docs/`-Baum, der die bestehenden Notizen aufnimmt, statt sie zu duplizieren, READMEs je Modul, das `.agents/`-Kit und ein gitignore-ausgeschlossenes `.dwp/`.
+4. **Verifiziert.** `/dwp-verify` liefert einen objektiven Bestanden/Nicht-bestanden-Bericht anhand der Konformitätskriterien.
+
+## Ergebnis
+
+Der Legacy-Service wird AI-first, ohne dass etwas zerstört wird: Bestehende Arbeit wird zusammengeführt, nicht überschrieben, und das Ergebnis ist prüfbar statt behauptet. Von hier aus plant und führt das Team echte Arbeit mit `/dwp-create` und `/dwp-execute` aus.

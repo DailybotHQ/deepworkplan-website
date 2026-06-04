@@ -1,0 +1,38 @@
+---
+title: "Bir çerçeve geçişi"
+description: "Deep Work Plan olarak yürütülen, uzun soluklu bir çerçeve geçişinin örnek anlatımı — ajanların genellikle savrulduğu, saatler süren, çok dosyalı türden bir iş."
+kind: example
+lang: tr
+order: 3
+---
+import MigrationBeforeAfter from '@/components/diagrams/kit/MigrationBeforeAfter.astro';
+
+# Bir çerçeve geçişi
+
+DWP’nin tam da bunun için kurulduğu işin örnek bir anlatımı: onlarca dosyaya yayılan ve birkaç saat süren bir geçiş — yönlendirilmemiş bir ajanın ipin ucunu kaçıracağı kadar uzun.
+
+## Hedef
+
+<MigrationBeforeAfter lang="tr" class="not-prose my-10" />
+
+"Veri katmanını, servisin tamamında eski ORM’den yenisine geçir."
+
+## Plansız
+
+Bir ajan, bağlamı yarım kalmış değişikliklerle dolana dek modelleri düzenler, hangi çağrı yerlerini zaten dönüştürdüğünü unutur ve neyin kaldığına dair hiçbir kayıt bırakmadan build’i kırmızı bırakır. Kaldığı yerden devam etmek, kendi düşünce silsilesini bir sohbet günlüğünden yeniden kurmak demektir.
+
+## Bir Deep Work Plan olarak
+
+`/dwp-create`, hedefi her biri kabul ölçütleri ve bir doğrulama geçidi içeren atomik, sıralı görevlere ayrıştırır:
+
+1. Yeni ORM’yi eskisinin yanına ekleyin (davranış değişikliği yok; geçit: build + testler yeşil).
+2. A modülünün modellerini ve çağrı yerlerini geçirin (geçit: A modülü testleri yeşil).
+3. Modül başına yineleyin, her biri tek bir görev — her görevden sonra ilerleme kaydedilir.
+4. Eski ORM’yi ve onun ara katmanlarını kaldırın (geçit: hiçbir referans kalmaz; tüm takım yeşil).
+5. Dokümanları ve modül başına README dosyalarını güncelleyin.
+
+`/dwp-execute`, görevleri sırayla çalıştırır; geçen her geçitten sonra commit eder ve `PROGRESS.md` dosyasını günceller. Bağlam penceresi yarı yolda sıfırlanırsa, `/dwp-resume` planı ve ilerlemeyi diskten okur ve bir sonraki işaretlenmemiş görevden devam eder.
+
+## Sonuç
+
+Geçiş; küçük, incelenebilir ve tek tek doğrulanmış commit’ler dizisi olarak yerine oturur — ve kesintilere dayanır, çünkü doğru kaynak konuşma değil, plandır.

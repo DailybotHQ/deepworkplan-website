@@ -1,0 +1,53 @@
+---
+title: Các kiểu hình repository
+description: "Kiểu hình repository độc lập và trung tâm điều phối, phép suy đoán để phân loại một repository, và cách khởi tạo cùng phạm vi kế hoạch khác nhau giữa chúng."
+order: 5
+lang: vi
+summary: Vì sao kiểu hình của một repository quyết định cách agent khởi tạo và giới hạn phạm vi các kế hoạch.
+icon: layers
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Các kiểu hình repository
+
+DWP nhận diện hai kiểu hình repository. Kiểu hình mà agent suy ra quyết định cách nó khởi tạo và cách nó giới hạn phạm vi các kế hoạch, nên xác định nó đúng là quyết định đầu tiên trong bất kỳ phần việc nào.
+
+## Repository độc lập
+
+Một codebase khép kín — một ứng dụng, một thư viện, hay một dịch vụ. Các kế hoạch tác động trực tiếp lên mã trong repository, và việc khởi tạo đọc cấu trúc và quy ước của chính repository.
+
+Đặc điểm:
+
+- Một codebase mạch lạc duy nhất.
+- Các kế hoạch sửa đổi tệp trong repository này.
+- Không gian làm việc `.dwp/` sống tại gốc repository.
+
+## Trung tâm điều phối
+
+Một repository điều phối quản lý nhiều repository con. Các kế hoạch có thể sinh ra các kế hoạch con trong các sub-repository, và việc khởi tạo đọc danh bạ các repository được quản lý của trung tâm thay vì một codebase duy nhất.
+
+Đặc điểm:
+
+- Điều phối nhiều sub-repository.
+- Các kế hoạch có thể ủy thác cho các kế hoạch con.
+- Duy trì một danh bạ các repository được quản lý.
+- Không gian làm việc `.dwp/` tại gốc trung tâm theo dõi trạng thái xuyên repository.
+
+## Phép suy đoán phân loại
+
+<ArchetypesTree lang="vi" class="not-prose my-10" />
+
+Một agent nên phân loại một repository là trung tâm điều phối khi nó tìm thấy nhiều repository git lồng nhau hoặc submodule, một danh bạ hay manifest các repository được quản lý, hoặc cấu hình trỏ tới các repository bên ngoài. Khi không có các dấu hiệu đó, nó coi repository là một repository độc lập.
+
+## Khởi tạo khác nhau như thế nào
+
+| Khía cạnh | Độc lập | Điều phối |
+|--------|------------|--------------|
+| Phạm vi | Repository này | Nhiều repository |
+| Khởi tạo | Cấu trúc repository | Danh bạ trung tâm |
+| Đích kế hoạch | Tệp cục bộ | Các kế hoạch con |
+| Trạng thái | `.dwp/` cục bộ | `.dwp/` xuyên repository |
+
+Hệ quả thực tế là một agent repository độc lập suy luận về một codebase từ đầu tới cuối, trong khi một agent điều phối suy luận về sự điều phối — repository con nào sở hữu công việc nào, và làm sao trạng thái xuyên repository luôn nhất quán.
+
+Xác định đúng kiểu hình là điều cho phép một agent làm việc tự chủ trong nhiều giờ mà không cần giám sát: nó giới hạn phạm vi các kế hoạch, việc khởi tạo và trạng thái vào đúng ranh giới, để agent vận hành trên bề mặt chính xác từ tác vụ đầu tiên tới tác vụ cuối cùng.

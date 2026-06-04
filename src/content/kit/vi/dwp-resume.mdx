@@ -1,0 +1,38 @@
+---
+title: dwp-resume
+description: "Tiếp tục một Deep Work Plan bị gián đoạn bằng cách dựng lại trạng thái từ nhật ký tiến độ và các file tác vụ, rồi tiếp tục từ tác vụ chưa hoàn thành đầu tiên."
+kind: command
+lang: vi
+order: 4
+usage: /dwp-resume [plan]
+aliases:
+  - dwp:resume
+---
+import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
+
+# dwp-resume
+
+Tiếp tục một Deep Work Plan bị gián đoạn.
+
+<CmdResume lang="vi" class="not-prose my-8" />
+
+## Tác dụng
+
+`dwp-resume` tiếp tục một kế hoạch bị gián đoạn. Nó dựng lại trạng thái từ `PROGRESS.md` và các file tác vụ, rồi tiếp tục từ tác vụ chưa hoàn thành đầu tiên.
+
+## Cách dùng
+
+```
+/dwp-resume [plan]
+```
+
+## Hành vi
+
+1. Đọc `PROGRESS.md` và các file tác vụ.
+2. Dựng lại trạng thái thực thi.
+3. Tiếp tục từ tác vụ chưa hoàn thành đầu tiên.
+4. Cập nhật tiến độ trong quá trình thực hiện.
+
+## Bí danh
+
+- `dwp:resume`

@@ -1,0 +1,38 @@
+---
+title: dwp-resume
+description: "Kesintiye uğramış bir Deep Work Plan’i, durumu ilerleme günlüğü ve görev dosyalarından yeniden kurarak, ardından ilk tamamlanmamış görevden devam ederek sürdürür."
+kind: command
+lang: tr
+order: 4
+usage: /dwp-resume [plan]
+aliases:
+  - dwp:resume
+---
+import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
+
+# dwp-resume
+
+Kesintiye uğramış bir Deep Work Plan’i sürdürün.
+
+<CmdResume lang="tr" class="not-prose my-8" />
+
+## Ne yapar
+
+`dwp-resume`, kesintiye uğramış bir plana devam eder. Durumu `PROGRESS.md` ve görev dosyalarından yeniden kurar, ardından ilk tamamlanmamış görevden devam eder.
+
+## Kullanım
+
+```
+/dwp-resume [plan]
+```
+
+## Davranış
+
+1. `PROGRESS.md` dosyasını ve görev dosyalarını okuyun.
+2. Yürütme durumunu yeniden kurun.
+3. İlk tamamlanmamış görevden devam edin.
+4. İlerledikçe ilerlemeyi güncelleyin.
+
+## Takma adlar
+
+- `dwp:resume`

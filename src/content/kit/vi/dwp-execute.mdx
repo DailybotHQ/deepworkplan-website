@@ -1,0 +1,39 @@
+---
+title: dwp-execute
+description: "Thực thi một Deep Work Plan sẵn có theo từng tác vụ. Agent đọc toàn bộ kế hoạch, chạy từng tác vụ theo thứ tự, cập nhật tiến độ, và đánh dấu hoàn thành chính xác."
+kind: command
+lang: vi
+order: 2
+usage: /dwp-execute [plan]
+aliases:
+  - dwp:execute
+---
+import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
+
+# dwp-execute
+
+Thực thi một Deep Work Plan sẵn có.
+
+<CmdExecute lang="vi" class="not-prose my-8" />
+
+## Tác dụng
+
+`dwp-execute` chạy một kế hoạch sẵn có theo từng tác vụ. Nó đọc toàn bộ kế hoạch, thực thi từng tác vụ theo thứ tự, cập nhật `PROGRESS.md`, và đánh dấu trạng thái hoàn thành của mỗi tác vụ.
+
+## Cách dùng
+
+```
+/dwp-execute [plan]
+```
+
+## Hành vi
+
+1. Đọc toàn bộ kế hoạch trước khi bắt đầu.
+2. Thực thi các tác vụ theo thứ tự.
+3. Cập nhật `PROGRESS.md` sau mỗi tác vụ.
+4. Đánh dấu trạng thái tác vụ chính xác.
+5. Dừng lại và hỏi khi bị chặn.
+
+## Bí danh
+
+- `dwp:execute`

@@ -1,0 +1,39 @@
+---
+title: dwp-status
+description: "Deep Work Plan を実行せずにその状態を報告する。エージェントは計画と進捗ログを読み、完了済み、進行中、保留中の作業を要約する。"
+kind: command
+lang: ja
+order: 5
+usage: /dwp-status [plan]
+aliases:
+  - dwp:status
+---
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
+
+# dwp-status
+
+Deep Work Plan の状態を実行せずに報告します。
+
+<CmdStatus lang="ja" class="not-prose my-8" />
+
+## 何をするか
+
+`dwp-status` は変更を加えずに計画の進捗を要約します。完了済み、進行中、保留中のタスクを報告します。
+
+## 使い方
+
+```
+/dwp-status [plan]
+```
+
+## 振る舞い
+
+1. 計画と `PROGRESS.md` を読む。
+2. 完了済みのタスクを要約する。
+3. 進行中のタスクを要約する。
+4. 保留中のタスクを要約する。
+5. 何も変更せずに報告する。
+
+## エイリアス
+
+- `dwp:status`

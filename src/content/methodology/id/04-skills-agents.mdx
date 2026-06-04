@@ -1,0 +1,53 @@
+---
+title: Skills and agents
+description: "Perbedaan antara skill dan agent, onboarding repositori berbasis penalaran, dan direktori .agents dengan konvensi symlink .claude ke .agents."
+order: 4
+lang: id
+summary: Bagaimana skill yang dapat dipakai ulang, agent terspesialisasi, dan onboarding repo saling melengkapi.
+icon: users
+---
+import SkillsAgents from '@/components/diagrams/methodology/SkillsAgents.astro';
+
+# Skills and agents
+
+DWP agnostik terhadap agent, tetapi ia mengharapkan dua blok pembangun yang berulang — skill dan agent — serta cara yang disengaja untuk berorientasi di sebuah repositori sebelum pekerjaan apa pun dimulai.
+
+## Skill versus agent
+
+<SkillsAgents lang="en" class="not-prose my-10" />
+
+Keduanya mudah dikelirukan tetapi melayani tujuan yang berbeda:
+
+- **Skill** adalah prosedur yang dapat dipakai ulang yang dipanggil berdasarkan nama. Sebuah skill mengemas alur kerja yang dapat diulang — menjalankan test, memperbaiki lint, membuat sebuah komponen — sehingga agent dan manusia memanggilnya dengan cara yang sama setiap kali.
+- **Agent** adalah pekerja terspesialisasi dengan peran yang terdefinisi — reviewer, executor, architect. Setiap agent memiliki tanggung jawab yang terfokus dan beroperasi dalam lingkupnya.
+
+Ringkasan yang berguna: sebuah skill adalah *bagaimana* melakukan tugas berulang; sebuah agent adalah *siapa* yang bertanggung jawab atas suatu kelas pekerjaan.
+
+## Kit hidup: repositori menumbuhkan skill-nya sendiri
+
+Onboarding mengubah sebuah repositori menjadi agent harness; ia tidak membekukannya. Kit dimaksudkan untuk **tumbuh** seiring alur kerja repositori menjadi jelas. DWP menyediakan sebuah sub-skill **author** — dipanggil melalui `/skill-create` dan `/agent-create` — yang bernalar tentang tata letak `.agents/` dan konvensi repositori yang ada, lalu menulis skill, agent, atau delegator command tipis yang baru yang sesuai dengannya. Repositori menulis kit-nya sendiri alih-alih mewarisi kit generik.
+
+Sub-skill author cermat soal kecocokan. Ia membuat sebuah skill untuk prosedur yang dapat diulang yang dijalankan orang secara manual, sebuah agent untuk peran berulang dengan kebutuhan model atau alat yang berbeda, dan sebuah command hanya sebagai titik masuk tipis yang mengarahkan ke sebuah skill atau agent. Ia melewati apa pun yang generik yang tidak cocok dengan alur kerja nyata, dan ia menjaga katalog `.agents/docs/` tetap selaras dengan apa pun yang ditambahkannya. Sub-skill yang sama menopang tugas wajib Skills & Agents Discovery, yang merekonsiliasikan katalog terhadap apa yang sebenarnya ada di disk — dan `/dwp-verify` mengonfirmasi rekonsiliasi itu secara objektif, gagal jika katalog dan berkasnya menyimpang.
+
+## Addon perawatan
+
+Selain authoring, DWP membawa **addon perawatan opt-in** — tidak pernah diwajibkan agar sebuah repositori menjadi AI-first. Addon **dependency-upgrade** adalah contoh kanonisnya: ia bernalar tentang package manager *yang sebenarnya* ada di repositori (npm, pnpm, atau yarn dengan `ncu`; pip, poetry, atau uv; Cargo; Go modules; Bundler; Composer) alih-alih mengasumsikan satu, lalu memperbarui dalam batch-batch kecil, menjalankan validation gate nyata repositori setelah setiap batch, mengembalikan batch apa pun yang gagal, dan merangkum tanpa meng-commit secara otomatis. Addon diterima secara eksplisit selama onboarding; menolak satu pun tetap membuat repositori sepenuhnya konforman.
+
+## Onboarding repositori berbasis penalaran
+
+Sebelum membuat atau mengeksekusi sebuah rencana, agent meng-onboard ke repositori. Onboarding bersifat **berbasis penalaran, bukan berbasis skrip**: agent membaca struktur, dokumentasi, dan konfigurasi repositori untuk membangun model mental alih-alih menjalankan skrip penyiapan yang tetap.
+
+Selama onboarding, agent mengidentifikasi arketipe repositori (individual versus orchestrator), perintah build, test, dan lint, konvensi yang ada untuk gaya, struktur, dan penamaan, serta skill dan agent yang sudah tersedia. Pemahaman inilah yang memungkinkan agent merencanakan dan mengeksekusi dengan cara yang sesuai dengan repositori alih-alih melawannya.
+
+## Direktori `.agents/` dan symlink `.claude → .agents`
+
+DWP mengumpulkan segala sesuatu yang mendefinisikan perilaku agent — skill, command, definisi agent, dokumentasi internal, dan pengaturan — di bawah satu direktori kanonis, `.agents/`. Nama itu menandakan bahwa isinya dibagikan lintas agent ketimbang terikat pada satu alat mana pun.
+
+Demi kompatibilitas mundur dengan alat yang secara historis membaca dari `.claude/`, path itu adalah sebuah symlink ke `.agents/`:
+
+```bash
+ls -la .claude
+# .claude -> .agents
+```
+
+Setiap path `.claude/...` me-resolve secara transparan ke padanan `.agents/...`-nya, sehingga perkakas lama tetap bekerja sementara konten baru merujuk ke lokasi kanonis `.agents/`. Skill dan agent disunting melalui berkas nyata di bawah `.agents/`, tidak pernah melalui symlink.

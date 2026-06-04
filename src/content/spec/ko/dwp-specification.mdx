@@ -1,0 +1,66 @@
+---
+title: DWP 스펙
+description: "규범적 Deep Work Plan 스펙: 계획 구조, 아홉 절로 이루어진 작업 구조, 다섯 연산 실행 루프, 출력 작업 공간, 그리고 버전 관리."
+order: 2
+lang: ko
+section: Workflow
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
+
+# DWP 스펙
+
+**버전 1.0. 상태: 안정(Stable).** 이 문서는 Deep Work Plan(DWP) 방법론의 규범적 스펙입니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
+
+## 정의
+
+Deep Work Plan은 복잡한 엔지니어링 작업을 순차적이고 검토 가능한 작업 단위로 분해해 기술하는, 구조화된 Markdown 전용 산출물이며, 자율적으로 일하는 AI 코딩 에이전트가 생성, 실행, 유지하도록 설계되었습니다.
+
+DWP는 스펙 주도입니다. 계획이 곧 스펙이고, 에이전트는 즉흥적으로 하는 대신 그것의 명시적인 인수 기준과 검증 게이트에 맞춰 실행해야(MUST) 합니다. 채팅 로그가 아니라 스펙이 견고한 진실 공급원이므로, 작업은 세션과 에이전트를 넘어 검증 가능하고 재개 가능합니다. 이는 또한 이식 가능한 형태로 만든 하니스 엔지니어링이기도 합니다. 에이전트를 신뢰할 수 있게 만드는 컨텍스트, 제어 루프, 가드레일, 재개 가능한 상태가 일반 Markdown으로 리포지토리 자체에 설치되므로, 적합한 어떤 에이전트든 도구별 프레임워크 없이 리포지토리를 조종할 수 있습니다(MAY).
+
+## 계획 구조
+
+계획은 `PLAN_<slug>/`라는 이름으로 `.dwp/plans/` 아래의 디렉터리여야(MUST) 합니다. 디렉터리는 다음을 담아야(MUST) 합니다.
+
+- `README.md` — 계획 개요, 목표, 작업 표, 상태.
+- 작업당 하나의 파일, `<n>.task_<slug>.md` 형식의 이름.
+- `PROGRESS.md` — 실행의 진행 로그.
+
+## 작업 구조
+
+<TaskAnatomy lang="ko" class="not-prose my-10" />
+
+각 작업 파일은 이 아홉 절을 순서대로 담아야(MUST) 합니다.
+
+1. **목표(Goal)** — 작업이 무엇을 달성하는지에 대한 한 단락의 진술.
+2. **컨텍스트(Context)** — 배경, 링크, 그리고 이 작업이 존재하는 이유.
+3. **단계(Steps)** — 수행할 순서대로 정리된 구체적 행동.
+4. **인수 기준(Acceptance criteria)** — 완료를 정의하는 조건의 체크리스트.
+5. **검증(Validation)** — 확인을 위해 실행할 명령이나 테스트.
+6. **파일(Files)** — 생성 또는 수정될 것으로 예상되는 경로.
+7. **의존성(Dependencies)** — 다른 작업이나 외부 선행 조건.
+8. **리스크(Risks)** — 무엇이 잘못될 수 있는지와 완화책.
+9. **완료 & 로그(Completion & Log)** — 상태 표시와 함께 시간순 기록.
+
+## 실행 루프
+
+<CoreLoop lang="ko" class="not-prose my-10" />
+
+DWP는 다섯 가지 연산을 정의합니다.
+
+- **create** — 목표로부터 새 계획을 생성합니다.
+- **execute** — 계획을 작업 단위로 실행합니다.
+- **refine** — 기존 계획을 수정합니다.
+- **resume** — 중단된 계획을 재개합니다.
+- **status** — 실행하지 않고 계획 상태를 보고합니다.
+
+## 출력 작업 공간
+
+<OutputWorkspace lang="ko" class="not-prose my-10" />
+
+모든 DWP 산출물은 리포지토리 루트의 gitignore된 `.dwp/` 디렉터리 아래에 있어야(MUST) 합니다.
+
+## 버전 관리
+
+이 스펙은 시맨틱 버저닝을 따릅니다.

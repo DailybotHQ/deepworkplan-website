@@ -1,0 +1,66 @@
+---
+title: DWP 仕様
+description: "規範的な Deep Work Plan 仕様。計画の構造、九つの節からなるタスク構造、五つの操作からなる実行ループ、出力作業領域、そしてバージョニング。"
+order: 2
+lang: ja
+section: Workflow
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
+
+# DWP 仕様
+
+**バージョン 1.0。状態: 安定。** この文書は Deep Work Plan（DWP）方法論の規範的な仕様です。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
+
+## 定義
+
+Deep Work Plan は、複雑なエンジニアリング作業を逐次的でレビュー可能な作業単位へと分解して記述する、構造化された Markdown のみの成果物であり、自律的に働くAIコーディングエージェントによって作成、実行、維持されるよう設計されています。
+
+DWP は仕様駆動です。計画が仕様であり、エージェントは即興するのではなく、その明示的な受け入れ基準と検証ゲートに照らして実行しなければなりません（MUST）。仕様こそが、チャットの履歴ではなく、永続的な信頼できる情報源であるため、作業は検証可能で、セッションとエージェントをまたいで再開可能です。これは同時に、ハーネスエンジニアリングを持ち運び可能にしたものでもあります。エージェントを信頼できるものにするコンテキスト、制御ループ、ガードレール、再開可能な状態が、プレーンな Markdown としてリポジトリそのものにインストールされるため、適合するあらゆるエージェントは、ツール固有のフレームワークなしにリポジトリを操縦できます（MAY）。
+
+## 計画の構造
+
+計画は `.dwp/plans/` 配下の `PLAN_<slug>/` という名前のディレクトリでなければなりません（MUST）。そのディレクトリは次のものを含まなければなりません（MUST）。
+
+- `README.md` — 計画の概観、目標、タスク表、状態。
+- タスクごとに一つのファイル。`<n>.task_<slug>.md` という名前。
+- `PROGRESS.md` — 実行の進行ログ。
+
+## タスク構造
+
+<TaskAnatomy lang="ja" class="not-prose my-10" />
+
+各タスクファイルは、これら九つの節をこの順序で含まなければなりません（MUST）。
+
+1. **Goal（目標）** — タスクが何を達成するかを述べる一段落。
+2. **Context（コンテキスト）** — 背景、リンク、そしてこのタスクが存在する理由。
+3. **Steps（手順）** — 実行すべき、順序づけられた具体的な行動。
+4. **Acceptance criteria（受け入れ基準）** — 完了を定義する条件のチェックリスト。
+5. **Validation（検証）** — 検証のために実行するコマンドやテスト。
+6. **Files（ファイル）** — 作成または変更されると見込まれるパス。
+7. **Dependencies（依存関係）** — 他のタスクや外部の前提条件。
+8. **Risks（リスク）** — 何がうまくいかない可能性があるか、そしてその緩和策。
+9. **Completion & Log（完了とログ）** — 状態マーカーと時系列の記録。
+
+## 実行ループ
+
+<CoreLoop lang="ja" class="not-prose my-10" />
+
+DWP は五つの操作を定義します。
+
+- **create** — 目標から新しい計画を生成する。
+- **execute** — 計画をタスクごとに実行する。
+- **refine** — 既存の計画を修正する。
+- **resume** — 中断された計画を再開する。
+- **status** — 実行せずに計画の状態を報告する。
+
+## 出力作業領域
+
+<OutputWorkspace lang="ja" class="not-prose my-10" />
+
+すべての DWP 成果物は、リポジトリのルートにある gitignore された `.dwp/` ディレクトリの配下に存在しなければなりません（MUST）。
+
+## バージョニング
+
+この仕様はセマンティックバージョニングに従います。

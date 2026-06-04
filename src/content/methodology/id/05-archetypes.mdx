@@ -1,0 +1,53 @@
+---
+title: Repository archetypes
+description: "Arketipe repositori individual dan orchestrator hub, heuristik untuk mengklasifikasikan sebuah repositori, dan bagaimana onboarding serta lingkup rencana berbeda di antara keduanya."
+order: 5
+lang: id
+summary: Mengapa arketipe sebuah repositori menentukan cara agent meng-onboard dan menetapkan lingkup rencana.
+icon: layers
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Repository archetypes
+
+DWP mengenali dua arketipe repositori. Arketipe yang disimpulkan agent menentukan cara ia meng-onboard dan cara ia menetapkan lingkup rencana, sehingga mengidentifikasinya dengan benar adalah keputusan pertama dalam setiap penugasan.
+
+## Repositori individual
+
+Sebuah basis kode yang mandiri — sebuah aplikasi, sebuah pustaka, atau sebuah layanan. Rencana beroperasi langsung pada kode di dalam repositori, dan onboarding membaca struktur serta konvensi repositori itu sendiri.
+
+Karakteristik:
+
+- Satu basis kode yang koheren.
+- Rencana memodifikasi berkas di repositori ini.
+- Ruang kerja `.dwp/` berada di akar repositori.
+
+## Orchestrator hub
+
+Sebuah repositori koordinasi yang mengelola beberapa repositori turunan. Rencana dapat memunculkan rencana turunan di sub-repositori, dan onboarding membaca registri repositori yang dikelola hub alih-alih satu basis kode.
+
+Karakteristik:
+
+- Mengoordinasikan beberapa sub-repositori.
+- Rencana dapat mendelegasikan ke rencana turunan.
+- Memelihara sebuah registri repositori yang dikelola.
+- Ruang kerja `.dwp/` di akar hub melacak status lintas repositori.
+
+## Heuristik klasifikasi
+
+<ArchetypesTree lang="en" class="not-prose my-10" />
+
+Sebuah agent sebaiknya mengklasifikasikan sebuah repositori sebagai orchestrator hub ketika ia menemukan beberapa repositori git bersarang atau submodule, sebuah registri atau manifes repositori yang dikelola, atau konfigurasi yang menunjuk ke repositori eksternal. Dengan tidak adanya sinyal-sinyal itu, ia memperlakukan repositori sebagai repositori individual.
+
+## Bagaimana onboarding berbeda
+
+| Aspek | Individual | Orchestrator |
+|--------|------------|--------------|
+| Lingkup | Repositori ini | Beberapa repositori |
+| Onboarding | Struktur repositori | Registri hub |
+| Target rencana | Berkas lokal | Rencana turunan |
+| Status | `.dwp/` lokal | `.dwp/` lintas repositori |
+
+Efek praktisnya adalah bahwa agent repositori individual bernalar tentang satu basis kode dari ujung ke ujung, sementara agent orchestrator bernalar tentang koordinasi — repositori turunan mana yang memiliki pekerjaan yang mana, dan bagaimana status lintas repositori tetap konsisten.
+
+Menetapkan arketipe dengan benar adalah yang memungkinkan agent bekerja secara otonom selama berjam-jam tanpa pengawasan: ia menetapkan lingkup rencana, onboarding, dan status ke batas yang tepat, sehingga agent beroperasi pada permukaan yang benar dari tugas pertama sampai terakhir.

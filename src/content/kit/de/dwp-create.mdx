@@ -1,0 +1,51 @@
+---
+title: dwp-create
+description: "Einen neuen Deep Work Plan aus einem übergeordneten Ziel erstellen. Der Agent analysiert das Ziel, zerlegt die Arbeit in Aufgaben und schreibt die Plandateien unter .dwp."
+kind: command
+lang: de
+order: 1
+usage: /dwp-create <goal>
+aliases:
+  - dwp:create
+---
+import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
+
+# dwp-create
+
+Einen neuen Deep Work Plan aus einem übergeordneten Ziel erstellen.
+
+<CmdCreate lang="en" class="not-prose my-8" />
+
+## Was es tut
+
+`dwp-create` nimmt ein übergeordnetes Ziel und verwandelt es in einen strukturierten Plan. Es analysiert das Ziel, stellt bei Bedarf klärende Fragen, zerlegt die Arbeit in aufeinanderfolgende Aufgaben und schreibt die Plandateien.
+
+## Verwendung
+
+```
+/dwp-create <goal>
+```
+
+## Modi
+
+`dwp-create` verwendet standardmäßig den **geführten** Modus: Es sammelt Kontext, schreibt einen einzigen verfeinerten Entwurf, **zeigt ihn Ihnen und bittet vor der Erzeugung des endgültigen Plans um Bestätigung** — sodass Sie den Plan stets lesen, bevor er erstellt wird. Dies ist die empfohlene Voreinstellung, besonders die ersten Male.
+
+Hängen Sie **`trust`** (oder `auto`) als letztes Wort an, um die Bestätigungen zu überspringen — der Agent schreibt den verfeinerten Entwurf und geht direkt zum endgültigen Plan über:
+
+```
+/dwp-create <goal> trust
+```
+
+Der Trust-Modus ist die Abkürzung für Power-User, sobald Sie dem Ablauf vertrauen; der geführte Modus hält standardmäßig einen Menschen in der Schleife.
+
+## Verhalten
+
+1. Das Ziel und den Repository-Kontext analysieren.
+2. Bei Mehrdeutigkeit klärende Fragen stellen.
+3. Einen verfeinerten Entwurf nach `.dwp/drafts/` schreiben (im geführten Modus prüfen und bestätigen).
+4. In aufeinanderfolgende Aufgaben zerlegen und die README, die Aufgabendateien und PROGRESS schreiben.
+5. Mit den zwei verpflichtenden Abschlussaufgaben enden.
+
+## Aliase
+
+- `dwp:create`
