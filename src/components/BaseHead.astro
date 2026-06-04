@@ -84,7 +84,16 @@ const inLanguage = getActiveLanguages().map((l) => getHreflang(l));
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<!-- viewport-fit=cover lets the page draw under the iPhone notch / dynamic-island
+     and below the home indicator; pair with env(safe-area-inset-*) on any
+     edge-anchored UI. user-scalable is intentionally left unset so users can pinch zoom (a11y). -->
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<!-- iOS Safari otherwise linkifies numbers/dates/addresses in body copy with
+     its own blue styling that clashes with the editorial palette. -->
+<meta name="format-detection" content="telephone=no,address=no,email=no,date=no" />
+<!-- color-scheme advertises both themes so native widgets (scrollbars, form
+     controls, autofill, ::selection) adapt without us styling each one. -->
+<meta name="color-scheme" content="light dark" />
 <link rel="icon" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -147,8 +156,12 @@ const inLanguage = getActiveLanguages().map((l) => getHreflang(l));
 />
 <meta name="author" content="Deep Work Plan" />
 
-<!-- Theme color for browser chrome. Light by default (independent of the
-     device's prefers-color-scheme); the theme scripts sync it to the chosen theme. -->
+<!-- Theme color for browser chrome. We declare both light/dark variants so the
+     correct chrome shows on the very first paint (before the inline theme
+     script runs); after that the toggle script updates the unconditional
+     <meta> below to whichever theme the user picked. -->
+<meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#14140f" media="(prefers-color-scheme: dark)" />
 <meta name="theme-color" content="#f7f4ec" />
 
 <!-- Open Graph / Facebook -->

@@ -78,7 +78,11 @@ function toggleTheme() {
   isDark = html.classList.toggle('dark');
   justToggled = true;
   const newTheme = isDark ? 'dark' : 'light';
-  localStorage.setItem('theme', newTheme);
+  try {
+    localStorage.setItem('theme', newTheme);
+  } catch (e) {
+    /* Safari Private Mode throws SecurityError on storage access */
+  }
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute('content', isDark ? '#14140f' : '#f7f4ec');
   trackEvent(EVENTS.THEME_TOGGLE, { theme: newTheme });
