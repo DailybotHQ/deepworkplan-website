@@ -34,6 +34,8 @@
     "images:webp": "echo 'All images are natively WebP — no generation needed'",
     "md:check": "node scripts/check-md-parity.mjs",
     "md:check:strict": "node scripts/check-md-parity.mjs --strict",
+    "i18n:check": "node scripts/i18n/check.mjs",
+    "i18n:scaffold": "node scripts/i18n/scaffold-language.mjs",
     "lighthouse": "lhci autorun",
     "lighthouse:full": "lhci autorun --config=lighthouserc.full.cjs",
     "lighthouse:desktop": "lhci autorun --config=lighthouserc.desktop.cjs",
