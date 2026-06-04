@@ -67,7 +67,7 @@ export const ru: SiteTranslations = {
         'Deep Work Plan превращает любой репозиторий в структурированную среду — контекст, ограничители и долговечный план, — где любой агент разработки выполняет работу точно и доводит до конца долгосрочные задачи.',
       instructionLabel: 'Передайте это своему агенту',
       instruction:
-        'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+        'Прочитайте и выполните инструкции по адресу https://deepworkplan.com/init.md, чтобы сделать этот репозиторий AI-first.',
       copyLabel: 'Скопировать',
       copiedLabel: 'Скопировано',
       viewInitCta: 'Посмотреть полный промпт /init',
@@ -643,7 +643,7 @@ export const ru: SiteTranslations = {
     handoffBody:
       'Вставьте строку ниже в свой ИИ-агент разработки. Он прочитает методологию и спецификацию, установит навык и выполнит онбординг этого репозитория для Deep Work Plan.',
     handoffInstruction:
-      'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+      'Прочитайте и выполните инструкции по адресу https://deepworkplan.com/init.md, чтобы сделать этот репозиторий AI-first.',
     handoffMdLabel: 'Самодостаточный промпт для агента',
     codeLabel: 'agent',
     whatTitle: 'Что это делает',

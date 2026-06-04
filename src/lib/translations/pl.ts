@@ -67,7 +67,7 @@ export const pl: SiteTranslations = {
         'Deep Work Plan zamienia dowolne repozytorium w uporządkowane środowisko — kontekst, zabezpieczenia i trwały plan — w którym każdy agent kodujący działa precyzyjnie i kończy długodystansową pracę.',
       instructionLabel: 'Przekaż to swojemu agentowi',
       instruction:
-        'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+        'Przeczytaj i wykonaj instrukcje na https://deepworkplan.com/init.md, aby uczynić to repozytorium AI-first.',
       copyLabel: 'Kopiuj',
       copiedLabel: 'Skopiowano',
       viewInitCta: 'Zobacz pełny prompt /init',
@@ -641,7 +641,7 @@ export const pl: SiteTranslations = {
     handoffBody:
       'Wklej poniższą linijkę do swojego agenta kodującego AI. Przeczyta metodykę i specyfikację, zainstaluje skill i przeprowadzi onboarding tego repozytorium pod Deep Work Plans.',
     handoffInstruction:
-      'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+      'Przeczytaj i wykonaj instrukcje na https://deepworkplan.com/init.md, aby uczynić to repozytorium AI-first.',
     handoffMdLabel: 'Samodzielny prompt dla agenta',
     codeLabel: 'agent',
     whatTitle: 'Co to robi',

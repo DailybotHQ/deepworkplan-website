@@ -66,7 +66,7 @@ export const vi: SiteTranslations = {
         'Deep Work Plan biến mọi repository thành một môi trường có cấu trúc — ngữ cảnh, hàng rào bảo vệ và một kế hoạch bền vững — nơi bất kỳ agent lập trình nào cũng thực thi chính xác và hoàn thành công việc dài hơi.',
       instructionLabel: 'Đưa cho agent của bạn dòng này',
       instruction:
-        'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+        'Đọc và làm theo hướng dẫn tại https://deepworkplan.com/init.md để biến kho lưu trữ này thành AI-first.',
       copyLabel: 'Sao chép',
       copiedLabel: 'Đã sao chép',
       viewInitCta: 'Xem toàn bộ lời nhắc /init',
@@ -637,7 +637,7 @@ export const vi: SiteTranslations = {
     handoffBody:
       'Dán dòng dưới đây vào agent lập trình AI của bạn. Nó sẽ đọc phương pháp luận và đặc tả, cài skill, và khởi tạo repository này cho các Deep Work Plan.',
     handoffInstruction:
-      'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+      'Đọc và làm theo hướng dẫn tại https://deepworkplan.com/init.md để biến kho lưu trữ này thành AI-first.',
     handoffMdLabel: 'Lời nhắc agent độc lập',
     codeLabel: 'agent',
     whatTitle: 'Điều này làm gì',

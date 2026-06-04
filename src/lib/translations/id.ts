@@ -65,7 +65,7 @@ export const id: SiteTranslations = {
         'Deep Work Plan mengubah repositori apa pun menjadi lingkungan terstruktur — konteks, pengaman, dan rencana yang tahan lama — tempat coding agent mana pun mengeksekusi dengan presisi dan menyelesaikan pekerjaan jangka panjang.',
       instructionLabel: 'Berikan ini kepada agent Anda',
       instruction:
-        'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+        'Baca dan ikuti instruksi di https://deepworkplan.com/init.md untuk menjadikan repositori ini AI-first.',
       copyLabel: 'Salin',
       copiedLabel: 'Tersalin',
       viewInitCta: 'Lihat prompt /init lengkap',
@@ -639,7 +639,7 @@ export const id: SiteTranslations = {
     handoffBody:
       'Tempel baris di bawah ke AI coding agent Anda. Ia akan membaca metodologi dan spesifikasi, memasang skill, dan meng-onboard repositori ini untuk Deep Work Plan.',
     handoffInstruction:
-      'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+      'Baca dan ikuti instruksi di https://deepworkplan.com/init.md untuk menjadikan repositori ini AI-first.',
     handoffMdLabel: 'Prompt agent mandiri',
     codeLabel: 'agent',
     whatTitle: 'Apa yang dilakukannya',

@@ -65,7 +65,7 @@ export const zh: SiteTranslations = {
         'Deep Work Plan 将任意代码仓库转化为结构化环境——上下文、防护栏与一份持久的计划——让任意编码代理都能精准执行并完成长周期工作。',
       instructionLabel: '把这一行交给你的代理',
       instruction:
-        'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+        '请阅读并按照 https://deepworkplan.com/init.md 中的说明操作，将此仓库变为 AI-first。',
       copyLabel: '复制',
       copiedLabel: '已复制',
       viewInitCta: '查看完整的 /init 提示',
@@ -631,7 +631,7 @@ export const zh: SiteTranslations = {
     handoffBody:
       '把下面这一行粘贴到你的 AI 编码代理中。它会阅读方法论与规范、安装技能，并为 Deep Work Plan 接入这个代码仓库。',
     handoffInstruction:
-      'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+      '请阅读并按照 https://deepworkplan.com/init.md 中的说明操作，将此仓库变为 AI-first。',
     handoffMdLabel: '自包含的代理提示',
     codeLabel: 'agent',
     whatTitle: '它做了什么',

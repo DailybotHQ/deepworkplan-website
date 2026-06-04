@@ -65,7 +65,7 @@ export const th: SiteTranslations = {
         'Deep Work Plan เปลี่ยน repository ใดก็ได้ให้เป็นสภาพแวดล้อมที่มีโครงสร้าง พร้อมบริบท ราวกั้นความปลอดภัย และแผนงานที่คงทน ที่ coding agent ใดก็ทำงานได้อย่างแม่นยำและทำงานระยะยาวจนเสร็จ',
       instructionLabel: 'มอบบรรทัดนี้ให้ agent ของคุณ',
       instruction:
-        'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+        'อ่านและทำตามคำแนะนำที่ https://deepworkplan.com/init.md เพื่อทำให้รีพอซิทอรีนี้เป็น AI-first',
       copyLabel: 'คัดลอก',
       copiedLabel: 'คัดลอกแล้ว',
       viewInitCta: 'ดูพรอมต์ /init ฉบับเต็ม',
@@ -633,7 +633,7 @@ export const th: SiteTranslations = {
     handoffBody:
       'Paste the line below into your AI coding agent. It will read the methodology and specification, install the skill, and onboard this repository for Deep Work Plans.',
     handoffInstruction:
-      'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+      'อ่านและทำตามคำแนะนำที่ https://deepworkplan.com/init.md เพื่อทำให้รีพอซิทอรีนี้เป็น AI-first',
     handoffMdLabel: 'Self-contained agent prompt',
     codeLabel: 'agent',
     whatTitle: 'What this does',

@@ -67,7 +67,7 @@ export const ja: SiteTranslations = {
         'Deep Work Plan はあらゆるリポジトリを、コンテキスト、ガードレール、そして永続的な計画を備えた構造化された環境へと変えます。そこではどのコーディングエージェントも正確に実行し、長期にわたる作業をやり遂げます。',
       instructionLabel: 'この一行をエージェントに渡してください',
       instruction:
-        'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+        'https://deepworkplan.com/init.md にある手順を読み、その指示に従って、このリポジトリを AI-first にします。',
       copyLabel: 'コピー',
       copiedLabel: 'コピーしました',
       viewInitCta: '完全な /init プロンプトを見る',
@@ -641,7 +641,7 @@ export const ja: SiteTranslations = {
     handoffBody:
       '以下の一行をお使いのAIコーディングエージェントに貼り付けてください。方法論と仕様を読み込み、スキルをインストールし、このリポジトリを Deep Work Plan 向けにオンボーディングします。',
     handoffInstruction:
-      'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
+      'https://deepworkplan.com/init.md にある手順を読み、その指示に従って、このリポジトリを AI-first にします。',
     handoffMdLabel: '自己完結したエージェント用プロンプト',
     codeLabel: 'agent',
     whatTitle: 'これが行うこと',

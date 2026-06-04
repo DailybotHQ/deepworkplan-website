@@ -10,7 +10,7 @@ Deep Work Plan trasforma qualsiasi repository in un ambiente strutturato — con
 
 Deep Work Plan (DWP) è una metodologia e un kit aperti, sotto licenza MIT, per pianificare ed eseguire lavoro software complesso con agenti AI. Non sceglie un metodo di installazione né copia un template — consegna al Suo agente una sola riga:
 
-> Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.
+> Leggi e segui le istruzioni su https://deepworkplan.com/init.md per rendere questo repository AI-first.
 
 > Deep Work Plan è spec-driven development in cui il repository stesso diventa la harness.
 
