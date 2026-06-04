@@ -97,7 +97,6 @@ export interface SiteTranslations {
       subtitle: string;
       instructionLabel: string;
       instruction: string;
-      instructionCaption: string;
       copyLabel: string;
       copiedLabel: string;
       viewInitCta: string;

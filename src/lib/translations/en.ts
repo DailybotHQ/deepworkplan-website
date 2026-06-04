@@ -50,8 +50,6 @@ export const en: SiteTranslations = {
       instructionLabel: 'Give your agent this',
       instruction:
         'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
-      instructionCaption:
-        'Your agent reads the plan, installs the kit, and onboards your repository — reasoning about your actual stack, never pasting a template.',
       copyLabel: 'Copy',
       copiedLabel: 'Copied',
       viewInitCta: 'View the full /init prompt',
