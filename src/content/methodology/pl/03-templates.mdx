@@ -1,0 +1,44 @@
+---
+title: Szablony planu i zadań
+description: "Struktura plików planu i zadań, dwa obowiązkowe zadania końcowe, którymi musi kończyć się każdy plan, oraz konwencje README i PROGRESS, które utrzymują czytelność planu."
+order: 3
+lang: pl
+summary: Jak plany i zadania są ułożone na dysku oraz konwencje, które utrzymują ich czytelność.
+icon: document
+---
+import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
+
+# Szablony planu i zadań
+
+Deep Work Plan to katalog plików Markdown. Kształt tego katalogu — i każdego pliku w nim — to właśnie to, co czyni plan podatnym na przegląd zarówno przez ludzi, jak i agentów.
+
+## Struktura planu
+
+<PlanTree lang="pl" class="not-prose my-10" />
+
+Plan to katalog w `.dwp/plans/` o nazwie `PLAN_<slug>/`. Zawiera:
+
+- `README.md` — przegląd planu: cel, materiały źródłowe, tabelę zadań i status.
+- Jeden plik na zadanie, o nazwie `<n>.task_<slug>.md`.
+- `PROGRESS.md` — bieżący dziennik realizacji.
+
+## Struktura pliku zadania
+
+Każdy plik zadania nosi nazwę `<n>.task_<slug>.md` i podąża za dziewięciosekcyjną anatomią: Cel, Kontekst, Kroki, Kryteria akceptacji, Walidacja, Pliki, Zależności, Ryzyka oraz Ukończenie i dziennik. Sekcje zawsze pojawiają się w tej kolejności, więc każdy czytelnik wie, gdzie szukać. Każde zadanie ponownie zakotwicza się w celu planu, zanim zacznie działać, co chroni agenta przed dryfem na długim, wielogodzinnym dystansie.
+
+## Dwa obowiązkowe zadania końcowe
+
+Każdy plan musi kończyć się dwoma standardowymi zadaniami. Zapewniają one uchwycenie wiedzy i poinformowanie interesariuszy:
+
+1. **Skills & Agents Discovery** — zidentyfikuj wielokrotnego użytku skille i agentów stworzonych podczas planu, aby praca kumulowała się ponad ten jeden wysiłek.
+2. **Executive Report** — zwięzłe podsumowanie wyników napisane dla interesariuszy, odróżniające to, co dostarczono, od tego, co pozostaje.
+
+## Konwencje README i PROGRESS
+
+Plik `README.md` planu musi zawierać tytuł (`# Deep Work Plan: <name>`), prozą zapisane sformułowanie celu, opcjonalną sekcję materiałów źródłowych, tabelę zadań (numer, nazwa zadania, pole statusu) oraz linię statusu planu w postaci `<n>/<total> tasks complete`.
+
+`PROGRESS.md` to dziennik realizacji wyłącznie dopisywany. Każdy wpis zapisuje znacznik czasu ISO 8601, numer i nazwę zadania, co zostało zrobione oraz wszelkie odstępstwa lub powody pominięcia. Ponieważ wyłącznie rośnie, jest wiarygodną historią tego, jak plan faktycznie się rozwijał.
+
+## Nagłówki i odsyłacze
+
+Wszystkie nagłówki używają zapisu zdaniowego, a dokumenty unikają języka marketingowego i wykrzykników. Konwencje te utrzymują spójność planów między agentami i w czasie.

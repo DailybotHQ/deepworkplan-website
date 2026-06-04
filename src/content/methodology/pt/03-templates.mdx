@@ -1,0 +1,44 @@
+---
+title: Templates de plano e de tarefa
+description: "A estrutura dos arquivos de plano e de tarefa, as duas tarefas finais obrigatórias com que todo plano deve terminar e as convenções de README e PROGRESS que mantêm um plano legível."
+order: 3
+lang: pt
+summary: Como planos e tarefas são estruturados em disco e as convenções que os mantêm legíveis.
+icon: document
+---
+import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
+
+# Templates de plano e de tarefa
+
+Um Deep Work Plan é um diretório de arquivos markdown. O formato desse diretório — e de cada arquivo dentro dele — é o que torna um plano revisável tanto por humanos quanto por agentes.
+
+## Estrutura do plano
+
+<PlanTree lang="pt" class="not-prose my-10" />
+
+Um plano é um diretório em `.dwp/plans/` chamado `PLAN_<slug>/`. Ele contém:
+
+- `README.md` — a visão geral do plano: objetivo, material de origem, tabela de tarefas e status.
+- Um arquivo por tarefa, chamado `<n>.task_<slug>.md`.
+- `PROGRESS.md` — um registro contínuo da execução.
+
+## Estrutura do arquivo de tarefa
+
+Cada arquivo de tarefa é chamado `<n>.task_<slug>.md` e segue a anatomia de nove seções: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks e Completion & Log. As seções sempre aparecem nessa ordem para que qualquer leitor saiba onde procurar. Cada tarefa reancora-se ao objetivo do plano antes de agir, o que impede o agente de derivar ao longo de um horizonte extenso, de várias horas.
+
+## As duas tarefas finais obrigatórias
+
+Todo plano deve terminar com duas tarefas padrão. Elas garantem que o conhecimento seja capturado e que as partes interessadas sejam informadas:
+
+1. **Skills & Agents Discovery** — identificar as skills e agents reutilizáveis criados durante o plano, para que o trabalho se acumule além deste único esforço.
+2. **Executive Report** — um resumo conciso dos resultados escrito para as partes interessadas, distinguindo o que foi entregue do que ainda resta.
+
+## Convenções de README e PROGRESS
+
+O `README.md` do plano deve conter um título (`# Deep Work Plan: <name>`), uma declaração de objetivo em prosa, uma seção opcional de material de origem, uma tabela de tarefas (número, nome da tarefa, caixa de status) e uma linha de status do plano no formato `<n>/<total> tasks complete`.
+
+O `PROGRESS.md` é um registro de execução somente de adição. Cada entrada registra um carimbo de data/hora ISO 8601, o número e o nome da tarefa, o que foi feito e quaisquer desvios ou motivos de pular. Como ele apenas cresce, é um histórico confiável de como o plano realmente se desenrolou.
+
+## Títulos e referências cruzadas
+
+Todos os títulos usam sentence case, e os documentos evitam linguagem de marketing e pontos de exclamação. Essas convenções mantêm os planos consistentes entre agentes e ao longo do tempo.

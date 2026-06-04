@@ -1,0 +1,31 @@
+---
+title: "Onboard một dịch vụ legacy"
+description: "Một minh họa từng bước về việc trỏ agent vào một repository legacy không có tài liệu và để lại nó AI-first — có suy luận, không phá hủy, và kiểm chứng được."
+kind: example
+lang: vi
+order: 4
+---
+import OnboardFlow from '@/components/diagrams/kit/OnboardFlow.astro';
+
+# Onboard một dịch vụ legacy
+
+Một minh họa từng bước về điều đầu tiên mà hầu hết các team làm: lấy một repository sẵn có, thiếu tài liệu và biến nó thành có-thể-được-agent-điều-khiển — mà không làm xáo trộn những gì vốn đang chạy tốt.
+
+<OnboardFlow lang="vi" class="not-prose my-10" />
+
+## Mục tiêu
+
+"Biến dịch vụ năm năm tuổi này thành AI-first." Nó đã có một `README` còn dang dở, vài tài liệu rải rác, và không có `AGENTS.md`.
+
+## Lượt chạy
+
+Nhà phát triển trao cho agent của mình một dòng duy nhất — *đọc và làm theo [`/init.md`](/init.md)* — và luồng onboarding:
+
+1. **Trinh sát.** Phát hiện ngôn ngữ thực, trình quản lý gói (từ lockfile đang tồn tại), và các lệnh build, test, lint thực tế — bằng cách đọc repo, chứ không phải bằng cách phỏng đoán.
+2. **Đề xuất một kế hoạch và hỏi.** Vì các artifact đã tồn tại, nó không phá hủy: nó liệt kê những gì sẽ tạo mới so với những gì sẽ dung hòa, và chờ phê duyệt trước khi đụng vào `README` còn dang dở hay các tài liệu rải rác.
+3. **Sinh ra harness.** Một `AGENTS.md` đã suy luận với các Quick Commands thực của dịch vụ, một cây `docs/` được phân loại hấp thụ các ghi chú sẵn có thay vì sao chép lại, các README cho từng module, bộ kit `.agents/`, và một `.dwp/` được gitignore.
+4. **Kiểm chứng.** `/dwp-verify` trả về một báo cáo pass/fail khách quan đối chiếu với các tiêu chí tuân thủ.
+
+## Kết quả
+
+Dịch vụ legacy trở thành AI-first mà không có gì bị phá hủy: công việc sẵn có được hợp nhất, không bị ghi đè, và kết quả là có thể kiểm tra được chứ không chỉ là khẳng định suông. Từ đây, team lập kế hoạch và thực thi công việc thực với `/dwp-create` và `/dwp-execute`.

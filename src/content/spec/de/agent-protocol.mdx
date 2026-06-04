@@ -1,0 +1,60 @@
+---
+title: Agentenprotokoll
+description: "Der normative Verhaltensvertrag für KI-Coding-Agenten, die mit Deep Work Plans arbeiten: Onboarding, Planung, Ausführung, Verfeinerung, Wiederaufnahme und Sicherheit."
+order: 3
+lang: de
+section: Protocol
+---
+import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
+
+# Agentenprotokoll
+
+**Version 1.0.** Dieses Protokoll definiert, wie sich ein KI-Coding-Agent verhalten MUSS, wenn er mit Deep Work Plans arbeitet. Die Schlüsselwörter MUSS, SOLLTE und KANN folgen RFC 2119.
+
+<AgentLifecycle lang="en" class="not-prose my-10" />
+
+## Onboarding
+
+Bevor ein Agent einen Plan erstellt oder ausführt, MUSS er sich auf das Repository onboarden. Das Onboarding ist Reasoning-basiert, nicht skript-basiert: Der Agent liest die Repository-Struktur, die Dokumentation und die Konfiguration, um ein mentales Modell aufzubauen.
+
+Der Agent SOLLTE Folgendes identifizieren:
+
+- Den Repository-Archetyp (individual versus orchestrator).
+- Die Build-, Test- und Lint-Befehle.
+- Bestehende Konventionen für Stil, Struktur und Benennung.
+- Verfügbare Skills und Agenten.
+
+## Planung
+
+Beim Erstellen eines Plans MUSS der Agent:
+
+- Das Ziel in aufeinanderfolgende, prüfbare Aufgaben zerlegen.
+- Jede Aufgabe mit der neunteiligen Anatomie schreiben.
+- Mit den zwei verpflichtenden Abschlussaufgaben enden.
+- Bei einem mehrdeutigen Ziel klärende Fragen stellen.
+
+## Ausführung
+
+Während der Ausführung MUSS der Agent:
+
+- Den vollständigen Plan lesen, bevor er beginnt.
+- Aufgaben der Reihe nach ausführen, sofern Abhängigkeiten nichts anderes erlauben.
+- `PROGRESS.md` nach jeder Aufgabe aktualisieren.
+- Den Aufgabenstatus akkurat markieren.
+- Bei Blockaden anhalten und nachfragen, statt zu raten.
+
+## Verfeinerung
+
+Beim Verfeinern MUSS der Agent abgeschlossene Arbeit bewahren, die Aufgabentabelle aktualisieren und festhalten, was sich geändert hat.
+
+## Wiederaufnahme
+
+Beim Wiederaufnehmen MUSS der Agent den Zustand aus `PROGRESS.md` und den Aufgabendateien rekonstruieren, bevor er fortsetzt.
+
+## Kommunikation
+
+Agenten SOLLTEN prägnant berichten. Statusberichte MÜSSEN zwischen abgeschlossener, laufender und ausstehender Arbeit unterscheiden.
+
+## Sicherheit
+
+Agenten DÜRFEN KEINE Geheimnisse committen, MÜSSEN `.dwp/` per gitignore ausgeschlossen halten und SOLLTEN vor destruktiven Operationen nachfragen.

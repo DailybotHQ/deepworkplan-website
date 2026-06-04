@@ -1,0 +1,39 @@
+---
+title: dwp-refine
+description: "ปรับแต่ง Deep Work Plan ที่มีอยู่ด้วยการเพิ่ม ลบ หรือจัดลำดับ task ใหม่ โดยรักษางานที่เสร็จแล้วและอัปเดตตาราง task ให้สะท้อนการเปลี่ยนแปลง"
+kind: command
+lang: th
+order: 3
+usage: /dwp-refine [plan]
+aliases:
+  - dwp:refine
+---
+import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
+
+# dwp-refine
+
+ปรับแต่ง Deep Work Plan ที่มีอยู่
+
+<CmdRefine lang="en" class="not-prose my-8" />
+
+## สิ่งที่มันทำ
+
+`dwp-refine` แก้ไขแผนที่มีอยู่ มันเพิ่ม ลบ หรือจัดลำดับ task ใหม่ได้ โดยรักษางานที่เสร็จแล้วและอัปเดตตาราง task
+
+## วิธีใช้
+
+```
+/dwp-refine [plan]
+```
+
+## พฤติกรรม
+
+1. อ่านแผนที่มีอยู่
+2. เพิ่ม ลบ หรือจัดลำดับ task ใหม่
+3. รักษางานที่เสร็จแล้ว
+4. อัปเดตตาราง task
+5. บันทึกว่ามีอะไรเปลี่ยนและเพราะเหตุใด
+
+## ชื่อแทน
+
+- `dwp:refine`

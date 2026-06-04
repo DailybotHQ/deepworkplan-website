@@ -1,0 +1,38 @@
+---
+title: "A framework migration"
+description: "एक Deep Work Plan के रूप में चलाए गए लंबी-अवधि के framework migration का एक उदाहरणात्मक विवरण — वही बहु-घंटे, बहु-फ़ाइल काम जहाँ एजेंट आमतौर पर भटक जाते हैं।"
+kind: example
+lang: hi
+order: 3
+---
+import MigrationBeforeAfter from '@/components/diagrams/kit/MigrationBeforeAfter.astro';
+
+# A framework migration
+
+उस काम का एक उदाहरणात्मक विवरण जिसके लिए DWP बना है: एक migration जो दर्जनों फ़ाइलों और कई घंटों तक फैला है — इतना लंबा कि एक अनिर्देशित एजेंट तारतम्य खो देता है।
+
+## लक्ष्य
+
+<MigrationBeforeAfter lang="en" class="not-prose my-10" />
+
+"पूरी सेवा में data layer को legacy ORM से नए वाले में migrate करें।"
+
+## योजना के बिना
+
+एक एजेंट models को तब तक संपादित करता है जब तक उसका संदर्भ अधूरे परिवर्तनों से भर नहीं जाता, भूल जाता है कि किन call sites को वह पहले ही परिवर्तित कर चुका है, और इस बात का कोई रिकॉर्ड छोड़े बिना build को लाल छोड़ देता है कि क्या शेष है। फिर से शुरू करने का अर्थ है एक chat log से अपने ही विचार-क्रम का पुनर्निर्माण।
+
+## एक Deep Work Plan के रूप में
+
+`/dwp-create` लक्ष्य को atomic, क्रमबद्ध कार्यों में विघटित करता है, प्रत्येक में acceptance criteria और एक validation gate के साथ:
+
+1. नए ORM को पुराने के साथ-साथ प्रस्तुत करें (कोई व्यवहार परिवर्तन नहीं; gate: build + tests हरे)।
+2. module A के models और call sites को migrate करें (gate: module A tests हरे)।
+3. प्रति module दोहराएं, हर एक एक कार्य — हर कार्य के बाद प्रगति दर्ज की जाती है।
+4. legacy ORM और उसके shims को हटाएं (gate: कोई संदर्भ शेष न रहे; पूरा suite हरा)।
+5. docs और प्रति-module READMEs अपडेट करें।
+
+`/dwp-execute` कार्यों को क्रम में चलाता है, हर पास होने वाले gate के बाद कमिट करता है और `PROGRESS.md` अपडेट करता है। यदि बीच में context window रीसेट हो जाए, तो `/dwp-resume` डिस्क से योजना और प्रगति पढ़ता है और अगले अचिह्नित कार्य पर जारी रहता है।
+
+## परिणाम
+
+migration छोटे, समीक्षा-योग्य, व्यक्तिगत रूप से मान्य किए गए कमिट्स के एक अनुक्रम के रूप में आता है — और बाधाओं को झेलता है, क्योंकि बातचीत नहीं, बल्कि योजना ही सत्य का स्रोत है।

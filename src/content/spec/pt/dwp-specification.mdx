@@ -1,0 +1,66 @@
+---
+title: Especificação do DWP
+description: "Especificação normativa do Deep Work Plan: estrutura do plano, a anatomia de nove seções da tarefa, o loop de execução de cinco operações, o espaço de trabalho de saída e o versionamento."
+order: 2
+lang: pt
+section: Workflow
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
+
+# Especificação do DWP
+
+**Versão 1.0. Status: Estável.** Este documento é a especificação normativa da metodologia Deep Work Plan (DWP). As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
+
+## Definição
+
+Um Deep Work Plan é um artefato estruturado, exclusivamente em markdown, que descreve uma tarefa de engenharia complexa decomposta em unidades de trabalho sequenciais e revisáveis, projetado para ser criado, executado e mantido por agentes de código de IA trabalhando de forma autônoma.
+
+O DWP é orientado a especificação: o plano é a especificação, e os agentes DEVEM (MUST) executar contra seus critérios de aceitação e validation gates explícitos, em vez de improvisar. A especificação — e não uma transcrição de chat — é a fonte de verdade duradoura, de modo que o trabalho é verificável e retomável entre sessões e agentes. É também engenharia de harness tornada portátil: o contexto, o loop de controle, as salvaguardas e o estado retomável que tornam um agente confiável são instalados no próprio repositório como markdown puro, de modo que qualquer agente conforme PODE (MAY) pilotar o repositório sem um framework específico de ferramenta.
+
+## Estrutura do plano
+
+Um plano DEVE (MUST) ser um diretório em `.dwp/plans/` chamado `PLAN_<slug>/`. O diretório DEVE (MUST) conter:
+
+- `README.md` — visão geral do plano, objetivo, tabela de tarefas e status.
+- Um arquivo por tarefa, chamado `<n>.task_<slug>.md`.
+- `PROGRESS.md` — um registro contínuo da execução.
+
+## Anatomia da tarefa
+
+<TaskAnatomy lang="pt" class="not-prose my-10" />
+
+Cada arquivo de tarefa DEVE (MUST) conter estas nove seções, em ordem:
+
+1. **Goal** — uma declaração de um parágrafo do que a tarefa alcança.
+2. **Context** — contexto, links e por que esta tarefa existe.
+3. **Steps** — ações ordenadas e concretas a executar.
+4. **Acceptance criteria** — uma lista de verificação de condições que definem o concluído.
+5. **Validation** — comandos ou testes a executar para verificar.
+6. **Files** — caminhos que se espera criar ou modificar.
+7. **Dependencies** — outras tarefas ou pré-requisitos externos.
+8. **Risks** — o que pode dar errado e as mitigações.
+9. **Completion & Log** — um marcador de status mais notas cronológicas.
+
+## O loop de execução
+
+<CoreLoop lang="pt" class="not-prose my-10" />
+
+O DWP define cinco operações:
+
+- **create** — Gerar um novo plano a partir de um objetivo.
+- **execute** — Executar o plano tarefa a tarefa.
+- **refine** — Modificar um plano existente.
+- **resume** — Retomar um plano interrompido.
+- **status** — Relatar o status do plano sem executar.
+
+## Espaço de trabalho de saída
+
+<OutputWorkspace lang="pt" class="not-prose my-10" />
+
+Todos os artefatos do DWP DEVEM (MUST) viver em um diretório `.dwp/` ignorado pelo git, na raiz do repositório.
+
+## Versionamento
+
+Esta especificação segue o versionamento semântico.

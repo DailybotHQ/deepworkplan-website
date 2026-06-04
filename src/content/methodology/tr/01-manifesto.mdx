@@ -1,0 +1,76 @@
+---
+title: Manifesto
+description: "Bir Deep Work Plan’in ne olduğu, yapılandırılmış otonom yürütmenin neden önemli olduğu ve herhangi bir depoyu AI-first, ajan-pilotlanabilir bir kod tabanına nasıl dönüştürdüğü."
+order: 1
+lang: tr
+summary: Yapay zeka kodlama ajanlarıyla plan odaklı yürütmenin gerekçesi.
+icon: compass
+---
+import RepoAsHarness from '@/components/diagrams/methodology/RepoAsHarness.astro';
+
+# Manifesto
+
+Bir Deep Work Plan (DWP), yapay zeka kodlama ajanlarının yapılandırılmış, otonom yürütmesi için yalnızca Markdown’dan oluşan bir metodolojidir. Belirsiz bir hedefi, bir ajanın bağlamını kaybetmeden veya tutarsız sonuçlara doğaçlama yapmadan yürütebileceği, duraklatabileceği, sürdürebileceği ve hakkında rapor verebileceği gözden geçirilebilir bir plana — bir spesifikasyona — dönüştürür.
+
+## Ajanlar için derin iş
+
+İsim, ürettiği uygulamayı betimler: irade gücüyle değil, yapıyla bir arada tutulan, bilişsel olarak zorlu işlere yönelik odaklanmış, sürekli çaba. Derin işi insanlar için değerli kılan özellik — dikkat dağınıklığı olmadan, uzun bir ufuk boyunca sürdürülen konsantrasyon — yapay zeka kodlama ajanının saatler ya da günler süren işi tamamlamak için ihtiyaç duyduğu şeydir. Bir Deep Work Plan bu yapıyı sağlar ve bunu yaparken depoyu AI-first, ajan-pilotlanabilir bir kod tabanına dönüştürür.
+
+Plansız bir ajan, hiç vakit ayırmayan, hiçbir şeyi yazıya dökmeyen ve her kesintide bağlam değiştiren bir bilgi işçisi gibi davranır. Bir Deep Work Plan, ajana bloke edilmiş bir takvimin ve yazılı bir özetin karşılığını verir: sınırlandırılmış bir kapsam, açık bir sıra ve ilerlemeyi kaydetmek için kalıcı bir yer.
+
+## Yön, çarpandır
+
+Bir yapay zeka kodlama ajanının yeteneği, modelden çok kendisine verilen yönün niteliğine bağlıdır. Belirsiz bir isteğe yönlendirilen yetenekli bir model belirsizliği büyütür; kesin bir spesifikasyona yönlendirilen aynı model kesinliği büyütür. Modeller geliştikçe bu açık kapanmak yerine genişler — darboğaz yukarıya, kodu yazmaktan işi tanımlamaya kayar. İlgili beceri artık yürütme değildir; yöndür.
+
+Bu, iyi delege etmenin ne anlama geldiğini yeniden çerçeveler. İyi delege etmek, bir ajandan iş istemek değildir — işi, doğru biçimde yürütülebilecek kadar açık tanımlamaktır: hedef, kısıtlar, ajanın aksi takdirde sahip olmayacağı bağlam ve başarılı olup olmadığına karar veren ölçütler. Değerin çoğu, yürütme başlamadan önce yaratılır.
+
+Deep Work Plan, bu yukarı yöndeki işi kalıcı, tekrarlanabilir bir biçimde yapma disiplinidir. İki temel direği, iyi yönün iki yarısıdır: bir **spesifikasyon** “doğru”nun neye benzediğini belirtir ve bir **harness** ajana ona ulaşması için bağlamı ve araçları verir. Birlikte, bir modelin ham yeteneğini güvenilir mühendisliğe dönüştürürler — saatlerce süren bir görev boyunca sürdürülen ve oturumlar arasında değişen ajanlar boyunca korunan biçimde.
+
+## Tasarım gereği spec odaklı
+
+Bu, metodolojinin ilk temel direğidir ve “harness” gibi onu da açıkça tanımlamaya değer.
+
+**Spec odaklı geliştirme nedir.** Sıradan, istem odaklı işte doğruluk kaynağı bir konuşmadır: bir ajandan bir şey istersiniz, dosyaları düzenler ve niyetin tek kaydı, akıp giden ve bir daha asla gözden geçirilmeyen bir sohbet dökümüdür. Spec odaklı geliştirme (SDD) bunu tersine çevirir. Önce *neyin* doğru olması gerektiğini yazarsınız — hedef, kapsam, kabul kriterleri, bittiğini kanıtlayan denetimler — ve konuşma değil, bu yazılı spesifikasyon doğruluk kaynağıdır. Ajan, ardından tek satırlık bir istemden doğaçlama yapmak yerine spesifikasyona *karşı* çalışır.
+
+**DWP bunu nasıl somutlaştırır.** Deep Work Plan’de plan, spesifikasyonun *kendisidir*. Bir hedef, gözden geçirilebilir bir plana dönüşür; plan, atomik görevlere ayrışır; her görev açık kabul kriterleri ve doğrulama kapıları taşır; ve bir tamamlama protokolü işi bunlara karşı doğrular. Plan → görevler → kapılar → tamamlama, SDD’nin somut ve yürütülebilir hale getirilmiş halidir.
+
+**Neden önemli.** Spesifikasyonu önce yazmak üç şekilde geri öder: **sapmayı azaltır**, çünkü ajan, isteğin solan bir anısı yerine belirtilmiş ölçütlere göre değerlendirilir; işi **doğrulanabilir** kılar, çünkü her kapı ya geçer ya kalır; ve işi **sürdürülebilir** kılar, çünkü spesifikasyon herhangi bir tek oturumdan ya da ajandan daha uzun ömürlüdür — başka bir ajan yarın işi devralabilir ve “bitti”nin tam olarak ne anlama geldiğini bilebilir.
+
+**DWP nasıl farklılaşır.** Bu fikrin etrafında, GitHub Spec Kit, Amazon Kiro ve Tessl dahil daha geniş bir spec odaklı hareket oluştu. Bu yaklaşımlar belirli bir araca ya da platforma bağlı olma eğilimindedir. DWP kasıtlı olarak farklıdır: araçtan bağımsız ve repo-native’dir. Spesifikasyon, depoda düz Markdown olarak yaşar; böylece bir satıcının ürünüyle değil, kodla birlikte gezer — ve ikinci temel direkle doğrudan birleşir, çünkü spesifikasyonun kendisi deponun taşıdığı harness’ın bir parçasıdır.
+
+## Depo, harness haline gelir
+
+Bu, metodolojinin ikinci temel direğidir ve açık bir tanımı hak eder — “harness” yüklü bir terime dönüştü ve sektörün çoğu onu ne anlama geldiğini söylemeden kullanıyor.
+
+**Bir ajan harness’ı nedir.** Büyük bir dil modeli, tek başına yalnızca bir metin tahmin edicidir. Onu güvenilir bir mühendise dönüştüren, etrafına sarılan her şeydir: ona verilen bağlam, çağırabileceği araçlar, sıradaki adımı belirleyen kontrol döngüsü, hataları yakalayan güvenlik bariyerleri ve durup kaldığı yerden sürdürmesini sağlayan kalıcı durum. Bu çevreleyen iskele, *harness*’tır. Model motordur; harness ise motoru güvenle sürülebilir kılan şasi, direksiyon ve frenlerdir.
+
+**Harness mühendisliği nedir.** Çoğu ekip bu iskeleyi örtük biçimde, tek bir araç içinde — belirli bir IDE, bir ajan ürünü ya da özel bir çerçeve — inşa eder; böylece yalnızca orada çalışır ve aracı değiştirdiğiniz anda yok olur. Harness mühendisliği, o iskeleyi kasıtlı olarak, birinci sınıf bir yapı olarak tasarlama disiplinidir. Deep Work Plan, onun nerede yaşaması gerektiği konusunda güçlü bir tutum sergiler: **bir araçta değil, deponun kendisinde.**
+
+**Neden doğru yer depodur.** Harness depoda yaşadığında, kodla birlikte gezer, depoyu açan her ajan onu devralır ve diğer her kod gibi sürümlenir, gözden geçirilir ve iyileştirilir. DWP, harness’ın her parçasını somut, kalıcı bir yapı olarak kurar:
+
+| Harness öğesi | Ne sağlar | DWP onu deponuzda nereye koyar |
+|---|---|---|
+| **Bağlam** | ajanın bilmesi gereken | `AGENTS.md`, `docs/` ve modül başına README’ler |
+| **Araçlar** | ajanın yapabileceği | `.agents/` skill’leri, ajanları ve `dwp-*` komutları |
+| **Kontrol döngüsü** | işin nasıl ilerlediği | Deep Work Plan: plan → atomik görevler → kapılar → tamamlama |
+| **Güvenlik bariyerleri** | onu doğru tutan | açık kabul kriterleri ve doğrulama kapıları |
+| **Durum** | kesintiyi nasıl atlattığı | gitignore’lanmış `.dwp/` planları, taslakları ve ilerleme günlüğü |
+
+<RepoAsHarness lang="tr" class="not-prose my-10" />
+
+Her öğe bir aracın özelliği değil, depodaki bir dosya olduğu için harness, yapısı gereği taşınabilirdir. Metodolojinin geri kalanının üzerine dayandığı tek satırlık iddia budur: *deponun kendisi harness haline gelir*, böylece herhangi bir ajan herhangi bir depoyu pilotlayabilir — araç başına özel bir çerçeve olmadan.
+
+## Yapılandırılmış otonom yürütme neden önemli
+
+Modern yapay zeka kodlama ajanları yeteneklidir ama yönsüzdür. Birini önemsiz olmayan bir göreve yönlendirin; hemen dosyaları düzenlemeye başlama, neyi değiştirdiğini izleyemez hale gelme ve gözden geçirmesi zor, sürdürmesi imkânsız bir iş üretme eğilimindedir.
+
+DWP, her başarısızlığa doğrudan değinen hafif bir yapı dayatır:
+
+- **Gözden geçirilebilir görevler** — iş, her biri açık bir kapsama ve kabul kriterlerine sahip ardışık birimlere ayrılır.
+- **Kalıcı durum** — ilerleme yazıya dökülür; böylece iş kesintiyi atlatır ve oturumlar ile ajanlar arasında kaldığı yerden sürdürülebilir.
+- **Standartlaştırılmış dokümantasyon** — insanlar ve ajanlar, ortak bir biçim aracılığıyla tek bir zihinsel model paylaşır.
+- **Ajan taşınabilirliği** — metodoloji, yeniden uygulamalar yoluyla değil, ince adaptörler aracılığıyla herhangi bir ajanla çalışır.
+
+## Baştan sona Markdown
+
+DWP, yazılım değil, yapı tanımlar. Kurulacak bir çalışma zamanı, bir bağımlılık ağacı ya da bir kilitlenme yoktur. Plan, görevler ve çalışma günlüğünün tümü, herhangi bir ajanın okuyabileceği, herhangi bir kişinin gözden geçirebileceği ve herhangi bir sürüm denetim sisteminin temiz biçimde izleyebileceği düz Markdown’dır. Sonuç, okuyabileceğiniz, denetleyebileceğiniz ve güvenebileceğiniz bir yürütmedir.

@@ -22,6 +22,7 @@ export const es: SiteTranslations = {
     kit: 'Kit',
     examples: 'Ejemplos',
     init: 'Init',
+    quickstart: 'Inicio rápido',
     github: 'GitHub',
     menu: 'Abrir menú',
     closeMenu: 'Cerrar menú',
@@ -32,6 +33,17 @@ export const es: SiteTranslations = {
     copyright: 'Deep Work Plan',
     allRightsReserved: 'Todos los derechos reservados.',
     poweredBy: 'Desarrollado por',
+  },
+
+  // Navegación de Markdown para agentes
+  agentNav: {
+    heading: 'Navegación del Sitio',
+    sections: {
+      methodology: 'Metodología',
+      getStarted: 'Empezar',
+      project: 'Proyecto',
+      connect: 'Conectar',
+    },
   },
 
   // Página de inicio de Deep Work Plan

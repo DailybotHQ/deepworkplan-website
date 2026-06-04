@@ -1,0 +1,38 @@
+---
+title: "Migrasi framework"
+description: "Panduan ilustratif migrasi framework jangka panjang yang dijalankan sebagai Deep Work Plan — jenis pekerjaan berjam-jam dan berbilang file tempat agent biasanya kehilangan arah."
+kind: example
+lang: id
+order: 3
+---
+import MigrationBeforeAfter from '@/components/diagrams/kit/MigrationBeforeAfter.astro';
+
+# Migrasi framework
+
+Panduan ilustratif untuk pekerjaan yang menjadi tujuan DWP: migrasi yang mencakup puluhan file dan beberapa jam — cukup panjang hingga agent tanpa panduan kehilangan benang merahnya.
+
+## Tujuan
+
+<MigrationBeforeAfter lang="en" class="not-prose my-10" />
+
+"Migrasikan lapisan data dari ORM lama ke ORM baru di seluruh service."
+
+## Tanpa rencana
+
+Agent menyunting model hingga konteksnya penuh dengan perubahan setengah jadi, lupa call site mana yang sudah dikonversinya, dan meninggalkan build dalam keadaan merah tanpa catatan tentang apa yang tersisa. Melanjutkan berarti merekonstruksi alur pikirannya sendiri dari log obrolan.
+
+## Sebagai Deep Work Plan
+
+`/dwp-create` menguraikan tujuan menjadi tugas-tugas atomik yang berurutan, masing-masing dengan acceptance criteria dan validation gate:
+
+1. Perkenalkan ORM baru berdampingan dengan yang lama (tanpa perubahan perilaku; gate: build + test hijau).
+2. Migrasikan model dan call site modul A (gate: test modul A hijau).
+3. Ulangi per modul, satu tugas tiap kali — progres dicatat setelah setiap tugas.
+4. Hapus ORM lama dan shim-nya (gate: tidak ada referensi tersisa; seluruh suite hijau).
+5. Perbarui dokumen dan README per modul.
+
+`/dwp-execute` menjalankan tugas secara berurutan, melakukan commit setelah setiap gate yang lolos dan memperbarui `PROGRESS.md`. Jika jendela konteks ter-reset di tengah jalan, `/dwp-resume` membaca rencana dan progres dari disk lalu melanjutkan pada tugas berikutnya yang belum dicentang.
+
+## Hasil
+
+Migrasi mendarat sebagai rangkaian commit yang kecil, dapat ditinjau, dan tervalidasi secara individual — serta bertahan dari interupsi, karena rencana, bukan percakapan, yang menjadi sumber kebenaran.

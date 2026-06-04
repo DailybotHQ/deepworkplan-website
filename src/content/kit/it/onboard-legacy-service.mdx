@@ -1,0 +1,31 @@
+---
+title: "Onboarding di un servizio legacy"
+description: "Una procedura illustrativa di come puntare un agente su un repository legacy non documentato e lasciarlo AI-first — ragionato, non distruttivo e verificabile."
+kind: example
+lang: it
+order: 4
+---
+import OnboardFlow from '@/components/diagrams/kit/OnboardFlow.astro';
+
+# Onboarding di un servizio legacy
+
+Una procedura illustrativa della prima cosa che fa la maggior parte dei team: prendere un repository esistente e poco documentato e renderlo pilotabile dagli agenti — senza disturbare ciò che già funziona.
+
+<OnboardFlow lang="it" class="not-prose my-10" />
+
+## L’obiettivo
+
+«Rendi AI-first questo servizio di cinque anni.» Ha già un `README` parziale, alcuni docs sparsi e nessun `AGENTS.md`.
+
+## L’esecuzione
+
+Lo sviluppatore consegna al proprio agente una sola riga — *leggi e segui [`/init.md`](/init.md)* — e il flusso di onboarding:
+
+1. **Ricognizione.** Rileva il linguaggio reale, il package manager (dal lockfile esistente) e i comandi reali di build, test e lint — leggendo il repo, non assumendo.
+2. **Propone un piano e chiede.** Poiché esistono già degli artefatti, è non distruttivo: elenca cosa creerà rispetto a cosa riconcilierà e attende l’approvazione prima di toccare il `README` parziale o i docs sparsi.
+3. **Genera la harness.** Un `AGENTS.md` ragionato con i Quick Commands reali del servizio, un albero `docs/` categorizzato che assorbe le note esistenti anziché duplicarle, README per modulo, il kit `.agents/` e una `.dwp/` esclusa da git.
+4. **Verifica.** `/dwp-verify` restituisce un report oggettivo di esito positivo/negativo rispetto ai criteri di conformità.
+
+## Risultato
+
+Il servizio legacy diventa AI-first senza distruggere nulla: il lavoro esistente viene unito, non sovrascritto, e il risultato è verificabile anziché dichiarato. Da qui il team pianifica ed esegue lavoro reale con `/dwp-create` e `/dwp-execute`.

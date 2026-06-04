@@ -1,0 +1,66 @@
+---
+title: DWP-Spezifikation
+description: "Normative Deep Work Plan Spezifikation: Planstruktur, die neunteilige Aufgaben-Anatomie, die Ausführungsschleife aus fünf Operationen, der Ausgabe-Arbeitsbereich und die Versionierung."
+order: 2
+lang: de
+section: Workflow
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
+
+# DWP-Spezifikation
+
+**Version 1.0. Status: Stabil.** Dieses Dokument ist die normative Spezifikation für die Deep Work Plan (DWP) Methodik. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
+
+## Definition
+
+Ein Deep Work Plan ist ein strukturiertes, reines Markdown-Artefakt, das eine komplexe Engineering-Aufgabe beschreibt, zerlegt in aufeinanderfolgende, prüfbare Arbeitseinheiten, entworfen, um von autonom arbeitenden KI-Coding-Agenten erstellt, ausgeführt und gepflegt zu werden.
+
+DWP ist spec-driven: Der Plan ist die Spezifikation, und Agenten MÜSSEN gegen seine expliziten Akzeptanzkriterien und Validierungs-Gates ausführen, statt zu improvisieren. Die Spezifikation — nicht ein Chat-Verlauf — ist die dauerhafte Quelle der Wahrheit, sodass die Arbeit über Sitzungen und Agenten hinweg überprüfbar und wiederaufnehmbar ist. Es ist zugleich Harness Engineering, portabel gemacht: Der Kontext, die Steuerschleife, die Leitplanken und der wiederaufnehmbare Zustand, die einen Agenten verlässlich machen, werden als reines Markdown in das Repository selbst installiert, sodass jeder konforme Agent das Repository ohne werkzeugspezifisches Framework steuern KANN.
+
+## Planstruktur
+
+Ein Plan MUSS ein Verzeichnis unter `.dwp/plans/` mit dem Namen `PLAN_<slug>/` sein. Das Verzeichnis MUSS Folgendes enthalten:
+
+- `README.md` — Planübersicht, Ziel, Aufgabentabelle und Status.
+- Eine Datei je Aufgabe, benannt `<n>.task_<slug>.md`.
+- `PROGRESS.md` — ein laufendes Protokoll der Ausführung.
+
+## Aufgaben-Anatomie
+
+<TaskAnatomy lang="en" class="not-prose my-10" />
+
+Jede Aufgabendatei MUSS diese neun Abschnitte enthalten, in dieser Reihenfolge:
+
+1. **Goal** — eine Formulierung in einem Absatz, was die Aufgabe erreicht.
+2. **Context** — Hintergrund, Links und warum diese Aufgabe existiert.
+3. **Steps** — geordnete, konkrete auszuführende Handlungen.
+4. **Acceptance criteria** — eine Checkliste von Bedingungen, die „erledigt“ definieren.
+5. **Validation** — Befehle oder Tests, die zur Verifizierung auszuführen sind.
+6. **Files** — Pfade, die voraussichtlich erstellt oder geändert werden.
+7. **Dependencies** — andere Aufgaben oder externe Voraussetzungen.
+8. **Risks** — was schiefgehen könnte und Gegenmaßnahmen.
+9. **Completion & Log** — eine Statusmarkierung plus chronologische Notizen.
+
+## Die Ausführungsschleife
+
+<CoreLoop lang="en" class="not-prose my-10" />
+
+DWP definiert fünf Operationen:
+
+- **create** — Einen neuen Plan aus einem Ziel erzeugen.
+- **execute** — Den Plan Aufgabe für Aufgabe ausführen.
+- **refine** — Einen bestehenden Plan ändern.
+- **resume** — Einen unterbrochenen Plan wiederaufnehmen.
+- **status** — Den Planstatus berichten, ohne auszuführen.
+
+## Ausgabe-Arbeitsbereich
+
+<OutputWorkspace lang="en" class="not-prose my-10" />
+
+Alle DWP-Artefakte MÜSSEN unter einem per gitignore ausgeschlossenen `.dwp/`-Verzeichnis im Repository-Stammverzeichnis leben.
+
+## Versionierung
+
+Diese Spezifikation folgt der semantischen Versionierung.

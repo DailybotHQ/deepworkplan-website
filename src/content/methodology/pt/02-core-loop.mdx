@@ -1,0 +1,61 @@
+---
+title: O loop central
+description: "O fluxo de create, execute, refine, resume, status e verify, o diretório de saída .dwp ignorado pelo git, a anatomia de nove seções da tarefa e como a validação funciona."
+order: 2
+lang: pt
+summary: Como as operações centrais do DWP conduzem um plano do objetivo à conclusão verificada.
+icon: refresh
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+
+# O loop central
+
+O DWP define um pequeno conjunto de operações que levam um plano de um objetivo a um trabalho concluído e revisável: **create → execute → refine → resume → status**, com **verify** como a verificação de conformidade que confirma o resultado. Juntas, elas formam o loop que um agente segue ao longo da vida de um plano. Os agentes executam uma tarefa por vez, validando cada passo antes de seguir em frente.
+
+Esse loop é a forma operacional do desenvolvimento orientado a especificação. O plano é a especificação contra a qual um agente executa, cada tarefa carrega critérios de aceitação explícitos e o passo de validação é o gate que transforma uma afirmação de conclusão em evidência dela. Como o plano e seu registro de progresso vivem no repositório, o loop é retomável entre sessões e agentes.
+
+## As operações
+
+<CoreLoop lang="pt" class="not-prose my-10" />
+
+- **create** — Gera um novo plano a partir de um objetivo. O agente analisa o objetivo, decompõe-o em tarefas sequenciais e escreve os arquivos do plano. Ele deve fazer perguntas de esclarecimento antes de escrever quando o objetivo for ambíguo.
+- **execute** — Executa o plano tarefa a tarefa. O agente atualiza o registro de progresso após cada tarefa e marca o status de conclusão da tarefa. Ele não deve pular tarefas sem registrar o motivo.
+- **refine** — Modifica um plano existente. O agente pode adicionar, remover ou reordenar tarefas, mas deve preservar o trabalho concluído e atualizar a tabela de tarefas.
+- **resume** — Continua um plano interrompido. O agente lê o registro de progresso e os arquivos de tarefa para reconstruir o estado, e então continua a partir da primeira tarefa incompleta.
+- **status** — Relata o progresso sem executar. O agente resume as tarefas concluídas, em andamento e pendentes e não altera nada.
+- **verify** — Verifica a conformidade sem alterar nada. O agente relata se o repositório atende ao padrão e se um plano está bem formado — cada tarefa carregando critérios de aceitação e um validation gate. Veja o [documento de Conformidade da especificação](/spec).
+
+## O diretório de saída `.dwp/`
+
+Todos os artefatos do DWP vivem em um diretório `.dwp/` ignorado pelo git, na raiz do repositório. Manter o espaço de trabalho fora do controle de versão significa que o estado de trabalho de um plano nunca polui o histórico do projeto.
+
+```
+.dwp/
+├── plans/
+│   └── PLAN_<slug>/
+│       ├── README.md
+│       ├── PROGRESS.md
+│       └── <n>.task_<slug>.md
+└── config.yaml
+```
+
+## A anatomia de nove seções da tarefa
+
+<TaskAnatomy lang="pt" class="not-prose my-10" />
+
+Todo arquivo de tarefa contém estas nove seções, em ordem. A estrutura garante que cada unidade de trabalho seja autocontida e revisável:
+
+1. **Goal** — um parágrafo declarando o que a tarefa alcança.
+2. **Context** — contexto, links e por que esta tarefa existe.
+3. **Steps** — ações ordenadas e concretas a executar.
+4. **Acceptance criteria** — uma lista de verificação de condições que definem o concluído.
+5. **Validation** — comandos ou testes a executar para verificar o trabalho.
+6. **Files** — caminhos que se espera criar ou modificar.
+7. **Dependencies** — outras tarefas ou pré-requisitos externos.
+8. **Risks** — o que pode dar errado e as mitigações.
+9. **Completion & Log** — um marcador de status mais notas cronológicas.
+
+## Validação, conclusão e retomada
+
+A validação faz parte da tarefa, não é um detalhe posterior: cada tarefa nomeia os comandos ou testes que provam que ela está concluída, e o agente os executa antes de marcar a conclusão. A conclusão é registrada com um marcador de status explícito (`[ ]` não iniciada, `[~]` em andamento, `[x]` concluída, `[!]` bloqueada) na seção Completion & Log. A retomada depende desses marcadores e do registro de progresso — um agente pode reconstruir exatamente onde o plano parou e continuar a partir da primeira tarefa incompleta sem refazer o trabalho já concluído.

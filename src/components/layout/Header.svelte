@@ -2,8 +2,8 @@
 import { onMount } from 'svelte';
 import { EVENTS, trackEvent } from '@/lib/analytics';
 import {
+  getActiveLanguages,
   getLanguageConfig,
-  getSupportedLanguages,
   getUrlPrefix,
   stripLangPrefix,
 } from '@/lib/i18n';
@@ -14,10 +14,18 @@ export let lang: string = 'en';
 let open: boolean = false;
 let languageOpen = false;
 
+// Dropdown label: full native name + Title-case code, e.g. "English (En)",
+// "Português (Pt)". The trigger itself stays code-only (e.g. "EN").
+function languageLabel(code: string, nativeName: string): string {
+  const titleCode = code.charAt(0).toUpperCase() + code.slice(1);
+  return `${nativeName} (${titleCode})`;
+}
+
 $: t = getTranslations(lang);
 $: prefix = getUrlPrefix(lang);
 $: currentLangConfig = getLanguageConfig(lang);
-$: otherLanguages = getSupportedLanguages().filter((l) => l !== lang);
+// Only active (translated) languages appear in the switcher.
+$: otherLanguages = getActiveLanguages().filter((l) => l !== lang);
 
 // Alternate language URLs - computed on mount from current page path
 let alternateLanguageUrls: {
@@ -25,6 +33,7 @@ let alternateLanguageUrls: {
   url: string;
   flag: string;
   nativeName: string;
+  label: string;
 }[] = [];
 
 onMount(() => {
@@ -37,7 +46,13 @@ onMount(() => {
       basePath === '/'
         ? config.urlPrefix || '/'
         : `${config.urlPrefix}${basePath}`;
-    return { lang: l, url, flag: config.flag, nativeName: config.nativeName };
+    return {
+      lang: l,
+      url,
+      flag: config.flag,
+      nativeName: config.nativeName,
+      label: languageLabel(l, config.nativeName),
+    };
   });
 });
 
@@ -140,17 +155,17 @@ function closeAllDropdowns() {
           </button>
           {#if languageOpen}
             <div
-              class="absolute left-1/2 -translate-x-1/2 top-full w-20"
+              class="absolute right-0 top-full min-w-[12rem]"
               style="height: 12px; pointer-events: auto;"
             ></div>
             <div
               id="language-dropdown"
-              class="absolute left-1/2 -translate-x-1/2 top-full w-20 bg-white dark:bg-gray-800 text-black dark:text-gray-200 rounded shadow-lg z-50 overflow-hidden transition-all duration-200"
+              class="absolute right-0 top-full min-w-[12rem] max-h-80 overflow-y-auto bg-white dark:bg-gray-800 text-black dark:text-gray-200 rounded shadow-lg z-50 transition-all duration-200"
               style="pointer-events: auto; opacity: 1; transform: translateY(12px);"
             >
               {#each alternateLanguageUrls as alt}
-                <a href={alt.url} class="block w-full text-center px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang })}>
-                  {alt.lang.toUpperCase()}
+                <a href={alt.url} lang={alt.lang} class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang })}>
+                  {alt.label}
                 </a>
               {/each}
             </div>

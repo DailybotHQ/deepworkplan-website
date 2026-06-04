@@ -1,0 +1,31 @@
+---
+title: "Intégrer un service hérité"
+description: "Une démonstration illustrative consistant à pointer un agent vers un dépôt hérité non documenté et à le laisser AI-first — raisonné, non destructif et vérifiable."
+kind: example
+lang: fr
+order: 4
+---
+import OnboardFlow from '@/components/diagrams/kit/OnboardFlow.astro';
+
+# Intégrer un service hérité
+
+Une démonstration illustrative de la première chose que font la plupart des équipes : prendre un dépôt existant et sous-documenté et le rendre pilotable par agent — sans perturber ce qui fonctionne déjà.
+
+<OnboardFlow lang="fr" class="not-prose my-10" />
+
+## L’objectif
+
+« Rendre ce service vieux de cinq ans AI-first. » Il dispose déjà d’un `README` partiel, de quelques docs éparses et d’aucun `AGENTS.md`.
+
+## Le déroulé
+
+Le développeur donne à son agent une seule ligne — *lire et suivre [`/init.md`](/init.md)* — et le flux d’onboarding :
+
+1. **Reconnaissance.** Détecte le langage réel, le gestionnaire de paquets (à partir du fichier de verrouillage existant) et les vraies commandes de build, de test et de lint — en lisant le dépôt, pas en supposant.
+2. **Propose un plan et demande.** Comme des artefacts existent déjà, il est non destructif : il liste ce qu’il va créer par rapport à ce qu’il va réconcilier, et attend l’approbation avant de toucher au `README` partiel ou aux docs éparses.
+3. **Génère le harness.** Un `AGENTS.md` raisonné avec les vraies Quick Commands du service, une arborescence `docs/` catégorisée qui absorbe les notes existantes au lieu de les dupliquer, des README par module, le kit `.agents/` et un `.dwp/` ignoré par git.
+4. **Vérifie.** `/dwp-verify` retourne un rapport objectif de réussite/échec face aux critères de conformité.
+
+## Résultat
+
+Le service hérité devient AI-first sans rien détruire : le travail existant est fusionné, pas écrasé, et le résultat est vérifiable plutôt qu’affirmé. À partir de là, l’équipe planifie et exécute un vrai travail avec `/dwp-create` et `/dwp-execute`.

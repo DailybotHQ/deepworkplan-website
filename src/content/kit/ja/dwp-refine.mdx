@@ -1,0 +1,39 @@
+---
+title: dwp-refine
+description: "完了済みの作業を保持し、変更を反映するようタスク表を更新しながら、タスクの追加、削除、並べ替えによって既存の Deep Work Plan を改良する。"
+kind: command
+lang: ja
+order: 3
+usage: /dwp-refine [plan]
+aliases:
+  - dwp:refine
+---
+import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
+
+# dwp-refine
+
+既存の Deep Work Plan を改良します。
+
+<CmdRefine lang="ja" class="not-prose my-8" />
+
+## 何をするか
+
+`dwp-refine` は既存の計画を修正します。完了済みの作業を保持し、タスク表を更新しながら、タスクの追加、削除、並べ替えができます。
+
+## 使い方
+
+```
+/dwp-refine [plan]
+```
+
+## 振る舞い
+
+1. 既存の計画を読む。
+2. タスクを追加、削除、または並べ替える。
+3. 完了済みの作業を保持する。
+4. タスク表を更新する。
+5. 何が、なぜ変わったかを記録する。
+
+## エイリアス
+
+- `dwp:refine`

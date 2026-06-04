@@ -1,0 +1,54 @@
+---
+title: Arquétipos
+description: "Descrição normativa dos arquétipos de repositório do DWP: o repositório individual e o hub orquestrador, a heurística de classificação e como o onboarding difere."
+order: 4
+lang: pt
+section: Archetypes
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Arquétipos
+
+**Versão 1.0.** O DWP reconhece dois arquétipos de repositório. O arquétipo determina como um agente faz o onboarding e como os planos têm seu escopo definido.
+
+## Repositório individual
+
+Uma base de código autocontida — uma aplicação, uma biblioteca ou um serviço. Os planos operam diretamente sobre o código.
+
+Características:
+
+- Uma única base de código coerente.
+- Os planos modificam arquivos neste repositório.
+- Espaço de trabalho `.dwp/` na raiz do repositório.
+
+## Hub orquestrador
+
+Um repositório de coordenação que gerencia múltiplos repositórios filhos. Os planos podem criar planos filhos em sub-repositórios.
+
+Características:
+
+- Coordena múltiplos sub-repositórios.
+- Os planos podem delegar a planos filhos.
+- Mantém um registro de repositórios gerenciados.
+- O espaço de trabalho `.dwp/` na raiz do hub rastreia o estado entre repositórios.
+
+## Heurística de classificação
+
+<ArchetypesTree lang="pt" class="not-prose my-10" />
+
+Um agente DEVERIA (SHOULD) classificar um repositório como um hub orquestrador se encontrar:
+
+- Múltiplos repositórios git aninhados ou submódulos.
+- Um registro ou manifesto de repositórios gerenciados.
+- Configuração que aponta para repositórios externos.
+
+Caso contrário, trate-o como um repositório individual.
+
+## Diferenças de onboarding
+
+| Aspecto | Individual | Orquestrador |
+|--------|------------|--------------|
+| Escopo | Este repositório | Múltiplos repositórios |
+| Onboarding | Estrutura do repositório | Registro do hub |
+| Alvo do plano | Arquivos locais | Planos filhos |
+| Estado | `.dwp/` local | `.dwp/` entre repositórios |

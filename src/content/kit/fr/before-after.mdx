@@ -1,0 +1,36 @@
+---
+title: Avant et après
+description: "Un exemple avant/après montrant comment un Deep Work Plan change le comportement d’un agent sur une tâche en plusieurs étapes, transformant l’improvisation en exécution relisible."
+kind: example
+lang: fr
+order: 1
+---
+import UnguidedVsDwp from '@/components/diagrams/kit/UnguidedVsDwp.astro';
+
+# Avant et après
+
+Une comparaison concrète du comportement d’un agent sans et avec DWP.
+
+<UnguidedVsDwp lang="fr" class="not-prose my-10" />
+
+## Avant DWP
+
+Face à « ajouter l’authentification à l’application », un agent :
+
+- Se met aussitôt à éditer des fichiers.
+- Perd la trace de ce qu’il a modifié.
+- Produit un résultat incohérent et difficile à relire.
+- Ne peut pas reprendre s’il est interrompu.
+
+## Après DWP
+
+Face au même objectif, un agent piloté par DWP :
+
+- Crée un plan : schéma, endpoints, middleware, tests, docs.
+- Exécute tâche par tâche, en mettant à jour la progression.
+- Produit des changements relisibles et incrémentaux.
+- Reprend proprement après une interruption.
+
+## Résultat
+
+Le même modèle produit un travail plus fiable et plus relisible lorsqu’il est guidé par un plan.

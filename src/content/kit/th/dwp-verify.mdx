@@ -1,0 +1,40 @@
+---
+title: dwp-verify
+description: "ตรวจสอบว่า repository สอดคล้องกับ DeepWorkPlan (เป็น AI-first) และแผนของมันถูกต้องตามรูปแบบ พร้อมรายงานความสอดคล้องผ่าน/ไม่ผ่านอย่างเป็นกลางเทียบกับ spec"
+kind: command
+lang: th
+order: 5.5
+usage: /dwp-verify [plan <name> | all]
+aliases:
+  - dwp:verify
+---
+import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
+
+# dwp-verify
+
+ตรวจสอบความสอดคล้องของ repository และแผนอย่างเป็นกลาง โดยอ่านอย่างเดียว
+
+<CmdVerify lang="en" class="not-prose my-8" />
+
+## สิ่งที่มันทำ
+
+`dwp-verify` ตรวจสอบเชิงกลไกว่า repository เป็น AI-first (สอดคล้องกับ DeepWorkPlan) หรือไม่ และแผนของมันถูกต้องตามรูปแบบหรือไม่ แล้วรายงานผ่าน/ไม่ผ่าน มันไม่เปลี่ยนแปลงสิ่งใด
+
+## วิธีใช้
+
+```
+/dwp-verify            # verify the repository
+/dwp-verify plan auth  # also verify a specific plan
+/dwp-verify all        # repository + every plan
+```
+
+## พฤติกรรม
+
+1. ตรวจ repository ทั้ง `AGENTS.md` ที่มีคำสั่งจริงรันได้ การ resolve ของ `CLAUDE.md` หมวดหมู่ใน `docs/` แคตตาล็อก `.agents/` ที่ตรงกับดิสก์ ตัวส่งต่อ `dwp-*` แบบบาง ๆ `.dwp/` และ `tmp/` ที่ถูก gitignore และ skill ที่ resolve ได้
+2. ตรวจแผน (เมื่อร้องขอ) ว่าทุก task มี acceptance criteria และ validation gate ความคืบหน้าถูกบันทึกคงอยู่ มี final task บังคับสองตัวครบ และ task ผูกกลับไปยังเป้าหมาย
+3. รายงาน **CONFORMANT** หรือ **NOT CONFORMANT** พร้อมแจกแจงทุกข้อที่ไม่ผ่าน
+4. เสนอที่จะบันทึกช่องว่างที่พบเป็น Deep Work Plan โดยไม่แก้ไขแบบเงียบ ๆ
+
+## ชื่อแทน
+
+- `dwp:verify`

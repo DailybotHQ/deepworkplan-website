@@ -30,6 +30,7 @@ ink-line **engraving** style anchored to the existing lighthouse in
 | [prompts/02-methodology.md](./prompts/02-methodology.md) | Methodology prompts (ME-01 … ME-06). |
 | [prompts/03-spec.md](./prompts/03-spec.md) | Spec figures (SP-01 … SP-05). |
 | [prompts/04-kit.md](./prompts/04-kit.md) | Kit prompts (KT-01 … KT-10). |
+| [prompts/05-pages.md](./prompts/05-pages.md) | Standalone page prompts (PG-01 — the 404 off-map chart). |
 | [INTEGRATION_GUIDE.md](./INTEGRATION_GUIDE.md) | How to wire the returned assets into the site (later — separate work). |
 
 ## How to use it

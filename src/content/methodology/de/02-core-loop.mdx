@@ -1,0 +1,61 @@
+---
+title: Die Kernschleife
+description: "Der Workflow aus create, execute, refine, resume, status und verify, das per gitignore ausgeschlossene .dwp-Ausgabeverzeichnis, die neunteilige Aufgaben-Anatomie und wie Validierung funktioniert."
+order: 2
+lang: de
+summary: Wie die zentralen DWP-Operationen einen Plan vom Ziel zum verifizierten Abschluss treiben.
+icon: refresh
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+
+# Die Kernschleife
+
+DWP definiert eine kleine Menge von Operationen, die einen Plan von einem Ziel zu abgeschlossener, prüfbarer Arbeit bewegen: **create → execute → refine → resume → status**, mit **verify** als Konformitätsprüfung, die das Ergebnis bestätigt. Gemeinsam bilden sie die Schleife, der ein Agent über die gesamte Lebensdauer eines Plans folgt. Agenten führen eine Aufgabe nach der anderen aus und validieren jeden Schritt, bevor sie weitergehen.
+
+Diese Schleife ist die operative Form von spec-driven Development. Der Plan ist die Spezifikation, gegen die ein Agent ausführt, jede Aufgabe trägt explizite Akzeptanzkriterien, und der Validierungsschritt ist das Gate, das eine Behauptung des Abschlusses in einen Beleg dafür verwandelt. Weil der Plan und sein Fortschrittsprotokoll im Repository leben, ist die Schleife über Sitzungen und Agenten hinweg wiederaufnehmbar.
+
+## Die Operationen
+
+<CoreLoop lang="en" class="not-prose my-10" />
+
+- **create** — Einen neuen Plan aus einem Ziel erzeugen. Der Agent analysiert das Ziel, zerlegt es in aufeinanderfolgende Aufgaben und schreibt die Plandateien. Bei einem mehrdeutigen Ziel sollte er vor dem Schreiben klärende Fragen stellen.
+- **execute** — Den Plan Aufgabe für Aufgabe ausführen. Der Agent aktualisiert nach jeder Aufgabe das Fortschrittsprotokoll und markiert den Abschlussstatus der Aufgabe. Er darf keine Aufgaben überspringen, ohne festzuhalten, warum.
+- **refine** — Einen bestehenden Plan ändern. Der Agent darf Aufgaben hinzufügen, entfernen oder umordnen, muss aber abgeschlossene Arbeit bewahren und die Aufgabentabelle aktualisieren.
+- **resume** — Einen unterbrochenen Plan fortsetzen. Der Agent liest das Fortschrittsprotokoll und die Aufgabendateien, um den Zustand zu rekonstruieren, und setzt dann ab der ersten unvollständigen Aufgabe fort.
+- **status** — Über den Fortschritt berichten, ohne auszuführen. Der Agent fasst abgeschlossene, laufende und ausstehende Aufgaben zusammen und ändert nichts.
+- **verify** — Konformität prüfen, ohne etwas zu ändern. Der Agent berichtet, ob das Repository den Standard erfüllt und ob ein Plan wohlgeformt ist — jede Aufgabe mit Akzeptanzkriterien und einem Validierungs-Gate. Siehe das [Konformitätsdokument der Spezifikation](/spec).
+
+## Das `.dwp/`-Ausgabeverzeichnis
+
+Alle DWP-Artefakte liegen unter einem per gitignore ausgeschlossenen `.dwp/`-Verzeichnis im Repository-Stammverzeichnis. Den Arbeitsbereich aus der Versionskontrolle herauszuhalten bedeutet, dass der Arbeitszustand eines Plans niemals den Projektverlauf verunreinigt.
+
+```
+.dwp/
+├── plans/
+│   └── PLAN_<slug>/
+│       ├── README.md
+│       ├── PROGRESS.md
+│       └── <n>.task_<slug>.md
+└── config.yaml
+```
+
+## Die neunteilige Aufgaben-Anatomie
+
+<TaskAnatomy lang="en" class="not-prose my-10" />
+
+Jede Aufgabendatei enthält diese neun Abschnitte, in dieser Reihenfolge. Die Struktur garantiert, dass jede Arbeitseinheit in sich geschlossen und prüfbar ist:
+
+1. **Goal** — ein Absatz, der festhält, was die Aufgabe erreicht.
+2. **Context** — Hintergrund, Links und warum diese Aufgabe existiert.
+3. **Steps** — geordnete, konkrete auszuführende Handlungen.
+4. **Acceptance criteria** — eine Checkliste von Bedingungen, die „erledigt“ definieren.
+5. **Validation** — Befehle oder Tests, die auszuführen sind, um die Arbeit zu verifizieren.
+6. **Files** — Pfade, die voraussichtlich erstellt oder geändert werden.
+7. **Dependencies** — andere Aufgaben oder externe Voraussetzungen.
+8. **Risks** — was schiefgehen könnte und Gegenmaßnahmen.
+9. **Completion & Log** — eine Statusmarkierung plus chronologische Notizen.
+
+## Validierung, Abschluss und Wiederaufnahme
+
+Validierung ist Teil der Aufgabe, kein nachträglicher Gedanke: Jede Aufgabe benennt die Befehle oder Tests, die belegen, dass sie erledigt ist, und der Agent führt sie aus, bevor er den Abschluss markiert. Der Abschluss wird mit einer expliziten Statusmarkierung (`[ ]` nicht begonnen, `[~]` in Arbeit, `[x]` erledigt, `[!]` blockiert) im Abschnitt Completion & Log festgehalten. Die Wiederaufnahme stützt sich auf diese Markierungen und das Fortschrittsprotokoll — ein Agent kann genau rekonstruieren, wo der Plan stehengeblieben ist, und ab der ersten unvollständigen Aufgabe fortsetzen, ohne fertige Arbeit erneut zu erledigen.

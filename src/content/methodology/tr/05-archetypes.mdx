@@ -1,0 +1,53 @@
+---
+title: Depo arketipleri
+description: "Bireysel depo ve orkestratör merkezi arketipleri, bir depoyu sınıflandırmaya yönelik sezgisel kural ve kuruluma alma ile plan kapsamının ikisi arasında nasıl farklılaştığı."
+order: 5
+lang: tr
+summary: Bir deponun arketipinin, bir ajanın nasıl kuruluma alındığını ve planları nasıl kapsamlandırdığını neden belirlediği.
+icon: layers
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Depo arketipleri
+
+DWP iki depo arketipi tanır. Bir ajanın çıkarsadığı arketip, nasıl kuruluma alındığını ve planları nasıl kapsamlandırdığını belirler; bu nedenle onu doğru belirlemek, herhangi bir çalışmadaki ilk karardır.
+
+## Bireysel depo
+
+Kendi kendine yeten bir kod tabanı — bir uygulama, bir kütüphane veya bir servis. Planlar doğrudan depodaki kod üzerinde çalışır ve kuruluma alma, deponun kendi yapısını ve kurallarını okur.
+
+Özellikler:
+
+- Tek, tutarlı bir kod tabanı.
+- Planlar bu depodaki dosyaları değiştirir.
+- `.dwp/` çalışma alanı depo kökünde yaşar.
+
+## Orkestratör merkezi
+
+Birden çok alt depoyu yöneten bir koordinasyon deposu. Planlar alt depolarda alt planlar başlatabilir ve kuruluma alma, tek bir kod tabanı yerine merkezin yönetilen depolar kaydını okur.
+
+Özellikler:
+
+- Birden çok alt depoyu koordine eder.
+- Planlar alt planlara devredebilir.
+- Yönetilen depoların bir kaydını tutar.
+- Merkez kökündeki `.dwp/` çalışma alanı, depolar arası durumu izler.
+
+## Sınıflandırma sezgisel kuralı
+
+<ArchetypesTree lang="tr" class="not-prose my-10" />
+
+Bir ajan, birden çok iç içe git deposu veya alt modül, yönetilen depoların bir kaydı ya da manifesti veya harici depolara işaret eden yapılandırma bulduğunda bir depoyu orkestratör merkezi olarak sınıflandırmalıdır. Bu sinyallerin yokluğunda, depoyu bireysel bir depo olarak ele alır.
+
+## Kuruluma alma nasıl farklılaşır
+
+| Yön | Bireysel | Orkestratör |
+|--------|------------|--------------|
+| Kapsam | Bu depo | Birden çok depo |
+| Kuruluma alma | Depo yapısı | Merkez kaydı |
+| Plan hedefi | Yerel dosyalar | Alt planlar |
+| Durum | Yerel `.dwp/` | Depolar arası `.dwp/` |
+
+Pratik etki şudur: bireysel depo ajanı tek bir kod tabanı hakkında baştan sona akıl yürütürken, orkestratör ajanı koordinasyon hakkında akıl yürütür — hangi alt deponun hangi işe sahip olduğu ve depolar arası durumun nasıl tutarlı kaldığı.
+
+Arketipi doğru belirlemek, bir ajanın gözetimsiz olarak saatlerce otonom çalışmasını sağlayan şeydir: planları, kuruluma almayı ve durumu doğru sınıra göre kapsamlandırır; böylece ajan ilk görevden sonuncusuna kadar doğru yüzey üzerinde çalışır.

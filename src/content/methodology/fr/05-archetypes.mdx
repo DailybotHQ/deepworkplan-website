@@ -1,0 +1,53 @@
+---
+title: Archétypes de dépôt
+description: "Les archétypes dépôt individuel et hub orchestrateur, l’heuristique de classification d’un dépôt, et en quoi l’onboarding et le périmètre des plans diffèrent entre eux."
+order: 5
+lang: fr
+summary: Pourquoi l’archétype d’un dépôt détermine la façon dont un agent s’intègre et cadre les plans.
+icon: layers
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Archétypes de dépôt
+
+DWP reconnaît deux archétypes de dépôt. L’archétype qu’un agent infère détermine la façon dont il s’intègre et dont il cadre les plans ; l’identifier correctement est donc la première décision de tout engagement.
+
+## Dépôt individuel
+
+Une base de code autonome — une application, une bibliothèque ou un service. Les plans opèrent directement sur le code du dépôt, et l’onboarding lit la structure et les conventions propres au dépôt.
+
+Caractéristiques :
+
+- Une base de code unique et cohérente.
+- Les plans modifient les fichiers de ce dépôt.
+- L’espace de travail `.dwp/` réside à la racine du dépôt.
+
+## Hub orchestrateur
+
+Un dépôt de coordination qui gère plusieurs dépôts enfants. Les plans peuvent lancer des plans enfants dans des sous-dépôts, et l’onboarding lit le registre des dépôts gérés par le hub plutôt qu’une base de code unique.
+
+Caractéristiques :
+
+- Coordonne plusieurs sous-dépôts.
+- Les plans peuvent déléguer à des plans enfants.
+- Maintient un registre des dépôts gérés.
+- L’espace de travail `.dwp/` à la racine du hub suit l’état inter-dépôts.
+
+## Heuristique de classification
+
+<ArchetypesTree lang="fr" class="not-prose my-10" />
+
+Un agent doit classer un dépôt comme hub orchestrateur lorsqu’il trouve plusieurs dépôts git imbriqués ou des sous-modules, un registre ou un manifeste de dépôts gérés, ou une configuration qui pointe vers des dépôts externes. En l’absence de ces signaux, il traite le dépôt comme un dépôt individuel.
+
+## En quoi l’onboarding diffère
+
+| Aspect | Individuel | Orchestrateur |
+|--------|------------|--------------|
+| Périmètre | Ce dépôt | Plusieurs dépôts |
+| Onboarding | Structure du dépôt | Registre du hub |
+| Cible du plan | Fichiers locaux | Plans enfants |
+| État | `.dwp/` local | `.dwp/` inter-dépôts |
+
+L’effet pratique est qu’un agent de dépôt individuel raisonne sur une base de code de bout en bout, tandis qu’un agent orchestrateur raisonne sur la coordination — quel dépôt enfant détient quel travail, et comment l’état inter-dépôts reste cohérent.
+
+Bien identifier l’archétype est ce qui permet à un agent de travailler en autonomie pendant des heures sans supervision : il cadre les plans, l’onboarding et l’état sur la bonne frontière, de sorte que l’agent opère sur la bonne surface, de la première tâche à la dernière.

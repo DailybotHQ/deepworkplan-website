@@ -1,0 +1,39 @@
+---
+title: dwp-status
+description: "किसी Deep Work Plan को निष्पादित किए बिना उसकी स्थिति की रिपोर्ट दें। एजेंट योजना और progress log पढ़ता है, फिर पूर्ण, प्रगति-में, और लंबित काम का सारांश देता है।"
+kind: command
+lang: hi
+order: 5
+usage: /dwp-status [plan]
+aliases:
+  - dwp:status
+---
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
+
+# dwp-status
+
+निष्पादित किए बिना Deep Work Plan की स्थिति की रिपोर्ट दें।
+
+<CmdStatus lang="en" class="not-prose my-8" />
+
+## यह क्या करता है
+
+`dwp-status` बिना परिवर्तन किए योजना की प्रगति का सारांश देता है। यह पूर्ण, प्रगति-में, और लंबित कार्यों की रिपोर्ट देता है।
+
+## उपयोग
+
+```
+/dwp-status [plan]
+```
+
+## व्यवहार
+
+1. योजना और `PROGRESS.md` पढ़ें।
+2. पूर्ण कार्यों का सारांश दें।
+3. प्रगति-में कार्यों का सारांश दें।
+4. लंबित कार्यों का सारांश दें।
+5. किसी चीज़ को संशोधित किए बिना रिपोर्ट दें।
+
+## उपनाम
+
+- `dwp:status`

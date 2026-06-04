@@ -1,0 +1,54 @@
+---
+title: Archetypen
+description: "Normative Beschreibung der DWP-Repository-Archetypen: das Einzel-Repository und der Orchestrator-Hub, die Klassifizierungsheuristik und wie sich das Onboarding unterscheidet."
+order: 4
+lang: de
+section: Archetypes
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Archetypen
+
+**Version 1.0.** DWP erkennt zwei Repository-Archetypen. Der Archetyp bestimmt, wie ein Agent onboardet und wie Pläne zugeschnitten werden.
+
+## Einzel-Repository
+
+Eine in sich geschlossene Codebasis — eine Anwendung, eine Bibliothek oder ein Service. Pläne operieren direkt auf dem Code.
+
+Merkmale:
+
+- Eine einzige zusammenhängende Codebasis.
+- Pläne ändern Dateien in diesem Repository.
+- `.dwp/`-Arbeitsbereich im Repository-Stammverzeichnis.
+
+## Orchestrator-Hub
+
+Ein Koordinations-Repository, das mehrere untergeordnete Repositorys verwaltet. Pläne können untergeordnete Pläne in Sub-Repositorys erzeugen.
+
+Merkmale:
+
+- Koordiniert mehrere Sub-Repositorys.
+- Pläne können an untergeordnete Pläne delegieren.
+- Pflegt ein Register der verwalteten Repositorys.
+- `.dwp/`-Arbeitsbereich im Hub-Stammverzeichnis verfolgt repository-übergreifenden Zustand.
+
+## Klassifizierungsheuristik
+
+<ArchetypesTree lang="en" class="not-prose my-10" />
+
+Ein Agent SOLLTE ein Repository als Orchestrator-Hub klassifizieren, wenn er Folgendes findet:
+
+- Mehrere verschachtelte git-Repositorys oder Submodule.
+- Ein Register oder Manifest verwalteter Repositorys.
+- Konfiguration, die auf externe Repositorys verweist.
+
+Andernfalls als Einzel-Repository behandeln.
+
+## Onboarding-Unterschiede
+
+| Aspekt | Individual | Orchestrator |
+|--------|------------|--------------|
+| Umfang | Dieses Repository | Mehrere Repositorys |
+| Onboarding | Repository-Struktur | Hub-Register |
+| Planziel | Lokale Dateien | Untergeordnete Pläne |
+| Zustand | Lokales `.dwp/` | Repository-übergreifendes `.dwp/` |

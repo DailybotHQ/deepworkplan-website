@@ -1,0 +1,51 @@
+---
+title: dwp-create
+description: "Criar um novo Deep Work Plan a partir de um objetivo de alto nível. O agente analisa o objetivo, decompõe o trabalho em tarefas e escreve os arquivos do plano em .dwp."
+kind: command
+lang: pt
+order: 1
+usage: /dwp-create <goal>
+aliases:
+  - dwp:create
+---
+import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
+
+# dwp-create
+
+Cria um novo Deep Work Plan a partir de um objetivo de alto nível.
+
+<CmdCreate lang="pt" class="not-prose my-8" />
+
+## O que faz
+
+O `dwp-create` recebe um objetivo de alto nível e o transforma em um plano estruturado. Ele analisa o objetivo, faz perguntas de esclarecimento se necessário, decompõe o trabalho em tarefas sequenciais e escreve os arquivos do plano.
+
+## Uso
+
+```
+/dwp-create <goal>
+```
+
+## Modos
+
+O `dwp-create` usa por padrão o modo **guiado**: ele reúne contexto, escreve um único rascunho refinado, **mostra-o a você e pede confirmação antes de gerar o plano final** — para que você sempre leia o plano antes de ele ser criado. Esse é o padrão recomendado, especialmente nas primeiras vezes.
+
+Acrescente **`trust`** (ou `auto`) como última palavra para pular as confirmações — o agente escreve o rascunho refinado e vai direto para o plano final:
+
+```
+/dwp-create <goal> trust
+```
+
+O modo trust é o atalho para usuários avançados, depois que você confia no fluxo; o modo guiado mantém um humano no circuito por padrão.
+
+## Comportamento
+
+1. Analisar o objetivo e o contexto do repositório.
+2. Fazer perguntas de esclarecimento se houver ambiguidade.
+3. Escrever um rascunho refinado em `.dwp/drafts/` (no modo guiado, revisá-lo e confirmá-lo).
+4. Decompor em tarefas sequenciais e escrever o README, os arquivos de tarefa e o PROGRESS.
+5. Terminar com as duas tarefas finais obrigatórias.
+
+## Aliases
+
+- `dwp:create`

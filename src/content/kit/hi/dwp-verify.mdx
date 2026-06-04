@@ -1,0 +1,40 @@
+---
+title: dwp-verify
+description: "सत्यापित करें कि कोई रिपॉज़िटरी DeepWorkPlan-अनुरूप (AI-first) है और उसकी योजनाएँ सुगठित हैं, स्पेक के विरुद्ध एक वस्तुनिष्ठ pass/fail अनुरूपता रिपोर्ट के साथ।"
+kind: command
+lang: hi
+order: 5.5
+usage: /dwp-verify [plan <name> | all]
+aliases:
+  - dwp:verify
+---
+import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
+
+# dwp-verify
+
+रिपॉज़िटरी और योजना की अनुरूपता को वस्तुनिष्ठ रूप से जाँचें — केवल-पठन।
+
+<CmdVerify lang="en" class="not-prose my-8" />
+
+## यह क्या करता है
+
+`dwp-verify` यांत्रिक रूप से जाँचता है कि कोई रिपॉज़िटरी AI-first (DeepWorkPlan-अनुरूप) है या नहीं और उसकी योजनाएँ सुगठित हैं या नहीं, फिर pass/fail की रिपोर्ट देता है। यह कुछ भी नहीं बदलता।
+
+## उपयोग
+
+```
+/dwp-verify            # verify the repository
+/dwp-verify plan auth  # also verify a specific plan
+/dwp-verify all        # repository + every plan
+```
+
+## व्यवहार
+
+1. रिपॉज़िटरी जाँचें: वास्तविक, चलने-योग्य कमांड वाली `AGENTS.md`; `CLAUDE.md` का समाधान; `docs/` श्रेणियाँ; डिस्क से मेल खाता `.agents/` कैटलॉग; पतले `dwp-*` डेलिगेटर; gitignored `.dwp/` और `tmp/`; एक समाधान-योग्य स्किल।
+2. एक योजना जाँचें (अनुरोध किए जाने पर): हर कार्य में acceptance criteria और एक validation gate है, प्रगति स्थायी की गई है, दो अनिवार्य अंतिम कार्य मौजूद हैं, और कार्य लक्ष्य से पुनः जुड़ते हैं।
+3. प्रत्येक विफलता को सूचीबद्ध करते हुए **CONFORMANT** या **NOT CONFORMANT** की रिपोर्ट दें।
+4. कमियों को एक Deep Work Plan के रूप में दर्ज करने का प्रस्ताव दें; कभी चुपचाप ठीक न करें।
+
+## उपनाम
+
+- `dwp:verify`

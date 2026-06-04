@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import KitReader from '@/components/pages/KitReader.astro';
+import { getActiveNonDefaultLanguages, type Language } from '@/lib/i18n';
+
+export async function getStaticPaths() {
+  const langs = getActiveNonDefaultLanguages();
+  const entries = await getCollection('kit');
+  return entries
+    .filter((entry) => langs.includes(entry.data.lang as Language))
+    .map((entry) => ({
+      params: {
+        lang: entry.data.lang,
+        slug: entry.id.replace(new RegExp(`^${entry.data.lang}/`), ''),
+      },
+      props: { entry },
+    }));
+}
+
+const { lang } = Astro.params as { lang: Language };
+const { entry } = Astro.props;
+---
+
+<KitReader lang={lang} entry={entry} variant="kit" />

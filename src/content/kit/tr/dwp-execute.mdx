@@ -1,0 +1,39 @@
+---
+title: dwp-execute
+description: "Var olan bir Deep Work Plan’i görev görev yürütür. Ajan planın tamamını okur, her görevi sırayla çalıştırır, ilerlemeyi günceller ve tamamlanmayı doğru biçimde işaretler."
+kind: command
+lang: tr
+order: 2
+usage: /dwp-execute [plan]
+aliases:
+  - dwp:execute
+---
+import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
+
+# dwp-execute
+
+Var olan bir Deep Work Plan’i yürütün.
+
+<CmdExecute lang="tr" class="not-prose my-8" />
+
+## Ne yapar
+
+`dwp-execute`, var olan bir planı görev görev çalıştırır. Planın tamamını okur, her görevi sırayla yürütür, `PROGRESS.md` dosyasını günceller ve her görevin tamamlanma durumunu işaretler.
+
+## Kullanım
+
+```
+/dwp-execute [plan]
+```
+
+## Davranış
+
+1. Başlamadan önce planın tamamını okuyun.
+2. Görevleri sırayla yürütün.
+3. Her görevden sonra `PROGRESS.md` dosyasını güncelleyin.
+4. Görev durumunu doğru biçimde işaretleyin.
+5. Engellendiğinizde durup sorun.
+
+## Takma adlar
+
+- `dwp:execute`

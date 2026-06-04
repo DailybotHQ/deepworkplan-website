@@ -1,0 +1,39 @@
+---
+title: dwp-refine
+description: "완료된 작업을 보존하고 변경을 반영하도록 task 표를 갱신하면서, task를 추가, 제거, 재배열하여 기존 Deep Work Plan을 정제합니다."
+kind: command
+lang: ko
+order: 3
+usage: /dwp-refine [plan]
+aliases:
+  - dwp:refine
+---
+import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
+
+# dwp-refine
+
+기존 Deep Work Plan을 정제합니다.
+
+<CmdRefine lang="ko" class="not-prose my-8" />
+
+## 하는 일
+
+`dwp-refine`은 기존 계획을 수정합니다. 완료된 작업을 보존하고 task 표를 갱신하면서 task를 추가, 제거, 재배열할 수 있습니다.
+
+## 사용법
+
+```
+/dwp-refine [plan]
+```
+
+## 동작
+
+1. 기존 계획을 읽습니다.
+2. task를 추가, 제거, 재배열합니다.
+3. 완료된 작업을 보존합니다.
+4. task 표를 갱신합니다.
+5. 무엇이 왜 바뀌었는지 기록합니다.
+
+## 별칭
+
+- `dwp:refine`

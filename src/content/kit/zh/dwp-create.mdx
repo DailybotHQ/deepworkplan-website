@@ -1,0 +1,51 @@
+---
+title: dwp-create
+description: "从一个高层目标创建一份新的 Deep Work Plan。代理分析目标、把工作分解为任务，并在 .dwp 之下写出计划文件。"
+kind: command
+lang: zh
+order: 1
+usage: /dwp-create <goal>
+aliases:
+  - dwp:create
+---
+import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
+
+# dwp-create
+
+从一个高层目标创建一份新的 Deep Work Plan。
+
+<CmdCreate lang="en" class="not-prose my-8" />
+
+## 它做了什么
+
+`dwp-create` 接收一个高层目标，并把它转化为一份结构化的计划。它会分析目标、在需要时提出澄清性的问题、把工作分解为一系列连续的任务，并写出计划文件。
+
+## 用法
+
+```
+/dwp-create <goal>
+```
+
+## 模式
+
+`dwp-create` 默认采用**引导**模式：它会收集上下文、写出一份经过精炼的草稿，**展示给你看，并在生成最终计划之前请求确认**——这样你总能在计划被创建之前先读到它。这是推荐的默认方式，尤其是在最初的几次。
+
+把 **`trust`**（或 `auto`）作为最后一个词追加进去，即可跳过这些确认——代理会写出经过精炼的草稿并直接进入最终计划：
+
+```
+/dwp-create <goal> trust
+```
+
+trust 模式是你信任这套流程之后的进阶用户捷径；引导模式则默认让人参与其中。
+
+## 行为
+
+1. 分析目标与仓库上下文。
+2. 若含糊则提出澄清性的问题。
+3. 把一份经过精炼的草稿写入 `.dwp/drafts/`（在引导模式下，审阅并确认它）。
+4. 分解为一系列连续的任务，并写出 README、任务文件与 PROGRESS。
+5. 以两项强制收尾任务作结。
+
+## 别名
+
+- `dwp:create`

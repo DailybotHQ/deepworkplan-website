@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 EventEmitter.defaultMaxListeners = 20;
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
@@ -12,10 +13,25 @@ import { defineConfig } from 'astro/config';
 import rehypeExternalLinks from 'rehype-external-links';
 
 import excludeInternal from './src/integrations/exclude-internal';
+import { DEFAULT_LANGUAGE_CODE, LANGUAGE_CODES } from './src/lib/language-codes';
 import rehypeResponsiveTables from './src/lib/rehype-responsive-tables.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+// /init is the canonical adoption endpoint. /setup and /onboarding redirect to
+// it in every language — one page, one .md endpoint, no canonical/AEO
+// duplication. Generated from the language registry so adding a language needs
+// no edit here.
+const adoptionRedirects = Object.fromEntries(
+  LANGUAGE_CODES.flatMap((code) => {
+    const prefix = code === DEFAULT_LANGUAGE_CODE ? '' : `/${code}`;
+    return [
+      [`${prefix}/setup`, { status: 301, destination: `${prefix}/init` }],
+      [`${prefix}/onboarding`, { status: 301, destination: `${prefix}/init` }],
+    ];
+  })
+);
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,28 +42,25 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
-  // /init is the canonical adoption endpoint. /setup and /onboarding (and their
-  // /es/ variants) are permanent redirects to it — one page, one .md endpoint,
-  // no canonical/AEO duplication.
-  redirects: {
-    '/setup': { status: 301, destination: '/init' },
-    '/onboarding': { status: 301, destination: '/init' },
-    '/es/setup': { status: 301, destination: '/es/init' },
-    '/es/onboarding': { status: 301, destination: '/es/init' },
-  },
+  redirects: adoptionRedirects,
+  // Astro 6.4+ moved `markdown.remarkPlugins/rehypePlugins/remarkRehype` to a
+  // `processor` instance produced by `unified()` from `@astrojs/markdown-remark`.
   markdown: {
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          target: '_blank',
-          rel: ['noopener', 'noreferrer'],
-        },
+    processor: unified({
+      rehypePlugins: [
+        [
+          rehypeExternalLinks,
+          {
+            target: '_blank',
+            rel: ['noopener', 'noreferrer'],
+          },
+        ],
+        // Wrap reader Markdown tables in .table-responsive so they scroll on
+        // mobile instead of overflowing the page (methodology/spec/kit are
+        // table-heavy).
+        rehypeResponsiveTables,
       ],
-      // Wrap reader Markdown tables in .table-responsive so they scroll on mobile
-      // instead of overflowing the page (methodology/spec/kit are table-heavy).
-      rehypeResponsiveTables,
-    ],
+    }),
   },
   integrations: [
     mdx(),
@@ -93,12 +106,53 @@ export default defineConfig({
       holdUntilCrawlEnd: false,
     },
     server: {
+      // Pre-compile the heaviest SSR modules at dev startup so the FIRST
+      // browser request doesn't trigger a cold compile of global.css /
+      // MainLayout / HomePage and blow the 60s `vite:invoke` timeout. With 16
+      // languages the cold compile graph for the first page exceeds that
+      // window; warming up moves the cost into the "ready in" phase.
+      warmup: {
+        ssrFiles: [
+          './src/styles/global.css',
+          './src/layouts/MainLayout.astro',
+          './src/components/pages/HomePage.astro',
+          './src/components/BaseHead.astro',
+          './src/components/layout/Header.svelte',
+          './src/lib/i18n.ts',
+          './src/lib/translations/index.ts',
+        ],
+      },
       hmr: {
         overlay: true,
       },
       port: 5555,
       watch: {
-        ignored: ['**/.lighthouseci/**'],
+        // Ignore everything that doesn't need HMR. With 16 languages our build
+        // output explodes to ~926 files; if Vite tries to watch dist/, tmp/,
+        // and other large/recursive trees it blows past the inotify limit
+        // (ENOSPC). The dev server only needs src/, public/, and config files.
+        ignored: [
+          // build + cache output
+          '**/dist/**',
+          '**/.astro/**',
+          '**/node_modules/.cache/**',
+          '**/coverage/**',
+          // Local pnpm store + lockfile internals
+          '**/.pnpm-store/**',
+          // Skills/agents catalog + DWP plans + scratch — not part of the site
+          '**/.agents/**',
+          '**/.claude/**',
+          '**/.dwp/**',
+          '**/tmp/**',
+          // Tooling output
+          '**/.lighthouseci/**',
+          '**/.github/**',
+          // Tests / Node scripts — not served by Astro
+          '**/tests/**',
+          '**/scripts/**',
+          // Repo docs — not part of the dev runtime
+          '**/docs/**',
+        ],
       },
     },
   },

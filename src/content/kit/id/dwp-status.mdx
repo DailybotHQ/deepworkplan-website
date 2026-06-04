@@ -1,0 +1,39 @@
+---
+title: dwp-status
+description: "Laporkan status Deep Work Plan tanpa mengeksekusinya. Agent membaca rencana dan log progres, lalu merangkum pekerjaan yang selesai, sedang berjalan, dan tertunda."
+kind: command
+lang: id
+order: 5
+usage: /dwp-status [plan]
+aliases:
+  - dwp:status
+---
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
+
+# dwp-status
+
+Laporkan status Deep Work Plan tanpa mengeksekusi.
+
+<CmdStatus lang="en" class="not-prose my-8" />
+
+## Fungsinya
+
+`dwp-status` merangkum progres rencana tanpa membuat perubahan. Ia melaporkan tugas yang selesai, sedang berjalan, dan tertunda.
+
+## Penggunaan
+
+```
+/dwp-status [plan]
+```
+
+## Perilaku
+
+1. Baca rencana dan `PROGRESS.md`.
+2. Rangkum tugas yang selesai.
+3. Rangkum tugas yang sedang berjalan.
+4. Rangkum tugas yang tertunda.
+5. Laporkan tanpa mengubah apa pun.
+
+## Alias
+
+- `dwp:status`

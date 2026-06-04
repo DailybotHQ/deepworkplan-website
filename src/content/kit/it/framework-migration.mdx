@@ -1,0 +1,38 @@
+---
+title: "Una migrazione di framework"
+description: "Una procedura illustrativa di una migrazione di framework a lungo termine eseguita come Deep Work Plan — il tipo di lavoro su più ore e più file in cui gli agenti di solito vanno alla deriva."
+kind: example
+lang: it
+order: 3
+---
+import MigrationBeforeAfter from '@/components/diagrams/kit/MigrationBeforeAfter.astro';
+
+# Una migrazione di framework
+
+Una procedura illustrativa del lavoro per cui DWP è costruito: una migrazione che spazia su decine di file e diverse ore — abbastanza lunga da far perdere il filo a un agente non guidato.
+
+## L’obiettivo
+
+<MigrationBeforeAfter lang="it" class="not-prose my-10" />
+
+«Migra il data layer dall’ORM legacy a quello nuovo su tutto il servizio.»
+
+## Senza un piano
+
+Un agente modifica i model finché il suo contesto si riempie di modifiche a metà, dimentica quali call site ha già convertito e lascia la build rossa senza alcuna traccia di ciò che resta. Riprendere significa ricostruire il proprio filo di pensiero da un log di chat.
+
+## Come Deep Work Plan
+
+`/dwp-create` scompone l’obiettivo in attività atomiche e ordinate, ciascuna con criteri di accettazione e un validation gate:
+
+1. Introdurre il nuovo ORM accanto a quello vecchio (nessun cambiamento di comportamento; gate: build + test verdi).
+2. Migrare i model e i call site del modulo A (gate: test del modulo A verdi).
+3. Ripetere per ogni modulo, un’attività ciascuno — progressi registrati dopo ogni attività.
+4. Rimuovere l’ORM legacy e i suoi shim (gate: nessun riferimento residuo; intera suite verde).
+5. Aggiornare i docs e i README per modulo.
+
+`/dwp-execute` esegue le attività in ordine, eseguendo il commit dopo ogni gate superato e aggiornando `PROGRESS.md`. Se la finestra di contesto si azzera a metà strada, `/dwp-resume` legge il piano e i progressi dal disco e prosegue dalla successiva attività non spuntata.
+
+## Risultato
+
+La migrazione arriva come una sequenza di commit piccoli, revisionabili e validati individualmente — e sopravvive alle interruzioni, perché la fonte di verità è il piano, non la conversazione.

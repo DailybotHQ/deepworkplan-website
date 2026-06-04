@@ -1,0 +1,61 @@
+---
+title: The core loop
+description: "Alur kerja create, execute, refine, resume, status, dan verify, direktori keluaran .dwp yang di-gitignore, anatomi tugas sembilan bagian, dan cara validasi bekerja."
+order: 2
+lang: id
+summary: Bagaimana operasi inti DWP menggerakkan rencana dari tujuan ke penyelesaian yang terverifikasi.
+icon: refresh
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+
+# The core loop
+
+DWP mendefinisikan sekumpulan kecil operasi yang memindahkan rencana dari sebuah tujuan ke pekerjaan yang selesai dan dapat ditinjau: **create → execute → refine → resume → status**, dengan **verify** sebagai pemeriksaan konformansi yang mengonfirmasi hasilnya. Bersama-sama keduanya membentuk loop yang diikuti agent sepanjang hidup sebuah rencana. Agent mengeksekusi satu tugas pada satu waktu, memvalidasi setiap langkah sebelum melanjutkan.
+
+Loop ini adalah bentuk operasional dari spec-driven development. Rencana adalah spesifikasi yang menjadi acuan eksekusi agent, setiap tugas membawa acceptance criteria yang eksplisit, dan langkah validasi adalah gate yang mengubah klaim penyelesaian menjadi bukti penyelesaian. Karena rencana dan log kemajuannya berada di dalam repositori, loop ini dapat dilanjutkan lintas sesi dan agent.
+
+## Operasi-operasinya
+
+<CoreLoop lang="en" class="not-prose my-10" />
+
+- **create** — Menghasilkan rencana baru dari sebuah tujuan. Agent menganalisis tujuan, menguraikannya menjadi tugas-tugas berurutan, dan menulis berkas rencana. Ia sebaiknya mengajukan pertanyaan klarifikasi sebelum menulis ketika tujuannya ambigu.
+- **execute** — Menjalankan rencana tugas demi tugas. Agent memperbarui log kemajuan setelah setiap tugas dan menandai status penyelesaian tugas. Ia tidak boleh melewati tugas tanpa mencatat alasannya.
+- **refine** — Memodifikasi rencana yang ada. Agent boleh menambah, menghapus, atau menyusun ulang tugas, tetapi ia harus mempertahankan pekerjaan yang selesai dan memperbarui tabel tugas.
+- **resume** — Melanjutkan rencana yang terhenti. Agent membaca log kemajuan dan berkas tugas untuk merekonstruksi status, lalu melanjutkan dari tugas pertama yang belum selesai.
+- **status** — Melaporkan kemajuan tanpa mengeksekusi. Agent merangkum tugas yang selesai, sedang berjalan, dan tertunda serta tidak mengubah apa pun.
+- **verify** — Memeriksa konformansi tanpa mengubah apa pun. Agent melaporkan apakah repositori memenuhi standar dan apakah sebuah rencana terbentuk dengan baik — setiap tugas membawa acceptance criteria dan sebuah validation gate. Lihat [dokumen Konformansi spesifikasi](/spec).
+
+## Direktori keluaran `.dwp/`
+
+Semua artefak DWP berada di bawah direktori `.dwp/` yang di-gitignore di akar repositori. Menjaga ruang kerja di luar kendali versi berarti status kerja sebuah rencana tidak pernah mencemari riwayat proyek.
+
+```
+.dwp/
+├── plans/
+│   └── PLAN_<slug>/
+│       ├── README.md
+│       ├── PROGRESS.md
+│       └── <n>.task_<slug>.md
+└── config.yaml
+```
+
+## Anatomi tugas sembilan bagian
+
+<TaskAnatomy lang="en" class="not-prose my-10" />
+
+Setiap berkas tugas berisi sembilan bagian ini, secara berurutan. Strukturnya menjamin bahwa setiap unit pekerjaan bersifat mandiri dan dapat ditinjau:
+
+1. **Goal** — satu paragraf yang menyatakan apa yang dicapai tugas.
+2. **Context** — latar belakang, tautan, dan mengapa tugas ini ada.
+3. **Steps** — tindakan konkret yang berurutan untuk dilakukan.
+4. **Acceptance criteria** — daftar periksa kondisi yang mendefinisikan selesai.
+5. **Validation** — perintah atau test yang dijalankan untuk memverifikasi pekerjaan.
+6. **Files** — path yang diperkirakan akan dibuat atau diubah.
+7. **Dependencies** — tugas lain atau prasyarat eksternal.
+8. **Risks** — apa yang bisa salah, dan mitigasinya.
+9. **Completion & Log** — penanda status ditambah catatan kronologis.
+
+## Validasi, penyelesaian, dan pelanjutan
+
+Validasi adalah bagian dari tugas, bukan renungan belakangan: setiap tugas menyebutkan perintah atau test yang membuktikannya selesai, dan agent menjalankannya sebelum menandai penyelesaian. Penyelesaian dicatat dengan penanda status yang eksplisit (`[ ]` belum dimulai, `[~]` sedang berjalan, `[x]` selesai, `[!]` terhambat) di bagian Completion & Log. Pelanjutan bersandar pada penanda ini dan log kemajuan — sebuah agent dapat merekonstruksi persis di mana rencana berhenti dan melanjutkan dari tugas pertama yang belum selesai tanpa mengulang pekerjaan yang telah rampung.

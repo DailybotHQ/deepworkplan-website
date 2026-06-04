@@ -1,0 +1,44 @@
+---
+title: Modèles de plan et de tâche
+description: "La structure des fichiers de plan et de tâche, les deux tâches finales obligatoires par lesquelles tout plan doit se terminer, et les conventions README et PROGRESS qui gardent un plan lisible."
+order: 3
+lang: fr
+summary: Comment les plans et les tâches sont structurés sur disque, et les conventions qui les gardent lisibles.
+icon: document
+---
+import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
+
+# Modèles de plan et de tâche
+
+Un Deep Work Plan est un répertoire de fichiers Markdown. La forme de ce répertoire — et de chaque fichier qu’il contient — est ce qui rend un plan relisible à la fois par les humains et par les agents.
+
+## Structure d’un plan
+
+<PlanTree lang="fr" class="not-prose my-10" />
+
+Un plan est un répertoire sous `.dwp/plans/` nommé `PLAN_<slug>/`. Il contient :
+
+- `README.md` — la vue d’ensemble du plan : objectif, matériau source, tableau des tâches et statut.
+- Un fichier par tâche, nommé `<n>.task_<slug>.md`.
+- `PROGRESS.md` — un journal d’exécution continu.
+
+## Structure d’un fichier de tâche
+
+Chaque fichier de tâche est nommé `<n>.task_<slug>.md` et suit l’anatomie en neuf sections : Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks et Completion & Log. Les sections apparaissent toujours dans cet ordre, de sorte que tout lecteur sait où chercher. Chaque tâche se réancre à l’objectif du plan avant d’agir, ce qui empêche un agent de dériver sur un long horizon de plusieurs heures.
+
+## Les deux tâches finales obligatoires
+
+Tout plan doit se terminer par deux tâches standard. Elles garantissent que la connaissance est capturée et que les parties prenantes sont informées :
+
+1. **Skills & Agents Discovery** — identifier les skills et agents réutilisables créés pendant le plan, pour que le travail capitalise au-delà de cet effort unique.
+2. **Executive Report** — un résumé concis des résultats, rédigé pour les parties prenantes, distinguant ce qui a été livré de ce qui reste à faire.
+
+## Conventions README et PROGRESS
+
+Le `README.md` du plan doit contenir un titre (`# Deep Work Plan: <name>`), un énoncé d’objectif en prose, une section facultative sur le matériau source, un tableau des tâches (numéro, nom de la tâche, case de statut) et une ligne de statut du plan sous la forme `<n>/<total> tasks complete`.
+
+`PROGRESS.md` est un journal d’exécution en ajout seul. Chaque entrée consigne un horodatage ISO 8601, le numéro et le nom de la tâche, ce qui a été fait, et tout écart ou raison de saut. Comme il ne fait que grandir, c’est un historique fiable de la façon dont le plan s’est réellement déroulé.
+
+## Titres et renvois
+
+Tous les titres utilisent la casse de phrase, et les documents évitent le langage marketing et les points d’exclamation. Ces conventions gardent les plans cohérents d’un agent à l’autre et dans le temps.

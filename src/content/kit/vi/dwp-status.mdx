@@ -1,0 +1,39 @@
+---
+title: dwp-status
+description: "Báo cáo trạng thái của một Deep Work Plan mà không thực thi. Agent đọc kế hoạch và nhật ký tiến độ, rồi tổng kết công việc đã xong, đang làm và còn chờ."
+kind: command
+lang: vi
+order: 5
+usage: /dwp-status [plan]
+aliases:
+  - dwp:status
+---
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
+
+# dwp-status
+
+Báo cáo trạng thái Deep Work Plan mà không thực thi.
+
+<CmdStatus lang="vi" class="not-prose my-8" />
+
+## Tác dụng
+
+`dwp-status` tổng kết tiến độ của kế hoạch mà không tạo ra thay đổi nào. Nó báo cáo các tác vụ đã hoàn thành, đang thực hiện và còn chờ.
+
+## Cách dùng
+
+```
+/dwp-status [plan]
+```
+
+## Hành vi
+
+1. Đọc kế hoạch và `PROGRESS.md`.
+2. Tổng kết các tác vụ đã hoàn thành.
+3. Tổng kết các tác vụ đang thực hiện.
+4. Tổng kết các tác vụ còn chờ.
+5. Báo cáo mà không sửa đổi bất cứ thứ gì.
+
+## Bí danh
+
+- `dwp:status`

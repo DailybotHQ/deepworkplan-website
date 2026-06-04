@@ -1,0 +1,53 @@
+---
+title: Archetipi di repository
+description: "Gli archetipi del repository individuale e dell’hub orchestratore, l’euristica per classificare un repository e come onboarding e ambito dei piani differiscono tra loro."
+order: 5
+lang: it
+summary: Perché l’archetipo di un repository determina come un agente fa l’onboarding e definisce l’ambito dei piani.
+icon: layers
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Archetipi di repository
+
+DWP riconosce due archetipi di repository. L’archetipo che un agente deduce determina come fa l’onboarding e come definisce l’ambito dei piani, quindi identificarlo correttamente è la prima decisione in qualsiasi ingaggio.
+
+## Repository individuale
+
+Un codebase autosufficiente — un’applicazione, una libreria o un servizio. I piani operano direttamente sul codice nel repository e l’onboarding legge la struttura e le convenzioni proprie del repository.
+
+Caratteristiche:
+
+- Un singolo codebase coerente.
+- I piani modificano file in questo repository.
+- Il workspace `.dwp/` vive nella radice del repository.
+
+## Hub orchestratore
+
+Un repository di coordinamento che gestisce più repository figli. I piani possono generare piani figli nei sotto-repository e l’onboarding legge il registro dei repository gestiti dall’hub anziché un singolo codebase.
+
+Caratteristiche:
+
+- Coordina più sotto-repository.
+- I piani possono delegare a piani figli.
+- Mantiene un registro dei repository gestiti.
+- Il workspace `.dwp/` nella radice dell’hub traccia lo stato tra i repository.
+
+## Euristica di classificazione
+
+<ArchetypesTree lang="it" class="not-prose my-10" />
+
+Un agente dovrebbe classificare un repository come hub orchestratore quando trova più repository git annidati o submodule, un registro o manifest di repository gestiti, oppure configurazione che punta a repository esterni. In assenza di questi segnali, tratta il repository come un repository individuale.
+
+## Come differisce l’onboarding
+
+| Aspetto | Individuale | Orchestratore |
+|--------|------------|--------------|
+| Ambito | Questo repository | Più repository |
+| Onboarding | Struttura del repository | Registro dell’hub |
+| Bersaglio del piano | File locali | Piani figli |
+| Stato | `.dwp/` locale | `.dwp/` tra repository |
+
+L’effetto pratico è che un agente per repository individuale ragiona su un singolo codebase dall’inizio alla fine, mentre un agente orchestratore ragiona sul coordinamento — quale repository figlio possiede quale lavoro e come lo stato tra i repository resta coerente.
+
+Azzeccare l’archetipo è ciò che permette a un agente di lavorare in autonomia per ore senza supervisione: definisce l’ambito di piani, onboarding e stato sul confine giusto, così l’agente opera sulla superficie corretta dalla prima all’ultima attività.

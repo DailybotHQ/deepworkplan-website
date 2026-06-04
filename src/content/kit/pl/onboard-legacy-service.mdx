@@ -1,0 +1,31 @@
+---
+title: "Onboarding starszej usługi"
+description: "Poglądowe przejście przez skierowanie agenta na nieudokumentowane starsze repozytorium i pozostawienie go AI-first — przemyślane, nieinwazyjne i weryfikowalne."
+kind: example
+lang: pl
+order: 4
+---
+import OnboardFlow from '@/components/diagrams/kit/OnboardFlow.astro';
+
+# Onboarding starszej usługi
+
+Poglądowe przejście przez pierwszą rzecz, jaką robi większość zespołów: wziąć istniejące, słabo udokumentowane repozytorium i uczynić je sterowalnym przez agenta — bez naruszania tego, co już działa.
+
+<OnboardFlow lang="pl" class="not-prose my-10" />
+
+## Cel
+
+„Uczyń tę pięcioletnią usługę AI-first." Ma już częściowy `README`, kilka rozproszonych dokumentów i żadnego `AGENTS.md`.
+
+## Przebieg
+
+Programista przekazuje agentowi jedno zdanie — *przeczytaj i zastosuj się do [`/init.md`](/init.md)* — a przepływ onboardingu:
+
+1. **Rozpoznanie.** Wykrywa rzeczywisty język, menedżer pakietów (z istniejącego pliku lock) oraz faktyczne komendy build, test i lint — czytając repozytorium, a nie zakładając.
+2. **Proponuje plan i pyta.** Ponieważ artefakty już istnieją, działa nieinwazyjnie: wymienia, co utworzy, a co uzgodni, i czeka na zatwierdzenie, zanim ruszy częściowy `README` lub rozproszone dokumenty.
+3. **Generuje harness.** Przemyślany `AGENTS.md` z rzeczywistymi Quick Commands usługi, skategoryzowane drzewo `docs/`, które wchłania istniejące notatki, zamiast je powielać, pliki README poszczególnych modułów, zestaw `.agents/` oraz pomijane przez git `.dwp/`.
+4. **Weryfikuje.** `/dwp-verify` zwraca obiektywny raport pass/fail względem kryteriów zgodności.
+
+## Rezultat
+
+Starsza usługa staje się AI-first, a nic nie zostaje zniszczone: istniejąca praca jest scalana, a nie nadpisywana, a wynik daje się sprawdzić, zamiast być jedynie deklarowanym. Stąd zespół planuje i wykonuje rzeczywistą pracę za pomocą `/dwp-create` i `/dwp-execute`.

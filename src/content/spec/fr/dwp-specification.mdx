@@ -1,0 +1,66 @@
+---
+title: Spécification DWP
+description: "Spécification normative du Deep Work Plan : structure du plan, anatomie d’une tâche en neuf sections, boucle d’exécution à cinq opérations, espace de travail de sortie et versionnage."
+order: 2
+lang: fr
+section: Workflow
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
+
+# Spécification DWP
+
+**Version 1.0. Statut : stable.** Ce document est la spécification normative de la méthodologie Deep Work Plan (DWP). Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
+
+## Définition
+
+Un Deep Work Plan est un artefact structuré, exclusivement en Markdown, qui décrit une tâche d’ingénierie complexe décomposée en unités de travail séquentielles et relisibles, conçu pour être créé, exécuté et maintenu par des agents de code IA travaillant de manière autonome.
+
+DWP est piloté par la spécification : le plan est la spécification, et les agents MUST s’exécuter face à ses critères d’acceptation explicites et à ses portes de validation plutôt que d’improviser. La spécification — et non une transcription de discussion — est la source de vérité durable, de sorte que le travail est vérifiable et reprenable d’une session et d’un agent à l’autre. C’est aussi de l’ingénierie de harness rendue portable : le contexte, la boucle de contrôle, les garde-fous et l’état reprenable qui rendent un agent fiable sont installés dans le dépôt lui-même sous forme de simple Markdown, de sorte que tout agent conforme MAY piloter le dépôt sans framework propre à un outil.
+
+## Structure du plan
+
+Un plan MUST être un répertoire sous `.dwp/plans/` nommé `PLAN_<slug>/`. Le répertoire MUST contenir :
+
+- `README.md` — vue d’ensemble du plan, objectif, tableau des tâches et statut.
+- Un fichier par tâche, nommé `<n>.task_<slug>.md`.
+- `PROGRESS.md` — un journal d’exécution continu.
+
+## Anatomie d’une tâche
+
+<TaskAnatomy lang="fr" class="not-prose my-10" />
+
+Chaque fichier de tâche MUST contenir ces neuf sections, dans l’ordre :
+
+1. **Goal** — un énoncé d’un paragraphe de ce que la tâche accomplit.
+2. **Context** — le contexte, les liens et la raison d’être de cette tâche.
+3. **Steps** — des actions ordonnées et concrètes à réaliser.
+4. **Acceptance criteria** — une liste de contrôle des conditions qui définissent « fait ».
+5. **Validation** — les commandes ou tests à exécuter pour vérifier.
+6. **Files** — les chemins censés être créés ou modifiés.
+7. **Dependencies** — les autres tâches ou prérequis externes.
+8. **Risks** — ce qui pourrait mal tourner, et les mesures d’atténuation.
+9. **Completion & Log** — un marqueur de statut accompagné de notes chronologiques.
+
+## La boucle d’exécution
+
+<CoreLoop lang="fr" class="not-prose my-10" />
+
+DWP définit cinq opérations :
+
+- **create** — Génère un nouveau plan à partir d’un objectif.
+- **execute** — Exécute le plan tâche par tâche.
+- **refine** — Modifie un plan existant.
+- **resume** — Reprend un plan interrompu.
+- **status** — Rend compte du statut du plan sans exécuter.
+
+## Espace de travail de sortie
+
+<OutputWorkspace lang="fr" class="not-prose my-10" />
+
+Tous les artefacts DWP MUST résider sous un répertoire `.dwp/` ignoré par git, à la racine du dépôt.
+
+## Versionnage
+
+Cette spécification suit le versionnage sémantique.

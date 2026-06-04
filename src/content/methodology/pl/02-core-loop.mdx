@@ -1,0 +1,61 @@
+---
+title: Podstawowa pętla
+description: "Przepływ create, execute, refine, resume, status i verify, ignorowany przez git katalog wynikowy .dwp, dziewięciosekcyjna anatomia zadania oraz to, jak działa walidacja."
+order: 2
+lang: pl
+summary: Jak podstawowe operacje DWP prowadzą plan od celu do zweryfikowanego ukończenia.
+icon: refresh
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+
+# Podstawowa pętla
+
+DWP definiuje niewielki zestaw operacji, które prowadzą plan od celu do ukończonej, podatnej na przegląd pracy: **create → execute → refine → resume → status**, z **verify** jako sprawdzeniem zgodności potwierdzającym wynik. Razem tworzą pętlę, którą agent podąża przez całe życie planu. Agenci wykonują jedno zadanie naraz, walidując każdy krok przed przejściem dalej.
+
+Ta pętla jest operacyjną formą spec-driven development. Plan jest specyfikacją, w odniesieniu do której agent pracuje, każde zadanie niesie jawne kryteria akceptacji, a krok walidacji jest bramką, która zamienia deklarację ukończenia w jego dowód. Ponieważ plan i jego dziennik postępu żyją w repozytorium, pętla jest wznawialna między sesjami i agentami.
+
+## Operacje
+
+<CoreLoop lang="pl" class="not-prose my-10" />
+
+- **create** — Wygeneruj nowy plan na podstawie celu. Agent analizuje cel, rozkłada go na sekwencyjne zadania i zapisuje pliki planu. Gdy cel jest niejednoznaczny, powinien zadać pytania doprecyzowujące przed zapisem.
+- **execute** — Realizuj plan zadanie po zadaniu. Agent aktualizuje dziennik postępu po każdym zadaniu i oznacza jego status ukończenia. Nie wolno mu pomijać zadań bez zapisania powodu.
+- **refine** — Zmodyfikuj istniejący plan. Agent może dodawać, usuwać lub zmieniać kolejność zadań, ale musi zachować ukończoną pracę i zaktualizować tabelę zadań.
+- **resume** — Kontynuuj przerwany plan. Agent czyta dziennik postępu i pliki zadań, by zrekonstruować stan, a następnie kontynuuje od pierwszego nieukończonego zadania.
+- **status** — Raportuj postęp bez realizacji. Agent podsumowuje zadania ukończone, w toku i oczekujące i niczego nie zmienia.
+- **verify** — Sprawdź zgodność bez wprowadzania zmian. Agent raportuje, czy repozytorium spełnia standard i czy plan jest poprawnie sformułowany — czy każde zadanie niesie kryteria akceptacji i bramkę walidacyjną. Zobacz [dokument o zgodności w specyfikacji](/spec).
+
+## Katalog wynikowy `.dwp/`
+
+Wszystkie artefakty DWP żyją w ignorowanym przez git katalogu `.dwp/` w głównym katalogu repozytorium. Trzymanie przestrzeni roboczej poza kontrolą wersji oznacza, że stan roboczy planu nigdy nie zaśmieca historii projektu.
+
+```
+.dwp/
+├── plans/
+│   └── PLAN_<slug>/
+│       ├── README.md
+│       ├── PROGRESS.md
+│       └── <n>.task_<slug>.md
+└── config.yaml
+```
+
+## Dziewięciosekcyjna anatomia zadania
+
+<TaskAnatomy lang="pl" class="not-prose my-10" />
+
+Każdy plik zadania zawiera te dziewięć sekcji, w kolejności. Struktura gwarantuje, że każda jednostka pracy jest samowystarczalna i podatna na przegląd:
+
+1. **Cel** — jeden akapit określający, co zadanie osiąga.
+2. **Kontekst** — tło, odnośniki i powód istnienia tego zadania.
+3. **Kroki** — uporządkowane, konkretne działania do wykonania.
+4. **Kryteria akceptacji** — lista warunków definiujących ukończenie.
+5. **Walidacja** — polecenia lub testy do uruchomienia, by zweryfikować pracę.
+6. **Pliki** — ścieżki, które mają zostać utworzone lub zmodyfikowane.
+7. **Zależności** — inne zadania lub zewnętrzne wymagania wstępne.
+8. **Ryzyka** — co może pójść nie tak oraz środki zaradcze.
+9. **Ukończenie i dziennik** — znacznik statusu plus chronologiczne notatki.
+
+## Walidacja, ukończenie i wznowienie
+
+Walidacja jest częścią zadania, a nie czymś doraźnym: każde zadanie wskazuje polecenia lub testy dowodzące jego ukończenia, a agent uruchamia je przed oznaczeniem ukończenia. Ukończenie zapisywane jest jawnym znacznikiem statusu (`[ ]` nierozpoczęte, `[~]` w toku, `[x]` ukończone, `[!]` zablokowane) w sekcji Ukończenie i dziennik. Wznowienie opiera się na tych znacznikach i dzienniku postępu — agent może odtworzyć dokładnie miejsce, w którym plan się zatrzymał, i kontynuować od pierwszego nieukończonego zadania, bez powtarzania zakończonej pracy.

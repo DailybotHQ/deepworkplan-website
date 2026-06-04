@@ -1,0 +1,51 @@
+---
+title: dwp-create
+description: "Tạo một Deep Work Plan mới từ một mục tiêu tổng quát. Agent phân tích mục tiêu, phân rã công việc thành các tác vụ, và ghi các file kế hoạch vào .dwp."
+kind: command
+lang: vi
+order: 1
+usage: /dwp-create <goal>
+aliases:
+  - dwp:create
+---
+import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
+
+# dwp-create
+
+Tạo một Deep Work Plan mới từ một mục tiêu tổng quát.
+
+<CmdCreate lang="vi" class="not-prose my-8" />
+
+## Tác dụng
+
+`dwp-create` nhận một mục tiêu tổng quát và biến nó thành một kế hoạch có cấu trúc. Nó phân tích mục tiêu, đặt câu hỏi làm rõ nếu cần, phân rã công việc thành các tác vụ tuần tự, và ghi các file kế hoạch.
+
+## Cách dùng
+
+```
+/dwp-create <goal>
+```
+
+## Các chế độ
+
+`dwp-create` mặc định ở chế độ **có hướng dẫn**: nó thu thập bối cảnh, viết một bản nháp tinh chỉnh duy nhất, **trình bày cho bạn, và yêu cầu xác nhận trước khi sinh ra kế hoạch cuối cùng** — để bạn luôn đọc kế hoạch trước khi nó được tạo. Đây là mặc định được khuyến nghị, đặc biệt trong vài lần đầu.
+
+Thêm **`trust`** (hoặc `auto`) làm từ cuối cùng để bỏ qua các bước xác nhận — agent viết bản nháp tinh chỉnh và đi thẳng đến kế hoạch cuối cùng:
+
+```
+/dwp-create <goal> trust
+```
+
+Chế độ trust là lối tắt cho người dùng thành thạo một khi bạn đã tin vào luồng làm việc; chế độ có hướng dẫn giữ con người trong vòng lặp theo mặc định.
+
+## Hành vi
+
+1. Phân tích mục tiêu và bối cảnh của repository.
+2. Đặt câu hỏi làm rõ nếu còn mơ hồ.
+3. Ghi một bản nháp tinh chỉnh vào `.dwp/drafts/` (ở chế độ có hướng dẫn, hãy rà soát và xác nhận nó).
+4. Phân rã thành các tác vụ tuần tự và ghi README, các file tác vụ, cùng PROGRESS.
+5. Kết thúc bằng hai tác vụ cuối bắt buộc.
+
+## Bí danh
+
+- `dwp:create`

@@ -1,0 +1,44 @@
+---
+title: Mẫu kế hoạch và tác vụ
+description: "Cấu trúc của các tệp kế hoạch và tác vụ, hai tác vụ cuối bắt buộc mà mọi kế hoạch phải kết thúc bằng, và các quy ước README và PROGRESS giữ cho kế hoạch dễ đọc."
+order: 3
+lang: vi
+summary: Cách các kế hoạch và tác vụ được cấu trúc trên đĩa, và các quy ước giữ chúng dễ đọc.
+icon: document
+---
+import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
+
+# Mẫu kế hoạch và tác vụ
+
+Một Deep Work Plan là một thư mục các tệp markdown. Hình dạng của thư mục đó — và của mỗi tệp bên trong nó — là điều khiến một kế hoạch rà soát được bởi cả con người lẫn agent.
+
+## Cấu trúc kế hoạch
+
+<PlanTree lang="vi" class="not-prose my-10" />
+
+Một kế hoạch là một thư mục dưới `.dwp/plans/` được đặt tên `PLAN_<slug>/`. Nó chứa:
+
+- `README.md` — tổng quan kế hoạch: mục tiêu, tài liệu nguồn, bảng tác vụ và trạng thái.
+- Một tệp cho mỗi tác vụ, đặt tên `<n>.task_<slug>.md`.
+- `PROGRESS.md` — một nhật ký chạy của quá trình thực thi.
+
+## Cấu trúc tệp tác vụ
+
+Mỗi tệp tác vụ được đặt tên `<n>.task_<slug>.md` và tuân theo cấu trúc chín phần: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, và Completion & Log. Các phần luôn xuất hiện theo thứ tự đó để bất kỳ người đọc nào cũng biết tìm ở đâu. Mỗi tác vụ neo lại vào mục tiêu của kế hoạch trước khi nó hành động, điều này giữ cho agent không trôi dạt qua một chân trời dài, nhiều giờ.
+
+## Hai tác vụ cuối bắt buộc
+
+Mọi kế hoạch phải kết thúc bằng hai tác vụ chuẩn. Chúng bảo đảm rằng tri thức được nắm bắt và các bên liên quan được thông báo:
+
+1. **Skills & Agents Discovery** — xác định các skill và agent tái sử dụng được tạo ra trong kế hoạch, để công việc tích lũy vượt ra ngoài nỗ lực đơn lẻ này.
+2. **Executive Report** — một bản tóm tắt súc tích về kết quả viết cho các bên liên quan, phân biệt điều đã được giao với điều còn lại.
+
+## Các quy ước README và PROGRESS
+
+Tệp `README.md` của kế hoạch phải chứa một tiêu đề (`# Deep Work Plan: <name>`), một câu phát biểu mục tiêu dạng văn xuôi, một phần tài liệu nguồn tùy chọn, một bảng tác vụ (số thứ tự, tên tác vụ, ô đánh dấu trạng thái), và một dòng trạng thái kế hoạch theo dạng `<n>/<total> tasks complete`.
+
+`PROGRESS.md` là một nhật ký thực thi chỉ ghi thêm. Mỗi mục ghi lại một dấu thời gian ISO 8601, số thứ tự và tên tác vụ, điều đã làm, và mọi sai lệch hay lý do bỏ qua. Vì nó chỉ luôn lớn lên, nó là một lịch sử đáng tin cậy về cách kế hoạch thực sự diễn ra.
+
+## Tiêu đề và tham chiếu chéo
+
+Mọi tiêu đề dùng kiểu viết hoa đầu câu, và các tài liệu tránh ngôn ngữ tiếp thị cùng dấu chấm than. Các quy ước này giữ cho kế hoạch nhất quán qua các agent và theo thời gian.

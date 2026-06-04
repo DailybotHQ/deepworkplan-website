@@ -1,0 +1,39 @@
+---
+title: dwp-refine
+description: "Refinar um Deep Work Plan existente adicionando, removendo ou reordenando tarefas, preservando o trabalho concluído e atualizando a tabela de tarefas para refletir as mudanças."
+kind: command
+lang: pt
+order: 3
+usage: /dwp-refine [plan]
+aliases:
+  - dwp:refine
+---
+import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
+
+# dwp-refine
+
+Refina um Deep Work Plan existente.
+
+<CmdRefine lang="pt" class="not-prose my-8" />
+
+## O que faz
+
+O `dwp-refine` modifica um plano existente. Ele pode adicionar, remover ou reordenar tarefas, preservando o trabalho concluído e atualizando a tabela de tarefas.
+
+## Uso
+
+```
+/dwp-refine [plan]
+```
+
+## Comportamento
+
+1. Ler o plano existente.
+2. Adicionar, remover ou reordenar tarefas.
+3. Preservar o trabalho concluído.
+4. Atualizar a tabela de tarefas.
+5. Registrar o que mudou e por quê.
+
+## Aliases
+
+- `dwp:refine`

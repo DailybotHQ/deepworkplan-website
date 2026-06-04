@@ -72,6 +72,7 @@ export interface SiteTranslations {
     kit: string;
     examples: string;
     init: string;
+    quickstart: string;
     github: string;
     menu: string;
     closeMenu: string;
@@ -82,6 +83,17 @@ export interface SiteTranslations {
     copyright: string;
     allRightsReserved: string;
     poweredBy: string;
+  };
+
+  // Agent-friendly Markdown navigation (rendered into .md endpoints)
+  agentNav: {
+    heading: string;
+    sections: {
+      methodology: string;
+      getStarted: string;
+      project: string;
+      connect: string;
+    };
   };
 
   // Deep Work Plan homepage
@@ -362,6 +374,12 @@ export interface SiteTranslations {
     intro: string;
     handoffTitle: string;
     handoffBody: string;
+    /**
+     * The copy-paste bootstrap command. TRANSLATORS: localize the prose, but
+     * NEVER localize the URL — it must stay the canonical English
+     * `https://deepworkplan.com/init.md` (init.md is first-class English agent
+     * content). Do not point it at a `/{lang}/init.md` variant.
+     */
     handoffInstruction: string;
     handoffMdLabel: string;
     codeLabel: string;

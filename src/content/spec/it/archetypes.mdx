@@ -1,0 +1,54 @@
+---
+title: Archetipi
+description: "Descrizione normativa degli archetipi di repository DWP: il repository individuale e l’hub orchestratore, l’euristica di classificazione e come differisce l’onboarding."
+order: 4
+lang: it
+section: Archetypes
+---
+import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
+
+# Archetipi
+
+**Versione 1.0.** DWP riconosce due archetipi di repository. L’archetipo determina come un agente fa l’onboarding e come viene definito l’ambito dei piani.
+
+## Repository individuale
+
+Un codebase autosufficiente — un’applicazione, una libreria o un servizio. I piani operano direttamente sul codice.
+
+Caratteristiche:
+
+- Singolo codebase coerente.
+- I piani modificano file in questo repository.
+- Workspace `.dwp/` nella radice del repository.
+
+## Hub orchestratore
+
+Un repository di coordinamento che gestisce più repository figli. I piani possono generare piani figli nei sotto-repository.
+
+Caratteristiche:
+
+- Coordina più sotto-repository.
+- I piani possono delegare a piani figli.
+- Mantiene un registro dei repository gestiti.
+- Il workspace `.dwp/` nella radice dell’hub traccia lo stato tra i repository.
+
+## Euristica di classificazione
+
+<ArchetypesTree lang="it" class="not-prose my-10" />
+
+Un agente DOVREBBE classificare un repository come hub orchestratore se trova:
+
+- Più repository git annidati o submodule.
+- Un registro o manifest di repository gestiti.
+- Configurazione che punta a repository esterni.
+
+Altrimenti, lo tratta come un repository individuale.
+
+## Differenze nell’onboarding
+
+| Aspetto | Individuale | Orchestratore |
+|--------|------------|--------------|
+| Ambito | Questo repository | Più repository |
+| Onboarding | Struttura del repository | Registro dell’hub |
+| Bersaglio del piano | File locali | Piani figli |
+| Stato | `.dwp/` locale | `.dwp/` tra repository |

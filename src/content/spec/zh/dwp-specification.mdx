@@ -1,0 +1,66 @@
+---
+title: DWP 规范
+description: "规范性的 Deep Work Plan 规范：计划结构、任务的九段式结构、五操作执行循环、输出工作区，以及版本控制。"
+order: 2
+lang: zh
+section: Workflow
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
+
+# DWP 规范
+
+**版本 1.0。状态：稳定。** 本文档是 Deep Work Plan（DWP）方法论的规范性规范。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
+
+## 定义
+
+一份 Deep Work Plan 是一件结构化、仅基于 Markdown 的产物，它描述了一项被分解为一系列连续、可审阅工作单元的复杂工程任务，旨在由自主工作的 AI 编码代理来创建、执行与维护。
+
+DWP 是规范驱动的：计划即规范，代理 MUST 依据其明确的验收标准与验证关卡来执行，而非即兴发挥。规范——而非聊天记录——才是持久的事实来源，因此工作可验证，并可跨会话、跨代理恢复。它同时也是被打磨为可移植形态的 harness 工程：让代理变得可靠的上下文、控制循环、防护栏与可恢复状态，都以纯 Markdown 的形式被安装进代码仓库本身，于是任意符合规范的代理 MAY 在没有工具专属框架的情况下驾驭该仓库。
+
+## 计划结构
+
+一份计划 MUST 是 `.dwp/plans/` 下一个名为 `PLAN_<slug>/` 的目录。该目录 MUST 包含：
+
+- `README.md` —— 计划概览、目标、任务表与状态。
+- 每项任务一个文件，命名为 `<n>.task_<slug>.md`。
+- `PROGRESS.md` —— 一份持续的执行日志。
+
+## 任务结构
+
+<TaskAnatomy lang="en" class="not-prose my-10" />
+
+每个任务文件 MUST 按顺序包含这九个段落：
+
+1. **Goal（目标）** —— 用一段文字陈述该任务达成了什么。
+2. **Context（上下文）** —— 背景、链接，以及这项任务为何存在。
+3. **Steps（步骤）** —— 有序、具体、要执行的动作。
+4. **Acceptance criteria（验收标准）** —— 一份界定“完成”的条件清单。
+5. **Validation（验证）** —— 为核实而要运行的命令或测试。
+6. **Files（文件）** —— 预计将被创建或修改的路径。
+7. **Dependencies（依赖）** —— 其他任务或外部前置条件。
+8. **Risks（风险）** —— 可能出错之处，以及缓解措施。
+9. **Completion & Log（完成与日志）** —— 一个状态标记外加按时间顺序排列的记录。
+
+## 执行循环
+
+<CoreLoop lang="en" class="not-prose my-10" />
+
+DWP 定义了五项操作：
+
+- **create** —— 从一个目标生成一份新计划。
+- **execute** —— 逐任务执行计划。
+- **refine** —— 修改一份现有计划。
+- **resume** —— 恢复一份被中断的计划。
+- **status** —— 报告计划状态而不执行。
+
+## 输出工作区
+
+<OutputWorkspace lang="en" class="not-prose my-10" />
+
+所有 DWP 产物 MUST 存放于代码仓库根目录下一个被 gitignore 的 `.dwp/` 目录中。
+
+## 版本控制
+
+本规范遵循语义化版本控制。

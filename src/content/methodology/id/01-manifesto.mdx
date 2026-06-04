@@ -1,0 +1,76 @@
+---
+title: Manifesto
+description: "Apa itu Deep Work Plan, mengapa eksekusi otonom yang terstruktur penting, dan bagaimana ia mengubah repositori apa pun menjadi basis kode AI-first yang dapat dikemudikan agent."
+order: 1
+lang: id
+summary: Argumen untuk eksekusi berbasis rencana dengan AI coding agent.
+icon: compass
+---
+import RepoAsHarness from '@/components/diagrams/methodology/RepoAsHarness.astro';
+
+# Manifesto
+
+Sebuah Deep Work Plan (DWP) adalah metodologi berbasis Markdown saja untuk eksekusi otonom yang terstruktur oleh AI coding agent. Ia mengubah tujuan yang samar menjadi rencana yang dapat ditinjau — sebuah spesifikasi — yang dapat dieksekusi, dijeda, dilanjutkan, dan dilaporkan oleh agent tanpa kehilangan konteks atau berimprovisasi hingga menghasilkan hasil yang tidak konsisten.
+
+## Deep work, untuk agent
+
+Nama ini menggambarkan praktik yang dihasilkannya: upaya yang terfokus dan berkelanjutan pada pekerjaan yang menuntut kognisi, yang disatukan oleh struktur ketimbang oleh tekad. Sifat yang sama yang membuat deep work bernilai bagi manusia — konsentrasi tanpa gangguan, yang dipertahankan sepanjang rentang yang panjang — adalah yang dibutuhkan AI coding agent untuk menyelesaikan pekerjaan yang berlangsung berjam-jam atau berhari-hari. Sebuah Deep Work Plan menyediakan struktur itu, dan dengan begitu mengubah repositori menjadi basis kode AI-first yang dapat dikemudikan agent.
+
+Sebuah agent tanpa rencana berperilaku seperti pekerja pengetahuan yang tidak pernah memblokir waktu, tidak pernah mencatat apa pun, dan berpindah konteks pada setiap interupsi. Sebuah Deep Work Plan memberi agent padanan dari kalender yang diblokir dan brief tertulis: lingkup yang terbatas, urutan yang jelas, dan tempat yang tahan lama untuk mencatat kemajuan.
+
+## Arah adalah pengganda
+
+Kemampuan sebuah AI coding agent lebih bergantung pada kualitas arah yang diberikan kepadanya ketimbang pada modelnya. Model yang cakap yang diarahkan ke permintaan yang ambigu memperbesar ambiguitas; model yang sama yang diarahkan ke spesifikasi yang presisi memperbesar presisi. Seiring model membaik, kesenjangan ini melebar alih-alih menutup — penyumbat berpindah ke hulu, dari menulis kode ke mendefinisikan pekerjaan. Keterampilan yang relevan bukan lagi eksekusi; melainkan arah.
+
+Ini membingkai ulang arti mendelegasikan dengan baik. Delegasi yang baik bukanlah meminta pekerjaan dari agent — melainkan mendefinisikan pekerjaan dengan cukup jelas sehingga dapat dieksekusi dengan benar: tujuan, batasan, konteks yang tanpanya agent akan kekurangan, dan kriteria yang menentukan apakah ia berhasil. Sebagian besar nilai diciptakan sebelum eksekusi dimulai.
+
+Deep Work Plan adalah disiplin melakukan pekerjaan hulu itu dalam bentuk yang tahan lama dan dapat diulang. Kedua pilarnya adalah dua paruh dari arah yang baik: sebuah **spesifikasi** menyatakan seperti apa "benar" itu, dan sebuah **harness** memberi agent konteks dan alat untuk mencapainya. Bersama-sama keduanya mengubah kemampuan mentah sebuah model menjadi rekayasa yang dapat diandalkan — dipertahankan sepanjang tugas yang berjalan berjam-jam, dan dilestarikan lintas agent yang berganti antar sesi.
+
+## Spec-driven sejak rancangan
+
+Ini adalah pilar pertama metodologi, dan seperti "harness", ia layak didefinisikan secara gamblang.
+
+**Apa itu spec-driven development.** Dalam pekerjaan berbasis prompt biasa, sumber kebenaran adalah sebuah percakapan: Anda meminta sesuatu dari agent, ia menyunting berkas, dan satu-satunya catatan niat adalah transkrip obrolan yang menggulir hilang dan tidak pernah ditinjau lagi. Spec-driven development (SDD) membalikkan itu. Anda terlebih dahulu menuliskan *apa* yang harus benar — tujuan, lingkup, acceptance criteria, pemeriksaan yang membuktikan ia selesai — dan spesifikasi tertulis itu, bukan percakapannya, yang menjadi sumber kebenaran. Agent kemudian mengeksekusi *terhadap* spec ketimbang berimprovisasi dari prompt satu baris.
+
+**Bagaimana DWP mewujudkannya.** Dalam Deep Work Plan, rencana *adalah* spesifikasi. Sebuah tujuan menjadi rencana yang dapat ditinjau; rencana terurai menjadi tugas-tugas atomik; setiap tugas membawa acceptance criteria dan validation gate yang eksplisit; dan completion protocol mengonfirmasi pekerjaan terhadapnya. Rencana → tugas → gate → penyelesaian adalah SDD yang dibuat konkret dan dapat dieksekusi.
+
+**Mengapa ini penting.** Menulis spec terlebih dahulu memberi imbal balik dalam tiga cara: ia **mengurangi penyimpangan**, karena agent diukur terhadap kriteria yang dinyatakan alih-alih ingatan yang memudar tentang permintaan; ia membuat pekerjaan **dapat diverifikasi**, karena setiap gate entah lulus atau gagal; dan ia membuat pekerjaan **dapat dilanjutkan**, karena spesifikasi bertahan melampaui sesi atau agent tunggal mana pun — agent lain dapat mengambilnya besok dan tahu persis apa arti "selesai".
+
+**Bagaimana DWP berbeda.** Sebuah gerakan spec-driven yang lebih luas telah terbentuk di seputar gagasan ini, termasuk GitHub Spec Kit, Amazon Kiro, dan Tessl. Pendekatan-pendekatan itu cenderung terikat pada alat atau platform tertentu. DWP sengaja berbeda: ia agnostik terhadap alat dan repo-native. Spesifikasi berada di dalam repositori sebagai Markdown polos, sehingga ia ikut bersama kode alih-alih bersama produk vendor — dan ia menyatu langsung dengan pilar kedua, karena spec itu sendiri adalah bagian dari harness yang dibawa repositori.
+
+## Repositori menjadi harness
+
+Ini adalah pilar kedua metodologi, dan ia pantas mendapat definisi yang gamblang — "harness" telah menjadi istilah yang sarat makna, dan sebagian besar industri memakainya tanpa menyatakan apa artinya.
+
+**Apa itu agent harness.** Sebuah large language model, dengan sendirinya, hanyalah peramal teks. Yang mengubahnya menjadi insinyur yang andal adalah segala sesuatu yang membungkusnya: konteks yang diberikan kepadanya, alat yang dapat dipanggilnya, control loop yang memutuskan apa yang harus dilakukan berikutnya, pengaman yang menangkap kesalahan, dan status persisten yang memungkinkannya berhenti dan melanjutkan. Perancah di sekitar itulah *harness*. Model adalah mesinnya; harness adalah sasis, kemudi, dan rem yang membuat mesin itu aman dikendarai.
+
+**Apa itu harness engineering.** Sebagian besar tim membangun perancah itu secara implisit, di dalam satu alat — IDE tertentu, produk agent, atau framework buatan sendiri — sehingga ia hanya bekerja di sana dan lenyap begitu Anda berganti alat. Harness engineering adalah disiplin merancang perancah itu secara sengaja, sebagai artefak kelas satu. Deep Work Plan mengambil satu posisi tegas tentang di mana ia seharusnya berada: **bukan di sebuah alat, melainkan di repositori itu sendiri.**
+
+**Mengapa repositori adalah tempat yang tepat.** Ketika harness berada di repo, ia ikut bersama kode, setiap agent yang membuka repo mewarisinya, dan ia dikendalikan versi, ditinjau, dan ditingkatkan layaknya kode lain. DWP memasang setiap bagian harness sebagai artefak yang konkret dan tahan lama:
+
+| Elemen harness | Apa yang disediakannya | Di mana DWP menempatkannya di repo Anda |
+|---|---|---|
+| **Konteks** | apa yang perlu diketahui agent | `AGENTS.md`, `docs/`, dan README per modul |
+| **Alat** | apa yang dapat dilakukan agent | skills, agents `.agents/`, dan command `dwp-*` |
+| **Control loop** | bagaimana pekerjaan berlangsung | Deep Work Plan: rencana → tugas atomik → gate → penyelesaian |
+| **Pengaman** | apa yang menjaganya tetap benar | acceptance criteria dan validation gate yang eksplisit |
+| **Status** | bagaimana ia bertahan dari interupsi | rencana, draf, dan log kemajuan `.dwp/` yang di-gitignore |
+
+<RepoAsHarness lang="en" class="not-prose my-10" />
+
+Karena setiap elemen adalah berkas di dalam repositori, bukan fitur sebuah alat, harness ini portabel secara konstruksi. Itulah klaim satu baris yang menjadi landasan seluruh sisa metodologi: *repositori itu sendiri menjadi harness*, sehingga agent mana pun dapat mengemudikan repo mana pun — tanpa framework buatan per-alat.
+
+## Mengapa eksekusi otonom yang terstruktur penting
+
+AI coding agent modern cakap tetapi tanpa arah. Arahkan satu ke tugas non-trivial dan ia cenderung langsung mulai menyunting berkas, kehilangan jejak apa yang diubahnya, dan menghasilkan pekerjaan yang sulit ditinjau dan mustahil dilanjutkan.
+
+DWP memberlakukan struktur ringan yang menangani setiap kegagalan secara langsung:
+
+- **Tugas yang dapat ditinjau** — pekerjaan terurai menjadi unit berurutan, masing-masing dengan lingkup eksplisit dan acceptance criteria.
+- **Status yang dipersistenkan** — kemajuan dicatat sehingga pekerjaan bertahan dari interupsi dan dapat dilanjutkan lintas sesi dan agent.
+- **Dokumentasi yang dibakukan** — manusia dan agent berbagi satu model mental melalui format yang sama.
+- **Portabilitas agent** — metodologi bekerja dengan agent mana pun melalui adapter tipis, bukan implementasi ulang.
+
+## Markdown sampai ke dasar
+
+DWP mendefinisikan struktur, bukan perangkat lunak. Tidak ada runtime untuk dipasang, tidak ada pohon dependensi, dan tidak ada lock-in. Rencana, tugas, dan log eksekusi semuanya berupa Markdown polos yang dapat dibaca agent mana pun, ditinjau orang mana pun, dan dilacak dengan rapi oleh sistem kendali versi mana pun. Hasilnya adalah eksekusi yang dapat Anda baca, audit, dan percayai.

@@ -1,0 +1,76 @@
+---
+title: Manifest
+description: "Was ein Deep Work Plan ist, warum strukturierte autonome Ausführung zählt und wie sie jedes Repository in eine AI-first, agenten-steuerbare Codebasis verwandelt."
+order: 1
+lang: de
+summary: Das Plädoyer für plangetriebene Ausführung mit KI-Coding-Agenten.
+icon: compass
+---
+import RepoAsHarness from '@/components/diagrams/methodology/RepoAsHarness.astro';
+
+# Manifest
+
+Ein Deep Work Plan (DWP) ist eine reine Markdown-Methodik für strukturierte, autonome Ausführung durch KI-Coding-Agenten. Sie verwandelt ein vages Ziel in einen prüfbaren Plan — eine Spezifikation —, den ein Agent ausführen, pausieren, wiederaufnehmen und über den er berichten kann, ohne den Kontext zu verlieren oder sich in inkonsistente Ergebnisse hineinzuimprovisieren.
+
+## Deep Work, für Agenten
+
+Der Name beschreibt die Praxis, die er hervorbringt: fokussierte, anhaltende Anstrengung an kognitiv fordernder Arbeit, zusammengehalten durch Struktur statt durch Willenskraft. Dieselbe Eigenschaft, die Deep Work für Menschen wertvoll macht — Konzentration ohne Ablenkung, über einen langen Horizont aufrechterhalten —, ist es, was ein KI-Coding-Agent braucht, um Arbeit abzuschließen, die sich über Stunden oder Tage erstreckt. Ein Deep Work Plan liefert diese Struktur und verwandelt das Repository dadurch in eine AI-first, agenten-steuerbare Codebasis.
+
+Ein Agent ohne Plan verhält sich wie ein Wissensarbeiter, der nie Zeit blockt, nie etwas aufschreibt und bei jeder Unterbrechung den Kontext wechselt. Ein Deep Work Plan gibt dem Agenten das Äquivalent eines geblockten Kalenders und eines schriftlichen Briefings: einen abgegrenzten Umfang, eine klare Abfolge und einen dauerhaften Ort, um Fortschritte festzuhalten.
+
+## Die Richtung ist der Multiplikator
+
+Die Leistungsfähigkeit eines KI-Coding-Agenten hängt weniger vom Modell ab als von der Qualität der Richtung, die ihm vorgegeben wird. Ein leistungsfähiges Modell, das auf eine mehrdeutige Anfrage gerichtet ist, verstärkt die Mehrdeutigkeit; dasselbe Modell, das auf eine präzise Spezifikation gerichtet ist, verstärkt die Präzision. Mit besseren Modellen vergrößert sich diese Kluft eher, als dass sie sich schließt — der Engpass verlagert sich stromaufwärts, vom Schreiben des Codes hin zum Definieren der Arbeit. Die entscheidende Fähigkeit ist nicht mehr die Ausführung; es ist die Richtung.
+
+Das stellt neu dar, was es bedeutet, gut zu delegieren. Gute Delegation heißt nicht, einen Agenten um Arbeit zu bitten — sie heißt, die Arbeit klar genug zu definieren, sodass sie korrekt ausgeführt werden kann: das Ziel, die Rahmenbedingungen, den Kontext, der dem Agenten sonst fehlen würde, und die Kriterien, die entscheiden, ob er erfolgreich war. Der größte Teil des Werts entsteht, bevor die Ausführung beginnt.
+
+Deep Work Plan ist die Disziplin, diese vorgelagerte Arbeit in einer dauerhaften, wiederholbaren Form zu leisten. Seine zwei Pfeiler sind die beiden Hälften guter Richtung: Eine **Spezifikation** legt fest, wie „korrekt“ aussieht, und ein **Harness** gibt dem Agenten den Kontext und die Werkzeuge, um es zu erreichen. Gemeinsam verwandeln sie die rohe Fähigkeit eines Modells in verlässliches Engineering — über eine Aufgabe hinweg aufrechterhalten, die stundenlang läuft, und über Agenten hinweg bewahrt, die zwischen Sitzungen wechseln.
+
+## Spec-driven von Grund auf
+
+Dies ist der erste Pfeiler der Methodik, und wie „harness“ verdient er eine klare Definition.
+
+**Was spec-driven Development ist.** Bei gewöhnlicher prompt-getriebener Arbeit ist die Quelle der Wahrheit ein Gespräch: Sie bitten einen Agenten um etwas, er bearbeitet Dateien, und die einzige Aufzeichnung der Absicht ist ein Chat-Verlauf, der wegscrollt und nie wieder geprüft wird. Spec-driven Development (SDD) kehrt das um. Sie schreiben zuerst auf, *was* wahr sein soll — das Ziel, den Umfang, die Akzeptanzkriterien, die Prüfungen, die belegen, dass es erledigt ist —, und diese geschriebene Spezifikation, nicht das Gespräch, ist die Quelle der Wahrheit. Der Agent führt dann *gegen* die Spezifikation aus, statt aus einem einzeiligen Prompt zu improvisieren.
+
+**Wie DWP es verkörpert.** Bei Deep Work Plan *ist* der Plan die Spezifikation. Ein Ziel wird zu einem prüfbaren Plan; der Plan zerfällt in atomare Aufgaben; jede Aufgabe trägt explizite Akzeptanzkriterien und Validierungs-Gates; und ein Completion-Protokoll bestätigt die Arbeit anhand dieser. Plan → Aufgaben → Gates → Completion ist SDD, konkret und ausführbar gemacht.
+
+**Warum es zählt.** Die Spezifikation zuerst zu schreiben zahlt sich auf drei Weisen aus: Es **reduziert das Abdriften**, weil der Agent an festgelegten Kriterien gemessen wird statt an einer verblassenden Erinnerung an die Anfrage; es macht die Arbeit **überprüfbar**, weil jedes Gate entweder besteht oder durchfällt; und es macht die Arbeit **wiederaufnehmbar**, weil die Spezifikation jede einzelne Sitzung oder jeden einzelnen Agenten überdauert — ein anderer Agent kann sie morgen aufgreifen und genau wissen, was „erledigt“ bedeutet.
+
+**Wie sich DWP unterscheidet.** Um diese Idee herum hat sich eine breitere spec-driven Bewegung gebildet, darunter GitHub Spec Kit, Amazon Kiro und Tessl. Diese Ansätze sind tendenziell an ein bestimmtes Werkzeug oder eine bestimmte Plattform gebunden. DWP ist bewusst anders: Es ist werkzeugunabhängig und repo-nativ. Die Spezifikation lebt als reines Markdown im Repository, sodass sie mit dem Code reist statt mit dem Produkt eines Anbieters — und sie verbindet sich unmittelbar mit dem zweiten Pfeiler, da die Spezifikation selbst Teil des Harness ist, das das Repository mit sich trägt.
+
+## Das Repository wird zum Harness
+
+Dies ist der zweite Pfeiler der Methodik, und er verdient eine klare Definition — „harness“ ist zu einem überladenen Begriff geworden, und ein Großteil der Branche verwendet ihn, ohne zu sagen, was er bedeutet.
+
+**Was ein Agenten-Harness ist.** Ein großes Sprachmodell ist für sich genommen nur ein Textvorhersager. Was es in einen verlässlichen Ingenieur verwandelt, ist alles, was darum herum gewickelt ist: der Kontext, der ihm gegeben wird, die Werkzeuge, die es aufrufen kann, die Steuerschleife, die entscheidet, was als Nächstes zu tun ist, die Leitplanken, die Fehler abfangen, und der dauerhafte Zustand, der es anhalten und wiederaufnehmen lässt. Dieses umgebende Gerüst ist das *Harness*. Das Modell ist der Motor; das Harness ist Fahrgestell, Lenkung und Bremsen, die den Motor sicher fahrbar machen.
+
+**Was Harness Engineering ist.** Die meisten Teams bauen dieses Gerüst implizit, innerhalb eines einzigen Werkzeugs — einer bestimmten IDE, eines Agentenprodukts oder eines maßgeschneiderten Frameworks —, sodass es nur dort funktioniert und in dem Moment verschwindet, in dem man das Werkzeug wechselt. Harness Engineering ist die Disziplin, dieses Gerüst bewusst zu entwerfen, als ein erstklassiges Artefakt. Deep Work Plan bezieht eine klare Position dazu, wo es leben sollte: **nicht in einem Werkzeug, sondern im Repository selbst.**
+
+**Warum das Repository der richtige Ort ist.** Wenn das Harness im Repository lebt, reist es mit dem Code, jeder Agent, der das Repository öffnet, erbt es, und es wird versioniert, geprüft und verbessert wie jeder andere Code. DWP installiert jeden Teil des Harness als konkretes, dauerhaftes Artefakt:
+
+| Harness-Element | Was es bereitstellt | Wo DWP es in Ihrem Repository ablegt |
+|---|---|---|
+| **Kontext** | was der Agent wissen muss | `AGENTS.md`, `docs/` und READMEs je Modul |
+| **Werkzeuge** | was der Agent tun kann | die `.agents/`-Skills, -Agenten und `dwp-*`-Befehle |
+| **Steuerschleife** | wie die Arbeit voranschreitet | der Deep Work Plan: Plan → atomare Aufgaben → Gates → Completion |
+| **Leitplanken** | was sie korrekt hält | explizite Akzeptanzkriterien und Validierungs-Gates |
+| **Zustand** | wie sie eine Unterbrechung übersteht | die per gitignore ausgeschlossenen `.dwp/`-Pläne, -Entwürfe und das Fortschrittsprotokoll |
+
+<RepoAsHarness lang="en" class="not-prose my-10" />
+
+Weil jedes Element eine Datei im Repository ist statt ein Feature eines Werkzeugs, ist das Harness von Natur aus portabel. Das ist die einzeilige Behauptung, auf der der Rest der Methodik ruht: *Das Repository selbst wird zum Harness*, sodass jeder Agent jedes Repository steuern kann — ohne maßgeschneidertes Framework je Werkzeug.
+
+## Warum strukturierte autonome Ausführung zählt
+
+Moderne KI-Coding-Agenten sind leistungsfähig, aber ungeführt. Richten Sie einen auf eine nicht-triviale Aufgabe, und er neigt dazu, sofort Dateien zu bearbeiten, den Überblick über das Geänderte zu verlieren und Arbeit zu produzieren, die schwer zu prüfen und unmöglich wiederaufzunehmen ist.
+
+DWP legt eine leichtgewichtige Struktur auf, die jedes Versagen direkt adressiert:
+
+- **Prüfbare Aufgaben** — die Arbeit wird in aufeinanderfolgende Einheiten zerlegt, jede mit einem expliziten Umfang und Akzeptanzkriterien.
+- **Persistierter Zustand** — der Fortschritt wird festgehalten, sodass die Arbeit eine Unterbrechung übersteht und über Sitzungen und Agenten hinweg wiederaufgenommen werden kann.
+- **Standardisierte Dokumentation** — Menschen und Agenten teilen durch ein gemeinsames Format ein mentales Modell.
+- **Agenten-Portabilität** — die Methodik funktioniert mit jedem Agenten über schlanke Adapter, nicht über Neuimplementierungen.
+
+## Markdown bis ganz nach unten
+
+DWP definiert Struktur, keine Software. Es gibt keine Laufzeitumgebung zu installieren, keinen Abhängigkeitsbaum und kein Lock-in. Der Plan, die Aufgaben und das laufende Protokoll sind allesamt reines Markdown, das jeder Agent lesen, jeder Mensch prüfen und jedes Versionskontrollsystem sauber nachverfolgen kann. Das Ergebnis ist eine Ausführung, die Sie lesen, prüfen und der Sie vertrauen können.

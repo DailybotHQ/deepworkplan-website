@@ -1,0 +1,39 @@
+---
+title: dwp-refine
+description: "पूर्ण किए गए काम को संरक्षित रखते हुए और task table को परिवर्तनों के अनुरूप अपडेट करते हुए कार्य जोड़कर, हटाकर, या पुनः क्रमबद्ध करके एक मौजूदा Deep Work Plan को परिष्कृत करें।"
+kind: command
+lang: hi
+order: 3
+usage: /dwp-refine [plan]
+aliases:
+  - dwp:refine
+---
+import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
+
+# dwp-refine
+
+एक मौजूदा Deep Work Plan परिष्कृत करें।
+
+<CmdRefine lang="en" class="not-prose my-8" />
+
+## यह क्या करता है
+
+`dwp-refine` एक मौजूदा योजना को संशोधित करता है। यह पूर्ण किए गए काम को संरक्षित रखते हुए और task table को अपडेट करते हुए कार्य जोड़, हटा, या पुनः क्रमबद्ध कर सकता है।
+
+## उपयोग
+
+```
+/dwp-refine [plan]
+```
+
+## व्यवहार
+
+1. मौजूदा योजना पढ़ें।
+2. कार्य जोड़ें, हटाएं, या पुनः क्रमबद्ध करें।
+3. पूर्ण किए गए काम को संरक्षित रखें।
+4. task table अपडेट करें।
+5. दर्ज करें कि क्या बदला और क्यों।
+
+## उपनाम
+
+- `dwp:refine`

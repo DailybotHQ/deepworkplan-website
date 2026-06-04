@@ -1,0 +1,40 @@
+---
+title: dwp-verify
+description: "Перевірка того, що репозиторій відповідає DeepWorkPlan (AI-first), а його плани коректні, з об'єктивним звітом про відповідність pass/fail щодо специфікації."
+kind: command
+lang: uk
+order: 5.5
+usage: /dwp-verify [plan <name> | all]
+aliases:
+  - dwp:verify
+---
+import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
+
+# dwp-verify
+
+Об'єктивно перевіряє відповідність репозиторію та плану — лише читання.
+
+<CmdVerify lang="uk" class="not-prose my-8" />
+
+## Що це робить
+
+`dwp-verify` механічно перевіряє, чи є репозиторій AI-first (відповідним DeepWorkPlan) і чи коректні його плани, після чого звітує pass/fail. Він нічого не змінює.
+
+## Використання
+
+```
+/dwp-verify            # verify the repository
+/dwp-verify plan auth  # also verify a specific plan
+/dwp-verify all        # repository + every plan
+```
+
+## Поведінка
+
+1. Перевірити репозиторій: `AGENTS.md` зі справжніми, придатними до запуску командами; розв'язання `CLAUDE.md`; категорії `docs/`; каталог `.agents/`, що відповідає диску; тонкі делегатори `dwp-*`; `.dwp/` і `tmp/` у gitignore; розв'язуваний скіл.
+2. Перевірити план (за запитом): кожна задача має критерії приймання й перевірку валідації, прогрес зберігається, наявні дві обов'язкові фінальні задачі, а задачі прив'язані до мети.
+3. Звітувати **CONFORMANT** або **NOT CONFORMANT** із переліком кожної невдачі.
+4. Запропонувати оформити прогалини як Deep Work Plan; ніколи не виправляти мовчки.
+
+## Аліаси
+
+- `dwp:verify`

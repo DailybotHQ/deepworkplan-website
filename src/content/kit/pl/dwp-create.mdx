@@ -1,0 +1,51 @@
+---
+title: dwp-create
+description: "Utwórz nowy Deep Work Plan na podstawie ogólnego celu. Agent analizuje cel, rozkłada pracę na zadania i zapisuje pliki planu w katalogu .dwp."
+kind: command
+lang: pl
+order: 1
+usage: /dwp-create <goal>
+aliases:
+  - dwp:create
+---
+import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
+
+# dwp-create
+
+Utwórz nowy Deep Work Plan na podstawie ogólnego celu.
+
+<CmdCreate lang="pl" class="not-prose my-8" />
+
+## Co robi
+
+`dwp-create` przyjmuje ogólny cel i zamienia go w ustrukturyzowany plan. Analizuje cel, w razie potrzeby zadaje pytania doprecyzowujące, rozkłada pracę na sekwencyjne zadania i zapisuje pliki planu.
+
+## Użycie
+
+```
+/dwp-create <goal>
+```
+
+## Tryby
+
+`dwp-create` domyślnie działa w trybie **prowadzonym**: zbiera kontekst, zapisuje pojedynczy dopracowany szkic, **pokazuje go tobie i prosi o potwierdzenie przed wygenerowaniem ostatecznego planu** — dzięki czemu zawsze czytasz plan, zanim powstanie. To zalecane ustawienie domyślne, zwłaszcza za pierwszymi razami.
+
+Dopisz **`trust`** (lub `auto`) jako ostatnie słowo, aby pominąć potwierdzenia — agent zapisuje dopracowany szkic i przechodzi bezpośrednio do ostatecznego planu:
+
+```
+/dwp-create <goal> trust
+```
+
+Tryb trust to skrót dla zaawansowanych użytkowników, gdy już ufasz przepływowi; tryb prowadzony domyślnie utrzymuje człowieka w pętli.
+
+## Zachowanie
+
+1. Analiza celu i kontekstu repozytorium.
+2. Zadanie pytań doprecyzowujących, jeśli cel jest niejednoznaczny.
+3. Zapis dopracowanego szkicu do `.dwp/drafts/` (w trybie prowadzonym przejrzyj go i potwierdź).
+4. Rozłożenie na sekwencyjne zadania oraz zapis README, plików zadań i PROGRESS.
+5. Zakończenie dwoma obowiązkowymi zadaniami końcowymi.
+
+## Aliasy
+
+- `dwp:create`

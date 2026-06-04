@@ -1,0 +1,39 @@
+---
+title: dwp-status
+description: "รายงานสถานะของ Deep Work Plan โดยไม่ดำเนินงาน agent อ่านแผนและ progress log แล้วสรุปงานที่เสร็จแล้ว กำลังดำเนินอยู่ และที่ยังค้างอยู่"
+kind: command
+lang: th
+order: 5
+usage: /dwp-status [plan]
+aliases:
+  - dwp:status
+---
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
+
+# dwp-status
+
+รายงานสถานะ Deep Work Plan โดยไม่ดำเนินงาน
+
+<CmdStatus lang="en" class="not-prose my-8" />
+
+## สิ่งที่มันทำ
+
+`dwp-status` สรุปความคืบหน้าของแผนโดยไม่ทำการเปลี่ยนแปลงใด มันรายงาน task ที่เสร็จแล้ว กำลังดำเนินอยู่ และที่ยังค้างอยู่
+
+## วิธีใช้
+
+```
+/dwp-status [plan]
+```
+
+## พฤติกรรม
+
+1. อ่านแผนและ `PROGRESS.md`
+2. สรุป task ที่เสร็จแล้ว
+3. สรุป task ที่กำลังดำเนินอยู่
+4. สรุป task ที่ยังค้างอยู่
+5. รายงานโดยไม่แก้ไขสิ่งใด
+
+## ชื่อแทน
+
+- `dwp:status`

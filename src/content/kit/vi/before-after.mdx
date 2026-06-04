@@ -1,0 +1,36 @@
+---
+title: Trước và sau
+description: "Một ví dụ trước-và-sau cho thấy một Deep Work Plan thay đổi hành vi của agent trên một tác vụ nhiều bước ra sao, biến sự ứng biến thành thực thi có thể rà soát."
+kind: example
+lang: vi
+order: 1
+---
+import UnguidedVsDwp from '@/components/diagrams/kit/UnguidedVsDwp.astro';
+
+# Trước và sau
+
+Một so sánh cụ thể về hành vi của agent khi không có và khi có DWP.
+
+<UnguidedVsDwp lang="vi" class="not-prose my-10" />
+
+## Trước khi có DWP
+
+Với yêu cầu "thêm xác thực vào ứng dụng", một agent sẽ:
+
+- Bắt đầu chỉnh sửa file ngay lập tức.
+- Mất dấu những gì mình đã thay đổi.
+- Tạo ra kết quả thiếu nhất quán, khó rà soát.
+- Không thể tiếp tục nếu bị gián đoạn.
+
+## Sau khi có DWP
+
+Với cùng mục tiêu, một agent vận hành bằng DWP sẽ:
+
+- Tạo một kế hoạch: schema, endpoint, middleware, bài test, tài liệu.
+- Thực thi từng tác vụ một, cập nhật tiến độ.
+- Tạo ra các thay đổi tăng dần, có thể rà soát.
+- Tiếp tục một cách gọn gàng sau khi bị gián đoạn.
+
+## Kết quả
+
+Cùng một mô hình tạo ra công việc đáng tin cậy hơn, dễ rà soát hơn khi được dẫn dắt bởi một kế hoạch.

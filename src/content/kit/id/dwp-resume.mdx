@@ -1,0 +1,38 @@
+---
+title: dwp-resume
+description: "Lanjutkan Deep Work Plan yang terhenti dengan merekonstruksi state dari log progres dan file tugas, lalu meneruskan dari tugas pertama yang belum selesai."
+kind: command
+lang: id
+order: 4
+usage: /dwp-resume [plan]
+aliases:
+  - dwp:resume
+---
+import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
+
+# dwp-resume
+
+Lanjutkan Deep Work Plan yang terhenti.
+
+<CmdResume lang="en" class="not-prose my-8" />
+
+## Fungsinya
+
+`dwp-resume` meneruskan rencana yang terhenti. Ia merekonstruksi state dari `PROGRESS.md` dan file tugas, lalu melanjutkan dari tugas pertama yang belum selesai.
+
+## Penggunaan
+
+```
+/dwp-resume [plan]
+```
+
+## Perilaku
+
+1. Baca `PROGRESS.md` dan file tugas.
+2. Rekonstruksi state eksekusi.
+3. Lanjutkan dari tugas pertama yang belum selesai.
+4. Perbarui progres seiring berjalan.
+
+## Alias
+
+- `dwp:resume`

@@ -1,0 +1,66 @@
+---
+title: DWP spesifikasyonu
+description: "Normatif Deep Work Plan spesifikasyonu: plan yapısı, dokuz bölümlü görev anatomisi, beş işlemli yürütme döngüsü, çıktı çalışma alanı ve sürümleme."
+order: 2
+lang: tr
+section: Workflow
+---
+import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';
+import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
+import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
+
+# DWP spesifikasyonu
+
+**Sürüm 1.0. Durum: Kararlı.** Bu belge, Deep Work Plan (DWP) metodolojisinin normatif spesifikasyonudur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119’da açıklandığı şekilde yorumlanacaktır.
+
+## Tanım
+
+Bir Deep Work Plan, karmaşık bir mühendislik görevini ardışık, gözden geçirilebilir iş birimlerine ayrılmış biçimde tanımlayan, yapılandırılmış, yalnızca Markdown’dan oluşan bir yapıdır; otonom çalışan yapay zeka kodlama ajanları tarafından oluşturulmak, yürütülmek ve sürdürülmek üzere tasarlanmıştır.
+
+DWP spec odaklıdır: plan spesifikasyondur ve ajanlar, doğaçlama yapmak yerine onun açık kabul kriterlerine ve doğrulama kapılarına karşı çalışMAK ZORUNDADIR. Bir sohbet dökümü değil, spesifikasyon kalıcı doğruluk kaynağıdır; böylece iş, oturumlar ve ajanlar arasında doğrulanabilir ve sürdürülebilirdir. Bu aynı zamanda taşınabilir hale getirilmiş harness mühendisliğidir: bir ajanı güvenilir kılan bağlam, kontrol döngüsü, güvenlik bariyerleri ve sürdürülebilir durum, deponun kendisine düz Markdown olarak kurulur; böylece uyumlu herhangi bir ajan, araca özgü bir çerçeve olmadan depoyu pilotlayABİLİR.
+
+## Plan yapısı
+
+Bir plan, `.dwp/plans/` altında `PLAN_<slug>/` olarak adlandırılmış bir dizin OLMALIDIR. Dizin şunları İÇERMELİDİR:
+
+- `README.md` — plan genel görünümü, hedef, görev tablosu ve durum.
+- Görev başına bir dosya, `<n>.task_<slug>.md` olarak adlandırılır.
+- `PROGRESS.md` — yürütmenin çalışan bir günlüğü.
+
+## Görev anatomisi
+
+<TaskAnatomy lang="tr" class="not-prose my-10" />
+
+Her görev dosyası, sırasıyla bu dokuz bölümü İÇERMELİDİR:
+
+1. **Hedef** — görevin neyi başardığına dair tek paragraflık bir bildirim.
+2. **Bağlam** — arka plan, bağlantılar ve bu görevin neden var olduğu.
+3. **Adımlar** — gerçekleştirilecek sıralı, somut eylemler.
+4. **Kabul kriterleri** — “bitti”yi tanımlayan koşulların bir kontrol listesi.
+5. **Doğrulama** — doğrulamak için çalıştırılacak komutlar veya testler.
+6. **Dosyalar** — oluşturulması veya değiştirilmesi beklenen yollar.
+7. **Bağımlılıklar** — diğer görevler veya harici ön koşullar.
+8. **Riskler** — neyin ters gidebileceği ve azaltıcı önlemler.
+9. **Tamamlama ve Günlük** — bir durum işareti ile kronolojik notlar.
+
+## Yürütme döngüsü
+
+<CoreLoop lang="tr" class="not-prose my-10" />
+
+DWP beş işlem tanımlar:
+
+- **create** — Bir hedeften yeni bir plan üretir.
+- **execute** — Planı görev görev yürütür.
+- **refine** — Mevcut bir planı değiştirir.
+- **resume** — Kesintiye uğramış bir planı sürdürür.
+- **status** — Yürütmeden plan durumunu raporlar.
+
+## Çıktı çalışma alanı
+
+<OutputWorkspace lang="tr" class="not-prose my-10" />
+
+Tüm DWP yapıları, depo kökündeki gitignore’lanmış bir `.dwp/` dizini altında YAŞAMALIDIR.
+
+## Sürümleme
+
+Bu spesifikasyon, anlamsal sürümlemeyi izler.
