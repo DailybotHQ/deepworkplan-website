@@ -59,6 +59,324 @@ const i18n = {
     caption:
       'Clasifica primero el repositorio: un Repositorio Individual delimita los planes a sus propios archivos; un Hub Orquestador coordina planes entre múltiples sub-repositorios.',
   },
+  pt: {
+    ariaLabel:
+      'Árvore de decisão: um repositório é um Repositório Individual (base de código única) ou um Hub Orquestrador (coordena sub-repositórios).',
+    root: 'Repositório',
+    question: 'Vários repositórios aninhados ou um registro de hub?',
+    no: 'Não',
+    yes: 'Sim',
+    individual: 'Repositório individual',
+    orchestrator: 'Hub orquestrador',
+    indPoints: [
+      'base de código única',
+      'os planos modificam arquivos locais',
+      '.dwp/ na raiz do repositório',
+    ],
+    orcPoints: [
+      'coordena sub-repositórios',
+      'os planos delegam a planos filhos',
+      'estado .dwp/ entre repositórios',
+    ],
+    caption:
+      'Classifique o repositório primeiro: um Repositório Individual delimita os planos a seus próprios arquivos; um Hub Orquestrador coordena planos entre sub-repositórios.',
+  },
+  zh: {
+    ariaLabel:
+      '决策树：仓库要么是独立仓库（单一代码库），要么是编排中心（协调多个子仓库）。',
+    root: '仓库',
+    question: '是多个嵌套仓库或中心注册表吗？',
+    no: '否',
+    yes: '是',
+    individual: '独立仓库',
+    orchestrator: '编排中心',
+    indPoints: ['单一代码库', '计划修改本地文件', '.dwp/ 位于仓库根目录'],
+    orcPoints: ['协调子仓库', '计划委派给子计划', '跨仓库的 .dwp/ 状态'],
+    caption:
+      '先对仓库进行分类：独立仓库将计划限定在自身文件范围内；编排中心则在多个子仓库之间协调计划。',
+  },
+  ja: {
+    ariaLabel:
+      '決定木：リポジトリは個別リポジトリ（単一のコードベース）か、オーケストレーターハブ（サブリポジトリを統括する）のいずれかです。',
+    root: 'リポジトリ',
+    question: '複数の入れ子リポジトリ、またはハブのレジストリですか。',
+    no: 'いいえ',
+    yes: 'はい',
+    individual: '個別リポジトリ',
+    orchestrator: 'オーケストレーターハブ',
+    indPoints: [
+      '単一のコードベース',
+      '計画はローカルファイルを変更します',
+      '.dwp/ はリポジトリのルートに配置します',
+    ],
+    orcPoints: [
+      'サブリポジトリを統括します',
+      '計画は子の計画へ委譲します',
+      'リポジトリ間で .dwp/ の状態を保持します',
+    ],
+    caption:
+      'まずリポジトリを分類します。個別リポジトリは計画を自身のファイルに限定し、オーケストレーターハブはサブリポジトリ間で計画を統括します。',
+  },
+  de: {
+    ariaLabel:
+      'Entscheidungsbaum: Ein Repository ist entweder ein Einzel-Repository (eine einzelne Codebasis) oder ein Orchestrator-Hub (koordiniert Unter-Repositories).',
+    root: 'Repository',
+    question: 'Mehrere verschachtelte Repositories oder eine Hub-Registry?',
+    no: 'Nein',
+    yes: 'Ja',
+    individual: 'Einzel-Repository',
+    orchestrator: 'Orchestrator-Hub',
+    indPoints: [
+      'einzelne Codebasis',
+      'Pläne ändern lokale Dateien',
+      '.dwp/ im Stammverzeichnis des Repositorys',
+    ],
+    orcPoints: [
+      'koordiniert Unter-Repositories',
+      'Pläne delegieren an untergeordnete Pläne',
+      '.dwp/-Zustand über Repositories hinweg',
+    ],
+    caption:
+      'Klassifizieren Sie das Repository zuerst: Ein Einzel-Repository begrenzt Pläne auf seine eigenen Dateien; ein Orchestrator-Hub koordiniert Pläne über mehrere Unter-Repositories hinweg.',
+  },
+  fr: {
+    ariaLabel:
+      'Arbre de décision : un dépôt est soit un Dépôt individuel (base de code unique), soit un Hub orchestrateur (coordonne des sous-dépôts).',
+    root: 'Dépôt',
+    question: 'Plusieurs dépôts imbriqués ou un registre de hub ?',
+    no: 'Non',
+    yes: 'Oui',
+    individual: 'Dépôt individuel',
+    orchestrator: 'Hub orchestrateur',
+    indPoints: [
+      'base de code unique',
+      'les plans modifient des fichiers locaux',
+      '.dwp/ à la racine du dépôt',
+    ],
+    orcPoints: [
+      'coordonne les sous-dépôts',
+      'les plans délèguent à des plans enfants',
+      'état .dwp/ partagé entre dépôts',
+    ],
+    caption:
+      'Classez d’abord le dépôt : un Dépôt individuel limite les plans à ses propres fichiers ; un Hub orchestrateur coordonne les plans entre plusieurs sous-dépôts.',
+  },
+  ko: {
+    ariaLabel:
+      '결정 트리: 저장소는 개별 저장소(단일 코드베이스)이거나 오케스트레이터 허브(하위 저장소를 조율)입니다.',
+    root: '저장소',
+    question: '중첩된 여러 저장소인가요, 아니면 허브 레지스트리인가요?',
+    no: '아니요',
+    yes: '예',
+    individual: '개별 저장소',
+    orchestrator: '오케스트레이터 허브',
+    indPoints: [
+      '단일 코드베이스',
+      '계획이 로컬 파일을 수정해요',
+      '.dwp/ 가 저장소 루트에 있어요',
+    ],
+    orcPoints: [
+      '하위 저장소를 조율해요',
+      '계획이 하위 계획에 위임해요',
+      '저장소 간에 .dwp/ 상태를 공유해요',
+    ],
+    caption:
+      '먼저 저장소를 분류하세요. 개별 저장소는 계획을 자신의 파일로 한정하고, 오케스트레이터 허브는 여러 하위 저장소에 걸쳐 계획을 조율해요.',
+  },
+  ru: {
+    ariaLabel:
+      'Дерево решений: репозиторий — это либо индивидуальный репозиторий (единая кодовая база), либо хаб-оркестратор (координирует подрепозитории).',
+    root: 'Репозиторий',
+    question: 'Несколько вложенных репозиториев или реестр хаба?',
+    no: 'Нет',
+    yes: 'Да',
+    individual: 'Индивидуальный репозиторий',
+    orchestrator: 'Хаб-оркестратор',
+    indPoints: [
+      'единая кодовая база',
+      'планы изменяют локальные файлы',
+      '.dwp/ в корне репозитория',
+    ],
+    orcPoints: [
+      'координирует подрепозитории',
+      'планы делегируют дочерним планам',
+      'состояние .dwp/ между репозиториями',
+    ],
+    caption:
+      'Сначала классифицируйте репозиторий: индивидуальный репозиторий ограничивает планы своими файлами, а хаб-оркестратор координирует планы между несколькими подрепозиториями.',
+  },
+  it: {
+    ariaLabel:
+      'Albero decisionale: un repository è un Repository individuale (codice base unico) oppure un Hub orchestratore (coordina sotto-repository).',
+    root: 'Repository',
+    question: 'Più repository annidati o un registro di hub?',
+    no: 'No',
+    yes: 'Sì',
+    individual: 'Repository individuale',
+    orchestrator: 'Hub orchestratore',
+    indPoints: [
+      'codice base unico',
+      'i piani modificano file locali',
+      '.dwp/ nella radice del repository',
+    ],
+    orcPoints: [
+      'coordina i sotto-repository',
+      'i piani delegano a piani figli',
+      'stato .dwp/ condiviso tra repository',
+    ],
+    caption:
+      'Classifichi prima il repository: un Repository individuale delimita i piani ai propri file; un Hub orchestratore coordina i piani tra più sotto-repository.',
+  },
+  tr: {
+    ariaLabel:
+      'Karar ağacı: bir depo ya Bireysel Depodur (tek bir kod tabanı) ya da Orkestratör Merkezidir (alt depoları koordine eder).',
+    root: 'Depo',
+    question: 'Birden çok iç içe depo mu, yoksa bir merkez kaydı mı?',
+    no: 'Hayır',
+    yes: 'Evet',
+    individual: 'Bireysel depo',
+    orchestrator: 'Orkestratör merkezi',
+    indPoints: [
+      'tek bir kod tabanı',
+      'planlar yerel dosyaları değiştirir',
+      '.dwp/ depo kökünde bulunur',
+    ],
+    orcPoints: [
+      'alt depoları koordine eder',
+      'planlar alt planlara yetki devreder',
+      'depolar arasında .dwp/ durumu',
+    ],
+    caption:
+      'Önce depoyu sınıflandırın: Bireysel Depo, planları kendi dosyalarıyla sınırlar; Orkestratör Merkezi ise planları birden çok alt depo arasında koordine eder.',
+  },
+  id: {
+    ariaLabel:
+      'Pohon keputusan: sebuah repositori adalah Repositori Individual (basis kode tunggal) atau Hub Orkestrator (mengoordinasikan sub-repositori).',
+    root: 'Repositori',
+    question: 'Beberapa repositori bersarang atau registri hub?',
+    no: 'Tidak',
+    yes: 'Ya',
+    individual: 'Repositori individual',
+    orchestrator: 'Hub orkestrator',
+    indPoints: [
+      'basis kode tunggal',
+      'rencana mengubah berkas lokal',
+      '.dwp/ pada akar repositori',
+    ],
+    orcPoints: [
+      'mengoordinasikan sub-repositori',
+      'rencana mendelegasikan ke rencana anak',
+      'status .dwp/ lintas repositori',
+    ],
+    caption:
+      'Klasifikasikan repositori terlebih dahulu: Repositori Individual membatasi rencana pada berkasnya sendiri; Hub Orkestrator mengoordinasikan rencana di antara beberapa sub-repositori.',
+  },
+  vi: {
+    ariaLabel:
+      'Cây quyết định: một kho lưu trữ là Kho lưu trữ Cá nhân (một mã nguồn duy nhất) hoặc Trung tâm Điều phối (điều phối các kho con).',
+    root: 'Kho lưu trữ',
+    question: 'Nhiều kho lưu trữ lồng nhau hay một sổ đăng ký trung tâm?',
+    no: 'Không',
+    yes: 'Có',
+    individual: 'Kho lưu trữ cá nhân',
+    orchestrator: 'Trung tâm điều phối',
+    indPoints: [
+      'một mã nguồn duy nhất',
+      'kế hoạch chỉnh sửa tệp cục bộ',
+      '.dwp/ tại thư mục gốc của kho',
+    ],
+    orcPoints: [
+      'điều phối các kho con',
+      'kế hoạch ủy quyền cho kế hoạch con',
+      'trạng thái .dwp/ xuyên suốt các kho',
+    ],
+    caption:
+      'Hãy phân loại kho lưu trữ trước: Kho lưu trữ Cá nhân giới hạn kế hoạch trong tệp của chính nó; Trung tâm Điều phối điều phối kế hoạch giữa nhiều kho con.',
+  },
+  hi: {
+    ariaLabel:
+      'निर्णय वृक्ष: एक रिपॉज़िटरी या तो व्यक्तिगत रिपॉज़िटरी (एकल कोडबेस) है या ऑर्केस्ट्रेटर हब (उप-रिपॉज़िटरियों का समन्वय करता है)।',
+    root: 'रिपॉज़िटरी',
+    question: 'क्या कई नेस्टेड रिपॉज़िटरी हैं या एक हब रजिस्ट्री है?',
+    no: 'नहीं',
+    yes: 'हाँ',
+    individual: 'व्यक्तिगत रिपॉज़िटरी',
+    orchestrator: 'ऑर्केस्ट्रेटर हब',
+    indPoints: [
+      'एकल कोडबेस',
+      'योजनाएँ स्थानीय फ़ाइलों को संशोधित करती हैं',
+      '.dwp/ रिपॉज़िटरी की जड़ में',
+    ],
+    orcPoints: [
+      'उप-रिपॉज़िटरियों का समन्वय करता है',
+      'योजनाएँ चाइल्ड योजनाओं को सौंपती हैं',
+      'रिपॉज़िटरियों के बीच .dwp/ स्थिति',
+    ],
+    caption:
+      'पहले रिपॉज़िटरी को वर्गीकृत करें: व्यक्तिगत रिपॉज़िटरी योजनाओं को उसकी अपनी फ़ाइलों तक सीमित रखती है; ऑर्केस्ट्रेटर हब कई उप-रिपॉज़िटरियों के बीच योजनाओं का समन्वय करता है।',
+  },
+  pl: {
+    ariaLabel:
+      'Drzewo decyzyjne: repozytorium jest albo repozytorium indywidualnym (pojedyncza baza kodu), albo hubem orkiestratora (koordynuje pod-repozytoria).',
+    root: 'Repozytorium',
+    question: 'Wiele zagnieżdżonych repozytoriów czy rejestr huba?',
+    no: 'Nie',
+    yes: 'Tak',
+    individual: 'Repozytorium indywidualne',
+    orchestrator: 'Hub orkiestratora',
+    indPoints: [
+      'pojedyncza baza kodu',
+      'plany modyfikują pliki lokalne',
+      '.dwp/ w katalogu głównym repozytorium',
+    ],
+    orcPoints: [
+      'koordynuje pod-repozytoria',
+      'plany delegują do planów podrzędnych',
+      'stan .dwp/ pomiędzy repozytoriami',
+    ],
+    caption:
+      'Najpierw sklasyfikuj repozytorium: repozytorium indywidualne ogranicza plany do własnych plików; hub orkiestratora koordynuje plany pomiędzy wieloma pod-repozytoriami.',
+  },
+  uk: {
+    ariaLabel:
+      'Дерево рішень: репозиторій — це або індивідуальний репозиторій (єдина кодова база), або хаб-оркестратор (координує підрепозиторії).',
+    root: 'Репозиторій',
+    question: 'Декілька вкладених репозиторіїв чи реєстр хаба?',
+    no: 'Ні',
+    yes: 'Так',
+    individual: 'Індивідуальний репозиторій',
+    orchestrator: 'Хаб-оркестратор',
+    indPoints: [
+      'єдина кодова база',
+      'плани змінюють локальні файли',
+      '.dwp/ у корені репозиторію',
+    ],
+    orcPoints: [
+      'координує підрепозиторії',
+      'плани делегують дочірнім планам',
+      'стан .dwp/ між репозиторіями',
+    ],
+    caption:
+      'Спершу класифікуйте репозиторій: індивідуальний репозиторій обмежує плани власними файлами; хаб-оркестратор координує плани між кількома підрепозиторіями.',
+  },
+  th: {
+    ariaLabel:
+      'แผนภาพการตัดสินใจ: ที่เก็บโค้ดเป็นได้ทั้งที่เก็บโค้ดเดี่ยว (โค้ดเบสเดียว) หรือศูนย์กลางผู้ประสานงาน (ประสานงานที่เก็บโค้ดย่อย)',
+    root: 'ที่เก็บโค้ด',
+    question: 'มีที่เก็บโค้ดซ้อนกันหลายชุด หรือเป็นทะเบียนของศูนย์กลาง',
+    no: 'ไม่ใช่',
+    yes: 'ใช่',
+    individual: 'ที่เก็บโค้ดเดี่ยว',
+    orchestrator: 'ศูนย์กลางผู้ประสานงาน',
+    indPoints: ['โค้ดเบสเดียว', 'แผนงานแก้ไขไฟล์ในเครื่อง', '.dwp/ อยู่ที่รากของที่เก็บโค้ด'],
+    orcPoints: [
+      'ประสานงานที่เก็บโค้ดย่อย',
+      'แผนงานมอบหมายให้แผนงานย่อย',
+      'สถานะ .dwp/ ข้ามที่เก็บโค้ด',
+    ],
+    caption:
+      'จัดประเภทที่เก็บโค้ดก่อน: ที่เก็บโค้ดเดี่ยวจำกัดแผนงานไว้กับไฟล์ของตนเอง ขณะที่ศูนย์กลางผู้ประสานงานจะประสานงานแผนงานข้ามที่เก็บโค้ดย่อยหลายชุด',
+  },
 } as const;
 
 const t = i18n[lang as keyof typeof i18n] ?? i18n.en;

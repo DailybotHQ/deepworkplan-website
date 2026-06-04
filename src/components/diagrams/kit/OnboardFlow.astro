@@ -29,6 +29,126 @@ const i18n = {
     caption:
       'La incorporación de código heredado razona sobre el código real y reconcilia en lugar de sobrescribir — luego verifica la conformidad.',
   },
+  pt: {
+    ariaLabel:
+      'Fluxo de incorporação de código legado: analisar, raciocinar sobre o stack, incorporar de forma não destrutiva (reconciliar, nunca sobrescrever) e então verificar.',
+    steps: ['Analisar', 'Raciocinar', 'Incorporar', 'Verificar'],
+    note: 'reconciliar, nunca sobrescrever',
+    caption:
+      'A incorporação de código legado raciocina sobre o código real e reconcilia em vez de sobrescrever — depois verifica a conformidade.',
+  },
+  zh: {
+    ariaLabel:
+      '遗留代码引导流程：分析、推理技术栈、以非破坏性方式引导（协调而非覆盖），然后验证。',
+    steps: ['分析', '推理', '引导', '验证'],
+    note: '协调，而非覆盖',
+    caption:
+      '遗留代码引导基于真实代码库进行推理，采用协调而非覆盖的方式——然后验证一致性。',
+  },
+  ja: {
+    ariaLabel:
+      'レガシーコードのオンボーディングフロー：分析し、スタックについて推論し、非破壊的にオンボーディングし(上書きせず統合する)、そして検証します。',
+    steps: ['分析', '推論', 'オンボーディング', '検証'],
+    note: '上書きせず統合する',
+    caption:
+      'レガシーコードのオンボーディングは実際のコードベースについて推論し、上書きではなく統合します。その後、適合性を検証します。',
+  },
+  de: {
+    ariaLabel:
+      'Onboarding-Ablauf für Legacy-Code: Analysieren, über den Stack räsonieren, nicht-destruktiv einbinden (Abgleichen, niemals Überschreiben) und anschließend verifizieren.',
+    steps: ['Analysieren', 'Räsonieren', 'Einbinden', 'Verifizieren'],
+    note: 'Abgleichen, niemals Überschreiben',
+    caption:
+      'Das Legacy-Onboarding räsoniert über die tatsächliche Codebasis und gleicht ab, statt zu überschreiben — anschließend wird die Konformität verifiziert.',
+  },
+  fr: {
+    ariaLabel:
+      "Flux d'intégration de code hérité : analyser, raisonner sur la pile technique, intégrer de manière non destructive (réconcilier, jamais écraser), puis vérifier.",
+    steps: ['Analyser', 'Raisonner', 'Intégrer', 'Vérifier'],
+    note: 'réconcilier, jamais écraser',
+    caption:
+      "L'intégration de code hérité raisonne sur la base de code réelle et réconcilie au lieu d'écraser — puis vérifie la conformité.",
+  },
+  ko: {
+    ariaLabel:
+      '레거시 코드 온보딩 흐름: 분석하고, 스택에 대해 추론하고, 비파괴적으로 온보딩하며(덮어쓰지 않고 조정), 그런 다음 검증해요.',
+    steps: ['분석', '추론', '온보딩', '검증'],
+    note: '덮어쓰지 않고 조정해요',
+    caption:
+      '레거시 온보딩은 실제 코드베이스에 대해 추론하고 덮어쓰는 대신 조정한 다음, 적합성을 검증해요.',
+  },
+  ru: {
+    ariaLabel:
+      'Поток онбординга унаследованного кода: проанализировать, рассудить о стеке, недеструктивно интегрировать (согласовать, никогда не перезаписывать), а затем верифицировать.',
+    steps: ['Анализ', 'Рассуждение', 'Интеграция', 'Верификация'],
+    note: 'согласовывать, никогда не перезаписывать',
+    caption:
+      'Онбординг унаследованного кода рассуждает о реальной кодовой базе и согласовывает её вместо перезаписи — затем верифицирует соответствие.',
+  },
+  it: {
+    ariaLabel:
+      'Flusso di onboarding del codice legacy: analizzare, ragionare sullo stack, integrare in modo non distruttivo (riconciliare, mai sovrascrivere) e poi verificare.',
+    steps: ['Analizzare', 'Ragionare', 'Integrare', 'Verificare'],
+    note: 'riconciliare, mai sovrascrivere',
+    caption:
+      "L'onboarding del codice legacy ragiona sulla codebase reale e riconcilia invece di sovrascrivere — poi verifica la conformità.",
+  },
+  tr: {
+    ariaLabel:
+      'Eski kod tabanını dahil etme akışı: analiz et, yığın hakkında akıl yürüt, yıkıcı olmayan biçimde dahil et (uzlaştır, asla üzerine yazma) ve ardından doğrula.',
+    steps: ['Analiz Et', 'Akıl Yürüt', 'Dahil Et', 'Doğrula'],
+    note: 'uzlaştır, asla üzerine yazma',
+    caption:
+      'Eski kod tabanını dahil etme süreci gerçek kod tabanı üzerinde akıl yürütür ve üzerine yazmak yerine uzlaştırır — ardından uyumu doğrular.',
+  },
+  id: {
+    ariaLabel:
+      'Alur orientasi kode lama: menganalisis, menalar tentang stack, mengintegrasikan secara non-destruktif (merekonsiliasi, tidak pernah menimpa), lalu memverifikasi.',
+    steps: ['Menganalisis', 'Menalar', 'Mengintegrasikan', 'Memverifikasi'],
+    note: 'rekonsiliasi, jangan pernah menimpa',
+    caption:
+      'Orientasi kode lama menalar tentang basis kode yang sebenarnya dan merekonsiliasi alih-alih menimpa — lalu memverifikasi kesesuaian.',
+  },
+  vi: {
+    ariaLabel:
+      'Luồng tích hợp mã kế thừa: phân tích, suy luận về ngăn xếp, tích hợp một cách không phá hủy (đối chiếu, không bao giờ ghi đè), rồi xác minh.',
+    steps: ['Phân tích', 'Suy luận', 'Tích hợp', 'Xác minh'],
+    note: 'đối chiếu, không bao giờ ghi đè',
+    caption:
+      'Việc tích hợp mã kế thừa suy luận về mã nguồn thực tế và đối chiếu thay vì ghi đè — sau đó xác minh sự tuân thủ.',
+  },
+  hi: {
+    ariaLabel:
+      'लीगेसी कोड ऑनबोर्डिंग प्रवाह: विश्लेषण करें, स्टैक के बारे में तर्क करें, गैर-विनाशकारी तरीके से ऑनबोर्ड करें (समाधान करें, कभी अधिलेखित न करें), फिर सत्यापित करें।',
+    steps: ['विश्लेषण', 'तर्क', 'ऑनबोर्ड', 'सत्यापन'],
+    note: 'समाधान करें, कभी अधिलेखित न करें',
+    caption:
+      'लीगेसी ऑनबोर्डिंग वास्तविक कोडबेस के बारे में तर्क करती है और अधिलेखित करने के बजाय समाधान करती है — फिर अनुरूपता का सत्यापन करती है।',
+  },
+  pl: {
+    ariaLabel:
+      'Przepływ wdrażania starszego kodu: przeanalizować, rozważyć stos technologiczny, wdrożyć w sposób niedestrukcyjny (uzgadniać, nigdy nie nadpisywać), a następnie zweryfikować.',
+    steps: ['Analiza', 'Rozważanie', 'Wdrożenie', 'Weryfikacja'],
+    note: 'uzgadniaj, nigdy nie nadpisuj',
+    caption:
+      'Wdrażanie starszego kodu rozważa rzeczywistą bazę kodu i uzgadnia, zamiast nadpisywać — a następnie weryfikuje zgodność.',
+  },
+  uk: {
+    ariaLabel:
+      'Потік онбордингу успадкованого коду: проаналізувати, міркувати про стек, інтегрувати недеструктивно (узгоджувати, ніколи не перезаписувати), а потім верифікувати.',
+    steps: ['Аналіз', 'Міркування', 'Інтеграція', 'Верифікація'],
+    note: 'узгоджуй, ніколи не перезаписуй',
+    caption:
+      'Онбординг успадкованого коду міркує про справжню кодову базу та узгоджує її замість перезапису — потім верифікує відповідність.',
+  },
+  th: {
+    ariaLabel:
+      'ขั้นตอนการนำโค้ดเดิมเข้าสู่ระบบ: วิเคราะห์ ใช้เหตุผลเกี่ยวกับสแต็ก นำเข้าสู่ระบบโดยไม่ทำลายของเดิม (ปรับให้สอดคล้อง อย่าเขียนทับ) จากนั้นตรวจสอบ',
+    steps: ['วิเคราะห์', 'ใช้เหตุผล', 'นำเข้าสู่ระบบ', 'ตรวจสอบ'],
+    note: 'ปรับให้สอดคล้อง อย่าเขียนทับ',
+    caption:
+      'การนำโค้ดเดิมเข้าสู่ระบบใช้เหตุผลกับโค้ดเบสจริงและปรับให้สอดคล้องแทนการเขียนทับ จากนั้นตรวจสอบความสอดคล้อง',
+  },
 } as const;
 const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
 ---
