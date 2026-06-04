@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  getActiveLanguages,
   getAlternateUrls,
   getDateLocale,
   getDefaultLanguage,
@@ -13,6 +14,7 @@ import {
   getUrlPrefix,
   isDefaultLanguage,
   isValidLanguage,
+  LANGUAGE_CODES,
   stripLangPrefix,
 } from '@/lib/i18n';
 
@@ -25,8 +27,27 @@ describe('getSupportedLanguages', () => {
     expect(languages).toContain('es');
   });
 
-  it('returns exactly 2 supported languages', () => {
-    expect(getSupportedLanguages()).toHaveLength(2);
+  it('returns every registered target language', () => {
+    expect(getSupportedLanguages()).toHaveLength(LANGUAGE_CODES.length);
+    expect(getSupportedLanguages()).toContain('pt');
+    expect(getSupportedLanguages()).toContain('zh');
+  });
+});
+
+// ─── getActiveLanguages ────────────────────────────────
+
+describe('getActiveLanguages', () => {
+  it('includes the default language', () => {
+    expect(getActiveLanguages()).toContain('en');
+  });
+
+  it('is a subset of the registered languages', () => {
+    const active = getActiveLanguages();
+    const supported = getSupportedLanguages();
+    expect(active.length).toBeLessThanOrEqual(supported.length);
+    for (const lang of active) {
+      expect(supported).toContain(lang);
+    }
   });
 });
 
@@ -86,8 +107,12 @@ describe('isValidLanguage', () => {
     expect(isValidLanguage('es')).toBe(true);
   });
 
-  it('returns false for "fr" (unsupported)', () => {
-    expect(isValidLanguage('fr')).toBe(false);
+  it('returns true for a registered language like "fr"', () => {
+    expect(isValidLanguage('fr')).toBe(true);
+  });
+
+  it('returns false for an unregistered code', () => {
+    expect(isValidLanguage('zz')).toBe(false);
   });
 
   it('returns false for empty string', () => {
@@ -262,9 +287,9 @@ describe('getLangFromUrl', () => {
 // ─── getAlternateUrls ──────────────────────────────────
 
 describe('getAlternateUrls', () => {
-  it('returns URLs for all supported languages', () => {
+  it('returns URLs for all active languages', () => {
     const urls = getAlternateUrls('/about');
-    expect(urls).toHaveLength(getSupportedLanguages().length);
+    expect(urls).toHaveLength(getActiveLanguages().length);
   });
 
   it('generates correct alternate URLs for an English page', () => {

@@ -140,7 +140,7 @@ describe('value quality', () => {
 describe('re-exports from translations/index.ts', () => {
   it('isValidLanguage is re-exported and works', () => {
     expect(isValidLanguage('en')).toBe(true);
-    expect(isValidLanguage('fr')).toBe(false);
+    expect(isValidLanguage('zz')).toBe(false);
   });
 
   it('getDefaultLanguage is re-exported and returns "en"', () => {

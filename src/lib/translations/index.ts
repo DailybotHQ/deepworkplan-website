@@ -4,25 +4,39 @@
  * This barrel re-exports the public API for translations.
  * Language configuration (type, registry, utilities) lives in ../i18n.ts.
  *
- * To add a new language:
- * 1. Create a new locale file (e.g., pt.ts) that exports a SiteTranslations object
- * 2. Import it here and add it to the translations record
- * 3. Update the Language type in ../i18n.ts
+ * Locale files are auto-discovered: any `./{code}.ts` that exports a
+ * `SiteTranslations` object named after its language code (e.g.
+ * `export const pt = { ... }`) is registered automatically. Adding a language
+ * needs NO edit to this file — just drop in the locale file and the content.
  */
 
-import type { Language } from '../i18n';
-import { en } from './en';
-import { es } from './es';
+import { isValidLanguage, type Language } from '../i18n';
 import type { SiteTranslations } from './types';
 
-const translations: Record<Language, SiteTranslations> = {
-  en,
-  es,
-};
+/**
+ * Eagerly load every locale module. The glob matches `en.ts`, `es.ts`, `pt.ts`,
+ * … as well as `types.ts`/`index.ts`; non-language files are filtered out below
+ * because their basename is not a valid language code.
+ */
+const localeModules = import.meta.glob<Record<string, unknown>>('./*.ts', {
+  eager: true,
+});
+
+const translations = {} as Record<Language, SiteTranslations>;
+
+for (const [path, mod] of Object.entries(localeModules)) {
+  const code = path.replace(/^\.\//, '').replace(/\.ts$/, '');
+  if (!isValidLanguage(code)) continue; // skips types.ts, index.ts, etc.
+  const value = mod[code];
+  if (value) {
+    translations[code] = value as SiteTranslations;
+  }
+}
 
 /**
- * Get translations for a specific language
- * @param lang - Language code ('en' or 'es')
+ * Get translations for a specific language. Falls back to English when a
+ * language has no strings file yet.
+ * @param lang - Language code
  * @returns Translation object for the specified language
  */
 export function getTranslations(lang: Language): SiteTranslations {
