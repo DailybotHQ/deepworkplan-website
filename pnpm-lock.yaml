@@ -14,6 +14,9 @@ importers:
       '@astrojs/compiler-rs':
         specifier: 0.2.1
         version: 0.2.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
+      '@astrojs/markdown-remark':
+        specifier: ^7.2.0
+        version: 7.2.0
       '@astrojs/mdx':
         specifier: 6.0.2
         version: 6.0.2(astro@6.4.4(@types/node@25.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.61.1)(yaml@2.8.3))

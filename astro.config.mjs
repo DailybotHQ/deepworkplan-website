@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 EventEmitter.defaultMaxListeners = 20;
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
@@ -42,19 +43,24 @@ export default defineConfig({
     inlineStylesheets: 'always',
   },
   redirects: adoptionRedirects,
+  // Astro 6.4+ moved `markdown.remarkPlugins/rehypePlugins/remarkRehype` to a
+  // `processor` instance produced by `unified()` from `@astrojs/markdown-remark`.
   markdown: {
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          target: '_blank',
-          rel: ['noopener', 'noreferrer'],
-        },
+    processor: unified({
+      rehypePlugins: [
+        [
+          rehypeExternalLinks,
+          {
+            target: '_blank',
+            rel: ['noopener', 'noreferrer'],
+          },
+        ],
+        // Wrap reader Markdown tables in .table-responsive so they scroll on
+        // mobile instead of overflowing the page (methodology/spec/kit are
+        // table-heavy).
+        rehypeResponsiveTables,
       ],
-      // Wrap reader Markdown tables in .table-responsive so they scroll on mobile
-      // instead of overflowing the page (methodology/spec/kit are table-heavy).
-      rehypeResponsiveTables,
-    ],
+    }),
   },
   integrations: [
     mdx(),
