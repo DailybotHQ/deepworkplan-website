@@ -1,6 +1,22 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/*
+ * Tailwind 4 source scope.
+ *
+ * Tailwind auto-discovers classes by scanning project source files. With 16+
+ * languages our content collections balloon to ~800 files; scanning every
+ * translated copy is wasted work because translators do NOT introduce new
+ * utility classes — translated MDX/Markdown duplicates the classes already in
+ * `en/`. Excluding non-`en` content directories drastically shortens the
+ * Tailwind scan and the dev start-up time, without losing any class.
+ *
+ * If a translator ever needs a class that does not appear elsewhere in the
+ * codebase, add a `@source "../content/<collection>/<lang>/<file>"` line
+ * here or, better, hoist the class into a shared component.
+ */
+@source not "../content/**/{es,pt,zh,ja,de,fr,ko,ru,it,tr,id,vi,hi,pl,uk,th}/**";
+
 @font-face {
   font-family: "Atkinson";
   src: url("/fonts/atkinson-regular.woff") format("woff");

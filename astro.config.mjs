@@ -105,7 +105,32 @@ export default defineConfig({
       },
       port: 5555,
       watch: {
-        ignored: ['**/.lighthouseci/**'],
+        // Ignore everything that doesn't need HMR. With 16 languages our build
+        // output explodes to ~926 files; if Vite tries to watch dist/, tmp/,
+        // and other large/recursive trees it blows past the inotify limit
+        // (ENOSPC). The dev server only needs src/, public/, and config files.
+        ignored: [
+          // build + cache output
+          '**/dist/**',
+          '**/.astro/**',
+          '**/node_modules/.cache/**',
+          '**/coverage/**',
+          // Local pnpm store + lockfile internals
+          '**/.pnpm-store/**',
+          // Skills/agents catalog + DWP plans + scratch — not part of the site
+          '**/.agents/**',
+          '**/.claude/**',
+          '**/.dwp/**',
+          '**/tmp/**',
+          // Tooling output
+          '**/.lighthouseci/**',
+          '**/.github/**',
+          // Tests / Node scripts — not served by Astro
+          '**/tests/**',
+          '**/scripts/**',
+          // Repo docs — not part of the dev runtime
+          '**/docs/**',
+        ],
       },
     },
   },
