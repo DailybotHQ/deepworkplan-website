@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan — convierte cualquier repositorio en un código AI-first"
+title: "Deep Work Plan — ejecución estructurada para agentes de IA"
 description: "El contexto importa más que el modelo. Deep Work Plan hace de cualquier repositorio un entorno estructurado donde un agente completa trabajo de largo aliento."
 lastUpdated: 2026-06-03
 ---
