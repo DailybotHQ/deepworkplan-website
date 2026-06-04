@@ -348,6 +348,17 @@ export function getUrlPrefix(lang: Language): string {
   return LANGUAGES[lang].urlPrefix;
 }
 
+/**
+ * Strip a leading registered-language directory from a content-entry id.
+ * Content entries are stored as `${lang}/${slug}` (e.g. `ja/01-manifesto`);
+ * this helper turns that into the bare slug for URL composition, recognising
+ * every code in `LANGUAGE_CODES` (not just `en`/`es`).
+ */
+const LANG_PREFIX_RE = new RegExp(`^(${LANGUAGE_CODES.join('|')})/`);
+export function stripEntryLangPrefix(entryId: string): string {
+  return entryId.replace(LANG_PREFIX_RE, '');
+}
+
 /** Get BCP 47 date locale string */
 export function getDateLocale(lang: Language): string {
   return LANGUAGES[lang].dateLocale;
