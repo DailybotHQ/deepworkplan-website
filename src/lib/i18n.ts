@@ -314,6 +314,15 @@ export function isActiveLanguage(lang: Language): boolean {
   return getActiveLanguages().includes(lang);
 }
 
+/**
+ * Active languages excluding the default. These are exactly the languages served
+ * under a `/[lang]/` prefix (the default language lives at the site root), so
+ * the dynamic `[lang]` routes enumerate this set in `getStaticPaths`.
+ */
+export function getActiveNonDefaultLanguages(): Language[] {
+  return getActiveLanguages().filter((lang) => lang !== DEFAULT_LANGUAGE);
+}
+
 /** Get metadata for a specific language */
 export function getLanguageConfig(lang: Language): LanguageConfig {
   return LANGUAGES[lang];

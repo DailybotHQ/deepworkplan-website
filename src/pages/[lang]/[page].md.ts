@@ -1,6 +1,7 @@
 import { getCollection } from 'astro:content';
 import type { APIRoute, GetStaticPaths } from 'astro';
 
+import { getActiveNonDefaultLanguages, type Language } from '@/lib/i18n';
 import { serializePageToAgentMarkdown } from '@/lib/markdown-for-agents';
 
 function getPageSlug(pageId: string): string {
@@ -14,19 +15,23 @@ function getPageLanguage(pageId: string): string {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const langs = getActiveNonDefaultLanguages();
   const allPages = await getCollection('pages');
   return allPages
-    .filter((page) => getPageLanguage(page.id) === 'es')
+    .filter((page) => langs.includes(getPageLanguage(page.id) as Language))
     .map((page) => ({
-      params: { page: getPageSlug(page.id) },
+      params: { lang: getPageLanguage(page.id), page: getPageSlug(page.id) },
       props: { page },
     }));
 };
 
-export const GET: APIRoute = ({ props }) => {
+export const GET: APIRoute = ({ props, params }) => {
   const { page } = props;
   const slug = getPageSlug(page.id);
-  const markdown = serializePageToAgentMarkdown(page, { slug, lang: 'es' });
+  const markdown = serializePageToAgentMarkdown(page, {
+    slug,
+    lang: params.lang as string,
+  });
 
   return new Response(markdown, {
     headers: {

@@ -1,0 +1,12 @@
+---
+import AboutPage from '@/components/pages/AboutPage.astro';
+import { getActiveNonDefaultLanguages, type Language } from '@/lib/i18n';
+
+export function getStaticPaths() {
+  return getActiveNonDefaultLanguages().map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Language };
+---
+
+<AboutPage lang={lang} />
