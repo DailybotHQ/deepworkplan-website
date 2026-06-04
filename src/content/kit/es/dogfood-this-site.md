@@ -32,4 +32,4 @@ El repositorio ahora es AI-first según su propia especificación: un `AGENTS.md
 
 ## Resultado
 
-La metodología se demuestra sobre su propio código: este sitio se construye y se mantiene de la misma forma que te dice que construyas el tuyo — siguiendo [`/init.md`](/es/init.md). Si el estándar funciona aquí, en producción, también funciona para tu repositorio.
+La metodología se demuestra sobre su propio código: este sitio se construye y se mantiene de la misma forma que te dice que construyas el tuyo — siguiendo [`/init.md`](/init.md). Si el estándar funciona aquí, en producción, también funciona para tu repositorio.

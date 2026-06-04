@@ -36,6 +36,22 @@ export type Language = (typeof LANGUAGE_CODES)[number];
 /** Default (fallback) language — used when no language prefix is detected */
 export const DEFAULT_LANGUAGE: Language = 'en';
 
+/**
+ * The canonical adoption bootstrap endpoint. `init.md` is first-class English
+ * content for the agent: the bootstrap command and every agent-facing reference
+ * must point to the **root, English** `/init.md` regardless of the visitor's
+ * locale. The human-facing `/init` page is still localized; only this endpoint
+ * is pinned to English.
+ */
+export const CANONICAL_INIT_MD_PATH = '/init.md';
+
+/** Absolute canonical `init.md` URL (always English, no language prefix). */
+export function getCanonicalInitMdUrl(
+  siteOrigin = 'https://deepworkplan.com'
+): string {
+  return `${siteOrigin.replace(/\/$/, '')}${CANONICAL_INIT_MD_PATH}`;
+}
+
 /** Metadata for a supported language */
 export interface LanguageConfig {
   /** ISO language code (bare BCP-47) */
