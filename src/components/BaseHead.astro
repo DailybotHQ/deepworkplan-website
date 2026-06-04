@@ -48,7 +48,8 @@ const {
 // default. Presence is detected at build time so adding a localized image is
 // zero-config. An explicit `image` prop from a page always wins.
 function resolveDefaultOgImage(language: string): string {
-  if (isDefaultLanguage(language as Language)) return '/images/og/og-default.png';
+  if (isDefaultLanguage(language as Language))
+    return '/images/og/og-default.png';
   const localized = `/images/og/og-default-${language}.png`;
   const onDisk = join(process.cwd(), 'public', localized);
   return existsSync(onDisk) ? localized : '/images/og/og-default.png';
