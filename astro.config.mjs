@@ -100,6 +100,22 @@ export default defineConfig({
       holdUntilCrawlEnd: false,
     },
     server: {
+      // Pre-compile the heaviest SSR modules at dev startup so the FIRST
+      // browser request doesn't trigger a cold compile of global.css /
+      // MainLayout / HomePage and blow the 60s `vite:invoke` timeout. With 16
+      // languages the cold compile graph for the first page exceeds that
+      // window; warming up moves the cost into the "ready in" phase.
+      warmup: {
+        ssrFiles: [
+          './src/styles/global.css',
+          './src/layouts/MainLayout.astro',
+          './src/components/pages/HomePage.astro',
+          './src/components/BaseHead.astro',
+          './src/components/layout/Header.svelte',
+          './src/lib/i18n.ts',
+          './src/lib/translations/index.ts',
+        ],
+      },
       hmr: {
         overlay: true,
       },
