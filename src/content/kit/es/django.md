@@ -1,6 +1,6 @@
 ---
 title: Django
-description: "Un preset de incorporación para proyectos Django, con pistas de razonamiento para apps, migraciones, ajustes, comandos de administración y el ejecutor de pruebas, siguiendo el diseño de proyecto estándar."
+description: "Un preset de incorporación para proyectos Django, con pistas de razonamiento para apps, migraciones, ajustes, comandos de administración y pruebas."
 kind: preset
 lang: es
 order: 1

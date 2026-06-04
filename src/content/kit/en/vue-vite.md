@@ -1,6 +1,6 @@
 ---
 title: Vue + Vite
-description: "An onboarding preset for Vue + Vite projects, with reasoning cues for single-file components, the Composition API, Pinia stores, the router, and Vitest component testing."
+description: "An onboarding preset for Vue + Vite projects, with reasoning cues for single-file components, the Composition API, Pinia stores, and Vitest testing."
 kind: preset
 lang: en
 order: 2

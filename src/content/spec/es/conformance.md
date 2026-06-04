@@ -1,6 +1,6 @@
 ---
 title: Conformidad
-description: "La definición normativa de un repositorio conforme con Deep Work Plan y AI-first: los artefactos que un repositorio DEBE y DEBERÍA tener, qué hace que un plan esté bien formado y cómo verificarlo de forma objetiva."
+description: "Definición normativa de un repositorio conforme con DWP y AI-first: artefactos que DEBE y DEBERÍA tener, qué hace que un plan sea válido y cómo verificarlo."
 order: 6
 lang: es
 section: Conformidad

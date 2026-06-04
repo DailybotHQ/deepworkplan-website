@@ -1,6 +1,6 @@
 ---
 title: Astro / Svelte
-description: "Un preset de incorporación para sitios Astro, opcionalmente con islas Svelte, con pistas de razonamiento para colecciones de contenido, validación de esquema, hidratación de islas y salida de sitio estático."
+description: "Un preset de incorporación para sitios Astro, opcionalmente con islas Svelte, con pistas para colecciones de contenido, validación de esquema e hidratación."
 kind: preset
 lang: es
 order: 3

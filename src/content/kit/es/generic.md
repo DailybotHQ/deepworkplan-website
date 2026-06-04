@@ -1,6 +1,6 @@
 ---
 title: Genérico
-description: "El preset de incorporación de reserva para cualquier proyecto, con pistas de razonamiento agnósticas de la pila que detectan los comandos de compilación y prueba del repositorio cuando no aplica ningún preset específico."
+description: "El preset de incorporación de reserva para cualquier proyecto, con pistas agnósticas de la pila que detectan los comandos de compilación y prueba del repo."
 kind: preset
 lang: es
 order: 6

@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "An opt-in addon that adds or reconciles a compose-based devcontainer reasoned from the detected stack, with persistent AI-CLI auth that survives rebuilds. Never required for a repo to be AI-first."
+description: "An opt-in addon that adds or reconciles a compose-based devcontainer from the detected stack, with persistent AI-CLI auth that survives rebuilds."
 kind: addon
 lang: en
 order: 1

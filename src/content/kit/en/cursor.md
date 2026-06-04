@@ -1,6 +1,6 @@
 ---
 title: Cursor
-description: "The DWP adapter for Cursor AI, with full support through the project rules system and the hash command prefix, since Cursor reserves the slash for its own commands."
+description: "The DWP adapter for Cursor AI, with full support through the project rules system and the hash command prefix, since Cursor reserves the slash itself."
 kind: adapter
 lang: en
 order: 2

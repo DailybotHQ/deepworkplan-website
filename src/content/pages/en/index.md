@@ -1,6 +1,6 @@
 ---
-title: "Deep Work Plan — turn any repository into an AI-first codebase"
-description: "Make any repository AI-first: Deep Work Plan turns it into a structured environment — context, guardrails, and a plan — where any coding agent executes reliably."
+title: "Deep Work Plan — structured execution for AI coding agents"
+description: "Context matters more than models. Deep Work Plan turns any repository into a structured environment where any coding agent finishes long-horizon work."
 lastUpdated: 2026-06-03
 ---
 

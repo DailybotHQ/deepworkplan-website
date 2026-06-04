@@ -1,6 +1,6 @@
 ---
 title: Node / TS service
-description: "An onboarding preset for Node and TypeScript services and serverless APIs, with reasoning cues for the request or event lifecycle, integrations, type-checking, and the test convention."
+description: "An onboarding preset for Node and TypeScript services and serverless APIs, with reasoning cues for the request lifecycle, integrations, and tests."
 kind: preset
 lang: en
 order: 4

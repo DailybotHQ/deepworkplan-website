@@ -1,6 +1,6 @@
 ---
 title: Python package / CLI
-description: "An onboarding preset for Python packages and CLI tools, with reasoning cues for the package layout, console entry points, the command tree, and the pytest-based validation gate."
+description: "An onboarding preset for Python packages and CLI tools, with reasoning cues for the package layout, console entry points, and the pytest validation gate."
 kind: preset
 lang: en
 order: 5

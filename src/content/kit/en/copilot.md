@@ -1,6 +1,6 @@
 ---
 title: GitHub Copilot
-description: "The DWP adapter for GitHub Copilot, with partial support through markdown command procedures and the hash prefix. Core commands work, with some automation done manually."
+description: "The DWP adapter for GitHub Copilot, with partial support through markdown command procedures and the hash prefix; some automation is done manually."
 kind: adapter
 lang: en
 order: 4

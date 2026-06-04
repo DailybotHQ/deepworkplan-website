@@ -37,10 +37,9 @@ export const es: SiteTranslations = {
   // Página de inicio de Deep Work Plan
   home: {
     meta: {
-      title:
-        'Deep Work Plan — convierte cualquier repositorio en un código AI-first',
+      title: 'Deep Work Plan — ejecución estructurada para agentes de IA',
       description:
-        'Haz cualquier repositorio AI-first: un entorno estructurado — contexto, guardrails y un plan — donde cualquier agente de código ejecuta de forma fiable.',
+        'El contexto importa más que el modelo. Deep Work Plan hace de cualquier repositorio un entorno estructurado donde un agente completa trabajo de largo aliento.',
     },
     hero: {
       badge: 'Metodología abierta · MIT · Independiente del agente',
