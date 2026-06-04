@@ -1,76 +1,61 @@
 import type { CollectionEntry } from 'astro:content';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
 
 const SITE_URL = 'https://deepworkplan.com';
 
-/**
- * Site navigation structure shared across all agent markdown outputs.
- * Mirrors the navbar + footer links so AI agents can discover all pages
- * from any entry point — just like a browser user sees global navigation.
- */
-interface NavLink {
-  label: Record<string, string>;
-  path: string;
-  external?: boolean;
-}
-
-interface NavSection {
-  title: Record<string, string>;
-  links: NavLink[];
-}
-
-const SITE_NAV_SECTIONS: NavSection[] = [
-  {
-    title: { en: 'Methodology', es: 'Metodología' },
-    links: [
-      { label: { en: 'Home', es: 'Inicio' }, path: '/' },
-      { label: { en: 'Methodology', es: 'Metodología' }, path: '/methodology' },
-      { label: { en: 'Specification', es: 'Especificación' }, path: '/spec' },
-      { label: { en: 'Kit', es: 'Kit' }, path: '/kit' },
-    ],
-  },
-  {
-    title: { en: 'Get started', es: 'Empezar' },
-    links: [
-      { label: { en: 'Quickstart', es: 'Inicio rápido' }, path: '/quickstart' },
-      { label: { en: 'Examples', es: 'Ejemplos' }, path: '/examples' },
-    ],
-  },
-  {
-    title: { en: 'Project', es: 'Proyecto' },
-    links: [
-      { label: { en: 'About', es: 'Acerca de' }, path: '/about' },
-      { label: { en: 'Contact', es: 'Contacto' }, path: '/contact' },
-    ],
-  },
-  {
-    title: { en: 'Connect', es: 'Conectar' },
-    links: [
-      {
-        label: { en: 'GitHub', es: 'GitHub' },
-        path: 'https://github.com/DailybotHQ/deepworkplan-website',
-        external: true,
-      },
-    ],
-  },
-];
+const GITHUB_URL = 'https://github.com/DailybotHQ/deepworkplan-website';
 
 /**
  * Generate a site-wide navigation section for agent markdown.
- * Appended to all serialized outputs so AI agents can discover
- * every page from any entry point — mirrors the HTML navbar/footer.
+ * Appended to all serialized outputs so AI agents can discover every page from
+ * any entry point — mirrors the HTML navbar/footer. Labels are localized via the
+ * translations layer, so every active language gets navigation in its own
+ * language (English fallback when a language has no strings file yet).
  */
 function generateSiteNavigation(lang: string): string {
+  const t = getTranslations(lang as Language);
   const prefix = buildUrlPrefix(lang);
-  const heading = lang === 'es' ? 'Navegación del Sitio' : 'Site Navigation';
-  const lines: string[] = ['', '---', '', `## ${heading}`, ''];
+  const lines: string[] = ['', '---', '', `## ${t.agentNav.heading}`, ''];
 
-  for (const section of SITE_NAV_SECTIONS) {
-    const sectionTitle = section.title[lang] || section.title.en;
-    lines.push(`**${sectionTitle}:**`);
+  const sections: {
+    title: string;
+    links: { label: string; path: string; external?: boolean }[];
+  }[] = [
+    {
+      title: t.agentNav.sections.methodology,
+      links: [
+        { label: t.nav.home, path: '/' },
+        { label: t.nav.methodology, path: '/methodology' },
+        { label: t.nav.spec, path: '/spec' },
+        { label: t.nav.kit, path: '/kit' },
+      ],
+    },
+    {
+      title: t.agentNav.sections.getStarted,
+      links: [
+        { label: t.nav.quickstart, path: '/quickstart' },
+        { label: t.nav.examples, path: '/examples' },
+      ],
+    },
+    {
+      title: t.agentNav.sections.project,
+      links: [
+        { label: t.nav.about, path: '/about' },
+        { label: t.nav.contact, path: '/contact' },
+      ],
+    },
+    {
+      title: t.agentNav.sections.connect,
+      links: [{ label: t.nav.github, path: GITHUB_URL, external: true }],
+    },
+  ];
+
+  for (const section of sections) {
+    lines.push(`**${section.title}:**`);
     for (const link of section.links) {
-      const label = link.label[lang] || link.label.en;
       const url = link.external ? link.path : `${prefix}${link.path}`;
-      lines.push(`- [${label}](${url})`);
+      lines.push(`- [${link.label}](${url})`);
     }
     lines.push('');
   }
@@ -88,7 +73,7 @@ function formatDate(date: Date): string {
 }
 
 function buildUrlPrefix(lang: string): string {
-  return lang === 'en' ? '' : `/${lang}`;
+  return getUrlPrefix(lang as Language);
 }
 
 /**

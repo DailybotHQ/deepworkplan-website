@@ -22,6 +22,7 @@ export const en: SiteTranslations = {
     kit: 'Kit',
     examples: 'Examples',
     init: 'Init',
+    quickstart: 'Quickstart',
     github: 'GitHub',
     menu: 'Open menu',
     closeMenu: 'Close menu',
@@ -32,6 +33,17 @@ export const en: SiteTranslations = {
     copyright: 'Deep Work Plan',
     allRightsReserved: 'All rights reserved.',
     poweredBy: 'Powered by',
+  },
+
+  // Agent-friendly Markdown navigation
+  agentNav: {
+    heading: 'Site Navigation',
+    sections: {
+      methodology: 'Methodology',
+      getStarted: 'Get started',
+      project: 'Project',
+      connect: 'Connect',
+    },
   },
 
   // Deep Work Plan homepage

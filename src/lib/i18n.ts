@@ -19,30 +19,16 @@
  *   That's it — no page wrappers, no edits to routing/middleware/registry.
  */
 
+import { LANGUAGE_CODES } from './language-codes';
+
 /**
- * Target language codes (bare BCP-47, no region suffix). This tuple is the
- * canonical list and the source of the `Language` type. Region-qualified forms
- * (for Open Graph / Intl) live per-language in `LANGUAGES` below.
+ * Target language codes (bare BCP-47, no region suffix). The canonical list
+ * lives in the dependency-free `./language-codes` module (so the Astro config
+ * can import it too); it is re-exported here as the source of the `Language`
+ * type. Region-qualified forms (for Open Graph / Intl) live per-language in
+ * `LANGUAGES` below.
  */
-export const LANGUAGE_CODES = [
-  'en',
-  'es',
-  'pt',
-  'zh',
-  'ja',
-  'de',
-  'fr',
-  'ko',
-  'ru',
-  'it',
-  'tr',
-  'id',
-  'vi',
-  'hi',
-  'pl',
-  'uk',
-  'th',
-] as const;
+export { LANGUAGE_CODES };
 
 /** Supported language codes. */
 export type Language = (typeof LANGUAGE_CODES)[number];

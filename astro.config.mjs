@@ -12,10 +12,25 @@ import { defineConfig } from 'astro/config';
 import rehypeExternalLinks from 'rehype-external-links';
 
 import excludeInternal from './src/integrations/exclude-internal';
+import { DEFAULT_LANGUAGE_CODE, LANGUAGE_CODES } from './src/lib/language-codes';
 import rehypeResponsiveTables from './src/lib/rehype-responsive-tables.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+// /init is the canonical adoption endpoint. /setup and /onboarding redirect to
+// it in every language — one page, one .md endpoint, no canonical/AEO
+// duplication. Generated from the language registry so adding a language needs
+// no edit here.
+const adoptionRedirects = Object.fromEntries(
+  LANGUAGE_CODES.flatMap((code) => {
+    const prefix = code === DEFAULT_LANGUAGE_CODE ? '' : `/${code}`;
+    return [
+      [`${prefix}/setup`, { status: 301, destination: `${prefix}/init` }],
+      [`${prefix}/onboarding`, { status: 301, destination: `${prefix}/init` }],
+    ];
+  })
+);
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,15 +41,7 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
-  // /init is the canonical adoption endpoint. /setup and /onboarding (and their
-  // /es/ variants) are permanent redirects to it — one page, one .md endpoint,
-  // no canonical/AEO duplication.
-  redirects: {
-    '/setup': { status: 301, destination: '/init' },
-    '/onboarding': { status: 301, destination: '/init' },
-    '/es/setup': { status: 301, destination: '/es/init' },
-    '/es/onboarding': { status: 301, destination: '/es/init' },
-  },
+  redirects: adoptionRedirects,
   markdown: {
     rehypePlugins: [
       [

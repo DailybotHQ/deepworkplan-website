@@ -72,6 +72,7 @@ export interface SiteTranslations {
     kit: string;
     examples: string;
     init: string;
+    quickstart: string;
     github: string;
     menu: string;
     closeMenu: string;
@@ -82,6 +83,17 @@ export interface SiteTranslations {
     copyright: string;
     allRightsReserved: string;
     poweredBy: string;
+  };
+
+  // Agent-friendly Markdown navigation (rendered into .md endpoints)
+  agentNav: {
+    heading: string;
+    sections: {
+      methodology: string;
+      getStarted: string;
+      project: string;
+      connect: string;
+    };
   };
 
   // Deep Work Plan homepage
