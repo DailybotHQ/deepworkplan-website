@@ -1,0 +1,28 @@
+{
+  "name": "Deep Work Plan",
+  "description": "Trust, provenance, and integrity metadata for the Deep Work Plan methodology, website, and skill.",
+  "website": "https://deepworkplan.com",
+  "license": "MIT",
+  "repositories": {
+    "website": "https://github.com/DailybotHQ/deepworkplan-website",
+    "skill": "https://github.com/DailybotHQ/deepworkplan-skill"
+  },
+  "skill": {
+    "version": "2.2.2",
+    "install": "npx skills add DailybotHQ/deepworkplan-skill",
+    "markdownFirst": true,
+    "networkCalls": false,
+    "telemetry": false
+  },
+  "integrity": {
+    "checksums": "https://github.com/DailybotHQ/deepworkplan-skill/releases/latest/download/SHA256SUMS",
+    "verifyDocs": "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/PUBLISHING.md#41-provenance--integrity",
+    "signing": "planned"
+  },
+  "security": {
+    "contact": "mailto:security@dailybot.com",
+    "policy": "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md",
+    "securityTxt": "https://deepworkplan.com/.well-known/security.txt"
+  },
+  "lastUpdated": "2026-06-04"
+}
