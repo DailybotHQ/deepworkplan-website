@@ -8,7 +8,7 @@ below, and wire them in following the integration guide.
 
 The visual identity follows the "Broadsheet" editorial system: warm-paper,
 ink-line **engraving** style anchored to the existing lighthouse in
-`public/images/og-default.png`.
+`public/images/og/og-default.png`.
 
 > **⚠️ Update — diagrams are now components, not images.** Following
 > `PLAN_interactive_diagram_components`, the **24 diagrams** in this pack

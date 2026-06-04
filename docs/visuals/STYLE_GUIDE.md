@@ -3,7 +3,7 @@
 > **Purpose.** This is the canonical house style for every illustration and
 > diagram on deepworkplan.com, plus the **prompt schema** that every entry in
 > `prompts/*.md` must follow. Read this before writing or generating any visual.
-> The style anchor is `public/images/og-default.png` (the lighthouse engraving).
+> The style anchor is `public/images/og/og-default.png` (the lighthouse engraving).
 
 ---
 
