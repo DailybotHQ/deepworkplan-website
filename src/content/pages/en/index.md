@@ -12,8 +12,6 @@ Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning a
 
 > Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.
 
-Your agent reads the plan, installs the kit, and onboards your repository — reasoning about your actual stack, never pasting a template.
-
 > Deep Work Plan is spec-driven development where the repository itself becomes the harness.
 
 - [Open the /init prompt](/init)
