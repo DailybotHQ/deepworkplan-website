@@ -62,11 +62,9 @@ export const es: SiteTranslations = {
       instructionLabel: 'Dale esto a tu agente',
       instruction:
         'Lee y sigue las instrucciones en https://deepworkplan.com/init.md para hacer este repositorio AI-first.',
-      instructionCaption:
-        'Tu agente lee el plan, instala el kit e incorpora tu repositorio, razonando sobre tu stack real, sin pegar una plantilla.',
       copyLabel: 'Copiar',
       copiedLabel: 'Copiado',
-      viewInitCta: 'Ver el prompt completo de /init',
+      viewInitCta: 'Ver el prompt de /init',
       pullQuote:
         'Deep Work Plan es desarrollo guiado por especificación donde el propio repositorio se convierte en el harness.',
       primaryCta: 'Leer la metodología',
