@@ -12,6 +12,10 @@ const { lang } = Astro.props;
 const t = getTranslations(lang);
 const prefix = getUrlPrefix(lang);
 const h = t.home.hero;
+// The instruction is DISPLAYED in the page language (h.instruction), but the copy
+// button copies the canonical ENGLISH command — that is the literal prompt that
+// works when pasted into an agent (it points at the English init.md).
+const agentInstructionCopy = getTranslations('en').home.hero.instruction;
 ---
 
 <section
@@ -52,7 +56,7 @@ const h = t.home.hero;
             type="button"
             class="copy-btn kicker inline-flex cursor-pointer items-center gap-1.5 rounded-sm px-2 py-1 transition enabled:hover:opacity-80 disabled:cursor-default disabled:opacity-70"
             style="color: var(--color-secondary);"
-            data-copy={h.instruction}
+            data-copy={agentInstructionCopy}
             data-label={h.copyLabel}
             data-copied={h.copiedLabel}
             aria-label={h.copyLabel}
