@@ -104,6 +104,10 @@ Translate the content following these rules:
 - Add the missing translations maintaining the same nested structure
 - Ensure both `en.ts` and `es.ts` export objects with identical key structures
 - Update `src/lib/translations/types.ts` if new interface fields are needed
+- **Quote safety:** use ONLY straight ASCII single quotes `'` as string delimiters
+  — never curly/typographic quotes (`‘ ’ “ ”`), which break the build. Escape inner
+  apostrophes as `\'` (e.g. `'d\'installer'`). Run `pnpm run biome:check` after; a
+  `parse` error means a stray curly delimiter slipped in.
 
 ### Step 4: Validate Synchronization
 
