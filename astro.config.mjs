@@ -3,18 +3,16 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 EventEmitter.defaultMaxListeners = 20;
-import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
+import { satteri } from '@astrojs/markdown-satteri';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
 import tailwindcss from '@tailwindcss/vite';
 // @ts-check
 import { defineConfig } from 'astro/config';
-import rehypeExternalLinks from 'rehype-external-links';
 
 import excludeInternal from './src/integrations/exclude-internal';
 import { DEFAULT_LANGUAGE_CODE, LANGUAGE_CODES } from './src/lib/language-codes';
-import rehypeResponsiveTables from './src/lib/rehype-responsive-tables.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,24 +41,13 @@ export default defineConfig({
     inlineStylesheets: 'always',
   },
   redirects: adoptionRedirects,
-  // Astro 6.4+ moved `markdown.remarkPlugins/rehypePlugins/remarkRehype` to a
-  // `processor` instance produced by `unified()` from `@astrojs/markdown-remark`.
+  // TRIAL (perf): Sätteri (Rust) Markdown processor — Astro 6.4. Much faster than
+  // the unified pipeline, but it does NOT run remark/rehype plugins, so the
+  // external-links and responsive-tables transforms are dropped here (would be
+  // reimplemented as a tiny script + CSS if adopted). Built-in: Shiki + heading
+  // IDs + image handling. Measuring build delta + verifying rendering.
   markdown: {
-    processor: unified({
-      rehypePlugins: [
-        [
-          rehypeExternalLinks,
-          {
-            target: '_blank',
-            rel: ['noopener', 'noreferrer'],
-          },
-        ],
-        // Wrap reader Markdown tables in .table-responsive so they scroll on
-        // mobile instead of overflowing the page (methodology/spec/kit are
-        // table-heavy).
-        rehypeResponsiveTables,
-      ],
-    }),
+    processor: satteri(),
   },
   integrations: [
     mdx(),
