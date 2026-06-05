@@ -81,7 +81,6 @@ Section components composing the homepage. Each is a self-contained `.astro` sec
 | `Archetypes.astro` | Astro | Plan archetypes overview |
 | `Comparison.astro` | Astro | Comparison with tool-bound SDD |
 | `Onboarding.astro` | Astro | Agent onboarding overview |
-| `Stacks.astro` | Astro | Supported stacks/adapters |
 
 ### Layout Components
 
