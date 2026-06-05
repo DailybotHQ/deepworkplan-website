@@ -40,6 +40,7 @@ function generateSiteNavigation(lang: string): string {
     {
       title: t.agentNav.sections.project,
       links: [
+        { label: t.nav.trust, path: '/trust' },
         { label: t.nav.about, path: '/about' },
         { label: t.nav.contact, path: '/contact' },
       ],

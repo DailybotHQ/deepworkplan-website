@@ -121,6 +121,7 @@ onDestroy(() => {
     <a href="{prefix}/spec" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'spec', source: 'mobile' })}>{t.nav.spec}</a>
     <a href="{prefix}/kit" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'kit', source: 'mobile' })}>{t.nav.kit}</a>
     <a href="{prefix}/examples" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'examples', source: 'mobile' })}>{t.nav.examples}</a>
+    <a href="{prefix}/trust" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'trust', source: 'mobile' })}>{t.nav.trust}</a>
     <button
       class="masthead-link text-xl text-center flex items-center justify-center gap-2 focus:outline-none cursor-pointer"
       on:click={() => repoOpen = !repoOpen}

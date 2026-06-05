@@ -192,6 +192,7 @@ function closeAllDropdowns() {
         <a href="{prefix}/spec" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'spec' })}>{t.nav.spec}</a>
         <a href="{prefix}/kit" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'kit' })}>{t.nav.kit}</a>
         <a href="{prefix}/examples" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'examples' })}>{t.nav.examples}</a>
+        <a href="{prefix}/trust" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'trust' })}>{t.nav.trust}</a>
         <!-- Source-code repo selector: GitHub trigger opens a disclosure with
              links to both the website repo and the installable skill repo.
              Mirrors the language-selector disclosure pattern below. -->

@@ -1,4 +1,5 @@
 ---
+import { REPO_URLS } from '@/lib/constants/repos';
 import { getUrlPrefix } from '@/lib/i18n';
 import type { Language } from '@/lib/translations';
 import { getTranslations } from '@/lib/translations';
@@ -11,7 +12,7 @@ const { lang = 'en' } = Astro.props;
 const t = getTranslations(lang as Language);
 const prefix = getUrlPrefix(lang as Language);
 
-const githubUrl = 'https://github.com/DailybotHQ/deepworkplan-website';
+const githubUrl = REPO_URLS.website;
 
 const links = [
   { href: `${prefix}/methodology`, label: t.nav.methodology },
@@ -19,6 +20,7 @@ const links = [
   { href: `${prefix}/kit`, label: t.nav.kit },
   { href: `${prefix}/examples`, label: t.nav.examples },
   { href: `${prefix}/init`, label: t.nav.init },
+  { href: `${prefix}/trust`, label: t.nav.trust },
   { href: `${prefix}/about`, label: t.nav.about },
   { href: `${prefix}/contact`, label: t.nav.contact },
 ];
