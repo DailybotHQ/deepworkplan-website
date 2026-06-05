@@ -48,19 +48,18 @@ Create new pages in the Astro application with correct file-based routing, MainL
 
 | File | Route |
 |------|-------|
-| `pages/about.astro` | `/about` |
+| `pages/about.astro` | `/about` (default-language, served at root) |
 | `pages/projects/index.astro` | `/projects` |
 | `pages/team/[member].astro` | `/team/{member}` (dynamic) |
-| `pages/es/about.astro` | `/es/about` (i18n) |
+| `pages/[lang]/about.astro` | `/es/about`, `/pt/about`, `/zh/about`, … (one file covers ALL non-default languages) |
 
 ## Steps
 
 ### Step 1: Determine Route Structure
 
-- Simple page → `pages/{name}.astro`
-- Section index → `pages/{name}/index.astro`
-- Dynamic → `pages/{name}/[param].astro`
-- i18n → `pages/{lang}/{name}.astro`
+- Simple page → `pages/{name}.astro` (default-lang) + `pages/[lang]/{name}.astro` (all non-default)
+- Section index → `pages/{name}/index.astro` + `pages/[lang]/{name}/index.astro`
+- Dynamic (per-language) → `pages/{name}/[param].astro` + `pages/[lang]/{name}/[param].astro`
 
 ### Step 2: Create Shared Page Component (MANDATORY)
 
@@ -98,11 +97,11 @@ const prefix = getUrlPrefix(lang);
 </MainLayout>
 ```
 
-### Step 3: Create Thin Page Wrappers for All Languages (MANDATORY)
+### Step 3: Create the Two Page Wrappers (MANDATORY)
 
-Create 3-line wrapper files for each active language (see `src/lib/i18n.ts`):
+Adding a page is exactly **two** wrappers regardless of how many languages ship: one default-language wrapper + one dynamic `[lang]` wrapper that covers every other active language.
 
-**English wrapper** (`src/pages/{name}.astro`):
+**Default-language wrapper** (`src/pages/{name}.astro` — 3 lines):
 ```astro
 ---
 import {Name}Page from '@/components/pages/{Name}Page.astro';
@@ -110,26 +109,32 @@ import {Name}Page from '@/components/pages/{Name}Page.astro';
 <{Name}Page lang="en" />
 ```
 
-**Spanish wrapper** (`src/pages/es/{name}.astro`):
+**Dynamic `[lang]` wrapper** (`src/pages/[lang]/{name}.astro` — covers all non-default languages):
 ```astro
 ---
 import {Name}Page from '@/components/pages/{Name}Page.astro';
+import { getActiveNonDefaultLanguages, type Language } from '@/lib/i18n';
+
+export function getStaticPaths() {
+  return getActiveNonDefaultLanguages().map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Language };
 ---
-<{Name}Page lang="es" />
+<{Name}Page lang={lang} />
 ```
 
 **Key rules:**
 - Wrappers never import `MainLayout` — the `*Page.astro` component handles it internally
-- The `lang` prop is passed as a **string literal** (`"en"`, `"es"`), not a variable
-- If the page introduces new UI text, add entries to `src/lib/translations/en.ts` and `src/lib/translations/es.ts`
+- The default-language wrapper passes `lang="en"` as a string literal; the dynamic wrapper derives `lang` from `Astro.params`
+- One `*Page.astro` component + one root wrapper + one `[lang]` wrapper covers every active language. New languages need ZERO edits in `src/pages/` — they auto-light-up via `getActiveNonDefaultLanguages()`
+- If the page introduces new UI text, add entries to **every** locale file under `src/lib/translations/` (en.ts, es.ts, pt.ts, zh.ts, …) and run `pnpm run i18n:check`
 
 ### Step 3b: Register the Route in the Middleware Allowlist (MANDATORY for top-level routes)
 
-`src/middleware.ts` uses a **hardcoded allowlist** (`KNOWN_ROOT_PATHS` / `KNOWN_ES_PATHS`). A new
-single-segment route (`/foo`, `/es/foo`) returns a `(rewrite)` 404 until you add it:
+`src/middleware.ts` uses a derived allowlist. A new single-segment route returns a `(rewrite)` 404 until you register it. Only ONE edit is needed:
 
-1. Add `'foo'` to `KNOWN_ROOT_PATHS`.
-2. For the Spanish route, add `'foo'` to `KNOWN_ES_PATHS` too.
+1. Add `'foo'` to `KNOWN_BASE_PATHS` — this single entry covers `/foo`, `/es/foo`, `/pt/foo`, `/zh/foo`, etc. (every active language) at once.
 
 Multi-segment paths (`/foo/bar`) and paths containing `.` bypass the rule, so only single-segment
 top-level routes need this. Symptom if forgotten: dev log shows `[404] (rewrite) /foo`. See
@@ -139,26 +144,28 @@ CLAUDE.md "Middleware Allowlist".
 
 New pages must fit "The Broadsheet" editorial system:
 
-- `.main-container` page width; serif `.font-display` headings; paper/ink tokens (`bg-paper text-ink`)
-  and the oxblood `--color-secondary` accent — **no indigo, multi-color, glow, or `prose-slate`**.
-- Reuse `src/components/editorial/` primitives (Kicker, Rule, Figure, Lead, Reference).
-- Add any new translation keys to `src/lib/translations/types.ts` as well as `en.ts`/`es.ts`.
-- See the [`update-styles`](../update-styles/SKILL.md) skill for token/primitive details.
+- `.main-container` page width; serif `.font-display` headings; paper/ink tokens (`bg-paper text-ink`,
+  `--color-paper`, `--color-ink`, `--color-muted`, `--color-line`) and the oxblood `--color-secondary`
+  accent — **no indigo, multi-color, glow, or `prose-slate`**.
+- Reuse `src/components/editorial/` primitives by name: `Kicker`, `Rule`, `Lead`, `Figure`, `Reference`.
+- For data/process diagrams, use the [`add-diagram-component`](../add-diagram-component/SKILL.md) skill — do not hand-roll SVG.
+- Add any new translation keys to `src/lib/translations/types.ts` AND every locale file under `src/lib/translations/` (`en.ts`, `es.ts`, `pt.ts`, `zh.ts`, …). Run `pnpm run i18n:check`.
+- See the [`update-styles`](../update-styles/SKILL.md) skill for the full token / primitive catalog (paper, ink, muted, line, secondary; serif / sans / mono families; editorial primitives).
 
 ### Step 4: Create Agent-Friendly Markdown (MANDATORY)
 
 Create Markdown source files for the new page's `.md` endpoint (Markdown for Agents):
 
 1. Create `src/content/pages/en/{name}.md` with frontmatter (`title`, `description`, `lastUpdated`) and full page content as clean Markdown
-2. Create `src/content/pages/es/{name}.md` with translated frontmatter and content (proper diacritical marks)
+2. Create `src/content/pages/<lang>/{name}.md` for **every** active non-default language (`es`, `pt`, `zh`, `ja`, `de`, `fr`, `ko`, `ru`, `it`, `tr`, `id`, `vi`, `hi`, `pl`, `uk`, `th`) with translated frontmatter and content (correct diacritics/scripts/punctuation for the language)
 
 **Content requirements:**
 - Include ALL semantic sections from the `*Page.astro` component (same information, not a summary)
 - Include internal links to other site pages (for agent navigation/discovery)
 - Strip presentation chrome (nav, footer, scripts) but keep all text, headings, lists, and links
-- EN pages use root-relative links (`/about`), ES pages use `/es/` prefix (`/es/about`)
+- Default-language pages use root-relative links (`/about`); non-default pages prefix with their language code (`/es/about`, `/pt/about`, `/zh/about`, …)
 
-These files are automatically served as `/{name}.md` and `/es/{name}.md` endpoints — no endpoint code changes needed. Agents can also request them via `Accept: text/markdown` header.
+These files are automatically served as `/{name}.md` and `/<lang>/{name}.md` endpoints — no endpoint code changes needed. Agents can also request them via `Accept: text/markdown` header. Run `pnpm run md:check` to verify endpoint parity across every active language.
 
 ### Step 5: Validate
 

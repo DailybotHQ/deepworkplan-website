@@ -109,14 +109,11 @@ Choose the right hydration directive:
 | (none) | Never | Static content |
 
 ```astro
-<!-- Header needs immediate interactivity -->
+<!-- Header needs immediate interactivity (includes the inline lamp theme toggle) -->
 <Header client:load />
 
 <!-- Below-fold section can wait until visible -->
 <ScrollSpyNav client:visible />
-
-<!-- Theme toggle can wait for idle -->
-<ThemeToggle client:idle />
 
 <!-- Mobile menu only on small screens -->
 <MobileMenu client:media="(max-width: 768px)" />
