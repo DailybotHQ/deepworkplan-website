@@ -53,33 +53,28 @@ Synchronize content from English (en) across all active languages — pages, met
 
 ### Step 1: Detect Source Language and Content Type
 
-Determine the source language and content type from the file path:
+Determine the source language and content type from the file path. The site ships 17 active languages today (en, es, pt, zh, ja, de, fr, ko, ru, it, tr, id, vi, hi, pl, uk, th); `<lang>` below is any of those codes:
 
 | Path Pattern | Language | Content Type |
 |---|---|---|
-| `src/pages/es/**` | Spanish | page |
-| `src/pages/**` (not es/) | English | page |
-| `src/content/{methodology,spec,kit}/es/**` | Spanish | content-doc |
-| `src/content/{methodology,spec,kit}/en/**` | English | content-doc |
-| `src/content/pages/es/**` | Spanish | content-doc (page .md) |
-| `src/content/pages/en/**` | English | content-doc (page .md) |
-| `src/lib/translations/en.ts` | English | translation-strings |
-| `src/lib/translations/es.ts` | Spanish | translation-strings |
+| `src/content/{methodology,spec,kit}/<lang>/**` | the matching lang | content-doc |
+| `src/content/pages/<lang>/**` | the matching lang | content-doc (page .md) |
+| `src/lib/translations/<lang>.ts` | the matching lang | translation-strings |
 
-Set target language to the opposite of source.
+Page wrappers under `src/pages/` are NOT translated content — they are 3-line routing shells. The default-language wrapper lives at `src/pages/<name>.astro` and the single dynamic wrapper at `src/pages/[lang]/<name>.astro` covers every other active language. Page wrappers do not need per-language duplication for translation.
 
-### Step 2: Find or Create Target File
+### Step 2: Find or Create Target File(s)
 
-Map source to target path:
+Translation fans out from the source to every other active language (not just one target). Use `src/lib/i18n.ts` `getActiveLanguages()` as the source of truth.
 
-| Source | Target |
+Map source to target paths:
+
+| Source | Targets |
 |---|---|
-| `src/pages/{path}.astro` | `src/pages/es/{path}.astro` |
-| `src/pages/es/{path}.astro` | `src/pages/{path}.astro` |
-| `src/content/{collection}/en/{slug}.md` | `src/content/{collection}/es/{slug}.md` |
-| `src/content/{collection}/es/{slug}.md` | `src/content/{collection}/en/{slug}.md` |
+| `src/content/{collection}/<src-lang>/{slug}.md` | `src/content/{collection}/<other-lang>/{slug}.md` for **every** active `<other-lang>` |
+| `src/lib/translations/<src-lang>.ts` | every other `src/lib/translations/<other-lang>.ts` (preserve interface shape from `types.ts`) |
 
-If the target file does not exist, create it using the source as a template. If it exists, update it to match the source structure.
+When invoked for a single content change, prioritize the source-lang → en path first (if the source isn't English), then en → all other active languages, so the canonical English version is correct before downstream propagation. If a target file does not exist, create it using the source as a template; if it exists, update it to match the source structure.
 
 ### Step 3: Translate Content
 

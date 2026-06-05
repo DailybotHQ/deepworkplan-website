@@ -330,7 +330,7 @@ All skills and agents are adapted for this Astro repository:
 - **Components:** Astro (.astro) and Svelte (.svelte)
 - **Styling:** Tailwind CSS with dark mode
 - **Content:** Content Collections in `src/content/`
-- **i18n:** Multilingual-ready (currently English/Spanish) with centralized config in `src/lib/i18n.ts`, modular translations in `src/lib/translations/`, shared page components in `src/components/pages/`, and thin per-language wrappers
+- **i18n:** Multilingual (17 active languages: en, es, pt, zh, ja, de, fr, ko, ru, it, tr, id, vi, hi, pl, uk, th — derived from `src/lib/translations/*.ts` via `getActiveLanguages()`) with centralized config in `src/lib/i18n.ts`, shared page components in `src/components/pages/`, one default-language wrapper in `src/pages/`, and one dynamic `src/pages/[lang]/<slug>.astro` wrapper that covers every non-default language
 - **Testing:** Vitest (`pnpm run test`)
 
 ---

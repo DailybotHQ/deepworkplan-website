@@ -71,10 +71,10 @@ Source Files → Astro Build → Static Output
 ```
 src/
 ├── components/              # Reusable UI components
-│   ├── BaseHead.astro       # <head> content (SEO, meta)
+│   ├── BaseHead.astro       # <head> content (SEO, meta, hreflang, OG, JSON-LD)
 │   ├── Footer.astro         # Site footer
-│   ├── ThemeToggle.astro    # Dark mode switch
-│   ├── FormattedDate.astro  # Date formatting
+│   ├── WebMcp.astro         # WebMCP progressive enhancement (agent-discoverable site map)
+│   ├── FormattedDate.astro  # Date formatting (per-language)
 │   ├── HeaderLink.astro     # Navigation link
 │   │
 │   ├── home/                # Homepage sections
@@ -93,59 +93,56 @@ src/
 │   ├── pages/              # Shared page components (*Page.astro, InitPage, readers)
 │   │
 │   └── layout/
-│       ├── Header.svelte        # Masthead navigation
+│       ├── Header.svelte        # Masthead navigation + inline hurricane-lamp theme toggle
 │       └── MobileMenu.svelte    # Mobile nav menu
 │
-├── content/                 # Content Collections
+├── content/                 # Content Collections (one folder per active language)
 │   ├── methodology/         # Methodology docs (primary content)
-│   │   ├── en/              # English (.md)
-│   │   └── es/              # Spanish (.md)
-│   ├── spec/                # Readable specification
-│   │   ├── en/
-│   │   └── es/
-│   ├── kit/                 # Kit catalog (presets, adapters, commands, examples, addons)
-│   │   ├── en/
-│   │   └── es/
-│   └── pages/               # Page Markdown for AI agents
-│       ├── en/              # English page content (.md endpoints)
-│       └── es/              # Spanish page content (.md endpoints)
+│   │   ├── en/, es/, pt/, zh/, ja/, de/, fr/, ko/, ru/, it/, tr/, id/, vi/, hi/, pl/, uk/, th/   # 17 language folders
+│   ├── spec/                # Readable specification (same 17 language folders)
+│   ├── kit/                 # Kit catalog (same 17 language folders)
+│   └── pages/               # Agent-friendly Markdown endpoints (same 17 language folders)
 │
 ├── content.config.ts        # Collection schemas (methodology, spec, kit, pages)
 ├── env.d.ts                 # TypeScript environment
 │
 ├── layouts/
-│   └── MainLayout.astro     # Base page layout
+│   ├── MainLayout.astro     # Base page layout (public site)
+│   ├── InternalLayout.astro # Dev-only hub layout
+│   └── ShowcaseLayout.astro # Dev-only design-system showcase layout
 │
 ├── lib/                     # Utilities
-│   ├── i18n.ts              # Centralized i18n config & utilities
+│   ├── i18n.ts              # Centralized i18n config; getActiveLanguages() derived from translations/*.ts
+│   ├── language-codes.ts    # Dependency-free LANGUAGE_CODES tuple (imported by i18n + astro.config)
 │   ├── markdown-for-agents.ts  # Helpers for the agent-friendly .md endpoints
 │   ├── analytics.ts         # Analytics helpers
 │   ├── constances.ts        # Site constants
-│   └── translations/        # Modular translation system
-│       ├── index.ts         # Public API barrel: getTranslations(), re-exports
+│   └── translations/        # Modular translation system (one file per active language)
+│       ├── index.ts         # Public API barrel: getTranslations(), glob-loads <lang>.ts
 │       ├── types.ts         # SiteTranslations interface + all sub-interfaces
-│       ├── en.ts            # English translations
-│       └── es.ts            # Spanish translations
+│       └── en.ts, es.ts, pt.ts, zh.ts, ja.ts, de.ts, fr.ts, ko.ts, ru.ts, it.ts, tr.ts, id.ts, vi.ts, hi.ts, pl.ts, uk.ts, th.ts
 │
 ├── pages/                   # File-based routing
-│   ├── index.astro          # Home (English)
-│   ├── es/index.astro       # Home (Spanish)
-│   ├── about.astro
+│   ├── index.astro          # Home (default language: English)
+│   ├── about.astro          # ~3-line wrapper passing lang="en"
 │   ├── contact.astro
-│   ├── examples.astro
-│   ├── quickstart.astro
-│   ├── init.astro
-│   ├── methodology/
-│   │   ├── index.astro      # Methodology reader index
-│   │   ├── [slug].astro     # Methodology document
-│   │   └── [page].md.ts     # Agent-friendly .md endpoint
-│   ├── spec/                # Spec reader (index + [slug] + [page].md.ts)
-│   ├── kit/                 # Kit reader (index + [slug] + [page].md.ts)
-│   ├── internal/            # Dev-only hub (excluded from production)
+│   ├── examples/            # Reader index + [slug] + .md endpoint
+│   ├── kit/                 # Reader index + [slug] + .md endpoint
+│   ├── methodology/         # Reader index + [slug] + .md endpoint
+│   ├── spec/                # Reader index + [slug] + .md endpoint
+│   ├── quickstart/, init/   # Section + nested pages
+│   ├── [lang]/              # Single dynamic tree serving ALL non-default languages
+│   │   ├── index.astro      # Home (non-default langs); getStaticPaths from registry
+│   │   ├── about.astro      # Same component, lang derived from Astro.params
+│   │   ├── examples/, kit/, methodology/, spec/, quickstart/, init/
+│   │   └── …
+│   ├── internal/            # Dev-only hub (excluded from production builds)
 │   └── api/                 # JSON endpoints
 │
+├── middleware.ts            # Route allowlist (KNOWN_BASE_PATHS, derived KNOWN_ROOT_PATHS); see below
+│
 └── styles/
-    └── global.css           # Global styles, Tailwind
+    └── global.css           # Global styles, Tailwind 4 @theme tokens, base browser-compat reset
 ```
 
 ## Component Architecture
@@ -259,15 +256,14 @@ Control when Svelte components load JavaScript:
 | (none) | No hydration | Static rendering |
 
 ```astro
-<!-- Header needs immediate interactivity -->
+<!-- Header needs immediate interactivity (includes the inline hurricane-lamp theme toggle) -->
 <Header client:load lang={lang} />
 
 <!-- Mobile menu can wait until visible -->
 <MobileMenu client:visible lang={lang} />
-
-<!-- Theme toggle can wait for idle -->
-<ThemeToggle client:idle />
 ```
+
+Note: the standalone `ThemeToggle.astro` component has been removed. The theme toggle is now a hurricane-lamp `<button>` inline in `src/components/layout/Header.svelte`; it ships as part of the masthead and inherits the Header's `client:load` directive.
 
 ## Content Collections
 
@@ -434,21 +430,23 @@ const { Content } = await render(doc);
 
 ### Middleware Allowlist (CRITICAL)
 
-`src/middleware.ts` enforces a **hardcoded allowlist** of single-segment top-level paths via `KNOWN_ROOT_PATHS` and `KNOWN_ES_PATHS`. Any single-segment URL not in the set is rewritten to `/404` — **even if the file exists at `src/pages/<name>/index.astro`**.
+`src/middleware.ts` enforces an **allowlist** of single-segment top-level paths. Any single-segment URL not in the set is rewritten to `/404` — **even if the file exists at `src/pages/<name>/index.astro`**. The allowlist is **derived** from one hand-edited set plus the language registry, so adding a new language requires no middleware edit at all:
+
+- `KNOWN_BASE_PATHS` — per-language page slugs (e.g. `about`, `contact`, `methodology`, `spec`, `kit`, `examples`, `quickstart`, `init`, `setup`, `onboarding`). These exist for **every** language: at the root for the default language and under `/<lang>/<slug>` for every other active language. ONE place, covers all languages.
+- `ROOT_ONLY_PATHS` — non-per-language paths (`api`, `internal`, `404`, `favicon.ico`, `favicon.svg`, `sitemap-index.xml`).
+- `PREFIXED_LANGUAGES` — active non-default language codes (`es`, `pt`, `zh`, …), derived from `getActiveNonDefaultLanguages()` in `src/lib/i18n.ts`. These are the valid single-segment language roots (`/es`, `/pt`, …).
+- `KNOWN_ROOT_PATHS` — derived union of the three sets above (`KNOWN_BASE_PATHS` ∪ `ROOT_ONLY_PATHS` ∪ `PREFIXED_LANGUAGES`).
 
 **Why it matters when adding a new page:**
 
-When you add a new top-level page (e.g. `/guides`, `/foo`), you MUST also add `'<name>'` to:
-
-- `KNOWN_ROOT_PATHS` — for the English version (`/<name>`)
-- `KNOWN_ES_PATHS` — for the Spanish version (`/es/<name>`), if it exists
+When you add a new top-level page (e.g. `/guides`, `/foo`), you only edit ONE place: add `'<name>'` to `KNOWN_BASE_PATHS`. That single entry covers `/foo`, `/es/foo`, `/pt/foo`, `/zh/foo`, … automatically.
 
 **Symptoms of forgetting:**
 
 | URL | Result | Explanation |
 |-----|--------|-------------|
-| `/<name>` | 404 | Single segment, not in allowlist → middleware rewrites to /404 |
-| `/<name>/` | 404 | Same as above |
+| `/<name>` | 404 | Single segment, not in `KNOWN_ROOT_PATHS` → middleware rewrites to /404 |
+| `/<lang>/<name>` | 404 | `lang` is a prefixed-language root but `name` is not in `KNOWN_BASE_PATHS` |
 | `/<name>/sub-path` | 200 | Multi-segment, allowlist rule does not apply |
 | `/<name>/index.html` | 200 | Path contains `.`, middleware skips the check |
 
@@ -456,13 +454,7 @@ When you add a new top-level page (e.g. `/guides`, `/foo`), you MUST also add `'
 
 The bypass conditions (path contains `.` or starts with `/_astro/`, `/__vite`, `/@`) exist to let assets, HMR, and build artifacts through.
 
-**Adoption endpoint `/init`.** The canonical adoption surface lives at `/init` (EN) and `/es/init` (ES),
-served by `InitPage.astro` + thin wrappers. `init` is present in both `KNOWN_ROOT_PATHS` and
-`KNOWN_ES_PATHS`. Its agent prompt is published at `/init.md` (and `/es/init.md`) through the dynamic
-`[page].md.ts` route, sourced from `src/content/pages/{en,es}/init.md`. `/setup` and `/onboarding` (plus
-`/es/` variants) are permanent 301 redirects to `/init`, configured in `astro.config.mjs`; the redirect
-source paths are also in the allowlist. ES redirect destinations use absolute URLs because Astro strips the
-`/es` locale segment from relative redirect targets.
+**Adoption endpoint `/init`.** The canonical adoption surface lives at `/init` (default language) and `/<lang>/init` for every other active language (`/es/init`, `/pt/init`, `/zh/init`, …), served by `InitPage.astro` + the page-wrapper pattern. `init` is present in `KNOWN_BASE_PATHS`, so it works in every language without a per-language allowlist edit. Its agent prompt is published at the **canonical English-only** URL `/init.md` (regardless of which locale a user is browsing) through the dynamic `[page].md.ts` route, sourced from `src/content/pages/en/init.md` — see `CANONICAL_INIT_MD_PATH` in `src/lib/i18n.ts`. `/setup` and `/onboarding` (plus their `/<lang>/` variants) are permanent 301 redirects to `/init`, configured in `astro.config.mjs`; the redirect source paths are also in `KNOWN_BASE_PATHS`.
 
 ## API Routes
 
@@ -745,8 +737,9 @@ Page wrappers in `src/pages/` never use translations directly — they just pass
 **Adding new translation keys:**
 
 1. Add the new interface field to `src/lib/translations/types.ts` (if needed)
-2. Add translations to both `src/lib/translations/en.ts` and `src/lib/translations/es.ts`
-3. Use the new key via `getTranslations(lang)` in components
+2. Add translations to **every** locale file under `src/lib/translations/` (en.ts, es.ts, pt.ts, zh.ts, …)
+3. Run `pnpm run i18n:check` to verify parity
+4. Use the new key via `getTranslations(lang)` in components
 
 ### Localized Content Collections
 

@@ -40,11 +40,13 @@ This project includes reusable **Skills** (procedures) and **Agents** (specializ
 
 | Type   | Tier 1 (Light) | Tier 2 (Standard) | Tier 3 (Heavy) | Total |
 |--------|:--------------:|:------------------:|:--------------:|:-----:|
-| Skills | 11             | 2                  | 0              | 13    |
+| Skills | 11             | 4                  | 1              | 16    |
 | Agents | 0              | 4                  | 1              | 5     |
-| **Total** | **11**      | **6**              | **1**          | **18** |
+| **Total** | **11**      | **8**              | **2**          | **21** |
 
-### Available Skills (13)
+> The `deepworkplan` skill (Tier 3) is the installed DWP methodology itself, mounted under `.agents/skills/deepworkplan/` as a reference install. It is not counted toward the per-skill tier breakdown above for routine tasks — it is the meta-skill that authors plans.
+
+### Available Skills
 
 | Skill | Invocation | Tier | Description |
 |-------|-----------|------|-------------|
@@ -56,11 +58,15 @@ This project includes reusable **Skills** (procedures) and **Agents** (specializ
 | security-check | `/security-check` | 1 | Quick security checklist (secrets, API routes, client exposure) |
 | git-commit-push | `/git-commit-push` | 1 | Commit all changes and push to remote |
 | add-component | `/add-component` | 1 | Create new Astro or Svelte component with correct patterns |
-| add-page | `/add-page` | 1 | Create new page with routing and MainLayout |
-| translate-sync | `/translate-sync` | 1 | Synchronize content between English and Spanish versions |
+| add-page | `/add-page` | 1 | Create new page (default-lang + `[lang]` dynamic wrappers, middleware allowlist) |
+| translate-sync | `/translate-sync` | 1 | Synchronize content across every active language (17 today) |
 | update-styles | `/update-styles` | 1 | Update Tailwind styles with dark mode support |
 | write-tests | `/write-tests` | 2 | Add or expand tests (Vitest/Playwright when configured) |
 | refactor-safe | `/refactor-safe` | 2 | Safe refactor in bounded scope (1-10 files, no behavior change) |
+| add-diagram-component | `/add-diagram-component` | 2 | Create an editorial SVG/HTML/CSS diagram component (Broadsheet system) |
+| add-language | `/add-language` | 2 | Scaffold + translate the full site into a new language code |
+| responsive-lighthouse-audit | `/responsive-lighthouse-audit` | 2 | Run mobile + desktop Lighthouse audit with the per-config CI configs |
+| deepworkplan | `/dwp-*` | 3 | Installed DWP methodology skill (reference install; authors long-horizon plans) |
 
 ### Available Agents (5)
 

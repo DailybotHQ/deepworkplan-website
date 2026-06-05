@@ -156,11 +156,13 @@ pnpm run dev
 1. Create shared component in `src/components/pages/{Name}Page.astro`
    - Accept `lang: Language` prop
    - Handle `MainLayout`, `getTranslations(lang)`, and content internally
-2. Create thin wrappers in `src/pages/{name}.astro` and `src/pages/es/{name}.astro`
-   - Each wrapper is 3 lines: import + render with `lang` as string literal
+2. Create **two** thin wrappers (covers every active language):
+   - `src/pages/{name}.astro` — 3 lines, renders with `lang="en"` string literal
+   - `src/pages/[lang]/{name}.astro` — dynamic wrapper with `getStaticPaths()` from `getActiveNonDefaultLanguages()`, derives `lang` from `Astro.params`. ONE file covers all 16 non-default languages
    - Wrappers never import `MainLayout`
-3. Add translation keys to `src/lib/translations/` for all languages if needed
-4. Run validation
+3. Add translation keys to **every** locale file under `src/lib/translations/` (en.ts, es.ts, pt.ts, zh.ts, …) if needed; run `pnpm run i18n:check`
+4. Add the page slug to `KNOWN_BASE_PATHS` in `src/middleware.ts` (one entry covers every language)
+5. Run validation
 
 ## Stop Conditions
 

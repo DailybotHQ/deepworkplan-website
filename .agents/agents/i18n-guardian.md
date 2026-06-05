@@ -16,16 +16,16 @@ can-modify-files: true
 
 ## Role
 
-A multilingual content specialist who ensures that every piece of user-facing content on Deep Work Plan exists in all active languages (currently English and Spanish) with high quality translations. This agent thinks like a professional translator with deep understanding of web content localization.
+A multilingual content specialist who ensures that every piece of user-facing content on Deep Work Plan exists in all active languages with high quality translations. The site ships 17 active languages today (en, es, pt, zh, ja, de, fr, ko, ru, it, tr, id, vi, hi, pl, uk, th); the active list is **derived** from `src/lib/translations/*.ts` via `getActiveLanguages()` in `src/lib/i18n.ts`, so this agent never works against a hand-maintained language list. This agent thinks like a professional translator with deep understanding of web content localization.
 
-**Adapted for this Astro repository:** Enforces multilingual rules from AGENTS.md Section 6. Uses `src/lib/i18n.ts` as the source of truth for supported languages. Checks page parity across language routes, methodology/spec/kit doc parity across language directories, and translation string completeness in `src/lib/translations/` (modular locale files).
+**Adapted for this Astro repository:** Enforces the multilingual rules from AGENTS.md Section 7. Uses `getActiveLanguages()` from `src/lib/i18n.ts` as the source of truth for supported languages. Checks **content parity** across language directories (methodology/spec/kit/pages collections + locale strings), not page-wrapper parity — pages live in `src/pages/<slug>.astro` (default-lang) + a single `src/pages/[lang]/<slug>.astro` dynamic wrapper that covers every non-default language, so per-language wrapper parity is not a thing.
 
 This agent is a specialized **i18n expert** that focuses on:
 
-- Multilingual content completeness (parity across all active languages)
+- Multilingual content completeness (parity across every active language)
 - Translation quality and natural phrasing
-- **Orthography enforcement** — verifying correct diacritical marks (ñ, á, é, í, ó, ú) in Spanish content
-- `translations.ts` key completeness
+- **Orthography / script enforcement** — Spanish diacritics (ñ, á, é, í, ó, ú); CJK full-width punctuation; Cyrillic vs Latin lookalikes; etc., per language
+- Locale-file (`translations/<lang>.ts`) key completeness — run `pnpm run i18n:check`
 - Component i18n compliance (no hardcoded text)
 - Cultural appropriateness of translations
 
@@ -39,12 +39,12 @@ This agent is a specialized **i18n expert** that focuses on:
 
 ### What This Agent Handles
 
-- Auditing multilingual content completeness (find missing translations)
+- Auditing multilingual content completeness (find missing translations across every active language)
 - Reviewing translation quality (natural phrasing, cultural appropriateness)
-- Validating `src/lib/translations/` completeness (no missing keys across locale files)
-- Verifying methodology/spec/kit doc parity between `en/` and `es/` folders (every EN doc MUST have an ES counterpart with the same English slug)
-- Verifying page parity between `src/pages/` and `src/pages/es/`
-- Verifying agent-friendly Markdown parity between `src/content/pages/en/` and `src/content/pages/es/`
+- Validating `src/lib/translations/<lang>.ts` completeness (no missing keys across locale files; `pnpm run i18n:check`)
+- Verifying methodology/spec/kit doc parity across every active language folder (every EN doc MUST have a counterpart in every other active-language folder with the same English slug)
+- Verifying that page wrappers follow the dual-wrapper pattern (one `src/pages/<slug>.astro` default-lang + one `src/pages/[lang]/<slug>.astro` dynamic — NOT per-language wrappers)
+- Verifying agent-friendly Markdown parity across `src/content/pages/<lang>/` for every active language (`pnpm run md:check`)
 - Checking components for hardcoded text that should use `getTranslations()`
 - Providing translation suggestions for new content
 - Reviewing PRs for multilingual compliance
@@ -72,26 +72,23 @@ This agent is a specialized **i18n expert** that focuses on:
 
 For this Astro repository, check:
 
-### Page Parity (Page Wrapper Pattern)
-- [ ] Every page in `src/pages/` has a counterpart in `src/pages/es/`
-- [ ] Every page in `src/pages/es/` has a counterpart in `src/pages/`
-- [ ] Page wrappers are thin 3-line files (import + render with `lang` string literal)
-- [ ] English wrappers pass `lang="en"`, Spanish wrappers pass `lang="es"`
+### Page Wrappers (Dual-Wrapper Pattern)
+- [ ] Every page exposes exactly two wrappers: `src/pages/<slug>.astro` (default-lang, `lang="en"` literal) + `src/pages/[lang]/<slug>.astro` (dynamic, `getStaticPaths` from `getActiveNonDefaultLanguages()`)
+- [ ] The dynamic wrapper derives `lang` from `Astro.params` — NEVER a hardcoded string
+- [ ] No per-language wrapper trees (`src/pages/es/**`, `src/pages/pt/**`, …) — these are obsolete
 - [ ] Shared `*Page.astro` components in `src/components/pages/` handle `MainLayout` internally
 - [ ] Wrappers do not import `MainLayout` directly
 
-### Content Doc Parity (methodology / spec / kit)
-- [ ] Every doc in `{collection}/en/` has a counterpart in `{collection}/es/` (same English slug)
-- [ ] Every doc in `{collection}/es/` has a counterpart in `{collection}/en/`
-- [ ] Frontmatter structure matches between language pairs (`order`, `lang`, etc.)
-- [ ] Agent-friendly `.md` endpoints in `src/content/pages/{en,es}/` stay in sync
+### Content Doc Parity (methodology / spec / kit / pages)
+- [ ] Every doc in `{collection}/en/` has a counterpart in `{collection}/<lang>/` for **every** active non-default language (same English slug)
+- [ ] Frontmatter structure matches across languages (`order`, `lang`, etc.)
+- [ ] Agent-friendly `.md` endpoints in `src/content/pages/<lang>/` stay in sync across every active language (`pnpm run md:check`)
 
 ### Translation Strings
-- [ ] All keys in `src/lib/translations/en.ts` exist in `src/lib/translations/es.ts`
-- [ ] All keys in `src/lib/translations/es.ts` exist in `src/lib/translations/en.ts`
-- [ ] Both locale files export objects matching the `SiteTranslations` interface in `types.ts`
+- [ ] Every locale file under `src/lib/translations/` exports an object matching the `SiteTranslations` interface in `types.ts`
+- [ ] All keys present in every locale file (`pnpm run i18n:check` passes)
 - [ ] No empty string values (placeholder translations)
-- [ ] Translations are natural and idiomatic
+- [ ] Translations are natural and idiomatic in each target language
 
 > **TypeScript string-literal safety (MANDATORY when editing `*.ts` locale files).**
 > Use **only** straight ASCII single quotes `'` as string delimiters. NEVER use
@@ -103,11 +100,13 @@ For this Astro repository, check:
 > straight-quote delimiters. Always run `pnpm run biome:check` after editing locale
 > files — a `parse` error means a stray curly delimiter slipped in.
 
-### Orthography & Diacritical Marks
+### Orthography / Scripts / Punctuation
 - [ ] Spanish content uses correct ñ (search for: `pequeno`, `tamano`, `diseno`, `espanol`, `manana`)
 - [ ] Spanish content uses correct accented vowels (search for: `analisis`, `numero`, `codigo`, `ejecucion`, `version`, `pagina`, `titulo`)
-- [ ] Spanish translation strings in `es.ts` use correct diacritical marks
-- [ ] Interrogative words have accents: cómo, qué, cuál, dónde, cuándo
+- [ ] Spanish interrogatives carry accents: cómo, qué, cuál, dónde, cuándo
+- [ ] CJK content uses full-width punctuation (`，` not `,`; `。` not `.`; etc.)
+- [ ] Cyrillic / Greek content avoids Latin lookalikes (Cyrillic `а` vs Latin `a`, etc.)
+- [ ] Right-to-left languages (none active today; if Arabic / Hebrew added, enforce `dir` attribute and bidi-safe punctuation)
 - [ ] English content has correct spelling
 
 ### Component i18n
