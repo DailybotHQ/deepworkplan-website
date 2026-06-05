@@ -1,25 +1,25 @@
 ---
 title: OpenAI Codex
-description: "L’adapter DWP per OpenAI Codex, con supporto parziale tramite procedure di comando in Markdown e il prefisso cancelletto; le funzionalità di team agent non sono disponibili."
+description: "L'adapter DWP per OpenAI Codex, con supporto completo tramite procedure di comando in Markdown e il prefisso cancelletto che eseguono l'intero ciclo Deep Work Plan."
 kind: adapter
 lang: it
 order: 3
 agent: OpenAI Codex
-support: partial
+support: full
 prefix: '#'
 ---
 
 # Adapter OpenAI Codex
 
-OpenAI Codex supporta DWP tramite procedure di comando in Markdown.
+Codex supporta DWP tramite procedure di comando in Markdown.
 
 ## Livello di supporto
 
-**Parziale** — i comandi principali funzionano; le funzionalità avanzate (team agent) non sono disponibili.
+**Completo** — ogni comando dwp-* viene eseguito dal suo file di procedura.
 
 ## Installazione
 
-I comandi DWP vivono come procedure Markdown che l’agente legge all’invocazione.
+I comandi DWP vivono come procedure Markdown che l'agente legge all'invocazione; le regole sono installate sotto `.codex/`.
 
 ## Invocazione
 
@@ -32,4 +32,4 @@ Usi il prefisso `#`:
 
 ## Note
 
-Le funzionalità di team agent sono esclusive di Claude; Codex supporta il workflow sequenziale.
+Codex legge i file di procedura ed esegue l'intero ciclo sequenziale di Deep Work Plan.

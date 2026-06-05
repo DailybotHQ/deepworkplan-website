@@ -36,8 +36,8 @@ Schlanke Slash-Befehle delegieren an die Sub-Skills und Addons:
 
 ### Adapter
 
-Schlanke Integrationen je Agent für Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini und
-Antigravity.
+Schlanke Integrationen je Agent für Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
+OpenCode, Windsurf, Cline und Antigravity.
 
 ### Onboarding-Presets
 

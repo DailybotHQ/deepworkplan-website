@@ -1,25 +1,25 @@
 ---
 title: GitHub Copilot
-description: "L’adaptateur DWP pour GitHub Copilot, avec une prise en charge partielle via des procédures de commande en Markdown et le préfixe dièse ; une partie de l’automatisation se fait manuellement."
+description: "L’adaptateur DWP pour GitHub Copilot, avec une prise en charge complète via AGENTS.md et des procédures de commande en Markdown invoquées avec le préfixe dièse."
 kind: adapter
 lang: fr
 order: 4
 agent: GitHub Copilot
-support: partial
-prefix: '#'
+support: full
+prefix: ‘#’
 ---
 
 # Adaptateur GitHub Copilot
 
-GitHub Copilot prend en charge DWP via des procédures de commande en Markdown.
+Copilot prend en charge DWP via AGENTS.md et des procédures de commande en Markdown.
 
 ## Niveau de prise en charge
 
-**Partiel** — les commandes de base fonctionnent via des fichiers de procédure ; une partie de l’automatisation est manuelle.
+**Complet** — Copilot lit AGENTS.md et les fichiers de procédure dwp-*, et exécute chaque commande depuis ceux-ci.
 
 ## Installation
 
-Les commandes DWP existent sous forme de procédures en Markdown dans le dépôt.
+DWP fournit AGENTS.md et les procédures de commande dans le dépôt ; Copilot les lit comme contexte du dépôt.
 
 ## Invocation
 
@@ -32,4 +32,4 @@ Utilisez le préfixe `#` :
 
 ## Notes
 
-Copilot lit les fichiers de procédure mais offre une exécution moins autonome que Claude Code.
+Copilot lit les fichiers de procédure et exécute l’intégralité de la boucle séquentielle Deep Work Plan.

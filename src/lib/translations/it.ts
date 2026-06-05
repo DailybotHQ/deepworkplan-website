@@ -208,6 +208,7 @@ export const it: SiteTranslations = {
         'Una metodologia, molti adapter. Il Markdown non accoppia il framework a nulla — ogni agente che legge Markdown può eseguire un Deep Work Plan.',
       fullLabel: 'Completo',
       partialLabel: 'Parziale',
+      viewAllCta: 'Vedi tutti gli agenti',
       items: [
         {
           name: 'Claude Code',
@@ -226,13 +227,28 @@ export const it: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: 'Solo docs e AGENTS.md. Slash command tramite estensioni.',
+          support: 'full',
+          note: 'Adapter completo — i comandi dwp-* girano tramite AGENTS.md e le procedure #.',
         },
         {
           name: 'Gemini',
           support: 'full',
           note: 'Richiede Gemini 2.5 Pro o versione successiva, con WebFetch nativo.',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: 'Open source. Legge AGENTS.md in modo nativo ed esegue dwp-* tramite comandi #.',
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: "Le regole e le procedure dei comandi # guidano l'intero ciclo Deep Work Plan.",
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: 'Open source. Le regole Markdown e i comandi # eseguono ogni passo dwp-*.',
         },
         {
           name: 'Antigravity',
@@ -244,6 +260,7 @@ export const it: SiteTranslations = {
     stacks: {
       badge: 'Stack',
       title: 'Preset di ragionamento per gli stack che contano.',
+      viewAllCta: 'Vedi tutti i preset',
       subtitle:
         'Sono ausili al ragionamento, non template. L’onboarding legge i manifest reali del Suo repository e si adatta a ogni stack — non copia mai un preset alla cieca. I monorepo ottengono documentazione per modulo.',
       items: [

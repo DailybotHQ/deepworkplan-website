@@ -36,8 +36,8 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ### Адаптеры
 
-Тонкие интеграции для отдельных агентов: Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini и
-Antigravity.
+Тонкие интеграции для отдельных агентов: Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
+OpenCode, Windsurf, Cline и Antigravity.
 
 ### Пресеты онбординга
 

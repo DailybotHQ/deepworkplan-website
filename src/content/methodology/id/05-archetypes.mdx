@@ -6,15 +6,20 @@ lang: id
 summary: Mengapa arketipe sebuah repositori menentukan cara agent meng-onboard dan menetapkan lingkup rencana.
 icon: layers
 ---
+import ArchetypesCompare from '@/components/diagrams/home/ArchetypesCompare.astro';
 import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
 
-# Repository archetypes
+# Arketipe repositori
 
-DWP mengenali dua arketipe repositori. Arketipe yang disimpulkan agent menentukan cara ia meng-onboard dan cara ia menetapkan lingkup rencana, sehingga mengidentifikasinya dengan benar adalah keputusan pertama dalam setiap penugasan.
+Sebelum mengubah satu baris pun, agent membuat satu keputusan yang membentuk segalanya setelahnya: **repositori macam apa ini?** Arketipe yang disimpulkannya menetapkan batas tempat ia akan bernalar sepanjang penugasan — cara ia meng-onboard, seberapa jauh sebuah rencana menjangkau, dan di mana status disimpan. Salah identifikasi, dan agent akan menetapkan lingkup pekerjaan pada permukaan yang keliru — sumber drift paling umum pada tugas berjangka panjang. Identifikasi dengan benar, dan agent dapat bekerja secara otonom selama berjam-jam, karena rencana, onboarding, dan status semuanya selaras dengan bentuk kode yang sesungguhnya.
+
+DWP mengenali dua arketipe. Sebagian besar repositori termasuk yang pertama; yang kedua ada untuk tim yang mengoordinasikan banyak repositori.
+
+<ArchetypesCompare lang="id" class="not-prose my-10" />
 
 ## Repositori individual
 
-Sebuah basis kode yang mandiri — sebuah aplikasi, sebuah pustaka, atau sebuah layanan. Rencana beroperasi langsung pada kode di dalam repositori, dan onboarding membaca struktur serta konvensi repositori itu sendiri.
+Kasus umum: sebuah basis kode yang mandiri — sebuah aplikasi, sebuah pustaka, atau sebuah layanan. Ada satu permukaan koheren untuk dinalar, sehingga rencana beroperasi langsung pada kode di dalam repositori dan onboarding membaca struktur serta konvensi repositori itu sendiri. Agent memegang seluruh basis kode sebagai konteksnya dan mengerjakannya dari ujung ke ujung.
 
 Karakteristik:
 
@@ -24,7 +29,7 @@ Karakteristik:
 
 ## Orchestrator hub
 
-Sebuah repositori koordinasi yang mengelola beberapa repositori turunan. Rencana dapat memunculkan rencana turunan di sub-repositori, dan onboarding membaca registri repositori yang dikelola hub alih-alih satu basis kode.
+Kasus koordinasi: sebuah repositori yang tugasnya adalah mengelola repositori lain. Di sini unit kerja bukan sebuah berkas melainkan sebuah repositori turunan, sehingga rencana dapat memunculkan rencana turunan di sub-repositori, dan onboarding membaca registri repositori yang dikelola hub alih-alih satu basis kode. Agent bernalar tentang batas dan serah terima — repositori mana yang memiliki pekerjaan yang mana, dan bagaimana status mereka tetap konsisten.
 
 Karakteristik:
 
@@ -35,11 +40,15 @@ Karakteristik:
 
 ## Heuristik klasifikasi
 
-<ArchetypesTree lang="en" class="not-prose my-10" />
+Kedua arketipe terlihat berbeda di disk, dan agent memilih di antara keduanya berdasarkan sinyal yang dapat diverifikasinya — bukan label yang diberitahukan kepadanya. Pohon keputusan di bawah ini menunjukkan jalurnya; singkatnya, perlakukan sebuah repositori sebagai orchestrator hub hanya ketika bukti menuntutnya, dan sebagai repositori individual dalam kondisi lainnya.
 
-Sebuah agent sebaiknya mengklasifikasikan sebuah repositori sebagai orchestrator hub ketika ia menemukan beberapa repositori git bersarang atau submodule, sebuah registri atau manifes repositori yang dikelola, atau konfigurasi yang menunjuk ke repositori eksternal. Dengan tidak adanya sinyal-sinyal itu, ia memperlakukan repositori sebagai repositori individual.
+<ArchetypesTree lang="id" class="not-prose my-10" />
+
+Sebuah agent sebaiknya mengklasifikasikan sebuah repositori sebagai orchestrator hub ketika ia menemukan beberapa repositori git bersarang atau submodule, sebuah registri atau manifes repositori yang dikelola, atau konfigurasi yang menunjuk ke repositori eksternal. Dengan tidak adanya sinyal-sinyal itu, ia memperlakukan repositori sebagai repositori individual — nilai default yang aman, karena menetapkan lingkup rencana terlalu luas melampaui batas yang tidak ada lebih buruk daripada bekerja dalam batas yang ada.
 
 ## Bagaimana onboarding berbeda
+
+Arketipe bukan sekadar label kosmetik; ia mengubah apa yang dibaca agent, apa yang boleh disentuh rencana, dan di mana status dicatat.
 
 | Aspek | Individual | Orchestrator |
 |--------|------------|--------------|
@@ -50,4 +59,4 @@ Sebuah agent sebaiknya mengklasifikasikan sebuah repositori sebagai orchestrator
 
 Efek praktisnya adalah bahwa agent repositori individual bernalar tentang satu basis kode dari ujung ke ujung, sementara agent orchestrator bernalar tentang koordinasi — repositori turunan mana yang memiliki pekerjaan yang mana, dan bagaimana status lintas repositori tetap konsisten.
 
-Menetapkan arketipe dengan benar adalah yang memungkinkan agent bekerja secara otonom selama berjam-jam tanpa pengawasan: ia menetapkan lingkup rencana, onboarding, dan status ke batas yang tepat, sehingga agent beroperasi pada permukaan yang benar dari tugas pertama sampai terakhir.
+Inilah yang memungkinkan agent bekerja secara otonom selama berjam-jam tanpa pengawasan: dengan menetapkan arketipe terlebih dahulu, ia menetapkan lingkup rencana, onboarding, dan status ke batas yang tepat, sehingga setiap tugas dari yang pertama hingga yang terakhir beroperasi pada permukaan yang benar.

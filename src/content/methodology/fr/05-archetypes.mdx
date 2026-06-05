@@ -1,45 +1,54 @@
 ---
 title: Archétypes de dépôt
-description: "Les archétypes dépôt individuel et hub orchestrateur, l’heuristique de classification d’un dépôt, et en quoi l’onboarding et le périmètre des plans diffèrent entre eux."
+description: "Les archétypes dépôt individuel et hub orchestrateur, l'heuristique de classification d'un dépôt, et en quoi l'onboarding et le périmètre des plans diffèrent entre eux."
 order: 5
 lang: fr
-summary: Pourquoi l’archétype d’un dépôt détermine la façon dont un agent s’intègre et cadre les plans.
+summary: Pourquoi l'archétype d'un dépôt détermine la façon dont un agent s'intègre et cadre les plans.
 icon: layers
 ---
+import ArchetypesCompare from '@/components/diagrams/home/ArchetypesCompare.astro';
 import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
 
 # Archétypes de dépôt
 
-DWP reconnaît deux archétypes de dépôt. L’archétype qu’un agent infère détermine la façon dont il s’intègre et dont il cadre les plans ; l’identifier correctement est donc la première décision de tout engagement.
+Avant de modifier une seule ligne, un agent prend une décision qui conditionne tout ce qui suit : **quel type de dépôt est-ce ?** L'archétype qu'il infère fixe la frontière à l'intérieur de laquelle il raisonnera pour le reste de l'engagement — comment il s'intègre, jusqu'où un plan s'étend et où l'état réside. Se tromper revient à cadrer le travail sur la mauvaise surface, source la plus fréquente de dérive sur les tâches à long horizon. Trouver le bon archétype permet à l'agent de travailler en autonomie pendant des heures, car les plans, l'onboarding et l'état s'alignent sur la forme réelle du code.
+
+DWP reconnaît deux archétypes. La plupart des dépôts sont du premier type ; le second existe pour les équipes qui en coordonnent plusieurs.
+
+<ArchetypesCompare lang="fr" class="not-prose my-10" />
 
 ## Dépôt individuel
 
-Une base de code autonome — une application, une bibliothèque ou un service. Les plans opèrent directement sur le code du dépôt, et l’onboarding lit la structure et les conventions propres au dépôt.
+Le cas courant : une base de code autonome — une application, une bibliothèque ou un service. Il n'y a qu'une seule surface cohérente sur laquelle raisonner, de sorte que les plans opèrent directement sur le code du dépôt et que l'onboarding lit la structure et les conventions propres au dépôt. L'agent garde l'intégralité de la base de code comme contexte et y travaille de bout en bout.
 
 Caractéristiques :
 
 - Une base de code unique et cohérente.
 - Les plans modifient les fichiers de ce dépôt.
-- L’espace de travail `.dwp/` réside à la racine du dépôt.
+- L'espace de travail `.dwp/` réside à la racine du dépôt.
 
 ## Hub orchestrateur
 
-Un dépôt de coordination qui gère plusieurs dépôts enfants. Les plans peuvent lancer des plans enfants dans des sous-dépôts, et l’onboarding lit le registre des dépôts gérés par le hub plutôt qu’une base de code unique.
+Le cas de coordination : un dépôt dont le rôle est de gérer d'autres dépôts. L'unité de travail n'est plus un fichier mais un dépôt enfant ; les plans peuvent donc lancer des plans enfants dans des sous-dépôts, et l'onboarding lit le registre des dépôts gérés par le hub plutôt qu'une base de code unique. L'agent raisonne sur les frontières et les transferts — quel dépôt enfant détient quel travail, et comment leur état reste cohérent.
 
 Caractéristiques :
 
 - Coordonne plusieurs sous-dépôts.
 - Les plans peuvent déléguer à des plans enfants.
 - Maintient un registre des dépôts gérés.
-- L’espace de travail `.dwp/` à la racine du hub suit l’état inter-dépôts.
+- L'espace de travail `.dwp/` à la racine du hub suit l'état inter-dépôts.
 
 ## Heuristique de classification
 
+Les deux archétypes se présentent différemment sur le disque, et l'agent choisit entre eux à partir de signaux qu'il peut vérifier — non d'un label qu'on lui a communiqué. L'arbre de décision ci-dessous montre le chemin ; en résumé, traitez un dépôt comme un hub orchestrateur uniquement lorsque les preuves l'exigent, et comme un dépôt individuel dans les autres cas.
+
 <ArchetypesTree lang="fr" class="not-prose my-10" />
 
-Un agent doit classer un dépôt comme hub orchestrateur lorsqu’il trouve plusieurs dépôts git imbriqués ou des sous-modules, un registre ou un manifeste de dépôts gérés, ou une configuration qui pointe vers des dépôts externes. En l’absence de ces signaux, il traite le dépôt comme un dépôt individuel.
+Un agent doit classer un dépôt comme hub orchestrateur lorsqu'il trouve plusieurs dépôts git imbriqués ou des sous-modules, un registre ou un manifeste de dépôts gérés, ou une configuration qui pointe vers des dépôts externes. En l'absence de ces signaux, il traite le dépôt comme un dépôt individuel — le comportement sûr par défaut, car surétendre un plan au-delà de frontières inexistantes est pire que travailler dans une frontière qui existe.
 
-## En quoi l’onboarding diffère
+## En quoi l'onboarding diffère
+
+L'archétype n'est pas un simple label cosmétique ; il change ce que l'agent lit, ce qu'un plan peut toucher et où l'état est enregistré.
 
 | Aspect | Individuel | Orchestrateur |
 |--------|------------|--------------|
@@ -48,6 +57,6 @@ Un agent doit classer un dépôt comme hub orchestrateur lorsqu’il trouve plus
 | Cible du plan | Fichiers locaux | Plans enfants |
 | État | `.dwp/` local | `.dwp/` inter-dépôts |
 
-L’effet pratique est qu’un agent de dépôt individuel raisonne sur une base de code de bout en bout, tandis qu’un agent orchestrateur raisonne sur la coordination — quel dépôt enfant détient quel travail, et comment l’état inter-dépôts reste cohérent.
+L'effet pratique est qu'un agent de dépôt individuel raisonne sur une base de code de bout en bout, tandis qu'un agent orchestrateur raisonne sur la coordination — quel dépôt enfant détient quel travail, et comment l'état inter-dépôts reste cohérent.
 
-Bien identifier l’archétype est ce qui permet à un agent de travailler en autonomie pendant des heures sans supervision : il cadre les plans, l’onboarding et l’état sur la bonne frontière, de sorte que l’agent opère sur la bonne surface, de la première tâche à la dernière.
+Bien identifier l'archétype est ce qui permet à un agent de travailler en autonomie pendant des heures sans supervision : il cadre les plans, l'onboarding et l'état sur la bonne frontière, de sorte que l'agent opère sur la bonne surface, de la première tâche à la dernière.

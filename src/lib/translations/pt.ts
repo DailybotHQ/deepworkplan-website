@@ -210,6 +210,7 @@ export const pt: SiteTranslations = {
         'Uma metodologia, muitos adaptadores. O Markdown não acopla o framework a nada — todo agente que lê Markdown pode executar um Deep Work Plan.',
       fullLabel: 'Completo',
       partialLabel: 'Parcial',
+      viewAllCta: 'Ver todos os agentes',
       items: [
         {
           name: 'Claude Code',
@@ -228,13 +229,28 @@ export const pt: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: 'Apenas docs e AGENTS.md. Slash commands via extensões.',
+          support: 'full',
+          note: 'Adaptador completo — os comandos dwp-* são executados via AGENTS.md e procedimentos #.',
         },
         {
           name: 'Gemini',
           support: 'full',
           note: 'Requer Gemini 2.5 Pro ou mais recente, com WebFetch nativo.',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: 'Código aberto. Lê AGENTS.md nativamente e executa dwp-* via comandos #.',
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: 'Regras e procedimentos de comando # conduzem o loop completo do Deep Work Plan.',
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: 'Código aberto. Regras em Markdown e comandos # executam cada etapa do dwp-*.',
         },
         {
           name: 'Antigravity',
@@ -248,6 +264,7 @@ export const pt: SiteTranslations = {
       title: 'Presets de raciocínio para as stacks que importam.',
       subtitle:
         'Estes são auxiliares de raciocínio, não templates. O onboarding lê os manifestos reais do seu repositório e adapta-se por stack — nunca copia um preset às cegas. Monorepos recebem docs por módulo.',
+      viewAllCta: 'Ver todos os presets',
       items: [
         { name: 'Django', sub: 'DRF · Poetry' },
         { name: 'FastAPI', sub: 'Pydantic · Poetry' },

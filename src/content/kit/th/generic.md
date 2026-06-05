@@ -3,7 +3,7 @@ title: ทั่วไป
 description: "พรีเซ็ต onboarding สำรองสำหรับโครงการทุกแบบ พร้อมแนวคิดที่ไม่ผูกกับสแตกใด เพื่อตรวจหาคำสั่ง build และ test จากตัว repository โดยตรง"
 kind: preset
 lang: th
-order: 6
+order: 100
 stack: Generic
 ---
 

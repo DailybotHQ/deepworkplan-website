@@ -207,6 +207,7 @@ export const th: SiteTranslations = {
         'ระเบียบวิธีเดียว อะแดปเตอร์หลากหลาย Markdown ไม่ผูกเฟรมเวิร์กไว้กับสิ่งใด agent ทุกตัวที่อ่าน Markdown ได้สามารถรัน Deep Work Plan ได้',
       fullLabel: 'เต็มรูปแบบ',
       partialLabel: 'บางส่วน',
+      viewAllCta: 'ดูเอเจนต์ทั้งหมด',
       items: [
         {
           name: 'Claude Code',
@@ -225,13 +226,28 @@ export const th: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: 'เฉพาะเอกสารและ AGENTS.md slash command ผ่านส่วนขยาย',
+          support: 'full',
+          note: 'อะแดปเตอร์เต็มรูปแบบ คำสั่ง dwp-* รันผ่าน AGENTS.md และขั้นตอน #',
         },
         {
           name: 'Gemini',
           support: 'full',
           note: 'ต้องใช้ Gemini 2.5 Pro ขึ้นไป พร้อม WebFetch ในตัว',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: 'โอเพนซอร์ส อ่าน AGENTS.md โดยตรงและรัน dwp-* ผ่านคำสั่ง #',
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: 'กฎและขั้นตอนคำสั่ง # ขับเคลื่อนลูป Deep Work Plan ทั้งหมด',
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: 'โอเพนซอร์ส กฎ Markdown และคำสั่ง # รันทุกขั้นตอน dwp-*',
         },
         {
           name: 'Antigravity',
@@ -243,6 +259,7 @@ export const th: SiteTranslations = {
     stacks: {
       badge: 'สแตก',
       title: 'พรีเซ็ตการให้เหตุผลสำหรับสแตกที่สำคัญ',
+      viewAllCta: 'ดูพรีเซ็ตทั้งหมด',
       subtitle:
         'สิ่งเหล่านี้เป็นตัวช่วยให้เหตุผล ไม่ใช่เทมเพลต การเริ่มต้นจะอ่าน manifest จริงของ repository คุณและปรับตามแต่ละสแตก ไม่เคยคัดลอกพรีเซ็ตแบบตาบอด โมโนรีโปจะได้เอกสารแยกตามโมดูล',
       items: [

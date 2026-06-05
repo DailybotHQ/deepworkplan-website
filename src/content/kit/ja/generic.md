@@ -3,7 +3,7 @@ title: Generic
 description: "あらゆるプロジェクト向けのフォールバックのオンボーディングプリセット。リポジトリからビルドとテストのコマンドを検出する、スタック非依存の推論の手がかりを備える。"
 kind: preset
 lang: ja
-order: 6
+order: 100
 stack: Generic
 ---
 

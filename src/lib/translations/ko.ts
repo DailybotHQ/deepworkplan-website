@@ -207,6 +207,7 @@ export const ko: SiteTranslations = {
         '하나의 방법론, 여러 어댑터. Markdown은 프레임워크를 어떤 것에도 묶지 않습니다 — Markdown을 읽는 모든 에이전트가 Deep Work Plan을 실행할 수 있습니다.',
       fullLabel: '완전',
       partialLabel: '부분',
+      viewAllCta: '모든 에이전트 보기',
       items: [
         {
           name: 'Claude Code',
@@ -225,13 +226,28 @@ export const ko: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: '문서와 AGENTS.md만. 슬래시 명령은 확장으로 제공.',
+          support: 'full',
+          note: '완전한 어댑터 — dwp-* 명령이 AGENTS.md와 # 절차를 통해 실행됩니다.',
         },
         {
           name: 'Gemini',
           support: 'full',
           note: 'Gemini 2.5 Pro 이상이 필요하며 네이티브 WebFetch를 지원합니다.',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: '오픈 소스. AGENTS.md를 네이티브로 읽고 # 명령으로 dwp-*를 실행합니다.',
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: '규칙과 # 명령 절차가 완전한 Deep Work Plan 루프를 구동합니다.',
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: '오픈 소스. Markdown 규칙과 # 명령이 모든 dwp-* 단계를 실행합니다.',
         },
         {
           name: 'Antigravity',
@@ -245,6 +261,7 @@ export const ko: SiteTranslations = {
       title: '중요한 스택을 위한 추론 프리셋.',
       subtitle:
         '이것은 템플릿이 아니라 추론 보조 자료입니다. 온보딩은 리포지토리의 실제 매니페스트를 읽고 스택별로 적응합니다 — 프리셋을 맹목적으로 복사하지 않습니다. 모노레포는 모듈별 문서를 받습니다.',
+      viewAllCta: '모든 프리셋 보기',
       items: [
         { name: 'Django', sub: 'DRF · Poetry' },
         { name: 'FastAPI', sub: 'Pydantic · Poetry' },

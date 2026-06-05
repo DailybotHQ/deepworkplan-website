@@ -3,7 +3,7 @@ title: Generic
 description: "面向任意项目的兜底接入预设，以技术栈无关的推理提示从仓库中检测构建与测试命令。"
 kind: preset
 lang: zh
-order: 6
+order: 100
 stack: Generic
 ---
 

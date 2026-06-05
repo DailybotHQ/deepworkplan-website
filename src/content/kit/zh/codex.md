@@ -1,25 +1,25 @@
 ---
 title: OpenAI Codex
-description: "面向 OpenAI Codex 的 DWP 适配器，通过 Markdown 命令过程与井号前缀提供部分支持；团队代理功能不可用。"
+description: "面向 OpenAI Codex 的 DWP 适配器，通过 Markdown 命令过程与井号前缀提供完整支持，可运行完整的 Deep Work Plan 循环。"
 kind: adapter
 lang: zh
 order: 3
 agent: OpenAI Codex
-support: partial
+support: full
 prefix: '#'
 ---
 
 # OpenAI Codex 适配器
 
-OpenAI Codex 通过 Markdown 命令过程支持 DWP。
+Codex 通过 Markdown 命令过程支持 DWP。
 
 ## 支持级别
 
-**部分** —— 核心命令可用；高级功能（团队代理）不可用。
+**完整** —— 每个 dwp-* 命令均通过其过程文件运行。
 
 ## 安装
 
-DWP 命令以代理在调用时读取的 Markdown 过程的形式存在。
+DWP 命令以代理在调用时读取的 Markdown 过程的形式存在；规则安装于 `.codex/` 之下。
 
 ## 调用
 
@@ -32,4 +32,4 @@ DWP 命令以代理在调用时读取的 Markdown 过程的形式存在。
 
 ## 备注
 
-团队代理功能为 Claude 专属；Codex 支持顺序工作流。
+Codex 会读取过程文件并执行完整的顺序 Deep Work Plan 循环。

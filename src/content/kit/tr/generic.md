@@ -3,7 +3,7 @@ title: Generic
 description: "Herhangi bir proje için yedek onboarding ön ayarı; build ve test komutlarını depodan saptayan, yığından bağımsız akıl yürütme ipuçları sunar."
 kind: preset
 lang: tr
-order: 6
+order: 100
 stack: Generic
 ---
 

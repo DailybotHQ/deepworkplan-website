@@ -158,12 +158,14 @@ export interface SiteTranslations {
       subtitle: string;
       fullLabel: string;
       partialLabel: string;
+      viewAllCta: string;
       items: { name: string; support: 'full' | 'partial'; note: string }[];
     };
     stacks: {
       badge: string;
       title: string;
       subtitle: string;
+      viewAllCta: string;
       items: { name: string; sub: string }[];
     };
     archetypes: {

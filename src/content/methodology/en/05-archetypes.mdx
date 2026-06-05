@@ -6,15 +6,20 @@ lang: en
 summary: Why a repository's archetype determines how an agent onboards and scopes plans.
 icon: layers
 ---
+import ArchetypesCompare from '@/components/diagrams/home/ArchetypesCompare.astro';
 import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
 
 # Repository archetypes
 
-DWP recognizes two repository archetypes. The archetype an agent infers determines how it onboards and how it scopes plans, so identifying it correctly is the first decision in any engagement.
+Before an agent changes a single line, it makes one decision that shapes everything after it: **what kind of repository is this?** The archetype it infers sets the boundary it will reason within for the rest of the engagement — how it onboards, how far a plan reaches, and where state lives. Get it wrong and the agent scopes work to the wrong surface, the most common source of drift on long-horizon tasks. Get it right and it can run autonomously for hours, because plans, onboarding, and state all line up with the real shape of the code.
+
+DWP recognizes two archetypes. Most repositories are the first; the second exists for the teams who coordinate many.
+
+<ArchetypesCompare lang="en" class="not-prose my-10" />
 
 ## Individual repository
 
-A self-contained codebase — an application, a library, or a service. Plans operate directly on the code in the repository, and onboarding reads the repository's own structure and conventions.
+The common case: a self-contained codebase — an application, a library, or a service. There is one coherent surface to reason about, so plans operate directly on the code in the repository and onboarding reads the repository's own structure and conventions. The agent holds the whole codebase as its context and works it end to end.
 
 Characteristics:
 
@@ -24,7 +29,7 @@ Characteristics:
 
 ## Orchestrator hub
 
-A coordination repository that manages multiple child repositories. Plans may spawn child plans in sub-repositories, and onboarding reads the hub's registry of managed repositories rather than a single codebase.
+The coordination case: a repository whose job is to manage other repositories. Here the unit of work is not a file but a child repository, so plans may spawn child plans in sub-repositories, and onboarding reads the hub's registry of managed repositories rather than a single codebase. The agent reasons about boundaries and handoffs — which repository owns which work, and how their state stays consistent.
 
 Characteristics:
 
@@ -35,11 +40,15 @@ Characteristics:
 
 ## Classification heuristic
 
+The two archetypes look different on disk, and the agent decides between them from signals it can verify — not a label it is told. The decision tree below shows the path; in short, treat a repository as an orchestrator hub only when the evidence demands it, and as an individual repository otherwise.
+
 <ArchetypesTree lang="en" class="not-prose my-10" />
 
-An agent should classify a repository as an orchestrator hub when it finds multiple nested git repositories or submodules, a registry or manifest of managed repositories, or configuration that points to external repositories. In the absence of those signals, it treats the repository as an individual repository.
+An agent should classify a repository as an orchestrator hub when it finds multiple nested git repositories or submodules, a registry or manifest of managed repositories, or configuration that points to external repositories. In the absence of those signals, it treats the repository as an individual repository — the safe default, because over-scoping a plan across boundaries that do not exist is worse than working within one that does.
 
 ## How onboarding differs
+
+The archetype is not a cosmetic label; it changes what the agent reads, what a plan may touch, and where state is recorded.
 
 | Aspect | Individual | Orchestrator |
 |--------|------------|--------------|
@@ -50,4 +59,4 @@ An agent should classify a repository as an orchestrator hub when it finds multi
 
 The practical effect is that an individual-repository agent reasons about one codebase end to end, while an orchestrator agent reasons about coordination — which child repository owns which work, and how cross-repository state stays consistent.
 
-Getting the archetype right is what lets an agent work autonomously for hours without supervision: it scopes plans, onboarding, and state to the right boundary, so the agent operates on the correct surface from the first task to the last.
+This is what lets an agent work autonomously for hours without supervision: by fixing the archetype first, it scopes plans, onboarding, and state to the right boundary, so every task from the first to the last operates on the correct surface.

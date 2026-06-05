@@ -207,6 +207,7 @@ export const zh: SiteTranslations = {
         '一套方法论，多个适配器。Markdown 让这套框架不与任何工具耦合——每个能读取 Markdown 的代理都能运行一份 Deep Work Plan。',
       fullLabel: '完整',
       partialLabel: '部分',
+      viewAllCta: '查看全部代理',
       items: [
         {
           name: 'Claude Code',
@@ -225,13 +226,28 @@ export const zh: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: '仅限文档与 AGENTS.md。斜杠命令需通过扩展实现。',
+          support: 'full',
+          note: '完整适配器——dwp-* 命令通过 AGENTS.md 与 # 过程运行。',
         },
         {
           name: 'Gemini',
           support: 'full',
           note: '需要 Gemini 2.5 Pro 或更新版本，具备原生 WebFetch。',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: '开源代理。原生读取 AGENTS.md，并通过 # 命令运行 dwp-*。',
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: '规则与 # 命令过程驱动完整的 Deep Work Plan 循环。',
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: '开源代理。Markdown 规则与 # 命令运行每一个 dwp-* 步骤。',
         },
         {
           name: 'Antigravity',
@@ -243,6 +259,7 @@ export const zh: SiteTranslations = {
     stacks: {
       badge: '技术栈',
       title: '面向重要技术栈的推理预设。',
+      viewAllCta: '查看全部预设',
       subtitle:
         '这些是推理辅助，而非模板。接入流程会读取你仓库的真实清单文件并按技术栈适配——它绝不会盲目复制某个预设。多仓库（monorepo）会获得各模块文档。',
       items: [

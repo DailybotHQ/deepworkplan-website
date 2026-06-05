@@ -6,15 +6,20 @@ lang: es
 summary: Por qué el arquetipo de un repositorio determina cómo se incorpora un agente y cómo acota los planes.
 icon: layers
 ---
+import ArchetypesCompare from '@/components/diagrams/home/ArchetypesCompare.astro';
 import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
 
 # Arquetipos de repositorio
 
-DWP reconoce dos arquetipos de repositorio. El arquetipo que un agente infiere determina cómo se incorpora y cómo acota los planes, de modo que identificarlo correctamente es la primera decisión de cualquier intervención.
+Antes de cambiar una sola línea, un agente toma una decisión que lo condiciona todo: **¿qué tipo de repositorio es este?** El arquetipo que infiere establece el límite dentro del cual razonará durante el resto del trabajo: cómo se incorpora, hasta dónde llega un plan y dónde vive el estado. Equivocarse significa acotar el trabajo a la superficie equivocada, que es la causa más frecuente de deriva en tareas de largo alcance. Acertar, en cambio, permite al agente trabajar de forma autónoma durante horas, porque planes, incorporación y estado se alinean con la forma real del código.
+
+DWP reconoce dos arquetipos. La mayoría de los repositorios son del primero; el segundo existe para los equipos que coordinan muchos.
+
+<ArchetypesCompare lang="es" class="not-prose my-10" />
 
 ## Repositorio individual
 
-Una base de código autónoma: una aplicación, una biblioteca o un servicio. Los planes operan directamente sobre el código del repositorio, y la incorporación lee la propia estructura y convenciones del repositorio.
+El caso habitual: una base de código autónoma — una aplicación, una biblioteca o un servicio. Hay una única superficie coherente sobre la que razonar, de modo que los planes operan directamente sobre el código del repositorio y la incorporación lee la propia estructura y convenciones del repositorio. El agente mantiene toda la base de código como contexto y trabaja en ella de principio a fin.
 
 Características:
 
@@ -24,7 +29,7 @@ Características:
 
 ## Centro orquestador
 
-Un repositorio de coordinación que gestiona varios repositorios hijos. Los planes pueden generar planes hijos en subrepositorios, y la incorporación lee el registro de repositorios gestionados del centro en lugar de una sola base de código.
+El caso de coordinación: un repositorio cuyo trabajo consiste en gestionar otros repositorios. Aquí la unidad de trabajo no es un archivo sino un repositorio hijo, de modo que los planes pueden generar planes hijos en subrepositorios, y la incorporación lee el registro de repositorios gestionados del centro en lugar de una sola base de código. El agente razona sobre límites y transferencias: qué repositorio es responsable de qué trabajo y cómo se mantiene coherente su estado.
 
 Características:
 
@@ -35,11 +40,15 @@ Características:
 
 ## Heurística de clasificación
 
+Los dos arquetipos se ven distintos en disco, y el agente decide entre ellos a partir de señales que puede verificar, no de una etiqueta que se le indica. El árbol de decisión siguiente muestra el camino; en resumen, trate un repositorio como centro orquestador solo cuando la evidencia lo exija, y como repositorio individual en caso contrario.
+
 <ArchetypesTree lang="es" class="not-prose my-10" />
 
-Un agente debería clasificar un repositorio como centro orquestador cuando encuentra varios repositorios git anidados o submódulos, un registro o manifiesto de repositorios gestionados, o configuración que apunta a repositorios externos. En ausencia de esas señales, lo trata como un repositorio individual.
+Un agente debería clasificar un repositorio como centro orquestador cuando encuentra varios repositorios git anidados o submódulos, un registro o manifiesto de repositorios gestionados, o configuración que apunta a repositorios externos. En ausencia de esas señales, lo trata como un repositorio individual — el comportamiento seguro por defecto, pues ampliar un plan más allá de límites que no existen es peor que trabajar dentro de uno que sí existe.
 
 ## Cómo difiere la incorporación
+
+El arquetipo no es una etiqueta cosmética; cambia lo que el agente lee, lo que un plan puede tocar y dónde se registra el estado.
 
 | Aspecto | Individual | Orquestador |
 |---------|------------|-------------|

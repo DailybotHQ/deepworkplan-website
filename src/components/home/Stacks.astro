@@ -1,6 +1,6 @@
 ---
 import Kicker from '@/components/editorial/Kicker.astro';
-import type { Language } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -9,6 +9,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
 const s = t.home.stacks;
 ---
 
@@ -53,5 +54,14 @@ const s = t.home.stacks;
         ))
       }
     </ul>
+    <div class="mt-8">
+      <a
+        href={`${prefix}/kit#presets`}
+        class="inline-flex items-center whitespace-nowrap text-base font-semibold transition hover:opacity-70"
+        style="color: var(--color-secondary);"
+      >
+        {s.viewAllCta} &rarr;
+      </a>
+    </div>
   </div>
 </section>

@@ -36,8 +36,8 @@ Cienkie komendy slash delegują do sub-skilli i dodatków:
 
 ### Adaptery
 
-Cienkie integracje dla poszczególnych agentów: Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini oraz
-Antigravity.
+Cienkie integracje dla poszczególnych agentów: Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
+OpenCode, Windsurf, Cline oraz Antigravity.
 
 ### Presety onboardingu
 

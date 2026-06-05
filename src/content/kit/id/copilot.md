@@ -1,25 +1,25 @@
 ---
 title: GitHub Copilot
-description: "Adapter DWP untuk GitHub Copilot, dengan dukungan parsial melalui prosedur command markdown dan prefix hash; sebagian otomasi dilakukan secara manual."
+description: "Adapter DWP untuk GitHub Copilot, dengan dukungan penuh melalui AGENTS.md dan prosedur command markdown yang dipanggil dengan prefix hash."
 kind: adapter
 lang: id
 order: 4
 agent: GitHub Copilot
-support: partial
+support: full
 prefix: '#'
 ---
 
 # Adapter GitHub Copilot
 
-GitHub Copilot mendukung DWP melalui prosedur command markdown.
+Copilot mendukung DWP melalui AGENTS.md dan prosedur command markdown.
 
 ## Tingkat dukungan
 
-**Parsial** — command inti berjalan melalui file prosedur; sebagian otomasi bersifat manual.
+**Penuh** — Copilot membaca AGENTS.md dan file prosedur dwp-*, serta menjalankan setiap command dari sana.
 
 ## Instalasi
 
-Command DWP tersimpan sebagai prosedur markdown di dalam repositori.
+DWP mengirimkan AGENTS.md dan prosedur command di dalam repositori; Copilot membacanya sebagai konteks repositori.
 
 ## Pemanggilan
 
@@ -32,4 +32,4 @@ Gunakan prefix `#`:
 
 ## Catatan
 
-Copilot membaca file prosedur, tetapi eksekusinya kurang otonom dibanding Claude Code.
+Copilot membaca file prosedur dan menjalankan loop Deep Work Plan sekuensial secara penuh.

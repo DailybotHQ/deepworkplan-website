@@ -1,11 +1,11 @@
 ---
 title: OpenAI Codex
-description: "Adapter DWP dla OpenAI Codex z częściowym wsparciem przez procedury komend w markdown i prefiks hash; funkcje agentów zespołowych są niedostępne."
+description: "Adapter DWP dla OpenAI Codex z pełnym wsparciem przez procedury komend w markdown i prefiks hash, które uruchamiają kompletną pętlę Deep Work Plan."
 kind: adapter
 lang: pl
 order: 3
 agent: OpenAI Codex
-support: partial
+support: full
 prefix: '#'
 ---
 
@@ -15,11 +15,11 @@ OpenAI Codex obsługuje DWP poprzez procedury komend w markdown.
 
 ## Poziom wsparcia
 
-**Częściowy** — podstawowe komendy działają; zaawansowane funkcje (agenci zespołowi) są niedostępne.
+**Pełny** — każda komenda dwp-* uruchamiania jest z jej pliku procedury.
 
 ## Instalacja
 
-Komendy DWP istnieją jako procedury w markdown, które agent odczytuje przy wywołaniu.
+Komendy DWP istnieją jako procedury w markdown, które agent odczytuje przy wywołaniu; reguły instalowane są w katalogu `.codex/`.
 
 ## Wywoływanie
 
@@ -32,4 +32,4 @@ Używaj prefiksu `#`:
 
 ## Uwagi
 
-Funkcje agentów zespołowych są dostępne tylko w Claude; Codex obsługuje przepływ sekwencyjny.
+Codex odczytuje pliki procedur i wykonuje pełną sekwencyjną pętlę Deep Work Plan.

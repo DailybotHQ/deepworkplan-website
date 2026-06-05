@@ -3,7 +3,7 @@ title: Generisch
 description: "Das Fallback-Onboarding-Preset für jedes Projekt, mit stack-agnostischen Reasoning-Hinweisen, die Build- und Test-Befehle aus dem Repository erkennen."
 kind: preset
 lang: de
-order: 6
+order: 100
 stack: Generic
 ---
 

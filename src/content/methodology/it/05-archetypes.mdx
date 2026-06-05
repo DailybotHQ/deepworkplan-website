@@ -1,20 +1,25 @@
 ---
 title: Archetipi di repository
-description: "Gli archetipi del repository individuale e dell’hub orchestratore, l’euristica per classificare un repository e come onboarding e ambito dei piani differiscono tra loro."
+description: "Gli archetipi del repository individuale e dell'hub orchestratore, l'euristica per classificare un repository e come onboarding e ambito dei piani differiscono tra loro."
 order: 5
 lang: it
-summary: Perché l’archetipo di un repository determina come un agente fa l’onboarding e definisce l’ambito dei piani.
+summary: Perché l'archetipo di un repository determina come un agente fa l'onboarding e definisce l'ambito dei piani.
 icon: layers
 ---
+import ArchetypesCompare from '@/components/diagrams/home/ArchetypesCompare.astro';
 import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
 
 # Archetipi di repository
 
-DWP riconosce due archetipi di repository. L’archetipo che un agente deduce determina come fa l’onboarding e come definisce l’ambito dei piani, quindi identificarlo correttamente è la prima decisione in qualsiasi ingaggio.
+Prima di modificare una singola riga, un agente prende una decisione che condiziona tutto ciò che segue: **che tipo di repository è questo?** L'archetipo che deduce stabilisce il confine entro cui ragionerà per il resto del lavoro — come fa l'onboarding, fino a dove arriva un piano e dove risiede lo stato. Sbagliare significa definire l'ambito del lavoro sulla superficie sbagliata, la causa più comune di deriva nelle attività a lungo orizzonte. Azzeccare il tipo consente all'agente di lavorare in autonomia per ore, perché piani, onboarding e stato si allineano con la forma reale del codice.
+
+DWP riconosce due archetipi. La maggior parte dei repository è del primo tipo; il secondo esiste per i team che ne coordinano molti.
+
+<ArchetypesCompare lang="it" class="not-prose my-10" />
 
 ## Repository individuale
 
-Un codebase autosufficiente — un’applicazione, una libreria o un servizio. I piani operano direttamente sul codice nel repository e l’onboarding legge la struttura e le convenzioni proprie del repository.
+Il caso comune: un codebase autosufficiente — un'applicazione, una libreria o un servizio. C'è un'unica superficie coerente su cui ragionare, quindi i piani operano direttamente sul codice nel repository e l'onboarding legge la struttura e le convenzioni proprie del repository. L'agente mantiene l'intero codebase come contesto e vi lavora dall'inizio alla fine.
 
 Caratteristiche:
 
@@ -24,30 +29,34 @@ Caratteristiche:
 
 ## Hub orchestratore
 
-Un repository di coordinamento che gestisce più repository figli. I piani possono generare piani figli nei sotto-repository e l’onboarding legge il registro dei repository gestiti dall’hub anziché un singolo codebase.
+Il caso di coordinamento: un repository il cui compito è gestire altri repository. Qui l'unità di lavoro non è un file ma un repository figlio; pertanto i piani possono generare piani figli nei sotto-repository, e l'onboarding legge il registro dei repository gestiti dall'hub anziché un singolo codebase. L'agente ragiona su confini e passaggi di consegna — quale repository figlio possiede quale lavoro e come il loro stato resta coerente.
 
 Caratteristiche:
 
 - Coordina più sotto-repository.
 - I piani possono delegare a piani figli.
 - Mantiene un registro dei repository gestiti.
-- Il workspace `.dwp/` nella radice dell’hub traccia lo stato tra i repository.
+- Il workspace `.dwp/` nella radice dell'hub traccia lo stato tra i repository.
 
 ## Euristica di classificazione
 
+I due archetipi si presentano diversamente su disco, e l'agente sceglie tra loro in base a segnali che può verificare — non a un'etichetta che gli è stata comunicata. L'albero decisionale seguente mostra il percorso; in breve, trattate un repository come hub orchestratore solo quando le prove lo richiedono, e come repository individuale negli altri casi.
+
 <ArchetypesTree lang="it" class="not-prose my-10" />
 
-Un agente dovrebbe classificare un repository come hub orchestratore quando trova più repository git annidati o submodule, un registro o manifest di repository gestiti, oppure configurazione che punta a repository esterni. In assenza di questi segnali, tratta il repository come un repository individuale.
+Un agente dovrebbe classificare un repository come hub orchestratore quando trova più repository git annidati o submodule, un registro o manifest di repository gestiti, oppure configurazione che punta a repository esterni. In assenza di questi segnali, tratta il repository come un repository individuale — il comportamento sicuro predefinito, perché estendere un piano oltre confini che non esistono è peggio che lavorare all'interno di uno che esiste.
 
-## Come differisce l’onboarding
+## Come differisce l'onboarding
+
+L'archetipo non è una semplice etichetta cosmetica; cambia ciò che l'agente legge, ciò che un piano può toccare e dove lo stato viene registrato.
 
 | Aspetto | Individuale | Orchestratore |
 |--------|------------|--------------|
 | Ambito | Questo repository | Più repository |
-| Onboarding | Struttura del repository | Registro dell’hub |
+| Onboarding | Struttura del repository | Registro dell'hub |
 | Bersaglio del piano | File locali | Piani figli |
 | Stato | `.dwp/` locale | `.dwp/` tra repository |
 
-L’effetto pratico è che un agente per repository individuale ragiona su un singolo codebase dall’inizio alla fine, mentre un agente orchestratore ragiona sul coordinamento — quale repository figlio possiede quale lavoro e come lo stato tra i repository resta coerente.
+L'effetto pratico è che un agente per repository individuale ragiona su un singolo codebase dall'inizio alla fine, mentre un agente orchestratore ragiona sul coordinamento — quale repository figlio possiede quale lavoro e come lo stato tra i repository resta coerente.
 
-Azzeccare l’archetipo è ciò che permette a un agente di lavorare in autonomia per ore senza supervisione: definisce l’ambito di piani, onboarding e stato sul confine giusto, così l’agente opera sulla superficie corretta dalla prima all’ultima attività.
+Azzeccare l'archetipo è ciò che permette a un agente di lavorare in autonomia per ore senza supervisione: definisce l'ambito di piani, onboarding e stato sul confine giusto, così l'agente opera sulla superficie corretta dalla prima all'ultima attività.

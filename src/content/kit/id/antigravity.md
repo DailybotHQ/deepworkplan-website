@@ -1,11 +1,11 @@
 ---
 title: Antigravity
-description: "Adapter DWP untuk Antigravity, dengan dukungan parsial melalui prosedur command markdown dan prefix hash yang menjalankan alur kerja sekuensial."
+description: "Adapter DWP untuk Antigravity, dengan dukungan penuh melalui prosedur command markdown dan prefix hash yang menjalankan loop Deep Work Plan secara lengkap."
 kind: adapter
 lang: id
 order: 6
 agent: Antigravity
-support: partial
+support: full
 prefix: '#'
 ---
 
@@ -15,7 +15,7 @@ Antigravity mendukung DWP melalui prosedur command markdown.
 
 ## Tingkat dukungan
 
-**Parsial** — command inti berjalan melalui file prosedur.
+**Penuh** — setiap command dwp-* berjalan dari file prosedurnya melalui permukaan command native.
 
 ## Instalasi
 
@@ -32,4 +32,4 @@ Gunakan prefix `#`:
 
 ## Catatan
 
-Antigravity membaca file prosedur dan menjalankan alur kerja DWP yang sekuensial.
+Antigravity membaca file prosedur dan menjalankan loop Deep Work Plan sekuensial secara penuh.

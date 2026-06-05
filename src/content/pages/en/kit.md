@@ -36,8 +36,8 @@ Thin slash commands delegate to the sub-skills and addons:
 
 ### Adapters
 
-Thin per-agent integrations for Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, and
-Antigravity.
+Thin per-agent integrations for Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
+OpenCode, Windsurf, Cline, and Antigravity.
 
 ### Onboarding presets
 

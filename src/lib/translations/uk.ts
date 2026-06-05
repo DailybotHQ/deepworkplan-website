@@ -210,6 +210,7 @@ export const uk: SiteTranslations = {
         'Одна методологія, багато адаптерів. Markdown не привʼязує фреймворк ні до чого — будь-який агент, що читає Markdown, може запустити Deep Work Plan.',
       fullLabel: 'Повна',
       partialLabel: 'Часткова',
+      viewAllCta: 'Переглянути всіх агентів',
       items: [
         {
           name: 'Claude Code',
@@ -228,13 +229,28 @@ export const uk: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: 'Лише документація та AGENTS.md. Slash-команди через розширення.',
+          support: 'full',
+          note: 'Повний адаптер — команди dwp-* виконуються через AGENTS.md та процедури #.',
         },
         {
           name: 'Gemini',
           support: 'full',
           note: 'Потрібен Gemini 2.5 Pro або новіший, із нативним WebFetch.',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: 'Відкритий код. Нативно читає AGENTS.md і запускає dwp-* через команди #.',
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: 'Правила та процедури команд # керують повним циклом Deep Work Plan.',
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: 'Відкритий код. Правила Markdown та команди # виконують кожен крок dwp-*.',
         },
         {
           name: 'Antigravity',
@@ -246,6 +262,7 @@ export const uk: SiteTranslations = {
     stacks: {
       badge: 'Стеки',
       title: 'Пресети-міркування для стеків, що мають значення.',
+      viewAllCta: 'Переглянути всі пресети',
       subtitle:
         'Це допоміжні засоби для міркування, а не шаблони. Онбординг читає реальні маніфести вашого репозиторію та пристосовується до кожного стеку — він ніколи не копіює пресет наосліп. Монорепозиторії отримують документацію кожного модуля.',
       items: [

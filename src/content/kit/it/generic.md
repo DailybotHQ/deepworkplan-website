@@ -3,7 +3,7 @@ title: Generic
 description: "Il preset di onboarding di fallback per qualsiasi progetto, con spunti di ragionamento indipendenti dallo stack che rilevano i comandi di build e test dal repository."
 kind: preset
 lang: it
-order: 6
+order: 100
 stack: Generic
 ---
 

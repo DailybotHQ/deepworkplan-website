@@ -1,11 +1,11 @@
 ---
 title: Antigravity
-description: "The DWP adapter for Antigravity, with partial support through markdown command procedures and the hash prefix that drive the sequential workflow."
+description: "The DWP adapter for Antigravity, with full support through markdown command procedures and the hash command prefix that drive the complete Deep Work Plan loop."
 kind: adapter
 lang: en
 order: 6
 agent: Antigravity
-support: partial
+support: full
 prefix: '#'
 ---
 
@@ -15,7 +15,7 @@ Antigravity supports DWP through markdown command procedures.
 
 ## Support level
 
-**Partial** — core commands work through procedure files.
+**Full** — every dwp-* command runs from its procedure file through the native command surface.
 
 ## Installation
 
@@ -32,4 +32,4 @@ Use the `#` prefix:
 
 ## Notes
 
-Antigravity reads procedure files and executes the sequential DWP workflow.
+Antigravity reads the procedure files and runs the full sequential Deep Work Plan loop.

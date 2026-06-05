@@ -1,25 +1,25 @@
 ---
 title: GitHub Copilot
-description: "El adaptador de DWP para GitHub Copilot, con soporte parcial mediante procedimientos en Markdown y el prefijo almohadilla; parte de la automatización es manual."
+description: "El adaptador de DWP para GitHub Copilot, con soporte completo a través de AGENTS.md y procedimientos de comando en Markdown invocados con el prefijo almohadilla."
 kind: adapter
 lang: es
 order: 4
 agent: GitHub Copilot
-support: partial
+support: full
 prefix: '#'
 ---
 
 # Adaptador de GitHub Copilot
 
-GitHub Copilot admite DWP mediante procedimientos de comando en Markdown.
+Copilot admite DWP a través de AGENTS.md y procedimientos de comando en Markdown.
 
 ## Nivel de soporte
 
-**Parcial**: los comandos básicos funcionan mediante archivos de procedimiento; parte de la automatización es manual.
+**Completo** — Copilot lee AGENTS.md y los archivos de procedimiento dwp-*, y ejecuta cada comando desde ellos.
 
 ## Instalación
 
-Los comandos de DWP viven como procedimientos en Markdown dentro del repositorio.
+DWP distribuye AGENTS.md y los procedimientos de comando en el repositorio; Copilot los lee como contexto del repositorio.
 
 ## Invocación
 
@@ -32,4 +32,4 @@ Usa el prefijo `#`:
 
 ## Notas
 
-Copilot lee los archivos de procedimiento, pero tiene menos ejecución autónoma que Claude Code.
+Copilot lee los archivos de procedimiento y ejecuta el flujo secuencial completo de Deep Work Plan.

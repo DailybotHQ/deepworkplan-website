@@ -37,7 +37,7 @@ Deep Work Plan 스킬은 라우터와 여덟 개의 하위 스킬입니다.
 ### 어댑터
 
 Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
-Antigravity를 위한 얇은 에이전트별 통합.
+OpenCode, Windsurf, Cline, Antigravity를 위한 얇은 에이전트별 통합.
 
 ### 온보딩 프리셋
 

@@ -36,8 +36,8 @@ Deep Work Plan 技能是一个路由器外加八个子技能：
 
 ### 适配器
 
-面向 Claude Code、Cursor、OpenAI Codex、GitHub Copilot、Google Gemini 与
-Antigravity 的轻量化逐代理集成。
+面向 Claude Code、Cursor、OpenAI Codex、GitHub Copilot、Google Gemini、
+OpenCode、Windsurf、Cline 与 Antigravity 的轻量化逐代理集成。
 
 ### 接入预设
 

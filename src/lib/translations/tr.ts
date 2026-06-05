@@ -210,6 +210,7 @@ export const tr: SiteTranslations = {
         'Tek metodoloji, birçok adaptör. Markdown, çerçeveyi hiçbir şeye bağlamaz — Markdown okuyan her ajan bir Deep Work Plan çalıştırabilir.',
       fullLabel: 'Tam',
       partialLabel: 'Kısmi',
+      viewAllCta: 'Tüm ajanları gör',
       items: [
         {
           name: 'Claude Code',
@@ -228,13 +229,28 @@ export const tr: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: 'Yalnızca dokümanlar ve AGENTS.md. Eğik çizgi komutları uzantılar aracılığıyla.',
+          support: 'full',
+          note: 'Tam adaptör — dwp-* komutları AGENTS.md ve # prosedürleri aracılığıyla çalışır.',
         },
         {
           name: 'Gemini',
           support: 'full',
           note: 'Yerel WebFetch ile Gemini 2.5 Pro veya daha yenisini gerektirir.',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: "Açık kaynak. AGENTS.md'yi yerel olarak okur ve dwp-* komutlarını # ile çalıştırır.",
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: 'Kurallar ve # komut prosedürleri eksiksiz Deep Work Plan döngüsünü yürütür.',
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: 'Açık kaynak. Markdown kuralları ve # komutları her dwp-* adımını çalıştırır.',
         },
         {
           name: 'Antigravity',
@@ -248,6 +264,7 @@ export const tr: SiteTranslations = {
       title: 'Önemli yığınlar için akıl yürütme hazır ayarları.',
       subtitle:
         'Bunlar şablon değil, akıl yürütme yardımcılarıdır. Kuruluma alma, deponuzun gerçek manifest dosyalarını okur ve yığın başına uyarlar — bir hazır ayarı asla körlemesine kopyalamaz. Monorepo’lar modül başına doküman alır.',
+      viewAllCta: 'Tüm önayarları gör',
       items: [
         { name: 'Django', sub: 'DRF · Poetry' },
         { name: 'FastAPI', sub: 'Pydantic · Poetry' },

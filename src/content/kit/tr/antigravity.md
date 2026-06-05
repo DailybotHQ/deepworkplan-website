@@ -1,12 +1,12 @@
 ---
 title: Antigravity
-description: "Antigravity için DWP adaptörü; sıralı iş akışını yürüten markdown komut prosedürleri ve hash öneki aracılığıyla kısmi destek sunar."
+description: "Antigravity için DWP adaptörü; hash komut öneki ile markdown komut prosedürleri aracılığıyla tam destek sunar ve eksiksiz Deep Work Plan döngüsünü yürütür."
 kind: adapter
 lang: tr
 order: 6
 agent: Antigravity
-support: partial
-prefix: '#'
+support: full
+prefix: ‘#’
 ---
 
 # Antigravity adaptörü
@@ -15,7 +15,7 @@ Antigravity, DWP’yi markdown komut prosedürleri aracılığıyla destekler.
 
 ## Destek düzeyi
 
-**Kısmi** — temel komutlar prosedür dosyaları aracılığıyla çalışır.
+**Tam** — her dwp-* komutu, yerel komut yüzeyi aracılığıyla kendi prosedür dosyasından çalışır.
 
 ## Kurulum
 
@@ -32,4 +32,4 @@ DWP komutları, ajanın çağrıldığında okuduğu markdown prosedürleri olar
 
 ## Notlar
 
-Antigravity, prosedür dosyalarını okur ve sıralı DWP iş akışını yürütür.
+Antigravity, prosedür dosyalarını okur ve eksiksiz sıralı Deep Work Plan döngüsünü çalıştırır.

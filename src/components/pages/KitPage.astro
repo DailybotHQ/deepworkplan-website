@@ -34,10 +34,10 @@ function byKind(kind: 'command' | 'adapter' | 'preset' | 'example' | 'addon') {
 // Examples have their own gallery page; the kit index covers commands,
 // adapters, presets, and opt-in addons.
 const groups = [
-  { meta: k.groups.command, items: byKind('command') },
-  { meta: k.groups.adapter, items: byKind('adapter') },
-  { meta: k.groups.preset, items: byKind('preset') },
-  { meta: k.groups.addon, items: byKind('addon') },
+  { id: 'commands', meta: k.groups.command, items: byKind('command') },
+  { id: 'adapters', meta: k.groups.adapter, items: byKind('adapter') },
+  { id: 'presets', meta: k.groups.preset, items: byKind('preset') },
+  { id: 'addons', meta: k.groups.addon, items: byKind('addon') },
 ];
 ---
 
@@ -61,7 +61,7 @@ const groups = [
     <div class="space-y-12">
       {
         groups.map((group) => (
-          <section>
+          <section id={group.id} class="scroll-mt-24">
             <Kicker>{group.meta.title}</Kicker>
             <p class="mt-3 max-w-3xl leading-relaxed" style="color: var(--color-muted);">
               {group.meta.description}
