@@ -387,10 +387,18 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
   <div class="editorial-asset__body">
     <div class="arch-root">{t.root}</div>
     <div class="arch-stem" aria-hidden="true"></div>
-    <div class="arch-question">{t.question}</div>
+    <div class="arch-question">
+      <span class="arch-q-mark" aria-hidden="true">?</span>
+      <span>{t.question}</span>
+    </div>
+    <div class="arch-fork" aria-hidden="true">
+      <span class="arch-fork-drop"></span>
+      <span class="arch-fork-bar"></span>
+    </div>
     <div class="arch-branches">
       <div class="arch-branch">
-        <span class="ea-label arch-edge">{t.no}</span>
+        <span class="arch-leg" aria-hidden="true"></span>
+        <span class="ea-label arch-edge arch-edge--no">{t.no}</span>
         <div class="arch-leaf">
           <p class="arch-h">{t.individual}</p>
           <ul class="arch-points">
@@ -399,7 +407,8 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
         </div>
       </div>
       <div class="arch-branch">
-        <span class="ea-label arch-edge">{t.yes}</span>
+        <span class="arch-leg" aria-hidden="true"></span>
+        <span class="ea-label arch-edge arch-edge--yes">{t.yes}</span>
         <div class="arch-leaf arch-leaf--accent">
           <p class="arch-h">{t.orchestrator}</p>
           <ul class="arch-points">
@@ -432,22 +441,68 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
     background-color: var(--color-line);
   }
   .arch-question {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     width: max-content;
     max-width: 100%;
     margin: 0 auto;
     border: 1px solid var(--color-line);
     border-radius: 999px;
-    padding: 0.4rem 1rem;
+    padding: 0.35rem 1rem 0.35rem 0.45rem;
     font-family: var(--font-serif);
     font-style: italic;
     font-size: 0.9rem;
-    text-align: center;
+    text-align: left;
+  }
+  .arch-q-mark {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 999px;
+    background-color: var(--color-secondary);
+    color: var(--color-paper);
+    font-family: var(--font-serif);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  /* Fork connector: question -> center drop -> bar -> a leg into each branch. */
+  .arch-fork {
+    position: relative;
+    height: 1.1rem;
+  }
+  .arch-fork-drop {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 0.6rem;
+    background-color: var(--color-line);
+  }
+  .arch-fork-bar {
+    display: none;
+  }
+  @media (min-width: 560px) {
+    .arch-fork-bar {
+      display: block;
+      position: absolute;
+      top: 0.6rem;
+      left: 25%;
+      right: 25%;
+      height: 1px;
+      background-color: var(--color-line);
+    }
   }
   .arch-branches {
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.9rem;
-    margin-top: 1rem;
   }
   @media (min-width: 560px) {
     .arch-branches {
@@ -457,15 +512,30 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
   .arch-branch {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     gap: 0.4rem;
   }
+  .arch-leg {
+    width: 1px;
+    height: 0.6rem;
+    background-color: var(--color-line);
+  }
   .arch-edge {
-    font-size: 0.72rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--color-muted);
-    text-align: center;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    padding: 0.05rem 0.6rem;
+    background-color: var(--color-paper);
+  }
+  .arch-edge--yes {
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
   }
   .arch-leaf {
+    width: 100%;
     border: 1px solid var(--color-line);
     border-radius: 4px;
     padding: 0.85rem;
@@ -479,10 +549,13 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 1rem;
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.55rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--color-line);
   }
   .arch-leaf--accent .arch-h {
     color: var(--color-secondary);
+    border-bottom-color: var(--color-secondary);
   }
   .arch-points {
     margin: 0;

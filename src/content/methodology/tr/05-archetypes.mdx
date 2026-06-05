@@ -6,15 +6,20 @@ lang: tr
 summary: Bir deponun arketipinin, bir ajanın nasıl kuruluma alındığını ve planları nasıl kapsamlandırdığını neden belirlediği.
 icon: layers
 ---
+import ArchetypesCompare from '@/components/diagrams/home/ArchetypesCompare.astro';
 import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
 
 # Depo arketipleri
 
-DWP iki depo arketipi tanır. Bir ajanın çıkarsadığı arketip, nasıl kuruluma alındığını ve planları nasıl kapsamlandırdığını belirler; bu nedenle onu doğru belirlemek, herhangi bir çalışmadaki ilk karardır.
+Bir ajan tek bir satırı bile değiştirmeden önce, sonrasındaki her şeyi şekillendiren tek bir karar verir: **bu ne tür bir depo?** Çıkarsadığı arketip, çalışmanın geri kalanında içinde akıl yürüteceği sınırı belirler — nasıl kuruluma alındığını, bir planın ne kadar ileriye uzandığını ve durumun nerede saklandığını. Yanlış anlarsanız, ajan çalışmayı yanlış yüzeye göre kapsamlandırır; bu, uzun vadeli görevlerde driftin en yaygın kaynağıdır. Doğru anlarsanız, ajan saatlerce otonom çalışabilir; çünkü planlar, kuruluma alma ve durum kodun gerçek şekliyle örtüşür.
+
+DWP iki arketip tanır. Depoların çoğu birincisine girer; ikincisi, pek çoğunu koordine eden ekipler için vardır.
+
+<ArchetypesCompare lang="tr" class="not-prose my-10" />
 
 ## Bireysel depo
 
-Kendi kendine yeten bir kod tabanı — bir uygulama, bir kütüphane veya bir servis. Planlar doğrudan depodaki kod üzerinde çalışır ve kuruluma alma, deponun kendi yapısını ve kurallarını okur.
+Yaygın durum: kendi kendine yeten bir kod tabanı — bir uygulama, bir kütüphane veya bir servis. Akıl yürütülecek tek bir tutarlı yüzey vardır; bu nedenle planlar doğrudan depodaki kod üzerinde çalışır ve kuruluma alma, deponun kendi yapısını ve kurallarını okur. Ajan tüm kod tabanını bağlam olarak tutar ve onu baştan sona işler.
 
 Özellikler:
 
@@ -24,7 +29,7 @@ Kendi kendine yeten bir kod tabanı — bir uygulama, bir kütüphane veya bir s
 
 ## Orkestratör merkezi
 
-Birden çok alt depoyu yöneten bir koordinasyon deposu. Planlar alt depolarda alt planlar başlatabilir ve kuruluma alma, tek bir kod tabanı yerine merkezin yönetilen depolar kaydını okur.
+Koordinasyon durumu: görevi diğer depoları yönetmek olan bir depo. Burada iş birimi bir dosya değil, bir alt depodur; bu nedenle planlar alt depolarda alt planlar başlatabilir ve kuruluma alma, tek bir kod tabanı yerine merkezin yönetilen depolar kaydını okur. Ajan sınırlar ve el değiştirmeler üzerine akıl yürütür — hangi deponun hangi işe sahip olduğu ve durumlarının nasıl tutarlı kaldığı.
 
 Özellikler:
 
@@ -35,11 +40,15 @@ Birden çok alt depoyu yöneten bir koordinasyon deposu. Planlar alt depolarda a
 
 ## Sınıflandırma sezgisel kuralı
 
+İki arketip disk üzerinde farklı görünür ve ajan doğrulayabileceği sinyallere göre aralarında karar verir — kendisine söylenen bir etikete göre değil. Aşağıdaki karar ağacı yolu gösterir; kısacası, bir depoyu yalnızca kanıtlar gerektirdiğinde orkestratör merkezi, aksi hâlde bireysel depo olarak ele alın.
+
 <ArchetypesTree lang="tr" class="not-prose my-10" />
 
-Bir ajan, birden çok iç içe git deposu veya alt modül, yönetilen depoların bir kaydı ya da manifesti veya harici depolara işaret eden yapılandırma bulduğunda bir depoyu orkestratör merkezi olarak sınıflandırmalıdır. Bu sinyallerin yokluğunda, depoyu bireysel bir depo olarak ele alır.
+Bir ajan, birden çok iç içe git deposu veya alt modül, yönetilen depoların bir kaydı ya da manifesti veya harici depolara işaret eden yapılandırma bulduğunda bir depoyu orkestratör merkezi olarak sınıflandırmalıdır. Bu sinyallerin yokluğunda, depoyu bireysel bir depo olarak ele alır — bu güvenli varsayılandır; çünkü var olmayan sınırlar genelinde bir planı aşırı kapsamlandırmak, var olan bir sınır içinde çalışmaktan daha kötüdür.
 
 ## Kuruluma alma nasıl farklılaşır
+
+Arketip, göstermelik bir etiket değildir; ajanın neyi okuduğunu, planın neye dokunabileceğini ve durumun nerede kaydedildiğini değiştirir.
 
 | Yön | Bireysel | Orkestratör |
 |--------|------------|--------------|

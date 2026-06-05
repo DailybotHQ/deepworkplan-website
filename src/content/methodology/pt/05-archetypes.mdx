@@ -6,15 +6,20 @@ lang: pt
 summary: Por que o arquétipo de um repositório determina como um agente faz o onboarding e define o escopo dos planos.
 icon: layers
 ---
+import ArchetypesCompare from '@/components/diagrams/home/ArchetypesCompare.astro';
 import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
 
 # Arquétipos de repositório
 
-O DWP reconhece dois arquétipos de repositório. O arquétipo que um agente infere determina como ele faz o onboarding e como define o escopo dos planos, de modo que identificá-lo corretamente é a primeira decisão em qualquer trabalho.
+Antes de alterar uma única linha, um agente toma uma decisão que molda tudo o que vem a seguir: **que tipo de repositório é este?** O arquétipo que ele infere define o limite dentro do qual raciocina pelo resto do trabalho — como faz o onboarding, até onde um plano alcança e onde o estado reside. Errar significa definir o escopo do trabalho para a superfície errada, a causa mais comum de deriva em tarefas de longo horizonte. Acertar permite ao agente trabalhar de forma autônoma por horas, porque planos, onboarding e estado se alinham com a forma real do código.
+
+O DWP reconhece dois arquétipos. A maioria dos repositórios é do primeiro tipo; o segundo existe para as equipes que coordenam muitos.
+
+<ArchetypesCompare lang="pt" class="not-prose my-10" />
 
 ## Repositório individual
 
-Uma base de código autocontida — uma aplicação, uma biblioteca ou um serviço. Os planos operam diretamente sobre o código no repositório, e o onboarding lê a estrutura e as convenções do próprio repositório.
+O caso comum: uma base de código autocontida — uma aplicação, uma biblioteca ou um serviço. Há uma única superfície coerente sobre a qual raciocinar, de modo que os planos operam diretamente sobre o código no repositório e o onboarding lê a estrutura e as convenções do próprio repositório. O agente mantém toda a base de código como contexto e trabalha nela de ponta a ponta.
 
 Características:
 
@@ -24,7 +29,7 @@ Características:
 
 ## Hub orquestrador
 
-Um repositório de coordenação que gerencia múltiplos repositórios filhos. Os planos podem criar planos filhos em sub-repositórios, e o onboarding lê o registro de repositórios gerenciados do hub em vez de uma única base de código.
+O caso de coordenação: um repositório cuja função é gerenciar outros repositórios. Aqui a unidade de trabalho não é um arquivo, mas um repositório filho; portanto, os planos podem criar planos filhos em sub-repositórios, e o onboarding lê o registro de repositórios gerenciados do hub em vez de uma única base de código. O agente raciocina sobre fronteiras e transferências — qual repositório é dono de qual trabalho e como o estado entre eles permanece consistente.
 
 Características:
 
@@ -35,11 +40,15 @@ Características:
 
 ## Heurística de classificação
 
+Os dois arquétipos se parecem diferentes em disco, e o agente decide entre eles a partir de sinais que pode verificar — não de um rótulo que lhe foi informado. A árvore de decisão abaixo mostra o caminho; em resumo, trate um repositório como hub orquestrador somente quando a evidência o exigir, e como repositório individual nos demais casos.
+
 <ArchetypesTree lang="pt" class="not-prose my-10" />
 
-Um agente deve classificar um repositório como um hub orquestrador quando encontra múltiplos repositórios git aninhados ou submódulos, um registro ou manifesto de repositórios gerenciados, ou configuração que aponta para repositórios externos. Na ausência desses sinais, ele trata o repositório como um repositório individual.
+Um agente deve classificar um repositório como hub orquestrador quando encontra múltiplos repositórios git aninhados ou submódulos, um registro ou manifesto de repositórios gerenciados, ou configuração que aponta para repositórios externos. Na ausência desses sinais, ele trata o repositório como um repositório individual — o padrão seguro, pois ampliar o escopo de um plano além de fronteiras que não existem é pior do que trabalhar dentro de uma que existe.
 
 ## Como o onboarding difere
+
+O arquétipo não é um rótulo cosmético; ele muda o que o agente lê, o que um plano pode tocar e onde o estado é registrado.
 
 | Aspecto | Individual | Orquestrador |
 |--------|------------|--------------|

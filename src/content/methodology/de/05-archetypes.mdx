@@ -6,15 +6,20 @@ lang: de
 summary: Warum der Archetyp eines Repositorys bestimmt, wie ein Agent onboardet und Pläne zuschneidet.
 icon: layers
 ---
+import ArchetypesCompare from '@/components/diagrams/home/ArchetypesCompare.astro';
 import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.astro';
 
 # Repository-Archetypen
 
-DWP erkennt zwei Repository-Archetypen. Der Archetyp, den ein Agent ableitet, bestimmt, wie er onboardet und wie er Pläne zuschneidet, sodass seine korrekte Identifizierung die erste Entscheidung in jedem Einsatz ist.
+Bevor ein Agent eine einzige Zeile ändert, trifft er eine Entscheidung, die alles Weitere prägt: **Was für ein Repository ist das?** Der Archetyp, den er ableitet, setzt die Grenze, innerhalb derer er für den Rest des Einsatzes denkt — wie er onboardet, wie weit ein Plan reicht und wo der Zustand gespeichert wird. Liegt er falsch, schneidet der Agent die Arbeit auf die falsche Oberfläche zu — die häufigste Ursache für Drift bei langfristigen Aufgaben. Liegt er richtig, kann er stundenlang autonom arbeiten, weil Pläne, Onboarding und Zustand alle mit der tatsächlichen Form des Codes übereinstimmen.
+
+DWP erkennt zwei Archetypen. Die meisten Repositorys sind der erste; der zweite existiert für Teams, die viele koordinieren.
+
+<ArchetypesCompare lang="de" class="not-prose my-10" />
 
 ## Einzel-Repository
 
-Eine in sich geschlossene Codebasis — eine Anwendung, eine Bibliothek oder ein Service. Pläne operieren direkt auf dem Code im Repository, und das Onboarding liest die eigene Struktur und die Konventionen des Repositorys.
+Der häufige Fall: eine in sich geschlossene Codebasis — eine Anwendung, eine Bibliothek oder ein Service. Es gibt eine einzige zusammenhängende Oberfläche, über die nachgedacht werden kann, sodass Pläne direkt auf dem Code im Repository operieren und das Onboarding die eigene Struktur und die Konventionen des Repositorys liest. Der Agent hält die gesamte Codebasis als seinen Kontext und bearbeitet sie von Anfang bis Ende.
 
 Merkmale:
 
@@ -24,7 +29,7 @@ Merkmale:
 
 ## Orchestrator-Hub
 
-Ein Koordinations-Repository, das mehrere untergeordnete Repositorys verwaltet. Pläne können untergeordnete Pläne in Sub-Repositorys erzeugen, und das Onboarding liest das Register der verwalteten Repositorys des Hubs statt einer einzelnen Codebasis.
+Der Koordinationsfall: ein Repository, dessen Aufgabe es ist, andere Repositorys zu verwalten. Hier ist die Arbeitseinheit nicht eine Datei, sondern ein untergeordnetes Repository — Pläne können untergeordnete Pläne in Sub-Repositorys erzeugen, und das Onboarding liest das Register der verwalteten Repositorys des Hubs statt einer einzelnen Codebasis. Der Agent denkt über Grenzen und Übergaben nach — welches Repository welche Arbeit besitzt und wie deren Zustand konsistent bleibt.
 
 Merkmale:
 
@@ -35,11 +40,15 @@ Merkmale:
 
 ## Klassifizierungsheuristik
 
-<ArchetypesTree lang="en" class="not-prose my-10" />
+Die beiden Archetypen sehen auf dem Datenträger unterschiedlich aus, und der Agent entscheidet zwischen ihnen anhand von Signalen, die er überprüfen kann — nicht anhand eines Labels, das ihm mitgeteilt wird. Der Entscheidungsbaum unten zeigt den Weg; kurz gesagt: Ein Repository wird nur dann als Orchestrator-Hub behandelt, wenn die Beweise es verlangen, und ansonsten als Einzel-Repository.
 
-Ein Agent sollte ein Repository als Orchestrator-Hub klassifizieren, wenn er mehrere verschachtelte git-Repositorys oder Submodule, ein Register oder Manifest verwalteter Repositorys oder Konfiguration findet, die auf externe Repositorys verweist. Fehlen diese Signale, behandelt er das Repository als Einzel-Repository.
+<ArchetypesTree lang="de" class="not-prose my-10" />
+
+Ein Agent sollte ein Repository als Orchestrator-Hub klassifizieren, wenn er mehrere verschachtelte git-Repositorys oder Submodule, ein Register oder Manifest verwalteter Repositorys oder Konfiguration findet, die auf externe Repositorys verweist. Fehlen diese Signale, behandelt er das Repository als Einzel-Repository — die sichere Voreinstellung, denn einen Plan über Grenzen hinaus zu weiten, die nicht existieren, ist schlimmer, als innerhalb einer vorhandenen zu arbeiten.
 
 ## Wie sich das Onboarding unterscheidet
+
+Der Archetyp ist kein kosmetisches Label; er verändert, was der Agent liest, was ein Plan berühren darf und wo der Zustand aufgezeichnet wird.
 
 | Aspekt | Individual | Orchestrator |
 |--------|------------|--------------|
@@ -50,4 +59,4 @@ Ein Agent sollte ein Repository als Orchestrator-Hub klassifizieren, wenn er meh
 
 Der praktische Effekt ist, dass ein Einzel-Repository-Agent über eine Codebasis von Anfang bis Ende schlussfolgert, während ein Orchestrator-Agent über Koordination schlussfolgert — welches untergeordnete Repository welche Arbeit besitzt und wie der repository-übergreifende Zustand konsistent bleibt.
 
-Den Archetyp richtig zu treffen ist es, was einen Agenten in die Lage versetzt, stundenlang ohne Aufsicht autonom zu arbeiten: Er schneidet Pläne, Onboarding und Zustand auf die richtige Grenze zu, sodass der Agent von der ersten bis zur letzten Aufgabe auf der korrekten Oberfläche operiert.
+Das ist es, was einen Agenten in die Lage versetzt, stundenlang ohne Aufsicht autonom zu arbeiten: Indem er den Archetyp zuerst festlegt, schneidet er Pläne, Onboarding und Zustand auf die richtige Grenze zu, sodass jede Aufgabe vom ersten bis zum letzten Schritt auf der korrekten Oberfläche operiert.
