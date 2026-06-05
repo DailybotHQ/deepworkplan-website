@@ -28,6 +28,7 @@ export const it: SiteTranslations = {
     examples: 'Esempi',
     init: 'Init',
     quickstart: 'Avvio rapido',
+    trust: 'Fiducia',
     github: 'GitHub',
     repo: {
       label: 'Codice sorgente',
@@ -701,5 +702,65 @@ export const it: SiteTranslations = {
       { label: 'Specifica', href: '/spec' },
       { label: 'Kit', href: '/kit' },
     ],
+  },
+
+  trustPage: {
+    meta: {
+      title: 'Fiducia e sicurezza',
+      description:
+        'Perché Deep Work Plan è sicuro da adottare: open source e MIT, Markdown-first senza chiamate di rete né telemetria, non distruttivo per design, con installazioni verificabili e una chiara politica di divulgazione delle vulnerabilità.',
+    },
+    eyebrow: 'Fiducia e sicurezza',
+    title: 'Fiducia e sicurezza',
+    intro:
+      'Nessuno dovrebbe installare una skill di cui non può fidarsi. Deep Work Plan è progettato per essere verificato, non accettato per fede: open source, Markdown-first, non distruttivo e controllabile prima di eseguirlo. Questa pagina illustra chiaramente cosa fa, cosa non fa e come confermare entrambe le cose.',
+    pillarsTitle: 'Cosa stai approvando',
+    pillars: [
+      {
+        title: 'Open source e licenza MIT',
+        body: 'Il sito web e la skill sono entrambi pubblici e ispezionabili riga per riga. Puoi leggere ogni riga prima di eseguirla e confrontare qualsiasi copia con il sorgente a una release taggata.',
+      },
+      {
+        title: 'Markdown-first — nessuna rete, nessuna telemetria',
+        body: "La skill non ha CLI, API HTTP né flusso di autenticazione. Non effettua chiamate di rete e non invia telemetria; il suo unico helper locale legge i metadati di git e dell'ambiente. Nulla del tuo repository lascia la tua macchina.",
+      },
+      {
+        title: 'Non distruttivo per design',
+        body: "L'unica azione rilevante per la sicurezza che la skill compie è modificare il tuo repository — e riconcilia anziché sovrascrivere. Rileva ciò che esiste, propone un piano e chiede conferma prima di sostituire qualsiasi cosa. L'output dei piani risiede in una cartella .dwp/ esclusa da git.",
+      },
+      {
+        title: 'Non tocca i segreti',
+        body: "La metodologia non esegue mai il commit di segreti e mantiene lo stato di lavoro fuori dal controllo di versione. L'onboarding aggiunge al .gitignore anziché riscriverlo, e ogni modifica è pensata per essere revisionata in diff piccoli e leggibili.",
+      },
+      {
+        title: 'Provenienza verificabile',
+        body: 'Ogni release pubblica i checksum sulla skill distribuita, così puoi confermare che una copia scaricata corrisponde a quanto pubblicato prima di fidarti di essa.',
+      },
+    ],
+    verifyTitle: 'Verifica prima di eseguire',
+    verifyIntro:
+      "Tratta la skill come non attendibile finché non l'hai verificata. Ogni release allega un file SHA256SUMS che copre la skill distribuita. Scaricalo per la versione che intendi installare e verifica che la tua copia corrisponda — un'uscita diversa da zero significa che un file non corrisponde e devi fermarti.",
+    codeLabel: 'shell',
+    verifyNote:
+      'Le release sono checksummate, non firmate — la firma (cosign o GPG del maintainer) è il passo successivo documentato, non una garanzia attuale. Poiché tutto è aperto, puoi anche confrontare qualsiasi file con il repository alla sua tag.',
+    disclosureTitle: 'Segnalare una vulnerabilità',
+    disclosureBody:
+      'Hai trovato un problema di sicurezza? Segnalalo privatamente a security@dailybot.com invece di aprire una issue pubblica. Confermiamo le segnalazioni entro 3 giorni lavorativi e miriamo a pubblicare una correzione o mitigazione entro 30 giorni per le scoperte valide, a seconda della gravità. Il sito web e la skill condividono la stessa politica.',
+    resourcesTitle: 'Risorse sulla fiducia',
+    linkManifest: 'Manifesto di fiducia leggibile dalla macchina',
+    linkSecurityTxt: 'security.txt (RFC 9116)',
+    linkPolicy: 'Politica di sicurezza del sito web',
+    linkSkillPolicy: 'Politica di sicurezza e modello di minacce della skill',
+    limitationsTitle: 'Limitazioni oneste',
+    limitations: [
+      'Le release sono checksummate, ma non ancora firmate crittograficamente — la firma è pianificata, non ancora implementata.',
+      'Deep Work Plan esegue un agente di coding autonomo sul tuo repository. Rivedi il piano proposto e i suoi diff; la metodologia è progettata per quella revisione, non per sostituirla.',
+      'Le affermazioni di fiducia qui descrivono solo le fonti ufficiali. Una copia modificata o di terze parti che si è allontanata dai repository non gode di nessuna di queste garanzie — verificala prima.',
+    ],
+    ctaTitle: 'Adottala con fiducia',
+    ctaBody:
+      "Leggi la metodologia e la specifica, punta un agente sull'endpoint init e verifica l'installazione prima di eseguirla.",
+    ctaPrimary: 'Leggi la metodologia',
+    ctaSecondary: 'Adozione (init)',
   },
 };

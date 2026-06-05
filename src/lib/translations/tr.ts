@@ -28,6 +28,7 @@ export const tr: SiteTranslations = {
     examples: 'Örnekler',
     init: 'Init',
     quickstart: 'Hızlı başlangıç',
+    trust: 'Güven',
     github: 'GitHub',
     repo: {
       label: 'Kaynak kod',
@@ -702,5 +703,65 @@ export const tr: SiteTranslations = {
       { label: 'Spesifikasyon', href: '/spec' },
       { label: 'Kit', href: '/kit' },
     ],
+  },
+
+  trustPage: {
+    meta: {
+      title: 'Güven ve güvenlik',
+      description:
+        "Deep Work Plan'in neden güvenle benimsenebileceği: açık kaynak ve MIT lisanslı, ağ çağrısı veya telemetri içermeyen Markdown-first yapı, tasarım gereği yıkıcı olmayan, doğrulanabilir kurulumlar ve açık bir güvenlik açığı bildirme politikası.",
+    },
+    eyebrow: 'Güven & güvenlik',
+    title: 'Güven ve güvenlik',
+    intro:
+      "Kimse güvenemediği bir skill'i kurmamalıdır. Deep Work Plan, kör bir inanca değil doğrulamaya dayalı olarak tasarlanmıştır: açık kaynak, Markdown-first, yıkıcı olmayan ve çalıştırmadan önce kontrol edilebilir. Bu sayfa, ne yaptığını, ne yapmadığını ve her ikisini nasıl doğrulayacağınızı açıkça ortaya koyar.",
+    pillarsTitle: 'Neye güveniyorsunuz',
+    pillars: [
+      {
+        title: 'Açık kaynak ve MIT lisanslı',
+        body: "Web sitesi ve skill'in ikisi de herkese açık ve karşılaştırılabilirdir. Çalıştırmadan önce her satırı okuyabilir ve herhangi bir kopyayı etiketli bir sürümdeki kaynakla karşılaştırabilirsiniz.",
+      },
+      {
+        title: 'Markdown-first — ağ yok, telemetri yok',
+        body: "Skill'in CLI'si, HTTP API'si veya kimlik doğrulama akışı yoktur. Ağ çağrısı yapmaz ve telemetri göndermez; tek yerel yardımcısı git ve ortam meta verilerini okur. Deponuzla ilgili hiçbir şey makinenizden çıkmaz.",
+      },
+      {
+        title: 'Tasarım gereği yıkıcı olmayan',
+        body: "Skill'in güvenlikle ilgili tek eylemi deponuzu değiştirmektir ve bunu üzerine yazmak yerine uzlaştırarak yapar. Mevcut olanı tespit eder, bir plan önerir ve herhangi bir şeyin yerini almadan önce sorar. Plan çıktıları, gitignore'lanmış bir .dwp/ dizininde tutulur.",
+      },
+      {
+        title: 'Sırları dokunmaz',
+        body: "Metodoloji hiçbir zaman sır kaydetmez ve çalışma durumunu sürüm denetiminin dışında tutar. Onboarding, .gitignore'u yeniden yazmak yerine ona ekler ve her değişiklik küçük, okunabilir farklar halinde gözden geçirilmek üzere tasarlanmıştır.",
+      },
+      {
+        title: 'Doğrulanabilir kaynak',
+        body: 'Her sürüm, gönderilen skill üzerinde sağlama toplamları yayımlar; böylece güvenmeden önce indirilen bir kopyanın yayımlananla eşleştiğini doğrulayabilirsiniz.',
+      },
+    ],
+    verifyTitle: 'Çalıştırmadan önce doğrulayın',
+    verifyIntro:
+      "Skill'i kontrol edene kadar güvenilmez olarak değerlendirin. Her sürüm, gönderilen skill'i kapsayan bir SHA256SUMS dosyası ekler. Kurmayı planladığınız sürüm için indirin, ardından kopyanızın eşleştiğini doğrulayın — sıfırdan farklı bir çıkış, bir dosyanın eşleşmediği anlamına gelir ve durmanız gerekir.",
+    codeLabel: 'shell',
+    verifyNote:
+      "Sürümler sağlama toplamlarına sahiptir, imzalı değildir — imzalama (cosign veya yetkili kişi GPG'si) belgelenmiş bir sonraki adımdır, mevcut bir iddia değildir. Her şey açık olduğundan, herhangi bir dosyayı etiketindeki depoya göre de karşılaştırabilirsiniz.",
+    disclosureTitle: 'Güvenlik açığı bildirin',
+    disclosureBody:
+      'Bir güvenlik sorunu mu buldunuz? Kamuya açık bir issue açmak yerine özel olarak security@dailybot.com adresine bildirin. Raporları 3 iş günü içinde onaylıyor ve ciddiyete bağlı olarak geçerli bulgular için 30 gün içinde bir düzeltme veya hafifletme göndermeyi hedefliyoruz. Web sitesi ve skill aynı politikayı paylaşır.',
+    resourcesTitle: 'Güven kaynakları',
+    linkManifest: 'Makine tarafından okunabilir güven manifestosu',
+    linkSecurityTxt: 'security.txt (RFC 9116)',
+    linkPolicy: 'Web sitesi güvenlik politikası',
+    linkSkillPolicy: 'Skill güvenlik politikası ve tehdit modeli',
+    limitationsTitle: 'Dürüst sınırlamalar',
+    limitations: [
+      'Sürümler sağlama toplamlarına sahiptir, henüz kriptografik olarak imzalanmamıştır — imzalama planlandı, tamamlanmadı.',
+      'Deep Work Plan, deponuza karşı otonom bir kodlama ajanı çalıştırır. Önerilen planı ve farklarını gözden geçirin; metodoloji bu inceleme için tasarlanmıştır, onun yerini almak için değil.',
+      'Buradaki güven iddiaları yalnızca resmi kaynakları tanımlar. Depolardan sapan değiştirilmiş veya üçüncü taraf bir kopya, bu garantilerin hiçbirini taşımaz — önce doğrulayın.',
+    ],
+    ctaTitle: 'Güvenle benimseyin',
+    ctaBody:
+      'Metodolojiyi ve spesifikasyonu okuyun, bir ajanı init uç noktasına yönlendirin ve çalıştırmadan önce kurulumu doğrulayın.',
+    ctaPrimary: 'Metodolojiyi okuyun',
+    ctaSecondary: 'Benimseme (init)',
   },
 };

@@ -28,6 +28,7 @@ export const vi: SiteTranslations = {
     examples: 'Ví dụ',
     init: 'Init',
     quickstart: 'Khởi động nhanh',
+    trust: 'Tin tưởng',
     github: 'GitHub',
     repo: {
       label: 'Mã nguồn',
@@ -699,5 +700,65 @@ export const vi: SiteTranslations = {
       { label: 'Đặc tả', href: '/spec' },
       { label: 'Kit', href: '/kit' },
     ],
+  },
+
+  trustPage: {
+    meta: {
+      title: 'Tin tưởng và bảo mật',
+      description:
+        'Tại sao Deep Work Plan an toàn để áp dụng: mã nguồn mở và MIT, Markdown-first không có lời gọi mạng hay telemetry, không phá hủy theo thiết kế, với các lần cài đặt có thể xác minh và chính sách công bố lỗ hổng rõ ràng.',
+    },
+    eyebrow: 'Tin tưởng & bảo mật',
+    title: 'Tin tưởng và bảo mật',
+    intro:
+      'Không ai nên cài một skill mà họ không thể tin tưởng. Deep Work Plan được xây dựng để xác minh, không phải để tin một cách mù quáng: mã nguồn mở, Markdown-first, không phá hủy và có thể kiểm tra trước khi chạy. Trang này nêu rõ những gì nó làm, những gì nó không làm, và cách xác nhận cả hai.',
+    pillarsTitle: 'Bạn đang tin tưởng điều gì',
+    pillars: [
+      {
+        title: 'Mã nguồn mở và cấp phép MIT',
+        body: 'Trang web và skill đều công khai và có thể so sánh được. Bạn có thể đọc từng dòng trước khi chạy, và so sánh bất kỳ bản sao nào với mã nguồn tại một phiên bản được gắn thẻ.',
+      },
+      {
+        title: 'Markdown-first — không mạng, không telemetry',
+        body: 'Skill không có CLI, không có HTTP API và không có luồng xác thực. Nó không thực hiện lời gọi mạng và không gửi telemetry; trợ lý cục bộ duy nhất của nó đọc metadata git và môi trường. Không có gì liên quan đến repository của bạn rời khỏi máy của bạn.',
+      },
+      {
+        title: 'Không phá hủy theo thiết kế',
+        body: 'Hành động duy nhất liên quan đến bảo mật mà skill thực hiện là thay đổi repository của bạn — và nó hòa giải thay vì ghi đè. Nó phát hiện những gì tồn tại, đề xuất một kế hoạch và hỏi trước khi thay thế bất cứ thứ gì. Đầu ra của kế hoạch nằm trong thư mục .dwp/ được gitignore.',
+      },
+      {
+        title: 'Không chạm vào bí mật',
+        body: 'Phương pháp luận không bao giờ commit bí mật và giữ trạng thái làm việc ngoài kiểm soát phiên bản. Khởi tạo thêm vào .gitignore thay vì viết lại nó, và mọi thay đổi đều được thiết kế để xem xét trong các diff nhỏ, dễ đọc.',
+      },
+      {
+        title: 'Nguồn gốc có thể xác minh',
+        body: 'Mỗi bản phát hành công bố checksum cho skill được giao, để bạn có thể xác nhận một bản sao đã tải xuống khớp với những gì đã công bố trước khi tin tưởng nó.',
+      },
+    ],
+    verifyTitle: 'Xác minh trước khi chạy',
+    verifyIntro:
+      'Hãy coi skill là không đáng tin cho đến khi bạn đã kiểm tra nó. Mỗi bản phát hành đính kèm một file SHA256SUMS bao gồm skill được giao. Tải xuống cho phiên bản bạn định cài đặt, rồi xác minh bản sao của bạn khớp — lối thoát khác không có nghĩa là một file không khớp và bạn nên dừng lại.',
+    codeLabel: 'shell',
+    verifyNote:
+      'Các bản phát hành có checksum, không có chữ ký — ký (cosign hoặc GPG của người duy trì) là bước tiếp theo được ghi lại, không phải tuyên bố hiện tại. Vì mọi thứ đều mở, bạn cũng có thể so sánh bất kỳ file nào với repository tại tag của nó.',
+    disclosureTitle: 'Báo cáo lỗ hổng',
+    disclosureBody:
+      'Tìm thấy vấn đề bảo mật? Báo cáo riêng tư tới security@dailybot.com thay vì mở một issue công khai. Chúng tôi xác nhận báo cáo trong vòng 3 ngày làm việc và đặt mục tiêu gửi bản sửa lỗi hoặc biện pháp giảm thiểu trong vòng 30 ngày cho các phát hiện hợp lệ, tùy thuộc vào mức độ nghiêm trọng. Trang web và skill chia sẻ cùng một chính sách.',
+    resourcesTitle: 'Tài nguyên tin tưởng',
+    linkManifest: 'Manifest tin tưởng có thể đọc bằng máy',
+    linkSecurityTxt: 'security.txt (RFC 9116)',
+    linkPolicy: 'Chính sách bảo mật trang web',
+    linkSkillPolicy: 'Chính sách bảo mật skill & mô hình mối đe dọa',
+    limitationsTitle: 'Những hạn chế thành thật',
+    limitations: [
+      'Các bản phát hành có checksum, nhưng chưa được ký mật mã — ký được lên kế hoạch, chưa thực hiện.',
+      'Deep Work Plan chạy một coding agent tự chủ đối với repository của bạn. Xem xét kế hoạch được đề xuất và các diff của nó; phương pháp luận được thiết kế cho việc xem xét đó, không phải để thay thế nó.',
+      'Các tuyên bố tin tưởng ở đây chỉ mô tả các nguồn chính thức. Một bản sao đã bị sửa đổi hoặc của bên thứ ba đã trôi dạt khỏi các repository không mang theo bất kỳ đảm bảo nào trong số này — hãy xác minh trước.',
+    ],
+    ctaTitle: 'Áp dụng với sự tự tin',
+    ctaBody:
+      'Đọc phương pháp luận và đặc tả, trỏ một agent vào endpoint init và xác minh quá trình cài đặt trước khi bạn chạy nó.',
+    ctaPrimary: 'Đọc phương pháp luận',
+    ctaSecondary: 'Áp dụng (init)',
   },
 };

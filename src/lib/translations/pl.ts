@@ -28,6 +28,7 @@ export const pl: SiteTranslations = {
     examples: 'Przykłady',
     init: 'Init',
     quickstart: 'Szybki start',
+    trust: 'Zaufanie',
     github: 'GitHub',
     repo: {
       label: 'Kod źródłowy',
@@ -631,6 +632,67 @@ export const pl: SiteTranslations = {
       { label: 'Przejrzyj zestaw', href: '/kit' },
       { label: 'Zobacz przykłady', href: '/examples' },
     ],
+  },
+
+  // Deep Work Plan — Trust & security page
+  trustPage: {
+    meta: {
+      title: 'Zaufanie i bezpieczeństwo',
+      description:
+        'Dlaczego Deep Work Plan jest bezpieczny w adopcji: open source i MIT, Markdown-first bez połączeń sieciowych ani telemetrii, niedestrukcyjny z założenia, z weryfikowalnymi instalacjami i przejrzystą polityką ujawniania podatności.',
+    },
+    eyebrow: 'Zaufanie i bezpieczeństwo',
+    title: 'Zaufanie i bezpieczeństwo',
+    intro:
+      'Nikt nie powinien instalować skilla, któremu nie może ufać. Deep Work Plan jest zbudowany tak, by dało się go zweryfikować, a nie przyjąć na wiarę: open source, Markdown-first, niedestrukcyjny i sprawdzalny przed uruchomieniem. Ta strona mówi wprost, co robi, czego nie robi i jak potwierdzić jedno i drugie.',
+    pillarsTitle: 'Czemu ufasz',
+    pillars: [
+      {
+        title: 'Open source na licencji MIT',
+        body: 'Witryna i skill są publiczne i diffowalne. Możesz przeczytać każdą linię przed uruchomieniem i porównać dowolną kopię ze źródłem przy oznaczonym wydaniu.',
+      },
+      {
+        title: 'Markdown-first — bez sieci, bez telemetrii',
+        body: 'Skill nie ma CLI, API HTTP ani przepływu uwierzytelniania. Nie wykonuje żadnych połączeń sieciowych i nie wysyła telemetrii; jego jedynym lokalnym pomocnikiem jest odczyt metadanych git i środowiska. Żadna informacja o Twoim repozytorium nie opuszcza Twojej maszyny.',
+      },
+      {
+        title: 'Niedestrukcyjny z założenia',
+        body: 'Jedyne działanie skilla istotne z punktu widzenia bezpieczeństwa to zmiana Twojego repozytorium — a robi to przez uzgadnianie, a nie nadpisywanie. Wykrywa, co istnieje, proponuje plan i pyta przed zastąpieniem czegokolwiek. Efekty planu trafiają do ignorowanego przez git katalogu .dwp/.',
+      },
+      {
+        title: 'Nie dotyka sekretów',
+        body: 'Metodyka nigdy nie zatwierdza sekretów i trzyma stan roboczy poza kontrolą wersji. Onboarding dopisuje do .gitignore zamiast go nadpisywać, a każda zmiana ma być przeglądana w małych, czytelnych diffach.',
+      },
+      {
+        title: 'Weryfikowalne pochodzenie',
+        body: 'Każde wydanie publikuje sumy kontrolne dla dostarczonego skilla, dzięki czemu możesz potwierdzić, że pobrана kopia odpowiada temu, co zostało opublikowane, zanim jej zaufasz.',
+      },
+    ],
+    verifyTitle: 'Zweryfikuj przed uruchomieniem',
+    verifyIntro:
+      'Traktuj skill jako niezaufany, dopóki go nie sprawdzisz. Każde wydanie dołącza plik SHA256SUMS obejmujący dostarczony skill. Pobierz go dla wersji, którą zamierzasz zainstalować, a następnie sprawdź, czy Twoja kopia pasuje — niezerowe wyjście oznacza, że plik nie pasuje i powinieneś się zatrzymać.',
+    codeLabel: 'shell',
+    verifyNote:
+      'Wydania są sumowane kontrolnie, nie podpisywane — podpisywanie (cosign lub GPG opiekuna) to udokumentowany kolejny krok, a nie bieżące twierdzenie. Ponieważ wszystko jest otwarte, możesz też diffować dowolny plik względem repozytorium przy jego tagu.',
+    disclosureTitle: 'Zgłoś podatność',
+    disclosureBody:
+      'Znalazłeś problem z bezpieczeństwem? Zgłoś go prywatnie na adres security@dailybot.com, zamiast otwierać publiczne zgłoszenie. Potwierdzamy odbiór raportów w ciągu 3 dni roboczych i dążymy do dostarczenia poprawki lub łagodzenia w ciągu 30 dni dla ważnych ustaleń, w zależności od powagi. Witryna i skill dzielą tę samą politykę.',
+    resourcesTitle: 'Zasoby dotyczące zaufania',
+    linkManifest: 'Manifest zaufania odczytywalny przez maszyny',
+    linkSecurityTxt: 'security.txt (RFC 9116)',
+    linkPolicy: 'Polityka bezpieczeństwa witryny',
+    linkSkillPolicy: 'Polityka bezpieczeństwa skilla i model zagrożeń',
+    limitationsTitle: 'Uczciwe ograniczenia',
+    limitations: [
+      'Wydania są sumowane kontrolnie, ale jeszcze nie podpisywane kryptograficznie — podpisywanie jest zaplanowane, nie wykonane.',
+      'Deep Work Plan uruchamia autonomicznego agenta kodującego względem Twojego repozytorium. Przeglądaj jego proponowany plan i diffe; metodyka jest zaprojektowana do tego przeglądu, nie do jego zastąpienia.',
+      'Twierdzenia dotyczące zaufania opisują wyłącznie oficjalne źródła. Zmodyfikowana lub zewnętrzna kopia, która odeszła od repozytoriów, nie niesie żadnej z tych gwarancji — najpierw ją zweryfikuj.',
+    ],
+    ctaTitle: 'Adoptuj z pewnością',
+    ctaBody:
+      'Przeczytaj metodykę i specyfikację, skieruj agenta na endpoint init i zweryfikuj instalację przed uruchomieniem.',
+    ctaPrimary: 'Przeczytaj metodykę',
+    ctaSecondary: 'Adopcja (init)',
   },
 
   // Deep Work Plan — Init / adoption endpoint

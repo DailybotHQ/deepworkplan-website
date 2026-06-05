@@ -27,6 +27,7 @@ export const zh: SiteTranslations = {
     examples: '示例',
     init: 'Init',
     quickstart: '快速开始',
+    trust: '信任',
     github: 'GitHub',
     repo: {
       label: '源代码',
@@ -693,5 +694,64 @@ export const zh: SiteTranslations = {
       { label: '规范', href: '/spec' },
       { label: '套件', href: '/kit' },
     ],
+  },
+
+  trustPage: {
+    meta: {
+      title: '信任与安全',
+      description:
+        '为什么 Deep Work Plan 可以放心采用：开源且采用 MIT 许可、以 Markdown 为核心且无网络调用或遥测、非破坏性设计、安装可验证，并具有清晰的漏洞披露政策。',
+    },
+    eyebrow: '信任与安全',
+    title: '信任与安全',
+    intro:
+      '没有人应该安装一个无法信任的技能。Deep Work Plan 生来就是可被验证的，而非依赖信念：开源、以 Markdown 为核心、非破坏性，且在运行之前就可以逐行核查。本页直白地说明它做了什么、没做什么，以及如何对两者都加以确认。',
+    pillarsTitle: '你所信任的内容',
+    pillars: [
+      {
+        title: '开源且采用 MIT 许可',
+        body: '网站和技能均公开且可 diff。你可以在运行前阅读每一行，并将任意副本与某个 tag 发布时的源代码进行比对。',
+      },
+      {
+        title: '以 Markdown 为核心——无网络调用，无遥测',
+        body: '该技能没有 CLI、没有 HTTP API，也没有认证流程。它不发起任何网络调用，也不发送任何遥测数据；它唯一的本地辅助程序只读取 git 和环境元数据。你的代码仓库中没有任何信息会离开你的机器。',
+      },
+      {
+        title: '非破坏性设计',
+        body: '该技能唯一与安全相关的操作就是修改你的代码仓库——而且它是协调式的，而非覆盖式的。它会检测已有内容，提出一份计划，并在替换任何内容之前征求确认。计划输出存放在被 gitignore 的 .dwp/ 目录中。',
+      },
+      {
+        title: '不涉及任何密钥',
+        body: '该方法论从不将密钥提交到版本控制，并将工作状态保存在版本控制之外。接入过程追加 .gitignore 而非重写它，每一处改动都设计为以小巧、可读的 diff 呈现供审阅。',
+      },
+      {
+        title: '可验证的来源',
+        body: '每个发布版本都会为已发布的技能文件发布校验和，因此你可以在信任之前确认下载的副本与已发布内容相符。',
+      },
+    ],
+    verifyTitle: '运行前先验证',
+    verifyIntro:
+      '在完成核查之前，请将该技能视为不可信的。每个发布版本都会附带一份涵盖所有已发布技能文件的 SHA256SUMS 文件。下载你打算安装的版本所对应的文件，然后验证你的副本是否匹配——非零退出码意味着某个文件不匹配，此时应立即停止。',
+    codeLabel: 'shell',
+    verifyNote:
+      '发布版本有校验和，但未经签名——签名（cosign 或维护者 GPG）是已记录的下一步计划，而非当前的承诺。由于一切都是公开的，你也可以将任意文件与仓库在其 tag 处的内容进行比对。',
+    disclosureTitle: '报告漏洞',
+    disclosureBody:
+      '发现了安全问题？请私下发送邮件至 security@dailybot.com 进行报告，而非公开提交 issue。我们在 3 个工作日内确认收到报告，并根据严重程度争取在 30 天内为有效发现提供修复或缓解措施。网站和技能共享同一套政策。',
+    resourcesTitle: '信任资源',
+    linkManifest: '可机器读取的信任清单',
+    linkSecurityTxt: 'security.txt（RFC 9116）',
+    linkPolicy: '网站安全政策',
+    linkSkillPolicy: '技能安全政策与威胁模型',
+    limitationsTitle: '诚实的局限性',
+    limitations: [
+      '发布版本有校验和，但尚未经过密码学签名——签名已在计划之中，尚未完成。',
+      'Deep Work Plan 对你的代码仓库运行一个自主编码代理。请审阅它提出的计划和 diff；该方法论正是为这种审阅而设计的，而非取代它。',
+      '这里的信任声明仅描述官方来源。已偏离仓库的经修改或第三方副本不附带这些保证——请先验证。',
+    ],
+    ctaTitle: '放心采用',
+    ctaBody: '阅读方法论和规范，将代理指向 init 端点，并在运行之前验证安装。',
+    ctaPrimary: '阅读方法论',
+    ctaSecondary: '采纳（Init）',
   },
 };

@@ -28,6 +28,7 @@ export const fr: SiteTranslations = {
     examples: 'Exemples',
     init: 'Init',
     quickstart: 'Démarrage rapide',
+    trust: 'Confiance',
     github: 'GitHub',
     repo: {
       label: 'Code source',
@@ -705,5 +706,65 @@ export const fr: SiteTranslations = {
       { label: 'Spécification', href: '/spec' },
       { label: 'Kit', href: '/kit' },
     ],
+  },
+
+  trustPage: {
+    meta: {
+      title: 'Confiance et sécurité',
+      description:
+        'Pourquoi Deep Work Plan est sûr à adopter : open source et MIT, Markdown-first sans appels réseau ni télémétrie, non destructif par conception, avec des installations vérifiables et une politique claire de divulgation des vulnérabilités.',
+    },
+    eyebrow: 'Confiance et sécurité',
+    title: 'Confiance et sécurité',
+    intro:
+      "Personne ne devrait installer une skill en laquelle il ne peut pas avoir confiance. Deep Work Plan est conçu pour être vérifié, pas accepté sur parole : open source, Markdown-first, non destructif et vérifiable avant toute exécution. Cette page indique clairement ce qu'il fait, ce qu'il ne fait pas et comment confirmer les deux.",
+    pillarsTitle: 'Ce en quoi vous faites confiance',
+    pillars: [
+      {
+        title: 'Open source et licence MIT',
+        body: "Le site web et la skill sont tous deux publics et inspectables. Vous pouvez lire chaque ligne avant de l'exécuter et comparer toute copie avec la source à une version taguée.",
+      },
+      {
+        title: 'Markdown-first — pas de réseau, pas de télémétrie',
+        body: "La skill n'a ni CLI, ni API HTTP, ni flux d'authentification. Elle n'effectue aucun appel réseau et n'envoie aucune télémétrie ; son seul helper local lit les métadonnées git et d'environnement. Rien de votre dépôt ne quitte votre machine.",
+      },
+      {
+        title: 'Non destructif par conception',
+        body: "La seule action pertinente pour la sécurité que la skill effectue est de modifier votre dépôt — et elle réconcilie plutôt qu'elle n'écrase. Elle détecte ce qui existe, propose un plan et demande confirmation avant de remplacer quoi que ce soit. Les résultats des plans résident dans un répertoire .dwp/ ignoré par git.",
+      },
+      {
+        title: 'Ne touche aucun secret',
+        body: "La méthodologie ne comite jamais de secrets et maintient l'état de travail en dehors du contrôle de version. L'onboarding complète .gitignore plutôt que de le réécrire, et chaque modification est pensée pour être relue dans de petits diffs lisibles.",
+      },
+      {
+        title: 'Provenance vérifiable',
+        body: "Chaque version publie des checksums sur la skill distribuée, afin que vous puissiez confirmer qu'une copie téléchargée correspond à ce qui a été publié avant de lui faire confiance.",
+      },
+    ],
+    verifyTitle: "Vérifiez avant d'exécuter",
+    verifyIntro:
+      "Traitez la skill comme non fiable tant que vous ne l'avez pas vérifiée. Chaque version joint un fichier SHA256SUMS couvrant la skill distribuée. Téléchargez-le pour la version que vous souhaitez installer, puis vérifiez que votre copie correspond — une sortie non nulle signifie qu'un fichier ne correspond pas et vous devez vous arrêter.",
+    codeLabel: 'shell',
+    verifyNote:
+      "Les versions sont checksummées, pas signées — la signature (cosign ou GPG du mainteneur) est la prochaine étape documentée, pas une garantie actuelle. Comme tout est ouvert, vous pouvez aussi comparer n'importe quel fichier avec le dépôt à son tag.",
+    disclosureTitle: 'Signaler une vulnérabilité',
+    disclosureBody:
+      "Vous avez découvert un problème de sécurité ? Signalez-le en privé à security@dailybot.com plutôt que d'ouvrir un ticket public. Nous accusons réception des signalements sous 3 jours ouvrables et visons à publier un correctif ou une atténuation sous 30 jours pour les découvertes valides, selon leur gravité. Le site web et la skill partagent la même politique.",
+    resourcesTitle: 'Ressources de confiance',
+    linkManifest: 'Manifeste de confiance lisible par machine',
+    linkSecurityTxt: 'security.txt (RFC 9116)',
+    linkPolicy: 'Politique de sécurité du site web',
+    linkSkillPolicy: 'Politique de sécurité et modèle de menaces de la skill',
+    limitationsTitle: 'Limitations honnêtes',
+    limitations: [
+      'Les versions sont checksummées, mais pas encore signées cryptographiquement — la signature est prévue, pas encore réalisée.',
+      'Deep Work Plan exécute un agent de coding autonome sur votre dépôt. Relisez son plan proposé et ses diffs ; la méthodologie est conçue pour cette relecture, pas pour la remplacer.',
+      "Les affirmations de confiance ici décrivent uniquement les sources officielles. Une copie modifiée ou tierce qui s'est écartée des dépôts ne bénéficie d'aucune de ces garanties — vérifiez-la d'abord.",
+    ],
+    ctaTitle: 'Adoptez-la en toute confiance',
+    ctaBody:
+      "Lisez la méthodologie et la spécification, pointez un agent vers l'endpoint init et vérifiez l'installation avant de l'exécuter.",
+    ctaPrimary: 'Lire la méthodologie',
+    ctaSecondary: 'Adoption (init)',
   },
 };

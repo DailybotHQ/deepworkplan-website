@@ -50,6 +50,7 @@ const KNOWN_BASE_PATHS = new Set([
   'examples',
   'quickstart',
   'init',
+  'trust',
   'setup',
   'onboarding',
 ]);

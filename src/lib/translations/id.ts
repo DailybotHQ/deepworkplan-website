@@ -27,6 +27,7 @@ export const id: SiteTranslations = {
     examples: 'Contoh',
     init: 'Init',
     quickstart: 'Mulai Cepat',
+    trust: 'Kepercayaan',
     github: 'GitHub',
     repo: {
       label: 'Kode sumber',
@@ -701,5 +702,65 @@ export const id: SiteTranslations = {
       { label: 'Spesifikasi', href: '/spec' },
       { label: 'Kit', href: '/kit' },
     ],
+  },
+
+  trustPage: {
+    meta: {
+      title: 'Kepercayaan dan keamanan',
+      description:
+        'Mengapa Deep Work Plan aman untuk diadopsi: sumber terbuka dan berlisensi MIT, Markdown-first tanpa panggilan jaringan atau telemetri, non-destruktif berdasarkan desain, dengan instalasi yang dapat diverifikasi dan kebijakan pengungkapan kerentanan yang jelas.',
+    },
+    eyebrow: 'Kepercayaan & keamanan',
+    title: 'Kepercayaan dan keamanan',
+    intro:
+      'Tidak ada yang harus memasang skill yang tidak bisa dipercaya. Deep Work Plan dibangun untuk diverifikasi, bukan diterima begitu saja: sumber terbuka, Markdown-first, non-destruktif, dan dapat diperiksa sebelum Anda menjalankannya. Halaman ini menyatakan dengan jelas apa yang dilakukannya, apa yang tidak dilakukannya, dan cara mengonfirmasi keduanya.',
+    pillarsTitle: 'Apa yang Anda percayai',
+    pillars: [
+      {
+        title: 'Sumber terbuka dan berlisensi MIT',
+        body: 'Situs web dan skill keduanya publik dan dapat dibandingkan. Anda dapat membaca setiap baris sebelum menjalankannya, dan membandingkan salinan mana pun terhadap sumber pada rilis bertag.',
+      },
+      {
+        title: 'Markdown-first — tanpa jaringan, tanpa telemetri',
+        body: 'Skill tidak memiliki CLI, tidak ada HTTP API, dan tidak ada alur autentikasi. Ia tidak melakukan panggilan jaringan dan tidak mengirim telemetri; satu-satunya helper lokalnya membaca metadata git dan lingkungan. Tidak ada yang berkaitan dengan repositori Anda yang meninggalkan mesin Anda.',
+      },
+      {
+        title: 'Non-destruktif berdasarkan desain',
+        body: 'Satu-satunya tindakan yang relevan dari segi keamanan yang dilakukan skill adalah mengubah repositori Anda — dan ia merekonsiliasi alih-alih menimpa. Ia mendeteksi apa yang ada, mengusulkan rencana, dan bertanya sebelum mengganti apa pun. Keluaran rencana berada di direktori .dwp/ yang di-gitignore.',
+      },
+      {
+        title: 'Tidak menyentuh rahasia',
+        body: 'Metodologi tidak pernah melakukan commit rahasia dan menjaga status pekerjaan di luar kontrol versi. Onboarding menambahkan ke .gitignore alih-alih menulisnya ulang, dan setiap perubahan dimaksudkan untuk ditinjau dalam diff kecil yang mudah dibaca.',
+      },
+      {
+        title: 'Asal-usul yang dapat diverifikasi',
+        body: 'Setiap rilis menerbitkan checksum atas skill yang dikirimkan, sehingga Anda dapat mengonfirmasi bahwa salinan yang diunduh cocok dengan yang diterbitkan sebelum Anda mempercayainya.',
+      },
+    ],
+    verifyTitle: 'Verifikasi sebelum menjalankan',
+    verifyIntro:
+      'Perlakukan skill sebagai tidak tepercaya sampai Anda telah memeriksanya. Setiap rilis melampirkan file SHA256SUMS yang mencakup skill yang dikirimkan. Unduh untuk versi yang ingin Anda pasang, lalu verifikasi bahwa salinan Anda cocok — keluaran non-zero berarti sebuah file tidak cocok dan Anda harus berhenti.',
+    codeLabel: 'shell',
+    verifyNote:
+      'Rilis ber-checksum, bukan ditandatangani — penandatanganan (cosign atau GPG pengelola) adalah langkah berikutnya yang terdokumentasi, bukan klaim saat ini. Karena semuanya terbuka, Anda juga dapat membandingkan file mana pun terhadap repositori pada tag-nya.',
+    disclosureTitle: 'Laporkan kerentanan',
+    disclosureBody:
+      'Menemukan masalah keamanan? Laporkan secara pribadi ke security@dailybot.com daripada membuka issue publik. Kami mengakui laporan dalam 3 hari kerja dan bertujuan mengirimkan perbaikan atau mitigasi dalam 30 hari untuk temuan yang valid, tergantung pada tingkat keparahannya. Situs web dan skill berbagi kebijakan yang sama.',
+    resourcesTitle: 'Sumber daya kepercayaan',
+    linkManifest: 'Manifes kepercayaan yang dapat dibaca mesin',
+    linkSecurityTxt: 'security.txt (RFC 9116)',
+    linkPolicy: 'Kebijakan keamanan situs web',
+    linkSkillPolicy: 'Kebijakan keamanan skill & model ancaman',
+    limitationsTitle: 'Keterbatasan yang jujur',
+    limitations: [
+      'Rilis ber-checksum, belum ditandatangani secara kriptografis — penandatanganan direncanakan, belum dilakukan.',
+      'Deep Work Plan menjalankan coding agent otonom terhadap repositori Anda. Tinjau rencana yang diusulkannya dan diff-nya; metodologi dirancang untuk tinjauan itu, bukan untuk menggantikannya.',
+      'Klaim kepercayaan di sini hanya mendeskripsikan sumber resmi. Salinan yang dimodifikasi atau pihak ketiga yang telah menyimpang dari repositori tidak membawa satu pun dari jaminan ini — verifikasi dulu.',
+    ],
+    ctaTitle: 'Adopsi dengan penuh keyakinan',
+    ctaBody:
+      'Baca metodologi dan spesifikasinya, arahkan agent ke endpoint init, dan verifikasi instalasi sebelum Anda menjalankannya.',
+    ctaPrimary: 'Baca metodologinya',
+    ctaSecondary: 'Adopsi (init)',
   },
 };
