@@ -745,7 +745,7 @@ export const id: SiteTranslations = {
       'Rilis ber-checksum, bukan ditandatangani — penandatanganan (cosign atau GPG pengelola) adalah langkah berikutnya yang terdokumentasi, bukan klaim saat ini. Karena semuanya terbuka, Anda juga dapat membandingkan file mana pun terhadap repositori pada tag-nya.',
     disclosureTitle: 'Laporkan kerentanan',
     disclosureBody:
-      'Menemukan masalah keamanan? Laporkan secara pribadi ke security@dailybot.com daripada membuka issue publik. Kami mengakui laporan dalam 3 hari kerja dan bertujuan mengirimkan perbaikan atau mitigasi dalam 30 hari untuk temuan yang valid, tergantung pada tingkat keparahannya. Situs web dan skill berbagi kebijakan yang sama.',
+      'Menemukan masalah keamanan? Laporkan secara pribadi melalui pelaporan kerentanan privat GitHub di repositori yang relevan — skill atau situs web (lihat tautan kebijakan keamanan di bawah) — daripada membuka issue publik yang akan mengekspos masalah sebelum ada perbaikan.',
     resourcesTitle: 'Sumber daya kepercayaan',
     linkManifest: 'Manifes kepercayaan yang dapat dibaca mesin',
     linkSecurityTxt: 'security.txt (RFC 9116)',

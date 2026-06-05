@@ -83,9 +83,7 @@ sampai sudah diperiksa.
   Rilis **ber-checksum, bukan bertanda tangan** (penandatanganan adalah langkah berikutnya yang
   terdokumentasi). Semuanya terbuka dan dapat dibandingkan, sehingga Anda juga dapat membandingkan
   berkas mana pun dengan repositori pada tagnya.
-- **Laporkan masalah.** Masalah keamanan ditujukan ke security@dailybot.com — lihat
-  `https://deepworkplan.com/.well-known/security.txt` dan `SECURITY.md` di setiap repositori. Halaman
-  kepercayaan publik adalah `https://deepworkplan.com/trust`.
+- **Laporkan masalah.** Laporkan masalah keamanan **secara pribadi melalui pelaporan kerentanan GitHub** di repositori yang relevan — `https://github.com/DailybotHQ/deepworkplan-skill/security` atau `https://github.com/DailybotHQ/deepworkplan-website/security` — bukan sebagai issue publik. Lihat juga `SECURITY.md` setiap repositori, `https://deepworkplan.com/.well-known/security.txt`, dan halaman kepercayaan `https://deepworkplan.com/trust`.
 
 ## 2. Pasang skill Deep Work Plan
 

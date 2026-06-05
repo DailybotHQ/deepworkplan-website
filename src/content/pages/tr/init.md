@@ -82,9 +82,7 @@ teşvik edilir: dikkatli bir ajan, denetlenene kadar alınan bir istemi güvenil
   Sürümler **sağlama toplamlıdır, imzalı değildir** (imzalama, belgelenmiş bir sonraki adımdır). Her
   şey açık ve karşılaştırılabilirdir; dolayısıyla herhangi bir dosyayı kendi etiketindeki depoyla da
   karşılaştırabilirsiniz.
-- **Bir sorun bildirin.** Güvenlik sorunları security@dailybot.com adresine iletilir — bkz.
-  `https://deepworkplan.com/.well-known/security.txt` ve her deponun `SECURITY.md` dosyası. Kamuya açık
-  güven sayfası: `https://deepworkplan.com/trust`.
+- **Bir sorun bildirin.** Güvenlik sorunlarını ilgili depoda **GitHub'ın güvenlik açığı bildirme özelliği aracılığıyla özel olarak** bildirin — `https://github.com/DailybotHQ/deepworkplan-skill/security` veya `https://github.com/DailybotHQ/deepworkplan-website/security` — kamuya açık bir issue olarak değil. Ayrıca her deponun `SECURITY.md` dosyasına, `https://deepworkplan.com/.well-known/security.txt` adresine ve güven sayfası `https://deepworkplan.com/trust` adresine bakın.
 
 ## 2. Deep Work Plan skill’ini kurun
 

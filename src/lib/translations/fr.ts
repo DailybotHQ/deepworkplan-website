@@ -749,7 +749,7 @@ export const fr: SiteTranslations = {
       "Les versions sont checksummées, pas signées — la signature (cosign ou GPG du mainteneur) est la prochaine étape documentée, pas une garantie actuelle. Comme tout est ouvert, vous pouvez aussi comparer n'importe quel fichier avec le dépôt à son tag.",
     disclosureTitle: 'Signaler une vulnérabilité',
     disclosureBody:
-      "Vous avez découvert un problème de sécurité ? Signalez-le en privé à security@dailybot.com plutôt que d'ouvrir un ticket public. Nous accusons réception des signalements sous 3 jours ouvrables et visons à publier un correctif ou une atténuation sous 30 jours pour les découvertes valides, selon leur gravité. Le site web et la skill partagent la même politique.",
+      "Vous avez découvert un problème de sécurité ? Signalez-le en privé via le système de signalement privé de vulnérabilités de GitHub sur le dépôt concerné — la skill ou le site web (voir les politiques de sécurité liées ci-dessous) — plutôt que d'ouvrir un ticket public, ce qui exposerait le problème avant qu'un correctif n'existe.",
     resourcesTitle: 'Ressources de confiance',
     linkManifest: 'Manifeste de confiance lisible par machine',
     linkSecurityTxt: 'security.txt (RFC 9116)',

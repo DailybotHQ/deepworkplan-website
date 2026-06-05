@@ -76,9 +76,7 @@ description: "AI 에이전트를 위한 실행 가능한 온보딩 프롬프트:
 
   릴리스는 **서명이 아니라 체크섬**으로 검증됩니다(서명은 문서화된 다음 단계입니다). 모든 것이
   공개되어 있고 비교 가능하므로, 태그 기준으로 리포지토리의 어떤 파일이든 직접 비교할 수도 있습니다.
-- **문제를 신고하세요.** 보안 문제는 security@dailybot.com으로 — 
-  `https://deepworkplan.com/.well-known/security.txt`와 각 리포지토리의 `SECURITY.md`를 참고하세요.
-  공개 신뢰 페이지는 `https://deepworkplan.com/trust`입니다.
+- **문제를 신고하세요.** 보안 문제는 해당 리포지토리에서 **GitHub의 취약점 신고** 기능을 통해 비공개로 신고해 주세요 — `https://github.com/DailybotHQ/deepworkplan-skill/security` 또는 `https://github.com/DailybotHQ/deepworkplan-website/security` — 공개 이슈로 신고하지 마세요. 각 리포지토리의 `SECURITY.md`, `https://deepworkplan.com/.well-known/security.txt`, 그리고 신뢰 페이지 `https://deepworkplan.com/trust`도 참고하세요.
 
 ## 2. Deep Work Plan 스킬을 설치하세요
 

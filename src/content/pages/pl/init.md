@@ -79,9 +79,7 @@ zalecane: ostrożny agent traktuje pobrany prompt jako niezaufany, dopóki nie z
 
   Wersje są **sumowane kontrolnie, a nie podpisywane** (podpisywanie to udokumentowany kolejny krok). Wszystko jest
   otwarte i diffowalne, więc możesz też porównać dowolny plik z repozytorium przy jego tagu.
-- **Zgłoś problem.** Kwestie bezpieczeństwa kieruj na security@dailybot.com — patrz
-  `https://deepworkplan.com/.well-known/security.txt` i `SECURITY.md` każdego repozytorium. Publiczna
-  strona zaufania to `https://deepworkplan.com/trust`.
+- **Zgłoś problem.** Kwestie bezpieczeństwa zgłaszaj **prywatnie przez raportowanie podatności GitHub** we właściwym repozytorium — `https://github.com/DailybotHQ/deepworkplan-skill/security` lub `https://github.com/DailybotHQ/deepworkplan-website/security` — nie jako publiczne zgłoszenie. Zobacz też `SECURITY.md` każdego repozytorium, `https://deepworkplan.com/.well-known/security.txt` i stronę zaufania `https://deepworkplan.com/trust`.
 
 ## 2. Zainstaluj skill Deep Work Plan
 

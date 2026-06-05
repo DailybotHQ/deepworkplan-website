@@ -739,7 +739,7 @@ export const es: SiteTranslations = {
       'Las versiones tienen checksums, no firmas criptográficas — las firmas (cosign o GPG del mantenedor) son el próximo paso documentado, no una garantía actual. Dado que todo es abierto, también puedes comparar cualquier archivo con el repositorio en su etiqueta.',
     disclosureTitle: 'Reportar una vulnerabilidad',
     disclosureBody:
-      '¿Encontraste un problema de seguridad? Repórtalo de forma privada a security@dailybot.com en lugar de abrir un issue público. Confirmamos los reportes en un plazo de 3 días hábiles y buscamos publicar una corrección o mitigación en 30 días para hallazgos válidos, según la gravedad. El sitio web y la skill comparten la misma política.',
+      '¿Encontraste un problema de seguridad? Repórtalo de forma privada a través del sistema de reporte privado de vulnerabilidades de GitHub en el repositorio correspondiente — la skill o el sitio web (consulta las políticas de seguridad enlazadas abajo) — en lugar de abrir un issue público, lo cual expondría el problema antes de que exista una corrección.',
     resourcesTitle: 'Recursos de confianza',
     linkManifest: 'Manifiesto de confianza legible por máquina',
     linkSecurityTxt: 'security.txt (RFC 9116)',

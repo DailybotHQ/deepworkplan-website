@@ -743,7 +743,7 @@ export const vi: SiteTranslations = {
       'Các bản phát hành có checksum, không có chữ ký — ký (cosign hoặc GPG của người duy trì) là bước tiếp theo được ghi lại, không phải tuyên bố hiện tại. Vì mọi thứ đều mở, bạn cũng có thể so sánh bất kỳ file nào với repository tại tag của nó.',
     disclosureTitle: 'Báo cáo lỗ hổng',
     disclosureBody:
-      'Tìm thấy vấn đề bảo mật? Báo cáo riêng tư tới security@dailybot.com thay vì mở một issue công khai. Chúng tôi xác nhận báo cáo trong vòng 3 ngày làm việc và đặt mục tiêu gửi bản sửa lỗi hoặc biện pháp giảm thiểu trong vòng 30 ngày cho các phát hiện hợp lệ, tùy thuộc vào mức độ nghiêm trọng. Trang web và skill chia sẻ cùng một chính sách.',
+      'Tìm thấy vấn đề bảo mật? Báo cáo riêng tư qua tính năng báo cáo lỗ hổng bảo mật riêng tư của GitHub trên repository liên quan — skill hoặc trang web (xem các liên kết chính sách bảo mật bên dưới) — thay vì mở một issue công khai, vì điều đó sẽ phơi bày vấn đề trước khi có bản vá.',
     resourcesTitle: 'Tài nguyên tin tưởng',
     linkManifest: 'Manifest tin tưởng có thể đọc bằng máy',
     linkSecurityTxt: 'security.txt (RFC 9116)',

@@ -35,7 +35,10 @@ curl -fsSL -o SHA256SUMS \
 
 ## 报告漏洞
 
-请私下发送邮件至 **security@dailybot.com** 进行报告，而非公开提交 issue。我们在 3 个工作日内确认收到报告，并根据严重程度争取在 30 天内为有效发现提供修复或缓解措施。网站和技能共享同一套政策。
+请通过 **GitHub 的私密漏洞报告功能**，在相关仓库上私密报告安全问题——而非公开提交 issue，因为公开提交会在修复完成前暴露问题：
+
+- Skill: <https://github.com/DailybotHQ/deepworkplan-skill/security>
+- Website: <https://github.com/DailybotHQ/deepworkplan-website/security>
 
 ---
 

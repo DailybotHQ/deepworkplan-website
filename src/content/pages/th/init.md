@@ -78,9 +78,7 @@ description: "พรอมต์การออนบอร์ดที่ดำ
 
   รีลีสถูก **ตรวจสอบด้วย checksum ไม่ใช่ลายเซ็น** (การลงนามเป็นขั้นตอนถัดไปที่ได้รับการจัดทำเป็นเอกสาร)
   ทุกอย่างเปิดเผยและสามารถ diff ได้ ดังนั้นคุณยังสามารถเปรียบเทียบไฟล์ใดก็ได้กับ repository ที่ tag นั้น
-- **รายงานปัญหา** ปัญหาด้านความปลอดภัยส่งไปที่ security@dailybot.com ดู
-  `https://deepworkplan.com/.well-known/security.txt` และ `SECURITY.md` ของแต่ละ repository หน้าความไว้วางใจ
-  สาธารณะคือ `https://deepworkplan.com/trust`
+- **รายงานปัญหา** รายงานปัญหาด้านความปลอดภัย**เป็นการส่วนตัวผ่านระบบรายงานช่องโหว่ของ GitHub** ใน repository ที่เกี่ยวข้อง — `https://github.com/DailybotHQ/deepworkplan-skill/security` หรือ `https://github.com/DailybotHQ/deepworkplan-website/security` — ไม่ใช่ในรูปแบบ issue สาธารณะ ดูเพิ่มเติมที่ `SECURITY.md` ของแต่ละ repository, `https://deepworkplan.com/.well-known/security.txt` และหน้าความไว้วางใจ `https://deepworkplan.com/trust`
 
 ## 2. ติดตั้ง skill ของ Deep Work Plan
 

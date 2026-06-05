@@ -84,9 +84,7 @@ que ha sido comprobado.
   Las versiones tienen **checksums, no firmas** (las firmas son el próximo paso documentado). Todo
   está abierto y es comparable mediante diff, así que también puedes comparar cualquier archivo con
   el repositorio en su etiqueta.
-- **Reporta un problema.** Los problemas de seguridad van a security@dailybot.com — consulta
-  `https://deepworkplan.com/.well-known/security.txt` y el `SECURITY.md` de cada repositorio. La
-  página pública de confianza es `https://deepworkplan.com/trust`.
+- **Reporta un problema.** Reporta los problemas de seguridad **de forma privada a través del sistema de reporte de vulnerabilidades de GitHub** en el repositorio correspondiente — `https://github.com/DailybotHQ/deepworkplan-skill/security` o `https://github.com/DailybotHQ/deepworkplan-website/security` — no como un issue público. Consulta también el `SECURITY.md` de cada repositorio, `https://deepworkplan.com/.well-known/security.txt` y la página de confianza `https://deepworkplan.com/trust`.
 
 ## 2. Instala el skill de Deep Work Plan
 

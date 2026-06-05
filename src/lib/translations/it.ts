@@ -745,7 +745,7 @@ export const it: SiteTranslations = {
       'Le release sono checksummate, non firmate — la firma (cosign o GPG del maintainer) è il passo successivo documentato, non una garanzia attuale. Poiché tutto è aperto, puoi anche confrontare qualsiasi file con il repository alla sua tag.',
     disclosureTitle: 'Segnalare una vulnerabilità',
     disclosureBody:
-      'Hai trovato un problema di sicurezza? Segnalalo privatamente a security@dailybot.com invece di aprire una issue pubblica. Confermiamo le segnalazioni entro 3 giorni lavorativi e miriamo a pubblicare una correzione o mitigazione entro 30 giorni per le scoperte valide, a seconda della gravità. Il sito web e la skill condividono la stessa politica.',
+      'Hai trovato un problema di sicurezza? Segnalalo privatamente tramite il sistema di segnalazione privata delle vulnerabilità di GitHub nel repository pertinente — la skill o il sito web (vedi le politiche di sicurezza collegate qui sotto) — invece di aprire una issue pubblica, il che esporrebbe il problema prima che esista una correzione.',
     resourcesTitle: 'Risorse sulla fiducia',
     linkManifest: 'Manifesto di fiducia leggibile dalla macchina',
     linkSecurityTxt: 'security.txt (RFC 9116)',

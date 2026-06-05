@@ -35,7 +35,10 @@ Les versions sont **checksummées, pas signées** — la signature (cosign ou GP
 
 ## Signaler une vulnérabilité
 
-Signalez les problèmes de sécurité en privé à **security@dailybot.com** plutôt que d'ouvrir un ticket public. Nous accusons réception des signalements sous 3 jours ouvrables et visons à publier un correctif ou une atténuation sous 30 jours pour les découvertes valides, selon leur gravité. Le site web et la skill partagent la même politique.
+Signalez les problèmes de sécurité **en privé via le système de signalement privé de vulnérabilités de GitHub** sur le dépôt concerné — et non comme un ticket public, ce qui divulguerait le problème avant qu'un correctif n'existe :
+
+- Skill : <https://github.com/DailybotHQ/deepworkplan-skill/security>
+- Site web : <https://github.com/DailybotHQ/deepworkplan-website/security>
 
 ---
 

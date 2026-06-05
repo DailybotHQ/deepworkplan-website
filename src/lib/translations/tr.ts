@@ -746,7 +746,7 @@ export const tr: SiteTranslations = {
       "Sürümler sağlama toplamlarına sahiptir, imzalı değildir — imzalama (cosign veya yetkili kişi GPG'si) belgelenmiş bir sonraki adımdır, mevcut bir iddia değildir. Her şey açık olduğundan, herhangi bir dosyayı etiketindeki depoya göre de karşılaştırabilirsiniz.",
     disclosureTitle: 'Güvenlik açığı bildirin',
     disclosureBody:
-      'Bir güvenlik sorunu mu buldunuz? Kamuya açık bir issue açmak yerine özel olarak security@dailybot.com adresine bildirin. Raporları 3 iş günü içinde onaylıyor ve ciddiyete bağlı olarak geçerli bulgular için 30 gün içinde bir düzeltme veya hafifletme göndermeyi hedefliyoruz. Web sitesi ve skill aynı politikayı paylaşır.',
+      "Bir güvenlik sorunu mu buldunuz? İlgili depoda — skill'de veya web sitesinde (aşağıda bağlantısı verilen güvenlik politikalarına bakın) — GitHub'ın özel güvenlik açığı bildirme özelliği aracılığıyla özel olarak bildirin; kamuya açık bir issue açmak yerine, zira bu durum düzeltme gelmeden önce sorunu ifşa eder.",
     resourcesTitle: 'Güven kaynakları',
     linkManifest: 'Makine tarafından okunabilir güven manifestosu',
     linkSecurityTxt: 'security.txt (RFC 9116)',

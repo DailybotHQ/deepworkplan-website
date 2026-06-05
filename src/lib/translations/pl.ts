@@ -676,7 +676,7 @@ export const pl: SiteTranslations = {
       'Wydania są sumowane kontrolnie, nie podpisywane — podpisywanie (cosign lub GPG opiekuna) to udokumentowany kolejny krok, a nie bieżące twierdzenie. Ponieważ wszystko jest otwarte, możesz też diffować dowolny plik względem repozytorium przy jego tagu.',
     disclosureTitle: 'Zgłoś podatność',
     disclosureBody:
-      'Znalazłeś problem z bezpieczeństwem? Zgłoś go prywatnie na adres security@dailybot.com, zamiast otwierać publiczne zgłoszenie. Potwierdzamy odbiór raportów w ciągu 3 dni roboczych i dążymy do dostarczenia poprawki lub łagodzenia w ciągu 30 dni dla ważnych ustaleń, w zależności od powagi. Witryna i skill dzielą tę samą politykę.',
+      'Znalazłeś problem z bezpieczeństwem? Zgłoś go prywatnie przez prywatne raportowanie podatności GitHub we właściwym repozytorium — skill lub stronie (patrz poniżej linkowane polityki bezpieczeństwa) — zamiast otwierać publiczne zgłoszenie, które ujawniłoby problem przed powstaniem poprawki.',
     resourcesTitle: 'Zasoby dotyczące zaufania',
     linkManifest: 'Manifest zaufania odczytywalny przez maszyny',
     linkSecurityTxt: 'security.txt (RFC 9116)',

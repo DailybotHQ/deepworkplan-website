@@ -35,7 +35,10 @@ Sürümler **sağlama toplamlarına sahiptir, imzalı değildir** — imzalama (
 
 ## Güvenlik açığı bildirin
 
-Bir güvenlik sorunu mu buldunuz? Kamuya açık bir issue açmak yerine özel olarak **security@dailybot.com** adresine bildirin. Raporları 3 iş günü içinde onaylıyor ve ciddiyete bağlı olarak geçerli bulgular için 30 gün içinde bir düzeltme veya hafifletme göndermeyi hedefliyoruz. Web sitesi ve skill aynı politikayı paylaşır.
+Güvenlik sorunlarını ilgili depoda **GitHub'ın özel güvenlik açığı bildirme özelliği aracılığıyla özel olarak** bildirin — kamuya açık bir issue olarak değil; bu durum düzeltme gelmeden önce sorunu ifşa eder:
+
+- Skill: <https://github.com/DailybotHQ/deepworkplan-skill/security>
+- Web sitesi: <https://github.com/DailybotHQ/deepworkplan-website/security>
 
 ---
 

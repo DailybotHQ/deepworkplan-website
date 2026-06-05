@@ -81,9 +81,7 @@ description: "AI एजेंट्स के लिए निष्पादन
 
   रिलीज़ **चेकसम की गई हैं, हस्ताक्षरित नहीं** (हस्ताक्षर एक दस्तावेज़ीकृत अगला चरण है)। सब कुछ खुला और
   diff योग्य है, इसलिए आप किसी भी फ़ाइल की उसके tag पर रिपॉज़िटरी से तुलना कर सकते हैं।
-- **कोई समस्या रिपोर्ट करें।** सुरक्षा संबंधी समस्याएँ security@dailybot.com को भेजें — देखें
-  `https://deepworkplan.com/.well-known/security.txt` और प्रत्येक रिपॉज़िटरी का `SECURITY.md`। सार्वजनिक
-  विश्वास पृष्ठ `https://deepworkplan.com/trust` है।
+- **कोई समस्या रिपोर्ट करें।** सुरक्षा संबंधी समस्याएँ संबंधित रिपॉज़िटरी पर **GitHub के भेद्यता रिपोर्टिंग के माध्यम से निजी तौर पर** रिपोर्ट करें — `https://github.com/DailybotHQ/deepworkplan-skill/security` या `https://github.com/DailybotHQ/deepworkplan-website/security` — सार्वजनिक issue के रूप में नहीं। प्रत्येक रिपॉज़िटरी का `SECURITY.md`, `https://deepworkplan.com/.well-known/security.txt`, और विश्वास पृष्ठ `https://deepworkplan.com/trust` भी देखें।
 
 ## 2. Deep Work Plan स्किल स्थापित करें
 

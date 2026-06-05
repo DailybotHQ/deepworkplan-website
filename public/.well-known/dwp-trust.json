@@ -20,7 +20,9 @@
     "signing": "planned"
   },
   "security": {
-    "contact": "mailto:security@dailybot.com",
+    "reporting": "github-private-vulnerability-reporting",
+    "reportWebsite": "https://github.com/DailybotHQ/deepworkplan-website/security",
+    "reportSkill": "https://github.com/DailybotHQ/deepworkplan-skill/security",
     "policy": "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md",
     "securityTxt": "https://deepworkplan.com/.well-known/security.txt"
   },

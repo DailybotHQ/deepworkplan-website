@@ -35,7 +35,10 @@ Rilis **ber-checksum, bukan ditandatangani** — penandatanganan (cosign atau GP
 
 ## Laporkan kerentanan
 
-Laporkan masalah keamanan secara pribadi ke **security@dailybot.com** daripada membuka issue publik. Kami mengakui laporan dalam 3 hari kerja dan bertujuan mengirimkan perbaikan atau mitigasi dalam 30 hari untuk temuan yang valid, tergantung pada tingkat keparahannya. Situs web dan skill berbagi kebijakan yang sama.
+Laporkan masalah keamanan **secara pribadi melalui pelaporan kerentanan privat GitHub** di repositori yang relevan — bukan sebagai issue publik yang akan mengungkapkan masalah sebelum ada perbaikan:
+
+- Skill: <https://github.com/DailybotHQ/deepworkplan-skill/security>
+- Situs web: <https://github.com/DailybotHQ/deepworkplan-website/security>
 
 ---
 

@@ -79,9 +79,11 @@ is encouraged: a careful agent treats a fetched prompt as untrusted until it has
 
   Releases are **checksummed, not signed** (signing is a documented next step). Everything is open and
   diffable, so you can also compare any file against the repository at its tag.
-- **Report a problem.** Security issues go to security@dailybot.com — see
-  `https://deepworkplan.com/.well-known/security.txt` and each repository's `SECURITY.md`. The public
-  trust page is `https://deepworkplan.com/trust`.
+- **Report a problem.** Report security issues **privately through GitHub's vulnerability reporting**
+  on the relevant repository — `https://github.com/DailybotHQ/deepworkplan-skill/security`
+  or `https://github.com/DailybotHQ/deepworkplan-website/security` — not as a public
+  issue. See also each repository's `SECURITY.md`, `https://deepworkplan.com/.well-known/security.txt`,
+  and the trust page `https://deepworkplan.com/trust`.
 
 ## 2. Install the Deep Work Plan skill
 

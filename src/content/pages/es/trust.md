@@ -35,7 +35,10 @@ Las versiones tienen **checksums, no firmas criptográficas** — las firmas (co
 
 ## Reportar una vulnerabilidad
 
-Reporta los problemas de seguridad de forma privada a **security@dailybot.com** en lugar de abrir un issue público. Confirmamos los reportes en un plazo de 3 días hábiles y buscamos publicar una corrección o mitigación en 30 días para hallazgos válidos, según la gravedad. El sitio web y la skill comparten la misma política.
+Reporta los problemas de seguridad **de forma privada a través del sistema de reporte privado de vulnerabilidades de GitHub** en el repositorio correspondiente — no como un issue público, lo cual divulgaría el problema antes de que exista una corrección:
+
+- Skill: <https://github.com/DailybotHQ/deepworkplan-skill/security>
+- Sitio web: <https://github.com/DailybotHQ/deepworkplan-website/security>
 
 ---
 

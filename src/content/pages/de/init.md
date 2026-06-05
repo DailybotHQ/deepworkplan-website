@@ -47,7 +47,7 @@ Sie sind dabei, Code in diesem Repository zu installieren und auszuführen. Prü
   ```
 
   Releases sind **geprüfsummt, aber nicht signiert** (Signierung ist ein dokumentierter nächster Schritt). Alles ist offen und diff-bar, sodass Sie jede Datei auch gegen das Repository am entsprechenden Tag vergleichen können.
-- **Ein Problem melden.** Sicherheitsprobleme gehen an security@dailybot.com — siehe `https://deepworkplan.com/.well-known/security.txt` und die `SECURITY.md` jedes Repositorys. Die öffentliche Vertrauensseite ist `https://deepworkplan.com/trust`.
+- **Ein Problem melden.** Melden Sie Sicherheitsprobleme **privat über GitHub's Vulnerability Reporting** im entsprechenden Repository — `https://github.com/DailybotHQ/deepworkplan-skill/security` oder `https://github.com/DailybotHQ/deepworkplan-website/security` — nicht als öffentliches Issue. Siehe auch die `SECURITY.md` jedes Repositorys, `https://deepworkplan.com/.well-known/security.txt` und die Vertrauensseite `https://deepworkplan.com/trust`.
 
 ## 0. Die Methodik und Spezifikation lesen
 

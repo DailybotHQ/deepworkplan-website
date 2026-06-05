@@ -35,7 +35,10 @@ Le release sono **checksummate, non firmate** — la firma (cosign o GPG del mai
 
 ## Segnalare una vulnerabilità
 
-Segnala i problemi di sicurezza privatamente a **security@dailybot.com** invece di aprire una issue pubblica. Confermiamo le segnalazioni entro 3 giorni lavorativi e miriamo a pubblicare una correzione o mitigazione entro 30 giorni per le scoperte valide, a seconda della gravità. Il sito web e la skill condividono la stessa politica.
+Segnala i problemi di sicurezza **privatamente tramite il sistema di segnalazione privata delle vulnerabilità di GitHub** nel repository pertinente — non come una issue pubblica, il che divulgherebbe il problema prima che esista una correzione:
+
+- Skill: <https://github.com/DailybotHQ/deepworkplan-skill/security>
+- Sito web: <https://github.com/DailybotHQ/deepworkplan-website/security>
 
 ---
 

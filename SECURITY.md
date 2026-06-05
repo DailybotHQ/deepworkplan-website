@@ -14,9 +14,14 @@ handling — a deliberately minimal attack surface.
 
 ## Reporting a vulnerability
 
-Please report security issues **privately** — do not open a public issue.
+Please report security issues **privately through GitHub's private vulnerability reporting** — do not
+open a public issue (that would disclose the problem before a fix exists). Use the relevant repository:
 
-**Email:** security@dailybot.com
+- **Website:** <https://github.com/DailybotHQ/deepworkplan-website/security>
+- **Skill:** <https://github.com/DailybotHQ/deepworkplan-skill/security>
+
+(If a repository's private reporting is ever unavailable, open a minimal issue asking us to enable it —
+do **not** post exploit details publicly.)
 
 Include:
 
@@ -24,10 +29,6 @@ Include:
 - Steps to reproduce (a minimal proof of concept is ideal)
 - The affected URL(s) or commit, if known
 - Your name or handle if you would like credit
-
-We acknowledge reports within **3 business days** and aim to ship a fix or a
-mitigation within **30 days** for valid findings, depending on severity. These
-are the same response targets as the skill repo, kept in sync intentionally.
 
 A machine-readable pointer is published at
 [`/.well-known/security.txt`](https://deepworkplan.com/.well-known/security.txt)

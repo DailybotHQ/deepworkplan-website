@@ -737,7 +737,7 @@ export const zh: SiteTranslations = {
       '发布版本有校验和，但未经签名——签名（cosign 或维护者 GPG）是已记录的下一步计划，而非当前的承诺。由于一切都是公开的，你也可以将任意文件与仓库在其 tag 处的内容进行比对。',
     disclosureTitle: '报告漏洞',
     disclosureBody:
-      '发现了安全问题？请私下发送邮件至 security@dailybot.com 进行报告，而非公开提交 issue。我们在 3 个工作日内确认收到报告，并根据严重程度争取在 30 天内为有效发现提供修复或缓解措施。网站和技能共享同一套政策。',
+      '发现了安全问题？请通过 GitHub 的私密漏洞报告功能，在相关仓库——技能或网站（详见下方链接的安全政策）——上私密报告，而非公开提交 issue，因为公开提交会在修复完成前暴露问题。',
     resourcesTitle: '信任资源',
     linkManifest: '可机器读取的信任清单',
     linkSecurityTxt: 'security.txt（RFC 9116）',

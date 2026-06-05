@@ -82,9 +82,7 @@ description: "Исполнимый промпт онбординга для ИИ
 
   Релизы **содержат контрольные суммы, а не подписи** (подпись — задокументированный следующий шаг).
   Всё открыто и сопоставимо, поэтому вы также можете сравнить любой файл с репозиторием по его тегу.
-- **Сообщите о проблеме.** Вопросы безопасности направляйте на security@dailybot.com — см.
-  `https://deepworkplan.com/.well-known/security.txt` и `SECURITY.md` в каждом репозитории. Публичная
-  страница доверия: `https://deepworkplan.com/trust`.
+- **Сообщите о проблеме.** Сообщайте о проблемах безопасности **приватно через отчётность об уязвимостях GitHub** в соответствующем репозитории — `https://github.com/DailybotHQ/deepworkplan-skill/security` или `https://github.com/DailybotHQ/deepworkplan-website/security` — а не в виде публичного issue. Смотрите также `SECURITY.md` каждого репозитория, `https://deepworkplan.com/.well-known/security.txt` и страницу доверия `https://deepworkplan.com/trust`.
 
 ## 2. Установите навык Deep Work Plan
 

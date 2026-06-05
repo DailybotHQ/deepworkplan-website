@@ -35,7 +35,10 @@ Wydania są **sumowane kontrolnie, nie podpisywane** — podpisywanie (cosign lu
 
 ## Zgłoś podatność
 
-Problemy z bezpieczeństwem zgłaszaj prywatnie na adres **security@dailybot.com**, zamiast otwierać publiczne zgłoszenie. Potwierdzamy odbiór raportów w ciągu 3 dni roboczych i dążymy do dostarczenia poprawki lub łagodzenia w ciągu 30 dni dla ważnych ustaleń, w zależności od powagi. Witryna i skill dzielą tę samą politykę.
+Problemy z bezpieczeństwem zgłaszaj **prywatnie przez prywatne raportowanie podatności GitHub** we właściwym repozytorium — nie jako publiczne zgłoszenie, które ujawniłoby problem przed powstaniem poprawki:
+
+- Skill: <https://github.com/DailybotHQ/deepworkplan-skill/security>
+- Website: <https://github.com/DailybotHQ/deepworkplan-website/security>
 
 ---
 

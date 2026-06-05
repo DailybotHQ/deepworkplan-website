@@ -28,6 +28,18 @@ curl -fsSL -o SHA256SUMS \\
   ${REPO_URLS.skill}/releases/download/vX.Y.Z/SHA256SUMS
 ./setup.sh --verify        # non-zero exit means a file does not match — stop`;
 
+// Direct "report a vulnerability" links → GitHub private vulnerability reporting.
+const reportLinks: { label: string; href: string }[] = [
+  {
+    label: t.nav.repo.skill,
+    href: `${REPO_URLS.skill}/security`,
+  },
+  {
+    label: t.nav.repo.website,
+    href: `${REPO_URLS.website}/security`,
+  },
+];
+
 const resources: { label: string; href: string }[] = [
   { label: p.linkManifest, href: '/.well-known/dwp-trust.json' },
   { label: p.linkSecurityTxt, href: '/.well-known/security.txt' },
@@ -152,6 +164,21 @@ const breadcrumbSchema = {
       <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-ink);">
         {p.disclosureBody}
       </p>
+      <div class="mt-5 flex flex-wrap gap-4">
+        {
+          reportLinks.map((link) => (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center rounded-sm border px-5 py-3 font-semibold transition hover:opacity-80"
+              style="border-color: var(--color-line); color: var(--color-ink);"
+            >
+              {p.disclosureTitle} — {link.label}
+            </a>
+          ))
+        }
+      </div>
     </section>
 
     <Rule class="my-12" />

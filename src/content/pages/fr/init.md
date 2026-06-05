@@ -84,9 +84,7 @@ qu'il ait été contrôlé.
   Les versions sont **dotées de checksums, pas de signatures** (la signature est la prochaine étape
   documentée). Tout est ouvert et comparable par diff, vous pouvez donc aussi comparer n'importe quel
   fichier avec le dépôt à son tag.
-- **Signalez un problème.** Les problèmes de sécurité sont à envoyer à security@dailybot.com — voir
-  `https://deepworkplan.com/.well-known/security.txt` et le `SECURITY.md` de chaque dépôt. La page
-  publique de confiance est `https://deepworkplan.com/trust`.
+- **Signalez un problème.** Signalez les problèmes de sécurité **en privé via le système de signalement de vulnérabilités de GitHub** sur le dépôt concerné — `https://github.com/DailybotHQ/deepworkplan-skill/security` ou `https://github.com/DailybotHQ/deepworkplan-website/security` — et non comme un ticket public. Consultez également le `SECURITY.md` de chaque dépôt, `https://deepworkplan.com/.well-known/security.txt` et la page de confiance `https://deepworkplan.com/trust`.
 
 ## 2. Installer le skill Deep Work Plan
 

@@ -35,7 +35,10 @@ curl -fsSL -o SHA256SUMS \
 
 ## 취약점 신고
 
-공개 이슈를 열지 말고 **security@dailybot.com**으로 비공개 신고해 주세요. 신고는 영업일 기준 3일 이내에 확인하며, 유효한 발견에 대해서는 심각도에 따라 30일 이내에 수정 또는 완화 방안을 제공하는 것을 목표로 합니다. 웹사이트와 스킬은 동일한 정책을 공유합니다.
+공개 이슈를 열지 말고, 해당 리포지토리에서 **GitHub의 비공개 취약점 신고** 기능을 통해 보안 문제를 비공개로 신고해 주세요. 공개 이슈는 수정이 완료되기 전에 문제를 노출시킵니다:
+
+- Skill: <https://github.com/DailybotHQ/deepworkplan-skill/security>
+- Website: <https://github.com/DailybotHQ/deepworkplan-website/security>
 
 ---
 

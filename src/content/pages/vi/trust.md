@@ -35,7 +35,10 @@ Các bản phát hành **có checksum, không có chữ ký** — ký (cosign ho
 
 ## Báo cáo lỗ hổng
 
-Báo cáo các vấn đề bảo mật riêng tư tới **security@dailybot.com** thay vì mở một issue công khai. Chúng tôi xác nhận báo cáo trong vòng 3 ngày làm việc và đặt mục tiêu gửi bản sửa lỗi hoặc biện pháp giảm thiểu trong vòng 30 ngày cho các phát hiện hợp lệ, tùy thuộc vào mức độ nghiêm trọng. Trang web và skill chia sẻ cùng một chính sách.
+Báo cáo các vấn đề bảo mật **riêng tư qua tính năng báo cáo lỗ hổng bảo mật riêng tư của GitHub** trên repository liên quan — không phải dưới dạng issue công khai, vì điều đó sẽ phơi bày vấn đề trước khi có bản vá:
+
+- Skill: <https://github.com/DailybotHQ/deepworkplan-skill/security>
+- Trang web: <https://github.com/DailybotHQ/deepworkplan-website/security>
 
 ---
 

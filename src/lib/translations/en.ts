@@ -737,7 +737,7 @@ export const en: SiteTranslations = {
       'Releases are checksummed, not signed — signing (cosign or maintainer GPG) is a documented next step, not a current claim. Because everything is open, you can also diff any file against the repository at its tag.',
     disclosureTitle: 'Report a vulnerability',
     disclosureBody:
-      'Found a security issue? Report it privately to security@dailybot.com rather than opening a public issue. We acknowledge reports within 3 business days and aim to ship a fix or mitigation within 30 days for valid findings, depending on severity. The website and the skill share the same policy.',
+      "Found a security issue? Report it privately through GitHub's private vulnerability reporting on the relevant repository — the skill or the website (see the security policies linked below) — rather than opening a public issue, which would expose the problem before a fix exists.",
     resourcesTitle: 'Trust resources',
     linkManifest: 'Machine-readable trust manifest',
     linkSecurityTxt: 'security.txt (RFC 9116)',

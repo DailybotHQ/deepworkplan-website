@@ -746,7 +746,7 @@ export const de: SiteTranslations = {
       'Releases sind mit Prüfsummen versehen, aber nicht signiert — Signierung (cosign oder Betreuer-GPG) ist ein dokumentierter nächster Schritt, keine aktuelle Aussage. Da alles offen ist, können Sie auch jede Datei gegen das Repository bei seinem Tag vergleichen.',
     disclosureTitle: 'Eine Schwachstelle melden',
     disclosureBody:
-      'Eine Sicherheitslücke gefunden? Melden Sie sie privat an security@dailybot.com, anstatt ein öffentliches Issue zu eröffnen. Wir bestätigen Meldungen innerhalb von 3 Werktagen und streben an, innerhalb von 30 Tagen für valide Befunde je nach Schweregrad einen Fix oder eine Milderungsmaßnahme zu liefern. Die Website und das Skill teilen dieselbe Richtlinie.',
+      "Eine Sicherheitslücke gefunden? Melden Sie sie privat über GitHub's Private Vulnerability Reporting im entsprechenden Repository — das Skill oder die Website (siehe die unten verlinkten Sicherheitsrichtlinien) — anstatt ein öffentliches Issue zu eröffnen, das das Problem vor einem Fix offenbart.",
     resourcesTitle: 'Vertrauensressourcen',
     linkManifest: 'Maschinenlesbares Vertrauensmanifest',
     linkSecurityTxt: 'security.txt (RFC 9116)',

@@ -82,9 +82,7 @@ nó đã được kiểm tra.
 
   Các bản phát hành **có checksum, không có chữ ký** (ký là bước tiếp theo đã được ghi lại). Mọi thứ
   đều mở và có thể so sánh, vì vậy bạn cũng có thể so sánh bất kỳ tệp nào với repository tại tag của nó.
-- **Báo cáo vấn đề.** Các vấn đề bảo mật gửi tới security@dailybot.com — xem
-  `https://deepworkplan.com/.well-known/security.txt` và `SECURITY.md` trong mỗi repository. Trang tin
-  tưởng công khai là `https://deepworkplan.com/trust`.
+- **Báo cáo vấn đề.** Báo cáo các vấn đề bảo mật **riêng tư qua tính năng báo cáo lỗ hổng bảo mật của GitHub** trên repository liên quan — `https://github.com/DailybotHQ/deepworkplan-skill/security` hoặc `https://github.com/DailybotHQ/deepworkplan-website/security` — không phải dưới dạng issue công khai. Xem thêm `SECURITY.md` của mỗi repository, `https://deepworkplan.com/.well-known/security.txt`, và trang tin tưởng `https://deepworkplan.com/trust`.
 
 ## 2. Cài skill Deep Work Plan
 

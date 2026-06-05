@@ -35,7 +35,10 @@ Releases sind mit **Prüfsummen versehen, aber nicht signiert** — Signierung (
 
 ## Eine Schwachstelle melden
 
-Melden Sie Sicherheitsprobleme privat an **security@dailybot.com**, anstatt ein öffentliches Issue zu eröffnen. Wir bestätigen Meldungen innerhalb von 3 Werktagen und streben an, innerhalb von 30 Tagen für valide Befunde je nach Schweregrad einen Fix oder eine Milderungsmaßnahme zu liefern. Die Website und das Skill teilen dieselbe Richtlinie.
+Melden Sie Sicherheitsprobleme **privat über GitHub's Private Vulnerability Reporting** im entsprechenden Repository — nicht als öffentliches Issue, da dies das Problem vor einem Fix offenbaren würde:
+
+- Skill: <https://github.com/DailybotHQ/deepworkplan-skill/security>
+- Website: <https://github.com/DailybotHQ/deepworkplan-website/security>
 
 ---
 

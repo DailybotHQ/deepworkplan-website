@@ -35,7 +35,10 @@ curl -fsSL -o SHA256SUMS \
 
 ## 脆弱性を報告する
 
-公開 Issue を立てるのではなく、**security@dailybot.com** にプライベートで報告してください。報告は 3 営業日以内に確認し、有効な発見については深刻度に応じて 30 日以内に修正または緩和策を提供することを目指しています。ウェブサイトとスキルは同じポリシーを共有しています。
+公開 Issue を立てるのではなく、該当リポジトリで **GitHub のプライベート脆弱性報告**を通じてセキュリティ上の問題をプライベートに報告してください。公開 Issue は修正が存在する前に問題を露出させます：
+
+- Skill: <https://github.com/DailybotHQ/deepworkplan-skill/security>
+- Website: <https://github.com/DailybotHQ/deepworkplan-website/security>
 
 ---
 
