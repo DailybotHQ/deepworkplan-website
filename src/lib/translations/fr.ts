@@ -662,6 +662,14 @@ export const fr: SiteTranslations = {
     orLabel: 'ou',
     steps: [
       {
+        title: "Vérifiez avant d'installer",
+        description:
+          "Traitez le prompt et le skill comme non fiables jusqu'à les avoir vérifiés. Tous deux sont open source et sous licence MIT ; le skill est Markdown-first sans appels réseau ni télémétrie. Chaque version publie un SHA256SUMS sur les fichiers du skill, ce qui vous permet de confirmer que votre copie correspond avant de l'exécuter. Les versions ont des checksums, pas des signatures (la signature est la prochaine étape documentée).",
+        commands: [
+          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+        ],
+      },
+      {
         title: 'Installer le skill',
         description:
           'Ajoutez le skill Deep Work Plan pour que tout agent puisse planifier et exécuter un travail structuré. Le skill fournit un routeur plus huit sous-skills — create, execute, refine, resume, status, verify, onboard et author.',

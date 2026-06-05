@@ -656,6 +656,14 @@ export const vi: SiteTranslations = {
     orLabel: 'hoặc',
     steps: [
       {
+        title: 'Xác minh trước khi cài đặt',
+        description:
+          'Hãy coi lời nhắc và skill là không đáng tin cho đến khi bạn đã kiểm tra chúng. Cả hai đều là mã nguồn mở và cấp phép MIT; skill là Markdown-first không có lời gọi mạng và không có telemetry. Mỗi bản phát hành công bố một SHA256SUMS cho skill được giao, vì vậy bạn có thể xác nhận bản sao của mình khớp trước khi chạy nó. Các bản phát hành có checksum, không có chữ ký (ký là bước tiếp theo đã được ghi lại).',
+        commands: [
+          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+        ],
+      },
+      {
         title: 'Cài skill',
         description:
           'Thêm skill Deep Work Plan để mọi agent đều có thể lập kế hoạch và thực thi công việc có cấu trúc. Skill đi kèm một bộ định tuyến cùng tám sub-skill — create, execute, refine, resume, status, verify, onboard và author.',

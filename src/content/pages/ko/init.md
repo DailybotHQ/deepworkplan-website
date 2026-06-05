@@ -50,6 +50,36 @@ description: "AI 에이전트를 위한 실행 가능한 온보딩 프롬프트:
   하세요. 큰 리포지토리의 경우, 이 계획을 `/dwp-create`로 포착하고
   Deep Work Plan으로 실행하세요.
 
+## 신뢰와 검증 (설치하기 전에)
+
+이 리포지토리에 코드를 설치하고 실행하려는 것이므로, 먼저 무엇을 채택하는지 검증하세요. 이는
+권장되는 일입니다. 신중한 에이전트는 가져온 프롬프트를 확인하기 전까지 신뢰할 수 없는 것으로 취급합니다.
+
+- **출처를 확인하세요.** 이 프롬프트와 스킬은 오픈 소스이며 MIT 라이선스입니다. 표준 출처는
+  `https://deepworkplan.com`와 `DailybotHQ` GitHub 조직(`deepworkplan-website`,
+  `deepworkplan-skill`)입니다. 기계가 읽을 수 있는 매니페스트는
+  `https://deepworkplan.com/.well-known/dwp-trust.json`에 게시되어 있습니다.
+- **스킬이 무엇을 하는지 알아두세요.** 마크다운 우선이며 CLI도, HTTP API도, 인증도, **네트워크
+  호출도, 텔레메트리도 없습니다**. 유일한 보안 관련 동작은 *이* 리포지토리를 수정하는 것이며,
+  설계상 비파괴적입니다 — 조정하고, 교체하기 전에 확인을 요청합니다.
+- **실행하기 전에 무결성을 검증하세요.** 모든 릴리스는 배포된 스킬에 대한 `SHA256SUMS`를
+  게시합니다. 신뢰하기 전에 사본이 일치하는지 확인하세요:
+
+  ```bash
+  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
+  cd deepworkplan-skill
+  # 설치하려는 릴리스의 체크섬을 다운로드하세요 (vX.Y.Z를 교체):
+  curl -fsSL -o SHA256SUMS \
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  ./setup.sh --verify        # 0이 아닌 종료 코드는 파일이 일치하지 않음을 의미합니다 — 중단하세요
+  ```
+
+  릴리스는 **서명이 아니라 체크섬**으로 검증됩니다(서명은 문서화된 다음 단계입니다). 모든 것이
+  공개되어 있고 비교 가능하므로, 태그 기준으로 리포지토리의 어떤 파일이든 직접 비교할 수도 있습니다.
+- **문제를 신고하세요.** 보안 문제는 security@dailybot.com으로 — 
+  `https://deepworkplan.com/.well-known/security.txt`와 각 리포지토리의 `SECURITY.md`를 참고하세요.
+  공개 신뢰 페이지는 `https://deepworkplan.com/trust`입니다.
+
 ## 2. Deep Work Plan 스킬을 설치하세요
 
 이 리포지토리의 에이전트가 구조화된 작업을 계획하고 실행할 수 있도록 스킬을 설치하세요. 라우터와

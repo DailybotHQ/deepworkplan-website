@@ -661,6 +661,14 @@ export const uk: SiteTranslations = {
     orLabel: 'або',
     steps: [
       {
+        title: 'Перевірте перед встановленням',
+        description:
+          'Ставтеся до промту та скілу як до ненадійних, доки не перевірите їх. Обидва є відкритими під ліцензією MIT; скіл є Markdown-first без мережевих викликів і телеметрії. Кожен реліз публікує SHA256SUMS для скілу, що постачається, тож ви можете підтвердити відповідність своєї копії перед запуском. Релізи контрольно-суміовані, але не підписані (підписання — задокументований наступний крок).',
+        commands: [
+          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+        ],
+      },
+      {
         title: 'Встановіть скіл',
         description:
           'Додайте скіл Deep Work Plan, щоб будь-який агент міг планувати та виконувати структуровану роботу. Скіл постачає маршрутизатор плюс вісім суб-скілів — create, execute, refine, resume, status, verify, onboard та author.',

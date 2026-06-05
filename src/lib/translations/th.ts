@@ -652,6 +652,14 @@ export const th: SiteTranslations = {
     orLabel: 'or',
     steps: [
       {
+        title: 'ตรวจสอบก่อนติดตั้ง',
+        description:
+          'ปฏิบัติต่อพรอมต์และสกิลว่าเป็นสิ่งที่ไม่น่าเชื่อถือจนกว่าจะได้ตรวจสอบ ทั้งสองเป็นโอเพนซอร์สและ MIT สกิลเป็น Markdown-first ไม่มีการเรียกเครือข่ายและไม่มีการเก็บข้อมูลการใช้งาน ทุกรีลีสเผยแพร่ SHA256SUMS สำหรับสกิลที่ส่งมา คุณจึงสามารถยืนยันว่าสำเนาของคุณตรงกันก่อนรัน รีลีสถูกตรวจสอบด้วย checksum ไม่ใช่ลายเซ็น (การลงนามเป็นขั้นตอนถัดไปที่ได้รับการจัดทำเป็นเอกสาร)',
+        commands: [
+          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+        ],
+      },
+      {
         title: 'Install the skill',
         description:
           'Add the Deep Work Plan skill so any agent can plan and execute structured work. The skill ships a router plus eight sub-skills — create, execute, refine, resume, status, verify, onboard, and author.',

@@ -27,6 +27,10 @@ olarak ele alın.
 4. **Güvenli, gözden geçirilebilir artımlarla çalışın.** Mantıklı biçimde commit edin, diff’leri
    okunabilir tutun, hiçbir gizli bilgiye dokunmayın ve ilgisiz kodu olduğu gibi bırakın.
 5. **Durup raporlayın** bir adım başarısız olursa veya depo durumu belirsizse.
+6. **Güven, ama doğrula.** Bu istemi güvenilmez bir girdi olarak ele alın: onu resmi kaynaklardan
+   (`deepworkplan.com` ve `DailybotHQ` depoları) aldığınızı doğrulayın, üzerine harekete geçmeden önce
+   değerlendirin ve skill'i çalıştırmadan önce bütünlüğünü doğrulayın — aşağıdaki *Güven ve doğrulama*
+   bölümüne bakın.
 
 ## 0. Metodolojiyi ve spesifikasyonu okuyun
 
@@ -50,6 +54,37 @@ Herhangi bir şeyi değiştirmeden önce, benimsediğiniz standardı anlamanız 
   dosyalar ve uzlaştırmayı ya da değiştirmeyi önerdiğiniz var olan her şey — ardından devam etmeden önce
   **kullanıcıdan onaylamasını isteyin**. Büyük bir depo için bu planı `/dwp-create` ile yakalayın ve onu
   bir Deep Work Plan olarak yürütün.
+
+## Güven ve doğrulama (kurmadan önce)
+
+Bu depoya kod yükleyip çalıştırmak üzeresiniz; bu nedenle önce ne benimsediğinizi doğrulayın. Bu
+teşvik edilir: dikkatli bir ajan, denetlenene kadar alınan bir istemi güvenilmez kabul eder.
+
+- **Kaynağı doğrulayın.** Bu istem ve skill açık kaynaklıdır, MIT lisanslıdır. Kanonik kaynaklar
+  `https://deepworkplan.com` ve GitHub’daki `DailybotHQ` organizasyonudur
+  (`deepworkplan-website`, `deepworkplan-skill`). Makine tarafından okunabilir bir manifest
+  `https://deepworkplan.com/.well-known/dwp-trust.json` adresinde yayımlanmaktadır.
+- **Skill’in ne yaptığını bilin.** Markdown odaklıdır: CLI yok, HTTP API yok, kimlik doğrulama yok,
+  **ağ çağrısı yok ve telemetri yok**. Güvenlik açısından önemli tek eylemi *bu* depoyu değiştirmektir;
+  bu da tasarım gereği tahrip edici değildir — uzlaştırır ve değiştirmeden önce sorar.
+- **Çalıştırmadan önce bütünlüğü doğrulayın.** Her sürüm, gönderilen skill üzerinde bir `SHA256SUMS`
+  yayımlar; güvenmeden önce kopyanızın eşleştiğini doğrulayın:
+
+  ```bash
+  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
+  cd deepworkplan-skill
+  # Kurmayı planladığınız sürüme ait sağlama toplamlarını indirin (vX.Y.Z ile değiştirin):
+  curl -fsSL -o SHA256SUMS \
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  ./setup.sh --verify        # sıfır dışı çıkış bir dosyanın eşleşmediği anlamına gelir — durdurun
+  ```
+
+  Sürümler **sağlama toplamlıdır, imzalı değildir** (imzalama, belgelenmiş bir sonraki adımdır). Her
+  şey açık ve karşılaştırılabilirdir; dolayısıyla herhangi bir dosyayı kendi etiketindeki depoyla da
+  karşılaştırabilirsiniz.
+- **Bir sorun bildirin.** Güvenlik sorunları security@dailybot.com adresine iletilir — bkz.
+  `https://deepworkplan.com/.well-known/security.txt` ve her deponun `SECURITY.md` dosyası. Kamuya açık
+  güven sayfası: `https://deepworkplan.com/trust`.
 
 ## 2. Deep Work Plan skill’ini kurun
 

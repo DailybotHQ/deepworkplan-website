@@ -654,6 +654,14 @@ export const hi: SiteTranslations = {
     orLabel: 'या',
     steps: [
       {
+        title: 'स्थापना से पहले सत्यापित करें',
+        description:
+          'प्रॉम्प्ट और स्किल को तब तक अविश्वसनीय मानें जब तक आपने उन्हें जाँच न लिया हो। दोनों ओपन-सोर्स और MIT लाइसेंस प्राप्त हैं; स्किल Markdown-first है जिसमें कोई नेटवर्क कॉल नहीं और कोई टेलीमेट्री नहीं है। प्रत्येक रिलीज़ भेजी गई स्किल पर SHA256SUMS प्रकाशित करती है, ताकि आप चलाने से पहले पुष्टि कर सकें कि आपकी प्रति मेल खाती है। रिलीज़ चेकसम की गई हैं, हस्ताक्षरित नहीं (हस्ताक्षर एक दस्तावेज़ीकृत अगला चरण है)।',
+        commands: [
+          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+        ],
+      },
+      {
         title: 'स्किल स्थापित करें',
         description:
           'Deep Work Plan स्किल जोड़ें ताकि कोई भी एजेंट संरचित काम की योजना बना सके और उसे निष्पादित कर सके। स्किल एक राउटर और आठ सब-स्किल्स के साथ आती है — create, execute, refine, resume, status, verify, onboard और author।',

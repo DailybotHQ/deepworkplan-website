@@ -659,6 +659,14 @@ export const tr: SiteTranslations = {
     orLabel: 'veya',
     steps: [
       {
+        title: 'Kurmadan önce doğrulayın',
+        description:
+          'İstemi ve skill’i denetleyene kadar güvenilmez olarak ele alın. Her ikisi de açık kaynaklıdır ve MIT lisanslıdır; skill, ağ çağrısı ve telemetri içermeyen Markdown odaklı bir yapıdadır. Her sürüm, gönderilen skill üzerinde bir SHA256SUMS yayımlar; çalıştırmadan önce kopyanızın eşleştiğini doğrulayabilirsiniz. Sürümler sağlama toplamlıdır, imzalı değildir (imzalama, belgelenmiş bir sonraki adımdır).',
+        commands: [
+          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+        ],
+      },
+      {
         title: 'Skill’i kurun',
         description:
           'Herhangi bir ajanın yapılandırılmış işi planlayıp yürütebilmesi için Deep Work Plan skill’ini ekleyin. Skill, bir yönlendirici ve sekiz alt skill ile gelir — create, execute, refine, resume, status, verify, onboard ve author.',
