@@ -3,7 +3,7 @@ title: Générique
 description: "Le preset d’onboarding de repli pour tout projet, avec des indices de raisonnement indépendants de la stack qui détectent les commandes de build et de test depuis le dépôt."
 kind: preset
 lang: fr
-order: 6
+order: 100
 stack: Generic
 ---
 

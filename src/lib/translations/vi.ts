@@ -209,6 +209,7 @@ export const vi: SiteTranslations = {
         'Một phương pháp luận, nhiều bộ chuyển đổi. Markdown không ràng buộc framework vào bất cứ thứ gì — mọi agent đọc được Markdown đều chạy được một Deep Work Plan.',
       fullLabel: 'Đầy đủ',
       partialLabel: 'Một phần',
+      viewAllCta: 'Xem tất cả agent',
       items: [
         {
           name: 'Claude Code',
@@ -227,13 +228,28 @@ export const vi: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: 'Chỉ tài liệu và AGENTS.md. Slash command qua tiện ích mở rộng.',
+          support: 'full',
+          note: 'Bộ chuyển đổi đầy đủ — các lệnh dwp-* chạy qua AGENTS.md và quy trình #.',
         },
         {
           name: 'Gemini',
           support: 'full',
           note: 'Yêu cầu Gemini 2.5 Pro trở lên, với WebFetch bản địa.',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: 'Mã nguồn mở. Đọc AGENTS.md bản địa và chạy dwp-* qua lệnh #.',
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: 'Quy tắc cùng quy trình lệnh # điều khiển toàn bộ vòng lặp Deep Work Plan.',
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: 'Mã nguồn mở. Quy tắc Markdown và lệnh # thực thi mọi bước dwp-*.',
         },
         {
           name: 'Antigravity',
@@ -245,6 +261,7 @@ export const vi: SiteTranslations = {
     stacks: {
       badge: 'Stack',
       title: 'Các preset suy luận cho những stack quan trọng.',
+      viewAllCta: 'Xem tất cả preset',
       subtitle:
         'Đây là các trợ giúp suy luận, không phải mẫu. Khởi tạo đọc các manifest thực tế của repository và thích ứng theo từng stack — nó không bao giờ sao chép mù một preset. Monorepo nhận tài liệu cho từng mô-đun.',
       items: [

@@ -211,6 +211,7 @@ export const ja: SiteTranslations = {
         '一つの方法論に、多数のアダプター。Markdown はフレームワークをどこにも結びつけません。Markdown を読めるすべてのエージェントが Deep Work Plan を実行できます。',
       fullLabel: '完全',
       partialLabel: '部分的',
+      viewAllCta: 'すべてのエージェントを見る',
       items: [
         {
           name: 'Claude Code',
@@ -229,13 +230,28 @@ export const ja: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: 'ドキュメントと AGENTS.md のみ。スラッシュコマンドは拡張機能経由。',
+          support: 'full',
+          note: '完全なアダプター。dwp-* コマンドは AGENTS.md と # 手順を通じて実行されます。',
         },
         {
           name: 'Gemini',
           support: 'full',
           note: 'Gemini 2.5 Pro 以降が必要で、ネイティブの WebFetch を備えます。',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: 'オープンソース。AGENTS.md をネイティブに読み込み、dwp-* を # コマンドで実行します。',
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: 'ルールと # コマンド手順が Deep Work Plan の完全なループを駆動します。',
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: 'オープンソース。Markdown ルールと # コマンドがすべての dwp-* ステップを実行します。',
         },
         {
           name: 'Antigravity',
@@ -247,6 +263,7 @@ export const ja: SiteTranslations = {
     stacks: {
       badge: 'スタック',
       title: '重要なスタックのための推論プリセット。',
+      viewAllCta: 'すべてのプリセットを見る',
       subtitle:
         'これらはテンプレートではなく推論の補助です。オンボーディングはリポジトリの実際のマニフェストを読み、スタックごとに適応します。プリセットをそのまま盲目的にコピーすることはありません。モノレポにはモジュールごとのドキュメントが用意されます。',
       items: [

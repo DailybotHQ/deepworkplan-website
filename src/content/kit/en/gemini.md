@@ -1,25 +1,25 @@
 ---
 title: Google Gemini
-description: "The DWP adapter for Google Gemini, with partial support through markdown command procedures and the hash prefix that drive the sequential workflow."
+description: "The DWP adapter for Google Gemini, with full support through markdown command procedures and the hash command prefix that run the complete Deep Work Plan loop."
 kind: adapter
 lang: en
 order: 5
 agent: Google Gemini
-support: partial
+support: full
 prefix: '#'
 ---
 
 # Google Gemini adapter
 
-Google Gemini supports DWP through markdown command procedures.
+Gemini supports DWP through markdown command procedures.
 
 ## Support level
 
-**Partial** — core commands work through procedure files.
+**Full** — every dwp-* command runs from its procedure file. Requires Gemini 2.5 Pro or newer for native WebFetch.
 
 ## Installation
 
-DWP commands live as markdown procedures the agent reads.
+DWP commands live as markdown procedures the agent reads on invocation.
 
 ## Invocation
 
@@ -32,4 +32,4 @@ Use the `#` prefix:
 
 ## Notes
 
-Gemini reads procedure files and executes the sequential DWP workflow.
+Gemini reads the procedure files and runs the full sequential Deep Work Plan loop.

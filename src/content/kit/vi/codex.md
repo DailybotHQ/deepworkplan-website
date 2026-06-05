@@ -1,25 +1,25 @@
 ---
 title: OpenAI Codex
-description: "Adapter DWP cho OpenAI Codex, hỗ trợ một phần qua các quy trình lệnh markdown và tiền tố dấu thăng; các tính năng team agent chưa khả dụng."
+description: "Adapter DWP cho OpenAI Codex, với hỗ trợ đầy đủ qua các quy trình lệnh markdown và tiền tố dấu thăng điều khiển toàn bộ vòng lặp Deep Work Plan."
 kind: adapter
 lang: vi
 order: 3
 agent: OpenAI Codex
-support: partial
+support: full
 prefix: '#'
 ---
 
 # OpenAI Codex adapter
 
-OpenAI Codex hỗ trợ DWP thông qua các quy trình lệnh dạng markdown.
+Codex hỗ trợ DWP thông qua các quy trình lệnh dạng markdown.
 
 ## Mức độ hỗ trợ
 
-**Một phần** — các lệnh cốt lõi hoạt động; các tính năng nâng cao (team agent) chưa khả dụng.
+**Đầy đủ** — mọi lệnh dwp-* đều chạy từ file quy trình của nó.
 
 ## Cài đặt
 
-Các lệnh DWP tồn tại dưới dạng quy trình markdown mà agent đọc khi được gọi.
+Các lệnh DWP tồn tại dưới dạng quy trình markdown mà agent đọc khi được gọi; quy tắc được cài dưới `.codex/`.
 
 ## Cách gọi
 
@@ -32,4 +32,4 @@ Dùng tiền tố `#`:
 
 ## Ghi chú
 
-Các tính năng team agent chỉ dành cho Claude; Codex hỗ trợ luồng làm việc tuần tự.
+Codex đọc các file quy trình và thực thi toàn bộ vòng lặp Deep Work Plan tuần tự.

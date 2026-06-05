@@ -208,6 +208,7 @@ export const id: SiteTranslations = {
         'Satu metodologi, banyak adapter. Markdown tidak mengikat framework ke apa pun — setiap agent yang membaca Markdown dapat menjalankan Deep Work Plan.',
       fullLabel: 'Penuh',
       partialLabel: 'Sebagian',
+      viewAllCta: 'Lihat semua agen',
       items: [
         {
           name: 'Claude Code',
@@ -226,13 +227,28 @@ export const id: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: 'Hanya docs dan AGENTS.md. Slash command melalui ekstensi.',
+          support: 'full',
+          note: 'Adapter penuh — command dwp-* berjalan melalui AGENTS.md dan prosedur #.',
         },
         {
           name: 'Gemini',
           support: 'full',
           note: 'Membutuhkan Gemini 2.5 Pro atau lebih baru, dengan WebFetch native.',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: 'Sumber terbuka. Membaca AGENTS.md secara native dan menjalankan dwp-* melalui command #.',
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: 'Aturan ditambah prosedur command # menjalankan loop Deep Work Plan secara penuh.',
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: 'Sumber terbuka. Aturan Markdown dan command # menjalankan setiap langkah dwp-*.',
         },
         {
           name: 'Antigravity',
@@ -244,6 +260,7 @@ export const id: SiteTranslations = {
     stacks: {
       badge: 'Stack',
       title: 'Preset penalaran untuk stack yang penting.',
+      viewAllCta: 'Lihat semua preset',
       subtitle:
         'Ini adalah alat bantu penalaran, bukan template. Onboarding membaca manifes nyata repositori Anda dan menyesuaikan per stack — tidak pernah menyalin preset secara buta. Monorepo memperoleh dokumentasi per modul.',
       items: [

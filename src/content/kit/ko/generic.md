@@ -3,7 +3,7 @@ title: Generic
 description: "어떤 프로젝트에든 적용되는 폴백 온보딩 프리셋으로, 리포지토리에서 build와 test 명령을 감지하는 스택 비종속 추론 단서를 제공합니다."
 kind: preset
 lang: ko
-order: 6
+order: 100
 stack: Generic
 ---
 

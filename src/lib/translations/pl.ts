@@ -211,6 +211,7 @@ export const pl: SiteTranslations = {
         'Jedna metodyka, wiele adapterów. Markdown nie wiąże frameworka z niczym — każdy agent, który czyta Markdown, może uruchomić Deep Work Plan.',
       fullLabel: 'Pełne',
       partialLabel: 'Częściowe',
+      viewAllCta: 'Zobacz wszystkich agentów',
       items: [
         {
           name: 'Claude Code',
@@ -229,13 +230,28 @@ export const pl: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: 'Tylko dokumentacja i AGENTS.md. Polecenia slash poprzez rozszerzenia.',
+          support: 'full',
+          note: 'Pełny adapter — komendy dwp-* działają przez AGENTS.md i procedury #.',
         },
         {
           name: 'Gemini',
           support: 'full',
           note: 'Wymaga Gemini 2.5 Pro lub nowszego, z natywnym WebFetch.',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: 'Open source. Natywnie odczytuje AGENTS.md i uruchamia dwp-* przez komendy #.',
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: 'Reguły i procedury komend # napędzają pełną pętlę Deep Work Plan.',
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: 'Open source. Reguły Markdown i komendy # wykonują każdy krok dwp-*.',
         },
         {
           name: 'Antigravity',
@@ -247,6 +263,7 @@ export const pl: SiteTranslations = {
     stacks: {
       badge: 'Stosy technologiczne',
       title: 'Presety rozumowania dla stosów, które mają znaczenie.',
+      viewAllCta: 'Zobacz wszystkie presety',
       subtitle:
         'To pomoce w rozumowaniu, nie szablony. Onboarding czyta rzeczywiste manifesty Twojego repozytorium i dostosowuje się do stosu — nigdy nie kopiuje presetu na ślepo. Monorepozytoria otrzymują dokumentację per moduł.',
       items: [

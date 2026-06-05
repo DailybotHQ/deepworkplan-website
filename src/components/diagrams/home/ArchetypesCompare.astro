@@ -1,8 +1,11 @@
 ---
 /**
  * ArchetypesCompare (HP-05) — individual repository vs orchestrator hub, compact
- * homepage register. Spec: docs/visuals/prompts/01-homepage.md#hp-05. HTML/CSS;
- * language-keyed i18n (en fallback); role="img"; dark mode; zero JS.
+ * homepage register. Spec: docs/visuals/prompts/01-homepage.md#hp-05. Each card
+ * carries a structural SVG glyph that draws the archetype (a self-contained repo
+ * node holding its own files vs. a hub fanning hairline links to child sub-repos)
+ * so the contrast reads visually. Language-keyed i18n (en fallback); the SVG is
+ * text-light (English file paths only); role="img"; dark mode; zero JS.
  */
 import type { Language } from '@/lib/i18n';
 
@@ -157,12 +160,35 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
   <div class="editorial-asset__grid" aria-hidden="true"></div>
   <div class="editorial-asset__body acomp-cols">
     <div class="acomp-card">
-      <span class="acomp-mark" aria-hidden="true">▢</span>
+      <!-- Individual: one self-contained repo node holding its own files. -->
+      <svg class="acomp-glyph" viewBox="0 0 220 132" aria-hidden="true">
+        <rect class="ac-repo" x="30" y="12" width="160" height="108" rx="6"></rect>
+        <rect class="ac-file" x="46" y="27" width="14" height="14" rx="2"></rect>
+        <text class="ac-file-label" x="68" y="38">AGENTS.md</text>
+        <rect class="ac-file" x="46" y="55" width="14" height="14" rx="2"></rect>
+        <text class="ac-file-label" x="68" y="66">docs/</text>
+        <rect class="ac-file" x="46" y="83" width="14" height="14" rx="2"></rect>
+        <text class="ac-file-label" x="68" y="94">.agents/</text>
+      </svg>
       <p class="acomp-h">{t.individual}</p>
       <p class="acomp-sub">{t.individualSub}</p>
     </div>
     <div class="acomp-card acomp-card--accent">
-      <span class="acomp-mark ea-accent" aria-hidden="true">⬡⬡⬡</span>
+      <!-- Orchestrator: a hub node coordinating several child sub-repos. -->
+      <svg class="acomp-glyph" viewBox="0 0 220 132" aria-hidden="true">
+        <path class="ac-link" d="M110 40 L46 92"></path>
+        <path class="ac-link" d="M110 40 L110 92"></path>
+        <path class="ac-link" d="M110 40 L174 92"></path>
+        <rect class="ac-hub" x="80" y="14" width="60" height="26" rx="4"></rect>
+        <text class="ac-hub-label" x="110" y="31">hub</text>
+        <rect class="ac-child" x="26" y="92" width="40" height="26" rx="4"></rect>
+        <rect class="ac-child" x="90" y="92" width="40" height="26" rx="4"></rect>
+        <rect class="ac-child" x="154" y="92" width="40" height="26" rx="4"></rect>
+        <circle class="ac-dot" cx="46" cy="105" r="2.5"></circle>
+        <circle class="ac-dot" cx="110" cy="105" r="2.5"></circle>
+        <circle class="ac-dot" cx="174" cy="105" r="2.5"></circle>
+        <circle class="ac-anchor" cx="110" cy="40" r="2.5"></circle>
+      </svg>
       <p class="acomp-h">{t.orchestrator}</p>
       <p class="acomp-sub">{t.orchestratorSub}</p>
     </div>
@@ -186,20 +212,66 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
   .acomp-card {
     border: 1px solid var(--color-line);
     border-radius: 4px;
-    padding: 1rem;
+    padding: 1rem 1rem 1.1rem;
     text-align: center;
     background-color: var(--color-paper);
   }
   .acomp-card--accent {
     border-color: var(--color-secondary);
   }
-  .acomp-mark {
+
+  /* Structural glyph: draws the archetype instead of labelling it. */
+  .acomp-glyph {
     display: block;
-    font-size: 1.1rem;
-    letter-spacing: 0.2em;
-    margin-bottom: 0.4rem;
-    color: var(--color-muted);
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    margin: 0 auto 0.7rem;
   }
+  .ac-repo {
+    fill: var(--color-paper);
+    stroke: var(--color-ink);
+    stroke-width: 1.5;
+  }
+  .ac-file {
+    fill: none;
+    stroke: var(--color-line);
+    stroke-width: 1;
+  }
+  .ac-file-label {
+    fill: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+  .ac-hub {
+    fill: var(--color-paper);
+    stroke: var(--color-secondary);
+    stroke-width: 1.5;
+  }
+  .ac-hub-label {
+    fill: var(--color-secondary);
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    text-anchor: middle;
+  }
+  .ac-child {
+    fill: var(--color-paper);
+    stroke: var(--color-ink);
+    stroke-width: 1.25;
+  }
+  .ac-link {
+    fill: none;
+    stroke: var(--color-secondary);
+    stroke-width: 1.25;
+  }
+  .ac-dot {
+    fill: var(--color-muted);
+  }
+  .ac-anchor {
+    fill: var(--color-secondary);
+  }
+
   .acomp-h {
     font-family: var(--font-serif);
     font-weight: 700;

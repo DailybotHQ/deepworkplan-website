@@ -1,12 +1,12 @@
 ---
 title: OpenAI Codex
-description: "OpenAI Codex için DWP adaptörü; markdown komut prosedürleri ve hash öneki aracılığıyla kısmi destek sunar; ekip ajanı özellikleri kullanılamaz."
+description: "OpenAI Codex için DWP adaptörü; hash komut öneki ile markdown komut prosedürleri aracılığıyla tam destek sunar ve eksiksiz Deep Work Plan döngüsünü çalıştırır."
 kind: adapter
 lang: tr
 order: 3
 agent: OpenAI Codex
-support: partial
-prefix: '#'
+support: full
+prefix: ‘#’
 ---
 
 # OpenAI Codex adaptörü
@@ -15,11 +15,11 @@ OpenAI Codex, DWP’yi markdown komut prosedürleri aracılığıyla destekler.
 
 ## Destek düzeyi
 
-**Kısmi** — temel komutlar çalışır; gelişmiş özellikler (ekip ajanları) kullanılamaz.
+**Tam** — her dwp-* komutu kendi prosedür dosyasından çalışır.
 
 ## Kurulum
 
-DWP komutları, ajanın çağrıldığında okuduğu markdown prosedürleri olarak bulunur.
+DWP komutları, ajanın çağrıldığında okuduğu markdown prosedürleri olarak bulunur; kurallar `.codex/` altına kurulur.
 
 ## Çağırma
 
@@ -32,4 +32,4 @@ DWP komutları, ajanın çağrıldığında okuduğu markdown prosedürleri olar
 
 ## Notlar
 
-Ekip ajanı özellikleri yalnızca Claude’a özgüdür; Codex sıralı iş akışını destekler.
+Codex, prosedür dosyalarını okur ve eksiksiz sıralı Deep Work Plan döngüsünü çalıştırır.

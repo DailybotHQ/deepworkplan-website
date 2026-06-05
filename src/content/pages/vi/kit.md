@@ -36,8 +36,8 @@ Các slash command mỏng ủy thác tới các sub-skill và addon:
 
 ### Bộ chuyển đổi
 
-Các tích hợp mỏng cho từng agent: Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini và
-Antigravity.
+Các tích hợp mỏng cho từng agent: Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
+OpenCode, Windsurf, Cline và Antigravity.
 
 ### Preset khởi tạo
 

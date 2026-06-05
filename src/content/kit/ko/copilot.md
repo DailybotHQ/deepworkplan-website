@@ -1,25 +1,25 @@
 ---
 title: GitHub Copilot
-description: "GitHub Copilot를 위한 DWP 어댑터로, Markdown 명령 절차와 해시 접두어를 통해 부분적으로 지원합니다. 일부 자동화는 수동으로 이루어집니다."
+description: "GitHub Copilot를 위한 DWP 어댑터로, AGENTS.md와 해시 명령 접두어로 호출하는 Markdown 명령 절차를 통해 완전히 지원합니다."
 kind: adapter
 lang: ko
 order: 4
 agent: GitHub Copilot
-support: partial
+support: full
 prefix: '#'
 ---
 
 # GitHub Copilot 어댑터
 
-GitHub Copilot는 Markdown 명령 절차를 통해 DWP를 지원합니다.
+GitHub Copilot은 AGENTS.md와 Markdown 명령 절차를 통해 DWP를 지원합니다.
 
 ## 지원 수준
 
-**부분** — 핵심 명령은 절차 파일을 통해 작동하지만 일부 자동화는 수동입니다.
+**완전** — Copilot은 AGENTS.md와 dwp-* 절차 파일을 읽고 모든 명령을 실행합니다.
 
 ## 설치
 
-DWP 명령은 리포지토리 안에 Markdown 절차로 존재합니다.
+DWP는 리포지토리에 AGENTS.md와 명령 절차를 제공합니다. Copilot은 이를 리포지토리 컨텍스트로 읽습니다.
 
 ## 호출
 
@@ -32,4 +32,4 @@ DWP 명령은 리포지토리 안에 Markdown 절차로 존재합니다.
 
 ## 참고
 
-Copilot는 절차 파일을 읽지만 Claude Code보다 자율 실행 능력이 낮습니다.
+Copilot은 절차 파일을 읽고 완전한 순차 Deep Work Plan 루프를 실행합니다.

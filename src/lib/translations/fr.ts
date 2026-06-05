@@ -210,6 +210,7 @@ export const fr: SiteTranslations = {
         'Une seule méthodologie, de nombreux adaptateurs. Le Markdown ne couple le framework à rien — tout agent qui lit du Markdown peut exécuter un Deep Work Plan.',
       fullLabel: 'Complet',
       partialLabel: 'Partiel',
+      viewAllCta: 'Voir tous les agents',
       items: [
         {
           name: 'Claude Code',
@@ -228,13 +229,28 @@ export const fr: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: 'Docs et AGENTS.md uniquement. Commandes slash via extensions.',
+          support: 'full',
+          note: "Adaptateur complet — les commandes dwp-* s'exécutent via AGENTS.md et les procédures #.",
         },
         {
           name: 'Gemini',
           support: 'full',
           note: 'Nécessite Gemini 2.5 Pro ou plus récent, avec WebFetch natif.',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: 'Open source. Lit AGENTS.md nativement et exécute les dwp-* via les commandes #.',
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: "Les règles et les procédures de commande # pilotent l'intégralité de la boucle Deep Work Plan.",
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: 'Open source. Les règles Markdown et les commandes # exécutent chaque étape dwp-*.',
         },
         {
           name: 'Antigravity',
@@ -248,6 +264,7 @@ export const fr: SiteTranslations = {
       title: 'Presets de raisonnement pour les stacks qui comptent.',
       subtitle:
         'Ce sont des aides au raisonnement, pas des modèles. L’onboarding lit les vrais manifestes de votre dépôt et s’adapte à chaque stack — il ne copie jamais un preset à l’aveugle. Les monorepos obtiennent une doc par module.',
+      viewAllCta: 'Voir tous les presets',
       items: [
         { name: 'Django', sub: 'DRF · Poetry' },
         { name: 'FastAPI', sub: 'Pydantic · Poetry' },

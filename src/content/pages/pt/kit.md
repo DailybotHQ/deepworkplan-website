@@ -36,8 +36,8 @@ Slash commands enxutos delegam às sub-skills e aos addons:
 
 ### Adaptadores
 
-Integrações enxutas por agente para Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini e
-Antigravity.
+Integrações enxutas por agente para Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
+OpenCode, Windsurf, Cline e Antigravity.
 
 ### Presets de onboarding
 

@@ -1,25 +1,25 @@
 ---
 title: GitHub Copilot
-description: "Der DWP-Adapter für GitHub Copilot, mit teilweiser Unterstützung über Markdown-Befehlsprozeduren und das Hash-Präfix; ein Teil der Automatisierung erfolgt manuell."
+description: "Der DWP-Adapter für GitHub Copilot, mit vollständiger Unterstützung über AGENTS.md und Markdown-Befehlsprozeduren, die mit dem Hash-Präfix aufgerufen werden."
 kind: adapter
 lang: de
 order: 4
 agent: GitHub Copilot
-support: partial
+support: full
 prefix: '#'
 ---
 
 # GitHub Copilot Adapter
 
-GitHub Copilot unterstützt DWP über Markdown-Befehlsprozeduren.
+GitHub Copilot unterstützt DWP über AGENTS.md und Markdown-Befehlsprozeduren.
 
 ## Unterstützungsstufe
 
-**Teilweise** — die Kernbefehle funktionieren über Prozedurdateien; ein Teil der Automatisierung erfolgt manuell.
+**Vollständig** — Copilot liest AGENTS.md und die dwp-*-Prozedurdateien und führt jeden Befehl daraus aus.
 
 ## Installation
 
-DWP-Befehle liegen als Markdown-Prozeduren im Repository vor.
+DWP liefert AGENTS.md und die Befehlsprozeduren im Repository; Copilot liest sie als Repository-Kontext.
 
 ## Aufruf
 
@@ -32,4 +32,4 @@ Verwenden Sie das `#`-Präfix:
 
 ## Hinweise
 
-Copilot liest Prozedurdateien, hat aber eine weniger autonome Ausführung als Claude Code.
+Copilot liest die Prozedurdateien und führt den vollständigen sequenziellen Deep Work Plan Loop aus.

@@ -1,25 +1,25 @@
 ---
 title: GitHub Copilot
-description: "GitHub Copilot için DWP adaptörü; markdown komut prosedürleri ve hash öneki aracılığıyla kısmi destek sunar; bazı otomasyonlar elle yapılır."
+description: "GitHub Copilot için DWP adaptörü; AGENTS.md ve hash komut öneki ile markdown komut prosedürleri aracılığıyla tam destek sunar."
 kind: adapter
 lang: tr
 order: 4
 agent: GitHub Copilot
-support: partial
-prefix: '#'
+support: full
+prefix: ‘#’
 ---
 
 # GitHub Copilot adaptörü
 
-GitHub Copilot, DWP’yi markdown komut prosedürleri aracılığıyla destekler.
+GitHub Copilot, DWP’yi AGENTS.md ve markdown komut prosedürleri aracılığıyla destekler.
 
 ## Destek düzeyi
 
-**Kısmi** — temel komutlar prosedür dosyaları aracılığıyla çalışır; bazı otomasyonlar elle yapılır.
+**Tam** — Copilot, AGENTS.md ve dwp-* prosedür dosyalarını okur ve her komutu bunlar üzerinden çalıştırır.
 
 ## Kurulum
 
-DWP komutları, depoda markdown prosedürleri olarak bulunur.
+DWP, AGENTS.md ve komut prosedürlerini depoda sunar; Copilot bunları depo bağlamı olarak okur.
 
 ## Çağırma
 
@@ -32,4 +32,4 @@ DWP komutları, depoda markdown prosedürleri olarak bulunur.
 
 ## Notlar
 
-Copilot, prosedür dosyalarını okur ancak Claude Code’a kıyasla daha az özerk yürütme yapar.
+Copilot, prosedür dosyalarını okur ve eksiksiz sıralı Deep Work Plan döngüsünü çalıştırır.

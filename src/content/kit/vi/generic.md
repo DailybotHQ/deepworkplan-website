@@ -3,7 +3,7 @@ title: Generic
 description: "Preset onboarding dự phòng cho mọi dự án, với các gợi ý suy luận không phụ thuộc stack giúp phát hiện lệnh build và test ngay từ repository."
 kind: preset
 lang: vi
-order: 6
+order: 100
 stack: Generic
 ---
 

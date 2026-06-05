@@ -1,11 +1,11 @@
 ---
 title: Antigravity
-description: "Der DWP-Adapter für Antigravity, mit teilweiser Unterstützung über Markdown-Befehlsprozeduren und das Hash-Präfix, die den sequenziellen Workflow steuern."
+description: "Der DWP-Adapter für Antigravity, mit vollständiger Unterstützung über Markdown-Befehlsprozeduren und das Hash-Präfix, die den gesamten Deep Work Plan Loop steuern."
 kind: adapter
 lang: de
 order: 6
 agent: Antigravity
-support: partial
+support: full
 prefix: '#'
 ---
 
@@ -15,7 +15,7 @@ Antigravity unterstützt DWP über Markdown-Befehlsprozeduren.
 
 ## Unterstützungsstufe
 
-**Teilweise** — die Kernbefehle funktionieren über Prozedurdateien.
+**Vollständig** — jeder dwp-*-Befehl läuft aus seiner Prozedurdatei über die native Befehlsoberfläche.
 
 ## Installation
 
@@ -32,4 +32,4 @@ Verwenden Sie das `#`-Präfix:
 
 ## Hinweise
 
-Antigravity liest Prozedurdateien und führt den sequenziellen DWP-Workflow aus.
+Antigravity liest die Prozedurdateien und führt den vollständigen sequenziellen Deep Work Plan Loop aus.

@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan のキット"
 description: "スキルとその八つのサブスキル、コマンド、エージェントアダプター、オンボーディングプリセット、オプトイン式アドオン、そして Deep Work Plan をどこでも実行可能にする事例。"
-lastUpdated: 2026-05-31
+lastUpdated: 2026-06-05
 ---
 
 ## Deep Work Plan のキット
@@ -35,7 +35,7 @@ Deep Work Plan スキルは、ルーターと八つのサブスキルです。
 
 ### アダプター
 
-Claude Code、Cursor、OpenAI Codex、GitHub Copilot、Google Gemini、Antigravity のための、エージェントごとの薄い統合。
+Claude Code、Cursor、OpenAI Codex、GitHub Copilot、Google Gemini、OpenCode、Windsurf、Cline、Antigravity のための、エージェントごとの薄い統合。
 
 ### オンボーディングプリセット
 

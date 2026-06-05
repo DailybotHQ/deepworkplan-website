@@ -208,6 +208,7 @@ export const hi: SiteTranslations = {
         'एक पद्धति, अनेक अडैप्टर। Markdown फ़्रेमवर्क को किसी से नहीं बाँधता — Markdown पढ़ने वाला हर एजेंट एक Deep Work Plan चला सकता है।',
       fullLabel: 'पूर्ण',
       partialLabel: 'आंशिक',
+      viewAllCta: 'सभी एजेंट देखें',
       items: [
         {
           name: 'Claude Code',
@@ -226,13 +227,28 @@ export const hi: SiteTranslations = {
         },
         {
           name: 'GitHub Copilot',
-          support: 'partial',
-          note: 'केवल docs और AGENTS.md। स्लैश कमांड्स एक्सटेंशन के माध्यम से।',
+          support: 'full',
+          note: 'पूर्ण अडैप्टर — dwp-* कमांड्स AGENTS.md और # प्रक्रियाओं के माध्यम से चलते हैं।',
         },
         {
           name: 'Gemini',
           support: 'full',
           note: 'Gemini 2.5 Pro या नया आवश्यक, नेटिव WebFetch के साथ।',
+        },
+        {
+          name: 'OpenCode',
+          support: 'full',
+          note: 'ओपन सोर्स। AGENTS.md को नेटिव रूप से पढ़ता है और dwp-* को # कमांड्स से चलाता है।',
+        },
+        {
+          name: 'Windsurf',
+          support: 'full',
+          note: 'नियम और # कमांड प्रक्रियाएँ पूरे Deep Work Plan लूप को चलाती हैं।',
+        },
+        {
+          name: 'Cline',
+          support: 'full',
+          note: 'ओपन सोर्स। Markdown नियम और # कमांड्स हर dwp-* चरण को चलाते हैं।',
         },
         {
           name: 'Antigravity',
@@ -246,6 +262,7 @@ export const hi: SiteTranslations = {
       title: 'उन स्टैक्स के लिए तर्क-प्रीसेट जो मायने रखते हैं।',
       subtitle:
         'ये तर्क में सहायक हैं, टेम्पलेट नहीं। ऑनबोर्डिंग आपकी रिपॉज़िटरी के वास्तविक मैनिफ़ेस्ट पढ़कर हर स्टैक के अनुसार ढलती है — यह कभी आँख मूँदकर कोई प्रीसेट कॉपी नहीं करती। मोनोरेपो को प्रति-मॉड्यूल docs मिलते हैं।',
+      viewAllCta: 'सभी प्रीसेट देखें',
       items: [
         { name: 'Django', sub: 'DRF · Poetry' },
         { name: 'FastAPI', sub: 'Pydantic · Poetry' },

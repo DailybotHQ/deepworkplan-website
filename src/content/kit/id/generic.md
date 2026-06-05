@@ -3,7 +3,7 @@ title: Generic
 description: "Preset onboarding cadangan untuk proyek apa pun, dengan petunjuk penalaran yang agnostik terhadap stack untuk mendeteksi command build dan test dari repositori."
 kind: preset
 lang: id
-order: 6
+order: 100
 stack: Generic
 ---
 

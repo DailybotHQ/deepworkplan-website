@@ -1,11 +1,11 @@
 ---
 title: Antigravity
-description: "Antigravity 向けの DWP アダプター。逐次的なワークフローを駆動する Markdown のコマンド手順とハッシュプレフィックスを通じた部分的なサポートを備える。"
+description: "Antigravity 向けの DWP アダプター。Markdown のコマンド手順とハッシュコマンドプレフィックスを通じた完全なサポートを備え、Deep Work Plan の完全なループを駆動します。"
 kind: adapter
 lang: ja
 order: 6
 agent: Antigravity
-support: partial
+support: full
 prefix: '#'
 ---
 
@@ -15,7 +15,7 @@ Antigravity は、Markdown のコマンド手順を通じて DWP をサポート
 
 ## サポートレベル
 
-**部分的** — 中核となるコマンドは手順ファイルを通じて機能します。
+**完全** — すべての dwp-* コマンドが、ネイティブなコマンド面を通じて手順ファイルから実行されます。
 
 ## インストール
 
@@ -32,4 +32,4 @@ DWP コマンドは、エージェントが呼び出し時に読む Markdown の
 
 ## 補足
 
-Antigravity は手順ファイルを読み、逐次的な DWP ワークフローを実行します。
+Antigravity は手順ファイルを読み、完全な逐次的 Deep Work Plan ループを実行します。

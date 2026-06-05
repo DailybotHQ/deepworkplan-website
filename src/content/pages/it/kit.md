@@ -36,8 +36,8 @@ I sottili slash command delegano alle sub-skill e agli addon:
 
 ### Adapter
 
-Integrazioni sottili per agente per Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini e
-Antigravity.
+Integrazioni sottili per agente per Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
+OpenCode, Windsurf, Cline e Antigravity.
 
 ### Preset di onboarding
 

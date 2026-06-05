@@ -36,8 +36,8 @@ Comandos de barra ligeros delegan en las sub-skills y los addons:
 
 ### Adaptadores
 
-Integraciones ligeras por agente para Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini
-y Antigravity.
+Integraciones ligeras por agente para Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
+OpenCode, Windsurf, Cline y Antigravity.
 
 ### Presets de incorporación
 

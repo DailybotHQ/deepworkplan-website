@@ -3,7 +3,7 @@ title: Generic
 description: "किसी भी प्रोजेक्ट के लिए फ़ॉलबैक ऑनबोर्डिंग प्रीसेट, जिसमें स्टैक-अज्ञेय तर्क संकेत होते हैं जो रिपॉज़िटरी से build और test कमांड का पता लगाते हैं।"
 kind: preset
 lang: hi
-order: 6
+order: 100
 stack: Generic
 ---
 

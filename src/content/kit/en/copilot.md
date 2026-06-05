@@ -1,25 +1,25 @@
 ---
 title: GitHub Copilot
-description: "The DWP adapter for GitHub Copilot, with partial support through markdown command procedures and the hash prefix; some automation is done manually."
+description: "The DWP adapter for GitHub Copilot, with full support through AGENTS.md and markdown command procedures invoked with the hash command prefix."
 kind: adapter
 lang: en
 order: 4
 agent: GitHub Copilot
-support: partial
+support: full
 prefix: '#'
 ---
 
 # GitHub Copilot adapter
 
-GitHub Copilot supports DWP through markdown command procedures.
+Copilot supports DWP through AGENTS.md and markdown command procedures.
 
 ## Support level
 
-**Partial** — core commands work through procedure files; some automation is manual.
+**Full** — Copilot reads AGENTS.md and the dwp-* procedure files, and runs every command from them.
 
 ## Installation
 
-DWP commands live as markdown procedures in the repository.
+DWP ships AGENTS.md and the command procedures in the repository; Copilot reads them as repository context.
 
 ## Invocation
 
@@ -32,4 +32,4 @@ Use the `#` prefix:
 
 ## Notes
 
-Copilot reads procedure files but has less autonomous execution than Claude Code.
+Copilot reads the procedure files and runs the full sequential Deep Work Plan loop.

@@ -1,11 +1,11 @@
 ---
 title: Antigravity
-description: "Adapter DWP cho Antigravity, với hỗ trợ một phần qua các quy trình lệnh markdown và tiền tố dấu thăng dùng để điều khiển luồng làm việc tuần tự."
+description: "Adapter DWP cho Antigravity, với hỗ trợ đầy đủ qua các quy trình lệnh markdown và tiền tố dấu thăng điều khiển toàn bộ vòng lặp Deep Work Plan."
 kind: adapter
 lang: vi
 order: 6
 agent: Antigravity
-support: partial
+support: full
 prefix: '#'
 ---
 
@@ -15,7 +15,7 @@ Antigravity hỗ trợ DWP thông qua các quy trình lệnh dạng markdown.
 
 ## Mức độ hỗ trợ
 
-**Một phần** — các lệnh cốt lõi hoạt động thông qua các file quy trình.
+**Đầy đủ** — mọi lệnh dwp-* đều chạy từ file quy trình của nó qua bề mặt lệnh bản địa.
 
 ## Cài đặt
 
@@ -32,4 +32,4 @@ Dùng tiền tố `#`:
 
 ## Ghi chú
 
-Antigravity đọc các file quy trình và thực thi luồng làm việc tuần tự của DWP.
+Antigravity đọc các file quy trình và thực thi toàn bộ vòng lặp Deep Work Plan tuần tự.

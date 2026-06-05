@@ -36,8 +36,8 @@ Slash command tipis mendelegasikan ke sub-skill dan addon:
 
 ### Adapter
 
-Integrasi per-agent yang tipis untuk Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, dan
-Antigravity.
+Integrasi per-agent yang tipis untuk Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
+OpenCode, Windsurf, Cline, dan Antigravity.
 
 ### Preset onboarding
 

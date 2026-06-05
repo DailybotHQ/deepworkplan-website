@@ -36,7 +36,7 @@ Deep Work Plan skill’i, bir yönlendirici ile sekiz alt skill’den oluşur:
 
 ### Adaptörler
 
-Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini ve Antigravity için ince, ajan başına entegrasyonlar.
+Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Windsurf, Cline ve Antigravity için ince, ajan başına entegrasyonlar.
 
 ### Onboarding hazır ayarları
 

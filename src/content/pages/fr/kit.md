@@ -36,8 +36,8 @@ Des commandes slash légères délèguent aux sous-skills et aux addons :
 
 ### Adaptateurs
 
-Des intégrations légères par agent pour Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini et
-Antigravity.
+Des intégrations légères par agent pour Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
+OpenCode, Windsurf, Cline et Antigravity.
 
 ### Presets d’onboarding
 

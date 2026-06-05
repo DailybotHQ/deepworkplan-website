@@ -1,25 +1,25 @@
 ---
 title: GitHub Copilot
-description: "อะแดปเตอร์ DWP สำหรับ GitHub Copilot รองรับบางส่วนผ่านขั้นตอนคำสั่งแบบ markdown และคำนำหน้า hash ระบบอัตโนมัติบางส่วนต้องทำด้วยมือ"
+description: "อะแดปเตอร์ DWP สำหรับ GitHub Copilot รองรับเต็มรูปแบบผ่าน AGENTS.md และขั้นตอนคำสั่งแบบ markdown ที่เรียกใช้ด้วยคำนำหน้า hash"
 kind: adapter
 lang: th
 order: 4
 agent: GitHub Copilot
-support: partial
+support: full
 prefix: '#'
 ---
 
 # อะแดปเตอร์ GitHub Copilot
 
-GitHub Copilot รองรับ DWP ผ่านขั้นตอนคำสั่งแบบ markdown
+GitHub Copilot รองรับ DWP ผ่าน AGENTS.md และขั้นตอนคำสั่งแบบ markdown
 
 ## ระดับการรองรับ
 
-**บางส่วน** คำสั่งหลักทำงานได้ผ่านไฟล์ขั้นตอน ระบบอัตโนมัติบางส่วนต้องทำด้วยมือ
+**เต็มรูปแบบ** — Copilot อ่าน AGENTS.md และไฟล์ขั้นตอน dwp-* แล้วรันทุกคำสั่งจากพวกมัน
 
 ## การติดตั้ง
 
-คำสั่ง DWP อยู่ในรูปขั้นตอนแบบ markdown ภายใน repository
+DWP ส่ง AGENTS.md และขั้นตอนคำสั่งมาใน repository Copilot อ่านพวกมันเป็นบริบทของ repository
 
 ## การเรียกใช้
 
@@ -32,4 +32,4 @@ GitHub Copilot รองรับ DWP ผ่านขั้นตอนคำส
 
 ## หมายเหตุ
 
-Copilot อ่านไฟล์ขั้นตอนได้ แต่ดำเนินการอัตโนมัติได้น้อยกว่า Claude Code
+Copilot อ่านไฟล์ขั้นตอนและดำเนินลูป Deep Work Plan แบบลำดับเต็มรูปแบบ

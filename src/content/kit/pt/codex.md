@@ -1,11 +1,11 @@
 ---
 title: OpenAI Codex
-description: "O adaptador DWP para o OpenAI Codex, com suporte parcial por meio de procedimentos de comando em markdown e o prefixo hash; os recursos de team agents não estão disponíveis."
+description: "O adaptador DWP para o OpenAI Codex, com suporte completo por meio de procedimentos de comando em markdown e o prefixo hash que executam o loop completo do Deep Work Plan."
 kind: adapter
 lang: pt
 order: 3
 agent: OpenAI Codex
-support: partial
+support: full
 prefix: '#'
 ---
 
@@ -15,11 +15,11 @@ O OpenAI Codex oferece suporte ao DWP por meio de procedimentos de comando em ma
 
 ## Nível de suporte
 
-**Parcial** — os comandos centrais funcionam; os recursos avançados (team agents) não estão disponíveis.
+**Completo** — todos os comandos dwp-* são executados a partir do respectivo arquivo de procedimento.
 
 ## Instalação
 
-Os comandos do DWP vivem como procedimentos em markdown que o agente lê ao serem invocados.
+Os comandos do DWP vivem como procedimentos em markdown que o agente lê ao serem invocados; as regras são instaladas em `.codex/`.
 
 ## Invocação
 
@@ -32,4 +32,4 @@ Use o prefixo `#`:
 
 ## Notas
 
-Os recursos de team agents são exclusivos do Claude; o Codex oferece suporte ao fluxo de trabalho sequencial.
+O Codex lê os arquivos de procedimento e executa o loop sequencial completo do Deep Work Plan.

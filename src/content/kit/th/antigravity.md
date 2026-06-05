@@ -1,11 +1,11 @@
 ---
 title: Antigravity
-description: "อะแดปเตอร์ DWP สำหรับ Antigravity รองรับบางส่วนผ่านขั้นตอนคำสั่งแบบ markdown และคำนำหน้า hash ที่ขับเคลื่อนเวิร์กโฟลว์แบบลำดับ"
+description: "อะแดปเตอร์ DWP สำหรับ Antigravity รองรับเต็มรูปแบบผ่านขั้นตอนคำสั่งแบบ markdown และคำนำหน้า hash ที่ขับเคลื่อนลูป Deep Work Plan ทั้งหมด"
 kind: adapter
 lang: th
 order: 6
 agent: Antigravity
-support: partial
+support: full
 prefix: '#'
 ---
 
@@ -15,7 +15,7 @@ Antigravity รองรับ DWP ผ่านขั้นตอนคำสั
 
 ## ระดับการรองรับ
 
-**บางส่วน** คำสั่งหลักทำงานได้ผ่านไฟล์ขั้นตอน
+**เต็มรูปแบบ** — ทุกคำสั่ง dwp-* รันจากไฟล์ขั้นตอนผ่านพื้นผิวคำสั่งในตัว
 
 ## การติดตั้ง
 
@@ -32,4 +32,4 @@ Antigravity รองรับ DWP ผ่านขั้นตอนคำสั
 
 ## หมายเหตุ
 
-Antigravity อ่านไฟล์ขั้นตอนและดำเนินเวิร์กโฟลว์ DWP แบบลำดับ
+Antigravity อ่านไฟล์ขั้นตอนและดำเนินลูป Deep Work Plan แบบลำดับเต็มรูปแบบ

@@ -1,11 +1,11 @@
 ---
 title: Antigravity
-description: "El adaptador de DWP para Antigravity, con soporte parcial mediante procedimientos en Markdown y el prefijo almohadilla que guían el flujo secuencial."
+description: "El adaptador de DWP para Antigravity, con soporte completo mediante procedimientos de comando en Markdown y el prefijo almohadilla que impulsan el flujo completo de Deep Work Plan."
 kind: adapter
 lang: es
 order: 6
 agent: Antigravity
-support: partial
+support: full
 prefix: '#'
 ---
 
@@ -15,7 +15,7 @@ Antigravity admite DWP mediante procedimientos de comando en Markdown.
 
 ## Nivel de soporte
 
-**Parcial**: los comandos básicos funcionan mediante archivos de procedimiento.
+**Completo** — cada comando dwp-* se ejecuta desde su archivo de procedimiento a través de la superficie de comandos nativa.
 
 ## Instalación
 
@@ -32,4 +32,4 @@ Usa el prefijo `#`:
 
 ## Notas
 
-Antigravity lee los archivos de procedimiento y ejecuta el flujo de trabajo secuencial de DWP.
+Antigravity lee los archivos de procedimiento y ejecuta el flujo secuencial completo de Deep Work Plan.
