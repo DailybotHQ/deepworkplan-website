@@ -73,7 +73,16 @@ export interface SiteTranslations {
     examples: string;
     init: string;
     quickstart: string;
+    trust: string;
     github: string;
+    // Source-code repo selector (header + mobile)
+    repo: {
+      label: string;
+      website: string;
+      websiteDesc: string;
+      skill: string;
+      skillDesc: string;
+    };
     menu: string;
     closeMenu: string;
   };
@@ -396,5 +405,32 @@ export interface SiteTranslations {
     outcome: string;
     nextStepsTitle: string;
     nextSteps: { label: string; href: string }[];
+  };
+
+  // Trust & security page
+  trustPage: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    intro: string;
+    pillarsTitle: string;
+    pillars: { title: string; body: string }[];
+    verifyTitle: string;
+    verifyIntro: string;
+    codeLabel: string;
+    verifyNote: string;
+    disclosureTitle: string;
+    disclosureBody: string;
+    resourcesTitle: string;
+    linkManifest: string;
+    linkSecurityTxt: string;
+    linkPolicy: string;
+    linkSkillPolicy: string;
+    limitationsTitle: string;
+    limitations: string[];
+    ctaTitle: string;
+    ctaBody: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
   };
 }

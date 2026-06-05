@@ -1,0 +1,13 @@
+# Deep Work Plan — security contact (RFC 9116)
+# https://deepworkplan.com/.well-known/security.txt
+
+# Report privately via GitHub's private vulnerability reporting (not public issues).
+Contact: https://github.com/DailybotHQ/deepworkplan-website/security
+Contact: https://github.com/DailybotHQ/deepworkplan-skill/security
+Expires: 2027-06-04T00:00:00.000Z
+Canonical: https://deepworkplan.com/.well-known/security.txt
+Policy: https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md
+Preferred-Languages: en, es
+
+# Vulnerabilities in the installable skill:
+# https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md

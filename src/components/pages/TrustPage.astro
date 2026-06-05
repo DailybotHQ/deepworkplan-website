@@ -1,0 +1,261 @@
+---
+import Kicker from '@/components/editorial/Kicker.astro';
+import Lead from '@/components/editorial/Lead.astro';
+import Rule from '@/components/editorial/Rule.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { REPO_URLS } from '@/lib/constants/repos';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const p = t.trustPage;
+const prefix = getUrlPrefix(lang);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+
+// The verify recipe is code — never localized. Mirrors analysis (verify_recipe.md),
+// the /init prompt, and the skill repo PUBLISHING.md so all surfaces agree.
+const verifyCommand = `git clone ${REPO_URLS.skill}.git
+cd deepworkplan-skill
+# Download the checksums for the release you intend to install (replace vX.Y.Z):
+curl -fsSL -o SHA256SUMS \\
+  ${REPO_URLS.skill}/releases/download/vX.Y.Z/SHA256SUMS
+./setup.sh --verify        # non-zero exit means a file does not match — stop`;
+
+// Direct "report a vulnerability" links → GitHub private vulnerability reporting.
+const reportLinks: { label: string; href: string }[] = [
+  {
+    label: t.nav.repo.skill,
+    href: `${REPO_URLS.skill}/security`,
+  },
+  {
+    label: t.nav.repo.website,
+    href: `${REPO_URLS.website}/security`,
+  },
+];
+
+const resources: { label: string; href: string }[] = [
+  { label: p.linkManifest, href: '/.well-known/dwp-trust.json' },
+  { label: p.linkSecurityTxt, href: '/.well-known/security.txt' },
+  { label: p.linkPolicy, href: `${REPO_URLS.website}/blob/main/SECURITY.md` },
+  {
+    label: p.linkSkillPolicy,
+    href: `${REPO_URLS.skill}/blob/main/SECURITY.md`,
+  },
+];
+
+const trustSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: p.meta.title,
+  description: p.meta.description,
+  url: `${siteUrl}${prefix}/trust`,
+  about: {
+    '@type': 'SoftwareApplication',
+    name: 'Deep Work Plan',
+    applicationCategory: 'DeveloperApplication',
+    license: 'https://opensource.org/licenses/MIT',
+    author: {
+      '@type': 'Organization',
+      name: 'Dailybot',
+      url: 'https://dailybot.com',
+    },
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${siteUrl}${prefix}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: p.title,
+      item: `${siteUrl}${prefix}/trust`,
+    },
+  ],
+};
+---
+
+<MainLayout lang={lang} title={p.meta.title} description={p.meta.description}>
+  <Fragment slot="head">
+    <JsonLd data={trustSchema} />
+    <JsonLd data={breadcrumbSchema} />
+  </Fragment>
+
+  <article class="main-container py-16 md:py-24">
+    <header class="max-w-3xl">
+      <Kicker>{p.eyebrow}</Kicker>
+      <h1
+        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl"
+        style="color: var(--color-ink);"
+      >
+        {p.title}
+      </h1>
+      <Lead class="mt-6">{p.intro}</Lead>
+    </header>
+
+    <Rule class="my-12" />
+
+    {/* What you are trusting */}
+    <section>
+      <Kicker>{p.pillarsTitle}</Kicker>
+      <div class="mt-6 grid gap-6 md:grid-cols-2">
+        {
+          p.pillars.map((pillar) => (
+            <div class="flex flex-col border p-6" style="border-color: var(--color-line);">
+              <h2
+                class="font-display text-xl font-semibold"
+                style="color: var(--color-ink);"
+              >
+                {pillar.title}
+              </h2>
+              <p class="mt-3 leading-relaxed" style="color: var(--color-gray-600);">
+                {pillar.body}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <Rule class="my-12" />
+
+    {/* Verify before you run */}
+    <section class="max-w-3xl">
+      <Kicker>{p.verifyTitle}</Kicker>
+      <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-ink);">
+        {p.verifyIntro}
+      </p>
+      <div class="mt-5 overflow-hidden border" style="border-color: var(--color-line);">
+        <div
+          class="border-b px-3 py-1.5"
+          style="border-color: var(--color-line); background-color: var(--color-gray-100);"
+        >
+          <span class="kicker">{p.codeLabel}</span>
+        </div>
+        <pre class="overflow-x-auto px-3 py-3" style="background-color: var(--color-gray-100);"><code class="font-mono text-xs leading-relaxed" style="color: var(--color-ink);">{verifyCommand}</code></pre>
+      </div>
+      <p class="mt-4 leading-relaxed" style="color: var(--color-gray-600);">
+        {p.verifyNote}
+      </p>
+    </section>
+
+    <Rule class="my-12" />
+
+    {/* Report a vulnerability */}
+    <section
+      class="max-w-3xl border-l-2 pl-6"
+      style="border-color: var(--color-secondary);"
+    >
+      <Kicker>{p.disclosureTitle}</Kicker>
+      <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-ink);">
+        {p.disclosureBody}
+      </p>
+      <div class="mt-5 flex flex-wrap gap-4">
+        {
+          reportLinks.map((link) => (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center rounded-sm border px-5 py-3 font-semibold transition hover:opacity-80"
+              style="border-color: var(--color-line); color: var(--color-ink);"
+            >
+              {p.disclosureTitle} — {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <Rule class="my-12" />
+
+    {/* Trust resources */}
+    <section class="max-w-3xl">
+      <Kicker>{p.resourcesTitle}</Kicker>
+      <ul class="mt-6 space-y-3">
+        {
+          resources.map((res) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-1 shrink-0" style="color: var(--color-secondary);" aria-hidden="true">
+                &#9656;
+              </span>
+              <a
+                href={res.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline underline-offset-4 hover:opacity-80"
+                style="color: var(--color-ink);"
+              >
+                {res.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <Rule class="my-12" />
+
+    {/* Honest limitations */}
+    <section class="max-w-3xl">
+      <Kicker>{p.limitationsTitle}</Kicker>
+      <ul class="mt-6 space-y-3">
+        {
+          p.limitations.map((item) => (
+            <li class="flex items-start gap-3" style="color: var(--color-gray-600);">
+              <span class="mt-1 shrink-0" style="color: var(--color-secondary);" aria-hidden="true">
+                &#9656;
+              </span>
+              <span>{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <Rule class="my-12" />
+
+    {/* CTA */}
+    <section class="max-w-3xl">
+      <h2
+        class="font-display text-2xl font-bold md:text-3xl"
+        style="color: var(--color-ink);"
+      >
+        {p.ctaTitle}
+      </h2>
+      <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-gray-600);">
+        {p.ctaBody}
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a
+          href={`${prefix}/methodology`}
+          class="inline-flex items-center rounded-sm px-6 py-3 font-semibold transition hover:opacity-90"
+          style="background-color: var(--color-ink); color: var(--color-paper);"
+        >
+          {p.ctaPrimary}
+        </a>
+        <a
+          href={`${prefix}/init`}
+          class="inline-flex items-center rounded-sm border px-6 py-3 font-semibold transition hover:opacity-80"
+          style="border-color: var(--color-line); color: var(--color-ink);"
+        >
+          {p.ctaSecondary}
+        </a>
+      </div>
+    </section>
+  </article>
+</MainLayout>

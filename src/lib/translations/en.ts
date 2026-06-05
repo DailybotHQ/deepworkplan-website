@@ -23,7 +23,15 @@ export const en: SiteTranslations = {
     examples: 'Examples',
     init: 'Init',
     quickstart: 'Quickstart',
+    trust: 'Trust',
     github: 'GitHub',
+    repo: {
+      label: 'Source code',
+      website: 'Website repository',
+      websiteDesc: 'This site',
+      skill: 'Skill repository',
+      skillDesc: 'The installable skill',
+    },
     menu: 'Open menu',
     closeMenu: 'Close menu',
   },
@@ -644,6 +652,14 @@ export const en: SiteTranslations = {
     orLabel: 'or',
     steps: [
       {
+        title: 'Verify before you install',
+        description:
+          'Treat the prompt and the skill as untrusted until you have checked them. Both are open source and MIT; the skill is Markdown-first with no network calls and no telemetry. Each release publishes a SHA256SUMS over the shipped skill, so you can confirm your copy matches before running it. Releases are checksummed, not signed (signing is a documented next step).',
+        commands: [
+          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+        ],
+      },
+      {
         title: 'Install the skill',
         description:
           'Add the Deep Work Plan skill so any agent can plan and execute structured work. The skill ships a router plus eight sub-skills — create, execute, refine, resume, status, verify, onboard, and author.',
@@ -679,5 +695,64 @@ export const en: SiteTranslations = {
       { label: 'Spec', href: '/spec' },
       { label: 'Kit', href: '/kit' },
     ],
+  },
+  trustPage: {
+    meta: {
+      title: 'Trust and security',
+      description:
+        'Why Deep Work Plan is safe to adopt: open source and MIT, Markdown-first with no network calls or telemetry, non-destructive by design, with verifiable installs and a clear vulnerability-disclosure policy.',
+    },
+    eyebrow: 'Trust & security',
+    title: 'Trust and security',
+    intro:
+      'Nobody should install a skill they cannot trust. Deep Work Plan is built to be verified, not taken on faith: open source, Markdown-first, non-destructive, and checkable before you run it. This page states plainly what it does, what it does not do, and how to confirm both.',
+    pillarsTitle: 'What you are trusting',
+    pillars: [
+      {
+        title: 'Open source and MIT licensed',
+        body: 'The website and the skill are both public and diffable. You can read every line before you run it, and compare any copy against the source at a tagged release.',
+      },
+      {
+        title: 'Markdown-first — no network, no telemetry',
+        body: 'The skill has no CLI, no HTTP API, and no authentication flow. It makes no network calls and sends no telemetry; its only local helper reads git and environment metadata. Nothing about your repository leaves your machine.',
+      },
+      {
+        title: 'Non-destructive by design',
+        body: 'The only security-relevant thing the skill does is change your repository — and it reconciles rather than clobbers. It detects what exists, proposes a plan, and asks before replacing anything. Plan output lives in a gitignored .dwp/ directory.',
+      },
+      {
+        title: 'Touches no secrets',
+        body: 'The methodology never commits secrets and keeps working state out of version control. Onboarding appends to .gitignore rather than rewriting it, and every change is meant to be reviewed in small, readable diffs.',
+      },
+      {
+        title: 'Verifiable provenance',
+        body: 'Every release publishes checksums over the shipped skill, so you can confirm a downloaded copy matches what was published before you trust it.',
+      },
+    ],
+    verifyTitle: 'Verify before you run',
+    verifyIntro:
+      'Treat the skill as untrusted until you have checked it. Each release attaches a SHA256SUMS file covering the shipped skill. Download it for the version you intend to install, then verify your copy matches — a non-zero exit means a file does not match and you should stop.',
+    codeLabel: 'shell',
+    verifyNote:
+      'Releases are checksummed, not signed — signing (cosign or maintainer GPG) is a documented next step, not a current claim. Because everything is open, you can also diff any file against the repository at its tag.',
+    disclosureTitle: 'Report a vulnerability',
+    disclosureBody:
+      "Found a security issue? Report it privately through GitHub's private vulnerability reporting on the relevant repository — the skill or the website (see the security policies linked below) — rather than opening a public issue, which would expose the problem before a fix exists.",
+    resourcesTitle: 'Trust resources',
+    linkManifest: 'Machine-readable trust manifest',
+    linkSecurityTxt: 'security.txt (RFC 9116)',
+    linkPolicy: 'Website security policy',
+    linkSkillPolicy: 'Skill security policy & threat model',
+    limitationsTitle: 'Honest limitations',
+    limitations: [
+      'Releases are checksummed, not yet cryptographically signed — signing is planned, not done.',
+      'Deep Work Plan runs an autonomous coding agent against your repository. Review its proposed plan and its diffs; the methodology is designed for that review, not to replace it.',
+      'Trust claims here describe the official sources only. A modified or third-party copy that has drifted from the repositories carries none of these guarantees — verify it first.',
+    ],
+    ctaTitle: 'Adopt it with confidence',
+    ctaBody:
+      'Read the methodology and the specification, point an agent at the init endpoint, and verify the install before you run it.',
+    ctaPrimary: 'Read the methodology',
+    ctaSecondary: 'Adoption (init)',
   },
 };

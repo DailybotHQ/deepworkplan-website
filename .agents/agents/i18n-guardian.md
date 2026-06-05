@@ -90,6 +90,16 @@ For this Astro repository, check:
 - [ ] No empty string values (placeholder translations)
 - [ ] Translations are natural and idiomatic in each target language
 
+> **TypeScript string-literal safety (MANDATORY when editing `*.ts` locale files).**
+> Use **only** straight ASCII single quotes `'` as string delimiters. NEVER use
+> curly/typographic quotes (`‘ ’ “ ”`) as delimiters — they are not valid JS string
+> delimiters and break the build (a frequent failure when translating prose with
+> apostrophes for fr/it/tr). If a translated value contains an apostrophe, escape it
+> as `\'` (e.g. `'Vérifiez avant d\'installer'`, `'skill\'i kurun'`). Inner
+> typographic apostrophes (`’`) are fine as literal characters but must sit inside
+> straight-quote delimiters. Always run `pnpm run biome:check` after editing locale
+> files — a `parse` error means a stray curly delimiter slipped in.
+
 ### Orthography / Scripts / Punctuation
 - [ ] Spanish content uses correct ñ (search for: `pequeno`, `tamano`, `diseno`, `espanol`, `manana`)
 - [ ] Spanish content uses correct accented vowels (search for: `analisis`, `numero`, `codigo`, `ejecucion`, `version`, `pagina`, `titulo`)

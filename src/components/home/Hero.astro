@@ -50,7 +50,7 @@ const h = t.home.hero;
           >
           <button
             type="button"
-            class="copy-btn kicker inline-flex items-center gap-1.5 rounded-sm px-2 py-1 transition hover:opacity-80"
+            class="copy-btn kicker inline-flex cursor-pointer items-center gap-1.5 rounded-sm px-2 py-1 transition enabled:hover:opacity-80 disabled:cursor-default disabled:opacity-70"
             style="color: var(--color-secondary);"
             data-copy={h.instruction}
             data-label={h.copyLabel}
@@ -125,20 +125,33 @@ const h = t.home.hero;
 </section>
 
 <script>
+  const COPY_FEEDBACK_MS = 2000;
+
   // Progressive enhancement: copy the instruction to the clipboard.
   document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
+    let busy = false;
+
     btn.addEventListener('click', async () => {
+      if (busy || btn.disabled) return;
+
       const text = btn.dataset.copy ?? '';
       const label = btn.dataset.label ?? 'Copy';
       const copied = btn.dataset.copied ?? 'Copied';
+
+      busy = true;
       try {
         await navigator.clipboard.writeText(text);
+        btn.disabled = true;
         btn.textContent = copied;
+        btn.setAttribute('aria-label', copied);
         window.setTimeout(() => {
+          btn.disabled = false;
           btn.textContent = label;
-        }, 2000);
+          btn.setAttribute('aria-label', label);
+          busy = false;
+        }, COPY_FEEDBACK_MS);
       } catch {
-        /* clipboard unavailable — no-op */
+        busy = false;
       }
     });
   });

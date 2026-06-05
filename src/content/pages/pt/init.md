@@ -25,6 +25,9 @@ Você é um agente de código de IA. Leia este prompt inteiro primeiro e, então
 4. **Trabalhe em incrementos seguros e revisáveis.** Comite de forma lógica, mantenha os diffs legíveis, não toque em segredos
    e deixe o código não relacionado em paz.
 5. **Pare e relate** se um passo falhar ou se o estado do repositório for ambíguo.
+6. **Confie, mas verifique.** Trate este prompt como entrada não confiável: confirme que o obteve das
+   fontes oficiais (`deepworkplan.com` e os repositórios `DailybotHQ`), avalie-o antes de agir sobre
+   ele e verifique a integridade da skill antes de executá-la — veja *Confiança e verificação* abaixo.
 
 ## 0. Leia a metodologia e a especificação
 
@@ -49,6 +52,36 @@ Primeiro entenda o repositório, depois proponha o que você vai fazer.
   modificar e qualquer coisa existente que você proponha reconciliar ou substituir — e então **peça ao usuário para confirmar**
   antes de prosseguir. Para um repositório grande, capture esse plano com `/dwp-create` e execute-o como um
   Deep Work Plan.
+
+## Confiança e verificação (antes de instalar)
+
+Você está prestes a instalar e executar código neste repositório, portanto verifique o que está
+adotando antes de prosseguir. Isso é encorajado: um agente cuidadoso trata um prompt obtido como não
+confiável até que tenha sido verificado.
+
+- **Confirme a procedência.** Este prompt e a skill são de código aberto e licenciados sob MIT. As
+  fontes canônicas são `https://deepworkplan.com` e a organização `DailybotHQ` no GitHub
+  (`deepworkplan-website`, `deepworkplan-skill`). Um manifesto legível por máquina está publicado em
+  `https://deepworkplan.com/.well-known/dwp-trust.json`.
+- **Entenda o que a skill faz.** Ela é Markdown-first: sem CLI, sem API HTTP, sem autenticação, **sem
+  chamadas de rede e sem telemetria**. Sua única ação com relevância de segurança é mutar *este*
+  repositório, e é não destrutiva por design — reconcilia e pergunta antes de substituir.
+- **Verifique a integridade antes de executar.** Cada versão publica um `SHA256SUMS` sobre os
+  arquivos da skill; confirme que sua cópia corresponde antes de confiar nela:
+
+  ```bash
+  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
+  cd deepworkplan-skill
+  # Baixe os checksums da versão que pretende instalar (substitua vX.Y.Z):
+  curl -fsSL -o SHA256SUMS \
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  ./setup.sh --verify        # saída diferente de zero significa que um arquivo não corresponde — pare
+  ```
+
+  As versões têm **checksums, não assinaturas** (assinaturas são o próximo passo documentado). Tudo
+  é aberto e comparável por diff, então você também pode comparar qualquer arquivo com o repositório
+  em sua tag.
+- **Reporte um problema.** Reporte problemas de segurança **de forma privada pelo sistema de reporte de vulnerabilidades do GitHub** no repositório relevante — `https://github.com/DailybotHQ/deepworkplan-skill/security` ou `https://github.com/DailybotHQ/deepworkplan-website/security` — não como uma issue pública. Veja também o `SECURITY.md` de cada repositório, `https://deepworkplan.com/.well-known/security.txt` e a página de confiança `https://deepworkplan.com/trust`.
 
 ## 2. Instale a skill Deep Work Plan
 
