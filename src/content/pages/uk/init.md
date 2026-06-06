@@ -107,7 +107,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
    блок Quick Commands з **реальними, виконуваними** командами репозиторію. Якщо `AGENTS.md` уже існує, зливайте
    в нього, а не замінюйте його. Створіть символьне посилання `CLAUDE.md → AGENTS.md` (не затирайте
    наявний `CLAUDE.md`, не спитавши).
-2. **`docs/`.** Заповніть стандартні категорії реальним, специфічним для репозиторію вмістом: `ARCHITECTURE.md`,
+2. **`docs/`.** Заповніть стандартні категорії реальним, специфічним для репозиторію вмістом: `PRODUCT_SPEC.md` (нетехнічний документ продукту/навіщо — обов'язковий для кожного репозиторію, включно з бібліотеками), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, плюс `PERFORMANCE.md` та покажчик `docs/README.md`.
    Якщо документація вже існує, інтегруйте та розширте її — не дублюйте.

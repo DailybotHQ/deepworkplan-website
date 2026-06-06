@@ -112,7 +112,7 @@ méthodologie) au lieu d’écraser — et confirmez avec l’utilisateur avant 
    Commands avec les commandes **réelles et exécutables** du dépôt. Si un `AGENTS.md` existe déjà, fusionnez-y
    plutôt que de le remplacer. Créez le lien symbolique `CLAUDE.md → AGENTS.md` (n’écrasez pas un
    `CLAUDE.md` existant sans demander).
-2. **`docs/`.** Remplissez les catégories standard avec un contenu réel, spécifique au dépôt : `ARCHITECTURE.md`,
+2. **`docs/`.** Remplissez les catégories standard avec un contenu réel, spécifique au dépôt : `PRODUCT_SPEC.md` (le document produit/pourquoi non technique — obligatoire pour tout dépôt, bibliothèques incluses), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, ainsi que `PERFORMANCE.md` et un index `docs/README.md`.
    Si des docs existent déjà, intégrez-les et étendez-les — ne les dupliquez pas.

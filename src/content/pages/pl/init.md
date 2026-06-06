@@ -107,7 +107,7 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
    Commands z **rzeczywistymi, uruchamialnymi** komendami repozytorium. Jeśli `AGENTS.md` już istnieje, scal
    z nim, zamiast go zastępować. Utwórz dowiązanie `CLAUDE.md → AGENTS.md` (nie nadpisuj
    istniejącego `CLAUDE.md` bez pytania).
-2. **`docs/`.** Wypełnij standardowe kategorie rzeczywistą, specyficzną dla repozytorium treścią: `ARCHITECTURE.md`,
+2. **`docs/`.** Wypełnij standardowe kategorie rzeczywistą, specyficzną dla repozytorium treścią: `PRODUCT_SPEC.md` (nietech­niczny dokument produktu/dlaczego — obowiązkowy dla każdego repozytorium, w tym bibliotek), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, a także `PERFORMANCE.md` i indeks `docs/README.md`.
    Jeśli dokumentacja już istnieje, zintegruj ją i rozszerz — nie duplikuj.

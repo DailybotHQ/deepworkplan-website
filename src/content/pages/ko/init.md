@@ -104,7 +104,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
    실행 가능한** 명령을 갖춘 Quick Commands 블록. `AGENTS.md`가 이미 존재하면 교체하는 대신 그것에
    병합하세요. `CLAUDE.md → AGENTS.md` 심링크를 만드세요(기존
    `CLAUDE.md`를 묻지 않고 덮어쓰지 마세요).
-2. **`docs/`.** 표준 범주를 실제 리포지토리별 내용으로 채우세요: `ARCHITECTURE.md`,
+2. **`docs/`.** 표준 범주를 실제 리포지토리별 내용으로 채우세요: `PRODUCT_SPEC.md` (비기술적인 제품/이유 문서 — 라이브러리를 포함한 모든 리포지토리에 필수), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, 그리고 `PERFORMANCE.md`와 `docs/README.md` 색인.
    문서가 이미 존재하면 통합하고 확장하세요 — 복제하지 마세요.
