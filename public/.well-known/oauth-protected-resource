@@ -1,7 +1,7 @@
 {
-  "_comment": "deepworkplan.com is a static content site with no OAuth-protected resources today. This document is published for agent-readiness compliance per RFC 9728. The authorization_servers entry self-references the site's own OAuth authorization-server metadata (also a stub).",
+  "_comment": "deepworkplan.com is a static content site with no OAuth-protected resources today. This document is published for agent-readiness compliance per RFC 9728. The authorization_servers entry self-references the site's own OAuth authorization-server metadata (also a stub). 'read' is the only scope and maps to anonymous read-only access to public content; no token is actually required.",
   "resource": "https://deepworkplan.com",
   "authorization_servers": ["https://deepworkplan.com"],
-  "scopes_supported": [],
+  "scopes_supported": ["read"],
   "bearer_methods_supported": ["header"]
 }
