@@ -73,10 +73,10 @@ export const tr: SiteTranslations = {
       titleEmphasis: 'Bağlam daha da önemlidir.',
       subtitle:
         'Deep Work Plan, herhangi bir depoyu yapılandırılmış bir ortama — bağlam, güvenlik bariyerleri ve kalıcı bir plana — dönüştürür; böylece herhangi bir kodlama ajanı işini tam isabetle yürütür ve uzun soluklu işi tamamlar.',
-      instructionLabel: 'Ajanınıza bunu verin',
+      instructionLabel: 'Ajanınıza kopyalayın',
       instruction:
-        'Bu depoyu AI-first hale getirmek için https://deepworkplan.com/init.md adresindeki talimatları oku ve uygula.',
-      copyLabel: 'Kopyala',
+        'init.md istemini kopyalayıp kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırarak herhangi bir depoyu AI-first hale getirin.',
+      copyLabel: 'init.md kopyala',
       copiedLabel: 'Kopyalandı',
       viewInitCta: 'Tam /init istemini görüntüle',
       pullQuote:
@@ -661,9 +661,9 @@ export const tr: SiteTranslations = {
     title: 'Bu depoyu AI-first hale getirin',
     intro:
       'Herhangi bir depoyu spec odaklı, ajana hazır bir kod tabanına dönüştürmek için tek bir uç nokta. Skill’i kurun, bir ajanın depoyu kuruluma almasını sağlayın, ardından herhangi bir kodlama ajanıyla yapılandırılmış işi planlayıp yürütün.',
-    handoffTitle: 'Bunu ajanınıza verin',
+    handoffTitle: 'Ajanınıza kopyalayın',
     handoffBody:
-      'Aşağıdaki satırı yapay zeka kodlama ajanınıza yapıştırın. Metodolojiyi ve spesifikasyonu okuyacak, skill’i kuracak ve bu depoyu Deep Work Plan’ler için kuruluma alacaktır.',
+      "init.md isteminin tamamını kopyalayıp yapay zeka kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırın. Metodolojiyi ve spesifikasyonu okur, skill'i kurar ve bu depoyu Deep Work Plan'ler için kuruluma alır.",
     handoffInstruction:
       'Bu depoyu AI-first hale getirmek için https://deepworkplan.com/init.md adresindeki talimatları oku ve uygula.',
     handoffMdLabel: 'Bağımsız ajan istemi',

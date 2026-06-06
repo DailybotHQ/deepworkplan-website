@@ -72,10 +72,10 @@ export const vi: SiteTranslations = {
       titleEmphasis: 'Ngữ cảnh quan trọng hơn.',
       subtitle:
         'Deep Work Plan biến mọi repository thành một môi trường có cấu trúc — ngữ cảnh, hàng rào bảo vệ và một kế hoạch bền vững — nơi bất kỳ agent lập trình nào cũng thực thi chính xác và hoàn thành công việc dài hơi.',
-      instructionLabel: 'Đưa cho agent của bạn dòng này',
+      instructionLabel: 'Sao chép vào agent của bạn',
       instruction:
-        'Đọc và làm theo hướng dẫn tại https://deepworkplan.com/init.md để biến kho lưu trữ này thành AI-first.',
-      copyLabel: 'Sao chép',
+        'Sao chép prompt init.md và dán vào agent lập trình của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác — để biến mọi repository thành AI-first.',
+      copyLabel: 'Sao chép init.md',
       copiedLabel: 'Đã sao chép',
       viewInitCta: 'Xem toàn bộ lời nhắc /init',
       pullQuote:
@@ -658,9 +658,9 @@ export const vi: SiteTranslations = {
     title: 'Biến repository này thành AI-first',
     intro:
       'Một endpoint để biến mọi repository thành một codebase dựa trên đặc tả, sẵn sàng cho agent. Cài skill, để một agent khởi tạo repo, rồi lập kế hoạch và thực thi công việc có cấu trúc với mọi agent lập trình.',
-    handoffTitle: 'Trao dòng này cho agent của bạn',
+    handoffTitle: 'Sao chép vào agent của bạn',
     handoffBody:
-      'Dán dòng dưới đây vào agent lập trình AI của bạn. Nó sẽ đọc phương pháp luận và đặc tả, cài skill, và khởi tạo repository này cho các Deep Work Plan.',
+      'Sao chép toàn bộ prompt init.md và dán vào agent lập trình AI của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác. Nó đọc phương pháp luận và đặc tả, cài skill, và khởi tạo repository này cho các Deep Work Plan.',
     handoffInstruction:
       'Đọc và làm theo hướng dẫn tại https://deepworkplan.com/init.md để biến kho lưu trữ này thành AI-first.',
     handoffMdLabel: 'Lời nhắc agent độc lập',

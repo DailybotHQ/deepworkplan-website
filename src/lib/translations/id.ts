@@ -71,10 +71,10 @@ export const id: SiteTranslations = {
       titleEmphasis: 'Konteks lebih penting.',
       subtitle:
         'Deep Work Plan mengubah repositori apa pun menjadi lingkungan terstruktur — konteks, pengaman, dan rencana yang tahan lama — tempat coding agent mana pun mengeksekusi dengan presisi dan menyelesaikan pekerjaan jangka panjang.',
-      instructionLabel: 'Berikan ini kepada agent Anda',
+      instructionLabel: 'Salin ke agent Anda',
       instruction:
-        'Baca dan ikuti instruksi di https://deepworkplan.com/init.md untuk menjadikan repositori ini AI-first.',
-      copyLabel: 'Salin',
+        'Salin prompt init.md dan tempelkan ke agent coding Anda — Claude Code, Cursor, Codex, atau lainnya — untuk menjadikan repositori apa pun AI-first.',
+      copyLabel: 'Salin init.md',
       copiedLabel: 'Tersalin',
       viewInitCta: 'Lihat prompt /init lengkap',
       pullQuote:
@@ -660,9 +660,9 @@ export const id: SiteTranslations = {
     title: 'Jadikan repositori ini AI-first',
     intro:
       'Satu endpoint untuk mengubah repositori apa pun menjadi basis kode spec-driven yang siap agent. Pasang skill, biarkan agent meng-onboard repo, lalu rencanakan dan eksekusi pekerjaan terstruktur dengan coding agent mana pun.',
-    handoffTitle: 'Berikan ini kepada agent Anda',
+    handoffTitle: 'Salin ke agent Anda',
     handoffBody:
-      'Tempel baris di bawah ke AI coding agent Anda. Ia akan membaca metodologi dan spesifikasi, memasang skill, dan meng-onboard repositori ini untuk Deep Work Plan.',
+      'Salin prompt init.md lengkap dan tempelkan ke AI coding agent Anda — Claude Code, Cursor, Codex, atau lainnya. Ia membaca metodologi dan spesifikasi, memasang skill, dan meng-onboard repositori ini untuk Deep Work Plan.',
     handoffInstruction:
       'Baca dan ikuti instruksi di https://deepworkplan.com/init.md untuk menjadikan repositori ini AI-first.',
     handoffMdLabel: 'Prompt agent mandiri',

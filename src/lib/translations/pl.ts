@@ -73,10 +73,10 @@ export const pl: SiteTranslations = {
       titleEmphasis: 'Kontekst znaczy więcej.',
       subtitle:
         'Deep Work Plan zamienia dowolne repozytorium w uporządkowane środowisko — kontekst, zabezpieczenia i trwały plan — w którym każdy agent kodujący działa precyzyjnie i kończy długodystansową pracę.',
-      instructionLabel: 'Przekaż to swojemu agentowi',
+      instructionLabel: 'Skopiuj do swojego agenta',
       instruction:
-        'Przeczytaj i wykonaj instrukcje na https://deepworkplan.com/init.md, aby uczynić to repozytorium AI-first.',
-      copyLabel: 'Kopiuj',
+        'Skopiuj prompt init.md i wklej go do swojego agenta kodowania — Claude Code, Cursor, Codex lub innego — aby uczynić dowolne repozytorium AI-first.',
+      copyLabel: 'Kopiuj init.md',
       copiedLabel: 'Skopiowano',
       viewInitCta: 'Zobacz pełny prompt /init',
       pullQuote:
@@ -723,9 +723,9 @@ export const pl: SiteTranslations = {
     title: 'Uczyń to repozytorium AI-first',
     intro:
       'Jeden endpoint, by zamienić dowolne repozytorium w bazę kodu spec-driven, gotową dla agentów. Zainstaluj skill, pozwól agentowi przeprowadzić onboarding repo, a potem planuj i realizuj uporządkowaną pracę z dowolnym agentem kodującym.',
-    handoffTitle: 'Przekaż to swojemu agentowi',
+    handoffTitle: 'Skopiuj do swojego agenta',
     handoffBody:
-      'Wklej poniższą linijkę do swojego agenta kodującego AI. Przeczyta metodykę i specyfikację, zainstaluje skill i przeprowadzi onboarding tego repozytorium pod Deep Work Plans.',
+      'Skopiuj pełny prompt init.md i wklej go do swojego agenta kodowania AI — Claude Code, Cursor, Codex lub innego. Przeczyta metodykę i specyfikację, zainstaluje skill i przeprowadzi onboarding tego repozytorium pod Deep Work Plans.',
     handoffInstruction:
       'Przeczytaj i wykonaj instrukcje na https://deepworkplan.com/init.md, aby uczynić to repozytorium AI-first.',
     handoffMdLabel: 'Samodzielny prompt dla agenta',

@@ -8,9 +8,9 @@ lastUpdated: 2026-06-03
 
 Deep Work Plan, herhangi bir depoyu yapılandırılmış bir ortama — bağlam, güvenlik bariyerleri ve kalıcı bir plan — dönüştürür; burada herhangi bir kodlama ajanı kesinlikle yürütür ve uzun soluklu işi bitirir.
 
-Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini planlamak ve yürütmek için açık, MIT lisanslı bir metodoloji ve kittir. Bir kurulum yöntemi seçmez ya da bir şablon kopyalamazsınız — ajanınıza tek bir satır verirsiniz:
+Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini planlamak ve yürütmek için açık, MIT lisanslı bir metodoloji ve kittir. Bir kurulum yöntemi seçmez ya da bir şablon kopyalamazsınız — init.md istemini kopyalayıp ajanınıza yapıştırırsınız:
 
-> Bu depoyu AI-first yapmak için https://deepworkplan.com/init.md adresindeki yönergeleri okuyup izleyin.
+> init.md istemini kopyalayıp kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırarak herhangi bir depoyu AI-first hale getirin.
 
 > Deep Work Plan, deponun kendisinin harness haline geldiği spec odaklı geliştirmedir.
 

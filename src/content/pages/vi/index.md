@@ -8,9 +8,9 @@ lastUpdated: 2026-06-03
 
 Deep Work Plan biến mọi repository thành một môi trường có cấu trúc — ngữ cảnh, hàng rào bảo vệ và một kế hoạch bền vững — nơi mọi agent lập trình thực thi với độ chính xác cao và hoàn thành công việc dài hơi.
 
-Deep Work Plan (DWP) là một phương pháp luận và bộ kit mở, cấp phép MIT, để lập kế hoạch và thực thi công việc phần mềm phức tạp cùng các agent AI. Bạn không phải chọn một cách cài đặt hay sao chép một mẫu — bạn chỉ trao cho agent của mình một dòng:
+Deep Work Plan (DWP) là một phương pháp luận và bộ kit mở, cấp phép MIT, để lập kế hoạch và thực thi công việc phần mềm phức tạp cùng các agent AI. Bạn không phải chọn một cách cài đặt hay sao chép một mẫu — bạn sao chép prompt init.md và dán vào agent của mình:
 
-> Đọc và làm theo hướng dẫn tại https://deepworkplan.com/init.md để biến repository này thành AI-first.
+> Sao chép prompt init.md và dán vào agent lập trình của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác — để biến mọi repository thành AI-first.
 
 > Deep Work Plan là phát triển dựa trên đặc tả, nơi chính repository trở thành harness.
 

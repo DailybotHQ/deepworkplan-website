@@ -8,9 +8,9 @@ lastUpdated: 2026-06-03
 
 Deep Work Plan transforme n’importe quel dépôt en un environnement structuré — contexte, garde-fous et un plan durable — où tout agent de code s’exécute avec précision et mène à terme un travail de longue haleine.
 
-Deep Work Plan (DWP) est une méthodologie et un kit ouverts, sous licence MIT, pour planifier et exécuter un travail logiciel complexe avec des agents IA. Vous ne choisissez pas de méthode d’installation et ne copiez aucun modèle — vous donnez une seule ligne à votre agent :
+Deep Work Plan (DWP) est une méthodologie et un kit ouverts, sous licence MIT, pour planifier et exécuter un travail logiciel complexe avec des agents IA. Vous ne choisissez pas de méthode d’installation et ne copiez aucun modèle — vous copiez le prompt init.md et le collez dans votre agent :
 
-> Lisez et suivez les instructions sur https://deepworkplan.com/init.md pour rendre ce dépôt AI-first.
+> Copiez le prompt init.md et collez-le dans votre agent de code — Claude Code, Cursor, Codex ou tout autre — pour rendre n’importe quel dépôt AI-first.
 
 > Deep Work Plan, c’est le développement piloté par la spécification, où le dépôt lui-même devient le harness.
 

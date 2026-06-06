@@ -71,10 +71,10 @@ export const th: SiteTranslations = {
       titleEmphasis: 'บริบทสำคัญกว่า',
       subtitle:
         'Deep Work Plan เปลี่ยน repository ใดก็ได้ให้เป็นสภาพแวดล้อมที่มีโครงสร้าง พร้อมบริบท ราวกั้นความปลอดภัย และแผนงานที่คงทน ที่ coding agent ใดก็ทำงานได้อย่างแม่นยำและทำงานระยะยาวจนเสร็จ',
-      instructionLabel: 'มอบบรรทัดนี้ให้ agent ของคุณ',
+      instructionLabel: 'คัดลอกไปยัง agent ของคุณ',
       instruction:
-        'อ่านและทำตามคำแนะนำที่ https://deepworkplan.com/init.md เพื่อทำให้รีพอซิทอรีนี้เป็น AI-first',
-      copyLabel: 'คัดลอก',
+        'คัดลอก prompt ของ init.md และวางลงใน coding agent ของคุณ — Claude Code, Cursor, Codex หรืออื่น ๆ — เพื่อทำให้ repository ใดก็ได้เป็น AI-first',
+      copyLabel: 'คัดลอก init.md',
       copiedLabel: 'คัดลอกแล้ว',
       viewInitCta: 'ดูพรอมต์ /init ฉบับเต็ม',
       pullQuote:
@@ -715,9 +715,9 @@ export const th: SiteTranslations = {
     title: 'Make this repository AI-first',
     intro:
       'One endpoint to turn any repository into a spec-driven, agent-ready codebase. Install the skill, let an agent onboard the repo, then plan and execute structured work with any coding agent.',
-    handoffTitle: 'Give this to your agent',
+    handoffTitle: 'คัดลอกไปยัง agent ของคุณ',
     handoffBody:
-      'Paste the line below into your AI coding agent. It will read the methodology and specification, install the skill, and onboard this repository for Deep Work Plans.',
+      'คัดลอก prompt ของ init.md ทั้งหมดและวางลงใน AI coding agent ของคุณ — Claude Code, Cursor, Codex หรืออื่น ๆ โดยมันจะอ่านระเบียบวิธีและข้อกำหนด ติดตั้ง skill และทำ onboarding ให้กับ repository นี้สำหรับ Deep Work Plan',
     handoffInstruction:
       'อ่านและทำตามคำแนะนำที่ https://deepworkplan.com/init.md เพื่อทำให้รีพอซิทอรีนี้เป็น AI-first',
     handoffMdLabel: 'Self-contained agent prompt',
