@@ -106,7 +106,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
    Commands ที่มีคำสั่ง **จริงและรันได้** ของ repo หาก `AGENTS.md` มีอยู่แล้ว ให้ผสาน
    เข้าไปแทนที่จะแทนที่มัน สร้าง symlink `CLAUDE.md → AGENTS.md` (อย่าทับ
    `CLAUDE.md` ที่มีอยู่โดยไม่ถาม)
-2. **`docs/`** เติมหมวดมาตรฐานด้วยเนื้อหาจริงที่เฉพาะกับ repo ได้แก่ `ARCHITECTURE.md`,
+2. **`docs/`** เติมหมวดมาตรฐานด้วยเนื้อหาจริงที่เฉพาะกับ repo ได้แก่ `PRODUCT_SPEC.md` (เอกสารผลิตภัณฑ์/เหตุผลที่ไม่ใช่เชิงเทคนิค — จำเป็นสำหรับทุก repository รวมถึงไลบรารี), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md` พร้อม `PERFORMANCE.md` และดัชนี `docs/README.md`
    หาก docs มีอยู่แล้ว ให้ผนวกและขยายมัน — อย่าทำซ้ำ

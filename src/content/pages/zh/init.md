@@ -96,7 +96,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
    Commands 块，其中是仓库**真实、可运行**的命令。若 `AGENTS.md` 已存在，则合并
    进它，而非替换它。创建 `CLAUDE.md → AGENTS.md` 符号链接（未经询问不要覆盖已有的
    `CLAUDE.md`）。
-2. **`docs/`。** 用真实、仓库专属的内容填充标准的各类别：`ARCHITECTURE.md`、
+2. **`docs/`。** 用真实、仓库专属的内容填充标准的各类别：`PRODUCT_SPEC.md`（非技术性的产品/为什么文档——每个仓库必须具备，库类项目亦然）、`ARCHITECTURE.md`、
    `STANDARDS.md`、`TESTING_GUIDE.md`、`DEVELOPMENT_COMMANDS.md`、`SECURITY.md`、
    `AI_AGENT_ONBOARDING.md`、`AI_AGENT_COLLAB.md`，外加 `PERFORMANCE.md` 与一份 `docs/README.md` 索引。
    若文档已存在，则整合并扩展它们——不要重复。

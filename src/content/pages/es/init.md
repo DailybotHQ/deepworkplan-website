@@ -114,7 +114,7 @@ metodología) en vez de sobrescribir — y confirma con el usuario antes de reem
    ya existe un `AGENTS.md`, fusiónate con él en vez de reemplazarlo. Crea el enlace simbólico
    `CLAUDE.md → AGENTS.md` (no pises un `CLAUDE.md` existente sin preguntar).
 2. **`docs/`.** Completa las categorías estándar con contenido real y específico del repo:
-   `ARCHITECTURE.md`, `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   `PRODUCT_SPEC.md` (el documento de producto/por qué no técnico — obligatorio para todo repositorio, incluidas las bibliotecas), `ARCHITECTURE.md`, `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, además de `PERFORMANCE.md` y un índice
    `docs/README.md`. Si ya existen docs, intégralos y amplíalos — no los dupliques.
 3. **Docs por módulo.** Añade un `README.md` (y una subcarpeta `docs/` para módulos complejos) dentro

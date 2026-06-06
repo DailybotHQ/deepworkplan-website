@@ -99,7 +99,7 @@ Methodik angleichen), statt es zu überschreiben — und bestätigen Sie mit dem
    Commands-Block mit den **echten, ausführbaren** Befehlen des Repositorys. Wenn bereits eine `AGENTS.md` existiert, führen Sie
    sie zusammen, statt sie zu ersetzen. Erstellen Sie den `CLAUDE.md → AGENTS.md`-Symlink (überschreiben Sie eine
    bestehende `CLAUDE.md` nicht ohne nachzufragen).
-2. **`docs/`.** Füllen Sie die Standardkategorien mit echtem, repository-spezifischem Inhalt: `ARCHITECTURE.md`,
+2. **`docs/`.** Füllen Sie die Standardkategorien mit echtem, repository-spezifischem Inhalt: `PRODUCT_SPEC.md` (das nicht-technische Produkt-/Warum-Dokument — für jedes Repository Pflicht, auch für Bibliotheken), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, plus `PERFORMANCE.md` und einen `docs/README.md`-Index.
    Wenn bereits Dokumentation existiert, integrieren und erweitern Sie sie — duplizieren Sie nicht.

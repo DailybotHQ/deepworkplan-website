@@ -111,7 +111,8 @@ methodology) instead of overwriting — and confirm with the user before replaci
    Commands block with the repo's **real, runnable** commands. If an `AGENTS.md` already exists, merge
    into it rather than replacing it. Create the `CLAUDE.md → AGENTS.md` symlink (do not clobber an
    existing `CLAUDE.md` without asking).
-2. **`docs/`.** Fill the standard categories with real, repo-specific content: `ARCHITECTURE.md`,
+2. **`docs/`.** Fill the standard categories with real, repo-specific content: `PRODUCT_SPEC.md`
+   (the non-technical product/why doc — required for every repo, libraries included), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, plus `PERFORMANCE.md` and a `docs/README.md` index.
    If docs already exist, integrate and extend them — do not duplicate.

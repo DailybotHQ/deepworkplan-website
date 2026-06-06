@@ -111,7 +111,7 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
    Commands dengan perintah repo yang **nyata dan dapat dijalankan**. Jika sebuah `AGENTS.md` sudah ada, gabungkan
    ke dalamnya alih-alih menggantinya. Buat symlink `CLAUDE.md → AGENTS.md` (jangan timpa
    `CLAUDE.md` yang ada tanpa bertanya).
-2. **`docs/`.** Isi kategori-kategori standar dengan konten nyata yang spesifik repo: `ARCHITECTURE.md`,
+2. **`docs/`.** Isi kategori-kategori standar dengan konten nyata yang spesifik repo: `PRODUCT_SPEC.md` (dokumen produk/mengapa yang non-teknis — wajib untuk setiap repositori, termasuk pustaka), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, ditambah `PERFORMANCE.md` dan indeks `docs/README.md`.
    Jika docs sudah ada, integrasikan dan perluas — jangan menduplikasi.

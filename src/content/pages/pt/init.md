@@ -109,7 +109,7 @@ metodologia) em vez de sobrescrever — e confirme com o usuário antes de subst
    Quick Commands com os comandos **reais e executáveis** do repositório. Se um `AGENTS.md` já existir, mescle
    nele em vez de substituí-lo. Crie o symlink `CLAUDE.md → AGENTS.md` (não sobrescreva um
    `CLAUDE.md` existente sem perguntar).
-2. **`docs/`.** Preencha as categorias padrão com conteúdo real e específico do repositório: `ARCHITECTURE.md`,
+2. **`docs/`.** Preencha as categorias padrão com conteúdo real e específico do repositório: `PRODUCT_SPEC.md` (o documento de produto/por quê não técnico — obrigatório para todo repositório, incluindo bibliotecas), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, além de `PERFORMANCE.md` e um índice `docs/README.md`.
    Se os docs já existirem, integre-os e estenda-os — não duplique.

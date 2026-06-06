@@ -72,7 +72,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実際のリポジトリについて推論し、すべてをそれに適応させます。以下の各成果物について、**すでに存在する場合は、上書きするのではなく調整します**（マージし、改善し、方法論に整合させる)。そして何かを置き換える前にユーザーと確認します。
 
 1. **`AGENTS.md` と `CLAUDE.md`。** ルートに `AGENTS.md` を生成します。索引、必須ルール（英語のみ、conventional commits、リポジトリの実際のテストパターンとレビューゲート)、そしてリポジトリの**実際に実行可能な**コマンドを備えた Quick Commands ブロックです。`AGENTS.md` がすでに存在する場合は、置き換えるのではなくそれにマージします。`CLAUDE.md → AGENTS.md` シンボリックリンクを作成します（既存の `CLAUDE.md` を尋ねずに上書きしない)。
-2. **`docs/`。** 標準的なカテゴリを、実際のリポジトリ固有の内容で満たします。`ARCHITECTURE.md`、`STANDARDS.md`、`TESTING_GUIDE.md`、`DEVELOPMENT_COMMANDS.md`、`SECURITY.md`、`AI_AGENT_ONBOARDING.md`、`AI_AGENT_COLLAB.md`、加えて `PERFORMANCE.md` と `docs/README.md` の索引です。ドキュメントがすでに存在する場合は、統合し拡張します。複製はしません。
+2. **`docs/`。** 標準的なカテゴリを、実際のリポジトリ固有の内容で満たします。`PRODUCT_SPEC.md`（技術的でない製品／なぜドキュメント——ライブラリを含むすべてのリポジトリで必須）、`ARCHITECTURE.md`、`STANDARDS.md`、`TESTING_GUIDE.md`、`DEVELOPMENT_COMMANDS.md`、`SECURITY.md`、`AI_AGENT_ONBOARDING.md`、`AI_AGENT_COLLAB.md`、加えて `PERFORMANCE.md` と `docs/README.md` の索引です。ドキュメントがすでに存在する場合は、統合し拡張します。複製はしません。
 3. **モジュールごとのドキュメント。** 偵察で発見された主要なソースモジュールのそれぞれの中に、`README.md`（複雑なモジュールには `docs/` サブフォルダ）を追加します。
 4. **`.agents/` と `.claude → .agents`。** 正規のエージェント横断の拠点を作成します。**推論にもとづく** `agents/` のカタログ、スタックに合った `skills/`、そしてインストールされたスキルへ委譲する薄い `dwp-*` の `commands/` です。各エントリは、別のものからコピーされたのではなく、*この*リポジトリのために正当化されます。ディスク上に存在するものと一致する `docs/` カタログ（`skills_agents_catalog.md` と `COMMANDS_REFERENCE.md`)、加えて `settings.json`、そして `.claude → .agents` シンボリックリンクを追加します。既存のスキル／エージェントをカタログに織り込みます。
 5. **適応された DWP スキル。** インストールされたスキルはエンジンです。リポジトリ自身のキット（スキル、エージェント、コマンド）は、**このリポジトリのために推論された**ものでなければなりません。決して別のリポジトリのキットのコピー＆ペーストではありません。

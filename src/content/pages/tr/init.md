@@ -111,7 +111,7 @@ teyit edin.
    deponun **gerçek, çalıştırılabilir** komutlarını içeren bir Hızlı Komutlar bloğu. Zaten bir
    `AGENTS.md` varsa, onu değiştirmek yerine içine birleştirin. `CLAUDE.md → AGENTS.md` sembolik bağını
    oluşturun (var olan bir `CLAUDE.md`’yi sormadan ezmeyin).
-2. **`docs/`.** Standart kategorileri gerçek, depoya özgü içerikle doldurun: `ARCHITECTURE.md`,
+2. **`docs/`.** Standart kategorileri gerçek, depoya özgü içerikle doldurun: `PRODUCT_SPEC.md` (teknik olmayan ürün/neden belgesi — kütüphaneler dahil her depo için zorunlu), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, ayrıca `PERFORMANCE.md` ve bir `docs/README.md` dizini.
    Dokümanlar zaten varsa, onları bütünleştirip genişletin — çoğaltmayın.

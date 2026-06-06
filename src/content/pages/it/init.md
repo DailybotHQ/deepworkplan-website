@@ -111,7 +111,7 @@ metodologia) anziché sovrascriverlo — e conferma con l’utente prima di sost
    Commands con i comandi **reali ed eseguibili** del repo. Se un `AGENTS.md` esiste già, fondi
    in esso anziché sostituirlo. Crea il symlink `CLAUDE.md → AGENTS.md` (non sovrascrivere un
    `CLAUDE.md` esistente senza chiedere).
-2. **`docs/`.** Popola le categorie standard con contenuto reale e specifico del repo: `ARCHITECTURE.md`,
+2. **`docs/`.** Popola le categorie standard con contenuto reale e specifico del repo: `PRODUCT_SPEC.md` (il documento di prodotto/perché non tecnico — obbligatorio per ogni repository, librerie incluse), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, più `PERFORMANCE.md` e un indice `docs/README.md`.
    Se i docs esistono già, integrali ed estendili — non duplicarli.
