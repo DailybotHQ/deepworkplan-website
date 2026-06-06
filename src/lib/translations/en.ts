@@ -67,10 +67,10 @@ export const en: SiteTranslations = {
       titleEmphasis: 'Context matters more.',
       subtitle:
         'Deep Work Plan turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and finishes long-horizon work.',
-      instructionLabel: 'Give your agent this',
+      instructionLabel: 'Copy into your agent',
       instruction:
-        'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
-      copyLabel: 'Copy',
+        'Copy the init.md prompt and paste it into your coding agent — Claude Code, Cursor, Codex, or any other — to make any repository AI-first.',
+      copyLabel: 'Copy init.md',
       copiedLabel: 'Copied',
       viewInitCta: 'View the full /init prompt',
       pullQuote:
@@ -653,9 +653,9 @@ export const en: SiteTranslations = {
     title: 'Make this repository AI-first',
     intro:
       'One endpoint to turn any repository into a spec-driven, agent-ready codebase. Install the skill, let an agent onboard the repo, then plan and execute structured work with any coding agent.',
-    handoffTitle: 'Give this to your agent',
+    handoffTitle: 'Copy into your agent',
     handoffBody:
-      'Paste the line below into your AI coding agent. It will read the methodology and specification, install the skill, and onboard this repository for Deep Work Plans.',
+      'Copy the full init.md prompt and paste it into your AI coding agent — Claude Code, Cursor, Codex, or any other. It reads the methodology and specification, installs the skill, and onboards this repository for Deep Work Plans.',
     handoffInstruction:
       'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
     handoffMdLabel: 'Self-contained agent prompt',

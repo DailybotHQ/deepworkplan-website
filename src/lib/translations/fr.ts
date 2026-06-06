@@ -72,10 +72,10 @@ export const fr: SiteTranslations = {
       titleEmphasis: 'Le contexte compte davantage.',
       subtitle:
         'Deep Work Plan transforme n’importe quel dépôt en un environnement structuré — contexte, garde-fous et un plan durable — où tout agent de code s’exécute avec précision et mène à terme un travail de longue haleine.',
-      instructionLabel: 'Donnez ceci à votre agent',
+      instructionLabel: 'Copier dans votre agent',
       instruction:
-        'Lisez et suivez les instructions sur https://deepworkplan.com/init.md pour rendre ce dépôt AI-first.',
-      copyLabel: 'Copier',
+        "Copiez le prompt init.md et collez-le dans votre agent de code — Claude Code, Cursor, Codex ou tout autre — pour rendre n'importe quel dépôt AI-first.",
+      copyLabel: 'Copier init.md',
       copiedLabel: 'Copié',
       viewInitCta: 'Voir le prompt /init complet',
       pullQuote:
@@ -664,9 +664,9 @@ export const fr: SiteTranslations = {
     title: 'Rendez ce dépôt AI-first',
     intro:
       'Un seul endpoint pour transformer n’importe quel dépôt en une base de code pilotée par la spécification et prête pour les agents. Installez le skill, laissez un agent intégrer le dépôt, puis planifiez et exécutez un travail structuré avec n’importe quel agent de code.',
-    handoffTitle: 'Donnez ceci à votre agent',
+    handoffTitle: 'Copier dans votre agent',
     handoffBody:
-      'Collez la ligne ci-dessous dans votre agent de code IA. Il lira la méthodologie et la spécification, installera le skill et intégrera ce dépôt pour les Deep Work Plans.',
+      'Copiez le prompt init.md complet et collez-le dans votre agent de code IA — Claude Code, Cursor, Codex ou tout autre. Il lit la méthodologie et la spécification, installe le skill et intègre ce dépôt pour les Deep Work Plans.',
     handoffInstruction:
       'Lisez et suivez les instructions sur https://deepworkplan.com/init.md pour rendre ce dépôt AI-first.',
     handoffMdLabel: 'Prompt d’agent autonome',

@@ -73,10 +73,10 @@ export const ja: SiteTranslations = {
       titleEmphasis: 'コンテキストはさらに重要です。',
       subtitle:
         'Deep Work Plan はあらゆるリポジトリを、コンテキスト、ガードレール、そして永続的な計画を備えた構造化された環境へと変えます。そこではどのコーディングエージェントも正確に実行し、長期にわたる作業をやり遂げます。',
-      instructionLabel: 'この一行をエージェントに渡してください',
+      instructionLabel: 'エージェントにコピーする',
       instruction:
-        'https://deepworkplan.com/init.md にある手順を読み、その指示に従って、このリポジトリを AI-first にします。',
-      copyLabel: 'コピー',
+        'init.md のプロンプトをコピーして、お使いのコーディングエージェント — Claude Code、Cursor、Codex、またはその他のツール — に貼り付けることで、あらゆるリポジトリを AI-first にします。',
+      copyLabel: 'init.md をコピー',
       copiedLabel: 'コピーしました',
       viewInitCta: '完全な /init プロンプトを見る',
       pullQuote:
@@ -662,9 +662,9 @@ export const ja: SiteTranslations = {
     title: 'このリポジトリを AI-first にする',
     intro:
       'あらゆるリポジトリを、仕様駆動でエージェント対応のコードベースに変える単一のエンドポイント。スキルをインストールし、エージェントにリポジトリをオンボーディングさせ、どのコーディングエージェントでも構造化された作業を計画して実行します。',
-    handoffTitle: 'これをエージェントに渡してください',
+    handoffTitle: 'エージェントにコピーする',
     handoffBody:
-      '以下の一行をお使いのAIコーディングエージェントに貼り付けてください。方法論と仕様を読み込み、スキルをインストールし、このリポジトリを Deep Work Plan 向けにオンボーディングします。',
+      '完全な init.md プロンプトをコピーして、お使いの AI コーディングエージェント — Claude Code、Cursor、Codex、またはその他のツール — に貼り付けてください。方法論と仕様を読み込み、スキルをインストールし、このリポジトリを Deep Work Plan 向けにオンボーディングします。',
     handoffInstruction:
       'https://deepworkplan.com/init.md にある手順を読み、その指示に従って、このリポジトリを AI-first にします。',
     handoffMdLabel: '自己完結したエージェント用プロンプト',
