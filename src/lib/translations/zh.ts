@@ -71,10 +71,10 @@ export const zh: SiteTranslations = {
       titleEmphasis: '上下文更重要。',
       subtitle:
         'Deep Work Plan 将任意代码仓库转化为结构化环境——上下文、防护栏与一份持久的计划——让任意编码代理都能精准执行并完成长周期工作。',
-      instructionLabel: '把这一行交给你的代理',
+      instructionLabel: '复制到你的代理',
       instruction:
-        '请阅读并按照 https://deepworkplan.com/init.md 中的说明操作，将此仓库变为 AI-first。',
-      copyLabel: '复制',
+        '复制 init.md 提示并将其粘贴到你的编码代理中——Claude Code、Cursor、Codex 或任何其他代理——让任意代码仓库变为 AI-first。',
+      copyLabel: '复制 init.md',
       copiedLabel: '已复制',
       viewInitCta: '查看完整的 /init 提示',
       pullQuote:
@@ -652,9 +652,9 @@ export const zh: SiteTranslations = {
     title: '让这个代码仓库 AI-first',
     intro:
       '一个端点，将任意代码仓库转化为规范驱动、面向代理就绪的代码库。安装技能，让代理接入仓库，然后用任意编码代理规划并执行结构化的工作。',
-    handoffTitle: '把这个交给你的代理',
+    handoffTitle: '复制到你的代理',
     handoffBody:
-      '把下面这一行粘贴到你的 AI 编码代理中。它会阅读方法论与规范、安装技能，并为 Deep Work Plan 接入这个代码仓库。',
+      '复制完整的 init.md 提示并将其粘贴到你的 AI 编码代理中——Claude Code、Cursor、Codex 或任何其他代理。它会阅读方法论与规范、安装技能，并为 Deep Work Plan 接入这个代码仓库。',
     handoffInstruction:
       '请阅读并按照 https://deepworkplan.com/init.md 中的说明操作，将此仓库变为 AI-first。',
     handoffMdLabel: '自包含的代理提示',

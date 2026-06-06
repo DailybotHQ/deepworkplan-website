@@ -72,10 +72,10 @@ export const de: SiteTranslations = {
       titleEmphasis: 'Kontext zählt mehr.',
       subtitle:
         'Deep Work Plan verwandelt jedes Repository in eine strukturierte Umgebung — Kontext, Leitplanken und einen dauerhaften Plan — in der jeder Coding-Agent präzise arbeitet und langfristige Aufgaben abschließt.',
-      instructionLabel: 'Geben Sie Ihrem Agenten dies',
+      instructionLabel: 'In Ihren Agenten kopieren',
       instruction:
-        'Lesen Sie die Anweisungen unter https://deepworkplan.com/init.md und befolgen Sie sie, um dieses Repository AI-first zu machen.',
-      copyLabel: 'Kopieren',
+        'Kopieren Sie den init.md-Prompt und fügen Sie ihn in Ihren Coding-Agenten ein — Claude Code, Cursor, Codex oder einen anderen — um jedes Repository AI-first zu machen.',
+      copyLabel: 'init.md kopieren',
       copiedLabel: 'Kopiert',
       viewInitCta: 'Den vollständigen /init-Prompt ansehen',
       pullQuote:
@@ -661,9 +661,9 @@ export const de: SiteTranslations = {
     title: 'Machen Sie dieses Repository AI-first',
     intro:
       'Ein Endpunkt, um jedes Repository in eine spec-driven, agentenbereite Codebasis zu verwandeln. Installieren Sie die Skill, lassen Sie einen Agenten das Repository onboarden, dann planen und führen Sie strukturierte Arbeit mit jedem Coding-Agenten aus.',
-    handoffTitle: 'Geben Sie dies Ihrem Agenten',
+    handoffTitle: 'In Ihren Agenten kopieren',
     handoffBody:
-      'Fügen Sie die untenstehende Zeile in Ihren KI-Coding-Agenten ein. Er liest die Methodik und Spezifikation, installiert die Skill und onboardet dieses Repository für Deep Work Plans.',
+      'Kopieren Sie den vollständigen init.md-Prompt und fügen Sie ihn in Ihren KI-Coding-Agenten ein — Claude Code, Cursor, Codex oder einen anderen. Er liest die Methodik und Spezifikation, installiert die Skill und onboardet dieses Repository für Deep Work Plans.',
     handoffInstruction:
       'Lesen Sie die Anweisungen unter https://deepworkplan.com/init.md und befolgen Sie sie, um dieses Repository AI-first zu machen.',
     handoffMdLabel: 'Eigenständiger Agenten-Prompt',

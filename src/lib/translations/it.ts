@@ -72,10 +72,10 @@ export const it: SiteTranslations = {
       titleEmphasis: 'Il contesto conta di più.',
       subtitle:
         'Deep Work Plan trasforma qualsiasi repository in un ambiente strutturato — contesto, salvaguardie e un piano duraturo — in cui ogni agente di coding esegue con precisione e porta a termine il lavoro a lungo termine.',
-      instructionLabel: 'Fornisca questo al Suo agente',
+      instructionLabel: 'Copia nel Suo agente',
       instruction:
-        'Leggi e segui le istruzioni su https://deepworkplan.com/init.md per rendere questo repository AI-first.',
-      copyLabel: 'Copia',
+        'Copi il prompt di init.md e lo incolli nel Suo agente di coding — Claude Code, Cursor, Codex o qualsiasi altro — per rendere qualsiasi repository AI-first.',
+      copyLabel: 'Copia init.md',
       copiedLabel: 'Copiato',
       viewInitCta: 'Visualizza il prompt /init completo',
       pullQuote:
@@ -660,9 +660,9 @@ export const it: SiteTranslations = {
     title: 'Rendi questo repository AI-first',
     intro:
       'Un unico endpoint per trasformare qualsiasi repository in un codebase spec-driven e pronto per gli agenti. Installi la skill, lasci che un agente faccia l’onboarding del repo, poi pianifichi ed esegua lavoro strutturato con qualsiasi agente di coding.',
-    handoffTitle: 'Fornisca questo al Suo agente',
+    handoffTitle: 'Copia nel Suo agente',
     handoffBody:
-      'Incolli la riga qui sotto nel Suo agente di coding AI. Leggerà la metodologia e la specifica, installerà la skill e farà l’onboarding di questo repository per i Deep Work Plan.',
+      "Copi il prompt completo di init.md e lo incolli nel Suo agente di coding AI — Claude Code, Cursor, Codex o qualsiasi altro. Legge la metodologia e la specifica, installa la skill e fa l'onboarding di questo repository per i Deep Work Plan.",
     handoffInstruction:
       'Leggi e segui le istruzioni su https://deepworkplan.com/init.md per rendere questo repository AI-first.',
     handoffMdLabel: 'Prompt per agenti autosufficiente',

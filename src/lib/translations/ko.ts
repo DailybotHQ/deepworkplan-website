@@ -71,10 +71,10 @@ export const ko: SiteTranslations = {
       titleEmphasis: '컨텍스트는 더 중요합니다.',
       subtitle:
         'Deep Work Plan은 어떤 리포지토리든 구조화된 환경 — 컨텍스트, 가드레일, 견고한 계획 — 으로 바꾸어, 어떤 코딩 에이전트든 정밀하게 실행하고 장시간 작업을 끝까지 완수하도록 합니다.',
-      instructionLabel: '에이전트에게 이 한 줄을 전달하세요',
+      instructionLabel: '에이전트에 복사하기',
       instruction:
-        'https://deepworkplan.com/init.md 의 지침을 읽고 따라 이 리포지토리를 AI-first로 만드세요.',
-      copyLabel: '복사',
+        'init.md 프롬프트를 복사하여 코딩 에이전트 — Claude Code, Cursor, Codex, 또는 다른 에이전트 — 에 붙여넣어 어떤 리포지토리든 AI-first로 만드세요.',
+      copyLabel: 'init.md 복사',
       copiedLabel: '복사됨',
       viewInitCta: '전체 /init 프롬프트 보기',
       pullQuote:
@@ -657,9 +657,9 @@ export const ko: SiteTranslations = {
     title: '이 리포지토리를 AI-first로 만들기',
     intro:
       '어떤 리포지토리든 스펙 주도이며 에이전트가 준비된 코드베이스로 바꾸는 단일 엔드포인트. 스킬을 설치하고, 에이전트가 리포지토리를 온보딩하게 한 뒤, 어떤 코딩 에이전트로든 구조화된 작업을 계획하고 실행하세요.',
-    handoffTitle: '이것을 에이전트에게 전달하세요',
+    handoffTitle: '에이전트에 복사하기',
     handoffBody:
-      '아래 한 줄을 AI 코딩 에이전트에 붙여넣으세요. 방법론과 스펙을 읽고, 스킬을 설치하며, 이 리포지토리를 Deep Work Plan을 위해 온보딩합니다.',
+      '완전한 init.md 프롬프트를 복사하여 AI 코딩 에이전트 — Claude Code, Cursor, Codex, 또는 다른 에이전트 — 에 붙여넣으세요. 방법론과 스펙을 읽고, 스킬을 설치하며, 이 리포지토리를 Deep Work Plan을 위해 온보딩합니다.',
     handoffInstruction:
       'https://deepworkplan.com/init.md 의 지침을 읽고 따라 이 리포지토리를 AI-first로 만드세요.',
     handoffMdLabel: '자체 완결형 에이전트 프롬프트',

@@ -6,9 +6,11 @@ import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import {
   CANONICAL_INIT_MD_PATH,
+  getCanonicalInitMdUrl,
   getUrlPrefix,
   type Language,
 } from '@/lib/i18n';
+import { getCanonicalInitMarkdown } from '@/lib/init-prompt';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -23,6 +25,15 @@ const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
 // The bootstrap endpoint is always the root, English /init.md (canonical
 // first-class agent content) — never a localized variant.
 const mdHref = CANONICAL_INIT_MD_PATH;
+// Full absolute URL shown next to the "Copy init.md" button (always the
+// canonical English endpoint).
+const mdUrl = getCanonicalInitMdUrl(siteUrl || undefined);
+// "Copy init.md" copies the full canonical ENGLISH init.md (what /init.md
+// serves), regardless of page language. Button labels are shared with the home
+// hero so the call-to-action reads identically everywhere.
+const initMarkdown = await getCanonicalInitMarkdown();
+const copyLabel = t.home.hero.copyLabel;
+const copiedLabel = t.home.hero.copiedLabel;
 
 const howToSchema = {
   '@context': 'https://schema.org',
@@ -66,16 +77,25 @@ const howToSchema = {
         {p.handoffBody}
       </p>
       <div
-        class="mt-5 overflow-hidden border"
-        style="border-color: var(--color-line);"
+        class="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-sm border px-4 py-3"
+        style="border-color: var(--color-secondary);"
       >
-        <div
-          class="border-b px-3 py-1.5"
-          style="border-color: var(--color-line); background-color: var(--color-gray-100);"
+        <a
+          href={mdHref}
+          class="min-w-0 break-all font-mono text-sm underline underline-offset-4 transition hover:opacity-80"
+          style="color: var(--color-secondary);">{mdUrl}</a
         >
-          <span class="kicker">{p.codeLabel}</span>
-        </div>
-        <pre class="overflow-x-auto px-3 py-3" style="background-color: var(--color-gray-100);"><code class="font-mono text-sm leading-relaxed" style="color: var(--color-ink);">{p.handoffInstruction}</code></pre>
+        <button
+          type="button"
+          class="copy-btn kicker inline-flex cursor-pointer items-center gap-1.5 rounded-sm px-2 py-1 transition enabled:hover:opacity-80 disabled:cursor-default disabled:opacity-70"
+          style="color: var(--color-secondary);"
+          data-copy={initMarkdown}
+          data-label={copyLabel}
+          data-copied={copiedLabel}
+          aria-label={copyLabel}
+        >
+          {copyLabel}
+        </button>
       </div>
       <p class="mt-4">
         <a
@@ -185,3 +205,36 @@ const howToSchema = {
     </section>
   </article>
 </MainLayout>
+
+<script>
+  const COPY_FEEDBACK_MS = 2000;
+
+  // Progressive enhancement: copy the full init.md prompt to the clipboard.
+  document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
+    let busy = false;
+
+    btn.addEventListener('click', async () => {
+      if (busy || btn.disabled) return;
+
+      const text = btn.dataset.copy ?? '';
+      const label = btn.dataset.label ?? 'Copy init.md';
+      const copied = btn.dataset.copied ?? 'Copied';
+
+      busy = true;
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.disabled = true;
+        btn.textContent = copied;
+        btn.setAttribute('aria-label', copied);
+        window.setTimeout(() => {
+          btn.disabled = false;
+          btn.textContent = label;
+          btn.setAttribute('aria-label', label);
+          busy = false;
+        }, COPY_FEEDBACK_MS);
+      } catch {
+        busy = false;
+      }
+    });
+  });
+</script>

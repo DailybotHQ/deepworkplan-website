@@ -73,10 +73,10 @@ export const pt: SiteTranslations = {
       titleEmphasis: 'O contexto importa mais.',
       subtitle:
         'O Deep Work Plan transforma qualquer repositório em um ambiente estruturado — contexto, salvaguardas e um plano duradouro — onde qualquer agente de código executa com precisão e conclui trabalhos de longo prazo.',
-      instructionLabel: 'Entregue isto ao seu agente',
+      instructionLabel: 'Copie para o seu agente',
       instruction:
-        'Leia e siga as instruções em https://deepworkplan.com/init.md para tornar este repositório AI-first.',
-      copyLabel: 'Copiar',
+        'Copie o prompt do init.md e cole-o no seu agente de código — Claude Code, Cursor, Codex, ou qualquer outro — para tornar qualquer repositório AI-first.',
+      copyLabel: 'Copiar init.md',
       copiedLabel: 'Copiado',
       viewInitCta: 'Ver o prompt completo do /init',
       pullQuote:
@@ -665,9 +665,9 @@ export const pt: SiteTranslations = {
     title: 'Torne este repositório AI-first',
     intro:
       'Um único endpoint para transformar qualquer repositório em uma base de código orientada a especificação e pronta para agentes. Instale a skill, deixe um agente fazer o onboarding do repositório e então planeje e execute trabalho estruturado com qualquer agente de código.',
-    handoffTitle: 'Entregue isto ao seu agente',
+    handoffTitle: 'Copie para o seu agente',
     handoffBody:
-      'Cole a linha abaixo no seu agente de código de IA. Ele lerá a metodologia e a especificação, instalará a skill e fará o onboarding deste repositório para Deep Work Plans.',
+      'Copie o prompt completo do init.md e cole-o no seu agente de código IA — Claude Code, Cursor, Codex, ou qualquer outro. Ele lê a metodologia e a especificação, instala a skill e faz o onboarding deste repositório para Deep Work Plans.',
     handoffInstruction:
       'Leia e siga as instruções em https://deepworkplan.com/init.md para tornar este repositório AI-first.',
     handoffMdLabel: 'Prompt de agente autocontido',

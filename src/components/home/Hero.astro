@@ -1,7 +1,12 @@
 ---
 import Kicker from '@/components/editorial/Kicker.astro';
 import type { Language } from '@/lib/i18n';
-import { getUrlPrefix } from '@/lib/i18n';
+import {
+  CANONICAL_INIT_MD_PATH,
+  getCanonicalInitMdUrl,
+  getUrlPrefix,
+} from '@/lib/i18n';
+import { getCanonicalInitMarkdown } from '@/lib/init-prompt';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -12,10 +17,15 @@ const { lang } = Astro.props;
 const t = getTranslations(lang);
 const prefix = getUrlPrefix(lang);
 const h = t.home.hero;
-// The instruction is DISPLAYED in the page language (h.instruction), but the copy
-// button copies the canonical ENGLISH command — that is the literal prompt that
-// works when pasted into an agent (it points at the English init.md).
-const agentInstructionCopy = getTranslations('en').home.hero.instruction;
+// Visible link to the canonical English init.md endpoint shown next to the
+// "Copy init.md" button. The href is the env-relative path (resolves to
+// localhost in dev, deepworkplan.com in prod); the text is the canonical URL.
+const mdHref = CANONICAL_INIT_MD_PATH;
+const mdUrl = getCanonicalInitMdUrl(Astro.site?.href);
+// The guidance is DISPLAYED in the page language (h.instruction), but the
+// "Copy init.md" button copies the full canonical ENGLISH init.md — the literal
+// onboarding prompt that works when pasted into an agent (no fetch needed).
+const initMarkdown = await getCanonicalInitMarkdown();
 ---
 
 <section
@@ -46,17 +56,24 @@ const agentInstructionCopy = getTranslations('en').home.hero.instruction;
         style="border-color: var(--color-secondary);"
       >
         <div
-          class="flex items-center justify-between border-b px-4 py-2"
+          class="flex items-center justify-between gap-3 border-b px-4 py-2"
           style="border-color: var(--color-line); background-color: var(--color-gray-100); background-color: color-mix(in srgb, var(--color-ink) 5%, var(--color-paper));"
         >
-          <span class="kicker" style="color: var(--color-muted);"
-            >{h.instructionLabel}</span
-          >
+          <div class="flex min-w-0 flex-col gap-0.5">
+            <span class="kicker" style="color: var(--color-muted);"
+              >{h.instructionLabel}</span
+            >
+            <a
+              href={mdHref}
+              class="break-all font-mono text-xs underline underline-offset-2 transition hover:opacity-80"
+              style="color: var(--color-secondary);">{mdUrl}</a
+            >
+          </div>
           <button
             type="button"
             class="copy-btn kicker inline-flex cursor-pointer items-center gap-1.5 rounded-sm px-2 py-1 transition enabled:hover:opacity-80 disabled:cursor-default disabled:opacity-70"
             style="color: var(--color-secondary);"
-            data-copy={agentInstructionCopy}
+            data-copy={initMarkdown}
             data-label={h.copyLabel}
             data-copied={h.copiedLabel}
             aria-label={h.copyLabel}
@@ -66,7 +83,7 @@ const agentInstructionCopy = getTranslations('en').home.hero.instruction;
         </div>
         <p
           class="px-4 py-4 text-base leading-relaxed sm:text-lg"
-          style="font-family: var(--font-mono); color: var(--color-ink);"
+          style="color: var(--color-ink);"
         >
           {h.instruction}
         </p>

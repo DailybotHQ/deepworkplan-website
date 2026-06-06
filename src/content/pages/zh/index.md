@@ -8,9 +8,9 @@ lastUpdated: 2026-06-03
 
 Deep Work Plan 将任意代码仓库转化为结构化环境——上下文、防护栏与一份持久的计划——让任意编码代理都能精准执行并完成长周期工作。
 
-Deep Work Plan（DWP）是一套开放、采用 MIT 许可的方法论与套件，用于与 AI 代理一同规划并执行复杂的软件工作。你无需挑选安装方式或复制模板——你把一行交给你的代理：
+Deep Work Plan（DWP）是一套开放、采用 MIT 许可的方法论与套件，用于与 AI 代理一同规划并执行复杂的软件工作。你无需挑选安装方式或复制模板——你复制 init.md 提示并将其粘贴到你的代理：
 
-> 请阅读并按照 https://deepworkplan.com/init.md 中的说明操作，将此仓库变为 AI-first。
+> 复制 init.md 提示并将其粘贴到你的编码代理中——Claude Code、Cursor、Codex 或任何其他代理——让任意代码仓库变为 AI-first。
 
 > Deep Work Plan 是一种规范驱动的开发方式，在其中代码仓库本身成为执行的 harness（运行支架）。
 
