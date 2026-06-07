@@ -14,8 +14,13 @@ interface UmamiWindow extends Window {
 }
 
 /**
- * Centralized event name catalog.
- * All event names are defined here to ensure consistency across the codebase.
+ * Centralized event name catalog (client-side).
+ * All client event names are defined here to ensure consistency across the
+ * codebase — never use a raw event-name string at a call site.
+ *
+ * The full taxonomy (these client events PLUS the server-side events emitted from
+ * `functions/_middleware.ts`) is documented in `docs/ANALYTICS.md` → "Event
+ * Catalog", which is the source of truth. Keep all three in sync.
  */
 export const EVENTS = {
   NAV_CLICK: 'nav_click',
