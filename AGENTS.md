@@ -20,6 +20,7 @@
 | Documentation | [Documentation Guide](docs/DOCUMENTATION_GUIDE.md) | When and how to update docs |
 | Product | [Product Spec](docs/PRODUCT_SPEC.md) | Product vision, features, website goals |
 | Brand | [Brand Guide](docs/BRAND_GUIDE.md) | "Broadsheet" editorial identity: warm paper, ink serif, oxblood accent, editorial primitives |
+| Design System | [DESIGN.md](docs/DESIGN.md) | Agent-facing design-system spec (DWP `design-system` addon): Broadsheet tokens (color/type/spacing/radius), component patterns, WCAG do's & don'ts. **Read before generating or editing UI.** |
 | Analytics | [Analytics](docs/ANALYTICS.md) | Tracking, GSC, verification |
 | AI Agents | [Agent Onboarding](docs/AI_AGENT_ONBOARDING.md), [Agent Collaboration](docs/AI_AGENT_COLLAB.md) | Setup, handoff, coordination |
 | Skills/Agents | [Skills & Agents Catalog](.agents/docs/skills_agents_catalog.md) | Available skills and agents |
