@@ -23,7 +23,7 @@ DWP 적합 리포지토리는 다음을 모두 충족해야(MUST) 합니다. 모
 5. **gitignore된 `.dwp/` 작업 공간.** 리포지토리는 `plans/`와 `drafts/`를 갖춘 `.dwp/` 디렉터리를 담아야(MUST) 하며, `.dwp/`는 gitignore되어야(MUST) 합니다. `tmp/` 스크래치 공간이 존재해야(SHOULD) 하며 gitignore되어야(SHOULD) 합니다.
 6. **방법론 스킬이 해석 가능함.** Deep Work Plan 스킬은 리포지토리 안의 에이전트가 그 하위 스킬을 호출할 수 있도록 설치되거나 참조되어야(MUST) 합니다.
 
-리포지토리는 **애드온이 하나도 없어도 완전히 적합**합니다. 애드온(devcontainer, Dailybot, dependency-upgrade)은 선택형이며 적합성에 필수여서는 안 됩니다(MUST NOT).
+리포지토리는 **애드온이 하나도 없어도 완전히 적합**합니다. 애드온(devcontainer, Dailybot, dependency-upgrade, design-system)은 선택형이며 적합성에 필수여서는 안 됩니다(MUST NOT).
 
 ## 잘 구성된 계획
 

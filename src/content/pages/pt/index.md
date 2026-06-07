@@ -34,7 +34,7 @@ O Deep Work Plan responde com **desenvolvimento orientado a especificação**: o
 - AGENTS.md na raiz do repositório, fundamentado na sua stack e nos seus comandos reais.
 - `docs/` categorizado e documentação por módulo.
 - Um diretório `.agents/` (skills, agents, commands) com o symlink de `.claude` para `.agents`.
-- A skill Deep Work Plan, instalada uma vez para todos os agentes — incluindo a sub-skill author, para que o repositório possa fazer crescer suas próprias skills, agents e commands, além de addons de manutenção opcionais como dependency-upgrade.
+- A skill Deep Work Plan, instalada uma vez para todos os agentes — incluindo a sub-skill author, para que o repositório possa fazer crescer suas próprias skills, agents e commands, além de addons opcionais como dependency-upgrade e o addon de frontend design-system.
 - Planos de longo prazo e retomáveis em uma pasta `.dwp/` ignorada pelo git.
 
 ---

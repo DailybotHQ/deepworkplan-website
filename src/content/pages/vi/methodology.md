@@ -19,7 +19,7 @@ Phương pháp luận được trình bày qua năm chương:
 1. **Tuyên ngôn** — Deep Work Plan là gì và vì sao thực thi có cấu trúc lại quan trọng.
 2. **Vòng lặp lõi** — chu trình lập kế hoạch–thực thi–kiểm chứng dẫn dắt mọi tác vụ.
 3. **Mẫu** — các cấu trúc kế hoạch và tác vụ mà agent và con người chia sẻ.
-4. **Skill và agent** — cách các command và vai trò agent ăn khớp với nhau, bộ kit sống (cách một repository nuôi lớn skill của riêng nó qua sub-skill author), và các addon bảo trì tự nguyện như dependency-upgrade.
+4. **Skill và agent** — cách các command và vai trò agent ăn khớp với nhau, bộ kit sống (cách một repository nuôi lớn skill của riêng nó qua sub-skill author), và các addon tự nguyện như dependency-upgrade và addon design-system frontend.
 5. **Các kiểu hình** — thích ứng phương pháp luận cho repo độc lập và trung tâm điều phối.
 
 - [Đọc phương pháp luận](/methodology)

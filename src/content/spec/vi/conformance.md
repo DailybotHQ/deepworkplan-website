@@ -23,7 +23,7 @@ Một repository tuân thủ DWP PHẢI thỏa mãn tất cả những điều s
 5. **Một không gian làm việc `.dwp/` được gitignore.** Repository PHẢI chứa một thư mục `.dwp/` với `plans/` và `drafts/`, và `.dwp/` PHẢI được gitignore. Một không gian nháp `tmp/` NÊN tồn tại và NÊN được gitignore.
 6. **Skill phương pháp luận phân giải được.** Skill Deep Work Plan PHẢI được cài hoặc tham chiếu sao cho một agent trong repository có thể gọi các sub-skill của nó.
 
-Một repository **hoàn toàn tuân thủ với không cần addon nào**. Các addon (devcontainer, Dailybot, dependency-upgrade) là tự nguyện và KHÔNG ĐƯỢC bắt buộc để tuân thủ.
+Một repository **hoàn toàn tuân thủ với không cần addon nào**. Các addon (devcontainer, Dailybot, dependency-upgrade, design-system) là tự nguyện và KHÔNG ĐƯỢC bắt buộc để tuân thủ.
 
 ## Một kế hoạch chỉnh dạng
 

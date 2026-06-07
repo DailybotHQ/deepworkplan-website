@@ -36,7 +36,7 @@ Bir `AGENTS.md`, bir `docs/` bilgi tabanı, modül başına dokümanlar ve ajanl
 
 ### 3. Kiti geliştirin ve eklentileri kabul edin
 
-Yığına uygun skill’ler, ajanlar ve komutlar büyütmek için `/skill-create` ve `/agent-create` (author alt skill’i) kullanın. Onboarding ayrıca üç tercihe dayalı eklenti sunar — devcontainer, Dailybot ve dependency-upgrade — bunları yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır eklentiyle tümüyle uyumludur.
+Yığına uygun skill’ler, ajanlar ve komutlar büyütmek için `/skill-create` ve `/agent-create` (author alt skill’i) kullanın. Onboarding ayrıca dört tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade ve design-system — bunları yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır eklentiyle tümüyle uyumludur.
 
 ### 4. Planlayın ve yürütün
 

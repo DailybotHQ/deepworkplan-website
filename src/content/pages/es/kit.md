@@ -53,6 +53,7 @@ AI-first:
 - **Devcontainer** — un contenedor de desarrollo reproducible y aislado con autenticación de CLI de IA persistente.
 - **Dailybot** — reportes de avance e hitos de mejor esfuerzo para equipos que usan Dailybot.
 - **Actualización de dependencias** — actualizaciones agnósticas del gestor de paquetes, por lotes, validadas y reversibles.
+- **Sistema de diseño** — un `DESIGN.md` con alcance de frontend (en `docs/DESIGN.md`, referenciado desde `AGENTS.md`) razonado a partir de los tokens de diseño reales del repo, para que los agentes generen una UI fiel a la marca; activado por defecto cuando se detecta un sistema de diseño.
 
 ### Ejemplos
 

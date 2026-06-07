@@ -137,7 +137,7 @@ catalog `.agents/docs/` đồng bộ với những gì có trên đĩa.
 
 ## 5. Đề xuất các addon tự nguyện
 
-Sau nền tảng cơ bản, hãy liệt kê ba addon và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository
+Sau nền tảng cơ bản, hãy liệt kê bốn addon (devcontainer, Dailybot, dependency-upgrade, design-system) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository
 hoàn toàn tuân thủ với **không** cần addon nào — đừng bao giờ tự động cài chúng.
 
 - **Hỗ trợ devcontainer** — một dev container tái lập được, cô lập, với xác thực AI-CLI bền vững.

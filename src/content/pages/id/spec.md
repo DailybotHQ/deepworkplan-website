@@ -12,7 +12,7 @@ Spesifikasi adalah definisi metodologi yang presisi dan mudah dibaca — struktu
 - **Spesifikasi DWP** — struktur rencana, anatomi tugas, dan loop eksekusi.
 - **Protokol agent** — perilaku lintas agent yang diwajibkan dan pemetaan command.
 - **Arketipe** — repo individual versus orchestrator hub.
-- **Addon** — mekanisme opt-in untuk menambahkan kemampuan opsional, termasuk sub-skill author (sehingga sebuah repositori menumbuhkan kit-nya sendiri) dan addon perawatan seperti dependency-upgrade.
+- **Addon** — mekanisme opt-in untuk menambahkan kemampuan opsional, termasuk sub-skill author (sehingga sebuah repositori menumbuhkan kit-nya sendiri), addon perawatan seperti dependency-upgrade, dan addon design-system frontend (sebuah `docs/DESIGN.md` yang dinalar dari token desain nyata repo).
 - **Konformansi** — definisi normatif dari sebuah repositori AI-first: artefak yang HARUS dan SEBAIKNYA dimiliki sebuah repositori, apa yang membuat sebuah rencana terbentuk dengan baik, dan cara memverifikasinya secara objektif dengan `/dwp-verify`.
 
 - [Baca spesifikasinya](/spec)

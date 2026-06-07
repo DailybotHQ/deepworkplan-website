@@ -629,7 +629,7 @@ export const id: SiteTranslations = {
       {
         title: 'Kembangkan kit dan terima addon',
         description:
-          'Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack. Onboarding juga menawarkan tiga addon opt-in — devcontainer, Dailybot, dan dependency-upgrade — yang Anda terima hanya ketika cocok.',
+          'Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack. Onboarding juga menawarkan empat addon opt-in — devcontainer, Dailybot, dependency-upgrade, dan design-system — yang Anda terima hanya ketika cocok.',
       },
       {
         title: 'Rencanakan dan eksekusi',
@@ -701,7 +701,7 @@ export const id: SiteTranslations = {
       {
         title: 'Kembangkan kit dan terima addon',
         description:
-          'Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack. Onboarding juga menawarkan tiga addon opt-in — devcontainer, Dailybot, dan dependency-upgrade — yang Anda terima hanya ketika cocok. Sebuah repo sepenuhnya konforman dengan nol addon.',
+          'Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack. Onboarding juga menawarkan empat addon opt-in — devcontainer, Dailybot, dependency-upgrade, dan design-system — yang Anda terima hanya ketika cocok. Sebuah repo sepenuhnya konforman dengan nol addon.',
       },
       {
         title: 'Rencanakan dan eksekusi',

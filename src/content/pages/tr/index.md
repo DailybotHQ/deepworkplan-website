@@ -34,7 +34,7 @@ Aynı zamanda taşınabilir hale getirilmiş **harness mühendisliğidir**. Bir 
 - Gerçek yığınınız ve komutlarınızdan akıl yürütülmüş, depo kökünde bir AGENTS.md.
 - Kategorize edilmiş bir `docs/` ve modül başına dokümanlar.
 - `.claude → .agents` sembolik bağıyla bir `.agents/` dizini (skill’ler, ajanlar, komutlar).
-- Her ajan için bir kez kurulan Deep Work Plan skill’i — author alt skill’i dahil; böylece depo kendi skill’lerini, ajanlarını ve komutlarını büyütebilir, ayrıca dependency-upgrade gibi tercihe dayalı bakım eklentileri.
+- Her ajan için bir kez kurulan Deep Work Plan skill’i — author alt skill’i dahil; böylece depo kendi skill’lerini, ajanlarını ve komutlarını büyütebilir, ayrıca dependency-upgrade ve frontend design-system eklentisi gibi tercihe dayalı eklentiler.
 - Gitignore’lanmış bir `.dwp/` klasöründe uzun soluklu, kaldığı yerden sürdürülebilir planlar.
 
 ---

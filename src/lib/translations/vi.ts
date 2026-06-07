@@ -627,7 +627,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Phát triển bộ kit và chấp nhận các addon',
         description:
-          'Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack. Khởi tạo cũng đề xuất ba addon tự nguyện — devcontainer, Dailybot và dependency-upgrade — mà bạn chỉ chấp nhận khi chúng phù hợp.',
+          'Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack. Khởi tạo cũng đề xuất bốn addon tự nguyện — devcontainer, Dailybot, dependency-upgrade và design-system — mà bạn chỉ chấp nhận khi chúng phù hợp.',
       },
       {
         title: 'Lập kế hoạch và thực thi',
@@ -699,7 +699,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Phát triển bộ kit và chấp nhận các addon',
         description:
-          'Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack. Khởi tạo cũng đề xuất ba addon tự nguyện — devcontainer, Dailybot và dependency-upgrade — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không cần addon nào.',
+          'Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack. Khởi tạo cũng đề xuất bốn addon tự nguyện — devcontainer, Dailybot, dependency-upgrade và design-system — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không cần addon nào.',
       },
       {
         title: 'Lập kế hoạch và thực thi',

@@ -23,7 +23,7 @@ section: Conformance
 5. **Робочий простір `.dwp/` у gitignore.** Репозиторій MUST містити каталог `.dwp/` з `plans/` та `drafts/`, і `.dwp/` MUST бути в gitignore. Робочий простір `tmp/` SHOULD існувати та SHOULD бути в gitignore.
 6. **Скіл методології розвʼязуваний.** Скіл Deep Work Plan MUST бути встановлений чи на нього є посилання так, щоб агент у репозиторії міг викликати його суб-скіли.
 
-Репозиторій є **повністю відповідним з нульовою кількістю add-on**. Add-on (devcontainer, Dailybot, dependency-upgrade) приймаються явно та MUST NOT бути обовʼязковими для відповідності.
+Репозиторій є **повністю відповідним з нульовою кількістю add-on**. Add-on (devcontainer, Dailybot, dependency-upgrade, design-system) приймаються явно та MUST NOT бути обовʼязковими для відповідності.
 
 ## Коректний план
 

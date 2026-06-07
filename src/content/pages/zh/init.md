@@ -123,7 +123,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ## 5. 提供可选的附加组件
 
-在基线之后，列举这三个附加组件，并把每一个作为一项明确的可选项来提供。一个仓库
+在基线之后，列举这四个附加组件（devcontainer、Dailybot、dependency-upgrade、design-system），并把每一个作为一项明确的可选项来提供。一个仓库
 在不带**任何**附加组件时即完全符合规范——绝不自动安装它们。
 
 - **Devcontainer 支持** —— 一个可复现、隔离的开发容器，具备持久的 AI-CLI 认证。

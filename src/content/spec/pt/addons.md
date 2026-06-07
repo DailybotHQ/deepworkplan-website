@@ -24,6 +24,14 @@ Agents são trabalhadores especializados com um papel definido (reviewer, execut
 
 Os addons de manutenção são extensões opcionais, nunca exigidas para a conformidade, que ajudam um repositório a se manter. O addon **dependency-upgrade** raciocina sobre o gerenciador de pacotes real do repositório (em vez de presumir npm) e atualiza as dependências em lotes pequenos, validados e reversíveis: ele detecta o gerenciador a partir do manifesto e do lockfile reais, classifica as atualizações por semver, atualiza em lotes, executa o validation gate real do repositório após cada lote, reverte qualquer lote que falhe e resume sem comitar automaticamente. Um addon só é instalado quando é aceito durante o onboarding.
 
+## Addon design-system
+
+O addon **design-system** é uma extensão opcional, com escopo de frontend, que dá a um repositório um `DESIGN.md` — um arquivo de design system em Markdown que qualquer agente de código lê para gerar UI consistente com o design system próprio do repositório. Ele raciocina sobre os tokens de design reais do repositório (propriedades CSS personalizadas, uma configuração do Tailwind, arquivos de tokens, estilos de componentes) em vez de copiar um arquivo de marca, e documenta as seções canônicas: cores e papéis (claro e escuro), tipografia, layout e espaçamento, elevação, formas, componentes, comportamento responsivo, o que fazer e o que evitar (incluindo as regras de acessibilidade do repositório) e um guia de prompts para agentes. Ele verifica o contraste WCAG AA e a integridade dos tokens, e reconcilia um `DESIGN.md` existente em vez de sobrescrevê-lo.
+
+O arquivo reside em `docs/DESIGN.md`, ao lado das outras especificações do repositório, e é referenciado a partir do `AGENTS.md` para que os agentes o descubram da mesma forma que descobrem o restante da documentação (a raiz do repositório é usada apenas quando não há uma árvore `docs/`). A descoberta é por referência, não pela localização física. O addon é **ativado por padrão quando detectado**: quando uma superfície de UI está presente, o onboarding o aplica em modo de confiança e o recomenda fortemente no modo guiado; ele nunca é oferecido para um repositório de backend, CLI ou apenas biblioteca, e um repositório com zero addons permanece totalmente conforme.
+
+Este arquivo de design system em nível de repositório é distinto de um documento de design técnico por funcionalidade (o `design.md` de "requisitos → design → tarefas" dos fluxos de desenvolvimento orientados a especificação vinculados a ferramentas). O DWP não fornece um arquétipo separado de documento de design por funcionalidade: o README de um plano, os critérios de aceitação de cada tarefa e os validation gates já cobrem esse papel. O addon preenche a única lacuna que esse papel não cobre: contexto de design de UI durável e nativo do repositório.
+
 ## Presets
 
 Presets adaptam o DWP a uma stack tecnológica específica (Django, React, Go).
