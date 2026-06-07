@@ -26,11 +26,18 @@ export const EVENTS = {
   CTA_CLICK: 'cta_click',
   CONTACT_FORM_SUBMIT: 'contact_form_submit',
   CONTACT_FORM_ERROR: 'contact_form_error',
-  SOCIAL_CLICK: 'social_click',
   OUTBOUND_CLICK: 'outbound_click',
   SCROLL_DEPTH: 'scroll_depth',
-  AI_BOT_VISIT: 'ai_bot_visit',
 } as const;
+
+/**
+ * Server-side events (NOT emitted from this client module).
+ * AI bots and `Accept: text/markdown` requests do not run JavaScript, so these
+ * are sent directly to Umami from the Cloudflare Pages middleware
+ * (`functions/_middleware.ts`): `markdown_request`, `ai_bot_visit`,
+ * `unknown_bot_visit`. They are listed in `docs/ANALYTICS.md`. Do not add them
+ * to EVENTS above — that would imply they fire client-side.
+ */
 
 /**
  * Track a custom event via Umami.
