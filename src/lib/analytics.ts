@@ -22,6 +22,7 @@ export const EVENTS = {
   LANGUAGE_SWITCH: 'language_switch',
   MOBILE_MENU_TOGGLE: 'mobile_menu_toggle',
   THEME_TOGGLE: 'theme_toggle',
+  COPY_INIT: 'copy_init',
   CONTACT_FORM_SUBMIT: 'contact_form_submit',
   CONTACT_FORM_ERROR: 'contact_form_error',
   SOCIAL_CLICK: 'social_click',

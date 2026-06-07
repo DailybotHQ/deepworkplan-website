@@ -92,6 +92,7 @@ const howToSchema = {
           data-copy={initMarkdown}
           data-label={copyLabel}
           data-copied={copiedLabel}
+          data-lang={lang}
           aria-label={copyLabel}
         >
           {copyLabel}
@@ -207,6 +208,8 @@ const howToSchema = {
 </MainLayout>
 
 <script>
+  import { EVENTS, trackEvent } from '@/lib/analytics';
+
   const COPY_FEEDBACK_MS = 2000;
 
   // Progressive enhancement: copy the full init.md prompt to the clipboard.
@@ -223,6 +226,10 @@ const howToSchema = {
       busy = true;
       try {
         await navigator.clipboard.writeText(text);
+        trackEvent(EVENTS.COPY_INIT, {
+          source: 'init_page',
+          lang: btn.dataset.lang ?? 'en',
+        });
         btn.disabled = true;
         btn.textContent = copied;
         btn.setAttribute('aria-label', copied);

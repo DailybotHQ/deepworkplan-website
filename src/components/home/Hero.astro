@@ -76,6 +76,7 @@ const initMarkdown = await getCanonicalInitMarkdown();
             data-copy={initMarkdown}
             data-label={h.copyLabel}
             data-copied={h.copiedLabel}
+            data-lang={lang}
             aria-label={h.copyLabel}
           >
             {h.copyLabel}
@@ -146,6 +147,8 @@ const initMarkdown = await getCanonicalInitMarkdown();
 </section>
 
 <script>
+  import { EVENTS, trackEvent } from '@/lib/analytics';
+
   const COPY_FEEDBACK_MS = 2000;
 
   // Progressive enhancement: copy the instruction to the clipboard.
@@ -162,6 +165,10 @@ const initMarkdown = await getCanonicalInitMarkdown();
       busy = true;
       try {
         await navigator.clipboard.writeText(text);
+        trackEvent(EVENTS.COPY_INIT, {
+          source: 'home',
+          lang: btn.dataset.lang ?? 'en',
+        });
         btn.disabled = true;
         btn.textContent = copied;
         btn.setAttribute('aria-label', copied);
