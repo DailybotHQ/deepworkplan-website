@@ -138,7 +138,7 @@ katalog `.agents/docs/` tetap selaras dengan apa yang ada di disk.
 
 ## 5. Tawarkan addon opt-in
 
-Setelah baseline, sebutkan tiga addon dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori
+Setelah baseline, sebutkan keempat addon (devcontainer, Dailybot, dependency-upgrade, design-system) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori
 sepenuhnya konforman dengan **nol** addon — jangan pernah memasangnya secara otomatis.
 
 - **Dukungan devcontainer** — kontainer pengembangan yang terisolasi dan dapat direproduksi dengan autentikasi AI-CLI yang persisten.

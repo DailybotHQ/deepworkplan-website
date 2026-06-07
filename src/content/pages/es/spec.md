@@ -12,7 +12,7 @@ La especificación es la definición precisa y legible de la metodología — la
 - **Especificación DWP** — estructura del plan, anatomía de las tareas y el bucle de ejecución.
 - **Protocolo de agentes** — el comportamiento requerido entre agentes y el mapeo de comandos.
 - **Arquetipos** — repos individuales frente a hubs orquestadores.
-- **Complementos** — el mecanismo opcional para añadir capacidades, incluida la subhabilidad author (para que un repositorio cree su propio kit) y los complementos de mantenimiento como dependency-upgrade.
+- **Complementos** — el mecanismo opcional para añadir capacidades, incluida la subhabilidad author (para que un repositorio cree su propio kit), los complementos de mantenimiento como dependency-upgrade y el complemento de frontend design-system (un `docs/DESIGN.md` razonado a partir de los tokens de diseño reales del repo).
 - **Conformidad** — la definición normativa de un repositorio AI-first: los artefactos que un repositorio DEBE y DEBERÍA tener, qué hace que un plan esté bien formado y cómo verificarlo de forma objetiva con `/dwp-verify`.
 
 - [Leer la especificación](/es/spec)

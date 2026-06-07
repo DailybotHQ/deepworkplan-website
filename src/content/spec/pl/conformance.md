@@ -23,7 +23,7 @@ Repozytorium zgodne z DWP MUSI spełniać wszystkie poniższe warunki. Każdy ar
 5. **Przestrzeń robocza `.dwp/` w gitignore.** Repozytorium MUSI zawierać katalog `.dwp/` z `plans/` i `drafts/`, a `.dwp/` MUSI być w gitignore. Przestrzeń robocza `tmp/` POWINNA istnieć i POWINNA być w gitignore.
 6. **Skill metodyki jest rozwiązywalny.** Skill Deep Work Plan MUSI być zainstalowany lub do niego dowiązany w taki sposób, aby agent w repozytorium mógł wywoływać jego sub-skille.
 
-Repozytorium jest **w pełni zgodne przy zerowej liczbie dodatków**. Dodatki (devcontainer, Dailybot, dependency-upgrade) są opcjonalne i NIE MOGĄ być wymagane do zgodności.
+Repozytorium jest **w pełni zgodne przy zerowej liczbie dodatków**. Dodatki (devcontainer, Dailybot, dependency-upgrade, design-system) są opcjonalne i NIE MOGĄ być wymagane do zgodności.
 
 ## Dobrze sformułowany plan
 

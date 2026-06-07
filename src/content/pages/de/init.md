@@ -126,7 +126,7 @@ den `.agents/docs/`-Katalog synchron mit dem, was auf der Festplatte existiert.
 
 ## 5. Die Opt-in-Addons anbieten
 
-Zählen Sie nach der Baseline die drei Addons auf und bieten Sie jedes als explizites Opt-in an. Ein Repository ist
+Zählen Sie nach der Baseline die vier Addons auf (devcontainer, Dailybot, dependency-upgrade, design-system) und bieten Sie jedes als explizites Opt-in an. Ein Repository ist
 mit **null** Addons vollständig konform — installieren Sie sie niemals automatisch.
 
 - **Devcontainer-Unterstützung** — ein reproduzierbarer, isolierter Dev-Container mit persistenter AI-CLI-Authentifizierung.

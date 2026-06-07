@@ -49,6 +49,7 @@ Onboarding akışının bir depoya katmanlayabileceği isteğe bağlı yetenekle
 - **Devcontainer** — kalıcı AI-CLI kimlik doğrulaması içeren, yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri.
 - **Dailybot** — Dailybot kullanan ekipler için en iyi çabayla ilerleme ve dönüm noktası raporlaması.
 - **Dependency upgrade** — paket yöneticisinden bağımsız, gruplanmış, doğrulanmış, geri alınabilir yükseltmeler.
+- **Design system** — deponun gerçek tasarım token’larından akıl yürütülen, frontend kapsamlı bir `DESIGN.md` (`docs/DESIGN.md` konumunda, `AGENTS.md`’den başvurulan); böylece ajanlar markaya uygun UI üretir; bir tasarım sistemi saptandığında varsayılan açıktır.
 
 ### Örnekler
 

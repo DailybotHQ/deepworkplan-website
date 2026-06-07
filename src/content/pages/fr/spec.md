@@ -12,7 +12,7 @@ La spécification est la définition précise et lisible de la méthodologie —
 - **Spécification DWP** — la structure du plan, l’anatomie d’une tâche et la boucle d’exécution.
 - **Protocole de l’agent** — le comportement inter-agents requis et le mappage des commandes.
 - **Archétypes** — dépôts individuels versus hubs orchestrateurs.
-- **Add-ons** — le mécanisme facultatif pour superposer des capacités optionnelles, dont le sous-skill author (pour qu’un dépôt fasse grandir son propre kit) et des add-ons de maintenance comme dependency-upgrade.
+- **Add-ons** — le mécanisme facultatif pour superposer des capacités optionnelles, dont le sous-skill author (pour qu’un dépôt fasse grandir son propre kit), des add-ons de maintenance comme dependency-upgrade, et l’add-on frontend design-system (un `docs/DESIGN.md` raisonné à partir des véritables tokens de conception du dépôt).
 - **Conformité** — la définition normative d’un dépôt AI-first : les artefacts qu’un dépôt MUST et SHOULD posséder, ce qui rend un plan bien formé, et comment le vérifier objectivement avec `/dwp-verify`.
 
 - [Lire la spécification](/spec)

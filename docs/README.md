@@ -18,6 +18,7 @@ Welcome to the **deepworkplan.com** documentation. This guide helps developers a
 |----------|-------------|
 | [Product Spec](PRODUCT_SPEC.md) | Vision, features, and goals for deepworkplan.com |
 | [Brand Guide](BRAND_GUIDE.md) | Color palette, typography, logo usage, and visual identity |
+| [DESIGN.md](DESIGN.md) | Agent-facing design-system spec (Broadsheet tokens, components, WCAG do's & don'ts) — read before generating UI |
 | [Architecture](ARCHITECTURE.md) | Technical architecture, patterns, and decisions |
 | [Performance](PERFORMANCE.md) | SSG optimization, images, caching strategies |
 

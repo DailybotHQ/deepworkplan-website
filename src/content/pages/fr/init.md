@@ -139,7 +139,8 @@ le catalogue `.agents/docs/` synchronisé avec ce qui existe sur disque.
 
 ## 5. Proposer les addons facultatifs
 
-Après la base, énumérez les trois addons et proposez chacun comme un choix explicite. Un dépôt est
+Après la base, énumérez les quatre addons (devcontainer, Dailybot, dependency-upgrade, design-system)
+et proposez chacun comme un choix explicite. Un dépôt est
 pleinement conforme avec **zéro** addon — ne les installez jamais automatiquement.
 
 - **Prise en charge du devcontainer** — un conteneur de développement reproductible et isolé avec une auth de CLI IA persistante.

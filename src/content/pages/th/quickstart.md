@@ -42,8 +42,8 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 ### 3. พัฒนา kit และยอมรับส่วนเสริม
 
 ใช้ `/skill-create` และ `/agent-create` (sub-skill ชื่อ author) เพื่อปลูก skill, agent และคำสั่ง
-ที่เหมาะกับเทคสแตก การออนบอร์ดยังเสนอส่วนเสริมแบบเลือกเข้าร่วมสามอย่าง — devcontainer, Dailybot และ
-dependency-upgrade — ที่คุณยอมรับเมื่อมันเหมาะสมเท่านั้น repo สอดคล้องอย่างสมบูรณ์โดยมีส่วนเสริมศูนย์อย่าง
+ที่เหมาะกับเทคสแตก การออนบอร์ดยังเสนอส่วนเสริมแบบเลือกเข้าร่วมสี่อย่าง — devcontainer, Dailybot,
+dependency-upgrade และ design-system — ที่คุณยอมรับเมื่อมันเหมาะสมเท่านั้น repo สอดคล้องอย่างสมบูรณ์โดยมีส่วนเสริมศูนย์อย่าง
 
 ### 4. วางแผนและดำเนินการ
 

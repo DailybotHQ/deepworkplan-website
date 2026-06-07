@@ -19,7 +19,7 @@ La metodología se explica en cinco capítulos:
 1. **Manifiesto** — qué es un Deep Work Plan y por qué importa la ejecución estructurada.
 2. **Bucle central** — el ciclo planificar-ejecutar-verificar que impulsa cada tarea.
 3. **Plantillas** — las estructuras de plan y tarea que comparten agentes y personas.
-4. **Skills y agentes** — cómo encajan los comandos y los roles de agente, el kit vivo (cómo un repositorio crea sus propias habilidades mediante la subhabilidad author) y los complementos de mantenimiento opcionales como dependency-upgrade.
+4. **Skills y agentes** — cómo encajan los comandos y los roles de agente, el kit vivo (cómo un repositorio crea sus propias habilidades mediante la subhabilidad author) y los complementos opcionales como dependency-upgrade y el complemento de frontend design-system.
 5. **Arquetipos** — adaptar la metodología a repos individuales y hubs orquestadores.
 
 - [Leer la metodología](/es/methodology)

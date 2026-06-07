@@ -19,7 +19,7 @@ La méthodologie est expliquée en cinq chapitres :
 1. **Manifeste** — ce qu’est un Deep Work Plan et pourquoi l’exécution structurée compte.
 2. **Boucle centrale** — le cycle planifier-exécuter-vérifier qui pilote chaque tâche.
 3. **Modèles** — les structures de plan et de tâche que les agents et les humains partagent.
-4. **Skills et agents** — comment les commandes et les rôles d’agent s’articulent, le kit vivant (comment un dépôt fait grandir ses propres skills via le sous-skill author) et les add-ons de maintenance facultatifs comme dependency-upgrade.
+4. **Skills et agents** — comment les commandes et les rôles d’agent s’articulent, le kit vivant (comment un dépôt fait grandir ses propres skills via le sous-skill author) et les add-ons facultatifs comme dependency-upgrade et l’add-on frontend design-system.
 5. **Archétypes** — adapter la méthodologie aux dépôts individuels et aux hubs orchestrateurs.
 
 - [Lire la méthodologie](/methodology)

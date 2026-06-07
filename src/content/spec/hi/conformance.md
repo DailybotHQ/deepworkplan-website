@@ -23,7 +23,7 @@ section: Conformance
 5. **एक gitignored `.dwp/` कार्यस्थल।** रिपॉज़िटरी में `plans/` और `drafts/` वाली एक `.dwp/` डायरेक्टरी MUST हो, और `.dwp/` को gitignored MUST होना चाहिए। एक `tmp/` स्क्रैच स्थान मौजूद SHOULD और gitignored SHOULD।
 6. **पद्धति स्किल हल करने योग्य है।** Deep Work Plan स्किल को इस प्रकार स्थापित या संदर्भित MUST किया जाए कि रिपॉज़िटरी में एक एजेंट उसके सब-स्किल्स आमंत्रित कर सके।
 
-एक रिपॉज़िटरी **शून्य ऐडऑन के साथ पूर्णतः अनुरूप** होती है। ऐडऑन (devcontainer, Dailybot, dependency-upgrade) ऑप्ट-इन हैं और अनुरूपता के लिए आवश्यक MUST NOT।
+एक रिपॉज़िटरी **शून्य ऐडऑन के साथ पूर्णतः अनुरूप** होती है। ऐडऑन (devcontainer, Dailybot, dependency-upgrade, design-system) ऑप्ट-इन हैं और अनुरूपता के लिए आवश्यक MUST NOT।
 
 ## एक सुगठित योजना
 

@@ -34,7 +34,7 @@ To także **inżynieria harnessu** uczyniona przenośną. Harness agenta to rusz
 - AGENTS.md w katalogu głównym repozytorium, przemyślany na podstawie twojego rzeczywistego stosu i komend.
 - Skategoryzowane `docs/` oraz dokumentację poszczególnych modułów.
 - Katalog `.agents/` (skille, agenci, komendy) z dowiązaniem `.claude` do `.agents`.
-- Skill Deep Work Plan, instalowany raz dla każdego agenta — w tym sub-skill author, dzięki któremu repozytorium może rozwijać własne skille, agentów i komendy, plus opcjonalne dodatki utrzymaniowe, takie jak dependency-upgrade.
+- Skill Deep Work Plan, instalowany raz dla każdego agenta — w tym sub-skill author, dzięki któremu repozytorium może rozwijać własne skille, agentów i komendy, plus opcjonalne dodatki, takie jak dependency-upgrade i frontendowy dodatek design-system.
 - Wznawialne plany o długim horyzoncie w folderze `.dwp/` objętym gitignore.
 
 ---

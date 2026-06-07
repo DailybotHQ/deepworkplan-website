@@ -23,7 +23,7 @@ Un repositorio conforme con DWP DEBE cumplir todo lo siguiente. Cada artefacto D
 5. **Un espacio `.dwp/` ignorado por git.** El repositorio DEBE contener un directorio `.dwp/` con `plans/` y `drafts/`, y `.dwp/` DEBE estar ignorado por git. Un espacio de trabajo `tmp/` DEBERÍA existir y DEBERÍA estar ignorado por git.
 6. **El skill de la metodología es resoluble.** El skill de Deep Work Plan DEBE estar instalado o referenciado de modo que un agente en el repositorio pueda invocar sus sub-skills.
 
-Un repositorio es **totalmente conforme con cero addons**. Los addons (devcontainer, Dailybot, dependency-upgrade) son opcionales y NO DEBEN ser requeridos para la conformidad.
+Un repositorio es **totalmente conforme con cero addons**. Los addons (devcontainer, Dailybot, dependency-upgrade, design-system) son opcionales y NO DEBEN ser requeridos para la conformidad.
 
 ## Un plan bien formado
 

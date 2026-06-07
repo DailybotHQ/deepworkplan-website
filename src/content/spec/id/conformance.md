@@ -23,7 +23,7 @@ Sebuah repositori konforman DWP MUST memenuhi semua hal berikut. Setiap artefak 
 5. **Sebuah ruang kerja `.dwp/` yang di-gitignore.** Repositori MUST berisi sebuah direktori `.dwp/` dengan `plans/` dan `drafts/`, dan `.dwp/` MUST di-gitignore. Sebuah ruang scratch `tmp/` SHOULD ada dan SHOULD di-gitignore.
 6. **Skill metodologi dapat di-resolve.** Skill Deep Work Plan MUST terpasang atau dirujuk sedemikian rupa sehingga sebuah agent di repositori dapat memanggil sub-skill-nya.
 
-Sebuah repositori **sepenuhnya konforman dengan nol addon**. Addon (devcontainer, Dailybot, dependency-upgrade) bersifat opt-in dan MUST NOT diwajibkan untuk konformansi.
+Sebuah repositori **sepenuhnya konforman dengan nol addon**. Addon (devcontainer, Dailybot, dependency-upgrade, design-system) bersifat opt-in dan MUST NOT diwajibkan untuk konformansi.
 
 ## Sebuah rencana yang terbentuk baik
 

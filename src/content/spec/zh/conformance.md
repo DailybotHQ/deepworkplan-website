@@ -23,7 +23,7 @@ section: Conformance
 5. **一个被 gitignore 的 `.dwp/` 工作区。** 仓库 MUST 包含一个含 `plans/` 与 `drafts/` 的 `.dwp/` 目录，且 `.dwp/` MUST 被 gitignore。一个 `tmp/` 草稿空间 SHOULD 存在，并 SHOULD 被 gitignore。
 6. **方法论技能可被解析。** Deep Work Plan 技能 MUST 被安装或被引用，使得仓库中的代理能够调用其各子技能。
 
-一个仓库**在不带任何附加组件时即完全符合规范**。附加组件（devcontainer、Dailybot、dependency-upgrade）是可选的，MUST NOT 作为符合性的必要条件。
+一个仓库**在不带任何附加组件时即完全符合规范**。附加组件（devcontainer、Dailybot、dependency-upgrade、design-system）是可选的，MUST NOT 作为符合性的必要条件。
 
 ## 一份结构良好的计划
 

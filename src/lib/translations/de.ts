@@ -630,7 +630,7 @@ export const de: SiteTranslations = {
       {
         title: 'Das Kit weiterentwickeln und Addons annehmen',
         description:
-          'Nutzen Sie /skill-create und /agent-create (die author-Sub-Skill), um stack-passende Skills, Agenten und Befehle aufzubauen. Das Onboarding bietet außerdem drei Opt-in-Addons — devcontainer, Dailybot und dependency-upgrade —, die Sie nur annehmen, wenn sie passen.',
+          'Nutzen Sie /skill-create und /agent-create (die author-Sub-Skill), um stack-passende Skills, Agenten und Befehle aufzubauen. Das Onboarding bietet außerdem vier Opt-in-Addons — devcontainer, Dailybot, dependency-upgrade und design-system —, die Sie nur annehmen, wenn sie passen.',
       },
       {
         title: 'Planen und ausführen',
@@ -702,7 +702,7 @@ export const de: SiteTranslations = {
       {
         title: 'Das Kit weiterentwickeln und Addons annehmen',
         description:
-          'Nutzen Sie /skill-create und /agent-create (die author-Sub-Skill), um stack-passende Skills, Agenten und Befehle aufzubauen. Das Onboarding bietet außerdem drei Opt-in-Addons — devcontainer, Dailybot und dependency-upgrade —, die Sie nur annehmen, wenn sie passen. Ein Repository ist mit null Addons vollständig konform.',
+          'Nutzen Sie /skill-create und /agent-create (die author-Sub-Skill), um stack-passende Skills, Agenten und Befehle aufzubauen. Das Onboarding bietet außerdem vier Opt-in-Addons — devcontainer, Dailybot, dependency-upgrade und design-system —, die Sie nur annehmen, wenn sie passen. Ein Repository ist mit null Addons vollständig konform.',
       },
       {
         title: 'Planen und ausführen',

@@ -24,6 +24,14 @@ Agents are specialized workers with a defined role (reviewer, executor, architec
 
 Maintenance add-ons are opt-in extensions, never required for compliance, that help a repository maintain itself. The **dependency-upgrade** add-on reasons about the repository's actual package manager (rather than assuming npm) and upgrades dependencies in small, validated, revertible batches: it detects the manager from the real manifest and lockfile, classifies upgrades by semver, upgrades in batches, runs the repository's real validation gate after each batch, reverts any batch that fails, and summarizes without auto-committing. An add-on is installed only when it is accepted during onboarding.
 
+## Design-system add-on
+
+The **design-system** add-on is a frontend-scoped, opt-in extension that gives a repository a `DESIGN.md` — a Markdown design-system file any coding agent reads to generate UI consistent with the repository's own design system. It reasons about the repository's real design tokens (CSS custom properties, a Tailwind config, token files, component styles) rather than copying a brand file, and documents the canonical sections: colors and roles (light and dark), typography, layout and spacing, elevation, shapes, components, responsive behavior, do's and don'ts (including the repository's accessibility rules), and an agent prompt guide. It checks WCAG AA contrast and token integrity, and reconciles an existing `DESIGN.md` instead of clobbering it.
+
+The file lives at `docs/DESIGN.md`, alongside the repository's other specs, and is referenced from `AGENTS.md` so agents discover it the same way they discover the rest of the docs (the repository root is used only when there is no `docs/` tree). Discovery is by reference, not by physical location. The add-on is **default-on when detected**: when a UI surface is present, onboarding applies it in trust mode and strongly recommends it in guided mode; it is never offered for a backend, CLI, or library-only repository, and a repository with zero add-ons remains fully conformant.
+
+This repository-level design-system file is distinct from a per-feature technical design document (the "requirements → design → tasks" `design.md` of tool-bound spec-driven workflows). DWP ships no separate per-feature design-doc archetype: a plan's README, each task's acceptance criteria, and the validation gates already cover that role. The add-on fills the one gap that role does not: durable, repo-native UI design context.
+
 ## Presets
 
 Presets adapt DWP to a specific tech stack (Django, React, Go).

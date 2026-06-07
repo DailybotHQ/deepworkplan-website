@@ -139,8 +139,9 @@ the `.agents/docs/` catalog in sync with what exists on disk.
 
 ## 5. Offer the opt-in addons
 
-After the baseline, enumerate the three addons and offer each as an explicit opt-in. A repository is
-fully conformant with **zero** addons — never auto-install them.
+After the baseline, enumerate the four addons (devcontainer, Dailybot, dependency-upgrade, design-system)
+and offer each as an explicit opt-in. A repository is fully conformant with **zero** addons — never
+auto-install them.
 
 - **Devcontainer support** — a reproducible, isolated dev container with persistent AI-CLI auth.
 - **Dailybot integration** — best-effort progress/milestone reporting for teams already using Dailybot.
