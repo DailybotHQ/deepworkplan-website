@@ -626,7 +626,7 @@ export const ko: SiteTranslations = {
       {
         title: '키트 발전과 애드온 채택',
         description:
-          '/skill-create와 /agent-create(author 하위 스킬)로 스택에 맞는 스킬, 에이전트, 명령을 키우세요. 온보딩은 또한 세 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade — 을 제안하며, 맞을 때만 채택하면 됩니다.',
+          '/skill-create와 /agent-create(author 하위 스킬)로 스택에 맞는 스킬, 에이전트, 명령을 키우세요. 온보딩은 또한 네 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system — 을 제안하며, 맞을 때만 채택하면 됩니다.',
       },
       {
         title: '계획하고 실행',
@@ -698,7 +698,7 @@ export const ko: SiteTranslations = {
       {
         title: '키트 발전과 애드온 채택',
         description:
-          '/skill-create와 /agent-create(author 하위 스킬)로 스택에 맞는 스킬, 에이전트, 명령을 키우세요. 온보딩은 또한 세 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade — 을 제안하며, 맞을 때만 채택하면 됩니다. 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다.',
+          '/skill-create와 /agent-create(author 하위 스킬)로 스택에 맞는 스킬, 에이전트, 명령을 키우세요. 온보딩은 또한 네 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system — 을 제안하며, 맞을 때만 채택하면 됩니다. 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다.',
       },
       {
         title: '계획하고 실행',

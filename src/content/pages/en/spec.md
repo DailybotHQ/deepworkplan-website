@@ -12,7 +12,7 @@ The specification is the precise, readable definition of the methodology — the
 - **DWP specification** — plan structure, task anatomy, and the execution loop.
 - **Agent protocol** — required cross-agent behavior and command mapping.
 - **Archetypes** — individual repos versus orchestrator hubs.
-- **Add-ons** — the opt-in mechanism for layering optional capabilities, including the author sub-skill (so a repository grows its own kit) and maintenance add-ons such as dependency-upgrade.
+- **Add-ons** — the opt-in mechanism for layering optional capabilities, including the author sub-skill (so a repository grows its own kit), maintenance add-ons such as dependency-upgrade, and the frontend design-system add-on (a `docs/DESIGN.md` reasoned from the repo's real design tokens).
 - **Conformance** — the normative definition of an AI-first repository: the artifacts a repository MUST and SHOULD have, what makes a plan well-formed, and how to verify it objectively with `/dwp-verify`.
 
 - [Read the specification](/spec)

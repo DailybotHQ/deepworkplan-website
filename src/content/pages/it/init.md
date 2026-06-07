@@ -138,7 +138,8 @@ il catalogo `.agents/docs/` allineato con ciò che esiste su disco.
 
 ## 5. Proponi gli addon opt-in
 
-Dopo la baseline, elenca i tre addon e proponi ciascuno come opt-in esplicito. Un repository è
+Dopo la baseline, elenca i quattro addon (devcontainer, Dailybot, dependency-upgrade, design-system)
+e proponi ciascuno come opt-in esplicito. Un repository è
 pienamente conforme con **zero** addon — non installarli mai automaticamente.
 
 - **Supporto devcontainer** — un dev container riproducibile e isolato con autenticazione AI-CLI persistente.

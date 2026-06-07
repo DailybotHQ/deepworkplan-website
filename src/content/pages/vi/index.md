@@ -34,7 +34,7 @@ Nó cũng là **kỹ thuật harness** được làm cho dễ mang theo. Một h
 - AGENTS.md tại gốc repository, được suy luận từ stack và các lệnh thực tế của bạn.
 - `docs/` được phân loại và tài liệu cho từng mô-đun.
 - Một thư mục `.agents/` (skill, agent, command) cùng symlink `.claude` tới `.agents`.
-- Skill Deep Work Plan, cài một lần cho mọi agent — gồm cả sub-skill author, để repository có thể nuôi lớn skill, agent và command của riêng nó, cùng các addon bảo trì tự nguyện như dependency-upgrade.
+- Skill Deep Work Plan, cài một lần cho mọi agent — gồm cả sub-skill author, để repository có thể nuôi lớn skill, agent và command của riêng nó, cùng các addon tự nguyện như dependency-upgrade và addon design-system frontend.
 - Các kế hoạch dài hơi, tiếp tục được, trong một thư mục `.dwp/` được gitignore.
 
 ---

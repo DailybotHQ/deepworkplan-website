@@ -42,8 +42,8 @@ cho các kế hoạch và bản nháp. Không gì là mẫu cứng; mọi thứ 
 ### 3. Phát triển bộ kit và chấp nhận addon
 
 Dùng `/skill-create` và `/agent-create` (sub-skill author) để nuôi lớn các skill, agent và command phù hợp với stack.
-Quá trình khởi tạo cũng đề xuất ba addon tự nguyện — devcontainer, Dailybot, và
-dependency-upgrade — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không cần addon nào.
+Quá trình khởi tạo cũng đề xuất bốn addon tự nguyện — devcontainer, Dailybot,
+dependency-upgrade, và design-system — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không cần addon nào.
 
 ### 4. Lập kế hoạch và thực thi
 

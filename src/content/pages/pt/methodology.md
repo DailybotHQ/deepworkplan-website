@@ -19,7 +19,7 @@ A metodologia é explicada em cinco capítulos:
 1. **Manifesto** — o que é um Deep Work Plan e por que a execução estruturada importa.
 2. **Loop central** — o ciclo de planejar-executar-verificar que conduz cada tarefa.
 3. **Templates** — as estruturas de plano e de tarefa que agentes e humanos compartilham.
-4. **Skills e agents** — como os commands e os papéis de agent se encaixam, o kit vivo (como um repositório faz crescer suas próprias skills via a sub-skill author) e os addons de manutenção opcionais como dependency-upgrade.
+4. **Skills e agents** — como os commands e os papéis de agent se encaixam, o kit vivo (como um repositório faz crescer suas próprias skills via a sub-skill author) e os addons opcionais como dependency-upgrade e o addon de frontend design-system.
 5. **Arquétipos** — adaptar a metodologia a repositórios individuais e a hubs orquestradores.
 
 - [Leia a metodologia](/methodology)

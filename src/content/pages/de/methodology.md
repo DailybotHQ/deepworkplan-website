@@ -19,7 +19,7 @@ Die Methodik wird in fünf Kapiteln erklärt:
 1. **Manifest** — was ein Deep Work Plan ist und warum strukturierte Ausführung zählt.
 2. **Kernschleife** — der Plan-Ausführen-Verifizieren-Zyklus, der jede Aufgabe antreibt.
 3. **Vorlagen** — die Plan- und Aufgabenstrukturen, die Agenten und Menschen teilen.
-4. **Skills & Agenten** — wie Befehle und Agentenrollen zusammenpassen, das lebendige Kit (wie ein Repository über die author-Sub-Skill eigene Skills aufbaut) und Opt-in-Wartungs-Addons wie dependency-upgrade.
+4. **Skills & Agenten** — wie Befehle und Agentenrollen zusammenpassen, das lebendige Kit (wie ein Repository über die author-Sub-Skill eigene Skills aufbaut) und Opt-in-Add-ons wie dependency-upgrade und dem frontend-bezogenen design-system-Add-on.
 5. **Archetypen** — die Methodik an Einzel-Repositorys und Orchestrator-Hubs anpassen.
 
 - [Methodik lesen](/methodology)

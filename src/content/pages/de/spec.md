@@ -12,7 +12,7 @@ Die Spezifikation ist die präzise, lesbare Definition der Methodik — die Stru
 - **DWP-Spezifikation** — Planstruktur, Aufgaben-Anatomie und die Ausführungsschleife.
 - **Agentenprotokoll** — erforderliches agentenübergreifendes Verhalten und Befehlszuordnung.
 - **Archetypen** — Einzel-Repositorys versus Orchestrator-Hubs.
-- **Add-ons** — der Opt-in-Mechanismus zum Hinzufügen optionaler Fähigkeiten, inklusive der author-Sub-Skill (sodass ein Repository sein eigenes Kit aufbaut) und Wartungs-Add-ons wie dependency-upgrade.
+- **Add-ons** — der Opt-in-Mechanismus zum Hinzufügen optionaler Fähigkeiten, inklusive der author-Sub-Skill (sodass ein Repository sein eigenes Kit aufbaut), Wartungs-Add-ons wie dependency-upgrade und dem frontend-bezogenen design-system-Add-on (eine `docs/DESIGN.md`, abgeleitet aus den echten Design-Tokens des Repos).
 - **Konformität** — die normative Definition eines AI-first Repositorys: die Artefakte, die ein Repository haben MUSS und SOLLTE, was einen Plan wohlgeformt macht und wie man es mit `/dwp-verify` objektiv verifiziert.
 
 - [Spezifikation lesen](/spec)

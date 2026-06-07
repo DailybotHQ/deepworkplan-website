@@ -24,6 +24,14 @@ Agent adalah pekerja terspesialisasi dengan peran yang terdefinisi (reviewer, ex
 
 Add-on perawatan adalah ekstensi opt-in, tidak pernah diwajibkan untuk konformansi, yang membantu sebuah repositori memelihara dirinya sendiri. Add-on **dependency-upgrade** bernalar tentang package manager yang sebenarnya ada di repositori (alih-alih mengasumsikan npm) dan memperbarui dependensi dalam batch-batch kecil yang tervalidasi dan dapat dikembalikan: ia mendeteksi manager dari manifes dan lockfile yang nyata, mengklasifikasikan peningkatan menurut semver, memperbarui dalam batch, menjalankan validation gate nyata repositori setelah setiap batch, mengembalikan batch apa pun yang gagal, dan merangkum tanpa meng-commit secara otomatis. Sebuah add-on dipasang hanya ketika ia diterima selama onboarding.
 
+## Add-on design-system
+
+Add-on **design-system** adalah ekstensi opt-in bercakupan frontend yang memberi sebuah repositori sebuah `DESIGN.md` — sebuah berkas sistem desain berformat Markdown yang dibaca agent coding mana pun untuk menghasilkan UI yang konsisten dengan sistem desain milik repositori itu sendiri. Ia bernalar tentang token desain nyata repositori (CSS custom properties, sebuah konfigurasi Tailwind, berkas token, gaya komponen) alih-alih menyalin sebuah berkas brand, dan mendokumentasikan bagian-bagian kanonis: warna dan peran (terang dan gelap), tipografi, tata letak dan spasi, elevasi, bentuk, komponen, perilaku responsif, anjuran dan larangan (termasuk aturan aksesibilitas repositori), dan panduan prompt agent. Ia memeriksa kontras WCAG AA dan integritas token, serta merekonsiliasikan sebuah `DESIGN.md` yang sudah ada alih-alih menimpanya.
+
+Berkas tersebut berada di `docs/DESIGN.md`, berdampingan dengan spesifikasi lain repositori, dan dirujuk dari `AGENTS.md` sehingga agent menemukannya dengan cara yang sama seperti mereka menemukan dokumen lainnya (akar repositori dipakai hanya ketika tidak ada pohon `docs/`). Penemuan dilakukan lewat referensi, bukan lewat lokasi fisik. Add-on ini **aktif secara default ketika terdeteksi**: ketika sebuah permukaan UI hadir, onboarding menerapkannya dalam mode trust dan sangat merekomendasikannya dalam mode terpandu; ia tidak pernah ditawarkan untuk repositori backend, CLI, atau hanya-library, dan sebuah repositori dengan nol add-on tetap sepenuhnya konforman.
+
+Berkas sistem desain tingkat-repositori ini berbeda dari sebuah dokumen desain teknis per-fitur ("requirements → design → tasks" `design.md` dari alur kerja spec-driven yang terikat tooling). DWP tidak membawa archetype dokumen-desain per-fitur terpisah: README sebuah rencana, acceptance criteria setiap tugas, dan validation gate sudah mencakup peran itu. Add-on ini mengisi satu celah yang tidak dicakup peran tersebut: konteks desain UI yang tahan lama dan repo-native.
+
 ## Presets
 
 Preset menyesuaikan DWP dengan tech stack tertentu (Django, React, Go).

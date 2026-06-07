@@ -42,8 +42,8 @@ ignoré par git pour les plans et les ébauches. Rien n’est issu d’un modèl
 ### 3. Faire évoluer le kit et accepter des addons
 
 Utilisez `/skill-create` et `/agent-create` (le sous-skill author) pour faire grandir des skills, agents et
-commandes adaptés à votre stack. L’onboarding propose aussi trois addons facultatifs — devcontainer, Dailybot et
-dependency-upgrade — que vous acceptez seulement lorsqu’ils conviennent. Un dépôt est pleinement conforme avec zéro addon.
+commandes adaptés à votre stack. L’onboarding propose aussi quatre addons facultatifs — devcontainer, Dailybot,
+dependency-upgrade et design-system — que vous acceptez seulement lorsqu’ils conviennent. Un dépôt est pleinement conforme avec zéro addon.
 
 ### 4. Planifier et exécuter
 

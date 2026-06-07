@@ -48,6 +48,7 @@ Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Wind
 - **Devcontainer** — स्थायी AI-CLI प्रमाणन वाला एक पुनरुत्पाद्य, पृथक dev container।
 - **Dailybot** — Dailybot का उपयोग करने वाली टीमों के लिए सर्वोत्तम-प्रयास प्रगति और मील-पत्थर रिपोर्टिंग।
 - **Dependency upgrade** — पैकेज-मैनेजर-निरपेक्ष, बैच-आधारित, सत्यापित, वापस लेने योग्य अपग्रेड।
+- **Design system** — रिपॉज़िटरी के वास्तविक डिज़ाइन टोकन से तर्क की गई एक फ़्रंटएंड-दायरे वाली `DESIGN.md` (`docs/DESIGN.md` पर, `AGENTS.md` से संदर्भित), ताकि एजेंट ऑन-ब्रांड UI बनाएँ; एक डिज़ाइन सिस्टम का पता चलने पर डिफ़ॉल्ट-ऑन।
 
 ### उदाहरण
 

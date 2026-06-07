@@ -23,7 +23,7 @@ Un repository conforme a DWP DEVE soddisfare tutto quanto segue. Ogni artefatto 
 5. **Un workspace `.dwp/` escluso da git.** Il repository DEVE contenere una directory `.dwp/` con `plans/` e `drafts/`, e `.dwp/` DEVE essere escluso da git. Uno spazio di lavoro temporaneo `tmp/` DOVREBBE esistere e DOVREBBE essere escluso da git.
 6. **La skill della metodologia è risolvibile.** La skill Deep Work Plan DEVE essere installata o referenziata in modo tale che un agente nel repository possa invocarne le sub-skill.
 
-Un repository è **pienamente conforme con zero addon**. Gli addon (devcontainer, Dailybot, dependency-upgrade) sono opt-in e NON DEVONO essere richiesti per la conformità.
+Un repository è **pienamente conforme con zero addon**. Gli addon (devcontainer, Dailybot, dependency-upgrade, design-system) sono opt-in e NON DEVONO essere richiesti per la conformità.
 
 ## Un piano ben formato
 

@@ -23,7 +23,7 @@ DWP uyumlu bir depo, aşağıdakilerin tümünü KARŞILAMALIDIR. Her yapı, **d
 5. **Gitignore’lanmış bir `.dwp/` çalışma alanı.** Depo, `plans/` ve `drafts/` içeren bir `.dwp/` dizini İÇERMELİ ve `.dwp/` gitignore’lanMALIDIR. Bir `tmp/` çalışma alanı VAR OLMALI ve gitignore’lanMALIDIR.
 6. **Metodoloji skill’i çözümlenebilir.** Deep Work Plan skill’i, depodaki bir ajanın alt skill’lerini çağırabileceği şekilde kurulMUŞ veya başvurulMUŞ OLMALIDIR.
 
-Bir depo, **sıfır eklentiyle tamamen uyumludur**. Eklentiler (devcontainer, Dailybot, dependency-upgrade) tercihe dayalıdır ve uyumluluk için GEREKLİ OLMAMALIDIR.
+Bir depo, **sıfır eklentiyle tamamen uyumludur**. Eklentiler (devcontainer, Dailybot, dependency-upgrade, design-system) tercihe dayalıdır ve uyumluluk için GEREKLİ OLMAMALIDIR.
 
 ## İyi biçimlendirilmiş bir plan
 

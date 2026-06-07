@@ -134,7 +134,7 @@ katalog `.agents/docs/` w synchronizacji z tym, co istnieje na dysku.
 
 ## 5. Zaproponuj opcjonalne dodatki
 
-Po ustanowieniu bazy wymień trzy dodatki i zaproponuj każdy jako wyraźną opcję do wyboru. Repozytorium jest
+Po ustanowieniu bazy wymień cztery dodatki (devcontainer, Dailybot, dependency-upgrade, design-system) i zaproponuj każdy jako wyraźną opcję do wyboru. Repozytorium jest
 w pełni zgodne przy **zerowej** liczbie dodatków — nigdy nie instaluj ich automatycznie.
 
 - **Wsparcie devcontainera** — odtwarzalny, izolowany kontener deweloperski z trwałym uwierzytelnianiem AI-CLI.

@@ -12,7 +12,7 @@ La specifica è la definizione precisa e leggibile della metodologia — le stru
 - **Specifica DWP** — struttura del piano, anatomia delle attività e ciclo di esecuzione.
 - **Protocollo degli agenti** — il comportamento richiesto tra gli agenti e la mappatura dei comandi.
 - **Archetipi** — repo individuali contro hub orchestratori.
-- **Addon** — il meccanismo opt-in per aggiungere capacità opzionali, inclusa la sub-skill author (così un repository fa crescere il proprio kit) e gli addon di manutenzione come dependency-upgrade.
+- **Addon** — il meccanismo opt-in per aggiungere capacità opzionali, inclusa la sub-skill author (così un repository fa crescere il proprio kit), gli addon di manutenzione come dependency-upgrade e l’addon frontend design-system (un `docs/DESIGN.md` ragionato dai token di design reali del repo).
 - **Conformità** — la definizione normativa di un repository AI-first: gli artefatti che un repository DEVE e DOVREBBE avere, cosa rende un piano ben formato e come verificarlo in modo oggettivo con `/dwp-verify`.
 
 - [Leggi la specifica](/spec)

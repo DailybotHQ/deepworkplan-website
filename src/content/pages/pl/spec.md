@@ -12,7 +12,7 @@ Specyfikacja to precyzyjna, czytelna definicja metodyki — struktury i protoko�
 - **Specyfikacja DWP** — struktura planu, anatomia zadania i pętla wykonania.
 - **Protokół agenta** — wymagane zachowanie między agentami i mapowanie komend.
 - **Archetypy** — pojedyncze repozytoria a centra orkiestracji.
-- **Dodatki** — opcjonalny mechanizm nakładania dodatkowych możliwości, w tym sub-skill author (dzięki któremu repozytorium rozwija własny kit) oraz dodatki utrzymaniowe, takie jak dependency-upgrade.
+- **Dodatki** — opcjonalny mechanizm nakładania dodatkowych możliwości, w tym sub-skill author (dzięki któremu repozytorium rozwija własny kit) dodatki utrzymaniowe, takie jak dependency-upgrade, oraz frontendowy dodatek design-system (plik `docs/DESIGN.md` wywiedziony z rzeczywistych tokenów projektowych repozytorium).
 - **Zgodność** — normatywna definicja repozytorium AI-first: artefakty, które repozytorium MUSI i POWINNO mieć, co czyni plan dobrze sformułowanym i jak zweryfikować to obiektywnie za pomocą `/dwp-verify`.
 
 - [Przeczytaj specyfikację](/spec)

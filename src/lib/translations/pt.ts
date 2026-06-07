@@ -634,7 +634,7 @@ export const pt: SiteTranslations = {
       {
         title: 'Evolua o kit e aceite addons',
         description:
-          'Use /skill-create e /agent-create (a sub-skill author) para desenvolver skills, agents e commands apropriados à sua stack. O onboarding também oferece três addons opcionais — devcontainer, Dailybot e dependency-upgrade — que você aceita apenas quando fizerem sentido.',
+          'Use /skill-create e /agent-create (a sub-skill author) para desenvolver skills, agents e commands apropriados à sua stack. O onboarding também oferece quatro addons opcionais — devcontainer, Dailybot, dependency-upgrade e design-system — que você aceita apenas quando fizerem sentido.',
       },
       {
         title: 'Planeje e execute',
@@ -706,7 +706,7 @@ export const pt: SiteTranslations = {
       {
         title: 'Evolua o kit e aceite addons',
         description:
-          'Use /skill-create e /agent-create (a sub-skill author) para desenvolver skills, agents e commands apropriados à sua stack. O onboarding também oferece três addons opcionais — devcontainer, Dailybot e dependency-upgrade — que você aceita apenas quando fizerem sentido. Um repositório é totalmente conforme com zero addons.',
+          'Use /skill-create e /agent-create (a sub-skill author) para desenvolver skills, agents e commands apropriados à sua stack. O onboarding também oferece quatro addons opcionais — devcontainer, Dailybot, dependency-upgrade e design-system — que você aceita apenas quando fizerem sentido. Um repositório é totalmente conforme com zero addons.',
       },
       {
         title: 'Planeje e execute',

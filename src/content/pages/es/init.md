@@ -141,7 +141,7 @@ sincronizado con lo que hay en disco.
 
 ## 5. Ofrece los addons opcionales
 
-Tras la base, enumera los tres addons y ofrece cada uno como una opción explícita. Un repositorio es
+Tras la base, enumera los cuatro addons (devcontainer, Dailybot, dependency-upgrade, design-system) y ofrece cada uno como una opción explícita. Un repositorio es
 totalmente conforme con **cero** addons — nunca los instales automáticamente.
 
 - **Soporte de devcontainer** — un contenedor de desarrollo reproducible y aislado con autenticación

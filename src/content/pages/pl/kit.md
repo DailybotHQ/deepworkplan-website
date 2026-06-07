@@ -52,6 +52,7 @@ Opcjonalne możliwości, które przepływ onboardingu może nałożyć na repozy
 - **Devcontainer** — odtwarzalny, izolowany kontener deweloperski z trwałym uwierzytelnianiem AI-CLI.
 - **Dailybot** — raportowanie postępu i kamieni milowych dla zespołów korzystających z Dailybot.
 - **Dependency upgrade** — aktualizacje niezależne od menedżera pakietów: partiami, zwalidowane i odwracalne.
+- **System projektowy** — plik `DESIGN.md` o zakresie frontendowym (w `docs/DESIGN.md`, przywoływany z `AGENTS.md`) wywiedziony z rzeczywistych tokenów projektowych repozytorium, dzięki czemu agenci generują UI zgodne z marką; domyślnie włączony, gdy wykryto system projektowy.
 
 ### Przykłady
 
