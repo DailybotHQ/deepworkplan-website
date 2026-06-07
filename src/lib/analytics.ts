@@ -23,6 +23,7 @@ export const EVENTS = {
   MOBILE_MENU_TOGGLE: 'mobile_menu_toggle',
   THEME_TOGGLE: 'theme_toggle',
   COPY_INIT: 'copy_init',
+  CTA_CLICK: 'cta_click',
   CONTACT_FORM_SUBMIT: 'contact_form_submit',
   CONTACT_FORM_ERROR: 'contact_form_error',
   SOCIAL_CLICK: 'social_click',
