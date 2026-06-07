@@ -139,7 +139,7 @@ yetki devredici olarak bir **komut** oluşturun. `.agents/docs/` kataloğunu dis
 
 ## 5. Tercihe dayalı eklentileri sunun
 
-Temel hattan sonra, üç eklentiyi sıralayın ve her birini açık bir tercih olarak sunun. Bir depo, **sıfır**
+Temel hattan sonra, dört eklentiyi (devcontainer, Dailybot, dependency-upgrade, design-system) sıralayın ve her birini açık bir tercih olarak sunun. Bir depo, **sıfır**
 eklentiyle tümüyle uyumludur — onları asla otomatik kurmayın.
 
 - **Devcontainer desteği** — kalıcı AI-CLI kimlik doğrulaması içeren, yeniden üretilebilir, yalıtılmış

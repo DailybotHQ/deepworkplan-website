@@ -23,7 +23,7 @@ Ein DWP-konformes Repository MUSS alles Folgende erfüllen. Jedes Artefakt MUSS 
 5. **Ein per gitignore ausgeschlossener `.dwp/`-Arbeitsbereich.** Das Repository MUSS ein `.dwp/`-Verzeichnis mit `plans/` und `drafts/` enthalten, und `.dwp/` MUSS per gitignore ausgeschlossen sein. Ein `tmp/`-Scratch-Bereich SOLLTE existieren und SOLLTE per gitignore ausgeschlossen sein.
 6. **Die Methodik-Skill ist auflösbar.** Die Deep Work Plan Skill MUSS so installiert oder referenziert sein, dass ein Agent im Repository ihre Sub-Skills aufrufen kann.
 
-Ein Repository ist **mit null Addons vollständig konform**. Addons (devcontainer, Dailybot, dependency-upgrade) sind Opt-in und DÜRFEN NICHT für die Konformität erforderlich sein.
+Ein Repository ist **mit null Addons vollständig konform**. Addons (devcontainer, Dailybot, dependency-upgrade, design-system) sind Opt-in und DÜRFEN NICHT für die Konformität erforderlich sein.
 
 ## Ein wohlgeformter Plan
 

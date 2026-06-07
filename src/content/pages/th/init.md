@@ -133,7 +133,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ## 5. เสนอส่วนเสริมแบบเลือกเข้าร่วม
 
-หลังจากค่าพื้นฐาน ให้แจกแจงส่วนเสริมสามอย่างและเสนอแต่ละอย่างเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง repository
+หลังจากค่าพื้นฐาน ให้แจกแจงส่วนเสริมสี่อย่าง (devcontainer, Dailybot, dependency-upgrade, design-system) และเสนอแต่ละอย่างเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง repository
 สอดคล้องอย่างสมบูรณ์โดยมีส่วนเสริม **ศูนย์** อย่าง — อย่าติดตั้งมันอัตโนมัติ
 
 - **Devcontainer support** — dev container ที่ทำซ้ำได้และแยกตัว พร้อม auth ของ AI-CLI ที่คงอยู่

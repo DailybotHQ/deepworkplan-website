@@ -621,7 +621,7 @@ export const zh: SiteTranslations = {
       {
         title: '演化套件并采纳附加组件',
         description:
-          '使用 /skill-create 与 /agent-create（author 子技能）来培育与技术栈相适配的技能、代理与命令。接入流程还会提供三个可选附加组件——devcontainer、Dailybot 与 dependency-upgrade——你只在它们契合时才采纳。',
+          '使用 /skill-create 与 /agent-create（author 子技能）来培育与技术栈相适配的技能、代理与命令。接入流程还会提供四个可选附加组件——devcontainer、Dailybot、dependency-upgrade 与 design-system——你只在它们契合时才采纳。',
       },
       {
         title: '规划并执行',
@@ -693,7 +693,7 @@ export const zh: SiteTranslations = {
       {
         title: '演化套件并采纳附加组件',
         description:
-          '使用 /skill-create 与 /agent-create（author 子技能）来培育与技术栈相适配的技能、代理与命令。接入流程还会提供三个可选附加组件——devcontainer、Dailybot 与 dependency-upgrade——你只在它们契合时才采纳。一个仓库即便不带任何附加组件，也完全符合规范。',
+          '使用 /skill-create 与 /agent-create（author 子技能）来培育与技术栈相适配的技能、代理与命令。接入流程还会提供四个可选附加组件——devcontainer、Dailybot、dependency-upgrade 与 design-system——你只在它们契合时才采纳。一个仓库即便不带任何附加组件，也完全符合规范。',
       },
       {
         title: '规划并执行',

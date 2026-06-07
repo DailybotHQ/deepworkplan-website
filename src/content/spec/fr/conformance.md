@@ -23,7 +23,7 @@ Un dépôt conforme DWP MUST satisfaire l’ensemble des points suivants. Chaque
 5. **Un espace de travail `.dwp/` ignoré par git.** Le dépôt MUST contenir un répertoire `.dwp/` avec `plans/` et `drafts/`, et `.dwp/` MUST être ignoré par git. Un espace de travail temporaire `tmp/` SHOULD exister et SHOULD être ignoré par git.
 6. **Le skill de la méthodologie est résolvable.** Le skill Deep Work Plan MUST être installé ou référencé de sorte qu’un agent dans le dépôt puisse invoquer ses sous-skills.
 
-Un dépôt est **pleinement conforme avec zéro addon**. Les addons (devcontainer, Dailybot, dependency-upgrade) sont facultatifs et MUST NOT être requis pour la conformité.
+Un dépôt est **pleinement conforme avec zéro addon**. Les addons (devcontainer, Dailybot, dependency-upgrade, design-system) sont facultatifs et MUST NOT être requis pour la conformité.
 
 ## Un plan bien formé
 

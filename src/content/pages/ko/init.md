@@ -131,7 +131,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 
 ## 5. 선택형 애드온을 제안하세요
 
-기준선 이후, 세 가지 애드온을 열거하고 각각을 명시적 선택형으로 제안하세요. 리포지토리는
+기준선 이후, 네 가지 애드온(devcontainer, Dailybot, dependency-upgrade, design-system)을 열거하고 각각을 명시적 선택형으로 제안하세요. 리포지토리는
 애드온이 **하나도** 없어도 완전히 적합합니다 — 결코 자동 설치하지 마세요.
 
 - **Devcontainer 지원** — 영속적 AI-CLI 인증을 갖춘 재현 가능하고 격리된 개발 컨테이너.

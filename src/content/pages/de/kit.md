@@ -52,6 +52,7 @@ Optionale Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügen kann
 - **Devcontainer** — ein reproduzierbarer, isolierter Dev-Container mit persistenter AI-CLI-Authentifizierung.
 - **Dailybot** — Best-Effort-Berichterstattung über Fortschritte und Meilensteine für Teams, die Dailybot nutzen.
 - **Dependency-Upgrade** — paketmanager-agnostische, chargenweise, validierte, rücknehmbare Upgrades.
+- **Design system** — eine frontend-bezogene `DESIGN.md` (unter `docs/DESIGN.md`, von `AGENTS.md` referenziert), die aus den echten Design-Tokens des Repos abgeleitet wird, damit Agenten markenkonforme UI erzeugen; standardmäßig aktiv, wenn ein Designsystem erkannt wird.
 
 ### Beispiele
 

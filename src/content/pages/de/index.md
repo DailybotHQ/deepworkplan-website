@@ -34,7 +34,7 @@ Es ist zugleich **Harness Engineering**, portabel gemacht. Ein Agenten-Harness i
 - AGENTS.md im Repository-Stammverzeichnis, durchdacht aus Ihrem echten Stack und Ihren Befehlen abgeleitet.
 - Kategorisierte `docs/` und Dokumentation je Modul.
 - Ein `.agents/`-Verzeichnis (Skills, Agenten, Befehle) mit dem `.claude`-zu-`.agents`-Symlink.
-- Die Deep Work Plan Skill, einmal für jeden Agenten installiert — inklusive der author-Sub-Skill, sodass das Repository eigene Skills, Agenten und Befehle aufbauen kann, plus Opt-in-Wartungs-Addons wie dependency-upgrade.
+- Die Deep Work Plan Skill, einmal für jeden Agenten installiert — inklusive der author-Sub-Skill, sodass das Repository eigene Skills, Agenten und Befehle aufbauen kann, plus Opt-in-Add-ons wie dependency-upgrade und dem frontend-bezogenen design-system-Add-on.
 - Langfristige, wiederaufnehmbare Pläne in einem per gitignore ausgeschlossenen `.dwp/`-Ordner.
 
 ---

@@ -632,7 +632,7 @@ export const uk: SiteTranslations = {
       {
         title: 'Розвивайте набір та приймайте addon',
         description:
-          'Використовуйте /skill-create та /agent-create (суб-скіл author), щоб розвивати скіли, агенти та команди, доречні для вашого стеку. Онбординг також пропонує три опціональні addon — devcontainer, Dailybot та dependency-upgrade — які ви приймаєте лише тоді, коли вони доречні.',
+          'Використовуйте /skill-create та /agent-create (суб-скіл author), щоб розвивати скіли, агенти та команди, доречні для вашого стеку. Онбординг також пропонує чотири опціональні addon — devcontainer, Dailybot, dependency-upgrade та design-system — які ви приймаєте лише тоді, коли вони доречні.',
       },
       {
         title: 'Плануйте та виконуйте',
@@ -765,7 +765,7 @@ export const uk: SiteTranslations = {
       {
         title: 'Розвивайте набір та приймайте addon',
         description:
-          'Використовуйте /skill-create та /agent-create (суб-скіл author), щоб розвивати скіли, агенти та команди, доречні для вашого стеку. Онбординг також пропонує три опціональні addon — devcontainer, Dailybot та dependency-upgrade — які ви приймаєте лише тоді, коли вони доречні. Репозиторій повністю відповідає вимогам і з нульовою кількістю addon.',
+          'Використовуйте /skill-create та /agent-create (суб-скіл author), щоб розвивати скіли, агенти та команди, доречні для вашого стеку. Онбординг також пропонує чотири опціональні addon — devcontainer, Dailybot, dependency-upgrade та design-system — які ви приймаєте лише тоді, коли вони доречні. Репозиторій повністю відповідає вимогам і з нульовою кількістю addon.',
       },
       {
         title: 'Плануйте та виконуйте',

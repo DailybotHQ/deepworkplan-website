@@ -52,6 +52,7 @@ onboard 흐름이 리포지토리에 얹을 수 있는 선택 기능 — AI-firs
 - **Devcontainer** — 영속적 AI-CLI 인증을 갖춘 재현 가능하고 격리된 개발 컨테이너.
 - **Dailybot** — Dailybot을 사용하는 팀을 위한 최선 노력 기반의 진행 및 마일스톤 보고.
 - **Dependency upgrade** — 패키지 관리자 비종속, 배치 단위, 검증되고 되돌릴 수 있는 업그레이드.
+- **Design system** — 리포지토리의 실제 디자인 토큰에서 추론된 프런트엔드 범위의 `DESIGN.md`(`docs/DESIGN.md`에 위치하며 `AGENTS.md`에서 참조됨)로, 에이전트가 브랜드에 맞는 UI를 생성합니다. 디자인 시스템이 감지되면 기본 활성입니다.
 
 ### 예시
 

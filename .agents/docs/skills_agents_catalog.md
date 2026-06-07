@@ -355,5 +355,6 @@ All skills and agents are adapted for this Astro repository:
 - [Agent template](../skills/deepworkplan/author/templates/AGENT_TEMPLATE.md)
 - [DeepWorkPlan skill (dwp-* flows)](../skills/deepworkplan/SKILL.md) — backs `/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`
 - [Dependency-upgrade add-on](../skills/deepworkplan/addons/dependency-upgrade/SKILL.md) — opt-in maintenance add-on shipped with the `deepworkplan` skill; backs `/lib-upgrade` (package-manager agnostic, validated revertible batches)
+- [Design-system add-on](../skills/deepworkplan/addons/design-system/SKILL.md) — opt-in, frontend-scoped add-on shipped with the `deepworkplan` skill; generates a `docs/DESIGN.md` (indexed from `AGENTS.md`) from the repo's real design tokens so agents produce on-brand UI; default-on when a design system is detected. This repo dogfoods it: see [docs/DESIGN.md](../../docs/DESIGN.md)
 - [AGENTS.md](../../AGENTS.md) - Main AI agent guidance
 - [docs/STANDARDS.md](../../docs/STANDARDS.md) - Coding standards

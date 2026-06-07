@@ -136,7 +136,7 @@ o catálogo `.agents/docs/` em sincronia com o que existe em disco.
 
 ## 5. Ofereça os addons opcionais
 
-Após a base, enumere os três addons e ofereça cada um como uma escolha explícita. Um repositório é
+Após a base, enumere os quatro addons (devcontainer, Dailybot, dependency-upgrade, design-system) e ofereça cada um como uma escolha explícita. Um repositório é
 totalmente conforme com **zero** addons — nunca os instale automaticamente.
 
 - **Suporte a devcontainer** — um dev container reproduzível e isolado com auth de CLI de IA persistente.

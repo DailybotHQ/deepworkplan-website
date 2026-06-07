@@ -42,8 +42,8 @@ per piani e bozze. Nulla è basato su template; tutto è adattato al Suo reposit
 ### 3. Faccia evolvere il kit e accetti gli addon
 
 Usi `/skill-create` e `/agent-create` (la sub-skill author) per far crescere skill, agenti e comandi
-adatti allo stack. L’onboarding offre anche tre addon opt-in — devcontainer, Dailybot e
-dependency-upgrade — che accetta solo quando sono pertinenti. Un repo è pienamente conforme con zero addon.
+adatti allo stack. L’onboarding offre anche quattro addon opt-in — devcontainer, Dailybot,
+dependency-upgrade e design-system — che accetta solo quando sono pertinenti. Un repo è pienamente conforme con zero addon.
 
 ### 4. Pianifichi ed esegua
 

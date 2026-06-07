@@ -23,7 +23,7 @@ A DWP-conformant repository MUST satisfy all of the following. Every artifact MU
 5. **A gitignored `.dwp/` workspace.** The repository MUST contain a `.dwp/` directory with `plans/` and `drafts/`, and `.dwp/` MUST be gitignored. A `tmp/` scratch space SHOULD exist and SHOULD be gitignored.
 6. **The methodology skill is resolvable.** The Deep Work Plan skill MUST be installed or referenced such that an agent in the repository can invoke its sub-skills.
 
-A repository is **fully conformant with zero addons**. Addons (devcontainer, Dailybot, dependency-upgrade) are opt-in and MUST NOT be required for conformance.
+A repository is **fully conformant with zero addons**. Addons (devcontainer, Dailybot, dependency-upgrade, design-system) are opt-in and MUST NOT be required for conformance.
 
 ## A well-formed plan
 
