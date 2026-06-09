@@ -11,7 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Especificación de DWP
 
-**Versión 1.1. Estado: estable.** Este documento es la especificación normativa de la metodología Deep Work Plan (DWP). Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
+**Versión 1.2. Estado: estable.** Este documento es la especificación normativa de la metodología Deep Work Plan (DWP). Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
+
+> **Aditivo en v1.2.** Cuatro capacidades aditivas, sin cambios rupturistas: (1) la **capa de estado del plan legible por máquina** (`manifest.json` + `state.json`, véase [Estado del plan](/spec/plan-state)); (2) **niveles de rigor proporcional** (micro / standard / deep, véase [Rigor proporcional](#proportional-rigor)); (3) la **sección Delta** opcional en la anatomía de tarea para cambios de comportamiento en proyectos brownfield; y (4) el **Protocolo de Reanudación DWP** se eleva a un ritual nombrado y citable de seis pasos. Los planes v1.1 existentes siguen siendo conformes.
 
 ## Definición
 
@@ -26,6 +28,8 @@ Un plan DEBE ser un directorio bajo `.dwp/plans/` llamado `PLAN_<slug>/`. El dir
 - `README.md`: resumen del plan, objetivo, tabla de tareas y estado.
 - Un archivo por tarea, con el nombre `<n>.task_<slug>.md`.
 - `PROGRESS.md`: un registro continuo de la ejecución.
+
+Un plan PUEDE llevar adicionalmente la capa de estado legible por máquina: `manifest.json` (identidad estática, escrito una vez en la materialización) y `state.json` (estado de ejecución activo por tarea). La capa de estado es RECOMENDADA para planes nuevos y REQUERIDA para la ejecución desatendida y para espacios de trabajo de agente sin git. Véase [Estado del plan](/spec/plan-state).
 
 ## Anatomía de la tarea
 
@@ -43,6 +47,18 @@ Cada archivo de tarea DEBE contener estas nueve secciones, en orden:
 8. **Riesgos**: qué podría salir mal y sus mitigaciones.
 9. **Finalización y registro**: un marcador de estado más notas cronológicas.
 
+Una tarea PUEDE incluir adicionalmente una **sección Delta** (RECOMENDADA para cambios de comportamiento en proyectos brownfield — véase más abajo) y una **sección de Reversión** (RECOMENDADA para migraciones, cambios de infraestructura o despliegues).
+
+### La sección Delta (cambios brownfield)
+
+La mayor parte del trabajo real modifica el comportamiento existente en lugar de crear comportamiento nuevo. Una tarea que cambia el funcionamiento de un sistema existente DEBERÍA llevar una **sección Delta** que describa el cambio como un contrato explícito de antes/después, usando tres encabezados de lista:
+
+- **ADDED** — comportamiento que existe después de la tarea y no existía antes.
+- **MODIFIED** — comportamiento que existe en ambos, expresado como `was: … → now: …`.
+- **REMOVED** — comportamiento que existía antes y desaparece intencionalmente después.
+
+Cada entrada DEBE ser comportamiento observable — la respuesta de un endpoint, un indicador CLI, un estado de UI, un valor por defecto — no un detalle de implementación. La sección Delta es el diff del revisor a nivel de comportamiento: los criterios de aceptación verifican las entradas ADDED/MODIFIED, y las entradas REMOVED son la licencia explícita para eliminar. Todo lo que no figure como REMOVED DEBE seguir funcionando, y la puerta de validación de la tarea (las pruebas existentes siguen en verde) es lo que lo garantiza.
+
 ## Puertas de validación y pruebas
 
 La validación es la puerta que convierte una afirmación de finalización en evidencia de ella: una tarea NO DEBE marcarse como completada hasta que cada comando de su sección de Validación se haya ejecutado y haya pasado. Las pruebas son una parte de primera clase de esta puerta, no un añadido opcional: son lo que hace que el código que entrega un plan sea fiable y verificable.
@@ -54,6 +70,27 @@ Cuando una tarea agrega nueva funcionalidad central o cambia de forma sustancial
 - Las pruebas existentes DEBEN seguir en verde. Un cambio que rompa una prueba que cubre el código afectado DEBE actualizar esa prueba al nuevo comportamiento previsto; NO DEBE eliminar, omitir ni debilitar una prueba solo para forzar que la puerta pase.
 
 Las tareas de pura documentación, configuración o investigación están exentas de crear pruebas, pero aun así DEBEN ejecutar la puerta de validación que defina el repositorio. La profundidad de las pruebas es proporcional al tamaño del cambio y a la madurez del repositorio. Cuando un repositorio no tiene ninguna cadena de herramientas de pruebas o de linter, el agente NO DEBE omitir en silencio esta disciplina: se apoya en la cadena de herramientas propuesta durante la incorporación (consulta [Conformidad](/spec)).
+
+## Protocolo de finalización de tarea
+
+Tras pasar la validación y antes de avanzar a la siguiente tarea, el agente DEBE, en orden: (1) marcar la tarea `[x]` en el README del plan; (2) incrementar el contador de estado del plan; (3) rellenar la sección Finalización y Registro de la tarea sin valores de marcador de posición; (4) añadir una entrada de 3-5 puntos en `PROGRESS.md`; (5) hacer commit (cuando el plan hace commits) con el formato `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) cuando el plan lleva la capa de estado, reescribir `state.json` de forma atómica — tarea `completed`, registros de puertas, registro de resultados, hash del commit.
+
+Los seis pasos forman una transacción lógica. Un agente interrumpido a mitad del protocolo NO DEBE comenzar la siguiente tarea — debe terminar o deshacer la finalización parcial primero.
+
+## El protocolo de reanudación DWP
+
+La reanudación DEBE ser posible únicamente a partir de los archivos del plan y del registro git, sin estado externo. En un workspace sin git — véase [Arquetipos](/spec/archetypes) §3 — el `state.json` del plan es REQUERIDO y sustituye al registro git.
+
+Un agente que reanuda — una sesión nueva, un agente diferente, un turno programado de un demonio o una sesión en la nube que despierta — DEBE realizar este ritual, en orden:
+
+1. **Reanclar.** Leer el README del plan: objetivo, directrices globales, la lista de tareas.
+2. **Localizar el punto de control.** Encontrar la primera tarea sin marcar en el README; leer el registro git y el estado de git (o el `checkpoint` de `state.json` donde git está ausente).
+3. **Reconciliar el estado.** Donde exista `state.json`, compararlo con las casillas del README; en caso de desincronización, regenerarlo desde el Markdown antes de continuar.
+4. **Inspeccionar la costura.** Leer la Finalización y Registro de la tarea del punto de reanudación y la última entrada de `PROGRESS.md` — el último terreno verificado de la sesión anterior.
+5. **Prueba de humo.** Ejecutar la validación permanente más barata del repositorio para confirmar que el mundo sigue funcionando antes de construir sobre él. Una prueba de humo fallida se investiga primero, no se construye sobre ella.
+6. **Continuar atómicamente.** Ejecutar exactamente la siguiente tarea; no avanzar por lotes.
+
+El agente DEBE confiar en las marcas completadas (`[x]`) y NO DEBE volver a validar las tareas completadas a menos que el usuario lo solicite explícitamente o la prueba de humo falle de un modo que implique a una tarea completada.
 
 ## El ciclo de ejecución
 
@@ -72,6 +109,28 @@ DWP define cinco operaciones:
 <OutputWorkspace lang="es" class="not-prose my-10" />
 
 Todos los artefactos de DWP DEBEN vivir bajo un directorio `.dwp/` ignorado por git en la raíz del repositorio.
+
+## Estado del plan legible por máquina
+
+Un plan PUEDE llevar la capa de estado legible por máquina — `manifest.json` (identidad estática) y `state.json` (estado activo por tarea, registros de puertas de validación, registros de resultados, punto de control, estado de bloqueo). El plan en Markdown sigue siendo la fuente de verdad; la capa JSON es una proyección derivada, regenerada en los puntos de protocolo y reconciliada en la reanudación.
+
+La capa de estado es RECOMENDADA para planes nuevos, REQUERIDA para la ejecución desatendida y REQUERIDA para espacios de trabajo de agente sin git. Véase la definición normativa completa en [Estado del plan](/spec/plan-state).
+
+## Rigor proporcional
+
+El rigor DEBE ser proporcional al trabajo. La ceremonia en cambios triviales es un fallo de la metodología, no seguridad adicional. Cada pieza de trabajo pertenece exactamente a un nivel:
+
+| Nivel | Cuándo | Forma |
+|-------|--------|-------|
+| **micro** | Un único cambio atómico: una preocupación, aproximadamente una sesión, sin coordinación. Una corrección de error, un cambio de texto, un ajuste de configuración. | Sin carpeta de plan. El agente declara el objetivo, los criterios de aceptación y la puerta de validación en línea en la conversación, ejecuta, valida, hace commit. |
+| **standard** | Trabajo de múltiples pasos con alcance real: una funcionalidad, una refactorización, una migración dentro de un repositorio. El nivel por defecto. | Un plan completo: carpeta de plan, tareas de nueve secciones, tareas finales obligatorias. |
+| **deep** | Trabajo de largo alcance que abarca grupos paralelos, repositorios hijos o múltiples sesiones desatendidas. | Un plan estándar más capacidades de orquestador o agentes en equipo, y la capa de estado. |
+
+Un agente al que se le pida crear un plan para trabajo de nivel micro DEBE indicar que un plan es desproporcionado y ofrecer la forma en línea en su lugar. NO DEBE crearse una carpeta de plan para un cambio trivial de un solo archivo.
+
+El trabajo de nivel micro mantiene los elementos no negociables: un objetivo explícito, una puerta de validación que se ejecuta y pasa, y disciplina de pruebas para cambios de comportamiento. El nivel cambia el empaquetado, nunca las puertas.
+
+Cuando el alcance crece a mitad del camino — una tarea micro descubre alcance real, un plan estándar surge en subrepositorios — el agente DEBE detenerse y promover el trabajo al siguiente nivel en lugar de estirar el actual.
 
 ## Versionado
 

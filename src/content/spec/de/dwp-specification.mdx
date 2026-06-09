@@ -11,7 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP-Spezifikation
 
-**Version 1.1. Status: Stabil.** Dieses Dokument ist die normative Spezifikation für die Deep Work Plan (DWP) Methodik. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
+**Version 1.2. Status: Stabil.** Dieses Dokument ist die normative Spezifikation für die Deep Work Plan (DWP) Methodik. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
+
+> **Additiv in v1.2.** Vier additive Fähigkeiten, keine Breaking Changes: (1) die **maschinenlesbare Plan-Zustandsschicht** (`manifest.json` + `state.json`, siehe [Plan-Zustand](/spec/plan-state)); (2) **proportionale Rigor-Stufen** (micro / standard / deep, siehe [Proportionaler Rigor](#proportional-rigor)); (3) der optionale **Delta-Abschnitt** in der Aufgaben-Anatomie für Brownfield-Verhaltensänderungen; und (4) das **DWP-Wiederaufnahme-Protokoll** wird zu einem benannten, zitierbaren sechsstufigen Ritual befördert. Bestehende v1.1-Pläne bleiben konform.
 
 ## Definition
 
@@ -27,6 +29,8 @@ Ein Plan MUSS ein Verzeichnis unter `.dwp/plans/` mit dem Namen `PLAN_<slug>/` s
 - Eine Datei je Aufgabe, benannt `<n>.task_<slug>.md`.
 - `PROGRESS.md` — ein laufendes Protokoll der Ausführung.
 
+Ein Plan KANN zusätzlich die maschinenlesbare Zustandsschicht tragen: `manifest.json` (statische Identität, einmal bei der Materialisierung geschrieben) und `state.json` (lebendiger aufgabenbezogener Ausführungszustand). Die Zustandsschicht ist für neue Pläne EMPFOHLEN und für unbeaufsichtigte Ausführung sowie für Agenten-Arbeitsbereiche ohne git ERFORDERLICH. Siehe [Plan-Zustand](/spec/plan-state).
+
 ## Aufgaben-Anatomie
 
 <TaskAnatomy lang="en" class="not-prose my-10" />
@@ -36,12 +40,24 @@ Jede Aufgabendatei MUSS diese neun Abschnitte enthalten, in dieser Reihenfolge:
 1. **Goal** — eine Formulierung in einem Absatz, was die Aufgabe erreicht.
 2. **Context** — Hintergrund, Links und warum diese Aufgabe existiert.
 3. **Steps** — geordnete, konkrete auszuführende Handlungen.
-4. **Acceptance criteria** — eine Checkliste von Bedingungen, die „erledigt“ definieren.
+4. **Acceptance criteria** — eine Checkliste von Bedingungen, die „erledigt" definieren.
 5. **Validation** — Befehle oder Tests, die zur Verifizierung auszuführen sind.
 6. **Files** — Pfade, die voraussichtlich erstellt oder geändert werden.
 7. **Dependencies** — andere Aufgaben oder externe Voraussetzungen.
 8. **Risks** — was schiefgehen könnte und Gegenmaßnahmen.
 9. **Completion & Log** — eine Statusmarkierung plus chronologische Notizen.
+
+Eine Aufgabe KANN zusätzlich einen **Delta-Abschnitt** enthalten (EMPFOHLEN für Brownfield-Verhaltensänderungen — siehe unten) sowie einen **Rollback-Abschnitt** (EMPFOHLEN für Migrationen, Infrastrukturänderungen oder Deployments).
+
+### Der Delta-Abschnitt (Brownfield-Änderungen)
+
+Die meisten reale Arbeit verändert bestehendes Verhalten, anstatt neues zu schaffen. Eine Aufgabe, die das Verhalten eines bestehenden Systems ändert, SOLLTE einen **Delta-Abschnitt** tragen, der die Änderung als expliziten Vorher/Nachher-Vertrag beschreibt, unter Verwendung von drei Listenüberschriften:
+
+- **ADDED** — Verhalten, das nach der Aufgabe existiert und vorher nicht existierte.
+- **MODIFIED** — Verhalten, das in beiden Zuständen existiert, dargestellt als `was: … → now: …`.
+- **REMOVED** — Verhalten, das vorher existierte und danach absichtlich nicht mehr vorhanden ist.
+
+Jeder Eintrag MUSS beobachtbares Verhalten sein — die Antwort eines Endpunkts, ein CLI-Flag, ein UI-Zustand, ein Standardwert — kein Implementierungsdetail. Der Delta-Abschnitt ist das Diff des Reviewers auf Verhaltensebene: Akzeptanzkriterien verifizieren die ADDED/MODIFIED-Einträge, und die REMOVED-Einträge sind die explizite Erlaubnis zum Löschen. Alles, was nicht als REMOVED aufgeführt ist, MUSS weiterhin funktionieren, und das Validierungs-Gate der Aufgabe (bestehende Tests bleiben grün) ist das, was dies durchsetzt.
 
 ## Validierungs-Gates und Tests
 
@@ -50,10 +66,31 @@ Die Validierung ist das Gate, das eine Behauptung des Abschlusses in einen Beleg
 Wenn eine Aufgabe neue Kernfunktionalität hinzufügt oder bestehendes Verhalten wesentlich ändert:
 
 - Ihre **Akzeptanzkriterien** MÜSSEN automatisierte Testabdeckung für das neue oder geänderte Verhalten umfassen (den Happy Path plus die wesentlichen Rand- und Fehlerfälle), entsprechend der Test-Konvention und der Abdeckungserwartung des Repositorys.
-- Ihre **Validierung** MUSS die Tests des Repositorys zusammen mit seinen Lint-, Typprüfungs- und Formatprüfungen ausführen — die vollständige Code-Qualitätsprüfung, die das Repository definiert — nicht den Build allein. „Es baut“ ist kein hinreichendes Gate für eine Verhaltensänderung.
+- Ihre **Validierung** MUSS die Tests des Repositorys zusammen mit seinen Lint-, Typprüfungs- und Formatprüfungen ausführen — die vollständige Code-Qualitätsprüfung, die das Repository definiert — nicht den Build allein. „Es baut" ist kein hinreichendes Gate für eine Verhaltensänderung.
 - Bestehende Tests MÜSSEN grün bleiben. Eine Änderung, die einen Test bricht, der den betroffenen Code abdeckt, MUSS diesen Test an das beabsichtigte neue Verhalten anpassen; sie DARF NICHT einen Test löschen, überspringen oder abschwächen, nur um das Gate zum Bestehen zu zwingen.
 
 Reine Dokumentations-, Konfigurations- oder Recherche-Aufgaben sind von der Erstellung von Tests befreit, MÜSSEN aber dennoch jenes Validierungs-Gate ausführen, das das Repository definiert. Die Tiefe des Testens ist proportional zur Größe der Änderung und zur Reife des Repositorys. Wo ein Repository überhaupt keine Test- oder Lint-Toolchain hat, DARF der Agent diese Disziplin NICHT stillschweigend überspringen — er stützt sich auf die während des Onboardings vorgeschlagene Toolchain (siehe [Konformität](/spec)).
+
+## Aufgabenabschlussprotokoll
+
+Nach dem Bestehen der Validierung und vor dem Weitergehen zur nächsten Aufgabe MUSS der Agent der Reihe nach: (1) die Aufgabe in der Plan-README mit `[x]` markieren; (2) den Planstatuszähler erhöhen; (3) den Completion-&-Log-Abschnitt der Aufgabe ohne Platzhalterwerte ausfüllen; (4) einen 3–5-Punkte-Eintrag zu `PROGRESS.md` hinzufügen; (5) committen (wo der Plan committet) im Format `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) wo der Plan die Zustandsschicht trägt, `state.json` atomar neu schreiben — Aufgabe `completed`, Gate-Einträge, Ergebnis-Eintrag, Commit-Hash.
+
+Die sechs Schritte bilden eine logische Transaktion. Ein Agent, der mitten im Protokoll unterbrochen wird, DARF NICHT mit der nächsten Aufgabe beginnen — er muss den partiellen Abschluss erst fertigstellen oder rückgängig machen.
+
+## Das DWP-Wiederaufnahme-Protokoll
+
+Die Wiederaufnahme MUSS allein aus den Dateien des Plans plus dem git-Protokoll möglich sein, ohne externen Zustand. In einem Arbeitsbereich ohne git — siehe [Archetypen](/spec/archetypes) §3 — ist `state.json` des Plans ERFORDERLICH und tritt an die Stelle des git-Protokolls.
+
+Ein wiederaufnehmender Agent — eine neue Sitzung, ein anderer Agent, ein geplanter Daemon-Turn oder eine aufwachende Cloud-Sitzung — MUSS dieses Ritual in der angegebenen Reihenfolge durchführen:
+
+1. **Neu verankern.** Den Plan-README lesen: Ziel, globale Richtlinien, die Aufgabenliste.
+2. **Den Checkpoint lokalisieren.** Die erste nicht markierte Aufgabe im README finden; das git-Protokoll und den git-Status lesen (oder `state.json`s `checkpoint`, wo git nicht vorhanden ist).
+3. **Zustand abgleichen.** Wo `state.json` existiert, gegen die README-Checkboxen abgleichen; bei Desync vor dem Fortfahren aus dem Markdown neu erzeugen.
+4. **Die Naht prüfen.** Den Completion-&-Log-Abschnitt der Wiederaufnahme-Aufgabe und den letzten `PROGRESS.md`-Eintrag lesen — den letzten verifizierten Stand der vorherigen Sitzung.
+5. **Smoke-Test.** Die günstigste stehende Validierung des Repositorys ausführen, um zu bestätigen, dass die Welt noch funktioniert, bevor darauf aufgebaut wird. Ein fehlschlagender Smoke-Test wird zuerst untersucht, nicht übergangen.
+6. **Atomar fortfahren.** Genau die nächste Aufgabe ausführen; nicht vorausbündeln.
+
+Der Agent MUSS abgeschlossenen (`[x]`) Markierungen vertrauen und DARF abgeschlossene Aufgaben NICHT neu validieren, es sei denn, der Nutzer fordert dies explizit an oder der Smoke-Test schlägt auf eine Weise fehl, die eine abgeschlossene Aufgabe impliziert.
 
 ## Die Ausführungsschleife
 
@@ -72,6 +109,28 @@ DWP definiert fünf Operationen:
 <OutputWorkspace lang="en" class="not-prose my-10" />
 
 Alle DWP-Artefakte MÜSSEN unter einem per gitignore ausgeschlossenen `.dwp/`-Verzeichnis im Repository-Stammverzeichnis leben.
+
+## Maschinenlesbarer Plan-Zustand
+
+Ein Plan KANN die maschinenlesbare Zustandsschicht tragen — `manifest.json` (statische Identität) und `state.json` (lebendiger aufgabenbezogener Zustand, Validierungs-Gate-Einträge, Ergebnis-Einträge, Checkpoint, blockierter Zustand). Der Markdown-Plan bleibt die Quelle der Wahrheit; die JSON-Schicht ist eine abgeleitete Projektion, die bei Protokollpunkten neu erzeugt und bei der Wiederaufnahme abgeglichen wird.
+
+Die Zustandsschicht ist für neue Pläne EMPFOHLEN, für unbeaufsichtigte Ausführung ERFORDERLICH und für Agenten-Arbeitsbereiche ohne git ERFORDERLICH. Siehe die vollständige normative Definition in [Plan-Zustand](/spec/plan-state).
+
+## Proportionaler Rigor
+
+Rigor MUSS proportional zur Arbeit sein. Zeremonie bei trivialen Änderungen ist ein Methodikversagen, keine zusätzliche Sicherheit. Jede Arbeit fällt in genau eine Stufe:
+
+| Stufe | Wann | Form |
+|-------|------|------|
+| **micro** | Eine einzelne atomare Änderung: ein Anliegen, ungefähr eine Sitzung, keine Koordination. Ein Bugfix, eine Textänderung, eine Konfigurationsanpassung. | Kein Plan-Ordner. Der Agent formuliert Ziel, Akzeptanzkriterien und Validierungs-Gate inline im Gespräch, führt aus, validiert, committet. |
+| **standard** | Mehrstufige Arbeit mit realem Umfang: ein Feature, ein Refactoring, eine Migration innerhalb eines Repositorys. Die Standardstufe. | Ein vollständiger Plan: Plan-Ordner, neunteilige Aufgaben, verpflichtende Abschlussaufgaben. |
+| **deep** | Langfristige Arbeit, die parallele Gruppen, untergeordnete Repositorys oder mehrere unbeaufsichtigte Sitzungen umspannt. | Ein Standard-Plan plus Orchestrator- und/oder Team-Agenten-Fähigkeiten sowie die Zustandsschicht. |
+
+Ein Agent, der gebeten wird, einen Plan für Micro-Stufen-Arbeit zu erstellen, MUSS mitteilen, dass ein Plan unverhältnismäßig ist, und stattdessen die Inline-Form anbieten. Ein Plan-Ordner DARF NICHT für eine triviale Einzeldatei-Änderung erstellt werden.
+
+Micro-Stufen-Arbeit hält dennoch die Nicht-Verhandelbaren: ein explizites Ziel, ein Validierungs-Gate, das ausgeführt wird und besteht, sowie Testdisziplin für Verhaltensänderungen. Die Stufe ändert die Verpackung, niemals die Gates.
+
+Wenn der Umfang während der Ausführung wächst — eine Micro-Aufgabe deckt realen Umfang auf, ein Standard-Plan bekommt Sub-Repositorys — MUSS der Agent stoppen und die Arbeit in die nächste Stufe befördern, anstatt die aktuelle zu dehnen.
 
 ## Versionierung
 

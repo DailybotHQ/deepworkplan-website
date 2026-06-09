@@ -11,7 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Đặc tả DWP
 
-**Phiên bản 1.1. Trạng thái: Ổn định.** Tài liệu này là đặc tả quy phạm cho phương pháp luận Deep Work Plan (DWP). Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
+**Phiên bản 1.2. Trạng thái: Ổn định.** Tài liệu này là đặc tả quy phạm cho phương pháp luận Deep Work Plan (DWP). Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
+
+> **Bổ sung trong v1.2.** Bốn năng lực bổ sung, không có thay đổi phá vỡ: (1) **lớp trạng thái kế hoạch có thể đọc bằng máy** (`manifest.json` + `state.json`, xem [Trạng thái kế hoạch](/spec/plan-state)); (2) **các bậc rigor tỷ lệ** (micro / standard / deep, xem [Rigor tỷ lệ](#proportional-rigor)); (3) **phần Delta** tùy chọn trong cấu trúc tác vụ cho các thay đổi hành vi trong codebase hiện có; và (4) **Giao thức Tiếp tục DWP** được nâng cấp thành một nghi lễ sáu bước có thể đặt tên và trích dẫn. Các kế hoạch v1.1 hiện có vẫn tuân thủ.
 
 ## Định nghĩa
 
@@ -26,6 +28,8 @@ Một kế hoạch PHẢI là một thư mục dưới `.dwp/plans/` được đ
 - `README.md` — tổng quan kế hoạch, mục tiêu, bảng tác vụ và trạng thái.
 - Một tệp cho mỗi tác vụ, đặt tên `<n>.task_<slug>.md`.
 - `PROGRESS.md` — một nhật ký chạy của quá trình thực thi.
+
+Một kế hoạch CÓ THỂ (MAY) bổ sung mang lớp trạng thái có thể đọc bằng máy: `manifest.json` (danh tính tĩnh, được ghi một lần khi vật liệu hóa) và `state.json` (trạng thái thực thi trực tiếp theo tác vụ). Lớp trạng thái ĐƯỢC KHUYẾN NGHỊ (RECOMMENDED) cho các kế hoạch mới và BẮT BUỘC (REQUIRED) cho thực thi không có giám sát và cho các không gian làm việc agent không có git. Xem [Trạng thái kế hoạch](/spec/plan-state).
 
 ## Cấu trúc tác vụ
 
@@ -43,6 +47,18 @@ Mỗi tệp tác vụ PHẢI chứa chín phần này, theo thứ tự:
 8. **Risks** — điều gì có thể sai, và các biện pháp giảm thiểu.
 9. **Completion & Log** — một dấu trạng thái cùng các ghi chú theo trình tự thời gian.
 
+Một tác vụ CÓ THỂ bổ sung bao gồm một **phần Delta** (ĐƯỢC KHUYẾN NGHỊ cho các thay đổi hành vi trong codebase hiện có — xem bên dưới) và một **phần Rollback** (ĐƯỢC KHUYẾN NGHỊ cho các lần di chuyển, thay đổi hạ tầng hay triển khai).
+
+### Phần Delta (thay đổi trong codebase hiện có)
+
+Hầu hết công việc thực tế sửa đổi hành vi hiện có thay vì tạo ra hành vi mới. Một tác vụ thay đổi cách một hệ thống hiện có hoạt động NÊN mang một **phần Delta** mô tả sự thay đổi dưới dạng hợp đồng trước/sau rõ ràng, sử dụng ba tiêu đề danh sách:
+
+- **ADDED** — hành vi tồn tại sau tác vụ mà không có trước.
+- **MODIFIED** — hành vi tồn tại trong cả hai, được nêu là `was: … → now: …`.
+- **REMOVED** — hành vi tồn tại trước và được loại bỏ có chủ ý sau.
+
+Mỗi mục PHẢI là hành vi có thể quan sát — phản hồi của một endpoint, một cờ CLI, một trạng thái UI, một giá trị mặc định — không phải một chi tiết triển khai. Phần Delta là diff của người rà soát ở mức hành vi: tiêu chí chấp nhận kiểm chứng các mục ADDED/MODIFIED, và các mục REMOVED là giấy phép rõ ràng để xóa. Bất cứ thứ gì không được liệt kê là REMOVED PHẢI tiếp tục hoạt động, và cổng kiểm chứng của tác vụ (các test hiện có tiếp tục xanh) là thứ thực thi điều đó.
+
 ## Cổng kiểm chứng và test
 
 Kiểm chứng là cổng biến một tuyên bố hoàn tất thành bằng chứng của nó: một tác vụ KHÔNG ĐƯỢC (MUST NOT) bị đánh dấu hoàn tất cho đến khi mọi lệnh trong phần Validation của nó đã chạy và đạt. Test là một phần hạng nhất của cổng này, không phải một thứ tùy chọn đính kèm — chúng là điều làm cho mã mà một kế hoạch xuất ra trở nên đáng tin cậy và kiểm chứng được.
@@ -54,6 +70,27 @@ Khi một tác vụ thêm chức năng lõi mới hoặc thay đổi đáng kể
 - Các test hiện có PHẢI tiếp tục xanh. Một thay đổi làm hỏng một test bao phủ phần mã bị ảnh hưởng PHẢI cập nhật test đó theo hành vi mới dự kiến; nó KHÔNG ĐƯỢC xóa, bỏ qua hay làm suy yếu một test chỉ để ép cổng đạt.
 
 Các tác vụ thuần tài liệu, cấu hình hay nghiên cứu được miễn việc tạo test nhưng vẫn PHẢI chạy bất kỳ cổng kiểm chứng nào mà repository định nghĩa. Độ sâu của việc test tỷ lệ với kích thước của thay đổi và độ trưởng thành của repository. Nơi một repository hoàn toàn không có bộ công cụ test hay lint, agent KHÔNG ĐƯỢC âm thầm bỏ qua kỷ luật này — nó dựa vào bộ công cụ được đề xuất trong quá trình khởi tạo (xem [Tuân thủ](/spec)).
+
+## Giao thức hoàn tất tác vụ
+
+Sau khi vượt qua kiểm chứng và trước khi chuyển sang tác vụ tiếp theo, agent PHẢI, theo thứ tự: (1) đánh dấu tác vụ `[x]` trong README kế hoạch; (2) tăng số đếm trạng thái kế hoạch; (3) điền vào phần Completion & Log của tác vụ mà không có giá trị placeholder; (4) thêm một mục 3–5 gạch đầu dòng vào `PROGRESS.md`; (5) commit (nơi kế hoạch commit) với định dạng `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) nơi kế hoạch mang lớp trạng thái, ghi lại `state.json` nguyên tử — tác vụ `completed`, bản ghi cổng, bản ghi kết quả, băm commit.
+
+Sáu bước tạo thành một giao dịch logic duy nhất. Một agent bị gián đoạn giữa chừng giao thức KHÔNG ĐƯỢC bắt đầu tác vụ tiếp theo — nó phải hoàn tất hoặc hoàn tác việc hoàn tất một phần trước.
+
+## Giao thức tiếp tục DWP
+
+Tiếp tục PHẢI có thể thực hiện được chỉ từ các tệp của kế hoạch cộng với git log, không có trạng thái bên ngoài. Trong một không gian làm việc không có git — xem [Các kiểu hình](/spec/archetypes) §3 — `state.json` của kế hoạch là BẮT BUỘC (REQUIRED) và thay thế cho git log.
+
+Một agent tiếp tục — một phiên mới, một agent khác, một lượt daemon theo lịch, hay một cloud session thức dậy — PHẢI thực hiện nghi lễ này, theo thứ tự:
+
+1. **Tái neo.** Đọc README kế hoạch: mục tiêu, hướng dẫn chung, danh sách tác vụ.
+2. **Định vị điểm kiểm tra.** Tìm tác vụ chưa chọn đầu tiên trong README; đọc git log và git status (hoặc `checkpoint` của `state.json` nơi git vắng mặt).
+3. **Điều hòa trạng thái.** Nơi `state.json` tồn tại, so sánh nó với các ô chọn README; khi desync, tái tạo nó từ markdown trước khi tiếp tục.
+4. **Kiểm tra đường nối.** Đọc Completion & Log của tác vụ điểm tiếp tục và mục `PROGRESS.md` cuối cùng — nền tảng đã xác minh cuối cùng của phiên trước.
+5. **Smoke-test.** Chạy kiểm chứng thường trực rẻ nhất của repository để xác nhận thế giới vẫn hoạt động trước khi xây dựng trên nó. Một smoke test thất bại được điều tra trước, không được xây dựng tiếp.
+6. **Tiếp tục nguyên tử.** Thực thi đúng tác vụ tiếp theo; không gộp nhiều tác vụ.
+
+Agent PHẢI tin vào các dấu đã hoàn tất (`[x]`) và KHÔNG ĐƯỢC tái kiểm chứng các tác vụ đã hoàn tất trừ khi người dùng yêu cầu rõ ràng, hoặc smoke test thất bại theo cách liên quan đến một tác vụ đã hoàn tất.
 
 ## Vòng lặp thực thi
 
@@ -72,6 +109,28 @@ DWP định nghĩa năm thao tác:
 <OutputWorkspace lang="vi" class="not-prose my-10" />
 
 Tất cả thành phần DWP PHẢI sống dưới một thư mục `.dwp/` được gitignore tại gốc repository.
+
+## Trạng thái kế hoạch có thể đọc bằng máy
+
+Một kế hoạch CÓ THỂ mang lớp trạng thái có thể đọc bằng máy — `manifest.json` (danh tính tĩnh) và `state.json` (trạng thái trực tiếp theo tác vụ, bản ghi cổng kiểm chứng, bản ghi kết quả, điểm kiểm tra, trạng thái bị chặn). Kế hoạch markdown vẫn là nguồn chân lý; lớp JSON là một phép chiếu dẫn xuất, được tái tạo tại các điểm giao thức và được điều hòa khi tiếp tục.
+
+Lớp trạng thái ĐƯỢC KHUYẾN NGHỊ cho các kế hoạch mới, BẮT BUỘC cho thực thi không có giám sát, và BẮT BUỘC cho các không gian làm việc agent không có git. Xem định nghĩa quy phạm đầy đủ trong [Trạng thái kế hoạch](/spec/plan-state).
+
+## Rigor tỷ lệ
+
+Rigor PHẢI tỷ lệ với công việc. Nghi lễ trên các thay đổi tầm thường là một lỗi phương pháp luận, không phải sự an toàn thêm. Mọi công việc đều thuộc chính xác một bậc:
+
+| Bậc | Khi nào | Hình thức |
+|-----|---------|-----------|
+| **micro** | Một thay đổi nguyên tử duy nhất: một mối quan tâm, khoảng một buổi làm việc, không cần điều phối. Sửa lỗi, thay đổi nội dung, chỉnh cấu hình. | Không có thư mục kế hoạch. Agent nêu mục tiêu, tiêu chí chấp nhận và cổng kiểm chứng nội tuyến trong cuộc trò chuyện, thực thi, kiểm chứng, commit. |
+| **standard** | Công việc nhiều bước với phạm vi thực sự: một tính năng, một tái cấu trúc, một di chuyển trong một repo. Bậc mặc định. | Một kế hoạch đầy đủ: thư mục kế hoạch, các tác vụ chín phần, các tác vụ cuối bắt buộc. |
+| **deep** | Công việc dài hạn trải dài các nhóm song song, repository con, hoặc nhiều phiên không có giám sát. | Một kế hoạch standard cộng với các năng lực điều phối và/hoặc team-agents, và lớp trạng thái. |
+
+Một agent được yêu cầu tạo kế hoạch cho công việc bậc micro PHẢI nói rằng một kế hoạch là không tương xứng và đề xuất hình thức nội tuyến thay thế. Một thư mục kế hoạch KHÔNG ĐƯỢC tạo cho một thay đổi đơn tệp tầm thường.
+
+Công việc bậc micro vẫn giữ các yếu tố không thể thương lượng: một mục tiêu rõ ràng, một cổng kiểm chứng chạy và đạt, và kỷ luật test cho các thay đổi hành vi. Bậc thay đổi bao bì, không bao giờ thay đổi các cổng.
+
+Khi phạm vi tăng lên giữa chừng — một tác vụ micro khám phá phạm vi thực sự, một kế hoạch standard nảy sinh các sub-repository — agent PHẢI dừng lại và nâng cấp công việc lên bậc tiếp theo thay vì kéo dài bậc hiện tại.
 
 ## Phiên bản hóa
 

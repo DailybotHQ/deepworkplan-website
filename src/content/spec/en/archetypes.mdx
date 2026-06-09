@@ -1,6 +1,6 @@
 ---
 title: Archetypes
-description: "Normative description of DWP repository archetypes: the individual repository and orchestrator hub, the classification heuristic, and how onboarding differs."
+description: "Normative description of DWP repository archetypes: the individual repository, orchestrator hub, and agent workspace, and how onboarding differs for each."
 order: 4
 lang: en
 section: Archetypes
@@ -9,7 +9,9 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 # Archetypes
 
-**Version 1.0.** DWP recognizes two repository archetypes. The archetype determines how an agent onboards and how plans are scoped.
+**Version 1.1.** DWP recognizes three archetypes. The archetype determines how an agent onboards, how plans are scoped, and whether the machine-readable state layer is required.
+
+> **Additive in v1.1.** The **agent workspace** (§3) joins as a third archetype: the long-lived home of an autonomous agent. Git becomes RECOMMENDED rather than assumed. The two v1.0 archetypes are unchanged.
 
 ## Individual repository
 
@@ -32,23 +34,43 @@ Characteristics:
 - Maintains a registry of managed repositories.
 - `.dwp/` workspace at the hub root tracks cross-repository state.
 
+## Agent workspace
+
+An agent workspace is the long-lived working home of an autonomous agent — an OpenClaw workspace, a Hermes service directory, a personal-assistant daemon's data directory, or a cloud agent's persistent volume. It is a workspace, not necessarily a git repository, and its primary product is the agent's ongoing work rather than one codebase.
+
+The insight that makes this archetype possible: **the harness is a workspace, not specifically a repository.** Every harness element the methodology defines for a repository has a direct workspace equivalent:
+
+| Harness element (repository) | Agent workspace equivalent |
+|------------------------------|---------------------------|
+| `AGENTS.md` (rules, quick commands) | The workspace's standing context — `AGENTS.md` itself, or the platform's standing-orders file |
+| `docs/` (durable knowledge) | Workspace knowledge files and memory documents |
+| `.agents/` (skills, agents, commands) | The platform's skill directory — OpenClaw natively scans `<workspace>/.agents/skills/` |
+| `.dwp/` (plans, drafts) | `.dwp/` in the workspace root — unchanged |
+| git log (state, resumability) | `state.json` per plan ([Plan state](/spec/plan-state)), REQUIRED here |
+
+An agent workspace MUST provide `AGENTS.md`, `.agents/`, and `.dwp/` at the workspace root.
+
+**Git is RECOMMENDED, not REQUIRED.** Where git is absent, every plan MUST carry the machine-readable state layer: `state.json`'s checkpoint, gate records, and per-task timestamps carry the recovery information the git log carries in a repository.
+
+Plans in an agent workspace typically run unattended: a scheduled heartbeat or cron turn resumes the open plan via the DWP Resume Protocol, executes the next atomic task, updates the state layer, and yields. The plan — not the session — is the unit of continuity.
+
 ## Classification heuristic
 
 <ArchetypesTree lang="en" class="not-prose my-10" />
 
-An agent SHOULD classify a repository as an orchestrator hub if it finds:
+Classify as an **agent workspace** first, when the target is the working directory of an autonomous agent platform — signals: a platform identity file (such as OpenClaw's `SOUL.md` or `HEARTBEAT.md`), no primary application stack, and content that is predominantly the agent's own state. Any one strong platform signal suffices.
 
-- Multiple nested git repositories or submodules.
-- A registry or manifest of managed repositories.
-- Configuration pointing to external repositories.
+Otherwise, classify as an **orchestrator hub** when a clear majority of the following hold: multiple nested git repositories or submodules; a registry or manifest of managed repositories; configuration pointing to external repositories. Classify as an **individual repository** otherwise — it is the safe default.
 
-Otherwise, treat it as an individual repository.
+When signals are ambiguous, the agent MUST present its assessment and evidence to the user and ask for confirmation before proceeding.
 
 ## Onboarding differences
 
-| Aspect | Individual | Orchestrator |
-|--------|------------|--------------|
-| Scope | This repository | Multiple repositories |
-| Onboarding | Repository structure | Hub registry |
-| Plan target | Local files | Child plans |
-| State | Local `.dwp/` | Cross-repository `.dwp/` |
+| Aspect | Individual | Orchestrator | Agent workspace |
+|--------|------------|--------------|-----------------|
+| Scope | This repository | Multiple repositories | The workspace and its plans |
+| Onboarding | Repository structure | Hub registry | Platform files + workspace conventions |
+| Plan target | Local files | Child plans | Local or external repositories |
+| State | Local `.dwp/` | Cross-repository `.dwp/` | `.dwp/` + `state.json` (REQUIRED without git) |
+| Git | Required | Required | RECOMMENDED |
+| State layer | RECOMMENDED | RECOMMENDED | REQUIRED without git; REQUIRED for unattended runs |

@@ -36,8 +36,7 @@ I sottili slash command delegano alle sub-skill e agli addon:
 
 ### Adapter
 
-Integrazioni sottili per agente per Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
-OpenCode, Windsurf, Cline e Antigravity.
+Integrazioni sottili per agente per Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Windsurf, Cline, Antigravity, OpenClaw, Hermes e agenti cloud/in background (task remote di Claude Code, Codex cloud, agenti di classe Jules). OpenClaw e Hermes sono piattaforme di agenti autonomi che eseguono i piani sotto il profilo di esecuzione non presidiata, guidate da heartbeat o scheduling cron.
 
 ### Preset di onboarding
 

@@ -11,11 +11,13 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP spesifikasyonu
 
-**Sürüm 1.1. Durum: Kararlı.** Bu belge, Deep Work Plan (DWP) metodolojisinin normatif spesifikasyonudur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119’da açıklandığı şekilde yorumlanacaktır.
+**Sürüm 1.2. Durum: Kararlı.** Bu belge, Deep Work Plan (DWP) metodolojisinin normatif spesifikasyonudur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
+
+> **v1.2'de eklemeli.** Dört eklemeli yetenek, kırıcı değişiklik yok: (1) **makine tarafından okunabilir plan durum katmanı** (`manifest.json` + `state.json`, bkz. [Plan durumu](/spec/plan-state)); (2) **orantılı titizlik kademeleri** (micro / standard / deep, bkz. [Orantılı titizlik](#proportional-rigor)); (3) görev anatomisinde kahverengi alan davranış değişiklikleri için isteğe bağlı **Delta bölümü**; ve (4) **DWP Resume Protocol**, adlandırılmış, atıfta bulunulabilir altı adımlı bir ritüele yükseltilmiştir. Mevcut v1.1 planları uyumlu olmaya devam eder.
 
 ## Tanım
 
-Bir Deep Work Plan, karmaşık bir mühendislik görevini ardışık, gözden geçirilebilir iş birimlerine ayrılmış biçimde tanımlayan, yapılandırılmış, yalnızca Markdown’dan oluşan bir yapıdır; otonom çalışan yapay zeka kodlama ajanları tarafından oluşturulmak, yürütülmek ve sürdürülmek üzere tasarlanmıştır.
+Bir Deep Work Plan, karmaşık bir mühendislik görevini ardışık, gözden geçirilebilir iş birimlerine ayrılmış biçimde tanımlayan, yapılandırılmış, yalnızca Markdown'dan oluşan bir yapıdır; otonom çalışan yapay zeka kodlama ajanları tarafından oluşturulmak, yürütülmek ve sürdürülmek üzere tasarlanmıştır.
 
 DWP spec odaklıdır: plan spesifikasyondur ve ajanlar, doğaçlama yapmak yerine onun açık kabul kriterlerine ve doğrulama kapılarına karşı çalışMAK ZORUNDADIR. Bir sohbet dökümü değil, spesifikasyon kalıcı doğruluk kaynağıdır; böylece iş, oturumlar ve ajanlar arasında doğrulanabilir ve sürdürülebilirdir. Bu aynı zamanda taşınabilir hale getirilmiş harness mühendisliğidir: bir ajanı güvenilir kılan bağlam, kontrol döngüsü, güvenlik bariyerleri ve sürdürülebilir durum, deponun kendisine düz Markdown olarak kurulur; böylece uyumlu herhangi bir ajan, araca özgü bir çerçeve olmadan depoyu pilotlayABİLİR.
 
@@ -27,6 +29,8 @@ Bir plan, `.dwp/plans/` altında `PLAN_<slug>/` olarak adlandırılmış bir diz
 - Görev başına bir dosya, `<n>.task_<slug>.md` olarak adlandırılır.
 - `PROGRESS.md` — yürütmenin çalışan bir günlüğü.
 
+Bir plan ek olarak makine tarafından okunabilir durum katmanını TASIYABİLİR: `manifest.json` (somutlaştırma sırasında bir kez yazılan statik kimlik) ve `state.json` (görev bazında canlı yürütme durumu). Durum katmanı yeni planlar için ÖNERİLİR ve gözetimsiz yürütme ile git içermeyen ajan çalışma alanları için ZORUNLUDUR. Bkz. [Plan durumu](/spec/plan-state).
+
 ## Görev anatomisi
 
 <TaskAnatomy lang="tr" class="not-prose my-10" />
@@ -36,12 +40,24 @@ Her görev dosyası, sırasıyla bu dokuz bölümü İÇERMELİDİR:
 1. **Hedef** — görevin neyi başardığına dair tek paragraflık bir bildirim.
 2. **Bağlam** — arka plan, bağlantılar ve bu görevin neden var olduğu.
 3. **Adımlar** — gerçekleştirilecek sıralı, somut eylemler.
-4. **Kabul kriterleri** — “bitti”yi tanımlayan koşulların bir kontrol listesi.
+4. **Kabul kriterleri** — "bitti"yi tanımlayan koşulların bir kontrol listesi.
 5. **Doğrulama** — doğrulamak için çalıştırılacak komutlar veya testler.
 6. **Dosyalar** — oluşturulması veya değiştirilmesi beklenen yollar.
 7. **Bağımlılıklar** — diğer görevler veya harici ön koşullar.
 8. **Riskler** — neyin ters gidebileceği ve azaltıcı önlemler.
 9. **Tamamlama ve Günlük** — bir durum işareti ile kronolojik notlar.
+
+Bir görev ek olarak bir **Delta bölümü** (kahverengi alan davranış değişiklikleri için ÖNERİLİR — aşağıya bakın) ve bir **Geri alma bölümü** (geçişler, altyapı değişiklikleri veya dağıtımlar için ÖNERİLİR) İÇEREBİLİR.
+
+### Delta bölümü (kahverengi alan değişiklikleri)
+
+Gerçek çalışmanın büyük çoğunluğu, yeni davranış oluşturmak yerine mevcut davranışı değiştirir. Mevcut bir sistemin nasıl davrandığını değiştiren bir görev, değişikliği açık bir önce/sonra sözleşmesi olarak tanımlayan bir **Delta bölümü** TAŞIMALIDIR; üç liste başlığı kullanarak:
+
+- **ADDED** — görevden sonra var olan ve önceden olmayan davranış.
+- **MODIFIED** — her ikisinde de var olan davranış, `was: … → now: …` biçiminde belirtilir.
+- **REMOVED** — önceden var olan ve kasıtlı olarak sonradan kaldırılan davranış.
+
+Her girdi, bir uç noktanın yanıtı, CLI bayrağı, UI durumu, varsayılan değer gibi gözlemlenebilir bir davranış OLMALIDIR — bir uygulama ayrıntısı değil. Delta bölümü, davranış düzeyindeki gözden geçirenin farkıdır: kabul kriterleri ADDED/MODIFIED girdilerini doğrular ve REMOVED girdileri açık silme lisansıdır. REMOVED olarak listelenmeyen hiçbir şey çalışmaya devam ETMEK ZORUNDADIR; görevin doğrulama kapısı (mevcut testlerin yeşil kalması) bunu zorunlu kılar.
 
 ## Doğrulama kapıları ve testler
 
@@ -50,10 +66,31 @@ Doğrulama, bir tamamlanma iddiasını onun kanıtına dönüştüren kapıdır:
 Bir görev yeni çekirdek işlevsellik eklediğinde veya mevcut davranışı önemli ölçüde değiştirdiğinde:
 
 - **Kabul kriterleri**, yeni veya değişen davranış için otomatik test kapsamını (mutlu yol ile birlikte anlamlı uç ve hata durumları), deponun test kuralını ve kapsam beklentisini izleyerek İÇERMELİDİR.
-- **Doğrulaması**, deponun testlerini lint, tür denetimi ve biçim denetimleriyle birlikte — deponun tanımladığı tam kod-kalitesi denetimini — çalıştırMALIDIR, yalnızca derlemeyi değil. Bir davranış değişikliği için “Derleniyor” yeterli bir kapı değildir.
+- **Doğrulaması**, deponun testlerini lint, tür denetimi ve biçim denetimleriyle birlikte — deponun tanımladığı tam kod-kalitesi denetimini — çalıştırMALIDIR, yalnızca derlemeyi değil. Bir davranış değişikliği için "Derleniyor" yeterli bir kapı değildir.
 - Mevcut testler yeşil kalMALIDIR. Etkilenen kodu kapsayan bir testi bozan bir değişiklik, o testi amaçlanan yeni davranışa güncelleMELİDİR; kapının geçmesini zorlamak için bir testi silMEMELİ, atlaMAMALI veya zayıflatMAMALIDIR.
 
 Yalnızca-dokümantasyon, yapılandırma veya araştırma görevleri test oluşturmaktan muaftır ancak yine de deponun tanımladığı doğrulama kapısını çalıştırMALIDIR. Test etmenin derinliği, değişikliğin boyutuyla ve deponun olgunluğuyla orantılıdır. Bir deponun hiç test veya lint araç zinciri olmadığında, ajan bu disiplini sessizce atlaMAMALIDIR — kuruluma alma sırasında önerilen araç zincirine dayanır (bkz. [Uyumluluk](/spec)).
+
+## Görev tamamlama protokolü
+
+Doğrulamayı geçtikten ve bir sonraki göreve geçmeden önce, ajan sırasıyla ŞUNLARI YAPMAK ZORUNDADIR: (1) görevin plan README'sindeki kutusunu `[x]` olarak işaretle; (2) plan durum sayısını artır; (3) görevin Tamamlama ve Günlük bölümünü yer tutucu değer bırakmadan doldur; (4) `PROGRESS.md`'ye 3–5 maddelik bir girdi ekle; (5) planın commit attığı yerlerde `{type}({scope}): {description} — Task {N} of PLAN_{name}` biçiminde commit at; (6) plan durum katmanını taşıyorsa, `state.json`'u atomik olarak yeniden yaz — görev `completed`, kapı kayıtları, sonuç kaydı, commit karması.
+
+Altı adım tek bir mantıksal işlem oluşturur. Protokol ortasında kesintiye uğrayan bir ajan, bir sonraki görevi BAŞLATMAMALIdır — önce kısmi tamamlamayı bitirmeli ya da geri almalıdır.
+
+## DWP devam protokolü
+
+Devam, yalnızca planın dosyaları ve git günlüğü ile herhangi bir harici durum olmadan mümkün OLMAK ZORUNDADIR. Git içermeyen bir çalışma alanında — bkz. [Arketipler](/spec/archetypes) §3 — planın `state.json`'u ZORUNLUDUR ve git günlüğünün yerini alır.
+
+Devam eden bir ajan — yeni bir oturum, farklı bir ajan, zamanlanmış daemon dönüşü veya uyanıklık bulut oturumu — bu ritüeli sırasıyla GERÇEKLEŞTIRMEK ZORUNDADIR:
+
+1. **Yeniden sabitle.** Plan README'sini oku: hedef, genel yönergeler, görev listesi.
+2. **Kontrol noktasını bul.** README'deki ilk işaretsiz görevi bul; git günlüğünü ve git durumunu (veya git yoksa `state.json`'un `checkpoint`'ini) oku.
+3. **Durumu uzlaştır.** `state.json` varsa, README onay kutularıyla karşılaştır; desenkronizasyonda, devam etmeden önce Markdown'dan yeniden oluştur.
+4. **Ek yeri incele.** Devam noktası görevinin Tamamlama ve Günlük bölümünü ve son `PROGRESS.md` girdisini oku — önceki oturumun son doğrulanmış zemini.
+5. **Duman testi.** Üzerine inşa etmeden önce dünyanın hâlâ çalıştığını doğrulamak için deponun en ucuz yerleşik doğrulamasını çalıştır. Başarısız bir duman testi önce araştırılır, üzerine inşa edilmez.
+6. **Atomik olarak devam et.** Tam olarak sonraki görevi yürüt; ilerisini toplu işleme alma.
+
+Ajan, tamamlandı (`[x]`) işaretlerine GÜVENMEK ZORUNDADIR ve tamamlanmış görevleri kullanıcı açıkça istemediği ya da duman testi tamamlanmış bir görevi ima eden şekilde başarısız olmadığı sürece YENİDEN DOĞRULAMAMALIdır.
 
 ## Yürütme döngüsü
 
@@ -71,7 +108,29 @@ DWP beş işlem tanımlar:
 
 <OutputWorkspace lang="tr" class="not-prose my-10" />
 
-Tüm DWP yapıları, depo kökündeki gitignore’lanmış bir `.dwp/` dizini altında YAŞAMALIDIR.
+Tüm DWP yapıları, depo kökündeki gitignore'lanmış bir `.dwp/` dizini altında YAŞAMALIDIR.
+
+## Makine tarafından okunabilir plan durumu
+
+Bir plan, makine tarafından okunabilir durum katmanını TASIYABİLİR — `manifest.json` (statik kimlik) ve `state.json` (görev bazında canlı durum, doğrulama kapısı kayıtları, sonuç kayıtları, kontrol noktası, engellenmiş durum). Markdown planı doğruluk kaynağı olmaya devam eder; JSON katmanı, protokol noktalarında yeniden oluşturulan ve devamda uzlaştırılan türetilmiş bir projeksiyondur.
+
+Durum katmanı yeni planlar için ÖNERİLİR, gözetimsiz yürütme için ZORUNLUDUR ve git içermeyen ajan çalışma alanları için ZORUNLUDUR. Tam normatif tanım için bkz. [Plan durumu](/spec/plan-state).
+
+## Orantılı titizlik
+
+Titizlik, çalışmayla orantılı OLMAK ZORUNDADIR. Önemsiz değişiklikler için tören, metodoloji başarısızlığıdır, ekstra güvenlik değil. Her çalışma parçası tam olarak bir kademeye girer:
+
+| Kademe | Ne zaman | Biçim |
+|--------|----------|-------|
+| **micro** | Tek atomik değişiklik: bir endişe, kabaca bir oturum, koordinasyon yok. Hata düzeltme, metin değişikliği, yapılandırma ayarı. | Plan klasörü yok. Ajan, hedefi, kabul kriterlerini ve doğrulama kapısını konuşmada satır içi belirtir, yürütür, doğrular, commit atar. |
+| **standard** | Gerçek kapsamlı çok adımlı çalışma: bir özellik, bir yeniden düzenleme, tek repo içinde bir geçiş. Varsayılan kademe. | Tam plan: plan klasörü, dokuz bölümlü görevler, zorunlu son görevler. |
+| **deep** | Paralel gruplar, alt depolar veya birden çok gözetimsiz oturum kapsayan uzun vadeli çalışma. | Standart plan artı orkestratör ve/veya ekip-ajanları yetenekleri ve durum katmanı. |
+
+Micro-kademe çalışması için plan oluşturması istenen bir ajan, bir planın orantısız olduğunu SÖYLEMELİ ve bunun yerine satır içi formu ÖNERMELİDİR. Önemsiz tek dosya değişikliği için plan klasörü OLUŞTURULMAMALIDIR.
+
+Micro-kademe çalışması hâlâ değiştirilemezleri korur: açık bir hedef, çalışan ve geçen bir doğrulama kapısı ve davranış değişiklikleri için test disiplini. Kademe paketi değiştirir, kapıları asla değiştirmez.
+
+Kapsam uçuşta büyüdüğünde — bir micro görev gerçek kapsam ortaya çıkardığında, standart bir plan alt depolar filizlendirdiğinde — ajan DURMAK ve çalışmayı bir sonraki kademeye yükseltmek ZORUNDADIR; mevcut kademeyi esnetmek yerine.
 
 ## Sürümleme
 

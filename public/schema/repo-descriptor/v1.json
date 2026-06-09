@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deepworkplan.com/schema/repo-descriptor/v1.json",
+  "title": "DeepWorkPlan repository descriptor",
+  "description": "Published at /.well-known/dwp.json by a repository or agent workspace that adopts the Deep Work Plan methodology, so agents and registries can discover that the target is DWP-pilotable.",
+  "type": "object",
+  "required": ["schema", "spec_version", "archetype"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "https://deepworkplan.com/schema/repo-descriptor/v1.json"
+    },
+    "spec_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "DWP spec version the target conforms to."
+    },
+    "archetype": {
+      "enum": ["individual", "orchestrator-hub", "agent-workspace"]
+    },
+    "conformance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "verified": { "type": "boolean", "description": "Whether conformance.sh passes on the default branch." },
+        "last_verified": { "type": "string", "format": "date" },
+        "checker": { "type": "string", "description": "How conformance is checked, e.g. 'conformance.sh in CI'." }
+      }
+    },
+    "agents_md": {
+      "type": "string",
+      "description": "Path or URL to the target's AGENTS.md."
+    },
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "install": { "type": "string" },
+        "repository": { "type": "string", "format": "uri" }
+      }
+    },
+    "endpoints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "init": { "type": "string", "format": "uri" },
+        "spec": { "type": "string", "format": "uri" },
+        "llms": { "type": "string" },
+        "trust": { "type": "string" }
+      }
+    },
+    "schemas": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plan_manifest": { "type": "string", "format": "uri" },
+        "plan_state": { "type": "string", "format": "uri" }
+      }
+    }
+  }
+}

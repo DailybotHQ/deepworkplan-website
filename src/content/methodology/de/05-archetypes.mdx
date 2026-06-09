@@ -1,6 +1,6 @@
 ---
 title: Repository-Archetypen
-description: "Die Archetypen Einzel-Repository und Orchestrator-Hub, die Heuristik zur Klassifizierung eines Repositorys und wie sich Onboarding und Planumfang zwischen ihnen unterscheiden."
+description: "Die drei DWP-Archetypen — Einzel-Repository, Orchestrator-Hub und Agenten-Arbeitsbereich — die Klassifizierungsheuristik und wie sich das Onboarding für jeden unterscheidet."
 order: 5
 lang: de
 summary: Warum der Archetyp eines Repositorys bestimmt, wie ein Agent onboardet und Pläne zuschneidet.
@@ -13,7 +13,7 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 Bevor ein Agent eine einzige Zeile ändert, trifft er eine Entscheidung, die alles Weitere prägt: **Was für ein Repository ist das?** Der Archetyp, den er ableitet, setzt die Grenze, innerhalb derer er für den Rest des Einsatzes denkt — wie er onboardet, wie weit ein Plan reicht und wo der Zustand gespeichert wird. Liegt er falsch, schneidet der Agent die Arbeit auf die falsche Oberfläche zu — die häufigste Ursache für Drift bei langfristigen Aufgaben. Liegt er richtig, kann er stundenlang autonom arbeiten, weil Pläne, Onboarding und Zustand alle mit der tatsächlichen Form des Codes übereinstimmen.
 
-DWP erkennt zwei Archetypen. Die meisten Repositorys sind der erste; der zweite existiert für Teams, die viele koordinieren.
+DWP erkennt drei Archetypen. Die meisten Repositorys sind der erste; der zweite existiert für Teams, die viele koordinieren; der dritte beschreibt die langlebigen Arbeitsbereiche autonomer Agenten.
 
 <ArchetypesCompare lang="de" class="not-prose my-10" />
 
@@ -38,25 +38,41 @@ Merkmale:
 - Pflegt ein Register der verwalteten Repositorys.
 - Der `.dwp/`-Arbeitsbereich im Hub-Stammverzeichnis verfolgt repository-übergreifenden Zustand.
 
+## Agenten-Arbeitsbereich
+
+Ein dritter Archetyp, hinzugefügt in v2.2, beschreibt etwas, das ein Arbeitsbereich ist, bevor es ein Repository ist: das langlebige Zuhause eines autonomen Agenten. Ein OpenClaw-Arbeitsbereich, ein Hermes-Service-Verzeichnis, das Datenverzeichnis eines Personal-Assistant-Daemons, das persistente Volume eines Cloud-Agenten — jedes hat Pläne auszuführen, Werkzeuge zu nutzen und Speicher zu pflegen, hat aber möglicherweise keine Codebasis, die ausgeliefert werden soll.
+
+Die zentrale Erkenntnis ist, dass **das Harness ein Arbeitsbereich ist, nicht speziell ein Repository.** Jedes Element, das DWP in ein Repository installiert — `AGENTS.md`, `docs/`, `.agents/`, `.dwp/` — hat ein direktes Arbeitsbereich-Äquivalent. Die Methodik-Oberfläche passt sich sauber an: Stehende-Kontext-Dateien ersetzen das root-`AGENTS.md`, ein Plattform-Skill-Verzeichnis ersetzt `.agents/`, und der `.dwp/`-Ordner im Arbeitsbereich-Stammverzeichnis ist unverändert. Was sich ändert, ist die Rolle von git. In einem Repository enthält das git-Protokoll den Zustand und macht Pläne über Sitzungen hinweg wiederaufnehmbar. In einem Arbeitsbereich ohne git übernimmt `state.json` diese Aufgabe — weshalb die maschinenlesbare Zustandsschicht für Agenten-Arbeitsbereiche erforderlich ist.
+
+Der praktische Nutzen sind unbeaufsichtigte Nachtpläne. Auf OpenClaw-ähnlichen Plattformen weckt ein Heartbeat oder Cron-Turn den Agenten, führt das DWP-Wiederaufnahme-Protokoll aus, führt die nächste atomare Aufgabe aus, aktualisiert `state.json` und gibt frei. Der Plan — nicht die Sitzung — ist die Einheit der Kontinuität. Ein mehrtägiger Plan überlebt Neustarts, Modellwechsel und Sitzungsgrenzen, weil alles, was der nächste Turn braucht, in den Plandateien liegt: das Ziel, der abgehakte Fortschritt, die Gate-Einträge und der genaue Checkpoint innerhalb der aktuellen Aufgabe.
+
+Merkmale:
+
+- Das Arbeitsverzeichnis einer autonomen Agenten-Plattform.
+- `AGENTS.md`, `.agents/` und `.dwp/` im Arbeitsbereich-Stammverzeichnis.
+- Git ist empfohlen, nicht erforderlich.
+- `state.json` ist erforderlich, wenn git fehlt, und für jeden unbeaufsichtigten Lauf.
+- Pläne laufen typischerweise unbeaufsichtigt, gesteuert durch einen geplanten Heartbeat oder Cron.
+
 ## Klassifizierungsheuristik
 
-Die beiden Archetypen sehen auf dem Datenträger unterschiedlich aus, und der Agent entscheidet zwischen ihnen anhand von Signalen, die er überprüfen kann — nicht anhand eines Labels, das ihm mitgeteilt wird. Der Entscheidungsbaum unten zeigt den Weg; kurz gesagt: Ein Repository wird nur dann als Orchestrator-Hub behandelt, wenn die Beweise es verlangen, und ansonsten als Einzel-Repository.
+Die drei Archetypen sehen auf dem Datenträger unterschiedlich aus, und der Agent entscheidet zwischen ihnen anhand von Signalen, die er überprüfen kann — nicht anhand eines Labels, das ihm mitgeteilt wird. Der Entscheidungsbaum unten zeigt den Weg; kurz gesagt: Als Agenten-Arbeitsbereich klassifizieren, wenn Plattform-Identitätssignale vorhanden sind, als Orchestrator-Hub nur, wenn die Beweise es verlangen, und andernfalls als Einzel-Repository.
 
-<ArchetypesTree lang="de" class="not-prose my-10" />
+<ArchetypesTree lang="en" class="not-prose my-10" />
 
-Ein Agent sollte ein Repository als Orchestrator-Hub klassifizieren, wenn er mehrere verschachtelte git-Repositorys oder Submodule, ein Register oder Manifest verwalteter Repositorys oder Konfiguration findet, die auf externe Repositorys verweist. Fehlen diese Signale, behandelt er das Repository als Einzel-Repository — die sichere Voreinstellung, denn einen Plan über Grenzen hinaus zu weiten, die nicht existieren, ist schlimmer, als innerhalb einer vorhandenen zu arbeiten.
+Ein Agent sollte zuerst nach Agenten-Arbeitsbereich-Signalen suchen: eine Plattform-Identitätsdatei (wie OpenClaws `SOUL.md` oder `HEARTBEAT.md`), kein primärer Anwendungsstack und Inhalte, die überwiegend den eigenen Zustand des Agenten darstellen. Fehlen diese, sucht er nach Orchestrator-Signalen: mehrere verschachtelte git-Repositorys oder Submodule, ein Register oder Manifest verwalteter Repositorys oder Konfiguration, die auf externe Repositorys verweist. Fehlen beide, behandelt er das Ziel als Einzel-Repository — die sichere Voreinstellung, denn einen Plan über Grenzen hinaus zu weiten, die nicht existieren, ist schlimmer, als innerhalb einer vorhandenen zu arbeiten.
 
 ## Wie sich das Onboarding unterscheidet
 
 Der Archetyp ist kein kosmetisches Label; er verändert, was der Agent liest, was ein Plan berühren darf und wo der Zustand aufgezeichnet wird.
 
-| Aspekt | Individual | Orchestrator |
-|--------|------------|--------------|
-| Umfang | Dieses Repository | Mehrere Repositorys |
-| Onboarding | Repository-Struktur | Hub-Register |
-| Planziel | Lokale Dateien | Untergeordnete Pläne |
-| Zustand | Lokales `.dwp/` | Repository-übergreifendes `.dwp/` |
+| Aspekt | Individual | Orchestrator | Agenten-Arbeitsbereich |
+|--------|------------|--------------|-----------------|
+| Umfang | Dieses Repository | Mehrere Repositorys | Der Arbeitsbereich und seine Pläne |
+| Onboarding | Repository-Struktur | Hub-Register | Plattformdateien + Arbeitsbereich-Konventionen |
+| Planziel | Lokale Dateien | Untergeordnete Pläne | Lokale oder externe Repositorys |
+| Zustand | Lokales `.dwp/` | Repository-übergreifendes `.dwp/` | `.dwp/` + `state.json` (erforderlich ohne git) |
 
-Der praktische Effekt ist, dass ein Einzel-Repository-Agent über eine Codebasis von Anfang bis Ende schlussfolgert, während ein Orchestrator-Agent über Koordination schlussfolgert — welches untergeordnete Repository welche Arbeit besitzt und wie der repository-übergreifende Zustand konsistent bleibt.
+Der praktische Effekt ist, dass ein Einzel-Repository-Agent über eine Codebasis von Anfang bis Ende schlussfolgert, ein Orchestrator-Agent über Koordination über Repositorys hinweg schlussfolgert und ein Agenten-Arbeitsbereich-Agent über Kontinuität über Sitzungen hinweg schlussfolgert — was geplant war, was lief, was blockiert ist und was als nächstes kommt.
 
 Das ist es, was einen Agenten in die Lage versetzt, stundenlang ohne Aufsicht autonom zu arbeiten: Indem er den Archetyp zuerst festlegt, schneidet er Pläne, Onboarding und Zustand auf die richtige Grenze zu, sodass jede Aufgabe vom ersten bis zum letzten Schritt auf der korrekten Oberfläche operiert.

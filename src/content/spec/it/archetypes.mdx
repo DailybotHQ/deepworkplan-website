@@ -1,6 +1,6 @@
 ---
 title: Archetipi
-description: "Descrizione normativa degli archetipi di repository DWP: il repository individuale e l’hub orchestratore, l’euristica di classificazione e come differisce l’onboarding."
+description: "Descrizione normativa degli archetipi di repository DWP: il repository individuale, l'hub orchestratore e il workspace agente, e come differisce l'onboarding per ciascuno."
 order: 4
 lang: it
 section: Archetypes
@@ -9,11 +9,13 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 # Archetipi
 
-**Versione 1.0.** DWP riconosce due archetipi di repository. L’archetipo determina come un agente fa l’onboarding e come viene definito l’ambito dei piani.
+**Versione 1.1.** DWP riconosce tre archetipi. L'archetipo determina come un agente fa l'onboarding, come vengono definiti gli ambiti dei piani e se il livello di stato leggibile dalle macchine è richiesto.
+
+> **Additivo in v1.1.** Il **workspace agente** (§3) si aggiunge come terzo archetipo: la casa di lunga durata di un agente autonomo. Git diventa RACCOMANDATO anziché presupposto. I due archetipi v1.0 sono invariati.
 
 ## Repository individuale
 
-Un codebase autosufficiente — un’applicazione, una libreria o un servizio. I piani operano direttamente sul codice.
+Un codebase autosufficiente — un'applicazione, una libreria o un servizio. I piani operano direttamente sul codice.
 
 Caratteristiche:
 
@@ -30,25 +32,45 @@ Caratteristiche:
 - Coordina più sotto-repository.
 - I piani possono delegare a piani figli.
 - Mantiene un registro dei repository gestiti.
-- Il workspace `.dwp/` nella radice dell’hub traccia lo stato tra i repository.
+- Il workspace `.dwp/` nella radice dell'hub traccia lo stato tra i repository.
+
+## Workspace agente
+
+Un workspace agente è la casa di lavoro di lunga durata di un agente autonomo — un workspace OpenClaw, una directory di servizio Hermes, la directory dei dati di un daemon di assistente personale, o un volume persistente di un agente cloud. È un workspace, non necessariamente un repository git, e il suo prodotto principale è il lavoro in corso dell'agente piuttosto che un singolo codebase.
+
+L'intuizione che rende possibile questo archetipo: **la harness è un workspace, non specificamente un repository.** Ogni elemento della harness che la metodologia definisce per un repository ha un equivalente diretto nel workspace:
+
+| Elemento harness (repository) | Equivalente workspace agente |
+|-------------------------------|------------------------------|
+| `AGENTS.md` (regole, comandi rapidi) | Il contesto permanente del workspace — `AGENTS.md` stesso, oppure il file di standing-orders della piattaforma |
+| `docs/` (conoscenza duratura) | File di conoscenza del workspace e documenti di memoria |
+| `.agents/` (skill, agenti, comandi) | La directory delle skill della piattaforma — OpenClaw esegue una scansione nativa di `<workspace>/.agents/skills/` |
+| `.dwp/` (piani, bozze) | `.dwp/` nella radice del workspace — invariato |
+| git log (stato, ripristinabilità) | `state.json` per piano ([Stato del piano](/spec/plan-state)), OBBLIGATORIO qui |
+
+Un workspace agente DEVE fornire `AGENTS.md`, `.agents/` e `.dwp/` nella radice del workspace.
+
+**Git è RACCOMANDATO, non OBBLIGATORIO.** Dove git è assente, ogni piano DEVE portare il livello di stato leggibile dalle macchine: il checkpoint di `state.json`, i gate record e i timestamp per attività portano le informazioni di recupero che il git log porta in un repository.
+
+I piani in un workspace agente vengono tipicamente eseguiti in modo non presidiato: un heartbeat o un turno cron pianificato riprende il piano aperto tramite il Protocollo di Ripresa DWP, esegue la prossima attività atomica, aggiorna il livello di stato e cede il controllo. Il piano — non la sessione — è l'unità di continuità.
 
 ## Euristica di classificazione
 
 <ArchetypesTree lang="it" class="not-prose my-10" />
 
-Un agente DOVREBBE classificare un repository come hub orchestratore se trova:
+Classificare come **workspace agente** per primo, quando il target è la directory di lavoro di una piattaforma di agenti autonomi — segnali: un file di identità della piattaforma (come `SOUL.md` o `HEARTBEAT.md` di OpenClaw), nessuno stack applicativo principale e contenuto che è prevalentemente lo stato proprio dell'agente. Un singolo segnale forte della piattaforma è sufficiente.
 
-- Più repository git annidati o submodule.
-- Un registro o manifest di repository gestiti.
-- Configurazione che punta a repository esterni.
+In caso contrario, classificare come **hub orchestratore** quando la chiara maggioranza dei seguenti segnali è presente: più repository git annidati o submodule; un registro o manifest di repository gestiti; configurazione che punta a repository esterni. Classificare come **repository individuale** negli altri casi — è il comportamento sicuro predefinito.
 
-Altrimenti, lo tratta come un repository individuale.
+Quando i segnali sono ambigui, l'agente DEVE presentare la propria valutazione e le prove all'utente e chiedere conferma prima di procedere.
 
-## Differenze nell’onboarding
+## Differenze nell'onboarding
 
-| Aspetto | Individuale | Orchestratore |
-|--------|------------|--------------|
-| Ambito | Questo repository | Più repository |
-| Onboarding | Struttura del repository | Registro dell’hub |
-| Bersaglio del piano | File locali | Piani figli |
-| Stato | `.dwp/` locale | `.dwp/` tra repository |
+| Aspetto | Individuale | Orchestratore | Workspace agente |
+|--------|------------|--------------|-----------------|
+| Ambito | Questo repository | Più repository | Il workspace e i suoi piani |
+| Onboarding | Struttura del repository | Registro dell'hub | File della piattaforma + convenzioni del workspace |
+| Bersaglio del piano | File locali | Piani figli | Repository locali o esterni |
+| Stato | `.dwp/` locale | `.dwp/` tra repository | `.dwp/` + `state.json` (OBBLIGATORIO senza git) |
+| Git | Obbligatorio | Obbligatorio | RACCOMANDATO |
+| Livello di stato | RACCOMANDATO | RACCOMANDATO | OBBLIGATORIO senza git; OBBLIGATORIO per le esecuzioni non presidiate |

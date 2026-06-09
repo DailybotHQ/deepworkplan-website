@@ -1,6 +1,6 @@
 ---
 title: Archetypen
-description: "Normative Beschreibung der DWP-Repository-Archetypen: das Einzel-Repository und der Orchestrator-Hub, die Klassifizierungsheuristik und wie sich das Onboarding unterscheidet."
+description: "Normative Beschreibung der DWP-Repository-Archetypen: das Einzel-Repository, der Orchestrator-Hub und der Agenten-Arbeitsbereich, sowie wie sich das Onboarding für jeden unterscheidet."
 order: 4
 lang: de
 section: Archetypes
@@ -9,7 +9,9 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 # Archetypen
 
-**Version 1.0.** DWP erkennt zwei Repository-Archetypen. Der Archetyp bestimmt, wie ein Agent onboardet und wie Pläne zugeschnitten werden.
+**Version 1.1.** DWP erkennt drei Archetypen. Der Archetyp bestimmt, wie ein Agent onboardet, wie Pläne zugeschnitten werden und ob die maschinenlesbare Zustandsschicht erforderlich ist.
+
+> **Additiv in v1.1.** Der **Agenten-Arbeitsbereich** (§3) wird als dritter Archetyp aufgenommen: das langlebige Zuhause eines autonomen Agenten. Git wird EMPFOHLEN statt vorausgesetzt. Die beiden v1.0-Archetypen sind unverändert.
 
 ## Einzel-Repository
 
@@ -32,23 +34,43 @@ Merkmale:
 - Pflegt ein Register der verwalteten Repositorys.
 - `.dwp/`-Arbeitsbereich im Hub-Stammverzeichnis verfolgt repository-übergreifenden Zustand.
 
+## Agenten-Arbeitsbereich
+
+Ein Agenten-Arbeitsbereich ist das langlebige Arbeitszuhause eines autonomen Agenten — ein OpenClaw-Arbeitsbereich, ein Hermes-Service-Verzeichnis, das Datenverzeichnis eines Personal-Assistant-Daemons oder das persistente Volume eines Cloud-Agenten. Es ist ein Arbeitsbereich, nicht notwendigerweise ein git-Repository, und sein primäres Produkt ist die laufende Arbeit des Agenten statt einer Codebasis.
+
+Die Erkenntnis, die diesen Archetyp ermöglicht: **das Harness ist ein Arbeitsbereich, nicht speziell ein Repository.** Jedes Harness-Element, das die Methodik für ein Repository definiert, hat ein direktes Arbeitsbereich-Äquivalent:
+
+| Harness-Element (Repository) | Agenten-Arbeitsbereich-Äquivalent |
+|------------------------------|---------------------------|
+| `AGENTS.md` (Regeln, Schnellbefehle) | Der stehende Kontext des Arbeitsbereichs — `AGENTS.md` selbst oder die Stehende-Anweisungen-Datei der Plattform |
+| `docs/` (dauerhaftes Wissen) | Arbeitsbereich-Wissensdateien und Speicherdokumente |
+| `.agents/` (Skills, Agenten, Befehle) | Das Skill-Verzeichnis der Plattform — OpenClaw scannt nativ `<workspace>/.agents/skills/` |
+| `.dwp/` (Pläne, Entwürfe) | `.dwp/` im Arbeitsbereich-Stammverzeichnis — unverändert |
+| git-Protokoll (Zustand, Wiederaufnehmbarkeit) | `state.json` je Plan ([Plan-Zustand](/spec/plan-state)), hier ERFORDERLICH |
+
+Ein Agenten-Arbeitsbereich MUSS `AGENTS.md`, `.agents/` und `.dwp/` im Arbeitsbereich-Stammverzeichnis bereitstellen.
+
+**Git ist EMPFOHLEN, nicht ERFORDERLICH.** Wo git fehlt, MUSS jeder Plan die maschinenlesbare Zustandsschicht tragen: `state.json`s Checkpoint, Gate-Einträge und aufgabenbezogene Zeitstempel enthalten die Wiederherstellungsinformationen, die das git-Protokoll in einem Repository enthält.
+
+Pläne in einem Agenten-Arbeitsbereich laufen typischerweise unbeaufsichtigt: Ein geplanter Heartbeat oder Cron-Turn nimmt den offenen Plan über das DWP-Wiederaufnahme-Protokoll wieder auf, führt die nächste atomare Aufgabe aus, aktualisiert die Zustandsschicht und gibt frei. Der Plan — nicht die Sitzung — ist die Einheit der Kontinuität.
+
 ## Klassifizierungsheuristik
 
 <ArchetypesTree lang="en" class="not-prose my-10" />
 
-Ein Agent SOLLTE ein Repository als Orchestrator-Hub klassifizieren, wenn er Folgendes findet:
+Als **Agenten-Arbeitsbereich** klassifizieren zuerst, wenn das Ziel das Arbeitsverzeichnis einer autonomen Agenten-Plattform ist — Signale: eine Plattform-Identitätsdatei (wie OpenClaws `SOUL.md` oder `HEARTBEAT.md`), kein primärer Anwendungsstack und Inhalte, die überwiegend den eigenen Zustand des Agenten darstellen. Ein starkes Plattformsignal genügt.
 
-- Mehrere verschachtelte git-Repositorys oder Submodule.
-- Ein Register oder Manifest verwalteter Repositorys.
-- Konfiguration, die auf externe Repositorys verweist.
+Andernfalls als **Orchestrator-Hub** klassifizieren, wenn eine klare Mehrheit der folgenden Punkte zutrifft: mehrere verschachtelte git-Repositorys oder Submodule; ein Register oder Manifest verwalteter Repositorys; Konfiguration, die auf externe Repositorys verweist. Andernfalls als **Einzel-Repository** klassifizieren — das ist die sichere Voreinstellung.
 
-Andernfalls als Einzel-Repository behandeln.
+Wenn Signale mehrdeutig sind, MUSS der Agent dem Nutzer seine Einschätzung und Belege vorlegen und um Bestätigung bitten, bevor er fortfährt.
 
 ## Onboarding-Unterschiede
 
-| Aspekt | Individual | Orchestrator |
-|--------|------------|--------------|
-| Umfang | Dieses Repository | Mehrere Repositorys |
-| Onboarding | Repository-Struktur | Hub-Register |
-| Planziel | Lokale Dateien | Untergeordnete Pläne |
-| Zustand | Lokales `.dwp/` | Repository-übergreifendes `.dwp/` |
+| Aspekt | Individual | Orchestrator | Agenten-Arbeitsbereich |
+|--------|------------|--------------|-----------------|
+| Umfang | Dieses Repository | Mehrere Repositorys | Der Arbeitsbereich und seine Pläne |
+| Onboarding | Repository-Struktur | Hub-Register | Plattformdateien + Arbeitsbereich-Konventionen |
+| Planziel | Lokale Dateien | Untergeordnete Pläne | Lokale oder externe Repositorys |
+| Zustand | Lokales `.dwp/` | Repository-übergreifendes `.dwp/` | `.dwp/` + `state.json` (ERFORDERLICH ohne git) |
+| Git | Erforderlich | Erforderlich | EMPFOHLEN |
+| Zustandsschicht | EMPFOHLEN | EMPFOHLEN | ERFORDERLICH ohne git; ERFORDERLICH für unbeaufsichtigte Läufe |

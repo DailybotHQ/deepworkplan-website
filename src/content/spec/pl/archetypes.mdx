@@ -1,6 +1,6 @@
 ---
 title: Archetypy
-description: "Normatywny opis archetypów repozytoriów DWP: pojedyncze repozytorium i hub orkiestratora, heurystyka klasyfikacji oraz to, czym różni się onboarding."
+description: "Normatywny opis archetypów repozytoriów DWP: pojedyncze repozytorium, hub orkiestratora i przestrzeń robocza agenta, heurystyka klasyfikacji oraz to, czym różni się onboarding."
 order: 4
 lang: pl
 section: Archetypes
@@ -9,7 +9,9 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 # Archetypy
 
-**Wersja 1.0.** DWP rozpoznaje dwa archetypy repozytoriów. Archetyp decyduje o tym, jak agent przeprowadza onboarding i jak wyznaczany jest zakres planów.
+**Wersja 1.1.** DWP rozpoznaje trzy archetypy. Archetyp decyduje o tym, jak agent przeprowadza onboarding, jak wyznaczany jest zakres planów i czy warstwa stanu odczytywalnego maszynowo jest wymagana.
+
+> **Addytywne w wersji 1.1.** **Przestrzeń robocza agenta** (§3) dołącza jako trzeci archetyp: długotrwały dom autonomicznego agenta. Git staje się ZALECANY, a nie zakładany. Dwa archetypy z wersji 1.0 pozostają bez zmian.
 
 ## Pojedyncze repozytorium
 
@@ -32,23 +34,43 @@ Cechy:
 - Utrzymuje rejestr zarządzanych repozytoriów.
 - Przestrzeń robocza `.dwp/` w głównym katalogu huba śledzi stan międzyrepozytoryjny.
 
+## Przestrzeń robocza agenta
+
+Przestrzeń robocza agenta to długotrwały, roboczy dom autonomicznego agenta — przestrzeń robocza OpenClaw, katalog usług Hermes, katalog danych demona asystenta osobistego lub wolumen trwały agenta chmurowego. Jest to przestrzeń robocza, niekoniecznie repozytorium git, a jej głównym produktem jest bieżąca praca agenta, a nie jedna baza kodu.
+
+Wgląd, który sprawia, że ten archetyp jest możliwy: **harness to przestrzeń robocza, a nie konkretnie repozytorium.** Każdy element harnessu, który metodologia definiuje dla repozytorium, ma bezpośredni odpowiednik w przestrzeni roboczej:
+
+| Element harnessu (repozytorium) | Odpowiednik w przestrzeni roboczej agenta |
+|---------------------------------|------------------------------------------|
+| `AGENTS.md` (reguły, szybkie komendy) | Stały kontekst przestrzeni roboczej — sam `AGENTS.md` lub plik stałych rozkazów platformy |
+| `docs/` (trwała wiedza) | Pliki wiedzy i dokumenty pamięci przestrzeni roboczej |
+| `.agents/` (skille, agenci, komendy) | Katalog skilli platformy — OpenClaw natywnie skanuje `<workspace>/.agents/skills/` |
+| `.dwp/` (plany, szkice) | `.dwp/` w katalogu głównym przestrzeni roboczej — bez zmian |
+| dziennik git (stan, wznawialność) | `state.json` dla każdego planu ([Stan planu](/spec/plan-state)), WYMAGANY tutaj |
+
+Przestrzeń robocza agenta MUSI zawierać `AGENTS.md`, `.agents/` oraz `.dwp/` w katalogu głównym przestrzeni roboczej.
+
+**Git jest ZALECANY, nie WYMAGANY.** Tam gdzie git jest nieobecny, każdy plan MUSI zawierać warstwę stanu odczytywalną maszynowo: punkt kontrolny `state.json`, rekordy bramek i znaczniki czasu poszczególnych zadań przenoszą informacje o odtwarzaniu, które dziennik git przenosi w repozytorium.
+
+Plany w przestrzeni roboczej agenta zazwyczaj działają nieobsługiwanie: zaplanowane bicie serca lub tura cron wznawia otwarty plan przez Protokół Wznowienia DWP, wykonuje następne zadanie atomowe, aktualizuje warstwę stanu i wykonuje yield. Plan — a nie sesja — jest jednostką ciągłości.
+
 ## Heurystyka klasyfikacji
 
 <ArchetypesTree lang="pl" class="not-prose my-10" />
 
-Agent POWINIEN sklasyfikować repozytorium jako hub orkiestratora, jeśli znajdzie:
+Klasyfikuj jako **przestrzeń roboczą agenta** w pierwszej kolejności, gdy cel jest katalogiem roboczym autonomicznej platformy agentów — sygnały: plik tożsamości platformy (jak `SOUL.md` lub `HEARTBEAT.md` OpenClaw), brak głównego stosu aplikacji i zawartość, która jest przeważnie własnym stanem agenta. Każdy jeden silny sygnał platformy jest wystarczający.
 
-- Wiele zagnieżdżonych repozytoriów git lub submodułów.
-- Rejestr lub manifest zarządzanych repozytoriów.
-- Konfigurację wskazującą na zewnętrzne repozytoria.
+W przeciwnym razie klasyfikuj jako **hub orkiestratora**, gdy wyraźna większość z poniższych jest prawdziwa: wiele zagnieżdżonych repozytoriów git lub submodułów; rejestr lub manifest zarządzanych repozytoriów; konfiguracja wskazująca na zewnętrzne repozytoria. Klasyfikuj jako **pojedyncze repozytorium** w pozostałych przypadkach — jest to bezpieczna wartość domyślna.
 
-W przeciwnym razie traktuje je jako pojedyncze repozytorium.
+Gdy sygnały są niejednoznaczne, agent MUSI przedstawić swoją ocenę i dowody użytkownikowi i poprosić o potwierdzenie przed kontynuacją.
 
 ## Różnice w onboardingu
 
-| Aspekt | Pojedyncze | Orkiestrator |
-|--------|------------|--------------|
-| Zakres | To repozytorium | Wiele repozytoriów |
-| Onboarding | Struktura repozytorium | Rejestr huba |
-| Cel planu | Pliki lokalne | Plany potomne |
-| Stan | Lokalny `.dwp/` | Międzyrepozytoryjny `.dwp/` |
+| Aspekt | Pojedyncze | Orkiestrator | Przestrzeń robocza agenta |
+|--------|------------|--------------|--------------------------|
+| Zakres | To repozytorium | Wiele repozytoriów | Przestrzeń robocza i jej plany |
+| Onboarding | Struktura repozytorium | Rejestr huba | Pliki platformy + konwencje przestrzeni roboczej |
+| Cel planu | Pliki lokalne | Plany potomne | Lokalne lub zewnętrzne repozytoria |
+| Stan | Lokalny `.dwp/` | Międzyrepozytoryjny `.dwp/` | `.dwp/` + `state.json` (WYMAGANY bez gita) |
+| Git | Wymagany | Wymagany | ZALECANY |
+| Warstwa stanu | ZALECANA | ZALECANA | WYMAGANA bez gita; WYMAGANA przy uruchomieniach nieobsługiwanych |

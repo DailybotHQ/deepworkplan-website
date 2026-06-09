@@ -1,6 +1,6 @@
 ---
 title: Specifica DWP
-description: "Specifica normativa di Deep Work Plan: struttura del piano, anatomia in nove sezioni di un’attività, ciclo di esecuzione a cinque operazioni, workspace di output e versionamento."
+description: "Specifica normativa di Deep Work Plan: struttura del piano, anatomia in nove sezioni di un'attività, ciclo di esecuzione a cinque operazioni, workspace di output e versionamento."
 order: 2
 lang: it
 section: Workflow
@@ -11,11 +11,13 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Specifica DWP
 
-**Versione 1.1. Stato: Stabile.** Questo documento è la specifica normativa per la metodologia Deep Work Plan (DWP). Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
+**Versione 1.2. Stato: Stabile.** Questo documento è la specifica normativa per la metodologia Deep Work Plan (DWP). Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
+
+> **Additivi in v1.2.** Quattro capacità additive, nessuna modifica incompatibile: (1) il **livello di stato del piano leggibile dalle macchine** (`manifest.json` + `state.json`, vedi [Stato del piano](/spec/plan-state)); (2) **livelli di rigore proporzionale** (micro / standard / deep, vedi [Rigore proporzionale](#rigore-proporzionale)); (3) la sezione **Delta** opzionale nell'anatomia dell'attività per le modifiche al comportamento brownfield; e (4) il **Protocollo di Ripresa DWP** viene promosso a rituale con nome e citabile in sei passi. I piani v1.1 esistenti rimangono conformi.
 
 ## Definizione
 
-Un Deep Work Plan è un artefatto strutturato e solo-Markdown che descrive un’attività di ingegneria complessa scomposta in unità di lavoro sequenziali e revisionabili, progettato per essere creato, eseguito e mantenuto da agenti di coding AI che operano in autonomia.
+Un Deep Work Plan è un artefatto strutturato e solo-Markdown che descrive un'attività di ingegneria complessa scomposta in unità di lavoro sequenziali e revisionabili, progettato per essere creato, eseguito e mantenuto da agenti di coding AI che operano in autonomia.
 
 DWP è spec-driven: il piano è la specifica e gli agenti DEVONO eseguire rispetto ai suoi criteri di accettazione e validation gate espliciti anziché improvvisare. La specifica — non una trascrizione di chat — è la fonte di verità duratura, così il lavoro è verificabile e ripristinabile tra sessioni e agenti. È anche harness engineering reso portabile: il contesto, il ciclo di controllo, le salvaguardie e lo stato ripristinabile che rendono un agente affidabile vengono installati nel repository stesso come semplice Markdown, così qualsiasi agente conforme PUÒ pilotare il repository senza un framework specifico per uno strumento.
 
@@ -27,13 +29,15 @@ Un piano DEVE essere una directory sotto `.dwp/plans/` denominata `PLAN_<slug>/`
 - Un file per attività, denominato `<n>.task_<slug>.md`.
 - `PROGRESS.md` — un log di esecuzione continuo.
 
-## Anatomia dell’attività
+Un piano PUÒ portare in aggiunta il livello di stato leggibile dalle macchine: `manifest.json` (identità statica, scritto una volta alla materializzazione) e `state.json` (stato di esecuzione live per attività). Il livello di stato è RACCOMANDATO per i nuovi piani e OBBLIGATORIO per l'esecuzione non presidiata e per i workspace agente senza git. Vedi [Stato del piano](/spec/plan-state).
+
+## Anatomia dell'attività
 
 <TaskAnatomy lang="it" class="not-prose my-10" />
 
-Ogni file di attività DEVE contenere queste nove sezioni, nell’ordine:
+Ogni file di attività DEVE contenere queste nove sezioni, nell'ordine:
 
-1. **Goal** — una dichiarazione di un paragrafo su cosa l’attività realizza.
+1. **Goal** — una dichiarazione di un paragrafo su cosa l'attività realizza.
 2. **Context** — contesto, link e il perché questa attività esiste.
 3. **Steps** — azioni ordinate e concrete da svolgere.
 4. **Acceptance criteria** — una checklist di condizioni che definiscono il completamento.
@@ -43,17 +47,50 @@ Ogni file di attività DEVE contenere queste nove sezioni, nell’ordine:
 8. **Risks** — cosa potrebbe andare storto e le relative mitigazioni.
 9. **Completion & Log** — un marcatore di stato più note cronologiche.
 
+Un'attività PUÒ includere in aggiunta una **sezione Delta** (RACCOMANDATA per le modifiche al comportamento brownfield — vedi di seguito) e una **sezione Rollback** (RACCOMANDATA per migrazioni, modifiche infrastrutturali o deployment).
+
+### La sezione Delta (modifiche brownfield)
+
+La maggior parte del lavoro reale modifica il comportamento esistente anziché crearne di nuovo. Un'attività che cambia il comportamento di un sistema esistente DOVREBBE portare una **sezione Delta** che descrive la modifica come un contratto esplicito prima/dopo, usando tre intestazioni di elenco:
+
+- **ADDED** — comportamento che esiste dopo l'attività e non esisteva prima.
+- **MODIFIED** — comportamento che esiste in entrambi, espresso come `was: … → now: …`.
+- **REMOVED** — comportamento che esisteva prima ed è intenzionalmente rimosso dopo.
+
+Ogni voce DEVE essere un comportamento osservabile — la risposta di un endpoint, un flag CLI, uno stato UI, un valore predefinito — non un dettaglio di implementazione. La sezione Delta è il diff del revisore a livello di comportamento: i criteri di accettazione verificano le voci ADDED/MODIFIED, e le voci REMOVED sono la licenza esplicita a eliminare. Qualsiasi cosa non elencata come REMOVED DEVE continuare a funzionare, e il validation gate dell'attività (i test esistenti che rimangono verdi) è ciò che lo garantisce.
+
 ## Validation gate e test
 
-La validazione è il gate che trasforma una dichiarazione di completamento nella sua prova: un’attività NON DEVE essere segnata come completata finché ogni comando della sua sezione Validation non è stato eseguito con esito positivo. I test sono parte di prima classe di questo gate, non un’aggiunta opzionale — sono ciò che rende affidabile e verificabile il codice che un piano consegna.
+La validazione è il gate che trasforma una dichiarazione di completamento nella sua prova: un'attività NON DEVE essere segnata come completata finché ogni comando della sua sezione Validation non è stato eseguito con esito positivo. I test sono parte di prima classe di questo gate, non un'aggiunta opzionale — sono ciò che rende affidabile e verificabile il codice che un piano consegna.
 
-Quando un’attività aggiunge nuove funzionalità fondamentali o modifica in modo sostanziale il comportamento esistente:
+Quando un'attività aggiunge nuove funzionalità fondamentali o modifica in modo sostanziale il comportamento esistente:
 
-- I suoi **criteri di accettazione** DEVONO includere una copertura di test automatizzati per il comportamento nuovo o modificato (il percorso felice più i casi limite e di errore significativi), seguendo la convenzione di test e l’aspettativa di copertura del repository.
+- I suoi **criteri di accettazione** DEVONO includere una copertura di test automatizzati per il comportamento nuovo o modificato (il percorso felice più i casi limite e di errore significativi), seguendo la convenzione di test e l'aspettativa di copertura del repository.
 - La sua **validazione** DEVE eseguire i test del repository insieme ai suoi controlli di lint, type-check e formattazione — il controllo completo di qualità del codice che il repository definisce — non solo la build. «Compila» non è un gate sufficiente per un cambiamento di comportamento.
 - I test esistenti DEVONO restare verdi. Un cambiamento che rompe un test che copre il codice interessato DEVE aggiornare quel test al nuovo comportamento previsto; NON DEVE eliminare, saltare o indebolire un test al solo scopo di forzare il superamento del gate.
 
-Le attività di pura documentazione, configurazione o ricerca sono esentate dal creare test ma DEVONO comunque eseguire qualsiasi validation gate il repository definisca. La profondità del testing è proporzionale alla dimensione del cambiamento e alla maturità del repository. Dove un repository non ha affatto una toolchain di test o lint, l’agente NON DEVE saltare silenziosamente questa disciplina — si affida alla toolchain proposta durante l’onboarding (vedi [Conformità](/spec)).
+Le attività di pura documentazione, configurazione o ricerca sono esentate dal creare test ma DEVONO comunque eseguire qualsiasi validation gate il repository definisca. La profondità del testing è proporzionale alla dimensione del cambiamento e alla maturità del repository. Dove un repository non ha affatto una toolchain di test o lint, l'agente NON DEVE saltare silenziosamente questa disciplina — si affida alla toolchain proposta durante l'onboarding (vedi [Conformità](/spec)).
+
+## Protocollo di completamento dell'attività
+
+Dopo aver superato la validazione e prima di avanzare all'attività successiva, l'agente DEVE, nell'ordine: (1) segnare l'attività `[x]` nel README del piano; (2) incrementare il contatore di stato del piano; (3) compilare la sezione Completion & Log dell'attività senza valori segnaposto; (4) aggiungere una voce di 3–5 punti in `PROGRESS.md`; (5) eseguire il commit (dove il piano esegue commit) con il formato `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) dove il piano porta il livello di stato, riscrivere `state.json` atomicamente — attività `completed`, gate record, outcome record, hash del commit.
+
+I sei passi formano un'unica transazione logica. Un agente interrotto a metà protocollo NON DEVE avviare l'attività successiva — deve terminare o annullare il completamento parziale prima.
+
+## Il protocollo di ripresa DWP
+
+La ripresa DEVE essere possibile usando solo i file del piano più il git log, senza stato esterno. In un workspace senza git — vedi [Archetipi](/spec/archetypes) §3 — il `state.json` del piano è OBBLIGATORIO e sostituisce il git log.
+
+Un agente che riprende l'esecuzione — una nuova sessione, un agente diverso, un turno di daemon pianificato, o una sessione cloud che si sveglia — DEVE eseguire questo rituale, nell'ordine:
+
+1. **Ri-ancorare.** Leggere il README del piano: obiettivo, linee guida globali, lista delle attività.
+2. **Individuare il checkpoint.** Trovare la prima attività non spuntata nel README; leggere il git log e git status (oppure il `checkpoint` di `state.json` dove git è assente).
+3. **Riconciliare lo stato.** Dove esiste `state.json`, confrontarlo con le caselle del README; in caso di desincronizzazione, rigenerarlo dal markdown prima di continuare.
+4. **Ispezionare la giuntura.** Leggere la sezione Completion & Log dell'attività al punto di ripresa e l'ultima voce di `PROGRESS.md` — l'ultimo terreno verificato della sessione precedente.
+5. **Smoke-test.** Eseguire la validazione permanente più economica del repository per confermare che il mondo funzioni ancora prima di costruirci sopra. Un smoke test che fallisce viene investigato prima, non ignorato.
+6. **Continuare atomicamente.** Eseguire esattamente la prossima attività; non procedere in batch.
+
+L'agente DEVE fidarsi dei segni completati (`[x]`) e NON DEVE rivalidare le attività completate, a meno che l'utente non lo richieda esplicitamente o lo smoke test fallisca in un modo che implica un'attività completata.
 
 ## Il ciclo di esecuzione
 
@@ -72,6 +109,28 @@ DWP definisce cinque operazioni:
 <OutputWorkspace lang="it" class="not-prose my-10" />
 
 Tutti gli artefatti DWP DEVONO vivere in una directory `.dwp/` esclusa da git nella radice del repository.
+
+## Stato del piano leggibile dalle macchine
+
+Un piano PUÒ portare il livello di stato leggibile dalle macchine — `manifest.json` (identità statica) e `state.json` (stato live per attività, gate record di validazione, outcome record, checkpoint, stato bloccato). Il piano in markdown rimane la fonte di verità; il livello JSON è una proiezione derivata, rigenerata nei punti di protocollo e riconciliata alla ripresa.
+
+Il livello di stato è RACCOMANDATO per i nuovi piani, OBBLIGATORIO per l'esecuzione non presidiata e OBBLIGATORIO per i workspace agente senza git. Vedi la definizione normativa completa in [Stato del piano](/spec/plan-state).
+
+## Rigore proporzionale
+
+Il rigore DEVE essere proporzionale al lavoro. La cerimonia su cambiamenti banali è un fallimento della metodologia, non una sicurezza in più. Ogni lavoro ricade esattamente in un livello:
+
+| Livello | Quando | Forma |
+|---------|--------|-------|
+| **micro** | Un singolo cambiamento atomico: un'unica preoccupazione, grossomodo una sessione, nessun coordinamento. Una correzione di bug, una modifica di testo, un aggiustamento di configurazione. | Nessuna cartella del piano. L'agente esprime obiettivo, criteri di accettazione e validation gate inline nella conversazione, esegue, valida, esegue il commit. |
+| **standard** | Lavoro multi-fase con portata reale: una funzionalità, un refactoring, una migrazione all'interno di un repo. Il livello predefinito. | Un piano completo: cartella del piano, attività in nove sezioni, attività finali obbligatorie. |
+| **deep** | Lavoro a lungo orizzonte che abbraccia gruppi paralleli, repository figlio o più sessioni non presidiate. | Un piano standard più capacità di orchestratore e/o team-agents, e il livello di stato. |
+
+Un agente a cui viene chiesto di creare un piano per un lavoro di livello micro DEVE dire che un piano è sproporzionato e offrire invece la forma inline. Una cartella del piano NON DEVE essere creata per un cambiamento banale a un singolo file.
+
+Il lavoro di livello micro mantiene comunque i non negoziabili: un obiettivo esplicito, un validation gate che viene eseguito e superato, e la disciplina di test per le modifiche al comportamento. Il livello cambia il packaging, mai i gate.
+
+Quando l'ambito cresce in corsa — un'attività micro scopre una portata reale, un piano standard genera sotto-repository — l'agente DEVE fermarsi e promuovere il lavoro al livello successivo anziché estendere quello corrente.
 
 ## Versionamento
 

@@ -36,8 +36,7 @@ Schlanke Slash-Befehle delegieren an die Sub-Skills und Addons:
 
 ### Adapter
 
-Schlanke Integrationen je Agent für Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
-OpenCode, Windsurf, Cline und Antigravity.
+Schlanke Integrationen je Agent für Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Windsurf, Cline, Antigravity, OpenClaw, Hermes sowie Cloud- und Hintergrund-Agenten (Claude Code Remote-Tasks, Codex Cloud, Jules-Klasse). OpenClaw und Hermes sind autonome Agenten-Plattformen, die Pläne unter dem unbeaufsichtigten Ausführungsprofil ausführen, gesteuert durch Heartbeat- oder Cron-Scheduling.
 
 ### Onboarding-Presets
 

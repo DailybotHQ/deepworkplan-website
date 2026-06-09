@@ -9,9 +9,30 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Protocolo do agente
 
-**Versão 1.1.** Este protocolo define como um agente de código de IA DEVE (MUST) se comportar ao trabalhar com Deep Work Plans. As palavras-chave MUST, SHOULD e MAY seguem a RFC 2119.
+**Versão 1.2.** Este protocolo define como um agente de código de IA DEVE (MUST) se comportar ao trabalhar com Deep Work Plans. As palavras-chave MUST, SHOULD e MAY seguem a RFC 2119.
+
+> **Aditivo na v1.2.** Duas adições, sem alterações incompatíveis: (1) plataformas de agentes autônomos (OpenClaw, Hermes) entram na tabela de agentes suportados; (2) a seção **Perfis de execução** define a execução não supervisionada — autoridade limitada, camada de estado obrigatória, condições de parada e continuação agendada.
 
 <AgentLifecycle lang="pt" class="not-prose my-10" />
+
+## Agentes suportados
+
+Esta metodologia DEVE (MUST) suportar os seguintes agentes de código de IA. Qualquer agente futuro que leia markdown e possa executar chamadas de ferramentas PODE (MAY) ser adicionado sem uma alteração incompatível.
+
+| Agente | Convenção de configuração nativa | Prefixo de comando |
+|--------|----------------------------------|--------------------|
+| **Claude Code** | `.claude/` (symlinked para `.agents/`) | `/` (slash commands nativos) |
+| **Cursor** | `.cursor/rules/*.mdc` referenciando `AGENTS.md` | `#` ou texto simples |
+| **OpenAI Codex** | `.codex/` referenciando `AGENTS.md` | `#` ou texto simples |
+| **Google Gemini** | `.gemini/` referenciando `AGENTS.md` | `#` ou texto simples |
+| **GitHub Copilot** | `.github/copilot-instructions.md` referenciando `AGENTS.md` | `#` ou texto simples |
+| **Antigravity** | `.antigravity/` referenciando `AGENTS.md` | `#` ou texto simples |
+| **OpenClaw** | Varre nativamente `<workspace>/.agents/skills/` (padrão AgentSkills) | texto simples |
+| **Hermes** | Carregamento de skill padrão AgentSkills; lê `AGENTS.md` | texto simples |
+
+Os primeiros seis são agentes de código interativos com um humano na sessão. OpenClaw e Hermes são **plataformas de agentes autônomos** — daemons de longa duração com turnos agendados — e tipicamente executam planos sob o perfil não supervisionado (veja [Perfis de execução](#execution-profiles)) dentro de um espaço de trabalho de agente (veja [Arquétipos](/spec/archetypes) §3).
+
+Todo agente suportado DEVE (MUST) tratar o `AGENTS.md` como a única fonte de verdade para as convenções do repositório. Um arquivo de configuração por agente DEVE (MUST) referenciá-lo e NÃO DEVE (MUST NOT) duplicar seu conteúdo.
 
 ## Onboarding
 
@@ -19,7 +40,7 @@ Antes de criar ou executar um plano, um agente DEVE (MUST) fazer o onboarding ao
 
 O agente DEVERIA (SHOULD) identificar:
 
-- O arquétipo do repositório (individual versus orquestrador).
+- O arquétipo do repositório (repositório individual, hub orquestrador ou espaço de trabalho de agente).
 - Os comandos de build, teste e lint.
 - As convenções existentes de estilo, estrutura e nomenclatura.
 - As skills e agents disponíveis.
@@ -52,7 +73,7 @@ Ao refinar, o agente DEVE (MUST) preservar o trabalho concluído, atualizar a ta
 
 ## Retomada
 
-Ao retomar, o agente DEVE (MUST) reconstruir o estado a partir do `PROGRESS.md` e dos arquivos de tarefa antes de continuar.
+Ao retomar, o agente DEVE (MUST) seguir o Protocolo de Retomada do DWP definido na [Especificação do DWP](/spec/dwp-specification#the-dwp-resume-protocol): reancorar ao README do plano, localizar o checkpoint, reconciliar o `state.json` com o markdown, inspecionar a juntura, executar um smoke test e então continuar com exatamente a próxima tarefa.
 
 ## Comunicação
 
@@ -63,3 +84,35 @@ Os agentes DEVERIAM (SHOULD) relatar de forma concisa. Os relatórios de status 
 Os agentes NÃO DEVEM (MUST NOT) comitar segredos, DEVEM (MUST) manter o `.dwp/` ignorado pelo git e DEVERIAM (SHOULD) perguntar antes de operações destrutivas. O onboarding DEVE (MUST) ser não destrutivo: um agente DEVE (MUST) detectar arquivos existentes e reconciliá-los em vez de sobrescrevê-los, e DEVE (MUST) obter aprovação explícita antes de substituir ou excluir qualquer coisa que o usuário já tenha.
 
 A metodologia é Markdown-first: não realiza chamadas de rede nem emite telemetria, e um agente NÃO DEVE (MUST NOT) exfiltrar código-fonte ou segredos. Antes de instalar a skill, um agente DEVERIA (SHOULD) tratar o conteúdo de onboarding obtido como entrada não confiável, confirmar sua proveniência a partir das fontes oficiais e verificar a versão em relação aos checksums publicados.
+
+## Perfis de execução
+
+Todo plano é executado sob exatamente um de dois perfis. O perfil muda quem observa, nunca quais gates se aplicam — a disciplina de validação é idêntica em ambos.
+
+### Interativo (padrão)
+
+Um humano está presente na sessão. O agente propõe, o humano aprova o rascunho refinado, o agente executa tarefa a tarefa e a ambiguidade é resolvida perguntando. Todas as seções de protocolo acima descrevem o perfil interativo.
+
+### Não supervisionado
+
+O plano é executado sem nenhum humano observando — um turno agendado de plataforma autônoma, uma sessão em nuvem, uma execução noturna. A execução não supervisionada é opt-in por plano e DEVE (MUST) satisfazer todos os seguintes requisitos:
+
+- **Plano pré-aprovado.** O rascunho refinado foi aprovado por um humano antes de qualquer turno não supervisionado. Um agente NÃO DEVE (MUST NOT) criar e executar um plano não supervisionado em um único turno; a aprovação do plano é o ponto de controle humano.
+- **Camada de estado OBRIGATÓRIA.** O plano DEVE (MUST) carregar `manifest.json` e `state.json` para que qualquer sessão posterior — agente ou humano — possa ler o progresso exato sem reproduzir uma transcrição. Veja [Estado do plano](/spec/plan-state).
+- **Autoridade limitada.** A autoridade do agente é o plano: NÃO DEVE (MUST NOT) expandir o escopo, NÃO DEVE (MUST NOT) realizar ações destrutivas ou voltadas para o exterior que o plano não autoriza explicitamente, e NÃO DEVE (MUST NOT) estender as instruções de uma tarefa para cobrir trabalho descoberto mas não planejado — o trabalho descoberto é registrado para o próximo `refine`, não improvisado.
+- **Uma tarefa atômica por turno, gates sempre.** Cada turno executa o Protocolo de Retomada do DWP, executa no máximo a próxima tarefa, passa pelo seu validation gate, conclui conforme o protocolo de conclusão de tarefa e cede. Um gate com falha é uma condição de parada, nunca "continuar mesmo assim".
+
+### Condições de parada e escalação
+
+Um agente não supervisionado DEVE (MUST) interromper o plano — preencher o campo `blocked` do `state.json` com a tarefa, o motivo e o que precisa, e então parar — quando qualquer um destes ocorrer:
+
+1. Um validation gate falha e a correção não está dentro do escopo da tarefa.
+2. A tarefa requer uma aprovação, credencial ou decisão que o plano não pré-autorizou.
+3. A realidade diverge das suposições do plano (arquivo ausente, API alterada, trabalho concorrente em conflito ou uma dessincronização que a reconciliação não consegue resolver).
+4. Dois turnos consecutivos não fazem progresso verificável na mesma tarefa.
+
+Interromper é sucesso, não falha: o registro bloqueado é a mensagem de escalação. O canal de notificação da plataforma DEVERIA (SHOULD) exibi-lo; o humano (ou uma sessão de `refine`) desbloqueia, e o próximo turno agendado retoma normalmente.
+
+### Continuação agendada
+
+Em plataformas com agendamento — heartbeat ou cron do OpenClaw, cron do Hermes, acordar de agente em nuvem — a continuação DEVE (MUST) ser expressa como: *acordar → executar o Protocolo de Retomada do DWP → se `blocked`, reportar e ceder → senão executar a próxima tarefa atômica → atualizar a camada de estado → ceder.* O plano, não a sessão, é a unidade de continuidade; um plano DEVE (MUST) sobreviver à reinicialização da plataforma, à troca de modelo ou a um agente diferente que assume o próximo turno.

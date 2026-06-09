@@ -1,0 +1,26 @@
+{
+  "schema": "https://deepworkplan.com/schema/repo-descriptor/v1.json",
+  "spec_version": "2.2.0",
+  "archetype": "individual",
+  "conformance": {
+    "verified": true,
+    "last_verified": "2026-06-09",
+    "checker": "conformance.sh (deepworkplan-skill verify sub-skill)"
+  },
+  "agents_md": "https://github.com/DailybotHQ/deepworkplan-website/blob/main/AGENTS.md",
+  "skill": {
+    "name": "deepworkplan",
+    "install": "npx skills add DailybotHQ/deepworkplan-skill",
+    "repository": "https://github.com/DailybotHQ/deepworkplan-skill"
+  },
+  "endpoints": {
+    "init": "https://deepworkplan.com/init.md",
+    "spec": "https://deepworkplan.com/spec",
+    "llms": "/llms.txt",
+    "trust": "/.well-known/dwp-trust.json"
+  },
+  "schemas": {
+    "plan_manifest": "https://deepworkplan.com/schema/plan-manifest/v1.json",
+    "plan_state": "https://deepworkplan.com/schema/plan-state/v1.json"
+  }
+}

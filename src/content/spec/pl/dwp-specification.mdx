@@ -11,7 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Specyfikacja DWP
 
-**Wersja 1.1. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
+**Wersja 1.2. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
+
+> **Addytywne w wersji 1.2.** Cztery addytywne możliwości, bez zmian niekompatybilnych wstecz: (1) **warstwa stanu planu odczytywalnego maszynowo** (`manifest.json` + `state.json`, zob. [Stan planu](/spec/plan-state)); (2) **poziomy proporcjonalnej rygorystyczności** (micro / standard / deep, zob. [Proporcjonalna rygorystyczność](#proportional-rigor)); (3) opcjonalna **sekcja Delta** w anatomii zadania dla zmian zachowania w systemach istniejących; oraz (4) **Protokół Wznowienia DWP** jest awansowany do nazwanego, cytowalnego rytuału składającego się z sześciu kroków. Istniejące plany w wersji 1.1 pozostają zgodne.
 
 ## Definicja
 
@@ -26,6 +28,8 @@ Plan MUSI być katalogiem w `.dwp/plans/` o nazwie `PLAN_<slug>/`. Katalog MUSI 
 - `README.md` — przegląd planu, cel, tabelę zadań i status.
 - Jeden plik na zadanie, o nazwie `<n>.task_<slug>.md`.
 - `PROGRESS.md` — bieżący dziennik realizacji.
+
+Plan MOŻE dodatkowo zawierać warstwę stanu odczytywalnego maszynowo: `manifest.json` (statyczna tożsamość, zapisywana raz podczas materializacji) i `state.json` (aktywny stan realizacji poszczególnych zadań). Warstwa stanu jest ZALECANA dla nowych planów i WYMAGANA przy wykonaniu nieobsługiwanym oraz w przestrzeniach roboczych agenta bez gita. Zob. [Stan planu](/spec/plan-state).
 
 ## Anatomia zadania
 
@@ -43,6 +47,18 @@ Każdy plik zadania MUSI zawierać te dziewięć sekcji, w kolejności:
 8. **Ryzyka** — co może pójść nie tak oraz środki zaradcze.
 9. **Ukończenie i dziennik** — znacznik statusu plus chronologiczne notatki.
 
+Zadanie MOŻE dodatkowo zawierać **sekcję Delta** (ZALECANA dla zmian zachowania w systemach istniejących — zob. poniżej) oraz **sekcję Rollback** (ZALECANA dla migracji, zmian infrastruktury lub wdrożeń).
+
+### Sekcja Delta (zmiany w systemach istniejących)
+
+Większość prawdziwej pracy modyfikuje istniejące zachowanie, a nie tworzy nowe. Zadanie, które zmienia sposób działania istniejącego systemu, POWINNO zawierać **sekcję Delta** opisującą zmianę jako jawny kontrakt przed/po, używając trzech nagłówków list:
+
+- **ADDED** — zachowanie, które istnieje po zadaniu, a nie istniało wcześniej.
+- **MODIFIED** — zachowanie, które istnieje w obu stanach, podane jako `was: … → now: …`.
+- **REMOVED** — zachowanie, które istniało wcześniej i jest celowo usunięte po zadaniu.
+
+Każdy wpis MUSI być obserwowalnym zachowaniem — odpowiedzią endpointu, flagą CLI, stanem UI, wartością domyślną — a nie szczegółem implementacji. Sekcja Delta to diff recenzenta na poziomie zachowania: kryteria akceptacji weryfikują wpisy ADDED/MODIFIED, a wpisy REMOVED są jawnym zezwoleniem na usunięcie. Wszystko, co nie jest wymienione jako REMOVED, MUSI nadal działać, a bramka walidacyjna zadania (istniejące testy pozostają zielone) to egzekwuje.
+
 ## Bramki walidacyjne i testy
 
 Walidacja jest bramką, która zamienia deklarację ukończenia w jego dowód: zadanie NIE MOŻE zostać oznaczone jako ukończone, dopóki każde polecenie z jego sekcji Walidacja nie zostanie uruchomione i nie przejdzie pomyślnie. Testy są pełnoprawną częścią tej bramki, a nie opcjonalnym dodatkiem — to one sprawiają, że kod dostarczany przez plan jest niezawodny i weryfikowalny.
@@ -54,6 +70,27 @@ Gdy zadanie dodaje nową kluczową funkcjonalność lub istotnie zmienia istniej
 - Istniejące testy MUSZĄ pozostać zielone. Zmiana, która psuje test pokrywający dotknięty kod, MUSI zaktualizować ten test do zamierzonego nowego zachowania; NIE MOŻE usuwać, pomijać ani osłabiać testu wyłącznie po to, by wymusić zaliczenie bramki.
 
 Zadania czysto dokumentacyjne, konfiguracyjne lub badawcze są zwolnione z tworzenia testów, lecz wciąż MUSZĄ uruchamiać dowolną bramkę walidacyjną, którą definiuje repozytorium. Głębokość testowania jest proporcjonalna do rozmiaru zmiany i dojrzałości repozytorium. Tam, gdzie repozytorium nie ma w ogóle żadnego łańcucha narzędzi do testów ani lintu, agent NIE MOŻE po cichu pomijać tej dyscypliny — opiera się na łańcuchu narzędzi zaproponowanym podczas onboardingu (zob. [Zgodność](/spec)).
+
+## Protokół ukończenia zadania
+
+Po zaliczeniu walidacji i przed przejściem do następnego zadania agent MUSI, w tej kolejności: (1) oznaczyć zadanie jako `[x]` w README planu; (2) zwiększyć licznik statusu planu; (3) wypełnić sekcję Ukończenie i dziennik zadania bez żadnych wartości zastępczych; (4) dodać wpis składający się z 3–5 punktów do `PROGRESS.md`; (5) wykonać commit (gdy plan dokonuje commitów) w formacie `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) gdy plan zawiera warstwę stanu, atomowo nadpisać `state.json` — zadanie `completed`, rekordy bramek, rekord wyników, hash commita.
+
+Sześć kroków tworzy jedną logiczną transakcję. Agent przerwany w środku protokołu NIE MOŻE rozpocząć następnego zadania — musi najpierw dokończyć lub cofnąć częściowe ukończenie.
+
+## Protokół wznowienia DWP
+
+Wznowienie MUSI być możliwe wyłącznie na podstawie plików planu i dziennika git, bez zewnętrznego stanu. W przestrzeni roboczej bez gita — zob. [Archetypy](/spec/archetypes) §3 — `state.json` planu jest WYMAGANY i zastępuje dziennik git.
+
+Wznawiający agent — nowa sesja, inny agent, zaplanowana tura demona lub budząca się sesja chmurowa — MUSI wykonać ten rytuał, w tej kolejności:
+
+1. **Ponowne zakotwiczenie.** Odczytanie README planu: cel, globalne wytyczne, lista zadań.
+2. **Zlokalizowanie punktu kontrolnego.** Znalezienie pierwszego niezaznaczonego zadania w README; odczytanie dziennika git i statusu git (lub `checkpoint` z `state.json` tam, gdzie git jest nieobecny).
+3. **Uzgodnienie stanu.** Tam gdzie istnieje `state.json`, porównanie go z polami wyboru README; przy desynchronizacji regeneracja z Markdown przed kontynuacją.
+4. **Zbadanie szwu.** Odczytanie sekcji Ukończenie i dziennik zadania stanowiącego punkt wznowienia oraz ostatniego wpisu `PROGRESS.md` — ostatniego zweryfikowanego gruntu poprzedniej sesji.
+5. **Test dymny.** Uruchomienie najtańszej stałej walidacji repozytorium w celu potwierdzenia, że świat nadal działa, zanim się na nim zbuduje. Nieudany test dymny jest najpierw badany, a nie budowany.
+6. **Kontynuacja atomowa.** Wykonanie dokładnie następnego zadania; bez grupowania do przodu.
+
+Agent MUSI ufać oznaczeniom ukończonym (`[x]`) i NIE MOŻE ponownie walidować ukończonych zadań, chyba że użytkownik jawnie o to poprosi lub test dymny zakończy się niepowodzeniem w sposób implikujący ukończone zadanie.
 
 ## Pętla realizacji
 
@@ -72,6 +109,28 @@ DWP definiuje pięć operacji:
 <OutputWorkspace lang="pl" class="not-prose my-10" />
 
 Wszystkie artefakty DWP MUSZĄ żyć w ignorowanym przez git katalogu `.dwp/` w głównym katalogu repozytorium.
+
+## Stan planu odczytywalny maszynowo
+
+Plan MOŻE zawierać warstwę stanu odczytywalną maszynowo — `manifest.json` (statyczna tożsamość) i `state.json` (aktywny stan poszczególnych zadań, rekordy bramek walidacyjnych, rekordy wyników, punkt kontrolny, stan zablokowania). Plan Markdown pozostaje źródłem prawdy; warstwa JSON jest pochodną projekcją, regenerowaną w punktach protokołu i uzgadnianą przy wznowieniu.
+
+Warstwa stanu jest ZALECANA dla nowych planów, WYMAGANA przy wykonaniu nieobsługiwanym i WYMAGANA w przestrzeniach roboczych agenta bez gita. Pełna definicja normatywna znajduje się w [Stan planu](/spec/plan-state).
+
+## Proporcjonalna rygorystyczność
+
+Rygorystyczność MUSI być proporcjonalna do pracy. Ceremonia przy trywialnych zmianach to błąd metodyczny, a nie dodatkowe bezpieczeństwo. Każda praca należy dokładnie do jednego poziomu:
+
+| Poziom | Kiedy | Forma |
+|--------|-------|-------|
+| **micro** | Pojedyncza zmiana atomowa: jedna kwestia, mniej więcej jedno posiedzenie, bez koordynacji. Naprawa błędu, zmiana tekstu, poprawka konfiguracji. | Brak folderu planu. Agent podaje cel, kryteria akceptacji i bramkę walidacyjną bezpośrednio w rozmowie, wykonuje, waliduje, commituje. |
+| **standard** | Praca wieloetapowa z prawdziwym zakresem: funkcja, refaktoryzacja, migracja w jednym repozytorium. Domyślny poziom. | Pełny plan: folder planu, zadania z dziewięcioma sekcjami, obowiązkowe zadania końcowe. |
+| **deep** | Praca długookresowa obejmująca równoległe grupy, repozytoria potomne lub wiele nieobsługiwanych sesji. | Standardowy plan plus możliwości orkiestratora i/lub agentów zespołowych oraz warstwa stanu. |
+
+Agent poproszony o stworzenie planu dla pracy na poziomie micro MUSI powiedzieć, że plan jest nieproporcjonalny, i zaproponować formę wbudowaną. Folder planu NIE MOŻE być tworzony dla trywialnej zmiany w jednym pliku.
+
+Praca na poziomie micro wciąż zachowuje to, co niezbywalne: jawny cel, bramkę walidacyjną, która działa i przechodzi, oraz dyscyplinę testową dla zmian zachowania. Poziom zmienia opakowanie, nigdy bramki.
+
+Gdy zakres rośnie w locie — zadanie micro odkrywa prawdziwy zakres, standardowy plan kiełkuje podrepozytoriami — agent MUSI się zatrzymać i awansować pracę do następnego poziomu, zamiast rozciągać bieżący.
 
 ## Wersjonowanie
 
