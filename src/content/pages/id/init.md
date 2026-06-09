@@ -45,8 +45,9 @@ Pahami dahulu repositori, lalu usulkan apa yang akan Anda lakukan.
 - **Deteksi stack.** Bahasa, framework, package manager (dari lockfile yang benar-benar
   ada), perintah build/test/lint/type-check yang sebenarnya, modul sumber, konvensi test, dan
   bentuk deployment-nya.
-- **Klasifikasikan arketipe.** Sebuah repositori individual (kasus umum) atau orchestrator hub, dengan
-  buktinya.
+- **Klasifikasikan arketipe.** Sebuah repositori individual (kasus umum), orchestrator hub, atau
+  ruang kerja agent — rumah long-lived dari agent otonom, di mana git direkomendasikan bukan
+  diasumsikan — dengan buktinya.
 - **Inventarisasi apa yang sudah ada.** `AGENTS.md`, `CLAUDE.md`, `docs/`, penyiapan `.agents/` atau skills/agents
   apa pun, `.dwp/`, dan `.gitignore`. Catat apa pun yang sudah melakukan sebagian dari pekerjaan ini.
 - **Usulkan rencana onboarding.** Sajikan daftar ringkas: berkas yang akan Anda buat, berkas yang akan Anda

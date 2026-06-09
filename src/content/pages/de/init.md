@@ -64,8 +64,9 @@ Verstehen Sie zuerst das Repository, schlagen Sie dann vor, was Sie tun werden.
 - **Den Stack erkennen.** Sprachen, Frameworks, den Paketmanager (aus der Lockfile, die tatsächlich
   existiert), die echten Build-/Test-/Lint-/Type-Check-Befehle, die Quellmodule, die Test-Konvention und
   die Deployment-Form.
-- **Den Archetyp klassifizieren.** Ein Einzel-Repository (der Regelfall) oder ein Orchestrator-Hub, mit
-  den Belegen.
+- **Den Archetyp klassifizieren.** Ein Einzel-Repository (der Regelfall), ein Orchestrator-Hub oder ein
+  Agenten-Arbeitsbereich — das langlebige Zuhause eines autonomen Agenten, wo git empfohlen statt
+  vorausgesetzt wird — mit den Belegen.
 - **Inventarisieren, was bereits existiert.** `AGENTS.md`, `CLAUDE.md`, `docs/`, ein etwaiges `.agents/`- oder Skills/Agents-
   Setup, `.dwp/` und `.gitignore`. Notieren Sie alles, was bereits einen Teil dieser Aufgabe erledigt.
 - **Den Onboarding-Plan vorschlagen.** Präsentieren Sie eine prägnante Liste: Dateien, die Sie erstellen, Dateien, die Sie

@@ -44,8 +44,9 @@ Najpierw zrozum repozytorium, a potem zaproponuj, co zrobisz.
 - **Wykryj stos.** Języki, frameworki, menedżer pakietów (na podstawie pliku blokady, który faktycznie
   istnieje), rzeczywiste komendy build/test/lint/type-check, moduły źródłowe, konwencję testów oraz
   kształt wdrożenia.
-- **Sklasyfikuj archetyp.** Pojedyncze repozytorium (przypadek typowy) albo centrum orkiestracji, wraz z
-  dowodami.
+- **Sklasyfikuj archetyp.** Pojedyncze repozytorium (przypadek typowy), centrum orkiestracji albo
+  przestrzeń robocza agenta — długotrwały dom autonomicznego agenta, gdzie git jest zalecany, a nie
+  zakładany z góry — wraz z dowodami.
 - **Sporządź inwentarz tego, co już istnieje.** `AGENTS.md`, `CLAUDE.md`, `docs/`, jakąkolwiek konfigurację `.agents/` lub skilli/agentów,
   `.dwp/` i `.gitignore`. Odnotuj wszystko, co już częściowo wykonuje to zadanie.
 - **Zaproponuj plan onboardingu.** Przedstaw zwięzłą listę: pliki, które utworzysz, pliki, które

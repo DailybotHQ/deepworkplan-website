@@ -45,8 +45,9 @@ Trước hết hãy hiểu repository, rồi đề xuất điều bạn sẽ là
 - **Phát hiện stack.** Các ngôn ngữ, framework, trình quản lý gói (từ lockfile thực sự
   tồn tại), các lệnh build/test/lint/type-check thật, các mô-đun nguồn, quy ước test, và
   hình dạng triển khai.
-- **Phân loại kiểu hình.** Một repository độc lập (trường hợp phổ biến) hay một trung tâm điều phối, kèm
-  bằng chứng.
+- **Phân loại kiểu hình.** Một repository độc lập (trường hợp phổ biến), một trung tâm điều phối, hay một
+  không gian làm việc agent — ngôi nhà tồn tại lâu dài của một agent tự chủ, nơi git được khuyến
+  nghị thay vì mặc định — kèm bằng chứng.
 - **Kiểm kê những gì đã tồn tại.** `AGENTS.md`, `CLAUDE.md`, `docs/`, bất kỳ thiết lập `.agents/` hay skill/agent
   nào, `.dwp/`, và `.gitignore`. Ghi chú bất cứ thứ gì đã làm một phần công việc này.
 - **Đề xuất kế hoạch khởi tạo.** Trình bày một danh sách súc tích: các tệp bạn sẽ tạo, các tệp bạn sẽ
