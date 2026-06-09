@@ -45,8 +45,9 @@ Prima comprendi il repository, poi proponi cosa farai.
 - **Rileva lo stack.** Linguaggi, framework, il package manager (dal lockfile effettivamente
   esistente), i comandi reali di build/test/lint/type-check, i moduli sorgente, la convenzione di test e
   la forma del deployment.
-- **Classifica l’archetipo.** Un repository individuale (il caso più comune) o un hub orchestratore, con
-  le relative evidenze.
+- **Classifica l’archetipo.** Un repository individuale (il caso più comune), un hub orchestratore, o un
+  workspace agente — la casa di lunga durata di un agente autonomo, dove git è raccomandato anziché
+  dato per scontato — con le relative evidenze.
 - **Inventaria ciò che già esiste.** `AGENTS.md`, `CLAUDE.md`, `docs/`, qualsiasi configurazione `.agents/` o di skill/agenti,
   `.dwp/` e `.gitignore`. Annota qualsiasi cosa svolga già parte di questo compito.
 - **Proponi il piano di onboarding.** Presenta un elenco conciso: i file che creerai, i file che

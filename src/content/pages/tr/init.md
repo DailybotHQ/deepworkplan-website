@@ -46,7 +46,8 @@ Herhangi bir şeyi değiştirmeden önce, benimsediğiniz standardı anlamanız 
 
 - **Yığını tespit edin.** Diller, çerçeveler, paket yöneticisi (gerçekten var olan lockfile’dan),
   gerçek build/test/lint/tür denetimi komutları, kaynak modüller, test kuralı ve dağıtım biçimi.
-- **Arketipi sınıflandırın.** Bir bireysel depo (yaygın durum) ya da bir orkestratör merkezi,
+- **Arketipi sınıflandırın.** Bir bireysel depo (yaygın durum), bir orkestratör merkezi ya da bir
+  ajan çalışma alanı — git'in varsayılan değil önerilen olduğu, otonom bir ajanın uzun ömürlü evi —
   kanıtlarıyla birlikte.
 - **Zaten var olanların envanterini çıkarın.** `AGENTS.md`, `CLAUDE.md`, `docs/`, herhangi bir `.agents/`
   ya da skills/agents kurulumu, `.dwp/` ve `.gitignore`. Bu işin bir kısmını zaten yapan her şeyi not edin.

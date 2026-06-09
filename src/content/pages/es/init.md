@@ -47,8 +47,9 @@ Primero entiende el repositorio, luego propón qué harás.
 - **Detecta el stack.** Lenguajes, frameworks, el gestor de paquetes (a partir del lockfile que
   realmente existe), los comandos reales de build/test/lint/type-check, los módulos de origen, la
   convención de pruebas y la forma de despliegue.
-- **Clasifica el arquetipo.** Un repositorio individual (el caso común) o un hub orquestador, con la
-  evidencia.
+- **Clasifica el arquetipo.** Un repositorio individual (el caso común), un hub orquestador, o un
+  espacio de trabajo de agente — el hogar de larga duración de un agente autónomo, donde git se
+  recomienda en lugar de suponerse — con la evidencia.
 - **Inventaría lo que ya existe.** `AGENTS.md`, `CLAUDE.md`, `docs/`, cualquier configuración
   `.agents/` o de skills/agentes, `.dwp/` y `.gitignore`. Anota lo que ya cumpla parte de este trabajo.
 - **Propón el plan de incorporación.** Presenta una lista concisa: archivos que crearás, archivos que

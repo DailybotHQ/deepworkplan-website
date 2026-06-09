@@ -46,8 +46,9 @@ Comprenez d’abord le dépôt, puis proposez ce que vous allez faire.
 - **Détectez la stack.** Les langages, les frameworks, le gestionnaire de paquets (à partir du fichier de verrouillage qui existe
   réellement), les vraies commandes de build/test/lint/vérification de types, les modules source, la convention de test, et
   la forme du déploiement.
-- **Classez l’archétype.** Un dépôt individuel (le cas courant) ou un hub orchestrateur, avec
-  les preuves.
+- **Classez l’archétype.** Un dépôt individuel (le cas courant), un hub orchestrateur, ou un
+  espace de travail d’agent — le foyer durable d’un agent autonome, où git est recommandé plutôt
+  que supposé — avec les preuves.
 - **Inventoriez ce qui existe déjà.** `AGENTS.md`, `CLAUDE.md`, `docs/`, toute configuration `.agents/` ou de skills/agents,
   `.dwp/`, et `.gitignore`. Notez tout ce qui accomplit déjà une partie de ce travail.
 - **Proposez le plan d’onboarding.** Présentez une liste concise : les fichiers que vous allez créer, les fichiers que vous allez
