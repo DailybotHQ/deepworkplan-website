@@ -53,3 +53,6 @@ spanish.png
 
 # Scheduler runtime lock (ephemeral, not tracked)
 .agents/scheduled_tasks.lock
+
+# Wrangler local cache (Cloudflare Pages dev)
+.wrangler/

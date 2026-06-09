@@ -312,20 +312,40 @@ Umami custom events are used to track specific user interactions beyond page vie
 
 ### Event Catalog
 
+This is the single source of truth for the site's analytics events. It is split
+into **client events** (fired from the browser via `trackEvent` — names live in the
+`EVENTS` constant in `src/lib/analytics.ts`) and **server events** (fired from the
+Cloudflare Pages middleware, because AI bots and `Accept: text/markdown` requests
+do not run JavaScript). Keep this table in sync with `src/lib/analytics.ts` and
+`functions/_middleware.ts`.
+
+**Client events** (`src/lib/analytics.ts` → `EVENTS`):
+
 | Event | Description | Data Payload | Source Component(s) |
 |-------|-------------|-------------|---------------------|
-| `nav_click` | Navigation link click | `{ item, source }` | Header.svelte, MobileMenu.svelte |
+| `nav_click` | Navigation link click | `{ item, source?, repo? }` | Header.svelte, MobileMenu.svelte |
 | `language_switch` | Language toggle | `{ from, to }` | Header.svelte, MobileMenu.svelte |
 | `mobile_menu_toggle` | Hamburger menu open/close | `{ action }` | Header.svelte |
-| `theme_toggle` | Dark/light mode switch | `{ theme }` | ThemeToggle.astro |
-| `copy_link` | Copy link button | — | CopyLinkButton.svelte |
+| `theme_toggle` | Dark/light mode switch | `{ theme }` | Header.svelte |
+| `copy_init` | Copy the `init.md` prompt | `{ source: 'home' \| 'init_page', lang }` | Hero.astro, InitPage.astro |
+| `cta_click` | Home hero call-to-action click | `{ target: 'init' \| 'methodology' \| 'spec' \| 'init_md', source: 'hero' }` | Hero.astro |
 | `contact_form_submit` | Contact form submitted | `{ reason }` | ContactForm.svelte |
 | `contact_form_error` | Form validation failure | `{ field_count }` | ContactForm.svelte |
-| `social_click` | Footer social link | `{ platform }` | Footer.astro |
-| `outbound_click` | External link click | `{ url }` | MainLayout.astro (delegated) |
-| `scroll_depth` | Scroll milestone | `{ depth }` | content pages (long-form readers) |
-| `ai_bot_visit` | AI crawler page visit (server-side) | `{ bot, path, method }` | `functions/_middleware.ts` (edge middleware) |
-| `markdown_request` | Markdown endpoint request (server-side) | `{ bot, path, source, user_agent }` | `functions/_middleware.ts` (edge middleware) |
+| `outbound_click` | External link click | `{ url }` | MainLayout.astro (delegated listener) |
+| `scroll_depth` | Scroll milestone (25/50/75/100%) | `{ depth }` | MainLayout.astro (all pages) |
+
+**Server events** (`functions/_middleware.ts` → Umami `/api/send`):
+
+| Event | Description | Data Payload | Trigger |
+|-------|-------------|-------------|---------|
+| `ai_bot_visit` | Known AI crawler page visit | `{ bot, path, method, user_agent }` | request User-Agent matches a known AI bot |
+| `unknown_bot_visit` | Heuristic (non-AI-list) bot visit | `{ bot, path, method, user_agent }` | UA looks like a bot but isn't in the known/ignored lists |
+| `markdown_request` | Markdown content served to a client | `{ bot, path, source: 'content_negotiation' \| 'direct_url', user_agent }` | `Accept: text/markdown` (negotiation) or a direct `*.md` URL |
+
+> Sending of all three server events is gated on the `PUBLIC_UMAMI_WEBSITE_ID`
+> environment variable being present in the Cloudflare Pages environment. Bot/
+> markdown events are **never** emitted client-side; do not add them to the client
+> `EVENTS` constant.
 
 ### How to Verify Events
 
@@ -341,11 +361,14 @@ Umami custom events are used to track specific user interactions beyond page vie
 | Event | How to Trigger | Expected Data |
 |-------|---------------|---------------|
 | `nav_click` | Click any nav link in header | `item: "methodology"`, `source: "desktop"` |
-| `language_switch` | Click EN/ES toggle | `from: "en"`, `to: "es"` |
-| `theme_toggle` | Click sun/moon button | `theme: "dark"` or `"light"` |
+| `language_switch` | Click language toggle | `from: "en"`, `to: "es"` |
+| `theme_toggle` | Click the hurricane-lamp toggle | `theme: "dark"` or `"light"` |
+| `copy_init` | Click "Copy init.md" (home or /init) | `source: "home"`, `lang: "en"` |
+| `cta_click` | Click a hero CTA (init/methodology/spec) | `target: "init"`, `source: "hero"` |
 | `contact_form_submit` | Submit the contact form | `reason: "project"` |
-| `social_click` | Click GitHub/LinkedIn in footer | `platform: "github"` |
 | `scroll_depth` | Scroll to bottom of a long page | `depth: "100"` |
+| `markdown_request` (server) | `curl -H 'Accept: text/markdown' <url>/methodology` | `source: "content_negotiation"` |
+| `ai_bot_visit` (server) | `curl -A 'GPTBot/1.1' <url>/` | `bot: "GPTBot"` |
 
 ### How to Add New Events
 

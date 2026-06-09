@@ -65,6 +65,7 @@ const initMarkdown = await getCanonicalInitMarkdown();
             >
             <a
               href={mdHref}
+              data-cta="init_md"
               class="break-all font-mono text-xs underline underline-offset-2 transition hover:opacity-80"
               style="color: var(--color-secondary);">{mdUrl}</a
             >
@@ -76,6 +77,7 @@ const initMarkdown = await getCanonicalInitMarkdown();
             data-copy={initMarkdown}
             data-label={h.copyLabel}
             data-copied={h.copiedLabel}
+            data-lang={lang}
             aria-label={h.copyLabel}
           >
             {h.copyLabel}
@@ -101,6 +103,7 @@ const initMarkdown = await getCanonicalInitMarkdown();
       >
         <a
           href={`${prefix}/init`}
+          data-cta="init"
           class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-6 py-3 text-base font-semibold transition hover:opacity-90"
           style="background-color: var(--color-ink); color: var(--color-paper);"
         >
@@ -108,6 +111,7 @@ const initMarkdown = await getCanonicalInitMarkdown();
         </a>
         <a
           href={`${prefix}/methodology`}
+          data-cta="methodology"
           class="inline-flex items-center justify-center whitespace-nowrap rounded-sm border px-6 py-3 text-base font-semibold transition hover:opacity-80"
           style="border-color: var(--color-line); color: var(--color-ink);"
         >
@@ -115,6 +119,7 @@ const initMarkdown = await getCanonicalInitMarkdown();
         </a>
         <a
           href={`${prefix}/spec`}
+          data-cta="spec"
           class="inline-flex items-center whitespace-nowrap text-base font-semibold transition hover:opacity-70 sm:px-2"
           style="color: var(--color-secondary);"
         >
@@ -123,7 +128,7 @@ const initMarkdown = await getCanonicalInitMarkdown();
       </div>
       </div>
 
-      <div class="mt-10 hidden md:block lg:mt-0">
+      <div class="mt-10 block lg:mt-0">
         <img
           src="/images/visuals/home/hero-harness.webp"
           alt={h.illustrationAlt}
@@ -146,6 +151,19 @@ const initMarkdown = await getCanonicalInitMarkdown();
 </section>
 
 <script>
+  import { EVENTS, trackEvent } from '@/lib/analytics';
+
+  // Track hero CTA clicks (init / methodology / spec / the visible init.md link).
+  // These are internal links, so the global outbound listener doesn't see them.
+  document.querySelectorAll<HTMLAnchorElement>('[data-cta]').forEach((link) => {
+    link.addEventListener('click', () => {
+      trackEvent(EVENTS.CTA_CLICK, {
+        target: link.dataset.cta ?? 'unknown',
+        source: 'hero',
+      });
+    });
+  });
+
   const COPY_FEEDBACK_MS = 2000;
 
   // Progressive enhancement: copy the instruction to the clipboard.
@@ -162,6 +180,10 @@ const initMarkdown = await getCanonicalInitMarkdown();
       busy = true;
       try {
         await navigator.clipboard.writeText(text);
+        trackEvent(EVENTS.COPY_INIT, {
+          source: 'home',
+          lang: btn.dataset.lang ?? 'en',
+        });
         btn.disabled = true;
         btn.textContent = copied;
         btn.setAttribute('aria-label', copied);

@@ -144,10 +144,12 @@ Serializes pages and reader entries into agent-friendly Markdown, powering the
 
 ### analytics.ts
 
-Privacy-friendly event tracking helpers and the `EVENTS` map. Tracked events:
+Privacy-friendly event tracking helpers and the `EVENTS` map. Client events:
 `NAV_CLICK`, `LANGUAGE_SWITCH`, `MOBILE_MENU_TOGGLE`, `THEME_TOGGLE`,
-`CONTACT_FORM_SUBMIT`, `CONTACT_FORM_ERROR`, `SOCIAL_CLICK`, `OUTBOUND_CLICK`,
-`SCROLL_DEPTH`, `AI_BOT_VISIT`.
+`COPY_INIT`, `CTA_CLICK`, `CONTACT_FORM_SUBMIT`, `CONTACT_FORM_ERROR`,
+`OUTBOUND_CLICK`, `SCROLL_DEPTH`. Bot/markdown events (`markdown_request`,
+`ai_bot_visit`, `unknown_bot_visit`) are emitted **server-side** from
+`functions/_middleware.ts`. The full catalog lives in `docs/ANALYTICS.md`.
 
 ---
 
