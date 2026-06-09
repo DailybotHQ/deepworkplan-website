@@ -1,6 +1,6 @@
 ---
 title: Arquétipos de repositório
-description: "Os arquétipos de repositório individual e hub orquestrador, a heurística para classificar um repositório e como o onboarding e o escopo dos planos diferem entre eles."
+description: "Os três arquétipos do DWP — repositório individual, hub orquestrador e espaço de trabalho de agente — a heurística de classificação e como o onboarding difere para cada um."
 order: 5
 lang: pt
 summary: Por que o arquétipo de um repositório determina como um agente faz o onboarding e define o escopo dos planos.
@@ -13,7 +13,7 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 Antes de alterar uma única linha, um agente toma uma decisão que molda tudo o que vem a seguir: **que tipo de repositório é este?** O arquétipo que ele infere define o limite dentro do qual raciocina pelo resto do trabalho — como faz o onboarding, até onde um plano alcança e onde o estado reside. Errar significa definir o escopo do trabalho para a superfície errada, a causa mais comum de deriva em tarefas de longo horizonte. Acertar permite ao agente trabalhar de forma autônoma por horas, porque planos, onboarding e estado se alinham com a forma real do código.
 
-O DWP reconhece dois arquétipos. A maioria dos repositórios é do primeiro tipo; o segundo existe para as equipes que coordenam muitos.
+O DWP reconhece três arquétipos. A maioria dos repositórios é do primeiro tipo; o segundo existe para as equipes que coordenam muitos; o terceiro cobre os workspaces de longa duração de agentes autônomos.
 
 <ArchetypesCompare lang="pt" class="not-prose my-10" />
 
@@ -38,25 +38,41 @@ Características:
 - Mantém um registro de repositórios gerenciados.
 - O espaço de trabalho `.dwp/` na raiz do hub rastreia o estado entre repositórios.
 
+## Espaço de trabalho de agente
+
+Um terceiro arquétipo, adicionado na v2.2, descreve algo que é um workspace antes de ser um repositório: o lar de longa duração de um agente autônomo. Um workspace do OpenClaw, um diretório de serviço do Hermes, o diretório de dados de um daemon de assistente pessoal, o volume persistente de um agente em nuvem — cada um tem planos a executar, ferramentas a usar e memória a manter, mas pode não ter uma base de código a entregar.
+
+O insight central é que **o harness é um workspace, não especificamente um repositório.** Todo elemento que o DWP instala em um repositório — `AGENTS.md`, `docs/`, `.agents/`, `.dwp/` — tem um equivalente direto no workspace. A superfície da metodologia mapeia de forma limpa: arquivos de contexto permanente substituem o `AGENTS.md` raiz, um diretório de skills da plataforma substitui `.agents/`, e a pasta `.dwp/` na raiz do workspace permanece sem alterações. O que muda é o papel do git. Em um repositório, o log do git carrega o estado e torna os planos retomáveis entre sessões. Em um workspace sem git, o `state.json` faz esse trabalho — razão pela qual a camada de estado legível por máquina é obrigatória para espaços de trabalho de agentes.
+
+O benefício prático são planos não supervisionados noturnos. Em plataformas classe OpenClaw, um heartbeat ou turno de cron acorda o agente, executa o protocolo de retomada do DWP, executa a próxima tarefa atômica, atualiza o `state.json` e cede. O plano — não a sessão — é a unidade de continuidade. Um plano de vários dias sobrevive a reinicializações, trocas de modelo e limites de sessão porque tudo o que o próximo turno precisa está nos arquivos do plano: o objetivo, o progresso marcado, os registros de gate e o checkpoint exato dentro da tarefa atual.
+
+Características:
+
+- O diretório de trabalho de uma plataforma de agente autônomo.
+- `AGENTS.md`, `.agents/` e `.dwp/` na raiz do workspace.
+- Git é recomendado, não obrigatório.
+- `state.json` é obrigatório quando o git está ausente, e para qualquer execução não supervisionada.
+- Os planos tipicamente são executados de forma não supervisionada, dirigidos por um heartbeat agendado ou cron.
+
 ## Heurística de classificação
 
-Os dois arquétipos se parecem diferentes em disco, e o agente decide entre eles a partir de sinais que pode verificar — não de um rótulo que lhe foi informado. A árvore de decisão abaixo mostra o caminho; em resumo, trate um repositório como hub orquestrador somente quando a evidência o exigir, e como repositório individual nos demais casos.
+Os três arquétipos parecem diferentes em disco, e o agente decide entre eles a partir de sinais que pode verificar — não de um rótulo que lhe foi informado. A árvore de decisão abaixo mostra o caminho; em resumo, classifique como espaço de trabalho de agente quando sinais de identidade de plataforma estiverem presentes, como hub orquestrador apenas quando a evidência o exigir e como repositório individual nos demais casos.
 
 <ArchetypesTree lang="pt" class="not-prose my-10" />
 
-Um agente deve classificar um repositório como hub orquestrador quando encontra múltiplos repositórios git aninhados ou submódulos, um registro ou manifesto de repositórios gerenciados, ou configuração que aponta para repositórios externos. Na ausência desses sinais, ele trata o repositório como um repositório individual — o padrão seguro, pois ampliar o escopo de um plano além de fronteiras que não existem é pior do que trabalhar dentro de uma que existe.
+Um agente deve primeiro procurar sinais de espaço de trabalho de agente: um arquivo de identidade de plataforma (como `SOUL.md` ou `HEARTBEAT.md` do OpenClaw), nenhuma stack de aplicação primária e conteúdo que é predominantemente o próprio estado do agente. Se esses estiverem ausentes, ele procura sinais de orquestrador: múltiplos repositórios git aninhados ou submódulos, um registro ou manifesto de repositórios gerenciados, ou configuração que aponta para repositórios externos. Na ausência de ambos, ele trata o alvo como um repositório individual — o padrão seguro, pois ampliar o escopo de um plano além de fronteiras que não existem é pior do que trabalhar dentro de uma que existe.
 
 ## Como o onboarding difere
 
 O arquétipo não é um rótulo cosmético; ele muda o que o agente lê, o que um plano pode tocar e onde o estado é registrado.
 
-| Aspecto | Individual | Orquestrador |
-|--------|------------|--------------|
-| Escopo | Este repositório | Múltiplos repositórios |
-| Onboarding | Estrutura do repositório | Registro do hub |
-| Alvo do plano | Arquivos locais | Planos filhos |
-| Estado | `.dwp/` local | `.dwp/` entre repositórios |
+| Aspecto | Individual | Orquestrador | Espaço de trabalho de agente |
+|--------|------------|--------------|------------------------------|
+| Escopo | Este repositório | Múltiplos repositórios | O workspace e seus planos |
+| Onboarding | Estrutura do repositório | Registro do hub | Arquivos da plataforma + convenções do workspace |
+| Alvo do plano | Arquivos locais | Planos filhos | Repositórios locais ou externos |
+| Estado | `.dwp/` local | `.dwp/` entre repositórios | `.dwp/` + `state.json` (obrigatório sem git) |
 
-O efeito prático é que um agente de repositório individual raciocina sobre uma base de código de ponta a ponta, enquanto um agente orquestrador raciocina sobre coordenação — qual repositório filho é dono de qual trabalho e como o estado entre repositórios permanece consistente.
+O efeito prático é que um agente de repositório individual raciocina sobre uma base de código de ponta a ponta, um agente orquestrador raciocina sobre coordenação entre repositórios e um agente de espaço de trabalho raciocina sobre continuidade entre sessões — o que foi planejado, o que foi executado, o que está bloqueado e o que vem a seguir.
 
-Acertar o arquétipo é o que permite a um agente trabalhar de forma autônoma por horas sem supervisão: ele ajusta os planos, o onboarding e o estado à fronteira certa, de modo que o agente opere sobre a superfície correta da primeira à última tarefa.
+É isso que permite a um agente trabalhar de forma autônoma por horas sem supervisão: ao fixar o arquétipo primeiro, ele ajusta os planos, o onboarding e o estado à fronteira certa, de modo que o agente opere sobre a superfície correta da primeira à última tarefa.

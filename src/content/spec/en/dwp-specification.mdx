@@ -11,7 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP specification
 
-**Version 1.1. Status: Stable.** This document is the normative specification for the Deep Work Plan (DWP) methodology. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
+**Version 1.2. Status: Stable.** This document is the normative specification for the Deep Work Plan (DWP) methodology. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
+
+> **Additive in v1.2.** Four additive capabilities, no breaking changes: (1) the **machine-readable plan state layer** (`manifest.json` + `state.json`, see [Plan state](/spec/plan-state)); (2) **proportional rigor tiers** (micro / standard / deep, see [Proportional rigor](#proportional-rigor)); (3) the optional **Delta section** in the task anatomy for brownfield behavior changes; and (4) the **DWP Resume Protocol** is promoted to a named, citable six-step ritual. Existing v1.1 plans remain conformant.
 
 ## Definition
 
@@ -26,6 +28,8 @@ A plan MUST be a directory under `.dwp/plans/` named `PLAN_<slug>/`. The directo
 - `README.md` — plan overview, goal, task table, and status.
 - One file per task, named `<n>.task_<slug>.md`.
 - `PROGRESS.md` — a running log of execution.
+
+A plan MAY additionally carry the machine-readable state layer: `manifest.json` (static identity, written once at materialization) and `state.json` (live per-task execution state). The state layer is RECOMMENDED for new plans and REQUIRED for unattended execution and for agent workspaces without git. See [Plan state](/spec/plan-state).
 
 ## Task anatomy
 
@@ -43,6 +47,18 @@ Each task file MUST contain these nine sections, in order:
 8. **Risks** — what could go wrong, and mitigations.
 9. **Completion & Log** — a status marker plus chronological notes.
 
+A task MAY additionally include a **Delta section** (RECOMMENDED for brownfield behavior changes — see below) and a **Rollback section** (RECOMMENDED for migrations, infrastructure changes, or deployments).
+
+### The Delta section (brownfield changes)
+
+Most real work modifies existing behavior rather than creating new behavior. A task that changes how an existing system behaves SHOULD carry a **Delta section** describing the change as an explicit before/after contract, using three list headings:
+
+- **ADDED** — behavior that exists after the task and did not before.
+- **MODIFIED** — behavior that exists in both, stated as `was: … → now: …`.
+- **REMOVED** — behavior that existed before and is intentionally gone after.
+
+Each entry MUST be observable behavior — an endpoint's response, a CLI flag, a UI state, a default value — not an implementation detail. The Delta section is the reviewer's diff at the behavior level: acceptance criteria verify the ADDED/MODIFIED entries, and the REMOVED entries are the explicit license to delete. Anything not listed as REMOVED MUST keep working, and the task's validation gate (existing tests staying green) is what enforces it.
+
 ## Validation gates and tests
 
 Validation is the gate that turns a claim of completion into evidence of it: a task MUST NOT be marked complete until every command in its Validation section has run and passed. Tests are a first-class part of this gate, not an optional add-on — they are what makes the code a plan ships reliable and verifiable.
@@ -54,6 +70,27 @@ When a task adds new core functionality or materially changes existing behavior:
 - Existing tests MUST stay green. A change that breaks a test covering the affected code MUST update that test to the intended new behavior; it MUST NOT delete, skip, or weaken a test merely to force the gate to pass.
 
 Pure-documentation, configuration, or research tasks are exempt from creating tests but still MUST run whatever validation gate the repository defines. The depth of testing is proportional to the size of the change and the repository's maturity. Where a repository has no test or lint toolchain at all, the agent MUST NOT silently skip this discipline — it relies on the toolchain proposed during onboarding (see [Conformance](/spec)).
+
+## Task completion protocol
+
+After passing validation and before advancing to the next task, the agent MUST, in order: (1) mark the task `[x]` in the plan README; (2) increment the plan status count; (3) fill the task's Completion & Log with no placeholder values; (4) add a 3–5 bullet entry to `PROGRESS.md`; (5) commit (where the plan commits) with the format `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) where the plan carries the state layer, rewrite `state.json` atomically — task `completed`, gate records, outcome record, commit hash.
+
+The six steps form one logical transaction. An agent interrupted mid-protocol MUST NOT start the next task — it must finish or unwind the partial completion first.
+
+## The DWP resume protocol
+
+Resume MUST be possible from only the plan's files plus the git log, with no external state. In a workspace without git — see [Archetypes](/spec/archetypes) §3 — the plan's `state.json` is REQUIRED and stands in for the git log.
+
+A resuming agent — a new session, a different agent, a scheduled daemon turn, or a cloud session waking — MUST perform this ritual, in order:
+
+1. **Re-anchor.** Read the plan README: goal, global guidelines, the task list.
+2. **Locate the checkpoint.** Find the first unchecked task in the README; read the git log and git status (or `state.json`'s `checkpoint` where git is absent).
+3. **Reconcile state.** Where `state.json` exists, compare it against the README checkboxes; on desync, regenerate it from the markdown before continuing.
+4. **Inspect the seam.** Read the resume-point task's Completion & Log and the last `PROGRESS.md` entry — the previous session's last verified ground.
+5. **Smoke-test.** Run the repository's cheapest standing validation to confirm the world still works before building on it. A failing smoke test is investigated first, not built upon.
+6. **Continue atomically.** Execute exactly the next task; do not batch ahead.
+
+The agent MUST trust completed (`[x]`) marks and MUST NOT re-validate completed tasks unless the user explicitly requests it, or the smoke test fails in a way that implicates a completed task.
 
 ## The execution loop
 
@@ -72,6 +109,28 @@ DWP defines five operations:
 <OutputWorkspace lang="en" class="not-prose my-10" />
 
 All DWP artifacts MUST live under a gitignored `.dwp/` directory at the repository root.
+
+## Machine-readable plan state
+
+A plan MAY carry the machine-readable state layer — `manifest.json` (static identity) and `state.json` (live per-task state, validation-gate records, outcome records, checkpoint, blocked state). The markdown plan remains the source of truth; the JSON layer is a derived projection, regenerated at protocol points and reconciled on resume.
+
+The state layer is RECOMMENDED for new plans, REQUIRED for unattended execution, and REQUIRED for agent workspaces without git. See the full normative definition in [Plan state](/spec/plan-state).
+
+## Proportional rigor
+
+Rigor MUST be proportional to the work. Ceremony on trivial changes is a methodology failure, not extra safety. Every piece of work falls in exactly one tier:
+
+| Tier | When | Form |
+|------|------|------|
+| **micro** | A single atomic change: one concern, roughly one sitting, no coordination. A bug fix, a copy change, a config tweak. | No plan folder. The agent states the goal, the acceptance criteria, and the validation gate inline in conversation, executes, validates, commits. |
+| **standard** | Multi-step work with real scope: a feature, a refactor, a migration within one repo. The default tier. | A full plan: plan folder, nine-section tasks, mandatory final tasks. |
+| **deep** | Long-horizon work spanning parallel groups, child repositories, or multiple unattended sessions. | A standard plan plus orchestrator and/or team-agents capabilities, and the state layer. |
+
+An agent asked to create a plan for micro-tier work MUST say that a plan is disproportionate and offer the inline form instead. A plan folder MUST NOT be created for a trivial single-file change.
+
+Micro-tier work still keeps the non-negotiables: an explicit goal, a validation gate that runs and passes, and test discipline for behavior changes. The tier changes the packaging, never the gates.
+
+When scope grows mid-flight — a micro task uncovers real scope, a standard plan sprouts sub-repositories — the agent MUST stop and promote the work to the next tier rather than stretching the current one.
 
 ## Versioning
 

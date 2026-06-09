@@ -1,6 +1,6 @@
 ---
 title: Archetype
-description: "คำอธิบายเชิงบรรทัดฐานของ archetype ของ repository ใน DWP: repository เดี่ยวและ orchestrator hub หลักการจำแนกประเภท และความแตกต่างของการออนบอร์ด"
+description: "คำอธิบายเชิงบรรทัดฐานของ archetype ของ repository ใน DWP: repository เดี่ยว orchestrator hub และ agent workspace หลักการจำแนกประเภท และความแตกต่างของการออนบอร์ด"
 order: 4
 lang: th
 section: Archetypes
@@ -9,7 +9,9 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 # Archetype
 
-**เวอร์ชัน 1.0** DWP รู้จัก archetype ของ repository สองแบบ archetype กำหนดว่าเอเจนต์จะออนบอร์ดอย่างไรและกำหนดขอบเขตแผนอย่างไร
+**เวอร์ชัน 1.1** DWP รู้จัก archetype ของ repository สามแบบ archetype กำหนดว่าเอเจนต์จะออนบอร์ดอย่างไร กำหนดขอบเขตแผนอย่างไร และชั้นสถานะที่เครื่องอ่านได้จำเป็นหรือไม่
+
+> **เพิ่มเติมใน v1.1** **agent workspace** (§3) เข้าร่วมเป็น archetype ที่สาม: บ้านที่มีอายุยาวนานของเอเจนต์อัตโนมัติ Git กลายเป็น RECOMMENDED แทนที่จะถูกสันนิษฐาน archetype สองแบบของ v1.0 ไม่เปลี่ยนแปลง
 
 ## repository เดี่ยว
 
@@ -32,23 +34,43 @@ repository ที่ทำหน้าที่ประสานงานซึ
 - ดูแล registry ของ repository ที่ถูกจัดการ
 - พื้นที่ทำงาน `.dwp/` ที่รากของ hub ติดตามสถานะข้าม repository
 
+## agent workspace
+
+agent workspace คือบ้านทำงานที่มีอายุยาวนานของเอเจนต์อัตโนมัติ — OpenClaw workspace ไดเรกทอรีบริการ Hermes ไดเรกทอรีข้อมูลของ personal-assistant daemon หรือ persistent volume ของ cloud agent มันเป็น workspace ไม่จำเป็นต้องเป็น git repository และผลิตภัณฑ์หลักของมันคืองานที่ดำเนินอยู่ของเอเจนต์ ไม่ใช่โค้ดเบสหนึ่ง
+
+ข้อคิดเห็นที่ทำให้ archetype นี้เป็นไปได้: **harness คือ workspace ไม่ใช่ repository โดยเฉพาะ** องค์ประกอบ harness ทุกอย่างที่ระเบียบวิธีนิยามสำหรับ repository มีสิ่งเทียบเท่าโดยตรงใน workspace:
+
+| องค์ประกอบ harness (repository) | สิ่งเทียบเท่าใน agent workspace |
+|------------------------------|---------------------------|
+| `AGENTS.md` (กฎ คำสั่งด่วน) | บริบทคงอยู่ของ workspace — `AGENTS.md` เอง หรือไฟล์ standing-orders ของแพลตฟอร์ม |
+| `docs/` (ความรู้ที่ยั่งยืน) | ไฟล์ความรู้ workspace และเอกสารหน่วยความจำ |
+| `.agents/` (skill, agent, คำสั่ง) | ไดเรกทอรี skill ของแพลตฟอร์ม — OpenClaw สแกน `<workspace>/.agents/skills/` แบบ native |
+| `.dwp/` (แผน ร่าง) | `.dwp/` ที่รากของ workspace — ไม่เปลี่ยนแปลง |
+| git log (สถานะ ความสามารถ resume) | `state.json` ต่อแผน ([สถานะแผน](/spec/plan-state)) REQUIRED ที่นี่ |
+
+agent workspace MUST มี `AGENTS.md`, `.agents/` และ `.dwp/` ที่รากของ workspace
+
+**Git เป็น RECOMMENDED ไม่ใช่ REQUIRED** ในกรณีที่ไม่มี git ทุกแผน MUST พกชั้นสถานะที่เครื่องอ่านได้: checkpoint gate records และ timestamp ต่อหนึ่งงานของ `state.json` พกข้อมูลการกู้คืนที่ git log พกใน repository
+
+แผนใน agent workspace โดยทั่วไปรันแบบไม่มีผู้ดูแล: heartbeat หรือรอบ cron ที่กำหนดเวลา resume แผนที่เปิดอยู่ผ่าน DWP Resume Protocol ดำเนินงาน atomic ถัดไป อัปเดตชั้นสถานะ และ yield แผน — ไม่ใช่เซสชัน — คือหน่วยของความต่อเนื่อง
+
 ## หลักการจำแนกประเภท
 
 <ArchetypesTree lang="th" class="not-prose my-10" />
 
-เอเจนต์ SHOULD จำแนก repository ว่าเป็น orchestrator hub หากพบ
+จำแนกเป็น**agent workspace**ก่อน เมื่อเป้าหมายคือไดเรกทอรีทำงานของแพลตฟอร์มเอเจนต์อัตโนมัติ — สัญญาณ: ไฟล์เอกลักษณ์แพลตฟอร์ม (เช่น `SOUL.md` หรือ `HEARTBEAT.md` ของ OpenClaw) ไม่มี application stack หลัก และเนื้อหาที่เป็นสถานะของเอเจนต์เองเป็นส่วนใหญ่ สัญญาณแพลตฟอร์มที่แข็งแกร่งหนึ่งอย่างก็เพียงพอ
 
-- git repository ที่ซ้อนกันหลายตัวหรือ submodule
-- registry หรือ manifest ของ repository ที่ถูกจัดการ
-- การกำหนดค่าที่ชี้ไปยัง repository ภายนอก
+มิฉะนั้น จำแนกเป็น**orchestrator hub**เมื่อส่วนใหญ่ที่ชัดเจนของสิ่งต่อไปนี้ถือเป็นจริง: git repository ที่ซ้อนกันหลายตัวหรือ submodule; registry หรือ manifest ของ repository ที่ถูกจัดการ; การกำหนดค่าที่ชี้ไปยัง repository ภายนอก จำแนกเป็น**repository เดี่ยว**ในกรณีอื่น — มันเป็นค่าเริ่มต้นที่ปลอดภัย
 
-มิฉะนั้นให้ถือว่ามันเป็น repository เดี่ยว
+เมื่อสัญญาณกำกวม เอเจนต์ MUST นำเสนอการประเมินและหลักฐานให้ผู้ใช้และขอการยืนยันก่อนดำเนินการ
 
 ## ความแตกต่างของการออนบอร์ด
 
-| ด้าน | เดี่ยว | Orchestrator |
-|--------|------------|--------------|
-| ขอบเขต | repository นี้ | repository หลายตัว |
-| การออนบอร์ด | โครงสร้าง repository | registry ของ hub |
-| เป้าหมายแผน | ไฟล์ในเครื่อง | แผนลูก |
-| สถานะ | `.dwp/` ในเครื่อง | `.dwp/` ข้าม repository |
+| ด้าน | เดี่ยว | Orchestrator | Agent workspace |
+|--------|------------|--------------|-----------------|
+| ขอบเขต | repository นี้ | repository หลายตัว | workspace และแผนของมัน |
+| การออนบอร์ด | โครงสร้าง repository | registry ของ hub | ไฟล์แพลตฟอร์ม + ข้อตกลง workspace |
+| เป้าหมายแผน | ไฟล์ในเครื่อง | แผนลูก | repository ในเครื่องหรือภายนอก |
+| สถานะ | `.dwp/` ในเครื่อง | `.dwp/` ข้าม repository | `.dwp/` + `state.json` (REQUIRED ไม่มี git) |
+| Git | Required | Required | RECOMMENDED |
+| ชั้นสถานะ | RECOMMENDED | RECOMMENDED | REQUIRED ไม่มี git; REQUIRED สำหรับการรันแบบไม่มีผู้ดูแล |

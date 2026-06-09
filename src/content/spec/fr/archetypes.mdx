@@ -1,6 +1,6 @@
 ---
 title: Archétypes
-description: "Description normative des archétypes de dépôt DWP : le dépôt individuel et le hub orchestrateur, l’heuristique de classification, et en quoi l’onboarding diffère."
+description: "Description normative des archétypes de dépôt DWP : le dépôt individuel, le hub orchestrateur et l'espace de travail d'agent, l'heuristique de classification, et en quoi l'onboarding diffère."
 order: 4
 lang: fr
 section: Archetypes
@@ -9,7 +9,9 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 # Archétypes
 
-**Version 1.0.** DWP reconnaît deux archétypes de dépôt. L’archétype détermine la façon dont un agent s’intègre et dont les plans sont cadrés.
+**Version 1.1.** DWP reconnaît trois archétypes. L'archétype détermine la façon dont un agent s'intègre, comment les plans sont cadrés, et si la couche d'état lisible par machine est requise.
+
+> **Additif en v1.1.** L'**espace de travail d'agent** (§3) rejoint la liste comme troisième archétype : le foyer durable d'un agent autonome. Git devient RECOMMENDED plutôt qu'assumé. Les deux archétypes v1.0 restent inchangés.
 
 ## Dépôt individuel
 
@@ -30,25 +32,45 @@ Caractéristiques :
 - Coordonne plusieurs sous-dépôts.
 - Les plans peuvent déléguer à des plans enfants.
 - Maintient un registre des dépôts gérés.
-- L’espace de travail `.dwp/` à la racine du hub suit l’état inter-dépôts.
+- L'espace de travail `.dwp/` à la racine du hub suit l'état inter-dépôts.
+
+## Espace de travail d'agent
+
+Un espace de travail d'agent est le foyer de travail durable d'un agent autonome — un espace de travail OpenClaw, un répertoire de service Hermes, le répertoire de données d'un daemon d'assistant personnel, ou le volume persistant d'un agent cloud. C'est un espace de travail, pas nécessairement un dépôt git, et son produit principal est le travail continu de l'agent plutôt qu'une base de code.
+
+L'intuition qui rend cet archétype possible : **le harness est un espace de travail, pas spécifiquement un dépôt.** Chaque élément de harness que la méthodologie définit pour un dépôt a un équivalent direct dans l'espace de travail :
+
+| Élément de harness (dépôt) | Équivalent espace de travail d'agent |
+|----------------------------|--------------------------------------|
+| `AGENTS.md` (règles, commandes rapides) | Le contexte permanent de l'espace de travail — `AGENTS.md` lui-même, ou le fichier d'ordres permanents de la plateforme |
+| `docs/` (connaissances durables) | Fichiers de connaissances et documents mémoire de l'espace de travail |
+| `.agents/` (skills, agents, commandes) | Le répertoire de skills de la plateforme — OpenClaw scanne nativement `<workspace>/.agents/skills/` |
+| `.dwp/` (plans, brouillons) | `.dwp/` à la racine de l'espace de travail — inchangé |
+| Journal git (état, reprenabilité) | `state.json` par plan ([État du plan](/spec/plan-state)), REQUIRED ici |
+
+Un espace de travail d'agent MUST fournir `AGENTS.md`, `.agents/` et `.dwp/` à la racine de l'espace de travail.
+
+**Git est RECOMMENDED, pas REQUIRED.** En l'absence de git, chaque plan MUST porter la couche d'état lisible par machine : le point de reprise, les enregistrements de portes et les horodatages par tâche de `state.json` portent les informations de récupération que le journal git porte dans un dépôt.
+
+Les plans dans un espace de travail d'agent s'exécutent typiquement sans surveillance : un tour heartbeat ou cron planifié reprend le plan ouvert via le Protocole de reprise DWP, exécute la prochaine tâche atomique, met à jour la couche d'état, et cède la main. Le plan — et non la session — est l'unité de continuité.
 
 ## Heuristique de classification
 
 <ArchetypesTree lang="fr" class="not-prose my-10" />
 
-Un agent SHOULD classer un dépôt comme hub orchestrateur s’il trouve :
+Classer en **espace de travail d'agent** en premier, lorsque la cible est le répertoire de travail d'une plateforme d'agents autonomes — signaux : un fichier d'identité de plateforme (tel que `SOUL.md` ou `HEARTBEAT.md` d'OpenClaw), pas de stack applicative principale, et un contenu qui est principalement l'état propre de l'agent. Un seul signal de plateforme fort suffit.
 
-- Plusieurs dépôts git imbriqués ou des sous-modules.
-- Un registre ou un manifeste de dépôts gérés.
-- Une configuration pointant vers des dépôts externes.
+Sinon, classer comme **hub orchestrateur** lorsqu'une majorité claire des éléments suivants s'applique : plusieurs dépôts git imbriqués ou des sous-modules ; un registre ou un manifeste de dépôts gérés ; une configuration pointant vers des dépôts externes. Classer comme **dépôt individuel** dans les autres cas — c'est le comportement sûr par défaut.
 
-Sinon, il le traite comme un dépôt individuel.
+Lorsque les signaux sont ambigus, l'agent MUST présenter son évaluation et ses preuves à l'utilisateur et demander une confirmation avant de continuer.
 
-## Différences d’onboarding
+## Différences d'onboarding
 
-| Aspect | Individuel | Orchestrateur |
-|--------|------------|--------------|
-| Périmètre | Ce dépôt | Plusieurs dépôts |
-| Onboarding | Structure du dépôt | Registre du hub |
-| Cible du plan | Fichiers locaux | Plans enfants |
-| État | `.dwp/` local | `.dwp/` inter-dépôts |
+| Aspect | Individuel | Orchestrateur | Espace de travail d'agent |
+|--------|------------|--------------|---------------------------|
+| Périmètre | Ce dépôt | Plusieurs dépôts | L'espace de travail et ses plans |
+| Onboarding | Structure du dépôt | Registre du hub | Fichiers de plateforme + conventions de l'espace de travail |
+| Cible du plan | Fichiers locaux | Plans enfants | Dépôts locaux ou externes |
+| État | `.dwp/` local | `.dwp/` inter-dépôts | `.dwp/` + `state.json` (REQUIRED sans git) |
+| Git | Requis | Requis | RECOMMENDED |
+| Couche d'état | RECOMMENDED | RECOMMENDED | REQUIRED sans git ; REQUIRED pour les exécutions sans surveillance |

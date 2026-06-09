@@ -36,8 +36,7 @@ Slash commands enxutos delegam às sub-skills e aos addons:
 
 ### Adaptadores
 
-Integrações enxutas por agente para Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
-OpenCode, Windsurf, Cline e Antigravity.
+Integrações enxutas por agente para Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Windsurf, Cline e Antigravity. Os adaptadores OpenClaw e Hermes cobrem plataformas de agentes autônomos que executam planos sob o perfil de execução não supervisionada, dirigidos por heartbeat ou agendamento cron. O adaptador para agentes em nuvem cobre sessões efêmeras (tarefas remotas do Claude Code, Codex cloud, agentes classe Jules) que executam contra um plano `.dwp/` durável.
 
 ### Presets de onboarding
 

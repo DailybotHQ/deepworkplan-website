@@ -1,6 +1,6 @@
 ---
 title: Các kiểu hình repository
-description: "Kiểu hình repository độc lập và trung tâm điều phối, phép suy đoán để phân loại một repository, và cách khởi tạo cùng phạm vi kế hoạch khác nhau giữa chúng."
+description: "Ba kiểu hình DWP — repo độc lập, trung tâm điều phối và không gian làm việc agent — phép suy đoán phân loại, và cách khởi tạo khác nhau cho từng kiểu."
 order: 5
 lang: vi
 summary: Vì sao kiểu hình của một repository quyết định cách agent khởi tạo và giới hạn phạm vi các kế hoạch.
@@ -13,7 +13,7 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 Trước khi thay đổi bất kỳ dòng nào, agent đưa ra một quyết định định hình tất cả những gì tiếp theo: **đây là loại repository nào?** Kiểu hình mà nó suy ra xác lập ranh giới mà nó sẽ lý luận trong suốt phần việc — cách nó khởi tạo, một kế hoạch vươn tới đâu, và trạng thái được lưu trữ ở đâu. Xác định sai, agent sẽ giới hạn phạm vi công việc vào sai bề mặt — nguồn gốc phổ biến nhất của hiện tượng drift trong các tác vụ dài hạn. Xác định đúng, agent có thể hoạt động tự chủ trong nhiều giờ, vì các kế hoạch, quá trình khởi tạo và trạng thái đều phù hợp với hình dạng thực của mã nguồn.
 
-DWP nhận diện hai kiểu hình. Hầu hết các repository thuộc về kiểu đầu tiên; kiểu thứ hai dành cho các nhóm điều phối nhiều repository.
+DWP nhận diện ba kiểu hình. Hầu hết các repository thuộc về kiểu đầu tiên; kiểu thứ hai dành cho các nhóm điều phối nhiều repository; kiểu thứ ba bao gồm các không gian làm việc tồn tại lâu dài của các agent tự chủ.
 
 <ArchetypesCompare lang="vi" class="not-prose my-10" />
 
@@ -38,25 +38,41 @@ Trường hợp điều phối: một repository mà nhiệm vụ của nó là 
 - Duy trì một danh bạ các repository được quản lý.
 - Không gian làm việc `.dwp/` tại gốc trung tâm theo dõi trạng thái xuyên repository.
 
+## Không gian làm việc agent
+
+Kiểu hình thứ ba, được thêm vào trong v2.2, mô tả thứ gì đó là một không gian làm việc trước khi là một repository: ngôi nhà tồn tại lâu dài của một agent tự chủ. Một không gian làm việc OpenClaw, một thư mục dịch vụ Hermes, thư mục dữ liệu của một daemon trợ lý cá nhân, volume bền vững của một cloud agent — mỗi cái đều có các kế hoạch để thực thi, công cụ để sử dụng, và bộ nhớ để duy trì, nhưng có thể không có codebase cần xuất bản.
+
+Nhận thức then chốt là **harness là một không gian làm việc, không đặc biệt là một repository.** Mọi phần tử DWP cài vào một repository — `AGENTS.md`, `docs/`, `.agents/`, `.dwp/` — đều có tương đương trực tiếp trong không gian làm việc. Bề mặt của phương pháp luận ánh xạ gọn gàng: các tệp ngữ cảnh thường trực thay thế `AGENTS.md` gốc, một thư mục skill của nền tảng thay thế `.agents/`, và thư mục `.dwp/` tại gốc không gian làm việc không thay đổi. Điều thay đổi là vai trò của git. Trong một repository, git log mang trạng thái và làm cho các kế hoạch có thể tiếp tục qua các phiên. Trong một không gian làm việc không có git, `state.json` làm công việc đó — đó là lý do tại sao lớp trạng thái có thể đọc bằng máy là bắt buộc cho các không gian làm việc agent.
+
+Kết quả thực tế là các kế hoạch không có giám sát qua đêm. Trên các nền tảng lớp OpenClaw, một nhịp tim hay lượt cron đánh thức agent, chạy giao thức tiếp tục DWP, thực thi tác vụ nguyên tử tiếp theo, cập nhật `state.json`, và nhường. Kế hoạch — không phải phiên — là đơn vị liên tục. Một kế hoạch nhiều ngày tồn tại qua các lần khởi động lại, hoán đổi mô hình và ranh giới phiên vì mọi thứ lượt tiếp theo cần đều nằm trong các tệp kế hoạch: mục tiêu, tiến độ đã đánh dấu xong, bản ghi cổng và điểm kiểm tra chính xác bên trong tác vụ hiện tại.
+
+Đặc điểm:
+
+- Thư mục làm việc của một nền tảng agent tự chủ.
+- `AGENTS.md`, `.agents/` và `.dwp/` tại gốc không gian làm việc.
+- Git được khuyến nghị, không bắt buộc.
+- `state.json` là bắt buộc khi git vắng mặt, và cho bất kỳ lần chạy không có giám sát nào.
+- Các kế hoạch thường chạy không có giám sát, được điều khiển bởi một nhịp tim hay cron theo lịch.
+
 ## Phép suy đoán phân loại
 
-Hai kiểu hình trông khác nhau trên đĩa, và agent quyết định giữa chúng dựa trên các tín hiệu có thể xác minh — không phải nhãn được cung cấp sẵn. Cây quyết định bên dưới cho thấy con đường; nói ngắn gọn, chỉ coi một repository là trung tâm điều phối khi bằng chứng đòi hỏi như vậy, còn lại là repository độc lập.
+Ba kiểu hình trông khác nhau trên đĩa, và agent quyết định giữa chúng dựa trên các tín hiệu có thể xác minh — không phải nhãn được cung cấp sẵn. Cây quyết định bên dưới cho thấy con đường; nói ngắn gọn, phân loại là không gian làm việc agent khi có các tín hiệu danh tính nền tảng, là trung tâm điều phối chỉ khi bằng chứng đòi hỏi như vậy, còn lại là repository độc lập.
 
 <ArchetypesTree lang="vi" class="not-prose my-10" />
 
-Một agent nên phân loại một repository là trung tâm điều phối khi nó tìm thấy nhiều repository git lồng nhau hoặc submodule, một danh bạ hay manifest các repository được quản lý, hoặc cấu hình trỏ tới các repository bên ngoài. Khi không có các dấu hiệu đó, nó coi repository là một repository độc lập — giá trị mặc định an toàn, vì mở rộng phạm vi kế hoạch vượt qua các ranh giới không tồn tại còn tệ hơn là làm việc trong một ranh giới có thực.
+Một agent trước tiên nên tìm các tín hiệu không gian làm việc agent: một tệp danh tính nền tảng (như `SOUL.md` hoặc `HEARTBEAT.md` của OpenClaw), không có ngăn xếp ứng dụng chính, và nội dung chủ yếu là trạng thái riêng của agent. Nếu những dấu hiệu đó vắng mặt, nó tìm kiếm các tín hiệu điều phối: nhiều git repository lồng nhau hoặc submodule, một danh bạ hay manifest các repository được quản lý, hoặc cấu hình trỏ tới các repository bên ngoài. Khi không có cả hai, nó coi đích là một repository độc lập — mặc định an toàn, vì mở rộng phạm vi kế hoạch vượt qua các ranh giới không tồn tại còn tệ hơn là làm việc trong một ranh giới có thực.
 
 ## Khởi tạo khác nhau như thế nào
 
 Kiểu hình không phải nhãn trang trí; nó thay đổi những gì agent đọc, những gì kế hoạch có thể chạm tới, và nơi trạng thái được ghi lại.
 
-| Khía cạnh | Độc lập | Điều phối |
-|--------|------------|--------------|
-| Phạm vi | Repository này | Nhiều repository |
-| Khởi tạo | Cấu trúc repository | Danh bạ trung tâm |
-| Đích kế hoạch | Tệp cục bộ | Các kế hoạch con |
-| Trạng thái | `.dwp/` cục bộ | `.dwp/` xuyên repository |
+| Khía cạnh | Độc lập | Điều phối | Không gian làm việc agent |
+|--------|------------|--------------|--------------------------|
+| Phạm vi | Repository này | Nhiều repository | Không gian làm việc và các kế hoạch của nó |
+| Khởi tạo | Cấu trúc repository | Danh bạ trung tâm | Tệp nền tảng + quy ước không gian làm việc |
+| Đích kế hoạch | Tệp cục bộ | Các kế hoạch con | Repository cục bộ hoặc bên ngoài |
+| Trạng thái | `.dwp/` cục bộ | `.dwp/` xuyên repository | `.dwp/` + `state.json` (bắt buộc không có git) |
 
-Hệ quả thực tế là một agent repository độc lập suy luận về một codebase từ đầu tới cuối, trong khi một agent điều phối suy luận về sự điều phối — repository con nào sở hữu công việc nào, và làm sao trạng thái xuyên repository luôn nhất quán.
+Hệ quả thực tế là một agent repository độc lập suy luận về một codebase từ đầu tới cuối, một agent điều phối suy luận về sự điều phối xuyên repository, và một agent không gian làm việc suy luận về tính liên tục qua các phiên — những gì đã được lên kế hoạch, những gì đã chạy, những gì bị chặn và những gì sẽ đến tiếp theo.
 
 Đây là điều cho phép một agent làm việc tự chủ trong nhiều giờ mà không cần giám sát: bằng cách xác lập kiểu hình trước tiên, nó giới hạn phạm vi các kế hoạch, việc khởi tạo và trạng thái vào đúng ranh giới, để mọi tác vụ từ đầu tiên tới cuối cùng đều vận hành trên bề mặt chính xác.

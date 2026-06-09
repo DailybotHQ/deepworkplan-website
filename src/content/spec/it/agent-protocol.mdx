@@ -1,6 +1,6 @@
 ---
 title: Protocollo degli agenti
-description: "Il contratto comportamentale normativo per gli agenti di coding AI che lavorano con i Deep Work Plan: onboarding, pianificazione, esecuzione, raffinamento, ripresa e sicurezza."
+description: "Il contratto comportamentale normativo per gli agenti di coding AI: onboarding, pianificazione, esecuzione, sicurezza e profili di esecuzione — operazione interattiva contro non presidiata."
 order: 3
 lang: it
 section: Protocol
@@ -9,50 +9,71 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Protocollo degli agenti
 
-**Versione 1.1.** Questo protocollo definisce come un agente di coding AI DEVE comportarsi quando lavora con i Deep Work Plan. Le parole chiave MUST, SHOULD e MAY seguono la RFC 2119.
+**Versione 1.2.** Questo protocollo definisce come un agente di coding AI DEVE comportarsi quando lavora con i Deep Work Plan. Le parole chiave MUST, SHOULD e MAY seguono la RFC 2119.
+
+> **Additivi in v1.2.** Due aggiunte, nessuna modifica incompatibile: (1) le piattaforme di agenti autonomi (OpenClaw, Hermes) entrano nella tabella degli agenti supportati; (2) la sezione **Profili di esecuzione** definisce l'esecuzione non presidiata — autorità limitata, livello di stato obbligatorio, stop condition e continuazione pianificata.
 
 <AgentLifecycle lang="it" class="not-prose my-10" />
 
+## Agenti supportati
+
+Questa metodologia DEVE supportare i seguenti agenti di coding AI. Qualsiasi agente futuro che legge markdown e può eseguire chiamate agli strumenti PUÒ essere aggiunto senza una modifica incompatibile.
+
+| Agente | Convenzione di configurazione nativa | Prefisso dei comandi |
+|--------|--------------------------------------|----------------------|
+| **Claude Code** | `.claude/` (collegato a `.agents/`) | `/` (slash command nativi) |
+| **Cursor** | `.cursor/rules/*.mdc` che referenzia `AGENTS.md` | `#` o plain text |
+| **OpenAI Codex** | `.codex/` che referenzia `AGENTS.md` | `#` o plain text |
+| **Google Gemini** | `.gemini/` che referenzia `AGENTS.md` | `#` o plain text |
+| **GitHub Copilot** | `.github/copilot-instructions.md` che referenzia `AGENTS.md` | `#` o plain text |
+| **Antigravity** | `.antigravity/` che referenzia `AGENTS.md` | `#` o plain text |
+| **OpenClaw** | Scansione nativa di `<workspace>/.agents/skills/` (standard AgentSkills) | plain text |
+| **Hermes** | Caricamento skill con standard AgentSkills; legge `AGENTS.md` | plain text |
+
+I primi sei sono agenti di coding interattivi con un essere umano nella sessione. OpenClaw e Hermes sono **piattaforme di agenti autonomi** — daemon di lunga durata con turni pianificati — e in genere eseguono i piani sotto il profilo non presidiato (vedi [Profili di esecuzione](#profili-di-esecuzione)) all'interno di un workspace agente (vedi [Archetipi](/spec/archetypes) §3).
+
+Ogni agente supportato DEVE trattare `AGENTS.md` come l'unica fonte di verità per le convenzioni del repository. Un file di configurazione per agente DEVE referenziarlo e NON DEVE duplicarne il contenuto.
+
 ## Onboarding
 
-Prima di creare o eseguire un piano, un agente DEVE fare l’onboarding al repository. L’onboarding è basato sul ragionamento, non su script: l’agente legge la struttura, la documentazione e la configurazione del repository per costruire un modello mentale.
+Prima di creare o eseguire un piano, un agente DEVE fare l'onboarding al repository. L'onboarding è basato sul ragionamento, non su script: l'agente legge la struttura, la documentazione e la configurazione del repository per costruire un modello mentale.
 
-L’agente DOVREBBE identificare:
+L'agente DOVREBBE identificare:
 
-- L’archetipo del repository (individuale contro orchestratore).
+- L'archetipo del repository (individuale, hub orchestratore o workspace agente).
 - I comandi di build, test e lint.
 - Le convenzioni esistenti per stile, struttura e denominazione.
 - Le skill e gli agenti disponibili.
 
-La toolchain di testing e validazione è contesto essenziale, non opzionale: i validation gate sono la spina dorsale dei piani affidabili. Dove il repository già valida il codice, l’agente DEVE registrarne i comandi reali di test, lint e type-check e la relativa convenzione. Dove il repository **non** ha una toolchain di test o lint, l’agente NON DEVE limitarsi a notarne l’assenza — DEVE proporne una adatta allo stack (un framework e un runner, una convenzione per i file di test, un obiettivo iniziale di copertura sensato e gli strumenti di lint, type-check e formattazione), documentarla come obiettivo nella guida al testing e portarla all’attenzione dello sviluppatore. Un repository senza un modo definito per validare il proprio comportamento non è ancora AI-first.
+La toolchain di testing e validazione è contesto essenziale, non opzionale: i validation gate sono la spina dorsale dei piani affidabili. Dove il repository già valida il codice, l'agente DEVE registrarne i comandi reali di test, lint e type-check e la relativa convenzione. Dove il repository **non** ha una toolchain di test o lint, l'agente NON DEVE limitarsi a notarne l'assenza — DEVE proporne una adatta allo stack (un framework e un runner, una convenzione per i file di test, un obiettivo iniziale di copertura sensato e gli strumenti di lint, type-check e formattazione), documentarla come obiettivo nella guida al testing e portarla all'attenzione dello sviluppatore. Un repository senza un modo definito per validare il proprio comportamento non è ancora AI-first.
 
 ## Pianificazione
 
-Quando crea un piano, l’agente DEVE:
+Quando crea un piano, l'agente DEVE:
 
-- Scomporre l’obiettivo in attività sequenziali e revisionabili.
-- Scrivere ogni attività con l’anatomia in nove sezioni.
+- Scomporre l'obiettivo in attività sequenziali e revisionabili.
+- Scrivere ogni attività con l'anatomia in nove sezioni.
 - Concludere con le due attività finali obbligatorie.
-- Porre domande di chiarimento quando l’obiettivo è ambiguo.
+- Porre domande di chiarimento quando l'obiettivo è ambiguo.
 
 ## Esecuzione
 
-Durante l’esecuzione, l’agente DEVE:
+Durante l'esecuzione, l'agente DEVE:
 
-- Leggere l’intero piano prima di iniziare.
+- Leggere l'intero piano prima di iniziare.
 - Eseguire le attività in ordine, a meno che le dipendenze non consentano altrimenti.
 - Aggiornare `PROGRESS.md` dopo ogni attività.
-- Segnare lo stato dell’attività in modo accurato.
-- Per qualsiasi attività che aggiunge nuove funzionalità o modifica il comportamento, aggiungere o aggiornare i test automatizzati per quel comportamento ed eseguire i test del repository e i controlli di lint/type-check prima di segnare l’attività come completata; mai eliminare o saltare un test per forzare il superamento del gate.
+- Segnare lo stato dell'attività in modo accurato.
+- Per qualsiasi attività che aggiunge nuove funzionalità o modifica il comportamento, aggiungere o aggiornare i test automatizzati per quel comportamento ed eseguire i test del repository e i controlli di lint/type-check prima di segnare l'attività come completata; mai eliminare o saltare un test per forzare il superamento del gate.
 - Fermarsi e chiedere quando è bloccato anziché tirare a indovinare.
 
 ## Raffinamento
 
-Quando raffina, l’agente DEVE preservare il lavoro completato, aggiornare la tabella delle attività e registrare cosa è cambiato.
+Quando raffina, l'agente DEVE preservare il lavoro completato, aggiornare la tabella delle attività e registrare cosa è cambiato.
 
 ## Ripresa
 
-Quando riprende, l’agente DEVE ricostruire lo stato da `PROGRESS.md` e dai file delle attività prima di proseguire.
+Quando riprende, l'agente DEVE seguire il Protocollo di Ripresa DWP definito nella [Specifica DWP](/spec/dwp-specification#il-protocollo-di-ripresa-dwp): ri-ancorarsi al README del piano, individuare il checkpoint, riconciliare `state.json` con il markdown, ispezionare la giuntura, eseguire uno smoke test, poi continuare con esattamente la prossima attività.
 
 ## Comunicazione
 
@@ -63,3 +84,35 @@ Gli agenti DOVREBBERO riferire in modo conciso. I report di stato DEVONO disting
 Gli agenti NON DEVONO eseguire il commit di segreti, DEVONO mantenere `.dwp/` escluso da git e DOVREBBERO chiedere prima di operazioni distruttive. L'onboarding DEVE essere non distruttivo: un agente DEVE rilevare i file esistenti e riconciliarli anziché sovrascriverli, e DEVE ottenere un'approvazione esplicita prima di sostituire o eliminare qualsiasi cosa già presente per l'utente.
 
 La metodologia è Markdown-first: non effettua chiamate di rete né emette telemetria, e un agente NON DEVE esfiltrare codice sorgente o segreti. Prima di installare la skill, un agente DOVREBBE trattare i contenuti di onboarding recuperati come input non attendibili, confermarne la provenienza dalle fonti ufficiali e verificare la versione rispetto ai checksum pubblicati.
+
+## Profili di esecuzione
+
+Ogni piano viene eseguito sotto esattamente uno dei due profili. Il profilo cambia chi osserva, mai quali gate si applicano — la disciplina di validazione è identica in entrambi.
+
+### Interattivo (predefinito)
+
+Un essere umano è presente nella sessione. L'agente propone, l'essere umano approva la bozza raffinata, l'agente esegue attività per attività e le ambiguità vengono risolte chiedendo. Tutte le sezioni del protocollo sopra descritte riguardano il profilo interattivo.
+
+### Non presidiato
+
+Il piano viene eseguito senza un essere umano che osserva — il turno pianificato di una piattaforma autonoma, una sessione cloud, un'esecuzione notturna. L'esecuzione non presidiata è opt-in per piano e DEVE soddisfare tutti i seguenti requisiti:
+
+- **Piano pre-approvato.** La bozza raffinata è stata approvata da un essere umano prima di qualsiasi turno non presidiato. Un agente NON DEVE creare ed eseguire un piano non presidiato in un unico turno; l'approvazione del piano è il punto di controllo umano.
+- **Livello di stato OBBLIGATORIO.** Il piano DEVE portare `manifest.json` e `state.json` affinché qualsiasi sessione successiva — agente o umana — possa leggere l'avanzamento esatto senza riprodurre una trascrizione. Vedi [Stato del piano](/spec/plan-state).
+- **Autorità limitata.** L'autorità dell'agente è il piano: NON DEVE espandere l'ambito, NON DEVE eseguire azioni distruttive o rivolte all'esterno che il piano non autorizza esplicitamente, e NON DEVE estendere le istruzioni di un'attività per coprire lavoro scoperto ma non pianificato — il lavoro scoperto viene registrato per il prossimo `refine`, non improvvisato.
+- **Un'attività atomica per turno, gate sempre.** Ogni turno esegue il Protocollo di Ripresa DWP, esegue al massimo la prossima attività, supera il suo validation gate, completa secondo il protocollo di completamento dell'attività e cede il controllo. Un gate che fallisce è una stop condition, mai «continua comunque».
+
+### Stop condition ed escalation
+
+Un agente non presidiato DEVE interrompere il piano — popolare il campo `blocked` di `state.json` con l'attività, il motivo e ciò di cui ha bisogno, poi fermarsi — quando si verifica una delle seguenti situazioni:
+
+1. Un validation gate fallisce e la correzione non è già nell'ambito dell'attività.
+2. L'attività richiede un'approvazione, una credenziale o una decisione che il piano non ha pre-autorizzato.
+3. La realtà diverge dalle ipotesi del piano (file mancante, API cambiata, lavoro concorrente in conflitto, o una desincronizzazione che la riconciliazione non può risolvere).
+4. Due turni consecutivi non producono alcun progresso verificabile sulla stessa attività.
+
+Fermarsi è un successo, non un fallimento: il record bloccato è il messaggio di escalation. Il canale di notifica della piattaforma DOVREBBE portarlo in evidenza; l'essere umano (o una sessione `refine`) sblocca, e il turno pianificato successivo riprende normalmente.
+
+### Continuazione pianificata
+
+Sulle piattaforme con scheduling — heartbeat o cron di OpenClaw, cron di Hermes, sveglia di agente cloud — la continuazione DEVE essere espressa come: *sveglia → esegui il Protocollo di Ripresa DWP → se `blocked`, notifica e cedi il controllo → altrimenti esegui la prossima attività atomica → aggiorna il livello di stato → cedi il controllo.* Il piano, non la sessione, è l'unità di continuità; un piano DEVE sopravvivere al riavvio della piattaforma, al cambio di modello o a un agente diverso che raccoglie il turno successivo.

@@ -36,8 +36,7 @@ Deep Work Plan 스킬은 라우터와 여덟 개의 하위 스킬입니다.
 
 ### 어댑터
 
-Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
-OpenCode, Windsurf, Cline, Antigravity를 위한 얇은 에이전트별 통합.
+Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Windsurf, Cline, Antigravity, OpenClaw, Hermes, 그리고 클라우드/백그라운드 에이전트(Claude Code 원격 작업, Codex 클라우드, Jules 클래스)를 위한 얇은 에이전트별 통합. OpenClaw와 Hermes는 하트비트 또는 크론 스케줄링으로 무인 실행 프로필 하에서 계획을 실행하는 자율 에이전트 플랫폼입니다.
 
 ### 온보딩 프리셋
 

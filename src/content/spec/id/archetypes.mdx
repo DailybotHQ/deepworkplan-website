@@ -1,6 +1,6 @@
 ---
 title: Archetypes
-description: "Deskripsi normatif arketipe repositori DWP: repositori individual dan orchestrator hub, heuristik klasifikasi, dan bagaimana onboarding berbeda."
+description: "Deskripsi normatif arketipe repositori DWP: repositori individual, orchestrator hub, dan ruang kerja agent, serta bagaimana onboarding berbeda untuk masing-masing."
 order: 4
 lang: id
 section: Archetypes
@@ -9,7 +9,9 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 # Archetypes
 
-**Versi 1.0.** DWP mengenali dua arketipe repositori. Arketipe menentukan cara sebuah agent meng-onboard dan cara rencana ditetapkan lingkupnya.
+**Versi 1.1.** DWP mengenali tiga arketipe. Arketipe menentukan cara sebuah agent meng-onboard, cara rencana ditetapkan lingkupnya, dan apakah lapisan status yang dapat dibaca mesin diwajibkan.
+
+> **Tambahan di v1.1.** **Ruang kerja agent** (§3) bergabung sebagai arketipe ketiga: rumah long-lived dari sebuah agent otonom. Git menjadi RECOMMENDED daripada diasumsikan. Dua arketipe v1.0 tidak berubah.
 
 ## Repositori individual
 
@@ -32,23 +34,43 @@ Karakteristik:
 - Memelihara sebuah registri repositori yang dikelola.
 - Ruang kerja `.dwp/` di akar hub melacak status lintas repositori.
 
+## Ruang kerja agent
+
+Sebuah ruang kerja agent adalah rumah kerja long-lived dari sebuah agent otonom — ruang kerja OpenClaw, direktori layanan Hermes, direktori data daemon asisten pribadi, atau volume persisten cloud agent. Ini adalah ruang kerja, tidak harus sebuah repositori git, dan produk utamanya adalah pekerjaan berkelanjutan agent daripada satu basis kode.
+
+Wawasan yang membuat arketipe ini mungkin: **harness adalah sebuah ruang kerja, bukan khususnya sebuah repositori.** Setiap elemen harness yang didefinisikan metodologi untuk repositori memiliki padanan ruang kerja langsung:
+
+| Elemen harness (repositori) | Padanan ruang kerja agent |
+|------------------------------|---------------------------|
+| `AGENTS.md` (aturan, perintah cepat) | Konteks berdiri ruang kerja — `AGENTS.md` itu sendiri, atau berkas standing-orders platform |
+| `docs/` (pengetahuan tahan lama) | Berkas pengetahuan ruang kerja dan dokumen memori |
+| `.agents/` (skill, agent, command) | Direktori skill platform — OpenClaw secara native memindai `<workspace>/.agents/skills/` |
+| `.dwp/` (rencana, draf) | `.dwp/` di akar ruang kerja — tidak berubah |
+| log git (status, dapat dilanjutkan) | `state.json` per rencana ([Status rencana](/spec/plan-state)), REQUIRED di sini |
+
+Sebuah ruang kerja agent MUST menyediakan `AGENTS.md`, `.agents/`, dan `.dwp/` di akar ruang kerja.
+
+**Git RECOMMENDED, tidak REQUIRED.** Di mana git tidak ada, setiap rencana MUST membawa lapisan status yang dapat dibaca mesin: checkpoint `state.json`, catatan gate, dan timestamp per-tugas membawa informasi pemulihan yang dibawa log git di sebuah repositori.
+
+Rencana di ruang kerja agent biasanya berjalan tanpa pengawasan: giliran heartbeat atau cron terjadwal melanjutkan rencana terbuka melalui Protokol Resume DWP, mengeksekusi tugas atomik berikutnya, memperbarui lapisan status, dan yield. Rencana — bukan sesi — adalah unit kontinuitas.
+
 ## Heuristik klasifikasi
 
 <ArchetypesTree lang="en" class="not-prose my-10" />
 
-Sebuah agent SHOULD mengklasifikasikan sebuah repositori sebagai orchestrator hub jika ia menemukan:
+Klasifikasikan sebagai **ruang kerja agent** terlebih dahulu, ketika target adalah direktori kerja platform agent otonom — sinyal: berkas identitas platform (seperti `SOUL.md` atau `HEARTBEAT.md` milik OpenClaw), tidak ada stack aplikasi utama, dan konten yang didominasi status milik agent itu sendiri. Satu sinyal platform yang kuat sudah cukup.
 
-- Beberapa repositori git bersarang atau submodule.
-- Sebuah registri atau manifes repositori yang dikelola.
-- Konfigurasi yang menunjuk ke repositori eksternal.
+Jika tidak, klasifikasikan sebagai **orchestrator hub** ketika mayoritas jelas dari hal berikut berlaku: beberapa repositori git bersarang atau submodule; sebuah registri atau manifes repositori yang dikelola; konfigurasi yang menunjuk ke repositori eksternal. Klasifikasikan sebagai **repositori individual** jika tidak — itu adalah nilai default yang aman.
 
-Jika tidak, perlakukan sebagai repositori individual.
+Ketika sinyal ambigu, agent MUST menyajikan penilaian dan buktinya kepada pengguna dan meminta konfirmasi sebelum melanjutkan.
 
 ## Perbedaan onboarding
 
-| Aspek | Individual | Orchestrator |
-|--------|------------|--------------|
-| Lingkup | Repositori ini | Beberapa repositori |
-| Onboarding | Struktur repositori | Registri hub |
-| Target rencana | Berkas lokal | Rencana turunan |
-| Status | `.dwp/` lokal | `.dwp/` lintas repositori |
+| Aspek | Individual | Orchestrator | Ruang kerja agent |
+|--------|------------|--------------|-----------------|
+| Lingkup | Repositori ini | Beberapa repositori | Ruang kerja dan rencananya |
+| Onboarding | Struktur repositori | Registri hub | Berkas platform + konvensi ruang kerja |
+| Target rencana | Berkas lokal | Rencana turunan | Repositori lokal atau eksternal |
+| Status | `.dwp/` lokal | `.dwp/` lintas repositori | `.dwp/` + `state.json` (REQUIRED tanpa git) |
+| Git | Required | Required | RECOMMENDED |
+| Lapisan status | RECOMMENDED | RECOMMENDED | REQUIRED tanpa git; REQUIRED untuk jalannya tanpa pengawasan |

@@ -37,7 +37,7 @@ Slash command tipis mendelegasikan ke sub-skill dan addon:
 ### Adapter
 
 Integrasi per-agent yang tipis untuk Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
-OpenCode, Windsurf, Cline, dan Antigravity.
+OpenCode, Windsurf, Cline, Antigravity, OpenClaw, Hermes, dan cloud/background agent (tugas remote Claude Code, Codex cloud, kelas Jules). OpenClaw dan Hermes adalah platform agent otonom yang menjalankan rencana di bawah profil eksekusi tanpa pengawasan, dijalankan oleh penjadwalan heartbeat atau cron.
 
 ### Preset onboarding
 

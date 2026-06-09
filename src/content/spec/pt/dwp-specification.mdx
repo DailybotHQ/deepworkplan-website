@@ -11,7 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Especificação do DWP
 
-**Versão 1.1. Status: Estável.** Este documento é a especificação normativa da metodologia Deep Work Plan (DWP). As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
+**Versão 1.2. Status: Estável.** Este documento é a especificação normativa da metodologia Deep Work Plan (DWP). As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
+
+> **Aditivo na v1.2.** Quatro capacidades aditivas, sem alterações incompatíveis: (1) a **camada de estado do plano legível por máquina** (`manifest.json` + `state.json`, veja [Estado do plano](/spec/plan-state)); (2) **tiers de rigor proporcional** (micro / standard / deep, veja [Rigor proporcional](#proportional-rigor)); (3) a **seção Delta** opcional na anatomia da tarefa para alterações de comportamento em brownfield; e (4) o **Protocolo de Retomada do DWP** é promovido a um ritual nomeado e citável de seis etapas. Os planos v1.1 existentes permanecem conformes.
 
 ## Definição
 
@@ -26,6 +28,8 @@ Um plano DEVE (MUST) ser um diretório em `.dwp/plans/` chamado `PLAN_<slug>/`. 
 - `README.md` — visão geral do plano, objetivo, tabela de tarefas e status.
 - Um arquivo por tarefa, chamado `<n>.task_<slug>.md`.
 - `PROGRESS.md` — um registro contínuo da execução.
+
+Um plano PODE (MAY) adicionalmente carregar a camada de estado legível por máquina: `manifest.json` (identidade estática, escrito uma vez na materialização) e `state.json` (estado de execução ao vivo por tarefa). A camada de estado é RECOMENDADA (RECOMMENDED) para novos planos e OBRIGATÓRIA (REQUIRED) para execução não supervisionada e para espaços de trabalho de agentes sem git. Veja [Estado do plano](/spec/plan-state).
 
 ## Anatomia da tarefa
 
@@ -43,6 +47,18 @@ Cada arquivo de tarefa DEVE (MUST) conter estas nove seções, em ordem:
 8. **Risks** — o que pode dar errado e as mitigações.
 9. **Completion & Log** — um marcador de status mais notas cronológicas.
 
+Uma tarefa PODE (MAY) adicionalmente incluir uma **seção Delta** (RECOMENDADA para alterações de comportamento em brownfield — veja abaixo) e uma **seção Rollback** (RECOMENDADA para migrações, alterações de infraestrutura ou implantações).
+
+### A seção Delta (alterações em brownfield)
+
+A maior parte do trabalho real modifica comportamentos existentes em vez de criar novos. Uma tarefa que altera o funcionamento de um sistema existente DEVERIA (SHOULD) incluir uma **seção Delta** descrevendo a mudança como um contrato explícito de antes/depois, usando três títulos de lista:
+
+- **ADDED** — comportamento que existe depois da tarefa e não existia antes.
+- **MODIFIED** — comportamento que existe em ambos, declarado como `was: … → now: …`.
+- **REMOVED** — comportamento que existia antes e foi intencionalmente removido depois.
+
+Cada entrada DEVE (MUST) ser um comportamento observável — a resposta de um endpoint, um flag de CLI, um estado de UI, um valor padrão — não um detalhe de implementação. A seção Delta é o diff do revisor no nível de comportamento: os critérios de aceitação verificam as entradas ADDED/MODIFIED, e as entradas REMOVED são a licença explícita para excluir. Qualquer coisa não listada como REMOVED DEVE (MUST) continuar funcionando, e o validation gate da tarefa (testes existentes permanecendo verdes) é o que garante isso.
+
 ## Validation gates e testes
 
 A validação é o gate que transforma uma afirmação de conclusão em evidência dela: uma tarefa NÃO DEVE (MUST NOT) ser marcada como concluída até que todo comando de sua seção Validation tenha sido executado e aprovado. Os testes são uma parte de primeira classe desse gate, não um complemento opcional — são eles que tornam o código que um plano entrega confiável e verificável.
@@ -54,6 +70,27 @@ Quando uma tarefa adiciona nova funcionalidade central ou altera de forma materi
 - Os testes existentes DEVEM (MUST) permanecer verdes. Uma mudança que quebra um teste que cobre o código afetado DEVE (MUST) atualizar esse teste para o novo comportamento pretendido; ela NÃO DEVE (MUST NOT) excluir, pular ou enfraquecer um teste apenas para forçar a aprovação do gate.
 
 Tarefas puramente de documentação, configuração ou pesquisa estão isentas de criar testes, mas ainda DEVEM (MUST) executar qualquer validation gate que o repositório defina. A profundidade dos testes é proporcional ao tamanho da mudança e à maturidade do repositório. Onde um repositório não tem nenhuma cadeia de ferramentas de teste ou lint, o agente NÃO DEVE (MUST NOT) pular silenciosamente essa disciplina — ele depende da cadeia de ferramentas proposta durante o onboarding (veja [Conformidade](/spec)).
+
+## Protocolo de conclusão de tarefa
+
+Após passar pela validação e antes de avançar para a próxima tarefa, o agente DEVE (MUST), em ordem: (1) marcar a tarefa como `[x]` no README do plano; (2) incrementar o contador de status do plano; (3) preencher o Completion & Log da tarefa sem valores de placeholder; (4) adicionar uma entrada de 3 a 5 itens ao `PROGRESS.md`; (5) fazer commit (onde o plano faz commits) com o formato `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) onde o plano carrega a camada de estado, reescrever o `state.json` atomicamente — tarefa `completed`, registros de gate, registro de resultado, hash de commit.
+
+As seis etapas formam uma transação lógica única. Um agente interrompido no meio do protocolo NÃO DEVE (MUST NOT) iniciar a próxima tarefa — ele deve terminar ou desfazer a conclusão parcial primeiro.
+
+## O protocolo de retomada do DWP
+
+A retomada DEVE (MUST) ser possível apenas a partir dos arquivos do plano mais o log do git, sem estado externo. Em um workspace sem git — veja [Arquétipos](/spec/archetypes) §3 — o `state.json` do plano é OBRIGATÓRIO (REQUIRED) e substitui o log do git.
+
+Um agente que retoma — uma nova sessão, um agente diferente, um turno de daemon agendado ou uma sessão em nuvem que acorda — DEVE (MUST) realizar este ritual, em ordem:
+
+1. **Reancorar.** Ler o README do plano: objetivo, diretrizes globais, a lista de tarefas.
+2. **Localizar o checkpoint.** Encontrar a primeira tarefa não marcada no README; ler o log do git e o status do git (ou o `checkpoint` do `state.json` onde o git está ausente).
+3. **Reconciliar o estado.** Onde o `state.json` existe, compará-lo com as caixas de seleção do README; em caso de dessincronização, regenerá-lo a partir do markdown antes de continuar.
+4. **Inspecionar a juntura.** Ler o Completion & Log da tarefa no ponto de retomada e a última entrada do `PROGRESS.md` — a última base verificada da sessão anterior.
+5. **Smoke test.** Executar a validação permanente mais barata do repositório para confirmar que o ambiente ainda funciona antes de construir sobre ele. Um smoke test com falha é investigado primeiro, não construído sobre.
+6. **Continuar atomicamente.** Executar exatamente a próxima tarefa; não agrupar à frente.
+
+O agente DEVE (MUST) confiar nas marcações `completed` (`[x]`) e NÃO DEVE (MUST NOT) revalidar tarefas concluídas, a menos que o usuário solicite explicitamente, ou o smoke test falhe de uma forma que implique uma tarefa concluída.
 
 ## O loop de execução
 
@@ -72,6 +109,28 @@ O DWP define cinco operações:
 <OutputWorkspace lang="pt" class="not-prose my-10" />
 
 Todos os artefatos do DWP DEVEM (MUST) viver em um diretório `.dwp/` ignorado pelo git, na raiz do repositório.
+
+## Estado do plano legível por máquina
+
+Um plano PODE (MAY) carregar a camada de estado legível por máquina — `manifest.json` (identidade estática) e `state.json` (estado ao vivo por tarefa, registros de validation gate, registros de resultado, checkpoint, estado bloqueado). O plano markdown permanece a fonte de verdade; a camada JSON é uma projeção derivada, regenerada em pontos de protocolo e reconciliada na retomada.
+
+A camada de estado é RECOMENDADA (RECOMMENDED) para novos planos, OBRIGATÓRIA (REQUIRED) para execução não supervisionada e OBRIGATÓRIA (REQUIRED) para espaços de trabalho de agentes sem git. Veja a definição normativa completa em [Estado do plano](/spec/plan-state).
+
+## Rigor proporcional
+
+O rigor DEVE (MUST) ser proporcional ao trabalho. Cerimônia em mudanças triviais é uma falha de metodologia, não segurança extra. Todo trabalho se enquadra em exatamente um tier:
+
+| Tier | Quando | Forma |
+|------|--------|-------|
+| **micro** | Uma única mudança atômica: uma preocupação, aproximadamente uma sessão, sem coordenação. Uma correção de bug, uma mudança de texto, um ajuste de configuração. | Sem pasta de plano. O agente declara o objetivo, os critérios de aceitação e o validation gate inline na conversa, executa, valida, faz commit. |
+| **standard** | Trabalho com várias etapas e escopo real: uma funcionalidade, uma refatoração, uma migração em um repositório. O tier padrão. | Um plano completo: pasta de plano, tarefas de nove seções, tarefas finais obrigatórias. |
+| **deep** | Trabalho de longo horizonte abrangendo grupos paralelos, repositórios filhos ou múltiplas sessões não supervisionadas. | Um plano standard mais capacidades de orquestrador e/ou team-agents, e a camada de estado. |
+
+Um agente solicitado a criar um plano para trabalho de tier micro DEVE (MUST) dizer que um plano é desproporcional e oferecer a forma inline. Uma pasta de plano NÃO DEVE (MUST NOT) ser criada para uma mudança trivial de arquivo único.
+
+O trabalho de tier micro ainda mantém os inegociáveis: um objetivo explícito, um validation gate que é executado e aprovado, e disciplina de testes para mudanças de comportamento. O tier muda o empacotamento, nunca os gates.
+
+Quando o escopo cresce no meio do caminho — uma micro tarefa revela escopo real, um plano standard cria sub-repositórios — o agente DEVE (MUST) parar e promover o trabalho ao próximo tier em vez de estender o atual.
 
 ## Versionamento
 

@@ -36,8 +36,7 @@ Thin slash commands delegate to the sub-skills and addons:
 
 ### Adapters
 
-Thin per-agent integrations for Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
-OpenCode, Windsurf, Cline, and Antigravity.
+Thin per-agent integrations for Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Windsurf, Cline, Antigravity, OpenClaw, Hermes, and cloud/background agents (Claude Code remote tasks, Codex cloud, Jules-class). OpenClaw and Hermes are autonomous agent platforms that run plans under the unattended execution profile, driven by heartbeat or cron scheduling.
 
 ### Onboarding presets
 

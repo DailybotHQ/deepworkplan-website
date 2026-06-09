@@ -1,6 +1,6 @@
 ---
 title: Archétypes de dépôt
-description: "Les archétypes dépôt individuel et hub orchestrateur, l'heuristique de classification d'un dépôt, et en quoi l'onboarding et le périmètre des plans diffèrent entre eux."
+description: "Les trois archétypes DWP — dépôt individuel, hub orchestrateur et espace de travail d'agent — l'heuristique de classification, et en quoi l'onboarding et le périmètre des plans diffèrent entre eux."
 order: 5
 lang: fr
 summary: Pourquoi l'archétype d'un dépôt détermine la façon dont un agent s'intègre et cadre les plans.
@@ -13,7 +13,7 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 Avant de modifier une seule ligne, un agent prend une décision qui conditionne tout ce qui suit : **quel type de dépôt est-ce ?** L'archétype qu'il infère fixe la frontière à l'intérieur de laquelle il raisonnera pour le reste de l'engagement — comment il s'intègre, jusqu'où un plan s'étend et où l'état réside. Se tromper revient à cadrer le travail sur la mauvaise surface, source la plus fréquente de dérive sur les tâches à long horizon. Trouver le bon archétype permet à l'agent de travailler en autonomie pendant des heures, car les plans, l'onboarding et l'état s'alignent sur la forme réelle du code.
 
-DWP reconnaît deux archétypes. La plupart des dépôts sont du premier type ; le second existe pour les équipes qui en coordonnent plusieurs.
+DWP reconnaît trois archétypes. La plupart des dépôts sont du premier type ; le second existe pour les équipes qui en coordonnent plusieurs ; le troisième couvre les espaces de travail durables des agents autonomes.
 
 <ArchetypesCompare lang="fr" class="not-prose my-10" />
 
@@ -38,25 +38,41 @@ Caractéristiques :
 - Maintient un registre des dépôts gérés.
 - L'espace de travail `.dwp/` à la racine du hub suit l'état inter-dépôts.
 
+## Espace de travail d'agent
+
+Un troisième archétype, ajouté en v2.2, décrit quelque chose qui est un espace de travail avant d'être un dépôt : le foyer durable d'un agent autonome. Un espace de travail OpenClaw, un répertoire de service Hermes, le répertoire de données d'un daemon d'assistant personnel, le volume persistant d'un agent cloud — chacun a des plans à exécuter, des outils à utiliser et une mémoire à maintenir, mais peut ne pas avoir de base de code à livrer.
+
+L'intuition clé est que **le harness est un espace de travail, pas spécifiquement un dépôt.** Chaque élément que DWP installe dans un dépôt — `AGENTS.md`, `docs/`, `.agents/`, `.dwp/` — a un équivalent direct dans l'espace de travail. La surface de la méthodologie se mappe proprement : des fichiers de contexte permanent remplacent le `AGENTS.md` racine, un répertoire de skills de plateforme remplace `.agents/`, et le dossier `.dwp/` à la racine de l'espace de travail est inchangé. Ce qui change est le rôle de git. Dans un dépôt, le journal git porte l'état et rend les plans reprenables entre les sessions. Dans un espace de travail sans git, `state.json` fait ce travail — c'est pourquoi la couche d'état lisible par machine est requise pour les espaces de travail d'agents.
+
+La récompense pratique est les plans nocturnes sans surveillance. Sur les plateformes de classe OpenClaw, un tour heartbeat ou cron réveille l'agent, exécute le protocole de reprise DWP, exécute la prochaine tâche atomique, met à jour `state.json`, et cède la main. Le plan — et non la session — est l'unité de continuité. Un plan multi-jours survit aux redémarrages, aux changements de modèle et aux limites de session parce que tout ce dont le tour suivant a besoin se trouve dans les fichiers du plan : l'objectif, la progression cochée, les enregistrements de portes et le point de reprise exact dans la tâche en cours.
+
+Caractéristiques :
+
+- Le répertoire de travail d'une plateforme d'agents autonomes.
+- `AGENTS.md`, `.agents/` et `.dwp/` à la racine de l'espace de travail.
+- Git est recommandé, pas requis.
+- `state.json` est requis en l'absence de git, et pour toute exécution sans surveillance.
+- Les plans s'exécutent typiquement sans surveillance, pilotés par un heartbeat planifié ou un cron.
+
 ## Heuristique de classification
 
-Les deux archétypes se présentent différemment sur le disque, et l'agent choisit entre eux à partir de signaux qu'il peut vérifier — non d'un label qu'on lui a communiqué. L'arbre de décision ci-dessous montre le chemin ; en résumé, traitez un dépôt comme un hub orchestrateur uniquement lorsque les preuves l'exigent, et comme un dépôt individuel dans les autres cas.
+Les trois archétypes se présentent différemment sur le disque, et l'agent choisit parmi eux à partir de signaux qu'il peut vérifier — non d'un label qu'on lui a communiqué. L'arbre de décision ci-dessous montre le chemin ; en résumé, classer comme espace de travail d'agent lorsque des signaux d'identité de plateforme sont présents, comme hub orchestrateur uniquement lorsque les preuves l'exigent, et comme dépôt individuel dans les autres cas.
 
 <ArchetypesTree lang="fr" class="not-prose my-10" />
 
-Un agent doit classer un dépôt comme hub orchestrateur lorsqu'il trouve plusieurs dépôts git imbriqués ou des sous-modules, un registre ou un manifeste de dépôts gérés, ou une configuration qui pointe vers des dépôts externes. En l'absence de ces signaux, il traite le dépôt comme un dépôt individuel — le comportement sûr par défaut, car surétendre un plan au-delà de frontières inexistantes est pire que travailler dans une frontière qui existe.
+Un agent doit d'abord rechercher des signaux d'espace de travail d'agent : un fichier d'identité de plateforme (tel que `SOUL.md` ou `HEARTBEAT.md` d'OpenClaw), pas de stack applicative principale, et un contenu qui est principalement l'état propre de l'agent. En leur absence, il recherche des signaux d'orchestrateur : plusieurs dépôts git imbriqués ou des sous-modules, un registre ou un manifeste de dépôts gérés, ou une configuration qui pointe vers des dépôts externes. En l'absence des deux, il traite la cible comme un dépôt individuel — le comportement sûr par défaut, car surétendre un plan au-delà de frontières inexistantes est pire que travailler dans une frontière qui existe.
 
 ## En quoi l'onboarding diffère
 
 L'archétype n'est pas un simple label cosmétique ; il change ce que l'agent lit, ce qu'un plan peut toucher et où l'état est enregistré.
 
-| Aspect | Individuel | Orchestrateur |
-|--------|------------|--------------|
-| Périmètre | Ce dépôt | Plusieurs dépôts |
-| Onboarding | Structure du dépôt | Registre du hub |
-| Cible du plan | Fichiers locaux | Plans enfants |
-| État | `.dwp/` local | `.dwp/` inter-dépôts |
+| Aspect | Individuel | Orchestrateur | Espace de travail d'agent |
+|--------|------------|--------------|---------------------------|
+| Périmètre | Ce dépôt | Plusieurs dépôts | L'espace de travail et ses plans |
+| Onboarding | Structure du dépôt | Registre du hub | Fichiers de plateforme + conventions de l'espace de travail |
+| Cible du plan | Fichiers locaux | Plans enfants | Dépôts locaux ou externes |
+| État | `.dwp/` local | `.dwp/` inter-dépôts | `.dwp/` + `state.json` (requis sans git) |
 
-L'effet pratique est qu'un agent de dépôt individuel raisonne sur une base de code de bout en bout, tandis qu'un agent orchestrateur raisonne sur la coordination — quel dépôt enfant détient quel travail, et comment l'état inter-dépôts reste cohérent.
+L'effet pratique est qu'un agent de dépôt individuel raisonne sur une base de code de bout en bout, un agent orchestrateur raisonne sur la coordination entre les dépôts, et un agent d'espace de travail raisonne sur la continuité entre les sessions — ce qui était prévu, ce qui s'est exécuté, ce qui est bloqué, et ce qui vient ensuite.
 
-Bien identifier l'archétype est ce qui permet à un agent de travailler en autonomie pendant des heures sans supervision : il cadre les plans, l'onboarding et l'état sur la bonne frontière, de sorte que l'agent opère sur la bonne surface, de la première tâche à la dernière.
+C'est ce qui permet à un agent de travailler en autonomie pendant des heures sans supervision : en fixant l'archétype en premier, il cadre les plans, l'onboarding et l'état sur la bonne frontière, de sorte que chaque tâche, de la première à la dernière, opère sur la bonne surface.

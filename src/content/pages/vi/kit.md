@@ -36,8 +36,7 @@ Các slash command mỏng ủy thác tới các sub-skill và addon:
 
 ### Bộ chuyển đổi
 
-Các tích hợp mỏng cho từng agent: Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
-OpenCode, Windsurf, Cline và Antigravity.
+Các tích hợp mỏng cho từng agent: Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Windsurf, Cline, Antigravity, OpenClaw, Hermes, và cloud/background agent (tác vụ từ xa Claude Code, Codex cloud, lớp Jules). OpenClaw và Hermes là các nền tảng agent tự chủ chạy các kế hoạch dưới hồ sơ thực thi không có giám sát, được điều khiển bởi lập lịch heartbeat hay cron.
 
 ### Preset khởi tạo
 

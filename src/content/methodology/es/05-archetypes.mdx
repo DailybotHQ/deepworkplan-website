@@ -1,6 +1,6 @@
 ---
 title: Arquetipos de repositorio
-description: "Los arquetipos de repositorio individual y centro orquestador, la heurística para clasificarlo y cómo difieren la incorporación y el alcance del plan."
+description: "Los tres arquetipos de DWP — repositorio individual, centro orquestador y espacio de trabajo de agente — la heurística de clasificación y cómo difiere la incorporación para cada uno."
 order: 5
 lang: es
 summary: Por qué el arquetipo de un repositorio determina cómo se incorpora un agente y cómo acota los planes.
@@ -13,7 +13,7 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 Antes de cambiar una sola línea, un agente toma una decisión que lo condiciona todo: **¿qué tipo de repositorio es este?** El arquetipo que infiere establece el límite dentro del cual razonará durante el resto del trabajo: cómo se incorpora, hasta dónde llega un plan y dónde vive el estado. Equivocarse significa acotar el trabajo a la superficie equivocada, que es la causa más frecuente de deriva en tareas de largo alcance. Acertar, en cambio, permite al agente trabajar de forma autónoma durante horas, porque planes, incorporación y estado se alinean con la forma real del código.
 
-DWP reconoce dos arquetipos. La mayoría de los repositorios son del primero; el segundo existe para los equipos que coordinan muchos.
+DWP reconoce tres arquetipos. La mayoría de los repositorios son del primero; el segundo existe para los equipos que coordinan muchos; el tercero cubre los espacios de trabajo de larga duración de los agentes autónomos.
 
 <ArchetypesCompare lang="es" class="not-prose my-10" />
 
@@ -38,25 +38,41 @@ Características:
 - Mantiene un registro de repositorios gestionados.
 - El espacio de trabajo `.dwp/` en la raíz del centro rastrea el estado entre repositorios.
 
+## Espacio de trabajo de agente
+
+Un tercer arquetipo, añadido en la v2.2, describe algo que es un espacio de trabajo antes que un repositorio: el hogar de larga duración de un agente autónomo. Un workspace de OpenClaw, un directorio de servicio de Hermes, el directorio de datos de un demonio de asistente personal, el volumen persistente de un agente en la nube — cada uno tiene planes que ejecutar, herramientas que usar y memoria que mantener, pero puede no tener una base de código que entregar.
+
+La idea clave es que **el harness es un espacio de trabajo, no específicamente un repositorio.** Cada elemento que DWP instala en un repositorio — `AGENTS.md`, `docs/`, `.agents/`, `.dwp/` — tiene un equivalente directo en el espacio de trabajo. La superficie de la metodología se mapea limpiamente: los archivos de contexto permanente reemplazan al `AGENTS.md` raíz, un directorio de skills de plataforma reemplaza a `.agents/`, y la carpeta `.dwp/` en la raíz del workspace no cambia. Lo que cambia es el papel de git. En un repositorio, el registro git lleva el estado y hace los planes reanudables entre sesiones. En un workspace sin git, `state.json` hace ese trabajo — por eso la capa de estado legible por máquina es obligatoria para los espacios de trabajo de agente.
+
+El beneficio práctico son los planes desatendidos nocturnos. En plataformas de la clase OpenClaw, un turno de latido o cron despierta al agente, ejecuta el protocolo de reanudación DWP, ejecuta la siguiente tarea atómica, actualiza `state.json` y cede. El plan — no la sesión — es la unidad de continuidad. Un plan de varios días sobrevive a reinicios, cambios de modelo y límites de sesión porque todo lo que necesita el siguiente turno está en los archivos del plan: el objetivo, el progreso marcado, los registros de puertas y el punto de control exacto dentro de la tarea actual.
+
+Características:
+
+- El directorio de trabajo de una plataforma de agentes autónomos.
+- `AGENTS.md`, `.agents/` y `.dwp/` en la raíz del workspace.
+- Git es recomendado, no requerido.
+- `state.json` es requerido cuando git está ausente, y para cualquier ejecución desatendida.
+- Los planes típicamente se ejecutan de forma desatendida, impulsados por un latido o cron programado.
+
 ## Heurística de clasificación
 
-Los dos arquetipos se ven distintos en disco, y el agente decide entre ellos a partir de señales que puede verificar, no de una etiqueta que se le indica. El árbol de decisión siguiente muestra el camino; en resumen, trate un repositorio como centro orquestador solo cuando la evidencia lo exija, y como repositorio individual en caso contrario.
+Los tres arquetipos se ven distintos en disco, y el agente decide entre ellos a partir de señales que puede verificar — no de una etiqueta que se le indica. El árbol de decisión siguiente muestra el camino; en resumen, clasificar como espacio de trabajo de agente cuando estén presentes señales de identidad de plataforma, como centro orquestador solo cuando la evidencia lo exija, y como repositorio individual en caso contrario.
 
 <ArchetypesTree lang="es" class="not-prose my-10" />
 
-Un agente debería clasificar un repositorio como centro orquestador cuando encuentra varios repositorios git anidados o submódulos, un registro o manifiesto de repositorios gestionados, o configuración que apunta a repositorios externos. En ausencia de esas señales, lo trata como un repositorio individual — el comportamiento seguro por defecto, pues ampliar un plan más allá de límites que no existen es peor que trabajar dentro de uno que sí existe.
+Un agente debería buscar primero señales de espacio de trabajo de agente: un archivo de identidad de plataforma (como `SOUL.md` o `HEARTBEAT.md` de OpenClaw), sin stack de aplicación principal, y contenido que es predominantemente el propio estado del agente. Si están ausentes, busca señales de orquestador: múltiples repositorios git anidados o submódulos, un registro o manifiesto de repositorios gestionados, o configuración que apunta a repositorios externos. En ausencia de ambos, trata el objetivo como un repositorio individual — el comportamiento seguro por defecto, pues ampliar un plan más allá de límites que no existen es peor que trabajar dentro de uno que sí existe.
 
 ## Cómo difiere la incorporación
 
 El arquetipo no es una etiqueta cosmética; cambia lo que el agente lee, lo que un plan puede tocar y dónde se registra el estado.
 
-| Aspecto | Individual | Orquestador |
-|---------|------------|-------------|
-| Alcance | Este repositorio | Varios repositorios |
-| Incorporación | Estructura del repositorio | Registro del centro |
-| Objetivo del plan | Archivos locales | Planes hijos |
-| Estado | `.dwp/` local | `.dwp/` entre repositorios |
+| Aspecto | Individual | Orquestador | Espacio de trabajo de agente |
+|---------|------------|-------------|------------------------------|
+| Alcance | Este repositorio | Varios repositorios | El workspace y sus planes |
+| Incorporación | Estructura del repositorio | Registro del centro | Archivos de plataforma + convenciones del workspace |
+| Objetivo del plan | Archivos locales | Planes hijos | Repositorios locales o externos |
+| Estado | `.dwp/` local | `.dwp/` entre repositorios | `.dwp/` + `state.json` (requerido sin git) |
 
-El efecto práctico es que un agente de repositorio individual razona sobre una base de código de principio a fin, mientras que un agente orquestador razona sobre la coordinación: qué repositorio hijo es responsable de qué trabajo y cómo se mantiene coherente el estado entre repositorios.
+El efecto práctico es que un agente de repositorio individual razona sobre una base de código de principio a fin, un agente orquestador razona sobre la coordinación entre repositorios, y un agente de espacio de trabajo razona sobre la continuidad entre sesiones — qué se planificó, qué se ejecutó, qué está bloqueado y qué viene a continuación.
 
-Acertar el arquetipo es lo que permite a un agente trabajar de forma autónoma durante horas sin supervisión: acota los planes, la incorporación y el estado al límite correcto, de modo que el agente opera sobre la superficie adecuada desde la primera tarea hasta la última.
+Esto es lo que permite a un agente trabajar de forma autónoma durante horas sin supervisión: al fijar primero el arquetipo, acota los planes, la incorporación y el estado al límite correcto, de modo que el agente opera sobre la superficie adecuada desde la primera tarea hasta la última.

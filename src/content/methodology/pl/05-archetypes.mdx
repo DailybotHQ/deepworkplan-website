@@ -1,6 +1,6 @@
 ---
 title: Archetypy repozytoriów
-description: "Archetypy pojedynczego repozytorium i huba orkiestratora, heurystyka klasyfikacji repozytorium oraz to, czym różnią się między nimi onboarding i zakres planu."
+description: "Trzy archetypy DWP — pojedyncze repozytorium, hub orkiestratora i przestrzeń robocza agenta — heurystyka klasyfikacji i to, czym różni się między nimi onboarding."
 order: 5
 lang: pl
 summary: Dlaczego archetyp repozytorium decyduje o tym, jak agent przeprowadza onboarding i wyznacza zakres planów.
@@ -13,7 +13,7 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 Zanim agent zmieni choćby jedną linię kodu, podejmuje decyzję, która kształtuje wszystko, co nastąpi: **czym jest to repozytorium?** Wywnioskowany archetyp wyznacza granicę, w ramach której agent będzie rozumował przez całe zaangażowanie — jak przeprowadza onboarding, jak daleko sięga plan i gdzie przechowywany jest stan. Pomyłka oznacza, że agent wyznacza zakres pracy do niewłaściwej powierzchni — to najczęstsze źródło dryftu w zadaniach długookresowych. Trafne rozpoznanie pozwala mu pracować autonomicznie przez wiele godzin, bo plany, onboarding i stan są dopasowane do rzeczywistej struktury kodu.
 
-DWP rozpoznaje dwa archetypy. Większość repozytoriów należy do pierwszego; drugi istnieje dla zespołów koordynujących wiele repozytoriów.
+DWP rozpoznaje trzy archetypy. Większość repozytoriów należy do pierwszego; drugi istnieje dla zespołów koordynujących wiele repozytoriów; trzeci obejmuje długotrwałe przestrzenie robocze autonomicznych agentów.
 
 <ArchetypesCompare lang="pl" class="not-prose my-10" />
 
@@ -38,25 +38,41 @@ Cechy:
 - Utrzymuje rejestr zarządzanych repozytoriów.
 - Przestrzeń robocza `.dwp/` w głównym katalogu huba śledzi stan międzyrepozytoryjny.
 
+## Przestrzeń robocza agenta
+
+Trzeci archetyp, dodany w wersji 2.2, opisuje coś, co jest przestrzenią roboczą zanim staje się repozytorium: długotrwały dom autonomicznego agenta. Przestrzeń robocza OpenClaw, katalog usług Hermes, katalog danych demona asystenta osobistego, trwały wolumen agenta chmurowego — każdy z nich ma plany do wykonania, narzędzia do użycia i pamięć do utrzymania, ale może nie mieć bazy kodu do dostarczenia.
+
+Kluczowy wgląd polega na tym, że **harness to przestrzeń robocza, a nie konkretnie repozytorium.** Każdy element, który DWP instaluje w repozytorium — `AGENTS.md`, `docs/`, `.agents/`, `.dwp/` — ma bezpośredni odpowiednik w przestrzeni roboczej. Powierzchnia metodologii mapuje się czysto: pliki stałego kontekstu zastępują `AGENTS.md` w katalogu głównym, katalog skilli platformy zastępuje `.agents/`, a folder `.dwp/` w katalogu głównym przestrzeni roboczej pozostaje bez zmian. To, co się zmienia, to rola gita. W repozytorium dziennik git przenosi stan i sprawia, że plany są wznawialne między sesjami. W przestrzeni roboczej bez gita `state.json` wykonuje tę pracę — dlatego warstwa stanu odczytywalnego maszynowo jest wymagana w przestrzeniach roboczych agenta.
+
+Praktyczna korzyść to nocne, nieobsługiwane plany. Na platformach klasy OpenClaw bicie serca lub tura cron budzi agenta, uruchamia protokół wznowienia DWP, wykonuje następne zadanie atomowe, aktualizuje `state.json` i wykonuje yield. Plan — a nie sesja — jest jednostką ciągłości. Wielodniowy plan przeżywa restarty, wymiany modeli i granice sesji, ponieważ wszystko, czego potrzebuje następna tura, jest w plikach planu: cel, zaznaczony postęp, rekordy bramek i dokładny punkt kontrolny wewnątrz bieżącego zadania.
+
+Cechy:
+
+- Katalog roboczy autonomicznej platformy agentów.
+- `AGENTS.md`, `.agents/` i `.dwp/` w katalogu głównym przestrzeni roboczej.
+- Git jest zalecany, nie wymagany.
+- `state.json` jest wymagany, gdy git jest nieobecny, i przy każdym nieobsługiwanym uruchomieniu.
+- Plany zazwyczaj działają nieobsługiwanie, sterowane zaplanowanym biciem serca lub cronem.
+
 ## Heurystyka klasyfikacji
 
-Oba archetypy wyglądają inaczej na dysku, a agent rozstrzyga między nimi na podstawie sygnałów, które może zweryfikować — nie etykiety, którą mu podano. Drzewo decyzyjne poniżej pokazuje ścieżkę; w skrócie: traktuj repozytorium jako hub orkiestratora tylko wtedy, gdy dowody tego wymagają, a w pozostałych przypadkach — jako pojedyncze repozytorium.
+Trzy archetypy wyglądają inaczej na dysku, a agent rozstrzyga między nimi na podstawie sygnałów, które może zweryfikować — nie etykiety, którą mu podano. Drzewo decyzyjne poniżej pokazuje ścieżkę; w skrócie: klasyfikuj jako przestrzeń roboczą agenta, gdy obecne są sygnały tożsamości platformy, jako hub orkiestratora tylko wtedy, gdy dowody tego wymagają, a w pozostałych przypadkach jako pojedyncze repozytorium.
 
 <ArchetypesTree lang="pl" class="not-prose my-10" />
 
-Agent powinien sklasyfikować repozytorium jako hub orkiestratora, gdy znajdzie wiele zagnieżdżonych repozytoriów git lub submodułów, rejestr lub manifest zarządzanych repozytoriów albo konfigurację wskazującą na zewnętrzne repozytoria. Wobec braku tych sygnałów traktuje repozytorium jako pojedyncze repozytorium — bezpieczna wartość domyślna, bo nadmierne rozszerzenie zakresu planu poza granice, które nie istnieją, jest gorsze niż praca w jednej granicy, która rzeczywiście istnieje.
+Agent powinien najpierw szukać sygnałów przestrzeni roboczej agenta: pliku tożsamości platformy (jak `SOUL.md` lub `HEARTBEAT.md` OpenClaw), braku głównego stosu aplikacji i zawartości, która jest przeważnie własnym stanem agenta. Jeśli ich brak, szuka sygnałów orkiestratora: wielu zagnieżdżonych repozytoriów git lub submodułów, rejestru lub manifestu zarządzanych repozytoriów albo konfiguracji wskazującej na zewnętrzne repozytoria. W przypadku braku obu traktuje cel jako pojedyncze repozytorium — bezpieczna wartość domyślna, bo nadmierne rozszerzenie zakresu planu poza granice, które nie istnieją, jest gorsze niż praca w jednej granicy, która rzeczywiście istnieje.
 
 ## Czym różni się onboarding
 
 Archetyp to nie etykieta kosmetyczna; zmienia to, co agent czyta, co plan może dotknąć i gdzie zapisywany jest stan.
 
-| Aspekt | Pojedyncze | Orkiestrator |
-|--------|------------|--------------|
-| Zakres | To repozytorium | Wiele repozytoriów |
-| Onboarding | Struktura repozytorium | Rejestr huba |
-| Cel planu | Pliki lokalne | Plany potomne |
-| Stan | Lokalny `.dwp/` | Międzyrepozytoryjny `.dwp/` |
+| Aspekt | Pojedyncze | Orkiestrator | Przestrzeń robocza agenta |
+|--------|------------|--------------|--------------------------|
+| Zakres | To repozytorium | Wiele repozytoriów | Przestrzeń robocza i jej plany |
+| Onboarding | Struktura repozytorium | Rejestr huba | Pliki platformy + konwencje przestrzeni roboczej |
+| Cel planu | Pliki lokalne | Plany potomne | Lokalne lub zewnętrzne repozytoria |
+| Stan | Lokalny `.dwp/` | Międzyrepozytoryjny `.dwp/` | `.dwp/` + `state.json` (wymagany bez gita) |
 
-Praktyczny efekt jest taki, że agent pojedynczego repozytorium rozumuje o jednej bazie kodu od początku do końca, podczas gdy agent orkiestratora rozumuje o koordynacji — które repozytorium potomne odpowiada za którą pracę i jak stan międzyrepozytoryjny pozostaje spójny.
+Praktyczny efekt jest taki, że agent pojedynczego repozytorium rozumuje o jednej bazie kodu od początku do końca, agent orkiestratora rozumuje o koordynacji między repozytoriami, a agent przestrzeni roboczej rozumuje o ciągłości między sesjami — co było zaplanowane, co zostało uruchomione, co jest zablokowane i co będzie następne.
 
 To właśnie pozwala agentowi pracować autonomicznie godzinami bez nadzoru: przez uprzednie ustalenie archetypu wyznacza zakres planów, onboardingu i stanu do właściwej granicy, dzięki czemu każde zadanie — od pierwszego do ostatniego — jest wykonywane na właściwej powierzchni.

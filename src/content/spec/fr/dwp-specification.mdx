@@ -1,6 +1,6 @@
 ---
 title: Spécification DWP
-description: "Spécification normative du Deep Work Plan : structure du plan, anatomie d’une tâche en neuf sections, boucle d’exécution à cinq opérations, espace de travail de sortie et versionnage."
+description: "Spécification normative du Deep Work Plan : structure du plan, anatomie d'une tâche en neuf sections, boucle d'exécution à cinq opérations, espace de travail de sortie et versionnage."
 order: 2
 lang: fr
 section: Workflow
@@ -11,57 +11,94 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Spécification DWP
 
-**Version 1.1. Statut : stable.** Ce document est la spécification normative de la méthodologie Deep Work Plan (DWP). Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
+**Version 1.2. Statut : stable.** Ce document est la spécification normative de la méthodologie Deep Work Plan (DWP). Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
+
+> **Additif en v1.2.** Quatre capacités additives, sans changement de rupture : (1) la **couche d'état du plan lisible par machine** (`manifest.json` + `state.json`, voir [État du plan](/spec/plan-state)) ; (2) les **niveaux de rigueur proportionnelle** (micro / standard / deep, voir [Rigueur proportionnelle](#proportional-rigor)) ; (3) la **section Delta** optionnelle dans l'anatomie de la tâche pour les changements de comportement sur du code existant ; et (4) le **Protocole de reprise DWP** est promu en un rituel en six étapes nommé et citable. Les plans v1.1 existants restent conformes.
 
 ## Définition
 
-Un Deep Work Plan est un artefact structuré, exclusivement en Markdown, qui décrit une tâche d’ingénierie complexe décomposée en unités de travail séquentielles et relisibles, conçu pour être créé, exécuté et maintenu par des agents de code IA travaillant de manière autonome.
+Un Deep Work Plan est un artefact structuré, exclusivement en Markdown, qui décrit une tâche d'ingénierie complexe décomposée en unités de travail séquentielles et relisibles, conçu pour être créé, exécuté et maintenu par des agents de code IA travaillant de manière autonome.
 
-DWP est piloté par la spécification : le plan est la spécification, et les agents MUST s’exécuter face à ses critères d’acceptation explicites et à ses portes de validation plutôt que d’improviser. La spécification — et non une transcription de discussion — est la source de vérité durable, de sorte que le travail est vérifiable et reprenable d’une session et d’un agent à l’autre. C’est aussi de l’ingénierie de harness rendue portable : le contexte, la boucle de contrôle, les garde-fous et l’état reprenable qui rendent un agent fiable sont installés dans le dépôt lui-même sous forme de simple Markdown, de sorte que tout agent conforme MAY piloter le dépôt sans framework propre à un outil.
+DWP est piloté par la spécification : le plan est la spécification, et les agents MUST s'exécuter face à ses critères d'acceptation explicites et à ses portes de validation plutôt que d'improviser. La spécification — et non une transcription de discussion — est la source de vérité durable, de sorte que le travail est vérifiable et reprenable d'une session et d'un agent à l'autre. C'est aussi de l'ingénierie de harness rendue portable : le contexte, la boucle de contrôle, les garde-fous et l'état reprenable qui rendent un agent fiable sont installés dans le dépôt lui-même sous forme de simple Markdown, de sorte que tout agent conforme MAY piloter le dépôt sans framework propre à un outil.
 
 ## Structure du plan
 
 Un plan MUST être un répertoire sous `.dwp/plans/` nommé `PLAN_<slug>/`. Le répertoire MUST contenir :
 
-- `README.md` — vue d’ensemble du plan, objectif, tableau des tâches et statut.
+- `README.md` — vue d'ensemble du plan, objectif, tableau des tâches et statut.
 - Un fichier par tâche, nommé `<n>.task_<slug>.md`.
-- `PROGRESS.md` — un journal d’exécution continu.
+- `PROGRESS.md` — un journal d'exécution continu.
 
-## Anatomie d’une tâche
+Un plan MAY également porter la couche d'état lisible par machine : `manifest.json` (identité statique, écrit une fois à la matérialisation) et `state.json` (état d'exécution en direct par tâche). La couche d'état est RECOMMENDED pour les nouveaux plans et REQUIRED pour l'exécution sans surveillance et pour les espaces de travail d'agents sans git. Voir [État du plan](/spec/plan-state).
+
+## Anatomie d'une tâche
 
 <TaskAnatomy lang="fr" class="not-prose my-10" />
 
-Chaque fichier de tâche MUST contenir ces neuf sections, dans l’ordre :
+Chaque fichier de tâche MUST contenir ces neuf sections, dans l'ordre :
 
-1. **Goal** — un énoncé d’un paragraphe de ce que la tâche accomplit.
-2. **Context** — le contexte, les liens et la raison d’être de cette tâche.
+1. **Goal** — un énoncé d'un paragraphe de ce que la tâche accomplit.
+2. **Context** — le contexte, les liens et la raison d'être de cette tâche.
 3. **Steps** — des actions ordonnées et concrètes à réaliser.
 4. **Acceptance criteria** — une liste de contrôle des conditions qui définissent « fait ».
 5. **Validation** — les commandes ou tests à exécuter pour vérifier.
 6. **Files** — les chemins censés être créés ou modifiés.
 7. **Dependencies** — les autres tâches ou prérequis externes.
-8. **Risks** — ce qui pourrait mal tourner, et les mesures d’atténuation.
+8. **Risks** — ce qui pourrait mal tourner, et les mesures d'atténuation.
 9. **Completion & Log** — un marqueur de statut accompagné de notes chronologiques.
+
+Une tâche MAY également inclure une **section Delta** (RECOMMENDED pour les changements de comportement sur du code existant — voir ci-dessous) et une **section Rollback** (RECOMMENDED pour les migrations, les changements d'infrastructure ou les déploiements).
+
+### La section Delta (changements sur du code existant)
+
+La plupart du travail réel modifie un comportement existant plutôt qu'en créant un nouveau. Une tâche qui change le comportement d'un système existant SHOULD porter une **section Delta** décrivant le changement comme un contrat avant/après explicite, en utilisant trois en-têtes de liste :
+
+- **ADDED** — comportement qui existe après la tâche et n'existait pas avant.
+- **MODIFIED** — comportement présent dans les deux états, formulé comme `was: … → now: …`.
+- **REMOVED** — comportement qui existait avant et est intentionnellement absent après.
+
+Chaque entrée MUST être un comportement observable — la réponse d'un endpoint, un indicateur CLI, un état d'interface, une valeur par défaut — et non un détail d'implémentation. La section Delta est le diff du relecteur au niveau comportemental : les critères d'acceptation vérifient les entrées ADDED/MODIFIED, et les entrées REMOVED sont la licence explicite de suppression. Tout ce qui n'est pas listé comme REMOVED MUST continuer à fonctionner, et la porte de validation de la tâche (les tests existants restant au vert) est ce qui l'impose.
 
 ## Portes de validation et tests
 
-La validation est la porte qui transforme une affirmation d’achèvement en preuve de celui-ci : une tâche MUST NOT être marquée comme achevée tant que chaque commande de sa section Validation n’a pas été exécutée avec succès. Les tests font partie intégrante de cette porte, ce n’est pas un ajout facultatif — ce sont eux qui rendent fiable et vérifiable le code qu’un plan livre.
+La validation est la porte qui transforme une affirmation d'achèvement en preuve de celui-ci : une tâche MUST NOT être marquée comme achevée tant que chaque commande de sa section Validation n'a pas été exécutée avec succès. Les tests font partie intégrante de cette porte, ce n'est pas un ajout facultatif — ce sont eux qui rendent fiable et vérifiable le code qu'un plan livre.
 
-Lorsqu’une tâche ajoute une nouvelle fonctionnalité centrale ou modifie matériellement un comportement existant :
+Lorsqu'une tâche ajoute une nouvelle fonctionnalité centrale ou modifie matériellement un comportement existant :
 
-- Ses **critères d’acceptation** MUST inclure une couverture de tests automatisés pour le comportement nouveau ou modifié (le cas nominal ainsi que les cas limites et d’erreur significatifs), en suivant la convention de test et l’exigence de couverture du dépôt.
-- Sa **validation** MUST exécuter les tests du dépôt conjointement avec ses vérifications de lint, de typage et de format — la vérification complète de qualité de code que le dépôt définit — et non le build seul. « Ça se compile » n’est pas une porte suffisante pour un changement de comportement.
+- Ses **critères d'acceptation** MUST inclure une couverture de tests automatisés pour le comportement nouveau ou modifié (le cas nominal ainsi que les cas limites et d'erreur significatifs), en suivant la convention de test et l'exigence de couverture du dépôt.
+- Sa **validation** MUST exécuter les tests du dépôt conjointement avec ses vérifications de lint, de typage et de format — la vérification complète de qualité de code que le dépôt définit — et non le build seul. « Ça se compile » n'est pas une porte suffisante pour un changement de comportement.
 - Les tests existants MUST rester au vert. Un changement qui casse un test couvrant le code affecté MUST mettre à jour ce test vers le nouveau comportement voulu ; il MUST NOT supprimer, ignorer ou affaiblir un test dans le seul but de forcer le passage de la porte.
 
-Les tâches purement documentaires, de configuration ou de recherche sont exemptées de la création de tests mais MUST tout de même exécuter quelle que soit la porte de validation que le dépôt définit. La profondeur des tests est proportionnelle à la taille du changement et à la maturité du dépôt. Lorsqu’un dépôt ne dispose d’aucune chaîne d’outils de test ou de lint, l’agent MUST NOT ignorer silencieusement cette discipline — il s’appuie sur la chaîne d’outils proposée pendant l’onboarding (voir [Conformité](/spec)).
+Les tâches purement documentaires, de configuration ou de recherche sont exemptées de la création de tests mais MUST tout de même exécuter quelle que soit la porte de validation que le dépôt définit. La profondeur des tests est proportionnelle à la taille du changement et à la maturité du dépôt. Lorsqu'un dépôt ne dispose d'aucune chaîne d'outils de test ou de lint, l'agent MUST NOT ignorer silencieusement cette discipline — il s'appuie sur la chaîne d'outils proposée pendant l'onboarding (voir [Conformité](/spec)).
 
-## La boucle d’exécution
+## Protocole d'achèvement de tâche
+
+Après avoir passé la validation et avant de passer à la tâche suivante, l'agent MUST, dans l'ordre : (1) marquer la tâche `[x]` dans le README du plan ; (2) incrémenter le compteur de statut du plan ; (3) remplir la section Completion & Log de la tâche sans valeur de substitution ; (4) ajouter une entrée de 3 à 5 puces dans `PROGRESS.md` ; (5) commiter (lorsque le plan commit) avec le format `{type}({scope}): {description} — Task {N} of PLAN_{name}` ; (6) lorsque le plan porte la couche d'état, réécrire `state.json` de façon atomique — tâche `completed`, enregistrements de portes, enregistrement de résultat, hash de commit.
+
+Les six étapes forment une transaction logique unique. Un agent interrompu en cours de protocole MUST NOT démarrer la tâche suivante — il doit d'abord terminer ou annuler l'achèvement partiel.
+
+## Le protocole de reprise DWP
+
+La reprise MUST être possible à partir des seuls fichiers du plan et du journal git, sans état externe. Dans un espace de travail sans git — voir [Archétypes](/spec/archetypes) §3 — le `state.json` du plan est REQUIRED et remplace le journal git.
+
+Un agent reprenant — une nouvelle session, un agent différent, un tour de daemon planifié, ou une session cloud se réveillant — MUST réaliser ce rituel, dans l'ordre :
+
+1. **Ré-ancrage.** Lire le README du plan : objectif, directives globales, liste des tâches.
+2. **Localiser le point de reprise.** Trouver la première tâche non cochée dans le README ; lire le journal git et le statut git (ou le `checkpoint` de `state.json` en l'absence de git).
+3. **Réconcilier l'état.** Lorsque `state.json` existe, le comparer aux cases du README ; en cas de désynchronisation, le régénérer depuis le markdown avant de continuer.
+4. **Inspecter la jonction.** Lire la section Completion & Log de la tâche de reprise et la dernière entrée de `PROGRESS.md` — le dernier terrain vérifié de la session précédente.
+5. **Smoke test.** Exécuter la validation permanente la moins coûteuse du dépôt pour confirmer que le monde fonctionne encore avant de construire dessus. Un smoke test en échec est d'abord investigué, pas ignoré.
+6. **Continuer de façon atomique.** Exécuter exactement la tâche suivante ; ne pas regrouper en avance.
+
+L'agent MUST faire confiance aux marqueurs `[x]` achevés et MUST NOT re-valider les tâches achevées, sauf si l'utilisateur le demande explicitement ou si le smoke test échoue d'une façon qui implique une tâche achevée.
+
+## La boucle d'exécution
 
 <CoreLoop lang="fr" class="not-prose my-10" />
 
 DWP définit cinq opérations :
 
-- **create** — Génère un nouveau plan à partir d’un objectif.
+- **create** — Génère un nouveau plan à partir d'un objectif.
 - **execute** — Exécute le plan tâche par tâche.
 - **refine** — Modifie un plan existant.
 - **resume** — Reprend un plan interrompu.
@@ -72,6 +109,28 @@ DWP définit cinq opérations :
 <OutputWorkspace lang="fr" class="not-prose my-10" />
 
 Tous les artefacts DWP MUST résider sous un répertoire `.dwp/` ignoré par git, à la racine du dépôt.
+
+## État du plan lisible par machine
+
+Un plan MAY porter la couche d'état lisible par machine — `manifest.json` (identité statique) et `state.json` (état en direct par tâche, enregistrements de portes de validation, enregistrements de résultats, point de reprise, état bloqué). Le plan markdown reste la source de vérité ; la couche JSON est une projection dérivée, régénérée aux points de protocole et réconciliée à la reprise.
+
+La couche d'état est RECOMMENDED pour les nouveaux plans, REQUIRED pour l'exécution sans surveillance, et REQUIRED pour les espaces de travail d'agents sans git. Voir la définition normative complète dans [État du plan](/spec/plan-state).
+
+## Rigueur proportionnelle
+
+La rigueur MUST être proportionnelle au travail. La cérémonie sur des changements triviaux est un échec de la méthodologie, pas une sécurité supplémentaire. Chaque travail appartient exactement à un niveau :
+
+| Niveau | Quand | Forme |
+|--------|-------|-------|
+| **micro** | Un changement atomique unique : une seule préoccupation, environ une session, sans coordination. Un correctif de bogue, un changement de texte, un ajustement de configuration. | Pas de dossier de plan. L'agent énonce l'objectif, les critères d'acceptation et la porte de validation en ligne dans la conversation, exécute, valide, commite. |
+| **standard** | Travail multi-étapes avec un périmètre réel : une fonctionnalité, un refactoring, une migration dans un seul dépôt. Le niveau par défaut. | Un plan complet : dossier de plan, tâches en neuf sections, tâches finales obligatoires. |
+| **deep** | Travail à long horizon couvrant des groupes parallèles, des dépôts enfants ou plusieurs sessions sans surveillance. | Un plan standard plus les capacités d'orchestrateur et/ou d'agents en équipe, et la couche d'état. |
+
+Un agent invité à créer un plan pour un travail de niveau micro MUST dire qu'un plan est disproportionné et proposer la forme en ligne à la place. Un dossier de plan MUST NOT être créé pour un changement trivial d'un seul fichier.
+
+Le travail de niveau micro conserve quand même les non-négociables : un objectif explicite, une porte de validation qui s'exécute et passe, et la discipline de test pour les changements de comportement. Le niveau change le conditionnement, jamais les portes.
+
+Lorsque le périmètre grandit en cours d'exécution — une tâche micro révèle un périmètre réel, un plan standard fait apparaître des sous-dépôts — l'agent MUST s'arrêter et promouvoir le travail au niveau suivant plutôt que d'étirer le niveau actuel.
 
 ## Versionnage
 

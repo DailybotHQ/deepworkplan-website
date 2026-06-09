@@ -1,6 +1,6 @@
 ---
 title: Arquétipos
-description: "Descrição normativa dos arquétipos de repositório do DWP: o repositório individual e o hub orquestrador, a heurística de classificação e como o onboarding difere."
+description: "Descrição normativa dos arquétipos de repositório do DWP: o repositório individual, o hub orquestrador e o espaço de trabalho de agente, e como o onboarding difere para cada um."
 order: 4
 lang: pt
 section: Archetypes
@@ -9,7 +9,9 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 # Arquétipos
 
-**Versão 1.0.** O DWP reconhece dois arquétipos de repositório. O arquétipo determina como um agente faz o onboarding e como os planos têm seu escopo definido.
+**Versão 1.1.** O DWP reconhece três arquétipos. O arquétipo determina como um agente faz o onboarding, como os planos têm seu escopo definido e se a camada de estado legível por máquina é obrigatória.
+
+> **Aditivo na v1.1.** O **espaço de trabalho de agente** (§3) entra como um terceiro arquétipo: o lar de longa duração de um agente autônomo. O git passa a ser RECOMENDADO em vez de assumido. Os dois arquétipos da v1.0 permanecem sem alterações.
 
 ## Repositório individual
 
@@ -32,23 +34,43 @@ Características:
 - Mantém um registro de repositórios gerenciados.
 - O espaço de trabalho `.dwp/` na raiz do hub rastreia o estado entre repositórios.
 
+## Espaço de trabalho de agente
+
+Um espaço de trabalho de agente é o lar de trabalho de longa duração de um agente autônomo — um workspace do OpenClaw, um diretório de serviço do Hermes, o diretório de dados de um daemon de assistente pessoal ou o volume persistente de um agente em nuvem. É um workspace, não necessariamente um repositório git, e seu produto principal é o trabalho contínuo do agente, não uma base de código.
+
+O insight que torna este arquétipo possível: **o harness é um workspace, não especificamente um repositório.** Todo elemento de harness que a metodologia define para um repositório tem um equivalente direto no workspace:
+
+| Elemento de harness (repositório) | Equivalente no espaço de trabalho de agente |
+|-----------------------------------|---------------------------------------------|
+| `AGENTS.md` (regras, comandos rápidos) | O contexto permanente do workspace — o próprio `AGENTS.md`, ou o arquivo de ordens permanentes da plataforma |
+| `docs/` (conhecimento durável) | Arquivos de conhecimento do workspace e documentos de memória |
+| `.agents/` (skills, agents, commands) | O diretório de skills da plataforma — o OpenClaw varre nativamente `<workspace>/.agents/skills/` |
+| `.dwp/` (planos, rascunhos) | `.dwp/` na raiz do workspace — sem alterações |
+| log do git (estado, retomabilidade) | `state.json` por plano ([Estado do plano](/spec/plan-state)), OBRIGATÓRIO aqui |
+
+Um espaço de trabalho de agente DEVE (MUST) fornecer `AGENTS.md`, `.agents/` e `.dwp/` na raiz do workspace.
+
+**O git é RECOMENDADO (RECOMMENDED), não OBRIGATÓRIO (REQUIRED).** Onde o git está ausente, todo plano DEVE (MUST) carregar a camada de estado legível por máquina: o checkpoint do `state.json`, os registros de gate e os timestamps por tarefa carregam as informações de recuperação que o log do git carrega em um repositório.
+
+Os planos em um espaço de trabalho de agente tipicamente são executados de forma não supervisionada: um heartbeat agendado ou turno de cron retoma o plano aberto via o Protocolo de Retomada do DWP, executa a próxima tarefa atômica, atualiza a camada de estado e cede. O plano — não a sessão — é a unidade de continuidade.
+
 ## Heurística de classificação
 
 <ArchetypesTree lang="pt" class="not-prose my-10" />
 
-Um agente DEVERIA (SHOULD) classificar um repositório como um hub orquestrador se encontrar:
+Classifique como **espaço de trabalho de agente** primeiro, quando o alvo for o diretório de trabalho de uma plataforma de agente autônomo — sinais: um arquivo de identidade de plataforma (como `SOUL.md` ou `HEARTBEAT.md` do OpenClaw), nenhuma stack de aplicação primária e conteúdo que é predominantemente o próprio estado do agente. Qualquer sinal forte de plataforma é suficiente.
 
-- Múltiplos repositórios git aninhados ou submódulos.
-- Um registro ou manifesto de repositórios gerenciados.
-- Configuração que aponta para repositórios externos.
+Caso contrário, classifique como **hub orquestrador** quando uma clara maioria dos seguintes se aplicar: múltiplos repositórios git aninhados ou submódulos; um registro ou manifesto de repositórios gerenciados; configuração apontando para repositórios externos. Classifique como **repositório individual** nos demais casos — é o padrão seguro.
 
-Caso contrário, trate-o como um repositório individual.
+Quando os sinais são ambíguos, o agente DEVE (MUST) apresentar sua avaliação e evidências ao usuário e pedir confirmação antes de prosseguir.
 
 ## Diferenças de onboarding
 
-| Aspecto | Individual | Orquestrador |
-|--------|------------|--------------|
-| Escopo | Este repositório | Múltiplos repositórios |
-| Onboarding | Estrutura do repositório | Registro do hub |
-| Alvo do plano | Arquivos locais | Planos filhos |
-| Estado | `.dwp/` local | `.dwp/` entre repositórios |
+| Aspecto | Individual | Orquestrador | Espaço de trabalho de agente |
+|--------|------------|--------------|------------------------------|
+| Escopo | Este repositório | Múltiplos repositórios | O workspace e seus planos |
+| Onboarding | Estrutura do repositório | Registro do hub | Arquivos da plataforma + convenções do workspace |
+| Alvo do plano | Arquivos locais | Planos filhos | Repositórios locais ou externos |
+| Estado | `.dwp/` local | `.dwp/` entre repositórios | `.dwp/` + `state.json` (OBRIGATÓRIO sem git) |
+| Git | Obrigatório | Obrigatório | RECOMENDADO |
+| Camada de estado | RECOMENDADA | RECOMENDADA | OBRIGATÓRIA sem git; OBRIGATÓRIA para execuções não supervisionadas |

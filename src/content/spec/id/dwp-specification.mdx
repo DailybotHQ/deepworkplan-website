@@ -11,7 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP specification
 
-**Versi 1.1. Status: Stabil.** Dokumen ini adalah spesifikasi normatif untuk metodologi Deep Work Plan (DWP). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
+**Versi 1.2. Status: Stabil.** Dokumen ini adalah spesifikasi normatif untuk metodologi Deep Work Plan (DWP). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
+
+> **Tambahan di v1.2.** Empat kemampuan tambahan, tanpa perubahan yang merusak: (1) **lapisan status rencana yang dapat dibaca mesin** (`manifest.json` + `state.json`, lihat [Status rencana](/spec/plan-state)); (2) **tingkatan rigor proporsional** (micro / standard / deep, lihat [Rigor proporsional](#proportional-rigor)); (3) **bagian Delta** opsional dalam anatomi tugas untuk perubahan perilaku brownfield; dan (4) **Protokol Resume DWP** dipromosikan menjadi ritual enam langkah yang bernama dan dapat dikutip. Rencana v1.1 yang ada tetap konforman.
 
 ## Definisi
 
@@ -26,6 +28,8 @@ Sebuah rencana MUST berupa sebuah direktori di bawah `.dwp/plans/` bernama `PLAN
 - `README.md` — ikhtisar rencana, tujuan, tabel tugas, dan status.
 - Satu berkas per tugas, bernama `<n>.task_<slug>.md`.
 - `PROGRESS.md` — log eksekusi yang berjalan.
+
+Sebuah rencana MAY juga membawa lapisan status yang dapat dibaca mesin: `manifest.json` (identitas statis, ditulis sekali saat materialisasi) dan `state.json` (status eksekusi per-tugas yang berjalan). Lapisan status RECOMMENDED untuk rencana baru dan REQUIRED untuk eksekusi tanpa pengawasan dan untuk ruang kerja agent tanpa git. Lihat [Status rencana](/spec/plan-state).
 
 ## Anatomi tugas
 
@@ -43,6 +47,18 @@ Setiap berkas tugas MUST berisi sembilan bagian ini, secara berurutan:
 8. **Risks** — apa yang bisa salah, dan mitigasinya.
 9. **Completion & Log** — penanda status ditambah catatan kronologis.
 
+Sebuah tugas MAY juga menyertakan **bagian Delta** (RECOMMENDED untuk perubahan perilaku brownfield — lihat di bawah) dan **bagian Rollback** (RECOMMENDED untuk migrasi, perubahan infrastruktur, atau deployment).
+
+### Bagian Delta (perubahan brownfield)
+
+Sebagian besar pekerjaan nyata memodifikasi perilaku yang ada alih-alih menciptakan perilaku baru. Sebuah tugas yang mengubah cara kerja sistem yang ada SHOULD membawa **bagian Delta** yang menggambarkan perubahan sebagai kontrak sebelum/sesudah yang eksplisit, menggunakan tiga judul daftar:
+
+- **ADDED** — perilaku yang ada setelah tugas dan tidak ada sebelumnya.
+- **MODIFIED** — perilaku yang ada di keduanya, dinyatakan sebagai `was: … → now: …`.
+- **REMOVED** — perilaku yang ada sebelumnya dan secara sengaja hilang setelahnya.
+
+Setiap entri MUST berupa perilaku yang dapat diamati — respons endpoint, flag CLI, status UI, nilai default — bukan detail implementasi. Bagian Delta adalah diff peninjau pada tingkat perilaku: acceptance criteria memverifikasi entri ADDED/MODIFIED, dan entri REMOVED adalah izin eksplisit untuk menghapus. Apa pun yang tidak terdaftar sebagai REMOVED MUST tetap berfungsi, dan gate validasi tugas (test yang ada tetap hijau) adalah yang menegakkannya.
+
 ## Validation gate dan test
 
 Validasi adalah gate yang mengubah klaim penyelesaian menjadi bukti penyelesaian: sebuah tugas MUST NOT ditandai selesai sampai setiap perintah di bagian Validation-nya telah dijalankan dan lulus. Test adalah bagian kelas satu dari gate ini, bukan tambahan opsional — itulah yang membuat kode yang dikirim sebuah rencana andal dan dapat diverifikasi.
@@ -54,6 +70,27 @@ Ketika sebuah tugas menambahkan fungsionalitas inti baru atau secara material me
 - Test yang ada MUST tetap hijau. Sebuah perubahan yang merusak test yang mencakup kode terdampak MUST memperbarui test tersebut ke perilaku baru yang dimaksudkan; ia MUST NOT menghapus, melewati, atau melemahkan sebuah test semata-mata untuk memaksa gate lulus.
 
 Tugas dokumentasi-murni, konfigurasi, atau riset dikecualikan dari pembuatan test tetapi tetap MUST menjalankan validation gate apa pun yang didefinisikan repositori. Kedalaman pengujian sebanding dengan ukuran perubahan dan kematangan repositori. Di mana sebuah repositori sama sekali tidak memiliki toolchain test atau lint, agent MUST NOT diam-diam melewati disiplin ini — ia bersandar pada toolchain yang diusulkan selama onboarding (lihat [Conformance](/spec)).
+
+## Protokol penyelesaian tugas
+
+Setelah melewati validasi dan sebelum beralih ke tugas berikutnya, agent MUST, secara berurutan: (1) menandai tugas `[x]` di README rencana; (2) menambah hitungan status rencana; (3) mengisi Completion & Log tugas tanpa nilai placeholder; (4) menambahkan entri 3–5 poin di `PROGRESS.md`; (5) melakukan commit (di mana rencana melakukan commit) dengan format `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) di mana rencana membawa lapisan status, menulis ulang `state.json` secara atomik — tugas `completed`, catatan gate, catatan outcome, hash commit.
+
+Keenam langkah membentuk satu transaksi logis. Sebuah agent yang terinterupsi di tengah protokol MUST NOT memulai tugas berikutnya — ia harus menyelesaikan atau membatalkan penyelesaian parsial terlebih dahulu.
+
+## Protokol Resume DWP
+
+Resume MUST dimungkinkan hanya dari berkas rencana ditambah log git, tanpa status eksternal. Di ruang kerja tanpa git — lihat [Arketipe](/spec/archetypes) §3 — `state.json` rencana REQUIRED dan menggantikan log git.
+
+Sebuah agent yang melanjutkan — sesi baru, agent yang berbeda, giliran daemon terjadwal, atau sesi cloud yang bangun — MUST melakukan ritual ini, secara berurutan:
+
+1. **Re-anchor.** Baca README rencana: tujuan, panduan global, daftar tugas.
+2. **Temukan checkpoint.** Temukan tugas pertama yang tidak dicentang di README; baca log git dan git status (atau `checkpoint` di `state.json` di mana git tidak ada).
+3. **Rekonsiliasi status.** Di mana `state.json` ada, bandingkan dengan kotak centang README; pada desinkronisasi, regenerasi dari markdown sebelum melanjutkan.
+4. **Periksa seam.** Baca Completion & Log tugas pada titik resume dan entri `PROGRESS.md` terakhir — tanah yang terakhir diverifikasi oleh sesi sebelumnya.
+5. **Smoke-test.** Jalankan validasi berdiri termurah repositori untuk mengonfirmasi dunia masih bekerja sebelum membangun di atasnya. Smoke test yang gagal diselidiki terlebih dahulu, tidak dibangun di atasnya.
+6. **Lanjutkan secara atomik.** Eksekusi tepat tugas berikutnya; jangan lakukan batch ke depan.
+
+Agent MUST mempercayai tanda selesai (`[x]`) dan MUST NOT memvalidasi ulang tugas yang selesai kecuali pengguna secara eksplisit memintanya, atau smoke test gagal dengan cara yang mengimplikasikan tugas yang selesai.
 
 ## Loop eksekusi
 
@@ -72,6 +109,28 @@ DWP mendefinisikan lima operasi:
 <OutputWorkspace lang="en" class="not-prose my-10" />
 
 Semua artefak DWP MUST berada di bawah direktori `.dwp/` yang di-gitignore di akar repositori.
+
+## Status rencana yang dapat dibaca mesin
+
+Sebuah rencana MAY membawa lapisan status yang dapat dibaca mesin — `manifest.json` (identitas statis) dan `state.json` (status per-tugas berjalan, catatan validation gate, catatan outcome, checkpoint, status terblokir). Rencana markdown tetap menjadi sumber kebenaran; lapisan JSON adalah proyeksi turunan, diregenerasi pada titik protokol dan direkonsiliasi saat resume.
+
+Lapisan status RECOMMENDED untuk rencana baru, REQUIRED untuk eksekusi tanpa pengawasan, dan REQUIRED untuk ruang kerja agent tanpa git. Lihat definisi normatif lengkap di [Status rencana](/spec/plan-state).
+
+## Rigor proporsional
+
+Rigor MUST sebanding dengan pekerjaan. Seremonial pada perubahan sepele adalah kegagalan metodologi, bukan keamanan ekstra. Setiap pekerjaan jatuh tepat pada satu tingkatan:
+
+| Tingkatan | Kapan | Bentuk |
+|------|------|------|
+| **micro** | Satu perubahan atomik: satu concern, kira-kira satu sesi, tanpa koordinasi. Perbaikan bug, perubahan teks, penyesuaian konfigurasi. | Tidak ada folder rencana. Agent menyatakan tujuan, acceptance criteria, dan validation gate secara inline dalam percakapan, mengeksekusi, memvalidasi, melakukan commit. |
+| **standard** | Pekerjaan multi-langkah dengan cakupan nyata: sebuah fitur, sebuah refactor, sebuah migrasi dalam satu repo. Tingkatan default. | Rencana penuh: folder rencana, tugas sembilan bagian, tugas akhir wajib. |
+| **deep** | Pekerjaan berjangka panjang yang mencakup kelompok paralel, repositori turunan, atau beberapa sesi tanpa pengawasan. | Rencana standard ditambah kemampuan orchestrator dan/atau team-agents, dan lapisan status. |
+
+Sebuah agent yang diminta membuat rencana untuk pekerjaan tingkatan micro MUST menyatakan bahwa rencana tidak proporsional dan menawarkan bentuk inline sebagai gantinya. Folder rencana MUST NOT dibuat untuk perubahan satu berkas yang sepele.
+
+Pekerjaan tingkatan micro tetap menjaga hal yang tidak bisa dinegosiasikan: tujuan yang eksplisit, validation gate yang berjalan dan lulus, serta disiplin test untuk perubahan perilaku. Tingkatan mengubah kemasan, tidak pernah gate-nya.
+
+Ketika cakupan berkembang di tengah jalan — sebuah tugas micro menemukan cakupan nyata, sebuah rencana standard memunculkan sub-repositori — agent MUST berhenti dan mempromosikan pekerjaan ke tingkatan berikutnya alih-alih meregangkan yang sekarang.
 
 ## Pemberian versi
 

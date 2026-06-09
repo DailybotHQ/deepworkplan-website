@@ -37,7 +37,10 @@ Comandos de barra ligeros delegan en las sub-skills y los addons:
 ### Adaptadores
 
 Integraciones ligeras por agente para Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
-OpenCode, Windsurf, Cline y Antigravity.
+OpenCode, Windsurf, Cline y Antigravity. Para plataformas de agentes autónomos: OpenClaw y Hermes ejecutan
+planes bajo el perfil de ejecución desatendida, impulsados por latido o programación cron; los agentes en la
+nube y en segundo plano (tareas remotas de Claude Code, Codex en la nube, tipo Jules) usan la capa de estado
+del plan para la reanudación entre sesiones efímeras.
 
 ### Presets de incorporación
 

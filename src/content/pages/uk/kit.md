@@ -36,8 +36,7 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ### Адаптери
 
-Тонкі інтеграції під кожного агента для Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini,
-OpenCode, Windsurf, Cline та Antigravity.
+Тонкі інтеграції під кожного агента для Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Windsurf, Cline, Antigravity, OpenClaw, Hermes та хмарних і фонових агентів (віддалені завдання Claude Code, Codex cloud, агенти класу Jules). OpenClaw та Hermes — автономні агентні платформи, що виконують плани під профілем автономного виконання, керованого heartbeat або cron-плануванням.
 
 ### Пресети онбордингу
 

@@ -35,7 +35,7 @@ Deep Work Plan スキルは、ルーターと八つのサブスキルです。
 
 ### アダプター
 
-Claude Code、Cursor、OpenAI Codex、GitHub Copilot、Google Gemini、OpenCode、Windsurf、Cline、Antigravity のための、エージェントごとの薄い統合。
+Claude Code、Cursor、OpenAI Codex、GitHub Copilot、Google Gemini、OpenCode、Windsurf、Cline、Antigravity、OpenClaw、Hermes、そしてクラウド／バックグラウンドエージェント（Claude Code リモートタスク、Codex クラウド、Jules クラス）のための、エージェントごとの薄い統合。OpenClaw と Hermes は、ハートビートまたはクロンスケジューリングで駆動される、無人実行プロファイルのもとで計画を実行する自律エージェントプラットフォームです。
 
 ### オンボーディングプリセット
 

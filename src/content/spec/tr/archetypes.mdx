@@ -1,6 +1,6 @@
 ---
 title: Arketipler
-description: "DWP depo arketiplerinin normatif açıklaması: bireysel depo ve orkestratör merkezi, sınıflandırma sezgisel kuralı ve kuruluma almanın nasıl farklılaştığı."
+description: "DWP depo arketiplerinin normatif açıklaması: bireysel depo, orkestratör merkezi ve ajan çalışma alanı; kuruluma almanın her biri için nasıl farklılaştığı."
 order: 4
 lang: tr
 section: Archetypes
@@ -9,7 +9,9 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 # Arketipler
 
-**Sürüm 1.0.** DWP iki depo arketipi tanır. Arketip, bir ajanın nasıl kuruluma alındığını ve planların nasıl kapsamlandırıldığını belirler.
+**Sürüm 1.1.** DWP üç arketip tanır. Arketip, bir ajanın nasıl kuruluma alındığını, planların nasıl kapsamlandırıldığını ve makine tarafından okunabilir durum katmanının zorunlu olup olmadığını belirler.
+
+> **v1.1'de eklemeli.** **Ajan çalışma alanı** (§3), üçüncü arketip olarak katılır: otonom bir ajanın uzun ömürlü evidir. Git, varsayılan yerine ÖNERİLİR hâle gelir. İki v1.0 arketipi değişmez.
 
 ## Bireysel depo
 
@@ -32,23 +34,43 @@ Birden çok alt depoyu yöneten bir koordinasyon deposu. Planlar alt depolarda a
 - Yönetilen depoların bir kaydını tutar.
 - Merkez kökündeki `.dwp/` çalışma alanı depolar arası durumu izler.
 
+## Ajan çalışma alanı
+
+Bir ajan çalışma alanı, otonom bir ajanın uzun ömürlü çalışma evidir — bir OpenClaw çalışma alanı, bir Hermes servis dizini, bir kişisel asistan daemon'ının veri dizini veya bir bulut ajanının kalıcı birimi. Bir çalışma alanıdır, zorunlu olarak git deposu değildir ve birincil ürünü, tek bir kod tabanı değil, ajanın süregelen çalışmasıdır.
+
+Bu arketipteki temel kavrayış: **harness, bir çalışma alanıdır, özellikle bir depo değil.** Metodolojinin bir depo için tanımladığı her harness öğesinin doğrudan bir çalışma alanı karşılığı vardır:
+
+| Harness öğesi (depo) | Ajan çalışma alanı karşılığı |
+|----------------------|------------------------------|
+| `AGENTS.md` (kurallar, hızlı komutlar) | Çalışma alanının daimi bağlamı — `AGENTS.md`'nin kendisi veya platformun daimi-emirler dosyası |
+| `docs/` (kalıcı bilgi) | Çalışma alanı bilgi dosyaları ve bellek belgeleri |
+| `.agents/` (skill'ler, ajanlar, komutlar) | Platformun skill dizini — OpenClaw, `<workspace>/.agents/skills/` dizinini yerel olarak tarar |
+| `.dwp/` (planlar, taslaklar) | Çalışma alanı kökünde `.dwp/` — değişmez |
+| git günlüğü (durum, devam edebilirlik) | Plan başına `state.json` ([Plan durumu](/spec/plan-state)), burada ZORUNLUDUR |
+
+Bir ajan çalışma alanı, çalışma alanı kökünde `AGENTS.md`, `.agents/` ve `.dwp/` SAĞLAMAK ZORUNDADIR.
+
+**Git ÖNERİLİR, ZORUNLU değildir.** Git yoksa, her plan makine tarafından okunabilir durum katmanını TAŞIMAK ZORUNDADIR: `state.json`'un kontrol noktası, kapı kayıtları ve görev başına zaman damgaları, bir depoda git günlüğünün taşıdığı kurtarma bilgisini taşır.
+
+Bir ajan çalışma alanındaki planlar genellikle gözetimsiz çalışır: zamanlanmış bir kalp atışı veya cron dönüşü, DWP Resume Protocol aracılığıyla açık planı sürdürür, sonraki atomik görevi yürütür, durum katmanını günceller ve verir. Plan — oturum değil — sürekliliğin birimidir.
+
 ## Sınıflandırma sezgisel kuralı
 
 <ArchetypesTree lang="tr" class="not-prose my-10" />
 
-Bir ajan, şunları bulursa bir depoyu orkestratör merkezi olarak sınıflandırMALIDIR:
+Hedef bir otonom ajan platformunun çalışma dizini olduğunda önce **ajan çalışma alanı** olarak sınıflandırın — sinyaller: bir platform kimlik dosyası (OpenClaw'ın `SOUL.md` veya `HEARTBEAT.md`'si gibi), birincil uygulama yığını yok ve ağırlıklı olarak ajanın kendi durumu olan içerik. Herhangi bir güçlü platform sinyali yeterlidir.
 
-- Birden çok iç içe git deposu veya alt modül.
-- Yönetilen depoların bir kaydı veya manifesti.
-- Harici depolara işaret eden yapılandırma.
+Aksi takdirde, aşağıdakilerin açık bir çoğunluğu geçerliyse **orkestratör merkezi** olarak sınıflandırın: birden çok iç içe git deposu veya alt modül; yönetilen depoların bir kaydı veya manifesti; harici depolara işaret eden yapılandırma. Aksi takdirde **bireysel depo** olarak sınıflandırın — güvenli varsayılandır.
 
-Aksi takdirde, onu bireysel bir depo olarak ele alın.
+Sinyaller belirsiz olduğunda, ajan DEĞERLENDİRMESİNİ ve kanıtını kullanıcıya SUNMAK ve devam etmeden önce onay istemek ZORUNDADIR.
 
 ## Kuruluma alma farkları
 
-| Yön | Bireysel | Orkestratör |
-|--------|------------|--------------|
-| Kapsam | Bu depo | Birden çok depo |
-| Kuruluma alma | Depo yapısı | Merkez kaydı |
-| Plan hedefi | Yerel dosyalar | Alt planlar |
-| Durum | Yerel `.dwp/` | Depolar arası `.dwp/` |
+| Yön | Bireysel | Orkestratör | Ajan çalışma alanı |
+|--------|------------|--------------|---------------------|
+| Kapsam | Bu depo | Birden çok depo | Çalışma alanı ve planları |
+| Kuruluma alma | Depo yapısı | Merkez kaydı | Platform dosyaları + çalışma alanı kuralları |
+| Plan hedefi | Yerel dosyalar | Alt planlar | Yerel veya harici depolar |
+| Durum | Yerel `.dwp/` | Depolar arası `.dwp/` | `.dwp/` + `state.json` (git olmadan ZORUNLU) |
+| Git | Zorunlu | Zorunlu | ÖNERİLİR |
+| Durum katmanı | ÖNERİLİR | ÖNERİLİR | Git olmadan ZORUNLU; gözetimsiz çalıştırmalar için ZORUNLU |

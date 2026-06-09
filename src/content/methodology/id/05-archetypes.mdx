@@ -1,6 +1,6 @@
 ---
 title: Repository archetypes
-description: "Arketipe repositori individual dan orchestrator hub, heuristik untuk mengklasifikasikan sebuah repositori, dan bagaimana onboarding serta lingkup rencana berbeda di antara keduanya."
+description: "Tiga arketipe DWP — repo individual, orchestrator hub, dan ruang kerja agent — heuristik klasifikasi, dan bagaimana onboarding berbeda untuk masing-masing."
 order: 5
 lang: id
 summary: Mengapa arketipe sebuah repositori menentukan cara agent meng-onboard dan menetapkan lingkup rencana.
@@ -13,7 +13,7 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 Sebelum mengubah satu baris pun, agent membuat satu keputusan yang membentuk segalanya setelahnya: **repositori macam apa ini?** Arketipe yang disimpulkannya menetapkan batas tempat ia akan bernalar sepanjang penugasan — cara ia meng-onboard, seberapa jauh sebuah rencana menjangkau, dan di mana status disimpan. Salah identifikasi, dan agent akan menetapkan lingkup pekerjaan pada permukaan yang keliru — sumber drift paling umum pada tugas berjangka panjang. Identifikasi dengan benar, dan agent dapat bekerja secara otonom selama berjam-jam, karena rencana, onboarding, dan status semuanya selaras dengan bentuk kode yang sesungguhnya.
 
-DWP mengenali dua arketipe. Sebagian besar repositori termasuk yang pertama; yang kedua ada untuk tim yang mengoordinasikan banyak repositori.
+DWP mengenali tiga arketipe. Sebagian besar repositori termasuk yang pertama; yang kedua ada untuk tim yang mengoordinasikan banyak repositori; yang ketiga mencakup ruang kerja long-lived dari agent otonom.
 
 <ArchetypesCompare lang="id" class="not-prose my-10" />
 
@@ -38,25 +38,41 @@ Karakteristik:
 - Memelihara sebuah registri repositori yang dikelola.
 - Ruang kerja `.dwp/` di akar hub melacak status lintas repositori.
 
+## Ruang kerja agent
+
+Arketipe ketiga, ditambahkan di v2.2, menggambarkan sesuatu yang merupakan ruang kerja sebelum menjadi repositori: rumah long-lived dari sebuah agent otonom. Ruang kerja OpenClaw, direktori layanan Hermes, direktori data daemon asisten pribadi, volume persisten cloud agent — masing-masing memiliki rencana untuk dieksekusi, alat untuk digunakan, dan memori untuk dipelihara, tetapi mungkin tidak memiliki basis kode untuk dikirimkan.
+
+Wawasan kuncinya adalah bahwa **harness adalah sebuah ruang kerja, bukan khususnya sebuah repositori.** Setiap elemen yang dipasang DWP ke dalam repositori — `AGENTS.md`, `docs/`, `.agents/`, `.dwp/` — memiliki padanan ruang kerja langsung. Permukaan metodologi dipetakan dengan bersih: berkas konteks-berdiri menggantikan `AGENTS.md` akar, direktori skill platform menggantikan `.agents/`, dan folder `.dwp/` di akar ruang kerja tidak berubah. Yang berubah adalah peran git. Di sebuah repositori, log git membawa status dan membuat rencana dapat dilanjutkan lintas sesi. Di ruang kerja tanpa git, `state.json` melakukan pekerjaan itu — itulah mengapa lapisan status yang dapat dibaca mesin diwajibkan untuk ruang kerja agent.
+
+Hasil praktisnya adalah rencana tanpa pengawasan semalam. Pada platform kelas OpenClaw, giliran heartbeat atau cron membangunkan agent, menjalankan protokol resume DWP, mengeksekusi tugas atomik berikutnya, memperbarui `state.json`, dan yield. Rencana — bukan sesi — adalah unit kontinuitas. Rencana multi-hari bertahan dari restart, penggantian model, dan batas sesi karena semua yang dibutuhkan giliran berikutnya ada dalam berkas rencana: tujuan, kemajuan yang telah ditandai centang, catatan gate, dan checkpoint tepat di dalam tugas saat ini.
+
+Karakteristik:
+
+- Direktori kerja dari platform agent otonom.
+- `AGENTS.md`, `.agents/`, dan `.dwp/` di akar ruang kerja.
+- Git direkomendasikan, tidak diwajibkan.
+- `state.json` diwajibkan ketika git tidak ada, dan untuk setiap jalannya tanpa pengawasan.
+- Rencana biasanya berjalan tanpa pengawasan, dijalankan oleh heartbeat atau cron terjadwal.
+
 ## Heuristik klasifikasi
 
-Kedua arketipe terlihat berbeda di disk, dan agent memilih di antara keduanya berdasarkan sinyal yang dapat diverifikasinya — bukan label yang diberitahukan kepadanya. Pohon keputusan di bawah ini menunjukkan jalurnya; singkatnya, perlakukan sebuah repositori sebagai orchestrator hub hanya ketika bukti menuntutnya, dan sebagai repositori individual dalam kondisi lainnya.
+Ketiga arketipe terlihat berbeda di disk, dan agent memilih di antara keduanya berdasarkan sinyal yang dapat diverifikasinya — bukan label yang diberitahukan kepadanya. Pohon keputusan di bawah ini menunjukkan jalurnya; singkatnya, klasifikasikan sebagai ruang kerja agent ketika sinyal identitas platform ada, sebagai orchestrator hub hanya ketika bukti menuntutnya, dan sebagai repositori individual dalam kondisi lainnya.
 
 <ArchetypesTree lang="id" class="not-prose my-10" />
 
-Sebuah agent sebaiknya mengklasifikasikan sebuah repositori sebagai orchestrator hub ketika ia menemukan beberapa repositori git bersarang atau submodule, sebuah registri atau manifes repositori yang dikelola, atau konfigurasi yang menunjuk ke repositori eksternal. Dengan tidak adanya sinyal-sinyal itu, ia memperlakukan repositori sebagai repositori individual — nilai default yang aman, karena menetapkan lingkup rencana terlalu luas melampaui batas yang tidak ada lebih buruk daripada bekerja dalam batas yang ada.
+Sebuah agent sebaiknya pertama-tama mencari sinyal ruang kerja agent: sebuah berkas identitas platform (seperti `SOUL.md` atau `HEARTBEAT.md` milik OpenClaw), tidak ada stack aplikasi utama, dan konten yang didominasi status milik agent itu sendiri. Jika tidak ada, ia mencari sinyal orchestrator: beberapa repositori git bersarang atau submodule, sebuah registri atau manifes repositori yang dikelola, atau konfigurasi yang menunjuk ke repositori eksternal. Jika keduanya tidak ada, ia memperlakukan target sebagai repositori individual — nilai default yang aman, karena menetapkan lingkup rencana terlalu luas melampaui batas yang tidak ada lebih buruk daripada bekerja dalam batas yang ada.
 
 ## Bagaimana onboarding berbeda
 
 Arketipe bukan sekadar label kosmetik; ia mengubah apa yang dibaca agent, apa yang boleh disentuh rencana, dan di mana status dicatat.
 
-| Aspek | Individual | Orchestrator |
-|--------|------------|--------------|
-| Lingkup | Repositori ini | Beberapa repositori |
-| Onboarding | Struktur repositori | Registri hub |
-| Target rencana | Berkas lokal | Rencana turunan |
-| Status | `.dwp/` lokal | `.dwp/` lintas repositori |
+| Aspek | Individual | Orchestrator | Ruang kerja agent |
+|--------|------------|--------------|-----------------|
+| Lingkup | Repositori ini | Beberapa repositori | Ruang kerja dan rencananya |
+| Onboarding | Struktur repositori | Registri hub | Berkas platform + konvensi ruang kerja |
+| Target rencana | Berkas lokal | Rencana turunan | Repositori lokal atau eksternal |
+| Status | `.dwp/` lokal | `.dwp/` lintas repositori | `.dwp/` + `state.json` (wajib tanpa git) |
 
-Efek praktisnya adalah bahwa agent repositori individual bernalar tentang satu basis kode dari ujung ke ujung, sementara agent orchestrator bernalar tentang koordinasi — repositori turunan mana yang memiliki pekerjaan yang mana, dan bagaimana status lintas repositori tetap konsisten.
+Efek praktisnya adalah bahwa agent repositori individual bernalar tentang satu basis kode dari ujung ke ujung, agent orchestrator bernalar tentang koordinasi lintas repositori, dan agent ruang kerja bernalar tentang kontinuitas lintas sesi — apa yang direncanakan, apa yang berjalan, apa yang terblokir, dan apa yang akan datang berikutnya.
 
 Inilah yang memungkinkan agent bekerja secara otonom selama berjam-jam tanpa pengawasan: dengan menetapkan arketipe terlebih dahulu, ia menetapkan lingkup rencana, onboarding, dan status ke batas yang tepat, sehingga setiap tugas dari yang pertama hingga yang terakhir beroperasi pada permukaan yang benar.

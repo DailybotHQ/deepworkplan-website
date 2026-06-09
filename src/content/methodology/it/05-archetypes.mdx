@@ -1,6 +1,6 @@
 ---
 title: Archetipi di repository
-description: "Gli archetipi del repository individuale e dell'hub orchestratore, l'euristica per classificare un repository e come onboarding e ambito dei piani differiscono tra loro."
+description: "I tre archetipi DWP — repo individuale, hub orchestratore e workspace agente — l'euristica di classificazione e come differisce l'onboarding per ciascuno."
 order: 5
 lang: it
 summary: Perché l'archetipo di un repository determina come un agente fa l'onboarding e definisce l'ambito dei piani.
@@ -13,7 +13,7 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 
 Prima di modificare una singola riga, un agente prende una decisione che condiziona tutto ciò che segue: **che tipo di repository è questo?** L'archetipo che deduce stabilisce il confine entro cui ragionerà per il resto del lavoro — come fa l'onboarding, fino a dove arriva un piano e dove risiede lo stato. Sbagliare significa definire l'ambito del lavoro sulla superficie sbagliata, la causa più comune di deriva nelle attività a lungo orizzonte. Azzeccare il tipo consente all'agente di lavorare in autonomia per ore, perché piani, onboarding e stato si allineano con la forma reale del codice.
 
-DWP riconosce due archetipi. La maggior parte dei repository è del primo tipo; il secondo esiste per i team che ne coordinano molti.
+DWP riconosce tre archetipi. La maggior parte dei repository è del primo tipo; il secondo esiste per i team che ne coordinano molti; il terzo copre i workspace di lunga durata degli agenti autonomi.
 
 <ArchetypesCompare lang="it" class="not-prose my-10" />
 
@@ -38,25 +38,41 @@ Caratteristiche:
 - Mantiene un registro dei repository gestiti.
 - Il workspace `.dwp/` nella radice dell'hub traccia lo stato tra i repository.
 
+## Workspace agente
+
+Un terzo archetipo, aggiunto in v2.2, descrive qualcosa che è un workspace prima ancora di essere un repository: la casa di lunga durata di un agente autonomo. Un workspace OpenClaw, una directory di servizio Hermes, la directory dei dati di un daemon di assistente personale, il volume persistente di un agente cloud — ciascuno ha piani da eseguire, strumenti da usare e memoria da mantenere, ma potrebbe non avere un codebase da consegnare.
+
+L'intuizione chiave è che **la harness è un workspace, non specificamente un repository.** Ogni elemento che DWP installa in un repository — `AGENTS.md`, `docs/`, `.agents/`, `.dwp/` — ha un equivalente diretto nel workspace. La superficie della metodologia si mappa in modo pulito: i file di contesto permanente sostituiscono l'`AGENTS.md` radice, una directory delle skill della piattaforma sostituisce `.agents/`, e la cartella `.dwp/` nella radice del workspace è invariata. Ciò che cambia è il ruolo di git. In un repository, il git log porta lo stato e rende i piani ripristinabili tra le sessioni. In un workspace senza git, `state.json` svolge quel lavoro — ed è per questo che il livello di stato leggibile dalle macchine è obbligatorio per i workspace agente.
+
+Il vantaggio pratico sono i piani non presidiati notturni. Sulle piattaforme di classe OpenClaw, un heartbeat o un turno cron sveglia l'agente, esegue il protocollo di ripresa DWP, esegue la prossima attività atomica, aggiorna `state.json` e cede il controllo. Il piano — non la sessione — è l'unità di continuità. Un piano multi-giorno sopravvive a riavvii, sostituzioni di modello e confini di sessione perché tutto ciò di cui il turno successivo ha bisogno si trova nei file del piano: l'obiettivo, i progressi spuntati, i gate record e il checkpoint esatto all'interno dell'attività corrente.
+
+Caratteristiche:
+
+- La directory di lavoro di una piattaforma di agenti autonomi.
+- `AGENTS.md`, `.agents/` e `.dwp/` nella radice del workspace.
+- Git è raccomandato, non obbligatorio.
+- `state.json` è obbligatorio quando git è assente e per qualsiasi esecuzione non presidiata.
+- I piani vengono tipicamente eseguiti in modo non presidiato, guidati da un heartbeat pianificato o da cron.
+
 ## Euristica di classificazione
 
-I due archetipi si presentano diversamente su disco, e l'agente sceglie tra loro in base a segnali che può verificare — non a un'etichetta che gli è stata comunicata. L'albero decisionale seguente mostra il percorso; in breve, trattate un repository come hub orchestratore solo quando le prove lo richiedono, e come repository individuale negli altri casi.
+I tre archetipi si presentano diversamente su disco, e l'agente sceglie tra loro in base a segnali che può verificare — non a un'etichetta che gli è stata comunicata. L'albero decisionale seguente mostra il percorso; in breve, classificare come workspace agente quando sono presenti segnali di identità della piattaforma, come hub orchestratore solo quando le prove lo richiedono, e come repository individuale negli altri casi.
 
 <ArchetypesTree lang="it" class="not-prose my-10" />
 
-Un agente dovrebbe classificare un repository come hub orchestratore quando trova più repository git annidati o submodule, un registro o manifest di repository gestiti, oppure configurazione che punta a repository esterni. In assenza di questi segnali, tratta il repository come un repository individuale — il comportamento sicuro predefinito, perché estendere un piano oltre confini che non esistono è peggio che lavorare all'interno di uno che esiste.
+Un agente dovrebbe prima cercare segnali di workspace agente: un file di identità della piattaforma (come `SOUL.md` o `HEARTBEAT.md` di OpenClaw), nessuno stack applicativo principale e contenuto che è prevalentemente lo stato proprio dell'agente. Se questi sono assenti, cerca segnali di orchestratore: più repository git annidati o submodule, un registro o manifest di repository gestiti, oppure configurazione che punta a repository esterni. In assenza di entrambi, tratta il target come un repository individuale — il comportamento sicuro predefinito, perché estendere un piano oltre confini che non esistono è peggio che lavorare all'interno di uno che esiste.
 
 ## Come differisce l'onboarding
 
 L'archetipo non è una semplice etichetta cosmetica; cambia ciò che l'agente legge, ciò che un piano può toccare e dove lo stato viene registrato.
 
-| Aspetto | Individuale | Orchestratore |
-|--------|------------|--------------|
-| Ambito | Questo repository | Più repository |
-| Onboarding | Struttura del repository | Registro dell'hub |
-| Bersaglio del piano | File locali | Piani figli |
-| Stato | `.dwp/` locale | `.dwp/` tra repository |
+| Aspetto | Individuale | Orchestratore | Workspace agente |
+|--------|------------|--------------|-----------------|
+| Ambito | Questo repository | Più repository | Il workspace e i suoi piani |
+| Onboarding | Struttura del repository | Registro dell'hub | File della piattaforma + convenzioni del workspace |
+| Bersaglio del piano | File locali | Piani figli | Repository locali o esterni |
+| Stato | `.dwp/` locale | `.dwp/` tra repository | `.dwp/` + `state.json` (obbligatorio senza git) |
 
-L'effetto pratico è che un agente per repository individuale ragiona su un singolo codebase dall'inizio alla fine, mentre un agente orchestratore ragiona sul coordinamento — quale repository figlio possiede quale lavoro e come lo stato tra i repository resta coerente.
+L'effetto pratico è che un agente per repository individuale ragiona su un singolo codebase dall'inizio alla fine, un agente orchestratore ragiona sul coordinamento tra repository, e un agente workspace ragiona sulla continuità tra sessioni — cosa è stato pianificato, cosa è stato eseguito, cosa è bloccato e cosa viene dopo.
 
-Azzeccare l'archetipo è ciò che permette a un agente di lavorare in autonomia per ore senza supervisione: definisce l'ambito di piani, onboarding e stato sul confine giusto, così l'agente opera sulla superficie corretta dalla prima all'ultima attività.
+Questo è ciò che consente a un agente di lavorare in autonomia per ore senza supervisione: fissando l'archetipo per primo, definisce l'ambito di piani, onboarding e stato sul confine giusto, così ogni attività dalla prima all'ultima opera sulla superficie corretta.
