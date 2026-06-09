@@ -8,7 +8,7 @@ section: Conformance
 
 # Tuân thủ
 
-**Phiên bản 1.0. Trạng thái: Ổn định.** Tài liệu này định nghĩa thế nào là một repository *tuân thủ Deep Work Plan* — tức là AI-first và điều khiển được bằng agent. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
+**Phiên bản 1.1. Trạng thái: Ổn định.** Tài liệu này định nghĩa thế nào là một repository *tuân thủ Deep Work Plan* — tức là AI-first và điều khiển được bằng agent. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
 Sự tuân thủ tồn tại để "AI-first" là một đặc tính khách quan, kiểm tra được thay vì một ấn tượng. Một repository hoặc đạt các tiêu chí dưới đây hoặc không. [Sub-skill `verify`](/kit) (`/dwp-verify`) kiểm tra chúng một cách máy móc.
 

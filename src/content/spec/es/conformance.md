@@ -8,7 +8,7 @@ section: Conformidad
 
 # Conformidad
 
-**Versión 1.0. Estado: Estable.** Este documento define qué significa que un repositorio sea *conforme con Deep Work Plan* — es decir, AI-first y pilotable por agentes. Las palabras clave DEBE, NO DEBE, DEBERÍA, NO DEBERÍA y PUEDE se interpretan como se describe en el RFC 2119.
+**Versión 1.1. Estado: Estable.** Este documento define qué significa que un repositorio sea *conforme con Deep Work Plan* — es decir, AI-first y pilotable por agentes. Las palabras clave DEBE, NO DEBE, DEBERÍA, NO DEBERÍA y PUEDE se interpretan como se describe en el RFC 2119.
 
 La conformidad existe para que "AI-first" sea una propiedad objetiva y comprobable, no una impresión. Un repositorio cumple los criterios de abajo o no los cumple. La [sub-skill `verify`](/es/kit) (`/dwp-verify`) los comprueba de forma mecánica.
 

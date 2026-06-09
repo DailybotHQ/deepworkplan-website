@@ -8,7 +8,7 @@ section: Conformance
 
 # Zgodność
 
-**Wersja 1.0. Status: Stabilny.** Ten dokument definiuje, co oznacza, że repozytorium jest *zgodne z Deep Work Plan* — czyli AI-first i sterowalne przez agenta. Słowa kluczowe MUSI, NIE MOŻE, POWINNO, NIE POWINNO oraz MOŻE należy interpretować zgodnie z opisem w RFC 2119.
+**Wersja 1.1. Status: Stabilny.** Ten dokument definiuje, co oznacza, że repozytorium jest *zgodne z Deep Work Plan* — czyli AI-first i sterowalne przez agenta. Słowa kluczowe MUSI, NIE MOŻE, POWINNO, NIE POWINNO oraz MOŻE należy interpretować zgodnie z opisem w RFC 2119.
 
 Zgodność istnieje po to, aby „AI-first" było obiektywną, sprawdzalną właściwością, a nie wrażeniem. Repozytorium albo spełnia poniższe kryteria, albo nie. [Sub-skill `verify`](/kit) (`/dwp-verify`) sprawdza je mechanicznie.
 

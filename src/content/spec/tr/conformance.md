@@ -8,7 +8,7 @@ section: Conformance
 
 # Uyumluluk
 
-**Sürüm 1.0. Durum: Kararlı.** Bu belge, bir deponun *Deep Work Plan uyumlu* — yani AI-first ve ajan-pilotlanabilir — olmasının ne anlama geldiğini tanımlar. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119’da açıklandığı şekilde yorumlanacaktır.
+**Sürüm 1.1. Durum: Kararlı.** Bu belge, bir deponun *Deep Work Plan uyumlu* — yani AI-first ve ajan-pilotlanabilir — olmasının ne anlama geldiğini tanımlar. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119’da açıklandığı şekilde yorumlanacaktır.
 
 Uyumluluk, “AI-first”ün bir izlenim değil, nesnel, denetlenebilir bir özellik olması için vardır. Bir depo, aşağıdaki ölçütleri ya karşılar ya da karşılamaz. [`verify` alt skill’i](/kit) (`/dwp-verify`) bunları mekanik olarak denetler.
 

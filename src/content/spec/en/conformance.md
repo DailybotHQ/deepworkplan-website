@@ -8,7 +8,7 @@ section: Conformance
 
 # Conformance
 
-**Version 1.0. Status: Stable.** This document defines what it means for a repository to be *Deep Work Plan-conformant* — that is, AI-first and agent-pilotable. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
+**Version 1.1. Status: Stable.** This document defines what it means for a repository to be *Deep Work Plan-conformant* — that is, AI-first and agent-pilotable. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
 Conformance exists so that "AI-first" is an objective, checkable property rather than an impression. A repository either meets the criteria below or it does not. The [`verify` sub-skill](/kit) (`/dwp-verify`) checks them mechanically.
 

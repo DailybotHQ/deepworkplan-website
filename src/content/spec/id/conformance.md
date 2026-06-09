@@ -8,7 +8,7 @@ section: Conformance
 
 # Conformance
 
-**Versi 1.0. Status: Stabil.** Dokumen ini mendefinisikan apa artinya sebuah repositori menjadi *konforman terhadap Deep Work Plan* — yaitu, AI-first dan dapat dikemudikan agent. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
+**Versi 1.1. Status: Stabil.** Dokumen ini mendefinisikan apa artinya sebuah repositori menjadi *konforman terhadap Deep Work Plan* — yaitu, AI-first dan dapat dikemudikan agent. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
 Konformansi ada agar "AI-first" menjadi properti yang objektif dan dapat diperiksa, bukan sekadar kesan. Sebuah repositori entah memenuhi kriteria di bawah atau tidak. [Sub-skill `verify`](/kit) (`/dwp-verify`) memeriksanya secara mekanis.
 

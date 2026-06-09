@@ -8,7 +8,7 @@ section: Conformance
 
 # 符合性
 
-**版本 1.0。状态：稳定。** 本文档界定了一个代码仓库*符合 Deep Work Plan*——也就是 AI-first、可被代理驾驭——意味着什么。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
+**版本 1.1。状态：稳定。** 本文档界定了一个代码仓库*符合 Deep Work Plan*——也就是 AI-first、可被代理驾驭——意味着什么。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
 符合性之所以存在，是为了让“AI-first”成为一项客观、可核查的属性，而非一种印象。一个仓库要么满足下述标准，要么不满足。[`verify` 子技能](/kit)（`/dwp-verify`）会以机械方式核查它们。
 

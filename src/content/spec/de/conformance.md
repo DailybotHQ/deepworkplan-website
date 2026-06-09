@@ -8,7 +8,7 @@ section: Conformance
 
 # Konformität
 
-**Version 1.0. Status: Stabil.** Dieses Dokument definiert, was es bedeutet, dass ein Repository *Deep Work Plan-konform* ist — also AI-first und agenten-steuerbar. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
+**Version 1.1. Status: Stabil.** Dieses Dokument definiert, was es bedeutet, dass ein Repository *Deep Work Plan-konform* ist — also AI-first und agenten-steuerbar. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
 Konformität existiert, damit „AI-first“ eine objektive, prüfbare Eigenschaft ist und kein Eindruck. Ein Repository erfüllt die untenstehenden Kriterien entweder oder nicht. Die [`verify`-Sub-Skill](/kit) (`/dwp-verify`) prüft sie mechanisch.
 

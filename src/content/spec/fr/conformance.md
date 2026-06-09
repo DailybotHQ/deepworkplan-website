@@ -8,7 +8,7 @@ section: Conformance
 
 # Conformité
 
-**Version 1.0. Statut : stable.** Ce document définit ce que signifie pour un dépôt d’être *conforme à Deep Work Plan* — c’est-à-dire AI-first et pilotable par agent. Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
+**Version 1.1. Statut : stable.** Ce document définit ce que signifie pour un dépôt d’être *conforme à Deep Work Plan* — c’est-à-dire AI-first et pilotable par agent. Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 
 La conformité existe pour que la qualité « AI-first » soit une propriété objective et vérifiable plutôt qu’une impression. Un dépôt satisfait les critères ci-dessous ou non. Le [sous-skill `verify`](/kit) (`/dwp-verify`) les vérifie mécaniquement.
 

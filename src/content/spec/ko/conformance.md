@@ -8,7 +8,7 @@ section: Conformance
 
 # 적합성
 
-**버전 1.0. 상태: 안정(Stable).** 이 문서는 리포지토리가 *Deep Work Plan 적합* — 즉 AI-first이며 에이전트가 조종 가능 — 하다는 것이 무엇을 뜻하는지 정의합니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
+**버전 1.1. 상태: 안정(Stable).** 이 문서는 리포지토리가 *Deep Work Plan 적합* — 즉 AI-first이며 에이전트가 조종 가능 — 하다는 것이 무엇을 뜻하는지 정의합니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
 
 적합성은 "AI-first"가 인상이 아니라 객관적이고 확인 가능한 속성이 되도록 존재합니다. 리포지토리는 아래 기준을 충족하거나 충족하지 못하거나 둘 중 하나입니다. [`verify` 하위 스킬](/kit)(`/dwp-verify`)이 그것들을 기계적으로 확인합니다.
 

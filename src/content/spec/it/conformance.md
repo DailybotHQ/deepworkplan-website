@@ -8,7 +8,7 @@ section: Conformance
 
 # Conformità
 
-**Versione 1.0. Stato: Stabile.** Questo documento definisce cosa significhi per un repository essere *conforme a Deep Work Plan* — ossia AI-first e pilotabile dagli agenti. Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
+**Versione 1.1. Stato: Stabile.** Questo documento definisce cosa significhi per un repository essere *conforme a Deep Work Plan* — ossia AI-first e pilotabile dagli agenti. Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
 
 La conformità esiste affinché «AI-first» sia una proprietà oggettiva e verificabile anziché un’impressione. Un repository soddisfa i criteri qui sotto oppure no. La [sub-skill `verify`](/kit) (`/dwp-verify`) li controlla in modo meccanico.
 
