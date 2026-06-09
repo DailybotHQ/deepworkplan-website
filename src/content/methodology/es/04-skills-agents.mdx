@@ -39,6 +39,8 @@ Antes de crear o ejecutar un plan, un agente se incorpora al repositorio. La inc
 
 Durante la incorporación, el agente identifica el arquetipo del repositorio (individual u orquestador), los comandos de compilación, prueba y linter, las convenciones existentes de estilo, estructura y nombrado, y las habilidades y agentes ya disponibles. Esta comprensión es lo que le permite planificar y ejecutar de una forma que encaja con el repositorio en lugar de luchar contra él.
 
+La cadena de herramientas de pruebas y validación recibe atención especial, porque las puertas de validación son lo que hace fiable el resultado de un plan. Cuando un repositorio ya tiene pruebas y linters, la incorporación registra sus comandos y convenciones reales. Cuando no tiene ninguno, la incorporación no se limita a señalar la carencia: propone una configuración adecuada al stack y la escribe en la guía de pruebas del repositorio, de modo que todo plan futuro tenga una puerta real que ejecutar en lugar de una indefinida.
+
 ## El directorio `.agents/` y el enlace simbólico `.claude → .agents`
 
 DWP reúne todo lo que define el comportamiento de los agentes (habilidades, comandos, definiciones de agentes, documentación interna y ajustes) bajo un único directorio canónico, `.agents/`. El nombre indica que el contenido se comparte entre agentes en lugar de estar atado a una sola herramienta.

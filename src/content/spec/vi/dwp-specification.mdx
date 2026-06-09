@@ -43,6 +43,18 @@ Mỗi tệp tác vụ PHẢI chứa chín phần này, theo thứ tự:
 8. **Risks** — điều gì có thể sai, và các biện pháp giảm thiểu.
 9. **Completion & Log** — một dấu trạng thái cùng các ghi chú theo trình tự thời gian.
 
+## Cổng kiểm chứng và test
+
+Kiểm chứng là cổng biến một tuyên bố hoàn tất thành bằng chứng của nó: một tác vụ KHÔNG ĐƯỢC (MUST NOT) bị đánh dấu hoàn tất cho đến khi mọi lệnh trong phần Validation của nó đã chạy và đạt. Test là một phần hạng nhất của cổng này, không phải một thứ tùy chọn đính kèm — chúng là điều làm cho mã mà một kế hoạch xuất ra trở nên đáng tin cậy và kiểm chứng được.
+
+Khi một tác vụ thêm chức năng lõi mới hoặc thay đổi đáng kể hành vi hiện có:
+
+- **Tiêu chí chấp nhận** của nó PHẢI bao gồm độ phủ test tự động cho hành vi mới hoặc đã thay đổi (đường đi thuận lợi cùng các trường hợp biên và lỗi có ý nghĩa), tuân theo quy ước test và kỳ vọng độ phủ của repository.
+- **Kiểm chứng** của nó PHẢI chạy các test của repository cùng với các bước kiểm tra lint, kiểm tra kiểu và định dạng của nó — kiểm tra chất lượng mã đầy đủ mà repository định nghĩa — chứ không phải chỉ riêng bước build. "Nó build được" không phải là một cổng đủ cho một thay đổi hành vi.
+- Các test hiện có PHẢI tiếp tục xanh. Một thay đổi làm hỏng một test bao phủ phần mã bị ảnh hưởng PHẢI cập nhật test đó theo hành vi mới dự kiến; nó KHÔNG ĐƯỢC xóa, bỏ qua hay làm suy yếu một test chỉ để ép cổng đạt.
+
+Các tác vụ thuần tài liệu, cấu hình hay nghiên cứu được miễn việc tạo test nhưng vẫn PHẢI chạy bất kỳ cổng kiểm chứng nào mà repository định nghĩa. Độ sâu của việc test tỷ lệ với kích thước của thay đổi và độ trưởng thành của repository. Nơi một repository hoàn toàn không có bộ công cụ test hay lint, agent KHÔNG ĐƯỢC âm thầm bỏ qua kỷ luật này — nó dựa vào bộ công cụ được đề xuất trong quá trình khởi tạo (xem [Tuân thủ](/spec)).
+
 ## Vòng lặp thực thi
 
 <CoreLoop lang="vi" class="not-prose my-10" />

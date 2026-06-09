@@ -24,6 +24,8 @@ Agent POWINIEN zidentyfikować:
 - Istniejące konwencje stylu, struktury i nazewnictwa.
 - Dostępne skille i agentów.
 
+Łańcuch narzędzi do testowania i walidacji jest kontekstem istotnym, nie opcjonalnym: bramki walidacyjne są fundamentem niezawodnych planów. Tam, gdzie repozytorium już waliduje kod, agent MUSI zapisać jego rzeczywiste polecenia i konwencję testów, lintu oraz sprawdzania typów. Tam, gdzie repozytorium **nie** ma łańcucha narzędzi do testów ani lintu, agent NIE MOŻE jedynie odnotować jego braku — MUSI zaproponować taki dopasowany do stosu technologicznego (framework i runner, konwencję plików testowych, rozsądny początkowy cel pokrycia oraz narzędzia do lintu, sprawdzania typów i formatowania), udokumentować go jako cel w przewodniku testowania i przedstawić go deweloperowi. Repozytorium bez zdefiniowanego sposobu walidacji swojego zachowania nie jest jeszcze AI-first.
+
 ## Planowanie
 
 Tworząc plan, agent MUSI:
@@ -41,6 +43,7 @@ Podczas realizacji agent MUSI:
 - Wykonywać zadania w kolejności, o ile zależności nie pozwalają inaczej.
 - Aktualizować `PROGRESS.md` po każdym zadaniu.
 - Trafnie oznaczać status zadania.
+- Dla każdego zadania, które dodaje nową funkcjonalność lub zmienia zachowanie, dodać lub zaktualizować automatyczne testy tego zachowania i uruchomić testy repozytorium oraz kontrole lintu i sprawdzania typów przed oznaczeniem zadania jako ukończonego; nigdy nie usuwać ani nie pomijać testu, by wymusić zaliczenie bramki.
 - Zatrzymać się i zapytać, gdy jest zablokowany, zamiast zgadywać.
 
 ## Dopracowanie

@@ -43,6 +43,18 @@ Chaque fichier de tâche MUST contenir ces neuf sections, dans l’ordre :
 8. **Risks** — ce qui pourrait mal tourner, et les mesures d’atténuation.
 9. **Completion & Log** — un marqueur de statut accompagné de notes chronologiques.
 
+## Portes de validation et tests
+
+La validation est la porte qui transforme une affirmation d’achèvement en preuve de celui-ci : une tâche MUST NOT être marquée comme achevée tant que chaque commande de sa section Validation n’a pas été exécutée avec succès. Les tests font partie intégrante de cette porte, ce n’est pas un ajout facultatif — ce sont eux qui rendent fiable et vérifiable le code qu’un plan livre.
+
+Lorsqu’une tâche ajoute une nouvelle fonctionnalité centrale ou modifie matériellement un comportement existant :
+
+- Ses **critères d’acceptation** MUST inclure une couverture de tests automatisés pour le comportement nouveau ou modifié (le cas nominal ainsi que les cas limites et d’erreur significatifs), en suivant la convention de test et l’exigence de couverture du dépôt.
+- Sa **validation** MUST exécuter les tests du dépôt conjointement avec ses vérifications de lint, de typage et de format — la vérification complète de qualité de code que le dépôt définit — et non le build seul. « Ça se compile » n’est pas une porte suffisante pour un changement de comportement.
+- Les tests existants MUST rester au vert. Un changement qui casse un test couvrant le code affecté MUST mettre à jour ce test vers le nouveau comportement voulu ; il MUST NOT supprimer, ignorer ou affaiblir un test dans le seul but de forcer le passage de la porte.
+
+Les tâches purement documentaires, de configuration ou de recherche sont exemptées de la création de tests mais MUST tout de même exécuter quelle que soit la porte de validation que le dépôt définit. La profondeur des tests est proportionnelle à la taille du changement et à la maturité du dépôt. Lorsqu’un dépôt ne dispose d’aucune chaîne d’outils de test ou de lint, l’agent MUST NOT ignorer silencieusement cette discipline — il s’appuie sur la chaîne d’outils proposée pendant l’onboarding (voir [Conformité](/spec)).
+
 ## La boucle d’exécution
 
 <CoreLoop lang="fr" class="not-prose my-10" />

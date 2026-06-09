@@ -24,6 +24,8 @@ Agent NÊN (SHOULD) xác định:
 - Các quy ước hiện có về phong cách, cấu trúc và đặt tên.
 - Các skill và agent sẵn có.
 
+Bộ công cụ test và kiểm chứng là ngữ cảnh thiết yếu, không phải tùy chọn: các cổng kiểm chứng là xương sống của những kế hoạch đáng tin cậy. Nơi repository đã kiểm chứng mã, agent PHẢI ghi lại các lệnh và quy ước test, lint và kiểm tra kiểu thực của nó. Nơi repository **không** có bộ công cụ test hay lint, agent KHÔNG ĐƯỢC chỉ ghi nhận sự vắng mặt của nó — nó PHẢI đề xuất một bộ phù hợp với ngăn xếp công nghệ (một framework và trình chạy, một quy ước tệp test, một mục tiêu độ phủ ban đầu hợp lý, và bộ công cụ lint, kiểm tra kiểu và định dạng), ghi nó như mục tiêu trong hướng dẫn kiểm thử, và đưa nó ra cho lập trình viên. Một repository không có cách xác định nào để kiểm chứng hành vi của nó thì chưa phải là AI-first.
+
 ## Lập kế hoạch
 
 Khi tạo một kế hoạch, agent PHẢI:
@@ -41,6 +43,7 @@ Trong quá trình thực thi, agent PHẢI:
 - Thực thi các tác vụ theo thứ tự trừ khi các phụ thuộc cho phép khác đi.
 - Cập nhật `PROGRESS.md` sau mỗi tác vụ.
 - Đánh dấu trạng thái tác vụ một cách chính xác.
+- Đối với bất kỳ tác vụ nào thêm chức năng mới hoặc thay đổi hành vi, thêm hoặc cập nhật các test tự động cho hành vi đó và chạy các test cùng các bước kiểm tra lint/kiểm tra kiểu của repository trước khi đánh dấu tác vụ hoàn tất; không bao giờ xóa hay bỏ qua một test để ép cổng đạt.
 - Dừng lại và hỏi khi bị chặn thay vì phỏng đoán.
 
 ## Tinh chỉnh

@@ -43,6 +43,18 @@ Each task file MUST contain these nine sections, in order:
 8. **Risks** — what could go wrong, and mitigations.
 9. **Completion & Log** — a status marker plus chronological notes.
 
+## Validation gates and tests
+
+Validation is the gate that turns a claim of completion into evidence of it: a task MUST NOT be marked complete until every command in its Validation section has run and passed. Tests are a first-class part of this gate, not an optional add-on — they are what makes the code a plan ships reliable and verifiable.
+
+When a task adds new core functionality or materially changes existing behavior:
+
+- Its **acceptance criteria** MUST include automated test coverage for the new or changed behavior (the happy path plus the meaningful edge and error cases), following the repository's test convention and coverage expectation.
+- Its **validation** MUST run the repository's tests together with its lint, type-check, and format checks — the full code-quality check the repository defines — not the build alone. "It builds" is not a sufficient gate for a behavior change.
+- Existing tests MUST stay green. A change that breaks a test covering the affected code MUST update that test to the intended new behavior; it MUST NOT delete, skip, or weaken a test merely to force the gate to pass.
+
+Pure-documentation, configuration, or research tasks are exempt from creating tests but still MUST run whatever validation gate the repository defines. The depth of testing is proportional to the size of the change and the repository's maturity. Where a repository has no test or lint toolchain at all, the agent MUST NOT silently skip this discipline — it relies on the toolchain proposed during onboarding (see [Conformance](/spec)).
+
 ## The execution loop
 
 <CoreLoop lang="en" class="not-prose my-10" />

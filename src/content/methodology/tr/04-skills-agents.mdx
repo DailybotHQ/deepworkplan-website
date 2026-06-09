@@ -39,6 +39,8 @@ Bir planı oluşturmadan veya yürütmeden önce, bir ajan depoya kuruluma alın
 
 Kuruluma alma sırasında ajan, depo arketipini (bireysel ile orkestratör), derleme, test ve lint komutlarını, stil, yapı ve adlandırmaya ilişkin mevcut kuralları ve zaten mevcut olan skill’ler ile ajanları belirler. Bu anlayış, ajanın depoya karşı savaşmak yerine ona uyacak biçimde planlamasını ve yürütmesini sağlayan şeydir.
 
+Test ve doğrulama araç zinciri özel bir ilgi görür, çünkü bir planın çıktısını güvenilir kılan şey doğrulama kapılarıdır. Bir depoda zaten testler ve linter’lar varsa, kuruluma alma onların gerçek komutlarını ve kurallarını kaydeder. Hiçbiri yoksa, kuruluma alma boşluğu yalnızca not etmez — yığına uygun bir kurulum önerir ve onu deponun test etme kılavuzuna yazar, böylece gelecekteki her planın çalıştıracağı tanımsız değil, gerçek bir kapısı olur.
+
 ## `.agents/` dizini ve `.claude → .agents` sembolik bağı
 
 DWP, ajan davranışını tanımlayan her şeyi — skill’ler, komutlar, ajan tanımları, dahili dokümantasyon ve ayarlar — tek bir kanonik dizin, `.agents/` altında toplar. İsim, içeriğin herhangi bir araca bağlı olmaktan çok ajanlar arasında paylaşıldığını gösterir.

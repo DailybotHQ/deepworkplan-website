@@ -43,6 +43,18 @@ Ogni file di attività DEVE contenere queste nove sezioni, nell’ordine:
 8. **Risks** — cosa potrebbe andare storto e le relative mitigazioni.
 9. **Completion & Log** — un marcatore di stato più note cronologiche.
 
+## Validation gate e test
+
+La validazione è il gate che trasforma una dichiarazione di completamento nella sua prova: un’attività NON DEVE essere segnata come completata finché ogni comando della sua sezione Validation non è stato eseguito con esito positivo. I test sono parte di prima classe di questo gate, non un’aggiunta opzionale — sono ciò che rende affidabile e verificabile il codice che un piano consegna.
+
+Quando un’attività aggiunge nuove funzionalità fondamentali o modifica in modo sostanziale il comportamento esistente:
+
+- I suoi **criteri di accettazione** DEVONO includere una copertura di test automatizzati per il comportamento nuovo o modificato (il percorso felice più i casi limite e di errore significativi), seguendo la convenzione di test e l’aspettativa di copertura del repository.
+- La sua **validazione** DEVE eseguire i test del repository insieme ai suoi controlli di lint, type-check e formattazione — il controllo completo di qualità del codice che il repository definisce — non solo la build. «Compila» non è un gate sufficiente per un cambiamento di comportamento.
+- I test esistenti DEVONO restare verdi. Un cambiamento che rompe un test che copre il codice interessato DEVE aggiornare quel test al nuovo comportamento previsto; NON DEVE eliminare, saltare o indebolire un test al solo scopo di forzare il superamento del gate.
+
+Le attività di pura documentazione, configurazione o ricerca sono esentate dal creare test ma DEVONO comunque eseguire qualsiasi validation gate il repository definisca. La profondità del testing è proporzionale alla dimensione del cambiamento e alla maturità del repository. Dove un repository non ha affatto una toolchain di test o lint, l’agente NON DEVE saltare silenziosamente questa disciplina — si affida alla toolchain proposta durante l’onboarding (vedi [Conformità](/spec)).
+
 ## Il ciclo di esecuzione
 
 <CoreLoop lang="it" class="not-prose my-10" />

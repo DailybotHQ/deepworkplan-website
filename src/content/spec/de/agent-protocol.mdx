@@ -24,6 +24,8 @@ Der Agent SOLLTE Folgendes identifizieren:
 - Bestehende Konventionen für Stil, Struktur und Benennung.
 - Verfügbare Skills und Agenten.
 
+Die Test- und Validierungs-Toolchain ist wesentlicher, nicht optionaler Kontext: Validierungs-Gates sind das Rückgrat verlässlicher Pläne. Wo das Repository Code bereits validiert, MUSS der Agent dessen echte Test-, Lint- und Typprüfungsbefehle und -konvention festhalten. Wo das Repository **keine** Test- oder Lint-Toolchain hat, DARF der Agent NICHT bloß deren Fehlen vermerken — er MUSS eine zum Stack passende vorschlagen (ein Framework und einen Runner, eine Test-Datei-Konvention, ein sinnvolles anfängliches Abdeckungsziel sowie das Lint-, Typprüfungs- und Format-Tooling), sie als Ziel im Testing-Leitfaden dokumentieren und sie dem Entwickler vorlegen. Ein Repository ohne definierten Weg, sein Verhalten zu validieren, ist noch nicht AI-first.
+
 ## Planung
 
 Beim Erstellen eines Plans MUSS der Agent:
@@ -41,6 +43,7 @@ Während der Ausführung MUSS der Agent:
 - Aufgaben der Reihe nach ausführen, sofern Abhängigkeiten nichts anderes erlauben.
 - `PROGRESS.md` nach jeder Aufgabe aktualisieren.
 - Den Aufgabenstatus akkurat markieren.
+- Für jede Aufgabe, die neue Funktionalität hinzufügt oder Verhalten ändert, automatisierte Tests für dieses Verhalten hinzufügen oder aktualisieren und die Tests sowie die Lint-/Typprüfungen des Repositorys ausführen, bevor die Aufgabe als abgeschlossen markiert wird; niemals einen Test löschen oder überspringen, um das Gate zum Bestehen zu zwingen.
 - Bei Blockaden anhalten und nachfragen, statt zu raten.
 
 ## Verfeinerung

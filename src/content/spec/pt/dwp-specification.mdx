@@ -43,6 +43,18 @@ Cada arquivo de tarefa DEVE (MUST) conter estas nove seções, em ordem:
 8. **Risks** — o que pode dar errado e as mitigações.
 9. **Completion & Log** — um marcador de status mais notas cronológicas.
 
+## Validation gates e testes
+
+A validação é o gate que transforma uma afirmação de conclusão em evidência dela: uma tarefa NÃO DEVE (MUST NOT) ser marcada como concluída até que todo comando de sua seção Validation tenha sido executado e aprovado. Os testes são uma parte de primeira classe desse gate, não um complemento opcional — são eles que tornam o código que um plano entrega confiável e verificável.
+
+Quando uma tarefa adiciona nova funcionalidade central ou altera de forma material o comportamento existente:
+
+- Seus **critérios de aceitação** DEVEM (MUST) incluir cobertura de testes automatizados para o comportamento novo ou alterado (o caminho feliz mais os casos de borda e de erro relevantes), seguindo a convenção de testes e a expectativa de cobertura do repositório.
+- Sua **validação** DEVE (MUST) executar os testes do repositório junto com suas verificações de lint, type-check e formatação — a verificação completa de qualidade de código que o repositório define —, não apenas o build. "Ele compila" não é um gate suficiente para uma mudança de comportamento.
+- Os testes existentes DEVEM (MUST) permanecer verdes. Uma mudança que quebra um teste que cobre o código afetado DEVE (MUST) atualizar esse teste para o novo comportamento pretendido; ela NÃO DEVE (MUST NOT) excluir, pular ou enfraquecer um teste apenas para forçar a aprovação do gate.
+
+Tarefas puramente de documentação, configuração ou pesquisa estão isentas de criar testes, mas ainda DEVEM (MUST) executar qualquer validation gate que o repositório defina. A profundidade dos testes é proporcional ao tamanho da mudança e à maturidade do repositório. Onde um repositório não tem nenhuma cadeia de ferramentas de teste ou lint, o agente NÃO DEVE (MUST NOT) pular silenciosamente essa disciplina — ele depende da cadeia de ferramentas proposta durante o onboarding (veja [Conformidade](/spec)).
+
 ## O loop de execução
 
 <CoreLoop lang="pt" class="not-prose my-10" />

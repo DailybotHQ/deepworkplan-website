@@ -39,6 +39,8 @@ Avant de créer ou d’exécuter un plan, un agent s’intègre au dépôt. L’
 
 Pendant l’onboarding, l’agent identifie l’archétype du dépôt (individuel versus orchestrateur), les commandes de build, de test et de lint, les conventions existantes de style, de structure et de nommage, ainsi que les skills et agents déjà disponibles. Cette compréhension est ce qui permet à l’agent de planifier et d’exécuter d’une manière qui épouse le dépôt au lieu de le contrarier.
 
+La chaîne d’outils de test et de validation reçoit une attention particulière, parce que les portes de validation sont ce qui rend fiable le résultat d’un plan. Lorsqu’un dépôt possède déjà des tests et des linters, l’onboarding consigne leurs véritables commandes et conventions. Lorsqu’il n’en a aucun, l’onboarding ne se contente pas de noter le manque — il propose une configuration adaptée à la stack et l’inscrit dans le guide de tests du dépôt, afin que chaque plan futur ait une véritable porte à exécuter plutôt qu’une porte indéfinie.
+
 ## Le répertoire `.agents/` et le lien symbolique `.claude → .agents`
 
 DWP rassemble tout ce qui définit le comportement des agents — skills, commandes, définitions d’agents, documentation interne et réglages — sous un seul répertoire canonique, `.agents/`. Le nom signale que le contenu est partagé entre agents plutôt que lié à un seul outil.
