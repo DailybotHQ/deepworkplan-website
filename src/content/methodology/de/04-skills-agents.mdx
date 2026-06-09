@@ -39,6 +39,8 @@ Bevor ein Agent einen Plan erstellt oder ausführt, onboardet er sich auf das Re
 
 Während des Onboardings identifiziert der Agent den Repository-Archetyp (individual versus orchestrator), die Build-, Test- und Lint-Befehle, die bestehenden Konventionen für Stil, Struktur und Benennung sowie die bereits verfügbaren Skills und Agenten. Dieses Verständnis ist es, was den Agenten in die Lage versetzt, so zu planen und auszuführen, dass es zum Repository passt, statt gegen es anzukämpfen.
 
+Die Test- und Validierungs-Toolchain erhält besondere Aufmerksamkeit, weil Validierungs-Gates das sind, was die Ausgabe eines Plans verlässlich macht. Wenn ein Repository bereits Tests und Linter hat, hält das Onboarding deren echte Befehle und Konventionen fest. Wenn es keine hat, vermerkt das Onboarding nicht einfach die Lücke — es schlägt ein zum Stack passendes Setup vor und schreibt es in den Testing-Leitfaden des Repositorys, sodass jeder zukünftige Plan ein echtes Gate zum Ausführen hat statt eines undefinierten.
+
 ## Das `.agents/`-Verzeichnis und der `.claude → .agents`-Symlink
 
 DWP sammelt alles, was Agentenverhalten definiert — Skills, Befehle, Agentendefinitionen, interne Dokumentation und Einstellungen — unter einem einzigen kanonischen Verzeichnis, `.agents/`. Der Name signalisiert, dass der Inhalt über Agenten hinweg geteilt wird, statt an ein einzelnes Werkzeug gebunden zu sein.

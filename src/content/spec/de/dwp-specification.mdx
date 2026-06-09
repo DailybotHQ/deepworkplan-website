@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP-Spezifikation
 
-**Version 1.0. Status: Stabil.** Dieses Dokument ist die normative Spezifikation für die Deep Work Plan (DWP) Methodik. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
+**Version 1.1. Status: Stabil.** Dieses Dokument ist die normative Spezifikation für die Deep Work Plan (DWP) Methodik. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
 ## Definition
 
@@ -42,6 +42,18 @@ Jede Aufgabendatei MUSS diese neun Abschnitte enthalten, in dieser Reihenfolge:
 7. **Dependencies** — andere Aufgaben oder externe Voraussetzungen.
 8. **Risks** — was schiefgehen könnte und Gegenmaßnahmen.
 9. **Completion & Log** — eine Statusmarkierung plus chronologische Notizen.
+
+## Validierungs-Gates und Tests
+
+Die Validierung ist das Gate, das eine Behauptung des Abschlusses in einen Beleg dafür verwandelt: Eine Aufgabe DARF NICHT als abgeschlossen markiert werden, bevor nicht jeder Befehl in ihrem Validation-Abschnitt ausgeführt wurde und bestanden hat. Tests sind ein erstklassiger Bestandteil dieses Gates, kein optionales Beiwerk — sie sind es, was den Code, den ein Plan ausliefert, verlässlich und überprüfbar macht.
+
+Wenn eine Aufgabe neue Kernfunktionalität hinzufügt oder bestehendes Verhalten wesentlich ändert:
+
+- Ihre **Akzeptanzkriterien** MÜSSEN automatisierte Testabdeckung für das neue oder geänderte Verhalten umfassen (den Happy Path plus die wesentlichen Rand- und Fehlerfälle), entsprechend der Test-Konvention und der Abdeckungserwartung des Repositorys.
+- Ihre **Validierung** MUSS die Tests des Repositorys zusammen mit seinen Lint-, Typprüfungs- und Formatprüfungen ausführen — die vollständige Code-Qualitätsprüfung, die das Repository definiert — nicht den Build allein. „Es baut“ ist kein hinreichendes Gate für eine Verhaltensänderung.
+- Bestehende Tests MÜSSEN grün bleiben. Eine Änderung, die einen Test bricht, der den betroffenen Code abdeckt, MUSS diesen Test an das beabsichtigte neue Verhalten anpassen; sie DARF NICHT einen Test löschen, überspringen oder abschwächen, nur um das Gate zum Bestehen zu zwingen.
+
+Reine Dokumentations-, Konfigurations- oder Recherche-Aufgaben sind von der Erstellung von Tests befreit, MÜSSEN aber dennoch jenes Validierungs-Gate ausführen, das das Repository definiert. Die Tiefe des Testens ist proportional zur Größe der Änderung und zur Reife des Repositorys. Wo ein Repository überhaupt keine Test- oder Lint-Toolchain hat, DARF der Agent diese Disziplin NICHT stillschweigend überspringen — er stützt sich auf die während des Onboardings vorgeschlagene Toolchain (siehe [Konformität](/spec)).
 
 ## Die Ausführungsschleife
 

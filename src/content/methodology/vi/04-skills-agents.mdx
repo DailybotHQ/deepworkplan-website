@@ -39,6 +39,8 @@ Trước khi tạo hay thực thi một kế hoạch, một agent khởi tạo v
 
 Trong quá trình khởi tạo, agent xác định kiểu hình của repository (độc lập so với điều phối), các lệnh build, test và lint, các quy ước hiện có về phong cách, cấu trúc và đặt tên, cùng các skill và agent đã sẵn có. Sự thấu hiểu này là điều cho phép agent lập kế hoạch và thực thi theo cách phù hợp với repository thay vì chống lại nó.
 
+Bộ công cụ test và kiểm chứng nhận được sự chú ý đặc biệt, vì các cổng kiểm chứng là điều làm cho đầu ra của một kế hoạch trở nên đáng tin cậy. Khi một repository đã có test và trình lint, việc khởi tạo ghi lại các lệnh và quy ước thực của chúng. Khi nó không có, việc khởi tạo không chỉ đơn thuần ghi nhận khoảng trống — nó đề xuất một thiết lập phù hợp với ngăn xếp công nghệ và viết nó vào hướng dẫn kiểm thử của repository, để mọi kế hoạch tương lai đều có một cổng thực để chạy thay vì một cổng chưa xác định.
+
 ## Thư mục `.agents/` và symlink `.claude → .agents`
 
 DWP gom tất cả những gì định nghĩa hành vi agent — skill, command, định nghĩa agent, tài liệu nội bộ và thiết lập — dưới một thư mục chuẩn duy nhất, `.agents/`. Cái tên báo hiệu rằng nội dung được chia sẻ giữa các agent thay vì gắn với bất kỳ một công cụ nào.

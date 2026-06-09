@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Protocolo do agente
 
-**Versão 1.0.** Este protocolo define como um agente de código de IA DEVE (MUST) se comportar ao trabalhar com Deep Work Plans. As palavras-chave MUST, SHOULD e MAY seguem a RFC 2119.
+**Versão 1.1.** Este protocolo define como um agente de código de IA DEVE (MUST) se comportar ao trabalhar com Deep Work Plans. As palavras-chave MUST, SHOULD e MAY seguem a RFC 2119.
 
 <AgentLifecycle lang="pt" class="not-prose my-10" />
 
@@ -23,6 +23,8 @@ O agente DEVERIA (SHOULD) identificar:
 - Os comandos de build, teste e lint.
 - As convenções existentes de estilo, estrutura e nomenclatura.
 - As skills e agents disponíveis.
+
+A cadeia de ferramentas de teste e validação é um contexto essencial, não opcional: os validation gates são a espinha dorsal de planos confiáveis. Onde o repositório já valida o código, o agente DEVE (MUST) registrar seus comandos e convenção reais de teste, lint e type-check. Onde o repositório **não** tem nenhuma cadeia de ferramentas de teste ou lint, o agente NÃO DEVE (MUST NOT) apenas anotar sua ausência — ele DEVE (MUST) propor uma adequada à stack (um framework e runner, uma convenção de arquivos de teste, uma meta inicial de cobertura sensata e as ferramentas de lint, type-check e formatação), documentá-la como alvo no guia de testes e apresentá-la ao desenvolvedor. Um repositório sem nenhuma forma definida de validar seu comportamento ainda não é AI-first.
 
 ## Planejamento
 
@@ -41,6 +43,7 @@ Durante a execução, o agente DEVE (MUST):
 - Executar as tarefas em ordem, a menos que as dependências permitam o contrário.
 - Atualizar o `PROGRESS.md` após cada tarefa.
 - Marcar o status da tarefa com precisão.
+- Para qualquer tarefa que adiciona nova funcionalidade ou altera o comportamento, adicionar ou atualizar testes automatizados para esse comportamento e executar os testes e as verificações de lint/type-check do repositório antes de marcar a tarefa como concluída; nunca excluir ou pular um teste para forçar a aprovação do gate.
 - Parar e perguntar quando estiver bloqueado, em vez de adivinhar.
 
 ## Refinamento

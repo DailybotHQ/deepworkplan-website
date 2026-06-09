@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Specyfikacja DWP
 
-**Wersja 1.0. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
+**Wersja 1.1. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 
 ## Definicja
 
@@ -42,6 +42,18 @@ Każdy plik zadania MUSI zawierać te dziewięć sekcji, w kolejności:
 7. **Zależności** — inne zadania lub zewnętrzne wymagania wstępne.
 8. **Ryzyka** — co może pójść nie tak oraz środki zaradcze.
 9. **Ukończenie i dziennik** — znacznik statusu plus chronologiczne notatki.
+
+## Bramki walidacyjne i testy
+
+Walidacja jest bramką, która zamienia deklarację ukończenia w jego dowód: zadanie NIE MOŻE zostać oznaczone jako ukończone, dopóki każde polecenie z jego sekcji Walidacja nie zostanie uruchomione i nie przejdzie pomyślnie. Testy są pełnoprawną częścią tej bramki, a nie opcjonalnym dodatkiem — to one sprawiają, że kod dostarczany przez plan jest niezawodny i weryfikowalny.
+
+Gdy zadanie dodaje nową kluczową funkcjonalność lub istotnie zmienia istniejące zachowanie:
+
+- Jego **kryteria akceptacji** MUSZĄ obejmować automatyczne pokrycie testami nowego lub zmienionego zachowania (ścieżkę pozytywną oraz znaczące przypadki brzegowe i błędne), zgodnie z konwencją testów repozytorium i oczekiwanym poziomem pokrycia.
+- Jego **walidacja** MUSI uruchamiać testy repozytorium razem z jego kontrolami lintu, sprawdzania typów i formatowania — pełną kontrolą jakości kodu, którą definiuje repozytorium — a nie samym budowaniem. „To się buduje" nie jest wystarczającą bramką dla zmiany zachowania.
+- Istniejące testy MUSZĄ pozostać zielone. Zmiana, która psuje test pokrywający dotknięty kod, MUSI zaktualizować ten test do zamierzonego nowego zachowania; NIE MOŻE usuwać, pomijać ani osłabiać testu wyłącznie po to, by wymusić zaliczenie bramki.
+
+Zadania czysto dokumentacyjne, konfiguracyjne lub badawcze są zwolnione z tworzenia testów, lecz wciąż MUSZĄ uruchamiać dowolną bramkę walidacyjną, którą definiuje repozytorium. Głębokość testowania jest proporcjonalna do rozmiaru zmiany i dojrzałości repozytorium. Tam, gdzie repozytorium nie ma w ogóle żadnego łańcucha narzędzi do testów ani lintu, agent NIE MOŻE po cichu pomijać tej dyscypliny — opiera się na łańcuchu narzędzi zaproponowanym podczas onboardingu (zob. [Zgodność](/spec)).
 
 ## Pętla realizacji
 

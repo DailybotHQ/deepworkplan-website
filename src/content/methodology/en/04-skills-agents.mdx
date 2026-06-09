@@ -39,6 +39,8 @@ Before creating or executing a plan, an agent onboards to the repository. Onboar
 
 During onboarding the agent identifies the repository archetype (individual versus orchestrator), the build, test, and lint commands, the existing conventions for style, structure, and naming, and the skills and agents already available. This understanding is what lets the agent plan and execute in a way that fits the repository instead of fighting it.
 
+The testing and validation toolchain gets special attention, because validation gates are what make a plan's output reliable. When a repository already has tests and linters, onboarding records their real commands and conventions. When it has none, onboarding does not simply note the gap — it proposes a setup fit to the stack and writes it into the repository's testing guide, so every future plan has a real gate to run rather than an undefined one.
+
 ## The `.agents/` directory and the `.claude → .agents` symlink
 
 DWP collects everything that defines agent behavior — skills, commands, agent definitions, internal documentation, and settings — under a single canonical directory, `.agents/`. The name signals that the contents are shared across agents rather than tied to any one tool.

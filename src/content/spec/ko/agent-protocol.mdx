@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # 에이전트 프로토콜
 
-**버전 1.0.** 이 프로토콜은 AI 코딩 에이전트가 Deep Work Plan과 함께 일할 때 어떻게 행동해야(MUST) 하는지를 정의합니다. 키워드 MUST, SHOULD, MAY는 RFC 2119를 따릅니다.
+**버전 1.1.** 이 프로토콜은 AI 코딩 에이전트가 Deep Work Plan과 함께 일할 때 어떻게 행동해야(MUST) 하는지를 정의합니다. 키워드 MUST, SHOULD, MAY는 RFC 2119를 따릅니다.
 
 <AgentLifecycle lang="ko" class="not-prose my-10" />
 
@@ -23,6 +23,8 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 - build, test, lint 명령.
 - 스타일, 구조, 명명에 대한 기존 관례.
 - 사용 가능한 스킬과 에이전트.
+
+테스트 및 검증 도구 사슬은 선택적 맥락이 아니라 필수적입니다. 검증 게이트는 신뢰할 수 있는 계획의 중추입니다. 리포지토리가 이미 코드를 검증하는 경우, 에이전트는 그 실제 테스트, lint, 타입 검사 명령과 관례를 기록해야(MUST) 합니다. 리포지토리에 테스트나 lint 도구 사슬이 **없는** 경우, 에이전트는 단지 그 부재를 언급하는 데 그쳐서는 안 됩니다(MUST NOT) — 스택에 맞는 것을 제안해야(MUST) 합니다(프레임워크와 러너, 테스트 파일 관례, 합리적인 초기 커버리지 목표, 그리고 lint, 타입 검사, 포맷 도구). 이를 테스트 가이드에 목표로 문서화하고, 개발자에게 드러내야 합니다. 자신의 동작을 검증하는 정의된 방법이 없는 리포지토리는 아직 AI-first가 아닙니다.
 
 ## 계획
 
@@ -41,6 +43,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 - 의존성이 달리 허용하지 않는 한 작업을 순서대로 실행합니다.
 - 각 작업 후 `PROGRESS.md`를 갱신합니다.
 - 작업 상태를 정확하게 표시합니다.
+- 새로운 기능을 추가하거나 동작을 변경하는 모든 작업에 대해, 작업을 완료로 표시하기 전에 그 동작에 대한 자동화된 테스트를 추가하거나 갱신하고 리포지토리의 테스트와 lint/타입 검사 검사를 실행합니다. 게이트를 통과시키려고 테스트를 삭제하거나 건너뛰지 않습니다.
 - 차단되었을 때는 추측하는 대신 멈추고 질문합니다.
 
 ## 정제
