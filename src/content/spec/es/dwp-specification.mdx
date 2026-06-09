@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Especificación de DWP
 
-**Versión 1.0. Estado: estable.** Este documento es la especificación normativa de la metodología Deep Work Plan (DWP). Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
+**Versión 1.1. Estado: estable.** Este documento es la especificación normativa de la metodología Deep Work Plan (DWP). Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
 
 ## Definición
 
@@ -42,6 +42,18 @@ Cada archivo de tarea DEBE contener estas nueve secciones, en orden:
 7. **Dependencias**: otras tareas o requisitos externos.
 8. **Riesgos**: qué podría salir mal y sus mitigaciones.
 9. **Finalización y registro**: un marcador de estado más notas cronológicas.
+
+## Puertas de validación y pruebas
+
+La validación es la puerta que convierte una afirmación de finalización en evidencia de ella: una tarea NO DEBE marcarse como completada hasta que cada comando de su sección de Validación se haya ejecutado y haya pasado. Las pruebas son una parte de primera clase de esta puerta, no un añadido opcional: son lo que hace que el código que entrega un plan sea fiable y verificable.
+
+Cuando una tarea agrega nueva funcionalidad central o cambia de forma sustancial el comportamiento existente:
+
+- Sus **criterios de aceptación** DEBEN incluir cobertura de pruebas automatizadas para el comportamiento nuevo o modificado (el camino feliz más los casos límite y de error significativos), siguiendo la convención de pruebas y la expectativa de cobertura del repositorio.
+- Su **validación** DEBE ejecutar las pruebas del repositorio junto con sus comprobaciones de linter, de tipos y de formato — el control completo de calidad de código que define el repositorio —, no solo la compilación. "Compila" no es una puerta suficiente para un cambio de comportamiento.
+- Las pruebas existentes DEBEN seguir en verde. Un cambio que rompa una prueba que cubre el código afectado DEBE actualizar esa prueba al nuevo comportamiento previsto; NO DEBE eliminar, omitir ni debilitar una prueba solo para forzar que la puerta pase.
+
+Las tareas de pura documentación, configuración o investigación están exentas de crear pruebas, pero aun así DEBEN ejecutar la puerta de validación que defina el repositorio. La profundidad de las pruebas es proporcional al tamaño del cambio y a la madurez del repositorio. Cuando un repositorio no tiene ninguna cadena de herramientas de pruebas o de linter, el agente NO DEBE omitir en silencio esta disciplina: se apoya en la cadena de herramientas propuesta durante la incorporación (consulta [Conformidad](/spec)).
 
 ## El ciclo de ejecución
 

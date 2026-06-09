@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Agent protocol
 
-**Version 1.0.** This protocol defines how an AI coding agent MUST behave when working with Deep Work Plans. The keywords MUST, SHOULD, and MAY follow RFC 2119.
+**Version 1.1.** This protocol defines how an AI coding agent MUST behave when working with Deep Work Plans. The keywords MUST, SHOULD, and MAY follow RFC 2119.
 
 <AgentLifecycle lang="en" class="not-prose my-10" />
 
@@ -23,6 +23,8 @@ The agent SHOULD identify:
 - The build, test, and lint commands.
 - Existing conventions for style, structure, and naming.
 - Available skills and agents.
+
+The testing and validation toolchain is essential, not optional context: validation gates are the backbone of reliable plans. Where the repository already validates code, the agent MUST record its real test, lint, and type-check commands and convention. Where the repository has **no** test or lint toolchain, the agent MUST NOT merely note its absence — it MUST propose one fit to the stack (a framework and runner, a test-file convention, a sensible initial coverage target, and the lint, type-check, and format tooling), document it as the target in the testing guide, and surface it to the developer. A repository with no defined way to validate its behavior is not yet AI-first.
 
 ## Planning
 
@@ -41,6 +43,7 @@ During execution, the agent MUST:
 - Execute tasks in order unless dependencies allow otherwise.
 - Update `PROGRESS.md` after each task.
 - Mark task status accurately.
+- For any task that adds new functionality or changes behavior, add or update automated tests for that behavior and run the repository's tests and lint/type-check checks before marking the task complete; never delete or skip a test to force the gate to pass.
 - Stop and ask when blocked rather than guessing.
 
 ## Refinement

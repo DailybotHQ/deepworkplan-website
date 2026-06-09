@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Ajan protokolü
 
-**Sürüm 1.0.** Bu protokol, bir yapay zeka kodlama ajanının Deep Work Plan’lerle çalışırken nasıl davranMASI GEREKTİĞİNİ tanımlar. MUST, SHOULD ve MAY anahtar kelimeleri RFC 2119’u izler.
+**Sürüm 1.1.** Bu protokol, bir yapay zeka kodlama ajanının Deep Work Plan’lerle çalışırken nasıl davranMASI GEREKTİĞİNİ tanımlar. MUST, SHOULD ve MAY anahtar kelimeleri RFC 2119’u izler.
 
 <AgentLifecycle lang="tr" class="not-prose my-10" />
 
@@ -23,6 +23,8 @@ Ajan şunları belirleMELİDİR:
 - Derleme, test ve lint komutları.
 - Stil, yapı ve adlandırmaya ilişkin mevcut kurallar.
 - Mevcut skill’ler ve ajanlar.
+
+Test ve doğrulama araç zinciri isteğe bağlı değil, temel bir bağlamdır: doğrulama kapıları güvenilir planların belkemiğidir. Depo kodu zaten doğruluyorsa, ajan onun gerçek test, lint ve tür denetimi komutlarını ve kuralını kaydetMELİDİR. Deponun **hiç** test veya lint araç zinciri olmadığında, ajan yokluğunu yalnızca not etMEMELİDİR — yığına uygun birini önerMELİ (bir çerçeve ve koşturucu, bir test-dosyası kuralı, makul bir başlangıç kapsam hedefi ve lint, tür denetimi ve biçim araçları), bunu test etme kılavuzunda hedef olarak belgeleMELİ ve geliştiriciye sunMALIDIR. Davranışını doğrulamak için tanımlı bir yolu olmayan bir depo henüz AI-first değildir.
 
 ## Planlama
 
@@ -41,6 +43,7 @@ Yürütme sırasında, ajan ŞUNLARI YAPMALIDIR:
 - Bağımlılıklar aksine izin vermedikçe görevleri sırayla yürütmek.
 - Her görevden sonra `PROGRESS.md` dosyasını güncellemek.
 - Görev durumunu doğru biçimde işaretlemek.
+- Yeni işlevsellik ekleyen veya davranışı değiştiren her görev için, o davranış için otomatik testler eklemek veya güncellemek ve görevi tamamlandı olarak işaretlemeden önce deponun testlerini ve lint/tür denetimi denetimlerini çalıştırmak; kapının geçmesini zorlamak için asla bir testi silmemek veya atlamamak.
 - Tahmin yürütmek yerine engellendiğinde durup sormak.
 
 ## İyileştirme

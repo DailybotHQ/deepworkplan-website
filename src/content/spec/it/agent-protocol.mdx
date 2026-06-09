@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Protocollo degli agenti
 
-**Versione 1.0.** Questo protocollo definisce come un agente di coding AI DEVE comportarsi quando lavora con i Deep Work Plan. Le parole chiave MUST, SHOULD e MAY seguono la RFC 2119.
+**Versione 1.1.** Questo protocollo definisce come un agente di coding AI DEVE comportarsi quando lavora con i Deep Work Plan. Le parole chiave MUST, SHOULD e MAY seguono la RFC 2119.
 
 <AgentLifecycle lang="it" class="not-prose my-10" />
 
@@ -23,6 +23,8 @@ L’agente DOVREBBE identificare:
 - I comandi di build, test e lint.
 - Le convenzioni esistenti per stile, struttura e denominazione.
 - Le skill e gli agenti disponibili.
+
+La toolchain di testing e validazione è contesto essenziale, non opzionale: i validation gate sono la spina dorsale dei piani affidabili. Dove il repository già valida il codice, l’agente DEVE registrarne i comandi reali di test, lint e type-check e la relativa convenzione. Dove il repository **non** ha una toolchain di test o lint, l’agente NON DEVE limitarsi a notarne l’assenza — DEVE proporne una adatta allo stack (un framework e un runner, una convenzione per i file di test, un obiettivo iniziale di copertura sensato e gli strumenti di lint, type-check e formattazione), documentarla come obiettivo nella guida al testing e portarla all’attenzione dello sviluppatore. Un repository senza un modo definito per validare il proprio comportamento non è ancora AI-first.
 
 ## Pianificazione
 
@@ -41,6 +43,7 @@ Durante l’esecuzione, l’agente DEVE:
 - Eseguire le attività in ordine, a meno che le dipendenze non consentano altrimenti.
 - Aggiornare `PROGRESS.md` dopo ogni attività.
 - Segnare lo stato dell’attività in modo accurato.
+- Per qualsiasi attività che aggiunge nuove funzionalità o modifica il comportamento, aggiungere o aggiornare i test automatizzati per quel comportamento ed eseguire i test del repository e i controlli di lint/type-check prima di segnare l’attività come completata; mai eliminare o saltare un test per forzare il superamento del gate.
 - Fermarsi e chiedere quando è bloccato anziché tirare a indovinare.
 
 ## Raffinamento

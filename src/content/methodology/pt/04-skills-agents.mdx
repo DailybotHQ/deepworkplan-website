@@ -39,6 +39,8 @@ Antes de criar ou executar um plano, um agente faz o onboarding ao repositório.
 
 Durante o onboarding, o agente identifica o arquétipo do repositório (individual versus orquestrador), os comandos de build, teste e lint, as convenções existentes de estilo, estrutura e nomenclatura, e as skills e agents já disponíveis. Esse entendimento é o que permite ao agente planejar e executar de uma forma que se ajuste ao repositório em vez de lutar contra ele.
 
+A cadeia de ferramentas de teste e validação recebe atenção especial, porque os validation gates são o que torna o resultado de um plano confiável. Quando um repositório já tem testes e linters, o onboarding registra seus comandos e convenções reais. Quando não tem nenhum, o onboarding não se limita a anotar a lacuna — ele propõe uma configuração adequada à stack e a escreve no guia de testes do repositório, para que todo plano futuro tenha um gate real a executar em vez de um indefinido.
+
 ## O diretório `.agents/` e o symlink `.claude → .agents`
 
 O DWP reúne tudo o que define o comportamento dos agentes — skills, commands, definições de agents, documentação interna e configurações — em um único diretório canônico, `.agents/`. O nome sinaliza que o conteúdo é compartilhado entre agentes, em vez de atrelado a uma única ferramenta.

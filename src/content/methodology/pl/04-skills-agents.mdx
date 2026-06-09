@@ -39,6 +39,8 @@ Przed utworzeniem lub realizacją planu agent przeprowadza onboarding repozytori
 
 Podczas onboardingu agent identyfikuje archetyp repozytorium (pojedyncze kontra orkiestrator), polecenia budowania, testów i lintowania, istniejące konwencje stylu, struktury i nazewnictwa oraz skille i agentów już dostępnych. To zrozumienie pozwala agentowi planować i realizować w sposób pasujący do repozytorium, zamiast z nim walczyć.
 
+Łańcuch narzędzi do testowania i walidacji otrzymuje szczególną uwagę, ponieważ to bramki walidacyjne sprawiają, że wynik planu jest niezawodny. Gdy repozytorium ma już testy i lintery, onboarding zapisuje ich rzeczywiste polecenia i konwencje. Gdy nie ma żadnych, onboarding nie poprzestaje na odnotowaniu luki — proponuje konfigurację dopasowaną do stosu technologicznego i wpisuje ją do przewodnika testowania repozytorium, tak aby każdy przyszły plan miał rzeczywistą bramkę do uruchomienia, a nie niezdefiniowaną.
+
 ## Katalog `.agents/` i dowiązanie `.claude → .agents`
 
 DWP gromadzi wszystko, co definiuje zachowanie agenta — skille, polecenia, definicje agentów, dokumentację wewnętrzną i ustawienia — w jednym kanonicznym katalogu `.agents/`. Nazwa sygnalizuje, że zawartość jest współdzielona między agentami, a nie związana z jednym narzędziem.

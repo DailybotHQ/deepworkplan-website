@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP specification
 
-**Versi 1.0. Status: Stabil.** Dokumen ini adalah spesifikasi normatif untuk metodologi Deep Work Plan (DWP). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
+**Versi 1.1. Status: Stabil.** Dokumen ini adalah spesifikasi normatif untuk metodologi Deep Work Plan (DWP). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
 ## Definisi
 
@@ -42,6 +42,18 @@ Setiap berkas tugas MUST berisi sembilan bagian ini, secara berurutan:
 7. **Dependencies** — tugas lain atau prasyarat eksternal.
 8. **Risks** — apa yang bisa salah, dan mitigasinya.
 9. **Completion & Log** — penanda status ditambah catatan kronologis.
+
+## Validation gate dan test
+
+Validasi adalah gate yang mengubah klaim penyelesaian menjadi bukti penyelesaian: sebuah tugas MUST NOT ditandai selesai sampai setiap perintah di bagian Validation-nya telah dijalankan dan lulus. Test adalah bagian kelas satu dari gate ini, bukan tambahan opsional — itulah yang membuat kode yang dikirim sebuah rencana andal dan dapat diverifikasi.
+
+Ketika sebuah tugas menambahkan fungsionalitas inti baru atau secara material mengubah perilaku yang ada:
+
+- **Acceptance criteria**-nya MUST menyertakan cakupan test otomatis untuk perilaku yang baru atau berubah (jalur bahagia ditambah kasus tepi dan kasus kesalahan yang bermakna), mengikuti konvensi test dan ekspektasi cakupan repositori.
+- **Validation**-nya MUST menjalankan test repositori bersama dengan pemeriksaan lint, type-check, dan format-nya — pemeriksaan kualitas kode lengkap yang didefinisikan repositori — bukan build saja. "Ia berhasil di-build" bukanlah gate yang memadai untuk sebuah perubahan perilaku.
+- Test yang ada MUST tetap hijau. Sebuah perubahan yang merusak test yang mencakup kode terdampak MUST memperbarui test tersebut ke perilaku baru yang dimaksudkan; ia MUST NOT menghapus, melewati, atau melemahkan sebuah test semata-mata untuk memaksa gate lulus.
+
+Tugas dokumentasi-murni, konfigurasi, atau riset dikecualikan dari pembuatan test tetapi tetap MUST menjalankan validation gate apa pun yang didefinisikan repositori. Kedalaman pengujian sebanding dengan ukuran perubahan dan kematangan repositori. Di mana sebuah repositori sama sekali tidak memiliki toolchain test atau lint, agent MUST NOT diam-diam melewati disiplin ini — ia bersandar pada toolchain yang diusulkan selama onboarding (lihat [Conformance](/spec)).
 
 ## Loop eksekusi
 

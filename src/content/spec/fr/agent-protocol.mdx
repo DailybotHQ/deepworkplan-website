@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Protocole de l’agent
 
-**Version 1.0.** Ce protocole définit comment un agent de code IA MUST se comporter lorsqu’il travaille avec des Deep Work Plans. Les mots-clés MUST, SHOULD et MAY suivent la RFC 2119.
+**Version 1.1.** Ce protocole définit comment un agent de code IA MUST se comporter lorsqu’il travaille avec des Deep Work Plans. Les mots-clés MUST, SHOULD et MAY suivent la RFC 2119.
 
 <AgentLifecycle lang="fr" class="not-prose my-10" />
 
@@ -23,6 +23,8 @@ L’agent SHOULD identifier :
 - Les commandes de build, de test et de lint.
 - Les conventions existantes de style, de structure et de nommage.
 - Les skills et agents disponibles.
+
+La chaîne d’outils de test et de validation est un contexte essentiel, pas facultatif : les portes de validation sont la colonne vertébrale des plans fiables. Là où le dépôt valide déjà le code, l’agent MUST consigner ses véritables commandes et conventions de test, de lint et de typage. Là où le dépôt n’a **aucune** chaîne d’outils de test ou de lint, l’agent MUST NOT se contenter d’en noter l’absence — il MUST en proposer une adaptée à la stack (un framework et un runner, une convention de fichiers de test, un objectif de couverture initial raisonnable, et l’outillage de lint, de typage et de format), la documenter comme cible dans le guide de tests, et la signaler au développeur. Un dépôt sans moyen défini de valider son comportement n’est pas encore AI-first.
 
 ## Planification
 
@@ -41,6 +43,7 @@ Pendant l’exécution, l’agent MUST :
 - Exécuter les tâches dans l’ordre, sauf si les dépendances permettent l’inverse.
 - Mettre à jour `PROGRESS.md` après chaque tâche.
 - Marquer le statut des tâches avec exactitude.
+- Pour toute tâche qui ajoute une nouvelle fonctionnalité ou modifie un comportement, ajouter ou mettre à jour des tests automatisés pour ce comportement et exécuter les tests du dépôt ainsi que les vérifications de lint et de typage avant de marquer la tâche comme achevée ; ne jamais supprimer ni ignorer un test pour forcer le passage de la porte.
 - S’arrêter et demander en cas de blocage plutôt que de deviner.
 
 ## Raffinement

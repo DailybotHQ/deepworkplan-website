@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Protocolo del agente
 
-**Versión 1.0.** Este protocolo define cómo DEBE comportarse un agente de programación con IA cuando trabaja con Deep Work Plans. Las palabras clave MUST (DEBE), SHOULD (DEBERÍA) y MAY (PUEDE) siguen el RFC 2119.
+**Versión 1.1.** Este protocolo define cómo DEBE comportarse un agente de programación con IA cuando trabaja con Deep Work Plans. Las palabras clave MUST (DEBE), SHOULD (DEBERÍA) y MAY (PUEDE) siguen el RFC 2119.
 
 <AgentLifecycle lang="es" class="not-prose my-10" />
 
@@ -23,6 +23,8 @@ El agente DEBERÍA identificar:
 - Los comandos de compilación, prueba y linter.
 - Las convenciones existentes de estilo, estructura y nombrado.
 - Las habilidades y agentes disponibles.
+
+La cadena de herramientas de pruebas y validación es contexto esencial, no opcional: las puertas de validación son la columna vertebral de los planes fiables. Cuando el repositorio ya valida el código, el agente DEBE registrar sus comandos y su convención reales de prueba, linter y comprobación de tipos. Cuando el repositorio no tiene ninguna cadena de herramientas de pruebas o de linter, el agente NO DEBE limitarse a señalar su ausencia: DEBE proponer una adecuada al stack (un framework y un ejecutor, una convención de archivos de prueba, un objetivo de cobertura inicial razonable y las herramientas de linter, comprobación de tipos y formato), documentarla como objetivo en la guía de pruebas y exponerla al desarrollador. Un repositorio sin una forma definida de validar su comportamiento todavía no es AI-first.
 
 ## Planificación
 
@@ -41,6 +43,7 @@ Durante la ejecución, el agente DEBE:
 - Ejecutar las tareas en orden salvo que las dependencias permitan otra cosa.
 - Actualizar `PROGRESS.md` tras cada tarea.
 - Marcar el estado de la tarea con exactitud.
+- Para cualquier tarea que agregue nueva funcionalidad o cambie el comportamiento, agregar o actualizar pruebas automatizadas para ese comportamiento y ejecutar las pruebas del repositorio y las comprobaciones de linter y de tipos antes de marcar la tarea como completada; nunca eliminar ni omitir una prueba para forzar que la puerta pase.
 - Detenerse y preguntar cuando esté bloqueado en lugar de adivinar.
 
 ## Refinamiento

@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP spesifikasyonu
 
-**Sürüm 1.0. Durum: Kararlı.** Bu belge, Deep Work Plan (DWP) metodolojisinin normatif spesifikasyonudur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119’da açıklandığı şekilde yorumlanacaktır.
+**Sürüm 1.1. Durum: Kararlı.** Bu belge, Deep Work Plan (DWP) metodolojisinin normatif spesifikasyonudur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119’da açıklandığı şekilde yorumlanacaktır.
 
 ## Tanım
 
@@ -42,6 +42,18 @@ Her görev dosyası, sırasıyla bu dokuz bölümü İÇERMELİDİR:
 7. **Bağımlılıklar** — diğer görevler veya harici ön koşullar.
 8. **Riskler** — neyin ters gidebileceği ve azaltıcı önlemler.
 9. **Tamamlama ve Günlük** — bir durum işareti ile kronolojik notlar.
+
+## Doğrulama kapıları ve testler
+
+Doğrulama, bir tamamlanma iddiasını onun kanıtına dönüştüren kapıdır: bir görev, Doğrulama bölümündeki her komut çalışıp geçene kadar tamamlandı olarak işaretlenMEMELİDİR. Testler bu kapının birinci sınıf bir parçasıdır, isteğe bağlı bir ek değil — bir planın sevk ettiği kodu güvenilir ve doğrulanabilir kılan şey onlardır.
+
+Bir görev yeni çekirdek işlevsellik eklediğinde veya mevcut davranışı önemli ölçüde değiştirdiğinde:
+
+- **Kabul kriterleri**, yeni veya değişen davranış için otomatik test kapsamını (mutlu yol ile birlikte anlamlı uç ve hata durumları), deponun test kuralını ve kapsam beklentisini izleyerek İÇERMELİDİR.
+- **Doğrulaması**, deponun testlerini lint, tür denetimi ve biçim denetimleriyle birlikte — deponun tanımladığı tam kod-kalitesi denetimini — çalıştırMALIDIR, yalnızca derlemeyi değil. Bir davranış değişikliği için “Derleniyor” yeterli bir kapı değildir.
+- Mevcut testler yeşil kalMALIDIR. Etkilenen kodu kapsayan bir testi bozan bir değişiklik, o testi amaçlanan yeni davranışa güncelleMELİDİR; kapının geçmesini zorlamak için bir testi silMEMELİ, atlaMAMALI veya zayıflatMAMALIDIR.
+
+Yalnızca-dokümantasyon, yapılandırma veya araştırma görevleri test oluşturmaktan muaftır ancak yine de deponun tanımladığı doğrulama kapısını çalıştırMALIDIR. Test etmenin derinliği, değişikliğin boyutuyla ve deponun olgunluğuyla orantılıdır. Bir deponun hiç test veya lint araç zinciri olmadığında, ajan bu disiplini sessizce atlaMAMALIDIR — kuruluma alma sırasında önerilen araç zincirine dayanır (bkz. [Uyumluluk](/spec)).
 
 ## Yürütme döngüsü
 
