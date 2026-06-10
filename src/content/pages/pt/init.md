@@ -141,10 +141,14 @@ Após a base, enumere os quatro addons (devcontainer, Dailybot, dependency-upgra
 totalmente conforme com **zero** addons — nunca os instale automaticamente.
 
 - **Suporte a devcontainer** — um dev container reproduzível e isolado com auth de CLI de IA persistente.
-- **Integração com a Dailybot** — relatórios de progresso/marcos em modo best-effort para equipes que já usam a Dailybot.
+- **Integração com a Dailybot** — relatórios de progresso/marcos em modo best-effort para equipes que já usam a Dailybot,
+  com um reforço autônomo opcional via hooks para que os agentes reportem trabalho significativo sem que ninguém peça.
   A metodologia central tem zero dependência da Dailybot.
 - **Atualização de dependências** — atualizações independentes do gerenciador de pacotes, em lotes, validadas e reversíveis. Quando
   aceita, ela instala o comando `/lib-upgrade`.
+- **Design system** — um `docs/DESIGN.md` voltado a agentes, raciocinado a partir dos tokens de design e
+  estilos de componentes reais do repositório, para que qualquer agente gere UI consistente com o design
+  system do próprio repo.
 
 ## 6. Planeje e execute
 

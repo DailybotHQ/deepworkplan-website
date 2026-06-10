@@ -148,9 +148,13 @@ totalmente conforme con **cero** addons — nunca los instales automáticamente.
 - **Soporte de devcontainer** — un contenedor de desarrollo reproducible y aislado con autenticación
   de CLI de IA persistente.
 - **Integración con Dailybot** — informes de progreso/hitos de mejor esfuerzo para equipos que ya usan
-  Dailybot. La metodología central no tiene dependencia de Dailybot.
+  Dailybot, con un refuerzo autónomo opcional mediante hooks para que los agentes reporten el trabajo
+  significativo sin que nadie se los pida. La metodología central no tiene dependencia de Dailybot.
 - **Actualización de dependencias** — actualizaciones independientes del gestor de paquetes, por lotes,
   validadas y revertibles. Cuando se acepta, instala el comando `/lib-upgrade`.
+- **Design system** — un `docs/DESIGN.md` orientado a agentes, razonado a partir de los tokens de diseño
+  y estilos de componentes reales del repositorio, para que cualquier agente genere UI consistente con
+  el design system propio del repo.
 
 ## 6. Planifica y ejecuta
 

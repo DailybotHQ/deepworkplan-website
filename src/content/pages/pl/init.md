@@ -139,10 +139,14 @@ Po ustanowieniu bazy wymień cztery dodatki (devcontainer, Dailybot, dependency-
 w pełni zgodne przy **zerowej** liczbie dodatków — nigdy nie instaluj ich automatycznie.
 
 - **Wsparcie devcontainera** — odtwarzalny, izolowany kontener deweloperski z trwałym uwierzytelnianiem AI-CLI.
-- **Integracja z Dailybot** — raportowanie postępu/kamieni milowych dla zespołów już korzystających z Dailybot.
+- **Integracja z Dailybot** — raportowanie postępu/kamieni milowych dla zespołów już korzystających z Dailybot,
+  z opcjonalną autonomiczną warstwą hooków, dzięki której agenci raportują istotną pracę bez przypominania.
   Podstawowa metodyka nie ma żadnej zależności od Dailybot.
 - **Dependency upgrade** — aktualizacje niezależne od menedżera pakietów: partiami, zwalidowane i odwracalne. Po
   zaakceptowaniu instaluje komendę `/lib-upgrade`.
+- **Design system** — skierowany do agentów `docs/DESIGN.md`, wywiedziony z prawdziwych tokenów
+  projektowych i stylów komponentów repozytorium, dzięki czemu każdy agent generuje UI spójne z własnym
+  design systemem repo.
 
 ## 6. Planuj i wykonuj
 

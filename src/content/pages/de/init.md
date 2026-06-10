@@ -131,10 +131,14 @@ Zählen Sie nach der Baseline die vier Addons auf (devcontainer, Dailybot, depen
 mit **null** Addons vollständig konform — installieren Sie sie niemals automatisch.
 
 - **Devcontainer-Unterstützung** — ein reproduzierbarer, isolierter Dev-Container mit persistenter AI-CLI-Authentifizierung.
-- **Dailybot-Integration** — Best-Effort-Berichterstattung über Fortschritte/Meilensteine für Teams, die Dailybot bereits nutzen.
+- **Dailybot-Integration** — Best-Effort-Berichterstattung über Fortschritte/Meilensteine für Teams, die Dailybot bereits nutzen,
+  mit optionaler autonomer Hook-Durchsetzung, sodass Agenten bedeutende Arbeit unaufgefordert berichten.
   Die zentrale Methodik hat keine Dailybot-Abhängigkeit.
 - **Dependency-Upgrade** — paketmanager-agnostische, chargenweise, validierte, rücknehmbare Upgrades. Wenn
   angenommen, installiert es den `/lib-upgrade`-Befehl.
+- **Design System** — eine agentenorientierte `docs/DESIGN.md`, hergeleitet aus den tatsächlichen
+  Design-Tokens und Komponentenstilen des Repositorys, damit jeder Agent UI erzeugt, die mit dem eigenen
+  Design-System des Repos konsistent ist.
 
 ## 6. Planen und ausführen
 

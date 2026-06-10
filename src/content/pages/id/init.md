@@ -143,10 +143,14 @@ Setelah baseline, sebutkan keempat addon (devcontainer, Dailybot, dependency-upg
 sepenuhnya konforman dengan **nol** addon — jangan pernah memasangnya secara otomatis.
 
 - **Dukungan devcontainer** — kontainer pengembangan yang terisolasi dan dapat direproduksi dengan autentikasi AI-CLI yang persisten.
-- **Integrasi Dailybot** — pelaporan kemajuan/milestone secara best-effort untuk tim yang sudah memakai Dailybot.
+- **Integrasi Dailybot** — pelaporan kemajuan/milestone secara best-effort untuk tim yang sudah memakai Dailybot,
+  dengan lapisan hook otonom opsional agar agent melaporkan pekerjaan signifikan tanpa diminta.
   Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan. Ketika
   diterima, ia memasang command `/lib-upgrade`.
+- **Design system** — sebuah `docs/DESIGN.md` untuk agent, dinalar dari design token dan gaya komponen
+  yang sebenarnya di repositori, sehingga agent mana pun menghasilkan UI yang konsisten dengan design
+  system milik repo itu sendiri.
 
 ## 6. Rencanakan dan eksekusi
 
