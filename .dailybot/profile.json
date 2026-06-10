@@ -2,5 +2,9 @@
   "name": "deepworkplan.com",
   "default_metadata": {
     "repo": "deepworkplan-website"
+  },
+  "report": {
+    "min_interval_minutes": 30,
+    "nudge": true
   }
 }
