@@ -202,6 +202,38 @@ setup_gh_persistence_for_user() {
 setup_gh_persistence_for_user "/home/node"
 chown -R node:node /home/node/.gh_data /home/node/.config 2>/dev/null || true
 
+# Setup Dailybot CLI persistence with symlinks for a given user
+# This ensures Dailybot config/auth (~/.config/dailybot) persists across container rebuilds
+setup_dailybot_persistence_for_user() {
+    USER_HOME="$1"
+    DAILYBOT_DATA_DIR="${USER_HOME}/.dailybot_data"
+    DAILYBOT_CONFIG_DIR="${USER_HOME}/.config/dailybot"
+
+    # Ensure the persistent data directory exists
+    mkdir -p "${DAILYBOT_DATA_DIR}"
+    mkdir -p "${USER_HOME}/.config"
+
+    # Handle .config/dailybot directory (CLI config + auth session)
+    if [ ! -L "${DAILYBOT_CONFIG_DIR}" ]; then
+        # If it's a real directory, move it to the persistent volume
+        if [ -d "${DAILYBOT_CONFIG_DIR}" ]; then
+            # Only seed from image if volume has no existing data
+            if [ ! -d "${DAILYBOT_DATA_DIR}/config_dailybot" ] || [ -z "$(ls -A "${DAILYBOT_DATA_DIR}/config_dailybot" 2>/dev/null)" ]; then
+                cp -r "${DAILYBOT_CONFIG_DIR}" "${DAILYBOT_DATA_DIR}/config_dailybot"
+            fi
+            rm -rf "${DAILYBOT_CONFIG_DIR}"
+        else
+            mkdir -p "${DAILYBOT_DATA_DIR}/config_dailybot"
+        fi
+        # Create symlink
+        ln -sf "${DAILYBOT_DATA_DIR}/config_dailybot" "${DAILYBOT_CONFIG_DIR}"
+    fi
+}
+
+# Setup Dailybot CLI persistence for node user
+setup_dailybot_persistence_for_user "/home/node"
+chown -R node:node /home/node/.dailybot_data /home/node/.config/dailybot 2>/dev/null || true
+
 # Setup SSH keys from host with correct permissions for a given user
 # This allows git operations with GitHub/GitLab
 setup_ssh_keys_for_user() {

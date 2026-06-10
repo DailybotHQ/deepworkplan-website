@@ -2,7 +2,12 @@ module.exports = {
   ci: {
     collect: {
       staticDistDir: './dist',
-      url: ['/', '/about/', '/methodology/', '/es/'],
+      // CI checks the two distinct layout families only (keeps the gate fast):
+      // '/' covers the marketing/home template (historically the heaviest),
+      // '/methodology/' covers the content-reader template (prose typography).
+      // Other languages share these same templates; the full URL sweep lives in
+      // lighthouserc.full.cjs for local deep audits.
+      url: ['/', '/methodology/'],
       numberOfRuns: 3,
       settings: {
         chromeFlags: '--no-sandbox --headless',
