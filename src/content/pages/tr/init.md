@@ -146,9 +146,13 @@ eklentiyle tümüyle uyumludur — onları asla otomatik kurmayın.
 - **Devcontainer desteği** — kalıcı AI-CLI kimlik doğrulaması içeren, yeniden üretilebilir, yalıtılmış
   bir geliştirme konteyneri.
 - **Dailybot entegrasyonu** — zaten Dailybot kullanan ekipler için en iyi çabayla ilerleme/dönüm noktası
-  raporlaması. Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
+  raporlaması; ajanların önemli işi kimse istemeden raporlaması için isteğe bağlı otonom kanca katmanıyla.
+  Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
 - **Dependency upgrade** — paket yöneticisinden bağımsız, gruplanmış, doğrulanmış, geri alınabilir
   yükseltmeler. Kabul edildiğinde, `/lib-upgrade` komutunu kurar.
+- **Design system** — deponun gerçek tasarım token’larından ve bileşen stillerinden akıl yürütülerek
+  oluşturulan, ajanlara yönelik bir `docs/DESIGN.md`; böylece her ajan, deponun kendi tasarım sistemiyle
+  tutarlı arayüzler üretir.
 
 ## 6. Planlayın ve yürütün
 

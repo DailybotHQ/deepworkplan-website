@@ -142,10 +142,14 @@ Sau nền tảng cơ bản, hãy liệt kê bốn addon (devcontainer, Dailybot,
 hoàn toàn tuân thủ với **không** cần addon nào — đừng bao giờ tự động cài chúng.
 
 - **Hỗ trợ devcontainer** — một dev container tái lập được, cô lập, với xác thực AI-CLI bền vững.
-- **Tích hợp Dailybot** — báo cáo tiến độ/cột mốc theo nỗ lực tối đa cho các đội đã dùng Dailybot.
+- **Tích hợp Dailybot** — báo cáo tiến độ/cột mốc theo nỗ lực tối đa cho các đội đã dùng Dailybot,
+  với lớp hook tự hành tùy chọn để agent báo cáo công việc quan trọng mà không cần ai nhắc.
   Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
 - **Nâng cấp phụ thuộc** — nâng cấp độc lập với trình quản lý gói, theo lô, được kiểm chứng, hoàn nguyên được. Khi
   được chấp nhận, nó cài command `/lib-upgrade`.
+- **Design system** — một `docs/DESIGN.md` dành cho agent, được suy luận từ các design token và phong
+  cách component thực của repository, để bất kỳ agent nào cũng tạo ra UI nhất quán với design system
+  riêng của repo.
 
 ## 6. Lập kế hoạch và thực thi
 

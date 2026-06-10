@@ -145,10 +145,13 @@ et proposez chacun comme un choix explicite. Un dépôt est
 pleinement conforme avec **zéro** addon — ne les installez jamais automatiquement.
 
 - **Prise en charge du devcontainer** — un conteneur de développement reproductible et isolé avec une auth de CLI IA persistante.
-- **Intégration Dailybot** — un rapport de progression/jalons au mieux pour les équipes utilisant déjà Dailybot.
+- **Intégration Dailybot** — un rapport de progression/jalons au mieux pour les équipes utilisant déjà Dailybot,
+  avec une couche facultative de hooks autonomes pour que les agents rapportent le travail significatif sans qu’on le leur demande.
   La méthodologie de base n’a aucune dépendance à Dailybot.
 - **Mise à jour des dépendances** — des mises à jour indépendantes du gestionnaire de paquets, par lots, validées et réversibles. Lorsqu’elle est
   acceptée, elle installe la commande `/lib-upgrade`.
+- **Design system** — un `docs/DESIGN.md` destiné aux agents, raisonné à partir des véritables design tokens
+  et styles de composants du dépôt, pour que tout agent génère une UI cohérente avec le design system propre au dépôt.
 
 ## 6. Planifier et exécuter
 
