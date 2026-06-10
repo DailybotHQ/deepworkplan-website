@@ -54,6 +54,9 @@ spanish.png
 # Dailybot agent skill — installed via the DWP dailybot addon, not vendored
 .agents/skills/dailybot/
 
+# Dailybot per-repo reporting opt-out (local kill-switch; profile.json IS tracked)
+.dailybot/disabled
+
 # Scheduler runtime lock (ephemeral, not tracked)
 .agents/scheduled_tasks.lock
 
