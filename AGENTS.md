@@ -257,6 +257,8 @@ Multiple AI agents collaborate on this codebase. When updating agent guidance, m
 
 This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installed alongside `deepworkplan` under `.agents/skills/` (both gitignored installs). When the Dailybot CLI is present and authenticated, DWP work emits standup-style agent updates at four lifecycle points — **kickoff** (a plan is approved: what is being built), **significant task** (a feature/fix ships mid-plan), **blocked** (a run halts; `state.json.blocked` says what it needs), and **completion** (the only **milestone**: what was built) — routed through the dailybot `report` sub-skill, with `--json-data` derived from the plan's `state.json`. If Dailybot is absent, unauthenticated, or unreachable — or `.dailybot/disabled` exists — skip silently and continue: **reporting never blocks any work.** Describe outcomes for the team, never plan IDs, task numbers, file paths, or git stats.
 
+**Deterministic hook enforcement (Claude Code):** `.agents/settings.json` wires the Dailybot lifecycle hooks (`dailybot hook session-start | activity | stop`, CLI >= 1.12.0) so the harness itself detects unreported work and reminds the agent at end of turn — no reliance on the model remembering. When a reminder fires: send a report if a meaningful unit of work is done, or run `dailybot hook dismiss` if not — never ignore it silently, and never let reporting block work. The hooks are local-only, always exit 0, and respect `.dailybot/disabled`.
+
 ## Quick Commands
 
 ```bash
