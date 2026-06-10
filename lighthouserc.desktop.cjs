@@ -2,10 +2,10 @@ module.exports = {
   ci: {
     collect: {
       staticDistDir: './dist',
-      // Lean CI gate: the 4 core URLs (mirrors lighthouserc.cjs mobile set) so the
-      // desktop run stays fast in GitHub Actions. For the full URL sweep use
-      // `lighthouse:desktop:full` (lighthouserc.desktop.full.cjs).
-      url: ['/', '/about/', '/methodology/', '/es/'],
+      // Lean CI gate: the 2 distinct layout families (mirrors lighthouserc.cjs
+      // mobile set) so the desktop run stays fast in GitHub Actions. For the
+      // full URL sweep use `lighthouse:desktop:full` (lighthouserc.desktop.full.cjs).
+      url: ['/', '/methodology/'],
       numberOfRuns: 3,
       settings: {
         // Desktop emulation (LHCI defaults to mobile). Mirrors lighthouserc.cjs
