@@ -51,6 +51,9 @@ spanish.png
 # DeepWorkPlan skill — installed via npx skills / setup.sh, not vendored
 .agents/skills/deepworkplan/
 
+# Dailybot agent skill — installed via the DWP dailybot addon, not vendored
+.agents/skills/dailybot/
+
 # Scheduler runtime lock (ephemeral, not tracked)
 .agents/scheduled_tasks.lock
 
