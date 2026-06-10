@@ -4,6 +4,8 @@ LABEL maintainer="developers@dailybot.com"
 # System packages (apt requires root)
 RUN apt-get update -y && \
     apt-get install -y less git curl gnupg ca-certificates openssh-client sudo nano \
+    # pipx / python3 / python3-pip / python-is-python3: Dailybot CLI install path (PEP 668 enforced on trixie)
+    pipx python3 python3-pip python-is-python3 \
     # Chromium for Lighthouse CI local audits
     chromium && \
     # Install GitHub CLI (binary is system-wide; per-user config lives in ~/.config/gh)
@@ -58,7 +60,7 @@ RUN echo 'source /app/docker/custom_commands.sh' >> /home/node/.bashrc \
     && chown node:node /home/node/.bashrc
 
 # Pre-create persistent data dirs so the named volumes inherit node ownership on first mount
-RUN mkdir -p /home/node/.claude_data /home/node/.codex_data /home/node/.cursor_data /home/node/.gh_data /home/node/.ssh \
+RUN mkdir -p /home/node/.claude_data /home/node/.codex_data /home/node/.cursor_data /home/node/.gh_data /home/node/.dailybot_data /home/node/.ssh \
     && chown -R node:node /home/node
 
 # Install AI CLIs and configure git as node user
@@ -74,6 +76,12 @@ RUN curl -fsSL https://cursor.com/install | bash
 
 # Install Codex CLI globally via pnpm (resolves under ${PNPM_HOME})
 RUN corepack pnpm add -g @openai/codex
+
+# Dailybot CLI — official installer handles PEP 668 internally (uses pipx),
+# avoiding the click 8.x conflict with the system-provided python3-click.
+# Binary lands in ~/.local/bin (already on PATH); auth/config lives in
+# ~/.config/dailybot, persisted across rebuilds via the dailybot_data volume.
+RUN curl -fsSL https://cli.dailybot.com/install.sh | bash
 
 # Configure Git for node user (can be overridden by mounted .gitconfig)
 RUN git config --global init.defaultBranch main \
