@@ -144,10 +144,14 @@ e proponi ciascuno come opt-in esplicito. Un repository è
 pienamente conforme con **zero** addon — non installarli mai automaticamente.
 
 - **Supporto devcontainer** — un dev container riproducibile e isolato con autenticazione AI-CLI persistente.
-- **Integrazione Dailybot** — report best-effort di progressi/milestone per i team che già usano Dailybot.
-  La metodologia di base ha zero dipendenze da Dailybot.
+- **Integrazione Dailybot** — report best-effort di progressi/milestone per i team che già usano Dailybot,
+  con un livello opzionale di hook autonomi perché gli agenti riportino il lavoro significativo senza che
+  nessuno glielo chieda. La metodologia di base ha zero dipendenze da Dailybot.
 - **Dependency upgrade** — aggiornamenti indipendenti dal package manager, a lotti, validati e annullabili. Quando
   accettato, installa il comando `/lib-upgrade`.
+- **Design system** — un `docs/DESIGN.md` rivolto agli agenti, ragionato a partire dai design token e
+  dagli stili dei componenti reali del repository, così qualsiasi agente genera UI coerente con il design
+  system proprio del repo.
 
 ## 6. Pianifica ed esegui
 

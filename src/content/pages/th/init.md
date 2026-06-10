@@ -139,9 +139,12 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 - **Devcontainer support** — dev container ที่ทำซ้ำได้และแยกตัว พร้อม auth ของ AI-CLI ที่คงอยู่
 - **Dailybot integration** — การรายงานความคืบหน้า/หมุดหมายแบบเต็มความสามารถสำหรับทีมที่ใช้ Dailybot อยู่แล้ว
+  พร้อมชั้น hook อัตโนมัติแบบเลือกได้ เพื่อให้เอเจนต์รายงานงานสำคัญโดยไม่ต้องมีใครเตือน
   ระเบียบวิธีหลักไม่มีการพึ่งพิง Dailybot ใด ๆ
 - **Dependency upgrade** — การอัปเกรดที่เป็นกลางต่อตัวจัดการแพ็กเกจ ทำเป็นชุด ตรวจสอบแล้ว และย้อนกลับได้ เมื่อ
   ยอมรับ มันจะติดตั้งคำสั่ง `/lib-upgrade`
+- **Design system** — `docs/DESIGN.md` สำหรับเอเจนต์ ซึ่งให้เหตุผลจาก design token และสไตล์คอมโพเนนต์
+  จริงของ repository เพื่อให้เอเจนต์ใดก็ตามสร้าง UI ที่สอดคล้องกับ design system ของ repo เอง
 
 ## 6. วางแผนและดำเนินการ
 
