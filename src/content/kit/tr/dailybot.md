@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "AI-first bir depoyu bir Dailybot ekibine bağlayan, plan yürütmesine en iyi çabayla bir ilerleme ve dönüm noktası raporu ekleyen, isteğe bağlı bir eklenti."
+description: "AI-first bir depoyu bir Dailybot ekibine bağlayan isteğe bağlı bir eklenti: plan yürütmesinde en iyi çabayla ilerleme ve dönüm noktası raporları, artı isteğe bağlı otonom kanca katmanı."
 kind: addon
 lang: tr
 order: 2
@@ -14,10 +14,13 @@ Deep Work Plan ilerlemesini bir Dailybot ekibine taşıyın. Zaten Dailybot kull
 
 - Dailybot ajan skill’inin ve/veya Dailybot CLI’nın, kendi onay akışları aracılığıyla isteğe bağlı kurulumu.
 - Plan yürütmesine bağlanan, en iyi çabayla çalışan bir ilerleme/dönüm noktası raporu; böylece bir planın tamamlanması ekibe yansır.
+- İsteğe bağlı deterministik kanca katmanı (Dailybot ajan skill’i 1.6.0+, CLI 1.12.0+): commit edilmiş harness kancaları, yerel bir defterden raporlanmamış işi tespit eder ve tur sonunda ajana hatırlatır; böylece prompt talimatlarının soluklaştığı uzun, gözetimsiz oturumlarda bile raporlama otonom kalır.
 
 ## Davranış
 
-Bu eklenti **yetkiyi devreder** — tekerleği yeniden icat etmez. Kurulumu, onayı, kimlik doğrulamayı ve yazım üslubunu Dailybot ajan skill’i üstlenir; bu eklenti yalnızca onu kurmayı önerir ve isteğe bağlı rapor adımını bağlar. Rapor kesinlikle en iyi çaba ilkesiyle çalışır ve Dailybot mevcut değilse, kimliği doğrulanmamışsa veya erişilemezse işi asla engellemez.
+Bu eklenti **yetkiyi devreder** — tekerleği yeniden icat etmez. Kurulumu, onayı, kimlik doğrulamayı, kanca şablonlarını ve yazım üslubunu Dailybot ajan skill’i üstlenir; bu eklenti yalnızca onu kurmayı önerir, isteğe bağlı rapor adımını bağlar ve depo düzeyindeki kanca yapılandırmasını önerir. Rapor kesinlikle en iyi çaba ilkesiyle çalışır ve Dailybot mevcut değilse, kimliği doğrulanmamışsa veya erişilemezse işi asla engellemez.
+
+İki katman çift raporlama olmadan birleşir: başarılı bir yaşam döngüsü raporu kanca defterini sıfırlar; böylece kancalar bir rapordan sonra sessiz kalır ve yalnızca bir yaşam döngüsü olayı kaçırıldığında deterministik bir güvence olarak devreye girer. Kanca komutları yalnızca yerel durumu okur ve her zaman sıfır koduyla çıkar; dolayısıyla onlar da işi asla engelleyemez.
 
 ## Notlar
 
