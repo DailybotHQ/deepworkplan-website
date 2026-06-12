@@ -1,6 +1,6 @@
 ---
 title: Plan- und Aufgabenvorlagen
-description: "Die Struktur von Plan- und Aufgabendateien, die zwei verpflichtenden Abschlussaufgaben, mit denen jeder Plan enden muss, und die README- und PROGRESS-Konventionen, die einen Plan lesbar halten."
+description: "Die Struktur von Plan- und Aufgabendateien, die drei verpflichtenden Abschlussaufgaben, mit denen jeder Plan enden muss, und die README- und PROGRESS-Konventionen, die einen Plan lesbar halten."
 order: 3
 lang: de
 summary: Wie Pläne und Aufgaben auf der Festplatte strukturiert sind und die Konventionen, die sie lesbar halten.
@@ -26,12 +26,13 @@ Ein Plan ist ein Verzeichnis unter `.dwp/plans/` mit dem Namen `PLAN_<slug>/`. E
 
 Jede Aufgabendatei trägt den Namen `<n>.task_<slug>.md` und folgt der neunteiligen Anatomie: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks und Completion & Log. Die Abschnitte erscheinen stets in dieser Reihenfolge, sodass jeder Leser weiß, wo er nachschauen muss. Jede Aufgabe verankert sich vor dem Handeln erneut am Ziel des Plans, was einen Agenten daran hindert, über einen langen, mehrstündigen Horizont abzudriften.
 
-## Die zwei verpflichtenden Abschlussaufgaben
+## Die drei verpflichtenden Abschlussaufgaben
 
-Jeder Plan muss mit zwei Standardaufgaben enden. Sie stellen sicher, dass Wissen erfasst wird und dass Stakeholder informiert sind:
+Jeder Plan muss mit drei Standardaufgaben enden. Sie stellen sicher, dass die Arbeit auditiert wird, dass Wissen erfasst wird und dass Stakeholder informiert sind:
 
-1. **Skills & Agents Discovery** — die wiederverwendbaren Skills und Agenten identifizieren, die während des Plans erstellt wurden, sodass die Arbeit über diese eine Anstrengung hinaus Wirkung entfaltet.
-2. **Executive Report** — eine prägnante Zusammenfassung der Ergebnisse, für Stakeholder verfasst, die unterscheidet, was geliefert wurde und was noch offen ist.
+1. **Security Review** — alles, was der Plan geändert hat, auf Geheimnisse, Injection-Risiken und neue Angriffsfläche prüfen und `docs/SECURITY.md` aktuell halten. Sicherheit ist kein separater Arbeitsstrang, der am Ende angeflanscht wird: Jeder Plan hinterlässt seine eigenen Änderungen auditiert, und ein kritischer Befund blockiert den Abschluss.
+2. **Skills & Agents Discovery** — die wiederverwendbaren Skills und Agenten identifizieren, die während des Plans erstellt wurden, sodass die Arbeit über diese eine Anstrengung hinaus Wirkung entfaltet.
+3. **Executive Report** — eine prägnante Zusammenfassung der Ergebnisse, für Stakeholder verfasst, die unterscheidet, was geliefert wurde und was noch offen ist.
 
 ## README- und PROGRESS-Konventionen
 

@@ -1,6 +1,6 @@
 ---
 title: Standard de documentation
-description: "Standard normatif sur la façon dont les Deep Work Plans documentent leur structure, leurs tâches et leur progression : règles du README, marqueurs de statut et les deux tâches finales obligatoires."
+description: "Standard normatif sur la façon dont les Deep Work Plans documentent leur structure, leurs tâches et leur progression : règles du README, marqueurs de statut et les trois tâches finales obligatoires."
 order: 1
 lang: fr
 section: Standard
@@ -44,9 +44,10 @@ Chaque fichier de tâche MUST être nommé `<n>.task_<slug>.md` et contenir l’
 
 Tous les titres MUST utiliser la casse de phrase. Les documents SHOULD éviter le langage marketing et les points d’exclamation.
 
-## Deux tâches finales obligatoires
+## Trois tâches finales obligatoires
 
-Tout plan MUST se terminer par deux tâches standard :
+Tout plan MUST se terminer par trois tâches standard :
 
-1. **Skills & Agents Discovery** — identifier les skills et agents réutilisables créés.
-2. **Executive Report** — un résumé des résultats pour les parties prenantes.
+1. **Security Review** — auditer l’ensemble des changements du plan à la recherche de secrets, de risques d’injection et de nouvelle surface d’attaque, et vérifier que `docs/SECURITY.md` reflète toujours la réalité. Une découverte critique bloque l’achèvement.
+2. **Skills & Agents Discovery** — identifier les skills et agents réutilisables créés.
+3. **Executive Report** — un résumé des résultats pour les parties prenantes.

@@ -1,6 +1,6 @@
 ---
 title: Standard dokumentacji
-description: "Normatywny standard sposobu dokumentowania struktury, zadań i postępu Deep Work Planów: reguły README, znaczniki statusu oraz dwa obowiązkowe zadania końcowe."
+description: "Normatywny standard sposobu dokumentowania struktury, zadań i postępu Deep Work Planów: reguły README, znaczniki statusu oraz trzy obowiązkowe zadania końcowe."
 order: 1
 lang: pl
 section: Standard
@@ -44,9 +44,10 @@ Każdy plik zadania MUSI być nazwany `<n>.task_<slug>.md` i zawierać dziewięc
 
 Wszystkie nagłówki MUSZĄ używać zapisu zdaniowego (sentence case). Dokumenty POWINNY unikać języka marketingowego i wykrzykników.
 
-## Dwa obowiązkowe zadania końcowe
+## Trzy obowiązkowe zadania końcowe
 
-Każdy plan MUSI kończyć się dwoma standardowymi zadaniami:
+Każdy plan MUSI kończyć się trzema standardowymi zadaniami:
 
-1. **Odkrywanie skilli i agentów** — zidentyfikowanie utworzonych skilli i agentów wielokrotnego użytku.
-2. **Raport wykonawczy** — podsumowanie wyników dla interesariuszy.
+1. **Przegląd bezpieczeństwa** — audyt pełnego zestawu zmian planu pod kątem sekretów, ryzyk iniekcji i nowej powierzchni ataku oraz zweryfikowanie, że `docs/SECURITY.md` nadal odzwierciedla rzeczywistość. Krytyczne znalezisko blokuje ukończenie.
+2. **Odkrywanie skilli i agentów** — zidentyfikowanie utworzonych skilli i agentów wielokrotnego użytku.
+3. **Raport wykonawczy** — podsumowanie wyników dla interesariuszy.

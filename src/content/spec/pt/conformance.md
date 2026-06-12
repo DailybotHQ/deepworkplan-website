@@ -31,12 +31,13 @@ Um Deep Work Plan em `.dwp/plans/` é bem formado quando:
 
 1. Toda tarefa DEVE (MUST) declarar um **escopo** explícito, **critérios de aceitação** e ao menos um **validation gate** (um comando ou verificação que objetivamente aprova ou reprova).
 2. Toda tarefa que adiciona nova funcionalidade central ou altera o comportamento do produto DEVE (MUST) incluir cobertura de testes automatizados para esse comportamento em seus critérios de aceitação, e DEVE (MUST) executar os testes do repositório junto com suas verificações de lint e type-check em seu validation gate — não apenas o build. Os testes existentes DEVEM (MUST) permanecer verdes; uma mudança de comportamento DEVE (MUST) atualizar um teste que ela quebra, em vez de excluí-lo ou pulá-lo. Tarefas puramente de documentação, configuração ou pesquisa estão isentas de criar testes, mas ainda assim executam o gate do repositório.
-3. O plano DEVE (MUST) persistir o progresso de modo que o trabalho sobreviva à interrupção e possa ser retomado por um agente diferente.
-4. O plano DEVE (MUST) incluir as duas tarefas finais obrigatórias — Skills & Agents Discovery e o Executive Report.
-5. As tarefas DEVERIAM (SHOULD) reancorar-se ao objetivo do plano antes de executar, para evitar a deriva ao longo de um horizonte extenso.
+3. Toda tarefa que toca autenticação, tratamento de entradas, segredos ou configuração, superfície de rede ou dependências DEVE (MUST) carregar as expectativas de segurança dessa mudança em seus critérios de aceitação, e todo commit DEVE (MUST) estar livre de material secreto.
+4. O plano DEVE (MUST) persistir o progresso de modo que o trabalho sobreviva à interrupção e possa ser retomado por um agente diferente.
+5. O plano DEVE (MUST) incluir as três tarefas finais obrigatórias — Security Review, Skills & Agents Discovery e o Executive Report. Um achado crítico de segurança bloqueia a conclusão até que seja corrigido ou explicitamente aceito.
+6. As tarefas DEVERIAM (SHOULD) reancorar-se ao objetivo do plano antes de executar, para evitar a deriva ao longo de um horizonte extenso.
 
 ## Verificando a conformidade
 
-A conformidade DEVERIA (SHOULD) ser verificada de forma mecânica, e não por inspeção. Executar `/dwp-verify` produz um relatório de aprovado/reprovado em relação aos critérios acima: a presença e o conteúdo real do `AGENTS.md`, a resolução do `CLAUDE.md`, as categorias de `docs/`, a correspondência catálogo-versus-disco de `.agents/`, o status de gitignore de `.dwp/` e `tmp/` e — para um plano — que cada tarefa carrega critérios de aceitação e um validation gate, com cobertura de testes para tarefas que alteram o comportamento.
+A conformidade DEVERIA (SHOULD) ser verificada de forma mecânica, e não por inspeção. Executar `/dwp-verify` produz um relatório de aprovado/reprovado em relação aos critérios acima: a presença e o conteúdo real do `AGENTS.md`, a resolução do `CLAUDE.md`, as categorias de `docs/`, a correspondência catálogo-versus-disco de `.agents/`, o status de gitignore de `.dwp/` e `tmp/` e — para um plano — que cada tarefa carrega critérios de aceitação e um validation gate, com cobertura de testes para tarefas que alteram o comportamento e as três tarefas finais obrigatórias presentes, incluindo a Security Review.
 
 Um repositório DEVERIA (SHOULD) ser reverificado após o onboarding e após cada plano concluído, de modo que a conformidade seja mantida, e não afirmada uma única vez.

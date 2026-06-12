@@ -31,12 +31,13 @@ Un Deep Work Plan en `.dwp/plans/` está bien formado cuando:
 
 1. Cada tarea DEBE declarar un **alcance** explícito, **criterios de aceptación** y al menos una **puerta de validación** (un comando o comprobación que pase o falle de forma objetiva).
 2. Cada tarea que agrega nueva funcionalidad central o cambia el comportamiento del producto DEBE incluir cobertura de pruebas automatizadas para ese comportamiento en sus criterios de aceptación, y DEBE ejecutar las pruebas del repositorio junto con sus comprobaciones de linter y de tipos en su puerta de validación — no solo la compilación. Las pruebas existentes DEBEN seguir en verde; un cambio de comportamiento DEBE actualizar una prueba que rompa en lugar de eliminarla u omitirla. Las tareas de pura documentación, configuración o investigación están exentas de crear pruebas, pero aun así ejecutan la puerta del repositorio.
-3. El plan DEBE persistir el progreso para que el trabajo sobreviva a la interrupción y pueda ser reanudado por un agente distinto.
-4. El plan DEBE incluir las dos tareas finales obligatorias — Descubrimiento de Skills y Agentes y el Reporte Ejecutivo.
-5. Las tareas DEBERÍAN reanclarse al objetivo del plan antes de ejecutarse, para evitar la desviación en un horizonte largo.
+3. Cada tarea que toque autenticación, manejo de entradas, secretos o configuración, superficie de red o dependencias DEBE llevar las expectativas de seguridad de ese cambio en sus criterios de aceptación, y cada commit DEBE estar libre de material secreto.
+4. El plan DEBE persistir el progreso para que el trabajo sobreviva a la interrupción y pueda ser reanudado por un agente distinto.
+5. El plan DEBE incluir las tres tareas finales obligatorias — Revisión de Seguridad, Descubrimiento de Skills y Agentes y el Reporte Ejecutivo. Un hallazgo de seguridad crítico bloquea la finalización hasta que se corrija o se acepte explícitamente.
+6. Las tareas DEBERÍAN reanclarse al objetivo del plan antes de ejecutarse, para evitar la desviación en un horizonte largo.
 
 ## Verificar la conformidad
 
-La conformidad DEBERÍA verificarse de forma mecánica y no por inspección. Ejecutar `/dwp-verify` produce un informe de aprobado/fallido frente a los criterios de arriba: la presencia y el contenido real de `AGENTS.md`, la resolución de `CLAUDE.md`, las categorías de `docs/`, la coincidencia catálogo-versus-disco de `.agents/`, el estado de gitignore de `.dwp/` y `tmp/` y — para un plan — que cada tarea lleve criterios de aceptación y una puerta de validación, con cobertura de pruebas para las tareas que cambian el comportamiento.
+La conformidad DEBERÍA verificarse de forma mecánica y no por inspección. Ejecutar `/dwp-verify` produce un informe de aprobado/fallido frente a los criterios de arriba: la presencia y el contenido real de `AGENTS.md`, la resolución de `CLAUDE.md`, las categorías de `docs/`, la coincidencia catálogo-versus-disco de `.agents/`, el estado de gitignore de `.dwp/` y `tmp/` y — para un plan — que cada tarea lleve criterios de aceptación y una puerta de validación, con cobertura de pruebas para las tareas que cambian el comportamiento y las tres tareas finales obligatorias presentes, incluida la Revisión de Seguridad.
 
 Un repositorio DEBERÍA reverificarse tras la incorporación y tras cada plan completado, de modo que la conformidad se mantenga en lugar de afirmarse una sola vez.

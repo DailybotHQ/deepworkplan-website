@@ -53,7 +53,7 @@ Tworząc plan, agent MUSI:
 
 - Rozłożyć cel na sekwencyjne, podatne na przegląd zadania.
 - Zapisać każde zadanie zgodnie z dziewięciosekcyjną anatomią.
-- Zakończyć dwoma obowiązkowymi zadaniami końcowymi.
+- Zakończyć trzema obowiązkowymi zadaniami końcowymi (przegląd bezpieczeństwa, odkrywanie skilli i agentów, raport wykonawczy).
 - Zadać pytania doprecyzowujące, gdy cel jest niejednoznaczny.
 
 ## Realizacja
@@ -65,6 +65,7 @@ Podczas realizacji agent MUSI:
 - Aktualizować `PROGRESS.md` po każdym zadaniu.
 - Trafnie oznaczać status zadania.
 - Dla każdego zadania, które dodaje nową funkcjonalność lub zmienia zachowanie, dodać lub zaktualizować automatyczne testy tego zachowania i uruchomić testy repozytorium oraz kontrole lintu i sprawdzania typów przed oznaczeniem zadania jako ukończonego; nigdy nie usuwać ani nie pomijać testu, by wymusić zaliczenie bramki.
+- Dla każdego zadania, które dotyka uwierzytelniania, obsługi danych wejściowych, sekretów lub konfiguracji, powierzchni sieciowej albo zależności, spełnić oczekiwania bezpieczeństwa zadeklarowane w jego kryteriach akceptacji i przed commitem potwierdzić, że diff nie zawiera żadnych sekretów.
 - Zatrzymać się i zapytać, gdy jest zablokowany, zamiast zgadywać.
 
 ## Dopracowanie

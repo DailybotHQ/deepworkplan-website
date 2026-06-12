@@ -31,7 +31,7 @@ import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
 ## พฤติกรรม
 
 1. ตรวจ repository ทั้ง `AGENTS.md` ที่มีคำสั่งจริงรันได้ การ resolve ของ `CLAUDE.md` หมวดหมู่ใน `docs/` แคตตาล็อก `.agents/` ที่ตรงกับดิสก์ ตัวส่งต่อ `dwp-*` แบบบาง ๆ `.dwp/` และ `tmp/` ที่ถูก gitignore และ skill ที่ resolve ได้
-2. ตรวจแผน (เมื่อร้องขอ) ว่าทุก task มี acceptance criteria และ validation gate ความคืบหน้าถูกบันทึกคงอยู่ มี final task บังคับสองตัวครบ และ task ผูกกลับไปยังเป้าหมาย
+2. ตรวจแผน (เมื่อร้องขอ) ว่าทุก task มี acceptance criteria และ validation gate ความคืบหน้าถูกบันทึกคงอยู่ มี final task บังคับสามตัวครบ (รวมถึง Security Review) และ task ผูกกลับไปยังเป้าหมาย
 3. รายงาน **CONFORMANT** หรือ **NOT CONFORMANT** พร้อมแจกแจงทุกข้อที่ไม่ผ่าน
 4. เสนอที่จะบันทึกช่องว่างที่พบเป็น Deep Work Plan โดยไม่แก้ไขแบบเงียบ ๆ
 

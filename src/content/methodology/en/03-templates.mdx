@@ -1,6 +1,6 @@
 ---
 title: Plan and task templates
-description: "The structure of plan and task files, the two mandatory final tasks every plan must end with, and the README and PROGRESS conventions that keep a plan readable."
+description: "The structure of plan and task files, the three mandatory final tasks every plan must end with, and the README and PROGRESS conventions that keep a plan readable."
 order: 3
 lang: en
 summary: How plans and tasks are structured on disk, and the conventions that keep them readable.
@@ -26,12 +26,13 @@ A plan is a directory under `.dwp/plans/` named `PLAN_<slug>/`. It contains:
 
 Each task file is named `<n>.task_<slug>.md` and follows the nine-section anatomy: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, and Completion & Log. The sections always appear in that order so any reader knows where to look. Each task re-anchors to the plan's goal before it acts, which keeps an agent from drifting over a long, multi-hour horizon.
 
-## The two mandatory final tasks
+## The three mandatory final tasks
 
-Every plan must end with two standard tasks. They ensure that knowledge is captured and that stakeholders are informed:
+Every plan must end with three standard tasks. They ensure that the work is audited, knowledge is captured, and stakeholders are informed:
 
-1. **Skills & Agents Discovery** — identify the reusable skills and agents created during the plan, so the work compounds beyond this single effort.
-2. **Executive Report** — a concise summary of outcomes written for stakeholders, distinguishing what was delivered from what remains.
+1. **Security Review** — audit everything the plan changed for secrets, injection risks, and new attack surface, and keep `docs/SECURITY.md` current. Security is not a separate workstream bolted on at the end: every plan leaves its own changes audited, and a critical finding blocks completion.
+2. **Skills & Agents Discovery** — identify the reusable skills and agents created during the plan, so the work compounds beyond this single effort.
+3. **Executive Report** — a concise summary of outcomes written for stakeholders, distinguishing what was delivered from what remains.
 
 ## README and PROGRESS conventions
 

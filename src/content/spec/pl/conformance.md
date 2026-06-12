@@ -31,12 +31,13 @@ Deep Work Plan w `.dwp/plans/` jest dobrze sformułowany, gdy:
 
 1. Każde zadanie MUSI deklarować jawny **zakres**, **kryteria akceptacji** oraz co najmniej jedną **bramkę walidacyjną** (komendę lub kontrolę, która obiektywnie przechodzi lub zawodzi).
 2. Każde zadanie, które dodaje nową kluczową funkcjonalność lub zmienia zachowanie produktu, MUSI obejmować automatyczne pokrycie testami tego zachowania w swoich kryteriach akceptacji oraz MUSI uruchamiać testy repozytorium razem z jego kontrolami lintu i sprawdzania typów w swojej bramce walidacyjnej — a nie samym budowaniem. Istniejące testy MUSZĄ pozostać zielone; zmiana zachowania MUSI zaktualizować test, który psuje, zamiast go usuwać lub pomijać. Zadania czysto dokumentacyjne, konfiguracyjne lub badawcze są zwolnione z tworzenia testów, lecz wciąż uruchamiają bramkę repozytorium.
-3. Plan MUSI utrwalać postęp tak, aby praca przetrwała przerwanie i mogła zostać wznowiona przez innego agenta.
-4. Plan MUSI zawierać dwa obowiązkowe zadania końcowe — odkrywanie skilli i agentów oraz raport wykonawczy.
-5. Zadania POWINNY ponownie zakotwiczać się w celu planu przed wykonaniem, aby zapobiec dryfowi w długim horyzoncie.
+3. Każde zadanie, które dotyka uwierzytelniania, obsługi danych wejściowych, sekretów lub konfiguracji, powierzchni sieciowej albo zależności, MUSI zawierać w swoich kryteriach akceptacji oczekiwania bezpieczeństwa dotyczące tej zmiany, a każdy commit MUSI być wolny od jakichkolwiek sekretów.
+4. Plan MUSI utrwalać postęp tak, aby praca przetrwała przerwanie i mogła zostać wznowiona przez innego agenta.
+5. Plan MUSI zawierać trzy obowiązkowe zadania końcowe — przegląd bezpieczeństwa, odkrywanie skilli i agentów oraz raport wykonawczy. Krytyczne znalezisko bezpieczeństwa blokuje ukończenie do czasu naprawy lub jawnej akceptacji.
+6. Zadania POWINNY ponownie zakotwiczać się w celu planu przed wykonaniem, aby zapobiec dryfowi w długim horyzoncie.
 
 ## Weryfikacja zgodności
 
-Zgodność POWINNA być weryfikowana mechanicznie, a nie przez inspekcję. Uruchomienie `/dwp-verify` generuje raport zaliczenia/niezaliczenia względem powyższych kryteriów: obecności i rzeczywistej treści `AGENTS.md`, rozwiązania `CLAUDE.md`, kategorii `docs/`, zgodności katalogu `.agents/` z dyskiem, statusu gitignore dla `.dwp/` i `tmp/` oraz — dla planu — tego, że każde zadanie ma kryteria akceptacji i bramkę walidacyjną, z pokryciem testami dla zadań zmieniających zachowanie.
+Zgodność POWINNA być weryfikowana mechanicznie, a nie przez inspekcję. Uruchomienie `/dwp-verify` generuje raport zaliczenia/niezaliczenia względem powyższych kryteriów: obecności i rzeczywistej treści `AGENTS.md`, rozwiązania `CLAUDE.md`, kategorii `docs/`, zgodności katalogu `.agents/` z dyskiem, statusu gitignore dla `.dwp/` i `tmp/` oraz — dla planu — tego, że każde zadanie ma kryteria akceptacji i bramkę walidacyjną, z pokryciem testami dla zadań zmieniających zachowanie oraz z obecnymi trzema obowiązkowymi zadaniami końcowymi, w tym przeglądem bezpieczeństwa.
 
 Repozytorium POWINNO być ponownie weryfikowane po onboardingu i po każdym ukończonym planie, aby zgodność była utrzymywana, a nie deklarowana jednorazowo.

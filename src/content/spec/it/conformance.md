@@ -31,12 +31,13 @@ Un Deep Work Plan in `.dwp/plans/` è ben formato quando:
 
 1. Ogni attività DEVE dichiarare uno **scope** esplicito, **criteri di accettazione** e almeno un **validation gate** (un comando o una verifica che ha esito oggettivamente positivo o negativo).
 2. Ogni attività che aggiunge nuove funzionalità fondamentali o modifica il comportamento del prodotto DEVE includere una copertura di test automatizzati per quel comportamento nei suoi criteri di accettazione, e DEVE eseguire i test del repository insieme ai suoi controlli di lint e type-check nel suo validation gate — non solo la build. I test esistenti DEVONO restare verdi; un cambiamento di comportamento DEVE aggiornare un test che rompe anziché eliminarlo o saltarlo. Le attività di pura documentazione, configurazione o ricerca sono esentate dal creare test ma eseguono comunque il gate del repository.
-3. Il piano DEVE persistere i progressi così che il lavoro sopravviva all’interruzione e possa essere ripreso da un agente diverso.
-4. Il piano DEVE includere le due attività finali obbligatorie — Skills & Agents Discovery ed Executive Report.
-5. Le attività DOVREBBERO riancorarsi all’obiettivo del piano prima di eseguire, per prevenire la deriva su un orizzonte lungo.
+3. Ogni attività che tocca autenticazione, gestione degli input, segreti o configurazione, superficie di rete o dipendenze DEVE portare le aspettative di sicurezza di quella modifica nei suoi criteri di accettazione, e ogni commit DEVE essere privo di materiale segreto.
+4. Il piano DEVE persistere i progressi così che il lavoro sopravviva all’interruzione e possa essere ripreso da un agente diverso.
+5. Il piano DEVE includere le tre attività finali obbligatorie — Security Review, Skills & Agents Discovery ed Executive Report. Un rilievo di sicurezza critico blocca il completamento finché non viene corretto o esplicitamente accettato.
+6. Le attività DOVREBBERO riancorarsi all’obiettivo del piano prima di eseguire, per prevenire la deriva su un orizzonte lungo.
 
 ## Verificare la conformità
 
-La conformità DOVREBBE essere verificata in modo meccanico anziché per ispezione. Eseguire `/dwp-verify` produce un report di esito positivo/negativo rispetto ai criteri qui sopra: la presenza e il contenuto reale di `AGENTS.md`, la risoluzione di `CLAUDE.md`, le categorie `docs/`, la corrispondenza tra catalogo `.agents/` e disco, lo stato di esclusione da git di `.dwp/` e `tmp/` e — per un piano — che ogni attività porti con sé criteri di accettazione e un validation gate, con copertura di test per le attività che modificano il comportamento.
+La conformità DOVREBBE essere verificata in modo meccanico anziché per ispezione. Eseguire `/dwp-verify` produce un report di esito positivo/negativo rispetto ai criteri qui sopra: la presenza e il contenuto reale di `AGENTS.md`, la risoluzione di `CLAUDE.md`, le categorie `docs/`, la corrispondenza tra catalogo `.agents/` e disco, lo stato di esclusione da git di `.dwp/` e `tmp/` e — per un piano — che ogni attività porti con sé criteri di accettazione e un validation gate, con copertura di test per le attività che modificano il comportamento e le tre attività finali obbligatorie presenti, Security Review inclusa.
 
 Un repository DOVREBBE essere ri-verificato dopo l’onboarding e dopo ogni piano completato, così che la conformità sia mantenuta anziché dichiarata una sola volta.

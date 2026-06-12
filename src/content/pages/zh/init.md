@@ -97,7 +97,8 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
    进它，而非替换它。创建 `CLAUDE.md → AGENTS.md` 符号链接（未经询问不要覆盖已有的
    `CLAUDE.md`）。
 2. **`docs/`。** 用真实、仓库专属的内容填充标准的各类别：`PRODUCT_SPEC.md`（非技术性的产品/为什么文档——每个仓库必须具备，库类项目亦然）、`ARCHITECTURE.md`、
-   `STANDARDS.md`、`TESTING_GUIDE.md`、`DEVELOPMENT_COMMANDS.md`、`SECURITY.md`、
+   `STANDARDS.md`、`TESTING_GUIDE.md`、`DEVELOPMENT_COMMANDS.md`、`SECURITY.md`
+   （绝不跳过——每个仓库都有安全态势，即使没有任何机密）、
    `AI_AGENT_ONBOARDING.md`、`AI_AGENT_COLLAB.md`，外加 `PERFORMANCE.md` 与一份 `docs/README.md` 索引。
    若文档已存在，则整合并扩展它们——不要重复。
 3. **各模块文档。** 在勘察中发现的每个主要源模块内部，添加一个 `README.md`
@@ -142,6 +143,10 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 - `/dwp-status` —— 报告进展而不做任何改动。
 - `/dwp-refine` —— 在保全已完成工作的同时增加、删除或重排任务。
 - `/dwp-resume` —— 重建状态并继续一份被中断的计划。
+
+每份计划都以三项强制收尾任务作结——一次针对计划自身改动的 **Security Review**（安全审查，
+让 `docs/SECURITY.md` 保持最新；一项严重发现会阻止完成）、Skills & Agents Discovery
+与 Executive Report。
 
 ## 7. 验证
 

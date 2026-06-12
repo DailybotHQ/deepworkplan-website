@@ -31,12 +31,13 @@ Un Deep Work Plan dans `.dwp/plans/` est bien formé lorsque :
 
 1. Chaque tâche MUST déclarer un **périmètre** explicite, des **critères d’acceptation** et au moins une **porte de validation** (une commande ou une vérification qui réussit ou échoue objectivement).
 2. Chaque tâche qui ajoute une nouvelle fonctionnalité centrale ou modifie le comportement du produit MUST inclure une couverture de tests automatisés pour ce comportement dans ses critères d’acceptation, et MUST exécuter les tests du dépôt conjointement avec ses vérifications de lint et de typage dans sa porte de validation — et non le build seul. Les tests existants MUST rester au vert ; un changement de comportement MUST mettre à jour un test qu’il casse plutôt que de le supprimer ou de l’ignorer. Les tâches purement documentaires, de configuration ou de recherche sont exemptées de la création de tests mais exécutent tout de même la porte du dépôt.
-3. Le plan MUST persister la progression pour que le travail survive à l’interruption et puisse être repris par un autre agent.
-4. Le plan MUST inclure les deux tâches finales obligatoires — Skills & Agents Discovery et l’Executive Report.
-5. Les tâches SHOULD se réancrer à l’objectif du plan avant de s’exécuter, afin de prévenir la dérive sur un long horizon.
+3. Chaque tâche qui touche à l’authentification, au traitement des entrées, aux secrets ou à la configuration, à la surface réseau ou aux dépendances MUST porter les attentes de sécurité de ce changement dans ses critères d’acceptation, et chaque commit MUST être exempt de tout matériau secret.
+4. Le plan MUST persister la progression pour que le travail survive à l’interruption et puisse être repris par un autre agent.
+5. Le plan MUST inclure les trois tâches finales obligatoires — Security Review, Skills & Agents Discovery et l’Executive Report. Une découverte de sécurité critique bloque l’achèvement jusqu’à ce qu’elle soit corrigée ou explicitement acceptée.
+6. Les tâches SHOULD se réancrer à l’objectif du plan avant de s’exécuter, afin de prévenir la dérive sur un long horizon.
 
 ## Vérifier la conformité
 
-La conformité SHOULD être vérifiée mécaniquement plutôt que par inspection. L’exécution de `/dwp-verify` produit un rapport de réussite/échec face aux critères ci-dessus : la présence et le contenu réel d’`AGENTS.md`, la résolution de `CLAUDE.md`, les catégories de `docs/`, la correspondance catalogue-versus-disque de `.agents/`, le statut gitignore de `.dwp/` et `tmp/`, et — pour un plan — que chaque tâche porte des critères d’acceptation et une porte de validation, avec une couverture de tests pour les tâches qui modifient le comportement.
+La conformité SHOULD être vérifiée mécaniquement plutôt que par inspection. L’exécution de `/dwp-verify` produit un rapport de réussite/échec face aux critères ci-dessus : la présence et le contenu réel d’`AGENTS.md`, la résolution de `CLAUDE.md`, les catégories de `docs/`, la correspondance catalogue-versus-disque de `.agents/`, le statut gitignore de `.dwp/` et `tmp/`, et — pour un plan — que chaque tâche porte des critères d’acceptation et une porte de validation, avec une couverture de tests pour les tâches qui modifient le comportement et les trois tâches finales obligatoires présentes, Security Review comprise.
 
 Un dépôt SHOULD être revérifié après l’onboarding et après chaque plan achevé, afin que la conformité soit maintenue plutôt qu’affirmée une seule fois.

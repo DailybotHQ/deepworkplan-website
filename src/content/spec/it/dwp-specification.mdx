@@ -71,6 +71,16 @@ Quando un'attività aggiunge nuove funzionalità fondamentali o modifica in modo
 
 Le attività di pura documentazione, configurazione o ricerca sono esentate dal creare test ma DEVONO comunque eseguire qualsiasi validation gate il repository definisca. La profondità del testing è proporzionale alla dimensione del cambiamento e alla maturità del repository. Dove un repository non ha affatto una toolchain di test o lint, l'agente NON DEVE saltare silenziosamente questa disciplina — si affida alla toolchain proposta durante l'onboarding (vedi [Conformità](/spec)).
 
+## Disciplina di sicurezza
+
+La sicurezza è di prima classe allo stesso modo dei test, e segue lo stesso modello a due livelli: disciplina per attività mentre il lavoro avviene, più un gate obbligatorio di Security Review sull'intero insieme di modifiche alla fine. Ogni volta che un'attività tocca l'autenticazione o l'autorizzazione, la gestione dell'input, segreti o configurazione, la superficie di rete, file o shell, oppure le dipendenze:
+
+- I suoi **criteri di accettazione** DEVONO dichiarare le aspettative di sicurezza della modifica — input validato e sottoposto a escape, nessun materiale segreto nel codice o nelle fixture, controlli di autenticazione preservati o rafforzati — in modo coerente con `docs/SECURITY.md`.
+- Ogni commit DEVE essere confermato privo di segreti o credenziali prima di essere integrato, incluse le fixture di test e gli esempi di documentazione. Un segreto in un commit già pubblicato DEVE essere trattato come trapelato e ruotato, non semplicemente rimosso.
+- Dove il lavoro sensibile alla sicurezza è sostanziale, un'attività di hardening dedicata DOVREBBE essere collocata immediatamente dopo le attività di implementazione e prima dell'attività di test completi, così che i riscontri siano corretti prima che i test codifichino il comportamento e ogni riscontro diventi un caso di regressione anziché rilavorazione.
+
+Questa disciplina per attività non sostituisce l'attività finale di Security Review: i controlli per attività intercettano i problemi nel commit in cui nascono, mentre il gate finale verifica l'intero piano — incluse le stesse attività di test e documentazione. Ogni piano termina quindi con tre attività finali obbligatorie — Security Review, poi Skills & Agents Discovery, poi l'Executive Report — e un riscontro di sicurezza critico blocca il completamento finché non viene corretto o esplicitamente accettato.
+
 ## Protocollo di completamento dell'attività
 
 Dopo aver superato la validazione e prima di avanzare all'attività successiva, l'agente DEVE, nell'ordine: (1) segnare l'attività `[x]` nel README del piano; (2) incrementare il contatore di stato del piano; (3) compilare la sezione Completion & Log dell'attività senza valori segnaposto; (4) aggiungere una voce di 3–5 punti in `PROGRESS.md`; (5) eseguire il commit (dove il piano esegue commit) con il formato `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) dove il piano porta il livello di stato, riscrivere `state.json` atomicamente — attività `completed`, gate record, outcome record, hash del commit.

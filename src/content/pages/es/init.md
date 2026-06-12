@@ -115,7 +115,8 @@ metodología) en vez de sobrescribir — y confirma con el usuario antes de reem
    ya existe un `AGENTS.md`, fusiónate con él en vez de reemplazarlo. Crea el enlace simbólico
    `CLAUDE.md → AGENTS.md` (no pises un `CLAUDE.md` existente sin preguntar).
 2. **`docs/`.** Completa las categorías estándar con contenido real y específico del repo:
-   `PRODUCT_SPEC.md` (el documento de producto/por qué no técnico — obligatorio para todo repositorio, incluidas las bibliotecas), `ARCHITECTURE.md`, `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   `PRODUCT_SPEC.md` (el documento de producto/por qué no técnico — obligatorio para todo repositorio, incluidas las bibliotecas), `ARCHITECTURE.md`, `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
+   (nunca se omite — todo repositorio tiene una postura de seguridad, incluso sin secretos),
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, además de `PERFORMANCE.md` y un índice
    `docs/README.md`. Si ya existen docs, intégralos y amplíalos — no los dupliques.
 3. **Docs por módulo.** Añade un `README.md` (y una subcarpeta `docs/` para módulos complejos) dentro
@@ -166,6 +167,10 @@ Genera Deep Work Plans para cualquier tarea y ejecútalos tarea por tarea:
 - `/dwp-status` — informa del progreso sin hacer cambios.
 - `/dwp-refine` — añade, elimina o reordena tareas preservando el trabajo completado.
 - `/dwp-resume` — reconstruye el estado y continúa un plan interrumpido.
+
+Todo plan termina con tres tareas finales obligatorias — una **Revisión de seguridad** de los propios
+cambios del plan (manteniendo `docs/SECURITY.md` al día; un hallazgo crítico bloquea la finalización),
+el Descubrimiento de habilidades y agentes y el Informe ejecutivo.
 
 ## 7. Verifica
 

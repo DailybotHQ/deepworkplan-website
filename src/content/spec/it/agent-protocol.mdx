@@ -53,7 +53,7 @@ Quando crea un piano, l'agente DEVE:
 
 - Scomporre l'obiettivo in attività sequenziali e revisionabili.
 - Scrivere ogni attività con l'anatomia in nove sezioni.
-- Concludere con le due attività finali obbligatorie.
+- Concludere con le tre attività finali obbligatorie (Security Review, Skills & Agents Discovery, Executive Report).
 - Porre domande di chiarimento quando l'obiettivo è ambiguo.
 
 ## Esecuzione
@@ -65,6 +65,7 @@ Durante l'esecuzione, l'agente DEVE:
 - Aggiornare `PROGRESS.md` dopo ogni attività.
 - Segnare lo stato dell'attività in modo accurato.
 - Per qualsiasi attività che aggiunge nuove funzionalità o modifica il comportamento, aggiungere o aggiornare i test automatizzati per quel comportamento ed eseguire i test del repository e i controlli di lint/type-check prima di segnare l'attività come completata; mai eliminare o saltare un test per forzare il superamento del gate.
+- Per qualsiasi attività che tocca autenticazione, gestione degli input, segreti o configurazione, superficie di rete o dipendenze, soddisfare le aspettative di sicurezza dichiarate nei suoi criteri di accettazione e confermare che il diff non contenga materiale segreto prima del commit.
 - Fermarsi e chiedere quando è bloccato anziché tirare a indovinare.
 
 ## Raffinamento

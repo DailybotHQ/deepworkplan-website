@@ -1,6 +1,6 @@
 ---
 title: Chuẩn tài liệu
-description: "Chuẩn quy phạm về cách các Deep Work Plan ghi lại cấu trúc, tác vụ và tiến độ của chúng: quy tắc README, các dấu trạng thái, và hai tác vụ cuối bắt buộc."
+description: "Chuẩn quy phạm về cách các Deep Work Plan ghi lại cấu trúc, tác vụ và tiến độ của chúng: quy tắc README, các dấu trạng thái, và ba tác vụ cuối bắt buộc."
 order: 1
 lang: vi
 section: Standard
@@ -44,9 +44,10 @@ Mỗi tệp tác vụ PHẢI được đặt tên `<n>.task_<slug>.md` và chứ
 
 Mọi tiêu đề PHẢI dùng kiểu viết hoa đầu câu. Các tài liệu NÊN tránh ngôn ngữ tiếp thị và dấu chấm than.
 
-## Hai tác vụ cuối bắt buộc
+## Ba tác vụ cuối bắt buộc
 
-Mọi kế hoạch PHẢI kết thúc bằng hai tác vụ chuẩn:
+Mọi kế hoạch PHẢI kết thúc bằng ba tác vụ chuẩn:
 
-1. **Skills & Agents Discovery** — xác định các skill và agent tái sử dụng được tạo ra.
-2. **Executive Report** — một bản tóm tắt kết quả cho các bên liên quan.
+1. **Security Review** — kiểm toán toàn bộ tập thay đổi của kế hoạch để tìm bí mật, rủi ro tiêm nhiễm và bề mặt tấn công mới, và xác minh rằng `docs/SECURITY.md` vẫn phản ánh thực tế. Một phát hiện nghiêm trọng chặn việc hoàn tất.
+2. **Skills & Agents Discovery** — xác định các skill và agent tái sử dụng được tạo ra.
+3. **Executive Report** — một bản tóm tắt kết quả cho các bên liên quan.
