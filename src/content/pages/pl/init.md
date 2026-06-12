@@ -145,9 +145,10 @@ w pełni zgodne przy **zerowej** liczbie dodatków — nigdy nie instaluj ich au
   Podstawowa metodyka nie ma żadnej zależności od Dailybot.
 - **Dependency upgrade** — aktualizacje niezależne od menedżera pakietów: partiami, zwalidowane i odwracalne. Po
   zaakceptowaniu instaluje komendę `/lib-upgrade`.
-- **Design system** — skierowany do agentów `docs/DESIGN.md`, wywiedziony z prawdziwych tokenów
-  projektowych i stylów komponentów repozytorium, dzięki czemu każdy agent generuje UI spójne z własnym
-  design systemem repo.
+- **Design system** — skierowany do agentów `docs/DESIGN.md`, wywiedziony z rzeczywistego źródła
+  projektowego repozytorium, obejmujący wykryte powierzchnie interfejsu jako profile — wizualny UI,
+  stylizowane wyjście CLI i komunikację konwersacyjną — dzięki czemu każdy agent generuje wyjście
+  interfejsu spójne z własnymi konwencjami repo.
 
 ## 6. Planuj i wykonuj
 

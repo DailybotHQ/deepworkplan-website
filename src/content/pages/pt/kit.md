@@ -51,7 +51,7 @@ Capacidades opcionais que o fluxo de onboarding pode adicionar a um repositório
 - **Devcontainer** — um dev container reproduzível e isolado com auth de CLI de IA persistente.
 - **Dailybot** — relatórios de progresso e marcos em modo best-effort para equipes que usam a Dailybot.
 - **Atualização de dependências** — atualizações independentes do gerenciador de pacotes, em lotes, validadas e reversíveis.
-- **Design system** — um `DESIGN.md` com escopo de frontend (em `docs/DESIGN.md`, referenciado a partir do `AGENTS.md`) derivado dos tokens de design reais do repositório, para que os agentes gerem UI fiel à marca; ativado por padrão quando um design system é detectado.
+- **Design system** — um `DESIGN.md` com escopo de interface (em `docs/DESIGN.md`, referenciado a partir do `AGENTS.md`) derivado da fonte real de design do repositório, com perfis para UI visual, saída de CLI estilizada e mensagens conversacionais, para que os agentes gerem saída de interface fiel à marca; o perfil visual é ativado por padrão quando um design system é detectado, e os perfis de CLI e conversacional são recomendados quando detectados e sempre perguntados.
 
 ### Exemplos
 

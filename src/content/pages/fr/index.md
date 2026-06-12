@@ -34,7 +34,7 @@ C’est aussi de l’**ingénierie de harness** rendue portable. Un harness d’
 - AGENTS.md à la racine du dépôt, raisonné à partir de votre stack et de vos commandes réelles.
 - Un `docs/` catégorisé et une documentation par module.
 - Un répertoire `.agents/` (skills, agents, commandes) avec le lien symbolique `.claude` vers `.agents`.
-- Le skill Deep Work Plan, installé une fois pour chaque agent — y compris le sous-skill author, pour que le dépôt puisse faire grandir ses propres skills, agents et commandes, ainsi que des add-ons facultatifs comme dependency-upgrade et l’add-on frontend design-system.
+- Le skill Deep Work Plan, installé une fois pour chaque agent — y compris le sous-skill author, pour que le dépôt puisse faire grandir ses propres skills, agents et commandes, ainsi que des add-ons facultatifs comme dependency-upgrade et l’add-on design-system pour toute surface d’interface destinée aux utilisateurs.
 - Des plans de longue haleine et reprenables dans un dossier `.dwp/` ignoré par git.
 
 ---

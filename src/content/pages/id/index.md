@@ -34,7 +34,7 @@ Ini juga **harness engineering** yang dibuat portabel. Sebuah agent harness adal
 - AGENTS.md di akar repositori, dipikirkan matang dari stack dan perintah nyata Anda.
 - `docs/` terkategori dan dokumentasi per modul.
 - Sebuah direktori `.agents/` (skills, agents, commands) dengan symlink `.claude` ke `.agents`.
-- Skill Deep Work Plan, dipasang sekali untuk setiap agent — termasuk sub-skill author, sehingga repositori dapat menumbuhkan skill, agent, dan command-nya sendiri, ditambah addon opt-in seperti dependency-upgrade dan addon design-system frontend.
+- Skill Deep Work Plan, dipasang sekali untuk setiap agent — termasuk sub-skill author, sehingga repositori dapat menumbuhkan skill, agent, dan command-nya sendiri, ditambah addon opt-in seperti dependency-upgrade dan addon design-system untuk permukaan antarmuka apa pun yang menghadap pengguna.
 - Rencana jangka panjang yang dapat dilanjutkan di folder `.dwp/` yang di-gitignore.
 
 ---

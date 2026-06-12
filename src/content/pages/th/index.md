@@ -34,7 +34,7 @@ Deep Work Plan ตอบด้วย **spec-driven development** แผนคื
 - AGENTS.md ที่รากของ repository ผ่านการให้เหตุผลจากเทคสแตกและคำสั่งจริงของคุณ
 - `docs/` ที่จัดหมวดหมู่และเอกสารต่อโมดูล
 - ไดเรกทอรี `.agents/` (skill, agent, คำสั่ง) พร้อม symlink จาก `.claude` ไปยัง `.agents`
-- skill ของ Deep Work Plan ติดตั้งครั้งเดียวสำหรับทุกเอเจนต์ — รวมถึง sub-skill ชื่อ author เพื่อให้ repository ปลูก skill, agent และคำสั่งของตัวเองได้ พร้อมส่วนเสริมแบบเลือกเข้าร่วมอย่าง dependency-upgrade และส่วนเสริม design-system ฝั่ง frontend
+- skill ของ Deep Work Plan ติดตั้งครั้งเดียวสำหรับทุกเอเจนต์ — รวมถึง sub-skill ชื่อ author เพื่อให้ repository ปลูก skill, agent และคำสั่งของตัวเองได้ พร้อมส่วนเสริมแบบเลือกเข้าร่วมอย่าง dependency-upgrade และส่วนเสริม design-system สำหรับพื้นผิวอินเทอร์เฟซที่ผู้ใช้มองเห็นทุกแบบ
 - แผนระยะยาวที่ดำเนินต่อได้ในโฟลเดอร์ `.dwp/` ที่ถูก gitignore
 
 ---

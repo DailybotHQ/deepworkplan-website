@@ -151,9 +151,10 @@ eklentiyle tümüyle uyumludur — onları asla otomatik kurmayın.
   Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
 - **Dependency upgrade** — paket yöneticisinden bağımsız, gruplanmış, doğrulanmış, geri alınabilir
   yükseltmeler. Kabul edildiğinde, `/lib-upgrade` komutunu kurar.
-- **Design system** — deponun gerçek tasarım token’larından ve bileşen stillerinden akıl yürütülerek
-  oluşturulan, ajanlara yönelik bir `docs/DESIGN.md`; böylece her ajan, deponun kendi tasarım sistemiyle
-  tutarlı arayüzler üretir.
+- **Design system** — deponun gerçek tasarım kaynağından akıl yürütülerek oluşturulan, ajanlara yönelik
+  bir `docs/DESIGN.md`; saptanan arayüz yüzeylerini profiller olarak kapsar — görsel UI, stilize CLI
+  çıktısı ve konuşma tabanlı mesajlaşma — böylece her ajan, deponun kendi kurallarıyla tutarlı arayüz
+  çıktısı üretir.
 
 ## 6. Planlayın ve yürütün
 
