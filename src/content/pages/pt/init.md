@@ -111,7 +111,8 @@ metodologia) em vez de sobrescrever — e confirme com o usuário antes de subst
    nele em vez de substituí-lo. Crie o symlink `CLAUDE.md → AGENTS.md` (não sobrescreva um
    `CLAUDE.md` existente sem perguntar).
 2. **`docs/`.** Preencha as categorias padrão com conteúdo real e específico do repositório: `PRODUCT_SPEC.md` (o documento de produto/por quê não técnico — obrigatório para todo repositório, incluindo bibliotecas), `ARCHITECTURE.md`,
-   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
+   (nunca pulado — todo repositório tem uma postura de segurança, mesmo sem segredos),
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, além de `PERFORMANCE.md` e um índice `docs/README.md`.
    Se os docs já existirem, integre-os e estenda-os — não duplique.
 3. **Docs por módulo.** Adicione um `README.md` (e uma subpasta `docs/` para módulos complexos) dentro de cada
@@ -159,6 +160,10 @@ Gere Deep Work Plans para qualquer tarefa e execute-os tarefa a tarefa:
 - `/dwp-status` — relatar o progresso sem fazer alterações.
 - `/dwp-refine` — adicionar, remover ou reordenar tarefas, preservando o trabalho concluído.
 - `/dwp-resume` — reconstruir o estado e continuar um plano interrompido.
+
+Todo plano termina com três tarefas finais obrigatórias — um **Security Review** das próprias mudanças
+do plano (mantendo o `docs/SECURITY.md` atualizado; um achado crítico bloqueia a conclusão), o
+Skills & Agents Discovery e o Executive Report.
 
 ## 7. Verifique
 

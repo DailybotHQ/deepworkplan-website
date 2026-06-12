@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# Container-installed Node must win over IDE-bundled Node (Cursor Server's
+# ~/.cursor-server/bin/<commit>/node, VS Code Server's equivalent, etc.).
+# /etc/profile.d/00-container-node-first.sh covers login shells; this guard
+# covers non-login interactive shells that only source ~/.bashrc (editor
+# terminals, `bash -i`, the agent shell tool, …). Idempotent.
+if [ -x /usr/local/bin/node ]; then
+  case "${PATH}" in
+    /usr/local/bin:*) : ;;  # already at the front
+    *) PATH="/usr/local/bin:${PATH}" ;;
+  esac
+  export PATH
+fi
+
 function print.success {
 	GREEN="\033[0;32m"
   RESET="\033[0m"

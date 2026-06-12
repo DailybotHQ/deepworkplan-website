@@ -71,6 +71,16 @@ Cuando una tarea agrega nueva funcionalidad central o cambia de forma sustancial
 
 Las tareas de pura documentación, configuración o investigación están exentas de crear pruebas, pero aun así DEBEN ejecutar la puerta de validación que defina el repositorio. La profundidad de las pruebas es proporcional al tamaño del cambio y a la madurez del repositorio. Cuando un repositorio no tiene ninguna cadena de herramientas de pruebas o de linter, el agente NO DEBE omitir en silencio esta disciplina: se apoya en la cadena de herramientas propuesta durante la incorporación (consulta [Conformidad](/spec)).
 
+## Disciplina de seguridad
+
+La seguridad es de primera clase del mismo modo que las pruebas, y sigue el mismo modelo de dos capas: disciplina por tarea mientras se realiza el trabajo, más una puerta obligatoria de Security Review sobre todo el conjunto de cambios al final. Siempre que una tarea toca autenticación o autorización, el manejo de entradas, secretos o configuración, la superficie de red, de archivos o de shell, o dependencias:
+
+- Sus **criterios de aceptación** DEBEN declarar las expectativas de seguridad del cambio — entrada validada y escapada, sin material secreto en el código ni en los fixtures, comprobaciones de autenticación preservadas o reforzadas —, de forma coherente con `docs/SECURITY.md`.
+- Cada commit DEBE confirmarse libre de secretos o credenciales antes de incorporarse, incluidos los fixtures de pruebas y los ejemplos de documentación. Un secreto en un commit ya subido DEBE tratarse como filtrado y rotarse, no simplemente eliminarse.
+- Donde el trabajo sensible a la seguridad sea sustancial, DEBERÍA colocarse una tarea de endurecimiento dedicada inmediatamente después de las tareas de implementación y antes de la tarea de pruebas exhaustivas, de modo que los hallazgos se corrijan antes de que las pruebas codifiquen el comportamiento y cada hallazgo se convierta en un caso de regresión en lugar de retrabajo.
+
+Esta disciplina por tarea no sustituye a la tarea final de Security Review: las comprobaciones por tarea detectan los problemas en el commit donde nacen, mientras que la puerta final audita todo el plan — incluidas las propias tareas de pruebas y documentación. Por ello, todo plan termina con tres tareas finales obligatorias — Security Review, luego Skills & Agents Discovery, luego el Executive Report — y un hallazgo de seguridad crítico bloquea la finalización hasta que se corrija o se acepte explícitamente.
+
 ## Protocolo de finalización de tarea
 
 Tras pasar la validación y antes de avanzar a la siguiente tarea, el agente DEBE, en orden: (1) marcar la tarea `[x]` en el README del plan; (2) incrementar el contador de estado del plan; (3) rellenar la sección Finalización y Registro de la tarea sin valores de marcador de posición; (4) añadir una entrada de 3-5 puntos en `PROGRESS.md`; (5) hacer commit (cuando el plan hace commits) con el formato `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) cuando el plan lleva la capa de estado, reescribir `state.json` de forma atómica — tarea `completed`, registros de puertas, registro de resultados, hash del commit.

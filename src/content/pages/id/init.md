@@ -113,7 +113,8 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
    ke dalamnya alih-alih menggantinya. Buat symlink `CLAUDE.md → AGENTS.md` (jangan timpa
    `CLAUDE.md` yang ada tanpa bertanya).
 2. **`docs/`.** Isi kategori-kategori standar dengan konten nyata yang spesifik repo: `PRODUCT_SPEC.md` (dokumen produk/mengapa yang non-teknis — wajib untuk setiap repositori, termasuk pustaka), `ARCHITECTURE.md`,
-   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md` (tidak pernah dilewati —
+   setiap repositori memiliki postur keamanan, bahkan tanpa secret),
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, ditambah `PERFORMANCE.md` dan indeks `docs/README.md`.
    Jika docs sudah ada, integrasikan dan perluas — jangan menduplikasi.
 3. **Dokumentasi per modul.** Tambahkan sebuah `README.md` (dan subfolder `docs/` untuk modul kompleks) di dalam setiap
@@ -161,6 +162,10 @@ Hasilkan Deep Work Plan untuk tugas apa pun dan jalankan tugas demi tugas:
 - `/dwp-status` — laporkan kemajuan tanpa membuat perubahan.
 - `/dwp-refine` — tambah, hapus, atau susun ulang tugas sambil mempertahankan pekerjaan yang selesai.
 - `/dwp-resume` — rekonstruksi status dan lanjutkan rencana yang terhenti.
+
+Setiap rencana diakhiri dengan tiga tugas akhir wajib — sebuah **Security Review** atas perubahan
+rencana itu sendiri (menjaga `docs/SECURITY.md` tetap mutakhir; sebuah temuan kritis memblokir
+penyelesaian), Skills & Agents Discovery, dan Executive Report.
 
 ## 7. Verifikasi
 

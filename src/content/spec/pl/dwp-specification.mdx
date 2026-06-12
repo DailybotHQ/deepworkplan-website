@@ -71,6 +71,16 @@ Gdy zadanie dodaje nową kluczową funkcjonalność lub istotnie zmienia istniej
 
 Zadania czysto dokumentacyjne, konfiguracyjne lub badawcze są zwolnione z tworzenia testów, lecz wciąż MUSZĄ uruchamiać dowolną bramkę walidacyjną, którą definiuje repozytorium. Głębokość testowania jest proporcjonalna do rozmiaru zmiany i dojrzałości repozytorium. Tam, gdzie repozytorium nie ma w ogóle żadnego łańcucha narzędzi do testów ani lintu, agent NIE MOŻE po cichu pomijać tej dyscypliny — opiera się na łańcuchu narzędzi zaproponowanym podczas onboardingu (zob. [Zgodność](/spec)).
 
+## Dyscyplina bezpieczeństwa
+
+Bezpieczeństwo jest pełnoprawne tak samo jak testy i podąża za tym samym dwuwarstwowym modelem: dyscyplina na poziomie zadania w trakcie pracy plus obowiązkowa bramka Security Review nad całym zestawem zmian na końcu. Ilekroć zadanie dotyka uwierzytelniania lub autoryzacji, obsługi wejścia, sekretów lub konfiguracji, powierzchni sieci, plików lub shell, albo zależności:
+
+- Jego **kryteria akceptacji** MUSZĄ określać oczekiwania bezpieczeństwa dotyczące zmiany — wejście zwalidowane i poddane escapowaniu, brak materiału sekretnego w kodzie lub fiksturach, kontrole uwierzytelniania zachowane lub wzmocnione — zgodnie z `docs/SECURITY.md`.
+- Każdy commit MUSI zostać potwierdzony jako wolny od sekretów lub poświadczeń, zanim trafi do gałęzi, wliczając fikstury testów i przykłady w dokumentacji. Sekret w wypchniętym commicie MUSI być traktowany jako ujawniony i poddany rotacji, a nie jedynie usunięty.
+- Tam, gdzie praca wrażliwa na bezpieczeństwo jest znacząca, dedykowane zadanie hardeningu POWINNO być umieszczone bezpośrednio po zadaniach implementacyjnych, a przed zadaniem kompleksowych testów, tak aby ustalenia były naprawione, zanim testy zakodują zachowanie, i aby każde ustalenie stawało się przypadkiem regresji, a nie ponowną pracą.
+
+Ta dyscyplina na poziomie zadania nie zastępuje końcowego zadania Security Review: kontrole na poziomie zadania wychwytują problemy w commicie, w którym się rodzą, podczas gdy bramka końcowa audytuje cały plan — w tym same zadania testów i dokumentacji. Dlatego każdy plan kończy się trzema obowiązkowymi zadaniami końcowymi — Security Review, następnie Skills & Agents Discovery, następnie Executive Report — a krytyczne ustalenie bezpieczeństwa blokuje ukończenie, dopóki nie zostanie naprawione lub jawnie zaakceptowane.
+
 ## Protokół ukończenia zadania
 
 Po zaliczeniu walidacji i przed przejściem do następnego zadania agent MUSI, w tej kolejności: (1) oznaczyć zadanie jako `[x]` w README planu; (2) zwiększyć licznik statusu planu; (3) wypełnić sekcję Ukończenie i dziennik zadania bez żadnych wartości zastępczych; (4) dodać wpis składający się z 3–5 punktów do `PROGRESS.md`; (5) wykonać commit (gdy plan dokonuje commitów) w formacie `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) gdy plan zawiera warstwę stanu, atomowo nadpisać `state.json` — zadanie `completed`, rekordy bramek, rekord wyników, hash commita.

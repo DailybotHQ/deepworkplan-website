@@ -31,12 +31,13 @@ Sebuah Deep Work Plan di `.dwp/plans/` terbentuk baik ketika:
 
 1. Setiap tugas MUST mendeklarasikan **lingkup**, **acceptance criteria**, dan setidaknya satu **validation gate** (sebuah perintah atau pemeriksaan yang secara objektif lulus atau gagal) yang eksplisit.
 2. Setiap tugas yang menambahkan fungsionalitas inti baru atau mengubah perilaku produk MUST menyertakan cakupan test otomatis untuk perilaku itu dalam acceptance criteria-nya, dan MUST menjalankan test repositori bersama dengan pemeriksaan lint dan type-check-nya dalam validation gate-nya — bukan build saja. Test yang ada MUST tetap hijau; sebuah perubahan perilaku MUST memperbarui test yang dirusaknya alih-alih menghapus atau melewatinya. Tugas dokumentasi-murni, konfigurasi, atau riset dikecualikan dari pembuatan test tetapi tetap menjalankan gate repositori.
-3. Rencana MUST mempersistenkan kemajuan sehingga pekerjaan bertahan dari interupsi dan dapat dilanjutkan oleh agent yang berbeda.
-4. Rencana MUST menyertakan dua tugas akhir wajib — Skills & Agents Discovery dan Executive Report.
-5. Tugas SHOULD berlabuh kembali ke tujuan rencana sebelum mengeksekusi, untuk mencegah penyimpangan sepanjang rentang yang panjang.
+3. Setiap tugas yang menyentuh autentikasi, penanganan input, secret atau konfigurasi, permukaan jaringan, atau dependensi MUST membawa ekspektasi keamanan dari perubahan itu dalam acceptance criteria-nya, dan setiap commit MUST bebas dari materi secret.
+4. Rencana MUST mempersistenkan kemajuan sehingga pekerjaan bertahan dari interupsi dan dapat dilanjutkan oleh agent yang berbeda.
+5. Rencana MUST menyertakan tiga tugas akhir wajib — Security Review, Skills & Agents Discovery, dan Executive Report. Sebuah temuan keamanan kritis memblokir penyelesaian sampai diperbaiki atau diterima secara eksplisit.
+6. Tugas SHOULD berlabuh kembali ke tujuan rencana sebelum mengeksekusi, untuk mencegah penyimpangan sepanjang rentang yang panjang.
 
 ## Memverifikasi konformansi
 
-Konformansi SHOULD diverifikasi secara mekanis ketimbang dengan inspeksi. Menjalankan `/dwp-verify` menghasilkan laporan lulus/gagal terhadap kriteria di atas: keberadaan dan kenyataan-konten `AGENTS.md`, resolusi `CLAUDE.md`, kategori-kategori `docs/`, kecocokan katalog-versus-disk `.agents/`, status gitignore `.dwp/` dan `tmp/`, dan — untuk sebuah rencana — bahwa setiap tugas membawa acceptance criteria dan sebuah validation gate, dengan cakupan test untuk tugas yang mengubah perilaku.
+Konformansi SHOULD diverifikasi secara mekanis ketimbang dengan inspeksi. Menjalankan `/dwp-verify` menghasilkan laporan lulus/gagal terhadap kriteria di atas: keberadaan dan kenyataan-konten `AGENTS.md`, resolusi `CLAUDE.md`, kategori-kategori `docs/`, kecocokan katalog-versus-disk `.agents/`, status gitignore `.dwp/` dan `tmp/`, dan — untuk sebuah rencana — bahwa setiap tugas membawa acceptance criteria dan sebuah validation gate, dengan cakupan test untuk tugas yang mengubah perilaku dan ketiga tugas akhir wajib hadir, termasuk Security Review.
 
 Sebuah repositori SHOULD diverifikasi ulang setelah onboarding dan setelah setiap rencana yang selesai, sehingga konformansi dipelihara ketimbang ditegaskan sekali saja.

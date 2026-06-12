@@ -12,7 +12,7 @@ Surface Deep Work Plan progress to a Dailybot team. An opt-in addon for teams al
 
 ## What it adds
 
-- An optional install of the Dailybot agent skill and/or the Dailybot CLI, through their own consent flows.
+- An optional install of the Dailybot agent skill (currently 1.7.x, which also adds team chat across Slack, Microsoft Teams, Discord, and Google Chat) and/or the Dailybot CLI, through their own consent flows.
 - A best-effort progress/milestone report wired into plan execution, so a plan completion surfaces to the team.
 - Optional deterministic hook enforcement (Dailybot agent skill 1.6.0+, CLI 1.12.0+): committed harness hooks that detect unreported work from a local ledger and remind the agent at end of turn, so reporting stays autonomous even in long unattended sessions where prompt instructions decay.
 

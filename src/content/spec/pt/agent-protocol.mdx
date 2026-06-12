@@ -53,7 +53,7 @@ Ao criar um plano, o agente DEVE (MUST):
 
 - Decompor o objetivo em tarefas sequenciais e revisáveis.
 - Escrever cada tarefa com a anatomia de nove seções.
-- Terminar com as duas tarefas finais obrigatórias.
+- Terminar com as três tarefas finais obrigatórias (Security Review, Skills & Agents Discovery, Executive Report).
 - Fazer perguntas de esclarecimento quando o objetivo for ambíguo.
 
 ## Execução
@@ -65,6 +65,7 @@ Durante a execução, o agente DEVE (MUST):
 - Atualizar o `PROGRESS.md` após cada tarefa.
 - Marcar o status da tarefa com precisão.
 - Para qualquer tarefa que adiciona nova funcionalidade ou altera o comportamento, adicionar ou atualizar testes automatizados para esse comportamento e executar os testes e as verificações de lint/type-check do repositório antes de marcar a tarefa como concluída; nunca excluir ou pular um teste para forçar a aprovação do gate.
+- Para qualquer tarefa que toca autenticação, tratamento de entradas, segredos ou configuração, superfície de rede ou dependências, atender às expectativas de segurança declaradas em seus critérios de aceitação e confirmar que o diff não carrega material secreto antes de fazer commit.
 - Parar e perguntar quando estiver bloqueado, em vez de adivinhar.
 
 ## Refinamento

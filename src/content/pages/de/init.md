@@ -101,7 +101,8 @@ Methodik angleichen), statt es zu überschreiben — und bestätigen Sie mit dem
    sie zusammen, statt sie zu ersetzen. Erstellen Sie den `CLAUDE.md → AGENTS.md`-Symlink (überschreiben Sie eine
    bestehende `CLAUDE.md` nicht ohne nachzufragen).
 2. **`docs/`.** Füllen Sie die Standardkategorien mit echtem, repository-spezifischem Inhalt: `PRODUCT_SPEC.md` (das nicht-technische Produkt-/Warum-Dokument — für jedes Repository Pflicht, auch für Bibliotheken), `ARCHITECTURE.md`,
-   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
+   (wird niemals übersprungen — jedes Repository hat eine Sicherheitslage, auch ohne Geheimnisse),
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, plus `PERFORMANCE.md` und einen `docs/README.md`-Index.
    Wenn bereits Dokumentation existiert, integrieren und erweitern Sie sie — duplizieren Sie nicht.
 3. **Dokumentation je Modul.** Fügen Sie eine `README.md` (und einen `docs/`-Unterordner für komplexe Module) in jedes
@@ -149,6 +150,10 @@ Erzeugen Sie Deep Work Plans für jede Aufgabe und führen Sie sie Aufgabe für 
 - `/dwp-status` — über den Fortschritt berichten, ohne Änderungen vorzunehmen.
 - `/dwp-refine` — Aufgaben hinzufügen, entfernen oder umordnen, während abgeschlossene Arbeit bewahrt wird.
 - `/dwp-resume` — den Zustand rekonstruieren und einen unterbrochenen Plan fortsetzen.
+
+Jeder Plan endet mit drei verpflichtenden Abschlussaufgaben — einem **Security Review** der
+eigenen Änderungen des Plans (das `docs/SECURITY.md` aktuell hält; ein kritischer Befund
+blockiert den Abschluss), Skills & Agents Discovery und dem Executive Report.
 
 ## 7. Verifizieren
 

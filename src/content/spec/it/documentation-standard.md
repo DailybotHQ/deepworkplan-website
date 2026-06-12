@@ -1,6 +1,6 @@
 ---
 title: Standard di documentazione
-description: "Standard normativo su come i Deep Work Plan documentano struttura, attività e progressi: regole del README, marcatori di stato e le due attività finali obbligatorie."
+description: "Standard normativo su come i Deep Work Plan documentano struttura, attività e progressi: regole del README, marcatori di stato e le tre attività finali obbligatorie."
 order: 1
 lang: it
 section: Standard
@@ -44,9 +44,10 @@ Ogni file di attività DEVE essere denominato `<n>.task_<slug>.md` e contenere l
 
 Tutte le intestazioni DEVONO usare lo stile a frase (sentence case). I documenti DOVREBBERO evitare il linguaggio di marketing e i punti esclamativi.
 
-## Due attività finali obbligatorie
+## Tre attività finali obbligatorie
 
-Ogni piano DEVE concludersi con due attività standard:
+Ogni piano DEVE concludersi con tre attività standard:
 
-1. **Skills & Agents Discovery** — identificare le skill e gli agenti riutilizzabili creati.
-2. **Executive Report** — un riassunto degli esiti per gli stakeholder.
+1. **Security Review** — verificare l’intero insieme di modifiche del piano alla ricerca di segreti, rischi di injection e nuova superficie di attacco, e accertare che `docs/SECURITY.md` rifletta ancora la realtà. Un rilievo critico blocca il completamento.
+2. **Skills & Agents Discovery** — identificare le skill e gli agenti riutilizzabili creati.
+3. **Executive Report** — un riassunto degli esiti per gli stakeholder.

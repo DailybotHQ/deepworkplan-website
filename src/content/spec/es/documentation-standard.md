@@ -1,6 +1,6 @@
 ---
 title: Estándar de documentación
-description: "Estándar normativo de cómo los Deep Work Plans documentan estructura, tareas y avance: README, marcadores de estado y las dos tareas finales obligatorias."
+description: "Estándar normativo de cómo los Deep Work Plans documentan estructura, tareas y avance: README, marcadores de estado y las tres tareas finales obligatorias."
 order: 1
 lang: es
 section: Standard
@@ -44,9 +44,10 @@ Cada archivo de tarea DEBE llamarse `<n>.task_<slug>.md` y contener la anatomía
 
 Todos los encabezados DEBEN usar mayúscula inicial al estilo de oración. Los documentos DEBERÍAN evitar el lenguaje publicitario y los signos de exclamación.
 
-## Dos tareas finales obligatorias
+## Tres tareas finales obligatorias
 
-Todo plan DEBE terminar con dos tareas estándar:
+Todo plan DEBE terminar con tres tareas estándar:
 
-1. **Descubrimiento de habilidades y agentes**: identificar las habilidades y agentes reutilizables creados.
-2. **Informe ejecutivo**: un resumen de los resultados para las partes interesadas.
+1. **Revisión de seguridad**: auditar el conjunto completo de cambios del plan en busca de secretos, riesgos de inyección y nueva superficie de ataque, y verificar que `docs/SECURITY.md` siga reflejando la realidad. Un hallazgo crítico bloquea la finalización.
+2. **Descubrimiento de habilidades y agentes**: identificar las habilidades y agentes reutilizables creados.
+3. **Informe ejecutivo**: un resumen de los resultados para las partes interesadas.

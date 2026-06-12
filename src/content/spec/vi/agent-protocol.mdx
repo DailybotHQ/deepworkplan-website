@@ -53,7 +53,7 @@ Khi tạo một kế hoạch, agent PHẢI:
 
 - Phân rã mục tiêu thành các tác vụ tuần tự, rà soát được.
 - Viết mỗi tác vụ theo cấu trúc chín phần.
-- Kết thúc bằng hai tác vụ cuối bắt buộc.
+- Kết thúc bằng ba tác vụ cuối bắt buộc (Security Review, Skills & Agents Discovery, Executive Report).
 - Đặt câu hỏi làm rõ khi mục tiêu còn mập mờ.
 
 ## Thực thi
@@ -65,6 +65,7 @@ Trong quá trình thực thi, agent PHẢI:
 - Cập nhật `PROGRESS.md` sau mỗi tác vụ.
 - Đánh dấu trạng thái tác vụ một cách chính xác.
 - Đối với bất kỳ tác vụ nào thêm chức năng mới hoặc thay đổi hành vi, thêm hoặc cập nhật các test tự động cho hành vi đó và chạy các test cùng các bước kiểm tra lint/kiểm tra kiểu của repository trước khi đánh dấu tác vụ hoàn tất; không bao giờ xóa hay bỏ qua một test để ép cổng đạt.
+- Đối với bất kỳ tác vụ nào chạm tới xác thực, xử lý đầu vào, bí mật hay cấu hình, bề mặt mạng, hoặc các phụ thuộc, đáp ứng các kỳ vọng bảo mật được khai báo trong tiêu chí chấp nhận của nó và xác nhận diff không mang tư liệu bí mật nào trước khi commit.
 - Dừng lại và hỏi khi bị chặn thay vì phỏng đoán.
 
 ## Tinh chỉnh

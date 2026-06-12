@@ -108,7 +108,8 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
    เข้าไปแทนที่จะแทนที่มัน สร้าง symlink `CLAUDE.md → AGENTS.md` (อย่าทับ
    `CLAUDE.md` ที่มีอยู่โดยไม่ถาม)
 2. **`docs/`** เติมหมวดมาตรฐานด้วยเนื้อหาจริงที่เฉพาะกับ repo ได้แก่ `PRODUCT_SPEC.md` (เอกสารผลิตภัณฑ์/เหตุผลที่ไม่ใช่เชิงเทคนิค — จำเป็นสำหรับทุก repository รวมถึงไลบรารี), `ARCHITECTURE.md`,
-   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
+   (ไม่ข้ามเด็ดขาด — ทุก repository มีท่าทีด้านความปลอดภัย แม้ไม่มีความลับใด ๆ),
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md` พร้อม `PERFORMANCE.md` และดัชนี `docs/README.md`
    หาก docs มีอยู่แล้ว ให้ผนวกและขยายมัน — อย่าทำซ้ำ
 3. **เอกสารต่อโมดูล** เพิ่ม `README.md` (และโฟลเดอร์ย่อย `docs/` สำหรับโมดูลที่ซับซ้อน) ภายในแต่ละ
@@ -155,6 +156,10 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 - `/dwp-status` — รายงานความคืบหน้าโดยไม่ทำการเปลี่ยนแปลง
 - `/dwp-refine` — เพิ่ม ลบ หรือจัดลำดับงานใหม่ขณะรักษางานที่เสร็จแล้ว
 - `/dwp-resume` — สร้างสถานะขึ้นใหม่และดำเนินแผนที่ถูกขัดจังหวะต่อ
+
+ทุกแผนจบด้วยสามงานสุดท้ายที่บังคับ — **การทบทวนความปลอดภัย (Security Review)** ของการเปลี่ยนแปลง
+ของแผนเอง (คง `docs/SECURITY.md` ให้เป็นปัจจุบัน สิ่งที่พบในระดับวิกฤตจะปิดกั้นการเสร็จสิ้น)
+การค้นพบ Skills และ Agents และรายงานสรุปสำหรับผู้บริหาร
 
 ## 7. ตรวจสอบ
 

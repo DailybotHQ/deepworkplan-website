@@ -53,7 +53,7 @@ Beim Erstellen eines Plans MUSS der Agent:
 
 - Das Ziel in aufeinanderfolgende, prüfbare Aufgaben zerlegen.
 - Jede Aufgabe mit der neunteiligen Anatomie schreiben.
-- Mit den zwei verpflichtenden Abschlussaufgaben enden.
+- Mit den drei verpflichtenden Abschlussaufgaben enden (Security Review, Skills & Agents Discovery, Executive Report).
 - Bei einem mehrdeutigen Ziel klärende Fragen stellen.
 
 ## Ausführung
@@ -65,6 +65,7 @@ Während der Ausführung MUSS der Agent:
 - `PROGRESS.md` nach jeder Aufgabe aktualisieren.
 - Den Aufgabenstatus akkurat markieren.
 - Für jede Aufgabe, die neue Funktionalität hinzufügt oder Verhalten ändert, automatisierte Tests für dieses Verhalten hinzufügen oder aktualisieren und die Tests sowie die Lint-/Typprüfungen des Repositorys ausführen, bevor die Aufgabe als abgeschlossen markiert wird; niemals einen Test löschen oder überspringen, um das Gate zum Bestehen zu zwingen.
+- Für jede Aufgabe, die Authentifizierung, Eingabeverarbeitung, Geheimnisse oder Konfiguration, Netzwerkoberfläche oder Abhängigkeiten berührt, die in ihren Akzeptanzkriterien deklarierten Sicherheitserwartungen erfüllen und vor dem Committen bestätigen, dass der Diff kein Geheimnismaterial enthält.
 - Bei Blockaden anhalten und nachfragen, statt zu raten.
 
 ## Verfeinerung

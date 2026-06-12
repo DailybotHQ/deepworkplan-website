@@ -71,6 +71,16 @@ Wenn eine Aufgabe neue Kernfunktionalität hinzufügt oder bestehendes Verhalten
 
 Reine Dokumentations-, Konfigurations- oder Recherche-Aufgaben sind von der Erstellung von Tests befreit, MÜSSEN aber dennoch jenes Validierungs-Gate ausführen, das das Repository definiert. Die Tiefe des Testens ist proportional zur Größe der Änderung und zur Reife des Repositorys. Wo ein Repository überhaupt keine Test- oder Lint-Toolchain hat, DARF der Agent diese Disziplin NICHT stillschweigend überspringen — er stützt sich auf die während des Onboardings vorgeschlagene Toolchain (siehe [Konformität](/spec)).
 
+## Sicherheitsdisziplin
+
+Sicherheit ist erstklassig auf dieselbe Weise wie Tests und folgt demselben zweischichtigen Modell: Disziplin je Aufgabe, während die Arbeit geschieht, plus ein verpflichtendes Security-Review-Gate über den gesamten Änderungssatz am Ende. Wann immer eine Aufgabe Authentifizierung oder Autorisierung, die Eingabeverarbeitung, Secrets oder Konfiguration, die Netzwerk-, Datei- oder Shell-Oberfläche oder Abhängigkeiten berührt:
+
+- Ihre **Akzeptanzkriterien** MÜSSEN die Sicherheitserwartungen der Änderung benennen — Eingaben validiert und maskiert, kein geheimes Material in Code oder Fixtures, Authentifizierungsprüfungen erhalten oder gestärkt — in Übereinstimmung mit `docs/SECURITY.md`.
+- Jeder Commit MUSS vor dem Einfließen als frei von Secrets oder Anmeldedaten bestätigt werden, Test-Fixtures und Dokumentationsbeispiele eingeschlossen. Ein Secret in einem bereits gepushten Commit MUSS als geleakt behandelt und rotiert werden, nicht bloß entfernt.
+- Wo die sicherheitsrelevante Arbeit erheblich ist, SOLLTE eine eigene Härtungsaufgabe unmittelbar nach den Implementierungsaufgaben und vor der Aufgabe der umfassenden Tests platziert werden, damit Befunde behoben werden, bevor die Tests das Verhalten festschreiben, und jeder Befund zu einem Regressionsfall statt zu Nacharbeit wird.
+
+Diese Disziplin je Aufgabe ersetzt nicht die finale Aufgabe Security Review: Prüfungen je Aufgabe fangen Probleme in dem Commit ab, in dem sie entstehen, während das finale Gate den gesamten Plan auditiert — einschließlich der Test- und Dokumentationsaufgaben selbst. Jeder Plan endet daher mit drei verpflichtenden finalen Aufgaben — Security Review, dann Skills & Agents Discovery, dann der Executive Report — und ein kritischer Sicherheitsbefund blockiert den Abschluss, bis er behoben oder ausdrücklich akzeptiert ist.
+
 ## Aufgabenabschlussprotokoll
 
 Nach dem Bestehen der Validierung und vor dem Weitergehen zur nächsten Aufgabe MUSS der Agent der Reihe nach: (1) die Aufgabe in der Plan-README mit `[x]` markieren; (2) den Planstatuszähler erhöhen; (3) den Completion-&-Log-Abschnitt der Aufgabe ohne Platzhalterwerte ausfüllen; (4) einen 3–5-Punkte-Eintrag zu `PROGRESS.md` hinzufügen; (5) committen (wo der Plan committet) im Format `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) wo der Plan die Zustandsschicht trägt, `state.json` atomar neu schreiben — Aufgabe `completed`, Gate-Einträge, Ergebnis-Eintrag, Commit-Hash.

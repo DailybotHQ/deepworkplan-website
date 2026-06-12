@@ -114,7 +114,8 @@ methodology) instead of overwriting — and confirm with the user before replaci
    existing `CLAUDE.md` without asking).
 2. **`docs/`.** Fill the standard categories with real, repo-specific content: `PRODUCT_SPEC.md`
    (the non-technical product/why doc — required for every repo, libraries included), `ARCHITECTURE.md`,
-   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
+   (never skipped — every repository has a security posture, even with no secrets),
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, plus `PERFORMANCE.md` and a `docs/README.md` index.
    If docs already exist, integrate and extend them — do not duplicate.
 3. **Per-module docs.** Add a `README.md` (and a `docs/` subfolder for complex modules) inside each
@@ -162,6 +163,10 @@ Generate Deep Work Plans for any task and run them task by task:
 - `/dwp-status` — report progress without making changes.
 - `/dwp-refine` — add, remove, or reorder tasks while preserving completed work.
 - `/dwp-resume` — reconstruct state and continue an interrupted plan.
+
+Every plan ends with three mandatory final tasks — a **Security Review** of the plan's own
+changes (keeping `docs/SECURITY.md` current; a critical finding blocks completion), Skills &
+Agents Discovery, and the Executive Report.
 
 ## 7. Verify
 

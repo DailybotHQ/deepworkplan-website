@@ -12,7 +12,7 @@ Exibe o progresso do Deep Work Plan para uma equipe Dailybot. Um addon opcional 
 
 ## O que ele adiciona
 
-- Uma instalação opcional da skill de agente da Dailybot e/ou da CLI da Dailybot, por meio de seus próprios fluxos de consentimento.
+- Uma instalação opcional da skill de agente da Dailybot (atualmente 1.7.x, que também adiciona chat de equipe no Slack, Microsoft Teams, Discord e Google Chat) e/ou da CLI da Dailybot, por meio de seus próprios fluxos de consentimento.
 - Um relatório de progresso/marcos em modo best-effort integrado à execução do plano, de modo que a conclusão de um plano seja exibida para a equipe.
 - Um reforço determinístico opcional via hooks (skill de agente da Dailybot 1.6.0+, CLI 1.12.0+): hooks do harness commitados que detectam trabalho não reportado a partir de um registro local e lembram o agente ao fim do turno, para que o relatório continue autônomo mesmo em sessões longas sem supervisão, em que as instruções do prompt se diluem.
 

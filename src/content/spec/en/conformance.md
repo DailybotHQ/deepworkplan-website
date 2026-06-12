@@ -31,12 +31,13 @@ A Deep Work Plan in `.dwp/plans/` is well-formed when:
 
 1. Every task MUST declare an explicit **scope**, **acceptance criteria**, and at least one **validation gate** (a command or check that objectively passes or fails).
 2. Every task that adds new core functionality or changes product behavior MUST include automated test coverage for that behavior in its acceptance criteria, and MUST run the repository's tests together with its lint and type-check checks in its validation gate — not the build alone. Existing tests MUST stay green; a behavior change MUST update a test it breaks rather than delete or skip it. Pure-documentation, configuration, or research tasks are exempt from creating tests but still run the repository's gate.
-3. The plan MUST persist progress so that work survives interruption and can be resumed by a different agent.
-4. The plan MUST include the two mandatory final tasks — Skills & Agents Discovery and the Executive Report.
-5. Tasks SHOULD re-anchor to the plan's goal before executing, to prevent drift over a long horizon.
+3. Every task that touches authentication, input handling, secrets or configuration, network surface, or dependencies MUST carry the security expectations of that change in its acceptance criteria, and every commit MUST be free of secret material.
+4. The plan MUST persist progress so that work survives interruption and can be resumed by a different agent.
+5. The plan MUST include the three mandatory final tasks — Security Review, Skills & Agents Discovery, and the Executive Report. A critical security finding blocks completion until fixed or explicitly accepted.
+6. Tasks SHOULD re-anchor to the plan's goal before executing, to prevent drift over a long horizon.
 
 ## Verifying conformance
 
-Conformance SHOULD be verified mechanically rather than by inspection. Running `/dwp-verify` produces a pass/fail report against the criteria above: the presence and real-content of `AGENTS.md`, the `CLAUDE.md` resolution, the `docs/` categories, the `.agents/` catalog-versus-disk match, the `.dwp/` and `tmp/` gitignore status, and — for a plan — that every task carries acceptance criteria and a validation gate, with test coverage for behavior-changing tasks.
+Conformance SHOULD be verified mechanically rather than by inspection. Running `/dwp-verify` produces a pass/fail report against the criteria above: the presence and real-content of `AGENTS.md`, the `CLAUDE.md` resolution, the `docs/` categories, the `.agents/` catalog-versus-disk match, the `.dwp/` and `tmp/` gitignore status, and — for a plan — that every task carries acceptance criteria and a validation gate, with test coverage for behavior-changing tasks and the three mandatory final tasks present, the Security Review included.
 
 A repository SHOULD be re-verified after onboarding and after each completed plan, so that conformance is maintained rather than asserted once.

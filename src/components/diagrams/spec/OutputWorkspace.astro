@@ -23,6 +23,7 @@ const i18n = {
       root: 'gitignored · disposable',
       drafts: 'refined draft staging',
       results: 'reports',
+      review: 'security review',
       report: 'executive report',
     },
     caption:
@@ -36,6 +37,7 @@ const i18n = {
       root: 'ignorado por git · desechable',
       drafts: 'preparación del borrador refinado',
       results: 'informes',
+      review: 'revisión de seguridad',
       report: 'informe ejecutivo',
     },
     caption:
@@ -49,6 +51,7 @@ const i18n = {
       root: 'ignorado pelo git · descartável',
       drafts: 'preparação do rascunho refinado',
       results: 'relatórios',
+      review: 'revisão de segurança',
       report: 'relatório executivo',
     },
     caption:
@@ -62,6 +65,7 @@ const i18n = {
       root: '被 git 忽略 · 可丢弃',
       drafts: '精炼草稿暂存',
       results: '报告',
+      review: '安全审查',
       report: '执行摘要报告',
     },
     caption:
@@ -75,6 +79,7 @@ const i18n = {
       root: 'git 無視 ・ 破棄可',
       drafts: '洗練された草案のステージング',
       results: 'レポート',
+      review: 'セキュリティレビュー',
       report: 'エグゼクティブレポート',
     },
     caption:
@@ -88,6 +93,7 @@ const i18n = {
       root: 'von git ignoriert · verwerfbar',
       drafts: 'Staging des überarbeiteten Entwurfs',
       results: 'Berichte',
+      review: 'Sicherheitsüberprüfung',
       report: 'Management-Bericht',
     },
     caption:
@@ -101,6 +107,7 @@ const i18n = {
       root: 'ignoré par git · jetable',
       drafts: 'préparation du brouillon affiné',
       results: 'rapports',
+      review: 'revue de sécurité',
       report: 'rapport exécutif',
     },
     caption:
@@ -114,6 +121,7 @@ const i18n = {
       root: 'git 무시 · 폐기 가능',
       drafts: '다듬어진 초안 스테이징',
       results: '보고서',
+      review: '보안 검토',
       report: '경영 요약 보고서',
     },
     caption:
@@ -127,6 +135,7 @@ const i18n = {
       root: 'игнорируется git · одноразовое',
       drafts: 'подготовка уточнённого черновика',
       results: 'отчёты',
+      review: 'обзор безопасности',
       report: 'итоговый отчёт',
     },
     caption:
@@ -140,6 +149,7 @@ const i18n = {
       root: 'ignorato da git · usa e getta',
       drafts: 'staging della bozza rifinita',
       results: 'report',
+      review: 'revisione di sicurezza',
       report: 'report esecutivo',
     },
     caption:
@@ -153,6 +163,7 @@ const i18n = {
       root: 'git tarafından yok sayılır · atılabilir',
       drafts: 'işlenmiş taslağın hazırlanması',
       results: 'raporlar',
+      review: 'güvenlik incelemesi',
       report: 'yönetici raporu',
     },
     caption:
@@ -166,6 +177,7 @@ const i18n = {
       root: 'diabaikan git · sekali pakai',
       drafts: 'penyiapan draf yang telah disempurnakan',
       results: 'laporan',
+      review: 'tinjauan keamanan',
       report: 'laporan eksekutif',
     },
     caption:
@@ -179,6 +191,7 @@ const i18n = {
       root: 'bị git bỏ qua · có thể loại bỏ',
       drafts: 'khu vực dàn dựng cho bản nháp đã tinh chỉnh',
       results: 'báo cáo',
+      review: 'đánh giá bảo mật',
       report: 'báo cáo điều hành',
     },
     caption:
@@ -192,6 +205,7 @@ const i18n = {
       root: 'git द्वारा अनदेखा · हटाने योग्य',
       drafts: 'परिष्कृत मसौदे की स्टेजिंग',
       results: 'रिपोर्ट',
+      review: 'सुरक्षा समीक्षा',
       report: 'कार्यकारी रिपोर्ट',
     },
     caption:
@@ -205,6 +219,7 @@ const i18n = {
       root: 'ignorowane przez git · jednorazowe',
       drafts: 'przygotowanie dopracowanego szkicu',
       results: 'raporty',
+      review: 'przegląd bezpieczeństwa',
       report: 'raport wykonawczy',
     },
     caption:
@@ -218,6 +233,7 @@ const i18n = {
       root: 'ігнорується git · одноразове',
       drafts: 'підготовка уточненого чернеткового варіанта',
       results: 'звіти',
+      review: 'огляд безпеки',
       report: 'підсумковий звіт',
     },
     caption:
@@ -231,6 +247,7 @@ const i18n = {
       root: 'git ละเว้น · ทิ้งได้',
       drafts: 'การจัดเตรียมร่างที่ขัดเกลาแล้ว',
       results: 'รายงาน',
+      review: 'การตรวจสอบความปลอดภัย',
       report: 'รายงานผู้บริหาร',
     },
     caption:
@@ -249,6 +266,7 @@ const rows = [
   { depth: 3, path: 'PROGRESS.md', ann: '' },
   { depth: 3, path: '<n>.task_<slug>.md', ann: '' },
   { depth: 3, path: 'analysis_results/', ann: t.ann.results },
+  { depth: 4, path: 'SECURITY_REVIEW.md', ann: t.ann.review },
   { depth: 4, path: 'EXECUTIVE_REPORT.md', ann: t.ann.report },
 ];
 ---

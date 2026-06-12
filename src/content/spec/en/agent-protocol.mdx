@@ -53,7 +53,7 @@ When creating a plan, the agent MUST:
 
 - Decompose the goal into sequential, reviewable tasks.
 - Write each task with the nine-section anatomy.
-- End with the two mandatory final tasks.
+- End with the three mandatory final tasks (Security Review, Skills & Agents Discovery, Executive Report).
 - Ask clarifying questions when the goal is ambiguous.
 
 ## Execution
@@ -65,6 +65,7 @@ During execution, the agent MUST:
 - Update `PROGRESS.md` after each task.
 - Mark task status accurately.
 - For any task that adds new functionality or changes behavior, add or update automated tests for that behavior and run the repository's tests and lint/type-check checks before marking the task complete; never delete or skip a test to force the gate to pass.
+- For any task that touches authentication, input handling, secrets or configuration, network surface, or dependencies, meet the security expectations declared in its acceptance criteria and confirm the diff carries no secret material before committing.
 - Stop and ask when blocked rather than guessing.
 
 ## Refinement

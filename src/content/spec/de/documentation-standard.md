@@ -1,6 +1,6 @@
 ---
 title: Dokumentationsstandard
-description: "Normativer Standard dafür, wie Deep Work Plans ihre Struktur, Aufgaben und Fortschritte dokumentieren: README-Regeln, Statusmarkierungen und die zwei verpflichtenden Abschlussaufgaben."
+description: "Normativer Standard dafür, wie Deep Work Plans ihre Struktur, Aufgaben und Fortschritte dokumentieren: README-Regeln, Statusmarkierungen und die drei verpflichtenden Abschlussaufgaben."
 order: 1
 lang: de
 section: Standard
@@ -44,9 +44,10 @@ Jede Aufgabendatei MUSS den Namen `<n>.task_<slug>.md` tragen und die neunteilig
 
 Alle Überschriften MÜSSEN Satzschreibweise (sentence case) verwenden. Dokumente SOLLTEN Marketing-Sprache und Ausrufezeichen vermeiden.
 
-## Zwei verpflichtende Abschlussaufgaben
+## Drei verpflichtende Abschlussaufgaben
 
-Jeder Plan MUSS mit zwei Standardaufgaben enden:
+Jeder Plan MUSS mit drei Standardaufgaben enden:
 
-1. **Skills & Agents Discovery** — die erstellten wiederverwendbaren Skills und Agenten identifizieren.
-2. **Executive Report** — eine Zusammenfassung der Ergebnisse für Stakeholder.
+1. **Security Review** — den vollständigen Änderungsumfang des Plans auf Geheimnisse, Injection-Risiken und neue Angriffsfläche prüfen und verifizieren, dass `docs/SECURITY.md` weiterhin die Realität widerspiegelt. Ein kritischer Befund blockiert den Abschluss.
+2. **Skills & Agents Discovery** — die erstellten wiederverwendbaren Skills und Agenten identifizieren.
+3. **Executive Report** — eine Zusammenfassung der Ergebnisse für Stakeholder.
