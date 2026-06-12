@@ -19,7 +19,7 @@ Metodoloji beş bölümde açıklanır:
 1. **Manifesto** — bir Deep Work Plan’in ne olduğu ve yapılandırılmış yürütmenin neden önemli olduğu.
 2. **Çekirdek döngü** — her görevi yürüten plan-yürüt-doğrula döngüsü.
 3. **Şablonlar** — ajanların ve insanların paylaştığı plan ve görev yapıları.
-4. **Skill’ler ve ajanlar** — komutların ve ajan rollerinin nasıl bir araya geldiği, yaşayan kit (bir deponun author alt skill’i aracılığıyla kendi skill’lerini nasıl büyüttüğü) ve dependency-upgrade ile frontend design-system eklentisi gibi tercihe dayalı eklentiler.
+4. **Skill’ler ve ajanlar** — komutların ve ajan rollerinin nasıl bir araya geldiği, yaşayan kit (bir deponun author alt skill’i aracılığıyla kendi skill’lerini nasıl büyüttüğü) ve dependency-upgrade ile kullanıcıya dönük herhangi bir arayüz yüzeyi (görsel UI, CLI çıktısı veya konuşma tabanlı) için design-system eklentisi gibi tercihe dayalı eklentiler.
 5. **Arketipler** — metodolojiyi bireysel depolara ve orkestratör merkezlerine uyarlamak.
 
 - [Metodolojiyi okuyun](/methodology)

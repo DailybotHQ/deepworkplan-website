@@ -150,9 +150,10 @@ pienamente conforme con **zero** addon — non installarli mai automaticamente.
   nessuno glielo chieda. La metodologia di base ha zero dipendenze da Dailybot.
 - **Dependency upgrade** — aggiornamenti indipendenti dal package manager, a lotti, validati e annullabili. Quando
   accettato, installa il comando `/lib-upgrade`.
-- **Design system** — un `docs/DESIGN.md` rivolto agli agenti, ragionato a partire dai design token e
-  dagli stili dei componenti reali del repository, così qualsiasi agente genera UI coerente con il design
-  system proprio del repo.
+- **Design system** — un `docs/DESIGN.md` rivolto agli agenti, ragionato a partire dalla fonte di design
+  reale del repository, che copre le sue superfici di interfaccia rilevate come profili — UI visuale,
+  output CLI stilizzato e messaggistica conversazionale — così qualsiasi agente genera output di
+  interfaccia coerente con le convenzioni proprie del repo.
 
 ## 6. Pianifica ed esegui
 

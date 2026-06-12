@@ -132,7 +132,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
   核心方法论对 Dailybot 零依赖。
 - **Dependency upgrade** —— 包管理器无关、分批次、经验证、可回退的升级。被
   采纳时，它会安装 `/lib-upgrade` 命令。
-- **Design system** —— 一份面向代理的 `docs/DESIGN.md`，基于仓库真实的设计令牌与组件样式推理而成，使任何代理生成的 UI 都与仓库自身的设计系统保持一致。
+- **Design system** —— 一份面向代理的 `docs/DESIGN.md`，基于仓库实际的设计来源推理而成，以配置档的形式涵盖其检测到的各界面表面——可视化 UI、带样式的 CLI 输出与会话式消息——使任何代理生成的界面输出都与仓库自身的约定保持一致。
 
 ## 6. 规划并执行
 

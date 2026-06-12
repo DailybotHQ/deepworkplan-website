@@ -152,7 +152,9 @@ auto-install them.
 - **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades. When
   accepted, it installs the `/lib-upgrade` command.
 - **Design system** — an agent-facing `docs/DESIGN.md` reasoned from the repository's actual design
-  tokens and component styles, so any agent generates UI consistent with the repo's own design system.
+  source, covering its detected interface surfaces as profiles — visual UI, styled CLI output, and
+  conversational messaging — so any agent generates interface output consistent with the repo's own
+  conventions.
 
 ## 6. Plan and execute
 

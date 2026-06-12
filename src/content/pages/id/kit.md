@@ -52,7 +52,7 @@ Kemampuan opsional yang dapat ditambahkan alur onboard ke sebuah repo — tidak 
 - **Devcontainer** — kontainer pengembangan yang terisolasi dan dapat direproduksi dengan autentikasi AI-CLI yang persisten.
 - **Dailybot** — pelaporan kemajuan dan milestone secara best-effort untuk tim yang memakai Dailybot.
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan.
-- **Sistem desain** — sebuah `DESIGN.md` bercakupan frontend (di `docs/DESIGN.md`, dirujuk dari `AGENTS.md`) yang dinalar dari token desain nyata repo, sehingga agent menghasilkan UI yang sesuai brand; aktif secara default ketika sebuah sistem desain terdeteksi.
+- **Sistem desain** — sebuah `DESIGN.md` bercakupan antarmuka (di `docs/DESIGN.md`, dirujuk dari `AGENTS.md`) yang dinalar dari sumber desain nyata repo, dengan profil untuk UI visual, output CLI yang bergaya, dan perpesanan percakapan, sehingga agent menghasilkan keluaran antarmuka yang sesuai brand; profil visual aktif secara default ketika sebuah sistem desain terdeteksi, profil CLI dan percakapan direkomendasikan ketika terdeteksi dan selalu ditanyakan.
 
 ### Contoh
 

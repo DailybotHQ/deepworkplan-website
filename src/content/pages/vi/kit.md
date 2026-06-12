@@ -51,7 +51,7 @@ Các năng lực tùy chọn mà luồng onboard có thể bổ sung vào một 
 - **Devcontainer** — một dev container tái lập được, cô lập, với xác thực AI-CLI bền vững.
 - **Dailybot** — báo cáo tiến độ và cột mốc theo nỗ lực tối đa cho các đội đang dùng Dailybot.
 - **Dependency upgrade** — nâng cấp phụ thuộc độc lập với trình quản lý gói, theo lô, được kiểm chứng, hoàn nguyên được.
-- **Design system** — một `DESIGN.md` giới hạn ở frontend (tại `docs/DESIGN.md`, được tham chiếu từ `AGENTS.md`) được suy luận từ các token thiết kế thực của repo, để agent sinh ra UI đúng thương hiệu; bật mặc định khi một hệ thống thiết kế được phát hiện.
+- **Design system** — một `DESIGN.md` giới hạn ở bề mặt giao diện (tại `docs/DESIGN.md`, được tham chiếu từ `AGENTS.md`) được suy luận từ nguồn thiết kế thực của repo, với các profile cho UI trực quan, đầu ra CLI có phong cách và nhắn tin hội thoại, để agent sinh ra đầu ra giao diện đúng thương hiệu; profile trực quan bật mặc định khi một hệ thống thiết kế được phát hiện, các profile CLI và hội thoại được khuyến nghị khi được phát hiện và luôn được hỏi.
 
 ### Ví dụ
 

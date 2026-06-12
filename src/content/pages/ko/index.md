@@ -34,7 +34,7 @@ Deep Work Plan은 **스펙 주도 개발**로 답합니다. 계획이 견고한 
 - 실제 스택과 명령으로부터 추론된, 리포지토리 루트의 AGENTS.md.
 - 분류된 `docs/`와 모듈별 문서.
 - `.claude`에서 `.agents`로의 심링크가 있는 `.agents/` 디렉터리(스킬, 에이전트, 명령).
-- 모든 에이전트를 위해 한 번 설치되는 Deep Work Plan 스킬 — author 하위 스킬을 포함하여 리포지토리가 자체 스킬, 에이전트, 명령을 키울 수 있고, dependency-upgrade 같은 선택형 애드온과 프런트엔드 design-system 애드온도 있습니다.
+- 모든 에이전트를 위해 한 번 설치되는 Deep Work Plan 스킬 — author 하위 스킬을 포함하여 리포지토리가 자체 스킬, 에이전트, 명령을 키울 수 있고, dependency-upgrade 같은 선택형 애드온과 어떤 사용자 대면 인터페이스 표면에든 적용되는 design-system 애드온도 있습니다.
 - gitignore된 `.dwp/` 폴더의 장시간, 재개 가능한 계획.
 
 ---

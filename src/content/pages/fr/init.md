@@ -151,8 +151,10 @@ pleinement conforme avec **zéro** addon — ne les installez jamais automatique
   La méthodologie de base n’a aucune dépendance à Dailybot.
 - **Mise à jour des dépendances** — des mises à jour indépendantes du gestionnaire de paquets, par lots, validées et réversibles. Lorsqu’elle est
   acceptée, elle installe la commande `/lib-upgrade`.
-- **Design system** — un `docs/DESIGN.md` destiné aux agents, raisonné à partir des véritables design tokens
-  et styles de composants du dépôt, pour que tout agent génère une UI cohérente avec le design system propre au dépôt.
+- **Design system** — un `docs/DESIGN.md` destiné aux agents, raisonné à partir de la véritable source de
+  conception du dépôt, couvrant ses surfaces d’interface détectées sous forme de profils — UI visuelle,
+  sortie CLI stylée et messagerie conversationnelle — pour que tout agent génère une sortie d’interface
+  cohérente avec les conventions propres au dépôt.
 
 ## 6. Planifier et exécuter
 

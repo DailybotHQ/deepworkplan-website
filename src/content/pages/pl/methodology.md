@@ -19,7 +19,7 @@ Metodyka jest wyjaśniona w pięciu rozdziałach:
 1. **Manifest** — czym jest Deep Work Plan i dlaczego ustrukturyzowane wykonanie ma znaczenie.
 2. **Podstawowa pętla** — cykl plan-wykonanie-weryfikacja napędzający każde zadanie.
 3. **Szablony** — struktury planu i zadań, które łączą agentów i ludzi.
-4. **Skille i agenci** — jak komendy i role agentów współgrają ze sobą, żywy kit (jak repozytorium rozwija własne skille za pomocą sub-skilla author) oraz opcjonalne dodatki, takie jak dependency-upgrade i frontendowy dodatek design-system.
+4. **Skille i agenci** — jak komendy i role agentów współgrają ze sobą, żywy kit (jak repozytorium rozwija własne skille za pomocą sub-skilla author) oraz opcjonalne dodatki, takie jak dependency-upgrade i dodatek design-system dla dowolnej powierzchni interfejsu skierowanej do użytkownika (wizualny UI, wyjście CLI lub konwersacyjna).
 5. **Archetypy** — dostosowanie metodyki do pojedynczych repozytoriów i centrów orkiestracji.
 
 - [Przeczytaj metodykę](/methodology)
