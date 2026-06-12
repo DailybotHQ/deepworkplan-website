@@ -71,6 +71,16 @@ Quando uma tarefa adiciona nova funcionalidade central ou altera de forma materi
 
 Tarefas puramente de documentação, configuração ou pesquisa estão isentas de criar testes, mas ainda DEVEM (MUST) executar qualquer validation gate que o repositório defina. A profundidade dos testes é proporcional ao tamanho da mudança e à maturidade do repositório. Onde um repositório não tem nenhuma cadeia de ferramentas de teste ou lint, o agente NÃO DEVE (MUST NOT) pular silenciosamente essa disciplina — ele depende da cadeia de ferramentas proposta durante o onboarding (veja [Conformidade](/spec)).
 
+## Disciplina de segurança
+
+A segurança é de primeira classe da mesma forma que os testes, e segue o mesmo modelo de duas camadas: disciplina por tarefa enquanto o trabalho acontece, mais um gate obrigatório de Security Review sobre todo o conjunto de alterações ao final. Sempre que uma tarefa toca autenticação ou autorização, o tratamento de entradas, secrets ou configuração, a superfície de rede, de arquivos ou de shell, ou dependências:
+
+- Seus **critérios de aceitação** DEVEM (MUST) declarar as expectativas de segurança da mudança — entrada validada e escapada, sem material secreto no código ou nos fixtures, verificações de autenticação preservadas ou reforçadas —, de forma coerente com `docs/SECURITY.md`.
+- Todo commit DEVE (MUST) ser confirmado livre de secrets ou credenciais antes de ser incorporado, incluindo fixtures de teste e exemplos de documentação. Um secret em um commit já enviado DEVE (MUST) ser tratado como vazado e rotacionado, não apenas removido.
+- Onde o trabalho sensível à segurança for substancial, uma tarefa de hardening dedicada DEVERIA (SHOULD) ser colocada imediatamente após as tarefas de implementação e antes da tarefa de testes abrangentes, de modo que as descobertas sejam corrigidas antes que os testes codifiquem o comportamento e cada descoberta se torne um caso de regressão em vez de retrabalho.
+
+Essa disciplina por tarefa não substitui a tarefa final de Security Review: as verificações por tarefa capturam os problemas no commit onde nascem, enquanto o gate final audita todo o plano — incluindo as próprias tarefas de testes e documentação. Por isso, todo plano termina com três tarefas finais obrigatórias — Security Review, depois Skills & Agents Discovery, depois o Executive Report — e uma descoberta de segurança crítica bloqueia a conclusão até que seja corrigida ou explicitamente aceita.
+
 ## Protocolo de conclusão de tarefa
 
 Após passar pela validação e antes de avançar para a próxima tarefa, o agente DEVE (MUST), em ordem: (1) marcar a tarefa como `[x]` no README do plano; (2) incrementar o contador de status do plano; (3) preencher o Completion & Log da tarefa sem valores de placeholder; (4) adicionar uma entrada de 3 a 5 itens ao `PROGRESS.md`; (5) fazer commit (onde o plano faz commits) com o formato `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) onde o plano carrega a camada de estado, reescrever o `state.json` atomicamente — tarefa `completed`, registros de gate, registro de resultado, hash de commit.

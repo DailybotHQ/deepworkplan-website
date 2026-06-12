@@ -12,7 +12,7 @@ order: 2
 
 ## Addon này bổ sung gì
 
-- Tùy chọn cài đặt skill agent của Dailybot và/hoặc Dailybot CLI, thông qua các luồng xin phép riêng của chúng.
+- Tùy chọn cài đặt skill agent của Dailybot (hiện tại 1.7.x, cũng bổ sung trò chuyện nhóm trên Slack, Microsoft Teams, Discord và Google Chat) và/hoặc Dailybot CLI, thông qua các luồng xin phép riêng của chúng.
 - Một báo cáo tiến độ/cột mốc ở mức nỗ-lực-tốt-nhất được gắn vào quá trình thực thi kế hoạch, để khi hoàn thành một kế hoạch, kết quả hiển thị tới team.
 - Một lớp hook xác định tùy chọn (skill agent của Dailybot 1.6.0+, CLI 1.12.0+): các hook của harness được commit phát hiện công việc chưa báo cáo từ một sổ cái cục bộ và nhắc agent ở cuối lượt, để việc báo cáo vẫn tự hành ngay cả trong các phiên dài không giám sát, nơi chỉ dẫn trong prompt phai dần.
 

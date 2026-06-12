@@ -1,6 +1,6 @@
 ---
 title: Padrão de documentação
-description: "Padrão normativo de como os Deep Work Plans documentam sua estrutura, tarefas e progresso: regras de README, marcadores de status e as duas tarefas finais obrigatórias."
+description: "Padrão normativo de como os Deep Work Plans documentam sua estrutura, tarefas e progresso: regras de README, marcadores de status e as três tarefas finais obrigatórias."
 order: 1
 lang: pt
 section: Standard
@@ -44,9 +44,10 @@ O `PROGRESS.md` é um registro de execução somente de adição. Cada entrada D
 
 Todos os títulos DEVEM (MUST) usar sentence case. Os documentos DEVERIAM (SHOULD) evitar linguagem de marketing e pontos de exclamação.
 
-## Duas tarefas finais obrigatórias
+## Três tarefas finais obrigatórias
 
-Todo plano DEVE (MUST) terminar com duas tarefas padrão:
+Todo plano DEVE (MUST) terminar com três tarefas padrão:
 
-1. **Skills & Agents Discovery** — identificar as skills e agents reutilizáveis criados.
-2. **Executive Report** — um resumo dos resultados para as partes interessadas.
+1. **Security Review** — auditar o conjunto completo de mudanças do plano em busca de segredos, riscos de injeção e nova superfície de ataque, e verificar que o `docs/SECURITY.md` ainda reflete a realidade. Um achado crítico bloqueia a conclusão.
+2. **Skills & Agents Discovery** — identificar as skills e agents reutilizáveis criados.
+3. **Executive Report** — um resumo dos resultados para as partes interessadas.

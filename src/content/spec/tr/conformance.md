@@ -31,12 +31,13 @@ Bir depo, **sıfır eklentiyle tamamen uyumludur**. Eklentiler (devcontainer, Da
 
 1. Her görev, açık bir **kapsam**, **kabul kriterleri** ve en az bir **doğrulama kapısı** (nesnel olarak geçen veya kalan bir komut ya da denetim) bildirMELİDİR.
 2. Yeni çekirdek işlevsellik ekleyen veya ürün davranışını değiştiren her görev, kabul kriterlerinde o davranış için otomatik test kapsamını İÇERMELİ ve doğrulama kapısında deponun testlerini lint ve tür denetimi denetimleriyle birlikte çalıştırMALIDIR — yalnızca derlemeyi değil. Mevcut testler yeşil kalMALIDIR; bir davranış değişikliği, bozduğu bir testi silmek veya atlamak yerine güncelleMELİDİR. Yalnızca-dokümantasyon, yapılandırma veya araştırma görevleri test oluşturmaktan muaftır ancak yine de deponun kapısını çalıştırır.
-3. Plan, işin kesintiyi atlatması ve farklı bir ajan tarafından kaldığı yerden sürdürülebilmesi için ilerlemeyi kalıcı kılMALIDIR.
-4. Plan, iki zorunlu son görevi — Skills & Agents Discovery ve Executive Report — İÇERMELİDİR.
-5. Görevler, uzun bir ufukta sapmayı önlemek için yürütmeden önce planın hedefine yeniden bağlanMALIDIR.
+3. Kimlik doğrulamaya, girdi işlemeye, sırlara veya yapılandırmaya, ağ yüzeyine ya da bağımlılıklara dokunan her görev, o değişikliğin güvenlik beklentilerini kabul kriterlerinde taşıMALIDIR ve her commit, sır niteliğindeki içerikten arınmış olMALIDIR.
+4. Plan, işin kesintiyi atlatması ve farklı bir ajan tarafından kaldığı yerden sürdürülebilmesi için ilerlemeyi kalıcı kılMALIDIR.
+5. Plan, üç zorunlu son görevi — Security Review, Skills & Agents Discovery ve Executive Report — İÇERMELİDİR. Kritik bir güvenlik bulgusu, düzeltilene veya açıkça kabul edilene kadar tamamlanmayı engeller.
+6. Görevler, uzun bir ufukta sapmayı önlemek için yürütmeden önce planın hedefine yeniden bağlanMALIDIR.
 
 ## Uyumluluğu doğrulama
 
-Uyumluluk, inceleme yoluyla değil, mekanik olarak doğrulanMALIDIR. `/dwp-verify` çalıştırmak, yukarıdaki ölçütlere karşı bir geçti/kaldı raporu üretir: `AGENTS.md`’nin varlığı ve gerçek içeriği, `CLAUDE.md` çözümlemesi, `docs/` kategorileri, `.agents/` katalog-ile-disk eşleşmesi, `.dwp/` ve `tmp/` gitignore durumu ve — bir plan için — her görevin kabul kriterleri ile bir doğrulama kapısı taşıdığı, davranış değiştiren görevler için test kapsamıyla birlikte.
+Uyumluluk, inceleme yoluyla değil, mekanik olarak doğrulanMALIDIR. `/dwp-verify` çalıştırmak, yukarıdaki ölçütlere karşı bir geçti/kaldı raporu üretir: `AGENTS.md`’nin varlığı ve gerçek içeriği, `CLAUDE.md` çözümlemesi, `docs/` kategorileri, `.agents/` katalog-ile-disk eşleşmesi, `.dwp/` ve `tmp/` gitignore durumu ve — bir plan için — her görevin kabul kriterleri ile bir doğrulama kapısı taşıdığı, davranış değiştiren görevler için test kapsamıyla ve üç zorunlu son görevin — Security Review dahil — mevcut olmasıyla birlikte.
 
 Bir depo, uyumluluğun bir kez iddia edilmek yerine sürdürülmesi için kuruluma almadan sonra ve tamamlanan her plandan sonra yeniden doğrulanMALIDIR.

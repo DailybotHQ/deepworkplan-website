@@ -12,7 +12,7 @@ Deep Work Plan ilerlemesini bir Dailybot ekibine taşıyın. Zaten Dailybot kull
 
 ## Neler ekler
 
-- Dailybot ajan skill’inin ve/veya Dailybot CLI’nın, kendi onay akışları aracılığıyla isteğe bağlı kurulumu.
+- Dailybot ajan skill’inin (şu anda 1.7.x; ayrıca Slack, Microsoft Teams, Discord ve Google Chat genelinde takım sohbeti ekler) ve/veya Dailybot CLI’nın, kendi onay akışları aracılığıyla isteğe bağlı kurulumu.
 - Plan yürütmesine bağlanan, en iyi çabayla çalışan bir ilerleme/dönüm noktası raporu; böylece bir planın tamamlanması ekibe yansır.
 - İsteğe bağlı deterministik kanca katmanı (Dailybot ajan skill’i 1.6.0+, CLI 1.12.0+): commit edilmiş harness kancaları, yerel bir defterden raporlanmamış işi tespit eder ve tur sonunda ajana hatırlatır; böylece prompt talimatlarının soluklaştığı uzun, gözetimsiz oturumlarda bile raporlama otonom kalır.
 

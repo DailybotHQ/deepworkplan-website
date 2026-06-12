@@ -12,7 +12,7 @@ Tampilkan progres Deep Work Plan ke tim Dailybot. Addon opsional untuk tim yang 
 
 ## Yang ditambahkan
 
-- Instalasi opsional skill agent Dailybot dan/atau CLI Dailybot, melalui alur consent masing-masing.
+- Instalasi opsional skill agent Dailybot (saat ini 1.7.x, yang juga menambahkan chat tim di Slack, Microsoft Teams, Discord, dan Google Chat) dan/atau CLI Dailybot, melalui alur consent masing-masing.
 - Laporan progres/milestone best-effort yang disambungkan ke eksekusi rencana, sehingga penyelesaian sebuah rencana terlihat oleh tim.
 - Lapisan hook deterministik opsional (skill agent Dailybot 1.6.0+, CLI 1.12.0+): hook harness yang di-commit mendeteksi pekerjaan yang belum dilaporkan dari buku besar lokal dan mengingatkan agent di akhir giliran, sehingga pelaporan tetap otonom bahkan dalam sesi panjang tanpa pengawasan ketika instruksi prompt memudar.
 

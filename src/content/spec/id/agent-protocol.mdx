@@ -53,7 +53,7 @@ Saat membuat sebuah rencana, agent MUST:
 
 - Menguraikan tujuan menjadi tugas-tugas berurutan yang dapat ditinjau.
 - Menulis setiap tugas dengan anatomi sembilan bagian.
-- Mengakhiri dengan dua tugas akhir wajib.
+- Mengakhiri dengan tiga tugas akhir wajib (Security Review, Skills & Agents Discovery, Executive Report).
 - Mengajukan pertanyaan klarifikasi ketika tujuannya ambigu.
 
 ## Eksekusi
@@ -65,6 +65,7 @@ Selama eksekusi, agent MUST:
 - Memperbarui `PROGRESS.md` setelah setiap tugas.
 - Menandai status tugas secara akurat.
 - Untuk setiap tugas yang menambahkan fungsionalitas baru atau mengubah perilaku, menambahkan atau memperbarui test otomatis untuk perilaku itu dan menjalankan test repositori serta pemeriksaan lint/type-check sebelum menandai tugas selesai; tidak pernah menghapus atau melewati sebuah test untuk memaksa gate lulus.
+- Untuk setiap tugas yang menyentuh autentikasi, penanganan input, secret atau konfigurasi, permukaan jaringan, atau dependensi, memenuhi ekspektasi keamanan yang dideklarasikan dalam acceptance criteria-nya dan memastikan diff tidak membawa materi secret sebelum melakukan commit.
 - Berhenti dan bertanya saat terhambat alih-alih menebak.
 
 ## Penyempurnaan

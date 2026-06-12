@@ -71,6 +71,16 @@ Ketika sebuah tugas menambahkan fungsionalitas inti baru atau secara material me
 
 Tugas dokumentasi-murni, konfigurasi, atau riset dikecualikan dari pembuatan test tetapi tetap MUST menjalankan validation gate apa pun yang didefinisikan repositori. Kedalaman pengujian sebanding dengan ukuran perubahan dan kematangan repositori. Di mana sebuah repositori sama sekali tidak memiliki toolchain test atau lint, agent MUST NOT diam-diam melewati disiplin ini — ia bersandar pada toolchain yang diusulkan selama onboarding (lihat [Conformance](/spec)).
 
+## Disiplin keamanan
+
+Keamanan bersifat kelas satu dengan cara yang sama seperti test, dan ia mengikuti model dua lapis yang sama: disiplin per-tugas selama pekerjaan berlangsung, ditambah gate Security Review wajib atas seluruh kumpulan perubahan di akhir. Setiap kali sebuah tugas menyentuh autentikasi atau otorisasi, penanganan input, secrets atau konfigurasi, permukaan jaringan, berkas, atau shell, atau dependensi:
+
+- **Acceptance criteria**-nya MUST menyatakan ekspektasi keamanan dari perubahan tersebut — input divalidasi dan di-escape, tidak ada material rahasia di dalam kode atau fixture, pemeriksaan auth dipertahankan atau diperkuat — konsisten dengan `docs/SECURITY.md`.
+- Setiap commit MUST dipastikan bebas dari secrets atau kredensial sebelum ia mendarat, termasuk fixture test dan contoh dokumentasi. Sebuah secret dalam commit yang telah didorong MUST diperlakukan sebagai bocor dan dirotasi, bukan sekadar dihapus.
+- Di mana pekerjaan yang sensitif terhadap keamanan bersifat substansial, sebuah tugas hardening khusus SHOULD ditempatkan tepat setelah tugas-tugas implementasi dan sebelum tugas test komprehensif, sehingga temuan diperbaiki sebelum test mengodekan perilaku tersebut dan setiap temuan menjadi kasus regresi alih-alih pengerjaan ulang.
+
+Disiplin per-tugas ini tidak menggantikan tugas akhir Security Review: pemeriksaan per-tugas menangkap masalah di commit tempat masalah itu lahir, sementara gate akhir mengaudit seluruh rencana — termasuk tugas test dan dokumentasi itu sendiri. Oleh karena itu setiap rencana berakhir dengan tiga tugas akhir wajib — Security Review, lalu Skills & Agents Discovery, lalu Executive Report — dan sebuah temuan keamanan kritis memblokir penyelesaian sampai ia diperbaiki atau diterima secara eksplisit.
+
 ## Protokol penyelesaian tugas
 
 Setelah melewati validasi dan sebelum beralih ke tugas berikutnya, agent MUST, secara berurutan: (1) menandai tugas `[x]` di README rencana; (2) menambah hitungan status rencana; (3) mengisi Completion & Log tugas tanpa nilai placeholder; (4) menambahkan entri 3–5 poin di `PROGRESS.md`; (5) melakukan commit (di mana rencana melakukan commit) dengan format `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) di mana rencana membawa lapisan status, menulis ulang `state.json` secara atomik — tugas `completed`, catatan gate, catatan outcome, hash commit.

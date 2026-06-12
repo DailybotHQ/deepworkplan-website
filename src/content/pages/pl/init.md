@@ -109,7 +109,8 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
    z nim, zamiast go zastępować. Utwórz dowiązanie `CLAUDE.md → AGENTS.md` (nie nadpisuj
    istniejącego `CLAUDE.md` bez pytania).
 2. **`docs/`.** Wypełnij standardowe kategorie rzeczywistą, specyficzną dla repozytorium treścią: `PRODUCT_SPEC.md` (nietech­niczny dokument produktu/dlaczego — obowiązkowy dla każdego repozytorium, w tym bibliotek), `ARCHITECTURE.md`,
-   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
+   (nigdy nie pomijany — każde repozytorium ma swoją posturę bezpieczeństwa, nawet bez sekretów),
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, a także `PERFORMANCE.md` i indeks `docs/README.md`.
    Jeśli dokumentacja już istnieje, zintegruj ją i rozszerz — nie duplikuj.
 3. **Dokumentacja poszczególnych modułów.** Dodaj `README.md` (oraz podfolder `docs/` dla złożonych modułów) wewnątrz każdego
@@ -157,6 +158,10 @@ Generuj Deep Work Plany dla dowolnego zadania i uruchamiaj je zadanie po zadaniu
 - `/dwp-status` — zaraportuj postęp bez wprowadzania zmian.
 - `/dwp-refine` — dodaj, usuń lub uporządkuj zadania, zachowując ukończoną pracę.
 - `/dwp-resume` — odtwórz stan i kontynuuj przerwany plan.
+
+Każdy plan kończy się trzema obowiązkowymi zadaniami końcowymi — **Security Review**, czyli
+przeglądem bezpieczeństwa własnych zmian planu (z utrzymywaniem `docs/SECURITY.md` w aktualności;
+krytyczne znalezisko blokuje ukończenie), Skills & Agents Discovery oraz Executive Report.
 
 ## 7. Zweryfikuj
 

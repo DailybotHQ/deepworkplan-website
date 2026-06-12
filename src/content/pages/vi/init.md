@@ -112,7 +112,8 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
    vào nó thay vì thay thế nó. Tạo symlink `CLAUDE.md → AGENTS.md` (đừng ghi đè một
    `CLAUDE.md` hiện có mà không hỏi).
 2. **`docs/`.** Lấp đầy các hạng mục chuẩn bằng nội dung thật, riêng cho repo: `PRODUCT_SPEC.md` (tài liệu sản phẩm/lý do phi kỹ thuật — bắt buộc cho mọi repo, kể cả thư viện), `ARCHITECTURE.md`,
-   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md` (không bao giờ
+   bị bỏ qua — mọi repository đều có một tư thế bảo mật, ngay cả khi không có bí mật nào),
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, cùng `PERFORMANCE.md` và một chỉ mục `docs/README.md`.
    Nếu tài liệu đã tồn tại, hãy tích hợp và mở rộng chúng — đừng nhân bản.
 3. **Tài liệu cho từng mô-đun.** Thêm một `README.md` (và một thư mục con `docs/` cho các mô-đun phức tạp) bên trong mỗi
@@ -160,6 +161,10 @@ Sinh các Deep Work Plan cho mọi tác vụ và chạy chúng từng tác vụ 
 - `/dwp-status` — báo cáo tiến độ mà không thay đổi gì.
 - `/dwp-refine` — thêm, bớt hoặc sắp xếp lại các tác vụ trong khi giữ nguyên công việc đã hoàn tất.
 - `/dwp-resume` — tái dựng trạng thái và tiếp tục một kế hoạch bị gián đoạn.
+
+Mỗi kế hoạch kết thúc bằng ba tác vụ cuối bắt buộc — một **Security Review** cho các thay đổi của
+chính kế hoạch (giữ `docs/SECURITY.md` luôn cập nhật; một phát hiện nghiêm trọng chặn việc hoàn tất),
+Skills & Agents Discovery và Executive Report.
 
 ## 7. Kiểm chứng
 

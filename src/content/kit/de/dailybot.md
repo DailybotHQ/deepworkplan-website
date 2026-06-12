@@ -12,7 +12,7 @@ Den Fortschritt eines Deep Work Plan für ein Dailybot-Team sichtbar machen. Ein
 
 ## Was es hinzufügt
 
-- Eine optionale Installation der Dailybot-Agenten-Skill und/oder der Dailybot-CLI über deren eigene Einwilligungsabläufe.
+- Eine optionale Installation der Dailybot-Agenten-Skill (derzeit 1.7.x, die zusätzlich Team-Chat über Slack, Microsoft Teams, Discord und Google Chat hinzufügt) und/oder der Dailybot-CLI über deren eigene Einwilligungsabläufe.
 - Einen Best-Effort-Bericht über Fortschritte/Meilensteine, eingebunden in die Planausführung, sodass ein Planabschluss dem Team sichtbar wird.
 - Eine optionale deterministische Hook-Durchsetzung (Dailybot-Agenten-Skill 1.6.0+, CLI 1.12.0+): committete Harness-Hooks, die unberichtete Arbeit anhand eines lokalen Registers erkennen und den Agenten am Ende des Zugs erinnern — so bleibt das Berichten selbst in langen unbeaufsichtigten Sitzungen autonom, in denen Prompt-Anweisungen verblassen.
 

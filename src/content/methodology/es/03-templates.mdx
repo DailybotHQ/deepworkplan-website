@@ -1,6 +1,6 @@
 ---
 title: Plantillas de plan y tarea
-description: "La estructura de los archivos de plan y de tarea, las dos tareas finales obligatorias y las convenciones de README y PROGRESS que mantienen legible el plan."
+description: "La estructura de los archivos de plan y de tarea, las tres tareas finales obligatorias y las convenciones de README y PROGRESS que mantienen legible el plan."
 order: 3
 lang: es
 summary: Cómo se estructuran los planes y las tareas en disco, y las convenciones que los mantienen legibles.
@@ -26,12 +26,13 @@ Un plan es un directorio bajo `.dwp/plans/` llamado `PLAN_<slug>/`. Contiene:
 
 Cada archivo de tarea se llama `<n>.task_<slug>.md` y sigue la anatomía de nueve secciones: Objetivo, Contexto, Pasos, Criterios de aceptación, Validación, Archivos, Dependencias, Riesgos y Finalización y registro. Las secciones aparecen siempre en ese orden para que cualquier lector sepa dónde mirar. Cada tarea se reancla al objetivo del plan antes de actuar, lo que evita que un agente se desvíe en un horizonte largo de varias horas.
 
-## Las dos tareas finales obligatorias
+## Las tres tareas finales obligatorias
 
-Todo plan debe terminar con dos tareas estándar. Aseguran que se capture el conocimiento y que se informe a las partes interesadas:
+Todo plan debe terminar con tres tareas estándar. Aseguran que el trabajo quede auditado, que se capture el conocimiento y que se informe a las partes interesadas:
 
-1. **Descubrimiento de habilidades y agentes**: identificar las habilidades y agentes reutilizables creados durante el plan, para que el trabajo se acumule más allá de este esfuerzo puntual.
-2. **Informe ejecutivo**: un resumen conciso de los resultados, escrito para las partes interesadas, que distingue lo entregado de lo que queda pendiente.
+1. **Revisión de seguridad**: auditar todo lo que el plan cambió en busca de secretos, riesgos de inyección y nueva superficie de ataque, y mantener `docs/SECURITY.md` al día. La seguridad no es un flujo de trabajo aparte añadido al final: cada plan deja sus propios cambios auditados, y un hallazgo crítico bloquea la finalización.
+2. **Descubrimiento de habilidades y agentes**: identificar las habilidades y agentes reutilizables creados durante el plan, para que el trabajo se acumule más allá de este esfuerzo puntual.
+3. **Informe ejecutivo**: un resumen conciso de los resultados, escrito para las partes interesadas, que distingue lo entregado de lo que queda pendiente.
 
 ## Convenciones de README y PROGRESS
 

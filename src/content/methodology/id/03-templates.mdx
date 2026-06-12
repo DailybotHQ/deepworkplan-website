@@ -1,6 +1,6 @@
 ---
 title: Plan and task templates
-description: "Struktur berkas rencana dan tugas, dua tugas akhir wajib yang harus mengakhiri setiap rencana, serta konvensi README dan PROGRESS yang menjaga rencana tetap mudah dibaca."
+description: "Struktur berkas rencana dan tugas, tiga tugas akhir wajib yang harus mengakhiri setiap rencana, serta konvensi README dan PROGRESS yang menjaga rencana tetap mudah dibaca."
 order: 3
 lang: id
 summary: Bagaimana rencana dan tugas distrukturkan di disk, dan konvensi yang menjaganya tetap mudah dibaca.
@@ -26,12 +26,13 @@ Sebuah rencana adalah sebuah direktori di bawah `.dwp/plans/` bernama `PLAN_<slu
 
 Setiap berkas tugas bernama `<n>.task_<slug>.md` dan mengikuti anatomi sembilan bagian: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, dan Completion & Log. Bagian-bagian itu selalu muncul dalam urutan tersebut sehingga setiap pembaca tahu di mana harus mencari. Setiap tugas berlabuh kembali ke tujuan rencana sebelum ia bertindak, yang mencegah agent menyimpang sepanjang rentang panjang yang berjam-jam.
 
-## Dua tugas akhir wajib
+## Tiga tugas akhir wajib
 
-Setiap rencana harus diakhiri dengan dua tugas standar. Keduanya memastikan bahwa pengetahuan tertangkap dan bahwa pemangku kepentingan diberi tahu:
+Setiap rencana harus diakhiri dengan tiga tugas standar. Ketiganya memastikan bahwa pekerjaan teraudit, pengetahuan tertangkap, dan pemangku kepentingan diberi tahu:
 
-1. **Skills & Agents Discovery** — mengidentifikasi skill dan agent yang dapat dipakai ulang yang dibuat selama rencana, sehingga pekerjaan berlipat melampaui upaya tunggal ini.
-2. **Executive Report** — ringkasan padat tentang hasil yang ditulis untuk pemangku kepentingan, membedakan apa yang sudah diserahkan dari apa yang tersisa.
+1. **Security Review** — mengaudit segala sesuatu yang diubah rencana untuk secret, risiko injeksi, dan permukaan serangan baru, serta menjaga `docs/SECURITY.md` tetap mutakhir. Keamanan bukanlah alur kerja terpisah yang ditempelkan di akhir: setiap rencana meninggalkan perubahannya sendiri dalam keadaan teraudit, dan sebuah temuan kritis memblokir penyelesaian.
+2. **Skills & Agents Discovery** — mengidentifikasi skill dan agent yang dapat dipakai ulang yang dibuat selama rencana, sehingga pekerjaan berlipat melampaui upaya tunggal ini.
+3. **Executive Report** — ringkasan padat tentang hasil yang ditulis untuk pemangku kepentingan, membedakan apa yang sudah diserahkan dari apa yang tersisa.
 
 ## Konvensi README dan PROGRESS
 

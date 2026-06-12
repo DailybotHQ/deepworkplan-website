@@ -1,6 +1,6 @@
 ---
 title: 문서화 표준
-description: "Deep Work Plan이 구조, 작업, 진행 상황을 문서화하는 방식에 대한 규범적 표준: README 규칙, 상태 표시, 그리고 두 개의 필수 최종 작업."
+description: "Deep Work Plan이 구조, 작업, 진행 상황을 문서화하는 방식에 대한 규범적 표준: README 규칙, 상태 표시, 그리고 세 개의 필수 최종 작업."
 order: 1
 lang: ko
 section: Standard
@@ -44,9 +44,10 @@ section: Standard
 
 모든 제목은 문장형 대소문자(sentence case)를 사용해야(MUST) 합니다. 문서는 마케팅 표현과 느낌표를 피해야(SHOULD) 합니다.
 
-## 두 개의 필수 최종 작업
+## 세 개의 필수 최종 작업
 
-모든 계획은 두 개의 표준 작업으로 끝나야(MUST) 합니다.
+모든 계획은 세 개의 표준 작업으로 끝나야(MUST) 합니다.
 
-1. **스킬 & 에이전트 발견(Skills & Agents Discovery)** — 만들어진 재사용 가능한 스킬과 에이전트를 식별합니다.
-2. **임원 보고서(Executive Report)** — 이해관계자를 위한 결과 요약.
+1. **보안 검토(Security Review)** — 계획의 전체 변경 집합을 비밀 값, 인젝션 위험, 새로운 공격 표면에 대해 감사하고, `docs/SECURITY.md`가 여전히 현실을 반영하는지 확인합니다. 치명적인 발견은 완료를 차단합니다.
+2. **스킬 & 에이전트 발견(Skills & Agents Discovery)** — 만들어진 재사용 가능한 스킬과 에이전트를 식별합니다.
+3. **임원 보고서(Executive Report)** — 이해관계자를 위한 결과 요약.

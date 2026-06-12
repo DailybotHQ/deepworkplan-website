@@ -112,7 +112,8 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
    в него, а не заменяйте. Создайте символьную ссылку `CLAUDE.md → AGENTS.md` (не затирайте
    существующий `CLAUDE.md`, не спросив).
 2. **`docs/`.** Заполните стандартные категории реальным, специфичным для репозитория содержимым: `PRODUCT_SPEC.md` (нетехнический документ продукта/«зачем» — обязателен для каждого репозитория, включая библиотеки), `ARCHITECTURE.md`,
-   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
+   (никогда не пропускается — у каждого репозитория есть профиль безопасности, даже без секретов),
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, а также `PERFORMANCE.md` и индекс `docs/README.md`.
    Если документация уже существует, интегрируйте и расширьте её — не дублируйте.
 3. **Документация по модулям.** Добавьте `README.md` (и подпапку `docs/` для сложных модулей) внутри каждого
@@ -160,6 +161,10 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 - `/dwp-status` — отчитаться о прогрессе, ничего не меняя.
 - `/dwp-refine` — добавить, удалить или переупорядочить задачи, сохраняя завершённую работу.
 - `/dwp-resume` — восстановить состояние и продолжить прерванный план.
+
+Каждый план заканчивается тремя обязательными финальными задачами — **Security Review** собственных
+изменений плана (с поддержанием `docs/SECURITY.md` в актуальном состоянии; критическая находка
+блокирует завершение), Skills & Agents Discovery и Executive Report.
 
 ## 7. Проверьте
 

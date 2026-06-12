@@ -71,6 +71,16 @@ When a task adds new core functionality or materially changes existing behavior:
 
 Pure-documentation, configuration, or research tasks are exempt from creating tests but still MUST run whatever validation gate the repository defines. The depth of testing is proportional to the size of the change and the repository's maturity. Where a repository has no test or lint toolchain at all, the agent MUST NOT silently skip this discipline — it relies on the toolchain proposed during onboarding (see [Conformance](/spec)).
 
+## Security discipline
+
+Security is first-class in the same way tests are, and it follows the same two-layer model: per-task discipline while the work happens, plus a mandatory Security Review gate over the full change set at the end. Whenever a task touches authentication or authorization, input handling, secrets or configuration, network, file, or shell surface, or dependencies:
+
+- Its **acceptance criteria** MUST state the security expectations of the change — input validated and escaped, no secret material in code or fixtures, auth checks preserved or strengthened — consistent with `docs/SECURITY.md`.
+- Every commit MUST be confirmed free of secrets or credentials before it lands, test fixtures and documentation examples included. A secret in a pushed commit MUST be treated as leaked and rotated, not merely removed.
+- Where the security-sensitive work is substantial, a dedicated hardening task SHOULD be placed immediately after the implementation tasks and before the comprehensive-tests task, so findings are fixed before tests encode the behavior and each finding becomes a regression case rather than rework.
+
+This per-task discipline does not replace the Security Review final task: per-task checks catch issues in the commit where they are born, while the final gate audits the whole plan — including the tests and documentation tasks themselves. Every plan therefore ends with three mandatory final tasks — Security Review, then Skills & Agents Discovery, then the Executive Report — and a critical security finding blocks completion until it is fixed or explicitly accepted.
+
 ## Task completion protocol
 
 After passing validation and before advancing to the next task, the agent MUST, in order: (1) mark the task `[x]` in the plan README; (2) increment the plan status count; (3) fill the task's Completion & Log with no placeholder values; (4) add a 3–5 bullet entry to `PROGRESS.md`; (5) commit (where the plan commits) with the format `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) where the plan carries the state layer, rewrite `state.json` atomically — task `completed`, gate records, outcome record, commit hash.

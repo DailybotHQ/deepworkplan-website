@@ -71,6 +71,16 @@ Khi một tác vụ thêm chức năng lõi mới hoặc thay đổi đáng kể
 
 Các tác vụ thuần tài liệu, cấu hình hay nghiên cứu được miễn việc tạo test nhưng vẫn PHẢI chạy bất kỳ cổng kiểm chứng nào mà repository định nghĩa. Độ sâu của việc test tỷ lệ với kích thước của thay đổi và độ trưởng thành của repository. Nơi một repository hoàn toàn không có bộ công cụ test hay lint, agent KHÔNG ĐƯỢC âm thầm bỏ qua kỷ luật này — nó dựa vào bộ công cụ được đề xuất trong quá trình khởi tạo (xem [Tuân thủ](/spec)).
 
+## Kỷ luật bảo mật
+
+Bảo mật là hạng nhất giống như cách test là hạng nhất, và nó tuân theo cùng một mô hình hai lớp: kỷ luật theo từng tác vụ trong khi công việc diễn ra, cộng với một cổng Security Review bắt buộc trên toàn bộ tập thay đổi ở cuối. Bất cứ khi nào một tác vụ chạm đến xác thực hoặc phân quyền, xử lý đầu vào, bí mật hoặc cấu hình, bề mặt mạng, tệp, hoặc shell, hay các phụ thuộc:
+
+- **Tiêu chí chấp nhận** của nó PHẢI nêu các kỳ vọng bảo mật của thay đổi — đầu vào được kiểm tra và escape, không có chất liệu bí mật trong mã hoặc fixture, các kiểm tra xác thực được giữ nguyên hoặc tăng cường — nhất quán với `docs/SECURITY.md`.
+- Mọi commit PHẢI được xác nhận là không chứa bí mật hoặc thông tin xác thực trước khi nó được đưa vào, bao gồm cả fixture test và ví dụ tài liệu. Một bí mật trong một commit đã push PHẢI được coi là đã rò rỉ và phải xoay vòng, chứ không chỉ đơn thuần bị xóa.
+- Nơi công việc nhạy cảm về bảo mật là đáng kể, một tác vụ gia cố chuyên biệt NÊN được đặt ngay sau các tác vụ triển khai và trước tác vụ test toàn diện, để các phát hiện được sửa trước khi test mã hóa hành vi và mỗi phát hiện trở thành một ca hồi quy thay vì làm lại.
+
+Kỷ luật theo từng tác vụ này không thay thế tác vụ cuối Security Review: các kiểm tra theo từng tác vụ bắt vấn đề ngay tại commit nơi chúng sinh ra, trong khi cổng cuối kiểm toán toàn bộ kế hoạch — bao gồm chính các tác vụ test và tài liệu. Do đó mọi kế hoạch kết thúc với ba tác vụ cuối bắt buộc — Security Review, rồi Skills & Agents Discovery, rồi Executive Report — và một phát hiện bảo mật nghiêm trọng chặn việc hoàn tất cho đến khi nó được sửa hoặc được chấp nhận một cách rõ ràng.
+
 ## Giao thức hoàn tất tác vụ
 
 Sau khi vượt qua kiểm chứng và trước khi chuyển sang tác vụ tiếp theo, agent PHẢI, theo thứ tự: (1) đánh dấu tác vụ `[x]` trong README kế hoạch; (2) tăng số đếm trạng thái kế hoạch; (3) điền vào phần Completion & Log của tác vụ mà không có giá trị placeholder; (4) thêm một mục 3–5 gạch đầu dòng vào `PROGRESS.md`; (5) commit (nơi kế hoạch commit) với định dạng `{type}({scope}): {description} — Task {N} of PLAN_{name}`; (6) nơi kế hoạch mang lớp trạng thái, ghi lại `state.json` nguyên tử — tác vụ `completed`, bản ghi cổng, bản ghi kết quả, băm commit.

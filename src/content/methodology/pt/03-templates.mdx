@@ -1,6 +1,6 @@
 ---
 title: Templates de plano e de tarefa
-description: "A estrutura dos arquivos de plano e de tarefa, as duas tarefas finais obrigatórias com que todo plano deve terminar e as convenções de README e PROGRESS que mantêm um plano legível."
+description: "A estrutura dos arquivos de plano e de tarefa, as três tarefas finais obrigatórias com que todo plano deve terminar e as convenções de README e PROGRESS que mantêm um plano legível."
 order: 3
 lang: pt
 summary: Como planos e tarefas são estruturados em disco e as convenções que os mantêm legíveis.
@@ -26,12 +26,13 @@ Um plano é um diretório em `.dwp/plans/` chamado `PLAN_<slug>/`. Ele contém:
 
 Cada arquivo de tarefa é chamado `<n>.task_<slug>.md` e segue a anatomia de nove seções: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks e Completion & Log. As seções sempre aparecem nessa ordem para que qualquer leitor saiba onde procurar. Cada tarefa reancora-se ao objetivo do plano antes de agir, o que impede o agente de derivar ao longo de um horizonte extenso, de várias horas.
 
-## As duas tarefas finais obrigatórias
+## As três tarefas finais obrigatórias
 
-Todo plano deve terminar com duas tarefas padrão. Elas garantem que o conhecimento seja capturado e que as partes interessadas sejam informadas:
+Todo plano deve terminar com três tarefas padrão. Elas garantem que o trabalho seja auditado, que o conhecimento seja capturado e que as partes interessadas sejam informadas:
 
-1. **Skills & Agents Discovery** — identificar as skills e agents reutilizáveis criados durante o plano, para que o trabalho se acumule além deste único esforço.
-2. **Executive Report** — um resumo conciso dos resultados escrito para as partes interessadas, distinguindo o que foi entregue do que ainda resta.
+1. **Security Review** — auditar tudo o que o plano mudou em busca de segredos, riscos de injeção e nova superfície de ataque, e manter o `docs/SECURITY.md` atualizado. Segurança não é um fluxo de trabalho separado acrescentado no final: todo plano deixa suas próprias mudanças auditadas, e um achado crítico bloqueia a conclusão.
+2. **Skills & Agents Discovery** — identificar as skills e agents reutilizáveis criados durante o plano, para que o trabalho se acumule além deste único esforço.
+3. **Executive Report** — um resumo conciso dos resultados escrito para as partes interessadas, distinguindo o que foi entregue do que ainda resta.
 
 ## Convenções de README e PROGRESS
 

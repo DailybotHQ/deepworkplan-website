@@ -31,12 +31,13 @@ Ein Deep Work Plan in `.dwp/plans/` ist wohlgeformt, wenn:
 
 1. Jede Aufgabe MUSS einen expliziten **Umfang**, **Akzeptanzkriterien** und mindestens ein **Validierungs-Gate** deklarieren (einen Befehl oder eine Prüfung, die objektiv besteht oder durchfällt).
 2. Jede Aufgabe, die neue Kernfunktionalität hinzufügt oder Produktverhalten ändert, MUSS automatisierte Testabdeckung für dieses Verhalten in ihren Akzeptanzkriterien umfassen und MUSS die Tests des Repositorys zusammen mit seinen Lint- und Typprüfungen in ihrem Validierungs-Gate ausführen — nicht den Build allein. Bestehende Tests MÜSSEN grün bleiben; eine Verhaltensänderung MUSS einen Test, den sie bricht, anpassen, statt ihn zu löschen oder zu überspringen. Reine Dokumentations-, Konfigurations- oder Recherche-Aufgaben sind von der Erstellung von Tests befreit, führen aber dennoch das Gate des Repositorys aus.
-3. Der Plan MUSS den Fortschritt persistieren, sodass die Arbeit eine Unterbrechung übersteht und von einem anderen Agenten wiederaufgenommen werden kann.
-4. Der Plan MUSS die zwei verpflichtenden Abschlussaufgaben enthalten — Skills & Agents Discovery und den Executive Report.
-5. Aufgaben SOLLTEN sich vor der Ausführung erneut am Ziel des Plans verankern, um ein Abdriften über einen langen Horizont zu verhindern.
+3. Jede Aufgabe, die Authentifizierung, Eingabeverarbeitung, Geheimnisse oder Konfiguration, Netzwerkoberfläche oder Abhängigkeiten berührt, MUSS die Sicherheitserwartungen dieser Änderung in ihren Akzeptanzkriterien tragen, und jeder Commit MUSS frei von Geheimnismaterial sein.
+4. Der Plan MUSS den Fortschritt persistieren, sodass die Arbeit eine Unterbrechung übersteht und von einem anderen Agenten wiederaufgenommen werden kann.
+5. Der Plan MUSS die drei verpflichtenden Abschlussaufgaben enthalten — Security Review, Skills & Agents Discovery und den Executive Report. Ein kritischer Sicherheitsbefund blockiert den Abschluss, bis er behoben oder ausdrücklich akzeptiert wurde.
+6. Aufgaben SOLLTEN sich vor der Ausführung erneut am Ziel des Plans verankern, um ein Abdriften über einen langen Horizont zu verhindern.
 
 ## Konformität verifizieren
 
-Konformität SOLLTE mechanisch verifiziert werden statt durch Inspektion. Das Ausführen von `/dwp-verify` erzeugt einen Bestanden/Nicht-bestanden-Bericht anhand der obigen Kriterien: das Vorhandensein und der echte Inhalt von `AGENTS.md`, die `CLAUDE.md`-Auflösung, die `docs/`-Kategorien, der `.agents/`-Abgleich Katalog gegen Festplatte, der gitignore-Status von `.dwp/` und `tmp/` und — für einen Plan —, dass jede Aufgabe Akzeptanzkriterien und ein Validierungs-Gate trägt, mit Testabdeckung für verhaltensändernde Aufgaben.
+Konformität SOLLTE mechanisch verifiziert werden statt durch Inspektion. Das Ausführen von `/dwp-verify` erzeugt einen Bestanden/Nicht-bestanden-Bericht anhand der obigen Kriterien: das Vorhandensein und der echte Inhalt von `AGENTS.md`, die `CLAUDE.md`-Auflösung, die `docs/`-Kategorien, der `.agents/`-Abgleich Katalog gegen Festplatte, der gitignore-Status von `.dwp/` und `tmp/` und — für einen Plan —, dass jede Aufgabe Akzeptanzkriterien und ein Validierungs-Gate trägt, mit Testabdeckung für verhaltensändernde Aufgaben und dem Vorhandensein der drei verpflichtenden Abschlussaufgaben, das Security Review eingeschlossen.
 
 Ein Repository SOLLTE nach dem Onboarding und nach jedem abgeschlossenen Plan erneut verifiziert werden, sodass die Konformität aufrechterhalten und nicht nur einmal behauptet wird.

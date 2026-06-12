@@ -71,6 +71,16 @@ Bir görev yeni çekirdek işlevsellik eklediğinde veya mevcut davranışı ön
 
 Yalnızca-dokümantasyon, yapılandırma veya araştırma görevleri test oluşturmaktan muaftır ancak yine de deponun tanımladığı doğrulama kapısını çalıştırMALIDIR. Test etmenin derinliği, değişikliğin boyutuyla ve deponun olgunluğuyla orantılıdır. Bir deponun hiç test veya lint araç zinciri olmadığında, ajan bu disiplini sessizce atlaMAMALIDIR — kuruluma alma sırasında önerilen araç zincirine dayanır (bkz. [Uyumluluk](/spec)).
 
+## Güvenlik disiplini
+
+Güvenlik, testlerle tam olarak aynı şekilde birinci sınıftır ve aynı iki katmanlı modeli izler: iş sürerken görev bazında disiplin, artı sonunda tüm değişiklik kümesi üzerinde zorunlu bir Security Review kapısı. Bir görev kimlik doğrulama veya yetkilendirmeye, girdi işlemeye, sırlara veya yapılandırmaya, ağ, dosya veya shell yüzeyine ya da bağımlılıklara dokunduğunda:
+
+- **Kabul kriterleri**, değişikliğin güvenlik beklentilerini — girdi doğrulanmış ve kaçışlanmış, kodda veya fikstürlerde gizli materyal yok, kimlik doğrulama denetimleri korunmuş veya güçlendirilmiş — `docs/SECURITY.md` ile tutarlı biçimde BELİRTMELİDİR.
+- Her commit, yerleşmeden önce sırlardan veya kimlik bilgilerinden arındırılmış olarak teyit edilMELİDİR; test fikstürleri ve dokümantasyon örnekleri dahil. Gönderilmiş bir commit'teki bir sır, yalnızca kaldırılmış değil, sızmış olarak kabul edilMELİ ve döndürülMELİDİR.
+- Güvenliğe duyarlı işin önemli olduğu yerlerde, ayrılmış bir sağlamlaştırma görevi, uygulama görevlerinden hemen sonra ve kapsamlı testler görevinden önce yerleştirilMELİDİR; böylece bulgular, testler davranışı kodlamadan önce düzeltilir ve her bulgu, yeniden çalışma yerine bir regresyon vakası hâline gelir.
+
+Bu görev bazında disiplin, Security Review son görevinin yerini almaz: görev bazında denetimler sorunları doğdukları commit'te yakalar, son kapı ise tüm planı — test ve dokümantasyon görevlerinin kendileri dahil — denetler. Bu nedenle her plan üç zorunlu son görevle biter — Security Review, ardından Skills & Agents Discovery, ardından Executive Report — ve kritik bir güvenlik bulgusu, düzeltilene veya açıkça kabul edilene kadar tamamlamayı engeller.
+
 ## Görev tamamlama protokolü
 
 Doğrulamayı geçtikten ve bir sonraki göreve geçmeden önce, ajan sırasıyla ŞUNLARI YAPMAK ZORUNDADIR: (1) görevin plan README'sindeki kutusunu `[x]` olarak işaretle; (2) plan durum sayısını artır; (3) görevin Tamamlama ve Günlük bölümünü yer tutucu değer bırakmadan doldur; (4) `PROGRESS.md`'ye 3–5 maddelik bir girdi ekle; (5) planın commit attığı yerlerde `{type}({scope}): {description} — Task {N} of PLAN_{name}` biçiminde commit at; (6) plan durum katmanını taşıyorsa, `state.json`'u atomik olarak yeniden yaz — görev `completed`, kapı kayıtları, sonuç kaydı, commit karması.

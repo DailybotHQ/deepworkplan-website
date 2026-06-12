@@ -1,6 +1,6 @@
 ---
 title: 计划与任务模板
-description: "计划与任务文件的结构、每份计划都必须以之收尾的两项强制收尾任务，以及让计划保持可读的 README 与 PROGRESS 约定。"
+description: "计划与任务文件的结构、每份计划都必须以之收尾的三项强制收尾任务，以及让计划保持可读的 README 与 PROGRESS 约定。"
 order: 3
 lang: zh
 summary: 计划与任务在磁盘上如何组织，以及让它们保持可读的各项约定。
@@ -26,12 +26,13 @@ import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
 
 每个任务文件命名为 `<n>.task_<slug>.md`，并遵循九段式结构：Goal、Context、Steps、Acceptance criteria、Validation、Files、Dependencies、Risks 以及 Completion & Log。这些段落始终按该顺序出现，于是任何读者都知道该往哪里看。每项任务在行动之前都会重新锚定到计划的目标，这能防止代理在漫长的、长达数小时的周期里发生漂移。
 
-## 两项强制收尾任务
+## 三项强制收尾任务
 
-每份计划都必须以两项标准任务收尾。它们确保知识被捕获、利益相关者被告知：
+每份计划都必须以三项标准任务收尾。它们确保工作经过审计、知识被捕获、利益相关者被告知：
 
-1. **Skills & Agents Discovery（技能与代理盘点）** —— 识别在计划过程中创建的可复用技能与代理，使工作的成果超越这一次单独的努力而不断累积。
-2. **Executive Report（执行摘要）** —— 一份面向利益相关者撰写的简明成果总结，区分已交付之物与尚待完成之物。
+1. **Security Review（安全审查）** —— 审计计划改动的一切，检查机密信息、注入风险与新的攻击面，并让 `docs/SECURITY.md` 保持最新。安全不是在结尾才拼接上去的独立工作流：每份计划都让自己的改动经过审计，且一项严重发现会阻止完成。
+2. **Skills & Agents Discovery（技能与代理盘点）** —— 识别在计划过程中创建的可复用技能与代理，使工作的成果超越这一次单独的努力而不断累积。
+3. **Executive Report（执行摘要）** —— 一份面向利益相关者撰写的简明成果总结，区分已交付之物与尚待完成之物。
 
 ## README 与 PROGRESS 约定
 

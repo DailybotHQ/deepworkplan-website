@@ -1,6 +1,6 @@
 ---
 title: Dokümantasyon standardı
-description: "Deep Work Plan’lerin yapılarını, görevlerini ve ilerlemelerini nasıl belgelediğine ilişkin normatif standart: README kuralları, durum işaretleri ve iki zorunlu son görev."
+description: "Deep Work Plan’lerin yapılarını, görevlerini ve ilerlemelerini nasıl belgelediğine ilişkin normatif standart: README kuralları, durum işaretleri ve üç zorunlu son görev."
 order: 1
 lang: tr
 section: Standard
@@ -44,9 +44,10 @@ Her görev dosyası `<n>.task_<slug>.md` olarak adlandırılMALI ve dokuz bölü
 
 Tüm başlıklar cümle düzenini KULLANMALIDIR. Belgeler, pazarlama dilinden ve ünlem işaretlerinden KAÇINMALIDIR.
 
-## İki zorunlu son görev
+## Üç zorunlu son görev
 
-Her plan iki standart görevle bitMELİDİR:
+Her plan üç standart görevle bitMELİDİR:
 
-1. **Skills & Agents Discovery** — oluşturulan yeniden kullanılabilir skill’leri ve ajanları belirler.
-2. **Executive Report** — paydaşlar için bir sonuç özeti.
+1. **Security Review** — planın tüm değişiklik kümesini sırlar, enjeksiyon riskleri ve yeni saldırı yüzeyi açısından denetler ve `docs/SECURITY.md` dosyasının hâlâ gerçeği yansıttığını doğrular. Kritik bir bulgu tamamlanmayı engeller.
+2. **Skills & Agents Discovery** — oluşturulan yeniden kullanılabilir skill’leri ve ajanları belirler.
+3. **Executive Report** — paydaşlar için bir sonuç özeti.

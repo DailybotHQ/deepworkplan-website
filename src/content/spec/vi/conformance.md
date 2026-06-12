@@ -31,12 +31,13 @@ Một Deep Work Plan trong `.dwp/plans/` là chỉnh dạng khi:
 
 1. Mỗi tác vụ PHẢI khai báo một **phạm vi** rõ ràng, **tiêu chí chấp nhận**, và ít nhất một **cổng kiểm chứng** (một lệnh hay bước kiểm tra đạt hoặc không đạt một cách khách quan).
 2. Mỗi tác vụ thêm chức năng lõi mới hoặc thay đổi hành vi sản phẩm PHẢI bao gồm độ phủ test tự động cho hành vi đó trong tiêu chí chấp nhận của nó, và PHẢI chạy các test của repository cùng với các bước kiểm tra lint và kiểm tra kiểu trong cổng kiểm chứng của nó — chứ không phải chỉ riêng bước build. Các test hiện có PHẢI tiếp tục xanh; một thay đổi hành vi PHẢI cập nhật một test mà nó làm hỏng thay vì xóa hay bỏ qua nó. Các tác vụ thuần tài liệu, cấu hình hay nghiên cứu được miễn việc tạo test nhưng vẫn chạy cổng của repository.
-3. Kế hoạch PHẢI lưu giữ tiến độ để công việc vượt qua gián đoạn và có thể được tiếp tục bởi một agent khác.
-4. Kế hoạch PHẢI bao gồm hai tác vụ cuối bắt buộc — Skills & Agents Discovery và Executive Report.
-5. Các tác vụ NÊN neo lại vào mục tiêu của kế hoạch trước khi thực thi, để ngăn trôi dạt qua một chân trời dài.
+3. Mỗi tác vụ chạm tới xác thực, xử lý đầu vào, bí mật hay cấu hình, bề mặt mạng, hoặc các phụ thuộc PHẢI mang các kỳ vọng bảo mật của thay đổi đó trong tiêu chí chấp nhận của nó, và mỗi commit PHẢI không chứa tư liệu bí mật.
+4. Kế hoạch PHẢI lưu giữ tiến độ để công việc vượt qua gián đoạn và có thể được tiếp tục bởi một agent khác.
+5. Kế hoạch PHẢI bao gồm ba tác vụ cuối bắt buộc — Security Review, Skills & Agents Discovery và Executive Report. Một phát hiện bảo mật nghiêm trọng chặn việc hoàn tất cho đến khi được sửa hoặc được chấp nhận một cách rõ ràng.
+6. Các tác vụ NÊN neo lại vào mục tiêu của kế hoạch trước khi thực thi, để ngăn trôi dạt qua một chân trời dài.
 
 ## Kiểm chứng sự tuân thủ
 
-Sự tuân thủ NÊN được kiểm chứng một cách máy móc thay vì bằng việc xem xét thủ công. Chạy `/dwp-verify` tạo một báo cáo đạt/không đạt so với các tiêu chí trên: sự hiện diện và nội dung thật của `AGENTS.md`, sự phân giải của `CLAUDE.md`, các hạng mục `docs/`, sự khớp giữa catalog `.agents/` và đĩa, trạng thái gitignore của `.dwp/` và `tmp/`, và — đối với một kế hoạch — rằng mỗi tác vụ mang tiêu chí chấp nhận và một cổng kiểm chứng, cùng độ phủ test cho các tác vụ thay đổi hành vi.
+Sự tuân thủ NÊN được kiểm chứng một cách máy móc thay vì bằng việc xem xét thủ công. Chạy `/dwp-verify` tạo một báo cáo đạt/không đạt so với các tiêu chí trên: sự hiện diện và nội dung thật của `AGENTS.md`, sự phân giải của `CLAUDE.md`, các hạng mục `docs/`, sự khớp giữa catalog `.agents/` và đĩa, trạng thái gitignore của `.dwp/` và `tmp/`, và — đối với một kế hoạch — rằng mỗi tác vụ mang tiêu chí chấp nhận và một cổng kiểm chứng, cùng độ phủ test cho các tác vụ thay đổi hành vi và sự hiện diện của ba tác vụ cuối bắt buộc, bao gồm cả Security Review.
 
 Một repository NÊN được kiểm chứng lại sau khi khởi tạo và sau mỗi kế hoạch hoàn tất, để sự tuân thủ được duy trì thay vì chỉ được tuyên bố một lần.

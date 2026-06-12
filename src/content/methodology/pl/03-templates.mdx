@@ -1,6 +1,6 @@
 ---
 title: Szablony planu i zadań
-description: "Struktura plików planu i zadań, dwa obowiązkowe zadania końcowe, którymi musi kończyć się każdy plan, oraz konwencje README i PROGRESS, które utrzymują czytelność planu."
+description: "Struktura plików planu i zadań, trzy obowiązkowe zadania końcowe, którymi musi kończyć się każdy plan, oraz konwencje README i PROGRESS, które utrzymują czytelność planu."
 order: 3
 lang: pl
 summary: Jak plany i zadania są ułożone na dysku oraz konwencje, które utrzymują ich czytelność.
@@ -26,12 +26,13 @@ Plan to katalog w `.dwp/plans/` o nazwie `PLAN_<slug>/`. Zawiera:
 
 Każdy plik zadania nosi nazwę `<n>.task_<slug>.md` i podąża za dziewięciosekcyjną anatomią: Cel, Kontekst, Kroki, Kryteria akceptacji, Walidacja, Pliki, Zależności, Ryzyka oraz Ukończenie i dziennik. Sekcje zawsze pojawiają się w tej kolejności, więc każdy czytelnik wie, gdzie szukać. Każde zadanie ponownie zakotwicza się w celu planu, zanim zacznie działać, co chroni agenta przed dryfem na długim, wielogodzinnym dystansie.
 
-## Dwa obowiązkowe zadania końcowe
+## Trzy obowiązkowe zadania końcowe
 
-Każdy plan musi kończyć się dwoma standardowymi zadaniami. Zapewniają one uchwycenie wiedzy i poinformowanie interesariuszy:
+Każdy plan musi kończyć się trzema standardowymi zadaniami. Zapewniają one audyt wykonanej pracy, uchwycenie wiedzy i poinformowanie interesariuszy:
 
-1. **Skills & Agents Discovery** — zidentyfikuj wielokrotnego użytku skille i agentów stworzonych podczas planu, aby praca kumulowała się ponad ten jeden wysiłek.
-2. **Executive Report** — zwięzłe podsumowanie wyników napisane dla interesariuszy, odróżniające to, co dostarczono, od tego, co pozostaje.
+1. **Security Review** — przeprowadź audyt wszystkiego, co plan zmienił, pod kątem sekretów, ryzyk iniekcji i nowej powierzchni ataku, oraz utrzymuj `docs/SECURITY.md` w aktualności. Bezpieczeństwo nie jest osobnym strumieniem pracy doklejanym na końcu: każdy plan pozostawia własne zmiany poddane audytowi, a krytyczne znalezisko blokuje ukończenie.
+2. **Skills & Agents Discovery** — zidentyfikuj wielokrotnego użytku skille i agentów stworzonych podczas planu, aby praca kumulowała się ponad ten jeden wysiłek.
+3. **Executive Report** — zwięzłe podsumowanie wyników napisane dla interesariuszy, odróżniające to, co dostarczono, od tego, co pozostaje.
 
 ## Konwencje README i PROGRESS
 

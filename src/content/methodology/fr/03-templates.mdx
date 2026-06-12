@@ -1,6 +1,6 @@
 ---
 title: Modèles de plan et de tâche
-description: "La structure des fichiers de plan et de tâche, les deux tâches finales obligatoires par lesquelles tout plan doit se terminer, et les conventions README et PROGRESS qui gardent un plan lisible."
+description: "La structure des fichiers de plan et de tâche, les trois tâches finales obligatoires par lesquelles tout plan doit se terminer, et les conventions README et PROGRESS qui gardent un plan lisible."
 order: 3
 lang: fr
 summary: Comment les plans et les tâches sont structurés sur disque, et les conventions qui les gardent lisibles.
@@ -26,12 +26,13 @@ Un plan est un répertoire sous `.dwp/plans/` nommé `PLAN_<slug>/`. Il contient
 
 Chaque fichier de tâche est nommé `<n>.task_<slug>.md` et suit l’anatomie en neuf sections : Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks et Completion & Log. Les sections apparaissent toujours dans cet ordre, de sorte que tout lecteur sait où chercher. Chaque tâche se réancre à l’objectif du plan avant d’agir, ce qui empêche un agent de dériver sur un long horizon de plusieurs heures.
 
-## Les deux tâches finales obligatoires
+## Les trois tâches finales obligatoires
 
-Tout plan doit se terminer par deux tâches standard. Elles garantissent que la connaissance est capturée et que les parties prenantes sont informées :
+Tout plan doit se terminer par trois tâches standard. Elles garantissent que le travail est audité, que la connaissance est capturée et que les parties prenantes sont informées :
 
-1. **Skills & Agents Discovery** — identifier les skills et agents réutilisables créés pendant le plan, pour que le travail capitalise au-delà de cet effort unique.
-2. **Executive Report** — un résumé concis des résultats, rédigé pour les parties prenantes, distinguant ce qui a été livré de ce qui reste à faire.
+1. **Security Review** — auditer tout ce que le plan a changé à la recherche de secrets, de risques d’injection et de nouvelle surface d’attaque, et garder `docs/SECURITY.md` à jour. La sécurité n’est pas un chantier séparé greffé à la fin : chaque plan laisse ses propres changements audités, et une découverte critique bloque l’achèvement.
+2. **Skills & Agents Discovery** — identifier les skills et agents réutilisables créés pendant le plan, pour que le travail capitalise au-delà de cet effort unique.
+3. **Executive Report** — un résumé concis des résultats, rédigé pour les parties prenantes, distinguant ce qui a été livré de ce qui reste à faire.
 
 ## Conventions README et PROGRESS
 

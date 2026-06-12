@@ -113,7 +113,8 @@ teyit edin.
    `AGENTS.md` varsa, onu değiştirmek yerine içine birleştirin. `CLAUDE.md → AGENTS.md` sembolik bağını
    oluşturun (var olan bir `CLAUDE.md`’yi sormadan ezmeyin).
 2. **`docs/`.** Standart kategorileri gerçek, depoya özgü içerikle doldurun: `PRODUCT_SPEC.md` (teknik olmayan ürün/neden belgesi — kütüphaneler dahil her depo için zorunlu), `ARCHITECTURE.md`,
-   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md` (asla atlanmaz —
+   hiç sırrı olmasa bile her deponun bir güvenlik duruşu vardır),
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, ayrıca `PERFORMANCE.md` ve bir `docs/README.md` dizini.
    Dokümanlar zaten varsa, onları bütünleştirip genişletin — çoğaltmayın.
 3. **Modül başına dokümanlar.** Keşifte bulunan her büyük kaynak modülün içine bir `README.md` (ve
@@ -163,6 +164,10 @@ Herhangi bir görev için Deep Work Plan’ler üretin ve onları görev görev 
 - `/dwp-status` — değişiklik yapmadan ilerlemeyi raporlar.
 - `/dwp-refine` — tamamlanmış işi korurken görev ekler, çıkarır veya yeniden sıralar.
 - `/dwp-resume` — durumu yeniden oluşturur ve kesintiye uğramış bir planı sürdürür.
+
+Her plan, üç zorunlu son görevle biter — planın kendi değişikliklerinin bir **Security Review**'u
+(`docs/SECURITY.md` güncel tutulur; kritik bir bulgu tamamlanmayı engeller), Skills & Agents
+Discovery ve Executive Report.
 
 ## 7. Doğrulayın
 

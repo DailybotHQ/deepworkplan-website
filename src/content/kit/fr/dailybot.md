@@ -12,7 +12,7 @@ Faire remonter la progression d’un Deep Work Plan vers une équipe Dailybot. U
 
 ## Ce qu’il ajoute
 
-- Une installation optionnelle du skill d’agent Dailybot et/ou de la CLI Dailybot, via leurs propres flux de consentement.
+- Une installation optionnelle du skill d’agent Dailybot (actuellement 1.7.x, qui ajoute aussi le chat d’équipe sur Slack, Microsoft Teams, Discord et Google Chat) et/ou de la CLI Dailybot, via leurs propres flux de consentement.
 - Un rapport de progression/jalons au mieux, câblé dans l’exécution du plan, de sorte que l’achèvement d’un plan remonte vers l’équipe.
 - Une couche facultative de hooks déterministes (skill d’agent Dailybot 1.6.0+, CLI 1.12.0+) : des hooks de harness committés détectent le travail non rapporté à partir d’un registre local et le rappellent à l’agent en fin de tour, de sorte que le rapport reste autonome même dans les longues sessions sans supervision où les instructions du prompt s’estompent.
 

@@ -106,7 +106,8 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
    병합하세요. `CLAUDE.md → AGENTS.md` 심링크를 만드세요(기존
    `CLAUDE.md`를 묻지 않고 덮어쓰지 마세요).
 2. **`docs/`.** 표준 범주를 실제 리포지토리별 내용으로 채우세요: `PRODUCT_SPEC.md` (비기술적인 제품/이유 문서 — 라이브러리를 포함한 모든 리포지토리에 필수), `ARCHITECTURE.md`,
-   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
+   (결코 생략하지 않음 — 비밀 값이 하나도 없어도 모든 리포지토리에는 보안 태세가 있음),
    `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, 그리고 `PERFORMANCE.md`와 `docs/README.md` 색인.
    문서가 이미 존재하면 통합하고 확장하세요 — 복제하지 마세요.
 3. **모듈별 문서.** 정찰에서 발견된 각 주요 소스 모듈 안에 `README.md`(복잡한 모듈에는
@@ -153,6 +154,10 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 - `/dwp-status` — 변경 없이 진행 상황을 보고합니다.
 - `/dwp-refine` — 완료된 작업을 보존하면서 task를 추가, 제거, 재배열합니다.
 - `/dwp-resume` — 상태를 재구성하고 중단된 계획을 계속합니다.
+
+모든 계획은 세 개의 필수 최종 작업으로 끝납니다 — 계획 자체 변경에 대한 **보안 검토(Security
+Review)**(`docs/SECURITY.md`를 최신 상태로 유지하며, 치명적인 발견은 완료를 차단합니다), 스킬 &
+에이전트 발견, 그리고 임원 보고서입니다.
 
 ## 7. 검증하세요
 

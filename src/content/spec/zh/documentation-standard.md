@@ -1,6 +1,6 @@
 ---
 title: 文档标准
-description: "关于 Deep Work Plan 如何记录其结构、任务与进展的规范性标准：README 规则、状态标记，以及两项强制收尾任务。"
+description: "关于 Deep Work Plan 如何记录其结构、任务与进展的规范性标准：README 规则、状态标记，以及三项强制收尾任务。"
 order: 1
 lang: zh
 section: Standard
@@ -44,9 +44,10 @@ section: Standard
 
 所有标题 MUST 采用首字母句式（sentence case）。文档 SHOULD 避免使用营销式语言与感叹号。
 
-## 两项强制收尾任务
+## 三项强制收尾任务
 
-每份计划 MUST 以两项标准任务收尾：
+每份计划 MUST 以三项标准任务收尾：
 
-1. **Skills & Agents Discovery** —— 识别所创建的可复用技能与代理。
-2. **Executive Report** —— 一份面向利益相关者的成果总结。
+1. **Security Review** —— 审计计划的完整变更集，检查机密信息、注入风险与新的攻击面，并核实 `docs/SECURITY.md` 仍然反映现实。一项严重发现会阻止完成。
+2. **Skills & Agents Discovery** —— 识别所创建的可复用技能与代理。
+3. **Executive Report** —— 一份面向利益相关者的成果总结。

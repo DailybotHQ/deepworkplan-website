@@ -1,6 +1,6 @@
 ---
 title: Documentation standard
-description: "Standar normatif tentang bagaimana Deep Work Plan mendokumentasikan struktur, tugas, dan kemajuannya: aturan README, penanda status, dan dua tugas akhir wajib."
+description: "Standar normatif tentang bagaimana Deep Work Plan mendokumentasikan struktur, tugas, dan kemajuannya: aturan README, penanda status, dan tiga tugas akhir wajib."
 order: 1
 lang: id
 section: Standard
@@ -44,9 +44,10 @@ Setiap berkas tugas MUST bernama `<n>.task_<slug>.md` dan berisi anatomi sembila
 
 Semua judul MUST menggunakan sentence case. Dokumen SHOULD menghindari bahasa pemasaran dan tanda seru.
 
-## Dua tugas akhir wajib
+## Tiga tugas akhir wajib
 
-Setiap rencana MUST diakhiri dengan dua tugas standar:
+Setiap rencana MUST diakhiri dengan tiga tugas standar:
 
-1. **Skills & Agents Discovery** — mengidentifikasi skill dan agent yang dapat dipakai ulang yang dibuat.
-2. **Executive Report** — ringkasan hasil untuk pemangku kepentingan.
+1. **Security Review** — mengaudit seluruh set perubahan rencana untuk secret, risiko injeksi, dan permukaan serangan baru, serta memverifikasi bahwa `docs/SECURITY.md` masih mencerminkan kenyataan. Sebuah temuan kritis memblokir penyelesaian.
+2. **Skills & Agents Discovery** — mengidentifikasi skill dan agent yang dapat dipakai ulang yang dibuat.
+3. **Executive Report** — ringkasan hasil untuk pemangku kepentingan.

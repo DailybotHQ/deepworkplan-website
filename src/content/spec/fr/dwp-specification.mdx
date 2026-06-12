@@ -71,6 +71,16 @@ Lorsqu'une tâche ajoute une nouvelle fonctionnalité centrale ou modifie matér
 
 Les tâches purement documentaires, de configuration ou de recherche sont exemptées de la création de tests mais MUST tout de même exécuter quelle que soit la porte de validation que le dépôt définit. La profondeur des tests est proportionnelle à la taille du changement et à la maturité du dépôt. Lorsqu'un dépôt ne dispose d'aucune chaîne d'outils de test ou de lint, l'agent MUST NOT ignorer silencieusement cette discipline — il s'appuie sur la chaîne d'outils proposée pendant l'onboarding (voir [Conformité](/spec)).
 
+## Discipline de sécurité
+
+La sécurité est de premier ordre au même titre que les tests, et elle suit le même modèle à deux couches : une discipline par tâche pendant le déroulement du travail, plus une porte obligatoire de Security Review sur l'ensemble des changements à la fin. Chaque fois qu'une tâche touche à l'authentification ou à l'autorisation, au traitement des entrées, aux secrets ou à la configuration, à la surface réseau, fichier ou shell, ou aux dépendances :
+
+- Ses **critères d'acceptation** MUST énoncer les attentes de sécurité du changement — entrée validée et échappée, aucun élément secret dans le code ou les fixtures, contrôles d'authentification préservés ou renforcés — en cohérence avec `docs/SECURITY.md`.
+- Chaque commit MUST être confirmé exempt de secrets ou d'identifiants avant d'être intégré, fixtures de test et exemples de documentation compris. Un secret présent dans un commit déjà poussé MUST être considéré comme divulgué et faire l'objet d'une rotation, et pas simplement supprimé.
+- Lorsque le travail sensible à la sécurité est substantiel, une tâche de durcissement dédiée SHOULD être placée immédiatement après les tâches d'implémentation et avant la tâche de tests exhaustifs, afin que les constats soient corrigés avant que les tests n'encodent le comportement et que chaque constat devienne un cas de régression plutôt qu'une reprise.
+
+Cette discipline par tâche ne remplace pas la tâche finale de Security Review : les vérifications par tâche détectent les problèmes dans le commit où ils naissent, tandis que la porte finale audite l'ensemble du plan — y compris les tâches de tests et de documentation elles-mêmes. Chaque plan se termine donc par trois tâches finales obligatoires — Security Review, puis Skills & Agents Discovery, puis l'Executive Report — et un constat de sécurité critique bloque l'achèvement jusqu'à ce qu'il soit corrigé ou explicitement accepté.
+
 ## Protocole d'achèvement de tâche
 
 Après avoir passé la validation et avant de passer à la tâche suivante, l'agent MUST, dans l'ordre : (1) marquer la tâche `[x]` dans le README du plan ; (2) incrémenter le compteur de statut du plan ; (3) remplir la section Completion & Log de la tâche sans valeur de substitution ; (4) ajouter une entrée de 3 à 5 puces dans `PROGRESS.md` ; (5) commiter (lorsque le plan commit) avec le format `{type}({scope}): {description} — Task {N} of PLAN_{name}` ; (6) lorsque le plan porte la couche d'état, réécrire `state.json` de façon atomique — tâche `completed`, enregistrements de portes, enregistrement de résultat, hash de commit.
