@@ -148,9 +148,10 @@ hoàn toàn tuân thủ với **không** cần addon nào — đừng bao giờ 
   Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
 - **Nâng cấp phụ thuộc** — nâng cấp độc lập với trình quản lý gói, theo lô, được kiểm chứng, hoàn nguyên được. Khi
   được chấp nhận, nó cài command `/lib-upgrade`.
-- **Design system** — một `docs/DESIGN.md` dành cho agent, được suy luận từ các design token và phong
-  cách component thực của repository, để bất kỳ agent nào cũng tạo ra UI nhất quán với design system
-  riêng của repo.
+- **Design system** — một `docs/DESIGN.md` dành cho agent, được suy luận từ nguồn thiết kế thực của
+  repository, bao quát các bề mặt giao diện được phát hiện của nó dưới dạng các profile — UI trực quan,
+  đầu ra CLI có phong cách và nhắn tin hội thoại — để bất kỳ agent nào cũng tạo ra đầu ra giao diện
+  nhất quán với các quy ước riêng của repo.
 
 ## 6. Lập kế hoạch và thực thi
 

@@ -19,7 +19,7 @@ Metodologi ini dijelaskan dalam lima bab:
 1. **Manifesto** — apa itu Deep Work Plan dan mengapa eksekusi terstruktur penting.
 2. **Core loop** — siklus plan-execute-verify yang menggerakkan setiap tugas.
 3. **Template** — struktur rencana dan tugas yang dibagikan agent dan manusia.
-4. **Skill & agent** — bagaimana command dan peran agent saling melengkapi, kit hidup (bagaimana sebuah repositori menumbuhkan skill-nya sendiri lewat sub-skill author), dan addon opt-in seperti dependency-upgrade dan addon design-system frontend.
+4. **Skill & agent** — bagaimana command dan peran agent saling melengkapi, kit hidup (bagaimana sebuah repositori menumbuhkan skill-nya sendiri lewat sub-skill author), dan addon opt-in seperti dependency-upgrade dan addon design-system untuk permukaan antarmuka apa pun yang menghadap pengguna (UI visual, output CLI, atau percakapan).
 5. **Arketipe** — menyesuaikan metodologi dengan repo individual dan orchestrator hub.
 
 - [Baca metodologinya](/methodology)

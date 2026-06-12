@@ -149,9 +149,10 @@ sepenuhnya konforman dengan **nol** addon — jangan pernah memasangnya secara o
   Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan. Ketika
   diterima, ia memasang command `/lib-upgrade`.
-- **Design system** — sebuah `docs/DESIGN.md` untuk agent, dinalar dari design token dan gaya komponen
-  yang sebenarnya di repositori, sehingga agent mana pun menghasilkan UI yang konsisten dengan design
-  system milik repo itu sendiri.
+- **Design system** — sebuah `docs/DESIGN.md` untuk agent, dinalar dari sumber desain yang sebenarnya
+  di repositori, mencakup permukaan antarmuka yang terdeteksi sebagai profil — UI visual, output CLI
+  yang bergaya, dan perpesanan percakapan — sehingga agent mana pun menghasilkan keluaran antarmuka
+  yang konsisten dengan konvensi milik repo itu sendiri.
 
 ## 6. Rencanakan dan eksekusi
 

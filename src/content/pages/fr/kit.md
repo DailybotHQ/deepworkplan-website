@@ -51,7 +51,7 @@ Des capacités optionnelles que le flux onboard peut superposer à un dépôt �
 - **Devcontainer** — un conteneur de développement reproductible et isolé avec une auth de CLI IA persistante.
 - **Dailybot** — un rapport de progression et de jalons au mieux pour les équipes utilisant Dailybot.
 - **Dependency upgrade** — des mises à jour indépendantes du gestionnaire de paquets, par lots, validées et réversibles.
-- **Système de conception** — un `DESIGN.md` à périmètre frontend (à `docs/DESIGN.md`, référencé depuis `AGENTS.md`) raisonné à partir des véritables tokens de conception du dépôt, afin que les agents génèrent une UI fidèle à la marque ; activé par défaut lorsqu'un système de conception est détecté.
+- **Système de conception** — un `DESIGN.md` à périmètre d'interface (à `docs/DESIGN.md`, référencé depuis `AGENTS.md`) raisonné à partir de la véritable source de conception du dépôt, avec des profils pour l'UI visuelle, la sortie CLI stylée et la messagerie conversationnelle, afin que les agents génèrent une sortie d'interface fidèle à la marque ; le profil visuel est activé par défaut lorsqu'un système de conception est détecté, et les profils CLI et conversationnel sont recommandés lorsqu'ils sont détectés et toujours soumis à une question.
 
 ### Exemples
 

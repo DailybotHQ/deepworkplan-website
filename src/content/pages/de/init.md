@@ -137,9 +137,10 @@ mit **null** Addons vollständig konform — installieren Sie sie niemals automa
   Die zentrale Methodik hat keine Dailybot-Abhängigkeit.
 - **Dependency-Upgrade** — paketmanager-agnostische, chargenweise, validierte, rücknehmbare Upgrades. Wenn
   angenommen, installiert es den `/lib-upgrade`-Befehl.
-- **Design System** — eine agentenorientierte `docs/DESIGN.md`, hergeleitet aus den tatsächlichen
-  Design-Tokens und Komponentenstilen des Repositorys, damit jeder Agent UI erzeugt, die mit dem eigenen
-  Design-System des Repos konsistent ist.
+- **Design System** — eine agentenorientierte `docs/DESIGN.md`, hergeleitet aus der tatsächlichen
+  Designquelle des Repositorys, die seine erkannten Interface-Oberflächen als Profile abdeckt — visuelle UI,
+  gestylte CLI-Ausgabe und konversationales Messaging —, damit jeder Agent Interface-Ausgaben erzeugt,
+  die mit den eigenen Konventionen des Repos konsistent sind.
 
 ## 6. Planen und ausführen
 

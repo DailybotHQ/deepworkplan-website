@@ -12,7 +12,7 @@ lastUpdated: 2026-05-30
 - **DWP 规范**（v1.2）—— 计划结构、任务结构、执行循环、用于存量代码行为变更的 Delta 段落、DWP 恢复协议、比例严格度层级（micro/standard/deep），以及机器可读计划状态层。
 - **代理协议**（v1.2）—— 必需的跨代理行为、命令映射、受支持代理（包括 OpenClaw 与 Hermes），以及执行配置文件（交互式与无人值守），含停止条件与计划续行。
 - **原型**（v1.1）—— 单一仓库、编排枢纽，以及代理工作区（自主代理的长期驻地：OpenClaw 工作区、Hermes 服务目录、云端代理卷）；归类判定法则及接入差异。
-- **附加组件** —— 用于叠加可选能力的可选机制，包括 author 子技能（使一个仓库培育自己的套件）与诸如 dependency-upgrade 这样的维护类附加组件，以及前端的 design-system 附加组件（一份从仓库真实设计 token 推理而来的 `docs/DESIGN.md`）。
+- **附加组件** —— 用于叠加可选能力的可选机制，包括 author 子技能（使一个仓库培育自己的套件）与诸如 dependency-upgrade 这样的维护类附加组件，以及 design-system 附加组件（一份从仓库真实设计来源推理而来的 `docs/DESIGN.md`，并为可视化 UI、CLI 输出与会话式表面提供配置档）。
 - **符合性** —— 对一个 AI-first 代码仓库的规范性定义：仓库 MUST 与 SHOULD 拥有的产物、什么使一份计划结构良好，以及如何用 `/dwp-verify` 客观地验证它。
 - **Plan state** —— 机器可读状态层：`manifest.json` 与 `state.json`、关卡记录、作为情节记忆的 outcome 记录、协调机制（Markdown 获胜），以及何时需要该层。
 
