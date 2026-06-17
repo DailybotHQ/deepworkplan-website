@@ -48,6 +48,14 @@ export const tr: SiteTranslations = {
     poweredBy: 'Geliştiren',
   },
 
+  // Temporary Product Hunt launch announcement bar
+  announcementBar: {
+    badge: 'Yeni',
+    text: 'Deep Work Plan bugün Product Hunt’ta',
+    tagline: 'ajanına bir plan ver',
+    linkText: 'Oy ver',
+  },
+
   // Agent-friendly Markdown navigation
   agentNav: {
     heading: 'Site Gezinmesi',

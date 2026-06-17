@@ -48,6 +48,14 @@ export const ja: SiteTranslations = {
     poweredBy: 'Powered by',
   },
 
+  // Temporary Product Hunt launch announcement bar
+  announcementBar: {
+    badge: 'New',
+    text: 'Deep Work Plan が本日 Product Hunt に登場',
+    tagline: 'エージェントに計画を',
+    linkText: '応援する',
+  },
+
   // Agent-friendly Markdown navigation
   agentNav: {
     heading: 'サイトナビゲーション',

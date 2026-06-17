@@ -47,6 +47,14 @@ export const id: SiteTranslations = {
     poweredBy: 'Didukung oleh',
   },
 
+  // Temporary Product Hunt launch announcement bar
+  announcementBar: {
+    badge: 'Baru',
+    text: 'Deep Work Plan hadir di Product Hunt hari ini',
+    tagline: 'beri agenmu sebuah rencana',
+    linkText: 'Dukung kami',
+  },
+
   // Agent-friendly Markdown navigation
   agentNav: {
     heading: 'Navigasi Situs',

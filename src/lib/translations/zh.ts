@@ -47,6 +47,14 @@ export const zh: SiteTranslations = {
     poweredBy: '技术支持',
   },
 
+  // Temporary Product Hunt launch announcement bar
+  announcementBar: {
+    badge: '最新',
+    text: 'Deep Work Plan 今天登陆 Product Hunt',
+    tagline: '给你的智能体一个计划',
+    linkText: '去支持',
+  },
+
   // Agent-friendly Markdown navigation
   agentNav: {
     heading: '站点导航',

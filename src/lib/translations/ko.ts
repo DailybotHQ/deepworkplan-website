@@ -47,6 +47,14 @@ export const ko: SiteTranslations = {
     poweredBy: 'Powered by',
   },
 
+  // Temporary Product Hunt launch announcement bar
+  announcementBar: {
+    badge: 'New',
+    text: 'Deep Work Plan이 오늘 Product Hunt에 출시됐어요',
+    tagline: '에이전트에게 계획을',
+    linkText: '추천하기',
+  },
+
   // Agent-friendly Markdown navigation
   agentNav: {
     heading: '사이트 내비게이션',

@@ -48,6 +48,14 @@ export const uk: SiteTranslations = {
     poweredBy: 'Працює на',
   },
 
+  // Temporary Product Hunt launch announcement bar
+  announcementBar: {
+    badge: 'Новинка',
+    text: 'Deep Work Plan сьогодні на Product Hunt',
+    tagline: 'дайте агенту план',
+    linkText: 'Підтримати',
+  },
+
   // Agent-friendly Markdown navigation
   agentNav: {
     heading: 'Навігація сайтом',
