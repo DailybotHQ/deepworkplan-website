@@ -48,6 +48,14 @@ export const it: SiteTranslations = {
     poweredBy: 'Realizzato con',
   },
 
+  // Temporary Product Hunt launch announcement bar
+  announcementBar: {
+    badge: 'Novità',
+    text: 'Deep Work Plan è su Product Hunt oggi',
+    tagline: 'dai un piano al tuo agente',
+    linkText: 'Vota ora',
+  },
+
   // Agent-friendly Markdown navigation
   agentNav: {
     heading: 'Navigazione del sito',

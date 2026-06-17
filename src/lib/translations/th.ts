@@ -47,6 +47,14 @@ export const th: SiteTranslations = {
     poweredBy: 'ขับเคลื่อนโดย',
   },
 
+  // Temporary Product Hunt launch announcement bar
+  announcementBar: {
+    badge: 'ใหม่',
+    text: 'Deep Work Plan เปิดตัวบน Product Hunt วันนี้',
+    tagline: 'มอบแผนให้เอเจนต์ของคุณ',
+    linkText: 'โหวตเลย',
+  },
+
   // Agent-friendly Markdown navigation
   agentNav: {
     heading: 'การนำทางในเว็บไซต์',

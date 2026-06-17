@@ -48,6 +48,14 @@ export const vi: SiteTranslations = {
     poweredBy: 'Vận hành bởi',
   },
 
+  // Temporary Product Hunt launch announcement bar
+  announcementBar: {
+    badge: 'Mới',
+    text: 'Deep Work Plan có mặt trên Product Hunt hôm nay',
+    tagline: 'trao cho agent một kế hoạch',
+    linkText: 'Ủng hộ ngay',
+  },
+
   // Agent-friendly Markdown navigation
   agentNav: {
     heading: 'Điều hướng trang',
