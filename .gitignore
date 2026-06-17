@@ -48,12 +48,6 @@ spanish.png
 # Deep Work Plan output (working state, not tracked)
 .dwp/
 
-# DeepWorkPlan skill — installed via npx skills / setup.sh, not vendored
-.agents/skills/deepworkplan/
-
-# Dailybot agent skill — installed via the DWP dailybot addon, not vendored
-.agents/skills/dailybot/
-
 # Dailybot per-repo reporting opt-out (local kill-switch; profile.json IS tracked)
 .dailybot/disabled
 
