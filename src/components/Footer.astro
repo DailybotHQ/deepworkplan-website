@@ -123,8 +123,11 @@ const links = [
         />
       </a>
 
-      <!-- Product Hunt launch badge (temporary — launch day). Light mode uses the
-           dark theme for ink-on-paper contrast; dark mode swaps to the neutral theme. -->
+      <!-- Product Hunt launch badge (temporary — launch day). Self-hosted SVGs
+           (snapshot of the official featured badge) so there's no third-party
+           request — keeps best-practices at 1.0 in CI and loads instantly. Light
+           mode uses the dark theme for ink-on-paper contrast; dark mode swaps to
+           the neutral theme. -->
       <a
         href="https://www.producthunt.com/products/deep-work-plan?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-deep-work-plan"
         target="_blank"
@@ -134,7 +137,7 @@ const links = [
       >
         <img
           class="block h-10 w-auto dark:hidden"
-          src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1171884&theme=dark"
+          src="/images/product-hunt/featured-dark.svg"
           alt="Deep Work Plan - Models matter. Context matters more. Give your agent a plan. | Product Hunt"
           width="250"
           height="54"
@@ -142,7 +145,7 @@ const links = [
         />
         <img
           class="hidden h-10 w-auto dark:block"
-          src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1171884&theme=neutral"
+          src="/images/product-hunt/featured-neutral.svg"
           alt="Deep Work Plan - Models matter. Context matters more. Give your agent a plan. | Product Hunt"
           width="250"
           height="54"
