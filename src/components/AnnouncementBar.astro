@@ -1,5 +1,9 @@
 ---
-// Temporary Product Hunt launch announcement bar (launch day only).
+// Reusable announcement bar.
+//
+// ON/OFF: controlled by `ANNOUNCEMENT.enabled` in
+// `src/lib/constants/announcement.ts`. MainLayout renders this component only
+// when that flag is true — flip it there to turn the bar on or off site-wide.
 //
 // The whole bar is a single link. It sits in normal document flow ABOVE the
 // sticky header, so it simply scrolls away on scroll-down and reappears at the
@@ -11,9 +15,9 @@
 // themes without a dark: variant.
 //
 // Copy is wired into the i18n system (t.announcementBar) so it ships in every
-// active language. To retire it, remove this component and its <AnnouncementBar />
-// usage in src/layouts/MainLayout.astro (the announcementBar translation keys can
-// stay or be cleaned up later).
+// active language; the link target lives in ANNOUNCEMENT.url. It was last used
+// for the Product Hunt launch.
+import { ANNOUNCEMENT } from '@/lib/constants/announcement';
 import type { Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
@@ -24,8 +28,7 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const t = getTranslations(lang as Language).announcementBar;
 
-const PH_URL =
-  'https://www.producthunt.com/products/deep-work-plan?utm_source=launch-bar&utm_medium=banner&utm_campaign=launch-bar';
+const ANN_URL = ANNOUNCEMENT.url;
 ---
 
 <div
@@ -33,7 +36,7 @@ const PH_URL =
   style="background-color: var(--color-main); border-color: rgba(255,255,255,0.08);"
 >
   <a
-    href={PH_URL}
+    href={ANN_URL}
     target="_blank"
     rel="noopener noreferrer"
     class="ph-bar-link group mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-x-2 gap-y-1 px-4 py-2 text-sm leading-snug transition-colors"
