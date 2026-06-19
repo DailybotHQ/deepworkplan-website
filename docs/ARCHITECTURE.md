@@ -71,6 +71,7 @@ Source Files → Astro Build → Static Output
 ```
 src/
 ├── components/              # Reusable UI components
+│   ├── AnnouncementBar.astro # Reusable top-of-page announcement strip (toggle via ANNOUNCEMENT.enabled)
 │   ├── BaseHead.astro       # <head> content (SEO, meta, hreflang, OG, JSON-LD)
 │   ├── Footer.astro         # Site footer
 │   ├── WebMcp.astro         # WebMCP progressive enhancement (agent-discoverable site map)
