@@ -94,6 +94,14 @@ export interface SiteTranslations {
     poweredBy: string;
   };
 
+  // Temporary Product Hunt launch announcement bar (above the header)
+  announcementBar: {
+    badge: string;
+    text: string;
+    tagline: string;
+    linkText: string;
+  };
+
   // Agent-friendly Markdown navigation (rendered into .md endpoints)
   agentNav: {
     heading: string;

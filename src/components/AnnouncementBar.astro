@@ -1,0 +1,82 @@
+---
+// Temporary Product Hunt launch announcement bar (launch day only).
+//
+// The whole bar is a single link. It sits in normal document flow ABOVE the
+// sticky header, so it simply scrolls away on scroll-down and reappears at the
+// top — no scroll JS, no layout shift, no dismiss button.
+//
+// Editorial treatment: an inverted masthead strip — warm ink ground
+// (--color-main, dark in both light & dark mode) with paper-white text and an
+// oxblood (--color-secondary) call-to-action, so it reads consistently in both
+// themes without a dark: variant.
+//
+// Copy is wired into the i18n system (t.announcementBar) so it ships in every
+// active language. To retire it, remove this component and its <AnnouncementBar />
+// usage in src/layouts/MainLayout.astro (the announcementBar translation keys can
+// stay or be cleaned up later).
+import type { Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = getTranslations(lang as Language).announcementBar;
+
+const PH_URL =
+  'https://www.producthunt.com/products/deep-work-plan?utm_source=launch-bar&utm_medium=banner&utm_campaign=launch-bar';
+---
+
+<div
+  class="relative w-full border-b"
+  style="background-color: var(--color-main); border-color: rgba(255,255,255,0.08);"
+>
+  <a
+    href={PH_URL}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="ph-bar-link group mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-x-2 gap-y-1 px-4 py-2 text-sm leading-snug transition-colors"
+    style="color: #ece7da;"
+  >
+    <span
+      class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em]"
+      style="background-color: rgba(255,255,255,0.08); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28);"
+    >
+      {t.badge}
+    </span>
+    <span class="flex min-w-0 items-baseline gap-1.5">
+      <span class="font-medium">{t.text}</span>
+      <span class="hidden truncate sm:inline" style="color: rgba(236,231,218,0.7);">
+        &mdash; {t.tagline}
+      </span>
+    </span>
+    <span
+      class="inline-flex shrink-0 items-center gap-1 font-semibold underline underline-offset-4 decoration-1"
+    >
+      {t.linkText}
+      <svg
+        class="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6L19.5 12L13.5 18"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14"></path>
+      </svg>
+    </span>
+  </a>
+</div>
+
+<style>
+  /* Subtle hover lift on the warm ink ground. */
+  .ph-bar-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  .ph-bar-link:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.4);
+    outline-offset: -2px;
+  }
+</style>

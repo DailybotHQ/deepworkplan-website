@@ -123,6 +123,36 @@ const links = [
         />
       </a>
 
+      <!-- Product Hunt launch badge (temporary — launch day). Self-hosted SVGs
+           (snapshot of the official featured badge) so there's no third-party
+           request — keeps best-practices at 1.0 in CI and loads instantly. Light
+           mode uses the dark theme for ink-on-paper contrast; dark mode swaps to
+           the neutral theme. -->
+      <a
+        href="https://www.producthunt.com/products/deep-work-plan?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-deep-work-plan"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex hover:opacity-80 transition-opacity"
+        aria-label="Deep Work Plan on Product Hunt"
+      >
+        <img
+          class="block h-10 w-auto dark:hidden"
+          src="/images/product-hunt/featured-dark.svg"
+          alt="Deep Work Plan - Models matter. Context matters more. Give your agent a plan. | Product Hunt"
+          width="250"
+          height="54"
+          loading="lazy"
+        />
+        <img
+          class="hidden h-10 w-auto dark:block"
+          src="/images/product-hunt/featured-neutral.svg"
+          alt="Deep Work Plan - Models matter. Context matters more. Give your agent a plan. | Product Hunt"
+          width="250"
+          height="54"
+          loading="lazy"
+        />
+      </a>
+
       <div class="kicker text-center">
         &copy; <span id="copyright-year">{new Date().getFullYear()}</span> Deep Work
         Plan &middot; {t.footer.allRightsReserved}

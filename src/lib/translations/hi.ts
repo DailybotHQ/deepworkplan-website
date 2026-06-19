@@ -47,6 +47,14 @@ export const hi: SiteTranslations = {
     poweredBy: 'द्वारा संचालित',
   },
 
+  // Temporary Product Hunt launch announcement bar
+  announcementBar: {
+    badge: 'नया',
+    text: 'Deep Work Plan आज Product Hunt पर है',
+    tagline: 'अपने एजेंट को एक प्लान दें',
+    linkText: 'अपवोट करें',
+  },
+
   // Agent-friendly Markdown navigation
   agentNav: {
     heading: 'साइट नेविगेशन',
