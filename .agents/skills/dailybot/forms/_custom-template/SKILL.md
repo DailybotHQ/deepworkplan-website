@@ -1,8 +1,8 @@
 ---
 name: dailybot-custom-form-template
 description: STARTER TEMPLATE — do not consume this file in place. Copy it to .agents/skills/dailybot-custom/<your-skill-name>/SKILL.md in your own repo, then customize. This is the bootstrap skeleton for authoring a per-form custom skill that the universal dailybot-forms resolver will load from .dailybot/profile.json.
-version: "1.7.1"
-documentation_url: https://api.dailybot.com/skill.md
+version: "3.4.0"
+documentation_url: https://www.dailybot.com/skill.md
 user-invocable: false
 allowed-tools: Bash, Read, Grep, Glob
 ---
@@ -114,7 +114,7 @@ What does the agent do when:
 
 ## 7 — Reference implementation
 
-For a complete reference of this template applied to a real workflow form, see the Dailybot-internal code-release skill at `api-services/.agents/skills/dailybot-custom/coderelease-form/SKILL.md` (ships in the `api-services` repo, separate from this skill pack). It demonstrates per-state validation, autofill from repo metadata, and channel-routing reminders end-to-end.
+A complete reference implementation of this template lives as a custom skill at `.agents/skills/dailybot-custom/<form-slug>/SKILL.md` in the consuming repo (a customer- or team-owned namespace, separate from this skill pack). Such a skill demonstrates per-state validation, autofill from repo metadata, and channel-routing reminders end-to-end.
 
 ---
 

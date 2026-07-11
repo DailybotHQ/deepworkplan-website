@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-verify
 description: Verify that a repository is DeepWorkPlan-conformant (AI-first) and that its plans are well-formed, producing an objective pass/fail report. Use when the developer asks to verify, audit, or check conformance of a repo or a plan.
-version: "2.15.0"
+version: "2.16.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob
@@ -75,6 +75,7 @@ for d in .agents/agents .agents/commands .agents/skills .agents/docs; do
   test -d "$d" && echo "$d: ok" || echo "$d: FAIL"
 done
 [ -e .claude ] && echo ".claude resolves: ok" || echo ".claude resolves: FAIL"
+[ -e .cursor ] && echo ".cursor resolves: ok" || echo ".cursor resolves: FAIL"
 
 # 5. dwp-* commands are thin delegators (≤ ~30 lines, reference the skill)
 for f in .agents/commands/dwp-*.md; do
@@ -124,6 +125,7 @@ Repository
   [x] CLAUDE.md -> AGENTS.md
   [ ] docs/ — missing SECURITY.md
   [x] .agents/ + catalog matches disk
+  [x] .cursor -> .agents
   [x] .dwp/ gitignored (plans/, drafts/)
   [x] tmp/ gitignored
   [x] skill resolvable

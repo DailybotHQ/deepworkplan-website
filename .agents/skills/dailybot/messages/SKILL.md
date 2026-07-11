@@ -1,8 +1,8 @@
 ---
 name: dailybot-messages
 description: Check for pending messages and instructions from your team via Dailybot. Use when starting a work session, when idle, or when asked what to work on next. Messages are instructions that should influence your work.
-version: "1.7.1"
-documentation_url: https://api.dailybot.com/skill.md
+version: "3.4.0"
+documentation_url: https://www.dailybot.com/skill.md
 user-invocable: false
 metadata: {"openclaw":{"emoji":"📬","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
 allowed-tools: Bash, Read, Grep, Glob
@@ -13,6 +13,8 @@ allowed-tools: Bash, Read, Grep, Glob
 You check for pending messages and instructions from the developer's team. Messages are sent by humans (or other agents) through Dailybot and represent tasks, priorities, context, or feedback that should influence your current work.
 
 This is the "what should I work on next?" skill.
+
+> **Requires `dailybot-cli >= 3.1.2`** (the skill-pack baseline). See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version).
 
 ---
 
@@ -175,4 +177,4 @@ Checking messages must **never block your primary work**. If the CLI is missing,
 - [`../shared/auth.md`](../shared/auth.md) — authentication setup
 - [`../shared/http-fallback.md`](../shared/http-fallback.md) — HTTP API fallback patterns
 - **Live API spec:** `https://api.dailybot.com/api/swagger/`
-- **Full agent API skill:** `https://api.dailybot.com/skill.md`
+- **Full agent API skill:** `https://www.dailybot.com/skill.md`

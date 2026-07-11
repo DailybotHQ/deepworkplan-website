@@ -1,8 +1,8 @@
 ---
 name: dailybot-report
 description: Report work progress to Dailybot. Activate after completing a discrete task or subtask, or after any batch of edits that modifies 3 or more files. Compose a standup-style update describing what changed and why.
-version: "1.7.1"
-documentation_url: https://api.dailybot.com/skill.md
+version: "3.4.0"
+documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"📡","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
 allowed-tools: Bash, Read, Grep, Glob
@@ -46,7 +46,7 @@ first run:
 
 - **Step 0a — Prompt trigger** (works on every agent): a standing
   instruction in the global config file.
-- **Step 0b — Hook enforcement** (CLI >= 1.12.0, harnesses with a hook
+- **Step 0b — Hook enforcement** (harnesses with a hook
   system): deterministic, harness-driven reminders.
 
 Check each one separately. **Having the trigger installed does NOT mean
@@ -111,10 +111,10 @@ If the developer accepts, briefly confirm:
 Then continue to **Step 0b** (do not skip to Step 1 — hooks are a separate
 opt-in).
 
-### Step 0b — Hook enforcement (recommended, CLI >= 1.12.0)
+### Step 0b — Hook enforcement (recommended)
 
 Trigger blocks are advisory — the model can forget them in long sessions.
-Since `dailybot-cli` **1.12.0**, the CLI ships a `dailybot hook` command
+The CLI ships a `dailybot hook` command
 group that the harness itself invokes at session start, after file edits,
 and at the end of every turn, making the reminders **deterministic**. This
 is what makes reporting truly autonomous, so offer it whenever it is
@@ -123,7 +123,7 @@ trigger in a previous session.
 
 #### Check whether hooks apply, and whether they are already installed
 
-1. **CLI version.** Run `dailybot --version`. If it reports below `1.12.0`
+1. **CLI version.** Run `dailybot --version`. If it reports below `3.1.2`
    (or the CLI is absent), the `dailybot hook` group does not exist — skip
    Step 0b silently and continue to Step 1. The Step 0a trigger alone still
    works.
@@ -151,6 +151,12 @@ content, merge rules, and uninstall path. The **same consent rules as Step
 consent. A repo-level config (`.claude/settings.json`, `.cursor/hooks.json`,
 …) committed to the repository gives the whole team autonomous reporting on
 clone — offer that when the developer is in a shared project.
+
+Once hooks are wired, consider the repo's **report cadence**. For research- or
+docs-heavy repos where much of the valuable work never lands as a commit, add
+`"report": {"mode": "continuous"}` to the committed `.dailybot/profile.json` so
+non-commit work (research, analysis, design docs, plans) is nudged sooner (a
+lower interval and turn threshold). See [`hooks.md`](hooks.md) § Per-repo controls.
 
 If the developer declines, continue to Step 1 and do not re-ask in the same
 session. The Step 0a trigger still provides (probabilistic) coverage.
@@ -403,9 +409,8 @@ A successful request returns `201` with the created report, including a
 ```
 
 Capture that `url` and surface it when you confirm (see Step 7). The CLI
-prints the same link automatically as a `View:` line **from `dailybot-cli`
-1.11.0 onward**; on earlier CLIs the printed output omits it, but the HTTP
-`201` body above always carries the `url` — read it from there.
+prints the same link automatically as a `View:` line; the HTTP
+`201` body above always carries the `url` too — read it from there.
 
 ---
 
@@ -498,7 +503,7 @@ For side-by-side examples, see [`examples.md`](examples.md).
 
 After the command runs:
 
-- **Success** — briefly confirm what was reported, and include the placement link the response returns (the `url` field, printed by the CLI as `View:` from `dailybot-cli` 1.11.0 onward, and always present in the HTTP `201` body) so the developer can jump straight to where it landed. Example: *"Reported to Dailybot: Built the notification preferences system with full test coverage — view it at https://app.dailybot.com/agents/report/<uuid>."* If no `url` is surfaced (an older backend, or a CLI below 1.11.0 where you only see the printed output), just confirm the report without a link.
+- **Success** — briefly confirm what was reported, and include the placement link the response returns (the `url` field, printed by the CLI as `View:`, and always present in the HTTP `201` body) so the developer can jump straight to where it landed. Example: *"Reported to Dailybot: Built the notification preferences system with full test coverage — view it at https://app.dailybot.com/agents/report/<uuid>."* If no `url` is surfaced (an older backend), just confirm the report without a link.
 - **Failure** — warn briefly. Do not retry in a loop. Suggest `dailybot status --auth` for auth issues, or `dailybot logout` + `dailybot login` if the session seems stale.
 - **Skipped** — say nothing. Complete silence is the correct response.
 
@@ -518,7 +523,7 @@ Reporting must **never block your primary work**. If the CLI is missing, auth fa
 ## Additional Resources
 
 - [`triggers.md`](triggers.md) — auto-activation trigger templates for each supported agent
-- [`hooks.md`](hooks.md) — deterministic hook enforcement (CLI >= 1.12.0): per-harness configs, reminder handling, `dismiss`
+- [`hooks.md`](hooks.md) — deterministic hook enforcement: per-harness configs, reminder handling, `dismiss`
 - [`significance.md`](significance.md) — when to report and when to stay silent, with edge cases
 - [`writing-guide.md`](writing-guide.md) — writing templates by work type, action verbs, rate limiting
 - [`examples.md`](examples.md) — 15 side-by-side good vs bad comparisons
@@ -526,4 +531,4 @@ Reporting must **never block your primary work**. If the CLI is missing, auth fa
 - [`../shared/context.sh`](../shared/context.sh) — automated context detection
 - [`../shared/http-fallback.md`](../shared/http-fallback.md) — HTTP API fallback patterns
 - **Live API spec:** `https://api.dailybot.com/api/swagger/`
-- **Full agent API skill:** `https://api.dailybot.com/skill.md`
+- **Full agent API skill:** `https://www.dailybot.com/skill.md`

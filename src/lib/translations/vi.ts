@@ -122,9 +122,9 @@ export const vi: SiteTranslations = {
             'Một AGENTS.md được suy luận, một hệ thống docs/ phân loại, cùng một README và docs/ bên trong mỗi mô-đun chính — được điền bằng các lệnh thực tế của repository, không phải chỗ trống.',
         },
         {
-          title: 'Dựng .agents/ cùng symlink .claude tới .agents',
+          title: 'Dựng .agents/ cùng symlink .claude và .cursor tới .agents',
           description:
-            'Một thư mục .agents/ dùng chung giữa các agent (skill, agent, command) và symlink .claude tới .agents, phản chiếu CLAUDE.md tới AGENTS.md, để mọi công cụ đều đọc một nguồn chân lý duy nhất.',
+            'Một thư mục .agents/ dùng chung giữa các agent (skill, agent, command) và các symlink .claude và .cursor tới .agents, phản chiếu CLAUDE.md tới AGENTS.md, để mọi công cụ đều đọc một nguồn chân lý duy nhất.',
         },
         {
           title: 'Cài skill DWP và dựng .dwp/',
@@ -179,9 +179,9 @@ export const vi: SiteTranslations = {
             'Kiến trúc, cài đặt, chuẩn mực và xử lý sự cố — cùng một README và docs/ bên trong mỗi mô-đun chính, được sinh ra từ codebase của bạn.',
         },
         {
-          label: '.agents/ cùng symlink .claude tới .agents',
+          label: '.agents/ cùng symlink .claude và .cursor tới .agents',
           detail:
-            'Một thư mục .agents/ dùng chung giữa các agent (skill, agent, command) với symlink .claude tới .agents để mọi công cụ đọc một nguồn chân lý duy nhất.',
+            'Một thư mục .agents/ dùng chung giữa các agent (skill, agent, command) với các symlink .claude và .cursor tới .agents để mọi công cụ đọc một nguồn chân lý duy nhất.',
         },
         {
           label: 'Skill Deep Work Plan, đã cài',
@@ -629,7 +629,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Khởi tạo repository',
         description:
-          'Chạy sub-skill onboard và để agent suy luận về repo thực tế của bạn. Nó sinh ra AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục .agents/ dùng chung giữa các agent (với symlink .claude → .agents), kết nối các command dwp-* mỏng và dựng một .dwp/ được gitignore.',
+          'Chạy sub-skill onboard và để agent suy luận về repo thực tế của bạn. Nó sinh ra AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục .agents/ dùng chung giữa các agent (với các symlink .claude → .agents và .cursor → .agents), kết nối các command dwp-* mỏng và dựng một .dwp/ được gitignore.',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -676,7 +676,7 @@ export const vi: SiteTranslations = {
     whatTitle: 'Điều này làm gì',
     whatBody: [
       'Việc áp dụng thay đổi repository theo hai cách bền vững — hai trụ cột của phương pháp luận.',
-      'Thứ nhất, repository trở thành dựa trên đặc tả: công việc bắt đầu từ một kế hoạch và đặc tả được viết ra, không phải từ những lời nhắc tùy hứng. Thứ hai, bản thân repository trở thành harness của agent — một AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục skill .agents/ (với symlink .claude → .agents) trao cho mọi agent ngữ cảnh và các command nó cần.',
+      'Thứ nhất, repository trở thành dựa trên đặc tả: công việc bắt đầu từ một kế hoạch và đặc tả được viết ra, không phải từ những lời nhắc tùy hứng. Thứ hai, bản thân repository trở thành harness của agent — một AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục skill .agents/ (với các symlink .claude → .agents và .cursor → .agents) trao cho mọi agent ngữ cảnh và các command nó cần.',
     ],
     sequenceTitle: 'Trình tự áp dụng',
     orLabel: 'hoặc',
@@ -686,7 +686,7 @@ export const vi: SiteTranslations = {
         description:
           'Hãy coi lời nhắc và skill là không đáng tin cho đến khi bạn đã kiểm tra chúng. Cả hai đều là mã nguồn mở và cấp phép MIT; skill là Markdown-first không có lời gọi mạng và không có telemetry. Mỗi bản phát hành công bố một SHA256SUMS cho skill được giao, vì vậy bạn có thể xác nhận bản sao của mình khớp trước khi chạy nó. Các bản phát hành có checksum, không có chữ ký (ký là bước tiếp theo đã được ghi lại).',
         commands: [
-          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -695,24 +695,31 @@ export const vi: SiteTranslations = {
           'Thêm skill Deep Work Plan để mọi agent đều có thể lập kế hoạch và thực thi công việc có cấu trúc. Skill đi kèm một bộ định tuyến cùng tám sub-skill — create, execute, refine, resume, status, verify, onboard và author.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
         title: 'Chạy khởi tạo repository',
         description:
-          'Gọi sub-skill onboard và để agent suy luận về repo thực tế — stack, trình quản lý gói và các lệnh kiểm chứng thực sự của nó. Sau đó nó sinh ra AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục .agents/ dùng chung giữa các agent (với symlink .claude → .agents), kết nối các command dwp-* mỏng và dựng một .dwp/ được gitignore cho kế hoạch và bản nháp. Không gì là rập khuôn; mọi thứ đều được thích ứng với repository của bạn.',
+          'Gọi sub-skill onboard và để agent suy luận về repo thực tế — stack, trình quản lý gói và các lệnh kiểm chứng thực sự của nó. Sau đó nó sinh ra AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục .agents/ dùng chung giữa các agent (với các symlink .claude → .agents và .cursor → .agents), kết nối các command dwp-* mỏng và dựng một .dwp/ được gitignore cho kế hoạch và bản nháp. Với các repo lớn, sub-skill onboard sử dụng đường dẫn dựa trên kế hoạch: hoàn thành khảo sát, sau đó phát hành một Deep Work Plan khởi tạo. Không gì là rập khuôn; mọi thứ đều được thích ứng với repository của bạn.',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Phát triển bộ kit và chấp nhận các addon',
+        title: 'Chấp nhận các addon tự nguyện',
         description:
-          'Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack. Khởi tạo cũng đề xuất bốn addon tự nguyện — devcontainer, Dailybot, dependency-upgrade và design-system — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không cần addon nào.',
+          'Khởi tạo đề xuất bốn addon tự nguyện — devcontainer, Dailybot, dependency-upgrade và design-system — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không cần addon nào. Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack vượt ra ngoài cơ sở.',
       },
       {
         title: 'Lập kế hoạch và thực thi',
         description:
-          'Sinh ra các Deep Work Plan với /dwp-create và chạy chúng với /dwp-execute, rồi /dwp-status, /dwp-refine và /dwp-resume khi công việc tiến triển. Mỗi kế hoạch mang các tác vụ được đánh số, các cổng kiểm chứng và một giao thức hoàn tất để công việc luôn có cấu trúc, rà soát được và có thể tiếp tục qua nhiều phiên.',
+          'Sinh ra các Deep Work Plan với /dwp-create và chạy chúng với /dwp-execute, rồi /dwp-status, /dwp-refine, /dwp-resume và /dwp-verify khi công việc tiến triển. Mỗi kế hoạch mang các tác vụ được đánh số, các cổng kiểm chứng và một giao thức hoàn tất — kết thúc với ba tác vụ cuối bắt buộc: Đánh giá Bảo mật, Khám phá Skill và Agent, và Báo cáo Tổng hợp.',
+      },
+      {
+        title: 'Xác minh sự tuân thủ',
+        description:
+          'Chạy /dwp-verify để có báo cáo đạt/không đạt khách quan so với đặc tả. Xác nhận rằng AGENTS.md, docs/ (với nội dung thực, không phải stub), .agents/ (với các delegator dwp-* mỏng và một catalog khớp với đĩa), .dwp/ và tmp/ đều đã sẵn sàng — không gì là rập khuôn, mọi thứ đều được suy luận cho repo này.',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: 'Kết quả',

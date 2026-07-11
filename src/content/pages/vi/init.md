@@ -52,8 +52,10 @@ Trước hết hãy hiểu repository, rồi đề xuất điều bạn sẽ là
   nào, `.dwp/`, và `.gitignore`. Ghi chú bất cứ thứ gì đã làm một phần công việc này.
 - **Đề xuất kế hoạch khởi tạo.** Trình bày một danh sách súc tích: các tệp bạn sẽ tạo, các tệp bạn sẽ
   sửa đổi, và bất cứ thứ gì hiện có mà bạn đề nghị đối chiếu hay thay thế — rồi **đề nghị người dùng xác nhận**
-  trước khi tiến hành. Với một repository lớn, hãy nắm bắt kế hoạch này bằng `/dwp-create` và thực thi nó như một
-  Deep Work Plan.
+  trước khi tiến hành. Với một repository lớn (nhiều mô-đun hoặc nhiều thành phần cần sinh ra), sub-skill
+  onboard sử dụng lộ trình hướng kế hoạch: nó hoàn tất trinh sát, sinh `AGENTS.md`, rồi phát ra một
+  Deep Work Plan khởi tạo dưới `.dwp/drafts/` và chuyển giao cho `/dwp-refine` → `/dwp-execute`
+  → `/dwp-resume` khi cần.
 
 ## Tin tưởng và xác minh (trước khi bạn cài đặt)
 
@@ -94,6 +96,12 @@ cùng tám sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `ver
 npx skills add DailybotHQ/deepworkplan-skill
 ```
 
+Hoặc cài đặt qua OpenClaw:
+
+```bash
+openclaw skills install deepworkplan
+```
+
 Hoặc clone và chạy script cài đặt:
 
 ```bash
@@ -110,7 +118,7 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
    (chỉ tiếng Anh, conventional commit, mẫu test thật của repo và các cổng rà soát), và một khối Quick
    Commands với các lệnh **thật, chạy được** của repo. Nếu một `AGENTS.md` đã tồn tại, hãy hợp nhất
    vào nó thay vì thay thế nó. Tạo symlink `CLAUDE.md → AGENTS.md` (đừng ghi đè một
-   `CLAUDE.md` hiện có mà không hỏi).
+   `CLAUDE.md` hiện có mà không hỏi). Cũng tạo `.cursor → .agents` nếu chưa có.
 2. **`docs/`.** Lấp đầy các hạng mục chuẩn bằng nội dung thật, riêng cho repo: `PRODUCT_SPEC.md` (tài liệu sản phẩm/lý do phi kỹ thuật — bắt buộc cho mọi repo, kể cả thư viện), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md` (không bao giờ
    bị bỏ qua — mọi repository đều có một tư thế bảo mật, ngay cả khi không có bí mật nào),
@@ -118,11 +126,11 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
    Nếu tài liệu đã tồn tại, hãy tích hợp và mở rộng chúng — đừng nhân bản.
 3. **Tài liệu cho từng mô-đun.** Thêm một `README.md` (và một thư mục con `docs/` cho các mô-đun phức tạp) bên trong mỗi
    mô-đun nguồn chính được phát hiện trong quá trình trinh sát.
-4. **`.agents/` + `.claude → .agents`.** Tạo ngôi nhà chuẩn, xuyên agent: một catalog **được suy luận**
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Tạo ngôi nhà chuẩn, xuyên agent: một catalog **được suy luận**
    gồm `agents/`, `skills/` phù hợp với stack, và các `commands/` `dwp-*` mỏng ủy thác tới skill
    đã cài — mỗi mục đều được biện minh cho *chính* repository này, không sao chép từ repo khác. Thêm một
    catalog `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) khớp với những gì có trên
-   đĩa, cùng `settings.json`, và symlink `.claude → .agents`. Gộp bất kỳ skill/agent hiện có nào
+   đĩa, cùng `settings.json`, và các symlink `.claude → .agents` cùng `.cursor → .agents`. Gộp bất kỳ skill/agent hiện có nào
    vào catalog.
 5. **Skill DWP, đã thích ứng.** Skill đã cài là động cơ; bộ kit của riêng repository
    (skill, agent, command) phải **được suy luận cho repo này** — không bao giờ là một bản sao chép-dán bộ kit của repo
@@ -130,28 +138,26 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
 6. **`.dwp/` + `tmp/`.** Dựng một `.dwp/` được gitignore với `plans/` và `drafts/`, cùng một không gian nháp
    `tmp/` — cả hai đều được thêm vào `.gitignore` một cách không phá hủy (nối thêm, không bao giờ viết lại).
 
-## 4. Phát triển bộ kit (sub-skill author)
+## 4. Đề xuất các addon tự nguyện
 
-Dùng sub-skill `author` để nuôi lớn bộ kit của riêng repository. Các bộ ủy thác mỏng `/skill-create` và
-`/agent-create` định tuyến tới nó. Tạo một **skill** cho một quy trình lặp lại trong phiên, một **agent** cho
-một vai trò lặp lại với hạng mô hình và công cụ riêng, và một **command** chỉ như một bộ ủy thác mỏng. Giữ
-catalog `.agents/docs/` đồng bộ với những gì có trên đĩa.
-
-## 5. Đề xuất các addon tự nguyện
-
-Sau nền tảng cơ bản, hãy liệt kê bốn addon (devcontainer, Dailybot, dependency-upgrade, design-system) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository
+Sau khi khởi tạo nền tảng, hãy liệt kê bốn addon (devcontainer, Dailybot, dependency-upgrade, design-system) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository
 hoàn toàn tuân thủ với **không** cần addon nào — đừng bao giờ tự động cài chúng.
 
 - **Hỗ trợ devcontainer** — một dev container tái lập được, cô lập, với xác thực AI-CLI bền vững.
-- **Tích hợp Dailybot** — báo cáo tiến độ/cột mốc theo nỗ lực tối đa cho các đội đã dùng Dailybot,
-  với lớp hook tự hành tùy chọn để agent báo cáo công việc quan trọng mà không cần ai nhắc.
-  Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
+- **Tích hợp Dailybot** — bốn sự kiện vòng đời (kickoff, tác vụ quan trọng, bị chặn, hoàn tất) dưới dạng báo cáo tiến độ theo nỗ lực tối đa cho các đội đã dùng Dailybot, với lớp hook tự hành tùy chọn (`dailybot-cli >= 3.1.2`). Cài skill agent Dailybot đi kèm (3.4.0) cũng mở ra chat, check-in, tạo biểu mẫu, hỏi AI và nhiều hơn — addon chỉ đấu nối phần báo cáo vào quá trình thực thi DWP. Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
 - **Nâng cấp phụ thuộc** — nâng cấp độc lập với trình quản lý gói, theo lô, được kiểm chứng, hoàn nguyên được. Khi
   được chấp nhận, nó cài command `/lib-upgrade`.
-- **Design system** — một `docs/DESIGN.md` dành cho agent, được suy luận từ nguồn thiết kế thực của
-  repository, bao quát các bề mặt giao diện được phát hiện của nó dưới dạng các profile — UI trực quan,
-  đầu ra CLI có phong cách và nhắn tin hội thoại — để bất kỳ agent nào cũng tạo ra đầu ra giao diện
-  nhất quán với các quy ước riêng của repo.
+- **Design system** — `docs/DESIGN.md` tự nguyện dành cho các repo có bề mặt giao diện được phát hiện
+  (không đề xuất cho thư viện thuần, dịch vụ headless hay repo chỉ hạ tầng). Ba profile xếp chồng trong
+  một tệp: visual-ui (bật mặc định khi phát hiện), cli-output và hội thoại — hai profile sau
+  luôn được hỏi, không bao giờ tự động áp dụng.
+
+## 5. Phát triển bộ kit (sub-skill author)
+
+Dùng sub-skill `author` để nuôi lớn bộ kit của riêng repository sau khi khởi tạo. Các bộ ủy thác mỏng `/skill-create` và
+`/agent-create` định tuyến tới nó. Tạo một **skill** cho một quy trình lặp lại trong phiên, một **agent** cho
+một vai trò lặp lại với hạng mô hình và công cụ riêng, và một **command** chỉ như một bộ ủy thác mỏng. Giữ
+catalog `.agents/docs/` đồng bộ với những gì có trên đĩa.
 
 ## 6. Lập kế hoạch và thực thi
 
@@ -162,6 +168,7 @@ Sinh các Deep Work Plan cho mọi tác vụ và chạy chúng từng tác vụ 
 - `/dwp-status` — báo cáo tiến độ mà không thay đổi gì.
 - `/dwp-refine` — thêm, bớt hoặc sắp xếp lại các tác vụ trong khi giữ nguyên công việc đã hoàn tất.
 - `/dwp-resume` — tái dựng trạng thái và tiếp tục một kế hoạch bị gián đoạn.
+- `/dwp-verify` — báo cáo tuân thủ đạt/không đạt khách quan cho repo (hoặc một kế hoạch cụ thể).
 
 Mỗi kế hoạch kết thúc bằng ba tác vụ cuối bắt buộc — một **Security Review** cho các thay đổi của
 chính kế hoạch (giữ `docs/SECURITY.md` luôn cập nhật; một phát hiện nghiêm trọng chặn việc hoàn tất),
@@ -169,16 +176,19 @@ Skills & Agents Discovery và Executive Report.
 
 ## 7. Kiểm chứng
 
-Chạy `/dwp-verify` để có một báo cáo tuân thủ đạt/không đạt khách quan (nó kiểm tra các
-tiêu chí trong [tài liệu Tuân thủ của đặc tả](https://deepworkplan.com/spec)),
-rồi xác nhận:
+Chạy `/dwp-verify` để có một báo cáo tuân thủ đạt/không đạt khách quan (hoặc
+`bash {skill_dir}/verify/conformance.sh` cho lớp cơ học tương thích CI, thoát `0`/`1`).
+Nó kiểm tra các tiêu chí trong [tài liệu Tuân thủ của đặc tả](https://deepworkplan.com/spec).
+Rồi xác nhận:
 
 - [ ] Skill đã được cài và phân giải được, với cả tám sub-skill sẵn sàng.
 - [ ] `AGENTS.md` tồn tại tại gốc với một khối Quick Commands thật; `CLAUDE.md` phân giải tới nó.
-- [ ] `docs/` chứa các hạng mục chuẩn với nội dung thật, riêng cho repo; các mô-đun chính có một
+- [ ] `docs/` chứa các hạng mục chuẩn với nội dung thật, riêng cho repo; `docs/TESTING_GUIDE.md`
+      mô tả thiết lập test/lint thật (không trống hay chỉ là stub); các mô-đun chính có một
       `README.md`.
-- [ ] `.agents/` tồn tại với `agents/`, `commands/` (các bộ ủy thác `dwp-*` mỏng), `skills/`, và một catalog
-      khớp với thực tế; `.claude → .agents` phân giải được.
+- [ ] `.agents/` tồn tại với `agents/`, `commands/` (các bộ ủy thác `dwp-*` mỏng tham chiếu đến skill,
+      không phải luồng sao chép), `skills/`, và một catalog khớp với thực tế trên đĩa;
+      `.claude → .agents` và `.cursor → .agents` phân giải được.
 - [ ] `.dwp/` tồn tại, được gitignore, và có `plans/` cùng `drafts/`; `tmp/` tồn tại và được gitignore.
 - [ ] Nội dung hiện có của người dùng được giữ nguyên hoặc đối chiếu có sự đồng ý — không gì bị phá hủy lặng lẽ.
 - [ ] Bạn có thể sinh một Deep Work Plan và thực thi nó từng tác vụ một, kiểm chứng mỗi cổng.

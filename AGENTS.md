@@ -78,6 +78,7 @@ scripts/                 # Build utilities (image optimization)
 docs/                    # Project documentation
 .agents/                 # Cross-agent skills, commands, agents, settings (canonical)
 .claude → .agents        # Backward-compat symlink for Claude Code
+.cursor → .agents        # Backward-compat symlink for Cursor
 .dwp/                    # Deep Work Plan output (plans/drafts) — git-ignored working state
 tmp/                     # Temporary workspace (git-ignored, see below)
 ```
@@ -112,21 +113,22 @@ The `.agents/` directory is the **canonical, cross-agent home** for everything t
 └── settings.local.json     # Claude Code local permissions (git-tracked)
 ```
 
-**Backward compatibility — `.claude/` symlink:**
+**Backward compatibility — `.claude/` and `.cursor/` symlinks:**
 
-Claude Code historically reads from `.claude/` at the repo root. To keep that working without duplicating files, **`.claude` is a symlink to `.agents`**:
+Claude Code historically reads from `.claude/` and Cursor from `.cursor/` at the repo root. To keep both working without duplicating files, **both are symlinks to `.agents`**:
 
 ```bash
-ls -la .claude
+ls -la .claude .cursor
 # .claude -> .agents
+# .cursor -> .agents
 ```
 
-This means every `.claude/...` path (e.g., `.claude/skills/foo/SKILL.md`) resolves transparently to `.agents/skills/foo/SKILL.md`. No tool, hook, or settings file needs to change for Claude Code to keep working.
+This means every `.claude/...` or `.cursor/...` path (e.g., `.claude/skills/foo/SKILL.md`, `.cursor/hooks.json`) resolves transparently to `.agents/`. No tool, hook, or settings file needs to change for either agent to keep working.
 
 **Authoring rules (all agents):**
 
-- Use `.agents/...` as the canonical path in **all new documentation, prompts, and skill/command files**. Do not write `.claude/...` in new content.
-- Do not edit files via the `.claude/` symlink — edit the real files under `.agents/`.
+- Use `.agents/...` as the canonical path in **all new documentation, prompts, and skill/command files**. Do not write `.claude/...` or `.cursor/...` in new content.
+- Do not edit files via the `.claude/` or `.cursor/` symlinks — edit the real files under `.agents/`.
 - Settings files (`settings.json`, `settings.local.json`) are Claude Code-specific but live in `.agents/` for symmetry. They're a no-op for other agents.
 - The `.agents/README.md` documents how to add new skills, commands, and agents.
 

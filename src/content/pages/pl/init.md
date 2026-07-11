@@ -51,8 +51,10 @@ Najpierw zrozum repozytorium, a potem zaproponuj, co zrobisz.
   `.dwp/` i `.gitignore`. Odnotuj wszystko, co już częściowo wykonuje to zadanie.
 - **Zaproponuj plan onboardingu.** Przedstaw zwięzłą listę: pliki, które utworzysz, pliki, które
   zmodyfikujesz, oraz wszystko istniejące, co proponujesz pogodzić lub zastąpić — a następnie **poproś użytkownika o potwierdzenie**
-  przed kontynuacją. W przypadku dużego repozytorium uchwyć ten plan za pomocą `/dwp-create` i wykonaj go jako
-  Deep Work Plan.
+  przed kontynuacją. W przypadku dużego repozytorium (wiele modułów lub wiele artefaktów do wygenerowania)
+  sub-skill onboard stosuje ścieżkę opartą na planie: kończy rozpoznanie, generuje `AGENTS.md`, a następnie
+  emituje onboardingowy Deep Work Plan pod `.dwp/drafts/` i przekazuje do `/dwp-refine` → `/dwp-execute`
+  → `/dwp-resume` w miarę potrzeb.
 
 ## Zaufanie i weryfikacja (zanim zainstalujesz)
 
@@ -91,6 +93,12 @@ oraz osiem sub-skilli — `create`, `execute`, `refine`, `resume`, `status`, `ve
 npx skills add DailybotHQ/deepworkplan-skill
 ```
 
+Lub zainstaluj przez OpenClaw:
+
+```bash
+openclaw skills install deepworkplan
+```
+
 Albo sklonuj i uruchom skrypt konfiguracyjny:
 
 ```bash
@@ -107,7 +115,7 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
    (wyłącznie angielski, conventional commits, rzeczywisty wzorzec testów repozytorium i bramki recenzji) oraz blok Quick
    Commands z **rzeczywistymi, uruchamialnymi** komendami repozytorium. Jeśli `AGENTS.md` już istnieje, scal
    z nim, zamiast go zastępować. Utwórz dowiązanie `CLAUDE.md → AGENTS.md` (nie nadpisuj
-   istniejącego `CLAUDE.md` bez pytania).
+   istniejącego `CLAUDE.md` bez pytania). Utwórz również `.cursor → .agents`, jeśli nie istnieje.
 2. **`docs/`.** Wypełnij standardowe kategorie rzeczywistą, specyficzną dla repozytorium treścią: `PRODUCT_SPEC.md` (nietech­niczny dokument produktu/dlaczego — obowiązkowy dla każdego repozytorium, w tym bibliotek), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
    (nigdy nie pomijany — każde repozytorium ma swoją posturę bezpieczeństwa, nawet bez sekretów),
@@ -115,11 +123,11 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
    Jeśli dokumentacja już istnieje, zintegruj ją i rozszerz — nie duplikuj.
 3. **Dokumentacja poszczególnych modułów.** Dodaj `README.md` (oraz podfolder `docs/` dla złożonych modułów) wewnątrz każdego
    głównego modułu źródłowego wykrytego podczas rozpoznania.
-4. **`.agents/` + `.claude → .agents`.** Utwórz kanoniczny, wspólny dla agentów dom: **przemyślany** katalog
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Utwórz kanoniczny, wspólny dla agentów dom: **przemyślany** katalog
    `agents/`, odpowiednich dla stosu `skills/` oraz cienkich komend `dwp-*` w `commands/`, które delegują do
    zainstalowanego skilla — każdy wpis uzasadniony dla *tego* repozytorium, a nie skopiowany z innego. Dodaj
    katalog `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`), który odpowiada temu, co istnieje na
-   dysku, plus `settings.json` oraz dowiązanie `.claude → .agents`. Włącz wszelkie istniejące skille/agentów
+   dysku, plus `settings.json` oraz dowiązania `.claude → .agents` i `.cursor → .agents`. Włącz wszelkie istniejące skille/agentów
    do katalogu.
 5. **Skill DWP, dostosowany.** Zainstalowany skill jest silnikiem; własny kit repozytorium
    (skille, agenci, komendy) musi być **przemyślany dla tego repozytorium** — nigdy nie skopiowany-wklejony z kitu innego
@@ -127,28 +135,26 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
 6. **`.dwp/` + `tmp/`.** Utwórz szkielet `.dwp/` objętego gitignore z `plans/` i `drafts/`, a także przestrzeń roboczą `tmp/`
    — obie dodane do `.gitignore` w sposób nieniszczący (dopisz, nigdy nie przepisuj).
 
-## 4. Rozwijaj kit (sub-skill author)
+## 4. Zaproponuj opcjonalne dodatki
 
-Użyj sub-skilla `author`, aby rozwijać własny kit repozytorium. Cienkie delegatory `/skill-create` i
-`/agent-create` do niego kierują. Utwórz **skill** dla powtarzalnej procedury w obrębie sesji, **agenta** dla
-powracającej roli z własnym poziomem modelu i narzędziami oraz **komendę** wyłącznie jako cienki delegator. Utrzymuj
-katalog `.agents/docs/` w synchronizacji z tym, co istnieje na dysku.
-
-## 5. Zaproponuj opcjonalne dodatki
-
-Po ustanowieniu bazy wymień cztery dodatki (devcontainer, Dailybot, dependency-upgrade, design-system) i zaproponuj każdy jako wyraźną opcję do wyboru. Repozytorium jest
+Po onboardingu bazowym wymień cztery dodatki (devcontainer, Dailybot, dependency-upgrade, design-system) i zaproponuj każdy jako wyraźną opcję do wyboru. Repozytorium jest
 w pełni zgodne przy **zerowej** liczbie dodatków — nigdy nie instaluj ich automatycznie.
 
 - **Wsparcie devcontainera** — odtwarzalny, izolowany kontener deweloperski z trwałym uwierzytelnianiem AI-CLI.
-- **Integracja z Dailybot** — raportowanie postępu/kamieni milowych dla zespołów już korzystających z Dailybot,
-  z opcjonalną autonomiczną warstwą hooków, dzięki której agenci raportują istotną pracę bez przypominania.
-  Podstawowa metodyka nie ma żadnej zależności od Dailybot.
+- **Integracja z Dailybot** — cztery zdarzenia cyklu życia (kickoff, istotne zadanie, blokada, zakończenie) jako raporty postępu w trybie najlepszego wysiłku dla zespołów już korzystających z Dailybot, z opcjonalnym autonomicznym wymuszaniem hooków (`dailybot-cli >= 3.1.2`). Instalacja sparowanego skilla agenta Dailybot (3.4.0) udostępnia również czat, check-iny, tworzenie formularzy, pytanie AI i więcej — dodatek łączy jedynie raportowanie z wykonywaniem DWP. Podstawowa metodyka nie ma żadnej zależności od Dailybot.
 - **Dependency upgrade** — aktualizacje niezależne od menedżera pakietów: partiami, zwalidowane i odwracalne. Po
   zaakceptowaniu instaluje komendę `/lib-upgrade`.
-- **Design system** — skierowany do agentów `docs/DESIGN.md`, wywiedziony z rzeczywistego źródła
-  projektowego repozytorium, obejmujący wykryte powierzchnie interfejsu jako profile — wizualny UI,
-  stylizowane wyjście CLI i komunikację konwersacyjną — dzięki czemu każdy agent generuje wyjście
-  interfejsu spójne z własnymi konwencjami repo.
+- **Design system** — opcjonalny `docs/DESIGN.md` tylko dla repozytoriów z wykrytą powierzchnią interfejsu
+  (nie jest oferowany dla czystych bibliotek, usług headless ani repozytoriów wyłącznie infrastrukturalnych). Trzy
+  profile nakładają się w jednym pliku: visual-ui (domyślnie włączony po wykryciu), cli-output i konwersacyjny —
+  dwa ostatnie zawsze są pytane, nigdy auto-stosowane.
+
+## 5. Rozwijaj kit (sub-skill author)
+
+Użyj sub-skilla `author`, aby rozwijać własny kit repozytorium po onboardingu. Cienkie delegatory `/skill-create` i
+`/agent-create` do niego kierują. Utwórz **skill** dla powtarzalnej procedury w obrębie sesji, **agenta** dla
+powracającej roli z własnym poziomem modelu i narzędziami oraz **komendę** wyłącznie jako cienki delegator. Utrzymuj
+katalog `.agents/docs/` w synchronizacji z tym, co istnieje na dysku.
 
 ## 6. Planuj i wykonuj
 
@@ -159,6 +165,7 @@ Generuj Deep Work Plany dla dowolnego zadania i uruchamiaj je zadanie po zadaniu
 - `/dwp-status` — zaraportuj postęp bez wprowadzania zmian.
 - `/dwp-refine` — dodaj, usuń lub uporządkuj zadania, zachowując ukończoną pracę.
 - `/dwp-resume` — odtwórz stan i kontynuuj przerwany plan.
+- `/dwp-verify` — obiektywny raport zgodności (zaliczenie/niezaliczenie) dla repo (lub konkretnego planu).
 
 Każdy plan kończy się trzema obowiązkowymi zadaniami końcowymi — **Security Review**, czyli
 przeglądem bezpieczeństwa własnych zmian planu (z utrzymywaniem `docs/SECURITY.md` w aktualności;
@@ -166,16 +173,19 @@ krytyczne znalezisko blokuje ukończenie), Skills & Agents Discovery oraz Execut
 
 ## 7. Zweryfikuj
 
-Uruchom `/dwp-verify`, aby uzyskać obiektywny raport zgodności zaliczenie/niezaliczenie (sprawdza
-kryteria z [dokumentu Zgodność w specyfikacji](https://deepworkplan.com/spec)),
-a następnie potwierdź:
+Uruchom `/dwp-verify`, aby uzyskać obiektywny raport zgodności zaliczenie/niezaliczenie (lub
+`bash {skill_dir}/verify/conformance.sh` dla warstwy mechanicznej kompatybilnej z CI, która kończy się kodem `0`/`1`).
+Sprawdza kryteria z [dokumentu Zgodność w specyfikacji](https://deepworkplan.com/spec).
+Następnie potwierdź:
 
 - [ ] Skill jest zainstalowany i rozwiązywalny, ze wszystkimi ośmioma sub-skillami dostępnymi.
 - [ ] `AGENTS.md` istnieje w katalogu głównym z rzeczywistym blokiem Quick Commands; `CLAUDE.md` rozwiązuje się do niego.
-- [ ] `docs/` zawiera standardowe kategorie z rzeczywistą, specyficzną dla repozytorium treścią; główne moduły mają
+- [ ] `docs/` zawiera standardowe kategorie z rzeczywistą, specyficzną dla repozytorium treścią;
+      `docs/TESTING_GUIDE.md` opisuje rzeczywistą konfigurację test/lint (niepustą i niebędącą stubem); główne moduły mają
       `README.md`.
-- [ ] `.agents/` istnieje z `agents/`, `commands/` (cienkie delegatory `dwp-*`), `skills/` oraz katalogiem,
-      który odpowiada rzeczywistości; `.claude → .agents` rozwiązuje się.
+- [ ] `.agents/` istnieje z `agents/`, `commands/` (cienkie delegatory `dwp-*`, które odwołują się do skilla,
+      a nie skopiowane przepływy), `skills/` oraz katalogiem, który odpowiada temu, co istnieje na dysku;
+      `.claude → .agents` i `.cursor → .agents` rozwiązują się.
 - [ ] `.dwp/` istnieje, jest objęte gitignore i ma `plans/` oraz `drafts/`; `tmp/` istnieje i jest objęte gitignore.
 - [ ] Istniejąca treść użytkownika została zachowana lub pogodzona za zgodą — nic nie zostało zniszczone po cichu.
 - [ ] Potrafisz wygenerować Deep Work Plan i wykonać go zadanie po zadaniu, walidując każdą bramkę.

@@ -2,7 +2,7 @@
 
 Complete reference for all GitHub Actions workflows in this repository.
 
-**Stack:** Node.js 24.15.0, pnpm (via Corepack), ubuntu-latest runners, Astro static site.
+**Stack:** Node.js 24.18.0, pnpm (via Corepack), ubuntu-latest runners, Astro static site.
 
 ---
 
@@ -18,7 +18,7 @@ Complete reference for all GitHub Actions workflows in this repository.
 | Step | Name | What it does |
 |------|------|-------------|
 | — | Checkout | `actions/checkout@v4` |
-| — | Setup Node | `actions/setup-node@v4` (24.15.0) |
+| — | Setup Node | `actions/setup-node@v4` (24.18.0) |
 | 0 | Get pnpm store path | Resolves `corepack pnpm store path` |
 | 0a | Cache pnpm store | `actions/cache@v4` — caches the pnpm content-addressable store, keyed on `pnpm-lock.yaml` |
 | 1 | Install Dependencies | `corepack pnpm install --frozen-lockfile` |
@@ -82,7 +82,7 @@ For L/XL/XXL PRs, a warning comment is automatically posted.
 | Step | Name | What it does |
 |------|------|-------------|
 | — | Checkout | `actions/checkout@v4` with `AUTOMATION_GITHUB_TOKEN` |
-| — | Setup Node | 24.15.0 with npm registry |
+| — | Setup Node | 24.18.0 with npm registry |
 | 1 | Setup GitHub Config | Commits as "Dailybot" |
 | 2 | Check/create branch | Creates `feature__packages_versions_update` if it doesn't exist |
 | 3 | Install Dependencies | `corepack pnpm install --frozen-lockfile` |
@@ -113,7 +113,7 @@ For L/XL/XXL PRs, a warning comment is automatically posted.
 | Step | Name | What it does |
 |------|------|-------------|
 | — | Checkout | `actions/checkout@v4` with `AUTOMATION_GITHUB_TOKEN` |
-| — | Setup Node | 24.15.0 |
+| — | Setup Node | 24.18.0 |
 | 1 | Setup GitHub Config | Git config + `gh auth login` |
 | 2 | Find PR | Search for open PR from `feature__packages_versions_update` |
 | — | Get PR body | Retrieve PR metadata |

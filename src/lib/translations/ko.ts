@@ -120,9 +120,10 @@ export const ko: SiteTranslations = {
             '추론으로 작성된 AGENTS.md, 분류된 docs/ 계층, 그리고 주요 모듈마다 들어가는 README와 docs/ — 모두 플레이스홀더가 아니라 리포지토리의 실제 명령으로 채워집니다.',
         },
         {
-          title: '.claude → .agents 심링크와 함께 .agents/를 구성합니다',
+          title:
+            '.claude 및 .cursor → .agents 심링크와 함께 .agents/를 구성합니다',
           description:
-            '교차 에이전트용 .agents/ 디렉터리(스킬, 에이전트, 명령)와 .claude → .agents 심링크를 만들고, CLAUDE.md를 AGENTS.md에 미러링하여 모든 도구가 하나의 진실 공급원을 읽도록 합니다.',
+            '교차 에이전트용 .agents/ 디렉터리(스킬, 에이전트, 명령)와 .claude 및 .cursor → .agents 심링크를 만들고, CLAUDE.md를 AGENTS.md에 미러링하여 모든 도구가 하나의 진실 공급원을 읽도록 합니다.',
         },
         {
           title: 'DWP 스킬을 설치하고 .dwp/를 구성합니다',
@@ -177,9 +178,9 @@ export const ko: SiteTranslations = {
             '아키텍처, 셋업, 표준, 문제 해결 — 그리고 코드베이스에서 생성된, 주요 모듈마다 들어가는 README와 docs/.',
         },
         {
-          label: '.claude → .agents 심링크가 있는 .agents/',
+          label: '.claude 및 .cursor → .agents 심링크가 있는 .agents/',
           detail:
-            '교차 에이전트용 .agents/ 디렉터리(스킬, 에이전트, 명령)와 .claude → .agents 심링크로 모든 도구가 하나의 진실 공급원을 읽습니다.',
+            '교차 에이전트용 .agents/ 디렉터리(스킬, 에이전트, 명령)와 .claude 및 .cursor → .agents 심링크로 모든 도구가 하나의 진실 공급원을 읽습니다.',
         },
         {
           label: '설치된 Deep Work Plan 스킬',
@@ -628,7 +629,7 @@ export const ko: SiteTranslations = {
       {
         title: '리포지토리 온보딩',
         description:
-          'onboard 하위 스킬을 실행하고 에이전트가 실제 리포지토리를 추론하게 하세요. AGENTS.md, docs/ 지식 베이스, 모듈별 문서, 교차 에이전트용 .agents/ 홈(.claude → .agents 심링크 포함)을 생성하고, 얇은 dwp-* 명령을 연결하며, gitignore된 .dwp/를 구성합니다.',
+          'onboard 하위 스킬을 실행하고 에이전트가 실제 리포지토리를 추론하게 하세요. AGENTS.md, docs/ 지식 베이스, 모듈별 문서, 교차 에이전트용 .agents/ 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)을 생성하고, 얇은 dwp-* 명령을 연결하며, gitignore된 .dwp/를 구성합니다.',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -675,7 +676,7 @@ export const ko: SiteTranslations = {
     whatTitle: '이것이 하는 일',
     whatBody: [
       '채택은 리포지토리를 두 가지 견고한 방식으로 바꿉니다 — 방법론의 두 기둥입니다.',
-      '첫째, 리포지토리가 스펙 주도가 됩니다. 작업이 즉흥적인 프롬프트가 아니라 작성된 계획과 스펙에서 시작됩니다. 둘째, 리포지토리 자체가 에이전트 하니스가 됩니다 — AGENTS.md, docs/ 지식 베이스, 모듈별 문서, .agents/ 스킬 홈(.claude → .agents 심링크 포함)이 모든 에이전트에 필요한 컨텍스트와 명령을 제공합니다.',
+      '첫째, 리포지토리가 스펙 주도가 됩니다. 작업이 즉흥적인 프롬프트가 아니라 작성된 계획과 스펙에서 시작됩니다. 둘째, 리포지토리 자체가 에이전트 하니스가 됩니다 — AGENTS.md, docs/ 지식 베이스, 모듈별 문서, .agents/ 스킬 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)이 모든 에이전트에 필요한 컨텍스트와 명령을 제공합니다.',
     ],
     sequenceTitle: '채택 순서',
     orLabel: '또는',
@@ -685,7 +686,7 @@ export const ko: SiteTranslations = {
         description:
           '프롬프트와 스킬을 확인하기 전까지 신뢰할 수 없는 것으로 취급하세요. 둘 다 오픈 소스이며 MIT 라이선스입니다. 스킬은 마크다운 우선으로 네트워크 호출과 텔레메트리가 없습니다. 모든 릴리스는 배포된 스킬에 대한 SHA256SUMS를 게시하므로 실행 전에 사본이 일치하는지 확인할 수 있습니다. 릴리스는 서명이 아니라 체크섬으로 검증됩니다(서명은 문서화된 다음 단계입니다).',
         commands: [
-          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -694,24 +695,31 @@ export const ko: SiteTranslations = {
           '어떤 에이전트든 구조화된 작업을 계획하고 실행할 수 있도록 Deep Work Plan 스킬을 추가합니다. 스킬은 라우터와 여덟 개의 하위 스킬 — create, execute, refine, resume, status, verify, onboard, author — 을 제공합니다.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
         title: '리포지토리 온보딩 실행',
         description:
-          'onboard 하위 스킬을 호출하고 에이전트가 실제 리포지토리 — 스택, 패키지 관리자, 실제 검증 명령 — 를 추론하게 하세요. 그런 다음 AGENTS.md, docs/ 지식 베이스, 모듈별 문서, 교차 에이전트용 .agents/ 홈(.claude → .agents 심링크 포함)을 생성하고, 얇은 dwp-* 명령을 연결하며, 계획과 초안을 위한 gitignore된 .dwp/를 구성합니다. 어떤 것도 템플릿이 아니라 모두 리포지토리에 맞게 적응됩니다.',
+          'onboard 하위 스킬을 호출하고 에이전트가 실제 리포지토리 — 스택, 패키지 관리자, 실제 검증 명령 — 를 추론하게 하세요. 그런 다음 AGENTS.md, docs/ 지식 베이스, 모듈별 문서, 교차 에이전트용 .agents/ 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)을 생성하고, 얇은 dwp-* 명령을 연결하며, 계획과 초안을 위한 gitignore된 .dwp/를 구성합니다. 대규모 리포지토리의 경우 onboard 하위 스킬은 계획 주도 경로를 사용합니다: 정찰을 완료한 뒤 온보딩 Deep Work Plan을 생성합니다. 어떤 것도 템플릿이 아니라 모두 리포지토리에 맞게 적응됩니다.',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: '키트 발전과 애드온 채택',
+        title: '선택형 애드온 채택',
         description:
-          '/skill-create와 /agent-create(author 하위 스킬)로 스택에 맞는 스킬, 에이전트, 명령을 키우세요. 온보딩은 또한 네 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system — 을 제안하며, 맞을 때만 채택하면 됩니다. 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다.',
+          '온보딩은 네 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system — 을 제안하며, 맞을 때만 채택하면 됩니다. 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다. /skill-create와 /agent-create(author 하위 스킬)로 기본 구성을 넘어 스택에 맞는 스킬, 에이전트, 명령을 키우세요.',
       },
       {
         title: '계획하고 실행',
         description:
-          '/dwp-create로 Deep Work Plan을 생성하고 /dwp-execute로 실행한 뒤, 작업이 진행됨에 따라 /dwp-status, /dwp-refine, /dwp-resume를 사용하세요. 각 계획은 번호가 매겨진 작업, 검증 게이트, 완료 프로토콜을 담아 작업이 구조화되고 검토 가능하며 세션을 넘어 재개 가능하도록 유지합니다.',
+          '/dwp-create로 Deep Work Plan을 생성하고 /dwp-execute로 실행한 뒤, 작업이 진행됨에 따라 /dwp-status, /dwp-refine, /dwp-resume, /dwp-verify를 사용하세요. 각 계획은 번호가 매겨진 작업, 검증 게이트, 완료 프로토콜을 담으며 — 세 가지 필수 최종 작업인 보안 검토, 스킬 & 에이전트 탐색, 실행 보고서로 마무리됩니다.',
+      },
+      {
+        title: '적합성 검증',
+        description:
+          '/dwp-verify를 실행하여 스펙 대비 객관적인 합격/불합격 보고서를 받으세요. AGENTS.md, docs/(스텁이 아닌 실제 콘텐츠), .agents/(얇은 dwp-* 위임자와 디스크와 일치하는 카탈로그), .dwp/, tmp/가 제자리에 있는지 확인하세요 — 템플릿이 아니라 이 리포지토리를 위해 추론된 모든 것.',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: '결과',

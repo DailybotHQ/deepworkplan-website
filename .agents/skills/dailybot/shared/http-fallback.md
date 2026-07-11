@@ -172,4 +172,4 @@ Same HTTP status codes as agent endpoints, plus:
 ## API Reference
 
 Full API documentation: `https://api.dailybot.com/api/swagger/`
-Full agent API skill: `https://api.dailybot.com/skill.md`
+Full agent API skill: `https://www.dailybot.com/skill.md`

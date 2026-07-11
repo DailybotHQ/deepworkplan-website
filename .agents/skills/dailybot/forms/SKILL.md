@@ -1,8 +1,8 @@
 ---
 name: dailybot-forms
-description: List, inspect, submit, update, and transition form responses via Dailybot — including forms with workflow states and audience-scoped permissions. Use when the developer wants to see available forms, fill out a survey, continue an in-progress response, move a response between states, or read prior responses. Do not use for daily check-ins — those go through dailybot-checkin.
-version: "1.7.1"
-documentation_url: https://api.dailybot.com/skill.md
+description: List, inspect, submit, update, and transition form responses via Dailybot — including forms with workflow states and audience-scoped permissions. Also authors forms — create and configure a form (workflow states, permissions, anonymous/public/approval, ChatOps command) and manage its questions (types, report titles, variations, conditional logic). Use when the developer wants to see available forms, fill out a survey, continue an in-progress response, move a response between states, read prior responses, or create/configure a form. Do not use for daily check-ins — those go through dailybot-checkin.
+version: "3.4.0"
+documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"📋","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
 allowed-tools: Bash, Read, Grep, Glob
@@ -10,7 +10,7 @@ allowed-tools: Bash, Read, Grep, Glob
 
 # Dailybot Forms
 
-> **Requires `dailybot-cli >= 1.10.0`** ([PyPI](https://pypi.org/project/dailybot-cli/1.10.0/), released 2026-05-26). The lifecycle commands (`form get`, `form responses`, `form response get`, `form update`, `form transition`, `form delete`) and the structured `--json` 4xx error shape ship in CLI 1.10.0 — earlier versions only expose `form list` and `form submit`. If `dailybot --version` reports below 1.10.0, ask the developer to run `dailybot upgrade`. See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version) for the full rationale, install commands, and version-check tooling.
+> **Requires `dailybot-cli >= 3.1.2`** (the skill-pack baseline). The full forms lifecycle — `form list` / `submit` / `get` / `responses` / `response get` / `update` / `transition` / `delete` — plus the structured `--json` 4xx error shape are all available. If `dailybot --version` is below 3.1.2, ask the developer to run `dailybot upgrade`. See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version) for install commands and version-check tooling.
 
 You help developers work with the full Dailybot forms lifecycle: list, inspect, submit, update, transition between workflow states, and read prior responses. Forms are custom questionnaires created by team leads — feedback surveys, retrospectives, release checklists, approval flows, or any structured data collection. Some forms are simple "fill once and done"; others have **workflow states** (e.g. `draft → review → released`) with audience-scoped permissions on who can edit and who can transition.
 
@@ -33,11 +33,11 @@ Customer-authored form skills live at `.agents/skills/dailybot-custom/<name>/SKI
 
 ---
 
-## Auth model — user-scoped commands
+## Auth model — API key or login
 
-All form commands require a **Bearer token** (user session), not an API key. The developer must be logged in via `dailybot login`. This scopes form access to the logged-in human's permissions — they only see forms (and responses) they have access to, and the server enforces every audience check on the API side.
+All form commands accept **either** a Bearer login session (`dailybot login`) **or** an org API key (`DAILYBOT_API_KEY`). Access is scoped to the acting identity's permissions (the server resolves the API key's owner) — they only see forms (and responses) they have access to, and the server enforces every audience check on the API side.
 
-If the developer only has an API key (`DAILYBOT_API_KEY`), guide them through `dailybot login` first. API keys authenticate agent-scoped endpoints (`dailybot agent ...`), not user-scoped ones.
+If the developer has only an API key, form commands still work — the CLI falls back to `X-API-KEY`.
 
 ---
 
@@ -58,13 +58,13 @@ Do **not** use this skill for daily standup check-ins — route those to `dailyb
 
 Read and follow the authentication steps in [`../shared/auth.md`](../shared/auth.md). That file covers CLI installation, login, API key setup, and agent profile configuration.
 
-**Additionally**, verify the developer has a user session (Bearer token):
+**Additionally**, confirm at least one credential is present (a login session or an API key):
 
 ```bash
 dailybot status --auth 2>&1
 ```
 
-If the output shows a logged-in user session, proceed. If not, guide them through `dailybot login` (see auth.md for the OTP flow). Form commands will not work with only an API key.
+If the output shows a logged-in user session **or** a configured API key, proceed. Otherwise guide them through `dailybot login` (see auth.md) or ask them to set `DAILYBOT_API_KEY`.
 
 A scripted preflight that does both at once and exits with code `3` if unauthenticated:
 
@@ -83,8 +83,8 @@ When the developer asks anything form-related, walk this tree before acting:
 ```
 1. Identify the target form by name or slug (or pick from a list).
 2. Run `dailybot form list --json` to find its UUID and confirm visibility.
-3. Run `dailybot form get <form_uuid> --json` to read questions, workflow_enabled,
-   states (if any), audience configuration, and the form's slug.
+3. Run `dailybot form get <form_uuid> --json` to read questions, the `workflow`
+   object (`null` or `{enabled, states}`), audience configuration, and the form's slug.
 4. RESOLVER: check .dailybot/profile.json → vars.custom_form_skills.
    - If a custom skill is registered for this form (by UUID or by slug),
      LOAD THAT SKILL'S SKILL.md and follow its instructions INSTEAD of
@@ -109,15 +109,15 @@ The resolver step (4) is the customer-extension hook. See **Step 7 — Custom-sk
 dailybot form list --json
 ```
 
-Returns all forms visible to the logged-in user. The shape is stable and machine-readable:
+Returns all forms visible to the logged-in user. **As of `dailybot-cli >= 3.2.0` this is org-scoped**: it lists every form the caller can see on the webapp list view — an org **admin sees all** the org's forms; a member sees forms flagged for the list view plus their own. (Before 3.2.0 the endpoint returned only the caller's *own* forms even for admins — a server-side bug; if a developer reports "I only see a handful of my forms," check `dailybot --version` and have them `dailybot upgrade`.) The shape is stable and machine-readable:
 
 ```json
 [
   {
-    "id": "<form-uuid>",
+    "uuid": "<form-uuid>",
     "slug": "team-feedback",
     "name": "Team Feedback",
-    "workflow_enabled": false,
+    "workflow": null,
     "questions": [
       {
         "uuid": "<question-uuid>",
@@ -127,16 +127,54 @@ Returns all forms visible to the logged-in user. The shape is stable and machine
     ]
   },
   {
-    "id": "<form-uuid>",
+    "uuid": "<form-uuid>",
     "slug": "code-release-form",
     "name": "Code Release Form",
-    "workflow_enabled": true,
+    "workflow": { "enabled": true, "states": [ ... ] },
     "questions": [ ... ]
   }
 ]
 ```
 
 > The `slug` field is stable across environments (dev / staging / prod), while `id` rotates per environment. Prefer `slug` for any persistent mapping you keep across deployments. See the resolver in Step 7.
+
+### Pagination, search, and date filters
+
+> **Note:** the shared list query flags below are part of the `dailybot-cli >= 3.1.2` baseline. Older CLIs
+> return the full list with no filtering.
+
+`form list` accepts the **full shared list query flag set** — pagination
+(`--page`, `--page-size`, `--all`, `--limit`), search (`--search` / `--grep`),
+and date range (`--since`, `--until`, `--date`, `--last-week`, `--today`). With
+no flags it fetches everything. The complete flag table, the
+`{count, next, previous, results}` envelope, and the `Showing X of N` footer are
+documented once in [`../shared/list-query-and-errors.md`](../shared/list-query-and-errors.md).
+
+```bash
+# Search forms by name, restricted to a date range:
+dailybot form list --search retro --since 2026-07-01 --json
+
+# Fetch every page explicitly (equivalent to the no-flag default):
+dailybot form list --all --json
+
+# One explicit page of 20:
+dailybot form list --page 2 --page-size 20 --json
+```
+
+### Scope the list to your own forms — `--mine` (CLI >= 3.2.0)
+
+Since the default is now org-scoped, pass **`--mine`** to narrow the result to
+only the forms **you own** (it sends `owner=me` to the API). Useful when an admin
+wants their personal forms out of the full org list.
+
+```bash
+# Only the forms I own:
+dailybot form list --mine --json
+```
+
+> **The envelope is unconditional.** `GET /v1/forms/` and the responses endpoint
+> below always return `{count, next, previous, results}`; no query parameter is
+> needed. See the shared doc.
 
 ### Present forms to the developer
 
@@ -165,33 +203,39 @@ Use this **before** submitting or updating. It returns the form's full configura
 
 ### JSON shape (workflow-enabled form)
 
-The workflow definition (states + transitions) is nested under the `workflow` key. Audience permissions live at the top level. Both are server-defined.
+The workflow definition is nested under the `workflow` key: `null` when the form has no
+workflow, or `{"enabled": true, "states": [...]}` when it does. Each state carries
+`{key, label, color, order}` — the ordered list defines the forward progression (the
+first state is the initial one, the last is the final/terminal one). `allow_reopen_from_final_state`
+is a **top-level** boolean. Audience permissions also live at the top level. All of it is
+server-defined.
 
 ```json
 {
-  "id": "<form-uuid>",
+  "uuid": "<form-uuid>",
   "slug": "code-release-form",
   "name": "Code Release Form",
-  "workflow_enabled": true,
   "allow_reopen_from_final_state": false,
   "state_change_permission": { "audience": "...", "...": "..." },
   "edit_permission":         { "audience": "...", "...": "..." },
   "view_reports_permission": { "audience": "...", "...": "..." },
   "workflow": {
+    "enabled": true,
     "states": [
-      {"key": "draft",    "label": "Draft",    "is_initial": true,  "is_final": false},
-      {"key": "review",   "label": "Review",   "is_initial": false, "is_final": false},
-      {"key": "released", "label": "Released", "is_initial": false, "is_final": true}
-    ],
-    "transitions": [
-      {"from_state": "draft",  "to_state": "review",   "label": "Send for review"},
-      {"from_state": "review", "to_state": "released", "label": "Mark released"},
-      {"from_state": "review", "to_state": "draft",    "label": "Back to draft"}
+      {"key": "draft",    "label": "Draft",    "color": "#9CA3AF", "order": 0},
+      {"key": "review",   "label": "Review",   "color": "#F59E0B", "order": 1},
+      {"key": "released", "label": "Released", "color": "#10B981", "order": 2}
     ]
   },
   "questions": [ ... ]
 }
 ```
+
+> A form with no workflow returns `"workflow": null`. The legacy `workflow_enabled`
+> boolean and `workflow_config` object are **gone** — read `workflow` and, when present,
+> `workflow.enabled` / `workflow.states`. The per-response moves the current caller can make
+> still arrive as `allowed_transitions` on each **response** payload (Steps 5–6) — the server
+> computes those from the ordered states and the caller's audience.
 
 ### Audience permissions
 
@@ -201,7 +245,7 @@ The three `*_permission` fields are server-evaluated. Treat them as **opaque** i
 
 ## Step 5 — Workflow-state Vocabulary
 
-When the form has `workflow_enabled: true`, the agent must understand five fields that appear on every response payload. Surface them when they affect what the developer can do next:
+When the form has a workflow (`workflow.enabled: true`), the agent must understand five fields that appear on every response payload. Surface them when they affect what the developer can do next:
 
 | Field | Meaning | Agent behavior |
 |-------|---------|----------------|
@@ -212,6 +256,479 @@ When the form has `workflow_enabled: true`, the agent must understand five field
 | `state_history` | Append-only list of `{from_state, to_state, actor_name, at}` entries. | Surface the latest entry (who moved it last, when) when relevant for context. |
 
 > Never infer state transitions from labels or names — the only valid moves are the ones in `allowed_transitions`. The server's audience checks may legitimately exclude transitions the developer *thinks* should be available.
+
+---
+
+## Step 5.5 — Authoring forms (create / configure / questions)
+
+> **Requires `dailybot-cli >= 3.1.2`** (the skill-pack baseline). The full authoring surface — `form create`, `form config` (workflow states, the three permission audiences, anonymous/public/brand/require-identity with `public_url`, approval + approvers, the ChatOps command), `form archive`, the `form questions add|edit|delete|reorder` group, resolving people by email, `--no-approvers`, the 3 report-channel cap, and the **create requires ≥ 1 question** rule (`questions_required`) — is all available. If `dailybot --version` is below 3.1.2, ask the developer to run `dailybot upgrade`.
+
+Everything above this point *reads* and *responds to* forms. This section *builds and reshapes* them. An agent with the right permissions can now create a form, wire up its workflow states, permission audiences, approval flow, and ChatOps command, and manage its questions — all end-to-end from the CLI, without opening the Dailybot webapp.
+
+Permissions are server-enforced. Creating and configuring forms typically requires org **admin / manager** rights (or an API key whose owner has them). If the acting identity lacks the rights, the server returns a 403 — surface it and fall back to the non-blocking rule; never re-implement the permission check client-side.
+
+### One-shot `create` vs. incremental `config`
+
+There are two ways to reach the same configured form. Pick based on how much you know up front:
+
+| Approach | Command | When to use |
+|----------|---------|-------------|
+| **One-shot** | `dailybot form create -n NAME [all config flags] [--questions-file / --interactive]` | You already know the full shape (name, workflow, permissions, seed questions). Everything lands in a single call. |
+| **Incremental** | `dailybot form create -n NAME` → then one or more `dailybot form config <uuid> [flags]` → then `form questions add …` | You're building up the form conversationally, or reconfiguring an existing one. |
+
+- `form create` and `form config` accept the **same config flags** (listed below). `create` additionally accepts the question-seeding flags (`--questions-file`, `--interactive`, `--ai-short-question`); `config` does not seed questions — use the `form questions` group for that.
+- `form config` is a **full partial-update**: send only the flags you want to change; anything you omit is left untouched. It is a strict **superset of `form edit`** (which only touches name + report channels). Prefer `form config` for anything beyond a name/channel tweak.
+- **`--report-channel` and the permission/approver objects use full-replace semantics** — see the callouts below. Most other scalar flags are simple set-if-passed.
+
+A form **must have at least one question at create time** — `POST` create with a missing/empty `questions` array is rejected with `400 {"code": "questions_required"}` ("A form must have at least one question."). Seed at least one question inline on create (see the `--questions-file` schema below); you can add, edit, remove, and reorder questions afterward via the `form questions` group. (Even a workflow-only or approval-routing form needs a seed question.)
+
+### Config flag reference
+
+Both `form create` and `form config` accept these. Grouped by concern:
+
+**Basics**
+
+| Flag | Meaning |
+|------|---------|
+| `-n`, `--name` | Form name (min length enforced — too short → `form_name_too_short`). |
+| `--active` / `--inactive` | Whether the form is active (accepting responses). |
+| `--report-channel UUID` | Chat channel to post responses to. **Repeatable, max 3.** On `config` this **REPLACES** the entire set — pass all channels you want every time. More than 3 → `too_many_report_channels`. |
+
+**Sharing / behavior**
+
+| Flag | Meaning |
+|------|---------|
+| `--anonymous` / `--no-anonymous` | Collect responses anonymously. Freely toggleable in **both** directions (unlike check-in anonymity, which is irreversible once on). |
+| `--public` / `--no-public` | Allow responses through a public shared link (no Dailybot account needed). Surfaces `public_url` when on — see **Public forms** below. |
+| `--brand` / `--no-brand` | Brand the public form with the org logo. |
+| `--require-identity` / `--no-require-identity` | Make email + name mandatory on public responses. |
+| `--reopen-from-final` / `--no-reopen-from-final` | Set the top-level `allow_reopen_from_final_state` boolean (whether a response can move back out of a terminal workflow state). |
+
+**Workflow**
+
+| Flag | Meaning |
+|------|---------|
+| `--state "Label:#color"` | Add a workflow state. **Repeatable and ordered** — position defines the sequence. Passing any `--state` **enables** the workflow. Max 20 states. |
+| `--no-workflow` | Turn the workflow off (clears states). |
+
+**Permissions** (three independent audiences)
+
+| Flag | Meaning |
+|------|---------|
+| `--can-edit MODE` | Who can edit responses. `MODE` = `everyone` \| `owner_and_admins` \| `restricted`. |
+| `--can-see MODE` | Who can see responses/reports. Same `MODE` values. |
+| `--can-change-states MODE` | Who can transition responses between states. Same `MODE` values. |
+| `--can-edit-user`, `--can-edit-team` | For `restricted` edit: name the allowed users/teams. |
+| `--can-see-user`, `--can-see-team` | For `restricted` view. |
+| `--change-states-user`, `--change-states-team` | For `restricted` state-changes. |
+
+Users accept **name / email / UUID**; teams accept **name / UUID**. Passing any `-user`/`-team` flag **implies `restricted` mode** for that audience — you don't have to also pass `--can-edit restricted`. Each audience object is **full-replace**: the users/teams you send become the new value; omitting a key clears it. A `restricted` audience with **empty** user + team lists effectively means "owner + admins only".
+
+**Approval flow**
+
+| Flag | Meaning |
+|------|---------|
+| `--approval` / `--no-approval` | File new submissions for approval before they count as final. |
+| `--approver-user` | An approver by name / email / UUID. **Repeatable.** |
+| `--approver-team` | An approver team. **Repeatable.** |
+| `--no-approvers` | Clear the approver list. |
+
+The approver list is **full-replace** (`{user_uuids, team_uuids}`) — pass every approver each time you set it.
+
+**ChatOps command**
+
+| Flag | Meaning |
+|------|---------|
+| `--command NAME` | The chat shortcut that opens the form (e.g. `release`, invoked as `@dailybot release`). Charset `[a-z0-9][a-z0-9_-]{0,30}`; unique per org. Invalid → `invalid_command`; taken by another form → `command_already_exists`. |
+| `--no-command` | Remove the command. |
+
+**Question seeding** (`create` only)
+
+| Flag | Meaning |
+|------|---------|
+| `--questions-file PATH` | Seed questions from a JSON array (see the questions-file schema below). Max 50. |
+| `--interactive` | Walk through adding questions one at a time. |
+| `--ai-short-question` | Let the server auto-generate the report title for seeded questions that omit one. |
+
+### Workflow states — write shape vs. read shape
+
+The write shape and the read shape are deliberately asymmetric:
+
+- **Write** (`--state "Label:#color"`): you send only `{label, color}`, ordered by flag position. The server **derives** `key` (a slugified label) and `order` (the position) for you.
+- **Read** (`form get`): each state comes back as `{key, label, color, order}` inside `workflow.states` (with `workflow.enabled: true`).
+
+```bash
+# Enable a 3-state release workflow (order follows flag order):
+dailybot form config <form_uuid> \
+  --state "Draft:#9CA3AF" \
+  --state "Review:#F59E0B" \
+  --state "Released:#10B981"
+
+# Turn the workflow off entirely:
+dailybot form config <form_uuid> --no-workflow
+```
+
+- A form with `--state` flags has `workflow.enabled: true`; enabling a workflow with no states is invalid → `workflow_requires_states`. A malformed `"Label:#color"` spec → `invalid_workflow_state`.
+- Max 20 states.
+
+### Permission audiences — the three independent controls
+
+`--can-edit`, `--can-see`, and `--can-change-states` are **independent** — a form can let everyone see responses but restrict state changes to two people. Each takes one of:
+
+| MODE | Meaning |
+|------|---------|
+| `everyone` | Anyone with form access. |
+| `owner_and_admins` | The form owner plus org admins. |
+| `restricted` | Only the named users/teams (empty lists ⇒ owner + admins). |
+
+```bash
+# Everyone can see; only two named people can change states; owner+admins edit.
+dailybot form config <form_uuid> \
+  --can-see everyone \
+  --can-edit owner_and_admins \
+  --change-states-user jane@example.com \
+  --change-states-user "John Doe" \
+  --change-states-team "Release Managers"
+```
+
+Passing `--change-states-user`/`--change-states-team` above **implied** `restricted` for that audience — no separate `--can-change-states restricted` needed. Remember full-replace semantics: the next time you set that audience, list **everyone** who should be in it. Invalid audience mode → `invalid_permission_audience`.
+
+### Approval + command
+
+```bash
+# Route new submissions through an approver team, and bind a ChatOps shortcut.
+dailybot form config <form_uuid> \
+  --approval \
+  --approver-team "Release Managers" \
+  --approver-user lead@example.com \
+  --command release            # opens the form via `@dailybot release`
+```
+
+- Approvers are full-replace. `--no-approvers` clears the list; `--no-approval` turns the flow off. Invalid approver reference → `invalid_approvers`.
+- The command name is unique per org: `command_already_exists` if another form already claims it, `invalid_command` if it violates the charset. `--no-command` unbinds it.
+
+### Public forms and `public_url`
+
+When `--public` is on, `form get` (and the output right after `form config --public`) includes a `public_url` — an absolute, shareable link anyone can open to submit a response:
+
+```
+https://app.dailybot.com/forms/<form-uuid>/responses/create/
+```
+
+`public_url` is `null` when `--no-public`. Pair `--public` with `--require-identity` if you need submitter email + name, and `--brand` to show the org logo.
+
+```bash
+# Anonymous public NPS survey with a branded, shareable link:
+dailybot form create -n "Q3 NPS Survey" \
+  --anonymous --public --brand --require-identity \
+  --report-channel <channel-uuid>
+# → the response includes public_url — share it with respondents.
+```
+
+### Question authoring
+
+Questions are managed with the `form questions` subgroup. The question model is **identical to check-in questions**.
+
+```bash
+dailybot form questions add <form_uuid> --type TYPE --question TEXT [flags]
+dailybot form questions edit <form_uuid> <question_uuid> [flags]
+dailybot form questions delete <form_uuid> <question_uuid>
+dailybot form questions reorder <form_uuid> <q_uuid> <q_uuid> ...
+```
+
+**Types** — the complete catalog is exactly four:
+
+| `--type` | Notes |
+|----------|-------|
+| `text` | Free-text answer. |
+| `multiple_choice` | Requires `--options "A,B,C"` (comma-separated). |
+| `boolean` | Yes/No. **No options.** |
+| `numeric` | Integer or decimal. |
+
+**Common flags**
+
+| Flag | Meaning |
+|------|---------|
+| `--question TEXT` | The question prompt. |
+| `--required` / `--optional` | Whether an answer is mandatory. |
+| `--blocker` / `--no-blocker` | Whether leaving it blank blocks submission. |
+| `--short-question "Title"` | **Report title** (≤ 512 chars). **Required on `add`** — see below. |
+| `--ai-short-question` | Let the server generate the report title instead of `--short-question`. |
+| `--variation TEXT` | Alternate phrasing shown to different respondents. **Repeatable, up to 10.** |
+| `--options "A,B,C"` | Choices for `multiple_choice`. |
+| `--logic-file PATH` / inline jump flags | Conditional logic — see below. |
+
+> **Report title is mandatory on `add`.** Every question needs a report title: pass **either** `--short-question "Title"` **or** `--ai-short-question`. Explicit titles are preserved; AI only fills blanks. Passing neither → `short_question_required`. On `edit` the report title is **not** required (edits are partial).
+
+**Conditional logic** lets a question jump forward, or trigger another check-in or form, based on the answer. Provide it inline (simple single-rule jump) or via `--logic-file` (full control):
+
+```bash
+# Inline: if the answer equals "No", jump to question index 5; else jump to 3.
+dailybot form questions add <form_uuid> \
+  --type multiple_choice --options "Yes,No" \
+  --question "Did all tests pass?" \
+  --short-question "Tests passed" \
+  --jump-if-equals "No" --jump-to 5 --else-jump-to 3
+```
+
+The full logic object (what `--logic-file` contains, and what the inline flags build under the hood):
+
+```json
+{
+  "rules": {
+    "rules_if": [
+      {
+        "conditions": [
+          {"operator": "is_equal_to", "comparison_value": "No", "logic_connector": "and"}
+        ],
+        "then": {"action": "jump_to", "target": 5}
+      }
+    ],
+    "rules_else": {"action": "jump_to", "target": -1}
+  }
+}
+```
+
+- `rules_else` is **required**. `target: -1` means "jump to the end" (finish the form).
+- **Jumps are forward-only**: `target` must be greater than the current question index, or `-1`. On delete/reorder the server **auto-clamps** dangling targets so logic never points at a removed/moved question.
+
+**Operators** allowed per question type:
+
+| Type | Operators |
+|------|-----------|
+| `text` | `is_equal_to`, `is_not_equal_to`, `contains`, `not_contains`, `begins_with`, `not_begins_with`, `ends_with`, `not_ends_with` |
+| `numeric` | `is_equal_to`, `is_not_equal_to`, `lower_than`, `lower_or_equal_than`, `greater_than`, `greater_or_equal_than` |
+| `multiple_choice` / `boolean` | `is_equal_to`, `is_not_equal_to` |
+
+**Logic connectors** (`logic_connector` on each condition):
+
+| Type | Connectors |
+|------|------------|
+| `text`, `numeric`, `boolean` | `and` / `or` |
+| `multiple_choice` | `or` only |
+
+> `boolean` comparison values are JSON `true` / `false` (not strings).
+
+**Actions** (`then.action` and `rules_else.action`):
+
+| Action | `target` |
+|--------|----------|
+| `jump_to` | An integer question index (forward-only, or `-1` for end). |
+| `trigger_checkin` | A check-in UUID — firing this question routes the respondent into that check-in. |
+| `trigger_form` | A form UUID — a form question can chain into **another form**. |
+
+A `trigger_form` example — when the release is a hotfix, chain into the hotfix intake form:
+
+```json
+{
+  "rules": {
+    "rules_if": [
+      {
+        "conditions": [
+          {"operator": "is_equal_to", "comparison_value": "Hotfix", "logic_connector": "or"}
+        ],
+        "then": {"action": "trigger_form", "target": "<hotfix-form-uuid>"}
+      }
+    ],
+    "rules_else": {"action": "jump_to", "target": -1}
+  }
+}
+```
+
+**Editing and reordering**
+
+```bash
+# Partial edit — report title NOT required here:
+dailybot form questions edit <form_uuid> <question_uuid> \
+  --question "Did every test pass in CI?" --required
+
+# Reorder — you MUST pass the COMPLETE set of question UUIDs in the new order.
+dailybot form questions reorder <form_uuid> <q3> <q1> <q2>
+```
+
+An incomplete `reorder` (missing any of the form's question UUIDs) → `question_uuids_incomplete`.
+
+### `--questions-file` schema (seed on `create`)
+
+A JSON array (max 50 objects). Each object accepts these keys (aliases shown with `/`):
+
+| Key | Meaning |
+|-----|---------|
+| `question_type` / `type` | One of `text`, `multiple_choice`, `boolean`, `numeric`. |
+| `question` / `label` | The prompt text. |
+| `options` | Choices array (for `multiple_choice`). |
+| `required` | Boolean. |
+| `is_blocker` | Boolean. |
+| `short_question` | Report title (omit + rely on `--ai-short-question` to auto-fill). |
+| `variations` | Array of alternate phrasings (≤ 10). |
+| `logic` | The conditional-logic object (same shape as above). |
+
+```json
+[
+  {
+    "question_type": "text",
+    "question": "What service is being released?",
+    "short_question": "Service",
+    "required": true,
+    "is_blocker": true
+  },
+  {
+    "type": "multiple_choice",
+    "label": "Release kind?",
+    "options": ["Standard", "Hotfix"],
+    "short_question": "Kind",
+    "logic": {
+      "rules": {
+        "rules_if": [
+          {"conditions": [{"operator": "is_equal_to", "comparison_value": "Hotfix", "logic_connector": "or"}],
+           "then": {"action": "trigger_form", "target": "<hotfix-form-uuid>"}}
+        ],
+        "rules_else": {"action": "jump_to", "target": -1}
+      }
+    }
+  }
+]
+```
+
+```bash
+dailybot form create -n "Code Release Form" \
+  --questions-file ./release-questions.json --ai-short-question
+```
+
+### `form get` — canonical detail JSON
+
+`dailybot form get <form_uuid> --json` returns the full authoritative shape. This is the read contract for everything the authoring flags write:
+
+```json
+{
+  "uuid": "<form-uuid>",
+  "name": "Code Release Form",
+  "is_active": true,
+  "is_archived": false,
+  "is_anonymous": false,
+  "allow_public_responses": true,
+  "public_url": "https://app.dailybot.com/forms/<form-uuid>/responses/create/",
+  "require_email_and_name": true,
+  "brand_with_logo": true,
+  "allow_reopen_from_final_state": false,
+  "workflow": {
+    "enabled": true,
+    "states": [
+      {"key": "draft",    "label": "Draft",    "color": "#9CA3AF", "order": 0},
+      {"key": "review",   "label": "Review",   "color": "#F59E0B", "order": 1},
+      {"key": "released", "label": "Released", "color": "#10B981", "order": 2}
+    ]
+  },
+  "who_can_edit":            {"mode": "owner_and_admins"},
+  "who_can_see_responses":   {"mode": "everyone"},
+  "who_can_change_states":   {"mode": "restricted", "user_uuids": ["<uuid>"], "team_uuids": ["<uuid>"]},
+  "use_for_approval": true,
+  "approvers": {"user_uuids": ["<uuid>"], "team_uuids": ["<uuid>"]},
+  "command_enabled": true,
+  "command": "release",
+  "report_channels": [
+    {"id": "<channel-uuid>", "name": "releases", "platform": "slack", "type": "channel"}
+  ],
+  "questions": [
+    {
+      "uuid": "<question-uuid>",
+      "index": 0,
+      "question": "What service is being released?",
+      "question_type": "text",
+      "required": true,
+      "is_blocker": true,
+      "short_question": "Service",
+      "choices": [],
+      "variations": [],
+      "logic": null
+    }
+  ]
+}
+```
+
+- `workflow` is `null` for non-workflow forms, else `{enabled, states:[{key,label,color,order}]}`.
+- `who_can_edit` / `who_can_see_responses` / `who_can_change_states` each carry `{mode}` and, when `restricted`, `{user_uuids, team_uuids}`.
+- `multiple_choice` questions expose `choices: [{label, value}]`; other types return `choices: []`.
+
+### Archiving a form
+
+```bash
+dailybot form archive <form_uuid> --yes
+```
+
+Soft-deletes the form (`is_archived: true`). Confirm before invoking — archived forms disappear from `form list`. This does not hard-delete responses.
+
+### Authoring error codes
+
+| Server `code` | Meaning / fix |
+|---------------|---------------|
+| `questions_required` | `create` had no questions. A form needs ≥ 1 question at create time — seed with `--questions-file`/`--interactive`. |
+| `too_many_report_channels` | More than 3 `--report-channel` values. Trim to ≤ 3. |
+| `short_question_required` | A `questions add` omitted both `--short-question` and `--ai-short-question`. Supply one. |
+| `workflow_requires_states` | Tried to enable a workflow with no states. Pass at least one `--state`. |
+| `invalid_workflow_state` | A `--state "Label:#color"` spec is malformed. Fix the label/color. |
+| `invalid_permission_audience` | A `--can-*` MODE is not `everyone`/`owner_and_admins`/`restricted`. |
+| `invalid_approvers` | An approver reference didn't resolve. Check the name/email/UUID. |
+| `invalid_command` | ChatOps command violates `[a-z0-9][a-z0-9_-]{0,30}`. |
+| `command_already_exists` | Another form already owns that command name. Pick another. |
+| `form_name_too_short` | `--name` is below the minimum length. |
+| `question_uuids_incomplete` | `reorder` didn't include every question UUID. Pass the complete set. |
+| `unknown_field` | An unrecognized key in `--questions-file` / `--logic-file`. Remove it. |
+
+### End-to-end authoring examples
+
+**A — Release checklist form with workflow, permissions, and a ChatOps command**
+
+```bash
+# 1. Create the shell.
+FID=$(dailybot form create -n "Code Release Form" --active --json | jq -r '.uuid')
+
+# 2. Wire the workflow, permissions, report channel, and command in one config call.
+dailybot form config "$FID" \
+  --state "Draft:#9CA3AF" --state "Review:#F59E0B" --state "Released:#10B981" \
+  --can-see everyone \
+  --can-edit owner_and_admins \
+  --change-states-team "Release Managers" \
+  --report-channel <channel-uuid> \
+  --command release
+
+# 3. Add questions.
+dailybot form questions add "$FID" --type text \
+  --question "What service is being released?" --short-question "Service" --required --blocker
+dailybot form questions add "$FID" --type multiple_choice --options "Standard,Hotfix" \
+  --question "Release kind?" --short-question "Kind"
+
+# 4. Verify.
+dailybot form get "$FID" --json | jq '{workflow, command, questions: (.questions|length)}'
+```
+
+**B — Anonymous public NPS survey (shareable link)**
+
+```bash
+dailybot form create -n "Q3 NPS Survey" \
+  --anonymous --public --brand --require-identity \
+  --report-channel <channel-uuid> --json | jq -r '.public_url'
+# → share the printed public_url with respondents.
+
+# Add the score question:
+dailybot form questions add <form_uuid> --type numeric \
+  --question "How likely are you to recommend us (0–10)?" --short-question "NPS score" --required
+```
+
+**C — Approval-routing intake form**
+
+```bash
+# A workflow + approval routing form. Even routing forms need >= 1 question at
+# create time (questions_required), so seed one with --questions-file.
+dailybot form create -n "Budget Approval" \
+  --questions-file budget-questions.json \
+  --approval \
+  --approver-user finance-lead@example.com \
+  --approver-team "Finance" \
+  --state "Requested:#9CA3AF" --state "Approved:#10B981" \
+  --can-change-states restricted \
+  --change-states-team "Finance"
+```
 
 ---
 
@@ -228,9 +745,9 @@ dailybot form responses <form_uuid> --latest --json
 The standard shell pattern for "continue if there's an in-progress response, otherwise create one":
 
 ```bash
-RID=$(dailybot form responses <form_uuid> --latest --json | jq -r '.[0].id // empty')
+RID=$(dailybot form responses <form_uuid> --latest --json | jq -r '.[0].uuid // empty')
 if [ -z "$RID" ]; then
-  RID=$(dailybot form submit <form_uuid> --content '{...}' --yes --json | jq -r '.id')
+  RID=$(dailybot form submit <form_uuid> --content '{...}' --yes --json | jq -r '.uuid')
 fi
 # $RID is now the response UUID — pass it to subsequent update / transition calls.
 ```
@@ -240,14 +757,24 @@ Useful flags:
 | Flag | Description |
 |------|-------------|
 | `--latest` | Return only the most recent response visible to the caller. |
-| `--state STATE` | Filter to responses in a specific workflow state (e.g. `--state draft`). |
+| `--state STATE` | Filter to responses in a specific workflow state. Pass the **state key** (`draft`), not the label (`Draft`) — read the keys from `workflow.states[].key` on `form get`. Filtering is server-side. On a form with no workflow the API returns `400 invalid_workflow_state`. |
+| `--search TEXT` | (alias `--grep`) Case-insensitive substring filter across responses. Max 256 chars (truncated client-side). |
 | `--json` | Machine-readable output (stable shape). |
+
+> **`form responses` search.** The `--search` / `--grep` flag
+> filters responses case-insensitively — handy for finding a past response by a
+> service name or keyword. Like `form list`, this endpoint
+> (`GET /v1/forms/<uuid>/responses/`) returns the `{count, next, previous,
+> results}` envelope with a `Showing X of N` footer. It also takes `--page` /
+> `--page-size` / `--limit`. Careful: `--all` here means **every author's**
+> responses (admin/owner only), not every page.
+> See [`../shared/list-query-and-errors.md`](../shared/list-query-and-errors.md).
 
 ### JSON shape (single response)
 
 ```json
 {
-  "id": "<response-uuid>",
+  "uuid": "<response-uuid>",
   "form_id": "<form-uuid>",
   "current_state": "review",
   "allowed_transitions": [
@@ -284,13 +811,13 @@ In `.dailybot/profile.json` at the repo root, under the CLI's free-form `vars` n
 
 ```json
 {
-  "name": "API Services",
-  "default_metadata": { "repo": "api-services" },
+  "name": "My Team",
+  "default_metadata": { "repo": "my-service" },
   "vars": {
-    "active_organization_uuid": "00e2b30f-b581-44ae-8981-4cdbd060b78d",
+    "active_organization_uuid": "<your-org-uuid>",
     "custom_form_skills": {
       "by_uuid": {
-        "65de0ec6-2353-4e17-94d7-7beaa905e92a": ".agents/skills/dailybot-custom/coderelease-form"
+        "<form-uuid>": ".agents/skills/dailybot-custom/coderelease-form"
       },
       "by_slug": {
         "code-release-form": ".agents/skills/dailybot-custom/coderelease-form"
@@ -485,6 +1012,12 @@ When the form is workflow-enabled and `allowed_transitions` is non-empty:
 dailybot form transition <form_uuid> <response_uuid> <to_state> --yes
 ```
 
+> **Pass `to_state`, never `label`.** In `allowed_transitions`, `to_state` is the
+> machine key (`released`) and `label` is display text (`Mark released`). The API
+> matches on the key and answers `Unknown workflow state: 'Mark released'`
+> otherwise. Read the key from the response payload rather than typing the state
+> name you saw in the panel.
+
 Confirm with the developer before transitioning:
 
 > "I'll transition response **#a1b2** of **Code Release Form** from `review` → `released` ("Mark released"). The action will be attributed to you in the state history. Confirm? (yes / cancel)"
@@ -521,7 +1054,7 @@ Only the **author, form owner, or org admin** can delete a response (server-enfo
 
 ```
 1. dailybot form list --json                  → find UUID for "Team Feedback"
-2. dailybot form get <uuid> --json            → workflow_enabled: false
+2. dailybot form get <uuid> --json            → workflow: null
 3. Resolver: no entry in custom_form_skills   → continue generic flow
 4. Guided submission:
      - Question 1: "How was your week?"       → developer answer
@@ -535,7 +1068,7 @@ Response stored. No further lifecycle moves required.
 
 ```
 1. dailybot form list --json                  → find UUID + slug
-2. dailybot form get <uuid> --json            → workflow_enabled: true
+2. dailybot form get <uuid> --json            → workflow: {enabled: true, ...}
 3. Resolver: by_slug["code-release-form"]     → ".agents/skills/dailybot-custom/coderelease-form"
 4. Load that custom SKILL.md and follow it    → it drives the whole release flow
    (the custom skill handles questions, per-state required fields, default
@@ -588,7 +1121,7 @@ If the server returns a body without a `code` (network error, gateway error, mal
 
 See [`../shared/http-fallback.md`](../shared/http-fallback.md) for base patterns.
 
-**Important:** Form endpoints use **Bearer token** auth, not API key auth.
+**Important:** Form endpoints accept **either** Bearer token or `X-API-KEY` auth.
 
 ### List forms (with questions)
 
@@ -686,4 +1219,4 @@ Form operations must **never block your primary work**. If the CLI is missing, a
 - [`../shared/http-fallback.md`](../shared/http-fallback.md) — HTTP API fallback patterns
 - [`_custom-template/SKILL.md`](_custom-template/SKILL.md) — starter template for authoring a custom per-form skill (copy into `.agents/skills/dailybot-custom/<your-name>/` in your own repo)
 - **Live API spec:** `https://api.dailybot.com/api/swagger/`
-- **Full agent API skill:** `https://api.dailybot.com/skill.md`
+- **Full agent API skill:** `https://www.dailybot.com/skill.md`

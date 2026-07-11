@@ -5,6 +5,8 @@
   },
   "report": {
     "min_interval_minutes": 30,
-    "nudge": true
+    "nudge": true,
+    "mode": "balanced",
+    "soft_turn_threshold": 8
   }
 }

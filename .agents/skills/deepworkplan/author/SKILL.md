@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-author
 description: Author or update reusable skills, agents, and commands in the current repo — reason about the repo's .agents/ layout, follow the Open Agent Skills frontmatter contract, and keep the .agents/docs/ catalog in sync. Use when a developer wants to create or evolve the repo's agent kit (skills, agents, commands), or runs /skill-create or /agent-create.
-version: "2.15.0"
+version: "2.16.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -38,7 +38,7 @@ the mandatory "Skills & Agents Discovery" plan task.
 Before authoring anything, discover where this repo keeps its kit. Do not hardcode any single repo's
 conventions.
 
-1. Find the agent root: look for `.agents/`, then `.claude/` (often a symlink to `.agents/`), then any
+1. Find the agent root: look for `.agents/`, then `.claude/` or `.cursor/` (often symlinks to `.agents/`), then any
    `AGENTS.md` / `CLAUDE.md` at the repo root for documented paths.
 2. Within it, locate `skills/`, `agents/`, `commands/`, and a catalog under `docs/`.
 3. Inspect 1-2 existing skills/agents to learn the repo's **local conventions** (frontmatter keys it
