@@ -681,7 +681,7 @@ export const en: SiteTranslations = {
         description:
           'Treat the prompt and the skill as untrusted until you have checked them. Both are open source and MIT; the skill is Markdown-first with no network calls and no telemetry. Each release publishes a SHA256SUMS over the shipped skill, so you can confirm your copy matches before running it. Releases are checksummed, not signed (signing is a documented next step).',
         commands: [
-          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -690,24 +690,31 @@ export const en: SiteTranslations = {
           'Add the Deep Work Plan skill so any agent can plan and execute structured work. The skill ships a router plus eight sub-skills — create, execute, refine, resume, status, verify, onboard, and author.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
         title: 'Run repository onboarding',
         description:
-          'Invoke the onboard sub-skill and let the agent reason about the actual repo — its stack, package manager, and real validation commands. It then generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents symlink), wires the thin dwp-* commands, and scaffolds a gitignored .dwp/ for plans and drafts. Nothing is templated; everything is adapted to your repository.',
+          'Invoke the onboard sub-skill and let the agent reason about the actual repo — its stack, package manager, and real validation commands. It generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents symlink), wires thin dwp-* commands, and scaffolds a gitignored .dwp/ for plans and drafts. For large repos the onboard sub-skill uses a plan-driven path: it completes reconnaissance, then emits an onboarding Deep Work Plan. Nothing is templated; everything is adapted to your repository.',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Evolve the kit and accept addons',
+        title: 'Accept opt-in addons',
         description:
-          'Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands. Onboarding also offers four opt-in addons — devcontainer, Dailybot, dependency-upgrade, and design-system — that you accept only when they fit. A repo is fully conformant with zero addons.',
+          'Onboarding offers four opt-in addons — devcontainer, Dailybot, dependency-upgrade, and design-system — that you accept only when they fit. A repo is fully conformant with zero addons. Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands beyond the baseline.',
       },
       {
         title: 'Plan and execute',
         description:
-          'Generate Deep Work Plans with /dwp-create and run them with /dwp-execute, then /dwp-status, /dwp-refine, and /dwp-resume as work proceeds. Each plan carries numbered tasks, validation gates, and a completion protocol so work stays structured, reviewable, and resumable across sessions.',
+          'Generate Deep Work Plans with /dwp-create and run them with /dwp-execute, then /dwp-status, /dwp-refine, /dwp-resume, and /dwp-verify as work proceeds. Each plan carries numbered tasks, validation gates, and a completion protocol — ending with three mandatory final tasks: a Security Review, Skills & Agents Discovery, and an Executive Report.',
+      },
+      {
+        title: 'Verify conformance',
+        description:
+          'Run /dwp-verify for an objective pass/fail report against the specification. Confirm AGENTS.md, docs/ (with real content, not stubs), .agents/ (with thin dwp-* delegators and a catalog that matches disk), .dwp/, and tmp/ are in place — nothing templated, everything reasoned for this repo.',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: 'The outcome',

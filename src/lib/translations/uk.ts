@@ -752,7 +752,7 @@ export const uk: SiteTranslations = {
         description:
           'Ставтеся до промту та скілу як до ненадійних, доки не перевірите їх. Обидва є відкритими під ліцензією MIT; скіл є Markdown-first без мережевих викликів і телеметрії. Кожен реліз публікує SHA256SUMS для скілу, що постачається, тож ви можете підтвердити відповідність своєї копії перед запуском. Релізи контрольно-суміовані, але не підписані (підписання — задокументований наступний крок).',
         commands: [
-          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -761,24 +761,31 @@ export const uk: SiteTranslations = {
           'Додайте скіл Deep Work Plan, щоб будь-який агент міг планувати та виконувати структуровану роботу. Скіл постачає маршрутизатор плюс вісім суб-скілів — create, execute, refine, resume, status, verify, onboard та author.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
         title: 'Запустіть онбординг репозиторію',
         description:
-          'Викличте суб-скіл onboard і дайте агенту поміркувати про реальний репозиторій — його стек, менеджер пакетів та реальні команди валідації. Потім він генерує AGENTS.md, базу знань docs/, документацію кожного модуля та міжагентну домівку .agents/ (із символьним посиланням .claude → .agents), підключає тонкі команди dwp-* і створює .dwp/ у gitignore для планів та чернеток. Нічого не шаблонізується; усе пристосовано до вашого репозиторію.',
+          'Викличте суб-скіл onboard і дайте агенту поміркувати про реальний репозиторій — його стек, менеджер пакетів та реальні команди валідації. Потім він генерує AGENTS.md, базу знань docs/, документацію кожного модуля та міжагентну домівку .agents/ (із символьним посиланням .claude → .agents), підключає тонкі команди dwp-* і створює .dwp/ у gitignore для планів та чернеток. Для великих репозиторіїв суб-скіл onboard використовує план-орієнтований шлях: спочатку проводить розвідку, а потім генерує онбординговий Deep Work Plan. Нічого не шаблонізується; усе пристосовано до вашого репозиторію.',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Розвивайте набір та приймайте addon',
+        title: 'Прийміть опціональні addon',
         description:
-          'Використовуйте /skill-create та /agent-create (суб-скіл author), щоб розвивати скіли, агенти та команди, доречні для вашого стеку. Онбординг також пропонує чотири опціональні addon — devcontainer, Dailybot, dependency-upgrade та design-system — які ви приймаєте лише тоді, коли вони доречні. Репозиторій повністю відповідає вимогам і з нульовою кількістю addon.',
+          'Онбординг пропонує чотири опціональні addon — devcontainer, Dailybot, dependency-upgrade та design-system — які ви приймаєте лише тоді, коли вони доречні. Репозиторій повністю відповідає вимогам і з нульовою кількістю addon. Використовуйте /skill-create та /agent-create (суб-скіл author), щоб розвивати скіли, агенти та команди понад базовий набір.',
       },
       {
         title: 'Плануйте та виконуйте',
         description:
-          'Генеруйте Deep Work Plan за допомогою /dwp-create і виконуйте їх через /dwp-execute, а потім /dwp-status, /dwp-refine та /dwp-resume у міру роботи. Кожен план несе пронумеровані завдання, валідаційні gate та протокол завершення, тож робота лишається структурованою, придатною до рецензування та відновлюваною між сесіями.',
+          "Генеруйте Deep Work Plan за допомогою /dwp-create і виконуйте їх через /dwp-execute, а потім /dwp-status, /dwp-refine, /dwp-resume та /dwp-verify у міру роботи. Кожен план несе пронумеровані завдання, валідаційні gate та протокол завершення — що закінчується трьома обов'язковими фінальними завданнями: оглядом безпеки, виявленням скілів та агентів і виконавчим звітом.",
+      },
+      {
+        title: 'Перевірте відповідність',
+        description:
+          "Запустіть /dwp-verify для об'єктивного звіту «пройдено/не пройдено» відносно специфікації. Переконайтеся, що AGENTS.md, docs/ (із реальним вмістом, а не заглушками), .agents/ (із тонкими делегаторами dwp-* і каталогом, що відповідає диску), .dwp/ та tmp/ на місці — нічого шаблонного, усе обґрунтовано для цього репозиторію.",
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: 'Результат',

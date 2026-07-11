@@ -689,7 +689,7 @@ export const tr: SiteTranslations = {
         description:
           'İstemi ve skill’i denetleyene kadar güvenilmez olarak ele alın. Her ikisi de açık kaynaklıdır ve MIT lisanslıdır; skill, ağ çağrısı ve telemetri içermeyen Markdown odaklı bir yapıdadır. Her sürüm, gönderilen skill üzerinde bir SHA256SUMS yayımlar; çalıştırmadan önce kopyanızın eşleştiğini doğrulayabilirsiniz. Sürümler sağlama toplamlıdır, imzalı değildir (imzalama, belgelenmiş bir sonraki adımdır).',
         commands: [
-          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -698,24 +698,31 @@ export const tr: SiteTranslations = {
           'Herhangi bir ajanın yapılandırılmış işi planlayıp yürütebilmesi için Deep Work Plan skill’ini ekleyin. Skill, bir yönlendirici ve sekiz alt skill ile gelir — create, execute, refine, resume, status, verify, onboard ve author.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
         title: 'Depo kuruluma almasını çalıştırın',
         description:
-          'onboard alt skill’ini çağırın ve ajanın gerçek depo hakkında — yığını, paket yöneticisi ve gerçek doğrulama komutları — akıl yürütmesine izin verin. Ardından AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve ajandan bağımsız bir .agents/ yuvası (.claude → .agents sembolik bağıyla) üretir, ince dwp-* komutlarını bağlar ve planlar ile taslaklar için gitignore’lanmış bir .dwp/ yapısı oluşturur. Hiçbir şey şablonlanmaz; her şey deponuza uyarlanır.',
+          'onboard alt skill’ini çağırın ve ajanın gerçek depo hakkında — yığını, paket yöneticisi ve gerçek doğrulama komutları — akıl yürütmesine izin verin. Ardından AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve ajandan bağımsız bir .agents/ yuvası (.claude → .agents sembolik bağıyla) üretir, ince dwp-* komutlarını bağlar ve planlar ile taslaklar için gitignore’lanmış bir .dwp/ yapısı oluşturur. Büyük depolarda onboard alt skill’i plan odaklı bir yol kullanır: keşfi tamamlar, ardından bir kuruluma alma Deep Work Plan’ı üretir. Hiçbir şey şablonlanmaz; her şey deponuza uyarlanır.',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Kiti geliştirin ve eklentileri kabul edin',
+        title: 'Tercihe dayalı eklentileri kabul edin',
         description:
-          'Yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın. Kuruluma alma ayrıca dört tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade ve design-system — yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır eklentiyle tam uyumludur.',
+          'Kuruluma alma dört tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade ve design-system — yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
       },
       {
         title: 'Planlayın ve yürütün',
         description:
-          '/dwp-create ile Deep Work Plan’ler üretin ve /dwp-execute ile çalıştırın, ardından iş ilerledikçe /dwp-status, /dwp-refine ve /dwp-resume kullanın. Her plan, numaralı görevler, doğrulama kapıları ve bir tamamlama protokolü taşır; böylece iş, oturumlar arasında yapılandırılmış, gözden geçirilebilir ve sürdürülebilir kalır.',
+          '/dwp-create ile Deep Work Plan’ler üretin ve /dwp-execute ile çalıştırın, ardından iş ilerledikçe /dwp-status, /dwp-refine, /dwp-resume ve /dwp-verify kullanın. Her plan, numaralı görevler, doğrulama kapıları ve bir tamamlama protokolü taşır — üç zorunlu son görevle sona erer: bir Güvenlik İncelemesi, Skill’ler ve Ajanlar Keşfi ve bir Yönetici Raporu.',
+      },
+      {
+        title: 'Uyumluluk doğrulaması',
+        description:
+          'Spesifikasyona karşı nesnel bir geçti/kaldı raporu için /dwp-verify çalıştırın. AGENTS.md, docs/ (taslak değil gerçek içerikle), .agents/ (ince dwp-* yönlendiricileri ve diskle eşleşen bir katalogla), .dwp/ ve tmp/ dizinlerinin yerinde olduğunu doğrulayın — şablonlanmış hiçbir şey yok, her şey bu depo için akıl yürütülmüş.',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: 'Sonuç',

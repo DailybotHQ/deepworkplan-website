@@ -53,8 +53,10 @@ Herhangi bir şeyi değiştirmeden önce, benimsediğiniz standardı anlamanız 
   ya da skills/agents kurulumu, `.dwp/` ve `.gitignore`. Bu işin bir kısmını zaten yapan her şeyi not edin.
 - **Onboarding planını önerin.** Özlü bir liste sunun: oluşturacağınız dosyalar, değiştireceğiniz
   dosyalar ve uzlaştırmayı ya da değiştirmeyi önerdiğiniz var olan her şey — ardından devam etmeden önce
-  **kullanıcıdan onaylamasını isteyin**. Büyük bir depo için bu planı `/dwp-create` ile yakalayın ve onu
-  bir Deep Work Plan olarak yürütün.
+  **kullanıcıdan onaylamasını isteyin**. Büyük bir depo (birçok modül veya üretilecek çok sayıda
+  artefakt) için onboard alt skill'i plan güdümlü bir yol kullanır: keşfi tamamlar, `AGENTS.md`'yi
+  oluşturur, ardından `.dwp/drafts/` altında bir onboarding Deep Work Plan çıkarır ve gerektiğinde
+  `/dwp-refine` → `/dwp-execute` → `/dwp-resume`'a devreder.
 
 ## Güven ve doğrulama (kurmadan önce)
 
@@ -92,6 +94,12 @@ ile sekiz alt skill içerir — `create`, `execute`, `refine`, `resume`, `status
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
+```
+
+Veya OpenClaw ile yükleyin:
+
+```bash
+openclaw skills install deepworkplan
 ```
 
 Ya da klonlayıp kurulum betiğini çalıştırın:
@@ -132,29 +140,29 @@ teyit edin.
    alanı iskeletleyin — ikisi de `.gitignore`’a tahrip edici olmadan eklenir (ekleyin, asla yeniden
    yazmayın).
 
-## 4. Kiti geliştirin (author alt skill’i)
+## 4. Tercihe dayalı eklentileri sunun
 
-Deponun kendi kitini büyütmek için `author` alt skill’ini kullanın. İnce yetki devredicileri
-`/skill-create` ve `/agent-create` ona yönlendirir. Tekrarlanabilir, oturum içi bir prosedür için bir
-**skill**, kendi model katmanı ve araçları olan yinelenen bir rol için bir **ajan** ve yalnızca ince bir
-yetki devredici olarak bir **komut** oluşturun. `.agents/docs/` kataloğunu diskte olanla eşitli tutun.
-
-## 5. Tercihe dayalı eklentileri sunun
-
-Temel hattan sonra, dört eklentiyi (devcontainer, Dailybot, dependency-upgrade, design-system) sıralayın ve her birini açık bir tercih olarak sunun. Bir depo, **sıfır**
-eklentiyle tümüyle uyumludur — onları asla otomatik kurmayın.
+Temel onboarding sonrasında, dört eklentiyi (devcontainer, Dailybot, dependency-upgrade,
+design-system) sıralayın ve her birini açık bir tercih olarak sunun. Bir depo, **sıfır** eklentiyle
+tümüyle uyumludur — onları asla otomatik kurmayın.
 
 - **Devcontainer desteği** — kalıcı AI-CLI kimlik doğrulaması içeren, yeniden üretilebilir, yalıtılmış
   bir geliştirme konteyneri.
-- **Dailybot entegrasyonu** — zaten Dailybot kullanan ekipler için en iyi çabayla ilerleme/dönüm noktası
-  raporlaması; ajanların önemli işi kimse istemeden raporlaması için isteğe bağlı otonom kanca katmanıyla.
-  Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
+- **Dailybot entegrasyonu** — dört yaşam döngüsü olayı (kickoff, önemli görev, engellendi, tamamlandı) olarak zaten Dailybot kullanan ekipler için en iyi çabayla ilerleme raporlaması; isteğe bağlı otonom kanca zorlama (`dailybot-cli >= 3.1.2`). Eşleştirilmiş Dailybot ajan skill’inin (3.4.0) kurulması ayrıca sohbet, check-in’ler, form yazarlığı, AI’ye sorma ve daha fazlasını açar — eklenti yalnızca raporlamayı DWP yürütmesine bağlar. Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
 - **Dependency upgrade** — paket yöneticisinden bağımsız, gruplanmış, doğrulanmış, geri alınabilir
   yükseltmeler. Kabul edildiğinde, `/lib-upgrade` komutunu kurar.
-- **Design system** — deponun gerçek tasarım kaynağından akıl yürütülerek oluşturulan, ajanlara yönelik
-  bir `docs/DESIGN.md`; saptanan arayüz yüzeylerini profiller olarak kapsar — görsel UI, stilize CLI
-  çıktısı ve konuşma tabanlı mesajlaşma — böylece her ajan, deponun kendi kurallarıyla tutarlı arayüz
-  çıktısı üretir.
+- **Design system** — yalnızca saptanan arayüz yüzeyi olan depolar için isteğe bağlı `docs/DESIGN.md`
+  (saf kütüphanelere, headless servislere veya yalnızca altyapı depolarına sunulmaz). Üç profil tek bir
+  dosyada katmanlanır: visual-ui (saptandığında varsayılan olarak açık), cli-output ve conversational —
+  son ikisi her zaman sorulur, asla otomatik uygulanmaz.
+
+## 5. Kiti geliştirin (author alt skill’i)
+
+Onboarding sonrasında deponun kendi kitini büyütmek için `author` alt skill’ini kullanın. İnce yetki
+devredicileri `/skill-create` ve `/agent-create` ona yönlendirir. Tekrarlanabilir, oturum içi bir
+prosedür için bir **skill**, kendi model katmanı ve araçları olan yinelenen bir rol için bir **ajan** ve
+yalnızca ince bir yetki devredici olarak bir **komut** oluşturun. `.agents/docs/` kataloğunu diskte
+olanla eşitli tutun.
 
 ## 6. Planlayın ve yürütün
 
@@ -165,6 +173,7 @@ Herhangi bir görev için Deep Work Plan’ler üretin ve onları görev görev 
 - `/dwp-status` — değişiklik yapmadan ilerlemeyi raporlar.
 - `/dwp-refine` — tamamlanmış işi korurken görev ekler, çıkarır veya yeniden sıralar.
 - `/dwp-resume` — durumu yeniden oluşturur ve kesintiye uğramış bir planı sürdürür.
+- `/dwp-verify` — depo (veya belirli bir plan) için nesnel bir geçti/kaldı uyumluluk raporu.
 
 Her plan, üç zorunlu son görevle biter — planın kendi değişikliklerinin bir **Security Review**'u
 (`docs/SECURITY.md` güncel tutulur; kritik bir bulgu tamamlanmayı engeller), Skills & Agents
@@ -172,16 +181,19 @@ Discovery ve Executive Report.
 
 ## 7. Doğrulayın
 
-Nesnel bir geçti/kaldı uyumluluk raporu için `/dwp-verify` çalıştırın (bu,
-[spesifikasyonun Uyumluluk belgesindeki](https://deepworkplan.com/spec) ölçütleri denetler),
+Nesnel bir geçti/kaldı uyumluluk raporu için `/dwp-verify` çalıştırın (veya `0`/`1`
+ile çıkan CI uyumlu mekanik katman olan `bash {skill_dir}/verify/conformance.sh`).
+[Spesifikasyonun Uyumluluk belgesindeki](https://deepworkplan.com/spec) ölçütleri denetler,
 ardından şunları teyit edin:
 
 - [ ] Skill kuruludur ve çözümlenebilir, sekiz alt skill’in tümü kullanılabilir.
 - [ ] Kökte gerçek bir Hızlı Komutlar bloğuyla bir `AGENTS.md` vardır; `CLAUDE.md` ona çözümlenir.
-- [ ] `docs/`, standart kategorileri gerçek, depoya özgü içerikle barındırır; büyük modüllerin bir
-      `README.md` dosyası vardır.
-- [ ] `.agents/`, `agents/`, `commands/` (ince `dwp-*` yetki devredicileri), `skills/` ve gerçeklikle
-      eşleşen bir katalog ile vardır; `.claude → .agents` çözümlenir.
+- [ ] `docs/`, standart kategorileri gerçek, depoya özgü içerikle barındırır;
+      `docs/TESTING_GUIDE.md` gerçek bir test/lint kurulumunu tanımlar (boş ya da taslak değil);
+      büyük modüllerin bir `README.md` dosyası vardır.
+- [ ] `.agents/`, `agents/`, `commands/` (kopyalanmış akışlar değil, skill’e referans veren ince
+      `dwp-*` yetki devredicileri), `skills/` ve diskte olanla eşleşen bir katalog ile vardır;
+      `.claude → .agents` çözümlenir.
 - [ ] `.dwp/` vardır, gitignore’lanmıştır ve `plans/` ile `drafts/` içerir; `tmp/` vardır ve gitignore’lanmıştır.
 - [ ] Var olan kullanıcı içeriği korundu ya da onayla uzlaştırıldı — hiçbir şey sessizce yok edilmedi.
 - [ ] Bir Deep Work Plan üretip onu görev görev yürütebilir, her kapıyı doğrulayabilirsiniz.

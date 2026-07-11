@@ -745,7 +745,7 @@ export const hi: SiteTranslations = {
         description:
           'प्रॉम्प्ट और स्किल को तब तक अविश्वसनीय मानें जब तक आपने उन्हें जाँच न लिया हो। दोनों ओपन-सोर्स और MIT लाइसेंस प्राप्त हैं; स्किल Markdown-first है जिसमें कोई नेटवर्क कॉल नहीं और कोई टेलीमेट्री नहीं है। प्रत्येक रिलीज़ भेजी गई स्किल पर SHA256SUMS प्रकाशित करती है, ताकि आप चलाने से पहले पुष्टि कर सकें कि आपकी प्रति मेल खाती है। रिलीज़ चेकसम की गई हैं, हस्ताक्षरित नहीं (हस्ताक्षर एक दस्तावेज़ीकृत अगला चरण है)।',
         commands: [
-          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -754,24 +754,31 @@ export const hi: SiteTranslations = {
           'Deep Work Plan स्किल जोड़ें ताकि कोई भी एजेंट संरचित काम की योजना बना सके और उसे निष्पादित कर सके। स्किल एक राउटर और आठ सब-स्किल्स के साथ आती है — create, execute, refine, resume, status, verify, onboard और author।',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
         title: 'रिपॉज़िटरी ऑनबोर्डिंग चलाएँ',
         description:
-          'onboard सब-स्किल आमंत्रित करें और एजेंट को वास्तविक रिपॉज़िटरी पर तर्क करने दें — उसका स्टैक, पैकेज मैनेजर और वास्तविक सत्यापन कमांड्स। फिर यह AGENTS.md, एक docs/ ज्ञान-आधार, प्रति-मॉड्यूल docs, और एक क्रॉस-एजेंट .agents/ घर (.claude → .agents सिमलिंक के साथ) तैयार करता है, पतले dwp-* कमांड्स जोड़ता है, और योजनाओं तथा ड्राफ़्ट के लिए एक gitignored .dwp/ का ढाँचा बनाता है। कुछ भी टेम्पलेट नहीं है; सब कुछ आपकी रिपॉज़िटरी के अनुरूप ढाला गया है।',
+          'onboard सब-स्किल आमंत्रित करें और एजेंट को वास्तविक रिपॉज़िटरी पर तर्क करने दें — उसका स्टैक, पैकेज मैनेजर और वास्तविक सत्यापन कमांड्स। फिर यह AGENTS.md, एक docs/ ज्ञान-आधार, प्रति-मॉड्यूल docs, और एक क्रॉस-एजेंट .agents/ घर (.claude → .agents सिमलिंक के साथ) तैयार करता है, पतले dwp-* कमांड्स जोड़ता है, और योजनाओं तथा ड्राफ़्ट के लिए एक gitignored .dwp/ का ढाँचा बनाता है। बड़ी रिपॉज़िटरी के लिए onboard सब-स्किल एक योजना-संचालित पथ का उपयोग करता है: यह पहले टोह लेता है, फिर एक ऑनबोर्डिंग Deep Work Plan उत्पन्न करता है। कुछ भी टेम्पलेट नहीं है; सब कुछ आपकी रिपॉज़िटरी के अनुरूप ढाला गया है।',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'किट विकसित करें और ऐडऑन स्वीकार करें',
+        title: 'ऑप्ट-इन ऐडऑन स्वीकार करें',
         description:
-          'स्टैक-उपयुक्त स्किल्स, एजेंट्स और कमांड्स विकसित करने के लिए /skill-create और /agent-create (author सब-स्किल) का उपयोग करें। ऑनबोर्डिंग चार ऑप्ट-इन ऐडऑन भी प्रदान करती है — devcontainer, Dailybot, dependency-upgrade और design-system — जिन्हें आप तभी स्वीकार करते हैं जब वे उपयुक्त हों। एक रिपॉज़िटरी शून्य ऐडऑन के साथ भी पूर्णतः अनुरूप होती है।',
+          'ऑनबोर्डिंग चार ऑप्ट-इन ऐडऑन प्रदान करती है — devcontainer, Dailybot, dependency-upgrade और design-system — जिन्हें आप तभी स्वीकार करते हैं जब वे उपयुक्त हों। एक रिपॉज़िटरी शून्य ऐडऑन के साथ भी पूर्णतः अनुरूप होती है। बेसलाइन से परे स्टैक-उपयुक्त स्किल्स, एजेंट्स और कमांड्स विकसित करने के लिए /skill-create और /agent-create (author सब-स्किल) का उपयोग करें।',
       },
       {
         title: 'योजना बनाएँ और निष्पादित करें',
         description:
-          '/dwp-create से Deep Work Plans तैयार करें और उन्हें /dwp-execute से चलाएँ, फिर काम बढ़ने पर /dwp-status, /dwp-refine और /dwp-resume का उपयोग करें। हर योजना में क्रमांकित कार्य, सत्यापन-गेट और एक पूर्णता प्रोटोकॉल होता है, ताकि काम संरचित, समीक्षा योग्य और सत्रों के पार फिर से शुरू होने योग्य बना रहे।',
+          '/dwp-create से Deep Work Plans तैयार करें और उन्हें /dwp-execute से चलाएँ, फिर काम बढ़ने पर /dwp-status, /dwp-refine, /dwp-resume और /dwp-verify का उपयोग करें। हर योजना में क्रमांकित कार्य, सत्यापन-गेट और एक पूर्णता प्रोटोकॉल होता है — जो तीन अनिवार्य अंतिम कार्यों के साथ समाप्त होता है: एक सुरक्षा समीक्षा, स्किल्स और एजेंट्स खोज, और एक कार्यकारी रिपोर्ट।',
+      },
+      {
+        title: 'अनुरूपता सत्यापित करें',
+        description:
+          'विनिर्देश के विरुद्ध एक वस्तुनिष्ठ उत्तीर्ण/अनुत्तीर्ण रिपोर्ट के लिए /dwp-verify चलाएँ। पुष्टि करें कि AGENTS.md, docs/ (वास्तविक सामग्री के साथ, स्टब्स नहीं), .agents/ (पतले dwp-* डेलिगेटर्स और डिस्क से मेल खाने वाली कैटलॉग के साथ), .dwp/ और tmp/ यथास्थान हैं — कुछ भी टेम्पलेट नहीं, सब कुछ इस रिपॉज़िटरी के लिए तर्कित।',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: 'परिणाम',

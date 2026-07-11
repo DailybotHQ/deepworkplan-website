@@ -688,7 +688,7 @@ export const id: SiteTranslations = {
         description:
           'Perlakukan prompt dan skill sebagai tidak tepercaya sampai Anda telah memeriksanya. Keduanya bersumber terbuka dan berlisensi MIT; skill berbasis Markdown tanpa panggilan jaringan dan tanpa telemetri. Setiap rilis menerbitkan SHA256SUMS atas skill yang dikirimkan, sehingga Anda dapat mengonfirmasi salinan Anda cocok sebelum menjalankannya. Rilis ber-checksum, bukan bertanda tangan (penandatanganan adalah langkah berikutnya yang terdokumentasi).',
         commands: [
-          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -697,24 +697,31 @@ export const id: SiteTranslations = {
           'Tambahkan skill Deep Work Plan agar agent mana pun dapat merencanakan dan mengeksekusi pekerjaan terstruktur. Skill ini membawa sebuah router ditambah delapan sub-skill — create, execute, refine, resume, status, verify, onboard, dan author.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
         title: 'Jalankan onboarding repositori',
         description:
-          'Panggil sub-skill onboard dan biarkan agent bernalar tentang repo yang sebenarnya — stack, package manager, dan perintah validasi nyatanya. Ia kemudian menghasilkan AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah .agents/ lintas agent (dengan symlink .claude → .agents), menyambungkan command dwp-* yang tipis, dan menyiapkan .dwp/ yang di-gitignore untuk rencana dan draf. Tidak ada yang ditemplatkan; semuanya disesuaikan dengan repositori Anda.',
+          'Panggil sub-skill onboard dan biarkan agent bernalar tentang repo yang sebenarnya — stack, package manager, dan perintah validasi nyatanya. Ia kemudian menghasilkan AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah .agents/ lintas agent (dengan symlink .claude → .agents), menyambungkan command dwp-* yang tipis, dan menyiapkan .dwp/ yang di-gitignore untuk rencana dan draf. Untuk repo besar, sub-skill onboard menggunakan jalur berbasis rencana: menyelesaikan rekognisi, lalu menghasilkan Deep Work Plan onboarding. Tidak ada yang ditemplatkan; semuanya disesuaikan dengan repositori Anda.',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Kembangkan kit dan terima addon',
+        title: 'Terima addon opt-in',
         description:
-          'Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack. Onboarding juga menawarkan empat addon opt-in — devcontainer, Dailybot, dependency-upgrade, dan design-system — yang Anda terima hanya ketika cocok. Sebuah repo sepenuhnya konforman dengan nol addon.',
+          'Onboarding menawarkan empat addon opt-in — devcontainer, Dailybot, dependency-upgrade, dan design-system — yang Anda terima hanya ketika cocok. Sebuah repo sepenuhnya konforman dengan nol addon. Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack di luar baseline.',
       },
       {
         title: 'Rencanakan dan eksekusi',
         description:
-          'Hasilkan Deep Work Plan dengan /dwp-create dan jalankan dengan /dwp-execute, lalu /dwp-status, /dwp-refine, dan /dwp-resume seiring pekerjaan berjalan. Setiap rencana membawa tugas bernomor, validation gate, dan completion protocol sehingga pekerjaan tetap terstruktur, dapat ditinjau, dan dapat dilanjutkan lintas sesi.',
+          'Hasilkan Deep Work Plan dengan /dwp-create dan jalankan dengan /dwp-execute, lalu /dwp-status, /dwp-refine, /dwp-resume, dan /dwp-verify seiring pekerjaan berjalan. Setiap rencana membawa tugas bernomor, validation gate, dan completion protocol — diakhiri dengan tiga tugas akhir wajib: Security Review, Skills & Agents Discovery, dan Executive Report.',
+      },
+      {
+        title: 'Verifikasi kepatuhan',
+        description:
+          'Jalankan /dwp-verify untuk laporan lulus/gagal yang objektif terhadap spesifikasi. Konfirmasi bahwa AGENTS.md, docs/ (dengan konten nyata, bukan stub), .agents/ (dengan delegator dwp-* yang tipis dan katalog yang sesuai dengan disk), .dwp/, dan tmp/ sudah pada tempatnya — tidak ada yang ditemplatkan, semuanya dinalar untuk repo ini.',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: 'Hasilnya',

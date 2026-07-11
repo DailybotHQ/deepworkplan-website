@@ -688,7 +688,7 @@ export const it: SiteTranslations = {
         description:
           'Tratti il prompt e la skill come non attendibili finché non li ha verificati. Entrambi sono open source e con licenza MIT; la skill è Markdown-first senza chiamate di rete e senza telemetria. Ogni release pubblica un SHA256SUMS sui file della skill, così può confermare che la sua copia corrisponda prima di eseguirla. Le release hanno checksum, non firme (la firma è il passo successivo documentato).',
         commands: [
-          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -697,24 +697,31 @@ export const it: SiteTranslations = {
           'Aggiunga la skill Deep Work Plan così che qualsiasi agente possa pianificare ed eseguire lavoro strutturato. La skill include un router più otto sub-skill — create, execute, refine, resume, status, verify, onboard e author.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
         title: 'Esegua l’onboarding del repository',
         description:
-          'Invochi la sub-skill onboard e lasci che l’agente ragioni sul repo reale — il suo stack, il package manager e i comandi di validazione reali. Genera poi AGENTS.md, una knowledge base docs/, documentazione per modulo e una home .agents/ multi-agente (con il symlink .claude → .agents), collega i sottili comandi dwp-* e predispone una .dwp/ esclusa da git per piani e bozze. Nulla è basato su template; tutto è adattato al Suo repository.',
+          'Invochi la sub-skill onboard e lasci che l’agente ragioni sul repo reale — il suo stack, il package manager e i comandi di validazione reali. Genera poi AGENTS.md, una knowledge base docs/, documentazione per modulo e una home .agents/ multi-agente (con il symlink .claude → .agents), collega i sottili comandi dwp-* e predispone una .dwp/ esclusa da git per piani e bozze. Per i repository di grandi dimensioni la sub-skill onboard utilizza un percorso guidato dal piano: completa la ricognizione, quindi genera un Deep Work Plan di onboarding. Nulla è basato su template; tutto è adattato al Suo repository.',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Faccia evolvere il kit e accetti gli addon',
+        title: 'Accetti gli addon opzionali',
         description:
-          'Usi /skill-create e /agent-create (la sub-skill author) per far crescere skill, agenti e comandi adatti allo stack. L’onboarding offre anche quattro addon opt-in — devcontainer, Dailybot, dependency-upgrade e design-system — che accetta solo quando sono pertinenti. Un repo è pienamente conforme anche con zero addon.',
+          'L’onboarding offre quattro addon opt-in — devcontainer, Dailybot, dependency-upgrade e design-system — che accetta solo quando sono pertinenti. Un repo è pienamente conforme anche con zero addon. Usi /skill-create e /agent-create (la sub-skill author) per far crescere skill, agenti e comandi oltre la configurazione di base.',
       },
       {
         title: 'Pianifichi ed esegua',
         description:
-          'Generi Deep Work Plan con /dwp-create ed eseguili con /dwp-execute, poi /dwp-status, /dwp-refine e /dwp-resume man mano che il lavoro procede. Ogni piano porta con sé attività numerate, validation gate e un protocollo di completamento così il lavoro resta strutturato, revisionabile e ripristinabile tra le sessioni.',
+          'Generi Deep Work Plan con /dwp-create ed eseguili con /dwp-execute, poi /dwp-status, /dwp-refine, /dwp-resume e /dwp-verify man mano che il lavoro procede. Ogni piano porta con sé attività numerate, validation gate e un protocollo di completamento — concludendosi con tre attività finali obbligatorie: una revisione di sicurezza, una scoperta di skill e agenti e un rapporto esecutivo.',
+      },
+      {
+        title: 'Verifichi la conformità',
+        description:
+          'Esegua /dwp-verify per un rapporto oggettivo di conformità (superato/non superato) rispetto alla specifica. Confermi che AGENTS.md, docs/ (con contenuto reale, non bozze), .agents/ (con sottili delegatori dwp-* e un catalogo corrispondente al disco), .dwp/ e tmp/ siano al loro posto — nulla basato su template, tutto ragionato per questo repository.',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: 'Il risultato',

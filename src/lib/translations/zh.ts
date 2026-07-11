@@ -680,7 +680,7 @@ export const zh: SiteTranslations = {
         description:
           '在核查之前，请将提示和技能视为不可信的。两者均为开源且采用 MIT 许可；该技能以 Markdown 为核心，无网络调用，也无遥测。每个发布版本都会发布一份涵盖所有已发布技能文件的 SHA256SUMS，以便你在运行前确认副本匹配。发布版本有校验和，但未签名（签名是已记录的下一步计划）。',
         commands: [
-          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -689,24 +689,31 @@ export const zh: SiteTranslations = {
           '添加 Deep Work Plan 技能，让任意代理都能规划并执行结构化的工作。该技能附带一个路由器外加八个子技能——create、execute、refine、resume、status、verify、onboard 与 author。',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
         title: '运行代码仓库接入',
         description:
-          '调用 onboard 子技能，让代理对真实的仓库进行推理——它的技术栈、包管理器与真实的验证命令。随后它会生成 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个跨代理的 .agents/ 目录（含 .claude → .agents 符号链接）,接入轻量的 dwp-* 命令，并搭建一个被 gitignore 的 .dwp/ 以存放计划与草稿。没有任何东西套用模板；一切都适配于你的代码仓库。',
+          '调用 onboard 子技能，让代理对真实的仓库进行推理——它的技术栈、包管理器与真实的验证命令。随后它会生成 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个跨代理的 .agents/ 目录（含 .claude → .agents 符号链接），接入轻量的 dwp-* 命令，并搭建一个被 gitignore 的 .dwp/ 以存放计划与草稿。对于大型仓库，onboard 子技能采用计划驱动路径：先完成探查，然后生成一份接入用的 Deep Work Plan。没有任何东西套用模板；一切都适配于你的代码仓库。',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: '演化套件并采纳附加组件',
+        title: '接受可选附加组件',
         description:
-          '使用 /skill-create 与 /agent-create（author 子技能）来培育与技术栈相适配的技能、代理与命令。接入流程还会提供四个可选附加组件——devcontainer、Dailybot、dependency-upgrade 与 design-system——你只在它们契合时才采纳。一个仓库即便不带任何附加组件，也完全符合规范。',
+          '接入流程提供四个可选附加组件——devcontainer、Dailybot、dependency-upgrade 与 design-system——你只在它们契合时才采纳。一个仓库即便不带任何附加组件，也完全符合规范。使用 /skill-create 与 /agent-create（author 子技能）来培育超越基线的技能、代理与命令。',
       },
       {
         title: '规划并执行',
         description:
-          '用 /dwp-create 生成 Deep Work Plan 并用 /dwp-execute 运行它们，随着工作推进再使用 /dwp-status、/dwp-refine 与 /dwp-resume。每份计划都带有编号任务、验证关卡与一套完成协议，使工作保持结构化、可审阅，并可跨会话恢复。',
+          '用 /dwp-create 生成 Deep Work Plan 并用 /dwp-execute 运行它们，随着工作推进再使用 /dwp-status、/dwp-refine、/dwp-resume 与 /dwp-verify。每份计划都带有编号任务、验证关卡与一套完成协议——以三项强制性最终任务收尾：安全审查、技能与代理发现，以及执行报告。',
+      },
+      {
+        title: '验证一致性',
+        description:
+          '运行 /dwp-verify 以获取一份基于规范的客观通过/不通过报告。确认 AGENTS.md、docs/（包含真实内容而非占位符）、.agents/（包含轻量的 dwp-* 委托器和与磁盘一致的目录）、.dwp/ 与 tmp/ 均已就位——没有任何套用模板的内容，一切都是针对此仓库推理得出的。',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: '成果',
