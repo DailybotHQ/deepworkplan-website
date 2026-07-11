@@ -117,7 +117,7 @@ metodologia) em vez de sobrescrever — e confirme com o usuário antes de subst
    (apenas inglês, conventional commits, o padrão de testes real e os gates de revisão do repositório) e um bloco
    Quick Commands com os comandos **reais e executáveis** do repositório. Se um `AGENTS.md` já existir, mescle
    nele em vez de substituí-lo. Crie o symlink `CLAUDE.md → AGENTS.md` (não sobrescreva um
-   `CLAUDE.md` existente sem perguntar).
+   `CLAUDE.md` existente sem perguntar). Da mesma forma, crie o symlink `.cursor → .agents` se ausente.
 2. **`docs/`.** Preencha as categorias padrão com conteúdo real e específico do repositório: `PRODUCT_SPEC.md` (o documento de produto/por quê não técnico — obrigatório para todo repositório, incluindo bibliotecas), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
    (nunca pulado — todo repositório tem uma postura de segurança, mesmo sem segredos),
@@ -125,11 +125,11 @@ metodologia) em vez de sobrescrever — e confirme com o usuário antes de subst
    Se os docs já existirem, integre-os e estenda-os — não duplique.
 3. **Docs por módulo.** Adicione um `README.md` (e uma subpasta `docs/` para módulos complexos) dentro de cada
    módulo de origem principal descoberto no reconhecimento.
-4. **`.agents/` + `.claude → .agents`.** Crie o diretório canônico e multiagente: um catálogo **fundamentado**
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Crie o diretório canônico e multiagente: um catálogo **fundamentado**
    de `agents/`, `skills/` apropriadas à stack e `commands/` `dwp-*` enxutos que delegam à
    skill instalada — cada entrada justificada para *este* repositório, não copiada de outro. Adicione um
    catálogo em `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) que corresponda ao que existe em
-   disco, além de `settings.json` e o symlink `.claude → .agents`. Incorpore quaisquer skills/agents existentes
+   disco, além de `settings.json` e os symlinks `.claude → .agents` e `.cursor → .agents`. Incorpore quaisquer skills/agents existentes
    ao catálogo.
 5. **A skill DWP, adaptada.** A skill instalada é o motor; o próprio kit do repositório
    (skills, agents, commands) deve ser **fundamentado para este repositório** — nunca um copia e cola do kit de outro
@@ -187,7 +187,7 @@ Então confirme:
       descreve uma configuração real de teste/lint (nem vazio nem stub); os módulos principais têm um `README.md`.
 - [ ] O `.agents/` existe com `agents/`, `commands/` (delegadores `dwp-*` enxutos que referenciam a skill,
       não fluxos copiados), `skills/` e um catálogo que corresponde ao que existe em disco;
-      o `.claude → .agents` resolve.
+      o `.claude → .agents` e o `.cursor → .agents` resolvem.
 - [ ] O `.dwp/` existe, é ignorado pelo git e tem `plans/` e `drafts/`; o `tmp/` existe e é ignorado pelo git.
 - [ ] O conteúdo existente do usuário foi preservado ou reconciliado com consentimento — nada foi destruído silenciosamente.
 - [ ] Você consegue gerar um Deep Work Plan e executá-lo tarefa a tarefa, validando cada gate.

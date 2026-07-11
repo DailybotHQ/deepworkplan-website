@@ -120,7 +120,7 @@ méthodologie) au lieu d’écraser — et confirmez avec l’utilisateur avant 
    (anglais uniquement, commits conventionnels, le vrai pattern de test du dépôt et les portes de revue), et un bloc Quick
    Commands avec les commandes **réelles et exécutables** du dépôt. Si un `AGENTS.md` existe déjà, fusionnez-y
    plutôt que de le remplacer. Créez le lien symbolique `CLAUDE.md → AGENTS.md` (n’écrasez pas un
-   `CLAUDE.md` existant sans demander).
+   `CLAUDE.md` existant sans demander). De même, créez le lien symbolique `.cursor → .agents` s'il est absent.
 2. **`docs/`.** Remplissez les catégories standard avec un contenu réel, spécifique au dépôt : `PRODUCT_SPEC.md` (le document produit/pourquoi non technique — obligatoire pour tout dépôt, bibliothèques incluses), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
    (jamais omis — tout dépôt a une posture de sécurité, même sans secrets),
@@ -128,11 +128,11 @@ méthodologie) au lieu d’écraser — et confirmez avec l’utilisateur avant 
    Si des docs existent déjà, intégrez-les et étendez-les — ne les dupliquez pas.
 3. **Doc par module.** Ajoutez un `README.md` (et un sous-dossier `docs/` pour les modules complexes) dans chaque
    module source majeur découvert lors de la reconnaissance.
-4. **`.agents/` + `.claude → .agents`.** Créez le foyer canonique, partagé entre agents : un catalogue **raisonné**
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Créez le foyer canonique, partagé entre agents : un catalogue **raisonné**
    d’`agents/`, de `skills/` adaptés à la stack, et de `commands/` `dwp-*` légères qui délèguent au
    skill installé — chaque entrée justifiée pour *ce* dépôt, pas copiée d’un autre. Ajoutez un
    catalogue `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) qui correspond à ce qui existe sur
-   disque, ainsi que `settings.json`, et le lien symbolique `.claude → .agents`. Intégrez tout skill/agent existant
+   disque, ainsi que `settings.json`, et les liens symboliques `.claude → .agents` et `.cursor → .agents`. Intégrez tout skill/agent existant
    au catalogue.
 5. **Le skill DWP, adapté.** Le skill installé est le moteur ; le kit propre au dépôt
    (skills, agents, commandes) doit être **raisonné pour ce dépôt** — jamais un copier-coller du kit
@@ -192,7 +192,7 @@ Puis confirmez :
       `README.md`.
 - [ ] `.agents/` existe avec `agents/`, `commands/` (délégateurs `dwp-*` légers qui référencent le skill,
       pas des flux copiés), `skills/`, et un catalogue qui correspond à ce qui existe sur disque ;
-      `.claude → .agents` se résout.
+      `.claude → .agents` et `.cursor → .agents` se résolvent.
 - [ ] `.dwp/` existe, est ignoré par git, et comporte `plans/` et `drafts/` ; `tmp/` existe et est ignoré par git.
 - [ ] Le contenu utilisateur existant a été préservé ou réconcilié avec consentement — rien n’a été détruit en silence.
 - [ ] Vous pouvez générer un Deep Work Plan et l’exécuter tâche par tâche, en validant chaque porte.

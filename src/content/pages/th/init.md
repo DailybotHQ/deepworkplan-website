@@ -114,7 +114,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
    (ภาษาอังกฤษเท่านั้น conventional commit รูปแบบการทดสอบจริงและ review gate ของ repo) และบล็อก Quick
    Commands ที่มีคำสั่ง **จริงและรันได้** ของ repo หาก `AGENTS.md` มีอยู่แล้ว ให้ผสาน
    เข้าไปแทนที่จะแทนที่มัน สร้าง symlink `CLAUDE.md → AGENTS.md` (อย่าทับ
-   `CLAUDE.md` ที่มีอยู่โดยไม่ถาม)
+   `CLAUDE.md` ที่มีอยู่โดยไม่ถาม) สร้าง `.cursor → .agents` ด้วยหากยังไม่มี
 2. **`docs/`** เติมหมวดมาตรฐานด้วยเนื้อหาจริงที่เฉพาะกับ repo ได้แก่ `PRODUCT_SPEC.md` (เอกสารผลิตภัณฑ์/เหตุผลที่ไม่ใช่เชิงเทคนิค — จำเป็นสำหรับทุก repository รวมถึงไลบรารี), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
    (ไม่ข้ามเด็ดขาด — ทุก repository มีท่าทีด้านความปลอดภัย แม้ไม่มีความลับใด ๆ),
@@ -122,11 +122,11 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
    หาก docs มีอยู่แล้ว ให้ผนวกและขยายมัน — อย่าทำซ้ำ
 3. **เอกสารต่อโมดูล** เพิ่ม `README.md` (และโฟลเดอร์ย่อย `docs/` สำหรับโมดูลที่ซับซ้อน) ภายในแต่ละ
    โมดูลต้นทางหลักที่ค้นพบในการสำรวจ
-4. **`.agents/` + `.claude → .agents`** สร้างบ้านข้ามเอเจนต์ที่เป็นมาตรฐาน ได้แก่ แคตตาล็อก **ที่ผ่านการให้เหตุผล**
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`** สร้างบ้านข้ามเอเจนต์ที่เป็นมาตรฐาน ได้แก่ แคตตาล็อก **ที่ผ่านการให้เหตุผล**
    ของ `agents/`, `skills/` ที่เหมาะกับเทคสแตก และคำสั่ง `dwp-*` `commands/` บาง ๆ ที่ส่งต่อไปยัง
    skill ที่ติดตั้งไว้ — ทุกรายการมีเหตุผลรองรับสำหรับ repository *นี้* ไม่ใช่คัดลอกมาจากที่อื่น เพิ่ม
    แคตตาล็อก `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) ที่ตรงกับสิ่งที่มีอยู่บน
-   ดิสก์ พร้อม `settings.json` และ symlink `.claude → .agents` รวม skill/agent ที่มีอยู่
+   ดิสก์ พร้อม `settings.json` และ symlink `.claude → .agents` และ `.cursor → .agents` รวม skill/agent ที่มีอยู่
    เข้าไปในแคตตาล็อก
 5. **skill ของ DWP ที่ปรับแล้ว** skill ที่ติดตั้งไว้คือเครื่องยนต์ kit ของ repository เอง
    (skill, agent, คำสั่ง) ต้อง **ผ่านการให้เหตุผลสำหรับ repo นี้** — ไม่เคยคัดลอกวาง kit ของ
@@ -184,7 +184,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
       `README.md`
 - [ ] `.agents/` มีอยู่พร้อม `agents/`, `commands/` (ตัวส่งต่อ `dwp-*` บาง ๆ ที่อ้างอิงถึง skill
       ไม่ใช่ flow ที่คัดลอกมา), `skills/` และแคตตาล็อกที่ตรงกับสิ่งที่มีอยู่บนดิสก์
-      `.claude → .agents` แปลงได้
+      `.claude → .agents` และ `.cursor → .agents` แปลงได้
 - [ ] `.dwp/` มีอยู่ ถูก gitignore และมี `plans/` และ `drafts/` `tmp/` มีอยู่และถูก gitignore
 - [ ] เนื้อหาของผู้ใช้ที่มีอยู่ถูกรักษาไว้หรือกระทบยอดด้วยความยินยอม — ไม่มีสิ่งใดถูกทำลายอย่างเงียบ ๆ
 - [ ] คุณสามารถสร้าง Deep Work Plan และดำเนินการทีละงาน โดยตรวจสอบแต่ละ gate

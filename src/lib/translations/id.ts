@@ -121,9 +121,10 @@ export const id: SiteTranslations = {
             'AGENTS.md yang dipikirkan matang, hierarki docs/ yang terkategori, serta README dan docs/ di dalam setiap modul utama — diisi dengan perintah nyata repositori Anda, bukan placeholder.',
         },
         {
-          title: 'Menyiapkan .agents/ dengan symlink .claude ke .agents',
+          title:
+            'Menyiapkan .agents/ dengan symlink .claude dan .cursor ke .agents',
           description:
-            'Direktori .agents/ lintas agent (skills, agents, commands) dan symlink .claude ke .agents, yang mencerminkan CLAUDE.md ke AGENTS.md, sehingga setiap alat membaca satu sumber kebenaran.',
+            'Direktori .agents/ lintas agent (skills, agents, commands) dan symlink .claude dan .cursor ke .agents, sehingga setiap alat membaca satu sumber kebenaran.',
         },
         {
           title: 'Memasang skill DWP dan menyiapkan .dwp/',
@@ -178,9 +179,9 @@ export const id: SiteTranslations = {
             'Arsitektur, penyiapan, standar, dan pemecahan masalah — ditambah README dan docs/ di dalam setiap modul utama, dihasilkan dari basis kode Anda.',
         },
         {
-          label: '.agents/ dengan symlink .claude ke .agents',
+          label: '.agents/ dengan symlink .claude dan .cursor ke .agents',
           detail:
-            'Direktori .agents/ lintas agent (skills, agents, commands) dengan symlink .claude ke .agents sehingga setiap alat membaca satu sumber kebenaran.',
+            'Direktori .agents/ lintas agent (skills, agents, commands) dengan symlink .claude dan .cursor ke .agents sehingga setiap alat membaca satu sumber kebenaran.',
         },
         {
           label: 'Skill Deep Work Plan, terpasang',
@@ -631,7 +632,7 @@ export const id: SiteTranslations = {
       {
         title: 'Onboard repositori',
         description:
-          'Jalankan sub-skill onboard dan biarkan agent bernalar tentang repo Anda yang sebenarnya. Ia menghasilkan AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah .agents/ lintas agent (dengan symlink .claude → .agents), menyambungkan command dwp-* yang tipis, dan menyiapkan .dwp/ yang di-gitignore.',
+          'Jalankan sub-skill onboard dan biarkan agent bernalar tentang repo Anda yang sebenarnya. Ia menghasilkan AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah .agents/ lintas agent (dengan symlink .claude → .agents dan .cursor → .agents), menyambungkan command dwp-* yang tipis, dan menyiapkan .dwp/ yang di-gitignore.',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -678,7 +679,7 @@ export const id: SiteTranslations = {
     whatTitle: 'Apa yang dilakukannya',
     whatBody: [
       'Adopsi mengubah repositori dengan dua cara yang tahan lama — kedua pilar metodologi.',
-      'Pertama, repositori menjadi spec-driven: pekerjaan dimulai dari rencana dan spesifikasi tertulis, bukan dari prompt dadakan. Kedua, repositori itu sendiri menjadi agent harness — AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah skill .agents/ (dengan symlink .claude → .agents) memberi setiap agent konteks dan command yang dibutuhkannya.',
+      'Pertama, repositori menjadi spec-driven: pekerjaan dimulai dari rencana dan spesifikasi tertulis, bukan dari prompt dadakan. Kedua, repositori itu sendiri menjadi agent harness — AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah skill .agents/ (dengan symlink .claude → .agents dan .cursor → .agents) memberi setiap agent konteks dan command yang dibutuhkannya.',
     ],
     sequenceTitle: 'Urutan adopsi',
     orLabel: 'atau',
@@ -704,7 +705,7 @@ export const id: SiteTranslations = {
       {
         title: 'Jalankan onboarding repositori',
         description:
-          'Panggil sub-skill onboard dan biarkan agent bernalar tentang repo yang sebenarnya — stack, package manager, dan perintah validasi nyatanya. Ia kemudian menghasilkan AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah .agents/ lintas agent (dengan symlink .claude → .agents), menyambungkan command dwp-* yang tipis, dan menyiapkan .dwp/ yang di-gitignore untuk rencana dan draf. Untuk repo besar, sub-skill onboard menggunakan jalur berbasis rencana: menyelesaikan rekognisi, lalu menghasilkan Deep Work Plan onboarding. Tidak ada yang ditemplatkan; semuanya disesuaikan dengan repositori Anda.',
+          'Panggil sub-skill onboard dan biarkan agent bernalar tentang repo yang sebenarnya — stack, package manager, dan perintah validasi nyatanya. Ia kemudian menghasilkan AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah .agents/ lintas agent (dengan symlink .claude → .agents dan .cursor → .agents), menyambungkan command dwp-* yang tipis, dan menyiapkan .dwp/ yang di-gitignore untuk rencana dan draf. Untuk repo besar, sub-skill onboard menggunakan jalur berbasis rencana: menyelesaikan rekognisi, lalu menghasilkan Deep Work Plan onboarding. Tidak ada yang ditemplatkan; semuanya disesuaikan dengan repositori Anda.',
         commands: ['/deepworkplan-onboard'],
       },
       {

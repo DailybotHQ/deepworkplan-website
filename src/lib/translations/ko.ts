@@ -120,9 +120,10 @@ export const ko: SiteTranslations = {
             '추론으로 작성된 AGENTS.md, 분류된 docs/ 계층, 그리고 주요 모듈마다 들어가는 README와 docs/ — 모두 플레이스홀더가 아니라 리포지토리의 실제 명령으로 채워집니다.',
         },
         {
-          title: '.claude → .agents 심링크와 함께 .agents/를 구성합니다',
+          title:
+            '.claude 및 .cursor → .agents 심링크와 함께 .agents/를 구성합니다',
           description:
-            '교차 에이전트용 .agents/ 디렉터리(스킬, 에이전트, 명령)와 .claude → .agents 심링크를 만들고, CLAUDE.md를 AGENTS.md에 미러링하여 모든 도구가 하나의 진실 공급원을 읽도록 합니다.',
+            '교차 에이전트용 .agents/ 디렉터리(스킬, 에이전트, 명령)와 .claude 및 .cursor → .agents 심링크를 만들고, CLAUDE.md를 AGENTS.md에 미러링하여 모든 도구가 하나의 진실 공급원을 읽도록 합니다.',
         },
         {
           title: 'DWP 스킬을 설치하고 .dwp/를 구성합니다',
@@ -177,9 +178,9 @@ export const ko: SiteTranslations = {
             '아키텍처, 셋업, 표준, 문제 해결 — 그리고 코드베이스에서 생성된, 주요 모듈마다 들어가는 README와 docs/.',
         },
         {
-          label: '.claude → .agents 심링크가 있는 .agents/',
+          label: '.claude 및 .cursor → .agents 심링크가 있는 .agents/',
           detail:
-            '교차 에이전트용 .agents/ 디렉터리(스킬, 에이전트, 명령)와 .claude → .agents 심링크로 모든 도구가 하나의 진실 공급원을 읽습니다.',
+            '교차 에이전트용 .agents/ 디렉터리(스킬, 에이전트, 명령)와 .claude 및 .cursor → .agents 심링크로 모든 도구가 하나의 진실 공급원을 읽습니다.',
         },
         {
           label: '설치된 Deep Work Plan 스킬',
@@ -628,7 +629,7 @@ export const ko: SiteTranslations = {
       {
         title: '리포지토리 온보딩',
         description:
-          'onboard 하위 스킬을 실행하고 에이전트가 실제 리포지토리를 추론하게 하세요. AGENTS.md, docs/ 지식 베이스, 모듈별 문서, 교차 에이전트용 .agents/ 홈(.claude → .agents 심링크 포함)을 생성하고, 얇은 dwp-* 명령을 연결하며, gitignore된 .dwp/를 구성합니다.',
+          'onboard 하위 스킬을 실행하고 에이전트가 실제 리포지토리를 추론하게 하세요. AGENTS.md, docs/ 지식 베이스, 모듈별 문서, 교차 에이전트용 .agents/ 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)을 생성하고, 얇은 dwp-* 명령을 연결하며, gitignore된 .dwp/를 구성합니다.',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -675,7 +676,7 @@ export const ko: SiteTranslations = {
     whatTitle: '이것이 하는 일',
     whatBody: [
       '채택은 리포지토리를 두 가지 견고한 방식으로 바꿉니다 — 방법론의 두 기둥입니다.',
-      '첫째, 리포지토리가 스펙 주도가 됩니다. 작업이 즉흥적인 프롬프트가 아니라 작성된 계획과 스펙에서 시작됩니다. 둘째, 리포지토리 자체가 에이전트 하니스가 됩니다 — AGENTS.md, docs/ 지식 베이스, 모듈별 문서, .agents/ 스킬 홈(.claude → .agents 심링크 포함)이 모든 에이전트에 필요한 컨텍스트와 명령을 제공합니다.',
+      '첫째, 리포지토리가 스펙 주도가 됩니다. 작업이 즉흥적인 프롬프트가 아니라 작성된 계획과 스펙에서 시작됩니다. 둘째, 리포지토리 자체가 에이전트 하니스가 됩니다 — AGENTS.md, docs/ 지식 베이스, 모듈별 문서, .agents/ 스킬 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)이 모든 에이전트에 필요한 컨텍스트와 명령을 제공합니다.',
     ],
     sequenceTitle: '채택 순서',
     orLabel: '또는',
@@ -701,7 +702,7 @@ export const ko: SiteTranslations = {
       {
         title: '리포지토리 온보딩 실행',
         description:
-          'onboard 하위 스킬을 호출하고 에이전트가 실제 리포지토리 — 스택, 패키지 관리자, 실제 검증 명령 — 를 추론하게 하세요. 그런 다음 AGENTS.md, docs/ 지식 베이스, 모듈별 문서, 교차 에이전트용 .agents/ 홈(.claude → .agents 심링크 포함)을 생성하고, 얇은 dwp-* 명령을 연결하며, 계획과 초안을 위한 gitignore된 .dwp/를 구성합니다. 대규모 리포지토리의 경우 onboard 하위 스킬은 계획 주도 경로를 사용합니다: 정찰을 완료한 뒤 온보딩 Deep Work Plan을 생성합니다. 어떤 것도 템플릿이 아니라 모두 리포지토리에 맞게 적응됩니다.',
+          'onboard 하위 스킬을 호출하고 에이전트가 실제 리포지토리 — 스택, 패키지 관리자, 실제 검증 명령 — 를 추론하게 하세요. 그런 다음 AGENTS.md, docs/ 지식 베이스, 모듈별 문서, 교차 에이전트용 .agents/ 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)을 생성하고, 얇은 dwp-* 명령을 연결하며, 계획과 초안을 위한 gitignore된 .dwp/를 구성합니다. 대규모 리포지토리의 경우 onboard 하위 스킬은 계획 주도 경로를 사용합니다: 정찰을 완료한 뒤 온보딩 Deep Work Plan을 생성합니다. 어떤 것도 템플릿이 아니라 모두 리포지토리에 맞게 적응됩니다.',
         commands: ['/deepworkplan-onboard'],
       },
       {

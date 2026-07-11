@@ -123,9 +123,10 @@ export const tr: SiteTranslations = {
             'Akıl yürütülmüş bir AGENTS.md, kategorize edilmiş bir docs/ hiyerarşisi ve her büyük modülün içinde bir README ile docs/ — yer tutucularla değil, deponuzun gerçek komutlarıyla doldurulmuş olarak.',
         },
         {
-          title: '.claude → .agents sembolik bağıyla .agents/ yapısını kurar',
+          title:
+            '.claude ve .cursor → .agents sembolik bağlarıyla .agents/ yapısını kurar',
           description:
-            'Ajandan bağımsız bir .agents/ dizini (skill’ler, ajanlar, komutlar) ve .claude → .agents sembolik bağı, CLAUDE.md’yi AGENTS.md’ye yansıtır; böylece her araç tek bir doğruluk kaynağını okur.',
+            'Ajandan bağımsız bir .agents/ dizini (skill’ler, ajanlar, komutlar) ve .claude ile .cursor → .agents sembolik bağları, CLAUDE.md’yi AGENTS.md’ye yansıtır; böylece her araç tek bir doğruluk kaynağını okur.',
         },
         {
           title: 'DWP skill’ini kurar ve .dwp/ yapısını oluşturur',
@@ -180,9 +181,9 @@ export const tr: SiteTranslations = {
             'Mimari, kurulum, standartlar ve sorun giderme — ayrıca her büyük modülün içinde, kod tabanınızdan üretilmiş bir README ve docs/.',
         },
         {
-          label: '.claude → .agents sembolik bağıyla .agents/',
+          label: '.claude ve .cursor → .agents sembolik bağlarıyla .agents/',
           detail:
-            'Ajandan bağımsız bir .agents/ dizini (skill’ler, ajanlar, komutlar) ve .claude → .agents sembolik bağı; böylece her araç tek bir doğruluk kaynağını okur.',
+            'Ajandan bağımsız bir .agents/ dizini (skill’ler, ajanlar, komutlar) ve .claude ile .cursor → .agents sembolik bağları; böylece her araç tek bir doğruluk kaynağını okur.',
         },
         {
           label: 'Kurulu Deep Work Plan skill’i',
@@ -632,7 +633,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Depoyu kuruluma alın',
         description:
-          'onboard alt skill’ini çalıştırın ve ajanın gerçek deponuz hakkında akıl yürütmesine izin verin. AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve ajandan bağımsız bir .agents/ yuvası (.claude → .agents sembolik bağıyla) üretir, ince dwp-* komutlarını bağlar ve gitignore’lanmış bir .dwp/ yapısı oluşturur.',
+          'onboard alt skill’ini çalıştırın ve ajanın gerçek deponuz hakkında akıl yürütmesine izin verin. AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve ajandan bağımsız bir .agents/ yuvası (.claude → .agents ve .cursor → .agents sembolik bağlarıyla) üretir, ince dwp-* komutlarını bağlar ve gitignore’lanmış bir .dwp/ yapısı oluşturur.',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -679,7 +680,7 @@ export const tr: SiteTranslations = {
     whatTitle: 'Bu ne yapar',
     whatBody: [
       'Benimseme, depoyu kalıcı iki şekilde değiştirir — metodolojinin temel direkleri.',
-      'İlk olarak, depo spec odaklı hale gelir: iş, gelişigüzel istemlerden değil, yazılı bir plan ve spesifikasyondan başlar. İkinci olarak, deponun kendisi ajan harness’ı haline gelir — bir AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve bir .agents/ skill yuvası (.claude → .agents sembolik bağıyla), her ajana ihtiyaç duyduğu bağlamı ve komutları verir.',
+      'İlk olarak, depo spec odaklı hale gelir: iş, gelişigüzel istemlerden değil, yazılı bir plan ve spesifikasyondan başlar. İkinci olarak, deponun kendisi ajan harness’ı haline gelir — bir AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve bir .agents/ skill yuvası (.claude → .agents ve .cursor → .agents sembolik bağlarıyla), her ajana ihtiyaç duyduğu bağlamı ve komutları verir.',
     ],
     sequenceTitle: 'Benimseme dizisi',
     orLabel: 'veya',
@@ -705,7 +706,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Depo kuruluma almasını çalıştırın',
         description:
-          'onboard alt skill’ini çağırın ve ajanın gerçek depo hakkında — yığını, paket yöneticisi ve gerçek doğrulama komutları — akıl yürütmesine izin verin. Ardından AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve ajandan bağımsız bir .agents/ yuvası (.claude → .agents sembolik bağıyla) üretir, ince dwp-* komutlarını bağlar ve planlar ile taslaklar için gitignore’lanmış bir .dwp/ yapısı oluşturur. Büyük depolarda onboard alt skill’i plan odaklı bir yol kullanır: keşfi tamamlar, ardından bir kuruluma alma Deep Work Plan’ı üretir. Hiçbir şey şablonlanmaz; her şey deponuza uyarlanır.',
+          'onboard alt skill’ini çağırın ve ajanın gerçek depo hakkında — yığını, paket yöneticisi ve gerçek doğrulama komutları — akıl yürütmesine izin verin. Ardından AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve ajandan bağımsız bir .agents/ yuvası (.claude → .agents ve .cursor → .agents sembolik bağlarıyla) üretir, ince dwp-* komutlarını bağlar ve planlar ile taslaklar için gitignore’lanmış bir .dwp/ yapısı oluşturur. Büyük depolarda onboard alt skill’i plan odaklı bir yol kullanır: keşfi tamamlar, ardından bir kuruluma alma Deep Work Plan’ı üretir. Hiçbir şey şablonlanmaz; her şey deponuza uyarlanır.',
         commands: ['/deepworkplan-onboard'],
       },
       {

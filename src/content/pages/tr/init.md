@@ -119,7 +119,7 @@ teyit edin.
    (yalnızca İngilizce, conventional commits, deponun gerçek test deseni ve inceleme kapıları) ve
    deponun **gerçek, çalıştırılabilir** komutlarını içeren bir Hızlı Komutlar bloğu. Zaten bir
    `AGENTS.md` varsa, onu değiştirmek yerine içine birleştirin. `CLAUDE.md → AGENTS.md` sembolik bağını
-   oluşturun (var olan bir `CLAUDE.md`’yi sormadan ezmeyin).
+   oluşturun (var olan bir `CLAUDE.md`’yi sormadan ezmeyin). Benzer şekilde, yoksa `.cursor → .agents` sembolik bağını oluşturun.
 2. **`docs/`.** Standart kategorileri gerçek, depoya özgü içerikle doldurun: `PRODUCT_SPEC.md` (teknik olmayan ürün/neden belgesi — kütüphaneler dahil her depo için zorunlu), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md` (asla atlanmaz —
    hiç sırrı olmasa bile her deponun bir güvenlik duruşu vardır),
@@ -127,11 +127,11 @@ teyit edin.
    Dokümanlar zaten varsa, onları bütünleştirip genişletin — çoğaltmayın.
 3. **Modül başına dokümanlar.** Keşifte bulunan her büyük kaynak modülün içine bir `README.md` (ve
    karmaşık modüller için bir `docs/` alt klasörü) ekleyin.
-4. **`.agents/` + `.claude → .agents`.** Kanonik, ajanlar arası yuvayı oluşturun: kurulu skill’e yetki
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Kanonik, ajanlar arası yuvayı oluşturun: kurulu skill’e yetki
    devreden `agents/`, yığına uygun `skills/` ve ince `dwp-*` `commands/`’tan oluşan **akıl yürütülmüş**
    bir katalog — her girdi başkasından kopyalanmış değil, *bu* depo için gerekçelendirilmiş. Diskte olanla
    eşleşen bir `docs/` kataloğu (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`), ayrıca
-   `settings.json` ve `.claude → .agents` sembolik bağını ekleyin. Var olan skill’leri/ajanları kataloğa
+   `settings.json` ve `.claude → .agents` ile `.cursor → .agents` sembolik bağlarını ekleyin. Var olan skill’leri/ajanları kataloğa
    dahil edin.
 5. **Uyarlanmış DWP skill’i.** Kurulu skill motordur; deponun kendi kiti
    (skill’ler, ajanlar, komutlar) **bu depo için akıl yürütülmüş** olmalıdır — asla başka bir deponun
@@ -193,7 +193,7 @@ ardından şunları teyit edin:
       büyük modüllerin bir `README.md` dosyası vardır.
 - [ ] `.agents/`, `agents/`, `commands/` (kopyalanmış akışlar değil, skill’e referans veren ince
       `dwp-*` yetki devredicileri), `skills/` ve diskte olanla eşleşen bir katalog ile vardır;
-      `.claude → .agents` çözümlenir.
+      `.claude → .agents` ve `.cursor → .agents` çözümlenir.
 - [ ] `.dwp/` vardır, gitignore’lanmıştır ve `plans/` ile `drafts/` içerir; `tmp/` vardır ve gitignore’lanmıştır.
 - [ ] Var olan kullanıcı içeriği korundu ya da onayla uzlaştırıldı — hiçbir şey sessizce yok edilmedi.
 - [ ] Bir Deep Work Plan üretip onu görev görev yürütebilir, her kapıyı doğrulayabilirsiniz.

@@ -120,9 +120,9 @@ export const zh: SiteTranslations = {
             '一份经过推理的 AGENTS.md、一套分类的 docs/ 层级结构，以及每个主要模块内部的 README 与 docs/——填入的是你仓库的真实命令，而非占位符。',
         },
         {
-          title: '搭建 .agents/，并建立 .claude 到 .agents 的符号链接',
+          title: '搭建 .agents/，并建立 .claude 和 .cursor 符号链接',
           description:
-            '一个跨代理的 .agents/ 目录（技能、代理、命令），以及 .claude 到 .agents 的符号链接，把 CLAUDE.md 映射到 AGENTS.md，让每个工具都读取同一个事实来源。',
+            '一个跨代理的 .agents/ 目录（技能、代理、命令），以及 .claude 和 .cursor 到 .agents 的符号链接，让每个工具都读取同一个事实来源。',
         },
         {
           title: '安装 DWP 技能并搭建 .dwp/',
@@ -177,9 +177,9 @@ export const zh: SiteTranslations = {
             '架构、搭建、规范与排错——外加每个主要模块内部的 README 与 docs/,均由你的代码库生成。',
         },
         {
-          label: '.agents/，含 .claude 到 .agents 的符号链接',
+          label: '.agents/，含 .claude 和 .cursor 到 .agents 的符号链接',
           detail:
-            '一个跨代理的 .agents/ 目录（技能、代理、命令），含 .claude 到 .agents 的符号链接，让每个工具都读取同一个事实来源。',
+            '一个跨代理的 .agents/ 目录（技能、代理、命令），含 .claude 和 .cursor 到 .agents 的符号链接，让每个工具都读取同一个事实来源。',
         },
         {
           label: '已安装的 Deep Work Plan 技能',
@@ -623,7 +623,7 @@ export const zh: SiteTranslations = {
       {
         title: '接入代码仓库',
         description:
-          '运行 onboard 子技能，让代理对你真实的仓库进行推理。它会生成 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个跨代理的 .agents/ 目录（含 .claude → .agents 符号链接）,接入轻量的 dwp-* 命令，并搭建一个被 gitignore 的 .dwp/。',
+          '运行 onboard 子技能，让代理对你真实的仓库进行推理。它会生成 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个跨代理的 .agents/ 目录（含 .claude → .agents 和 .cursor → .agents 符号链接）,接入轻量的 dwp-* 命令，并搭建一个被 gitignore 的 .dwp/。',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -670,7 +670,7 @@ export const zh: SiteTranslations = {
     whatTitle: '它做了什么',
     whatBody: [
       '采纳会以两种持久的方式改变代码仓库——这正是方法论的两大支柱。',
-      '其一，代码仓库变得规范驱动：工作从一份书面的计划与规范开始，而非从临时提示开始。其二，代码仓库本身成为代理的 harness（运行支架）——一份 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个 .agents/ 技能目录（含 .claude → .agents 符号链接）,为每个代理提供它所需的上下文与命令。',
+      '其一，代码仓库变得规范驱动：工作从一份书面的计划与规范开始，而非从临时提示开始。其二，代码仓库本身成为代理的 harness（运行支架）——一份 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个 .agents/ 技能目录（含 .claude → .agents 和 .cursor → .agents 符号链接）,为每个代理提供它所需的上下文与命令。',
     ],
     sequenceTitle: '采纳流程',
     orLabel: '或',
@@ -696,7 +696,7 @@ export const zh: SiteTranslations = {
       {
         title: '运行代码仓库接入',
         description:
-          '调用 onboard 子技能，让代理对真实的仓库进行推理——它的技术栈、包管理器与真实的验证命令。随后它会生成 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个跨代理的 .agents/ 目录（含 .claude → .agents 符号链接），接入轻量的 dwp-* 命令，并搭建一个被 gitignore 的 .dwp/ 以存放计划与草稿。对于大型仓库，onboard 子技能采用计划驱动路径：先完成探查，然后生成一份接入用的 Deep Work Plan。没有任何东西套用模板；一切都适配于你的代码仓库。',
+          '调用 onboard 子技能，让代理对真实的仓库进行推理——它的技术栈、包管理器与真实的验证命令。随后它会生成 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个跨代理的 .agents/ 目录（含 .claude → .agents 和 .cursor → .agents 符号链接），接入轻量的 dwp-* 命令，并搭建一个被 gitignore 的 .dwp/ 以存放计划与草稿。对于大型仓库，onboard 子技能采用计划驱动路径：先完成探查，然后生成一份接入用的 Deep Work Plan。没有任何东西套用模板；一切都适配于你的代码仓库。',
         commands: ['/deepworkplan-onboard'],
       },
       {

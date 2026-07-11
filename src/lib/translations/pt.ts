@@ -123,9 +123,9 @@ export const pt: SiteTranslations = {
             'Um AGENTS.md fundamentado, uma hierarquia categorizada em docs/ e um README mais docs/ dentro de cada módulo principal — preenchidos com os comandos reais do seu repositório, não com placeholders.',
         },
         {
-          title: 'Estrutura o .agents/ com o symlink de .claude para .agents',
+          title: 'Estrutura o .agents/ com os symlinks de .claude e .cursor',
           description:
-            'Um diretório .agents/ multiagente (skills, agents, commands) e o symlink de .claude para .agents, espelhando CLAUDE.md em AGENTS.md, para que cada ferramenta leia uma única fonte de verdade.',
+            'Um diretório .agents/ multiagente (skills, agents, commands) e os symlinks de .claude e .cursor para .agents, para que cada ferramenta leia uma única fonte de verdade.',
         },
         {
           title: 'Instala a skill DWP e estrutura o .dwp/',
@@ -180,9 +180,9 @@ export const pt: SiteTranslations = {
             'Arquitetura, configuração, padrões e solução de problemas — além de um README e docs/ dentro de cada módulo principal, gerados a partir do seu código.',
         },
         {
-          label: '.agents/ com o symlink de .claude para .agents',
+          label: '.agents/ com os symlinks de .claude e .cursor para .agents',
           detail:
-            'Um diretório .agents/ multiagente (skills, agents, commands) com o symlink de .claude para .agents, para que cada ferramenta leia uma única fonte de verdade.',
+            'Um diretório .agents/ multiagente (skills, agents, commands) com os symlinks de .claude e .cursor para .agents, para que cada ferramenta leia uma única fonte de verdade.',
         },
         {
           label: 'A skill Deep Work Plan, instalada',
@@ -636,7 +636,7 @@ export const pt: SiteTranslations = {
       {
         title: 'Faça o onboarding do repositório',
         description:
-          'Execute a sub-skill onboard e deixe o agente raciocinar sobre seu repositório real. Ele gera AGENTS.md, uma base de conhecimento em docs/, docs por módulo e um diretório .agents/ multiagente (com o symlink de .claude → .agents), conecta os comandos enxutos dwp-* e estrutura um .dwp/ ignorado pelo git.',
+          'Execute a sub-skill onboard e deixe o agente raciocinar sobre seu repositório real. Ele gera AGENTS.md, uma base de conhecimento em docs/, docs por módulo e um diretório .agents/ multiagente (com os symlinks de .claude → .agents e .cursor → .agents), conecta os comandos enxutos dwp-* e estrutura um .dwp/ ignorado pelo git.',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -683,7 +683,7 @@ export const pt: SiteTranslations = {
     whatTitle: 'O que isto faz',
     whatBody: [
       'A adoção altera o repositório de duas formas duradouras — os pilares da metodologia.',
-      'Primeiro, o repositório se torna orientado a especificação: o trabalho começa a partir de um plano e uma especificação escritos, não de prompts ad hoc. Segundo, o próprio repositório se torna o harness do agente — um AGENTS.md, uma base de conhecimento em docs/, docs por módulo e um diretório de skills .agents/ (com o symlink de .claude → .agents) dão a cada agente o contexto e os comandos de que ele precisa.',
+      'Primeiro, o repositório se torna orientado a especificação: o trabalho começa a partir de um plano e uma especificação escritos, não de prompts ad hoc. Segundo, o próprio repositório se torna o harness do agente — um AGENTS.md, uma base de conhecimento em docs/, docs por módulo e um diretório de skills .agents/ (com os symlinks de .claude → .agents e .cursor → .agents) dão a cada agente o contexto e os comandos de que ele precisa.',
     ],
     sequenceTitle: 'A sequência de adoção',
     orLabel: 'ou',
@@ -709,7 +709,7 @@ export const pt: SiteTranslations = {
       {
         title: 'Execute o onboarding do repositório',
         description:
-          'Invoque a sub-skill onboard e deixe o agente raciocinar sobre o repositório real — sua stack, gerenciador de pacotes e comandos de validação reais. Ele então gera AGENTS.md, uma base de conhecimento em docs/, docs por módulo e um diretório .agents/ multiagente (com o symlink de .claude → .agents), conecta os comandos enxutos dwp-* e estrutura um .dwp/ ignorado pelo git para planos e rascunhos. Para repositórios grandes, a sub-skill onboard utiliza um caminho orientado por plano: completa o reconhecimento e então emite um Deep Work Plan de onboarding. Nada é gerado por template; tudo é adaptado ao seu repositório.',
+          'Invoque a sub-skill onboard e deixe o agente raciocinar sobre o repositório real — sua stack, gerenciador de pacotes e comandos de validação reais. Ele então gera AGENTS.md, uma base de conhecimento em docs/, docs por módulo e um diretório .agents/ multiagente (com os symlinks de .claude → .agents e .cursor → .agents), conecta os comandos enxutos dwp-* e estrutura um .dwp/ ignorado pelo git para planos e rascunhos. Para repositórios grandes, a sub-skill onboard utiliza um caminho orientado por plano: completa o reconhecimento e então emite um Deep Work Plan de onboarding. Nada é gerado por template; tudo é adaptado ao seu repositório.',
         commands: ['/deepworkplan-onboard'],
       },
       {

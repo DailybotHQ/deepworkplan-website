@@ -112,7 +112,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
    (영어 전용, 컨벤셔널 커밋, 리포지토리의 실제 테스트 패턴과 리뷰 게이트), 그리고 리포지토리의 **실제로
    실행 가능한** 명령을 갖춘 Quick Commands 블록. `AGENTS.md`가 이미 존재하면 교체하는 대신 그것에
    병합하세요. `CLAUDE.md → AGENTS.md` 심링크를 만드세요(기존
-   `CLAUDE.md`를 묻지 않고 덮어쓰지 마세요).
+   `CLAUDE.md`를 묻지 않고 덮어쓰지 마세요). 마찬가지로, `.cursor → .agents` 심링크가 없으면 생성하세요.
 2. **`docs/`.** 표준 범주를 실제 리포지토리별 내용으로 채우세요: `PRODUCT_SPEC.md` (비기술적인 제품/이유 문서 — 라이브러리를 포함한 모든 리포지토리에 필수), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
    (결코 생략하지 않음 — 비밀 값이 하나도 없어도 모든 리포지토리에는 보안 태세가 있음),
@@ -120,11 +120,11 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
    문서가 이미 존재하면 통합하고 확장하세요 — 복제하지 마세요.
 3. **모듈별 문서.** 정찰에서 발견된 각 주요 소스 모듈 안에 `README.md`(복잡한 모듈에는
    `docs/` 하위 폴더)를 추가하세요.
-4. **`.agents/` + `.claude → .agents`.** 정규, 교차 에이전트 홈을 만드세요: `agents/`,
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** 정규, 교차 에이전트 홈을 만드세요: `agents/`,
    스택에 맞는 `skills/`, 그리고 설치된 스킬에 위임하는 얇은 `dwp-*` `commands/`의 **추론된** 카탈로그 —
    모든 항목이 다른 데서 복사된 것이 아니라 *이* 리포지토리를 위해 정당화됩니다. 디스크에
    존재하는 것과 일치하는 `docs/` 카탈로그(`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`),
-   그리고 `settings.json`과 `.claude → .agents` 심링크를 추가하세요. 기존 스킬/에이전트를
+   그리고 `settings.json`과 `.claude → .agents` 및 `.cursor → .agents` 심링크를 추가하세요. 기존 스킬/에이전트를
    카탈로그에 통합하세요.
 5. **DWP 스킬, 적응됨.** 설치된 스킬은 엔진이고, 리포지토리 자체의 키트
    (스킬, 에이전트, 명령)는 **이 리포지토리를 위해 추론되어야** 합니다 — 결코 다른
@@ -182,7 +182,7 @@ CI 호환 기계적 계층인 `bash {skill_dir}/verify/conformance.sh`).
       실제 test/lint 설정을 기술하고(비어 있거나 스텁이 아님), 주요 모듈에 `README.md`가 있다.
 - [ ] `.agents/`가 `agents/`, `commands/`(복사된 흐름이 아니라 스킬을 참조하는 얇은 `dwp-*`
       위임자), `skills/`, 그리고 디스크에 존재하는 것과 일치하는 카탈로그와 함께 존재하고,
-      `.claude → .agents`가 해석된다.
+      `.claude → .agents`와 `.cursor → .agents`가 해석된다.
 - [ ] `.dwp/`가 존재하고 gitignore되며 `plans/`와 `drafts/`를 갖고, `tmp/`가 존재하고 gitignore된다.
 - [ ] 기존 사용자 콘텐츠가 동의를 받아 보존되거나 조정되었다 — 아무것도 조용히 파괴되지 않았다.
 - [ ] Deep Work Plan을 생성하고 task 단위로 실행하며 각 게이트를 검증할 수 있다.

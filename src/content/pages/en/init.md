@@ -119,7 +119,7 @@ methodology) instead of overwriting — and confirm with the user before replaci
    (English-only, conventional commits, the repo's real test pattern and review gates), and a Quick
    Commands block with the repo's **real, runnable** commands. If an `AGENTS.md` already exists, merge
    into it rather than replacing it. Create the `CLAUDE.md → AGENTS.md` symlink (do not clobber an
-   existing `CLAUDE.md` without asking).
+   existing `CLAUDE.md` without asking). Similarly, create the `.cursor → .agents` symlink if absent.
 2. **`docs/`.** Fill the standard categories with real, repo-specific content: `PRODUCT_SPEC.md`
    (the non-technical product/why doc — required for every repo, libraries included), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
@@ -128,11 +128,11 @@ methodology) instead of overwriting — and confirm with the user before replaci
    If docs already exist, integrate and extend them — do not duplicate.
 3. **Per-module docs.** Add a `README.md` (and a `docs/` subfolder for complex modules) inside each
    major source module discovered in recon.
-4. **`.agents/` + `.claude → .agents`.** Create the canonical, cross-agent home: a **reasoned** catalog
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Create the canonical, cross-agent home: a **reasoned** catalog
    of `agents/`, stack-appropriate `skills/`, and thin `dwp-*` `commands/` that delegate to the
    installed skill — every entry justified for *this* repository, not copied from another. Add a
    `docs/` catalog (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) that matches what exists on
-   disk, plus `settings.json`, and the `.claude → .agents` symlink. Fold any existing skills/agents
+   disk, plus `settings.json`, and both the `.claude → .agents` and `.cursor → .agents` symlinks. Fold any existing skills/agents
    into the catalog.
 5. **The DWP skill, adapted.** The installed skill is the engine; the repository's own kit
    (skills, agents, commands) must be **reasoned for this repo** — never a copy-paste of another
@@ -190,7 +190,7 @@ Then confirm:
       describes a real test/lint setup (not empty or stub); major modules have a `README.md`.
 - [ ] `.agents/` exists with `agents/`, `commands/` (thin `dwp-*` delegators that reference the skill,
       not copied flows), `skills/`, and a catalog that matches what exists on disk;
-      `.claude → .agents` resolves.
+      `.claude → .agents` and `.cursor → .agents` resolve.
 - [ ] `.dwp/` exists, is gitignored, and has `plans/` and `drafts/`; `tmp/` exists and is gitignored.
 - [ ] Existing user content was preserved or reconciled with consent — nothing was destroyed silently.
 - [ ] You can generate a Deep Work Plan and execute it task by task, validating each gate.

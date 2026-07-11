@@ -1,7 +1,7 @@
 ---
 name: deepworkplan
 description: DeepWorkPlan — turn any repo AI-first and run Deep Work Plans. Routes to create, execute, refine, resume, status, verify, and repo-onboarding sub-skills based on intent. Use when the developer wants to plan, execute, manage, or verify structured multi-task work, or make a repository AI-agent-ready.
-version: "2.15.1"
+version: "2.16.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -14,7 +14,7 @@ Models matter; context matters more. The **DeepWorkPlan** skill turns any
 repository into a structured environment — context, guardrails, and a durable
 plan — where any coding agent executes reliably on long-horizon work. It makes
 the repository "AI-first" — `AGENTS.md` + `docs/` + per-module docs + `.agents/`
-(with the `.claude → .agents` symlink) — and runs structured **Deep Work
+(with the `.claude → .agents` and `.cursor → .agents` symlinks) — and runs structured **Deep Work
 Plans**: multi-task plans an AI agent drafts, refines, executes task-by-task,
 and resumes. All plan and draft outputs land in a gitignored `.dwp/` directory
 at the repo root (`.dwp/plans/`, `.dwp/drafts/`).

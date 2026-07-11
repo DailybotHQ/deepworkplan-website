@@ -116,9 +116,9 @@ export const en: SiteTranslations = {
             "A reasoned AGENTS.md, a categorized docs/ hierarchy, and a README plus docs/ inside each major module — filled with your repository's real commands, not placeholders.",
         },
         {
-          title: 'Scaffolds .agents/ with the .claude to .agents symlink',
+          title: 'Scaffolds .agents/ with .claude and .cursor symlinks',
           description:
-            'A cross-agent .agents/ directory (skills, agents, commands) and the .claude to .agents symlink, mirroring CLAUDE.md to AGENTS.md, so every tool reads one source of truth.',
+            'A cross-agent .agents/ directory (skills, agents, commands) and the .claude and .cursor to .agents symlinks, so every tool reads one source of truth.',
         },
         {
           title: 'Installs the DWP skill and scaffolds .dwp/',
@@ -173,9 +173,9 @@ export const en: SiteTranslations = {
             'Architecture, setup, standards, and troubleshooting — plus a README and docs/ inside each major module, generated from your codebase.',
         },
         {
-          label: '.agents/ with the .claude to .agents symlink',
+          label: '.agents/ with .claude and .cursor to .agents symlinks',
           detail:
-            'A cross-agent .agents/ directory (skills, agents, commands) with the .claude to .agents symlink so every tool reads one source of truth.',
+            'A cross-agent .agents/ directory (skills, agents, commands) with the .claude and .cursor to .agents symlinks so every tool reads one source of truth.',
         },
         {
           label: 'The Deep Work Plan skill, installed',
@@ -624,7 +624,7 @@ export const en: SiteTranslations = {
       {
         title: 'Onboard the repository',
         description:
-          'Run the onboard sub-skill and let the agent reason about your actual repo. It generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents symlink), wires the thin dwp-* commands, and scaffolds a gitignored .dwp/.',
+          'Run the onboard sub-skill and let the agent reason about your actual repo. It generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents and .cursor → .agents symlinks), wires the thin dwp-* commands, and scaffolds a gitignored .dwp/.',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -671,7 +671,7 @@ export const en: SiteTranslations = {
     whatTitle: 'What this does',
     whatBody: [
       'Adoption changes the repository in two durable ways — the pillars of the methodology.',
-      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, per-module docs, and a .agents/ skill home (with the .claude → .agents symlink) give every agent the context and commands it needs.',
+      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, per-module docs, and a .agents/ skill home (with the .claude → .agents and .cursor → .agents symlinks) give every agent the context and commands it needs.',
     ],
     sequenceTitle: 'The adoption sequence',
     orLabel: 'or',
@@ -697,7 +697,7 @@ export const en: SiteTranslations = {
       {
         title: 'Run repository onboarding',
         description:
-          'Invoke the onboard sub-skill and let the agent reason about the actual repo — its stack, package manager, and real validation commands. It generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents symlink), wires thin dwp-* commands, and scaffolds a gitignored .dwp/ for plans and drafts. For large repos the onboard sub-skill uses a plan-driven path: it completes reconnaissance, then emits an onboarding Deep Work Plan. Nothing is templated; everything is adapted to your repository.',
+          'Invoke the onboard sub-skill and let the agent reason about the actual repo — its stack, package manager, and real validation commands. It generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents and .cursor → .agents symlinks), wires thin dwp-* commands, and scaffolds a gitignored .dwp/ for plans and drafts. For large repos the onboard sub-skill uses a plan-driven path: it completes reconnaissance, then emits an onboarding Deep Work Plan. Nothing is templated; everything is adapted to your repository.',
         commands: ['/deepworkplan-onboard'],
       },
       {

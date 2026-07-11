@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-addon-dailybot
 description: Optional DeepWorkPlan addon that connects an AI-first repo to the developer's Dailybot team — installing (with consent) the Dailybot agent skill (DailybotHQ/agent-skill, currently 3.4.0) and/or the Dailybot CLI (DailybotHQ/cli, >= 3.1.2), wiring the plan lifecycle into best-effort agent updates - kickoff when a plan starts, significant task completions, a blocked report when an unattended run halts, and a milestone on plan completion - with payloads derived from the plan's state layer, and optionally committing the Dailybot skill's deterministic hook enforcement (dailybot hook lifecycle hooks) so the agent harness itself reminds agents about unreported work. Opt-in, never required, never blocks the work, reconciles existing setups instead of clobbering them, and defers all auth to the Dailybot skill's own consent flow. Use when the developer or team already uses Dailybot and wants DWP progress visible to humans.
-version: "2.15.1"
+version: "2.16.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -162,7 +162,8 @@ This is the strongest version of the visibility this addon exists for.
 - **Offer it** (consent-gated, show the exact config before writing) when
   `dailybot --version` reports **>= 3.1.2**: commit the repo-level hook config —
   Claude Code `.claude/settings.json` (or `.agents/settings.json` where
-  `.claude → .agents`), Cursor `.cursor/hooks.json`, other harnesses per the
+  `.claude → .agents`), Cursor `.cursor/hooks.json` (or via `.cursor → .agents`),
+  other harnesses per the
   table in the Dailybot skill's `report/hooks.md` — so every contributor and
   fresh container gets autonomous reporting on clone; the only per-person step
   left is `dailybot login`.

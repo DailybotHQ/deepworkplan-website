@@ -102,7 +102,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
    （仅英文、约定式提交、仓库真实的测试模式与审查关卡），以及一个 Quick
    Commands 块，其中是仓库**真实、可运行**的命令。若 `AGENTS.md` 已存在，则合并
    进它，而非替换它。创建 `CLAUDE.md → AGENTS.md` 符号链接（未经询问不要覆盖已有的
-   `CLAUDE.md`）。
+   `CLAUDE.md`）。同样，如果 `.cursor → .agents` 符号链接不存在，也创建它。
 2. **`docs/`。** 用真实、仓库专属的内容填充标准的各类别：`PRODUCT_SPEC.md`（非技术性的产品/为什么文档——每个仓库必须具备，库类项目亦然）、`ARCHITECTURE.md`、
    `STANDARDS.md`、`TESTING_GUIDE.md`、`DEVELOPMENT_COMMANDS.md`、`SECURITY.md`
    （绝不跳过——每个仓库都有安全态势，即使没有任何机密）、
@@ -110,11 +110,11 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
    若文档已存在，则整合并扩展它们——不要重复。
 3. **各模块文档。** 在勘察中发现的每个主要源模块内部，添加一个 `README.md`
    （并为复杂模块添加一个 `docs/` 子文件夹）。
-4. **`.agents/` + `.claude → .agents`。** 创建规范的、跨代理的目录：一份**经过推理**的
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`。** 创建规范的、跨代理的目录：一份**经过推理**的
    `agents/`、与技术栈相适配的 `skills/`，以及委派给已安装技能的轻量 `dwp-*` `commands/` 目录——
    每一项都为*这个*仓库给出理由，而非从另一个仓库复制。添加一份
    与磁盘上存在之物相一致的 `docs/` 目录（`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`），
-   外加 `settings.json` 与 `.claude → .agents` 符号链接。把任何既有的技能/代理
+   外加 `settings.json` 以及 `.claude → .agents` 和 `.cursor → .agents` 符号链接。把任何既有的技能/代理
    纳入该目录。
 5. **DWP 技能，已适配。** 已安装的技能是引擎；仓库自己的套件
    （技能、代理、命令）必须**为这个仓库经过推理**——绝非对另一个
@@ -169,7 +169,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 - [ ] `docs/` 以真实、仓库专属的内容承载标准的各类别；`docs/TESTING_GUIDE.md` 描述了真实的
       测试/lint 配置（非空、非桩代码）；各主要模块都有一个 `README.md`。
 - [ ] `.agents/` 存在，含 `agents/`、`commands/`（轻量 `dwp-*` 委派器，引用技能而非拷贝的流程）、
-      `skills/`，以及一份与磁盘上存在之物相一致的目录；`.claude → .agents` 可解析。
+      `skills/`，以及一份与磁盘上存在之物相一致的目录；`.claude → .agents` 和 `.cursor → .agents` 可解析。
 - [ ] `.dwp/` 存在、被 gitignore，并含 `plans/` 与 `drafts/`；`tmp/` 存在且被 gitignore。
 - [ ] 既有的用户内容在征得同意后被保全或协调——没有任何东西被悄悄销毁。
 - [ ] 你能够生成一份 Deep Work Plan 并逐任务执行它，验证每一道关卡。

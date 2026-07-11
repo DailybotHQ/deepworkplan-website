@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [{"command": "dailybot hook session-start --format cursor"}],
+    "afterFileEdit": [{"command": "dailybot hook activity"}],
+    "stop": [{"command": "dailybot hook stop --format cursor"}]
+  }
+}

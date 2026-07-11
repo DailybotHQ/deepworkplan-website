@@ -122,9 +122,9 @@ export const vi: SiteTranslations = {
             'Một AGENTS.md được suy luận, một hệ thống docs/ phân loại, cùng một README và docs/ bên trong mỗi mô-đun chính — được điền bằng các lệnh thực tế của repository, không phải chỗ trống.',
         },
         {
-          title: 'Dựng .agents/ cùng symlink .claude tới .agents',
+          title: 'Dựng .agents/ cùng symlink .claude và .cursor tới .agents',
           description:
-            'Một thư mục .agents/ dùng chung giữa các agent (skill, agent, command) và symlink .claude tới .agents, phản chiếu CLAUDE.md tới AGENTS.md, để mọi công cụ đều đọc một nguồn chân lý duy nhất.',
+            'Một thư mục .agents/ dùng chung giữa các agent (skill, agent, command) và các symlink .claude và .cursor tới .agents, phản chiếu CLAUDE.md tới AGENTS.md, để mọi công cụ đều đọc một nguồn chân lý duy nhất.',
         },
         {
           title: 'Cài skill DWP và dựng .dwp/',
@@ -179,9 +179,9 @@ export const vi: SiteTranslations = {
             'Kiến trúc, cài đặt, chuẩn mực và xử lý sự cố — cùng một README và docs/ bên trong mỗi mô-đun chính, được sinh ra từ codebase của bạn.',
         },
         {
-          label: '.agents/ cùng symlink .claude tới .agents',
+          label: '.agents/ cùng symlink .claude và .cursor tới .agents',
           detail:
-            'Một thư mục .agents/ dùng chung giữa các agent (skill, agent, command) với symlink .claude tới .agents để mọi công cụ đọc một nguồn chân lý duy nhất.',
+            'Một thư mục .agents/ dùng chung giữa các agent (skill, agent, command) với các symlink .claude và .cursor tới .agents để mọi công cụ đọc một nguồn chân lý duy nhất.',
         },
         {
           label: 'Skill Deep Work Plan, đã cài',
@@ -629,7 +629,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Khởi tạo repository',
         description:
-          'Chạy sub-skill onboard và để agent suy luận về repo thực tế của bạn. Nó sinh ra AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục .agents/ dùng chung giữa các agent (với symlink .claude → .agents), kết nối các command dwp-* mỏng và dựng một .dwp/ được gitignore.',
+          'Chạy sub-skill onboard và để agent suy luận về repo thực tế của bạn. Nó sinh ra AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục .agents/ dùng chung giữa các agent (với các symlink .claude → .agents và .cursor → .agents), kết nối các command dwp-* mỏng và dựng một .dwp/ được gitignore.',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -676,7 +676,7 @@ export const vi: SiteTranslations = {
     whatTitle: 'Điều này làm gì',
     whatBody: [
       'Việc áp dụng thay đổi repository theo hai cách bền vững — hai trụ cột của phương pháp luận.',
-      'Thứ nhất, repository trở thành dựa trên đặc tả: công việc bắt đầu từ một kế hoạch và đặc tả được viết ra, không phải từ những lời nhắc tùy hứng. Thứ hai, bản thân repository trở thành harness của agent — một AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục skill .agents/ (với symlink .claude → .agents) trao cho mọi agent ngữ cảnh và các command nó cần.',
+      'Thứ nhất, repository trở thành dựa trên đặc tả: công việc bắt đầu từ một kế hoạch và đặc tả được viết ra, không phải từ những lời nhắc tùy hứng. Thứ hai, bản thân repository trở thành harness của agent — một AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục skill .agents/ (với các symlink .claude → .agents và .cursor → .agents) trao cho mọi agent ngữ cảnh và các command nó cần.',
     ],
     sequenceTitle: 'Trình tự áp dụng',
     orLabel: 'hoặc',
@@ -702,7 +702,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Chạy khởi tạo repository',
         description:
-          'Gọi sub-skill onboard và để agent suy luận về repo thực tế — stack, trình quản lý gói và các lệnh kiểm chứng thực sự của nó. Sau đó nó sinh ra AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục .agents/ dùng chung giữa các agent (với symlink .claude → .agents), kết nối các command dwp-* mỏng và dựng một .dwp/ được gitignore cho kế hoạch và bản nháp. Với các repo lớn, sub-skill onboard sử dụng đường dẫn dựa trên kế hoạch: hoàn thành khảo sát, sau đó phát hành một Deep Work Plan khởi tạo. Không gì là rập khuôn; mọi thứ đều được thích ứng với repository của bạn.',
+          'Gọi sub-skill onboard và để agent suy luận về repo thực tế — stack, trình quản lý gói và các lệnh kiểm chứng thực sự của nó. Sau đó nó sinh ra AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục .agents/ dùng chung giữa các agent (với các symlink .claude → .agents và .cursor → .agents), kết nối các command dwp-* mỏng và dựng một .dwp/ được gitignore cho kế hoạch và bản nháp. Với các repo lớn, sub-skill onboard sử dụng đường dẫn dựa trên kế hoạch: hoàn thành khảo sát, sau đó phát hành một Deep Work Plan khởi tạo. Không gì là rập khuôn; mọi thứ đều được thích ứng với repository của bạn.',
         commands: ['/deepworkplan-onboard'],
       },
       {

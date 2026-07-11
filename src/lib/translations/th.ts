@@ -120,9 +120,9 @@ export const th: SiteTranslations = {
             'AGENTS.md ที่ผ่านการให้เหตุผล โครงสร้าง docs/ ที่จัดหมวดหมู่ และ README พร้อม docs/ ในแต่ละโมดูลหลัก เต็มไปด้วยคำสั่งจริงของ repository คุณ ไม่ใช่ตัวยึดตำแหน่ง',
         },
         {
-          title: 'วางโครง .agents/ พร้อมซิมลิงก์ .claude ไปยัง .agents',
+          title: 'วางโครง .agents/ พร้อมซิมลิงก์ .claude และ .cursor ไปยัง .agents',
           description:
-            'ไดเรกทอรี .agents/ ที่ใช้ร่วมกันข้าม agent (สกิล agent คำสั่ง) และซิมลิงก์ .claude ไปยัง .agents โดยสะท้อน CLAUDE.md ไปยัง AGENTS.md เพื่อให้ทุกเครื่องมืออ่านแหล่งความจริงเดียวกัน',
+            'ไดเรกทอรี .agents/ ที่ใช้ร่วมกันข้าม agent (สกิล agent คำสั่ง) และซิมลิงก์ .claude และ .cursor ไปยัง .agents โดยสะท้อน CLAUDE.md ไปยัง AGENTS.md เพื่อให้ทุกเครื่องมืออ่านแหล่งความจริงเดียวกัน',
         },
         {
           title: 'ติดตั้งสกิล DWP และวางโครง .dwp/',
@@ -177,9 +177,9 @@ export const th: SiteTranslations = {
             'สถาปัตยกรรม การติดตั้ง มาตรฐาน และการแก้ปัญหา พร้อม README และ docs/ ในแต่ละโมดูลหลัก สร้างจากโค้ดเบสของคุณ',
         },
         {
-          label: '.agents/ พร้อมซิมลิงก์ .claude ไปยัง .agents',
+          label: '.agents/ พร้อมซิมลิงก์ .claude และ .cursor ไปยัง .agents',
           detail:
-            'ไดเรกทอรี .agents/ ที่ใช้ร่วมกันข้าม agent (สกิล agent คำสั่ง) พร้อมซิมลิงก์ .claude ไปยัง .agents เพื่อให้ทุกเครื่องมืออ่านแหล่งความจริงเดียวกัน',
+            'ไดเรกทอรี .agents/ ที่ใช้ร่วมกันข้าม agent (สกิล agent คำสั่ง) พร้อมซิมลิงก์ .claude และ .cursor ไปยัง .agents เพื่อให้ทุกเครื่องมืออ่านแหล่งความจริงเดียวกัน',
         },
         {
           label: 'สกิล Deep Work Plan ที่ติดตั้งแล้ว',
@@ -625,7 +625,7 @@ export const th: SiteTranslations = {
       {
         title: 'เริ่มต้น repository',
         description:
-          'รันสกิลย่อย onboard แล้วให้ agent ให้เหตุผลเกี่ยวกับ repo จริงของคุณ มันจะสร้าง AGENTS.md ฐานความรู้ docs/ เอกสารแยกตามโมดูล และที่อยู่ .agents/ ที่ใช้ร่วมกันข้าม agent (พร้อมซิมลิงก์ .claude → .agents) เชื่อมต่อคำสั่ง dwp-* บาง ๆ และวางโครง .dwp/ ที่ถูก gitignore ไว้',
+          'รันสกิลย่อย onboard แล้วให้ agent ให้เหตุผลเกี่ยวกับ repo จริงของคุณ มันจะสร้าง AGENTS.md ฐานความรู้ docs/ เอกสารแยกตามโมดูล และที่อยู่ .agents/ ที่ใช้ร่วมกันข้าม agent (พร้อมซิมลิงก์ .claude → .agents และ .cursor → .agents) เชื่อมต่อคำสั่ง dwp-* บาง ๆ และวางโครง .dwp/ ที่ถูก gitignore ไว้',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -733,7 +733,7 @@ export const th: SiteTranslations = {
     whatTitle: 'What this does',
     whatBody: [
       'Adoption changes the repository in two durable ways — the pillars of the methodology.',
-      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, per-module docs, and a .agents/ skill home (with the .claude → .agents symlink) give every agent the context and commands it needs.',
+      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, per-module docs, and a .agents/ skill home (with the .claude → .agents and .cursor → .agents symlinks) give every agent the context and commands it needs.',
     ],
     sequenceTitle: 'The adoption sequence',
     orLabel: 'or',
@@ -759,7 +759,7 @@ export const th: SiteTranslations = {
       {
         title: 'รันการ onboard repository',
         description:
-          'เรียกสกิลย่อย onboard และให้ agent วิเคราะห์ repo จริง ได้แก่ สแตก ตัวจัดการแพ็กเกจ และคำสั่งตรวจสอบจริง จากนั้นจะสร้าง AGENTS.md, ฐานความรู้ docs/, เอกสารแต่ละโมดูล และโฮม .agents/ ข้ามเอเจนต์ (พร้อม symlink .claude → .agents), ต่อสายคำสั่ง dwp-* แบบบาง และสร้างโครง .dwp/ ที่ถูก gitignore สำหรับแผนและฉบับร่าง สำหรับ repo ขนาดใหญ่ สกิลย่อย onboard ใช้เส้นทางแบบขับเคลื่อนด้วยแผน: ทำการสำรวจก่อน จากนั้นสร้าง Deep Work Plan สำหรับการ onboarding ไม่มีอะไรเป็นเทมเพลต ทุกอย่างถูกปรับให้เหมาะกับ repository ของคุณ',
+          'เรียกสกิลย่อย onboard และให้ agent วิเคราะห์ repo จริง ได้แก่ สแตก ตัวจัดการแพ็กเกจ และคำสั่งตรวจสอบจริง จากนั้นจะสร้าง AGENTS.md, ฐานความรู้ docs/, เอกสารแต่ละโมดูล และโฮม .agents/ ข้ามเอเจนต์ (พร้อม symlink .claude → .agents และ .cursor → .agents), ต่อสายคำสั่ง dwp-* แบบบาง และสร้างโครง .dwp/ ที่ถูก gitignore สำหรับแผนและฉบับร่าง สำหรับ repo ขนาดใหญ่ สกิลย่อย onboard ใช้เส้นทางแบบขับเคลื่อนด้วยแผน: ทำการสำรวจก่อน จากนั้นสร้าง Deep Work Plan สำหรับการ onboarding ไม่มีอะไรเป็นเทมเพลต ทุกอย่างถูกปรับให้เหมาะกับ repository ของคุณ',
         commands: ['/deepworkplan-onboard'],
       },
       {

@@ -124,9 +124,9 @@ export const ja: SiteTranslations = {
         },
         {
           title:
-            '.claude から .agents へのシンボリックリンクとともに .agents/ を整備する',
+            '.claude と .cursor のシンボリックリンクとともに .agents/ を整備する',
           description:
-            'エージェント横断の .agents/ ディレクトリ（スキル、エージェント、コマンド）と .claude から .agents へのシンボリックリンクを作成し、CLAUDE.md を AGENTS.md にミラーリングします。これにより、すべてのツールが単一の信頼できる情報源を読みます。',
+            'エージェント横断の .agents/ ディレクトリ（スキル、エージェント、コマンド）と .claude および .cursor から .agents へのシンボリックリンクを作成し、すべてのツールが単一の信頼できる情報源を読みます。',
         },
         {
           title: 'DWP スキルをインストールし、.dwp/ を整備する',
@@ -181,9 +181,10 @@ export const ja: SiteTranslations = {
             'アーキテクチャ、セットアップ、規約、トラブルシューティングに加え、主要モジュールごとの README と docs/ を、コードベースから生成します。',
         },
         {
-          label: '.claude から .agents へのシンボリックリンクを備えた .agents/',
+          label:
+            '.claude と .cursor から .agents へのシンボリックリンクを備えた .agents/',
           detail:
-            'エージェント横断の .agents/ ディレクトリ（スキル、エージェント、コマンド）に .claude から .agents へのシンボリックリンクを備え、すべてのツールが単一の信頼できる情報源を読みます。',
+            'エージェント横断の .agents/ ディレクトリ（スキル、エージェント、コマンド）に .claude および .cursor から .agents へのシンボリックリンクを備え、すべてのツールが単一の信頼できる情報源を読みます。',
         },
         {
           label: 'インストール済みの Deep Work Plan スキル',
@@ -633,7 +634,7 @@ export const ja: SiteTranslations = {
       {
         title: 'リポジトリをオンボーディングする',
         description:
-          'onboard サブスキルを実行し、エージェントに実際のリポジトリを推論させます。AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、そしてエージェント横断の .agents/ 拠点（.claude → .agents シンボリックリンクつき）を生成し、薄い dwp-* コマンドを配線し、gitignore された .dwp/ を整備します。',
+          'onboard サブスキルを実行し、エージェントに実際のリポジトリを推論させます。AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、そしてエージェント横断の .agents/ 拠点（.claude → .agents および .cursor → .agents シンボリックリンクつき）を生成し、薄い dwp-* コマンドを配線し、gitignore された .dwp/ を整備します。',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -680,7 +681,7 @@ export const ja: SiteTranslations = {
     whatTitle: 'これが行うこと',
     whatBody: [
       '採用は、この方法論の二本の柱として、リポジトリを二つの永続的なかたちで変えます。',
-      'まず、リポジトリが仕様駆動になります。作業は場当たり的なプロンプトからではなく、書かれた計画と仕様から始まります。次に、リポジトリそのものがエージェントハーネスになります。AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、そして .agents/ のスキル拠点（.claude → .agents シンボリックリンクつき）が、すべてのエージェントに必要なコンテキストとコマンドを与えます。',
+      'まず、リポジトリが仕様駆動になります。作業は場当たり的なプロンプトからではなく、書かれた計画と仕様から始まります。次に、リポジトリそのものがエージェントハーネスになります。AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、そして .agents/ のスキル拠点（.claude → .agents および .cursor → .agents シンボリックリンクつき）が、すべてのエージェントに必要なコンテキストとコマンドを与えます。',
     ],
     sequenceTitle: '採用の手順',
     orLabel: 'または',
@@ -706,7 +707,7 @@ export const ja: SiteTranslations = {
       {
         title: 'リポジトリのオンボーディングを実行する',
         description:
-          'onboard サブスキルを呼び出し、エージェントに実際のリポジトリ（スタック、パッケージマネージャー、実際の検証コマンド）を推論させます。その後、AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、エージェント横断の .agents/ 拠点（.claude → .agents シンボリックリンクつき）を生成し、薄い dwp-* コマンドを配線し、計画とドラフトのための gitignore された .dwp/ を整備します。大規模なリポジトリでは、onboard サブスキルはプラン駆動パスを使用します。偵察を完了してから、オンボーディング用の Deep Work Plan を出力します。テンプレートは一切なく、すべてがリポジトリに適応されます。',
+          'onboard サブスキルを呼び出し、エージェントに実際のリポジトリ（スタック、パッケージマネージャー、実際の検証コマンド）を推論させます。その後、AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、エージェント横断の .agents/ 拠点（.claude → .agents および .cursor → .agents シンボリックリンクつき）を生成し、薄い dwp-* コマンドを配線し、計画とドラフトのための gitignore された .dwp/ を整備します。大規模なリポジトリでは、onboard サブスキルはプラン駆動パスを使用します。偵察を完了してから、オンボーディング用の Deep Work Plan を出力します。テンプレートは一切なく、すべてがリポジトリに適応されます。',
         commands: ['/deepworkplan-onboard'],
       },
       {

@@ -118,7 +118,7 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
    (chỉ tiếng Anh, conventional commit, mẫu test thật của repo và các cổng rà soát), và một khối Quick
    Commands với các lệnh **thật, chạy được** của repo. Nếu một `AGENTS.md` đã tồn tại, hãy hợp nhất
    vào nó thay vì thay thế nó. Tạo symlink `CLAUDE.md → AGENTS.md` (đừng ghi đè một
-   `CLAUDE.md` hiện có mà không hỏi).
+   `CLAUDE.md` hiện có mà không hỏi). Cũng tạo `.cursor → .agents` nếu chưa có.
 2. **`docs/`.** Lấp đầy các hạng mục chuẩn bằng nội dung thật, riêng cho repo: `PRODUCT_SPEC.md` (tài liệu sản phẩm/lý do phi kỹ thuật — bắt buộc cho mọi repo, kể cả thư viện), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md` (không bao giờ
    bị bỏ qua — mọi repository đều có một tư thế bảo mật, ngay cả khi không có bí mật nào),
@@ -126,11 +126,11 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
    Nếu tài liệu đã tồn tại, hãy tích hợp và mở rộng chúng — đừng nhân bản.
 3. **Tài liệu cho từng mô-đun.** Thêm một `README.md` (và một thư mục con `docs/` cho các mô-đun phức tạp) bên trong mỗi
    mô-đun nguồn chính được phát hiện trong quá trình trinh sát.
-4. **`.agents/` + `.claude → .agents`.** Tạo ngôi nhà chuẩn, xuyên agent: một catalog **được suy luận**
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Tạo ngôi nhà chuẩn, xuyên agent: một catalog **được suy luận**
    gồm `agents/`, `skills/` phù hợp với stack, và các `commands/` `dwp-*` mỏng ủy thác tới skill
    đã cài — mỗi mục đều được biện minh cho *chính* repository này, không sao chép từ repo khác. Thêm một
    catalog `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) khớp với những gì có trên
-   đĩa, cùng `settings.json`, và symlink `.claude → .agents`. Gộp bất kỳ skill/agent hiện có nào
+   đĩa, cùng `settings.json`, và các symlink `.claude → .agents` cùng `.cursor → .agents`. Gộp bất kỳ skill/agent hiện có nào
    vào catalog.
 5. **Skill DWP, đã thích ứng.** Skill đã cài là động cơ; bộ kit của riêng repository
    (skill, agent, command) phải **được suy luận cho repo này** — không bao giờ là một bản sao chép-dán bộ kit của repo
@@ -188,7 +188,7 @@ Rồi xác nhận:
       `README.md`.
 - [ ] `.agents/` tồn tại với `agents/`, `commands/` (các bộ ủy thác `dwp-*` mỏng tham chiếu đến skill,
       không phải luồng sao chép), `skills/`, và một catalog khớp với thực tế trên đĩa;
-      `.claude → .agents` phân giải được.
+      `.claude → .agents` và `.cursor → .agents` phân giải được.
 - [ ] `.dwp/` tồn tại, được gitignore, và có `plans/` cùng `drafts/`; `tmp/` tồn tại và được gitignore.
 - [ ] Nội dung hiện có của người dùng được giữ nguyên hoặc đối chiếu có sự đồng ý — không gì bị phá hủy lặng lẽ.
 - [ ] Bạn có thể sinh một Deep Work Plan và thực thi nó từng tác vụ một, kiểm chứng mỗi cổng.

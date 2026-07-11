@@ -119,7 +119,7 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
    (hanya bahasa Inggris, conventional commit, pola test nyata repo dan review gate), dan blok Quick
    Commands dengan perintah repo yang **nyata dan dapat dijalankan**. Jika sebuah `AGENTS.md` sudah ada, gabungkan
    ke dalamnya alih-alih menggantinya. Buat symlink `CLAUDE.md → AGENTS.md` (jangan timpa
-   `CLAUDE.md` yang ada tanpa bertanya).
+   `CLAUDE.md` yang ada tanpa bertanya). Demikian pula, buat symlink `.cursor → .agents` jika belum ada.
 2. **`docs/`.** Isi kategori-kategori standar dengan konten nyata yang spesifik repo: `PRODUCT_SPEC.md` (dokumen produk/mengapa yang non-teknis — wajib untuk setiap repositori, termasuk pustaka), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md` (tidak pernah dilewati —
    setiap repositori memiliki postur keamanan, bahkan tanpa secret),
@@ -127,11 +127,11 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
    Jika docs sudah ada, integrasikan dan perluas — jangan menduplikasi.
 3. **Dokumentasi per modul.** Tambahkan sebuah `README.md` (dan subfolder `docs/` untuk modul kompleks) di dalam setiap
    modul sumber utama yang ditemukan dalam pengintaian.
-4. **`.agents/` + `.claude → .agents`.** Buat rumah kanonis lintas agent: katalog `agents/` yang **dipikirkan matang**,
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Buat rumah kanonis lintas agent: katalog `agents/` yang **dipikirkan matang**,
    `skills/` yang sesuai stack, dan `commands/` `dwp-*` tipis yang mendelegasikan ke
    skill yang terpasang — setiap entri dibenarkan untuk repositori *ini*, bukan disalin dari yang lain. Tambahkan
    katalog `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) yang sesuai dengan apa yang ada di
-   disk, ditambah `settings.json`, dan symlink `.claude → .agents`. Lipat setiap skills/agents yang ada
+   disk, ditambah `settings.json`, dan symlink `.claude → .agents` serta `.cursor → .agents`. Lipat setiap skills/agents yang ada
    ke dalam katalog.
 5. **Skill DWP, disesuaikan.** Skill yang terpasang adalah mesinnya; kit milik repositori sendiri
    (skills, agents, commands) harus **dipikirkan untuk repo ini** — tidak pernah menyalin-tempel kit
@@ -192,7 +192,7 @@ lalu konfirmasikan:
       modul-modul utama memiliki `README.md`.
 - [ ] `.agents/` ada dengan `agents/`, `commands/` (delegator `dwp-*` tipis yang mereferensikan skill,
       bukan alur yang disalin), `skills/`, dan sebuah katalog yang sesuai dengan apa yang ada di disk;
-      `.claude → .agents` me-resolve.
+      `.claude → .agents` dan `.cursor → .agents` me-resolve.
 - [ ] `.dwp/` ada, di-gitignore, dan memiliki `plans/` dan `drafts/`; `tmp/` ada dan di-gitignore.
 - [ ] Konten pengguna yang ada dipertahankan atau direkonsiliasi dengan persetujuan — tidak ada yang dihancurkan secara diam-diam.
 - [ ] Anda dapat menghasilkan sebuah Deep Work Plan dan mengeksekusinya tugas demi tugas, memvalidasi setiap gate.

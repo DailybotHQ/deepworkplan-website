@@ -123,9 +123,9 @@ export const fr: SiteTranslations = {
         },
         {
           title:
-            'Échafaude .agents/ avec le lien symbolique .claude vers .agents',
+            'Échafaude .agents/ avec les liens symboliques .claude et .cursor',
           description:
-            'Un répertoire .agents/ partagé entre agents (skills, agents, commandes) et le lien symbolique .claude vers .agents, qui reflète CLAUDE.md vers AGENTS.md, afin que chaque outil lise une seule source de vérité.',
+            'Un répertoire .agents/ partagé entre agents (skills, agents, commandes) et les liens symboliques .claude et .cursor vers .agents, afin que chaque outil lise une seule source de vérité.',
         },
         {
           title: 'Installe le skill DWP et échafaude .dwp/',
@@ -180,9 +180,10 @@ export const fr: SiteTranslations = {
             'Architecture, installation, standards et dépannage — ainsi qu’un README et un docs/ dans chaque module principal, générés à partir de votre code.',
         },
         {
-          label: '.agents/ avec le lien symbolique .claude vers .agents',
+          label:
+            '.agents/ avec les liens symboliques .claude et .cursor vers .agents',
           detail:
-            'Un répertoire .agents/ partagé entre agents (skills, agents, commandes) avec le lien symbolique .claude vers .agents, pour que chaque outil lise une seule source de vérité.',
+            'Un répertoire .agents/ partagé entre agents (skills, agents, commandes) avec les liens symboliques .claude et .cursor vers .agents, pour que chaque outil lise une seule source de vérité.',
         },
         {
           label: 'Le skill Deep Work Plan, installé',
@@ -635,7 +636,7 @@ export const fr: SiteTranslations = {
       {
         title: 'Intégrer le dépôt',
         description:
-          'Lancez le sous-skill onboard et laissez l’agent raisonner sur votre dépôt réel. Il génère AGENTS.md, une base de connaissances docs/, une doc par module et un foyer .agents/ partagé entre agents (avec le lien symbolique .claude → .agents), branche les commandes dwp-* légères et échafaude un .dwp/ ignoré par git.',
+          'Lancez le sous-skill onboard et laissez l’agent raisonner sur votre dépôt réel. Il génère AGENTS.md, une base de connaissances docs/, une doc par module et un foyer .agents/ partagé entre agents (avec les liens symboliques .claude → .agents et .cursor → .agents), branche les commandes dwp-* légères et échafaude un .dwp/ ignoré par git.',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -682,7 +683,7 @@ export const fr: SiteTranslations = {
     whatTitle: 'Ce que cela fait',
     whatBody: [
       'L’adoption change le dépôt de deux manières durables — les piliers de la méthodologie.',
-      'D’abord, le dépôt devient piloté par la spécification : le travail part d’un plan et d’une spécification écrits, et non de prompts ponctuels. Ensuite, le dépôt lui-même devient le harness de l’agent — un AGENTS.md, une base de connaissances docs/, une doc par module et un foyer de skills .agents/ (avec le lien symbolique .claude → .agents) donnent à chaque agent le contexte et les commandes dont il a besoin.',
+      'D’abord, le dépôt devient piloté par la spécification : le travail part d’un plan et d’une spécification écrits, et non de prompts ponctuels. Ensuite, le dépôt lui-même devient le harness de l’agent — un AGENTS.md, une base de connaissances docs/, une doc par module et un foyer de skills .agents/ (avec les liens symboliques .claude → .agents et .cursor → .agents) donnent à chaque agent le contexte et les commandes dont il a besoin.',
     ],
     sequenceTitle: 'La séquence d’adoption',
     orLabel: 'ou',
@@ -708,7 +709,7 @@ export const fr: SiteTranslations = {
       {
         title: 'Lancer l’onboarding du dépôt',
         description:
-          'Invoquez le sous-skill onboard et laissez l’agent raisonner sur le dépôt réel — sa stack, son gestionnaire de paquets et ses vraies commandes de validation. Il génère alors AGENTS.md, une base de connaissances docs/, une doc par module et un foyer .agents/ partagé entre agents (avec le lien symbolique .claude → .agents), branche les commandes dwp-* légères et échafaude un .dwp/ ignoré par git pour les plans et les ébauches. Pour les grands dépôts, le sous-skill onboard utilise un chemin piloté par plan : il complète la reconnaissance, puis émet un Deep Work Plan d’intégration. Rien n’est issu d’un modèle ; tout est adapté à votre dépôt.',
+          'Invoquez le sous-skill onboard et laissez l’agent raisonner sur le dépôt réel — sa stack, son gestionnaire de paquets et ses vraies commandes de validation. Il génère alors AGENTS.md, une base de connaissances docs/, une doc par module et un foyer .agents/ partagé entre agents (avec les liens symboliques .claude → .agents et .cursor → .agents), branche les commandes dwp-* légères et échafaude un .dwp/ ignoré par git pour les plans et les ébauches. Pour les grands dépôts, le sous-skill onboard utilise un chemin piloté par plan : il complète la reconnaissance, puis émet un Deep Work Plan d’intégration. Rien n’est issu d’un modèle ; tout est adapté à votre dépôt.',
         commands: ['/deepworkplan-onboard'],
       },
       {

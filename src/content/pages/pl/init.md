@@ -115,7 +115,7 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
    (wyłącznie angielski, conventional commits, rzeczywisty wzorzec testów repozytorium i bramki recenzji) oraz blok Quick
    Commands z **rzeczywistymi, uruchamialnymi** komendami repozytorium. Jeśli `AGENTS.md` już istnieje, scal
    z nim, zamiast go zastępować. Utwórz dowiązanie `CLAUDE.md → AGENTS.md` (nie nadpisuj
-   istniejącego `CLAUDE.md` bez pytania).
+   istniejącego `CLAUDE.md` bez pytania). Utwórz również `.cursor → .agents`, jeśli nie istnieje.
 2. **`docs/`.** Wypełnij standardowe kategorie rzeczywistą, specyficzną dla repozytorium treścią: `PRODUCT_SPEC.md` (nietech­niczny dokument produktu/dlaczego — obowiązkowy dla każdego repozytorium, w tym bibliotek), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
    (nigdy nie pomijany — każde repozytorium ma swoją posturę bezpieczeństwa, nawet bez sekretów),
@@ -123,11 +123,11 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
    Jeśli dokumentacja już istnieje, zintegruj ją i rozszerz — nie duplikuj.
 3. **Dokumentacja poszczególnych modułów.** Dodaj `README.md` (oraz podfolder `docs/` dla złożonych modułów) wewnątrz każdego
    głównego modułu źródłowego wykrytego podczas rozpoznania.
-4. **`.agents/` + `.claude → .agents`.** Utwórz kanoniczny, wspólny dla agentów dom: **przemyślany** katalog
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Utwórz kanoniczny, wspólny dla agentów dom: **przemyślany** katalog
    `agents/`, odpowiednich dla stosu `skills/` oraz cienkich komend `dwp-*` w `commands/`, które delegują do
    zainstalowanego skilla — każdy wpis uzasadniony dla *tego* repozytorium, a nie skopiowany z innego. Dodaj
    katalog `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`), który odpowiada temu, co istnieje na
-   dysku, plus `settings.json` oraz dowiązanie `.claude → .agents`. Włącz wszelkie istniejące skille/agentów
+   dysku, plus `settings.json` oraz dowiązania `.claude → .agents` i `.cursor → .agents`. Włącz wszelkie istniejące skille/agentów
    do katalogu.
 5. **Skill DWP, dostosowany.** Zainstalowany skill jest silnikiem; własny kit repozytorium
    (skille, agenci, komendy) musi być **przemyślany dla tego repozytorium** — nigdy nie skopiowany-wklejony z kitu innego
@@ -185,7 +185,7 @@ Następnie potwierdź:
       `README.md`.
 - [ ] `.agents/` istnieje z `agents/`, `commands/` (cienkie delegatory `dwp-*`, które odwołują się do skilla,
       a nie skopiowane przepływy), `skills/` oraz katalogiem, który odpowiada temu, co istnieje na dysku;
-      `.claude → .agents` rozwiązuje się.
+      `.claude → .agents` i `.cursor → .agents` rozwiązują się.
 - [ ] `.dwp/` istnieje, jest objęte gitignore i ma `plans/` oraz `drafts/`; `tmp/` istnieje i jest objęte gitignore.
 - [ ] Istniejąca treść użytkownika została zachowana lub pogodzona za zgodą — nic nie zostało zniszczone po cichu.
 - [ ] Potrafisz wygenerować Deep Work Plan i wykonać go zadanie po zadaniu, walidując każdą bramkę.
