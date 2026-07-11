@@ -123,9 +123,9 @@ export const fr: SiteTranslations = {
         },
         {
           title:
-            'Échafaude .agents/ avec le lien symbolique .claude vers .agents',
+            'Échafaude .agents/ avec les liens symboliques .claude et .cursor',
           description:
-            'Un répertoire .agents/ partagé entre agents (skills, agents, commandes) et le lien symbolique .claude vers .agents, qui reflète CLAUDE.md vers AGENTS.md, afin que chaque outil lise une seule source de vérité.',
+            'Un répertoire .agents/ partagé entre agents (skills, agents, commandes) et les liens symboliques .claude et .cursor vers .agents, afin que chaque outil lise une seule source de vérité.',
         },
         {
           title: 'Installe le skill DWP et échafaude .dwp/',
@@ -180,9 +180,10 @@ export const fr: SiteTranslations = {
             'Architecture, installation, standards et dépannage — ainsi qu’un README et un docs/ dans chaque module principal, générés à partir de votre code.',
         },
         {
-          label: '.agents/ avec le lien symbolique .claude vers .agents',
+          label:
+            '.agents/ avec les liens symboliques .claude et .cursor vers .agents',
           detail:
-            'Un répertoire .agents/ partagé entre agents (skills, agents, commandes) avec le lien symbolique .claude vers .agents, pour que chaque outil lise une seule source de vérité.',
+            'Un répertoire .agents/ partagé entre agents (skills, agents, commandes) avec les liens symboliques .claude et .cursor vers .agents, pour que chaque outil lise une seule source de vérité.',
         },
         {
           label: 'Le skill Deep Work Plan, installé',
@@ -635,7 +636,7 @@ export const fr: SiteTranslations = {
       {
         title: 'Intégrer le dépôt',
         description:
-          'Lancez le sous-skill onboard et laissez l’agent raisonner sur votre dépôt réel. Il génère AGENTS.md, une base de connaissances docs/, une doc par module et un foyer .agents/ partagé entre agents (avec le lien symbolique .claude → .agents), branche les commandes dwp-* légères et échafaude un .dwp/ ignoré par git.',
+          'Lancez le sous-skill onboard et laissez l’agent raisonner sur votre dépôt réel. Il génère AGENTS.md, une base de connaissances docs/, une doc par module et un foyer .agents/ partagé entre agents (avec les liens symboliques .claude → .agents et .cursor → .agents), branche les commandes dwp-* légères et échafaude un .dwp/ ignoré par git.',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -682,7 +683,7 @@ export const fr: SiteTranslations = {
     whatTitle: 'Ce que cela fait',
     whatBody: [
       'L’adoption change le dépôt de deux manières durables — les piliers de la méthodologie.',
-      'D’abord, le dépôt devient piloté par la spécification : le travail part d’un plan et d’une spécification écrits, et non de prompts ponctuels. Ensuite, le dépôt lui-même devient le harness de l’agent — un AGENTS.md, une base de connaissances docs/, une doc par module et un foyer de skills .agents/ (avec le lien symbolique .claude → .agents) donnent à chaque agent le contexte et les commandes dont il a besoin.',
+      'D’abord, le dépôt devient piloté par la spécification : le travail part d’un plan et d’une spécification écrits, et non de prompts ponctuels. Ensuite, le dépôt lui-même devient le harness de l’agent — un AGENTS.md, une base de connaissances docs/, une doc par module et un foyer de skills .agents/ (avec les liens symboliques .claude → .agents et .cursor → .agents) donnent à chaque agent le contexte et les commandes dont il a besoin.',
     ],
     sequenceTitle: 'La séquence d’adoption',
     orLabel: 'ou',
@@ -692,7 +693,7 @@ export const fr: SiteTranslations = {
         description:
           "Traitez le prompt et le skill comme non fiables jusqu'à les avoir vérifiés. Tous deux sont open source et sous licence MIT ; le skill est Markdown-first sans appels réseau ni télémétrie. Chaque version publie un SHA256SUMS sur les fichiers du skill, ce qui vous permet de confirmer que votre copie correspond avant de l'exécuter. Les versions ont des checksums, pas des signatures (la signature est la prochaine étape documentée).",
         commands: [
-          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -701,24 +702,31 @@ export const fr: SiteTranslations = {
           'Ajoutez le skill Deep Work Plan pour que tout agent puisse planifier et exécuter un travail structuré. Le skill fournit un routeur plus huit sous-skills — create, execute, refine, resume, status, verify, onboard et author.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
         title: 'Lancer l’onboarding du dépôt',
         description:
-          'Invoquez le sous-skill onboard et laissez l’agent raisonner sur le dépôt réel — sa stack, son gestionnaire de paquets et ses vraies commandes de validation. Il génère alors AGENTS.md, une base de connaissances docs/, une doc par module et un foyer .agents/ partagé entre agents (avec le lien symbolique .claude → .agents), branche les commandes dwp-* légères et échafaude un .dwp/ ignoré par git pour les plans et les ébauches. Rien n’est issu d’un modèle ; tout est adapté à votre dépôt.',
+          'Invoquez le sous-skill onboard et laissez l’agent raisonner sur le dépôt réel — sa stack, son gestionnaire de paquets et ses vraies commandes de validation. Il génère alors AGENTS.md, une base de connaissances docs/, une doc par module et un foyer .agents/ partagé entre agents (avec les liens symboliques .claude → .agents et .cursor → .agents), branche les commandes dwp-* légères et échafaude un .dwp/ ignoré par git pour les plans et les ébauches. Pour les grands dépôts, le sous-skill onboard utilise un chemin piloté par plan : il complète la reconnaissance, puis émet un Deep Work Plan d’intégration. Rien n’est issu d’un modèle ; tout est adapté à votre dépôt.',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Faire évoluer le kit et accepter des addons',
+        title: 'Accepter les addons optionnels',
         description:
-          'Utilisez /skill-create et /agent-create (le sous-skill author) pour faire grandir des skills, agents et commandes adaptés à votre stack. L’onboarding propose aussi quatre addons facultatifs — devcontainer, Dailybot, dependency-upgrade et design-system — que vous acceptez seulement lorsqu’ils conviennent. Un dépôt est pleinement conforme avec zéro addon.',
+          'L’onboarding propose quatre addons optionnels — devcontainer, Dailybot, dependency-upgrade et design-system — que vous acceptez seulement lorsqu’ils conviennent. Un dépôt est pleinement conforme avec zéro addon. Utilisez /skill-create et /agent-create (le sous-skill author) pour faire grandir des skills, agents et commandes au-delà de la ligne de base.',
       },
       {
         title: 'Planifier et exécuter',
         description:
-          'Générez des Deep Work Plans avec /dwp-create et exécutez-les avec /dwp-execute, puis /dwp-status, /dwp-refine et /dwp-resume au fil du travail. Chaque plan porte des tâches numérotées, des portes de validation et un protocole d’achèvement, de sorte que le travail reste structuré, relisible et reprenable d’une session à l’autre.',
+          'Générez des Deep Work Plans avec /dwp-create et exécutez-les avec /dwp-execute, puis /dwp-status, /dwp-refine, /dwp-resume et /dwp-verify au fil du travail. Chaque plan porte des tâches numérotées, des portes de validation et un protocole d’achèvement — se terminant par trois tâches finales obligatoires : une Revue de Sécurité, une Découverte des Skills et Agents, et un Rapport Exécutif.',
+      },
+      {
+        title: 'Vérifier la conformité',
+        description:
+          'Exécutez /dwp-verify pour obtenir un rapport objectif réussite/échec par rapport à la spécification. Confirmez que AGENTS.md, docs/ (avec du contenu réel, pas des stubs), .agents/ (avec des délégateurs dwp-* légers et un catalogue correspondant au disque), .dwp/ et tmp/ sont en place — rien de modélisé, tout raisonné pour ce dépôt.',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: 'Le résultat',

@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Un addon opcional que conecta un repo AI-first con un equipo de Dailybot: reportes de avance e hitos de mejor esfuerzo en la ejecución del plan, más un refuerzo autónomo opcional mediante hooks."
+description: "Addon DWP opcional: conecta el plan con un equipo Dailybot, hooks opcionales y la skill de agente 3.4.0 (chat, check-ins, formularios, ask AI y más)."
 kind: addon
 lang: es
 order: 2
@@ -8,20 +8,134 @@ order: 2
 
 # Addon de Dailybot
 
-Lleva el avance de Deep Work Plan a un equipo de Dailybot. Un addon opcional para equipos que ya usan Dailybot.
+Conecta la ejecución de Deep Work Plan con un **equipo de Dailybot** para que las personas vean lo que los agentes están construyendo — inicio, avance a mitad de plan, bloqueos y finalización — sin añadir reuniones ni una segunda cadena de herramientas. Un addon **opcional** para equipos que ya usan [Dailybot](https://www.dailybot.com).
 
-## Qué agrega
+La metodología central de Deep Work Plan tiene **cero** dependencia de Dailybot. Un repositorio sin addons es plenamente conforme. Ofrece este addon solo cuando el desarrollador o el equipo ya usan Dailybot; nunca lo instales automáticamente para todos.
 
-- Una instalación opcional de la skill de agente de Dailybot (actualmente 1.7.x, que además añade chat de equipo en Slack, Microsoft Teams, Discord y Google Chat) o de la CLI de Dailybot, a través de sus propios flujos de consentimiento.
-- Un reporte de avance/hito de mejor esfuerzo conectado a la ejecución del plan, para que una finalización de plan llegue al equipo.
-- Un refuerzo determinístico opcional mediante hooks (skill de agente de Dailybot 1.6.0+, CLI 1.12.0+): hooks del harness commiteados que detectan trabajo sin reportar desde un registro local y se lo recuerdan al agente al final del turno, para que el reporte siga siendo autónomo incluso en sesiones largas sin supervisión, donde las instrucciones del prompt se diluyen.
+## Cuándo usarlo
 
-## Comportamiento
+| Señal | Acción |
+|--------|--------|
+| El equipo ya usa Dailybot (Slack, Teams, Discord, Google Chat o el panel) | **Recomendar** durante la incorporación |
+| El desarrollador pide visibilidad del avance del agente o actualizaciones tipo standup | **Ofrecer** el addon |
+| Repositorio greenfield sin cuenta de Dailybot | **Omitir** — la línea base neutral respecto al proveedor es suficiente |
+| Trabajo con cliente bajo NDA donde el avance no debe salir del repo | **Omitir**, o confirmar `.dailybot/disabled` como interruptor local |
 
-Este addon **delega** — no reinventa. La skill de agente de Dailybot es dueña de la instalación, el consentimiento, la autenticación, las plantillas de hooks y el estilo de redacción; este addon solo ofrece instalarla, conecta el paso de reporte opcional y ofrece la configuración de hooks a nivel de repo. El reporte es estrictamente de mejor esfuerzo y nunca bloquea el trabajo si Dailybot está ausente, sin autenticar o inalcanzable.
+## Qué conecta este addon (deliberadamente acotado)
 
-Las dos capas se componen sin duplicar reportes: un reporte de ciclo de vida exitoso reinicia el registro de los hooks, de modo que los hooks guardan silencio después de un reporte y actúan solo como respaldo determinístico cuando un evento del ciclo de vida se pasó por alto. Los comandos de hooks solo leen estado local y siempre terminan con código cero, así que tampoco pueden bloquear el trabajo.
+El addon Dailybot de DWP **no** reinventa Dailybot. Conecta la ejecución del plan con la sub-skill **`report`** de dailybot y, opcionalmente, confirma hooks del harness. Todo lo demás — instalación, consentimiento, autenticación, estilo de redacción — se **delega** a la [skill de agente Dailybot](https://github.com/DailybotHQ/agent-skill) oficial (actualmente **3.4.0**).
 
-## Notas
+### Cuatro eventos del ciclo de vida
 
-La metodología central de Deep Work Plan tiene **cero** dependencia de Dailybot. Ofrécelo solo cuando el desarrollador o el equipo ya usan Dailybot; nunca lo instales automáticamente para todos.
+Durante `create` / `execute` de DWP, el addon conecta **cuatro actualizaciones de agente de mejor esfuerzo**. Cada evento es condicional (Dailybot presente y autenticado), no bloqueante y respeta `.dailybot/disabled`.
+
+| Evento | Disparador | Nivel | Requisito |
+|-------|---------|-------|-------------|
+| **Inicio (Kickoff)** | Plan materializado y aprobado, o primer turno de `execute` | regular | SHOULD |
+| **Tarea significativa** | Una función, corrección de error o refactor importante se completa — no tareas de configuración | regular | MAY |
+| **Bloqueado** | El plan se detiene; `state.json.blocked` poblado (`reason`, `needs`) | regular + blockers | SHOULD |
+| **Finalización** | Todas las tareas hechas; el plan termina | **milestone** | SHOULD |
+
+Las cargas útiles se derivan de la capa de estado del plan (`state.json`) cuando está presente: `completed` como resultados (no números de tarea), `in_progress` desde la tarea actual, `blockers` desde `state.json.blocked`. El mensaje describe **qué se construyó y por qué** — nunca rutas de archivo, estadísticas de git, nombres de rama ni IDs de plan.
+
+### Refuerzo opcional mediante hooks
+
+Con `dailybot-cli >= 3.1.2`, el addon **puede** confirmar hooks del harness a nivel de repo (`dailybot hook session-start | activity | post-commit | stop | dismiss`) respaldados por un registro local por repo. El harness recuerda al agente al final del turno cuando se omitió un evento del ciclo de vida — crítico para sesiones largas sin supervisión donde las instrucciones del prompt se diluyen.
+
+Un reporte de ciclo de vida exitoso **reinicia** el registro de hooks, de modo que las dos capas nunca reportan en doble. Los comandos de hooks solo leen estado local y siempre terminan con `0`.
+
+### Identidad del repo y política de reportes
+
+Opcionalmente confirma `.dailybot/profile.json` (o `.dailybot_example/profile.json` como plantilla) para que cada colaborador y agente firme los reportes de la misma forma. **Nunca** pongas credenciales en ese archivo — un campo `key` es un error grave.
+
+El mismo archivo puede llevar la política de reportes que los hooks respetan:
+
+```json
+{
+  "name": "my-repo-agent",
+  "report": {
+    "min_interval_minutes": 30,
+    "nudge": true,
+    "mode": "continuous"
+  }
+}
+```
+
+`"mode": "continuous"` es especialmente útil para repos de investigación o documentación: el trabajo sin commits (análisis, documentos de diseño, planes) recibe recordatorios antes.
+
+## Instalación (todo opcional)
+
+El addon **ofrece** rutas de instalación; la skill de Dailybot es dueña del consentimiento y la verificación.
+
+| Componente | Comando / ruta |
+|-----------|----------------|
+| **Skill de agente Dailybot** (recomendado) | `npx skills add DailybotHQ/agent-skill` |
+| **Actualizar skill existente** | `npx skills update dailybot` |
+| **OpenClaw** | `openclaw skills install dailybot` |
+| **Git clone** | `git clone https://github.com/DailybotHQ/agent-skill.git` + `./setup.sh` |
+| **Dailybot CLI** (mínimo `>= 3.1.2`) | Instalada por la skill en el primer uso vía `shared/auth.md` verificado; o `pip install 'dailybot-cli>=3.1.2'`, Homebrew, o el instalador con checksum verificado en [cli.dailybot.com](https://cli.dailybot.com) |
+
+Comprueba versiones: `dailybot --version` y `dailybot version --check`. Actualiza: `dailybot upgrade`.
+
+## Autenticación — delegada
+
+Este addon **nunca** pide correo, OTP ni claves API, y **nunca** almacena credenciales. La autenticación la gestiona [`shared/auth.md`](https://github.com/DailybotHQ/agent-skill/blob/main/skills/dailybot/shared/auth.md) de la skill de Dailybot:
+
+- `dailybot login` (OTP por correo), o
+- `DAILYBOT_API_KEY` / `dailybot config key=...`
+
+Si se rechaza la autenticación o no está disponible, el reporte se omite en silencio — el trabajo continúa.
+
+## La skill emparejada de Dailybot — 13 capacidades (3.4.0)
+
+Instalar la skill de agente Dailybot aporta mucho más de lo que conecta el addon de DWP. El paquete oficial de skills (skill **3.4.0**, CLI **>= 3.1.2**, publicación actual **3.2.1**) expone **13 sub-skills coordinadas**:
+
+| Sub-skill | Qué hace |
+|-----------|--------------|
+| **Reportes de avance** | Actualizaciones de agente tipo standup al panel de Dailybot |
+| **Ask the AI** | Consultas puntuales sin interfaz al asistente de IA de Dailybot |
+| **Sondeo de mensajes** | Comprobar instrucciones del equipo al iniciar sesión o en inactividad |
+| **Correo** | Enviar correos con comprobaciones de seguridad obligatorias antes del envío |
+| **Chat** | Enviar o editar en Slack, Microsoft Teams, Discord o Google Chat — canales, MD, equipos, hilos tipo reporte, enviar-como-usuario (Slack, admin) |
+| **Conversaciones** | Abrir o reutilizar un MD grupal de Slack con el bot y compañeros nombrados; publicar un reporte en la misma llamada |
+| **Salud y estado** | Anunciar agente en línea/fuera de línea para sesiones de larga duración |
+| **Check-ins** | Completar standups; **autorar** check-ins (programación, participantes, preguntas, recordatorios, ajustes de IA) |
+| **Kudos** | Reconocer compañeros o equipos enteros; explorar feed de reconocimiento, feed de la org, muro de la fama |
+| **Equipos** | Listar equipos, inspeccionar miembros, resolver nombres a UUIDs; `me`, `org`, perfiles de usuario |
+| **Formularios** | Listar, enviar, actualizar, transicionar formularios; **autorar** formularios (estados de workflow, permisos, ChatOps) |
+| **Workflows** | Leer workflows de la org (`workflow list` / `workflow get`; solo lectura) |
+| **Canales de reporte** | Descubrir UUIDs de canal para formularios o check-ins |
+
+**El addon de DWP solo conecta `report` a la ejecución del plan.** Invoca la skill de Dailybot directamente para todo lo demás — por ejemplo, publicar un resumen de despliegue en `#releases`, completar un standup o pedir a la IA de Dailybot que resuma tendencias de check-ins.
+
+Referencia pública: [dailybot.com/skill.md](https://www.dailybot.com/skill.md). Código fuente: [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill). Modelo de confianza: [`TRUST.md`](https://github.com/DailybotHQ/agent-skill/blob/main/skills/dailybot/TRUST.md) en el paquete de skills.
+
+## Comportamiento — delegar, nunca bloquear
+
+| Regla | Detalle |
+|------|--------|
+| **Delegar** | La skill de Dailybot es dueña de instalación, consentimiento, auth, plantillas de hooks y estilo de redacción |
+| **Nunca bloquear** | CLI ausente, fallo de auth, error de red → advertir una vez, continuar el trabajo principal |
+| **Sin reintentos** | No entrar en bucles de diagnóstico; el reporte es de mejor esfuerzo |
+| **Reconciliar** | Skill, CLI, perfil, hooks o cableado de reporte existente se preservan — solo rellenar huecos |
+| **Neutral respecto al proveedor** | DWP no requiere Dailybot; este addon es visibilidad aditiva para el equipo |
+
+## Flujo de incorporación
+
+Durante la **Fase 7b** de `onboard` de DWP, tras el andamiaje AI-first central, el flujo ofrece cuatro addons opcionales. Si el desarrollador acepta Dailybot:
+
+1. Detectar configuración existente (skill, CLI, `.dailybot/profile.json`, hooks, paso de reporte).
+2. Ofrecer instalación de skill/CLI mediante los flujos de consentimiento de Dailybot.
+3. Delegar la autenticación a `shared/auth.md`.
+4. Conectar los cuatro eventos del ciclo de vida en `AGENTS.md` / `docs/AI_AGENT_COLLAB.md`.
+5. Ofrecer opcionalmente refuerzo mediante hooks y `.dailybot/profile.json`.
+6. Ejecutar validación (SPEC §8 en `addons/dailybot/SPEC.md` de la skill).
+
+Contrato normativo en la skill de Deep Work Plan: `addons/dailybot/SPEC.md` (versión **2.3.0**).
+
+## Entradas relacionadas del kit
+
+- [Devcontainer](/kit/devcontainer) — entorno de desarrollo reproducible con persistencia de CLI de Dailybot (primer addon)
+- [Dependency upgrade](/kit/dependency-upgrade) — actualizaciones de dependencias por lotes y validadas (tercer addon)
+- [Design system](/kit/design-system) — `DESIGN.md` orientado a agentes para superficies de interfaz (cuarto addon)
+- [Deep Work Plan onboard](/kit/deepworkplan-onboard) — la sub-skill de incorporación que ofrece addons

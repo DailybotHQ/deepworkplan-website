@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-onboard
-description: Make a repository AI-first by reasoning about its stack and archetype, then generating adapted AGENTS.md, docs/, per-module docs, .agents/, and the .claude to .agents symlink. Offers opt-in addons. Use when the developer wants to onboard or AI-enable a repo.
-version: "2.15.0"
+description: Make a repository AI-first by reasoning about its stack and archetype, then generating adapted AGENTS.md, docs/, per-module docs, .agents/, and the .claude/.cursor to .agents symlinks. Offers opt-in addons. Use when the developer wants to onboard or AI-enable a repo.
+version: "2.16.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -10,8 +10,8 @@ allowed-tools: Bash, Read, Grep, Glob, Edit, Write
 # DeepWorkPlan — Onboard
 
 Turn the **target repository** into an **AI-first autopilot repo**: a codebase
-whose `AGENTS.md`, `docs/`, per-module docs, `.agents/`, `.claude → .agents`
-symlink, and gitignored `.dwp/` give *any* AI agent (Claude Code, Cursor, OpenAI
+whose `AGENTS.md`, `docs/`, per-module docs, `.agents/`, `.claude → .agents` and
+`.cursor → .agents` symlinks, and gitignored `.dwp/` give *any* AI agent (Claude Code, Cursor, OpenAI
 Codex, Gemini, Copilot, Cline, Windsurf, OpenClaw) enough structured context to
 work reliably without per-session human hand-holding.
 
@@ -84,7 +84,7 @@ When this flow finishes, the target repo contains:
    complex modules) inside each major source module discovered in recon.
 4. **`.agents/`** — reasoned `agents/`, `commands/`, `skills/`, `docs/`
    (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`), `settings.json`, and
-   the `.claude → .agents` symlink. Skills/agents/commands are
+   the `.claude → .agents` and `.cursor → .agents` symlinks. Skills/agents/commands are
    **stack-appropriate**, not generic boilerplate.
 5. **DeepWorkPlan skill installed** + a gitignored **`.dwp/`** scaffold
    (`.dwp/plans/`, `.dwp/drafts/`, with READMEs and a `.gitignore` rule).
@@ -406,7 +406,7 @@ its own `README.md`; surface the most significant ones in the root `AGENTS.md`
 index. (Reference `../spec/DOCUMENTATION_STANDARD.md` §4 for the per-module rule; which
 modules count as "major"/"complex" is reasoned per repo.)
 
-## Phase 6 — Generate `.agents/` + `.claude → .agents` symlink
+## Phase 6 — Generate `.agents/` + agent directory symlinks
 
 Create the canonical cross-agent config directory. **All content must be
 cross-agent** (readable by Cursor/Codex/Gemini/Copilot as personas/procedures),
@@ -444,12 +444,12 @@ and **stack-appropriate**, not generic boilerplate.
   generated to **match what you actually created** (no phantom entries).
 - **`.agents/settings.json`** — a sane harness-config baseline (sensible
   permissions; no secrets). `.agents/README.md` — a short entry point.
-- **`.claude → .agents` symlink** — `ln -s .agents .claude`. Same symlink
-  fallback as Phase 3 if unsupported (a tool-native pointer; document it).
+- **`.claude → .agents` and `.cursor → .agents` symlinks** — `ln -s .agents .claude` and
+  `ln -s .agents .cursor`. Same symlink fallback as Phase 3 if unsupported (a tool-native pointer; document it).
 
 > **Existing-repo note:** if `.agents/` (or per-tool `.claude/` / `.cursor/`)
-> config already exists, reconcile into `.agents/` and add the `.claude` symlink
-> only if absent; never delete existing personas/commands without asking.
+> config already exists, reconcile into `.agents/` and add the `.claude` and
+> `.cursor` symlinks only if absent; never delete existing personas/commands without asking.
 
 ## Phase 7 — Install the DeepWorkPlan skill + scaffold `.dwp/`
 
@@ -517,15 +517,19 @@ reporting; in trust mode, recommend it **only** on that signal and **never
 auto-install it for everyone**. If accepted: read that addon's `SKILL.md` and run
 its flow — detect whether the Dailybot skill/CLI is already present
 (reconcile-don't-clobber), offer the **opt-in** install paths (Dailybot agent
-skill via `npx skills add DailybotHQ/agent-skill` / OpenClaw / git clone +
-`setup.sh`, or the Dailybot CLI), **defer all authentication** to the Dailybot
-skill's own consent flow (`shared/auth.md` — `dailybot login` or
-`DAILYBOT_API_KEY`; never reinvent or store credentials), and wire the
-**optional** progress-report step into DWP execution so a **plan completion**
-emits a Dailybot **milestone** report via the dailybot `report` sub-skill. That
-report step is strictly **best-effort and never blocks** the work if Dailybot is
-absent, unauthenticated, or unreachable. The core DeepWorkPlan methodology has
-**zero Dailybot dependency** — this addon is purely optional team visibility.
+skill via `npx skills add DailybotHQ/agent-skill` / `npx skills update dailybot`
+/ OpenClaw / git clone + `setup.sh`, or the Dailybot CLI **>= 3.1.2**), **defer
+all authentication** to the Dailybot skill's own consent flow (`shared/auth.md`
+— `dailybot login` or `DAILYBOT_API_KEY`; never reinvent or store credentials),
+wire the **four lifecycle events** (kickoff, significant task, blocked,
+completion) as optional progress reports via the dailybot `report` sub-skill,
+and **MAY** offer deterministic hook enforcement (`dailybot hook`, CLI >=
+3.1.2). The paired Dailybot skill (**3.4.0**) exposes 13 capabilities (chat,
+check-ins, forms authoring, ask AI, and more); this addon wires only **report**
+into DWP execution. Every report is strictly **best-effort and never blocks**
+the work if Dailybot is absent, unauthenticated, or unreachable. The core
+DeepWorkPlan methodology has **zero Dailybot dependency** — this addon is purely
+optional team visibility.
 After applying, run the addon's validation step (SPEC §8). If declined, skip it
 and continue — the repo stays baseline-conformant.
 
@@ -612,7 +616,7 @@ done.
 4. **Every major source module has a `README.md`** (and complex modules have a
    `docs/`).
 5. **`.agents/`** has `agents/`, `commands/`, `skills/`, `docs/`, `settings.json`
-   and a `.claude → .agents` symlink (or documented fallback);
+   and `.claude → .agents` + `.cursor → .agents` symlinks (or documented fallback);
    `skills_agents_catalog.md` and `COMMANDS_REFERENCE.md` **match** what was
    actually created (no phantom entries). **The six `dwp-*` commands exist** in
    `.agents/commands/` (`dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`,

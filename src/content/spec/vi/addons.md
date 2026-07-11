@@ -1,45 +1,102 @@
 ---
-title: Addon
-description: "Các phần mở rộng tùy chọn cho phương pháp luận DWP lõi: skill, agent, preset, bộ chuyển đổi và ví dụ, cùng cách mỗi loại mở rộng quy trình mà không bắt buộc."
+title: Add-on
+description: "Phần mở rộng DWP tùy chọn: bốn addon đang phát hành (devcontainer, Dailybot, dependency-upgrade, design-system), hợp đồng addon và khái niệm kit (skill, agent, preset, adapter, ví dụ)."
 order: 5
 lang: vi
 section: Addons
 ---
 
-# Addon
+# Add-on
 
-**Phiên bản 1.0.** Các addon là phần mở rộng tùy chọn cho phương pháp luận DWP lõi. Chúng không bắt buộc để tuân thủ nhưng cung cấp thêm năng lực.
+**Phiên bản 2.0.** Add-on là phần mở rộng tùy chọn của phương pháp Deep Work Plan cốt lõi. Chúng **không bao giờ bắt buộc để tuân thủ** — kho lưu trữ không có addon vẫn hoàn toàn AI-first và tuân thủ DWP. Mỗi addon được đề xuất trong onboarding, chấp nhận hoặc từ chối rõ ràng và — khi được chấp nhận — **đối chiếu** với thiết lập hiện có thay vì ghi đè.
+
+## Hợp đồng addon
+
+Mỗi addon đang phát hành cung cấp bốn thành phần bắt buộc:
+
+| Thành phần | Mục đích |
+|-----------|---------|
+| **Spec** | Mô tả chuẩn RFC-2119 về addon cung cấp gì và "tuân thủ addon này" nghĩa là gì |
+| **Reasoning templates** | Hướng dẫn agent điền bằng cách suy luận về stack repo đích — không sao chép |
+| **Onboarding hook** | Điểm vào `SKILL.md` mà luồng `onboard` gọi khi nhà phát triển chấp nhận |
+| **Validation step** | Checklist xác nhận addon được áp dụng đúng |
+
+Khám phá: luồng `onboard` liệt kê `skills/deepworkplan/addons/` và trình bày mỗi addon như bước opt-in trong **Giai đoạn 7b**, sau scaffolding cốt lõi.
+
+## Addon đang phát hành (bốn)
+
+Hôm nay có bốn addon. Mỗi addon có **trang danh mục kit** với chi tiết hướng người dùng và **spec chuẩn** bên trong skill Deep Work Plan.
+
+### Devcontainer (addon đầu tiên)
+
+Thiết lập `.devcontainer/` + `docker/` dựa trên compose, suy luận từ stack được phát hiện.
+
+- **Trang kit:** [Devcontainer](/kit/devcontainer)
+- **Bổ sung:** volume xác thực AI-CLI bền vững (Claude, Codex, Cursor, gh, Dailybot), `dailybot-project-network`, `DOCKER_DEV_ENV=vscode`, alias xác thực (`codecheck`, `check`, `fix`, `test`), vệ sinh bí mật OSS công khai
+- **Hành vi:** ~85% khung ổn định; ~15% suy luận theo stack. Devcontainer hiện có được đối chiếu, không bao giờ ghi đè
+- **Khi đề xuất:** hầu hết repo có Docker hoặc dịch vụ hưởng lợi từ dev container cô lập
+
+### Dailybot (addon thứ hai)
+
+Kết nối opt-in tới **nhóm Dailybot** của nhà phát triển để hiển thị tiến độ agent.
+
+- **Trang kit:** [Dailybot](/kit/dailybot) — tham chiếu khả năng đầy đủ
+- **Addon DWP kết nối:** bốn báo cáo vòng đời kế hoạch (kickoff, significant task, blocked, completion) qua sub-skill dailybot `report`; thực thi hook xác định tùy chọn (`dailybot hook`, CLI `>= 3.1.2`)
+- **Skill đi kèm:** cài [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (hiện tại **3.4.0**) mở **13 khả năng** — chat trên Slack/Teams/Discord/Google Chat, check-in, tác giả biểu mẫu, ask AI, kudos, email và hơn thế. Addon DWP chỉ kết nối **report**; khả năng khác được gọi trực tiếp qua skill Dailybot
+- **Auth:** hoàn toàn hoãn sang skill Dailybot (`dailybot login` hoặc `DAILYBOT_API_KEY`); addon này không bao giờ lưu thông tin xác thực
+- **Rào vendor-neutral:** DWP cốt lõi **không** phụ thuộc Dailybot; không bao giờ tự cài cho mọi người
+- **Khi đề xuất:** nhà phát triển hoặc nhóm đã dùng Dailybot, hoặc yêu cầu rõ ràng báo cáo nhóm
+
+### Dependency upgrade (addon thứ ba)
+
+Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã xác thực, có thể hoàn tác.
+
+- **Trang kit:** [Dependency upgrade](/kit/dependency-upgrade)
+- **Bổ sung:** phát hiện trình quản lý **thực** của repo (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, …), nâng cấp theo lô phân loại semver, chạy validation gate repo sau mỗi lô, hoàn tác thất bại, tóm tắt không tự commit
+- **Lệnh:** cài `/lib-upgrade` vào `.agents/commands/` chỉ khi được chấp nhận
+- **Khi đề xuất:** có lockfile và stack nhiều phụ thuộc; chỉ khuyến nghị khi liên quan
+
+### Design system (addon thứ tư)
+
+`DESIGN.md` phạm vi bề mặt giao diện mà mọi agent mã hóa đọc để đầu ra UI, CLI hoặc hội thoại nhất quán.
+
+- **Trang kit:** [Design system](/kit/design-system)
+- **Bổ sung:** `docs/DESIGN.md` (tham chiếu từ `AGENTS.md`) với tối đa ba **hồ sơ** xếp chồng trong một file: **visual-ui** (token và thành phần UI được render), **cli-output** (kiểu terminal ngữ nghĩa, suy giảm TTY/`NO_COLOR`), **conversational** (giọng, giải phẫu thông điệp, render theo nền tảng với fallback văn bản thuần)
+- **Độ mạnh hồ sơ:** visual-ui **bật mặc định khi phát hiện**; cli-output và conversational **khuyến nghị khi phát hiện, luôn hỏi, không bao giờ tự áp dụng**
+- **Khi đề xuất:** chỉ khi phát hiện bề mặt giao diện người dùng — không cho thư viện thuần, dịch vụ headless hoặc repo chỉ hạ tầng
 
 ## Skill
 
-Skill là các quy trình tái sử dụng được gọi theo tên. Một skill đóng gói một quy trình lặp lại được (chạy test, sửa lint, tạo một component).
+Skill là quy trình tái sử dụng được gọi theo tên. Skill đóng gói luồng công việc lặp lại (chạy test, sửa lint, tạo thành phần).
 
-Phương pháp luận đi kèm một tập hợp nhỏ các sub-skill lõi. Trong số đó, sub-skill **author** cho phép một repository **nuôi lớn bộ kit của riêng nó**: được gọi qua `/skill-create` và `/agent-create`, nó suy luận về bố cục và quy ước `.agents/` hiện có của repository, rồi sáng tác một skill, agent, hay bộ ủy thác command mỏng phù hợp với chúng, và giữ catalog đồng bộ. Cùng sub-skill đó thực thi tác vụ Skills & Agents Discovery bắt buộc.
+Phương pháp cung cấp một tập nhỏ sub-skill cốt lõi. Trong đó, sub-skill **author** cho phép kho lưu trữ **phát triển kit riêng**: gọi qua `/skill-create` và `/agent-create`, suy luận về bố cục `.agents/` và quy ước repo hiện có, rồi viết skill, agent hoặc ủy quyền lệnh mỏng mới phù hợp và giữ danh mục đồng bộ. Cùng sub-skill thực hiện tác vụ bắt buộc Skills & Agents Discovery.
+
+Mục kit: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 
 ## Agent
 
-Agent là các nhân công chuyên biệt với một vai trò xác định (người rà soát, người thực thi, kiến trúc sư).
+Agent là công nhân chuyên biệt với vai trò xác định (reviewer, executor, architect). Chúng nằm trong `.agents/agents/` và được liệt kê trong `.agents/docs/`.
 
-## Các addon bảo trì
+## Addon bảo trì
 
-Các addon bảo trì là các phần mở rộng tự nguyện, không bao giờ bắt buộc để tuân thủ, giúp một repository tự bảo trì. Addon **dependency-upgrade** suy luận về trình quản lý gói thực tế của repository (thay vì giả định npm) và nâng cấp các phụ thuộc theo các lô nhỏ, được kiểm chứng, có thể hoàn nguyên: nó phát hiện trình quản lý từ manifest và lockfile thực, phân loại các nâng cấp theo semver, nâng cấp theo lô, chạy cổng kiểm chứng thực của repository sau mỗi lô, hoàn nguyên bất kỳ lô nào thất bại, và tóm tắt mà không tự động commit. Một addon chỉ được cài khi nó được chấp nhận trong quá trình khởi tạo.
+Addon **dependency-upgrade** (ở trên) là addon bảo trì chính. Nó suy luận về package manager thực của repo thay vì giả định npm, phân loại nâng cấp theo semver, nâng cấp theo lô an toàn, chạy xác thực sau mỗi lô và hoàn tác lô thất bại.
 
 ## Addon design-system
 
-Addon **design-system** là một phần mở rộng tự nguyện, giới hạn ở bề mặt giao diện, trao cho một repository một `DESIGN.md` — một tệp hệ thống thiết kế dạng Markdown mà bất kỳ coding agent nào cũng đọc để sinh ra đầu ra giao diện nhất quán với các quy ước của riêng repository. Nó bao quát ba **profile**, được phát hiện độc lập từ các tệp thực và xếp chồng vào cùng một tệp duy nhất: **visual-ui** (UI web/mobile/desktop được render), **cli-output** (đầu ra terminal có phong cách: màu ngữ nghĩa, các thành phần đầu ra như panel và spinner, quy ước bố cục, xuống cấp TTY/`NO_COLOR`), và **conversational** (sản phẩm trò chuyện qua chat hay email: giọng nói và sắc thái, giải phẫu thông điệp, cách render theo từng nền tảng với phương án dự phòng văn bản thuần). Nó suy luận về nguồn thiết kế thực của repository (các CSS custom property, một cấu hình Tailwind, các tệp token, style của component — hay một module hiển thị CLI, hay các helper soạn thông điệp) thay vì sao chép một tệp thương hiệu, và kiểm chứng tính toàn vẹn của từng profile: độ tương phản WCAG AA cho các cặp văn bản trực quan, màu sắc không bao giờ là phương tiện duy nhất mang nghĩa trong đầu ra terminal, phương án dự phòng văn bản thuần cho các thông điệp giàu định dạng, và các tham chiếu token phân giải được. Nó hòa giải một `DESIGN.md` đã có thay vì đè bừa lên nó.
-
-Tệp này nằm tại `docs/DESIGN.md`, đặt cạnh các đặc tả khác của repository, và được tham chiếu từ `AGENTS.md` để agent khám phá ra nó theo cùng cách chúng khám phá phần còn lại của tài liệu (gốc repository chỉ được dùng khi không có cây thư mục `docs/`). Khám phá là bằng tham chiếu, không phải bằng vị trí vật lý. Độ mạnh của các profile khác nhau: **visual-ui bật mặc định khi được phát hiện** — khi một bề mặt UI trực quan hiện diện, quá trình khởi tạo áp dụng nó ở chế độ tin cậy và mạnh mẽ khuyến nghị nó ở chế độ có hướng dẫn — trong khi **cli-output và conversational được khuyến nghị khi được phát hiện và luôn được hỏi, không bao giờ tự động áp dụng**. Addon không bao giờ được đề xuất cho một repository không có bất kỳ bề mặt giao diện nào (một thư viện thuần, một dịch vụ headless, một repository chỉ có hạ tầng), và một repository với không có addon nào vẫn hoàn toàn tuân thủ. Một `DESIGN.md` được tạo trước khi các profile tồn tại là một tệp trực quan đơn-profile hợp lệ — không cần di trú.
-
-Tệp hệ thống thiết kế cấp repository này khác với một tài liệu thiết kế kỹ thuật theo tính năng (`design.md` kiểu "requirements → design → tasks" của các quy trình spec-driven gắn với công cụ). DWP không đi kèm một archetype tài liệu thiết kế theo tính năng riêng: README của một kế hoạch, tiêu chí chấp nhận của mỗi tác vụ, và các cổng kiểm chứng đã bao quát vai trò đó. Addon lấp đúng một khoảng trống mà vai trò đó không lấp: ngữ cảnh thiết kế giao diện bền vững, gốc-repo.
+Xem [Design system](/kit/design-system) trong addon đang phát hành. `DESIGN.md` cấp repo khác với tài liệu thiết kế kỹ thuật theo tính năng: README kế hoạch DWP, tiêu chí chấp nhận tác vụ và validation gate đã bao phủ thiết kế theo tính năng. Addon design-system lấp ngữ cảnh thiết kế **giao diện** bền vững, native repo.
 
 ## Preset
 
-Preset thích ứng DWP với một stack công nghệ cụ thể (Django, React, Go).
+Preset điều chỉnh DWP cho stack công nghệ cụ thể (Django, React, Go, Astro + Svelte và hơn thế). Duyệt [danh mục kit](/kit).
 
-## Bộ chuyển đổi
+## Adapter
 
-Bộ chuyển đổi ánh xạ các command DWP sang hệ thống lệnh của một agent cụ thể (Claude Code, Cursor, Codex).
+Adapter ánh xạ lệnh DWP sang hệ thống lệnh của agent cụ thể (Claude Code, Cursor, Codex, Gemini, Copilot, OpenClaw và khác). Mục adapter nằm trong kit dưới tên từng agent.
 
 ## Ví dụ
 
-Ví dụ minh họa DWP trong thực tế (so sánh trước/sau, kế hoạch mẫu, nghiên cứu tình huống).
+Ví dụ minh họa DWP trong thực tế: so sánh trước/sau, kế hoạch mẫu, nghiên cứu điển hình. Xem [Examples](/examples) và [Dogfood this site](/kit/dogfood-this-site).
+
+## Nhắc tuân thủ
+
+Kho lưu trữ **PHẢI** hoàn toàn tuân thủ với **không** addon. Addon là khả năng opt-in xếp lớp — không bao giờ là điều kiện tiên quyết. Xem [Conformance](/spec/conformance).

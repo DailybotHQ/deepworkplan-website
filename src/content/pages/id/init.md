@@ -52,8 +52,10 @@ Pahami dahulu repositori, lalu usulkan apa yang akan Anda lakukan.
   apa pun, `.dwp/`, dan `.gitignore`. Catat apa pun yang sudah melakukan sebagian dari pekerjaan ini.
 - **Usulkan rencana onboarding.** Sajikan daftar ringkas: berkas yang akan Anda buat, berkas yang akan Anda
   ubah, dan apa pun yang ada yang Anda usulkan untuk direkonsiliasi atau diganti — lalu **minta pengguna mengonfirmasi**
-  sebelum melanjutkan. Untuk repositori besar, tangkap rencana ini dengan `/dwp-create` dan eksekusi sebagai
-  Deep Work Plan.
+  sebelum melanjutkan. Untuk repositori besar (banyak modul atau banyak artefak yang perlu dihasilkan),
+  sub-skill onboard menggunakan jalur berbasis rencana: menyelesaikan pengintaian, menghasilkan
+  `AGENTS.md`, lalu mengeluarkan Deep Work Plan onboarding di bawah `.dwp/drafts/` dan mendelegasikan
+  ke `/dwp-refine` → `/dwp-execute` → `/dwp-resume` sesuai kebutuhan.
 
 ## Kepercayaan dan verifikasi (sebelum Anda memasang)
 
@@ -95,6 +97,12 @@ ditambah delapan sub-skill — `create`, `execute`, `refine`, `resume`, `status`
 npx skills add DailybotHQ/deepworkplan-skill
 ```
 
+Atau instal melalui OpenClaw:
+
+```bash
+openclaw skills install deepworkplan
+```
+
 Atau klona dan jalankan skrip setup:
 
 ```bash
@@ -111,7 +119,7 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
    (hanya bahasa Inggris, conventional commit, pola test nyata repo dan review gate), dan blok Quick
    Commands dengan perintah repo yang **nyata dan dapat dijalankan**. Jika sebuah `AGENTS.md` sudah ada, gabungkan
    ke dalamnya alih-alih menggantinya. Buat symlink `CLAUDE.md → AGENTS.md` (jangan timpa
-   `CLAUDE.md` yang ada tanpa bertanya).
+   `CLAUDE.md` yang ada tanpa bertanya). Demikian pula, buat symlink `.cursor → .agents` jika belum ada.
 2. **`docs/`.** Isi kategori-kategori standar dengan konten nyata yang spesifik repo: `PRODUCT_SPEC.md` (dokumen produk/mengapa yang non-teknis — wajib untuk setiap repositori, termasuk pustaka), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md` (tidak pernah dilewati —
    setiap repositori memiliki postur keamanan, bahkan tanpa secret),
@@ -119,11 +127,11 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
    Jika docs sudah ada, integrasikan dan perluas — jangan menduplikasi.
 3. **Dokumentasi per modul.** Tambahkan sebuah `README.md` (dan subfolder `docs/` untuk modul kompleks) di dalam setiap
    modul sumber utama yang ditemukan dalam pengintaian.
-4. **`.agents/` + `.claude → .agents`.** Buat rumah kanonis lintas agent: katalog `agents/` yang **dipikirkan matang**,
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Buat rumah kanonis lintas agent: katalog `agents/` yang **dipikirkan matang**,
    `skills/` yang sesuai stack, dan `commands/` `dwp-*` tipis yang mendelegasikan ke
    skill yang terpasang — setiap entri dibenarkan untuk repositori *ini*, bukan disalin dari yang lain. Tambahkan
    katalog `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) yang sesuai dengan apa yang ada di
-   disk, ditambah `settings.json`, dan symlink `.claude → .agents`. Lipat setiap skills/agents yang ada
+   disk, ditambah `settings.json`, dan symlink `.claude → .agents` serta `.cursor → .agents`. Lipat setiap skills/agents yang ada
    ke dalam katalog.
 5. **Skill DWP, disesuaikan.** Skill yang terpasang adalah mesinnya; kit milik repositori sendiri
    (skills, agents, commands) harus **dipikirkan untuk repo ini** — tidak pernah menyalin-tempel kit
@@ -131,28 +139,29 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
 6. **`.dwp/` + `tmp/`.** Siapkan `.dwp/` yang di-gitignore dengan `plans/` dan `drafts/`, ditambah ruang
    scratch `tmp/` — keduanya ditambahkan ke `.gitignore` secara non-destruktif (tambahkan, jangan pernah menulis ulang).
 
-## 4. Kembangkan kit (sub-skill author)
+## 4. Tawarkan addon opt-in
 
-Gunakan sub-skill `author` untuk menumbuhkan kit milik repositori sendiri. Delegator tipis `/skill-create` dan
-`/agent-create` mengarah ke sana. Buat sebuah **skill** untuk prosedur dalam sesi yang dapat diulang, sebuah **agent** untuk
-peran berulang dengan model tier dan alatnya sendiri, dan sebuah **command** hanya sebagai delegator tipis. Jaga
-katalog `.agents/docs/` tetap selaras dengan apa yang ada di disk.
-
-## 5. Tawarkan addon opt-in
-
-Setelah baseline, sebutkan keempat addon (devcontainer, Dailybot, dependency-upgrade, design-system) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori
-sepenuhnya konforman dengan **nol** addon — jangan pernah memasangnya secara otomatis.
+Setelah onboarding dasar, sebutkan keempat addon (devcontainer, Dailybot, dependency-upgrade,
+design-system) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori sepenuhnya
+konforman dengan **nol** addon — jangan pernah memasangnya secara otomatis.
 
 - **Dukungan devcontainer** — kontainer pengembangan yang terisolasi dan dapat direproduksi dengan autentikasi AI-CLI yang persisten.
-- **Integrasi Dailybot** — pelaporan kemajuan/milestone secara best-effort untuk tim yang sudah memakai Dailybot,
-  dengan lapisan hook otonom opsional agar agent melaporkan pekerjaan signifikan tanpa diminta.
-  Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
+- **Integrasi Dailybot** — empat peristiwa siklus hidup (kickoff, tugas signifikan, terblokir, penyelesaian) sebagai pelaporan kemajuan secara best-effort untuk tim yang sudah memakai Dailybot, dengan penegakan hook otonom opsional (`dailybot-cli >= 3.1.2`). Memasang skill agent Dailybot yang dipasangkan (3.4.0) juga membuka chat, check-in, penulisan form, tanya AI, dan lainnya — addon ini hanya menghubungkan pelaporan ke eksekusi DWP. Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan. Ketika
   diterima, ia memasang command `/lib-upgrade`.
-- **Design system** — sebuah `docs/DESIGN.md` untuk agent, dinalar dari sumber desain yang sebenarnya
-  di repositori, mencakup permukaan antarmuka yang terdeteksi sebagai profil — UI visual, output CLI
-  yang bergaya, dan perpesanan percakapan — sehingga agent mana pun menghasilkan keluaran antarmuka
-  yang konsisten dengan konvensi milik repo itu sendiri.
+- **Design system** — `docs/DESIGN.md` opsional hanya untuk repositori dengan permukaan antarmuka yang
+  terdeteksi (tidak ditawarkan untuk pustaka murni, layanan headless, atau repositori khusus
+  infrastruktur). Tiga profil ditumpuk dalam satu berkas: visual-ui (aktif secara default saat
+  terdeteksi), cli-output, dan conversational — dua yang terakhir selalu ditanyakan, tidak pernah
+  diterapkan secara otomatis.
+
+## 5. Kembangkan kit (sub-skill author)
+
+Setelah onboarding, gunakan sub-skill `author` untuk menumbuhkan kit milik repositori sendiri.
+Delegator tipis `/skill-create` dan `/agent-create` mengarah ke sana. Buat sebuah **skill** untuk
+prosedur dalam sesi yang dapat diulang, sebuah **agent** untuk peran berulang dengan model tier dan
+alatnya sendiri, dan sebuah **command** hanya sebagai delegator tipis. Jaga katalog `.agents/docs/`
+tetap selaras dengan apa yang ada di disk.
 
 ## 6. Rencanakan dan eksekusi
 
@@ -163,6 +172,7 @@ Hasilkan Deep Work Plan untuk tugas apa pun dan jalankan tugas demi tugas:
 - `/dwp-status` — laporkan kemajuan tanpa membuat perubahan.
 - `/dwp-refine` — tambah, hapus, atau susun ulang tugas sambil mempertahankan pekerjaan yang selesai.
 - `/dwp-resume` — rekonstruksi status dan lanjutkan rencana yang terhenti.
+- `/dwp-verify` — laporan konformansi lulus/gagal yang objektif untuk repositori (atau rencana tertentu).
 
 Setiap rencana diakhiri dengan tiga tugas akhir wajib — sebuah **Security Review** atas perubahan
 rencana itu sendiri (menjaga `docs/SECURITY.md` tetap mutakhir; sebuah temuan kritis memblokir
@@ -170,16 +180,19 @@ penyelesaian), Skills & Agents Discovery, dan Executive Report.
 
 ## 7. Verifikasi
 
-Jalankan `/dwp-verify` untuk laporan konformansi lulus/gagal yang objektif (ia memeriksa
-kriteria dalam [dokumen Konformansi spesifikasi](https://deepworkplan.com/spec)),
+Jalankan `/dwp-verify` untuk laporan konformansi lulus/gagal yang objektif (atau
+`bash {skill_dir}/verify/conformance.sh` untuk lapisan mekanis yang ramah CI dan keluar dengan
+`0`/`1`). Ia memeriksa kriteria dalam [dokumen Konformansi spesifikasi](https://deepworkplan.com/spec),
 lalu konfirmasikan:
 
 - [ ] Skill terpasang dan dapat di-resolve, dengan kedelapan sub-skill tersedia.
 - [ ] `AGENTS.md` ada di akar dengan blok Quick Commands yang nyata; `CLAUDE.md` me-resolve ke sana.
-- [ ] `docs/` memuat kategori-kategori standar dengan konten nyata yang spesifik repo; modul-modul utama memiliki
-      `README.md`.
-- [ ] `.agents/` ada dengan `agents/`, `commands/` (delegator `dwp-*` tipis), `skills/`, dan sebuah katalog
-      yang sesuai dengan kenyataan; `.claude → .agents` me-resolve.
+- [ ] `docs/` memuat kategori-kategori standar dengan konten nyata yang spesifik repo;
+      `docs/TESTING_GUIDE.md` mendeskripsikan pengaturan test/lint yang nyata (bukan kosong atau stub);
+      modul-modul utama memiliki `README.md`.
+- [ ] `.agents/` ada dengan `agents/`, `commands/` (delegator `dwp-*` tipis yang mereferensikan skill,
+      bukan alur yang disalin), `skills/`, dan sebuah katalog yang sesuai dengan apa yang ada di disk;
+      `.claude → .agents` dan `.cursor → .agents` me-resolve.
 - [ ] `.dwp/` ada, di-gitignore, dan memiliki `plans/` dan `drafts/`; `tmp/` ada dan di-gitignore.
 - [ ] Konten pengguna yang ada dipertahankan atau direkonsiliasi dengan persetujuan — tidak ada yang dihancurkan secara diam-diam.
 - [ ] Anda dapat menghasilkan sebuah Deep Work Plan dan mengeksekusinya tugas demi tugas, memvalidasi setiap gate.

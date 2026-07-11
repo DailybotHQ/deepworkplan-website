@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "AI-first bir depoyu bir Dailybot ekibine bağlayan isteğe bağlı bir eklenti: plan yürütmesinde en iyi çabayla ilerleme ve dönüm noktası raporları, artı isteğe bağlı otonom kanca katmanı."
+description: "Opt-in DWP eklentisi: plan yaşam döngüsünü bir Dailybot ekibine bağlar, isteğe bağlı hook zorlaması ve tam Dailybot agent skill 3.4.0 (sohbet, check-in'ler, formlar, ask AI ve daha fazlası)."
 kind: addon
 lang: tr
 order: 2
@@ -8,20 +8,134 @@ order: 2
 
 # Dailybot eklentisi
 
-Deep Work Plan ilerlemesini bir Dailybot ekibine taşıyın. Zaten Dailybot kullanan ekipler için isteğe bağlı bir eklenti.
+Deep Work Plan yürütmesini bir **Dailybot ekibine** bağlayın; böylece insanlar agent'ların ne inşa ettiğini görür — kickoff, plan ortası ilerleme, engeller ve tamamlanma — toplantı veya ikinci bir toolchain eklemeden. Zaten [Dailybot](https://www.dailybot.com) kullanan ekipler için **opt-in** bir eklenti.
 
-## Neler ekler
+Temel Deep Work Plan metodolojisinin Dailybot'a **sıfır** bağımlılığı vardır. Sıfır eklentili bir depo tamamen uyumludur. Bu eklentiyi yalnızca geliştirici veya ekip zaten Dailybot kullanıyorsa önerin; herkes için otomatik kurmayın.
 
-- Dailybot ajan skill’inin (şu anda 1.7.x; ayrıca Slack, Microsoft Teams, Discord ve Google Chat genelinde takım sohbeti ekler) ve/veya Dailybot CLI’nın, kendi onay akışları aracılığıyla isteğe bağlı kurulumu.
-- Plan yürütmesine bağlanan, en iyi çabayla çalışan bir ilerleme/dönüm noktası raporu; böylece bir planın tamamlanması ekibe yansır.
-- İsteğe bağlı deterministik kanca katmanı (Dailybot ajan skill’i 1.6.0+, CLI 1.12.0+): commit edilmiş harness kancaları, yerel bir defterden raporlanmamış işi tespit eder ve tur sonunda ajana hatırlatır; böylece prompt talimatlarının soluklaştığı uzun, gözetimsiz oturumlarda bile raporlama otonom kalır.
+## Ne zaman kullanılır
 
-## Davranış
+| Sinyal | Eylem |
+|--------|--------|
+| Ekip zaten Dailybot kullanıyor (Slack, Teams, Discord, Google Chat veya dashboard) | Onboarding sırasında **öner** |
+| Geliştirici agent ilerleme görünürlüğü veya standup tarzı güncellemeler istiyor | Eklentiyi **sun** |
+| Dailybot hesabı olmayan greenfield depo | **Atla** — vendor-neutral temel yeterli |
+| İlerlemenin depodan çıkmaması gereken NDA altındaki müşteri işi | **Atla** veya yerel kill-switch olarak `.dailybot/disabled` commit'le |
 
-Bu eklenti **yetkiyi devreder** — tekerleği yeniden icat etmez. Kurulumu, onayı, kimlik doğrulamayı, kanca şablonlarını ve yazım üslubunu Dailybot ajan skill’i üstlenir; bu eklenti yalnızca onu kurmayı önerir, isteğe bağlı rapor adımını bağlar ve depo düzeyindeki kanca yapılandırmasını önerir. Rapor kesinlikle en iyi çaba ilkesiyle çalışır ve Dailybot mevcut değilse, kimliği doğrulanmamışsa veya erişilemezse işi asla engellemez.
+## Bu eklentinin bağladıkları (kasıtlı olarak dar)
 
-İki katman çift raporlama olmadan birleşir: başarılı bir yaşam döngüsü raporu kanca defterini sıfırlar; böylece kancalar bir rapordan sonra sessiz kalır ve yalnızca bir yaşam döngüsü olayı kaçırıldığında deterministik bir güvence olarak devreye girer. Kanca komutları yalnızca yerel durumu okur ve her zaman sıfır koduyla çıkar; dolayısıyla onlar da işi asla engelleyemez.
+DWP Dailybot eklentisi Dailybot'u **yeniden icat etmez**. Plan yürütmesini dailybot **`report`** alt-skill'ine bağlar ve isteğe bağlı olarak harness hook'larını commit'ler. Geri kalan her şey — kurulum, onay, kimlik doğrulama, yazım stili — resmi [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill)'e (şu an **3.4.0**) **ertelenir**.
 
-## Notlar
+### Dört yaşam döngüsü olayı
 
-Temel Deep Work Plan metodolojisinin Dailybot’a **hiçbir** bağımlılığı yoktur. Bunu yalnızca geliştirici veya ekip zaten Dailybot kullanıyorsa önerin; herkes için asla otomatik kurmayın.
+DWP `create` / `execute` sırasında eklenti **dört best-effort agent güncellemesi** bağlar. Her olay koşulludur (Dailybot mevcut ve kimlik doğrulanmış), engelleyici değildir ve `.dailybot/disabled`'a saygı gösterir.
+
+| Olay | Tetikleyici | Seviye | Gereksinim |
+|-------|---------|-------|-------------|
+| **Kickoff** | Plan somutlaştırıldı ve onaylandı veya ilk `execute` turu | regular | SHOULD |
+| **Significant task** | Bir özellik, hata düzeltmesi veya büyük refactor tamamlandı — kurulum işleri değil | regular | MAY |
+| **Blocked** | Plan durur; `state.json.blocked` dolduruldu (`reason`, `needs`) | regular + blockers | SHOULD |
+| **Completion** | Tüm görevler bitti; plan tamamlandı | **milestone** | SHOULD |
+
+Payload'lar mevcut olduğunda planın durum katmanından (`state.json`) türetilir: `completed` sonuçlar olarak (görev numaraları değil), `in_progress` mevcut görevden, `blockers` `state.json.blocked`'dan. Mesaj **ne inşa edildiğini ve nedenini** açıklar — asla dosya yolları, git istatistikleri, branch adları veya plan ID'leri değil.
+
+### İsteğe bağlı hook zorlaması
+
+`dailybot-cli >= 3.1.2` ile eklenti depo düzeyinde harness hook'larını (`dailybot hook session-start | activity | post-commit | stop | dismiss`) yerel depo başına ledger ile destekleyerek **commit edebilir**. Harness, bir yaşam döngüsü olayı kaçırıldığında tur sonunda agent'ı hatırlatır — prompt talimatlarının zayıfladığı uzun gözetimsiz oturumlar için kritik.
+
+Başarılı bir yaşam döngüsü raporu hook ledger'ını **sıfırlar**, böylece iki katman asla çift rapor vermez. Hook komutları yalnızca yerel durumu okur ve her zaman `0` ile çıkar.
+
+### Depo kimliği ve rapor politikası
+
+İsteğe bağlı olarak `.dailybot/profile.json` (veya şablon olarak `.dailybot_example/profile.json`) commit'leyin; böylece her katkıda bulunan ve agent raporları aynı şekilde imzalar. O dosyaya **asla** kimlik bilgisi koymayın — `key` alanı ciddi bir hatadır.
+
+Aynı dosya hook'ların uyduğu rapor politikasını taşıyabilir:
+
+```json
+{
+  "name": "my-repo-agent",
+  "report": {
+    "min_interval_minutes": 30,
+    "nudge": true,
+    "mode": "continuous"
+  }
+}
+```
+
+`"mode": "continuous"` özellikle araştırma veya dokümantasyon ağırlıklı depolar için kullanışlıdır: commit'siz çalışma (analiz, tasarım dokümanları, planlar) daha erken hatırlatılır.
+
+## Kurulum (hepsi opt-in)
+
+Eklenti kurulum yollarını **sunar**; Dailybot skill onay ve doğrulamayı yönetir.
+
+| Bileşen | Komut / yol |
+|-----------|----------------|
+| **Dailybot agent skill** (önerilen) | `npx skills add DailybotHQ/agent-skill` |
+| **Mevcut skill'i güncelle** | `npx skills update dailybot` |
+| **OpenClaw** | `openclaw skills install dailybot` |
+| **Git clone** | `git clone https://github.com/DailybotHQ/agent-skill.git` + `./setup.sh` |
+| **Dailybot CLI** (minimum `>= 3.1.2`) | İlk kullanımda skill tarafından doğrulanmış `shared/auth.md` ile kurulur; veya `pip install 'dailybot-cli>=3.1.2'`, Homebrew veya [cli.dailybot.com](https://cli.dailybot.com)'daki checksum doğrulanmış yükleyici |
+
+Sürümleri kontrol et: `dailybot --version` ve `dailybot version --check`. Yükseltme: `dailybot upgrade`.
+
+## Kimlik doğrulama — ertelenmiş
+
+Bu eklenti **asla** e-posta, OTP veya API anahtarı istemez ve kimlik bilgilerini **saklamaz**. Kimlik doğrulama Dailybot skill'in [`shared/auth.md`](https://github.com/DailybotHQ/agent-skill/blob/main/skills/dailybot/shared/auth.md) dosyasına aittir:
+
+- `dailybot login` (e-posta OTP) veya
+- `DAILYBOT_API_KEY` / `dailybot config key=...`
+
+Kimlik doğrulama reddedilirse veya kullanılamazsa raporlama sessizce atlanır — çalışma devam eder.
+
+## Eşleşen Dailybot skill — 13 yetenek (3.4.0)
+
+Dailybot agent skill kurmak, DWP eklentisinin bağladığından çok daha fazlasını getirir. Resmi skill paketi (skill **3.4.0**, CLI **>= 3.1.2**, güncel yayın **3.2.1**) **13 koordineli alt-skill** sunar:
+
+| Alt-skill | Ne yapar |
+|-----------|--------------|
+| **Progress reports** | Dailybot dashboard'a standup tarzı agent güncellemeleri |
+| **Ask the AI** | Dailybot AI asistanına tek seferlik headless sorgular |
+| **Message polling** | Oturum başında veya boştayken ekip talimatlarını kontrol et |
+| **Email** | Zorunlu gönderim öncesi güvenlik kontrolleriyle e-posta gönder |
+| **Chat** | Slack, Microsoft Teams, Discord veya Google Chat'te gönder veya düzenle — kanallar, DM'ler, ekipler, rapor tarzı thread'ler, send-as-user (Slack, admin) |
+| **Conversations** | Bot ve adı geçen ekip arkadaşlarıyla Slack grup DM'i aç veya yeniden kullan; aynı çağrıda rapor yayınla |
+| **Health and status** | Uzun süren oturumlar için agent çevrimiçi/çevrimdışı duyur |
+| **Check-ins** | Standup'ları tamamla; check-in'leri **author** et (zamanlama, katılımcılar, sorular, hatırlatıcılar, AI ayarları) |
+| **Kudos** | Ekip arkadaşlarını veya tüm ekipleri tanı; tanınma akışı, org akışı, wall of fame'e göz at |
+| **Teams** | Ekipleri listele, üyeleri incele, adları UUID'lere çöz; `me`, `org`, kullanıcı profilleri |
+| **Forms** | Formları listele, gönder, güncelle, geçiş yap; formları **author** et (workflow durumları, izinler, ChatOps) |
+| **Workflows** | Org workflow'larını oku (`workflow list` / `workflow get`; salt okunur) |
+| **Report channels** | Formlar veya check-in'ler için kanal UUID'lerini keşfet |
+
+**DWP eklentisi yalnızca `report`'u plan yürütmesine bağlar.** Geri kalan her şey için Dailybot skill'i doğrudan çağırın — örneğin `#releases`'e deploy özeti gönderin, standup tamamlayın veya Dailybot AI'dan check-in trendlerini özetlemesini isteyin.
+
+Halka açık referans: [dailybot.com/skill.md](https://www.dailybot.com/skill.md). Kaynak: [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill). Güven modeli: skill paketindeki [`TRUST.md`](https://github.com/DailybotHQ/agent-skill/blob/main/skills/dailybot/TRUST.md).
+
+## Davranış — ertele, asla engelleme
+
+| Kural | Ayrıntı |
+|------|--------|
+| **Ertele** | Dailybot skill kurulum, onay, auth, hook şablonları, yazım stilini yönetir |
+| **Asla engelleme** | CLI yok, auth başarısız, ağ hatası → bir kez uyar, birincil çalışmaya devam et |
+| **Yeniden deneme yok** | Tanı döngülerine girme; raporlama best-effort'tur |
+| **Uzlaştır** | Mevcut skill, CLI, profile, hook'lar veya rapor bağlantısı korunur — yalnızca boşluklar doldurulur |
+| **Vendor-neutral** | DWP Dailybot gerektirmez; bu eklenti ek ekip görünürlüğüdür |
+
+## Onboarding akışı
+
+DWP `onboard` sırasında **Faz 7b**'de, temel AI-first iskeletinden sonra akış dört opt-in eklenti sunar. Geliştirici Dailybot'u kabul ederse:
+
+1. Mevcut kurulumu tespit et (skill, CLI, `.dailybot/profile.json`, hook'lar, rapor adımı).
+2. Dailybot onay akışlarıyla skill/CLI kurulumu sun.
+3. Kimlik doğrulamayı `shared/auth.md`'ye ertele.
+4. Dört yaşam döngüsü olayını `AGENTS.md` / `docs/AI_AGENT_COLLAB.md`'ye bağla.
+5. İsteğe bağlı olarak hook zorlaması ve `.dailybot/profile.json` sun.
+6. Doğrulamayı çalıştır (skill'in `addons/dailybot/SPEC.md` dosyasında SPEC §8).
+
+Deep Work Plan skill'inde normatif sözleşme: `addons/dailybot/SPEC.md` (sürüm **2.3.0**).
+
+## İlgili kit girişleri
+
+- [Devcontainer](/kit/devcontainer) — Dailybot CLI kalıcılığıyla tekrarlanabilir geliştirme ortamı (birinci eklenti)
+- [Dependency upgrade](/kit/dependency-upgrade) — toplu, doğrulanmış bağımlılık yükseltmeleri (üçüncü eklenti)
+- [Design system](/kit/design-system) — arayüz yüzeyleri için agent odaklı `DESIGN.md` (dördüncü eklenti)
+- [Deep Work Plan onboard](/kit/deepworkplan-onboard) — eklentileri sunan onboarding alt-skill'i

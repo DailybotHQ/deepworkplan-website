@@ -7,7 +7,7 @@ Dailybot skills after completing tasks or making broad edits — primarily the
 periodic health checks.
 
 > **Prefer hooks where available.** Trigger blocks are prompt instructions —
-> advisory, and forgettable in long sessions. Since `dailybot-cli` 1.12.0
+> advisory, and forgettable in long sessions. With `dailybot-cli`
 > the harness can enforce reporting deterministically via lifecycle hooks;
 > see [`hooks.md`](hooks.md). Install both when possible: the trigger block
 > teaches the behavior, the hooks guarantee it. On harnesses without hook

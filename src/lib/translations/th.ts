@@ -120,9 +120,9 @@ export const th: SiteTranslations = {
             'AGENTS.md ที่ผ่านการให้เหตุผล โครงสร้าง docs/ ที่จัดหมวดหมู่ และ README พร้อม docs/ ในแต่ละโมดูลหลัก เต็มไปด้วยคำสั่งจริงของ repository คุณ ไม่ใช่ตัวยึดตำแหน่ง',
         },
         {
-          title: 'วางโครง .agents/ พร้อมซิมลิงก์ .claude ไปยัง .agents',
+          title: 'วางโครง .agents/ พร้อมซิมลิงก์ .claude และ .cursor ไปยัง .agents',
           description:
-            'ไดเรกทอรี .agents/ ที่ใช้ร่วมกันข้าม agent (สกิล agent คำสั่ง) และซิมลิงก์ .claude ไปยัง .agents โดยสะท้อน CLAUDE.md ไปยัง AGENTS.md เพื่อให้ทุกเครื่องมืออ่านแหล่งความจริงเดียวกัน',
+            'ไดเรกทอรี .agents/ ที่ใช้ร่วมกันข้าม agent (สกิล agent คำสั่ง) และซิมลิงก์ .claude และ .cursor ไปยัง .agents โดยสะท้อน CLAUDE.md ไปยัง AGENTS.md เพื่อให้ทุกเครื่องมืออ่านแหล่งความจริงเดียวกัน',
         },
         {
           title: 'ติดตั้งสกิล DWP และวางโครง .dwp/',
@@ -177,9 +177,9 @@ export const th: SiteTranslations = {
             'สถาปัตยกรรม การติดตั้ง มาตรฐาน และการแก้ปัญหา พร้อม README และ docs/ ในแต่ละโมดูลหลัก สร้างจากโค้ดเบสของคุณ',
         },
         {
-          label: '.agents/ พร้อมซิมลิงก์ .claude ไปยัง .agents',
+          label: '.agents/ พร้อมซิมลิงก์ .claude และ .cursor ไปยัง .agents',
           detail:
-            'ไดเรกทอรี .agents/ ที่ใช้ร่วมกันข้าม agent (สกิล agent คำสั่ง) พร้อมซิมลิงก์ .claude ไปยัง .agents เพื่อให้ทุกเครื่องมืออ่านแหล่งความจริงเดียวกัน',
+            'ไดเรกทอรี .agents/ ที่ใช้ร่วมกันข้าม agent (สกิล agent คำสั่ง) พร้อมซิมลิงก์ .claude และ .cursor ไปยัง .agents เพื่อให้ทุกเครื่องมืออ่านแหล่งความจริงเดียวกัน',
         },
         {
           label: 'สกิล Deep Work Plan ที่ติดตั้งแล้ว',
@@ -625,7 +625,7 @@ export const th: SiteTranslations = {
       {
         title: 'เริ่มต้น repository',
         description:
-          'รันสกิลย่อย onboard แล้วให้ agent ให้เหตุผลเกี่ยวกับ repo จริงของคุณ มันจะสร้าง AGENTS.md ฐานความรู้ docs/ เอกสารแยกตามโมดูล และที่อยู่ .agents/ ที่ใช้ร่วมกันข้าม agent (พร้อมซิมลิงก์ .claude → .agents) เชื่อมต่อคำสั่ง dwp-* บาง ๆ และวางโครง .dwp/ ที่ถูก gitignore ไว้',
+          'รันสกิลย่อย onboard แล้วให้ agent ให้เหตุผลเกี่ยวกับ repo จริงของคุณ มันจะสร้าง AGENTS.md ฐานความรู้ docs/ เอกสารแยกตามโมดูล และที่อยู่ .agents/ ที่ใช้ร่วมกันข้าม agent (พร้อมซิมลิงก์ .claude → .agents และ .cursor → .agents) เชื่อมต่อคำสั่ง dwp-* บาง ๆ และวางโครง .dwp/ ที่ถูก gitignore ไว้',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -733,7 +733,7 @@ export const th: SiteTranslations = {
     whatTitle: 'What this does',
     whatBody: [
       'Adoption changes the repository in two durable ways — the pillars of the methodology.',
-      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, per-module docs, and a .agents/ skill home (with the .claude → .agents symlink) give every agent the context and commands it needs.',
+      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, per-module docs, and a .agents/ skill home (with the .claude → .agents and .cursor → .agents symlinks) give every agent the context and commands it needs.',
     ],
     sequenceTitle: 'The adoption sequence',
     orLabel: 'or',
@@ -743,33 +743,40 @@ export const th: SiteTranslations = {
         description:
           'ปฏิบัติต่อพรอมต์และสกิลว่าเป็นสิ่งที่ไม่น่าเชื่อถือจนกว่าจะได้ตรวจสอบ ทั้งสองเป็นโอเพนซอร์สและ MIT สกิลเป็น Markdown-first ไม่มีการเรียกเครือข่ายและไม่มีการเก็บข้อมูลการใช้งาน ทุกรีลีสเผยแพร่ SHA256SUMS สำหรับสกิลที่ส่งมา คุณจึงสามารถยืนยันว่าสำเนาของคุณตรงกันก่อนรัน รีลีสถูกตรวจสอบด้วย checksum ไม่ใช่ลายเซ็น (การลงนามเป็นขั้นตอนถัดไปที่ได้รับการจัดทำเป็นเอกสาร)',
         commands: [
-          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
-        title: 'Install the skill',
+        title: 'ติดตั้งสกิล',
         description:
-          'Add the Deep Work Plan skill so any agent can plan and execute structured work. The skill ships a router plus eight sub-skills — create, execute, refine, resume, status, verify, onboard, and author.',
+          'เพิ่มสกิล Deep Work Plan เพื่อให้ agent ใดก็ได้สามารถวางแผนและดำเนินงานที่มีโครงสร้าง สกิลประกอบด้วย router และสกิลย่อยแปดตัว ได้แก่ create, execute, refine, resume, status, verify, onboard และ author',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
-        title: 'Run repository onboarding',
+        title: 'รันการ onboard repository',
         description:
-          'Invoke the onboard sub-skill and let the agent reason about the actual repo — its stack, package manager, and real validation commands. It then generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents symlink), wires the thin dwp-* commands, and scaffolds a gitignored .dwp/ for plans and drafts. Nothing is templated; everything is adapted to your repository.',
+          'เรียกสกิลย่อย onboard และให้ agent วิเคราะห์ repo จริง ได้แก่ สแตก ตัวจัดการแพ็กเกจ และคำสั่งตรวจสอบจริง จากนั้นจะสร้าง AGENTS.md, ฐานความรู้ docs/, เอกสารแต่ละโมดูล และโฮม .agents/ ข้ามเอเจนต์ (พร้อม symlink .claude → .agents และ .cursor → .agents), ต่อสายคำสั่ง dwp-* แบบบาง และสร้างโครง .dwp/ ที่ถูก gitignore สำหรับแผนและฉบับร่าง สำหรับ repo ขนาดใหญ่ สกิลย่อย onboard ใช้เส้นทางแบบขับเคลื่อนด้วยแผน: ทำการสำรวจก่อน จากนั้นสร้าง Deep Work Plan สำหรับการ onboarding ไม่มีอะไรเป็นเทมเพลต ทุกอย่างถูกปรับให้เหมาะกับ repository ของคุณ',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'พัฒนาชุดเครื่องมือและรับ addon',
+        title: 'รับ addon แบบสมัครใจ',
         description:
-          'ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตก การเริ่มต้นยังเสนอ addon แบบสมัครใจสี่ตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade และ design-system ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม repo สอดคล้องอย่างสมบูรณ์โดยมี addon ศูนย์ตัว',
+          'การ onboarding เสนอ addon แบบสมัครใจสี่ตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade และ design-system ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม repo สอดคล้องอย่างสมบูรณ์โดยมี addon ศูนย์ตัว ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตกเกินกว่าชุดพื้นฐาน',
       },
       {
-        title: 'Plan and execute',
+        title: 'วางแผนและดำเนินการ',
         description:
-          'Generate Deep Work Plans with /dwp-create and run them with /dwp-execute, then /dwp-status, /dwp-refine, and /dwp-resume as work proceeds. Each plan carries numbered tasks, validation gates, and a completion protocol so work stays structured, reviewable, and resumable across sessions.',
+          'สร้าง Deep Work Plans ด้วย /dwp-create และรันด้วย /dwp-execute จากนั้นใช้ /dwp-status, /dwp-refine, /dwp-resume และ /dwp-verify ตามความคืบหน้าของงาน แต่ละแผนมีงานที่มีหมายเลข gate การตรวจสอบ และโปรโตคอลการเสร็จสิ้น โดยจบด้วยงานบังคับสุดท้ายสามงาน ได้แก่ การตรวจสอบความปลอดภัย การค้นพบสกิลและ agent และรายงานสรุปผู้บริหาร',
+      },
+      {
+        title: 'ตรวจสอบความสอดคล้อง',
+        description:
+          'รัน /dwp-verify เพื่อรับรายงานผ่าน/ไม่ผ่านอย่างเป็นกลางเทียบกับสเปก ยืนยันว่า AGENTS.md, docs/ (มีเนื้อหาจริง ไม่ใช่ stub), .agents/ (มี delegator dwp-* แบบบางและ catalog ที่ตรงกับดิสก์), .dwp/ และ tmp/ อยู่ในที่ — ไม่มีอะไรเป็นเทมเพลต ทุกอย่างถูกคิดมาสำหรับ repo นี้',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: 'The outcome',

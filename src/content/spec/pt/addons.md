@@ -1,45 +1,102 @@
 ---
-title: Addons
-description: "Extensões opcionais à metodologia DWP central: skills, agents, presets, adaptadores e exemplos, e como cada um amplia o fluxo de trabalho sem ser obrigatório."
+title: Complementos
+description: "Extensões opcionais do DWP: os quatro addons ativos (devcontainer, Dailybot, dependency-upgrade, design-system), o contrato de addon e conceitos do kit."
 order: 5
 lang: pt
 section: Addons
 ---
 
-# Addons
+# Complementos
 
-**Versão 1.0.** Os addons são extensões opcionais à metodologia DWP central. Eles não são exigidos para a conformidade, mas fornecem capacidades adicionais.
+**Versão 2.0.** Os complementos são extensões opcionais da metodologia central do Deep Work Plan. **Nunca são obrigatórios para conformidade** — um repositório sem addons é totalmente AI-first e conforme com o DWP. Cada addon é oferecido durante a integração, aceite ou recusado explicitamente e — quando aceite — **reconcilia** com a configuração existente em vez de a sobrescrever.
+
+## O contrato de addon
+
+Cada addon ativo inclui quatro componentes obrigatórios:
+
+| Componente | Propósito |
+|-----------|---------|
+| **Spec** | Descrição normativa RFC-2119 do que o addon fornece e do que significa «conforme com este addon» |
+| **Modelos de raciocínio** | Guias que o agente preenche raciocinando sobre o stack do repositório alvo — não copiar e colar |
+| **Hook de integração** | Ponto de entrada `SKILL.md` que o fluxo `onboard` invoca quando o programador aceita |
+| **Passo de validação** | Lista de verificação que confirma que o addon foi aplicado corretamente |
+
+Descoberta: o fluxo `onboard` enumera `skills/deepworkplan/addons/` e apresenta cada addon como um passo opcional na **Fase 7b**, após o scaffolding central.
+
+## Addons ativos (quatro)
+
+Quatro addons estão ativos hoje. Cada um tem uma **página do catálogo do kit** com detalhe orientado ao utilizador e uma **spec normativa** dentro da skill Deep Work Plan.
+
+### Devcontainer (primeiro addon)
+
+Uma configuração `.devcontainer/` + `docker/` baseada em compose, raciocinada a partir do stack detetado.
+
+- **Página do kit:** [Devcontainer](/kit/devcontainer)
+- **O que adiciona:** volumes persistentes de auth de CLI de IA (Claude, Codex, Cursor, gh, Dailybot), `dailybot-project-network`, `DOCKER_DEV_ENV=vscode`, aliases de validação (`codecheck`, `check`, `fix`, `test`), higiene de segredos em OSS público
+- **Comportamento:** ~85 % esqueleto estável; ~15 % raciocinado por stack. Devcontainers existentes são reconciliados, nunca sobrescritos
+- **Quando oferecido:** a maioria dos repositórios com Docker ou serviços que beneficiam de um contentor de desenvolvimento isolado
+
+### Dailybot (segundo addon)
+
+Uma ligação opcional à **equipa Dailybot** do programador para visibilidade do progresso do agente.
+
+- **Página do kit:** [Dailybot](/kit/dailybot) — referência completa de capacidades
+- **O que o addon DWP liga:** quatro relatórios do ciclo de vida do plano (kickoff, tarefa significativa, bloqueado, conclusão) via sub-skill `report` do dailybot; reforço determinístico opcional por hooks (`dailybot hook`, CLI `>= 3.1.2`)
+- **Skill emparelhada:** instalar [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (atualmente **3.4.0**) expõe **13 capacidades** — chat no Slack/Teams/Discord/Google Chat, check-ins, autoría de formulários, ask AI, kudos, email e mais. O addon DWP liga apenas **report**; outras capacidades são invocadas diretamente pela skill Dailybot
+- **Auth:** totalmente adiada para a skill Dailybot (`dailybot login` ou `DAILYBOT_API_KEY`); este addon nunca armazena credenciais
+- **Salvaguarda neutra em relação ao fornecedor:** o DWP central tem **zero** dependência do Dailybot; nunca instalar automaticamente para todos
+- **Quando oferecido:** programador ou equipa já usa Dailybot, ou pede explicitamente relatórios à equipa
+
+### Dependency upgrade (terceiro addon)
+
+Atualizações de dependências em lotes, validadas e reversíveis, agnósticas ao gestor de pacotes.
+
+- **Página do kit:** [Dependency upgrade](/kit/dependency-upgrade)
+- **O que adiciona:** deteta o gestor **real** do repositório (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, …), atualiza em lotes classificados por semver, executa a porta de validação do repositório após cada lote, reverte falhas, resume sem confirmar automaticamente
+- **Comando:** instala `/lib-upgrade` em `.agents/commands/` apenas quando aceite
+- **Quando oferecido:** lockfile presente e stack com muitas dependências; recomendar apenas quando relevante
+
+### Design system (quarto addon)
+
+Um `DESIGN.md` com âmbito de superfície de interface que qualquer agente de codificação lê para saída coerente de UI, CLI ou conversacional.
+
+- **Página do kit:** [Design system](/kit/design-system)
+- **O que adiciona:** `docs/DESIGN.md` (referenciado a partir de `AGENTS.md`) com até três **perfis** empilhados num único ficheiro: **visual-ui** (tokens e componentes de UI renderizada), **cli-output** (estilos semânticos de terminal, degradação TTY/`NO_COLOR`), **conversational** (voz, anatomia da mensagem, renderização por plataforma com alternativas em texto simples)
+- **Força do perfil:** visual-ui está **ativado por defeito quando detetado**; cli-output e conversational são **recomendados quando detetados, sempre perguntados, nunca aplicados automaticamente**
+- **Quando oferecido:** apenas quando uma superfície de interface orientada ao utilizador é detetada — não para bibliotecas puras, serviços sem interface ou repositórios só de infraestrutura
 
 ## Skills
 
-Skills são procedimentos reutilizáveis invocados pelo nome. Uma skill empacota um fluxo de trabalho repetível (executar testes, corrigir lint, criar um componente).
+As skills são procedimentos reutilizáveis invocados por nome. Uma skill empacota um fluxo de trabalho repetível (executar testes, corrigir lint, criar um componente).
 
-A metodologia fornece um pequeno conjunto de sub-skills centrais. Entre elas, a sub-skill **author** permite que um repositório **faça crescer seu próprio kit**: invocada por meio de `/skill-create` e `/agent-create`, ela raciocina sobre o layout e as convenções existentes em `.agents/` do repositório, e então cria uma nova skill, agent ou delegador de comando enxuto que combine com eles, mantendo o catálogo em sincronia. A mesma sub-skill executa a tarefa obrigatória Skills & Agents Discovery.
+A metodologia inclui um pequeno conjunto de sub-skills centrais. Entre elas, a sub-skill **author** permite que um repositório **cresça o seu próprio kit**: invocada através de `/skill-create` e `/agent-create`, raciocina sobre o layout `.agents/` existente e convenções, depois cria uma nova skill, agente ou comando delegador fino que corresponde a eles, mantendo o catálogo sincronizado. A mesma sub-skill executa a tarefa obrigatória de Descoberta de Skills e Agentes.
 
-## Agents
+Entrada do kit: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 
-Agents são trabalhadores especializados com um papel definido (reviewer, executor, architect).
+## Agentes
 
-## Addons de manutenção
+Os agentes são trabalhadores especializados com um papel definido (revisor, executor, arquiteto). Vivem em `.agents/agents/` e são catalogados em `.agents/docs/`.
 
-Os addons de manutenção são extensões opcionais, nunca exigidas para a conformidade, que ajudam um repositório a se manter. O addon **dependency-upgrade** raciocina sobre o gerenciador de pacotes real do repositório (em vez de presumir npm) e atualiza as dependências em lotes pequenos, validados e reversíveis: ele detecta o gerenciador a partir do manifesto e do lockfile reais, classifica as atualizações por semver, atualiza em lotes, executa o validation gate real do repositório após cada lote, reverte qualquer lote que falhe e resume sem comitar automaticamente. Um addon só é instalado quando é aceito durante o onboarding.
+## Complementos de manutenção
 
-## Addon design-system
+O complemento **dependency-upgrade** (acima) é o complemento de manutenção principal. Raciocina sobre o gestor de pacotes real do repositório em vez de assumir npm, classifica atualizações por semver, atualiza em lotes seguros, executa validação após cada lote e reverte qualquer lote que falhe.
 
-O addon **design-system** é uma extensão opcional, com escopo de superfície de interface, que dá a um repositório um `DESIGN.md` — um arquivo de design system em Markdown que qualquer agente de código lê para gerar saída de interface consistente com as convenções próprias do repositório. Ele cobre três **perfis**, detectados de forma independente a partir de arquivos reais e empilhados no mesmo e único arquivo: **visual-ui** (UI web/mobile/desktop renderizada), **cli-output** (saída de terminal estilizada: cores semânticas, componentes de saída como painéis e spinners, convenções de layout, degradação TTY/`NO_COLOR`) e **conversational** (o produto conversa por chat ou e-mail: voz e registro, anatomia da mensagem, renderização por plataforma com alternativas em texto simples). Ele raciocina sobre a fonte real de design do repositório (propriedades CSS personalizadas, uma configuração do Tailwind, arquivos de tokens, estilos de componentes — ou um módulo de exibição de CLI, ou helpers de composição de mensagens) em vez de copiar um arquivo de marca, e valida a integridade de cada perfil: contraste WCAG AA para os pares de texto visuais, a cor nunca como único portador de significado na saída de terminal, alternativas em texto simples para mensagens ricas e referências de tokens que resolvem. Ele reconcilia um `DESIGN.md` existente em vez de sobrescrevê-lo.
+## Complemento de sistema de design
 
-O arquivo reside em `docs/DESIGN.md`, ao lado das outras especificações do repositório, e é referenciado a partir do `AGENTS.md` para que os agentes o descubram da mesma forma que descobrem o restante da documentação (a raiz do repositório é usada apenas quando não há uma árvore `docs/`). A descoberta é por referência, não pela localização física. A força difere por perfil: **visual-ui é ativado por padrão quando detectado** — quando uma superfície de UI visual está presente, o onboarding o aplica em modo de confiança e o recomenda fortemente no modo guiado — enquanto **cli-output e conversational são recomendados quando detectados e sempre perguntados, nunca aplicados automaticamente**. O addon nunca é oferecido para um repositório sem nenhuma superfície de interface (uma biblioteca pura, um serviço headless, um repositório apenas de infraestrutura), e um repositório com zero addons permanece totalmente conforme. Um `DESIGN.md` criado antes de os perfis existirem é um arquivo visual de perfil único válido — sem migração.
-
-Este arquivo de design system em nível de repositório é distinto de um documento de design técnico por funcionalidade (o `design.md` de "requisitos → design → tarefas" dos fluxos de desenvolvimento orientados a especificação vinculados a ferramentas). O DWP não fornece um arquétipo separado de documento de design por funcionalidade: o README de um plano, os critérios de aceitação de cada tarefa e os validation gates já cobrem esse papel. O addon preenche a única lacuna que esse papel não cobre: contexto de design de interface durável e nativo do repositório.
+Ver [Design system](/kit/design-system) em addons ativos. O `DESIGN.md` ao nível do repositório é distinto de um documento de design técnico por funcionalidade: o README do plano DWP, critérios de aceitação de tarefas e portas de validação já cobrem design por funcionalidade. O addon design-system preenche contexto de design de **interface** durável e nativo do repositório.
 
 ## Presets
 
-Presets adaptam o DWP a uma stack tecnológica específica (Django, React, Go).
+Os presets adaptam o DWP a um stack tecnológico específico (Django, React, Go, Astro + Svelte e mais). Explore o [catálogo do kit](/kit).
 
 ## Adaptadores
 
-Adaptadores mapeiam os comandos do DWP para o sistema de comandos de um agente específico (Claude Code, Cursor, Codex).
+Os adaptadores mapeiam comandos DWP para o sistema de comandos de um agente específico (Claude Code, Cursor, Codex, Gemini, Copilot, OpenClaw e outros). As entradas de adaptador vivem no kit sob o nome de cada agente.
 
 ## Exemplos
 
-Exemplos demonstram o DWP na prática (comparações de antes e depois, planos de amostra, estudos de caso).
+Os exemplos demonstram o DWP na prática: comparações antes/depois, planos de exemplo, estudos de caso. Ver [Examples](/examples) e [Dogfood this site](/kit/dogfood-this-site).
+
+## Lembrete de conformidade
+
+Um repositório **DEVE** ser totalmente conforme com **zero** addons. Os addons são capacidades opcionais em camadas — nunca pré-condições. Ver [Conformance](/spec/conformance).

@@ -12,8 +12,8 @@ in once, and from then on the harness re-arms the reminders in every future
 session, container, and repo. No human reminders, no reliance on the model's
 memory.
 
-> **Requires `dailybot-cli >= 1.12.0`** (the `dailybot hook` command group
-> first ships in 1.12.0 — [release notes](https://github.com/DailybotHQ/cli/releases/tag/v1.12.0)).
+> **Requires `dailybot-cli >= 3.1.2`** (the skill-pack baseline). The `dailybot hook` command group
+> is available at this floor.
 > Check with `dailybot --version`; if older, ask the developer to run
 > `dailybot upgrade` once. Hooks installed against an older CLI fail
 > gracefully (the harness ignores a missing command), but install-time is
@@ -41,7 +41,8 @@ When a Dailybot reminder is injected into your context by one of these
 hooks:
 
 1. **If a meaningful unit of work is complete** — including non-commit work
-   such as research, analysis, or written documents — send a report now via
+   such as research, analysis, architecture decisions, written documents, or
+   plans — send a report now via
    the [`dailybot-report` skill](SKILL.md). The successful
    `dailybot agent update` resets the ledger and the reminders stop.
 2. **If nothing significant happened** (or the work is still mid-stream and
@@ -140,15 +141,49 @@ the only remaining per-person step is `dailybot login`, and the
 ## Per-repo controls
 
 - `.dailybot/disabled` — silences hooks (and all skill telemetry) for a repo.
-- `.dailybot/profile.json` → `"report": {"min_interval_minutes": 30, "nudge": true}`
-  — committed team policy; `"nudge": false` turns reminders off for the repo
-  while keeping manual reporting available.
+- `.dailybot/profile.json` → the `"report"` block is committed team policy.
+  All keys are optional; absent keys keep the defaults:
+
+  ```json
+  {
+    "report": {
+      "min_interval_minutes": 30,
+      "nudge": true,
+      "mode": "balanced",
+      "soft_turn_threshold": 8
+    }
+  }
+  ```
+
+  | Key | Default | Effect |
+  |-----|---------|--------|
+  | `min_interval_minutes` | `30` (`20` in `continuous` mode when omitted) | Minimum time between reports before reminders resume |
+  | `nudge` | `true` | `false` turns reminders off for the repo while keeping manual reporting available |
+  | `mode` | `"balanced"` | `"continuous"` lowers the soft-nudge thresholds for research-heavy repos so non-commit work (research, docs, analysis, plans) gets reminded sooner |
+  | `soft_turn_threshold` | `8` (`5` in `continuous` mode when omitted) | Agent turns without a report before a soft nudge is eligible |
+
+  Invalid `mode` values fall back to `"balanced"`; invalid `soft_turn_threshold`
+  values fall back to the mode default. (Part of the `dailybot-cli >= 3.1.2`
+  baseline; much older CLIs ignore `mode`/`soft_turn_threshold` and stay on the balanced
+  defaults.
+
+  **Continuous mode** — for repos where a lot of valuable work never lands as a
+  commit (research, design docs, analysis):
+
+  ```json
+  {
+    "report": {
+      "mode": "continuous"
+    }
+  }
+  ```
 
 ## Troubleshooting
 
 | Symptom | Check |
 |---------|-------|
-| Reminders never fire | Run `dailybot hook stop` manually after a commit — any output? Then check `dailybot --version` (>= 1.12.0), `.dailybot/disabled`, and the harness config actually contains the `dailybot hook` entries |
+| Reminders never fire | Run `dailybot hook stop` manually after a commit — any output? Then check `dailybot --version` (>= 3.1.2), `.dailybot/disabled`, and the harness config actually contains the `dailybot hook` entries |
 | Reminder fires but mentions old history | Delete the repo's file under `~/.config/dailybot/ledger/` — the baseline re-anchors silently |
 | Too noisy | Raise `min_interval_minutes` in `.dailybot/profile.json`, or use `dailybot hook dismiss --minutes <n>` |
+| Not reminded often enough (research-heavy repo) | Set `"mode": "continuous"` (or lower `soft_turn_threshold` / `min_interval_minutes`) in `.dailybot/profile.json` |
 | Harness errors on hook output | Wrong `--format` — `claude`/`cursor` emit JSON, `generic` is plain text |

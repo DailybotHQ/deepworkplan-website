@@ -124,9 +124,9 @@ export const ja: SiteTranslations = {
         },
         {
           title:
-            '.claude から .agents へのシンボリックリンクとともに .agents/ を整備する',
+            '.claude と .cursor のシンボリックリンクとともに .agents/ を整備する',
           description:
-            'エージェント横断の .agents/ ディレクトリ（スキル、エージェント、コマンド）と .claude から .agents へのシンボリックリンクを作成し、CLAUDE.md を AGENTS.md にミラーリングします。これにより、すべてのツールが単一の信頼できる情報源を読みます。',
+            'エージェント横断の .agents/ ディレクトリ（スキル、エージェント、コマンド）と .claude および .cursor から .agents へのシンボリックリンクを作成し、すべてのツールが単一の信頼できる情報源を読みます。',
         },
         {
           title: 'DWP スキルをインストールし、.dwp/ を整備する',
@@ -181,9 +181,10 @@ export const ja: SiteTranslations = {
             'アーキテクチャ、セットアップ、規約、トラブルシューティングに加え、主要モジュールごとの README と docs/ を、コードベースから生成します。',
         },
         {
-          label: '.claude から .agents へのシンボリックリンクを備えた .agents/',
+          label:
+            '.claude と .cursor から .agents へのシンボリックリンクを備えた .agents/',
           detail:
-            'エージェント横断の .agents/ ディレクトリ（スキル、エージェント、コマンド）に .claude から .agents へのシンボリックリンクを備え、すべてのツールが単一の信頼できる情報源を読みます。',
+            'エージェント横断の .agents/ ディレクトリ（スキル、エージェント、コマンド）に .claude および .cursor から .agents へのシンボリックリンクを備え、すべてのツールが単一の信頼できる情報源を読みます。',
         },
         {
           label: 'インストール済みの Deep Work Plan スキル',
@@ -633,7 +634,7 @@ export const ja: SiteTranslations = {
       {
         title: 'リポジトリをオンボーディングする',
         description:
-          'onboard サブスキルを実行し、エージェントに実際のリポジトリを推論させます。AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、そしてエージェント横断の .agents/ 拠点（.claude → .agents シンボリックリンクつき）を生成し、薄い dwp-* コマンドを配線し、gitignore された .dwp/ を整備します。',
+          'onboard サブスキルを実行し、エージェントに実際のリポジトリを推論させます。AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、そしてエージェント横断の .agents/ 拠点（.claude → .agents および .cursor → .agents シンボリックリンクつき）を生成し、薄い dwp-* コマンドを配線し、gitignore された .dwp/ を整備します。',
         commands: ['/deepworkplan-onboard'],
       },
       {
@@ -680,7 +681,7 @@ export const ja: SiteTranslations = {
     whatTitle: 'これが行うこと',
     whatBody: [
       '採用は、この方法論の二本の柱として、リポジトリを二つの永続的なかたちで変えます。',
-      'まず、リポジトリが仕様駆動になります。作業は場当たり的なプロンプトからではなく、書かれた計画と仕様から始まります。次に、リポジトリそのものがエージェントハーネスになります。AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、そして .agents/ のスキル拠点（.claude → .agents シンボリックリンクつき）が、すべてのエージェントに必要なコンテキストとコマンドを与えます。',
+      'まず、リポジトリが仕様駆動になります。作業は場当たり的なプロンプトからではなく、書かれた計画と仕様から始まります。次に、リポジトリそのものがエージェントハーネスになります。AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、そして .agents/ のスキル拠点（.claude → .agents および .cursor → .agents シンボリックリンクつき）が、すべてのエージェントに必要なコンテキストとコマンドを与えます。',
     ],
     sequenceTitle: '採用の手順',
     orLabel: 'または',
@@ -690,7 +691,7 @@ export const ja: SiteTranslations = {
         description:
           '確認が済むまで、プロンプトとスキルを信頼できないものとして扱ってください。どちらもオープンソースで MIT ライセンスです。スキルは Markdown ファーストでネットワーク呼び出しもテレメトリーもありません。各リリースでは出荷されたスキルに対する SHA256SUMS が公開されているため、実行する前に手元のコピーが一致することを確認できます。リリースはチェックサム付きですが、署名はされていません（署名はドキュメント化された次のステップです）。',
         commands: [
-          'curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS && ./setup.sh --verify',
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -699,24 +700,31 @@ export const ja: SiteTranslations = {
           'Deep Work Plan スキルを追加し、どのエージェントも構造化された作業を計画して実行できるようにします。スキルはルーターと八つのサブスキル（create、execute、refine、resume、status、verify、onboard、author）を備えます。',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
         title: 'リポジトリのオンボーディングを実行する',
         description:
-          'onboard サブスキルを呼び出し、エージェントに実際のリポジトリ（スタック、パッケージマネージャー、実際の検証コマンド）を推論させます。その後、AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、エージェント横断の .agents/ 拠点（.claude → .agents シンボリックリンクつき）を生成し、薄い dwp-* コマンドを配線し、計画とドラフトのための gitignore された .dwp/ を整備します。テンプレートは一切なく、すべてがリポジトリに適応されます。',
+          'onboard サブスキルを呼び出し、エージェントに実際のリポジトリ（スタック、パッケージマネージャー、実際の検証コマンド）を推論させます。その後、AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、エージェント横断の .agents/ 拠点（.claude → .agents および .cursor → .agents シンボリックリンクつき）を生成し、薄い dwp-* コマンドを配線し、計画とドラフトのための gitignore された .dwp/ を整備します。大規模なリポジトリでは、onboard サブスキルはプラン駆動パスを使用します。偵察を完了してから、オンボーディング用の Deep Work Plan を出力します。テンプレートは一切なく、すべてがリポジトリに適応されます。',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'キットを進化させ、アドオンを受け入れる',
+        title: 'オプトインのアドオンを受け入れる',
         description:
-          '/skill-create と /agent-create（author サブスキル）を使って、スタックに合ったスキル、エージェント、コマンドを育てます。オンボーディングは四つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system）も提案します。適合する場合にのみ受け入れてください。アドオンがゼロでも、リポジトリは完全に適合します。',
+          'オンボーディングは四つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system）を提案します。適合する場合にのみ受け入れてください。アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
       },
       {
         title: '計画して実行する',
         description:
-          '/dwp-create で Deep Work Plan を生成し、/dwp-execute で実行し、作業の進行に応じて /dwp-status、/dwp-refine、/dwp-resume を使います。各計画には番号つきのタスク、検証ゲート、完了プロトコルが含まれ、作業は構造化され、レビュー可能で、セッションをまたいで再開できる状態に保たれます。',
+          '/dwp-create で Deep Work Plan を生成し、/dwp-execute で実行し、作業の進行に応じて /dwp-status、/dwp-refine、/dwp-resume、/dwp-verify を使います。各計画には番号つきのタスク、検証ゲート、完了プロトコルが含まれ、三つの必須最終タスク（セキュリティレビュー、スキル＆エージェントの発見、エグゼクティブレポート）で締めくくられます。',
+      },
+      {
+        title: '適合性を検証する',
+        description:
+          '/dwp-verify を実行し、仕様に対する客観的な合否レポートを取得します。AGENTS.md、docs/（スタブではなく実際のコンテンツ）、.agents/（薄い dwp-* デリゲーターとディスクと一致するカタログを含む）、.dwp/、tmp/ が配置されていることを確認します。テンプレート的なものは何もなく、すべてがこのリポジトリのために推論されたものです。',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: '成果',
