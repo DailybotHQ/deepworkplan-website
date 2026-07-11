@@ -78,7 +78,7 @@ jobs:
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
       - uses: actions/setup-node@v4
         with:
-          node-version: '24.15.0'
+          node-version: '24.18.0'
           registry-url: https://registry.npmjs.org/
       - name: Step 0 - 📁 Get pnpm store path
         id: pnpm-store

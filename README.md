@@ -69,7 +69,7 @@ The repository practices the methodology it documents. The official DeepWorkPlan
 
 ## 🚀 Quick Start
 
-> Requires **Node.js 24+** (CI runs on 24.15.0). The package manager is
+> Requires **Node.js 24+** (CI runs on 24.18.0). The package manager is
 > **pnpm**, pinned via Corepack in `package.json#packageManager`. Enable it
 > once with `corepack enable`; the dev container does this automatically.
 
