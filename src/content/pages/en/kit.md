@@ -49,7 +49,7 @@ and a generic fallback.
 Optional capabilities the onboard flow can layer onto a repo — never part of the AI-first baseline:
 
 - **Devcontainer** — a reproducible, isolated dev container with persistent AI-CLI auth.
-- **Dailybot** — best-effort progress and milestone reporting for teams using Dailybot.
+- **Dailybot** — plan-lifecycle reporting (kickoff, significant task, blocked, completion) for teams using Dailybot, plus access to the full Dailybot agent skill (3.4.0: chat, check-ins, forms, ask AI, and more).
 - **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades.
 - **Design system** — an interface-scoped `DESIGN.md` (at `docs/DESIGN.md`, referenced from `AGENTS.md`) reasoned from the repo's real design source, with profiles for visual UI, styled CLI output, and conversational messaging, so agents generate on-brand interface output; the visual profile is default-on when a design system is detected, the CLI and conversational profiles are recommended when detected and always asked about.
 

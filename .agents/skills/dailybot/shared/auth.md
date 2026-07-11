@@ -43,6 +43,51 @@ treat that as session-wide consent.
 > If the developer is on Windows but has WSL2 or Git Bash, prefer
 > `install.sh` — it has broader testing coverage.
 
+> [!NOTE]
+> **Installing a specific version.** Both installers default to the latest
+> release but accept a version pin (the skill-pack baseline is **`dailybot-cli >= 3.1.2`**):
+> - `install.sh` — set `DAILYBOT_VERSION=<version>` in the environment, or
+>   pass `bash -s -- --version <version>`. Example (drop it into the verified
+>   snippet below, right before `bash /tmp/install.sh`):
+>   `DAILYBOT_VERSION=<version> bash /tmp/install.sh`.
+> - `install.ps1` — set `$env:DAILYBOT_VERSION = '<version>'` before running
+>   (piping to `iex` cannot forward arguments).
+> - Both scripts validate the value before use, so a malformed version aborts
+>   the install rather than being interpolated into a command.
+>
+> When the developer already has Python, `pip install dailybot-cli==<version>`
+> is the simplest pin and works on every release. See
+> [`../SKILL.md` § Pinning a specific version](../SKILL.md#pinning-a-specific-version).
+
+#### curl flags: always `-fsSL`
+
+Every command in this skill fetches over HTTPS with `curl -fsSL`:
+
+| Flag | Why |
+|------|-----|
+| `-f` | **Fail on HTTP errors.** Without it, a `404`/`500` response body is written to stdout **with exit status `0`** — and in a pipe, `bash` executes that error page. With `-f`, curl emits nothing and exits non-zero. |
+| `-s` | Silent — no progress meter cluttering agent output. |
+| `-S` | But still show the error message on stderr when it does fail. |
+| `-L` | Follow redirects (`cli.dailybot.com` redirects to the CDN origin). |
+
+#### Why an agent must never pipe the installer straight into bash
+
+A `curl … | bash` one-liner is what a **human** types and watches. An agent runs
+unattended, where two failure modes are invisible:
+
+1. **Partial execution.** The pipeline *streams* — bash starts executing before the
+   download finishes, so a connection truncated mid-transfer runs **half a script**.
+   Neither `-f` nor `set -o pipefail` prevents this; they only change the exit status
+   *after the fact*.
+2. **Silent no-op.** In a shell without `pipefail` (Docker's default `sh -c`, most CI
+   `run:` steps), the pipeline's exit status is **bash's**, not curl's. A failing curl
+   writes nothing to stdout, bash reads an empty script and exits `0` — the step
+   "succeeds" with **nothing installed**, surfacing later as `command not found`.
+
+Both disappear when you download the file, verify it, and *then* execute it — which is
+what the primary path below does. Use it for every automated context (agents, CI,
+Dockerfiles, provisioning scripts).
+
 #### Primary path: defense-in-depth verified install (Linux, macOS, WSL2, Git Bash, Docker, CI)
 
 Show the developer this prompt the first time:
@@ -310,33 +355,60 @@ Dailybot → Settings → API Keys.
 
 ---
 
-## 4. User-Scoped Commands (Bearer Token Auth)
+## 4. Auth model — API key *or* login, almost everywhere
 
-Some Dailybot features — **check-ins**, **forms**, **kudos**, and **user
-directory** — are scoped to the logged-in human's session, not to an agent
-identity. These commands use a **Bearer token** stored at
-`~/.config/dailybot/credentials.json` after `dailybot login`.
+As of the CLI's full-parity baseline (`dailybot-cli >= 3.1.2`, paired with the
+matching API server rollout), **every authenticated CLI command accepts either
+credential** — a Bearer login session **or** an org API key. The server resolves
+the acting user from the API key's `owner`, so the two paths behave identically.
+This is what lets an autonomous agent do **everything** with only
+`DAILYBOT_API_KEY` set — including `dailybot ask` (the AI chat).
 
-### Auth model distinction
+| Scope | Accepted credentials | Used by |
+|-------|----------------------|---------|
+| **Agent endpoints** | API key (`X-API-KEY`) preferred, Bearer fallback | `dailybot agent update`, `dailybot agent health`, `dailybot agent email send` |
+| **User / CLI / AI commands** | Bearer token preferred, API key fallback — **either works** | `dailybot status`, `update`, `checkin`, `form`, `kudos`, `team`, `user`, `chat`, `ask` (AI chat) |
+| **Login lifecycle** | OTP / Bearer only | `dailybot login`, `dailybot logout` (revokes the session token) |
 
-| Scope | Auth method | How to set up | Used by |
-|-------|-------------|---------------|---------|
-| **Agent endpoints** | API key (`X-API-KEY` header) | `dailybot config key=...` or `DAILYBOT_API_KEY` env | `dailybot agent update`, `dailybot agent health`, `dailybot agent email send` |
-| **User endpoints** | Bearer token (`Authorization: Bearer <token>`) | `dailybot login` (OTP email flow) | `dailybot checkin`, `dailybot form`, `dailybot kudos`, `dailybot user` |
+Both credentials can coexist — the CLI stores them separately, and a developer
+can hold an API key and a Bearer session at the same time. The CLI prefers the
+login session when present and falls back to the API key.
 
-Both auth paths can coexist — the CLI stores them separately. A developer
-can have both an API key (for agent operations) and a Bearer session (for
-user-scoped operations) active at the same time.
+> **Parity.** All user-scoped commands (`checkin`, `form`, `kudos`, `user`) and
+> the AI chat accept an org API key **or** a Bearer login session. Only
+> `dailybot logout` is Bearer-only.
 
-### Checking user session status
+### Checking session status
 
 ```bash
 dailybot status --auth 2>&1
 ```
 
-The output shows both the agent API key status and the Bearer session status.
-If the user session is missing or expired, guide through `dailybot login`
-using the OTP flow in Section 2 above.
+The output shows both the API key status and the Bearer session status. If
+neither is present, guide the developer through `dailybot login` (Section 2) or
+ask them to set `DAILYBOT_API_KEY`.
+
+### Config directory override
+
+The `DAILYBOT_CONFIG_DIR` environment variable overrides where all credential
+and config files are stored (default: `~/.config/dailybot/`):
+
+```bash
+export DAILYBOT_CONFIG_DIR=/tmp/my-sandbox-config
+dailybot login --email me@example.com
+```
+
+This is useful for development sandboxes, CI environments, or testing
+scenarios with isolated config directories. The directory is created
+automatically if it does not exist.
+
+### Commands need *some* credential
+
+Every authenticated command works with **either** a login session or an API
+key; they exit with a non-zero "not authenticated" code only when **neither**
+is present. The single command that still requires a Bearer session is
+`dailybot logout` (it revokes the session token itself). Guide the developer
+through `dailybot login` or ask them to set `DAILYBOT_API_KEY`.
 
 ### Config directory override
 

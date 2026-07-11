@@ -1,6 +1,6 @@
 ---
 title: 附加组件
-description: "对核心 DWP 方法论的可选扩展：技能、代理、预设、适配器与示例，以及每一项如何在并非必需的前提下扩展工作流。"
+description: "可选 DWP 扩展：四个已发布的附加组件（devcontainer、Dailybot、dependency-upgrade、design-system）、附加组件合约，以及套件概念（技能、代理、预设、适配器、示例）。"
 order: 5
 lang: zh
 section: Addons
@@ -8,38 +8,95 @@ section: Addons
 
 # 附加组件
 
-**版本 1.0。** 附加组件是对核心 DWP 方法论的可选扩展。它们对符合性而言并非必需，但提供了额外的能力。
+**版本 2.0。** 附加组件是对核心 Deep Work Plan 方法论的可选扩展。它们**从不要求符合性**——零附加组件的仓库完全符合 AI-first 与 DWP 规范。每个附加组件在接入期间提供，由开发者明确接受或拒绝，且——接受后——**调和**现有设置而非覆盖。
+
+## 附加组件合约
+
+每个已发布的附加组件提供四个强制组件：
+
+| 组件 | 用途 |
+|------|------|
+| **Spec** | 规范性 RFC-2119 描述，说明附加组件提供什么以及「符合此附加组件」的含义 |
+| **Reasoning templates** | 代理根据目标仓库技术栈推理填写的指南——非复制粘贴 |
+| **Onboarding hook** | `SKILL.md` 入口点，`onboard` 流程在开发者接受时调用 |
+| **Validation step** | 确认附加组件已正确应用的检查清单 |
+
+发现机制：`onboard` 流程枚举 `skills/deepworkplan/addons/`，并在核心脚手架完成后的 **第 7b 阶段**将每个附加组件作为可选步骤呈现。
+
+## 已发布的附加组件（四个）
+
+当前发布四个附加组件。每个都有**套件目录页**（面向用户的详情）以及 Deep Work Plan 技能内的**规范性规格**。
+
+### Devcontainer（第一个附加组件）
+
+基于 compose 的 `.devcontainer/` + `docker/` 设置，根据检测到的技术栈推理生成。
+
+- **套件页：** [Devcontainer](/kit/devcontainer)
+- **新增内容：** 持久化 AI-CLI 认证卷（Claude、Codex、Cursor、gh、Dailybot）、`dailybot-project-network`、`DOCKER_DEV_ENV=vscode`、验证别名（`codecheck`、`check`、`fix`、`test`）、公开 OSS 密钥卫生
+- **行为：** 约 85% 稳定骨架；约 15% 按技术栈推理。现有 devcontainer 被调和，绝不覆盖
+- **何时提供：** 大多数使用 Docker 或受益于隔离开发容器的服务的仓库
+
+### Dailybot（第二个附加组件）
+
+与开发者 **Dailybot 团队**的可选连接，用于代理进展可见性。
+
+- **套件页：** [Dailybot](/kit/dailybot)——完整能力参考
+- **DWP 附加组件接入的内容：** 通过 dailybot `report` 子技能的四个计划生命周期报告（kickoff、significant task、blocked、completion）；可选确定性钩子强制层（`dailybot hook`，CLI `>= 3.1.2`）
+- **配套技能：** 安装 [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（当前 **3.4.0**）暴露 **13 项能力**——在 Slack/Teams/Discord/Google Chat 上聊天、签到、表单编写、Ask AI、kudos、电子邮件等。DWP 附加组件仅接入 **report**；其他能力通过 Dailybot 技能直接调用
+- **认证：** 完全延后至 Dailybot 技能（`dailybot login` 或 `DAILYBOT_API_KEY`）；此附加组件从不存储凭据
+- **供应商中立护栏：** 核心 DWP 对 Dailybot **零**依赖；切勿为所有人自动安装
+- **何时提供：** 开发者或团队已在使用 Dailybot，或明确要求团队报告
+
+### Dependency upgrade（第三个附加组件）
+
+与包管理器无关、分批、经验证、可回退的依赖升级。
+
+- **套件页：** [Dependency upgrade](/kit/dependency-upgrade)
+- **新增内容：** 检测仓库的**真实**管理器（npm/pnpm/yarn + ncu、pip/poetry/uv、cargo、go mod、bundler、composer……），按 semver 分类批次升级，每批后运行仓库验证关卡，回退失败批次，总结但不自动提交
+- **命令：** 仅在接受时向 `.agents/commands/` 安装 `/lib-upgrade`
+- **何时提供：** 存在锁文件且依赖密集型技术栈；仅在相关时推荐
+
+### Design system（第四个附加组件）
+
+限定于界面表面的 `DESIGN.md`，任何编码代理读取它以生成一致的 UI、CLI 或对话输出。
+
+- **套件页：** [Design system](/kit/design-system)
+- **新增内容：** `docs/DESIGN.md`（由 `AGENTS.md` 引用），最多三个**配置档**叠加于同一文件：**visual-ui**（渲染 UI 令牌与组件）、**cli-output**（语义化终端样式、TTY/`NO_COLOR` 降级）、**conversational**（语态、消息结构、按平台渲染及纯文本回退）
+- **配置档强度：** 检测到 visual-ui 时**默认开启**；检测到 cli-output 与 conversational 时**推荐、始终询问、绝不自动应用**
+- **何时提供：** 仅当检测到面向用户的界面表面时——不适用于纯库、无头服务或纯基础设施仓库
 
 ## 技能
 
-技能是按名称调用的可复用过程。一项技能把一套可重复的工作流打包起来（运行测试、修复 lint、创建组件）。
+技能是按名称调用的可复用过程。一项技能将可重复的工作流打包（运行测试、修复 lint、创建组件）。
 
-这套方法论附带了一小组核心子技能。其中，**author** 子技能让一个仓库得以**培育自己的套件**：通过 `/skill-create` 与 `/agent-create` 调用，它会对仓库现有的 `.agents/` 布局与约定进行推理，然后撰写一个与之相匹配的新技能、新代理或轻量命令委派器，并让目录保持同步。同一个子技能也执行那项强制的 Skills & Agents Discovery 任务。
+方法论附带一小组核心子技能。其中，**author** 子技能让仓库**培育自己的套件**：通过 `/skill-create` 与 `/agent-create` 调用，它推理仓库现有的 `.agents/` 布局与约定，然后撰写与之匹配的新技能、代理或轻量命令委派器，并保持目录同步。同一子技能执行强制的 Skills & Agents Discovery 任务。
+
+套件条目：[Skill create](/kit/skill-create)、[Agent create](/kit/agent-create)。
 
 ## 代理
 
-代理是带有既定角色的专职工作者（审阅者、执行者、架构师）。
+代理是带有既定角色的专职工作者（reviewer、executor、architect）。它们位于 `.agents/agents/` 下，并在 `.agents/docs/` 中编目。
 
 ## 维护类附加组件
 
-维护类附加组件是可选的扩展，对符合性而言绝非必需，它们帮助一个仓库维护自身。**dependency-upgrade** 附加组件会对仓库实际使用的包管理器进行推理（而非假定 npm），并以小批次、经验证、可回退的方式升级依赖：它从真实的清单与锁文件中检测包管理器，按 semver 对升级进行分类，分批次升级，在每个批次后运行仓库真实的验证关卡，回退任何失败的批次，并在不自动提交的情况下给出总结。一个附加组件只有在接入期间被采纳时才会被安装。
+上方的 **dependency-upgrade** 附加组件是主要的维护附加组件。它推理仓库实际的包管理器而非假定 npm，按 semver 分类升级，安全分批升级，每批后运行验证，并回退任何失败的批次。
 
-## design-system 附加组件
+## Design-system 附加组件
 
-**design-system** 附加组件是一个限定于界面表面范围、可选的扩展，它为一个仓库提供一份 `DESIGN.md`——一个 Markdown 设计系统文件，任何编码代理都会读取它，以生成与仓库自身约定一致的界面输出。它涵盖三个**配置档（profile）**，各自从真实文件中独立检测并叠加进同一份单一文件：**visual-ui**（渲染出来的 Web/移动/桌面 UI）、**cli-output**（带样式的终端输出：语义化颜色、面板与加载指示器等输出组件、布局约定、TTY/`NO_COLOR` 降级），以及 **conversational**（产品在聊天或电子邮件上说话：语态与语域、消息结构、按平台的渲染及纯文本回退）。它会对仓库真实的设计来源（CSS 自定义属性、一份 Tailwind 配置、token 文件、组件样式——或一个 CLI 显示模块，或消息组装辅助函数）进行推理，而非复制一个品牌文件，并核查各配置档的完整性：可视化文本配对满足 WCAG AA 对比度、颜色绝不是终端输出中含义的唯一载体、富消息具备纯文本回退，以及 token 引用能够解析。它会调和一份既有的 `DESIGN.md`，而不是将其覆盖。
-
-该文件位于 `docs/DESIGN.md`，与仓库的其他规范并列，并从 `AGENTS.md` 引用，使代理以发现其余文档的相同方式发现它（仅当没有 `docs/` 目录树时才使用仓库根目录）。发现凭引用进行，而非凭物理位置。各配置档的强度不同：**visual-ui 在检测到时默认开启**——当存在可视化 UI 表面时，接入会在信任模式下应用它，并在引导模式下强烈推荐它——而 **cli-output 与 conversational 在检测到时被推荐，并且始终先询问，绝不自动应用**。该附加组件绝不会为没有任何界面表面的仓库提供（纯库、headless 服务、仅基础设施的仓库），而一个不带任何附加组件的仓库仍完全符合规范。一份在配置档存在之前创建的 `DESIGN.md` 是一份有效的单配置档可视化文件——无需迁移。
-
-这份仓库级的设计系统文件，区别于按特性的技术设计文档（工具绑定式规范驱动工作流中那种“需求 → 设计 → 任务”的 `design.md`）。DWP 不附带任何独立的按特性设计文档原型：一份计划的 README、每项任务的验收标准，以及各验证关卡，已经覆盖了那一角色。该附加组件填补了那一角色未覆盖的唯一空白：持久的、仓库原生的界面设计上下文。
+参见已发布附加组件下的 [Design system](/kit/design-system)。仓库级 `DESIGN.md` 与按功能的技术设计文档不同：DWP 的计划 README、任务验收标准与验证关卡已涵盖按功能的设计。design-system 附加组件填补持久的、仓库原生的**界面**设计上下文。
 
 ## 预设
 
-预设把 DWP 适配到某一特定技术栈（Django、React、Go）。
+预设将 DWP 适配到特定技术栈（Django、React、Go、Astro + Svelte 等）。浏览[套件目录](/kit)。
 
 ## 适配器
 
-适配器把 DWP 命令映射到某一特定代理的命令系统（Claude Code、Cursor、Codex）。
+适配器将 DWP 命令映射到特定代理的命令系统（Claude Code、Cursor、Codex、Gemini、Copilot、OpenClaw 等）。适配器条目位于套件中各代理名称下。
 
 ## 示例
 
-示例展示 DWP 的实战（前后对比、示例计划、案例研究）。
+示例演示 DWP 实践：前后对比、示例计划、案例研究。参见 [Examples](/examples) 与 [Dogfood this site](/kit/dogfood-this-site)。
+
+## 符合性提醒
+
+仓库**必须**在**零**附加组件下完全符合规范。附加组件为分层可选能力——绝非前提条件。参见 [Conformance](/spec/conformance)。

@@ -1,8 +1,8 @@
 ---
 name: dailybot-health
 description: Announce agent online/offline status to Dailybot and receive pending messages from the team. Use for long-running or scheduled agents to stay visible and pick up instructions.
-version: "1.7.1"
-documentation_url: https://api.dailybot.com/skill.md
+version: "3.4.0"
+documentation_url: https://www.dailybot.com/skill.md
 user-invocable: false
 metadata: {"openclaw":{"emoji":"💚","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
 allowed-tools: Bash, Read, Grep, Glob
@@ -11,6 +11,8 @@ allowed-tools: Bash, Read, Grep, Glob
 # Dailybot Health Check
 
 You announce the agent's status (online, working, offline, degraded) to Dailybot so the team knows whether the agent is alive and what it's doing. Health check responses also deliver pending messages from the team.
+
+> **Requires `dailybot-cli >= 3.1.2`** (the skill-pack baseline). See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version).
 
 ---
 
@@ -210,4 +212,4 @@ Health checks must **never block your primary work**. If the CLI is missing, aut
 - [`../shared/auth.md`](../shared/auth.md) — authentication setup
 - [`../shared/http-fallback.md`](../shared/http-fallback.md) — HTTP API fallback patterns
 - **Live API spec:** `https://api.dailybot.com/api/swagger/`
-- **Full agent API skill:** `https://api.dailybot.com/skill.md`
+- **Full agent API skill:** `https://www.dailybot.com/skill.md`

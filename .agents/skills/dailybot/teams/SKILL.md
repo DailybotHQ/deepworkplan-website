@@ -1,8 +1,8 @@
 ---
 name: dailybot-teams
 description: Read and resolve teams visible to the authenticated user. Use when the developer references a team by name (for kudos targeting, member lookup, or routing context) and an agent needs to obtain its UUID. Other Dailybot skills (kudos, messages) delegate team-name resolution to this skill rather than duplicating the logic.
-version: "1.7.1"
-documentation_url: https://api.dailybot.com/skill.md
+version: "3.4.0"
+documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"👥","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
 allowed-tools: Bash, Read, Grep, Glob
@@ -10,7 +10,7 @@ allowed-tools: Bash, Read, Grep, Glob
 
 # Dailybot Teams
 
-> **Requires `dailybot-cli >= 1.10.0`** ([PyPI](https://pypi.org/project/dailybot-cli/1.10.0/), released 2026-05-26). `dailybot team list` and `dailybot team get` ship in CLI 1.10.0 — earlier versions don't expose the team commands at all. If `dailybot --version` reports below 1.10.0, ask the developer to run `dailybot upgrade`. See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version) for install commands and version-check tooling.
+> **Requires `dailybot-cli >= 3.1.2`** (the skill-pack baseline). `dailybot team list`, `dailybot team get`, and the account-context commands `dailybot me` / `org` / `user get` are all available. If `dailybot --version` is below 3.1.2, ask the developer to run `dailybot upgrade`. See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version) for install commands and version-check tooling.
 
 You help agents resolve and read teams visible to the logged-in user. Teams are how Dailybot groups people inside an organization — they're the targets for team-scoped kudos, the routing context for some messages, and the source of truth for "who's in X?".
 
@@ -18,11 +18,11 @@ This skill is primarily a **resolver dependency** for other Dailybot skills (mos
 
 ---
 
-## Auth model — user-scoped commands
+## Auth model — API key or login
 
-Team-read commands require a **Bearer token** (user session), not an API key. The developer must be logged in via `dailybot login`. This scopes results to the logged-in human's permissions — they only see teams the server allows them to see.
+Team-read commands accept **either** a Bearer login session (`dailybot login`) **or** an org API key (`DAILYBOT_API_KEY`). Results are scoped to the acting identity's permissions (the server resolves the API key's owner) — they only see teams the server allows them to see.
 
-If the developer only has an API key (`DAILYBOT_API_KEY`), guide them through `dailybot login` first. API keys authenticate agent-scoped endpoints (`dailybot agent ...`), not user-scoped ones.
+If the developer has only an API key, team commands still work — the CLI falls back to `X-API-KEY`.
 
 ---
 
@@ -49,6 +49,7 @@ Never imply the team doesn't exist — only that it isn't visible to this caller
 - The developer asks "what teams am I in?", "list my teams", "show org teams".
 - The developer asks "who's in the Engineering team?", "members of QA".
 - Before any `dailybot kudos give --team ...` invocation, to resolve the team name → UUID.
+- The developer asks "who am I logged in as?", "what's my role?", "which org am I in?", or wants one user's profile by UUID → see **Step 4.5** (`dailybot me` / `dailybot org` / `dailybot user get`).
 
 Do **not** use this skill to enumerate org members when the goal is to recognize a single person — route that through `dailybot-kudos` (which uses the user directory). Use teams for *team-scoped* operations.
 
@@ -58,13 +59,13 @@ Do **not** use this skill to enumerate org members when the goal is to recognize
 
 Read and follow the authentication steps in [`../shared/auth.md`](../shared/auth.md). That file covers CLI installation, login, API key setup, and agent profile configuration.
 
-**Additionally**, verify the developer has a user session (Bearer token):
+**Additionally**, confirm at least one credential is present (a login session or an API key):
 
 ```bash
 dailybot status --auth 2>&1
 ```
 
-If the output shows a logged-in user session, proceed. If not, guide them through `dailybot login` (see auth.md for the OTP flow). Team commands will not work with only an API key.
+If the output shows a logged-in user session **or** a configured API key, proceed. Otherwise guide them through `dailybot login` (see auth.md) or ask them to set `DAILYBOT_API_KEY`.
 
 If auth fails or the developer declines, skip and continue with your primary task.
 
@@ -167,6 +168,46 @@ Returns the team plus its membership when `--with-members` is set. Useful when t
 
 ---
 
+## Step 4.5 — Read a single user, and your own account context
+
+> **Baseline:** `user get`, `me`, and `org` are part of the `dailybot-cli >= 3.1.2` baseline.
+
+The org directory has always been readable in bulk via `dailybot user list`
+(names + UUIDs; emails hidden as PII). You can also read
+**one** user and your **own** account/org context.
+
+### `user get` — one user's profile
+
+```bash
+dailybot user get <user_uuid> [--include-email] [--json]
+```
+
+Returns a single user's profile (`GET /v1/users/<uuid>/`) — complements
+`dailybot user list`. Emails stay hidden by default; pass `--include-email` only
+when the developer actually needs the address (it's PII — see the privacy note
+above). Use this when you already have a UUID and want that one person's details
+without listing the whole org.
+
+### `dailybot me` / `dailybot org` — account context
+
+```bash
+dailybot me  [--include-email] [--json]   # the authenticated user + org context
+dailybot org [--json]                       # the org the credential is scoped to
+```
+
+- **`dailybot me`** (`GET /v1/me/`) — who the current credential belongs to:
+  name, role, org, UUID, and timezone. The fastest way to answer "who am I
+  logged in as?" or "what's my role?". `--include-email` adds the email.
+- **`dailybot org`** (`GET /v1/organization/`) — the organization the API key
+  or login session is scoped to (name, UUID, etc.). Answers "which org am I
+  acting in?".
+
+Both are on the FREE-plan Bearer allowlist (along with `dailybot status`), so
+they work even where other reads are plan-gated — see
+[`../shared/list-query-and-errors.md`](../shared/list-query-and-errors.md) § 6.
+
+---
+
 ## Step 5 — Cross-skill Resolver Convention
 
 When another Dailybot skill (notably `dailybot-kudos`) needs a team UUID from a name, it MUST go through this skill — not duplicate the `dailybot team list` parsing.
@@ -183,7 +224,7 @@ Concretely: a calling skill should invoke the same `dailybot team list --json` c
 
 See [`../shared/http-fallback.md`](../shared/http-fallback.md) for base patterns.
 
-**Important:** Team endpoints use **Bearer token** auth, not API key auth.
+**Important:** Team endpoints accept **either** Bearer token or `X-API-KEY` auth.
 
 ### List teams (role-scoped)
 
@@ -228,4 +269,4 @@ Team operations must **never block your primary work**. If the CLI is missing, a
 - [`../shared/http-fallback.md`](../shared/http-fallback.md) — HTTP API fallback patterns
 - [`../kudos/SKILL.md`](../kudos/SKILL.md) — primary consumer of this skill's resolver
 - **Live API spec:** `https://api.dailybot.com/api/swagger/`
-- **Full agent API skill:** `https://api.dailybot.com/skill.md`
+- **Full agent API skill:** `https://www.dailybot.com/skill.md`

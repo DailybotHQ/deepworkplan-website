@@ -22,6 +22,28 @@ What "already provides" means concretely:
 
 Anything else the profile may contain (future-proofing — the schema may grow) is still **safe to ignore** for your command line; the CLI itself reads the full file.
 
+### The `report` policy block (hooks, not flags)
+
+The profile may also carry a `report` object. It is **not** a command-line concern — you never translate it into or out of a flag — but it is a committed team policy the Dailybot hooks honour, so it's documented here for completeness:
+
+```json
+{
+  "name": "CLI",
+  "default_metadata": { "repo": "cli" },
+  "report": {
+    "min_interval_minutes": 30,
+    "nudge": true
+  }
+}
+```
+
+| `report` key | Effect | Default |
+|---|---|---|
+| `min_interval_minutes` | Minimum gap before the hooks surface another "you have unreported work" reminder for this repo. Raise it to make reminders less frequent. | `30` |
+| `nudge` | `false` turns hook reminders off repo-wide (manual `dailybot agent update` still works); `true` keeps them on. | `true` |
+
+This block is consumed by the deterministic hook reminders (`dailybot hook session-start` / `stop`), not by the report command itself. See [`../report/hooks.md`](../report/hooks.md) § "Per-repo controls" for the full hook policy (including the `.dailybot/disabled` kill-switch and `dailybot hook dismiss` snooze).
+
 ---
 
 ## How to detect the repo profile (mandatory pre-flight)
