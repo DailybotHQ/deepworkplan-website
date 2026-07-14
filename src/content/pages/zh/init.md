@@ -128,7 +128,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 在不带**任何**附加组件时即完全符合规范——绝不自动安装它们。
 
 - **Devcontainer 支持** —— 一个可复现、隔离的开发容器，具备持久的 AI-CLI 认证。
-- **Dailybot 集成** —— 四个生命周期事件（启动、重要任务、阻塞、完成）作为面向已在使用 Dailybot 的团队的尽力而为式进展报告，并可选启用自主的钩子强制层（`dailybot-cli >= 3.1.2`）。安装配套的 Dailybot 代理技能（3.4.0）还会暴露聊天、签到、表单创建、AI 询问等功能——该附加组件仅将报告接入 DWP 执行。核心方法论对 Dailybot 零依赖。
+- **Dailybot 集成** —— 四个生命周期事件（启动、重要任务、阻塞、完成）作为面向已在使用 Dailybot 的团队的尽力而为式进展报告，并可选启用自主的钩子强制层（`dailybot-cli >= 3.7.0`）。安装配套的 Dailybot 代理技能（3.10.3）还会暴露聊天、签到、表单创建、AI 询问、每仓库 API 密钥等功能——该附加组件仅将报告接入 DWP 执行。核心方法论对 Dailybot 零依赖。
 - **Dependency upgrade** —— 包管理器无关、分批次、经验证、可回退的升级。被
   采纳时，它会安装 `/lib-upgrade` 命令。
 - **Design system** —— 可选的 `docs/DESIGN.md`，仅面向具备被检测到的界面表面的仓库

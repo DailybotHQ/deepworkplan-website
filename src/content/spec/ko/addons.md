@@ -41,8 +41,8 @@ section: Addons
 에이전트 진행 가시성을 위한 개발자 **Dailybot 팀**에 대한 옵트인 연결.
 
 - **키트 페이지:** [Dailybot](/kit/dailybot) — 전체 기능 참조
-- **DWP 애드온이 연결하는 것:** dailybot `report` 서브스킬을 통한 네 가지 플랜 라이프사이클 보고(kickoff, significant task, blocked, completion); 선택적 결정론적 훅 강제(`dailybot hook`, CLI `>= 3.1.2`)
-- **페어링 스킬:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)(현재 **3.4.0**) 설치 시 **13가지 기능** — Slack/Teams/Discord/Google Chat 채팅, 체크인, 폼 작성, Ask AI, kudos, 이메일 등. DWP 애드온은 **report**만 연결; 다른 기능은 Dailybot 스킬을 직접 호출
+- **DWP 애드온이 연결하는 것:** dailybot `report` 서브스킬을 통한 네 가지 플랜 라이프사이클 보고(kickoff, significant task, blocked, completion); 선택적 결정론적 훅 강제(`dailybot hook`, CLI `>= 3.7.0`)
+- **페어링 스킬:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)(현재 **3.10.3**) 설치 시 **14가지 기능** — Slack/Teams/Discord/Google Chat 채팅, 체크인, 폼 작성, Ask AI, kudos, 저장소별 API 키(`.dailybot/env.json`), 이메일 등. DWP 애드온은 **report**만 연결; 다른 기능은 Dailybot 스킬을 직접 호출
 - **인증:** Dailybot 스킬에 완전 위임(`dailybot login` 또는 `DAILYBOT_API_KEY`); 이 애드온은 자격 증명을 저장하지 않음
 - **벤더 중립 가드레일:** 핵심 DWP는 Dailybot 의존성 **제로**; 모든 사람에게 자동 설치하지 않음
 - **제안 시점:** 개발자나 팀이 이미 Dailybot을 사용하거나 팀 보고를 명시적으로 요청

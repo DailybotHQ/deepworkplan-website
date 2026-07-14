@@ -10,7 +10,7 @@ This pre-flight closes that gap. Run it once per turn (or once per work session 
 
 ## The rule (one line)
 
-> Before constructing any `dailybot <subcommand>` command line, walk up from `$PWD` looking for a `.dailybot/` directory. If `.dailybot/profile.json` exists in the closest ancestor, **omit from your command every flag the profile already provides**.
+> Before constructing any `dailybot <subcommand>` command line, walk up from `$PWD` looking for a `.dailybot/` directory. If `.dailybot/profile.json` exists in the closest ancestor, **omit from your command every flag the profile already provides**. (If `.dailybot/env.json` also exists, the CLI reads it automatically for credentials + URL overrides — see [`shared/env-json.md`](env-json.md); do not attempt to override its keys from the command line.)
 
 What "already provides" means concretely:
 
@@ -147,12 +147,24 @@ This applies to: `dailybot-report`, `dailybot-chat`, `dailybot-kudos`, `dailybot
 
 ## What about `.dailybot/` files other than `profile.json`?
 
-The schema may grow. Today the only file the CLI reads from `.dailybot/` is `profile.json`. If you find other files in `.dailybot/`, do not act on them — just leave them alone. A future skill-pack release will add specific guidance for any new file.
+Since CLI **3.7.0**, `.dailybot/` also supports an **opt-in, gitignored** file called `env.json` that carries per-repo API keys + URLs for one or more environments. It is orthogonal to `profile.json` — different purpose, different lifecycle, different security posture:
+
+| File | Committed? | Purpose |
+|---|---|---|
+| `.dailybot/profile.json` | **Yes** (tracked) | *Identity* — how reports get signed (team-shared) |
+| `.dailybot/env.json` | **No** (gitignored) | *Auth context* — which org the CLI talks to (per-developer) |
+
+If the developer asks about per-repo API keys, staging/local dev orgs, or "logging into different orgs in different repos", route them to [`shared/env-json.md`](env-json.md) instead — that file has the full workflow, security rules, and CLI commands.
+
+Do **not** attempt to read `env.json` directly (`cat` etc.) from an agent context — it contains API keys. Use `dailybot env show` / `dailybot env list`, which mask them automatically.
+
+Any other file you find in `.dailybot/` is out of scope for this skill pack — leave it alone.
 
 ---
 
 ## See also
 
 - [`shared/auth.md`](./auth.md) — full authentication / profile resolution model (Bearer token, API key, profile slug, env var).
+- [`shared/env-json.md`](./env-json.md) — the sibling `env.json` file (per-repo API keys + URLs, gitignored, CLI 3.7.0+).
 - [CLI auth-resolution order](https://github.com/DailybotHQ/cli/blob/main/AGENTS.md#14-auth-resolution-order-do-not-break) — the per-field precedence the CLI implements (this doc is the agent-side mirror).
 - [CLI configuration reference](https://github.com/DailybotHQ/cli/blob/main/docs/CONFIGURATION.md) — the full `.dailybot/profile.json` schema, security rules, and migration notes.

@@ -1,7 +1,7 @@
 ---
 name: dailybot-chat
 description: Send and edit Dailybot bot messages on the team's connected chat platform (Slack, Microsoft Teams, Discord, Google Chat) — to user DMs, channels, or whole teams. Supports report-style threads (one headline + replies, in one call) and editing the parent or any reply afterward. Use when the developer says "send a message to my Slack channel", "ping the team in chat", "post the deploy report to #releases", or wants to update a previously sent bot message. Works headless for agents.
-version: "3.4.0"
+version: "3.10.3"
 documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"💬","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
@@ -10,7 +10,7 @@ allowed-tools: Bash, Read, Grep, Glob
 
 # Dailybot Chat
 
-> **Requires `dailybot-cli >= 3.1.2`** (the skill-pack baseline). The `dailybot chat send` / `chat update` command group, the `--thread-message` flag (≤10 replies per call, each independently editable), the login-Bearer auth path on `/v1/send-message/` (send without an org API key), and `--send-as-user` / `--send-as-me` (admin-only) are all available. If `dailybot --version` is below 3.1.2, ask the developer to run `dailybot upgrade`. See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version) for install commands and version-check tooling.
+> **Requires `dailybot-cli >= 3.7.0`** (the skill-pack baseline). The `dailybot chat send` / `chat update` command group, the `--thread-message` flag (≤10 replies per call, each independently editable), the login-Bearer auth path on `/v1/send-message/` (send without an org API key), and `--send-as-user` / `--send-as-me` (admin-only) are all available. If `dailybot --version` is below 3.7.0, ask the developer to run `dailybot upgrade`. See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version) for install commands and version-check tooling.
 
 You send **Dailybot bot messages** on the developer's behalf to the organization's connected chat platform (Slack, Microsoft Teams, Discord, Google Chat) — to user DMs, channels, or whole teams (expanded to member DMs server-side). This skill is the right surface for:
 

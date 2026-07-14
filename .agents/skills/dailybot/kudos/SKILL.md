@@ -1,7 +1,7 @@
 ---
 name: dailybot-kudos
 description: Give kudos to a teammate or to an entire team via Dailybot to recognize their contributions. Use when the developer wants to thank or recognize one person, or recognize a whole team (e.g. "kudos al equipo Engineering"). Do not use for general progress reports — those go through dailybot-report.
-version: "3.4.0"
+version: "3.10.3"
 documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"🏆","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
@@ -10,7 +10,7 @@ allowed-tools: Bash, Read, Grep, Glob
 
 # Dailybot Kudos
 
-> **Requires `dailybot-cli >= 3.1.2`** (the skill-pack baseline). Giving kudos to a user (`--to`) or a team (`--team`), and browsing kudos (`list` / `org` / `wall-of-fame`), are all available. If `dailybot --version` is below 3.1.2, ask the developer to run `dailybot upgrade`. See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version) for install commands and version-check tooling.
+> **Requires `dailybot-cli >= 3.7.0`** (the skill-pack baseline). Giving kudos to a user (`--to`) or a team (`--team`), and browsing kudos (`list` / `org` / `wall-of-fame`), are all available. If `dailybot --version` is below 3.7.0, ask the developer to run `dailybot upgrade`. See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version) for install commands and version-check tooling.
 
 You help developers recognize teammates by sending kudos through Dailybot. Kudos are team-visible appreciation messages — the whole team sees them in Dailybot's recognition feed and in connected chat platforms (Slack, Teams, Discord).
 
@@ -32,7 +32,7 @@ If the developer has only an API key, kudos still work — the CLI falls back to
 ## Browsing kudos (read)
 
 > **Baseline:** the three read commands below (`kudos list`, `kudos org`,
-> `kudos wall-of-fame`) are part of the `dailybot-cli >= 3.1.2` baseline.
+> `kudos wall-of-fame`) are part of the `dailybot-cli >= 3.7.0` baseline.
 
 Beyond *giving* kudos, an agent can **browse** the recognition feed and read
 org-wide stats. All three return the standard pagination envelope where
@@ -92,6 +92,43 @@ dailybot kudos wall-of-fame --limit 10 --json
 Returns the recognition leaderboard — the top receiver, the top giver, and the
 ranked leaderboard entries. `--limit N` caps the number of leaderboard entries
 returned.
+
+**Parse the payload carefully — three fields are commonly misread:**
+
+- Every person is **nested under a `user` key** — the name lives at
+  `top_receiver.user.full_name` (and likewise in `top_giver` and in every
+  leaderboard entry), **not** at a top-level `full_name`.
+- `leaderboard` is itself a **paginated envelope** `{count, next, previous,
+  results}` — the ranked entries are in `leaderboard.results`, and the total
+  ranked members is `leaderboard.count` (do not count the envelope's keys).
+- `leaderboard_summary` is the **caller's own standing**: `{position, total}`.
+
+```json
+{
+  "top_receiver": { "user": { "uuid": "…", "full_name": "…", "image": "…" },
+                    "kudos_received": 11, "kudos_given": 5,
+                    "total_plus_kudos_received": 18, "total_plus_kudos_given": 2 },
+  "top_giver":    { "user": { "…": "…" }, "kudos_given": 14 },
+  "dna_distribution": [ { "company_value": { "id": "…", "value": "…", "emoji": "…" },
+                          "count": 10, "percentage": 38.5 } ],
+  "leaderboard": { "count": 11, "next": false, "previous": false,
+                   "results": [ { "position": 1, "user": { "…": "…" },
+                                  "score": 11, "total_plus_kudos": 18 } ] },
+  "leaderboard_summary": { "position": 1, "total": 11 }
+}
+```
+
+`dna_distribution` breaks the kudos down by the org's company values.
+
+> **Version note:** the human (non-`--json`) rendering of this command was
+> fixed in [`dailybot-cli` v3.7.2](https://github.com/DailybotHQ/cli/releases/tag/v3.7.2)
+> ([DailybotHQ/cli#71](https://github.com/DailybotHQ/cli/pull/71), on
+> [PyPI](https://pypi.org/project/dailybot-cli/)) — since that release it shows
+> the full wall of fame: top receiver/giver with counts, the caller's position,
+> the company-values distribution, and the ranked leaderboard table. Older CLI
+> versions render an incomplete summary panel (dashes instead of names), so
+> always prefer `--json` when parsing, and suggest `dailybot upgrade` if the
+> developer sees dashes.
 
 ---
 
@@ -462,6 +499,7 @@ Sending kudos must **never block your primary work**. If the CLI is missing, aut
 
 - [`../shared/auth.md`](../shared/auth.md) — authentication setup
 - [`../shared/http-fallback.md`](../shared/http-fallback.md) — HTTP API fallback patterns
+- [`../shared/dashboard-urls.md`](../shared/dashboard-urls.md) — full dashboard URL catalog (kudos detail, wall of fame, etc.)
 - [`../teams/SKILL.md`](../teams/SKILL.md) — team-name resolver (called by this skill)
 - **Live API spec:** `https://api.dailybot.com/api/swagger/`
 - **Full agent API skill:** `https://www.dailybot.com/skill.md`

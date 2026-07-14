@@ -149,7 +149,7 @@ design-system) y ofrece cada uno como una opción explícita. Un repositorio es 
 
 - **Soporte de devcontainer** — un contenedor de desarrollo reproducible y aislado con autenticación
   de CLI de IA persistente.
-- **Integración con Dailybot** — cuatro eventos del ciclo de vida (kickoff, tarea significativa, bloqueado, finalización) como informes de progreso de mejor esfuerzo para equipos que ya usan Dailybot, con refuerzo autónomo opcional mediante hooks (`dailybot-cli >= 3.1.2`). La instalación del skill de agente Dailybot emparejado (3.4.0) también expone chat, check-ins, autoría de formularios, preguntar a la IA y más — el addon solo conecta reportes con la ejecución de DWP. La metodología central no tiene dependencia de Dailybot.
+- **Integración con Dailybot** — cuatro eventos del ciclo de vida (kickoff, tarea significativa, bloqueado, finalización) como informes de progreso de mejor esfuerzo para equipos que ya usan Dailybot, con refuerzo autónomo opcional mediante hooks (`dailybot-cli >= 3.7.0`). La instalación del skill de agente Dailybot emparejado (3.10.3) también expone chat, check-ins, autoría de formularios, preguntar a la IA, claves API por repo y más — el addon solo conecta reportes con la ejecución de DWP. La metodología central no tiene dependencia de Dailybot.
 - **Actualización de dependencias** — actualizaciones independientes del gestor de paquetes, por lotes,
   validadas y revertibles. Cuando se acepta, instala el comando `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` opcional para repos con una superficie de interfaz detectada

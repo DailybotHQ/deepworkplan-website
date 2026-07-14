@@ -45,7 +45,7 @@ treat that as session-wide consent.
 
 > [!NOTE]
 > **Installing a specific version.** Both installers default to the latest
-> release but accept a version pin (the skill-pack baseline is **`dailybot-cli >= 3.1.2`**):
+> release but accept a version pin (the skill-pack baseline is **`dailybot-cli >= 3.7.0`**):
 > - `install.sh` — set `DAILYBOT_VERSION=<version>` in the environment, or
 >   pass `bash -s -- --version <version>`. Example (drop it into the verified
 >   snippet below, right before `bash /tmp/install.sh`):
@@ -355,27 +355,88 @@ Dailybot → Settings → API Keys.
 
 ---
 
-## 4. Auth model — API key *or* login, almost everywhere
+## 4. Auth model — unified Bearer-first priority everywhere
 
-As of the CLI's full-parity baseline (`dailybot-cli >= 3.1.2`, paired with the
-matching API server rollout), **every authenticated CLI command accepts either
-credential** — a Bearer login session **or** an org API key. The server resolves
-the acting user from the API key's `owner`, so the two paths behave identically.
-This is what lets an autonomous agent do **everything** with only
-`DAILYBOT_API_KEY` set — including `dailybot ask` (the AI chat).
+**All endpoints use the same auth priority: Bearer token first, API key
+second** (unified in CLI 3.5.1). There is no longer a split where agent
+endpoints preferred API key and user endpoints preferred Bearer — the CLI
+now behaves consistently everywhere. The server accepts both credentials on
+every `/v1/` endpoint, so the two paths are functionally identical.
 
-| Scope | Accepted credentials | Used by |
-|-------|----------------------|---------|
-| **Agent endpoints** | API key (`X-API-KEY`) preferred, Bearer fallback | `dailybot agent update`, `dailybot agent health`, `dailybot agent email send` |
-| **User / CLI / AI commands** | Bearer token preferred, API key fallback — **either works** | `dailybot status`, `update`, `checkin`, `form`, `kudos`, `team`, `user`, `chat`, `ask` (AI chat) |
+One deliberate exception (CLI >= 3.7.0): when the API key resolves from a
+repo's `.dailybot/env.json` active profile, the client sends `X-API-KEY`
+**first** — the per-repo key must beat the global Bearer session even against
+a server that would accept the Bearer, and the session token must never be
+transmitted to the env.json server. The 401/403 alt-credential retry covers
+the reverse direction. See [`env-json.md`](env-json.md).
+
+| Scope | Auth priority | Used by |
+|-------|--------------------------------|---------|
+| **All endpoints** | Bearer preferred → API key fallback | Every command: `agent update`, `form submit`, `kudos`, `chat send`, `ask`, etc. |
 | **Login lifecycle** | OTP / Bearer only | `dailybot login`, `dailybot logout` (revokes the session token) |
 
-Both credentials can coexist — the CLI stores them separately, and a developer
-can hold an API key and a Bearer session at the same time. The CLI prefers the
-login session when present and falls back to the API key.
+### Per-repo API key override (`.dailybot/env.json`) — CLI >= 3.7.0
 
-> **Parity.** All user-scoped commands (`checkin`, `form`, `kudos`, `user`) and
-> the AI chat accept an org API key **or** a Bearer login session. Only
+Since `dailybot-cli >= 3.7.0`, the CLI also honours an **opt-in, gitignored**
+per-repo file at `<repo>/.dailybot/env.json` that carries API keys + optional
+URL overrides for one or more environments. When present with an *active*
+profile, it sits **just below** explicit `--profile` / `--api-url` flags in
+the auth-resolution order — above `agents.json`, above `DAILYBOT_API_KEY`,
+above `config.json`, above the login Bearer.
+
+If the developer asks about "per-repo API keys", "staging vs prod",
+"different orgs per project", or wants to override auth without touching
+env vars, route them to [`shared/env-json.md`](env-json.md) — it has the
+full schema, CLI commands (`dailybot env add / use / show / list / remove /
+off / on`), security posture, and worked examples.
+
+`env.json` is orthogonal to `profile.json`:
+
+- `profile.json` = identity (tracked in git, team-shared).
+- `env.json` = auth context (gitignored, per-developer).
+
+Neither field overlaps. Both can be present.
+
+Both credentials can coexist — the CLI stores them separately, and a developer
+can hold an API key and a Bearer session at the same time.
+
+### Automatic fallback on 401 or 403
+
+When the primary credential is rejected (HTTP **401 or 403**), the CLI
+automatically retries once with the alternative credential if available.
+This is bidirectional:
+
+- **Bearer expired** → retries with API key
+- **API key stale/revoked** → retries with Bearer session
+
+Both `_agent_request()` (agent-scoped endpoints) and `_request()` (all
+user-scoped endpoints — `auth_status`, `checkin`, `form`, `kudos`, `chat`,
+`ask`, `user`, `team`, ...) implement identical retry semantics. Login-
+lifecycle endpoints (`request_code`, `verify_code`, `logout`, agent
+registration) never retry because the credential IS the thing being
+negotiated or invalidated.
+
+The retry covers three real-world cases at zero UX cost:
+
+1. **`env.json` active + stale Bearer.** Prod OTP session on disk, `cd` into
+   a repo whose `env.json` points at `http://localhost:8000` — the local
+   API rejects the Bearer (403), the retry uses the `env.json` API key,
+   the command succeeds. `dailybot status --auth` then reports
+   `Authenticated via API key` (not `login (OTP)`) — the report reflects
+   what actually worked, not what was tried first.
+2. **Bearer expired** in normal single-org use → falls back to a locally
+   configured API key without a login prompt.
+3. **API key revoked** while a valid login session exists → falls back to
+   the Bearer.
+
+Retrying on **403** in addition to 401 is required because Django/DRF
+frequently returns 403 for rejected credentials (see
+[DRF authentication docs](https://www.django-rest-framework.org/api-guide/authentication/#unauthorized-and-forbidden-responses)).
+Relying on 401 alone leaves the local-Django + `env.json` case broken.
+
+> **Parity.** All commands — user-scoped (`checkin`, `form`, `kudos`, `user`),
+> agent-scoped (`agent update`, `agent health`), and the AI chat (`ask`) —
+> accept an org API key **or** a Bearer login session. Only
 > `dailybot logout` is Bearer-only.
 
 ### Checking session status
@@ -405,29 +466,6 @@ automatically if it does not exist.
 ### Commands need *some* credential
 
 Every authenticated command works with **either** a login session or an API
-key; they exit with a non-zero "not authenticated" code only when **neither**
-is present. The single command that still requires a Bearer session is
-`dailybot logout` (it revokes the session token itself). Guide the developer
-through `dailybot login` or ask them to set `DAILYBOT_API_KEY`.
-
-### Config directory override
-
-The `DAILYBOT_CONFIG_DIR` environment variable overrides where all credential
-and config files are stored (default: `~/.config/dailybot/`):
-
-```bash
-export DAILYBOT_CONFIG_DIR=/tmp/my-sandbox-config
-dailybot login --email me@example.com
-```
-
-This is useful for development sandboxes, CI environments, or testing
-scenarios with isolated config directories. The directory is created
-automatically if it does not exist.
-
-### User-scoped commands fail without a Bearer session
-
-If a developer tries to use `dailybot checkin`, `dailybot form`,
-`dailybot kudos`, or `dailybot user` with only an API key and no login
-session, the CLI exits with code `3` (not authenticated). Guide them
-through `dailybot login` — these commands require the human's own
-session, not an agent key.
+key. Only `dailybot logout` requires a Bearer session (it revokes the session
+token itself). If neither credential is present, the CLI exits with a clear
+error suggesting `dailybot login` or setting `DAILYBOT_API_KEY`.

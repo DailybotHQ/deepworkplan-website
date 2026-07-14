@@ -41,8 +41,8 @@ section: Addons
 डेवलपर की **Dailybot टीम** से ऑप्ट-इन कनेक्शन एजेंट प्रगति दृश्यता के लिए।
 
 - **Kit पृष्ठ:** [Dailybot](/kit/dailybot) — पूर्ण क्षमता संदर्भ
-- **DWP ऐडऑन क्या जोड़ता है:** dailybot `report` sub-skill के माध्यम से चार योजना-जीवनचक्र रिपोर्ट (kickoff, significant task, blocked, completion); वैकल्पिक deterministic हुक प्रवर्तन (`dailybot hook`, CLI `>= 3.1.2`)
-- **जोड़ी गई स्किल:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (वर्तमान में **3.4.0**) इंस्टॉल करने से **13 क्षमताएँ** — Slack/Teams/Discord/Google Chat पर chat, check-ins, forms authoring, ask AI, kudos, email, और अधिक। DWP ऐडऑन केवल **report** जोड़ता है; अन्य क्षमताएँ Dailybot स्किल के माध्यम से सीधे invoke होती हैं
+- **DWP ऐडऑन क्या जोड़ता है:** dailybot `report` sub-skill के माध्यम से चार योजना-जीवनचक्र रिपोर्ट (kickoff, significant task, blocked, completion); वैकल्पिक deterministic हुक प्रवर्तन (`dailybot hook`, CLI `>= 3.7.0`)
+- **जोड़ी गई स्किल:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (वर्तमान में **3.10.3**) इंस्टॉल करने से **14 क्षमताएँ** — Slack/Teams/Discord/Google Chat पर chat, check-ins, forms authoring, ask AI, kudos, per-repo API keys (`.dailybot/env.json`), email, और अधिक। DWP ऐडऑन केवल **report** जोड़ता है; अन्य क्षमताएँ Dailybot स्किल के माध्यम से सीधे invoke होती हैं
 - **Auth:** पूर्णतः Dailybot स्किल को सौंपा (`dailybot login` या `DAILYBOT_API_KEY`); यह ऐडऑन कभी credentials संग्रहीत नहीं करता
 - **Vendor-neutral guardrail:** कोर DWP की Dailybot पर **शून्य** निर्भरता; कभी सभी के लिए स्वतः इंस्टॉल न करें
 - **कब प्रस्तावित:** डेवलपर या टीम पहले से Dailybot उपयोग करती हो, या स्पष्ट रूप से टीम रिपोर्टिंग माँगे

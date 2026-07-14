@@ -41,8 +41,8 @@ Thiết lập `.devcontainer/` + `docker/` dựa trên compose, suy luận từ 
 Kết nối opt-in tới **nhóm Dailybot** của nhà phát triển để hiển thị tiến độ agent.
 
 - **Trang kit:** [Dailybot](/kit/dailybot) — tham chiếu khả năng đầy đủ
-- **Addon DWP kết nối:** bốn báo cáo vòng đời kế hoạch (kickoff, significant task, blocked, completion) qua sub-skill dailybot `report`; thực thi hook xác định tùy chọn (`dailybot hook`, CLI `>= 3.1.2`)
-- **Skill đi kèm:** cài [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (hiện tại **3.4.0**) mở **13 khả năng** — chat trên Slack/Teams/Discord/Google Chat, check-in, tác giả biểu mẫu, ask AI, kudos, email và hơn thế. Addon DWP chỉ kết nối **report**; khả năng khác được gọi trực tiếp qua skill Dailybot
+- **Addon DWP kết nối:** bốn báo cáo vòng đời kế hoạch (kickoff, significant task, blocked, completion) qua sub-skill dailybot `report`; thực thi hook xác định tùy chọn (`dailybot hook`, CLI `>= 3.7.0`)
+- **Skill đi kèm:** cài [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (hiện tại **3.10.3**) mở **14 khả năng** — chat trên Slack/Teams/Discord/Google Chat, check-in, tác giả biểu mẫu, ask AI, kudos, API key theo repo (`.dailybot/env.json`), email và hơn thế. Addon DWP chỉ kết nối **report**; khả năng khác được gọi trực tiếp qua skill Dailybot
 - **Auth:** hoàn toàn hoãn sang skill Dailybot (`dailybot login` hoặc `DAILYBOT_API_KEY`); addon này không bao giờ lưu thông tin xác thực
 - **Rào vendor-neutral:** DWP cốt lõi **không** phụ thuộc Dailybot; không bao giờ tự cài cho mọi người
 - **Khi đề xuất:** nhà phát triển hoặc nhóm đã dùng Dailybot, hoặc yêu cầu rõ ràng báo cáo nhóm

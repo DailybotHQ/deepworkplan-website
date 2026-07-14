@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "可选 DWP 附加组件：将计划生命周期连接到 Dailybot 团队，可选钩子强制层，以及完整的 Dailybot 代理技能 3.4.0（聊天、签到、表单、Ask AI 等）。"
+description: "可选 DWP 附加组件：将计划生命周期连接到 Dailybot 团队，可选钩子强制层，以及完整的 Dailybot 代理技能 3.10.3（聊天、签到、表单、Ask AI 等）。"
 kind: addon
 lang: zh
 order: 2
@@ -23,7 +23,7 @@ order: 2
 
 ## 此附加组件接入的内容（刻意保持精简）
 
-DWP Dailybot 附加组件**不会**重新发明 Dailybot。它将计划执行连接到 dailybot **`report`** 子技能，并可选择提交 harness 钩子。其余一切——安装、同意、认证、书写风格——均**延后**至官方 [Dailybot 代理技能](https://github.com/DailybotHQ/agent-skill)（当前 **3.4.0**）。
+DWP Dailybot 附加组件**不会**重新发明 Dailybot。它将计划执行连接到 dailybot **`report`** 子技能，并可选择提交 harness 钩子。其余一切——安装、同意、认证、书写风格——均**延后**至官方 [Dailybot 代理技能](https://github.com/DailybotHQ/agent-skill)（当前 **3.10.3**）。
 
 ### 四个生命周期事件
 
@@ -40,7 +40,7 @@ DWP Dailybot 附加组件**不会**重新发明 Dailybot。它将计划执行连
 
 ### 可选钩子强制层
 
-使用 `dailybot-cli >= 3.1.2` 时，此附加组件**可以**提交仓库级 harness 钩子（`dailybot hook session-start | activity | post-commit | stop | dismiss`），由本地每仓库台账支撑。当遗漏生命周期事件时，harness 在回合结束时提醒代理——对提示词指令逐渐失效的长时间无人值守会话至关重要。
+使用 `dailybot-cli >= 3.7.0` 时，此附加组件**可以**提交仓库级 harness 钩子（`dailybot hook session-start | activity | post-commit | stop | dismiss`），由本地每仓库台账支撑。当遗漏生命周期事件时，harness 在回合结束时提醒代理——对提示词指令逐渐失效的长时间无人值守会话至关重要。
 
 成功的生命周期报告会**重置**钩子台账，因此两层机制不会重复报告。钩子命令仅读取本地状态并始终以 `0` 退出。
 
@@ -73,7 +73,7 @@ DWP Dailybot 附加组件**不会**重新发明 Dailybot。它将计划执行连
 | **更新现有技能** | `npx skills update dailybot` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Git 克隆** | `git clone https://github.com/DailybotHQ/agent-skill.git` + `./setup.sh` |
-| **Dailybot CLI**（最低 `>= 3.1.2`） | 首次使用时由技能通过已验证的 `shared/auth.md` 安装；或 `pip install 'dailybot-cli>=3.1.2'`、Homebrew，或 [cli.dailybot.com](https://cli.dailybot.com) 上的校验和验证安装器 |
+| **Dailybot CLI**（最低 `>= 3.7.0`） | 首次使用时由技能通过已验证的 `shared/auth.md` 安装；或 `pip install 'dailybot-cli>=3.7.0'`、Homebrew，或 [cli.dailybot.com](https://cli.dailybot.com) 上的校验和验证安装器 |
 
 检查版本：`dailybot --version` 和 `dailybot version --check`。升级：`dailybot upgrade`。
 
@@ -82,13 +82,14 @@ DWP Dailybot 附加组件**不会**重新发明 Dailybot。它将计划执行连
 此附加组件**从不**提示输入电子邮件、OTP 或 API 密钥，也**从不**存储凭据。认证由 Dailybot 技能的 [`shared/auth.md`](https://github.com/DailybotHQ/agent-skill/blob/main/skills/dailybot/shared/auth.md) 负责：
 
 - `dailybot login`（电子邮件 OTP），或
-- `DAILYBOT_API_KEY` / `dailybot config key=...`
+- `DAILYBOT_API_KEY` / `dailybot config key=...`，或
+- 可选的、被 gitignore 忽略的 `.dailybot/env.json` 每仓库密钥文件（`dailybot env add/use`，CLI `>= 3.7.0`），使开发者能够在不同仓库中登录不同组织。
 
-若拒绝认证或认证不可用，则静默跳过报告——工作继续进行。
+认证解析采用 **Bearer 优先**：会话令牌优先，并在遇到 `401`/`403` 时透明地从 Bearer→API 密钥重试，因此过期令牌绝不会阻塞有效密钥。若拒绝认证或认证不可用，则静默跳过报告——工作继续进行。
 
-## 配套的 Dailybot 技能——13 项能力（3.4.0）
+## 配套的 Dailybot 技能——14 项能力（3.10.3）
 
-安装 Dailybot 代理技能带来的远不止 DWP 附加组件所接入的内容。官方技能包（技能 **3.4.0**，CLI **>= 3.1.2**，当前发布 **3.2.1**）暴露 **13 个协调子技能**：
+安装 Dailybot 代理技能带来的远不止 DWP 附加组件所接入的内容。官方技能包（技能 **3.10.3**，CLI 基线 **>= 3.7.0**，当前发布 **3.7.3**）暴露 **14 个协调子技能**：
 
 | 子技能 | 功能 |
 |--------|------|
@@ -102,9 +103,10 @@ DWP Dailybot 附加组件**不会**重新发明 Dailybot。它将计划执行连
 | **Check-ins** | 完成站会；**编写**签到（日程、参与者、问题、提醒、AI 设置） |
 | **Kudos** | 表彰队友或整个团队；浏览认可动态、组织动态、荣誉墙 |
 | **Teams** | 列出团队、查看成员、将名称解析为 UUID；`me`、`org`、用户资料 |
-| **Forms** | 列出、提交、更新、流转表单；**编写**表单（工作流状态、权限、ChatOps） |
+| **Forms** | 列出（现默认**组织范围**，可用 `--mine` 和 `--owner` 收窄）、提交、更新、流转表单；**编写**表单（工作流状态、权限、ChatOps）；分页、搜索与日期筛选 |
 | **Workflows** | 读取组织工作流（`workflow list` / `workflow get`；只读） |
 | **Report channels** | 发现用于表单或签到的频道 UUID |
+| **Per-repo API keys** | 管理 `.dailybot/env.json`——一个可选的、被 gitignore 忽略的、按环境组织的 API 密钥 + URL 文件（`dailybot env add / use / show / list / remove / off / on`，CLI `>= 3.7.0`） |
 
 **DWP 附加组件仅将 `report` 接入计划执行。** 直接调用 Dailybot 技能处理其余一切——例如，向 `#releases` 发布部署摘要、完成站会，或请 Dailybot AI 总结签到趋势。
 
