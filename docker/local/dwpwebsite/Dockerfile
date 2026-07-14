@@ -100,7 +100,7 @@ RUN corepack pnpm add -g @openai/codex
 # avoiding the click 8.x conflict with the system-provided python3-click.
 # Binary lands in ~/.local/bin (already on PATH); auth/config lives in
 # ~/.config/dailybot, persisted across rebuilds via the dailybot_data volume.
-RUN curl -fsSL https://cli.dailybot.com/install.sh | DAILYBOT_VERSION='>=3.2.1' bash
+RUN curl -fsSL https://cli.dailybot.com/install.sh | DAILYBOT_VERSION='>=3.7.3' bash
 
 # Configure Git for node user (can be overridden by mounted .gitconfig)
 RUN git config --global init.defaultBranch main \
