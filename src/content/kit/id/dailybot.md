@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Addon DWP opt-in: menghubungkan siklus hidup rencana ke tim Dailybot, penegakan hook opsional, dan skill agen Dailybot lengkap 3.4.0 (chat, check-in, formulir, ask AI, dan lainnya)."
+description: "Addon DWP opt-in: menghubungkan siklus hidup rencana ke tim Dailybot, penegakan hook opsional, dan skill agen Dailybot lengkap 3.10.3 (chat, check-in, formulir, ask AI, dan lainnya)."
 kind: addon
 lang: id
 order: 2
@@ -23,7 +23,7 @@ Metodologi Deep Work Plan inti memiliki **nol** ketergantungan pada Dailybot. Re
 
 ## Yang dihubungkan addon ini (sengaja sempit)
 
-Addon DWP Dailybot **tidak** menciptakan ulang Dailybot. Addon ini menghubungkan eksekusi rencana ke sub-skill dailybot **`report`** dan secara opsional meng-commit hook harness. Segala hal lain — instalasi, persetujuan, autentikasi, gaya penulisan — **ditunda** ke [skill agen Dailybot](https://github.com/DailybotHQ/agent-skill) resmi (saat ini **3.4.0**).
+Addon DWP Dailybot **tidak** menciptakan ulang Dailybot. Addon ini menghubungkan eksekusi rencana ke sub-skill dailybot **`report`** dan secara opsional meng-commit hook harness. Segala hal lain — instalasi, persetujuan, autentikasi, gaya penulisan — **ditunda** ke [skill agen Dailybot](https://github.com/DailybotHQ/agent-skill) resmi (saat ini **3.10.3**).
 
 ### Empat peristiwa siklus hidup
 
@@ -40,7 +40,7 @@ Payload berasal dari lapisan status rencana (`state.json`) jika ada: `completed`
 
 ### Penegakan hook opsional
 
-Dengan `dailybot-cli >= 3.1.2`, addon **dapat** meng-commit hook harness tingkat repo (`dailybot hook session-start | activity | post-commit | stop | dismiss`) yang didukung ledger lokal per repo. Harness mengingatkan agen di akhir giliran ketika peristiwa siklus hidup terlewat — penting untuk sesi panjang tanpa pengawasan di mana instruksi prompt memudar.
+Dengan `dailybot-cli >= 3.7.0`, addon **dapat** meng-commit hook harness tingkat repo (`dailybot hook session-start | activity | post-commit | stop | dismiss`) yang didukung ledger lokal per repo. Harness mengingatkan agen di akhir giliran ketika peristiwa siklus hidup terlewat — penting untuk sesi panjang tanpa pengawasan di mana instruksi prompt memudar.
 
 Laporan siklus hidup yang berhasil **mereset** ledger hook, sehingga kedua lapisan tidak pernah melaporkan ganda. Perintah hook hanya membaca status lokal dan selalu keluar dengan `0`.
 
@@ -73,7 +73,7 @@ Addon **menawarkan** jalur instalasi; skill Dailybot mengelola persetujuan dan v
 | **Perbarui skill yang ada** | `npx skills update dailybot` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Git clone** | `git clone https://github.com/DailybotHQ/agent-skill.git` + `./setup.sh` |
-| **Dailybot CLI** (minimum `>= 3.1.2`) | Diinstal oleh skill saat penggunaan pertama melalui `shared/auth.md` terverifikasi; atau `pip install 'dailybot-cli>=3.1.2'`, Homebrew, atau installer terverifikasi checksum di [cli.dailybot.com](https://cli.dailybot.com) |
+| **Dailybot CLI** (minimum `>= 3.7.0`) | Diinstal oleh skill saat penggunaan pertama melalui `shared/auth.md` terverifikasi; atau `pip install 'dailybot-cli>=3.7.0'`, Homebrew, atau installer terverifikasi checksum di [cli.dailybot.com](https://cli.dailybot.com) |
 
 Periksa versi: `dailybot --version` dan `dailybot version --check`. Upgrade: `dailybot upgrade`.
 
@@ -82,13 +82,14 @@ Periksa versi: `dailybot --version` dan `dailybot version --check`. Upgrade: `da
 Addon ini **tidak pernah** meminta email, OTP, atau API key, dan **tidak pernah** menyimpan kredensial. Autentikasi dimiliki oleh [`shared/auth.md`](https://github.com/DailybotHQ/agent-skill/blob/main/skills/dailybot/shared/auth.md) skill Dailybot:
 
 - `dailybot login` (email OTP), atau
-- `DAILYBOT_API_KEY` / `dailybot config key=...`
+- `DAILYBOT_API_KEY` / `dailybot config key=...`, atau
+- file key per repo `.dailybot/env.json` yang opt-in dan di-gitignore (`dailybot env add/use`, CLI `>= 3.7.0`) sehingga seorang pengembang dapat masuk ke org yang berbeda di repo yang berbeda.
 
-Jika autentikasi ditolak atau tidak tersedia, pelaporan dilewati secara diam-diam — pekerjaan berlanjut.
+Resolusi auth bersifat **Bearer-first**: token sesi diprioritaskan, dengan retry transparan Bearer→API-key pada `401`/`403` sehingga token basi tidak pernah memblokir key yang valid. Jika autentikasi ditolak atau tidak tersedia, pelaporan dilewati secara diam-diam — pekerjaan berlanjut.
 
-## Skill Dailybot yang dipasangkan — 13 kemampuan (3.4.0)
+## Skill Dailybot yang dipasangkan — 14 kemampuan (3.10.3)
 
-Menginstal skill agen Dailybot membawa jauh lebih banyak daripada yang dihubungkan addon DWP. Paket skill resmi (skill **3.4.0**, CLI **>= 3.1.2**, publish saat ini **3.2.1**) mengekspos **13 sub-skill terkoordinasi**:
+Menginstal skill agen Dailybot membawa jauh lebih banyak daripada yang dihubungkan addon DWP. Paket skill resmi (skill **3.10.3**, baseline CLI **>= 3.7.0**, publish saat ini **3.7.3**) mengekspos **14 sub-skill terkoordinasi**:
 
 | Sub-skill | Fungsinya |
 |-----------|--------------|
@@ -102,9 +103,10 @@ Menginstal skill agen Dailybot membawa jauh lebih banyak daripada yang dihubungk
 | **Check-ins** | Selesaikan standup; **author** check-in (jadwal, peserta, pertanyaan, pengingat, pengaturan AI) |
 | **Kudos** | Kenali rekan tim atau seluruh tim; jelajahi feed pengakuan, feed org, wall of fame |
 | **Teams** | Daftar tim, periksa anggota, selesaikan nama ke UUID; `me`, `org`, profil pengguna |
-| **Forms** | Daftar, kirim, perbarui, transisi formulir; **author** formulir (status workflow, izin, ChatOps) |
+| **Forms** | Daftar (kini **bercakupan org** secara default, dengan `--mine` dan `--owner` untuk mempersempit), kirim, perbarui, transisi formulir; **author** formulir (status workflow, izin, ChatOps); paginasi, pencarian, dan filter tanggal |
 | **Workflows** | Baca workflow org (`workflow list` / `workflow get`; hanya baca) |
 | **Report channels** | Temukan UUID channel untuk formulir atau check-in |
+| **Per-repo API keys** | Kelola `.dailybot/env.json` — file API key + URL per environment yang opt-in dan di-gitignore (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.7.0`) |
 
 **Addon DWP hanya menghubungkan `report` ke eksekusi rencana.** Panggil skill Dailybot langsung untuk segala hal lain — misalnya, posting ringkasan deploy ke `#releases`, selesaikan standup, atau minta AI Dailybot merangkum tren check-in.
 

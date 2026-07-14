@@ -146,7 +146,7 @@ design-system) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repos
 konforman dengan **nol** addon — jangan pernah memasangnya secara otomatis.
 
 - **Dukungan devcontainer** — kontainer pengembangan yang terisolasi dan dapat direproduksi dengan autentikasi AI-CLI yang persisten.
-- **Integrasi Dailybot** — empat peristiwa siklus hidup (kickoff, tugas signifikan, terblokir, penyelesaian) sebagai pelaporan kemajuan secara best-effort untuk tim yang sudah memakai Dailybot, dengan penegakan hook otonom opsional (`dailybot-cli >= 3.1.2`). Memasang skill agent Dailybot yang dipasangkan (3.4.0) juga membuka chat, check-in, penulisan form, tanya AI, dan lainnya — addon ini hanya menghubungkan pelaporan ke eksekusi DWP. Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
+- **Integrasi Dailybot** — empat peristiwa siklus hidup (kickoff, tugas signifikan, terblokir, penyelesaian) sebagai pelaporan kemajuan secara best-effort untuk tim yang sudah memakai Dailybot, dengan penegakan hook otonom opsional (`dailybot-cli >= 3.7.0`). Memasang skill agent Dailybot yang dipasangkan (3.10.3) juga membuka chat, check-in, penulisan form, tanya AI, API key per repo, dan lainnya — addon ini hanya menghubungkan pelaporan ke eksekusi DWP. Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan. Ketika
   diterima, ia memasang command `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` opsional hanya untuk repositori dengan permukaan antarmuka yang

@@ -41,8 +41,8 @@ Une configuration `.devcontainer/` + `docker/` basée sur compose, raisonnée à
 Une connexion optionnelle à l'**équipe Dailybot** du développeur pour la visibilité de la progression des agents.
 
 - **Page kit :** [Dailybot](/kit/dailybot) — référence complète des capacités
-- **Ce que l'addon DWP connecte :** quatre rapports du cycle de vie du plan (kickoff, tâche significative, bloqué, achèvement) via la sous-skill `report` de dailybot ; application déterministe optionnelle par hooks (`dailybot hook`, CLI `>= 3.1.2`)
-- **Skill jumelée :** installer [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (actuellement **3.4.0**) expose **13 capacités** — chat sur Slack/Teams/Discord/Google Chat, check-ins, autorisation de formulaires, ask AI, kudos, e-mail et plus. L'addon DWP ne connecte que **report** ; les autres capacités sont invoquées directement via la skill Dailybot
+- **Ce que l'addon DWP connecte :** quatre rapports du cycle de vie du plan (kickoff, tâche significative, bloqué, achèvement) via la sous-skill `report` de dailybot ; application déterministe optionnelle par hooks (`dailybot hook`, CLI `>= 3.7.0`)
+- **Skill jumelée :** installer [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (actuellement **3.10.3**) expose **14 capacités** — chat sur Slack/Teams/Discord/Google Chat, check-ins, autorisation de formulaires, ask AI, kudos, clés API par dépôt (`.dailybot/env.json`), e-mail et plus. L'addon DWP ne connecte que **report** ; les autres capacités sont invoquées directement via la skill Dailybot
 - **Auth :** entièrement reportée à la skill Dailybot (`dailybot login` ou `DAILYBOT_API_KEY`) ; cet addon ne stocke jamais de credentials
 - **Garde-fou neutre vis-à-vis du fournisseur :** le DWP central a **zéro** dépendance à Dailybot ; ne jamais installer automatiquement pour tout le monde
 - **Quand proposé :** le développeur ou l'équipe utilise déjà Dailybot, ou demande explicitement des rapports d'équipe

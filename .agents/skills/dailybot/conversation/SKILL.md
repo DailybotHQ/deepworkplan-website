@@ -1,7 +1,7 @@
 ---
 name: dailybot-conversation
 description: Open (or idempotently reuse) a private Slack group DM (MPIM) that includes the Dailybot bot, then optionally post a message or report to it. Use when the developer wants to start a Slack group with specific teammates plus the bot — e.g. "open a group DM with Jane and Bob and send them the analysis report". Slack only, org-admin only. Distinct from dailybot-chat (which posts to existing channels/DMs) and dailybot-channels (which discovers report-channel UUIDs).
-version: "3.4.0"
+version: "3.10.3"
 documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"👥","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
@@ -10,11 +10,10 @@ allowed-tools: Bash, Read, Grep, Glob
 
 # Dailybot Conversations
 
-> **Requires `dailybot-cli >= 3.2.0`** — the release that introduced the
-> `dailybot conversation open` command (and `form list --mine`). The rest of the
-> pack works from the `>= 3.1.2` baseline, but this sub-skill's command does not
-> exist below 3.2.0: if `dailybot --version` reports lower, ask the developer to
-> run `dailybot upgrade` and continue with your primary task meanwhile. See
+> **Requires `dailybot-cli >= 3.7.0`** (the skill-pack baseline; the
+> `dailybot conversation open` command itself shipped in 3.2.0). If
+> `dailybot --version` reports lower, ask the developer to run
+> `dailybot upgrade` and continue with your primary task meanwhile. See
 > [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version).
 
 You help developers **open a private Slack group DM (MPIM)** that includes the
@@ -98,6 +97,14 @@ Participants can be named three ways — the CLI resolves them for you:
 > The bot is added automatically — you do **not** pass the bot as a participant.
 > One human participant already makes a valid group with the bot.
 
+### Participant limit
+
+Slack group DMs (MPIMs) support **at most 8 total members**. The Dailybot bot
+always occupies one slot, so you can pass **at most 7 user UUIDs / emails /
+names**. The CLI rejects more than 7 before making the API call; the server also
+validates and returns `400 conversation_too_many_participants` if the limit is
+exceeded.
+
 ---
 
 ## Step 3 — Open the Conversation (idempotent)
@@ -170,6 +177,7 @@ Match on the machine-readable `code` (with `--json`), never the prose `detail`.
 |------|--------|------------------------|
 | 406 | `open_conversation_not_supported` | Org is not on Slack. Tell the developer group DMs are Slack-only; stop. |
 | 403 | — | Caller is not an org admin. Explain the command needs admin rights. |
+| 400 | `conversation_too_many_participants` | More than 7 users passed (8 total including the bot). Reduce the list. |
 | 400 | `one_or_more_users_not_found` | A participant isn't an active org user. Re-check the names/UUIDs. |
 | 400 | `no_valid_users` | The list contained invalid UUIDs. Fix the identifiers. |
 | 400 | `params_validation_error` | `users_uuids` wasn't a list — a CLI usage error; re-run with `-u`. |
@@ -231,4 +239,5 @@ automatically, and do not enter a diagnostic loop.
 - [`../teams/SKILL.md`](../teams/SKILL.md) — resolve a person's UUID by name
 - [`../shared/auth.md`](../shared/auth.md) — authentication setup
 - [`../shared/http-fallback.md`](../shared/http-fallback.md) — HTTP API fallback patterns
+- [`../shared/dashboard-urls.md`](../shared/dashboard-urls.md) — full dashboard URL catalog
 - **Full agent API skill:** `https://www.dailybot.com/skill.md`

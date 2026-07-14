@@ -41,8 +41,8 @@ Setup `.devcontainer/` + `docker/` berbasis compose yang dirasionalkan dari stac
 Koneksi opt-in ke **tim Dailybot** pengembang untuk visibilitas progres agen.
 
 - **Halaman kit:** [Dailybot](/kit/dailybot) — referensi kemampuan lengkap
-- **Yang dihubungkan addon DWP:** empat laporan siklus hidup rencana (kickoff, significant task, blocked, completion) melalui sub-skill dailybot `report`; penegakan hook deterministik opsional (`dailybot hook`, CLI `>= 3.1.2`)
-- **Skill yang dipasangkan:** menginstal [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (saat ini **3.4.0**) mengekspos **13 kemampuan** — chat di Slack/Teams/Discord/Google Chat, check-in, authoring formulir, ask AI, kudos, email, dan lainnya. Addon DWP hanya menghubungkan **report**; kemampuan lain dipanggil melalui skill Dailybot secara langsung
+- **Yang dihubungkan addon DWP:** empat laporan siklus hidup rencana (kickoff, significant task, blocked, completion) melalui sub-skill dailybot `report`; penegakan hook deterministik opsional (`dailybot hook`, CLI `>= 3.7.0`)
+- **Skill yang dipasangkan:** menginstal [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (saat ini **3.10.3**) mengekspos **14 kemampuan** — chat di Slack/Teams/Discord/Google Chat, check-in, authoring formulir, ask AI, kudos, API key per repo (`.dailybot/env.json`), email, dan lainnya. Addon DWP hanya menghubungkan **report**; kemampuan lain dipanggil melalui skill Dailybot secara langsung
 - **Auth:** sepenuhnya ditunda ke skill Dailybot (`dailybot login` atau `DAILYBOT_API_KEY`); addon ini tidak pernah menyimpan kredensial
 - **Pagar vendor-neutral:** DWP inti memiliki **nol** ketergantungan Dailybot; jangan pernah menginstal otomatis untuk semua orang
 - **Kapan ditawarkan:** pengembang atau tim sudah menggunakan Dailybot, atau secara eksplisit meminta pelaporan tim
