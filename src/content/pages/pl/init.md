@@ -141,7 +141,7 @@ Po onboardingu bazowym wymień cztery dodatki (devcontainer, Dailybot, dependenc
 w pełni zgodne przy **zerowej** liczbie dodatków — nigdy nie instaluj ich automatycznie.
 
 - **Wsparcie devcontainera** — odtwarzalny, izolowany kontener deweloperski z trwałym uwierzytelnianiem AI-CLI.
-- **Integracja z Dailybot** — cztery zdarzenia cyklu życia (kickoff, istotne zadanie, blokada, zakończenie) jako raporty postępu w trybie najlepszego wysiłku dla zespołów już korzystających z Dailybot, z opcjonalnym autonomicznym wymuszaniem hooków (`dailybot-cli >= 3.1.2`). Instalacja sparowanego skilla agenta Dailybot (3.4.0) udostępnia również czat, check-iny, tworzenie formularzy, pytanie AI i więcej — dodatek łączy jedynie raportowanie z wykonywaniem DWP. Podstawowa metodyka nie ma żadnej zależności od Dailybot.
+- **Integracja z Dailybot** — cztery zdarzenia cyklu życia (kickoff, istotne zadanie, blokada, zakończenie) jako raporty postępu w trybie najlepszego wysiłku dla zespołów już korzystających z Dailybot, z opcjonalnym autonomicznym wymuszaniem hooków (`dailybot-cli >= 3.7.0`). Instalacja sparowanego skilla agenta Dailybot (3.10.3) udostępnia również czat, check-iny, tworzenie formularzy, pytanie AI, klucze API per-repo i więcej — dodatek łączy jedynie raportowanie z wykonywaniem DWP. Podstawowa metodyka nie ma żadnej zależności od Dailybot.
 - **Dependency upgrade** — aktualizacje niezależne od menedżera pakietów: partiami, zwalidowane i odwracalne. Po
   zaakceptowaniu instaluje komendę `/lib-upgrade`.
 - **Design system** — opcjonalny `docs/DESIGN.md` tylko dla repozytoriów z wykrytą powierzchnią interfejsu

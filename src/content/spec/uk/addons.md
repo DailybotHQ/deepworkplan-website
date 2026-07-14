@@ -41,8 +41,8 @@ Compose-налаштування `.devcontainer/` + `docker/`, виведене 
 Опційне підключення до **команди Dailybot** розробника для видимості прогресу агента.
 
 - **Сторінка kit:** [Dailybot](/kit/dailybot) — повна довідка можливостей
-- **Що підключає DWP-аддон:** чотири звіти життєвого циклу плану (kickoff, significant task, blocked, completion) через sub-skill dailybot `report`; опційне детерміноване примусове виконання хуків (`dailybot hook`, CLI `>= 3.1.2`)
-- **Парний скіл:** встановлення [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (зараз **3.4.0**) відкриває **13 можливостей** — чат у Slack/Teams/Discord/Google Chat, check-in, авторство форм, ask AI, kudos, email тощо. DWP-аддон підключає лише **report**; інші можливості викликаються безпосередньо через скіл Dailybot
+- **Що підключає DWP-аддон:** чотири звіти життєвого циклу плану (kickoff, significant task, blocked, completion) через sub-skill dailybot `report`; опційне детерміноване примусове виконання хуків (`dailybot hook`, CLI `>= 3.7.0`)
+- **Парний скіл:** встановлення [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (зараз **3.10.3**) відкриває **14 можливостей** — чат у Slack/Teams/Discord/Google Chat, check-in, авторство форм, ask AI, kudos, per-repo API keys (`.dailybot/env.json`), email тощо. DWP-аддон підключає лише **report**; інші можливості викликаються безпосередньо через скіл Dailybot
 - **Auth:** повністю делеговано скілу Dailybot (`dailybot login` або `DAILYBOT_API_KEY`); цей аддон ніколи не зберігає облікові дані
 - **Vendor-neutral guardrail:** основний DWP має **нульову** залежність від Dailybot; ніколи не встановлюйте автоматично для всіх
 - **Коли пропонувати:** розробник або команда вже використовує Dailybot або явно просить командне звітування

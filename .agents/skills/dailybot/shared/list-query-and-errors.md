@@ -1,10 +1,10 @@
 # Shared reference — list query flags, pagination, and machine-readable errors
 
-> **Requires `dailybot-cli >= 3.1.2`** (the skill-pack baseline). Everything on this page — the shared
+> **Requires `dailybot-cli >= 3.7.0`** (the skill-pack baseline). Everything on this page — the shared
 > list query flags, the `{count, next, previous, results}` pagination envelope,
 > the `Showing X of N` footer, the machine-readable error `code` dispatch, and
 > the API-key / Bearer parity + free-plan gating rules — is available at this
-> floor. If `dailybot --version` is below 3.1.2, ask the developer to run
+> floor. If `dailybot --version` is below 3.7.0, ask the developer to run
 > `dailybot upgrade`.
 
 This is the **single source of truth** for behavior shared across every
@@ -27,7 +27,7 @@ that flag already means "every author's responses", not "every page").
 | `--page-size N` | | Items per page. **Max 100** — larger values are clamped client-side. Passing it alone returns that one page, not the whole list. |
 | `--all` | | Fetch **every** page and concatenate the results. Mutually exclusive with `--limit`. |
 | `--limit N` | | Stop after the first `N` items (across pages). Mutually exclusive with `--all`. |
-| `--search TEXT` | `--grep TEXT` | Case-insensitive substring filter. **Max 256 chars** — longer queries are truncated client-side before the request. |
+| `--search TEXT` | `--grep TEXT` | Case-insensitive substring filter. **Max 256 chars** — longer queries are rejected client-side with an error before the request is made. |
 | `--since YYYY-MM-DD` | | Start of a date range (inclusive). |
 | `--until YYYY-MM-DD` | | End of a date range (inclusive). |
 | `--date YYYY-MM-DD` | | A single day (shorthand for `--since D --until D`). |
@@ -151,7 +151,7 @@ In `--json` mode the error surfaces as `{ error, status, code, detail }`.
 | `code` | Meaning | What to do |
 |--------|---------|------------|
 | `target_user_inactive` | The targeted user is deactivated. | Pick an active user. |
-| `search_query_too_long` | `--search` exceeded the limit. | The CLI truncates to 256 chars client-side; if you see this, shorten the query. |
+| `search_query_too_long` | `--search` exceeded the 256-char limit. | The query is rejected client-side before the request. If you hit this server-side, shorten the query. |
 | `invalid_date_range` | `--since`/`--until` are malformed or reversed. | Fix the dates (`YYYY-MM-DD`, since ≤ until). |
 | `invalid_user_identifier` | `--user` was given an email or a name. | `--user` takes **only a UUID**. Get it from `dailybot user list --json`. (Caught client-side before the request.) |
 | `invalid_workflow_state` | On `form responses --state`: the form has no workflow. On `form create` / `form config --state`: the `"Label:#color"` spec is malformed. | Two meanings, one code — read which command you ran. For the filter, drop `--state` (or pick a workflow form). |
@@ -160,6 +160,8 @@ In `--json` mode the error surfaces as `{ error, status, code, detail }`.
 | `send_as_user_not_found` | The `--send-as-user` UUID doesn't resolve to a user. | Confirm the user exists (`dailybot user list`). |
 | `invalid_kudos_filter` | `kudos list --filter` got an unrecognized value. | Use `received` or `given` (the CLI also accepts `KUDOS_RECEIVED` / `KUDOS_GIVEN`). |
 | `send_message_validation_error` | `chat send` payload is missing content or otherwise invalid. | Read the `detail` — it names the problem (e.g. no message/buttons/image). |
+| `invalid_owner_user_id` | `--owner` value isn't a valid UUID (after resolution). | Fix the UUID or name. |
+| `too_many_owner_user_ids` | More than 50 `--owner` values. | Narrow the filter — max 50 owners per request. |
 
 ### 429 — rate limit
 

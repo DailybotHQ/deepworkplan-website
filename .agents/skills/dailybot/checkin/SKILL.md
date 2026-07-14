@@ -1,7 +1,7 @@
 ---
 name: dailybot-checkin
 description: Drive the full check-in lifecycle via Dailybot — list and complete pending check-ins, see pending/completed status for a day, inspect a check-in's questions and schedule, browse response history, edit or reset a submitted response, and backfill or future-date responses. Also authors check-ins — create and configure a check-in (schedule, participants, reminders, privacy, smart/AI) and manage its questions (types, report titles, variations, conditional logic). Works headless with an API key. Use when the developer asks to fill in their standup, answer daily questions, check what check-ins they have, edit or reset a check-in, review past responses, or create/configure a check-in. Do not use for free-text progress reports — those go through dailybot-report.
-version: "3.4.0"
+version: "3.10.3"
 documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"✅","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
@@ -285,11 +285,11 @@ prompts — handy for humans; agents should use the headless commands above.
 
 ## Step 3.7 — Authoring check-ins (create / configure / questions)
 
-> **Requires `dailybot-cli >= 3.1.2`** (the skill-pack baseline). The authoring surface — `checkin create`,
+> **Requires `dailybot-cli >= 3.7.0`** (the skill-pack baseline). The authoring surface — `checkin create`,
 > `checkin config`, `checkin archive`, the `checkin questions add|edit|delete|reorder`
 > group, resolving people by email, the smart/AI flags, and the **create requires
 > ≥ 1 question** rule (`questions_required`) — is all available. If
-> `dailybot --version` is below 3.1.2, run `dailybot upgrade`.
+> `dailybot --version` is below 3.7.0, run `dailybot upgrade`.
 
 Everything above **answers** a check-in. This section **builds** one. As of the
 authoring release, an agent can create a check-in from scratch, tune every
@@ -297,10 +297,11 @@ scheduling / reminder / privacy / AI setting, manage its questions (including
 conditional jump logic), verify the result with a round-trip read, and archive
 it — all headless with an API key.
 
-> **Role-gated.** Creating, configuring, or archiving a check-in and editing its
-> questions are **admin/manager** operations server-side. With a plain-member
-> credential these calls fail with a `401`/`403` — surface that to the developer
-> and stop (don't retry). Answering check-ins (Steps 2–3.5) is not gated this way.
+> **Role-gated.** Configuring, archiving a check-in, and editing its questions
+> are **admin/manager** operations server-side. **Creating** a check-in is now
+> allowed for **any authenticated member**.
+> Update and delete remain admin/manager only. Answering check-ins (Steps 2–3.5)
+> is not role-gated.
 
 ### Create in one shot vs. configure incrementally
 
@@ -865,5 +866,6 @@ Check-in completion must **never block your primary work**. If the CLI is missin
 
 - [`../shared/auth.md`](../shared/auth.md) — authentication setup
 - [`../shared/http-fallback.md`](../shared/http-fallback.md) — HTTP API fallback patterns
+- [`../shared/dashboard-urls.md`](../shared/dashboard-urls.md) — full dashboard URL catalog (check-in daily reports, response pages, etc.)
 - **Live API spec:** `https://api.dailybot.com/api/swagger/`
 - **Full agent API skill:** `https://www.dailybot.com/skill.md`

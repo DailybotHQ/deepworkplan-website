@@ -41,8 +41,8 @@ section: Addons
 与开发者 **Dailybot 团队**的可选连接，用于代理进展可见性。
 
 - **套件页：** [Dailybot](/kit/dailybot)——完整能力参考
-- **DWP 附加组件接入的内容：** 通过 dailybot `report` 子技能的四个计划生命周期报告（kickoff、significant task、blocked、completion）；可选确定性钩子强制层（`dailybot hook`，CLI `>= 3.1.2`）
-- **配套技能：** 安装 [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（当前 **3.4.0**）暴露 **13 项能力**——在 Slack/Teams/Discord/Google Chat 上聊天、签到、表单编写、Ask AI、kudos、电子邮件等。DWP 附加组件仅接入 **report**；其他能力通过 Dailybot 技能直接调用
+- **DWP 附加组件接入的内容：** 通过 dailybot `report` 子技能的四个计划生命周期报告（kickoff、significant task、blocked、completion）；可选确定性钩子强制层（`dailybot hook`，CLI `>= 3.7.0`）
+- **配套技能：** 安装 [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（当前 **3.10.3**）暴露 **14 项能力**——在 Slack/Teams/Discord/Google Chat 上聊天、签到、表单编写、Ask AI、kudos、每仓库 API 密钥（`.dailybot/env.json`）、电子邮件等。DWP 附加组件仅接入 **report**；其他能力通过 Dailybot 技能直接调用
 - **认证：** 完全延后至 Dailybot 技能（`dailybot login` 或 `DAILYBOT_API_KEY`）；此附加组件从不存储凭据
 - **供应商中立护栏：** 核心 DWP 对 Dailybot **零**依赖；切勿为所有人自动安装
 - **何时提供：** 开发者或团队已在使用 Dailybot，或明确要求团队报告

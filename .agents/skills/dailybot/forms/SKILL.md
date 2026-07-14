@@ -1,7 +1,7 @@
 ---
 name: dailybot-forms
 description: List, inspect, submit, update, and transition form responses via Dailybot — including forms with workflow states and audience-scoped permissions. Also authors forms — create and configure a form (workflow states, permissions, anonymous/public/approval, ChatOps command) and manage its questions (types, report titles, variations, conditional logic). Use when the developer wants to see available forms, fill out a survey, continue an in-progress response, move a response between states, read prior responses, or create/configure a form. Do not use for daily check-ins — those go through dailybot-checkin.
-version: "3.4.0"
+version: "3.10.3"
 documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"📋","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
@@ -10,7 +10,7 @@ allowed-tools: Bash, Read, Grep, Glob
 
 # Dailybot Forms
 
-> **Requires `dailybot-cli >= 3.1.2`** (the skill-pack baseline). The full forms lifecycle — `form list` / `submit` / `get` / `responses` / `response get` / `update` / `transition` / `delete` — plus the structured `--json` 4xx error shape are all available. If `dailybot --version` is below 3.1.2, ask the developer to run `dailybot upgrade`. See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version) for install commands and version-check tooling.
+> **Requires `dailybot-cli >= 3.7.0`** (the skill-pack baseline). The full forms lifecycle — `form list` / `submit` / `get` / `responses` / `response get` / `update` / `transition` / `delete` — plus the structured `--json` 4xx error shape are all available. If `dailybot --version` is below 3.7.0, ask the developer to run `dailybot upgrade`. See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version) for install commands and version-check tooling.
 
 You help developers work with the full Dailybot forms lifecycle: list, inspect, submit, update, transition between workflow states, and read prior responses. Forms are custom questionnaires created by team leads — feedback surveys, retrospectives, release checklists, approval flows, or any structured data collection. Some forms are simple "fill once and done"; others have **workflow states** (e.g. `draft → review → released`) with audience-scoped permissions on who can edit and who can transition.
 
@@ -109,7 +109,7 @@ The resolver step (4) is the customer-extension hook. See **Step 7 — Custom-sk
 dailybot form list --json
 ```
 
-Returns all forms visible to the logged-in user. **As of `dailybot-cli >= 3.2.0` this is org-scoped**: it lists every form the caller can see on the webapp list view — an org **admin sees all** the org's forms; a member sees forms flagged for the list view plus their own. (Before 3.2.0 the endpoint returned only the caller's *own* forms even for admins — a server-side bug; if a developer reports "I only see a handful of my forms," check `dailybot --version` and have them `dailybot upgrade`.) The shape is stable and machine-readable:
+Returns all forms in the caller's organization. Every org member sees every org form; capabilities (editing, response visibility, state changes) are governed by each form's permissions. Pass `--mine` to narrow to only your own forms. (If a developer reports "I only see a handful of my forms," check `dailybot --version` and have them `dailybot upgrade` — older CLIs had a server-side visibility bug.) The shape is stable and machine-readable:
 
 ```json
 [
@@ -140,7 +140,7 @@ Returns all forms visible to the logged-in user. **As of `dailybot-cli >= 3.2.0`
 
 ### Pagination, search, and date filters
 
-> **Note:** the shared list query flags below are part of the `dailybot-cli >= 3.1.2` baseline. Older CLIs
+> **Note:** the shared list query flags below are part of the `dailybot-cli >= 3.7.0` baseline. Older CLIs
 > return the full list with no filtering.
 
 `form list` accepts the **full shared list query flag set** — pagination
@@ -161,15 +161,68 @@ dailybot form list --all --json
 dailybot form list --page 2 --page-size 20 --json
 ```
 
-### Scope the list to your own forms — `--mine` (CLI >= 3.2.0)
+### Filter by owner — `--mine` and `--owner`
 
-Since the default is now org-scoped, pass **`--mine`** to narrow the result to
-only the forms **you own** (it sends `owner=me` to the API). Useful when an admin
-wants their personal forms out of the full org list.
+Pass **`--mine`** to narrow the result to only the forms **you own**, or
+**`--owner`** (repeatable) to filter by specific owners. `--owner` accepts
+a UUID, email, or name — non-UUID values are resolved via the org directory.
+The two flags can be combined (AND semantics with every other filter).
 
 ```bash
 # Only the forms I own:
 dailybot form list --mine --json
+
+# Forms owned by a specific person (by name):
+dailybot form list --owner "Jane Doe" --json
+
+# Forms owned by two people (by UUID):
+dailybot form list --owner <uuid-1> --owner <uuid-2> --json
+```
+
+> **Deprecation:** the `--filter me` scope is deprecated server-side. Use
+> `--mine` or `--owner` instead — `--filter me` still works but maps to
+> the legacy `filter=me` parameter.
+
+### Form owners picker — `form owners`
+
+A lightweight endpoint to discover which org members own at least one form,
+without pulling the full member directory.
+
+```bash
+dailybot form owners                     # table of owners
+dailybot form owners --search jane       # search by name/email
+dailybot form owners --json              # machine-readable
+```
+
+Each result has `uuid`, `full_name`, `image`, `role`, and optionally `email`
+(email is only visible to admins/managers — the CLI must not assume it exists).
+
+### Server-side filtering, sorting, and archived forms
+
+| Flag | Values | Description |
+|------|--------|-------------|
+| `--filter` | `all`, `public`, `approval`, `workflow`, `archived` | Scope filter (server-side). `me` still works but is deprecated. |
+| `--owner` | UUID, email, or name (repeatable) | Filter by form owner(s). Max 50. |
+| `--order` | `alphabetical`, `recent`, `total` | Sort field (`total` = total response count). |
+| `--ascending` / `--asc` | flag | Sort ascending (default: descending). |
+| `--include-questions` | flag | Include question definitions in each form. |
+| `--include-archived` | flag | Include archived forms (hidden by default). |
+
+```bash
+# Workflow-enabled forms, sorted alphabetically ascending:
+dailybot form list --filter workflow --order alphabetical --asc --json
+
+# Only forms with approval flow:
+dailybot form list --filter approval --json
+
+# Public forms sorted by total responses:
+dailybot form list --filter public --order total --json
+
+# Archived forms:
+dailybot form list --filter archived --json
+
+# Include question definitions:
+dailybot form list --include-questions --json
 ```
 
 > **The envelope is unconditional.** `GET /v1/forms/` and the responses endpoint
@@ -261,7 +314,7 @@ When the form has a workflow (`workflow.enabled: true`), the agent must understa
 
 ## Step 5.5 — Authoring forms (create / configure / questions)
 
-> **Requires `dailybot-cli >= 3.1.2`** (the skill-pack baseline). The full authoring surface — `form create`, `form config` (workflow states, the three permission audiences, anonymous/public/brand/require-identity with `public_url`, approval + approvers, the ChatOps command), `form archive`, the `form questions add|edit|delete|reorder` group, resolving people by email, `--no-approvers`, the 3 report-channel cap, and the **create requires ≥ 1 question** rule (`questions_required`) — is all available. If `dailybot --version` is below 3.1.2, ask the developer to run `dailybot upgrade`.
+> **Requires `dailybot-cli >= 3.7.0`** (the skill-pack baseline). The full authoring surface — `form create`, `form config` (workflow states, the three permission audiences, anonymous/public/brand/require-identity with `public_url`, approval + approvers, the ChatOps command), `form archive`, the `form questions add|edit|delete|reorder` group, resolving people by email, `--no-approvers`, the 3 report-channel cap, and the **create requires ≥ 1 question** rule (`questions_required`) — is all available. If `dailybot --version` is below 3.7.0, ask the developer to run `dailybot upgrade`.
 
 Everything above this point *reads* and *responds to* forms. This section *builds and reshapes* them. An agent with the right permissions can now create a form, wire up its workflow states, permission audiences, approval flow, and ChatOps command, and manage its questions — all end-to-end from the CLI, without opening the Dailybot webapp.
 
@@ -758,7 +811,8 @@ Useful flags:
 |------|-------------|
 | `--latest` | Return only the most recent response visible to the caller. |
 | `--state STATE` | Filter to responses in a specific workflow state. Pass the **state key** (`draft`), not the label (`Draft`) — read the keys from `workflow.states[].key` on `form get`. Filtering is server-side. On a form with no workflow the API returns `400 invalid_workflow_state`. |
-| `--search TEXT` | (alias `--grep`) Case-insensitive substring filter across responses. Max 256 chars (truncated client-side). |
+| `--all` | List everyone's responses (requires VIEW_REPORTS permission — admin/owner only; a member receives 403). |
+| `--search TEXT` | Search response content and submitter name/email. Max 256 chars. Does **not** search anonymous member identities (privacy preserved). |
 | `--json` | Machine-readable output (stable shape). |
 
 > **`form responses` search.** The `--search` / `--grep` flag
@@ -769,6 +823,48 @@ Useful flags:
 > `--page-size` / `--limit`. Careful: `--all` here means **every author's**
 > responses (admin/owner only), not every page.
 > See [`../shared/list-query-and-errors.md`](../shared/list-query-and-errors.md).
+
+### Advanced response filters
+
+| Flag | Values | Description |
+|------|--------|-------------|
+| `--source` | CSV: `member`, `anonymous`, `automation`, `public` | Filter by submission origin (OR semantics within the group). |
+| `--submitter` | CSV of UUIDs (max 50) | Filter by specific submitter user UUIDs. |
+| `--flow-status` | `pending`, `approved`, `denied` | Approval flow status filter. Silently ignored if the form has no approval flow. |
+| `--order` | `recent`, `oldest` | Sort by creation time. |
+| `--ascending` / `--asc` | flag | Sort ascending (alias for `--order oldest`). |
+| `--user UUID` | single UUID | Filter to one user's responses (admin/owner only). |
+| `--from DATE` | YYYY-MM-DD | Responses on/after this date. |
+| `--to DATE` | YYYY-MM-DD | Responses on/before this date. |
+
+**Submission sources** — every response belongs to exactly one bucket:
+
+| Source | Meaning |
+|--------|---------|
+| `member` | Identified org member submitted normally. |
+| `anonymous` | Org member submitted anonymously (`collect_responses_anonymously=true`). |
+| `automation` | Submitted via API/CLI with `--automation` (`is_dailybot_bot=true`). |
+| `public` | Submitted via the public form URL by an external guest. |
+
+All filters compose with **AND** across groups and **OR** within each group:
+`--source "member,automation" --flow-status pending --search "deploy"` → responses that are `(member OR automation) AND pending AND contain "deploy"`.
+
+```bash
+# All automation submissions:
+dailybot form responses <form_uuid> --all --source automation --json
+
+# Multiple sources (OR): automation OR public:
+dailybot form responses <form_uuid> --all --source "automation,public" --json
+
+# Approval: only pending:
+dailybot form responses <form_uuid> --all --flow-status pending --json
+
+# Combined: member responses, approved, containing "sprint":
+dailybot form responses <form_uuid> --all --source member --flow-status approved --search "sprint" --json
+
+# Sorted oldest first in a date range:
+dailybot form responses <form_uuid> --all --order oldest --from 2026-07-01 --to 2026-07-10 --json
+```
 
 ### JSON shape (single response)
 
@@ -971,6 +1067,36 @@ Always show the complete answer set before sending:
 | `--state` | `-s` | Optional initial state (workflow forms only). Defaults to the form's initial state. |
 | `--yes` | `-y` | Skip confirmation. |
 | `--json` |     | Machine-readable JSON output. |
+| `--automation` | | Submit as an automation — channel notifications show no submitter name. |
+| `--anonymous` | | Submit anonymously — channel notifications show a random generated name. |
+| `--guest-name` | | Guest submitter full name (used with `--automation` for third-party submissions). |
+| `--guest-email` | | Guest submitter email (validated client-side). |
+| `--source` | | Provenance label, max 512 chars (e.g. `workflow:release-pipeline`). Works with any mode. |
+
+> **`--automation` vs `--anonymous`:** Both are independent booleans. `--automation` hides the submitter entirely; `--anonymous` replaces them with a random name. When combined, `automation` takes precedence for the channel display. Neither flag affects who owns the response in the dashboard — it only controls the notification appearance.
+
+### Submission modes
+
+| Mode | Flags | Channel notification |
+|------|-------|---------------------|
+| Normal | (none) | Shows your name + avatar |
+| Anonymous | `--anonymous` | Random generated name (e.g. "Purple Elephant") |
+| Automation | `--automation` | No submitter shown |
+| Automation + Guest | `--automation --guest-name "X" --guest-email "x@y"` | Guest name/email in body, no submitter avatar |
+| Any + Source | `--source "label"` | Provenance label attached (works with any mode) |
+
+```bash
+# Automation with guest identity and source tracking:
+dailybot form submit <form_uuid> \
+  --content '{"<q_uuid>":"done"}' --yes --automation \
+  --guest-name "Release Bot" --guest-email "releases@example.com" \
+  --source "workflow:production-deploy"
+```
+
+**Validation rules:**
+- If the form has `require_email_and_name` enabled and you use `--automation`, both `--guest-name` and `--guest-email` are required (API returns `guest_user_required`).
+- `--guest-email` is validated client-side for format.
+- `--source` max length: 512 characters.
 
 After submit, **re-read `current_state` and `allowed_transitions` on the returned payload** to decide the next step.
 
@@ -1012,11 +1138,12 @@ When the form is workflow-enabled and `allowed_transitions` is non-empty:
 dailybot form transition <form_uuid> <response_uuid> <to_state> --yes
 ```
 
-> **Pass `to_state`, never `label`.** In `allowed_transitions`, `to_state` is the
-> machine key (`released`) and `label` is display text (`Mark released`). The API
-> matches on the key and answers `Unknown workflow state: 'Mark released'`
-> otherwise. Read the key from the response payload rather than typing the state
-> name you saw in the panel.
+> **You can pass either `to_state` (machine key) or `label` (display text).**
+> The CLI resolves labels to keys automatically — e.g.
+> `"Mark released"` → `released`. In `allowed_transitions`, `to_state` is the
+> machine key (`released`) and `label` is display text (`Mark released`). Both
+> are accepted; the CLI performs a case-insensitive lookup and translates labels
+> to keys before calling the API. On older CLIs, only the machine key works.
 
 Confirm with the developer before transitioning:
 
@@ -1217,6 +1344,7 @@ Form operations must **never block your primary work**. If the CLI is missing, a
 
 - [`../shared/auth.md`](../shared/auth.md) — authentication setup
 - [`../shared/http-fallback.md`](../shared/http-fallback.md) — HTTP API fallback patterns
+- [`../shared/dashboard-urls.md`](../shared/dashboard-urls.md) — full dashboard URL catalog (forms, check-ins, kudos, agents)
 - [`_custom-template/SKILL.md`](_custom-template/SKILL.md) — starter template for authoring a custom per-form skill (copy into `.agents/skills/dailybot-custom/<your-name>/` in your own repo)
 - **Live API spec:** `https://api.dailybot.com/api/swagger/`
 - **Full agent API skill:** `https://www.dailybot.com/skill.md`

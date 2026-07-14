@@ -41,8 +41,8 @@ section: Addons
 การเชื่อม opt-in กับ **ทีม Dailybot** ของนักพัฒนาเพื่อมองเห็นความคืบหน้าของเอเจนต์
 
 - **หน้า kit:** [Dailybot](/kit/dailybot) — อ้างอิงความสามารถครบ
-- **สิ่งที่ DWP addon เชื่อม:** รายงาน lifecycle แผนสี่แบบ (kickoff, significant task, blocked, completion) ผ่าน sub-skill dailybot `report`; การบังคับใช้ hook แบบ deterministic แบบเลือกได้ (`dailybot hook`, CLI `>= 3.1.2`)
-- **Skill คู่กัน:** ติดตั้ง [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (ปัจจุบัน **3.4.0**) เปิด **13 ความสามารถ** — แชทบน Slack/Teams/Discord/Google Chat check-in การเขียนฟอร์ม ask AI kudos อีเมล และอื่นๆ DWP addon เชื่อมเฉพาะ **report** ความสามารถอื่นเรียกผ่าน skill Dailybot โดยตรง
+- **สิ่งที่ DWP addon เชื่อม:** รายงาน lifecycle แผนสี่แบบ (kickoff, significant task, blocked, completion) ผ่าน sub-skill dailybot `report`; การบังคับใช้ hook แบบ deterministic แบบเลือกได้ (`dailybot hook`, CLI `>= 3.7.0`)
+- **Skill คู่กัน:** ติดตั้ง [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (ปัจจุบัน **3.10.3**) เปิด **14 ความสามารถ** — แชทบน Slack/Teams/Discord/Google Chat check-in การเขียนฟอร์ม ask AI kudos per-repo API keys (`.dailybot/env.json`) อีเมล และอื่นๆ DWP addon เชื่อมเฉพาะ **report** ความสามารถอื่นเรียกผ่าน skill Dailybot โดยตรง
 - **Auth:** มอบหมายทั้งหมดให้ skill Dailybot (`dailybot login` หรือ `DAILYBOT_API_KEY`) addon นี้ไม่เก็บ credentials
 - **Guardrail แบบ vendor-neutral:** DWP หลัก **ไม่พึ่งพา** Dailybot เลย อย่าติดตั้งอัตโนมัติให้ทุกคน
 - **เมื่อเสนอ:** นักพัฒนาหรือทีมใช้ Dailybot อยู่แล้ว หรือขอการรายงานทีมอย่างชัดเจน

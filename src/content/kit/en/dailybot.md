@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Opt-in DWP addon: connect plan lifecycle to a Dailybot team, optional hook enforcement, and the full Dailybot agent skill 3.4.0 (chat, check-ins, forms, ask AI, and more)."
+description: "Opt-in DWP addon: connect plan lifecycle to a Dailybot team, optional hook enforcement, and the full Dailybot agent skill 3.10.3 (chat, check-ins, forms, ask AI, and more)."
 kind: addon
 lang: en
 order: 2
@@ -23,7 +23,7 @@ The core Deep Work Plan methodology has **zero** Dailybot dependency. A reposito
 
 ## What this addon wires (narrow by design)
 
-The DWP Dailybot addon does **not** reinvent Dailybot. It connects plan execution to the dailybot **`report`** sub-skill and optionally commits harness hooks. Everything else — install, consent, authentication, writing style — is **deferred** to the official [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) (currently **3.4.0**).
+The DWP Dailybot addon does **not** reinvent Dailybot. It connects plan execution to the dailybot **`report`** sub-skill and optionally commits harness hooks. Everything else — install, consent, authentication, writing style — is **deferred** to the official [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) (currently **3.10.3**).
 
 ### Four lifecycle events
 
@@ -40,7 +40,7 @@ Payloads derive from the plan's state layer (`state.json`) when present: `comple
 
 ### Optional hook enforcement
 
-With `dailybot-cli >= 3.1.2`, the addon **may** commit repo-level harness hooks (`dailybot hook session-start | activity | post-commit | stop | dismiss`) backed by a local per-repo ledger. The harness reminds the agent at end of turn when a lifecycle event was missed — critical for long unattended sessions where prompt instructions decay.
+With `dailybot-cli >= 3.7.0`, the addon **may** commit repo-level harness hooks (`dailybot hook session-start | activity | post-commit | stop | dismiss`) backed by a local per-repo ledger. The harness reminds the agent at end of turn when a lifecycle event was missed — critical for long unattended sessions where prompt instructions decay.
 
 A successful lifecycle report **resets** the hook ledger, so the two layers never double-report. Hook commands read local state only and always exit `0`.
 
@@ -73,7 +73,7 @@ The addon **offers** install paths; the Dailybot skill owns consent and verifica
 | **Update existing skill** | `npx skills update dailybot` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Git clone** | `git clone https://github.com/DailybotHQ/agent-skill.git` + `./setup.sh` |
-| **Dailybot CLI** (minimum `>= 3.1.2`) | Installed by the skill on first use via verified `shared/auth.md`; or `pip install 'dailybot-cli>=3.1.2'`, Homebrew, or the checksum-verified installer at [cli.dailybot.com](https://cli.dailybot.com) |
+| **Dailybot CLI** (minimum `>= 3.7.0`) | Installed by the skill on first use via verified `shared/auth.md`; or `pip install 'dailybot-cli>=3.7.0'`, Homebrew, or the checksum-verified installer at [cli.dailybot.com](https://cli.dailybot.com) |
 
 Check versions: `dailybot --version` and `dailybot version --check`. Upgrade: `dailybot upgrade`.
 
@@ -82,13 +82,14 @@ Check versions: `dailybot --version` and `dailybot version --check`. Upgrade: `d
 This addon **never** prompts for email, OTP, or API keys, and **never** stores credentials. Authentication is owned by the Dailybot skill's [`shared/auth.md`](https://github.com/DailybotHQ/agent-skill/blob/main/skills/dailybot/shared/auth.md):
 
 - `dailybot login` (email OTP), or
-- `DAILYBOT_API_KEY` / `dailybot config key=...`
+- `DAILYBOT_API_KEY` / `dailybot config key=...`, or
+- an opt-in, gitignored `.dailybot/env.json` per-repo key file (`dailybot env add/use`, CLI `>= 3.7.0`) so a developer can be signed into different orgs in different repos.
 
-If auth is declined or unavailable, reporting is skipped silently — work continues.
+Auth resolution is **Bearer-first**: a session token takes priority, with a transparent Bearer→API-key retry on `401`/`403` so a stale token never blocks a valid key. If auth is declined or unavailable, reporting is skipped silently — work continues.
 
-## The paired Dailybot skill — 13 capabilities (3.4.0)
+## The paired Dailybot skill — 14 capabilities (3.10.3)
 
-Installing the Dailybot agent skill brings far more than the DWP addon wires. The official skill pack (skill **3.4.0**, CLI **>= 3.1.2**, current publish **3.2.1**) exposes **13 coordinated sub-skills**:
+Installing the Dailybot agent skill brings far more than the DWP addon wires. The official skill pack (skill **3.10.3**, CLI baseline **>= 3.7.0**, current publish **3.7.3**) exposes **14 coordinated sub-skills**:
 
 | Sub-skill | What it does |
 |-----------|--------------|
@@ -102,9 +103,10 @@ Installing the Dailybot agent skill brings far more than the DWP addon wires. Th
 | **Check-ins** | Complete standups; **author** check-ins (schedule, participants, questions, reminders, AI settings) |
 | **Kudos** | Recognize teammates or whole teams; browse recognition feed, org feed, wall of fame |
 | **Teams** | List teams, inspect members, resolve names to UUIDs; `me`, `org`, user profiles |
-| **Forms** | List, submit, update, transition forms; **author** forms (workflow states, permissions, ChatOps) |
+| **Forms** | List (now **org-scoped** by default, with `--mine` and `--owner` to narrow), submit, update, transition forms; **author** forms (workflow states, permissions, ChatOps); pagination, search, and date filters |
 | **Workflows** | Read org workflows (`workflow list` / `workflow get`; read-only) |
 | **Report channels** | Discover channel UUIDs for forms or check-ins |
+| **Per-repo API keys** | Manage `.dailybot/env.json` — an opt-in, gitignored file of API keys + URLs per environment (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.7.0`) |
 
 **The DWP addon wires only `report` into plan execution.** Invoke the Dailybot skill directly for everything else — for example, post a deploy summary to `#releases`, complete a standup, or ask the Dailybot AI to summarize check-in trends.
 

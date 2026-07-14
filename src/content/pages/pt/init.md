@@ -144,7 +144,7 @@ design-system) e ofereça cada um como uma escolha explícita. Um repositório �
 totalmente conforme com **zero** addons — nunca os instale automaticamente.
 
 - **Suporte a devcontainer** — um dev container reproduzível e isolado com auth de CLI de IA persistente.
-- **Integração com a Dailybot** — quatro eventos do ciclo de vida (kickoff, tarefa significativa, bloqueado, conclusão) como relatórios de progresso best-effort para equipes que já usam a Dailybot, com reforço autônomo opcional via hooks (`dailybot-cli >= 3.1.2`). A instalação da skill de agente Dailybot emparelhada (3.4.0) também expõe chat, check-ins, criação de formulários, consulta à IA e mais — o addon conecta apenas os relatórios à execução DWP. A metodologia central tem zero dependência da Dailybot.
+- **Integração com a Dailybot** — quatro eventos do ciclo de vida (kickoff, tarefa significativa, bloqueado, conclusão) como relatórios de progresso best-effort para equipes que já usam a Dailybot, com reforço autônomo opcional via hooks (`dailybot-cli >= 3.7.0`). A instalação da skill de agente Dailybot emparelhada (3.10.3) também expõe chat, check-ins, criação de formulários, consulta à IA, chaves API por repositório e mais — o addon conecta apenas os relatórios à execução DWP. A metodologia central tem zero dependência da Dailybot.
 - **Atualização de dependências** — atualizações independentes do gerenciador de pacotes, em lotes, validadas e reversíveis. Quando
   aceita, ela instala o comando `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` opcional para repos com uma superfície de interface detectada
