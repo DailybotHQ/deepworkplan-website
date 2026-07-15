@@ -1,0 +1,121 @@
+name: Check & Merge Vendored Skills PR
+
+# Auto-merges the PR opened by `check_vendored_skills.yml` once CI is
+# green. When the merge lands, the standard `release_and_publish.yml`
+# workflow fires (it triggers on `pull_request: closed && merged`) and
+# cuts the website's next patch release — so the whole chain from
+# "upstream skill v2.16.4 was published" to "deepworkplan.com released
+# v1.0.75 with 2.16.4 vendored" runs unattended.
+#
+# Mirrors `check_and_merge_packages_upgrades_pr.yml`. Only auto-merges
+# when GitHub reports `mergeable_state == "clean"` (all required checks
+# passed, no conflicts). If not clean, the PR stays open for a human to
+# review — this workflow never force-merges.
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily at 17:00 UTC — 5 hours after the check runs at 12:00 UTC.
+    # Matches the "detect at 15:00 → merge at 20:00" gap used for npm
+    # dependency upgrades, giving CI enough time to run and, ideally,
+    # for a maintainer to intervene if a specific upgrade should NOT
+    # auto-merge (close the PR before 17:00 UTC and this run is a no-op).
+    - cron: '0 17 * * *'
+
+env:
+  GIT_BRANCH_FOR_SKILLS_REFRESH: feature__vendored_skills_refresh
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: check-and-merge-vendored-skills
+  cancel-in-progress: false
+
+jobs:
+  check_and_merge_vendored_skills_pr:
+    name: 'Check & Merge Vendored Skills PR'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.18.0'
+
+      - name: Step 1 - ⚙️ Setup GitHub Config
+        run: |
+          git config user.name "🤖 Dailybot"
+          git config user.email "ops@dailybot.com"
+          gh auth login --with-token <<< "${{ secrets.AUTOMATION_GITHUB_TOKEN }}"
+
+      - name: Step 2 - 🔍 Locate the open vendored-skills refresh PR
+        id: locate_pr
+        run: |
+          set -euo pipefail
+          PR_NUMBER=$(gh pr list -B main -s open -L 1 \
+            --json number,headRefName \
+            -q '.[] | select(.headRefName == "'"$GIT_BRANCH_FOR_SKILLS_REFRESH"'") | .number' \
+            || true)
+          if [ -z "$PR_NUMBER" ]; then
+            echo "No open PR from ${GIT_BRANCH_FOR_SKILLS_REFRESH} to main — nothing to merge."
+            echo "**No open PR** — this is expected on days when no upstream skill released." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+
+      - if: ${{ steps.locate_pr.outputs.pr_number }}
+        name: Step 3 - 🧾 Read PR title/body for the run summary
+        id: read_pr
+        run: |
+          set -euo pipefail
+          PR_NUMBER="${{ steps.locate_pr.outputs.pr_number }}"
+          PR_TITLE=$(gh pr view "$PR_NUMBER" --json title -q '.title')
+          echo "pr_title=$PR_TITLE" >> "$GITHUB_OUTPUT"
+          {
+            echo "## Vendored-skills refresh PR"
+            echo ""
+            echo "**#${PR_NUMBER}** — ${PR_TITLE}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - if: ${{ steps.locate_pr.outputs.pr_number }}
+        name: Step 4 - 🚦 Check mergeable state and merge if clean
+        id: merge_if_clean
+        run: |
+          set -euo pipefail
+          PR_NUMBER="${{ steps.locate_pr.outputs.pr_number }}"
+
+          # Prefer the REST API's `mergeable_state`. `"clean"` means all
+          # required status checks pass AND there are no conflicts AND the
+          # branch is up to date with base. Any other value (`"blocked"`,
+          # `"unstable"`, `"dirty"`, `"unknown"`, ...) means we should NOT
+          # auto-merge — leave the PR alone for a human to review.
+          PR_DATA=$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}")
+          PR_MERGEABLE_STATE=$(echo "$PR_DATA" | jq -r '.mergeable_state')
+
+          echo "pr_mergeable_state=$PR_MERGEABLE_STATE" >> "$GITHUB_OUTPUT"
+          echo "PR #${PR_NUMBER} mergeable_state = ${PR_MERGEABLE_STATE}"
+
+          if [ "$PR_MERGEABLE_STATE" != "clean" ]; then
+            {
+              echo ""
+              echo "**Mergeable state:** \`${PR_MERGEABLE_STATE}\` — not merging automatically. Leaving PR open for review."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          # `--merge` (not `--squash`) so `release_and_publish.yml`, which
+          # counts commits since the last release marker, picks up the
+          # refresh commit as a normal entry in the release notes.
+          gh pr merge "$PR_NUMBER" --merge
+          {
+            echo ""
+            echo "**Merged automatically** — \`release_and_publish.yml\` will now bump the website version and publish a release with the refreshed skills."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+    outputs:
+      pr_number: ${{ steps.locate_pr.outputs.pr_number }}
+      pr_title: ${{ steps.read_pr.outputs.pr_title }}
+      pr_mergeable_state: ${{ steps.merge_if_clean.outputs.pr_mergeable_state }}

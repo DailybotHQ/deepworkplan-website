@@ -164,16 +164,119 @@ Dispatches a `cleanup_caches` event via GitHub API.
 
 ---
 
+## 6. check_vendored_skills.yml — Detect Vendored-Skill Updates
+
+| Property | Value |
+|----------|-------|
+| **Trigger** | Scheduled: **daily at 12:00 UTC** + `workflow_dispatch` |
+| **Concurrency** | `check-vendored-skills`, `cancel-in-progress: false` |
+| **Branch** | `feature__vendored_skills_refresh` (bot-owned; force-reset from main on every run that finds updates) |
+
+Detects when either upstream agent-skill repo has cut a release newer than the copy vendored under `.agents/skills/`, and opens a PR that refreshes them:
+
+- `DailybotHQ/deepworkplan-skill` → `.agents/skills/deepworkplan/`
+- `DailybotHQ/agent-skill` → `.agents/skills/dailybot/`
+
+When that PR merges, `release_and_publish.yml` (Section 5) fires normally — so **a new upstream skill release directly causes a new website release** that ships with the refreshed skills vendored inside. No manual step in between.
+
+Companion workflow `check_and_merge_vendored_skills_pr.yml` (Section 7) auto-merges the PR once CI is green.
+
+### Job: `check_vendored_skills`
+
+| Step | Name | What it does |
+|------|------|-------------|
+| — | Checkout | `actions/checkout@v4` with `AUTOMATION_GITHUB_TOKEN`, `fetch-depth: 0` |
+| — | Setup Node | 24.18.0 |
+| 1 | Setup GitHub Config | Git config + `gh auth login` |
+| 2 | Resolve upstream tags vs vendored versions | For each skill: `gh release view --repo <owner/repo> --json tagName -q .tagName` (unless a `workflow_dispatch` input pins it). Reads current vendored versions from `.agents/skills/*/SKILL.md`. Computes `updates_available`. |
+| 3 | Reset feature branch from main | If `updates_available`: deletes the remote branch (if any) and re-branches from main so every run starts on a clean base |
+| 4a | Install deepworkplan at resolved tag | `npx --yes skills add DailybotHQ/deepworkplan-skill@<tag> --skill deepworkplan --force -y` + version-match invariant assertion |
+| 4b | Install dailybot at resolved tag | Same pattern for `DailybotHQ/agent-skill@<tag>` |
+| 5 | Stage vendored files and check for actual changes | Stages `.agents/skills/{deepworkplan,dailybot}/` and `skills-lock.json`; short-circuits if `git diff --cached --quiet` (pinned to current) |
+| 6 | Commit and push feature branch | Commits `chore: refresh vendored skills to (deepworkplan vX.Y.Z, dailybot vA.B.C)` and force-with-lease pushes to `feature__vendored_skills_refresh` |
+| 7 | Open (or update) the pull request | `gh pr create` (or `gh pr edit` if a PR from that branch is already open) with a diff-style body listing the from/to versions and release-notes links |
+
+### Manual override
+
+Run from the Actions tab (`workflow_dispatch`) with optional inputs to pin either skill to a specific tag:
+
+- `deepworkplan_tag` — e.g. `v2.16.3` (blank = latest release)
+- `dailybot_tag` — e.g. `v3.10.3` (blank = latest release)
+
+Useful for previewing a pre-release, or intentionally rolling back to an older tag.
+
+### Failure modes
+
+| Failure | Behavior |
+|---------|----------|
+| Both skills already at latest | Job exits 0 with a summary; no branch, no commit, no PR |
+| Upstream repo has no releases / API blip | Warning in job summary; that skill is skipped, the other continues |
+| `npx skills add` fails | **Fails the job** — treated as real breakage (the whole point of the smoke test) |
+| Vendored `SKILL.md` version does not match the requested tag | **Fails the job** — refuses to open a PR whose title misrepresents its contents |
+| No diff after install (rare pin-to-current case) | Skips commit + PR; exits 0 |
+
+**Secrets:** `AUTOMATION_GITHUB_TOKEN`
+
+---
+
+## 7. check_and_merge_vendored_skills_pr.yml — Auto-Merge Vendored-Skill Refresh PR
+
+| Property | Value |
+|----------|-------|
+| **Trigger** | Scheduled: **daily at 17:00 UTC** + `workflow_dispatch` |
+| **Timing** | Runs 5 hours after the check workflow to allow CI (`code_check.yml`, `pull_request_check.yml`) to complete |
+| **Concurrency** | `check-and-merge-vendored-skills`, `cancel-in-progress: false` |
+
+Mirrors the pattern of `check_and_merge_packages_upgrades_pr.yml` (Section 4) but targeting the vendored-skills refresh PR.
+
+### Job: `check_and_merge_vendored_skills_pr`
+
+| Step | Name | What it does |
+|------|------|-------------|
+| — | Checkout | `actions/checkout@v4` with `AUTOMATION_GITHUB_TOKEN` |
+| — | Setup Node | 24.18.0 |
+| 1 | Setup GitHub Config | Git config + `gh auth login` |
+| 2 | Locate PR | `gh pr list -B main -s open -H feature__vendored_skills_refresh` — exits 0 if no PR |
+| 3 | Read PR title/body | For the run summary only |
+| 4 | Check mergeable state and merge if clean | `gh api repos/:owner/:repo/pulls/:n` → if `mergeable_state == "clean"`, `gh pr merge <n> --merge`. Otherwise leaves PR open. |
+
+**Key behavior:** Only merges when GitHub reports `mergeable_state == "clean"` (all required checks passed AND no conflicts AND branch up to date with base). Any other state (`blocked`, `unstable`, `dirty`, `unknown`, ...) leaves the PR open for a human to review. The workflow never force-merges.
+
+**Merge triggers a release:** Because `release_and_publish.yml` runs on `pull_request: closed && merged == true`, the merge here directly cuts a new website release (bumps `package.json`, tags `vX.Y.Z`, publishes a GitHub Release). This is intentional — a new upstream skill release IS the reason for a new website release.
+
+**Opting out of an individual auto-merge:** Close the PR (or push additional commits so it goes non-clean) before 17:00 UTC. The next day's check run will re-open it with the same target tags if they haven't advanced.
+
+**Secrets:** `AUTOMATION_GITHUB_TOKEN`
+
+---
+
 ## Workflow Dependencies
 
 ```
-check_pr_size_label
-         │
-         ▼
-  release_and_publish
-         │
-         ▼
-  cleanup_caches
+                       ┌──────────────────────────────┐
+                       │      Upstream skill release  │
+                       │  (deepworkplan / agent-skill)│
+                       └──────────────┬───────────────┘
+                                      │
+       12:00 UTC daily ▶ check_vendored_skills.yml (or manual)
+                                      │
+                              opens/updates PR
+                                      │
+                                      ▼
+                     code_check + pull_request_check (on PR)
+                                      │
+       17:00 UTC daily ▶ check_and_merge_vendored_skills_pr.yml
+                                      │
+                              gh pr merge --merge  (if clean)
+                                      │
+                                      ▼
+                       release_and_publish.yml (Section 5)
+                                      │
+                                      ▼
+     check_pr_size_label ──▶ release_and_publish ──▶ cleanup_caches
+                                      │
+                                      ▼
+                       Cloudflare Pages deploy (on push to main)
 ```
 
 **Note:** Cloudflare Pages deploys independently on push to `main` (configured in Cloudflare dashboard).

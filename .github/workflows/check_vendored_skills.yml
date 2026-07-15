@@ -1,0 +1,343 @@
+name: Check Vendored Skills
+
+# Detects when either upstream agent-skill repo (deepworkplan-skill or
+# agent-skill/dailybot) has cut a release newer than the copy vendored under
+# `.agents/skills/`, and opens a PR that refreshes them. Merging that PR
+# triggers `release_and_publish.yml` → the website version bumps, a new
+# `vX.Y.Z` tag is cut, and a GitHub Release ships with the refreshed skill
+# tree inside. In other words: **a new upstream skill release directly
+# causes a new website release** — no manual step in between.
+#
+# Companion workflow `check_and_merge_vendored_skills_pr.yml` auto-merges
+# the PR a few hours later once CI is green. Together they mirror the
+# `check_packages_versions.yml` + `check_and_merge_packages_upgrades_pr.yml`
+# pattern already used for npm dependency upgrades.
+#
+# Manual runs (`workflow_dispatch`) accept optional per-skill tag pins so a
+# maintainer can preview a pre-release or intentionally roll back.
+
+on:
+  workflow_dispatch:
+    inputs:
+      deepworkplan_tag:
+        description: 'Pin deepworkplan-skill to a tag (e.g. v2.16.3). Blank = latest release.'
+        required: false
+        type: string
+      dailybot_tag:
+        description: 'Pin dailybot agent-skill to a tag (e.g. v3.10.3). Blank = latest release.'
+        required: false
+        type: string
+  schedule:
+    # Daily at 12:00 UTC. Upstream skills release often enough that a
+    # weekly cadence would leave the site lagging days behind; a daily
+    # check + a 5-hour delayed auto-merge gets a new upstream release
+    # into a website release within ~24h without human intervention.
+    - cron: '0 12 * * *'
+
+env:
+  GIT_BRANCH_FOR_SKILLS_REFRESH: feature__vendored_skills_refresh
+
+permissions:
+  contents: write
+  pull-requests: write
+
+# Never allow two check runs to race for the same feature branch — the
+# second run would step on the first's force-push. A queued run waits.
+concurrency:
+  group: check-vendored-skills
+  cancel-in-progress: false
+
+jobs:
+  check_vendored_skills:
+    name: 'Check Vendored Skills'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.18.0'
+          registry-url: https://registry.npmjs.org/
+
+      - name: Step 1 - ⚙️ Setup GitHub Config
+        run: |
+          git config user.name "🤖 Dailybot"
+          git config user.email "ops@dailybot.com"
+          gh auth login --with-token <<< "${{ secrets.AUTOMATION_GITHUB_TOKEN }}"
+
+      - name: Step 2 - 🔍 Resolve upstream tags vs vendored versions
+        id: resolve
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+          DWP_INPUT: ${{ github.event.inputs.deepworkplan_tag }}
+          DB_INPUT: ${{ github.event.inputs.dailybot_tag }}
+        run: |
+          set -euo pipefail
+
+          # Resolve one upstream skill to a concrete tag.
+          #   $1 = owner/repo, $2 = workflow_dispatch pin (or ""), $3 = pretty name
+          # Prints "" on failure so callers can skip cleanly — a transient
+          # upstream API blip should NOT poison the whole refresh.
+          #
+          # CRITICAL: all logging goes to stderr (>&2). Only the tag itself
+          # touches stdout, because the caller uses `X=$(resolve ...)` — any
+          # `::notice::`/`::warning::` on stdout would be swallowed into the
+          # captured variable and the equality checks below would spuriously
+          # think an update is needed. GitHub Actions still renders workflow
+          # commands emitted to stderr.
+          resolve() {
+            local repo="$1" input="$2" name="$3"
+            if [ -n "$input" ]; then
+              echo "::notice::${name}: pinned by workflow input to ${input}" >&2
+              printf '%s\n' "$input"
+              return 0
+            fi
+            local tag
+            tag=$(gh release view --repo "$repo" --json tagName -q .tagName 2>/dev/null || true)
+            if [ -z "$tag" ]; then
+              echo "::warning::${name}: could not resolve latest release for ${repo} — skipping" >&2
+              printf '\n'
+              return 0
+            fi
+            echo "::notice::${name}: latest published release is ${tag}" >&2
+            printf '%s\n' "$tag"
+          }
+
+          DWP_TAG=$(resolve DailybotHQ/deepworkplan-skill "$DWP_INPUT" deepworkplan)
+          DB_TAG=$(resolve DailybotHQ/agent-skill "$DB_INPUT" dailybot)
+
+          # Currently vendored versions on main (bare number, no leading v).
+          DWP_CUR=$(sed -nE 's/^version:[[:space:]]*"([^"]+)".*/\1/p' .agents/skills/deepworkplan/SKILL.md | head -n1)
+          DB_CUR=$(sed -nE 's/^version:[[:space:]]*"([^"]+)".*/\1/p' .agents/skills/dailybot/SKILL.md | head -n1)
+
+          # Per-skill "moved" flag: true iff the resolved tag differs from
+          # the currently vendored version. Downstream steps use these to
+          # skip installing skills that would produce no change AND to keep
+          # the commit subject / PR title accurate ("refresh deepworkplan
+          # v2.16.3" vs. the misleading "refresh deepworkplan v2.16.3,
+          # dailybot v3.10.3" when only deepworkplan actually moved).
+          DWP_MOVED=false
+          DB_MOVED=false
+          if [ -n "$DWP_TAG" ] && [ "$DWP_CUR" != "${DWP_TAG#v}" ]; then
+            DWP_MOVED=true
+          fi
+          if [ -n "$DB_TAG" ] && [ "$DB_CUR" != "${DB_TAG#v}" ]; then
+            DB_MOVED=true
+          fi
+          UPDATES_AVAILABLE=false
+          if [ "$DWP_MOVED" = "true" ] || [ "$DB_MOVED" = "true" ]; then
+            UPDATES_AVAILABLE=true
+          fi
+
+          {
+            echo "dwp_tag=$DWP_TAG"
+            echo "db_tag=$DB_TAG"
+            echo "dwp_cur=$DWP_CUR"
+            echo "db_cur=$DB_CUR"
+            echo "dwp_moved=$DWP_MOVED"
+            echo "db_moved=$DB_MOVED"
+            echo "updates_available=$UPDATES_AVAILABLE"
+          } >> "$GITHUB_OUTPUT"
+
+          {
+            echo "## Vendored vs upstream"
+            echo ""
+            echo "| Skill | Vendored | Latest upstream | Moved? |"
+            echo "| --- | --- | --- | --- |"
+            echo "| deepworkplan | v${DWP_CUR} | ${DWP_TAG:-_(unresolved)_} | ${DWP_MOVED} |"
+            echo "| dailybot | v${DB_CUR} | ${DB_TAG:-_(unresolved)_} | ${DB_MOVED} |"
+            echo ""
+            echo "**Updates available:** \`${UPDATES_AVAILABLE}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - if: ${{ steps.resolve.outputs.updates_available == 'true' }}
+        name: Step 3 - 🌱 Reset feature branch from main
+        run: |
+          set -euo pipefail
+          # The refresh branch is 100% bot-owned — force-reset from main so
+          # every run starts from a clean, up-to-date base. This guarantees
+          # the PR that lands never carries stale conflict material from a
+          # previous refresh cycle that was never merged.
+          if [ -n "$(git ls-remote --heads origin $GIT_BRANCH_FOR_SKILLS_REFRESH)" ]; then
+            git push origin --delete "$GIT_BRANCH_FOR_SKILLS_REFRESH" || true
+          fi
+          git checkout -b "$GIT_BRANCH_FOR_SKILLS_REFRESH"
+
+      - if: ${{ steps.resolve.outputs.dwp_moved == 'true' }}
+        name: Step 4a - 📦 Install deepworkplan at resolved tag
+        env:
+          NEW_TAG: ${{ steps.resolve.outputs.dwp_tag }}
+        run: |
+          set -euo pipefail
+          NEW_VERSION="${NEW_TAG#v}"
+
+          # Two `-y` / `--yes` flags below — both required in a non-TTY
+          # environment: `npx --yes` skips the "install the package?"
+          # prompt, `skills add ... -y` skips the interactive agent picker.
+          echo "::group::npx skills add DailybotHQ/deepworkplan-skill@${NEW_TAG}"
+          npx --yes skills add "DailybotHQ/deepworkplan-skill@${NEW_TAG}" \
+            --skill deepworkplan --force -y
+          echo "::endgroup::"
+
+          # Invariant: what got installed MUST equal what we asked for.
+          # Otherwise we'd open a PR that misrepresents its title.
+          VENDORED_VERSION=$(sed -nE 's/^version:[[:space:]]*"([^"]+)".*/\1/p' .agents/skills/deepworkplan/SKILL.md | head -n1)
+          if [ "$VENDORED_VERSION" != "$NEW_VERSION" ]; then
+            echo "::error::deepworkplan install produced version '${VENDORED_VERSION}', expected '${NEW_VERSION}' (tag ${NEW_TAG})"
+            exit 1
+          fi
+
+      - if: ${{ steps.resolve.outputs.db_moved == 'true' }}
+        name: Step 4b - 📦 Install dailybot at resolved tag
+        env:
+          NEW_TAG: ${{ steps.resolve.outputs.db_tag }}
+        run: |
+          set -euo pipefail
+          NEW_VERSION="${NEW_TAG#v}"
+
+          echo "::group::npx skills add DailybotHQ/agent-skill@${NEW_TAG}"
+          npx --yes skills add "DailybotHQ/agent-skill@${NEW_TAG}" \
+            --skill dailybot --force -y
+          echo "::endgroup::"
+
+          VENDORED_VERSION=$(sed -nE 's/^version:[[:space:]]*"([^"]+)".*/\1/p' .agents/skills/dailybot/SKILL.md | head -n1)
+          if [ "$VENDORED_VERSION" != "$NEW_VERSION" ]; then
+            echo "::error::dailybot install produced version '${VENDORED_VERSION}', expected '${NEW_VERSION}' (tag ${NEW_TAG})"
+            exit 1
+          fi
+
+      - if: ${{ steps.resolve.outputs.updates_available == 'true' }}
+        name: Step 5 - 🔍 Stage vendored files and check for actual changes
+        id: git_changes
+        run: |
+          set -euo pipefail
+          # Stage only the paths the installer is allowed to touch. Anything
+          # else in the working tree (transient CI artefacts, node_modules,
+          # etc.) is intentionally excluded from the PR.
+          git add \
+            .agents/skills/deepworkplan \
+            .agents/skills/dailybot \
+            skills-lock.json 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            # This can happen when a workflow_dispatch input pins a tag that
+            # matches what's already on main — `--force` re-copies identical
+            # bytes and `git diff` sees no change.
+            echo "changes_available=false" >> "$GITHUB_OUTPUT"
+            echo "No file changes staged — vendored copies already match the resolved tags."
+            {
+              echo ""
+              echo "**No PR opened** — the resolved tags produced no file changes."
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "changes_available=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - if: ${{ steps.git_changes.outputs.changes_available == 'true' }}
+        name: Step 6 - 📝 Commit and push feature branch
+        env:
+          DWP_TAG: ${{ steps.resolve.outputs.dwp_tag }}
+          DB_TAG: ${{ steps.resolve.outputs.db_tag }}
+          DWP_MOVED: ${{ steps.resolve.outputs.dwp_moved }}
+          DB_MOVED: ${{ steps.resolve.outputs.db_moved }}
+        run: |
+          set -euo pipefail
+
+          # Build a comma-joined "deepworkplan v2.16.3, dailybot v3.10.4"
+          # summary listing ONLY the skills that actually moved. `${array[*]}`
+          # only uses the first character of IFS when joining, so build the
+          # string by hand to preserve "a, b" (with the space).
+          parts=()
+          [ "$DWP_MOVED" = "true" ] && parts+=("deepworkplan ${DWP_TAG}")
+          [ "$DB_MOVED" = "true" ] && parts+=("dailybot ${DB_TAG}")
+          MSG=""
+          for p in "${parts[@]}"; do
+            if [ -z "$MSG" ]; then MSG="$p"; else MSG="${MSG}, ${p}"; fi
+          done
+
+          git commit -m "chore: refresh vendored skills to ${MSG}"
+          # `--force-with-lease` because Step 3 tries to delete the remote
+          # branch before we branched off main; if that delete failed (rare
+          # protection edge case), we still need to overwrite the stale
+          # remote head. Safe because the branch is 100% bot-owned.
+          git push --force-with-lease -u origin "$GIT_BRANCH_FOR_SKILLS_REFRESH"
+
+      - if: ${{ steps.git_changes.outputs.changes_available == 'true' }}
+        name: Step 7 - 🚀 Open (or update) the pull request
+        id: pull_request
+        env:
+          DWP_TAG: ${{ steps.resolve.outputs.dwp_tag }}
+          DB_TAG: ${{ steps.resolve.outputs.db_tag }}
+          DWP_CUR: ${{ steps.resolve.outputs.dwp_cur }}
+          DB_CUR: ${{ steps.resolve.outputs.db_cur }}
+          DWP_MOVED: ${{ steps.resolve.outputs.dwp_moved }}
+          DB_MOVED: ${{ steps.resolve.outputs.db_moved }}
+        run: |
+          set -euo pipefail
+
+          # PR title mirrors the commit subject — only the skills that
+          # actually moved appear.
+          parts=()
+          [ "$DWP_MOVED" = "true" ] && parts+=("deepworkplan ${DWP_TAG}")
+          [ "$DB_MOVED" = "true" ] && parts+=("dailybot ${DB_TAG}")
+          TITLE_TAIL=""
+          for p in "${parts[@]}"; do
+            if [ -z "$TITLE_TAIL" ]; then TITLE_TAIL="$p"; else TITLE_TAIL="${TITLE_TAIL}, ${p}"; fi
+          done
+          PR_TITLE="🤖 Refresh vendored skills to ${TITLE_TAIL}"
+
+          # PR body: a diff-style table (only skills that moved) + a clear
+          # explanation of what the merge will trigger. Written to a file
+          # so `gh pr create` gets it verbatim — no shell-escaping traps
+          # with backticks or newlines.
+          BODY_FILE="$(mktemp)"
+          {
+            echo "Automated refresh of the vendored agent skills that live under \`.agents/skills/\`."
+            echo ""
+            echo "| Skill | From | To | Release notes |"
+            echo "| --- | --- | --- | --- |"
+            if [ "$DWP_MOVED" = "true" ]; then
+              echo "| \`deepworkplan\` | \`v${DWP_CUR}\` | \`${DWP_TAG}\` | [notes](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/${DWP_TAG}) |"
+            fi
+            if [ "$DB_MOVED" = "true" ]; then
+              echo "| \`dailybot\` | \`v${DB_CUR}\` | \`${DB_TAG}\` | [notes](https://github.com/DailybotHQ/agent-skill/releases/tag/${DB_TAG}) |"
+            fi
+            echo ""
+            echo "## How this refresh happens"
+            echo ""
+            echo "Skills were installed via \`npx --yes skills add <repo>@<tag> --skill <name> --force -y\` — the exact same command any downstream consumer would run. Version invariants (\`SKILL.md\` frontmatter \`version:\` equals the resolved tag) were asserted before the commit was made."
+            echo ""
+            echo "## What merging this PR does"
+            echo ""
+            echo "Merging this PR triggers \`release_and_publish.yml\`, which bumps \`package.json\`, cuts a new \`vX.Y.Z\` tag, and publishes a GitHub Release — so **a new upstream skill release directly produces a new website release** with the refreshed skills inside."
+            echo ""
+            echo "If CI is green, the companion workflow \`check_and_merge_vendored_skills_pr.yml\` will auto-merge this PR a few hours after it opens. Close the PR (or push additional commits) to opt out of that run."
+          } > "$BODY_FILE"
+
+          # Is there already an open PR from this branch? If yes, edit it
+          # in place; if not, create a fresh one.
+          EXISTING_PR=$(gh pr list -B main -s open -H "$GIT_BRANCH_FOR_SKILLS_REFRESH" --json number -q '.[0].number' || true)
+          if [ -z "$EXISTING_PR" ]; then
+            PR_LINK=$(gh pr create --title "$PR_TITLE" --body-file "$BODY_FILE" --base main --head "$GIT_BRANCH_FOR_SKILLS_REFRESH")
+            echo "pr_number=" >> "$GITHUB_OUTPUT"
+            echo "pr_link=$PR_LINK" >> "$GITHUB_OUTPUT"
+            echo "Created new PR: $PR_LINK"
+          else
+            gh pr edit "$EXISTING_PR" --title "$PR_TITLE" --body-file "$BODY_FILE"
+            PR_LINK="https://github.com/${GITHUB_REPOSITORY}/pull/${EXISTING_PR}"
+            echo "pr_number=$EXISTING_PR" >> "$GITHUB_OUTPUT"
+            echo "pr_link=$PR_LINK" >> "$GITHUB_OUTPUT"
+            echo "Updated existing PR #${EXISTING_PR}: $PR_LINK"
+          fi
+
+          {
+            echo ""
+            echo "**Opened PR:** ${PR_LINK}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+    outputs:
+      updates_available: ${{ steps.resolve.outputs.updates_available }}
+      changes_available: ${{ steps.git_changes.outputs.changes_available }}
+      pr_link: ${{ steps.pull_request.outputs.pr_link }}
