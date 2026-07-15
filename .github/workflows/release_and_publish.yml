@@ -97,6 +97,148 @@ jobs:
           git config user.name "deepworkplan-bot"
           git config user.email "bot@deepworkplan.com"
           git config advice.skippedCherryPicks false
+      - name: Step 1a - 🐕 Dogfood — refresh vendored agent skills to latest upstream
+        # Before every website release, bring the two vendored skills under
+        # `.agents/skills/` up to their latest published upstream tags —
+        # so `vX.Y.Z` of this site always ships with a current snapshot of
+        # `deepworkplan` and `dailybot`. Mirrors the "Dogfood" step in
+        # DailybotHQ/deepworkplan-skill's own `auto-release.yml`, adapted
+        # to install third-party upstream tags instead of this repo's own.
+        #
+        # This step runs BEFORE Step 2 on purpose: `get_github_release_log.sh`
+        # in Step 2 collects commit subjects from the previous release
+        # marker up to HEAD; committing the refresh here ensures the
+        # dogfood commit lands in the GitHub Release notes alongside the
+        # PR that triggered this run.
+        #
+        # Failure semantics:
+        #   * Upstream API blip while resolving a tag → warn + skip THAT
+        #     skill (a temporary hiccup with `gh release view` should NOT
+        #     block a website release that was going to happen anyway).
+        #   * `npx skills add` failure OR version-invariant mismatch →
+        #     FAIL the release (we should not publish a website tag that
+        #     misrepresents which skill versions it vendors).
+        #   * Both skills already at latest → clean no-op, release proceeds
+        #     normally without a dogfood commit.
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          # Resolve one upstream skill to a concrete tag. Prints "" on
+          # failure so callers can skip cleanly.
+          #
+          # CRITICAL: all logging goes to stderr (>&2). The caller uses
+          # `X=$(resolve ...)` — any `::notice::`/`::warning::` on stdout
+          # would be captured into the variable and poison the equality
+          # checks below. GitHub Actions still renders workflow commands
+          # emitted to stderr.
+          resolve() {
+            local repo="$1" name="$2"
+            local tag
+            tag=$(gh release view --repo "$repo" --json tagName -q .tagName 2>/dev/null || true)
+            if [ -z "$tag" ]; then
+              echo "::warning::${name}: could not resolve latest release for ${repo} — skipping this skill this release" >&2
+              printf '\n'
+              return 0
+            fi
+            echo "::notice::${name}: latest published release is ${tag}" >&2
+            printf '%s\n' "$tag"
+          }
+
+          read_version() {
+            sed -nE 's/^version:[[:space:]]*"([^"]+)".*/\1/p' "$1" | head -n1
+          }
+
+          install_and_verify() {
+            local repo="$1" skill_name="$2" skill_dir="$3" tag="$4"
+            local new_version="${tag#v}"
+            # Two `-y` / `--yes` flags below — both required in a non-TTY
+            # environment: `npx --yes` skips the "install the package?"
+            # prompt, `skills add ... -y` skips the interactive agent picker.
+            echo "::group::${skill_name}: npx skills add ${repo}@${tag}"
+            npx --yes skills add "${repo}@${tag}" --skill "$skill_name" --force -y
+            echo "::endgroup::"
+            # Invariant: what got installed MUST equal what we asked for.
+            local vendored
+            vendored=$(read_version "${skill_dir}/SKILL.md")
+            if [ "$vendored" != "$new_version" ]; then
+              echo "::error::${skill_name}: installed version '${vendored}' does not match requested tag '${tag}' (expected '${new_version}')"
+              exit 1
+            fi
+          }
+
+          DWP_TAG=$(resolve DailybotHQ/deepworkplan-skill deepworkplan)
+          DB_TAG=$(resolve DailybotHQ/agent-skill dailybot)
+
+          DWP_CUR=$(read_version .agents/skills/deepworkplan/SKILL.md)
+          DB_CUR=$(read_version .agents/skills/dailybot/SKILL.md)
+
+          # Only install skills that would actually change — no wasted work
+          # and no misleading dogfood commit when one skill is at latest
+          # and the other is not.
+          DWP_MOVED=false
+          DB_MOVED=false
+          [ -n "$DWP_TAG" ] && [ "$DWP_CUR" != "${DWP_TAG#v}" ] && DWP_MOVED=true
+          [ -n "$DB_TAG" ] && [ "$DB_CUR" != "${DB_TAG#v}" ] && DB_MOVED=true
+
+          [ "$DWP_MOVED" = "true" ] && install_and_verify DailybotHQ/deepworkplan-skill deepworkplan .agents/skills/deepworkplan "$DWP_TAG"
+          [ "$DB_MOVED" = "true" ] && install_and_verify DailybotHQ/agent-skill dailybot .agents/skills/dailybot "$DB_TAG"
+
+          # Stage only the paths the installer is allowed to touch.
+          git add \
+            .agents/skills/deepworkplan \
+            .agents/skills/dailybot \
+            skills-lock.json 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "Vendored skills already at latest — no dogfood commit needed."
+            {
+              echo "## Vendored skills"
+              echo ""
+              echo "| Skill | Vendored | Latest upstream | Moved? |"
+              echo "| --- | --- | --- | --- |"
+              echo "| deepworkplan | v${DWP_CUR} | ${DWP_TAG:-_(unresolved)_} | ${DWP_MOVED} |"
+              echo "| dailybot | v${DB_CUR} | ${DB_TAG:-_(unresolved)_} | ${DB_MOVED} |"
+              echo ""
+              echo "**No dogfood commit** — vendored copies already match the latest upstream releases."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          # Build a commit subject that lists ONLY the skills that moved.
+          # `${array[*]}` only uses the first character of IFS when joining,
+          # so build the joined string by hand to preserve "a, b" (with the
+          # space).
+          parts=()
+          [ "$DWP_MOVED" = "true" ] && parts+=("deepworkplan ${DWP_TAG}")
+          [ "$DB_MOVED" = "true" ] && parts+=("dailybot ${DB_TAG}")
+          MSG=""
+          for p in "${parts[@]}"; do
+            if [ -z "$MSG" ]; then MSG="$p"; else MSG="${MSG}, ${p}"; fi
+          done
+
+          # Commit locally. Step 3 ('Prepare release') runs right after
+          # and does `pnpm run release && git push --follow-tags origin
+          # main`, which pushes THIS commit alongside the version-bump
+          # commit + tag in a single atomic push. The commit shows up in
+          # the release body because Step 2 (get_github_release_log.sh)
+          # runs after this step and walks the commit range from the
+          # previous release marker up to HEAD.
+          git commit -m "chore: dogfood vendored skills to ${MSG}"
+
+          {
+            echo "## Vendored skills"
+            echo ""
+            echo "| Skill | Vendored | Latest upstream | Moved? |"
+            echo "| --- | --- | --- | --- |"
+            echo "| deepworkplan | v${DWP_CUR} | ${DWP_TAG:-_(unresolved)_} | ${DWP_MOVED} |"
+            echo "| dailybot | v${DB_CUR} | ${DB_TAG:-_(unresolved)_} | ${DB_MOVED} |"
+            echo ""
+            echo "**Dogfood commit:** \`chore: dogfood vendored skills to ${MSG}\`"
+            echo ""
+            echo "This commit is pushed alongside the version-bump commit in Step 3."
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Step 2 - 📄 Set GitHub release content "BODY" env var
         run: |
           bash .github/scripts/get_github_release_log.sh

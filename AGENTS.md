@@ -261,6 +261,27 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 
 **Deterministic hook enforcement (Claude Code):** `.agents/settings.json` wires the Dailybot lifecycle hooks (`dailybot hook session-start | activity | stop`, CLI >= 1.12.0) so the harness itself detects unreported work and reminds the agent at end of turn — no reliance on the model remembering. When a reminder fires: send a report if a meaningful unit of work is done, or run `dailybot hook dismiss` if not — never ignore it silently, and never let reporting block work. The hooks are local-only, always exit 0, and respect `.dailybot/disabled`.
 
+### Vendored agent skills — refreshed on every website release
+
+`.agents/skills/deepworkplan/` and `.agents/skills/dailybot/` are **vendored copies** of the upstream skill repos (`DailybotHQ/deepworkplan-skill` and `DailybotHQ/agent-skill`), tracked in git and pinned via `skills-lock.json`. They are refreshed **automatically as part of every website release**, so `vX.Y.Z` of the site always ships with a current snapshot of both skills.
+
+**How it works.** [`release_and_publish.yml`](.github/workflows/release_and_publish.yml) (which fires on every merge to `main`) has a dogfood step (Step 1a) that runs **before** the version bump:
+
+1. Resolves the latest tag of each upstream skill via `gh release view --repo <owner/repo>`.
+2. Compares against the vendored `SKILL.md` `version:` field. Only installs skills that actually moved.
+3. Runs `npx --yes skills add <repo>@<tag> --skill <name> --force -y` — the exact command any downstream consumer would run, so this doubles as a live smoke test.
+4. Asserts the invariant: installed `SKILL.md` version equals the requested tag. Refuses to proceed with the release if not.
+5. If any files changed, commits `chore: dogfood vendored skills to (…)` locally. Step 3's `git push --follow-tags` sends this commit alongside the version-bump commit and the tag in a single atomic push, and the dogfood commit appears in the auto-generated GitHub Release notes.
+
+**Semantics.** Skill refresh is **release-driven**, not autonomous — no scheduled/cron refresh runs in the background. The vendored copies advance only when a maintainer merges a PR to `main`, which is the same moment `release_and_publish.yml` cuts a new website release. The intent is that the maintainer controls exactly when the site adopts a new skill version.
+
+**Failure semantics.**
+- `npx skills add` failure OR version-invariant mismatch → **fails the release** (a broken upstream tag must never quietly ship inside a website version).
+- Transient `gh release view` blip (rate limit, temporary outage) → skips only that skill for this release; the release itself proceeds.
+- Both skills already at latest → clean no-op, no dogfood commit, release proceeds normally.
+
+**Do not edit files under `.agents/skills/deepworkplan/` or `.agents/skills/dailybot/` by hand** — the next release will overwrite hand edits. Contribute upstream, then merge any PR to trigger a website release that picks up the new upstream tag.
+
 ## Quick Commands
 
 ```bash
