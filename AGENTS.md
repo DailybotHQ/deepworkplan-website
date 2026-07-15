@@ -263,24 +263,52 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 
 ### Vendored agent skills — refreshed on every website release
 
-`.agents/skills/deepworkplan/` and `.agents/skills/dailybot/` are **vendored copies** of the upstream skill repos (`DailybotHQ/deepworkplan-skill` and `DailybotHQ/agent-skill`), tracked in git and pinned via `skills-lock.json`. They are refreshed **automatically as part of every website release**, so `vX.Y.Z` of the site always ships with a current snapshot of both skills.
+`.agents/skills/deepworkplan/`, `.agents/skills/dailybot/`, and `.agents/skills/ai-diff-reviewer/` are **vendored copies** of the upstream skill repos (`DailybotHQ/deepworkplan-skill`, `DailybotHQ/agent-skill`, and `DailybotHQ/ai-diff-reviewer`), tracked in git and pinned via `skills-lock.json`. All three are refreshed **automatically as part of every website release**, so `vX.Y.Z` of the site always ships with a current snapshot of the full skill set.
 
 **How it works.** [`release_and_publish.yml`](.github/workflows/release_and_publish.yml) (which fires on every merge to `main`) has a dogfood step (Step 1a) that runs **before** the version bump:
 
 1. Resolves the latest tag of each upstream skill via `gh release view --repo <owner/repo>`.
 2. Compares against the vendored `SKILL.md` `version:` field. Only installs skills that actually moved.
-3. Runs `npx --yes skills add <repo>@<tag> --skill <name> --force -y` — the exact command any downstream consumer would run, so this doubles as a live smoke test.
+3. Runs `npx --yes skills add <repo>@<tag> --skill <name> --force -y` — the exact command any downstream consumer would run, so this doubles as a live smoke test. Both `--yes` (npm's proceed prompt) AND `-y` (the skills CLI's agent-picker prompt) are required in a non-TTY runner — dropping either hangs the workflow indefinitely.
 4. Asserts the invariant: installed `SKILL.md` version equals the requested tag. Refuses to proceed with the release if not.
-5. If any files changed, commits `chore: dogfood vendored skills to (…)` locally. Step 3's `git push --follow-tags` sends this commit alongside the version-bump commit and the tag in a single atomic push, and the dogfood commit appears in the auto-generated GitHub Release notes.
+5. If any files changed, commits `chore: dogfood vendored skills to (…)` locally with a selective subject that names ONLY the skills that moved (e.g., `chore: dogfood vendored skills to deepworkplan v2.16.4, ai-diff-reviewer v1.7.1`). Step 3's `git push --follow-tags` sends this commit alongside the version-bump commit and the tag in a single atomic push, and the dogfood commit appears in the auto-generated GitHub Release notes.
 
 **Semantics.** Skill refresh is **release-driven**, not autonomous — no scheduled/cron refresh runs in the background. The vendored copies advance only when a maintainer merges a PR to `main`, which is the same moment `release_and_publish.yml` cuts a new website release. The intent is that the maintainer controls exactly when the site adopts a new skill version.
 
 **Failure semantics.**
 - `npx skills add` failure OR version-invariant mismatch → **fails the release** (a broken upstream tag must never quietly ship inside a website version).
 - Transient `gh release view` blip (rate limit, temporary outage) → skips only that skill for this release; the release itself proceeds.
-- Both skills already at latest → clean no-op, no dogfood commit, release proceeds normally.
+- All three skills already at latest → clean no-op, no dogfood commit, release proceeds normally.
 
-**Do not edit files under `.agents/skills/deepworkplan/` or `.agents/skills/dailybot/` by hand** — the next release will overwrite hand edits. Contribute upstream, then merge any PR to trigger a website release that picks up the new upstream tag.
+**Do not edit files under `.agents/skills/deepworkplan/`, `.agents/skills/dailybot/`, or `.agents/skills/ai-diff-reviewer/` by hand** — the next release will overwrite hand edits. Contribute upstream, then merge any PR to trigger a website release that picks up the new upstream tag.
+
+### PR review workflow — Cursor-based, `ready`-label gated
+
+The website ships an AI code-review workflow at [`.github/workflows/pr-review.yml`](.github/workflows/pr-review.yml) powered by `DailybotHQ/ai-diff-reviewer` (GitHub Marketplace listing: **"AI Diff Reviewer"**). It runs on every `pull_request` to `main` that carries the `ready` label AND is opened by a write-tier author (OWNER / MEMBER / COLLABORATOR), single Cursor provider (`model: auto`), and applies the `pr-reviewed` label on success. `critical` findings block the merge; `warning` and `info` findings are reported but non-blocking.
+
+**How to use it.**
+
+1. Open a PR against `main` as normal.
+2. Apply the `ready` label. The workflow triggers.
+3. If the review passes, `pr-reviewed` is applied automatically and the `AI review gate` check turns green.
+4. If a `critical` finding is posted, address it (edit, push a fix, or add an inline reply if you disagree), then toggle the `ready` label off and on to re-run.
+
+**Branch-protection integration.** Mark ONLY the stable-named `AI review gate` job as a required status check in Settings > Branches > Protection rules. GitHub treats `skipped` required checks as passing, so a PR without `ready` becomes mergeable without a review — pair this with a separate rule that enforces `ready` on every PR if that's the workflow you want.
+
+**Setup: `CURSOR_API_KEY` secret.**
+
+1. Get a Cursor subscription key from Cursor's dashboard (unlimited reviews on Pro).
+2. Repo Settings > Secrets and variables > Actions > **New repository secret**.
+3. Name: exactly `CURSOR_API_KEY`. Value: the key. Save.
+4. Without the secret, the `AI review gate` job fails loud with an actionable message ("CURSOR_API_KEY is not configured on this repo").
+
+**Local ↔ CI ↔ apply-review three-moment loop.** The same [`ai-diff-reviewer`](https://skills.sh/DailybotHQ/ai-diff-reviewer) skill vendored at `.agents/skills/ai-diff-reviewer/` powers both the local pre-push review and the CI pass — the skill's `prompt.md` is byte-identical to the CI Action's shipped `prompts/default.md` at the same tag (enforced by upstream CI). Three moments in a maintainer's day:
+
+1. **Local pre-push review** (optional) — run the `ai-diff-reviewer` skill's parent default flow (`/ai-diff-reviewer` or "Review my current branch") before pushing. Same findings CI will produce, minus the round-trip.
+2. **CI review** — push, apply `ready`, this workflow runs.
+3. **Post-CI walkthrough** (optional) — invoke the skill's `apply-review` sub-skill to walk through the CI-posted findings per-finding (apply / defer / skip) with explicit consent. Read-only by default; edits require per-finding yes; never commits or pushes.
+
+**Shared override file: [`.review/extension.md`](.review/extension.md).** Repo-tailored severity overrides + "don't comment on" scopes + repo-specific context. The local skill and the CI Action read the SAME file via `prompt-extension-file:` — one source of truth for what maps to `critical` vs `warning` vs `info` in this codebase.
 
 ## Quick Commands
 
