@@ -1,6 +1,6 @@
 ---
 title: Add-ons
-description: "Optionale DWP-Erweiterungen: die fünf aktiven Addons (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), der Addon-Vertrag und Kit-Konzepte."
+description: "Optionale DWP-Erweiterungen: fünf Addons (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), Addon-Vertrag und Kit-Konzepte."
 order: 5
 lang: de
 section: Addons

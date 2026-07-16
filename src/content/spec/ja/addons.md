@@ -1,6 +1,6 @@
 ---
 title: アドオン
-description: "オプションの DWP 拡張：5 つの出荷済みアドオン（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）、アドオン契約、およびキット概念（スキル、エージェント、プリセット、アダプター、例）。"
+description: "オプションのDWP拡張機能：5つの出荷アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）、アドオン契約、およびキットの基本概念（skills・agents・presets）を説明します。"
 order: 5
 lang: ja
 section: Addons

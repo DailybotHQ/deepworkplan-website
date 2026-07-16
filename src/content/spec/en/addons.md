@@ -1,6 +1,6 @@
 ---
 title: Add-ons
-description: "Optional DWP extensions: the five shipping addons (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), the addon contract, and kit concepts (skills, agents, presets, adapters, examples)."
+description: "Optional DWP extensions: five shipping addons (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), addon contract, and kit concepts."
 order: 5
 lang: en
 section: Addons

@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "İsteğe bağlı DWP eklentisi: Güvenlik İncelemesini yerel bir AI Diff Reviewer geçişiyle güçlendirir, isteğe bağlı Flow B CI birleştirme kapısı (v2), paylaşılan uzantı dosyası ve apply-review yardımcısı."
+description: "İsteğe bağlı DWP eklentisi: Security Review için yerel AI Diff Reviewer geçişi, isteğe bağlı Flow B CI kapısı (v2), ortak extension ve apply-review."
 kind: addon
 lang: tr
 order: 5

@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Tiện ích bổ sung DWP tùy chọn: tăng cường Đánh giá Bảo mật bằng lượt kiểm tra cục bộ AI Diff Reviewer, cổng hợp nhất CI Flow B tùy chọn (v2), tệp mở rộng dùng chung và trợ lý apply-review."
+description: "Addon DWP tùy chọn: lượt AI Diff Reviewer cục bộ cho Security Review, cổng CI Flow B tùy chọn (v2), extension dùng chung và apply-review."
 kind: addon
 lang: vi
 order: 5

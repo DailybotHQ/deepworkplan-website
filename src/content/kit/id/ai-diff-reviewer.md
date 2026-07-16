@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Add-on DWP opsional: perkuat Tinjauan Keamanan dengan penerusan lokal AI Diff Reviewer, gerbang gabungan CI Flow B opsional (v2), file ekstensi bersama, dan pendamping apply-review."
+description: "Add-on DWP opsional: pass lokal AI Diff Reviewer untuk Security Review, gerbang CI Flow B opsional (v2), extension bersama, dan apply-review."
 kind: addon
 lang: id
 order: 5

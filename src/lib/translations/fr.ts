@@ -642,7 +642,7 @@ export const fr: SiteTranslations = {
       {
         title: 'Faire évoluer le kit et accepter des addons',
         description:
-          'Utilisez /skill-create et /agent-create (le sous-skill author) pour faire grandir des skills, agents et commandes adaptés à votre stack. L’onboarding propose aussi cinq addons facultatifs — devcontainer, Dailybot, dependency-upgrade et design-system — que vous acceptez seulement lorsqu’ils conviennent.',
+          'Utilisez /skill-create et /agent-create (le sous-skill author) pour faire grandir des skills, agents et commandes adaptés à votre stack. L’onboarding propose aussi cinq addons facultatifs — devcontainer, Dailybot, dependency-upgrade, design-system et AI Diff Reviewer — que vous acceptez seulement lorsqu’ils conviennent.',
       },
       {
         title: 'Planifier et exécuter',

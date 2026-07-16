@@ -1,6 +1,6 @@
 ---
 title: Аддоны
-description: "Опциональные расширения DWP: пять поставляемых аддонов (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), контракт аддона и концепции kit (навыки, агенты, пресеты, адаптеры, примеры)."
+description: "Опциональные расширения DWP: пять аддонов (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), контракт аддона и понятия kit."
 order: 5
 lang: ru
 section: Addons
@@ -25,7 +25,7 @@ section: Addons
 
 ## Поставляемые аддоны (пять)
 
-Сегодня поставляются четыре аддона. У каждого есть **страница каталога kit** с пользовательскими деталями и **нормативная спецификация** внутри навыка Deep Work Plan.
+Сегодня поставляются пять аддонов. У каждого есть **страница каталога kit** с пользовательскими деталями и **нормативная спецификация** внутри навыка Deep Work Plan.
 
 ### Devcontainer (первый аддон)
 

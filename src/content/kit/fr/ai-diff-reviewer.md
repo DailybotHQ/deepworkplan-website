@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Addon DWP optionnel : renforce la Revue de sécurité avec un passage local AI Diff Reviewer, porte de fusion CI optionnelle Flow B (v2), fichier d'extension partagé et compagnon apply-review."
+description: "Addon DWP optionnel : passage local AI Diff Reviewer pour la Revue de sécurité, porte CI Flow B optionnelle (v2), extension partagée et apply-review."
 kind: addon
 lang: fr
 order: 5

@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "선택적 DWP 애드온: 로컬 AI Diff Reviewer 패스로 보안 검토 강화, 선택적 Flow B CI 병합 게이트(v2), 공유 확장 파일, apply-review 컴패니언."
+description: "선택적 DWP 애드온입니다. Security Review용 로컬 AI Diff Reviewer 패스, 선택적 Flow B CI 머지 게이트(v2), 공유 .review/extension 파일, apply-review 동반 기능으로 로컬과 CI 리뷰를 맞춥니다."
 kind: addon
 lang: ko
 order: 5

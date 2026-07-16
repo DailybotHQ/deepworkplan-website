@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Addon DWP opcional: amplía la Revisión de Seguridad con un pase local de AI Diff Reviewer, compuerta de CI opcional de Flujo B (v2), archivo de extensión compartido y compañero apply-review."
+description: "Addon DWP opcional: pase local de AI Diff Reviewer en la Revisión de Seguridad, puerta CI Flow B opcional (v2), extensión compartida y apply-review."
 kind: addon
 lang: es
 order: 5
@@ -52,7 +52,7 @@ Tras publicar CI una revisión, el desarrollador puede invocar `apply-review` du
 ## Comportamiento
 
 - **Pregunta el flujo; nunca asumas.** Instalar un flujo no solicitado es una huella mayor que permanecer en el Flujo A.
-- **Reconcilia, no sobreescriba.** La skill, extensión o `pr-review.yml` existentes se preservan; solo rellena huecos.
+- **Reconcilia, no sobrescribas.** La skill, extensión o `pr-review.yml` existentes se preservan; solo rellena huecos.
 - **Auth diferida.** Los secretos del proveedor para CI los configura el mantenedor; este addon nunca almacena credenciales.
 - **Neutral respecto al proveedor.** Rechazarlo deja un repositorio plenamente AI-first.
 

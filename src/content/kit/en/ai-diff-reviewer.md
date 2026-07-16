@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Opt-in DWP addon: augment Security Review with a local AI Diff Reviewer pass, optional Flow B CI merge gate (v2), shared extension file, and apply-review companion."
+description: "Opt-in DWP addon: local AI Diff Reviewer Security Review pass, optional Flow B CI gate (v2), shared extension, and apply-review companion."
 kind: addon
 lang: en
 order: 5

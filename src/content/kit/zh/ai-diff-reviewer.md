@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "可选 DWP 附加组件：通过本地 AI Diff Reviewer 通道增强安全审查，可选 Flow B CI 合并门控（v2），共享扩展文件及 apply-review 伴随工具。"
+description: "可选的DWP附加组件：为Security Review提供本地AI Diff Reviewer通道、可选的Flow B CI合并门控（v2）、共享的.review/extension文件，以及apply-review伴侣流程，使本地审查与CI审查两边保持一致。"
 kind: addon
 lang: zh
 order: 5

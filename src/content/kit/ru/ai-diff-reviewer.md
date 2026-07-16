@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Дополнение DWP по выбору: расширяет проверку безопасности локальным проходом AI Diff Reviewer, опциональным CI-шлюзом Flow B (v2), общим файлом расширения и компаньоном apply-review."
+description: "Дополнение DWP по выбору: локальный проход AI Diff Reviewer для Security Review, опциональный CI-шлюз Flow B (v2), общее extension и apply-review."
 kind: addon
 lang: ru
 order: 5

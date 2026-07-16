@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "ส่วนเสริม DWP แบบเลือกใช้: เสริมการตรวจสอบความปลอดภัยด้วยการรัน AI Diff Reviewer ในเครื่อง, เกท CI Flow B แบบเลือกใช้ (v2), ไฟล์ส่วนขยายที่ใช้ร่วมกัน และผู้ช่วย apply-review"
+description: "Addon DWP แบบสมัครใจ: ผ่าน AI Diff Reviewer ภายในสำหรับ Security Review, ประตู CI Flow B แบบเลือกได้ (v2), ไฟล์ extension ร่วม และ apply-review"
 kind: addon
 lang: th
 order: 5

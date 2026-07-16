@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Необов'язковий додаток DWP: розширює Огляд безпеки локальним проходом AI Diff Reviewer, необов'язковим CI-шлюзом Flow B (v2), спільним файлом розширення та супутником apply-review."
+description: "Необов'язковий додаток DWP: локальний прохід AI Diff Reviewer для Security Review, опційний CI-шлюз Flow B (v2), спільне extension і apply-review."
 kind: addon
 lang: uk
 order: 5

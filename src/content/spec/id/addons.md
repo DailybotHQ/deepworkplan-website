@@ -1,6 +1,6 @@
 ---
 title: Add-on
-description: "Ekstensi DWP opsional: lima addon yang dikirim (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), kontrak addon, dan konsep kit (skill, agen, preset, adapter, contoh)."
+description: "Ekstensi DWP opsional: lima addon (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), kontrak addon, dan konsep kit."
 order: 5
 lang: id
 section: Addons
@@ -25,7 +25,7 @@ Penemuan: alur `onboard` mengekstrak `skills/deepworkplan/addons/` dan menyajika
 
 ## Addon yang dikirim (lima)
 
-Empat addon tersedia hari ini. Masing-masing memiliki **halaman katalog kit** dengan detail untuk pengguna dan **spec normatif** di dalam skill Deep Work Plan.
+Lima addon tersedia hari ini. Masing-masing memiliki **halaman katalog kit** dengan detail untuk pengguna dan **spec normatif** di dalam skill Deep Work Plan.
 
 ### Devcontainer (addon pertama)
 

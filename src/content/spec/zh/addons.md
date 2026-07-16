@@ -1,6 +1,6 @@
 ---
 title: 附加组件
-description: "可选 DWP 扩展：五个已发布的附加组件（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）、附加组件合约，以及套件概念（技能、代理、预设、适配器、示例）。"
+description: "可选的DWP扩展：五个已发布附加组件（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）、附加组件合约，以及套件相关概念（skills、agents、presets）说明。"
 order: 5
 lang: zh
 section: Addons

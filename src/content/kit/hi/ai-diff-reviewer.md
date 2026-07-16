@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "वैकल्पिक DWP ऐड-ऑन: स्थानीय AI Diff Reviewer पास से सुरक्षा समीक्षा को बेहतर बनाएं, वैकल्पिक Flow B CI मर्ज गेट (v2), साझा एक्सटेंशन फ़ाइल, और apply-review साथी।"
+description: "वैकल्पिक DWP ऐड-ऑन: Security Review के लिए स्थानीय AI Diff Reviewer पास, वैकल्पिक Flow B CI गेट (v2), साझा extension, और apply-review साथी।"
 kind: addon
 lang: hi
 order: 5

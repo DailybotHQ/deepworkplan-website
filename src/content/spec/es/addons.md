@@ -1,6 +1,6 @@
 ---
 title: Complementos
-description: "Extensiones opcionales de DWP: los cinco addons activos (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), el contrato de addon y conceptos del kit."
+description: "Extensiones opcionales de DWP: cinco addons (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), contrato y conceptos del kit."
 order: 5
 lang: es
 section: Addons

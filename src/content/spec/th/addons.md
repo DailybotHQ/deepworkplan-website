@@ -1,6 +1,6 @@
 ---
 title: ส่วนเสริม
-description: "ส่วนขยาย DWP แบบเลือกได้: ห้า addon ที่จัดส่ง (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer) สัญญา addon และแนวคิด kit (skills, agents, presets, adapters, examples)"
+description: "ส่วนขยาย DWP แบบเลือกได้: ห้า addon (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), สัญญา addon และแนวคิด kit"
 order: 5
 lang: th
 section: Addons
@@ -25,7 +25,7 @@ section: Addons
 
 ## Addon ที่จัดส่ง (ห้าตัว)
 
-วันนี้มีสี่ addon แต่ละตัวมี **หน้าแคตตาล็อก kit** พร้อมรายละเอียดสำหรับผู้ใช้ และ **spec normative** ภายใน skill Deep Work Plan
+วันนี้มีห้า addon แต่ละตัวมี **หน้าแคตตาล็อก kit** พร้อมรายละเอียดสำหรับผู้ใช้ และ **spec normative** ภายใน skill Deep Work Plan
 
 ### Devcontainer (addon แรก)
 

@@ -1,6 +1,6 @@
 ---
 title: Add-on
-description: "Phần mở rộng DWP tùy chọn: năm addon đang phát hành (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), hợp đồng addon và khái niệm kit (skill, agent, preset, adapter, ví dụ)."
+description: "Phần mở rộng DWP tùy chọn: năm addon (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), hợp đồng addon và khái niệm kit."
 order: 5
 lang: vi
 section: Addons
@@ -25,7 +25,7 @@ Khám phá: luồng `onboard` liệt kê `skills/deepworkplan/addons/` và trìn
 
 ## Addon đang phát hành (năm)
 
-Hôm nay có bốn addon. Mỗi addon có **trang danh mục kit** với chi tiết hướng người dùng và **spec chuẩn** bên trong skill Deep Work Plan.
+Hôm nay có năm addon. Mỗi addon có **trang danh mục kit** với chi tiết hướng người dùng và **spec chuẩn** bên trong skill Deep Work Plan.
 
 ### Devcontainer (addon đầu tiên)
 

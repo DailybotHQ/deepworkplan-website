@@ -1,6 +1,6 @@
 ---
 title: ऐडऑन
-description: "वैकल्पिक DWP विस्तार: पाँच shipping ऐडऑन (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), ऐडऑन अनुबंध, और kit अवधारणाएँ (skills, agents, presets, adapters, examples)।"
+description: "वैकल्पिक DWP विस्तार: पाँच ऐडऑन (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), ऐडऑन अनुबंध और kit अवधारणाएँ।"
 order: 5
 lang: hi
 section: Addons
@@ -25,7 +25,7 @@ section: Addons
 
 ## Shipping ऐडऑन (पाँच)
 
-आज चार ऐडऑन ship होते हैं। हर एक का **kit catalog पृष्ठ** user-facing विवरण के साथ और Deep Work Plan स्किल के अंदर **normative spec** है।
+आज पाँच ऐडऑन ship होते हैं। हर एक का **kit catalog पृष्ठ** user-facing विवरण के साथ और Deep Work Plan स्किल के अंदर **normative spec** है।
 
 ### Devcontainer (पहला ऐडऑन)
 

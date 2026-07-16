@@ -631,7 +631,7 @@ export const th: SiteTranslations = {
       {
         title: 'พัฒนาชุดเครื่องมือและรับ addon',
         description:
-          'ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตก การเริ่มต้นยังเสนอ addon แบบสมัครใจห้าตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade และ design-system ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม',
+          'ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตก การเริ่มต้นยังเสนอ addon แบบสมัครใจห้าตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade, design-system และ AI Diff Reviewer ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม',
       },
       {
         title: 'วางแผนและลงมือทำ',

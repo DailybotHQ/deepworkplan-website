@@ -1,6 +1,6 @@
 ---
 title: Add-on
-description: "Estensioni DWP opzionali: i cinque addon in produzione (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), il contratto addon e i concetti del kit (skill, agenti, preset, adapter, esempi)."
+description: "Estensioni DWP opzionali: cinque addon (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), contratto e concetti del kit."
 order: 5
 lang: it
 section: Addons
@@ -25,7 +25,7 @@ Scoperta: il flusso `onboard` enumera `skills/deepworkplan/addons/` e presenta o
 
 ## Addon in produzione (cinque)
 
-Quattro addon sono disponibili oggi. Ognuno ha una **pagina del catalogo kit** con dettagli per l'utente e una **spec normativa** all'interno della skill Deep Work Plan.
+Cinque addon sono disponibili oggi. Ognuno ha una **pagina del catalogo kit** con dettagli per l'utente e una **spec normativa** all'interno della skill Deep Work Plan.
 
 ### Devcontainer (primo addon)
 

@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Opcjonalny dodatek DWP: rozszerza Przegląd Bezpieczeństwa o lokalny przebieg AI Diff Reviewer, opcjonalną bramkę scalania CI Flow B (v2), współdzielony plik rozszerzenia i towarzysza apply-review."
+description: "Opcjonalny dodatek DWP: lokalny przebieg AI Diff Reviewer w Security Review, opcjonalna bramka CI Flow B (v2), wspólne extension i apply-review."
 kind: addon
 lang: pl
 order: 5

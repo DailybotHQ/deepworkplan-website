@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "オプションの DWP アドオン：ローカル AI Diff Reviewer パスでセキュリティレビューを強化、オプションの Flow B CI マージゲート（v2）、共有拡張ファイル、apply-review コンパニオン。"
+description: "任意のDWPアドオンです。Security Review向けのローカルAI Diff Reviewer実行、任意のFlow B CIマージゲート（v2）、共有の.review/extensionファイル、およびapply-reviewコンパニオンを提供し、ローカルとCIのレビューを揃えます。"
 kind: addon
 lang: ja
 order: 5

@@ -1,6 +1,6 @@
 ---
 title: 애드온
-description: "선택적 DWP 확장: 다섯 가지 출시 애드온(devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), 애드온 계약, 및 키트 개념(스킬, 에이전트, 프리셋, 어댑터, 예제)."
+description: "선택적 DWP 확장: 다섯 가지 출시 애드온(devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), 애드온 계약 및 키트 개념(skills, agents, presets)을 설명합니다."
 order: 5
 lang: ko
 section: Addons
@@ -25,7 +25,7 @@ section: Addons
 
 ## 출시 애드온(다섯 가지)
 
-현재 네 가지 애드온이 출시됩니다. 각각 **키트 카탈로그 페이지**(사용자 대상 세부)와 Deep Work Plan 스킬 내 **규범 스펙**이 있습니다.
+현재 다섯 가지 애드온이 출시됩니다. 각각 **키트 카탈로그 페이지**(사용자 대상 세부)와 Deep Work Plan 스킬 내 **규범 스펙**이 있습니다.
 
 ### Devcontainer(첫 번째 애드온)
 

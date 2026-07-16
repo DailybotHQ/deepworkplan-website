@@ -1,6 +1,6 @@
 ---
 title: Додатки
-description: "Опційні розширення DWP: п'ять shipping-аддонів (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), контракт аддона та концепції kit (скіли, агенти, пресети, адаптери, приклади)."
+description: "Опційні розширення DWP: п'ять аддонів (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), контракт аддона та поняття kit."
 order: 5
 lang: uk
 section: Addons
@@ -25,7 +25,7 @@ section: Addons
 
 ## Shipping-аддони (п'ять)
 
-Сьогодні доступні чотири аддони. Кожен має **сторінку каталогу kit** з деталями для користувача та **нормативну spec** у скілі Deep Work Plan.
+Сьогодні доступні п'ять аддонів. Кожен має **сторінку каталогу kit** з деталями для користувача та **нормативну spec** у скілі Deep Work Plan.
 
 ### Devcontainer (перший аддон)
 

@@ -1,6 +1,6 @@
 ---
 title: Modules complémentaires
-description: "Extensions DWP optionnelles : les cinq addons actifs (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), le contrat d'addon et les concepts du kit."
+description: "Extensions DWP optionnelles : cinq addons (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), contrat d’addon et concepts du kit."
 order: 5
 lang: fr
 section: Addons
@@ -25,7 +25,7 @@ Découverte : le flux `onboard` énumère `skills/deepworkplan/addons/` et prés
 
 ## Addons actifs (cinq)
 
-Quatre addons sont actifs aujourd'hui. Chacun a une **page du catalogue kit** avec des détails orientés utilisateur et une **spec normative** dans la skill Deep Work Plan.
+Cinq addons sont actifs aujourd'hui. Chacun a une **page du catalogue kit** avec des détails orientés utilisateur et une **spec normative** dans la skill Deep Work Plan.
 
 ### Devcontainer (premier addon)
 
