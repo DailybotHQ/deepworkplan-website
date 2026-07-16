@@ -124,7 +124,7 @@ DWP Dailybot 附加组件**不会**重新发明 Dailybot。它将计划执行连
 
 ## 接入流程
 
-在 DWP `onboard` **第 7b 阶段**，核心 AI-first 脚手架完成后，流程提供四个可选附加组件。若开发者接受 Dailybot：
+在 DWP `onboard` **第 7b 阶段**，核心 AI-first 脚手架完成后，流程提供五个可选附加组件。若开发者接受 Dailybot：
 
 1. 检测现有设置（技能、CLI、`.dailybot/profile.json`、钩子、报告步骤）。
 2. 通过 Dailybot 的同意流程提供技能/CLI 安装。

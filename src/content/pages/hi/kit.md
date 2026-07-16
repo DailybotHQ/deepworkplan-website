@@ -49,6 +49,7 @@ Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Wind
 - **Dailybot** — Dailybot का उपयोग करने वाली टीमों के लिए सर्वोत्तम-प्रयास प्रगति और मील-पत्थर रिपोर्टिंग।
 - **Dependency upgrade** — पैकेज-मैनेजर-निरपेक्ष, बैच-आधारित, सत्यापित, वापस लेने योग्य अपग्रेड।
 - **Design system** — रिपॉज़िटरी के वास्तविक डिज़ाइन स्रोत से तर्क की गई एक इंटरफ़ेस-दायरे वाली `DESIGN.md` (`docs/DESIGN.md` पर, `AGENTS.md` से संदर्भित), विज़ुअल UI, शैलीबद्ध CLI आउटपुट और संवादात्मक संदेशों के लिए प्रोफ़ाइलों के साथ, ताकि एजेंट ऑन-ब्रांड इंटरफ़ेस आउटपुट बनाएँ; एक डिज़ाइन सिस्टम का पता चलने पर विज़ुअल प्रोफ़ाइल डिफ़ॉल्ट-ऑन है, CLI और संवादात्मक प्रोफ़ाइल पता चलने पर अनुशंसित हैं और हमेशा पूछे जाते हैं।
+- **AI Diff Reviewer** — Security Review को संरचित स्थानीय समीक्षा ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + आवश्यक `.review/extension.md`) से मज़बूत करता है; वैकल्पिक Flow B उसी extension को साझा करने वाला CI PR मर्ज गेट जोड़ता है। हमेशा Flow A vs Flow B पूछें; कभी स्वतः-इंस्टॉल न करें।
 
 ### उदाहरण
 

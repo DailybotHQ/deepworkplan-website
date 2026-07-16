@@ -137,7 +137,7 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
 
 ## 4. Zaproponuj opcjonalne dodatki
 
-Po onboardingu bazowym wymień cztery dodatki (devcontainer, Dailybot, dependency-upgrade, design-system) i zaproponuj każdy jako wyraźną opcję do wyboru. Repozytorium jest
+Po onboardingu bazowym wymień pięć dodatków (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer) i zaproponuj każdy jako wyraźną opcję do wyboru. Repozytorium jest
 w pełni zgodne przy **zerowej** liczbie dodatków — nigdy nie instaluj ich automatycznie.
 
 - **Wsparcie devcontainera** — odtwarzalny, izolowany kontener deweloperski z trwałym uwierzytelnianiem AI-CLI.
@@ -148,6 +148,7 @@ w pełni zgodne przy **zerowej** liczbie dodatków — nigdy nie instaluj ich au
   (nie jest oferowany dla czystych bibliotek, usług headless ani repozytoriów wyłącznie infrastrukturalnych). Trzy
   profile nakładają się w jednym pliku: visual-ui (domyślnie włączony po wykryciu), cli-output i konwersacyjny —
   dwa ostatnie zawsze są pytane, nigdy auto-stosowane.
+- **AI Diff Reviewer** — wzmacnia obowiązkowy Security Review o ustrukturyzowany przegląd lokalny przez [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + wymagany `.review/extension.md`). Zawsze pytaj o **Flow A** (tylko lokalnie) vs **Flow B** (podwójna brama CI z `pr-review.yml`); nigdy nie zakładaj domyślnie. Soft-fail tylko dla brakujących błędów skill/rozszerzenia/wywołania; wyniki `critical` z zakończonego lokalnego przejścia nadal blokują ukończenie Security Review. Podstawowa metodyka nie ma żadnej zależności od AI Diff Reviewer.
 
 ## 5. Rozwijaj kit (sub-skill author)
 

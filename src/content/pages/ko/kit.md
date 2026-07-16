@@ -52,6 +52,7 @@ onboard 흐름이 리포지토리에 얹을 수 있는 선택 기능 — AI-firs
 - **Dailybot** — Dailybot을 사용하는 팀을 위한 최선 노력 기반의 진행 및 마일스톤 보고.
 - **Dependency upgrade** — 패키지 관리자 비종속, 배치 단위, 검증되고 되돌릴 수 있는 업그레이드.
 - **Design system** — 리포지토리의 실제 디자인 소스에서 추론된 인터페이스 범위의 `DESIGN.md`(`docs/DESIGN.md`에 위치하며 `AGENTS.md`에서 참조됨)로, 비주얼 UI, 스타일이 입혀진 CLI 출력, 대화형 메시징을 위한 프로필을 갖추어 에이전트가 브랜드에 맞는 인터페이스 출력을 생성합니다. 디자인 시스템이 감지되면 비주얼 프로필은 기본 활성이고, CLI와 대화형 프로필은 감지 시 권장되며 언제나 먼저 물어봅니다.
+- **AI Diff Reviewer** — 구조화된 로컬 검토([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + 필수 `.review/extension.md`)로 Security Review를 강화합니다. 선택적인 Flow B는 동일한 extension을 공유하는 CI PR 병합 게이트를 추가합니다. 항상 Flow A 대 Flow B를 질문하세요. 절대 자동 설치하지 마세요.
 
 ### 예시
 

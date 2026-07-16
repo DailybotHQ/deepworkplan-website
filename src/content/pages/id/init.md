@@ -141,8 +141,8 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
 
 ## 4. Tawarkan addon opt-in
 
-Setelah onboarding dasar, sebutkan keempat addon (devcontainer, Dailybot, dependency-upgrade,
-design-system) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori sepenuhnya
+Setelah onboarding dasar, sebutkan kelima addon (devcontainer, Dailybot, dependency-upgrade,
+design-system, AI Diff Reviewer) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori sepenuhnya
 konforman dengan **nol** addon — jangan pernah memasangnya secara otomatis.
 
 - **Dukungan devcontainer** — kontainer pengembangan yang terisolasi dan dapat direproduksi dengan autentikasi AI-CLI yang persisten.
@@ -154,6 +154,8 @@ konforman dengan **nol** addon — jangan pernah memasangnya secara otomatis.
   infrastruktur). Tiga profil ditumpuk dalam satu berkas: visual-ui (aktif secara default saat
   terdeteksi), cli-output, dan conversational — dua yang terakhir selalu ditanyakan, tidak pernah
   diterapkan secara otomatis.
+- **AI Diff Reviewer** — meningkatkan Tinjauan Keamanan wajib dengan tinjauan lokal terstruktur
+  melalui [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md` wajib). Selalu tanyakan **Flow A** (hanya lokal) vs **Flow B** (gerbang CI ganda dengan `pr-review.yml`); jangan pernah mengasumsikan nilai default. Kegagalan lunak hanya untuk kesalahan skill/ekstensi/pemanggilan yang hilang; hasil `critical` dari penerusan lokal yang selesai masih memblokir penyelesaian Tinjauan Keamanan. Metodologi inti memiliki nol ketergantungan pada AI Diff Reviewer.
 
 ## 5. Kembangkan kit (sub-skill author)
 

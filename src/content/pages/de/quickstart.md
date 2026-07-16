@@ -42,8 +42,8 @@ Es erzeugt `AGENTS.md`, eine `docs/`-Wissensbasis, Dokumentation je Modul und ei
 ### 3. Das Kit weiterentwickeln und Addons annehmen
 
 Nutzen Sie `/skill-create` und `/agent-create` (die author-Sub-Skill), um stack-passende Skills,
-Agenten und Befehle aufzubauen. Das Onboarding bietet außerdem vier Opt-in-Addons — devcontainer, Dailybot,
-dependency-upgrade und design-system —, die Sie nur annehmen, wenn sie passen. Ein Repository ist mit null Addons vollständig konform.
+Agenten und Befehle aufzubauen. Das Onboarding bietet außerdem fünf Opt-in-Addons — devcontainer, Dailybot,
+dependency-upgrade, design-system und AI Diff Reviewer —, die Sie nur annehmen, wenn sie passen. Ein Repository ist mit null Addons vollständig konform.
 
 ### 4. Planen und ausführen
 

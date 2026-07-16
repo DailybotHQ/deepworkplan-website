@@ -143,9 +143,9 @@ metodología) en vez de sobrescribir — y confirma con el usuario antes de reem
 
 ## 4. Ofrece los addons opcionales
 
-Tras la incorporación base, enumera los cuatro addons (devcontainer, Dailybot, dependency-upgrade,
-design-system) y ofrece cada uno como una opción explícita. Un repositorio es totalmente conforme con
-**cero** addons — nunca los instales automáticamente.
+Tras la incorporación base, enumera los cinco addons (devcontainer, Dailybot, dependency-upgrade,
+design-system, AI Diff Reviewer) y ofrece cada uno como una opción explícita. Un repositorio es
+totalmente conforme con **cero** addons — nunca los instales automáticamente.
 
 - **Soporte de devcontainer** — un contenedor de desarrollo reproducible y aislado con autenticación
   de CLI de IA persistente.
@@ -156,6 +156,8 @@ design-system) y ofrece cada uno como una opción explícita. Un repositorio es 
   (no se ofrece para bibliotecas puras, servicios headless o repos solo de infra). Tres perfiles se
   apilan en un archivo: visual-ui (activado por defecto al detectarse), cli-output y conversacional —
   estos dos últimos siempre se preguntan, nunca se aplican automáticamente.
+- **AI Diff Reviewer** — amplía la Revisión de Seguridad obligatoria con una revisión local estructurada
+  mediante [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md` requerido). Pregunta siempre **Flujo A** (solo local) vs **Flujo B** (compuerta CI de doble superficie con `pr-review.yml`); nunca elijas por defecto. Fallo suave solo para errores de skill/extensión/invocación ausentes; los hallazgos `critical` de un pase local completado siguen bloqueando la finalización de la Revisión de Seguridad. La metodología central tiene cero dependencia de AI Diff Reviewer.
 
 ## 5. Haz evolucionar el kit (sub-skill author)
 

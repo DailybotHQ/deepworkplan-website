@@ -124,7 +124,7 @@ Riferimento pubblico: [dailybot.com/skill.md](https://www.dailybot.com/skill.md)
 
 ## Flusso di onboarding
 
-Durante `onboard` di DWP **Fase 7b**, dopo lo scaffolding AI-first di base, il flusso offre quattro addon opt-in. Se lo sviluppatore accetta Dailybot:
+Durante `onboard` di DWP **Fase 7b**, dopo lo scaffolding AI-first di base, il flusso offre cinque addon opt-in. Se lo sviluppatore accetta Dailybot:
 
 1. Rileva setup esistente (skill, CLI, `.dailybot/profile.json`, hook, passo report).
 2. Offre installazione skill/CLI tramite i flussi di consenso di Dailybot.

@@ -630,7 +630,7 @@ export const en: SiteTranslations = {
       {
         title: 'Evolve the kit and accept addons',
         description:
-          'Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands. Onboarding also offers four opt-in addons — devcontainer, Dailybot, dependency-upgrade, and design-system — that you accept only when they fit.',
+          'Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands. Onboarding also offers five opt-in addons — devcontainer, Dailybot, dependency-upgrade, design-system, and AI Diff Reviewer — that you accept only when they fit.',
       },
       {
         title: 'Plan and execute',
@@ -703,7 +703,7 @@ export const en: SiteTranslations = {
       {
         title: 'Accept opt-in addons',
         description:
-          'Onboarding offers four opt-in addons — devcontainer, Dailybot, dependency-upgrade, and design-system — that you accept only when they fit. A repo is fully conformant with zero addons. Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands beyond the baseline.',
+          'Onboarding offers five opt-in addons — devcontainer, Dailybot, dependency-upgrade, design-system, and AI Diff Reviewer — that you accept only when they fit. A repo is fully conformant with zero addons. Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands beyond the baseline.',
       },
       {
         title: 'Plan and execute',

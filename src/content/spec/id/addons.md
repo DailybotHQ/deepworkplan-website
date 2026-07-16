@@ -1,6 +1,6 @@
 ---
 title: Add-on
-description: "Ekstensi DWP opsional: empat addon yang dikirim (devcontainer, Dailybot, dependency-upgrade, design-system), kontrak addon, dan konsep kit (skill, agen, preset, adapter, contoh)."
+description: "Ekstensi DWP opsional: lima addon (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), kontrak addon, dan konsep kit."
 order: 5
 lang: id
 section: Addons
@@ -23,9 +23,9 @@ Setiap addon yang dikirim menyediakan empat komponen wajib:
 
 Penemuan: alur `onboard` mengekstrak `skills/deepworkplan/addons/` dan menyajikan setiap addon sebagai langkah opt-in di **Fase 7b**, setelah scaffolding inti.
 
-## Addon yang dikirim (empat)
+## Addon yang dikirim (lima)
 
-Empat addon tersedia hari ini. Masing-masing memiliki **halaman katalog kit** dengan detail untuk pengguna dan **spec normatif** di dalam skill Deep Work Plan.
+Lima addon tersedia hari ini. Masing-masing memiliki **halaman katalog kit** dengan detail untuk pengguna dan **spec normatif** di dalam skill Deep Work Plan.
 
 ### Devcontainer (addon pertama)
 
@@ -64,6 +64,18 @@ Upgrade dependensi agnostik package manager, bertahap, tervalidasi, dan dapat di
 - **Yang ditambahkan:** `docs/DESIGN.md` (direferensikan dari `AGENTS.md`) dengan hingga tiga **profil** ditumpuk dalam satu file: **visual-ui** (token dan komponen UI yang dirender), **cli-output** (gaya terminal semantik, degradasi TTY/`NO_COLOR`), **conversational** (suara, anatomi pesan, rendering per platform dengan fallback teks biasa)
 - **Kekuatan profil:** visual-ui **aktif default saat terdeteksi**; cli-output dan conversational **direkomendasikan saat terdeteksi, selalu ditanyakan, tidak pernah diterapkan otomatis**
 - **Kapan ditawarkan:** hanya ketika permukaan antarmuka pengguna terdeteksi — bukan untuk pustaka murni, layanan headless, atau repo hanya infrastruktur
+
+### AI Diff Reviewer (addon kelima)
+
+Koneksi opsional ke **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, versi saat ini **v2.0.0**) yang meningkatkan Tinjauan Keamanan wajib dengan tinjauan lokal terstruktur dan secara opsional mengontrol pull request di CI.
+
+- **Halaman kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — referensi kemampuan lengkap
+- **Yang dihubungkan addon DWP:** peningkatan lokal Tinjauan Keamanan melalui alur default induk skill upstream; `.review/extension.md` wajib (skill saja tidak lengkap); Flow B secara opsional menginstal `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) dan mengekspos `apply-review` sebagai pendamping yang dapat dipanggil pengembang — tidak pernah sebagai tugas rencana
+- **Alur:** **A — hanya lokal** (skill + ekstensi) atau **B — permukaan ganda** (skill + ekstensi + CI Action). Addon **HARUS menanyakan** alur mana; tidak pernah mengasumsikan nilai default
+- **Kegagalan lunak vs gerbang:** kesalahan skill/ekstensi/pemanggilan yang hilang tidak pernah memblokir; hasil `critical` dari penerusan lokal yang **selesai** masih mengikuti kontrak Tinjauan Keamanan
+- **Paritas (Flow B):** `prompt.md` bersama + ekstensi menyelaraskan metodologi/tingkat keparahan; Tinjauan Sadar Iterasi CI dapat mempersingkat putaran 2+ sementara penerusan lokal tetap penuh
+- **Pengamanan netral vendor:** DWP inti memiliki **nol** ketergantungan AI Diff Reviewer; tidak pernah menginstal otomatis untuk semua orang
+- **Kapan ditawarkan:** pengembang atau tim menginginkan tinjauan lokal terstruktur dan/atau gerbang penggabungan PR CI
 
 ## Skill
 

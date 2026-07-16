@@ -137,6 +137,7 @@ Serializes pages and reader entries into agent-friendly Markdown, powering the
 
 | Function | Description |
 |----------|-------------|
+| `buildMarkdownAccessLine(lang)` | Localized `Markdown:` header hint (`Accept: text/markdown` content negotiation) |
 | `serializePageToAgentMarkdown(...)` | Serialize a static page to agent Markdown |
 | `serializeReaderEntryToAgentMarkdown(...)` | Serialize a methodology/spec/kit entry to agent Markdown |
 

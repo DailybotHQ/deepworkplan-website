@@ -140,7 +140,7 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
 
 ## 4. Đề xuất các addon tự nguyện
 
-Sau khi khởi tạo nền tảng, hãy liệt kê bốn addon (devcontainer, Dailybot, dependency-upgrade, design-system) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository
+Sau khi khởi tạo nền tảng, hãy liệt kê năm addon (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository
 hoàn toàn tuân thủ với **không** cần addon nào — đừng bao giờ tự động cài chúng.
 
 - **Hỗ trợ devcontainer** — một dev container tái lập được, cô lập, với xác thực AI-CLI bền vững.
@@ -151,6 +151,8 @@ hoàn toàn tuân thủ với **không** cần addon nào — đừng bao giờ 
   (không đề xuất cho thư viện thuần, dịch vụ headless hay repo chỉ hạ tầng). Ba profile xếp chồng trong
   một tệp: visual-ui (bật mặc định khi phát hiện), cli-output và hội thoại — hai profile sau
   luôn được hỏi, không bao giờ tự động áp dụng.
+- **AI Diff Reviewer** — tăng cường Đánh giá Bảo mật bắt buộc với đánh giá cục bộ có cấu trúc
+  qua [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md` bắt buộc). Luôn hỏi **Flow A** (chỉ cục bộ) vs **Flow B** (cổng CI hai bề mặt với `pr-review.yml`); không bao giờ mặc định. Thất bại nhẹ chỉ cho lỗi skill/tiện ích mở rộng/gọi bị thiếu; kết quả `critical` từ lượt kiểm tra cục bộ hoàn tất vẫn chặn việc hoàn thành Đánh giá Bảo mật. Phương pháp luận lõi không phụ thuộc vào AI Diff Reviewer.
 
 ## 5. Phát triển bộ kit (sub-skill author)
 

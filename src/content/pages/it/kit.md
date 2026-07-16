@@ -52,6 +52,7 @@ Capacità opzionali che il flusso di onboard può aggiungere a un repo — mai p
 - **Dailybot** — report best-effort di progressi e milestone per i team che usano Dailybot.
 - **Dependency upgrade** — aggiornamenti indipendenti dal package manager, a lotti, validati e annullabili.
 - **Design system** — un `DESIGN.md` con ambito di interfaccia (in `docs/DESIGN.md`, referenziato da `AGENTS.md`) ragionato dalla fonte di design reale del repo, con profili per UI visuale, output CLI stilizzato e messaggistica conversazionale, così che gli agenti generino output di interfaccia on-brand; il profilo visuale è attivo di default quando un design system viene rilevato, mentre i profili CLI e conversazionale sono raccomandati quando rilevati e sempre proposti con una domanda.
+- **AI Diff Reviewer** — potenzia il Security Review con una revisione locale strutturata ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md` obbligatorio); il Flow B opzionale aggiunge un gate di merge PR in CI che condivide la stessa estensione. Chiedere sempre Flow A vs Flow B; non installare mai automaticamente.
 
 ### Esempi
 

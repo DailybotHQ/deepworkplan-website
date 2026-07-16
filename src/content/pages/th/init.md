@@ -136,7 +136,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ## 4. เสนอส่วนเสริมแบบเลือกเข้าร่วม
 
-หลังจากการออนบอร์ดพื้นฐาน ให้แจกแจงส่วนเสริมสี่อย่าง (devcontainer, Dailybot, dependency-upgrade, design-system) และเสนอแต่ละอย่างเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง repository
+หลังจากการออนบอร์ดพื้นฐาน ให้แจกแจงส่วนเสริมห้าอย่าง (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer) และเสนอแต่ละอย่างเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง repository
 สอดคล้องอย่างสมบูรณ์โดยมีส่วนเสริม **ศูนย์** อย่าง — อย่าติดตั้งมันอัตโนมัติ
 
 - **Devcontainer support** — dev container ที่ทำซ้ำได้และแยกตัว พร้อม auth ของ AI-CLI ที่คงอยู่
@@ -147,6 +147,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
   (ไม่เสนอสำหรับไลบรารีบริสุทธิ์ บริการ headless หรือ repo ที่มีแต่โครงสร้างพื้นฐาน) สามโปรไฟล์ซ้อนกัน
   ในไฟล์เดียว ได้แก่ visual-ui (เปิดโดยค่าเริ่มต้นเมื่อตรวจพบ), cli-output และสนทนา — สองโปรไฟล์หลัง
   จะถูกถามเสมอ ไม่เคยถูกใช้โดยอัตโนมัติ
+- **AI Diff Reviewer** — เสริม Security Review ที่บังคับด้วยการตรวจสอบในเครื่องแบบมีโครงสร้างผ่าน [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md` ที่ต้องการ) ถามเสมอว่า **Flow A** (เฉพาะในเครื่อง) หรือ **Flow B** (CI gate สองพื้นผิวกับ `pr-review.yml`); อย่าสมมติค่าเริ่มต้น Soft-fail เฉพาะสำหรับข้อผิดพลาด skill/ส่วนขยาย/การเรียกใช้ที่ขาดหาย; ผลลัพธ์ `critical` จากการผ่านในเครื่องที่เสร็จสมบูรณ์ยังคงบล็อกการเสร็จสิ้น Security Review ระเบียบวิธีหลักไม่มีการพึ่งพิง AI Diff Reviewer ใด ๆ
 
 ## 5. พัฒนา kit (sub-skill ชื่อ author)
 

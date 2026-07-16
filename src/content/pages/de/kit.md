@@ -52,6 +52,7 @@ Optionale Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügen kann
 - **Dailybot** — Best-Effort-Berichterstattung über Fortschritte und Meilensteine für Teams, die Dailybot nutzen.
 - **Dependency-Upgrade** — paketmanager-agnostische, chargenweise, validierte, rücknehmbare Upgrades.
 - **Design system** — eine interface-bezogene `DESIGN.md` (unter `docs/DESIGN.md`, von `AGENTS.md` referenziert), die aus der echten Designquelle des Repos abgeleitet wird, mit Profilen für visuelle UI, gestylte CLI-Ausgabe und konversationales Messaging, damit Agenten markenkonforme Interface-Ausgaben erzeugen; das visuelle Profil ist standardmäßig aktiv, wenn ein Designsystem erkannt wird, die CLI- und konversationalen Profile werden bei Erkennung empfohlen und stets erfragt.
+- **AI Diff Reviewer** — ergänzt den Security Review um eine strukturierte lokale Überprüfung ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + erforderliche `.review/extension.md`); das optionale Flow B fügt ein CI-PR-Merge-Gate hinzu, das dieselbe Extension teilt. Immer Flow A vs Flow B fragen; niemals automatisch installieren.
 
 ### Beispiele
 

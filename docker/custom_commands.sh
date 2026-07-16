@@ -257,6 +257,19 @@ function git_status_indicator() {
     fi
 }
 
+# Speed up `git status` on macOS bind mounts (caches the untracked-files walk).
+# Repo-local; do not enable core.fsmonitor — unreliable through this mount.
+if git rev-parse --git-dir >/dev/null 2>&1; then
+    git config core.untrackedcache true
+fi
+
+# Cached git dirty state for the prompt. `git status` costs ~0.4s on the
+# macOS bind mount even with core.untrackedCache, so refresh at most every
+# 5 seconds instead of on every prompt redraw.
+__GIT_DIRTY_CACHE=""
+__GIT_DIRTY_REPO=""
+__GIT_DIRTY_TS=-10
+
 # Custom PS1 prompt with colors and git info
 function set_bash_prompt() {
     local exit_code=$?
@@ -270,7 +283,9 @@ function set_bash_prompt() {
 
     # Get git branch and status
     local git_info=""
-    if git rev-parse --git-dir > /dev/null 2>&1; then
+    local repo_root
+    repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [[ -n "$repo_root" ]]; then
         local branch
         branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 
@@ -278,8 +293,17 @@ function set_bash_prompt() {
             branch='detached*'
         fi
 
-        # Check if there are uncommitted changes
-        if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
+        if [[ "$repo_root" != "$__GIT_DIRTY_REPO" ]] || (( SECONDS - __GIT_DIRTY_TS >= 5 )); then
+            if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
+                __GIT_DIRTY_CACHE=1
+            else
+                __GIT_DIRTY_CACHE=0
+            fi
+            __GIT_DIRTY_REPO="$repo_root"
+            __GIT_DIRTY_TS=$SECONDS
+        fi
+
+        if [[ "$__GIT_DIRTY_CACHE" == 1 ]]; then
             git_info=" ${red}(${branch}*)${reset}"
         else
             git_info=" ${green}(${branch})${reset}"

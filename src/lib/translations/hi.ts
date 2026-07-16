@@ -634,7 +634,7 @@ export const hi: SiteTranslations = {
       {
         title: 'किट विकसित करें और ऐडऑन स्वीकार करें',
         description:
-          'स्टैक-उपयुक्त स्किल्स, एजेंट्स और कमांड्स विकसित करने के लिए /skill-create और /agent-create (author सब-स्किल) का उपयोग करें। ऑनबोर्डिंग चार ऑप्ट-इन ऐडऑन भी प्रदान करती है — devcontainer, Dailybot, dependency-upgrade और design-system — जिन्हें आप तभी स्वीकार करते हैं जब वे उपयुक्त हों।',
+          'स्टैक-उपयुक्त स्किल्स, एजेंट्स और कमांड्स विकसित करने के लिए /skill-create और /agent-create (author सब-स्किल) का उपयोग करें। ऑनबोर्डिंग पाँच ऑप्ट-इन ऐडऑन भी प्रदान करती है — devcontainer, Dailybot, dependency-upgrade, design-system और AI Diff Reviewer — जिन्हें आप तभी स्वीकार करते हैं जब वे उपयुक्त हों।',
       },
       {
         title: 'योजना बनाएँ और निष्पादित करें',
@@ -768,7 +768,7 @@ export const hi: SiteTranslations = {
       {
         title: 'ऑप्ट-इन ऐडऑन स्वीकार करें',
         description:
-          'ऑनबोर्डिंग चार ऑप्ट-इन ऐडऑन प्रदान करती है — devcontainer, Dailybot, dependency-upgrade और design-system — जिन्हें आप तभी स्वीकार करते हैं जब वे उपयुक्त हों। एक रिपॉज़िटरी शून्य ऐडऑन के साथ भी पूर्णतः अनुरूप होती है। बेसलाइन से परे स्टैक-उपयुक्त स्किल्स, एजेंट्स और कमांड्स विकसित करने के लिए /skill-create और /agent-create (author सब-स्किल) का उपयोग करें।',
+          'ऑनबोर्डिंग पाँच ऑप्ट-इन ऐडऑन प्रदान करती है — devcontainer, Dailybot, dependency-upgrade, design-system और AI Diff Reviewer — जिन्हें आप तभी स्वीकार करते हैं जब वे उपयुक्त हों। एक रिपॉज़िटरी शून्य ऐडऑन के साथ भी पूर्णतः अनुरूप होती है। बेसलाइन से परे स्टैक-उपयुक्त स्किल्स, एजेंट्स और कमांड्स विकसित करने के लिए /skill-create और /agent-create (author सब-स्किल) का उपयोग करें।',
       },
       {
         title: 'योजना बनाएँ और निष्पादित करें',

@@ -42,8 +42,8 @@ para planos e rascunhos. Nada é gerado por template; tudo é adaptado ao seu re
 ### 3. Evolua o kit e aceite addons
 
 Use `/skill-create` e `/agent-create` (a sub-skill author) para desenvolver skills,
-agents e commands apropriados à sua stack. O onboarding também oferece quatro addons opcionais — devcontainer, Dailybot,
-dependency-upgrade e design-system — que você aceita apenas quando fizerem sentido. Um repositório é totalmente conforme com zero addons.
+agents e commands apropriados à sua stack. O onboarding também oferece cinco addons opcionais — devcontainer, Dailybot,
+dependency-upgrade, design-system e AI Diff Reviewer — que você aceita apenas quando fizerem sentido. Um repositório é totalmente conforme com zero addons.
 
 ### 4. Planeje e execute
 

@@ -1,6 +1,6 @@
 ---
 title: Add-on
-description: "Phần mở rộng DWP tùy chọn: bốn addon đang phát hành (devcontainer, Dailybot, dependency-upgrade, design-system), hợp đồng addon và khái niệm kit (skill, agent, preset, adapter, ví dụ)."
+description: "Phần mở rộng DWP tùy chọn: năm addon (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), hợp đồng addon và khái niệm kit."
 order: 5
 lang: vi
 section: Addons
@@ -23,9 +23,9 @@ Mỗi addon đang phát hành cung cấp bốn thành phần bắt buộc:
 
 Khám phá: luồng `onboard` liệt kê `skills/deepworkplan/addons/` và trình bày mỗi addon như bước opt-in trong **Giai đoạn 7b**, sau scaffolding cốt lõi.
 
-## Addon đang phát hành (bốn)
+## Addon đang phát hành (năm)
 
-Hôm nay có bốn addon. Mỗi addon có **trang danh mục kit** với chi tiết hướng người dùng và **spec chuẩn** bên trong skill Deep Work Plan.
+Hôm nay có năm addon. Mỗi addon có **trang danh mục kit** với chi tiết hướng người dùng và **spec chuẩn** bên trong skill Deep Work Plan.
 
 ### Devcontainer (addon đầu tiên)
 
@@ -64,6 +64,18 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 - **Bổ sung:** `docs/DESIGN.md` (tham chiếu từ `AGENTS.md`) với tối đa ba **hồ sơ** xếp chồng trong một file: **visual-ui** (token và thành phần UI được render), **cli-output** (kiểu terminal ngữ nghĩa, suy giảm TTY/`NO_COLOR`), **conversational** (giọng, giải phẫu thông điệp, render theo nền tảng với fallback văn bản thuần)
 - **Độ mạnh hồ sơ:** visual-ui **bật mặc định khi phát hiện**; cli-output và conversational **khuyến nghị khi phát hiện, luôn hỏi, không bao giờ tự áp dụng**
 - **Khi đề xuất:** chỉ khi phát hiện bề mặt giao diện người dùng — không cho thư viện thuần, dịch vụ headless hoặc repo chỉ hạ tầng
+
+### AI Diff Reviewer (addon thứ năm)
+
+Kết nối tùy chọn với **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, phiên bản hiện tại **v2.0.0**) tăng cường Đánh giá Bảo mật bắt buộc với đánh giá cục bộ có cấu trúc và tùy chọn kiểm soát các pull request trong CI.
+
+- **Trang kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — tài liệu tham khảo khả năng đầy đủ
+- **Những gì DWP addon kết nối:** tăng cường Đánh giá Bảo mật cục bộ qua luồng mặc định của skill thượng nguồn; `.review/extension.md` bắt buộc (skill đơn lẻ là chưa đủ); Flow B tùy chọn cài đặt `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) và hiển thị `apply-review` như một công cụ đồng hành do nhà phát triển gọi — không bao giờ là tệp nhiệm vụ kế hoạch
+- **Luồng:** **A — chỉ cục bộ** (skill + tiện ích mở rộng) hoặc **B — hai bề mặt** (skill + tiện ích mở rộng + CI Action). Addon **PHẢI hỏi** luồng nào; không bao giờ mặc định
+- **Thất bại nhẹ vs cổng:** lỗi skill/tiện ích mở rộng/gọi bị thiếu không bao giờ chặn; kết quả `critical` từ lượt kiểm tra cục bộ **hoàn tất** vẫn theo hợp đồng Đánh giá Bảo mật
+- **Tương đồng (Flow B):** `prompt.md` dùng chung + tiện ích mở rộng căn chỉnh phương pháp luận/mức độ nghiêm trọng; Đánh giá Nhận thức Lặp lại CI có thể rút ngắn vòng 2+ trong khi lượt kiểm tra cục bộ vẫn đầy đủ
+- **Bảo vệ trung lập với nhà cung cấp:** DWP cốt lõi có **không** phụ thuộc AI Diff Reviewer; không bao giờ cài đặt tự động cho tất cả mọi người
+- **Khi nào được cung cấp:** nhà phát triển hoặc nhóm muốn đánh giá cục bộ có cấu trúc và/hoặc cổng hợp nhất PR CI
 
 ## Skill
 

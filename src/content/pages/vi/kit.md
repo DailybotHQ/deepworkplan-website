@@ -52,6 +52,7 @@ Các năng lực tùy chọn mà luồng onboard có thể bổ sung vào một 
 - **Dailybot** — báo cáo tiến độ và cột mốc theo nỗ lực tối đa cho các đội đang dùng Dailybot.
 - **Dependency upgrade** — nâng cấp phụ thuộc độc lập với trình quản lý gói, theo lô, được kiểm chứng, hoàn nguyên được.
 - **Design system** — một `DESIGN.md` giới hạn ở bề mặt giao diện (tại `docs/DESIGN.md`, được tham chiếu từ `AGENTS.md`) được suy luận từ nguồn thiết kế thực của repo, với các profile cho UI trực quan, đầu ra CLI có phong cách và nhắn tin hội thoại, để agent sinh ra đầu ra giao diện đúng thương hiệu; profile trực quan bật mặc định khi một hệ thống thiết kế được phát hiện, các profile CLI và hội thoại được khuyến nghị khi được phát hiện và luôn được hỏi.
+- **AI Diff Reviewer** — tăng cường Security Review với đánh giá cục bộ có cấu trúc ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md` bắt buộc); Flow B tùy chọn thêm cổng merge PR CI dùng chung extension. Luôn hỏi Flow A vs Flow B; không bao giờ tự động cài đặt.
 
 ### Ví dụ
 

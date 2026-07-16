@@ -124,7 +124,7 @@ Referencia pública: [dailybot.com/skill.md](https://www.dailybot.com/skill.md).
 
 ## Flujo de incorporación
 
-Durante la **Fase 7b** de `onboard` de DWP, tras el andamiaje AI-first central, el flujo ofrece cuatro addons opcionales. Si el desarrollador acepta Dailybot:
+Durante la **Fase 7b** de `onboard` de DWP, tras el andamiaje AI-first central, el flujo ofrece cinco addons opcionales. Si el desarrollador acepta Dailybot:
 
 1. Detectar configuración existente (skill, CLI, `.dailybot/profile.json`, hooks, paso de reporte).
 2. Ofrecer instalación de skill/CLI mediante los flujos de consentimiento de Dailybot.

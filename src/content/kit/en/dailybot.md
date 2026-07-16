@@ -124,7 +124,7 @@ Public reference: [dailybot.com/skill.md](https://www.dailybot.com/skill.md). So
 
 ## Onboarding flow
 
-During DWP `onboard` **Phase 7b**, after core AI-first scaffolding, the flow offers four opt-in addons. If the developer accepts Dailybot:
+During DWP `onboard` **Phase 7b**, after core AI-first scaffolding, the flow offers five opt-in addons. If the developer accepts Dailybot:
 
 1. Detect existing setup (skill, CLI, `.dailybot/profile.json`, hooks, report step).
 2. Offer skill/CLI install through Dailybot's consent flows.

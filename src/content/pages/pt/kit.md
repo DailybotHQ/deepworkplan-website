@@ -52,6 +52,7 @@ Capacidades opcionais que o fluxo de onboarding pode adicionar a um repositório
 - **Dailybot** — relatórios de progresso e marcos em modo best-effort para equipes que usam a Dailybot.
 - **Atualização de dependências** — atualizações independentes do gerenciador de pacotes, em lotes, validadas e reversíveis.
 - **Design system** — um `DESIGN.md` com escopo de interface (em `docs/DESIGN.md`, referenciado a partir do `AGENTS.md`) derivado da fonte real de design do repositório, com perfis para UI visual, saída de CLI estilizada e mensagens conversacionais, para que os agentes gerem saída de interface fiel à marca; o perfil visual é ativado por padrão quando um design system é detectado, e os perfis de CLI e conversacional são recomendados quando detectados e sempre perguntados.
+- **AI Diff Reviewer** — amplia o Security Review com uma revisão local estruturada ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md` obrigatório); o Flow B opcional adiciona uma barreira de merge de PR em CI que compartilha a mesma extensão. Sempre perguntar Flow A vs Flow B; nunca instalar automaticamente.
 
 ### Exemplos
 

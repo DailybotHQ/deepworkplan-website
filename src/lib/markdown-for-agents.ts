@@ -6,6 +6,39 @@ import { getTranslations } from '@/lib/translations';
 const SITE_URL = 'https://deepworkplan.com';
 
 /**
+ * Localized prose for the Markdown access hint. The media type
+ * `Accept: text/markdown` stays literal in every language so agents can parse it.
+ */
+const MARKDOWN_ACCESS_LINES: Record<string, string> = {
+  en: 'Markdown: send header `Accept: text/markdown` on any URL to receive Markdown instead of HTML.',
+  es: 'Markdown: envía el header `Accept: text/markdown` en cualquier URL para recibir Markdown en lugar de HTML.',
+  pt: 'Markdown: envie o header `Accept: text/markdown` em qualquer URL para receber Markdown em vez de HTML.',
+  de: 'Markdown: sende den Header `Accept: text/markdown` an jede URL, um Markdown statt HTML zu erhalten.',
+  fr: "Markdown: envoyez l'en-tête `Accept: text/markdown` sur n'importe quelle URL pour recevoir du Markdown au lieu du HTML.",
+  it: "Markdown: invia l'header `Accept: text/markdown` su qualsiasi URL per ricevere Markdown invece di HTML.",
+  ja: 'Markdown: 任意の URL にヘッダー `Accept: text/markdown` を送ると、HTML の代わりに Markdown を受け取れます。',
+  zh: 'Markdown: 在任意 URL 上发送请求头 `Accept: text/markdown` 即可获取 Markdown 而非 HTML。',
+  ko: 'Markdown: 모든 URL에 `Accept: text/markdown` 헤더를 보내면 HTML 대신 Markdown을 받을 수 있습니다.',
+  ru: 'Markdown: отправьте заголовок `Accept: text/markdown` на любой URL, чтобы получить Markdown вместо HTML.',
+  tr: "Markdown: herhangi bir URL'ye `Accept: text/markdown` başlığını göndererek HTML yerine Markdown alın.",
+  id: 'Markdown: kirim header `Accept: text/markdown` pada URL mana pun untuk menerima Markdown, bukan HTML.',
+  vi: 'Markdown: gửi header `Accept: text/markdown` trên mọi URL để nhận Markdown thay vì HTML.',
+  hi: 'Markdown: किसी भी URL पर `Accept: text/markdown` हेडर भेजें ताकि HTML के बजाय Markdown मिले।',
+  pl: 'Markdown: wyślij nagłówek `Accept: text/markdown` na dowolny URL, aby otrzymać Markdown zamiast HTML.',
+  uk: 'Markdown: надішліть заголовок `Accept: text/markdown` на будь-який URL, щоб отримати Markdown замість HTML.',
+  th: 'Markdown: ส่งเฮดเดอร์ `Accept: text/markdown` บน URL ใดก็ได้เพื่อรับ Markdown แทน HTML.',
+};
+
+/**
+ * One-line hint in every .md mirror header so agents know how to fetch
+ * Markdown for any other URL on the site via content negotiation.
+ * Keep the key prefix exactly `Markdown:` (same pattern as `Canonical:`).
+ */
+export function buildMarkdownAccessLine(lang: string): string {
+  return MARKDOWN_ACCESS_LINES[lang] ?? MARKDOWN_ACCESS_LINES.en;
+}
+
+/**
  * Generate a site-wide navigation section for agent markdown.
  * Appended to all serialized outputs so AI agents can discover every page from
  * any entry point — mirrors the HTML navbar/footer. Labels are localized via the
@@ -101,6 +134,7 @@ export function serializePageToAgentMarkdown(
   lines.push('');
   lines.push(`Language: ${lang}`);
   lines.push(`Canonical: ${canonicalUrl}`);
+  lines.push(buildMarkdownAccessLine(lang));
 
   if ('lastUpdated' in page.data && page.data.lastUpdated instanceof Date) {
     lines.push(`Last Updated: ${formatDate(page.data.lastUpdated)}`);
@@ -158,6 +192,7 @@ export function serializeReaderEntryToAgentMarkdown(
   lines.push('');
   lines.push(`Language: ${lang}`);
   lines.push(`Canonical: ${canonicalUrl}`);
+  lines.push(buildMarkdownAccessLine(lang));
   lines.push('');
   lines.push('---');
   lines.push('');

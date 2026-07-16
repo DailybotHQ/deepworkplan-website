@@ -1,7 +1,7 @@
 ---
 title: "The Deep Work Plan Kit"
 description: "The skill and its eight sub-skills, commands, agent adapters, onboarding presets, opt-in add-ons, and examples that make Deep Work Plan runnable anywhere."
-lastUpdated: 2026-05-31
+lastUpdated: 2026-07-16
 ---
 
 ## The Deep Work Plan Kit
@@ -52,6 +52,7 @@ Optional capabilities the onboard flow can layer onto a repo — never part of t
 - **Dailybot** — plan-lifecycle reporting (kickoff, significant task, blocked, completion) for teams using Dailybot, plus access to the full Dailybot agent skill (3.10.3: chat, check-ins, forms, ask AI, per-repo API keys, and more).
 - **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades.
 - **Design system** — an interface-scoped `DESIGN.md` (at `docs/DESIGN.md`, referenced from `AGENTS.md`) reasoned from the repo's real design source, with profiles for visual UI, styled CLI output, and conversational messaging, so agents generate on-brand interface output; the visual profile is default-on when a design system is detected, the CLI and conversational profiles are recommended when detected and always asked about.
+- **AI Diff Reviewer** — augments Security Review with a structured local review ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + required `.review/extension.md`); optional Flow B adds a CI PR merge gate sharing the same extension. Always ask Flow A vs Flow B; never auto-install.
 
 ### Examples
 
