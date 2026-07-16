@@ -41,6 +41,7 @@ Source: `src/content/pages/{en,es}/` content collection.
 
 Language: en
 Canonical: https://deepworkplan.com/about
+Markdown: send header `Accept: text/markdown` on any URL to receive Markdown instead of HTML.
 
 ---
 
@@ -51,6 +52,7 @@ Canonical: https://deepworkplan.com/about
 - Blockquote description — visually distinct
 - Simple key-value metadata — easy to parse
 - Canonical URL — always points to the HTML version
+- **Markdown access line** — tells agents to send `Accept: text/markdown` on any URL for Markdown instead of HTML (content negotiation; do not rely on appending `.md`). Localized prose per language; the media type stays literal. Owned by `buildMarkdownAccessLine(lang)` in `src/lib/markdown-for-agents.ts`
 - Separator before body — clear content boundary
 - Site navigation footer — global nav links appended to every output (see below)
 
@@ -70,7 +72,9 @@ Canonical: https://deepworkplan.com/about
 
 ### Serialization Functions
 
+- `buildMarkdownAccessLine(lang)` — localized `Markdown:` header hint (content negotiation)
 - `serializePageToAgentMarkdown(page, { slug, lang })` — site pages
+- `serializeReaderEntryToAgentMarkdown(entry, { basePath, slug, lang })` — methodology / spec / kit / examples readers
 
 ### Site Navigation Partial
 
