@@ -97,14 +97,17 @@ jobs:
           git config user.name "deepworkplan-bot"
           git config user.email "bot@deepworkplan.com"
           git config advice.skippedCherryPicks false
-      - name: Step 1a - 🐕 Dogfood — refresh vendored agent skills to latest upstream
-        # Before every website release, bring the three vendored skills under
-        # `.agents/skills/` up to their latest published upstream tags —
+      - name: Step 1a - 🐕 Dogfood — refresh addon skills to latest upstream
+        # Before every website release, bring the two *addon* vendored skills
+        # under `.agents/skills/` up to their latest published upstream tags —
         # so `vX.Y.Z` of this site always ships with a current snapshot of
-        # `deepworkplan`, `dailybot`, and `ai-diff-reviewer`. Mirrors the
-        # "Dogfood" step in DailybotHQ/deepworkplan-skill's own
-        # `auto-release.yml`, adapted to install third-party upstream tags
-        # instead of this repo's own.
+        # `dailybot` and `ai-diff-reviewer`.
+        #
+        # INTENTIONAL EXCLUSION: `deepworkplan` is NOT refreshed here. The
+        # DWP skill in this repo is repo-adapted (onboarded kit + local
+        # wiring); a blind `skills add --force` would overwrite that
+        # adaptation. Update `.agents/skills/deepworkplan/` only via an
+        # explicit, reviewed change that re-adapts it to this repository.
         #
         # This step runs BEFORE Step 2 on purpose: `get_github_release_log.sh`
         # in Step 2 collects commit subjects from the previous release
@@ -119,7 +122,7 @@ jobs:
         #   * `npx skills add` failure OR version-invariant mismatch →
         #     FAIL the release (we should not publish a website tag that
         #     misrepresents which skill versions it vendors).
-        #   * All three skills already at latest → clean no-op, release
+        #   * Both addon skills already at latest → clean no-op, release
         #     proceeds normally without a dogfood commit.
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
@@ -169,7 +172,6 @@ jobs:
             fi
           }
 
-          DWP_TAG=$(resolve DailybotHQ/deepworkplan-skill deepworkplan)
           DB_TAG=$(resolve DailybotHQ/agent-skill dailybot)
           AIDR_TAG=$(resolve DailybotHQ/ai-diff-reviewer ai-diff-reviewer)
 
@@ -180,36 +182,33 @@ jobs:
           # Only install skills that would actually change — no wasted work
           # and no misleading dogfood commit when one skill is at latest
           # and another is not.
-          DWP_MOVED=false
           DB_MOVED=false
           AIDR_MOVED=false
-          [ -n "$DWP_TAG" ] && [ "$DWP_CUR" != "${DWP_TAG#v}" ] && DWP_MOVED=true
           [ -n "$DB_TAG" ] && [ "$DB_CUR" != "${DB_TAG#v}" ] && DB_MOVED=true
           [ -n "$AIDR_TAG" ] && [ "$AIDR_CUR" != "${AIDR_TAG#v}" ] && AIDR_MOVED=true
 
-          [ "$DWP_MOVED" = "true" ] && install_and_verify DailybotHQ/deepworkplan-skill deepworkplan .agents/skills/deepworkplan "$DWP_TAG"
           [ "$DB_MOVED" = "true" ] && install_and_verify DailybotHQ/agent-skill dailybot .agents/skills/dailybot "$DB_TAG"
           [ "$AIDR_MOVED" = "true" ] && install_and_verify DailybotHQ/ai-diff-reviewer ai-diff-reviewer .agents/skills/ai-diff-reviewer "$AIDR_TAG"
 
           # Stage only the paths the installer is allowed to touch.
+          # deepworkplan is intentionally omitted — see step comment above.
           git add \
-            .agents/skills/deepworkplan \
             .agents/skills/dailybot \
             .agents/skills/ai-diff-reviewer \
             skills-lock.json 2>/dev/null || true
 
           if git diff --cached --quiet; then
-            echo "Vendored skills already at latest — no dogfood commit needed."
+            echo "Addon skills already at latest — no dogfood commit needed."
             {
               echo "## Vendored skills"
               echo ""
-              echo "| Skill | Vendored | Latest upstream | Moved? |"
-              echo "| --- | --- | --- | --- |"
-              echo "| deepworkplan | v${DWP_CUR} | ${DWP_TAG:-_(unresolved)_} | ${DWP_MOVED} |"
-              echo "| dailybot | v${DB_CUR} | ${DB_TAG:-_(unresolved)_} | ${DB_MOVED} |"
-              echo "| ai-diff-reviewer | v${AIDR_CUR} | ${AIDR_TAG:-_(unresolved)_} | ${AIDR_MOVED} |"
+              echo "| Skill | Vendored | Latest upstream | Auto-refreshed? | Moved? |"
+              echo "| --- | --- | --- | --- | --- |"
+              echo "| deepworkplan | v${DWP_CUR} | _(manual — repo-adapted)_ | no | — |"
+              echo "| dailybot | v${DB_CUR} | ${DB_TAG:-_(unresolved)_} | yes | ${DB_MOVED} |"
+              echo "| ai-diff-reviewer | v${AIDR_CUR} | ${AIDR_TAG:-_(unresolved)_} | yes | ${AIDR_MOVED} |"
               echo ""
-              echo "**No dogfood commit** — vendored copies already match the latest upstream releases."
+              echo "**No dogfood commit** — auto-refreshed addon copies already match the latest upstream releases."
             } >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
@@ -219,7 +218,6 @@ jobs:
           # so build the joined string by hand to preserve "a, b" (with the
           # space).
           parts=()
-          [ "$DWP_MOVED" = "true" ] && parts+=("deepworkplan ${DWP_TAG}")
           [ "$DB_MOVED" = "true" ] && parts+=("dailybot ${DB_TAG}")
           [ "$AIDR_MOVED" = "true" ] && parts+=("ai-diff-reviewer ${AIDR_TAG}")
           MSG=""
@@ -239,11 +237,11 @@ jobs:
           {
             echo "## Vendored skills"
             echo ""
-            echo "| Skill | Vendored | Latest upstream | Moved? |"
-            echo "| --- | --- | --- | --- |"
-            echo "| deepworkplan | v${DWP_CUR} | ${DWP_TAG:-_(unresolved)_} | ${DWP_MOVED} |"
-            echo "| dailybot | v${DB_CUR} | ${DB_TAG:-_(unresolved)_} | ${DB_MOVED} |"
-            echo "| ai-diff-reviewer | v${AIDR_CUR} | ${AIDR_TAG:-_(unresolved)_} | ${AIDR_MOVED} |"
+            echo "| Skill | Vendored | Latest upstream | Auto-refreshed? | Moved? |"
+            echo "| --- | --- | --- | --- | --- |"
+            echo "| deepworkplan | v${DWP_CUR} | _(manual — repo-adapted)_ | no | — |"
+            echo "| dailybot | v${DB_CUR} | ${DB_TAG:-_(unresolved)_} | yes | ${DB_MOVED} |"
+            echo "| ai-diff-reviewer | v${AIDR_CUR} | ${AIDR_TAG:-_(unresolved)_} | yes | ${AIDR_MOVED} |"
             echo ""
             echo "**Dogfood commit:** \`chore: dogfood vendored skills to ${MSG}\`"
             echo ""
