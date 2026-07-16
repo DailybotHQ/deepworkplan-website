@@ -257,30 +257,38 @@ Multiple AI agents collaborate on this codebase. When updating agent guidance, m
 
 ### Optional — Dailybot reporting (best-effort, never blocks)
 
-This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installed alongside `deepworkplan` under `.agents/skills/` (both gitignored installs). When the Dailybot CLI is present and authenticated, DWP work emits standup-style agent updates at four lifecycle points — **kickoff** (a plan is approved: what is being built), **significant task** (a feature/fix ships mid-plan), **blocked** (a run halts; `state.json.blocked` says what it needs), and **completion** (the only **milestone**: what was built) — routed through the dailybot `report` sub-skill, with `--json-data` derived from the plan's `state.json`. If Dailybot is absent, unauthenticated, or unreachable — or `.dailybot/disabled` exists — skip silently and continue: **reporting never blocks any work.** Describe outcomes for the team, never plan IDs, task numbers, file paths, or git stats.
+This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installed alongside `deepworkplan` under `.agents/skills/` (vendored, tracked in git). When the Dailybot CLI is present and authenticated, DWP work emits standup-style agent updates at four lifecycle points — **kickoff** (a plan is approved: what is being built), **significant task** (a feature/fix ships mid-plan), **blocked** (a run halts; `state.json.blocked` says what it needs), and **completion** (the only **milestone**: what was built) — routed through the dailybot `report` sub-skill, with `--json-data` derived from the plan's `state.json`. If Dailybot is absent, unauthenticated, or unreachable — or `.dailybot/disabled` exists — skip silently and continue: **reporting never blocks any work.** Describe outcomes for the team, never plan IDs, task numbers, file paths, or git stats.
 
 **Deterministic hook enforcement (Claude Code):** `.agents/settings.json` wires the Dailybot lifecycle hooks (`dailybot hook session-start | activity | stop`, CLI >= 1.12.0) so the harness itself detects unreported work and reminds the agent at end of turn — no reliance on the model remembering. When a reminder fires: send a report if a meaningful unit of work is done, or run `dailybot hook dismiss` if not — never ignore it silently, and never let reporting block work. The hooks are local-only, always exit 0, and respect `.dailybot/disabled`.
 
-### Vendored agent skills — refreshed on every website release
+### Vendored agent skills — addons auto-refresh; deepworkplan is repo-adapted
 
-`.agents/skills/deepworkplan/`, `.agents/skills/dailybot/`, and `.agents/skills/ai-diff-reviewer/` are **vendored copies** of the upstream skill repos (`DailybotHQ/deepworkplan-skill`, `DailybotHQ/agent-skill`, and `DailybotHQ/ai-diff-reviewer`), tracked in git and pinned via `skills-lock.json`. All three are refreshed **automatically as part of every website release**, so `vX.Y.Z` of the site always ships with a current snapshot of the full skill set.
+`.agents/skills/deepworkplan/`, `.agents/skills/dailybot/`, and `.agents/skills/ai-diff-reviewer/` are **vendored copies** tracked in git and pinned via `skills-lock.json`. They are managed differently on purpose:
 
-**How it works.** [`release_and_publish.yml`](.github/workflows/release_and_publish.yml) (which fires on every merge to `main`) has a dogfood step (Step 1a) that runs **before** the version bump:
+| Skill | Upstream | Release auto-refresh | Why |
+|-------|----------|----------------------|-----|
+| `deepworkplan` | `DailybotHQ/deepworkplan-skill` | **No** | Repo-adapted DWP kit — blind reinstall would overwrite local adaptation. Update only via an explicit, reviewed change that re-adapts the skill to this repository. |
+| `dailybot` | `DailybotHQ/agent-skill` | **Yes** | Addon — safe to pin to latest upstream on every website release. |
+| `ai-diff-reviewer` | `DailybotHQ/ai-diff-reviewer` | **Yes** | Addon — safe to pin to latest upstream on every website release. |
 
-1. Resolves the latest tag of each upstream skill via `gh release view --repo <owner/repo>`.
+**How addon refresh works.** [`release_and_publish.yml`](.github/workflows/release_and_publish.yml) (which fires on every merge to `main`) has a dogfood step (Step 1a) that runs **before** the version bump and refreshes **only** `dailybot` and `ai-diff-reviewer`:
+
+1. Resolves the latest tag of each auto-refreshed upstream skill via `gh release view --repo <owner/repo>`.
 2. Compares against the vendored `SKILL.md` `version:` field. Only installs skills that actually moved.
 3. Runs `npx --yes skills add <repo>@<tag> --skill <name> --force -y` — the exact command any downstream consumer would run, so this doubles as a live smoke test. Both `--yes` (npm's proceed prompt) AND `-y` (the skills CLI's agent-picker prompt) are required in a non-TTY runner — dropping either hangs the workflow indefinitely.
 4. Asserts the invariant: installed `SKILL.md` version equals the requested tag. Refuses to proceed with the release if not.
-5. If any files changed, commits `chore: dogfood vendored skills to (…)` locally with a selective subject that names ONLY the skills that moved (e.g., `chore: dogfood vendored skills to deepworkplan v2.16.4, ai-diff-reviewer v2.0.0`). Step 3's `git push --follow-tags` sends this commit alongside the version-bump commit and the tag in a single atomic push, and the dogfood commit appears in the auto-generated GitHub Release notes.
+5. If any files changed, commits `chore: dogfood vendored skills to (…)` locally with a selective subject that names ONLY the skills that moved (e.g., `chore: dogfood vendored skills to dailybot v3.10.3, ai-diff-reviewer v2.0.0`). Step 3's `git push --follow-tags` sends this commit alongside the version-bump commit and the tag in a single atomic push, and the dogfood commit appears in the auto-generated GitHub Release notes.
 
-**Semantics.** Skill refresh is **release-driven**, not autonomous — no scheduled/cron refresh runs in the background. The vendored copies advance only when a maintainer merges a PR to `main`, which is the same moment `release_and_publish.yml` cuts a new website release. The intent is that the maintainer controls exactly when the site adopts a new skill version.
+**Semantics.** Addon skill refresh is **release-driven**, not autonomous — no scheduled/cron refresh runs in the background. The auto-refreshed vendored copies advance only when a maintainer merges a PR to `main`, which is the same moment `release_and_publish.yml` cuts a new website release.
 
 **Failure semantics.**
 - `npx skills add` failure OR version-invariant mismatch → **fails the release** (a broken upstream tag must never quietly ship inside a website version).
 - Transient `gh release view` blip (rate limit, temporary outage) → skips only that skill for this release; the release itself proceeds.
-- All three skills already at latest → clean no-op, no dogfood commit, release proceeds normally.
+- Both auto-refreshed addon skills already at latest → clean no-op, no dogfood commit, release proceeds normally.
 
-**Do not edit files under `.agents/skills/deepworkplan/`, `.agents/skills/dailybot/`, or `.agents/skills/ai-diff-reviewer/` by hand** — the next release will overwrite hand edits. Contribute upstream, then merge any PR to trigger a website release that picks up the new upstream tag.
+**Editing policy.**
+- **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the next release will overwrite those edits. Contribute upstream, then merge any PR to trigger a website release that picks up the new upstream tag.
+- **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: changes there must be intentional and reviewed. Prefer contributing reusable improvements upstream in `DailybotHQ/deepworkplan-skill`, then re-adapting this copy deliberately — never rely on the release dogfood step to pull it in.
 
 ### PR review workflow — Cursor-based, `ready`-label gated (Action `@v2`)
 

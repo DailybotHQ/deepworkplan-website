@@ -144,7 +144,7 @@ Extracts the PR's size label and maps to emoji for the workflow summary.
 |------|------|-------------|
 | 0-0a | Cache | pnpm store, keyed on `pnpm-lock.yaml` |
 | 1 | Setup GitHub Config | Git config |
-| 1a | **Dogfood — refresh vendored agent skills** | Resolves the latest tag of `DailybotHQ/deepworkplan-skill`, `DailybotHQ/agent-skill`, and `DailybotHQ/ai-diff-reviewer` via `gh release view`, and if any is newer than the vendored copy under `.agents/skills/`, runs `npx --yes skills add <repo>@<tag> --skill <name> --force -y`, asserts the version invariant, and commits `chore: dogfood vendored skills to (…)`. **Runs before Step 2** so the dogfood commit lands in the release notes. See "Dogfood step" below for details. |
+| 1a | **Dogfood — refresh addon skills** | Resolves the latest tag of `DailybotHQ/agent-skill` and `DailybotHQ/ai-diff-reviewer` via `gh release view`, and if either is newer than the vendored copy under `.agents/skills/`, runs `npx --yes skills add <repo>@<tag> --skill <name> --force -y`, asserts the version invariant, and commits `chore: dogfood vendored skills to (…)`. **Does not touch `deepworkplan`** (repo-adapted). **Runs before Step 2** so the dogfood commit lands in the release notes. See "Dogfood step" below for details. |
 | 2 | Release notes | Runs `scripts/get_github_release_log.sh` — includes the dogfood commit from Step 1a if it exists |
 | 3 | Prepare release | `corepack pnpm install --frozen-lockfile && corepack pnpm run release` + push tags to main (pushes the dogfood commit alongside the version-bump commit + tag in one atomic push) |
 | 4 | Get release tag | Extract latest tag |
@@ -159,27 +159,29 @@ Extracts the PR's size label and maps to emoji for the workflow summary.
 
 #### Dogfood step (Step 1a)
 
-**Purpose.** Every website release should ship with a current snapshot of the three agent skills it documents. Rather than a scheduled/autonomous refresh, the update happens **exactly when the maintainer decides to cut a release** — no background cron, no drift between "when a skill dropped" and "when someone releases the site".
+**Purpose.** Every website release should ship with a current snapshot of the **addon** skills (`dailybot`, `ai-diff-reviewer`). Rather than a scheduled/autonomous refresh, the update happens **exactly when the maintainer decides to cut a release** — no background cron.
+
+**Intentional exclusion — `deepworkplan`.** The DWP skill under `.agents/skills/deepworkplan/` is **repo-adapted** and is **not** auto-refreshed. A blind `skills add --force` would overwrite local adaptation. Update it only via an explicit, reviewed change that re-adapts it to this repository (see AGENTS.md → Vendored agent skills).
 
 **What runs.**
 
-1. `gh release view --repo <owner/repo> --json tagName -q .tagName` for each of `DailybotHQ/deepworkplan-skill`, `DailybotHQ/agent-skill`, and `DailybotHQ/ai-diff-reviewer` to resolve the latest tag.
-2. Reads the currently vendored versions from `.agents/skills/{deepworkplan,dailybot,ai-diff-reviewer}/SKILL.md` frontmatter.
-3. Per-skill "moved" flag → only installs the skills that actually changed. Commits and PR titles list only the moved skills (no misleading "dogfood to deepworkplan vX, dailybot vY, ai-diff-reviewer vZ" when only one moved).
+1. `gh release view --repo <owner/repo> --json tagName -q .tagName` for `DailybotHQ/agent-skill` and `DailybotHQ/ai-diff-reviewer` to resolve the latest tag.
+2. Reads the currently vendored versions from `.agents/skills/{dailybot,ai-diff-reviewer}/SKILL.md` frontmatter (and reports the pinned `deepworkplan` version in the step summary for visibility only).
+3. Per-skill "moved" flag → only installs the addon skills that actually changed. Commit subjects list only the moved skills.
 4. `npx --yes skills add <repo>@<tag> --skill <name> --force -y` — exact same command any downstream consumer would run. Serves as a live smoke test that the upstream release is installable. Both `--yes` AND `-y` are required — the former covers npm's own proceed prompt, the latter covers the `skills` CLI's agent-picker prompt; dropping either hangs the workflow in a non-TTY runner.
 5. Version invariant: the installed `SKILL.md` frontmatter `version:` MUST equal the requested tag. Fails the release if not — refuses to publish a website tag that misrepresents its vendored skills.
-6. If any files changed, commits `chore: dogfood vendored skills to <list>` locally. Step 3's `git push --follow-tags` sends this commit alongside the version-bump commit and the tag in a single atomic push.
+6. If any files changed, commits `chore: dogfood vendored skills to <list>` locally. Step 3's `git push --follow-tags` sends this commit alongside the version-bump commit and the tag in a single atomic push. Staging paths are limited to `.agents/skills/dailybot`, `.agents/skills/ai-diff-reviewer`, and `skills-lock.json`.
 
 **Failure semantics.**
 
 | Failure | Behavior |
 |---------|----------|
-| `gh release view` fails for one upstream repo (rate limit, transient outage) | Warns; skips that skill. The other two skills (and the release) proceed. |
+| `gh release view` fails for one upstream repo (rate limit, transient outage) | Warns; skips that skill. The other auto-refreshed skill (and the release) proceed. |
 | `npx skills add` fails | **Fails the release** — real upstream breakage, must be surfaced. |
 | Version invariant mismatch after install | **Fails the release** — refuses to commit a misrepresented dogfood snapshot. |
-| All three skills already at latest | Clean no-op — no dogfood commit, release proceeds. |
+| Both auto-refreshed addon skills already at latest | Clean no-op — no dogfood commit, release proceeds. |
 
-**Manual refresh outside of a release.** Not supported by design. If a maintainer needs to bump a vendored skill without cutting a full release, do it locally (`npx skills add <repo>@<tag>`) on a PR branch and merge it as a normal `chore:` change — that will trigger a release naturally.
+**Manual refresh outside of a release.** For addons: do it locally (`npx skills add <repo>@<tag>`) on a PR branch and merge as a normal `chore:` change — that will trigger a release naturally. For `deepworkplan`: never rely on release dogfood; re-adapt deliberately on a reviewed PR.
 
 ### Job 3: `cleanup_caches` (depends on: Job 2)
 
