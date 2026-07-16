@@ -13,6 +13,7 @@ import { defineConfig } from 'astro/config';
 
 import excludeInternal from './src/integrations/exclude-internal';
 import { DEFAULT_LANGUAGE_CODE, LANGUAGE_CODES } from './src/lib/language-codes';
+import { satteriHastPlugins } from './src/lib/satteri-markdown-plugins.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -33,21 +34,20 @@ const adoptionRedirects = Object.fromEntries(
 
 // https://astro.build/config
 export default defineConfig({
-  experimental: {
-    rustCompiler: true,
-  },
   site: 'https://deepworkplan.com',
+  // Keep Astro 6 HTML-aware whitespace so inline elements do not glue together
+  // under Astro 7's default JSX whitespace compression.
+  compressHTML: true,
   build: {
     inlineStylesheets: 'always',
   },
   redirects: adoptionRedirects,
-  // TRIAL (perf): Sätteri (Rust) Markdown processor — Astro 6.4. Much faster than
-  // the unified pipeline, but it does NOT run remark/rehype plugins, so the
-  // external-links and responsive-tables transforms are dropped here (would be
-  // reimplemented as a tiny script + CSS if adopted). Built-in: Shiki + heading
-  // IDs + image handling. Measuring build delta + verifying rendering.
+  // Sätteri (Rust) is the Astro 7 default Markdown/MDX pipeline. Custom hast
+  // plugins restore external-link target/rel and responsive table wrappers.
   markdown: {
-    processor: satteri(),
+    processor: satteri({
+      hastPlugins: satteriHastPlugins,
+    }),
   },
   integrations: [
     mdx(),

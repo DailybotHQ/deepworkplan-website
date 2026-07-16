@@ -75,8 +75,8 @@ layout (no CLS), sensible wide-screen behavior.
 ## Common fixes (battle-tested in this repo)
 
 1. **Reader Markdown tables overflow on mobile** → wrap every `<table>` in
-   `<div class="table-responsive">` via a rehype plugin
-   (`src/lib/rehype-responsive-tables.mjs`, wired in `astro.config.mjs`); the
+   `<div class="table-responsive">` via the Sätteri hast plugin
+   (`src/lib/satteri-markdown-plugins.mjs`, wired in `astro.config.mjs`); the
    `.table-responsive` mobile-scroll CSS lives in `src/styles/global.css`.
 2. **`label-content-name-mismatch`** on a labeled link (logo / CTA): an `aria-label`
    must *contain* the link's visible text. Causes seen here: a child `<img>` with

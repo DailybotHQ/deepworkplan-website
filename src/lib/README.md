@@ -11,7 +11,7 @@ lib/
 ├── enum.ts                    # Shared enumerations
 ├── analytics.ts               # Event tracking helpers and EVENTS map
 ├── markdown-for-agents.ts     # Serialize pages/reader entries to agent Markdown
-├── rehype-responsive-tables.mjs  # Rehype plugin for responsive tables
+├── satteri-markdown-plugins.mjs  # Sätteri hast plugins (external links, responsive tables)
 └── translations/              # Modular i18n translation system
     ├── index.ts               # Public API barrel: getTranslations(), re-exports
     ├── types.ts               # SiteTranslations interface + all sub-interfaces
