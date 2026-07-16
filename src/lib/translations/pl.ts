@@ -640,7 +640,7 @@ export const pl: SiteTranslations = {
       {
         title: 'Rozwijaj zestaw i przyjmuj dodatki',
         description:
-          'Użyj /skill-create i /agent-create (sub-skill author), by rozwijać skille, agentów i polecenia dopasowane do stosu technologicznego. Onboarding oferuje także cztery dobrowolne dodatki — devcontainer, Dailybot, dependency-upgrade i design-system — które przyjmujesz tylko, gdy pasują.',
+          'Użyj /skill-create i /agent-create (sub-skill author), by rozwijać skille, agentów i polecenia dopasowane do stosu technologicznego. Onboarding oferuje także pięć dobrowolnych dodatków — devcontainer, Dailybot, dependency-upgrade, design-system i AI Diff Reviewer — które przyjmujesz tylko, gdy pasują.',
       },
       {
         title: 'Planuj i realizuj',
@@ -774,7 +774,7 @@ export const pl: SiteTranslations = {
       {
         title: 'Przyjmij opcjonalne dodatki',
         description:
-          'Onboarding oferuje cztery opcjonalne dodatki — devcontainer, Dailybot, dependency-upgrade i design-system — które przyjmujesz tylko, gdy pasują. Repo jest w pełni zgodne z zerową liczbą dodatków. Użyj /skill-create i /agent-create (sub-skill author), by rozwijać skille, agentów i polecenia wykraczające poza bazowy zestaw.',
+          'Onboarding oferuje pięć opcjonalnych dodatków — devcontainer, Dailybot, dependency-upgrade, design-system i AI Diff Reviewer — które przyjmujesz tylko, gdy pasują. Repo jest w pełni zgodne z zerową liczbą dodatków. Użyj /skill-create i /agent-create (sub-skill author), by rozwijać skille, agentów i polecenia wykraczające poza bazowy zestaw.',
       },
       {
         title: 'Planuj i realizuj',

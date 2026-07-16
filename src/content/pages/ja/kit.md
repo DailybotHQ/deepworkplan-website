@@ -49,6 +49,7 @@ onboard フローがリポジトリに重ねられる任意の機能です。AI-
 - **Dailybot** — Dailybot を使うチームのための、最善努力での進捗とマイルストーンの報告。
 - **Dependency upgrade** — パッケージマネージャー非依存で、バッチ化され、検証され、取り消し可能な更新。
 - **Design system** — インターフェイスに限定された `DESIGN.md`（`docs/DESIGN.md` に置かれ、`AGENTS.md` から参照される）で、リポジトリの実際のデザインソースから推論され、ビジュアル UI、スタイルづけされた CLI 出力、会話のメッセージングのプロファイルを備え、エージェントがオンブランドのインターフェイス出力を生成できるようにします。デザインシステムが検出されたときはビジュアルのプロファイルがデフォルトでオンであり、CLI と会話のプロファイルは検出されたとき推奨され、必ず尋ねられます。
+- **AI Diff Reviewer** — 構造化されたローカルレビュー（[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + 必須の `.review/extension.md`）でセキュリティレビューを強化します。オプションの Flow B は同じ extension を共有する CI PR マージゲートを追加します。常に Flow A か Flow B かを尋ねてください。絶対に自動インストールしないでください。
 
 ### 事例
 

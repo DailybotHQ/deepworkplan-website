@@ -142,9 +142,9 @@ methodology) instead of overwriting — and confirm with the user before replaci
 
 ## 4. Offer the opt-in addons
 
-After the baseline onboarding, enumerate the four addons (devcontainer, Dailybot, dependency-upgrade,
-design-system) and offer each as an explicit opt-in. A repository is fully conformant with **zero**
-addons — never auto-install them.
+After the baseline onboarding, enumerate the five addons (devcontainer, Dailybot, dependency-upgrade,
+design-system, AI Diff Reviewer) and offer each as an explicit opt-in. A repository is fully
+conformant with **zero** addons — never auto-install them.
 
 - **Devcontainer support** — a reproducible, isolated dev container with persistent AI-CLI auth.
 - **Dailybot integration** — four lifecycle events (kickoff, significant task, blocked, completion) as best-effort progress reports for teams already using Dailybot, with optional autonomous hook enforcement (`dailybot-cli >= 3.7.0`). Installing the paired Dailybot agent skill (3.10.3) also exposes chat, check-ins, forms authoring, ask AI, per-repo API keys, and more — the addon wires only reporting into DWP execution. The core methodology has zero Dailybot dependency.
@@ -154,6 +154,12 @@ addons — never auto-install them.
   (not offered for pure libraries, headless services, or infra-only repos). Three profiles stack in
   one file: visual-ui (default-on when detected), cli-output, and conversational — the latter two
   are always asked, never auto-applied.
+- **AI Diff Reviewer** — augments the mandatory Security Review with a structured local review via
+  [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + required
+  `.review/extension.md`). Always ask **Flow A** (local-only) vs **Flow B** (dual-surface CI gate
+  with `pr-review.yml`); never default. Soft-fail only on missing skill/extension/invocation errors;
+  `critical` findings from a completed local pass still block Security Review completion. The core
+  methodology has zero AI Diff Reviewer dependency.
 
 ## 5. Evolve the kit (author sub-skill)
 

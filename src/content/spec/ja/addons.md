@@ -1,6 +1,6 @@
 ---
 title: アドオン
-description: "オプションの DWP 拡張：4 つの出荷済みアドオン（devcontainer、Dailybot、dependency-upgrade、design-system）、アドオン契約、およびキット概念（スキル、エージェント、プリセット、アダプター、例）。"
+description: "オプションの DWP 拡張：5 つの出荷済みアドオン（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）、アドオン契約、およびキット概念（スキル、エージェント、プリセット、アダプター、例）。"
 order: 5
 lang: ja
 section: Addons
@@ -23,9 +23,9 @@ section: Addons
 
 発見：`onboard` フローは `skills/deepworkplan/addons/` を列挙し、コアスキャフォールディング後の**フェーズ 7b**で各アドオンをオプトインステップとして提示。
 
-## 出荷済みアドオン（4 つ）
+## 出荷済みアドオン（5 つ）
 
-現在 4 つのアドオンが出荷されています。各々に**キットカタログページ**（ユーザー向け詳細）と Deep Work Plan スキル内の**規範スペック**があります。
+現在 5 つのアドオンが出荷されています。各々に**キットカタログページ**（ユーザー向け詳細）と Deep Work Plan スキル内の**規範スペック**があります。
 
 ### Devcontainer（第 1 アドオン）
 
@@ -64,6 +64,18 @@ section: Addons
 - **追加内容：** `docs/DESIGN.md`（`AGENTS.md` から参照）、1 ファイルに最大 3 **プロファイル**を積み重ね：**visual-ui**（レンダリング UI トークンとコンポーネント）、**cli-output**（セマンティック端末スタイル、TTY/`NO_COLOR` 劣化）、**conversational**（声、メッセージ構造、プラットフォーム別レンダリングとプレーンテキストフォールバック）
 - **プロファイル強度：** visual-ui は検出時**デフォルトオン**；cli-output と conversational は検出時**推奨、常に確認、自動適用しない**
 - **提供タイミング：** ユーザー向けインターフェース表面が検出された場合のみ——純ライブラリ、ヘッドレスサービス、インフラのみのリポジトリには提供しない
+
+### AI Diff Reviewer（第 5 アドオン）
+
+必須の Security Review を構造化されたローカルレビューで強化し、オプションで CI 内の pull request をゲートする **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**、現在のバージョン **v2.0.0**）へのオプション接続。
+
+- **キットページ：** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 完全な機能リファレンス
+- **DWP アドオンが接続するもの：** upstream スキルの親デフォルトフロー経由のローカル Security Review 強化；必須 `.review/extension.md`（スキル単体では不完全）；Flow B はオプションで `pr-review.yml`（`DailybotHQ/ai-diff-reviewer@v2`）をインストールし、`apply-review` を開発者が呼び出せるコンパニオンとして公開——プランタスクには決してしない
+- **フロー：** **A — ローカルのみ**（スキル + 拡張）または **B — デュアルサーフェス**（スキル + 拡張 + CI Action）。アドオンはどのフローか**必ず確認**；デフォルトは決して設定しない
+- **ソフト失敗 vs ゲート：** スキル/拡張/呼び出しエラーが欠落しても決してブロックしない；**完了した**ローカルパスからの `critical` 結果は引き続き Security Review 契約に従う
+- **同等性（Flow B）：** 共有 `prompt.md` + 拡張が方法論/深刻度を整合；CI のイテレーション認識レビューでローカルパスを完全に保ちながらラウンド 2+ を短縮できる
+- **ベンダー中立ガードレール：** コア DWP は AI Diff Reviewer への依存が**ゼロ**；決して全員に自動インストールしない
+- **提供タイミング：** 開発者またはチームが構造化されたローカルレビューおよび/または CI PR マージゲートを求めているとき
 
 ## スキル
 

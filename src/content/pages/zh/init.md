@@ -124,7 +124,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ## 4. 提供可选的附加组件
 
-在基线接入完成之后，列举这四个附加组件（devcontainer、Dailybot、dependency-upgrade、design-system），并把每一个作为一项明确的可选项来提供。一个仓库
+在基线接入完成之后，列举这五个附加组件（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer），并把每一个作为一项明确的可选项来提供。一个仓库
 在不带**任何**附加组件时即完全符合规范——绝不自动安装它们。
 
 - **Devcontainer 支持** —— 一个可复现、隔离的开发容器，具备持久的 AI-CLI 认证。
@@ -134,6 +134,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 - **Design system** —— 可选的 `docs/DESIGN.md`，仅面向具备被检测到的界面表面的仓库
   （不会向纯库、无头服务或纯基础设施仓库提供）。三个配置档堆叠在一个文件中：visual-ui
   （检测到时默认启用）、cli-output 与 conversational——后两者始终会被询问，绝不会被自动应用。
+- **AI Diff Reviewer** —— 通过 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2**（skill + 必需的 `.review/extension.md`）以结构化的本地评审增强必选的安全审查。始终询问 **Flow A**（仅本地）还是 **Flow B**（具有 `pr-review.yml` 的双面 CI 门控）；绝不默认假定。仅对缺失的 skill/扩展/调用错误执行软失败；已完成的本地通行 `critical` 发现仍会阻止安全审查完成。核心方法论对 AI Diff Reviewer 零依赖。
 
 ## 5. 演化套件（author 子技能）
 

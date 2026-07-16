@@ -1,6 +1,6 @@
 ---
 title: 애드온
-description: "선택적 DWP 확장: 네 가지 출시 애드온(devcontainer, Dailybot, dependency-upgrade, design-system), 애드온 계약, 및 키트 개념(스킬, 에이전트, 프리셋, 어댑터, 예제)."
+description: "선택적 DWP 확장: 다섯 가지 출시 애드온(devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), 애드온 계약, 및 키트 개념(스킬, 에이전트, 프리셋, 어댑터, 예제)."
 order: 5
 lang: ko
 section: Addons
@@ -23,7 +23,7 @@ section: Addons
 
 발견: `onboard` 흐름은 `skills/deepworkplan/addons/`를 열거하고 핵심 스캐폴딩 후 **7b 단계**에서 각 애드온을 옵트인 단계로 제시합니다.
 
-## 출시 애드온(네 가지)
+## 출시 애드온(다섯 가지)
 
 현재 네 가지 애드온이 출시됩니다. 각각 **키트 카탈로그 페이지**(사용자 대상 세부)와 Deep Work Plan 스킬 내 **규범 스펙**이 있습니다.
 
@@ -64,6 +64,18 @@ section: Addons
 - **추가 내용:** `docs/DESIGN.md`(`AGENTS.md`에서 참조), 하나의 파일에 최대 세 **프로필** 적층: **visual-ui**(렌더링 UI 토큰 및 컴포넌트), **cli-output**(의미적 터미널 스타일, TTY/`NO_COLOR` 저하), **conversational**(목소리, 메시지 구조, 플랫폼별 렌더링 및 일반 텍스트 폴백)
 - **프로필 강도:** visual-ui는 감지 시 **기본 켜짐**; cli-output과 conversational은 감지 시 **권장, 항상 질문, 자동 적용 안 함**
 - **제안 시점:** 사용자 대상 인터페이스 표면이 감지된 경우에만 — 순수 라이브러리, 헤드리스 서비스 또는 인프라 전용 저장소에는 해당 없음
+
+### AI Diff Reviewer(다섯 번째 애드온)
+
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**(marketplace **"AI Diff Reviewer"**, 현재 버전 **v2.0.0**)에 대한 선택적 연결로, 필수 보안 검토를 구조화된 로컬 검토로 강화하고 선택적으로 CI에서 pull request를 게이트합니다.
+
+- **키트 페이지:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 전체 기능 참조
+- **DWP 애드온이 연결하는 것:** upstream skill의 부모 기본 플로우를 통한 로컬 보안 검토 강화; 필수 `.review/extension.md` (skill만으로는 불완전함); Flow B는 선택적으로 `pr-review.yml`(`DailybotHQ/ai-diff-reviewer@v2`)을 설치하고 `apply-review`를 개발자가 호출 가능한 컴패니언으로 제공 — 절대 플랜 작업이 아님
+- **플로우:** **A — 로컬 전용** (skill + 확장) 또는 **B — 이중 서피스** (skill + 확장 + CI Action). 애드온은 어떤 플로우인지 **반드시 질문해야 함**; 절대 기본값을 가정하지 않음
+- **소프트 실패 vs 게이트:** 누락된 skill/확장/호출 오류는 절대 차단하지 않음; **완료된** 로컬 패스의 `critical` 결과는 여전히 보안 검토 계약을 따름
+- **동일성(Flow B):** 공유 `prompt.md` + 확장으로 방법론/심각도 정렬; CI Iteration-Aware Review는 로컬 패스가 완전하게 유지되는 동안 2+ 라운드를 줄일 수 있음
+- **공급자 중립 보호:** 핵심 DWP는 AI Diff Reviewer에 대한 **제로** 의존성을 가짐; 모든 사람에게 절대 자동 설치하지 않음
+- **제안 시점:** 개발자 또는 팀이 구조화된 로컬 검토 및/또는 CI PR 병합 게이트를 원할 때
 
 ## 스킬
 

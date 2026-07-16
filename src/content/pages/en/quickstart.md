@@ -42,8 +42,8 @@ It generates `AGENTS.md`, a `docs/` knowledge base, per-module docs, and a cross
 ### 3. Evolve the kit and accept addons
 
 Use `/skill-create` and `/agent-create` (the author sub-skill) to grow stack-appropriate skills,
-agents, and commands. Onboarding also offers four opt-in addons — devcontainer, Dailybot,
-dependency-upgrade, and design-system — that you accept only when they fit. A repo is fully conformant with zero addons.
+agents, and commands. Onboarding also offers five opt-in addons — devcontainer, Dailybot,
+dependency-upgrade, design-system, and AI Diff Reviewer — that you accept only when they fit. A repo is fully conformant with zero addons.
 
 ### 4. Plan and execute
 

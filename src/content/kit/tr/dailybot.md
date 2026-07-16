@@ -124,7 +124,7 @@ Halka açık referans: [dailybot.com/skill.md](https://www.dailybot.com/skill.md
 
 ## Onboarding akışı
 
-DWP `onboard` sırasında **Faz 7b**'de, temel AI-first iskeletinden sonra akış dört opt-in eklenti sunar. Geliştirici Dailybot'u kabul ederse:
+DWP `onboard` sırasında **Faz 7b**'de, temel AI-first iskeletinden sonra akış beş opt-in eklenti sunar. Geliştirici Dailybot'u kabul ederse:
 
 1. Mevcut kurulumu tespit et (skill, CLI, `.dailybot/profile.json`, hook'lar, rapor adımı).
 2. Dailybot onay akışlarıyla skill/CLI kurulumu sun.

@@ -52,6 +52,7 @@ Opcjonalne możliwości, które przepływ onboardingu może nałożyć na repozy
 - **Dailybot** — raportowanie postępu i kamieni milowych dla zespołów korzystających z Dailybot.
 - **Dependency upgrade** — aktualizacje niezależne od menedżera pakietów: partiami, zwalidowane i odwracalne.
 - **System projektowy** — plik `DESIGN.md` o zakresie interfejsowym (w `docs/DESIGN.md`, przywoływany z `AGENTS.md`) wywiedziony z rzeczywistego źródła projektowego repozytorium, z profilami dla wizualnego UI, stylizowanego wyjścia CLI i komunikacji konwersacyjnej, dzięki czemu agenci generują wyjście interfejsu zgodne z marką; profil wizualny jest domyślnie włączony, gdy wykryto system projektowy, a profile CLI i konwersacyjny są zalecane po wykryciu i zawsze poprzedzone pytaniem.
+- **AI Diff Reviewer** — wzmacnia Security Review o ustrukturyzowany lokalny przegląd ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + wymagany `.review/extension.md`); opcjonalny Flow B dodaje bramę merge PR w CI współdzielącą to samo rozszerzenie. Zawsze pytaj Flow A vs Flow B; nigdy nie instaluj automatycznie.
 
 ### Przykłady
 

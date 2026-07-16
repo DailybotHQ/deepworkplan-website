@@ -141,8 +141,8 @@ metodologia) anziché sovrascriverlo — e conferma con l’utente prima di sost
 
 ## 4. Proponi gli addon opt-in
 
-Dopo l'onboarding di base, elenca i quattro addon (devcontainer, Dailybot, dependency-upgrade,
-design-system) e proponi ciascuno come opt-in esplicito. Un repository è pienamente conforme con
+Dopo l'onboarding di base, elenca i cinque addon (devcontainer, Dailybot, dependency-upgrade,
+design-system, AI Diff Reviewer) e proponi ciascuno come opt-in esplicito. Un repository è pienamente conforme con
 **zero** addon — non installarli mai automaticamente.
 
 - **Supporto devcontainer** — un dev container riproducibile e isolato con autenticazione AI-CLI persistente.
@@ -153,6 +153,8 @@ design-system) e proponi ciascuno come opt-in esplicito. Un repository è pienam
   rilevata (non offerto per librerie pure, servizi headless o repository solo infra). Tre profili si
   sovrappongono in un unico file: visual-ui (attivo per default quando rilevato), cli-output e
   conversational — gli ultimi due vengono sempre chiesti, mai applicati automaticamente.
+- **AI Diff Reviewer** — potenzia la Revisione di Sicurezza obbligatoria con una revisione locale strutturata
+  via [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md` obbligatorio). Chiedi sempre **Flow A** (solo locale) vs **Flow B** (gate CI a doppia superficie con `pr-review.yml`); non assumere mai un valore predefinito. Soft-fail solo per errori di skill/estensione/invocazione mancanti; i risultati `critical` di un passaggio locale completato bloccano ancora il completamento della Revisione di Sicurezza. La metodologia di base ha zero dipendenze da AI Diff Reviewer.
 
 ## 5. Fai evolvere il kit (sub-skill author)
 

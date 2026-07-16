@@ -142,8 +142,8 @@ teyit edin.
 
 ## 4. Tercihe dayalı eklentileri sunun
 
-Temel onboarding sonrasında, dört eklentiyi (devcontainer, Dailybot, dependency-upgrade,
-design-system) sıralayın ve her birini açık bir tercih olarak sunun. Bir depo, **sıfır** eklentiyle
+Temel onboarding sonrasında, beş eklentiyi (devcontainer, Dailybot, dependency-upgrade,
+design-system, AI Diff Reviewer) sıralayın ve her birini açık bir tercih olarak sunun. Bir depo, **sıfır** eklentiyle
 tümüyle uyumludur — onları asla otomatik kurmayın.
 
 - **Devcontainer desteği** — kalıcı AI-CLI kimlik doğrulaması içeren, yeniden üretilebilir, yalıtılmış
@@ -155,6 +155,7 @@ tümüyle uyumludur — onları asla otomatik kurmayın.
   (saf kütüphanelere, headless servislere veya yalnızca altyapı depolarına sunulmaz). Üç profil tek bir
   dosyada katmanlanır: visual-ui (saptandığında varsayılan olarak açık), cli-output ve conversational —
   son ikisi her zaman sorulur, asla otomatik uygulanmaz.
+- **AI Diff Reviewer** — zorunlu Güvenlik İncelemesini [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + gerekli `.review/extension.md`) aracılığıyla yapılandırılmış yerel bir incelemeyle güçlendirir. Her zaman **Flow A** (yalnızca yerel) veya **Flow B** (çift yüzeyli CI kapısı, `pr-review.yml`) sorun; hiçbir zaman varsayılan seçmeyin. Yalnızca eksik skill/uzantı/çağrı hataları için yumuşak başarısızlık; tamamlanmış bir yerel geçişten gelen `critical` sonuçlar hâlâ Güvenlik İncelemesinin tamamlanmasını bloke eder. Temel metodolojinin AI Diff Reviewer'a sıfır bağımlılığı vardır.
 
 ## 5. Kiti geliştirin (author alt skill’i)
 

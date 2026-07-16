@@ -1,6 +1,6 @@
 ---
 title: ส่วนเสริม
-description: "ส่วนขยาย DWP แบบเลือกได้: สี่ addon ที่จัดส่ง (devcontainer, Dailybot, dependency-upgrade, design-system) สัญญา addon และแนวคิด kit (skills, agents, presets, adapters, examples)"
+description: "ส่วนขยาย DWP แบบเลือกได้: ห้า addon ที่จัดส่ง (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer) สัญญา addon และแนวคิด kit (skills, agents, presets, adapters, examples)"
 order: 5
 lang: th
 section: Addons
@@ -23,7 +23,7 @@ section: Addons
 
 การค้นพบ: ขั้นตอน `onboard` นับ `skills/deepworkplan/addons/` และนำเสนอแต่ละ addon เป็นขั้นตอน opt-in ใน **Phase 7b** หลัง scaffolding หลัก
 
-## Addon ที่จัดส่ง (สี่ตัว)
+## Addon ที่จัดส่ง (ห้าตัว)
 
 วันนี้มีสี่ addon แต่ละตัวมี **หน้าแคตตาล็อก kit** พร้อมรายละเอียดสำหรับผู้ใช้ และ **spec normative** ภายใน skill Deep Work Plan
 
@@ -64,6 +64,18 @@ section: Addons
 - **สิ่งที่เพิ่ม:** `docs/DESIGN.md` (อ้างอิงจาก `AGENTS.md`) สูงสุดสาม **profile** ในไฟล์เดียว: **visual-ui** (โทเค็นและคอมโพเนนต์ UI ที่เรนเดอร์) **cli-output** (สไตล์เทอร์มินัลเชิงความหมาย การเสื่อม TTY/`NO_COLOR`) **conversational** (น้ำเสียง โครงสร้างข้อความ การเรนเดอร์ต่อแพลตฟอร์มพร้อม fallback ข้อความธรรมดา)
 - **ความแรงของ profile:** visual-ui **เปิดโดยค่าเริ่มต้นเมื่อตรวจพบ** cli-output และ conversational **แนะนำเมื่อตรวจพบ ถามเสมอ ไม่ auto-apply**
 - **เมื่อเสนอ:** เฉพาะเมื่อตรวจพบพื้นผิวอินเทอร์เฟซสำหรับผู้ใช้ — ไม่ใช่ไลบรารีล้วน บริการ headless หรือรีโพ infra เท่านั้น
+
+### AI Diff Reviewer (addon ที่ห้า)
+
+การเชื่อมต่อแบบเลือกใช้กับ **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"** เวอร์ชันปัจจุบัน **v2.0.0**) ที่เสริมการตรวจสอบความปลอดภัยบังคับด้วยการตรวจสอบในเครื่องแบบมีโครงสร้าง และเลือกที่จะควบคุม pull request ใน CI
+
+- **หน้า kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — ข้อมูลอ้างอิงความสามารถเต็มรูปแบบ
+- **สิ่งที่ DWP addon เชื่อมต่อ:** การเสริมการตรวจสอบความปลอดภัยในเครื่องผ่านโฟลว์หลักเริ่มต้นของ skill ต้นทาง; `.review/extension.md` ที่จำเป็น (skill เพียงอย่างเดียวไม่สมบูรณ์); Flow B ติดตั้ง `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) ตามเลือกและนำเสนอ `apply-review` เป็นผู้ช่วยที่นักพัฒนาเรียกใช้ได้ — ไม่เคยเป็นไฟล์งานของแผน
+- **โฟลว์:** **A — เฉพาะในเครื่อง** (skill + ส่วนขยาย) หรือ **B — สองพื้นผิว** (skill + ส่วนขยาย + CI Action) addon **ต้องถาม** โฟลว์ใด; ไม่เคยสันนิษฐานค่าเริ่มต้น
+- **ความล้มเหลวแบบนุ่มนวลเทียบกับเกท:** ข้อผิดพลาดของ skill/ส่วนขยาย/การเรียกที่หายไปไม่เคยบล็อก; ผลการค้นพบ `critical` จากการรันในเครื่องที่ **เสร็จสิ้น** ยังคงปฏิบัติตามสัญญาการตรวจสอบความปลอดภัย
+- **ความเท่าเทียม (Flow B):** `prompt.md` ที่ใช้ร่วมกัน + ส่วนขยายจัดแนวระเบียบวิธีและระดับความรุนแรง; Iteration-Aware Review ของ CI อาจทำให้รอบที่ 2+ สั้นลงในขณะที่การรันในเครื่องยังคงสมบูรณ์
+- **การป้องกันที่เป็นกลางต่อผู้ให้บริการ:** DWP หลักมีการพึ่งพา AI Diff Reviewer **เป็นศูนย์**; ไม่เคยติดตั้งให้ทุกคนโดยอัตโนมัติ
+- **เมื่อเสนอ:** นักพัฒนาหรือทีมต้องการการตรวจสอบในเครื่องแบบมีโครงสร้างและ/หรือเกทการรวม PR CI
 
 ## Skills
 

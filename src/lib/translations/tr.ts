@@ -639,7 +639,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Kiti geliştirin ve eklentileri kabul edin',
         description:
-          'Yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın. Kuruluma alma ayrıca dört tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade ve design-system — yalnızca uygun olduklarında kabul edersiniz.',
+          'Yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın. Kuruluma alma ayrıca beş tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade, design-system ve AI Diff Reviewer — yalnızca uygun olduklarında kabul edersiniz.',
       },
       {
         title: 'Planlayın ve yürütün',
@@ -712,7 +712,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Tercihe dayalı eklentileri kabul edin',
         description:
-          'Kuruluma alma dört tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade ve design-system — yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
+          'Kuruluma alma beş tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade, design-system ve AI Diff Reviewer — yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
       },
       {
         title: 'Planlayın ve yürütün',

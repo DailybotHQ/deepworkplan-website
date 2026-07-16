@@ -36,7 +36,7 @@ onboard サブスキルを実行し、エージェントに実際のリポジト
 
 ### 3. キットを進化させ、アドオンを受け入れる
 
-`/skill-create` と `/agent-create`（author サブスキル）を使って、スタックに合ったスキル、エージェント、コマンドを育てます。オンボーディングは四つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system）も提案します。適合する場合にのみ受け入れてください。リポジトリはアドオンがゼロでも完全に適合します。
+`/skill-create` と `/agent-create`（author サブスキル）を使って、スタックに合ったスキル、エージェント、コマンドを育てます。オンボーディングは五つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）も提案します。適合する場合にのみ受け入れてください。リポジトリはアドオンがゼロでも完全に適合します。
 
 ### 4. 計画して実行する
 

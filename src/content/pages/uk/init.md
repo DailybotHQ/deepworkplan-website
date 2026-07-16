@@ -137,7 +137,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ## 4. Запропонуйте add-on із явним прийняттям
 
-Після базового онбордингу перелічіть чотири add-on (devcontainer, Dailybot, dependency-upgrade, design-system)
+Після базового онбордингу перелічіть п'ять add-on (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer)
 і запропонуйте кожен як явне прийняття. Репозиторій
 повністю відповідний з **нульовою** кількістю add-on — ніколи не встановлюйте їх автоматично.
 
@@ -149,6 +149,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
   (не пропонується для чистих бібліотек, headless-сервісів або суто інфраструктурних репозиторіїв). Три профілі
   складаються в одному файлі: visual-ui (увімкнений за замовчуванням при виявленні), cli-output та розмовний —
   останні два завжди запитуються, ніколи не застосовуються автоматично.
+- **AI Diff Reviewer** — посилює обов'язковий Security Review структурованим локальним переглядом через [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + обов'язковий `.review/extension.md`). Завжди питайте **Flow A** (лише локально) або **Flow B** (двоповерховий CI-гейт із `pr-review.yml`); ніколи не припускайте за замовчуванням. М'який збій лише для помилок відсутнього skill/розширення/виклику; результати `critical` завершеного локального проходу все одно блокують завершення Security Review. Базова методологія не має жодної залежності від AI Diff Reviewer.
 
 ## 5. Розвивайте набір (суб-скіл author)
 

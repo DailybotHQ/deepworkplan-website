@@ -632,7 +632,7 @@ export const es: SiteTranslations = {
       {
         title: 'Evoluciona el kit y acepta addons',
         description:
-          'Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos adaptados a tu stack. La incorporación también ofrece cuatro addons opcionales — devcontainer, Dailybot, dependency-upgrade y design-system — que aceptas solo cuando encajan.',
+          'Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos adaptados a tu stack. La incorporación también ofrece cinco addons opcionales — devcontainer, Dailybot, dependency-upgrade, design-system y AI Diff Reviewer — que aceptas solo cuando encajan.',
       },
       {
         title: 'Planifica y ejecuta',
@@ -705,7 +705,7 @@ export const es: SiteTranslations = {
       {
         title: 'Acepta addons opcionales',
         description:
-          'La incorporación ofrece cuatro addons opcionales — devcontainer, Dailybot, dependency-upgrade y design-system — que aceptas solo cuando encajan. Un repo es plenamente conforme con cero addons. Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos más allá de la línea base.',
+          'La incorporación ofrece cinco addons opcionales — devcontainer, Dailybot, dependency-upgrade, design-system y AI Diff Reviewer — que aceptas solo cuando encajan. Un repo es plenamente conforme con cero addons. Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos más allá de la línea base.',
       },
       {
         title: 'Planifica y ejecuta',

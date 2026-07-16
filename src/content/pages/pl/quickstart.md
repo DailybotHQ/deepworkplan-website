@@ -42,8 +42,8 @@ na plany i szkice. Nic nie pochodzi z szablonu; wszystko jest dostosowane do two
 ### 3. Rozwijaj kit i akceptuj dodatki
 
 Użyj `/skill-create` i `/agent-create` (sub-skill author), aby rozwijać skille, agentów i komendy odpowiednie dla
-twojego stosu. Onboarding oferuje też cztery opcjonalne dodatki — devcontainer, Dailybot,
-dependency-upgrade i design-system — które akceptujesz tylko wtedy, gdy pasują. Repozytorium jest w pełni zgodne przy zerowej liczbie dodatków.
+twojego stosu. Onboarding oferuje też pięć opcjonalnych dodatków — devcontainer, Dailybot,
+dependency-upgrade, design-system i AI Diff Reviewer — które akceptujesz tylko wtedy, gdy pasują. Repozytorium jest w pełni zgodne przy zerowej liczbie dodatków.
 
 ### 4. Planuj i wykonuj
 

@@ -1,6 +1,6 @@
 ---
 title: ऐडऑन
-description: "वैकल्पिक DWP विस्तार: चार shipping ऐडऑन (devcontainer, Dailybot, dependency-upgrade, design-system), ऐडऑन अनुबंध, और kit अवधारणाएँ (skills, agents, presets, adapters, examples)।"
+description: "वैकल्पिक DWP विस्तार: पाँच shipping ऐडऑन (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), ऐडऑन अनुबंध, और kit अवधारणाएँ (skills, agents, presets, adapters, examples)।"
 order: 5
 lang: hi
 section: Addons
@@ -23,7 +23,7 @@ section: Addons
 
 खोज: `onboard` प्रवाह `skills/deepworkplan/addons/` को गिनता है और हर ऐडऑन को **Phase 7b** में ऑप्ट-इन चरण के रूप में प्रस्तुत करता है, कोर scaffolding के बाद।
 
-## Shipping ऐडऑन (चार)
+## Shipping ऐडऑन (पाँच)
 
 आज चार ऐडऑन ship होते हैं। हर एक का **kit catalog पृष्ठ** user-facing विवरण के साथ और Deep Work Plan स्किल के अंदर **normative spec** है।
 
@@ -64,6 +64,18 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 - **क्या जोड़ता है:** `docs/DESIGN.md` (`AGENTS.md` से संदर्भित) अधिकतम तीन **profiles** एक फ़ाइल में: **visual-ui** (rendered UI tokens और components), **cli-output** (semantic terminal styles, TTY/`NO_COLOR` degradation), **conversational** (voice, message anatomy, per-platform rendering plain-text fallbacks के साथ)
 - **Profile strength:** visual-ui **पता चलने पर default-on**; cli-output और conversational **पता चलने पर अनुशंसित, हमेशा पूछे जाते हैं, कभी auto-applied नहीं**
 - **कब प्रस्तावित:** केवल जब user-facing इंटरफ़ेस सतह पहचानी जाए — pure libraries, headless services, या infra-only रिपॉज़िटरी के लिए नहीं
+
+### AI Diff Reviewer (पाँचवाँ ऐडऑन)
+
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, वर्तमान संस्करण **v2.0.0**) से एक वैकल्पिक संबंध जो अनिवार्य सुरक्षा समीक्षा को संरचित स्थानीय समीक्षा से बेहतर बनाता है और वैकल्पिक रूप से CI में pull requests को गेट करता है।
+
+- **Kit पृष्ठ:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — पूर्ण क्षमता संदर्भ
+- **DWP ऐडऑन जो जोड़ता है:** upstream skill के मूल डिफ़ॉल्ट प्रवाह के माध्यम से स्थानीय सुरक्षा समीक्षा वृद्धि; आवश्यक `.review/extension.md` (skill अकेले अपूर्ण है); Flow B वैकल्पिक रूप से `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) इंस्टॉल करता है और `apply-review` को डेवलपर द्वारा इनवोक किए जाने वाले साथी के रूप में प्रस्तुत करता है — कभी प्लान टास्क के रूप में नहीं
+- **प्रवाह:** **A — केवल स्थानीय** (skill + एक्सटेंशन) या **B — दोहरी सतह** (skill + एक्सटेंशन + CI Action)। ऐडऑन **अवश्य पूछना चाहिए** कौन सा प्रवाह; कभी डिफ़ॉल्ट न मानें
+- **सॉफ्ट-फेल बनाम गेट:** अनुपस्थित skill/एक्सटेंशन/इनवोकेशन त्रुटियाँ कभी नहीं रोकतीं; एक **पूर्ण** स्थानीय पास से `critical` निष्कर्ष सुरक्षा समीक्षा अनुबंध का अनुसरण करते रहते हैं
+- **समानता (Flow B):** साझा `prompt.md` + एक्सटेंशन पद्धति/गंभीरता संरेखित करते हैं; CI Iteration-Aware Review स्थानीय पास पूर्ण रहते हुए 2+ राउंड को छोटा कर सकता है
+- **वेंडर-तटस्थ सुरक्षा:** कोर DWP की AI Diff Reviewer पर **शून्य** निर्भरता है; सभी के लिए कभी स्वचालित इंस्टॉल न करें
+- **कब प्रस्तावित:** डेवलपर या टीम संरचित स्थानीय समीक्षा और/या CI PR मर्ज गेट चाहती है
 
 ## Skills
 

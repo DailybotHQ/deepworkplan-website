@@ -124,7 +124,7 @@ Die Installation der Dailybot-Agent-Skill bringt weit mehr als das DWP-Addon ver
 
 ## Onboarding-Ablauf
 
-Während DWP `onboard` **Phase 7b**, nach dem zentralen AI-first-Scaffolding, bietet der Ablauf vier optionale Addons. Akzeptiert der Entwickler Dailybot:
+Während DWP `onboard` **Phase 7b**, nach dem zentralen AI-first-Scaffolding, bietet der Ablauf fünf optionale Addons. Akzeptiert der Entwickler Dailybot:
 
 1. Bestehendes Setup erkennen (Skill, CLI, `.dailybot/profile.json`, Hooks, Report-Schritt).
 2. Skill-/CLI-Installation über Dailybots Einwilligungsflows anbieten.

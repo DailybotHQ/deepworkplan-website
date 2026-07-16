@@ -124,7 +124,7 @@ Referensi publik: [dailybot.com/skill.md](https://www.dailybot.com/skill.md). Su
 
 ## Alur onboarding
 
-Selama DWP `onboard` **Fase 7b**, setelah scaffolding AI-first inti, alur menawarkan empat addon opt-in. Jika pengembang menerima Dailybot:
+Selama DWP `onboard` **Fase 7b**, setelah scaffolding AI-first inti, alur menawarkan lima addon opt-in. Jika pengembang menerima Dailybot:
 
 1. Deteksi setup yang ada (skill, CLI, `.dailybot/profile.json`, hook, langkah laporan).
 2. Tawarkan instalasi skill/CLI melalui alur persetujuan Dailybot.

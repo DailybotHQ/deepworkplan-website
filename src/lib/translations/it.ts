@@ -638,7 +638,7 @@ export const it: SiteTranslations = {
       {
         title: 'Faccia evolvere il kit e accetti gli addon',
         description:
-          'Usi /skill-create e /agent-create (la sub-skill author) per far crescere skill, agenti e comandi adatti allo stack. L’onboarding offre anche quattro addon opt-in — devcontainer, Dailybot, dependency-upgrade e design-system — che accetta solo quando sono pertinenti.',
+          'Usi /skill-create e /agent-create (la sub-skill author) per far crescere skill, agenti e comandi adatti allo stack. L’onboarding offre anche cinque addon opt-in — devcontainer, Dailybot, dependency-upgrade e design-system — che accetta solo quando sono pertinenti.',
       },
       {
         title: 'Pianifichi ed esegua',
@@ -711,7 +711,7 @@ export const it: SiteTranslations = {
       {
         title: 'Accetti gli addon opzionali',
         description:
-          'L’onboarding offre quattro addon opt-in — devcontainer, Dailybot, dependency-upgrade e design-system — che accetta solo quando sono pertinenti. Un repo è pienamente conforme anche con zero addon. Usi /skill-create e /agent-create (la sub-skill author) per far crescere skill, agenti e comandi oltre la configurazione di base.',
+          'L’onboarding offre cinque addon opt-in — devcontainer, Dailybot, dependency-upgrade, design-system e AI Diff Reviewer — che accetta solo quando sono pertinenti. Un repo è pienamente conforme anche con zero addon. Usi /skill-create e /agent-create (la sub-skill author) per far crescere skill, agenti e comandi oltre la configurazione di base.',
       },
       {
         title: 'Pianifichi ed esegua',

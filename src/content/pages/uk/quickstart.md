@@ -42,8 +42,8 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 ### 3. Розвивайте набір та приймайте add-on
 
 Використовуйте `/skill-create` та `/agent-create` (суб-скіл author), щоб вирощувати доречні для стека скіли,
-агенти та команди. Онбординг також пропонує чотири add-on із явним прийняттям — devcontainer, Dailybot,
-dependency-upgrade та design-system, — які ви приймаєте лише тоді, коли вони пасують. Репозиторій повністю відповідний з нульовою кількістю add-on.
+агенти та команди. Онбординг також пропонує п'ять add-on із явним прийняттям — devcontainer, Dailybot,
+dependency-upgrade, design-system та AI Diff Reviewer, — які ви приймаєте лише тоді, коли вони пасують. Репозиторій повністю відповідний з нульовою кількістю add-on.
 
 ### 4. Плануйте та виконуйте
 

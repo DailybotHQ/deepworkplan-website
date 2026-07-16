@@ -42,8 +42,8 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 ### 3. 演化套件并采纳附加组件
 
 使用 `/skill-create` 与 `/agent-create`（author 子技能）来培育与技术栈相适配的技能、
-代理与命令。接入流程还会提供四个可选附加组件——devcontainer、Dailybot、
-dependency-upgrade 与 design-system——你只在它们契合时才采纳。一个仓库即便不带任何附加组件，也完全符合规范。
+代理与命令。接入流程还会提供五个可选附加组件——devcontainer、Dailybot、
+dependency-upgrade、design-system 与 AI Diff Reviewer——你只在它们契合时才采纳。一个仓库即便不带任何附加组件，也完全符合规范。
 
 ### 4. 规划并执行
 

@@ -640,7 +640,7 @@ export const ja: SiteTranslations = {
       {
         title: 'キットを進化させ、アドオンを受け入れる',
         description:
-          '/skill-create と /agent-create（author サブスキル）を使って、スタックに合ったスキル、エージェント、コマンドを育てます。オンボーディングは四つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system）も提案します。適合する場合にのみ受け入れてください。',
+          '/skill-create と /agent-create（author サブスキル）を使って、スタックに合ったスキル、エージェント、コマンドを育てます。オンボーディングは五つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）も提案します。適合する場合にのみ受け入れてください。',
       },
       {
         title: '計画して実行する',
@@ -713,7 +713,7 @@ export const ja: SiteTranslations = {
       {
         title: 'オプトインのアドオンを受け入れる',
         description:
-          'オンボーディングは四つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system）を提案します。適合する場合にのみ受け入れてください。アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
+          'オンボーディングは五つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）を提案します。適合する場合にのみ受け入れてください。アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
       },
       {
         title: '計画して実行する',

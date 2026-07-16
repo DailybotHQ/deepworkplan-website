@@ -129,8 +129,8 @@ Methodik angleichen), statt es zu überschreiben — und bestätigen Sie mit dem
 
 ## 4. Die Opt-in-Addons anbieten
 
-Nach dem Baseline-Onboarding zählen Sie die vier Addons auf (devcontainer, Dailybot, dependency-upgrade,
-design-system) und bieten Sie jedes als explizites Opt-in an. Ein Repository ist
+Nach dem Baseline-Onboarding zählen Sie die fünf Addons auf (devcontainer, Dailybot, dependency-upgrade,
+design-system, AI Diff Reviewer) und bieten Sie jedes als explizites Opt-in an. Ein Repository ist
 mit **null** Addons vollständig konform — installieren Sie sie niemals automatisch.
 
 - **Devcontainer-Unterstützung** — ein reproduzierbarer, isolierter Dev-Container mit persistenter AI-CLI-Authentifizierung.
@@ -141,6 +141,8 @@ mit **null** Addons vollständig konform — installieren Sie sie niemals automa
   (nicht angeboten für reine Bibliotheken, Headless-Dienste oder reine Infrastruktur-Repos). Drei Profile
   werden in einer Datei gestapelt: visual-ui (standardmäßig aktiviert bei Erkennung), cli-output und
   conversational — die letzten beiden werden immer gefragt, niemals automatisch angewendet.
+- **AI Diff Reviewer** — erweitert die obligatorische Sicherheitsprüfung um eine strukturierte lokale Überprüfung
+  über [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (Skill + erforderliches `.review/extension.md`). Immer **Flow A** (nur lokal) vs. **Flow B** (dualer CI-Gate mit `pr-review.yml`) fragen; niemals Standard setzen. Soft-Fail nur bei fehlenden Skill/Erweiterungs/Aufruffehlern; `critical`-Ergebnisse eines abgeschlossenen lokalen Durchlaufs blockieren weiterhin die Fertigstellung der Sicherheitsprüfung. Die zentrale Methodik hat keine AI Diff Reviewer-Abhängigkeit.
 
 ## 5. Das Kit weiterentwickeln (author-Sub-Skill)
 

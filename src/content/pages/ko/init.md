@@ -134,7 +134,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 
 ## 4. 선택형 애드온을 제안하세요
 
-기준선 온보딩 이후, 네 가지 애드온(devcontainer, Dailybot, dependency-upgrade, design-system)을
+기준선 온보딩 이후, 다섯 가지 애드온(devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer)을
 열거하고 각각을 명시적 선택형으로 제안하세요. 리포지토리는 애드온이 **하나도** 없어도 완전히
 적합합니다 — 결코 자동 설치하지 마세요.
 
@@ -146,6 +146,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
   (순수 라이브러리, 헤드리스 서비스, 인프라 전용 리포지토리에는 제공하지 않음). 세 가지 프로필이
   하나의 파일에 쌓입니다: visual-ui(감지되면 기본 활성화), cli-output, conversational — 후자 두 개는
   항상 질문하며 자동 적용하지 않습니다.
+- **AI Diff Reviewer** — 필수 보안 검토를 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + 필수 `.review/extension.md`)를 통한 구조화된 로컬 검토로 강화합니다. 항상 **Flow A** (로컬 전용) vs **Flow B** (이중 서피스 CI 게이트, `pr-review.yml`)를 질문하세요; 절대 기본값을 가정하지 마세요. 누락된 skill/확장/호출 오류에 대해서만 소프트 실패; 완료된 로컬 패스의 `critical` 결과는 여전히 보안 검토 완료를 차단합니다. 핵심 방법론은 AI Diff Reviewer에 대한 제로 의존성을 가집니다.
 
 ## 5. 키트를 발전시키세요 (author 하위 스킬)
 

@@ -124,7 +124,7 @@ Référence publique : [dailybot.com/skill.md](https://www.dailybot.com/skill.md
 
 ## Flux d'onboarding
 
-Pendant la **Phase 7b** de `onboard` DWP, après le scaffolding AI-first central, le flux propose quatre addons optionnels. Si le développeur accepte Dailybot :
+Pendant la **Phase 7b** de `onboard` DWP, après le scaffolding AI-first central, le flux propose cinq addons optionnels. Si le développeur accepte Dailybot :
 
 1. Détecter la configuration existante (skill, CLI, `.dailybot/profile.json`, hooks, étape de rapport).
 2. Proposer l'installation skill/CLI via les flux de consentement de Dailybot.

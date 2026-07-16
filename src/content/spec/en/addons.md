@@ -1,6 +1,6 @@
 ---
 title: Add-ons
-description: "Optional DWP extensions: the four shipping addons (devcontainer, Dailybot, dependency-upgrade, design-system), the addon contract, and kit concepts (skills, agents, presets, adapters, examples)."
+description: "Optional DWP extensions: the five shipping addons (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), the addon contract, and kit concepts (skills, agents, presets, adapters, examples)."
 order: 5
 lang: en
 section: Addons
@@ -23,9 +23,9 @@ Every shipping addon ships four mandatory components:
 
 Discovery: the `onboard` flow enumerates `skills/deepworkplan/addons/` and presents each addon as an opt-in step in **Phase 7b**, after core scaffolding.
 
-## Shipping addons (four)
+## Shipping addons (five)
 
-Four addons ship today. Each has a **kit catalog page** with user-facing detail and a **normative spec** inside the Deep Work Plan skill.
+Five addons ship today. Each has a **kit catalog page** with user-facing detail and a **normative spec** inside the Deep Work Plan skill.
 
 ### Devcontainer (first addon)
 
@@ -64,6 +64,18 @@ An interface-surface-scoped `DESIGN.md` any coding agent reads for consistent UI
 - **What it adds:** `docs/DESIGN.md` (referenced from `AGENTS.md`) with up to three **profiles** stacked in one file: **visual-ui** (rendered UI tokens and components), **cli-output** (semantic terminal styles, TTY/`NO_COLOR` degradation), **conversational** (voice, message anatomy, per-platform rendering with plain-text fallbacks)
 - **Profile strength:** visual-ui is **default-on when detected**; cli-output and conversational are **recommended when detected, always asked, never auto-applied**
 - **When offered:** only when a user-facing interface surface is detected — not for pure libraries, headless services, or infra-only repos
+
+### AI Diff Reviewer (fifth addon)
+
+An opt-in connection to the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, current **v2.0.0**) that augments the mandatory Security Review with a structured local review, and optionally gates pull requests in CI.
+
+- **Kit page:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — full capability reference
+- **What the DWP addon wires:** local Security Review augmentation via the upstream parent default flow; required `.review/extension.md` (skill alone is incomplete); Flow B optionally installs `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) and surfaces `apply-review` as a developer-invoked companion — never a plan task
+- **Flows:** **A — local-only** (skill + extension) or **B — dual-surface** (skill + extension + CI Action). The addon **MUST ask** which flow; never default
+- **Soft-fail vs gate:** missing skill/extension/invocation errors never block; `critical` findings from a **completed** local pass still follow the Security Review contract
+- **Parity (Flow B):** shared `prompt.md` + extension align methodology/severity; CI Iteration-Aware Review may shorten round 2+ while local stays a full pass
+- **Vendor-neutral guardrail:** core DWP has **zero** AI Diff Reviewer dependency; never auto-install for everyone
+- **When offered:** developer or team wants structured local review and/or a CI PR merge gate
 
 ## Skills
 

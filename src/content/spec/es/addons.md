@@ -1,6 +1,6 @@
 ---
 title: Complementos
-description: "Extensiones opcionales de DWP: los cuatro addons activos (devcontainer, Dailybot, dependency-upgrade, design-system), el contrato de addon y conceptos del kit."
+description: "Extensiones opcionales de DWP: los cinco addons activos (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), el contrato de addon y conceptos del kit."
 order: 5
 lang: es
 section: Addons
@@ -23,9 +23,9 @@ Cada addon activo incluye cuatro componentes obligatorios:
 
 Descubrimiento: el flujo `onboard` enumera `skills/deepworkplan/addons/` y presenta cada addon como un paso opcional en la **Fase 7b**, tras el andamiaje central.
 
-## Addons activos (cuatro)
+## Addons activos (cinco)
 
-Hoy hay cuatro addons activos. Cada uno tiene una **página del catálogo del kit** con detalle orientado al usuario y una **spec normativa** dentro de la skill de Deep Work Plan.
+Hoy hay cinco addons activos. Cada uno tiene una **página del catálogo del kit** con detalle orientado al usuario y una **spec normativa** dentro de la skill de Deep Work Plan.
 
 ### Devcontainer (primer addon)
 
@@ -64,6 +64,18 @@ Un `DESIGN.md` con alcance de superficie de interfaz que cualquier agente de cod
 - **Qué añade:** `docs/DESIGN.md` (referenciado desde `AGENTS.md`) con hasta tres **perfiles** apilados en un solo archivo: **visual-ui** (tokens y componentes de UI renderizada), **cli-output** (estilos semánticos de terminal, degradación TTY/`NO_COLOR`), **conversational** (voz, anatomía del mensaje, renderizado por plataforma con alternativas en texto plano)
 - **Fuerza del perfil:** visual-ui está **activado por defecto cuando se detecta**; cli-output y conversational se **recomiendan cuando se detectan, siempre se preguntan, nunca se aplican automáticamente**
 - **Cuándo se ofrece:** solo cuando se detecta una superficie de interfaz orientada al usuario — no para bibliotecas puras, servicios sin interfaz o repos solo de infraestructura
+
+### AI Diff Reviewer (quinto addon)
+
+Una conexión opcional al **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **«AI Diff Reviewer»**, versión actual **v2.0.0**) que amplía la Revisión de Seguridad obligatoria con una revisión local estructurada y, opcionalmente, bloquea los pull requests en CI.
+
+- **Página del kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — referencia completa de capacidades
+- **Qué conecta el addon de DWP:** ampliación local de la Revisión de Seguridad vía el flujo padre por defecto de la skill upstream; `.review/extension.md` requerido (la skill sola es incompleta); el Flujo B instala opcionalmente `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) y expone `apply-review` como compañero invocable por el desarrollador — nunca como tarea del plan
+- **Flujos:** **A — solo local** (skill + extensión) o **B — doble superficie** (skill + extensión + CI Action). El addon **DEBE preguntar** qué flujo elegir; nunca elegir por defecto
+- **Fallo suave vs compuerta:** errores de skill/extensión/invocación ausentes nunca bloquean; los hallazgos `critical` de un pase local **completado** siguen el contrato de Revisión de Seguridad
+- **Paridad (Flujo B):** el `prompt.md` compartido + extensión alinean metodología/severidad; la Revisión Consciente de Iteraciones de CI puede acortar la ronda 2+ mientras el pase local permanece completo
+- **Salvaguarda neutral respecto al proveedor:** el DWP central tiene **cero** dependencia de AI Diff Reviewer; nunca instalar automáticamente para todos
+- **Cuándo se ofrece:** el desarrollador o el equipo quiere revisión local estructurada y/o una compuerta de PR en CI
 
 ## Habilidades
 

@@ -124,7 +124,7 @@ Referencja publiczna: [dailybot.com/skill.md](https://www.dailybot.com/skill.md)
 
 ## Przepływ onboardingu
 
-Podczas DWP `onboard` w **Phase 7b**, po podstawowym scaffoldingu AI-first, przepływ proponuje cztery opcjonalne addony. Jeśli programista zaakceptuje Dailybot:
+Podczas DWP `onboard` w **Phase 7b**, po podstawowym scaffoldingu AI-first, przepływ proponuje pięć opcjonalnych addonów. Jeśli programista zaakceptuje Dailybot:
 
 1. Wykryj istniejącą konfigurację (skill, CLI, `.dailybot/profile.json`, hooki, krok raportu).
 2. Zaproponuj instalację skilla/CLI przez przepływy zgody Dailybot.
