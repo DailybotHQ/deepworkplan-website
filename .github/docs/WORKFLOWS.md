@@ -203,8 +203,8 @@ Dispatches a `cleanup_caches` event via GitHub API.
 | Job | Depends on | Purpose |
 |-----|------------|---------|
 | `scope` | — | Three-tier gate: (1) `author-association ∈ {OWNER, MEMBER, COLLABORATOR}` (cheapest, payload-based, not spoofable); (2) `ready` label present on the PR (case-insensitive); (3) `CURSOR_API_KEY` secret configured. Emits `should_run` + `empty_reason` outputs consumed by downstream jobs. |
-| `labels-bootstrap` | `scope` | Idempotent `gh label create` for `ready` (color `0e8a16`) and `pr-reviewed` (color `0366d6`). Only runs when `should_run == 'true'`. |
-| `review` | `scope, labels-bootstrap` | Checks out with `fetch-depth: 0` and `persist-credentials: false` (Cursor CLI has broad local access — a persisted token on disk is an exfil surface). Invokes `DailybotHQ/ai-diff-reviewer@v1` with `provider: cursor`, `model: auto`, `label-gate: ready`, `author-association: OWNER,MEMBER,COLLABORATOR`, `applied-label: pr-reviewed`, `strictness: block-on-critical`, `prompt-extension-file: .review/extension.md`, `max-inline-comments: 15`. |
+| `labels-bootstrap` | `scope` | Idempotent `gh label create` for `ready` (color `0e8a16`), `pr-reviewed` (color `0366d6`), and `skip-ai-review` (color `b60205` — emergency bypass). Only runs when `should_run == 'true'`. |
+| `review` | `scope, labels-bootstrap` | Checks out with `fetch-depth: 0` and `persist-credentials: false` (Cursor CLI has broad local access — a persisted token on disk is an exfil surface). Invokes `DailybotHQ/ai-diff-reviewer@v2` with `provider: cursor`, `model: auto`, `label-gate: ready`, `author-association: OWNER,MEMBER,COLLABORATOR`, `applied-label: pr-reviewed`, `skip-review-label: skip-ai-review`, `strictness: block-on-critical`, `prompt-extension-file: .review/extension.md`, `max-inline-comments: 15`. Applying `skip-ai-review` while `ready` is present re-runs the job and short-circuits the LLM. |
 | `gate` | `scope, review` | Stable-named `'AI review gate'`. This is the ONLY job to mark as required in branch protection. |
 
 ### Gate semantics
@@ -265,4 +265,4 @@ check_pr_size_label       pr-review (scope → labels-bootstrap → review → g
 | `actions/setup-node@v4` | v4 | All workflows |
 | `actions/cache@v4` | v4 | code_check, release_and_publish |
 | `ncipollo/release-action@v1` | v1 | release_and_publish (job 3) |
-| `DailybotHQ/ai-diff-reviewer@v1` | v1 | pr-review (review job) |
+| `DailybotHQ/ai-diff-reviewer@v2` | v2 | pr-review (review job) |

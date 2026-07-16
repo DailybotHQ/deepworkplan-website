@@ -9,6 +9,23 @@ documents, and hosts the canonical adoption endpoint `/init`. Every user-
 facing change ripples across 17 language surfaces + agent-friendly Markdown
 mirrors + a search index — the review bar is calibrated to that reach.
 
+Trust is **two-sided** (see [`docs/SECURITY.md`](../docs/SECURITY.md)
+"Provenance & Integrity"): this website and the installable skill
+([`DailybotHQ/deepworkplan-skill`](https://github.com/DailybotHQ/deepworkplan-skill)).
+Users decide whether to adopt DWP from what they read here **and** from the
+skill's public security audits on skills.sh:
+
+<https://www.skills.sh/dailybothq/deepworkplan-skill/deepworkplan>
+
+Target posture on that listing: **Gen Agent Trust Hub = Pass**, **Socket =
+Pass** (or at worst a residual Warn that is not a delivery-vector hit),
+**Snyk = Pass**. This site MUST NOT teach, mirror, or normalize patterns that
+would FAIL those audits (especially remote-installer pipes), MUST NOT
+overstate trust claims beyond the skill repo's SECURITY.md, and MUST keep
+`/trust`, `/.well-known/dwp-trust.json`, and `security.txt` honest. skills.sh
+re-scans on a delay after skill releases — a stale FAIL on the dashboard is
+not permission to add more risk in website copy.
+
 The load-bearing rules live in [`AGENTS.md`](../AGENTS.md); this file
 overrides the base prompt for the patterns most likely to slip a review in
 this codebase.
@@ -75,6 +92,51 @@ this codebase.
   automatically excluded from production builds via three layers (post-
   build deletion, sitemap filter, `noindex` meta) — a public reference
   breaks that isolation.
+- **Always `critical` (user trust / skills.sh Snyk E005 / Socket W012):**
+  any fetch-and-execute installer pipeline as a literal string in
+  user-facing or agent-facing content — translations
+  (`src/lib/translations/**`), methodology/spec/kit/pages collections
+  (`src/content/**`), page components, `/init` copy, `/trust` copy,
+  `AGENTS.md`, or `docs/**`. Banned shapes: POSIX `curl … | bash` /
+  `curl … | sh` / `wget … | sh`, PowerShell `irm … | iex` / `iwr … | iex`,
+  and any single-line `download → pipe → shell`. Scanners (and users who
+  copy-paste from this site into agents) are lexical; "don't do this"
+  examples that still spell the pipe still poison trust. Prefer
+  `npx skills add …`, package managers (`pip` / `brew` / `npm`), or a
+  verified multi-step flow without the pipe. **Allowed:** `curl -fsSL -o
+  FILE URL` that only downloads a checksum or artifact (as on `/trust`)
+  — download-only is fine; pipe-to-shell is not. Precedent on the skill
+  side: `fix(security): eliminate remote-installer pipes` (`6a05ed9`)
+  — that string is what moved Snyk to Fail on
+  [skills.sh](https://www.skills.sh/dailybothq/deepworkplan-skill/deepworkplan).
+- **Always `critical` (user trust / overclaim):** asserting that releases
+  are cryptographically **signed**, that the skill phones home, or any
+  trust claim stronger than the skill repo's SECURITY.md / this repo's
+  `docs/SECURITY.md`. Current honest posture: releases are
+  **checksummed, not signed**; signing is planned. `/trust`,
+  `/.well-known/dwp-trust.json`, and related copy MUST stay aligned —
+  `signing` stays `"planned"` until a real signature ships.
+- **Always `critical` (user trust / trust surface regression):** removing,
+  gutting, or making inaccurate the public trust surfaces — `/trust`
+  (and its 17-language mirrors), `public/.well-known/dwp-trust.json`,
+  `public/.well-known/security.txt`, or the Provenance section of
+  `docs/SECURITY.md` — without an intentional, documented replacement
+  that preserves disclosure channels and verifiable-install guidance.
+- **Always `critical`:** committing secrets, API keys, tokens, or
+  provider credentials (e.g. `CURSOR_API_KEY`, Dailybot keys, Cloudflare
+  tokens) into the tree, sample env files that are not placeholders, or
+  workflow logs. Env-based secrets stay in GitHub Actions secrets /
+  local `.env` (gitignored).
+- **Always `critical`:** an `npx skills add` / `skills update` invocation
+  in a new workflow or script that omits either `--yes` or `-y`. Missing
+  either hangs non-TTY runners; `release_and_publish.yml` Step 1a must
+  keep both on every dogfood install.
+- **Always `critical`:** a hand-edit under `.agents/skills/**` that
+  reintroduces a remote-installer pipe, strips a Trust-boundary section
+  from a write-capable `SKILL.md`, or otherwise diverges the dogfood
+  copy from upstream security posture. Vendored skills are refreshed on
+  release — hand edits are almost always wrong; if a PR must touch them,
+  security regressions are merge-blocking.
 
 - **Always `warning`:** any use of `text-gray-400`, `text-gray-500`,
   `dark:text-gray-400`, or `dark:text-gray-500` for BODY text. All fail
@@ -123,6 +185,21 @@ this codebase.
   pages in translations, or in collection-doc frontmatter). Pre-Commit
   Checklist. Long descriptions get truncated in SERPs; short ones lose
   the space budget.
+- **Always `warning`:** any new step in `.github/workflows/*.yml` that
+  interpolates attacker-controlled PR content
+  (`github.event.pull_request.title`, `.body`, `.head.ref`, `.head.label`)
+  directly into a `run:` shell block via `${{ ... }}`. Route through
+  `env:` and reference `"$VAR"` in the script. The AI Diff Reviewer
+  workflow is specifically at risk if edited carelessly.
+- **Always `warning`:** a workflow using `pull_request_target` combined
+  with `actions/checkout@vN` on `github.head_ref` without
+  `if: github.event.pull_request.head.repo.full_name == github.repository`.
+  Most-exploited GitHub Actions RCE pattern — do not introduce it.
+- **Always `warning`:** install / onboarding copy that drifts from the
+  companion skill's safe paths (package manager or `npx skills add` first;
+  verified download-then-execute as separate steps) or that omits the
+  "verify before you run" checksum story when teaching install. Keep
+  `/init` and `/trust` in sync with the skill repo's TRUST.md promises.
 
 - **Always `info`:** import order not matching the canonical convention.
   AGENTS.md §3. Order is: (1) Node native (`node:*`), (2) third-party
@@ -160,6 +237,15 @@ this codebase.
 
 ## Repo-specific context
 
+- **User-trust invariant (website ↔ skill ↔ skills.sh).** This site is
+  the public face of DWP trust. Keep three things aligned: (1) `/trust` +
+  well-known manifests tell the truth; (2) adoption copy never teaches
+  `curl|sh` / `irm|iex`; (3) the installable skill's
+  [skills.sh Security Audits](https://www.skills.sh/dailybothq/deepworkplan-skill/deepworkplan)
+  stay Pass. After a skill-side security fix, the skills.sh dashboard
+  can lag — that lag is not a green light to weaken website guidance.
+  Before merging install/trust/security copy changes, confirm they match
+  `docs/SECURITY.md` and do not reintroduce known FAIL vectors.
 - **Astro SSG + Svelte islands.** `.astro` is the foundation and default;
   Svelte is for interactive components only, always with a `client:*`
   directive (prefer `client:visible` / `client:idle` over `client:load`).
@@ -212,3 +298,10 @@ this codebase.
 - If any vendored skill was hand-edited (`.agents/skills/*/`) → this is
   almost certainly a bug; the vendored copies are refreshed by
   `release_and_publish.yml` Step 1a on release, not by contributors.
+- If install, `/init`, `/trust`, or security docs changed → trust
+  checklist: (1) no `curl … | sh` / `wget … | sh` / `irm … | iex` literals
+  in the diff; (2) no claim that releases are signed unless signing
+  actually shipped; (3) `/trust` + `dwp-trust.json` + `security.txt` still
+  point at live disclosure/verify paths; (4) copy stays consistent with
+  the skill's Pass posture on
+  [skills.sh](https://www.skills.sh/dailybothq/deepworkplan-skill/deepworkplan).

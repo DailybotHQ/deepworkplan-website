@@ -271,7 +271,7 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 2. Compares against the vendored `SKILL.md` `version:` field. Only installs skills that actually moved.
 3. Runs `npx --yes skills add <repo>@<tag> --skill <name> --force -y` — the exact command any downstream consumer would run, so this doubles as a live smoke test. Both `--yes` (npm's proceed prompt) AND `-y` (the skills CLI's agent-picker prompt) are required in a non-TTY runner — dropping either hangs the workflow indefinitely.
 4. Asserts the invariant: installed `SKILL.md` version equals the requested tag. Refuses to proceed with the release if not.
-5. If any files changed, commits `chore: dogfood vendored skills to (…)` locally with a selective subject that names ONLY the skills that moved (e.g., `chore: dogfood vendored skills to deepworkplan v2.16.4, ai-diff-reviewer v1.7.1`). Step 3's `git push --follow-tags` sends this commit alongside the version-bump commit and the tag in a single atomic push, and the dogfood commit appears in the auto-generated GitHub Release notes.
+5. If any files changed, commits `chore: dogfood vendored skills to (…)` locally with a selective subject that names ONLY the skills that moved (e.g., `chore: dogfood vendored skills to deepworkplan v2.16.4, ai-diff-reviewer v2.0.0`). Step 3's `git push --follow-tags` sends this commit alongside the version-bump commit and the tag in a single atomic push, and the dogfood commit appears in the auto-generated GitHub Release notes.
 
 **Semantics.** Skill refresh is **release-driven**, not autonomous — no scheduled/cron refresh runs in the background. The vendored copies advance only when a maintainer merges a PR to `main`, which is the same moment `release_and_publish.yml` cuts a new website release. The intent is that the maintainer controls exactly when the site adopts a new skill version.
 
@@ -282,9 +282,17 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 
 **Do not edit files under `.agents/skills/deepworkplan/`, `.agents/skills/dailybot/`, or `.agents/skills/ai-diff-reviewer/` by hand** — the next release will overwrite hand edits. Contribute upstream, then merge any PR to trigger a website release that picks up the new upstream tag.
 
-### PR review workflow — Cursor-based, `ready`-label gated
+### PR review workflow — Cursor-based, `ready`-label gated (Action `@v2`)
 
-The website ships an AI code-review workflow at [`.github/workflows/pr-review.yml`](.github/workflows/pr-review.yml) powered by `DailybotHQ/ai-diff-reviewer` (GitHub Marketplace listing: **"AI Diff Reviewer"**). It runs on every `pull_request` to `main` that carries the `ready` label AND is opened by a write-tier author (OWNER / MEMBER / COLLABORATOR), single Cursor provider (`model: auto`), and applies the `pr-reviewed` label on success. `critical` findings block the merge; `warning` and `info` findings are reported but non-blocking.
+The website ships an AI code-review workflow at [`.github/workflows/pr-review.yml`](.github/workflows/pr-review.yml) powered by [`DailybotHQ/ai-diff-reviewer@v2`](https://github.com/marketplace/actions/ai-diff-reviewer) (GitHub Marketplace listing: **"AI Diff Reviewer"**, skill + Action **v2**). It runs on every `pull_request` to `main` that carries the `ready` label AND is opened by a write-tier author (OWNER / MEMBER / COLLABORATOR), single Cursor provider (`model: auto`), and applies the `pr-reviewed` label on success. `critical` findings block the merge; `warning` and `info` findings are reported but non-blocking. CI runs Iteration-Aware Review (IAR) by default; local skill reviews remain a full pass.
+
+**Labels.**
+
+| Label | Role |
+|-------|------|
+| `ready` | Trigger / unlock the review (toggle off→on to re-run) |
+| `pr-reviewed` | Applied automatically after a successful, non-skipped review |
+| `skip-ai-review` | Opt-in emergency bypass — short-circuits the LLM with a successful check + ⏭️ skipped tracking comment. Protect with a ruleset if the AI review is a merge gate. Distinct from `full-review-please` (IAR escape) |
 
 **How to use it.**
 
@@ -292,6 +300,7 @@ The website ships an AI code-review workflow at [`.github/workflows/pr-review.ym
 2. Apply the `ready` label. The workflow triggers.
 3. If the review passes, `pr-reviewed` is applied automatically and the `AI review gate` check turns green.
 4. If a `critical` finding is posted, address it (edit, push a fix, or add an inline reply if you disagree), then toggle the `ready` label off and on to re-run.
+5. Hotfix / mechanical revert only: apply `skip-ai-review` while `ready` is present (or apply both, then toggle `ready`) to bypass the LLM.
 
 **Branch-protection integration.** Mark ONLY the stable-named `AI review gate` job as a required status check in Settings > Branches > Protection rules. GitHub treats `skipped` required checks as passing, so a PR without `ready` becomes mergeable without a review — pair this with a separate rule that enforces `ready` on every PR if that's the workflow you want.
 
