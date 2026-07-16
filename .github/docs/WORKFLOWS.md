@@ -144,7 +144,7 @@ Extracts the PR's size label and maps to emoji for the workflow summary.
 |------|------|-------------|
 | 0-0a | Cache | pnpm store, keyed on `pnpm-lock.yaml` |
 | 1 | Setup GitHub Config | Git config |
-| 1a | **Dogfood — refresh vendored agent skills** | Resolves the latest tag of `DailybotHQ/deepworkplan-skill` and `DailybotHQ/agent-skill` via `gh release view`, and if either is newer than the vendored copy under `.agents/skills/`, runs `npx --yes skills add <repo>@<tag> --skill <name> --force -y`, asserts the version invariant, and commits `chore: dogfood vendored skills to (…)`. **Runs before Step 2** so the dogfood commit lands in the release notes. See "Dogfood step" below for details. |
+| 1a | **Dogfood — refresh vendored agent skills** | Resolves the latest tag of `DailybotHQ/deepworkplan-skill`, `DailybotHQ/agent-skill`, and `DailybotHQ/ai-diff-reviewer` via `gh release view`, and if any is newer than the vendored copy under `.agents/skills/`, runs `npx --yes skills add <repo>@<tag> --skill <name> --force -y`, asserts the version invariant, and commits `chore: dogfood vendored skills to (…)`. **Runs before Step 2** so the dogfood commit lands in the release notes. See "Dogfood step" below for details. |
 | 2 | Release notes | Runs `scripts/get_github_release_log.sh` — includes the dogfood commit from Step 1a if it exists |
 | 3 | Prepare release | `corepack pnpm install --frozen-lockfile && corepack pnpm run release` + push tags to main (pushes the dogfood commit alongside the version-bump commit + tag in one atomic push) |
 | 4 | Get release tag | Extract latest tag |
@@ -159,14 +159,14 @@ Extracts the PR's size label and maps to emoji for the workflow summary.
 
 #### Dogfood step (Step 1a)
 
-**Purpose.** Every website release should ship with a current snapshot of the two agent skills it documents. Rather than a scheduled/autonomous refresh, the update happens **exactly when the maintainer decides to cut a release** — no background cron, no drift between "when a skill dropped" and "when someone releases the site".
+**Purpose.** Every website release should ship with a current snapshot of the three agent skills it documents. Rather than a scheduled/autonomous refresh, the update happens **exactly when the maintainer decides to cut a release** — no background cron, no drift between "when a skill dropped" and "when someone releases the site".
 
 **What runs.**
 
-1. `gh release view --repo <owner/repo> --json tagName -q .tagName` for each of `DailybotHQ/deepworkplan-skill` and `DailybotHQ/agent-skill` to resolve the latest tag.
-2. Reads the currently vendored versions from `.agents/skills/{deepworkplan,dailybot}/SKILL.md` frontmatter.
-3. Per-skill "moved" flag → only installs the skills that actually changed. Commits and PR titles list only the moved skills (no misleading "dogfood to deepworkplan vX, dailybot vY" when only one moved).
-4. `npx --yes skills add <repo>@<tag> --skill <name> --force -y` — exact same command any downstream consumer would run. Serves as a live smoke test that the upstream release is installable.
+1. `gh release view --repo <owner/repo> --json tagName -q .tagName` for each of `DailybotHQ/deepworkplan-skill`, `DailybotHQ/agent-skill`, and `DailybotHQ/ai-diff-reviewer` to resolve the latest tag.
+2. Reads the currently vendored versions from `.agents/skills/{deepworkplan,dailybot,ai-diff-reviewer}/SKILL.md` frontmatter.
+3. Per-skill "moved" flag → only installs the skills that actually changed. Commits and PR titles list only the moved skills (no misleading "dogfood to deepworkplan vX, dailybot vY, ai-diff-reviewer vZ" when only one moved).
+4. `npx --yes skills add <repo>@<tag> --skill <name> --force -y` — exact same command any downstream consumer would run. Serves as a live smoke test that the upstream release is installable. Both `--yes` AND `-y` are required — the former covers npm's own proceed prompt, the latter covers the `skills` CLI's agent-picker prompt; dropping either hangs the workflow in a non-TTY runner.
 5. Version invariant: the installed `SKILL.md` frontmatter `version:` MUST equal the requested tag. Fails the release if not — refuses to publish a website tag that misrepresents its vendored skills.
 6. If any files changed, commits `chore: dogfood vendored skills to <list>` locally. Step 3's `git push --follow-tags` sends this commit alongside the version-bump commit and the tag in a single atomic push.
 
@@ -174,10 +174,10 @@ Extracts the PR's size label and maps to emoji for the workflow summary.
 
 | Failure | Behavior |
 |---------|----------|
-| `gh release view` fails for one upstream repo (rate limit, transient outage) | Warns; skips that skill. The other skill (and the release) proceed. |
+| `gh release view` fails for one upstream repo (rate limit, transient outage) | Warns; skips that skill. The other two skills (and the release) proceed. |
 | `npx skills add` fails | **Fails the release** — real upstream breakage, must be surfaced. |
 | Version invariant mismatch after install | **Fails the release** — refuses to commit a misrepresented dogfood snapshot. |
-| Both skills already at latest | Clean no-op — no dogfood commit, release proceeds. |
+| All three skills already at latest | Clean no-op — no dogfood commit, release proceeds. |
 
 **Manual refresh outside of a release.** Not supported by design. If a maintainer needs to bump a vendored skill without cutting a full release, do it locally (`npx skills add <repo>@<tag>`) on a PR branch and merge it as a normal `chore:` change — that will trigger a release naturally.
 
@@ -189,19 +189,71 @@ Dispatches a `cleanup_caches` event via GitHub API.
 
 ---
 
+## 6. pr-review.yml — AI Code Review on Pull Requests
+
+| Property | Value |
+|----------|-------|
+| **Trigger** | `pull_request` to `main`, types: `opened, labeled` (NOT `synchronize`) |
+| **Concurrency** | `pr-review-${{ pull_request.number }}`, cancel in-progress |
+| **Permissions** | `contents: read`, `pull-requests: write` at workflow level |
+| **Powered by** | [`DailybotHQ/ai-diff-reviewer`](https://github.com/marketplace/actions/ai-diff-reviewer) (marketplace listing: "AI Diff Reviewer") |
+
+### Jobs
+
+| Job | Depends on | Purpose |
+|-----|------------|---------|
+| `scope` | — | Three-tier gate: (1) `author-association ∈ {OWNER, MEMBER, COLLABORATOR}` (cheapest, payload-based, not spoofable); (2) `ready` label present on the PR (case-insensitive); (3) `CURSOR_API_KEY` secret configured. Emits `should_run` + `empty_reason` outputs consumed by downstream jobs. |
+| `labels-bootstrap` | `scope` | Idempotent `gh label create` for `ready` (color `0e8a16`), `pr-reviewed` (color `0366d6`), and `skip-ai-review` (color `b60205` — emergency bypass). Only runs when `should_run == 'true'`. |
+| `review` | `scope, labels-bootstrap` | Checks out with `fetch-depth: 0` and `persist-credentials: false` (Cursor CLI has broad local access — a persisted token on disk is an exfil surface). Invokes `DailybotHQ/ai-diff-reviewer@v2` with `provider: cursor`, `model: auto`, `label-gate: ready`, `author-association: OWNER,MEMBER,COLLABORATOR`, `applied-label: pr-reviewed`, `skip-review-label: skip-ai-review`, `strictness: block-on-critical`, `prompt-extension-file: .review/extension.md`, `max-inline-comments: 15`. Applying `skip-ai-review` while `ready` is present re-runs the job and short-circuits the LLM. |
+| `gate` | `scope, review` | Stable-named `'AI review gate'`. This is the ONLY job to mark as required in branch protection. |
+
+### Gate semantics
+
+The `gate` job runs `if: always() && needs.scope.outputs.empty_reason != 'no-ready-label' && needs.scope.outputs.empty_reason != 'author-association'`, which produces four possible outcomes:
+
+| `empty_reason` | `review.result` | `gate` outcome | Branch-protection effect |
+|----------------|-----------------|----------------|--------------------------|
+| `no-ready-label` | (skipped) | Skipped | Required check counts as passing — PRs without `ready` are mergeable |
+| `author-association` | (skipped) | Skipped | Same — external-contributor forks never trigger a review |
+| `no-provider-secret` | (skipped) | **Failed** | Fails with an actionable message; unblock by setting `CURSOR_API_KEY` |
+| `` (empty) | `success` | **Passed** | Gate green |
+| `` (empty) | `failure` / `cancelled` | **Failed** | Reviewer signaled a blocking finding OR the review job errored |
+
+### Failure modes
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Gate fails with "CURSOR_API_KEY is not configured" | Missing secret | Add it in Settings > Secrets and variables > Actions |
+| Gate fails with "AI review did not pass" | `critical` finding in the review | Address findings, toggle `ready` label off + on to re-run |
+| No review appears; gate is skipped | PR missing `ready` label OR author is external contributor | Apply `ready` (if maintainer); external forks are intentionally not reviewed |
+| Review posts findings but gate passes | Findings are `warning` / `info` only | Working as designed — non-blocking findings are reported for context, not gated |
+
+### Trigger discipline
+
+- `pull_request` only, `types: [opened, labeled]` — NOT `synchronize`. Pushes to the PR do **not** re-review; toggle the `ready` label off and on to force a re-run.
+- Concurrency keyed on PR number with `cancel-in-progress: true`, so a rapid label-toggle sequence resolves to the latest state.
+
+### Shared with the local `ai-diff-reviewer` skill
+
+The vendored skill at `.agents/skills/ai-diff-reviewer/` reads the SAME `.review/extension.md` this workflow reads via `prompt-extension-file:`. The upstream skill's `prompt.md` is byte-identical to the CI Action's `prompts/default.md` at the same tag (enforced by upstream CI's "Skills — prompt-sync invariant" job). Consequence: a local pre-push review shares the same methodology and severity model; under v2 Iteration-Aware Review, CI round 2+ may be shorter while the local pass stays full.
+
+**Post-CI walkthrough.** After this workflow posts its review, developers can invoke the vendored skill's `apply-review` sub-skill locally to walk through CI findings per-finding (apply / defer / skip) with explicit consent. Read-only by default; edits require per-finding yes; never commits or pushes.
+
+---
+
 ## Workflow Dependencies
 
 ```
-check_pr_size_label
-         │
-         ▼
-  release_and_publish
+check_pr_size_label       pr-review (scope → labels-bootstrap → review → gate)
+         │                       │
+         ▼                       ▼
+  release_and_publish       (independent, PR-scoped)
          │
          ▼
   cleanup_caches
 ```
 
-**Note:** Cloudflare Pages deploys independently on push to `main` (configured in Cloudflare dashboard).
+**Note:** Cloudflare Pages deploys independently on push to `main` (configured in Cloudflare dashboard). `pr-review.yml` is scoped to pull requests and runs independently of the release pipeline.
 
 ---
 
@@ -213,3 +265,4 @@ check_pr_size_label
 | `actions/setup-node@v4` | v4 | All workflows |
 | `actions/cache@v4` | v4 | code_check, release_and_publish |
 | `ncipollo/release-action@v1` | v1 | release_and_publish (job 3) |
+| `DailybotHQ/ai-diff-reviewer@v2` | v2 | pr-review (review job) |
