@@ -235,7 +235,7 @@ The `gate` job runs `if: always() && needs.scope.outputs.empty_reason != 'no-rea
 
 ### Shared with the local `ai-diff-reviewer` skill
 
-The vendored skill at `.agents/skills/ai-diff-reviewer/` reads the SAME `.review/extension.md` this workflow reads via `prompt-extension-file:`. The upstream skill's `prompt.md` is byte-identical to the CI Action's `prompts/default.md` at the same tag (enforced by upstream CI's "Skills — prompt-sync invariant" job). Consequence: running the local skill on a branch before pushing yields the same findings CI will produce.
+The vendored skill at `.agents/skills/ai-diff-reviewer/` reads the SAME `.review/extension.md` this workflow reads via `prompt-extension-file:`. The upstream skill's `prompt.md` is byte-identical to the CI Action's `prompts/default.md` at the same tag (enforced by upstream CI's "Skills — prompt-sync invariant" job). Consequence: a local pre-push review shares the same methodology and severity model; under v2 Iteration-Aware Review, CI round 2+ may be shorter while the local pass stays full.
 
 **Post-CI walkthrough.** After this workflow posts its review, developers can invoke the vendored skill's `apply-review` sub-skill locally to walk through CI findings per-finding (apply / defer / skip) with explicit consent. Read-only by default; edits require per-finding yes; never commits or pushes.
 

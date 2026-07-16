@@ -313,7 +313,7 @@ The website ships an AI code-review workflow at [`.github/workflows/pr-review.ym
 
 **Local ↔ CI ↔ apply-review three-moment loop.** The same [`ai-diff-reviewer`](https://skills.sh/DailybotHQ/ai-diff-reviewer) skill vendored at `.agents/skills/ai-diff-reviewer/` powers both the local pre-push review and the CI pass — the skill's `prompt.md` is byte-identical to the CI Action's shipped `prompts/default.md` at the same tag (enforced by upstream CI). Three moments in a maintainer's day:
 
-1. **Local pre-push review** (optional) — run the `ai-diff-reviewer` skill's parent default flow (`/ai-diff-reviewer` or "Review my current branch") before pushing. Same findings CI will produce, minus the round-trip.
+1. **Local pre-push review** (optional) — run the `ai-diff-reviewer` skill's parent default flow (`/ai-diff-reviewer` or "Review my current branch") before pushing. Shares the same methodology and severity model as CI (byte-identical `prompt.md` + this extension); under v2 Iteration-Aware Review, CI round 2+ may be shorter while the local pass stays full.
 2. **CI review** — push, apply `ready`, this workflow runs.
 3. **Post-CI walkthrough** (optional) — invoke the skill's `apply-review` sub-skill to walk through the CI-posted findings per-finding (apply / defer / skip) with explicit consent. Read-only by default; edits require per-finding yes; never commits or pushes.
 
