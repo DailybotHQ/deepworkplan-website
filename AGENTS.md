@@ -43,12 +43,12 @@ The site explains and positions the DWP methodology, hosts the readable specific
 
 **Technology Stack:**
 
-- **Astro 6.4.4** — Static site generator (islands architecture)
-- **Svelte 5.56.1** — Interactive components
+- **Astro 7.0.8** — Static site generator (islands architecture; Rust compiler + Sätteri Markdown)
+- **Svelte 5.56.4** — Interactive components
 - **TypeScript 6.0.3** — Type-safe development
-- **Tailwind CSS 4.3.0** — Utility-first styling with dark mode
-- **Biome 2.4.16** — Linter and formatter (replaces ESLint + Prettier)
-- **MDX** — Enhanced Markdown for content collections (via `@astrojs/markdown-remark`)
+- **Tailwind CSS 4.3.2** — Utility-first styling with dark mode
+- **Biome 2.5.3** — Linter and formatter (replaces ESLint + Prettier)
+- **MDX** — Enhanced Markdown for content collections (via `@astrojs/markdown-satteri` / Sätteri)
 
 ## Project Structure
 
