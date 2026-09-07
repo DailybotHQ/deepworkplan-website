@@ -12,7 +12,7 @@
   "version": "1.0.79",
   "packageManager": "pnpm@11.1.2",
   "engines": {
-    "node": ">=24.18.0"
+    "node": ">=24.20.0"
   },
   "scripts": {
     "dev": "astro dev",

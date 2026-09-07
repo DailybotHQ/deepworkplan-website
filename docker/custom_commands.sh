@@ -173,6 +173,86 @@ function claudex() {
 }
 
 # ================================
+# Claude Code via Z.AI GLM Coding Plan (does not change default `claude` / Anthropic auth).
+# Requires ZAI_CODING_API_KEY in docker/local/dwpwebsite/.env (survives rebuilds).
+# Model aliases (Opus/Sonnet/Haiku) are remapped to GLM only for this process — not in settings.json.
+# Docs: https://docs.z.ai/devpack/quick-start · https://docs.z.ai/devpack/latest-model
+# ================================
+function _zai_coding_env_or_die() {
+	if [[ -z "${ZAI_CODING_API_KEY:-}" ]]; then
+		print.error "ZAI_CODING_API_KEY is not set."
+		echo "Add it to docker/local/dwpwebsite/.env (Coding Plan key from https://z.ai/manage-apikey/apikey-list),"
+		echo "then open a new shell or re-source your custom_commands file."
+		echo "Optional one-time wizard: chelper   (or: pnpm dlx @z_ai/coding-helper)"
+		return 1
+	fi
+	return 0
+}
+
+# Build env for a single Claude Code invocation against Z.AI (process-scoped only).
+function _zai_claude_run() {
+	local -a claude_args=("$@")
+	local opus_model="${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3}"
+	local sonnet_model="${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3}"
+	local haiku_model="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3-flash}"
+	local timeout_ms="${ZAI_CODING_API_TIMEOUT_MS:-3000000}"
+	# Optional 1M context: set models to e.g. glm-5.3[1m] and ZAI_CODING_AUTO_COMPACT_WINDOW=1000000
+	local compact_window="${ZAI_CODING_AUTO_COMPACT_WINDOW:-}"
+
+	if [[ -n "${compact_window}" ]]; then
+		ANTHROPIC_AUTH_TOKEN="${ZAI_CODING_API_KEY}" \
+			ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
+			API_TIMEOUT_MS="${timeout_ms}" \
+			ANTHROPIC_DEFAULT_OPUS_MODEL="${opus_model}" \
+			ANTHROPIC_DEFAULT_SONNET_MODEL="${sonnet_model}" \
+			ANTHROPIC_DEFAULT_HAIKU_MODEL="${haiku_model}" \
+			CLAUDE_CODE_AUTO_COMPACT_WINDOW="${compact_window}" \
+			claude "${claude_args[@]}"
+	else
+		ANTHROPIC_AUTH_TOKEN="${ZAI_CODING_API_KEY}" \
+			ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
+			API_TIMEOUT_MS="${timeout_ms}" \
+			ANTHROPIC_DEFAULT_OPUS_MODEL="${opus_model}" \
+			ANTHROPIC_DEFAULT_SONNET_MODEL="${sonnet_model}" \
+			ANTHROPIC_DEFAULT_HAIKU_MODEL="${haiku_model}" \
+			claude "${claude_args[@]}"
+	fi
+}
+
+function claude-glm() {
+	_zai_coding_env_or_die || return 1
+	print.success "Starting Claude Code with Z.AI GLM (${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3} / ${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3})..."
+	_zai_claude_run "$@"
+}
+
+function claudex-glm() {
+	_zai_coding_env_or_die || return 1
+	case "${1:-}" in
+		-c|--continue)
+			print.success "Continuing most recent Claude Code session (Z.AI GLM)..."
+			shift
+			_zai_claude_run --continue --dangerously-skip-permissions "$@"
+			;;
+		-r|--resume)
+			shift
+			if [[ -n "${1:-}" && "${1:0:1}" != "-" ]]; then
+				local session_id="$1"
+				shift
+				print.success "Resuming Claude Code session (Z.AI GLM): $session_id..."
+				_zai_claude_run --resume "$session_id" --dangerously-skip-permissions "$@"
+			else
+				print.success "Selecting Claude Code session to resume (Z.AI GLM)..."
+				_zai_claude_run --resume --dangerously-skip-permissions "$@"
+			fi
+			;;
+		*)
+			print.success "Starting Claude Code (Z.AI GLM) with full permissions (${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3})..."
+			_zai_claude_run --dangerously-skip-permissions "$@"
+			;;
+	esac
+}
+
+# ================================
 # Cursor CLI agent (interactive mode with full permissions)
 # ================================
 # Usage:
@@ -356,9 +436,17 @@ function show_welcome() {
     echo "  • install              - Run pnpm install"
     echo ""
     echo "AI Assistant commands:"
-    echo "  • claude            - Claude Code CLI"
+    echo "  • claude            - Claude Code CLI (Anthropic)"
     echo "  • codex             - Codex CLI"
     echo "  • agent             - Cursor CLI agent (or cursorx alias)"
+    echo "  • chelper           - Z.AI Coding Tool Helper wizard"
+    echo "  • opencode          - OpenCode CLI (opencode auth login → Z.AI Coding Plan)"
+    echo ""
+    echo "  • claude-glm        - Claude Code via Z.AI GLM Coding Plan"
+    echo "  • claudex-glm       - Claude Code (Z.AI GLM) with full permissions"
+    echo "      -c, --continue  Continue most recent session"
+    echo "      -r, --resume    Interactive session selection"
+    echo "      -r <id>         Resume specific session by ID"
     echo ""
     echo "  • codexx            - Codex with full permissions (bypass approvals and sandbox)"
     echo "      -l, --last      Resume last session"

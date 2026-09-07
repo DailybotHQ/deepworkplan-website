@@ -1,4 +1,4 @@
-FROM node:24.18.0-trixie-slim
+FROM node:24.20.0-trixie-slim
 LABEL maintainer="developers@dailybot.com"
 
 # System packages (apt requires root)
@@ -79,7 +79,8 @@ RUN echo 'source /app/docker/custom_commands.sh' >> /home/node/.bashrc \
     && chown node:node /home/node/.bashrc
 
 # Pre-create persistent data dirs so the named volumes inherit node ownership on first mount
-RUN mkdir -p /home/node/.claude_data /home/node/.codex_data /home/node/.cursor_data /home/node/.gh_data /home/node/.dailybot_data /home/node/.ssh \
+RUN mkdir -p /home/node/.claude_data /home/node/.codex_data /home/node/.cursor_data /home/node/.gh_data \
+    /home/node/.dailybot_data /home/node/.chelper_data /home/node/.opencode_data /home/node/.ssh \
     && chown -R node:node /home/node
 
 # Install AI CLIs and configure git as node user
@@ -93,8 +94,10 @@ RUN curl -fsSL https://claude.ai/install.sh | bash \
 # Install Cursor CLI (provides the 'agent' command in ~/.cursor/bin)
 RUN curl -fsSL https://cursor.com/install | bash
 
-# Install Codex CLI globally via pnpm (resolves under ${PNPM_HOME})
-RUN corepack pnpm add -g @openai/codex
+# Install Codex, Z.AI Coding Tool Helper, and OpenCode globally via pnpm (resolves under ${PNPM_HOME})
+# opencode-ai requires its postinstall script to download the platform binary (pnpm may skip it on global add)
+RUN corepack pnpm add -g @openai/codex @z_ai/coding-helper opencode-ai \
+    && node "$(find "${PNPM_HOME}/global" -path '*/node_modules/opencode-ai/postinstall.mjs' -print -quit)"
 
 # Dailybot CLI — official installer handles PEP 668 internally (uses pipx),
 # avoiding the click 8.x conflict with the system-provided python3-click.
