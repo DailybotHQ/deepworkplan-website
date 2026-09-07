@@ -12,7 +12,7 @@
   "version": "1.0.79",
   "packageManager": "pnpm@11.1.2",
   "engines": {
-    "node": ">=24.18.0"
+    "node": ">=24.20.0"
   },
   "scripts": {
     "dev": "astro dev",
@@ -43,32 +43,32 @@
     "release": "bash .github/scripts/prepare_release.sh"
   },
   "dependencies": {
-    "@astrojs/check": "0.9.9",
-    "@astrojs/compiler-rs": "0.3.1",
-    "@astrojs/markdown-satteri": "0.3.4",
-    "@astrojs/mdx": "7.0.3",
-    "@astrojs/sitemap": "3.7.3",
+    "@astrojs/check": "0.9.10",
+    "@astrojs/compiler-rs": "0.4.0",
+    "@astrojs/markdown-satteri": "0.4.0",
+    "@astrojs/mdx": "8.0.0",
+    "@astrojs/sitemap": "3.7.4",
     "@astrojs/svelte": "9.0.1",
-    "astro": "7.0.8",
+    "astro": "7.3.1",
     "reveal.js": "^6.0.1",
-    "satteri": "0.9.5",
-    "svelte": "5.56.4",
-    "tailwindcss": "4.3.2",
+    "satteri": "0.10.5",
+    "svelte": "5.57.0",
+    "tailwindcss": "4.3.3",
     "typescript": "6.0.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.3",
-    "@bruits/satteri-wasm32-wasi": "0.9.5",
+    "@biomejs/biome": "2.5.12",
+    "@bruits/satteri-wasm32-wasi": "0.10.5",
     "@lhci/cli": "0.15.1",
-    "@sveltejs/vite-plugin-svelte": "7.2.0",
+    "@sveltejs/vite-plugin-svelte": "7.3.0",
     "@tailwindcss/typography": "0.5.20",
-    "@tailwindcss/vite": "4.3.2",
-    "@testing-library/jest-dom": "6.9.1",
+    "@tailwindcss/vite": "4.3.3",
+    "@testing-library/jest-dom": "7.0.1",
     "@testing-library/svelte": "5.4.2",
-    "@vitest/coverage-v8": "4.1.10",
-    "happy-dom": "20.10.6",
-    "npm-check-updates": "22.2.9",
-    "sharp": "0.35.3",
-    "vitest": "4.1.10"
+    "@vitest/coverage-v8": "5.0.0",
+    "happy-dom": "20.14.0",
+    "npm-check-updates": "23.1.0",
+    "sharp": "0.35.4",
+    "vitest": "5.0.0"
   }
 }

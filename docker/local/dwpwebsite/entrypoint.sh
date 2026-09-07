@@ -234,6 +234,69 @@ setup_dailybot_persistence_for_user() {
 setup_dailybot_persistence_for_user "/home/node"
 chown -R node:node /home/node/.dailybot_data /home/node/.config/dailybot 2>/dev/null || true
 
+# Setup Z.AI Coding Tool Helper persistence (@z_ai/coding-helper → ~/.chelper)
+setup_chelper_persistence_for_user() {
+    USER_HOME="$1"
+    CHELPER_DATA_DIR="${USER_HOME}/.chelper_data"
+    CHELPER_DIR="${USER_HOME}/.chelper"
+
+    mkdir -p "${CHELPER_DATA_DIR}"
+
+    if [ ! -L "${CHELPER_DIR}" ]; then
+        if [ -d "${CHELPER_DIR}" ]; then
+            if [ ! -d "${CHELPER_DATA_DIR}/chelper_dir" ] || [ -z "$(ls -A "${CHELPER_DATA_DIR}/chelper_dir" 2>/dev/null)" ]; then
+                cp -r "${CHELPER_DIR}" "${CHELPER_DATA_DIR}/chelper_dir"
+            fi
+            rm -rf "${CHELPER_DIR}"
+        else
+            mkdir -p "${CHELPER_DATA_DIR}/chelper_dir"
+        fi
+        ln -sf "${CHELPER_DATA_DIR}/chelper_dir" "${CHELPER_DIR}"
+    fi
+}
+
+setup_chelper_persistence_for_user "/home/node"
+chown -R node:node /home/node/.chelper_data /home/node/.chelper 2>/dev/null || true
+
+# OpenCode: ~/.config/opencode + ~/.local/share/opencode
+setup_opencode_persistence_for_user() {
+    USER_HOME="$1"
+    OPENCODE_DATA_DIR="${USER_HOME}/.opencode_data"
+    OPENCODE_CONFIG_DIR="${USER_HOME}/.config/opencode"
+    OPENCODE_SHARE_DIR="${USER_HOME}/.local/share/opencode"
+
+    mkdir -p "${OPENCODE_DATA_DIR}"
+    mkdir -p "${USER_HOME}/.config"
+    mkdir -p "${USER_HOME}/.local/share"
+
+    if [ ! -L "${OPENCODE_CONFIG_DIR}" ]; then
+        if [ -d "${OPENCODE_CONFIG_DIR}" ]; then
+            if [ ! -d "${OPENCODE_DATA_DIR}/config_opencode" ] || [ -z "$(ls -A "${OPENCODE_DATA_DIR}/config_opencode" 2>/dev/null)" ]; then
+                cp -r "${OPENCODE_CONFIG_DIR}" "${OPENCODE_DATA_DIR}/config_opencode"
+            fi
+            rm -rf "${OPENCODE_CONFIG_DIR}"
+        else
+            mkdir -p "${OPENCODE_DATA_DIR}/config_opencode"
+        fi
+        ln -sf "${OPENCODE_DATA_DIR}/config_opencode" "${OPENCODE_CONFIG_DIR}"
+    fi
+
+    if [ ! -L "${OPENCODE_SHARE_DIR}" ]; then
+        if [ -d "${OPENCODE_SHARE_DIR}" ]; then
+            if [ ! -d "${OPENCODE_DATA_DIR}/share_opencode" ] || [ -z "$(ls -A "${OPENCODE_DATA_DIR}/share_opencode" 2>/dev/null)" ]; then
+                cp -r "${OPENCODE_SHARE_DIR}" "${OPENCODE_DATA_DIR}/share_opencode"
+            fi
+            rm -rf "${OPENCODE_SHARE_DIR}"
+        else
+            mkdir -p "${OPENCODE_DATA_DIR}/share_opencode"
+        fi
+        ln -sf "${OPENCODE_DATA_DIR}/share_opencode" "${OPENCODE_SHARE_DIR}"
+    fi
+}
+
+setup_opencode_persistence_for_user "/home/node"
+chown -R node:node /home/node/.opencode_data /home/node/.config/opencode /home/node/.local/share/opencode 2>/dev/null || true
+
 # Setup SSH keys from host with correct permissions for a given user
 # This allows git operations with GitHub/GitLab
 setup_ssh_keys_for_user() {

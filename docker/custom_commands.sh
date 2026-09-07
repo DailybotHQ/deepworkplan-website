@@ -56,9 +56,52 @@ function test() {
 	corepack pnpm run test
 }
 
+# Astro 7 has no quiet/level option for build logs (the `logging` config key is
+# gone; `--silent` hides errors too), so builds in this container filter the
+# per-route lines ("21:38:52   ├─ /es/quickstart.md (+3ms)") — ~2700 lines
+# across 17 languages — and keep banners, errors, and warnings. The pattern is
+# deliberately pure ASCII ([^0-9]+ stands in for the ├─/└─ glyphs) so it works
+# even when grep falls back to the C locale and byte-mode matching. It anchors
+# on the exact "(+Nms)" ending, so the build-flake error text that Astro glues
+# onto a route line ("...index.htmlENOENT: ...") is NOT matched and still
+# prints.
+_ASTROROUTE='^[0-9]{2}:[0-9]{2}:[0-9]{2} +[^0-9]+ /[^ ]+ \(\+[0-9]+ms\)( \(restored\)| \(cached\))? *$'
+
+# This container's bind-mounted filesystem (virtiofs on Docker Desktop) races
+# with astro build in two known-transient ways: rolldown's mkdir of
+# dist/.prerender fails with EEXIST when a previous build left it behind, and
+# page generation intermittently fails with ENOENT on the mkdir of a
+# just-created parent dir. Both go away with a clean dist/ + retry, so builds
+# retry up to 3 times — but ONLY when the failure matches these signatures; a
+# real error (type error, missing dep, …) fails immediately with full output.
+_ASTRO_FLAKE='(Could not create directory for output chunks|File exists \(os error 17\)|ENOENT: no such file or directory, mkdir)'
+
+function _astro_build() {
+	local log status attempt
+	log="$(mktemp)"
+	for attempt in 1 2 3; do
+		rm -rf dist
+		corepack pnpm run build 2>&1 | tee "$log" | grep -vE "$_ASTROROUTE"
+		status=${PIPESTATUS[0]}
+		if [ "$status" = 0 ]; then
+			rm -f "$log"
+			return 0
+		fi
+		if ! grep -qE "$_ASTRO_FLAKE" "$log"; then
+			rm -f "$log"
+			print.error "⚠️ Build failed with a real error (not the filesystem race) — not retrying."
+			return "$status"
+		fi
+		print.error "⚠️ Build hit the known virtiofs race (attempt $attempt/3) — retrying with a clean dist/…"
+	done
+	rm -f "$log"
+	print.error "⚠️ Build kept hitting the filesystem race after 3 attempts."
+	return 1
+}
+
 function lighthouse() {
 	print.success "Building site for Lighthouse audit..."
-	corepack pnpm run build
+	_astro_build
 	if [ $? != 0 ]; then
 		print.error "⚠️ Build failed, skipping Lighthouse audit..."
 		return 1
@@ -168,6 +211,86 @@ function claudex() {
 		*)
 			print.success "Starting new Claude Code session with full permissions..."
 			claude --dangerously-skip-permissions "$@"
+			;;
+	esac
+}
+
+# ================================
+# Claude Code via Z.AI GLM Coding Plan (does not change default `claude` / Anthropic auth).
+# Requires ZAI_CODING_API_KEY in docker/local/dwpwebsite/.env (survives rebuilds).
+# Model aliases (Opus/Sonnet/Haiku) are remapped to GLM only for this process — not in settings.json.
+# Docs: https://docs.z.ai/devpack/quick-start · https://docs.z.ai/devpack/latest-model
+# ================================
+function _zai_coding_env_or_die() {
+	if [[ -z "${ZAI_CODING_API_KEY:-}" ]]; then
+		print.error "ZAI_CODING_API_KEY is not set."
+		echo "Add it to docker/local/dwpwebsite/.env (Coding Plan key from https://z.ai/manage-apikey/apikey-list),"
+		echo "then open a new shell or re-source your custom_commands file."
+		echo "Optional one-time wizard: chelper   (or: pnpm dlx @z_ai/coding-helper)"
+		return 1
+	fi
+	return 0
+}
+
+# Build env for a single Claude Code invocation against Z.AI (process-scoped only).
+function _zai_claude_run() {
+	local -a claude_args=("$@")
+	local opus_model="${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3}"
+	local sonnet_model="${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3}"
+	local haiku_model="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3-flash}"
+	local timeout_ms="${ZAI_CODING_API_TIMEOUT_MS:-3000000}"
+	# Optional 1M context: set models to e.g. glm-5.3[1m] and ZAI_CODING_AUTO_COMPACT_WINDOW=1000000
+	local compact_window="${ZAI_CODING_AUTO_COMPACT_WINDOW:-}"
+
+	if [[ -n "${compact_window}" ]]; then
+		ANTHROPIC_AUTH_TOKEN="${ZAI_CODING_API_KEY}" \
+			ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
+			API_TIMEOUT_MS="${timeout_ms}" \
+			ANTHROPIC_DEFAULT_OPUS_MODEL="${opus_model}" \
+			ANTHROPIC_DEFAULT_SONNET_MODEL="${sonnet_model}" \
+			ANTHROPIC_DEFAULT_HAIKU_MODEL="${haiku_model}" \
+			CLAUDE_CODE_AUTO_COMPACT_WINDOW="${compact_window}" \
+			claude "${claude_args[@]}"
+	else
+		ANTHROPIC_AUTH_TOKEN="${ZAI_CODING_API_KEY}" \
+			ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
+			API_TIMEOUT_MS="${timeout_ms}" \
+			ANTHROPIC_DEFAULT_OPUS_MODEL="${opus_model}" \
+			ANTHROPIC_DEFAULT_SONNET_MODEL="${sonnet_model}" \
+			ANTHROPIC_DEFAULT_HAIKU_MODEL="${haiku_model}" \
+			claude "${claude_args[@]}"
+	fi
+}
+
+function claude-glm() {
+	_zai_coding_env_or_die || return 1
+	print.success "Starting Claude Code with Z.AI GLM (${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3} / ${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3})..."
+	_zai_claude_run "$@"
+}
+
+function claudex-glm() {
+	_zai_coding_env_or_die || return 1
+	case "${1:-}" in
+		-c|--continue)
+			print.success "Continuing most recent Claude Code session (Z.AI GLM)..."
+			shift
+			_zai_claude_run --continue --dangerously-skip-permissions "$@"
+			;;
+		-r|--resume)
+			shift
+			if [[ -n "${1:-}" && "${1:0:1}" != "-" ]]; then
+				local session_id="$1"
+				shift
+				print.success "Resuming Claude Code session (Z.AI GLM): $session_id..."
+				_zai_claude_run --resume "$session_id" --dangerously-skip-permissions "$@"
+			else
+				print.success "Selecting Claude Code session to resume (Z.AI GLM)..."
+				_zai_claude_run --resume --dangerously-skip-permissions "$@"
+			fi
+			;;
+		*)
+			print.success "Starting Claude Code (Z.AI GLM) with full permissions (${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3})..."
+			_zai_claude_run --dangerously-skip-permissions "$@"
 			;;
 	esac
 }
@@ -356,9 +479,17 @@ function show_welcome() {
     echo "  • install              - Run pnpm install"
     echo ""
     echo "AI Assistant commands:"
-    echo "  • claude            - Claude Code CLI"
+    echo "  • claude            - Claude Code CLI (Anthropic)"
     echo "  • codex             - Codex CLI"
     echo "  • agent             - Cursor CLI agent (or cursorx alias)"
+    echo "  • chelper           - Z.AI Coding Tool Helper wizard"
+    echo "  • opencode          - OpenCode CLI (opencode auth login → Z.AI Coding Plan)"
+    echo ""
+    echo "  • claude-glm        - Claude Code via Z.AI GLM Coding Plan"
+    echo "  • claudex-glm       - Claude Code (Z.AI GLM) with full permissions"
+    echo "      -c, --continue  Continue most recent session"
+    echo "      -r, --resume    Interactive session selection"
+    echo "      -r <id>         Resume specific session by ID"
     echo ""
     echo "  • codexx            - Codex with full permissions (bypass approvals and sandbox)"
     echo "      -l, --last      Resume last session"
