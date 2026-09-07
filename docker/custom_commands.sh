@@ -56,9 +56,52 @@ function test() {
 	corepack pnpm run test
 }
 
+# Astro 7 has no quiet/level option for build logs (the `logging` config key is
+# gone; `--silent` hides errors too), so builds in this container filter the
+# per-route lines ("21:38:52   ├─ /es/quickstart.md (+3ms)") — ~2700 lines
+# across 17 languages — and keep banners, errors, and warnings. The pattern is
+# deliberately pure ASCII ([^0-9]+ stands in for the ├─/└─ glyphs) so it works
+# even when grep falls back to the C locale and byte-mode matching. It anchors
+# on the exact "(+Nms)" ending, so the build-flake error text that Astro glues
+# onto a route line ("...index.htmlENOENT: ...") is NOT matched and still
+# prints.
+_ASTROROUTE='^[0-9]{2}:[0-9]{2}:[0-9]{2} +[^0-9]+ /[^ ]+ \(\+[0-9]+ms\)( \(restored\)| \(cached\))? *$'
+
+# This container's bind-mounted filesystem (virtiofs on Docker Desktop) races
+# with astro build in two known-transient ways: rolldown's mkdir of
+# dist/.prerender fails with EEXIST when a previous build left it behind, and
+# page generation intermittently fails with ENOENT on the mkdir of a
+# just-created parent dir. Both go away with a clean dist/ + retry, so builds
+# retry up to 3 times — but ONLY when the failure matches these signatures; a
+# real error (type error, missing dep, …) fails immediately with full output.
+_ASTRO_FLAKE='(Could not create directory for output chunks|File exists \(os error 17\)|ENOENT: no such file or directory, mkdir)'
+
+function _astro_build() {
+	local log status attempt
+	log="$(mktemp)"
+	for attempt in 1 2 3; do
+		rm -rf dist
+		corepack pnpm run build 2>&1 | tee "$log" | grep -vE "$_ASTROROUTE"
+		status=${PIPESTATUS[0]}
+		if [ "$status" = 0 ]; then
+			rm -f "$log"
+			return 0
+		fi
+		if ! grep -qE "$_ASTRO_FLAKE" "$log"; then
+			rm -f "$log"
+			print.error "⚠️ Build failed with a real error (not the filesystem race) — not retrying."
+			return "$status"
+		fi
+		print.error "⚠️ Build hit the known virtiofs race (attempt $attempt/3) — retrying with a clean dist/…"
+	done
+	rm -f "$log"
+	print.error "⚠️ Build kept hitting the filesystem race after 3 attempts."
+	return 1
+}
+
 function lighthouse() {
 	print.success "Building site for Lighthouse audit..."
-	corepack pnpm run build
+	_astro_build
 	if [ $? != 0 ]; then
 		print.error "⚠️ Build failed, skipping Lighthouse audit..."
 		return 1
