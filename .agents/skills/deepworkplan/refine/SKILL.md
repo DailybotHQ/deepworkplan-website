@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-refine
 description: Refine a Deep Work Plan draft or modify an existing final plan. Use when the developer wants to adjust scope, tasks, or details of a draft in .dwp/drafts/ or a plan in .dwp/plans/.
-version: "2.17.0"
+version: "2.17.1"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -38,6 +38,19 @@ reorder tasks, update the README).
 | `latest` | Refine the most recent refined draft | `/dwp-refine latest` |
 | `plan {plan_name}` | Modify an existing final plan | `/dwp-refine plan auth_refactor` |
 | `plan latest` | Modify the most recent plan | `/dwp-refine plan latest` |
+
+## Trust boundary (write scope)
+
+`allowed-tools` includes write-capable `Edit`, `Write`, and `Bash`.
+
+**Writes:** edits confined to the target plan's files under `.dwp/drafts/` or
+`.dwp/plans/PLAN_{name}/` — task content, ordering, and the README's task list,
+kept mutually consistent. Deleting a completed task or dropping a mandatory
+final task requires explicit developer confirmation.
+
+**It MUST NOT:** touch source files, write outside `.dwp/`, weaken a task's
+acceptance criteria or validation gate without saying so in the diff summary,
+or commit/push anything (refinement output stays uncommitted working state).
 
 ## Workflow
 
