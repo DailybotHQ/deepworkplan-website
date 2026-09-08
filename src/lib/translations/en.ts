@@ -798,7 +798,7 @@ export const en: SiteTranslations = {
     meta: {
       title: 'Developers — Deep Work Plan agent API, MCP server & docs',
       description:
-        'The Deep Work Plan agent surface: a read-only, zero-auth API with an OpenAPI spec, an MCP server at /api/mcp, per-page Markdown in 17 languages, and the npx skills install CLI.',
+        'The Deep Work Plan agent surface: a read-only, zero-auth API with an OpenAPI spec, an MCP server, per-page Markdown in 17 languages, and the npx skills CLI.',
     },
     eyebrow: 'Agent & developer surface',
     title: 'Deep Work Plan for developers and AI agents',
@@ -923,7 +923,7 @@ export const en: SiteTranslations = {
     meta: {
       title: 'Privacy — Deep Work Plan',
       description:
-        'The deepworkplan.com privacy policy: a static site with no accounts, no advertising, cookieless analytics, and exactly what the contact form collects — explained plainly.',
+        'The deepworkplan.com privacy policy: a static site with no accounts, no advertising, cookieless analytics, and exactly what the contact form collects.',
     },
     eyebrow: 'Privacy policy',
     title: 'Privacy on deepworkplan.com',

@@ -805,7 +805,7 @@ export const hi: SiteTranslations = {
     meta: {
       title: 'डेवलपर — Deep Work Plan एजेंट API, MCP सर्वर और दस्तावेज़',
       description:
-        'Deep Work Plan की एजेंट सतह: OpenAPI स्पेसिफिकेशन के साथ रीड-ओनली, ज़ीरो-ऑथ API, /api/mcp पर MCP सर्वर, 17 भाषाओं में प्रति-पृष्ठ Markdown और npx skills इंस्टॉल CLI।',
+        'Deep Work Plan की एजेंट सतह: OpenAPI स्पेसिफिकेशन के साथ रीड-ओनली, ज़ीरो-ऑथ API, MCP सर्वर, 17 भाषाओं में प्रति-पृष्ठ Markdown और npx skills इंस्टॉल CLI।',
     },
     eyebrow: 'एजेंट और डेवलपर सतह',
     title: 'डेवलपर्स और AI एजेंटों के लिए Deep Work Plan',
@@ -934,7 +934,7 @@ export const hi: SiteTranslations = {
     meta: {
       title: 'गोपनीयता — Deep Work Plan',
       description:
-        'deepworkplan.com की गोपनीयता नीति: बिना खाता, बिना विज्ञापन, बिना साइट-पार ट्रैकिंग और बिना कुकी की एनालिटिक्स वाली स्थैतिक साइट, तथा संपर्क फ़ॉर्म ठीक क्या एकत्र करता है की सरल व्याख्या।',
+        'deepworkplan.com की गोपनीयता नीति: बिना खाता, बिना विज्ञापन और बिना कुकी की एनालिटिक्स वाली स्थैतिक साइट, तथा संपर्क फ़ॉर्म क्या एकत्र करता है।',
     },
     eyebrow: 'गोपनीयता नीति',
     title: 'deepworkplan.com पर गोपनीयता',

@@ -1,6 +1,6 @@
 ---
 title: "Privacy policy"
-description: "The deepworkplan.com privacy policy: a static site with no accounts, no advertising, cookieless aggregate analytics, and a plain explanation of exactly what the contact form collects."
+description: "The deepworkplan.com privacy policy: a static site with no accounts, no advertising, cookieless analytics, and exactly what the contact form collects."
 ---
 
 ## What this site is

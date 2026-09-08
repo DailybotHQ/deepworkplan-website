@@ -1,6 +1,6 @@
 ---
 title: "Developers — the Deep Work Plan agent API"
-description: "The deepworkplan.com agent surface for developers and AI agents: a read-only, zero-auth API described by an OpenAPI spec, a stateless MCP server at /api/mcp, per-page Markdown in 17 languages, and the npx skills install CLI."
+description: "The Deep Work Plan agent surface: a read-only, zero-auth API with an OpenAPI spec, an MCP server, per-page Markdown in 17 languages, and the npx skills CLI."
 ---
 
 ## Zero-auth by design

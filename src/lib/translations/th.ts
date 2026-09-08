@@ -802,7 +802,7 @@ export const th: SiteTranslations = {
     meta: {
       title: 'นักพัฒนา — agent API, MCP server และเอกสารของ Deep Work Plan',
       description:
-        'ส่วนติดต่อสำหรับ agent ของ Deep Work Plan: API แบบอ่านอย่างเดียว ไร้การยืนยันตัวตน พร้อมสเปก OpenAPI, MCP server ที่ /api/mcp, Markdown รายหน้าใน 17 ภาษา และ npx skills CLI',
+        'ส่วนติดต่อสำหรับ agent ของ Deep Work Plan: API แบบอ่านอย่างเดียว ไร้การยืนยันตัวตน พร้อมสเปก OpenAPI, MCP server, Markdown 17 ภาษา และ npx skills CLI',
     },
     eyebrow: 'ส่วนติดต่อสำหรับ agent และนักพัฒนา',
     title: 'Deep Work Plan สำหรับนักพัฒนาและ AI agent',
@@ -931,7 +931,7 @@ export const th: SiteTranslations = {
     meta: {
       title: 'ความเป็นส่วนตัว — Deep Work Plan',
       description:
-        'นโยบายความเป็นส่วนตัวของ deepworkplan.com: เว็บไซต์แบบสถิตที่ไม่มีบัญชี ไม่มีโฆษณา ไม่มีการติดตามข้ามไซต์ สถิติแบบไร้คุกกี้ และคำอธิบายตรงไปตรงมาว่าแบบฟอร์มติดต่อเก็บข้อมูลอะไรบ้าง',
+        'นโยบายความเป็นส่วนตัวของ deepworkplan.com: เว็บไซต์แบบสถิตที่ไม่มีบัญชี ไม่มีโฆษณา สถิติแบบไร้คุกกี้ และแบบฟอร์มติดต่อเก็บข้อมูลอะไรบ้าง',
     },
     eyebrow: 'นโยบายความเป็นส่วนตัว',
     title: 'ความเป็นส่วนตัวบน deepworkplan.com',

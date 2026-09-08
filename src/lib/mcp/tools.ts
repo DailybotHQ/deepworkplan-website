@@ -173,19 +173,33 @@ function notFoundResult(path: string): McpToolResult {
 
 /**
  * Validate a caller-supplied page path: must be site-relative (no scheme, no
- * protocol-relative form, no traversal sequences, no query/fragment).
+ * protocol-relative form, no traversal sequences — including percent-encoded
+ * ones like %2e%2e — and no query/fragment). Returns the decoded path.
  */
 export function sanitizePagePath(input: string): string | null {
   if (typeof input !== 'string' || input.length === 0 || input.length > 512) {
     return null;
   }
-  if (input.includes('://') || input.startsWith('//')) {
+  // Decode percent-escapes BEFORE validating so encoded traversal
+  // (`/%2e%2e/`) and encoded schemes are rejected by the same rules. A
+  // remaining '%' after one decode means the input was double-encoded —
+  // reject it too: page slugs never contain a literal percent sign.
+  let decoded: string;
+  try {
+    decoded = decodeURIComponent(input);
+  } catch {
     return null;
   }
-  if (input.includes('..') || input.includes('\\')) {
+  if (decoded.includes('%')) {
     return null;
   }
-  const path = input.startsWith('/') ? input : `/${input}`;
+  if (decoded.includes('://') || decoded.startsWith('//')) {
+    return null;
+  }
+  if (decoded.includes('..') || decoded.includes('\\')) {
+    return null;
+  }
+  const path = decoded.startsWith('/') ? decoded : `/${decoded}`;
   if (/[?#$\s]/.test(path)) {
     return null;
   }

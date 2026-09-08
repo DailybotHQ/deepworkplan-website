@@ -19,6 +19,17 @@ const n = t.notFoundPage;
 const agentRecoveryMarkdown = RECOVERY_LINKS.map(
   (link) => `- [${link.label}](https://deepworkplan.com${link.path})`
 ).join('\n');
+
+// Visible recovery links: localized labels + language-prefixed paths (the
+// markdown block above stays English on purpose — it is machine syntax).
+const recoveryLinks = [
+  { label: t.nav.home, path: `${prefix}/` },
+  { label: t.nav.methodology, path: `${prefix}/methodology` },
+  { label: t.nav.spec, path: `${prefix}/spec` },
+  { label: t.nav.kit, path: `${prefix}/kit` },
+  { label: t.nav.examples, path: `${prefix}/examples` },
+  { label: t.nav.developers, path: `${prefix}/developers` },
+];
 ---
 
 <MainLayout lang={lang} title={n.title} description={n.description}>
@@ -67,7 +78,7 @@ const agentRecoveryMarkdown = RECOVERY_LINKS.map(
           </p>
           <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
             {
-              RECOVERY_LINKS.slice(0, 6).map((link) => (
+              recoveryLinks.map((link) => (
                 <li>
                   <a
                     href={link.path}

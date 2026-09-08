@@ -16,16 +16,11 @@
  */
 
 import { readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
-
-function dirname(path) {
-  const idx = path.lastIndexOf('/');
-  return idx === -1 ? '.' : path.slice(0, idx);
-}
 
 async function readVersion() {
   const pkgRaw = await readFile(resolve(ROOT, 'package.json'), 'utf8');

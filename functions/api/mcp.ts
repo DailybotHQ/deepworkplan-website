@@ -109,11 +109,17 @@ export const onRequestPost: PagesFunctionHandler = async (context) => {
     fetchAssetText: makeAssetFetcher(context.env, url.origin),
   });
 
-  return jsonResponse(
-    output.status,
-    output.body ?? '',
-    output.body !== null ? { 'MCP-Protocol-Version': output.protocolVersion } : {}
-  );
+  // 202 Accepted for notifications: empty body, no Content-Type (spec).
+  if (output.body === null) {
+    return new Response(null, {
+      status: output.status,
+      headers: { ...CORS_HEADERS },
+    });
+  }
+
+  return jsonResponse(output.status, output.body, {
+    'MCP-Protocol-Version': output.protocolVersion,
+  });
 };
 
 export const onRequestGet: PagesFunctionHandler = async () => methodNotAllowed('POST, OPTIONS');

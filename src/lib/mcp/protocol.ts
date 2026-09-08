@@ -94,5 +94,8 @@ export function isValidRpcMessage(value: unknown): value is JsonRpcMessage {
 }
 
 export function isNotification(message: JsonRpcMessage): boolean {
-  return message.id === undefined || message.id === null;
+  // Only an ABSENT id marks a notification. JSON-RPC 2.0 discourages `id: null`
+  // but a request that explicitly sends it still expects a response (answered
+  // with `id: null` per the spec's error-reporting rules).
+  return message.id === undefined;
 }

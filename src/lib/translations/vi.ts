@@ -805,7 +805,7 @@ export const vi: SiteTranslations = {
       title:
         'Nhà phát triển — API agent, máy chủ MCP và tài liệu của Deep Work Plan',
       description:
-        'Bề mặt agent của Deep Work Plan: API chỉ đọc, không cần xác thực kèm đặc tả OpenAPI, máy chủ MCP tại /api/mcp, Markdown theo từng trang bằng 17 ngôn ngữ, và CLI cài đặt npx skills.',
+        'Bề mặt agent của Deep Work Plan: API chỉ đọc, không cần xác thực kèm đặc tả OpenAPI, máy chủ MCP, Markdown theo từng trang bằng 17 ngôn ngữ, và CLI npx skills.',
     },
     eyebrow: 'Bề mặt agent và nhà phát triển',
     title: 'Deep Work Plan dành cho nhà phát triển và AI agent',
@@ -933,7 +933,7 @@ export const vi: SiteTranslations = {
     meta: {
       title: 'Quyền riêng tư — Deep Work Plan',
       description:
-        'Chính sách quyền riêng tư của deepworkplan.com: trang web tĩnh không tài khoản, không quảng cáo, phân tích không dùng cookie, và giải thích thẳng thắn chính xác biểu mẫu liên hệ thu thập những gì.',
+        'Chính sách quyền riêng tư của deepworkplan.com: trang tĩnh không tài khoản, không quảng cáo, phân tích không cookie, và biểu mẫu liên hệ thu thập đúng những gì.',
     },
     eyebrow: 'Chính sách quyền riêng tư',
     title: 'Quyền riêng tư trên deepworkplan.com',

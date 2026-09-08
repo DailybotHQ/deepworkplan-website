@@ -69,6 +69,16 @@ describe('sanitizePagePath', () => {
     expect(sanitizePagePath('/page?x=1')).toBeNull();
     expect(sanitizePagePath('')).toBeNull();
   });
+
+  it('rejects percent-encoded traversal and double-encoded input', () => {
+    expect(sanitizePagePath('/%2e%2e/etc/passwd')).toBeNull();
+    expect(sanitizePagePath('/%252e%252e/etc')).toBeNull();
+    expect(sanitizePagePath('/page%20name')).toBeNull();
+  });
+
+  it('still accepts harmless percent-encoded characters', () => {
+    expect(sanitizePagePath('/caf%C3%A9')).toBe('/café');
+  });
 });
 
 describe('resolveMarkdownAssetPath', () => {
@@ -260,6 +270,14 @@ describe('handleMcpRequest — protocol edge cases', () => {
       expect(out.status).toBe(202);
       expect(out.body).toBeNull();
     }
+  });
+
+  it('an explicit id: null is a call, not a notification — it gets a response with id null', async () => {
+    const out = await rpc({ jsonrpc: '2.0', id: null, method: 'ping' });
+    expect(out.status).toBe(200);
+    const body = parseBody(out);
+    expect(body.id).toBeNull();
+    expect(body.result).toEqual({});
   });
 
   it('unparseable bodies get HTTP 400 with -32700 and id null', async () => {

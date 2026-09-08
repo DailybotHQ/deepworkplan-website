@@ -266,7 +266,7 @@ const inLanguage = getActiveLanguages().map((l) => getHreflang(l));
       email: "security@dailybot.com",
       contactType: "customer support",
       url: "https://deepworkplan.com/contact",
-      availableLanguage: ["en", "es"],
+      availableLanguage: getActiveLanguages(),
     },
     address: {
       "@type": "PostalAddress",
