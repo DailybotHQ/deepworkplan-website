@@ -1,0 +1,62 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Deep Work Plan",
+    "identifier": "did:web:deepworkplan.com"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:deepworkplan.com:server:webmcp",
+      "displayName": "Deep Work Plan WebMCP Server",
+      "type": "application/mcp-server-card+json",
+      "url": "https://deepworkplan.com/.well-known/mcp/server-card.json",
+      "representativeQueries": [
+        "how do I make my repository AI-first with Deep Work Plan",
+        "what tools does deepworkplan.com expose to agents",
+        "open the Deep Work Plan methodology section"
+      ]
+    },
+    {
+      "identifier": "urn:air:deepworkplan.com:skills:catalog",
+      "displayName": "Agent Skills Discovery Index",
+      "type": "application/json",
+      "url": "https://deepworkplan.com/.well-known/agent-skills/index.json",
+      "representativeQueries": [
+        "which agent-readiness skills does deepworkplan.com implement",
+        "find the SKILL.md procedures this site advertises"
+      ]
+    },
+    {
+      "identifier": "urn:air:deepworkplan.com:document:llms-txt",
+      "displayName": "LLM Guidance Index (llms.txt)",
+      "type": "text/plain",
+      "url": "https://deepworkplan.com/llms.txt",
+      "representativeQueries": [
+        "what is the Deep Work Plan methodology",
+        "how does DWP differ from GitHub Spec Kit or Amazon Kiro",
+        "where can I read the full DWP specification"
+      ]
+    },
+    {
+      "identifier": "urn:air:deepworkplan.com:document:init-adoption-prompt",
+      "displayName": "DWP Adoption Prompt (/init)",
+      "type": "text/markdown",
+      "url": "https://deepworkplan.com/init.md",
+      "representativeQueries": [
+        "give me the prompt to onboard a repository with Deep Work Plan",
+        "install the Deep Work Plan agent skill in my repo",
+        "what is the canonical /init endpoint for DWP"
+      ]
+    },
+    {
+      "identifier": "urn:air:deepworkplan.com:catalog:api-linkset",
+      "displayName": "API Catalog (RFC 9727 linkset)",
+      "type": "application/linkset+json",
+      "url": "https://deepworkplan.com/.well-known/api-catalog",
+      "representativeQueries": [
+        "where is the machine-readable catalog of deepworkplan.com",
+        "list the service documents this site publishes"
+      ]
+    }
+  ]
+}
