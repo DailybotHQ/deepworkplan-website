@@ -26,7 +26,15 @@ console.log(pkg.version);
 TAG="v${VERSION}"
 RELEASE_MESSAGE="[🤖 Deep Work Plan] New release to ${TAG} launched 🚀"
 
+# Re-stamp the versioned agent artifacts (openapi.json, health.json, mcp
+# manifests, server card, MCP server-info) so they ship in the SAME release
+# commit. Without this, `pnpm run test` fails on a fresh checkout of main
+# after a release: package.json says vX.Y.Z+1 while the artifacts still say
+# vX.Y.Z (tests/unit/lib/openapi.test.ts enforces the parity).
+node scripts/stamp-versions.mjs
+
 git add package.json
+git add public/openapi.json public/api/health.json public/.well-known/mcp.json public/.well-known/mcp/server-card.json src/lib/mcp/server-info.ts 2>/dev/null || true
 if [[ -f "pnpm-lock.yaml" ]]; then
   git add pnpm-lock.yaml
 fi

@@ -1,6 +1,6 @@
 {
   "name": "deep-work-plan-site",
-  "version": "1.0.83",
+  "version": "1.0.84",
   "description": "deepworkplan.com — the Deep Work Plan methodology, specification, and kit. Read-only MCP surface exposing the canonical /init adoption prompt, the site map, and every page as source Markdown.",
   "protocolVersion": "2025-06-18",
   "supportedProtocolVersions": [
