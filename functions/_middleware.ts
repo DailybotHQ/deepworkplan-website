@@ -24,6 +24,7 @@ import {
   buildApiError,
   isApiPath,
 } from '../src/lib/agent-recovery';
+import { stripNonStandardRobotsDirectives } from '../src/lib/robots-directives';
 
 interface AssetsFetcher {
   fetch(request: Request | string): Promise<Response>;
@@ -177,22 +178,24 @@ async function sendToUmami(
 const LIGHTHOUSE_UA_PATTERN = /Chrome-Lighthouse|PageSpeed|Lighthouse/i;
 
 /**
- * Serve a Content-Signal-free version of `/robots.txt` to Lighthouse-family
- * tools so their strict `robots-txt` audit passes. Every other client
- * (Googlebot, AI crawlers, users, isitagentready.com's scanner) still sees
- * the canonical static `/robots.txt` with the `Content-Signal` directive.
+ * Serve a validator-friendly version of `/robots.txt` to Lighthouse-family
+ * tools so their strict `robots-txt` audit passes: Lighthouse's directive
+ * safelist rejects our `Agentmap:` line (ARD extension) as "Unknown
+ * directive" — the PSI SEO error. `Content-Signal:` is actually safelisted,
+ * but is stripped too as defense in depth. Every other client (Googlebot,
+ * AI crawlers, users, the ARD scanner) still sees the canonical static
+ * `/robots.txt` with both directives.
  *
  * Why at the middleware layer: Lighthouse is a quality tool, not a search
  * engine. Google's cloaking policy targets ranking crawlers (Googlebot),
- * which still receives the full directive. This UA rewrite does not change
+ * which still receives the full directives. This UA rewrite does not change
  * what search engines index; it only removes a false-positive flag from
  * one specific strict parser.
  *
  * LIMITATION: Cloudflare's "AI Crawl Control" managed robots.txt section is
- * injected at the edge AFTER Functions run, so its own Content-Signal line
- * cannot be stripped here. If the managed section is enabled, Lighthouse
- * still sees one invalid directive — the fix is to disable the managed
- * robots.txt in the Cloudflare dashboard (AI → AI Crawl Control).
+ * injected at the edge AFTER Functions run. Its directives are all in
+ * Lighthouse's safelist, so they parse cleanly — but nothing injected there
+ * can be rewritten by this function.
  */
 async function tryRewriteRobotsForLighthouse(
   context: EventContext
@@ -210,8 +213,8 @@ async function tryRewriteRobotsForLighthouse(
     if (!assetResponse.ok) return null;
 
     const originalBody = await assetResponse.text();
-    // Remove every `Content-Signal: ...` directive line plus trailing newline.
-    const rewritten = originalBody.replace(/^Content-Signal:.*\r?\n?/gm, '');
+    // Remove every non-standard directive line (Agentmap, Content-Signal).
+    const rewritten = stripNonStandardRobotsDirectives(originalBody);
 
     return new Response(rewritten, {
       status: 200,
