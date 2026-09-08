@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-addon-dependency-upgrade
 description: Optional DeepWorkPlan addon that safely upgrades a repo's dependencies — reasoning about the repo's ACTUAL package manager (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, and more) rather than assuming npm — with a batched, validated, revertible workflow that detects the manager and manifests/lockfiles, classifies upgrades (patch/minor/major), upgrades in safe batches, runs the repo's real validation gate after each batch, reverts a failing batch, and summarizes. Opt-in, never required, reconciles with the repo's existing tooling. Use when the developer wants to bring dependencies up to date without breaking the build.
-version: "2.17.0"
+version: "2.17.1"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -44,6 +44,25 @@ revertible** workflow. This is the methodology's **third opt-in addon** — it i
   offers this addon; if accepted it reads this SKILL and runs the flow below.
 - **Directly** — `/deepworkplan-addon-dependency-upgrade` on an already-onboarded
   repo to upgrade dependencies, or via the installed `/lib-upgrade` delegator.
+
+## Trust boundary (write scope)
+
+`allowed-tools` includes write-capable `Edit`, `Write`, and `Bash`.
+
+**Writes:** manifests and lockfiles (`package.json` + `package-lock.json` /
+`pnpm-lock.yaml`, `pyproject.toml` + lock, `Cargo.toml` + `Cargo.lock`, and
+equivalents), a batch/upgrade report under the repo's working-state directory,
+and a git commit per completed upgrade batch. Remote registry access is limited
+to the package manager's own resolution commands (`npm view`, `pip index`,
+`cargo update`…) — metadata queries and lockfile regeneration, never script
+execution. (Ecosystem post-install scripts run only if the developer opts in,
+stated per batch.)
+
+**It MUST NOT:** run a major-version jump that fails the repo's validation gate
+and still record the batch as upgraded, commit regenerated lockfiles without
+the matching manifest change, force-push or rewrite history, or leave the tree
+dirty when a batch is recorded as done. Everything is revertible: every batch
+is a self-contained commit.
 
 ## The flow
 
