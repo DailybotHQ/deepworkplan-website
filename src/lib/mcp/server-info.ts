@@ -12,7 +12,7 @@
 export const SERVER_NAME = 'deep-work-plan-site';
 
 /** Keep in sync with package.json — stamped automatically by prebuild. */
-export const SITE_VERSION = '1.0.84';
+export const SITE_VERSION = '1.0.85';
 
 /**
  * MCP protocol revisions this server understands. A client may negotiate any
