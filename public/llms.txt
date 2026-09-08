@@ -6,6 +6,19 @@
 
 Deep Work Plan is the methodology that turns any repository into an AI-first, agent-pilotable codebase. It is spec-driven development where the repository itself becomes the agent harness: a goal becomes an agreed plan, the plan is decomposed into atomic, independently verifiable tasks, and each task runs in a focused loop that ends with an explicit validation gate. The plan, tasks, and running log are all plain Markdown — readable, reviewable, and version-controlled. DWP is tool-agnostic and repo-native: the methodology and kit install into the repository (AGENTS.md, docs, the .agents/ skills home, the DWP skill) so any agent — Claude, Cursor, Copilot, Codex, Gemini, and more — can pilot the repo.
 
+## When to use Deep Work Plan
+
+Reach for DWP when the job is:
+
+- Making a repository AI-first: installing the agent scaffolding (context, skills, guardrails) so any coding agent can pilot it. Start at /init.md — a self-contained prompt an agent can execute directly.
+- Long-horizon agent work: features, refactors, or migrations too large for one prompt, decomposed into atomic tasks that each end in an explicit validation gate and survive across sessions (resumable state on disk).
+- Spec-driven development without tool lock-in: the plan is the durable source of truth in the repo (Markdown, version-controlled), not inside a vendor's tool. DWP is tool-agnostic where GitHub Spec Kit, Amazon Kiro, or Tessl are tool-bound.
+- Handing an unfamiliar repository to an agent: the DWP documentation layer (AGENTS.md, docs/, .agents/) gives any agent the context to work safely.
+
+Skip DWP for single-file edits, throwaway scripts, or repos an agent will touch once — the structure pays off on durable, multi-session work.
+
+How an agent should engage: fetch /init.md and follow it to onboard a repository; call the MCP tools at /api/mcp (get_init_prompt, list_site_sections, read_page) to navigate and read this site; read /developers for the full API surface.
+
 ## Core Sections
 
 - Home: /
@@ -15,17 +28,33 @@ Deep Work Plan is the methodology that turns any repository into an AI-first, ag
 - Examples: /examples — worked examples of the methodology in practice
 - Quickstart: /quickstart — get DWP running in a repo quickly
 - Init / Adoption: /init — make any repository AI-first: install the skill, onboard the repo, then plan and execute. Self-contained agent prompt at /init.md
+- Developers: /developers — the agent & developer surface: OpenAPI spec, MCP server, zero-auth API, install CLI
+- Trust: /trust — why the skill is safe to adopt: MIT, verifiable installs, disclosure policy
 - About: /about — what DWP is and who maintains it (Dailybot)
 - Contact: /contact — how to engage with the project on GitHub
+- Privacy: /privacy — the site's privacy policy
 
 ## Repository
 
 - GitHub: https://github.com/DailybotHQ/deepworkplan-website
 
+## Developer & Agent Resources
+
+All public, read-only, and zero-auth (no API keys, no registration) — declared at /auth.md:
+
+- OpenAPI spec: /openapi.json — every endpoint, parameter, and response schema of the agent API
+- MCP server: /api/mcp — Streamable HTTP (JSON-RPC 2.0); manifest at /.well-known/mcp.json
+- Health: /api/health.json
+- API catalog (RFC 9727): /.well-known/api-catalog
+- ARD capability manifest (agentmap): /.well-known/ai-catalog.json
+- Agent Skills index: /.well-known/agent-skills/index.json
+- Security contact: /.well-known/security.txt
+- Developer portal: /developers (redirect: /docs → /developers)
+- Install CLI: `npx skills add DailybotHQ/deepworkplan-skill@latest`
+
 ## Languages
 
-- English (default): /
-- Spanish: /es/
+The site ships in 17 languages — English (default) at the root and 16 more under their code (`/es/`, `/pt/`, `/zh/`, `/ja/`, `/de/`, `/fr/`, `/ko/`, `/ru/`, `/it/`, `/tr/`, `/id/`, `/vi/`, `/hi/`, `/pl/`, `/uk/`, `/th/`). Every page and its Markdown mirror exist in every language.
 
 ## Agent-Friendly Markdown
 
@@ -40,6 +69,9 @@ Every rendered page is available as native source Markdown for AI agents:
 ## Machine-Readable Feeds
 
 - Sitemap: /sitemap-index.xml
+- OpenAPI spec: /openapi.json
+- Agentmap: /.well-known/ai-catalog.json
+- API catalog: /.well-known/api-catalog
 
 ## Crawling Guidance
 

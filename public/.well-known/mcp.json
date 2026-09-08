@@ -1,0 +1,35 @@
+{
+  "name": "deep-work-plan-site",
+  "version": "1.0.83",
+  "description": "deepworkplan.com — the Deep Work Plan methodology, specification, and kit. Read-only MCP surface exposing the canonical /init adoption prompt, the site map, and every page as source Markdown.",
+  "protocolVersion": "2025-06-18",
+  "supportedProtocolVersions": [
+    "2025-03-26",
+    "2025-06-18"
+  ],
+  "transport": {
+    "type": "streamable-http",
+    "url": "https://deepworkplan.com/api/mcp"
+  },
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    }
+  },
+  "tools": [
+    {
+      "name": "get_init_prompt",
+      "description": "Return the canonical /init.md adoption prompt — a self-contained instruction that makes any repository AI-first with Deep Work Plan."
+    },
+    {
+      "name": "list_site_sections",
+      "description": "List the main sections of deepworkplan.com with their paths and one-line descriptions."
+    },
+    {
+      "name": "read_page",
+      "description": "Fetch any page of deepworkplan.com as native source Markdown, e.g. /init or /es/methodology/01-manifesto."
+    }
+  ],
+  "serverCard": "https://deepworkplan.com/.well-known/mcp/server-card.json",
+  "developers": "https://deepworkplan.com/developers"
+}

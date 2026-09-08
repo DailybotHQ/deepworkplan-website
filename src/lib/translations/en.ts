@@ -24,6 +24,8 @@ export const en: SiteTranslations = {
     init: 'Init',
     quickstart: 'Quickstart',
     trust: 'Trust',
+    developers: 'Developers',
+    privacy: 'Privacy',
     github: 'GitHub',
     repo: {
       label: 'Source code',
@@ -354,6 +356,7 @@ export const en: SiteTranslations = {
         'Hand your agent one line — point it at /init.md — and it makes your repository AI-first: it installs the skill, reasons about your stack, and commits a complete AGENTS.md hierarchy. From there you create and execute Deep Work Plans that run autonomously for hours.',
       primaryCta: 'Open the /init prompt',
       secondaryCta: 'Read the methodology',
+      tertiaryCta: 'For agents & developers',
       meta: 'MIT-licensed · zero telemetry · outputs to a gitignored .dwp/ folder.',
     },
   },
@@ -500,6 +503,9 @@ export const en: SiteTranslations = {
       "Sorry, the page you are looking for doesn't exist or may have been moved. Try navigating back to the homepage or exploring the methodology.",
     backHome: 'Go back home',
     exploreMethodology: 'Read the methodology',
+    agentTitle: 'For AI agents',
+    agentIntro:
+      'This path does not exist. The recovery links below (and their machine-readable equivalents) list every page on this site.',
   },
 
   // Deep Work Plan — Methodology index + chapter reader
@@ -786,5 +792,176 @@ export const en: SiteTranslations = {
       'Read the methodology and the specification, point an agent at the init endpoint, and verify the install before you run it.',
     ctaPrimary: 'Read the methodology',
     ctaSecondary: 'Adoption (init)',
+  },
+
+  developersPage: {
+    meta: {
+      title: 'Developers — Deep Work Plan agent API, MCP server & docs',
+      description:
+        'The Deep Work Plan agent surface: a read-only, zero-auth API with an OpenAPI spec, an MCP server, per-page Markdown in 17 languages, and the npx skills CLI.',
+    },
+    eyebrow: 'Agent & developer surface',
+    title: 'Deep Work Plan for developers and AI agents',
+    intro:
+      'deepworkplan.com ships a machine-readable surface alongside its pages: an OpenAPI-described agent API, a stateless MCP server, native Markdown mirrors for every page in 17 languages, and the installable DWP skill. Everything on this page is live, public, and free — there is nothing to sign up for.',
+    accessTitle: 'Zero-auth by design',
+    accessIntro:
+      'There are no API keys to generate, no OAuth dance, and no sandbox separate from production — the production surface itself is the sandbox. This is a deliberate property of the methodology: agents cannot fill in "contact sales" forms, so the site never asks for one.',
+    accessPoints: [
+      {
+        title: 'Read-only',
+        body: 'Every operation is a safe, cacheable GET — except the MCP endpoint, which is POST. There are no write operations, uploads, or state changes anywhere.',
+      },
+      {
+        title: 'No API keys',
+        body: 'No registration, no tokens, no rate-limit tiers. Anonymous access is the documented contract, declared in /auth.md and the OAuth discovery stubs.',
+      },
+      {
+        title: 'Free & open source',
+        body: 'The site content and the DWP skill are MIT-licensed. Use them in commercial and non-commercial work without asking permission.',
+      },
+      {
+        title: 'Machine-first',
+        body: 'Structured JSON errors on /api paths, Markdown 404 recovery bodies, RFC 9727 API catalog, and an ARD capability manifest — built for agent consumption.',
+      },
+    ],
+    endpointsTitle: 'Endpoints',
+    endpointsIntro:
+      'The core endpoints of the agent API. The complete, typed specification — every operation, parameter, and response schema — lives at the OpenAPI document.',
+    endpointsNote:
+      'Unknown /api/* paths return a structured JSON error with a resolution hint, never an HTML error page.',
+    endpoints: [
+      {
+        method: 'GET',
+        path: '/openapi.json',
+        description: 'OpenAPI 3.1 specification of the whole agent API.',
+      },
+      {
+        method: 'GET',
+        path: '/llms.txt',
+        description:
+          'Curated LLM guidance index — the recommended entry point for agents.',
+      },
+      {
+        method: 'GET',
+        path: '/init.md',
+        description:
+          'The canonical DWP adoption prompt (make any repository AI-first).',
+      },
+      {
+        method: 'GET',
+        path: '/{page}.md',
+        description:
+          'Any page as native source Markdown — in all 17 languages (e.g. /es/developers.md).',
+      },
+      {
+        method: 'GET',
+        path: '/api/health.json',
+        description:
+          'Static health marker with links to the spec and this portal.',
+      },
+      {
+        method: 'POST',
+        path: '/api/mcp',
+        description:
+          'MCP server (Streamable HTTP, stateless): initialize, ping, tools/list, tools/call.',
+      },
+      {
+        method: 'GET',
+        path: '/.well-known/ai-catalog.json',
+        description:
+          'ARD capability manifest — the agentmap declared in robots.txt.',
+      },
+    ],
+    mcpTitle: 'MCP server',
+    mcpIntro:
+      'A stateless Model Context Protocol server over Streamable HTTP. Three read-only tools: get_init_prompt, list_site_sections, and read_page. Protocol versions 2025-03-26 and 2025-06-18 are supported; no session is required.',
+    mcpCodeLabel: 'Terminal — JSON-RPC over HTTP',
+    mcpNote:
+      'The MCP manifest lives at /.well-known/mcp.json and the server card at /.well-known/mcp/server-card.json. Claude, ChatGPT, and any MCP client can call these tools natively.',
+    markdownTitle: 'Markdown for agents',
+    markdownIntro:
+      'Every rendered page is published as native source Markdown — not an HTML conversion. Request Markdown explicitly with a URL suffix or through HTTP content negotiation on any page.',
+    markdownCodeLabel: 'Terminal — content negotiation',
+    markdownNote:
+      'Content negotiation returns the same source Markdown the site renders from, in the language of the URL you request.',
+    cliTitle: 'Install the kit',
+    cliIntro:
+      'The official install path for the Deep Work Plan skill — the same command the /init endpoint gives agents. It works with any skills-compatible coding agent (Claude Code, Cursor, Codex, Gemini, and others).',
+    cliCodeLabel: 'Terminal — skills CLI',
+    cliNote:
+      'The skill vendors into .agents/skills/deepworkplan/ inside your repository, so every agent that touches the repo shares the same methodology.',
+    resourcesTitle: 'Machine-readable resources',
+    resources: [
+      { label: 'OpenAPI spec (/openapi.json)', href: '/openapi.json' },
+      { label: 'Agent access & auth declaration (/auth.md)', href: '/auth.md' },
+      {
+        label: 'API catalog, RFC 9727 (/.well-known/api-catalog)',
+        href: '/.well-known/api-catalog',
+      },
+      {
+        label: 'MCP manifest (/.well-known/mcp.json)',
+        href: '/.well-known/mcp.json',
+      },
+      {
+        label: 'Security contact (/.well-known/security.txt)',
+        href: '/.well-known/security.txt',
+      },
+      {
+        label: 'Site repo descriptor (/.well-known/dwp.json)',
+        href: '/.well-known/dwp.json',
+      },
+    ],
+    ctaTitle: 'Point an agent at it',
+    ctaBody:
+      'The fastest path is still one line: hand any coding agent the /init prompt and it installs the skill, onboards your repository, and starts finishing deep work.',
+    ctaPrimary: 'Open the /init prompt',
+    ctaSecondary: 'Read the methodology',
+  },
+
+  privacyPage: {
+    meta: {
+      title: 'Privacy — Deep Work Plan',
+      description:
+        'The deepworkplan.com privacy policy: a static site with no accounts, no advertising, cookieless analytics, and exactly what the contact form collects.',
+    },
+    eyebrow: 'Privacy policy',
+    title: 'Privacy on deepworkplan.com',
+    intro:
+      'Deep Work Plan is a static documentation and methodology site. This page explains, plainly and completely, what data the site touches when you visit: there is no accounts system, no advertising, and no cross-site tracking anywhere in it.',
+    lastUpdated: 'September 8, 2026',
+    sections: [
+      {
+        heading: 'What the site is',
+        body: 'deepworkplan.com is a collection of static pages served through a CDN. There is no login, no user database, and no way for the site to store personal profiles. Content is developed in public GitHub repositories under the DailybotHQ organization, and everything you read here is served exactly as built.',
+      },
+      {
+        heading: 'Analytics',
+        body: 'The site uses Umami, a cookieless, privacy-first analytics service, to count page views in aggregate. Umami does not set tracking cookies and does not build cross-site profiles. Because AI crawlers do not run JavaScript, a server-side edge function also records the user agent and path of automated bot visits as anonymous analytics events — this identifies crawler software (for example "GPTBot visited /init"), never a human visitor.',
+      },
+      {
+        heading: 'Cookies and local storage',
+        body: 'The site sets no tracking cookies. The only thing stored in your browser is a theme preference (light or dark mode) kept in localStorage, which never leaves your device and is not transmitted anywhere. If you clear your browser storage, the site simply returns to your system default theme.',
+      },
+      {
+        heading: 'Third-party services',
+        body: "Hosting and delivery run on Cloudflare Pages, which processes request logs and IP addresses at the edge as part of operating the CDN and blocking abuse, under Cloudflare's own privacy policy. Aggregate analytics run on Umami (cloud.umami.is). If you voluntarily submit the contact form, your answers are sent through Google Forms to our team — that is the only place where information you type is collected, and it is used solely to reply to you.",
+      },
+      {
+        heading: 'What we do not do',
+        body: 'We do not sell or share personal data, run advertising or remarketing pixels, fingerprint browsers, or send marketing email. The site has no newsletter signup and no telemetry beyond the aggregate, cookieless counts described above.',
+      },
+      {
+        heading: 'Your choices',
+        body: 'Because analytics here are aggregate and cookieless, there is no personal profile to export or delete. You can block the analytics script with any content blocker without affecting how the site works. If you have submitted the contact form and want your message deleted, write to the contact address below and we will remove it.',
+      },
+      {
+        heading: 'Changes to this policy',
+        body: 'If this policy changes materially, the updated date at the top of this page changes with it, and substantive edits are committed to the public website repository where anyone can review the history.',
+      },
+    ],
+    contactTitle: 'Contact and security',
+    contactBody:
+      "For privacy questions write to security@dailybot.com. To report a security vulnerability, prefer GitHub's private vulnerability reporting for the website and skill repositories — see /.well-known/security.txt for the exact addresses.",
   },
 };

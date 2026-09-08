@@ -28,6 +28,8 @@ export const ko: SiteTranslations = {
     init: 'Init',
     quickstart: '빠른 시작',
     trust: '신뢰',
+    developers: '개발자',
+    privacy: '개인정보 보호',
     github: 'GitHub',
     repo: {
       label: '소스 코드',
@@ -360,6 +362,7 @@ export const ko: SiteTranslations = {
         '에이전트에게 한 줄을 건네 /init.md를 가리키면 리포지토리가 AI-first가 됩니다. 스킬을 설치하고, 스택을 추론하고, 완전한 AGENTS.md 계층을 커밋합니다. 거기서부터 수 시간 동안 자율적으로 실행되는 Deep Work Plan을 생성하고 실행합니다.',
       primaryCta: '/init 프롬프트 열기',
       secondaryCta: '방법론 읽기',
+      tertiaryCta: '에이전트와 개발자용',
       meta: 'MIT 라이선스 · 텔레메트리 없음 · 산출물은 gitignore된 .dwp/ 폴더로.',
     },
   },
@@ -506,6 +509,9 @@ export const ko: SiteTranslations = {
       '죄송합니다. 찾으시는 페이지가 존재하지 않거나 이동되었을 수 있습니다. 홈페이지로 돌아가거나 방법론을 둘러보세요.',
     backHome: '홈으로 돌아가기',
     exploreMethodology: '방법론 읽기',
+    agentTitle: 'AI 에이전트용',
+    agentIntro:
+      '이 경로는 존재하지 않습니다. 아래의 복구 링크(및 그 기계 판독 가능한 대응물)가 이 사이트의 모든 페이지를 나열합니다.',
   },
 
   // Deep Work Plan — Methodology index + chapter reader
@@ -792,5 +798,175 @@ export const ko: SiteTranslations = {
       '방법론과 스펙을 읽고, 에이전트를 init 엔드포인트로 향하게 한 뒤, 실행하기 전에 설치를 검증하세요.',
     ctaPrimary: '방법론 읽기',
     ctaSecondary: '채택(Init)',
+  },
+
+  developersPage: {
+    meta: {
+      title: '개발자 — Deep Work Plan 에이전트 API, MCP 서버 및 문서',
+      description:
+        'Deep Work Plan의 에이전트 표면: OpenAPI 스펙을 갖춘 읽기 전용 무인증 API, /api/mcp의 MCP 서버, 17개 언어의 페이지별 Markdown, npx skills 설치 CLI.',
+    },
+    eyebrow: '에이전트 및 개발자 표면',
+    title: '개발자와 AI 에이전트를 위한 Deep Work Plan',
+    intro:
+      'deepworkplan.com은 페이지와 함께 기계 판독 가능한 표면을 제공합니다. OpenAPI로 기술된 에이전트 API, 스테이트리스 MCP 서버, 17개 언어의 모든 페이지를 담은 네이티브 Markdown 미러, 그리고 설치 가능한 DWP 스킬입니다. 이 페이지의 모든 것은 라이브로 공개되어 있고 무료입니다 — 가입할 것이 전혀 없습니다.',
+    accessTitle: '설계부터 무인증',
+    accessIntro:
+      '생성할 API 키도, OAuth 절차도, 프로덕션과 분리된 샌드박스도 없습니다 — 프로덕션 표면 자체가 샌드박스입니다. 이는 방법론의 의도적인 속성입니다. 에이전트는 "영업 문의" 양식을 작성할 수 없기에, 이 사이트는 그런 것을 절대 요구하지 않습니다.',
+    accessPoints: [
+      {
+        title: '읽기 전용',
+        body: '모든 작업은 안전하고 캐시 가능한 GET입니다 — POST를 사용하는 MCP 엔드포인트가 유일한 예외입니다. 어디에도 쓰기 작업, 업로드, 상태 변경은 존재하지 않습니다.',
+      },
+      {
+        title: 'API 키 불필요',
+        body: '등록도, 토큰도, 속도 제한 티어도 없습니다. 익명 접근이 문서화된 계약이며, /auth.md와 OAuth 디스커버리 스텁에 선언되어 있습니다.',
+      },
+      {
+        title: '무료 및 오픈 소스',
+        body: '사이트 콘텐츠와 DWP 스킬은 MIT 라이선스입니다. 허락을 구하지 않고 상업적·비상업적 작업에 사용할 수 있습니다.',
+      },
+      {
+        title: '머신 퍼스트',
+        body: '/api 경로의 구조화된 JSON 오류, Markdown 404 복구 본문, RFC 9727 API 카탈로그, ARD 역량 매니페스트 — 에이전트 소비를 위해 구축되었습니다.',
+      },
+    ],
+    endpointsTitle: '엔드포인트',
+    endpointsIntro:
+      '에이전트 API의 핵심 엔드포인트입니다. 완전하고 타입이 지정된 스펙 — 모든 작업, 매개변수, 응답 스키마 — 은 OpenAPI 문서에 있습니다.',
+    endpointsNote:
+      '알 수 없는 /api/* 경로는 해결 힌트를 포함한 구조화된 JSON 오류를 반환하며, HTML 오류 페이지는 결코 반환하지 않습니다.',
+    endpoints: [
+      {
+        method: 'GET',
+        path: '/openapi.json',
+        description: '전체 에이전트 API의 OpenAPI 3.1 스펙입니다.',
+      },
+      {
+        method: 'GET',
+        path: '/llms.txt',
+        description:
+          '엄선된 LLM 안내 인덱스 — 에이전트에게 권장되는 진입점입니다.',
+      },
+      {
+        method: 'GET',
+        path: '/init.md',
+        description:
+          '정식 DWP 채택 프롬프트(모든 리포지토리를 AI-first로 만듭니다).',
+      },
+      {
+        method: 'GET',
+        path: '/{page}.md',
+        description:
+          '모든 페이지를 네이티브 소스 Markdown으로 — 17개 언어 모두(예: /es/developers.md).',
+      },
+      {
+        method: 'GET',
+        path: '/api/health.json',
+        description: '스펙과 이 포털로 연결되는 정적 헬스 마커입니다.',
+      },
+      {
+        method: 'POST',
+        path: '/api/mcp',
+        description:
+          'MCP 서버(Streamable HTTP, 스테이트리스): initialize, ping, tools/list, tools/call.',
+      },
+      {
+        method: 'GET',
+        path: '/.well-known/ai-catalog.json',
+        description:
+          'ARD 역량 매니페스트 — robots.txt에 선언된 agentmap입니다.',
+      },
+    ],
+    mcpTitle: 'MCP 서버',
+    mcpIntro:
+      'Streamable HTTP 위의 스테이트리스 Model Context Protocol 서버입니다. 세 가지 읽기 전용 도구: get_init_prompt, list_site_sections, read_page. 프로토콜 버전 2025-03-26과 2025-06-18을 지원하며 세션은 필요하지 않습니다.',
+    mcpCodeLabel: '터미널 — HTTP를 통한 JSON-RPC',
+    mcpNote:
+      'MCP 매니페스트는 /.well-known/mcp.json에, 서버 카드는 /.well-known/mcp/server-card.json에 있습니다. Claude, ChatGPT, 그리고 모든 MCP 클라이언트가 이 도구들을 네이티브로 호출할 수 있습니다.',
+    markdownTitle: '에이전트를 위한 Markdown',
+    markdownIntro:
+      '렌더링되는 모든 페이지는 HTML 변환이 아니라 네이티브 소스 Markdown으로 게시됩니다. URL 접미사로 Markdown을 명시적으로 요청하거나, 어떤 페이지에서든 HTTP 콘텐츠 협상을 통해 요청하세요.',
+    markdownCodeLabel: '터미널 — 콘텐츠 협상',
+    markdownNote:
+      '콘텐츠 협상은 사이트가 렌더링에 사용하는 것과 동일한 소스 Markdown을, 요청한 URL의 언어로 반환합니다.',
+    cliTitle: '키트 설치',
+    cliIntro:
+      'Deep Work Plan 스킬의 공식 설치 경로입니다 — /init 엔드포인트가 에이전트에게 주는 것과 같은 명령입니다. skills 호환 코딩 에이전트(Claude Code, Cursor, Codex, Gemini 등)라면 무엇이든 작동합니다.',
+    cliCodeLabel: '터미널 — skills CLI',
+    cliNote:
+      '스킬은 리포지토리 내 .agents/skills/deepworkplan/에 벤더되므로, 리포지토리를 다루는 모든 에이전트가 같은 방법론을 공유합니다.',
+    resourcesTitle: '기계 판독 가능 리소스',
+    resources: [
+      { label: 'OpenAPI 스펙 (/openapi.json)', href: '/openapi.json' },
+      { label: '에이전트 접근 및 인증 선언 (/auth.md)', href: '/auth.md' },
+      {
+        label: 'API 카탈로그, RFC 9727 (/.well-known/api-catalog)',
+        href: '/.well-known/api-catalog',
+      },
+      {
+        label: 'MCP 매니페스트 (/.well-known/mcp.json)',
+        href: '/.well-known/mcp.json',
+      },
+      {
+        label: '보안 연락처 (/.well-known/security.txt)',
+        href: '/.well-known/security.txt',
+      },
+      {
+        label: '사이트 리포지토리 디스크립터 (/.well-known/dwp.json)',
+        href: '/.well-known/dwp.json',
+      },
+    ],
+    ctaTitle: '에이전트를 향하게 하세요',
+    ctaBody:
+      '가장 빠른 길은 여전히 한 줄입니다. 어떤 코딩 에이전트에게든 /init 프롬프트를 건네면 스킬을 설치하고, 리포지토리를 온보딩하고, 깊은 작업을 완료하기 시작합니다.',
+    ctaPrimary: '/init 프롬프트 열기',
+    ctaSecondary: '방법론 읽기',
+  },
+
+  privacyPage: {
+    meta: {
+      title: '개인정보 보호 — Deep Work Plan',
+      description:
+        'deepworkplan.com의 개인정보 보호 정책: 계정 없음, 광고 없음, 쿠키 없는 분석을 쓰는 정적 사이트이며, 문의 양식이 수집하는 것을 분명하게 설명합니다.',
+    },
+    eyebrow: '개인정보 보호 정책',
+    title: 'deepworkplan.com의 개인정보 보호',
+    intro:
+      'Deep Work Plan은 정적 문서 및 방법론 사이트입니다. 이 페이지는 방문할 때 사이트가 다루는 데이터를 분명하고 완전하게 설명합니다. 계정 시스템도, 광고도, 사이트 어디에도 크로스 사이트 추적이 없습니다.',
+    lastUpdated: '2026년 9월 8일',
+    sections: [
+      {
+        heading: '사이트란 무엇인가',
+        body: 'deepworkplan.com은 CDN을 통해 제공되는 정적 페이지 모음입니다. 로그인도, 사용자 데이터베이스도 없으며 사이트가 개인 프로필을 저장할 방법도 없습니다. 콘텐츠는 DailybotHQ 조직의 공개 GitHub 리포지토리에서 개발되며, 여기서 읽는 모든 것은 빌드된 그대로 제공됩니다.',
+      },
+      {
+        heading: '분석',
+        body: '이 사이트는 쿠키를 쓰지 않고 프라이버시를 우선하는 분석 서비스 Umami를 사용해 페이지뷰를 집계합니다. Umami는 추적 쿠키를 설정하지 않고 크로스 사이트 프로필을 만들지 않습니다. AI 크롤러는 JavaScript를 실행하지 않기 때문에, 서버 측 엣지 함수가 자동 봇 방문의 사용자 에이전트와 경로를 익명 분석 이벤트로 기록합니다 — 이는 크롤러 소프트웨어를 식별하는 것이지(예: "GPTBot이 /init 방문") 인간 방문자를 식별하는 것이 결코 아닙니다.',
+      },
+      {
+        heading: '쿠키 및 로컬 스토리지',
+        body: '이 사이트는 추적 쿠키를 설정하지 않습니다. 브라우저에 저장되는 유일한 것은 localStorage에 보관되는 테마 기본 설정(라이트 또는 다크 모드)이며, 기기를 벗어나거나 어디로도 전송되지 않습니다. 브라우저 저장소를 지우면 사이트는 시스템 기본 테마로 돌아갈 뿐입니다.',
+      },
+      {
+        heading: '서드파티 서비스',
+        body: '호스팅과 전송은 Cloudflare Pages에서 실행되며, CDN 운영과 악용 차단의 일환으로 Cloudflare가 자체 개인정보 보호 정책에 따라 엣지에서 요청 로그와 IP 주소를 처리합니다. 집계 분석은 Umami(cloud.umami.is)에서 실행됩니다. 문의 양식을 자발적으로 제출하면 답변은 Google Forms를 통해 팀으로 전송됩니다 — 입력한 정보가 수집되는 유일한 곳이며, 답장을 위해서만 사용됩니다.',
+      },
+      {
+        heading: '하지 않는 것',
+        body: '우리는 개인 데이터를 판매하거나 공유하지 않고, 광고나 리마케팅 픽셀을 실행하지 않으며, 브라우저 핑거프린팅을 하지 않고, 마케팅 이메일을 보내지 않습니다. 사이트에는 뉴스레터 가입도 없고, 위에 설명된 집계·쿠키 없는 카운트를 넘는 텔레메트리도 없습니다.',
+      },
+      {
+        heading: '사용자의 선택',
+        body: '여기의 분석은 집계형이고 쿠키를 쓰지 않으므로 내보내거나 삭제할 개인 프로필이 없습니다. 어떤 콘텐츠 차단기로도 분석 스크립트를 차단할 수 있으며 사이트 작동에는 영향이 없습니다. 문의 양식을 제출했고 메시지 삭제를 원한다면 아래 연락처로 편지해 주세요. 삭제하겠습니다.',
+      },
+      {
+        heading: '정책 변경',
+        body: '이 정책이 실질적으로 변경되면 이 페이지 상단의 업데이트 날짜도 함께 변경되며, 실질적인 수정은 공개 웹사이트 리포지토리에 커밋되어 누구나 이력을 검토할 수 있습니다.',
+      },
+    ],
+    contactTitle: '연락처 및 보안',
+    contactBody:
+      '개인정보 보호 관련 질문은 security@dailybot.com으로 보내 주세요. 보안 취약점을 신고할 때는 웹사이트 및 스킬 리포지토리에 대해 GitHub의 비공개 취약점 신고를 우선해 주세요 — 정확한 주소는 /.well-known/security.txt에 있습니다.',
   },
 };

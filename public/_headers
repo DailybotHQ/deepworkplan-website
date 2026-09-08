@@ -2,10 +2,16 @@
   Cache-Control: public, max-age=0, must-revalidate
 
 /
-  Link: </.well-known/api-catalog>; rel="api-catalog"
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby"
 
 /es/
-  Link: </.well-known/api-catalog>; rel="api-catalog"
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby"
+
+# OpenAPI 3.1 spec of the agent API (read-only, zero-auth)
+/openapi.json
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300, must-revalidate
 
 # Agent-readiness .well-known endpoints (RFC 9727, RFC 8414, RFC 9728, SEP-1649, agent-skills v0.2.0, ARD ai-catalog)
 /.well-known/api-catalog
@@ -15,6 +21,19 @@
 # ARD capability manifest (agenticresourcediscovery.org): the scanner requires
 # application/json + Access-Control-Allow-Origin: * at the origin root.
 /.well-known/ai-catalog.json
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300, must-revalidate
+
+# MCP manifest (Streamable HTTP transport at /api/mcp)
+/.well-known/mcp.json
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300, must-revalidate
+
+# Static health marker for the agent API (the MCP endpoint sets its own headers
+# as a Cloudflare Pages Function — _headers does not apply there)
+/api/health.json
   Content-Type: application/json
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=300, must-revalidate

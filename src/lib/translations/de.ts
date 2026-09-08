@@ -29,6 +29,8 @@ export const de: SiteTranslations = {
     init: 'Init',
     quickstart: 'Schnellstart',
     trust: 'Vertrauen',
+    developers: 'Entwickler',
+    privacy: 'Datenschutz',
     github: 'GitHub',
     repo: {
       label: 'Quellcode',
@@ -361,6 +363,7 @@ export const de: SiteTranslations = {
         'Geben Sie Ihrem Agenten eine Zeile — richten Sie ihn auf /init.md — und er macht Ihr Repository AI-first: Er installiert die Skill, schlussfolgert über Ihren Stack und committet eine vollständige AGENTS.md-Hierarchie. Von dort aus erstellen und führen Sie Deep Work Plans aus, die stundenlang autonom laufen.',
       primaryCta: 'Den /init-Prompt öffnen',
       secondaryCta: 'Methodik lesen',
+      tertiaryCta: 'Für Agenten & Entwickler',
       meta: 'MIT-lizenziert · keine Telemetrie · Ausgaben in einen per gitignore ausgeschlossenen .dwp/-Ordner.',
     },
   },
@@ -508,6 +511,9 @@ export const de: SiteTranslations = {
       'Entschuldigung, die gesuchte Seite existiert nicht oder wurde möglicherweise verschoben. Kehren Sie zur Startseite zurück oder erkunden Sie die Methodik.',
     backHome: 'Zurück zur Startseite',
     exploreMethodology: 'Methodik lesen',
+    agentTitle: 'Für KI-Agenten',
+    agentIntro:
+      'Dieser Pfad existiert nicht. Die Wiederherstellungslinks unten (und ihre maschinenlesbaren Entsprechungen) listen jede Seite dieser Website auf.',
   },
 
   // Deep Work Plan — Methodology index + chapter reader
@@ -795,5 +801,179 @@ export const de: SiteTranslations = {
       'Lesen Sie die Methodik und die Spezifikation, richten Sie einen Agenten auf den Init-Endpunkt und verifizieren Sie die Installation, bevor Sie sie ausführen.',
     ctaPrimary: 'Methodik lesen',
     ctaSecondary: 'Adoption (Init)',
+  },
+
+  developersPage: {
+    meta: {
+      title: 'Entwickler — Deep Work Plan Agent-API, MCP-Server & Docs',
+      description:
+        'Agentenoberfläche von Deep Work Plan: read-only API ohne Login (OpenAPI), MCP-Server unter /api/mcp, Markdown pro Seite in 17 Sprachen, npx-skills-CLI.',
+    },
+    eyebrow: 'Oberfläche für Agenten & Entwickler',
+    title: 'Deep Work Plan für Entwickler und KI-Agenten',
+    intro:
+      'deepworkplan.com liefert neben seinen Seiten eine maschinenlesbare Oberfläche: eine per OpenAPI beschriebene Agent-API, einen zustandslosen MCP-Server, native Markdown-Spiegel für jede Seite in 17 Sprachen und das installierbare DWP-Skill. Alles auf dieser Seite ist live, öffentlich und kostenlos — es gibt nichts, wofür man sich registrieren müsste.',
+    accessTitle: 'Bewusst ohne Authentifizierung',
+    accessIntro:
+      'Es gibt keine API-Schlüssel zu erzeugen, keinen OAuth-Aufwand und keine von der Produktion getrennte Sandbox — die Produktionsoberfläche selbst ist die Sandbox. Das ist eine bewusste Eigenschaft der Methodik: Agenten können keine „Kontakt zum Vertrieb“-Formulare ausfüllen, also verlangt die Website nie eines.',
+    accessPoints: [
+      {
+        title: 'Nur lesend',
+        body: 'Jede Operation ist ein sicheres, cachebares GET — mit Ausnahme des MCP-Endpunkts, der POST verwendet. Es gibt nirgends Schreiboperationen, Uploads oder Zustandsänderungen.',
+      },
+      {
+        title: 'Keine API-Schlüssel',
+        body: 'Keine Registrierung, keine Token, keine Rate-Limit-Stufen. Anonymer Zugriff ist der dokumentierte Vertrag, erklärt in /auth.md und den OAuth-Discovery-Stubs.',
+      },
+      {
+        title: 'Kostenlos & Open Source',
+        body: 'Die Website-Inhalte und das DWP-Skill sind MIT-lizenziert. Nutzen Sie sie in kommerzieller und nicht-kommerzieller Arbeit, ohne um Erlaubnis zu fragen.',
+      },
+      {
+        title: 'Maschinen zuerst',
+        body: 'Strukturierte JSON-Fehler auf /api-Pfaden, Markdown-Wiederherstellungstexte bei 404, ein RFC-9727-API-Katalog und ein ARD-Fähigkeitsmanifest — gebaut für die Nutzung durch Agenten.',
+      },
+    ],
+    endpointsTitle: 'Endpunkte',
+    endpointsIntro:
+      'Die Kern-Endpunkte der Agent-API. Die vollständige, typisierte Spezifikation — jede Operation, jeder Parameter und jedes Antwort-Schema — liegt im OpenAPI-Dokument.',
+    endpointsNote:
+      'Unbekannte /api/*-Pfade geben einen strukturierten JSON-Fehler mit einem Lösungshinweis zurück, nie eine HTML-Fehlerseite.',
+    endpoints: [
+      {
+        method: 'GET',
+        path: '/openapi.json',
+        description: 'OpenAPI-3.1-Spezifikation der gesamten Agent-API.',
+      },
+      {
+        method: 'GET',
+        path: '/llms.txt',
+        description:
+          'Kuratierter LLM-Leitfaden-Index — der empfohlene Einstiegspunkt für Agenten.',
+      },
+      {
+        method: 'GET',
+        path: '/init.md',
+        description:
+          'Der kanonische DWP-Adoptions-Prompt (macht jedes Repository AI-first).',
+      },
+      {
+        method: 'GET',
+        path: '/{page}.md',
+        description:
+          'Jede Seite als natives Quell-Markdown — in allen 17 Sprachen (z. B. /es/developers.md).',
+      },
+      {
+        method: 'GET',
+        path: '/api/health.json',
+        description:
+          'Statischer Health-Marker mit Links zur Spezifikation und zu diesem Portal.',
+      },
+      {
+        method: 'POST',
+        path: '/api/mcp',
+        description:
+          'MCP-Server (Streamable HTTP, zustandslos): initialize, ping, tools/list, tools/call.',
+      },
+      {
+        method: 'GET',
+        path: '/.well-known/ai-catalog.json',
+        description:
+          'ARD-Fähigkeitsmanifest — die in robots.txt deklarierte Agentmap.',
+      },
+    ],
+    mcpTitle: 'MCP-Server',
+    mcpIntro:
+      'Ein zustandsloser Model-Context-Protocol-Server über Streamable HTTP. Drei nur lesende Tools: get_init_prompt, list_site_sections und read_page. Die Protokollversionen 2025-03-26 und 2025-06-18 werden unterstützt; eine Sitzung ist nicht erforderlich.',
+    mcpCodeLabel: 'Terminal — JSON-RPC über HTTP',
+    mcpNote:
+      'Das MCP-Manifest liegt unter /.well-known/mcp.json und die Serverkarte unter /.well-known/mcp/server-card.json. Claude, ChatGPT und jeder MCP-Client können diese Tools nativ aufrufen.',
+    markdownTitle: 'Markdown für Agenten',
+    markdownIntro:
+      'Jede gerenderte Seite wird als natives Quell-Markdown veröffentlicht — nicht als HTML-Konvertierung. Fordern Sie Markdown explizit über ein URL-Suffix oder über HTTP-Content-Negotiation auf jeder Seite an.',
+    markdownCodeLabel: 'Terminal — Content-Negotiation',
+    markdownNote:
+      'Content-Negotiation liefert dasselbe Quell-Markdown, aus dem die Website rendert, in der Sprache der angeforderten URL.',
+    cliTitle: 'Das Kit installieren',
+    cliIntro:
+      'Der offizielle Installationspfad für das Deep Work Plan Skill — derselbe Befehl, den der /init-Endpunkt Agenten übergibt. Er funktioniert mit jedem Skills-kompatiblen Coding-Agenten (Claude Code, Cursor, Codex, Gemini und andere).',
+    cliCodeLabel: 'Terminal — Skills-CLI',
+    cliNote:
+      'Das Skill wird unter .agents/skills/deepworkplan/ in Ihr Repository eingebettet, sodass jeder Agent, der das Repository bearbeitet, dieselbe Methodik teilt.',
+    resourcesTitle: 'Maschinenlesbare Ressourcen',
+    resources: [
+      { label: 'OpenAPI-Spezifikation (/openapi.json)', href: '/openapi.json' },
+      {
+        label: 'Erklärung zu Agentenzugriff & Authentifizierung (/auth.md)',
+        href: '/auth.md',
+      },
+      {
+        label: 'API-Katalog, RFC 9727 (/.well-known/api-catalog)',
+        href: '/.well-known/api-catalog',
+      },
+      {
+        label: 'MCP-Manifest (/.well-known/mcp.json)',
+        href: '/.well-known/mcp.json',
+      },
+      {
+        label: 'Sicherheitskontakt (/.well-known/security.txt)',
+        href: '/.well-known/security.txt',
+      },
+      {
+        label: 'Website-Repo-Deskriptor (/.well-known/dwp.json)',
+        href: '/.well-known/dwp.json',
+      },
+    ],
+    ctaTitle: 'Richten Sie einen Agenten darauf',
+    ctaBody:
+      'Der schnellste Weg bleibt eine Zeile: Übergeben Sie einem beliebigen Coding-Agenten den /init-Prompt, und er installiert das Skill, onboardet Ihr Repository und beginnt, Deep Work abzuschließen.',
+    ctaPrimary: 'Den /init-Prompt öffnen',
+    ctaSecondary: 'Methodik lesen',
+  },
+
+  privacyPage: {
+    meta: {
+      title: 'Datenschutz — Deep Work Plan',
+      description:
+        'Die Datenschutzerklärung von deepworkplan.com: statische Website ohne Konten und Werbung, cookielose Analytik — klar erklärt, was das Kontaktformular erhebt.',
+    },
+    eyebrow: 'Datenschutzerklärung',
+    title: 'Datenschutz auf deepworkplan.com',
+    intro:
+      'Deep Work Plan ist eine statische Dokumentations- und Methodik-Website. Diese Seite erklärt klar und vollständig, welche Daten die Website bei Ihrem Besuch berührt: Es gibt kein Kontosystem, keine Werbung und nirgendwo seitenübergreifendes Tracking.',
+    lastUpdated: '8. September 2026',
+    sections: [
+      {
+        heading: 'Was die Website ist',
+        body: 'deepworkplan.com ist eine Sammlung statischer Seiten, die über ein CDN ausgeliefert werden. Es gibt keinen Login, keine Benutzerdatenbank und keine Möglichkeit für die Website, persönliche Profile zu speichern. Inhalte werden in öffentlichen GitHub-Repositories unter der DailybotHQ-Organisation entwickelt, und alles, was Sie hier lesen, wird genau so ausgeliefert, wie es gebaut wurde.',
+      },
+      {
+        heading: 'Analytik',
+        body: 'Die Website nutzt Umami, einen cookielosen, datenschutzorientierten Analytik-Dienst, um Seitenaufrufe aggregiert zu zählen. Umami setzt keine Tracking-Cookies und erstellt keine seitenübergreifenden Profile. Da KI-Crawler kein JavaScript ausführen, zeichnet eine serverseitige Edge-Funktion zusätzlich User Agent und Pfad automatisierter Bot-Besuche als anonyme Analytik-Ereignisse auf — das identifiziert Crawler-Software (zum Beispiel „GPTBot besuchte /init“), nie einen menschlichen Besucher.',
+      },
+      {
+        heading: 'Cookies und lokaler Speicher',
+        body: 'Die Website setzt keine Tracking-Cookies. Das Einzige, was in Ihrem Browser gespeichert wird, ist eine Design-Voreinstellung (hell oder dunkel) im localStorage, die Ihr Gerät nie verlässt und nirgendwo übertragen wird. Wenn Sie Ihren Browser-Speicher leeren, kehrt die Website einfach zum Design-Standard Ihres Systems zurück.',
+      },
+      {
+        heading: 'Drittanbieter-Dienste',
+        body: 'Hosting und Auslieferung laufen auf Cloudflare Pages, das Anfrage-Logs und IP-Adressen an der Edge verarbeitet — als Teil des CDN-Betriebs und der Abwehr von Missbrauch, unter Cloudflares eigener Datenschutzerklärung. Aggregierte Analytik läuft auf Umami (cloud.umami.is). Wenn Sie das Kontaktformular freiwillig absenden, werden Ihre Antworten über Google Forms an unser Team gesendet — das ist der einzige Ort, an dem Informationen erhoben werden, die Sie eingeben, und sie werden ausschließlich verwendet, um Ihnen zu antworten.',
+      },
+      {
+        heading: 'Was wir nicht tun',
+        body: 'Wir verkaufen oder geben keine personenbezogenen Daten weiter, schalten keine Werbung oder Remarketing-Pixel, erzeugen keine Browser-Fingerabdrücke und versenden keine Marketing-E-Mails. Die Website hat keine Newsletter-Anmeldung und keine Telemetrie über die oben beschriebenen aggregierten, cookielosen Zählungen hinaus.',
+      },
+      {
+        heading: 'Ihre Möglichkeiten',
+        body: 'Da die Analytik hier aggregiert und cookielos ist, gibt es kein persönliches Profil zum Exportieren oder Löschen. Sie können das Analytik-Skript mit einem beliebigen Content-Blocker blockieren, ohne die Funktionsweise der Website zu beeinträchtigen. Wenn Sie das Kontaktformular abgesendet haben und Ihre Nachricht löschen möchten, schreiben Sie an die Kontaktadresse unten — wir entfernen sie.',
+      },
+      {
+        heading: 'Änderungen an dieser Erklärung',
+        body: 'Wenn sich diese Erklärung wesentlich ändert, ändert sich das Datum oben auf dieser Seite mit, und inhaltliche Änderungen werden in das öffentliche Website-Repository committet, wo jeder die Historie einsehen kann.',
+      },
+    ],
+    contactTitle: 'Kontakt und Sicherheit',
+    contactBody:
+      'Bei Datenschutzfragen schreiben Sie an security@dailybot.com. Um eine Sicherheitslücke zu melden, nutzen Sie bevorzugt GitHubs private Schwachstellenmeldungen für die Website- und Skill-Repositories — die genauen Adressen stehen in /.well-known/security.txt.',
   },
 };

@@ -51,8 +51,11 @@ const KNOWN_BASE_PATHS = new Set([
   'quickstart',
   'init',
   'trust',
+  'developers',
+  'privacy',
   'setup',
   'onboarding',
+  'docs',
 ]);
 
 /** Root-only paths that are not per-language. */

@@ -2,9 +2,12 @@
 # https://deepworkplan.com
 
 # Default: allow all crawlers
+# /api/ is the agent API (MCP server + health) — it is public and intended
+# for AI agents, so it is NOT disallowed. /internal/ is dev-only and excluded
+# from production builds; kept here as defense-in-depth.
 User-agent: *
 Allow: /
-Disallow: /api/
+Disallow: /internal/
 Content-Signal: ai-train=yes, search=yes, ai-input=yes
 
 # Sitemap location
