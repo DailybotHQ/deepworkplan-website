@@ -2,7 +2,7 @@
   "status": "ok",
   "service": "deepworkplan.com",
   "description": "Deep Work Plan — methodology site with a read-only, zero-auth agent API: LLM guidance files, per-page Markdown mirrors, discovery documents, and an MCP server.",
-  "version": "1.0.83",
+  "version": "1.0.84",
   "links": {
     "openapi": "https://deepworkplan.com/openapi.json",
     "developers": "https://deepworkplan.com/developers",

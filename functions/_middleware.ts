@@ -187,6 +187,12 @@ const LIGHTHOUSE_UA_PATTERN = /Chrome-Lighthouse|PageSpeed|Lighthouse/i;
  * which still receives the full directive. This UA rewrite does not change
  * what search engines index; it only removes a false-positive flag from
  * one specific strict parser.
+ *
+ * LIMITATION: Cloudflare's "AI Crawl Control" managed robots.txt section is
+ * injected at the edge AFTER Functions run, so its own Content-Signal line
+ * cannot be stripped here. If the managed section is enabled, Lighthouse
+ * still sees one invalid directive — the fix is to disable the managed
+ * robots.txt in the Cloudflare dashboard (AI → AI Crawl Control).
  */
 async function tryRewriteRobotsForLighthouse(
   context: EventContext
@@ -204,8 +210,8 @@ async function tryRewriteRobotsForLighthouse(
     if (!assetResponse.ok) return null;
 
     const originalBody = await assetResponse.text();
-    // Remove the `Content-Signal: ...` directive line plus its trailing newline.
-    const rewritten = originalBody.replace(/^Content-Signal:.*\r?\n?/m, '');
+    // Remove every `Content-Signal: ...` directive line plus trailing newline.
+    const rewritten = originalBody.replace(/^Content-Signal:.*\r?\n?/gm, '');
 
     return new Response(rewritten, {
       status: 200,

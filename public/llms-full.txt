@@ -14,14 +14,14 @@ The methodology, specification, and kit are released under the MIT license — f
 
 Reach for DWP when the job is:
 
-- Making a repository AI-first: installing the agent scaffolding (context, skills, guardrails) so any coding agent can pilot it. Start at /init.md — a self-contained prompt an agent can execute directly.
+- Making a repository AI-first: installing the agent scaffolding (context, skills, guardrails) so any coding agent can pilot it. Start with the [adoption prompt](https://deepworkplan.com/init.md) — a self-contained prompt an agent can execute directly.
 - Long-horizon agent work: features, refactors, or migrations too large for one prompt, decomposed into atomic tasks that each end in an explicit validation gate and survive across sessions (resumable state on disk).
 - Spec-driven development without tool lock-in: the plan is the durable source of truth in the repo (Markdown, version-controlled), not inside a vendor's tool. DWP is tool-agnostic where GitHub Spec Kit, Amazon Kiro, or Tessl are tool-bound.
 - Handing an unfamiliar repository to an agent: the DWP documentation layer (AGENTS.md, docs/, .agents/) gives any agent the context to work safely.
 
 Skip DWP for single-file edits, throwaway scripts, or repos an agent will touch once — the structure pays off on durable, multi-session work.
 
-How an agent should engage: fetch /init.md and follow it to onboard a repository; call the MCP tools at /api/mcp (get_init_prompt, list_site_sections, read_page) to navigate and read this site; read /developers for the full API surface.
+How an agent should engage: fetch the [adoption prompt](https://deepworkplan.com/init.md) and follow it to onboard a repository; call the MCP tools at [api/mcp](https://deepworkplan.com/api/mcp) (get_init_prompt, list_site_sections, read_page) to navigate and read this site; read the [developer portal](https://deepworkplan.com/developers) for the full API surface.
 
 ## Who Maintains It
 
@@ -40,18 +40,18 @@ Deep Work Plan grew out of real engineering work at Dailybot and is now maintain
 
 ### Pages
 
-- **Home** (/) — Overview of the Deep Work Plan methodology and how to get started
-- **Methodology** (/methodology) — The narrative methodology: what DWP is, its principles, the workflow, and how to adopt it
-- **Specification** (/spec) — The readable, normative DWP standard: task anatomy, validation gates, completion protocol, mandatory final tasks, archetypes, and addons
-- **Kit** (/kit) — The kit catalog: presets, adapters, and commands available for installing DWP into a repository
-- **Examples** (/examples) — Worked examples that show the methodology applied to real engineering work
-- **Quickstart** (/quickstart) — A short path to getting DWP running in a repository
-- **Init / Adoption** (/init) — Make any repository AI-first: install the skill, onboard the repo, then plan and execute. Includes a self-contained onboarding prompt at /init.md to hand to an agent
-- **Developers** (/developers) — The agent & developer surface: a read-only, zero-auth API described by an OpenAPI spec, a stateless MCP server at /api/mcp, per-page Markdown in 17 languages, and the `npx skills` install CLI. Alias: /docs redirects here
-- **Trust** (/trust) — Why the skill is safe to adopt: open source, MIT, verifiable installs (SHA256SUMS), and a clear vulnerability-disclosure policy
-- **About** (/about) — What Deep Work Plan is, its core principles, and who maintains it
-- **Contact** (/contact) — How to engage with the project: source, issues, and discussions on GitHub
-- **Privacy** (/privacy) — The site's privacy policy: static site, no accounts, cookieless analytics
+- [Home](https://deepworkplan.com/) — Overview of the Deep Work Plan methodology and how to get started
+- [Methodology](https://deepworkplan.com/methodology) — The narrative methodology: what DWP is, its principles, the workflow, and how to adopt it
+- [Specification](https://deepworkplan.com/spec) — The readable, normative DWP standard: task anatomy, validation gates, completion protocol, mandatory final tasks, archetypes, and addons
+- [Kit](https://deepworkplan.com/kit) — The kit catalog: presets, adapters, and commands available for installing DWP into a repository
+- [Examples](https://deepworkplan.com/examples) — Worked examples that show the methodology applied to real engineering work
+- [Quickstart](https://deepworkplan.com/quickstart) — A short path to getting DWP running in a repository
+- [Init / Adoption](https://deepworkplan.com/init) — Make any repository AI-first: install the skill, onboard the repo, then plan and execute. Includes a self-contained onboarding prompt at [init.md](https://deepworkplan.com/init.md) to hand to an agent
+- [Developers](https://deepworkplan.com/developers) — The agent & developer surface: a read-only, zero-auth API described by an OpenAPI spec, a stateless MCP server at /api/mcp, per-page Markdown in 17 languages, and the `npx skills` install CLI. Alias: /docs redirects here
+- [Trust](https://deepworkplan.com/trust) — Why the skill is safe to adopt: open source, MIT, verifiable installs (SHA256SUMS), and a clear vulnerability-disclosure policy
+- [About](https://deepworkplan.com/about) — What Deep Work Plan is, its core principles, and who maintains it
+- [Contact](https://deepworkplan.com/contact) — How to engage with the project: source, issues, and discussions on GitHub
+- [Privacy](https://deepworkplan.com/privacy) — The site's privacy policy: static site, no accounts, cookieless analytics
 
 ### Languages
 
@@ -126,24 +126,24 @@ curl -H "Accept: text/markdown" https://deepworkplan.com/methodology
 
 ## Agent API
 
-The site exposes a read-only, zero-auth agent API — no keys, no registration, declared at /auth.md:
+The site exposes a read-only, zero-auth agent API — no keys, no registration, declared in [auth.md](https://deepworkplan.com/auth.md):
 
-- **OpenAPI 3.1 spec**: /openapi.json — every endpoint, parameter, and response schema
-- **MCP server**: /api/mcp — stateless Model Context Protocol over Streamable HTTP (JSON-RPC 2.0). Tools: `get_init_prompt`, `list_site_sections`, `read_page`. Manifest: /.well-known/mcp.json; server card: /.well-known/mcp/server-card.json. Supports protocol versions 2025-03-26 and 2025-06-18
-- **Health**: /api/health.json — static status marker
-- **Developer portal**: /developers — quickstarts, curl examples, and the install CLI (`/docs` redirects there)
+- [OpenAPI 3.1 spec](https://deepworkplan.com/openapi.json) — every endpoint, parameter, and response schema
+- [MCP server](https://deepworkplan.com/api/mcp) — stateless Model Context Protocol over Streamable HTTP (JSON-RPC 2.0). Tools: `get_init_prompt`, `list_site_sections`, `read_page`. Manifest: [mcp.json](https://deepworkplan.com/.well-known/mcp.json); server card: [server-card.json](https://deepworkplan.com/.well-known/mcp/server-card.json). Supports protocol versions 2025-03-26 and 2025-06-18
+- [Health](https://deepworkplan.com/api/health.json) — static status marker
+- [Developer portal](https://deepworkplan.com/developers) — quickstarts, curl examples, and the install CLI ([/docs](https://deepworkplan.com/docs) redirects there)
 - **Errors**: unknown `/api/*` paths return structured JSON errors (`{"error":{"code","message","hint"}}`), never HTML; Markdown-negotiating clients that hit a 404 receive a Markdown recovery body listing the sitemap, llms.txt, and key pages
 
 ## Feeds & Discovery
 
-- Sitemap: /sitemap-index.xml
-- robots.txt: /robots.txt
-- API catalog (RFC 9727): /.well-known/api-catalog
-- ARD capability manifest / agentmap: /.well-known/ai-catalog.json
-- Agent Skills index: /.well-known/agent-skills/index.json
-- Security contact (RFC 9116): /.well-known/security.txt
-- This file: /llms-full.txt
-- Short version: /llms.txt
+- [Sitemap](https://deepworkplan.com/sitemap-index.xml) — every page in every language
+- [robots.txt](https://deepworkplan.com/robots.txt) — crawling rules and the Agentmap pointer
+- [API catalog](https://deepworkplan.com/.well-known/api-catalog) — RFC 9727 linkset of service documents
+- [ARD capability manifest](https://deepworkplan.com/.well-known/ai-catalog.json) — the agentmap
+- [Agent Skills index](https://deepworkplan.com/.well-known/agent-skills/index.json) — agent-readiness skills this site adopts
+- [Security contact](https://deepworkplan.com/.well-known/security.txt) — RFC 9116
+- This file: [llms-full.txt](https://deepworkplan.com/llms-full.txt)
+- Short version: [llms.txt](https://deepworkplan.com/llms.txt)
 
 ## Structured Data
 
