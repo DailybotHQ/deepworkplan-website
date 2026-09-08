@@ -69,10 +69,9 @@ Payload походять із шару стану плану (`state.json`), я�
 
 | Компонент | Команда / шлях |
 |-----------|----------------|
-| **Агентський скіл Dailybot** (рекомендовано) | `npx skills add DailybotHQ/agent-skill` |
-| **Оновлення наявного скілу** | `npx skills update dailybot` |
+| **Агентський скіл Dailybot** (рекомендовано) | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Оновлення наявного скілу** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Git clone** | `git clone https://github.com/DailybotHQ/agent-skill.git` + `./setup.sh` |
 | **Dailybot CLI** (мінімум `>= 3.7.0`) | Встановлюється скілом при першому використанні через `shared/auth.md`; або `pip install 'dailybot-cli>=3.7.0'`, Homebrew чи installer з перевіркою checksum на [cli.dailybot.com](https://cli.dailybot.com) |
 
 Перевірка версій: `dailybot --version` і `dailybot version --check`. Оновлення: `dailybot upgrade`.

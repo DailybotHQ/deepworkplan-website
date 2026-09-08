@@ -69,10 +69,9 @@ order: 2
 
 | Компонент | Команда / путь |
 |-----------|----------------|
-| **Навык агента Dailybot** (рекомендуется) | `npx skills add DailybotHQ/agent-skill` |
-| **Обновление существующего навыка** | `npx skills update dailybot` |
+| **Навык агента Dailybot** (рекомендуется) | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Обновление существующего навыка** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Git clone** | `git clone https://github.com/DailybotHQ/agent-skill.git` + `./setup.sh` |
 | **Dailybot CLI** (минимум `>= 3.7.0`) | Устанавливается навыком при первом использовании через проверенный `shared/auth.md`; или `pip install 'dailybot-cli>=3.7.0'`, Homebrew, или установщик с проверкой контрольной суммы на [cli.dailybot.com](https://cli.dailybot.com) |
 
 Проверка версий: `dailybot --version` и `dailybot version --check`. Обновление: `dailybot upgrade`.

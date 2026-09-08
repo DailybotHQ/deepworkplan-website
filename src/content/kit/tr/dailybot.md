@@ -69,10 +69,9 @@ Eklenti kurulum yollarını **sunar**; Dailybot skill onay ve doğrulamayı yön
 
 | Bileşen | Komut / yol |
 |-----------|----------------|
-| **Dailybot agent skill** (önerilen) | `npx skills add DailybotHQ/agent-skill` |
-| **Mevcut skill'i güncelle** | `npx skills update dailybot` |
+| **Dailybot agent skill** (önerilen) | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Mevcut skill'i güncelle** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Git clone** | `git clone https://github.com/DailybotHQ/agent-skill.git` + `./setup.sh` |
 | **Dailybot CLI** (minimum `>= 3.7.0`) | İlk kullanımda skill tarafından doğrulanmış `shared/auth.md` ile kurulur; veya `pip install 'dailybot-cli>=3.7.0'`, Homebrew veya [cli.dailybot.com](https://cli.dailybot.com)'daki checksum doğrulanmış yükleyici |
 
 Sürümleri kontrol et: `dailybot --version` ve `dailybot version --check`. Yükseltme: `dailybot upgrade`.
