@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-addon-dailybot
 description: Optional DeepWorkPlan addon that connects an AI-first repo to the developer's Dailybot team — installing (with consent) the Dailybot agent skill (DailybotHQ/agent-skill, currently 3.10.3) and/or the Dailybot CLI (DailybotHQ/cli, >= 3.7.0), wiring the plan lifecycle into best-effort agent updates - kickoff when a plan starts, significant task completions, a blocked report when an unattended run halts, and a milestone on plan completion - with payloads derived from the plan's state layer, and optionally committing the Dailybot skill's deterministic hook enforcement (dailybot hook lifecycle hooks) so the agent harness itself reminds agents about unreported work. Opt-in, never required, never blocks the work, reconciles existing setups instead of clobbering them, and defers all auth to the Dailybot skill's own consent flow. Use when the developer or team already uses Dailybot and wants DWP progress visible to humans.
-version: "2.17.0"
+version: "2.17.1"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -54,6 +54,26 @@ everyone.
 - **Directly** — `/deepworkplan-addon-dailybot` on an already-onboarded repo to
   add the Dailybot integration.
 
+## Trust boundary (write scope)
+
+`allowed-tools` includes write-capable `Edit`, `Write`, and `Bash`. Everything
+this addon may write is enumerated below; anything not listed does not happen.
+
+**Writes (only after the developer accepts the relevant step):**
+
+- The Dailybot skill install itself (tag-pinned, consent-gated — Step 1) into
+  the agent's skills directory and `skills-lock.json`.
+- A short reporting note in the repo's DWP execution docs (`AGENTS.md` section
+  and/or `docs/AI_AGENT_COLLAB.md`), merged — never over an existing section.
+- Optionally, a credential-free repo identity (`.dailybot/profile.json` or the
+  `example` template) and the harness hook config (Step 3b, shown verbatim
+  before writing, merged into existing config files).
+
+**It MUST NOT:** prompt for or store credentials (auth belongs to the Dailybot
+skill's `shared/auth.md` consent flow), write a `key` field into any committed
+file, install anything unpinned or unprompted, block any DWP flow when Dailybot
+is absent/unreachable, or imply the core methodology needs Dailybot.
+
 ## The flow
 
 ### Step 0 — Consent + recommend-only-if-relevant
@@ -81,10 +101,20 @@ flow applies, defer to it rather than prompting yourself.
 
 - **Dailybot agent skill** (the recommended path — it brings the consent/auth
   flow and the full 14-capability pack; currently **3.10.3**):
-  - `npx skills add DailybotHQ/agent-skill` (cross-agent, recommended), or
-  - `npx skills update dailybot` when already installed, or
-  - OpenClaw native: `openclaw skills install dailybot`, or
-  - `git clone https://github.com/DailybotHQ/agent-skill.git` + run its `setup.sh`.
+  - `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y`
+    (cross-agent, recommended — **pinned to a published tag** so the exact
+    content is reproducible; both `--yes` and `-y` are required in non-TTY
+    contexts), or
+  - OpenClaw native: `openclaw skills install dailybot` (registry-managed,
+    records its own pin), or
+  - `npx --yes skills update dailybot -y` when already installed.
+
+  > **Always pin and verify.** Installs are developer-consented, pinned to a
+  > tag, and recorded (source + content hash) in the repo's `skills-lock.json`
+  > by the `skills` CLI. Do not offer unpinned clone-and-run variants of a
+  > skill repo — executing whatever a remote default branch currently holds is
+  > an unverifiable fetch-and-execute dependency (the shape Snyk W012 / Socket
+  > flag), with no version, no checksum, and no rollback path.
 - **Dailybot CLI** (the underlying bridge, from
   [`DailybotHQ/cli`](https://github.com/DailybotHQ/cli); minimum **`>= 3.7.0`**
   for the whole skill pack; the skill installs it on first use via its own

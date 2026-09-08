@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-verify
 description: Verify that a repository is DeepWorkPlan-conformant (AI-first) and that its plans are well-formed, producing an objective pass/fail report. Use when the developer asks to verify, audit, or check conformance of a repo or a plan.
-version: "2.17.0"
+version: "2.17.1"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob
@@ -43,6 +43,16 @@ top — the script verifies *structure*; you verify *substance*.
 - `/dwp-verify` — verify the repository (the default).
 - `/dwp-verify plan {name}` — also verify a specific plan's well-formedness.
 - `/dwp-verify all` — verify the repository and every plan under `.dwp/plans/`.
+
+## Trust boundary (write scope)
+
+This skill is **read-only by contract**. `allowed-tools` lists `Bash` (to run
+the repo's own read-only inspection and validation commands), not `Edit` or
+`Write`: verification produces a **report**, never a repair.
+
+**It MUST NOT:** create, modify, or delete any file; "fix" a failing criterion;
+or let a failed check silently pass. Findings are reported with evidence and
+fixed through the proper sub-skill (`onboard`, `refine`, or a plan).
 
 ## The overriding rule
 

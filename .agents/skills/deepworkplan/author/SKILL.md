@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-author
 description: Author or update reusable skills, agents, and commands in the current repo — reason about the repo's .agents/ layout, follow the Open Agent Skills frontmatter contract, and keep the .agents/docs/ catalog in sync. Use when a developer wants to create or evolve the repo's agent kit (skills, agents, commands), or runs /skill-create or /agent-create.
-version: "2.17.0"
+version: "2.17.1"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -52,6 +52,20 @@ ls AGENTS.md CLAUDE.md 2>/dev/null
 
 If the repo has no `.agents/` layout yet, route the developer to the **onboard** sub-skill first
 (`onboard/SKILL.md`) — onboarding scaffolds the directories this sub-skill writes into.
+
+## Trust boundary (write scope)
+
+`allowed-tools` includes write-capable `Edit`, `Write`, and `Bash`.
+
+**Writes:** new or updated files **only** under the repo's `.agents/` kit —
+`skills/*/SKILL.md`, `agents/*.md`, `commands/*.md`, `docs/` catalogs — plus the
+catalog index entries that keep them discoverable. Broad additions (a new skill
+family, restructuring the kit) are proposed to the developer before creation.
+
+**It MUST NOT:** edit files outside `.agents/` (a skill's *content* may
+document anything; this sub-skill writes only kit files), weaken the frontmatter
+conventions (`name`, quoted `version:`, `documentation_url`, kebab-case), delete
+an existing skill/agent/command without explicit approval, or commit/push.
 
 ---
 
