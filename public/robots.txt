@@ -10,6 +10,9 @@ Content-Signal: ai-train=yes, search=yes, ai-input=yes
 # Sitemap location
 Sitemap: https://deepworkplan.com/sitemap-index.xml
 
+# ARD capability manifest for agents (agenticresourcediscovery.org)
+Agentmap: https://deepworkplan.com/.well-known/ai-catalog.json
+
 # LLM guidance files
 # https://deepworkplan.com/llms.txt
 # https://deepworkplan.com/llms-full.txt

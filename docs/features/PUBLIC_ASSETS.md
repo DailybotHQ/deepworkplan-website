@@ -43,7 +43,7 @@ public/
 | `site.webmanifest` | PWA metadata and icons |
 | `openapi.json` | Machine-readable API description |
 | `_headers`, `_redirects` | Cloudflare Pages headers and redirects |
-| `.well-known/` | Agent skills, MCP, and OAuth discovery files |
+| `.well-known/` | Agent skills, ARD catalog, MCP, and OAuth discovery files |
 
 ### Fonts
 
