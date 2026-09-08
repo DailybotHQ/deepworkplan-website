@@ -69,10 +69,9 @@ Addon **menawarkan** jalur instalasi; skill Dailybot mengelola persetujuan dan v
 
 | Komponen | Perintah / jalur |
 |-----------|----------------|
-| **Skill agen Dailybot** (direkomendasikan) | `npx skills add DailybotHQ/agent-skill` |
-| **Perbarui skill yang ada** | `npx skills update dailybot` |
+| **Skill agen Dailybot** (direkomendasikan) | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Perbarui skill yang ada** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Git clone** | `git clone https://github.com/DailybotHQ/agent-skill.git` + `./setup.sh` |
 | **Dailybot CLI** (minimum `>= 3.7.0`) | Diinstal oleh skill saat penggunaan pertama melalui `shared/auth.md` terverifikasi; atau `pip install 'dailybot-cli>=3.7.0'`, Homebrew, atau installer terverifikasi checksum di [cli.dailybot.com](https://cli.dailybot.com) |
 
 Periksa versi: `dailybot --version` dan `dailybot version --check`. Upgrade: `dailybot upgrade`.

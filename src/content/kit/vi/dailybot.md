@@ -69,10 +69,9 @@ Addon **đề xuất** đường cài đặt; skill Dailybot sở hữu đồng 
 
 | Thành phần | Lệnh / đường dẫn |
 |-----------|----------------|
-| **Skill agent Dailybot** (khuyến nghị) | `npx skills add DailybotHQ/agent-skill` |
-| **Cập nhật skill hiện có** | `npx skills update dailybot` |
+| **Skill agent Dailybot** (khuyến nghị) | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Cập nhật skill hiện có** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Git clone** | `git clone https://github.com/DailybotHQ/agent-skill.git` + `./setup.sh` |
 | **Dailybot CLI** (tối thiểu `>= 3.7.0`) | Skill cài ở lần dùng đầu qua `shared/auth.md` đã xác minh; hoặc `pip install 'dailybot-cli>=3.7.0'`, Homebrew hoặc trình cài đã xác minh checksum tại [cli.dailybot.com](https://cli.dailybot.com) |
 
 Kiểm tra phiên bản: `dailybot --version` và `dailybot version --check`. Nâng cấp: `dailybot upgrade`.
