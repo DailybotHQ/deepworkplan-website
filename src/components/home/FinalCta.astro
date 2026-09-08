@@ -41,6 +41,14 @@ const f = t.home.finalCta;
           {f.secondaryCta}
         </a>
       </div>
+      <a
+        href={`${prefix}/developers`}
+        class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-80"
+        style="color: var(--color-secondary);"
+      >
+        {f.tertiaryCta}
+        <span aria-hidden="true">&rarr;</span>
+      </a>
       <p class="fig-caption mt-6" style="font-family: var(--font-mono);">{f.meta}</p>
     </div>
   </div>

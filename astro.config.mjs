@@ -32,6 +32,15 @@ const adoptionRedirects = Object.fromEntries(
   })
 );
 
+// /developers is the agent & developer portal; /docs is a predictable alias
+// agents and humans try first. Same per-language pattern as adoptionRedirects.
+const docsRedirects = Object.fromEntries(
+  LANGUAGE_CODES.map((code) => {
+    const prefix = code === DEFAULT_LANGUAGE_CODE ? '' : `/${code}`;
+    return [`${prefix}/docs`, { status: 301, destination: `${prefix}/developers` }];
+  })
+);
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://deepworkplan.com',
@@ -41,7 +50,7 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
-  redirects: adoptionRedirects,
+  redirects: { ...adoptionRedirects, ...docsRedirects },
   // Sätteri (Rust) is the Astro 7 default Markdown/MDX pipeline. Custom hast
   // plugins restore external-link target/rel and responsive table wrappers.
   markdown: {

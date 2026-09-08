@@ -57,6 +57,48 @@
         "where is the machine-readable catalog of deepworkplan.com",
         "list the service documents this site publishes"
       ]
+    },
+    {
+      "identifier": "urn:air:deepworkplan.com:spec:openapi",
+      "displayName": "OpenAPI Specification (Deep Work Plan Agent API)",
+      "type": "application/openapi+json",
+      "url": "https://deepworkplan.com/openapi.json",
+      "representativeQueries": [
+        "what endpoints does deepworkplan.com expose",
+        "openapi spec for the deepworkplan agent api",
+        "what is the API surface of Deep Work Plan"
+      ]
+    },
+    {
+      "identifier": "urn:air:deepworkplan.com:server:mcp",
+      "displayName": "MCP Server (Streamable HTTP)",
+      "type": "application/json",
+      "url": "https://deepworkplan.com/api/mcp",
+      "representativeQueries": [
+        "call deepworkplan.com from Claude or an MCP client",
+        "read Deep Work Plan pages as markdown through tools"
+      ]
+    },
+    {
+      "identifier": "urn:air:deepworkplan.com:page:developers",
+      "displayName": "Developer & Agent Portal (/developers)",
+      "type": "text/markdown",
+      "url": "https://deepworkplan.com/developers.md",
+      "representativeQueries": [
+        "deepworkplan developer documentation",
+        "how do agents integrate with Deep Work Plan",
+        "deepworkplan api quickstart and mcp examples"
+      ]
+    },
+    {
+      "identifier": "urn:air:deepworkplan.com:document:privacy",
+      "displayName": "Privacy Policy (/privacy)",
+      "type": "text/markdown",
+      "url": "https://deepworkplan.com/privacy.md",
+      "representativeQueries": [
+        "what is the privacy policy of deepworkplan.com",
+        "does deepworkplan use cookies or trackers"
+      ]
     }
   ]
 }

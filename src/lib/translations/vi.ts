@@ -29,6 +29,8 @@ export const vi: SiteTranslations = {
     init: 'Init',
     quickstart: 'Khởi động nhanh',
     trust: 'Tin tưởng',
+    developers: 'Nhà phát triển',
+    privacy: 'Quyền riêng tư',
     github: 'GitHub',
     repo: {
       label: 'Mã nguồn',
@@ -360,6 +362,7 @@ export const vi: SiteTranslations = {
         'Trao cho agent của bạn một dòng — trỏ nó vào /init.md — và nó biến repository của bạn thành AI-first: nó cài skill, suy luận về stack của bạn và commit một hệ thống AGENTS.md hoàn chỉnh. Từ đó bạn tạo và thực thi các Deep Work Plan chạy tự chủ trong nhiều giờ.',
       primaryCta: 'Mở lời nhắc /init',
       secondaryCta: 'Đọc phương pháp luận',
+      tertiaryCta: 'Dành cho agent và nhà phát triển',
       meta: 'Cấp phép MIT · không telemetry · xuất ra thư mục .dwp/ được gitignore.',
     },
   },
@@ -505,6 +508,9 @@ export const vi: SiteTranslations = {
       'Xin lỗi, trang bạn đang tìm không tồn tại hoặc có thể đã được di chuyển. Hãy thử quay về trang chủ hoặc khám phá phương pháp luận.',
     backHome: 'Quay về trang chủ',
     exploreMethodology: 'Đọc phương pháp luận',
+    agentTitle: 'Dành cho AI agent',
+    agentIntro:
+      'Đường dẫn này không tồn tại. Các liên kết khôi phục bên dưới (và các bản tương đương máy có thể đọc được của chúng) liệt kê mọi trang trên trang web này.',
   },
 
   // Deep Work Plan — Methodology index + chapter reader
@@ -792,5 +798,180 @@ export const vi: SiteTranslations = {
       'Đọc phương pháp luận và đặc tả, trỏ một agent vào endpoint init và xác minh quá trình cài đặt trước khi bạn chạy nó.',
     ctaPrimary: 'Đọc phương pháp luận',
     ctaSecondary: 'Áp dụng (init)',
+  },
+
+  developersPage: {
+    meta: {
+      title:
+        'Nhà phát triển — API agent, máy chủ MCP và tài liệu của Deep Work Plan',
+      description:
+        'Bề mặt agent của Deep Work Plan: API chỉ đọc, không cần xác thực kèm đặc tả OpenAPI, máy chủ MCP tại /api/mcp, Markdown theo từng trang bằng 17 ngôn ngữ, và CLI cài đặt npx skills.',
+    },
+    eyebrow: 'Bề mặt agent và nhà phát triển',
+    title: 'Deep Work Plan dành cho nhà phát triển và AI agent',
+    intro:
+      'deepworkplan.com cung cấp một bề mặt máy có thể đọc được song song với các trang của mình: API agent được mô tả bằng OpenAPI, máy chủ MCP không trạng thái, bản mirror Markdown gốc cho mọi trang bằng 17 ngôn ngữ, và skill DWP có thể cài đặt. Mọi thứ trên trang này đều trực tiếp công khai và miễn phí — không có gì phải đăng ký.',
+    accessTitle: 'Không cần xác thực theo thiết kế',
+    accessIntro:
+      'Không có API key để tạo, không quy trình OAuth, và không có sandbox tách biệt khỏi sản xuất — chính bề mặt sản xuất là sandbox. Đây là một thuộc tính có chủ đích của phương pháp luận: agent không thể điền vào biểu mẫu "liên hệ bộ phận bán hàng", nên trang web không bao giờ yêu cầu điều đó.',
+    accessPoints: [
+      {
+        title: 'Chỉ đọc',
+        body: 'Mọi thao tác đều là GET an toàn, có thể lưu đệm — ngoại lệ duy nhất là endpoint MCP, dùng POST. Không có thao tác ghi, tải lên hay thay đổi trạng thái ở bất kỳ đâu.',
+      },
+      {
+        title: 'Không cần API key',
+        body: 'Không đăng ký, không token, không phân tầng giới hạn tốc độ. Truy cập ẩn danh là hợp đồng được tài liệu hóa, được khai báo trong /auth.md và các stub khám phá OAuth.',
+      },
+      {
+        title: 'Miễn phí và mã nguồn mở',
+        body: 'Nội dung trang web và skill DWP đều theo giấy phép MIT. Hãy dùng chúng trong công việc thương mại và phi thương mại mà không cần xin phép.',
+      },
+      {
+        title: 'Máy trước',
+        body: 'Lỗi JSON có cấu trúc trên các đường dẫn /api, phần thân khôi phục 404 bằng Markdown, danh mục API RFC 9727, và manifest năng lực ARD — được xây dựng cho agent tiêu thụ.',
+      },
+    ],
+    endpointsTitle: 'Các endpoint',
+    endpointsIntro:
+      'Các endpoint cốt lõi của API agent. Đặc tả hoàn chỉnh, có kiểu — mọi thao tác, tham số và schema phản hồi — nằm trong tài liệu OpenAPI.',
+    endpointsNote:
+      'Các đường dẫn /api/* không xác định trả về lỗi JSON có cấu trúc kèm gợi ý giải quyết, không bao giờ trả về trang lỗi HTML.',
+    endpoints: [
+      {
+        method: 'GET',
+        path: '/openapi.json',
+        description: 'Đặc tả OpenAPI 3.1 của toàn bộ API agent.',
+      },
+      {
+        method: 'GET',
+        path: '/llms.txt',
+        description:
+          'Chỉ mục hướng dẫn LLM được tuyển chọn — điểm vào được khuyến nghị cho agent.',
+      },
+      {
+        method: 'GET',
+        path: '/init.md',
+        description:
+          'Lời nhắc áp dụng DWP chính tắc (biến mọi repository thành AI-first).',
+      },
+      {
+        method: 'GET',
+        path: '/{page}.md',
+        description:
+          'Bất kỳ trang nào dưới dạng Markdown nguồn gốc — bằng cả 17 ngôn ngữ (ví dụ /es/developers.md).',
+      },
+      {
+        method: 'GET',
+        path: '/api/health.json',
+        description:
+          'Dấu hiệu trạng thái tĩnh kèm liên kết đến đặc tả và cổng thông tin này.',
+      },
+      {
+        method: 'POST',
+        path: '/api/mcp',
+        description:
+          'Máy chủ MCP (Streamable HTTP, không trạng thái): initialize, ping, tools/list, tools/call.',
+      },
+      {
+        method: 'GET',
+        path: '/.well-known/ai-catalog.json',
+        description:
+          'Manifest năng lực ARD — agentmap được khai báo trong robots.txt.',
+      },
+    ],
+    mcpTitle: 'Máy chủ MCP',
+    mcpIntro:
+      'Máy chủ Model Context Protocol không trạng thái qua Streamable HTTP. Ba công cụ chỉ đọc: get_init_prompt, list_site_sections, và read_page. Hỗ trợ phiên bản giao thức 2025-03-26 và 2025-06-18; không cần phiên làm việc.',
+    mcpCodeLabel: 'Terminal — JSON-RPC qua HTTP',
+    mcpNote:
+      'Manifest MCP nằm tại /.well-known/mcp.json và thẻ máy chủ tại /.well-known/mcp/server-card.json. Claude, ChatGPT và bất kỳ client MCP nào cũng có thể gọi các công cụ này một cách tự nhiên.',
+    markdownTitle: 'Markdown dành cho agent',
+    markdownIntro:
+      'Mỗi trang được kết xuất đều được xuất bản dưới dạng Markdown nguồn gốc — không phải chuyển đổi từ HTML. Hãy yêu cầu Markdown một cách tường minh bằng hậu tố URL hoặc qua đàm phán nội dung HTTP trên bất kỳ trang nào.',
+    markdownCodeLabel: 'Terminal — đàm phán nội dung',
+    markdownNote:
+      'Đàm phán nội dung trả về đúng phần Markdown nguồn mà trang web dùng để kết xuất, bằng ngôn ngữ của URL bạn yêu cầu.',
+    cliTitle: 'Cài đặt bộ kit',
+    cliIntro:
+      'Đường dẫn cài đặt chính thức cho skill Deep Work Plan — cùng một lệnh mà endpoint /init đưa cho agent. Nó hoạt động với bất kỳ coding agent tương thích skills nào (Claude Code, Cursor, Codex, Gemini và các agent khác).',
+    cliCodeLabel: 'Terminal — skills CLI',
+    cliNote:
+      'Skill được vendor vào .agents/skills/deepworkplan/ bên trong repository của bạn, nên mọi agent chạm đến repo đều dùng chung một phương pháp luận.',
+    resourcesTitle: 'Tài nguyên máy có thể đọc được',
+    resources: [
+      { label: 'Đặc tả OpenAPI (/openapi.json)', href: '/openapi.json' },
+      {
+        label: 'Tuyên bố truy cập và xác thực agent (/auth.md)',
+        href: '/auth.md',
+      },
+      {
+        label: 'Danh mục API, RFC 9727 (/.well-known/api-catalog)',
+        href: '/.well-known/api-catalog',
+      },
+      {
+        label: 'Manifest MCP (/.well-known/mcp.json)',
+        href: '/.well-known/mcp.json',
+      },
+      {
+        label: 'Liên hệ bảo mật (/.well-known/security.txt)',
+        href: '/.well-known/security.txt',
+      },
+      {
+        label: 'Bộ mô tả repo trang web (/.well-known/dwp.json)',
+        href: '/.well-known/dwp.json',
+      },
+    ],
+    ctaTitle: 'Trỏ một agent vào nó',
+    ctaBody:
+      'Con đường nhanh nhất vẫn là một dòng: đưa lời nhắc /init cho bất kỳ coding agent nào và nó sẽ cài skill, onboard repository của bạn, và bắt đầu hoàn thành deep work.',
+    ctaPrimary: 'Mở lời nhắc /init',
+    ctaSecondary: 'Đọc phương pháp luận',
+  },
+
+  privacyPage: {
+    meta: {
+      title: 'Quyền riêng tư — Deep Work Plan',
+      description:
+        'Chính sách quyền riêng tư của deepworkplan.com: trang web tĩnh không tài khoản, không quảng cáo, phân tích không dùng cookie, và giải thích thẳng thắn chính xác biểu mẫu liên hệ thu thập những gì.',
+    },
+    eyebrow: 'Chính sách quyền riêng tư',
+    title: 'Quyền riêng tư trên deepworkplan.com',
+    intro:
+      'Deep Work Plan là một trang web tài liệu và phương pháp luận tĩnh. Trang này giải thích, một cách thẳng thắn và đầy đủ, dữ liệu nào trang web chạm đến khi bạn ghé thăm: không có hệ thống tài khoản, không quảng cáo, và không có theo dõi xuyên trang nào trong toàn bộ trang web.',
+    lastUpdated: 'Ngày 8 tháng 9 năm 2026',
+    sections: [
+      {
+        heading: 'Trang web này là gì',
+        body: 'deepworkplan.com là một tập hợp các trang tĩnh được phục vụ qua CDN. Không có đăng nhập, không có cơ sở dữ liệu người dùng, và không có cách nào để trang web lưu hồ sơ cá nhân. Nội dung được phát triển trong các repository GitHub công khai dưới tổ chức DailybotHQ, và mọi thứ bạn đọc ở đây đều được phục vụ đúng như đã xây dựng.',
+      },
+      {
+        heading: 'Phân tích',
+        body: 'Trang web dùng Umami, một dịch vụ phân tích không cookie, đặt quyền riêng tư lên trước, để đếm lượt xem trang một cách tổng hợp. Umami không đặt cookie theo dõi và không xây hồ sơ xuyên trang. Vì các trình thu thập AI không chạy JavaScript, một hàm edge phía máy chủ còn ghi lại user agent và đường dẫn của các lượt ghé thăm bot tự động dưới dạng sự kiện phân tích ẩn danh — điều này nhận diện phần mềm thu thập (ví dụ "GPTBot đã ghé /init"), không bao giờ nhận diện khách truy cập là người.',
+      },
+      {
+        heading: 'Cookie và bộ nhớ cục bộ',
+        body: 'Trang web không đặt cookie theo dõi. Điều duy nhất được lưu trong trình duyệt của bạn là tùy chọn giao diện (chế độ sáng hoặc tối) giữ trong localStorage, vốn không bao giờ rời khỏi thiết bị của bạn và không được truyền đi đâu. Nếu bạn xóa bộ nhớ trình duyệt, trang web đơn giản quay về giao diện mặc định của hệ thống.',
+      },
+      {
+        heading: 'Dịch vụ bên thứ ba',
+        body: 'Việc lưu trữ và phân phối chạy trên Cloudflare Pages, vốn xử lý nhật ký yêu cầu và địa chỉ IP tại edge như một phần vận hành CDN và chặn lạm dụng, theo chính sách quyền riêng tư của chính Cloudflare. Phân tích tổng hợp chạy trên Umami (cloud.umami.is). Nếu bạn tự nguyện gửi biểu mẫu liên hệ, câu trả lời của bạn được gửi qua Google Forms đến đội ngũ của chúng tôi — đó là nơi duy nhất thông tin bạn gõ được thu thập, và nó chỉ được dùng để trả lời bạn.',
+      },
+      {
+        heading: 'Những gì chúng tôi không làm',
+        body: 'Chúng tôi không bán hay chia sẻ dữ liệu cá nhân, không chạy quảng cáo hay pixel tiếp thị lại, không lấy dấu vân tay trình duyệt, và không gửi email tiếp thị. Trang web không có đăng ký bản tin và không có telemetry nào vượt quá các phép đếm tổng hợp, không cookie đã mô tả ở trên.',
+      },
+      {
+        heading: 'Lựa chọn của bạn',
+        body: 'Vì phân tích ở đây mang tính tổng hợp và không dùng cookie, không có hồ sơ cá nhân nào để xuất hay xóa. Bạn có thể chặn tập lệnh phân tích bằng bất kỳ trình chặn nội dung nào mà không ảnh hưởng đến cách trang web hoạt động. Nếu bạn đã gửi biểu mẫu liên hệ và muốn xóa tin nhắn của mình, hãy viết đến địa chỉ liên hệ bên dưới và chúng tôi sẽ xóa nó.',
+      },
+      {
+        heading: 'Thay đổi chính sách',
+        body: 'Nếu chính sách này thay đổi đáng kể, ngày cập nhật ở đầu trang này thay đổi theo, và các chỉnh sửa thực chất được commit vào repository trang web công khai, nơi bất kỳ ai cũng có thể xem lại lịch sử.',
+      },
+    ],
+    contactTitle: 'Liên hệ và bảo mật',
+    contactBody:
+      'Về câu hỏi quyền riêng tư, hãy viết đến security@dailybot.com. Để báo cáo lỗ hổng bảo mật, hãy ưu tiên tính năng báo cáo lỗ hổng riêng tư của GitHub cho các repository trang web và skill — xem /.well-known/security.txt để biết địa chỉ chính xác.',
   },
 };

@@ -1,7 +1,7 @@
 /**
  * Cloudflare Pages Middleware — AI Bot Analytics & Markdown Content Negotiation
  *
- * Two responsibilities:
+ * Three responsibilities:
  *
  * 1. **Markdown for Agents**: If a request sends `Accept: text/markdown`,
  *    serves the static `.md` version of the page (if it exists) instead of HTML.
@@ -12,8 +12,18 @@
  *    and tracks them server-side to Umami (AI bots don't execute JavaScript,
  *    so client-side analytics are invisible to them).
  *
+ * 3. **Agent-friendly errors** (post-processing): API paths never serve HTML
+ *    errors — unknown /api/* paths get a structured JSON error body — and
+ *    Markdown-negotiating clients that hit a 404 receive a short Markdown
+ *    recovery body pointing at the sitemap, llms.txt, and /developers.
+ *
  * Non-bot, non-markdown requests pass through with zero overhead.
  */
+import {
+  buildAgentRecoveryMarkdown,
+  buildApiError,
+  isApiPath,
+} from '../src/lib/agent-recovery';
 
 interface AssetsFetcher {
   fetch(request: Request | string): Promise<Response>;
@@ -341,6 +351,67 @@ function isDirectMarkdownUrl(pathname: string): boolean {
     !MARKDOWN_EXCLUDED_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 }
 
+/**
+ * Post-process the upstream (asset/function) response:
+ *
+ * 1. **JSON errors for API paths** — an unknown /api/* path must never serve
+ *    the HTML 404 page; agents get a structured JSON error they can parse.
+ * 2. **Markdown 404s** — a client negotiating Markdown (Accept: text/markdown)
+ *    that hits a 404 receives a short Markdown recovery body with the sitemap,
+ *    llms.txt, and developer links, instead of unparsable HTML.
+ *
+ * Everything else (including the HTML 404 page for regular browsers) passes
+ * through untouched.
+ */
+function finalizeResponse(context: EventContext, response: Response): Response {
+  if (response.status !== 404) {
+    return response;
+  }
+
+  const url = new URL(context.request.url);
+
+  // 1. API paths → structured JSON error.
+  if (isApiPath(url.pathname)) {
+    const body = JSON.stringify(
+      buildApiError(
+        'not_found',
+        `Unknown API path: ${url.pathname}`,
+        'The documented agent API lives at /api/mcp (MCP over JSON-RPC 2.0, POST) and /api/health.json (GET).'
+      )
+    );
+    return new Response(body, {
+      status: 404,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+  }
+
+  // 2. Markdown-negotiating clients → Markdown recovery body.
+  //    Same eligibility rules as tryServeMarkdown: no /api/, /internal/, /_
+  //    prefixes and no static-asset extensions.
+  const accept = context.request.headers.get('accept') || '';
+  const eligible =
+    accept.includes('text/markdown') &&
+    !MARKDOWN_EXCLUDED_PREFIXES.some((prefix) => url.pathname.startsWith(prefix)) &&
+    !MARKDOWN_EXCLUDED_EXTENSIONS.test(url.pathname);
+  if (eligible) {
+    return new Response(buildAgentRecoveryMarkdown(url.origin), {
+      status: 404,
+      headers: {
+        'Content-Type': 'text/markdown; charset=utf-8',
+        'Cache-Control': 'public, max-age=600',
+        Vary: 'Accept',
+        'X-Content-Negotiation': 'markdown',
+      },
+    });
+  }
+
+  return response;
+}
+
 export async function onRequest(context: EventContext): Promise<Response> {
   // 0. robots.txt UA rewrite — strip Content-Signal for Lighthouse-family
   //    tools to keep PageSpeed SEO at 1.00 without weakening the directive
@@ -378,7 +449,7 @@ export async function onRequest(context: EventContext): Promise<Response> {
       );
     }
 
-    return context.next();
+    return finalizeResponse(context, await context.next());
   }
 
   // Check for unknown bots
@@ -402,5 +473,5 @@ export async function onRequest(context: EventContext): Promise<Response> {
     }
   }
 
-  return context.next();
+  return finalizeResponse(context, await context.next());
 }

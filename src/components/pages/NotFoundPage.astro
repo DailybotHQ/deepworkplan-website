@@ -1,6 +1,7 @@
 ---
 import Kicker from '@/components/editorial/Kicker.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { RECOVERY_LINKS } from '@/lib/agent-recovery';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
@@ -12,6 +13,12 @@ const { lang } = Astro.props;
 const t = getTranslations(lang);
 const prefix = getUrlPrefix(lang);
 const n = t.notFoundPage;
+
+// Raw markdown recovery block — the same list the edge middleware serves as a
+// text/markdown 404 body. Machine syntax: never localized.
+const agentRecoveryMarkdown = RECOVERY_LINKS.map(
+  (link) => `- [${link.label}](https://deepworkplan.com${link.path})`
+).join('\n');
 ---
 
 <MainLayout lang={lang} title={n.title} description={n.description}>
@@ -50,6 +57,33 @@ const n = t.notFoundPage;
             {n.exploreMethodology}
           </a>
         </div>
+
+        {/* Agent recovery: visible links + the raw markdown list agents parse.
+            Mirrors the text/markdown 404 body served by the edge middleware. */}
+        <section class="mt-12 max-w-xl" aria-label={n.agentTitle}>
+          <Kicker>{n.agentTitle}</Kicker>
+          <p class="mt-3 text-sm leading-relaxed" style="color: var(--color-muted);">
+            {n.agentIntro}
+          </p>
+          <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+            {
+              RECOVERY_LINKS.slice(0, 6).map((link) => (
+                <li>
+                  <a
+                    href={link.path}
+                    class="text-sm underline underline-offset-4 transition hover:opacity-80"
+                    style="color: var(--color-secondary);"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <div class="mt-4 overflow-hidden border" style="border-color: var(--color-line);">
+            <pre class="overflow-x-auto px-3 py-3" style="background-color: var(--color-gray-100);"><code class="font-mono text-xs leading-relaxed" style="color: var(--color-ink);">{agentRecoveryMarkdown}</code></pre>
+          </div>
+        </section>
       </div>
 
       <div class="mt-12 hidden md:block lg:mt-0">

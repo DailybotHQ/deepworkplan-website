@@ -29,6 +29,8 @@ export const ja: SiteTranslations = {
     init: 'Init',
     quickstart: 'クイックスタート',
     trust: '信頼',
+    developers: '開発者',
+    privacy: 'プライバシー',
     github: 'GitHub',
     repo: {
       label: 'ソースコード',
@@ -363,6 +365,7 @@ export const ja: SiteTranslations = {
         'エージェントに一行を渡し、/init.md に向けるだけで、リポジトリが AI-first になります。スキルをインストールし、スタックを推論し、完全な AGENTS.md 階層をコミットします。そこから、何時間も自律的に走る Deep Work Plan を作成し、実行できます。',
       primaryCta: '/init プロンプトを開く',
       secondaryCta: '方法論を読む',
+      tertiaryCta: 'エージェントと開発者向け',
       meta: 'MIT ライセンス · テレメトリーなし · 出力は gitignore された .dwp/ フォルダへ。',
     },
   },
@@ -510,6 +513,9 @@ export const ja: SiteTranslations = {
       '申し訳ありません。お探しのページは存在しないか、移動された可能性があります。ホームページに戻るか、方法論を見てみてください。',
     backHome: 'ホームに戻る',
     exploreMethodology: '方法論を読む',
+    agentTitle: 'AI エージェント向け',
+    agentIntro:
+      'このパスは存在しません。下のリカバリーリンク（とその機械可読な等価物）に、このサイトのすべてのページが列挙されています。',
   },
 
   // Deep Work Plan — Methodology index + chapter reader
@@ -797,5 +803,178 @@ export const ja: SiteTranslations = {
       '方法論と仕様を読み、エージェントを init エンドポイントに向け、実行する前にインストールを検証してください。',
     ctaPrimary: '方法論を読む',
     ctaSecondary: '採用（Init）',
+  },
+
+  developersPage: {
+    meta: {
+      title:
+        '開発者 — Deep Work Plan のエージェント API、MCP サーバーとドキュメント',
+      description:
+        'Deep Work Plan のエージェントサーフェス：OpenAPI 仕様付きの読み取り専用・認証不要 API、/api/mcp の MCP サーバー、17 言語のページ単位 Markdown、npx skills インストール CLI。',
+    },
+    eyebrow: 'エージェントと開発者のサーフェス',
+    title: '開発者と AI エージェントのための Deep Work Plan',
+    intro:
+      'deepworkplan.com はページ群に加えて機械可読のサーフェスを提供します。OpenAPI で記述されたエージェント API、ステートレスな MCP サーバー、17 言語すべてのページをカバーするネイティブ Markdown ミラー、そしてインストール可能な DWP スキルです。このページのすべては本番環境で動作する公開・無料のものであり、登録は一切不要です。',
+    accessTitle: '認証ゼロの設計',
+    accessIntro:
+      '生成すべき API キーも、OAuth の手順も、本番とは別のサンドボックスもありません——本番のサーフェス自体がサンドボックスです。これは方法論の意図的な性質です。エージェントは「営業に問い合わせる」フォームに記入できないため、このサイトがそのようなものを要求することは決してありません。',
+    accessPoints: [
+      {
+        title: '読み取り専用',
+        body: 'すべての操作は安全でキャッシュ可能な GET です——唯一の例外は POST を使う MCP エンドポイントです。書き込み操作、アップロード、状態変更はどこにも存在しません。',
+      },
+      {
+        title: 'API キー不要',
+        body: '登録なし、トークンなし、レート制限ティアなし。匿名アクセスが文書化された契約であり、/auth.md と OAuth ディスカバリスタブで宣言されています。',
+      },
+      {
+        title: '無料かつオープンソース',
+        body: 'サイトのコンテンツと DWP スキルは MIT ライセンスです。商用・非商用を問わず、許可を求めることなく利用できます。',
+      },
+      {
+        title: 'マシンファースト',
+        body: '/api パスでの構造化 JSON エラー、Markdown の 404 リカバリーボディ、RFC 9727 API カタログ、ARD 能力マニフェスト——エージェントによる利用のために構築されています。',
+      },
+    ],
+    endpointsTitle: 'エンドポイント',
+    endpointsIntro:
+      'エージェント API の中核エンドポイントです。完全な型付き仕様（すべての操作、パラメータ、レスポンススキーマ）は OpenAPI ドキュメントにあります。',
+    endpointsNote:
+      '不明な /api/* パスは解決ヒント付きの構造化 JSON エラーを返し、HTML エラーページは決して返しません。',
+    endpoints: [
+      {
+        method: 'GET',
+        path: '/openapi.json',
+        description: 'エージェント API 全体の OpenAPI 3.1 仕様。',
+      },
+      {
+        method: 'GET',
+        path: '/llms.txt',
+        description:
+          '厳選された LLM ガイドインデックス——エージェントへの推奨入口。',
+      },
+      {
+        method: 'GET',
+        path: '/init.md',
+        description:
+          '正規の DWP 採用プロンプト（任意のリポジトリを AI-first にする）。',
+      },
+      {
+        method: 'GET',
+        path: '/{page}.md',
+        description:
+          '任意のページをネイティブのソース Markdown で——全 17 言語（例: /es/developers.md）。',
+      },
+      {
+        method: 'GET',
+        path: '/api/health.json',
+        description: '仕様とこのポータルへのリンクを備えた静的ヘルスマーカー。',
+      },
+      {
+        method: 'POST',
+        path: '/api/mcp',
+        description:
+          'MCP サーバー（Streamable HTTP、ステートレス）: initialize、ping、tools/list、tools/call。',
+      },
+      {
+        method: 'GET',
+        path: '/.well-known/ai-catalog.json',
+        description: 'ARD 能力マニフェスト——robots.txt で宣言された agentmap。',
+      },
+    ],
+    mcpTitle: 'MCP サーバー',
+    mcpIntro:
+      'Streamable HTTP 上のステートレスな Model Context Protocol サーバーです。読み取り専用の 3 つのツール: get_init_prompt、list_site_sections、read_page。プロトコルバージョン 2025-03-26 と 2025-06-18 をサポートしており、セッションは不要です。',
+    mcpCodeLabel: 'ターミナル — HTTP 上の JSON-RPC',
+    mcpNote:
+      'MCP マニフェストは /.well-known/mcp.json に、サーバーカードは /.well-known/mcp/server-card.json にあります。Claude、ChatGPT、その他の MCP クライアントはこれらのツールをネイティブに呼び出せます。',
+    markdownTitle: 'エージェントのための Markdown',
+    markdownIntro:
+      'レンダリングされるすべてのページは、HTML 変換ではなくネイティブのソース Markdown として公開されます。URL のサフィックスで明示的に Markdown を要求するか、任意のページで HTTP コンテンツネゴシエーションを利用してください。',
+    markdownCodeLabel: 'ターミナル — コンテンツネゴシエーション',
+    markdownNote:
+      'コンテンツネゴシエーションは、サイトがレンダリングに使うのと同じソース Markdown を、要求した URL の言語で返します。',
+    cliTitle: 'キットをインストール',
+    cliIntro:
+      'Deep Work Plan スキルの公式インストールパスです——/init エンドポイントがエージェントに与えるのと同じコマンドです。skills 互換の任意のコーディングエージェント（Claude Code、Cursor、Codex、Gemini など）で動作します。',
+    cliCodeLabel: 'ターミナル — skills CLI',
+    cliNote:
+      'スキルはリポジトリ内の .agents/skills/deepworkplan/ にベンダーされるため、リポジトリを扱うすべてのエージェントが同じ方法論を共有します。',
+    resourcesTitle: '機械可読リソース',
+    resources: [
+      { label: 'OpenAPI 仕様 (/openapi.json)', href: '/openapi.json' },
+      {
+        label: 'エージェントアクセスと認証宣言 (/auth.md)',
+        href: '/auth.md',
+      },
+      {
+        label: 'API カタログ、RFC 9727 (/.well-known/api-catalog)',
+        href: '/.well-known/api-catalog',
+      },
+      {
+        label: 'MCP マニフェスト (/.well-known/mcp.json)',
+        href: '/.well-known/mcp.json',
+      },
+      {
+        label: 'セキュリティ連絡先 (/.well-known/security.txt)',
+        href: '/.well-known/security.txt',
+      },
+      {
+        label: 'サイトリポジトリ記述子 (/.well-known/dwp.json)',
+        href: '/.well-known/dwp.json',
+      },
+    ],
+    ctaTitle: 'エージェントに向ける',
+    ctaBody:
+      '最速の道は依然として一行です。任意のコーディングエージェントに /init プロンプトを渡せば、スキルをインストールし、リポジトリをオンボードし、ディープワークを完了させ始めます。',
+    ctaPrimary: '/init プロンプトを開く',
+    ctaSecondary: '方法論を読む',
+  },
+
+  privacyPage: {
+    meta: {
+      title: 'プライバシー — Deep Work Plan',
+      description:
+        'deepworkplan.com のプライバシーポリシー: アカウントなし、広告なし、Cookie を使わないアナリティクスの静的サイトであり、お問い合わせフォームが収集するものを平易に説明します。',
+    },
+    eyebrow: 'プライバシーポリシー',
+    title: 'deepworkplan.com のプライバシー',
+    intro:
+      'Deep Work Plan は静的なドキュメントと方法論のサイトです。このページでは、訪問時にサイトが扱うデータを平易かつ完全に説明します。アカウントシステムも広告もクロスサイトトラッキングも一切ありません。',
+    lastUpdated: '2026年9月8日',
+    sections: [
+      {
+        heading: 'サイトの仕組み',
+        body: 'deepworkplan.com は CDN 経由で配信される静的ページの集まりです。ログインはなく、ユーザーデータベースもなく、個人のプロフィールを保存する仕組みもありません。コンテンツは DailybotHQ オーガニゼーション配下の公開 GitHub リポジトリで開発されており、ここで読むすべてのものはビルドされた通りに配信されます。',
+      },
+      {
+        heading: 'アナリティクス',
+        body: '当サイトは、Cookie を使わないプライバシー重視のアナリティクスサービス Umami を利用し、ページビューを集計しています。Umami はトラッキング Cookie を設定せず、クロスサイトのプロフィールも構築しません。AI クローラーは JavaScript を実行しないため、サーバーサイドのエッジ関数が、自動ボット訪問のユーザーエージェントとパスを匿名のアナリティクスイベントとして記録します——これはクローラーソフトウェアを識別するもので（例: 「GPTBot が /init を訪問」）、人間の訪問者を識別するものではありません。',
+      },
+      {
+        heading: 'Cookie とローカルストレージ',
+        body: '当サイトはトラッキング Cookie を設定しません。ブラウザに保存される唯一のものは、localStorage に保持されるテーマ設定（ライトまたはダークモード）で、デバイスの外に出ることも、どこへも送信されることもありません。ブラウザのストレージを消去すると、サイトは単にシステムのデフォルトテーマへ戻るだけです。',
+      },
+      {
+        heading: 'サードパーティサービス',
+        body: 'ホスティングと配信は Cloudflare Pages で行われており、CDN の運用と悪用のブロックの一環として、Cloudflare 自身のプライバシーポリシーに基づきリクエストログと IP アドレスがエッジで処理されます。集計アナリティクスは Umami（cloud.umami.is）で実行されます。お問い合わせフォームを自発的に送信した場合、回答は Google Forms 経由でチームに送られます——入力した情報が収集されるのはそこだけであり、返信のためだけに使われます。',
+      },
+      {
+        heading: '行わないこと',
+        body: '当社は個人データを販売または共有せず、広告やリマーケティングピクセルを実行せず、ブラウザのフィンガープリントも行わず、マーケティングメールも送信しません。サイトにニュースレター登録はなく、上記の集計型・Cookie なしのカウントを超えるテレメトリーもありません。',
+      },
+      {
+        heading: 'あなたの選択',
+        body: 'ここのアナリティクスは集計型で Cookie を使わないため、書き出しや削除すべき個人のプロフィールは存在しません。アナリティクススクリプトは、どんなコンテンツブロッカーでもブロックでき、サイトの動作には影響しません。お問い合わせフォームを送信済みでメッセージの削除を希望する場合は、下記の連絡先にご連絡ください。削除します。',
+      },
+      {
+        heading: 'ポリシーの変更',
+        body: 'このポリシーが実質的に変更された場合は、このページ上部の更新日付も変更され、実質的な編集は公開のウェブサイトリポジトリにコミットされるため、誰でも履歴を確認できます。',
+      },
+    ],
+    contactTitle: '連絡先とセキュリティ',
+    contactBody:
+      'プライバシーに関する質問は security@dailybot.com までご連絡ください。セキュリティの脆弱性を報告する場合は、ウェブサイトとスキルのリポジトリに対して GitHub のプライベート脆弱性レポートを優先してください——正確な宛先は /.well-known/security.txt に記載されています。',
   },
 };
