@@ -88,10 +88,11 @@ For custom OG images, pass `image` prop:
 |--------|----------|-------|
 | WebSite | `BaseHead.astro` | Global (all pages) |
 | Person | `BaseHead.astro` | Global (all pages) |
-| Organization | `BaseHead.astro` | Global (Dailybot) |
+| Organization | `BaseHead.astro` | Global (Dailybot; includes `contactPoint` — security@dailybot.com, customer support — and `address` — PostalAddress CO/Bogotá. AI trust checks look for both) |
 | Person (enhanced) | `AboutPage.astro` | About page only |
 | BreadcrumbList | Most page components | Per-page navigation hierarchy |
 | ContactPage | `ContactPage.astro` | Contact page |
+| WebPage | `TrustPage.astro`, `DevelopersPage.astro`, `PrivacyPage.astro` | Trust/developers/privacy pages |
 
 ### Adding a New Schema
 
@@ -243,9 +244,10 @@ Every page serves native Markdown for AI consumption:
 
 | File | Purpose | Update When |
 |------|---------|-------------|
-| `public/llms.txt` | Short-form site description for AI crawlers | Adding/removing pages or sections |
+| `public/llms.txt` | Short-form site description for AI crawlers, incl. the When-to-use section and Developer & Agent Resources | Adding/removing pages, sections, or agent endpoints |
 | `public/llms-full.txt` | Comprehensive site description | Major content or structure changes |
-| `public/robots.txt` | AI crawler allow directives | New AI crawlers emerge |
+| `public/robots.txt` | AI crawler allow directives (`/api/` is allowed — the agent API lives there) | New AI crawlers emerge |
+| `public/openapi.json` | OpenAPI 3.1 spec of the agent API (version auto-stamped by `scripts/stamp-versions.mjs` in prebuild) | Any agent endpoint changes |
 
 ### Agent adoption endpoint
 
@@ -261,6 +263,11 @@ When adding a new page section:
 1. Add the page to `llms.txt` Core Sections list
 2. Add a description to `llms-full.txt` Pages section
 3. No robots.txt change needed (global `Allow: /` covers new pages)
+
+When adding a machine-readable endpoint or agent surface:
+1. Document it in `public/openapi.json` (operationId + description + responses)
+2. Add it to `llms.txt` Developer & Agent Resources and the llms-full Agent API section
+3. Link it from `/.well-known/api-catalog` (and `ai-catalog.json` when it is a discovery surface)
 
 ### Current AI Crawlers Allowed
 
@@ -356,10 +363,10 @@ Structure:
 ### New Page SEO Checklist
 
 - [ ] Page component has `title` and `description` props passed to MainLayout
-- [ ] Meta description is 130-160 characters (EN and ES independently)
+- [ ] Meta description is 130-160 characters in every active language
 - [ ] BreadcrumbList JSON-LD schema added via `<Fragment slot="head">`
-- [ ] Page exists in both `src/pages/` (EN) and `src/pages/es/` (ES)
-- [ ] Translation strings added to both `en.ts` and `es.ts`
+- [ ] Page exists in `src/pages/` (EN) and `src/pages/[lang]/` (all non-default languages)
+- [ ] Translation strings added to every locale in `src/lib/translations/`
 - [ ] `llms.txt` Core Sections updated with new page
 - [ ] `llms-full.txt` Pages section updated
 - [ ] Verify hreflang in generated HTML

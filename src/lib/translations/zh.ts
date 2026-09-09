@@ -28,6 +28,8 @@ export const zh: SiteTranslations = {
     init: 'Init',
     quickstart: '快速开始',
     trust: '信任',
+    developers: '开发者',
+    privacy: '隐私',
     github: 'GitHub',
     repo: {
       label: '源代码',
@@ -358,6 +360,7 @@ export const zh: SiteTranslations = {
         '把一行交给你的代理——将它指向 /init.md——它便会让你的仓库 AI-first：安装技能、推理你的技术栈，并提交一套完整的 AGENTS.md 层级结构。从那时起，你便可以创建并执行能自主运行数小时的 Deep Work Plan。',
       primaryCta: '打开 /init 提示',
       secondaryCta: '阅读方法论',
+      tertiaryCta: '面向代理与开发者',
       meta: '采用 MIT 许可 · 零遥测 · 产出至被 gitignore 的 .dwp/ 目录。',
     },
   },
@@ -502,6 +505,9 @@ export const zh: SiteTranslations = {
       '抱歉，你查找的页面不存在，或可能已被移动。请尝试返回首页或浏览方法论。',
     backHome: '返回首页',
     exploreMethodology: '阅读方法论',
+    agentTitle: '面向 AI 代理',
+    agentIntro:
+      '此路径不存在。下方的恢复链接（及其机器可读的等价物）列出了本站点的所有页面。',
   },
 
   // Deep Work Plan — Methodology index + chapter reader
@@ -785,5 +791,172 @@ export const zh: SiteTranslations = {
     ctaBody: '阅读方法论和规范，将代理指向 init 端点，并在运行之前验证安装。',
     ctaPrimary: '阅读方法论',
     ctaSecondary: '采纳（Init）',
+  },
+
+  developersPage: {
+    meta: {
+      title: '开发者 — Deep Work Plan 代理 API、MCP 服务器与文档',
+      description:
+        'Deep Work Plan 的代理接口面：只读、零认证的 API（附 OpenAPI 规范）、位于 /api/mcp 的 MCP 服务器、17 种语言的逐页 Markdown，以及 npx skills 安装 CLI。',
+    },
+    eyebrow: '代理与开发者接口面',
+    title: '面向开发者与 AI 代理的 Deep Work Plan',
+    intro:
+      'deepworkplan.com 在页面之外还提供了一个机器可读的接口面：由 OpenAPI 描述的代理 API、无状态的 MCP 服务器、覆盖 17 种语言每个页面的原生 Markdown 镜像，以及可安装的 DWP 技能。本页面上的一切都是实时、公开且免费的——无需注册任何内容。',
+    accessTitle: '设计上的零认证',
+    accessIntro:
+      '无需生成 API 密钥，没有 OAuth 流程，也没有独立于生产的沙箱——生产接口面本身就是沙箱。这是这套方法论刻意为之的属性：代理无法填写“联系销售”表单，因此本站点绝不会要求你填写。',
+    accessPoints: [
+      {
+        title: '只读',
+        body: '每一项操作都是安全、可缓存的 GET——唯一例外是使用 POST 的 MCP 端点。任何地方都不存在写操作、上传或状态变更。',
+      },
+      {
+        title: '无 API 密钥',
+        body: '无需注册、无需令牌、没有速率限制层级。匿名访问就是成文的契约，在 /auth.md 与 OAuth 探索桩中声明。',
+      },
+      {
+        title: '免费且开源',
+        body: '站点内容与 DWP 技能均采用 MIT 许可。无需征得许可即可用于商业与非商业工作。',
+      },
+      {
+        title: '机器优先',
+        body: '/api 路径返回结构化的 JSON 错误、Markdown 404 恢复响应体、RFC 9727 API 目录，以及 ARD 能力清单——为代理消费而构建。',
+      },
+    ],
+    endpointsTitle: '端点',
+    endpointsIntro:
+      '代理 API 的核心端点。完整且带类型的规范——每一项操作、参数与响应模式——位于 OpenAPI 文档中。',
+    endpointsNote:
+      '未知的 /api/* 路径会返回带解决提示的结构化 JSON 错误，绝不返回 HTML 错误页。',
+    endpoints: [
+      {
+        method: 'GET',
+        path: '/openapi.json',
+        description: '整个代理 API 的 OpenAPI 3.1 规范。',
+      },
+      {
+        method: 'GET',
+        path: '/llms.txt',
+        description: '精选的 LLM 指引索引——代理推荐的入口。',
+      },
+      {
+        method: 'GET',
+        path: '/init.md',
+        description: '权威的 DWP 采纳提示（让任意代码仓库 AI-first）。',
+      },
+      {
+        method: 'GET',
+        path: '/{page}.md',
+        description:
+          '任意页面的原生源 Markdown——覆盖全部 17 种语言（例如 /es/developers.md）。',
+      },
+      {
+        method: 'GET',
+        path: '/api/health.json',
+        description: '静态健康标记，附带指向规范与本门户的链接。',
+      },
+      {
+        method: 'POST',
+        path: '/api/mcp',
+        description:
+          'MCP 服务器（Streamable HTTP、无状态）：initialize、ping、tools/list、tools/call。',
+      },
+      {
+        method: 'GET',
+        path: '/.well-known/ai-catalog.json',
+        description: 'ARD 能力清单——robots.txt 中声明的 agentmap。',
+      },
+    ],
+    mcpTitle: 'MCP 服务器',
+    mcpIntro:
+      '一个基于 Streamable HTTP 的无状态 Model Context Protocol 服务器。三个只读工具：get_init_prompt、list_site_sections 与 read_page。支持协议版本 2025-03-26 与 2025-06-18；无需会话。',
+    mcpCodeLabel: '终端 — 基于 HTTP 的 JSON-RPC',
+    mcpNote:
+      'MCP 清单位于 /.well-known/mcp.json，服务器卡片位于 /.well-known/mcp/server-card.json。Claude、ChatGPT 以及任何 MCP 客户端都能原生调用这些工具。',
+    markdownTitle: '面向代理的 Markdown',
+    markdownIntro:
+      '每个已渲染的页面都会以原生源 Markdown 发布——而非 HTML 转换。通过 URL 后缀显式请求 Markdown，或在任意页面上通过 HTTP 内容协商获取。',
+    markdownCodeLabel: '终端 — 内容协商',
+    markdownNote:
+      '内容协商返回的正是站点渲染所用的同一份源 Markdown，语言与你请求的 URL 一致。',
+    cliTitle: '安装套件',
+    cliIntro:
+      'Deep Work Plan 技能的官方安装路径——与 /init 端点交给代理的命令完全相同。它适用于任何兼容 skills 的编码代理（Claude Code、Cursor、Codex、Gemini 等）。',
+    cliCodeLabel: '终端 — skills CLI',
+    cliNote:
+      '该技能会内嵌到你仓库内的 .agents/skills/deepworkplan/，因此每个接触该仓库的代理都共享同一套方法论。',
+    resourcesTitle: '机器可读资源',
+    resources: [
+      { label: 'OpenAPI 规范 (/openapi.json)', href: '/openapi.json' },
+      { label: '代理访问与认证声明 (/auth.md)', href: '/auth.md' },
+      {
+        label: 'API 目录，RFC 9727 (/.well-known/api-catalog)',
+        href: '/.well-known/api-catalog',
+      },
+      {
+        label: 'MCP 清单 (/.well-known/mcp.json)',
+        href: '/.well-known/mcp.json',
+      },
+      {
+        label: '安全联系 (/.well-known/security.txt)',
+        href: '/.well-known/security.txt',
+      },
+      {
+        label: '站点仓库描述符 (/.well-known/dwp.json)',
+        href: '/.well-known/dwp.json',
+      },
+    ],
+    ctaTitle: '把代理指向它',
+    ctaBody:
+      '最快的路径仍然只有一行：把 /init 提示交给任意编码代理，它会安装技能、接入你的代码仓库，并开始完成深度工作。',
+    ctaPrimary: '打开 /init 提示',
+    ctaSecondary: '阅读方法论',
+  },
+
+  privacyPage: {
+    meta: {
+      title: '隐私 — Deep Work Plan',
+      description:
+        'deepworkplan.com 的隐私政策：一个无账户、无广告、使用无 Cookie 分析的静态站点，并直白说明联系表单到底收集哪些信息。',
+    },
+    eyebrow: '隐私政策',
+    title: 'deepworkplan.com 上的隐私',
+    intro:
+      'Deep Work Plan 是一个静态文档与方法论站点。本页直白而完整地说明你访问时站点会触及哪些数据：站点中没有账户系统、没有广告，也没有任何跨站跟踪。',
+    lastUpdated: '2026年9月8日',
+    sections: [
+      {
+        heading: '站点是什么',
+        body: 'deepworkplan.com 是一组通过 CDN 提供的静态页面。没有登录，没有用户数据库，站点也无法存储个人资料。内容在 DailybotHQ 组织下的公开 GitHub 仓库中开发，你在这里读到的一切都完全按构建结果提供。',
+      },
+      {
+        heading: '分析',
+        body: '本站点使用 Umami——一项无 Cookie、隐私优先的分析服务——来按聚合方式统计页面浏览量。Umami 不设置跟踪 Cookie，也不构建跨站档案。由于 AI 爬虫不执行 JavaScript，一个服务器端边缘函数还会把自动化机器人访问的用户代理与路径记录为匿名分析事件——它识别的是爬虫软件（例如“GPTBot 访问了 /init”），绝不是人类访客。',
+      },
+      {
+        heading: 'Cookie 与本地存储',
+        body: '本站点不设置任何跟踪 Cookie。浏览器中唯一保存的是主题偏好（浅色或深色模式），存放在 localStorage 中，它绝不会离开你的设备，也不会被传送到任何地方。如果你清除浏览器存储，站点只会回到系统默认主题。',
+      },
+      {
+        heading: '第三方服务',
+        body: '托管与分发运行在 Cloudflare Pages 上；作为运营 CDN 与阻止滥用的一部分，Cloudflare 会在边缘处理请求日志与 IP 地址，并遵循其自身的隐私政策。聚合分析运行在 Umami（cloud.umami.is）上。如果你自愿提交联系表单，你的回答会经由 Google Forms 发送给我们的团队——这是唯一收集你输入信息的地方，且仅用于回复你。',
+      },
+      {
+        heading: '我们不做的事',
+        body: '我们不出售或共享个人数据，不投放广告或再营销像素，不对浏览器做指纹识别，也不发送营销邮件。本站点没有邮件通讯订阅，也没有超出上述聚合、无 Cookie 计数的任何遥测。',
+      },
+      {
+        heading: '你的选择',
+        body: '由于这里的分析是聚合且无 Cookie 的，不存在可供导出或删除的个人档案。你可以用任何内容拦截器屏蔽分析脚本，而不影响站点的运行。如果你提交过联系表单并希望删除留言，请写信至下方的联系地址，我们会将其移除。',
+      },
+      {
+        heading: '政策变更',
+        body: '如果本政策发生实质性变更，本页顶部的更新日期会随之改变，实质性修改会提交到公开的网站仓库，任何人都可以在那里审阅历史。',
+      },
+    ],
+    contactTitle: '联系与安全',
+    contactBody:
+      '隐私问题请致信 security@dailybot.com。要报告安全漏洞，请优先使用 GitHub 面向网站与技能仓库的私密漏洞报告——确切地址见 /.well-known/security.txt。',
   },
 };

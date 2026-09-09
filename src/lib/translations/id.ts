@@ -28,6 +28,8 @@ export const id: SiteTranslations = {
     init: 'Init',
     quickstart: 'Mulai Cepat',
     trust: 'Kepercayaan',
+    developers: 'Pengembang',
+    privacy: 'Privasi',
     github: 'GitHub',
     repo: {
       label: 'Kode sumber',
@@ -361,6 +363,7 @@ export const id: SiteTranslations = {
         'Serahkan satu baris kepada agent Anda — arahkan ke /init.md — dan ia menjadikan repositori Anda AI-first: memasang skill, bernalar tentang stack Anda, dan meng-commit hierarki AGENTS.md yang lengkap. Dari sana Anda membuat dan mengeksekusi Deep Work Plan yang berjalan otonom selama berjam-jam.',
       primaryCta: 'Buka prompt /init',
       secondaryCta: 'Baca metodologinya',
+      tertiaryCta: 'Untuk agent & pengembang',
       meta: 'Berlisensi MIT · tanpa telemetri · keluaran ke folder .dwp/ yang di-gitignore.',
     },
   },
@@ -508,6 +511,9 @@ export const id: SiteTranslations = {
       'Maaf, halaman yang Anda cari tidak ada atau mungkin telah dipindahkan. Coba kembali ke beranda atau jelajahi metodologinya.',
     backHome: 'Kembali ke beranda',
     exploreMethodology: 'Baca metodologinya',
+    agentTitle: 'Untuk agent AI',
+    agentIntro:
+      'Path ini tidak ada. Link pemulihan di bawah (beserta padanan yang dapat dibaca mesin) mencantumkan setiap halaman di situs ini.',
   },
 
   // Deep Work Plan — Methodology index + chapter reader
@@ -795,5 +801,185 @@ export const id: SiteTranslations = {
       'Baca metodologi dan spesifikasinya, arahkan agent ke endpoint init, dan verifikasi instalasi sebelum Anda menjalankannya.',
     ctaPrimary: 'Baca metodologinya',
     ctaSecondary: 'Adopsi (init)',
+  },
+
+  // Developers — agent & developer surface
+  developersPage: {
+    meta: {
+      title:
+        'Pengembang — API agent, server MCP, dan dokumentasi Deep Work Plan',
+      description:
+        'Permukaan agent Deep Work Plan: API read-only tanpa autentikasi, spesifikasi OpenAPI, server MCP di /api/mcp, Markdown 17 bahasa, dan CLI npx skills.',
+    },
+    eyebrow: 'Permukaan agent & pengembang',
+    title: 'Deep Work Plan untuk pengembang dan agent AI',
+    intro:
+      'deepworkplan.com menghadirkan permukaan yang dapat dibaca mesin di samping halamannya: API agent yang dideskripsikan OpenAPI, server MCP stateless, mirror Markdown native untuk setiap halaman dalam 17 bahasa, dan skill DWP yang dapat dipasang. Semua di halaman ini live, publik, dan gratis — tidak ada yang perlu didaftarkan.',
+    accessTitle: 'Tanpa autentikasi secara desain',
+    accessIntro:
+      'Tidak ada kunci API untuk dibuat, tidak ada alur OAuth, dan tidak ada sandbox yang terpisah dari produksi — permukaan produksi itu sendirilah sandbox-nya. Ini adalah properti metodologi yang disengaja: agent tidak bisa mengisi formulir "hubungi sales", jadi situs ini tidak pernah memintanya.',
+    accessPoints: [
+      {
+        title: 'Read-only',
+        body: 'Setiap operasi adalah GET yang aman dan dapat di-cache — kecuali endpoint MCP, yang merupakan POST. Tidak ada operasi tulis, unggahan, atau perubahan status di mana pun.',
+      },
+      {
+        title: 'Tanpa kunci API',
+        body: 'Tidak ada registrasi, tidak ada token, tidak ada tingkat rate limit. Akses anonim adalah kontrak terdokumentasi, dinyatakan di /auth.md dan stub penemuan OAuth.',
+      },
+      {
+        title: 'Gratis & open source',
+        body: 'Konten situs dan skill DWP berlisensi MIT. Gunakan dalam pekerjaan komersial dan non-komersial tanpa perlu meminta izin.',
+      },
+      {
+        title: 'Machine-first',
+        body: 'Error JSON terstruktur pada path /api, body pemulihan 404 Markdown, katalog API RFC 9727, dan manifest kapabilitas ARD — dibangun untuk konsumsi agent.',
+      },
+    ],
+    endpointsTitle: 'Endpoint',
+    endpointsIntro:
+      'Endpoint inti dari API agent. Spesifikasi lengkap dan bertipe — setiap operasi, parameter, dan skema respons — berada di dokumen OpenAPI.',
+    endpointsNote:
+      'Path /api/* yang tidak dikenal mengembalikan error JSON terstruktur dengan petunjuk resolusi, bukan halaman error HTML.',
+    endpoints: [
+      {
+        method: 'GET',
+        path: '/openapi.json',
+        description: 'Spesifikasi OpenAPI 3.1 dari seluruh API agent.',
+      },
+      {
+        method: 'GET',
+        path: '/llms.txt',
+        description:
+          'Indeks panduan LLM terkurasi — titik masuk yang direkomendasikan untuk agent.',
+      },
+      {
+        method: 'GET',
+        path: '/init.md',
+        description:
+          'Prompt adopsi DWP kanonik (jadikan repositori apa pun AI-first).',
+      },
+      {
+        method: 'GET',
+        path: '/{page}.md',
+        description:
+          'Halaman apa pun sebagai Markdown sumber native — dalam semua 17 bahasa (mis. /es/developers.md).',
+      },
+      {
+        method: 'GET',
+        path: '/api/health.json',
+        description:
+          'Penanda health statis dengan link ke spesifikasi dan portal ini.',
+      },
+      {
+        method: 'POST',
+        path: '/api/mcp',
+        description:
+          'Server MCP (Streamable HTTP, stateless): initialize, ping, tools/list, tools/call.',
+      },
+      {
+        method: 'GET',
+        path: '/.well-known/ai-catalog.json',
+        description:
+          'Manifest kapabilitas ARD — agentmap yang dinyatakan di robots.txt.',
+      },
+    ],
+    mcpTitle: 'Server MCP',
+    mcpIntro:
+      'Server Model Context Protocol stateless melalui Streamable HTTP. Tiga tool read-only: get_init_prompt, list_site_sections, dan read_page. Versi protokol 2025-03-26 dan 2025-06-18 didukung; tidak ada sesi yang diperlukan.',
+    mcpCodeLabel: 'Terminal — JSON-RPC over HTTP',
+    mcpNote:
+      'Manifest MCP berada di /.well-known/mcp.json dan kartu server di /.well-known/mcp/server-card.json. Claude, ChatGPT, dan klien MCP apa pun dapat memanggil tool ini secara native.',
+    markdownTitle: 'Markdown untuk agent',
+    markdownIntro:
+      'Setiap halaman yang dirender diterbitkan sebagai Markdown sumber native — bukan konversi HTML. Minta Markdown secara eksplisit dengan sufiks URL atau melalui negosiasi konten HTTP di halaman mana pun.',
+    markdownCodeLabel: 'Terminal — negosiasi konten',
+    markdownNote:
+      'Negosiasi konten mengembalikan Markdown sumber yang sama dengan yang dirender situs, dalam bahasa URL yang Anda minta.',
+    cliTitle: 'Pasang kit',
+    cliIntro:
+      'Jalur instalasi resmi untuk skill Deep Work Plan — perintah yang sama dengan yang diberikan endpoint /init kepada agent. Bekerja dengan coding agent apa pun yang kompatibel dengan skills (Claude Code, Cursor, Codex, Gemini, dan lainnya).',
+    cliCodeLabel: 'Terminal — skills CLI',
+    cliNote:
+      'Skill di-vendor ke .agents/skills/deepworkplan/ di dalam repositori Anda, sehingga setiap agent yang menyentuh repo berbagi metodologi yang sama.',
+    resourcesTitle: 'Sumber daya yang dapat dibaca mesin',
+    resources: [
+      {
+        label: 'Spesifikasi OpenAPI (/openapi.json)',
+        href: '/openapi.json',
+      },
+      {
+        label: 'Deklarasi akses & autentikasi agent (/auth.md)',
+        href: '/auth.md',
+      },
+      {
+        label: 'Katalog API, RFC 9727 (/.well-known/api-catalog)',
+        href: '/.well-known/api-catalog',
+      },
+      {
+        label: 'Manifest MCP (/.well-known/mcp.json)',
+        href: '/.well-known/mcp.json',
+      },
+      {
+        label: 'Kontak keamanan (/.well-known/security.txt)',
+        href: '/.well-known/security.txt',
+      },
+      {
+        label: 'Deskriptor repo situs (/.well-known/dwp.json)',
+        href: '/.well-known/dwp.json',
+      },
+    ],
+    ctaTitle: 'Arahkan sebuah agent ke sini',
+    ctaBody:
+      'Jalur tercepat tetap satu baris: berikan prompt /init kepada coding agent mana pun dan ia memasang skill, onboarding repositori Anda, dan mulai menyelesaikan deep work.',
+    ctaPrimary: 'Buka prompt /init',
+    ctaSecondary: 'Baca metodologinya',
+  },
+
+  // Privacy policy
+  privacyPage: {
+    meta: {
+      title: 'Privasi — Deep Work Plan',
+      description:
+        'Kebijakan privasi deepworkplan.com: situs statis tanpa akun dan iklan, analitik tanpa cookie, serta penjelasan lugas data apa yang dikumpulkan formulir kontak.',
+    },
+    eyebrow: 'Kebijakan privasi',
+    title: 'Privasi di deepworkplan.com',
+    intro:
+      'Deep Work Plan adalah situs dokumentasi dan metodologi statis. Halaman ini menjelaskan, secara lugas dan lengkap, data apa yang disentuh situs saat Anda berkunjung: tidak ada sistem akun, tidak ada iklan, dan tidak ada pelacakan lintas situs di dalamnya.',
+    lastUpdated: '8 September 2026',
+    sections: [
+      {
+        heading: 'Apa situs ini',
+        body: 'deepworkplan.com adalah kumpulan halaman statis yang dilayani melalui CDN. Tidak ada login, tidak ada basis data pengguna, dan tidak ada cara bagi situs untuk menyimpan profil pribadi. Konten dikembangkan di repositori GitHub publik di bawah organisasi DailybotHQ, dan semua yang Anda baca di sini disajikan persis seperti yang dibangun.',
+      },
+      {
+        heading: 'Analitik',
+        body: 'Situs menggunakan Umami, layanan analitik tanpa cookie yang mengutamakan privasi, untuk menghitung tampilan halaman secara agregat. Umami tidak menetapkan cookie pelacakan dan tidak membangun profil lintas situs. Karena crawler AI tidak menjalankan JavaScript, sebuah edge function sisi server juga mencatat user agent dan path kunjungan bot otomatis sebagai peristiwa analitik anonim — ini mengidentifikasi perangkat lunak crawler (misalnya "GPTBot mengunjungi /init"), bukan pengunjung manusia.',
+      },
+      {
+        heading: 'Cookie dan penyimpanan lokal',
+        body: 'Situs tidak menetapkan cookie pelacakan. Satu-satunya hal yang disimpan di browser Anda adalah preferensi tema (mode terang atau gelap) yang disimpan di localStorage, yang tidak pernah meninggalkan perangkat Anda dan tidak dikirim ke mana pun. Jika Anda menghapus penyimpanan browser, situs cukup kembali ke tema bawaan sistem Anda.',
+      },
+      {
+        heading: 'Layanan pihak ketiga',
+        body: 'Hosting dan pengiriman berjalan di Cloudflare Pages, yang memproses log permintaan dan alamat IP di edge sebagai bagian dari mengoperasikan CDN dan memblokir penyalahgunaan, di bawah kebijakan privasi Cloudflare sendiri. Analitik agregat berjalan di Umami (cloud.umami.is). Jika Anda mengirimkan formulir kontak secara sukarela, jawaban Anda dikirim melalui Google Forms ke tim kami — itu satu-satunya tempat informasi yang Anda ketik dikumpulkan, dan hanya digunakan untuk membalas Anda.',
+      },
+      {
+        heading: 'Yang tidak kami lakukan',
+        body: 'Kami tidak menjual atau membagikan data pribadi, tidak menjalankan iklan atau piksel remarketing, tidak melakukan fingerprinting browser, dan tidak mengirim email pemasaran. Situs ini tidak memiliki pendaftaran buletin dan tidak ada telemetri di luar hitungan agregat tanpa cookie yang dijelaskan di atas.',
+      },
+      {
+        heading: 'Pilihan Anda',
+        body: 'Karena analitik di sini agregat dan tanpa cookie, tidak ada profil pribadi untuk diekspor atau dihapus. Anda dapat memblokir skrip analitik dengan pemblokir konten apa pun tanpa memengaruhi cara kerja situs. Jika Anda telah mengirimkan formulir kontak dan ingin pesan Anda dihapus, tulislah ke alamat kontak di bawah dan kami akan menghapusnya.',
+      },
+      {
+        heading: 'Perubahan kebijakan ini',
+        body: 'Jika kebijakan ini berubah secara material, tanggal pembaruan di bagian atas halaman ini ikut berubah, dan penyuntingan substantif di-commit ke repositori situs web publik tempat siapa pun dapat meninjau riwayatnya.',
+      },
+    ],
+    contactTitle: 'Kontak dan keamanan',
+    contactBody:
+      'Untuk pertanyaan privasi, tulis ke security@dailybot.com. Untuk melaporkan kerentanan keamanan, gunakan pelaporan kerentanan privat GitHub untuk repositori situs web dan skill — lihat /.well-known/security.txt untuk alamat persisnya.',
   },
 };

@@ -9,7 +9,7 @@
     "url": "https://github.com/DailybotHQ/deepworkplan-website"
   },
   "type": "module",
-  "version": "1.0.83",
+  "version": "1.0.86",
   "packageManager": "pnpm@11.1.2",
   "engines": {
     "node": ">=24.20.0"
@@ -17,7 +17,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
-    "prebuild": "node scripts/generate-agent-skills-index.mjs",
+    "prebuild": "node scripts/generate-agent-skills-index.mjs && node scripts/stamp-versions.mjs",
     "generate:agent-skills-index": "node scripts/generate-agent-skills-index.mjs",
     "astro": "astro",
     "astro:check": "astro check",

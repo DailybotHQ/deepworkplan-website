@@ -29,6 +29,8 @@ export const tr: SiteTranslations = {
     init: 'Init',
     quickstart: 'Hızlı başlangıç',
     trust: 'Güven',
+    developers: 'Geliştiriciler',
+    privacy: 'Gizlilik',
     github: 'GitHub',
     repo: {
       label: 'Kaynak kod',
@@ -362,6 +364,7 @@ export const tr: SiteTranslations = {
         'Ajanınıza tek bir satır verin — onu /init.md adresine yönlendirin — ve deponuzu AI-first hale getirsin: skill’i kurar, yığınınız hakkında akıl yürütür ve eksiksiz bir AGENTS.md hiyerarşisini işler. Oradan, saatlerce otonom çalışan Deep Work Plan’ler oluşturur ve yürütürsünüz.',
       primaryCta: '/init istemini açın',
       secondaryCta: 'Metodolojiyi okuyun',
+      tertiaryCta: 'Ajanlar ve geliştiriciler için',
       meta: 'MIT lisanslı · sıfır telemetri · çıktılar gitignore’lanmış bir .dwp/ klasörüne yazılır.',
     },
   },
@@ -509,6 +512,9 @@ export const tr: SiteTranslations = {
       'Üzgünüz, aradığınız sayfa mevcut değil ya da taşınmış olabilir. Ana sayfaya dönmeyi veya metodolojiyi keşfetmeyi deneyin.',
     backHome: 'Ana sayfaya dön',
     exploreMethodology: 'Metodolojiyi okuyun',
+    agentTitle: 'Yapay zeka ajanları için',
+    agentIntro:
+      'Bu yol mevcut değil. Aşağıdaki kurtarma bağlantıları (ve makine tarafından okunabilir karşılıkları) bu sitedeki tüm sayfaları listeler.',
   },
 
   // Deep Work Plan — Methodology index + chapter reader
@@ -796,5 +802,185 @@ export const tr: SiteTranslations = {
       'Metodolojiyi ve spesifikasyonu okuyun, bir ajanı init uç noktasına yönlendirin ve çalıştırmadan önce kurulumu doğrulayın.',
     ctaPrimary: 'Metodolojiyi okuyun',
     ctaSecondary: 'Benimseme (init)',
+  },
+
+  // Developers — agent & developer surface
+  developersPage: {
+    meta: {
+      title:
+        "Geliştiriciler — Deep Work Plan ajan API'si, MCP sunucusu ve dokümanları",
+      description:
+        "Deep Work Plan ajan yüzeyi: salt okunur, kimlik doğrulamasız API, OpenAPI spesifikasyonu, /api/mcp MCP sunucusu, 17 dilde Markdown ve npx skills CLI'si.",
+    },
+    eyebrow: 'Ajan ve geliştirici yüzeyi',
+    title: 'Geliştiriciler ve yapay zeka ajanları için Deep Work Plan',
+    intro:
+      "deepworkplan.com, sayfalarının yanı sıra makine tarafından okunabilir bir yüzey sunar: OpenAPI ile tanımlanmış bir ajan API'si, durumsuz bir MCP sunucusu, her sayfa için 17 dilde yerel Markdown aynaları ve kurulabilir DWP skill'i. Bu sayfadaki her şey canlı, herkese açık ve ücretsizdir — kayıt olacak bir şey yoktur.",
+    accessTitle: 'Tasarım gereği kimlik doğrulamasız',
+    accessIntro:
+      'Üretecek API anahtarı, OAuth akışı ve üretimden ayrı bir sandbox yoktur — üretim yüzeyinin kendisi sandbox\'tur. Bu, metodolojinin bilinçli bir özelliğidir: ajanlar "bize ulaşın" formlarını dolduramaz; dolayısıyla site hiçbir zaman bunu istemez.',
+    accessPoints: [
+      {
+        title: 'Salt okunur',
+        body: "MCP uç noktası (POST) dışındaki her işlem güvenli ve önbelleğe alınabilir bir GET'tir. Hiçbir yerde yazma işlemi, yükleme veya durum değişikliği yoktur.",
+      },
+      {
+        title: 'API anahtarı yok',
+        body: 'Kayıt yok, jeton yok, hız sınırı kademesi yok. Anonim erişim; /auth.md ve OAuth keşif taslaklarında bildirilen belgelenmiş sözleşmedir.',
+      },
+      {
+        title: 'Ücretsiz ve açık kaynak',
+        body: "Site içeriği ve DWP skill'i MIT lisanslıdır. Bunları, izin istemeden ticari ve ticari olmayan işlerde kullanabilirsiniz.",
+      },
+      {
+        title: 'Makine öncelikli',
+        body: '/api yollarında yapılandırılmış JSON hataları, Markdown 404 kurtarma gövdeleri, RFC 9727 API kataloğu ve bir ARD yetenek manifestosu — ajan tüketimi için tasarlanmıştır.',
+      },
+    ],
+    endpointsTitle: 'Uç noktalar',
+    endpointsIntro:
+      "Ajan API'sinin temel uç noktaları. Eksiksiz ve türlendirilmiş spesifikasyon — her işlem, parametre ve yanıt şeması — OpenAPI belgesinde yer alır.",
+    endpointsNote:
+      'Bilinmeyen /api/* yolları, çözüm ipucu içeren yapılandırılmış bir JSON hatası döndürür; asla bir HTML hata sayfası döndürmez.',
+    endpoints: [
+      {
+        method: 'GET',
+        path: '/openapi.json',
+        description: "Ajan API'sinin tamamının OpenAPI 3.1 spesifikasyonu.",
+      },
+      {
+        method: 'GET',
+        path: '/llms.txt',
+        description:
+          'Seçilmiş LLM rehber dizini — ajanlar için önerilen giriş noktası.',
+      },
+      {
+        method: 'GET',
+        path: '/init.md',
+        description:
+          'Kanonik DWP benimseme istemi (herhangi bir depoyu AI-first yapar).',
+      },
+      {
+        method: 'GET',
+        path: '/{page}.md',
+        description:
+          'Herhangi bir sayfa, yerel kaynak Markdown olarak — 17 dilin tümünde (örn. /es/developers.md).',
+      },
+      {
+        method: 'GET',
+        path: '/api/health.json',
+        description:
+          'Spesifikasyona ve bu portala bağlantılar içeren statik sağlık işareti.',
+      },
+      {
+        method: 'POST',
+        path: '/api/mcp',
+        description:
+          'MCP sunucusu (Streamable HTTP, durumsuz): initialize, ping, tools/list, tools/call.',
+      },
+      {
+        method: 'GET',
+        path: '/.well-known/ai-catalog.json',
+        description:
+          'ARD yetenek manifestosu — robots.txt içinde bildirilen agentmap.',
+      },
+    ],
+    mcpTitle: 'MCP sunucusu',
+    mcpIntro:
+      'Streamable HTTP üzerinden durumsuz bir Model Context Protocol sunucusu. Üç salt okunur araç: get_init_prompt, list_site_sections ve read_page. 2025-03-26 ve 2025-06-18 protokol sürümleri desteklenir; oturum gerekmez.',
+    mcpCodeLabel: 'Terminal — HTTP üzerinden JSON-RPC',
+    mcpNote:
+      'MCP manifestosu /.well-known/mcp.json adresinde, sunucu kartı ise /.well-known/mcp/server-card.json adresindedir. Claude, ChatGPT ve herhangi bir MCP istemcisi bu araçları doğal olarak çağırabilir.',
+    markdownTitle: 'Ajanlar için Markdown',
+    markdownIntro:
+      "İşlenen her sayfa, yerel kaynak Markdown olarak yayımlanır — bir HTML dönüşümü değildir. Markdown'ı herhangi bir sayfada URL son ekiyle açıkça ya da HTTP içerik müzakeresi yoluyla isteyin.",
+    markdownCodeLabel: 'Terminal — içerik müzakeresi',
+    markdownNote:
+      "İçerik müzakeresi, sitenin işlediği kaynağın aynısı olan kaynak Markdown'ı, istekte bulunduğunuz URL'nin dilinde döndürür.",
+    cliTitle: "Kit'i kurun",
+    cliIntro:
+      "Deep Work Plan skill'i için resmî kurulum yolu — /init uç noktasının ajanlara verdiği komutla aynıdır. Skills uyumlu herhangi bir kodlama ajanıyla çalışır (Claude Code, Cursor, Codex, Gemini ve diğerleri).",
+    cliCodeLabel: 'Terminal — skills CLI',
+    cliNote:
+      'Skill, deponuzun içindeki .agents/skills/deepworkplan/ klasörüne yerleştirilir; böylece depoya dokunan her ajan aynı metodolojiyi paylaşır.',
+    resourcesTitle: 'Makine tarafından okunabilir kaynaklar',
+    resources: [
+      {
+        label: 'OpenAPI spesifikasyonu (/openapi.json)',
+        href: '/openapi.json',
+      },
+      {
+        label: 'Ajan erişimi ve kimlik doğrulama bildirimi (/auth.md)',
+        href: '/auth.md',
+      },
+      {
+        label: 'API kataloğu, RFC 9727 (/.well-known/api-catalog)',
+        href: '/.well-known/api-catalog',
+      },
+      {
+        label: 'MCP manifestosu (/.well-known/mcp.json)',
+        href: '/.well-known/mcp.json',
+      },
+      {
+        label: 'Güvenlik iletişim adresi (/.well-known/security.txt)',
+        href: '/.well-known/security.txt',
+      },
+      {
+        label: 'Site depo tanımlayıcısı (/.well-known/dwp.json)',
+        href: '/.well-known/dwp.json',
+      },
+    ],
+    ctaTitle: 'Bir ajanı yönlendirin',
+    ctaBody:
+      "En hızlı yol hâlâ tek satırdır: herhangi bir kodlama ajanına /init istemini verin; skill'i kurar, deponuzu ajanlar için hazırlar ve derin işi bitirmeye koyulur.",
+    ctaPrimary: '/init istemini açın',
+    ctaSecondary: 'Metodolojiyi okuyun',
+  },
+
+  // Privacy policy
+  privacyPage: {
+    meta: {
+      title: 'Gizlilik — Deep Work Plan',
+      description:
+        'deepworkplan.com gizlilik politikası: hesap, reklam ve siteler arası takip içermeyen statik bir site; iletişim formunun ne topladığı sade biçimde açıklanır.',
+    },
+    eyebrow: 'Gizlilik politikası',
+    title: "deepworkplan.com'da gizlilik",
+    intro:
+      'Deep Work Plan statik bir dokümantasyon ve metodoloji sitesidir. Bu sayfa, ziyaret ettiğinizde sitenin hangi verilere dokunduğunu sade ve eksiksiz biçimde açıklar: sitede hesap sistemi, reklam ve siteler arası takip yoktur.',
+    lastUpdated: '8 Eylül 2026',
+    sections: [
+      {
+        heading: 'Site nedir',
+        body: 'deepworkplan.com, bir CDN üzerinden sunulan statik sayfalar bütünüdür. Giriş, kullanıcı veritabanı ve kişisel profil depolama yolu yoktur. İçerik, DailybotHQ organizasyonu altındaki herkese açık GitHub depolarında geliştirilir; burada okuduğunuz her şey tam olarak derlendiği gibi sunulur.',
+      },
+      {
+        heading: 'Analitik',
+        body: 'Site, sayfa görüntülemelerini toplu olarak saymak için çerezsiz ve gizlilik öncelikli bir analitik hizmeti olan Umami\'yi kullanır. Umami takip çerezi yerleştirmez ve siteler arası profil oluşturmaz. Yapay zeka tarayıcıları JavaScript çalıştırmadığı için, sunucu tarafındaki bir edge fonksiyonu ayrıca otomatik bot ziyaretlerinin kullanıcı aracısını ve yolunu anonim analitik olayları olarak kaydeder — bu, tarayıcı yazılımını tanımlar (örneğin "GPTBot /init adresini ziyaret etti"), asla insan bir ziyaretçiyi değil.',
+      },
+      {
+        heading: 'Çerezler ve yerel depolama',
+        body: 'Site hiçbir takip çerezi yerleştirmez. Tarayıcınızda depolanan tek şey, localStorage içinde tutulan bir tema tercihidir (açık veya koyu mod); bu tercih cihazınızdan asla çıkmaz ve hiçbir yere iletilmez. Tarayıcı depolamanızı temizlerseniz site, yalnızca sistem varsayılan temanıza döner.',
+      },
+      {
+        heading: 'Üçüncü taraf hizmetler',
+        body: "Barındırma ve teslimat Cloudflare Pages üzerinde çalışır; Cloudflare, CDN'yi işletmek ve kötüye kullanımı engellemek kapsamında kenar noktasındaki istek günlüklerini ve IP adreslerini kendi gizlilik politikası uyarınca işler. Toplu analitik Umami üzerinde çalışır (cloud.umami.is). İletişim formunu gönüllü olarak gönderirseniz yanıtlarınız, Google Forms üzerinden ekibimize iletilir — yazdığınız bilgilerin toplandığı tek yer burasıdır ve yalnızca size yanıt vermek için kullanılır.",
+      },
+      {
+        heading: 'Yapmadığımız şeyler',
+        body: 'Kişisel veri satmayız veya paylaşmayız; reklam veya yeniden pazarlama pikseli çalıştırmayız, tarayıcı parmak izi almayız, pazarlama e-postası göndermeyiz. Sitede bülten kaydı ve yukarıda açıklanan toplu, çerezsiz sayımların ötesinde telemetri yoktur.',
+      },
+      {
+        heading: 'Seçenekleriniz',
+        body: 'Buradaki analitik toplu ve çerezsiz olduğu için dışa aktarılacak veya silinecek kişisel profil yoktur. Analitik betiğini, sitenin çalışmasını etkilemeden herhangi bir içerik engelleyiciyle engelleyebilirsiniz. İletişim formunu gönderdiyseniz ve iletinizin silinmesini istiyorsanız aşağıdaki iletişim adresine yazın; iletiyi kaldırırız.',
+      },
+      {
+        heading: 'Bu politikadaki değişiklikler',
+        body: 'Bu politikada önemli bir değişiklik olursa sayfanın en üstündeki güncellenme tarihi de değişir ve öz değişiklikler, herkesin geçmişi inceleyebileceği herkese açık web sitesi deposuna işlenir.',
+      },
+    ],
+    contactTitle: 'İletişim ve güvenlik',
+    contactBody:
+      "Gizlilik soruları için security@dailybot.com adresine yazın. Bir güvenlik açığını bildirmek isterseniz, web sitesi ve skill depoları için GitHub'ın özel güvenlik açığı bildirme özelliğini tercih edin — kesin adresler için /.well-known/security.txt dosyasına bakın.",
   },
 };

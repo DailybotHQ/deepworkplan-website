@@ -1,7 +1,7 @@
 /**
  * Cloudflare Pages Middleware — AI Bot Analytics & Markdown Content Negotiation
  *
- * Two responsibilities:
+ * Three responsibilities:
  *
  * 1. **Markdown for Agents**: If a request sends `Accept: text/markdown`,
  *    serves the static `.md` version of the page (if it exists) instead of HTML.
@@ -12,8 +12,19 @@
  *    and tracks them server-side to Umami (AI bots don't execute JavaScript,
  *    so client-side analytics are invisible to them).
  *
+ * 3. **Agent-friendly errors** (post-processing): API paths never serve HTML
+ *    errors — unknown /api/* paths get a structured JSON error body — and
+ *    Markdown-negotiating clients that hit a 404 receive a short Markdown
+ *    recovery body pointing at the sitemap, llms.txt, and /developers.
+ *
  * Non-bot, non-markdown requests pass through with zero overhead.
  */
+import {
+  buildAgentRecoveryMarkdown,
+  buildApiError,
+  isApiPath,
+} from '../src/lib/agent-recovery';
+import { stripNonStandardRobotsDirectives } from '../src/lib/robots-directives';
 
 interface AssetsFetcher {
   fetch(request: Request | string): Promise<Response>;
@@ -167,16 +178,24 @@ async function sendToUmami(
 const LIGHTHOUSE_UA_PATTERN = /Chrome-Lighthouse|PageSpeed|Lighthouse/i;
 
 /**
- * Serve a Content-Signal-free version of `/robots.txt` to Lighthouse-family
- * tools so their strict `robots-txt` audit passes. Every other client
- * (Googlebot, AI crawlers, users, isitagentready.com's scanner) still sees
- * the canonical static `/robots.txt` with the `Content-Signal` directive.
+ * Serve a validator-friendly version of `/robots.txt` to Lighthouse-family
+ * tools so their strict `robots-txt` audit passes: Lighthouse's directive
+ * safelist rejects our `Agentmap:` line (ARD extension) as "Unknown
+ * directive" — the PSI SEO error. `Content-Signal:` is actually safelisted,
+ * but is stripped too as defense in depth. Every other client (Googlebot,
+ * AI crawlers, users, the ARD scanner) still sees the canonical static
+ * `/robots.txt` with both directives.
  *
  * Why at the middleware layer: Lighthouse is a quality tool, not a search
  * engine. Google's cloaking policy targets ranking crawlers (Googlebot),
- * which still receives the full directive. This UA rewrite does not change
+ * which still receives the full directives. This UA rewrite does not change
  * what search engines index; it only removes a false-positive flag from
  * one specific strict parser.
+ *
+ * LIMITATION: Cloudflare's "AI Crawl Control" managed robots.txt section is
+ * injected at the edge AFTER Functions run. Its directives are all in
+ * Lighthouse's safelist, so they parse cleanly — but nothing injected there
+ * can be rewritten by this function.
  */
 async function tryRewriteRobotsForLighthouse(
   context: EventContext
@@ -194,8 +213,8 @@ async function tryRewriteRobotsForLighthouse(
     if (!assetResponse.ok) return null;
 
     const originalBody = await assetResponse.text();
-    // Remove the `Content-Signal: ...` directive line plus its trailing newline.
-    const rewritten = originalBody.replace(/^Content-Signal:.*\r?\n?/m, '');
+    // Remove every non-standard directive line (Agentmap, Content-Signal).
+    const rewritten = stripNonStandardRobotsDirectives(originalBody);
 
     return new Response(rewritten, {
       status: 200,
@@ -341,6 +360,67 @@ function isDirectMarkdownUrl(pathname: string): boolean {
     !MARKDOWN_EXCLUDED_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 }
 
+/**
+ * Post-process the upstream (asset/function) response:
+ *
+ * 1. **JSON errors for API paths** — an unknown /api/* path must never serve
+ *    the HTML 404 page; agents get a structured JSON error they can parse.
+ * 2. **Markdown 404s** — a client negotiating Markdown (Accept: text/markdown)
+ *    that hits a 404 receives a short Markdown recovery body with the sitemap,
+ *    llms.txt, and developer links, instead of unparsable HTML.
+ *
+ * Everything else (including the HTML 404 page for regular browsers) passes
+ * through untouched.
+ */
+function finalizeResponse(context: EventContext, response: Response): Response {
+  if (response.status !== 404) {
+    return response;
+  }
+
+  const url = new URL(context.request.url);
+
+  // 1. API paths → structured JSON error.
+  if (isApiPath(url.pathname)) {
+    const body = JSON.stringify(
+      buildApiError(
+        'not_found',
+        `Unknown API path: ${url.pathname}`,
+        'The documented agent API lives at /api/mcp (MCP over JSON-RPC 2.0, POST) and /api/health.json (GET).'
+      )
+    );
+    return new Response(body, {
+      status: 404,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+  }
+
+  // 2. Markdown-negotiating clients → Markdown recovery body.
+  //    Same eligibility rules as tryServeMarkdown: no /api/, /internal/, /_
+  //    prefixes and no static-asset extensions.
+  const accept = context.request.headers.get('accept') || '';
+  const eligible =
+    accept.includes('text/markdown') &&
+    !MARKDOWN_EXCLUDED_PREFIXES.some((prefix) => url.pathname.startsWith(prefix)) &&
+    !MARKDOWN_EXCLUDED_EXTENSIONS.test(url.pathname);
+  if (eligible) {
+    return new Response(buildAgentRecoveryMarkdown(url.origin), {
+      status: 404,
+      headers: {
+        'Content-Type': 'text/markdown; charset=utf-8',
+        'Cache-Control': 'public, max-age=600',
+        Vary: 'Accept',
+        'X-Content-Negotiation': 'markdown',
+      },
+    });
+  }
+
+  return response;
+}
+
 export async function onRequest(context: EventContext): Promise<Response> {
   // 0. robots.txt UA rewrite — strip Content-Signal for Lighthouse-family
   //    tools to keep PageSpeed SEO at 1.00 without weakening the directive
@@ -378,7 +458,7 @@ export async function onRequest(context: EventContext): Promise<Response> {
       );
     }
 
-    return context.next();
+    return finalizeResponse(context, await context.next());
   }
 
   // Check for unknown bots
@@ -402,5 +482,5 @@ export async function onRequest(context: EventContext): Promise<Response> {
     }
   }
 
-  return context.next();
+  return finalizeResponse(context, await context.next());
 }

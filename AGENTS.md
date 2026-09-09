@@ -67,14 +67,15 @@ src/
 │   ├── kit/{en,es,pt,zh,…}/          # Kit catalog (presets, adapters, commands)
 │   └── pages/{en,es,pt,zh,…}/        # Agent-friendly Markdown endpoints (AEO)
 ├── layouts/             # MainLayout, InternalLayout, ShowcaseLayout
-├── lib/                 # Utilities (i18n.ts, language-codes.ts, translations/, markdown-for-agents.ts)
+├── lib/                 # Utilities (i18n.ts, translations/, markdown-for-agents.ts, mcp/ MCP server logic, agent-recovery.ts)
 ├── pages/               # File-based routing (EN at root, non-EN under /[lang]/ dynamic tree)
 │   ├── [lang]/          # Single dynamic tree serving all non-default languages
-│   ├── internal/        # Dev-only hub (excluded from production)
-│   └── api/             # JSON endpoints
+│   └── internal/        # Dev-only hub (excluded from production)
 └── styles/              # global.css (Tailwind config)
 
-scripts/                 # Build utilities (image optimization)
+functions/               # Cloudflare Pages Functions (edge): api/mcp.ts (MCP server) + _middleware.ts
+public/api/              # Static agent API artifacts (health.json); spec at public/openapi.json
+scripts/                 # Build utilities (image optimization, version stamping)
 docs/                    # Project documentation
 .agents/                 # Cross-agent skills, commands, agents, settings (canonical)
 .claude → .agents        # Backward-compat symlink for Claude Code

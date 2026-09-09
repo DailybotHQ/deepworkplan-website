@@ -6,40 +6,72 @@
 
 Deep Work Plan is the methodology that turns any repository into an AI-first, agent-pilotable codebase. It is spec-driven development where the repository itself becomes the agent harness: a goal becomes an agreed plan, the plan is decomposed into atomic, independently verifiable tasks, and each task runs in a focused loop that ends with an explicit validation gate. The plan, tasks, and running log are all plain Markdown — readable, reviewable, and version-controlled. DWP is tool-agnostic and repo-native: the methodology and kit install into the repository (AGENTS.md, docs, the .agents/ skills home, the DWP skill) so any agent — Claude, Cursor, Copilot, Codex, Gemini, and more — can pilot the repo.
 
+## When to use Deep Work Plan
+
+Reach for DWP when the job is:
+
+- Making a repository AI-first: installing the agent scaffolding (context, skills, guardrails) so any coding agent can pilot it. Start with the [adoption prompt](https://deepworkplan.com/init.md) — a self-contained prompt an agent can execute directly.
+- Long-horizon agent work: features, refactors, or migrations too large for one prompt, decomposed into atomic tasks that each end in an explicit validation gate and survive across sessions (resumable state on disk).
+- Spec-driven development without tool lock-in: the plan is the durable source of truth in the repo (Markdown, version-controlled), not inside a vendor's tool. DWP is tool-agnostic where GitHub Spec Kit, Amazon Kiro, or Tessl are tool-bound.
+- Handing an unfamiliar repository to an agent: the DWP documentation layer (AGENTS.md, docs/, .agents/) gives any agent the context to work safely.
+
+Skip DWP for single-file edits, throwaway scripts, or repos an agent will touch once — the structure pays off on durable, multi-session work.
+
+How an agent should engage: fetch the [adoption prompt](https://deepworkplan.com/init.md) and follow it to onboard a repository; call the MCP tools at [api/mcp](https://deepworkplan.com/api/mcp) (get_init_prompt, list_site_sections, read_page) to navigate and read this site; read the [developer portal](https://deepworkplan.com/developers) for the full API surface.
+
 ## Core Sections
 
-- Home: /
-- Methodology: /methodology — what DWP is, its principles, and how to adopt it
-- Specification: /spec — the normative DWP standard (task anatomy, validation gates, completion protocol, archetypes, addons)
-- Kit: /kit — presets, adapters, and commands for installing DWP into a repository
-- Examples: /examples — worked examples of the methodology in practice
-- Quickstart: /quickstart — get DWP running in a repo quickly
-- Init / Adoption: /init — make any repository AI-first: install the skill, onboard the repo, then plan and execute. Self-contained agent prompt at /init.md
-- About: /about — what DWP is and who maintains it (Dailybot)
-- Contact: /contact — how to engage with the project on GitHub
+- [Home](https://deepworkplan.com/): overview of the Deep Work Plan methodology
+- [Methodology](https://deepworkplan.com/methodology): what DWP is, its principles, and how to adopt it
+- [Specification](https://deepworkplan.com/spec): the normative DWP standard — task anatomy, validation gates, completion protocol, archetypes, addons
+- [Kit](https://deepworkplan.com/kit): presets, adapters, and commands for installing DWP into a repository
+- [Examples](https://deepworkplan.com/examples): worked examples of the methodology in practice
+- [Quickstart](https://deepworkplan.com/quickstart): get DWP running in a repo quickly
+- [Init / Adoption](https://deepworkplan.com/init): make any repository AI-first — install the skill, onboard the repo, then plan and execute (self-contained agent prompt at [init.md](https://deepworkplan.com/init.md))
+- [Developers](https://deepworkplan.com/developers): the agent & developer surface — OpenAPI spec, MCP server, zero-auth API, install CLI
+- [Trust](https://deepworkplan.com/trust): why the skill is safe to adopt — MIT, verifiable installs, disclosure policy
+- [About](https://deepworkplan.com/about): what DWP is and who maintains it (Dailybot)
+- [Contact](https://deepworkplan.com/contact): how to engage with the project on GitHub
+- [Privacy](https://deepworkplan.com/privacy): the site's privacy policy
+
+## Developer & Agent Resources
+
+All public, read-only, and zero-auth (no API keys, no registration) — declared in [auth.md](https://deepworkplan.com/auth.md):
+
+- [OpenAPI spec](https://deepworkplan.com/openapi.json): every endpoint, parameter, and response schema of the agent API
+- [MCP server](https://deepworkplan.com/api/mcp): Streamable HTTP (JSON-RPC 2.0) — manifest at [mcp.json](https://deepworkplan.com/.well-known/mcp.json)
+- [Health](https://deepworkplan.com/api/health.json): static health marker for the agent API
+- [API catalog](https://deepworkplan.com/.well-known/api-catalog): RFC 9727 linkset of service documents
+- [ARD capability manifest](https://deepworkplan.com/.well-known/ai-catalog.json): the agentmap declared in robots.txt
+- [Agent Skills index](https://deepworkplan.com/.well-known/agent-skills/index.json): agent-readiness skills this site adopts
+- [Security contact](https://deepworkplan.com/.well-known/security.txt): where to report vulnerabilities
+- [Developer portal](https://deepworkplan.com/developers): quickstarts, curl examples, install CLI (/docs redirects here)
 
 ## Repository
 
-- GitHub: https://github.com/DailybotHQ/deepworkplan-website
+- [deepworkplan-website](https://github.com/DailybotHQ/deepworkplan-website): this site's source (the repo dogfoods DWP)
+- [deepworkplan-skill](https://github.com/DailybotHQ/deepworkplan-skill): the installable DWP skill
 
 ## Languages
 
-- English (default): /
-- Spanish: /es/
+The site ships in 17 languages — English (default) at the root and 16 more under their code. Every page and its Markdown mirror exist in every language:
+
+- [English](https://deepworkplan.com/) (default), [Spanish](https://deepworkplan.com/es/), [Portuguese](https://deepworkplan.com/pt/), [Chinese](https://deepworkplan.com/zh/), [Japanese](https://deepworkplan.com/ja/), [German](https://deepworkplan.com/de/), [French](https://deepworkplan.com/fr/), [Korean](https://deepworkplan.com/ko/), [Russian](https://deepworkplan.com/ru/), [Italian](https://deepworkplan.com/it/), [Turkish](https://deepworkplan.com/tr/), [Indonesian](https://deepworkplan.com/id/), [Vietnamese](https://deepworkplan.com/vi/), [Hindi](https://deepworkplan.com/hi/), [Polish](https://deepworkplan.com/pl/), [Ukrainian](https://deepworkplan.com/uk/), [Thai](https://deepworkplan.com/th/)
 
 ## Agent-Friendly Markdown
 
-Every rendered page is available as native source Markdown for AI agents:
+Every rendered page is available as native source Markdown for AI agents (not HTML-to-Markdown conversion):
 
-- Page Markdown: /{page}.md (EN), /es/{page}.md (ES)
-- Onboarding prompt: /init.md — a self-contained prompt you can paste into an agent to make a repository AI-first
-- Content Negotiation: send `Accept: text/markdown` to get Markdown for any page
-- Content-Type: text/markdown; charset=utf-8
-- Source Markdown — not HTML-to-Markdown conversion
+- Page Markdown: [about.md](https://deepworkplan.com/about.md) (EN), [es/about.md](https://deepworkplan.com/es/about.md) (ES) — same pattern for every page and language
+- Onboarding prompt: [init.md](https://deepworkplan.com/init.md) — a self-contained prompt you can paste into an agent to make a repository AI-first
+- Content negotiation: send `Accept: text/markdown` on any URL to receive Markdown instead of HTML (Content-Type: text/markdown; charset=utf-8)
 
 ## Machine-Readable Feeds
 
-- Sitemap: /sitemap-index.xml
+- [Sitemap](https://deepworkplan.com/sitemap-index.xml): every page in every language
+- [OpenAPI spec](https://deepworkplan.com/openapi.json): the typed agent API surface
+- [Agentmap](https://deepworkplan.com/.well-known/ai-catalog.json): ARD capability manifest
+- [API catalog](https://deepworkplan.com/.well-known/api-catalog): RFC 9727 linkset
 
 ## Crawling Guidance
 
@@ -49,4 +81,4 @@ Every rendered page is available as native source Markdown for AI agents:
 
 ## Detailed Version
 
-For comprehensive content descriptions, see: /llms-full.txt
+For comprehensive content descriptions, see: [llms-full.txt](https://deepworkplan.com/llms-full.txt)

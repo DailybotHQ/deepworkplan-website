@@ -1,0 +1,1013 @@
+{
+  "openapi": "3.1.0",
+  "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+  "info": {
+    "title": "Deep Work Plan Agent API",
+    "version": "1.0.86",
+    "summary": "Read-only, zero-auth agent surface for deepworkplan.com: LLM guidance files, per-page Markdown mirrors in 17 languages, machine-readable discovery documents, and a stateless MCP server.",
+    "description": "The Deep Work Plan (DWP) methodology site exposes a public, read-only, zero-auth surface built for AI agents. No API keys, no OAuth, no registration: every endpoint is anonymous GET except the MCP endpoint, which is POST.\n\n**When to use this API:** fetch the canonical adoption prompt (`/init.md`) to make any repository AI-first with DWP; read any page as native source Markdown (`Accept: text/markdown` or explicit `.md` URLs) in 17 languages; discover the site map via `llms.txt`, the sitemap, or the ARD catalog; and drive the site programmatically through the MCP server at `/api/mcp` (tools: `get_init_prompt`, `list_site_sections`, `read_page`).\n\n**When not to use it:** this is a documentation/marketing site — there are no write operations, user accounts, or telemetry endpoints. Do not look for them here.\n\nErrors: unknown `/api/*` paths return a structured JSON error (`ApiError`), never HTML. Non-API paths return the HTML 404 page (or a Markdown recovery body when `Accept: text/markdown` is sent).",
+    "contact": {
+      "name": "Dailybot (maintainer of Deep Work Plan)",
+      "url": "https://www.dailybot.com",
+      "email": "security@dailybot.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://deepworkplan.com",
+      "description": "Production (Cloudflare Pages)"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://deepworkplan.com/developers",
+    "description": "Developer & agent portal — quickstarts, MCP examples, CLI install."
+  },
+  "tags": [
+    {
+      "name": "Guidance",
+      "description": "LLM guidance files for site-level discovery."
+    },
+    {
+      "name": "Agent Markdown",
+      "description": "Per-page Markdown mirrors, in every active language."
+    },
+    {
+      "name": "Discovery",
+      "description": "Machine-readable discovery and provenance documents."
+    },
+    {
+      "name": "API",
+      "description": "JSON endpoints under /api (MCP server, health)."
+    }
+  ],
+  "security": [],
+  "paths": {
+    "/llms.txt": {
+      "get": {
+        "operationId": "getLlmsTxt",
+        "tags": [
+          "Guidance"
+        ],
+        "summary": "LLM guidance index (llms.txt)",
+        "description": "Curated, hand-authored index of the site for LLMs: about, core sections, when to use Deep Work Plan, agent-facing resources, and crawling guidance. Start here.",
+        "responses": {
+          "200": {
+            "description": "llms.txt body.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "body": {
+                    "value": "# Deep Work Plan\n\n> Context matters more than models…"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/llms-full.txt": {
+      "get": {
+        "operationId": "getLlmsFullTxt",
+        "tags": [
+          "Guidance"
+        ],
+        "summary": "Detailed LLM guidance (llms-full.txt)",
+        "description": "Comprehensive version of llms.txt with fuller content descriptions for every section.",
+        "responses": {
+          "200": {
+            "description": "llms-full.txt body.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/init.md": {
+      "get": {
+        "operationId": "getInitMarkdown",
+        "tags": [
+          "Agent Markdown"
+        ],
+        "summary": "Canonical DWP adoption prompt",
+        "description": "The self-contained English agent prompt served at the canonical `/init` adoption endpoint: install the DWP skill, onboard the repository, then plan and execute long-horizon work. Paste it into any coding agent.",
+        "responses": {
+          "200": {
+            "description": "Adoption prompt as Markdown.",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/index.md": {
+      "get": {
+        "operationId": "getHomeMarkdown",
+        "tags": [
+          "Agent Markdown"
+        ],
+        "summary": "Home page as Markdown (English)",
+        "description": "Markdown mirror of the home page (English is the default, unprefixed language).",
+        "responses": {
+          "200": {
+            "description": "Home page Markdown.",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{page}.md": {
+      "parameters": [
+        {
+          "name": "page",
+          "in": "path",
+          "required": true,
+          "description": "Page slug (English slugs are shared across all languages).",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "about",
+              "contact",
+              "developers",
+              "examples",
+              "init",
+              "kit",
+              "methodology",
+              "privacy",
+              "quickstart",
+              "spec",
+              "trust"
+            ]
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getPageMarkdown",
+        "tags": [
+          "Agent Markdown"
+        ],
+        "summary": "Any top-level page as Markdown (English)",
+        "description": "Native source Markdown for a top-level page in the default language (English). Every rendered HTML page on the site has one of these mirrors — this is the source Markdown, not an HTML conversion.",
+        "responses": {
+          "200": {
+            "description": "Page Markdown with metadata header (Language, Canonical) and a site-navigation footer.",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown page slug. The body is a Markdown recovery document (or HTML if Markdown was not accepted).",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{lang}/{page}.md": {
+      "parameters": [
+        {
+          "name": "lang",
+          "in": "path",
+          "required": true,
+          "description": "Language code (every language except the default English, which is unprefixed).",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "es",
+              "pt",
+              "zh",
+              "ja",
+              "de",
+              "fr",
+              "ko",
+              "ru",
+              "it",
+              "tr",
+              "id",
+              "vi",
+              "hi",
+              "pl",
+              "uk",
+              "th"
+            ]
+          }
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "required": true,
+          "description": "Page slug (English slugs are shared across all languages).",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "about",
+              "contact",
+              "developers",
+              "examples",
+              "index",
+              "init",
+              "kit",
+              "methodology",
+              "privacy",
+              "quickstart",
+              "spec",
+              "trust"
+            ]
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getLocalizedPageMarkdown",
+        "tags": [
+          "Agent Markdown"
+        ],
+        "summary": "Any top-level page as Markdown (localized)",
+        "description": "Native source Markdown for a top-level page in one of the 16 non-default languages. `page: index` is the localized home page.",
+        "responses": {
+          "200": {
+            "description": "Localized page Markdown.",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown language/page combination.",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/methodology/{slug}.md": {
+      "parameters": [
+        {
+          "name": "slug",
+          "in": "path",
+          "required": true,
+          "description": "Methodology document slug, e.g. `01-manifesto`. Enumerate all slugs via the sitemap or /methodology.md.",
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getMethodologyDocMarkdown",
+        "tags": [
+          "Agent Markdown"
+        ],
+        "summary": "Methodology document as Markdown",
+        "description": "Markdown mirror of a methodology reader page (English). Localized variants live at /{lang}/methodology/{slug}.md.",
+        "responses": {
+          "200": {
+            "description": "Methodology document Markdown.",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/spec/{slug}.md": {
+      "parameters": [
+        {
+          "name": "slug",
+          "in": "path",
+          "required": true,
+          "description": "Specification document slug. Enumerate all slugs via the sitemap or /spec.md.",
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getSpecDocMarkdown",
+        "tags": [
+          "Agent Markdown"
+        ],
+        "summary": "Specification document as Markdown",
+        "description": "Markdown mirror of a normative DWP specification page (English). Localized variants live at /{lang}/spec/{slug}.md.",
+        "responses": {
+          "200": {
+            "description": "Specification document Markdown.",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kit/{slug}.md": {
+      "parameters": [
+        {
+          "name": "slug",
+          "in": "path",
+          "required": true,
+          "description": "Kit catalog entry slug. Enumerate all slugs via the sitemap or /kit.md.",
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getKitDocMarkdown",
+        "tags": [
+          "Agent Markdown"
+        ],
+        "summary": "Kit catalog entry as Markdown",
+        "description": "Markdown mirror of a kit catalog page — presets, adapters, commands (English). Localized variants live at /{lang}/kit/{slug}.md.",
+        "responses": {
+          "200": {
+            "description": "Kit entry Markdown.",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/examples/{slug}.md": {
+      "parameters": [
+        {
+          "name": "slug",
+          "in": "path",
+          "required": true,
+          "description": "Example slug. Enumerate all slugs via the sitemap or /examples.md.",
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getExampleMarkdown",
+        "tags": [
+          "Agent Markdown"
+        ],
+        "summary": "Worked example as Markdown",
+        "description": "Markdown mirror of a worked example of the methodology (English). Localized variants live at /{lang}/examples/{slug}.md.",
+        "responses": {
+          "200": {
+            "description": "Example Markdown.",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/ai-catalog.json": {
+      "get": {
+        "operationId": "getAiCatalog",
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "ARD capability manifest (agentmap)",
+        "description": "Agentic Resource Discovery manifest referenced as `Agentmap:` in robots.txt. Lists this site's agent surfaces (MCP server card, skills index, llms.txt, /init.md, API catalog) with representative queries.",
+        "responses": {
+          "200": {
+            "description": "ARD catalog (JSON, CORS-enabled).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "entry": {
+                    "value": {
+                      "specVersion": "1.0",
+                      "host": {
+                        "displayName": "Deep Work Plan",
+                        "identifier": "did:web:deepworkplan.com"
+                      },
+                      "entries": []
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/api-catalog": {
+      "get": {
+        "operationId": "getApiCatalog",
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "RFC 9727 API catalog (linkset+json)",
+        "description": "Linkset of the site's service documents: service-doc (llms.txt), service-desc (this OpenAPI file), and the MCP server card.",
+        "responses": {
+          "200": {
+            "description": "linkset+json catalog.",
+            "content": {
+              "application/linkset+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Linkset"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/agent-skills/index.json": {
+      "get": {
+        "operationId": "getAgentSkillsIndex",
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "Agent Skills Discovery index",
+        "description": "Cloudflare Agent Skills Discovery v0.2.0 index of the agent-readiness skills this site adopts, each with a SHA-256 digest of the referenced SKILL.md.",
+        "responses": {
+          "200": {
+            "description": "Skills index (JSON).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/mcp.json": {
+      "get": {
+        "operationId": "getMcpManifest",
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "MCP manifest",
+        "description": "Machine-readable manifest of the MCP server: Streamable HTTP transport URL, protocol version, and the exposed tool names.",
+        "responses": {
+          "200": {
+            "description": "MCP manifest (JSON, CORS-enabled).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpManifest"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/mcp/server-card.json": {
+      "get": {
+        "operationId": "getMcpServerCard",
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "MCP server card",
+        "description": "Server card describing the deepworkplan.com MCP surfaces (HTTP Streamable transport at /api/mcp plus the browser WebMCP channel) with tool descriptions.",
+        "responses": {
+          "200": {
+            "description": "Server card (JSON).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/dwp.json": {
+      "get": {
+        "operationId": "getDwpDescriptor",
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "DWP repository descriptor",
+        "description": "This website's own Deep Work Plan repo descriptor — the site dogfoods the methodology it documents (spec version, archetype, conformance, skill install command).",
+        "responses": {
+          "200": {
+            "description": "Repo descriptor (JSON).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/security.txt": {
+      "get": {
+        "operationId": "getSecurityTxt",
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "Security contact (RFC 9116)",
+        "description": "Where to report security vulnerabilities (GitHub private vulnerability reporting for both the website and the skill repositories).",
+        "responses": {
+          "200": {
+            "description": "security.txt body.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sitemap-index.xml": {
+      "get": {
+        "operationId": "getSitemapIndex",
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "XML sitemap index",
+        "description": "Sitemap index covering every page in every language. The authoritative enumeration of valid paths on this site.",
+        "responses": {
+          "200": {
+            "description": "Sitemap index XML.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/health.json": {
+      "get": {
+        "operationId": "getHealth",
+        "tags": [
+          "API"
+        ],
+        "summary": "Service health",
+        "description": "Static health marker for the site's agent API. Confirms the service is up and links to the OpenAPI spec, developer portal, and llms.txt.",
+        "responses": {
+          "200": {
+            "description": "Healthy.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mcp": {
+      "post": {
+        "operationId": "callMcp",
+        "tags": [
+          "API"
+        ],
+        "summary": "MCP server (Streamable HTTP, stateless)",
+        "description": "Model Context Protocol server for deepworkplan.com over JSON-RPC 2.0. Stateless (no session id, no SSE). Supported methods: `initialize`, `ping`, `tools/list`, `tools/call`. Notifications (no `id`) receive `202` with an empty body; batching is not supported.\n\nTools: `get_init_prompt` (canonical adoption prompt), `list_site_sections` (site map), `read_page` (any page as source Markdown).\n\nProtocol versions: `2025-03-26`, `2025-06-18` (send the `MCP-Protocol-Version` header; when absent `2025-03-26` is assumed).",
+        "x-mcp-transport": "streamable-http",
+        "x-mcp-endpoint": "https://deepworkplan.com/api/mcp",
+        "x-mcp-protocol-versions": [
+          "2025-03-26",
+          "2025-06-18"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonRpcRequest"
+              },
+              "examples": {
+                "initialize": {
+                  "summary": "Initialize a session",
+                  "value": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "initialize",
+                    "params": {
+                      "protocolVersion": "2025-06-18",
+                      "capabilities": {},
+                      "clientInfo": {
+                        "name": "example-agent",
+                        "version": "1.0.0"
+                      }
+                    }
+                  }
+                },
+                "toolsList": {
+                  "summary": "List available tools",
+                  "value": {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "method": "tools/list"
+                  }
+                },
+                "readPage": {
+                  "summary": "Call a tool",
+                  "value": {
+                    "jsonrpc": "2.0",
+                    "id": 3,
+                    "method": "tools/call",
+                    "params": {
+                      "name": "read_page",
+                      "arguments": {
+                        "path": "/init"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "JSON-RPC response (success result or JSON-RPC error object for method-not-found / invalid-params).",
+            "headers": {
+              "MCP-Protocol-Version": {
+                "description": "Protocol version in effect for this request.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonRpcResponse"
+                },
+                "examples": {
+                  "toolResult": {
+                    "value": {
+                      "jsonrpc": "2.0",
+                      "id": 3,
+                      "result": {
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "# Init — …"
+                          }
+                        ],
+                        "isError": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted notification — empty body, no response object."
+          },
+          "400": {
+            "description": "Unparseable body, invalid JSON-RPC envelope, or unsupported MCP-Protocol-Version header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonRpcResponse"
+                },
+                "example": {
+                  "jsonrpc": "2.0",
+                  "id": null,
+                  "error": {
+                    "code": -32700,
+                    "message": "Parse error: request body must be a single JSON-RPC 2.0 object."
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed (only POST and OPTIONS). Includes `Allow: POST, OPTIONS`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type — Content-Type must be application/json.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiError": {
+        "type": "object",
+        "description": "Structured error body for /api/* paths — agents should never have to parse HTML errors.",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Stable machine-readable error code, e.g. `not_found`, `method_not_allowed`, `unsupported_media_type`."
+              },
+              "message": {
+                "type": "string",
+                "description": "Human-readable explanation of what failed."
+              },
+              "hint": {
+                "type": "string",
+                "description": "How to resolve or retry the request."
+              },
+              "docs": {
+                "type": "string",
+                "format": "uri",
+                "description": "Where to read more (usually the OpenAPI spec)."
+              }
+            },
+            "required": [
+              "code",
+              "message"
+            ]
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "additionalProperties": false
+      },
+      "JsonRpcRequest": {
+        "type": "object",
+        "description": "JSON-RPC 2.0 request object. `id` absent ⇒ notification (202, empty body). Batching (arrays) is not supported.",
+        "properties": {
+          "jsonrpc": {
+            "const": "2.0"
+          },
+          "id": {
+            "type": [
+              "string",
+              "number",
+              "null"
+            ],
+            "description": "Caller-supplied identifier echoed in the response."
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "initialize",
+              "ping",
+              "tools/list",
+              "tools/call"
+            ],
+            "description": "JSON-RPC method. Unknown methods get -32601."
+          },
+          "params": {
+            "type": "object",
+            "description": "Method parameters. tools/call needs {name: string, arguments?: object}."
+          }
+        },
+        "required": [
+          "jsonrpc",
+          "method"
+        ],
+        "additionalProperties": false
+      },
+      "JsonRpcErrorObject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "JSON-RPC error code: -32700 parse, -32600 invalid request, -32601 method not found, -32602 invalid params, -32603 internal."
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "JsonRpcResponse": {
+        "type": "object",
+        "description": "JSON-RPC 2.0 response: either `result` or `error`, never both.",
+        "properties": {
+          "jsonrpc": {
+            "const": "2.0"
+          },
+          "id": {
+            "type": [
+              "string",
+              "number",
+              "null"
+            ]
+          },
+          "result": {
+            "type": "object",
+            "description": "initialize: {protocolVersion, capabilities, serverInfo, instructions}; tools/list: {tools: […]}; tools/call: {content: [{type: 'text', text}], isError: boolean}; ping: {}."
+          },
+          "error": {
+            "$ref": "#/components/schemas/JsonRpcErrorObject"
+          }
+        },
+        "required": [
+          "jsonrpc",
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "HealthStatus": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ok"
+          },
+          "service": {
+            "type": "string",
+            "const": "deepworkplan.com"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string",
+            "description": "Site release version."
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "openapi": {
+                "type": "string",
+                "format": "uri"
+              },
+              "developers": {
+                "type": "string",
+                "format": "uri"
+              },
+              "llms": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          }
+        },
+        "required": [
+          "status",
+          "service"
+        ],
+        "additionalProperties": false
+      },
+      "McpManifest": {
+        "type": "object",
+        "description": "Manifest for the MCP server published at /.well-known/mcp.json.",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "protocolVersion": {
+            "type": "string"
+          },
+          "transport": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "streamable-http"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Linkset": {
+        "type": "object",
+        "description": "RFC 9727 linkset (application/linkset+json).",
+        "properties": {
+          "linkset": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "anchor": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "rel": {
+                        "type": "string"
+                      },
+                      "href": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

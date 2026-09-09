@@ -74,6 +74,8 @@ export interface SiteTranslations {
     init: string;
     quickstart: string;
     trust: string;
+    developers: string;
+    privacy: string;
     github: string;
     // Source-code repo selector (header + mobile)
     repo: {
@@ -213,6 +215,7 @@ export interface SiteTranslations {
       subtitle: string;
       primaryCta: string;
       secondaryCta: string;
+      tertiaryCta: string;
       meta: string;
     };
   };
@@ -307,6 +310,55 @@ export interface SiteTranslations {
     message: string;
     backHome: string;
     exploreMethodology: string;
+    // Agent-recovery block: links rendered for AI agents that land on a 404.
+    agentTitle: string;
+    agentIntro: string;
+  };
+
+  // Developer & agent portal (/developers)
+  developersPage: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    intro: string;
+    accessTitle: string;
+    accessIntro: string;
+    accessPoints: { title: string; body: string }[];
+    endpointsTitle: string;
+    endpointsIntro: string;
+    endpointsNote: string;
+    // method + path are code (never localized); description is translated.
+    endpoints: { method: string; path: string; description: string }[];
+    mcpTitle: string;
+    mcpIntro: string;
+    mcpCodeLabel: string;
+    mcpNote: string;
+    markdownTitle: string;
+    markdownIntro: string;
+    markdownCodeLabel: string;
+    markdownNote: string;
+    cliTitle: string;
+    cliIntro: string;
+    cliCodeLabel: string;
+    cliNote: string;
+    resourcesTitle: string;
+    resources: { label: string; href: string }[];
+    ctaTitle: string;
+    ctaBody: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+  };
+
+  // Privacy policy (/privacy)
+  privacyPage: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    intro: string;
+    lastUpdated: string;
+    sections: { heading: string; body: string }[];
+    contactTitle: string;
+    contactBody: string;
   };
 
   // Deep Work Plan — Methodology index + chapter reader
