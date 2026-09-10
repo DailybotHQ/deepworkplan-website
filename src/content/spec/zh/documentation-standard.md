@@ -1,6 +1,6 @@
 ---
 title: 文档标准
-description: "关于 Deep Work Plan 如何记录其结构、任务与进展的规范性标准：README 规则、状态标记，以及三项强制收尾任务。"
+description: "关于 Deep Work Plan 如何记录其结构、任务与进展的规范性标准：README 规则、状态标记、十段式任务结构，以及 Final Review。"
 order: 1
 lang: zh
 section: Standard
@@ -8,7 +8,7 @@ section: Standard
 
 # 文档标准
 
-**版本 1.0。** 本标准界定了 Deep Work Plan 如何记录其结构、任务与进展。它适用于在 DWP 方法论下创建的每一份计划。关键词 MUST、SHOULD 与 MAY 按 RFC 2119 中所定义使用。
+**版本 1.1。** 本标准界定了 Deep Work Plan 如何记录其结构、任务与进展。它适用于在 DWP 方法论下创建的每一份计划。关键词 MUST、SHOULD 与 MAY 按 RFC 2119 中所定义使用。
 
 ## 计划 README
 
@@ -22,7 +22,7 @@ section: Standard
 
 ## 任务文件
 
-每个任务文件 MUST 命名为 `<n>.task_<slug>.md`，并包含九段式结构。
+每个任务文件 MUST 命名为 `<n>.task_<slug>.md`，并包含十段式结构——九个经典段落外加**触及面（Touched Surface）**：该任务改动之物与必须验证之物之间的契约（计划面与实际面、受影响的消费方、*isolated*（隔离）、*seam*（接缝）、*shared/core*（共享核心）或 *unknown*（未知）之一的风险级别、所用的测试映射，以及所选关卡及其理由）。
 
 ## PROGRESS.md
 
@@ -44,10 +44,10 @@ section: Standard
 
 所有标题 MUST 采用首字母句式（sentence case）。文档 SHOULD 避免使用营销式语言与感叹号。
 
-## 三项强制收尾任务
+## Final Review、任务内技能决策与可选报告
 
-每份计划 MUST 以三项标准任务收尾：
+在本版本下编写的每份计划 MUST 恰好以一项强制任务收尾：**Final Review**——对计划完整变更集的安全审查、对最后相关状态的最终状态验证，以及技能决策的核对。一项严重的安全发现会阻止完成。
 
-1. **Security Review** —— 审计计划的完整变更集，检查机密信息、注入风险与新的攻击面，并核实 `docs/SECURITY.md` 仍然反映现实。一项严重发现会阻止完成。
-2. **Skills & Agents Discovery** —— 识别所创建的可复用技能与代理。
-3. **Executive Report** —— 一份面向利益相关者的成果总结。
+- **任务内技能决策。** 每项任务的“完成与日志”段落都承载一项**技能处置（skills disposition）**——`none`（无）、对既有技能或代理的更新、一次具名创建，或一次附带理由与负责人的推迟。有依据的编写发生在所属任务内部、其验证关卡之前，并在对照 `.agents/` 目录查重之后；有依据的条目以稳定候选（`T{task}-{seq}`）的形式记录在计划的技能候选台账中。
+- **Executive Report 是可选的，按需生成。** 在完成时提供一次；仅在明确请求时从持久证据中生成。没有回应，或一次无人值守运行，都会让计划在没有它的情况下照常完成。
+- **旧版计划。** 在更早版本下编写的计划以三项强制收尾任务收尾，且仍然符合规范——符合性检查器 MUST 接受那种形态。

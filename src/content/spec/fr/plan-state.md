@@ -50,7 +50,7 @@ Les deux fichiers MUST être écrits de façon atomique : écrire dans un fichie
 ```json
 {
   "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.2.0",
+  "spec_version": "2.3.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
@@ -146,7 +146,7 @@ Une tâche MUST NOT être marquée `completed` dans `state.json` tant que l'un d
 
 Une tâche `completed` SHOULD porter un enregistrement `outcome` : ce qui a été `tried`, ce qui a `failed`, ce qui a `worked`, et des `notes` libres. Chaque entrée doit tenir en une ligne.
 
-Les enregistrements de résultats font d'un plan terminé une **mémoire épisodique** récupérable : un agent (ou une plateforme d'indexation de mémoire) peut ensuite se rappeler comment un problème a été résolu, et pas seulement qu'il l'a été. Ils alimentent la tâche finale obligatoire de découverte des Skills et Agents, qui SHOULD les lire lors de l'extraction de motifs. Sur des plateformes comme Hermes qui indexent la mémoire des agents, les enregistrements de résultats dans `state.json` rendent les plans terminés directement récupérables dans les sessions futures.
+Les enregistrements de résultats font d'un plan terminé une **mémoire épisodique** récupérable : un agent (ou une plateforme d'indexation de mémoire) peut ensuite se rappeler comment un problème a été résolu, et pas seulement qu'il l'a été. Ils alimentent les dispositions de skills par tâche et la réconciliation des skills du Final Review, qui les lit lors de l'extraction de motifs. Sur des plateformes comme Hermes qui indexent la mémoire des agents, les enregistrements de résultats dans `state.json` rendent les plans terminés directement récupérables dans les sessions futures.
 
 ### Point de reprise et état bloqué
 

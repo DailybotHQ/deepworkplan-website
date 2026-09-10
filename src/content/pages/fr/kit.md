@@ -46,13 +46,13 @@ et un repli générique.
 
 ### Addons (facultatifs)
 
-Des capacités optionnelles que le flux onboard peut superposer à un dépôt — jamais incluses dans la base AI-first :
+Des capacités que le flux onboard superpose à un dépôt. Quatre sont facultatives et jamais incluses dans la base AI-first ; la revue locale d’AI Diff Reviewer est requise depuis le standard 2.3.0 :
 
 - **Devcontainer** — un conteneur de développement reproductible et isolé avec une auth de CLI IA persistante.
 - **Dailybot** — un rapport de progression et de jalons au mieux pour les équipes utilisant Dailybot.
 - **Dependency upgrade** — des mises à jour indépendantes du gestionnaire de paquets, par lots, validées et réversibles.
 - **Système de conception** — un `DESIGN.md` à périmètre d'interface (à `docs/DESIGN.md`, référencé depuis `AGENTS.md`) raisonné à partir de la véritable source de conception du dépôt, avec des profils pour l'UI visuelle, la sortie CLI stylée et la messagerie conversationnelle, afin que les agents génèrent une sortie d'interface fidèle à la marque ; le profil visuel est activé par défaut lorsqu'un système de conception est détecté, et les profils CLI et conversationnel sont recommandés lorsqu'ils sont détectés et toujours soumis à une question.
-- **AI Diff Reviewer** — renforce la Revue de sécurité avec une revue locale structurée ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md` requis) ; le Flow B optionnel ajoute un point de contrôle de fusion de PR en CI partageant la même extension. Toujours demander Flow A vs Flow B ; jamais auto-installer.
+- **AI Diff Reviewer** — la revue locale requise : l’onboarding installe [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md`, et la passe de sécurité de chaque Final Review l’exécute ; le Flow B optionnel ajoute un point de contrôle de fusion de PR en CI partageant la même extension, proposé explicitement et jamais installé sans demande.
 
 ### Exemples
 

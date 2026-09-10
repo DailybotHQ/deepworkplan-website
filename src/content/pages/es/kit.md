@@ -50,14 +50,14 @@ paquete/CLI de Python y una reserva genérica.
 
 ### Addons (opcionales)
 
-Capacidades opcionales que el flujo de onboard puede sumar a un repo — nunca forman parte de la base
-AI-first:
+Capacidades que el flujo de onboard suma a un repo. Cuatro son opcionales y nunca forman parte de la base
+AI-first; la revisión local de AI Diff Reviewer es requerida desde el estándar 2.3.0:
 
 - **Devcontainer** — un contenedor de desarrollo reproducible y aislado con autenticación de CLI de IA persistente.
 - **Dailybot** — reportes de avance e hitos de mejor esfuerzo para equipos que usan Dailybot.
 - **Actualización de dependencias** — actualizaciones agnósticas del gestor de paquetes, por lotes, validadas y reversibles.
 - **Sistema de diseño** — un `DESIGN.md` con alcance de interfaz (en `docs/DESIGN.md`, referenciado desde `AGENTS.md`) razonado a partir de la fuente de diseño real del repo, con perfiles para UI visual, salida de CLI con estilo y mensajería conversacional, para que los agentes generen salida de interfaz fiel a la marca; el perfil visual está activado por defecto cuando se detecta un sistema de diseño, y los perfiles de CLI y conversacional se recomiendan cuando se detectan y siempre se preguntan.
-- **AI Diff Reviewer** — amplía la Revisión de Seguridad con una revisión local estructurada ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md` requerido); el Flujo B opcional añade una compuerta de fusión de PR en CI que comparte la misma extensión. Siempre preguntar Flujo A vs Flujo B; nunca instalar automáticamente.
+- **AI Diff Reviewer** — la revisión local requerida: el onboarding instala [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md`, y el pase de seguridad de cada Final Review la ejecuta; el Flujo B opcional añade una compuerta de fusión de PR en CI que comparte la misma extensión, ofrecida explícitamente y nunca instalada sin pedirlo.
 
 ### Ejemplos
 

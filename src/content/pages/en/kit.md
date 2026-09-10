@@ -46,13 +46,13 @@ and a generic fallback.
 
 ### Addons (opt-in)
 
-Optional capabilities the onboard flow can layer onto a repo — never part of the AI-first baseline:
+Capabilities the onboard flow layers onto a repo. Four are optional and never part of the AI-first baseline; the AI Diff Reviewer local review is required since standard 2.3.0:
 
 - **Devcontainer** — a reproducible, isolated dev container with persistent AI-CLI auth.
 - **Dailybot** — plan-lifecycle reporting (kickoff, significant task, blocked, completion) for teams using Dailybot, plus access to the full Dailybot agent skill (3.10.3: chat, check-ins, forms, ask AI, per-repo API keys, and more).
 - **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades.
 - **Design system** — an interface-scoped `DESIGN.md` (at `docs/DESIGN.md`, referenced from `AGENTS.md`) reasoned from the repo's real design source, with profiles for visual UI, styled CLI output, and conversational messaging, so agents generate on-brand interface output; the visual profile is default-on when a design system is detected, the CLI and conversational profiles are recommended when detected and always asked about.
-- **AI Diff Reviewer** — augments Security Review with a structured local review ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + required `.review/extension.md`); optional Flow B adds a CI PR merge gate sharing the same extension. Always ask Flow A vs Flow B; never auto-install.
+- **AI Diff Reviewer** — the required local review: onboarding installs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md`, and every Final Review's security pass runs it; optional Flow B adds a CI PR merge gate sharing the same extension, offered explicitly and never installed unrequested.
 
 ### Examples
 

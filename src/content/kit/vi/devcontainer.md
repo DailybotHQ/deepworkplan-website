@@ -23,4 +23,4 @@ Khoảng 85% của devcontainer là một bộ khung chung ổn định; 15% cò
 
 ## Ghi chú
 
-Tùy chọn và không bao giờ bắt buộc. Một repo hoàn toàn tuân thủ ngay cả khi không có addon nào.
+Tùy chọn và không bao giờ bắt buộc. Một repo hoàn toàn tuân thủ ngay cả khi không có addon tùy chọn nào.

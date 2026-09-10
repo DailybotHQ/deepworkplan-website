@@ -50,7 +50,7 @@ Markdown 计划仍是**人类可读的事实来源**。JSON 层是一份**派生
 ```json
 {
   "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.2.0",
+  "spec_version": "2.3.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
@@ -146,7 +146,7 @@ Markdown 计划仍是**人类可读的事实来源**。JSON 层是一份**派生
 
 已 `completed` 的任务 SHOULD 携带一条 `outcome` 记录：尝试了什么（`tried`）、失败了什么（`failed`）、有效的是什么（`worked`），以及自由格式的 `notes`。每条记录保持一行。
 
-outcome 记录使已完成的计划成为可检索的**情节记忆**：代理（或记忆索引平台）日后可以回想起某个问题是如何解决的，而不仅仅是知道它被解决了。它们馈送给强制性的技能与代理发现任务，该任务在挖掘模式时 SHOULD 读取它们。在 Hermes 等对代理记忆建立索引的平台上，`state.json` 中的 outcome 记录使已完成的计划可在未来的会话中直接检索。
+outcome 记录使已完成的计划成为可检索的**情节记忆**：代理（或记忆索引平台）日后可以回想起某个问题是如何解决的，而不仅仅是知道它被解决了。它们馈送给任务内的技能处置与 Final Review 的技能决策核对，后者在挖掘模式时读取它们。在 Hermes 等对代理记忆建立索引的平台上，`state.json` 中的 outcome 记录使已完成的计划可在未来的会话中直接检索。
 
 ### 检查点与阻塞状态
 

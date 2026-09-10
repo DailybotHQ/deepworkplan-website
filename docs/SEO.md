@@ -92,7 +92,8 @@ For custom OG images, pass `image` prop:
 | Person (enhanced) | `AboutPage.astro` | About page only |
 | BreadcrumbList | Most page components | Per-page navigation hierarchy |
 | ContactPage | `ContactPage.astro` | Contact page |
-| WebPage | `TrustPage.astro`, `DevelopersPage.astro`, `PrivacyPage.astro` | Trust/developers/privacy pages |
+| WebPage | `TrustPage.astro`, `DevelopersPage.astro`, `PrivacyPage.astro`, `ComparePage.astro` | Trust/developers/privacy/compare pages |
+| FAQPage | `FaqPage.astro` | FAQ question and accepted-answer structured data |
 
 ### Adding a New Schema
 

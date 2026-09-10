@@ -6,8 +6,8 @@
 > boilerplate (§9), and the prompt entry schema (§10). Every entry below is
 > schema-complete; each **Prompt** field is copy-paste-ready.
 >
-> **Slots covered:** HP-01, HP-02 (illustrations) · HP-03, HP-04, HP-05 (diagram
-> components) + skip decisions for `Comparison.astro` and `Origin.astro`.
+> **Slots covered:** HP-01, HP-02, HP-06…HP-09 (illustrations) · HP-03, HP-04, HP-05
+> (diagram components) + skip decisions for `Comparison.astro` and `Origin.astro`.
 >
 > **Flagship:** HP-01 — the Hero right-column illustration — gets the richest
 > treatment and is the single highest-value asset on the site.
@@ -202,6 +202,245 @@
 
 ---
 
+
+---
+
+## HP-06…HP-09 — Home story plates (four-act narrative)
+
+> **Provenance:** generated during `PLAN_home_storytelling_upgrade` and mirrored
+> here as the canonical durable home of these prompts (the plan-local pack under
+> `.dwp/` is disposable). Each plate generates TWO transparent-background PNGs
+> (light + dark ink variant, identical composition) — no ground, no text. Entries
+> below are schema-complete; each **Prompt** block is self-contained.
+
+### HP-06 — Humans steer, agents execute (ship's wheel)
+
+- **Target surface:** `src/components/diagrams/home/HumansSteer.astro` → Act I plate art (site renders the text layer around it).
+- **Type:** illustration
+- **Priority:** ★ flagship (first act of the homepage story)
+- **Purpose / trust rationale:** The division of labor that defines the method — humans choose the course, agents do the hours. The wheel-and-crew metaphor makes the abstract contract concrete in one glance.
+- **Aspect & dimensions:** 16:10 · ~800 × 500 px displayed · generate @2x (1600 × 1000 px)
+- **Light/dark strategy:** transparent — dual-ink pair (light file: dark ink `#1B1A17` + oxblood `#7A1F1F`; dark file: light ink `#ECE7DA` + oxblood `#C2554D`; identical composition).
+- **In-image text (EN):** none
+- **In-image text (ES):** none
+- **Suggested asset path:** `public/images/visuals/home/plate-humans-steer.png` (light) · `plate-humans-steer-dark.png` (dark)
+- **Alt text (EN):** An engraved ship's wheel held by a captain's hand while the crew works the sails behind — an engraving evoking humans steering and agents executing.
+- **Alt text (ES):** Un timón de barco grabado sostenido por la mano de un capitán mientras la tripulación trabaja en las velas — un grabado que evoca a los humanos dirigiendo y los agentes ejecutando.
+- **Caption (EN):** —
+- **Caption (ES):** —
+- **Integration note:** `<img>` pair inside the `editorial-plate` frame (light `dark:hidden`, dark `hidden dark:block`), `width="1600" height="1000"`, `loading="lazy"`, class `plate-frame-img`. Statement/points render as the HTML text layer.
+
+**HP-06 LIGHT — Prompt (copy-paste):**
+
+> **HOUSE STYLE (transparent plate art) —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome warm ink (`#1B1A17`) line work on a **fully transparent background** (alpha channel — no canvas fill of any color), with a single restrained **oxblood** accent (`#7A1F1F`) used for one small emphasis mark only. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows, no ground or backdrop of any kind.
+>
+> **EDGES / BACKGROUND (critical):** The background must be **100% transparent** — alpha, not white, not cream, not any solid color or paper texture. The composition sits centered with generous margin; linework thins and feathers softly toward the margins; **nothing touches or is clipped by any edge**. No border, no frame, no rectangle, no outline, no vignette fill.
+>
+> **Subject:** A landscape 16:10 engraved vignette. Dominating the left-center, a large ship's wheel (helm) rendered in fine engraved line work — eight spokes with turned handles, a carved hub — gripped by a captain's hand in a period coat sleeve. Behind and to the right, suggested in slightly lighter, finer hatching: three crew members at work on ropes and sails, drawn smaller and quieter than the wheel. A single bold course line — the lone **oxblood** accent — sweeps from behind the wheel across the lower composition toward the horizon at right, ending in a small oxblood arrowhead. Quiet sea-horizon hairlines low in the frame, well inside the margins. Balanced, calm, timeless.
+>
+> **AVOID —** any solid, filled, or textured background (transparent only), any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, **any text, letters, words, numbers, typography, captions, or labels**, lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+
+**HP-06 DARK — Prompt (copy-paste):**
+
+> **HOUSE STYLE (transparent plate art) —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome **light ink (`#ECE7DA`)** line work on a **fully transparent background** (alpha channel — no canvas fill of any color), with a single restrained **oxblood** accent (`#C2554D`) used for one small emphasis mark only. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows, no ground or backdrop of any kind.
+>
+> **EDGES / BACKGROUND (critical):** The background must be **100% transparent** — alpha, not white, not cream, not black, not any solid color or texture. The composition sits centered with generous margin; linework thins and feathers softly toward the margins; **nothing touches or is clipped by any edge**. No border, no frame, no rectangle, no outline, no vignette fill.
+>
+> **Subject:** A landscape 16:10 engraved vignette. Dominating the left-center, a large ship's wheel (helm) rendered in fine engraved line work — eight spokes with turned handles, a carved hub — gripped by a captain's hand in a period coat sleeve. Behind and to the right, suggested in slightly lighter, finer hatching: three crew members at work on ropes and sails, drawn smaller and quieter than the wheel. A single bold course line — the lone **oxblood** accent — sweeps from behind the wheel across the lower composition toward the horizon at right, ending in a small oxblood arrowhead. Quiet sea-horizon hairlines low in the frame, well inside the margins. Balanced, calm, timeless.
+>
+> **AVOID —** any solid, filled, or textured background (transparent only), any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, **any text, letters, words, numbers, typography, captions, or labels**, lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+
+---
+
+### HP-07 — A plan agents can't drift from (the loop)
+
+- **Target surface:** `src/components/diagrams/home/PlanNoDrift.astro` → Act II plate art.
+- **Type:** illustration
+- **Priority:** high
+- **Purpose / trust rationale:** The mechanism plate: a plan is a closed loop — plan, atomic tasks, validation gates, completion, resumable state — and the loop is what keeps a context-limited agent on course. The trailing dashed wake shows drift being prevented, not just omitted.
+- **Aspect & dimensions:** 16:10 · ~800 × 500 px displayed · generate @2x (1600 × 1000 px)
+- **Light/dark strategy:** transparent — dual-ink pair (same rules as HP-06).
+- **In-image text (EN):** none
+- **In-image text (ES):** none
+- **Suggested asset path:** `public/images/visuals/home/plate-plan-no-drift.png` (light) · `plate-plan-no-drift-dark.png` (dark)
+- **Alt text (EN):** A gyroscope ringed by five engraved emblems joined in a loop — an engraving evoking a plan agents cannot drift from.
+- **Alt text (ES):** Un giróscopo rodeado por cinco emblemas grabados unidos en un bucle — un grabado que evoca un plan del que los agentes no pueden desviarse.
+- **Caption (EN):** —
+- **Caption (ES):** —
+- **Integration note:** Same pair wiring as HP-06; the five loop stages render as the HTML ordered list beside/below the art.
+
+**HP-07 LIGHT — Prompt (copy-paste):**
+
+> **HOUSE STYLE (transparent plate art) —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome warm ink (`#1B1A17`) line work on a **fully transparent background** (alpha channel — no canvas fill of any color), with a single restrained **oxblood** accent (`#7A1F1F`) used for one small emphasis mark only. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows, no ground or backdrop of any kind.
+>
+> **EDGES / BACKGROUND (critical):** The background must be **100% transparent** — alpha, not white, not cream, not any solid color or paper texture. The composition sits centered with generous margin; linework thins and feathers softly toward the margins; **nothing touches or is clipped by any edge**. No border, no frame, no rectangle, no outline, no vignette fill.
+>
+> **Subject:** A landscape 16:10 engraved emblem ring. At center, a small standing **gyroscope** in fine engraved line work (gimbal rings, balanced rotor). Around it, five small engraved emblems arranged evenly on an invisible ellipse and joined by thin directional arrows into a closed clockwise **loop**: a mariner's compass; a document scroll with four blank check boxes; a small arched gate; a planted flag; a small treasure chest. The **gate** emblem (and the arrow returning to it) carries the lone **oxblood** accent. One faint **dashed** line trails off the loop outward and fades to nothing within the lower margin — drift being caught back by the loop. Quiet, symmetrical, print-quality.
+>
+> **AVOID —** any solid, filled, or textured background (transparent only), any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, **any text, letters, words, numbers, typography, captions, or labels**, lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+
+**HP-07 DARK — Prompt (copy-paste):**
+
+> **HOUSE STYLE (transparent plate art) —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome **light ink (`#ECE7DA`)** line work on a **fully transparent background** (alpha channel — no canvas fill of any color), with a single restrained **oxblood** accent (`#C2554D`) used for one small emphasis mark only. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows, no ground or backdrop of any kind.
+>
+> **EDGES / BACKGROUND (critical):** The background must be **100% transparent** — alpha, not white, not cream, not black, not any solid color or texture. The composition sits centered with generous margin; linework thins and feathers softly toward the margins; **nothing touches or is clipped by any edge**. No border, no frame, no rectangle, no outline, no vignette fill.
+>
+> **Subject:** A landscape 16:10 engraved emblem ring. At center, a small standing **gyroscope** in fine engraved line work (gimbal rings, balanced rotor). Around it, five small engraved emblems arranged evenly on an invisible ellipse and joined by thin directional arrows into a closed clockwise **loop**: a mariner's compass; a document scroll with four blank check boxes; a small arched gate; a planted flag; a small treasure chest. The **gate** emblem (and the arrow returning to it) carries the lone **oxblood** accent. One faint **dashed** line trails off the loop outward and fades to nothing within the lower margin — drift being caught back by the loop. Quiet, symmetrical, print-quality.
+>
+> **AVOID —** any solid, filled, or textured background (transparent only), any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, **any text, letters, words, numbers, typography, captions, or labels**, lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+
+---
+
+### HP-08 — Done is a contract, not a vibe (the seal)
+
+- **Target surface:** `src/components/diagrams/home/DoneIsAContract.astro` → Act III plate art.
+- **Type:** illustration
+- **Priority:** high
+- **Purpose / trust rationale:** Verification is the product: tasks close on evidence, not on feeling. The wax seal on a contract with blank check rows says "acceptance criteria, met and recorded" without a single word.
+- **Aspect & dimensions:** 16:10 · ~800 × 500 px displayed · generate @2x (1600 × 1000 px)
+- **Light/dark strategy:** transparent — dual-ink pair (same rules as HP-06).
+- **In-image text (EN):** none
+- **In-image text (ES):** none
+- **Suggested asset path:** `public/images/visuals/home/plate-done-is-a-contract.png` (light) · `plate-done-is-a-contract-dark.png` (dark)
+- **Alt text (EN):** A hand pressing a wax seal onto a contract document with blank check rows — an engraving evoking done as a contract, not a vibe.
+- **Alt text (ES):** Una mano presionando un sello de laca sobre un documento de contrato con filas de casillas en blanco — un grabado que evoca que hecho es un contrato, no una sensación.
+- **Caption (EN):** —
+- **Caption (ES):** —
+- **Integration note:** Same pair wiring as HP-06; the four contract terms render as the HTML list.
+
+**HP-08 LIGHT — Prompt (copy-paste):**
+
+> **HOUSE STYLE (transparent plate art) —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome warm ink (`#1B1A17`) line work on a **fully transparent background** (alpha channel — no canvas fill of any color), with a single restrained **oxblood** accent (`#7A1F1F`) used for one small emphasis mark only. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows, no ground or backdrop of any kind.
+>
+> **EDGES / BACKGROUND (critical):** The background must be **100% transparent** — alpha, not white, not cream, not any solid color or paper texture. The composition sits centered with generous margin; linework thins and feathers softly toward the margins; **nothing touches or is clipped by any edge**. No border, no frame, no rectangle, no outline, no vignette fill.
+>
+> **Subject:** A landscape 16:10 engraved vignette. Center-right: a contract document drawn in fine line work, lying at a slight angle, its face carrying **four blank check rows** (empty square boxes with hairline rules — no writing). Above it, a dignified hand in a period sleeve presses a round **wax seal** stamp; the seal — the lone **oxblood** element — sits pressed onto the document's lower corner with a scalloped wax edge and a simple heraldic mark. At the left margin, a small engraved inkwell with a quill. Hairline ruling and quiet cross-hatching only; calm, ceremonial, print-quality.
+>
+> **AVOID —** any solid, filled, or textured background (transparent only), any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, **any text, letters, words, numbers, typography, captions, or labels** (the check rows are empty boxes), lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+
+**HP-08 DARK — Prompt (copy-paste):**
+
+> **HOUSE STYLE (transparent plate art) —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome **light ink (`#ECE7DA`)** line work on a **fully transparent background** (alpha channel — no canvas fill of any color), with a single restrained **oxblood** accent (`#C2554D`) used for one small emphasis mark only. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows, no ground or backdrop of any kind.
+>
+> **EDGES / BACKGROUND (critical):** The background must be **100% transparent** — alpha, not white, not cream, not black, not any solid color or texture. The composition sits centered with generous margin; linework thins and feathers softly toward the margins; **nothing touches or is clipped by any edge**. No border, no frame, no rectangle, no outline, no vignette fill.
+>
+> **Subject:** A landscape 16:10 engraved vignette. Center-right: a contract document drawn in fine line work, lying at a slight angle, its face carrying **four blank check rows** (empty square boxes with hairline rules — no writing). Above it, a dignified hand in a period sleeve presses a round **wax seal** stamp; the seal — the lone **oxblood** element — sits pressed onto the document's lower corner with a scalloped wax edge and a simple heraldic mark. At the left margin, a small engraved inkwell with a quill. Hairline ruling and quiet cross-hatching only; calm, ceremonial, print-quality.
+>
+> **AVOID —** any solid, filled, or textured background (transparent only), any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, **any text, letters, words, numbers, typography, captions, or labels** (the check rows are empty boxes), lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+
+---
+
+### HP-09 — The repository is the harness (the chest)
+
+- **Target surface:** `src/components/diagrams/home/RepoAsHarnessPlate.astro` → Act IV plate art.
+- **Type:** illustration
+- **Priority:** high
+- **Purpose / trust rationale:** The where-does-it-live plate: context, tasks, checks, state, and tools are plain files in the repository — the chest makes "durable, inspectable, survives context resets" physical. The blank hang-tags are deliberate: the site renders the real labels (SPEC, TASKS, CHECKS, STATE, TOOLS) as live text over the art.
+- **Aspect & dimensions:** 16:10 · ~800 × 500 px displayed · generate @2x (1600 × 1000 px)
+- **Light/dark strategy:** transparent — dual-ink pair (same rules as HP-06).
+- **In-image text (EN):** none
+- **In-image text (ES):** none
+- **Suggested asset path:** `public/images/visuals/home/plate-repo-as-harness.png` (light) · `plate-repo-as-harness-dark.png` (dark)
+- **Alt text (EN):** An engraved archive chest with five blank hang-tags tied by string — an engraving evoking the repository as the harness.
+- **Alt text (ES):** Un arcón archivo grabado con cinco etiquetas colgantes en blanco atadas con cordel — un grabado que evoca el repositorio como el harness.
+- **Caption (EN):** —
+- **Caption (ES):** —
+- **Integration note:** Same pair wiring as HP-06; the five tag labels (SPEC, TASKS, CHECKS, STATE, TOOLS) render as HTML small-caps chips positioned over/near the tags — keep the tag faces blank and uncluttered so the labels land cleanly.
+
+**HP-09 LIGHT — Prompt (copy-paste):**
+
+> **HOUSE STYLE (transparent plate art) —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome warm ink (`#1B1A17`) line work on a **fully transparent background** (alpha channel — no canvas fill of any color), with a single restrained **oxblood** accent (`#7A1F1F`) used for one small emphasis mark only. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows, no ground or backdrop of any kind.
+>
+> **EDGES / BACKGROUND (critical):** The background must be **100% transparent** — alpha, not white, not cream, not any solid color or paper texture. The composition sits centered with generous margin; linework thins and feathers softly toward the margins; **nothing touches or is clipped by any edge**. No border, no frame, no rectangle, no outline, no vignette fill.
+>
+> **Subject:** A landscape 16:10 engraved vignette. Centered, a sturdy **archive chest** in fine engraved line work — banded wood, lock hasp, two small drawers — its lid slightly open showing neat ledger folders standing inside. **Five blank hang-tags** (small rectangles with a hole and short string, completely blank faces) fan out from the chest, tied by string, two on the left, one on top, two on the right, each angled differently and held fully inside the composition. The chest's central **hasp** carries the lone **oxblood** accent. Quiet, grounded, print-quality; generous margin all around.
+>
+> **AVOID —** any solid, filled, or textured background (transparent only), any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, **any text, letters, words, numbers, typography, captions, or labels** (the hang-tags are blank), lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+
+**HP-09 DARK — Prompt (copy-paste):**
+
+> **HOUSE STYLE (transparent plate art) —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome **light ink (`#ECE7DA`)** line work on a **fully transparent background** (alpha channel — no canvas fill of any color), with a single restrained **oxblood** accent (`#C2554D`) used for one small emphasis mark only. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows, no ground or backdrop of any kind.
+>
+> **EDGES / BACKGROUND (critical):** The background must be **100% transparent** — alpha, not white, not cream, not black, not any solid color or texture. The composition sits centered with generous margin; linework thins and feathers softly toward the margins; **nothing touches or is clipped by any edge**. No border, no frame, no rectangle, no outline, no vignette fill.
+>
+> **Subject:** A landscape 16:10 engraved vignette. Centered, a sturdy **archive chest** in fine engraved line work — banded wood, lock hasp, two small drawers — its lid slightly open showing neat ledger folders standing inside. **Five blank hang-tags** (small rectangles with a hole and short string, completely blank faces) fan out from the chest, tied by string, two on the left, one on top, two on the right, each angled differently and held fully inside the composition. The chest's central **hasp** carries the lone **oxblood** accent. Quiet, grounded, print-quality; generous margin all around.
+>
+> **AVOID —** any solid, filled, or textured background (transparent only), any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, **any text, letters, words, numbers, typography, captions, or labels** (the hang-tags are blank), lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+
+
+---
+
+## HP-10…HP-11 — Problem/answer diptych + context economy (user-directed amendment)
+
+> **Provenance:** generated during `PLAN_home_storytelling_upgrade` (Task 15) and mirrored here as canonical.
+
+### HP-10 — The problem and the answer (drift vs charted course)
+
+- **Target surface:** `src/components/home/Pitch.astro` → section illustration (text right, art left).
+- **Type:** illustration · **Priority:** high
+- **Purpose:** The problem and the answer in one image: drift in the fog versus a plotted course to harbor.
+- **Aspect & dimensions:** 16:10 · 1600 × 1000 px · PNG transparent · ≤ 400 KB
+- **Light/dark strategy:** transparent — dual-ink pair.
+- **In-image text (EN):** none · **(ES):** none
+- **Suggested asset path:** `public/images/visuals/home/plate-pitch-problem.png` (light) · `plate-pitch-problem-dark.png` (dark)
+- **Alt text (EN):** An engraved diptych: a ship adrift in fog beside jagged rocks on one side, and the same ship steady on a plotted course toward a harbor beacon on the other.
+- **Alt text (ES):** Un díptico grabado: un barco a la deriva en la niebla junto a rocas escarpadas a un lado, y el mismo barco firme sobre un rumbo trazado hacia una baliza de puerto al otro.
+- **Integration note:** img pair (light `dark:hidden`, dark `hidden dark:block`) in the Pitch left column, `width="1600" height="1000"`, `loading="lazy"`.
+
+**HP-10 LIGHT — Prompt (copy-paste):**
+
+> **HOUSE STYLE (transparent plate art) —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome warm ink (`#1B1A17`) line work on a **fully transparent background** (alpha channel — no canvas fill of any color), with a single restrained **oxblood** accent (`#7A1F1F`) used for one small emphasis mark only. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows, no ground or backdrop of any kind.
+>
+> **EDGES / BACKGROUND (critical):** The background must be **100% transparent** — alpha, not white, not cream, not any solid color or paper texture. The composition sits centered with generous margin; linework thins and feathers softly toward the margins; **nothing touches or is clipped by any edge**. No border, no frame, no rectangle, no outline, no vignette fill.
+>
+> **Subject:** A landscape 16:10 engraved diptych split by a soft vertical fade (no hard line). LEFT: a sailing ship adrift in a fog bank amid jagged rocks — sails slack and askew, hull listing, an oar drifting loose — hatched denser to feel lost and heavy. RIGHT: the same class of ship steady and upright on calm swells, sails set with purpose, following a single **oxblood** plotted course line that sweeps from the lower left up toward a small harbor beacon with a tiny flame at the far right. The fog only troubles the left half; the right half breathes calm, open water. Quiet storytelling, print-quality.
+>
+> **AVOID —** any solid, filled, or textured background (transparent only), any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, **any text, letters, words, numbers, typography, captions, or labels**, lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+
+**HP-10 DARK — Prompt (copy-paste):**
+
+> **HOUSE STYLE (transparent plate art) —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome **light ink (`#ECE7DA`)** line work on a **fully transparent background** (alpha channel — no canvas fill of any color), with a single restrained **oxblood** accent (`#C2554D`) used for one small emphasis mark only. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows, no ground or backdrop of any kind.
+>
+> **EDGES / BACKGROUND (critical):** The background must be **100% transparent** — alpha, not white, not black, not any solid color or texture. The composition sits centered with generous margin; linework thins and feathers softly toward the margins; **nothing touches or is clipped by any edge**. No border, no frame, no rectangle, no outline, no vignette fill.
+>
+> **Subject:** A landscape 16:10 engraved diptych split by a soft vertical fade (no hard line). LEFT: a sailing ship adrift in a fog bank amid jagged rocks — sails slack and askew, hull listing, an oar drifting loose — hatched denser to feel lost and heavy. RIGHT: the same class of ship steady and upright on calm swells, sails set with purpose, following a single **oxblood** plotted course line that sweeps from the lower left up toward a small harbor beacon with a tiny flame at the far right. The fog only troubles the left half; the right half breathes calm, open water. Quiet storytelling, print-quality.
+>
+> **AVOID —** any solid, filled, or textured background (transparent only), any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, **any text, letters, words, numbers, typography, captions, or labels**, lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+
+### HP-11 — Every token counts (the context economy)
+
+- **Target surface:** `src/components/diagrams/home/ContextEconomy.astro` → Act V plate art (new fifth act).
+- **Type:** illustration · **Priority:** high
+- **Purpose:** The efficiency story made physical: context is measured supply — loaded progressively, spent deliberately, tallied where it happens.
+- **Aspect & dimensions:** 16:10 · 1600 × 1000 px · PNG transparent · ≤ 400 KB
+- **Light/dark strategy:** transparent — dual-ink pair.
+- **In-image text (EN):** none · **(ES):** none
+- **Suggested asset path:** `public/images/visuals/home/plate-context-economy.png` (light) · `plate-context-economy-dark.png` (dark)
+- **Alt text (EN):** An engraved purser's cabin: a balance scale weighing cargo crates against a strongbox beside an open ledger with blank tally rows — an engraving evoking that every token counts.
+- **Alt text (ES):** La cabina del contramastrer grabada: una balanza que pesa cajas de carga contra una caja fuerte junto a un libro de cuentas con filas de tally en blanco — un grabado que evoca que cada token cuenta.
+- **Integration note:** img pair in the Act V editorial-plate frame (light `dark:hidden`, dark `hidden dark:block`), `width="1600" height="1000"`, `loading="lazy"`, class `plate-frame-img`.
+
+**HP-11 LIGHT — Prompt (copy-paste):**
+
+> **HOUSE STYLE (transparent plate art) —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome warm ink (`#1B1A17`) line work on a **fully transparent background** (alpha channel — no canvas fill of any color), with a single restrained **oxblood** accent (`#7A1F1F`) used for one small emphasis mark only. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows, no ground or backdrop of any kind.
+>
+> **EDGES / BACKGROUND (critical):** The background must be **100% transparent** — alpha, not white, not cream, not any solid color or paper texture. The composition sits centered with generous margin; linework thins and feathers softly toward the margins; **nothing touches or is clipped by any edge**. No border, no frame, no rectangle, no outline, no vignette fill.
+>
+> **Subject:** A landscape 16:10 engraved vignette of a ship's purser cabin. Center-right: a fine engraved **balance scale** weighing a small stack of cargo crates against a compact strongbox, its pointer perfectly level — the pointer is the lone **oxblood** accent. Left: an open **ledger book** with blank tally rows (no writing) and a few loose counting discs beside it. Behind, a round porthole framing a calm sea horizon, high in the composition. Everything measured, orderly, deliberate — supply counted, nothing wasted. Print-quality.
+>
+> **AVOID —** any solid, filled, or textured background (transparent only), any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, **any text, letters, words, numbers, typography, captions, or labels** (ledger rows and tally marks are blank), lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+
+**HP-11 DARK — Prompt (copy-paste):**
+
+> **HOUSE STYLE (transparent plate art) —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome **light ink (`#ECE7DA`)** line work on a **fully transparent background** (alpha channel — no canvas fill of any color), with a single restrained **oxblood** accent (`#C2554D`) used for one small emphasis mark only. Calm, authoritative, editorial. Flat 2D, print-quality line work. No gradients, no glossy 3D, no photographic realism, no drop shadows, no ground or backdrop of any kind.
+>
+> **EDGES / BACKGROUND (critical):** The background must be **100% transparent** — alpha, not white, not black, not any solid color or texture. The composition sits centered with generous margin; linework thins and feathers softly toward the margins; **nothing touches or is clipped by any edge**. No border, no frame, no rectangle, no outline, no vignette fill.
+>
+> **Subject:** A landscape 16:10 engraved vignette of a ship's purser cabin. Center-right: a fine engraved **balance scale** weighing a small stack of cargo crates against a compact strongbox, its pointer perfectly level — the pointer is the lone **oxblood** accent. Left: an open **ledger book** with blank tally rows (no writing) and a few loose counting discs beside it. Behind, a round porthole framing a calm sea horizon, high in the composition. Everything measured, orderly, deliberate — supply counted, nothing wasted. Print-quality.
+>
+> **AVOID —** any solid, filled, or textured background (transparent only), any border / frame / rectangle / box / outline, elements touching or clipped by the edges, hard straight edges, gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy backgrounds, watermark, signature, extra logos, **any text, letters, words, numbers, typography, captions, or labels** (ledger rows and tally marks are blank), lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
+
+
 ## Coverage (homepage)
 
 | ID | Kind | Status |
@@ -211,5 +450,11 @@
 | HP-03 | diagram (component) | done — `QuickstartFlow` |
 | HP-04 | diagram (component) | done — `OnboardingSequence` |
 | HP-05 | diagram (component) | done — `ArchetypesCompare` |
+| HP-06 | illustration (image) | done — `HumansSteer` (integrated) |
+| HP-07 | illustration (image) | done — `PlanNoDrift` (integrated) |
+| HP-08 | illustration (image) | done — `DoneIsAContract` (integrated) |
+| HP-09 | illustration (image) | done — `RepoAsHarnessPlate` (integrated) |
+| HP-10 | illustration (image) | done — `Pitch` problem/answer diptych |
+| HP-11 | illustration (image) | done — `ContextEconomy` Act V |
 | Comparison | — | skip (table → CSS ticks) |
 | Origin | — | skip (already has logo) |

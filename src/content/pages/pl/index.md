@@ -1,12 +1,12 @@
 ---
 title: "Deep Work Plan — ustrukturyzowane wykonanie dla agentów kodujących AI"
 description: "Kontekst liczy się bardziej niż modele. Deep Work Plan zamienia repozytorium w ustrukturyzowane środowisko, w którym agent kończy długą pracę."
-lastUpdated: 2026-06-03
+lastUpdated: 2026-09-10
 ---
 
 ## Modele mają znaczenie. Kontekst ma znaczenie większe.
 
-Deep Work Plan zamienia dowolne repozytorium w ustrukturyzowane środowisko — kontekst, zabezpieczenia i trwały plan — w którym dowolny agent kodujący wykonuje pracę z precyzją i doprowadza do końca zadania o długim horyzoncie.
+Deep Work Plan przekształca każde repozytorium w ustrukturyzowane środowisko — kontekst, zabezpieczenia i trwały plan — w którym każdy agent kodowania pracuje precyzyjnie i wydajnie oraz kończy pracę długoterminową.
 
 Deep Work Plan (DWP) to otwarta metodyka i kit na licencji MIT, służące do planowania i wykonywania złożonej pracy programistycznej z agentami AI. Nie wybierasz metody instalacji ani nie kopiujesz szablonu — kopiujesz prompt init.md i wklejasz go do swojego agenta:
 
@@ -21,12 +21,63 @@ Deep Work Plan (DWP) to otwarta metodyka i kit na licencji MIT, służące do pl
 
 ## Problem i odpowiedź
 
-Agenci kodujący AI są zdumiewająco skuteczni w krótkich zrywach. Przy pracy o długim horyzoncie — migracji, nowym podsystemie, refaktoryzacji obejmującej dziesiątki plików — dryfują: kontekst się zapełnia, decyzje są zapominane, a wielogodzinne zadania porzucane w połowie.
+W krótkich seriach agenci kodowania są imponujący. Powierz im długą misję — migrację, nowy podsystem, refaktoryzację dziesiątek plików — a zaczną dryfować: kontekst się zapełnia, wcześniejsze decyzje blakną, a wielogodzinna praca zatrzymuje się w połowie.
 
-Deep Work Plan odpowiada **rozwojem opartym na specyfikacji**: plan jest trwałym źródłem prawdy, a agenci wykonują pracę względem jawnych kryteriów akceptacji i bramek walidacyjnych. Dryf spada, praca pozostaje weryfikowalna, a dowolny agent może ją wznowić między sesjami. W przeciwieństwie do narzędzi spec-driven związanych z jednym IDE lub dostawcą (GitHub Spec Kit, Amazon Kiro, Tessl), DWP jest niezależny od narzędzi i natywny dla repozytorium.
+Deep Work Plan odpowiada programowaniem sterowanym specyfikacją: trwały plan, zadania atomowe i bramki walidacyjne, które agent musi przejść. Praca pozostaje weryfikowalna — i każdy agent może ją wznowić między sesjami.
 
-To także **inżynieria harnessu** uczyniona przenośną. Harness agenta to rusztowanie wokół modelu — kontekst, narzędzia, pętla sterująca, zabezpieczenia, wznawialny stan — które czyni go niezawodnym. Deep Work Plan instaluje ten harness w samym repozytorium, więc dowolny agent może sterować dowolnym repozytorium.
+A ponieważ kontekst to najrzadszy zasób Twojego agenta, harness zaprojektowano pod wydajność tokenów: instrukcje ładują się progresywnie, walidacja dotyka tylko zmian, a każde zadanie uczy się lokalnie — długa praca pozostaje przystępna.
+---
 
+## Ludzie sterują. Agenci wykonują.
+
+To Ty decydujesz, co znaczy „skończone” i gdzie biegną granice. Plan niesie Twoją intencję; agenci odpracowują godziny — bez ciągłego nadzorowania i poprawek co dwadzieścia minut.
+
+- Ty: intencja, kryteria akceptacji, przegląd
+- Agenci: wykonanie, zadanie po zadaniu
+- Plan: umowa między nimi
+
+[Przeczytaj metodologię](/pl/methodology)
+
+---
+
+## Plan, od którego agenci nie mogą odbiegać.
+
+Długie zadania zapełniają kontekst każdego modelu. Szczegóły znikają i agent dryfuje. Napisany plan — zadania atomowe, bramy walidacji, wznawialny stan — to punkt, do którego wraca z okrążenia na okrążenie.
+
+1. Plan
+2. Zadania atomowe
+3. Bramki walidacji
+4. Ukończenie
+5. Stan wznawialny
+
+[Zobacz pętlę główną](/pl/methodology)
+
+---
+
+## Skończone to kontrakt, nie wrażenie.
+
+Każde zadanie nazywa swoje kryteria akceptacji i testy, które muszą przejść. Agent nie może czuć się skończony — musi przejść, albo zadanie pozostaje otwarte.
+
+- Testy przechodzą
+- Typy się zgadzają
+- Kryteria akceptacji są spełnione
+- Albo zadanie pozostaje otwarte
+
+[Przeczytaj specyfikację](/pl/spec)
+
+---
+
+## Repozytorium to harness.
+
+Kontekst, narzędzia, zabezpieczenia i stan mieszkają w Twoim repozytorium jako zwykłe pliki, które może przeczytać każdy agent. Bez lock-inu, bez zewnętrznego mózgu — przetrwa resetowanie kontekstu.
+
+- Trwała specyfikacja na dysku
+- Bramki walidacji, nie wrażenia
+- Przeżywa reset kontekstu
+
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
+
+[Zobacz, co tworzy onboarding](/pl/quickstart)
 ---
 
 ## Co otrzymujesz

@@ -1,6 +1,6 @@
 ---
 title: The core loop
-description: "The create, execute, refine, resume, status, and verify workflow, the gitignored .dwp output directory, the nine-section task anatomy, and how validation works."
+description: "The create, execute, refine, resume, status, and verify workflow, the gitignored .dwp output directory, the ten-section task anatomy, and how validation works."
 order: 2
 lang: en
 summary: How the core DWP operations drive a plan from goal to verified completion.
@@ -19,7 +19,7 @@ This loop is the operational form of spec-driven development. The plan is the sp
 
 <CoreLoop lang="en" class="not-prose my-10" />
 
-- **create** — Generate a new plan from a goal. The agent analyzes the goal, decomposes it into sequential tasks, and writes the plan files. It should ask clarifying questions before writing when the goal is ambiguous.
+- **create** — Generate a new plan from a goal. The agent analyzes the goal, decomposes it into sequential tasks, and writes the plan files. It should ask clarifying questions before writing when the goal is ambiguous. In guided mode the plan is staged as a refined draft for review; in trust mode it materializes directly — the analysis and quality checks run either way.
 - **execute** — Run the plan task by task. The agent updates the progress log after each task and marks the task's completion status. It must not skip tasks without recording why.
 - **refine** — Modify an existing plan. The agent may add, remove, or reorder tasks, but it must preserve completed work and update the task table.
 - **resume** — Continue an interrupted plan. The agent reads the progress log and the task files to reconstruct state, then continues from the first incomplete task.
@@ -40,22 +40,11 @@ All DWP artifacts live under a gitignored `.dwp/` directory at the repository ro
 └── config.yaml
 ```
 
-## The nine-section task anatomy
+## The ten-section task anatomy
 
 <TaskAnatomy lang="en" class="not-prose my-10" />
 
-Every task file contains these nine sections, in order. The structure guarantees that each unit of work is self-contained and reviewable:
-
-1. **Goal** — one paragraph stating what the task achieves.
-2. **Context** — background, links, and why this task exists.
-3. **Steps** — ordered, concrete actions to perform.
-4. **Acceptance criteria** — a checklist of conditions that define done.
-5. **Validation** — commands or tests to run to verify the work.
-6. **Files** — paths expected to be created or modified.
-7. **Dependencies** — other tasks or external prerequisites.
-8. **Risks** — what could go wrong, and mitigations.
-9. **Completion & Log** — a status marker plus chronological notes.
-
+Every task file follows the ten normative sections rendered above, in the order defined by the installed skill.
 ## Validation, completion, and resumption
 
-Validation is part of the task, not an afterthought: each task names the commands or tests that prove it is done, and the agent runs them before marking completion. Tests are first-class here — a task that adds new functionality or changes behavior must add or update automated tests for that behavior and run the repository's full code-quality check (tests plus lint and type-check), not just confirm that the build succeeds; existing tests must stay green, updated to the intended behavior rather than skipped. Security is first-class in the same way — any task that touches authentication, input handling, secrets, network surface, or dependencies carries the security expectations of that change in its acceptance criteria and keeps every commit free of secrets, and every plan ends with a Security Review that audits the whole change set. Completion is recorded with an explicit status marker (`[ ]` not started, `[~]` in progress, `[x]` done, `[!]` blocked) in the Completion & Log section. Resumption relies on these markers and the progress log — an agent can reconstruct exactly where the plan stopped and continue from the first incomplete task without redoing finished work.
+Validation is part of the task, not an afterthought: each task names the commands or tests that prove it is done, and the agent runs them before marking completion. Tests are first-class here — a task that adds new functionality or changes behavior must add or update automated tests for that behavior and run the repository's full code-quality check (tests plus lint and type-check), not just confirm that the build succeeds; existing tests must stay green, updated to the intended behavior rather than skipped. Security is first-class in the same way — any task that touches authentication, input handling, secrets, network surface, or dependencies carries the security expectations of that change in its acceptance criteria and keeps every commit free of secrets, and every plan closes with the Final Review — the security pass over the whole change set, the full validation on the final state, and the reconciliation of skills decisions. Completion is recorded with an explicit status marker (`[ ]` not started, `[~]` in progress, `[x]` done, `[!]` blocked) in the Completion & Log section. Resumption relies on these markers and the progress log — an agent can reconstruct exactly where the plan stopped and continue from the first incomplete task without redoing finished work.

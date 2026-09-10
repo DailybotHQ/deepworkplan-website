@@ -1,6 +1,6 @@
 ---
 title: Plan and task templates
-description: "The structure of plan and task files, the three mandatory final tasks every plan must end with, and the README and PROGRESS conventions that keep a plan readable."
+description: "The structure of plan and task files, the Final Review every plan must end with, and the README and PROGRESS conventions that keep a plan readable."
 order: 3
 lang: en
 summary: How plans and tasks are structured on disk, and the conventions that keep them readable.
@@ -19,20 +19,20 @@ A Deep Work Plan is a directory of markdown files. The shape of that directory �
 A plan is a directory under `.dwp/plans/` named `PLAN_<slug>/`. It contains:
 
 - `README.md` — the plan overview: goal, source material, task table, and status.
-- One file per task, named `<n>.task_<slug>.md`.
+Each task file is named `<n>.task_<slug>.md` and follows the ten normative sections rendered above, in the order defined by the installed skill.
 - `PROGRESS.md` — a running log of execution.
 
 ## Task file structure
 
-Each task file is named `<n>.task_<slug>.md` and follows the nine-section anatomy: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, and Completion & Log. The sections always appear in that order so any reader knows where to look. Each task re-anchors to the plan's goal before it acts, which keeps an agent from drifting over a long, multi-hour horizon.
+Each task file is named `<n>.task_<slug>.md` and follows the ten normative sections rendered above, in the order defined by the installed skill. Each task re-anchors to the plan's goal before it acts, which keeps an agent from drifting over a long, multi-hour horizon.
 
-## The three mandatory final tasks
+## The Final Review
 
-Every plan must end with three standard tasks. They ensure that the work is audited, knowledge is captured, and stakeholders are informed:
+Every plan must end with exactly one mandatory task: the **Final Review**. It closes the plan in three ordered passes — nothing in the security pass is relaxed:
 
-1. **Security Review** — audit everything the plan changed for secrets, injection risks, and new attack surface, and keep `docs/SECURITY.md` current. Security is not a separate workstream bolted on at the end: every plan leaves its own changes audited, and a critical finding blocks completion.
-2. **Skills & Agents Discovery** — identify the reusable skills and agents created during the plan, so the work compounds beyond this single effort.
-3. **Executive Report** — a concise summary of outcomes written for stakeholders, distinguishing what was delivered from what remains.
+1. **Security pass** — audit everything the plan changed for secrets, injection risks, and new attack surface, and keep `docs/SECURITY.md` current. Security is not a separate workstream bolted on at the end: every plan leaves its own changes audited, and a critical finding blocks completion.
+2. **Final-state validation** — the repository's full validation runs and passes on the last relevant state, after the final fix.
+3. **Skills reconciliation** — every task recorded its own skills disposition while its evidence was fresh; the review reconciles the ledger. The Executive Report remains available on request.
 
 ## README and PROGRESS conventions
 

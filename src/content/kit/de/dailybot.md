@@ -10,7 +10,7 @@ order: 2
 
 Verbindet die Deep Work Plan-Ausführung mit einem **Dailybot-Team**, damit Menschen sehen, was Agenten bauen — Kickoff, Fortschritt mitten im Plan, Blocker und Abschluss — ohne zusätzliche Meetings oder eine zweite Toolchain. Ein **optionales** Addon für Teams, die bereits [Dailybot](https://www.dailybot.com) nutzen.
 
-Die zentrale Deep Work Plan-Methodik hat **null** Dailybot-Abhängigkeit. Ein Repository ohne Addons ist vollständig konform. Bieten Sie dieses Addon nur an, wenn der Entwickler oder das Team Dailybot bereits nutzt; niemals für alle automatisch installieren.
+Die zentrale Deep Work Plan-Methodik hat **null** Dailybot-Abhängigkeit. Ein Repository ohne optionale Addons ist vollständig konform. Bieten Sie dieses Addon nur an, wenn der Entwickler oder das Team Dailybot bereits nutzt; niemals für alle automatisch installieren.
 
 ## Wann es einsetzen
 
@@ -123,7 +123,7 @@ Die Installation der Dailybot-Agent-Skill bringt weit mehr als das DWP-Addon ver
 
 ## Onboarding-Ablauf
 
-Während DWP `onboard` **Phase 7b**, nach dem zentralen AI-first-Scaffolding, bietet der Ablauf fünf optionale Addons. Akzeptiert der Entwickler Dailybot:
+Während DWP `onboard` **Phase 7b**, nach dem zentralen AI-first-Scaffolding, bietet der Ablauf die vier optionalen Addons an (die lokale Überprüfung des AI Diff Reviewer wurde bereits in Phase 7a installiert). Akzeptiert der Entwickler Dailybot:
 
 1. Bestehendes Setup erkennen (Skill, CLI, `.dailybot/profile.json`, Hooks, Report-Schritt).
 2. Skill-/CLI-Installation über Dailybots Einwilligungsflows anbieten.

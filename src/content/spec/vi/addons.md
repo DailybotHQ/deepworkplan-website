@@ -1,6 +1,6 @@
 ---
 title: Add-on
-description: "Phần mở rộng DWP tùy chọn: năm addon (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), hợp đồng addon và khái niệm kit."
+description: "Addon DWP: bốn phần mở rộng tùy chọn (devcontainer, Dailybot, dependency-upgrade, design-system), đánh giá cục bộ AI Diff Reviewer bắt buộc kèm bề mặt CI tùy chọn, hợp đồng addon và khái niệm kit."
 order: 5
 lang: vi
 section: Addons
@@ -8,7 +8,7 @@ section: Addons
 
 # Add-on
 
-**Phiên bản 2.0.** Add-on là phần mở rộng tùy chọn của phương pháp Deep Work Plan cốt lõi. Chúng **không bao giờ bắt buộc để tuân thủ** — kho lưu trữ không có addon vẫn hoàn toàn AI-first và tuân thủ DWP. Mỗi addon được đề xuất trong onboarding, chấp nhận hoặc từ chối rõ ràng và — khi được chấp nhận — **đối chiếu** với thiết lập hiện có thay vì ghi đè.
+**Phiên bản 2.1.** Add-on là phần mở rộng của phương pháp Deep Work Plan cốt lõi. Bốn trong năm addon là tùy chọn và **không bao giờ bắt buộc để tuân thủ** — kho lưu trữ không có addon tùy chọn nào vẫn hoàn toàn AI-first và tuân thủ DWP. Mỗi addon tùy chọn được đề xuất trong onboarding, chấp nhận hoặc từ chối rõ ràng và — khi được chấp nhận — **đối chiếu** với thiết lập hiện có thay vì ghi đè. Một thành phần là ngoại lệ được khai báo: kể từ chuẩn 2.3.0, **đánh giá cục bộ AI Diff Reviewer** là một phần của chuẩn cơ sở bắt buộc — onboarding cài đặt nó và mọi Final Review chạy nó — trong khi bề mặt CI của nó vẫn là opt-in.
 
 ## Hợp đồng addon
 
@@ -25,7 +25,7 @@ Khám phá: luồng `onboard` liệt kê `skills/deepworkplan/addons/` và trìn
 
 ## Addon đang phát hành (năm)
 
-Hôm nay có năm addon. Mỗi addon có **trang danh mục kit** với chi tiết hướng người dùng và **spec chuẩn** bên trong skill Deep Work Plan.
+Hôm nay có năm addon — bốn addon opt-in cộng với đánh giá cục bộ bắt buộc. Mỗi addon có **trang danh mục kit** với chi tiết hướng người dùng và **spec chuẩn** bên trong skill Deep Work Plan.
 
 ### Devcontainer (addon đầu tiên)
 
@@ -65,23 +65,24 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 - **Độ mạnh hồ sơ:** visual-ui **bật mặc định khi phát hiện**; cli-output và conversational **khuyến nghị khi phát hiện, luôn hỏi, không bao giờ tự áp dụng**
 - **Khi đề xuất:** chỉ khi phát hiện bề mặt giao diện người dùng — không cho thư viện thuần, dịch vụ headless hoặc repo chỉ hạ tầng
 
-### AI Diff Reviewer (addon thứ năm)
+### AI Diff Reviewer (addon thứ năm — đánh giá cục bộ bắt buộc, bề mặt CI tùy chọn)
 
-Kết nối tùy chọn với **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, phiên bản hiện tại **v2.0.0**) tăng cường Đánh giá Bảo mật bắt buộc với đánh giá cục bộ có cấu trúc và tùy chọn kiểm soát các pull request trong CI.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, phiên bản hiện tại **v2.0.0**) trao cho bước rà soát bảo mật của Final Review bắt buộc một đánh giá cục bộ có cấu trúc, và tùy chọn kiểm soát các pull request trong CI. Kể từ chuẩn 2.3.0, **đánh giá cục bộ là một phần của chuẩn cơ sở**; chỉ bề mặt CI là opt-in.
 
 - **Trang kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — tài liệu tham khảo khả năng đầy đủ
-- **Những gì DWP addon kết nối:** tăng cường Đánh giá Bảo mật cục bộ qua luồng mặc định của skill thượng nguồn; `.review/extension.md` bắt buộc (skill đơn lẻ là chưa đủ); Flow B tùy chọn cài đặt `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) và hiển thị `apply-review` như một công cụ đồng hành do nhà phát triển gọi — không bao giờ là tệp nhiệm vụ kế hoạch
-- **Luồng:** **A — chỉ cục bộ** (skill + tiện ích mở rộng) hoặc **B — hai bề mặt** (skill + tiện ích mở rộng + CI Action). Addon **PHẢI hỏi** luồng nào; không bao giờ mặc định
-- **Thất bại nhẹ vs cổng:** lỗi skill/tiện ích mở rộng/gọi bị thiếu không bao giờ chặn; kết quả `critical` từ lượt kiểm tra cục bộ **hoàn tất** vẫn theo hợp đồng Đánh giá Bảo mật
+- **Bắt buộc tại onboarding (Giai đoạn 7a):** cài đặt skill vendored được ghim theo tag (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) cùng `.review/extension.md` được điều chỉnh riêng cho repo (qua `generate-extension`), dưới sự chấp thuận của onboarding; một nâng cấp harness có mục tiêu đối chiếu cả hai khi thiếu; một lần từ chối được ghi lại như một ngoại lệ được khai báo và được `verify` báo cáo cho đến khi được cài đặt
+- **Bắt buộc trong mọi Final Review:** bước rà soát bảo mật chạy luồng mặc định cha của skill thượng nguồn trên toàn bộ tập thay đổi đã tích lũy và nối thêm kết quả vào `analysis_results/SECURITY_REVIEW.md`; một skill hoặc tiện ích mở rộng bị thiếu là một phát hiện `local reviewer not installed` được ghi lại — được cài đặt khi lượt chạy có thể ghi vào harness — không bao giờ là một lần bỏ qua âm thầm; các phát hiện `critical` từ một lượt hoàn tất chặn việc hoàn tất cho đến khi được sửa hoặc được chấp nhận rõ ràng
+- **Bề mặt CI tùy chọn (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) qua sub-skill `setup` thượng nguồn, cùng `apply-review` như một công cụ đồng hành do nhà phát triển gọi — được đề xuất rõ ràng, không bao giờ cài khi chưa được yêu cầu, không bao giờ là mặc định, không bao giờ là một tệp nhiệm vụ kế hoạch
+- **Không bao giờ chặn (chỉ đối với lỗi gọi):** một đánh giá cục bộ có thể khởi động nhưng gặp lỗi thì cảnh báo một lần, ghi lại và tiếp tục; nó không bao giờ làm thất bại tác vụ
 - **Tương đồng (Flow B):** `prompt.md` dùng chung + tiện ích mở rộng căn chỉnh phương pháp luận/mức độ nghiêm trọng; Đánh giá Nhận thức Lặp lại CI có thể rút ngắn vòng 2+ trong khi lượt kiểm tra cục bộ vẫn đầy đủ
-- **Bảo vệ trung lập với nhà cung cấp:** DWP cốt lõi có **không** phụ thuộc AI Diff Reviewer; không bao giờ cài đặt tự động cho tất cả mọi người
-- **Khi nào được cung cấp:** nhà phát triển hoặc nhóm muốn đánh giá cục bộ có cấu trúc và/hoặc cổng hợp nhất PR CI
+- **Rào trung lập với nhà cung cấp:** không luồng Deep Work Plan nào yêu cầu một dịch vụ thương mại, nhà cung cấp CI hay bí mật — reviewer là một skill MIT được ghim theo tag, chạy bởi chính agent lập trình của nhà phát triển
+- **Tuân thủ:** `verify` báo cáo một local reviewer bị thiếu như một thất bại đối với các repository khai báo chuẩn 2.3.0 hoặc mới hơn, và như một phát hiện phiên bản harness đối với các repository cũ
 
 ## Skill
 
 Skill là quy trình tái sử dụng được gọi theo tên. Skill đóng gói luồng công việc lặp lại (chạy test, sửa lint, tạo thành phần).
 
-Phương pháp cung cấp một tập nhỏ sub-skill cốt lõi. Trong đó, sub-skill **author** cho phép kho lưu trữ **phát triển kit riêng**: gọi qua `/skill-create` và `/agent-create`, suy luận về bố cục `.agents/` và quy ước repo hiện có, rồi viết skill, agent hoặc ủy quyền lệnh mỏng mới phù hợp và giữ danh mục đồng bộ. Cùng sub-skill thực hiện tác vụ bắt buộc Skills & Agents Discovery.
+Phương pháp cung cấp một tập nhỏ sub-skill cốt lõi. Trong đó, sub-skill **author** cho phép kho lưu trữ **phát triển kit riêng**: gọi qua `/skill-create` và `/agent-create`, suy luận về bố cục `.agents/` và quy ước repo hiện có, rồi viết skill, agent hoặc ủy quyền lệnh mỏng mới phù hợp và giữ danh mục đồng bộ. Cùng sub-skill hậu thuẫn cho bước đối chiếu skill của Final Review.
 
 Mục kit: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 
@@ -111,4 +112,4 @@ Ví dụ minh họa DWP trong thực tế: so sánh trước/sau, kế hoạch m
 
 ## Nhắc tuân thủ
 
-Kho lưu trữ **PHẢI** hoàn toàn tuân thủ với **không** addon. Addon là khả năng opt-in xếp lớp — không bao giờ là điều kiện tiên quyết. Xem [Conformance](/spec/conformance).
+Kho lưu trữ **PHẢI** hoàn toàn tuân thủ với **không** addon tùy chọn nào. Addon là khả năng opt-in xếp lớp — không bao giờ là điều kiện tiên quyết. Xem [Conformance](/spec/conformance).

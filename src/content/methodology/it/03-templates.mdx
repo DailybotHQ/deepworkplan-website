@@ -1,6 +1,6 @@
 ---
 title: Template di piani e attività
-description: "La struttura dei file di piano e di attività, le tre attività finali obbligatorie con cui ogni piano deve concludersi e le convenzioni di README e PROGRESS che mantengono un piano leggibile."
+description: "La struttura dei file di piano e di attività, il Final Review con cui ogni piano deve concludersi e le convenzioni di README e PROGRESS che mantengono un piano leggibile."
 order: 3
 lang: it
 summary: Come piani e attività sono strutturati su disco e le convenzioni che li mantengono leggibili.
@@ -24,15 +24,15 @@ Un piano è una directory sotto `.dwp/plans/` denominata `PLAN_<slug>/`. Contien
 
 ## Struttura del file di attività
 
-Ogni file di attività è denominato `<n>.task_<slug>.md` e segue l’anatomia in nove sezioni: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks e Completion & Log. Le sezioni compaiono sempre in quell’ordine, così ogni lettore sa dove guardare. Ogni attività si riancora all’obiettivo del piano prima di agire, il che impedisce a un agente di andare alla deriva su un orizzonte lungo, di più ore.
+Ogni file di attività è denominato `<n>.task_<slug>.md` e segue l’anatomia in dieci sezioni: Goal, Context, Superficie toccata, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks e Completion & Log. Le sezioni compaiono sempre in quell’ordine, così ogni lettore sa dove guardare. Ogni attività si riancora all’obiettivo del piano prima di agire, il che impedisce a un agente di andare alla deriva su un orizzonte lungo, di più ore.
 
-## Le tre attività finali obbligatorie
+## Il Final Review
 
-Ogni piano deve concludersi con tre attività standard. Garantiscono che il lavoro sia verificato, che la conoscenza sia catturata e che gli stakeholder siano informati:
+Ogni piano deve concludersi con esattamente un’attività obbligatoria: il **Final Review**. Chiude il piano in tre passaggi ordinati — nulla del passaggio di sicurezza viene allentato:
 
-1. **Security Review** — verificare tutto ciò che il piano ha modificato alla ricerca di segreti, rischi di injection e nuova superficie di attacco, e mantenere aggiornato `docs/SECURITY.md`. La sicurezza non è un flusso di lavoro separato aggiunto alla fine: ogni piano lascia le proprie modifiche verificate, e un rilievo critico blocca il completamento.
-2. **Skills & Agents Discovery** — identificare le skill e gli agenti riutilizzabili creati durante il piano, così il lavoro si capitalizza oltre questo singolo sforzo.
-3. **Executive Report** — un riassunto conciso degli esiti scritto per gli stakeholder, che distingue ciò che è stato consegnato da ciò che resta.
+1. **Passaggio di sicurezza** — verificare tutto ciò che il piano ha modificato alla ricerca di segreti, rischi di injection e nuova superficie di attacco, e mantenere aggiornato `docs/SECURITY.md`. La sicurezza non è un flusso di lavoro separato aggiunto alla fine: ogni piano lascia le proprie modifiche verificate, e un rilievo critico blocca il completamento.
+2. **Validazione dello stato finale** — la validazione completa del repository viene eseguita e superata sull’ultimo stato rilevante, dopo l’ultima correzione.
+3. **Riconciliazione delle skill** — ogni attività ha registrato la propria disposizione sulle skill mentre la sua evidenza era fresca; la revisione riconcilia il registro. L’Executive Report resta disponibile su richiesta.
 
 ## Convenzioni di README e PROGRESS
 

@@ -1,6 +1,6 @@
 ---
 title: Mẫu kế hoạch và tác vụ
-description: "Cấu trúc của các tệp kế hoạch và tác vụ, ba tác vụ cuối bắt buộc mà mọi kế hoạch phải kết thúc bằng, và các quy ước README và PROGRESS giữ cho kế hoạch dễ đọc."
+description: "Cấu trúc của các tệp kế hoạch và tác vụ, Final Review mà mọi kế hoạch phải kết thúc bằng, và các quy ước README và PROGRESS giữ cho kế hoạch dễ đọc."
 order: 3
 lang: vi
 summary: Cách các kế hoạch và tác vụ được cấu trúc trên đĩa, và các quy ước giữ chúng dễ đọc.
@@ -24,15 +24,15 @@ Một kế hoạch là một thư mục dưới `.dwp/plans/` được đặt t�
 
 ## Cấu trúc tệp tác vụ
 
-Mỗi tệp tác vụ được đặt tên `<n>.task_<slug>.md` và tuân theo cấu trúc chín phần: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, và Completion & Log. Các phần luôn xuất hiện theo thứ tự đó để bất kỳ người đọc nào cũng biết tìm ở đâu. Mỗi tác vụ neo lại vào mục tiêu của kế hoạch trước khi nó hành động, điều này giữ cho agent không trôi dạt qua một chân trời dài, nhiều giờ.
+Mỗi tệp tác vụ được đặt tên `<n>.task_<slug>.md` và tuân theo cấu trúc mười phần: Goal, Context, Touched Surface, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, và Completion & Log. Các phần luôn xuất hiện theo thứ tự đó để bất kỳ người đọc nào cũng biết tìm ở đâu. Mỗi tác vụ neo lại vào mục tiêu của kế hoạch trước khi nó hành động, điều này giữ cho agent không trôi dạt qua một chân trời dài, nhiều giờ.
 
-## Ba tác vụ cuối bắt buộc
+## Final Review
 
-Mọi kế hoạch phải kết thúc bằng ba tác vụ chuẩn. Chúng bảo đảm rằng công việc được kiểm toán, tri thức được nắm bắt và các bên liên quan được thông báo:
+Mọi kế hoạch phải kết thúc bằng đúng một tác vụ bắt buộc: **Final Review**. Nó khép lại kế hoạch bằng ba lượt đi có thứ tự — không gì trong bước rà soát bảo mật bị nới lỏng:
 
-1. **Security Review** — kiểm toán mọi thứ kế hoạch đã thay đổi để tìm bí mật, rủi ro tiêm nhiễm và bề mặt tấn công mới, và giữ `docs/SECURITY.md` luôn cập nhật. Bảo mật không phải là một luồng công việc riêng được gắn vào cuối: mỗi kế hoạch để lại các thay đổi của chính nó đã được kiểm toán, và một phát hiện nghiêm trọng chặn việc hoàn tất.
-2. **Skills & Agents Discovery** — xác định các skill và agent tái sử dụng được tạo ra trong kế hoạch, để công việc tích lũy vượt ra ngoài nỗ lực đơn lẻ này.
-3. **Executive Report** — một bản tóm tắt súc tích về kết quả viết cho các bên liên quan, phân biệt điều đã được giao với điều còn lại.
+1. **Bước rà soát bảo mật** — kiểm toán mọi thứ kế hoạch đã thay đổi để tìm bí mật, rủi ro tiêm nhiễm và bề mặt tấn công mới, và giữ `docs/SECURITY.md` luôn cập nhật. Bảo mật không phải là một luồng công việc riêng được gắn vào cuối: mỗi kế hoạch để lại các thay đổi của chính nó đã được kiểm toán, và một phát hiện nghiêm trọng chặn việc hoàn tất.
+2. **Kiểm chứng trạng thái cuối cùng** — kiểm chứng đầy đủ của repository chạy và đạt trên trạng thái liên quan cuối cùng, sau lần sửa cuối cùng.
+3. **Đối chiếu skill** — mỗi tác vụ đã ghi lại kết luận về skill của riêng nó trong khi bằng chứng còn mới; bước rà soát đối chiếu sổ cái. Executive Report vẫn khả dụng theo yêu cầu.
 
 ## Các quy ước README và PROGRESS
 

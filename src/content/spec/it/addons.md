@@ -1,6 +1,6 @@
 ---
 title: Add-on
-description: "Estensioni DWP opzionali: cinque addon (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), contratto e concetti del kit."
+description: "Addon DWP: quattro estensioni opzionali (devcontainer, Dailybot, dependency-upgrade, design-system), la revisione locale AI Diff Reviewer richiesta con la sua superficie CI opzionale, contratto degli addon e concetti del kit."
 order: 5
 lang: it
 section: Addons
@@ -8,7 +8,7 @@ section: Addons
 
 # Add-on
 
-**Versione 2.0.** Gli add-on sono estensioni opzionali della metodologia Deep Work Plan di base. **Non sono mai richiesti per la conformità** — un repository senza addon è pienamente AI-first e conforme a DWP. Ogni addon viene offerto durante l'onboarding, accettato o rifiutato esplicitamente e — se accettato — **riconcilia** con il setup esistente invece di sovrascriverlo.
+**Versione 2.1.** Gli add-on sono estensioni della metodologia Deep Work Plan di base. Quattro dei cinque sono opzionali e **mai richiesti per la conformità** — un repository senza addon opzionali è pienamente AI-first e conforme a DWP. Ogni addon opzionale viene offerto durante l'onboarding, accettato o rifiutato esplicitamente e — se accettato — **riconcilia** con il setup esistente invece di sovrascriverlo. Un componente è l'eccezione dichiarata: dallo standard 2.3.0 la **revisione locale AI Diff Reviewer** fa parte della baseline richiesta — l'onboarding la installa e ogni Final Review la esegue — mentre la sua superficie CI resta opt-in.
 
 ## Il contratto addon
 
@@ -25,7 +25,7 @@ Scoperta: il flusso `onboard` enumera `skills/deepworkplan/addons/` e presenta o
 
 ## Addon in produzione (cinque)
 
-Cinque addon sono disponibili oggi. Ognuno ha una **pagina del catalogo kit** con dettagli per l'utente e una **spec normativa** all'interno della skill Deep Work Plan.
+Cinque addon sono disponibili oggi — quattro opt-in più la revisione locale richiesta. Ognuno ha una **pagina del catalogo kit** con dettagli per l'utente e una **spec normativa** all'interno della skill Deep Work Plan.
 
 ### Devcontainer (primo addon)
 
@@ -65,23 +65,24 @@ Un `DESIGN.md` con ambito di superficie di interfaccia che qualsiasi agente di c
 - **Forza del profilo:** visual-ui è **attivo di default se rilevato**; cli-output e conversational sono **consigliati se rilevati, sempre chiesti, mai applicati automaticamente**
 - **Quando offerto:** solo quando viene rilevata una superficie di interfaccia utente — non per librerie pure, servizi headless o repo solo infrastruttura
 
-### AI Diff Reviewer (quinto addon)
+### AI Diff Reviewer (quinto addon — revisione locale richiesta, superficie CI opzionale)
 
-Una connessione opzionale all'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, versione attuale **v2.0.0**) che potenzia la Revisione di Sicurezza obbligatoria con una revisione locale strutturata e blocca opzionalmente i pull request in CI.
+L'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, versione attuale **v2.0.0**) dota il passaggio di sicurezza obbligatorio del Final Review di una revisione locale strutturata e blocca opzionalmente le pull request in CI. Dallo standard 2.3.0 la **revisione locale fa parte della baseline**; solo la superficie CI è opt-in.
 
 - **Pagina kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — riferimento completo delle capacità
-- **Cosa collega il DWP addon:** potenziamento locale della Revisione di Sicurezza tramite il flusso padre predefinito della skill upstream; `.review/extension.md` obbligatorio (la skill sola è incompleta); Flow B installa opzionalmente `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) ed espone `apply-review` come compagno invocabile dallo sviluppatore — mai un task del piano
-- **Flussi:** **A — solo locale** (skill + estensione) o **B — doppia superficie** (skill + estensione + CI Action). L'addon **DEVE chiedere** quale flusso; mai assumere un valore predefinito
-- **Soft-fail vs gate:** errori di skill/estensione/invocazione mancante non bloccano mai; i risultati `critical` di un passaggio locale **completato** seguono ancora il contratto di Revisione di Sicurezza
+- **Richiesto all'onboarding (Fase 7a):** installazione della skill vendorizzata fissata al tag (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) più un `.review/extension.md` su misura per il repository (via `generate-extension`), sotto il consenso dell'onboarding; un aggiornamento mirato della harness riconcilia entrambi quando mancano; un rifiuto è registrato come eccezione dichiarata e riportato da `verify` finché non viene installata
+- **Richiesto in ogni Final Review:** il passaggio di sicurezza esegue il flusso padre predefinito della skill upstream sull'insieme di modifiche accumulato e accoda il proprio output a `analysis_results/SECURITY_REVIEW.md`; una skill o un'estensione mancante è un rilievo registrato `local reviewer not installed` — installata quando l'esecuzione può scrivere nella harness — mai un salto silenzioso; i rilievi `critical` di un passaggio completato bloccano il completamento finché non sono corretti o accettati esplicitamente
+- **Superficie CI opzionale (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) tramite la sub-skill upstream `setup`, più `apply-review` come compagno invocabile dallo sviluppatore — offerto esplicitamente, mai installato senza richiesta, mai il valore predefinito, mai un'attività del piano
+- **Mai bloccante (solo invocazione):** una revisione locale che può iniziare ma fallisce con un errore avvisa una volta, registra e prosegue; non fa mai fallire l'attività
 - **Parità (Flow B):** `prompt.md` condiviso + estensione allineano metodologia/gravità; la Revisione CI consapevole delle iterazioni può abbreviare il round 2+ mentre il passaggio locale rimane completo
-- **Salvaguarda neutrale rispetto al provider:** il DWP core ha **zero** dipendenza da AI Diff Reviewer; non installare mai automaticamente per tutti
-- **Quando offerto:** sviluppatore o team vuole revisione locale strutturata e/o un gate di merge PR in CI
+- **Salvaguarda neutrale rispetto al provider:** nessun flusso Deep Work Plan richiede un servizio commerciale, un provider CI o un segreto — il reviewer è una skill MIT fissata a un tag, eseguita dall'agente di coding dello stesso sviluppatore
+- **Conformità:** `verify` riporta un reviewer locale mancante come fallimento per i repository che dichiarano lo standard 2.3.0 o successivo e come rilievo sulla versione della harness per i repository legacy
 
 ## Skill
 
 Le skill sono procedure riutilizzabili invocate per nome. Una skill impacchetta un workflow ripetibile (eseguire test, correggere lint, creare un componente).
 
-La metodologia include un piccolo insieme di sub-skill di base. Tra queste, la sub-skill **author** consente a un repository di **far crescere il proprio kit**: invocata tramite `/skill-create` e `/agent-create`, ragiona sulla struttura `.agents/` esistente e sulle convenzioni del repository, poi crea una nuova skill, agente o sottile delegatore di comando che vi si conforma e mantiene il catalogo allineato. La stessa sub-skill esegue l'attività obbligatoria Skills & Agents Discovery.
+La metodologia include un piccolo insieme di sub-skill di base. Tra queste, la sub-skill **author** consente a un repository di **far crescere il proprio kit**: invocata tramite `/skill-create` e `/agent-create`, ragiona sulla struttura `.agents/` esistente e sulle convenzioni del repository, poi crea una nuova skill, agente o sottile delegatore di comando che vi si conforma e mantiene il catalogo allineato. La stessa sub-skill supporta il passaggio di riconciliazione delle skill del Final Review.
 
 Voce kit: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 

@@ -34,6 +34,8 @@ olarak ele alın.
 
 ## 0. Metodolojiyi ve spesifikasyonu okuyun
 
+Metodoloji, üç temel direk üzerinde durur: **spec odaklı geliştirme** (yazılı spesifikasyon doğruluk kaynağıdır), **harness mühendisliği** (depo, bağlamı, araçları, güvenlik bariyerlerini ve durumu taşır) ve **token verimliliği** (harness kademeli olarak yüklenir ve doğrulama yalnızca değişene dokunur — uzun ufuklu iş tasarım gereği, verimlilik yapı gereği).
+
 Herhangi bir şeyi değiştirmeden önce, benimsediğiniz standardı anlamanız için kanonik kaynakları okuyun:
 
 - Metodoloji: https://deepworkplan.com/methodology.md
@@ -49,6 +51,12 @@ Herhangi bir şeyi değiştirmeden önce, benimsediğiniz standardı anlamanız 
 - **Arketipi sınıflandırın.** Bir bireysel depo (yaygın durum), bir orkestratör merkezi ya da bir
   ajan çalışma alanı — git'in varsayılan değil önerilen olduğu, otonom bir ajanın uzun ömürlü evi —
   kanıtlarıyla birlikte.
+- **Var olan bir DWP kurulumunu tanıyın.** `AGENTS.md` ve `.agents/` zaten varsa, `DWP standard:` kaynak
+  satırını arayın. Mevcut standardın öncesine dayanan bir harness, **hedefli bir yükseltme** alır: skill'i
+  yeniden kurmak yükseltme yolunun tamamıdır ve onboarding yalnızca eksik ya da güncelliğini yitirmiş
+  parçaları uzlaştırır — elle yazılmış her bölüm, her özel skill ve yürürlükteki her plan korunur; ikinci
+  bir çalıştırma hiçbir şeyi değiştirmez. Önceki bir sürüm altında yazılmış planlar kayıtlı şekillerini
+  korur ve kendi son görevleriyle kapanır; asla yenisine zorlanmaz.
 - **Zaten var olanların envanterini çıkarın.** `AGENTS.md`, `CLAUDE.md`, `docs/`, herhangi bir `.agents/`
   ya da skills/agents kurulumu, `.dwp/` ve `.gitignore`. Bu işin bir kısmını zaten yapan her şeyi not edin.
 - **Onboarding planını önerin.** Özlü bir liste sunun: oluşturacağınız dosyalar, değiştireceğiniz
@@ -140,11 +148,15 @@ teyit edin.
    alanı iskeletleyin — ikisi de `.gitignore`’a tahrip edici olmadan eklenir (ekleyin, asla yeniden
    yazmayın).
 
-## 4. Tercihe dayalı eklentileri sunun
+## 4. Gerekli yerel incelemeyi kurun, ardından tercihe dayalı eklentileri sunun
 
-Temel onboarding sonrasında, beş eklentiyi (devcontainer, Dailybot, dependency-upgrade,
-design-system, AI Diff Reviewer) sıralayın ve her birini açık bir tercih olarak sunun. Bir depo, **sıfır** eklentiyle
-tümüyle uyumludur — onları asla otomatik kurmayın.
+Temel onboarding sonrasında, **AI Diff Reviewer yerel incelemesini** kurun (Faz 7a — 2.3.0
+standardından itibaren gereklidir): etikete sabitlenmiş vendored skill
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) artı
+`generate-extension` aracılığıyla depoya uyarlanmış bir `.review/extension.md`, onboarding onayı
+altında. Ardından dört isteğe bağlı eklentiyi (devcontainer, Dailybot, dependency-upgrade,
+design-system) sıralayın ve her birini açık bir tercih olarak sunun. Bir depo, **sıfır** isteğe bağlı
+eklentiyle tümüyle uyumludur — onları asla otomatik kurmayın.
 
 - **Devcontainer desteği** — kalıcı AI-CLI kimlik doğrulaması içeren, yeniden üretilebilir, yalıtılmış
   bir geliştirme konteyneri.
@@ -155,7 +167,10 @@ tümüyle uyumludur — onları asla otomatik kurmayın.
   (saf kütüphanelere, headless servislere veya yalnızca altyapı depolarına sunulmaz). Üç profil tek bir
   dosyada katmanlanır: visual-ui (saptandığında varsayılan olarak açık), cli-output ve conversational —
   son ikisi her zaman sorulur, asla otomatik uygulanmaz.
-- **AI Diff Reviewer** — zorunlu Güvenlik İncelemesini [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + gerekli `.review/extension.md`) aracılığıyla yapılandırılmış yerel bir incelemeyle güçlendirir. Her zaman **Flow A** (yalnızca yerel) veya **Flow B** (çift yüzeyli CI kapısı, `pr-review.yml`) sorun; hiçbir zaman varsayılan seçmeyin. Yalnızca eksik skill/uzantı/çağrı hataları için yumuşak başarısızlık; tamamlanmış bir yerel geçişten gelen `critical` sonuçlar hâlâ Güvenlik İncelemesinin tamamlanmasını bloke eder. Temel metodolojinin AI Diff Reviewer'a sıfır bağımlılığı vardır.
+- **AI Diff Reviewer** — gerekli yerel inceleme (bir opt-in değil): her Final Review’in güvenlik
+  incelemesi, planın birikmiş değişiklik kümesi üzerinde [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2**’yi (skill + gerekli
+  `.review/extension.md`) çalıştırır. Eksik bir skill veya uzantı, kaydedilmiş bir `local reviewer not installed` bulgusudur — çalışma harness’a yazabiliyorsa kurulur — asla sessiz bir atlama değildir; çağrı hataları yumuşak başarısızlıkla geçer; tamamlanmış bir geçişten gelen `critical` bulgular hâlâ tamamlanmayı bloke eder. **Flow B** (`pr-review.yml` ile CI kapısı) açık bir tercih olarak sunulur ve
+  istenmeden asla kurulmaz. Hiçbir Deep Work Plan akışı ticari bir servis, CI sağlayıcısı veya sır gerektirmez.
 
 ## 5. Kiti geliştirin (author alt skill’i)
 
@@ -176,9 +191,8 @@ Herhangi bir görev için Deep Work Plan’ler üretin ve onları görev görev 
 - `/dwp-resume` — durumu yeniden oluşturur ve kesintiye uğramış bir planı sürdürür.
 - `/dwp-verify` — depo (veya belirli bir plan) için nesnel bir geçti/kaldı uyumluluk raporu.
 
-Her plan, üç zorunlu son görevle biter — planın kendi değişikliklerinin bir **Security Review**'u
-(`docs/SECURITY.md` güncel tutulur; kritik bir bulgu tamamlanmayı engeller), Skills & Agents
-Discovery ve Executive Report.
+Her plan, Final Review ile kapanır — planın kendi değişiklikleri üzerinde bir güvenlik incelemesi
+(`docs/SECURITY.md` güncel tutulur; kritik bir bulgu tamamlanmayı engeller), nihai durum doğrulaması ve skills kararlarının uzlaştırılması. Executive Report istek üzerine sunulmaya devam eder.
 
 ## 7. Doğrulayın
 

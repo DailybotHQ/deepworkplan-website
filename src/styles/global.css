@@ -340,6 +340,63 @@ body {
   .ea-accent {
     color: var(--color-secondary);
   }
+
+  /* --- Story plate primitives — home four-act narrative ------------------ */
+
+  /* Plate variant of the frame; renders as class="editorial-asset
+   * editorial-plate". Same hairline rhythm, sized for the two-layer plates
+   * (transparent-background art + real text layer). */
+  .editorial-plate {
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    background-color: var(--color-gray-50);
+    padding: clamp(1rem, 2.5vw, 2rem);
+    overflow: hidden;
+  }
+
+  /* Serif display statement inside a plate (DESIGN.md h2 scale). */
+  .plate-statement {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--color-ink);
+    font-size: clamp(1.5rem, 1.2rem + 1.4vw, 1.9rem);
+    line-height: 1.2;
+  }
+
+  /* The one oxblood-emphasized word inside a statement. */
+  .plate-statement-em {
+    color: var(--color-secondary);
+    font-style: italic;
+  }
+
+  /* Vertical point rows separated by hairlines; row text in muted ink. */
+  .plate-points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .plate-points > li {
+    color: var(--color-muted);
+    padding-block: 0.5rem;
+  }
+  .plate-points > li + li {
+    border-top: 1px solid var(--color-line);
+  }
+  /* Row labels compose .ea-label in the markup; keep them in ink. */
+  .plate-points > li .ea-label {
+    color: var(--color-ink);
+  }
+
+  /* Light/dark raster pair inside the frame — fixed aspect, no CLS
+   * (generation size is 1600x1000; transparent-background PNGs). */
+  .plate-frame-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: 4px;
+    object-fit: cover;
+  }
 }
 
 @layer base {

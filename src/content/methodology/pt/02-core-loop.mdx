@@ -1,6 +1,6 @@
 ---
 title: O loop central
-description: "O fluxo de create, execute, refine, resume, status e verify, o diretório de saída .dwp ignorado pelo git, a anatomia de nove seções da tarefa e como a validação funciona."
+description: "O fluxo de create, execute, refine, resume, status e verify, o diretório de saída .dwp ignorado pelo git, a anatomia de dez seções da tarefa e como a validação funciona."
 order: 2
 lang: pt
 summary: Como as operações centrais do DWP conduzem um plano do objetivo à conclusão verificada.
@@ -40,22 +40,23 @@ Todos os artefatos do DWP vivem em um diretório `.dwp/` ignorado pelo git, na r
 └── config.yaml
 ```
 
-## A anatomia de nove seções da tarefa
+## A anatomia de dez seções da tarefa
 
 <TaskAnatomy lang="pt" class="not-prose my-10" />
 
-Todo arquivo de tarefa contém estas nove seções, em ordem. A estrutura garante que cada unidade de trabalho seja autocontida e revisável:
+Todo arquivo de tarefa contém estas dez seções, em ordem. A estrutura garante que cada unidade de trabalho seja autocontida e revisável:
 
 1. **Goal** — um parágrafo declarando o que a tarefa alcança.
 2. **Context** — contexto, links e por que esta tarefa existe.
-3. **Steps** — ações ordenadas e concretas a executar.
-4. **Acceptance criteria** — uma lista de verificação de condições que definem o concluído.
-5. **Validation** — comandos ou testes a executar para verificar o trabalho.
-6. **Files** — caminhos que se espera criar ou modificar.
-7. **Dependencies** — outras tarefas ou pré-requisitos externos.
-8. **Risks** — o que pode dar errado e as mitigações.
-9. **Completion & Log** — um marcador de status mais notas cronológicas.
+3. **Superfície tocada**: o que a tarefa muda e a classe de risco que seleciona sua validação.
+4. **Steps** — ações ordenadas e concretas a executar.
+5. **Acceptance criteria** — uma lista de verificação de condições que definem o concluído.
+6. **Validation** — comandos ou testes a executar para verificar o trabalho.
+7. **Files** — caminhos que se espera criar ou modificar.
+8. **Dependencies** — outras tarefas ou pré-requisitos externos.
+9. **Risks** — o que pode dar errado e as mitigações.
+10. **Completion & Log** — um marcador de status mais notas cronológicas.
 
 ## Validação, conclusão e retomada
 
-A validação faz parte da tarefa, não é um detalhe posterior: cada tarefa nomeia os comandos ou testes que provam que ela está concluída, e o agente os executa antes de marcar a conclusão. Os testes são de primeira classe aqui — uma tarefa que adiciona nova funcionalidade ou altera o comportamento deve adicionar ou atualizar testes automatizados para esse comportamento e executar a verificação completa de qualidade de código do repositório (testes mais lint e type-check), não apenas confirmar que o build foi bem-sucedido; os testes existentes devem permanecer verdes, atualizados para o comportamento pretendido em vez de pulados. A segurança é de primeira classe da mesma forma — qualquer tarefa que toca autenticação, tratamento de entradas, secrets, superfície de rede ou dependências carrega as expectativas de segurança dessa mudança em seus critérios de aceitação e mantém todo commit livre de secrets, e todo plano termina com um Security Review que audita todo o conjunto de alterações. A conclusão é registrada com um marcador de status explícito (`[ ]` não iniciada, `[~]` em andamento, `[x]` concluída, `[!]` bloqueada) na seção Completion & Log. A retomada depende desses marcadores e do registro de progresso — um agente pode reconstruir exatamente onde o plano parou e continuar a partir da primeira tarefa incompleta sem refazer o trabalho já concluído.
+A validação faz parte da tarefa, não é um detalhe posterior: cada tarefa nomeia os comandos ou testes que provam que ela está concluída, e o agente os executa antes de marcar a conclusão. Os testes são de primeira classe aqui — uma tarefa que adiciona nova funcionalidade ou altera o comportamento deve adicionar ou atualizar testes automatizados para esse comportamento e executar a verificação completa de qualidade de código do repositório (testes mais lint e type-check), não apenas confirmar que o build foi bem-sucedido; os testes existentes devem permanecer verdes, atualizados para o comportamento pretendido em vez de pulados. A segurança é de primeira classe da mesma forma — qualquer tarefa que toca autenticação, tratamento de entradas, secrets, superfície de rede ou dependências carrega as expectativas de segurança dessa mudança em seus critérios de aceitação e mantém todo commit livre de secrets, e todo plano se encerra com o Final Review — o passe de segurança sobre todo o conjunto de alterações, a validação completa sobre o estado final e a reconciliação das decisões de skills. A conclusão é registrada com um marcador de status explícito (`[ ]` não iniciada, `[~]` em andamento, `[x]` concluída, `[!]` bloqueada) na seção Completion & Log. A retomada depende desses marcadores e do registro de progresso — um agente pode reconstruir exatamente onde o plano parou e continuar a partir da primeira tarefa incompleta sem refazer o trabalho já concluído.

@@ -9,11 +9,11 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Agent protocol
 
-**Versi 1.2.** Protokol ini mendefinisikan bagaimana sebuah AI coding agent MUST berperilaku saat bekerja dengan Deep Work Plan. Kata kunci MUST, SHOULD, dan MAY mengikuti RFC 2119.
+**Versi 1.3.** Protokol ini mendefinisikan bagaimana sebuah AI coding agent MUST berperilaku saat bekerja dengan Deep Work Plan. Kata kunci MUST, SHOULD, dan MAY mengikuti RFC 2119.
 
 > **Tambahan di v1.2.** Dua tambahan, tanpa perubahan yang merusak: (1) platform agent otonom (OpenClaw, Hermes) bergabung dalam tabel supported agents; (2) bagian **Profil eksekusi** mendefinisikan eksekusi tanpa pengawasan — otoritas terbatas, lapisan status wajib, kondisi berhenti, dan kelanjutan terjadwal.
 
-<AgentLifecycle lang="en" class="not-prose my-10" />
+<AgentLifecycle lang="id" class="not-prose my-10" />
 
 ## Supported agents
 
@@ -52,8 +52,8 @@ Toolchain pengujian dan validasi adalah konteks yang esensial, bukan opsional: v
 Saat membuat sebuah rencana, agent MUST:
 
 - Menguraikan tujuan menjadi tugas-tugas berurutan yang dapat ditinjau.
-- Menulis setiap tugas dengan anatomi sembilan bagian.
-- Mengakhiri dengan tiga tugas akhir wajib (Security Review, Skills & Agents Discovery, Executive Report).
+- Menulis setiap tugas dengan anatomi sepuluh bagian — Touched Surface mencatat apa yang diubah tugas dan memilih validation gate-nya berdasarkan kelas risiko.
+- Mengakhiri dengan satu-satunya Final Review wajib (pemeriksaan keamanan, validasi status akhir, rekonsiliasi skills).
 - Mengajukan pertanyaan klarifikasi ketika tujuannya ambigu.
 
 ## Eksekusi
@@ -66,7 +66,8 @@ Selama eksekusi, agent MUST:
 - Menandai status tugas secara akurat.
 - Untuk setiap tugas yang menambahkan fungsionalitas baru atau mengubah perilaku, menambahkan atau memperbarui test otomatis untuk perilaku itu dan menjalankan test repositori serta pemeriksaan lint/type-check sebelum menandai tugas selesai; tidak pernah menghapus atau melewati sebuah test untuk memaksa gate lulus.
 - Untuk setiap tugas yang menyentuh autentikasi, penanganan input, secret atau konfigurasi, permukaan jaringan, atau dependensi, memenuhi ekspektasi keamanan yang dideklarasikan dalam acceptance criteria-nya dan memastikan diff tidak membawa materi secret sebelum melakukan commit.
-- Berhenti dan bertanya saat terhambat alih-alih menebak.
+- Melanjutkan dari gate yang lulus ke tugas berikutnya tanpa meminta konfirmasi; mencoba perbaikan dalam lingkup tugas yang diotorisasi ketika sebuah gate gagal — dengan hipotesis konkret, menghentikan percobaan ulang buta setelah dua kali tanpa bukti baru.
+- Berhenti dan bertanya hanya pada batas persetujuan yang sesungguhnya atau hambatan yang belum teratasi alih-alih menebak.
 
 ## Penyempurnaan
 
@@ -98,7 +99,7 @@ Seorang manusia hadir dalam sesi. Agent mengusulkan, manusia menyetujui draf yan
 
 Rencana berjalan tanpa manusia yang mengawasi — giliran terjadwal platform otonom, sesi cloud, jalannya semalam. Eksekusi tanpa pengawasan bersifat opt-in per rencana dan MUST memenuhi semua hal berikut:
 
-- **Rencana yang telah disetujui sebelumnya.** Draf yang disempurnakan telah disetujui oleh manusia sebelum giliran tanpa pengawasan mana pun. Sebuah agent MUST NOT membuat dan mengeksekusi rencana tanpa pengawasan dalam satu giliran; persetujuan rencana adalah titik kontrol manusia.
+- **Rencana yang telah disetujui sebelumnya.** Rencana telah disetujui sebelum giliran tanpa pengawasan mana pun — dalam mode terpandu manusia menyetujui draf yang disempurnakan; dalam mode trust instruksi `trust` eksplisit dari pengembang adalah persetujuan yang tercatat. Sebuah agent MUST NOT membuat dan mengeksekusi rencana tanpa pengawasan dalam satu giliran tanpa salah satunya; persetujuan rencana adalah titik kontrol manusia.
 - **Lapisan status REQUIRED.** Rencana MUST membawa `manifest.json` dan `state.json` sehingga sesi berikutnya — agent atau manusia — dapat membaca kemajuan yang tepat tanpa memutar ulang transkrip. Lihat [Status rencana](/spec/plan-state).
 - **Otoritas terbatas.** Otoritas agent adalah rencana: ia MUST NOT memperluas cakupan, MUST NOT melakukan tindakan destruktif atau menghadap keluar yang tidak secara eksplisit diotorisasi rencana, dan MUST NOT meregangkan instruksi tugas untuk mencakup pekerjaan yang ditemukan-tetapi-tidak-direncanakan — pekerjaan yang ditemukan dicatat untuk `refine` berikutnya, tidak diimprovisasi.
 - **Satu tugas atomik per giliran, gate selalu.** Setiap giliran menjalankan Protokol Resume DWP, mengeksekusi paling banyak tugas berikutnya, melewati validation gate-nya, menyelesaikan per protokol penyelesaian tugas, dan yield. Gate yang gagal adalah kondisi berhenti, tidak pernah "lanjutkan saja".

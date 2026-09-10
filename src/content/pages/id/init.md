@@ -32,6 +32,8 @@ Perlakukan ini sebagai tugas teknik yang terstruktur — sebuah Deep Work Plan �
 
 ## 0. Baca metodologi dan spesifikasi
 
+Metodologi ini berdiri di atas tiga pilar: **spec-driven development** (spec tertulis adalah sumber kebenaran), **harness engineering** (repositori membawa konteks, alat, pengaman, dan status), dan **efisiensi token** (harness memuat secara progresif dan validasi menyentuh apa yang berubah — pekerjaan horizon panjang sejak rancangan, efisien secara konstruksi).
+
 Sebelum mengubah apa pun, baca sumber kanonis agar Anda memahami standar yang Anda adopsi:
 
 - Metodologi: https://deepworkplan.com/methodology.md
@@ -48,6 +50,13 @@ Pahami dahulu repositori, lalu usulkan apa yang akan Anda lakukan.
 - **Klasifikasikan arketipe.** Sebuah repositori individual (kasus umum), orchestrator hub, atau
   ruang kerja agent — rumah long-lived dari agent otonom, di mana git direkomendasikan bukan
   diasumsikan — dengan buktinya.
+- **Kenali instalasi DWP yang sudah ada.** Jika `AGENTS.md` dan `.agents/` sudah ada, cari baris provenans
+  `DWP standard:`. Harness yang mendahului standar saat ini mendapat **peningkatan tertarget**: memasang
+  ulang skill adalah seluruh jalur peningkatannya, dan onboarding hanya merekonsiliasi bagian yang hilang
+  atau usang — setiap bagian yang ditulis tangan, skill kustom, dan rencana yang sedang berjalan
+  dipertahankan, dan eksekusi kedua tidak mengubah apa pun. Rencana yang ditulis di bawah versi sebelumnya
+  mempertahankan bentuknya yang tercatat dan ditutup dengan tugas akhirnya sendiri; mereka tidak pernah
+  dipaksa masuk ke bentuk yang baru.
 - **Inventarisasi apa yang sudah ada.** `AGENTS.md`, `CLAUDE.md`, `docs/`, penyiapan `.agents/` atau skills/agents
   apa pun, `.dwp/`, dan `.gitignore`. Catat apa pun yang sudah melakukan sebagian dari pekerjaan ini.
 - **Usulkan rencana onboarding.** Sajikan daftar ringkas: berkas yang akan Anda buat, berkas yang akan Anda
@@ -139,11 +148,15 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
 6. **`.dwp/` + `tmp/`.** Siapkan `.dwp/` yang di-gitignore dengan `plans/` dan `drafts/`, ditambah ruang
    scratch `tmp/` — keduanya ditambahkan ke `.gitignore` secara non-destruktif (tambahkan, jangan pernah menulis ulang).
 
-## 4. Tawarkan addon opt-in
+## 4. Pasang tinjauan lokal yang wajib, lalu tawarkan addon opt-in
 
-Setelah onboarding dasar, sebutkan kelima addon (devcontainer, Dailybot, dependency-upgrade,
-design-system, AI Diff Reviewer) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori sepenuhnya
-konforman dengan **nol** addon — jangan pernah memasangnya secara otomatis.
+Setelah onboarding dasar, pasang **tinjauan lokal AI Diff Reviewer** (Fase 7a — wajib sejak
+standar 2.3.0): skill vendored yang dipatok pada tag
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) ditambah
+`.review/extension.md` yang disesuaikan dengan repo melalui `generate-extension`, di bawah persetujuan
+onboarding. Lalu sebutkan keempat addon opsional (devcontainer, Dailybot, dependency-upgrade,
+design-system) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori sepenuhnya
+konforman dengan **nol** addon opsional — jangan pernah memasang yang itu secara otomatis.
 
 - **Dukungan devcontainer** — kontainer pengembangan yang terisolasi dan dapat direproduksi dengan autentikasi AI-CLI yang persisten.
 - **Integrasi Dailybot** — empat peristiwa siklus hidup (kickoff, tugas signifikan, terblokir, penyelesaian) sebagai pelaporan kemajuan secara best-effort untuk tim yang sudah memakai Dailybot, dengan penegakan hook otonom opsional (`dailybot-cli >= 3.7.0`). Memasang skill agent Dailybot yang dipasangkan (3.10.3) juga membuka chat, check-in, penulisan form, tanya AI, API key per repo, dan lainnya — addon ini hanya menghubungkan pelaporan ke eksekusi DWP. Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
@@ -154,8 +167,14 @@ konforman dengan **nol** addon — jangan pernah memasangnya secara otomatis.
   infrastruktur). Tiga profil ditumpuk dalam satu berkas: visual-ui (aktif secara default saat
   terdeteksi), cli-output, dan conversational — dua yang terakhir selalu ditanyakan, tidak pernah
   diterapkan secara otomatis.
-- **AI Diff Reviewer** — meningkatkan Tinjauan Keamanan wajib dengan tinjauan lokal terstruktur
-  melalui [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md` wajib). Selalu tanyakan **Flow A** (hanya lokal) vs **Flow B** (gerbang CI ganda dengan `pr-review.yml`); jangan pernah mengasumsikan nilai default. Kegagalan lunak hanya untuk kesalahan skill/ekstensi/pemanggilan yang hilang; hasil `critical` dari penerusan lokal yang selesai masih memblokir penyelesaian Tinjauan Keamanan. Metodologi inti memiliki nol ketergantungan pada AI Diff Reviewer.
+- **AI Diff Reviewer** — tinjauan lokal yang wajib (bukan opt-in): pemeriksaan keamanan setiap Final
+  Review menjalankan [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill +
+  `.review/extension.md` wajib) atas kumpulan perubahan rencana yang terakumulasi. Skill atau ekstensi
+  yang hilang adalah temuan `local reviewer not installed` yang tercatat, dipasang ketika eksekusi boleh
+  menulis ke harness — tidak pernah dilewati diam-diam; kesalahan pemanggilan bersifat kegagalan lunak;
+  temuan `critical` dari penerusan yang selesai tetap memblokir penyelesaian. **Flow B** (gerbang CI
+  dengan `pr-review.yml`) ditawarkan sebagai opt-in eksplisit dan tidak pernah dipasang tanpa diminta.
+  Tidak ada alur Deep Work Plan yang memerlukan layanan komersial, penyedia CI, atau secret.
 
 ## 5. Kembangkan kit (sub-skill author)
 
@@ -176,9 +195,9 @@ Hasilkan Deep Work Plan untuk tugas apa pun dan jalankan tugas demi tugas:
 - `/dwp-resume` — rekonstruksi status dan lanjutkan rencana yang terhenti.
 - `/dwp-verify` — laporan konformansi lulus/gagal yang objektif untuk repositori (atau rencana tertentu).
 
-Setiap rencana diakhiri dengan tiga tugas akhir wajib — sebuah **Security Review** atas perubahan
-rencana itu sendiri (menjaga `docs/SECURITY.md` tetap mutakhir; sebuah temuan kritis memblokir
-penyelesaian), Skills & Agents Discovery, dan Executive Report.
+Setiap rencana ditutup dengan Final Review — sebuah pemeriksaan keamanan atas perubahan rencana itu
+sendiri (menjaga `docs/SECURITY.md` tetap mutakhir; sebuah temuan kritis memblokir penyelesaian),
+validasi status akhir, dan rekonsiliasi skills. Executive Report tersedia atas permintaan.
 
 ## 7. Verifikasi
 

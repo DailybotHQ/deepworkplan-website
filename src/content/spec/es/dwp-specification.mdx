@@ -1,6 +1,6 @@
 ---
 title: Especificación de DWP
-description: "Especificación normativa de Deep Work Plan: estructura del plan, anatomía de tarea de nueve secciones, ciclo de cinco operaciones, salida y versionado."
+description: "Especificación normativa de Deep Work Plan: estructura del plan, anatomía de tarea de diez secciones, selección de puerta por superficie tocada, ciclo de cinco operaciones, salida y versionado."
 order: 2
 lang: es
 section: Workflow
@@ -11,15 +11,25 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Especificación de DWP
 
-**Versión 1.2. Estado: estable.** Este documento es la especificación normativa de la metodología Deep Work Plan (DWP). Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
+**Versión 2.3.0. Estado: estable.** Este documento es la especificación normativa de la metodología Deep Work Plan (DWP). Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
 
-> **Aditivo en v1.2.** Cuatro capacidades aditivas, sin cambios rupturistas: (1) la **capa de estado del plan legible por máquina** (`manifest.json` + `state.json`, véase [Estado del plan](/spec/plan-state)); (2) **niveles de rigor proporcional** (micro / standard / deep, véase [Rigor proporcional](#proportional-rigor)); (3) la **sección Delta** opcional en la anatomía de tarea para cambios de comportamiento en proyectos brownfield; y (4) el **Protocolo de Reanudación DWP** se eleva a un ritual nombrado y citable de seis pasos. Los planes v1.1 existentes siguen siendo conformes.
+> **Aditivo en esta revisión, sin cambios rupturistas.** (1) La sección **Superficie tocada** — el contrato entre lo que una tarea cambia y lo que debe validarse, con selección de puerta por clase de riesgo (aislada / costura / compartida-núcleo / desconocida); (2) la validación completa pasa a ser un **requisito de estado final** que se ejecuta en el único **Final Review** obligatorio del plan, con reglas explícitas de reutilización de evidencia; (3) las **decisiones de skills por tarea** se mudan a la tarea que las origina, y el Reporte Ejecutivo pasa a ser **opcional, a petición**; (4) un **flujo `create` consciente del modo** — el modo trust materializa directamente conservando el análisis y las comprobaciones de calidad; y (5) una **matriz de compatibilidad** explícita: los planes y repositorios de versiones anteriores siguen siendo conformes.
 
 ## Definición
 
 Un Deep Work Plan es un artefacto estructurado, basado solo en Markdown, que describe una tarea de ingeniería compleja descompuesta en unidades de trabajo secuenciales y revisables, diseñado para ser creado, ejecutado y mantenido por agentes de programación con IA que trabajan de forma autónoma.
 
 DWP está guiado por especificación: el plan es la especificación, y los agentes DEBEN ejecutar contra sus criterios de aceptación y puertas de validación explícitos en lugar de improvisar. La especificación — no una transcripción de chat — es la fuente de verdad duradera, de modo que el trabajo es verificable y reanudable entre sesiones y agentes. Es además ingeniería de harness hecha portable: el contexto, el bucle de control, las salvaguardas y el estado reanudable que hacen fiable a un agente se instalan en el propio repositorio como Markdown plano, de modo que cualquier agente conforme PUEDE pilotar el repositorio sin un framework específico de una herramienta.
+
+## Flujo `create` — un solo paso, consciente del modo
+
+El flujo `create` recoge una sola vez el objetivo, el contexto, las restricciones y el esquema de tareas, ejecuta su **análisis de requisitos** (alcance, orden de dependencias entre tareas, selección de validación a partir de la Superficie tocada, nivel de rigor proporcional) y luego materializa según el modo que eligió el desarrollador:
+
+- **Modo guiado (por defecto).** El flujo produce exactamente **un** artefacto para revisión: un **borrador refinado** en `.dwp/drafts/`, con estructura suficiente para aprobar o pedir cambios en una sola pasada. La carpeta del plan se materializa solo tras la aprobación.
+- **Modo trust (`trust` / `auto`).** El flujo **materializa el plan directamente**, sin archivo de borrador — el desarrollador renunció a la revisión intermedia. El análisis de requisitos, el orden de dependencias y una **comprobación de calidad del plan** siguen ejecutándose: trust renuncia a la *revisión*, no al *análisis*. Un plan en modo trust se registra como **preaprobado para ejecución desatendida**.
+- **Modos de borrador explícitos.** `refined-draft {name}` y `from-refined-draft {file}` siguen disponibles en ambos modos; un desarrollador que pida un borrador lo obtiene.
+
+En todos los modos el flujo nunca produce un borrador intermedio no refinado como paso revisable separado.
 
 ## Estructura del plan
 
@@ -35,21 +45,35 @@ Un plan PUEDE llevar adicionalmente la capa de estado legible por máquina: `man
 
 <TaskAnatomy lang="es" class="not-prose my-10" />
 
-Cada archivo de tarea DEBE contener estas nueve secciones, en orden:
+Cada archivo de tarea DEBE contener estas diez secciones, en orden:
 
 1. **Objetivo**: una declaración de un párrafo de lo que logra la tarea.
 2. **Contexto**: antecedentes, enlaces y por qué existe esta tarea.
-3. **Pasos**: acciones concretas y ordenadas que ejecutar.
-4. **Criterios de aceptación**: una lista de condiciones que definen lo terminado.
-5. **Validación**: comandos o pruebas que ejecutar para verificar.
-6. **Archivos**: rutas que se espera crear o modificar.
-7. **Dependencias**: otras tareas o requisitos externos.
-8. **Riesgos**: qué podría salir mal y sus mitigaciones.
-9. **Finalización y registro**: un marcador de estado más notas cronológicas.
+3. **Superficie tocada**: el contrato entre lo que la tarea cambia y lo que debe validarse.
+4. **Pasos**: acciones concretas y ordenadas que ejecutar.
+5. **Criterios de aceptación**: una lista de condiciones que definen lo terminado.
+6. **Validación**: comandos o pruebas que ejecutar para verificar, seleccionados a partir de la Superficie tocada.
+7. **Archivos**: rutas que se espera crear o modificar.
+8. **Dependencias**: otras tareas o requisitos externos.
+9. **Riesgos**: qué podría salir mal y sus mitigaciones.
+10. **Finalización y registro**: un marcador de estado más notas cronológicas.
 
 Una tarea PUEDE incluir adicionalmente una **sección Delta** (RECOMENDADA para cambios de comportamiento en proyectos brownfield — véase más abajo) y una **sección de Reversión** (RECOMENDADA para migraciones, cambios de infraestructura o despliegues).
 
-### La sección Delta (cambios brownfield)
+## La Superficie tocada
+
+La Superficie tocada es el contrato entre lo que una tarea cambia y lo que debe validarse. Existe para que la validación se **seleccione por efecto**, no por costumbre, y para que un lector posterior pueda ver por qué se eligió una puerta. Una tarea que cambia el comportamiento DEBE registrar:
+
+- **Superficie planificada**: las rutas, módulos, paquetes o configuración que la tarea pretende cambiar, escrita antes de editar.
+- **Superficie real**: la lista reconciliada tras editar, tomada del diff real. El agente DEBE reconciliar las superficies planificada y real antes de seleccionar la puerta.
+- **Consumidores afectados**: módulos, paquetes o servicios que dependen de la superficie real, hasta donde el mapeo documentado del repositorio pueda establecerlo. Donde no pueda, la entrada DEBE decirlo.
+- **Clase de riesgo**: una de: *aislada* (confinada a un módulo y sus pruebas); *costura* (altera un contrato, persistencia, enrutamiento, serialización, autenticación o el cableado del framework entre colaboradores); *compartida/núcleo* (importada ampliamente, o un cambio de dependencia, migración, configuración de build/pruebas, esquema o cadena de herramientas); *desconocida* (el mapeo falta, está desactualizado o está sin verificar).
+- **Mapeo de pruebas usado**: qué mapeo o herramienta documentada produjo la selección.
+- **Puerta seleccionada y motivo**: los comandos exactos y por qué cubren la superficie real.
+
+Los archivos de configuración, esquemas, manifiestos de dependencias, plantillas, fixtures, migraciones y archivos de instrucciones de agente **pueden cambiar el comportamiento** y DEBEN clasificarse por su efecto, nunca por extensión de archivo. Una tarea que solo cambia prosa, comentarios o artefactos de investigación PUEDE declarar la superficie como no aplicable y aun así ejecuta las comprobaciones no runtime del repositorio.
+
+## La sección Delta (cambios brownfield)
 
 La mayor parte del trabajo real modifica el comportamiento existente en lugar de crear comportamiento nuevo. Una tarea que cambia el funcionamiento de un sistema existente DEBERÍA llevar una **sección Delta** que describa el cambio como un contrato explícito de antes/después, usando tres encabezados de lista:
 
@@ -57,29 +81,61 @@ La mayor parte del trabajo real modifica el comportamiento existente en lugar de
 - **MODIFIED** — comportamiento que existe en ambos, expresado como `was: … → now: …`.
 - **REMOVED** — comportamiento que existía antes y desaparece intencionalmente después.
 
-Cada entrada DEBE ser comportamiento observable — la respuesta de un endpoint, un indicador CLI, un estado de UI, un valor por defecto — no un detalle de implementación. La sección Delta es el diff del revisor a nivel de comportamiento: los criterios de aceptación verifican las entradas ADDED/MODIFIED, y las entradas REMOVED son la licencia explícita para eliminar. Todo lo que no figure como REMOVED DEBE seguir funcionando, y la puerta de validación de la tarea (las pruebas existentes siguen en verde) es lo que lo garantiza.
+Cada entrada DEBE ser comportamiento observable — la respuesta de un endpoint, un indicador CLI, un estado de UI, un valor por defecto — no un detalle de implementación. La sección Delta es el diff del revisor a nivel de comportamiento: los criterios de aceptación verifican las entradas ADDED/MODIFIED, y las entradas REMOVED son la licencia explícita para eliminar. Todo lo que no figure como REMOVED DEBE seguir funcionando.
 
-## Puertas de validación y pruebas
+## Puertas de validación — seleccionadas por clase de riesgo
 
-La validación es la puerta que convierte una afirmación de finalización en evidencia de ella: una tarea NO DEBE marcarse como completada hasta que cada comando de su sección de Validación se haya ejecutado y haya pasado. Las pruebas son una parte de primera clase de esta puerta, no un añadido opcional: son lo que hace que el código que entrega un plan sea fiable y verificable.
+La validación es la puerta que convierte una afirmación de finalización en evidencia de ella: una tarea NO DEBE marcarse como completada hasta que cada comando de su sección de Validación se haya ejecutado y haya pasado. La puerta de una tarea que cambia el comportamiento se selecciona a partir de su Superficie tocada reconciliada, por clase de riesgo:
 
-Cuando una tarea agrega nueva funcionalidad central o cambia de forma sustancial el comportamiento existente:
+| Clase de riesgo | Validación requerida |
+|------|------|
+| **aislada** | Las pruebas del comportamiento cambiado y de sus consumidores afectados, más las comprobaciones estáticas que cubren la superficie real. |
+| **costura** | Lo anterior, más las pruebas de integración o de contrato para esa costura — añadidas en esta tarea si no existe ninguna. Las comprobaciones de integración en una costura no se difieren al final del plan. |
+| **compartida/núcleo** | Ampliar a los paquetes afectados y sus consumidores transitivos; donde el impacto no pueda acotarse de forma fiable, ejecutar la validación completa. |
+| **desconocida** | Investigar y corregir la selección; si aún no puede establecerse, ejecutar el comando más amplio o el completo. |
+| **no aplicable** (prosa/investigación) | Las comprobaciones no runtime del repositorio, con el motivo registrado en la Superficie tocada. |
 
-- Sus **criterios de aceptación** DEBEN incluir cobertura de pruebas automatizadas para el comportamiento nuevo o modificado (el camino feliz más los casos límite y de error significativos), siguiendo la convención de pruebas y la expectativa de cobertura del repositorio.
-- Su **validación** DEBE ejecutar las pruebas del repositorio junto con sus comprobaciones de linter, de tipos y de formato — el control completo de calidad de código que define el repositorio —, no solo la compilación. "Compila" no es una puerta suficiente para un cambio de comportamiento.
-- Las pruebas existentes DEBEN seguir en verde. Un cambio que rompa una prueba que cubre el código afectado DEBE actualizar esa prueba al nuevo comportamiento previsto; NO DEBE eliminar, omitir ni debilitar una prueba solo para forzar que la puerta pase.
+Un cambio de comportamiento DEBE producir una selección de pruebas no vacía y relevante — un selector inválido o un ejecutor que seleccionó cero pruebas no es cobertura. Donde el mapeo de pruebas del repositorio esté desactualizado, se deriva la invocación correcta y se registra la actualización del mapeo; un pequeño comando faltante nunca exige una ejecución completa de incorporación. Donde no exista una invocación acotada, aplica la suite completa aplicable — comportamiento heredado, nunca un error.
 
-Las tareas de pura documentación, configuración o investigación están exentas de crear pruebas, pero aun así DEBEN ejecutar la puerta de validación que defina el repositorio. La profundidad de las pruebas es proporcional al tamaño del cambio y a la madurez del repositorio. Cuando un repositorio no tiene ninguna cadena de herramientas de pruebas o de linter, el agente NO DEBE omitir en silencio esta disciplina: se apoya en la cadena de herramientas propuesta durante la incorporación (consulta [Conformidad](/spec)).
+Cuando una tarea agrega nueva funcionalidad central o cambia de forma sustancial el comportamiento existente, sus **criterios de aceptación** DEBEN incluir cobertura de pruebas automatizadas para el comportamiento nuevo o modificado, y su validación ejecuta las pruebas del repositorio junto con las comprobaciones de linter, de tipos y de formato — no solo la compilación. Las pruebas existentes DEBEN seguir en verde.
+
+## Validación de estado final
+
+Las puertas por tarea validan lo que cada tarea tocó; no sustituyen la validación del plan como conjunto. Antes de que un plan se complete, la validación **completa aplicable** del repositorio DEBE ejecutarse y pasar sobre el **estado final relevante**, tras el último cambio sustancial — en el Final Review. Las ejecuciones más amplias anteriores ocurren en los límites de integración o tras cambios compartidos/núcleo, no según un calendario basado en el conteo de tareas. Un resultado que pasa PUEDE reutilizarse solo con evidencia de que las entradas relevantes son equivalentes; de lo contrario se vuelve a ejecutar. Cada ejecución de puerta deja un registro conciso: comando, alcance, revisión, resultado y una ruta de evidencia.
 
 ## Disciplina de seguridad
 
-La seguridad es de primera clase del mismo modo que las pruebas, y sigue el mismo modelo de dos capas: disciplina por tarea mientras se realiza el trabajo, más una puerta obligatoria de Security Review sobre todo el conjunto de cambios al final. Siempre que una tarea toca autenticación o autorización, el manejo de entradas, secretos o configuración, la superficie de red, de archivos o de shell, o dependencias:
+La seguridad es de primera clase del mismo modo que las pruebas, y sigue el mismo modelo de dos capas: disciplina por tarea mientras se realiza el trabajo, más el pase de seguridad del Final Review sobre todo el conjunto de cambios al final. Siempre que una tarea toca autenticación o autorización, el manejo de entradas, secretos o configuración, la superficie de red, de archivos o de shell, o dependencias:
 
 - Sus **criterios de aceptación** DEBEN declarar las expectativas de seguridad del cambio — entrada validada y escapada, sin material secreto en el código ni en los fixtures, comprobaciones de autenticación preservadas o reforzadas —, de forma coherente con `docs/SECURITY.md`.
 - Cada commit DEBE confirmarse libre de secretos o credenciales antes de incorporarse, incluidos los fixtures de pruebas y los ejemplos de documentación. Un secreto en un commit ya subido DEBE tratarse como filtrado y rotarse, no simplemente eliminarse.
 - Donde el trabajo sensible a la seguridad sea sustancial, DEBERÍA colocarse una tarea de endurecimiento dedicada inmediatamente después de las tareas de implementación y antes de la tarea de pruebas exhaustivas, de modo que los hallazgos se corrijan antes de que las pruebas codifiquen el comportamiento y cada hallazgo se convierta en un caso de regresión en lugar de retrabajo.
 
-Esta disciplina por tarea no sustituye a la tarea final de Security Review: las comprobaciones por tarea detectan los problemas en el commit donde nacen, mientras que la puerta final audita todo el plan — incluidas las propias tareas de pruebas y documentación. Por ello, todo plan termina con tres tareas finales obligatorias — Security Review, luego Skills & Agents Discovery, luego el Executive Report — y un hallazgo de seguridad crítico bloquea la finalización hasta que se corrija o se acepte explícitamente.
+Esta disciplina por tarea no sustituye al pase de seguridad del Final Review: las comprobaciones por tarea detectan los problemas en el commit donde nacen, mientras que la puerta final audita todo el plan — incluidas las propias tareas de pruebas y documentación.
+
+## Ciclo de vida del plan — el Final Review
+
+Todo plan conforme redactado bajo esta versión termina con exactamente **una** tarea obligatoria: el **Final Review** (tarea N). Dos responsabilidades que versiones anteriores colocaban en tareas de cierre separadas se reubican: las decisiones de skills pasan a la tarea que produjo el patrón, y el Reporte Ejecutivo pasa a ser un artefacto opcional, a petición. Nada del pase de seguridad se relaja.
+
+El Final Review DEBE, en orden:
+
+**(a) Pase de seguridad** — revisar el conjunto completo acumulado de cambios del plan en busca de secretos codificados, riesgos de inyección, nueva superficie de ataque, autenticación debilitada y datos sensibles en registros o documentación; auditar las dependencias introducidas; verificar que `docs/SECURITY.md` siga reflejando la realidad; escribir el informe de revisión de seguridad incluso cuando esté limpio. Un hallazgo crítico se corrige — o el usuario lo acepta explícitamente — antes de que el plan se complete.
+
+**(b) Validación de estado final** — la validación completa aplicable del repositorio se ejecuta y pasa sobre el estado final relevante.
+
+**(c) Reconciliación de skills** — cada tarea lleva una disposición de skills y cada candidatura registrada tiene una disposición; no hay un segundo informe de descubrimiento.
+
+**(d) Finalización** — reportar la finalización con entregables, evidencia de validación y limitaciones; ofrecer el Reporte Ejecutivo una sola vez. El plan queda completo responda o no la oferta.
+
+El Final Review se ejecuta secuencialmente tras todas las demás tareas y nunca se coloca en un grupo paralelo.
+
+## Decisiones de skills por tarea
+
+La pregunta "¿este trabajo creó un patrón reutilizable que merezca una skill o un agente?" se responde dentro de la tarea que produjo el patrón, mientras su evidencia está en contexto. La Finalización y registro de cada tarea lleva una **disposición de skills**: ninguna, actualizar una skill existente, crear un artefacto con nombre, o un aplazamiento con motivo. La autoría justificada ocurre dentro de esa tarea, antes de su puerta de validación y su commit, tras comprobar duplicados contra el catálogo existente.
+
+## Reporte ejecutivo — opcional, a petición
+
+El Reporte Ejecutivo ya no es una tarea obligatoria. Al completar, el agente lo ofrece una vez; se genera solo bajo petición explícita, satisfecho a partir de evidencia duradera sin reproducir el plan. Sin respuesta, o en una ejecución desatendida, el plan queda completo sin generar el reporte.
 
 ## Protocolo de finalización de tarea
 
@@ -133,7 +189,7 @@ El rigor DEBE ser proporcional al trabajo. La ceremonia en cambios triviales es 
 | Nivel | Cuándo | Forma |
 |-------|--------|-------|
 | **micro** | Un único cambio atómico: una preocupación, aproximadamente una sesión, sin coordinación. Una corrección de error, un cambio de texto, un ajuste de configuración. | Sin carpeta de plan. El agente declara el objetivo, los criterios de aceptación y la puerta de validación en línea en la conversación, ejecuta, valida, hace commit. |
-| **standard** | Trabajo de múltiples pasos con alcance real: una funcionalidad, una refactorización, una migración dentro de un repositorio. El nivel por defecto. | Un plan completo: carpeta de plan, tareas de nueve secciones, tareas finales obligatorias. |
+| **standard** | Trabajo de múltiples pasos con alcance real: una funcionalidad, una refactorización, una migración dentro de un repositorio. El nivel por defecto. | Un plan completo: carpeta de plan, tareas de diez secciones, el Final Review. |
 | **deep** | Trabajo de largo alcance que abarca grupos paralelos, repositorios hijos o múltiples sesiones desatendidas. | Un plan estándar más capacidades de orquestador o agentes en equipo, y la capa de estado. |
 
 Un agente al que se le pida crear un plan para trabajo de nivel micro DEBE indicar que un plan es desproporcionado y ofrecer la forma en línea en su lugar. NO DEBE crearse una carpeta de plan para un cambio trivial de un solo archivo.
@@ -141,6 +197,17 @@ Un agente al que se le pida crear un plan para trabajo de nivel micro DEBE indic
 El trabajo de nivel micro mantiene los elementos no negociables: un objetivo explícito, una puerta de validación que se ejecuta y pasa, y disciplina de pruebas para cambios de comportamiento. El nivel cambia el empaquetado, nunca las puertas.
 
 Cuando el alcance crece a mitad del camino — una tarea micro descubre alcance real, un plan estándar surge en subrepositorios — el agente DEBE detenerse y promover el trabajo al siguiente nivel en lugar de estirar el actual.
+
+## Compatibilidad
+
+Los planes y repositorios de versiones anteriores siguen siendo conformes, y un comprobador de conformidad DEBE distinguir un artefacto heredado conocido (aceptado) de un artefacto que declara esta versión y es objetivamente inválido bajo ella (rechazado):
+
+| Caso | Regla |
+|------|------|
+| **Plan redactado bajo una versión anterior** (tres tareas finales obligatorias; tareas sin Superficie tocada) ejecutado por esta versión | Soportado. Se ejecuta bajo su propia forma registrada — no se añaden, quitan ni reordenan tareas finales, no se añade una Superficie tocada a mitad de vuelo, y la validación recurre a la suite completa aplicable. Una sesión de `refine` PUEDE migrarlo deliberadamente. |
+| **Repositorio incorporado bajo una versión anterior**, incorporado o planificado por esta versión | Soportado. Los planes recurren a puertas de suite completa; la documentación faltante de invocaciones acotadas es un hallazgo que nombra la actualización dirigida del harness, nunca un fallo. |
+| **Plan redactado bajo esta versión**, agente que sigue esta versión | Soportado — el objetivo. |
+| **Plan redactado bajo esta versión**, agente que sigue una versión anterior | No soportado; documentado. Los repositorios que fijan un skill antiguo DEBERÍAN actualizarlo antes de adoptar planes nuevos. |
 
 ## Versionado
 

@@ -1,6 +1,6 @@
 ---
 title: Especificação do DWP
-description: "Especificação normativa do Deep Work Plan: estrutura do plano, a anatomia de nove seções da tarefa, o loop de execução de cinco operações, o espaço de trabalho de saída e o versionamento."
+description: "Especificação normativa do Deep Work Plan: estrutura do plano, a anatomia de dez seções da tarefa, a seleção de gate pela superfície tocada, o loop de execução de cinco operações, a saída e o versionamento."
 order: 2
 lang: pt
 section: Workflow
@@ -11,15 +11,25 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Especificação do DWP
 
-**Versão 1.2. Status: Estável.** Este documento é a especificação normativa da metodologia Deep Work Plan (DWP). As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
+**Versão 2.3.0. Status: Estável.** Este documento é a especificação normativa da metodologia Deep Work Plan (DWP). As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
 
-> **Aditivo na v1.2.** Quatro capacidades aditivas, sem alterações incompatíveis: (1) a **camada de estado do plano legível por máquina** (`manifest.json` + `state.json`, veja [Estado do plano](/spec/plan-state)); (2) **tiers de rigor proporcional** (micro / standard / deep, veja [Rigor proporcional](#proportional-rigor)); (3) a **seção Delta** opcional na anatomia da tarefa para alterações de comportamento em brownfield; e (4) o **Protocolo de Retomada do DWP** é promovido a um ritual nomeado e citável de seis etapas. Os planos v1.1 existentes permanecem conformes.
+> **Aditivo nesta revisão, sem alterações incompatíveis.** (1) A seção **Superfície tocada** — o contrato entre o que uma tarefa muda e o que deve ser validado, com seleção de gate por classe de risco (isolada / costura / compartilhada-núcleo / desconhecida); (2) a validação completa passa a ser um **requisito de estado final** executado no único **Final Review** obrigatório do plano, com regras explícitas de reutilização de evidência; (3) as **decisões de skills por tarefa** passam para a tarefa que as origina, e o Executive Report passa a ser **opcional, mediante solicitação**; (4) um **fluxo `create` consciente do modo** — o modo trust materializa diretamente preservando a análise e as verificações de qualidade; e (5) uma **matriz de compatibilidade** explícita: os planos e repositórios de versões anteriores permanecem conformes.
 
 ## Definição
 
 Um Deep Work Plan é um artefato estruturado, exclusivamente em markdown, que descreve uma tarefa de engenharia complexa decomposta em unidades de trabalho sequenciais e revisáveis, projetado para ser criado, executado e mantido por agentes de código de IA trabalhando de forma autônoma.
 
 O DWP é orientado a especificação: o plano é a especificação, e os agentes DEVEM (MUST) executar contra seus critérios de aceitação e validation gates explícitos, em vez de improvisar. A especificação — e não uma transcrição de chat — é a fonte de verdade duradoura, de modo que o trabalho é verificável e retomável entre sessões e agentes. É também engenharia de harness tornada portátil: o contexto, o loop de controle, as salvaguardas e o estado retomável que tornam um agente confiável são instalados no próprio repositório como markdown puro, de modo que qualquer agente conforme PODE (MAY) pilotar o repositório sem um framework específico de ferramenta.
+
+## Fluxo `create` — etapa única, consciente do modo
+
+O fluxo `create` reúne uma única vez o objetivo, o contexto, as restrições e o esboço de tarefas, realiza sua **análise de requisitos** (escopo, ordenação de dependências entre tarefas, seleção de validação a partir da Superfície tocada, tier de rigor proporcional) e então materializa de acordo com o modo que o programador escolheu:
+
+- **Modo guiado (padrão).** O fluxo produz exatamente **um** artefato para revisão: um **rascunho refinado** em `.dwp/drafts/`, com estrutura suficiente para aprovar ou pedir mudanças em uma única passagem. A pasta do plano é materializada somente após a aprovação.
+- **Modo trust (`trust` / `auto`).** O fluxo **materializa o plano diretamente**, sem arquivo de rascunho — o programador abriu mão da revisão intermediária. A análise de requisitos, a ordenação de dependências e uma **verificação de qualidade do plano** continuam a ser executadas: trust abre mão da *revisão*, não da *análise*. Um plano em modo trust é registrado como **pré-aprovado para execução não supervisionada**.
+- **Modos de rascunho explícitos.** `refined-draft {name}` e `from-refined-draft {file}` permanecem disponíveis em ambos os modos; um programador que peça um rascunho o obtém.
+
+Em todos os modos o fluxo nunca produz um rascunho intermediário não refinado como etapa revisável separada.
 
 ## Estrutura do plano
 
@@ -35,21 +45,35 @@ Um plano PODE (MAY) adicionalmente carregar a camada de estado legível por máq
 
 <TaskAnatomy lang="pt" class="not-prose my-10" />
 
-Cada arquivo de tarefa DEVE (MUST) conter estas nove seções, em ordem:
+Cada arquivo de tarefa DEVE (MUST) conter estas dez seções, em ordem:
 
 1. **Goal** — uma declaração de um parágrafo do que a tarefa alcança.
 2. **Context** — contexto, links e por que esta tarefa existe.
-3. **Steps** — ações ordenadas e concretas a executar.
-4. **Acceptance criteria** — uma lista de verificação de condições que definem o concluído.
-5. **Validation** — comandos ou testes a executar para verificar.
-6. **Files** — caminhos que se espera criar ou modificar.
-7. **Dependencies** — outras tarefas ou pré-requisitos externos.
-8. **Risks** — o que pode dar errado e as mitigações.
-9. **Completion & Log** — um marcador de status mais notas cronológicas.
+3. **Superfície tocada** — o contrato entre o que a tarefa muda e o que deve ser validado.
+4. **Steps** — ações ordenadas e concretas a executar.
+5. **Acceptance criteria** — uma lista de verificação de condições que definem o concluído.
+6. **Validation** — comandos ou testes a executar para verificar, selecionados a partir da Superfície tocada.
+7. **Files** — caminhos que se espera criar ou modificar.
+8. **Dependencies** — outras tarefas ou pré-requisitos externos.
+9. **Risks** — o que pode dar errado e as mitigações.
+10. **Completion & Log** — um marcador de status mais notas cronológicas.
 
 Uma tarefa PODE (MAY) adicionalmente incluir uma **seção Delta** (RECOMENDADA para alterações de comportamento em brownfield — veja abaixo) e uma **seção Rollback** (RECOMENDADA para migrações, alterações de infraestrutura ou implantações).
 
-### A seção Delta (alterações em brownfield)
+## A Superfície tocada
+
+A Superfície tocada é o contrato entre o que uma tarefa muda e o que deve ser validado. Ela existe para que a validação seja **selecionada pelo efeito**, não pelo hábito, e para que um leitor posterior possa ver por que um gate foi escolhido. Uma tarefa que altera o comportamento DEVE (MUST) registrar:
+
+- **Superfície planejada** — os caminhos, módulos, pacotes ou configuração que a tarefa pretende mudar, escritos antes de editar.
+- **Superfície real** — a lista reconciliada após editar, tomada do diff real. O agente DEVE (MUST) reconciliar as superfícies planejada e real antes de selecionar o gate.
+- **Consumidores afetados** — módulos, pacotes ou serviços que dependem da superfície real, até onde o mapeamento documentado do repositório conseguir estabelecer. Onde não conseguir, a entrada DEVE (MUST) dizê-lo.
+- **Classe de risco** — uma de: *isolada* (confinada a um módulo e seus testes); *costura* (altera um contrato, persistência, roteamento, serialização, autenticação ou o cabeamento do framework entre colaboradores); *compartilhada/núcleo* (importada amplamente, ou uma mudança de dependência, migração, configuração de build/testes, schema ou cadeia de ferramentas); *desconhecida* (o mapeamento está ausente, desatualizado ou não verificado).
+- **Mapeamento de testes usado** — qual mapeamento ou ferramenta documentada produziu a seleção.
+- **Gate selecionado e motivo** — os comandos exatos e por que cobrem a superfície real.
+
+Arquivos de configuração, schemas, manifestos de dependências, templates, fixtures, migrações e arquivos de instruções de agente **podem mudar o comportamento** e DEVEM (MUST) ser classificados pelo seu efeito, nunca pela extensão do arquivo. Uma tarefa que muda apenas prosa, comentários ou artefatos de pesquisa PODE (MAY) declarar a superfície como não aplicável e ainda assim executa as verificações não runtime do repositório.
+
+## A seção Delta (alterações em brownfield)
 
 A maior parte do trabalho real modifica comportamentos existentes em vez de criar novos. Uma tarefa que altera o funcionamento de um sistema existente DEVERIA (SHOULD) incluir uma **seção Delta** descrevendo a mudança como um contrato explícito de antes/depois, usando três títulos de lista:
 
@@ -57,29 +81,61 @@ A maior parte do trabalho real modifica comportamentos existentes em vez de cria
 - **MODIFIED** — comportamento que existe em ambos, declarado como `was: … → now: …`.
 - **REMOVED** — comportamento que existia antes e foi intencionalmente removido depois.
 
-Cada entrada DEVE (MUST) ser um comportamento observável — a resposta de um endpoint, um flag de CLI, um estado de UI, um valor padrão — não um detalhe de implementação. A seção Delta é o diff do revisor no nível de comportamento: os critérios de aceitação verificam as entradas ADDED/MODIFIED, e as entradas REMOVED são a licença explícita para excluir. Qualquer coisa não listada como REMOVED DEVE (MUST) continuar funcionando, e o validation gate da tarefa (testes existentes permanecendo verdes) é o que garante isso.
+Cada entrada DEVE (MUST) ser um comportamento observável — a resposta de um endpoint, um flag de CLI, um estado de UI, um valor padrão — não um detalhe de implementação. A seção Delta é o diff do revisor no nível de comportamento: os critérios de aceitação verificam as entradas ADDED/MODIFIED, e as entradas REMOVED são a licença explícita para excluir. Qualquer coisa não listada como REMOVED DEVE (MUST) continuar funcionando.
 
-## Validation gates e testes
+## Validation gates — selecionados por classe de risco
 
-A validação é o gate que transforma uma afirmação de conclusão em evidência dela: uma tarefa NÃO DEVE (MUST NOT) ser marcada como concluída até que todo comando de sua seção Validation tenha sido executado e aprovado. Os testes são uma parte de primeira classe desse gate, não um complemento opcional — são eles que tornam o código que um plano entrega confiável e verificável.
+A validação é o gate que transforma uma afirmação de conclusão em evidência dela: uma tarefa NÃO DEVE (MUST NOT) ser marcada como concluída até que todo comando de sua seção Validation tenha sido executado e aprovado. O gate de uma tarefa que altera o comportamento é selecionado a partir de sua Superfície tocada reconciliada, por classe de risco:
 
-Quando uma tarefa adiciona nova funcionalidade central ou altera de forma material o comportamento existente:
+| Classe de risco | Validação exigida |
+|------|------|
+| **isolada** | Os testes do comportamento alterado e de seus consumidores afetados, mais as verificações estáticas que cobrem a superfície real. |
+| **costura** | O acima, mais os testes de integração ou de contrato para essa costura — adicionados nesta tarefa se não existir nenhum. Verificações de integração em uma costura não são adiadas para o fim do plano. |
+| **compartilhada/núcleo** | Ampliar para os pacotes afetados e seus consumidores transitivos; onde o impacto não puder ser delimitado de forma confiável, executar a validação completa. |
+| **desconhecida** | Investigar e corrigir a seleção; se ainda assim não puder ser estabelecida, executar o comando mais amplo ou o completo. |
+| **não aplicável** (prosa/pesquisa) | As verificações não runtime do repositório, com o motivo registrado na Superfície tocada. |
 
-- Seus **critérios de aceitação** DEVEM (MUST) incluir cobertura de testes automatizados para o comportamento novo ou alterado (o caminho feliz mais os casos de borda e de erro relevantes), seguindo a convenção de testes e a expectativa de cobertura do repositório.
-- Sua **validação** DEVE (MUST) executar os testes do repositório junto com suas verificações de lint, type-check e formatação — a verificação completa de qualidade de código que o repositório define —, não apenas o build. "Ele compila" não é um gate suficiente para uma mudança de comportamento.
-- Os testes existentes DEVEM (MUST) permanecer verdes. Uma mudança que quebra um teste que cobre o código afetado DEVE (MUST) atualizar esse teste para o novo comportamento pretendido; ela NÃO DEVE (MUST NOT) excluir, pular ou enfraquecer um teste apenas para forçar a aprovação do gate.
+Uma mudança de comportamento DEVE (MUST) produzir uma seleção de testes não vazia e relevante — um seletor inválido ou um executor que selecionou zero testes não é cobertura. Onde o mapa de testes do repositório estiver desatualizado, deriva-se a invocação correta e registra-se a atualização do mapeamento; um pequeno comando faltante nunca exige uma execução completa de onboarding. Onde não existir uma invocação delimitada, aplica-se a suíte completa aplicável — comportamento legado, nunca um erro.
 
-Tarefas puramente de documentação, configuração ou pesquisa estão isentas de criar testes, mas ainda DEVEM (MUST) executar qualquer validation gate que o repositório defina. A profundidade dos testes é proporcional ao tamanho da mudança e à maturidade do repositório. Onde um repositório não tem nenhuma cadeia de ferramentas de teste ou lint, o agente NÃO DEVE (MUST NOT) pular silenciosamente essa disciplina — ele depende da cadeia de ferramentas proposta durante o onboarding (veja [Conformidade](/spec)).
+Quando uma tarefa adiciona nova funcionalidade central ou altera de forma material o comportamento existente, seus critérios de aceitação DEVEM (MUST) incluir cobertura de testes automatizados para o comportamento novo ou alterado, e sua validação executa os testes do repositório junto com as verificações de lint, type-check e formatação — não apenas o build. Os testes existentes DEVEM (MUST) permanecer verdes.
+
+## Validação de estado final
+
+Os gates por tarefa validam o que cada tarefa tocou; eles não substituem a validação do plano como um todo. Antes de um plano se completar, a validação **completa aplicável** do repositório DEVE (MUST) executar e passar sobre o **estado final relevante**, após a última mudança substancial — no Final Review. Execuções mais amplas anteriores acontecem em limites de integração ou após mudanças compartilhadas/núcleo, não segundo um cronograma baseado na contagem de tarefas. Um resultado aprovado PODE (MAY) ser reutilizado apenas com evidência de que as entradas relevantes são equivalentes; caso contrário, é reexecutado. Cada execução de gate deixa um registro conciso: comando, escopo, revisão, resultado e um caminho de evidência.
 
 ## Disciplina de segurança
 
-A segurança é de primeira classe da mesma forma que os testes, e segue o mesmo modelo de duas camadas: disciplina por tarefa enquanto o trabalho acontece, mais um gate obrigatório de Security Review sobre todo o conjunto de alterações ao final. Sempre que uma tarefa toca autenticação ou autorização, o tratamento de entradas, secrets ou configuração, a superfície de rede, de arquivos ou de shell, ou dependências:
+A segurança é de primeira classe da mesma forma que os testes, e segue o mesmo modelo de duas camadas: disciplina por tarefa enquanto o trabalho acontece, mais o passe de segurança do Final Review sobre todo o conjunto de alterações ao final. Sempre que uma tarefa toca autenticação ou autorização, o tratamento de entradas, secrets ou configuração, a superfície de rede, de arquivos ou de shell, ou dependências:
 
 - Seus **critérios de aceitação** DEVEM (MUST) declarar as expectativas de segurança da mudança — entrada validada e escapada, sem material secreto no código ou nos fixtures, verificações de autenticação preservadas ou reforçadas —, de forma coerente com `docs/SECURITY.md`.
 - Todo commit DEVE (MUST) ser confirmado livre de secrets ou credenciais antes de ser incorporado, incluindo fixtures de teste e exemplos de documentação. Um secret em um commit já enviado DEVE (MUST) ser tratado como vazado e rotacionado, não apenas removido.
 - Onde o trabalho sensível à segurança for substancial, uma tarefa de hardening dedicada DEVERIA (SHOULD) ser colocada imediatamente após as tarefas de implementação e antes da tarefa de testes abrangentes, de modo que as descobertas sejam corrigidas antes que os testes codifiquem o comportamento e cada descoberta se torne um caso de regressão em vez de retrabalho.
 
-Essa disciplina por tarefa não substitui a tarefa final de Security Review: as verificações por tarefa capturam os problemas no commit onde nascem, enquanto o gate final audita todo o plano — incluindo as próprias tarefas de testes e documentação. Por isso, todo plano termina com três tarefas finais obrigatórias — Security Review, depois Skills & Agents Discovery, depois o Executive Report — e uma descoberta de segurança crítica bloqueia a conclusão até que seja corrigida ou explicitamente aceita.
+Essa disciplina por tarefa não substitui o passe de segurança do Final Review: as verificações por tarefa capturam os problemas no commit onde nascem, enquanto o gate final audita todo o plano — incluindo as próprias tarefas de testes e documentação.
+
+## Ciclo de vida do plano — o Final Review
+
+Todo plano conforme redigido sob esta versão termina com exatamente **uma** tarefa obrigatória: o **Final Review** (tarefa N). Duas responsabilidades que versões anteriores colocavam em tarefas de encerramento separadas são realocadas: as decisões de skills passam para a tarefa que produziu o padrão, e o Executive Report passa a ser um artefato opcional, mediante solicitação. Nada do passe de segurança é relaxado.
+
+O Final Review DEVE (MUST), em ordem:
+
+**(a) Passe de segurança** — revisar todo o conjunto acumulado de alterações do plano em busca de secrets embutidos, riscos de injeção, nova superfície de ataque, autenticação enfraquecida e dados sensíveis em logs ou documentação; auditar as dependências introduzidas; verificar que o `docs/SECURITY.md` ainda reflete a realidade; escrever o relatório de revisão de segurança mesmo quando estiver limpo. Uma descoberta crítica é corrigida — ou explicitamente aceita pelo usuário — antes de o plano se completar.
+
+**(b) Validação de estado final** — a validação completa aplicável do repositório executa e passa sobre o estado final relevante.
+
+**(c) Reconciliação de skills** — cada tarefa carrega uma disposição de skills e cada candidata registrada tem uma disposição; não há um segundo relatório de descoberta.
+
+**(d) Conclusão** — reportar a conclusão com entregáveis, evidência de validação e limitações; oferecer o Executive Report uma única vez. O plano fica completo independentemente de a oferta ser respondida.
+
+O Final Review executa sequencialmente após todas as demais tarefas e nunca é colocado em um grupo paralelo.
+
+## Decisões de skills por tarefa
+
+A pergunta "este trabalho criou um padrão reutilizável que mereça uma skill ou um agent?" é respondida dentro da tarefa que produziu o padrão, enquanto sua evidência está em contexto. O Completion & Log de cada tarefa carrega uma **disposição de skills**: nenhuma, atualizar uma skill existente, criar um artefato nomeado, ou um adiamento com motivo. A autoria justificada acontece dentro dessa tarefa, antes de seu validation gate e de seu commit, após verificar duplicados no catálogo existente.
+
+## Executive Report — opcional, mediante solicitação
+
+O Executive Report não é mais uma tarefa obrigatória. Na conclusão, o agente o oferece uma vez; ele é gerado apenas mediante solicitação explícita, atendido a partir de evidência duradoura sem reproduzir o plano. Sem resposta, ou em uma execução não supervisionada, o plano fica completo sem nenhum relatório gerado.
 
 ## Protocolo de conclusão de tarefa
 
@@ -133,7 +189,7 @@ O rigor DEVE (MUST) ser proporcional ao trabalho. Cerimônia em mudanças trivia
 | Tier | Quando | Forma |
 |------|--------|-------|
 | **micro** | Uma única mudança atômica: uma preocupação, aproximadamente uma sessão, sem coordenação. Uma correção de bug, uma mudança de texto, um ajuste de configuração. | Sem pasta de plano. O agente declara o objetivo, os critérios de aceitação e o validation gate inline na conversa, executa, valida, faz commit. |
-| **standard** | Trabalho com várias etapas e escopo real: uma funcionalidade, uma refatoração, uma migração em um repositório. O tier padrão. | Um plano completo: pasta de plano, tarefas de nove seções, tarefas finais obrigatórias. |
+| **standard** | Trabalho com várias etapas e escopo real: uma funcionalidade, uma refatoração, uma migração em um repositório. O tier padrão. | Um plano completo: pasta de plano, tarefas de dez seções, o Final Review. |
 | **deep** | Trabalho de longo horizonte abrangendo grupos paralelos, repositórios filhos ou múltiplas sessões não supervisionadas. | Um plano standard mais capacidades de orquestrador e/ou team-agents, e a camada de estado. |
 
 Um agente solicitado a criar um plano para trabalho de tier micro DEVE (MUST) dizer que um plano é desproporcional e oferecer a forma inline. Uma pasta de plano NÃO DEVE (MUST NOT) ser criada para uma mudança trivial de arquivo único.
@@ -141,6 +197,17 @@ Um agente solicitado a criar um plano para trabalho de tier micro DEVE (MUST) di
 O trabalho de tier micro ainda mantém os inegociáveis: um objetivo explícito, um validation gate que é executado e aprovado, e disciplina de testes para mudanças de comportamento. O tier muda o empacotamento, nunca os gates.
 
 Quando o escopo cresce no meio do caminho — uma micro tarefa revela escopo real, um plano standard cria sub-repositórios — o agente DEVE (MUST) parar e promover o trabalho ao próximo tier em vez de estender o atual.
+
+## Compatibilidade
+
+Os planos e repositórios de versões anteriores permanecem conformes, e um verificador de conformidade DEVE (MUST) distinguir um artefato legado conhecido (aceito) de um artefato que declara esta versão e é objetivamente inválido sob ela (rejeitado):
+
+| Caso | Regra |
+|------|------|
+| **Plano redigido sob uma versão anterior** (três tarefas finais obrigatórias; tarefas sem Superfície tocada) executado por esta versão | Suportado. Executado sob sua própria forma registrada — tarefas finais não são adicionadas, removidas nem reordenadas, nenhuma Superfície tocada é adicionada no meio do caminho, e a validação recorre à suíte completa aplicável. Uma sessão de `refine` PODE (MAY) migrá-lo deliberadamente. |
+| **Repositório integrado sob uma versão anterior**, integrado ou planejado por esta versão | Suportado. Os planos recorrem a gates de suíte completa; a documentação faltante de invocações delimitadas é uma descoberta que nomeia a atualização dirigida do harness, nunca uma falha. |
+| **Plano redigido sob esta versão**, agente seguindo esta versão | Suportado — o alvo. |
+| **Plano redigido sob esta versão**, agente seguindo uma versão anterior | Não suportado; documentado. Repositórios que fixam uma skill antiga DEVERIAM (SHOULD) atualizá-la antes de adotar planos novos. |
 
 ## Versionamento
 

@@ -78,20 +78,28 @@ src/
 │   ├── FormattedDate.astro  # Date formatting (per-language)
 │   ├── HeaderLink.astro     # Navigation link
 │   │
-│   ├── home/                # Homepage sections
-│   │   ├── HeroSection/
-│   │   │   ├── HeroSection.astro
-│   │   │   └── TypewriterWords.astro
-│   │   ├── HomeSection/
-│   │   │   ├── HomeSection.astro
-│   │   │   ├── HomeSectionContent.astro
-│   │   │   ├── HomeSectionImage.astro
-│   │   │   └── enum.ts
-│   │   └── ...                  # Methodology / spec / kit preview sections
+│   ├── home/                # Homepage sections (rendered by HomePage.astro)
+│   │   ├── Hero.astro                # Value proposition + copy-init.md CTA
+│   │   ├── ActHumansSteer.astro      # Story Act I — Humans steer. Agents execute.
+│   │   ├── ActPlanNoDrift.astro      # Story Act II — A plan agents can't drift from.
+│   │   ├── ActDoneIsAContract.astro  # Story Act III — Done is a contract, not a vibe.
+│   │   ├── ActRepoAsHarness.astro    # Story Act IV — The repository is the harness.
+│   │   ├── Onboarding.astro          # Reasoning-based onboarding steps
+│   │   ├── Quickstart.astro          # One-instruction quickstart
+│   │   ├── Outcomes.astro            # What onboarding generates
+│   │   ├── Agents.astro              # Supported coding agents
+│   │   ├── Stacks.astro              # Stack presets
+│   │   ├── Archetypes.astro          # Individual repo vs orchestrator hub
+│   │   ├── Comparison.astro          # Methodology vs tool comparison table
+│   │   ├── Origin.astro              # Origin quote
+│   │   └── FinalCta.astro            # Closing call to action
 │   │
 │   ├── editorial/          # Editorial primitives (Kicker, Rule, Lead, Figure, Reference)
 │   │
 │   ├── pages/              # Shared page components (*Page.astro, InitPage, readers)
+│   │   ├── ComparePage.astro       # Objective comparison and source notes
+│   │   ├── CompareMatrix.astro     # Responsive capability matrix
+│   │   └── FaqPage.astro           # Grouped FAQ with FAQPage JSON-LD
 │   │
 │   └── layout/
 │       ├── Header.svelte        # Masthead navigation + inline hurricane-lamp theme toggle
@@ -391,6 +399,8 @@ src/pages/
 ├── about.astro          → /about
 ├── contact.astro        → /contact
 ├── examples.astro       → /examples
+├── compare.astro        → /compare
+├── faq.astro            → /faq
 ├── quickstart.astro     → /quickstart
 ├── init.astro           → /init
 ├── methodology/
@@ -436,7 +446,7 @@ const { Content } = await render(doc);
 
 `src/middleware.ts` enforces an **allowlist** of single-segment top-level paths. Any single-segment URL not in the set is rewritten to `/404` — **even if the file exists at `src/pages/<name>/index.astro`**. The allowlist is **derived** from one hand-edited set plus the language registry, so adding a new language requires no middleware edit at all:
 
-- `KNOWN_BASE_PATHS` — per-language page slugs (e.g. `about`, `contact`, `methodology`, `spec`, `kit`, `examples`, `quickstart`, `init`, `trust`, `developers`, `privacy`, `setup`, `onboarding`, `docs`). These exist for **every** language: at the root for the default language and under `/<lang>/<slug>` for every other active language. ONE place, covers all languages. (`setup`/`onboarding` redirect to `/init`; `docs` redirects to `/developers`.)
+- `KNOWN_BASE_PATHS` — per-language page slugs (e.g. `about`, `contact`, `compare`, `faq`, `methodology`, `spec`, `kit`, `examples`, `quickstart`, `init`, `trust`, `developers`, `privacy`, `setup`, `onboarding`, `docs`). These exist for **every** language: at the root for the default language and under `/<lang>/<slug>` for every other active language. ONE place, covers all languages. (`setup`/`onboarding` redirect to `/init`; `docs` redirects to `/developers`.)
 - `ROOT_ONLY_PATHS` — non-per-language paths (`api`, `internal`, `404`, `favicon.ico`, `favicon.svg`, `sitemap-index.xml`).
 - `PREFIXED_LANGUAGES` — active non-default language codes (`es`, `pt`, `zh`, …), derived from `getActiveNonDefaultLanguages()` in `src/lib/i18n.ts`. These are the valid single-segment language roots (`/es`, `/pt`, …).
 - `KNOWN_ROOT_PATHS` — derived union of the three sets above (`KNOWN_BASE_PATHS` ∪ `ROOT_ONLY_PATHS` ∪ `PREFIXED_LANGUAGES`).

@@ -23,4 +23,4 @@ Sekitar 85% dari devcontainer adalah kerangka umum yang stabil; 15% sisanya — 
 
 ## Catatan
 
-Opsional dan tidak pernah wajib. Sebuah repositori sepenuhnya konform tanpa addon sama sekali.
+Opsional dan tidak pernah wajib. Sebuah repositori sepenuhnya konform tanpa addon opsional sama sekali.

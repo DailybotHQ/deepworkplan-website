@@ -1,0 +1,334 @@
+---
+/**
+ * RepoAsHarnessPlate — Act IV of the homepage four-act story block
+ * ("The repository is the harness"), HP-09 in the illustration inventory.
+ *
+ * Two-layer editorial plate (refined-draft architecture):
+ *   1. Art layer — engraved raster pair (light + dark, 1600×1000,
+ *      transparent background) referenced from the canonical asset paths.
+ *      The chest's hang-tags are deliberately BLANK in the art (text-free
+ *      illustration rule) — their labels are the text layer below.
+ *   2. Text layer — real, translatable HTML: the statement with its single
+ *      oxblood emphasis word, the three mechanism points, and the five
+ *      brand-term tag chips (SPEC / TASKS / CHECKS / STATE / TOOLS) rendered
+ *      as HTML chips, never baked into the image.
+ *
+ * Inline 17-language i18n map + en fallback (docs/DIAGRAM_COMPONENTS.md §4).
+ * Zero JS: static .astro, no <script>, no client:*, no motion. This is NOT
+ * the ME-01 methodology diagram of the same concept: that diagram is a
+ * separate component for a separate use case and is never imported or
+ * wrapped here (one component per use case).
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Editorial plate: the repository is the harness — a durable spec on disk, validation gates instead of vibes, and state that survives context resets, with the tags SPEC, TASKS, CHECKS, STATE and TOOLS.',
+    statement: 'The repository is the harness.',
+    statementEmphasis: 'harness',
+    points: [
+      'Durable spec on disk',
+      'Validation gates, not vibes',
+      'Survives context resets',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'Engraved illustration of an archive chest with five blank hang-tags tied by string fanning out of it.',
+  },
+  es: {
+    ariaLabel:
+      'Lámina editorial: el repositorio es el harness — una especificación duradera en disco, puertas de validación en lugar de corazonadas y un estado que sobrevive a los reinicios de contexto, con las etiquetas SPEC, TASKS, CHECKS, STATE y TOOLS.',
+    statement: 'El repositorio es el harness.',
+    statementEmphasis: 'harness',
+    points: [
+      'Especificación duradera en disco',
+      'Puertas de validación, no corazonadas',
+      'Sobrevive a los reinicios de contexto',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'Ilustración grabada de un arcón de archivo del que salen, atadas con cordel, cinco etiquetas colgantes en blanco que se abren en abanico.',
+  },
+  pt: {
+    ariaLabel:
+      'Prancha editorial: o repositório é o harness — uma especificação durável em disco, portões de validação em vez de palpites e um estado que sobrevive a reinícios de contexto, com as etiquetas SPEC, TASKS, CHECKS, STATE e TOOLS.',
+    statement: 'O repositório é o harness.',
+    statementEmphasis: 'harness',
+    points: [
+      'Especificação durável em disco',
+      'Portões de validação, não palpites',
+      'Sobrevive a reinícios de contexto',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'Ilustração gravada de um baú de arquivo de onde saem, amarradas por cordões, cinco etiquetas pendentes em branco abrindo-se em leque.',
+  },
+  zh: {
+    ariaLabel:
+      '编辑插图：仓库即是 harness——磁盘上的持久规格说明、以验证关卡取代主观感觉，以及能在上下文重置后存续的状态；标签为 SPEC、TASKS、CHECKS、STATE 与 TOOLS。',
+    statement: '仓库即是 harness。',
+    statementEmphasis: 'harness',
+    points: [
+      '磁盘上的持久规格说明',
+      '验证关卡，而非感觉',
+      '在上下文重置后依然存续',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: '雕版风格插图：一只档案箱，五张系着细绳的空白吊牌从中呈扇形展开。',
+  },
+  ja: {
+    ariaLabel:
+      '編集図版：リポジトリこそが harness です。ディスク上に残る永続的な仕様、感覚ではなく検証ゲート、そしてコンテキストのリセットを生き延びる状態。タグは SPEC、TASKS、CHECKS、STATE、TOOLS です。',
+    statement: 'リポジトリこそが harness です。',
+    statementEmphasis: 'harness',
+    points: [
+      'ディスク上の永続的な仕様',
+      '感覚ではなく検証ゲート',
+      'コンテキストのリセットを生き延びる',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'ひもで結ばれた五枚の白紙のタグが扇状に広がるアーカイブチェストの彫刻風イラスト。',
+  },
+  de: {
+    ariaLabel:
+      'Editoriale Tafel: Das Repository ist das Harness — eine dauerhafte Spezifikation auf der Festplatte, Validierungsgates statt Bauchgefühl und ein Zustand, der Kontext-Resets übersteht, mit den Tags SPEC, TASKS, CHECKS, STATE und TOOLS.',
+    statement: 'Das Repository ist das Harness.',
+    statementEmphasis: 'Harness',
+    points: [
+      'Dauerhafte Spezifikation auf der Festplatte',
+      'Validierungsgates statt Bauchgefühl',
+      'Übersteht Kontext-Resets',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'Gravierte Illustration einer Archivtruhe, aus der fünf leere Anhänger an Schnüren fächerförmig hervorgehen.',
+  },
+  fr: {
+    ariaLabel:
+      'Planche éditoriale : le dépôt est le harness — une spécification durable sur disque, des portes de validation plutôt que de l’intuition, et un état qui survit aux réinitialisations de contexte, avec les étiquettes SPEC, TASKS, CHECKS, STATE et TOOLS.',
+    statement: 'Le dépôt est le harness.',
+    statementEmphasis: 'harness',
+    points: [
+      'Spécification durable sur disque',
+      'Portes de validation, pas d’intuition',
+      'Survit aux réinitialisations de contexte',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'Illustration gravée d’un coffre d’archives d’où s’éventailent cinq étiquettes vierges attachées par une ficelle.',
+  },
+  ko: {
+    ariaLabel:
+      '에디토리얼 도판: 저장소가 곧 harness입니다 — 디스크에 남는 지속적인 명세, 감 대신 검증 게이트, 그리고 컨텍스트 초기화를 견디는 상태입니다. 태그는 SPEC, TASKS, CHECKS, STATE, TOOLS입니다.',
+    statement: '저장소가 곧 harness입니다.',
+    statementEmphasis: 'harness',
+    points: [
+      '디스크에 남는 지속적인 명세',
+      '감이 아니라 검증 게이트',
+      '컨텍스트 초기화를 견딥니다',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: '끈에 매달린 백지 태그 다섯 장이 부채꼴로 펼쳐진 아카이브 상자를 새긴 판화 일러스트.',
+  },
+  ru: {
+    ariaLabel:
+      'Редакционная гравюра: репозиторий — это harness. Долговечная спецификация на диске, ворота валидации вместо чутья и состояние, которое переживает сбросы контекста, с ярлыками SPEC, TASKS, CHECKS, STATE и TOOLS.',
+    statement: 'Репозиторий — это harness.',
+    statementEmphasis: 'harness',
+    points: [
+      'Долговечная спецификация на диске',
+      'Ворота валидации, а не чутьё',
+      'Переживает сбросы контекста',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'Гравированная иллюстрация архивного сундука, из которого веером расходятся пять пустых бирок, привязанных бечёвкой.',
+  },
+  it: {
+    ariaLabel:
+      'Tavola editoriale: il repository è il harness — una specifica durevole su disco, gate di validazione invece di sensazioni, e uno stato che sopravvive ai reset del contesto, con le etichette SPEC, TASKS, CHECKS, STATE e TOOLS.',
+    statement: 'Il repository è il harness.',
+    statementEmphasis: 'harness',
+    points: [
+      'Specifica durevole su disco',
+      'Gate di validazione, non sensazioni',
+      'Sopravvive ai reset del contesto',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'Illustrazione incisa di un baule d’archivio da cui si aprono a ventaglio cinque cartellini vuoti legati da uno spago.',
+  },
+  tr: {
+    ariaLabel:
+      'Editoryal levha: depo, harness’tir — diskte kalıcı bir spesifikasyon, his yerine doğrulama kapıları ve bağlam sıfırlamalarını atlatan bir durum; etiketler SPEC, TASKS, CHECKS, STATE ve TOOLS.',
+    statement: 'Depo, harness’tir.',
+    statementEmphasis: 'harness',
+    points: [
+      'Diskte kalıcı spesifikasyon',
+      'His değil doğrulama kapıları',
+      'Bağlam sıfırlamalarını atlatır',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'İple bağlanmış beş boş askı etiketinin yelpaze gibi açıldığı arşiv sandığının kazınmış illüstrasyonu.',
+  },
+  id: {
+    ariaLabel:
+      'Pelat editorial: repositori adalah harness — spesifikasi awet di disk, gerbang validasi alih-alih perasaan, dan keadaan yang selamat dari reset konteks, dengan tag SPEC, TASKS, CHECKS, STATE, dan TOOLS.',
+    statement: 'Repositori adalah harness.',
+    statementEmphasis: 'harness',
+    points: [
+      'Spesifikasi awet di disk',
+      'Gerbang validasi, bukan perasaan',
+      'Selamat dari reset konteks',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'Ilustrasi ukiran berupa peti arsip dengan lima tag gantung kosong yang diikat tali dan mengipas keluar darinya.',
+  },
+  vi: {
+    ariaLabel:
+      'Hình minh họa biên tập: kho lưu trữ chính là harness — bản đặc tả bền vững trên đĩa, cổng kiểm chứng thay cho cảm tính, và trạng thái sống sót qua việc đặt lại ngữ cảnh, với các nhãn SPEC, TASKS, CHECKS, STATE và TOOLS.',
+    statement: 'Kho lưu trữ chính là harness.',
+    statementEmphasis: 'harness',
+    points: [
+      'Bản đặc tả bền vững trên đĩa',
+      'Cổng kiểm chứng, không phải cảm tính',
+      'Sống sót qua việc đặt lại ngữ cảnh',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'Tranh khắc minh họa một rương lưu trữ với năm thẻ treo để trống buộc bằng dây, tỏa ra hình quạt.',
+  },
+  hi: {
+    ariaLabel:
+      'संपादकीय प्लेट: रिपॉज़िटरी ही harness है — डिस्क पर स्थायी स्पेक, अहसास के बजाय सत्यापन द्वार, और संदर्भ रीसेट से बच निकलने वाली स्थिति, जिसमें SPEC, TASKS, CHECKS, STATE और TOOLS टैग शामिल हैं।',
+    statement: 'रिपॉज़िटरी ही harness है।',
+    statementEmphasis: 'harness',
+    points: [
+      'डिस्क पर स्थायी स्पेक',
+      'सत्यापन द्वार, भावनाओं पर नहीं',
+      'संदर्भ रीसेट से बच निकलता है',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'एक संग्रह संदूक से डोरी से बंधी पाँच खाली टैग बाहर की ओर फैली हुई हैं — ऐसा उत्कीर्ण चित्र।',
+  },
+  pl: {
+    ariaLabel:
+      'Płyta redakcyjna: repozytorium to harness — trwała specyfikacja na dysku, bramki walidacji zamiast wrażeń oraz stan, który przeżywa reset kontekstu, z tagami SPEC, TASKS, CHECKS, STATE i TOOLS.',
+    statement: 'Repozytorium to harness.',
+    statementEmphasis: 'harness',
+    points: [
+      'Trwała specyfikacja na dysku',
+      'Bramki walidacji, nie wrażenia',
+      'Przeżywa reset kontekstu',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'Grawerska ilustracja archiwnej skrzyni, z której wachlarzowo rozchodzi się pięć pustych zawieszek związanych sznurkiem.',
+  },
+  uk: {
+    ariaLabel:
+      'Редакційна гравюра: репозиторій — це harness. Довговічна специфікація на диску, ворота валідації замість відчуттів і стан, який переживає скиди контексту, з мітками SPEC, TASKS, CHECKS, STATE і TOOLS.',
+    statement: 'Репозиторій — це harness.',
+    statementEmphasis: 'harness',
+    points: [
+      'Довговічна специфікація на диску',
+      'Ворота валідації, а не відчуття',
+      'Переживає скиди контексту',
+    ],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'Гравірована ілюстрація архівної скрині, з якої віялом розходяться п’ять порожніх ярликів, прив’язаних шнурком.',
+  },
+  th: {
+    ariaLabel:
+      'ภาพประกอบเชิงบรรณาธิการ: รีโพซิทอรีคือ harness — สเปกถาวรบนดิสก์ เกตตรวจสอบแทนความรู้สึก และสถานะที่อยู่รอดจากการรีเซ็ตบริบท โดยมีแท็ก SPEC, TASKS, CHECKS, STATE และ TOOLS',
+    statement: 'รีโพซิทอรีคือ harness',
+    statementEmphasis: 'harness',
+    points: ['สเปกถาวรบนดิสก์', 'เกตตรวจสอบ ไม่ใช่ความรู้สึก', 'อยู่รอดจากการรีเซ็ตบริบท'],
+    tags: ['SPEC', 'TASKS', 'CHECKS', 'STATE', 'TOOLS'],
+    alt: 'ภาพพิมพ์ลายสลักของหีบเก็บเอกสารที่มีแท็กเปล่าห้าใบผูกด้วยเชือกแผ่ออกจากตัวหีบ',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+
+// Split the statement around the emphasis word so the oxblood span binds
+// `statementEmphasis` (an exact substring of `statement` in every locale —
+// enforced by tests/unit/components/repo-as-harness-plate.test.ts).
+const emIndex = t.statement.indexOf(t.statementEmphasis);
+const statementBefore =
+  emIndex >= 0 ? t.statement.slice(0, emIndex) : t.statement;
+const statementAfter =
+  emIndex >= 0 ? t.statement.slice(emIndex + t.statementEmphasis.length) : '';
+---
+
+<figure
+  class={`editorial-asset editorial-plate ${className}`}
+  role="img"
+  aria-label={t.ariaLabel}
+>
+  <img
+    src="/images/visuals/home/plate-repo-as-harness.png"
+    alt={t.alt}
+    width="1600"
+    height="1000"
+    loading="lazy"
+    class="plate-frame-img dark:hidden"
+  />
+  <img
+    src="/images/visuals/home/plate-repo-as-harness-dark.png"
+    alt={t.alt}
+    width="1600"
+    height="1000"
+    loading="lazy"
+    class="plate-frame-img hidden dark:block"
+  />
+  <figcaption>
+    <p class="plate-statement">
+      {statementBefore}<span class="plate-statement-em">{t.statementEmphasis}</span>{statementAfter}
+    </p>
+    <ul class="plate-points">
+      {t.points.map((point) => <li>{point}</li>)}
+    </ul>
+    <ul class="plate-tags">
+      {t.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+  </figcaption>
+</figure>
+
+<style>
+  /* Art layer: explicit 1600×1000 frame ratio (mirrors the shared
+     .plate-frame-img rule) so the plate reserves its space with no CLS. */
+  .plate-frame-img {
+    aspect-ratio: 16 / 10;
+  }
+
+  /* Caption rhythm: statement, points, and tag chips stacked with a gap. */
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  /* Hang-tag chips — the engraved chest's five blank tags, labeled here in
+     HTML instead of in the art. Small-caps serif chips on hairline rules,
+     Broadsheet tokens only (no ad-hoc hex, no drop shadows). */
+  .plate-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .plate-tags > li {
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    color: var(--color-muted);
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    font-variant-caps: small-caps;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    padding: 0.15rem 0.6rem;
+  }
+</style>

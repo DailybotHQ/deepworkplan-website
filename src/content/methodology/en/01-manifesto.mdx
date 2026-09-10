@@ -24,7 +24,7 @@ The capability of an AI coding agent depends less on the model than on the quali
 
 This reframes what it means to delegate well. Good delegation is not asking an agent for work — it is defining the work clearly enough that it can be executed correctly: the goal, the constraints, the context the agent would otherwise lack, and the criteria that decide whether it succeeded. Most of the value is created before execution begins.
 
-Deep Work Plan is the discipline of doing that upstream work in a durable, repeatable form. Its two pillars are the two halves of good direction: a **specification** states what "correct" looks like, and a **harness** gives the agent the context and tools to reach it. Together they convert a model's raw ability into dependable engineering — sustained across a task that runs for hours, and preserved across agents that change between sessions.
+Deep Work Plan is the discipline of doing that upstream work in a durable, repeatable form. Its two founding pillars are the two halves of good direction: a **specification** states what "correct" looks like, and a **harness** gives the agent the context and tools to reach it. A third discipline keeps the combination affordable at scale: **token efficiency**, because a harness that works is one the agent can actually carry through a long horizon. Together they convert a model's raw ability into dependable engineering — sustained across a task that runs for hours, and preserved across agents that change between sessions.
 
 ## Spec-driven by design
 
@@ -59,6 +59,18 @@ This is the second pillar of the methodology, and it deserves a plain definition
 <RepoAsHarness lang="en" class="not-prose my-10" />
 
 Because every element is a file in the repository rather than a feature of a tool, the harness is portable by construction. That is the one-line claim the rest of the methodology rests on: *the repository itself becomes the harness*, so any agent can pilot any repo — with no bespoke per-tool framework.
+
+## Efficient by construction
+
+The first pillar makes the work correct; the second makes it portable. The third keeps it **affordable** — because context is the scarcest resource a coding agent has, and a methodology that wastes it fails exactly when the work gets long.
+
+Three mechanisms do the work:
+
+- **Progressive disclosure.** The agent reads an essential core, and each guide or specification section loads only when the flow's own trigger fires. The agent carries the chapter it needs, not the whole book.
+- **Validation selected by touched surface.** Every task records what it changes and picks its gate by risk class — a small, isolated change proves itself narrowly; a change to shared machinery proves itself broadly. Validation is chosen by effect, not by habit.
+- **Task-local learning.** When a task produces a reusable pattern, the decision happens inside that task, where the evidence is fresh — not in a retrospective nobody reads.
+
+None of this is claimed to be loss-free by construction, and none of it is marketed with invented percentages. The instruction bytes each flow requires are measured and published; the behavioral claims are backed by seeded-fault replays. What can be said plainly is this: the agent reads less that it does not need, re-runs less that has not changed, and decides more where the evidence lives — and those savings compound over a long horizon.
 
 ## Why structured autonomous execution matters
 

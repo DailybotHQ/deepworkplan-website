@@ -10,7 +10,7 @@ order: 2
 
 Kết nối thực thi Deep Work Plan với **nhóm Dailybot** để con người thấy agent đang xây dựng gì — kickoff, tiến độ giữa kế hoạch, trở ngại và hoàn thành — mà không thêm cuộc họp hay toolchain thứ hai. Addon **opt-in** cho các nhóm đã dùng [Dailybot](https://www.dailybot.com).
 
-Phương pháp Deep Work Plan cốt lõi có **không** phụ thuộc Dailybot. Kho lưu trữ không có addon vẫn hoàn toàn tuân thủ. Chỉ đề xuất addon này khi nhà phát triển hoặc nhóm đã dùng Dailybot; không bao giờ tự động cài cho mọi người.
+Phương pháp Deep Work Plan cốt lõi có **không** phụ thuộc Dailybot. Kho lưu trữ không có addon tùy chọn nào vẫn hoàn toàn tuân thủ. Chỉ đề xuất addon này khi nhà phát triển hoặc nhóm đã dùng Dailybot; không bao giờ tự động cài cho mọi người.
 
 ## Khi nào dùng
 
@@ -123,7 +123,7 @@ Tham chiếu công khai: [dailybot.com/skill.md](https://www.dailybot.com/skill.
 
 ## Luồng onboarding
 
-Trong DWP `onboard` **Giai đoạn 7b**, sau scaffolding AI-first cốt lõi, luồng đề xuất năm addon opt-in. Nếu nhà phát triển chấp nhận Dailybot:
+Trong DWP `onboard` **Giai đoạn 7b**, sau scaffolding AI-first cốt lõi, luồng đề xuất bốn addon opt-in (đánh giá cục bộ AI Diff Reviewer đã được cài ở Giai đoạn 7a). Nếu nhà phát triển chấp nhận Dailybot:
 
 1. Phát hiện thiết lập hiện có (skill, CLI, `.dailybot/profile.json`, hook, bước báo cáo).
 2. Đề xuất cài skill/CLI qua luồng đồng ý của Dailybot.

@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Opcjonalny dodatek DWP: lokalny przebieg AI Diff Reviewer w Security Review, opcjonalna bramka CI Flow B (v2), wspólne extension i apply-review."
+description: "Wymagany lokalny przegląd w każdym Final Review DWP od standardu 2.3.0, instalowany przy onboardingu; bramka CI Flow B (v2), wspólne extension i apply-review pozostają opcjonalne."
 kind: addon
 lang: pl
 order: 5
@@ -8,37 +8,38 @@ order: 5
 
 # Dodatek AI Diff Reviewer
 
-Łączy wykonanie Deep Work Plan z **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (wpis na marketplace **"AI Diff Reviewer"**, aktualna wersja **v2.0.0**), dzięki czemu obowiązkowe końcowe zadanie **Przeglądu Bezpieczeństwa** uzyskuje strukturalny lokalny przegląd — werdykt, tabelę wyników i poziom ważności — a przy wyborze Flow B każde pull request może być zablokowane przez ten sam przegląd w CI. Dodatek **opcjonalny**; nigdy niewymagany do zgodności AI-first.
+Łączy wykonanie Deep Work Plan z **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (wpis na marketplace **"AI Diff Reviewer"**, aktualna wersja **v2.0.0**), dzięki czemu przegląd bezpieczeństwa obowiązkowego **Final Review** uruchamia strukturalny lokalny przegląd — werdykt, tabelę wyników i poziom ważności — a przy wyborze Flow B każde pull request może być zablokowane przez ten sam przegląd w CI. Od standardu 2.3.0 **lokalny przegląd jest częścią linii bazowej**: onboarding go instaluje, a każde Final Review go uruchamia. Opcjonalna pozostaje wyłącznie powierzchnia CI.
 
-Podstawowa metodologia Deep Work Plan ma **zero** zależności od AI Diff Reviewer. Repozytorium bez dodatków jest w pełni zgodne. Oferuj ten dodatek tylko wtedy, gdy deweloper lub zespół chce strukturalnej jakości przeglądu; nigdy nie instaluj automatycznie dla wszystkich. Zawsze pytaj o Flow A lub Flow B — nigdy nie zakładaj wartości domyślnej.
+Neutralna wobec dostawcy pozostaje granica, która ma znaczenie: reviewer to skill na licencji MIT przypięty do tagu, uruchamiany przez **własnego** agenta kodującego — żaden przepływ Deep Work Plan nie wymaga komercyjnej usługi, dostawcy CI ani sekretu. Flow A (tylko lokalnie) to linia bazowa, którą otrzymuje każde repozytorium po onboardingu; Flow B (CI Action) jest proponowany wyraźnie i nigdy nie jest instalowany bez prośby. Deweloper może odmówić lokalnego reviewera; odmowa jest zapisywana jako zadeklarowany wyjątek, a `verify` zgłasza repozytorium jako niezgodne w tym punkcie do czasu instalacji.
 
 ## Kiedy używać
 
 | Sygnał | Działanie |
 |--------|--------|
-| Zespół chce bramki scalania CI z ustrukturyzowanymi wynikami | **Zalecaj Flow B** podczas onboardingu |
-| Repozytorium osobiste lub eksperymentalne; lokalny przegląd przed push wystarczy | **Oferuj Flow A** |
-| Brak potrzeby dodatkowej powierzchni przeglądu | **Pomiń** — podstawowy Przegląd Bezpieczeństwa nadal obowiązuje |
+| Każde repozytorium po onboardingu | **Flow A jest instalowany** w fazie 7a onboardingu (vendorowana skill + `.review/extension.md`); ukierunkowany upgrade harnessu dodaje go do repozytoriów onboardowanych wcześniej |
+| Zespół chce bramki scalania CI z ustrukturyzowanymi wynikami | **Proponuj Flow B** — wyraźna zgoda, nigdy wartość domyślna |
+| Repozytorium osobiste lub eksperymentalne; lokalny przegląd wystarczy | **Pozostań przy Flow A** — linia bazowa jest kompletna |
 
 ## Dwa przepływy adopcji
 
 | Przepływ | Co otrzymujesz |
 |------|----------------|
-| **A — tylko lokalnie** | Vendorowana skill + wymagany `.review/extension.md` (przez `generate-extension`). Rozszerza Przegląd Bezpieczeństwa o lokalny przebieg. Bez przepływu GitHub Actions. |
+| **A — tylko lokalnie (linia bazowa)** | Vendorowana skill + wymagany `.review/extension.md` (przez `generate-extension`). Uruchamia lokalny przegląd wewnątrz przeglądu bezpieczeństwa każdego Final Review. Bez przepływu GitHub Actions. |
 | **B — podwójna powierzchnia** | Flow A plus `setup` zapisuje `.github/workflows/pr-review.yml` (Action `@v2`), ten sam plik rozszerzenia dla lokalnego i CI. Opcjonalny towarzysz `apply-review` po opublikowaniu wyników przez CI. |
 
-Wykrywanie do rozszerzenia Przeglądu Bezpieczeństwa wymaga **skill + pliku rozszerzenia** w jednym z: `.review/extension.md`, `.github/ai-diff-reviewer/extension.md` lub `.github/ai-pr-reviewer/extension.md`. Sama skill nie wystarczy.
+Wykrywanie lokalnego przeglądu wymaga **skill + pliku rozszerzenia** w jednym z: `.review/extension.md`, `.github/ai-diff-reviewer/extension.md` lub `.github/ai-pr-reviewer/extension.md`. Sama skill nie wystarczy.
 
 ## Co ten dodatek łączy (celowo ograniczone)
 
 Dodatek DWP **nie** wynajduje recenzenta na nowo. Deleguje instalację, metodologię, kreator CI, tworzenie rozszerzeń, szkicowanie PR i przegląd po CI do pięciu sub-skills skill upstream (domyślny przepływ nadrzędny, `generate-extension`, `setup`, `open-pr`, `apply-review`).
 
-### Rozszerzenie Przeglądu Bezpieczeństwa
+### Wymagany lokalny przegląd
 
-Po wykryciu `create` / `execute` dodają krok lokalnego przeglądu do obowiązkowego zadania Przeglądu Bezpieczeństwa. Wynik jest dołączany pod `## AI Diff Reviewer local review` w `analysis_results/SECURITY_REVIEW.md`.
+`create` dodaje krok lokalnego przeglądu do przeglądu bezpieczeństwa każdego Final Review, a `execute` go uruchamia. Wynik jest dołączany pod `## AI Diff Reviewer local review` w `analysis_results/SECURITY_REVIEW.md`.
 
-- **Miękka porażka (tylko wywołanie):** brakująca skill, brakujące rozszerzenie lub błąd wywołania → ostrzeż raz i kontynuuj; nigdy nie powoduj porażki zadania z tego powodu.
-- **Bramka po ukończonym przebiegu:** wyniki `critical` nadal blokują ukończenie Przeglądu Bezpieczeństwa do czasu naprawienia lub wyraźnej akceptacji (istniejąca umowa SR). `warning` / `info` są dokumentowane, ale nieblokujące.
+- **Brakujący reviewer — zapisany, nigdy cicho pominięty:** brakująca skill lub rozszerzenie staje się znaleziskiem `local reviewer not installed`; gdy przebieg może zapisywać w harnessie (tryb trust lub wyraźne zatwierdzenie), agent instaluje brakujący element i dopiero potem przegląda, w przeciwnym razie znalezisko trafia do raportu z ukończenia.
+- **Miękka porażka (tylko wywołanie):** przegląd, który mógł wystartować, ale kończy się błędem → ostrzeż raz, zapisz, kontynuuj; nigdy nie powoduj porażki zadania z tego powodu.
+- **Bramka po ukończonym przebiegu:** wyniki `critical` nadal blokują ukończenie Final Review do czasu naprawienia lub wyraźnej akceptacji. `warning` / `info` są dokumentowane, ale nieblokujące.
 - **Flow A nie potrzebuje sekretu CI.** Nieustawiony `CURSOR_API_KEY` nie może tłumić lokalnego przebiegu.
 
 ### Bramka CI Flow B (opcjonalna)
@@ -51,11 +52,11 @@ Po opublikowaniu przeglądu przez CI deweloper może wywołać `apply-review` po
 
 ## Zachowanie
 
-- **Pytaj o przepływ; nigdy nie zgaduj.** Instalowanie przepływu bez prośby ma większy ślad niż pozostanie przy Flow A.
+- **Flow A to linia bazowa; o Flow B się pyta, nigdy nie zgaduje.** Instalowanie przepływu bez prośby ma większy ślad niż pozostanie przy Flow A.
 - **Uzgadniaj, nie nadpisuj.** Istniejąca skill, rozszerzenie lub `pr-review.yml` są zachowywane; wypełniaj tylko luki.
 - **Uwierzytelnienie odroczone.** Sekrety dostawcy dla CI są konfigurowane przez opiekuna; ten dodatek nigdy nie przechowuje poświadczeń.
-- **Neutralny wobec dostawcy.** Odmowa pozostawia w pełni AI-first repozytorium.
+- **Neutralny wobec dostawcy.** Komercyjna usługa, dostawca CI ani sekret nigdy nie są wymagane; powierzchnia CI to jedyny element, który dotyka dostawcy.
 
 ## Uwagi
 
-Opcjonalny i nigdy niewymagany. Skill upstream: [DailybotHQ/ai-diff-reviewer](https://github.com/DailybotHQ/ai-diff-reviewer). Strona specyfikacji: [Add-ons](/spec/addons).
+Lokalny przegląd wymagany od standardu 2.3.0; powierzchnia CI opcjonalna. Skill upstream: [DailybotHQ/ai-diff-reviewer](https://github.com/DailybotHQ/ai-diff-reviewer). Strona specyfikacji: [Add-ons](/spec/addons).

@@ -24,7 +24,7 @@ Bir yapay zeka kodlama ajanının yeteneği, modelden çok kendisine verilen yö
 
 Bu, iyi delege etmenin ne anlama geldiğini yeniden çerçeveler. İyi delege etmek, bir ajandan iş istemek değildir — işi, doğru biçimde yürütülebilecek kadar açık tanımlamaktır: hedef, kısıtlar, ajanın aksi takdirde sahip olmayacağı bağlam ve başarılı olup olmadığına karar veren ölçütler. Değerin çoğu, yürütme başlamadan önce yaratılır.
 
-Deep Work Plan, bu yukarı yöndeki işi kalıcı, tekrarlanabilir bir biçimde yapma disiplinidir. İki temel direği, iyi yönün iki yarısıdır: bir **spesifikasyon** “doğru”nun neye benzediğini belirtir ve bir **harness** ajana ona ulaşması için bağlamı ve araçları verir. Birlikte, bir modelin ham yeteneğini güvenilir mühendisliğe dönüştürürler — saatlerce süren bir görev boyunca sürdürülen ve oturumlar arasında değişen ajanlar boyunca korunan biçimde.
+Deep Work Plan, bu yukarı yöndeki işi kalıcı, tekrarlanabilir bir biçimde yapma disiplinidir. İki kurucu direği, iyi yönün iki yarısıdır: bir **spesifikasyon** “doğru”nun neye benzediğini belirtir ve bir **harness** ajana ona ulaşması için bağlamı ve araçları verir. Üçüncü bir disiplin, bu birleşimi büyük ölçekte uygun maliyetli tutar: **token verimliliği** — çünkü işe yarayan bir harness, ajanın uzun bir ufuk boyunca gerçekten taşıyabileceği harness’tır. Birlikte, bir modelin ham yeteneğini güvenilir mühendisliğe dönüştürürler — saatlerce süren bir görev boyunca sürdürülen ve oturumlar arasında değişen ajanlar boyunca korunan biçimde.
 
 ## Tasarım gereği spec odaklı
 
@@ -59,6 +59,18 @@ Bu, metodolojinin ikinci temel direğidir ve açık bir tanımı hak eder — �
 <RepoAsHarness lang="tr" class="not-prose my-10" />
 
 Her öğe bir aracın özelliği değil, depodaki bir dosya olduğu için harness, yapısı gereği taşınabilirdir. Metodolojinin geri kalanının üzerine dayandığı tek satırlık iddia budur: *deponun kendisi harness haline gelir*, böylece herhangi bir ajan herhangi bir depoyu pilotlayabilir — araç başına özel bir çerçeve olmadan.
+
+## Yapı gereği verimli
+
+İlk direk işi doğru kılar; ikincisi onu taşınabilir kılar. Üçüncüsü onu **uygun maliyetli** tutar — çünkü bağlam, bir kodlama ajanının sahip olduğu en kıt kaynaktır ve onu israf eden bir metodoloji, tam da iş uzamaya başladığında başarısız olur.
+
+Üç mekanizma işi yapar:
+
+- **Kademeli açığa çıkarma.** Ajan, olmazsa olmaz bir çekirdeği okur; her rehber ya da spesifikasyon bölümü yalnızca akışın kendi tetikleyicisi devreye girdiğinde yüklenir. Ajan, ihtiyaç duyduğu bölümü taşır, kitabın tamamını değil.
+- **Dokunulan yüzeye göre seçilen doğrulama.** Her görev neyi değiştirdiğini kaydeder ve kapısını risk sınıfına göre seçer — küçük, izole bir değişiklik kendisini dar biçimde kanıtlar; paylaşılan makineye dokunan bir değişiklik kendisini geniş biçimde kanıtlar. Doğrulama alışkanlığa göre değil, etkiye göre seçilir.
+- **Görev içinde öğrenme.** Bir görev yeniden kullanılabilir bir örüntü ürettiğinde karar, kanıtın taze olduğu yerde — o görevin içinde — verilir; kimsenin okumadığı bir geriye dönük değerlendirmede değil.
+
+Bunların hiçbiri, yapı gereği kayıpsız olduğu iddiasıyla sunulmaz ve hiçbiri uydurma yüzdelerle pazarlanmaz. Her akışın gerektirdiği yönerge baytları ölçülür ve yayımlanır; davranışsal iddialar, bilinçli olarak eklenmiş hatalarla yapılan yeniden çalıştırmalarla desteklenir. Açıkça söylenebilecek şey şudur: ajan, ihtiyacı olmayanı daha az okur; değişmeyeni daha az yeniden çalıştırır ve kararları kanıtın bulunduğu yerde daha çok verir — ve bu tasarruflar uzun bir ufuk boyunca birikir.
 
 ## Yapılandırılmış otonom yürütme neden önemli
 

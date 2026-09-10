@@ -1,6 +1,6 @@
 ---
 title: アドオン
-description: "オプションのDWP拡張機能：5つの出荷アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）、アドオン契約、およびキットの基本概念（skills・agents・presets）を説明します。"
+description: "DWP アドオン：4 つのオプトイン拡張機能（devcontainer、Dailybot、dependency-upgrade、design-system）、必須となった AI Diff Reviewer ローカルレビューとそのオプションの CI サーフェス、アドオン契約、およびキットの基本概念（skills・agents・presets）を説明します。"
 order: 5
 lang: ja
 section: Addons
@@ -8,7 +8,7 @@ section: Addons
 
 # アドオン
 
-**バージョン 2.0。** アドオンはコア Deep Work Plan 方法論へのオプション拡張です。**適合に決して不要**——アドオンがゼロのリポジトリも完全に AI-first で DWP 適合です。各アドオンはオンボーディング中に提供され、明示的に受け入れまたは拒否され、——受け入れた場合——既存セットアップを上書きせず**調和**します。
+**バージョン 2.1。** アドオンはコア Deep Work Plan 方法論への拡張機能です。5 つのうち 4 つはオプションであり、**適合に決して不要**——オプションアドオンがゼロのリポジトリも完全に AI-first で DWP 適合です。各オプションアドオンはオンボーディング中に提供され、明示的に受け入れまたは拒否され、——受け入れた場合——既存セットアップを上書きせず**調和**します。1 つのコンポーネントだけが明言された例外です：標準 2.3.0 以降、**AI Diff Reviewer ローカルレビュー**は必須ベースラインの一部であり——オンボーディングがそれをインストールし、すべての Final Review がそれを実行します——CI サーフェスのみがオプトインのままです。
 
 ## アドオン契約
 
@@ -25,7 +25,7 @@ section: Addons
 
 ## 出荷済みアドオン（5 つ）
 
-現在 5 つのアドオンが出荷されています。各々に**キットカタログページ**（ユーザー向け詳細）と Deep Work Plan スキル内の**規範スペック**があります。
+現在 5 つのアドオンが出荷されています——4 つのオプションと、必須のローカルレビューです。各々に**キットカタログページ**（ユーザー向け詳細）と Deep Work Plan スキル内の**規範スペック**があります。
 
 ### Devcontainer（第 1 アドオン）
 
@@ -65,23 +65,24 @@ section: Addons
 - **プロファイル強度：** visual-ui は検出時**デフォルトオン**；cli-output と conversational は検出時**推奨、常に確認、自動適用しない**
 - **提供タイミング：** ユーザー向けインターフェース表面が検出された場合のみ——純ライブラリ、ヘッドレスサービス、インフラのみのリポジトリには提供しない
 
-### AI Diff Reviewer（第 5 アドオン）
+### AI Diff Reviewer（第 5 アドオン——必須ローカルレビュー、オプション CI サーフェス）
 
-必須の Security Review を構造化されたローカルレビューで強化し、オプションで CI 内の pull request をゲートする **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**、現在のバージョン **v2.0.0**）へのオプション接続。
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**、現在のバージョン **v2.0.0**）は、必須の Final Review セキュリティパスに構造化されたローカルレビューを与え、オプションで CI 内の pull request をゲートします。標準 2.3.0 以降、**ローカルレビューはベースラインの一部**です；オプションなのは CI サーフェスだけです。
 
 - **キットページ：** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 完全な機能リファレンス
-- **DWP アドオンが接続するもの：** upstream スキルの親デフォルトフロー経由のローカル Security Review 強化；必須 `.review/extension.md`（スキル単体では不完全）；Flow B はオプションで `pr-review.yml`（`DailybotHQ/ai-diff-reviewer@v2`）をインストールし、`apply-review` を開発者が呼び出せるコンパニオンとして公開——プランタスクには決してしない
-- **フロー：** **A — ローカルのみ**（スキル + 拡張）または **B — デュアルサーフェス**（スキル + 拡張 + CI Action）。アドオンはどのフローか**必ず確認**；デフォルトは決して設定しない
-- **ソフト失敗 vs ゲート：** スキル/拡張/呼び出しエラーが欠落しても決してブロックしない；**完了した**ローカルパスからの `critical` 結果は引き続き Security Review 契約に従う
+- **オンボーディングで必須（フェーズ 7a）：** オンボーディングの同意の下で、タグ固定の vendored スキル（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`）と、`generate-extension` 経由のリポジトリ調整 `.review/extension.md` をインストール；欠落時は対象を絞ったハーネスアップグレードが両方を調和；拒否は明言された例外として記録され、インストールされるまで `verify` が報告し続ける
+- **すべての Final Review で必須：** セキュリティパスが累積変更セットに対して upstream 親デフォルトフローを実行し、その出力を `analysis_results/SECURITY_REVIEW.md` に追記；スキルまたは拡張の欠落は `local reviewer not installed` の発見として記録され——実行がハーネスに書き込める場合はその場でインストールされ——黙ってスキップされることは決してない；完了したパスからの `critical` 結果は、修正または明示的に受け入れられるまで完了を阻止する
+- **オプションの CI サーフェス（Flow B）：** upstream `setup` サブスキル経由の `pr-review.yml`（`DailybotHQ/ai-diff-reviewer@v2`）に加え、開発者が呼び出すコンパニオンとしての `apply-review`——明示的に提供され、無断ではインストールされず、デフォルトにされることなく、プランタスクには決してならない
+- **決してブロックしない（呼び出しのみ）：** 開始できたにもかかわらずエラーになったローカルレビューは、一度警告して記録し、続行；その失敗でタスクを落とすことは決してない
 - **同等性（Flow B）：** 共有 `prompt.md` + 拡張が方法論/深刻度を整合；CI のイテレーション認識レビューでローカルパスを完全に保ちながらラウンド 2+ を短縮できる
-- **ベンダー中立ガードレール：** コア DWP は AI Diff Reviewer への依存が**ゼロ**；決して全員に自動インストールしない
-- **提供タイミング：** 開発者またはチームが構造化されたローカルレビューおよび/または CI PR マージゲートを求めているとき
+- **ベンダー中立ガードレール：** どの Deep Work Plan フローも商用サービス、CI プロバイダー、シークレットを一切必要としない——レビューアーは開発者自身のコーディングエージェントが実行する、MIT ライセンスのタグ固定スキルである
+- **適合性：** 標準 2.3.0 以降を宣言するリポジトリでは `verify` はローカルレビューアーの欠落を失敗として報告し、レガシーリポジトリではハーネスバージョンの発見として報告する
 
 ## スキル
 
 スキルは名前で呼び出す再利用可能な手順。スキルは反復可能なワークフロー（テスト実行、lint 修正、コンポーネント作成）をパッケージ化します。
 
-方法論は少数のコアサブスキルを出荷。うち **author** サブスキルはリポジトリが**独自のキットを育てる**ことを可能に：`/skill-create` と `/agent-create` 経由で呼び出され、既存の `.agents/` レイアウトと規約について推論し、それに合う新スキル、エージェント、または薄いコマンド委譲を作成し、カタログを同期。同じサブスキルが必須の Skills & Agents Discovery タスクを実行。
+方法論は少数のコアサブスキルを出荷。うち **author** サブスキルはリポジトリが**独自のキットを育てる**ことを可能に：`/skill-create` と `/agent-create` 経由で呼び出され、既存の `.agents/` レイアウトと規約について推論し、それに合う新スキル、エージェント、または薄いコマンド委譲を作成し、カタログを同期。同じサブスキルが Final Review のスキルの決定の突き合わせを支える。
 
 キットエントリ：[Skill create](/kit/skill-create)、[Agent create](/kit/agent-create)。
 

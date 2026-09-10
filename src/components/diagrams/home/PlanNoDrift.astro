@@ -1,0 +1,303 @@
+---
+/**
+ * PlanNoDrift — Act II plate of the homepage four-act story (inventory HP-07).
+ *
+ * "A plan agents can't drift from": a two-layer editorial plate. Layer one is
+ * the transparent-background engraved raster pair (light + dark; the assets are
+ * developer-generated and hard-gated at integration time). Layer two is real
+ * HTML text from an inline 17-language i18n map with an `en` fallback — the
+ * statement plus the five loop stages as an ordered list, because the sequence
+ * (plan → atomic tasks → validation gates → completion → resumable state) is
+ * the point. Static, zero JS; frame and text styling come from the shared
+ * plate primitives in src/styles/global.css (.editorial-plate, .plate-frame-img,
+ * .plate-statement, .plate-points, .ea-label).
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      "Editorial plate: a plan agents can't drift from — plan, atomic tasks, validation gates, completion and resumable state as a loop.",
+    statement: "A plan agents can't drift from.",
+    statementEmphasis: 'drift',
+    points: [
+      'Plan',
+      'Atomic tasks',
+      'Validation gates',
+      'Completion',
+      'Resumable state',
+    ],
+    alt: 'Engraved illustration of a gyroscope ringed by five emblems joined by directional arrows into a loop, with a faint dashed wake trailing away from it.',
+  },
+  es: {
+    ariaLabel:
+      'Lámina editorial: un plan del que los agentes no pueden desviarse — plan, tareas atómicas, puertas de validación, finalización y estado reanudable como un bucle.',
+    statement: 'Un plan del que los agentes no pueden desviarse.',
+    statementEmphasis: 'desviarse',
+    points: [
+      'Plan',
+      'Tareas atómicas',
+      'Puertas de validación',
+      'Finalización',
+      'Estado reanudable',
+    ],
+    alt: 'Ilustración grabada de un giroscopio rodeado de cinco emblemas unidos por flechas direccionales en un bucle, con una tenue estela discontinua que se aleja de él.',
+  },
+  pt: {
+    ariaLabel:
+      'Prancha editorial: um plano do qual os agentes não se desviam — plano, tarefas atômicas, portões de validação, conclusão e estado retomável como um ciclo.',
+    statement: 'Um plano do qual os agentes não se desviam.',
+    statementEmphasis: 'desviam',
+    points: [
+      'Plano',
+      'Tarefas atômicas',
+      'Portões de validação',
+      'Conclusão',
+      'Estado retomável',
+    ],
+    alt: 'Ilustração gravada de um giroscópio cercado por cinco emblemas unidos por setas direcionais em um ciclo, com um rastro tracejado tênue se afastando dele.',
+  },
+  zh: {
+    ariaLabel:
+      '编辑图版：一份让代理无法偏离的计划——计划、原子任务、验证关卡、完成与可恢复状态构成一个循环。',
+    statement: '一份让代理无法偏离的计划。',
+    statementEmphasis: '偏离',
+    points: ['计划', '原子任务', '验证关卡', '完成', '可恢复状态'],
+    alt: '版画插图：一个陀螺仪被五个徽记环绕，徽记由方向箭头相连成环，一道浅淡的虚线尾迹自它延伸远去。',
+  },
+  ja: {
+    ariaLabel:
+      '編集図版：エージェントが逸脱できない計画。計画、アトミックなタスク、検証ゲート、完了、再開可能な状態が一つのループを形成します。',
+    statement: 'エージェントが逸脱できない計画。',
+    statementEmphasis: '逸脱',
+    points: [
+      '計画',
+      'アトミックなタスク',
+      '検証ゲート',
+      '完了',
+      '再開可能な状態',
+    ],
+    alt: '版画風の挿絵：五つのエンブレムが方向矢印で結ばれて輪を成し、ジャイロスコープを取り囲んでいます。かすかな破線の航跡が外へと延びています。',
+  },
+  de: {
+    ariaLabel:
+      'Editoriale Tafel: ein Plan, von dem Agenten nicht abweichen können — Plan, atomare Aufgaben, Validierungsschranken, Abschluss und fortsetzbarer Zustand als eine Schleife.',
+    statement: 'Ein Plan, von dem Agenten nicht abweichen können.',
+    statementEmphasis: 'abweichen',
+    points: [
+      'Plan',
+      'Atomare Aufgaben',
+      'Validierungsschranken',
+      'Abschluss',
+      'Fortsetzbarer Zustand',
+    ],
+    alt: 'Gravierte Illustration eines Kreisels, den fünf Embleme umringen, verbunden durch Richtungspfeile zu einer Schleife, mit einer schwachen gestrichelten Spur, die sich von ihm entfernt.',
+  },
+  fr: {
+    ariaLabel:
+      'Planche éditoriale : un plan dont les agents ne peuvent pas dévier — plan, tâches atomiques, portes de validation, achèvement et état reprenable formant une boucle.',
+    statement: 'Un plan dont les agents ne peuvent pas dévier.',
+    statementEmphasis: 'dévier',
+    points: [
+      'Plan',
+      'Tâches atomiques',
+      'Portes de validation',
+      'Achèvement',
+      'État reprenable',
+    ],
+    alt: 'Illustration gravée d’un gyroscope entouré de cinq emblèmes reliés par des flèches directionnelles formant une boucle, avec un sillage pointillé discret s’en éloignant.',
+  },
+  ko: {
+    ariaLabel:
+      '에디토리얼 판화: 에이전트가 이탈하지 못하는 계획 — 계획, 원자적 작업, 검증 게이트, 완료, 재개 가능한 상태가 하나의 순환을 이룹니다.',
+    statement: '에이전트가 이탈하지 못하는 계획.',
+    statementEmphasis: '이탈',
+    points: ['계획', '원자적 작업', '검증 게이트', '완료', '재개 가능한 상태'],
+    alt: '판화 삽화: 방향 화살표로 연결되어 하나의 순환을 이루는 다섯 개의 엠블럼에 둘러싸인 자이로스코프, 희미한 점선 궤적이 멀어져 갑니다.',
+  },
+  ru: {
+    ariaLabel:
+      'Редакционная гравюра: план, от которого агенты не могут отклониться — план, атомарные задачи, шлюзы валидации, завершение и возобновляемое состояние образуют цикл.',
+    statement: 'План, от которого агенты не могут отклониться.',
+    statementEmphasis: 'отклониться',
+    points: [
+      'План',
+      'Атомарные задачи',
+      'Шлюзы валидации',
+      'Завершение',
+      'Возобновляемое состояние',
+    ],
+    alt: 'Гравированная иллюстрация: гироскоп в кольце из пяти эмблем, соединённых направленными стрелками в цикл, с едва заметным пунктирным следом, уходящим в сторону.',
+  },
+  it: {
+    ariaLabel:
+      'Tavola editoriale: un piano da cui gli agenti non possono deviare — piano, attività atomiche, porte di validazione, completamento e stato riprendibile in forma di ciclo.',
+    statement: 'Un piano da cui gli agenti non possono deviare.',
+    statementEmphasis: 'deviare',
+    points: [
+      'Piano',
+      'Attività atomiche',
+      'Porte di validazione',
+      'Completamento',
+      'Stato riprendibile',
+    ],
+    alt: 'Illustrazione incisa di un giroscopio circondato da cinque emblemi uniti da frecce direzionali in un ciclo, con una tenue scia tratteggiata che se ne allontana.',
+  },
+  tr: {
+    ariaLabel:
+      'Editoryal levha: ajanların sapamayacağı bir plan — plan, atomik görevler, doğrulama kapıları, tamamlanma ve devam ettirilebilir durum bir döngü oluşturur.',
+    statement: 'Ajanların sapamayacağı bir plan.',
+    statementEmphasis: 'sapamayacağı',
+    points: [
+      'Plan',
+      'Atomik görevler',
+      'Doğrulama kapıları',
+      'Tamamlanma',
+      'Devam ettirilebilir durum',
+    ],
+    alt: 'Yön oklarıyla bir döngü oluşturan beş amblemle çevrili bir jiroskobun gravür illüstrasyonu, ardından soluk kesikli bir iz uzaklaşıyor.',
+  },
+  id: {
+    ariaLabel:
+      'Pelat editorial: rencana yang tidak bisa disimpangi oleh agen — rencana, tugas atomik, gerbang validasi, penyelesaian dan status yang dapat dilanjutkan membentuk satu putaran.',
+    statement: 'Rencana yang tidak bisa disimpangi oleh agen.',
+    statementEmphasis: 'disimpangi',
+    points: [
+      'Rencana',
+      'Tugas atomik',
+      'Gerbang validasi',
+      'Penyelesaian',
+      'Status yang dapat dilanjutkan',
+    ],
+    alt: 'Ilustrasi ukiran giroskop yang dikelilingi lima lambang dihubungkan panah arah menjadi satu putaran, dengan jejak putus-putus samar yang menjauh darinya.',
+  },
+  vi: {
+    ariaLabel:
+      'Tranh biên tập: một kế hoạch mà các tác tử không thể lệch khỏi — kế hoạch, tác vụ nguyên tử, cổng xác minh, hoàn thành và trạng thái có thể tiếp tục tạo thành một vòng lặp.',
+    statement: 'Một kế hoạch mà các tác tử không thể lệch khỏi.',
+    statementEmphasis: 'lệch khỏi',
+    points: [
+      'Kế hoạch',
+      'Tác vụ nguyên tử',
+      'Cổng xác minh',
+      'Hoàn thành',
+      'Trạng thái có thể tiếp tục',
+    ],
+    alt: 'Tranh khắc minh họa một con quay hồi chuyển được năm phù hiệu bao quanh, nối với nhau bằng các mũi tên định hướng thành một vòng lặp, với một vệt nét đứt mờ nhạt kéo dài ra xa.',
+  },
+  hi: {
+    ariaLabel:
+      'संपादकीय चित्रफलक: एक ऐसी योजना जिससे एजेंट भटक नहीं सकते — योजना, परमाणु कार्य, सत्यापन द्वार, पूर्णता और पुनरारंभ योग्य स्थिति मिलकर एक चक्र बनाते हैं।',
+    statement: 'एक ऐसी योजना जिससे एजेंट भटक नहीं सकते।',
+    statementEmphasis: 'भटक',
+    points: [
+      'योजना',
+      'परमाणु कार्य',
+      'सत्यापन द्वार',
+      'पूर्णता',
+      'पुनरारंभ योग्य स्थिति',
+    ],
+    alt: 'एक उत्कीर्ण चित्र: जाइरोस्कोप को पाँच प्रतीक घेरे हुए हैं जो दिशा तीरों से जुड़कर एक चक्र बनाते हैं, और एक हल्की बिंदीदार रेखा दूर तक जाती दिखती है।',
+  },
+  pl: {
+    ariaLabel:
+      'Tablica redakcyjna: plan, od którego agenci nie mogą odbiegać — plan, zadania atomowe, bramki walidacji, ukończenie i stan wznawialny tworzą pętlę.',
+    statement: 'Plan, od którego agenci nie mogą odbiegać.',
+    statementEmphasis: 'odbiegać',
+    points: [
+      'Plan',
+      'Zadania atomowe',
+      'Bramki walidacji',
+      'Ukończenie',
+      'Stan wznawialny',
+    ],
+    alt: 'Grawerowana ilustracja żyroskopu otoczonego pięcioma emblematami połączonymi strzałkami kierunkowymi w pętlę, ze słabym przerywanym śladem oddalającym się od niego.',
+  },
+  uk: {
+    ariaLabel:
+      'Редакційна гравюра: план, від якого агенти не можуть відхилятися — план, атомарні завдання, шлюзи валідації, завершення та відновлюваний стан утворюють цикл.',
+    statement: 'План, від якого агенти не можуть відхилятися.',
+    statementEmphasis: 'відхилятися',
+    points: [
+      'План',
+      'Атомарні завдання',
+      'Шлюзи валідації',
+      'Завершення',
+      'Відновлюваний стан',
+    ],
+    alt: 'Гравірована ілюстрація гіроскопа в кільці з п’яти емблем, з’єднаних спрямованими стрілками в цикл, із ледь помітним пунктирним слідом, що віддаляється.',
+  },
+  th: {
+    ariaLabel:
+      'ภาพประกอบเชิงบรรณาธิการ: แผนซึ่งเอเจนต์เบี่ยงเบนไปจากไม่ได้ — แผน งานอะตอมมิก ด่านตรวจสอบ การเสร็จสิ้น และสถานะที่กลับมาทำต่อได้หมุนเวียนเป็นวงจร',
+    statement: 'แผนซึ่งเอเจนต์เบี่ยงเบนไปจากไม่ได้',
+    statementEmphasis: 'เบี่ยงเบน',
+    points: [
+      'แผน',
+      'งานอะตอมมิก',
+      'ด่านตรวจสอบ',
+      'การเสร็จสิ้น',
+      'สถานะที่กลับมาทำต่อได้',
+    ],
+    alt: 'ภาพพิมพ์ลายแกะสลักของไจโรสโคปที่ล้อมรอบด้วยสัญลักษณ์ห้าชิ้นซึ่งเชื่อมถึงกันด้วยลูกศรกำกับทิศทางเป็นวงจร โดยมีเส้นประจาง ๆ ทอดยาวออกไปจากมัน',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+
+// Normalize the per-locale tuple union so the template .map() type-checks.
+const points: readonly string[] = t.points;
+
+// Wrap the emphasized word by splitting the localized statement around it.
+// statementEmphasis is an exact substring of statement in every locale — an
+// invariant enforced by tests/unit/components/plan-no-drift.test.ts.
+const emphasisStart = t.statement.indexOf(t.statementEmphasis);
+const statementHead = t.statement.slice(0, emphasisStart);
+const statementTail = t.statement.slice(
+  emphasisStart + t.statementEmphasis.length
+);
+---
+
+<figure
+  class={`editorial-asset editorial-plate ${className}`}
+  role="img"
+  aria-label={t.ariaLabel}
+>
+  <img
+    src="/images/visuals/home/plate-plan-no-drift.png"
+    alt={t.alt}
+    width="1600"
+    height="1000"
+    loading="lazy"
+    class="plate-frame-img dark:hidden"
+  />
+  <img
+    src="/images/visuals/home/plate-plan-no-drift-dark.png"
+    alt={t.alt}
+    width="1600"
+    height="1000"
+    loading="lazy"
+    class="plate-frame-img hidden dark:block"
+  />
+  <figcaption>
+    <p class="plate-statement">
+      {statementHead}<span class="plate-statement-em">{t.statementEmphasis}</span>{statementTail}
+    </p>
+    <ol class="plate-points">
+      {
+        points.map((point) => (
+          <li>
+            <span class="ea-label">{point}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </figcaption>
+</figure>

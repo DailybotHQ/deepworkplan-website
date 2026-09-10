@@ -1,6 +1,6 @@
 ---
 title: El ciclo central
-description: "El flujo de crear, ejecutar, refinar, reanudar, estado y verificar; el directorio de salida .dwp ignorado por git; la anatomía de tarea y la validación."
+description: "El flujo de crear, ejecutar, refinar, reanudar, estado y verificar; el directorio .dwp ignorado por git; la anatomía de tarea en diez secciones y la validación."
 order: 2
 lang: es
 summary: Cómo las operaciones centrales de DWP llevan un plan desde el objetivo hasta su finalización verificada.
@@ -40,22 +40,23 @@ Todos los artefactos de DWP viven bajo un directorio `.dwp/` ignorado por git en
 └── config.yaml
 ```
 
-## La anatomía de tarea de nueve secciones
+## La anatomía de tarea de diez secciones
 
 <TaskAnatomy lang="es" class="not-prose my-10" />
 
-Cada archivo de tarea contiene estas nueve secciones, en orden. La estructura garantiza que cada unidad de trabajo sea autónoma y revisable:
+Cada archivo de tarea contiene estas diez secciones, en orden. La estructura garantiza que cada unidad de trabajo sea autónoma y revisable:
 
 1. **Objetivo**: un párrafo que indica qué logra la tarea.
 2. **Contexto**: antecedentes, enlaces y por qué existe esta tarea.
-3. **Pasos**: acciones concretas y ordenadas que ejecutar.
-4. **Criterios de aceptación**: una lista de condiciones que definen lo terminado.
-5. **Validación**: comandos o pruebas que ejecutar para verificar el trabajo.
-6. **Archivos**: rutas que se espera crear o modificar.
-7. **Dependencias**: otras tareas o requisitos externos.
-8. **Riesgos**: qué podría salir mal y sus mitigaciones.
-9. **Finalización y registro**: un marcador de estado más notas cronológicas.
+3. **Superficie tocada**: qué cambia la tarea y la clase de riesgo que selecciona su validación.
+4. **Pasos**: acciones concretas y ordenadas que ejecutar.
+5. **Criterios de aceptación**: una lista de condiciones que definen lo terminado.
+6. **Validación**: comandos o pruebas que ejecutar para verificar el trabajo.
+7. **Archivos**: rutas que se espera crear o modificar.
+8. **Dependencias**: otras tareas o requisitos externos.
+9. **Riesgos**: qué podría salir mal y sus mitigaciones.
+10. **Finalización y registro**: un marcador de estado más notas cronológicas.
 
 ## Validación, finalización y reanudación
 
-La validación forma parte de la tarea, no es algo accesorio: cada tarea nombra los comandos o pruebas que demuestran que está terminada, y el agente los ejecuta antes de marcar la finalización. Las pruebas son de primera clase aquí: una tarea que agrega nueva funcionalidad o cambia el comportamiento debe agregar o actualizar pruebas automatizadas para ese comportamiento y ejecutar el control completo de calidad de código del repositorio (pruebas más linter y comprobación de tipos), no solo confirmar que la compilación tiene éxito; las pruebas existentes deben seguir en verde, actualizadas al comportamiento previsto en lugar de omitidas. La seguridad es de primera clase del mismo modo — cualquier tarea que toca autenticación, manejo de entradas, secretos, superficie de red o dependencias lleva las expectativas de seguridad de ese cambio en sus criterios de aceptación y mantiene cada commit libre de secretos, y cada plan termina con un Security Review que audita todo el conjunto de cambios. La finalización se registra con un marcador de estado explícito (`[ ]` sin empezar, `[~]` en curso, `[x]` hecho, `[!]` bloqueado) en la sección de Finalización y registro. La reanudación se apoya en estos marcadores y en el registro de avance: un agente puede reconstruir con exactitud dónde se detuvo el plan y continuar desde la primera tarea incompleta sin rehacer el trabajo terminado.
+La validación forma parte de la tarea, no es algo accesorio: cada tarea nombra los comandos o pruebas que demuestran que está terminada, y el agente los ejecuta antes de marcar la finalización. Las pruebas son de primera clase aquí: una tarea que agrega nueva funcionalidad o cambia el comportamiento debe agregar o actualizar pruebas automatizadas para ese comportamiento y ejecutar el control completo de calidad de código del repositorio (pruebas más linter y comprobación de tipos), no solo confirmar que la compilación tiene éxito; las pruebas existentes deben seguir en verde, actualizadas al comportamiento previsto en lugar de omitidas. La seguridad es de primera clase del mismo modo — cualquier tarea que toca autenticación, manejo de entradas, secretos, superficie de red o dependencias lleva las expectativas de seguridad de ese cambio en sus criterios de aceptación y mantiene cada commit libre de secretos, y cada plan se cierra con el Final Review — el pase de seguridad sobre todo el conjunto de cambios, la validación completa sobre el estado final y la reconciliación de decisiones de skills. La finalización se registra con un marcador de estado explícito (`[ ]` sin empezar, `[~]` en curso, `[x]` hecho, `[!]` bloqueado) en la sección de Finalización y registro. La reanudación se apoya en estos marcadores y en el registro de avance: un agente puede reconstruir con exactitud dónde se detuvo el plan y continuar desde la primera tarea incompleta sin rehacer el trabajo terminado.

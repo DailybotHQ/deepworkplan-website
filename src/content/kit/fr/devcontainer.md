@@ -23,4 +23,4 @@ Environ 85 % du devcontainer est un squelette commun stable ; les 15 % restants 
 
 ## Notes
 
-Facultatif et jamais requis. Un dépôt est pleinement conforme avec zéro addon.
+Facultatif et jamais requis. Un dépôt est pleinement conforme avec zéro addon optionnel.

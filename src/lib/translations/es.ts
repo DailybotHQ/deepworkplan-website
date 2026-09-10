@@ -27,6 +27,10 @@ export const es: SiteTranslations = {
     developers: 'Desarrolladores',
     privacy: 'Privacidad',
     github: 'GitHub',
+    faq: 'FAQ',
+    compare: 'Comparativa',
+    resources: 'Recursos',
+    resourcesDesc: 'Ejemplos, confianza, FAQ y comparativa',
     repo: {
       label: 'Código fuente',
       website: 'Repositorio del sitio web',
@@ -47,7 +51,7 @@ export const es: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Nuevo',
+    badge: 'Nuevo · Eficiente en tokens',
     text: 'Deep Work Plan ya está en Product Hunt',
     tagline: 'dale un plan a tu agente',
     linkText: 'Vótalo',
@@ -61,6 +65,7 @@ export const es: SiteTranslations = {
       getStarted: 'Empezar',
       project: 'Proyecto',
       connect: 'Conectar',
+      learn: 'Aprender',
     },
   },
 
@@ -76,7 +81,7 @@ export const es: SiteTranslations = {
       title: 'Los modelos importan.',
       titleEmphasis: 'El contexto importa más.',
       subtitle:
-        'Deep Work Plan convierte cualquier repositorio en un entorno estructurado — contexto, guardrails y un plan duradero — donde cualquier agente de código ejecuta con precisión y completa el trabajo de largo aliento.',
+        'Deep Work Plan convierte cualquier repositorio en un entorno estructurado — contexto, guardarraíles y un plan duradero — donde cualquier agente de código ejecuta con precisión y eficiencia y completa el trabajo de largo alcance.',
       instructionLabel: 'Copia en tu agente',
       instruction:
         'Copia el prompt de init.md y pégalo en tu agente de código — Claude Code, Cursor, Codex, o cualquier otro — para hacer de cualquier repositorio uno AI-first.',
@@ -89,17 +94,50 @@ export const es: SiteTranslations = {
       secondaryCta: 'Leer la especificación',
       illustrationAlt:
         'Un faro en una costa rocosa proyecta un único haz que guía a una pequeña embarcación — un grabado que evoca el repositorio como un harness estable que guía a cualquier agente.',
+      scrollCta: 'Ve cómo funciona',
     },
     pitch: {
       kicker: 'El problema y la respuesta',
       problem:
-        'Los agentes de programación de IA son muy eficaces en ráfagas cortas. En trabajo de largo alcance — una migración, un subsistema nuevo, una refactorización en decenas de archivos — se desvían: el contexto se llena, las decisiones se olvidan y las tareas de varias horas se abandonan a medio camino.',
+        'Un agente de programación rinde de maravilla en tareas cortas. Pero en una misión de largo alcance — una migración, un subsistema nuevo, una refactorización a escala — la deriva llega: el contexto se llena, las decisiones se olvidan y las tareas de varias horas se quedan a medio camino.',
       answer:
-        'Deep Work Plan responde con desarrollo guiado por especificación: el plan es la fuente de verdad duradera y los agentes ejecutan contra criterios de aceptación y puertas de validación explícitos. La desviación baja, el trabajo se mantiene verificable y cualquier agente puede reanudarlo entre sesiones.',
-      origin:
-        'También es ingeniería de harness hecha portable. Un harness de agente es el andamiaje alrededor de un modelo — contexto, herramientas, bucle de control, barreras, estado reanudable — que lo hace fiable. Deep Work Plan instala ese harness en el propio repositorio (AGENTS.md, docs, el hogar de skills .agents/, el skill de DWP), para que cualquier agente pueda pilotar cualquier repo. Nació en Dailybot, se probó durante meses y se publicó como la DailybotHQ/deepworkplan-skill.',
+        'Deep Work Plan responde con desarrollo guiado por especificación: un plan duradero, tareas atómicas y puertas de validación que el agente debe pasar. «Hecho» deja de ser una sensación — se convierte en evidencia verificable y revisable.',
+      efficiency:
+        'Y como el contexto es el recurso más escaso de tu agente, el harness está diseñado para la eficiencia de tokens: las instrucciones se cargan progresivamente, la validación solo toca lo que cambió y cada tarea aprende localmente — así el trabajo de largo alcance se mantiene asequible.',
       illustrationAlt:
-        'Una carta náutica con un único rumbo trazado que sortea los peligros con seguridad — un grabado que evoca el plan como la dirección que mantiene el trabajo en curso.',
+        'Un díptico grabado: un barco a la deriva en la niebla junto a rocas escarpadas a un lado, y el mismo barco firme sobre un rumbo trazado hacia una baliza de puerto al otro.',
+    },
+    story: {
+      act1: {
+        kicker: 'El método · Acto I',
+        lead: 'Tú decides qué significa «hecho» y dónde están los límites. El plan lleva tu intención; los agentes ponen las horas — sin supervisión constante, sin corregir cada veinte minutos.',
+        deepLinkLabel: 'Lee la metodología',
+        deepLinkHref: '/methodology',
+      },
+      act2: {
+        kicker: 'El método · Acto II',
+        lead: 'Las tareas largas llenan el contexto de cualquier modelo. Los detalles se pierden y el agente se desvía. Un plan escrito — tareas atómicas, puertas de validación, estado reanudable — es aquello a lo que vuelve, vuelta tras vuelta.',
+        deepLinkLabel: 'Ve el bucle principal',
+        deepLinkHref: '/methodology',
+      },
+      act3: {
+        kicker: 'El método · Acto III',
+        lead: 'Cada tarea nombra sus criterios de aceptación y las comprobaciones que deben pasar. El agente no puede sentirse terminado — tiene que pasar, o la tarea sigue abierta.',
+        deepLinkLabel: 'Lee la especificación',
+        deepLinkHref: '/spec',
+      },
+      act4: {
+        kicker: 'El método · Acto IV',
+        lead: 'El contexto, las herramientas, los guardarraíles y el estado viven en tu repositorio como archivos planos que cualquier agente puede leer. Sin dependencias, sin cerebro externo — sobrevive a los reinicios de contexto.',
+        deepLinkLabel: 'Ve qué genera la incorporación',
+        deepLinkHref: '/quickstart',
+      },
+      act5: {
+        kicker: 'El método · Acto V',
+        lead: 'El contexto es el recurso más escaso de tu agente. El harness carga progresivamente, valida lo que cambió y aprende tarea a tarea — así el plan se paga por sí mismo.',
+        deepLinkLabel: 'Lee la metodología',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'Incorporación basada en razonamiento',
@@ -126,7 +164,7 @@ export const es: SiteTranslations = {
         {
           title: 'Instala el skill de DWP y crea .dwp/',
           description:
-            'Conecta el skill de Deep Work Plan y crea la carpeta .dwp/ ignorada por git para planes y borradores, y luego, de forma opcional, añade complementos como soporte de devcontainer.',
+            'Conecta el skill de Deep Work Plan y crea la carpeta .dwp/ ignorada por git para planes y borradores, instala la revisión local obligatoria de AI Diff Reviewer y luego, de forma opcional, añade complementos como soporte de devcontainer.',
         },
       ],
     },
@@ -555,7 +593,7 @@ export const es: SiteTranslations = {
     eyebrow: 'Kit',
     title: 'El Kit',
     intro:
-      'Todo lo que necesitas para ejecutar la metodología: la skill y sus sub-skills, comandos de barra, adaptadores de agente, presets de incorporación, addons opcionales y ejemplos resueltos.',
+      'Todo lo que necesitas para ejecutar la metodología: la skill y sus sub-skills, comandos de barra, adaptadores de agente, presets de incorporación, la revisión local obligatoria y los addons opcionales, y ejemplos resueltos.',
     groups: {
       command: {
         title: 'Sub-skills y comandos',
@@ -579,7 +617,7 @@ export const es: SiteTranslations = {
       addon: {
         title: 'Addons (opcionales)',
         description:
-          'Capacidades opcionales que el flujo de onboard puede sumar a un repo — nunca forman parte de la base AI-first.',
+          'Capacidades que el flujo de onboard suma a un repo: la revisión local obligatoria de AI Diff Reviewer más cuatro addons opcionales que nunca forman parte de la base AI-first.',
       },
     },
     viewDetail: 'Ver detalles',
@@ -638,7 +676,7 @@ export const es: SiteTranslations = {
       {
         title: 'Evoluciona el kit y acepta addons',
         description:
-          'Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos adaptados a tu stack. La incorporación también ofrece cinco addons opcionales — devcontainer, Dailybot, dependency-upgrade, design-system y AI Diff Reviewer — que aceptas solo cuando encajan.',
+          'Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos adaptados a tu stack. La incorporación instala la revisión local obligatoria de AI Diff Reviewer (su gate de CI sigue siendo opcional) y ofrece cuatro addons opcionales — devcontainer, Dailybot, dependency-upgrade y design-system — que aceptas solo cuando encajan.',
       },
       {
         title: 'Planifica y ejecuta',
@@ -709,14 +747,14 @@ export const es: SiteTranslations = {
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Acepta addons opcionales',
+        title: 'Revisión local y addons opcionales',
         description:
-          'La incorporación ofrece cinco addons opcionales — devcontainer, Dailybot, dependency-upgrade, design-system y AI Diff Reviewer — que aceptas solo cuando encajan. Un repo es plenamente conforme con cero addons. Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos más allá de la línea base.',
+          'La incorporación instala la revisión local obligatoria de AI Diff Reviewer (su gate de CI sigue siendo opcional) y ofrece cuatro addons opcionales — devcontainer, Dailybot, dependency-upgrade y design-system — que aceptas solo cuando encajan. Un repo es plenamente conforme con cero addons opcionales. Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos más allá de la línea base.',
       },
       {
         title: 'Planifica y ejecuta',
         description:
-          'Genera Deep Work Plans con /dwp-create y ejecútalos con /dwp-execute; luego usa /dwp-status, /dwp-refine, /dwp-resume y /dwp-verify a medida que avanza el trabajo. Cada plan lleva tareas numeradas, compuertas de validación y un protocolo de finalización — terminando con tres tareas finales obligatorias: una Revisión de Seguridad, un Descubrimiento de Skills y Agentes, y un Informe Ejecutivo.',
+          'Genera Deep Work Plans con /dwp-create y ejecútalos con /dwp-execute; luego usa /dwp-status, /dwp-refine, /dwp-resume y /dwp-verify a medida que avanza el trabajo. Cada plan lleva tareas numeradas, compuertas de validación y un protocolo de finalización — y se cierra con un único Final Review obligatorio (pase de seguridad, validación del estado final y reconciliación de skills). El Executive Report sigue disponible a petición.',
       },
       {
         title: 'Verifica la conformidad',
@@ -735,6 +773,463 @@ export const es: SiteTranslations = {
       { label: 'Especificación', href: '/spec' },
       { label: 'Kit', href: '/kit' },
     ],
+  },
+
+  faqPage: {
+    meta: {
+      title: 'Preguntas frecuentes — Deep Work Plan',
+      description:
+        'Respuestas a las preguntas sobre Deep Work Plan: qué hace, cómo funcionan las puertas de validación y la reanudación, cómo se compara y cómo adoptarlo.',
+    },
+    eyebrow: 'FAQ',
+    title: 'Preguntas frecuentes',
+    intro:
+      'Respuestas breves a lo que más se pregunta sobre Deep Work Plan, cada una con un enlace a la página que entra en más detalle.',
+    tocTitle: 'En esta página',
+    groups: [
+      {
+        id: 'what',
+        title: 'Qué es Deep Work Plan',
+        items: [
+          {
+            id: 'what-is-it',
+            question: '¿Qué hace Deep Work Plan en concreto?',
+            answer:
+              'Deep Work Plan convierte un repositorio en un entorno estructurado donde un agente de código puede ejecutar trabajo largo de forma fiable. Se instala como una skill de agente, incorpora el repositorio una vez (un índice `AGENTS.md`, un árbol `docs/`, un kit `.agents/` de skills y comandos, un área de salida `.dwp/` ignorada por git) y, a partir de ahí, cualquier objetivo se convierte en un plan: tareas atómicas, cada una con criterios de aceptación y una puerta de validación, ejecutadas de una en una, con commit a medida que pasan y reanudables desde el disco por cualquier agente. El plan se cierra con un Final Review que audita la seguridad y valida el estado final. La metodología tiene licencia MIT y funciona con cualquier agente de código que lea un repositorio.',
+            linkLabel: 'Leer la metodología',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'who-is-it-for',
+            question: '¿Para quién es?',
+            answer:
+              'Desarrolladores y equipos que entregan trabajo real de varios pasos a agentes de código y quieren que se termine. Encaja cuando una tarea abarca más de una sesión, más de una familia de archivos o más de un agente; cuando un compañero debe poder continuar donde un agente se detuvo; o cuando «hecho» debe significar «validado», no «el agente lo dice». Una corrección de una línea no necesita un plan, y la metodología lo dice: su regla de rigor proporcional recomienda en su lugar un objetivo inline, criterios y una puerta.',
+            linkLabel: 'Inicio rápido',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'is-it-a-tool',
+            question: '¿Es una herramienta, un framework o una metodología?',
+            answer:
+              'Una metodología empaquetada como una skill instalable. No hay servidor, ni cuenta, ni formato propietario, ni runtime más allá del agente de código que ya usas. Lo que se instala son instrucciones que el agente lee, un pequeño conjunto de scripts de shell para la detección de contexto y la comprobación de conformidad, y las convenciones que tu repositorio adopta. Todo lo que el plan produce es Markdown y JSON en tu repositorio, legible sin ninguna herramienta.',
+            linkLabel: 'Leer la especificación',
+            linkPath: '/spec',
+          },
+          {
+            id: 'which-agents',
+            question: '¿Con qué agentes de código funciona?',
+            answer:
+              'Con cualquier agente que lea archivos del repositorio. La skill sigue el estándar abierto Agent Skills y la convención `AGENTS.md`, de modo que Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot y otros la reconocen a través de su carga normal de skills e instrucciones. La propia evaluación de la metodología muestra un plan iniciado por el agente de un proveedor y reanudado por el de otro, en ambas direcciones. La cobertura de instalación y la evidencia de comportamiento se listan por agente en la matriz de compatibilidad, y ambas nunca se confunden.',
+            linkLabel: 'Explorar el kit',
+            linkPath: '/kit',
+          },
+          {
+            id: 'what-is-installed',
+            question: '¿Qué se instala exactamente y dónde?',
+            answer:
+              'La skill del agente se instala donde tu agente carga las skills de usuario o de proyecto. Después, la incorporación adapta el propio repositorio: crea o concilia `AGENTS.md`, `docs/`, `.agents/` y el área `.dwp/` ignorada por git. La skill enseña el método al agente; el repositorio conserva el contexto, el kit y la evidencia del plan que necesitan los demás agentes para continuar.',
+            linkLabel: 'Ver el flujo de adopción',
+            linkPath: '/init',
+          },
+          {
+            id: 'requires-git',
+            question: '¿Deep Work Plan necesita Git?',
+            answer:
+              'Git se recomienda en los repositorios porque su historial forma parte de la superficie de recuperación y revisión, pero la metodología también puede ejecutarse en un workspace de agente sin un repositorio Git. En ese caso, la capa de estado legible por máquina, incluidos los puntos de control y registros de puertas en `state.json`, es obligatoria para que la recuperación no dependa del historial del chat.',
+            linkLabel: 'Leer sobre los arquetipos de repositorio',
+            linkPath: '/spec/archetypes',
+          },
+          {
+            id: 'skill-plan-spec',
+            question:
+              '¿Cuál es la diferencia entre una skill, un plan y una especificación de producto?',
+            answer:
+              'Una skill describe cómo ejecuta un agente un procedimiento repetible. Un plan de DWP describe un cambio concreto mediante alcance, criterios de aceptación, puertas de validación y evidencias. Una especificación de producto describe el comportamiento actual del producto y evoluciona mediante deltas después de cada implementación; las skills y los planes también son especificaciones, pero describen procedimientos y cambios en lugar de mantener ese contrato canónico del producto.',
+            linkLabel: 'Leer la especificación',
+            linkPath: '/spec/dwp-specification',
+          },
+        ],
+      },
+      {
+        id: 'how',
+        title: 'Cómo se ejecuta un plan',
+        items: [
+          {
+            id: 'how-to-use',
+            question: '¿Cómo lo uso?',
+            answer:
+              'Tres pasos. Primero, instala la skill Deep Work Plan en tu agente de código — la vía más rápida es `npx skills add DailybotHQ/deepworkplan-skill` (o clona el repositorio de la skill y ejecuta `./setup.sh`). Segundo, incorpora el repositorio una vez para que el agente adapte `AGENTS.md`, `docs/`, el kit `.agents/` y un área `.dwp/` ignorada por git a tu stack: apúntalo a https://deepworkplan.com/init.md, o ejecuta `/deepworkplan-onboard`. Tercero, planifica y ejecuta el trabajo con los comandos ligeros: `/dwp-create <goal>` construye un plan; `/dwp-execute` lo ejecuta tarea por tarea frente a cada puerta; `/dwp-refine` edita un borrador o un plan en curso; `/dwp-resume` continúa tras una interrupción; `/dwp-status` informa del progreso sin ejecutar; `/dwp-verify` produce un informe objetivo de conformidad. Los agentes que interceptan `/` suelen usar `#` en su lugar (por ejemplo `#dwp-execute`). El endpoint de adopción y el inicio rápido recorren el mismo camino con más detalle.',
+            linkLabel: 'Inicio rápido',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'gates',
+            question:
+              '¿Cómo se implementan las puertas de validación? ¿Necesitan aprobación humana?',
+            answer:
+              'Son aserciones ejecutables que el propio agente ejecuta. La aprobación humana enmarca la ejecución: una persona aprueba el plan antes de la ejecución y revisa el diff final a la hora del pull request; la ejecución intermedia es autónoma. Cada tarea nombra comandos concretos, normalmente el propio control de calidad del repositorio, seleccionados de la superficie tocada de la tarea: las pruebas del comportamiento cambiado y de sus consumidores, ampliando a la suite completa cuando el cambio es compartido o no puede acotarse. Una tarea se marca como hecha solo cuando esos comandos terminan con éxito, y las tareas que cambian comportamiento deben ampliar las pruebas. Ante un fallo, la tarea se marca como bloqueada y el agente se detiene.',
+            linkLabel: 'El bucle principal',
+            linkPath: '/methodology/02-core-loop',
+          },
+          {
+            id: 'stale-plan',
+            question:
+              '¿Cómo evita el plan quedar obsoleto cuando la gente cambia el código entre ejecuciones?',
+            answer:
+              'En tres frentes. Las tareas se escriben como comportamiento, no como ediciones: un criterio de aceptación dice qué debe hacer el sistema, así que un archivo renombrado o una implementación sustituida no lo invalida. Cada puerta se vuelve a ejecutar contra el repositorio tal como está ahora, de modo que una suposición rota falla de forma ruidosa en la siguiente ejecución en lugar de derivar en silencio, y ese fallo es la señal para refinar. Y mantener la documentación sincronizada es parte del trabajo: una tarea que cambia comportamiento también actualiza la documentación y el kit orientado a agentes que la describen, dentro de su propia puerta. Cada ejecución debería dejar el repositorio más preparado para agentes de lo que lo encontró.',
+            linkLabel: 'Leer la metodología',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'edit-mid-run',
+            question:
+              '¿Puedo cambiar el plan a mitad de ejecución sin perder el trabajo completado?',
+            answer:
+              'Sí; refinar un plan parcialmente ejecutado es un movimiento de primera clase. Las definiciones de tareas y el estado de ejecución se mantienen separados: el plan es una lista de verificación en disco más un pequeño archivo de estado, así que lo hecho queda registrado con independencia del texto de la tarea. Cuando una tarea resulta estar equivocada, el agente la marca como bloqueada y se detiene en lugar de forzar el paso. Entonces tú editas, reordenas, divides o descartas las tareas que no se han ejecutado, mientras las tareas completadas siguen completadas. La reanudación reconstruye el estado desde el disco y el repositorio real y vuelve a ejecutar las puertas que importan, así que nada de lo que cambió por debajo pasa desapercibido.',
+            linkLabel: 'El bucle principal',
+            linkPath: '/methodology/02-core-loop',
+          },
+          {
+            id: 'drift',
+            question:
+              '¿Sigue comprobando el trabajo contra el plan, o el plan es solo algo del principio?',
+            answer:
+              'El plan es una comprobación continua. El agente trabaja una tarea pequeña cada vez y debe validar antes de continuar, así que puede desviarse un paso, no tres. Cada tarea lleva criterios de aceptación más los comandos exactos que los demuestran, y el progreso se escribe en el repositorio a medida que avanza, con un estado por tarea, de modo que la deriva se vuelve visible para ti, para la siguiente sesión y para el siguiente agente. Un plan no está terminado hasta que todo valida, incluido el Final Review. La advertencia honesta: la metodología no puede impedir que un agente escriba de entrada un criterio de aceptación débil; hace que la deriva sea ruidosa en lugar de silenciosa.',
+            linkLabel: 'El bucle principal',
+            linkPath: '/methodology/02-core-loop',
+          },
+          {
+            id: 'plan-evolution',
+            question:
+              '¿El plan se genera una vez y se mantiene a mano, o evoluciona con el código?',
+            answer:
+              'Ninguna de las dos. Se genera una vez a partir de un objetivo y luego se mantiene como parte del trabajo. El plan deliberadamente no se reescribe a partir de los diffs de código, porque una especificación que persigue al código se convierte en un espejo rezagado, que es la deriva que la metodología existe para eliminar. Evoluciona a propósito: las puertas se vuelven a ejecutar contra el repositorio actual, una puerta que falla desencadena un refinamiento, y el agente realiza ese refinamiento durante la ejecución mientras tú apruebas por adelantado y revisas al final. La documentación y las pruebas evolucionan junto con el código por construcción, porque actualizarlas está dentro de la puerta de cada tarea.',
+            linkLabel: 'Leer la metodología',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'resume',
+            question: '¿Qué pasa si la sesión muere a mitad de camino?',
+            answer:
+              'El progreso vive en el disco, no en el chat. Las casillas del README, el registro de cada tarea, un índice de trabajo acotado y un archivo de estado legible por máquina se actualizan en cada límite de tarea, y el archivo de estado registra un punto de control antes de cualquier pausa planificada. Una sesión nueva, o un agente distinto, lee ese índice compacto, lo concilia con el repositorio y el historial de git, y continúa en la primera tarea incompleta sin rehacer el trabajo terminado. Incluso una creación de plan interrumpida es recuperable: la identidad del plan y su lista de tareas prevista se escriben antes que cualquier archivo de tarea, así que un plan creado a medias puede completarse o descartarse en lugar de adivinarse.',
+            linkLabel: 'El bucle principal',
+            linkPath: '/methodology/02-core-loop',
+          },
+          {
+            id: 'final-review',
+            question: '¿Qué es el Final Review?',
+            answer:
+              'La única tarea de cierre obligatoria de todo plan. En orden: un pase de seguridad sobre el conjunto completo de cambios acumulados del plan, incluida una revisión local obligatoria del diff por la skill AI Diff Reviewer, con hallazgos críticos que bloquean la finalización hasta que se corrigen o se aceptan explícitamente; la validación del estado final, es decir, las suites completas aplicables de pruebas, lint, comprobación de tipos y formato del repositorio sobre el código final; y una reconciliación de las decisiones de skills que registró cada tarea. El agente luego informa de entregables, evidencia y limitaciones, y ofrece un Reporte Ejecutivo una sola vez, generándolo solo si lo pides.',
+            linkLabel: 'La especificación',
+            linkPath: '/spec/dwp-specification',
+          },
+          {
+            id: 'gate-fails',
+            question: '¿Qué ocurre cuando falla una puerta de validación?',
+            answer:
+              'La tarea queda registrada como bloqueada y el agente se detiene antes de declarar que está terminada. Puedes revisar la evidencia, corregir el código o refinar la tarea y después reanudarla; un comando fallido es una señal para resolver la discrepancia, no un permiso para debilitar la puerta.',
+            linkLabel: 'Leer el protocolo del agente',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'unattended-runs',
+            question:
+              '¿Puede un plan ejecutarse sin supervisión durante la noche o en CI?',
+            answer:
+              'Sí, siempre que el plan se haya aprobado de antemano, incluya la capa de estado necesaria y otorgue al agente una autoridad acotada. Una ejecución sin supervisión debe detenerse y registrar un bloqueo cuando la realidad diverge, falla una puerta fuera del alcance de reparación previsto o se necesita una aprobación o credencial nueva.',
+            linkLabel: 'Leer el protocolo sin supervisión',
+            linkPath: '/spec/agent-protocol',
+          },
+        ],
+      },
+      {
+        id: 'compare',
+        title: 'Cómo se compara',
+        items: [
+          {
+            id: 'vs-sdd-tools',
+            question:
+              '¿En qué se diferencia de las herramientas guiadas por especificación como Spec Kit, OpenSpec o Kiro?',
+            answer:
+              'Resuelven problemas adyacentes. Las herramientas guiadas por especificación son excelentes para capturar qué debe cambiar: especificaciones, requisitos y propuestas de cambio con una forma repetible. Deep Work Plan trata de cómo un agente ejecuta durante horas sin derivar: el harness incorporado en el repositorio, puertas de validación por tarea seleccionadas de la superficie tocada, estado reanudable en disco, un Final Review obligatorio con pase de seguridad y un comprobador de conformidad para el propio repositorio. Ambas cosas pueden combinarse, con una especificación o propuesta de cambio alimentando un plan. El playbook de Claude sobre el SDLC nativo de IA plantea una idea relacionada con artefactos duraderos entre Planificar, Diseñar, Construir, Probar, Desplegar y Mantener; DWP cubre el harness del repositorio y el bucle de ejecución, mientras que la evaluación continua en producción sigue siendo una práctica complementaria. La página de comparación pone las capacidades una al lado de la otra, en los términos de cada herramienta.',
+            linkLabel: 'Ver la comparativa',
+            linkPath: '/compare',
+          },
+          {
+            id: 'vs-agent-frameworks',
+            question:
+              '¿En qué se diferencia de herramientas de flujo de trabajo para agentes como BMAD, Superpowers, Get Shit Done o Gentle-AI?',
+            answer:
+              'Los frameworks de flujo de trabajo para agentes como BMAD, Superpowers y Get Shit Done aportan estilos de trabajo sólidos: roles, principios, pasos de prueba primero, hábitos de verificación. Gentle-AI pertenece a una categoría vecina como configurador del ecosistema de agentes: equipa los agentes de codificación que ya usas con memoria persistente entre sesiones (Engram), skills curadas, personas, servidores MCP, Spec-Driven Development opcional y revisión basada en evidencias opcional (Receipt-Driven Development), escribiendo en los directorios de configuración de cada agente. Deep Work Plan se diferencia de ambos: se centra en lo que permanece en el repositorio y en lo que puede comprobarse — un harness que cualquier agente lee sin contexto previo, archivos de tarea con criterios de aceptación y puertas, estado que sobrevive a una sesión, un comprobador de conformidad con un código de salida apto para CI y una medición publicada de cuántos bytes de instrucción carga cada flujo. Es agnóstico de la herramienta por construcción y no añade ningún servicio, proveedor ni secreto al bucle principal. Las capas pueden convivir: los frameworks y Gentle-AI dan forma a cómo trabaja el agente; Deep Work Plan hace que el trabajo largo sea duradero y comprobable dentro del repositorio. La página de comparación muestra dónde cada enfoque las tiene integradas, opcionales o fuera del alcance.',
+            linkLabel: 'Ver la comparativa',
+            linkPath: '/compare',
+          },
+          {
+            id: 'vs-native-plan-mode',
+            question:
+              '¿Por qué no usar simplemente el modo de planificación integrado de mi agente?',
+            answer:
+              'Los modos de planificación integrados son útiles y Deep Work Plan se construye sobre el mismo sustrato, la convención `AGENTS.md` y el estándar abierto Agent Skills. La diferencia está en dónde vive el plan y qué lo hace cumplir. Los planes nativos suelen vivir fuera del repositorio y caducan con la sesión; Deep Work Plan escribe el plan, su estado y su evidencia en el repositorio, de modo que otro agente o un compañero puede continuar el plan, y cada tarea lleva una puerta ejecutable y un registro escrito. Tú sigues usando el modo de planificación de tu agente para pensar; la metodología añade el bucle de ejecución duradero y verificable.',
+            linkLabel: 'Ver la comparativa',
+            linkPath: '/compare',
+          },
+        ],
+      },
+      {
+        id: 'adopt',
+        title: 'Adoptarlo',
+        items: [
+          {
+            id: 'install',
+            question:
+              '¿Qué escribe la incorporación en mi repositorio y toca algún archivo existente?',
+            answer:
+              'La incorporación no es destructiva: detecta un `AGENTS.md`, `docs/`, `.agents/` o `CLAUDE.md` existente, reconcilia en lugar de sobrescribir y pregunta antes de reemplazar cualquier cosa. Escribe el índice `AGENTS.md` con comandos reales, un árbol `docs/` razonado, documentación por módulo, el kit `.agents/` con comandos ligeros `dwp-*`, un área de salida `.dwp/` ignorada por git, un mapa de pruebas verificado y la revisión local de código obligatoria (la skill AI Diff Reviewer más una extensión de revisión adaptada al repositorio). Luego ejecuta una autocomprobación y el comprobador de conformidad para que veas lo que se produjo. Un repositorio incorporado con una versión anterior recibe una actualización dirigida que cambia solo lo que falta.',
+            linkLabel: 'El endpoint de adopción',
+            linkPath: '/init',
+          },
+          {
+            id: 'core-and-addons',
+            question:
+              '¿Puedo usar la metodología principal sin instalar add-ons?',
+            answer:
+              'Sí. Los add-ons son capas opcionales y un repositorio sin ninguno cumple por completo con DWP. Los devcontainers, los informes de Dailybot, las actualizaciones de dependencias, el soporte de sistemas de diseño y la revisión opcional en CI solo se ofrecen cuando encajan con tu repositorio y los aceptas explícitamente.',
+            linkLabel: 'Explorar los add-ons',
+            linkPath: '/spec/addons',
+          },
+          {
+            id: 'no-test-toolchain',
+            question:
+              '¿Qué pasa si mi repositorio todavía no tiene tests ni linting?',
+            answer:
+              'DWP no considera que la ausencia de herramientas sea un pase libre. Durante la incorporación, el agente propone una configuración de validación adecuada para el stack, registra los comandos en la documentación del repositorio y los usa como objetivo para las futuras puertas; la propuesta queda visible para que la revises.',
+            linkLabel: 'Leer el protocolo del agente',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'cost',
+            question: '¿Cuánto cuesta y cómo se mide la eficiencia?',
+            answer:
+              'La metodología y la skill tienen licencia MIT y son gratuitas; no hay servicio, clave de API ni telemetría en los flujos centrales. La eficiencia se reporta como el número de bytes de instrucción que carga cada flujo, medido por un script versionado junto con la skill y publicado en un registro de evaluación, con los aumentos reportados con la misma claridad que las disminuciones. No se reporta como porcentajes de tokens ni ahorros de costo, porque un inventario de bytes no establece eso; está planificada una evaluación pública preregistrada para medir los resultados como corresponde.',
+            linkLabel: 'Confianza y divulgación',
+            linkPath: '/trust',
+          },
+        ],
+      },
+    ],
+    stillHaveQuestions: {
+      title: '¿Te queda alguna pregunta?',
+      body: 'Abre una discusión o un issue en GitHub. Las preguntas que surgen repetidamente se añaden a esta página.',
+      ctaLabel: 'Pregunta en GitHub',
+    },
+  },
+
+  comparePage: {
+    meta: {
+      title: 'Deep Work Plan comparado con las alternativas',
+      description:
+        'Cómo se relaciona Deep Work Plan con herramientas guiadas por especificación, frameworks de agentes y modos de plan nativos, con fuentes y fecha de revisión.',
+    },
+    eyebrow: 'Comparativa',
+    title: 'Deep Work Plan y las alternativas',
+    intro:
+      'Elige Deep Work Plan cuando el trabajo de largo alcance con agentes deba seguir siendo duradero, portable y verificable. Esta guía responde las dudas que aparecen al comparar DWP con otras alternativas y aclara sus diferencias: DWP pone el harness, el plan, el estado y la evidencia en tu repositorio para que cualquier agente pueda continuar el trabajo.',
+    howToRead: {
+      title: 'Cómo leer esta página',
+      body: 'Tres valores describen cada capacidad. Indican dónde vive una capacidad en una herramienta, no qué tan buena es la herramienta. Una aclaración importante: las skills y los planes de DWP son especificaciones de procedimientos y cambios; la fila de especificaciones vivas del producto pregunta si una herramienta mantiene una descripción canónica del comportamiento actual del producto y fusiona deltas en ella.',
+      values: {
+        builtIn: 'Integrado',
+        optional: 'Opcional o mediante extensión',
+        notInScope: 'Fuera del alcance',
+      },
+    },
+    reviewedOnLabel: 'Última revisión',
+    alternativesTitle: 'Las alternativas, en sus propios términos',
+    officialSiteLabel: 'Sitio oficial',
+    categories: {
+      methodology: 'Metodología',
+      sdd: 'Herramientas de desarrollo guiado por especificación',
+      agentFramework: 'Frameworks de flujo de trabajo para agentes',
+      aiNativeSdlc: 'SDLC nativo de IA',
+      vendorNative: 'Modos de plan nativos del proveedor',
+    },
+    matrix: {
+      title: 'Matriz de capacidades',
+      caption:
+        'Dónde vive cada capacidad, por herramienta. Integrado, opcional o mediante extensión, o fuera del alcance. Revisado contra la documentación oficial.',
+      capabilityColumn: 'Capacidad',
+    },
+    capabilities: {
+      toolAgnostic: {
+        label: 'Funciona con cualquier agente de código',
+        help: 'Los mismos archivos del repositorio impulsan a Claude Code, Codex, Cursor, Gemini CLI y otros.',
+      },
+      repoNativeHarness: {
+        label: 'Escribe el harness del agente en el repositorio',
+        help: 'Las instrucciones, la documentación, las skills y los comandos viven en el repositorio, no en la configuración de una sola herramienta.',
+      },
+      taskAcceptanceCriteria: {
+        label: 'Criterios de aceptación por tarea',
+        help: 'Cada tarea establece condiciones observables para considerarse hecha.',
+      },
+      perTaskGates: {
+        label: 'Puerta de validación por tarea',
+        help: 'Cada tarea nombra los comandos que deben pasar, seleccionados de lo que tocó.',
+      },
+      resumableState: {
+        label: 'Estado reanudable en disco',
+        help: 'El progreso sobrevive a un reinicio de sesión y otro agente o un compañero puede retomarlo.',
+      },
+      finalReview: {
+        label: 'Revisión de cierre obligatoria con pase de seguridad',
+        help: 'El plan no puede completarse sin una revisión de seguridad del conjunto completo de cambios y la validación del estado final.',
+      },
+      conformanceChecker: {
+        label: 'Comprobador de conformidad ejecutable',
+        help: 'Un script verifica el repositorio y sus planes contra el estándar, con un código de salida apto para CI.',
+      },
+      instructionBudgetLedger: {
+        label: 'Medición publicada de la carga de instrucciones',
+        help: 'Los bytes que carga cada flujo los mide un script versionado y se publican con sus límites.',
+      },
+      onboardingScaffold: {
+        label: 'Incorporación que genera la documentación',
+        help: 'Una primera ejecución escribe la documentación y el kit orientados a agentes del repositorio.',
+      },
+      brownfieldSpecs: {
+        label: 'Especificaciones vivas del producto',
+        help: 'Una especificación canónica describe el comportamiento actual del producto, acepta deltas de cambio y se actualiza cuando cada cambio se implementa.',
+      },
+    },
+    alternatives: {
+      dwp: {
+        name: 'Deep Work Plan',
+        whatItDoesWell:
+          'Se instala como skill, incorpora el repositorio a un harness de agente y ejecuta planes de largo alcance con puertas de validación por tarea, estado en disco y un Final Review obligatorio.',
+        audience:
+          'Desarrolladores y equipos que entregan trabajo de varias sesiones a cualquier agente de código y necesitan que termine verificado.',
+      },
+      'github-spec-kit': {
+        name: 'GitHub Spec Kit',
+        whatItDoesWell:
+          'Convierte una funcionalidad en una especificación ejecutable mediante una constitución, una especificación, un plan y una lista de tareas, impulsado por comandos de barra que se integran con más de cincuenta agentes de código.',
+        audience:
+          'Equipos que quieren un flujo repetible de especificar, planificar, tareas e implementar dentro del agente que ya usan.',
+      },
+      openspec: {
+        name: 'OpenSpec',
+        whatItDoesWell:
+          'Captura cada cambio como una propuesta con especificaciones delta (añadidas, modificadas, eliminadas) y requisitos RFC 2119 con escenarios, y luego los archiva en especificaciones vivas.',
+        audience:
+          'Equipos que trabajan sobre sistemas existentes y quieren que las especificaciones crezcan un cambio a la vez.',
+      },
+      'amazon-kiro': {
+        name: 'Amazon Kiro',
+        whatItDoesWell:
+          'Un IDE agéntico y una CLI cuyas especificaciones avanzan de requisitos de estilo EARS al diseño y a las tareas, con archivos steering y hooks que se ejecutan en eventos del editor.',
+        audience:
+          'Desarrolladores que quieren el desarrollo guiado por especificación integrado en su editor con herramientas respaldadas por AWS.',
+      },
+      'bmad-method': {
+        name: 'BMAD Method',
+        whatItDoesWell:
+          'Un framework ágil de roles de agente especializados (análisis, producto, arquitectura, desarrollo, calidad) que produce briefs, requisitos, documentos de arquitectura y archivos de historias de usuario.',
+        audience:
+          'Equipos a los que les gustan las ceremonias basadas en roles y quieren un ciclo ágil completo para el trabajo de agentes.',
+      },
+      superpowers: {
+        name: 'Superpowers',
+        whatItDoesWell:
+          'Una biblioteca de skills y un flujo de trabajo para hacer lluvia de ideas, planificar en pasos pequeños de prueba primero, ejecutar con subagentes y revisar antes de completar.',
+        audience:
+          'Desarrolladores que quieren una ejecución disciplinada guiada por pruebas dentro de su agente de código.',
+      },
+      'get-shit-done': {
+        name: 'Get Shit Done',
+        whatItDoesWell:
+          'Un sistema de planificación con un directorio .planning, ids de requisitos, planes por fases, ejecución con contexto fresco y un pase de verificación contra los requisitos imprescindibles declarados.',
+        audience:
+          'Desarrolladores en solitario y equipos pequeños que quieren ingeniería de contexto y verificación con poca ceremonia.',
+      },
+      'gentle-ai': {
+        name: 'Gentle-AI',
+        whatItDoesWell:
+          'Configura los agentes de código que ya usas con memoria persistente, skills curadas, servidores MCP, personas y Spec-Driven Development o Receipt-Driven Development opcionales.',
+        audience:
+          'Para desarrolladores que quieren un ecosistema de agentes configurado, capaz de recordar el trabajo entre sesiones y producir evidencias cuando se necesitan.',
+      },
+      'claude-ai-native-sdlc': {
+        name: 'SDLC nativo de IA de Claude',
+        whatItDoesWell:
+          'Un ciclo de seis etapas, desde Planificar y Diseñar hasta Construir, Probar, Desplegar y Mantener, con artefactos duraderos que pasan de una etapa a la siguiente.',
+        audience:
+          'Equipos que evalúan el playbook de entrega de software de extremo a extremo de Claude Code y su ciclo de feedback en producción.',
+      },
+      'vendor-native': {
+        name: 'Funciones nativas del agente (varían según el proveedor)',
+        whatItDoesWell:
+          'Los productos de agentes pueden ofrecer modos de plan, archivos de instrucciones y skills, pero el comportamiento exacto depende del proveedor, el cliente y la versión.',
+        audience:
+          'Para quienes quieren planificar dentro de un solo agente y aceptan un comportamiento específico del proveedor.',
+      },
+    },
+    aiNative: {
+      title: 'Dónde encaja en el SDLC nativo de IA',
+      body: 'El playbook de Claude sobre el SDLC nativo de IA describe un ciclo completo: Planificar, Diseñar, Construir, Probar, Desplegar y Mantener. Cada etapa deja un artefacto para la siguiente, mientras que el feedback de producción se convierte en nueva intención.',
+      shared:
+        'DWP comparte la idea de los artefactos duraderos: la intención se convierte en un plan, las tareas dejan evidencia y el repositorio sigue siendo legible para el siguiente agente.',
+      boundary:
+        'El playbook también cubre la evaluación continua y las operaciones en producción. DWP se centra en el harness del repositorio y la ejecución de largo alcance, de modo que esas prácticas operativas pueden complementarlo sin atribuirle capacidades que no incorpora.',
+      sourceLabel: 'Leer el playbook de Claude sobre el SDLC nativo de IA',
+    },
+    profileCta: 'Ver la comparativa',
+    profile: {
+      backLabel: 'Volver a todas las alternativas',
+      eyebrow: 'Perfil de la alternativa',
+      compareWith: 'Comparado con Deep Work Plan',
+      fitTitle: 'Dónde encaja',
+      capabilityTitle: 'Resumen de capacidades',
+      sourceLabel: 'Documentación oficial',
+    },
+    dwpStrengths: {
+      title: 'Qué aporta Deep Work Plan',
+      items: [
+        {
+          title: 'Agnóstico de la herramienta y nativo del repositorio',
+          body: 'El harness y el plan son archivos en tu repositorio, legibles por cualquier agente que siga los estándares AGENTS.md y Agent Skills. Cambiar de agente no pierde el plan.',
+        },
+        {
+          title: 'Validación seleccionada de lo que cada tarea tocó',
+          body: 'Cada tarea declara su superficie tocada y ejecuta las pruebas del comportamiento cambiado y de sus consumidores, ampliando a la suite completa cuando el impacto no puede acotarse. Cero pruebas seleccionadas nunca cuenta como un pase.',
+        },
+        {
+          title: 'Un Final Review con pase de seguridad',
+          body: 'Un plan se cierra con una revisión de seguridad del conjunto acumulado de cambios, incluida una revisión local obligatoria del diff, y una validación del estado final. Los hallazgos críticos bloquean la finalización.',
+        },
+        {
+          title: 'Estado que sobrevive a sesiones y agentes',
+          body: 'Las casillas del README, los registros de tareas, un índice de trabajo acotado y un archivo de estado legible por máquina se escriben en cada límite, de modo que otra sesión u otro agente continúa desde el disco. Incluso una creación de plan interrumpida es recuperable.',
+        },
+        {
+          title: 'Un comprobador de conformidad para el propio repositorio',
+          body: 'Un script de solo lectura verifica el harness y cada plan contra la especificación, entiende ambos ciclos de vida del plan y termina con un código apto para CI.',
+        },
+        {
+          title: 'Carga de instrucciones medida y publicada',
+          body: 'Un script versionado mide cuántos bytes carga cada flujo; los resultados, incluidos los aumentos, se publican como bytes, nunca como porcentajes de tokens o de costo.',
+        },
+      ],
+    },
+    honestLimits: {
+      title: 'Límites honestos',
+      body: 'Una skill de DWP también es una especificación: describe cómo debe ejecutar un agente un procedimiento, como crear un componente. Los planes de DWP también son especificaciones de cambio: definen el alcance, los criterios de aceptación, las puertas de validación y las evidencias. Esta fila se refiere a algo más concreto: una especificación canónica que describe el comportamiento actual del producto y se actualiza con deltas después de cada cambio. Actualmente DWP no mantiene esa especificación viva a nivel de producto para cada sistema adoptado; OpenSpec es más fuerte cuando ese ciclo de vida es la necesidad principal. Las capas se pueden combinar alimentando un plan de DWP con una especificación del producto o una propuesta delta. Todavía no existe un benchmark independiente de la metodología; está planificada una evaluación pública preregistrada. El registro de carga de instrucciones mide bytes cargados, no tokens, costo ni resultados.',
+    },
+    correction: {
+      title: 'Ayúdanos a mantener esto preciso',
+      body: 'Esta página se revisa en la fecha indicada y se corrige a petición. Si la descripción de tu herramienta está desactualizada o incompleta, abre un issue y lo corregiremos.',
+      ctaLabel: 'Abrir un issue',
+    },
+    sourcesTitle: 'Fuentes',
   },
 
   trustPage: {

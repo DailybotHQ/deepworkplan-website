@@ -31,6 +31,8 @@ Potraktuj to jako ustrukturyzowane zadanie inżynierskie — Deep Work Plan — 
 
 ## 0. Przeczytaj metodykę i specyfikację
 
+Metodyka opiera się na trzech filarach: **spec-driven development** (spisana specyfikacja jest źródłem prawdy), **harness engineering** (repozytorium niesie kontekst, narzędzia, zabezpieczenia i stan) oraz **efektywność tokenów** (harness ładuje się stopniowo, a walidacja dotyka tylko tego, co zmienione — praca na długi dystans z założenia, wydajna z samej konstrukcji).
+
 Zanim cokolwiek zmienisz, przeczytaj kanoniczne źródła, aby zrozumieć standard, który przyjmujesz:
 
 - Metodyka: https://deepworkplan.com/methodology.md
@@ -47,6 +49,7 @@ Najpierw zrozum repozytorium, a potem zaproponuj, co zrobisz.
 - **Sklasyfikuj archetyp.** Pojedyncze repozytorium (przypadek typowy), centrum orkiestracji albo
   przestrzeń robocza agenta — długotrwały dom autonomicznego agenta, gdzie git jest zalecany, a nie
   zakładany z góry — wraz z dowodami.
+- **Rozpoznaj istniejącą instalację DWP.** Jeśli `AGENTS.md` i `.agents/` już istnieją, poszukaj wiersza proweniencji `DWP standard:`. Harness starszy niż aktualny standard otrzymuje **celową aktualizację**: ponowna instalacja skilla to cała ścieżka aktualizacji, a onboarding uzgadnia wyłącznie brakujące lub przestarzałe elementy — każda pisana ręcznie sekcja, każdy własny skill i każdy plan w toku pozostaje zachowany, a drugie uruchomienie niczego nie zmienia. Plany utworzone pod wcześniejszą wersją zachowują swój zapisany kształt i kończą się własnymi zadaniami końcowymi; nigdy nie są zmuszane do nowego kształtu.
 - **Sporządź inwentarz tego, co już istnieje.** `AGENTS.md`, `CLAUDE.md`, `docs/`, jakąkolwiek konfigurację `.agents/` lub skilli/agentów,
   `.dwp/` i `.gitignore`. Odnotuj wszystko, co już częściowo wykonuje to zadanie.
 - **Zaproponuj plan onboardingu.** Przedstaw zwięzłą listę: pliki, które utworzysz, pliki, które
@@ -135,10 +138,15 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
 6. **`.dwp/` + `tmp/`.** Utwórz szkielet `.dwp/` objętego gitignore z `plans/` i `drafts/`, a także przestrzeń roboczą `tmp/`
    — obie dodane do `.gitignore` w sposób nieniszczący (dopisz, nigdy nie przepisuj).
 
-## 4. Zaproponuj opcjonalne dodatki
+## 4. Zainstaluj wymagany przegląd lokalny, potem zaproponuj opcjonalne dodatki
 
-Po onboardingu bazowym wymień pięć dodatków (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer) i zaproponuj każdy jako wyraźną opcję do wyboru. Repozytorium jest
-w pełni zgodne przy **zerowej** liczbie dodatków — nigdy nie instaluj ich automatycznie.
+Po onboardingu bazowym zainstaluj **lokalny przegląd AI Diff Reviewer** (Phase 7a — wymagany od
+standardu 2.3.0): vendorowaną skill przypiętą do tagu
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus dopasowany
+do repozytorium `.review/extension.md` przez `generate-extension`, w ramach zgody onboardingu. Następnie
+wymień cztery opcjonalne dodatki (devcontainer, Dailybot, dependency-upgrade, design-system) i zaproponuj
+każdy jako wyraźną opcję do wyboru. Repozytorium jest w pełni zgodne przy **zerowej** liczbie opcjonalnych
+dodatków — nigdy nie instaluj ich automatycznie.
 
 - **Wsparcie devcontainera** — odtwarzalny, izolowany kontener deweloperski z trwałym uwierzytelnianiem AI-CLI.
 - **Integracja z Dailybot** — cztery zdarzenia cyklu życia (kickoff, istotne zadanie, blokada, zakończenie) jako raporty postępu w trybie najlepszego wysiłku dla zespołów już korzystających z Dailybot, z opcjonalnym autonomicznym wymuszaniem hooków (`dailybot-cli >= 3.7.0`). Instalacja sparowanego skilla agenta Dailybot (3.10.3) udostępnia również czat, check-iny, tworzenie formularzy, pytanie AI, klucze API per-repo i więcej — dodatek łączy jedynie raportowanie z wykonywaniem DWP. Podstawowa metodyka nie ma żadnej zależności od Dailybot.
@@ -148,7 +156,7 @@ w pełni zgodne przy **zerowej** liczbie dodatków — nigdy nie instaluj ich au
   (nie jest oferowany dla czystych bibliotek, usług headless ani repozytoriów wyłącznie infrastrukturalnych). Trzy
   profile nakładają się w jednym pliku: visual-ui (domyślnie włączony po wykryciu), cli-output i konwersacyjny —
   dwa ostatnie zawsze są pytane, nigdy auto-stosowane.
-- **AI Diff Reviewer** — wzmacnia obowiązkowy Security Review o ustrukturyzowany przegląd lokalny przez [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + wymagany `.review/extension.md`). Zawsze pytaj o **Flow A** (tylko lokalnie) vs **Flow B** (podwójna brama CI z `pr-review.yml`); nigdy nie zakładaj domyślnie. Soft-fail tylko dla brakujących błędów skill/rozszerzenia/wywołania; wyniki `critical` z zakończonego lokalnego przejścia nadal blokują ukończenie Security Review. Podstawowa metodyka nie ma żadnej zależności od AI Diff Reviewer.
+- **AI Diff Reviewer** — wymagany przegląd lokalny (nie opcja do wyboru): przegląd bezpieczeństwa każdego Final Review uruchamia [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + wymagany `.review/extension.md`) na skumulowanym zestawie zmian planu. Brakująca skill lub rozszerzenie to zapisane znalezisko `local reviewer not installed`, instalowane, gdy przebieg może zapisywać w harnessie — nigdy ciche pominięcie; błędy wywołania kończą się soft-failem; wyniki `critical` z zakończonego przebiegu nadal blokują ukończenie. **Flow B** (bramka CI z `pr-review.yml`) jest proponowany jako wyraźna opcja do wyboru i nigdy nie jest instalowany bez prośby. Żaden przepływ Deep Work Plan nie wymaga komercyjnej usługi, dostawcy CI ani sekretu.
 
 ## 5. Rozwijaj kit (sub-skill author)
 
@@ -168,9 +176,9 @@ Generuj Deep Work Plany dla dowolnego zadania i uruchamiaj je zadanie po zadaniu
 - `/dwp-resume` — odtwórz stan i kontynuuj przerwany plan.
 - `/dwp-verify` — obiektywny raport zgodności (zaliczenie/niezaliczenie) dla repo (lub konkretnego planu).
 
-Każdy plan kończy się trzema obowiązkowymi zadaniami końcowymi — **Security Review**, czyli
-przeglądem bezpieczeństwa własnych zmian planu (z utrzymywaniem `docs/SECURITY.md` w aktualności;
-krytyczne znalezisko blokuje ukończenie), Skills & Agents Discovery oraz Executive Report.
+Każdy plan zamyka Final Review — przegląd bezpieczeństwa własnych zmian planu
+(z utrzymywaniem `docs/SECURITY.md` w aktualności; krytyczne znalezisko blokuje ukończenie),
+walidacja stanu końcowego oraz uzgodnienie decyzji dotyczących skilli. Executive Report pozostaje dostępny na życzenie.
 
 ## 7. Zweryfikuj
 

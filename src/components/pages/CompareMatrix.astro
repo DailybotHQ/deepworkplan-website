@@ -1,0 +1,140 @@
+---
+/**
+ * Capability matrix for the /compare page.
+ *
+ * Presentational: facts come from `@/lib/compare-data`, words from the
+ * `comparePage` translations. Every cell carries a non-color cue (glyph) and
+ * an aria-label so the three values read without color; the table scrolls
+ * inside its own container so the page never scrolls sideways.
+ */
+import {
+  ALTERNATIVES,
+  type AlternativeId,
+  CAPABILITY_IDS,
+  type CellValue,
+} from '@/lib/compare-data';
+import type { Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+  alternativeIds?: AlternativeId[];
+}
+
+const { lang, alternativeIds } = Astro.props;
+const c = getTranslations(lang).comparePage;
+const alternatives = alternativeIds
+  ? ALTERNATIVES.filter((alternative) =>
+      alternativeIds.includes(alternative.id)
+    )
+  : ALTERNATIVES;
+
+const CELL_GLYPH: Record<CellValue, string> = {
+  'built-in': '✓',
+  optional: '◐',
+  'not-in-scope': '–',
+};
+const CELL_CLASS: Record<CellValue, string> = {
+  'built-in': 'cell-built-in',
+  optional: 'cell-optional',
+  'not-in-scope': 'cell-not-in-scope',
+};
+function cellLabel(value: CellValue): string {
+  if (value === 'built-in') return c.howToRead.values.builtIn;
+  if (value === 'optional') return c.howToRead.values.optional;
+  return c.howToRead.values.notInScope;
+}
+---
+
+<div class="matrix-wrap overflow-x-auto border" style="border-color: var(--color-line);">
+  <table class="matrix w-full border-collapse text-sm" style="font-variant-numeric: tabular-nums;">
+    <caption class="px-3 py-3 text-left text-sm" style="color: var(--color-muted);">
+      {c.matrix.caption}
+    </caption>
+    <thead>
+      <tr>
+        <th
+          scope="col"
+          class="sticky left-0 z-10 px-3 py-2 text-left align-bottom font-semibold"
+          style="background-color: var(--color-gray-100); color: var(--color-ink); border-bottom: 1px solid var(--color-line);"
+        >
+          {c.matrix.capabilityColumn}
+        </th>
+        {
+          alternatives.map((alt) => (
+            <th
+              scope="col"
+              class:list={[
+                'px-3 py-2 text-left align-bottom',
+                alt.id === 'dwp' ? 'font-bold' : 'font-medium',
+              ]}
+              style="background-color: var(--color-gray-100); color: var(--color-ink); border-bottom: 1px solid var(--color-line); min-width: 8.5rem;"
+            >
+              {c.alternatives[alt.id].name}
+            </th>
+          ))
+        }
+      </tr>
+    </thead>
+    <tbody>
+      {
+        CAPABILITY_IDS.map((capabilityId) => (
+          <tr>
+            <th
+              scope="row"
+              class="sticky left-0 z-10 px-3 py-3 text-left align-top"
+              style="background-color: var(--color-paper); border-bottom: 1px solid var(--color-line);"
+            >
+              <span class="block font-semibold" style="color: var(--color-ink);">
+                {c.capabilities[capabilityId].label}
+              </span>
+              <span class="mt-1 block text-xs leading-snug font-normal" style="color: var(--color-muted);">
+                {c.capabilities[capabilityId].help}
+              </span>
+            </th>
+            {alternatives.map((alt) => {
+              const value = alt.cells[capabilityId];
+              return (
+                <td
+                  class:list={['px-3 py-3 align-top', alt.id === 'dwp' ? 'font-semibold' : '']}
+                  style="border-bottom: 1px solid var(--color-line);"
+                >
+                  <span
+                    class:list={['cell inline-flex items-center gap-1.5 whitespace-nowrap', CELL_CLASS[value]]}
+                    aria-label={cellLabel(value)}
+                  >
+                    <span aria-hidden="true" class="cell-glyph font-mono">{CELL_GLYPH[value]}</span>
+                    <span>{cellLabel(value)}</span>
+                  </span>
+                </td>
+              );
+            })}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .matrix-wrap {
+    background-color: var(--color-paper);
+  }
+  .matrix thead th {
+    position: sticky;
+    top: 0;
+  }
+  .cell {
+    color: var(--color-ink);
+  }
+  .cell-glyph {
+    color: var(--color-secondary);
+  }
+  .cell-optional .cell-glyph,
+  .cell-not-in-scope .cell-glyph {
+    color: var(--color-muted);
+  }
+  .cell-not-in-scope {
+    color: var(--color-muted);
+  }
+</style>

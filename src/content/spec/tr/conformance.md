@@ -8,7 +8,7 @@ section: Conformance
 
 # Uyumluluk
 
-**Sürüm 1.1. Durum: Kararlı.** Bu belge, bir deponun *Deep Work Plan uyumlu* — yani AI-first ve ajan-pilotlanabilir — olmasının ne anlama geldiğini tanımlar. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119’da açıklandığı şekilde yorumlanacaktır.
+**Sürüm 1.2. Durum: Kararlı.** Bu belge, bir deponun *Deep Work Plan uyumlu* — yani AI-first ve ajan-pilotlanabilir — olmasının ne anlama geldiğini tanımlar. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119’da açıklandığı şekilde yorumlanacaktır.
 
 Uyumluluk, “AI-first”ün bir izlenim değil, nesnel, denetlenebilir bir özellik olması için vardır. Bir depo, aşağıdaki ölçütleri ya karşılar ya da karşılamaz. [`verify` alt skill’i](/kit) (`/dwp-verify`) bunları mekanik olarak denetler.
 
@@ -23,7 +23,7 @@ DWP uyumlu bir depo, aşağıdakilerin tümünü KARŞILAMALIDIR. Her yapı, **d
 5. **Gitignore’lanmış bir `.dwp/` çalışma alanı.** Depo, `plans/` ve `drafts/` içeren bir `.dwp/` dizini İÇERMELİ ve `.dwp/` gitignore’lanMALIDIR. Bir `tmp/` çalışma alanı VAR OLMALI ve gitignore’lanMALIDIR.
 6. **Metodoloji skill’i çözümlenebilir.** Deep Work Plan skill’i, depodaki bir ajanın alt skill’lerini çağırabileceği şekilde kurulMUŞ veya başvurulMUŞ OLMALIDIR.
 
-Bir depo, **sıfır eklentiyle tamamen uyumludur**. Eklentiler (devcontainer, Dailybot, dependency-upgrade, design-system) tercihe dayalıdır ve uyumluluk için GEREKLİ OLMAMALIDIR.
+Bir depo, **sıfır isteğe bağlı eklentiyle tamamen uyumludur**. İsteğe bağlı eklentiler (devcontainer, Dailybot, dependency-upgrade, design-system) uyumluluk için GEREKLİ OLMAMALIDIR. 2.3.0 standardından itibaren **AI Diff Reviewer yerel incelemesi** (vendored skill + uzantı dosyası) temelin bir parçasıdır: yokluğu, 2.3.0 veya daha yeni bir standart beyan eden bir depo için bir başarısızlıktır ve eski bir depo için bir harness-sürüm bulgusudur. CI yüzeyi isteğe bağlı kalır.
 
 ## İyi biçimlendirilmiş bir plan
 
@@ -33,11 +33,11 @@ Bir depo, **sıfır eklentiyle tamamen uyumludur**. Eklentiler (devcontainer, Da
 2. Yeni çekirdek işlevsellik ekleyen veya ürün davranışını değiştiren her görev, kabul kriterlerinde o davranış için otomatik test kapsamını İÇERMELİ ve doğrulama kapısında deponun testlerini lint ve tür denetimi denetimleriyle birlikte çalıştırMALIDIR — yalnızca derlemeyi değil. Mevcut testler yeşil kalMALIDIR; bir davranış değişikliği, bozduğu bir testi silmek veya atlamak yerine güncelleMELİDİR. Yalnızca-dokümantasyon, yapılandırma veya araştırma görevleri test oluşturmaktan muaftır ancak yine de deponun kapısını çalıştırır.
 3. Kimlik doğrulamaya, girdi işlemeye, sırlara veya yapılandırmaya, ağ yüzeyine ya da bağımlılıklara dokunan her görev, o değişikliğin güvenlik beklentilerini kabul kriterlerinde taşıMALIDIR ve her commit, sır niteliğindeki içerikten arınmış olMALIDIR.
 4. Plan, işin kesintiyi atlatması ve farklı bir ajan tarafından kaldığı yerden sürdürülebilmesi için ilerlemeyi kalıcı kılMALIDIR.
-5. Plan, üç zorunlu son görevi — Security Review, Skills & Agents Discovery ve Executive Report — İÇERMELİDİR. Kritik bir güvenlik bulgusu, düzeltilene veya açıkça kabul edilene kadar tamamlanmayı engeller.
+5. Plan kayıtlı son incelemesiyle kapanMALIDIR. Bu sürüm altında yazılmış bir plan, tam olarak tek bir zorunlu **Final Review** ile bitMELİDİR — güvenlik incelemesi, son-durum doğrulaması ve skill uzlaştırması. Önceki bir sürüm altında yazılmış bir plan, üç zorunlu son görevle (Security Review, Skills & Agents Discovery, Executive Report) biter ve uyumlu kalır. Kritik bir güvenlik bulgusu, düzeltilene veya açıkça kabul edilene kadar tamamlanmayı engeller.
 6. Görevler, uzun bir ufukta sapmayı önlemek için yürütmeden önce planın hedefine yeniden bağlanMALIDIR.
 
 ## Uyumluluğu doğrulama
 
-Uyumluluk, inceleme yoluyla değil, mekanik olarak doğrulanMALIDIR. `/dwp-verify` çalıştırmak, yukarıdaki ölçütlere karşı bir geçti/kaldı raporu üretir: `AGENTS.md`’nin varlığı ve gerçek içeriği, `CLAUDE.md` çözümlemesi, `docs/` kategorileri, `.agents/` katalog-ile-disk eşleşmesi, `.dwp/` ve `tmp/` gitignore durumu ve — bir plan için — her görevin kabul kriterleri ile bir doğrulama kapısı taşıdığı, davranış değiştiren görevler için test kapsamıyla ve üç zorunlu son görevin — Security Review dahil — mevcut olmasıyla birlikte.
+Uyumluluk, inceleme yoluyla değil, mekanik olarak doğrulanMALIDIR. `/dwp-verify` çalıştırmak, yukarıdaki ölçütlere karşı bir geçti/kaldı raporu üretir: `AGENTS.md`’nin varlığı ve gerçek içeriği, `CLAUDE.md` çözümlemesi, `docs/` kategorileri, `.agents/` katalog-ile-disk eşleşmesi, `.dwp/` ve `tmp/` gitignore durumu ve — bir plan için — her görevin kabul kriterleri ile bir doğrulama kapısı taşıdığı, davranış değiştiren görevler için test kapsamıyla ve kayıtlı son incelemenin mevcut olmasıyla birlikte. Denetleyici **sürüme duyarlıdır**: eski bir planı (üç zorunlu son görev, Dokunulan Yüzey yok) uyumlu olarak KABUL ETMELİ ve bu sürümü beyan eden, ona göre nesnel olarak geçersiz olan bir planı REDDETMELİDİR. Ayrıca eksik veya bayat bir `DWP standard:` provenance satırını, hedeflenen harness yükseltmesini adlandıran bir bulgu olarak raporlar.
 
 Bir depo, uyumluluğun bir kez iddia edilmek yerine sürdürülmesi için kuruluma almadan sonra ve tamamlanan her plandan sonra yeniden doğrulanMALIDIR.

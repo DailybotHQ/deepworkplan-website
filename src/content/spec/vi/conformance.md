@@ -8,7 +8,7 @@ section: Conformance
 
 # Tuân thủ
 
-**Phiên bản 1.1. Trạng thái: Ổn định.** Tài liệu này định nghĩa thế nào là một repository *tuân thủ Deep Work Plan* — tức là AI-first và điều khiển được bằng agent. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
+**Phiên bản 1.2. Trạng thái: Ổn định.** Tài liệu này định nghĩa thế nào là một repository *tuân thủ Deep Work Plan* — tức là AI-first và điều khiển được bằng agent. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
 Sự tuân thủ tồn tại để "AI-first" là một đặc tính khách quan, kiểm tra được thay vì một ấn tượng. Một repository hoặc đạt các tiêu chí dưới đây hoặc không. [Sub-skill `verify`](/kit) (`/dwp-verify`) kiểm tra chúng một cách máy móc.
 
@@ -23,7 +23,7 @@ Một repository tuân thủ DWP PHẢI thỏa mãn tất cả những điều s
 5. **Một không gian làm việc `.dwp/` được gitignore.** Repository PHẢI chứa một thư mục `.dwp/` với `plans/` và `drafts/`, và `.dwp/` PHẢI được gitignore. Một không gian nháp `tmp/` NÊN tồn tại và NÊN được gitignore.
 6. **Skill phương pháp luận phân giải được.** Skill Deep Work Plan PHẢI được cài hoặc tham chiếu sao cho một agent trong repository có thể gọi các sub-skill của nó.
 
-Một repository **hoàn toàn tuân thủ với không cần addon nào**. Các addon (devcontainer, Dailybot, dependency-upgrade, design-system) là tự nguyện và KHÔNG ĐƯỢC bắt buộc để tuân thủ.
+Một repository **hoàn toàn tuân thủ với không addon tùy chọn nào**. Các addon tùy chọn (devcontainer, Dailybot, dependency-upgrade, design-system) KHÔNG ĐƯỢC bao giờ bắt buộc để tuân thủ. Kể từ chuẩn 2.3.0, **đánh giá cục bộ AI Diff Reviewer** (skill vendored + tệp tiện ích mở rộng) là một phần của chuẩn cơ sở: sự vắng mặt của nó là một thất bại đối với một repository khai báo 2.3.0 hoặc mới hơn, và một phát hiện phiên bản harness đối với một repository cũ. Bề mặt CI của nó vẫn là tùy chọn.
 
 ## Một kế hoạch chỉnh dạng
 
@@ -33,11 +33,11 @@ Một Deep Work Plan trong `.dwp/plans/` là chỉnh dạng khi:
 2. Mỗi tác vụ thêm chức năng lõi mới hoặc thay đổi hành vi sản phẩm PHẢI bao gồm độ phủ test tự động cho hành vi đó trong tiêu chí chấp nhận của nó, và PHẢI chạy các test của repository cùng với các bước kiểm tra lint và kiểm tra kiểu trong cổng kiểm chứng của nó — chứ không phải chỉ riêng bước build. Các test hiện có PHẢI tiếp tục xanh; một thay đổi hành vi PHẢI cập nhật một test mà nó làm hỏng thay vì xóa hay bỏ qua nó. Các tác vụ thuần tài liệu, cấu hình hay nghiên cứu được miễn việc tạo test nhưng vẫn chạy cổng của repository.
 3. Mỗi tác vụ chạm tới xác thực, xử lý đầu vào, bí mật hay cấu hình, bề mặt mạng, hoặc các phụ thuộc PHẢI mang các kỳ vọng bảo mật của thay đổi đó trong tiêu chí chấp nhận của nó, và mỗi commit PHẢI không chứa tư liệu bí mật.
 4. Kế hoạch PHẢI lưu giữ tiến độ để công việc vượt qua gián đoạn và có thể được tiếp tục bởi một agent khác.
-5. Kế hoạch PHẢI bao gồm ba tác vụ cuối bắt buộc — Security Review, Skills & Agents Discovery và Executive Report. Một phát hiện bảo mật nghiêm trọng chặn việc hoàn tất cho đến khi được sửa hoặc được chấp nhận một cách rõ ràng.
+5. Kế hoạch PHẢI khép lại bằng bước rà soát cuối được ghi lại của mình. Một kế hoạch được viết dưới phiên bản này PHẢI kết thúc bằng đúng một **Final Review** bắt buộc — bước rà soát bảo mật, kiểm chứng trạng thái cuối cùng, và sự đối chiếu skill. Một kế hoạch được viết dưới một phiên bản sớm hơn kết thúc bằng ba tác vụ cuối bắt buộc (Security Review, Skills & Agents Discovery, Executive Report) và vẫn tuân thủ. Một phát hiện bảo mật nghiêm trọng chặn việc hoàn tất cho đến khi được sửa hoặc được chấp nhận một cách rõ ràng.
 6. Các tác vụ NÊN neo lại vào mục tiêu của kế hoạch trước khi thực thi, để ngăn trôi dạt qua một chân trời dài.
 
 ## Kiểm chứng sự tuân thủ
 
-Sự tuân thủ NÊN được kiểm chứng một cách máy móc thay vì bằng việc xem xét thủ công. Chạy `/dwp-verify` tạo một báo cáo đạt/không đạt so với các tiêu chí trên: sự hiện diện và nội dung thật của `AGENTS.md`, sự phân giải của `CLAUDE.md`, các hạng mục `docs/`, sự khớp giữa catalog `.agents/` và đĩa, trạng thái gitignore của `.dwp/` và `tmp/`, và — đối với một kế hoạch — rằng mỗi tác vụ mang tiêu chí chấp nhận và một cổng kiểm chứng, cùng độ phủ test cho các tác vụ thay đổi hành vi và sự hiện diện của ba tác vụ cuối bắt buộc, bao gồm cả Security Review.
+Sự tuân thủ NÊN được kiểm chứng một cách máy móc thay vì bằng việc xem xét thủ công. Chạy `/dwp-verify` tạo một báo cáo đạt/không đạt so với các tiêu chí trên: sự hiện diện và nội dung thật của `AGENTS.md`, sự phân giải của `CLAUDE.md`, các hạng mục `docs/`, sự khớp giữa catalog `.agents/` và đĩa, trạng thái gitignore của `.dwp/` và `tmp/`, và — đối với một kế hoạch — rằng mỗi tác vụ mang tiêu chí chấp nhận và một cổng kiểm chứng, cùng độ phủ test cho các tác vụ thay đổi hành vi và sự hiện diện của bước rà soát cuối được ghi lại. Trình kiểm tra **nhận thức phiên bản**: nó PHẢI chấp nhận một kế hoạch cũ (ba tác vụ cuối bắt buộc, không có Touched Surface) là tuân thủ, và PHẢI từ chối một kế hoạch khai báo phiên bản này mà về khách quan không hợp lệ dưới nó. Nó cũng báo cáo một dòng xuất xứ `DWP standard:` bị thiếu hoặc lỗi thời là một phát hiện nêu tên nâng cấp harness có mục tiêu.
 
 Một repository NÊN được kiểm chứng lại sau khi khởi tạo và sau mỗi kế hoạch hoàn tất, để sự tuân thủ được duy trì thay vì chỉ được tuyên bố một lần.

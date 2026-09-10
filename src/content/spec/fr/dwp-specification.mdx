@@ -1,6 +1,6 @@
 ---
 title: Spécification DWP
-description: "Spécification normative du Deep Work Plan : structure du plan, anatomie d'une tâche en neuf sections, boucle d'exécution à cinq opérations, espace de travail de sortie et versionnage."
+description: "Spécification normative du Deep Work Plan : structure du plan, anatomie d'une tâche en dix sections, sélection de porte par surface touchée, boucle d'exécution à cinq opérations, sortie et versionnage."
 order: 2
 lang: fr
 section: Workflow
@@ -11,15 +11,25 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Spécification DWP
 
-**Version 1.2. Statut : stable.** Ce document est la spécification normative de la méthodologie Deep Work Plan (DWP). Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
+**Version 2.3.0. Statut : stable.** Ce document est la spécification normative de la méthodologie Deep Work Plan (DWP). Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 
-> **Additif en v1.2.** Quatre capacités additives, sans changement de rupture : (1) la **couche d'état du plan lisible par machine** (`manifest.json` + `state.json`, voir [État du plan](/spec/plan-state)) ; (2) les **niveaux de rigueur proportionnelle** (micro / standard / deep, voir [Rigueur proportionnelle](#proportional-rigor)) ; (3) la **section Delta** optionnelle dans l'anatomie de la tâche pour les changements de comportement sur du code existant ; et (4) le **Protocole de reprise DWP** est promu en un rituel en six étapes nommé et citable. Les plans v1.1 existants restent conformes.
+> **Additif dans cette révision, sans changement de rupture.** (1) La section **Surface touchée** — le contrat entre ce qu'une tâche modifie et ce qui doit être validé, avec sélection de la porte par classe de risque (isolée / couture / partagée-cœur / inconnue) ; (2) la validation complète devient une **exigence d'état final** exécutée dans l'unique **Final Review** obligatoire du plan, avec des règles explicites de réutilisation des preuves ; (3) les **décisions de skills par tâche** rejoignent la tâche qui les motive, et l'Executive Report devient **optionnel, sur demande** ; (4) un **flux `create` conscient du mode** — le mode trust matérialise directement tout en conservant l'analyse et les contrôles de qualité ; et (5) une **matrice de compatibilité** explicite : les plans et dépôts des versions antérieures restent conformes.
 
 ## Définition
 
 Un Deep Work Plan est un artefact structuré, exclusivement en Markdown, qui décrit une tâche d'ingénierie complexe décomposée en unités de travail séquentielles et relisibles, conçu pour être créé, exécuté et maintenu par des agents de code IA travaillant de manière autonome.
 
 DWP est piloté par la spécification : le plan est la spécification, et les agents MUST s'exécuter face à ses critères d'acceptation explicites et à ses portes de validation plutôt que d'improviser. La spécification — et non une transcription de discussion — est la source de vérité durable, de sorte que le travail est vérifiable et reprenable d'une session et d'un agent à l'autre. C'est aussi de l'ingénierie de harness rendue portable : le contexte, la boucle de contrôle, les garde-fous et l'état reprenable qui rendent un agent fiable sont installés dans le dépôt lui-même sous forme de simple Markdown, de sorte que tout agent conforme MAY piloter le dépôt sans framework propre à un outil.
+
+## Flux `create` — une seule étape, conscient du mode
+
+Le flux `create` recueille une seule fois l'objectif, le contexte, les contraintes et l'esquisse des tâches, effectue son **analyse des exigences** (périmètre, ordonnancement des dépendances entre tâches, sélection de la validation à partir de la Surface touchée, niveau de rigueur proportionnelle), puis matérialise selon le mode choisi par le développeur :
+
+- **Mode guidé (par défaut).** Le flux produit exactement **un** artefact à relire : une **ébauche affinée** dans `.dwp/drafts/`, avec assez de structure pour approuver ou demander des changements en une seule passe. Le dossier du plan n'est matérialisé qu'après approbation.
+- **Mode trust (`trust` / `auto`).** Le flux **matérialise le plan directement**, sans fichier d'ébauche — le développeur a renoncé à la relecture intermédiaire. L'analyse des exigences, l'ordonnancement des dépendances et un **contrôle de qualité du plan** s'exécutent toujours : trust renonce à la *relecture*, pas à l'*analyse*. Un plan en mode trust est enregistré comme **pré-approuvé pour une exécution sans surveillance**.
+- **Modes d'ébauche explicites.** `refined-draft {name}` et `from-refined-draft {file}` restent disponibles dans les deux modes ; un développeur qui demande une ébauche l'obtient.
+
+Dans tous les modes, le flux ne produit jamais d'ébauche intermédiaire non affinée comme étape relisible distincte.
 
 ## Structure du plan
 
@@ -35,21 +45,35 @@ Un plan MAY également porter la couche d'état lisible par machine : `manifest.
 
 <TaskAnatomy lang="fr" class="not-prose my-10" />
 
-Chaque fichier de tâche MUST contenir ces neuf sections, dans l'ordre :
+Chaque fichier de tâche MUST contenir ces dix sections, dans l'ordre :
 
 1. **Goal** — un énoncé d'un paragraphe de ce que la tâche accomplit.
 2. **Context** — le contexte, les liens et la raison d'être de cette tâche.
-3. **Steps** — des actions ordonnées et concrètes à réaliser.
-4. **Acceptance criteria** — une liste de contrôle des conditions qui définissent « fait ».
-5. **Validation** — les commandes ou tests à exécuter pour vérifier.
-6. **Files** — les chemins censés être créés ou modifiés.
-7. **Dependencies** — les autres tâches ou prérequis externes.
-8. **Risks** — ce qui pourrait mal tourner, et les mesures d'atténuation.
-9. **Completion & Log** — un marqueur de statut accompagné de notes chronologiques.
+3. **Surface touchée** — le contrat entre ce que la tâche modifie et ce qui doit être validé.
+4. **Steps** — des actions ordonnées et concrètes à réaliser.
+5. **Acceptance criteria** — une liste de contrôle des conditions qui définissent « fait ».
+6. **Validation** — les commandes ou tests à exécuter pour vérifier, sélectionnés à partir de la Surface touchée.
+7. **Files** — les chemins censés être créés ou modifiés.
+8. **Dependencies** — les autres tâches ou prérequis externes.
+9. **Risks** — ce qui pourrait mal tourner, et les mesures d'atténuation.
+10. **Completion & Log** — un marqueur de statut accompagné de notes chronologiques.
 
 Une tâche MAY également inclure une **section Delta** (RECOMMENDED pour les changements de comportement sur du code existant — voir ci-dessous) et une **section Rollback** (RECOMMENDED pour les migrations, les changements d'infrastructure ou les déploiements).
 
-### La section Delta (changements sur du code existant)
+## La Surface touchée
+
+La Surface touchée est le contrat entre ce qu'une tâche modifie et ce qui doit être validé. Elle existe pour que la validation soit **sélectionnée par effet**, non par habitude, et pour qu'un lecteur ultérieur puisse voir pourquoi une porte a été choisie. Une tâche qui change le comportement MUST consigner :
+
+- **Surface planifiée** — les chemins, modules, paquets ou configurations que la tâche entend modifier, écrits avant l'édition.
+- **Surface réelle** — la liste réconciliée après l'édition, tirée du diff réel. L'agent MUST réconcilier les surfaces planifiée et réelle avant de sélectionner la porte.
+- **Consommateurs affectés** — les modules, paquets ou services qui dépendent de la surface réelle, dans la mesure où le mappage documenté du dépôt permet de l'établir. Là où il ne le permet pas, l'entrée MUST le dire.
+- **Classe de risque** — l'une de : *isolée* (confinée à un module et à ses tests) ; *couture* (altère un contrat, la persistance, le routage, la sérialisation, l'authentification ou le câblage du framework entre collaborateurs) ; *partagée/cœur* (largement importée, ou un changement de dépendance, de migration, de configuration de build/tests, de schéma ou de chaîne d'outils) ; *inconnue* (le mappage est absent, obsolète ou non vérifié).
+- **Mappage de tests utilisé** — quel mappage ou outil documenté a produit la sélection.
+- **Porte sélectionnée et raison** — les commandes exactes et pourquoi elles couvrent la surface réelle.
+
+Les fichiers de configuration, schémas, manifestes de dépendances, gabarits, fixtures, migrations et fichiers d'instructions d'agent **peuvent changer le comportement** et MUST être classés par leur effet, jamais par extension de fichier. Une tâche qui ne modifie que de la prose, des commentaires ou des artefacts de recherche MAY déclarer la surface non applicable et exécute tout de même les vérifications non runtime du dépôt.
+
+## La section Delta (changements sur du code existant)
 
 La plupart du travail réel modifie un comportement existant plutôt qu'en créant un nouveau. Une tâche qui change le comportement d'un système existant SHOULD porter une **section Delta** décrivant le changement comme un contrat avant/après explicite, en utilisant trois en-têtes de liste :
 
@@ -57,29 +81,61 @@ La plupart du travail réel modifie un comportement existant plutôt qu'en créa
 - **MODIFIED** — comportement présent dans les deux états, formulé comme `was: … → now: …`.
 - **REMOVED** — comportement qui existait avant et est intentionnellement absent après.
 
-Chaque entrée MUST être un comportement observable — la réponse d'un endpoint, un indicateur CLI, un état d'interface, une valeur par défaut — et non un détail d'implémentation. La section Delta est le diff du relecteur au niveau comportemental : les critères d'acceptation vérifient les entrées ADDED/MODIFIED, et les entrées REMOVED sont la licence explicite de suppression. Tout ce qui n'est pas listé comme REMOVED MUST continuer à fonctionner, et la porte de validation de la tâche (les tests existants restant au vert) est ce qui l'impose.
+Chaque entrée MUST être un comportement observable — la réponse d'un endpoint, un indicateur CLI, un état d'interface, une valeur par défaut — et non un détail d'implémentation. La section Delta est le diff du relecteur au niveau comportemental : les critères d'acceptation vérifient les entrées ADDED/MODIFIED, et les entrées REMOVED sont la licence explicite de suppression. Tout ce qui n'est pas listé comme REMOVED MUST continuer à fonctionner.
 
-## Portes de validation et tests
+## Portes de validation — sélectionnées par classe de risque
 
-La validation est la porte qui transforme une affirmation d'achèvement en preuve de celui-ci : une tâche MUST NOT être marquée comme achevée tant que chaque commande de sa section Validation n'a pas été exécutée avec succès. Les tests font partie intégrante de cette porte, ce n'est pas un ajout facultatif — ce sont eux qui rendent fiable et vérifiable le code qu'un plan livre.
+La validation est la porte qui transforme une affirmation d'achèvement en preuve de celui-ci : une tâche MUST NOT être marquée comme achevée tant que chaque commande de sa section Validation n'a pas été exécutée avec succès. La porte d'une tâche qui change le comportement est sélectionnée à partir de sa Surface touchée réconciliée, par classe de risque :
 
-Lorsqu'une tâche ajoute une nouvelle fonctionnalité centrale ou modifie matériellement un comportement existant :
+| Classe de risque | Validation requise |
+|------|------|
+| **isolée** | Les tests du comportement modifié et de ses consommateurs affectés, plus les vérifications statiques couvrant la surface réelle. |
+| **couture** | Ce qui précède, plus les tests d'intégration ou de contrat pour cette couture — ajoutés dans cette tâche s'il n'en existe aucun. Les vérifications d'intégration à une couture ne sont pas reportées à la fin du plan. |
+| **partagée/cœur** | Élargir aux paquets affectés et à leurs consommateurs transitifs ; là où l'impact ne peut pas être borné de façon fiable, exécuter la validation complète. |
+| **inconnue** | Investiguer et corriger la sélection ; si elle ne peut toujours pas être établie, exécuter la commande plus large ou complète. |
+| **non applicable** (prose/recherche) | Les vérifications non runtime du dépôt, avec la raison consignée dans la Surface touchée. |
 
-- Ses **critères d'acceptation** MUST inclure une couverture de tests automatisés pour le comportement nouveau ou modifié (le cas nominal ainsi que les cas limites et d'erreur significatifs), en suivant la convention de test et l'exigence de couverture du dépôt.
-- Sa **validation** MUST exécuter les tests du dépôt conjointement avec ses vérifications de lint, de typage et de format — la vérification complète de qualité de code que le dépôt définit — et non le build seul. « Ça se compile » n'est pas une porte suffisante pour un changement de comportement.
-- Les tests existants MUST rester au vert. Un changement qui casse un test couvrant le code affecté MUST mettre à jour ce test vers le nouveau comportement voulu ; il MUST NOT supprimer, ignorer ou affaiblir un test dans le seul but de forcer le passage de la porte.
+Un changement de comportement MUST produire une sélection de tests non vide et pertinente — un sélecteur invalide ou un exécuteur qui a sélectionné zéro test n'est pas une couverture. Lorsque la carte de tests du dépôt est obsolète, l'invocation correcte est dérivée et la mise à jour du mappage consignée ; une petite commande manquante n'exige jamais une exécution complète d'onboarding. Là où aucune invocation ciblée n'existe, la suite complète applicable s'applique — comportement hérité, jamais une erreur.
 
-Les tâches purement documentaires, de configuration ou de recherche sont exemptées de la création de tests mais MUST tout de même exécuter quelle que soit la porte de validation que le dépôt définit. La profondeur des tests est proportionnelle à la taille du changement et à la maturité du dépôt. Lorsqu'un dépôt ne dispose d'aucune chaîne d'outils de test ou de lint, l'agent MUST NOT ignorer silencieusement cette discipline — il s'appuie sur la chaîne d'outils proposée pendant l'onboarding (voir [Conformité](/spec)).
+Lorsqu'une tâche ajoute une nouvelle fonctionnalité centrale ou modifie matériellement un comportement existant, ses critères d'acceptation MUST inclure une couverture de tests automatisés pour le comportement nouveau ou modifié, et sa validation exécute les tests du dépôt conjointement avec les vérifications de lint, de typage et de format — pas le build seul. Les tests existants MUST rester au vert.
+
+## Validation de l'état final
+
+Les portes par tâche valident ce que chaque tâche a touché ; elles ne remplacent pas la validation du plan dans son ensemble. Avant qu'un plan ne s'achève, la validation **complète applicable** du dépôt MUST s'exécuter et réussir sur l'**état final pertinent**, après le dernier changement substantiel — dans le Final Review. Les exécutions plus larges antérieures ont lieu aux frontières d'intégration ou après des changements partagés/cœur, non selon un calendrier fondé sur le nombre de tâches. Un résultat réussi MAY être réutilisé uniquement avec la preuve que les entrées pertinentes sont équivalentes ; sinon il est réexécuté. Chaque exécution de porte laisse une trace concise : commande, périmètre, révision, résultat et un chemin de preuve.
 
 ## Discipline de sécurité
 
-La sécurité est de premier ordre au même titre que les tests, et elle suit le même modèle à deux couches : une discipline par tâche pendant le déroulement du travail, plus une porte obligatoire de Security Review sur l'ensemble des changements à la fin. Chaque fois qu'une tâche touche à l'authentification ou à l'autorisation, au traitement des entrées, aux secrets ou à la configuration, à la surface réseau, fichier ou shell, ou aux dépendances :
+La sécurité est de premier ordre au même titre que les tests, et elle suit le même modèle à deux couches : une discipline par tâche pendant le déroulement du travail, plus la passe de sécurité du Final Review sur l'ensemble des changements à la fin. Chaque fois qu'une tâche touche à l'authentification ou à l'autorisation, au traitement des entrées, aux secrets ou à la configuration, à la surface réseau, fichier ou shell, ou aux dépendances :
 
 - Ses **critères d'acceptation** MUST énoncer les attentes de sécurité du changement — entrée validée et échappée, aucun élément secret dans le code ou les fixtures, contrôles d'authentification préservés ou renforcés — en cohérence avec `docs/SECURITY.md`.
 - Chaque commit MUST être confirmé exempt de secrets ou d'identifiants avant d'être intégré, fixtures de test et exemples de documentation compris. Un secret présent dans un commit déjà poussé MUST être considéré comme divulgué et faire l'objet d'une rotation, et pas simplement supprimé.
 - Lorsque le travail sensible à la sécurité est substantiel, une tâche de durcissement dédiée SHOULD être placée immédiatement après les tâches d'implémentation et avant la tâche de tests exhaustifs, afin que les constats soient corrigés avant que les tests n'encodent le comportement et que chaque constat devienne un cas de régression plutôt qu'une reprise.
 
-Cette discipline par tâche ne remplace pas la tâche finale de Security Review : les vérifications par tâche détectent les problèmes dans le commit où ils naissent, tandis que la porte finale audite l'ensemble du plan — y compris les tâches de tests et de documentation elles-mêmes. Chaque plan se termine donc par trois tâches finales obligatoires — Security Review, puis Skills & Agents Discovery, puis l'Executive Report — et un constat de sécurité critique bloque l'achèvement jusqu'à ce qu'il soit corrigé ou explicitement accepté.
+Cette discipline par tâche ne remplace pas la passe de sécurité du Final Review : les vérifications par tâche détectent les problèmes dans le commit où ils naissent, tandis que la porte finale audite l'ensemble du plan — y compris les tâches de tests et de documentation elles-mêmes.
+
+## Cycle de vie du plan — le Final Review
+
+Tout plan conforme rédigé sous cette version se termine par exactement **une** tâche obligatoire : le **Final Review** (tâche N). Deux responsabilités que les versions antérieures plaçaient dans des tâches de clôture distinctes sont relocalisées : les décisions de skills rejoignent la tâche qui a produit le motif, et l'Executive Report devient un artefact optionnel, sur demande. Rien de la passe de sécurité n'est relâché.
+
+Le Final Review MUST, dans l'ordre :
+
+**(a) Passe de sécurité** — relire l'ensemble accumulé des changements du plan à la recherche de secrets en dur, de risques d'injection, de nouvelle surface d'attaque, d'authentification affaiblie et de données sensibles dans les journaux ou la documentation ; auditer les dépendances introduites ; vérifier que `docs/SECURITY.md` reflète toujours la réalité ; rédiger le rapport de revue de sécurité même lorsqu'il est vierge. Un constat critique est corrigé — ou explicitement accepté par l'utilisateur — avant que le plan ne s'achève.
+
+**(b) Validation de l'état final** — la validation complète applicable du dépôt s'exécute et réussit sur l'état final pertinent.
+
+**(c) Réconciliation des skills** — chaque tâche porte une disposition de skills et chaque candidate consignée a une disposition ; pas de second rapport de découverte.
+
+**(d) Achèvement** — rendre compte de l'achèvement avec les livrables, les preuves de validation et les limites ; proposer l'Executive Report une seule fois. Le plan est achevé, que la proposition reçoive une réponse ou non.
+
+Le Final Review s'exécute séquentiellement après toutes les autres tâches et n'est jamais placé dans un groupe parallèle.
+
+## Décisions de skills par tâche
+
+La question « ce travail a-t-il créé un motif réutilisable méritant un skill ou un agent ? » se répond à l'intérieur de la tâche qui a produit le motif, tant que ses preuves sont dans le contexte. Le Completion & Log de chaque tâche porte une **disposition de skills** : aucune, mettre à jour un skill existant, créer un artefact nommé, ou un report avec motif. La rédaction justifiée a lieu à l'intérieur de cette tâche, avant sa porte de validation et son commit, après vérification des doublons dans le catalogue existant.
+
+## Executive Report — optionnel, sur demande
+
+L'Executive Report n'est plus une tâche obligatoire. À l'achèvement, l'agent le propose une fois ; il n'est généré que sur demande explicite, satisfait à partir de preuves durables sans rejouer le plan. Sans réponse, ou lors d'une exécution sans surveillance, le plan reste achevé sans qu'aucun rapport ne soit généré.
 
 ## Protocole d'achèvement de tâche
 
@@ -133,7 +189,7 @@ La rigueur MUST être proportionnelle au travail. La cérémonie sur des changem
 | Niveau | Quand | Forme |
 |--------|-------|-------|
 | **micro** | Un changement atomique unique : une seule préoccupation, environ une session, sans coordination. Un correctif de bogue, un changement de texte, un ajustement de configuration. | Pas de dossier de plan. L'agent énonce l'objectif, les critères d'acceptation et la porte de validation en ligne dans la conversation, exécute, valide, commite. |
-| **standard** | Travail multi-étapes avec un périmètre réel : une fonctionnalité, un refactoring, une migration dans un seul dépôt. Le niveau par défaut. | Un plan complet : dossier de plan, tâches en neuf sections, tâches finales obligatoires. |
+| **standard** | Travail multi-étapes avec un périmètre réel : une fonctionnalité, un refactoring, une migration dans un seul dépôt. Le niveau par défaut. | Un plan complet : dossier de plan, tâches en dix sections, le Final Review. |
 | **deep** | Travail à long horizon couvrant des groupes parallèles, des dépôts enfants ou plusieurs sessions sans surveillance. | Un plan standard plus les capacités d'orchestrateur et/ou d'agents en équipe, et la couche d'état. |
 
 Un agent invité à créer un plan pour un travail de niveau micro MUST dire qu'un plan est disproportionné et proposer la forme en ligne à la place. Un dossier de plan MUST NOT être créé pour un changement trivial d'un seul fichier.
@@ -141,6 +197,17 @@ Un agent invité à créer un plan pour un travail de niveau micro MUST dire qu'
 Le travail de niveau micro conserve quand même les non-négociables : un objectif explicite, une porte de validation qui s'exécute et passe, et la discipline de test pour les changements de comportement. Le niveau change le conditionnement, jamais les portes.
 
 Lorsque le périmètre grandit en cours d'exécution — une tâche micro révèle un périmètre réel, un plan standard fait apparaître des sous-dépôts — l'agent MUST s'arrêter et promouvoir le travail au niveau suivant plutôt que d'étirer le niveau actuel.
+
+## Compatibilité
+
+Les plans et dépôts des versions antérieures restent conformes, et un vérificateur de conformité MUST distinguer un artefact hérité connu (accepté) d'un artefact qui déclare cette version et se révèle objectivement invalide sous elle (rejeté) :
+
+| Cas | Règle |
+|------|------|
+| **Plan rédigé sous une version antérieure** (trois tâches finales obligatoires ; tâches sans Surface touchée) exécuté par cette version | Pris en charge. Exécuté sous sa propre forme consignée — les tâches finales ne sont ni ajoutées, ni retirées, ni réordonnées, aucune Surface touchée n'est ajoutée en cours de route, et la validation se replie sur la suite complète applicable. Une session `refine` MAY le migrer délibérément. |
+| **Dépôt intégré sous une version antérieure**, intégré ou planifié par cette version | Pris en charge. Les plans se replient sur des portes de suite complète ; la documentation manquante des invocations ciblées est un constat qui nomme la mise à niveau ciblée du harness, jamais un échec. |
+| **Plan rédigé sous cette version**, agent suivant cette version | Pris en charge — la cible. |
+| **Plan rédigé sous cette version**, agent suivant une version antérieure | Non pris en charge ; documenté. Les dépôts qui épinglent un skill ancien SHOULD le mettre à niveau avant d'adopter de nouveaux plans. |
 
 ## Versionnage
 

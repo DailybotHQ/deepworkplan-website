@@ -8,11 +8,13 @@ lastUpdated: 2026-05-30
 
 Deep Work Plan (DWP) là một phương pháp luận mở, độc lập với framework, để chạy công việc kỹ thuật tự chủ, có cấu trúc cùng các agent lập trình AI. Nó biến một mục tiêu mơ hồ thành một kế hoạch rà soát được mà agent có thể thực thi, tạm dừng, tiếp tục và báo cáo — mà không đánh mất ngữ cảnh.
 
-DWP đứng trên hai trụ cột.
+DWP đứng trên ba trụ cột.
 
 **Phát triển dựa trên đặc tả.** Thay vì coi một bản chép cuộc chat là nguồn chân lý, trước hết bạn viết ra *điều gì* phải đúng — mục tiêu, phạm vi, tiêu chí chấp nhận, và các bước kiểm tra chứng minh nó đã xong — và agent thực thi dựa trên đặc tả đó. Trong DWP, kế hoạch *chính là* đặc tả: kế hoạch → tác vụ nguyên tử → cổng kiểm chứng → hoàn tất. Viết đặc tả trước giúp giảm trôi dạt (agent được đo lường so với các tiêu chí được nêu), làm công việc kiểm chứng được (mỗi cổng hoặc đạt hoặc không đạt), và làm nó tiếp tục được (đặc tả sống lâu hơn bất kỳ phiên hay agent nào). Độc lập với công cụ và thuần repo, nó khác với các hệ thống dựa trên đặc tả bị ràng buộc vào công cụ như GitHub Spec Kit, Amazon Kiro và Tessl.
 
 **Kỹ thuật harness — repository trở thành harness.** Một mô hình ngôn ngữ, tự thân nó, chỉ là một bộ dự đoán văn bản; thứ biến nó thành một kỹ sư đáng tin cậy là *harness* bao quanh nó — ngữ cảnh, công cụ, một vòng điều khiển, các hàng rào bảo vệ và trạng thái bền vững. Kỹ thuật harness là việc thiết kế khung giàn đó một cách có chủ đích. Lập trường của DWP là nó nên sống trong repository, không phải trong một công cụ: ngữ cảnh là `AGENTS.md` + `docs/`, công cụ là bộ kit `.agents/`, vòng điều khiển là kế hoạch, hàng rào bảo vệ là các cổng kiểm chứng, và trạng thái là `.dwp/` được gitignore. Vì mỗi phần là một tệp trong repo, harness có tính di động — nên mọi agent đều có thể điều khiển mọi repo.
+
+**Hiệu quả token — công việc tầm xa ngay từ thiết kế, hiệu quả ngay từ cách dựng.** Ngữ cảnh là tài nguyên khan hiếm nhất mà một agent lập trình có, và một phương pháp luận lãng phí nó sẽ thất bại đúng lúc công việc trở nên dài. DWP nạp hướng dẫn theo kiểu tiệm tiến — mỗi phần hướng dẫn được nạp khi tín hiệu kích hoạt của nó phát — chọn kiểm chứng từ những gì mỗi tác vụ thực sự chạm tới, và quyết định skill ngay trong tác vụ. Số byte hướng dẫn mà mỗi luồng cần được đo lường và công bố; không có phần trăm token bịa ra.
 
 Phương pháp luận được trình bày qua năm chương:
 

@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Addon DWP opzionale: passaggio locale AI Diff Reviewer per la Revisione di Sicurezza, gate CI Flow B opzionale (v2), extension condivisa e apply-review."
+description: "Revisione locale richiesta in ogni Final Review DWP dallo standard 2.3.0, installata dall'onboarding; il gate CI Flow B (v2), l'estensione condivisa e il compagno apply-review restano opzionali."
 kind: addon
 lang: it
 order: 5
@@ -8,37 +8,38 @@ order: 5
 
 # Addon AI Diff Reviewer
 
-Collega l'esecuzione di Deep Work Plan all'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (voce nel marketplace **"AI Diff Reviewer"**, versione corrente **v2.0.0**) in modo che il task finale obbligatorio di **Revisione di Sicurezza** acquisisca una revisione locale strutturata — verdetto, tabella dei risultati e gravità — e, scegliendo Flow B, ogni pull request può essere bloccata dalla stessa revisione in CI. Un addon **opzionale**; mai richiesto per la conformità AI-first.
+Collega l'esecuzione di Deep Work Plan all'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (voce nel marketplace **"AI Diff Reviewer"**, versione corrente **v2.0.0**) in modo che il passaggio di sicurezza del **Final Review** obbligatorio esegua una revisione locale strutturata — verdetto, tabella dei rilievi e gravità — e, scegliendo Flow B, ogni pull request possa essere bloccata dalla stessa revisione in CI. Dallo standard 2.3.0 la **revisione locale fa parte della baseline**: l'onboarding la installa e ogni Final Review la esegue. Solo la superficie CI è opt-in.
 
-La metodologia centrale di Deep Work Plan ha **zero** dipendenza da AI Diff Reviewer. Un repository senza addon è pienamente conforme. Offri questo addon solo quando lo sviluppatore o il team desidera qualità di revisione strutturata; non installare mai automaticamente per tutti. Chiedi sempre Flow A vs Flow B — non assumere mai un valore predefinito.
+Ciò che resta neutrale rispetto ai provider è il confine che conta: il reviewer è una skill MIT fissata a un tag, eseguita dal **proprio** agente di coding — nessun flusso Deep Work Plan richiede un servizio commerciale, un provider CI o un secret. Flow A (solo locale) è la baseline che ogni repository sottoposto a onboarding riceve; Flow B (la CI Action) è offerto esplicitamente e mai installato senza richiesta. Uno sviluppatore può rifiutare il reviewer locale; il rifiuto è registrato come eccezione dichiarata e `verify` riporta il repository come non conforme su quel punto finché non viene installato.
 
 ## Quando usarlo
 
 | Segnale | Azione |
 |--------|--------|
-| Il team vuole un gate di merge CI con risultati strutturati | **Raccomandare Flow B** durante l'onboarding |
-| Repository personale o sperimentale; la revisione locale pre-push è sufficiente | **Offrire Flow A** |
-| Nessun interesse per una superficie di revisione aggiuntiva | **Saltare** — la Revisione di Sicurezza di base si applica comunque |
+| Ogni repository sottoposto a onboarding | **Flow A viene installato** nella Fase 7a dell'onboarding (skill vendorizzata + `.review/extension.md`); un aggiornamento mirato della harness lo aggiunge ai repository sottoposti a onboarding in precedenza |
+| Il team vuole un gate di merge CI con rilievi strutturati | **Offrire Flow B** — opt-in esplicito, mai il valore predefinito |
+| Repository personale o sperimentale; la revisione locale è sufficiente | **Restare su Flow A** — la baseline è completa |
 
 ## Due flussi di adozione
 
 | Flusso | Cosa ottieni |
 |------|----------------|
-| **A — solo locale** | Skill vendorizzata + `.review/extension.md` richiesto (tramite `generate-extension`). Potenzia la Revisione di Sicurezza con un passaggio locale. Nessun workflow GitHub Actions. |
-| **B — doppia superficie** | Flow A più `setup` scrive `.github/workflows/pr-review.yml` (Action `@v2`), stesso file di estensione per locale e CI. Compagno opzionale `apply-review` dopo che CI pubblica i risultati. |
+| **A — solo locale (baseline)** | Skill vendorizzata + `.review/extension.md` richiesto (tramite `generate-extension`). Esegue la revisione locale dentro il passaggio di sicurezza di ogni Final Review. Nessun workflow GitHub Actions. |
+| **B — doppia superficie** | Flow A più `setup` scrive `.github/workflows/pr-review.yml` (Action `@v2`), stesso file di estensione per locale e CI. Compagno opzionale `apply-review` dopo che CI pubblica i rilievi. |
 
-Il rilevamento per il potenziamento della Revisione di Sicurezza richiede **skill + un file di estensione** in uno di: `.review/extension.md`, `.github/ai-diff-reviewer/extension.md` o `.github/ai-pr-reviewer/extension.md`. La skill da sola non è sufficiente.
+Il rilevamento per la revisione locale richiede **skill + un file di estensione** in uno di: `.review/extension.md`, `.github/ai-diff-reviewer/extension.md` o `.github/ai-pr-reviewer/extension.md`. La skill da sola non è sufficiente.
 
 ## Cosa collega questo addon (limitato per design)
 
 L'addon DWP **non** reinventa il reviewer. Delega installazione, metodologia, l'assistente CI, la creazione di estensioni, la bozza delle PR e il walkthrough post-CI alle cinque sub-skill della skill upstream (flusso padre predefinito, `generate-extension`, `setup`, `open-pr`, `apply-review`).
 
-### Potenziamento della Revisione di Sicurezza
+### La revisione locale richiesta
 
-Quando rilevato, `create` / `execute` aggiungono un passaggio di revisione locale al task obbligatorio di Revisione di Sicurezza. L'output viene aggiunto sotto `## AI Diff Reviewer local review` in `analysis_results/SECURITY_REVIEW.md`.
+`create` aggiunge il passaggio di revisione locale al passaggio di sicurezza di ogni Final Review e `execute` lo esegue. L'output viene aggiunto sotto `## AI Diff Reviewer local review` in `analysis_results/SECURITY_REVIEW.md`.
 
-- **Soft-fail (solo invocazione):** skill mancante, estensione mancante o errore di invocazione → avvisare una volta e continuare; non far mai fallire il task per questo.
-- **Gate dopo un passaggio completato:** i risultati `critical` bloccano ancora il completamento della Revisione di Sicurezza fino alla correzione o accettazione esplicita (contratto SR esistente). `warning` / `info` sono documentati ma non bloccanti.
+- **Reviewer mancante — registrato, mai saltato in silenzio:** una skill o un'estensione mancante diventa un rilievo `local reviewer not installed`; quando l'esecuzione può scrivere nella harness (modalità trust o approvazione esplicita) l'agente installa il pezzo mancante e poi revisiona, altrimenti il rilievo è riportato nel report di completamento.
+- **Soft-fail (solo invocazione):** una revisione che può avviarsi ma va in errore → avvisare una volta, registrare, continuare; non far mai fallire il task per questo.
+- **Gate dopo un passaggio completato:** i rilievi `critical` bloccano ancora il completamento del Final Review fino alla correzione o accettazione esplicita. `warning` / `info` sono documentati ma non bloccanti.
 - **Flow A non necessita di secret CI.** Un `CURSOR_API_KEY` non impostato non deve sopprimere il passaggio locale.
 
 ### Gate CI Flow B (opzionale)
@@ -51,11 +52,11 @@ Dopo che CI pubblica una revisione, lo sviluppatore può invocare `apply-review`
 
 ## Comportamento
 
-- **Chiedere il flusso; non indovinare mai.** Installare un workflow non richiesto ha un impatto maggiore rispetto a rimanere su Flow A.
+- **Flow A è la baseline; Flow B è chiesto, mai indovinato.** Installare un workflow non richiesto ha un impatto maggiore rispetto a rimanere su Flow A.
 - **Riconciliare, non sovrascrivere.** Skill, estensione o `pr-review.yml` esistenti sono preservati; colmare solo le lacune.
 - **Auth differita.** I secret del provider per CI sono configurati dal maintainer; questo addon non archivia mai credenziali.
-- **Neutro rispetto al provider.** Rifiutare lascia un repository completamente AI-first.
+- **Neutro rispetto al provider.** Nessun servizio commerciale, provider CI o secret è mai richiesto; la superficie CI è l'unico pezzo che tocca un provider.
 
 ## Note
 
-Opzionale e mai richiesto. Skill upstream: [DailybotHQ/ai-diff-reviewer](https://github.com/DailybotHQ/ai-diff-reviewer). Pagina spec: [Add-ons](/spec/addons).
+Revisione locale richiesta dallo standard 2.3.0; superficie CI opzionale. Skill upstream: [DailybotHQ/ai-diff-reviewer](https://github.com/DailybotHQ/ai-diff-reviewer). Pagina spec: [Add-ons](/spec/addons).

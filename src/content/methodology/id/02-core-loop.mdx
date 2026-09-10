@@ -1,6 +1,6 @@
 ---
 title: The core loop
-description: "Alur kerja create, execute, refine, resume, status, dan verify, direktori keluaran .dwp yang di-gitignore, anatomi tugas sembilan bagian, dan cara validasi bekerja."
+description: "Alur kerja create, execute, refine, resume, status, dan verify, direktori keluaran .dwp yang di-gitignore, anatomi tugas sepuluh bagian, dan cara validasi bekerja."
 order: 2
 lang: id
 summary: Bagaimana operasi inti DWP menggerakkan rencana dari tujuan ke penyelesaian yang terverifikasi.
@@ -17,7 +17,7 @@ Loop ini adalah bentuk operasional dari spec-driven development. Rencana adalah 
 
 ## Operasi-operasinya
 
-<CoreLoop lang="en" class="not-prose my-10" />
+<CoreLoop lang="id" class="not-prose my-10" />
 
 - **create** — Menghasilkan rencana baru dari sebuah tujuan. Agent menganalisis tujuan, menguraikannya menjadi tugas-tugas berurutan, dan menulis berkas rencana. Ia sebaiknya mengajukan pertanyaan klarifikasi sebelum menulis ketika tujuannya ambigu.
 - **execute** — Menjalankan rencana tugas demi tugas. Agent memperbarui log kemajuan setelah setiap tugas dan menandai status penyelesaian tugas. Ia tidak boleh melewati tugas tanpa mencatat alasannya.
@@ -40,22 +40,23 @@ Semua artefak DWP berada di bawah direktori `.dwp/` yang di-gitignore di akar re
 └── config.yaml
 ```
 
-## Anatomi tugas sembilan bagian
+## Anatomi tugas sepuluh bagian
 
-<TaskAnatomy lang="en" class="not-prose my-10" />
+<TaskAnatomy lang="id" class="not-prose my-10" />
 
-Setiap berkas tugas berisi sembilan bagian ini, secara berurutan. Strukturnya menjamin bahwa setiap unit pekerjaan bersifat mandiri dan dapat ditinjau:
+Setiap berkas tugas berisi sepuluh bagian ini, secara berurutan. Strukturnya menjamin bahwa setiap unit pekerjaan bersifat mandiri dan dapat ditinjau:
 
 1. **Goal** — satu paragraf yang menyatakan apa yang dicapai tugas.
 2. **Context** — latar belakang, tautan, dan mengapa tugas ini ada.
-3. **Steps** — tindakan konkret yang berurutan untuk dilakukan.
-4. **Acceptance criteria** — daftar periksa kondisi yang mendefinisikan selesai.
-5. **Validation** — perintah atau test yang dijalankan untuk memverifikasi pekerjaan.
-6. **Files** — path yang diperkirakan akan dibuat atau diubah.
-7. **Dependencies** — tugas lain atau prasyarat eksternal.
-8. **Risks** — apa yang bisa salah, dan mitigasinya.
-9. **Completion & Log** — penanda status ditambah catatan kronologis.
+3. **Touched Surface** — kontrak antara apa yang diubah tugas dan apa yang harus divalidasi.
+4. **Steps** — tindakan konkret yang berurutan untuk dilakukan.
+5. **Acceptance criteria** — daftar periksa kondisi yang mendefinisikan selesai.
+6. **Validation** — perintah atau test yang dijalankan untuk memverifikasi pekerjaan.
+7. **Files** — path yang diperkirakan akan dibuat atau diubah.
+8. **Dependencies** — tugas lain atau prasyarat eksternal.
+9. **Risks** — apa yang bisa salah, dan mitigasinya.
+10. **Completion & Log** — penanda status ditambah catatan kronologis.
 
 ## Validasi, penyelesaian, dan pelanjutan
 
-Validasi adalah bagian dari tugas, bukan renungan belakangan: setiap tugas menyebutkan perintah atau test yang membuktikannya selesai, dan agent menjalankannya sebelum menandai penyelesaian. Test bersifat kelas satu di sini — sebuah tugas yang menambahkan fungsionalitas baru atau mengubah perilaku harus menambahkan atau memperbarui test otomatis untuk perilaku itu dan menjalankan pemeriksaan kualitas kode lengkap repositori (test ditambah lint dan type-check), bukan sekadar memastikan bahwa build berhasil; test yang ada harus tetap hijau, diperbarui ke perilaku yang dimaksudkan alih-alih dilewati. Keamanan bersifat kelas satu dengan cara yang sama — setiap tugas yang menyentuh autentikasi, penanganan input, secrets, permukaan jaringan, atau dependensi membawa ekspektasi keamanan dari perubahan itu dalam acceptance criteria-nya dan menjaga setiap commit bebas dari secrets, dan setiap rencana berakhir dengan Security Review yang mengaudit seluruh kumpulan perubahan. Penyelesaian dicatat dengan penanda status yang eksplisit (`[ ]` belum dimulai, `[~]` sedang berjalan, `[x]` selesai, `[!]` terhambat) di bagian Completion & Log. Pelanjutan bersandar pada penanda ini dan log kemajuan — sebuah agent dapat merekonstruksi persis di mana rencana berhenti dan melanjutkan dari tugas pertama yang belum selesai tanpa mengulang pekerjaan yang telah rampung.
+Validasi adalah bagian dari tugas, bukan renungan belakangan: setiap tugas menyebutkan perintah atau test yang membuktikannya selesai, dan agent menjalankannya sebelum menandai penyelesaian. Test bersifat kelas satu di sini — sebuah tugas yang menambahkan fungsionalitas baru atau mengubah perilaku harus menambahkan atau memperbarui test otomatis untuk perilaku itu dan menjalankan pemeriksaan kualitas kode lengkap repositori (test ditambah lint dan type-check), bukan sekadar memastikan bahwa build berhasil; test yang ada harus tetap hijau, diperbarui ke perilaku yang dimaksudkan alih-alih dilewati. Keamanan bersifat kelas satu dengan cara yang sama — setiap tugas yang menyentuh autentikasi, penanganan input, secrets, permukaan jaringan, atau dependensi membawa ekspektasi keamanan dari perubahan itu dalam acceptance criteria-nya dan menjaga setiap commit bebas dari secrets, dan setiap rencana ditutup dengan Final Review — pemeriksaan keamanan atas seluruh kumpulan perubahan, validasi lengkap pada status akhir, dan rekonsiliasi keputusan skills. Penyelesaian dicatat dengan penanda status yang eksplisit (`[ ]` belum dimulai, `[~]` sedang berjalan, `[x]` selesai, `[!]` terhambat) di bagian Completion & Log. Pelanjutan bersandar pada penanda ini dan log kemajuan — sebuah agent dapat merekonstruksi persis di mana rencana berhenti dan melanjutkan dari tugas pertama yang belum selesai tanpa mengulang pekerjaan yang telah rampung.

@@ -50,7 +50,7 @@ Her iki dosya da atomik olarak YAZILMALIDIR: aynı dizinde geçici bir dosyaya y
 ```json
 {
   "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.2.0",
+  "spec_version": "2.3.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
@@ -146,7 +146,7 @@ Bir görev, `state.json`'daki kapı kayıtlarından herhangi birinin `passes: fa
 
 `completed` bir görev bir `outcome` kaydı TAŞIMALIDIR: nelerin `tried` (denendiği), nelerin `failed` (başarısız olduğu), nelerin `worked` (işe yaradığı) ve serbest biçimli `notes` (notlar). Her girdiyi tek satırda tutun.
 
-Sonuç kayıtları, tamamlanmış bir planı erişilebilir **bölümsel bellek** hâline getirir: bir ajan (veya bellek-dizinleme platformu) daha sonra bir sorunun yalnızca çözüldüğünü değil, nasıl çözüldüğünü hatırlayabilir. Kalıpları aramada bu kayıtları OKUMALIları gereken zorunlu Skills & Agents Discovery görevini beslerler. Hermes gibi ajan belleğini dizinleyen platformlarda, `state.json`'daki sonuç kayıtları tamamlanmış planların ilerideki oturumlar genelinde doğrudan erişilebilir hâle gelmesini sağlar.
+Sonuç kayıtları, tamamlanmış bir planı erişilebilir **bölümsel bellek** hâline getirir: bir ajan (veya bellek-dizinleme platformu) daha sonra bir sorunun yalnızca çözüldüğünü değil, nasıl çözüldüğünü hatırlayabilir. Bunlar, görev-yerel skill kararlarını ve kalıpları ararken bu kayıtları okuyan Final Review'in skill uzlaştırmasını besler. Hermes gibi ajan belleğini dizinleyen platformlarda, `state.json`'daki sonuç kayıtları tamamlanmış planların ilerideki oturumlar genelinde doğrudan erişilebilir hâle gelmesini sağlar.
 
 ### Kontrol noktası ve engellenmiş durum
 

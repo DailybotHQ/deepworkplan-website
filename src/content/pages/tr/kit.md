@@ -44,13 +44,13 @@ Onboarding akışının dokümanları, skill'leri ve doğrulama komutlarını uy
 
 ### Eklentiler (tercihe dayalı)
 
-Onboarding akışının bir depoya katmanlayabileceği isteğe bağlı yetenekler — asla AI-first temel hattının bir parçası değil:
+Onboarding akışının bir depoya katmanladığı yetenekler. Dördü isteğe bağlıdır ve asla AI-first temel hattının bir parçası değildir; AI Diff Reviewer yerel incelemesi 2.3.0 standardından itibaren gereklidir:
 
 - **Devcontainer** — kalıcı AI-CLI kimlik doğrulaması içeren, yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri.
 - **Dailybot** — Dailybot kullanan ekipler için en iyi çabayla ilerleme ve dönüm noktası raporlaması.
 - **Dependency upgrade** — paket yöneticisinden bağımsız, gruplanmış, doğrulanmış, geri alınabilir yükseltmeler.
 - **Design system** — deponun gerçek tasarım kaynağından akıl yürütülen, arayüz kapsamlı bir `DESIGN.md` (`docs/DESIGN.md` konumunda, `AGENTS.md`'den başvurulan); görsel UI, stilize CLI çıktısı ve konuşma tabanlı mesajlaşma için profillerle; böylece ajanlar markaya uygun arayüz çıktısı üretir; görsel profil bir tasarım sistemi saptandığında varsayılan açıktır, CLI ve konuşma profilleri saptandığında önerilir ve her zaman sorulur.
-- **AI Diff Reviewer** — Security Review'ı yapılandırılmış bir yerel incelemeyle ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + gerekli `.review/extension.md`) güçlendirir; isteğe bağlı Flow B, aynı uzantıyı paylaşan bir CI PR birleştirme kapısı ekler. Her zaman Flow A mı yoksa Flow B mi sorun; asla otomatik yüklemeyin.
+- **AI Diff Reviewer** — gerekli yerel inceleme: onboarding, [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md` kurar ve her Final Review'in güvenlik incelemesi onu çalıştırır; isteğe bağlı Flow B, aynı uzantıyı paylaşan bir CI PR birleştirme kapısı ekler — açıkça sunulur, istenmeden asla kurulmaz.
 
 ### Örnekler
 

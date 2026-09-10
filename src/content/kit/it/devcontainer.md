@@ -23,4 +23,4 @@ Circa l’85% del devcontainer è uno scheletro comune stabile; il restante 15% 
 
 ## Note
 
-Opt-in e mai richiesto. Un repo è pienamente conforme con zero addon.
+Opt-in e mai richiesto. Un repo è pienamente conforme con zero addon opzionali.

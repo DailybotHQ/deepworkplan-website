@@ -32,6 +32,10 @@ export const tr: SiteTranslations = {
     developers: 'Geliştiriciler',
     privacy: 'Gizlilik',
     github: 'GitHub',
+    faq: 'SSS',
+    compare: 'Karşılaştırma',
+    resources: 'Kaynaklar',
+    resourcesDesc: 'Örnekler, güven, SSS ve karşılaştırma',
     repo: {
       label: 'Kaynak kod',
       website: 'Web sitesi deposu',
@@ -52,7 +56,7 @@ export const tr: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Yeni',
+    badge: 'Yeni · Token verimli',
     text: 'Deep Work Plan bugün Product Hunt’ta',
     tagline: 'ajanına bir plan ver',
     linkText: 'Oy ver',
@@ -66,6 +70,7 @@ export const tr: SiteTranslations = {
       getStarted: 'Başlayın',
       project: 'Proje',
       connect: 'Bağlantı kurun',
+      learn: 'Öğrenin',
     },
   },
 
@@ -82,7 +87,7 @@ export const tr: SiteTranslations = {
       title: 'Modeller önemlidir.',
       titleEmphasis: 'Bağlam daha da önemlidir.',
       subtitle:
-        'Deep Work Plan, herhangi bir depoyu yapılandırılmış bir ortama — bağlam, güvenlik bariyerleri ve kalıcı bir plana — dönüştürür; böylece herhangi bir kodlama ajanı işini tam isabetle yürütür ve uzun soluklu işi tamamlar.',
+        'Deep Work Plan, herhangi bir depoyu yapılandırılmış bir ortama dönüştürür — bağlam, koruma bariyerleri ve kalıcı bir plan — herhangi bir kodlama ajanı burada hassas ve verimli çalışır ve uzun soluklu işi tamamlar.',
       instructionLabel: 'Ajanınıza kopyalayın',
       instruction:
         'init.md istemini kopyalayıp kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırarak herhangi bir depoyu AI-first hale getirin.',
@@ -95,17 +100,50 @@ export const tr: SiteTranslations = {
       secondaryCta: 'Spesifikasyonu okuyun',
       illustrationAlt:
         'Kayalık bir kıyıdaki bir deniz feneri, küçük bir tekneye yol gösteren tek bir ışık huzmesi gönderiyor — deponun, herhangi bir ajana rehberlik eden sağlam bir harness olduğunu çağrıştıran bir gravür.',
+      scrollCta: 'Nasıl çalıştığını görün',
     },
     pitch: {
-      kicker: 'Sorun ve yanıt',
+      kicker: 'Sorun ve çözüm',
       problem:
-        'Yapay zeka kodlama ajanları kısa süreli atılımlarda olağanüstü etkilidir. Uzun soluklu işlerde — bir geçiş, yeni bir alt sistem, onlarca dosyaya yayılan bir yeniden düzenleme — yönlerini kaybederler: bağlam dolar, kararlar unutulur ve çok saatlik görevler yarıda bırakılır.',
+        'Kısa hamlelerde kodlama ajanları etkileyicidir. Ona uzun soluklu bir misyon verin — bir göç, yeni bir alt sistem, onlarca dosyayı kapsayan bir yeniden yapılandırma — ve ajan sapar: bağlam dolar, önceki kararlar solur ve saatler süren iş yarı yolda kalır.',
       answer:
-        'Deep Work Plan buna spec odaklı geliştirmeyle yanıt verir: plan, kalıcı doğruluk kaynağıdır ve ajanlar açık kabul kriterlerine ve doğrulama kapılarına karşı çalışır. Sapma azalır, iş doğrulanabilir kalır ve herhangi bir ajan işi oturumlar arasında kaldığı yerden sürdürebilir.',
-      origin:
-        'Bu aynı zamanda taşınabilir hale getirilmiş harness mühendisliğidir. Bir ajan harness’ı, modelin etrafındaki iskeledir — bağlam, araçlar, kontrol döngüsü, güvenlik bariyerleri, sürdürülebilir durum — ve modeli güvenilir kılan budur. Deep Work Plan bu harness’ı deponun kendisine kurar (AGENTS.md, dokümanlar, .agents/ skill yuvası, DWP skill’i), böylece herhangi bir ajan herhangi bir depoyu pilotlayabilir. Dailybot’ta doğdu, aylarca sahada test edildi ve DailybotHQ/deepworkplan-skill olarak yayımlandı.',
+        'Deep Work Plan, spesifikasyon odaklı geliştirme ile yanıt verir: dayanıklı bir plan, atomik görevler ve ajanın geçmesi gereken doğrulama kapıları. "Bitti" bir his olmaktan çıkar — geçerlenebilir, gözden geçirilebilir kanıta dönüşür.',
+      efficiency:
+        'Ve bağlam, ajanınızın en kıt kaynağıdır. Bu yüzden harness token verimliliği için tasarlandı: talimatlar aşamalı yüklenir, doğrulama yalnızca değişene dokunur ve her görev kendi yerinde öğrenir — uzun soluklu iş ulaşılabilir kalır.',
       illustrationAlt:
-        'Tehlikelerin yanından güvenle geçen tek bir çizili rotaya sahip bir deniz haritası — planın, işi rotada tutan yön olduğunu çağrıştıran bir gravür.',
+        'Bir yandan sisli kayalıklar arasında sürüklenen bir gemi, diğer yandan aynı geminin çizili rotayla liman fenerine ilerleyişi — bir gravür diptiği.',
+    },
+    story: {
+      act1: {
+        kicker: 'Yöntem · Perde I',
+        lead: 'Neyin bitti sayılacağına ve sınırların nerede olacağına siz karar verirsiniz. Plan niyetinizi taşır; ajanlar saatleri çalışır — sürekli gözetim yok, yirmi dakikada bir düzeltme yok.',
+        deepLinkLabel: 'Metodolojiyi okuyun',
+        deepLinkHref: '/methodology',
+      },
+      act2: {
+        kicker: 'Yöntem · Perde II',
+        lead: 'Uzun görevler her modelin bağlamını doldurur. Ayrıntılar kayar ve ajan saptar. Yazılı bir plan — atomik görevler, doğrulama kapıları, sürdürülebilir durum — her turda geri döndüğü çıpadır.',
+        deepLinkLabel: 'Çekirdek döngüyü görün',
+        deepLinkHref: '/methodology',
+      },
+      act3: {
+        kicker: 'Yöntem · Perde III',
+        lead: 'Her görev, kabul kriterlerini ve geçmesi gereken kontrolleri adlandırır. Ajan kendini bitmiş hissedemez — geçmek zorundadır, aksi hâlde görev açık kalır.',
+        deepLinkLabel: 'Şartnamayı okuyun',
+        deepLinkHref: '/spec',
+      },
+      act4: {
+        kicker: 'Yöntem · Perde IV',
+        lead: 'Bağlam, araçlar, koruma bariyerleri ve durum; herhangi bir ajanın okuyabileceği düz dosyalar olarak deponuzda yaşar. Kilitlenme yok, dış beyin yok — bağlam sıfırlamalarını atlatır.',
+        deepLinkLabel: 'Onboarding çıktısını görün',
+        deepLinkHref: '/quickstart',
+      },
+      act5: {
+        kicker: 'Yöntem · Perde V',
+        lead: 'Bağlam, ajanınızın en kıt kaynağıdır. Harness aşamalı yüklenir, yalnızca değişeni doğrular ve görev başına öğrenir — plan kendini öder.',
+        deepLinkLabel: 'Metodolojiyi okuyun',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'Akıl yürütmeye dayalı kuruluma alma',
@@ -133,7 +171,7 @@ export const tr: SiteTranslations = {
         {
           title: 'DWP skill’ini kurar ve .dwp/ yapısını oluşturur',
           description:
-            'Deep Work Plan skill’ini bağlar ve planlar ile taslaklar için gitignore’lanmış .dwp/ klasörünü oluşturur, ardından isteğe bağlı olarak devcontainer desteği gibi tercihe dayalı eklentileri katmanlar.',
+            'Deep Work Plan skill’ini bağlar ve planlar ile taslaklar için gitignore’lanmış .dwp/ klasörünü oluşturur, zorunlu AI Diff Reviewer yerel incelemesini kurar, ardından isteğe bağlı olarak devcontainer desteği gibi tercihe dayalı eklentileri katmanlar.',
         },
       ],
     },
@@ -562,7 +600,7 @@ export const tr: SiteTranslations = {
     eyebrow: 'Kit',
     title: 'Kit',
     intro:
-      'Metodolojiyi çalıştırmak için ihtiyacınız olan her şey: skill ve alt skill’leri, eğik çizgi komutları, ajan adaptörleri, kuruluma alma hazır ayarları, tercihe dayalı eklentiler ve işlenmiş örnekler.',
+      'Metodolojiyi çalıştırmak için ihtiyacınız olan her şey: skill ve alt skill’leri, eğik çizgi komutları, ajan adaptörleri, kuruluma alma hazır ayarları, zorunlu yerel inceleme ve tercihe dayalı eklentiler ile işlenmiş örnekler.',
     groups: {
       command: {
         title: 'Alt skill’ler ve komutlar',
@@ -586,7 +624,7 @@ export const tr: SiteTranslations = {
       addon: {
         title: 'Eklentiler (tercihe dayalı)',
         description:
-          'onboard akışının bir depoya katmanlayabileceği isteğe bağlı yetenekler — asla AI-first temel hattının parçası değildir.',
+          'onboard akışının bir depoya katmanladığı yetenekler: zorunlu AI Diff Reviewer yerel incelemesi ve asla AI-first temel hattının parçası olmayan dört isteğe bağlı eklenti.',
       },
     },
     viewDetail: 'Ayrıntıları görüntüle',
@@ -645,7 +683,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Kiti geliştirin ve eklentileri kabul edin',
         description:
-          'Yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın. Kuruluma alma ayrıca beş tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade, design-system ve AI Diff Reviewer — yalnızca uygun olduklarında kabul edersiniz.',
+          'Yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın. Kuruluma alma, zorunlu AI Diff Reviewer yerel incelemesini kurar (CI kapısı isteğe bağlı kalır) ve dört tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade ve design-system — yalnızca uygun olduklarında kabul edersiniz.',
       },
       {
         title: 'Planlayın ve yürütün',
@@ -716,14 +754,14 @@ export const tr: SiteTranslations = {
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Tercihe dayalı eklentileri kabul edin',
+        title: 'Yerel inceleme ve tercihe dayalı eklentiler',
         description:
-          'Kuruluma alma beş tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade, design-system ve AI Diff Reviewer — yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
+          'Kuruluma alma, zorunlu AI Diff Reviewer yerel incelemesini kurar (CI kapısı isteğe bağlı kalır) ve dört tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade ve design-system — yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır isteğe bağlı eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
       },
       {
         title: 'Planlayın ve yürütün',
         description:
-          '/dwp-create ile Deep Work Plan’ler üretin ve /dwp-execute ile çalıştırın, ardından iş ilerledikçe /dwp-status, /dwp-refine, /dwp-resume ve /dwp-verify kullanın. Her plan, numaralı görevler, doğrulama kapıları ve bir tamamlama protokolü taşır — üç zorunlu son görevle sona erer: bir Güvenlik İncelemesi, Skill’ler ve Ajanlar Keşfi ve bir Yönetici Raporu.',
+          '/dwp-create ile Deep Work Plan’ler üretin ve /dwp-execute ile çalıştırın, ardından iş ilerledikçe /dwp-status, /dwp-refine, /dwp-resume ve /dwp-verify kullanın. Her plan, numaralı görevler, doğrulama kapıları ve bir tamamlama protokolü taşır — ve tam olarak tek bir zorunlu Final Review ile kapanır (güvenlik geçişi, son-durum doğrulaması ve skills uzlaştırması). Executive Report istek üzerine hâlâ kullanılabilir.',
       },
       {
         title: 'Uyumluluk doğrulaması',
@@ -742,6 +780,461 @@ export const tr: SiteTranslations = {
       { label: 'Spesifikasyon', href: '/spec' },
       { label: 'Kit', href: '/kit' },
     ],
+  },
+
+  faqPage: {
+    meta: {
+      title: 'Sıkça sorulan sorular — Deep Work Plan',
+      description:
+        'Deep Work Plan hakkında sorulan soruların yanıtları: ne yaptığı, doğrulama kapıları ve sürdürme, araçlarla karşılaştırma ve benimseme.',
+    },
+    eyebrow: 'SSS',
+    title: 'Sıkça sorulan sorular',
+    intro:
+      'Deep Work Plan hakkında en çok sorulanlara kısa yanıtlar; her biri, konuyu derinleştiren sayfaya bir bağlantıyla.',
+    tocTitle: 'Bu sayfada',
+    groups: [
+      {
+        id: 'what',
+        title: 'Deep Work Plan nedir',
+        items: [
+          {
+            id: 'what-is-it',
+            question: 'Deep Work Plan gerçekte ne yapar?',
+            answer:
+              'Deep Work Plan, bir depoyu, bir kodlama ajanının uzun işi güvenilir biçimde yürütebileceği yapılandırılmış bir ortama dönüştürür. Bir ajan skill’i olarak kurulur, depoyu bir kez kuruluma alır (bir `AGENTS.md` dizini, bir `docs/` ağacı, skill ve komutlardan oluşan bir `.agents/` kiti, gitignore’lanmış bir `.dwp/` çıktı alanı) ve o andan itibaren her hedef bir plana dönüşür: her biri kabul kriterleri ve bir doğrulama kapısı taşıyan atomik görevler; tek tek yürütülür, geçtikçe işlenir ve herhangi bir ajan tarafından diskten sürdürülebilir. Plan, güvenliği denetleyen ve son durumu doğrulayan bir Final Review ile kapanır. Metodoloji MIT lisanslıdır ve depo okuyan her kodlama ajanıyla çalışır.',
+            linkLabel: 'Metodolojiyi okuyun',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'who-is-it-for',
+            question: 'Kimler içindir?',
+            answer:
+              'Kodlama ajanlarına gerçek, çok adımlı işler veren ve bu işin bitmesini isteyen geliştiriciler ve ekipler. Bir görev birden fazla oturuma, birden fazla dosya ailesine veya birden fazla ajana yayıldığında; bir ekip arkadaşının ajanın kaldığı yerden devam edebilmesi gerektiğinde; ya da "bitti"nin "ajanan öyle dedi" değil "doğrulandı" anlamına gelmesi gerektiğinde uyar. Tek satırlık bir düzeltmeye plan gerekmez ve metodoloji bunu açıkça söyler: orantılı titizlik kuralı, bunun yerine satır içi bir hedef, kriter ve kapı önerir.',
+            linkLabel: 'Hızlı başlangıç',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'is-it-a-tool',
+            question: 'Bir araç mı, çerçeve mi yoksa metodoloji mi?',
+            answer:
+              'Kurulabilir bir skill olarak paketlenmiş bir metodoloji. Sunucu yok, hesap yok, tescilli biçim yok ve zaten kullandığınız kodlama ajanının ötesinde bir çalışma zamanı yok. Kurulan şey, ajanın okuduğu talimatlar; bağlam tespiti ve uyumluluk denetimi için küçük bir shell betiği kümesi; ve deponuzun benimsediği kurallardır. Planın ürettiği her şey deponuzdaki Markdown ve JSON’dur; hiçbir araç olmadan okunabilir.',
+            linkLabel: 'Spesifikasyonu okuyun',
+            linkPath: '/spec',
+          },
+          {
+            id: 'which-agents',
+            question: 'Hangi kodlama ajanlarıyla çalışır?',
+            answer:
+              'Depo dosyalarını okuyan herhangi bir ajan. Skill, açık Agent Skills standardını ve `AGENTS.md` kuralını izler; bu yüzden Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot ve diğerleri onu normal skill ve talimat yükleme süreçleri üzerinden edinir. Metodolojinin kendi değerlendirmesi, bir satıcının ajanının başlattığı bir planın diğer satıcının ajanı tarafından her iki yönde sürdürüldüğünü gösterir. Kurulum kapsamı ve davranışsal kanıt uyumluluk matrisinde ajan başına listelenir ve ikisi asla birbirine karıştırılmaz.',
+            linkLabel: 'Kite göz atın',
+            linkPath: '/kit',
+          },
+          {
+            id: 'what-is-installed',
+            question: 'What exactly gets installed, and where?',
+            answer:
+              'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles AGENTS.md, docs/, .agents/ and the gitignored .dwp/ workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
+            linkLabel: 'See the adoption flow',
+            linkPath: '/init',
+          },
+          {
+            id: 'requires-git',
+            question: 'Does Deep Work Plan require Git?',
+            answer:
+              'Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including state.json checkpoints and gate records, is required so recovery does not depend on a chat transcript.',
+            linkLabel: 'Read about repository archetypes',
+            linkPath: '/spec/archetypes',
+          },
+          {
+            id: 'skill-plan-spec',
+            question:
+              'What is the difference between a skill, a plan and a product specification?',
+            answer:
+              'A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.',
+            linkLabel: 'Read the specification',
+            linkPath: '/spec/dwp-specification',
+          },
+        ],
+      },
+      {
+        id: 'how',
+        title: 'Bir plan nasıl çalışır',
+        items: [
+          {
+            id: 'how-to-use',
+            question: 'Nasıl kullanılır?',
+            answer:
+              "Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx skills add DailybotHQ/deepworkplan-skill` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` bir taslağı veya devam eden bir planı düzenler; `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.",
+            linkLabel: 'Hızlı başlangıç',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'gates',
+            question:
+              'Doğrulama kapıları nasıl uygulanır? İnsan onayı gerekir mi?',
+            answer:
+              'Yürütülebilir onaylamalardır ve ajan bunları kendisi çalıştırır. İnsan onayı çalışmayı iki uçtan çerçeveler: bir kişi yürütmeden önce planı onaylar ve pull request sırasında son diff’i inceler; aradaki yürütme otonomdur. Her görev, genellikle deponun kendi kalite kapısı olan somut komutları adlandırır; bunlar görevin dokunduğu yüzeyden seçilir: değişen davranışın testleri ve tüketicileri, değişiklik paylaşıldığında veya sınırlandırılamadığında tam suite’e genişletilir. Bir görev, yalnızca bu komutlar başarıyla çıktığında tamamlanmış sayılır ve davranışı değiştiren görevler testleri genişletmelidir. Başarısızlıkta görev engellenmiş olarak işaretlenir ve ajan durur.',
+            linkLabel: 'Çekirdek döngü',
+            linkPath: '/methodology/02-core-loop',
+          },
+          {
+            id: 'stale-plan',
+            question:
+              'İnsanlar çalışmalar arasında kodu değiştirdiğinde plan nasıl bayatlamaktan kaçınır?',
+            answer:
+              'Üç cephede. Görevler düzenleme olarak değil davranış olarak yazılır: bir kabul kriteri sistemin ne yapması gerektiğini söyler, bu yüzden yeniden adlandırılmış bir dosya veya değiştirilmiş bir uygulama onu geçersiz kılmaz. Her kapı, reponun şu anki haliyle yeniden çalıştırılır; böylece kırık bir varsayım bir sonraki çalıştırmada sessizce kaymak yerine gürültülü biçimde başarısız olur ve bu başarısızlık iyileştirme için işarettir. Dokümantasyonu senkron tutmak da işin parçasıdır: davranışı değiştiren bir görev, onu tanımlayan docs ve ajan kitini de kendi kapısının içinde günceller. Her çalıştırma, reponu bulduğundan daha ajan-hazır bırakmalıdır.',
+            linkLabel: 'Metodolojiyi okuyun',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'edit-mid-run',
+            question:
+              'Tamamlanan işi kaybetmeden planı yürütme ortasında değiştirebilir miyim?',
+            answer:
+              'Evet; kısmen yürütülmüş bir planı iyileştirmek birinci sınıf bir harekettir. Görev tanımları ve yürütme durumu ayrı tutulur: plan diskte bir kontrol listesi artı küçük bir durum dosyasıdır, bu yüzden tamamlananlar görev metninden bağımsız kayıtlı kalır. Bir görev yanlış çıktığında ajan onu engellenmiş işaretler ve zorlamak yerine durur. Sonra henüz çalışmamış görevleri düzenler, yeniden sıralar, böler veya düşürürken tamamlanan görevler tamamlanmış kalır. Sürdürme, durumu diskten ve gerçek repodan yeniden oluşturur ve önemli kapıları yeniden çalıştırır; altta kaymış hiçbir şey gözden kaçmaz.',
+            linkLabel: 'Çekirdek döngü',
+            linkPath: '/methodology/02-core-loop',
+          },
+          {
+            id: 'drift',
+            question:
+              'İşi plana karşı sürekli kontrol eder mi, yoksa plan yalnızca başta belirlenen bir şey mi?',
+            answer:
+              'Plan sürekli bir kontroldür. Ajan bir seferde bir küçük görevle çalışır ve devam etmeden önce doğrulamalıdır; böylece üç adım değil bir adım sapabilir. Her görev kabul kriterleri ve bunları kanıtlayan tam komutları taşır; ilerleme giderken repoya yazılır, görev başına bir durumla; sapma size, sonraki oturuma ve sonraki ajana görünür olur. Bir plan, Final Review dahil her şey doğrulanana kadar bitmiş değildir. Dürüst uyarı: metodoloji bir ajanın baştan zayıf bir kabul kriteri yazmasını engelleyemez; sapmayı sessiz yerine gürültülü yapar.',
+            linkLabel: 'Çekirdek döngü',
+            linkPath: '/methodology/02-core-loop',
+          },
+          {
+            id: 'plan-evolution',
+            question:
+              'Plan bir kez üretilip elle sürdürülür mü, yoksa kodla birlikte evrilir mi?',
+            answer:
+              'Hiçbiri. Bir hedeften bir kez üretilir ve sonra işin parçası olarak sürdürülür. Plan kasıtlı olarak kod diff’lerinden yeniden yazılmaz; çünkü kodu kovalayan bir spec gecikmeli bir ayna olur — metodolojinin ortadan kaldırmak için var olduğu sapma budur. Kasıtlı olarak evrilir: kapılar güncel repoya karşı yeniden çalışır, başarısız bir kapı iyileştirmeyi tetikler ve ajan bu iyileştirmeyi çalışma sırasında yapar; siz önden onaylar, sonda incelersiniz. Dokümantasyon ve testler, güncellemek her görevin kapısının içinde olduğu için yapı gereği kodla birlikte evrilir.',
+            linkLabel: 'Metodolojiyi okuyun',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'resume',
+            question: 'Oturum yarıda kesilirse ne olur?',
+            answer:
+              'İlerleme sohbette değil diskte yaşar. README onay kutuları, her görevin günlüğü, sınırlı bir çalışma indeksi ve makine tarafından okunabilir bir durum dosyası her görev sınırında güncellenir; durum dosyası planlı her duraklamadan önce bir kontrol noktası kaydeder. Yeni bir oturum veya farklı bir ajan bu kompakt indeksi okur, repoyla ve git geçmişiyle uzlaştırır ve bitmiş işi yeniden yapmadan ilk tamamlanmamış görevde devam eder. Yarıda kesilen plan oluşturma bile kurtarılabilir: planın kimliği ve amaçlanan görev listesi herhangi bir görev dosyasından önce yazılır; böylece yarım oluşturulmuş bir plan tahmin edilmek yerine tamamlanabilir veya atılabilir.',
+            linkLabel: 'Çekirdek döngü',
+            linkPath: '/methodology/02-core-loop',
+          },
+          {
+            id: 'final-review',
+            question: 'Final Review nedir?',
+            answer:
+              'Her planın zorunlu tek kapanış görevi. Sırayla: planın birikmiş tam değişiklik kümesi üzerinde bir güvenlik geçişi, AI Diff Reviewer skill’iyle diff’in zorunlu yerel incelemesi dahil; kritik bulgular düzeltilene veya açıkça kabul edilene kadar tamamlamayı engeller; son durum doğrulaması, yani nihai kodda deponun geçerli test, lint, type-check ve format suite’lerinin tamamı; ve her görevin kaydettiği skills kararlarının uzlaştırması. Ajan sonra teslim edilenleri, kanıtları ve sınırlamaları raporlar ve yalnızca siz istediğinizde oluşturarak bir kez Executive Report sunar.',
+            linkLabel: 'Spesifikasyon',
+            linkPath: '/spec/dwp-specification',
+          },
+          {
+            id: 'gate-fails',
+            question: 'What happens when a validation gate fails?',
+            answer:
+              'The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.',
+            linkLabel: 'Read the agent protocol',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'unattended-runs',
+            question: 'Can a plan run unattended overnight or in CI?',
+            answer:
+              'Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.',
+            linkLabel: 'Read the unattended protocol',
+            linkPath: '/spec/agent-protocol',
+          },
+        ],
+      },
+      {
+        id: 'compare',
+        title: 'Diğerleriyle karşılaştırma',
+        items: [
+          {
+            id: 'vs-sdd-tools',
+            question:
+              'Spec Kit, OpenSpec veya Kiro gibi spec odaklı araçlardan nasıl farklıdır?',
+            answer:
+              'Bitişik sorunları çözerler. Spec odaklı araçlar neyin değişmesi gerektiğini yakalamada mükemmeldir: tekrarlanabilir biçimde spesifikasyonlar, gereksinimler ve değişiklik önerileri. Deep Work Plan, bir ajanın saatlerce sapmadan nasıl yürüteceğiyle ilgilidir: kuruluma alınmış harness, dokunulan yüzeyden seçilen görev başına doğrulama kapıları, diskte sürdürülebilir durum, güvenlik geçişiyle zorunlu Final Review ve reponun kendisi için bir uyumluluk denetleyicisi. İkisi birleştirilebilir; bir spec veya değişiklik önerisi bir plana beslenir. Karşılaştırma sayfası yetenekleri yan yana, her aracın kendi terimleriyle düzenler.',
+            linkLabel: 'Karşılaştırmayı görün',
+            linkPath: '/compare',
+          },
+          {
+            id: 'vs-agent-frameworks',
+            question:
+              'BMAD, Superpowers, Get Shit Done veya Gentle-AI gibi ajan iş akışı araçlarından nasıl farklıdır?',
+            answer:
+              "Bu çerçeveler güçlü çalışma stilleri getirir: roller, ilkeler, test-first adımlar, doğrulama alışkanlıkları. Deep Work Plan ikisinden de farklıdır; repoda ne kalır ve ne kontrol edilebilir odaklanır: soğuk okunabilen herhangi bir harness, kabul kriterleri ve kapılarla görev dosyaları, oturumu atlatan durum, CI-dostu çıkış kodlu uyumluluk denetleyicisi ve her akışın kaç talimat byte’ı yüklediğinin yayımlanmış ölçümü. Yapı gereği araçtan bağımsızdır ve core loop’a hizmet, sağlayıcı veya secret eklememez. Karşılaştırma sayfası her yaklaşımın yerleşik, isteğe bağlı veya kapsam dışı olduğu yerleri gösterir. Gentle-AI, halihazırda kullandığınız kodlama ajanlarını yapılandırır: oturumlar arasında kalıcı bellek (Engram), seçilmiş beceriler, persona'lar, MCP sunucuları, isteğe bağlı Spec-Driven Development ve isteğe bağlı kanıta dayalı inceleme (Receipt-Driven Development). Her ajanın yapılandırma dizinlerine yazır ve planlama çıktılarını Engram'da, OpenSpec dosyalarında veya her ikisinde tutabilir. Katmanlar bir arada durabilir: Gentle-AI ajana donanım sağlar; Deep Work Plan uzun işi repoda kalıcı ve doğrulanabilir kılar.",
+            linkLabel: 'Karşılaştırmayı görün',
+            linkPath: '/compare',
+          },
+          {
+            id: 'vs-native-plan-mode',
+            question:
+              'Neden yalnızca ajanımın yerleşik plan modunu kullanmıyorum?',
+            answer:
+              'Yerleşik plan modları kullanışlıdır ve Deep Work Plan aynı alt yapı üzerine kurulur: `AGENTS.md` kuralı ve açık Agent Skills standardı. Fark, planın nerede yaşadığı ve neyin onu zorladığıdır. Yerel planlar genellikle reponun dışında yaşar ve oturumla sona erer; Deep Work Plan planı, durumunu ve kanıtını repoya yazır; böylece başka bir ajan veya ekip arkadaşı devam edebilir ve her görev yürütülebilir bir kapı ve kayıtlı bir günlük taşır. Düşünmek için ajanınızın plan modunu kullanmaya devam edersiniz; metodoloji dayanıklı, doğrulanabilir yürütme döngüsünü ekler.',
+            linkLabel: 'Karşılaştırmayı görün',
+            linkPath: '/compare',
+          },
+        ],
+      },
+      {
+        id: 'adopt',
+        title: 'Benimseme',
+        items: [
+          {
+            id: 'install',
+            question:
+              'Kuruluma alma repoma ne yazır ve mevcut dosyalara dokunur mu?',
+            answer:
+              'Kuruluma alma yıkıcı değildir: mevcut `AGENTS.md`, `docs/`, `.agents/` veya `CLAUDE.md` dosyasını algılar, üzerine yazmak yerine uzlaştırır ve bir şeyi değiştirmeden önce sorar. Gerçek komutlarla `AGENTS.md` dizini, akıl yürütülmüş bir `docs/` ağacı, modül başına docs, ince `dwp-*` komutlarıyla `.agents/` kiti, gitignore’lanmış bir `.dwp/` çıktı alanı, doğrulanmış bir test haritası ve zorunlu yerel kod incelemesi (AI Diff Reviewer skill’i artı repoya uyarlanmış inceleme eklentisi) yazır. Sonra ne üretildiğini görebilmeniz için self-check ve uyumluluk denetleyicisini çalıştırır. Daha önceki bir sürümle kuruluma alınmış bir repo, yalnızca eksik olanları değiştiren hedefli bir yükseltme alır.',
+            linkLabel: 'Benimseme uç noktası',
+            linkPath: '/init',
+          },
+          {
+            id: 'core-and-addons',
+            question:
+              'Can I use the core methodology without installing add-ons?',
+            answer:
+              'Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.',
+            linkLabel: 'Browse the add-ons',
+            linkPath: '/spec/addons',
+          },
+          {
+            id: 'no-test-toolchain',
+            question: 'What if my repository has no tests or linting yet?',
+            answer:
+              'DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.',
+            linkLabel: 'Read the agent protocol',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'cost',
+            question: 'Maliyeti nedir ve verimlilik nasıl ölçülür?',
+            answer:
+              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın yüklediği talimat byte sayısı olarak raporlanır; skill ile commit edilen bir betikle ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz; sonuçları düzgün ölçmek için önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır.',
+            linkLabel: 'Güven ve açıklama',
+            linkPath: '/trust',
+          },
+        ],
+      },
+    ],
+    stillHaveQuestions: {
+      title: 'Hâlâ bir sorunuz var mı?',
+      body: 'GitHub’da bir tartışma veya issue açın. Tekrar tekrar gelen sorular bu sayfaya eklenir.',
+      ctaLabel: 'GitHub’da sorun',
+    },
+  },
+
+  comparePage: {
+    meta: {
+      title: 'Deep Work Plan alternatiflerle karşılaştırıldığında',
+      description:
+        'Deep Work Plan’in spec araçları, ajan çerçeveleri ve satıcı plan modlarıyla ilişkisi: kendi terimleriyle, kaynaklar ve inceleme tarihiyle.',
+    },
+    eyebrow: 'Karşılaştırma',
+    title: 'Deep Work Plan ve alternatifler',
+    intro:
+      'Durumunuz için doğru katmanı seçin. Her alternatif kendi terimleriyle tanımlanır, her gerçek resmi belgelere izlenebilir ve sayfa en son ne zaman incelendiğini belirtir. Bu bir harita, sıralama değil.',
+    howToRead: {
+      title: 'Bu sayfa nasıl okunur',
+      body: 'Her yetenek üç değerle tanımlanır. Bir yeteneğin bir araçta nerede olduğunu söylerler; aracın ne kadar iyi olduğunu değil.',
+      values: {
+        builtIn: 'Yerleşik',
+        optional: 'İsteğe bağlı veya eklentiyle',
+        notInScope: 'Kapsam dışı',
+      },
+    },
+    reviewedOnLabel: 'Son incelenme',
+    alternativesTitle: 'Alternatifler, kendi terimleriyle',
+    officialSiteLabel: 'Resmi site',
+    categories: {
+      methodology: 'Metodoloji',
+      sdd: 'Spec odaklı geliştirme araçları',
+      agentFramework: 'Ajan iş akışı çerçeveleri',
+      aiNativeSdlc: 'AI-native SDLC',
+      vendorNative: 'Satıcı yerel plan modları',
+    },
+    matrix: {
+      title: 'Yetenek matrisi',
+      caption:
+        'Her yetenek araç başına nerede. Yerleşik, isteğe bağlı veya eklentiyle, veya kapsam dışı. Resmi belgelere karşı incelenmiştir.',
+      capabilityColumn: 'Yetenek',
+    },
+    capabilities: {
+      toolAgnostic: {
+        label: 'Herhangi bir kodlama ajanıyla çalışır',
+        help: 'Aynı repo dosyaları Claude Code, Codex, Cursor, Gemini CLI ve diğerlerini yönlendirir.',
+      },
+      repoNativeHarness: {
+        label: 'Ajan harness’ını repoya yazır',
+        help: 'Talimatlar, docs, skill’ler ve komutlar repoda yaşar; tek bir aracın ayarlarında değil.',
+      },
+      taskAcceptanceCriteria: {
+        label: 'Görev başına kabul kriterleri',
+        help: 'Her görev, tamamlanmak için gözlemlenebilir koşulları belirtir.',
+      },
+      perTaskGates: {
+        label: 'Görev başına doğrulama kapısı',
+        help: 'Her görev, dokunduğu yüzeyden seçilen geçmesi gereken komutları adlandırır.',
+      },
+      resumableState: {
+        label: 'Diskte sürdürülebilir durum',
+        help: 'İlerleme oturum sıfırlamasını atlatır ve başka bir ajan veya ekip arkadaşı tarafından devralınabilir.',
+      },
+      finalReview: {
+        label: 'Güvenlik geçişiyle zorunlu kapanış incelemesi',
+        help: 'Plan, tam değişiklik kümesinin güvenlik incelemesi ve son durum doğrulaması olmadan tamamlanamaz.',
+      },
+      conformanceChecker: {
+        label: 'Yürütülebilir uyumluluk denetleyicisi',
+        help: 'Bir betik repoyu ve planlarını standarda karşı doğrular; CI-dostu çıkış koduyla.',
+      },
+      instructionBudgetLedger: {
+        label: 'Yayımlanmış talimat yükü ölçümü',
+        help: 'Her akışın yüklediği byte’lar commit edilmiş bir betikle ölçülür ve limitleriyle yayımlanır.',
+      },
+      onboardingScaffold: {
+        label: 'Dokümantasyon iskelesi kuran kuruluma alma',
+        help: 'İlk çalıştırma, reponun ajan yüzeyli dokümantasyonunu ve kitini yazır.',
+      },
+      brownfieldSpecs: {
+        label: 'Mevcut sistemler için yaşayan spec’ler',
+        help: 'Değişiklikler, sistemin büyüyen spesifikasyonuna birleşen delta’lar olarak belirtilir.',
+      },
+    },
+    alternatives: {
+      dwp: {
+        name: 'Deep Work Plan',
+        whatItDoesWell:
+          'Skill olarak kurulur, repoyu bir ajan harness’ına kuruluma alır ve görev başına doğrulama kapıları, diskte durum ve zorunlu Final Review ile uzun soluklu planlar yürütür.',
+        audience:
+          'Herhangi bir kodlama ajanına çok oturumlu iş veren ve doğrulanmış biçimde bitmesini isteyen geliştiriciler ve ekipler.',
+      },
+      'github-spec-kit': {
+        name: 'GitHub Spec Kit',
+        whatItDoesWell:
+          'Bir özelliği bir anayasa, bir spec, bir plan ve bir görev listesiyle yürütülebilir bir spesifikasyona dönüştürür; elliden fazla kodlama ajanıyla entegre slash komutlarıyla yönlendirilir.',
+        audience:
+          'Zaten kullandıkları ajanın içinde tekrarlanabilir specify, plan, tasks ve implement iş akışı isteyen ekipler.',
+      },
+      openspec: {
+        name: 'OpenSpec',
+        whatItDoesWell:
+          'Her değişikliği delta spec’lerle (eklenen, değiştirilen, kaldırılan) ve senaryolarla RFC 2119 gereksinimleri içeren bir öneri olarak yakalar, ardından bunları yaşayan spesifikasyonlara arşivler.',
+        audience:
+          'Mevcut sistemlerde çalışan ve spesifikasyonların değişiklik değişiklik büyümesini isteyen ekipler.',
+      },
+      'amazon-kiro': {
+        name: 'Amazon Kiro',
+        whatItDoesWell:
+          'Spec’leri EARS tarzı gereksinimlerden tasarıma ve görevlere taşıyan, düzenleyici olaylarında çalışan steering dosyaları ve hook’larla bir agentic IDE ve CLI.',
+        audience:
+          'Düzenleyicisine AWS destekli araçlarla spec odaklı geliştirme yerleşik isteyen geliştiriciler.',
+      },
+      'bmad-method': {
+        name: 'BMAD Method',
+        whatItDoesWell:
+          'Brief, gereksinim, mimari belgeler ve story dosyaları üreten uzmanlaşmış ajan rollerinden (analiz, ürün, mimari, geliştirme, kalite) oluşan bir agile çerçeve.',
+        audience:
+          'Rol tabanlı törenleri seven ve ajan işi için tam bir agile yaşam döngüsü isteyen ekipler.',
+      },
+      superpowers: {
+        name: 'Superpowers',
+        whatItDoesWell:
+          'Beyin fırtınası, küçük test-first adımlarla planlama, alt ajanlarla yürütme ve tamamlamadan önce inceleme için bir skill kütüphanesi ve iş akışı.',
+        audience:
+          'Kodlama ajanlarında disiplinli test odaklı yürütme isteyen geliştiriciler.',
+      },
+      'get-shit-done': {
+        name: 'Get Shit Done',
+        whatItDoesWell:
+          'Bir .planning dizini, gereksinim kimlikleri, faz planları, taze bağlam yürütmesi ve belirtilen must-have’lere karşı bir doğrulama geçişiyle bir planlama sistemi.',
+        audience:
+          'Az törenle bağlam mühendisliği ve doğrulama isteyen solo geliştiriciler ve küçük ekipler.',
+      },
+      'gentle-ai': {
+        name: 'Gentle-AI',
+        whatItDoesWell:
+          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+        audience:
+          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+      },
+      'claude-ai-native-sdlc': {
+        name: "Claude's AI-native SDLC",
+        whatItDoesWell:
+          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+        audience:
+          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+      },
+      'vendor-native': {
+        name: 'Satıcı yerel plan modları',
+        whatItDoesWell:
+          'Claude Code, Codex, Cursor ve Gemini CLI, AGENTS.md ve Agent Skills standartlarını izleyen plan modları, talimat dosyaları ve skill’ler sunar.',
+        audience:
+          'Metodoloji benimsemek istemeyen, tek bir ajanın içinde planlama isteyen herkes.',
+      },
+    },
+    aiNative: {
+      title: 'Where this fits in the AI-native SDLC',
+      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      shared:
+        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+      boundary:
+        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+      sourceLabel: "Read Claude's AI-native SDLC playbook",
+    },
+    profileCta: 'Karşılaştırmayı gör',
+    profile: {
+      backLabel: 'Back to all alternatives',
+      eyebrow: 'Alternative profile',
+      compareWith: 'Compared with Deep Work Plan',
+      fitTitle: 'Where it fits',
+      capabilityTitle: 'Capability snapshot',
+      sourceLabel: 'Official documentation',
+    },
+    dwpStrengths: {
+      title: 'Deep Work Plan’in getirdikleri',
+      items: [
+        {
+          title: 'Araçtan bağımsız ve repo-yerel',
+          body: 'Harness ve plan repodaki dosyalardır; AGENTS.md ve Agent Skills standartlarını izleyen herhangi bir ajan okur. Ajan değiştirmek planı kaybettirmez.',
+        },
+        {
+          title: 'Her görevin dokunduğu yüzeyden seçilen doğrulama',
+          body: 'Her görev dokunduğu yüzeyi bildirir ve değişen davranışın testlerini ve tüketicilerini çalıştırır; etki sınırlandırılamadığında tam suite’e genişler. Sıfır seçili test asla geçiş değildir.',
+        },
+        {
+          title: 'Güvenlik geçişiyle tek Final Review',
+          body: 'Bir plan, birikmiş değişiklik kümesinin güvenlik incelemesiyle — zorunlu yerel diff incelemesi dahil — ve son durum doğrulamasıyla kapanır. Kritik bulgular tamamlamayı engeller.',
+        },
+        {
+          title: 'Oturumları ve ajanları atlatan durum',
+          body: 'README onay kutuları, görev günlükleri, sınırlı çalışma indeksi ve makine tarafından okunabilir durum dosyası her sınırda yazılır; böylece başka bir oturum veya ajan diskten devam eder. Yarıda kesilen plan oluşturma bile kurtarılabilir.',
+        },
+        {
+          title: 'Reponun kendisi için uyumluluk denetleyicisi',
+          body: 'Salt okunur bir betik harness’ı ve her planı spesifikasyona karşı doğrular, her iki plan yaşam döngüsünü anlar ve CI-dostu kodla çıkar.',
+        },
+        {
+          title: 'Ölçülen ve yayımlanan talimat yükü',
+          body: 'Commit edilmiş bir betik her akışın kaç byte yüklediğini ölçer; sonuçlar, artışlar dahil, byte olarak yayımlanır — asla token veya maliyet yüzdesi olarak değil.',
+        },
+      ],
+    },
+    honestLimits: {
+      title: 'Dürüst sınırlar',
+      body: 'Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil.',
+    },
+    correction: {
+      title: 'Bu sayfanın doğruluğunu korumamıza yardım edin',
+      body: 'Bu sayfa gösterilen tarihte incelenir ve talep üzerine düzeltilir. Aracınızın tanımı güncel değilse veya eksikse bir issue açın, düzeltiriz.',
+      ctaLabel: 'Issue açın',
+    },
+    sourcesTitle: 'Kaynaklar',
   },
 
   trustPage: {

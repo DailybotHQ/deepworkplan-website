@@ -32,6 +32,10 @@ export const ja: SiteTranslations = {
     developers: '開発者',
     privacy: 'プライバシー',
     github: 'GitHub',
+    faq: 'よくある質問',
+    compare: '比較',
+    resources: 'リソース',
+    resourcesDesc: '事例、信頼、よくある質問、比較',
     repo: {
       label: 'ソースコード',
       website: 'ウェブサイトのリポジトリ',
@@ -52,7 +56,7 @@ export const ja: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'New',
+    badge: 'New · トークン効率',
     text: 'Deep Work Plan が本日 Product Hunt に登場',
     tagline: 'エージェントに計画を',
     linkText: '応援する',
@@ -66,6 +70,7 @@ export const ja: SiteTranslations = {
       getStarted: 'はじめる',
       project: 'プロジェクト',
       connect: 'つながる',
+      learn: '学ぶ',
     },
   },
 
@@ -82,7 +87,7 @@ export const ja: SiteTranslations = {
       title: 'モデルは重要です。',
       titleEmphasis: 'コンテキストはさらに重要です。',
       subtitle:
-        'Deep Work Plan はあらゆるリポジトリを、コンテキスト、ガードレール、そして永続的な計画を備えた構造化された環境へと変えます。そこではどのコーディングエージェントも正確に実行し、長期にわたる作業をやり遂げます。',
+        'Deep Work Plan はあらゆるリポジトリを構造化された環境——コンテキスト、ガードレール、永続的な計画——に変え、どんなコーディングエージェントも精確かつ効率的に実行し、長期の作業を完了させます。',
       instructionLabel: 'エージェントにコピーする',
       instruction:
         'init.md のプロンプトをコピーして、お使いのコーディングエージェント — Claude Code、Cursor、Codex、またはその他のツール — に貼り付けることで、あらゆるリポジトリを AI-first にします。',
@@ -95,17 +100,50 @@ export const ja: SiteTranslations = {
       secondaryCta: '仕様を読む',
       illustrationAlt:
         '岩場の岸辺に立つ灯台が一筋の光で小舟を導く版画。どんなエージェントも導く安定したハーネスとしてのリポジトリを想起させる。',
+      scrollCta: '仕組みを見る',
     },
     pitch: {
-      kicker: '課題とその答え',
+      kicker: '問題と答え',
       problem:
-        'AIコーディングエージェントは短時間の作業では驚くほど効果的です。しかし、移行作業や新しいサブシステムの構築、数十ファイルにまたがるリファクタリングといった長期の作業では、コンテキストが溢れ、決定事項が忘れられ、複数時間に及ぶタスクは途中で放棄され、本筋から逸れていきます。',
+        '短い作業では驚異的な性能を発揮するコーディングエージェント。長期のミッション——移行、新しいサブシステム、数十ファイルに及ぶリファクタリング——を任せると、コンテキストが満杯になり、先の判断は薄れ、数時間の作業が途中で止まります。',
       answer:
-        'Deep Work Plan はこれに仕様駆動開発で答えます。計画こそが永続的な信頼できる情報源であり、エージェントは明示的な受け入れ基準と検証ゲートに照らして実行します。逸脱は減り、作業は検証可能なまま保たれ、どのエージェントもセッションをまたいで再開できます。',
-      origin:
-        'これは同時に、ハーネスエンジニアリングを持ち運び可能にしたものでもあります。エージェントハーネスとは、モデルを取り巻く足場（コンテキスト、ツール、制御ループ、ガードレール、再開可能な状態）であり、モデルを信頼できるものにします。Deep Work Plan はそのハーネスをリポジトリそのものに組み込みます（AGENTS.md、ドキュメント、.agents/ のスキル拠点、DWP スキル）。これにより、どのエージェントもどのリポジトリも操縦できるようになります。Dailybot で生まれ、数か月にわたって実戦で鍛えられ、DailybotHQ/deepworkplan-skill として公開されました。',
+        'Deep Work Planは仕様駆動開発で応えます。永続する計画、原子タスク、そしてエージェントが通過すべき検証ゲート。「完了」は気分ではなく——検証可能でレビューできる証拠になります。',
+      efficiency:
+        'コンテキストはエージェントにとって最も希少な資源です。だからハーネスはトークン効率のために設計されています：指示は段階的に読み込み、検証は変更された箇所だけに触れ、学習はタスクごとに記録——長期の作業でも経済的に続きます。',
       illustrationAlt:
-        '危険を安全にすり抜ける一本の航路が記された海図の版画。作業を軌道に保つ方向としての計画を想起させる。',
+        '彫版の二連作：片側は霧の中で岩場に漂う船、もう片側は同じ船が描かれた航路に沿って港の灯台へ穏やかに進む様子。',
+    },
+    story: {
+      act1: {
+        kicker: '方法論 · 第一幕',
+        lead: '「完了」の意味と境界線を決めるのは人です。計画が意図を担い、エージェントが時間を担います。常時の監視も、二十分ごとの修正も不要です。',
+        deepLinkLabel: '方法論を読む',
+        deepLinkHref: '/methodology',
+      },
+      act2: {
+        kicker: '方法論 · 第二幕',
+        lead: '長いタスクはどんなモデルのコンテキストを埋め尽くします。詳細は失われ、エージェントはドリフトします。書かれた計画——原子タスク、検証ゲート、再開可能な状態こそが、周回ごとに立ち返る拠り所です。',
+        deepLinkLabel: 'コアループを見る',
+        deepLinkHref: '/methodology',
+      },
+      act3: {
+        kicker: '方法論 · 第三幕',
+        lead: '各タスクは受け入れ基準と、通過すべき検証を明記します。エージェントが「完了した気分」で終わることはできません。通過するか、タスクは開いたままです。',
+        deepLinkLabel: '仕様を読む',
+        deepLinkHref: '/spec',
+      },
+      act4: {
+        kicker: '方法論 · 第四幕',
+        lead: 'コンテキスト、ツール、ガードレール、状態は、どんなエージェントも読めるプレーンなファイルとしてリポジトリに宿ります。ロックインも外部ブレインもなく、コンテキストのリセットをまたいで生き残ります。',
+        deepLinkLabel: 'オンボーディングの生成物を見る',
+        deepLinkHref: '/quickstart',
+      },
+      act5: {
+        kicker: 'メソッド · 第五幕',
+        lead: 'コンテキストはエージェントにとって最も希少な資源です。ハーネスは段階的に読み込み、変更された箇所だけを検証し、タスクごとに学習します——長期の作業でも経済的に続けられる設計です。',
+        deepLinkLabel: '方法論を読む',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: '推論にもとづくオンボーディング',
@@ -133,7 +171,7 @@ export const ja: SiteTranslations = {
         {
           title: 'DWP スキルをインストールし、.dwp/ を整備する',
           description:
-            'Deep Work Plan スキルを組み込み、計画とドラフトのための gitignore された .dwp/ フォルダを作成します。その後、devcontainer サポートなどのオプトイン式アドオンを任意で重ねられます。',
+            'Deep Work Plan スキルを組み込み、計画とドラフトのための gitignore された .dwp/ フォルダを作成し、必須の AI Diff Reviewer ローカルレビューをインストールします。その後、devcontainer サポートなどのオプトイン式アドオンを任意で重ねられます。',
         },
       ],
     },
@@ -563,7 +601,7 @@ export const ja: SiteTranslations = {
     eyebrow: 'キット',
     title: 'キット',
     intro:
-      'この方法論を実行するために必要なものすべて。スキルとそのサブスキル、スラッシュコマンド、エージェントアダプター、オンボーディングプリセット、オプトイン式アドオン、そして実例つきのウォークスルー。',
+      'この方法論を実行するために必要なものすべて。スキルとそのサブスキル、スラッシュコマンド、エージェントアダプター、オンボーディングプリセット、必須のローカルレビューとオプトイン式アドオン、そして実例つきのウォークスルー。',
     groups: {
       command: {
         title: 'サブスキルとコマンド',
@@ -587,7 +625,7 @@ export const ja: SiteTranslations = {
       addon: {
         title: 'アドオン（オプトイン）',
         description:
-          'onboard フローがリポジトリに重ねられる任意の機能。AI-first の基本構成には決して含まれません。',
+          'onboard フローがリポジトリに重ねる機能。必須の AI Diff Reviewer ローカルレビューと、AI-first の基本構成には決して含まれない四つの任意アドオンです。',
       },
     },
     viewDetail: '詳細を見る',
@@ -646,7 +684,7 @@ export const ja: SiteTranslations = {
       {
         title: 'キットを進化させ、アドオンを受け入れる',
         description:
-          '/skill-create と /agent-create（author サブスキル）を使って、スタックに合ったスキル、エージェント、コマンドを育てます。オンボーディングは五つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）も提案します。適合する場合にのみ受け入れてください。',
+          '/skill-create と /agent-create（author サブスキル）を使って、スタックに合ったスキル、エージェント、コマンドを育てます。オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、四つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system）も提案します。適合する場合にのみ受け入れてください。',
       },
       {
         title: '計画して実行する',
@@ -717,14 +755,14 @@ export const ja: SiteTranslations = {
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'オプトインのアドオンを受け入れる',
+        title: 'ローカルレビューとオプトインのアドオン',
         description:
-          'オンボーディングは五つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）を提案します。適合する場合にのみ受け入れてください。アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
+          'オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、四つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system）を提案します。適合する場合にのみ受け入れてください。任意アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
       },
       {
         title: '計画して実行する',
         description:
-          '/dwp-create で Deep Work Plan を生成し、/dwp-execute で実行し、作業の進行に応じて /dwp-status、/dwp-refine、/dwp-resume、/dwp-verify を使います。各計画には番号つきのタスク、検証ゲート、完了プロトコルが含まれ、三つの必須最終タスク（セキュリティレビュー、スキル＆エージェントの発見、エグゼクティブレポート）で締めくくられます。',
+          '/dwp-create で Deep Work Plan を生成し、/dwp-execute で実行し、作業の進行に応じて /dwp-status、/dwp-refine、/dwp-resume、/dwp-verify を使います。各計画には番号つきのタスク、検証ゲート、完了プロトコルが含まれ、ちょうど一つの必須 Final Review（セキュリティパス、最終状態の検証、スキル決定の突き合わせ）で締めくくられます。Executive Report はリクエスト時に利用できます。',
       },
       {
         title: '適合性を検証する',
@@ -743,6 +781,461 @@ export const ja: SiteTranslations = {
       { label: '仕様', href: '/spec' },
       { label: 'キット', href: '/kit' },
     ],
+  },
+
+  faqPage: {
+    meta: {
+      title: 'よくある質問 — Deep Work Plan',
+      description:
+        'Deep Work Plan について寄せられるよくある質問への短い回答集：この方法論が実際に何をするのか、検証ゲートと中断からの再開の仕組み、他のツールとの位置づけと比較、そしてリポジトリへの導入方法まで、各トピックを詳しく扱うページへのリンクとともに紹介します。',
+    },
+    eyebrow: 'FAQ',
+    title: 'よくある質問',
+    intro:
+      'Deep Work Plan についてよく聞かれる質問への短い回答集です。それぞれ、詳しく掘り下げたページへのリンクを備えています。',
+    tocTitle: 'このページの目次',
+    groups: [
+      {
+        id: 'what',
+        title: 'Deep Work Plan とは',
+        items: [
+          {
+            id: 'what-is-it',
+            question: 'Deep Work Plan は実際に何をするのですか？',
+            answer:
+              'Deep Work Plan はリポジトリを、コーディングエージェントが長い作業を確実に実行できる構造化された環境に変えます。エージェントスキルとしてインストールされ、リポジトリのオンボーディングを一度だけ実行します（`AGENTS.md` のインデックス、`docs/` ツリー、スキルとコマンドの `.agents/` キット、gitignore された `.dwp/` 出力領域）。以後、あらゆる目標が計画になります。原子タスクの一つひとつに受け入れ基準と検証ゲートが伴い、一つずつ実行され、通過するたびにコミットされ、どのエージェントでもディスクから再開できます。計画は、セキュリティを監査し最終状態を検証する Final Review で締めくくられます。方法論は MIT ライセンスで、リポジトリを読めるどのコーディングエージェントとも動作します。',
+            linkLabel: '方法論を読む',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'who-is-it-for',
+            question: '誰のためのものですか？',
+            answer:
+              '本物の複数ステップの作業をコーディングエージェントに任せ、それをやり遂げてほしい開発者とチームのためのものです。タスクが複数のセッション、複数のファイル群、複数のエージェントにまたがるとき。チームメイトがエージェントの停止地点から引き継げる必要があるとき。あるいは「完了」が「エージェントがそう言った」ではなく「検証済み」を意味しなければならないときに適合します。一行修正に計画は不要であり、方法論も自らそう述べています。比例リゴーの規則は、代わりにインラインの目標・基準・ゲートを推奨します。',
+            linkLabel: 'クイックスタート',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'is-it-a-tool',
+            question: 'ツール、フレームワーク、それとも方法論のどれですか？',
+            answer:
+              'インストール可能なスキルとしてパッケージされた方法論です。サーバーも、アカウントも、独自のフォーマットも、すでに使っているコーディングエージェント以外のランタイムもありません。インストールされるのは、エージェントが読む指示、コンテキスト検出と適合性チェックのための小さなシェルスクリプト群、そしてリポジトリが採用する規約です。計画が生成するすべてはリポジトリ内の Markdown と JSON であり、ツールなしで読めます。',
+            linkLabel: '仕様を読む',
+            linkPath: '/spec',
+          },
+          {
+            id: 'which-agents',
+            question: 'どのコーディングエージェントで動作しますか？',
+            answer:
+              'リポジトリのファイルを読めるエージェントすべてです。スキルはオープンな Agent Skills 標準と `AGENTS.md` 規約に従うため、Claude Code、Codex、Cursor、Gemini CLI、GitHub Copilot などが、通常のスキルと指示の読み込みを通じて取り込みます。方法論自身の評価では、あるベンダーのエージェントが開始した計画を別ベンダーのエージェントが再開する様子が双方向で示されています。インストール対応状況と挙動の証拠はエージェントごとに互換性マトリクスへ列挙され、両者が混同されることはありません。',
+            linkLabel: 'キットを見る',
+            linkPath: '/kit',
+          },
+          {
+            id: 'what-is-installed',
+            question: 'What exactly gets installed, and where?',
+            answer:
+              'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles AGENTS.md, docs/, .agents/ and the gitignored .dwp/ workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
+            linkLabel: 'See the adoption flow',
+            linkPath: '/init',
+          },
+          {
+            id: 'requires-git',
+            question: 'Does Deep Work Plan require Git?',
+            answer:
+              'Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including state.json checkpoints and gate records, is required so recovery does not depend on a chat transcript.',
+            linkLabel: 'Read about repository archetypes',
+            linkPath: '/spec/archetypes',
+          },
+          {
+            id: 'skill-plan-spec',
+            question:
+              'What is the difference between a skill, a plan and a product specification?',
+            answer:
+              'A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.',
+            linkLabel: 'Read the specification',
+            linkPath: '/spec/dwp-specification',
+          },
+        ],
+      },
+      {
+        id: 'how',
+        title: '計画の実行方法',
+        items: [
+          {
+            id: 'how-to-use',
+            question: 'どう使いますか？',
+            answer:
+              '三つのステップです。まず、コーディングエージェントに Deep Work Plan スキルをインストールします——最も速い方法は `npx skills add DailybotHQ/deepworkplan-skill`（またはスキルリポジトリをクローンして `./setup.sh` を実行）です。次に、リポジトリに一度オンボーディングし、エージェントに `AGENTS.md`、`docs/`、`.agents/` キット、gitignore された `.dwp/` 領域をあなたのスタックに適応させます：https://deepworkplan.com/init.md を指すか、`/deepworkplan-onboard` を実行します。第三に、薄いコマンドで計画と実行を行います：`/dwp-create <goal>` が計画を構築し、`/dwp-execute` が各ゲートに対してタスク単位で実行し、`/dwp-refine` がドラフトまたは進行中の計画を編集し、`/dwp-resume` が中断後に続行し、`/dwp-status` が実行せずに進捗を報告し、`/dwp-verify` が客観的な適合性レポートを生成します。`/` をインターセプトするエージェントは `#` を使うことが多いです（例：`#dwp-execute`）。アダプションエンドポイントとクイックスタートが、同じ経路をより詳しく説明します。',
+            linkLabel: 'クイックスタート',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'gates',
+            question:
+              '検証ゲートはどのように実装されていますか？人の承認は必要ですか？',
+            answer:
+              'ゲートは、エージェント自身が実行する実行可能なアサーションです。人の承認は実行の両端にあります。実行の前に人が計画を承認し、プルリクエストの時点で最終 diff をレビューし、その間の実行は自律的に行われます。すべてのタスクは具体的なコマンドを明記します。通常はリポジトリ自身の品質ゲートであり、タスクの変更対象面から選ばれます。変更された挙動とそのコンシューマーのテストから始まり、変更が共有されているか境界づけられない場合はスイート全体に広がります。タスクはそれらのコマンドが正常終了したときだけ完了とマークされ、挙動を変更するタスクはテストを拡張しなければなりません。失敗した場合、タスクはブロックとマークされ、エージェントは停止します。',
+            linkLabel: 'コアループ',
+            linkPath: '/methodology/02-core-loop',
+          },
+          {
+            id: 'stale-plan',
+            question:
+              '実行と実行の間に人がコードを変更しても、計画が古くならないのはなぜですか？',
+            answer:
+              '三つの面で防ぎます。第一に、タスクは編集ではなく挙動として書かれます。受け入れ基準はシステムが何をすべきかを述べるため、ファイルの改名や実装の差し替えで無効になりません。第二に、すべてのゲートは今のリポジトリに対して再実行されるため、壊れた前提は静かにドリフトするのではなく次の実行で明確に失敗し、その失敗こそがリファインの合図になります。第三に、ドキュメントの同期を保つことも作業の一部です。挙動を変更するタスクは、自分のゲートの内側で、それを記述するドキュメントとエージェント向けキットも更新します。すべての実行は、着手したときよりもエージェントにとって準備の整ったリポジトリを残すべきです。',
+            linkLabel: '方法論を読む',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'edit-mid-run',
+            question:
+              '実行の途中で計画を変更できますか？完了済みの作業は失われませんか？',
+            answer:
+              'はい。部分的に実行された計画をリファインすることは、第一級の操作です。タスク定義と実行状態は分けて保持されます。計画はディスク上のチェックリストと小さな状態ファイルであり、完了したことはタスク本文とは独立に記録され続けます。タスクが誤りだと判明した場合、エージェントは強行するのではなく、ブロックとマークして停止します。そのあとあなたが、まだ実行していないタスクを編集・並べ替え・分割・削除し、完了したタスクは完了のまま残ります。再開時にはディスクと実際のリポジトリから状態が再構築され、重要なゲートが再実行されるため、水面下で変わったものが見逃されることはありません。',
+            linkLabel: 'コアループ',
+            linkPath: '/methodology/02-core-loop',
+          },
+          {
+            id: 'drift',
+            question:
+              '計画に照らして作業をチェックし続けるのですか？それとも計画は最初に一度だけのものですか？',
+            answer:
+              '計画は継続的なチェックです。エージェントは一度に一つの小さなタスクだけを扱い、次に進む前に検証しなければならないため、迷えるのは三歩ではなく一歩です。すべてのタスクは受け入れ基準に加えて、それを証明する正確なコマンドを持ちます。進捗はタスクごとのステータスとともにリポジトリに書き込まれていくため、ドリフトはあなたにも、次のセッションにも、次のエージェントにも見えるようになります。Final Review を含め、すべてが検証されるまで計画は完了しません。正直な注意点として、方法論はエージェントが最初に弱い受け入れ基準を書くことまでは止められません。ただ、ドリフトを静かではなく見える形に変えます。',
+            linkLabel: 'コアループ',
+            linkPath: '/methodology/02-core-loop',
+          },
+          {
+            id: 'plan-evolution',
+            question:
+              '計画は一度生成されて手作業で保守されるのですか？それともコードとともに進化するのですか？',
+            answer:
+              'どちらでもありません。計画は目標から一度生成され、その後は作業の一部として保守されます。コード diff から書き直されないのは意図的です。コードを追いかけ続ける仕様は後追いの鏡になり、それはこの方法論が撲滅のために存在するドリフトそのものだからです。進化は意図的に行われます。ゲートは現在のリポジトリに対して再実行され、失敗するゲートはリファインを引き起こし、エージェントは実行中にそのリファインを実行します。あなたは事前に承認し、最後にレビューします。ドキュメントとテストは、その更新が各タスクのゲートの内側にあるため、構成上コードとともに進化します。',
+            linkLabel: '方法論を読む',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'resume',
+            question: 'セッションが途中で終わったらどうなりますか？',
+            answer:
+              '進捗はチャットではなくディスクにあります。README のチェックボックス、各タスクのログ、範囲が限られた作業インデックス、機械可読の状態ファイルがすべてのタスク境界で更新され、状態ファイルは計画された休止の前にチェックポイントを記録します。新しいセッション、あるいは別のエージェントが、そのコンパクトなインデックスを読み、リポジトリと git 履歴と突き合わせ、完了済みの作業をやり直すことなく最初の未完了タスクから続行します。中断された計画の作成すら復元できます。計画の識別情報と意図されたタスク一覧はどのタスクファイルより先に書き込まれるため、作成途中の計画は、推測に委ねられるのではなく、完了させるか破棄できるのです。',
+            linkLabel: 'コアループ',
+            linkPath: '/methodology/02-core-loop',
+          },
+          {
+            id: 'final-review',
+            question: 'Final Review とは何ですか？',
+            answer:
+              'すべての計画に課される、ただ一つの必須の締めタスクです。順に、計画の累積変更セット全体に対するセキュリティパス（AI Diff Reviewer スキルによる必須のローカル diff レビューを含み、重大な発見は修正されるか明示的に受け入れられるまで完了を阻止します）、最終状態の検証（最終コードに対するリポジトリの適用可能なテスト・リント・型チェック・フォーマットのスイート全体）、そして各タスクが記録したスキル決定の突き合わせです。その後エージェントは成果物・証拠・制限を報告し、Executive Report を一度だけ提案し、あなたが求めた場合にのみ生成します。',
+            linkLabel: '仕様を読む',
+            linkPath: '/spec/dwp-specification',
+          },
+          {
+            id: 'gate-fails',
+            question: 'What happens when a validation gate fails?',
+            answer:
+              'The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.',
+            linkLabel: 'Read the agent protocol',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'unattended-runs',
+            question: 'Can a plan run unattended overnight or in CI?',
+            answer:
+              'Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.',
+            linkLabel: 'Read the unattended protocol',
+            linkPath: '/spec/agent-protocol',
+          },
+        ],
+      },
+      {
+        id: 'compare',
+        title: '他のツールとの比較',
+        items: [
+          {
+            id: 'vs-sdd-tools',
+            question:
+              'Spec Kit、OpenSpec、Kiro といった仕様駆動ツールとどう違いますか？',
+            answer:
+              'これらは隣接する問題を解きます。仕様駆動ツールは、何を変更すべきかを捉えるのが得意です。仕様、要件、変更提案を繰り返し可能なかたちでまとめます。Deep Work Plan が扱うのは、エージェントがドリフトせずに何時間も実行し続ける方法です。オンボーディングされたハーネス、変更対象面から選ばれるタスクごとの検証ゲート、ディスク上の再開可能な状態、セキュリティパスを伴う必須の Final Review、そしてリポジトリ自身のための適合性チェッカーです。両者は組み合わせられます。仕様や変更提案が計画に流れ込む構成です。比較ページは、各ツール自身の言葉でケイパビリティを並べて示します。',
+            linkLabel: '比較を見る',
+            linkPath: '/compare',
+          },
+          {
+            id: 'vs-agent-frameworks',
+            question:
+              'BMAD、Superpowers、Get Shit Done、Gentle-AI といったエージェントワークフローのツールとどう違いますか？',
+            answer:
+              'それらのフレームワークは強い働き方をもたらします。ロール、原則、テストファーストのステップ、検証の習慣です。Deep Work Plan はどちらとも異なり、リポジトリに何が残り、何がチェックできるかに焦点を当てます。どのエージェントも初見で読めるハーネス、受け入れ基準とゲートを備えたタスクファイル、セッションを生き延びる状態、CI に優しい終了コードを持つ適合性チェッカー、そして各フローが読み込む指示バイト数の公開された計測です。構成上ツール非依存であり、コアループにサービスもプロバイダーもシークレットも追加しません。比較ページは、各アプローチがどこに組み込まれ、どこがオプションで、どこが対象外かを示します。Gentle-AI は隣接するカテゴリ——エージェントエコシステムのコンフィギュレータ——に属し、次の質問で扱います。 Gentle-AI は、すでにお使いのコーディングエージェントを設定します：セッションをまたぐ永続メモリ（Engram）、厳選されたスキル、ペルソナ、MCP サーバー、オプションの Spec-Driven Development、およびオプションのエビデンスベースのレビュー（Receipt-Driven Development）。各エージェントの設定ディレクトリに書き込み、計画の成果物を Engram、OpenSpec ファイル、または両方に保持できます。Deep Work Plan はリポジトリ自体にインストールされます——どのエージェントも初見で読めるハーネス、受け入れ基準とゲートを備えたタスクファイル、再開可能なディスク上の状態、CI に優しい終了コードを持つ適合性チェッカー、公開された指示バイト台帳——を、コアループにサービス、プロバイダー、シークレットを追加せずに提供します。両レイヤーは共存できます。Gentle-AI がエージェントを装備し、Deep Work Plan が長時間の作業をリポジトリ内で永続かつ検証可能にします。',
+            linkLabel: '比較を見る',
+            linkPath: '/compare',
+          },
+          {
+            id: 'vs-native-plan-mode',
+            question:
+              'エージェントの内蔵プランモードをそのまま使えばよいのでは？',
+            answer:
+              '内蔵プランモードは有用であり、Deep Work Plan も同じ基盤——`AGENTS.md` 規約とオープンな Agent Skills 標準——の上に築かれています。違いは、計画がどこに存在し、何がそれを強制するかです。ネイティブの計画は通常リポジトリの外にあり、セッションとともに失効します。Deep Work Plan は計画もその状態も証拠もリポジトリに書き込むため、別のエージェントやチームメイトが続きを実行でき、すべてのタスクが実行可能なゲートと記録されたログを持ちます。考えるためのエージェントのプランモードはそのまま使い、方法論がその上に永続的で検証可能な実行ループを加えます。',
+            linkLabel: '比較を見る',
+            linkPath: '/compare',
+          },
+        ],
+      },
+      {
+        id: 'adopt',
+        title: '導入',
+        items: [
+          {
+            id: 'install',
+            question:
+              'オンボーディングは私のリポジトリに何を書き込みますか？既存のファイルにも触れますか？',
+            answer:
+              'オンボーディングは非破壊的です。既存の `AGENTS.md`、`docs/`、`.agents/`、`CLAUDE.md` を検出し、上書きではなく調整し、何かを置き換える前には確認を求めます。実際のコマンドを備えた `AGENTS.md` インデックス、推論にもとづく `docs/` ツリー、モジュールごとのドキュメント、薄い `dwp-*` コマンドを備えた `.agents/` キット、gitignore された `.dwp/` 出力領域、検証済みのテストマップ、そして必須のローカルコードレビュー（AI Diff Reviewer スキルとリポジトリ仕立てのレビュー拡張）を書き込みます。その後セルフチェックと適合性チェッカーを実行するため、何が生成されたかを確認できます。より前のバージョンでオンボーディングされたリポジトリには、欠けているものだけを変更する対象を絞ったアップグレードが適用されます。',
+            linkLabel: '採用エンドポイント',
+            linkPath: '/init',
+          },
+          {
+            id: 'core-and-addons',
+            question:
+              'Can I use the core methodology without installing add-ons?',
+            answer:
+              'Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.',
+            linkLabel: 'Browse the add-ons',
+            linkPath: '/spec/addons',
+          },
+          {
+            id: 'no-test-toolchain',
+            question: 'What if my repository has no tests or linting yet?',
+            answer:
+              'DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.',
+            linkLabel: 'Read the agent protocol',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'cost',
+            question: '費用はいくらですか？効率はどのように測定されますか？',
+            answer:
+              '方法論とスキルは MIT ライセンスで無料です。中核のフローにサービスも API キーもテレメトリーもありません。効率は、各フローが読み込む指示バイト数として報告されます。スキルとともにコミットされたスクリプトによって計測され、評価台帳として公開され、増加は減少と同じようにはっきり報告されます。バイトの目録はそれらを立証しないため、トークンのパーセンテージやコスト削減として報告されることはありません。成果を適切に測定するため、事前登録された公開評価が計画されています。',
+            linkLabel: '信頼と開示',
+            linkPath: '/trust',
+          },
+        ],
+      },
+    ],
+    stillHaveQuestions: {
+      title: 'まだ質問がありますか？',
+      body: 'GitHub でディスカッションまたは Issue を開いてください。繰り返し寄せられる質問はこのページに追加されます。',
+      ctaLabel: 'GitHub で質問する',
+    },
+  },
+
+  comparePage: {
+    meta: {
+      title: 'Deep Work Plan と代替ツールの比較',
+      description:
+        'Deep Work Plan と仕様駆動開発ツール、エージェントワークフローフレームワーク、各ベンダー純正のプランモードとの関係を、どのツールもそのツール自身の言葉で整理して並べる比較ページです。すべての事実は公式ドキュメントに出所をたどれ、最終確認日付も明記しています。',
+    },
+    eyebrow: '比較',
+    title: 'Deep Work Plan と代替ツール',
+    intro:
+      '状況に合ったレイヤーを選んでください。各代替ツールはそのツール自身の言葉で記述され、すべての事実は公式ドキュメントにたどれ、ページは最終確認日を明記します。これはランキングではなく地図です。',
+    howToRead: {
+      title: 'このページの読み方',
+      body: '三つの値が各ケイパビリティを記述します。これらはケイパビリティがツールのどこにあるかを示すものであり、ツールの優劣を示すものではありません。',
+      values: {
+        builtIn: '組み込み',
+        optional: 'オプションまたは拡張経由',
+        notInScope: '対象外',
+      },
+    },
+    reviewedOnLabel: '最終確認',
+    alternativesTitle: '代替ツールをそれぞれ自身の言葉で',
+    officialSiteLabel: '公式サイト',
+    categories: {
+      methodology: '方法論',
+      sdd: '仕様駆動開発ツール',
+      agentFramework: 'エージェントワークフローフレームワーク',
+      aiNativeSdlc: 'AI-native SDLC',
+      vendorNative: 'ベンダー純正のプランモード',
+    },
+    matrix: {
+      title: 'ケイパビリティマトリクス',
+      caption:
+        'ツールごとに、各ケイパビリティがどこにあるか。組み込み、オプションまたは拡張経由、対象外のいずれか。公式ドキュメントに照らして確認しています。',
+      capabilityColumn: 'ケイパビリティ',
+    },
+    capabilities: {
+      toolAgnostic: {
+        label: 'どのコーディングエージェントでも動作',
+        help: '同じリポジトリファイルが Claude Code、Codex、Cursor、Gemini CLI などを駆動します。',
+      },
+      repoNativeHarness: {
+        label: 'エージェントハーネスをリポジトリに書き込む',
+        help: '指示、ドキュメント、スキル、コマンドは一つのツールの設定ではなくリポジトリに存在します。',
+      },
+      taskAcceptanceCriteria: {
+        label: 'タスクごとの受け入れ基準',
+        help: '各タスクが、完了とみなせる観察可能な条件を示します。',
+      },
+      perTaskGates: {
+        label: 'タスクごとの検証ゲート',
+        help: '各タスクが、触れたものから選ばれた、通過しなければならないコマンドを明記します。',
+      },
+      resumableState: {
+        label: 'ディスク上の再開可能な状態',
+        help: '進捗はセッションのリセットを生き延び、別のエージェントやチームメイトが引き取れます。',
+      },
+      finalReview: {
+        label: 'セキュリティパスを伴う必須の締めレビュー',
+        help: '変更セット全体のセキュリティレビューと最終状態の検証なしに、計画は完了できません。',
+      },
+      conformanceChecker: {
+        label: '実行可能な適合性チェッカー',
+        help: 'スクリプトが、CI に優しい終了コードで、リポジトリとその計画を標準に照らして検証します。',
+      },
+      instructionBudgetLedger: {
+        label: '公開された指示読み込みの計測',
+        help: '各フローが読み込むバイト数は、コミットされたスクリプトで計測され、上限とともに公開されます。',
+      },
+      onboardingScaffold: {
+        label: 'ドキュメントを足場に築くオンボーディング',
+        help: '初回の実行が、リポジトリのエージェント向けドキュメントとキットを書き出します。',
+      },
+      brownfieldSpecs: {
+        label: '既存システムのための生きた仕様',
+        help: '変更が、システムの成長していく仕様へとマージされるデルタとして記述されます。',
+      },
+    },
+    alternatives: {
+      dwp: {
+        name: 'Deep Work Plan',
+        whatItDoesWell:
+          'スキルとしてインストールされ、リポジトリをエージェントハーネスへとオンボーディングし、タスクごとの検証ゲート、ディスク上の状態、必須の Final Review とともに長期の計画を実行します。',
+        audience:
+          '複数セッションにわたる作業をコーディングエージェントに任せ、検証済みの完了を必要とする開発者とチーム。',
+      },
+      'github-spec-kit': {
+        name: 'GitHub Spec Kit',
+        whatItDoesWell:
+          '憲章、仕様、計画、タスクリストを通じて機能を実行可能な仕様に変え、五十を超えるコーディングエージェントと統合するスラッシュコマンドで駆動します。',
+        audience:
+          'すでに使っているエージェントの内側で、繰り返し可能な specify・plan・tasks・implement のワークフローを求めるチーム。',
+      },
+      openspec: {
+        name: 'OpenSpec',
+        whatItDoesWell:
+          '各変更を、デルタ仕様（追加・変更・削除）とシナリオ付き RFC 2119 要件を備えた提案として捉え、生きた仕様へとアーカイブします。',
+        audience:
+          '既存のシステムを扱い、仕様を一度に一つの変更ずつ育てたいチーム。',
+      },
+      'amazon-kiro': {
+        name: 'Amazon Kiro',
+        whatItDoesWell:
+          'エージェント的な IDE と CLI。仕様は EARS 形式の要件から設計へ、そしてタスクへと進み、ステアリングファイルとエディタのイベントで走るフックを備えます。',
+        audience:
+          'AWS 基盤のツールとともに、エディタに組み込まれた仕様駆動開発を求める開発者。',
+      },
+      'bmad-method': {
+        name: 'BMAD Method',
+        whatItDoesWell:
+          '専門化されたエージェントロール（分析、プロダクト、アーキテクチャ、開発、品質）からなるアジャイルフレームワークで、ブリーフ、要件、アーキテクチャドキュメント、ストーリーファイルを生成します。',
+        audience:
+          'ロールベースの作法を好み、エージェント作業に完全なアジャイルライフサイクルを求めるチーム。',
+      },
+      superpowers: {
+        name: 'Superpowers',
+        whatItDoesWell:
+          'ブレインストーミング、小さなテストファーストのステップでの計画、サブエージェントによる実行、完了前のレビューのためのスキルライブラリとワークフロー。',
+        audience:
+          'コーディングエージェントの内側で、規律あるテスト駆動の実行を求める開発者。',
+      },
+      'get-shit-done': {
+        name: 'Get Shit Done',
+        whatItDoesWell:
+          '.planning ディレクトリ、要件 ID、フェーズ計画、新しいコンテキストでの実行、宣言された must-have に対する検証パスを備えた計画システム。',
+        audience:
+          '儀式を少なくコンテキストエンジニアリングと検証を求める、個人開発者と小さなチーム。',
+      },
+      'gentle-ai': {
+        name: 'Gentle-AI',
+        whatItDoesWell:
+          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+        audience:
+          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+      },
+      'claude-ai-native-sdlc': {
+        name: "Claude's AI-native SDLC",
+        whatItDoesWell:
+          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+        audience:
+          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+      },
+      'vendor-native': {
+        name: 'ベンダー純正のプランモード',
+        whatItDoesWell:
+          'Claude Code、Codex、Cursor、Gemini CLI は、AGENTS.md と Agent Skills 標準に従うプランモード、指示ファイル、スキルを同梱しています。',
+        audience:
+          '方法論を採用せずに、単一のエージェントの内側で計画したいすべての人。',
+      },
+    },
+    aiNative: {
+      title: 'Where this fits in the AI-native SDLC',
+      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      shared:
+        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+      boundary:
+        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+      sourceLabel: "Read Claude's AI-native SDLC playbook",
+    },
+    profileCta: '比較を見る',
+    profile: {
+      backLabel: 'Back to all alternatives',
+      eyebrow: 'Alternative profile',
+      compareWith: 'Compared with Deep Work Plan',
+      fitTitle: 'Where it fits',
+      capabilityTitle: 'Capability snapshot',
+      sourceLabel: 'Official documentation',
+    },
+    dwpStrengths: {
+      title: 'Deep Work Plan がもたらすもの',
+      items: [
+        {
+          title: 'ツール非依存でリポジトリネイティブ',
+          body: 'ハーネスも計画もあなたのリポジトリ内のファイルであり、AGENTS.md と Agent Skills 標準に従うどのエージェントにも読めます。エージェントを乗り換えても計画は失われません。',
+        },
+        {
+          title: '各タスクが触れたものから選ばれる検証',
+          body: 'すべてのタスクが変更対象面を宣言し、変更された挙動とそのコンシューマーのテストを実行し、影響を境界づけられないときはスイート全体に広げます。選択されたテストがゼロで合格することはありません。',
+        },
+        {
+          title: 'セキュリティパスを伴う単一の Final Review',
+          body: '計画は、累積変更セットのセキュリティレビュー（diff の必須ローカルレビューを含む）と最終状態の検証で締めくくられます。重大な発見は完了を阻止します。',
+        },
+        {
+          title: 'セッションとエージェントを生き延びる状態',
+          body: 'README のチェックボックス、タスクログ、範囲が限られた作業インデックス、機械可読の状態ファイルがすべての境界で書き込まれるため、別のセッションや別のエージェントがディスクから続行します。中断された計画の作成すら復元できます。',
+        },
+        {
+          title: 'リポジトリ自身のための適合性チェッカー',
+          body: '読み取り専用のスクリプトが、ハーネスとすべての計画を仕様に照らして検証し、両方の計画ライフサイクルを理解し、CI に優しいコードで終了します。',
+        },
+        {
+          title: '計測され公開される指示読み込み',
+          body: 'コミットされたスクリプトが各フローの読み込むバイト数を計測し、増加を含む結果はバイトとして公開されます。トークンやコストのパーセンテージとして公開されることはありません。',
+        },
+      ],
+    },
+    honestLimits: {
+      title: '正直な限界',
+      body: 'Deep Work Plan には生きた仕様やデルタ仕様の仕組みがなく、その領域では OpenSpec などのツールが優れています。方法論の独立したベンチマークはまだ存在せず、事前登録された公開評価が計画されています。指示読み込みの台帳は読み込まれたバイト数を測るものであり、トークン、コスト、成果ではありません。',
+    },
+    correction: {
+      title: '正確さを保つためにご協力ください',
+      body: 'このページは表示された日付に確認し、要望に応じて修正されます。あなたのツールの記述が古い、あるいは不完全な場合は Issue を開いてください。修正します。',
+      ctaLabel: 'Issue を開く',
+    },
+    sourcesTitle: '情報源',
   },
 
   trustPage: {
