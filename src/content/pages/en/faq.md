@@ -36,6 +36,12 @@ Any agent that reads repository files. The skill follows the open Agent Skills s
 
 ## How a plan runs
 
+### How do I use it?
+
+Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx skills add DailybotHQ/deepworkplan-skill` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits a draft or an in-flight plan; `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.
+
+[Quickstart](https://deepworkplan.com/quickstart)
+
 ### How are the validation gates implemented? Do they need human sign-off?
 
 They are executable assertions the agent runs itself. Human sign-off bookends the run: a person approves the plan before execution and reviews the final diff at pull-request time; execution in between is autonomous. Every task names concrete commands, typically the repository's own quality gate, selected from the task's touched surface: the tests of the changed behavior and its consumers, widening to the full suite when the change is shared or cannot be bounded. A task is marked done only when those commands exit successfully, and tasks that change behavior must extend the tests. On failure the task is marked blocked and the agent stops.
@@ -84,11 +90,13 @@ The single mandatory closing task of every plan. In order: a security pass over 
 
 They solve adjacent problems. Spec-driven tools are excellent at capturing what should change: specifications, requirements and change proposals in a repeatable shape. Deep Work Plan is about how an agent executes for hours without drifting: the onboarded harness, per-task validation gates selected from the touched surface, on-disk resumable state, a mandatory Final Review with a security pass, and a conformance checker for the repository itself. The two can be combined, with a spec or change proposal feeding a plan. The comparison page lays the capabilities side by side, on each tool's own terms.
 
+Claude's AI-native SDLC playbook makes a related case for durable artifacts across Plan, Design, Build, Test, Deploy and Maintain; DWP covers the repository harness and execution loop, while continuous production evaluation remains a complementary practice.
+
 [See the comparison](https://deepworkplan.com/compare)
 
-### How is it different from agent workflow frameworks such as BMAD, Superpowers or Get Shit Done?
+### How is it different from agent workflow tools such as BMAD, Superpowers, Get Shit Done or Gentle-AI?
 
-Those frameworks bring strong working styles: roles, principles, test-first steps, verification habits. Deep Work Plan focuses on what stays in the repository and what can be checked: a harness any agent reads cold, task files with acceptance criteria and gates, state that survives a session, a conformance checker with a CI-friendly exit code, and a published measurement of how many instruction bytes each flow loads. It is tool-agnostic by construction and adds no service, provider or secret to the core loop. The comparison page shows where each approach is built in, optional or out of scope.
+Agent workflow frameworks such as BMAD, Superpowers and Get Shit Done bring strong working styles: roles, principles, test-first steps, verification habits. Gentle-AI sits nearby as an agent ecosystem configurator: it equips the coding agents you already use with persistent memory across sessions (Engram), curated skills, personas, MCP servers, optional Spec-Driven Development and optional evidence-based review (Receipt-Driven Development), writing into each agent\
 
 [See the comparison](https://deepworkplan.com/compare)
 

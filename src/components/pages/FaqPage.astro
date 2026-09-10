@@ -19,6 +19,21 @@ const prefix = getUrlPrefix(lang);
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
 const discussionsUrl = `${REPO_URLS.website}/discussions`;
 
+function faqItemHref(linkPath: string): string {
+  if (linkPath.startsWith('http://') || linkPath.startsWith('https://')) {
+    return linkPath;
+  }
+  return `${prefix}${linkPath}`;
+}
+
+function isExternalFaqLink(linkPath: string): boolean {
+  return linkPath.startsWith('http://') || linkPath.startsWith('https://');
+}
+
+function sectionKicker(index: number): string {
+  return String(index + 1).padStart(2, '0');
+}
+
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -53,25 +68,46 @@ const faqSchema = {
       <Lead class="mt-6">{f.intro}</Lead>
     </header>
 
+    <nav class="mt-12 max-w-3xl" aria-label={f.tocTitle}>
+      <Kicker>{f.tocTitle}</Kicker>
+      <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-3">
+        {
+          f.groups.map((group) => (
+            <li>
+              <a
+                href={`#faq-group-${group.id}`}
+                class="text-sm font-semibold underline decoration-1 underline-offset-4 transition hover:opacity-80"
+                style="color: var(--color-secondary);"
+              >
+                {group.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
     <Rule class="my-12" />
 
-    <div class="max-w-3xl space-y-14">
+    <div class="max-w-3xl space-y-20 md:space-y-24">
       {
-        f.groups.map((group) => (
+        f.groups.map((group, groupIndex) => (
           <section aria-labelledby={`faq-group-${group.id}`}>
+            <Kicker>{sectionKicker(groupIndex)}</Kicker>
             <h2
               id={`faq-group-${group.id}`}
-              class="font-display text-2xl font-semibold"
+              class="font-display mt-3 scroll-mt-28 text-2xl font-semibold"
               style="color: var(--color-ink);"
             >
               {group.title}
             </h2>
-            <div class="mt-4 border-t" style="border-color: var(--color-line);">
-              {group.items.map((item) => (
+            <div class="mt-6 border-t" style="border-color: var(--color-line);">
+              {group.items.map((item, itemIndex) => (
                 <details
                   id={`faq-${item.id}`}
-                  class="faq-item border-b"
+                  class="faq-item scroll-mt-28 border-b"
                   style="border-color: var(--color-line);"
+                  open={groupIndex === 0 && itemIndex === 0}
                 >
                   <summary class="faq-summary flex cursor-pointer items-start justify-between gap-4 py-4">
                     <span
@@ -98,9 +134,11 @@ const faqSchema = {
                     {item.linkPath && item.linkLabel && (
                       <p class="mt-3">
                         <a
-                          href={`${prefix}${item.linkPath}`}
+                          href={faqItemHref(item.linkPath)}
                           class="font-semibold underline decoration-1 underline-offset-4 transition hover:opacity-80"
-                          style="color: var(--color-ink);"
+                          style="color: var(--color-secondary);"
+                          target={isExternalFaqLink(item.linkPath) ? '_blank' : undefined}
+                          rel={isExternalFaqLink(item.linkPath) ? 'noopener noreferrer' : undefined}
                         >
                           {item.linkLabel}
                         </a>

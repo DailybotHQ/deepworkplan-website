@@ -34,7 +34,7 @@ export const zh: SiteTranslations = {
     faq: '常见问题',
     compare: '对比',
     resources: '资源',
-    resourcesDesc: '示例、对比、常见问题与信任',
+    resourcesDesc: '示例、信任、常见问题与对比',
     repo: {
       label: '源代码',
       website: '网站仓库',
@@ -782,6 +782,7 @@ export const zh: SiteTranslations = {
     title: '常见问题',
     intro:
       '关于 Deep Work Plan 最常见问题的简短解答，每一条都附有可深入了解的页面链接。',
+    tocTitle: '本页内容',
     groups: [
       {
         id: 'what',
@@ -825,6 +826,14 @@ export const zh: SiteTranslations = {
         id: 'how',
         title: '计划如何运行',
         items: [
+          {
+            id: 'how-to-use',
+            question: '如何使用？',
+            answer:
+              '三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx skills add DailybotHQ/deepworkplan-skill`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑草稿或进行中的计划；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。',
+            linkLabel: '快速开始',
+            linkPath: '/quickstart',
+          },
           {
             id: 'gates',
             question: '验证关卡是如何实现的？需要人工签署吗？',
@@ -900,9 +909,9 @@ export const zh: SiteTranslations = {
           {
             id: 'vs-agent-frameworks',
             question:
-              '它与 BMAD、Superpowers 或 Get Shit Done 等代理工作流框架有何不同？',
+              '它与 BMAD、Superpowers、Get Shit Done 或 Gentle-AI 等代理工作流工具有何不同？',
             answer:
-              '这些框架带来了成熟的工作风格：角色、原则、测试先行的步骤、验证的习惯。Deep Work Plan 聚焦于什么留在仓库里、什么可以被检查：任何代理都能冷启动读取的 harness、带验收标准与关卡的任务文件、能在会话结束后存续的状态、带 CI 友好退出码的符合性检查器，以及对每个流程加载多少指令字节的公开测量。它在构造上即是工具无关的，并且不向核心循环添加任何服务、提供商或密钥。对比页面标明了每种做法在何处内置、可选或不在范围内。',
+              '这些框架带来了成熟的工作风格：角色、原则、测试先行的步骤、验证的习惯。Deep Work Plan 与两者都不同，聚焦于什么留在仓库里、什么可以被检查：任何代理都能冷启动读取的 harness、带验收标准与关卡的任务文件、能在会话结束后存续的状态、带 CI 友好退出码的符合性检查器，以及对每个流程加载多少指令字节的公开测量。它在构造上即是工具无关的，并且不向核心循环添加任何服务、提供商或密钥。对比页面标明了每种做法在何处内置、可选或不在范围内。Gentle-AI 属于相邻的一类——代理生态系统配置器——下一题会专门说明。 Gentle-AI 配置您已经在用的编码代理：跨会话的持久记忆（Engram）、精选技能、人设、MCP 服务器、可选的 Spec-Driven Development，以及可选的基于证据的审查（Receipt-Driven Development）。它写入各代理的配置目录，并可将规划产物保存在 Engram、OpenSpec 文件中，或两者兼有。Deep Work Plan 则安装进仓库本身——任何代理都能冷启动读取的 harness、带验收标准与关卡的任务文件、可恢复的磁盘状态、带 CI 友好退出码的符合性检查器，以及已发布的指令字节台账——而不向核心循环添加任何服务、提供商或密钥。这两层可以并存：Gentle-AI 装备代理；Deep Work Plan 让长周期工作在仓库内持久且可核查。',
             linkLabel: '查看对比',
             linkPath: '/compare',
           },
@@ -972,6 +981,7 @@ export const zh: SiteTranslations = {
       methodology: '方法论',
       sdd: '规范驱动开发工具',
       agentFramework: '代理工作流框架',
+      aiNativeSdlc: 'AI-native SDLC',
       vendorNative: '厂商原生计划模式',
     },
     matrix: {
@@ -1069,12 +1079,44 @@ export const zh: SiteTranslations = {
         audience:
           '想要上下文工程与验证、又不想有太多仪式的独立开发者与小团队。',
       },
+      'gentle-ai': {
+        name: 'Gentle-AI',
+        whatItDoesWell:
+          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+        audience:
+          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+      },
+      'claude-ai-native-sdlc': {
+        name: "Claude's AI-native SDLC",
+        whatItDoesWell:
+          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+        audience:
+          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+      },
       'vendor-native': {
         name: '厂商原生计划模式',
         whatItDoesWell:
           'Claude Code、Codex、Cursor 与 Gemini CLI 都内置了计划模式，以及遵循 AGENTS.md 与 Agent Skills 标准的指令文件和技能。',
         audience: '希望在单个代理内部获得规划能力、而无需采纳一套方法论的人。',
       },
+    },
+    aiNative: {
+      title: 'Where this fits in the AI-native SDLC',
+      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      shared:
+        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+      boundary:
+        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+      sourceLabel: "Read Claude's AI-native SDLC playbook",
+    },
+    profileCta: '查看比较',
+    profile: {
+      backLabel: 'Back to all alternatives',
+      eyebrow: 'Alternative profile',
+      compareWith: 'Compared with Deep Work Plan',
+      fitTitle: 'Where it fits',
+      capabilityTitle: 'Capability snapshot',
+      sourceLabel: 'Official documentation',
     },
     dwpStrengths: {
       title: 'Deep Work Plan 带来什么',

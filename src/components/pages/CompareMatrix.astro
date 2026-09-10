@@ -9,6 +9,7 @@
  */
 import {
   ALTERNATIVES,
+  type AlternativeId,
   CAPABILITY_IDS,
   type CellValue,
 } from '@/lib/compare-data';
@@ -17,10 +18,16 @@ import { getTranslations } from '@/lib/translations';
 
 interface Props {
   lang: Language;
+  alternativeIds?: AlternativeId[];
 }
 
-const { lang } = Astro.props;
+const { lang, alternativeIds } = Astro.props;
 const c = getTranslations(lang).comparePage;
+const alternatives = alternativeIds
+  ? ALTERNATIVES.filter((alternative) =>
+      alternativeIds.includes(alternative.id)
+    )
+  : ALTERNATIVES;
 
 const CELL_GLYPH: Record<CellValue, string> = {
   'built-in': '✓',
@@ -54,7 +61,7 @@ function cellLabel(value: CellValue): string {
           {c.matrix.capabilityColumn}
         </th>
         {
-          ALTERNATIVES.map((alt) => (
+          alternatives.map((alt) => (
             <th
               scope="col"
               class:list={[
@@ -85,7 +92,7 @@ function cellLabel(value: CellValue): string {
                 {c.capabilities[capabilityId].help}
               </span>
             </th>
-            {ALTERNATIVES.map((alt) => {
+            {alternatives.map((alt) => {
               const value = alt.cells[capabilityId];
               return (
                 <td

@@ -36,6 +36,12 @@ Bất kỳ agent nào đọc được các tệp của repository. Skill tuân t
 
 ## Cách một kế hoạch vận hành
 
+### Tôi dùng nó như thế nào?
+
+Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx skills add DailybotHQ/deepworkplan-skill` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa bản nháp hoặc kế hoạch đang chạy; `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.
+
+[Khởi động nhanh](https://deepworkplan.com/vi/quickstart)
+
 ### Các cổng kiểm chứng được triển khai thế nào? Chúng có cần con người phê duyệt không?
 
 Chúng là các assertion thực thi được, do chính agent chạy. Việc phê duyệt của con người chỉ đóng khung hai đầu lượt chạy: một người duyệt kế hoạch trước khi thực thi và xem xét diff cuối cùng lúc mở pull request; phần thực thi ở giữa là tự chủ. Mỗi tác vụ nêu tên các lệnh cụ thể, thường là chính cổng chất lượng của repository, được chọn từ Touched Surface của tác vụ: các test của hành vi bị thay đổi và các bên tiêu thụ nó, mở rộng ra toàn bộ bộ test khi thay đổi dùng chung hoặc không thể giới hạn. Một tác vụ chỉ được đánh dấu xong khi các lệnh đó thoát thành công, và các tác vụ thay đổi hành vi phải mở rộng test. Khi thất bại, tác vụ được đánh dấu bị chặn và agent dừng lại.
@@ -86,9 +92,9 @@ Chúng giải quyết các vấn đề kề nhau. Các công cụ theo đặc t�
 
 [Xem trang so sánh](https://deepworkplan.com/vi/compare)
 
-### Nó khác các framework quy trình agent như BMAD, Superpowers hay Get Shit Done thế nào?
+### Nó khác các công cụ quy trình agent như BMAD, Superpowers, Get Shit Done hay Gentle-AI thế nào?
 
-Những framework đó mang các phong cách làm việc mạnh: vai trò, nguyên tắc, các bước test trước, thói quen xác minh. Deep Work Plan tập trung vào cái gì ở lại trong repository và cái gì kiểm tra được: một harness mà bất kỳ agent nào cũng đọc hiểu được khi mới vào, các tệp tác vụ với tiêu chí chấp nhận và cổng, trạng thái sống sót qua phiên, một công cụ kiểm tra tính tuân thủ với mã thoát thân thiện CI, và một phép đo công khai về số byte hướng dẫn mà mỗi luồng tải. Nó độc lập với công cụ ngay từ cấu trúc và không thêm dịch vụ, nhà cung cấp hay bí mật nào vào vòng lặp lõi. Trang so sánh cho thấy mỗi cách tiếp cận nằm ở đâu: tích hợp sẵn, tùy chọn hay ngoài phạm vi.
+Những framework đó mang các phong cách làm việc mạnh: vai trò, nguyên tắc, các bước test trước, thói quen xác minh. Deep Work Plan khác cả hai và tập trung vào cái gì ở lại trong repository và cái gì kiểm tra được: một harness mà bất kỳ agent nào cũng đọc hiểu được khi mới vào, các tệp tác vụ với tiêu chí chấp nhận và cổng, trạng thái sống sót qua phiên, một công cụ kiểm tra tính tuân thủ với mã thoát thân thiện CI, và một phép đo công khai về số byte hướng dẫn mà mỗi luồng tải. Nó độc lập với công cụ ngay từ cấu trúc và không thêm dịch vụ, nhà cung cấp hay bí mật nào vào vòng lặp lõi. Trang so sánh cho thấy mỗi cách tiếp cận nằm ở đâu: tích hợp sẵn, tùy chọn hay ngoài phạm vi. Gentle-AI cấu hình các coding agent bạn đã dùng: bộ nhớ bền vững qua phiên (Engram), kỹ năng được chọn lọc, persona, máy chủ MCP, Spec-Driven Development tùy chọn, và đánh giá dựa trên bằng chứng tùy chọn (Receipt-Driven Development). Nó ghi vào thư mục cấu hình của từng agent và có thể lưu các artifact lập kế hoạch trong Engram, trong tệp OpenSpec, hoặc cả hai. Deep Work Plan cài vào chính repository — một harness mà bất kỳ agent nào cũng đọc hiểu được khi mới vào, các tệp tác vụ với tiêu chí chấp nhận và cổng, trạng thái trên đĩa có thể tiếp tục, một công cụ kiểm tra tính tuân thủ với mã thoát thân thiện CI, và sổ cái byte hướng dẫn đã công bố — mà không thêm dịch vụ, nhà cung cấp hay bí mật nào vào vòng lặp lõi. Hai tầng có thể đi cùng nhau: Gentle-AI trang bị agent; Deep Work Plan giúp công việc dài bền vững và kiểm tra được trong repo.
 
 [Xem trang so sánh](https://deepworkplan.com/vi/compare)
 

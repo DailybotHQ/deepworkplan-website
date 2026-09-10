@@ -34,7 +34,7 @@ export const th: SiteTranslations = {
     faq: 'คำถามที่พบบ่อย',
     compare: 'เปรียบเทียบ',
     resources: 'ทรัพยากร',
-    resourcesDesc: 'ตัวอย่าง การเปรียบเทียบ คำถามที่พบบ่อย และความน่าเชื่อถือ',
+    resourcesDesc: 'ตัวอย่าง ความน่าเชื่อถือ คำถามที่พบบ่อย และการเปรียบเทียบ',
     repo: {
       label: 'ซอร์สโค้ด',
       website: 'ที่เก็บโค้ดเว็บไซต์',
@@ -706,6 +706,7 @@ export const th: SiteTranslations = {
     title: 'คำถามที่พบบ่อย',
     intro:
       'คำตอบสั้น ๆ สำหรับสิ่งที่ผู้คนถามมากที่สุดเกี่ยวกับ Deep Work Plan โดยแต่ละข้อมีลิงก์ไปยังหน้าที่ลงลึกกว่านั้น',
+    tocTitle: 'ในหน้านี้',
     groups: [
       {
         id: 'what',
@@ -749,6 +750,14 @@ export const th: SiteTranslations = {
         id: 'how',
         title: 'แผนทำงานอย่างไร',
         items: [
+          {
+            id: 'how-to-use',
+            question: 'ใช้งานอย่างไร?',
+            answer:
+              'สามขั้นตอน ขั้นแรก ติดตั้ง Deep Work Plan skill ลงใน coding agent ของคุณ——เส้นทางที่เร็วที่สุดคือ `npx skills add DailybotHQ/deepworkplan-skill` (หรือ clone skill repo แล้วรัน `./setup.sh`) ขั้นที่สอง onboard repository ครั้งเดียว เพื่อให้ agent ปรับ `AGENTS.md`, `docs/`, ชุด `.agents/` และพื้นที่ `.dwp/` ที่ถูก gitignore ให้เข้ากับสแต็กของคุณ: ชี้ไปที่ https://deepworkplan.com/init.md หรือรัน `/deepworkplan-onboard` ขั้นที่สาม วางแผนและรันงานด้วยคำสั่งบาง ๆ: `/dwp-create <goal>` สร้างแผน; `/dwp-execute` รันทีละงานผ่านแต่ละ gate; `/dwp-refine` แก้ไขแบบร่างหรือแผนที่กำลังดำเนินอยู่; `/dwp-resume` ทำต่อหลังการหยุดชะงัก; `/dwp-status` รายงานความคืบหน้าโดยไม่รัน; `/dwp-verify` สร้างรายงานการสอดคล้องที่เป็นกลาง agent ที่ intercept `/` มักใช้ `#` แทน (เช่น `#dwp-execute`) adoption endpoint และเริ่มใช้งานเร็วอธิบายเส้นทางเดียวกันอย่างละเอียดยิ่งขึ้น',
+            linkLabel: 'เริ่มใช้งานเร็ว',
+            linkPath: '/quickstart',
+          },
           {
             id: 'gates',
             question: 'validation gate ทำงานอย่างไร และต้องมีมนุษย์อนุมัติหรือไม่?',
@@ -823,9 +832,9 @@ export const th: SiteTranslations = {
           {
             id: 'vs-agent-frameworks',
             question:
-              'มันต่างจากเฟรมเวิร์กขั้นตอนการทำงานของ agent อย่าง BMAD, Superpowers หรือ Get Shit Done อย่างไร?',
+              'มันต่างจากเครื่องมือขั้นตอนการทำงานของ agent อย่าง BMAD, Superpowers, Get Shit Done หรือ Gentle-AI อย่างไร?',
             answer:
-              'เฟรมเวิร์กเหล่านั้นนำสไตล์การทำงานที่แข็งแกร่งมาให้: บทบาท หลักการ ขั้นตอนแบบทดสอบก่อน และนิสัยการตรวจสอบ Deep Work Plan เน้นที่สิ่งที่อยู่ใน repository และตรวจสอบได้: harness ที่ agent ใดก็อ่านเข้าใจได้ทันที ไฟล์งานพร้อมเกณฑ์การยอมรับและ gate สถานะที่รอดข้ามเซสชัน ตัวตรวจสอบความสอดคล้องพร้อม exit code ที่เป็นมิตรกับ CI และการวัดที่เผยแพร่ว่าแต่ละโฟลว์โหลดคำสั่งกี่ไบต์ มันไม่ผูกกับเครื่องมือใดโดยการออกแบบ และไม่เพิ่มบริการ ผู้ให้บริการ หรือความลับใด ๆ เข้าไปในวงรอบหลัก หน้าเปรียบเทียบแสดงว่าแนวทางของแต่ละตัวมีในตัว เป็นตัวเลือก หรืออยู่นอกขอบเขตตรงไหน',
+              'เฟรมเวิร์กเหล่านั้นนำสไตล์การทำงานที่แข็งแกร่งมาให้: บทบาท หลักการ ขั้นตอนแบบทดสอบก่อน และนิสัยการตรวจสอบ Deep Work Plan ต่างจากทั้งสองและเน้นที่สิ่งที่อยู่ใน repository และตรวจสอบได้: harness ที่ agent ใดก็อ่านเข้าใจได้ทันที ไฟล์งานพร้อมเกณฑ์การยอมรับและ gate สถานะที่รอดข้ามเซสชัน ตัวตรวจสอบความสอดคล้องพร้อม exit code ที่เป็นมิตรกับ CI และการวัดที่เผยแพร่ว่าแต่ละโฟลว์โหลดคำสั่งกี่ไบต์ มันไม่ผูกกับเครื่องมือใดโดยการออกแบบ และไม่เพิ่มบริการ ผู้ให้บริการ หรือความลับใด ๆ เข้าไปในวงรอบหลัก หน้าเปรียบเทียบแสดงว่าแนวทางของแต่ละตัวมีในตัว เป็นตัวเลือก หรืออยู่นอกขอบเขตตรงไหน. Gentle-AI กำหนดค่า coding agent ที่คุณใช้อยู่แล้ว: หน่วยความจำถาวรข้ามเซสชัน (Engram) สกิลที่คัดเลือกแล้ว persona เซิร์ฟเวอร์ MCP Spec-Driven Development แบบเลือกได้ และการตรวจสอบแบบอิงหลักฐานแบบเลือกได้ (Receipt-Driven Development) มันเขียนลงในไดเรกทอรี config ของแต่ละ agent และสามารถเก็บ artifacts ของการวางแผนใน Engram ในไฟล์ OpenSpec หรือทั้งสองอย่าง Deep Work Plan ติดตั้งลงใน repository เอง — harness ที่ agent ใดก็อ่านเข้าใจได้ทันที ไฟล์งานพร้อมเกณฑ์การยอมรับและ gate สถานะบนดิสก์ที่กดต่อได้ ตัวตรวจสอบความสอดคล้องพร้อม exit code ที่เป็นมิตรกับ CI และบัญชี instruction byte ที่เผยแพร่ — โดยไม่เพิ่มบริการ ผู้ให้บริการ หรือความลับใด ๆ เข้าไปในวงรอบหลัก ทั้งสองชั้นสามารถอยู่ร่วมกันได้: Gentle-AI ติดอาวุธให้ agent ส่วน Deep Work Plan ทำให้งานยาว ๆ คงอยู่และตรวจสอบได้ภายใน repo',
             linkLabel: 'ดูการเปรียบเทียบ',
             linkPath: '/compare',
           },
@@ -896,6 +905,7 @@ export const th: SiteTranslations = {
       methodology: 'ระเบียบวิธี',
       sdd: 'เครื่องมือพัฒนาแบบขับเคลื่อนด้วยสเปก',
       agentFramework: 'เฟรมเวิร์กขั้นตอนการทำงานของ agent',
+      aiNativeSdlc: 'AI-native SDLC',
       vendorNative: 'โหมดวางแผนในตัวของผู้จัดจำหน่าย',
     },
     matrix: {
@@ -994,6 +1004,20 @@ export const th: SiteTranslations = {
         audience:
           'นักพัฒนาอิสระและทีมเล็กที่ต้องการ context engineering และการตรวจสอบโดยมีพิธีกรรมน้อย',
       },
+      'gentle-ai': {
+        name: 'Gentle-AI',
+        whatItDoesWell:
+          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+        audience:
+          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+      },
+      'claude-ai-native-sdlc': {
+        name: "Claude's AI-native SDLC",
+        whatItDoesWell:
+          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+        audience:
+          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+      },
       'vendor-native': {
         name: 'Vendor-native plan modes',
         whatItDoesWell:
@@ -1001,6 +1025,24 @@ export const th: SiteTranslations = {
         audience:
           'ทุกคนที่ต้องการการวางแผนภายใน agent เดียว โดยไม่ต้องรับระเบียบวิธีเพิ่มเติม',
       },
+    },
+    aiNative: {
+      title: 'Where this fits in the AI-native SDLC',
+      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      shared:
+        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+      boundary:
+        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+      sourceLabel: "Read Claude's AI-native SDLC playbook",
+    },
+    profileCta: 'ดูการเปรียบเทียบ',
+    profile: {
+      backLabel: 'Back to all alternatives',
+      eyebrow: 'Alternative profile',
+      compareWith: 'Compared with Deep Work Plan',
+      fitTitle: 'Where it fits',
+      capabilityTitle: 'Capability snapshot',
+      sourceLabel: 'Official documentation',
     },
     dwpStrengths: {
       title: 'สิ่งที่ Deep Work Plan นำมา',

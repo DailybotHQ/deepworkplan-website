@@ -1,0 +1,15 @@
+---
+import CompareDetailPage from '@/components/pages/CompareDetailPage.astro';
+import type { AlternativeId } from '@/lib/compare-data';
+import { ALTERNATIVES } from '@/lib/compare-data';
+
+export function getStaticPaths() {
+  return ALTERNATIVES.map((alternative) => ({
+    params: { slug: alternative.id },
+  }));
+}
+
+const { slug } = Astro.params as { slug: AlternativeId };
+---
+
+<CompareDetailPage lang="en" alternativeId={slug} />

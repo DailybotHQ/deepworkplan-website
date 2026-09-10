@@ -36,6 +36,12 @@ Z każdym agentem, który czyta pliki repozytorium. Skill podąża za otwartym s
 
 ## Jak działa plan
 
+### Jak z tego korzystać?
+
+Trzy kroki. Najpierw zainstaluj skill Deep Work Plan w swoim agencie kodującym — najszybsza ścieżka to `npx skills add DailybotHQ/deepworkplan-skill` (lub sklonuj repozytorium skilla i uruchom `./setup.sh`). Następnie jednorazowo wprowadź repozytorium do onboardingu, aby agent dostosował `AGENTS.md`, `docs/`, zestaw `.agents/` i obszar `.dwp/` ignorowany przez git do twojego stacku: wskaż https://deepworkplan.com/init.md lub uruchom `/deepworkplan-onboard`. Na koniec planuj i wykonuj pracę za pomocą lekkich poleceń: `/dwp-create <goal>` buduje plan; `/dwp-execute` uruchamia go zadanie po zadaniu wobec każdej bramki; `/dwp-refine` edytuje szkic lub plan w toku; `/dwp-resume` kontynuuje po przerwie; `/dwp-status` raportuje postęp bez wykonywania; `/dwp-verify` tworzy obiektywny raport zgodności. Agenci przechwytujący `/` często używają zamiast tego `#` (na przykład `#dwp-execute`). Endpoint adopcji i szybki start przechodzą tę samą ścieżkę bardziej szczegółowo.
+
+[Szybki start](https://deepworkplan.com/pl/quickstart)
+
 ### Jak zaimplementowane są bramki walidacji? Czy wymagają zatwierdzenia przez człowieka?
 
 To wykonywalne asercje, które agent uruchamia sam. Zatwierdzenie przez człowieka ramuje przebieg: osoba zatwierdza plan przed wykonaniem i przegląda końcowy diff przy pull requeście; wykonanie między tymi punktami jest autonomiczne. Każde zadanie wymienia konkretne polecenia, zwykle własną bramkę jakości repozytorium, wybrane z dotkniętej powierzchni zadania: testy zmienionego zachowania i jego konsumentów, rozszerzone do pełnej suity, gdy zmiana jest współdzielona lub nie da się jej ograniczyć. Zadanie jest oznaczone jako ukończone tylko wtedy, gdy te polecenia zakończą się sukcesem, a zadania zmieniające zachowanie muszą rozszerzyć testy. Przy niepowodzeniu zadanie jest oznaczone jako zablokowane i agent się zatrzymuje.
@@ -86,9 +92,9 @@ Rozwiązują sąsiednie problemy. Narzędzia spec-driven doskonale uchwytują, c
 
 [Zobacz porównanie](https://deepworkplan.com/pl/compare)
 
-### Czym różni się od frameworków workflow agentów, takich jak BMAD, Superpowers czy Get Shit Done?
+### Czym różni się od narzędzi workflow agentów, takich jak BMAD, Superpowers, Get Shit Done czy Gentle-AI?
 
-Te frameworki wnoszą silne style pracy: role, zasady, kroki test-first, nawyki weryfikacji. Deep Work Plan koncentruje się na tym, co zostaje w repozytorium i co da się sprawdzić: harness, który każdy agent czyta od zera, pliki zadań z kryteriami akceptacji i bramkami, stan przetrwający sesję, sprawdzacz zgodności z kodem wyjścia przyjaznym dla CI i opublikowany pomiar liczby bajtów instrukcji ładowanych przez każdy przepływ. Jest z definicji niezależny od narzędzi i nie dodaje do pętli rdzeniowej usługi, dostawcy ani sekretu. Strona porównania pokazuje, gdzie każde podejście jest wbudowane, opcjonalne lub poza zakresem.
+Te frameworki wnoszą silne style pracy: role, zasady, kroki test-first, nawyki weryfikacji. Deep Work Plan różni się od obu i koncentruje się na tym, co zostaje w repozytorium i co da się sprawdzić: harness, który każdy agent czyta od zera, pliki zadań z kryteriami akceptacji i bramkami, stan przetrwający sesję, sprawdzacz zgodności z kodem wyjścia przyjaznym dla CI i opublikowany pomiar liczby bajtów instrukcji ładowanych przez każdy przepływ. Jest z definicji niezależny od narzędzi i nie dodaje do pętli rdzeniowej usługi, dostawcy ani sekretu. Strona porównania pokazuje, gdzie każde podejście jest wbudowane, opcjonalne lub poza zakresem. Gentle-AI konfiguruje agentów kodujących, których już używasz: trwałą pamięć między sesjami (Engram), wyselekcjonowane skille, persony, serwery MCP, opcjonalne Spec-Driven Development oraz opcjonalny przegląd oparty na dowodach (Receipt-Driven Development). Zapisuje w katalogach konfiguracyjnych każdego agenta i może przechowywać artefakty planowania w Engram, w plikach OpenSpec albo w obu. Deep Work Plan instaluje się w samym repozytorium — harness, który każdy agent czyta od zera, pliki zadań z kryteriami akceptacji i bramkami, wznawialny stan na dysku, sprawdzacz zgodności z kodem wyjścia przyjaznym dla CI i opublikowany rejestr bajtów instrukcji — bez dodawania do pętli rdzeniowej usługi, dostawcy ani sekretu. Warstwy mogą współistnieć: Gentle-AI wyposaża agenta; Deep Work Plan sprawia, że długa praca jest trwała i weryfikowalna w repozytorium.
 
 [Zobacz porównanie](https://deepworkplan.com/pl/compare)
 

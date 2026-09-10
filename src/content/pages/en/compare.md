@@ -6,7 +6,7 @@ lastUpdated: 2026-09-10
 
 ## Deep Work Plan and the alternatives
 
-Pick the right layer for your situation. Each alternative is described on its own terms, every fact traces to its official documentation, and the page says when it was last reviewed. This is a map, not a ranking.
+Choose Deep Work Plan when long-horizon agent work needs to remain durable, portable and verifiable. The alternatives below clarify the tradeoffs: DWP puts the harness, plan, state and evidence in your repository so any agent can carry the work forward.
 
 ## How to read this page
 
@@ -68,7 +68,7 @@ Where each capability lives, per tool. Built in, optional or via extension, or n
 
 ## Honest limits
 
-Deep Work Plan has no living or delta specification mechanism; OpenSpec and similar tools are stronger there. No independent benchmark of the methodology exists yet; a pre-registered public evaluation is planned. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes.
+Deep Work Plan is spec-driven: every plan specifies the change through scope, acceptance criteria, validation gates and evidence. It does not currently maintain a canonical living or delta-based behavioral specification for each adopted system; OpenSpec is stronger when that system-level lifecycle is the primary need. You can combine the layers by feeding a spec or delta proposal into a DWP plan. No independent benchmark of the methodology exists yet; a pre-registered public evaluation is planned. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes.
 
 ## Help us keep this accurate
 

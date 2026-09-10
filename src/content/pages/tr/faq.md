@@ -36,6 +36,12 @@ Depo dosyalarını okuyan herhangi bir ajan. Skill, açık Agent Skills standard
 
 ## Bir plan nasıl çalışır
 
+### Nasıl kullanılır?
+
+Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx skills add DailybotHQ/deepworkplan-skill` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` bir taslağı veya devam eden bir planı düzenler; `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.
+
+[Hızlı başlangıç](https://deepworkplan.com/tr/quickstart)
+
 ### Doğrulama kapıları nasıl uygulanır? İnsan onayı gerekir mi?
 
 Yürütülebilir onaylamalardır ve ajan bunları kendisi çalıştırır. İnsan onayı çalışmayı iki uçtan çerçeveler: bir kişi yürütmeden önce planı onaylar ve pull request sırasında son diff'i inceler; aradaki yürütme otonomdur. Her görev, genellikle deponun kendi kalite kapısı olan somut komutları adlandırır; bunlar görevin dokunduğu yüzeyden seçilir: değişen davranışın testleri ve tüketicileri, değişiklik paylaşıldığında veya sınırlandırılamadığında tam suite'e genişletilir. Bir görev, yalnızca bu komutlar başarıyla çıktığında tamamlanmış sayılır ve davranışı değiştiren görevler testleri genişletmelidir. Başarısızlıkta görev engellenmiş olarak işaretlenir ve ajan durur.
@@ -86,9 +92,9 @@ Bitişik sorunları çözerler. Spec odaklı araçlar neyin değişmesi gerekti�
 
 [Karşılaştırmayı görün](https://deepworkplan.com/tr/compare)
 
-### BMAD, Superpowers veya Get Shit Done gibi ajan iş akışı çerçevelerinden nasıl farklıdır?
+### BMAD, Superpowers, Get Shit Done veya Gentle-AI gibi ajan iş akışı araçlarından nasıl farklıdır?
 
-Bu çerçeveler güçlü çalışma stilleri getirir: roller, ilkeler, test-first adımlar, doğrulama alışkanlıkları. Deep Work Plan, repoda ne kalır ve ne kontrol edilebilir odaklanır: soğuk okunabilen herhangi bir harness, kabul kriterleri ve kapılarla görev dosyaları, oturumu atlatan durum, CI-dostu çıkış kodlu uyumluluk denetleyicisi ve her akışın kaç talimat byte'ı yüklediğinin yayımlanmış ölçümü. Yapı gereği araçtan bağımsızdır ve core loop'a hizmet, sağlayıcı veya secret eklememez. Karşılaştırma sayfası her yaklaşımın yerleşik, isteğe bağlı veya kapsam dışı olduğu yerleri gösterir.
+Bu çerçeveler güçlü çalışma stilleri getirir: roller, ilkeler, test-first adımlar, doğrulama alışkanlıkları. Deep Work Plan ikisinden de farklıdır; repoda ne kalır ve ne kontrol edilebilir odaklanır: soğuk okunabilen herhangi bir harness, kabul kriterleri ve kapılarla görev dosyaları, oturumu atlatan durum, CI-dostu çıkış kodlu uyumluluk denetleyicisi ve her akışın kaç talimat byte’ı yüklediğinin yayımlanmış ölçümü. Yapı gereği araçtan bağımsızdır ve core loop’a hizmet, sağlayıcı veya secret eklememez. Karşılaştırma sayfası her yaklaşımın yerleşik, isteğe bağlı veya kapsam dışı olduğu yerleri gösterir. Gentle-AI, halihazırda kullandığınız kodlama ajanlarını yapılandırır: oturumlar arasında kalıcı bellek (Engram), seçilmiş beceriler, persona'lar, MCP sunucuları, isteğe bağlı Spec-Driven Development ve isteğe bağlı kanıta dayalı inceleme (Receipt-Driven Development). Her ajanın yapılandırma dizinlerine yazır ve planlama çıktılarını Engram'da, OpenSpec dosyalarında veya her ikisinde tutabilir. Katmanlar bir arada durabilir: Gentle-AI ajana donanım sağlar; Deep Work Plan uzun işi repoda kalıcı ve doğrulanabilir kılar.
 
 [Karşılaştırmayı görün](https://deepworkplan.com/tr/compare)
 

@@ -30,7 +30,7 @@ export const es: SiteTranslations = {
     faq: 'FAQ',
     compare: 'Comparativa',
     resources: 'Recursos',
-    resourcesDesc: 'Ejemplos, comparativa, FAQ y confianza',
+    resourcesDesc: 'Ejemplos, confianza, FAQ y comparativa',
     repo: {
       label: 'Código fuente',
       website: 'Repositorio del sitio web',
@@ -785,6 +785,7 @@ export const es: SiteTranslations = {
     title: 'Preguntas frecuentes',
     intro:
       'Respuestas breves a lo que más se pregunta sobre Deep Work Plan, cada una con un enlace a la página que entra en más detalle.',
+    tocTitle: 'En esta página',
     groups: [
       {
         id: 'what',
@@ -828,6 +829,14 @@ export const es: SiteTranslations = {
         id: 'how',
         title: 'Cómo se ejecuta un plan',
         items: [
+          {
+            id: 'how-to-use',
+            question: '¿Cómo lo uso?',
+            answer:
+              'Tres pasos. Primero, instala la skill Deep Work Plan en tu agente de código — la vía más rápida es `npx skills add DailybotHQ/deepworkplan-skill` (o clona el repositorio de la skill y ejecuta `./setup.sh`). Segundo, incorpora el repositorio una vez para que el agente adapte `AGENTS.md`, `docs/`, el kit `.agents/` y un área `.dwp/` ignorada por git a tu stack: apúntalo a https://deepworkplan.com/init.md, o ejecuta `/deepworkplan-onboard`. Tercero, planifica y ejecuta el trabajo con los comandos ligeros: `/dwp-create <goal>` construye un plan; `/dwp-execute` lo ejecuta tarea por tarea frente a cada puerta; `/dwp-refine` edita un borrador o un plan en curso; `/dwp-resume` continúa tras una interrupción; `/dwp-status` informa del progreso sin ejecutar; `/dwp-verify` produce un informe objetivo de conformidad. Los agentes que interceptan `/` suelen usar `#` en su lugar (por ejemplo `#dwp-execute`). El endpoint de adopción y el inicio rápido recorren el mismo camino con más detalle.',
+            linkLabel: 'Inicio rápido',
+            linkPath: '/quickstart',
+          },
           {
             id: 'gates',
             question:
@@ -900,16 +909,16 @@ export const es: SiteTranslations = {
             question:
               '¿En qué se diferencia de las herramientas guiadas por especificación como Spec Kit, OpenSpec o Kiro?',
             answer:
-              'Resuelven problemas adyacentes. Las herramientas guiadas por especificación son excelentes para capturar qué debe cambiar: especificaciones, requisitos y propuestas de cambio con una forma repetible. Deep Work Plan trata de cómo un agente ejecuta durante horas sin derivar: el harness incorporado en el repositorio, puertas de validación por tarea seleccionadas de la superficie tocada, estado reanudable en disco, un Final Review obligatorio con pase de seguridad y un comprobador de conformidad para el propio repositorio. Ambas cosas pueden combinarse, con una especificación o propuesta de cambio alimentando un plan. La página de comparación pone las capacidades una al lado de la otra, en los términos de cada herramienta.',
+              'Resuelven problemas adyacentes. Las herramientas guiadas por especificación son excelentes para capturar qué debe cambiar: especificaciones, requisitos y propuestas de cambio con una forma repetible. Deep Work Plan trata de cómo un agente ejecuta durante horas sin derivar: el harness incorporado en el repositorio, puertas de validación por tarea seleccionadas de la superficie tocada, estado reanudable en disco, un Final Review obligatorio con pase de seguridad y un comprobador de conformidad para el propio repositorio. Ambas cosas pueden combinarse, con una especificación o propuesta de cambio alimentando un plan. El playbook de Claude sobre el SDLC nativo de IA plantea una idea relacionada con artefactos duraderos entre Planificar, Diseñar, Construir, Probar, Desplegar y Mantener; DWP cubre el harness del repositorio y el bucle de ejecución, mientras que la evaluación continua en producción sigue siendo una práctica complementaria. La página de comparación pone las capacidades una al lado de la otra, en los términos de cada herramienta.',
             linkLabel: 'Ver la comparativa',
             linkPath: '/compare',
           },
           {
             id: 'vs-agent-frameworks',
             question:
-              '¿En qué se diferencia de los frameworks de flujo de trabajo para agentes como BMAD, Superpowers o Get Shit Done?',
+              '¿En qué se diferencia de herramientas de flujo de trabajo para agentes como BMAD, Superpowers, Get Shit Done o Gentle-AI?',
             answer:
-              'Esos frameworks aportan estilos de trabajo sólidos: roles, principios, pasos de prueba primero, hábitos de verificación. Deep Work Plan se centra en lo que permanece en el repositorio y en lo que puede comprobarse: un harness que cualquier agente lee sin contexto previo, archivos de tarea con criterios de aceptación y puertas, estado que sobrevive a una sesión, un comprobador de conformidad con un código de salida apto para CI y una medición publicada de cuántos bytes de instrucción carga cada flujo. Es agnóstico de la herramienta por construcción y no añade ningún servicio, proveedor ni secreto al bucle principal. La página de comparación muestra dónde cada enfoque las tiene integradas, opcionales o fuera del alcance.',
+              'Los frameworks de flujo de trabajo para agentes como BMAD, Superpowers y Get Shit Done aportan estilos de trabajo sólidos: roles, principios, pasos de prueba primero, hábitos de verificación. Gentle-AI pertenece a una categoría vecina como configurador del ecosistema de agentes: equipa los agentes de codificación que ya usas con memoria persistente entre sesiones (Engram), skills curadas, personas, servidores MCP, Spec-Driven Development opcional y revisión basada en evidencias opcional (Receipt-Driven Development), escribiendo en los directorios de configuración de cada agente. Deep Work Plan se diferencia de ambos: se centra en lo que permanece en el repositorio y en lo que puede comprobarse — un harness que cualquier agente lee sin contexto previo, archivos de tarea con criterios de aceptación y puertas, estado que sobrevive a una sesión, un comprobador de conformidad con un código de salida apto para CI y una medición publicada de cuántos bytes de instrucción carga cada flujo. Es agnóstico de la herramienta por construcción y no añade ningún servicio, proveedor ni secreto al bucle principal. Las capas pueden convivir: los frameworks y Gentle-AI dan forma a cómo trabaja el agente; Deep Work Plan hace que el trabajo largo sea duradero y comprobable dentro del repositorio. La página de comparación muestra dónde cada enfoque las tiene integradas, opcionales o fuera del alcance.',
             linkLabel: 'Ver la comparativa',
             linkPath: '/compare',
           },
@@ -964,10 +973,10 @@ export const es: SiteTranslations = {
     eyebrow: 'Comparativa',
     title: 'Deep Work Plan y las alternativas',
     intro:
-      'Elige la capa adecuada para tu situación. Cada alternativa se describe en sus propios términos, cada dato proviene de su documentación oficial y la página indica cuándo se revisó por última vez. Esto es un mapa, no una clasificación.',
+      'Elige Deep Work Plan cuando el trabajo de largo alcance con agentes deba seguir siendo duradero, portable y verificable. Esta guía responde las dudas que aparecen al comparar DWP con otras alternativas y aclara sus diferencias: DWP pone el harness, el plan, el estado y la evidencia en tu repositorio para que cualquier agente pueda continuar el trabajo.',
     howToRead: {
       title: 'Cómo leer esta página',
-      body: 'Tres valores describen cada capacidad. Indican dónde vive una capacidad en una herramienta, no qué tan buena es la herramienta.',
+      body: 'Tres valores describen cada capacidad. Indican dónde vive una capacidad en una herramienta, no qué tan buena es la herramienta. Una aclaración importante: las skills y los planes de DWP son especificaciones de procedimientos y cambios; la fila de especificaciones vivas del producto pregunta si una herramienta mantiene una descripción canónica del comportamiento actual del producto y fusiona deltas en ella.',
       values: {
         builtIn: 'Integrado',
         optional: 'Opcional o mediante extensión',
@@ -981,6 +990,7 @@ export const es: SiteTranslations = {
       methodology: 'Metodología',
       sdd: 'Herramientas de desarrollo guiado por especificación',
       agentFramework: 'Frameworks de flujo de trabajo para agentes',
+      aiNativeSdlc: 'SDLC nativo de IA',
       vendorNative: 'Modos de plan nativos del proveedor',
     },
     matrix: {
@@ -1027,8 +1037,8 @@ export const es: SiteTranslations = {
         help: 'Una primera ejecución escribe la documentación y el kit orientados a agentes del repositorio.',
       },
       brownfieldSpecs: {
-        label: 'Especificaciones vivas para sistemas existentes',
-        help: 'Los cambios se especifican como deltas que se fusionan en una especificación creciente del sistema.',
+        label: 'Especificaciones vivas del producto',
+        help: 'Una especificación canónica describe el comportamiento actual del producto, acepta deltas de cambio y se actualiza cuando cada cambio se implementa.',
       },
     },
     alternatives: {
@@ -1081,13 +1091,45 @@ export const es: SiteTranslations = {
         audience:
           'Desarrolladores en solitario y equipos pequeños que quieren ingeniería de contexto y verificación con poca ceremonia.',
       },
-      'vendor-native': {
-        name: 'Modos de plan nativos del proveedor',
+      'gentle-ai': {
+        name: 'Gentle-AI',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor y Gemini CLI incluyen modos de plan, archivos de instrucciones y skills que siguen los estándares AGENTS.md y Agent Skills.',
+          'Configura los agentes de código que ya usas con memoria persistente, skills curadas, servidores MCP, personas y Spec-Driven Development o Receipt-Driven Development opcionales.',
         audience:
-          'Cualquiera que quiera planificación dentro de un solo agente sin adoptar una metodología.',
+          'Para desarrolladores que quieren un ecosistema de agentes configurado, capaz de recordar el trabajo entre sesiones y producir evidencias cuando se necesitan.',
       },
+      'claude-ai-native-sdlc': {
+        name: 'SDLC nativo de IA de Claude',
+        whatItDoesWell:
+          'Un ciclo de seis etapas, desde Planificar y Diseñar hasta Construir, Probar, Desplegar y Mantener, con artefactos duraderos que pasan de una etapa a la siguiente.',
+        audience:
+          'Equipos que evalúan el playbook de entrega de software de extremo a extremo de Claude Code y su ciclo de feedback en producción.',
+      },
+      'vendor-native': {
+        name: 'Funciones nativas del agente (varían según el proveedor)',
+        whatItDoesWell:
+          'Los productos de agentes pueden ofrecer modos de plan, archivos de instrucciones y skills, pero el comportamiento exacto depende del proveedor, el cliente y la versión.',
+        audience:
+          'Para quienes quieren planificar dentro de un solo agente y aceptan un comportamiento específico del proveedor.',
+      },
+    },
+    aiNative: {
+      title: 'Dónde encaja en el SDLC nativo de IA',
+      body: 'El playbook de Claude sobre el SDLC nativo de IA describe un ciclo completo: Planificar, Diseñar, Construir, Probar, Desplegar y Mantener. Cada etapa deja un artefacto para la siguiente, mientras que el feedback de producción se convierte en nueva intención.',
+      shared:
+        'DWP comparte la idea de los artefactos duraderos: la intención se convierte en un plan, las tareas dejan evidencia y el repositorio sigue siendo legible para el siguiente agente.',
+      boundary:
+        'El playbook también cubre la evaluación continua y las operaciones en producción. DWP se centra en el harness del repositorio y la ejecución de largo alcance, de modo que esas prácticas operativas pueden complementarlo sin atribuirle capacidades que no incorpora.',
+      sourceLabel: 'Leer el playbook de Claude sobre el SDLC nativo de IA',
+    },
+    profileCta: 'Ver la comparativa',
+    profile: {
+      backLabel: 'Volver a todas las alternativas',
+      eyebrow: 'Perfil de la alternativa',
+      compareWith: 'Comparado con Deep Work Plan',
+      fitTitle: 'Dónde encaja',
+      capabilityTitle: 'Resumen de capacidades',
+      sourceLabel: 'Documentación oficial',
     },
     dwpStrengths: {
       title: 'Qué aporta Deep Work Plan',
@@ -1120,7 +1162,7 @@ export const es: SiteTranslations = {
     },
     honestLimits: {
       title: 'Límites honestos',
-      body: 'Deep Work Plan no tiene un mecanismo de especificación viva ni delta; OpenSpec y herramientas similares son más fuertes ahí. Todavía no existe un benchmark independiente de la metodología; está planificada una evaluación pública preregistrada. El registro de carga de instrucciones mide bytes cargados, no tokens, costo ni resultados.',
+      body: 'Una skill de DWP también es una especificación: describe cómo debe ejecutar un agente un procedimiento, como crear un componente. Los planes de DWP también son especificaciones de cambio: definen el alcance, los criterios de aceptación, las puertas de validación y las evidencias. Esta fila se refiere a algo más concreto: una especificación canónica que describe el comportamiento actual del producto y se actualiza con deltas después de cada cambio. Actualmente DWP no mantiene esa especificación viva a nivel de producto para cada sistema adoptado; OpenSpec es más fuerte cuando ese ciclo de vida es la necesidad principal. Las capas se pueden combinar alimentando un plan de DWP con una especificación del producto o una propuesta delta. Todavía no existe un benchmark independiente de la metodología; está planificada una evaluación pública preregistrada. El registro de carga de instrucciones mide bytes cargados, no tokens, costo ni resultados.',
     },
     correction: {
       title: 'Ayúdanos a mantener esto preciso',

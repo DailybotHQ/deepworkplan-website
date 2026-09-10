@@ -1,0 +1,17 @@
+---
+import CompareDetailPage from '@/components/pages/CompareDetailPage.astro';
+import { ALTERNATIVES, type AlternativeId } from '@/lib/compare-data';
+import { getActiveNonDefaultLanguages, type Language } from '@/lib/i18n';
+
+export function getStaticPaths() {
+  return getActiveNonDefaultLanguages().flatMap((lang) =>
+    ALTERNATIVES.map((alternative) => ({
+      params: { lang, slug: alternative.id },
+    }))
+  );
+}
+
+const { lang, slug } = Astro.params as { lang: Language; slug: AlternativeId };
+---
+
+<CompareDetailPage lang={lang} alternativeId={slug} />

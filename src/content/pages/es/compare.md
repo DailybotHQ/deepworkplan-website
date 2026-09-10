@@ -6,7 +6,7 @@ lastUpdated: 2026-09-10
 
 ## Deep Work Plan y las alternativas
 
-Elige la capa adecuada para tu situación. Cada alternativa se describe en sus propios términos, cada dato proviene de su documentación oficial y la página indica cuándo se revisó por última vez. Esto es un mapa, no una clasificación.
+Elige Deep Work Plan cuando el trabajo de largo alcance con agentes deba seguir siendo duradero, portable y verificable. Esta guía responde las dudas que aparecen al comparar DWP con otras alternativas y aclara sus diferencias: DWP pone el harness, el plan, el estado y la evidencia en tu repositorio para que cualquier agente pueda continuar el trabajo.
 
 ## Cómo leer esta página
 
@@ -68,7 +68,7 @@ Dónde vive cada capacidad, por herramienta. Integrado, opcional o mediante exte
 
 ## Límites honestos
 
-Deep Work Plan no tiene un mecanismo de especificación viva ni delta; OpenSpec y herramientas similares son más fuertes ahí. Todavía no existe un benchmark independiente de la metodología; está planificada una evaluación pública preregistrada. El registro de carga de instrucciones mide bytes cargados, no tokens, costo ni resultados.
+Deep Work Plan sigue un enfoque guiado por especificación: cada plan define el cambio mediante alcance, criterios de aceptación, puertas de validación y evidencias. Actualmente no mantiene una especificación canónica, viva o basada en deltas, sobre el comportamiento de cada sistema adoptado; OpenSpec es más fuerte cuando esa evolución a nivel de sistema es la necesidad principal. Las capas se pueden combinar alimentando un plan de DWP con una especificación o una propuesta delta. Todavía no existe un benchmark independiente de la metodología; está planificada una evaluación pública preregistrada. El registro de carga de instrucciones mide bytes cargados, no tokens, costo ni resultados.
 
 ## Ayúdanos a mantener esto preciso
 

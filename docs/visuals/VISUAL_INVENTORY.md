@@ -96,9 +96,10 @@
 | ID | Surface | Type | Pri | Aspect/size | Light/dark | Asset path | Status |
 | :-- | :-- | :-: | :-: | :-- | :-- | :-- | :-- |
 | PG-01 | `NotFoundPage.astro` → right column (404 / ship to lighthouse) | 🖼 | M | ~4:5 · 1122×1402 | pair | `pages/not-found-offmap.webp` | done |
+| PG-02 | `FaqPage.astro` → hero right column (blank ledger / charted answers) | 🖼 | M | 4:3 · 1152×864 | pair | `pages/faq-index.webp` | done |
 
 > New `pages` asset area for standalone routes outside home/methodology/spec/kit
-> (extends STYLE_GUIDE §6). PG-01 is wordless, so one light/dark pair serves EN+ES.
+> (extends STYLE_GUIDE §6). PG-01 and PG-02 are wordless, so one light/dark pair serves every language.
 
 ---
 

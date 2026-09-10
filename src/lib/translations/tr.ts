@@ -35,7 +35,7 @@ export const tr: SiteTranslations = {
     faq: 'SSS',
     compare: 'Karşılaştırma',
     resources: 'Kaynaklar',
-    resourcesDesc: 'Örnekler, karşılaştırma, SSS ve güven',
+    resourcesDesc: 'Örnekler, güven, SSS ve karşılaştırma',
     repo: {
       label: 'Kaynak kod',
       website: 'Web sitesi deposu',
@@ -792,6 +792,7 @@ export const tr: SiteTranslations = {
     title: 'Sıkça sorulan sorular',
     intro:
       'Deep Work Plan hakkında en çok sorulanlara kısa yanıtlar; her biri, konuyu derinleştiren sayfaya bir bağlantıyla.',
+    tocTitle: 'Bu sayfada',
     groups: [
       {
         id: 'what',
@@ -835,6 +836,14 @@ export const tr: SiteTranslations = {
         id: 'how',
         title: 'Bir plan nasıl çalışır',
         items: [
+          {
+            id: 'how-to-use',
+            question: 'Nasıl kullanılır?',
+            answer:
+              "Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx skills add DailybotHQ/deepworkplan-skill` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` bir taslağı veya devam eden bir planı düzenler; `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.",
+            linkLabel: 'Hızlı başlangıç',
+            linkPath: '/quickstart',
+          },
           {
             id: 'gates',
             question:
@@ -914,9 +923,9 @@ export const tr: SiteTranslations = {
           {
             id: 'vs-agent-frameworks',
             question:
-              'BMAD, Superpowers veya Get Shit Done gibi ajan iş akışı çerçevelerinden nasıl farklıdır?',
+              'BMAD, Superpowers, Get Shit Done veya Gentle-AI gibi ajan iş akışı araçlarından nasıl farklıdır?',
             answer:
-              'Bu çerçeveler güçlü çalışma stilleri getirir: roller, ilkeler, test-first adımlar, doğrulama alışkanlıkları. Deep Work Plan, repoda ne kalır ve ne kontrol edilebilir odaklanır: soğuk okunabilen herhangi bir harness, kabul kriterleri ve kapılarla görev dosyaları, oturumu atlatan durum, CI-dostu çıkış kodlu uyumluluk denetleyicisi ve her akışın kaç talimat byte’ı yüklediğinin yayımlanmış ölçümü. Yapı gereği araçtan bağımsızdır ve core loop’a hizmet, sağlayıcı veya secret eklememez. Karşılaştırma sayfası her yaklaşımın yerleşik, isteğe bağlı veya kapsam dışı olduğu yerleri gösterir.',
+              "Bu çerçeveler güçlü çalışma stilleri getirir: roller, ilkeler, test-first adımlar, doğrulama alışkanlıkları. Deep Work Plan ikisinden de farklıdır; repoda ne kalır ve ne kontrol edilebilir odaklanır: soğuk okunabilen herhangi bir harness, kabul kriterleri ve kapılarla görev dosyaları, oturumu atlatan durum, CI-dostu çıkış kodlu uyumluluk denetleyicisi ve her akışın kaç talimat byte’ı yüklediğinin yayımlanmış ölçümü. Yapı gereği araçtan bağımsızdır ve core loop’a hizmet, sağlayıcı veya secret eklememez. Karşılaştırma sayfası her yaklaşımın yerleşik, isteğe bağlı veya kapsam dışı olduğu yerleri gösterir. Gentle-AI, halihazırda kullandığınız kodlama ajanlarını yapılandırır: oturumlar arasında kalıcı bellek (Engram), seçilmiş beceriler, persona'lar, MCP sunucuları, isteğe bağlı Spec-Driven Development ve isteğe bağlı kanıta dayalı inceleme (Receipt-Driven Development). Her ajanın yapılandırma dizinlerine yazır ve planlama çıktılarını Engram'da, OpenSpec dosyalarında veya her ikisinde tutabilir. Katmanlar bir arada durabilir: Gentle-AI ajana donanım sağlar; Deep Work Plan uzun işi repoda kalıcı ve doğrulanabilir kılar.",
             linkLabel: 'Karşılaştırmayı görün',
             linkPath: '/compare',
           },
@@ -988,6 +997,7 @@ export const tr: SiteTranslations = {
       methodology: 'Metodoloji',
       sdd: 'Spec odaklı geliştirme araçları',
       agentFramework: 'Ajan iş akışı çerçeveleri',
+      aiNativeSdlc: 'AI-native SDLC',
       vendorNative: 'Satıcı yerel plan modları',
     },
     matrix: {
@@ -1088,6 +1098,20 @@ export const tr: SiteTranslations = {
         audience:
           'Az törenle bağlam mühendisliği ve doğrulama isteyen solo geliştiriciler ve küçük ekipler.',
       },
+      'gentle-ai': {
+        name: 'Gentle-AI',
+        whatItDoesWell:
+          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+        audience:
+          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+      },
+      'claude-ai-native-sdlc': {
+        name: "Claude's AI-native SDLC",
+        whatItDoesWell:
+          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+        audience:
+          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+      },
       'vendor-native': {
         name: 'Satıcı yerel plan modları',
         whatItDoesWell:
@@ -1095,6 +1119,24 @@ export const tr: SiteTranslations = {
         audience:
           'Metodoloji benimsemek istemeyen, tek bir ajanın içinde planlama isteyen herkes.',
       },
+    },
+    aiNative: {
+      title: 'Where this fits in the AI-native SDLC',
+      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      shared:
+        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+      boundary:
+        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+      sourceLabel: "Read Claude's AI-native SDLC playbook",
+    },
+    profileCta: 'Karşılaştırmayı gör',
+    profile: {
+      backLabel: 'Back to all alternatives',
+      eyebrow: 'Alternative profile',
+      compareWith: 'Compared with Deep Work Plan',
+      fitTitle: 'Where it fits',
+      capabilityTitle: 'Capability snapshot',
+      sourceLabel: 'Official documentation',
     },
     dwpStrengths: {
       title: 'Deep Work Plan’in getirdikleri',

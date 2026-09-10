@@ -36,6 +36,12 @@ Qualquer agente que leia arquivos do repositório. A skill segue o padrão abert
 
 ## Como um plano é executado
 
+### Como uso?
+
+Três passos. Primeiro, instale a skill Deep Work Plan no seu agente de código — o caminho mais rápido é `npx skills add DailybotHQ/deepworkplan-skill` (ou clone o repositório da skill e execute `./setup.sh`). Segundo, faça o onboarding do repositório uma vez para que o agente adapte `AGENTS.md`, `docs/`, o kit `.agents/` e uma área `.dwp/` ignorada pelo git ao seu stack: aponte para https://deepworkplan.com/init.md, ou execute `/deepworkplan-onboard`. Terceiro, planeje e execute o trabalho com os comandos enxutos: `/dwp-create <goal>` constrói um plano; `/dwp-execute` executa tarefa por tarefa em cada gate; `/dwp-refine` edita um rascunho ou um plano em andamento; `/dwp-resume` continua após uma interrupção; `/dwp-status` informa o progresso sem executar; `/dwp-verify` produz um relatório objetivo de conformidade. Agentes que interceptam `/` costumam usar `#` em vez disso (por exemplo `#dwp-execute`). O endpoint de adoção e o início rápido seguem o mesmo caminho com mais detalhes.
+
+[Início rápido](https://deepworkplan.com/pt/quickstart)
+
 ### Como os gates de validação são implementados? Eles exigem aprovação humana?
 
 São asserções executáveis que o próprio agente roda. A aprovação humana enquadra a execução: uma pessoa aprova o plano antes da execução e revisa o diff final na hora do pull request; o que fica entre as duas pontas é autônomo. Cada tarefa nomeia comandos concretos, normalmente o próprio gate de qualidade do repositório, selecionados a partir da superfície tocada pela tarefa: os testes do comportamento alterado e dos seus consumidores, ampliando para a suíte completa quando a mudança é compartilhada ou não pode ser delimitada. Uma tarefa é marcada como concluída somente quando esses comandos terminam com sucesso, e tarefas que alteram comportamento devem estender os testes. Em caso de falha, a tarefa é marcada como bloqueada e o agente para.
@@ -86,9 +92,9 @@ Elas resolvem problemas adjacentes. As ferramentas orientadas a especificação 
 
 [Veja a comparação](https://deepworkplan.com/pt/compare)
 
-### Como ele difere de frameworks de fluxo de trabalho para agentes como BMAD, Superpowers ou Get Shit Done?
+### Como ele difere de ferramentas de fluxo de trabalho para agentes como BMAD, Superpowers, Get Shit Done ou Gentle-AI?
 
-Esses frameworks trazem estilos de trabalho fortes: papéis, princípios, passos de teste primeiro, hábitos de verificação. O Deep Work Plan se concentra no que fica no repositório e no que pode ser verificado: um harness que qualquer agente lê sem contexto prévio, arquivos de tarefa com critérios de aceitação e gates, estado que sobrevive a uma sessão, um verificador de conformidade com código de saída amigável a CI e uma medição publicada de quantos bytes de instrução cada fluxo carrega. Ele é independente de ferramenta por construção e não acrescenta serviço, provedor nem segredo ao ciclo principal. A página de comparação mostra onde cada abordagem é integrada, opcional ou está fora do escopo.
+Esses frameworks trazem estilos de trabalho fortes: papéis, princípios, passos de teste primeiro, hábitos de verificação. O Deep Work Plan difere de ambos: se concentra no que fica no repositório e no que pode ser verificado: um harness que qualquer agente lê sem contexto prévio, arquivos de tarefa com critérios de aceitação e gates, estado que sobrevive a uma sessão, um verificador de conformidade com código de saída amigável a CI e uma medição publicada de quantos bytes de instrução cada fluxo carrega. Ele é independente de ferramenta por construção e não acrescenta serviço, provedor nem segredo ao ciclo principal. A página de comparação mostra onde cada abordagem é integrada, opcional ou está fora do escopo. Gentle-AI configura os agentes de codificação que você já usa: memória persistente entre sessões (Engram), skills curadas, personas, servidores MCP, Spec-Driven Development opcional e revisão baseada em evidências opcional (Receipt-Driven Development). Ele escreve nos diretórios de configuração de cada agente e pode manter artefatos de planejamento no Engram, em arquivos OpenSpec ou em ambos. O Deep Work Plan instala-se no próprio repositório — um harness que qualquer agente lê sem contexto prévio, arquivos de tarefa com critérios de aceitação e gates, estado retomável em disco, um verificador de conformidade com código de saída amigável a CI e um registro publicado de bytes de instrução — sem acrescentar serviço, provedor nem segredo ao ciclo principal. As camadas podem coexistir: Gentle-AI equipa o agente; o Deep Work Plan torna o trabalho longo durável e verificável dentro do repositório.
 
 [Veja a comparação](https://deepworkplan.com/pt/compare)
 

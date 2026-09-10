@@ -782,6 +782,7 @@ export const en: SiteTranslations = {
     title: 'Frequently asked questions',
     intro:
       'Short answers to what people ask most about Deep Work Plan, each with a link to the page that goes deeper.',
+    tocTitle: 'On this page',
     groups: [
       {
         id: 'what',
@@ -897,16 +898,16 @@ export const en: SiteTranslations = {
             question:
               'How is it different from spec-driven tools such as Spec Kit, OpenSpec or Kiro?',
             answer:
-              "They solve adjacent problems. Spec-driven tools are excellent at capturing what should change: specifications, requirements and change proposals in a repeatable shape. Deep Work Plan is about how an agent executes for hours without drifting: the onboarded harness, per-task validation gates selected from the touched surface, on-disk resumable state, a mandatory Final Review with a security pass, and a conformance checker for the repository itself. The two can be combined, with a spec or change proposal feeding a plan. The comparison page lays the capabilities side by side, on each tool's own terms.",
+              "They solve adjacent problems. Spec-driven tools are excellent at capturing what should change: specifications, requirements and change proposals in a repeatable shape. Deep Work Plan is about how an agent executes for hours without drifting: the onboarded harness, per-task validation gates selected from the touched surface, on-disk resumable state, a mandatory Final Review with a security pass, and a conformance checker for the repository itself. The two can be combined, with a spec or change proposal feeding a plan. Claude's AI-native SDLC playbook makes a related case for durable artifacts across Plan, Design, Build, Test, Deploy and Maintain; DWP covers the repository harness and execution loop, while continuous production evaluation remains a complementary practice. The comparison page lays the capabilities side by side, on each tool's own terms.",
             linkLabel: 'See the comparison',
             linkPath: '/compare',
           },
           {
             id: 'vs-agent-frameworks',
             question:
-              'How is it different from agent workflow frameworks such as BMAD, Superpowers or Get Shit Done?',
+              'How is it different from agent workflow tools such as BMAD, Superpowers, Get Shit Done or Gentle-AI?',
             answer:
-              'Those frameworks bring strong working styles: roles, principles, test-first steps, verification habits. Deep Work Plan focuses on what stays in the repository and what can be checked: a harness any agent reads cold, task files with acceptance criteria and gates, state that survives a session, a conformance checker with a CI-friendly exit code, and a published measurement of how many instruction bytes each flow loads. It is tool-agnostic by construction and adds no service, provider or secret to the core loop. The comparison page shows where each approach is built in, optional or out of scope.',
+              "Agent workflow frameworks such as BMAD, Superpowers and Get Shit Done bring strong working styles: roles, principles, test-first steps, verification habits. Gentle-AI sits nearby as an agent ecosystem configurator: it equips the coding agents you already use with persistent memory across sessions (Engram), curated skills, personas, MCP servers, optional Spec-Driven Development and optional evidence-based review (Receipt-Driven Development), writing into each agent's config directories. Deep Work Plan differs from both: it focuses on what stays in the repository and what can be checked — a harness any agent reads cold, task files with acceptance criteria and gates, state that survives a session, a conformance checker with a CI-friendly exit code, and a published measurement of how many instruction bytes each flow loads. It is tool-agnostic by construction and adds no service, provider or secret to the core loop. The layers can sit together: frameworks and Gentle-AI shape how the agent works; Deep Work Plan makes long work durable and checkable inside the repo. The comparison page shows where each approach is built in, optional or out of scope.",
             linkLabel: 'See the comparison',
             linkPath: '/compare',
           },
@@ -960,10 +961,10 @@ export const en: SiteTranslations = {
     eyebrow: 'Compare',
     title: 'Deep Work Plan and the alternatives',
     intro:
-      'Pick the right layer for your situation. Each alternative is described on its own terms, every fact traces to its official documentation, and the page says when it was last reviewed. This is a map, not a ranking.',
+      'Choose Deep Work Plan when long-horizon agent work needs to remain durable, portable and verifiable. The alternatives below clarify the tradeoffs: DWP puts the harness, plan, state and evidence in your repository so any agent can carry the work forward.',
     howToRead: {
       title: 'How to read this page',
-      body: 'Three values describe each capability. They say where a capability lives in a tool, not how good the tool is.',
+      body: 'Three values describe each capability. They say where a capability lives in a tool, not how good the tool is. One clarification: DWP skills and plans are specifications of procedures and changes; the living product specs row asks whether a tool maintains a canonical description of the product’s current behavior and merges deltas into it.',
       values: {
         builtIn: 'Built in',
         optional: 'Optional or via extension',
@@ -977,6 +978,7 @@ export const en: SiteTranslations = {
       methodology: 'Methodology',
       sdd: 'Spec-driven development tools',
       agentFramework: 'Agent workflow frameworks',
+      aiNativeSdlc: 'AI-native SDLC',
       vendorNative: 'Vendor-native plan modes',
     },
     matrix: {
@@ -1023,8 +1025,8 @@ export const en: SiteTranslations = {
         help: "A first run writes the repository's agent-facing documentation and kit.",
       },
       brownfieldSpecs: {
-        label: 'Living specs for existing systems',
-        help: 'Changes are specified as deltas that merge into a growing specification of the system.',
+        label: 'Living product specs for existing systems',
+        help: 'A canonical specification describes the product’s current behavior, accepts change deltas and is updated as each change is implemented.',
       },
     },
     alternatives: {
@@ -1077,13 +1079,45 @@ export const en: SiteTranslations = {
         audience:
           'Solo developers and small teams who want context engineering and verification with little ceremony.',
       },
-      'vendor-native': {
-        name: 'Vendor-native plan modes',
+      'gentle-ai': {
+        name: 'Gentle-AI',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor and Gemini CLI ship plan modes, instruction files and skills that follow the AGENTS.md and Agent Skills standards.',
+          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
         audience:
-          'Anyone who wants planning inside a single agent without adopting a methodology.',
+          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
       },
+      'claude-ai-native-sdlc': {
+        name: "Claude's AI-native SDLC",
+        whatItDoesWell:
+          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+        audience:
+          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+      },
+      'vendor-native': {
+        name: 'Native agent features (varies by vendor)',
+        whatItDoesWell:
+          'Agent products may provide plan modes, instruction files and skills, but the exact behavior depends on the vendor, client and version.',
+        audience:
+          'Anyone who wants planning inside one agent and is comfortable with vendor-specific behavior.',
+      },
+    },
+    aiNative: {
+      title: 'Where this fits in the AI-native SDLC',
+      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      shared:
+        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+      boundary:
+        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+      sourceLabel: "Read Claude's AI-native SDLC playbook",
+    },
+    profileCta: 'See the comparison',
+    profile: {
+      backLabel: 'Back to all alternatives',
+      eyebrow: 'Alternative profile',
+      compareWith: 'Compared with Deep Work Plan',
+      fitTitle: 'Where it fits',
+      capabilityTitle: 'Capability snapshot',
+      sourceLabel: 'Official documentation',
     },
     dwpStrengths: {
       title: 'What Deep Work Plan brings',
@@ -1116,7 +1150,7 @@ export const en: SiteTranslations = {
     },
     honestLimits: {
       title: 'Honest limits',
-      body: 'Deep Work Plan has no living or delta specification mechanism; OpenSpec and similar tools are stronger there. No independent benchmark of the methodology exists yet; a pre-registered public evaluation is planned. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes.',
+      body: 'A DWP skill is a specification too: it describes how an agent should perform a procedure, such as creating a component. DWP plans are also change specifications: they define scope, acceptance criteria, validation gates and evidence. This row means something narrower: a canonical specification that describes the product’s current behavior and is updated with deltas after each change. DWP does not currently maintain that product-level living specification for every adopted system; OpenSpec is stronger when that lifecycle is the primary need. You can combine the layers by feeding a product spec or delta proposal into a DWP plan. No independent benchmark of the methodology exists yet; a pre-registered public evaluation is planned. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes.',
     },
     correction: {
       title: 'Help us keep this accurate',

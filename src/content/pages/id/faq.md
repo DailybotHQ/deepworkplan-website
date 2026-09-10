@@ -36,6 +36,12 @@ Agent mana pun yang membaca file repositori. Skill ini mengikuti standar Agent S
 
 ## Bagaimana sebuah rencana berjalan
 
+### Bagaimana cara menggunakannya?
+
+Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx skills add DailybotHQ/deepworkplan-skill` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit draf atau rencana yang sedang berjalan; `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.
+
+[Mulai Cepat](https://deepworkplan.com/id/quickstart)
+
 ### Bagaimana gerbang verifikasi diimplementasikan? Apakah memerlukan persetujuan manusia?
 
 Gerbang itu adalah asersi yang dapat dieksekusi dan dijalankan sendiri oleh agent. Persetujuan manusia mengapit jalannya rencana: seorang manusia menyetujui rencana sebelum eksekusi dan meninjau diff akhir saat pull request; eksekusi di antaranya berjalan otonom. Setiap tugas menyebutkan command konkret, biasanya gerbang kualitas milik repositori itu sendiri, yang dipilih dari permukaan yang disentuh tugas: test dari perilaku yang berubah beserta konsumennya, diperluas ke seluruh suite ketika perubahan bersifat shared atau tidak bisa dibatasi. Sebuah tugas ditandai selesai hanya ketika command itu keluar dengan sukses, dan tugas yang mengubah perilaku wajib memperluas test. Saat gagal, tugas ditandai terblokir dan agent berhenti.
@@ -86,9 +92,9 @@ Keduanya memecahkan masalah yang berdampingan. Tool spec-driven unggul dalam men
 
 [Lihat perbandingannya](https://deepworkplan.com/id/compare)
 
-### Apa bedanya dengan framework alur kerja agent seperti BMAD, Superpowers, atau Get Shit Done?
+### Apa bedanya dengan perangkat alur kerja agent seperti BMAD, Superpowers, Get Shit Done, atau Gentle-AI?
 
-Framework-framework itu membawa gaya kerja yang kuat: peran, prinsip, langkah test-first, dan kebiasaan verifikasi. Deep Work Plan berfokus pada apa yang tinggal di repositori dan apa yang bisa diperiksa: harness yang bisa dibaca agent mana pun dari nol, file tugas dengan kriteria penerimaan dan gerbang, status yang bertahan dari sesi, pemeriksa konformansi dengan exit code yang ramah CI, dan pengukuran terpublikasi atas berapa byte instruksi yang dimuat setiap alur. Ia agnostik terhadap tool menurut konstruksinya dan tidak menambahkan service, provider, atau secret ke core loop. Halaman perbandingan menunjukkan di mana setiap pendekatan bersifat bawaan, opsional, atau di luar cakupan.
+Framework-framework itu membawa gaya kerja yang kuat: peran, prinsip, langkah test-first, dan kebiasaan verifikasi. Deep Work Plan berbeda dari keduanya dan berfokus pada apa yang tinggal di repositori dan apa yang bisa diperiksa: harness yang bisa dibaca agent mana pun dari nol, file tugas dengan kriteria penerimaan dan gerbang, status yang bertahan dari sesi, pemeriksa konformansi dengan exit code yang ramah CI, dan pengukuran terpublikasi atas berapa byte instruksi yang dimuat setiap alur. Ia agnostik terhadap tool menurut konstruksinya dan tidak menambahkan service, provider, atau secret ke core loop. Halaman perbandingan menunjukkan di mana setiap pendekatan bersifat bawaan, opsional, atau di luar cakupan. Gentle-AI mengonfigurasi coding agent yang sudah Anda pakai: memori persisten antar sesi (Engram), skill terkurasi, persona, server MCP, Spec-Driven Development opsional, dan tinjauan berbasis bukti opsional (Receipt-Driven Development). Ia menulis ke direktori konfigurasi setiap agent dan bisa menyimpan artefak perencanaan di Engram, di file OpenSpec, atau keduanya. Deep Work Plan terpasang ke repositori itu sendiri — harness yang bisa dibaca agent mana pun dari nol, file tugas dengan kriteria penerimaan dan gerbang, status on-disk yang bisa dilanjutkan, pemeriksa konformansi dengan exit code yang ramah CI, dan buku besar byte instruksi terpublikasi — tanpa menambahkan service, provider, atau secret ke core loop. Kedua lapisan bisa berdampingan: Gentle-AI melengkapi agent; Deep Work Plan membuat pekerjaan panjang tangguh dan dapat diperiksa di dalam repo.
 
 [Lihat perbandingannya](https://deepworkplan.com/id/compare)
 

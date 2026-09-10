@@ -42,6 +42,7 @@ export type AlternativeCategory =
   | 'methodology'
   | 'sdd'
   | 'agent-framework'
+  | 'ai-native-sdlc'
   | 'vendor-native';
 
 /** Alternatives in display order: Deep Work Plan first, then grouped by category. */
@@ -53,6 +54,8 @@ export const ALTERNATIVE_IDS = [
   'bmad-method',
   'superpowers',
   'get-shit-done',
+  'gentle-ai',
+  'claude-ai-native-sdlc',
   'vendor-native',
 ] as const;
 
@@ -198,6 +201,42 @@ export const ALTERNATIVES: readonly Alternative[] = [
       conformanceChecker: 'not-in-scope',
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'built-in',
+      brownfieldSpecs: 'optional',
+    },
+  },
+  {
+    id: 'gentle-ai',
+    category: 'agent-framework',
+    homepage: 'https://github.com/Gentleman-Programming/gentle-ai',
+    docsUrl: 'https://github.com/Gentleman-Programming/gentle-ai#readme',
+    cells: {
+      toolAgnostic: 'built-in',
+      repoNativeHarness: 'optional',
+      taskAcceptanceCriteria: 'optional',
+      perTaskGates: 'optional',
+      resumableState: 'built-in',
+      finalReview: 'optional',
+      conformanceChecker: 'not-in-scope',
+      instructionBudgetLedger: 'not-in-scope',
+      onboardingScaffold: 'not-in-scope',
+      brownfieldSpecs: 'optional',
+    },
+  },
+  {
+    id: 'claude-ai-native-sdlc',
+    category: 'ai-native-sdlc',
+    homepage: 'https://claude.com/blog/the-ai-native-sdlc-playbook',
+    docsUrl: 'https://claude.com/blog/the-ai-native-sdlc-playbook',
+    cells: {
+      toolAgnostic: 'not-in-scope',
+      repoNativeHarness: 'optional',
+      taskAcceptanceCriteria: 'optional',
+      perTaskGates: 'optional',
+      resumableState: 'optional',
+      finalReview: 'optional',
+      conformanceChecker: 'not-in-scope',
+      instructionBudgetLedger: 'not-in-scope',
+      onboardingScaffold: 'not-in-scope',
       brownfieldSpecs: 'optional',
     },
   },

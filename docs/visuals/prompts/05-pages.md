@@ -6,7 +6,7 @@
 > boilerplate (§9), and the prompt entry schema (§10). Every entry below is
 > schema-complete; each **Prompt** field is copy-paste-ready.
 >
-> **Slots covered:** PG-01 (404 / Not Found illustration).
+> **Slots covered:** PG-01 (404 / Not Found illustration), PG-02 (FAQ hero illustration).
 >
 > **Area:** `pages` — a new asset area for standalone routes that are not part of
 > `home` / `methodology` / `spec` / `kit` (extends STYLE_GUIDE §6). Assets live
@@ -50,6 +50,15 @@
 - **Caption (ES):** —
 - **Integration note:** Two-column grid on `lg` (the existing `404` + heading + copy `max-w-2xl` on the left, illustration on the right), stacking on mobile and vertically centered (`lg:items-center`). Because the asset is now **landscape**, give the right column more width than the portrait version used — e.g. `lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)]` — so the wide band reads at a comfortable height; alternatively drop it full-width **below** the action buttons as a wide `Figure`. Dual-`<img>` light/dark swap (`dark:hidden` / `hidden dark:block`, same mechanism as the Hero faro and the brand logos). One pair serves EN and ES (no in-image text). `width="720" height="480"`, `loading="lazy"`, `decoding="async"`. Decorative option: since the page copy already conveys the "not found" meaning, `alt=""` is acceptable instead of the alt above; use the meaningful alt if the illustration is the only "lost" signal.
 
+### PG-02 — FAQ hero illustration (blank ledger / charted answers)
+
+- **Target surface:** `src/components/pages/FaqPage.astro` → hero right column. Title + intro stay on the left; the illustration fills the empty desktop gutter as a single above-the-fold beat (not sticky beside the accordion).
+- **Type:** illustration
+- **Purpose:** Wordless metaphor for “questions answered by a charted course”: blank open ledger with empty ruled lines, compass rose, faint coastal chart edge, one oxblood plotted course.
+- **Light/dark strategy:** pair — `faq-index.webp` (ink on `#F7F4EC`) and `faq-index-dark.webp` (paper-ink on `#14140F`).
+- **In-image text:** none (wordless; one pair serves every language).
+- **Integration note:** `lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)]`, dual `<img>` with `dark:hidden` / `hidden dark:block`, `alt=""`, `width="1152" height="864"`. Hidden below `md` so mobile stays copy-first.
+
 ---
 
 ## Coverage (standalone pages)
@@ -57,3 +66,4 @@
 | ID | Kind | Status |
 | :-- | :-- | :-- |
 | PG-01 | illustration (image) | done — 404 ship-to-lighthouse chart (light/dark pair, 1122×1402) |
+| PG-02 | illustration (image) | done — FAQ ledger/chart plate (light/dark pair, 1152×864) |

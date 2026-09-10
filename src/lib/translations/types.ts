@@ -517,6 +517,7 @@ export interface SiteTranslations {
     eyebrow: string;
     title: string;
     intro: string;
+    tocTitle: string;
     groups: {
       id: string;
       title: string;
@@ -550,6 +551,7 @@ export interface SiteTranslations {
       methodology: string;
       sdd: string;
       agentFramework: string;
+      aiNativeSdlc: string;
       vendorNative: string;
     };
     matrix: { title: string; caption: string; capabilityColumn: string };
@@ -558,6 +560,22 @@ export interface SiteTranslations {
       AlternativeId,
       { name: string; whatItDoesWell: string; audience: string }
     >;
+    aiNative: {
+      title: string;
+      body: string;
+      shared: string;
+      boundary: string;
+      sourceLabel: string;
+    };
+    profileCta: string;
+    profile: {
+      backLabel: string;
+      eyebrow: string;
+      compareWith: string;
+      fitTitle: string;
+      capabilityTitle: string;
+      sourceLabel: string;
+    };
     dwpStrengths: { title: string; items: { title: string; body: string }[] };
     honestLimits: { title: string; body: string };
     correction: { title: string; body: string; ctaLabel: string };
