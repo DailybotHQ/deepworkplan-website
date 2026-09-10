@@ -93,17 +93,33 @@ export const zh: SiteTranslations = {
       secondaryCta: '阅读规范',
       illustrationAlt:
         '一座灯塔矗立在礁石海岸，射出一道光束为一艘小船指引方向——这幅版画寓意着代码仓库如同稳固的支架，引导任意代理。',
+      scrollCta: '了解它的工作原理',
     },
-    pitch: {
-      kicker: '问题与答案',
-      problem:
-        'AI 编码代理在短时冲刺中效果惊人。但在长周期工作上——一次迁移、一个新子系统、一次跨越数十个文件的重构——它们会发生漂移：上下文被填满，决策被遗忘，多小时的任务在半途被放弃。',
-      answer:
-        'Deep Work Plan 以规范驱动的开发方式作答：计划是持久的事实来源，代理依据明确的验收标准与验证关卡来执行。漂移随之减少，工作保持可验证，任意代理都能跨会话恢复它。',
-      origin:
-        '它同时也是被打磨为可移植形态的 harness 工程。代理的 harness（运行支架）是围绕模型构建的脚手架——上下文、工具、控制循环、防护栏、可恢复状态——它让模型变得可靠。Deep Work Plan 将这套 harness 安装进代码仓库本身（AGENTS.md、文档、.agents/ 技能目录、DWP 技能），让任意代理都能驾驭任意仓库。它诞生于 Dailybot，经过数月的实战检验，并以 DailybotHQ/deepworkplan-skill 的形式发布。',
-      illustrationAlt:
-        '一张航海图上标绘着一条安全绕过各处险滩的航线——这幅版画寓意着计划如同让工作始终沿正确方向前进的指引。',
+    story: {
+      act1: {
+        kicker: '方法论 · 第一幕',
+        lead: '由你来定义“完成”的标准与边界。计划承载你的意图；代理完成耗时的工作——无需时时看管，也无需每二十分钟纠正一次。',
+        deepLinkLabel: '阅读方法论',
+        deepLinkHref: '/methodology',
+      },
+      act2: {
+        kicker: '方法论 · 第二幕',
+        lead: '长任务会填满任何模型的上下文。细节逐渐流失，代理随之偏移。一份书面计划——原子任务、验证关卡、可恢复状态——正是它一轮又一轮回归的依据。',
+        deepLinkLabel: '查看核心循环',
+        deepLinkHref: '/methodology',
+      },
+      act3: {
+        kicker: '方法论 · 第三幕',
+        lead: '每项任务都写明其验收标准与必须通过的检查。代理不能“感觉完成了”——必须通过检查，否则任务保持打开。',
+        deepLinkLabel: '阅读规范',
+        deepLinkHref: '/spec',
+      },
+      act4: {
+        kicker: '方法论 · 第四幕',
+        lead: '上下文、工具、防护栏与状态以纯文件形式存放在你的仓库中，任何代理都可读取。没有锁定，没有外部大脑——它能在上下文重置后依然完好。',
+        deepLinkLabel: '查看接入流程会生成什么',
+        deepLinkHref: '/quickstart',
+      },
     },
     onboarding: {
       badge: '基于推理的接入',

@@ -94,17 +94,33 @@ export const vi: SiteTranslations = {
       secondaryCta: 'Đọc đặc tả',
       illustrationAlt:
         'Một ngọn hải đăng trên bờ đá phát ra một luồng sáng duy nhất dẫn đường cho con tàu nhỏ — bản khắc gợi hình ảnh repository như một harness vững vàng dẫn lối cho mọi agent.',
+      scrollCta: 'Xem cách hoạt động',
     },
-    pitch: {
-      kicker: 'Vấn đề và lời giải',
-      problem:
-        'Các agent lập trình AI hiệu quả đáng kinh ngạc trong những đợt ngắn. Với công việc dài hơi — một đợt di trú, một hệ thống con mới, một lần tái cấu trúc trải khắp hàng chục tệp — chúng trôi dạt: ngữ cảnh đầy lên, các quyết định bị quên đi và những tác vụ nhiều giờ bị bỏ dở giữa chừng.',
-      answer:
-        'Deep Work Plan trả lời bằng phát triển dựa trên đặc tả: kế hoạch là nguồn chân lý bền vững, và các agent thực thi dựa trên tiêu chí chấp nhận rõ ràng cùng các cổng kiểm chứng. Hiện tượng trôi dạt giảm xuống, công việc luôn kiểm chứng được, và bất kỳ agent nào cũng có thể tiếp tục nó qua nhiều phiên.',
-      origin:
-        'Đó cũng là kỹ thuật harness được làm cho dễ mang theo. Một harness agent là khung giàn quanh một mô hình — ngữ cảnh, công cụ, vòng điều khiển, hàng rào bảo vệ, trạng thái có thể tiếp tục — giúp nó đáng tin cậy. Deep Work Plan cài chính harness đó vào bản thân repository (AGENTS.md, tài liệu, thư mục skill .agents/, skill DWP), để mọi agent đều có thể điều khiển mọi repo. Ra đời tại Dailybot, được tôi luyện qua nhiều tháng, và phát hành dưới dạng DailybotHQ/deepworkplan-skill.',
-      illustrationAlt:
-        'Một hải đồ với một lộ trình duy nhất được vạch luồn lách an toàn qua các hiểm họa — bản khắc gợi hình ảnh kế hoạch như hướng đi giữ cho công việc đúng lộ trình.',
+    story: {
+      act1: {
+        kicker: 'Phương pháp · Hồi I',
+        lead: 'Bạn quyết định “xong” nghĩa là gì và ranh giới ở đâu. Kế hoạch mang theo ý định của bạn; các agent làm phần giờ giấc — không cần trông chừng, không cần sửa mỗi hai mươi phút.',
+        deepLinkLabel: 'Đọc phương pháp luận',
+        deepLinkHref: '/methodology',
+      },
+      act2: {
+        kicker: 'Phương pháp · Hồi II',
+        lead: 'Tác vụ dài làm đầy ngữ cảnh của bất kỳ mô hình nào. Chi tiết rơi rụng và agent trôi dạt. Một kế hoạch viết ra — tác vụ nguyên tử, cổng kiểm chứng, trạng thái có thể tiếp tục — chính là nơi nó quay về, vòng này qua vòng khác.',
+        deepLinkLabel: 'Xem vòng lặp lõi',
+        deepLinkHref: '/methodology',
+      },
+      act3: {
+        kicker: 'Phương pháp · Hồi III',
+        lead: 'Mỗi tác vụ nêu rõ tiêu chí chấp nhận và các bước kiểm tra bắt buộc phải qua. Agent không được “cảm thấy đã xong” — phải qua kiểm tra, nếu không task vẫn mở.',
+        deepLinkLabel: 'Đọc đặc tả',
+        deepLinkHref: '/spec',
+      },
+      act4: {
+        kicker: 'Phương pháp · Hồi IV',
+        lead: 'Ngữ cảnh, công cụ, rào chắn và trạng thái nằm trong repository của bạn dưới dạng tệp thuần mà bất kỳ agent nào cũng đọc được. Không khóa chặt, không bộ não bên ngoài — sống sót qua mọi lần đặt lại ngữ cảnh.',
+        deepLinkLabel: 'Xem onboarding tạo ra gì',
+        deepLinkHref: '/quickstart',
+      },
     },
     onboarding: {
       badge: 'Khởi tạo dựa trên suy luận',

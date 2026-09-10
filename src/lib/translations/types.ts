@@ -135,13 +135,33 @@ export interface SiteTranslations {
       primaryCta: string;
       secondaryCta: string;
       illustrationAlt: string;
+      scrollCta: string;
     };
-    pitch: {
-      kicker: string;
-      problem: string;
-      answer: string;
-      origin: string;
-      illustrationAlt: string;
+    story: {
+      act1: {
+        kicker: string;
+        lead: string;
+        deepLinkLabel: string;
+        deepLinkHref: string;
+      };
+      act2: {
+        kicker: string;
+        lead: string;
+        deepLinkLabel: string;
+        deepLinkHref: string;
+      };
+      act3: {
+        kicker: string;
+        lead: string;
+        deepLinkLabel: string;
+        deepLinkHref: string;
+      };
+      act4: {
+        kicker: string;
+        lead: string;
+        deepLinkLabel: string;
+        deepLinkHref: string;
+      };
     };
     onboarding: {
       badge: string;

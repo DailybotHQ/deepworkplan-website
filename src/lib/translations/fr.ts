@@ -94,17 +94,33 @@ export const fr: SiteTranslations = {
       secondaryCta: 'Lire la spécification',
       illustrationAlt:
         'Un phare sur une côte rocheuse projette un faisceau unique qui guide un petit navire — une gravure évoquant le dépôt comme un harness stable qui guide tout agent.',
+      scrollCta: 'Voir comment ça marche',
     },
-    pitch: {
-      kicker: 'Le problème et la réponse',
-      problem:
-        'Les agents de code IA sont remarquablement efficaces sur de courtes séquences. Sur un travail de longue haleine — une migration, un nouveau sous-système, un refactoring sur des dizaines de fichiers — ils dérivent : le contexte se remplit, les décisions s’oublient et les tâches de plusieurs heures sont abandonnées à mi-parcours.',
-      answer:
-        'Deep Work Plan répond par le développement piloté par la spécification : le plan est la source de vérité durable, et les agents s’exécutent face à des critères d’acceptation explicites et des portes de validation. La dérive diminue, le travail reste vérifiable, et n’importe quel agent peut le reprendre d’une session à l’autre.',
-      origin:
-        'C’est aussi de l’ingénierie de harness rendue portable. Un harness d’agent, c’est l’échafaudage autour d’un modèle — contexte, outils, boucle de contrôle, garde-fous, état reprenable — qui le rend fiable. Deep Work Plan installe ce harness dans le dépôt lui-même (AGENTS.md, docs, le foyer des skills .agents/, le skill DWP), pour que tout agent puisse piloter tout dépôt. Né chez Dailybot, éprouvé pendant des mois, et publié sous le nom DailybotHQ/deepworkplan-skill.',
-      illustrationAlt:
-        'Une carte marine avec une route unique tracée qui passe sans danger entre les écueils — une gravure évoquant le plan comme la direction qui maintient le travail sur le cap.',
+    story: {
+      act1: {
+        kicker: 'La méthode · Acte I',
+        lead: 'Vous décidez de ce que « terminé » signifie et des limites à ne pas franchir. Le plan porte votre intention ; les agents font les heures — sans surveillance permanente, sans correction toutes les vingt minutes.',
+        deepLinkLabel: 'Lire la méthodologie',
+        deepLinkHref: '/methodology',
+      },
+      act2: {
+        kicker: 'La méthode · Acte II',
+        lead: 'Les longues tâches remplissent le contexte de n’importe quel modèle. Les détails s’effacent et l’agent dérive. Un plan écrit — tâches atomiques, portes de validation, état reprenable — est le repère vers lequel il revient, tour après tour.',
+        deepLinkLabel: 'Voir la boucle principale',
+        deepLinkHref: '/methodology',
+      },
+      act3: {
+        kicker: 'La méthode · Acte III',
+        lead: 'Chaque tâche nomme ses critères d’acceptation et les vérifications qui doivent passer. L’agent ne peut pas se sentir fini — il doit passer, sinon la tâche reste ouverte.',
+        deepLinkLabel: 'Lire la spécification',
+        deepLinkHref: '/spec',
+      },
+      act4: {
+        kicker: 'La méthode · Acte IV',
+        lead: 'Contexte, outils, garde-fous et état vivent dans votre dépôt sous forme de fichiers simples que n’importe quel agent peut lire. Pas d’enfermement, pas de cerveau externe — tout survit aux réinitialisations de contexte.',
+        deepLinkLabel: 'Voir ce que l’onboarding génère',
+        deepLinkHref: '/quickstart',
+      },
     },
     onboarding: {
       badge: 'Onboarding fondé sur le raisonnement',

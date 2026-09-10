@@ -93,17 +93,33 @@ export const id: SiteTranslations = {
       secondaryCta: 'Baca spesifikasinya',
       illustrationAlt:
         'Sebuah mercusuar di pesisir berbatu memancarkan satu berkas cahaya yang memandu kapal kecil — ukiran yang menggambarkan repositori sebagai harness mantap yang memandu agent mana pun.',
+      scrollCta: 'Lihat cara kerjanya',
     },
-    pitch: {
-      kicker: 'Masalah dan jawabannya',
-      problem:
-        'AI coding agent sangat efektif dalam tugas singkat. Pada pekerjaan jangka panjang — migrasi, subsistem baru, atau refaktor lintas puluhan berkas — mereka melenceng: konteks penuh, keputusan terlupakan, dan tugas multijam ditinggalkan di tengah jalan.',
-      answer:
-        'Deep Work Plan menjawabnya dengan spec-driven development: rencana adalah sumber kebenaran yang tahan lama, dan agent mengeksekusi terhadap acceptance criteria serta validation gate yang eksplisit. Penyimpangan berkurang, pekerjaan tetap dapat diverifikasi, dan agent mana pun dapat melanjutkannya lintas sesi.',
-      origin:
-        'Ini juga harness engineering yang dibuat portabel. Sebuah agent harness adalah perancah di sekitar model — konteks, alat, control loop, pengaman, status yang dapat dilanjutkan — yang membuatnya andal. Deep Work Plan memasang harness itu ke dalam repositori itu sendiri (AGENTS.md, docs, rumah skill .agents/, dan skill DWP), sehingga agent mana pun dapat mengemudikan repo mana pun. Lahir di Dailybot, teruji selama berbulan-bulan, dan dirilis sebagai DailybotHQ/deepworkplan-skill.',
-      illustrationAlt:
-        'Peta laut dengan satu rute yang diplot dan melewati bahaya dengan aman — ukiran yang menggambarkan rencana sebagai arah yang menjaga pekerjaan tetap pada jalurnya.',
+    story: {
+      act1: {
+        kicker: 'Metode · Babak I',
+        lead: 'Anda yang memutuskan arti selesai dan di mana batasnya. Rencana membawa niat Anda; agen yang menghabiskan waktu — tanpa pengawasan terus-menerus, tanpa koreksi setiap dua puluh menit.',
+        deepLinkLabel: 'Baca metodologi',
+        deepLinkHref: '/methodology',
+      },
+      act2: {
+        kicker: 'Metode · Babak II',
+        lead: 'Tugas panjang mengisi konteks model mana pun. Detail hilang dan agen menyimpang. Rencana tertulis — tugas atomik, gerbang verifikasi, status yang dapat dilanjutkan — adalah tempat kembali setiap putaran.',
+        deepLinkLabel: 'Lihat loop inti',
+        deepLinkHref: '/methodology',
+      },
+      act3: {
+        kicker: 'Metode · Babak III',
+        lead: 'Setiap tugas menyebutkan kriteria penerimaan dan pemeriksaan yang harus lulus. Agen tidak bisa merasa selesai — harus lulus, atau tugas tetap terbuka.',
+        deepLinkLabel: 'Baca spesifikasi',
+        deepLinkHref: '/spec',
+      },
+      act4: {
+        kicker: 'Metode · Babak IV',
+        lead: 'Konteks, alat, pagar pengaman, dan status tinggal di repositori Anda sebagai berkas sederhana yang dapat dibaca agen mana pun. Tanpa lock-in, tanpa otak eksternal — bertahan melewati reset konteks.',
+        deepLinkLabel: 'Lihat hasil onboarding',
+        deepLinkHref: '/quickstart',
+      },
     },
     onboarding: {
       badge: 'Onboarding berbasis penalaran',

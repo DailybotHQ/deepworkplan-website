@@ -95,17 +95,33 @@ export const tr: SiteTranslations = {
       secondaryCta: 'Spesifikasyonu okuyun',
       illustrationAlt:
         'Kayalık bir kıyıdaki bir deniz feneri, küçük bir tekneye yol gösteren tek bir ışık huzmesi gönderiyor — deponun, herhangi bir ajana rehberlik eden sağlam bir harness olduğunu çağrıştıran bir gravür.',
+      scrollCta: 'Nasıl çalıştığını görün',
     },
-    pitch: {
-      kicker: 'Sorun ve yanıt',
-      problem:
-        'Yapay zeka kodlama ajanları kısa süreli atılımlarda olağanüstü etkilidir. Uzun soluklu işlerde — bir geçiş, yeni bir alt sistem, onlarca dosyaya yayılan bir yeniden düzenleme — yönlerini kaybederler: bağlam dolar, kararlar unutulur ve çok saatlik görevler yarıda bırakılır.',
-      answer:
-        'Deep Work Plan buna spec odaklı geliştirmeyle yanıt verir: plan, kalıcı doğruluk kaynağıdır ve ajanlar açık kabul kriterlerine ve doğrulama kapılarına karşı çalışır. Sapma azalır, iş doğrulanabilir kalır ve herhangi bir ajan işi oturumlar arasında kaldığı yerden sürdürebilir.',
-      origin:
-        'Bu aynı zamanda taşınabilir hale getirilmiş harness mühendisliğidir. Bir ajan harness’ı, modelin etrafındaki iskeledir — bağlam, araçlar, kontrol döngüsü, güvenlik bariyerleri, sürdürülebilir durum — ve modeli güvenilir kılan budur. Deep Work Plan bu harness’ı deponun kendisine kurar (AGENTS.md, dokümanlar, .agents/ skill yuvası, DWP skill’i), böylece herhangi bir ajan herhangi bir depoyu pilotlayabilir. Dailybot’ta doğdu, aylarca sahada test edildi ve DailybotHQ/deepworkplan-skill olarak yayımlandı.',
-      illustrationAlt:
-        'Tehlikelerin yanından güvenle geçen tek bir çizili rotaya sahip bir deniz haritası — planın, işi rotada tutan yön olduğunu çağrıştıran bir gravür.',
+    story: {
+      act1: {
+        kicker: 'Yöntem · Perde I',
+        lead: 'Neyin bitti sayılacağına ve sınırların nerede olacağına siz karar verirsiniz. Plan niyetinizi taşır; ajanlar saatleri çalışır — sürekli gözetim yok, yirmi dakikada bir düzeltme yok.',
+        deepLinkLabel: 'Metodolojiyi okuyun',
+        deepLinkHref: '/methodology',
+      },
+      act2: {
+        kicker: 'Yöntem · Perde II',
+        lead: 'Uzun görevler her modelin bağlamını doldurur. Ayrıntılar kayar ve ajan saptar. Yazılı bir plan — atomik görevler, doğrulama kapıları, sürdürülebilir durum — her turda geri döndüğü çıpadır.',
+        deepLinkLabel: 'Çekirdek döngüyü görün',
+        deepLinkHref: '/methodology',
+      },
+      act3: {
+        kicker: 'Yöntem · Perde III',
+        lead: 'Her görev, kabul kriterlerini ve geçmesi gereken kontrolleri adlandırır. Ajan kendini bitmiş hissedemez — geçmek zorundadır, aksi hâlde görev açık kalır.',
+        deepLinkLabel: 'Şartnamayı okuyun',
+        deepLinkHref: '/spec',
+      },
+      act4: {
+        kicker: 'Yöntem · Perde IV',
+        lead: 'Bağlam, araçlar, koruma bariyerleri ve durum; herhangi bir ajanın okuyabileceği düz dosyalar olarak deponuzda yaşar. Kilitlenme yok, dış beyin yok — bağlam sıfırlamalarını atlatır.',
+        deepLinkLabel: 'Onboarding çıktısını görün',
+        deepLinkHref: '/quickstart',
+      },
     },
     onboarding: {
       badge: 'Akıl yürütmeye dayalı kuruluma alma',

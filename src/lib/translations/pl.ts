@@ -95,17 +95,33 @@ export const pl: SiteTranslations = {
       secondaryCta: 'Przeczytaj specyfikację',
       illustrationAlt:
         'Latarnia morska na skalistym brzegu rzuca pojedynczy snop światła prowadzący niewielki statek — rycina przywołująca repozytorium jako stabilny harness, który prowadzi każdego agenta.',
+      scrollCta: 'Zobacz, jak to działa',
     },
-    pitch: {
-      kicker: 'Problem i odpowiedź',
-      problem:
-        'Agenci kodujący AI są wyjątkowo skuteczni w krótkich zrywach. W długodystansowej pracy — migracji, nowym podsystemie, refaktoryzacji obejmującej dziesiątki plików — dryfują: kontekst się zapełnia, decyzje zostają zapomniane, a wielogodzinne zadania porzucone w połowie.',
-      answer:
-        'Deep Work Plan odpowiada na to za pomocą spec-driven development: plan jest trwałym źródłem prawdy, a agenci pracują w odniesieniu do jawnych kryteriów akceptacji i bramek walidacyjnych. Dryf maleje, praca pozostaje weryfikowalna, a każdy agent może wznowić ją między sesjami.',
-      origin:
-        'To także harness engineering w przenośnej formie. Harness agenta to rusztowanie wokół modelu — kontekst, narzędzia, pętla sterująca, zabezpieczenia, wznawialny stan — które czyni go niezawodnym. Deep Work Plan instaluje ten harness w samym repozytorium (AGENTS.md, dokumentacja, katalog skilli .agents/, skill DWP), dzięki czemu dowolny agent może pilotować dowolne repo. Powstał w Dailybot, sprawdzony w boju przez wiele miesięcy i udostępniony jako DailybotHQ/deepworkplan-skill.',
-      illustrationAlt:
-        'Mapa nawigacyjna z jednym wytyczonym kursem prowadzącym bezpiecznie pomiędzy zagrożeniami — rycina przywołująca plan jako kierunek, który utrzymuje pracę na właściwym torze.',
+    story: {
+      act1: {
+        kicker: 'Metoda · Akt I',
+        lead: 'To Ty decydujesz, co znaczy „skończone” i gdzie biegną granice. Plan niesie Twoją intencję; agenci odpracowują godziny — bez ciągłego nadzorowania i poprawek co dwadzieścia minut.',
+        deepLinkLabel: 'Przeczytaj metodologię',
+        deepLinkHref: '/methodology',
+      },
+      act2: {
+        kicker: 'Metoda · Akt II',
+        lead: 'Długie zadania zapełniają kontekst każdego modelu. Szczegóły znikają i agent dryfuje. Napisany plan — zadania atomowe, bramy walidacji, wznawialny stan — to punkt, do którego wraca z okrążenia na okrążenie.',
+        deepLinkLabel: 'Zobacz pętlę główną',
+        deepLinkHref: '/methodology',
+      },
+      act3: {
+        kicker: 'Metoda · Akt III',
+        lead: 'Każde zadanie nazywa swoje kryteria akceptacji i testy, które muszą przejść. Agent nie może czuć się skończony — musi przejść, albo zadanie pozostaje otwarte.',
+        deepLinkLabel: 'Przeczytaj specyfikację',
+        deepLinkHref: '/spec',
+      },
+      act4: {
+        kicker: 'Metoda · Akt IV',
+        lead: 'Kontekst, narzędzia, zabezpieczenia i stan mieszkają w Twoim repozytorium jako zwykłe pliki, które może przeczytać każdy agent. Bez lock-inu, bez zewnętrznego mózgu — przetrwa resetowanie kontekstu.',
+        deepLinkLabel: 'Zobacz, co tworzy onboarding',
+        deepLinkHref: '/quickstart',
+      },
     },
     onboarding: {
       badge: 'Onboarding oparty na rozumowaniu',

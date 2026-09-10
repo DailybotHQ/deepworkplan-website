@@ -89,17 +89,33 @@ export const en: SiteTranslations = {
       secondaryCta: 'Read the spec',
       illustrationAlt:
         'A lighthouse on a rocky shore casts a single beam guiding a small vessel — an engraving evoking the repository as a steady harness that guides any agent.',
+      scrollCta: 'See how it works',
     },
-    pitch: {
-      kicker: 'The problem and the answer',
-      problem:
-        'AI coding agents are remarkably effective in short bursts. On long-horizon work — a migration, a new subsystem, a refactor across dozens of files — they drift: context fills up, decisions are forgotten, and multi-hour tasks are abandoned halfway through.',
-      answer:
-        'Deep Work Plan answers with spec-driven development: the plan is the durable source of truth, and agents execute against explicit acceptance criteria and validation gates. Drift drops, the work stays verifiable, and any agent can resume it across sessions.',
-      origin:
-        'It is also harness engineering made portable. An agent harness is the scaffolding around a model — context, tools, control loop, guardrails, resumable state — that makes it reliable. Deep Work Plan installs that harness into the repository itself (AGENTS.md, docs, the .agents/ skills home, the DWP skill), so any agent can pilot any repo. Born at Dailybot, battle-tested for months, and released as the DailybotHQ/deepworkplan-skill.',
-      illustrationAlt:
-        'A nautical chart with a single plotted course threading safely past hazards — an engraving evoking the plan as the direction that keeps work on course.',
+    story: {
+      act1: {
+        kicker: 'The method · Act I',
+        lead: 'You decide what done means and where the lines are. The plan carries your intent; the agents do the hours — no babysitting, no correcting every twenty minutes.',
+        deepLinkLabel: 'Read the methodology',
+        deepLinkHref: '/methodology',
+      },
+      act2: {
+        kicker: 'The method · Act II',
+        lead: "Long tasks fill any model's context. Details fall away and the agent drifts. A written plan — atomic tasks, validation gates, resumable state — is what it returns to, lap after lap.",
+        deepLinkLabel: 'See the core loop',
+        deepLinkHref: '/methodology',
+      },
+      act3: {
+        kicker: 'The method · Act III',
+        lead: "Each task names its acceptance criteria and the checks that must pass. The agent doesn't get to feel finished — it has to pass, or the task stays open.",
+        deepLinkLabel: 'Read the specification',
+        deepLinkHref: '/spec',
+      },
+      act4: {
+        kicker: 'The method · Act IV',
+        lead: 'Context, tools, guardrails, and state live in your repository as plain files any agent can read. No lock-in, no external brain — it survives context resets.',
+        deepLinkLabel: 'See what onboarding generates',
+        deepLinkHref: '/quickstart',
+      },
     },
     onboarding: {
       badge: 'Reasoning-based onboarding',

@@ -94,17 +94,33 @@ export const de: SiteTranslations = {
       secondaryCta: 'Spezifikation lesen',
       illustrationAlt:
         'Ein Leuchtturm an felsiger Küste wirft einen einzelnen Strahl, der ein kleines Schiff lenkt — ein Stich, der das Repository als stabilen Anker („harness“) zeigt, der jeden Agenten führt.',
+      scrollCta: 'So funktioniert es',
     },
-    pitch: {
-      kicker: 'Das Problem und die Antwort',
-      problem:
-        'KI-Coding-Agenten sind in kurzen Schüben bemerkenswert wirksam. Bei langfristiger Arbeit — einer Migration, einem neuen Subsystem, einem Refactoring über Dutzende Dateien hinweg — driften sie ab: Der Kontext füllt sich, Entscheidungen geraten in Vergessenheit, und mehrstündige Aufgaben werden auf halbem Weg abgebrochen.',
-      answer:
-        'Deep Work Plan antwortet mit spec-driven Development: Der Plan ist die dauerhafte Quelle der Wahrheit, und Agenten arbeiten gegen explizite Akzeptanzkriterien und Validierungs-Gates. Das Abdriften nimmt ab, die Arbeit bleibt überprüfbar, und jeder Agent kann sie über Sitzungen hinweg wiederaufnehmen.',
-      origin:
-        'Es ist zugleich Harness Engineering, portabel gemacht. Ein Agenten-Harness ist das Gerüst um ein Modell herum — Kontext, Werkzeuge, Steuerschleife, Leitplanken, wiederaufnehmbarer Zustand —, das es zuverlässig macht. Deep Work Plan installiert dieses Harness in das Repository selbst (AGENTS.md, docs, das .agents/ Skill-Verzeichnis, die DWP-Skill), sodass jeder Agent jedes Repository steuern kann. Entstanden bei Dailybot, über Monate im Praxiseinsatz erprobt und als DailybotHQ/deepworkplan-skill veröffentlicht.',
-      illustrationAlt:
-        'Eine Seekarte mit einem einzigen eingezeichneten Kurs, der sicher an Gefahren vorbeiführt — ein Stich, der den Plan als die Richtung zeigt, die die Arbeit auf Kurs hält.',
+    story: {
+      act1: {
+        kicker: 'Die Methode · Akt I',
+        lead: 'Sie entscheiden, was „fertig“ heißt und wo die Grenzen verlaufen. Der Plan trägt Ihre Absicht; die Agenten verrichten die Stundenarbeit — ohne ständige Beaufsichtigung, ohne Korrekturen alle zwanzig Minuten.',
+        deepLinkLabel: 'Lesen Sie die Methodik',
+        deepLinkHref: '/methodology',
+      },
+      act2: {
+        kicker: 'Die Methode · Akt II',
+        lead: 'Lange Aufgaben füllen den Kontext jedes Modells. Details gehen verloren, der Agent driftet. Ein geschriebener Plan — atomare Aufgaben, Validierungs-Gates, wiederaufnehmbarer Zustand — ist der Ankerpunkt, zu dem er Runde für Runde zurückkehrt.',
+        deepLinkLabel: 'Kernzyklus ansehen',
+        deepLinkHref: '/methodology',
+      },
+      act3: {
+        kicker: 'Die Methode · Akt III',
+        lead: 'Jede Aufgabe nennt ihre Abnahmekriterien und die Prüfungen, die bestehen müssen. Der Agent darf sich nicht fertig fühlen — er muss bestehen, sonst bleibt die Aufgabe offen.',
+        deepLinkLabel: 'Spezifikation lesen',
+        deepLinkHref: '/spec',
+      },
+      act4: {
+        kicker: 'Die Methode · Akt IV',
+        lead: 'Kontext, Werkzeuge, Leitplanken und Zustand liegen als einfache Dateien in Ihrem Repository, die jeder Agent lesen kann. Kein Lock-in, kein externes Gehirn — übersteht Kontext-Resets.',
+        deepLinkLabel: 'Sehen Sie, was das Onboarding erzeugt',
+        deepLinkHref: '/quickstart',
+      },
     },
     onboarding: {
       badge: 'Reasoning-basiertes Onboarding',

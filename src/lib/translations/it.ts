@@ -94,17 +94,33 @@ export const it: SiteTranslations = {
       secondaryCta: 'Leggi la specifica',
       illustrationAlt:
         'Un faro su una costa rocciosa proietta un unico fascio che guida una piccola imbarcazione — un’incisione che evoca il repository come una harness stabile che guida qualsiasi agente.',
+      scrollCta: 'Scopri come funziona',
     },
-    pitch: {
-      kicker: 'Il problema e la risposta',
-      problem:
-        'Gli agenti di coding AI sono notevolmente efficaci in brevi sessioni. Sul lavoro a lungo termine — una migrazione, un nuovo sottosistema, un refactoring su decine di file — vanno alla deriva: il contesto si riempie, le decisioni vengono dimenticate e le attività di più ore vengono abbandonate a metà.',
-      answer:
-        'Deep Work Plan risponde con lo spec-driven development: il piano è la fonte di verità duratura e gli agenti eseguono rispetto a criteri di accettazione e validation gate espliciti. La deriva si riduce, il lavoro resta verificabile e qualsiasi agente può riprenderlo tra una sessione e l’altra.',
-      origin:
-        'È anche harness engineering reso portabile. Una harness per agenti è l’impalcatura attorno a un modello — contesto, strumenti, ciclo di controllo, salvaguardie, stato ripristinabile — che lo rende affidabile. Deep Work Plan installa quella harness nel repository stesso (AGENTS.md, docs, la home delle skill .agents/, la skill DWP), così qualsiasi agente può pilotare qualsiasi repo. Nato in Dailybot, collaudato per mesi e rilasciato come DailybotHQ/deepworkplan-skill.',
-      illustrationAlt:
-        'Una carta nautica con un’unica rotta tracciata che si snoda in sicurezza tra i pericoli — un’incisione che evoca il piano come la direzione che mantiene il lavoro in rotta.',
+    story: {
+      act1: {
+        kicker: 'Il metodo · Atto I',
+        lead: 'Sei tu a decidere cosa significa “fatto” e dove corrono i confini. Il piano porta la tua intenzione; gli agenti mettono le ore — senza supervisione continua, senza correzioni ogni venti minuti.',
+        deepLinkLabel: 'Leggi la metodologia',
+        deepLinkHref: '/methodology',
+      },
+      act2: {
+        kicker: 'Il metodo · Atto II',
+        lead: 'I task lunghi riempiono il contesto di qualsiasi modello. I dettagli sfumano e l’agente deriva. Un piano scritto — task atomici, validation gate, stato ripristinabile — è ciò a cui torna, giro dopo giro.',
+        deepLinkLabel: 'Vedi il ciclo principale',
+        deepLinkHref: '/methodology',
+      },
+      act3: {
+        kicker: 'Il metodo · Atto III',
+        lead: 'Ogni task nomina i propri criteri di accettazione e le verifiche che devono passare. L’agente non può sentirsi finito — deve passare, o il task resta aperto.',
+        deepLinkLabel: 'Leggi la specifica',
+        deepLinkHref: '/spec',
+      },
+      act4: {
+        kicker: 'Il metodo · Atto IV',
+        lead: 'Contesto, strumenti, guardrail e stato vivono nel tuo repository come semplici file che qualsiasi agente può leggere. Niente lock-in, niente cervello esterno — sopravvive ai reset del contesto.',
+        deepLinkLabel: 'Vedi cosa genera l’onboarding',
+        deepLinkHref: '/quickstart',
+      },
     },
     onboarding: {
       badge: 'Onboarding basato sul ragionamento',
