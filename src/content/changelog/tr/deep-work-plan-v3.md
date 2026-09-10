@@ -10,5 +10,5 @@ featured: true
 sourceLabel: "Skill release commit d050474"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a2b7675ce851efb377833b4960367"
 ---
-
+Amaç, DWP’nin bugünkü çalışma biçimini korurken onu daha çevik hale getirmek ve gereksiz bağlamı, döngüleri ve token tüketimini azaltarak küçük görevlerde de yararlı kılmaktır.
 Bu güncelleme bağlamı, korumaları, doğrulamayı ve sürdürülebilir durumu depoda birleştiriyor.

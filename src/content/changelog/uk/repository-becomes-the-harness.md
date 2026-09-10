@@ -12,7 +12,7 @@ sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG
 sourceLinks:
   - label: "Dailybot — How we run long-horizon agent work"
     url: "https://www.dailybot.com/blog/how-we-run-long-horizon-agent-work/"
-  - label: "Xergio Alex — Deep Work Plan"
+  - label: "XergioAlex — Deep Work Plan: Give Your Agent a Plan and a Harness"
     url: "https://xergioalex.com/blog/deep-work-plan/"
   - label: "Deep Work Plan skill changelog"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"

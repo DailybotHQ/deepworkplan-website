@@ -61,7 +61,7 @@ export const it: SiteTranslations = {
       'Una cronologia documentata delle release e delle decisioni di design che rendono Deep Work Plan affidabile per il lavoro degli agenti a lungo termine.',
     viewDetail: 'Leggi l’aggiornamento',
     backToIndex: 'Tutti gli aggiornamenti',
-    sourceLabel: 'Fonte',
+    sourceLabel: 'Fonti',
     featuredLabel: 'Release in evidenza',
     relatedTitle: 'Aggiornamenti correlati',
   },

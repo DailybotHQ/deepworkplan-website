@@ -61,7 +61,7 @@ export const fr: SiteTranslations = {
       'Une chronologie sourcée des versions et des choix de conception qui rendent Deep Work Plan fiable pour le travail d’agents au long cours.',
     viewDetail: 'Lire la mise à jour',
     backToIndex: 'Toutes les mises à jour',
-    sourceLabel: 'Source',
+    sourceLabel: 'Sources',
     featuredLabel: 'Version à la une',
     relatedTitle: 'Mises à jour connexes',
   },

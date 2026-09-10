@@ -10,5 +10,5 @@ featured: true
 sourceLabel: "Skill release commit d050474"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a2b7675ce851efb377833b4960367"
 ---
-
+Das Ziel ist, das heutige Verhalten von DWP zu bewahren, es agiler zu machen und auch für kleine Aufgaben nutzbar zu halten, mit weniger Kontextlast, unnötigen Schleifen und Tokenverbrauch.
 Diese Aktualisierung macht das Repository zum Harness des Agenten und bündelt Kontext, Regeln, Validierung und fortsetzbaren Zustand.

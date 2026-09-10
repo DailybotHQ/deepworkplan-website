@@ -56,7 +56,7 @@ export const es: SiteTranslations = {
       'Una línea de tiempo basada en fuentes sobre las versiones y decisiones de diseño que hacen fiable a Deep Work Plan para el trabajo de largo aliento.',
     viewDetail: 'Leer la actualización',
     backToIndex: 'Todos los cambios',
-    sourceLabel: 'Fuente',
+    sourceLabel: 'Fuentes',
     featuredLabel: 'Lanzamiento destacado',
     relatedTitle: 'Cambios relacionados',
   },

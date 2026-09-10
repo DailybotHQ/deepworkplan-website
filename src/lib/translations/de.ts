@@ -61,7 +61,7 @@ export const de: SiteTranslations = {
       'Eine quellenbasierte Zeitleiste der Releases und Designentscheidungen, die Deep Work Plan für langfristige Agentenarbeit zuverlässig machen.',
     viewDetail: 'Update lesen',
     backToIndex: 'Alle Updates',
-    sourceLabel: 'Quelle',
+    sourceLabel: 'Quellen',
     featuredLabel: 'Hervorgehobenes Release',
     relatedTitle: 'Verwandte Updates',
   },

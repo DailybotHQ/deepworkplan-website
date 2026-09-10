@@ -61,7 +61,7 @@ export const uk: SiteTranslations = {
       'Хронологія з посиланнями на джерела: релізи та дизайнерські рішення, які роблять Deep Work Plan надійним для тривалої роботи агентів.',
     viewDetail: 'Читати оновлення',
     backToIndex: 'Усі оновлення',
-    sourceLabel: 'Джерело',
+    sourceLabel: 'Джерела',
     featuredLabel: 'Основний реліз',
     relatedTitle: 'Пов’язані оновлення',
   },

@@ -10,5 +10,5 @@ featured: true
 sourceLabel: "Skill release commit d050474"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a2b7675ce851efb377833b4960367"
 ---
-
+Mục tiêu là giữ nguyên cách DWP đang hoạt động, làm cho nó linh hoạt hơn và hữu ích với cả tác vụ nhỏ, đồng thời giảm ngữ cảnh lặp lại, vòng lặp không cần thiết và mức tiêu thụ token.
 Bản cập nhật biến kho mã thành harness của tác nhân, kết hợp ngữ cảnh, rào chắn, xác thực và trạng thái có thể tiếp tục.

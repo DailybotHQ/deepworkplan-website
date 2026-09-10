@@ -56,7 +56,7 @@ export const en: SiteTranslations = {
       'A source-backed timeline of the releases and design decisions that make Deep Work Plan reliable for long-horizon agent work.',
     viewDetail: 'Read the update',
     backToIndex: 'All updates',
-    sourceLabel: 'Source',
+    sourceLabel: 'Sources',
     featuredLabel: 'Featured release',
     relatedTitle: 'Related updates',
   },

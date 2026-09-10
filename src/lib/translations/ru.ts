@@ -61,7 +61,7 @@ export const ru: SiteTranslations = {
       'Хронология с указанием источников: релизы и проектные решения, которые делают Deep Work Plan надёжным для долгой работы агентов.',
     viewDetail: 'Читать обновление',
     backToIndex: 'Все обновления',
-    sourceLabel: 'Источник',
+    sourceLabel: 'Источники',
     featuredLabel: 'Главный релиз',
     relatedTitle: 'Связанные обновления',
   },

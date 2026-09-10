@@ -61,7 +61,7 @@ export const pl: SiteTranslations = {
       'Oparta na źródłach oś czasu wydań i decyzji projektowych, które sprawiają, że Deep Work Plan nadaje się do długiej pracy agentów.',
     viewDetail: 'Przeczytaj aktualizację',
     backToIndex: 'Wszystkie aktualizacje',
-    sourceLabel: 'Źródło',
+    sourceLabel: 'Źródła',
     featuredLabel: 'Wyróżnione wydanie',
     relatedTitle: 'Powiązane aktualizacje',
   },

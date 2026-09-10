@@ -10,5 +10,5 @@ featured: true
 sourceLabel: "Skill release commit d050474"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a2b7675ce851efb377833b4960367"
 ---
-
+L’objectif est de conserver le fonctionnement actuel de DWP tout en le rendant plus agile et utile pour les petites tâches, avec moins de contexte répété, de boucles inutiles et de tokens consommés.
 Cette mise à jour fait du dépôt le harness de l’agent : contexte, garde-fous, validation et état reprenable sont réunis.

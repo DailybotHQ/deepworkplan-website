@@ -61,7 +61,7 @@ export const tr: SiteTranslations = {
       'Deep Work Plan’ı uzun vadeli ajan çalışmaları için güvenilir kılan sürümleri ve tasarım kararlarını kaynaklarıyla izleyen zaman çizelgesi.',
     viewDetail: 'Güncellemeyi oku',
     backToIndex: 'Tüm güncellemeler',
-    sourceLabel: 'Kaynak',
+    sourceLabel: 'Kaynaklar',
     featuredLabel: 'Öne çıkan sürüm',
     relatedTitle: 'İlgili güncellemeler',
   },

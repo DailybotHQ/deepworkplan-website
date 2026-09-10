@@ -10,5 +10,5 @@ featured: true
 sourceLabel: "Skill release commit d050474"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a2b7675ce851efb377833b4960367"
 ---
-
+目标是在保留 DWP 当前工作方式的同时，让它更敏捷，也能服务于小任务，减少重复上下文、不必要的循环和令牌消耗。
 本次更新让仓库成为代理运行框架，集中承载上下文、规则、验证和可恢复状态。

@@ -10,5 +10,5 @@ featured: true
 sourceLabel: "Skill release commit d050474"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a2b7675ce851efb377833b4960367"
 ---
-
+目標は、DWP の現在の動作を保ちながら、より素早く使いやすくし、小さなタスクにも活用できるよう、重複したコンテキストや不要なループ、トークン消費を減らすことです。
 この更新では、コンテキスト、検証、ガードレール、再開可能な状態をリポジトリに集約します。
