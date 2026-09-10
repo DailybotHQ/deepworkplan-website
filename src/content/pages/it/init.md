@@ -32,6 +32,8 @@ Sei un agente di coding AI. Leggi per intero questo prompt, poi rendi il reposit
 
 ## 0. Leggi la metodologia e la specifica
 
+La metodologia si regge su tre pilastri: **sviluppo guidato dalla specifica** (la specifica scritta è la fonte della verità), **ingegneria della harness** (il repository porta contesto, strumenti, guardrail e stato) ed **efficienza dei token** (l’harness carica progressivamente e la validazione tocca solo ciò che è cambiato — lavoro di lungo corso by design, efficiente per costruzione).
+
 Prima di cambiare qualsiasi cosa, leggi le fonti canoniche così da comprendere lo standard che stai adottando:
 
 - Metodologia: https://deepworkplan.com/methodology.md

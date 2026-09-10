@@ -33,6 +33,8 @@ et non comme une retouche rapide.
 
 ## 0. Lire la méthodologie et la spécification
 
+La méthodologie s’appuie sur trois piliers : le **développement piloté par la spécification** (la spécification écrite est la source de vérité), l’**ingénierie du harness** (le dépôt porte le contexte, les outils, les garde-fous et l’état) et l’**efficacité des tokens** (le harness charge progressivement et la validation ne touche que ce qui a changé — un travail long terme par conception, efficace par construction).
+
 Avant de modifier quoi que ce soit, lisez les sources canoniques pour comprendre le standard que vous adoptez :
 
 - Méthodologie : https://deepworkplan.com/methodology.md

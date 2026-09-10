@@ -24,7 +24,19 @@ La capacità di un agente di coding AI dipende meno dal modello che dalla qualit
 
 Questo ridefinisce cosa significhi delegare bene. Una buona delega non è chiedere del lavoro a un agente — è definire il lavoro in modo abbastanza chiaro da poter essere eseguito correttamente: l’obiettivo, i vincoli, il contesto di cui l’agente altrimenti mancherebbe e i criteri che decidono se ha avuto successo. La maggior parte del valore si crea prima che l’esecuzione cominci.
 
-Deep Work Plan è la disciplina di svolgere quel lavoro a monte in una forma duratura e ripetibile. I suoi due pilastri sono le due metà di una buona direzione: una **specifica** definisce cosa significhi «corretto» e una **harness** dà all’agente il contesto e gli strumenti per raggiungerlo. Insieme convertono la capacità grezza di un modello in ingegneria affidabile — sostenuta lungo un’attività che dura ore e preservata tra agenti che cambiano da una sessione all’altra.
+Deep Work Plan è la disciplina di svolgere quel lavoro a monte in una forma duratura e ripetibile. I suoi due pilastri fondativi sono le due metà di una buona direzione: una **specifica** definisce cosa significhi «corretto» e una **harness** dà all’agente il contesto e gli strumenti per raggiungerlo. Insieme convertono la capacità grezza di un modello in ingegneria affidabile — sostenuta lungo un’attività che dura ore e preservata tra agenti che cambiano da una sessione all’altra. Una terza disciplina mantiene la combinazione sostenibile su scala: l’**efficienza dei token**, perché un harness che funziona è uno che l’agente può portare attraverso un orizzonte lungo.
+
+## Efficiente per costruzione
+
+Il primo pilastro rende il lavoro corretto; il secondo lo rende portatile. Il terzo lo mantiene **sostenibile** — perché il contesto è la risorsa più scarsa che un agente di coding abbia, e una metodologia che lo spreca fallisce esattamente quando il lavoro si allunga.
+
+Tre meccanismi fanno il lavoro:
+
+- **Divulgazione progressiva.** L’agente legge un nucleo essenziale, e ogni guida o sezione della specifica si carica solo quando il flusso stesso attiva il suo trigger. L’agente porta con sé il capitolo di cui ha bisogno, non l’intero libro.
+- **Validazione selezionata dalla superficie toccata.** Ogni attività registra ciò che modifica e sceglie il suo varco per classe di rischio — una modifica piccola e isolata si prova in modo circoscritto; una modifica a machineria condivisa si prova ampiamente.
+- **Apprendimento locale per attività.** Quando un’attività produce un pattern riutilizzabile, la decisione avviene dentro di essa, dove l’evidenza è fresca — non in una retrospettiva che nessuno legge.
+
+Nulla di questo dichiara di essere senza perdite per costruzione, né viene promosso con percentuali inventate. I byte di istruzione che ogni flusso richiede sono misurati e pubblicati; le affermazioni comportamentali sono supportate da replay con errori seminati. Ciò che si può dire chiaramente è questo: l’agente legge meno di ciò che non gli serve, riesegue meno di ciò che non è cambiato e decide più dove vive l’evidenza — e questi risparmi si compongono lungo un orizzonte lungo.
 
 ## Spec-driven by design
 

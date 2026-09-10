@@ -31,6 +31,8 @@ Você é um agente de código de IA. Leia este prompt inteiro primeiro e, então
 
 ## 0. Leia a metodologia e a especificação
 
+A metodologia se apoia em três pilares: **desenvolvimento guiado por especificação** (a especificação escrita é a fonte da verdade), **engenharia de harness** (o repositório carrega o contexto, as ferramentas, os guardrails e o estado) e **eficiência de tokens** (o harness carrega progressivamente e a validação toca apenas o que mudou — trabalho de longo alcance por design, eficiente por construção).
+
 Antes de alterar qualquer coisa, leia as fontes canônicas para entender o padrão que você está adotando:
 
 - Metodologia: https://deepworkplan.com/methodology.md

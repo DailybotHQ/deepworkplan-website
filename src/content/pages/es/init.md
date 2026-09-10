@@ -34,6 +34,8 @@ Plan — no como una edición rápida.
 
 ## 0. Lee la metodología y la especificación
 
+La metodología se apoya en tres pilares: **desarrollo guiado por especificación** (la especificación escrita es la fuente de la verdad), **ingeniería de harness** (el repositorio lleva el contexto, las herramientas, los guardarraíles y el estado) y **eficiencia de tokens** (el harness carga progresivamente y la validación toca solo lo que cambió — trabajo de largo alcance por diseño, eficiente por construcción).
+
 Antes de cambiar nada, lee las fuentes canónicas para entender el estándar que estás adoptando:
 
 - Metodología: https://deepworkplan.com/methodology.md
