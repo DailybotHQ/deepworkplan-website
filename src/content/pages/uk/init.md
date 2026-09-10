@@ -141,7 +141,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 ## 4. Встановіть обовʼязковий локальний огляд, потім запропонуйте опційні аддони
 
 Після базового онбордингу встановіть **локальний огляд AI Diff Reviewer** (Phase 7a — обовʼязковий починаючи зі стандарту 2.3.0): закріплений за тегом vendored-скіл
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) плюс адаптований під репозиторій `.review/extension.md` через `generate-extension`, за згодою онбордингу. Потім
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) плюс адаптований під репозиторій `.review/extension.md` через `generate-extension`, за згодою онбордингу. Потім
 перелічіть чотири опційні аддони (devcontainer, Dailybot, dependency-upgrade, design-system) і
 запропонуйте кожен як явний вибір. Репозиторій повністю відповідний з **нульовою** кількістю опційних аддонів —
 ніколи не встановлюйте їх автоматично.

@@ -147,7 +147,7 @@ onboard सब-स्किल (`/deepworkplan-onboard`) आमंत्रि�
 
 आधाररेखा ऑनबोर्डिंग के बाद, **AI Diff Reviewer स्थानीय समीक्षा** स्थापित करें (Phase 7a — संस्करण
 2.3.0 से आवश्यक): tag-pinned vendored स्किल
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) साथ ही
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) साथ ही
 `generate-extension` के माध्यम से रिपॉज़िटरी के लिए ढाली गई `.review/extension.md`, ऑनबोर्डिंग की
 सहमति के अंतर्गत। फिर चार वैकल्पिक ऐडऑन (devcontainer, Dailybot, dependency-upgrade, design-system)
 गिनाएँ और हर एक को एक स्पष्ट ऑप्ट-इन के रूप में प्रस्तुत करें। एक रिपॉज़िटरी **शून्य** वैकल्पिक ऐडऑन

@@ -145,7 +145,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 После базового онбординга установите **локальный обзор AI Diff Reviewer** (Phase 7a — обязателен
 начиная со стандарта 2.3.0): закреплённый по тегу вендорённый skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) плюс
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) плюс
 адаптированный под репозиторий `.review/extension.md` через `generate-extension`, в рамках согласия
 онбординга. Затем перечислите четыре опциональных дополнения (devcontainer, Dailybot,
 dependency-upgrade, design-system) и предложите каждое как явное согласие. Репозиторий полностью

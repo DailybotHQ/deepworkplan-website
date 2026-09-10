@@ -151,7 +151,7 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
 
 Sau khi khởi tạo nền tảng, hãy cài **đánh giá cục bộ AI Diff Reviewer** (Giai đoạn 7a — bắt buộc kể từ
 chuẩn 2.3.0): skill vendored được ghim theo tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) cùng một
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) cùng một
 `.review/extension.md` được điều chỉnh riêng cho repo qua `generate-extension`, dưới sự chấp thuận của
 quá trình khởi tạo. Sau đó liệt kê bốn addon tùy chọn (devcontainer, Dailybot, dependency-upgrade,
 design-system) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository hoàn toàn tuân thủ

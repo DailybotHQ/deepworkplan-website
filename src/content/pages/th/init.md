@@ -141,7 +141,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 หลังจากการออนบอร์ดพื้นฐาน ให้ติดตั้ง **การตรวจสอบในเครื่องของ AI Diff Reviewer** (Phase 7a — จำเป็น
 ตั้งแต่มาตรฐาน 2.3.0) ได้แก่ skill ที่ฝังมาพร้อมและตรึงด้วยแท็ก
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) บวกกับ
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) บวกกับ
 `.review/extension.md` ที่ปรับให้เข้ากับ repo ผ่าน `generate-extension` ภายใต้ความยินยอมของการออนบอร์ด จากนั้น
 ให้แจกแจงส่วนเสริมแบบเลือกได้สี่อย่าง (devcontainer, Dailybot, dependency-upgrade, design-system) และเสนอแต่ละอย่าง
 เป็นการเลือกเข้าร่วมอย่างชัดแจ้ง repository สอดคล้องอย่างสมบูรณ์โดยมีส่วนเสริมแบบเลือกได้ **ศูนย์** อย่าง —

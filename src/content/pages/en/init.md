@@ -118,6 +118,42 @@ Or clone and run the setup script:
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh
 ```
 
+### Current standard and execution model
+
+The current repository-facing standard is **DWP 2.3.0**, implemented by the
+Deep Work Plan skill release installed above. The current skill pack includes
+the router and eight sub-skills: `create`, `execute`, `refine`, `resume`,
+`status`, `verify`, `onboard`, and `author`. The standard is deliberately
+proportional: use an inline goal, acceptance criteria, and gate for a small
+single-concern change; use a full plan for multi-step work; and use the deep
+tier when work spans parallel groups, child repositories, or unattended
+sessions.
+
+For a full plan, the repository is the durable execution surface. The plan
+contains atomic tasks, a **Touched Surface** that explains what changed and
+which consumers are affected, acceptance criteria, and a validation gate
+selected from the repository's documented test map. A new plan writes its
+identity manifest first, records its analysis, creates the task list, and flips
+the live state last so an interrupted creation can be recovered instead of
+guessed at. When the state layer is present, `manifest.json` describes the
+plan and `state.json` records checkpoints, task status, gate results, and
+blockers.
+
+Every plan has one mandatory closing task: **Final Review**. It runs the
+security pass over the accumulated change set, including the required local
+AI Diff Reviewer review, validates the final repository state, reconciles the
+skills used by the tasks, and records the evidence and limitations. The local
+review skill is installed at a pinned release; the current documented command
+uses `DailybotHQ/ai-diff-reviewer@v2.0.1`. The GitHub Action is a separate,
+optional CI surface and is never required for the core methodology.
+
+Unattended execution is supported only for a plan approved in advance. It
+requires the machine-readable state layer, a declared DWP standard, bounded
+authority, and explicit stop conditions. If a gate fails outside the planned
+repair scope, the repository diverges, or a new approval or credential is
+needed, the agent records the blocker and stops. No flow weakens a validation
+gate to claim completion.
+
 ## 3. Onboard the repository (reasoned and non-destructive)
 
 Invoke the onboard sub-skill (`/deepworkplan-onboard`). Reason about the real repo and adapt everything
@@ -153,7 +189,7 @@ methodology) instead of overwriting — and confirm with the user before replaci
 
 After the baseline onboarding, install the **AI Diff Reviewer local review** (Phase 7a — required
 since standard 2.3.0): the tag-pinned vendored skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) plus a
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus a
 repo-tailored `.review/extension.md` via `generate-extension`, under the onboarding consent. Then
 enumerate the four optional addons (devcontainer, Dailybot, dependency-upgrade, design-system) and
 offer each as an explicit opt-in. A repository is fully conformant with **zero** optional addons —

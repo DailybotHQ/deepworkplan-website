@@ -133,7 +133,7 @@ Methodik angleichen), statt es zu überschreiben — und bestätigen Sie mit dem
 ## 4. Die erforderliche lokale Überprüfung installieren, dann die Opt-in-Addons anbieten
 
 Installieren Sie nach dem Baseline-Onboarding die **lokale Überprüfung des AI Diff Reviewer** (Phase 7a — seit Standard 2.3.0 erforderlich): die tag-gepinnte vendorte Skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) plus eine
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus eine
 repo-zugeschnittene `.review/extension.md` via `generate-extension`, unter der Onboarding-Zustimmung. Zählen Sie dann die vier optionalen Addons auf (devcontainer, Dailybot, dependency-upgrade,
 design-system) und bieten Sie jedes als explizites Opt-in an. Ein Repository ist
 mit **null** optionalen Addons vollständig konform — installieren Sie diese niemals automatisch.

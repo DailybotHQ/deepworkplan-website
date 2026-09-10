@@ -141,7 +141,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 ## 4. 필수 로컬 리뷰를 설치한 뒤 선택형 애드온을 제안하세요
 
 기준선 온보딩 이후, **AI Diff Reviewer 로컬 리뷰**를 설치하세요(7a 단계 — 표준 2.3.0부터 필수):
-태그 고정 벤더 스킬(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`)과
+태그 고정 벤더 스킬(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`)과
 `generate-extension`을 통한 저장소 맞춤 `.review/extension.md`을, 온보딩 동의 아래 설치합니다. 그런 다음
 네 가지 선택적 애드온(devcontainer, Dailybot, dependency-upgrade, design-system)을 열거하고
 각각을 명시적 선택형으로 제안하세요. 리포지토리는 선택적 애드온이 **하나도** 없어도 완전히

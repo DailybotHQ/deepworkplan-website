@@ -127,7 +127,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ## 4. 安装必备的本地审查，然后提供可选的附加组件
 
-在基线接入完成之后，安装 **AI Diff Reviewer 本地审查**（第 7a 阶段——自标准 2.3.0 起必备）：在接入授权之下，安装标签锁定的 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`），并通过 `generate-extension` 生成按仓库定制的 `.review/extension.md`。然后列举四个可选附加组件（devcontainer、Dailybot、dependency-upgrade、design-system），并把每一个作为一项明确的可选项来提供。一个仓库
+在基线接入完成之后，安装 **AI Diff Reviewer 本地审查**（第 7a 阶段——自标准 2.3.0 起必备）：在接入授权之下，安装标签锁定的 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`），并通过 `generate-extension` 生成按仓库定制的 `.review/extension.md`。然后列举四个可选附加组件（devcontainer、Dailybot、dependency-upgrade、design-system），并把每一个作为一项明确的可选项来提供。一个仓库
 在不带**任何**可选附加组件时即完全符合规范——绝不自动安装它们。
 
 - **Devcontainer 支持** —— 一个可复现、隔离的开发容器，具备持久的 AI-CLI 认证。

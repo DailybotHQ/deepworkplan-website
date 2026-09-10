@@ -146,7 +146,7 @@ metodologia) anziché sovrascriverlo — e conferma con l’utente prima di sost
 
 Dopo l’onboarding di base, installa la **revisione locale AI Diff Reviewer** (Fase 7a — richiesta
 dallo standard 2.3.0): la skill vendorizzata fissata al tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) più un
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) più un
 `.review/extension.md` su misura per il repository via `generate-extension`, sotto il consenso
 dell’onboarding. Poi elenca i quattro addon opzionali (devcontainer, Dailybot, dependency-upgrade,
 design-system) e proponi ciascuno come opt-in esplicito. Un repository è pienamente conforme con

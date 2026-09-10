@@ -142,7 +142,7 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
 
 Po onboardingu bazowym zainstaluj **lokalny przegląd AI Diff Reviewer** (Phase 7a — wymagany od
 standardu 2.3.0): vendorowaną skill przypiętą do tagu
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) plus dopasowany
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus dopasowany
 do repozytorium `.review/extension.md` przez `generate-extension`, w ramach zgody onboardingu. Następnie
 wymień cztery opcjonalne dodatki (devcontainer, Dailybot, dependency-upgrade, design-system) i zaproponuj
 każdy jako wyraźną opcję do wyboru. Repozytorium jest w pełni zgodne przy **zerowej** liczbie opcjonalnych

@@ -152,7 +152,7 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
 
 Setelah onboarding dasar, pasang **tinjauan lokal AI Diff Reviewer** (Fase 7a — wajib sejak
 standar 2.3.0): skill vendored yang dipatok pada tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) ditambah
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) ditambah
 `.review/extension.md` yang disesuaikan dengan repo melalui `generate-extension`, di bawah persetujuan
 onboarding. Lalu sebutkan keempat addon opsional (devcontainer, Dailybot, dependency-upgrade,
 design-system) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori sepenuhnya

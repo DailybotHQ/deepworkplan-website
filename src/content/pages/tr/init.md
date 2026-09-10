@@ -152,7 +152,7 @@ teyit edin.
 
 Temel onboarding sonrasında, **AI Diff Reviewer yerel incelemesini** kurun (Faz 7a — 2.3.0
 standardından itibaren gereklidir): etikete sabitlenmiş vendored skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) artı
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) artı
 `generate-extension` aracılığıyla depoya uyarlanmış bir `.review/extension.md`, onboarding onayı
 altında. Ardından dört isteğe bağlı eklentiyi (devcontainer, Dailybot, dependency-upgrade,
 design-system) sıralayın ve her birini açık bir tercih olarak sunun. Bir depo, **sıfır** isteğe bağlı
