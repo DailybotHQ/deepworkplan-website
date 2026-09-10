@@ -67,12 +67,12 @@ An interface-surface-scoped `DESIGN.md` any coding agent reads for consistent UI
 
 ### AI Diff Reviewer (fifth addon)
 
-An opt-in connection to the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, current **v2.0.0**) that augments the mandatory Security Review with a structured local review, and optionally gates pull requests in CI.
+An opt-in connection to the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, current **v2.0.0**) that augments the mandatory Final Review security pass with a structured local review, and optionally gates pull requests in CI.
 
 - **Kit page:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — full capability reference
-- **What the DWP addon wires:** local Security Review augmentation via the upstream parent default flow; required `.review/extension.md` (skill alone is incomplete); Flow B optionally installs `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) and surfaces `apply-review` as a developer-invoked companion — never a plan task
+- **What the DWP addon wires:** local Final Review security pass augmentation via the upstream parent default flow; required `.review/extension.md` (skill alone is incomplete); Flow B optionally installs `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) and surfaces `apply-review` as a developer-invoked companion — never a plan task
 - **Flows:** **A — local-only** (skill + extension) or **B — dual-surface** (skill + extension + CI Action). The addon **MUST ask** which flow; never default
-- **Soft-fail vs gate:** missing skill/extension/invocation errors never block; `critical` findings from a **completed** local pass still follow the Security Review contract
+- **Soft-fail vs gate:** missing skill/extension/invocation errors never block; `critical` findings from a **completed** local pass still follow the Final Review security pass contract
 - **Parity (Flow B):** shared `prompt.md` + extension align methodology/severity; CI Iteration-Aware Review may shorten round 2+ while local stays a full pass
 - **Vendor-neutral guardrail:** core DWP has **zero** AI Diff Reviewer dependency; never auto-install for everyone
 - **When offered:** developer or team wants structured local review and/or a CI PR merge gate
