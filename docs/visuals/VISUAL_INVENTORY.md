@@ -10,7 +10,7 @@
 > every ▦ diagram slot (HP-03/04/05, all ME/SP/KT) is built as an HTML/CSS component
 > under `src/components/diagrams/` (see [`docs/DIAGRAM_COMPONENTS.md`](../DIAGRAM_COMPONENTS.md));
 > these prompt entries are kept as the **component specs / i18n seed**. Only the
-> 🖼 illustrations (HP-01, HP-02, HP-06…HP-09) are generated as images.
+> 🖼 illustrations (HP-01, HP-02, HP-06…HP-11) are generated as images.
 
 **Priority key:** ★ flagship · H high · M medium · L low.
 **Type:** 🖼 illustration (→ image) · ▦ diagram (→ component).
@@ -33,6 +33,8 @@
 | HP-07 | `diagrams/home/PlanNoDrift.astro` → Act II plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-plan-no-drift.png` | done |
 | HP-08 | `diagrams/home/DoneIsAContract.astro` → Act III plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-done-is-a-contract.png` | done |
 | HP-09 | `diagrams/home/RepoAsHarnessPlate.astro` → Act IV plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-repo-as-harness.png` | done |
+| HP-10 | `Pitch.astro` → problem/answer diptych, illustration left | 🖼 | H | 4:5 · 520×650 | transparent (dual-ink PNG) | `home/plate-pitch-problem.png` | done |
+| HP-11 | `diagrams/home/ContextEconomy.astro` → Act V plate art (token economy) | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-context-economy.png` | done |
 
 > `Comparison.astro` and `Origin.astro`: candidate `skip` — Comparison is a table
 > (status marks may be CSS, not an asset); Origin already carries the Dailybot
