@@ -450,10 +450,10 @@
 | HP-03 | diagram (component) | done — `QuickstartFlow` |
 | HP-04 | diagram (component) | done — `OnboardingSequence` |
 | HP-05 | diagram (component) | done — `ArchetypesCompare` |
-| HP-06 | illustration (image) | done — `HumansSteer` (awaiting generated assets) |
-| HP-07 | illustration (image) | done — `PlanNoDrift` (awaiting generated assets) |
-| HP-08 | illustration (image) | done — `DoneIsAContract` (awaiting generated assets) |
-| HP-09 | illustration (image) | done — `RepoAsHarnessPlate` (awaiting generated assets) |
+| HP-06 | illustration (image) | done — `HumansSteer` (integrated) |
+| HP-07 | illustration (image) | done — `PlanNoDrift` (integrated) |
+| HP-08 | illustration (image) | done — `DoneIsAContract` (integrated) |
+| HP-09 | illustration (image) | done — `RepoAsHarnessPlate` (integrated) |
 | HP-10 | illustration (image) | done — `Pitch` problem/answer diptych |
 | HP-11 | illustration (image) | done — `ContextEconomy` Act V |
 | Comparison | — | skip (table → CSS ticks) |
