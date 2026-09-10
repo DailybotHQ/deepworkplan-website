@@ -10,7 +10,7 @@ order: 2
 
 เชื่อมการดำเนินการ Deep Work Plan กับ **ทีม Dailybot** เพื่อให้มนุษย์เห็นว่าเอเจนต์กำลังสร้างอะไร — kickoff ความคืบหน้าระหว่างแผน ตัวบล็อก และการเสร็จสิ้น — โดยไม่ต้องเพิ่มการประชุมหรือ toolchain ที่สอง **Opt-in** addon สำหรับทีมที่ใช้ [Dailybot](https://www.dailybot.com) อยู่แล้ว
 
-วิธีการหลักของ Deep Work Plan **ไม่พึ่งพา** Dailybot เลย รีโพที่มี addon ศูนย์ตัวก็สอดคล้องมาตรฐานครบ ให้ addon นี้เฉพาะเมื่อนักพัฒนาหรือทีมใช้ Dailybot อยู่แล้ว อย่าติดตั้งอัตโนมัติให้ทุกคน
+วิธีการหลักของ Deep Work Plan **ไม่พึ่งพา** Dailybot เลย รีโพที่มี addon แบบเลือกใช้ศูนย์ตัวก็สอดคล้องมาตรฐานครบ ให้ addon นี้เฉพาะเมื่อนักพัฒนาหรือทีมใช้ Dailybot อยู่แล้ว อย่าติดตั้งอัตโนมัติให้ทุกคน
 
 ## เมื่อไหร่ควรใช้
 
@@ -123,7 +123,7 @@ Addon นี้ **ไม่** ถาม email OTP หรือ API keys แล�
 
 ## ขั้นตอน onboarding
 
-ระหว่าง DWP `onboard` ใน **Phase 7b** หลัง scaffolding AI-first หลัก ขั้นตอนเสนอห้า addon แบบ opt-in หากนักพัฒนายอมรับ Dailybot:
+ระหว่าง DWP `onboard` ใน **Phase 7b** หลัง scaffolding AI-first หลัก ขั้นตอนเสนอสี่ addon แบบ opt-in (การตรวจสอบในเครื่องของ AI Diff Reviewer ถูกติดตั้งไปแล้วใน Phase 7a) หากนักพัฒนายอมรับ Dailybot:
 
 1. ตรวจการตั้งค่าที่มี (skill, CLI, `.dailybot/profile.json`, hook, ขั้นตอนรายงาน)
 2. เสนอติดตั้ง skill/CLI ผ่านขั้นตอนความยินยอมของ Dailybot
