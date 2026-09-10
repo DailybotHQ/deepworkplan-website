@@ -28,8 +28,6 @@
 
 The site is a fast, fully multilingual static site built with [Astro](https://astro.build) — 17 languages ship today (English, Spanish, Portuguese, Chinese, Japanese, German, French, Korean, Russian, Italian, Turkish, Indonesian, Vietnamese, Hindi, Polish, Ukrainian, Thai). It explains and sells the methodology, hosts the readable specification, and catalogs the kit (presets, adapters, commands) for installing DWP into any repository. The repository **dogfoods** the methodology it documents.
 
-The tone is serious, neutral, and technical — this is a specification-and-methodology site, not a personal blog.
-
 ### This repository dogfoods DWP
 
 The repository practices the methodology it documents. The official DeepWorkPlan skill is installed under `.agents/skills/deepworkplan/` as a **reference install** — the skill source is gitignored, and a committed `skills-lock.json` pins it. What is committed is the thin `dwp-*` command delegators, the `/skill-create` and `/agent-create` delegators (which route to the skill's **author** sub-skill that grows the repo's own kit), the `/lib-upgrade` delegator for the opt-in **dependency-upgrade** add-on, and the `/init` adoption flow. All Deep Work Plan output lives in the gitignored `.dwp/` directory. The legacy homegrown command engine has been retired in favor of the installed skill. See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md#dogfooding-dwp) for details.
