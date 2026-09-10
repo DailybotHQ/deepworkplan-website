@@ -94,7 +94,7 @@ export const en: SiteTranslations = {
     pitch: {
       kicker: 'The problem and the answer',
       problem:
-        'In short bursts, coding agents are remarkable. Hand one a long-horizon mission — a migration, a new subsystem, a refactor across dozens of files — and it drifts: the context window fills, earlier decisions fade, and hours of work stall halfway through.',
+        'A coding agent performs beautifully on short tasks. But hand it a long-horizon mission — a migration, a new subsystem, a refactor at scale — and drift sets in: the context window fills, earlier decisions fade, and hours of work stall halfway through.',
       answer:
         'Deep Work Plan answers with spec-driven development: a durable plan, atomic tasks, and validation gates the agent must pass. Done stops being a feeling — it becomes verifiable, reviewable evidence.',
       efficiency:
