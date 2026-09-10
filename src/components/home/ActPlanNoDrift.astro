@@ -15,21 +15,23 @@ const a = t.home.story.act2;
 ---
 
 <section class="border-b py-16 md:py-20" style="border-color: var(--color-line);">
-  <div class="main-container">
-    <h2 class="kicker flex items-center gap-3">
-      <span>{a.kicker}</span>
-      <span class="h-px w-8 shrink-0 bg-secondary" aria-hidden="true"></span>
-    </h2>
-    <p class="lead mt-4">{a.lead}</p>
-
-    <PlanNoDrift lang={lang} class="mt-10" />
-
-    <a
-      href={`${prefix}${a.deepLinkHref}`}
-      class="mt-8 inline-flex items-center text-base font-semibold transition hover:opacity-70"
-      style="color: var(--color-secondary);"
-    >
-      {a.deepLinkLabel} &rarr;
-    </a>
+  <div class="main-container lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-center lg:gap-12">
+    <div class="lg:order-2">
+      <h2 class="kicker flex items-center gap-3">
+        <span>{a.kicker}</span>
+        <span class="h-px w-8 shrink-0 bg-secondary" aria-hidden="true"></span>
+      </h2>
+      <p class="lead mt-4">{a.lead}</p>
+      <a
+        href={`${prefix}${a.deepLinkHref}`}
+        class="mt-6 inline-flex items-center text-base font-semibold transition hover:opacity-70"
+        style="color: var(--color-secondary);"
+      >
+        {a.deepLinkLabel} &rarr;
+      </a>
+    </div>
+    <div class="mt-10 lg:mt-0 lg:order-1">
+      <PlanNoDrift lang={lang} />
+    </div>
   </div>
 </section>
