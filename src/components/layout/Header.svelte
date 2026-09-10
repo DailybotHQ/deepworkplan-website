@@ -144,8 +144,8 @@ function closeOnEscape(event: KeyboardEvent) {
         class="h-7 w-auto md:h-8 block dark:hidden"
         src="/images/brand/dwp-mark-light.png"
         alt=""
-        width={270}
-        height={160}
+        width={135}
+        height={80}
         loading="eager"
         fetchpriority="high"
       />
@@ -153,8 +153,8 @@ function closeOnEscape(event: KeyboardEvent) {
         class="h-7 w-auto md:h-8 hidden dark:block"
         src="/images/brand/dwp-mark-dark.png"
         alt=""
-        width={270}
-        height={160}
+        width={135}
+        height={80}
         loading="eager"
         fetchpriority="high"
       />
