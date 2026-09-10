@@ -50,7 +50,7 @@ Cả hai tệp PHẢI được ghi nguyên tử: ghi vào một tệp tạm th�
 ```json
 {
   "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.2.0",
+  "spec_version": "2.3.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
@@ -146,7 +146,7 @@ Một tác vụ KHÔNG ĐƯỢC đánh dấu `completed` trong `state.json` tron
 
 Một tác vụ `completed` NÊN mang một bản ghi `outcome`: những gì đã `tried`, những gì đã `failed`, những gì đã `worked`, và `notes` tự do. Giữ mỗi mục một dòng.
 
-Các bản ghi kết quả biến một kế hoạch đã hoàn tất thành **bộ nhớ theo sự kiện** có thể truy xuất: một agent (hay một nền tảng lập chỉ mục bộ nhớ) có thể về sau nhớ lại cách một vấn đề được giải quyết, không chỉ là nó đã được giải quyết. Chúng phục vụ tác vụ bắt buộc Skills & Agents Discovery, tác vụ này NÊN đọc chúng khi khai thác các mô hình. Trên các nền tảng như Hermes lập chỉ mục bộ nhớ agent, các bản ghi kết quả trong `state.json` làm cho các kế hoạch đã hoàn tất trực tiếp có thể truy xuất qua các phiên tương lai.
+Các bản ghi kết quả biến một kế hoạch đã hoàn tất thành **bộ nhớ theo sự kiện** có thể truy xuất: một agent (hay một nền tảng lập chỉ mục bộ nhớ) có thể về sau nhớ lại cách một vấn đề được giải quyết, không chỉ là nó đã được giải quyết. Chúng nuôi các quyết định về skill ngay trong tác vụ và bước đối chiếu skill của Final Review, vốn đọc chúng khi khai thác các mô hình. Trên các nền tảng như Hermes lập chỉ mục bộ nhớ agent, các bản ghi kết quả trong `state.json` làm cho các kế hoạch đã hoàn tất trực tiếp có thể truy xuất qua các phiên tương lai.
 
 ### Điểm kiểm tra và trạng thái bị chặn
 

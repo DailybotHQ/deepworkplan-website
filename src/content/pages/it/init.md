@@ -50,7 +50,7 @@ Prima comprendi il repository, poi proponi cosa farai.
 - **Classifica l’archetipo.** Un repository individuale (il caso più comune), un hub orchestratore, o un
   workspace agente — la casa di lunga durata di un agente autonomo, dove git è raccomandato anziché
   dato per scontato — con le relative evidenze.
-- **Riconosci un’installazione DWP esistente.** Se `AGENTS.md` e `.agents/` esistono già, cerca la riga di provenienza `DWP standard:`. Un harness precedente allo standard attuale riceve un **aggiornamento mirato**: reinstallare la skill è l’intero percorso di aggiornamento, e l’onboarding riconcilia solo le parti mancanti o obsolete — ogni sezione scritta a mano, skill personalizzata e piano in corso viene preservata, e una seconda esecuzione non cambia nulla.
+- **Riconosci un’installazione DWP esistente.** Se `AGENTS.md` e `.agents/` esistono già, cerca la riga di provenienza `DWP standard:`. Un harness precedente allo standard attuale riceve un **aggiornamento mirato**: reinstallare la skill è l’intero percorso di aggiornamento, e l’onboarding riconcilia solo le parti mancanti o obsolete — ogni sezione scritta a mano, skill personalizzata e piano in corso viene preservata, e una seconda esecuzione non cambia nulla. I piani redatti con una versione precedente mantengono la loro forma registrata e si chiudono con le proprie attività finali; non vengono mai forzati in quella nuova.
 - **Inventaria ciò che già esiste.** `AGENTS.md`, `CLAUDE.md`, `docs/`, qualsiasi configurazione `.agents/` o di skill/agenti,
   `.dwp/` e `.gitignore`. Annota qualsiasi cosa svolga già parte di questo compito.
 - **Proponi il piano di onboarding.** Presenta un elenco conciso: i file che creerai, i file che
@@ -142,11 +142,15 @@ metodologia) anziché sovrascriverlo — e conferma con l’utente prima di sost
 6. **`.dwp/` + `tmp/`.** Predisponi una `.dwp/` esclusa da git con `plans/` e `drafts/`, più uno spazio di lavoro temporaneo
    `tmp/` — entrambi aggiunti a `.gitignore` in modo non distruttivo (in coda, mai riscrivendo).
 
-## 4. Proponi gli addon opt-in
+## 4. Installa la revisione locale richiesta, poi proponi gli addon opt-in
 
-Dopo l'onboarding di base, elenca i cinque addon (devcontainer, Dailybot, dependency-upgrade,
-design-system, AI Diff Reviewer) e proponi ciascuno come opt-in esplicito. Un repository è pienamente conforme con
-**zero** addon — non installarli mai automaticamente.
+Dopo l’onboarding di base, installa la **revisione locale AI Diff Reviewer** (Fase 7a — richiesta
+dallo standard 2.3.0): la skill vendorizzata fissata al tag
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) più un
+`.review/extension.md` su misura per il repository via `generate-extension`, sotto il consenso
+dell’onboarding. Poi elenca i quattro addon opzionali (devcontainer, Dailybot, dependency-upgrade,
+design-system) e proponi ciascuno come opt-in esplicito. Un repository è pienamente conforme con
+**zero** addon opzionali — non installarli mai automaticamente.
 
 - **Supporto devcontainer** — un dev container riproducibile e isolato con autenticazione AI-CLI persistente.
 - **Integrazione Dailybot** — quattro eventi del ciclo di vita (kickoff, attività significativa, bloccato, completamento) come report best-effort di progressi per i team che già usano Dailybot, con livello opzionale di enforcement autonomo degli hook (`dailybot-cli >= 3.7.0`). L'installazione della skill agente Dailybot abbinata (3.10.3) espone anche chat, check-in, authoring di form, domande all'AI, API key per repository e altro — l'addon collega solo il reporting all'esecuzione DWP. La metodologia di base ha zero dipendenze da Dailybot.
@@ -156,8 +160,14 @@ design-system, AI Diff Reviewer) e proponi ciascuno come opt-in esplicito. Un re
   rilevata (non offerto per librerie pure, servizi headless o repository solo infra). Tre profili si
   sovrappongono in un unico file: visual-ui (attivo per default quando rilevato), cli-output e
   conversational — gli ultimi due vengono sempre chiesti, mai applicati automaticamente.
-- **AI Diff Reviewer** — potenzia la Revisione di Sicurezza obbligatoria con una revisione locale strutturata
-  via [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md` obbligatorio). Chiedi sempre **Flow A** (solo locale) vs **Flow B** (gate CI a doppia superficie con `pr-review.yml`); non assumere mai un valore predefinito. Soft-fail solo per errori di skill/estensione/invocazione mancanti; i risultati `critical` di un passaggio locale completato bloccano ancora il completamento della Revisione di Sicurezza. La metodologia di base ha zero dipendenze da AI Diff Reviewer.
+- **AI Diff Reviewer** — la revisione locale richiesta (non un opt-in): il passaggio di sicurezza di
+  ogni Final Review esegue [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill +
+  `.review/extension.md` obbligatorio) sull’insieme di modifiche accumulato dal piano. Una skill o un’estensione
+  mancante è un rilievo registrato `local reviewer not installed`, installata quando l’esecuzione può scrivere
+  nella harness — mai un salto silenzioso; gli errori di invocazione sono soft-fail; i rilievi `critical` di un
+  passaggio completato bloccano comunque il completamento. **Flow B** (il gate CI con `pr-review.yml`) è offerto
+  come opt-in esplicito e mai installato senza richiesta. Nessun flusso Deep Work Plan richiede un servizio
+  commerciale, un provider CI o un segreto.
 
 ## 5. Fai evolvere il kit (sub-skill author)
 
@@ -178,9 +188,9 @@ Genera Deep Work Plan per qualsiasi attività ed eseguili attività per attivit�
 - `/dwp-resume` — ricostruisce lo stato e continua un piano interrotto.
 - `/dwp-verify` — report di conformità oggettivo positivo/negativo per il repository (o un piano specifico).
 
-Ogni piano si conclude con tre attività finali obbligatorie — una **Security Review** delle modifiche
+Ogni piano si chiude con il Final Review — un passaggio di sicurezza sulle modifiche
 proprie del piano (mantenendo aggiornato `docs/SECURITY.md`; un rilievo critico blocca il
-completamento), Skills & Agents Discovery e l’Executive Report.
+completamento), la Skills & Agents Discovery e l’Executive Report.
 
 ## 7. Verifica
 

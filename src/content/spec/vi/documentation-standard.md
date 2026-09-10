@@ -1,6 +1,6 @@
 ---
 title: Chuẩn tài liệu
-description: "Chuẩn quy phạm về cách các Deep Work Plan ghi lại cấu trúc, tác vụ và tiến độ của chúng: quy tắc README, các dấu trạng thái, và ba tác vụ cuối bắt buộc."
+description: "Chuẩn quy phạm về cách các Deep Work Plan ghi lại cấu trúc, tác vụ và tiến độ của chúng: quy tắc README, các dấu trạng thái, cấu trúc tác vụ mười phần, và Final Review."
 order: 1
 lang: vi
 section: Standard
@@ -8,7 +8,7 @@ section: Standard
 
 # Chuẩn tài liệu
 
-**Phiên bản 1.0.** Chuẩn này định nghĩa cách các Deep Work Plan ghi lại cấu trúc, tác vụ và tiến độ của chúng. Nó áp dụng cho mọi kế hoạch được tạo theo phương pháp luận DWP. Các từ khóa MUST, SHOULD và MAY được dùng như định nghĩa trong RFC 2119.
+**Phiên bản 1.1.** Chuẩn này định nghĩa cách các Deep Work Plan ghi lại cấu trúc, tác vụ và tiến độ của chúng. Nó áp dụng cho mọi kế hoạch được tạo theo phương pháp luận DWP. Các từ khóa MUST, SHOULD và MAY được dùng như định nghĩa trong RFC 2119.
 
 ## README của kế hoạch
 
@@ -22,7 +22,7 @@ Mỗi kế hoạch PHẢI có một `README.md` chứa:
 
 ## Các tệp tác vụ
 
-Mỗi tệp tác vụ PHẢI được đặt tên `<n>.task_<slug>.md` và chứa cấu trúc chín phần.
+Mỗi tệp tác vụ PHẢI được đặt tên `<n>.task_<slug>.md` và chứa cấu trúc mười phần — chín phần kinh điển cộng với **Touched Surface**: hợp đồng giữa những gì tác vụ thay đổi và những gì phải được kiểm chứng (bề mặt dự kiến so với bề mặt thực tế, các bên tiêu thụ bị ảnh hưởng, một lớp rủi ro thuộc một trong *cô lập*, *đường nối*, *dùng chung/lõi* hoặc *không rõ*, ánh xạ test được dùng, và cổng được chọn kèm lý do).
 
 ## PROGRESS.md
 
@@ -44,10 +44,10 @@ Mỗi tệp tác vụ PHẢI được đặt tên `<n>.task_<slug>.md` và chứ
 
 Mọi tiêu đề PHẢI dùng kiểu viết hoa đầu câu. Các tài liệu NÊN tránh ngôn ngữ tiếp thị và dấu chấm than.
 
-## Ba tác vụ cuối bắt buộc
+## Final Review, quyết định skill ngay trong tác vụ, và báo cáo tùy chọn
 
-Mọi kế hoạch PHẢI kết thúc bằng ba tác vụ chuẩn:
+Mọi kế hoạch được viết dưới phiên bản này PHẢI kết thúc bằng đúng một tác vụ bắt buộc: **Final Review** — bước rà soát bảo mật trên toàn bộ tập thay đổi của kế hoạch, kiểm chứng trạng thái cuối cùng trên trạng thái liên quan cuối cùng, và sự đối chiếu các quyết định về skill. Một phát hiện bảo mật nghiêm trọng chặn việc hoàn tất.
 
-1. **Security Review** — kiểm toán toàn bộ tập thay đổi của kế hoạch để tìm bí mật, rủi ro tiêm nhiễm và bề mặt tấn công mới, và xác minh rằng `docs/SECURITY.md` vẫn phản ánh thực tế. Một phát hiện nghiêm trọng chặn việc hoàn tất.
-2. **Skills & Agents Discovery** — xác định các skill và agent tái sử dụng được tạo ra.
-3. **Executive Report** — một bản tóm tắt kết quả cho các bên liên quan.
+- **Quyết định skill ngay trong tác vụ.** Completion & Log của mỗi tác vụ mang một **kết luận về skill** — không có gì, một cập nhật cho một skill hoặc agent hiện có, một tạo mới có đặt tên, hoặc một lần hoãn kèm lý do và người phụ trách. Việc viết skill khi thực sự có cơ sở diễn ra bên trong tác vụ sở hữu nó, trước cổng kiểm chứng của nó, sau một kiểm tra trùng lặp với danh mục `.agents/`; các ứng viên xứng đáng được ghi lại như các ứng viên ổn định (`T{task}-{seq}`) trong sổ cái ứng viên skill của kế hoạch.
+- **Executive Report là tùy chọn, theo yêu cầu.** Được đề xuất một lần lúc hoàn tất; chỉ được tạo khi có yêu cầu rõ ràng, từ bằng chứng bền vững. Không trả lời, hoặc một lượt chạy không có giám sát, để kế hoạch hoàn tất mà không có nó.
+- **Kế hoạch cũ.** Các kế hoạch được viết dưới các phiên bản sớm hơn kết thúc bằng ba tác vụ cuối bắt buộc và vẫn tuân thủ — một trình kiểm tra tuân thủ PHẢI chấp nhận hình dạng đó.

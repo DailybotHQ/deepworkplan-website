@@ -1,6 +1,6 @@
 ---
 title: Dodatki
-description: "Opcjonalne rozszerzenia DWP: pięć addonów (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), kontrakt i pojęcia kitu."
+description: "Dodatki DWP: cztery opcjonalne rozszerzenia (devcontainer, Dailybot, dependency-upgrade, design-system), wymagany lokalny przegląd AI Diff Reviewer z opcjonalną powierzchnią CI, kontrakt i pojęcia kitu."
 order: 5
 lang: pl
 section: Addons
@@ -8,7 +8,7 @@ section: Addons
 
 # Dodatki
 
-**Wersja 2.0.** Dodatki to opcjonalne rozszerzenia podstawowej metodyki Deep Work Plan. **Nigdy nie są wymagane do zgodności** — repozytorium bez addonów jest w pełni AI-first i zgodne z DWP. Każdy addon jest proponowany podczas onboardingu, wyraźnie akceptowany lub odrzucany, a po akceptacji **uzgadnia** się z istniejącą konfiguracją zamiast ją nadpisywać.
+**Wersja 2.1.** Dodatki to rozszerzenia podstawowej metodyki Deep Work Plan. Cztery z pięciu są opcjonalne i **nigdy nie są wymagane do zgodności** — repozytorium bez opcjonalnych addonów jest w pełni AI-first i zgodne z DWP. Każdy opcjonalny addon jest proponowany podczas onboardingu, wyraźnie akceptowany lub odrzucany, a po akceptacji **uzgadnia** się z istniejącą konfiguracją zamiast ją nadpisywać. Jeden komponent jest zadeklarowanym wyjątkiem: od standardu 2.3.0 **lokalny przegląd AI Diff Reviewer** jest częścią wymaganej linii bazowej — onboarding go instaluje, a każde Final Review go uruchamia — podczas gdy jego powierzchnia CI pozostaje opcjonalna.
 
 ## Kontrakt addonu
 
@@ -25,7 +25,7 @@ Odkrywanie: przepływ `onboard` enumeruje `skills/deepworkplan/addons/` i prezen
 
 ## Dostępne addony (pięć)
 
-Dziś dostępne są pięć addonów. Każdy ma **stronę katalogu kit** ze szczegółami dla użytkownika oraz **normatywną specyfikację** w skillu Deep Work Plan.
+Dziś dostępne są pięć addonów — cztery opcjonalne plus wymagany lokalny przegląd. Każdy ma **stronę katalogu kit** ze szczegółami dla użytkownika oraz **normatywną specyfikację** w skillu Deep Work Plan.
 
 ### Devcontainer (pierwszy addon)
 
@@ -65,17 +65,18 @@ Aktualizacje zależności niezależne od menedżera pakietów, partiami, zwalido
 - **Siła profilu:** visual-ui **domyślnie włączony przy wykryciu**; cli-output i conversational **zalecane przy wykryciu, zawsze pytane, nigdy auto-stosowane**
 - **Kiedy proponować:** tylko gdy wykryto powierzchnię interfejsu dla użytkownika — nie dla czystych bibliotek, usług headless ani repo tylko infra
 
-### AI Diff Reviewer (piąty addon)
+### AI Diff Reviewer (piąty addon — wymagany lokalny przegląd, opcjonalna powierzchnia CI)
 
-Opcjonalne połączenie z **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, aktualna wersja **v2.0.0**), które rozszerza obowiązkowy Przegląd Bezpieczeństwa o strukturalny lokalny przegląd i opcjonalnie blokuje pull requesty w CI.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, aktualna wersja **v2.0.0**) nadaje obowiązkowemu przeglądowi bezpieczeństwa Final Review strukturalny lokalny przegląd i opcjonalnie blokuje pull requesty w CI. Od standardu 2.3.0 **lokalny przegląd jest częścią linii bazowej**; tylko powierzchnia CI jest opcjonalna.
 
 - **Strona kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — pełna referencja możliwości
-- **Co addon DWP łączy:** lokalne wzmocnienie Przeglądu Bezpieczeństwa poprzez domyślny przepływ nadrzędny upstream skill; wymagane `.review/extension.md` (sama skill jest niepełna); Flow B opcjonalnie instaluje `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) i udostępnia `apply-review` jako towarzysza wywoływanego przez dewelopera — nigdy jako zadanie planu
-- **Przepływy:** **A — tylko lokalnie** (skill + rozszerzenie) lub **B — podwójna powierzchnia** (skill + rozszerzenie + CI Action). Addon **MUSI pytać** o przepływ; nigdy nie zakładać wartości domyślnej
-- **Miękka porażka vs bramka:** brakujące błędy skill/rozszerzenia/wywołania nigdy nie blokują; wyniki `critical` z **zakończonego** lokalnego przebiegu nadal stosują kontrakt Przeglądu Bezpieczeństwa
+- **Wymagany przy onboardingu (Phase 7a):** instalacja vendored skilla przypięta do tagu (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) plus dopasowane do repo `.review/extension.md` (przez `generate-extension`), za zgodą onboardingu; ukierunkowany upgrade harnessu uzgadnia oba elementy, gdy ich brakuje; odmowa jest zapisywana jako zadeklarowany wyjątek i zgłaszana przez `verify` do czasu instalacji
+- **Wymagany w każdym Final Review:** przegląd bezpieczeństwa uruchamia domyślny przepływ nadrzędny upstream skilla na skumulowanym zestawie zmian i dołącza jego wynik do `analysis_results/SECURITY_REVIEW.md`; brakująca skill lub rozszerzenie to zapisane znalezisko `local reviewer not installed` — instalowane, gdy przebieg może zapisywać w harnessie — nigdy ciche pominięcie; wyniki `critical` ze zakończonego przebiegu blokują ukończenie do czasu naprawy lub wyraźnej akceptacji
+- **Opcjonalna powierzchnia CI (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) przez upstream sub-skill `setup`, plus `apply-review` jako towarzysz wywoływany przez dewelopera — proponowany wyraźnie, nigdy instalowany nieproszony, nigdy domyślny, nigdy zadanie planu
+- **Nigdy nie blokuje (tylko wywołanie):** lokalny przegląd, który mógł wystartować, ale kończy się błędem, to ostrzeżenie raz, zapis i kontynuacja; nigdy nie zawiedzie z tego powodu zadania
 - **Parytety (Flow B):** wspólny `prompt.md` + rozszerzenie wyrównuje metodologię/ważność; CI Iteration-Aware Review może skrócić rundy 2+ podczas gdy lokalny przebieg pozostaje pełny
-- **Ochrona neutralna wobec dostawcy:** rdzeń DWP ma **zero** zależności od AI Diff Reviewer; nigdy nie instaluj automatycznie dla wszystkich
-- **Kiedy proponować:** deweloper lub zespół chce strukturalnego lokalnego przeglądu i/lub bramki scalania PR CI
+- **Ochrona neutralna wobec dostawcy:** żaden przepływ Deep Work Plan nie wymaga komercyjnej usługi, dostawcy CI ani sekretu — reviewer to skill na licencji MIT przypięty do tagu, uruchamiany przez własnego agenta kodującego dewelopera
+- **Zgodność:** `verify` zgłasza brakujący lokalny reviewer jako niepowodzenie dla repozytoriów deklarujących standard 2.3.0 lub nowszy oraz jako znalezisko wersji harnessu dla starszych repozytoriów
 
 ## Skille
 

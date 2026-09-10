@@ -1,6 +1,6 @@
 ---
 title: Đặc tả DWP
-description: "Đặc tả Deep Work Plan có tính quy phạm: cấu trúc kế hoạch, cấu trúc tác vụ chín phần, vòng lặp thực thi năm thao tác, không gian làm việc đầu ra và phiên bản hóa."
+description: "Đặc tả Deep Work Plan có tính quy phạm: cấu trúc kế hoạch, cấu trúc tác vụ mười phần, lựa chọn cổng theo bề mặt bị chạm tới, vòng lặp thực thi năm thao tác, không gian làm việc đầu ra và phiên bản hóa."
 order: 2
 lang: vi
 section: Workflow
@@ -11,15 +11,25 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Đặc tả DWP
 
-**Phiên bản 1.2. Trạng thái: Ổn định.** Tài liệu này là đặc tả quy phạm cho phương pháp luận Deep Work Plan (DWP). Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
+**Phiên bản 2.3.0. Trạng thái: Ổn định.** Tài liệu này là đặc tả quy phạm cho phương pháp luận Deep Work Plan (DWP). Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
-> **Bổ sung trong v1.2.** Bốn năng lực bổ sung, không có thay đổi phá vỡ: (1) **lớp trạng thái kế hoạch có thể đọc bằng máy** (`manifest.json` + `state.json`, xem [Trạng thái kế hoạch](/spec/plan-state)); (2) **các bậc rigor tỷ lệ** (micro / standard / deep, xem [Rigor tỷ lệ](#proportional-rigor)); (3) **phần Delta** tùy chọn trong cấu trúc tác vụ cho các thay đổi hành vi trong codebase hiện có; và (4) **Giao thức Tiếp tục DWP** được nâng cấp thành một nghi lễ sáu bước có thể đặt tên và trích dẫn. Các kế hoạch v1.1 hiện có vẫn tuân thủ.
+> **Bổ sung trong bản sửa đổi này, không có thay đổi phá vỡ.** (1) Phần **Touched Surface** — hợp đồng giữa những gì một tác vụ thay đổi và những gì phải được kiểm chứng, kèm lựa chọn cổng theo lớp rủi ro (cô lập / đường nối / dùng chung-lõi / không rõ); (2) kiểm chứng đầy đủ trở thành một **yêu cầu trạng thái cuối cùng** chạy trong **Final Review** bắt buộc duy nhất của kế hoạch, với các quy tắc tái sử dụng bằng chứng rõ ràng; (3) các **quyết định về skill theo từng tác vụ** chuyển vào tác vụ sở hữu, và Executive Report trở thành **tùy chọn, theo yêu cầu**; (4) một **luồng create tùy thuộc chế độ** — chế độ tin cậy vật liệu hóa trực tiếp nhưng vẫn giữ phân tích và các bước kiểm tra chất lượng; và (5) một **ma trận tương thích** rõ ràng: các kế hoạch và repository từ các phiên bản sớm hơn vẫn tuân thủ.
 
 ## Định nghĩa
 
 Một Deep Work Plan là một thành phần có cấu trúc, chỉ dùng markdown, mô tả một tác vụ kỹ thuật phức tạp được phân rã thành các đơn vị công việc tuần tự, rà soát được, thiết kế để được tạo ra, thực thi và duy trì bởi các agent lập trình AI làm việc tự chủ.
 
 DWP dựa trên đặc tả: kế hoạch là đặc tả, và các agent PHẢI (MUST) thực thi dựa trên tiêu chí chấp nhận rõ ràng và các cổng kiểm chứng của nó thay vì tùy hứng. Đặc tả — chứ không phải một bản chép cuộc chat — là nguồn chân lý bền vững, nên công việc kiểm chứng được và tiếp tục được qua các phiên và các agent. Đó cũng là kỹ thuật harness được làm cho dễ mang theo: ngữ cảnh, vòng điều khiển, hàng rào bảo vệ và trạng thái có thể tiếp tục giúp một agent đáng tin cậy được cài vào chính repository dưới dạng markdown thuần, nên mọi agent tuân thủ ĐỀU CÓ THỂ (MAY) điều khiển repository mà không cần một framework gắn với công cụ cụ thể.
+
+## Luồng create — một bước, tùy thuộc chế độ
+
+Luồng `create` thu thập mục tiêu, ngữ cảnh, các ràng buộc và dàn ý tác vụ một lần, thực hiện **phân tích yêu cầu** của nó (phạm vi, thứ tự phụ thuộc giữa các tác vụ, lựa chọn kiểm chứng từ Touched Surface, bậc rigor tỷ lệ), rồi vật liệu hóa theo chế độ nhà phát triển đã chọn:
+
+- **Chế độ hướng dẫn (mặc định).** Luồng tạo ra đúng **một** thành phẩm để rà soát: một **bản nháp tinh chỉnh** trong `.dwp/drafts/`, với đủ cấu trúc để chấp thuận hoặc yêu cầu thay đổi trong một lượt. Thư mục kế hoạch chỉ được vật liệu hóa sau khi phê duyệt.
+- **Chế độ tin cậy (`trust` / `auto`).** Luồng **vật liệu hóa kế hoạch trực tiếp**, không có tệp nháp — nhà phát triển đã từ chối bước rà soát trung gian. Phân tích yêu cầu, thứ tự phụ thuộc và một **bước kiểm tra chất lượng kế hoạch** vẫn chạy: trust từ chối *lượt rà soát*, chứ không phải *phân tích*. Một kế hoạch ở chế độ tin cậy được ghi lại là **được phê duyệt trước cho thực thi không có giám sát**.
+- **Các chế độ nháp rõ ràng.** `refined-draft {name}` và `from-refined-draft {file}` vẫn khả dụng trong cả hai chế độ; một nhà phát triển yêu cầu bản nháp sẽ có nó.
+
+Trong mọi chế độ, luồng không bao giờ tạo ra một bản nháp chưa tinh chỉnh trung gian như một bước rà soát riêng.
 
 ## Cấu trúc kế hoạch
 
@@ -35,21 +45,35 @@ Một kế hoạch CÓ THỂ (MAY) bổ sung mang lớp trạng thái có thể 
 
 <TaskAnatomy lang="vi" class="not-prose my-10" />
 
-Mỗi tệp tác vụ PHẢI chứa chín phần này, theo thứ tự:
+Mỗi tệp tác vụ PHẢI chứa mười phần này, theo thứ tự:
 
 1. **Goal** — một câu phát biểu một đoạn về điều tác vụ đạt được.
 2. **Context** — bối cảnh, liên kết và lý do tác vụ này tồn tại.
-3. **Steps** — các hành động cụ thể, có thứ tự cần thực hiện.
-4. **Acceptance criteria** — một danh sách kiểm các điều kiện định nghĩa thế nào là xong.
-5. **Validation** — các lệnh hoặc test cần chạy để kiểm chứng.
-6. **Files** — các đường dẫn dự kiến được tạo hoặc sửa đổi.
-7. **Dependencies** — các tác vụ khác hoặc điều kiện tiên quyết bên ngoài.
-8. **Risks** — điều gì có thể sai, và các biện pháp giảm thiểu.
-9. **Completion & Log** — một dấu trạng thái cùng các ghi chú theo trình tự thời gian.
+3. **Touched Surface** — hợp đồng giữa những gì tác vụ thay đổi và những gì phải được kiểm chứng.
+4. **Steps** — các hành động cụ thể, có thứ tự cần thực hiện.
+5. **Acceptance criteria** — một danh sách kiểm các điều kiện định nghĩa thế nào là xong.
+6. **Validation** — các lệnh hoặc test cần chạy để kiểm chứng, được chọn từ Touched Surface.
+7. **Files** — các đường dẫn dự kiến được tạo hoặc sửa đổi.
+8. **Dependencies** — các tác vụ khác hoặc điều kiện tiên quyết bên ngoài.
+9. **Risks** — điều gì có thể sai, và các biện pháp giảm thiểu.
+10. **Completion & Log** — một dấu trạng thái cùng các ghi chú theo trình tự thời gian.
 
 Một tác vụ CÓ THỂ bổ sung bao gồm một **phần Delta** (ĐƯỢC KHUYẾN NGHỊ cho các thay đổi hành vi trong codebase hiện có — xem bên dưới) và một **phần Rollback** (ĐƯỢC KHUYẾN NGHỊ cho các lần di chuyển, thay đổi hạ tầng hay triển khai).
 
-### Phần Delta (thay đổi trong codebase hiện có)
+## Touched Surface
+
+Touched Surface là hợp đồng giữa những gì một tác vụ thay đổi và những gì phải được kiểm chứng. Nó tồn tại để kiểm chứng được **chọn theo hiệu ứng**, không phải theo thói quen, và để một người đọc về sau thấy được vì sao một cổng được chọn. Một tác vụ thay đổi hành vi PHẢI ghi lại:
+
+- **Bề mặt dự kiến** — các đường dẫn, mô-đun, gói hoặc cấu hình mà tác vụ định thay đổi, được viết trước khi chỉnh sửa.
+- **Bề mặt thực tế** — danh sách đã đối chiếu sau khi chỉnh sửa, lấy từ diff thật. Agent PHẢI đối chiếu bề mặt dự kiến và bề mặt thực tế trước khi chọn cổng.
+- **Các bên tiêu thụ bị ảnh hưởng** — các mô-đun, gói hoặc dịch vụ phụ thuộc vào bề mặt thực tế, xa nhất mức ánh xạ được tài liệu hóa của repository có thể xác lập. Nơi không thể, mục nhập PHẢI nói rõ điều đó.
+- **Lớp rủi ro** — một trong: *cô lập* (giới hạn trong một mô-đun và các test của nó); *đường nối* (thay đổi một hợp đồng, tính bền vững dữ liệu, định tuyến, tuần tự hóa, xác thực hoặc wiring framework giữa các cộng tác viên); *dùng chung/lõi* (được import rộng rãi, hoặc một thay đổi phụ thuộc, di chuyển, cấu hình build/test, schema hoặc bộ công cụ); *không rõ* (ánh xạ bị thiếu, lỗi thời hoặc chưa xác minh).
+- **Ánh xạ test được dùng** — ánh xạ hoặc công cụ được tài liệu hóa nào tạo ra lựa chọn.
+- **Cổng được chọn và lý do** — các lệnh chính xác và vì sao chúng bao phủ bề mặt thực tế.
+
+Các tệp cấu hình, schema, manifest phụ thuộc, mẫu, fixture, di chuyển và các tệp chỉ dẫn agent **có thể thay đổi hành vi** và PHẢI được phân loại theo hiệu ứng của chúng, không bao giờ theo phần mở rộng tệp. Một tác vụ chỉ thay đổi văn xuôi, chú thích hoặc các thành phần nghiên cứu CÓ THỂ (MAY) khai báo bề mặt không áp dụng và vẫn chạy các bước kiểm tra không cần runtime của repository.
+
+## Phần Delta (thay đổi trong codebase hiện có)
 
 Hầu hết công việc thực tế sửa đổi hành vi hiện có thay vì tạo ra hành vi mới. Một tác vụ thay đổi cách một hệ thống hiện có hoạt động NÊN mang một **phần Delta** mô tả sự thay đổi dưới dạng hợp đồng trước/sau rõ ràng, sử dụng ba tiêu đề danh sách:
 
@@ -57,29 +81,61 @@ Hầu hết công việc thực tế sửa đổi hành vi hiện có thay vì t
 - **MODIFIED** — hành vi tồn tại trong cả hai, được nêu là `was: … → now: …`.
 - **REMOVED** — hành vi tồn tại trước và được loại bỏ có chủ ý sau.
 
-Mỗi mục PHẢI là hành vi có thể quan sát — phản hồi của một endpoint, một cờ CLI, một trạng thái UI, một giá trị mặc định — không phải một chi tiết triển khai. Phần Delta là diff của người rà soát ở mức hành vi: tiêu chí chấp nhận kiểm chứng các mục ADDED/MODIFIED, và các mục REMOVED là giấy phép rõ ràng để xóa. Bất cứ thứ gì không được liệt kê là REMOVED PHẢI tiếp tục hoạt động, và cổng kiểm chứng của tác vụ (các test hiện có tiếp tục xanh) là thứ thực thi điều đó.
+Mỗi mục PHẢI là hành vi có thể quan sát — phản hồi của một endpoint, một cờ CLI, một trạng thái UI, một giá trị mặc định — không phải một chi tiết triển khai. Phần Delta là diff của người rà soát ở mức hành vi: tiêu chí chấp nhận kiểm chứng các mục ADDED/MODIFIED, và các mục REMOVED là giấy phép rõ ràng để xóa. Bất cứ thứ gì không được liệt kê là REMOVED PHẢI tiếp tục hoạt động.
 
-## Cổng kiểm chứng và test
+## Cổng kiểm chứng — được chọn theo lớp rủi ro
 
-Kiểm chứng là cổng biến một tuyên bố hoàn tất thành bằng chứng của nó: một tác vụ KHÔNG ĐƯỢC (MUST NOT) bị đánh dấu hoàn tất cho đến khi mọi lệnh trong phần Validation của nó đã chạy và đạt. Test là một phần hạng nhất của cổng này, không phải một thứ tùy chọn đính kèm — chúng là điều làm cho mã mà một kế hoạch xuất ra trở nên đáng tin cậy và kiểm chứng được.
+Kiểm chứng là cổng biến một tuyên bố hoàn tất thành bằng chứng của nó: một tác vụ KHÔNG ĐƯỢC (MUST NOT) bị đánh dấu hoàn tất cho đến khi mọi lệnh trong phần Validation của nó đã chạy và đạt. Cổng của một tác vụ thay đổi hành vi được chọn từ Touched Surface đã đối chiếu của nó, theo lớp rủi ro:
 
-Khi một tác vụ thêm chức năng lõi mới hoặc thay đổi đáng kể hành vi hiện có:
+| Lớp rủi ro | Kiểm chứng bắt buộc |
+|------|------|
+| **cô lập** | Các test của hành vi đã thay đổi và của các bên tiêu thụ bị ảnh hưởng, cùng các kiểm tra tĩnh bao phủ bề mặt thực tế. |
+| **đường nối** | Những điều trên, cộng thêm các test tích hợp hoặc hợp đồng cho đường nối đó — được thêm trong tác vụ này nếu chưa có. Các kiểm tra tích hợp tại một đường nối không bị hoãn đến cuối kế hoạch. |
+| **dùng chung/lõi** | Mở rộng tới các gói bị ảnh hưởng và các bên tiêu thụ bắc cầu của chúng; nơi tác động không thể được giới hạn một cách đáng tin cậy, chạy kiểm chứng đầy đủ. |
+| **không rõ** | Điều tra và sửa lại lựa chọn; nếu vẫn không thể xác lập, chạy lệnh rộng hơn hoặc toàn bộ. |
+| **không áp dụng** (văn xuôi/nghiên cứu) | Các bước kiểm tra không cần runtime của repository, với lý do được ghi trong Touched Surface. |
 
-- **Tiêu chí chấp nhận** của nó PHẢI bao gồm độ phủ test tự động cho hành vi mới hoặc đã thay đổi (đường đi thuận lợi cùng các trường hợp biên và lỗi có ý nghĩa), tuân theo quy ước test và kỳ vọng độ phủ của repository.
-- **Kiểm chứng** của nó PHẢI chạy các test của repository cùng với các bước kiểm tra lint, kiểm tra kiểu và định dạng của nó — kiểm tra chất lượng mã đầy đủ mà repository định nghĩa — chứ không phải chỉ riêng bước build. "Nó build được" không phải là một cổng đủ cho một thay đổi hành vi.
-- Các test hiện có PHẢI tiếp tục xanh. Một thay đổi làm hỏng một test bao phủ phần mã bị ảnh hưởng PHẢI cập nhật test đó theo hành vi mới dự kiến; nó KHÔNG ĐƯỢC xóa, bỏ qua hay làm suy yếu một test chỉ để ép cổng đạt.
+Một thay đổi hành vi PHẢI tạo ra một lựa chọn test không rỗng và liên quan — một bộ chọn không hợp lệ hoặc một trình chạy chọn được số không test không phải là độ phủ. Nơi ánh xạ kiểm thử của repository lỗi thời, lệnh gọi đúng được suy diễn và việc cập nhật ánh xạ được ghi lại; một lệnh nhỏ bị thiếu không bao giờ đòi hỏi một lượt onboarding đầy đủ. Nơi không tồn tại lệnh gọi có phạm vi, bộ đầy đủ áp dụng — hành vi kế thừa, không bao giờ là một lỗi.
 
-Các tác vụ thuần tài liệu, cấu hình hay nghiên cứu được miễn việc tạo test nhưng vẫn PHẢI chạy bất kỳ cổng kiểm chứng nào mà repository định nghĩa. Độ sâu của việc test tỷ lệ với kích thước của thay đổi và độ trưởng thành của repository. Nơi một repository hoàn toàn không có bộ công cụ test hay lint, agent KHÔNG ĐƯỢC âm thầm bỏ qua kỷ luật này — nó dựa vào bộ công cụ được đề xuất trong quá trình khởi tạo (xem [Tuân thủ](/spec)).
+Khi một tác vụ thêm chức năng lõi mới hoặc thay đổi đáng kể hành vi hiện có, tiêu chí chấp nhận của nó PHẢI bao gồm độ phủ test tự động cho hành vi mới hoặc đã thay đổi, và kiểm chứng của nó chạy các test của repository cùng các bước kiểm tra lint, kiểm tra kiểu và định dạng — chứ không phải chỉ riêng bước build. Các test hiện có PHẢI tiếp tục xanh.
+
+## Kiểm chứng trạng thái cuối cùng
+
+Các cổng theo tác vụ kiểm chứng những gì mỗi tác vụ chạm tới; chúng không thay thế việc kiểm chứng kế hoạch như một tổng thể. Trước khi một kế hoạch hoàn tất, kiểm chứng **áp dụng đầy đủ** của repository PHẢI chạy và đạt trên **trạng thái liên quan cuối cùng**, sau thay đổi substantive cuối cùng — trong Final Review. Các lượt chạy rộng hơn sớm hơn diễn ra tại các ranh giới tích hợp hoặc sau các thay đổi dùng chung/lõi, không theo một lịch trình đếm tác vụ. Một kết quả đạt CÓ THỂ (MAY) được tái sử dụng chỉ kèm bằng chứng rằng các đầu vào liên quan là tương đương; nếu không, nó được chạy lại. Mỗi lần chạy cổng để lại một bản ghi ngắn gọn: lệnh, phạm vi, revision, kết quả, và một đường dẫn bằng chứng.
 
 ## Kỷ luật bảo mật
 
-Bảo mật là hạng nhất giống như cách test là hạng nhất, và nó tuân theo cùng một mô hình hai lớp: kỷ luật theo từng tác vụ trong khi công việc diễn ra, cộng với một cổng Security Review bắt buộc trên toàn bộ tập thay đổi ở cuối. Bất cứ khi nào một tác vụ chạm đến xác thực hoặc phân quyền, xử lý đầu vào, bí mật hoặc cấu hình, bề mặt mạng, tệp, hoặc shell, hay các phụ thuộc:
+Bảo mật là hạng nhất giống như cách test là hạng nhất, và nó tuân theo cùng một mô hình hai lớp: kỷ luật theo từng tác vụ trong khi công việc diễn ra, cộng với bước rà soát bảo mật của Final Review trên toàn bộ tập thay đổi ở cuối. Bất cứ khi nào một tác vụ chạm đến xác thực hoặc phân quyền, xử lý đầu vào, bí mật hoặc cấu hình, bề mặt mạng, tệp, hoặc shell, hay các phụ thuộc:
 
 - **Tiêu chí chấp nhận** của nó PHẢI nêu các kỳ vọng bảo mật của thay đổi — đầu vào được kiểm tra và escape, không có chất liệu bí mật trong mã hoặc fixture, các kiểm tra xác thực được giữ nguyên hoặc tăng cường — nhất quán với `docs/SECURITY.md`.
 - Mọi commit PHẢI được xác nhận là không chứa bí mật hoặc thông tin xác thực trước khi nó được đưa vào, bao gồm cả fixture test và ví dụ tài liệu. Một bí mật trong một commit đã push PHẢI được coi là đã rò rỉ và phải xoay vòng, chứ không chỉ đơn thuần bị xóa.
 - Nơi công việc nhạy cảm về bảo mật là đáng kể, một tác vụ gia cố chuyên biệt NÊN được đặt ngay sau các tác vụ triển khai và trước tác vụ test toàn diện, để các phát hiện được sửa trước khi test mã hóa hành vi và mỗi phát hiện trở thành một ca hồi quy thay vì làm lại.
 
-Kỷ luật theo từng tác vụ này không thay thế tác vụ cuối Security Review: các kiểm tra theo từng tác vụ bắt vấn đề ngay tại commit nơi chúng sinh ra, trong khi cổng cuối kiểm toán toàn bộ kế hoạch — bao gồm chính các tác vụ test và tài liệu. Do đó mọi kế hoạch kết thúc với ba tác vụ cuối bắt buộc — Security Review, rồi Skills & Agents Discovery, rồi Executive Report — và một phát hiện bảo mật nghiêm trọng chặn việc hoàn tất cho đến khi nó được sửa hoặc được chấp nhận một cách rõ ràng.
+Kỷ luật theo từng tác vụ này không thay thế bước rà soát bảo mật của Final Review: các kiểm tra theo từng tác vụ bắt vấn đề ngay tại commit nơi chúng sinh ra, trong khi cổng cuối kiểm toán toàn bộ kế hoạch — bao gồm chính các tác vụ test và tài liệu.
+
+## Vòng đời kế hoạch — Final Review
+
+Mọi kế hoạch tuân thủ được viết dưới phiên bản này kết thúc bằng đúng **một** tác vụ bắt buộc: **Final Review** (tác vụ N). Hai trách nhiệm mà các phiên bản trước đặt trong các tác vụ khép riêng biệt được tái định vị: các quyết định về skill chuyển vào tác vụ đã tạo ra mô hình, và Executive Report trở thành một thành phẩm tùy chọn, theo yêu cầu. Không gì trong bước rà soát bảo mật bị nới lỏng.
+
+Final Review PHẢI, theo thứ tự:
+
+**(a) Bước rà soát bảo mật** — rà soát toàn bộ tập thay đổi đã tích lũy của kế hoạch để tìm bí mật hardcode, rủi ro tiêm nhiễm, bề mặt tấn công mới, xác thực bị suy yếu, và dữ liệu nhạy cảm trong log hay tài liệu; kiểm toán các phụ thuộc được đưa vào; xác minh `docs/SECURITY.md` vẫn phản ánh thực tế; viết báo cáo rà soát bảo mật ngay cả khi sạch. Một phát hiện nghiêm trọng được sửa — hoặc được người dùng chấp nhận rõ ràng — trước khi kế hoạch hoàn tất.
+
+**(b) Kiểm chứng trạng thái cuối cùng** — kiểm chứng áp dụng đầy đủ của repository chạy và đạt trên trạng thái liên quan cuối cùng.
+
+**(c) Đối chiếu skill** — mỗi tác vụ mang một kết luận về skill và mọi ứng viên được ghi lại đều có một kết luận; không có báo cáo khám phá lần hai.
+
+**(d) Hoàn tất** — báo cáo hoàn tất với các sản phẩm bàn giao, bằng chứng kiểm chứng và các hạn chế; đề xuất Executive Report một lần. Kế hoạch hoàn tất bất kể đề xuất có được trả lời hay không.
+
+Final Review chạy tuần tự sau mọi tác vụ khác và không bao giờ được đặt trong một nhóm song song.
+
+## Quyết định skill ngay trong tác vụ
+
+Câu hỏi "công việc này có tạo ra một mô hình dùng lại được, đáng giá một skill hay agent không?" được trả lời bên trong tác vụ đã tạo ra mô hình đó, trong khi bằng chứng của nó còn trong ngữ cảnh. Completion & Log của mỗi tác vụ mang một **kết luận về skill**: không có gì, cập nhật một skill hiện có, tạo một thành phẩm có đặt tên, hoặc một lần hoãn kèm lý do. Việc viết skill khi thực sự có cơ sở diễn ra bên trong tác vụ đó, trước cổng kiểm chứng và commit của nó, sau khi kiểm tra danh mục hiện có để tìm trùng lặp.
+
+## Báo cáo điều hành — tùy chọn, theo yêu cầu
+
+Executive Report không còn là một tác vụ bắt buộc. Lúc hoàn tất, agent đề xuất nó một lần; nó chỉ được tạo khi có một yêu cầu rõ ràng, được thỏa mãn từ bằng chứng bền vững mà không cần phát lại kế hoạch. Không trả lời, hoặc một lượt chạy không có giám sát, để kế hoạch hoàn tất mà không tạo báo cáo.
 
 ## Giao thức hoàn tất tác vụ
 
@@ -133,7 +189,7 @@ Rigor PHẢI tỷ lệ với công việc. Nghi lễ trên các thay đổi tầ
 | Bậc | Khi nào | Hình thức |
 |-----|---------|-----------|
 | **micro** | Một thay đổi nguyên tử duy nhất: một mối quan tâm, khoảng một buổi làm việc, không cần điều phối. Sửa lỗi, thay đổi nội dung, chỉnh cấu hình. | Không có thư mục kế hoạch. Agent nêu mục tiêu, tiêu chí chấp nhận và cổng kiểm chứng nội tuyến trong cuộc trò chuyện, thực thi, kiểm chứng, commit. |
-| **standard** | Công việc nhiều bước với phạm vi thực sự: một tính năng, một tái cấu trúc, một di chuyển trong một repo. Bậc mặc định. | Một kế hoạch đầy đủ: thư mục kế hoạch, các tác vụ chín phần, các tác vụ cuối bắt buộc. |
+| **standard** | Công việc nhiều bước với phạm vi thực sự: một tính năng, một tái cấu trúc, một di chuyển trong một repo. Bậc mặc định. | Một kế hoạch đầy đủ: thư mục kế hoạch, các tác vụ mười phần, Final Review. |
 | **deep** | Công việc dài hạn trải dài các nhóm song song, repository con, hoặc nhiều phiên không có giám sát. | Một kế hoạch standard cộng với các năng lực điều phối và/hoặc team-agents, và lớp trạng thái. |
 
 Một agent được yêu cầu tạo kế hoạch cho công việc bậc micro PHẢI nói rằng một kế hoạch là không tương xứng và đề xuất hình thức nội tuyến thay thế. Một thư mục kế hoạch KHÔNG ĐƯỢC tạo cho một thay đổi đơn tệp tầm thường.
@@ -141,6 +197,17 @@ Một agent được yêu cầu tạo kế hoạch cho công việc bậc micro 
 Công việc bậc micro vẫn giữ các yếu tố không thể thương lượng: một mục tiêu rõ ràng, một cổng kiểm chứng chạy và đạt, và kỷ luật test cho các thay đổi hành vi. Bậc thay đổi bao bì, không bao giờ thay đổi các cổng.
 
 Khi phạm vi tăng lên giữa chừng — một tác vụ micro khám phá phạm vi thực sự, một kế hoạch standard nảy sinh các sub-repository — agent PHẢI dừng lại và nâng cấp công việc lên bậc tiếp theo thay vì kéo dài bậc hiện tại.
+
+## Tương thích
+
+Các kế hoạch và repository từ các phiên bản sớm hơn vẫn tuân thủ, và một trình kiểm tra tuân thủ PHẢI phân biệt một thành phẩm cũ đã biết (được chấp nhận) với một thành phẩm khai báo phiên bản này mà về khách quan không hợp lệ dưới nó (bị từ chối):
+
+| Trường hợp | Quy tắc |
+|------|------|
+| **Kế hoạch được viết dưới một phiên bản sớm hơn** (ba tác vụ cuối bắt buộc; các tác vụ không có Touched Surface) được thực thi bởi phiên bản này | Được hỗ trợ. Được thực thi theo hình dạng đã ghi lại của chính nó — các tác vụ cuối không được thêm, bớt hay sắp xếp lại, không Touched Surface nào được thêm giữa chừng, và kiểm chứng rơi về bộ áp dụng đầy đủ. Một phiên `refine` CÓ THỂ di chuyển nó một cách có chủ đích. |
+| **Repository được onboarding dưới một phiên bản sớm hơn**, được onboarding hoặc lập kế hoạch bởi phiên bản này | Được hỗ trợ. Các kế hoạch rơi về các cổng bộ đầy đủ; tài liệu lệnh gọi có phạm vi bị thiếu là một phát hiện nêu tên nâng cấp harness có mục tiêu, không bao giờ là một thất bại. |
+| **Kế hoạch được viết dưới phiên bản này**, agent theo phiên bản này | Được hỗ trợ — đây là mục tiêu. |
+| **Kế hoạch được viết dưới phiên bản này**, agent theo một phiên bản sớm hơn | Không được hỗ trợ; đã được tài liệu hóa. Các repository ghim một skill cũ NÊN nâng cấp skill trước khi nhận các kế hoạch mới. |
 
 ## Phiên bản hóa
 

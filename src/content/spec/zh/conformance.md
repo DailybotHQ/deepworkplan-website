@@ -8,7 +8,7 @@ section: Conformance
 
 # 符合性
 
-**版本 1.1。状态：稳定。** 本文档界定了一个代码仓库*符合 Deep Work Plan*——也就是 AI-first、可被代理驾驭——意味着什么。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
+**版本 1.2。状态：稳定。** 本文档界定了一个代码仓库*符合 Deep Work Plan*——也就是 AI-first、可被代理驾驭——意味着什么。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
 符合性之所以存在，是为了让“AI-first”成为一项客观、可核查的属性，而非一种印象。一个仓库要么满足下述标准，要么不满足。[`verify` 子技能](/kit)（`/dwp-verify`）会以机械方式核查它们。
 
@@ -23,7 +23,7 @@ section: Conformance
 5. **一个被 gitignore 的 `.dwp/` 工作区。** 仓库 MUST 包含一个含 `plans/` 与 `drafts/` 的 `.dwp/` 目录，且 `.dwp/` MUST 被 gitignore。一个 `tmp/` 草稿空间 SHOULD 存在，并 SHOULD 被 gitignore。
 6. **方法论技能可被解析。** Deep Work Plan 技能 MUST 被安装或被引用，使得仓库中的代理能够调用其各子技能。
 
-一个仓库**在不带任何附加组件时即完全符合规范**。附加组件（devcontainer、Dailybot、dependency-upgrade、design-system）是可选的，MUST NOT 作为符合性的必要条件。
+一个仓库**在零可选附加组件下即完全符合规范**。可选附加组件（devcontainer、Dailybot、dependency-upgrade、design-system）MUST NOT 作为符合性的必要条件。自标准 2.3.0 起，**AI Diff Reviewer 本地审查**（vendored skill + 扩展文件）属于基线的一部分：对声明 2.3.0 或更新版本的仓库，它的缺失是一项失败；对旧版仓库则是一项 harness 版本发现。其 CI 层面保持可选。
 
 ## 一份结构良好的计划
 
@@ -33,11 +33,11 @@ section: Conformance
 2. 每项新增核心功能或改变产品行为的任务 MUST 在其验收标准中包含针对该行为的自动化测试覆盖，并 MUST 在其验证关卡中将代码仓库的测试与其 lint 及类型检查一并运行——而不仅仅是构建。现有测试 MUST 保持通过；行为变更 MUST 更新它所破坏的测试，而非删除或跳过它。纯文档、配置或研究类任务无需创建测试，但仍要运行代码仓库的关卡。
 3. 每项涉及身份验证、输入处理、机密或配置、网络暴露面或依赖项的任务 MUST 在其验收标准中承载该变更的安全期望，且每次提交 MUST 不含任何机密材料。
 4. 计划 MUST 持久化进展，使工作能在中断中存续，并能被另一个代理恢复。
-5. 计划 MUST 包含三项强制收尾任务——Security Review、Skills & Agents Discovery 与 Executive Report。一项严重的安全发现会阻止完成，直至被修复或被明确接受。
+5. 计划 MUST 持久化进展，使工作能在中断中存续，并能被另一个代理恢复——并且 MUST 以其记录在案的最终审查收尾。在本版本下编写的计划 MUST 恰好以唯一的强制 **Final Review** 作结——安全审查、最终状态验证与技能决策核对。在更早版本下编写的计划以三项强制收尾任务（Security Review、Skills & Agents Discovery、Executive Report）作结，且仍然符合规范。一项严重的安全发现会阻止完成，直至被修复或被明确接受。
 6. 任务 SHOULD 在执行之前重新锚定到计划的目标，以防止在长周期中发生漂移。
 
 ## 验证符合性
 
-符合性 SHOULD 以机械方式验证，而非靠人工检查。运行 `/dwp-verify` 会针对上述标准生成一份通过/未通过报告：`AGENTS.md` 的存在与真实内容、`CLAUDE.md` 的解析、`docs/` 的各类别、`.agents/` 目录与磁盘的一致性、`.dwp/` 与 `tmp/` 的 gitignore 状态，以及——对一份计划而言——每项任务都带有验收标准与验证关卡，并对改变行为的任务带有测试覆盖，且三项强制收尾任务均已就位，其中包括 Security Review。
+符合性 SHOULD 以机械方式验证，而非靠人工检查。运行 `/dwp-verify` 会针对上述标准生成一份通过/未通过报告：`AGENTS.md` 的存在与真实内容、`CLAUDE.md` 的解析、`docs/` 的各类别、`.agents/` 目录与磁盘的一致性、`.dwp/` 与 `tmp/` 的 gitignore 状态，以及——对一份计划而言——每项任务都带有验收标准与验证关卡，对改变行为的任务带有测试覆盖，且记录在案的最终审查已就位。检查器是**版本感知的**：它 MUST 接受一份旧版计划（三项强制收尾任务、无触及面）为符合规范，并 MUST 拒绝一份声明本版本、却在本版本下客观无效的计划。它还会将缺失或过期的 `DWP standard:` 溯源行报告为一项指明目标 harness 升级的发现。
 
 一个仓库 SHOULD 在接入之后、以及每份计划完成之后重新验证，使符合性得以持续维护，而非只声称一次。

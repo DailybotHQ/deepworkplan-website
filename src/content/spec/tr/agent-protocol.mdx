@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Ajan protokolü
 
-**Sürüm 1.2.** Bu protokol, bir yapay zeka kodlama ajanının Deep Work Plan'lerle çalışırken nasıl davranMASI GEREKTİĞİNİ tanımlar. MUST, SHOULD ve MAY anahtar kelimeleri RFC 2119'u izler.
+**Sürüm 1.3.** Bu protokol, bir yapay zeka kodlama ajanının Deep Work Plan'lerle çalışırken nasıl davranMASI GEREKTİĞİNİ tanımlar. MUST, SHOULD ve MAY anahtar kelimeleri RFC 2119'u izler.
 
 > **v1.2'de eklemeli.** İki ekleme, kırıcı değişiklik yok: (1) otonom ajan platformları (OpenClaw, Hermes) desteklenen ajanlar tablosuna katılır; (2) **Yürütme profilleri** bölümü gözetimsiz yürütmeyi tanımlar — sınırlı yetki, zorunlu durum katmanı, durma koşulları ve zamanlanmış devam.
 
@@ -52,8 +52,8 @@ Test ve doğrulama araç zinciri isteğe bağlı değil, temel bir bağlamdır: 
 Bir plan oluştururken, ajan ŞUNLARI YAPMALIDIR:
 
 - Hedefi ardışık, gözden geçirilebilir görevlere ayırmak.
-- Her görevi dokuz bölümlü anatomiyle yazmak.
-- Üç zorunlu son görevle (Security Review, Skills & Agents Discovery, Executive Report) bitirmek.
+- Her görevi on bölümlü anatomiyle yazmak — Dokunulan Yüzey, görevin neyi değiştirdiğini kaydeder ve doğrulama kapısını risk sınıfına göre seçer.
+- Tek zorunlu Final Review ile bitirmek (güvenlik incelemesi, son-durum doğrulaması, skill uzlaştırması).
 - Hedef belirsiz olduğunda açıklayıcı sorular sormak.
 
 ## Yürütme
@@ -66,7 +66,8 @@ Yürütme sırasında, ajan ŞUNLARI YAPMALIDIR:
 - Görev durumunu doğru biçimde işaretlemek.
 - Yeni işlevsellik ekleyen veya davranışı değiştiren her görev için, o davranış için otomatik testler eklemek veya güncellemek ve görevi tamamlandı olarak işaretlemeden önce deponun testlerini ve lint/tür denetimi denetimlerini çalıştırmak; kapının geçmesini zorlamak için asla bir testi silmemek veya atlamamak.
 - Kimlik doğrulamaya, girdi işlemeye, sırlara veya yapılandırmaya, ağ yüzeyine ya da bağımlılıklara dokunan her görev için, kabul kriterlerinde bildirilen güvenlik beklentilerini karşılamak ve commit etmeden önce diff'in hiçbir sır içermediğini teyit etmek.
-- Tahmin yürütmek yerine engellendiğinde durup sormak.
+- Geçen bir kapıdan onay istemeden bir sonraki göreve geçmek; bir kapı başarısız olduğunda düzeltmeleri görevin yetkili kapsamı içinde denemek — somut bir hipotezle, yeni kanıt olmadan iki denemeden sonra kör yeniden denemeleri durdurarak.
+- Tahmin yürütmek yerine yalnızca gerçek bir onay sınırında veya çözülmemiş bir engelde durup sormak.
 
 ## İyileştirme
 
@@ -98,7 +99,7 @@ Oturumda bir insan bulunur. Ajan önerir, insan iyileştirilmiş taslağı onayl
 
 Plan, insan gözetimi olmadan çalışır — otonom bir platformun zamanlanmış dönüşü, bir bulut oturumu, bir gece çalışması. Gözetimsiz yürütme, plan bazında isteğe bağlıdır ve aşağıdakilerin tümünü KARŞILAMAK ZORUNDADIR:
 
-- **Önceden onaylanmış plan.** İyileştirilmiş taslak, herhangi bir gözetimsiz dönüşten önce bir insan tarafından onaylanmıştır. Bir ajan, tek dönüşte gözetimsiz olarak plan oluşturup yürütemez; plan onayı, insan kontrol noktasıdır.
+- **Önceden onaylanmış plan.** Plan, herhangi bir gözetimsiz dönüşten önce onaylanmıştır — yönlendirilmiş modda iyileştirilmiş taslağı bir insan onaylamıştır; trust modunda geliştiricinin açık `trust` talimatı kayıtlı onaydır. Bir ajan, ikisiz tek dönüşte gözetimsiz olarak plan oluşturup yürüTEMEZ; plan onayı, insan kontrol noktasıdır.
 - **Durum katmanı ZORUNLUDUR.** Plan, daha sonraki herhangi bir oturumun — ajan veya insan — bir dökümü yeniden oynamadan kesin ilerlemeyi okuyabilmesi için `manifest.json` ve `state.json` TAŞIMAK ZORUNDADIR. Bkz. [Plan durumu](/spec/plan-state).
 - **Sınırlı yetki.** Ajanın yetkisi plandır: kapsamı GENİŞLETMEMELİ, planın açıkça yetkilendirmediği yıkıcı veya dışarı yönelik eylemler GERÇEKLEŞTİRMEMELİ ve keşfedilen-ancak-planlanmamış çalışmayı kapsamak için görevin talimatlarını ESSNETMEMELİDİR — keşfedilen çalışma, doğaçlama yapılmak yerine bir sonraki `refine` için kaydedilir.
 - **Dönüş başına tek atomik görev, kapılar her zaman.** Her dönüş DWP Resume Protocol'ü çalıştırır, en fazla bir sonraki görevi yürütür, doğrulama kapısını geçer, görev tamamlama protokolüne göre tamamlar ve verir. Başarısız bir kapı, durma koşuludur; asla "yine de devam et" değil.

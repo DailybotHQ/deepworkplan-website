@@ -50,7 +50,7 @@ Ambos archivos DEBEN escribirse de forma atómica: escribir en un archivo tempor
 ```json
 {
   "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.2.0",
+  "spec_version": "2.3.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
@@ -146,7 +146,7 @@ Una tarea NO DEBE marcarse como `completed` en `state.json` mientras alguno de s
 
 Una tarea `completed` DEBERÍA llevar un registro de `outcome`: qué se `tried` (intentó), qué `failed` (falló), qué `worked` (funcionó) y notas libres en `notes`. Mantener cada entrada en una línea.
 
-Los registros de resultados convierten un plan terminado en **memoria episódica** recuperable: un agente (o una plataforma de indexación de memoria) puede recordar más adelante cómo se resolvió un problema, no solo que se resolvió. Alimentan la tarea obligatoria de Descubrimiento de Skills y Agentes, que DEBERÍA leerlos al buscar patrones. En plataformas como Hermes que indexan la memoria del agente, los registros de resultados en `state.json` hacen que los planes completados sean directamente recuperables en sesiones futuras.
+Los registros de resultados convierten un plan terminado en **memoria episódica** recuperable: un agente (o una plataforma de indexación de memoria) puede recordar más adelante cómo se resolvió un problema, no solo que se resolvió. Alimentan las disposiciones de skills por tarea y la reconciliación de skills del Final Review, que los lee al buscar patrones. En plataformas como Hermes que indexan la memoria del agente, los registros de resultados en `state.json` hacen que los planes completados sean directamente recuperables en sesiones futuras.
 
 ### Estado de punto de control y de bloqueo
 

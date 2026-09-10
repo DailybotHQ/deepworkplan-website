@@ -8,7 +8,7 @@ section: Conformance
 
 # Conformità
 
-**Versione 1.1. Stato: Stabile.** Questo documento definisce cosa significhi per un repository essere *conforme a Deep Work Plan* — ossia AI-first e pilotabile dagli agenti. Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
+**Versione 1.2. Stato: Stabile.** Questo documento definisce cosa significhi per un repository essere *conforme a Deep Work Plan* — ossia AI-first e pilotabile dagli agenti. Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
 
 La conformità esiste affinché «AI-first» sia una proprietà oggettiva e verificabile anziché un’impressione. Un repository soddisfa i criteri qui sotto oppure no. La [sub-skill `verify`](/kit) (`/dwp-verify`) li controlla in modo meccanico.
 
@@ -23,7 +23,7 @@ Un repository conforme a DWP DEVE soddisfare tutto quanto segue. Ogni artefatto 
 5. **Un workspace `.dwp/` escluso da git.** Il repository DEVE contenere una directory `.dwp/` con `plans/` e `drafts/`, e `.dwp/` DEVE essere escluso da git. Uno spazio di lavoro temporaneo `tmp/` DOVREBBE esistere e DOVREBBE essere escluso da git.
 6. **La skill della metodologia è risolvibile.** La skill Deep Work Plan DEVE essere installata o referenziata in modo tale che un agente nel repository possa invocarne le sub-skill.
 
-Un repository è **pienamente conforme con zero addon**. Gli addon (devcontainer, Dailybot, dependency-upgrade, design-system) sono opt-in e NON DEVONO essere richiesti per la conformità.
+Un repository è **pienamente conforme con zero addon opzionali**. Gli addon opzionali (devcontainer, Dailybot, dependency-upgrade, design-system) NON DEVONO essere richiesti per la conformità. Dallo standard 2.3.0 la **revisione locale AI Diff Reviewer** (skill vendorizzata + file di estensione) fa parte della baseline: la sua assenza è un fallimento per un repository che dichiara la 2.3.0 o successiva e un rilievo sulla versione della harness per un repository legacy. La sua superficie CI resta opzionale.
 
 ## Un piano ben formato
 
@@ -33,11 +33,11 @@ Un Deep Work Plan in `.dwp/plans/` è ben formato quando:
 2. Ogni attività che aggiunge nuove funzionalità fondamentali o modifica il comportamento del prodotto DEVE includere una copertura di test automatizzati per quel comportamento nei suoi criteri di accettazione, e DEVE eseguire i test del repository insieme ai suoi controlli di lint e type-check nel suo validation gate — non solo la build. I test esistenti DEVONO restare verdi; un cambiamento di comportamento DEVE aggiornare un test che rompe anziché eliminarlo o saltarlo. Le attività di pura documentazione, configurazione o ricerca sono esentate dal creare test ma eseguono comunque il gate del repository.
 3. Ogni attività che tocca autenticazione, gestione degli input, segreti o configurazione, superficie di rete o dipendenze DEVE portare le aspettative di sicurezza di quella modifica nei suoi criteri di accettazione, e ogni commit DEVE essere privo di materiale segreto.
 4. Il piano DEVE persistere i progressi così che il lavoro sopravviva all’interruzione e possa essere ripreso da un agente diverso.
-5. Il piano DEVE includere le tre attività finali obbligatorie — Security Review, Skills & Agents Discovery ed Executive Report. Un rilievo di sicurezza critico blocca il completamento finché non viene corretto o esplicitamente accettato.
+5. Il piano DEVE persistere i progressi così che il lavoro sopravviva all’interruzione e possa essere ripreso da un agente diverso — e DEVE chiudersi con la propria revisione finale registrata. Un piano redatto con questa versione DEVE terminare con esattamente un **Final Review** obbligatorio — il passaggio di sicurezza, la validazione dello stato finale e la riconciliazione delle skill. Un piano redatto con una versione precedente termina con le tre attività finali obbligatorie (Security Review, Skills & Agents Discovery, Executive Report) e resta conforme. Un rilievo di sicurezza critico blocca il completamento finché non viene corretto o esplicitamente accettato.
 6. Le attività DOVREBBERO riancorarsi all’obiettivo del piano prima di eseguire, per prevenire la deriva su un orizzonte lungo.
 
 ## Verificare la conformità
 
-La conformità DOVREBBE essere verificata in modo meccanico anziché per ispezione. Eseguire `/dwp-verify` produce un report di esito positivo/negativo rispetto ai criteri qui sopra: la presenza e il contenuto reale di `AGENTS.md`, la risoluzione di `CLAUDE.md`, le categorie `docs/`, la corrispondenza tra catalogo `.agents/` e disco, lo stato di esclusione da git di `.dwp/` e `tmp/` e — per un piano — che ogni attività porti con sé criteri di accettazione e un validation gate, con copertura di test per le attività che modificano il comportamento e le tre attività finali obbligatorie presenti, Security Review inclusa.
+La conformità DOVREBBE essere verificata in modo meccanico anziché per ispezione. Eseguire `/dwp-verify` produce un report di esito positivo/negativo rispetto ai criteri qui sopra: la presenza e il contenuto reale di `AGENTS.md`, la risoluzione di `CLAUDE.md`, le categorie `docs/`, la corrispondenza tra catalogo `.agents/` e disco, lo stato di esclusione da git di `.dwp/` e `tmp/` e — per un piano — che ogni attività porti con sé criteri di accettazione e un validation gate, con copertura di test per le attività che modificano il comportamento e la revisione finale registrata presente. Il checker è **consapevole della versione**: DEVE accettare come conforme un piano legacy (tre attività finali obbligatorie, nessuna Superficie toccata) e DEVE rifiutare un piano che dichiara questa versione e che è oggettivamente invalido sotto di essa. Riporta inoltre una riga di provenienza `DWP standard:` mancante o non aggiornata come un rilievo che nomina l’aggiornamento mirato della harness.
 
 Un repository DOVREBBE essere ri-verificato dopo l’onboarding e dopo ogni piano completato, così che la conformità sia mantenuta anziché dichiarata una sola volta.

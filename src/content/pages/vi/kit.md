@@ -44,15 +44,15 @@ Các hướng dẫn suy luận theo từng stack mà luồng onboard dùng để
 không bao giờ là mẫu cứng. Sáu preset: Django, Vue + Vite, Astro/Svelte, dịch vụ Node/TS, gói/CLI Python,
 và một phương án dự phòng chung.
 
-### Addon (tự nguyện)
+### Addon (tùy chọn)
 
-Các năng lực tùy chọn mà luồng onboard có thể bổ sung vào một repo — không bao giờ là phần lõi của nền tảng AI-first:
+Các năng lực mà luồng onboard bổ sung vào một repo. Bốn addon là tùy chọn và không bao giờ là phần lõi của nền tảng AI-first; đánh giá cục bộ AI Diff Reviewer là bắt buộc kể từ chuẩn 2.3.0:
 
 - **Devcontainer** — một dev container tái lập được, cô lập, với xác thực AI-CLI bền vững.
 - **Dailybot** — báo cáo tiến độ và cột mốc theo nỗ lực tối đa cho các đội đang dùng Dailybot.
 - **Dependency upgrade** — nâng cấp phụ thuộc độc lập với trình quản lý gói, theo lô, được kiểm chứng, hoàn nguyên được.
 - **Design system** — một `DESIGN.md` giới hạn ở bề mặt giao diện (tại `docs/DESIGN.md`, được tham chiếu từ `AGENTS.md`) được suy luận từ nguồn thiết kế thực của repo, với các profile cho UI trực quan, đầu ra CLI có phong cách và nhắn tin hội thoại, để agent sinh ra đầu ra giao diện đúng thương hiệu; profile trực quan bật mặc định khi một hệ thống thiết kế được phát hiện, các profile CLI và hội thoại được khuyến nghị khi được phát hiện và luôn được hỏi.
-- **AI Diff Reviewer** — tăng cường Security Review với đánh giá cục bộ có cấu trúc ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md` bắt buộc); Flow B tùy chọn thêm cổng merge PR CI dùng chung extension. Luôn hỏi Flow A vs Flow B; không bao giờ tự động cài đặt.
+- **AI Diff Reviewer** — đánh giá cục bộ bắt buộc: onboarding cài [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md`, và bước rà soát bảo mật của mọi Final Review chạy nó; Flow B tùy chọn thêm cổng merge PR CI dùng chung extension, được đề xuất rõ ràng và không bao giờ được cài khi chưa được yêu cầu.
 
 ### Ví dụ
 

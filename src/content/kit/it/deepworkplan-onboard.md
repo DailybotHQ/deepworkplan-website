@@ -29,8 +29,8 @@ Trasforma un repository in un codebase AI-first e spec-driven. Questa è la sub-
 4. Genera `docs/` (architettura, standard, testing, sicurezza e altro) e documentazione per modulo.
 5. Genera `.agents/` (agenti, sottili comandi `dwp-*`, skill adatte allo stack, catalogo) + `.claude → .agents`.
 6. Installa la skill e predispone una `.dwp/` esclusa da git (plans, drafts) e uno spazio di lavoro temporaneo `tmp/`.
-7. Propone gli addon opt-in, poi esegue un’auto-verifica.
+7. Installa la revisione locale AI Diff Reviewer richiesta, propone gli addon opt-in, poi esegue un’auto-verifica.
 
 ## Note
 
-Un repository è pienamente conforme con zero addon. La realtà rilevata vince sempre sulle assunzioni del preset.
+Un repository è pienamente conforme con zero addon opzionali; la revisione locale AI Diff Reviewer fa parte della baseline dallo standard 2.3.0. La realtà rilevata vince sempre sulle assunzioni del preset.

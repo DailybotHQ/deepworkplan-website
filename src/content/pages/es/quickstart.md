@@ -43,9 +43,9 @@ tu repositorio.
 ### 3. Evoluciona el kit y acepta addons
 
 Usa `/skill-create` y `/agent-create` (la sub-skill author) para hacer crecer skills, agentes y
-comandos adaptados a tu stack. La incorporación también ofrece cinco addons opcionales — devcontainer,
-Dailybot, dependency-upgrade, design-system y AI Diff Reviewer — que aceptas solo cuando encajan. Un repo es plenamente conforme con
-cero addons.
+comandos adaptados a tu stack. La incorporación instala la revisión local requerida de AI Diff Reviewer (su compuerta CI sigue
+opcional) y ofrece cuatro addons opcionales — devcontainer, Dailybot, dependency-upgrade y design-system — que aceptas solo cuando encajan. Un repo es plenamente conforme con
+cero addons opcionales.
 
 ### 4. Planifica y ejecuta
 

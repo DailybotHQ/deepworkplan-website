@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Agentenprotokoll
 
-**Version 1.2.** Dieses Protokoll definiert, wie sich ein KI-Coding-Agent verhalten MUSS, wenn er mit Deep Work Plans arbeitet. Die Schlüsselwörter MUSS, SOLLTE und KANN folgen RFC 2119.
+**Version 1.3.** Dieses Protokoll definiert, wie sich ein KI-Coding-Agent verhalten MUSS, wenn er mit Deep Work Plans arbeitet. Die Schlüsselwörter MUSS, SOLLTE und KANN folgen RFC 2119.
 
 > **Additiv in v1.2.** Zwei Ergänzungen, keine Breaking Changes: (1) autonome Agenten-Plattformen (OpenClaw, Hermes) werden in die Tabelle unterstützter Agenten aufgenommen; (2) der Abschnitt **Ausführungsprofile** definiert unbeaufsichtigte Ausführung — begrenzte Autorität, verpflichtende Zustandsschicht, Stopbedingungen und geplante Fortsetzung.
 
@@ -52,8 +52,8 @@ Die Test- und Validierungs-Toolchain ist wesentlicher, nicht optionaler Kontext:
 Beim Erstellen eines Plans MUSS der Agent:
 
 - Das Ziel in aufeinanderfolgende, prüfbare Aufgaben zerlegen.
-- Jede Aufgabe mit der neunteiligen Anatomie schreiben.
-- Mit den drei verpflichtenden Abschlussaufgaben enden (Security Review, Skills & Agents Discovery, Executive Report).
+- Jede Aufgabe mit der zehnteiligen Anatomie schreiben — die Touched Surface hält fest, was die Aufgabe ändert, und wählt ihr Validierungs-Gate nach Risikoklasse.
+- Mit dem einen verpflichtenden Final Review enden (Sicherheitstest, Validierung des Endzustands, Abgleich der Skills-Entscheidungen).
 - Bei einem mehrdeutigen Ziel klärende Fragen stellen.
 
 ## Ausführung
@@ -66,7 +66,8 @@ Während der Ausführung MUSS der Agent:
 - Den Aufgabenstatus akkurat markieren.
 - Für jede Aufgabe, die neue Funktionalität hinzufügt oder Verhalten ändert, automatisierte Tests für dieses Verhalten hinzufügen oder aktualisieren und die Tests sowie die Lint-/Typprüfungen des Repositorys ausführen, bevor die Aufgabe als abgeschlossen markiert wird; niemals einen Test löschen oder überspringen, um das Gate zum Bestehen zu zwingen.
 - Für jede Aufgabe, die Authentifizierung, Eingabeverarbeitung, Geheimnisse oder Konfiguration, Netzwerkoberfläche oder Abhängigkeiten berührt, die in ihren Akzeptanzkriterien deklarierten Sicherheitserwartungen erfüllen und vor dem Committen bestätigen, dass der Diff kein Geheimnismaterial enthält.
-- Bei Blockaden anhalten und nachfragen, statt zu raten.
+- Von einem bestandenen Gate ohne Bestätigungsnachfrage zur nächsten Aufgabe übergehen; bei einem fehlschlagenden Gate Reparaturen innerhalb des autorisierten Umfangs der Aufgabe versuchen — mit einer konkreten Hypothese und nach zwei Versuchen ohne neue Erkenntnisse keine blinden Wiederholungen mehr.
+- Nur an einer echten Genehmigungsgrenze oder einem ungelösten Blocker anhalten und nachfragen, statt zu raten.
 
 ## Verfeinerung
 
@@ -98,7 +99,7 @@ Ein Mensch ist in der Sitzung anwesend. Der Agent schlägt vor, der Mensch geneh
 
 Der Plan läuft ohne menschliche Aufsicht — der geplante Turn einer autonomen Plattform, eine Cloud-Sitzung, ein Nachtlauf. Unbeaufsichtigte Ausführung ist per Plan opt-in und MUSS alle folgenden Bedingungen erfüllen:
 
-- **Vorab genehmigter Plan.** Der überarbeitete Entwurf wurde von einem Menschen genehmigt, bevor ein unbeaufsichtigter Turn stattfindet. Ein Agent DARF NICHT in einem Turn unbeaufsichtigt einen Plan erstellen und ausführen; die Plan-Genehmigung ist der menschliche Kontrollpunkt.
+- **Vorab genehmigter Plan.** Der Plan wurde vor jedem unbeaufsichtigten Turn genehmigt — im geführten Modus genehmigte der Mensch den überarbeiteten Entwurf; im Trust-Modus ist die explizite `trust`-Anweisung des Entwicklers die aufgezeichnete Genehmigung. Ein Agent DARF NICHT ohne eines von beidem in einem Turn unbeaufsichtigt einen Plan erstellen und ausführen; die Plan-Genehmigung ist der menschliche Kontrollpunkt.
 - **Zustandsschicht ERFORDERLICH.** Der Plan MUSS `manifest.json` und `state.json` tragen, damit jede spätere Sitzung — Agent oder Mensch — den genauen Fortschritt lesen kann, ohne ein Transkript abzuspielen. Siehe [Plan-Zustand](/spec/plan-state).
 - **Begrenzte Autorität.** Die Autorität des Agenten ist der Plan: Er DARF den Umfang NICHT ausweiten, DARF KEINE destruktiven oder nach außen gerichteten Aktionen durchführen, die der Plan nicht explizit autorisiert, und DARF die Anweisungen einer Aufgabe NICHT dehnen, um entdeckte, aber nicht geplante Arbeit abzudecken — entdeckte Arbeit wird für das nächste `refine` aufgezeichnet, nicht improvisiert.
 - **Eine atomare Aufgabe pro Turn, Gates immer.** Jeder Turn führt das DWP-Wiederaufnahme-Protokoll aus, führt höchstens die nächste Aufgabe aus, besteht ihr Validierungs-Gate, schließt gemäß dem Aufgabenabschlussprotokoll ab und gibt frei. Ein fehlschlagendes Gate ist eine Stopbedingung, niemals „trotzdem weiterfahren".

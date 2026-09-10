@@ -1,6 +1,6 @@
 ---
 title: Add-ons
-description: "Optionale DWP-Erweiterungen: fünf Addons (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), Addon-Vertrag und Kit-Konzepte."
+description: "DWP-Addons: vier optionale Erweiterungen (devcontainer, Dailybot, dependency-upgrade, design-system), die erforderliche lokale AI-Diff-Reviewer-Überprüfung mit optionaler CI-Oberfläche, Addon-Vertrag und Kit-Konzepte."
 order: 5
 lang: de
 section: Addons
@@ -8,7 +8,7 @@ section: Addons
 
 # Add-ons
 
-**Version 2.0.** Add-ons sind optionale Erweiterungen der zentralen Deep Work Plan-Methodik. Sie sind **niemals für Konformität erforderlich** — ein Repository ohne Addons ist vollständig AI-first und DWP-konform. Jedes Addon wird beim Onboarding angeboten, explizit angenommen oder abgelehnt und — bei Annahme — mit bestehendem Setup **abgeglichen**, statt es zu überschreiben.
+**Version 2.1.** Add-ons sind Erweiterungen der zentralen Deep Work Plan-Methodik. Vier der fünf sind optional und **niemals für Konformität erforderlich** — ein Repository ohne optionale Addons ist vollständig AI-first und DWP-konform. Jedes optionale Addon wird beim Onboarding angeboten, explizit angenommen oder abgelehnt und — bei Annahme — mit bestehendem Setup **abgeglichen**, statt es zu überschreiben. Eine Komponente ist die deklarierte Ausnahme: Seit Standard 2.3.0 ist die **lokale Überprüfung des AI Diff Reviewer** Teil der erforderlichen Baseline — das Onboarding installiert sie und jedes Final Review führt sie aus —, während ihre CI-Oberfläche Opt-in bleibt.
 
 ## Der Addon-Vertrag
 
@@ -25,7 +25,7 @@ Discovery: Der `onboard`-Ablauf enumeriert `skills/deepworkplan/addons/` und pr�
 
 ## Aktive Addons (fünf)
 
-Fünf Addons sind heute aktiv. Jedes hat eine **Kit-Katalogseite** mit nutzerorientierten Details und eine **normative Spec** innerhalb der Deep Work Plan-Skill.
+Fünf Addons sind heute aktiv — vier optionale plus die erforderliche lokale Überprüfung. Jedes hat eine **Kit-Katalogseite** mit nutzerorientierten Details und eine **normative Spec** innerhalb der Deep Work Plan-Skill.
 
 ### Devcontainer (erstes Addon)
 
@@ -65,17 +65,18 @@ Ein interface-oberflächenbezogenes `DESIGN.md`, das jeder Coding-Agent für kon
 - **Profilstärke:** visual-ui ist **standardmäßig an bei Erkennung**; cli-output und conversational werden **bei Erkennung empfohlen, immer gefragt, niemals automatisch angewendet**
 - **Wann angeboten:** nur wenn eine nutzerorientierte Interface-Oberfläche erkannt wird — nicht für reine Libraries, headless Services oder reine Infra-Repos
 
-### AI Diff Reviewer (fünftes Addon)
+### AI Diff Reviewer (fünftes Addon — erforderliche lokale Überprüfung, optionale CI-Oberfläche)
 
-Eine optionale Verbindung zum **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (Marketplace **"AI Diff Reviewer"**, aktuelle Version **v2.0.0**), die die obligatorische Sicherheitsprüfung um eine strukturierte lokale Überprüfung erweitert und optional Pull Requests in CI sperrt.
+Der **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (Marketplace **"AI Diff Reviewer"**, aktuelle Version **v2.0.0**) versieht den Sicherheitstest des obligatorischen Final Review mit einer strukturierten lokalen Überprüfung und sperrt optional Pull Requests in CI. Seit Standard 2.3.0 ist die **lokale Überprüfung Teil der Baseline**; nur die CI-Oberfläche ist Opt-in.
 
 - **Kit-Seite:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — vollständige Fähigkeitsreferenz
-- **Was das DWP-Addon verbindet:** lokale Erweiterung der Sicherheitsprüfung über den übergeordneten Standardflow des Upstream-Skills; erforderliches `.review/extension.md` (Skill allein unvollständig); Flow B installiert optional `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) und bietet `apply-review` als entwickleraufrufbaren Begleiter — nie als Plan-Task
-- **Flows:** **A — nur lokal** (Skill + Erweiterung) oder **B — doppelte Oberfläche** (Skill + Erweiterung + CI Action). Das Addon **MUSS fragen**, welcher Flow; niemals Standard annehmen
-- **Soft-Fail vs. Gate:** fehlende Skill/Erweiterung/Aufruffehler blockieren niemals; `critical`-Ergebnisse eines **abgeschlossenen** lokalen Durchlaufs folgen dem Sicherheitsprüfungsvertrag weiterhin
-- **Parität (Flow B):** gemeinsames `prompt.md` + Erweiterung richten Methodik/Schweregrad aus; CI-iterationsbewusste Überprüfung kann Runde 2+ verkürzen, während der lokale Durchlauf vollständig bleibt
-- **Anbieterneutrale Schutzmaßnahme:** Kern-DWP hat **null** AI Diff Reviewer-Abhängigkeit; niemals für alle automatisch installieren
-- **Wann angeboten:** Entwickler oder Team möchte strukturierte lokale Überprüfung und/oder CI-PR-Merge-Gate
+- **Beim Onboarding erforderlich (Phase 7a):** tag-gepinnte Installation der vendorten Skill (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) plus eine auf das Repo zugeschnittene `.review/extension.md` (via `generate-extension`), unter der Onboarding-Zustimmung; ein zielgerichtetes Harness-Upgrade gleicht beide ab, wenn sie fehlen; eine Ablehnung wird als deklarierte Ausnahme aufgezeichnet und von `verify` gemeldet, bis sie installiert ist
+- **In jedem Final Review erforderlich:** der Sicherheitstest führt den übergeordneten Standardflow des Upstream-Skills über den akkumulierten Änderungssatz aus und hängt seine Ausgabe an `analysis_results/SECURITY_REVIEW.md` an; eine fehlende Skill oder Erweiterung ist ein aufgezeichneter `local reviewer not installed`-Befund — installiert, wenn der Lauf in das Harness schreiben darf — niemals ein stilles Überspringen; `critical`-Ergebnisse eines abgeschlossenen Durchlaufs blockieren den Abschluss, bis sie behoben oder explizit akzeptiert sind
+- **Optionale CI-Oberfläche (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) via Upstream-`setup`-Sub-Skill, plus `apply-review` als entwickleraufrufbaren Begleiter — explizit angeboten, niemals ungefragt installiert, niemals der Standard, niemals ein Plan-Task
+- **Niemals blockierend (nur der Aufruf):** eine lokale Überprüfung, die starten konnte, aber fehlschlägt, wird einmal gewarnt, aufgezeichnet und dann fortgefahren; sie lässt die Aufgabe niemals scheitern
+- **Parität (Flow B):** gemeinsames `prompt.md` + Erweiterung richten Methodik/Schweregrad aus; das iterationsbewusste CI-Review kann Runde 2+ verkürzen, während der lokale Durchlauf vollständig bleibt
+- **Anbieterneutrale Schutzmaßnahme:** kein Deep Work Plan-Ablauf erfordert einen kommerziellen Dienst, CI-Anbieter oder Secret — der Reviewer ist eine MIT-lizenzierte, tag-gepinnte Skill, ausgeführt vom eigenen Coding-Agenten des Entwicklers
+- **Konformität:** `verify` meldet einen fehlenden lokalen Reviewer als Fehler für Repositories, die Standard 2.3.0 oder neuer deklarieren, und als Harness-Versions-Befund für Legacy-Repositories
 
 ## Skills
 

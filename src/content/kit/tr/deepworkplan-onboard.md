@@ -29,8 +29,8 @@ Bir depoyu AI-first, spec-driven bir kod tabanına dönüştürün. Bu, Deep Wor
 4. `docs/` (mimari, standartlar, test, güvenlik ve daha fazlası) ile modül başına dokümanları üretin.
 5. `.agents/` (ajanlar, ince `dwp-*` komutları, yığına uygun skill’ler, katalog) ile `.claude → .agents` üretin.
 6. Skill’i kurun ve gitignore’lu bir `.dwp/` (planlar, taslaklar) ile bir `tmp/` karalama alanı iskeletleyin.
-7. İsteğe bağlı eklentileri önerin, ardından kendi kendini denetleyin.
+7. Gerekli AI Diff Reviewer yerel incelemesini kurun, isteğe bağlı eklentileri önerin, ardından kendi kendini denetleyin.
 
 ## Notlar
 
-Bir depo, sıfır eklentiyle tümüyle uyumludur. Saptanan gerçeklik her zaman ön ayar varsayımlarına üstün gelir.
+Bir depo, sıfır isteğe bağlı eklentiyle tümüyle uyumludur; AI Diff Reviewer yerel incelemesi 2.3.0 standardından itibaren temelin bir parçasıdır. Saptanan gerçeklik her zaman ön ayar varsayımlarına üstün gelir.

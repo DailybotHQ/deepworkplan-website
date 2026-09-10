@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Protocolo do agente
 
-**Versão 1.2.** Este protocolo define como um agente de código de IA DEVE (MUST) se comportar ao trabalhar com Deep Work Plans. As palavras-chave MUST, SHOULD e MAY seguem a RFC 2119.
+**Versão 1.3.** Este protocolo define como um agente de código de IA DEVE (MUST) se comportar ao trabalhar com Deep Work Plans. As palavras-chave MUST, SHOULD e MAY seguem a RFC 2119.
 
 > **Aditivo na v1.2.** Duas adições, sem alterações incompatíveis: (1) plataformas de agentes autônomos (OpenClaw, Hermes) entram na tabela de agentes suportados; (2) a seção **Perfis de execução** define a execução não supervisionada — autoridade limitada, camada de estado obrigatória, condições de parada e continuação agendada.
 
@@ -52,8 +52,8 @@ A cadeia de ferramentas de teste e validação é um contexto essencial, não op
 Ao criar um plano, o agente DEVE (MUST):
 
 - Decompor o objetivo em tarefas sequenciais e revisáveis.
-- Escrever cada tarefa com a anatomia de nove seções.
-- Terminar com as três tarefas finais obrigatórias (Security Review, Skills & Agents Discovery, Executive Report).
+- Escrever cada tarefa com a anatomia de dez seções — a Superfície tocada registra o que a tarefa muda e seleciona seu gate de validação pela classe de risco.
+- Terminar com o único Final Review obrigatório (passe de segurança, validação de estado final, reconciliação de skills).
 - Fazer perguntas de esclarecimento quando o objetivo for ambíguo.
 
 ## Execução
@@ -66,7 +66,8 @@ Durante a execução, o agente DEVE (MUST):
 - Marcar o status da tarefa com precisão.
 - Para qualquer tarefa que adiciona nova funcionalidade ou altera o comportamento, adicionar ou atualizar testes automatizados para esse comportamento e executar os testes e as verificações de lint/type-check do repositório antes de marcar a tarefa como concluída; nunca excluir ou pular um teste para forçar a aprovação do gate.
 - Para qualquer tarefa que toca autenticação, tratamento de entradas, segredos ou configuração, superfície de rede ou dependências, atender às expectativas de segurança declaradas em seus critérios de aceitação e confirmar que o diff não carrega material secreto antes de fazer commit.
-- Parar e perguntar quando estiver bloqueado, em vez de adivinhar.
+- Avançar de um gate aprovado para a próxima tarefa sem pedir confirmação; tentar reparos dentro do escopo autorizado da tarefa quando um gate falha — com uma hipótese concreta, interrompendo tentativas às cegas depois de duas tentativas sem nova evidência.
+- Parar e perguntar apenas em um limite genuíno de aprovação ou diante de um bloqueio não resolvido, em vez de adivinhar.
 
 ## Refinamento
 
@@ -98,7 +99,7 @@ Um humano está presente na sessão. O agente propõe, o humano aprova o rascunh
 
 O plano é executado sem nenhum humano observando — um turno agendado de plataforma autônoma, uma sessão em nuvem, uma execução noturna. A execução não supervisionada é opt-in por plano e DEVE (MUST) satisfazer todos os seguintes requisitos:
 
-- **Plano pré-aprovado.** O rascunho refinado foi aprovado por um humano antes de qualquer turno não supervisionado. Um agente NÃO DEVE (MUST NOT) criar e executar um plano não supervisionado em um único turno; a aprovação do plano é o ponto de controle humano.
+- **Plano pré-aprovado.** O plano foi aprovado antes de qualquer turno não supervisionado — no modo guiado o humano aprovou o rascunho refinado; no modo trust a instrução `trust` explícita do desenvolvedor é a aprovação registrada. Um agente NÃO DEVE (MUST NOT) criar e executar um plano não supervisionado em um único turno sem uma ou outra; a aprovação do plano é o ponto de controle humano.
 - **Camada de estado OBRIGATÓRIA.** O plano DEVE (MUST) carregar `manifest.json` e `state.json` para que qualquer sessão posterior — agente ou humano — possa ler o progresso exato sem reproduzir uma transcrição. Veja [Estado do plano](/spec/plan-state).
 - **Autoridade limitada.** A autoridade do agente é o plano: NÃO DEVE (MUST NOT) expandir o escopo, NÃO DEVE (MUST NOT) realizar ações destrutivas ou voltadas para o exterior que o plano não autoriza explicitamente, e NÃO DEVE (MUST NOT) estender as instruções de uma tarefa para cobrir trabalho descoberto mas não planejado — o trabalho descoberto é registrado para o próximo `refine`, não improvisado.
 - **Uma tarefa atômica por turno, gates sempre.** Cada turno executa o Protocolo de Retomada do DWP, executa no máximo a próxima tarefa, passa pelo seu validation gate, conclui conforme o protocolo de conclusão de tarefa e cede. Um gate com falha é uma condição de parada, nunca "continuar mesmo assim".

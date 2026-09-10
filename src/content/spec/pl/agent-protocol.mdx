@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Protokół agenta
 
-**Wersja 1.2.** Ten protokół definiuje, jak agent kodujący AI MUSI się zachowywać podczas pracy z Deep Work Plans. Słowa kluczowe MUST (MUSI), SHOULD (POWINIEN) i MAY (MOŻE) zgodne są z RFC 2119.
+**Wersja 1.3.** Ten protokół definiuje, jak agent kodujący AI MUSI się zachowywać podczas pracy z Deep Work Plans. Słowa kluczowe MUST (MUSI), SHOULD (POWINIEN) i MAY (MOŻE) zgodne są z RFC 2119.
 
 > **Addytywne w wersji 1.2.** Dwa uzupełnienia, bez zmian niekompatybilnych wstecz: (1) autonomiczne platformy agentów (OpenClaw, Hermes) dołączają do tabeli obsługiwanych agentów; (2) sekcja **Profile realizacji** definiuje wykonanie nieobsługiwane — ograniczony zakres uprawnień, obowiązkowa warstwa stanu, warunki zatrzymania i zaplanowana kontynuacja.
 
@@ -52,8 +52,8 @@ Agent POWINIEN zidentyfikować:
 Tworząc plan, agent MUSI:
 
 - Rozłożyć cel na sekwencyjne, podatne na przegląd zadania.
-- Zapisać każde zadanie zgodnie z dziewięciosekcyjną anatomią.
-- Zakończyć trzema obowiązkowymi zadaniami końcowymi (przegląd bezpieczeństwa, odkrywanie skilli i agentów, raport wykonawczy).
+- Zapisać każde zadanie zgodnie z dziesięciosekcyjną anatomią — Powierzchnia dotknięta zapisuje, co zadanie zmienia, i wybiera jego bramkę walidacyjną według klasy ryzyka.
+- Zakończyć pojedynczym obowiązkowym Final Review (przegląd bezpieczeństwa, walidacja stanu końcowego, uzgodnienie decyzji dotyczących skilli).
 - Zadać pytania doprecyzowujące, gdy cel jest niejednoznaczny.
 
 ## Realizacja
@@ -66,7 +66,8 @@ Podczas realizacji agent MUSI:
 - Trafnie oznaczać status zadania.
 - Dla każdego zadania, które dodaje nową funkcjonalność lub zmienia zachowanie, dodać lub zaktualizować automatyczne testy tego zachowania i uruchomić testy repozytorium oraz kontrole lintu i sprawdzania typów przed oznaczeniem zadania jako ukończonego; nigdy nie usuwać ani nie pomijać testu, by wymusić zaliczenie bramki.
 - Dla każdego zadania, które dotyka uwierzytelniania, obsługi danych wejściowych, sekretów lub konfiguracji, powierzchni sieciowej albo zależności, spełnić oczekiwania bezpieczeństwa zadeklarowane w jego kryteriach akceptacji i przed commitem potwierdzić, że diff nie zawiera żadnych sekretów.
-- Zatrzymać się i zapytać, gdy jest zablokowany, zamiast zgadywać.
+- Przechodzić od zaliczonej bramki do następnego zadania bez pytania o potwierdzenie; przy niezdanej bramce podejmować naprawy w ramach autoryzowanego zakresu zadania — z konkretną hipotezą, przerywając ślepe powtórzenia po dwóch próbach bez nowych dowodów.
+- Zatrzymywać się i pytać tylko przy rzeczywistej granicy zatwierdzenia albo nierozwiązanym blokerze, zamiast zgadywać.
 
 ## Dopracowanie
 
@@ -98,7 +99,7 @@ W sesji obecny jest człowiek. Agent proponuje, człowiek zatwierdza dopracowany
 
 Plan działa bez obserwacji człowieka — zaplanowana tura autonomicznej platformy, sesja chmurowa, nocne uruchomienie. Wykonanie nieobsługiwane jest opcjonalne dla każdego planu i MUSI spełniać wszystkie poniższe wymagania:
 
-- **Wstępnie zatwierdzony plan.** Dopracowany szkic został zatwierdzony przez człowieka przed jakąkolwiek turą nieobsługiwaną. Agent NIE MOŻE tworzyć i wykonywać planu nieobsługiwanego w jednej turze; zatwierdzenie planu jest ludzkim punktem kontrolnym.
+- **Wstępnie zatwierdzony plan.** Plan został zatwierdzony przed jakąkolwiek turą nieobsługiwaną — w trybie guided człowiek zatwierdził dopracowany szkic; w trybie trust jawna instrukcja `trust` programisty jest zapisanym zatwierdzeniem. Agent NIE MOŻE bez żadnego z nich tworzyć i wykonywać planu nieobsługiwanego w jednej turze; zatwierdzenie planu jest ludzkim punktem kontrolnym.
 - **Warstwa stanu WYMAGANA.** Plan MUSI zawierać `manifest.json` i `state.json`, aby każda późniejsza sesja — agenta lub człowieka — mogła odczytać dokładny postęp bez odtwarzania transkryptu. Zob. [Stan planu](/spec/plan-state).
 - **Ograniczony zakres uprawnień.** Zakres uprawnień agenta to plan: NIE MOŻE rozszerzać zakresu, NIE MOŻE wykonywać destrukcyjnych ani zewnętrznych akcji, których plan nie autoryzuje jawnie, i NIE MOŻE rozciągać instrukcji zadania na odkrytą, ale nieplanowaną pracę — odkryta praca jest rejestrowana do następnego `refine`, a nie improwizowana.
 - **Jedno zadanie atomowe na turę, bramki zawsze.** Każda tura uruchamia Protokół Wznowienia DWP, wykonuje co najwyżej następne zadanie, zalicza jego bramkę walidacyjną, kończy zgodnie z protokołem ukończenia zadania i wykonuje yield. Nieudana bramka jest warunkiem zatrzymania, nigdy „kontynuuj mimo to".

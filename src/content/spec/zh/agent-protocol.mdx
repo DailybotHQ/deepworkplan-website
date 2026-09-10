@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # 代理协议
 
-**版本 1.2。** 本协议界定了 AI 编码代理在使用 Deep Work Plan 时 MUST 如何行事。关键词 MUST、SHOULD 与 MAY 遵循 RFC 2119。
+**版本 1.3。** 本协议界定了 AI 编码代理在使用 Deep Work Plan 时 MUST 如何行事。关键词 MUST、SHOULD 与 MAY 遵循 RFC 2119。
 
 > **v1.2 新增（可向后兼容）。** 两项新增，无破坏性变更：（1）自主代理平台（OpenClaw、Hermes）加入受支持代理表；（2）**执行配置文件**章节定义了无人值守执行——受限权限范围、强制状态层、停止条件与计划续行。
 
@@ -52,8 +52,8 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 在创建一份计划时，代理 MUST：
 
 - 把目标分解为一系列连续、可审阅的任务。
-- 以九段式结构撰写每一项任务。
-- 以三项强制收尾任务作结（Security Review、Skills & Agents Discovery、Executive Report）。
+- 以十段式结构撰写每一项任务——触及面（Touched Surface）记录该任务改动什么，并按风险级别选择其验证关卡。
+- 以唯一的强制 Final Review 作结（安全审查、最终状态验证、技能决策核对）。
 - 当目标含糊时提出澄清性的问题。
 
 ## 执行
@@ -66,7 +66,8 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 - 准确标记任务状态。
 - 对于任何新增功能或改变行为的任务，在将该任务标记为完成之前，为该行为新增或更新自动化测试，并运行代码仓库的测试与 lint／类型检查；切勿为强行通过关卡而删除或跳过测试。
 - 对于任何涉及身份验证、输入处理、机密或配置、网络暴露面或依赖项的任务，满足其验收标准中声明的安全期望，并在提交之前确认 diff 不含任何机密材料。
-- 受阻时停下并询问，而非猜测。
+- 从通过的关卡直接进入下一项任务，无需请求确认；关卡失败时，在任务授权范围内尝试修复——带着一个具体的假设，并在没有新证据的情况下两次尝试后停止盲目重试。
+- 仅在真正的审批边界或未解决的阻碍处停下并询问，而非猜测。
 
 ## 精炼
 
@@ -98,7 +99,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 计划在没有人类监督的情况下运行——自主平台的计划轮次、云端会话、隔夜运行。无人值守执行是按计划选择启用的，MUST 满足以下所有条件：
 
-- **预审批计划。** 精炼后的草案在任何无人值守轮次之前已由人类审批。代理 MUST NOT 在单次轮次内无人值守地创建并执行计划；计划审批是人类控制点。
+- **预审批计划。** 计划在任何无人值守轮次之前已被审批——在引导模式下由人类审批精炼后的草案；在信任模式下，开发者明确的 `trust` 指令即是被记录的审批。缺少二者之一时，代理 MUST NOT 在单次轮次内无人值守地创建并执行计划；计划审批是人类控制点。
 - **状态层 REQUIRED。** 计划 MUST 携带 `manifest.json` 与 `state.json`，以便任何后续会话——无论是代理还是人类——都能在不重放记录的情况下读取确切的进展。参见 [Plan state](/spec/plan-state)。
 - **受限权限范围。** 代理的权限范围就是计划：它 MUST NOT 扩展范围，MUST NOT 执行计划未明确授权的破坏性或对外操作，MUST NOT 将任务的指令延伸以涵盖已发现但未计划的工作——已发现的工作记录以备下次 `refine`，不得即兴发挥。
 - **每轮次一个原子任务，关卡始终适用。** 每次轮次运行 DWP 恢复协议，最多执行下一项任务，通过其验证关卡，按任务完成协议完成，然后让出。关卡失败是停止条件，绝非"继续执行"的理由。

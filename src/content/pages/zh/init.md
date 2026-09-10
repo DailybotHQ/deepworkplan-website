@@ -125,10 +125,10 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 6. **`.dwp/` + `tmp/`。** 搭建一个含 `plans/` 与 `drafts/` 的、被 gitignore 的 `.dwp/`，外加一个 `tmp/`
    草稿空间——两者都以非破坏性方式（追加，而非重写）加入 `.gitignore`。
 
-## 4. 提供可选的附加组件
+## 4. 安装必备的本地审查，然后提供可选的附加组件
 
-在基线接入完成之后，列举这五个附加组件（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer），并把每一个作为一项明确的可选项来提供。一个仓库
-在不带**任何**附加组件时即完全符合规范——绝不自动安装它们。
+在基线接入完成之后，安装 **AI Diff Reviewer 本地审查**（第 7a 阶段——自标准 2.3.0 起必备）：在接入授权之下，安装标签锁定的 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`），并通过 `generate-extension` 生成按仓库定制的 `.review/extension.md`。然后列举四个可选附加组件（devcontainer、Dailybot、dependency-upgrade、design-system），并把每一个作为一项明确的可选项来提供。一个仓库
+在不带**任何**可选附加组件时即完全符合规范——绝不自动安装它们。
 
 - **Devcontainer 支持** —— 一个可复现、隔离的开发容器，具备持久的 AI-CLI 认证。
 - **Dailybot 集成** —— 四个生命周期事件（启动、重要任务、阻塞、完成）作为面向已在使用 Dailybot 的团队的尽力而为式进展报告，并可选启用自主的钩子强制层（`dailybot-cli >= 3.7.0`）。安装配套的 Dailybot 代理技能（3.10.3）还会暴露聊天、签到、表单创建、AI 询问、每仓库 API 密钥等功能——该附加组件仅将报告接入 DWP 执行。核心方法论对 Dailybot 零依赖。
@@ -137,7 +137,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 - **Design system** —— 可选的 `docs/DESIGN.md`，仅面向具备被检测到的界面表面的仓库
   （不会向纯库、无头服务或纯基础设施仓库提供）。三个配置档堆叠在一个文件中：visual-ui
   （检测到时默认启用）、cli-output 与 conversational——后两者始终会被询问，绝不会被自动应用。
-- **AI Diff Reviewer** —— 通过 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2**（skill + 必需的 `.review/extension.md`）以结构化的本地评审增强必选的安全审查。始终询问 **Flow A**（仅本地）还是 **Flow B**（具有 `pr-review.yml` 的双面 CI 门控）；绝不默认假定。仅对缺失的 skill/扩展/调用错误执行软失败；已完成的本地通行 `critical` 发现仍会阻止安全审查完成。核心方法论对 AI Diff Reviewer 零依赖。
+- **AI Diff Reviewer** —— 必备的本地审查（并非可选项）：每份 Final Review 的安全审查环节都会在计划累计的变更集上运行 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2**（skill + 必需的 `.review/extension.md`）。缺失的 skill 或扩展会成为一项被记录的 `local reviewer not installed` 发现，并在本次运行可写入 harness 时当场安装——绝不静默跳过；调用错误软失败；已完成通道中的 `critical` 发现在修复或被明确接受之前仍会阻止完成。**Flow B**（带 `pr-review.yml` 的 CI 门控）作为一项明确的可选项提供，绝不未经请求安装。没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密。
 
 ## 5. 演化套件（author 子技能）
 
@@ -157,9 +157,9 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 - `/dwp-resume` —— 重建状态并继续一份被中断的计划。
 - `/dwp-verify` —— 针对仓库（或特定计划）的客观通过/未通过符合性报告。
 
-每份计划都以三项强制收尾任务作结——一次针对计划自身改动的 **Security Review**（安全审查，
-让 `docs/SECURITY.md` 保持最新；一项严重发现会阻止完成）、Skills & Agents Discovery
-与 Executive Report。
+每份计划都以 Final Review 收尾——一次针对计划自身改动的安全审查（让
+`docs/SECURITY.md` 保持最新；一项严重发现会阻止完成）、Skills & Agents Discovery
+以及 Executive Report。
 
 ## 7. 验证
 

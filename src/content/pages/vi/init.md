@@ -54,7 +54,9 @@ Trước hết hãy hiểu repository, rồi đề xuất điều bạn sẽ là
   xuất xứ `DWP standard:`. Một harness ra đời trước tiêu chuẩn hiện tại nhận một đợt **nâng cấp
   có mục tiêu**: cài lại skill là toàn bộ lộ trình nâng cấp, và việc khởi tạo chỉ đối chiếu những
   phần còn thiếu hoặc đã cũ — mọi phần viết tay, skill tùy chỉnh và kế hoạch đang thực thi đều
-  được giữ nguyên, và lượt chạy thứ hai không thay đổi gì.
+  được giữ nguyên, và lượt chạy thứ hai không thay đổi gì. Các kế hoạch được viết dưới một phiên bản
+  sớm hơn giữ nguyên hình dạng đã ghi lại của mình và khép lại bằng các tác vụ cuối riêng của chúng;
+  chúng không bao giờ bị ép sang hình dạng mới.
 - **Kiểm kê những gì đã tồn tại.** `AGENTS.md`, `CLAUDE.md`, `docs/`, bất kỳ thiết lập `.agents/` hay skill/agent
   nào, `.dwp/`, và `.gitignore`. Ghi chú bất cứ thứ gì đã làm một phần công việc này.
 - **Đề xuất kế hoạch khởi tạo.** Trình bày một danh sách súc tích: các tệp bạn sẽ tạo, các tệp bạn sẽ
@@ -145,10 +147,15 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
 6. **`.dwp/` + `tmp/`.** Dựng một `.dwp/` được gitignore với `plans/` và `drafts/`, cùng một không gian nháp
    `tmp/` — cả hai đều được thêm vào `.gitignore` một cách không phá hủy (nối thêm, không bao giờ viết lại).
 
-## 4. Đề xuất các addon tự nguyện
+## 4. Cài đặt đánh giá cục bộ bắt buộc, rồi đề xuất các addon tùy chọn
 
-Sau khi khởi tạo nền tảng, hãy liệt kê năm addon (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository
-hoàn toàn tuân thủ với **không** cần addon nào — đừng bao giờ tự động cài chúng.
+Sau khi khởi tạo nền tảng, hãy cài **đánh giá cục bộ AI Diff Reviewer** (Giai đoạn 7a — bắt buộc kể từ
+chuẩn 2.3.0): skill vendored được ghim theo tag
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) cùng một
+`.review/extension.md` được điều chỉnh riêng cho repo qua `generate-extension`, dưới sự chấp thuận của
+quá trình khởi tạo. Sau đó liệt kê bốn addon tùy chọn (devcontainer, Dailybot, dependency-upgrade,
+design-system) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository hoàn toàn tuân thủ
+với **không** addon tùy chọn nào — đừng bao giờ tự động cài chúng.
 
 - **Hỗ trợ devcontainer** — một dev container tái lập được, cô lập, với xác thực AI-CLI bền vững.
 - **Tích hợp Dailybot** — bốn sự kiện vòng đời (kickoff, tác vụ quan trọng, bị chặn, hoàn tất) dưới dạng báo cáo tiến độ theo nỗ lực tối đa cho các đội đã dùng Dailybot, với lớp hook tự hành tùy chọn (`dailybot-cli >= 3.7.0`). Cài skill agent Dailybot đi kèm (3.10.3) cũng mở ra chat, check-in, tạo biểu mẫu, hỏi AI, API key theo repo và nhiều hơn — addon chỉ đấu nối phần báo cáo vào quá trình thực thi DWP. Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
@@ -158,8 +165,14 @@ hoàn toàn tuân thủ với **không** cần addon nào — đừng bao giờ 
   (không đề xuất cho thư viện thuần, dịch vụ headless hay repo chỉ hạ tầng). Ba profile xếp chồng trong
   một tệp: visual-ui (bật mặc định khi phát hiện), cli-output và hội thoại — hai profile sau
   luôn được hỏi, không bao giờ tự động áp dụng.
-- **AI Diff Reviewer** — tăng cường Đánh giá Bảo mật bắt buộc với đánh giá cục bộ có cấu trúc
-  qua [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md` bắt buộc). Luôn hỏi **Flow A** (chỉ cục bộ) vs **Flow B** (cổng CI hai bề mặt với `pr-review.yml`); không bao giờ mặc định. Thất bại nhẹ chỉ cho lỗi skill/tiện ích mở rộng/gọi bị thiếu; kết quả `critical` từ lượt kiểm tra cục bộ hoàn tất vẫn chặn việc hoàn thành Đánh giá Bảo mật. Phương pháp luận lõi không phụ thuộc vào AI Diff Reviewer.
+- **AI Diff Reviewer** — đánh giá cục bộ bắt buộc (không phải tùy chọn): bước rà soát bảo mật của mọi
+  Final Review chạy [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill +
+  `.review/extension.md` bắt buộc) trên toàn bộ tập thay đổi đã tích lũy của kế hoạch. Một skill hoặc
+  tiện ích mở rộng bị thiếu là một phát hiện `local reviewer not installed` được ghi lại, và được cài
+  khi lượt chạy có thể ghi vào harness — không bao giờ là một lần bỏ qua âm thầm; lỗi gọi chỉ thất bại
+  nhẹ; kết quả `critical` từ một lượt hoàn tất vẫn chặn việc hoàn thành. **Flow B** (cổng CI với
+  `pr-review.yml`) được đề xuất như một lựa chọn tự nguyện rõ ràng và không bao giờ được cài khi chưa
+  được yêu cầu. Không luồng Deep Work Plan nào yêu cầu một dịch vụ thương mại, nhà cung cấp CI hay bí mật.
 
 ## 5. Phát triển bộ kit (sub-skill author)
 
@@ -179,9 +192,9 @@ Sinh các Deep Work Plan cho mọi tác vụ và chạy chúng từng tác vụ 
 - `/dwp-resume` — tái dựng trạng thái và tiếp tục một kế hoạch bị gián đoạn.
 - `/dwp-verify` — báo cáo tuân thủ đạt/không đạt khách quan cho repo (hoặc một kế hoạch cụ thể).
 
-Mỗi kế hoạch kết thúc bằng ba tác vụ cuối bắt buộc — một **Security Review** cho các thay đổi của
+Mỗi kế hoạch khép lại bằng Final Review — một bước rà soát bảo mật trên các thay đổi của
 chính kế hoạch (giữ `docs/SECURITY.md` luôn cập nhật; một phát hiện nghiêm trọng chặn việc hoàn tất),
-Skills & Agents Discovery và Executive Report.
+kiểm chứng trạng thái cuối cùng và đối chiếu skill.
 
 ## 7. Kiểm chứng
 

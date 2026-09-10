@@ -10,7 +10,7 @@ order: 2
 
 Deep Work Plan 실행을 **Dailybot 팀**에 연결하여 사람들이 에이전트가 무엇을 구축하는지 파악할 수 있게 합니다 — 킥오프, 플랜 중간 진행, 차단, 완료 — 미팅이나 두 번째 툴체인을 추가하지 않고. 이미 [Dailybot](https://www.dailybot.com)을 사용하는 팀을 위한 **옵트인** 애드온입니다.
 
-핵심 Deep Work Plan 방법론은 Dailybot에 대한 의존성이 **제로**입니다. 애드온이 없는 저장소도 완전히 적합합니다. 개발자나 팀이 이미 Dailybot을 사용할 때만 이 애드온을 제공하고, 모든 사람에게 자동 설치하지 마세요.
+핵심 Deep Work Plan 방법론은 Dailybot에 대한 의존성이 **제로**입니다. 선택적 애드온이 없는 저장소도 완전히 적합합니다. 개발자나 팀이 이미 Dailybot을 사용할 때만 이 애드온을 제공하고, 모든 사람에게 자동 설치하지 마세요.
 
 ## 사용 시점
 
@@ -123,7 +123,7 @@ Dailybot 에이전트 스킬 설치는 DWP 애드온이 연결하는 것 이상�
 
 ## 온보딩 흐름
 
-DWP `onboard` **7b 단계**에서 핵심 AI-first 스캐폴딩 후 다섯 가지 옵트인 애드온을 제안. 개발자가 Dailybot을 수락하면:
+DWP `onboard` **7b 단계**에서 핵심 AI-first 스캐폴딩 후 네 가지 선택적 애드온을 제안합니다(AI Diff Reviewer 로컬 리뷰는 이미 7a 단계에서 설치됨). 개발자가 Dailybot을 수락하면:
 
 1. 기존 설정 감지(스킬, CLI, `.dailybot/profile.json`, 훅, 보고 단계).
 2. Dailybot 동의 흐름을 통해 스킬/CLI 설치 제안.

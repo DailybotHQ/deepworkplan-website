@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Protocollo degli agenti
 
-**Versione 1.2.** Questo protocollo definisce come un agente di coding AI DEVE comportarsi quando lavora con i Deep Work Plan. Le parole chiave MUST, SHOULD e MAY seguono la RFC 2119.
+**Versione 1.3.** Questo protocollo definisce come un agente di coding AI DEVE comportarsi quando lavora con i Deep Work Plan. Le parole chiave MUST, SHOULD e MAY seguono la RFC 2119.
 
 > **Additivi in v1.2.** Due aggiunte, nessuna modifica incompatibile: (1) le piattaforme di agenti autonomi (OpenClaw, Hermes) entrano nella tabella degli agenti supportati; (2) la sezione **Profili di esecuzione** definisce l'esecuzione non presidiata — autorità limitata, livello di stato obbligatorio, stop condition e continuazione pianificata.
 
@@ -52,8 +52,8 @@ La toolchain di testing e validazione è contesto essenziale, non opzionale: i v
 Quando crea un piano, l'agente DEVE:
 
 - Scomporre l'obiettivo in attività sequenziali e revisionabili.
-- Scrivere ogni attività con l'anatomia in nove sezioni.
-- Concludere con le tre attività finali obbligatorie (Security Review, Skills & Agents Discovery, Executive Report).
+- Scrivere ogni attività con l'anatomia in dieci sezioni — la Superficie toccata registra ciò che l'attività modifica e seleziona il suo validation gate per classe di rischio.
+- Concludere con il singolo Final Review obbligatorio (passaggio di sicurezza, validazione dello stato finale, riconciliazione delle skill).
 - Porre domande di chiarimento quando l'obiettivo è ambiguo.
 
 ## Esecuzione
@@ -66,7 +66,8 @@ Durante l'esecuzione, l'agente DEVE:
 - Segnare lo stato dell'attività in modo accurato.
 - Per qualsiasi attività che aggiunge nuove funzionalità o modifica il comportamento, aggiungere o aggiornare i test automatizzati per quel comportamento ed eseguire i test del repository e i controlli di lint/type-check prima di segnare l'attività come completata; mai eliminare o saltare un test per forzare il superamento del gate.
 - Per qualsiasi attività che tocca autenticazione, gestione degli input, segreti o configurazione, superficie di rete o dipendenze, soddisfare le aspettative di sicurezza dichiarate nei suoi criteri di accettazione e confermare che il diff non contenga materiale segreto prima del commit.
-- Fermarsi e chiedere quando è bloccato anziché tirare a indovinare.
+- Procedere da un gate superato all'attività successiva senza chiedere conferma; tentare le riparazioni entro l'ambito autorizzato dell'attività quando un gate fallisce — con un'ipotesi concreta, interrompendo i tentativi alla cieca dopo due prove senza nuove evidenze.
+- Fermarsi e chiedere solo a un vero confine di approvazione o davanti a un blocco non risolto, anziché tirare a indovinare.
 
 ## Raffinamento
 
@@ -98,7 +99,7 @@ Un essere umano è presente nella sessione. L'agente propone, l'essere umano app
 
 Il piano viene eseguito senza un essere umano che osserva — il turno pianificato di una piattaforma autonoma, una sessione cloud, un'esecuzione notturna. L'esecuzione non presidiata è opt-in per piano e DEVE soddisfare tutti i seguenti requisiti:
 
-- **Piano pre-approvato.** La bozza raffinata è stata approvata da un essere umano prima di qualsiasi turno non presidiato. Un agente NON DEVE creare ed eseguire un piano non presidiato in un unico turno; l'approvazione del piano è il punto di controllo umano.
+- **Piano pre-approvato.** Il piano è stato approvato prima di qualsiasi turno non presidiato — in modalità guidata l'essere umano ha approvato la bozza raffinata; in modalità trust l'istruzione `trust` esplicita dello sviluppatore è l'approvazione registrata. Un agente NON DEVE creare ed eseguire un piano non presidiato in un unico turno senza l'una o l'altra; l'approvazione del piano è il punto di controllo umano.
 - **Livello di stato OBBLIGATORIO.** Il piano DEVE portare `manifest.json` e `state.json` affinché qualsiasi sessione successiva — agente o umana — possa leggere l'avanzamento esatto senza riprodurre una trascrizione. Vedi [Stato del piano](/spec/plan-state).
 - **Autorità limitata.** L'autorità dell'agente è il piano: NON DEVE espandere l'ambito, NON DEVE eseguire azioni distruttive o rivolte all'esterno che il piano non autorizza esplicitamente, e NON DEVE estendere le istruzioni di un'attività per coprire lavoro scoperto ma non pianificato — il lavoro scoperto viene registrato per il prossimo `refine`, non improvvisato.
 - **Un'attività atomica per turno, gate sempre.** Ogni turno esegue il Protocollo di Ripresa DWP, esegue al massimo la prossima attività, supera il suo validation gate, completa secondo il protocollo di completamento dell'attività e cede il controllo. Un gate che fallisce è una stop condition, mai «continua comunque».

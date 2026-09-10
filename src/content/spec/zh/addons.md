@@ -1,6 +1,6 @@
 ---
 title: 附加组件
-description: "可选的DWP扩展：五个已发布附加组件（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）、附加组件合约，以及套件相关概念（skills、agents、presets）说明。"
+description: "DWP 附加组件：四个可选扩展（devcontainer、Dailybot、dependency-upgrade、design-system）、必备的 AI Diff Reviewer 本地审查及其可选 CI 层面、附加组件合约，以及套件相关概念（skills、agents、presets）说明。"
 order: 5
 lang: zh
 section: Addons
@@ -8,7 +8,7 @@ section: Addons
 
 # 附加组件
 
-**版本 2.0。** 附加组件是对核心 Deep Work Plan 方法论的可选扩展。它们**从不要求符合性**——零附加组件的仓库完全符合 AI-first 与 DWP 规范。每个附加组件在接入期间提供，由开发者明确接受或拒绝，且——接受后——**调和**现有设置而非覆盖。
+**版本 2.1。** 附加组件是对核心 Deep Work Plan 方法论的扩展。五个之中有四个是可选的，且**绝非符合性所必需**——零可选附加组件的仓库完全符合 AI-first 与 DWP 规范。每个可选附加组件在接入期间提供，由开发者明确接受或拒绝，且——接受后——**调和**现有设置而非覆盖。一个组件是声明的例外：自标准 2.3.0 起，**AI Diff Reviewer 本地审查**属于必备基线——接入时安装它，每份 Final Review 都运行它——而其 CI 层面保持可选。
 
 ## 附加组件合约
 
@@ -25,7 +25,7 @@ section: Addons
 
 ## 已发布的附加组件（五个）
 
-当前发布五个附加组件。每个都有**套件目录页**（面向用户的详情）以及 Deep Work Plan 技能内的**规范性规格**。
+当前发布五个附加组件——四个可选，外加必备的本地审查。每个都有**套件目录页**（面向用户的详情）以及 Deep Work Plan 技能内的**规范性规格**。
 
 ### Devcontainer（第一个附加组件）
 
@@ -65,17 +65,18 @@ section: Addons
 - **配置档强度：** 检测到 visual-ui 时**默认开启**；检测到 cli-output 与 conversational 时**推荐、始终询问、绝不自动应用**
 - **何时提供：** 仅当检测到面向用户的界面表面时——不适用于纯库、无头服务或纯基础设施仓库
 
-### AI Diff Reviewer（第五个附加组件）
+### AI Diff Reviewer（第五个附加组件——必备本地审查、可选 CI 层面）
 
-与 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**，当前版本 **v2.0.0**）的可选连接，通过结构化的本地审查增强强制性安全审查，并可选地在 CI 中对拉取请求设置门控。
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**，当前版本 **v2.0.0**）为强制的 Final Review 安全审查环节提供结构化的本地审查，并可选地在 CI 中对拉取请求设置门控。自标准 2.3.0 起，**本地审查属于基线的一部分**；只有 CI 层面是可选的。
 
 - **套件页：** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 完整能力参考
-- **DWP 附加组件接入的内容：** 通过上游 skill 父级默认流的本地安全审查增强；需要 `.review/extension.md`（仅 skill 不完整）；Flow B 可选安装 `pr-review.yml`（`DailybotHQ/ai-diff-reviewer@v2`）并将 `apply-review` 作为开发者调用的伴随工具公开——绝不作为计划任务
-- **流程：** **A — 仅本地**（skill + 扩展）或 **B — 双层面**（skill + 扩展 + CI Action）。附加组件**必须询问**哪个流程；绝不默认
-- **软失败 vs 门控：** 缺少 skill/扩展/调用错误绝不阻塞；来自**已完成**本地通道的 `critical` 结果仍遵循安全审查合同
+- **接入时必备（第 7a 阶段）：** 在接入授权之下，标签锁定安装 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`），外加按仓库定制的 `.review/extension.md`（通过 `generate-extension`）；缺失时由定向 harness 升级调和二者；拒绝会被记录为一项声明的例外，并由 `verify` 持续报告，直至安装完成
+- **每份 Final Review 中必备：** 安全审查环节在累计变更集上运行上游父级默认流，并将输出追加到 `analysis_results/SECURITY_REVIEW.md`；缺少 skill 或扩展会作为一项 `local reviewer not installed` 发现被记录——若本次运行可写入 harness 则当场安装——绝不静默跳过；已完成通道中的 `critical` 发现在修复或被明确接受之前会阻止完成
+- **可选 CI 层面（Flow B）：** 通过上游 `setup` 子技能提供 `pr-review.yml`（`DailybotHQ/ai-diff-reviewer@v2`），并将 `apply-review` 作为开发者调用的伴随工具——明确提供、绝不未经请求安装、绝不作为默认、绝不作为计划任务
+- **绝不阻塞（仅限调用）：** 能够启动但出错的本地审查按「警告一次、记录后继续」处理；它绝不使任务失败
 - **奇偶性（Flow B）：** 共享 `prompt.md` + 扩展对齐方法论/严重程度；CI 迭代感知审查可缩短第 2+ 轮，而本地通道保持完整
-- **供应商中立护栏：** 核心 DWP 对 AI Diff Reviewer **零**依赖；切勿为所有人自动安装
-- **何时提供：** 开发者或团队想要结构化本地审查和/或 CI PR 合并门控
+- **供应商中立护栏：** 没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密——该审查器是一个由开发者自己的编码代理运行的 MIT 授权、标签锁定的 skill
+- **符合性：** 对声明标准 2.3.0 或更新版本的仓库，`verify` 将缺失的本地审查器报告为一项失败；对旧版仓库则报告为一项 harness 版本发现
 
 ## 技能
 

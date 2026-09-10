@@ -50,7 +50,7 @@ Beide Dateien MÜSSEN atomar geschrieben werden: in eine temporäre Datei im sel
 ```json
 {
   "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.2.0",
+  "spec_version": "2.3.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
@@ -146,7 +146,7 @@ Eine Aufgabe DARF NICHT in `state.json` als `completed` markiert werden, solange
 
 Eine `completed`-Aufgabe SOLLTE einen `outcome`-Eintrag enthalten: was `tried` (versucht) wurde, was `failed` (fehlschlug), was `worked` (funktionierte) und freie `notes` (Notizen). Jeden Eintrag auf eine Zeile beschränken.
 
-Ergebnis-Einträge machen einen abgeschlossenen Plan zu abrufbarem **episodischem Gedächtnis**: Ein Agent (oder eine Speicher-Indexierungsplattform) kann später nachvollziehen, wie ein Problem gelöst wurde — nicht nur, dass es gelöst wurde. Sie fließen in die verpflichtende Skills-&-Agenten-Discovery-Aufgabe ein, die sie beim Mining von Mustern lesen SOLLTE. Auf Plattformen wie Hermes, die Agentenspeicher indexieren, machen Ergebnis-Einträge in `state.json` abgeschlossene Pläne direkt über zukünftige Sitzungen abrufbar.
+Ergebnis-Einträge machen einen abgeschlossenen Plan zu abrufbarem **episodischem Gedächtnis**: Ein Agent (oder eine Speicher-Indexierungsplattform) kann später nachvollziehen, wie ein Problem gelöst wurde — nicht nur, dass es gelöst wurde. Sie fließen in die aufgaben-lokalen Skills-Dispositionen und den Skills-Abgleich des Final Review ein, der sie beim Mining von Mustern liest. Auf Plattformen wie Hermes, die Agentenspeicher indexieren, machen Ergebnis-Einträge in `state.json` abgeschlossene Pläne direkt über zukünftige Sitzungen abrufbar.
 
 ### Checkpoint und blockierter Zustand
 

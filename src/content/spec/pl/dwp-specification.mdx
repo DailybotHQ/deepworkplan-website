@@ -1,6 +1,6 @@
 ---
 title: Specyfikacja DWP
-description: "Normatywna specyfikacja Deep Work Plan: struktura planu, dziewięciosekcyjna anatomia zadania, pięciooperacyjna pętla realizacji, przestrzeń robocza wyników oraz wersjonowanie."
+description: "Normatywna specyfikacja Deep Work Plan: struktura planu, dziesięciosekcyjna anatomia zadania, dobór bramek według powierzchni dotkniętej, pięciooperacyjna pętla realizacji, przestrzeń robocza wyników oraz wersjonowanie."
 order: 2
 lang: pl
 section: Workflow
@@ -11,15 +11,25 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Specyfikacja DWP
 
-**Wersja 1.2. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
+**Wersja 2.3.0. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 
-> **Addytywne w wersji 1.2.** Cztery addytywne możliwości, bez zmian niekompatybilnych wstecz: (1) **warstwa stanu planu odczytywalnego maszynowo** (`manifest.json` + `state.json`, zob. [Stan planu](/spec/plan-state)); (2) **poziomy proporcjonalnej rygorystyczności** (micro / standard / deep, zob. [Proporcjonalna rygorystyczność](#proportional-rigor)); (3) opcjonalna **sekcja Delta** w anatomii zadania dla zmian zachowania w systemach istniejących; oraz (4) **Protokół Wznowienia DWP** jest awansowany do nazwanego, cytowalnego rytuału składającego się z sześciu kroków. Istniejące plany w wersji 1.1 pozostają zgodne.
+> **Addytywne w tej rewizji, bez zmian niekompatybilnych wstecz.** (1) Sekcja **Powierzchnia dotknięta** — kontrakt między tym, co zadanie zmienia, i tym, co musi zostać zwalidowane, z doborem bramki według klasy ryzyka (izolowana / szew / współdzielony-rdzeń / nieznana); (2) pełna walidacja staje się **wymogiem stanu końcowego** uruchamianym w jedynym obowiązkowym **Final Review** planu, z jawnymi regułami ponownego użycia dowodów; (3) **lokalne decyzje dotyczące skilli** przenoszą się do zadania będącego właścicielem, a raport wykonawczy staje się **opcjonalny, na życzenie**; (4) **przepływ create świadomy trybu** — tryb trust materializuje się bezpośrednio, zachowując analizę i kontrole jakości; oraz (5) jawna **macierz kompatybilności**: plany i repozytoria z wcześniejszych wersji pozostają zgodne.
 
 ## Definicja
 
 Deep Work Plan to uporządkowany artefakt oparty wyłącznie na Markdown, opisujący złożone zadanie inżynierskie rozłożone na sekwencyjne, podatne na przegląd jednostki pracy, zaprojektowany tak, by tworzyły go, realizowały i utrzymywały agenci kodujący AI pracujący autonomicznie.
 
 DWP jest spec-driven: plan jest specyfikacją, a agenci MUSZĄ pracować w odniesieniu do jej jawnych kryteriów akceptacji i bramek walidacyjnych, zamiast improwizować. Specyfikacja — a nie transkrypcja czatu — jest trwałym źródłem prawdy, dzięki czemu praca jest weryfikowalna i wznawialna między sesjami i agentami. To także harness engineering w przenośnej formie: kontekst, pętla sterująca, zabezpieczenia i wznawialny stan, które czynią agenta niezawodnym, instalowane są w samym repozytorium jako zwykły Markdown, więc każdy zgodny agent MOŻE pilotować repozytorium bez frameworka właściwego dla narzędzia.
+
+## Przepływ create — jeden krok, świadomy trybu
+
+Przepływ `create` zbiera cel, kontekst, ograniczenia i zarys zadań raz, wykonuje swoją **analizę wymagań** (zakres, kolejność zależności między zadaniami, dobór walidacji z Powierzchni dotkniętej, poziom proporcjonalnej rygorystyczności), a następnie materializuje się zgodnie z trybem wybranym przez programistę:
+
+- **Tryb guided (domyślny).** Przepływ tworzy dokładnie **jeden** artefakt do przeglądu: **dopracowany szkic** w `.dwp/drafts/`, wystarczająco ustrukturyzowany, by zatwierdzić lub zgłosić poprawki w jednym przebiegu. Folder planu jest materializowany dopiero po zatwierdzeniu.
+- **Tryb trust (`trust` / `auto`).** Przepływ **materializuje plan bezpośrednio**, bez pliku szkicu — programista zrzekł się pośredniego przeglądu. Analiza wymagań, kolejność zależności i **kontrola jakości planu** wciąż się wykonują: trust zrzeka się *przeglądu*, nie *analizy*. Plan w trybie trust jest zapisywany jako **wstępnie zatwierdzony do wykonania nieobsługiwanego**.
+- **Jawne tryby szkicu.** `refined-draft {name}` i `from-refined-draft {file}` pozostają dostępne w obu trybach; programista, który poprosi o szkic, go dostaje.
+
+W każdym trybie przepływ nigdy nie tworzy pośredniego, niedopracowanego szkicu jako osobnego kroku podlegającego przeglądowi.
 
 ## Struktura planu
 
@@ -35,17 +45,18 @@ Plan MOŻE dodatkowo zawierać warstwę stanu odczytywalnego maszynowo: `manifes
 
 <TaskAnatomy lang="pl" class="not-prose my-10" />
 
-Każdy plik zadania MUSI zawierać te dziewięć sekcji, w kolejności:
+Każdy plik zadania MUSI zawierać te dziesięć sekcji, w kolejności:
 
 1. **Cel** — jednoakapitowe sformułowanie tego, co zadanie osiąga.
 2. **Kontekst** — tło, odnośniki i powód istnienia tego zadania.
-3. **Kroki** — uporządkowane, konkretne działania do wykonania.
-4. **Kryteria akceptacji** — lista warunków definiujących ukończenie.
-5. **Walidacja** — polecenia lub testy do uruchomienia w celu weryfikacji.
-6. **Pliki** — ścieżki, które mają zostać utworzone lub zmodyfikowane.
-7. **Zależności** — inne zadania lub zewnętrzne wymagania wstępne.
-8. **Ryzyka** — co może pójść nie tak oraz środki zaradcze.
-9. **Ukończenie i dziennik** — znacznik statusu plus chronologiczne notatki.
+3. **Powierzchnia dotknięta** — kontrakt między tym, co zadanie zmienia, i tym, co musi zostać zwalidowane.
+4. **Kroki** — uporządkowane, konkretne działania do wykonania.
+5. **Kryteria akceptacji** — lista warunków definiujących ukończenie.
+6. **Walidacja** — polecenia lub testy do uruchomienia w celu weryfikacji, dobrane z Powierzchni dotkniętej.
+7. **Pliki** — ścieżki, które mają zostać utworzone lub zmodyfikowane.
+8. **Zależności** — inne zadania lub zewnętrzne wymagania wstępne.
+9. **Ryzyka** — co może pójść nie tak oraz środki zaradcze.
+10. **Ukończenie i dziennik** — znacznik statusu plus chronologiczne notatki.
 
 Zadanie MOŻE dodatkowo zawierać **sekcję Delta** (ZALECANA dla zmian zachowania w systemach istniejących — zob. poniżej) oraz **sekcję Rollback** (ZALECANA dla migracji, zmian infrastruktury lub wdrożeń).
 

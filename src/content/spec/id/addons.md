@@ -1,6 +1,6 @@
 ---
 title: Add-on
-description: "Ekstensi DWP opsional: lima addon (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), kontrak addon, dan konsep kit."
+description: "Addon DWP: empat ekstensi opsional (devcontainer, Dailybot, dependency-upgrade, design-system), tinjauan lokal AI Diff Reviewer yang wajib dengan permukaan CI opsionalnya, kontrak addon, dan konsep kit."
 order: 5
 lang: id
 section: Addons
@@ -8,7 +8,7 @@ section: Addons
 
 # Add-on
 
-**Versi 2.0.** Add-on adalah ekstensi opsional dari metodologi Deep Work Plan inti. Add-on **tidak pernah diperlukan untuk konformitas** — repositori tanpa addon sepenuhnya AI-first dan konforman DWP. Setiap addon ditawarkan saat onboarding, diterima atau ditolak secara eksplisit, dan — jika diterima — **merekonsiliasi** dengan setup yang ada alih-alih menimpanya.
+**Versi 2.1.** Add-on adalah ekstensi dari metodologi Deep Work Plan inti. Empat dari lima bersifat opsional dan **tidak pernah diperlukan untuk konformitas** — repositori tanpa addon opsional sepenuhnya AI-first dan konforman DWP. Setiap addon opsional ditawarkan saat onboarding, diterima atau ditolak secara eksplisit, dan — jika diterima — **merekonsiliasi** dengan setup yang ada alih-alih menimpanya. Satu komponen adalah pengecualian yang dinyatakan: sejak standar 2.3.0 **tinjauan lokal AI Diff Reviewer** adalah bagian dari baseline wajib — onboarding menginstalnya dan setiap Final Review menjalankannya — sementara permukaan CI-nya tetap opt-in.
 
 ## Kontrak addon
 
@@ -25,7 +25,7 @@ Penemuan: alur `onboard` mengekstrak `skills/deepworkplan/addons/` dan menyajika
 
 ## Addon yang dikirim (lima)
 
-Lima addon tersedia hari ini. Masing-masing memiliki **halaman katalog kit** dengan detail untuk pengguna dan **spec normatif** di dalam skill Deep Work Plan.
+Lima addon tersedia hari ini — empat opt-in ditambah tinjauan lokal yang wajib. Masing-masing memiliki **halaman katalog kit** dengan detail untuk pengguna dan **spec normatif** di dalam skill Deep Work Plan.
 
 ### Devcontainer (addon pertama)
 
@@ -65,17 +65,18 @@ Upgrade dependensi agnostik package manager, bertahap, tervalidasi, dan dapat di
 - **Kekuatan profil:** visual-ui **aktif default saat terdeteksi**; cli-output dan conversational **direkomendasikan saat terdeteksi, selalu ditanyakan, tidak pernah diterapkan otomatis**
 - **Kapan ditawarkan:** hanya ketika permukaan antarmuka pengguna terdeteksi — bukan untuk pustaka murni, layanan headless, atau repo hanya infrastruktur
 
-### AI Diff Reviewer (addon kelima)
+### AI Diff Reviewer (addon kelima — tinjauan lokal wajib, permukaan CI opsional)
 
-Koneksi opsional ke **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, versi saat ini **v2.0.0**) yang meningkatkan Tinjauan Keamanan wajib dengan tinjauan lokal terstruktur dan secara opsional mengontrol pull request di CI.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, versi saat ini **v2.0.0**) memberi pemeriksaan keamanan Final Review wajib sebuah tinjauan lokal terstruktur, dan secara opsional mengontrol pull request di CI. Sejak standar 2.3.0 **tinjauan lokal adalah bagian dari baseline**; hanya permukaan CI yang opt-in.
 
 - **Halaman kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — referensi kemampuan lengkap
-- **Yang dihubungkan addon DWP:** peningkatan lokal Tinjauan Keamanan melalui alur default induk skill upstream; `.review/extension.md` wajib (skill saja tidak lengkap); Flow B secara opsional menginstal `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) dan mengekspos `apply-review` sebagai pendamping yang dapat dipanggil pengembang — tidak pernah sebagai tugas rencana
-- **Alur:** **A — hanya lokal** (skill + ekstensi) atau **B — permukaan ganda** (skill + ekstensi + CI Action). Addon **HARUS menanyakan** alur mana; tidak pernah mengasumsikan nilai default
-- **Kegagalan lunak vs gerbang:** kesalahan skill/ekstensi/pemanggilan yang hilang tidak pernah memblokir; hasil `critical` dari penerusan lokal yang **selesai** masih mengikuti kontrak Tinjauan Keamanan
+- **Wajib saat onboarding (Fase 7a):** instalasi skill vendored yang dipatok pada tag (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) plus `.review/extension.md` yang disesuaikan dengan repo (melalui `generate-extension`), di bawah persetujuan onboarding; upgrade harness tertarget merekonsiliasi keduanya bila hilang; penolakan dicatat sebagai pengecualian yang dinyatakan dan dilaporkan oleh `verify` hingga terinstal
+- **Wajib di setiap Final Review:** pemeriksaan keamanan menjalankan alur default induk upstream atas kumpulan perubahan yang terakumulasi dan menambahkan outputnya ke `analysis_results/SECURITY_REVIEW.md`; skill atau ekstensi yang hilang menjadi temuan `local reviewer not installed` yang tercatat — dipasang ketika eksekusi boleh menulis ke harness — tidak pernah dilewati diam-diam; temuan `critical` dari penerusan yang selesai memblokir penyelesaian hingga diperbaiki atau diterima secara eksplisit
+- **Permukaan CI opsional (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) melalui sub-skill `setup` upstream, plus `apply-review` sebagai pendamping yang dipanggil pengembang — ditawarkan secara eksplisit, tidak pernah diinstal tanpa diminta, tidak pernah menjadi default, tidak pernah menjadi tugas rencana
+- **Tidak pernah memblokir (hanya pemanggilan):** tinjauan lokal yang bisa dimulai tetapi gagal bersifat peringat-sekali-catat-dan-lanjut; itu tidak pernah menggagalkan tugas
 - **Paritas (Flow B):** `prompt.md` bersama + ekstensi menyelaraskan metodologi/tingkat keparahan; Tinjauan Sadar Iterasi CI dapat mempersingkat putaran 2+ sementara penerusan lokal tetap penuh
-- **Pengamanan netral vendor:** DWP inti memiliki **nol** ketergantungan AI Diff Reviewer; tidak pernah menginstal otomatis untuk semua orang
-- **Kapan ditawarkan:** pengembang atau tim menginginkan tinjauan lokal terstruktur dan/atau gerbang penggabungan PR CI
+- **Pengamanan netral vendor:** tidak ada alur Deep Work Plan yang memerlukan layanan komersial, penyedia CI, atau rahasia — reviewer adalah skill MIT yang dipatok pada tag dan dijalankan oleh coding agent pengembang sendiri
+- **Konformitas:** `verify` melaporkan reviewer lokal yang hilang sebagai kegagalan untuk repositori yang menyatakan standar 2.3.0 atau lebih baru, dan sebagai temuan versi-harness untuk repositori lama
 
 ## Skill
 

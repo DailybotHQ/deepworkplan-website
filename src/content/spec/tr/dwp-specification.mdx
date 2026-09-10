@@ -1,6 +1,6 @@
 ---
 title: DWP spesifikasyonu
-description: "Normatif Deep Work Plan spesifikasyonu: plan yapısı, dokuz bölümlü görev anatomisi, beş işlemli yürütme döngüsü, çıktı çalışma alanı ve sürümleme."
+description: "Normatif Deep Work Plan spesifikasyonu: plan yapısı, on bölümlü görev anatomisi, dokunulan yüzeye göre kapı seçimi, beş işlemli yürütme döngüsü, çıktı çalışma alanı ve sürümleme."
 order: 2
 lang: tr
 section: Workflow
@@ -11,15 +11,25 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP spesifikasyonu
 
-**Sürüm 1.2. Durum: Kararlı.** Bu belge, Deep Work Plan (DWP) metodolojisinin normatif spesifikasyonudur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
+**Sürüm 2.3.0. Durum: Kararlı.** Bu belge, Deep Work Plan (DWP) metodolojisinin normatif spesifikasyonudur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 
-> **v1.2'de eklemeli.** Dört eklemeli yetenek, kırıcı değişiklik yok: (1) **makine tarafından okunabilir plan durum katmanı** (`manifest.json` + `state.json`, bkz. [Plan durumu](/spec/plan-state)); (2) **orantılı titizlik kademeleri** (micro / standard / deep, bkz. [Orantılı titizlik](#proportional-rigor)); (3) görev anatomisinde kahverengi alan davranış değişiklikleri için isteğe bağlı **Delta bölümü**; ve (4) **DWP Resume Protocol**, adlandırılmış, atıfta bulunulabilir altı adımlı bir ritüele yükseltilmiştir. Mevcut v1.1 planları uyumlu olmaya devam eder.
+> **Bu revizyonda eklemeli, kırıcı değişiklik yok.** (1) **Dokunulan Yüzey** bölümü — görevin neyi değiştirdiği ile neyin doğrulanması gerektiği arasındaki sözleşme, risk sınıfına göre kapı seçimiyle (izole / seam / paylaşılan-çekirdek / bilinmeyen); (2) eksiksiz doğrulama, planın tek zorunlu **Final Review**'inde, açık kanıt-yeniden-kullanım kurallarıyla çalıştırılan bir **son-durum gereksinimi** hâline gelir; (3) **görev-yerel skill kararları** sahipli göreve taşınır ve Executive Report **isteğe bağlı, talep üzerine** hâline gelir; (4) **mod-farkındalıklı bir create akışı** — trust modu, analiz ve kalite denetimlerini korurken planı doğrudan somutlaştırır; ve (5) açık bir **uyumluluk matrisi**: önceki sürümlerden planlar ve depolar uyumlu kalır.
 
 ## Tanım
 
 Bir Deep Work Plan, karmaşık bir mühendislik görevini ardışık, gözden geçirilebilir iş birimlerine ayrılmış biçimde tanımlayan, yapılandırılmış, yalnızca Markdown'dan oluşan bir yapıdır; otonom çalışan yapay zeka kodlama ajanları tarafından oluşturulmak, yürütülmek ve sürdürülmek üzere tasarlanmıştır.
 
 DWP spec odaklıdır: plan spesifikasyondur ve ajanlar, doğaçlama yapmak yerine onun açık kabul kriterlerine ve doğrulama kapılarına karşı çalışMAK ZORUNDADIR. Bir sohbet dökümü değil, spesifikasyon kalıcı doğruluk kaynağıdır; böylece iş, oturumlar ve ajanlar arasında doğrulanabilir ve sürdürülebilirdir. Bu aynı zamanda taşınabilir hale getirilmiş harness mühendisliğidir: bir ajanı güvenilir kılan bağlam, kontrol döngüsü, güvenlik bariyerleri ve sürdürülebilir durum, deponun kendisine düz Markdown olarak kurulur; böylece uyumlu herhangi bir ajan, araca özgü bir çerçeve olmadan depoyu pilotlayABİLİR.
+
+## Create akışı — tek adım, mod-farkındalıklı
+
+`create` akışı hedefi, bağlamı, kısıtları ve görev taslağını bir kez toplar, **gereksinim analizini** gerçekleştirir (kapsam, görevler arası bağımlılık sıralaması, Dokunulan Yüzey'den doğrulama seçimi, orantılı-titizlik kademesi) ve ardından geliştiricinin seçtiği moda göre somutlaştırır:
+
+- **Yönlendirilmiş mod (varsayılan).** Akış, gözden geçirme için tam olarak **bir** yapıt üretir: `.dwp/drafts/` içinde **rafine edilmiş bir taslak** — tek geçişte onaylamak veya değişiklik istemek için yeterli yapıyla. Plan klasörü yalnızca onaydan sonra somutlaştırılır.
+- **Trust modu (`trust` / `auto`).** Akış, **planı doğrudan somutlaştırır** — taslak dosyası olmadan; geliştirici ara gözden geçirmeden feragat etti. Gereksinim analizi, bağımlılık sıralaması ve bir **plan-kalite denetimi** yine de çalışır: trust, *analizi* değil, *gözden geçirmeyi* feragat eder. Trust modundaki bir plan, **gözetimsiz yürütme için önceden onaylanmış** olarak kaydedilir.
+- **Açık taslak modları.** `refined-draft {name}` ve `from-refined-draft {file}`, her iki modda da kullanılabilir kalır; taslak isteyen bir geliştirici taslak alır.
+
+Her modda akış, ayrı bir gözden geçirilebilir adım olarak ara bir rafine-edilmemiş taslak üretmez.
 
 ## Plan yapısı
 
@@ -35,21 +45,35 @@ Bir plan ek olarak makine tarafından okunabilir durum katmanını TASIYABİLİR
 
 <TaskAnatomy lang="tr" class="not-prose my-10" />
 
-Her görev dosyası, sırasıyla bu dokuz bölümü İÇERMELİDİR:
+Her görev dosyası, sırasıyla bu on bölümü İÇERMELİDİR:
 
 1. **Hedef** — görevin neyi başardığına dair tek paragraflık bir bildirim.
 2. **Bağlam** — arka plan, bağlantılar ve bu görevin neden var olduğu.
-3. **Adımlar** — gerçekleştirilecek sıralı, somut eylemler.
-4. **Kabul kriterleri** — "bitti"yi tanımlayan koşulların bir kontrol listesi.
-5. **Doğrulama** — doğrulamak için çalıştırılacak komutlar veya testler.
-6. **Dosyalar** — oluşturulması veya değiştirilmesi beklenen yollar.
-7. **Bağımlılıklar** — diğer görevler veya harici ön koşullar.
-8. **Riskler** — neyin ters gidebileceği ve azaltıcı önlemler.
-9. **Tamamlama ve Günlük** — bir durum işareti ile kronolojik notlar.
+3. **Dokunulan Yüzey** — görevin neyi değiştirdiği ile neyin doğrulanması gerektiği arasındaki sözleşme.
+4. **Adımlar** — gerçekleştirilecek sıralı, somut eylemler.
+5. **Kabul kriterleri** — "bitti"yi tanımlayan koşulların bir kontrol listesi.
+6. **Doğrulama** — doğrulamak için çalıştırılacak komutlar veya testler, Dokunulan Yüzey'den seçilir.
+7. **Dosyalar** — oluşturulması veya değiştirilmesi beklenen yollar.
+8. **Bağımlılıklar** — diğer görevler veya harici ön koşullar.
+9. **Riskler** — neyin ters gidebileceği ve azaltıcı önlemler.
+10. **Tamamlama ve Günlük** — bir durum işareti ile kronolojik notlar.
 
 Bir görev ek olarak bir **Delta bölümü** (kahverengi alan davranış değişiklikleri için ÖNERİLİR — aşağıya bakın) ve bir **Geri alma bölümü** (geçişler, altyapı değişiklikleri veya dağıtımlar için ÖNERİLİR) İÇEREBİLİR.
 
-### Delta bölümü (kahverengi alan değişiklikleri)
+## Dokunulan Yüzey
+
+Dokunulan Yüzey, görevin neyi değiştirdiği ile neyin doğrulanması gerektiği arasındaki sözleşmedir. Doğrulamanın alışkanlığa göre değil **etkiye göre seçilmesini** ve sonradan gelen bir okuyucunun bir kapının neden seçildiğini görebilmesini sağlamak için var olur. Davranış değiştiren bir görev şunları kaydetMEK ZORUNDADIR:
+
+- **Planlanan yüzey** — görevin değiştirmeyi amaçladığı yollar, modüller, paketler veya yapılandırma; düzenlemeden önce yazılır.
+- **Gerçekleşen yüzey** — düzenlemeden sonra, gerçek diff'ten alınan uzlaştırılmış liste. Ajan, kapıyı seçmeden önce planlanan ve gerçekleşen yüzeyleri uzlaştırMAK ZORUNDADIR.
+- **Etkilenen tüketiciler** — gerçekleşen yüzeye bağımlı olan modüller, paketler veya servisler; deponun belgelenmiş eşlemesinin belirleyebildiği ölçüde. Belirleyemediği yerde girdi bunu BELİRTMEK ZORUNDADIR.
+- **Risk sınıfı** — şunlardan biri: *izole* (tek bir modülle ve onun testleriyle sınırlı); *seam* (iş birlikçiler arasındaki bir sözleşmeyi, kalıcılığı, yönlendirmeyi, serileştirmeyi, kimlik doğrulamayı veya çerçeve bağlantısını değiştirir); *paylaşılan/çekirdek* (geniş biçimde içe aktarılır ya da bir bağımlılık, geçiş, derleme/test yapılandırması, şema veya araç zinciri değişikliğidir); *bilinmeyen* (eşleme eksik, bayat veya doğrulanmamış).
+- **Kullanılan test eşlemesi** — seçimi hangi belgelenmiş eşlemenin veya aracın ürettiği.
+- **Seçilmiş kapı ve gerekçesi** — kesin komutlar ve bunların gerçekleşen yüzeyi neden kapsadığı.
+
+Yapılandırma dosyaları, şemalar, bağımlılık manifestoları, şablonlar, fikstürler, geçişler ve ajan yönerge dosyaları **davranışı değiştirebilir** ve dosya uzantısına göre değil, etkilerine göre sınıflandırılMAK ZORUNDADIR. Yalnızca düz metin, yorum veya araştırma yapıtlarını değiştiren bir görev, yüzeyin uygulanamaz olduğunu beyan edEBİLİR ve yine de deponun çalışma zamanı dışı denetimlerini çalıştırır.
+
+## Delta bölümü (kahverengi alan değişiklikleri)
 
 Gerçek çalışmanın büyük çoğunluğu, yeni davranış oluşturmak yerine mevcut davranışı değiştirir. Mevcut bir sistemin nasıl davrandığını değiştiren bir görev, değişikliği açık bir önce/sonra sözleşmesi olarak tanımlayan bir **Delta bölümü** TAŞIMALIDIR; üç liste başlığı kullanarak:
 
@@ -57,29 +81,61 @@ Gerçek çalışmanın büyük çoğunluğu, yeni davranış oluşturmak yerine 
 - **MODIFIED** — her ikisinde de var olan davranış, `was: … → now: …` biçiminde belirtilir.
 - **REMOVED** — önceden var olan ve kasıtlı olarak sonradan kaldırılan davranış.
 
-Her girdi, bir uç noktanın yanıtı, CLI bayrağı, UI durumu, varsayılan değer gibi gözlemlenebilir bir davranış OLMALIDIR — bir uygulama ayrıntısı değil. Delta bölümü, davranış düzeyindeki gözden geçirenin farkıdır: kabul kriterleri ADDED/MODIFIED girdilerini doğrular ve REMOVED girdileri açık silme lisansıdır. REMOVED olarak listelenmeyen hiçbir şey çalışmaya devam ETMEK ZORUNDADIR; görevin doğrulama kapısı (mevcut testlerin yeşil kalması) bunu zorunlu kılar.
+Her girdi, bir uç noktanın yanıtı, CLI bayrağı, UI durumu, varsayılan değer gibi gözlemlenebilir bir davranış OLMALIDIR — bir uygulama ayrıntısı değil. Delta bölümü, davranış düzeyindeki gözden geçirenin farkıdır: kabul kriterleri ADDED/MODIFIED girdilerini doğrular ve REMOVED girdileri açık silme lisansıdır. REMOVED olarak listelenmeyen hiçbir şey çalışmaya devam ETMEK ZORUNDADIR.
 
-## Doğrulama kapıları ve testler
+## Doğrulama kapıları — risk sınıfına göre seçilir
 
-Doğrulama, bir tamamlanma iddiasını onun kanıtına dönüştüren kapıdır: bir görev, Doğrulama bölümündeki her komut çalışıp geçene kadar tamamlandı olarak işaretlenMEMELİDİR. Testler bu kapının birinci sınıf bir parçasıdır, isteğe bağlı bir ek değil — bir planın sevk ettiği kodu güvenilir ve doğrulanabilir kılan şey onlardır.
+Doğrulama, bir tamamlanma iddiasını onun kanıtına dönüştüren kapıdır: bir görev, Doğrulama bölümündeki her komut çalışıp geçene kadar tamamlandı olarak işaretlenMEMELİDİR. Davranış değiştiren bir görevin kapısı, uzlaştırılmış Dokunulan Yüzey'den, risk sınıfına göre seçilir:
 
-Bir görev yeni çekirdek işlevsellik eklediğinde veya mevcut davranışı önemli ölçüde değiştirdiğinde:
+| Risk sınıfı | Gerekli doğrulama |
+|------|------|
+| **izole** | Değiştirilen davranışın ve etkilenen tüketicilerinin testleri, artı gerçekleşen yüzeyi kapsayan statik denetimler. |
+| **seam** | Yukarıdakiler, artı o seam için entegrasyon veya sözleşme testleri — yoksa bu görevde eklenir. Bir seam'deki entegrasyon denetimleri planın sonuna ertelenmez. |
+| **paylaşılan/çekirdek** | Etkilenen paketlere ve onların geçişli tüketicilerine genişletilir; etki güvenilir biçimde sınırlanamıyorsa eksiksiz doğrulama çalıştırılır. |
+| **bilinmeyen** | Seçimi araştır ve düzelt; hâlâ belirlenemiyorsa daha geniş veya eksiksiz komutu çalıştır. |
+| **uygulanamaz** (düz metin/araştırma) | Deponun çalışma zamanı dışı denetimleri; gerekçesi Dokunulan Yüzey'de kayıtlıdır. |
 
-- **Kabul kriterleri**, yeni veya değişen davranış için otomatik test kapsamını (mutlu yol ile birlikte anlamlı uç ve hata durumları), deponun test kuralını ve kapsam beklentisini izleyerek İÇERMELİDİR.
-- **Doğrulaması**, deponun testlerini lint, tür denetimi ve biçim denetimleriyle birlikte — deponun tanımladığı tam kod-kalitesi denetimini — çalıştırMALIDIR, yalnızca derlemeyi değil. Bir davranış değişikliği için "Derleniyor" yeterli bir kapı değildir.
-- Mevcut testler yeşil kalMALIDIR. Etkilenen kodu kapsayan bir testi bozan bir değişiklik, o testi amaçlanan yeni davranışa güncelleMELİDİR; kapının geçmesini zorlamak için bir testi silMEMELİ, atlaMAMALI veya zayıflatMAMALIDIR.
+Bir davranış değişikliği, boş olmayan ve ilgili bir test seçimi ÜRETMEK ZORUNDADIR — geçersiz bir seçici veya sıfır test seçen bir koşturucu kapsam değildir. Deponun test eşlemesi bayatsa, doğru çağrı türetilir ve eşleme güncellemesi kaydedilir; küçük bir eksik komut asla eksiksiz bir kuruluma alma çalışması gerektirmez. Kapsamlı bir çağrı yoksa, geçerli eksiksiz paket uygulanır — eski davranıştır, asla bir hata değil.
 
-Yalnızca-dokümantasyon, yapılandırma veya araştırma görevleri test oluşturmaktan muaftır ancak yine de deponun tanımladığı doğrulama kapısını çalıştırMALIDIR. Test etmenin derinliği, değişikliğin boyutuyla ve deponun olgunluğuyla orantılıdır. Bir deponun hiç test veya lint araç zinciri olmadığında, ajan bu disiplini sessizce atlaMAMALIDIR — kuruluma alma sırasında önerilen araç zincirine dayanır (bkz. [Uyumluluk](/spec)).
+Bir görev yeni çekirdek işlevsellik eklediğinde veya mevcut davranışı önemli ölçüde değiştirdiğinde, kabul kriterleri yeni veya değişen davranış için otomatik test kapsamını İÇERMELİ ve doğrulaması deponun testlerini lint, tür denetimi ve biçim denetimleriyle birlikte çalıştırMALIDIR — yalnızca derlemeyi değil. Mevcut testler yeşil kalMALIDIR.
+
+## Son-durum doğrulaması
+
+Görev bazındaki kapılar her görevin dokunduğunu doğrular; planın bir bütün olarak doğrulamasının yerini almazlar. Bir plan tamamlanmadan önce, deponun **eksiksiz geçerli** doğrulaması, son önemli değişiklikten sonra, **son ilgili durum** üzerinde — Final Review'de — çalışMAK ve geçMEK ZORUNDADIR. Daha önceki daha geniş çalıştırmalar entegrasyon sınırlarında veya paylaşılan/çekirdek değişikliklerinden sonra olur, görev-sayısı takvimine göre değil. Geçen bir sonuç, yalnızca ilgili girdilerin eşdeğer olduğuna dair kanıtla yeniden KULLANILABİLİR; aksi hâlde yeniden çalıştırılır. Her kapı çalıştırması özlü bir kayıt bırakır: komut, kapsam, revizyon, sonuç ve bir kanıt yolu.
 
 ## Güvenlik disiplini
 
-Güvenlik, testlerle tam olarak aynı şekilde birinci sınıftır ve aynı iki katmanlı modeli izler: iş sürerken görev bazında disiplin, artı sonunda tüm değişiklik kümesi üzerinde zorunlu bir Security Review kapısı. Bir görev kimlik doğrulama veya yetkilendirmeye, girdi işlemeye, sırlara veya yapılandırmaya, ağ, dosya veya shell yüzeyine ya da bağımlılıklara dokunduğunda:
+Güvenlik, testlerle tam olarak aynı şekilde birinci sınıftır ve aynı iki katmanlı modeli izler: iş sürerken görev bazında disiplin, artı sonunda tüm değişiklik kümesi üzerinde Final Review'in güvenlik incelemesi. Bir görev kimlik doğrulama veya yetkilendirmeye, girdi işlemeye, sırlara veya yapılandırmaya, ağ, dosya veya shell yüzeyine ya da bağımlılıklara dokunduğunda:
 
 - **Kabul kriterleri**, değişikliğin güvenlik beklentilerini — girdi doğrulanmış ve kaçışlanmış, kodda veya fikstürlerde gizli materyal yok, kimlik doğrulama denetimleri korunmuş veya güçlendirilmiş — `docs/SECURITY.md` ile tutarlı biçimde BELİRTMELİDİR.
 - Her commit, yerleşmeden önce sırlardan veya kimlik bilgilerinden arındırılmış olarak teyit edilMELİDİR; test fikstürleri ve dokümantasyon örnekleri dahil. Gönderilmiş bir commit'teki bir sır, yalnızca kaldırılmış değil, sızmış olarak kabul edilMELİ ve döndürülMELİDİR.
 - Güvenliğe duyarlı işin önemli olduğu yerlerde, ayrılmış bir sağlamlaştırma görevi, uygulama görevlerinden hemen sonra ve kapsamlı testler görevinden önce yerleştirilMELİDİR; böylece bulgular, testler davranışı kodlamadan önce düzeltilir ve her bulgu, yeniden çalışma yerine bir regresyon vakası hâline gelir.
 
-Bu görev bazında disiplin, Security Review son görevinin yerini almaz: görev bazında denetimler sorunları doğdukları commit'te yakalar, son kapı ise tüm planı — test ve dokümantasyon görevlerinin kendileri dahil — denetler. Bu nedenle her plan üç zorunlu son görevle biter — Security Review, ardından Skills & Agents Discovery, ardından Executive Report — ve kritik bir güvenlik bulgusu, düzeltilene veya açıkça kabul edilene kadar tamamlamayı engeller.
+Bu görev bazında disiplin, Final Review'in güvenlik incelemesinin yerini almaz: görev bazında denetimler sorunları doğdukları commit'te yakalar, son kapı ise tüm planı — test ve dokümantasyon görevlerinin kendileri dahil — denetler.
+
+## Plan yaşam döngüsü — Final Review
+
+Bu sürüm altında yazılmış uyumlu her plan, tam olarak **bir** zorunlu görevle biter: **Final Review** (görev N). Önceki sürümlerin ayrı kapanış görevlerine yerleştirdiği iki sorumluluk yeniden konumlandırılır: skill kararları, örüntüyü üreten göreve taşınır ve Executive Report isteğe bağlı, talep üzerine bir yapıt hâline gelir. Güvenlik incelemesinde hiçbir şey gevşetilmez.
+
+Final Review, sırasıyla ŞUNLARI YAPMAK ZORUNDADIR:
+
+**(a) Güvenlik incelemesi** — planın birikmiş tüm değişiklik kümesini gömme sırlar, enjeksiyon riskleri, yeni saldırı yüzeyi, zayıflatılmış kimlik doğrulama ve günlüklerde ya da dokümantasyonda hassas veriler açısından inceler; tanıtılan bağımlılıkları denetler; `docs/SECURITY.md`'nin hâlâ gerçeği yansıttığını doğrular; temiz olsa bile güvenlik incelemesi raporunu yazar. Kritik bir bulgu, plan tamamlanmadan önce düzeltilir — ya da kullanıcı tarafından açıkça kabul edilir.
+
+**(b) Son-durum doğrulaması** — deponun eksiksiz geçerli doğrulaması, son ilgili durum üzerinde çalışır ve geçer.
+
+**(c) Skill uzlaştırması** — her görev bir skill kararı taşır ve kayıtlı her aday karara bağlanmıştır; ikinci bir keşif raporu yoktur.
+
+**(d) Tamamlanma** — tamamlanmayı, teslim edilenlerle, doğrulama kanıtıyla ve sınırlamalarla raporla; Executive Report'u bir kez sun. Plan, teklif yanıtlanıp yanıtlanmadan tamamlanmıştır.
+
+Final Review, diğer tüm görevlerden sonra ardışık olarak çalışır ve asla paralel bir gruba yerleştirilmez.
+
+## Görev-yerel skill kararları
+
+"Bu iş, bir skill'e veya ajana değer yeniden kullanılabilir bir örüntü mü üretti?" sorusu, örüntüyü üreten görevin içinde, kanıtı bağlamdayken yanıtlanır. Her görevin Tamamlama ve Günlük bölümü bir **skill kararı** taşır: none, mevcut bir skill'i güncelleme, adlandırılmış bir yapıt oluşturma ya da gerekçeli bir erteleme. Gerekçeli yazma, mevcut katalogda yinelenenler denetlendikten sonra, o görevin içinde, onun doğrulama kapısından ve commit'inden önce gerçekleşir.
+
+## Executive report — isteğe bağlı, talep üzerine
+
+Executive Report artık zorunlu bir görev değildir. Tamamlanmada ajan onu bir kez sunar; yalnızca açık bir istek üzerine, planı yeniden oynamadan kalıcı kanıtlardan üretilir. Yanıt gelmemesi veya gözetimsiz bir çalışma, planı rapor üretilmeden tamamlanmış bırakır.
 
 ## Görev tamamlama protokolü
 
@@ -133,7 +189,7 @@ Titizlik, çalışmayla orantılı OLMAK ZORUNDADIR. Önemsiz değişiklikler i�
 | Kademe | Ne zaman | Biçim |
 |--------|----------|-------|
 | **micro** | Tek atomik değişiklik: bir endişe, kabaca bir oturum, koordinasyon yok. Hata düzeltme, metin değişikliği, yapılandırma ayarı. | Plan klasörü yok. Ajan, hedefi, kabul kriterlerini ve doğrulama kapısını konuşmada satır içi belirtir, yürütür, doğrular, commit atar. |
-| **standard** | Gerçek kapsamlı çok adımlı çalışma: bir özellik, bir yeniden düzenleme, tek repo içinde bir geçiş. Varsayılan kademe. | Tam plan: plan klasörü, dokuz bölümlü görevler, zorunlu son görevler. |
+| **standard** | Gerçek kapsamlı çok adımlı çalışma: bir özellik, bir yeniden düzenleme, tek repo içinde bir geçiş. Varsayılan kademe. | Tam plan: plan klasörü, on bölümlü görevler, Final Review. |
 | **deep** | Paralel gruplar, alt depolar veya birden çok gözetimsiz oturum kapsayan uzun vadeli çalışma. | Standart plan artı orkestratör ve/veya ekip-ajanları yetenekleri ve durum katmanı. |
 
 Micro-kademe çalışması için plan oluşturması istenen bir ajan, bir planın orantısız olduğunu SÖYLEMELİ ve bunun yerine satır içi formu ÖNERMELİDİR. Önemsiz tek dosya değişikliği için plan klasörü OLUŞTURULMAMALIDIR.
@@ -141,6 +197,17 @@ Micro-kademe çalışması için plan oluşturması istenen bir ajan, bir planı
 Micro-kademe çalışması hâlâ değiştirilemezleri korur: açık bir hedef, çalışan ve geçen bir doğrulama kapısı ve davranış değişiklikleri için test disiplini. Kademe paketi değiştirir, kapıları asla değiştirmez.
 
 Kapsam uçuşta büyüdüğünde — bir micro görev gerçek kapsam ortaya çıkardığında, standart bir plan alt depolar filizlendirdiğinde — ajan DURMAK ve çalışmayı bir sonraki kademeye yükseltmek ZORUNDADIR; mevcut kademeyi esnetmek yerine.
+
+## Uyumluluk
+
+Önceki sürümlerden planlar ve depolar uyumlu kalır; bir uyumluluk denetleyicisi, bilinen eski bir yapıt (kabul edilir) ile bu sürümü beyan eden ve ona göre nesnel olarak geçersiz olan bir yapıt (reddedilir) arasında AYRIM YAPMAK ZORUNDADIR:
+
+| Durum | Kural |
+|------|------|
+| **Önceki bir sürüm altında yazılmış plan** (üç zorunlu son görev; Dokunulan Yüzey'i olmayan görevler), bu sürüm tarafından yürütülüyor | Desteklenir. Kendi kayıtlı şekli altında yürütülür — son görevler eklenmez, kaldırılmaz veya yeniden sıralanmaz; Dokunulan Yüzey uçuşta eklenmez ve doğrulama, geçerli eksiksiz pakete geri düşer. Bir `refine` oturumu onu kasıtlı olarak göç ettireBİLİR. |
+| **Önceki bir sürüm altında kuruluma alınmış depo**, bu sürüm tarafından kuruluma alınıyor veya planlanıyor | Desteklenir. Planlar eksiksiz-paket kapılarına geri düşer; eksik kapsamlı-çağrı dokümantasyonu, hedeflenen harness yükseltmesini adlandıran bir bulgudur, asla bir başarısızlık değil. |
+| **Bu sürüm altında yazılmış plan**, bu sürümü izleyen ajan | Desteklenir — hedef budur. |
+| **Bu sürüm altında yazılmış plan**, önceki bir sürümü izleyen ajan | Desteklenmez; belgelenmiştir. Daha eski bir skill'i sabitleyen depolar, yeni planları benimsemeden önce skill'i YÜKSELTMELİDİR. |
 
 ## Sürümleme
 
