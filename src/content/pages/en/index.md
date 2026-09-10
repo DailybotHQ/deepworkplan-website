@@ -6,7 +6,7 @@ lastUpdated: 2026-09-10
 
 ## Models matter. Context matters more.
 
-Deep Work Plan turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and finishes long-horizon work.
+eep Work Plan turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and efficiency and finishes long-horizon work
 
 Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning and executing complex software work with AI agents. You do not pick an install method or copy a template — you copy the init.md prompt and paste it into your agent:
 

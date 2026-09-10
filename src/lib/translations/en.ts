@@ -76,7 +76,7 @@ export const en: SiteTranslations = {
       title: 'Models matter.',
       titleEmphasis: 'Context matters more.',
       subtitle:
-        'Deep Work Plan turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and finishes long-horizon work.',
+        'Deep Work Plan turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes and finishes long-horizon work with precision and efficiency.',
       instructionLabel: 'Copy into your agent',
       instruction:
         'Copy the init.md prompt and paste it into your coding agent — Claude Code, Cursor, Codex, or any other — to make any repository AI-first.',
