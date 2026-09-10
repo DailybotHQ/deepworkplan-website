@@ -1,6 +1,6 @@
 ---
 title: La boucle centrale
-description: "Le workflow create, execute, refine, resume, status et verify, le répertoire de sortie .dwp ignoré par git, l’anatomie d’une tâche en neuf sections, et comment fonctionne la validation."
+description: "Le workflow create, execute, refine, resume, status et verify, le répertoire de sortie .dwp ignoré par git, l’anatomie d’une tâche en dix sections, et comment fonctionne la validation."
 order: 2
 lang: fr
 summary: Comment les opérations centrales du DWP mènent un plan de l’objectif à un achèvement vérifié.
@@ -44,17 +44,18 @@ Tous les artefacts DWP résident sous un répertoire `.dwp/` ignoré par git, à
 
 <TaskAnatomy lang="fr" class="not-prose my-10" />
 
-Chaque fichier de tâche contient ces neuf sections, dans l’ordre. La structure garantit que chaque unité de travail est autonome et relisible :
+Chaque fichier de tâche contient ces dix sections, dans l’ordre. La structure garantit que chaque unité de travail est autonome et relisible :
 
 1. **Goal** — un paragraphe énonçant ce que la tâche accomplit.
 2. **Context** — le contexte, les liens et la raison d’être de cette tâche.
-3. **Steps** — des actions ordonnées et concrètes à réaliser.
-4. **Acceptance criteria** — une liste de contrôle des conditions qui définissent « fait ».
-5. **Validation** — les commandes ou tests à exécuter pour vérifier le travail.
-6. **Files** — les chemins censés être créés ou modifiés.
-7. **Dependencies** — les autres tâches ou prérequis externes.
-8. **Risks** — ce qui pourrait mal tourner, et les mesures d’atténuation.
-9. **Completion & Log** — un marqueur de statut accompagné de notes chronologiques.
+3. **Surface touchée** : ce que la tâche modifie et la classe de risque qui sélectionne sa validation.
+4. **Steps** — des actions ordonnées et concrètes à réaliser.
+5. **Acceptance criteria** — une liste de contrôle des conditions qui définissent « fait ».
+6. **Validation** — les commandes ou tests à exécuter pour vérifier le travail.
+7. **Files** — les chemins censés être créés ou modifiés.
+8. **Dependencies** — les autres tâches ou prérequis externes.
+9. **Risks** — ce qui pourrait mal tourner, et les mesures d’atténuation.
+10. **Completion & Log** — un marqueur de statut accompagné de notes chronologiques.
 
 ## Validation, achèvement et reprise
 

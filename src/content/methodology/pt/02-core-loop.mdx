@@ -1,6 +1,6 @@
 ---
 title: O loop central
-description: "O fluxo de create, execute, refine, resume, status e verify, o diretório de saída .dwp ignorado pelo git, a anatomia de nove seções da tarefa e como a validação funciona."
+description: "O fluxo de create, execute, refine, resume, status e verify, o diretório de saída .dwp ignorado pelo git, a anatomia de dez seções da tarefa e como a validação funciona."
 order: 2
 lang: pt
 summary: Como as operações centrais do DWP conduzem um plano do objetivo à conclusão verificada.
@@ -44,17 +44,18 @@ Todos os artefatos do DWP vivem em um diretório `.dwp/` ignorado pelo git, na r
 
 <TaskAnatomy lang="pt" class="not-prose my-10" />
 
-Todo arquivo de tarefa contém estas nove seções, em ordem. A estrutura garante que cada unidade de trabalho seja autocontida e revisável:
+Todo arquivo de tarefa contém estas dez seções, em ordem. A estrutura garante que cada unidade de trabalho seja autocontida e revisável:
 
 1. **Goal** — um parágrafo declarando o que a tarefa alcança.
 2. **Context** — contexto, links e por que esta tarefa existe.
-3. **Steps** — ações ordenadas e concretas a executar.
-4. **Acceptance criteria** — uma lista de verificação de condições que definem o concluído.
-5. **Validation** — comandos ou testes a executar para verificar o trabalho.
-6. **Files** — caminhos que se espera criar ou modificar.
-7. **Dependencies** — outras tarefas ou pré-requisitos externos.
-8. **Risks** — o que pode dar errado e as mitigações.
-9. **Completion & Log** — um marcador de status mais notas cronológicas.
+3. **Superfície tocada**: o que a tarefa muda e a classe de risco que seleciona sua validação.
+4. **Steps** — ações ordenadas e concretas a executar.
+5. **Acceptance criteria** — uma lista de verificação de condições que definem o concluído.
+6. **Validation** — comandos ou testes a executar para verificar o trabalho.
+7. **Files** — caminhos que se espera criar ou modificar.
+8. **Dependencies** — outras tarefas ou pré-requisitos externos.
+9. **Risks** — o que pode dar errado e as mitigações.
+10. **Completion & Log** — um marcador de status mais notas cronológicas.
 
 ## Validação, conclusão e retomada
 
