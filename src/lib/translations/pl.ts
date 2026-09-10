@@ -887,7 +887,7 @@ export const pl: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan w porównaniu z alternatywami — Deep Work Plan',
+      title: 'Deep Work Plan w porównaniu z alternatywami',
       description:
         'Jak Deep Work Plan odnosi się do narzędzi spec-driven, frameworków workflow agentów i trybów planowania dostawców: własne terminy, źródła i data przeglądu.',
     },
@@ -1178,7 +1178,7 @@ export const pl: SiteTranslations = {
       {
         title: 'Planuj i realizuj',
         description:
-          'Generuj Deep Work Plans za pomocą /dwp-create i realizuj je przez /dwp-execute, a następnie /dwp-status, /dwp-refine, /dwp-resume i /dwp-verify w miarę postępu prac. Każdy plan niesie ponumerowane zadania, bramki walidacyjne i protokół ukończenia — kończący się trzema obowiązkowymi zadaniami końcowymi: przeglądem bezpieczeństwa, odkrywaniem skilli i agentów oraz raportem wykonawczym.',
+          'Generuj Deep Work Plans za pomocą /dwp-create i realizuj je przez /dwp-execute, a następnie /dwp-status, /dwp-refine, /dwp-resume i /dwp-verify w miarę postępu prac. Każdy plan niesie ponumerowane zadania, bramki walidacyjne i protokół ukończenia — i zamyka się dokładnie jednym obowiązkowym Final Review (przejście bezpieczeństwa, walidacja stanu końcowego i uzgodnienie decyzji o skillach). Executive Report pozostaje dostępny na żądanie.',
       },
       {
         title: 'Zweryfikuj zgodność',

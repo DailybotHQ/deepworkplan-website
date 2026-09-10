@@ -879,7 +879,7 @@ export const hi: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan और विकल्पों की तुलना — Deep Work Plan',
+      title: 'Deep Work Plan और विकल्पों की तुलना',
       description:
         'Deep Work Plan और स्पेक-ड्रिवन उपकरणों, एजेंट वर्कफ़्लो फ़्रेमवर्क तथा वेंडर प्लान मोड की तुलना: हर एक अपने शब्दों में, स्रोतों और समीक्षा तिथि के साथ।',
     },
@@ -1170,7 +1170,7 @@ export const hi: SiteTranslations = {
       {
         title: 'योजना बनाएँ और निष्पादित करें',
         description:
-          '/dwp-create से Deep Work Plans तैयार करें और उन्हें /dwp-execute से चलाएँ, फिर काम बढ़ने पर /dwp-status, /dwp-refine, /dwp-resume और /dwp-verify का उपयोग करें। हर योजना में क्रमांकित कार्य, सत्यापन-गेट और एक पूर्णता प्रोटोकॉल होता है — जो तीन अनिवार्य अंतिम कार्यों के साथ समाप्त होता है: एक सुरक्षा समीक्षा, स्किल्स और एजेंट्स खोज, और एक कार्यकारी रिपोर्ट।',
+          '/dwp-create से Deep Work Plans तैयार करें और उन्हें /dwp-execute से चलाएँ, फिर काम बढ़ने पर /dwp-status, /dwp-refine, /dwp-resume और /dwp-verify का उपयोग करें। हर योजना में क्रमांकित कार्य, सत्यापन-गेट और एक पूर्णता प्रोटोकॉल होता है — और ठीक एक अनिवार्य Final Review के साथ बंद होती है (सुरक्षा-जाँच, अंतिम-स्थिति सत्यापन और स्किल्स समाधान)। Executive Report अनुरोध पर उपलब्ध रहता है।',
       },
       {
         title: 'अनुरूपता सत्यापित करें',

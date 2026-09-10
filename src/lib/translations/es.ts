@@ -754,7 +754,7 @@ export const es: SiteTranslations = {
       {
         title: 'Planifica y ejecuta',
         description:
-          'Genera Deep Work Plans con /dwp-create y ejecútalos con /dwp-execute; luego usa /dwp-status, /dwp-refine, /dwp-resume y /dwp-verify a medida que avanza el trabajo. Cada plan lleva tareas numeradas, compuertas de validación y un protocolo de finalización — terminando con tres tareas finales obligatorias: una Revisión de Seguridad, un Descubrimiento de Skills y Agentes, y un Informe Ejecutivo.',
+          'Genera Deep Work Plans con /dwp-create y ejecútalos con /dwp-execute; luego usa /dwp-status, /dwp-refine, /dwp-resume y /dwp-verify a medida que avanza el trabajo. Cada plan lleva tareas numeradas, compuertas de validación y un protocolo de finalización — y se cierra con un único Final Review obligatorio (pase de seguridad, validación del estado final y reconciliación de skills). El Executive Report sigue disponible a petición.',
       },
       {
         title: 'Verifica la conformidad',
@@ -957,7 +957,7 @@ export const es: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan comparado con las alternativas — Deep Work Plan',
+      title: 'Deep Work Plan comparado con las alternativas',
       description:
         'Cómo se relaciona Deep Work Plan con herramientas guiadas por especificación, frameworks de agentes y modos de plan nativos, con fuentes y fecha de revisión.',
     },

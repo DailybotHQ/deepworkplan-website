@@ -761,7 +761,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Planlayın ve yürütün',
         description:
-          '/dwp-create ile Deep Work Plan’ler üretin ve /dwp-execute ile çalıştırın, ardından iş ilerledikçe /dwp-status, /dwp-refine, /dwp-resume ve /dwp-verify kullanın. Her plan, numaralı görevler, doğrulama kapıları ve bir tamamlama protokolü taşır — üç zorunlu son görevle sona erer: bir Güvenlik İncelemesi, Skill’ler ve Ajanlar Keşfi ve bir Yönetici Raporu.',
+          '/dwp-create ile Deep Work Plan’ler üretin ve /dwp-execute ile çalıştırın, ardından iş ilerledikçe /dwp-status, /dwp-refine, /dwp-resume ve /dwp-verify kullanın. Her plan, numaralı görevler, doğrulama kapıları ve bir tamamlama protokolü taşır — ve tam olarak tek bir zorunlu Final Review ile kapanır (güvenlik geçişi, son-durum doğrulaması ve skills uzlaştırması). Executive Report istek üzerine hâlâ kullanılabilir.',
       },
       {
         title: 'Uyumluluk doğrulaması',
@@ -964,8 +964,7 @@ export const tr: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title:
-        'Deep Work Plan alternatiflerle karşılaştırıldığında — Deep Work Plan',
+      title: 'Deep Work Plan alternatiflerle karşılaştırıldığında',
       description:
         'Deep Work Plan’in spec araçları, ajan çerçeveleri ve satıcı plan modlarıyla ilişkisi: kendi terimleriyle, kaynaklar ve inceleme tarihiyle.',
     },

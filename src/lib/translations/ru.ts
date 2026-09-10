@@ -763,7 +763,7 @@ export const ru: SiteTranslations = {
       {
         title: 'Планируйте и выполняйте',
         description:
-          'Создавайте Deep Work Plan с помощью /dwp-create и выполняйте их через /dwp-execute, затем /dwp-status, /dwp-refine, /dwp-resume и /dwp-verify по ходу работы. Каждый план содержит пронумерованные задачи, validation gates и протокол завершения — завершающийся тремя обязательными финальными задачами: проверка безопасности, обнаружение навыков и агентов, а также исполнительный отчёт.',
+          'Создавайте Deep Work Plan с помощью /dwp-create и выполняйте их через /dwp-execute, затем /dwp-status, /dwp-refine, /dwp-resume и /dwp-verify по ходу работы. Каждый план содержит пронумерованные задачи, validation gates и протокол завершения — и закрывается ровно одним обязательным Final Review (проверка безопасности, валидация финального состояния и сверка решений по skills). Executive Report по-прежнему доступен по запросу.',
       },
       {
         title: 'Проверьте соответствие',
@@ -966,7 +966,7 @@ export const ru: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan в сравнении с альтернативами — Deep Work Plan',
+      title: 'Deep Work Plan в сравнении с альтернативами',
       description:
         'Как Deep Work Plan соотносится со spec-driven-инструментами, фреймворками агентных workflows и режимами планирования вендоров: с источниками и датой проверки.',
     },

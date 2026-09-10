@@ -760,7 +760,7 @@ export const id: SiteTranslations = {
       {
         title: 'Rencanakan dan eksekusi',
         description:
-          'Hasilkan Deep Work Plan dengan /dwp-create dan jalankan dengan /dwp-execute, lalu /dwp-status, /dwp-refine, /dwp-resume, dan /dwp-verify seiring pekerjaan berjalan. Setiap rencana membawa tugas bernomor, validation gate, dan completion protocol — diakhiri dengan tiga tugas akhir wajib: Security Review, Skills & Agents Discovery, dan Executive Report.',
+          'Hasilkan Deep Work Plan dengan /dwp-create dan jalankan dengan /dwp-execute, lalu /dwp-status, /dwp-refine, /dwp-resume, dan /dwp-verify seiring pekerjaan berjalan. Setiap rencana membawa tugas bernomor, validation gate, dan completion protocol — dan ditutup dengan tepat satu Final Review wajib (pemeriksaan keamanan, validasi status akhir, dan rekonsiliasi skills). Executive Report tetap tersedia atas permintaan.',
       },
       {
         title: 'Verifikasi kepatuhan',
@@ -963,8 +963,7 @@ export const id: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title:
-        'Deep Work Plan dibandingkan dengan alternatifnya — Deep Work Plan',
+      title: 'Deep Work Plan dibandingkan dengan alternatifnya',
       description:
         'Relasi Deep Work Plan dengan tool spec-driven, framework agent, dan mode rencana vendor: masing-masing menurut istilahnya, dengan sumber dan tanggal tinjauan.',
     },

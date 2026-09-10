@@ -757,7 +757,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Lập kế hoạch và thực thi',
         description:
-          'Sinh ra các Deep Work Plan với /dwp-create và chạy chúng với /dwp-execute, rồi /dwp-status, /dwp-refine, /dwp-resume và /dwp-verify khi công việc tiến triển. Mỗi kế hoạch mang các tác vụ được đánh số, các cổng kiểm chứng và một giao thức hoàn tất — kết thúc với ba tác vụ cuối bắt buộc: Đánh giá Bảo mật, Khám phá Skill và Agent, và Báo cáo Tổng hợp.',
+          'Sinh ra các Deep Work Plan với /dwp-create và chạy chúng với /dwp-execute, rồi /dwp-status, /dwp-refine, /dwp-resume và /dwp-verify khi công việc tiến triển. Mỗi kế hoạch mang các tác vụ được đánh số, các cổng kiểm chứng và một giao thức hoàn tất — và khép lại bằng đúng một Final Review bắt buộc (bước rà soát bảo mật, kiểm chứng trạng thái cuối và đối chiếu skill). Executive Report vẫn sẵn có khi bạn yêu cầu.',
       },
       {
         title: 'Xác minh sự tuân thủ',
@@ -961,7 +961,7 @@ export const vi: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan so với các phương án khác — Deep Work Plan',
+      title: 'Deep Work Plan so với các phương án khác',
       description:
         'Deep Work Plan so với các công cụ theo đặc tả, framework quy trình agent và chế độ lập kế hoạch sẵn có: theo thuật ngữ từng bên, kèm nguồn và ngày rà soát.',
     },

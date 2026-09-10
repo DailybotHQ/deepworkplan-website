@@ -872,7 +872,7 @@ export const th: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan เทียบกับทางเลือกอื่น — Deep Work Plan',
+      title: 'Deep Work Plan เทียบกับทางเลือกอื่น',
       description:
         'Deep Work Plan เทียบกับเครื่องมือ spec-driven เฟรมเวิร์กขั้นตอนการทำงานของ agent และโหมดแผนของผู้จัดจำหน่าย ตามเงื่อนไขของทุกตัว พร้อมแหล่งอ้างอิงและวันตรวจทาน',
     },
@@ -1161,7 +1161,7 @@ export const th: SiteTranslations = {
       {
         title: 'วางแผนและดำเนินการ',
         description:
-          'สร้าง Deep Work Plans ด้วย /dwp-create และรันด้วย /dwp-execute จากนั้นใช้ /dwp-status, /dwp-refine, /dwp-resume และ /dwp-verify ตามความคืบหน้าของงาน แต่ละแผนมีงานที่มีหมายเลข gate การตรวจสอบ และโปรโตคอลการเสร็จสิ้น โดยจบด้วยงานบังคับสุดท้ายสามงาน ได้แก่ การตรวจสอบความปลอดภัย การค้นพบสกิลและ agent และรายงานสรุปผู้บริหาร',
+          'สร้าง Deep Work Plans ด้วย /dwp-create และรันด้วย /dwp-execute จากนั้นใช้ /dwp-status, /dwp-refine, /dwp-resume และ /dwp-verify ตามความคืบหน้าของงาน แต่ละแผนมีงานที่มีหมายเลข gate การตรวจสอบ และโปรโตคอลการเสร็จสิ้น และปิดด้วย Final Review บังคับเพียงหนึ่งงาน (การตรวจความปลอดภัย การตรวจสถานะสุดท้าย และการกระทบยอดการตัดสินใจสกิล) Executive Report ยังพร้อมให้ใช้เมื่อคุณร้องขอ',
       },
       {
         title: 'ตรวจสอบความสอดคล้อง',

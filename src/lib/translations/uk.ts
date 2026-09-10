@@ -888,7 +888,7 @@ export const uk: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan у порівнянні з альтернативами — Deep Work Plan',
+      title: 'Deep Work Plan у порівнянні з альтернативами',
       description:
         'Порівняння Deep Work Plan зі spec-driven засобами, фреймворками агентів і режимами планування вендорів: кожен на власних умовах, з джерелами й датою перегляду.',
     },
@@ -1179,7 +1179,7 @@ export const uk: SiteTranslations = {
       {
         title: 'Плануйте та виконуйте',
         description:
-          "Генеруйте Deep Work Plan за допомогою /dwp-create і виконуйте їх через /dwp-execute, а потім /dwp-status, /dwp-refine, /dwp-resume та /dwp-verify у міру роботи. Кожен план несе пронумеровані завдання, валідаційні gate та протокол завершення — що закінчується трьома обов'язковими фінальними завданнями: оглядом безпеки, виявленням скілів та агентів і виконавчим звітом.",
+          "Генеруйте Deep Work Plan за допомогою /dwp-create і виконуйте їх через /dwp-execute, а потім /dwp-status, /dwp-refine, /dwp-resume та /dwp-verify у міру роботи. Кожен план несе пронумеровані завдання, валідаційні gate та протокол завершення — і завершується рівно одним обов'язковим Final Review (перевірка безпеки, валідація кінцевого стану та узгодження skills). Executive Report і надалі доступний на запит.",
       },
       {
         title: 'Перевірте відповідність',

@@ -762,7 +762,7 @@ export const ja: SiteTranslations = {
       {
         title: '計画して実行する',
         description:
-          '/dwp-create で Deep Work Plan を生成し、/dwp-execute で実行し、作業の進行に応じて /dwp-status、/dwp-refine、/dwp-resume、/dwp-verify を使います。各計画には番号つきのタスク、検証ゲート、完了プロトコルが含まれ、三つの必須最終タスク（セキュリティレビュー、スキル＆エージェントの発見、エグゼクティブレポート）で締めくくられます。',
+          '/dwp-create で Deep Work Plan を生成し、/dwp-execute で実行し、作業の進行に応じて /dwp-status、/dwp-refine、/dwp-resume、/dwp-verify を使います。各計画には番号つきのタスク、検証ゲート、完了プロトコルが含まれ、ちょうど一つの必須 Final Review（セキュリティパス、最終状態の検証、スキル決定の突き合わせ）で締めくくられます。Executive Report はリクエスト時に利用できます。',
       },
       {
         title: '適合性を検証する',
@@ -965,7 +965,7 @@ export const ja: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan と代替ツールの比較 — Deep Work Plan',
+      title: 'Deep Work Plan と代替ツールの比較',
       description:
         'Deep Work Plan と仕様駆動開発ツール、エージェントワークフローフレームワーク、各ベンダー純正のプランモードとの関係を、どのツールもそのツール自身の言葉で整理して並べる比較ページです。すべての事実は公式ドキュメントに出所をたどれ、最終確認日付も明記しています。',
     },

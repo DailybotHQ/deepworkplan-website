@@ -760,7 +760,7 @@ export const de: SiteTranslations = {
       {
         title: 'Planen und ausführen',
         description:
-          'Erzeugen Sie Deep Work Plans mit /dwp-create und führen Sie sie mit /dwp-execute aus, dann /dwp-status, /dwp-refine, /dwp-resume und /dwp-verify im Verlauf der Arbeit. Jeder Plan trägt nummerierte Aufgaben, Validierungs-Gates und ein Completion-Protokoll — abschließend mit drei obligatorischen Endaufgaben: einer Sicherheitsüberprüfung, einer Skills-&-Agenten-Erkennung und einem Executive Report.',
+          'Erzeugen Sie Deep Work Plans mit /dwp-create und führen Sie sie mit /dwp-execute aus, dann /dwp-status, /dwp-refine, /dwp-resume und /dwp-verify im Verlauf der Arbeit. Jeder Plan trägt nummerierte Aufgaben, Validierungs-Gates und ein Completion-Protokoll — und schließt mit genau einem verpflichtenden Final Review (Sicherheitstest, Validierung des Endzustands und Abgleich der Skills-Entscheidungen). Der Executive Report bleibt auf Anfrage verfügbar.',
       },
       {
         title: 'Konformität verifizieren',
@@ -963,8 +963,7 @@ export const de: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title:
-        'Deep Work Plan im Vergleich mit den Alternativen — Deep Work Plan',
+      title: 'Deep Work Plan im Vergleich mit den Alternativen',
       description:
         'Wie Deep Work Plan zu spec-driven Werkzeugen, Agenten-Frameworks und hersteller-nativen Plan-Modi steht: in eigenen Begriffen, mit Quellen und Prüfdatum.',
     },

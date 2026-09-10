@@ -751,7 +751,7 @@ export const zh: SiteTranslations = {
       {
         title: '规划并执行',
         description:
-          '用 /dwp-create 生成 Deep Work Plan 并用 /dwp-execute 运行它们，随着工作推进再使用 /dwp-status、/dwp-refine、/dwp-resume 与 /dwp-verify。每份计划都带有编号任务、验证关卡与一套完成协议——以三项强制性最终任务收尾：安全审查、技能与代理发现，以及执行报告。',
+          '用 /dwp-create 生成 Deep Work Plan 并用 /dwp-execute 运行它们，随着工作推进再使用 /dwp-status、/dwp-refine、/dwp-resume 与 /dwp-verify。每份计划都带有编号任务、验证关卡与一套完成协议——并以唯一的强制 Final Review 收尾（安全审查、最终状态验证与技能决策核对）。Executive Report 仍可按需提供。',
       },
       {
         title: '验证一致性',
@@ -948,7 +948,7 @@ export const zh: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan 与替代方案的对比 — Deep Work Plan',
+      title: 'Deep Work Plan 与替代方案的对比',
       description:
         'Deep Work Plan 与规范驱动开发工具、代理工作流框架以及各代理自带的原生计划模式之间是什么关系：本页按每个替代方案自身的定位逐一描述，标明每项能力是内置、可选还是不在其范围内，每项事实都可追溯到其官方文档，并注明最近一次复核的日期。这是一张地图，而非一份排名。',
     },

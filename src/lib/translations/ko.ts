@@ -757,7 +757,7 @@ export const ko: SiteTranslations = {
       {
         title: '계획하고 실행',
         description:
-          '/dwp-create로 Deep Work Plan을 생성하고 /dwp-execute로 실행한 뒤, 작업이 진행됨에 따라 /dwp-status, /dwp-refine, /dwp-resume, /dwp-verify를 사용하세요. 각 계획은 번호가 매겨진 작업, 검증 게이트, 완료 프로토콜을 담으며 — 세 가지 필수 최종 작업인 보안 검토, 스킬 & 에이전트 탐색, 실행 보고서로 마무리됩니다.',
+          '/dwp-create로 Deep Work Plan을 생성하고 /dwp-execute로 실행한 뒤, 작업이 진행됨에 따라 /dwp-status, /dwp-refine, /dwp-resume, /dwp-verify를 사용하세요. 각 계획은 번호가 매겨진 작업, 검증 게이트, 완료 프로토콜을 담으며 — 단 하나의 필수 Final Review(보안 패스, 최종 상태 검증, 스킬 결정 조정)로 마무리됩니다. Executive Report는 요청 시 제공됩니다.',
       },
       {
         title: '적합성 검증',
@@ -959,7 +959,7 @@ export const ko: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan과 대안들의 비교 — Deep Work Plan',
+      title: 'Deep Work Plan과 대안들의 비교',
       description:
         'Deep Work Plan이 스펙 주도 개발 도구, 에이전트 워크플로 프레임워크, 벤더 네이티브 계획 모드와 각각 어떻게 관련되는지 설명합니다. 모든 사실은 각 도구의 공식 문서로 거슬러 추적되고, 출처와 마지막 검토 날짜를 함께 밝힙니다.',
     },

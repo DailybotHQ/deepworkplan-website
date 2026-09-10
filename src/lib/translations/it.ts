@@ -760,7 +760,7 @@ export const it: SiteTranslations = {
       {
         title: 'Pianifichi ed esegua',
         description:
-          'Generi Deep Work Plan con /dwp-create ed eseguili con /dwp-execute, poi /dwp-status, /dwp-refine, /dwp-resume e /dwp-verify man mano che il lavoro procede. Ogni piano porta con sé attività numerate, validation gate e un protocollo di completamento — concludendosi con tre attività finali obbligatorie: una revisione di sicurezza, una scoperta di skill e agenti e un rapporto esecutivo.',
+          'Generi Deep Work Plan con /dwp-create ed eseguili con /dwp-execute, poi /dwp-status, /dwp-refine, /dwp-resume e /dwp-verify man mano che il lavoro procede. Ogni piano porta con sé attività numerate, validation gate e un protocollo di completamento — e si chiude con un unico Final Review obbligatorio (passaggio di sicurezza, validazione dello stato finale e riconciliazione delle skill). L’Executive Report resta disponibile su richiesta.',
       },
       {
         title: 'Verifichi la conformità',
@@ -963,7 +963,7 @@ export const it: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan rispetto alle alternative — Deep Work Plan',
+      title: 'Deep Work Plan rispetto alle alternative',
       description:
         'Deep Work Plan rispetto a strumenti spec-driven, framework per agenti e modalità plan dei vendor: ciascuno nei suoi termini, con fonti e data di revisione.',
     },
