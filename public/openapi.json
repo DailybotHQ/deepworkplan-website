@@ -3,7 +3,7 @@
   "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
   "info": {
     "title": "Deep Work Plan Agent API",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "summary": "Read-only, zero-auth agent surface for deepworkplan.com: LLM guidance files, per-page Markdown mirrors in 17 languages, machine-readable discovery documents, and a stateless MCP server.",
     "description": "The Deep Work Plan (DWP) methodology site exposes a public, read-only, zero-auth surface built for AI agents. No API keys, no OAuth, no registration: every endpoint is anonymous GET except the MCP endpoint, which is POST.\n\n**When to use this API:** fetch the canonical adoption prompt (`/init.md`) to make any repository AI-first with DWP; read any page as native source Markdown (`Accept: text/markdown` or explicit `.md` URLs) in 17 languages; discover the site map via `llms.txt`, the sitemap, or the ARD catalog; and drive the site programmatically through the MCP server at `/api/mcp` (tools: `get_init_prompt`, `list_site_sections`, `read_page`).\n\n**When not to use it:** this is a documentation/marketing site — there are no write operations, user accounts, or telemetry endpoints. Do not look for them here.\n\nErrors: unknown `/api/*` paths return a structured JSON error (`ApiError`), never HTML. Non-API paths return the HTML 404 page (or a Markdown recovery body when `Accept: text/markdown` is sent).",
     "contact": {
