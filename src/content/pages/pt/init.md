@@ -49,7 +49,7 @@ Primeiro entenda o repositório, depois proponha o que você vai fazer.
 - **Classifique o arquétipo.** Um repositório individual (o caso comum), um hub orquestrador, ou um
   espaço de trabalho de agente — o lar de longa duração de um agente autônomo, onde o git é
   recomendado em vez de presumido — com as evidências.
-- **Reconheça uma instalação DWP existente.** Se `AGENTS.md` e `.agents/` já existem, procure a linha de procedência `DWP standard:`. Um harness anterior ao padrão atual recebe uma **atualização direcionada**: reinstalar a skill é todo o caminho de atualização, e o onboarding reconcilia apenas as peças ausentes ou desatualizadas — cada seção escrita à mão, skill personalizada e plano em andamento é preservado, e uma segunda execução não muda nada.
+- **Reconheça uma instalação DWP existente.** Se `AGENTS.md` e `.agents/` já existem, procure a linha de procedência `DWP standard:`. Um harness anterior ao padrão atual recebe uma **atualização direcionada**: reinstalar a skill é todo o caminho de atualização, e o onboarding reconcilia apenas as peças ausentes ou desatualizadas — cada seção escrita à mão, skill personalizada e plano em andamento é preservado, e uma segunda execução não muda nada. Os planos redigidos sob uma versão anterior conservam sua forma registrada e se encerram com suas próprias tarefas finais; nunca são forçados para a nova.
 - **Faça o inventário do que já existe.** `AGENTS.md`, `CLAUDE.md`, `docs/`, qualquer configuração `.agents/` ou de skills/agents,
   `.dwp/` e `.gitignore`. Anote qualquer coisa que já faça parte deste trabalho.
 - **Proponha o plano de onboarding.** Apresente uma lista concisa: arquivos que você vai criar, arquivos que você vai
@@ -140,11 +140,15 @@ metodologia) em vez de sobrescrever — e confirme com o usuário antes de subst
 6. **`.dwp/` + `tmp/`.** Estruture um `.dwp/` ignorado pelo git com `plans/` e `drafts/`, além de um espaço de rascunho
    `tmp/` — ambos adicionados ao `.gitignore` de forma não destrutiva (acrescente, nunca reescreva).
 
-## 4. Ofereça os addons opcionais
+## 4. Instale a revisão local obrigatória e depois ofereça os addons opcionais
 
-Após o onboarding de base, enumere os cinco addons (devcontainer, Dailybot, dependency-upgrade,
-design-system, AI Diff Reviewer) e ofereça cada um como uma escolha explícita. Um repositório é
-totalmente conforme com **zero** addons — nunca os instale automaticamente.
+Após o onboarding de base, instale a **revisão local do AI Diff Reviewer** (Fase 7a — obrigatória
+desde o padrão 2.3.0): a skill vendorizada fixada por tag
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) mais um
+`.review/extension.md` sob medida para o repositório via `generate-extension`, sob o consentimento do
+onboarding. Depois enumere os quatro addons opcionais (devcontainer, Dailybot, dependency-upgrade,
+design-system) e ofereça cada um como uma escolha explícita. Um repositório é totalmente conforme com
+**zero** addons opcionais — nunca instale esses automaticamente.
 
 - **Suporte a devcontainer** — um dev container reproduzível e isolado com auth de CLI de IA persistente.
 - **Integração com a Dailybot** — quatro eventos do ciclo de vida (kickoff, tarefa significativa, bloqueado, conclusão) como relatórios de progresso best-effort para equipes que já usam a Dailybot, com reforço autônomo opcional via hooks (`dailybot-cli >= 3.7.0`). A instalação da skill de agente Dailybot emparelhada (3.10.3) também expõe chat, check-ins, criação de formulários, consulta à IA, chaves API por repositório e mais — o addon conecta apenas os relatórios à execução DWP. A metodologia central tem zero dependência da Dailybot.
@@ -154,8 +158,14 @@ totalmente conforme com **zero** addons — nunca os instale automaticamente.
   (não oferecido para bibliotecas puras, serviços headless ou repos exclusivamente de infra). Três perfis se
   empilham em um único arquivo: visual-ui (ativado por padrão quando detectado), cli-output e
   conversational — estes dois últimos são sempre perguntados, nunca aplicados automaticamente.
-- **AI Diff Reviewer** — aumenta a Revisão de Segurança obrigatória com uma revisão local estruturada
-  via [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md` obrigatório). Pergunte sempre **Fluxo A** (apenas local) vs **Fluxo B** (portão CI de dupla superfície com `pr-review.yml`); nunca assuma um padrão. Falha suave apenas para erros de skill/extensão/invocação ausentes; resultados `critical` de uma passagem local concluída ainda bloqueiam a conclusão da Revisão de Segurança. A metodologia central tem zero dependência do AI Diff Reviewer.
+- **AI Diff Reviewer** — a revisão local obrigatória (não uma opção): o passe de segurança de cada Final Review
+  executa o [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md`
+  obrigatório) sobre o conjunto acumulado de mudanças do plano. Uma skill ou extensão ausente é um achado
+  registrado `local reviewer not installed`, instalada quando a execução pode escrever no harness —
+  nunca uma omissão silenciosa; os erros de invocação falham de forma suave; os achados `critical` de uma passagem
+  concluída ainda bloqueiam a conclusão. O **Fluxo B** (o portão de CI com `pr-review.yml`) é oferecido
+  como opção explícita e nunca é instalado sem ser pedido. Nenhum fluxo do Deep Work Plan exige um serviço
+  comercial, um fornecedor de CI ou um segredo.
 
 ## 5. Evolua o kit (sub-skill author)
 
@@ -175,7 +185,7 @@ Gere Deep Work Plans para qualquer tarefa e execute-os tarefa a tarefa:
 - `/dwp-resume` — reconstruir o estado e continuar um plano interrompido.
 - `/dwp-verify` — relatório objetivo de conformidade aprovado/reprovado para o repositório (ou um plano específico).
 
-Todo plano termina com três tarefas finais obrigatórias — um **Security Review** das próprias mudanças
+Todo plano se encerra com o Final Review — um passe de segurança sobre as próprias mudanças
 do plano (mantendo o `docs/SECURITY.md` atualizado; um achado crítico bloqueia a conclusão), o
 Skills & Agents Discovery e o Executive Report.
 

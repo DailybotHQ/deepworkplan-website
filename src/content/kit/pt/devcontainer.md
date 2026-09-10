@@ -23,4 +23,4 @@ Cerca de 85% do devcontainer é um esqueleto comum e estável; os 15% restantes 
 
 ## Notas
 
-Opcional e nunca obrigatório. Um repositório é totalmente conforme com zero addons.
+Opcional e nunca obrigatório. Um repositório é totalmente conforme com zero addons opcionais.

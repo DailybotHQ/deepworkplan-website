@@ -50,7 +50,7 @@ Ambos os arquivos DEVEM (MUST) ser escritos atomicamente: escrever em um arquivo
 ```json
 {
   "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.2.0",
+  "spec_version": "2.3.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
@@ -146,7 +146,7 @@ Uma tarefa NÃO DEVE (MUST NOT) ser marcada como `completed` no `state.json` enq
 
 Uma tarefa `completed` DEVERIA (SHOULD) carregar um registro de `outcome`: o que foi `tried` (tentado), o que `failed` (falhou), o que `worked` (funcionou) e `notes` (notas) em formato livre. Mantenha cada entrada em uma linha.
 
-Os registros de resultado tornam um plano concluído em **memória episódica** recuperável: um agente (ou uma plataforma de indexação de memória) pode posteriormente lembrar como um problema foi resolvido, não apenas que foi. Eles alimentam a tarefa obrigatória de Descoberta de Skills e Agentes, que DEVERIA (SHOULD) lê-los ao extrair padrões. Em plataformas como o Hermes que indexam a memória do agente, os registros de resultado no `state.json` tornam os planos concluídos diretamente recuperáveis em sessões futuras.
+Os registros de resultado tornam um plano concluído em **memória episódica** recuperável: um agente (ou uma plataforma de indexação de memória) pode posteriormente lembrar como um problema foi resolvido, não apenas que foi. Eles alimentam as disposições de skills por tarefa e a reconciliação de skills do Final Review, que os lê ao extrair padrões. Em plataformas como o Hermes que indexam a memória do agente, os registros de resultado no `state.json` tornam os planos concluídos diretamente recuperáveis em sessões futuras.
 
 ### Checkpoint e estado bloqueado
 

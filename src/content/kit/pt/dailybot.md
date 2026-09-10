@@ -10,7 +10,7 @@ order: 2
 
 Liga a execução do Deep Work Plan a uma **equipa Dailybot** para que as pessoas vejam o que os agentes estão a construir — arranque, progresso a meio do plano, bloqueios e conclusão — sem adicionar reuniões nem uma segunda cadeia de ferramentas. Um addon **opcional** para equipas que já usam [Dailybot](https://www.dailybot.com).
 
-A metodologia central do Deep Work Plan tem **zero** dependência do Dailybot. Um repositório sem addons é totalmente conforme. Ofereça este addon apenas quando o programador ou a equipa já usa Dailybot; nunca instale automaticamente para todos.
+A metodologia central do Deep Work Plan tem **zero** dependência do Dailybot. Um repositório sem addons opcionais é totalmente conforme. Ofereça este addon apenas quando o programador ou a equipa já usa Dailybot; nunca instale automaticamente para todos.
 
 ## Quando usar
 
@@ -123,7 +123,7 @@ Referência pública: [dailybot.com/skill.md](https://www.dailybot.com/skill.md)
 
 ## Fluxo de integração
 
-Durante a **Fase 7b** do `onboard` DWP, após o scaffolding AI-first central, o fluxo oferece cinco addons opcionais. Se o programador aceitar Dailybot:
+Durante a **Fase 7b** do `onboard` DWP, após o scaffolding AI-first central, o fluxo oferece os quatro addons opcionais (a revisão local do AI Diff Reviewer já foi instalada na Fase 7a). Se o programador aceitar Dailybot:
 
 1. Detetar configuração existente (skill, CLI, `.dailybot/profile.json`, hooks, passo de relatório).
 2. Oferecer instalação de skill/CLI através dos fluxos de consentimento do Dailybot.

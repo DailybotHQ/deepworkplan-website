@@ -8,11 +8,13 @@ lastUpdated: 2026-05-30
 
 O Deep Work Plan (DWP) é uma metodologia aberta e independente de framework para executar trabalho de engenharia estruturado e autônomo com agentes de código de IA. Ele transforma um objetivo vago em um plano revisável que um agente pode executar, pausar, retomar e relatar — sem perder o contexto.
 
-O DWP se apoia em dois pilares.
+O DWP se apoia em três pilares.
 
 **Desenvolvimento orientado a especificação.** Em vez de tratar uma transcrição de chat como a fonte de verdade, você primeiro escreve *o que* deve ser verdadeiro — objetivo, escopo, critérios de aceitação e as verificações que provam que está concluído — e o agente executa contra essa especificação. No DWP, o plano *é* a especificação: plano → tarefas atômicas → validation gates → conclusão. Escrever a especificação primeiro reduz a deriva (o agente é medido contra critérios declarados), torna o trabalho verificável (cada gate aprova ou reprova) e o torna retomável (a especificação sobrevive a qualquer sessão ou agente). Independente de ferramenta e nativo do repositório, ele difere de sistemas orientados a especificação atrelados a ferramentas, como GitHub Spec Kit, Amazon Kiro e Tessl.
 
 **Engenharia de harness — o repositório se torna o harness.** Um modelo de linguagem sozinho é apenas um preditor de texto; o que o torna um engenheiro confiável é o *harness* ao seu redor — contexto, ferramentas, um loop de controle, salvaguardas e estado persistente. A engenharia de harness é projetar esse andaime deliberadamente. A posição do DWP é que ele deve viver no repositório, não em uma ferramenta: o contexto como `AGENTS.md` + `docs/`, as ferramentas como o kit `.agents/`, o loop de controle como o plano, as salvaguardas como os validation gates e o estado como o `.dwp/` ignorado pelo git. Como cada parte é um arquivo no repositório, o harness é portátil — de modo que qualquer agente pode pilotar qualquer repositório.
+
+**Eficiência de tokens — de horizonte longo por design, eficiente por construção.** O contexto é o recurso mais escasso que um agente de código tem, e uma metodologia que o desperdiça falha exatamente quando o trabalho se alonga. O DWP carrega as instruções de forma progressiva — cada guia é carregado quando seu gatilho dispara —, seleciona a validação a partir do que cada tarefa realmente toca e decide as skills de forma local por tarefa. Os bytes de instrução que cada fluxo exige são medidos e publicados; sem porcentagens de tokens inventadas.
 
 A metodologia é explicada em cinco capítulos:
 
