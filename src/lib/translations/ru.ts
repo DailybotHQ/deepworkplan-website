@@ -33,9 +33,9 @@ export const ru: SiteTranslations = {
     privacy: 'Конфиденциальность',
     github: 'GitHub',
     faq: 'FAQ',
-    compare: 'Compare',
-    resources: 'Resources',
-    resourcesDesc: 'Examples, comparison, FAQ and trust',
+    compare: 'Сравнение',
+    resources: 'Ресурсы',
+    resourcesDesc: 'Примеры, сравнение, FAQ и доверие',
     repo: {
       label: 'Исходный код',
       website: 'Репозиторий сайта',
@@ -70,7 +70,7 @@ export const ru: SiteTranslations = {
       getStarted: 'Начало работы',
       project: 'Проект',
       connect: 'Связаться',
-      learn: 'Learn',
+      learn: 'Узнать больше',
     },
   },
 
@@ -786,356 +786,357 @@ export const ru: SiteTranslations = {
 
   faqPage: {
     meta: {
-      title: 'Frequently asked questions — Deep Work Plan',
+      title: 'Часто задаваемые вопросы — Deep Work Plan',
       description:
-        'Answers to the questions people ask about Deep Work Plan: what it does, how gates and resumption work, how it compares with other tools, and how to adopt it.',
+        'Ответы на частые вопросы о Deep Work Plan: что он делает, как работают gates и возобновление, сравнение с другими инструментами и порядок внедрения.',
     },
     eyebrow: 'FAQ',
-    title: 'Frequently asked questions',
+    title: 'Часто задаваемые вопросы',
     intro:
-      'Short answers to what people ask most about Deep Work Plan, each with a link to the page that goes deeper.',
+      'Короткие ответы на самые частые вопросы о Deep Work Plan, каждый со ссылкой на страницу, где тема раскрыта глубже.',
     groups: [
       {
         id: 'what',
-        title: 'What Deep Work Plan is',
+        title: 'Что такое Deep Work Plan',
         items: [
           {
             id: 'what-is-it',
-            question: 'What does Deep Work Plan actually do?',
+            question: 'Что именно делает Deep Work Plan?',
             answer:
-              'Deep Work Plan turns a repository into a structured environment where a coding agent can execute long work reliably. It installs as an agent skill, onboards the repository once (an `AGENTS.md` index, a `docs/` tree, a `.agents/` kit of skills and commands, a gitignored `.dwp/` output area), and from then on any goal becomes a plan: atomic tasks, each with acceptance criteria and a validation gate, executed one at a time, committed as they pass, and resumable from disk by any agent. The plan closes with a Final Review that audits security and validates the final state. The methodology is MIT-licensed and works with any coding agent that reads a repository.',
-            linkLabel: 'Read the methodology',
+              'Deep Work Plan превращает репозиторий в структурированную среду, где агент разработки надёжно выполняет долгую работу. Он устанавливается как навык агента и один раз проводит онбординг репозитория (индекс `AGENTS.md`, дерево `docs/`, набор навыков и команд `.agents/`, игнорируемая git-ом область вывода `.dwp/`), а после этого любая цель становится планом: атомарные задачи, каждая со своими критериями приёмки и validation gate, выполняются по одной, фиксируются коммитами по мере прохождения и возобновляются с диска любым агентом. План завершается Final Review, которая проверяет безопасность и валидирует финальное состояние. Методология распространяется по лицензии MIT и работает с любым агентом разработки, который читает репозиторий.',
+            linkLabel: 'Читать методологию',
             linkPath: '/methodology',
           },
           {
             id: 'who-is-it-for',
-            question: 'Who is it for?',
+            question: 'Для кого он предназначен?',
             answer:
-              'Developers and teams who hand real, multi-step work to coding agents and want it to finish. It fits when a task spans more than one session, more than one file family, or more than one agent; when a teammate must be able to pick up where an agent stopped; or when "done" must mean "validated", not "the agent said so". A one-line fix does not need a plan, and the methodology says so: its proportional-rigor rule recommends an inline goal, criteria and gate instead.',
-            linkLabel: 'Quickstart',
+              'Разработчикам и командам, которые передают агентам разработки настоящую многошаговую работу и хотят, чтобы она была доведена до конца. Методология уместна, когда задача выходит за рамки одной сессии, одного семейства файлов или одного агента; когда коллега должен суметь продолжить с того места, где агент остановился; или когда «готово» должно означать «провалидировано», а не «агент так сказал». Однострочной правке план не нужен, и методология прямо это признаёт: её правило соразмерной строгости рекомендует вместо этого ограничиться целью, критериями и gate, записанными по месту.',
+            linkLabel: 'Быстрый старт',
             linkPath: '/quickstart',
           },
           {
             id: 'is-it-a-tool',
-            question: 'Is it a tool, a framework or a methodology?',
+            question: 'Это инструмент, фреймворк или методология?',
             answer:
-              'A methodology packaged as an installable skill. There is no server, no account, no proprietary format and no runtime beyond the coding agent you already use. What gets installed is instructions the agent reads, a small set of shell scripts for context detection and conformance checking, and the conventions your repository adopts. Everything the plan produces is Markdown and JSON in your repository, readable without any tool.',
-            linkLabel: 'Read the specification',
+              'Методология, упакованная в устанавливаемый навык. Нет сервера, аккаунта, проприетарного формата и рантайма помимо агента разработки, которым вы уже пользуетесь. Устанавливаются инструкции, которые читает агент, небольшой набор shell-скриптов для обнаружения контекста и проверки соответствия, а также соглашения, которые принимает ваш репозиторий. Всё, что производит план, — это Markdown и JSON в вашем репозитории, читаемые без какого-либо инструмента.',
+            linkLabel: 'Читать спецификацию',
             linkPath: '/spec',
           },
           {
             id: 'which-agents',
-            question: 'Which coding agents does it work with?',
+            question: 'С какими агентами разработки он работает?',
             answer:
-              "Any agent that reads repository files. The skill follows the open Agent Skills standard and the `AGENTS.md` convention, so Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot and others pick it up through their normal skill and instruction loading. The methodology's own evaluation shows a plan started by one vendor's agent and resumed by another's in both directions. Installation coverage and behavioral evidence are listed per agent in the compatibility matrix, and the two are never conflated.",
-            linkLabel: 'Browse the kit',
+              'С любым агентом, который читает файлы репозитория. Навык следует открытому стандарту Agent Skills и соглашению `AGENTS.md`, поэтому Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot и другие подхватывают его через обычную загрузку навыков и инструкций. Собственная оценка методологии показывает план, начатый агентом одного вендора и возобновлённый агентом другого, в обоих направлениях. Охват установки и поведенческие свидетельства перечислены по агентам в матрице совместимости, и одно никогда не выдаётся за другое.',
+            linkLabel: 'Просмотреть набор',
             linkPath: '/kit',
           },
         ],
       },
       {
         id: 'how',
-        title: 'How a plan runs',
+        title: 'Как выполняется план',
         items: [
           {
             id: 'gates',
             question:
-              'How are the validation gates implemented? Do they need human sign-off?',
+              'Как реализованы validation gates? Требуют ли они согласования человеком?',
             answer:
-              "They are executable assertions the agent runs itself. Human sign-off bookends the run: a person approves the plan before execution and reviews the final diff at pull-request time; execution in between is autonomous. Every task names concrete commands, typically the repository's own quality gate, selected from the task's touched surface: the tests of the changed behavior and its consumers, widening to the full suite when the change is shared or cannot be bounded. A task is marked done only when those commands exit successfully, and tasks that change behavior must extend the tests. On failure the task is marked blocked and the agent stops.",
-            linkLabel: 'The core loop',
+              'Это исполняемые утверждения, которые агент запускает сам. Участие человека обрамляет запуск: человек утверждает план перед выполнением и просматривает финальный дифф на этапе pull request; выполнение между ними автономно. Каждая задача называет конкретные команды — как правило, собственную проверку качества репозитория, — выбранные по затронутой поверхности задачи: тесты изменённого поведения и его потребителей, с расширением до полного набора, когда изменение разделяемое или его нельзя ограничить. Задача отмечается готовой, только если эти команды завершаются успешно, а задачи, меняющие поведение, обязаны расширять тесты. При провале задача помечается заблокированной, и агент останавливается.',
+            linkLabel: 'Основной цикл',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'stale-plan',
             question:
-              'How does the plan avoid going stale when people change the code between runs?',
+              'Как план не устаревает, когда код меняют между запусками?',
             answer:
-              'On three fronts. Tasks are written as behavior, not edits: an acceptance criterion says what the system must do, so a renamed file or a swapped implementation does not invalidate it. Every gate re-runs against the repository as it is now, so a broken assumption fails loudly at the next run instead of drifting silently, and that failure is the cue to refine. And keeping documentation in sync is part of the work: a task that changes behavior also updates the docs and the agent-facing kit that describe it, inside its own gate. Every run should leave the repository more agent-ready than it found it.',
-            linkLabel: 'Read the methodology',
+              'По трём направлениям. Задачи записываются как поведение, а не как правки: критерий приёмки говорит, что система должна делать, поэтому переименованный файл или заменённая реализация не обесценивают его. Каждый gate перезапускается на репозитории в его текущем виде, поэтому сломанное предположение громко проваливается при следующем запуске, а не дрейфует молча, — и этот провал служит сигналом к уточнению. И поддерживать документацию в актуальном виде — часть работы: задача, меняющая поведение, обновляет и описывающие её документацию, и набор для агентов, внутри собственного gate. Каждый запуск должен оставлять репозиторий более готовым к агентам, чем он его застал.',
+            linkLabel: 'Читать методологию',
             linkPath: '/methodology',
           },
           {
             id: 'edit-mid-run',
             question:
-              'Can I change the plan mid-run without losing completed work?',
+              'Можно ли менять план посреди выполнения, не теряя завершённой работы?',
             answer:
-              'Yes; refining a partially executed plan is a first-class move. Task definitions and execution state are kept separate: the plan is a checklist on disk plus a small state file, so what is done stays recorded independently of the task text. When a task turns out to be wrong, the agent marks it blocked and stops rather than pushing through. You then edit, reorder, split or drop the tasks that have not run, while completed tasks stay completed. Resuming rebuilds state from disk and the actual repository and re-runs the gates that matter, so nothing that shifted underneath slips by.',
-            linkLabel: 'The core loop',
+              'Да: уточнение частично выполненного плана — полноценный приём. Определения задач и состояние выполнения хранятся раздельно: план — это чек-лист на диске плюс небольшой файл состояния, поэтому сделанное остаётся записанным независимо от текста задач. Если задача оказывается ошибочной, агент помечает её заблокированной и останавливается, а не продавливает её силой. Затем вы редактируете, переупорядочиваете, разбиваете или отбрасываете ещё не выполненные задачи, а завершённые остаются завершёнными. Возобновление восстанавливает состояние с диска и из фактического репозитория и перезапускает значимые gates, поэтому ничто изменившееся под руками не ускользнёт.',
+            linkLabel: 'Основной цикл',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'drift',
             question:
-              'Does it keep checking the work against the plan, or is the plan an upfront thing?',
+              'Он постоянно сверяет работу с планом или план существует только в начале?',
             answer:
-              'The plan is a continuous check. The agent works one small task at a time and must validate before moving on, so it can wander one step, not three. Every task carries acceptance criteria plus the exact commands that prove them, and progress is written into the repository as it goes, with a status per task, so drift becomes visible to you, to the next session and to the next agent. A plan is not finished until everything validates, including the Final Review. The honest caveat: the methodology cannot stop an agent from writing a weak acceptance criterion in the first place; it makes drift loud instead of silent.',
-            linkLabel: 'The core loop',
+              'План — это непрерывная проверка. Агент работает маленькими задачами по одной и обязан валидироваться, прежде чем идти дальше, поэтому он может сойти на шаг, а не на три. Каждая задача несёт критерии приёмки и точные команды, которые их доказывают, а прогресс по ходу работы записывается в репозиторий со статусом по каждой задаче, поэтому дрейф становится виден вам, следующей сессии и следующему агенту. План не закончен, пока не провалидируется всё, включая Final Review. Честная оговорка: методология не может помешать агенту изначально записать слабый критерий приёмки; она делает дрейф громким, а не молчаливым.',
+            linkLabel: 'Основной цикл',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'plan-evolution',
             question:
-              'Is the plan generated once and maintained by hand, or does it evolve with the code?',
+              'План генерируется один раз и поддерживается вручную или развивается вместе с кодом?',
             answer:
-              "Neither. It is generated once from a goal and then maintained as part of the work. The plan is deliberately not rewritten from code diffs, because a spec that chases the code becomes a lagging mirror, which is the drift the methodology exists to kill. It evolves on purpose: gates re-run against the current repository, a failing gate triggers a refinement, and the agent performs that refinement during the run while you approve up front and review at the end. Documentation and tests evolve alongside the code by construction, because updating them is inside each task's gate.",
-            linkLabel: 'Read the methodology',
+              'Ни то, ни другое. План генерируется один раз из цели, а затем поддерживается как часть работы. Он намеренно не переписывается из диффов кода: спецификация, гонящаяся за кодом, становится запаздывающим зеркалом, а это тот самый дрейф, ради устранения которого методология существует. План развивается осознанно: gates перезапускаются на текущем репозитории, провалившийся gate запускает уточнение, и агент выполняет это уточнение во время прогона, пока вы утверждаете план в начале и делаете ревью в конце. Документация и тесты развиваются вместе с кодом по построению, потому что их обновление находится внутри gate каждой задачи.',
+            linkLabel: 'Читать методологию',
             linkPath: '/methodology',
           },
           {
             id: 'resume',
-            question: 'What happens if the session dies halfway?',
+            question: 'Что будет, если сессия оборвётся на полпути?',
             answer:
-              "Progress lives on disk, not in the chat. The README checkboxes, each task's log, a bounded working index and a machine-readable state file are updated at every task boundary, and the state file records a checkpoint before any planned pause. A fresh session, or a different agent, reads that compact index, reconciles it with the repository and git history, and continues at the first incomplete task without redoing finished work. Even an interrupted plan creation is recoverable: the plan's identity and intended task list are written before any task file, so a half-created plan can be completed or discarded rather than guessed at.",
-            linkLabel: 'The core loop',
+              'Прогресс живёт на диске, а не в чате. Чекбоксы README, журнал каждой задачи, ограниченный рабочий индекс и машиночитаемый файл состояния обновляются на каждой границе задач, а файл состояния записывает контрольную точку перед любой запланированной паузой. Свежая сессия или другой агент читает этот компактный индекс, сверяет его с репозиторием и историей git и продолжает с первой незавершённой задачи, не переделывая законченную работу. Восстановимо даже прерванное создание плана: то, что это за план, и его задуманный список задач записываются раньше любых файлов задач, поэтому недосозданный план можно завершить или отбросить, а не угадывать.',
+            linkLabel: 'Основной цикл',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'final-review',
-            question: 'What is the Final Review?',
+            question: 'Что такое Final Review?',
             answer:
-              "The single mandatory closing task of every plan. In order: a security pass over the plan's full accumulated change set, including a required local review of the diff by the AI Diff Reviewer skill, with critical findings blocking completion until fixed or explicitly accepted; final-state validation, meaning the repository's complete applicable test, lint, type-check and format suites on the final code; and a reconciliation of the skills decisions each task recorded. The agent then reports deliverables, evidence and limitations, and offers an Executive Report once, generating it only if you ask.",
-            linkLabel: 'The specification',
+              'Единственная обязательная закрывающая задача каждого плана. По порядку: проверка безопасности всего накопленного набора изменений плана, включая обязательное локальное ревью диффа навыком AI Diff Reviewer, где критические находки блокируют завершение, пока они не исправлены или явно приняты; валидация финального состояния — то есть все подходящие наборы тестов, линтинга, проверки типов и форматирования репозитория на финальном коде; и сверка записанных каждой задачей решений по skills. Затем агент отчитывается о результатах, свидетельствах и ограничениях и один раз предлагает Executive Report, создавая его, только если вы попросите.',
+            linkLabel: 'Спецификация',
             linkPath: '/spec/dwp-specification',
           },
         ],
       },
       {
         id: 'compare',
-        title: 'How it compares',
+        title: 'Сравнение с другими',
         items: [
           {
             id: 'vs-sdd-tools',
             question:
-              'How is it different from spec-driven tools such as Spec Kit, OpenSpec or Kiro?',
+              'Чем он отличается от spec-driven-инструментов вроде Spec Kit, OpenSpec или Kiro?',
             answer:
-              "They solve adjacent problems. Spec-driven tools are excellent at capturing what should change: specifications, requirements and change proposals in a repeatable shape. Deep Work Plan is about how an agent executes for hours without drifting: the onboarded harness, per-task validation gates selected from the touched surface, on-disk resumable state, a mandatory Final Review with a security pass, and a conformance checker for the repository itself. The two can be combined, with a spec or change proposal feeding a plan. The comparison page lays the capabilities side by side, on each tool's own terms.",
-            linkLabel: 'See the comparison',
+              'Они решают смежные задачи. Spec-driven-инструменты отлично фиксируют, что должно измениться: спецификации, требования и предложения изменений в повторяемой форме. Deep Work Plan — о том, как агент выполняет работу часами без дрейфа: созданный онбордингом harness, пер-задачные validation gates, выбранные по затронутой поверхности, возобновляемое состояние на диске, обязательный Final Review с проверкой безопасности и инструмент проверки соответствия для самого репозитория. То и другое можно сочетать: спецификация или предложение изменений может питать план. Страница сравнения выкладывает возможности рядом, на условиях каждого инструмента.',
+            linkLabel: 'Посмотреть сравнение',
             linkPath: '/compare',
           },
           {
             id: 'vs-agent-frameworks',
             question:
-              'How is it different from agent workflow frameworks such as BMAD, Superpowers or Get Shit Done?',
+              'Чем он отличается от фреймворков агентных workflows, таких как BMAD, Superpowers или Get Shit Done?',
             answer:
-              'Those frameworks bring strong working styles: roles, principles, test-first steps, verification habits. Deep Work Plan focuses on what stays in the repository and what can be checked: a harness any agent reads cold, task files with acceptance criteria and gates, state that survives a session, a conformance checker with a CI-friendly exit code, and a published measurement of how many instruction bytes each flow loads. It is tool-agnostic by construction and adds no service, provider or secret to the core loop. The comparison page shows where each approach is built in, optional or out of scope.',
-            linkLabel: 'See the comparison',
+              'Эти фреймворки несут сильные стили работы: роли, принципы, шаги «сначала тест», привычки проверки. Deep Work Plan сосредоточен на том, что остаётся в репозитории и что можно проверить: harness, который любой агент читает с холодного старта, файлы задач с критериями приёмки и gates, состояние, переживающее сессию, инструмент проверки соответствия с CI-дружелюбным кодом выхода и опубликованное измерение того, сколько байтов инструкций загружает каждый поток. Он не зависит от инструмента по построению и не добавляет в основной цикл ни сервиса, ни провайдера, ни секрета. Страница сравнения показывает, где в каждом подходе возможности встроены, опциональны или вне рамок.',
+            linkLabel: 'Посмотреть сравнение',
             linkPath: '/compare',
           },
           {
             id: 'vs-native-plan-mode',
-            question: "Why not just use my agent's built-in plan mode?",
+            question:
+              'Почему бы просто не использовать встроенный режим планирования моего агента?',
             answer:
-              "Built-in plan modes are useful and Deep Work Plan builds on the same substrate, the `AGENTS.md` convention and the open Agent Skills standard. The difference is where the plan lives and what enforces it. Native plans usually live outside the repository and expire with the session; Deep Work Plan writes the plan, its state and its evidence into the repository, so another agent or a teammate can continue it, and every task carries an executable gate and a recorded log. You keep using your agent's plan mode for thinking; the methodology adds the durable, verifiable execution loop.",
-            linkLabel: 'See the comparison',
+              'Встроенные режимы планирования полезны, и Deep Work Plan строится на том же основании — соглашении `AGENTS.md` и открытом стандарте Agent Skills. Разница в том, где живёт план и что его обеспечивает. Нативные планы обычно живут вне репозитория и истекают вместе с сессией; Deep Work Plan записывает план, его состояние и его свидетельства в репозиторий, поэтому другой агент или коллега может продолжить его, а каждая задача несёт исполняемый gate и записанный журнал. Режим планирования агента вы продолжаете использовать для обдумывания; методология добавляет долговечный, проверяемый цикл выполнения.',
+            linkLabel: 'Посмотреть сравнение',
             linkPath: '/compare',
           },
         ],
       },
       {
         id: 'adopt',
-        title: 'Adopting it',
+        title: 'Внедрение',
         items: [
           {
             id: 'install',
             question:
-              'What does onboarding write into my repository, and does it touch existing files?',
+              'Что онбординг записывает в мой репозиторий и затрагивает ли он существующие файлы?',
             answer:
-              'Onboarding is non-destructive: it detects an existing `AGENTS.md`, `docs/`, `.agents/` or `CLAUDE.md`, reconciles rather than overwrites, and asks before replacing anything. It writes the `AGENTS.md` index with real commands, a reasoned `docs/` tree, per-module docs, the `.agents/` kit with thin `dwp-*` commands, a gitignored `.dwp/` output area, a verified testing map, and the required local code review (the AI Diff Reviewer skill plus a repo-tailored review extension). It then runs a self-check and the conformance checker so you can see what was produced. A repository onboarded under an earlier version gets a targeted upgrade that changes only what is missing.',
-            linkLabel: 'The adoption endpoint',
+              'Онбординг неразрушителен: он обнаруживает существующие `AGENTS.md`, `docs/`, `.agents/` или `CLAUDE.md`, согласовывает, а не перезаписывает, и спрашивает перед заменой чего-либо. Он записывает индекс `AGENTS.md` с реальными командами, осмысленное дерево `docs/`, документацию по модулям, набор `.agents/` с тонкими командами `dwp-*`, игнорируемую git-ом область вывода `.dwp/`, проверенную карту тестирования и обязательную локальную проверку кода (навык AI Diff Reviewer плюс адаптированное под репозиторий расширение ревью). Затем он запускает самопроверку и инструмент проверки соответствия, чтобы вы увидели, что получилось. Репозиторий, для которого онбординг был выполнен под более ранней версией, получает адресное обновление, меняющее только то, чего не хватает.',
+            linkLabel: 'Точка внедрения',
             linkPath: '/init',
           },
           {
             id: 'cost',
-            question: 'What does it cost, and how is efficiency measured?',
+            question: 'Сколько это стоит и как измеряется эффективность?',
             answer:
-              'The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads, measured by a script committed with the skill and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those; a pre-registered public evaluation is planned to measure outcomes properly.',
-            linkLabel: 'Trust and disclosure',
+              'Методология и навык распространяются под лицензией MIT и бесплатны; в основных потоках нет сервиса, API-ключа и телеметрии. Эффективность сообщается как число байтов инструкций, загружаемых каждым потоком: её измеряет зафиксированный вместе с навыком скрипт и публикует в реестре оценки, причём рост сообщается так же прямо, как и снижение. Процентами токенов или экономией затрат она не сообщается, потому что инвентаризация байтов этого не устанавливает; для корректного измерения результатов запланирована предварительно зарегистрированная публичная оценка.',
+            linkLabel: 'Доверие и раскрытие информации',
             linkPath: '/trust',
           },
         ],
       },
     ],
     stillHaveQuestions: {
-      title: 'Still have a question?',
-      body: 'Open a discussion or an issue on GitHub. Questions that come up repeatedly are added to this page.',
-      ctaLabel: 'Ask on GitHub',
+      title: 'Остался вопрос?',
+      body: 'Откройте обсуждение или issue на GitHub. Вопросы, которые возникают повторно, добавляются на эту страницу.',
+      ctaLabel: 'Спросить на GitHub',
     },
   },
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan compared with the alternatives — Deep Work Plan',
+      title: 'Deep Work Plan в сравнении с альтернативами — Deep Work Plan',
       description:
-        'How Deep Work Plan relates to spec-driven tools, agent workflow frameworks and vendor plan modes: each on its own terms, with sources and a review date.',
+        'Как Deep Work Plan соотносится со spec-driven-инструментами, фреймворками агентных workflows и режимами планирования вендоров: с источниками и датой проверки.',
     },
-    eyebrow: 'Compare',
-    title: 'Deep Work Plan and the alternatives',
+    eyebrow: 'Сравнение',
+    title: 'Deep Work Plan и альтернативы',
     intro:
-      'Pick the right layer for your situation. Each alternative is described on its own terms, every fact traces to its official documentation, and the page says when it was last reviewed. This is a map, not a ranking.',
+      'Выберите подходящий уровень для вашей ситуации. Каждая альтернатива описана на её собственных условиях, каждый факт прослеживается до официальной документации, а страница сообщает дату последней проверки. Это карта, а не рейтинг.',
     howToRead: {
-      title: 'How to read this page',
-      body: 'Three values describe each capability. They say where a capability lives in a tool, not how good the tool is.',
+      title: 'Как читать эту страницу',
+      body: 'Каждую возможность описывают три значения. Они говорят, где возможность живёт в инструменте, а не насколько хорош сам инструмент.',
       values: {
-        builtIn: 'Built in',
-        optional: 'Optional or via extension',
-        notInScope: 'Not in scope',
+        builtIn: 'Встроено',
+        optional: 'Опционально или через расширение',
+        notInScope: 'Вне рамок',
       },
     },
-    reviewedOnLabel: 'Last reviewed',
-    alternativesTitle: 'The alternatives, on their own terms',
-    officialSiteLabel: 'Official site',
+    reviewedOnLabel: 'Последняя проверка',
+    alternativesTitle: 'Альтернативы — на их собственных условиях',
+    officialSiteLabel: 'Официальный сайт',
     categories: {
-      methodology: 'Methodology',
-      sdd: 'Spec-driven development tools',
-      agentFramework: 'Agent workflow frameworks',
-      vendorNative: 'Vendor-native plan modes',
+      methodology: 'Методология',
+      sdd: 'Инструменты spec-driven-разработки',
+      agentFramework: 'Фреймворки агентных workflows',
+      vendorNative: 'Нативные режимы планирования вендоров',
     },
     matrix: {
-      title: 'Capability matrix',
+      title: 'Матрица возможностей',
       caption:
-        'Where each capability lives, per tool. Built in, optional or via extension, or not in scope. Reviewed against official documentation.',
-      capabilityColumn: 'Capability',
+        'Где живёт каждая возможность в каждом инструменте. Встроено, опционально или через расширение, или вне рамок. Проверено по официальной документации.',
+      capabilityColumn: 'Возможность',
     },
     capabilities: {
       toolAgnostic: {
-        label: 'Works with any coding agent',
-        help: 'The same repository files drive Claude Code, Codex, Cursor, Gemini CLI and others.',
+        label: 'Работает с любым агентом разработки',
+        help: 'Одни и те же файлы репозитория работают с Claude Code, Codex, Cursor, Gemini CLI и другими.',
       },
       repoNativeHarness: {
-        label: 'Writes the agent harness into the repository',
-        help: "Instructions, docs, skills and commands live in the repository, not in one tool's settings.",
+        label: 'Записывает harness агента в репозиторий',
+        help: 'Инструкции, документация, навыки и команды живут в репозитории, а не в настройках одного инструмента.',
       },
       taskAcceptanceCriteria: {
-        label: 'Acceptance criteria per task',
-        help: 'Each task states observable conditions for being done.',
+        label: 'Критерии приёмки для каждой задачи',
+        help: 'Каждая задача формулирует наблюдаемые условия готовности.',
       },
       perTaskGates: {
-        label: 'Validation gate per task',
-        help: 'Each task names the commands that must pass, selected from what it touched.',
+        label: 'Validation gate для каждой задачи',
+        help: 'Каждая задача называет команды, которые должны пройти, выбранные по тому, что она затронула.',
       },
       resumableState: {
-        label: 'Resumable state on disk',
-        help: 'Progress survives a session reset and can be picked up by another agent or a teammate.',
+        label: 'Возобновляемое состояние на диске',
+        help: 'Прогресс переживает сброс сессии, и его может подхватить другой агент или коллега.',
       },
       finalReview: {
-        label: 'Mandatory closing review with a security pass',
-        help: 'The plan cannot complete without a security review of the full change set and validation of the final state.',
+        label: 'Обязательное закрывающее ревью с проверкой безопасности',
+        help: 'План не может завершиться без проверки безопасности всего набора изменений и валидации финального состояния.',
       },
       conformanceChecker: {
-        label: 'Executable conformance checker',
-        help: 'A script verifies the repository and its plans against the standard, with a CI-friendly exit code.',
+        label: 'Исполняемая проверка соответствия',
+        help: 'Скрипт сверяет репозиторий и его планы со стандартом и завершается с CI-дружелюбным кодом выхода.',
       },
       instructionBudgetLedger: {
-        label: 'Published instruction-load measurement',
-        help: 'The bytes each flow loads are measured by a committed script and published with their limits.',
+        label: 'Публикуемое измерение загрузки инструкций',
+        help: 'Байты, загружаемые каждым потоком, измеряются зафиксированным в репозитории скриптом и публикуются вместе со своими лимитами.',
       },
       onboardingScaffold: {
-        label: 'Onboarding that scaffolds documentation',
-        help: "A first run writes the repository's agent-facing documentation and kit.",
+        label: 'Онбординг, создающий каркас документации',
+        help: 'Первый запуск записывает документацию репозитория для агентов и его набор.',
       },
       brownfieldSpecs: {
-        label: 'Living specs for existing systems',
-        help: 'Changes are specified as deltas that merge into a growing specification of the system.',
+        label: 'Живые спецификации для существующих систем',
+        help: 'Изменения специфицируются как дельты, сливающиеся в растущую спецификацию системы.',
       },
     },
     alternatives: {
       dwp: {
         name: 'Deep Work Plan',
         whatItDoesWell:
-          'Installs as a skill, onboards the repository into an agent harness and runs long-horizon plans with per-task validation gates, on-disk state and a mandatory Final Review.',
+          'Устанавливается как навык, превращает репозиторий через онбординг в harness агента и выполняет долгосрочные планы с пер-задачными validation gates, состоянием на диске и обязательным Final Review.',
         audience:
-          'Developers and teams who hand multi-session work to any coding agent and need it to finish verified.',
+          'Разработчики и команды, которые передают любому агенту разработки работу на несколько сессий и должны быть уверены, что она завершится проверенной.',
       },
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'Turns a feature into an executable specification through a constitution, a spec, a plan and a task list, driven by slash commands that integrate with more than fifty coding agents.',
+          'Превращает функциональность в исполняемую спецификацию через конституцию, спецификацию, план и список задач; управляется слеш-командами и интегрируется более чем с пятьюдесятью агентами разработки.',
         audience:
-          'Teams that want a repeatable specify, plan, tasks and implement workflow inside the agent they already use.',
+          'Команды, которым нужен повторяемый workflow «специфицируй, планируй, разбивай на задачи, реализуй» внутри уже используемого агента.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'Captures each change as a proposal with delta specs (added, modified, removed) and RFC 2119 requirements with scenarios, then archives them into living specifications.',
+          'Фиксирует каждое изменение как предложение с дельта-спецификациями (добавлено, изменено, удалено) и требованиями RFC 2119 со сценариями, затем архивирует их в живые спецификации.',
         audience:
-          'Teams working on existing systems who want specifications to grow one change at a time.',
+          'Команды, работающие с существующими системами, которым важно, чтобы спецификации росли по одному изменению за раз.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'An agentic IDE and CLI whose specs move from EARS-style requirements to design to tasks, with steering files and hooks that run on editor events.',
+          'Агентная IDE и CLI, где спецификации движутся от требований в стиле EARS к дизайну и задачам, с файлами steering и хуками, срабатывающими на события редактора.',
         audience:
-          'Developers who want spec-driven development built into their editor with AWS-backed tooling.',
+          'Разработчики, которым нужна spec-driven-разработка, встроенная в редактор, с инструментами на базе AWS.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'An agile framework of specialized agent roles (analysis, product, architecture, development, quality) that produces briefs, requirements, architecture documents and story files.',
+          'Гибкий фреймворк из специализированных агентных ролей (анализ, продукт, архитектура, разработка, качество), который производит брифы, требования, документы по архитектуре и файлы историй.',
         audience:
-          'Teams that like role-based ceremonies and want a full agile lifecycle for agent work.',
+          'Команды, которым нравятся ролевые церемонии и которым нужен полный гибкий жизненный цикл агентной работы.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'A skills library and workflow for brainstorming, planning in small test-first steps, executing with subagents and reviewing before completion.',
+          'Библиотека навыков и workflow для брейншторминга, планирования малыми шагами «сначала тест», исполнения через субагентов и ревью до завершения.',
         audience:
-          'Developers who want disciplined test-driven execution inside their coding agent.',
+          'Разработчики, которым нужна дисциплинированная test-driven работа внутри агента разработки.',
       },
       'get-shit-done': {
         name: 'Get Shit Done',
         whatItDoesWell:
-          'A planning system with a .planning directory, requirement ids, phase plans, fresh-context execution and a verification pass against stated must-haves.',
+          'Система планирования с директорией .planning, идентификаторами требований, планами фаз, исполнением на свежем контексте и проверкой против заявленных обязательных условий.',
         audience:
-          'Solo developers and small teams who want context engineering and verification with little ceremony.',
+          'Сольные разработчики и небольшие команды, которым нужны инженерия контекста и проверка с минимумом церемоний.',
       },
       'vendor-native': {
-        name: 'Vendor-native plan modes',
+        name: 'Нативные режимы планирования вендоров',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor and Gemini CLI ship plan modes, instruction files and skills that follow the AGENTS.md and Agent Skills standards.',
+          'Claude Code, Codex, Cursor и Gemini CLI поставляют режимы планирования, файлы инструкций и навыки, следующие стандартам AGENTS.md и Agent Skills.',
         audience:
-          'Anyone who wants planning inside a single agent without adopting a methodology.',
+          'Все, кому нужно планирование внутри одного агента без принятия целой методологии.',
       },
     },
     dwpStrengths: {
-      title: 'What Deep Work Plan brings',
+      title: 'Что приносит Deep Work Plan',
       items: [
         {
-          title: 'Tool-agnostic and repository-native',
-          body: 'The harness and the plan are files in your repository, read by any agent that follows the AGENTS.md and Agent Skills standards. Switching agents does not lose the plan.',
+          title: 'Независимость от инструмента и нативность репозитория',
+          body: 'Harness и план — это файлы в вашем репозитории, которые читает любой агент, следующий стандартам AGENTS.md и Agent Skills. Смена агента не теряет план.',
         },
         {
-          title: 'Validation selected from what each task touched',
-          body: 'Every task declares its touched surface and runs the tests of the changed behavior and its consumers, widening to the full suite when the impact cannot be bounded. Zero selected tests is never a pass.',
+          title: 'Валидация, выбранная по затронутому каждой задачей',
+          body: 'Каждая задача объявляет свою затронутую поверхность и запускает тесты изменённого поведения и его потребителей, расширяясь до полного набора, когда влияние нельзя ограничить. Ноль выбранных тестов никогда не считается прохождением.',
         },
         {
-          title: 'One Final Review with a security pass',
-          body: 'A plan closes with a security review of the accumulated change set, including a required local review of the diff, and a validation of the final state. Critical findings block completion.',
+          title: 'Единый Final Review с проверкой безопасности',
+          body: 'План завершается проверкой безопасности накопленного набора изменений, включая обязательное локальное ревью диффа, и валидацией финального состояния. Критические находки блокируют завершение.',
         },
         {
-          title: 'State that survives sessions and agents',
-          body: 'README checkboxes, task logs, a bounded working index and a machine-readable state file are written at every boundary, so another session or another agent continues from disk. Even an interrupted plan creation is recoverable.',
+          title: 'Состояние, переживающее сессии и агентов',
+          body: 'Чекбоксы README, журналы задач, ограниченный рабочий индекс и машиночитаемый файл состояния записываются на каждой границе, поэтому другая сессия или другой агент продолжает с диска. Восстановимо даже прерванное создание плана.',
         },
         {
-          title: 'A conformance checker for the repository itself',
-          body: 'A read-only script verifies the harness and every plan against the specification, understands both plan lifecycles and exits with a CI-friendly code.',
+          title: 'Инструмент проверки соответствия для самого репозитория',
+          body: 'Скрипт только для чтения сверяет harness и каждый план со спецификацией, понимает оба жизненных цикла плана и завершается CI-дружелюбным кодом.',
         },
         {
-          title: 'Instruction load measured and published',
-          body: 'A committed script measures how many bytes each flow loads; the results, including the increases, are published as bytes, never as token or cost percentages.',
+          title: 'Измеренная и опубликованная загрузка инструкций',
+          body: 'Зафиксированный в репозитории скрипт измеряет, сколько байтов загружает каждый поток; результаты, включая рост, публикуются в байтах и никогда — в процентах токенов или стоимости.',
         },
       ],
     },
     honestLimits: {
-      title: 'Honest limits',
-      body: 'Deep Work Plan has no living or delta specification mechanism; OpenSpec and similar tools are stronger there. No independent benchmark of the methodology exists yet; a pre-registered public evaluation is planned. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes.',
+      title: 'Честные ограничения',
+      body: 'В Deep Work Plan нет механизма живых или дельта-спецификаций; OpenSpec и подобные инструменты там сильнее. Независимого бенчмарка методологии пока не существует; запланирована предварительно зарегистрированная публичная оценка. Реестр загрузки инструкций измеряет загруженные байты, а не токены, стоимость или результаты.',
     },
     correction: {
-      title: 'Help us keep this accurate',
-      body: 'This page is reviewed on the date shown and corrected on request. If a description of your tool is out of date or incomplete, open an issue and we will fix it.',
-      ctaLabel: 'Open an issue',
+      title: 'Помогите нам сохранять точность',
+      body: 'Эта страница проверяется в указанную дату и исправляется по запросу. Если описание вашего инструмента устарело или неполно, откройте issue, и мы его поправим.',
+      ctaLabel: 'Открыть issue',
     },
-    sourcesTitle: 'Sources',
+    sourcesTitle: 'Источники',
   },
 
   trustPage: {

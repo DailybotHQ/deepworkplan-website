@@ -31,10 +31,10 @@ export const ko: SiteTranslations = {
     developers: '개발자',
     privacy: '개인정보 보호',
     github: 'GitHub',
-    faq: 'FAQ',
-    compare: 'Compare',
-    resources: 'Resources',
-    resourcesDesc: 'Examples, comparison, FAQ and trust',
+    faq: '자주 묻는 질문',
+    compare: '비교',
+    resources: '리소스',
+    resourcesDesc: '예시, 비교, 자주 묻는 질문, 신뢰',
     repo: {
       label: '소스 코드',
       website: '웹사이트 저장소',
@@ -69,7 +69,7 @@ export const ko: SiteTranslations = {
       getStarted: '시작하기',
       project: '프로젝트',
       connect: '연결',
-      learn: 'Learn',
+      learn: '더 알아보기',
     },
   },
 
@@ -780,356 +780,356 @@ export const ko: SiteTranslations = {
 
   faqPage: {
     meta: {
-      title: 'Frequently asked questions — Deep Work Plan',
+      title: '자주 묻는 질문 — Deep Work Plan',
       description:
-        'Answers to the questions people ask about Deep Work Plan: what it does, how gates and resumption work, how it compares with other tools, and how to adopt it.',
+        'Deep Work Plan이 실제로 무엇을 하는지, 검증 게이트와 세션 재개가 어떻게 작동하는지, 다른 개발 도구들과 어떻게 다른지, 그리고 어떻게 채택하기 시작하는지 — 사람들이 자주 묻는 질문에 대한 답을 이 한 페이지에 모았습니다.',
     },
     eyebrow: 'FAQ',
-    title: 'Frequently asked questions',
+    title: '자주 묻는 질문',
     intro:
-      'Short answers to what people ask most about Deep Work Plan, each with a link to the page that goes deeper.',
+      'Deep Work Plan에 대해 가장 자주 묻는 질문에 짧게 답합니다. 각 항목에는 더 깊이 들어가는 페이지로 이어지는 링크가 함께 있습니다.',
     groups: [
       {
         id: 'what',
-        title: 'What Deep Work Plan is',
+        title: 'Deep Work Plan이란 무엇인가',
         items: [
           {
             id: 'what-is-it',
-            question: 'What does Deep Work Plan actually do?',
+            question: 'Deep Work Plan은 실제로 무엇을 하나요?',
             answer:
-              'Deep Work Plan turns a repository into a structured environment where a coding agent can execute long work reliably. It installs as an agent skill, onboards the repository once (an `AGENTS.md` index, a `docs/` tree, a `.agents/` kit of skills and commands, a gitignored `.dwp/` output area), and from then on any goal becomes a plan: atomic tasks, each with acceptance criteria and a validation gate, executed one at a time, committed as they pass, and resumable from disk by any agent. The plan closes with a Final Review that audits security and validates the final state. The methodology is MIT-licensed and works with any coding agent that reads a repository.',
-            linkLabel: 'Read the methodology',
+              'Deep Work Plan은 리포지토리를 코딩 에이전트가 긴 작업을 안정적으로 수행할 수 있는 구조화된 환경으로 바꿉니다. 에이전트 스킬로 설치되어 리포지토리를 한 번 온보딩하고(`AGENTS.md` 인덱스, `docs/` 트리, 스킬과 명령의 `.agents/` 키트, gitignore된 `.dwp/` 출력 영역), 그다음부터는 모든 목표가 계획이 됩니다: 인수 기준과 검증 게이트를 각각 갖춘 원자적 작업들이 한 번에 하나씩 실행되고, 통과할 때마다 커밋되며, 어떤 에이전트든 디스크에서 다시 이어받을 수 있습니다. 계획은 보안을 감사하고 최종 상태를 검증하는 Final Review로 닫힙니다. 방법론은 MIT 라이선스이며 리포지토리를 읽을 수 있는 어떤 코딩 에이전트와도 작동합니다.',
+            linkLabel: '방법론 읽기',
             linkPath: '/methodology',
           },
           {
             id: 'who-is-it-for',
-            question: 'Who is it for?',
+            question: '누구를 위한 것인가요?',
             answer:
-              'Developers and teams who hand real, multi-step work to coding agents and want it to finish. It fits when a task spans more than one session, more than one file family, or more than one agent; when a teammate must be able to pick up where an agent stopped; or when "done" must mean "validated", not "the agent said so". A one-line fix does not need a plan, and the methodology says so: its proportional-rigor rule recommends an inline goal, criteria and gate instead.',
-            linkLabel: 'Quickstart',
+              '코딩 에이전트에게 실제 여러 단계로 이루어진 작업을 맡기고 그것을 끝까지 마치기를 원하는 개발자와 팀이 대상입니다. 작업이 세션 하나를 넘거나, 파일군 하나를 넘거나, 에이전트 하나를 넘을 때; 팀원이 에이전트가 멈춘 지점을 이어받을 수 있어야 할 때; 또는 "완료"가 "에이전트가 그렇다고 말했다"가 아니라 "검증됨"을 의미해야 할 때 잘 맞습니다. 한 줄 수정에는 계획이 필요 없으며, 방법론도 그렇게 말합니다: 비례적 엄격도 규칙은 대신 인라인 목표, 기준, 게이트를 권장합니다.',
+            linkLabel: '빠른 시작',
             linkPath: '/quickstart',
           },
           {
             id: 'is-it-a-tool',
-            question: 'Is it a tool, a framework or a methodology?',
+            question: '도구인가요, 프레임워크인가요, 방법론인가요?',
             answer:
-              'A methodology packaged as an installable skill. There is no server, no account, no proprietary format and no runtime beyond the coding agent you already use. What gets installed is instructions the agent reads, a small set of shell scripts for context detection and conformance checking, and the conventions your repository adopts. Everything the plan produces is Markdown and JSON in your repository, readable without any tool.',
-            linkLabel: 'Read the specification',
+              '설치 가능한 스킬로 포장된 방법론입니다. 서버도, 계정도, 독점 형식도 없으며, 이미 쓰고 있는 코딩 에이전트 너머의 런타임도 없습니다. 설치되는 것은 에이전트가 읽는 지시사항, 컨텍스트 감지와 적합성 검사를 위한 작은 셸 스크립트 모음, 그리고 리포지토리가 채택하는 관례입니다. 계획이 만들어내는 모든 것은 리포지토리 안의 Markdown과 JSON이며, 어떤 도구 없이도 읽을 수 있습니다.',
+            linkLabel: '스펙 읽기',
             linkPath: '/spec',
           },
           {
             id: 'which-agents',
-            question: 'Which coding agents does it work with?',
+            question: '어떤 코딩 에이전트에서 작동하나요?',
             answer:
-              "Any agent that reads repository files. The skill follows the open Agent Skills standard and the `AGENTS.md` convention, so Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot and others pick it up through their normal skill and instruction loading. The methodology's own evaluation shows a plan started by one vendor's agent and resumed by another's in both directions. Installation coverage and behavioral evidence are listed per agent in the compatibility matrix, and the two are never conflated.",
-            linkLabel: 'Browse the kit',
+              '리포지토리 파일을 읽을 수 있는 에이전트라면 어느 것이든 됩니다. 스킬은 개방형 Agent Skills 표준과 `AGENTS.md` 관례를 따르므로, Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot 등이 평소의 스킬·지시사항 로딩을 통해 이를 가져옵니다. 방법론 자체 평가에서는 한 벤더의 에이전트가 시작한 계획을 다른 벤더의 에이전트가 양방향으로 이어받는 것이 확인되었습니다. 설치 지원 범위와 행동 증거는 호환성 매트릭스에 에이전트별로 나열되며, 둘은 결코 혼동되지 않습니다.',
+            linkLabel: '키트 둘러보기',
             linkPath: '/kit',
           },
         ],
       },
       {
         id: 'how',
-        title: 'How a plan runs',
+        title: '계획이 실행되는 방식',
         items: [
           {
             id: 'gates',
             question:
-              'How are the validation gates implemented? Do they need human sign-off?',
+              '검증 게이트는 어떻게 구현되나요? 사람의 승인이 필요한가요?',
             answer:
-              "They are executable assertions the agent runs itself. Human sign-off bookends the run: a person approves the plan before execution and reviews the final diff at pull-request time; execution in between is autonomous. Every task names concrete commands, typically the repository's own quality gate, selected from the task's touched surface: the tests of the changed behavior and its consumers, widening to the full suite when the change is shared or cannot be bounded. A task is marked done only when those commands exit successfully, and tasks that change behavior must extend the tests. On failure the task is marked blocked and the agent stops.",
-            linkLabel: 'The core loop',
+              '게이트는 에이전트가 스스로 실행하는 실행 가능한 단언입니다. 사람의 승인은 실행의 양 끝에 있습니다: 실행 전에 사람이 계획을 승인하고, 풀 리퀘스트 시점에 최종 diff를 검토하며, 그 사이의 실행은 자율적입니다. 모든 작업은 구체적인 명령을 명시하는데, 대개 리포지토리 자체의 품질 게이트이며 작업의 변경 표면에서 선택됩니다: 변경된 동작과 그 소비자의 테스트, 그리고 변경이 공유되거나 범위를 한정할 수 없을 때는 전체 스위트로 넓어집니다. 작업은 그 명령들이 성공적으로 종료될 때만 완료로 표시되며, 동작을 변경하는 작업은 테스트를 확장해야 합니다. 실패하면 작업은 차단됨으로 표시되고 에이전트는 멈춥니다.',
+            linkLabel: '핵심 루프',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'stale-plan',
             question:
-              'How does the plan avoid going stale when people change the code between runs?',
+              '실행 사이에 사람들이 코드를 바꾸면 계획이 낡아버리는 일은 어떻게 막나요?',
             answer:
-              'On three fronts. Tasks are written as behavior, not edits: an acceptance criterion says what the system must do, so a renamed file or a swapped implementation does not invalidate it. Every gate re-runs against the repository as it is now, so a broken assumption fails loudly at the next run instead of drifting silently, and that failure is the cue to refine. And keeping documentation in sync is part of the work: a task that changes behavior also updates the docs and the agent-facing kit that describe it, inside its own gate. Every run should leave the repository more agent-ready than it found it.',
-            linkLabel: 'Read the methodology',
+              '세 가지 방면에서 그렇습니다. 작업은 편집이 아니라 동작으로 작성됩니다: 인수 기준은 시스템이 무엇을 해야 하는지를 말하므로, 파일 이름이 바뀌거나 구현이 교체되어도 무효가 되지 않습니다. 모든 게이트는 지금 현재의 리포지토리를 기준으로 다시 실행되므로, 깨진 가정은 조용히 표류하는 대신 다음 실행에서 요란하게 실패하며, 그 실패가 다듬을 신호입니다. 그리고 문서를 동기화 상태로 유지하는 것도 작업의 일부입니다: 동작을 변경하는 작업은 그것을 설명하는 문서와 에이전트 대면 키트를 자기 게이트 안에서 함께 갱신합니다. 모든 실행은 리포지토리를 처음 발견했을 때보다 에이전트에 더 준비된 상태로 남겨야 합니다.',
+            linkLabel: '방법론 읽기',
             linkPath: '/methodology',
           },
           {
             id: 'edit-mid-run',
             question:
-              'Can I change the plan mid-run without losing completed work?',
+              '실행 중간에 계획을 바꿔도 완료된 작업을 잃지 않을 수 있나요?',
             answer:
-              'Yes; refining a partially executed plan is a first-class move. Task definitions and execution state are kept separate: the plan is a checklist on disk plus a small state file, so what is done stays recorded independently of the task text. When a task turns out to be wrong, the agent marks it blocked and stops rather than pushing through. You then edit, reorder, split or drop the tasks that have not run, while completed tasks stay completed. Resuming rebuilds state from disk and the actual repository and re-runs the gates that matter, so nothing that shifted underneath slips by.',
-            linkLabel: 'The core loop',
+              '가능합니다; 부분적으로 실행된 계획을 다듬는 것은 일급 기능입니다. 작업 정의와 실행 상태는 분리되어 보관됩니다: 계획은 디스크의 체크리스트에 작은 상태 파일이 더해진 것이므로, 완료된 것은 작업 텍스트와 무관하게 기록으로 남습니다. 작업이 틀린 것으로 밝혀지면 에이전트는 억지로 밀고 나가는 대신 그것을 차단됨으로 표시하고 멈춥니다. 그런 다음 아직 실행되지 않은 작업을 편집, 재정렬, 분할, 제거하면 되고, 완료된 작업은 완료된 채로 남습니다. 재개는 디스크와 실제 리포지토리에서 상태를 재구성하고 중요한 게이트를 다시 실행하므로, 그 밑에서 바뀐 것이 빠져나가지 않습니다.',
+            linkLabel: '핵심 루프',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'drift',
             question:
-              'Does it keep checking the work against the plan, or is the plan an upfront thing?',
+              '작업을 계획에 대비해 계속 검사하나요, 아니면 계획은 처음 한 번뿐인가요?',
             answer:
-              'The plan is a continuous check. The agent works one small task at a time and must validate before moving on, so it can wander one step, not three. Every task carries acceptance criteria plus the exact commands that prove them, and progress is written into the repository as it goes, with a status per task, so drift becomes visible to you, to the next session and to the next agent. A plan is not finished until everything validates, including the Final Review. The honest caveat: the methodology cannot stop an agent from writing a weak acceptance criterion in the first place; it makes drift loud instead of silent.',
-            linkLabel: 'The core loop',
+              '계획은 연속적인 검사입니다. 에이전트는 한 번에 작은 작업 하나씩 진행하고 넘어가기 전에 검증해야 하므로, 세 걸음이 아니라 한 걸음만 벗어날 수 있습니다. 모든 작업은 인수 기준과 그것을 증명하는 정확한 명령을 담고 있고, 진행 상황은 작업별 상태와 함께 리포지토리에 기록되므로, 표류는 당신에게도, 다음 세션에도, 다음 에이전트에게도 보이게 됩니다. Final Review를 포함해 모든 것이 검증되기 전까지 계획은 끝난 것이 아닙니다. 정직한 단서: 방법론은 에이전트가 애초에 약한 인수 기준을 쓰는 것까지는 막을 수 없습니다; 대신 표류를 조용한 것이 아니라 요란한 것으로 만듭니다.',
+            linkLabel: '핵심 루프',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'plan-evolution',
             question:
-              'Is the plan generated once and maintained by hand, or does it evolve with the code?',
+              '계획은 한 번 생성되어 손으로 유지되나요, 아니면 코드와 함께 발전하나요?',
             answer:
-              "Neither. It is generated once from a goal and then maintained as part of the work. The plan is deliberately not rewritten from code diffs, because a spec that chases the code becomes a lagging mirror, which is the drift the methodology exists to kill. It evolves on purpose: gates re-run against the current repository, a failing gate triggers a refinement, and the agent performs that refinement during the run while you approve up front and review at the end. Documentation and tests evolve alongside the code by construction, because updating them is inside each task's gate.",
-            linkLabel: 'Read the methodology',
+              '둘 다 아닙니다. 목표에서 한 번 생성된 뒤 작업의 일부로 유지됩니다. 계획을 코드 diff에서 다시 쓰지 않는 것은 의도된 것입니다. 코드를 쫓는 스펙은 뒤처진 거울이 되는데, 그것이야말로 이 방법론이 없애기 위해 존재하는 표류이기 때문입니다. 계획은 의도적으로 발전합니다: 게이트는 현재 리포지토리를 기준으로 다시 실행되고, 실패하는 게이트는 다듬기를 유발하며, 에이전트가 실행 중에 그 다듬기를 수행하는 동안 당신은 앞에서 승인하고 끝에서 검토합니다. 문서와 테스트는 구조상 코드와 함께 발전합니다. 갱신이 각 작업의 게이트 안에 있기 때문입니다.',
+            linkLabel: '방법론 읽기',
             linkPath: '/methodology',
           },
           {
             id: 'resume',
-            question: 'What happens if the session dies halfway?',
+            question: '세션이 중간에 끊기면 어떻게 되나요?',
             answer:
-              "Progress lives on disk, not in the chat. The README checkboxes, each task's log, a bounded working index and a machine-readable state file are updated at every task boundary, and the state file records a checkpoint before any planned pause. A fresh session, or a different agent, reads that compact index, reconciles it with the repository and git history, and continues at the first incomplete task without redoing finished work. Even an interrupted plan creation is recoverable: the plan's identity and intended task list are written before any task file, so a half-created plan can be completed or discarded rather than guessed at.",
-            linkLabel: 'The core loop',
+              '진행 상황은 대화가 아니라 디스크에 살아 있습니다. README 체크박스, 각 작업의 로그, 범위가 한정된 작업 인덱스, 기계 판독 가능한 상태 파일이 모든 작업 경계에서 갱신되며, 상태 파일은 계획된 일시정지 전에 체크포인트를 기록합니다. 새 세션이나 다른 에이전트는 그 간결한 인덱스를 읽고 리포지토리 및 git 히스토리와 조정한 뒤, 끝낸 작업을 다시 하지 않고 완료되지 않은 첫 작업부터 계속합니다. 계획 생성이 중단된 경우조차 복구 가능합니다: 계획의 정체성과 의도된 작업 목록은 어떤 작업 파일보다 먼저 기록되므로, 반쯤 만들어진 계획은 추측하는 대신 완성하거나 폐기할 수 있습니다.',
+            linkLabel: '핵심 루프',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'final-review',
-            question: 'What is the Final Review?',
+            question: 'Final Review란 무엇인가요?',
             answer:
-              "The single mandatory closing task of every plan. In order: a security pass over the plan's full accumulated change set, including a required local review of the diff by the AI Diff Reviewer skill, with critical findings blocking completion until fixed or explicitly accepted; final-state validation, meaning the repository's complete applicable test, lint, type-check and format suites on the final code; and a reconciliation of the skills decisions each task recorded. The agent then reports deliverables, evidence and limitations, and offers an Executive Report once, generating it only if you ask.",
-            linkLabel: 'The specification',
+              '모든 계획의 단 하나뿐인 필수 마무리 작업입니다. 순서대로: 계획이 쌓아온 전체 변경 집합에 대한 보안 점검 — AI Diff Reviewer 스킬에 의한 로컬 diff 리뷰가 필수로 포함되며, 치명적 발견은 수정되거나 명시적으로 수용될 때까지 완료를 막습니다; 최종 상태 검증 — 최종 코드에 대한 리포지토리의 해당되는 전체 테스트, lint, 타입 검사, 포맷 스위트를 의미합니다; 그리고 각 작업이 기록한 스킬 결정의 조정. 그런 다음 에이전트는 산출물, 증거, 한계를 보고하고, 임원 보고서를 한 번만 제안하며, 요청할 때만 생성합니다.',
+            linkLabel: '스펙',
             linkPath: '/spec/dwp-specification',
           },
         ],
       },
       {
         id: 'compare',
-        title: 'How it compares',
+        title: '비교',
         items: [
           {
             id: 'vs-sdd-tools',
             question:
-              'How is it different from spec-driven tools such as Spec Kit, OpenSpec or Kiro?',
+              'Spec Kit, OpenSpec, Kiro 같은 스펙 주도 도구와 어떻게 다른가요?',
             answer:
-              "They solve adjacent problems. Spec-driven tools are excellent at capturing what should change: specifications, requirements and change proposals in a repeatable shape. Deep Work Plan is about how an agent executes for hours without drifting: the onboarded harness, per-task validation gates selected from the touched surface, on-disk resumable state, a mandatory Final Review with a security pass, and a conformance checker for the repository itself. The two can be combined, with a spec or change proposal feeding a plan. The comparison page lays the capabilities side by side, on each tool's own terms.",
-            linkLabel: 'See the comparison',
+              '이들은 인접한 문제를 풉니다. 스펙 주도 도구는 무엇이 바뀌어야 하는지 포착하는 데 탁월합니다: 반복 가능한 형태의 스펙, 요구사항, 변경 제안. Deep Work Plan은 에이전트가 표류 없이 수 시간을 실행하는 방법에 관한 것입니다: 온보딩된 하니스, 변경 표면에서 선택되는 작업별 검증 게이트, 디스크 위의 재개 가능한 상태, 보안 점검을 동반하는 필수 Final Review, 그리고 리포지토리 자체를 위한 적합성 검사기. 둘은 결합할 수 있으며, 스펙이나 변경 제안이 계획에 공급됩니다. 비교 페이지는 각 도구의 관점에서 기능을 나란히 놓습니다.',
+            linkLabel: '비교 보기',
             linkPath: '/compare',
           },
           {
             id: 'vs-agent-frameworks',
             question:
-              'How is it different from agent workflow frameworks such as BMAD, Superpowers or Get Shit Done?',
+              'BMAD, Superpowers, Get Shit Done 같은 에이전트 워크플로 프레임워크와 어떻게 다른가요?',
             answer:
-              'Those frameworks bring strong working styles: roles, principles, test-first steps, verification habits. Deep Work Plan focuses on what stays in the repository and what can be checked: a harness any agent reads cold, task files with acceptance criteria and gates, state that survives a session, a conformance checker with a CI-friendly exit code, and a published measurement of how many instruction bytes each flow loads. It is tool-agnostic by construction and adds no service, provider or secret to the core loop. The comparison page shows where each approach is built in, optional or out of scope.',
-            linkLabel: 'See the comparison',
+              '그 프레임워크들은 강력한 작업 방식을 가져옵니다: 역할, 원칙, 테스트 우선 단계, 검증 습관. Deep Work Plan은 리포지토리에 무엇이 남고 무엇을 검사할 수 있는지에 집중합니다: 어떤 에이전트든 처음 보고 읽을 수 있는 하니스, 인수 기준과 게이트를 갖춘 작업 파일, 세션을 넘어 살아남는 상태, CI 친화적 종료 코드를 가진 적합성 검사기, 그리고 각 플로우가 몇 바이트의 지시사항을 로드하는지에 대한 공개 측정. 구조상 도구 비종속이며 핵심 루프에 서비스, 공급자, 비밀을 추가하지 않습니다. 비교 페이지는 각 접근 방식에서 무엇이 내장이고, 선택이고, 범위 밖인지 보여줍니다.',
+            linkLabel: '비교 보기',
             linkPath: '/compare',
           },
           {
             id: 'vs-native-plan-mode',
-            question: "Why not just use my agent's built-in plan mode?",
+            question: '그냥 에이전트에 내장된 계획 모드를 쓰면 안 되나요?',
             answer:
-              "Built-in plan modes are useful and Deep Work Plan builds on the same substrate, the `AGENTS.md` convention and the open Agent Skills standard. The difference is where the plan lives and what enforces it. Native plans usually live outside the repository and expire with the session; Deep Work Plan writes the plan, its state and its evidence into the repository, so another agent or a teammate can continue it, and every task carries an executable gate and a recorded log. You keep using your agent's plan mode for thinking; the methodology adds the durable, verifiable execution loop.",
-            linkLabel: 'See the comparison',
+              '내장 계획 모드도 유용하며, Deep Work Plan은 같은 기반 — `AGENTS.md` 관례와 개방형 Agent Skills 표준 — 위에 세워집니다. 차이는 계획이 어디에 사는지, 무엇이 그것을 강제하는지입니다. 네이티브 계획은 보통 리포지토리 밖에 살며 세션과 함께 만료됩니다; Deep Work Plan은 계획과 그 상태, 증거를 리포지토리 안에 기록하므로 다른 에이전트나 팀원이 그것을 이어갈 수 있고, 모든 작업은 실행 가능한 게이트와 기록된 로그를 담습니다. 사고에는 계속 에이전트의 계획 모드를 쓰시면 됩니다; 방법론은 지속적이고 검증 가능한 실행 루프를 더합니다.',
+            linkLabel: '비교 보기',
             linkPath: '/compare',
           },
         ],
       },
       {
         id: 'adopt',
-        title: 'Adopting it',
+        title: '채택하기',
         items: [
           {
             id: 'install',
             question:
-              'What does onboarding write into my repository, and does it touch existing files?',
+              '온보딩은 내 리포지토리에 무엇을 기록하나요? 기존 파일을 건드리나요?',
             answer:
-              'Onboarding is non-destructive: it detects an existing `AGENTS.md`, `docs/`, `.agents/` or `CLAUDE.md`, reconciles rather than overwrites, and asks before replacing anything. It writes the `AGENTS.md` index with real commands, a reasoned `docs/` tree, per-module docs, the `.agents/` kit with thin `dwp-*` commands, a gitignored `.dwp/` output area, a verified testing map, and the required local code review (the AI Diff Reviewer skill plus a repo-tailored review extension). It then runs a self-check and the conformance checker so you can see what was produced. A repository onboarded under an earlier version gets a targeted upgrade that changes only what is missing.',
-            linkLabel: 'The adoption endpoint',
+              '온보딩은 비파괴적입니다: 기존의 `AGENTS.md`, `docs/`, `.agents/`, `CLAUDE.md`를 감지하고 덮어쓰는 대신 조정하며, 무언가를 교체하기 전에 묻습니다. 실제 명령을 담은 `AGENTS.md` 인덱스, 이유가 담긴 `docs/` 트리, 모듈별 문서, 얇은 `dwp-*` 명령의 `.agents/` 키트, gitignore된 `.dwp/` 출력 영역, 검증된 테스팅 맵, 그리고 필수 로컬 코드 리뷰(AI Diff Reviewer 스킬 더하기 리포지토리 맞춤 리뷰 확장)를 작성합니다. 그런 다음 자기 점검과 적합성 검사기를 실행해 무엇이 만들어졌는지 볼 수 있게 합니다. 이전 버전에서 온보딩된 리포지토리는 빠진 부분만 바꾸는 표적 업그레이드를 받습니다.',
+            linkLabel: '채택 엔드포인트',
             linkPath: '/init',
           },
           {
             id: 'cost',
-            question: 'What does it cost, and how is efficiency measured?',
+            question: '비용은 얼마인가요? 효율은 어떻게 측정되나요?',
             answer:
-              'The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads, measured by a script committed with the skill and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those; a pre-registered public evaluation is planned to measure outcomes properly.',
-            linkLabel: 'Trust and disclosure',
+              '방법론과 스킬은 MIT 라이선스이며 무료입니다; 핵심 플로우에는 서비스도, API 키도, 텔레메트리도 없습니다. 효율은 각 플로우가 로드하는 지시사항 바이트 수로 보고됩니다. 스킬과 함께 커밋된 스크립트가 측정하고 평가 원장에 공개하며, 증가는 감소만큼 평범하게 보고됩니다. 바이트 목록은 그런 것을 입증하지 못하므로 토큰 백분율이나 비용 절감으로 보고하지 않습니다; 결과를 제대로 측정하기 위한 사전 등록된 공개 평가가 계획되어 있습니다.',
+            linkLabel: '신뢰와 공개',
             linkPath: '/trust',
           },
         ],
       },
     ],
     stillHaveQuestions: {
-      title: 'Still have a question?',
-      body: 'Open a discussion or an issue on GitHub. Questions that come up repeatedly are added to this page.',
-      ctaLabel: 'Ask on GitHub',
+      title: '아직 궁금한 점이 있나요?',
+      body: 'GitHub에서 토론이나 이슈를 열어 주세요. 반복해서 나오는 질문은 이 페이지에 추가됩니다.',
+      ctaLabel: 'GitHub에서 묻기',
     },
   },
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan compared with the alternatives — Deep Work Plan',
+      title: 'Deep Work Plan과 대안들의 비교 — Deep Work Plan',
       description:
-        'How Deep Work Plan relates to spec-driven tools, agent workflow frameworks and vendor plan modes: each on its own terms, with sources and a review date.',
+        'Deep Work Plan이 스펙 주도 개발 도구, 에이전트 워크플로 프레임워크, 벤더 네이티브 계획 모드와 각각 어떻게 관련되는지 설명합니다. 모든 사실은 각 도구의 공식 문서로 거슬러 추적되고, 출처와 마지막 검토 날짜를 함께 밝힙니다.',
     },
-    eyebrow: 'Compare',
-    title: 'Deep Work Plan and the alternatives',
+    eyebrow: '비교',
+    title: 'Deep Work Plan과 대안들',
     intro:
-      'Pick the right layer for your situation. Each alternative is described on its own terms, every fact traces to its official documentation, and the page says when it was last reviewed. This is a map, not a ranking.',
+      '상황에 맞는 계층을 고르세요. 각 대안은 그 자신의 관점에서 설명되고, 모든 사실은 공식 문서로 거슬러 추적되며, 이 페이지는 마지막으로 검토된 시점을 밝힙니다. 이것은 순위표가 아니라 지도입니다.',
     howToRead: {
-      title: 'How to read this page',
-      body: 'Three values describe each capability. They say where a capability lives in a tool, not how good the tool is.',
+      title: '이 페이지 읽는 법',
+      body: '세 가지 값이 각 기능을 설명합니다. 이 값들은 도구가 얼마나 좋은지가 아니라 기능이 도구의 어디에 있는지를 말합니다.',
       values: {
-        builtIn: 'Built in',
-        optional: 'Optional or via extension',
-        notInScope: 'Not in scope',
+        builtIn: '내장',
+        optional: '선택 사항 또는 확장 경유',
+        notInScope: '범위 외',
       },
     },
-    reviewedOnLabel: 'Last reviewed',
-    alternativesTitle: 'The alternatives, on their own terms',
-    officialSiteLabel: 'Official site',
+    reviewedOnLabel: '마지막 검토',
+    alternativesTitle: '대안들, 각자의 관점에서',
+    officialSiteLabel: '공식 사이트',
     categories: {
-      methodology: 'Methodology',
-      sdd: 'Spec-driven development tools',
-      agentFramework: 'Agent workflow frameworks',
-      vendorNative: 'Vendor-native plan modes',
+      methodology: '방법론',
+      sdd: '스펙 주도 개발 도구',
+      agentFramework: '에이전트 워크플로 프레임워크',
+      vendorNative: '벤더 네이티브 계획 모드',
     },
     matrix: {
-      title: 'Capability matrix',
+      title: '기능 매트릭스',
       caption:
-        'Where each capability lives, per tool. Built in, optional or via extension, or not in scope. Reviewed against official documentation.',
-      capabilityColumn: 'Capability',
+        '도구별로 각 기능이 어디에 있는지. 내장, 선택 사항 또는 확장 경유, 범위 외. 공식 문서를 기준으로 검토했습니다.',
+      capabilityColumn: '기능',
     },
     capabilities: {
       toolAgnostic: {
-        label: 'Works with any coding agent',
-        help: 'The same repository files drive Claude Code, Codex, Cursor, Gemini CLI and others.',
+        label: '어떤 코딩 에이전트와도 작동',
+        help: '같은 리포지토리 파일이 Claude Code, Codex, Cursor, Gemini CLI 등을 구동합니다.',
       },
       repoNativeHarness: {
-        label: 'Writes the agent harness into the repository',
-        help: "Instructions, docs, skills and commands live in the repository, not in one tool's settings.",
+        label: '에이전트 하니스를 리포지토리에 기록',
+        help: '지시사항, 문서, 스킬, 명령이 한 도구의 설정이 아니라 리포지토리에 살아 있습니다.',
       },
       taskAcceptanceCriteria: {
-        label: 'Acceptance criteria per task',
-        help: 'Each task states observable conditions for being done.',
+        label: '작업별 인수 기준',
+        help: '각 작업이 완료의 관찰 가능한 조건을 명시합니다.',
       },
       perTaskGates: {
-        label: 'Validation gate per task',
-        help: 'Each task names the commands that must pass, selected from what it touched.',
+        label: '작업별 검증 게이트',
+        help: '각 작업이 자기가 건드린 것에서 선택된, 통과해야 하는 명령을 명시합니다.',
       },
       resumableState: {
-        label: 'Resumable state on disk',
-        help: 'Progress survives a session reset and can be picked up by another agent or a teammate.',
+        label: '디스크 위의 재개 가능한 상태',
+        help: '진행 상황이 세션 초기화를 넘어 살아남고 다른 에이전트나 팀원이 이어받을 수 있습니다.',
       },
       finalReview: {
-        label: 'Mandatory closing review with a security pass',
-        help: 'The plan cannot complete without a security review of the full change set and validation of the final state.',
+        label: '보안 점검을 동반하는 필수 마무리 리뷰',
+        help: '전체 변경 집합에 대한 보안 검토와 최종 상태 검증 없이는 계획이 완료될 수 없습니다.',
       },
       conformanceChecker: {
-        label: 'Executable conformance checker',
-        help: 'A script verifies the repository and its plans against the standard, with a CI-friendly exit code.',
+        label: '실행 가능한 적합성 검사기',
+        help: '스크립트가 리포지토리와 그 계획을 표준에 대비해 검증하며, CI 친화적 종료 코드를 냅니다.',
       },
       instructionBudgetLedger: {
-        label: 'Published instruction-load measurement',
-        help: 'The bytes each flow loads are measured by a committed script and published with their limits.',
+        label: '공개된 지시사항 로드량 측정',
+        help: '각 플로우가 로드하는 바이트가 커밋된 스크립트로 측정되어 그 한계와 함께 공개됩니다.',
       },
       onboardingScaffold: {
-        label: 'Onboarding that scaffolds documentation',
-        help: "A first run writes the repository's agent-facing documentation and kit.",
+        label: '문서를 스캐폴딩하는 온보딩',
+        help: '첫 실행이 리포지토리의 에이전트 대면 문서와 키트를 작성합니다.',
       },
       brownfieldSpecs: {
-        label: 'Living specs for existing systems',
-        help: 'Changes are specified as deltas that merge into a growing specification of the system.',
+        label: '기존 시스템을 위한 살아있는 스펙',
+        help: '변경이 시스템의 커져 가는 스펙으로 병합되는 델타로 명세됩니다.',
       },
     },
     alternatives: {
       dwp: {
         name: 'Deep Work Plan',
         whatItDoesWell:
-          'Installs as a skill, onboards the repository into an agent harness and runs long-horizon plans with per-task validation gates, on-disk state and a mandatory Final Review.',
+          '스킬로 설치되어 리포지토리를 에이전트 하니스로 온보딩하고, 작업별 검증 게이트, 디스크 상태, 필수 Final Review와 함께 장기 계획을 실행합니다.',
         audience:
-          'Developers and teams who hand multi-session work to any coding agent and need it to finish verified.',
+          '여러 세션에 걸친 작업을 어떤 코딩 에이전트에게든 맡기고 검증된 채로 완료되기를 필요로 하는 개발자와 팀.',
       },
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'Turns a feature into an executable specification through a constitution, a spec, a plan and a task list, driven by slash commands that integrate with more than fifty coding agents.',
+          '컨스티튜션, 스펙, 계획, 작업 목록을 통해 기능을 실행 가능한 스펙으로 바꾸며, 50개가 넘는 코딩 에이전트와 통합되는 슬래시 명령으로 구동됩니다.',
         audience:
-          'Teams that want a repeatable specify, plan, tasks and implement workflow inside the agent they already use.',
+          '이미 쓰고 있는 에이전트 안에서 반복 가능한 스펙 작성, 계획, 작업화, 구현 워크플로를 원하는 팀.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'Captures each change as a proposal with delta specs (added, modified, removed) and RFC 2119 requirements with scenarios, then archives them into living specifications.',
+          '각 변경을 델타 스펙(추가, 수정, 제거)과 시나리오를 갖춘 RFC 2119 요구사항의 제안으로 포착한 뒤, 살아있는 스펙으로 보관합니다.',
         audience:
-          'Teams working on existing systems who want specifications to grow one change at a time.',
+          '기존 시스템에서 스펙이 변경 한 번에 한 걸음씩 자라나기를 원하는 팀.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'An agentic IDE and CLI whose specs move from EARS-style requirements to design to tasks, with steering files and hooks that run on editor events.',
+          'EARS 스타일 요구사항에서 설계로, 다시 작업으로 이동하는 스펙을 갖춘 에이전트형 IDE와 CLI이며, 편집기 이벤트에서 실행되는 스티어링 파일과 훅을 제공합니다.',
         audience:
-          'Developers who want spec-driven development built into their editor with AWS-backed tooling.',
+          'AWS 지원 도구와 함께 편집기에 스펙 주도 개발이 내장되기를 원하는 개발자.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'An agile framework of specialized agent roles (analysis, product, architecture, development, quality) that produces briefs, requirements, architecture documents and story files.',
+          '전문화된 에이전트 역할(분석, 제품, 아키텍처, 개발, 품질)이 브리프, 요구사항, 아키텍처 문서, 스토리 파일을 만들어 내는 애자일 프레임워크입니다.',
         audience:
-          'Teams that like role-based ceremonies and want a full agile lifecycle for agent work.',
+          '역할 기반 세레모니를 선호하고 에이전트 작업을 위한 완전한 애자일 라이프사이클을 원하는 팀.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'A skills library and workflow for brainstorming, planning in small test-first steps, executing with subagents and reviewing before completion.',
+          '브레인스토밍, 작은 테스트 우선 단계로 계획하기, 서브에이전트로 실행하기, 완료 전에 검토하기 위한 스킬 라이브러리와 워크플로.',
         audience:
-          'Developers who want disciplined test-driven execution inside their coding agent.',
+          '코딩 에이전트 안에서 규율 있는 테스트 주도 실행을 원하는 개발자.',
       },
       'get-shit-done': {
         name: 'Get Shit Done',
         whatItDoesWell:
-          'A planning system with a .planning directory, requirement ids, phase plans, fresh-context execution and a verification pass against stated must-haves.',
+          '.planning 디렉터리, 요구사항 id, 단계 계획, 새 컨텍스트 실행, 명시된 필수 사항에 대한 검증 패스를 갖춘 계획 시스템.',
         audience:
-          'Solo developers and small teams who want context engineering and verification with little ceremony.',
+          '적은 세레모니로 컨텍스트 엔지니어링과 검증을 원하는 1인 개발자와 소규모 팀.',
       },
       'vendor-native': {
-        name: 'Vendor-native plan modes',
+        name: '벤더 네이티브 계획 모드',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor and Gemini CLI ship plan modes, instruction files and skills that follow the AGENTS.md and Agent Skills standards.',
+          'Claude Code, Codex, Cursor, Gemini CLI가 AGENTS.md와 Agent Skills 표준을 따르는 계획 모드, 지시사항 파일, 스킬을 제공합니다.',
         audience:
-          'Anyone who wants planning inside a single agent without adopting a methodology.',
+          '방법론을 채택하지 않고 단일 에이전트 안에서 계획을 원하는 모든 사람.',
       },
     },
     dwpStrengths: {
-      title: 'What Deep Work Plan brings',
+      title: 'Deep Work Plan이 가져오는 것',
       items: [
         {
-          title: 'Tool-agnostic and repository-native',
-          body: 'The harness and the plan are files in your repository, read by any agent that follows the AGENTS.md and Agent Skills standards. Switching agents does not lose the plan.',
+          title: '도구 비종속이며 리포지토리 네이티브',
+          body: '하니스와 계획은 리포지토리 안의 파일이며, AGENTS.md와 Agent Skills 표준을 따르는 어떤 에이전트든 읽습니다. 에이전트를 바꿔도 계획을 잃지 않습니다.',
         },
         {
-          title: 'Validation selected from what each task touched',
-          body: 'Every task declares its touched surface and runs the tests of the changed behavior and its consumers, widening to the full suite when the impact cannot be bounded. Zero selected tests is never a pass.',
+          title: '각 작업이 건드린 것에서 선택되는 검증',
+          body: '모든 작업은 자신의 변경 표면을 선언하고 변경된 동작과 그 소비자의 테스트를 실행하며, 영향을 한정할 수 없을 때는 전체 스위트로 넓힙니다. 선택된 테스트가 0개인 경우는 결코 통과가 아닙니다.',
         },
         {
-          title: 'One Final Review with a security pass',
-          body: 'A plan closes with a security review of the accumulated change set, including a required local review of the diff, and a validation of the final state. Critical findings block completion.',
+          title: '보안 점검을 동반하는 하나의 Final Review',
+          body: '계획은 누적된 변경 집합에 대한 보안 검토 — 필수 로컬 diff 리뷰 포함 — 와 최종 상태 검증으로 닫힙니다. 치명적 발견은 완료를 막습니다.',
         },
         {
-          title: 'State that survives sessions and agents',
-          body: 'README checkboxes, task logs, a bounded working index and a machine-readable state file are written at every boundary, so another session or another agent continues from disk. Even an interrupted plan creation is recoverable.',
+          title: '세션과 에이전트를 넘어 살아남는 상태',
+          body: 'README 체크박스, 작업 로그, 범위가 한정된 작업 인덱스, 기계 판독 가능한 상태 파일이 모든 경계에서 기록되므로, 다른 세션이나 다른 에이전트가 디스크에서 이어갑니다. 계획 생성이 중단된 경우조차 복구 가능합니다.',
         },
         {
-          title: 'A conformance checker for the repository itself',
-          body: 'A read-only script verifies the harness and every plan against the specification, understands both plan lifecycles and exits with a CI-friendly code.',
+          title: '리포지토리 자체를 위한 적합성 검사기',
+          body: '읽기 전용 스크립트가 하니스와 모든 계획을 스펙에 대비해 검증하고, 두 가지 계획 수명 주기를 모두 이해하며, CI 친화적 코드로 종료합니다.',
         },
         {
-          title: 'Instruction load measured and published',
-          body: 'A committed script measures how many bytes each flow loads; the results, including the increases, are published as bytes, never as token or cost percentages.',
+          title: '측정되고 공개되는 지시사항 로드량',
+          body: '커밋된 스크립트가 각 플로우가 로드하는 바이트를 측정합니다; 증가를 포함한 결과는 바이트로 공개되며, 토큰이나 비용 백분율로는 결코 공개되지 않습니다.',
         },
       ],
     },
     honestLimits: {
-      title: 'Honest limits',
-      body: 'Deep Work Plan has no living or delta specification mechanism; OpenSpec and similar tools are stronger there. No independent benchmark of the methodology exists yet; a pre-registered public evaluation is planned. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes.',
+      title: '정직한 한계',
+      body: 'Deep Work Plan에는 살아있는 스펙이나 델타 스펙 메커니즘이 없습니다; 그 부분에서는 OpenSpec과 유사한 도구가 더 강합니다. 방법론의 독립적인 벤치마크는 아직 존재하지 않으며, 사전 등록된 공개 평가가 계획되어 있습니다. 지시사항 로드 원장은 로드된 바이트를 측정하며, 토큰, 비용, 결과가 아닙니다.',
     },
     correction: {
-      title: 'Help us keep this accurate',
-      body: 'This page is reviewed on the date shown and corrected on request. If a description of your tool is out of date or incomplete, open an issue and we will fix it.',
-      ctaLabel: 'Open an issue',
+      title: '정확성을 유지하도록 도와주세요',
+      body: '이 페이지는 표시된 날짜에 검토되었으며 요청에 따라 수정됩니다. 당신의 도구 설명이 오래되었거나 불완전하다면 이슈를 열어 주세요. 수정하겠습니다.',
+      ctaLabel: '이슈 열기',
     },
-    sourcesTitle: 'Sources',
+    sourcesTitle: '출처',
   },
 
   trustPage: {

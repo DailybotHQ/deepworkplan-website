@@ -32,9 +32,9 @@ export const id: SiteTranslations = {
     privacy: 'Privasi',
     github: 'GitHub',
     faq: 'FAQ',
-    compare: 'Compare',
-    resources: 'Resources',
-    resourcesDesc: 'Examples, comparison, FAQ and trust',
+    compare: 'Perbandingan',
+    resources: 'Sumber daya',
+    resourcesDesc: 'Contoh, perbandingan, FAQ, dan kepercayaan',
     repo: {
       label: 'Kode sumber',
       website: 'Repositori situs web',
@@ -69,7 +69,7 @@ export const id: SiteTranslations = {
       getStarted: 'Mulai',
       project: 'Proyek',
       connect: 'Terhubung',
-      learn: 'Learn',
+      learn: 'Pelajari',
     },
   },
 
@@ -783,356 +783,358 @@ export const id: SiteTranslations = {
 
   faqPage: {
     meta: {
-      title: 'Frequently asked questions — Deep Work Plan',
+      title: 'Pertanyaan yang sering diajukan — Deep Work Plan',
       description:
-        'Answers to the questions people ask about Deep Work Plan: what it does, how gates and resumption work, how it compares with other tools, and how to adopt it.',
+        'Jawaban atas pertanyaan seputar Deep Work Plan: apa yang dilakukannya, cara kerja gerbang dan pelanjutan, perbandingan dengan alat lain, dan cara adopsinya.',
     },
     eyebrow: 'FAQ',
-    title: 'Frequently asked questions',
+    title: 'Pertanyaan yang sering diajukan',
     intro:
-      'Short answers to what people ask most about Deep Work Plan, each with a link to the page that goes deeper.',
+      'Jawaban singkat untuk hal yang paling sering ditanyakan tentang Deep Work Plan, masing-masing dengan tautan ke halaman yang membahas lebih dalam.',
     groups: [
       {
         id: 'what',
-        title: 'What Deep Work Plan is',
+        title: 'Apa itu Deep Work Plan',
         items: [
           {
             id: 'what-is-it',
-            question: 'What does Deep Work Plan actually do?',
+            question: 'Apa yang sebenarnya dilakukan Deep Work Plan?',
             answer:
-              'Deep Work Plan turns a repository into a structured environment where a coding agent can execute long work reliably. It installs as an agent skill, onboards the repository once (an `AGENTS.md` index, a `docs/` tree, a `.agents/` kit of skills and commands, a gitignored `.dwp/` output area), and from then on any goal becomes a plan: atomic tasks, each with acceptance criteria and a validation gate, executed one at a time, committed as they pass, and resumable from disk by any agent. The plan closes with a Final Review that audits security and validates the final state. The methodology is MIT-licensed and works with any coding agent that reads a repository.',
-            linkLabel: 'Read the methodology',
+              'Deep Work Plan mengubah sebuah repositori menjadi lingkungan terstruktur tempat coding agent dapat mengeksekusi pekerjaan panjang dengan andal. Ia terpasang sebagai skill agent, meng-onboard repositori satu kali (indeks `AGENTS.md`, pohon `docs/`, kit skill dan command `.agents/`, area keluaran `.dwp/` yang di-gitignore), dan setelah itu setiap tujuan menjadi rencana: tugas atomik, masing-masing dengan kriteria penerimaan dan gerbang verifikasi, dieksekusi satu per satu, di-commit saat lulus, dan dapat dilanjutkan dari disk oleh agent mana pun. Rencana ditutup dengan Final Review yang mengaudit keamanan dan memvalidasi status akhir. Metodologinya berlisensi MIT dan bekerja dengan coding agent mana pun yang membaca repositori.',
+            linkLabel: 'Baca metodologinya',
             linkPath: '/methodology',
           },
           {
             id: 'who-is-it-for',
-            question: 'Who is it for?',
+            question: 'Untuk siapa ini?',
             answer:
-              'Developers and teams who hand real, multi-step work to coding agents and want it to finish. It fits when a task spans more than one session, more than one file family, or more than one agent; when a teammate must be able to pick up where an agent stopped; or when "done" must mean "validated", not "the agent said so". A one-line fix does not need a plan, and the methodology says so: its proportional-rigor rule recommends an inline goal, criteria and gate instead.',
-            linkLabel: 'Quickstart',
+              'Pengembang dan tim yang menyerahkan pekerjaan nyata dan multilangkah kepada coding agent dan ingin pekerjaan itu selesai. Cocok ketika sebuah tugas melintasi lebih dari satu sesi, lebih dari satu kelompok file, atau lebih dari satu agent; ketika rekan tim harus bisa melanjutkan dari tempat agent berhenti; atau ketika "selesai" harus berarti "tervalidasi", bukan "kata agent begitu". Perbaikan satu baris tidak memerlukan rencana, dan metodologinya mengatakannya sendiri: aturan rigor proporsionalnya menyarankan tujuan, kriteria, dan gerbang inline sebagai gantinya.',
+            linkLabel: 'Mulai Cepat',
             linkPath: '/quickstart',
           },
           {
             id: 'is-it-a-tool',
-            question: 'Is it a tool, a framework or a methodology?',
+            question: 'Apakah ini tool, framework, atau metodologi?',
             answer:
-              'A methodology packaged as an installable skill. There is no server, no account, no proprietary format and no runtime beyond the coding agent you already use. What gets installed is instructions the agent reads, a small set of shell scripts for context detection and conformance checking, and the conventions your repository adopts. Everything the plan produces is Markdown and JSON in your repository, readable without any tool.',
-            linkLabel: 'Read the specification',
+              'Sebuah metodologi yang dikemas sebagai skill yang dapat dipasang. Tidak ada server, tidak ada akun, tidak ada format proprietary, dan tidak ada runtime selain coding agent yang sudah Anda pakai. Yang terpasang adalah instruksi yang dibaca agent, sejumlah kecil shell script untuk deteksi konteks dan pemeriksaan konformansi, serta konvensi yang diadopsi repositori Anda. Semua yang dihasilkan rencana berupa Markdown dan JSON di repositori Anda, dapat dibaca tanpa tool apa pun.',
+            linkLabel: 'Baca spesifikasinya',
             linkPath: '/spec',
           },
           {
             id: 'which-agents',
-            question: 'Which coding agents does it work with?',
+            question: 'Dengan coding agent apa saja ia bekerja?',
             answer:
-              "Any agent that reads repository files. The skill follows the open Agent Skills standard and the `AGENTS.md` convention, so Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot and others pick it up through their normal skill and instruction loading. The methodology's own evaluation shows a plan started by one vendor's agent and resumed by another's in both directions. Installation coverage and behavioral evidence are listed per agent in the compatibility matrix, and the two are never conflated.",
-            linkLabel: 'Browse the kit',
+              'Agent mana pun yang membaca file repositori. Skill ini mengikuti standar Agent Skills terbuka dan konvensi `AGENTS.md`, sehingga Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot, dan lainnya memuatnya melalui pemuatan skill dan instruksi normal mereka. Evaluasi milik metodologi ini sendiri menunjukkan sebuah rencana yang dimulai oleh agent dari satu vendor dan dilanjutkan oleh agent vendor lain, di kedua arah. Cakupan instalasi dan bukti perilaku didaftar per agent dalam matriks kompatibilitas, dan keduanya tidak pernah dicampuradukkan.',
+            linkLabel: 'Telusuri kit',
             linkPath: '/kit',
           },
         ],
       },
       {
         id: 'how',
-        title: 'How a plan runs',
+        title: 'Bagaimana sebuah rencana berjalan',
         items: [
           {
             id: 'gates',
             question:
-              'How are the validation gates implemented? Do they need human sign-off?',
+              'Bagaimana gerbang verifikasi diimplementasikan? Apakah memerlukan persetujuan manusia?',
             answer:
-              "They are executable assertions the agent runs itself. Human sign-off bookends the run: a person approves the plan before execution and reviews the final diff at pull-request time; execution in between is autonomous. Every task names concrete commands, typically the repository's own quality gate, selected from the task's touched surface: the tests of the changed behavior and its consumers, widening to the full suite when the change is shared or cannot be bounded. A task is marked done only when those commands exit successfully, and tasks that change behavior must extend the tests. On failure the task is marked blocked and the agent stops.",
-            linkLabel: 'The core loop',
+              'Gerbang itu adalah asersi yang dapat dieksekusi dan dijalankan sendiri oleh agent. Persetujuan manusia mengapit jalannya rencana: seorang manusia menyetujui rencana sebelum eksekusi dan meninjau diff akhir saat pull request; eksekusi di antaranya berjalan otonom. Setiap tugas menyebutkan command konkret, biasanya gerbang kualitas milik repositori itu sendiri, yang dipilih dari permukaan yang disentuh tugas: test dari perilaku yang berubah beserta konsumennya, diperluas ke seluruh suite ketika perubahan bersifat shared atau tidak bisa dibatasi. Sebuah tugas ditandai selesai hanya ketika command itu keluar dengan sukses, dan tugas yang mengubah perilaku wajib memperluas test. Saat gagal, tugas ditandai terblokir dan agent berhenti.',
+            linkLabel: 'Loop inti',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'stale-plan',
             question:
-              'How does the plan avoid going stale when people change the code between runs?',
+              'Bagaimana rencana menghindari keusangan ketika orang mengubah kode di antara eksekusi?',
             answer:
-              'On three fronts. Tasks are written as behavior, not edits: an acceptance criterion says what the system must do, so a renamed file or a swapped implementation does not invalidate it. Every gate re-runs against the repository as it is now, so a broken assumption fails loudly at the next run instead of drifting silently, and that failure is the cue to refine. And keeping documentation in sync is part of the work: a task that changes behavior also updates the docs and the agent-facing kit that describe it, inside its own gate. Every run should leave the repository more agent-ready than it found it.',
-            linkLabel: 'Read the methodology',
+              'Di tiga front. Tugas ditulis sebagai perilaku, bukan editan: sebuah kriteria penerimaan menyatakan apa yang harus dilakukan sistem, sehingga file yang diganti nama atau implementasi yang ditukar tidak membatalkannya. Setiap gerbang dijalankan ulang terhadap repositori apa adanya saat ini, sehingga asumsi yang rusak gagal keras pada eksekusi berikutnya alih-alih menyimpang diam-diam, dan kegagalan itulah isyarat untuk menyempurnakan. Menjaga dokumentasi tetap sinkron juga bagian dari pekerjaan: tugas yang mengubah perilaku turut memperbarui docs dan kit yang menghadap agent yang mendeskripsikannya, di dalam gerbangnya sendiri. Setiap eksekusi semestinya meninggalkan repositori lebih siap dihadapi agent daripada saat ia menemukannya.',
+            linkLabel: 'Baca metodologinya',
             linkPath: '/methodology',
           },
           {
             id: 'edit-mid-run',
             question:
-              'Can I change the plan mid-run without losing completed work?',
+              'Bisakah saya mengubah rencana di tengah eksekusi tanpa kehilangan pekerjaan yang sudah selesai?',
             answer:
-              'Yes; refining a partially executed plan is a first-class move. Task definitions and execution state are kept separate: the plan is a checklist on disk plus a small state file, so what is done stays recorded independently of the task text. When a task turns out to be wrong, the agent marks it blocked and stops rather than pushing through. You then edit, reorder, split or drop the tasks that have not run, while completed tasks stay completed. Resuming rebuilds state from disk and the actual repository and re-runs the gates that matter, so nothing that shifted underneath slips by.',
-            linkLabel: 'The core loop',
+              'Bisa; menyempurnakan rencana yang telah dieksekusi sebagian adalah langkah kelas satu. Definisi tugas dan status eksekusi disimpan terpisah: rencana berupa checklist di disk plus berkas status kecil, sehingga apa yang sudah selesai tetap tercatat terlepas dari teks tugasnya. Ketika sebuah tugas ternyata salah, agent menandainya terblokir dan berhenti alih-alih memaksakan jalan. Anda kemudian mengedit, mengurutkan ulang, memecah, atau menggugurkan tugas yang belum berjalan, sementara tugas yang selesai tetap selesai. Melanjutkan membangun ulang status dari disk dan repositori yang sebenarnya serta menjalankan ulang gerbang yang relevan, sehingga tidak ada pergeseran di bawah permukaan yang lolos begitu saja.',
+            linkLabel: 'Loop inti',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'drift',
             question:
-              'Does it keep checking the work against the plan, or is the plan an upfront thing?',
+              'Apakah ia terus memeriksa pekerjaan terhadap rencana, atau apakah rencana hanya urusan di awal?',
             answer:
-              'The plan is a continuous check. The agent works one small task at a time and must validate before moving on, so it can wander one step, not three. Every task carries acceptance criteria plus the exact commands that prove them, and progress is written into the repository as it goes, with a status per task, so drift becomes visible to you, to the next session and to the next agent. A plan is not finished until everything validates, including the Final Review. The honest caveat: the methodology cannot stop an agent from writing a weak acceptance criterion in the first place; it makes drift loud instead of silent.',
-            linkLabel: 'The core loop',
+              'Rencana adalah pemeriksaan berkelanjutan. Agent mengerjakan satu tugas kecil dalam satu waktu dan harus memvalidasi sebelum melanjutkan, sehingga ia bisa melenceng satu langkah, bukan tiga. Setiap tugas membawa kriteria penerimaan plus command persis yang membuktikannya, dan kemajuan ditulis ke repositori seiring berjalannya waktu, dengan status per tugas, sehingga penyimpangan menjadi terlihat oleh Anda, oleh sesi berikutnya, dan oleh agent berikutnya. Sebuah rencana belum selesai sampai semuanya tervalidasi, termasuk Final Review. Catatan yang jujur: metodologi tidak bisa menghentikan agent menulis kriteria penerimaan yang lemah sejak awal; ia menjadikan penyimpangan nyaring alih-alih senyap.',
+            linkLabel: 'Loop inti',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'plan-evolution',
             question:
-              'Is the plan generated once and maintained by hand, or does it evolve with the code?',
+              'Apakah rencana dibuat sekali lalu dirawat secara manual, atau apakah ia berevolusi bersama kode?',
             answer:
-              "Neither. It is generated once from a goal and then maintained as part of the work. The plan is deliberately not rewritten from code diffs, because a spec that chases the code becomes a lagging mirror, which is the drift the methodology exists to kill. It evolves on purpose: gates re-run against the current repository, a failing gate triggers a refinement, and the agent performs that refinement during the run while you approve up front and review at the end. Documentation and tests evolve alongside the code by construction, because updating them is inside each task's gate.",
-            linkLabel: 'Read the methodology',
+              'Bukan keduanya. Ia dibuat sekali dari sebuah tujuan, lalu dirawat sebagai bagian dari pekerjaan. Rencana sengaja tidak ditulis ulang dari diff kode, karena spesifikasi yang mengejar kode menjadi cermin yang tertinggal, dan penyimpangan itulah yang ingin dibasmi oleh metodologi ini. Ia berevolusi dengan sengaja: gerbang dijalankan ulang terhadap repositori saat ini, gerbang yang gagal memicu penyempurnaan, dan agent melakukan penyempurnaan itu selama eksekusi sementara Anda menyetujui di awal dan meninjau di akhir. Dokumentasi dan test berevolusi beriringan dengan kode sebagai akibat konstruksinya, karena memperbaruinya berada di dalam gerbang setiap tugas.',
+            linkLabel: 'Baca metodologinya',
             linkPath: '/methodology',
           },
           {
             id: 'resume',
-            question: 'What happens if the session dies halfway?',
+            question: 'Apa yang terjadi jika sesi mati di tengah jalan?',
             answer:
-              "Progress lives on disk, not in the chat. The README checkboxes, each task's log, a bounded working index and a machine-readable state file are updated at every task boundary, and the state file records a checkpoint before any planned pause. A fresh session, or a different agent, reads that compact index, reconciles it with the repository and git history, and continues at the first incomplete task without redoing finished work. Even an interrupted plan creation is recoverable: the plan's identity and intended task list are written before any task file, so a half-created plan can be completed or discarded rather than guessed at.",
-            linkLabel: 'The core loop',
+              'Kemajuan hidup di disk, bukan di chat. Centang README, log setiap tugas, indeks kerja yang terbatas, dan berkas status terbaca mesin diperbarui di setiap batas tugas, dan berkas status mencatat checkpoint sebelum setiap jeda yang direncanakan. Sesi baru, atau agent yang berbeda, membaca indeks ringkas itu, merekonsiliasikannya dengan repositori dan riwayat git, lalu melanjutkan dari tugas pertama yang belum selesai tanpa mengulang pekerjaan yang sudah beres. Bahkan pembuatan rencana yang terputus bisa dipulihkan: identitas rencana dan daftar tugas yang dimaksud ditulis sebelum file tugas mana pun, sehingga rencana yang setengah jadi bisa diselesaikan atau dibuang alih-alih ditebak-nebak.',
+            linkLabel: 'Loop inti',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'final-review',
-            question: 'What is the Final Review?',
+            question: 'Apa itu Final Review?',
             answer:
-              "The single mandatory closing task of every plan. In order: a security pass over the plan's full accumulated change set, including a required local review of the diff by the AI Diff Reviewer skill, with critical findings blocking completion until fixed or explicitly accepted; final-state validation, meaning the repository's complete applicable test, lint, type-check and format suites on the final code; and a reconciliation of the skills decisions each task recorded. The agent then reports deliverables, evidence and limitations, and offers an Executive Report once, generating it only if you ask.",
-            linkLabel: 'The specification',
+              'Satu-satunya tugas penutup wajib dari setiap rencana. Secara berurutan: pemeriksaan keamanan atas seluruh kumpulan perubahan yang terkumpul dalam rencana, termasuk tinjauan lokal atas diff yang diwajibkan oleh skill AI Diff Reviewer, dengan temuan kritis memblokir penyelesaian sampai diperbaiki atau diterima secara eksplisit; validasi status akhir, artinya seluruh suite test, lint, type-check, dan format yang berlaku milik repositori pada kode akhir; dan rekonsiliasi keputusan skills yang dicatat setiap tugas. Agent kemudian melaporkan deliverable, bukti, dan keterbatasan, lalu menawarkan Executive Report satu kali, menghasilkannya hanya jika Anda meminta.',
+            linkLabel: 'Spesifikasinya',
             linkPath: '/spec/dwp-specification',
           },
         ],
       },
       {
         id: 'compare',
-        title: 'How it compares',
+        title: 'Perbandingannya dengan alat lain',
         items: [
           {
             id: 'vs-sdd-tools',
             question:
-              'How is it different from spec-driven tools such as Spec Kit, OpenSpec or Kiro?',
+              'Apa bedanya dengan tool spec-driven seperti Spec Kit, OpenSpec, atau Kiro?',
             answer:
-              "They solve adjacent problems. Spec-driven tools are excellent at capturing what should change: specifications, requirements and change proposals in a repeatable shape. Deep Work Plan is about how an agent executes for hours without drifting: the onboarded harness, per-task validation gates selected from the touched surface, on-disk resumable state, a mandatory Final Review with a security pass, and a conformance checker for the repository itself. The two can be combined, with a spec or change proposal feeding a plan. The comparison page lays the capabilities side by side, on each tool's own terms.",
-            linkLabel: 'See the comparison',
+              'Keduanya memecahkan masalah yang berdampingan. Tool spec-driven unggul dalam menangkap apa yang harus berubah: spesifikasi, kebutuhan, dan proposal perubahan dalam bentuk yang dapat diulang. Deep Work Plan soal bagaimana sebuah agent mengeksekusi berjam-jam tanpa menyimpang: harness hasil onboarding, gerbang verifikasi per tugas yang dipilih dari permukaan yang disentuh, status yang dapat dilanjutkan di disk, Final Review wajib dengan pemeriksaan keamanan, dan pemeriksa konformansi untuk repositorinya sendiri. Keduanya bisa digabungkan, dengan spesifikasi atau proposal perubahan yang menjadi masukan sebuah rencana. Halaman perbandingan menyandingkan kapabilitasnya berdampingan, menurut istilah masing-masing tool.',
+            linkLabel: 'Lihat perbandingannya',
             linkPath: '/compare',
           },
           {
             id: 'vs-agent-frameworks',
             question:
-              'How is it different from agent workflow frameworks such as BMAD, Superpowers or Get Shit Done?',
+              'Apa bedanya dengan framework alur kerja agent seperti BMAD, Superpowers, atau Get Shit Done?',
             answer:
-              'Those frameworks bring strong working styles: roles, principles, test-first steps, verification habits. Deep Work Plan focuses on what stays in the repository and what can be checked: a harness any agent reads cold, task files with acceptance criteria and gates, state that survives a session, a conformance checker with a CI-friendly exit code, and a published measurement of how many instruction bytes each flow loads. It is tool-agnostic by construction and adds no service, provider or secret to the core loop. The comparison page shows where each approach is built in, optional or out of scope.',
-            linkLabel: 'See the comparison',
+              'Framework-framework itu membawa gaya kerja yang kuat: peran, prinsip, langkah test-first, dan kebiasaan verifikasi. Deep Work Plan berfokus pada apa yang tinggal di repositori dan apa yang bisa diperiksa: harness yang bisa dibaca agent mana pun dari nol, file tugas dengan kriteria penerimaan dan gerbang, status yang bertahan dari sesi, pemeriksa konformansi dengan exit code yang ramah CI, dan pengukuran terpublikasi atas berapa byte instruksi yang dimuat setiap alur. Ia agnostik terhadap tool menurut konstruksinya dan tidak menambahkan service, provider, atau secret ke core loop. Halaman perbandingan menunjukkan di mana setiap pendekatan bersifat bawaan, opsional, atau di luar cakupan.',
+            linkLabel: 'Lihat perbandingannya',
             linkPath: '/compare',
           },
           {
             id: 'vs-native-plan-mode',
-            question: "Why not just use my agent's built-in plan mode?",
+            question:
+              'Mengapa tidak sekadar memakai mode rencana bawaan agent saya?',
             answer:
-              "Built-in plan modes are useful and Deep Work Plan builds on the same substrate, the `AGENTS.md` convention and the open Agent Skills standard. The difference is where the plan lives and what enforces it. Native plans usually live outside the repository and expire with the session; Deep Work Plan writes the plan, its state and its evidence into the repository, so another agent or a teammate can continue it, and every task carries an executable gate and a recorded log. You keep using your agent's plan mode for thinking; the methodology adds the durable, verifiable execution loop.",
-            linkLabel: 'See the comparison',
+              'Mode rencana bawaan berguna, dan Deep Work Plan membangun di atas substrat yang sama, konvensi `AGENTS.md` dan standar Agent Skills terbuka. Bedanya ada pada tempat rencana hidup dan apa yang menegakkannya. Rencana native biasanya hidup di luar repositori dan kedaluwarsa bersama sesi; Deep Work Plan menulis rencana, statusnya, dan buktinya ke dalam repositori, sehingga agent lain atau rekan tim bisa melanjutkannya, dan setiap tugas membawa gerbang yang dapat dieksekusi serta log yang tercatat. Anda tetap memakai mode rencana agent Anda untuk berpikir; metodologinya menambahkan loop eksekusi yang tahan lama dan dapat diverifikasi.',
+            linkLabel: 'Lihat perbandingannya',
             linkPath: '/compare',
           },
         ],
       },
       {
         id: 'adopt',
-        title: 'Adopting it',
+        title: 'Mengadopsinya',
         items: [
           {
             id: 'install',
             question:
-              'What does onboarding write into my repository, and does it touch existing files?',
+              'Apa yang ditulis onboarding ke repositori saya, dan apakah ia menyentuh file yang sudah ada?',
             answer:
-              'Onboarding is non-destructive: it detects an existing `AGENTS.md`, `docs/`, `.agents/` or `CLAUDE.md`, reconciles rather than overwrites, and asks before replacing anything. It writes the `AGENTS.md` index with real commands, a reasoned `docs/` tree, per-module docs, the `.agents/` kit with thin `dwp-*` commands, a gitignored `.dwp/` output area, a verified testing map, and the required local code review (the AI Diff Reviewer skill plus a repo-tailored review extension). It then runs a self-check and the conformance checker so you can see what was produced. A repository onboarded under an earlier version gets a targeted upgrade that changes only what is missing.',
-            linkLabel: 'The adoption endpoint',
+              'Onboarding bersifat non-destruktif: ia mendeteksi `AGENTS.md`, `docs/`, `.agents/`, atau `CLAUDE.md` yang sudah ada, merekonsiliasi alih-alih menimpa, dan bertanya sebelum mengganti apa pun. Ia menulis indeks `AGENTS.md` dengan command nyata, pohon `docs/` yang beralasan, dokumentasi per modul, kit `.agents/` dengan command `dwp-*` yang tipis, area keluaran `.dwp/` yang di-gitignore, peta pengujian yang terverifikasi, dan tinjauan kode lokal yang diwajibkan (skill AI Diff Reviewer plus ekstensi review yang disesuaikan repo). Ia kemudian menjalankan self-check dan pemeriksa konformansi agar Anda bisa melihat apa yang dihasilkan. Repositori yang di-onboard di bawah versi sebelumnya mendapat upgrade tertarget yang hanya mengubah apa yang kurang.',
+            linkLabel: 'Endpoint adopsi',
             linkPath: '/init',
           },
           {
             id: 'cost',
-            question: 'What does it cost, and how is efficiency measured?',
+            question: 'Berapa biayanya, dan bagaimana efisiensi diukur?',
             answer:
-              'The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads, measured by a script committed with the skill and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those; a pre-registered public evaluation is planned to measure outcomes properly.',
-            linkLabel: 'Trust and disclosure',
+              'Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur, diukur oleh script yang di-commit bersama skill dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu; evaluasi publik yang praregistrasi direncanakan untuk mengukur hasilnya secara semestinya.',
+            linkLabel: 'Kepercayaan dan pengungkapan',
             linkPath: '/trust',
           },
         ],
       },
     ],
     stillHaveQuestions: {
-      title: 'Still have a question?',
-      body: 'Open a discussion or an issue on GitHub. Questions that come up repeatedly are added to this page.',
-      ctaLabel: 'Ask on GitHub',
+      title: 'Masih punya pertanyaan?',
+      body: 'Buka diskusi atau issue di GitHub. Pertanyaan yang muncul berulang kali ditambahkan ke halaman ini.',
+      ctaLabel: 'Tanya di GitHub',
     },
   },
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan compared with the alternatives — Deep Work Plan',
+      title:
+        'Deep Work Plan dibandingkan dengan alternatifnya — Deep Work Plan',
       description:
-        'How Deep Work Plan relates to spec-driven tools, agent workflow frameworks and vendor plan modes: each on its own terms, with sources and a review date.',
+        'Relasi Deep Work Plan dengan tool spec-driven, framework agent, dan mode rencana vendor: masing-masing menurut istilahnya, dengan sumber dan tanggal tinjauan.',
     },
-    eyebrow: 'Compare',
-    title: 'Deep Work Plan and the alternatives',
+    eyebrow: 'Perbandingan',
+    title: 'Deep Work Plan dan alternatifnya',
     intro:
-      'Pick the right layer for your situation. Each alternative is described on its own terms, every fact traces to its official documentation, and the page says when it was last reviewed. This is a map, not a ranking.',
+      'Pilih lapisan yang tepat untuk situasi Anda. Setiap alternatif dideskripsikan menurut istilahnya sendiri, setiap fakta merunut ke dokumentasi resminya, dan halaman ini mencantumkan kapan terakhir ia ditinjau. Ini adalah peta, bukan peringkat.',
     howToRead: {
-      title: 'How to read this page',
-      body: 'Three values describe each capability. They say where a capability lives in a tool, not how good the tool is.',
+      title: 'Cara membaca halaman ini',
+      body: 'Tiga nilai mendeskripsikan setiap kapabilitas. Nilai itu menyatakan di mana sebuah kapabilitas berada di dalam sebuah tool, bukan seberapa bagus tool-nya.',
       values: {
-        builtIn: 'Built in',
-        optional: 'Optional or via extension',
-        notInScope: 'Not in scope',
+        builtIn: 'Bawaan',
+        optional: 'Opsional atau melalui ekstensi',
+        notInScope: 'Di luar cakupan',
       },
     },
-    reviewedOnLabel: 'Last reviewed',
-    alternativesTitle: 'The alternatives, on their own terms',
-    officialSiteLabel: 'Official site',
+    reviewedOnLabel: 'Terakhir ditinjau',
+    alternativesTitle: 'Alternatifnya, menurut istilah masing-masing',
+    officialSiteLabel: 'Situs resmi',
     categories: {
-      methodology: 'Methodology',
-      sdd: 'Spec-driven development tools',
-      agentFramework: 'Agent workflow frameworks',
-      vendorNative: 'Vendor-native plan modes',
+      methodology: 'Metodologi',
+      sdd: 'Tool spec-driven',
+      agentFramework: 'Framework alur kerja agent',
+      vendorNative: 'Mode rencana bawaan vendor',
     },
     matrix: {
-      title: 'Capability matrix',
+      title: 'Matriks kapabilitas',
       caption:
-        'Where each capability lives, per tool. Built in, optional or via extension, or not in scope. Reviewed against official documentation.',
-      capabilityColumn: 'Capability',
+        'Di mana setiap kapabilitas berada, per tool. Bawaan, opsional atau melalui ekstensi, atau di luar cakupan. Ditinjau terhadap dokumentasi resmi.',
+      capabilityColumn: 'Kapabilitas',
     },
     capabilities: {
       toolAgnostic: {
-        label: 'Works with any coding agent',
-        help: 'The same repository files drive Claude Code, Codex, Cursor, Gemini CLI and others.',
+        label: 'Bekerja dengan coding agent mana pun',
+        help: 'File repositori yang sama menggerakkan Claude Code, Codex, Cursor, Gemini CLI, dan lainnya.',
       },
       repoNativeHarness: {
-        label: 'Writes the agent harness into the repository',
-        help: "Instructions, docs, skills and commands live in the repository, not in one tool's settings.",
+        label: 'Menulis harness agent ke dalam repositori',
+        help: 'Instruksi, docs, skill, dan command hidup di repositori, bukan di pengaturan satu tool.',
       },
       taskAcceptanceCriteria: {
-        label: 'Acceptance criteria per task',
-        help: 'Each task states observable conditions for being done.',
+        label: 'Kriteria penerimaan per tugas',
+        help: 'Setiap tugas menyatakan kondisi yang teramati untuk dianggap selesai.',
       },
       perTaskGates: {
-        label: 'Validation gate per task',
-        help: 'Each task names the commands that must pass, selected from what it touched.',
+        label: 'Gerbang verifikasi per tugas',
+        help: 'Setiap tugas menyebutkan command yang harus lulus, dipilih dari apa yang disentuhnya.',
       },
       resumableState: {
-        label: 'Resumable state on disk',
-        help: 'Progress survives a session reset and can be picked up by another agent or a teammate.',
+        label: 'Status yang dapat dilanjutkan di disk',
+        help: 'Kemajuan bertahan dari reset sesi dan dapat diambil oleh agent lain atau rekan tim.',
       },
       finalReview: {
-        label: 'Mandatory closing review with a security pass',
-        help: 'The plan cannot complete without a security review of the full change set and validation of the final state.',
+        label: 'Tinjauan penutup wajib dengan pemeriksaan keamanan',
+        help: 'Rencana tidak dapat selesai tanpa tinjauan keamanan atas seluruh kumpulan perubahan dan validasi status akhir.',
       },
       conformanceChecker: {
-        label: 'Executable conformance checker',
-        help: 'A script verifies the repository and its plans against the standard, with a CI-friendly exit code.',
+        label: 'Pemeriksa konformansi yang dapat dieksekusi',
+        help: 'Sebuah script memverifikasi repositori dan rencananya terhadap standar, dengan exit code yang ramah CI.',
       },
       instructionBudgetLedger: {
-        label: 'Published instruction-load measurement',
-        help: 'The bytes each flow loads are measured by a committed script and published with their limits.',
+        label: 'Pengukuran beban instruksi yang dipublikasikan',
+        help: 'Byte yang dimuat setiap alur diukur oleh script yang di-commit dan dipublikasikan beserta batasnya.',
       },
       onboardingScaffold: {
-        label: 'Onboarding that scaffolds documentation',
-        help: "A first run writes the repository's agent-facing documentation and kit.",
+        label: 'Onboarding yang menyusun kerangka dokumentasi',
+        help: 'Eksekusi pertama menulis dokumentasi yang menghadap agent dan kit milik repositori.',
       },
       brownfieldSpecs: {
-        label: 'Living specs for existing systems',
-        help: 'Changes are specified as deltas that merge into a growing specification of the system.',
+        label: 'Spesifikasi hidup untuk sistem yang sudah ada',
+        help: 'Perubahan dispesifikasikan sebagai delta yang menyatu ke dalam spesifikasi sistem yang terus bertumbuh.',
       },
     },
     alternatives: {
       dwp: {
         name: 'Deep Work Plan',
         whatItDoesWell:
-          'Installs as a skill, onboards the repository into an agent harness and runs long-horizon plans with per-task validation gates, on-disk state and a mandatory Final Review.',
+          'Terpasang sebagai skill, meng-onboard repositori menjadi agent harness, dan menjalankan rencana jangka panjang dengan gerbang verifikasi per tugas, status di disk, serta Final Review yang wajib.',
         audience:
-          'Developers and teams who hand multi-session work to any coding agent and need it to finish verified.',
+          'Pengembang dan tim yang menyerahkan pekerjaan multisesi kepada coding agent mana pun dan membutuhkannya selesai dalam keadaan terverifikasi.',
       },
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'Turns a feature into an executable specification through a constitution, a spec, a plan and a task list, driven by slash commands that integrate with more than fifty coding agents.',
+          'Mengubah sebuah fitur menjadi spesifikasi yang dapat dieksekusi melalui konstitusi, spesifikasi, rencana, dan daftar tugas, digerakkan oleh slash command yang berintegrasi dengan lebih dari lima puluh coding agent.',
         audience:
-          'Teams that want a repeatable specify, plan, tasks and implement workflow inside the agent they already use.',
+          'Tim yang menginginkan alur specify, plan, tasks, dan implement yang dapat diulang di dalam agent yang sudah mereka pakai.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'Captures each change as a proposal with delta specs (added, modified, removed) and RFC 2119 requirements with scenarios, then archives them into living specifications.',
+          'Menangkap setiap perubahan sebagai proposal dengan spesifikasi delta (ditambahkan, diubah, dihapus) dan kebutuhan RFC 2119 beserta skenarionya, lalu mengarsipkannya menjadi spesifikasi hidup.',
         audience:
-          'Teams working on existing systems who want specifications to grow one change at a time.',
+          'Tim yang bekerja pada sistem yang sudah ada dan ingin spesifikasinya bertumbuh satu perubahan dalam satu waktu.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'An agentic IDE and CLI whose specs move from EARS-style requirements to design to tasks, with steering files and hooks that run on editor events.',
+          'IDE dan CLI agentic yang spesifikasinya bergerak dari kebutuhan bergaya EARS ke desain lalu ke tugas, dengan file steering dan hook yang berjalan pada event editor.',
         audience:
-          'Developers who want spec-driven development built into their editor with AWS-backed tooling.',
+          'Pengembang yang menginginkan pengembangan spec-driven di dalam editor mereka, dengan tooling yang ditopang AWS.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'An agile framework of specialized agent roles (analysis, product, architecture, development, quality) that produces briefs, requirements, architecture documents and story files.',
+          'Framework agile berisi peran agent yang terspesialisasi (analisis, produk, arsitektur, pengembangan, kualitas) yang menghasilkan brief, kebutuhan, dokumen arsitektur, dan file story.',
         audience:
-          'Teams that like role-based ceremonies and want a full agile lifecycle for agent work.',
+          'Tim yang menyukai seremoni berbasis peran dan menginginkan siklus hidup agile penuh untuk pekerjaan agent.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'A skills library and workflow for brainstorming, planning in small test-first steps, executing with subagents and reviewing before completion.',
+          'Pustaka skill dan alur kerja untuk brainstorming, perencanaan dalam langkah test-first kecil, eksekusi dengan subagent, dan peninjauan sebelum selesai.',
         audience:
-          'Developers who want disciplined test-driven execution inside their coding agent.',
+          'Pengembang yang menginginkan eksekusi test-driven yang disiplin di dalam coding agent mereka.',
       },
       'get-shit-done': {
         name: 'Get Shit Done',
         whatItDoesWell:
-          'A planning system with a .planning directory, requirement ids, phase plans, fresh-context execution and a verification pass against stated must-haves.',
+          'Sistem perencanaan dengan direktori .planning, id kebutuhan, rencana fase, eksekusi konteks segar, dan pemeriksaan verifikasi terhadap must-have yang dinyatakan.',
         audience:
-          'Solo developers and small teams who want context engineering and verification with little ceremony.',
+          'Pengembang solo dan tim kecil yang menginginkan context engineering dan verifikasi dengan sedikit seremoni.',
       },
       'vendor-native': {
-        name: 'Vendor-native plan modes',
+        name: 'Mode rencana bawaan vendor',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor and Gemini CLI ship plan modes, instruction files and skills that follow the AGENTS.md and Agent Skills standards.',
+          'Claude Code, Codex, Cursor, dan Gemini CLI menghadirkan mode rencana, file instruksi, dan skill yang mengikuti standar AGENTS.md dan Agent Skills.',
         audience:
-          'Anyone who wants planning inside a single agent without adopting a methodology.',
+          'Siapa pun yang menginginkan perencanaan di dalam satu agent tanpa harus mengadopsi sebuah metodologi.',
       },
     },
     dwpStrengths: {
-      title: 'What Deep Work Plan brings',
+      title: 'Apa yang dibawa Deep Work Plan',
       items: [
         {
-          title: 'Tool-agnostic and repository-native',
-          body: 'The harness and the plan are files in your repository, read by any agent that follows the AGENTS.md and Agent Skills standards. Switching agents does not lose the plan.',
+          title: 'Agnostik tool dan native repositori',
+          body: 'Harness dan rencananya adalah file di repositori Anda, dibaca oleh agent mana pun yang mengikuti standar AGENTS.md dan Agent Skills. Berganti agent tidak kehilangan rencana.',
         },
         {
-          title: 'Validation selected from what each task touched',
-          body: 'Every task declares its touched surface and runs the tests of the changed behavior and its consumers, widening to the full suite when the impact cannot be bounded. Zero selected tests is never a pass.',
+          title: 'Validasi dipilih dari apa yang disentuh setiap tugas',
+          body: 'Setiap tugas menyatakan permukaan yang disentuhnya dan menjalankan test dari perilaku yang berubah beserta konsumennya, diperluas ke seluruh suite ketika dampaknya tidak bisa dibatasi. Nol test terpilih tidak pernah dianggap lulus.',
         },
         {
-          title: 'One Final Review with a security pass',
-          body: 'A plan closes with a security review of the accumulated change set, including a required local review of the diff, and a validation of the final state. Critical findings block completion.',
+          title: 'Satu Final Review dengan pemeriksaan keamanan',
+          body: 'Sebuah rencana ditutup dengan tinjauan keamanan atas kumpulan perubahan yang terkumpul, termasuk tinjauan lokal atas diff yang diwajibkan, dan validasi status akhir. Temuan kritis memblokir penyelesaian.',
         },
         {
-          title: 'State that survives sessions and agents',
-          body: 'README checkboxes, task logs, a bounded working index and a machine-readable state file are written at every boundary, so another session or another agent continues from disk. Even an interrupted plan creation is recoverable.',
+          title: 'Status yang bertahan lintas sesi dan agent',
+          body: 'Centang README, log tugas, indeks kerja yang terbatas, dan berkas status terbaca mesin ditulis di setiap batas, sehingga sesi lain atau agent lain melanjutkan dari disk. Bahkan pembuatan rencana yang terputus bisa dipulihkan.',
         },
         {
-          title: 'A conformance checker for the repository itself',
-          body: 'A read-only script verifies the harness and every plan against the specification, understands both plan lifecycles and exits with a CI-friendly code.',
+          title: 'Pemeriksa konformansi untuk repositorinya sendiri',
+          body: 'Script baca-saja memverifikasi harness dan setiap rencana terhadap spesifikasi, memahami kedua siklus hidup rencana, dan keluar dengan kode yang ramah CI.',
         },
         {
-          title: 'Instruction load measured and published',
-          body: 'A committed script measures how many bytes each flow loads; the results, including the increases, are published as bytes, never as token or cost percentages.',
+          title: 'Beban instruksi diukur dan dipublikasikan',
+          body: 'Script yang di-commit mengukur berapa byte yang dimuat setiap alur; hasilnya, termasuk kenaikan, dipublikasikan sebagai byte, tidak pernah sebagai persentase token atau biaya.',
         },
       ],
     },
     honestLimits: {
-      title: 'Honest limits',
-      body: 'Deep Work Plan has no living or delta specification mechanism; OpenSpec and similar tools are stronger there. No independent benchmark of the methodology exists yet; a pre-registered public evaluation is planned. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes.',
+      title: 'Keterbatasan yang jujur',
+      body: 'Deep Work Plan tidak memiliki mekanisme spesifikasi hidup maupun delta; OpenSpec dan tool sejenis lebih kuat di aspek itu. Belum ada benchmark independen atas metodologi ini; sebuah evaluasi publik yang praregistrasi sedang direncanakan. Ledger beban instruksi mengukur byte yang dimuat, bukan token, biaya, atau hasil.',
     },
     correction: {
-      title: 'Help us keep this accurate',
-      body: 'This page is reviewed on the date shown and corrected on request. If a description of your tool is out of date or incomplete, open an issue and we will fix it.',
-      ctaLabel: 'Open an issue',
+      title: 'Bantu kami menjaga keakuratan halaman ini',
+      body: 'Halaman ini ditinjau pada tanggal yang tertera dan dikoreksi atas permintaan. Jika deskripsi tool Anda kedaluwarsa atau tidak lengkap, bukalah issue dan kami akan memperbaikinya.',
+      ctaLabel: 'Buka issue',
     },
-    sourcesTitle: 'Sources',
+    sourcesTitle: 'Sumber',
   },
 
   trustPage: {

@@ -32,10 +32,10 @@ export const vi: SiteTranslations = {
     developers: 'Nhà phát triển',
     privacy: 'Quyền riêng tư',
     github: 'GitHub',
-    faq: 'FAQ',
-    compare: 'Compare',
-    resources: 'Resources',
-    resourcesDesc: 'Examples, comparison, FAQ and trust',
+    faq: 'Câu hỏi thường gặp',
+    compare: 'So sánh',
+    resources: 'Tài nguyên',
+    resourcesDesc: 'Ví dụ, so sánh, câu hỏi thường gặp và tin tưởng',
     repo: {
       label: 'Mã nguồn',
       website: 'Kho lưu trữ trang web',
@@ -70,7 +70,7 @@ export const vi: SiteTranslations = {
       getStarted: 'Bắt đầu',
       project: 'Dự án',
       connect: 'Kết nối',
-      learn: 'Learn',
+      learn: 'Tìm hiểu',
     },
   },
 
@@ -780,356 +780,358 @@ export const vi: SiteTranslations = {
 
   faqPage: {
     meta: {
-      title: 'Frequently asked questions — Deep Work Plan',
+      title: 'Câu hỏi thường gặp — Deep Work Plan',
       description:
-        'Answers to the questions people ask about Deep Work Plan: what it does, how gates and resumption work, how it compares with other tools, and how to adopt it.',
+        'Câu trả lời cho các câu hỏi về Deep Work Plan: nó làm gì, cổng kiểm chứng và tiếp tục sau gián đoạn thế nào, so sánh với công cụ khác, và cách áp dụng.',
     },
     eyebrow: 'FAQ',
-    title: 'Frequently asked questions',
+    title: 'Câu hỏi thường gặp',
     intro:
-      'Short answers to what people ask most about Deep Work Plan, each with a link to the page that goes deeper.',
+      'Những câu trả lời ngắn cho các câu hỏi được hỏi nhiều nhất về Deep Work Plan, mỗi câu kèm liên kết đến trang đi sâu hơn.',
     groups: [
       {
         id: 'what',
-        title: 'What Deep Work Plan is',
+        title: 'Deep Work Plan là gì',
         items: [
           {
             id: 'what-is-it',
-            question: 'What does Deep Work Plan actually do?',
+            question: 'Deep Work Plan thực sự làm gì?',
             answer:
-              'Deep Work Plan turns a repository into a structured environment where a coding agent can execute long work reliably. It installs as an agent skill, onboards the repository once (an `AGENTS.md` index, a `docs/` tree, a `.agents/` kit of skills and commands, a gitignored `.dwp/` output area), and from then on any goal becomes a plan: atomic tasks, each with acceptance criteria and a validation gate, executed one at a time, committed as they pass, and resumable from disk by any agent. The plan closes with a Final Review that audits security and validates the final state. The methodology is MIT-licensed and works with any coding agent that reads a repository.',
-            linkLabel: 'Read the methodology',
+              'Deep Work Plan biến một repository thành một môi trường có cấu trúc, nơi agent lập trình có thể thực thi công việc dài hơi một cách đáng tin cậy. Nó cài đặt dưới dạng một agent skill, onboard repository một lần (một chỉ mục `AGENTS.md`, một cây `docs/`, một bộ kit `.agents/` gồm skill và lệnh, một vùng xuất `.dwp/` được gitignore), và từ đó mọi mục tiêu trở thành một kế hoạch: các tác vụ nguyên tử, mỗi tác vụ có tiêu chí chấp nhận và một cổng kiểm chứng, được thực thi lần lượt từng tác vụ một, được commit khi vượt qua, và bất kỳ agent nào cũng có thể tiếp tục từ đĩa. Kế hoạch khép lại bằng một Final Review rà soát bảo mật và kiểm chứng trạng thái cuối. Phương pháp luận này cấp phép MIT và hoạt động với bất kỳ agent lập trình nào đọc được repository.',
+            linkLabel: 'Đọc phương pháp luận',
             linkPath: '/methodology',
           },
           {
             id: 'who-is-it-for',
-            question: 'Who is it for?',
+            question: 'Nó dành cho ai?',
             answer:
-              'Developers and teams who hand real, multi-step work to coding agents and want it to finish. It fits when a task spans more than one session, more than one file family, or more than one agent; when a teammate must be able to pick up where an agent stopped; or when "done" must mean "validated", not "the agent said so". A one-line fix does not need a plan, and the methodology says so: its proportional-rigor rule recommends an inline goal, criteria and gate instead.',
-            linkLabel: 'Quickstart',
+              'Những nhà phát triển và nhóm giao công việc thật, nhiều bước cho agent lập trình và muốn nó hoàn thành. Nó phù hợp khi một tác vụ trải dài hơn một phiên, hơn một họ tệp, hoặc hơn một agent; khi một đồng đội phải có thể tiếp tục đúng chỗ agent dừng lại; hoặc khi “xong” phải nghĩa là “đã kiểm chứng”, chứ không phải “agent nói vậy”. Một bản sửa một dòng không cần kế hoạch, và phương pháp luận nói rõ điều đó: quy tắc rigor tỷ lệ của nó đề xuất thay bằng mục tiêu, tiêu chí và cổng viết inline.',
+            linkLabel: 'Khởi động nhanh',
             linkPath: '/quickstart',
           },
           {
             id: 'is-it-a-tool',
-            question: 'Is it a tool, a framework or a methodology?',
+            question:
+              'Nó là một công cụ, một framework hay một phương pháp luận?',
             answer:
-              'A methodology packaged as an installable skill. There is no server, no account, no proprietary format and no runtime beyond the coding agent you already use. What gets installed is instructions the agent reads, a small set of shell scripts for context detection and conformance checking, and the conventions your repository adopts. Everything the plan produces is Markdown and JSON in your repository, readable without any tool.',
-            linkLabel: 'Read the specification',
+              'Một phương pháp luận được đóng gói thành skill cài đặt được. Không có server, không có tài khoản, không có định dạng độc quyền và không có runtime nào ngoài agent lập trình bạn đã dùng. Những gì được cài là các hướng dẫn cho agent đọc, một bộ nhỏ script shell để nhận diện ngữ cảnh và kiểm tra tính tuân thủ, cùng các quy ước mà repository của bạn áp dụng. Mọi thứ kế hoạch tạo ra đều là Markdown và JSON trong repository của bạn, đọc được mà không cần công cụ nào.',
+            linkLabel: 'Đọc đặc tả',
             linkPath: '/spec',
           },
           {
             id: 'which-agents',
-            question: 'Which coding agents does it work with?',
+            question: 'Nó hoạt động với những agent lập trình nào?',
             answer:
-              "Any agent that reads repository files. The skill follows the open Agent Skills standard and the `AGENTS.md` convention, so Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot and others pick it up through their normal skill and instruction loading. The methodology's own evaluation shows a plan started by one vendor's agent and resumed by another's in both directions. Installation coverage and behavioral evidence are listed per agent in the compatibility matrix, and the two are never conflated.",
-            linkLabel: 'Browse the kit',
+              'Bất kỳ agent nào đọc được các tệp của repository. Skill tuân theo chuẩn mở Agent Skills và quy ước `AGENTS.md`, nên Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot và các agent khác nhận được nó qua cơ chế tải skill và hướng dẫn thông thường của mình. Chính đợt đánh giá của phương pháp luận cho thấy một kế hoạch do agent của nhà cung cấp này bắt đầu và được agent của nhà cung cấp khác tiếp tục, theo cả hai chiều. Độ phủ cài đặt và bằng chứng hành vi được liệt kê cho từng agent trong ma trận tương thích, và hai thứ đó không bao giờ bị trộn lẫn.',
+            linkLabel: 'Xem bộ kit',
             linkPath: '/kit',
           },
         ],
       },
       {
         id: 'how',
-        title: 'How a plan runs',
+        title: 'Cách một kế hoạch vận hành',
         items: [
           {
             id: 'gates',
             question:
-              'How are the validation gates implemented? Do they need human sign-off?',
+              'Các cổng kiểm chứng được triển khai thế nào? Chúng có cần con người phê duyệt không?',
             answer:
-              "They are executable assertions the agent runs itself. Human sign-off bookends the run: a person approves the plan before execution and reviews the final diff at pull-request time; execution in between is autonomous. Every task names concrete commands, typically the repository's own quality gate, selected from the task's touched surface: the tests of the changed behavior and its consumers, widening to the full suite when the change is shared or cannot be bounded. A task is marked done only when those commands exit successfully, and tasks that change behavior must extend the tests. On failure the task is marked blocked and the agent stops.",
-            linkLabel: 'The core loop',
+              'Chúng là các assertion thực thi được, do chính agent chạy. Việc phê duyệt của con người chỉ đóng khung hai đầu lượt chạy: một người duyệt kế hoạch trước khi thực thi và xem xét diff cuối cùng lúc mở pull request; phần thực thi ở giữa là tự chủ. Mỗi tác vụ nêu tên các lệnh cụ thể, thường là chính cổng chất lượng của repository, được chọn từ Touched Surface của tác vụ: các test của hành vi bị thay đổi và các bên tiêu thụ nó, mở rộng ra toàn bộ bộ test khi thay đổi dùng chung hoặc không thể giới hạn. Một tác vụ chỉ được đánh dấu xong khi các lệnh đó thoát thành công, và các tác vụ thay đổi hành vi phải mở rộng test. Khi thất bại, tác vụ được đánh dấu bị chặn và agent dừng lại.',
+            linkLabel: 'Vòng lặp lõi',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'stale-plan',
             question:
-              'How does the plan avoid going stale when people change the code between runs?',
+              'Kế hoạch tránh lỗi thời thế nào khi mọi người thay đổi mã giữa các lượt chạy?',
             answer:
-              'On three fronts. Tasks are written as behavior, not edits: an acceptance criterion says what the system must do, so a renamed file or a swapped implementation does not invalidate it. Every gate re-runs against the repository as it is now, so a broken assumption fails loudly at the next run instead of drifting silently, and that failure is the cue to refine. And keeping documentation in sync is part of the work: a task that changes behavior also updates the docs and the agent-facing kit that describe it, inside its own gate. Every run should leave the repository more agent-ready than it found it.',
-            linkLabel: 'Read the methodology',
+              'Trên ba mặt trận. Các tác vụ được viết theo hành vi, không phải theo các bước sửa: một tiêu chí chấp nhận nói rõ hệ thống phải làm gì, nên một tệp được đổi tên hay một bản triển khai bị thay không làm nó vô hiệu. Mỗi cổng chạy lại trên repository như nó đang tồn tại, nên một giả định sai sẽ hỏng ầm ĩ ở lượt chạy tiếp theo thay vì trôi dạt âm thầm, và chính thất bại đó là tín hiệu để tinh chỉnh. Và việc giữ tài liệu đồng bộ là một phần của công việc: một tác vụ thay đổi hành vi cũng cập nhật tài liệu và bộ kit dành cho agent mô tả hành vi đó, ngay trong cổng của chính nó. Mỗi lượt chạy nên để lại repository sẵn sàng cho agent hơn khi nó bắt đầu.',
+            linkLabel: 'Đọc phương pháp luận',
             linkPath: '/methodology',
           },
           {
             id: 'edit-mid-run',
             question:
-              'Can I change the plan mid-run without losing completed work?',
+              'Tôi có thể thay đổi kế hoạch giữa lượt chạy mà không mất công việc đã xong không?',
             answer:
-              'Yes; refining a partially executed plan is a first-class move. Task definitions and execution state are kept separate: the plan is a checklist on disk plus a small state file, so what is done stays recorded independently of the task text. When a task turns out to be wrong, the agent marks it blocked and stops rather than pushing through. You then edit, reorder, split or drop the tasks that have not run, while completed tasks stay completed. Resuming rebuilds state from disk and the actual repository and re-runs the gates that matter, so nothing that shifted underneath slips by.',
-            linkLabel: 'The core loop',
+              'Có; tinh chỉnh một kế hoạch đã thực thi một phần là một thao tác được hỗ trợ đầy đủ. Định nghĩa tác vụ và trạng thái thực thi được giữ tách biệt: kế hoạch là một danh sách kiểm tra trên đĩa cộng với một tệp trạng thái nhỏ, nên những gì đã xong vẫn được ghi lại độc lập với nội dung tác vụ. Khi một tác vụ hóa ra sai, agent đánh dấu nó bị chặn và dừng lại thay vì cố đẩy tiếp. Sau đó bạn sửa, sắp xếp lại, tách hoặc bỏ các tác vụ chưa chạy, trong khi các tác vụ đã hoàn thành vẫn giữ nguyên. Việc tiếp tục dựng lại trạng thái từ đĩa và từ repository thực tế rồi chạy lại các cổng liên quan, nên không có gì thay đổi bên dưới lượt qua được.',
+            linkLabel: 'Vòng lặp lõi',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'drift',
             question:
-              'Does it keep checking the work against the plan, or is the plan an upfront thing?',
+              'Nó có liên tục đối chiếu công việc với kế hoạch, hay kế hoạch chỉ là thứ lập sẵn từ đầu?',
             answer:
-              'The plan is a continuous check. The agent works one small task at a time and must validate before moving on, so it can wander one step, not three. Every task carries acceptance criteria plus the exact commands that prove them, and progress is written into the repository as it goes, with a status per task, so drift becomes visible to you, to the next session and to the next agent. A plan is not finished until everything validates, including the Final Review. The honest caveat: the methodology cannot stop an agent from writing a weak acceptance criterion in the first place; it makes drift loud instead of silent.',
-            linkLabel: 'The core loop',
+              'Kế hoạch là một phép kiểm tra liên tục. Agent làm việc theo từng tác vụ nhỏ và phải kiểm chứng trước khi đi tiếp, nên nó chỉ có thể lạc một bước, chứ không phải ba bước. Mỗi tác vụ mang tiêu chí chấp nhận cùng các lệnh chính xác chứng minh chúng, và tiến trình được ghi vào repository khi làm việc, kèm trạng thái từng tác vụ, nên độ trôi dạt trở nên nhìn thấy được với bạn, với phiên tiếp theo và với agent tiếp theo. Một kế hoạch chưa xong cho đến khi mọi thứ kiểm chứng đạt, kể cả Final Review. Lời nói thành thật: phương pháp luận không thể ngăn agent viết một tiêu chí chấp nhận yếu ngay từ đầu; nó làm cho trôi dạt bị lộ rõ thay vì âm thầm.',
+            linkLabel: 'Vòng lặp lõi',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'plan-evolution',
             question:
-              'Is the plan generated once and maintained by hand, or does it evolve with the code?',
+              'Kế hoạch được sinh một lần và duy trì bằng tay, hay nó tiến hóa cùng mã?',
             answer:
-              "Neither. It is generated once from a goal and then maintained as part of the work. The plan is deliberately not rewritten from code diffs, because a spec that chases the code becomes a lagging mirror, which is the drift the methodology exists to kill. It evolves on purpose: gates re-run against the current repository, a failing gate triggers a refinement, and the agent performs that refinement during the run while you approve up front and review at the end. Documentation and tests evolve alongside the code by construction, because updating them is inside each task's gate.",
-            linkLabel: 'Read the methodology',
+              'Cả hai đều không. Nó được sinh một lần từ một mục tiêu, rồi được duy trì như một phần của công việc. Kế hoạch cố tình không được viết lại từ code diff, vì một đặc tả chạy theo mã sẽ trở thành tấm gương phản chiếu muộn màng — chính là độ trôi dạt mà phương pháp luận tồn tại để diệt. Nó tiến hóa một cách có chủ đích: các cổng chạy lại trên repository hiện tại, một cổng thất bại kích hoạt một lượt tinh chỉnh, và agent thực hiện lượt tinh chỉnh đó trong lúc chạy, còn bạn duyệt từ đầu và xem xét ở cuối. Tài liệu và test tiến hóa song song với mã một cách tự nhiên, vì việc cập nhật chúng nằm ngay trong cổng của từng tác vụ.',
+            linkLabel: 'Đọc phương pháp luận',
             linkPath: '/methodology',
           },
           {
             id: 'resume',
-            question: 'What happens if the session dies halfway?',
+            question: 'Điều gì xảy ra nếu phiên chết giữa chừng?',
             answer:
-              "Progress lives on disk, not in the chat. The README checkboxes, each task's log, a bounded working index and a machine-readable state file are updated at every task boundary, and the state file records a checkpoint before any planned pause. A fresh session, or a different agent, reads that compact index, reconciles it with the repository and git history, and continues at the first incomplete task without redoing finished work. Even an interrupted plan creation is recoverable: the plan's identity and intended task list are written before any task file, so a half-created plan can be completed or discarded rather than guessed at.",
-            linkLabel: 'The core loop',
+              'Tiến trình nằm trên đĩa, không nằm trong hội thoại. Các ô đánh dấu trong README, nhật ký của từng tác vụ, một chỉ mục làm việc có giới hạn và một tệp trạng thái đọc được bằng máy được cập nhật tại mỗi ranh giới tác vụ, và tệp trạng thái ghi một điểm kiểm tra trước mọi khoảng dừng theo kế hoạch. Một phiên mới, hoặc một agent khác, đọc chỉ mục gọn gàng đó, đối chiếu nó với repository và lịch sử git, rồi tiếp tục tại tác vụ chưa hoàn thành đầu tiên mà không làm lại công việc đã xong. Ngay cả một kế hoạch đang tạo bị gián đoạn cũng khôi phục được: định danh của kế hoạch và danh sách tác vụ dự kiến được ghi trước mọi tệp tác vụ, nên một kế hoạch tạo dở có thể được hoàn tất hoặc bỏ đi thay vì phải đoán.',
+            linkLabel: 'Vòng lặp lõi',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'final-review',
-            question: 'What is the Final Review?',
+            question: 'Final Review là gì?',
             answer:
-              "The single mandatory closing task of every plan. In order: a security pass over the plan's full accumulated change set, including a required local review of the diff by the AI Diff Reviewer skill, with critical findings blocking completion until fixed or explicitly accepted; final-state validation, meaning the repository's complete applicable test, lint, type-check and format suites on the final code; and a reconciliation of the skills decisions each task recorded. The agent then reports deliverables, evidence and limitations, and offers an Executive Report once, generating it only if you ask.",
-            linkLabel: 'The specification',
+              'Tác vụ kết thúc bắt buộc duy nhất của mọi kế hoạch. Theo thứ tự: một bước rà soát bảo mật trên toàn bộ tập thay đổi tích lũy của kế hoạch, gồm cả lượt review diff cục bộ bắt buộc bởi skill AI Diff Reviewer, với các phát hiện nghiêm trọng chặn việc hoàn tất cho đến khi được sửa hoặc được chấp nhận rõ ràng; kiểm chứng trạng thái cuối, nghĩa là chạy đầy đủ các bộ test, lint, kiểm tra kiểu và định dạng áp dụng được của repository trên mã cuối cùng; và một bước đối chiếu các quyết định về skill mà từng tác vụ đã ghi. Sau đó agent báo cáo sản phẩm bàn giao, bằng chứng và giới hạn, rồi đề xuất Executive Report đúng một lần, chỉ tạo khi bạn yêu cầu.',
+            linkLabel: 'Đặc tả',
             linkPath: '/spec/dwp-specification',
           },
         ],
       },
       {
         id: 'compare',
-        title: 'How it compares',
+        title: 'So sánh với các công cụ khác',
         items: [
           {
             id: 'vs-sdd-tools',
             question:
-              'How is it different from spec-driven tools such as Spec Kit, OpenSpec or Kiro?',
+              'Nó khác các công cụ theo đặc tả như Spec Kit, OpenSpec hay Kiro thế nào?',
             answer:
-              "They solve adjacent problems. Spec-driven tools are excellent at capturing what should change: specifications, requirements and change proposals in a repeatable shape. Deep Work Plan is about how an agent executes for hours without drifting: the onboarded harness, per-task validation gates selected from the touched surface, on-disk resumable state, a mandatory Final Review with a security pass, and a conformance checker for the repository itself. The two can be combined, with a spec or change proposal feeding a plan. The comparison page lays the capabilities side by side, on each tool's own terms.",
-            linkLabel: 'See the comparison',
+              'Chúng giải quyết các vấn đề kề nhau. Các công cụ theo đặc tả rất giỏi ghi lại cái gì cần thay đổi: đặc tả, yêu cầu và đề xuất thay đổi theo một khuôn có thể lặp lại. Deep Work Plan nói về cách một agent thực thi nhiều giờ mà không trôi dạt: harness đã onboard, các cổng kiểm chứng theo tác vụ được chọn từ Touched Surface, trạng thái có thể tiếp tục trên đĩa, một Final Review bắt buộc kèm bước rà soát bảo mật, và một công cụ kiểm tra tính tuân thủ cho chính repository. Hai thứ có thể kết hợp, với một đặc tả hay đề xuất thay đổi cấp dữ liệu cho kế hoạch. Trang so sánh xếp các khả năng cạnh nhau, theo đúng thuật ngữ của từng công cụ.',
+            linkLabel: 'Xem trang so sánh',
             linkPath: '/compare',
           },
           {
             id: 'vs-agent-frameworks',
             question:
-              'How is it different from agent workflow frameworks such as BMAD, Superpowers or Get Shit Done?',
+              'Nó khác các framework quy trình agent như BMAD, Superpowers hay Get Shit Done thế nào?',
             answer:
-              'Those frameworks bring strong working styles: roles, principles, test-first steps, verification habits. Deep Work Plan focuses on what stays in the repository and what can be checked: a harness any agent reads cold, task files with acceptance criteria and gates, state that survives a session, a conformance checker with a CI-friendly exit code, and a published measurement of how many instruction bytes each flow loads. It is tool-agnostic by construction and adds no service, provider or secret to the core loop. The comparison page shows where each approach is built in, optional or out of scope.',
-            linkLabel: 'See the comparison',
+              'Những framework đó mang các phong cách làm việc mạnh: vai trò, nguyên tắc, các bước test trước, thói quen xác minh. Deep Work Plan tập trung vào cái gì ở lại trong repository và cái gì kiểm tra được: một harness mà bất kỳ agent nào cũng đọc hiểu được khi mới vào, các tệp tác vụ với tiêu chí chấp nhận và cổng, trạng thái sống sót qua phiên, một công cụ kiểm tra tính tuân thủ với mã thoát thân thiện CI, và một phép đo công khai về số byte hướng dẫn mà mỗi luồng tải. Nó độc lập với công cụ ngay từ cấu trúc và không thêm dịch vụ, nhà cung cấp hay bí mật nào vào vòng lặp lõi. Trang so sánh cho thấy mỗi cách tiếp cận nằm ở đâu: tích hợp sẵn, tùy chọn hay ngoài phạm vi.',
+            linkLabel: 'Xem trang so sánh',
             linkPath: '/compare',
           },
           {
             id: 'vs-native-plan-mode',
-            question: "Why not just use my agent's built-in plan mode?",
+            question:
+              'Sao không dùng luôn chế độ lập kế hoạch có sẵn trong agent của tôi?',
             answer:
-              "Built-in plan modes are useful and Deep Work Plan builds on the same substrate, the `AGENTS.md` convention and the open Agent Skills standard. The difference is where the plan lives and what enforces it. Native plans usually live outside the repository and expire with the session; Deep Work Plan writes the plan, its state and its evidence into the repository, so another agent or a teammate can continue it, and every task carries an executable gate and a recorded log. You keep using your agent's plan mode for thinking; the methodology adds the durable, verifiable execution loop.",
-            linkLabel: 'See the comparison',
+              'Các chế độ lập kế hoạch có sẵn rất hữu ích, và Deep Work Plan xây trên cùng một nền tảng — quy ước `AGENTS.md` và chuẩn mở Agent Skills. Khác biệt nằm ở chỗ kế hoạch sống ở đâu và cái gì bảo đảm nó. Các kế hoạch bản địa thường nằm ngoài repository và hết hạn cùng phiên; Deep Work Plan ghi kế hoạch, trạng thái và bằng chứng của nó vào repository, nên một agent khác hay một đồng đội có thể tiếp tục, và mỗi tác vụ mang một cổng thực thi được cùng một nhật ký đã ghi. Bạn vẫn dùng chế độ lập kế hoạch của agent để suy nghĩ; phương pháp luận bổ sung vòng lặp thực thi bền vững và kiểm chứng được.',
+            linkLabel: 'Xem trang so sánh',
             linkPath: '/compare',
           },
         ],
       },
       {
         id: 'adopt',
-        title: 'Adopting it',
+        title: 'Áp dụng',
         items: [
           {
             id: 'install',
             question:
-              'What does onboarding write into my repository, and does it touch existing files?',
+              'Onboarding ghi gì vào repository của tôi, và nó có chạm các tệp hiện có không?',
             answer:
-              'Onboarding is non-destructive: it detects an existing `AGENTS.md`, `docs/`, `.agents/` or `CLAUDE.md`, reconciles rather than overwrites, and asks before replacing anything. It writes the `AGENTS.md` index with real commands, a reasoned `docs/` tree, per-module docs, the `.agents/` kit with thin `dwp-*` commands, a gitignored `.dwp/` output area, a verified testing map, and the required local code review (the AI Diff Reviewer skill plus a repo-tailored review extension). It then runs a self-check and the conformance checker so you can see what was produced. A repository onboarded under an earlier version gets a targeted upgrade that changes only what is missing.',
-            linkLabel: 'The adoption endpoint',
+              'Onboarding không phá hủy gì: nó phát hiện `AGENTS.md`, `docs/`, `.agents/` hay `CLAUDE.md` sẵn có, hòa giải thay vì ghi đè, và hỏi trước khi thay thế bất cứ thứ gì. Nó ghi chỉ mục `AGENTS.md` với các lệnh thật, một cây `docs/` có lý lẽ, tài liệu cho từng mô-đun, bộ kit `.agents/` với các lệnh `dwp-*` mỏng, một vùng xuất `.dwp/` được gitignore, một bản đồ kiểm thử đã xác minh, và phần review mã cục bộ bắt buộc (skill AI Diff Reviewer cùng một tiện ích mở rộng review được điều chỉnh theo repo). Sau đó nó chạy tự kiểm tra và công cụ kiểm tra tính tuân thủ để bạn thấy cái gì đã được tạo. Một repository đã onboard ở phiên bản sớm hơn sẽ nhận một bản nâng cấp có mục tiêu, chỉ thay đổi phần còn thiếu.',
+            linkLabel: 'Điểm cuối áp dụng',
             linkPath: '/init',
           },
           {
             id: 'cost',
-            question: 'What does it cost, and how is efficiency measured?',
+            question: 'Chi phí là bao nhiêu, và hiệu suất được đo thế nào?',
             answer:
-              'The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads, measured by a script committed with the skill and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those; a pre-registered public evaluation is planned to measure outcomes properly.',
-            linkLabel: 'Trust and disclosure',
+              'Phương pháp luận và skill cấp phép MIT và miễn phí; không có dịch vụ, không có API key và không có telemetry trong các luồng lõi. Hiệu suất được báo cáo bằng số byte hướng dẫn mà mỗi luồng tải, đo bằng một script được commit cùng skill và công bố trong một sổ cái đánh giá, với mức tăng được báo cáo thẳng thắn như mức giảm. Nó không được báo cáo dưới dạng phần trăm token hay khoản tiết kiệm chi phí, vì một bản kê byte không chứng minh được những điều đó; một đợt đánh giá công khai đăng ký trước đang được lên kế hoạch để đo kết quả một cách đúng đắn.',
+            linkLabel: 'Tin tưởng và công bố',
             linkPath: '/trust',
           },
         ],
       },
     ],
     stillHaveQuestions: {
-      title: 'Still have a question?',
-      body: 'Open a discussion or an issue on GitHub. Questions that come up repeatedly are added to this page.',
-      ctaLabel: 'Ask on GitHub',
+      title: 'Vẫn còn câu hỏi?',
+      body: 'Mở một thảo luận hoặc một issue trên GitHub. Các câu hỏi được hỏi đi hỏi lại sẽ được thêm vào trang này.',
+      ctaLabel: 'Hỏi trên GitHub',
     },
   },
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan compared with the alternatives — Deep Work Plan',
+      title: 'Deep Work Plan so với các phương án khác — Deep Work Plan',
       description:
-        'How Deep Work Plan relates to spec-driven tools, agent workflow frameworks and vendor plan modes: each on its own terms, with sources and a review date.',
+        'Deep Work Plan so với các công cụ theo đặc tả, framework quy trình agent và chế độ lập kế hoạch sẵn có: theo thuật ngữ từng bên, kèm nguồn và ngày rà soát.',
     },
-    eyebrow: 'Compare',
-    title: 'Deep Work Plan and the alternatives',
+    eyebrow: 'So sánh',
+    title: 'Deep Work Plan và các phương án khác',
     intro:
-      'Pick the right layer for your situation. Each alternative is described on its own terms, every fact traces to its official documentation, and the page says when it was last reviewed. This is a map, not a ranking.',
+      'Chọn đúng tầng cho hoàn cảnh của bạn. Mỗi phương án được mô tả theo đúng thuật ngữ của chính nó, mọi dữ kiện đều truy về được tài liệu chính thức, và trang nêu rõ ngày được rà soát lần cuối. Đây là một bản đồ, không phải một bảng xếp hạng.',
     howToRead: {
-      title: 'How to read this page',
-      body: 'Three values describe each capability. They say where a capability lives in a tool, not how good the tool is.',
+      title: 'Cách đọc trang này',
+      body: 'Ba giá trị mô tả mỗi khả năng. Chúng nói một khả năng nằm ở đâu trong một công cụ, chứ không nói công cụ tốt đến đâu.',
       values: {
-        builtIn: 'Built in',
-        optional: 'Optional or via extension',
-        notInScope: 'Not in scope',
+        builtIn: 'Tích hợp sẵn',
+        optional: 'Tùy chọn hoặc qua tiện ích mở rộng',
+        notInScope: 'Ngoài phạm vi',
       },
     },
-    reviewedOnLabel: 'Last reviewed',
-    alternativesTitle: 'The alternatives, on their own terms',
-    officialSiteLabel: 'Official site',
+    reviewedOnLabel: 'Rà soát lần cuối',
+    alternativesTitle: 'Các phương án khác, theo cách riêng của từng bên',
+    officialSiteLabel: 'Trang chính thức',
     categories: {
-      methodology: 'Methodology',
-      sdd: 'Spec-driven development tools',
-      agentFramework: 'Agent workflow frameworks',
-      vendorNative: 'Vendor-native plan modes',
+      methodology: 'Phương pháp luận',
+      sdd: 'Công cụ phát triển theo đặc tả',
+      agentFramework: 'Các framework quy trình agent',
+      vendorNative: 'Chế độ lập kế hoạch có sẵn từ nhà cung cấp',
     },
     matrix: {
-      title: 'Capability matrix',
+      title: 'Ma trận khả năng',
       caption:
-        'Where each capability lives, per tool. Built in, optional or via extension, or not in scope. Reviewed against official documentation.',
-      capabilityColumn: 'Capability',
+        'Mỗi khả năng nằm ở đâu, theo từng công cụ. Tích hợp sẵn, tùy chọn hoặc qua tiện ích mở rộng, hoặc ngoài phạm vi. Được rà soát theo tài liệu chính thức.',
+      capabilityColumn: 'Khả năng',
     },
     capabilities: {
       toolAgnostic: {
-        label: 'Works with any coding agent',
-        help: 'The same repository files drive Claude Code, Codex, Cursor, Gemini CLI and others.',
+        label: 'Hoạt động với mọi agent lập trình',
+        help: 'Cùng các tệp repository điều khiển Claude Code, Codex, Cursor, Gemini CLI và các agent khác.',
       },
       repoNativeHarness: {
-        label: 'Writes the agent harness into the repository',
-        help: "Instructions, docs, skills and commands live in the repository, not in one tool's settings.",
+        label: 'Ghi harness của agent vào repository',
+        help: 'Hướng dẫn, tài liệu, skill và lệnh nằm trong repository, không nằm trong cấu hình của một công cụ duy nhất.',
       },
       taskAcceptanceCriteria: {
-        label: 'Acceptance criteria per task',
-        help: 'Each task states observable conditions for being done.',
+        label: 'Tiêu chí chấp nhận cho từng tác vụ',
+        help: 'Mỗi tác vụ nêu các điều kiện quan sát được để coi là xong.',
       },
       perTaskGates: {
-        label: 'Validation gate per task',
-        help: 'Each task names the commands that must pass, selected from what it touched.',
+        label: 'Cổng kiểm chứng cho từng tác vụ',
+        help: 'Mỗi tác vụ nêu tên các lệnh phải đạt, được chọn từ những gì nó chạm tới.',
       },
       resumableState: {
-        label: 'Resumable state on disk',
-        help: 'Progress survives a session reset and can be picked up by another agent or a teammate.',
+        label: 'Trạng thái có thể tiếp tục trên đĩa',
+        help: 'Tiến trình sống sót qua việc đặt lại phiên và có thể được một agent hay một đồng đội khác tiếp tục.',
       },
       finalReview: {
-        label: 'Mandatory closing review with a security pass',
-        help: 'The plan cannot complete without a security review of the full change set and validation of the final state.',
+        label: 'Lượt rà kết thúc bắt buộc kèm bước rà soát bảo mật',
+        help: 'Kế hoạch không thể hoàn tất nếu thiếu bước rà soát bảo mật toàn bộ tập thay đổi và kiểm chứng trạng thái cuối.',
       },
       conformanceChecker: {
-        label: 'Executable conformance checker',
-        help: 'A script verifies the repository and its plans against the standard, with a CI-friendly exit code.',
+        label: 'Công cụ kiểm tra tính tuân thủ có thể thực thi',
+        help: 'Một script xác minh repository và các kế hoạch của nó theo chuẩn, với mã thoát thân thiện CI.',
       },
       instructionBudgetLedger: {
-        label: 'Published instruction-load measurement',
-        help: 'The bytes each flow loads are measured by a committed script and published with their limits.',
+        label: 'Phép đo tải hướng dẫn được công bố',
+        help: 'Số byte mỗi luồng tải được đo bằng một script được commit và công bố kèm giới hạn của chúng.',
       },
       onboardingScaffold: {
-        label: 'Onboarding that scaffolds documentation',
-        help: "A first run writes the repository's agent-facing documentation and kit.",
+        label: 'Onboarding dựng khung tài liệu',
+        help: 'Lượt chạy đầu tiên ghi tài liệu dành cho agent và bộ kit của repository.',
       },
       brownfieldSpecs: {
-        label: 'Living specs for existing systems',
-        help: 'Changes are specified as deltas that merge into a growing specification of the system.',
+        label: 'Đặc tả sống cho hệ thống hiện có',
+        help: 'Các thay đổi được đặc tả dưới dạng delta hợp nhất vào đặc tả ngày càng đầy đủ của hệ thống.',
       },
     },
     alternatives: {
       dwp: {
         name: 'Deep Work Plan',
         whatItDoesWell:
-          'Installs as a skill, onboards the repository into an agent harness and runs long-horizon plans with per-task validation gates, on-disk state and a mandatory Final Review.',
+          'Cài đặt dưới dạng skill, onboard repository thành một harness cho agent và chạy các kế hoạch dài hơi với cổng kiểm chứng theo tác vụ, trạng thái trên đĩa và một Final Review bắt buộc.',
         audience:
-          'Developers and teams who hand multi-session work to any coding agent and need it to finish verified.',
+          'Các nhà phát triển và nhóm giao việc nhiều phiên cho bất kỳ agent lập trình nào và cần nó hoàn thành đã được kiểm chứng.',
       },
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'Turns a feature into an executable specification through a constitution, a spec, a plan and a task list, driven by slash commands that integrate with more than fifty coding agents.',
+          'Biến một tính năng thành đặc tả thực thi được thông qua một bản hiến chương, một đặc tả, một kế hoạch và một danh sách tác vụ, điều khiển bằng các lệnh slash tích hợp với hơn năm mươi agent lập trình.',
         audience:
-          'Teams that want a repeatable specify, plan, tasks and implement workflow inside the agent they already use.',
+          'Các nhóm muốn một quy trình đặc tả, lập kế hoạch, phân tác vụ và triển khai có thể lặp lại ngay trong agent họ đã dùng.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'Captures each change as a proposal with delta specs (added, modified, removed) and RFC 2119 requirements with scenarios, then archives them into living specifications.',
+          'Ghi lại mỗi thay đổi thành một đề xuất với các đặc tả delta (thêm, sửa, bỏ) và các yêu cầu RFC 2119 kèm kịch bản, rồi lưu trữ chúng thành các đặc tả sống.',
         audience:
-          'Teams working on existing systems who want specifications to grow one change at a time.',
+          'Các nhóm làm trên hệ thống hiện có, muốn đặc tả lớn dần theo từng thay đổi.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'An agentic IDE and CLI whose specs move from EARS-style requirements to design to tasks, with steering files and hooks that run on editor events.',
+          'Một IDE và CLI dạng agentic với đặc tả đi từ yêu cầu kiểu EARS sang thiết kế rồi sang tác vụ, cùng các tệp steering và hook chạy theo sự kiện của trình soạn thảo.',
         audience:
-          'Developers who want spec-driven development built into their editor with AWS-backed tooling.',
+          'Các nhà phát triển muốn phát triển theo đặc tả được tích hợp sẵn trong trình soạn thảo, cùng công cụ được AWS hỗ trợ.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'An agile framework of specialized agent roles (analysis, product, architecture, development, quality) that produces briefs, requirements, architecture documents and story files.',
+          'Một framework agile gồm các vai trò agent chuyên biệt (phân tích, sản phẩm, kiến trúc, phát triển, chất lượng), tạo ra các bản tóm tắt, yêu cầu, tài liệu kiến trúc và tệp story.',
         audience:
-          'Teams that like role-based ceremonies and want a full agile lifecycle for agent work.',
+          'Các nhóm thích các nghi thức theo vai trò và muốn một vòng đời agile đầy đủ cho công việc của agent.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'A skills library and workflow for brainstorming, planning in small test-first steps, executing with subagents and reviewing before completion.',
+          'Một thư viện skill và quy trình làm việc để thảo luận ý tưởng, lập kế hoạch theo các bước nhỏ test trước, thực thi với subagent và review trước khi hoàn tất.',
         audience:
-          'Developers who want disciplined test-driven execution inside their coding agent.',
+          'Các nhà phát triển muốn thực thi theo hướng test-driven có kỷ luật ngay trong agent lập trình của mình.',
       },
       'get-shit-done': {
         name: 'Get Shit Done',
         whatItDoesWell:
-          'A planning system with a .planning directory, requirement ids, phase plans, fresh-context execution and a verification pass against stated must-haves.',
+          'Một hệ thống lập kế hoạch với thư mục .planning, id yêu cầu, kế hoạch theo pha, thực thi trong ngữ cảnh mới và một lượt xác minh đối chiếu các điều kiện bắt buộc đã nêu.',
         audience:
-          'Solo developers and small teams who want context engineering and verification with little ceremony.',
+          'Nhà phát triển độc lập và nhóm nhỏ muốn kỹ thuật ngữ cảnh và xác minh với ít nghi thức.',
       },
       'vendor-native': {
-        name: 'Vendor-native plan modes',
+        name: 'Chế độ lập kế hoạch có sẵn từ nhà cung cấp',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor and Gemini CLI ship plan modes, instruction files and skills that follow the AGENTS.md and Agent Skills standards.',
+          'Claude Code, Codex, Cursor và Gemini CLI tích hợp sẵn các chế độ lập kế hoạch, tệp hướng dẫn và skill tuân theo các chuẩn AGENTS.md và Agent Skills.',
         audience:
-          'Anyone who wants planning inside a single agent without adopting a methodology.',
+          'Bất kỳ ai muốn lập kế hoạch ngay trong một agent duy nhất mà không cần áp dụng một phương pháp luận.',
       },
     },
     dwpStrengths: {
-      title: 'What Deep Work Plan brings',
+      title: 'Deep Work Plan mang lại điều gì',
       items: [
         {
-          title: 'Tool-agnostic and repository-native',
-          body: 'The harness and the plan are files in your repository, read by any agent that follows the AGENTS.md and Agent Skills standards. Switching agents does not lose the plan.',
+          title: 'Độc lập với công cụ và gắn với repository',
+          body: 'Harness và kế hoạch là các tệp trong repository của bạn, được mọi agent tuân theo chuẩn AGENTS.md và Agent Skills đọc. Đổi agent không làm mất kế hoạch.',
         },
         {
-          title: 'Validation selected from what each task touched',
-          body: 'Every task declares its touched surface and runs the tests of the changed behavior and its consumers, widening to the full suite when the impact cannot be bounded. Zero selected tests is never a pass.',
+          title: 'Kiểm chứng được chọn từ những gì từng tác vụ chạm tới',
+          body: 'Mỗi tác vụ khai báo Touched Surface của mình và chạy các test của hành vi bị thay đổi cùng các bên tiêu thụ nó, mở rộng ra toàn bộ bộ test khi ảnh hưởng không thể giới hạn. Không chọn được test nào thì không bao giờ coi là đạt.',
         },
         {
-          title: 'One Final Review with a security pass',
-          body: 'A plan closes with a security review of the accumulated change set, including a required local review of the diff, and a validation of the final state. Critical findings block completion.',
+          title: 'Một Final Review duy nhất kèm bước rà soát bảo mật',
+          body: 'Kế hoạch khép lại bằng bước rà soát bảo mật trên tập thay đổi tích lũy, gồm cả lượt review diff cục bộ bắt buộc, và kiểm chứng trạng thái cuối. Các phát hiện nghiêm trọng chặn việc hoàn tất.',
         },
         {
-          title: 'State that survives sessions and agents',
-          body: 'README checkboxes, task logs, a bounded working index and a machine-readable state file are written at every boundary, so another session or another agent continues from disk. Even an interrupted plan creation is recoverable.',
+          title: 'Trạng thái sống sót qua các phiên và các agent',
+          body: 'Các ô đánh dấu README, nhật ký tác vụ, một chỉ mục làm việc có giới hạn và một tệp trạng thái đọc được bằng máy được ghi tại mỗi ranh giới, nên một phiên khác hay một agent khác tiếp tục ngay từ đĩa. Ngay cả một kế hoạch đang tạo bị gián đoạn cũng khôi phục được.',
         },
         {
-          title: 'A conformance checker for the repository itself',
-          body: 'A read-only script verifies the harness and every plan against the specification, understands both plan lifecycles and exits with a CI-friendly code.',
+          title: 'Công cụ kiểm tra tính tuân thủ cho chính repository',
+          body: 'Một script chỉ đọc xác minh harness và mọi kế hoạch theo đặc tả, hiểu cả hai vòng đời kế hoạch và thoát với mã thân thiện CI.',
         },
         {
-          title: 'Instruction load measured and published',
-          body: 'A committed script measures how many bytes each flow loads; the results, including the increases, are published as bytes, never as token or cost percentages.',
+          title: 'Khối lượng hướng dẫn tải lên được đo và công bố',
+          body: 'Một script được commit đo mỗi luồng tải bao nhiêu byte; kết quả, kể cả mức tăng, được công bố theo byte, không bao giờ theo phần trăm token hay chi phí.',
         },
       ],
     },
     honestLimits: {
-      title: 'Honest limits',
-      body: 'Deep Work Plan has no living or delta specification mechanism; OpenSpec and similar tools are stronger there. No independent benchmark of the methodology exists yet; a pre-registered public evaluation is planned. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes.',
+      title: 'Những giới hạn thành thật',
+      body: 'Deep Work Plan không có cơ chế đặc tả sống hay đặc tả delta; OpenSpec và các công cụ tương tự mạnh hơn ở khoản đó. Chưa có benchmark độc lập nào cho phương pháp luận; một đợt đánh giá công khai đăng ký trước đang được lên kế hoạch. Sổ cái tải hướng dẫn đo byte được tải, không đo token, chi phí hay kết quả.',
     },
     correction: {
-      title: 'Help us keep this accurate',
-      body: 'This page is reviewed on the date shown and corrected on request. If a description of your tool is out of date or incomplete, open an issue and we will fix it.',
-      ctaLabel: 'Open an issue',
+      title: 'Giúp chúng tôi giữ trang này chính xác',
+      body: 'Trang này được rà soát vào ngày hiển thị và sửa theo yêu cầu. Nếu mô tả về công cụ của bạn đã lỗi thời hoặc chưa đầy đủ, hãy mở một issue và chúng tôi sẽ sửa.',
+      ctaLabel: 'Mở một issue',
     },
-    sourcesTitle: 'Sources',
+    sourcesTitle: 'Nguồn',
   },
 
   trustPage: {

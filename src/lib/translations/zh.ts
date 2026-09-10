@@ -31,10 +31,10 @@ export const zh: SiteTranslations = {
     developers: '开发者',
     privacy: '隐私',
     github: 'GitHub',
-    faq: 'FAQ',
-    compare: 'Compare',
-    resources: 'Resources',
-    resourcesDesc: 'Examples, comparison, FAQ and trust',
+    faq: '常见问题',
+    compare: '对比',
+    resources: '资源',
+    resourcesDesc: '示例、对比、常见问题与信任',
     repo: {
       label: '源代码',
       website: '网站仓库',
@@ -69,7 +69,7 @@ export const zh: SiteTranslations = {
       getStarted: '开始使用',
       project: '项目',
       connect: '联系',
-      learn: 'Learn',
+      learn: '学习',
     },
   },
 
@@ -774,356 +774,347 @@ export const zh: SiteTranslations = {
 
   faqPage: {
     meta: {
-      title: 'Frequently asked questions — Deep Work Plan',
+      title: '常见问题 — Deep Work Plan',
       description:
-        'Answers to the questions people ask about Deep Work Plan: what it does, how gates and resumption work, how it compares with other tools, and how to adopt it.',
+        '人们关于 Deep Work Plan 最常提出的疑问，都在这里得到简明解答：它究竟做什么、逐任务的验证关卡如何实现、会话中断后如何从磁盘恢复执行、它与规范驱动工具、代理工作流框架和各代理自带的计划模式相比有何异同，以及如何把它接入你的代码仓库，开始第一份计划。',
     },
     eyebrow: 'FAQ',
-    title: 'Frequently asked questions',
+    title: '常见问题',
     intro:
-      'Short answers to what people ask most about Deep Work Plan, each with a link to the page that goes deeper.',
+      '关于 Deep Work Plan 最常见问题的简短解答，每一条都附有可深入了解的页面链接。',
     groups: [
       {
         id: 'what',
-        title: 'What Deep Work Plan is',
+        title: 'Deep Work Plan 是什么',
         items: [
           {
             id: 'what-is-it',
-            question: 'What does Deep Work Plan actually do?',
+            question: 'Deep Work Plan 究竟做什么？',
             answer:
-              'Deep Work Plan turns a repository into a structured environment where a coding agent can execute long work reliably. It installs as an agent skill, onboards the repository once (an `AGENTS.md` index, a `docs/` tree, a `.agents/` kit of skills and commands, a gitignored `.dwp/` output area), and from then on any goal becomes a plan: atomic tasks, each with acceptance criteria and a validation gate, executed one at a time, committed as they pass, and resumable from disk by any agent. The plan closes with a Final Review that audits security and validates the final state. The methodology is MIT-licensed and works with any coding agent that reads a repository.',
-            linkLabel: 'Read the methodology',
+              'Deep Work Plan 将一个代码仓库转变为结构化环境，让编码代理能够在其中可靠地执行长时间的工作。它以代理技能的形式安装，对仓库做一次接入（一份 `AGENTS.md` 索引、一棵 `docs/` 树、一套由技能与命令组成的 `.agents/` 套件、一个被 gitignore 的 `.dwp/` 输出区），此后任何目标都成为一份计划：原子任务，每项都带有验收标准与验证关卡，逐项执行、通过即提交，并可由任意代理从磁盘恢复。计划以一项 Final Review 收尾——审计安全并验证最终状态。该方法论采用 MIT 许可，可与任何能读取仓库的编码代理协同工作。',
+            linkLabel: '阅读方法论',
             linkPath: '/methodology',
           },
           {
             id: 'who-is-it-for',
-            question: 'Who is it for?',
+            question: '它适合谁？',
             answer:
-              'Developers and teams who hand real, multi-step work to coding agents and want it to finish. It fits when a task spans more than one session, more than one file family, or more than one agent; when a teammate must be able to pick up where an agent stopped; or when "done" must mean "validated", not "the agent said so". A one-line fix does not need a plan, and the methodology says so: its proportional-rigor rule recommends an inline goal, criteria and gate instead.',
-            linkLabel: 'Quickstart',
+              '适合把真实的多步骤工作交给编码代理、并希望工作得以完成的开发者与团队。当一项任务跨越多个会话、多类文件或多个代理；当队友必须能从代理停下之处接手；或当“完成”必须意味着“已验证”、而非“代理说完成了”时，它尤为合适。一行代码的修复不需要计划，方法论自己也如此规定：其比例严格度规则建议改用内联的目标、标准与关卡。',
+            linkLabel: '快速开始',
             linkPath: '/quickstart',
           },
           {
             id: 'is-it-a-tool',
-            question: 'Is it a tool, a framework or a methodology?',
+            question: '它是工具、框架还是方法论？',
             answer:
-              'A methodology packaged as an installable skill. There is no server, no account, no proprietary format and no runtime beyond the coding agent you already use. What gets installed is instructions the agent reads, a small set of shell scripts for context detection and conformance checking, and the conventions your repository adopts. Everything the plan produces is Markdown and JSON in your repository, readable without any tool.',
-            linkLabel: 'Read the specification',
+              '一套被打包为可安装技能的方法论。没有服务器、没有账号、没有专有格式，除你已在使用的编码代理之外也没有额外的运行时。被安装的是代理阅读的指令、一小组用于上下文检测与符合性检查的 shell 脚本，以及你的仓库所采纳的约定。计划产出的一切都是你仓库中的 Markdown 与 JSON，无需任何工具即可阅读。',
+            linkLabel: '阅读规范',
             linkPath: '/spec',
           },
           {
             id: 'which-agents',
-            question: 'Which coding agents does it work with?',
+            question: '它支持哪些编码代理？',
             answer:
-              "Any agent that reads repository files. The skill follows the open Agent Skills standard and the `AGENTS.md` convention, so Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot and others pick it up through their normal skill and instruction loading. The methodology's own evaluation shows a plan started by one vendor's agent and resumed by another's in both directions. Installation coverage and behavioral evidence are listed per agent in the compatibility matrix, and the two are never conflated.",
-            linkLabel: 'Browse the kit',
+              '任何能读取仓库文件的代理。该技能遵循开放的 Agent Skills 标准与 `AGENTS.md` 约定，因此 Claude Code、Codex、Cursor、Gemini CLI、GitHub Copilot 等都能通过其常规的技能与指令加载机制识别它。方法论自身的评估表明，由一家厂商的代理启动、再由另一家厂商的代理恢复的计划在两个方向上都有实证。兼容性矩阵按代理分别列出安装覆盖情况与行为证据，且从不将二者混为一谈。',
+            linkLabel: '浏览套件',
             linkPath: '/kit',
           },
         ],
       },
       {
         id: 'how',
-        title: 'How a plan runs',
+        title: '计划如何运行',
         items: [
           {
             id: 'gates',
-            question:
-              'How are the validation gates implemented? Do they need human sign-off?',
+            question: '验证关卡是如何实现的？需要人工签署吗？',
             answer:
-              "They are executable assertions the agent runs itself. Human sign-off bookends the run: a person approves the plan before execution and reviews the final diff at pull-request time; execution in between is autonomous. Every task names concrete commands, typically the repository's own quality gate, selected from the task's touched surface: the tests of the changed behavior and its consumers, widening to the full suite when the change is shared or cannot be bounded. A task is marked done only when those commands exit successfully, and tasks that change behavior must extend the tests. On failure the task is marked blocked and the agent stops.",
-            linkLabel: 'The core loop',
+              '它们是代理自己运行的可执行断言。人工签署位于运行的两端：一个人在执行前批准计划，并在拉取请求时审阅最终的 diff；其间的执行是自主的。每项任务都点明具体命令——通常是仓库自身的质量关卡——从任务的触及面中选择：被改行为及其消费方的测试，当改动是共享的或无法界定影响时，扩大到完整的测试套件。只有当这些命令成功退出时，任务才被标记为完成，而改变行为的任务必须扩展测试。一旦失败，任务被标记为受阻，代理随之停止。',
+            linkLabel: '核心循环',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'stale-plan',
-            question:
-              'How does the plan avoid going stale when people change the code between runs?',
+            question: '当人们在两次运行之间修改代码时，计划如何避免过时？',
             answer:
-              'On three fronts. Tasks are written as behavior, not edits: an acceptance criterion says what the system must do, so a renamed file or a swapped implementation does not invalidate it. Every gate re-runs against the repository as it is now, so a broken assumption fails loudly at the next run instead of drifting silently, and that failure is the cue to refine. And keeping documentation in sync is part of the work: a task that changes behavior also updates the docs and the agent-facing kit that describe it, inside its own gate. Every run should leave the repository more agent-ready than it found it.',
-            linkLabel: 'Read the methodology',
+              '从三个方面入手。任务以行为、而非编辑动作来书写：验收标准陈述系统必须做什么，因此文件改名或实现替换都不会使其失效。每道关卡都针对仓库当前的状态重新运行，因此失实的假设会在下一次运行中响亮地失败，而非悄然偏移，而那次失败正是发起精炼的信号。保持文档同步也是工作的一部分：改变行为的任务会在自己的关卡内更新描述该行为的文档与面向代理的套件。每一次运行结束时，仓库都应比运行开始时更适于代理工作。',
+            linkLabel: '阅读方法论',
             linkPath: '/methodology',
           },
           {
             id: 'edit-mid-run',
-            question:
-              'Can I change the plan mid-run without losing completed work?',
+            question: '我能在运行中途修改计划而不丢失已完成的工作吗？',
             answer:
-              'Yes; refining a partially executed plan is a first-class move. Task definitions and execution state are kept separate: the plan is a checklist on disk plus a small state file, so what is done stays recorded independently of the task text. When a task turns out to be wrong, the agent marks it blocked and stops rather than pushing through. You then edit, reorder, split or drop the tasks that have not run, while completed tasks stay completed. Resuming rebuilds state from disk and the actual repository and re-runs the gates that matter, so nothing that shifted underneath slips by.',
-            linkLabel: 'The core loop',
+              '可以；精炼一份已部分执行的计划是受完整支持的常规操作。任务定义与执行状态分开保存：计划是磁盘上的一份清单加上一个小型状态文件，因此已完成的内容独立于任务文本被记录。当某项任务被发现有误时，代理会将其标记为受阻并停下来，而不是硬闯过去。随后你可以编辑、重排、拆分或丢弃尚未运行的任务，已完成的任务保持完成。恢复时会从磁盘与仓库的实际状态重建状态，并重新运行要紧的关卡，因此底下发生的任何变动都不会漏网。',
+            linkLabel: '核心循环',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'drift',
             question:
-              'Does it keep checking the work against the plan, or is the plan an upfront thing?',
+              '它会持续依据计划检查工作，还是计划只是一次性的前置产物？',
             answer:
-              'The plan is a continuous check. The agent works one small task at a time and must validate before moving on, so it can wander one step, not three. Every task carries acceptance criteria plus the exact commands that prove them, and progress is written into the repository as it goes, with a status per task, so drift becomes visible to you, to the next session and to the next agent. A plan is not finished until everything validates, including the Final Review. The honest caveat: the methodology cannot stop an agent from writing a weak acceptance criterion in the first place; it makes drift loud instead of silent.',
-            linkLabel: 'The core loop',
+              '计划是一次贯穿始终的检查。代理一次只做一项小任务，并且必须在继续之前先通过验证，因此它最多偏出一步，而不是三步。每项任务都带有验收标准以及证明它们的确切命令，进展随工作写入仓库，每项任务各有状态，因此偏移对你、对下一个会话、对下一个代理都是可见的。直到一切通过验证——包括 Final Review——计划才算完成。诚实的告诫：方法论无法阻止代理一开始就写下一条薄弱的验收标准；它做的是让偏移响亮，而非无声。',
+            linkLabel: '核心循环',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'plan-evolution',
-            question:
-              'Is the plan generated once and maintained by hand, or does it evolve with the code?',
+            question: '计划是生成一次后靠人工维护，还是随代码演进？',
             answer:
-              "Neither. It is generated once from a goal and then maintained as part of the work. The plan is deliberately not rewritten from code diffs, because a spec that chases the code becomes a lagging mirror, which is the drift the methodology exists to kill. It evolves on purpose: gates re-run against the current repository, a failing gate triggers a refinement, and the agent performs that refinement during the run while you approve up front and review at the end. Documentation and tests evolve alongside the code by construction, because updating them is inside each task's gate.",
-            linkLabel: 'Read the methodology',
+              '都不是。它从一个目标一次性生成，随后作为工作的一部分被维护。计划有意不从代码 diff 重写，因为追逐代码的规范会变成一面滞后的镜子——那正是该方法论要消灭的偏移。它的演进是有意为之：关卡针对当前仓库重新运行，失败的关卡触发一次精炼，而精炼由代理在运行期间完成，你在事前批准、在事后审阅。文档与测试天然随代码一同演进，因为对它们的更新就在每项任务的关卡之内。',
+            linkLabel: '阅读方法论',
             linkPath: '/methodology',
           },
           {
             id: 'resume',
-            question: 'What happens if the session dies halfway?',
+            question: '如果会话中途终止，会发生什么？',
             answer:
-              "Progress lives on disk, not in the chat. The README checkboxes, each task's log, a bounded working index and a machine-readable state file are updated at every task boundary, and the state file records a checkpoint before any planned pause. A fresh session, or a different agent, reads that compact index, reconciles it with the repository and git history, and continues at the first incomplete task without redoing finished work. Even an interrupted plan creation is recoverable: the plan's identity and intended task list are written before any task file, so a half-created plan can be completed or discarded rather than guessed at.",
-            linkLabel: 'The core loop',
+              '进展存放在磁盘上，而非聊天记录里。README 复选框、每项任务的日志、一个有界的进行中索引和一个可机器读取的状态文件会在每个任务边界更新，状态文件还会在任何计划内暂停之前记录一个检查点。一个新会话或另一个代理读取那份紧凑的索引，将其与仓库及 git 历史核对，然后从第一项未完成的任务继续，不重做已完成的工作。即使计划创建被中断，也是可恢复的：计划的标识与预期任务列表先于任何任务文件写入，因此半成的计划可以被完成或丢弃，而不是靠猜。',
+            linkLabel: '核心循环',
             linkPath: '/methodology/02-core-loop',
           },
           {
             id: 'final-review',
-            question: 'What is the Final Review?',
+            question: '什么是 Final Review？',
             answer:
-              "The single mandatory closing task of every plan. In order: a security pass over the plan's full accumulated change set, including a required local review of the diff by the AI Diff Reviewer skill, with critical findings blocking completion until fixed or explicitly accepted; final-state validation, meaning the repository's complete applicable test, lint, type-check and format suites on the final code; and a reconciliation of the skills decisions each task recorded. The agent then reports deliverables, evidence and limitations, and offers an Executive Report once, generating it only if you ask.",
-            linkLabel: 'The specification',
+              '每份计划唯一的一项强制收尾任务。依次为：对计划完整累计变更集的安全审查——其中包括由 AI Diff Reviewer 技能对 diff 进行的必备本地审查，critical 发现会在修复或被明确接受之前阻止完成；最终状态验证——即在最终代码上运行仓库完整适用的测试、lint、类型检查与格式化套件；以及对每项任务所记录技能决策的核对。随后，代理报告交付物、证据与局限，并仅提议一次 Executive Report，只有你提出要求才会生成。',
+            linkLabel: '查看规范',
             linkPath: '/spec/dwp-specification',
           },
         ],
       },
       {
         id: 'compare',
-        title: 'How it compares',
+        title: '它与其他方案的对比',
         items: [
           {
             id: 'vs-sdd-tools',
             question:
-              'How is it different from spec-driven tools such as Spec Kit, OpenSpec or Kiro?',
+              '它与 Spec Kit、OpenSpec 或 Kiro 等规范驱动工具有何不同？',
             answer:
-              "They solve adjacent problems. Spec-driven tools are excellent at capturing what should change: specifications, requirements and change proposals in a repeatable shape. Deep Work Plan is about how an agent executes for hours without drifting: the onboarded harness, per-task validation gates selected from the touched surface, on-disk resumable state, a mandatory Final Review with a security pass, and a conformance checker for the repository itself. The two can be combined, with a spec or change proposal feeding a plan. The comparison page lays the capabilities side by side, on each tool's own terms.",
-            linkLabel: 'See the comparison',
+              '它们解决的是相邻的问题。规范驱动工具擅长捕捉应当改变什么：以可复用的形态呈现规范、需求与变更提案。Deep Work Plan 关心的是代理如何连续执行数小时而不偏移：接入后的 harness（运行支架）、从触及面中选择的逐任务验证关卡、磁盘上可恢复的状态、带安全审查环节的强制 Final Review，以及针对仓库本身的符合性检查器。二者可以结合：用一份规范或变更提案喂给一份计划。对比页面按每个工具自身的定位将各项能力并排呈现。',
+            linkLabel: '查看对比',
             linkPath: '/compare',
           },
           {
             id: 'vs-agent-frameworks',
             question:
-              'How is it different from agent workflow frameworks such as BMAD, Superpowers or Get Shit Done?',
+              '它与 BMAD、Superpowers 或 Get Shit Done 等代理工作流框架有何不同？',
             answer:
-              'Those frameworks bring strong working styles: roles, principles, test-first steps, verification habits. Deep Work Plan focuses on what stays in the repository and what can be checked: a harness any agent reads cold, task files with acceptance criteria and gates, state that survives a session, a conformance checker with a CI-friendly exit code, and a published measurement of how many instruction bytes each flow loads. It is tool-agnostic by construction and adds no service, provider or secret to the core loop. The comparison page shows where each approach is built in, optional or out of scope.',
-            linkLabel: 'See the comparison',
+              '这些框架带来了成熟的工作风格：角色、原则、测试先行的步骤、验证的习惯。Deep Work Plan 聚焦于什么留在仓库里、什么可以被检查：任何代理都能冷启动读取的 harness、带验收标准与关卡的任务文件、能在会话结束后存续的状态、带 CI 友好退出码的符合性检查器，以及对每个流程加载多少指令字节的公开测量。它在构造上即是工具无关的，并且不向核心循环添加任何服务、提供商或密钥。对比页面标明了每种做法在何处内置、可选或不在范围内。',
+            linkLabel: '查看对比',
             linkPath: '/compare',
           },
           {
             id: 'vs-native-plan-mode',
-            question: "Why not just use my agent's built-in plan mode?",
+            question: '为什么不直接使用我所在用代理的内置计划模式？',
             answer:
-              "Built-in plan modes are useful and Deep Work Plan builds on the same substrate, the `AGENTS.md` convention and the open Agent Skills standard. The difference is where the plan lives and what enforces it. Native plans usually live outside the repository and expire with the session; Deep Work Plan writes the plan, its state and its evidence into the repository, so another agent or a teammate can continue it, and every task carries an executable gate and a recorded log. You keep using your agent's plan mode for thinking; the methodology adds the durable, verifiable execution loop.",
-            linkLabel: 'See the comparison',
+              '内置计划模式是有用的，而 Deep Work Plan 建立在同样的基础之上——`AGENTS.md` 约定与开放的 Agent Skills 标准。区别在于计划存放在哪里、由什么来保证它被执行。原生计划通常位于仓库之外，并随会话一起失效；Deep Work Plan 把计划、其状态与其证据写进仓库，因此另一个代理或一位队友可以接续它，而且每项任务都带有一道可执行的关卡和一份留存的日志。你可以继续用代理自带的计划模式来思考；方法论补上的是持久、可验证的执行循环。',
+            linkLabel: '查看对比',
             linkPath: '/compare',
           },
         ],
       },
       {
         id: 'adopt',
-        title: 'Adopting it',
+        title: '采用它',
         items: [
           {
             id: 'install',
-            question:
-              'What does onboarding write into my repository, and does it touch existing files?',
+            question: '接入会向我的仓库写入什么？会改动现有文件吗？',
             answer:
-              'Onboarding is non-destructive: it detects an existing `AGENTS.md`, `docs/`, `.agents/` or `CLAUDE.md`, reconciles rather than overwrites, and asks before replacing anything. It writes the `AGENTS.md` index with real commands, a reasoned `docs/` tree, per-module docs, the `.agents/` kit with thin `dwp-*` commands, a gitignored `.dwp/` output area, a verified testing map, and the required local code review (the AI Diff Reviewer skill plus a repo-tailored review extension). It then runs a self-check and the conformance checker so you can see what was produced. A repository onboarded under an earlier version gets a targeted upgrade that changes only what is missing.',
-            linkLabel: 'The adoption endpoint',
+              '接入是非破坏性的：它会检测已有的 `AGENTS.md`、`docs/`、`.agents/` 或 `CLAUDE.md`，采取调和而非覆盖，并在替换任何内容之前先询问。它会写入带真实命令的 `AGENTS.md` 索引、一棵经过推理的 `docs/` 树、各模块文档、带轻量 `dwp-*` 命令的 `.agents/` 套件、一个被 gitignore 的 `.dwp/` 输出区、一份经过验证的测试映射，以及必备的本地代码审查（AI Diff Reviewer 技能加一份为仓库定制的审查扩展）。随后它会运行自检与符合性检查器，让你看到产出了什么。在更早版本下接入的仓库会得到一次定向升级，只补上缺失的部分。',
+            linkLabel: '采用入口',
             linkPath: '/init',
           },
           {
             id: 'cost',
-            question: 'What does it cost, and how is efficiency measured?',
+            question: '它收费吗？效率如何衡量？',
             answer:
-              'The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads, measured by a script committed with the skill and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those; a pre-registered public evaluation is planned to measure outcomes properly.',
-            linkLabel: 'Trust and disclosure',
+              '方法论与技能均采用 MIT 许可，且完全免费；核心流程中没有服务、没有 API 密钥、也没有遥测。效率以每个流程加载的指令字节数来报告，由随技能一同提交的脚本测量，并发布在一本评估台账中，增长与下降同样如实呈现。它不以 token 百分比或成本节省的形式报告，因为一份字节清单无法证明这些；一项预注册的公开评估已在计划之中，用以恰当地衡量实际效果。',
+            linkLabel: '信任与披露',
             linkPath: '/trust',
           },
         ],
       },
     ],
     stillHaveQuestions: {
-      title: 'Still have a question?',
-      body: 'Open a discussion or an issue on GitHub. Questions that come up repeatedly are added to this page.',
-      ctaLabel: 'Ask on GitHub',
+      title: '还有问题？',
+      body: '在 GitHub 上发起讨论或提交 issue。反复出现的问题会被收录到本页。',
+      ctaLabel: '到 GitHub 提问',
     },
   },
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan compared with the alternatives — Deep Work Plan',
+      title: 'Deep Work Plan 与替代方案的对比 — Deep Work Plan',
       description:
-        'How Deep Work Plan relates to spec-driven tools, agent workflow frameworks and vendor plan modes: each on its own terms, with sources and a review date.',
+        'Deep Work Plan 与规范驱动开发工具、代理工作流框架以及各代理自带的原生计划模式之间是什么关系：本页按每个替代方案自身的定位逐一描述，标明每项能力是内置、可选还是不在其范围内，每项事实都可追溯到其官方文档，并注明最近一次复核的日期。这是一张地图，而非一份排名。',
     },
-    eyebrow: 'Compare',
-    title: 'Deep Work Plan and the alternatives',
+    eyebrow: '对比',
+    title: 'Deep Work Plan 与替代方案',
     intro:
-      'Pick the right layer for your situation. Each alternative is described on its own terms, every fact traces to its official documentation, and the page says when it was last reviewed. This is a map, not a ranking.',
+      '根据你的处境选择合适的层。每个替代方案都按其自身定位来描述，每项事实都可追溯到其官方文档，页面也标明最近一次复核的时间。这是一张地图，不是一份排名。',
     howToRead: {
-      title: 'How to read this page',
-      body: 'Three values describe each capability. They say where a capability lives in a tool, not how good the tool is.',
+      title: '如何阅读本页',
+      body: '三个取值描述每项能力。它们说明的是一项能力位于工具中的何处，而不是工具的好坏。',
       values: {
-        builtIn: 'Built in',
-        optional: 'Optional or via extension',
-        notInScope: 'Not in scope',
+        builtIn: '内置',
+        optional: '可选或通过扩展',
+        notInScope: '不在范围内',
       },
     },
-    reviewedOnLabel: 'Last reviewed',
-    alternativesTitle: 'The alternatives, on their own terms',
-    officialSiteLabel: 'Official site',
+    reviewedOnLabel: '最近复核',
+    alternativesTitle: '替代方案，按各自定位呈现',
+    officialSiteLabel: '官方网站',
     categories: {
-      methodology: 'Methodology',
-      sdd: 'Spec-driven development tools',
-      agentFramework: 'Agent workflow frameworks',
-      vendorNative: 'Vendor-native plan modes',
+      methodology: '方法论',
+      sdd: '规范驱动开发工具',
+      agentFramework: '代理工作流框架',
+      vendorNative: '厂商原生计划模式',
     },
     matrix: {
-      title: 'Capability matrix',
+      title: '能力矩阵',
       caption:
-        'Where each capability lives, per tool. Built in, optional or via extension, or not in scope. Reviewed against official documentation.',
-      capabilityColumn: 'Capability',
+        '每项能力在各工具中的所在。内置、可选或通过扩展，或不在范围内。依据官方文档复核。',
+      capabilityColumn: '能力',
     },
     capabilities: {
       toolAgnostic: {
-        label: 'Works with any coding agent',
-        help: 'The same repository files drive Claude Code, Codex, Cursor, Gemini CLI and others.',
+        label: '与任何编码代理协同工作',
+        help: '同一份仓库文件驱动 Claude Code、Codex、Cursor、Gemini CLI 及其他代理。',
       },
       repoNativeHarness: {
-        label: 'Writes the agent harness into the repository',
-        help: "Instructions, docs, skills and commands live in the repository, not in one tool's settings.",
+        label: '把代理 harness 写入仓库',
+        help: '指令、文档、技能与命令都存放在仓库中，而非某个工具的设置里。',
       },
       taskAcceptanceCriteria: {
-        label: 'Acceptance criteria per task',
-        help: 'Each task states observable conditions for being done.',
+        label: '逐任务的验收标准',
+        help: '每项任务都写明可观察的完成条件。',
       },
       perTaskGates: {
-        label: 'Validation gate per task',
-        help: 'Each task names the commands that must pass, selected from what it touched.',
+        label: '逐任务的验证关卡',
+        help: '每项任务都点明必须通过的命令，并从其触及的内容中选择。',
       },
       resumableState: {
-        label: 'Resumable state on disk',
-        help: 'Progress survives a session reset and can be picked up by another agent or a teammate.',
+        label: '磁盘上可恢复的状态',
+        help: '进展在会话重置后依然存续，可由另一个代理或一位队友接手。',
       },
       finalReview: {
-        label: 'Mandatory closing review with a security pass',
-        help: 'The plan cannot complete without a security review of the full change set and validation of the final state.',
+        label: '带安全审查环节的强制收尾审查',
+        help: '未经对完整变更集的安全审查与对最终状态的验证，计划无法完成。',
       },
       conformanceChecker: {
-        label: 'Executable conformance checker',
-        help: 'A script verifies the repository and its plans against the standard, with a CI-friendly exit code.',
+        label: '可执行的符合性检查器',
+        help: '一个脚本依据标准核验仓库及其计划，并提供对 CI 友好的退出码。',
       },
       instructionBudgetLedger: {
-        label: 'Published instruction-load measurement',
-        help: 'The bytes each flow loads are measured by a committed script and published with their limits.',
+        label: '公开的指令加载测量',
+        help: '每个流程加载的字节数由随仓库提交的脚本测量，并连同其上限一同发布。',
       },
       onboardingScaffold: {
-        label: 'Onboarding that scaffolds documentation',
-        help: "A first run writes the repository's agent-facing documentation and kit.",
+        label: '搭建文档骨架的接入',
+        help: '首次运行即写出仓库面向代理的文档与套件。',
       },
       brownfieldSpecs: {
-        label: 'Living specs for existing systems',
-        help: 'Changes are specified as deltas that merge into a growing specification of the system.',
+        label: '面向存量系统的活规范',
+        help: '变更以增量形式规范，并合并进一份不断生长的系统规范。',
       },
     },
     alternatives: {
       dwp: {
         name: 'Deep Work Plan',
         whatItDoesWell:
-          'Installs as a skill, onboards the repository into an agent harness and runs long-horizon plans with per-task validation gates, on-disk state and a mandatory Final Review.',
+          '以技能形式安装，把仓库接入为代理 harness（运行支架），并以逐任务验证关卡、磁盘上的状态与强制的 Final Review 运行长程计划。',
         audience:
-          'Developers and teams who hand multi-session work to any coding agent and need it to finish verified.',
+          '把跨会话工作交给任意编码代理、并需要工作带着验证完成的开发者与团队。',
       },
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'Turns a feature into an executable specification through a constitution, a spec, a plan and a task list, driven by slash commands that integrate with more than fifty coding agents.',
+          '通过一部宪章、一份规范、一份计划和一份任务清单，把一个功能转变为可执行的规范，由与五十余个编码代理集成的斜杠命令驱动。',
         audience:
-          'Teams that want a repeatable specify, plan, tasks and implement workflow inside the agent they already use.',
+          '希望在自己已在使用的代理内部获得可复用的“规范、计划、任务、实现”工作流的团队。',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'Captures each change as a proposal with delta specs (added, modified, removed) and RFC 2119 requirements with scenarios, then archives them into living specifications.',
-        audience:
-          'Teams working on existing systems who want specifications to grow one change at a time.',
+          '把每次变更捕捉为一份提案，带增量规范（新增、修改、移除）与含场景的 RFC 2119 需求，随后将它们归档为不断生长的活规范。',
+        audience: '在存量系统上工作、希望规范随每次变更逐步生长的团队。',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'An agentic IDE and CLI whose specs move from EARS-style requirements to design to tasks, with steering files and hooks that run on editor events.',
+          '一款代理式 IDE 与 CLI，其规范从 EARS 风格需求推进到设计再到任务，并带有在编辑器事件上运行的引导文件与钩子。',
         audience:
-          'Developers who want spec-driven development built into their editor with AWS-backed tooling.',
+          '希望规范驱动开发内置于编辑器、并配有 AWS 支撑工具链的开发者。',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'An agile framework of specialized agent roles (analysis, product, architecture, development, quality) that produces briefs, requirements, architecture documents and story files.',
-        audience:
-          'Teams that like role-based ceremonies and want a full agile lifecycle for agent work.',
+          '一套由专业化代理角色（分析、产品、架构、开发、质量）组成的敏捷框架，产出简报、需求、架构文档与故事文件。',
+        audience: '偏好角色化仪式、并希望代理工作拥有完整敏捷生命周期的团队。',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'A skills library and workflow for brainstorming, planning in small test-first steps, executing with subagents and reviewing before completion.',
-        audience:
-          'Developers who want disciplined test-driven execution inside their coding agent.',
+          '一套技能库与工作流，用于头脑风暴、以测试先行的小步骤规划、用子代理执行，并在完成前审查。',
+        audience: '希望在编码代理内部获得纪律化测试驱动执行的开发者。',
       },
       'get-shit-done': {
         name: 'Get Shit Done',
         whatItDoesWell:
-          'A planning system with a .planning directory, requirement ids, phase plans, fresh-context execution and a verification pass against stated must-haves.',
+          '一套计划系统，带有 .planning 目录、需求编号、阶段计划、全新上下文执行，以及针对声明必备项的验证环节。',
         audience:
-          'Solo developers and small teams who want context engineering and verification with little ceremony.',
+          '想要上下文工程与验证、又不想有太多仪式的独立开发者与小团队。',
       },
       'vendor-native': {
-        name: 'Vendor-native plan modes',
+        name: '厂商原生计划模式',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor and Gemini CLI ship plan modes, instruction files and skills that follow the AGENTS.md and Agent Skills standards.',
-        audience:
-          'Anyone who wants planning inside a single agent without adopting a methodology.',
+          'Claude Code、Codex、Cursor 与 Gemini CLI 都内置了计划模式，以及遵循 AGENTS.md 与 Agent Skills 标准的指令文件和技能。',
+        audience: '希望在单个代理内部获得规划能力、而无需采纳一套方法论的人。',
       },
     },
     dwpStrengths: {
-      title: 'What Deep Work Plan brings',
+      title: 'Deep Work Plan 带来什么',
       items: [
         {
-          title: 'Tool-agnostic and repository-native',
-          body: 'The harness and the plan are files in your repository, read by any agent that follows the AGENTS.md and Agent Skills standards. Switching agents does not lose the plan.',
+          title: '工具无关、仓库原生',
+          body: 'harness（运行支架）与计划都是你仓库中的文件，任何遵循 AGENTS.md 与 Agent Skills 标准的代理都能读取。更换代理不会丢失计划。',
         },
         {
-          title: 'Validation selected from what each task touched',
-          body: 'Every task declares its touched surface and runs the tests of the changed behavior and its consumers, widening to the full suite when the impact cannot be bounded. Zero selected tests is never a pass.',
+          title: '从每项任务触及的内容中选择的验证',
+          body: '每项任务声明其触及面，并运行被改行为及其消费方的测试，当影响无法界定时，扩大到完整的测试套件。选出的测试数量为零永远不算通过。',
         },
         {
-          title: 'One Final Review with a security pass',
-          body: 'A plan closes with a security review of the accumulated change set, including a required local review of the diff, and a validation of the final state. Critical findings block completion.',
+          title: '一次带安全审查环节的 Final Review',
+          body: '计划以对累计变更集的安全审查收尾，其中包括对 diff 的必备本地审查，以及对最终状态的验证。critical 发现会阻止完成。',
         },
         {
-          title: 'State that survives sessions and agents',
-          body: 'README checkboxes, task logs, a bounded working index and a machine-readable state file are written at every boundary, so another session or another agent continues from disk. Even an interrupted plan creation is recoverable.',
+          title: '跨会话、跨代理存续的状态',
+          body: 'README 复选框、任务日志、有界的进行中索引与可机器读取的状态文件在每个边界写入，因此另一个会话或另一个代理都能从磁盘接续。即使计划创建被中断，也是可恢复的。',
         },
         {
-          title: 'A conformance checker for the repository itself',
-          body: 'A read-only script verifies the harness and every plan against the specification, understands both plan lifecycles and exits with a CI-friendly code.',
+          title: '针对仓库本身的符合性检查器',
+          body: '一个只读脚本依据规范核验 harness 与每份计划，理解两种计划生命周期，并以对 CI 友好的退出码退出。',
         },
         {
-          title: 'Instruction load measured and published',
-          body: 'A committed script measures how many bytes each flow loads; the results, including the increases, are published as bytes, never as token or cost percentages.',
+          title: '指令加载的测量与发布',
+          body: '一个随仓库提交的脚本测量每个流程加载多少字节；结果——包括增长——以字节数发布，从不用 token 或成本百分比表示。',
         },
       ],
     },
     honestLimits: {
-      title: 'Honest limits',
-      body: 'Deep Work Plan has no living or delta specification mechanism; OpenSpec and similar tools are stronger there. No independent benchmark of the methodology exists yet; a pre-registered public evaluation is planned. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes.',
+      title: '诚实的局限',
+      body: 'Deep Work Plan 没有活规范或增量规范机制；OpenSpec 及类似工具在那一面更强。该方法论尚无独立基准测试；一项预注册的公开评估已在计划之中。指令加载台账测量的是加载的字节数，而非 token、成本或结果。',
     },
     correction: {
-      title: 'Help us keep this accurate',
-      body: 'This page is reviewed on the date shown and corrected on request. If a description of your tool is out of date or incomplete, open an issue and we will fix it.',
-      ctaLabel: 'Open an issue',
+      title: '帮助我们保持准确',
+      body: '本页在所示日期复核，并按请求更正。如果你所用工具的描述已过时或不完整，请提交一个 issue，我们会修正。',
+      ctaLabel: '提交 issue',
     },
-    sourcesTitle: 'Sources',
+    sourcesTitle: '来源',
   },
 
   trustPage: {
