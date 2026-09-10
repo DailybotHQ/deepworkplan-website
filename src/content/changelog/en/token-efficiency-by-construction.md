@@ -11,10 +11,10 @@ sourceLabel: "ADR 0001 — token-efficiency architecture"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/blob/feat/token-efficiency-upgrade/docs/adr/0001-token-efficiency-architecture.md"
 ---
 
-Context is the agent's scarcest resource. The token-efficiency work in Deep Work Plan treats that constraint as an architecture problem: compress the scaffolding, never the instructions.
+Context is the agent's scarcest resource. In this architecture update, we are treating that constraint as an engineering problem: compress the scaffolding, never the instructions.
 
 The design has five levers: progressive disclosure, affected validation, task-local learning, direct trust-mode creation, and bounded working context. Together they reduce repeated reading and unnecessary full-suite work without making plans vaguer or weakening their gates.
 
-The public evaluation ledger measures instruction bytes and replay behavior honestly. It does not turn an estimate into an invented token-saving percentage.
+We will measure instruction bytes and replay behavior in the public evaluation ledger. The goal is transparent improvement, not an invented token-saving percentage.
 
 Read the [token-efficiency architecture](https://github.com/DailybotHQ/deepworkplan-skill/blob/feat/token-efficiency-upgrade/docs/adr/0001-token-efficiency-architecture.md) and its [evaluation notes](https://github.com/DailybotHQ/deepworkplan-skill/blob/feat/token-efficiency-upgrade/docs/evaluations/token-efficiency.md).

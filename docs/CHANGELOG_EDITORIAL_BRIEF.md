@@ -24,7 +24,7 @@ the methodology/skill major release.
 
 - Date: 2026-09-10
 - Label: Deep Work Plan v3 · DWP standard 2.3.0
-- Status: shipped major-release commit; release tag publication remains a repository release concern
+- Status: release-day major-release commit
 - Summary: The skill's command surface stays familiar while plan lifecycle, conformance, and review guarantees become substantially stronger.
 - Evidence: `d050474`, `skills/deepworkplan/spec/DWP_SPECIFICATION.md`, `AGENTS.md`
 - Core points: one Final Review for new plans; AI Diff Reviewer local review as baseline; zero optional addons as the conformance floor; guide routing index; standard provenance in AGENTS.md; explicit legacy-plan compatibility and migration path.
@@ -33,7 +33,7 @@ the methodology/skill major release.
 
 - Date: 2026-09-09
 - Label: Architecture · token efficiency
-- Status: accepted architecture and implementation line
+- Status: architecture decision published that day
 - Summary: DWP reduces context cost by loading less, repeating less, and running expensive validation only when the touched surface warrants it.
 - Evidence: `docs/adr/0001-token-efficiency-architecture.md`, `docs/evaluations/token-efficiency.md`, commits `a3e7018` through `0da548e`
 - Core points: progressive disclosure, affected validation, task-local learning, direct trust-mode creation, bounded working context.
@@ -42,7 +42,7 @@ the methodology/skill major release.
 
 - Date: 2026-09-10
 - Label: Reliability · resumability
-- Status: shipped follow-up amendment in the v3 line
+- Status: release-day reliability amendment
 - Summary: Plan creation becomes recoverable from the first write instead of leaving an opaque half-created artifact.
 - Evidence: `69b03ea`, `9ac6584`, `89d3889`
 - Core points: manifest first, README skeleton with intended task list, recorded PLAN_ANALYSIS, task files in order, state layer, status flipped last.
@@ -51,7 +51,7 @@ the methodology/skill major release.
 
 - Date: 2026-07-16 to 2026-09-10
 - Label: Trust · reviewability
-- Status: shipped across the 2.17.x and v3 lines
+- Status: trust work published across the 2.17.x release line
 - Summary: The methodology makes security and provenance part of the default harness rather than an optional afterthought.
 - Evidence: `CHANGELOG.md` entries for `2.17.0`, `2.17.1`, commit `606c1c0`, `docs/SECURITY.md`, `TRUST.md`
 - Core points: local AI review baseline, pinned addon installs, trust boundaries, checksummed provenance, legacy compatibility without silent weakening.
@@ -67,9 +67,9 @@ the methodology/skill major release.
 
 ## Editorial guardrails
 
-- Do not claim a published `v3.0.0` skill tag until the source repository has
-  one. The current evidence is the explicit v3 major-release commit and the
-  post-release follow-up branch.
+- Write each post from the perspective of its publication date. Do not import
+  later website versions, current dogfood state, or retrospective labels into
+  an earlier entry.
 - Do not publish internal branch names, task numbers, evaluation traces, or
   private session URLs as user-facing changelog copy.
 - Use measured token-efficiency evidence from the public ledger, never invented

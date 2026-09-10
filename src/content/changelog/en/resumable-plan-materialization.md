@@ -11,10 +11,10 @@ sourceLabel: "Resumable materialization commit 69b03ea"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/69b03ea"
 ---
 
-Creating a Deep Work Plan is now designed to survive interruption. The materializer writes the manifest first, then a README skeleton containing the intended task list, records the requirements analysis, writes task files in order, and flips the status only after the plan is complete.
+Starting today, creating a Deep Work Plan is designed to survive interruption. The materializer writes the manifest first, then a README skeleton containing the intended task list, records the requirements analysis, writes task files in order, and flips the status only after the plan is complete.
 
 That sequence turns partial work into recoverable state. A new session can see what the plan intended to contain, which files are missing, and what reasoning produced the task decomposition.
 
-The result is a better fit for long-horizon work: crashes, context resets, and handoffs do not have to erase the plan's shape.
+This gives long-horizon work a safer starting point: a crash, context reset, or handoff no longer has to erase the plan's shape.
 
 See the [resumable materialization change](https://github.com/DailybotHQ/deepworkplan-skill/commit/69b03ea).

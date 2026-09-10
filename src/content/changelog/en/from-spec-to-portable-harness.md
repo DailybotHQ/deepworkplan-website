@@ -11,8 +11,8 @@ sourceLabel: "Skill changelog 2.3.0–2.16.0"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
 ---
 
-Before v3, Deep Work Plan expanded from a written plan loop into a portable adoption kit. The skill added a trust statement and checksummed provenance, broader onboarding presets and agent hosts, first-class testing discipline, a conformance checker, a state and resume protocol, and compatibility for both `.claude` and `.cursor` through `.agents`.
+Over these releases, Deep Work Plan expanded from a written plan loop into a portable adoption kit. The skill added a trust statement and checksummed provenance, broader onboarding presets and agent hosts, first-class testing discipline, a conformance checker, a state and resume protocol, and compatibility for both `.claude` and `.cursor` through `.agents`.
 
-Those milestones established the foundation v3 now tightens: the repository is not just where the plan is stored. It is the agent's working harness.
+Together, these milestones establish the foundation for the next stage: the repository is not just where the plan is stored. It is the agent's working harness.
 
 Review the [skill's release history](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md) for the full sequence.

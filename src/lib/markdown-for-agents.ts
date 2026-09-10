@@ -75,6 +75,7 @@ function generateSiteNavigation(lang: string): string {
       links: [
         { label: t.nav.compare, path: '/compare' },
         { label: t.nav.faq, path: '/faq' },
+        { label: t.nav.changelog, path: '/changelog' },
       ],
     },
     {
@@ -210,5 +211,87 @@ export function serializeReaderEntryToAgentMarkdown(
 
   lines.push(generateSiteNavigation(lang));
 
+  return `${lines.join('\n')}\n`;
+}
+
+interface ChangelogSerializeEntry {
+  id?: string;
+  body?: string;
+  data: {
+    title: string;
+    description: string;
+    date: Date;
+    version: string;
+    sourceLabel?: string;
+    sourceUrl?: string;
+  };
+}
+
+export function serializeChangelogIndexToAgentMarkdown(
+  entries: ChangelogSerializeEntry[],
+  lang: string
+): string {
+  const t = getTranslations(lang as Language);
+  const prefix = buildUrlPrefix(lang);
+  const lines = [
+    `# ${t.changelogPage.title}`,
+    '',
+    `> ${t.changelogPage.meta.description}`,
+    '',
+    `Language: ${lang}`,
+    `Canonical: ${SITE_URL}${prefix}/changelog`,
+    buildMarkdownAccessLine(lang),
+    '',
+    '---',
+    '',
+  ];
+
+  for (const entry of entries) {
+    const slug = entry.id?.replace(`${lang}/`, '') ?? '';
+    lines.push(
+      `## [${entry.data.title}](${prefix}/changelog/${slug})`,
+      '',
+      `> ${entry.data.description}`,
+      '',
+      `Date: ${formatDate(entry.data.date)}`,
+      `Version: ${entry.data.version}`,
+      ''
+    );
+  }
+
+  lines.push(generateSiteNavigation(lang));
+  return `${lines.join('\n')}\n`;
+}
+
+export function serializeChangelogEntryToAgentMarkdown(
+  entry: ChangelogSerializeEntry,
+  options: { slug: string; lang: string; index?: boolean }
+): string {
+  const { slug, lang, index = false } = options;
+  const prefix = buildUrlPrefix(lang);
+  const pagePath = index ? '/changelog' : `/changelog/${slug}`;
+  const lines = [
+    `# ${entry.data.title}`,
+    '',
+    `> ${entry.data.description}`,
+    '',
+    `Language: ${lang}`,
+    `Canonical: ${SITE_URL}${prefix}${pagePath}`,
+    buildMarkdownAccessLine(lang),
+    `Date: ${formatDate(entry.data.date)}`,
+    `Version: ${entry.data.version}`,
+    '',
+    '---',
+    '',
+  ];
+
+  if (entry.body) lines.push(entry.body.trim(), '');
+  if (entry.data.sourceLabel && entry.data.sourceUrl) {
+    lines.push(
+      `Source: [${entry.data.sourceLabel}](${entry.data.sourceUrl})`,
+      ''
+    );
+  }
+  lines.push(generateSiteNavigation(lang));
   return `${lines.join('\n')}\n`;
 }
