@@ -132,6 +132,12 @@ export const vi: SiteTranslations = {
         deepLinkLabel: 'Xem onboarding tạo ra gì',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'Phương pháp · Hồi V',
+        lead: 'Ngữ cảnh là tài nguyên khan hiếm nhất của agent. Harness tải tiến tiến, chỉ kiểm chứng phần thay đổi và học theo từng tác vụ — kế hoạch tự trả phí cho chính nó.',
+        deepLinkLabel: 'Đọc phương pháp luận',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'Khởi tạo dựa trên suy luận',

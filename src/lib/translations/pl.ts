@@ -133,6 +133,12 @@ export const pl: SiteTranslations = {
         deepLinkLabel: 'Zobacz, co tworzy onboarding',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'Metoda · Akt V',
+        lead: 'Kontekst to najrzadszy zasób Twojego agenta. Harness ładuje się progresywnie, waliduje tylko zmiany i uczy się zadanie po zadaniu — plan spłaca się sam.',
+        deepLinkLabel: 'Przeczytaj metodologię',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'Onboarding oparty na rozumowaniu',

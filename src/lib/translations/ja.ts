@@ -133,6 +133,12 @@ export const ja: SiteTranslations = {
         deepLinkLabel: 'オンボーディングの生成物を見る',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'メソッド · 第五幕',
+        lead: 'コンテキストはエージェントにとって最も希少な資源です。ハーネスは段階的に読み込み、変更された箇所だけを検証し、タスクごとに学習します——長期の作業でも経済的に続けられる設計です。',
+        deepLinkLabel: '方法論を読む',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: '推論にもとづくオンボーディング',

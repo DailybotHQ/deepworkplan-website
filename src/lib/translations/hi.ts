@@ -131,6 +131,12 @@ export const hi: SiteTranslations = {
         deepLinkLabel: 'देखें ऑनबोर्डिंग क्या बनाता है',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'पद्धति · अंक V',
+        lead: 'संदर्भ आपके एजेंट का सबसे दुर्लभ संसाधन है। harness प्रगतिशील रूप से लोड होता है, केवल बदले हुए को सत्यापित करता है और कार्य दर कार्य सीखता है — योजना खुद का खर्च निकालती है।',
+        deepLinkLabel: 'पद्धति पढ़ें',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'तर्क-आधारित ऑनबोर्डिंग',

@@ -127,6 +127,12 @@ export const en: SiteTranslations = {
         deepLinkLabel: 'See what onboarding generates',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'The method · Act V',
+        lead: 'Context is the scarcest resource your agent has. The harness loads progressively, validates what changed, and learns task by task — so the plan pays for itself.',
+        deepLinkLabel: 'Read the methodology',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'Reasoning-based onboarding',

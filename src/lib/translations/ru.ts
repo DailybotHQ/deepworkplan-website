@@ -133,6 +133,12 @@ export const ru: SiteTranslations = {
         deepLinkLabel: 'Посмотреть, что создаёт онбординг',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'Метод · Акт V',
+        lead: 'Контекст — самый дефицитный ресурс агента. Harness загружается прогрессивно, проверяет только изменённое и учится на месте каждой задачи — план окупает себя сам.',
+        deepLinkLabel: 'Читать методологию',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'Онбординг на основе рассуждений',

@@ -133,6 +133,12 @@ export const tr: SiteTranslations = {
         deepLinkLabel: 'Onboarding çıktısını görün',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'Yöntem · Perde V',
+        lead: 'Bağlam, ajanınızın en kıt kaynağıdır. Harness aşamalı yüklenir, yalnızca değişeni doğrular ve görev başına öğrenir — plan kendini öder.',
+        deepLinkLabel: 'Metodolojiyi okuyun',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'Akıl yürütmeye dayalı kuruluma alma',

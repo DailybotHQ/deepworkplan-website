@@ -132,6 +132,12 @@ export const fr: SiteTranslations = {
         deepLinkLabel: 'Voir ce que l’onboarding génère',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'La méthode · Acte V',
+        lead: 'Le contexte est la ressource la plus rare de votre agent. Le harness se charge progressivement, ne valide que ce qui a changé et apprend tâche par tâche — le plan se paie tout seul.',
+        deepLinkLabel: 'Lire la méthodologie',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'Onboarding fondé sur le raisonnement',

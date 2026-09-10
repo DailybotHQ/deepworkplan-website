@@ -132,6 +132,12 @@ export const it: SiteTranslations = {
         deepLinkLabel: 'Vedi cosa genera l’onboarding',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'Il metodo · Atto V',
+        lead: 'Il contesto è la risorsa più scarsa del vostro agente. L’harness si carica progressivamente, valida solo ciò che è cambiato e impara task per task — il piano si ripaga da solo.',
+        deepLinkLabel: 'Leggi la metodologia',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'Onboarding basato sul ragionamento',

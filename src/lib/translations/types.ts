@@ -169,6 +169,12 @@ export interface SiteTranslations {
         deepLinkLabel: string;
         deepLinkHref: string;
       };
+      act5: {
+        kicker: string;
+        lead: string;
+        deepLinkLabel: string;
+        deepLinkHref: string;
+      };
     };
     onboarding: {
       badge: string;

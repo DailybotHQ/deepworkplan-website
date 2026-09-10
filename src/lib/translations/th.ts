@@ -131,6 +131,12 @@ export const th: SiteTranslations = {
         deepLinkLabel: 'ดูว่า onboarding สร้างอะไร',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'วิธีการ · องก์ที่ 5',
+        lead: 'คอนเท็กซ์คือทรัพยากรที่หายากที่สุดของเอเจนต์ harness โหลดแบบขั้นเป็นขั้น ตรวจสอบเฉพาะสิ่งที่เปลี่ยน และเรียนรู้รายงาน — แผนงานจ่ายค่าตัวเอง',
+        deepLinkLabel: 'อ่านวิธีการ',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'การเริ่มต้นบนพื้นฐานการให้เหตุผล',

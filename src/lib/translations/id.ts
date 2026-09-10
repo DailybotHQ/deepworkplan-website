@@ -131,6 +131,12 @@ export const id: SiteTranslations = {
         deepLinkLabel: 'Lihat hasil onboarding',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'Metode · Babak V',
+        lead: 'Konteks adalah sumber daya paling langka bagi agen Anda. Harness memuat progresif, memvalidasi yang berubah, dan belajar per tugas — rencana membayar dirinya sendiri.',
+        deepLinkLabel: 'Baca metodologi',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'Onboarding berbasis penalaran',

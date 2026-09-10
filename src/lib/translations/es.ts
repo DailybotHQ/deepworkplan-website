@@ -127,6 +127,12 @@ export const es: SiteTranslations = {
         deepLinkLabel: 'Ve qué genera la incorporación',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'El método · Acto V',
+        lead: 'El contexto es el recurso más escaso de tu agente. El harness carga progresivamente, valida lo que cambió y aprende tarea a tarea — así el plan se paga por sí mismo.',
+        deepLinkLabel: 'Lee la metodología',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'Incorporación basada en razonamiento',

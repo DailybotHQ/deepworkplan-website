@@ -132,6 +132,12 @@ export const de: SiteTranslations = {
         deepLinkLabel: 'Sehen Sie, was das Onboarding erzeugt',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: 'Die Methode · Akt V',
+        lead: 'Der Kontext ist die knappste Ressource Ihres Agenten. Das Harness lädt progressiv, validiert nur Geändertes und lernt Aufgabe für Aufgabe — so amortisiert sich der Plan selbst.',
+        deepLinkLabel: 'Lesen Sie die Methodik',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: 'Reasoning-basiertes Onboarding',

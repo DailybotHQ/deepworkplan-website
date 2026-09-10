@@ -131,6 +131,12 @@ export const ko: SiteTranslations = {
         deepLinkLabel: '온보딩이 생성하는 것 보기',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: '방법론 · 제5막',
+        lead: '컨텍스트는 에이전트에게 가장 희소한 자원입니다. 하네스는 점진적으로 로드하고, 변경된 부분만 검증하며, 작업마다 학습합니다 — 계획이 스스로 비용을 회수합니다.',
+        deepLinkLabel: '방법론 읽기',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: '추론 기반 온보딩',

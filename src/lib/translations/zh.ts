@@ -131,6 +131,12 @@ export const zh: SiteTranslations = {
         deepLinkLabel: '查看接入流程会生成什么',
         deepLinkHref: '/quickstart',
       },
+      act5: {
+        kicker: '方法论 · 第五幕',
+        lead: '上下文是任何模型最稀缺的资源。harness 渐进加载、只验证改动、按任务就地学习——让计划一轮轮自我回本。',
+        deepLinkLabel: '阅读方法论',
+        deepLinkHref: '/methodology',
+      },
     },
     onboarding: {
       badge: '基于推理的接入',
