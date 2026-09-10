@@ -71,6 +71,13 @@ function generateSiteNavigation(lang: string): string {
       ],
     },
     {
+      title: t.agentNav.sections.learn,
+      links: [
+        { label: t.nav.compare, path: '/compare' },
+        { label: t.nav.faq, path: '/faq' },
+      ],
+    },
+    {
       title: t.agentNav.sections.project,
       links: [
         { label: t.nav.trust, path: '/trust' },

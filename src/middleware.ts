@@ -50,6 +50,8 @@ const KNOWN_BASE_PATHS = new Set([
   'examples',
   'quickstart',
   'init',
+  'faq',
+  'compare',
   'trust',
   'developers',
   'privacy',

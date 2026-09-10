@@ -83,6 +83,8 @@ describe('buildAgentRecoveryMarkdown', () => {
       '/kit',
       '/examples',
       '/quickstart',
+      '/compare',
+      '/faq',
       '/init',
     ]);
     for (const link of RECOVERY_LINKS) {

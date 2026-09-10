@@ -52,6 +52,8 @@ export const RECOVERY_LINKS: { label: string; path: string }[] = [
   { label: 'Kit', path: '/kit' },
   { label: 'Examples', path: '/examples' },
   { label: 'Quickstart', path: '/quickstart' },
+  { label: 'Compare with alternatives', path: '/compare' },
+  { label: 'FAQ', path: '/faq' },
   { label: 'Init / adoption prompt', path: '/init' },
 ];
 
