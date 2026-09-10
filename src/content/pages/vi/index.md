@@ -75,7 +75,7 @@ Ngữ cảnh, công cụ, rào chắn và trạng thái nằm trong repository c
 - Cổng kiểm chứng, không phải cảm tính
 - Sống sót qua việc đặt lại ngữ cảnh
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Xem onboarding tạo ra gì](/vi/quickstart)
 ---

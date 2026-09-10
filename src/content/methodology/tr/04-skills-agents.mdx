@@ -27,7 +27,7 @@ Faydalı bir kısaltma: bir skill, yinelenen bir görevin *nasıl* yapılacağı
 
 Kuruluma alma, bir depoyu ajan harness’ına dönüştürür; onu dondurmaz. Kit, deponun iş akışları netleştikçe **büyümek** içindir. DWP, `/skill-create` ve `/agent-create` aracılığıyla çağrılan bir **author** alt skill’i sağlar; bu alt skill, deponun mevcut `.agents/` düzeni ve kuralları hakkında akıl yürütür, ardından bunlara uyan yeni bir skill, ajan veya ince komut yönlendiricisi yazar. Depo, genel bir kiti devralmak yerine kendi kitini yazar.
 
-author alt skill’i uygunluk konusunda özenlidir. İnsanların elle çalıştırdığı tekrarlanabilir bir prosedür için bir skill, ayrı model veya araç ihtiyaçları olan yinelenen bir rol için bir ajan ve yalnızca bir skill’e ya da ajana yönlendiren ince bir giriş noktası olarak bir komut oluşturur. Gerçek bir iş akışına uymayan genel her şeyi atlar ve eklediği her şeyle `.agents/docs/` kataloğunu eşitler. Aynı alt skill, kataloğu diskte gerçekte olanla bağdaştıran zorunlu Skills & Agents Discovery görevini de destekler — ve `/dwp-verify` bu bağdaştırmayı nesnel olarak doğrular, katalog ile dosyalar ayrıştığında kalır.
+author alt skill’i uygunluk konusunda özenlidir. İnsanların elle çalıştırdığı tekrarlanabilir bir prosedür için bir skill, ayrı model veya araç ihtiyaçları olan yinelenen bir rol için bir ajan ve yalnızca bir skill’e ya da ajana yönlendiren ince bir giriş noktası olarak bir komut oluşturur. Gerçek bir iş akışına uymayan genel her şeyi atlar ve eklediği her şeyle `.agents/docs/` kataloğunu eşitler. Aynı alt skill, kataloğu diskte gerçekte olanla bağdaştıran Final Review skills uzlaştırmasını da destekler — ve `/dwp-verify` bu bağdaştırmayı nesnel olarak doğrular, katalog ile dosyalar ayrıştığında kalır.
 
 ## Bakım eklentileri
 

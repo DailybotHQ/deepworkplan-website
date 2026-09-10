@@ -75,7 +75,7 @@ Deep Work Plan स्पेसिफिकेशन-संचालित वि
 - सत्यापन द्वार, भावनाओं पर नहीं
 - संदर्भ रीसेट से बच निकलता है
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [देखें ऑनबोर्डिंग क्या बनाता है](/hi/quickstart)
 ---

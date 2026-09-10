@@ -82,7 +82,7 @@ Der **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (Mark
 
 Skills sind wiederverwendbare Prozeduren, die namentlich aufgerufen werden. Eine Skill bündelt einen wiederholbaren Workflow (Tests ausführen, Lint beheben, Komponente erstellen).
 
-Die Methodik liefert eine kleine Menge zentraler Sub-Skills. Darunter lässt die **author**-Sub-Skill ein Repository **sein eigenes Kit wachsen**: aufgerufen via `/skill-create` und `/agent-create`, schlussfolgert über das bestehende `.agents/`-Layout und Konventionen und autorisiert dann eine neue Skill, einen Agenten oder einen dünnen Befehls-Delegator, der dazu passt, und hält den Katalog synchron. Dieselbe Sub-Skill führt die obligatorische Skills-&-Agents-Discovery-Aufgabe aus.
+Die Methodik liefert eine kleine Menge zentraler Sub-Skills. Darunter lässt die **author**-Sub-Skill ein Repository **sein eigenes Kit wachsen**: aufgerufen via `/skill-create` und `/agent-create`, schlussfolgert über das bestehende `.agents/`-Layout und Konventionen und autorisiert dann eine neue Skill, einen Agenten oder einen dünnen Befehls-Delegator, der dazu passt, und hält den Katalog synchron. Dieselbe Sub-Skill stützt den Skills-Abstimmungspass des Final Review.
 
 Kit-Eintrag: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 

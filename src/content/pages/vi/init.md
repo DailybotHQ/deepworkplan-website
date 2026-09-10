@@ -194,7 +194,7 @@ Sinh các Deep Work Plan cho mọi tác vụ và chạy chúng từng tác vụ 
 
 Mỗi kế hoạch khép lại bằng Final Review — một bước rà soát bảo mật trên các thay đổi của
 chính kế hoạch (giữ `docs/SECURITY.md` luôn cập nhật; một phát hiện nghiêm trọng chặn việc hoàn tất),
-kiểm chứng trạng thái cuối cùng và đối chiếu skill.
+kiểm chứng trạng thái cuối cùng và đối chiếu skill. Executive Report vẫn được cung cấp theo yêu cầu.
 
 ## 7. Kiểm chứng
 

@@ -75,7 +75,7 @@ Contexto, ferramentas, salvaguardas e estado vivem no seu repositório como arqu
 - Portões de validação, não palpites
 - Sobrevive a reinícios de contexto
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Veja o que o onboarding gera](/pt/quickstart)
 ---

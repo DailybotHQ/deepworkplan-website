@@ -75,7 +75,7 @@ Contexte, outils, garde-fous et état vivent dans votre dépôt sous forme de fi
 - Portes de validation, pas d’intuition
 - Survit aux réinitialisations de contexte
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Voir ce que l’onboarding génère](/fr/quickstart)
 ---

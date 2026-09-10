@@ -75,7 +75,7 @@ Kontekst, narzędzia, zabezpieczenia i stan mieszkają w Twoim repozytorium jako
 - Bramki walidacji, nie wrażenia
 - Przeżywa reset kontekstu
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Zobacz, co tworzy onboarding](/pl/quickstart)
 ---

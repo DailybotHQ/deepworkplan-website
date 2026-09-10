@@ -82,7 +82,7 @@ El **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marke
 
 Las habilidades son procedimientos reutilizables que se invocan por nombre. Una habilidad empaqueta un flujo de trabajo repetible (ejecutar pruebas, corregir el linter, crear un componente).
 
-La metodología incluye un pequeño conjunto de subhabilidades centrales. Entre ellas, la subhabilidad **author** permite que un repositorio **cree su propio kit**: invocada mediante `/skill-create` y `/agent-create`, razona sobre el esquema `.agents/` existente y sus convenciones, y luego crea una nueva habilidad, agente o comando delegador ligero que encaja con ellas, manteniendo el catálogo sincronizado. Esta misma subhabilidad ejecuta la tarea obligatoria de Descubrimiento de Habilidades y Agentes.
+La metodología incluye un pequeño conjunto de subhabilidades centrales. Entre ellas, la subhabilidad **author** permite que un repositorio **cree su propio kit**: invocada mediante `/skill-create` y `/agent-create`, razona sobre el esquema `.agents/` existente y sus convenciones, y luego crea una nueva habilidad, agente o comando delegador ligero que encaja con ellas, manteniendo el catálogo sincronizado. Esta misma subhabilidad respalda el pase de reconciliación de skills del Final Review.
 
 Entrada del kit: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 

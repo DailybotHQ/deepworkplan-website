@@ -82,7 +82,7 @@ section: Addons
 
 技能是按名称调用的可复用过程。一项技能将可重复的工作流打包（运行测试、修复 lint、创建组件）。
 
-方法论附带一小组核心子技能。其中，**author** 子技能让仓库**培育自己的套件**：通过 `/skill-create` 与 `/agent-create` 调用，它推理仓库现有的 `.agents/` 布局与约定，然后撰写与之匹配的新技能、代理或轻量命令委派器，并保持目录同步。同一子技能执行强制的 Skills & Agents Discovery 任务。
+方法论附带一小组核心子技能。其中，**author** 子技能让仓库**培育自己的套件**：通过 `/skill-create` 与 `/agent-create` 调用，它推理仓库现有的 `.agents/` 布局与约定，然后撰写与之匹配的新技能、代理或轻量命令委派器，并保持目录同步。同一子技能支撑 Final Review 的 skills 决策核对环节。
 
 套件条目：[Skill create](/kit/skill-create)、[Agent create](/kit/agent-create)。
 

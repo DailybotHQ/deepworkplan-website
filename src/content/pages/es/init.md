@@ -194,7 +194,7 @@ Genera Deep Work Plans para cualquier tarea y ejecútalos tarea por tarea:
 
 Todo plan se cierra con el Final Review — un pase de seguridad sobre los propios
 cambios del plan (manteniendo `docs/SECURITY.md` al día; un hallazgo crítico bloquea la finalización),
-Skills & Agents Discovery y el Reporte Ejecutivo.
+la validación del estado final y la reconciliación de las decisiones sobre skills. El Reporte Ejecutivo sigue disponible a petición.
 
 ## 7. Verifica
 

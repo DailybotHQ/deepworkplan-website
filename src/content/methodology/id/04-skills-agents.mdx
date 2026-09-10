@@ -14,7 +14,7 @@ DWP agnostik terhadap agent, tetapi ia mengharapkan dua blok pembangun yang beru
 
 ## Skill versus agent
 
-<SkillsAgents lang="en" class="not-prose my-10" />
+<SkillsAgents lang="id" class="not-prose my-10" />
 
 Keduanya mudah dikelirukan tetapi melayani tujuan yang berbeda:
 
@@ -27,7 +27,7 @@ Ringkasan yang berguna: sebuah skill adalah *bagaimana* melakukan tugas berulang
 
 Onboarding mengubah sebuah repositori menjadi agent harness; ia tidak membekukannya. Kit dimaksudkan untuk **tumbuh** seiring alur kerja repositori menjadi jelas. DWP menyediakan sebuah sub-skill **author** — dipanggil melalui `/skill-create` dan `/agent-create` — yang bernalar tentang tata letak `.agents/` dan konvensi repositori yang ada, lalu menulis skill, agent, atau delegator command tipis yang baru yang sesuai dengannya. Repositori menulis kit-nya sendiri alih-alih mewarisi kit generik.
 
-Sub-skill author cermat soal kecocokan. Ia membuat sebuah skill untuk prosedur yang dapat diulang yang dijalankan orang secara manual, sebuah agent untuk peran berulang dengan kebutuhan model atau alat yang berbeda, dan sebuah command hanya sebagai titik masuk tipis yang mengarahkan ke sebuah skill atau agent. Ia melewati apa pun yang generik yang tidak cocok dengan alur kerja nyata, dan ia menjaga katalog `.agents/docs/` tetap selaras dengan apa pun yang ditambahkannya. Sub-skill yang sama menopang tugas wajib Skills & Agents Discovery, yang merekonsiliasikan katalog terhadap apa yang sebenarnya ada di disk — dan `/dwp-verify` mengonfirmasi rekonsiliasi itu secara objektif, gagal jika katalog dan berkasnya menyimpang.
+Sub-skill author cermat soal kecocokan. Ia membuat sebuah skill untuk prosedur yang dapat diulang yang dijalankan orang secara manual, sebuah agent untuk peran berulang dengan kebutuhan model atau alat yang berbeda, dan sebuah command hanya sebagai titik masuk tipis yang mengarahkan ke sebuah skill atau agent. Ia melewati apa pun yang generik yang tidak cocok dengan alur kerja nyata, dan ia menjaga katalog `.agents/docs/` tetap selaras dengan apa pun yang ditambahkannya. Sub-skill yang sama menopang rekonsiliasi skills pada Final Review, yang merekonsiliasikan katalog terhadap apa yang sebenarnya ada di disk — dan `/dwp-verify` mengonfirmasi rekonsiliasi itu secara objektif, gagal jika katalog dan berkasnya menyimpang.
 
 ## Addon perawatan
 

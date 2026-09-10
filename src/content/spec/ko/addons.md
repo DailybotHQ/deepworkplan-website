@@ -82,7 +82,7 @@ section: Addons
 
 스킬은 이름으로 호출하는 재사용 가능한 절차. 스킬은 반복 가능한 워크플로(테스트 실행, lint 수정, 컴포넌트 생성)를 패키징합니다.
 
-방법론은 소수의 핵심 서브스킬을 제공합니다. 그중 **author** 서브스킬은 저장소가 **자체 키트를 키우게** 합니다: `/skill-create` 및 `/agent-create`로 호출되며 기존 `.agents/` 레이아웃과 규약에 대해 추론한 뒤 맞는 새 스킬, 에이전트 또는 얇은 명령 위임자를 작성하고 카탈로그를 동기화합니다. 동일 서브스킬이 필수 Skills & Agents Discovery 작업을 실행합니다.
+방법론은 소수의 핵심 서브스킬을 제공합니다. 그중 **author** 서브스킬은 저장소가 **자체 키트를 키우게** 합니다: `/skill-create` 및 `/agent-create`로 호출되며 기존 `.agents/` 레이아웃과 규약에 대해 추론한 뒤 맞는 새 스킬, 에이전트 또는 얇은 명령 위임자를 작성하고 카탈로그를 동기화합니다. 동일 서브스킬이 Final Review의 스킬 조정 단계를 뒷받침합니다.
 
 키트 항목: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 

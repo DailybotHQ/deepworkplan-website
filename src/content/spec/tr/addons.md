@@ -82,7 +82,7 @@ Tutarlı UI, CLI veya konuşma çıktısı için herhangi bir kodlama agent'ın�
 
 Skill'ler adıyla çağrılan yeniden kullanılabilir prosedürlerdir. Bir skill tekrarlanabilir bir iş akışını paketler (test çalıştırma, lint düzeltme, bileşen oluşturma).
 
-Metodoloji küçük bir temel alt-skill seti sunar. Bunlar arasında **author** alt-skill'i bir deponun **kendi kit'ini büyütmesini** sağlar: `/skill-create` ve `/agent-create` ile çağrılır, deponun mevcut `.agents/` düzenini ve kurallarını akıl yürütür, ardından bunlara uyan yeni bir skill, agent veya ince komut delegatörü yazar ve kataloğu senkron tutar. Aynı alt-skill zorunlu Skills & Agents Discovery görevini yürütür.
+Metodoloji küçük bir temel alt-skill seti sunar. Bunlar arasında **author** alt-skill'i bir deponun **kendi kit'ini büyütmesini** sağlar: `/skill-create` ve `/agent-create` ile çağrılır, deponun mevcut `.agents/` düzenini ve kurallarını akıl yürütür, ardından bunlara uyan yeni bir skill, agent veya ince komut delegatörü yazar ve kataloğu senkron tutar. Aynı alt-skill Final Review'in skills uzlaştırma geçişini destekler.
 
 Kit girişi: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 

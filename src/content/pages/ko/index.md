@@ -75,7 +75,7 @@ Deep Work Plan은 스펙 주도 개발로 답합니다. 지속되는 계획, 원
 - 감이 아니라 검증 게이트
 - 컨텍스트 초기화를 견딥니다
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [온보딩이 생성하는 것 보기](/ko/quickstart)
 ---

@@ -75,7 +75,7 @@ Bağlam, araçlar, koruma bariyerleri ve durum; herhangi bir ajanın okuyabilece
 - His değil doğrulama kapıları
 - Bağlam sıfırlamalarını atlatır
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Onboarding çıktısını görün](/tr/quickstart)
 ---

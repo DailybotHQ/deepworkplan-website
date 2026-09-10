@@ -17,13 +17,13 @@ const { lang = 'en', class: className = '' } = Astro.props;
 const i18n = {
   en: {
     ariaLabel:
-      'The ten ordered sections of a DWP task file: Goal, Context, Steps, Touched Surface, Acceptance criteria, Validation, Files, Dependencies, Risks, and Completion & Log.',
+      'The ten ordered sections of a DWP task file: Goal, Context, Touched Surface, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, and Completion & Log.',
     title: 'Task file',
     sections: [
       'Goal',
       'Context',
-      'Steps',
       'Touched Surface',
+      'Steps',
       'Acceptance criteria',
       'Validation',
       'Files',
@@ -36,13 +36,13 @@ const i18n = {
   },
   es: {
     ariaLabel:
-      'Las diez secciones ordenadas de un archivo de tarea de DWP: Objetivo, Contexto, Pasos, Superficie tocada, Criterios de aceptación, Validación, Archivos, Dependencias, Riesgos y Finalización y registro.',
+      'Las diez secciones ordenadas de un archivo de tarea de DWP: Objetivo, Contexto, Superficie tocada, Pasos, Criterios de aceptación, Validación, Archivos, Dependencias, Riesgos y Finalización y registro.',
     title: 'Archivo de tarea',
     sections: [
       'Objetivo',
       'Contexto',
-      'Pasos',
       'Superficie tocada',
+      'Pasos',
       'Criterios de aceptación',
       'Validación',
       'Archivos',
@@ -55,13 +55,13 @@ const i18n = {
   },
   pt: {
     ariaLabel:
-      'As dez seções ordenadas de um arquivo de tarefa do DWP: Objetivo, Contexto, Passos, Superfície tocada, Critérios de aceitação, Validação, Arquivos, Dependências, Riscos e Conclusão e registro.',
+      'As dez seções ordenadas de um arquivo de tarefa do DWP: Objetivo, Contexto, Superfície tocada, Passos, Critérios de aceitação, Validação, Arquivos, Dependências, Riscos e Conclusão e registro.',
     title: 'Arquivo de tarefa',
     sections: [
       'Objetivo',
       'Contexto',
-      'Passos',
       'Superfície tocada',
+      'Passos',
       'Critérios de aceitação',
       'Validação',
       'Arquivos',
@@ -74,13 +74,13 @@ const i18n = {
   },
   zh: {
     ariaLabel:
-      'DWP 任务文件的十个有序部分：目标、上下文、步骤、触及面、验收标准、验证、文件、依赖、风险以及完成与日志。',
+      'DWP 任务文件的十个有序部分：目标、上下文、触及面、步骤、验收标准、验证、文件、依赖、风险以及完成与日志。',
     title: '任务文件',
     sections: [
       '目标',
       '上下文',
-      '步骤',
       '触及面',
+      '步骤',
       '验收标准',
       '验证',
       '文件',
@@ -93,13 +93,13 @@ const i18n = {
   },
   ja: {
     ariaLabel:
-      'DWP タスクファイルの順序付けられた 10 つのセクションです。目標、コンテキスト、手順、変更対象、受け入れ基準、検証、ファイル、依存関係、リスク、完了とログ。',
+      'DWP タスクファイルの順序付けられた 10 つのセクションです。目標、コンテキスト、変更対象、手順、受け入れ基準、検証、ファイル、依存関係、リスク、完了とログ。',
     title: 'タスクファイル',
     sections: [
       '目標',
       'コンテキスト',
-      '手順',
       '変更対象',
+      '手順',
       '受け入れ基準',
       '検証',
       'ファイル',
@@ -112,13 +112,13 @@ const i18n = {
   },
   de: {
     ariaLabel:
-      'Die zehn geordneten Abschnitte einer DWP-Aufgabendatei: Ziel, Kontext, Schritte, Berührte Oberfläche, Akzeptanzkriterien, Validierung, Dateien, Abhängigkeiten, Risiken sowie Abschluss und Protokoll.',
+      'Die zehn geordneten Abschnitte einer DWP-Aufgabendatei: Ziel, Kontext, Berührte Oberfläche, Schritte, Akzeptanzkriterien, Validierung, Dateien, Abhängigkeiten, Risiken sowie Abschluss und Protokoll.',
     title: 'Aufgabendatei',
     sections: [
       'Ziel',
       'Kontext',
-      'Schritte',
       'Berührte Oberfläche',
+      'Schritte',
       'Akzeptanzkriterien',
       'Validierung',
       'Dateien',
@@ -131,13 +131,13 @@ const i18n = {
   },
   fr: {
     ariaLabel:
-      'Les dix sections ordonnées d’un fichier de tâche DWP : Objectif, Contexte, Étapes, Surface touchée, Critères d’acceptation, Validation, Fichiers, Dépendances, Risques et Achèvement et journal.',
+      'Les dix sections ordonnées d’un fichier de tâche DWP : Objectif, Contexte, Surface touchée, Étapes, Critères d’acceptation, Validation, Fichiers, Dépendances, Risques et Achèvement et journal.',
     title: 'Fichier de tâche',
     sections: [
       'Objectif',
       'Contexte',
-      'Étapes',
       'Surface touchée',
+      'Étapes',
       'Critères d’acceptation',
       'Validation',
       'Fichiers',
@@ -150,13 +150,13 @@ const i18n = {
   },
   ko: {
     ariaLabel:
-      'DWP 작업 파일의 순서가 정해진 열 개 섹션입니다. 목표, 맥락, 단계, 변경 대상, 수용 기준, 검증, 파일, 의존성, 위험, 완료 및 로그.',
+      'DWP 작업 파일의 순서가 정해진 열 개 섹션입니다. 목표, 맥락, 변경 대상, 단계, 수용 기준, 검증, 파일, 의존성, 위험, 완료 및 로그.',
     title: '작업 파일',
     sections: [
       '목표',
       '맥락',
-      '단계',
       '변경 대상',
+      '단계',
       '수용 기준',
       '검증',
       '파일',
@@ -169,13 +169,13 @@ const i18n = {
   },
   ru: {
     ariaLabel:
-      'Десять упорядоченных разделов файла задачи DWP: цель, контекст, шаги, затронутая поверхность, критерии приёмки, проверка, файлы, зависимости, риски и завершение и журнал.',
+      'Десять упорядоченных разделов файла задачи DWP: цель, контекст, затронутая поверхность, шаги, критерии приёмки, проверка, файлы, зависимости, риски и завершение и журнал.',
     title: 'Файл задачи',
     sections: [
       'Цель',
       'Контекст',
-      'Шаги',
       'Затронутая поверхность',
+      'Шаги',
       'Критерии приёмки',
       'Проверка',
       'Файлы',
@@ -188,13 +188,13 @@ const i18n = {
   },
   it: {
     ariaLabel:
-      'Le dieci sezioni ordinate di un file di attività DWP: Obiettivo, Contesto, Passi, Superficie toccata, Criteri di accettazione, Convalida, File, Dipendenze, Rischi e Completamento e registro.',
+      'Le dieci sezioni ordinate di un file di attività DWP: Obiettivo, Contesto, Superficie toccata, Passi, Criteri di accettazione, Convalida, File, Dipendenze, Rischi e Completamento e registro.',
     title: 'File di attività',
     sections: [
       'Obiettivo',
       'Contesto',
-      'Passi',
       'Superficie toccata',
+      'Passi',
       'Criteri di accettazione',
       'Convalida',
       'File',
@@ -207,13 +207,13 @@ const i18n = {
   },
   tr: {
     ariaLabel:
-      'Bir DWP görev dosyasının sıralı on bölümü: Amaç, Bağlam, Adımlar, Dokunulan Yüzey, Kabul ölçütleri, Doğrulama, Dosyalar, Bağımlılıklar, Riskler ve Tamamlama ve günlük.',
+      'Bir DWP görev dosyasının sıralı on bölümü: Amaç, Bağlam, Dokunulan Yüzey, Adımlar, Kabul ölçütleri, Doğrulama, Dosyalar, Bağımlılıklar, Riskler ve Tamamlama ve günlük.',
     title: 'Görev dosyası',
     sections: [
       'Amaç',
       'Bağlam',
-      'Adımlar',
       'Dokunulan Yüzey',
+      'Adımlar',
       'Kabul ölçütleri',
       'Doğrulama',
       'Dosyalar',
@@ -226,13 +226,13 @@ const i18n = {
   },
   id: {
     ariaLabel:
-      'Sepuluh bagian terurut dalam berkas tugas DWP: Tujuan, Konteks, Langkah, Permukaan yang Disentuh, Kriteria penerimaan, Validasi, Berkas, Dependensi, Risiko, serta Penyelesaian dan catatan.',
+      'Sepuluh bagian terurut dalam berkas tugas DWP: Tujuan, Konteks, Permukaan yang Disentuh, Langkah, Kriteria penerimaan, Validasi, Berkas, Dependensi, Risiko, serta Penyelesaian dan catatan.',
     title: 'Berkas tugas',
     sections: [
       'Tujuan',
       'Konteks',
-      'Langkah',
       'Permukaan yang Disentuh',
+      'Langkah',
       'Kriteria penerimaan',
       'Validasi',
       'Berkas',
@@ -245,13 +245,13 @@ const i18n = {
   },
   vi: {
     ariaLabel:
-      'Mười phần được sắp xếp theo thứ tự của một tệp nhiệm vụ DWP: Mục tiêu, Bối cảnh, Các bước, Bề mặt bị chạm đến, Tiêu chí chấp nhận, Xác minh, Tệp, Phụ thuộc, Rủi ro và Hoàn thành và nhật ký.',
+      'Mười phần được sắp xếp theo thứ tự của một tệp nhiệm vụ DWP: Mục tiêu, Bối cảnh, Bề mặt bị chạm đến, Các bước, Tiêu chí chấp nhận, Xác minh, Tệp, Phụ thuộc, Rủi ro và Hoàn thành và nhật ký.',
     title: 'Tệp nhiệm vụ',
     sections: [
       'Mục tiêu',
       'Bối cảnh',
-      'Các bước',
       'Bề mặt bị chạm đến',
+      'Các bước',
       'Tiêu chí chấp nhận',
       'Xác minh',
       'Tệp',
@@ -264,13 +264,13 @@ const i18n = {
   },
   hi: {
     ariaLabel:
-      'DWP कार्य फ़ाइल के दस क्रमबद्ध अनुभाग: लक्ष्य, संदर्भ, चरण, स्पर्शित सतह, स्वीकृति मानदंड, सत्यापन, फ़ाइलें, निर्भरताएँ, जोखिम, और समापन और लॉग।',
+      'DWP कार्य फ़ाइल के दस क्रमबद्ध अनुभाग: लक्ष्य, संदर्भ, स्पर्शित सतह, चरण, स्वीकृति मानदंड, सत्यापन, फ़ाइलें, निर्भरताएँ, जोखिम, और समापन और लॉग।',
     title: 'कार्य फ़ाइल',
     sections: [
       'लक्ष्य',
       'संदर्भ',
-      'चरण',
       'स्पर्शित सतह',
+      'चरण',
       'स्वीकृति मानदंड',
       'सत्यापन',
       'फ़ाइलें',
@@ -283,13 +283,13 @@ const i18n = {
   },
   pl: {
     ariaLabel:
-      'Dziesięć uporządkowanych sekcji pliku zadania DWP: Cel, Kontekst, Kroki, Dotknięta powierzchnia, Kryteria akceptacji, Walidacja, Pliki, Zależności, Ryzyka oraz Zakończenie i dziennik.',
+      'Dziesięć uporządkowanych sekcji pliku zadania DWP: Cel, Kontekst, Dotknięta powierzchnia, Kroki, Kryteria akceptacji, Walidacja, Pliki, Zależności, Ryzyka oraz Zakończenie i dziennik.',
     title: 'Plik zadania',
     sections: [
       'Cel',
       'Kontekst',
-      'Kroki',
       'Dotknięta powierzchnia',
+      'Kroki',
       'Kryteria akceptacji',
       'Walidacja',
       'Pliki',
@@ -302,13 +302,13 @@ const i18n = {
   },
   uk: {
     ariaLabel:
-      'Десять упорядкованих розділів файлу завдання DWP: ціль, контекст, кроки, торкнута поверхня, критерії приймання, перевірка, файли, залежності, ризики та завершення і журнал.',
+      'Десять упорядкованих розділів файлу завдання DWP: ціль, контекст, торкнута поверхня, кроки, критерії приймання, перевірка, файли, залежності, ризики та завершення і журнал.',
     title: 'Файл завдання',
     sections: [
       'Ціль',
       'Контекст',
-      'Кроки',
       'Торкнута поверхня',
+      'Кроки',
       'Критерії приймання',
       'Перевірка',
       'Файли',
@@ -321,13 +321,13 @@ const i18n = {
   },
   th: {
     ariaLabel:
-      'สิบส่วนเรียงลำดับของไฟล์งาน DWP ได้แก่ เป้าหมาย บริบท ขั้นตอน พื้นผิวที่สัมผัส เกณฑ์การยอมรับ การตรวจสอบ ไฟล์ การพึ่งพา ความเสี่ยง และการเสร็จสิ้นและบันทึก',
+      'สิบส่วนเรียงลำดับของไฟล์งาน DWP ได้แก่ เป้าหมาย บริบท พื้นผิวที่สัมผัส ขั้นตอน เกณฑ์การยอมรับ การตรวจสอบ ไฟล์ การพึ่งพา ความเสี่ยง และการเสร็จสิ้นและบันทึก',
     title: 'ไฟล์งาน',
     sections: [
       'เป้าหมาย',
       'บริบท',
-      'ขั้นตอน',
       'พื้นผิวที่สัมผัส',
+      'ขั้นตอน',
       'เกณฑ์การยอมรับ',
       'การตรวจสอบ',
       'ไฟล์',

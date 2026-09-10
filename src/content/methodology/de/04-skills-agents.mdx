@@ -14,7 +14,7 @@ DWP ist agenten-agnostisch, erwartet aber zwei wiederkehrende Bausteine — Skil
 
 ## Skills versus Agenten
 
-<SkillsAgents lang="en" class="not-prose my-10" />
+<SkillsAgents lang="de" class="not-prose my-10" />
 
 Die beiden sind leicht zu verwechseln, dienen aber unterschiedlichen Zwecken:
 
@@ -27,7 +27,7 @@ Eine nützliche Kurzformel: Eine Skill ist das *Wie* einer wiederkehrenden Aufga
 
 Das Onboarding verwandelt ein Repository in das Agenten-Harness; es friert es nicht ein. Das Kit soll **wachsen**, sobald die Workflows des Repositorys klar werden. DWP stellt eine **author**-Sub-Skill bereit — aufgerufen über `/skill-create` und `/agent-create` —, die über die bestehende `.agents/`-Struktur und die Konventionen des Repositorys schlussfolgert und dann eine neue Skill, einen neuen Agenten oder einen schlanken Befehls-Delegator schreibt, der dazu passt. Das Repository verfasst sein eigenes Kit, statt ein generisches zu erben.
 
-Die author-Sub-Skill achtet bewusst auf Passung. Sie erstellt eine Skill für eine wiederholbare Prozedur, die Menschen von Hand ausführen, einen Agenten für eine wiederkehrende Rolle mit eigenen Modell- oder Werkzeuganforderungen und einen Befehl nur als schlanken Einstiegspunkt, der an eine Skill oder einen Agenten weiterleitet. Sie überspringt alles Generische, das keinem echten Workflow entspricht, und hält den `.agents/docs/`-Katalog mit allem synchron, was sie hinzufügt. Dieselbe Sub-Skill stützt die verpflichtende Skills-&-Agents-Discovery-Aufgabe, die den Katalog mit dem abgleicht, was tatsächlich auf der Festplatte liegt — und `/dwp-verify` bestätigt diesen Abgleich objektiv und schlägt fehl, wenn Katalog und Dateien auseinandergehen.
+Die author-Sub-Skill achtet bewusst auf Passung. Sie erstellt eine Skill für eine wiederholbare Prozedur, die Menschen von Hand ausführen, einen Agenten für eine wiederkehrende Rolle mit eigenen Modell- oder Werkzeuganforderungen und einen Befehl nur als schlanken Einstiegspunkt, der an eine Skill oder einen Agenten weiterleitet. Sie überspringt alles Generische, das keinem echten Workflow entspricht, und hält den `.agents/docs/`-Katalog mit allem synchron, was sie hinzufügt. Dieselbe Sub-Skill stützt die Skills-Abstimmung des Final Review, die den Katalog mit dem abgleicht, was tatsächlich auf der Festplatte liegt — und `/dwp-verify` bestätigt diesen Abgleich objektiv und schlägt fehl, wenn Katalog und Dateien auseinandergehen.
 
 ## Wartungs-Add-ons
 

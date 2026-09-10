@@ -178,7 +178,7 @@ Generuj Deep Work Plany dla dowolnego zadania i uruchamiaj je zadanie po zadaniu
 
 Każdy plan zamyka Final Review — przegląd bezpieczeństwa własnych zmian planu
 (z utrzymywaniem `docs/SECURITY.md` w aktualności; krytyczne znalezisko blokuje ukończenie),
-walidacja stanu końcowego oraz uzgodnienie decyzji dotyczących skilli.
+walidacja stanu końcowego oraz uzgodnienie decyzji dotyczących skilli. Executive Report pozostaje dostępny na życzenie.
 
 ## 7. Zweryfikuj
 

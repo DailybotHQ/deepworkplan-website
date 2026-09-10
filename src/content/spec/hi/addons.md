@@ -82,7 +82,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 Skills नाम से invoke की जाने वाली पुनः-प्रयोज्य प्रक्रियाएँ हैं। एक skill दोहराने योग्य workflow पैकेज करती है (tests चलाना, lint ठीक करना, component बनाना)।
 
-पद्धति मूल sub-skills का छोटा समूह ship करती है। उनमें, **author** sub-skill रिपॉज़िटरी को **अपनी kit बढ़ाने** देती है: `/skill-create` और `/agent-create` के माध्यम से invoke, मौजूदा `.agents/` लेआउट और परिपाटियों पर तर्क, फिर नई skill, agent, या thin command delegator जो उनसे मेल खाता हो, और कैटलॉग sync रखता है। वही sub-skill अनिवार्य Skills & Agents Discovery कार्य निष्पादित करती है।
+पद्धति मूल sub-skills का छोटा समूह ship करती है। उनमें, **author** sub-skill रिपॉज़िटरी को **अपनी kit बढ़ाने** देती है: `/skill-create` और `/agent-create` के माध्यम से invoke, मौजूदा `.agents/` लेआउट और परिपाटियों पर तर्क, फिर नई skill, agent, या thin command delegator जो उनसे मेल खाता हो, और कैटलॉग sync रखता है। वही sub-skill Final Review के स्किल्स समाधान पास का समर्थन करती है।
 
 Kit प्रविष्टि: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create)।
 

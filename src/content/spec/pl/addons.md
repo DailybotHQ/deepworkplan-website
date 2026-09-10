@@ -82,7 +82,7 @@ Aktualizacje zależności niezależne od menedżera pakietów, partiami, zwalido
 
 Skille to powtarzalne procedury wywoływane po nazwie. Skill pakuje powtarzalny przepływ pracy (uruchamianie testów, naprawa lintu, tworzenie komponentu).
 
-Metodyka dostarcza mały zestaw podstawowych sub-skilli. Wśród nich sub-skill **author** pozwala repozytorium **rozwijać własny kit**: wywoływany przez `/skill-create` i `/agent-create`, analizuje istniejący układ `.agents/` i konwencje, tworzy nowy skill, agenta lub cienki delegator poleceń pasujący do nich i utrzymuje katalog w synchronizacji. Ten sam sub-skill wykonuje obowiązkowe zadanie odkrywania skilli i agentów.
+Metodyka dostarcza mały zestaw podstawowych sub-skilli. Wśród nich sub-skill **author** pozwala repozytorium **rozwijać własny kit**: wywoływany przez `/skill-create` i `/agent-create`, analizuje istniejący układ `.agents/` i konwencje, tworzy nowy skill, agenta lub cienki delegator poleceń pasujący do nich i utrzymuje katalog w synchronizacji. Ten sam sub-skill wspiera przebieg uzgadniania skilli w Final Review.
 
 Wpis kit: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 

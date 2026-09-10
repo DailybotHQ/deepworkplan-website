@@ -190,7 +190,7 @@ Genera Deep Work Plan per qualsiasi attività ed eseguili attività per attivit�
 
 Ogni piano si chiude con il Final Review — un passaggio di sicurezza sulle modifiche
 proprie del piano (mantenendo aggiornato `docs/SECURITY.md`; un rilievo critico blocca il
-completamento), la Skills & Agents Discovery e l’Executive Report.
+completamento), la validazione dello stato finale e la riconciliazione delle decisioni sulle skill. L’Executive Report resta disponibile su richiesta.
 
 ## 7. Verifica
 

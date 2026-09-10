@@ -174,7 +174,7 @@ Erzeugen Sie Deep Work Plans für jede Aufgabe und führen Sie sie Aufgabe für 
 
 Jeder Plan schließt mit dem Final Review — einem Sicherheitstest über die eigenen
 Änderungen des Plans (der `docs/SECURITY.md` aktuell hält; ein kritischer Befund blockiert den
-Abschluss), Skills & Agents Discovery und dem Executive Report.
+Abschluss), der Validierung des Endzustands und der Abstimmung der Skills-Entscheidungen. Der Executive Report bleibt auf Anfrage verfügbar.
 
 ## 7. Verifizieren
 

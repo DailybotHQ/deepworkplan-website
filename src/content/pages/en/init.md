@@ -194,8 +194,9 @@ Generate Deep Work Plans for any task and run them task by task:
 - `/dwp-verify` — objective pass/fail conformance report for the repo (or a specific plan).
 
 Every plan closes with the Final Review — a security pass over the plan's own
-changes (keeping `docs/SECURITY.md` current; a critical finding blocks completion), Skills &
-Agents Discovery, and the Executive Report.
+changes (keeping `docs/SECURITY.md` current; a critical finding blocks completion), the
+final-state validation, and the reconciliation of skills decisions. The Executive Report
+remains available on request.
 
 ## 7. Verify
 

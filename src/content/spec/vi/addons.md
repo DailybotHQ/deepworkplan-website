@@ -82,7 +82,7 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 
 Skill là quy trình tái sử dụng được gọi theo tên. Skill đóng gói luồng công việc lặp lại (chạy test, sửa lint, tạo thành phần).
 
-Phương pháp cung cấp một tập nhỏ sub-skill cốt lõi. Trong đó, sub-skill **author** cho phép kho lưu trữ **phát triển kit riêng**: gọi qua `/skill-create` và `/agent-create`, suy luận về bố cục `.agents/` và quy ước repo hiện có, rồi viết skill, agent hoặc ủy quyền lệnh mỏng mới phù hợp và giữ danh mục đồng bộ. Cùng sub-skill thực hiện tác vụ bắt buộc Skills & Agents Discovery.
+Phương pháp cung cấp một tập nhỏ sub-skill cốt lõi. Trong đó, sub-skill **author** cho phép kho lưu trữ **phát triển kit riêng**: gọi qua `/skill-create` và `/agent-create`, suy luận về bố cục `.agents/` và quy ước repo hiện có, rồi viết skill, agent hoặc ủy quyền lệnh mỏng mới phù hợp và giữ danh mục đồng bộ. Cùng sub-skill hậu thuẫn cho bước đối chiếu skill của Final Review.
 
 Mục kit: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 

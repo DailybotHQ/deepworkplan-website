@@ -186,8 +186,8 @@ Gere Deep Work Plans para qualquer tarefa e execute-os tarefa a tarefa:
 - `/dwp-verify` — relatório objetivo de conformidade aprovado/reprovado para o repositório (ou um plano específico).
 
 Todo plano se encerra com o Final Review — um passe de segurança sobre as próprias mudanças
-do plano (mantendo o `docs/SECURITY.md` atualizado; um achado crítico bloqueia a conclusão), o
-Skills & Agents Discovery e o Executive Report.
+do plano (mantendo o `docs/SECURITY.md` atualizado; um achado crítico bloqueia a conclusão), 
+a validação do estado final e a reconciliação das decisões de skills. O Executive Report continua disponível a pedido.
 
 ## 7. Verifique
 

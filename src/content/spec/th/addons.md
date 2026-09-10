@@ -82,7 +82,7 @@ section: Addons
 
 Skills เป็นขั้นตอนที่ใช้ซ้ำได้ เรียกด้วยชื่อ skill ห่อ workflow ที่ทำซ้ำได้ (รันเทสต์ แก้ lint สร้างคอมโพเนนต์)
 
-วิธีการจัดส่ง sub-skill หลักชุดเล็ก ในบรรดานั้น sub-skill **author** ให้รีโพ **ขยาย kit ของตนเอง**: เรียกผ่าน `/skill-create` และ `/agent-create` ให้เหตุผลจาก layout `.agents/` และแบบแปลงที่มี แล้วเขียน skill เอเจนต์ หรือ command delegator บางๆ ที่ตรงกัน และซิงก์แคตตาล็อก sub-skill เดียวกันทำงาน Skills & Agents Discovery บังคับ
+วิธีการจัดส่ง sub-skill หลักชุดเล็ก ในบรรดานั้น sub-skill **author** ให้รีโพ **ขยาย kit ของตนเอง**: เรียกผ่าน `/skill-create` และ `/agent-create` ให้เหตุผลจาก layout `.agents/` และแบบแปลงที่มี แล้วเขียน skill เอเจนต์ หรือ command delegator บางๆ ที่ตรงกัน และซิงก์แคตตาล็อก sub-skill เดียวกันหนุนหลังช่วงกระทบยอด skill ของ Final Review
 
 รายการ kit: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create)
 

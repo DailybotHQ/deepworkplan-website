@@ -158,8 +158,8 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 - `/dwp-verify` —— 针对仓库（或特定计划）的客观通过/未通过符合性报告。
 
 每份计划都以 Final Review 收尾——一次针对计划自身改动的安全审查（让
-`docs/SECURITY.md` 保持最新；一项严重发现会阻止完成）、Skills & Agents Discovery
-以及 Executive Report。
+`docs/SECURITY.md` 保持最新；一项严重发现会阻止完成）、对最终状态的验证
+以及对 skills 决策的核对。Executive Report 仍可按需提供。
 
 ## 7. 验证
 

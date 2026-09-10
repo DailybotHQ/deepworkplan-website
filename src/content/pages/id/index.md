@@ -75,7 +75,7 @@ Konteks, alat, pagar pengaman, dan status tinggal di repositori Anda sebagai ber
 - Gerbang validasi, bukan perasaan
 - Selamat dari reset konteks
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Lihat hasil onboarding](/id/quickstart)
 ---

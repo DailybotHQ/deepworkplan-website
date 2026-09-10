@@ -75,7 +75,7 @@ Contesto, strumenti, guardrail e stato vivono nel tuo repository come semplici f
 - Gate di validazione, non sensazioni
 - Sopravvive ai reset del contesto
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Vedi cosa genera l’onboarding](/it/quickstart)
 ---

@@ -56,4 +56,4 @@
 
 | ID | Kind | Status |
 | :-- | :-- | :-- |
-| PG-01 | illustration (image) | done — 404 off-map chart |
+| PG-01 | illustration (image) | done — 404 ship-to-lighthouse chart (light/dark pair, 1122×1402) |

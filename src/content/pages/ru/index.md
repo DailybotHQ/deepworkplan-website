@@ -75,7 +75,7 @@ Deep Work Plan отвечает spec-driven development: прочный план
 - Ворота валидации, а не чутьё
 - Переживает сбросы контекста
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Посмотреть, что создаёт онбординг](/ru/quickstart)
 ---

@@ -75,7 +75,7 @@ Deep Work Plan 以规范驱动开发应对：一份持久的计划、原子任�
 - 验证关卡，而非感觉
 - 在上下文重置后依然存续
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [查看接入流程会生成什么](/zh/quickstart)
 ---

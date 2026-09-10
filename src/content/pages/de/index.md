@@ -75,7 +75,7 @@ Kontext, Werkzeuge, Leitplanken und Zustand liegen als einfache Dateien in Ihrem
 - Validierungsgates statt Bauchgefühl
 - Übersteht Kontext-Resets
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Sehen Sie, was das Onboarding erzeugt](/de/quickstart)
 ---

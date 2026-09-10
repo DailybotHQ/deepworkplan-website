@@ -75,7 +75,7 @@ Deep Work Planは仕様駆動開発で応えます。永続する計画、原子
 - 感覚ではなく検証ゲート
 - コンテキストのリセットを生き延びる
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [オンボーディングの生成物を見る](/ja/quickstart)
 ---

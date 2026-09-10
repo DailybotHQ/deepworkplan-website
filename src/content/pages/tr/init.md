@@ -192,8 +192,7 @@ Herhangi bir görev için Deep Work Plan’ler üretin ve onları görev görev 
 - `/dwp-verify` — depo (veya belirli bir plan) için nesnel bir geçti/kaldı uyumluluk raporu.
 
 Her plan, Final Review ile kapanır — planın kendi değişiklikleri üzerinde bir güvenlik incelemesi
-(`docs/SECURITY.md` güncel tutulur; kritik bir bulgu tamamlanmayı engeller), Skills & Agents
-Discovery ve Executive Report.
+(`docs/SECURITY.md` güncel tutulur; kritik bir bulgu tamamlanmayı engeller), nihai durum doğrulaması ve skills kararlarının uzlaştırılması. Executive Report istek üzerine sunulmaya devam eder.
 
 ## 7. Doğrulayın
 

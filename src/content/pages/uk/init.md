@@ -180,8 +180,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 - `/dwp-verify` — обʼєктивний звіт про відповідність «пройдено/не пройдено» для репозиторію (або конкретного плану).
 
 Кожен план завершується Final Review — перевіркою безпеки власних
-змін плану (тримаючи `docs/SECURITY.md` актуальним; критична знахідка блокує завершення), Skills &
-Agents Discovery та Executive Report.
+змін плану (тримаючи `docs/SECURITY.md` актуальним; критична знахідка блокує завершення), валідацією фінального стану та звіркою рішень щодо skills. Executive Report залишається доступним на запит.
 
 ## 7. Перевірте
 

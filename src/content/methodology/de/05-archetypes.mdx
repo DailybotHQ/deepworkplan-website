@@ -58,7 +58,7 @@ Merkmale:
 
 Die drei Archetypen sehen auf dem Datenträger unterschiedlich aus, und der Agent entscheidet zwischen ihnen anhand von Signalen, die er überprüfen kann — nicht anhand eines Labels, das ihm mitgeteilt wird. Der Entscheidungsbaum unten zeigt den Weg; kurz gesagt: Als Agenten-Arbeitsbereich klassifizieren, wenn Plattform-Identitätssignale vorhanden sind, als Orchestrator-Hub nur, wenn die Beweise es verlangen, und andernfalls als Einzel-Repository.
 
-<ArchetypesTree lang="en" class="not-prose my-10" />
+<ArchetypesTree lang="de" class="not-prose my-10" />
 
 Ein Agent sollte zuerst nach Agenten-Arbeitsbereich-Signalen suchen: eine Plattform-Identitätsdatei (wie OpenClaws `SOUL.md` oder `HEARTBEAT.md`), kein primärer Anwendungsstack und Inhalte, die überwiegend den eigenen Zustand des Agenten darstellen. Fehlen diese, sucht er nach Orchestrator-Signalen: mehrere verschachtelte git-Repositorys oder Submodule, ein Register oder Manifest verwalteter Repositorys oder Konfiguration, die auf externe Repositorys verweist. Fehlen beide, behandelt er das Ziel als Einzel-Repository — die sichere Voreinstellung, denn einen Plan über Grenzen hinaus zu weiten, die nicht existieren, ist schlimmer, als innerhalb einer vorhandenen zu arbeiten.
 

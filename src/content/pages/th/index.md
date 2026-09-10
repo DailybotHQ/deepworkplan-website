@@ -75,7 +75,7 @@ Deep Work Plan ตอบด้วยการพัฒนาแบบขับ�
 - เกตตรวจสอบ ไม่ใช่ความรู้สึก
 - อยู่รอดจากการรีเซ็ตบริบท
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [ดูว่า onboarding สร้างอะไร](/th/quickstart)
 ---

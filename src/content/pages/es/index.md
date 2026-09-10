@@ -75,7 +75,7 @@ El contexto, las herramientas, los guardarraíles y el estado viven en tu reposi
 - Puertas de validación, no corazonadas
 - Sobrevive a los reinicios de contexto
 
-**PE · ASK · HECK · TAT · OOL**
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Ve qué genera la incorporación](/es/quickstart)
 ---

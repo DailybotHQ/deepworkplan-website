@@ -82,7 +82,7 @@ Upgrade dependensi agnostik package manager, bertahap, tervalidasi, dan dapat di
 
 Skill adalah prosedur yang dapat digunakan kembali yang dipanggil berdasarkan nama. Skill mengemas alur kerja yang dapat diulang (menjalankan tes, memperbaiki lint, membuat komponen).
 
-Metodologi menyediakan seperangkat kecil sub-skill inti. Di antaranya, sub-skill **author** memungkinkan repositori **menumbuhkan kit sendiri**: dipanggil melalui `/skill-create` dan `/agent-create`, menalar tentang tata letak `.agents/` dan konvensi repo yang ada, lalu menulis skill, agen, atau delegator perintah tipis baru yang sesuai, dan menjaga katalog tetap sinkron. Sub-skill yang sama menjalankan tugas wajib Skills & Agents Discovery.
+Metodologi menyediakan seperangkat kecil sub-skill inti. Di antaranya, sub-skill **author** memungkinkan repositori **menumbuhkan kit sendiri**: dipanggil melalui `/skill-create` dan `/agent-create`, menalar tentang tata letak `.agents/` dan konvensi repo yang ada, lalu menulis skill, agen, atau delegator perintah tipis baru yang sesuai, dan menjaga katalog tetap sinkron. Sub-skill yang sama menopang pass rekonsiliasi skills pada Final Review.
 
 Entri kit: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 
