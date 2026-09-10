@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan so với các phương án khác — Deep Work Plan"
+title: "Deep Work Plan so với các phương án khác"
 description: "Deep Work Plan so với các công cụ theo đặc tả, framework quy trình agent và chế độ lập kế hoạch sẵn có: theo thuật ngữ từng bên, kèm nguồn và ngày rà soát."
 lastUpdated: 2026-09-10
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan в сравнении с альтернативами — Deep Work Plan"
+title: "Deep Work Plan в сравнении с альтернативами"
 description: "Как Deep Work Plan соотносится со spec-driven-инструментами, фреймворками агентных workflows и режимами планирования вендоров: с источниками и датой проверки."
 lastUpdated: 2026-09-10
 ---

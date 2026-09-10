@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan im Vergleich mit den Alternativen — Deep Work Plan"
+title: "Deep Work Plan im Vergleich mit den Alternativen"
 description: "Wie Deep Work Plan zu spec-driven Werkzeugen, Agenten-Frameworks und hersteller-nativen Plan-Modi steht: in eigenen Begriffen, mit Quellen und Prüfdatum."
 lastUpdated: 2026-09-10
 ---

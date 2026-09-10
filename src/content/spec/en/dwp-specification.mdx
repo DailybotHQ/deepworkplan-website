@@ -45,21 +45,7 @@ A plan MAY additionally carry the machine-readable state layer: `manifest.json` 
 
 <TaskAnatomy lang="en" class="not-prose my-10" />
 
-Each task file MUST contain these ten sections, in order:
-
-1. **Goal** — a one-paragraph statement of what the task achieves.
-2. **Context** — background, links, and why this task exists.
-3. **Touched Surface** — the contract between what the task changes and what must be validated.
-4. **Steps** — ordered, concrete actions to perform.
-5. **Acceptance criteria** — a checklist of conditions that define done.
-6. **Validation** — commands or tests to run to verify, selected from the Touched Surface.
-7. **Files** — paths expected to be created or modified.
-8. **Dependencies** — other tasks or external prerequisites.
-9. **Risks** — what could go wrong, and mitigations.
-10. **Completion & Log** — a status marker plus chronological notes.
-
-A task MAY additionally include a **Delta section** (RECOMMENDED for brownfield behavior changes — see below) and a **Rollback section** (RECOMMENDED for migrations, infrastructure changes, or deployments).
-
+Every task file follows the ten normative sections rendered above, in the order defined by the installed skill.
 ## The Touched Surface
 
 The Touched Surface is the contract between what a task changes and what must be validated. It exists so that validation is **selected by effect**, not by habit, and so a later reader can see why a gate was chosen. A behavior-changing task MUST record:

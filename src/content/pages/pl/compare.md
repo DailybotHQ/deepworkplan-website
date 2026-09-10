@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan w porównaniu z alternatywami — Deep Work Plan"
+title: "Deep Work Plan w porównaniu z alternatywami"
 description: "Jak Deep Work Plan odnosi się do narzędzi spec-driven, frameworków workflow agentów i trybów planowania dostawców: własne terminy, źródła i data przeglądu."
 lastUpdated: 2026-09-10
 ---

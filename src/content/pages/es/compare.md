@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan comparado con las alternativas — Deep Work Plan"
+title: "Deep Work Plan comparado con las alternativas"
 description: "Cómo se relaciona Deep Work Plan con herramientas guiadas por especificación, frameworks de agentes y modos de plan nativos, con fuentes y fecha de revisión."
 lastUpdated: 2026-09-10
 ---

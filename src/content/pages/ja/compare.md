@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan と代替ツールの比較 — Deep Work Plan"
+title: "Deep Work Plan と代替ツールの比較"
 description: "Deep Work Plan と仕様駆動開発ツール、エージェントワークフローフレームワーク、各ベンダー純正のプランモードとの関係を、どのツールもそのツール自身の言葉で整理して並べる比較ページです。すべての事実は公式ドキュメントに出所をたどれ、最終確認日付も明記しています。"
 lastUpdated: 2026-09-10
 ---

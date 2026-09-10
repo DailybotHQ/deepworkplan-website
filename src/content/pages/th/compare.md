@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan เทียบกับทางเลือกอื่น — Deep Work Plan"
+title: "Deep Work Plan เทียบกับทางเลือกอื่น"
 description: "Deep Work Plan เทียบกับเครื่องมือ spec-driven เฟรมเวิร์กขั้นตอนการทำงานของ agent และโหมดแผนของผู้จัดจำหน่าย ตามเงื่อนไขของทุกตัว พร้อมแหล่งอ้างอิงและวันตรวจทาน"
 lastUpdated: 2026-09-10
 ---

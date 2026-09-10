@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan과 대안들의 비교 — Deep Work Plan"
+title: "Deep Work Plan과 대안들의 비교"
 description: "Deep Work Plan이 스펙 주도 개발 도구, 에이전트 워크플로 프레임워크, 벤더 네이티브 계획 모드와 각각 어떻게 관련되는지 설명합니다. 모든 사실은 각 도구의 공식 문서로 거슬러 추적되고, 출처와 마지막 검토 날짜를 함께 밝힙니다."
 lastUpdated: 2026-09-10
 ---

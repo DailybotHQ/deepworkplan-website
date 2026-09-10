@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan compared with the alternatives — Deep Work Plan"
+title: "Deep Work Plan compared with the alternatives"
 description: "How Deep Work Plan relates to spec-driven tools, agent workflow frameworks and vendor plan modes: each on its own terms, with sources and a review date."
 lastUpdated: 2026-09-10
 ---

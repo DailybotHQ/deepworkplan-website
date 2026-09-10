@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan rispetto alle alternative — Deep Work Plan"
+title: "Deep Work Plan rispetto alle alternative"
 description: "Deep Work Plan rispetto a strumenti spec-driven, framework per agenti e modalità plan dei vendor: ciascuno nei suoi termini, con fonti e data di revisione."
 lastUpdated: 2026-09-10
 ---

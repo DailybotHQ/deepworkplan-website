@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan comparé aux alternatives — Deep Work Plan"
+title: "Deep Work Plan comparé aux alternatives"
 description: "Deep Work Plan comparé aux outils de spécification, aux frameworks d’agents et aux modes de plan : chaque outil selon ses termes, sources et date de revue."
 lastUpdated: 2026-09-10
 ---

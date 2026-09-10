@@ -155,8 +155,9 @@ const faqSchema = {
 
     <Rule class="my-12" />
 
-    <section class="max-w-3xl">
+    <section class="max-w-3xl" aria-labelledby="faq-still-have-questions">
       <Kicker>{f.stillHaveQuestions.title}</Kicker>
+      <h2 id="faq-still-have-questions" class="sr-only">{f.stillHaveQuestions.title}</h2>
       <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-muted);">
         {f.stillHaveQuestions.body}
       </p>

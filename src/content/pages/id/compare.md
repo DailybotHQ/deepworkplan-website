@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan dibandingkan dengan alternatifnya — Deep Work Plan"
+title: "Deep Work Plan dibandingkan dengan alternatifnya"
 description: "Relasi Deep Work Plan dengan tool spec-driven, framework agent, dan mode rencana vendor: masing-masing menurut istilahnya, dengan sumber dan tanggal tinjauan."
 lastUpdated: 2026-09-10
 ---

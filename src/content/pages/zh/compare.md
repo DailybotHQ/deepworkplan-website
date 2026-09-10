@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan 与替代方案的对比 — Deep Work Plan"
+title: "Deep Work Plan 与替代方案的对比"
 description: "Deep Work Plan 与规范驱动开发工具、代理工作流框架以及各代理自带的原生计划模式之间是什么关系：本页按每个替代方案自身的定位逐一描述，标明每项能力是内置、可选还是不在其范围内，每项事实都可追溯到其官方文档，并注明最近一次复核的日期。这是一张地图，而非一份排名。"
 lastUpdated: 2026-09-10
 ---

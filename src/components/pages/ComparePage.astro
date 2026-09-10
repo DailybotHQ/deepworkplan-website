@@ -91,26 +91,26 @@ const webPageSchema = {
       <p class="mt-3 text-lg leading-relaxed" style="color: var(--color-muted);">
         {c.howToRead.body}
       </p>
-      <dl class="mt-5 grid gap-3 sm:grid-cols-3">
+      <ul class="mt-5 grid gap-3 sm:grid-cols-3" aria-label={c.howToRead.title}>
         <div class="border-t pt-3" style="border-color: var(--color-line);">
-          <dt class="font-semibold" style="color: var(--color-ink);">
+          <li class="font-semibold" style="color: var(--color-ink);">
             <span aria-hidden="true" class="font-mono" style="color: var(--color-secondary);">✓</span>
             {c.howToRead.values.builtIn}
-          </dt>
+          </li>
         </div>
         <div class="border-t pt-3" style="border-color: var(--color-line);">
-          <dt class="font-semibold" style="color: var(--color-ink);">
+          <li class="font-semibold" style="color: var(--color-ink);">
             <span aria-hidden="true" class="font-mono" style="color: var(--color-muted);">◐</span>
             {c.howToRead.values.optional}
-          </dt>
+          </li>
         </div>
         <div class="border-t pt-3" style="border-color: var(--color-line);">
-          <dt class="font-semibold" style="color: var(--color-ink);">
+          <li class="font-semibold" style="color: var(--color-ink);">
             <span aria-hidden="true" class="font-mono" style="color: var(--color-muted);">–</span>
             {c.howToRead.values.notInScope}
-          </dt>
+          </li>
         </div>
-      </dl>
+      </ul>
       <p class="kicker mt-6">
         {c.reviewedOnLabel}: <time datetime={COMPARE_REVIEWED_ON}>{reviewedOn}</time>
       </p>

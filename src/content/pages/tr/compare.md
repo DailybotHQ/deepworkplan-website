@@ -1,5 +1,5 @@
 ---
-title: "Deep Work Plan alternatiflerle karşılaştırıldığında — Deep Work Plan"
+title: "Deep Work Plan alternatiflerle karşılaştırıldığında"
 description: "Deep Work Plan'in spec odaklı araçlar, ajan iş akışı çerçeveleri ve satıcı plan modlarıyla ilişkisi: her biri kendi terimleriyle, kaynaklar ve inceleme tarihiyle."
 lastUpdated: 2026-09-10
 ---
