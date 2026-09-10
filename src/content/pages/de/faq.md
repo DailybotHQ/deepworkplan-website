@@ -122,4 +122,4 @@ Die Methodik und die Skill sind MIT-lizenziert und kostenlos; es gibt keinen Die
 
 Eröffnen Sie eine Diskussion oder ein Issue auf GitHub. Fragen, die wiederkehren, werden auf dieser Seite ergänzt.
 
-[Auf GitHub fragen](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[Auf GitHub fragen](https://github.com/DailybotHQ/deepworkplan-website/issues)

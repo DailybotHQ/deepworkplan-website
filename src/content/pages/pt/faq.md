@@ -122,4 +122,4 @@ A metodologia e a skill são licenciadas sob MIT e gratuitas; não há serviço,
 
 Abra uma discussão ou uma issue no GitHub. Perguntas que surgem com frequência são acrescentadas a esta página.
 
-[Pergunte no GitHub](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[Pergunte no GitHub](https://github.com/DailybotHQ/deepworkplan-website/issues)

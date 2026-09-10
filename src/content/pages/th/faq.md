@@ -122,4 +122,4 @@ agent ใดก็ตามที่อ่านไฟล์ใน repository �
 
 เปิด discussion หรือ issue บน GitHub คำถามที่ถูกถามขึ้นซ้ำ ๆ จะถูกเพิ่มเข้าหน้านี้
 
-[ถามบน GitHub](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[ถามบน GitHub](https://github.com/DailybotHQ/deepworkplan-website/issues)

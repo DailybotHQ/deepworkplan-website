@@ -122,4 +122,4 @@ Phương pháp luận và skill cấp phép MIT và miễn phí; không có dị
 
 Mở một thảo luận hoặc một issue trên GitHub. Các câu hỏi được hỏi đi hỏi lại sẽ được thêm vào trang này.
 
-[Hỏi trên GitHub](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[Hỏi trên GitHub](https://github.com/DailybotHQ/deepworkplan-website/issues)

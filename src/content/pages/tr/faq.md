@@ -122,4 +122,4 @@ Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API 
 
 GitHub'da bir tartışma veya issue açın. Tekrar tekrar gelen sorular bu sayfaya eklenir.
 
-[GitHub'da sorun](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[GitHub'da sorun](https://github.com/DailybotHQ/deepworkplan-website/issues)

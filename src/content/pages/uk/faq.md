@@ -122,4 +122,4 @@ Deep Work Plan перетворює репозиторій на структур
 
 Відкрийте обговорення або issue на GitHub. Запитання, що повторюються, додаються на цю сторінку.
 
-[Запитати на GitHub](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[Запитати на GitHub](https://github.com/DailybotHQ/deepworkplan-website/issues)

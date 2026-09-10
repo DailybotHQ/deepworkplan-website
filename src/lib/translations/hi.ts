@@ -747,6 +747,31 @@ export const hi: SiteTranslations = {
             linkLabel: 'किट देखें',
             linkPath: '/kit',
           },
+          {
+            id: 'what-is-installed',
+            question: 'What exactly gets installed, and where?',
+            answer:
+              'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles AGENTS.md, docs/, .agents/ and the gitignored .dwp/ workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
+            linkLabel: 'See the adoption flow',
+            linkPath: '/init',
+          },
+          {
+            id: 'requires-git',
+            question: 'Does Deep Work Plan require Git?',
+            answer:
+              'Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including state.json checkpoints and gate records, is required so recovery does not depend on a chat transcript.',
+            linkLabel: 'Read about repository archetypes',
+            linkPath: '/spec/archetypes',
+          },
+          {
+            id: 'skill-plan-spec',
+            question:
+              'What is the difference between a skill, a plan and a product specification?',
+            answer:
+              'A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.',
+            linkLabel: 'Read the specification',
+            linkPath: '/spec/dwp-specification',
+          },
         ],
       },
       {
@@ -821,6 +846,22 @@ export const hi: SiteTranslations = {
             linkLabel: 'विनिर्देश',
             linkPath: '/spec/dwp-specification',
           },
+          {
+            id: 'gate-fails',
+            question: 'What happens when a validation gate fails?',
+            answer:
+              'The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.',
+            linkLabel: 'Read the agent protocol',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'unattended-runs',
+            question: 'Can a plan run unattended overnight or in CI?',
+            answer:
+              'Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.',
+            linkLabel: 'Read the unattended protocol',
+            linkPath: '/spec/agent-protocol',
+          },
         ],
       },
       {
@@ -867,6 +908,23 @@ export const hi: SiteTranslations = {
               'ऑनबोर्डिंग गैर-विनाशकारी है: यह मौजूदा `AGENTS.md`, `docs/`, `.agents/` या `CLAUDE.md` को पहचानती है, अधिलेखित करने के बजाय सुलझाती है, और कुछ भी बदलने से पहले पूछती है। यह वास्तविक कमांड्स वाला `AGENTS.md` इंडेक्स, एक तर्कपूर्ण `docs/` वृक्ष, प्रति-मॉड्यूल docs, पतले `dwp-*` कमांड्स वाली `.agents/` किट, एक gitignored `.dwp/` आउटपुट क्षेत्र, एक सत्यापित टेस्टिंग मैप, और अनिवार्य स्थानीय कोड समीक्षा (AI Diff Reviewer स्किल और रिपॉज़िटरी-अनुरूप समीक्षा एक्सटेंशन) लिखती है। फिर वह एक स्व-जाँच और अनुरूपता परीक्षक चलाती है ताकि आप देख सकें कि क्या बना। किसी पुराने संस्करण के तहत ऑनबोर्ड रिपॉज़िटरी को एक लक्षित अपग्रेड मिलता है जो केवल जो गायब है उसे बदलता है।',
             linkLabel: 'अपनाने का endpoint',
             linkPath: '/init',
+          },
+          {
+            id: 'core-and-addons',
+            question:
+              'Can I use the core methodology without installing add-ons?',
+            answer:
+              'Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.',
+            linkLabel: 'Browse the add-ons',
+            linkPath: '/spec/addons',
+          },
+          {
+            id: 'no-test-toolchain',
+            question: 'What if my repository has no tests or linting yet?',
+            answer:
+              'DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.',
+            linkLabel: 'Read the agent protocol',
+            linkPath: '/spec/agent-protocol',
           },
           {
             id: 'cost',

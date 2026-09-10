@@ -122,4 +122,4 @@ Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada
 
 Buka diskusi atau issue di GitHub. Pertanyaan yang muncul berulang kali ditambahkan ke halaman ini.
 
-[Tanya di GitHub](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[Tanya di GitHub](https://github.com/DailybotHQ/deepworkplan-website/issues)

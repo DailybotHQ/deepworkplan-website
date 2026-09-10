@@ -34,6 +34,24 @@ Con cualquier agente que lea archivos del repositorio. La skill sigue el estánd
 
 [Explorar el kit](https://deepworkplan.com/es/kit)
 
+### ¿Qué se instala exactamente y dónde?
+
+La skill del agente se instala donde tu agente carga las skills de usuario o de proyecto. Después, la incorporación adapta el propio repositorio: crea o concilia `AGENTS.md`, `docs/`, `.agents/` y el área `.dwp/` ignorada por git. La skill enseña el método al agente; el repositorio conserva el contexto, el kit y la evidencia del plan que necesitan los demás agentes para continuar.
+
+[Ver el flujo de adopción](https://deepworkplan.com/es/init)
+
+### ¿Deep Work Plan necesita Git?
+
+Git se recomienda en los repositorios porque su historial forma parte de la superficie de recuperación y revisión, pero la metodología también puede ejecutarse en un workspace de agente sin un repositorio Git. En ese caso, la capa de estado legible por máquina, incluidos los puntos de control y registros de puertas en `state.json`, es obligatoria para que la recuperación no dependa del historial del chat.
+
+[Leer sobre los arquetipos de repositorio](https://deepworkplan.com/es/spec/archetypes)
+
+### ¿Cuál es la diferencia entre una skill, un plan y una especificación de producto?
+
+Una skill describe cómo ejecuta un agente un procedimiento repetible. Un plan de DWP describe un cambio concreto mediante alcance, criterios de aceptación, puertas de validación y evidencias. Una especificación de producto describe el comportamiento actual del producto y evoluciona mediante deltas después de cada implementación; las skills y los planes también son especificaciones, pero describen procedimientos y cambios en lugar de mantener ese contrato canónico del producto.
+
+[Leer la especificación](https://deepworkplan.com/es/spec/dwp-specification)
+
 ## Cómo se ejecuta un plan
 
 ### ¿Cómo lo uso?
@@ -84,6 +102,18 @@ La única tarea de cierre obligatoria de todo plan. En orden: un pase de segurid
 
 [La especificación](https://deepworkplan.com/es/spec/dwp-specification)
 
+### ¿Qué ocurre cuando falla una puerta de validación?
+
+La tarea queda registrada como bloqueada y el agente se detiene antes de declarar que está terminada. Puedes revisar la evidencia, corregir el código o refinar la tarea y después reanudarla; un comando fallido es una señal para resolver la discrepancia, no un permiso para debilitar la puerta.
+
+[Leer el protocolo del agente](https://deepworkplan.com/es/spec/agent-protocol)
+
+### ¿Puede un plan ejecutarse sin supervisión durante la noche o en CI?
+
+Sí, siempre que el plan se haya aprobado de antemano, incluya la capa de estado necesaria y otorgue al agente una autoridad acotada. Una ejecución sin supervisión debe detenerse y registrar un bloqueo cuando la realidad diverge, falla una puerta fuera del alcance de reparación previsto o se necesita una aprobación o credencial nueva.
+
+[Leer el protocolo sin supervisión](https://deepworkplan.com/es/spec/agent-protocol)
+
 ## Cómo se compara
 
 ### ¿En qué se diferencia de las herramientas guiadas por especificación como Spec Kit, OpenSpec o Kiro?
@@ -112,6 +142,18 @@ La incorporación no es destructiva: detecta un `AGENTS.md`, `docs/`, `.agents/`
 
 [El endpoint de adopción](https://deepworkplan.com/es/init)
 
+### ¿Puedo usar la metodología principal sin instalar add-ons?
+
+Sí. Los add-ons son capas opcionales y un repositorio sin ninguno cumple por completo con DWP. Los devcontainers, los informes de Dailybot, las actualizaciones de dependencias, el soporte de sistemas de diseño y la revisión opcional en CI solo se ofrecen cuando encajan con tu repositorio y los aceptas explícitamente.
+
+[Explorar los add-ons](https://deepworkplan.com/es/spec/addons)
+
+### ¿Qué pasa si mi repositorio todavía no tiene tests ni linting?
+
+DWP no considera que la ausencia de herramientas sea un pase libre. Durante la incorporación, el agente propone una configuración de validación adecuada para el stack, registra los comandos en la documentación del repositorio y los usa como objetivo para las futuras puertas; la propuesta queda visible para que la revises.
+
+[Leer el protocolo del agente](https://deepworkplan.com/es/spec/agent-protocol)
+
 ### ¿Cuánto cuesta y cómo se mide la eficiencia?
 
 La metodología y la skill tienen licencia MIT y son gratuitas; no hay servicio, clave de API ni telemetría en los flujos centrales. La eficiencia se reporta como el número de bytes de instrucción que carga cada flujo, medido por un script versionado junto con la skill y publicado en un registro de evaluación, con los aumentos reportados con la misma claridad que las disminuciones. No se reporta como porcentajes de tokens ni ahorros de costo, porque un inventario de bytes no establece eso; está planificada una evaluación pública preregistrada para medir los resultados como corresponde.
@@ -120,6 +162,6 @@ La metodología y la skill tienen licencia MIT y son gratuitas; no hay servicio,
 
 ## ¿Te queda alguna pregunta?
 
-Abre una discusión o un issue en GitHub. Las preguntas que surgen repetidamente se añaden a esta página.
+Abre un issue en GitHub. Las preguntas que surgen repetidamente se añaden a esta página.
 
-[Pregunta en GitHub](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[Pregunta en GitHub](https://github.com/DailybotHQ/deepworkplan-website/issues)

@@ -122,4 +122,4 @@ Deep Work Plan은 리포지토리를 코딩 에이전트가 긴 작업을 안정
 
 GitHub에서 토론이나 이슈를 열어 주세요. 반복해서 나오는 질문은 이 페이지에 추가됩니다.
 
-[GitHub에서 묻기](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[GitHub에서 묻기](https://github.com/DailybotHQ/deepworkplan-website/issues)

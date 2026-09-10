@@ -122,4 +122,4 @@ Deep Work Plan はリポジトリを、コーディングエージェントが�
 
 GitHub でディスカッションまたは Issue を開いてください。繰り返し寄せられる質問はこのページに追加されます。
 
-[GitHub で質問する](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[GitHub で質問する](https://github.com/DailybotHQ/deepworkplan-website/issues)

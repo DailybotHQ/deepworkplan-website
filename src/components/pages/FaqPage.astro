@@ -17,7 +17,7 @@ const t = getTranslations(lang);
 const f = t.faqPage;
 const prefix = getUrlPrefix(lang);
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
-const discussionsUrl = `${REPO_URLS.website}/discussions`;
+const issuesUrl = `${REPO_URLS.website}/issues`;
 
 function faqItemHref(linkPath: string): string {
   if (linkPath.startsWith('http://') || linkPath.startsWith('https://')) {
@@ -162,7 +162,7 @@ const faqSchema = {
       </p>
       <div class="mt-6 flex flex-wrap gap-4">
         <a
-          href={discussionsUrl}
+          href={issuesUrl}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center rounded-sm border px-5 py-3 font-semibold transition hover:opacity-80"

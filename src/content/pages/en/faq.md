@@ -34,6 +34,24 @@ Any agent that reads repository files. The skill follows the open Agent Skills s
 
 [Browse the kit](https://deepworkplan.com/kit)
 
+### What exactly gets installed, and where?
+
+The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles `AGENTS.md`, `docs/`, `.agents/` and the gitignored `.dwp/` workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.
+
+[See the adoption flow](https://deepworkplan.com/init)
+
+### Does Deep Work Plan require Git?
+
+Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including `state.json` checkpoints and gate records, is required so recovery does not depend on a chat transcript.
+
+[Read about repository archetypes](https://deepworkplan.com/spec/archetypes)
+
+### What is the difference between a skill, a plan and a product specification?
+
+A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product’s current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.
+
+[Read the specification](https://deepworkplan.com/spec/dwp-specification)
+
 ## How a plan runs
 
 ### How do I use it?
@@ -84,6 +102,18 @@ The single mandatory closing task of every plan. In order: a security pass over 
 
 [The specification](https://deepworkplan.com/spec/dwp-specification)
 
+### What happens when a validation gate fails?
+
+The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.
+
+[Read the agent protocol](https://deepworkplan.com/spec/agent-protocol)
+
+### Can a plan run unattended overnight or in CI?
+
+Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.
+
+[Read the unattended protocol](https://deepworkplan.com/spec/agent-protocol)
+
 ## How it compares
 
 ### How is it different from spec-driven tools such as Spec Kit, OpenSpec or Kiro?
@@ -114,6 +144,18 @@ Onboarding is non-destructive: it detects an existing `AGENTS.md`, `docs/`, `.ag
 
 [The adoption endpoint](https://deepworkplan.com/init)
 
+### Can I use the core methodology without installing add-ons?
+
+Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.
+
+[Browse the add-ons](https://deepworkplan.com/spec/addons)
+
+### What if my repository has no tests or linting yet?
+
+DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.
+
+[Read the agent protocol](https://deepworkplan.com/spec/agent-protocol)
+
 ### What does it cost, and how is efficiency measured?
 
 The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads, measured by a script committed with the skill and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those; a pre-registered public evaluation is planned to measure outcomes properly.
@@ -122,6 +164,6 @@ The methodology and the skill are MIT-licensed and free; there is no service, no
 
 ## Still have a question?
 
-Open a discussion or an issue on GitHub. Questions that come up repeatedly are added to this page.
+Open an issue on GitHub. Questions that come up repeatedly are added to this page.
 
-[Ask on GitHub](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[Ask on GitHub](https://github.com/DailybotHQ/deepworkplan-website/issues)

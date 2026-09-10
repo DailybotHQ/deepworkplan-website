@@ -122,4 +122,4 @@ Deep Work Plan 将一个代码仓库转变为结构化环境，让编码代理�
 
 在 GitHub 上发起讨论或提交 issue。反复出现的问题会被收录到本页。
 
-[到 GitHub 提问](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[到 GitHub 提问](https://github.com/DailybotHQ/deepworkplan-website/issues)

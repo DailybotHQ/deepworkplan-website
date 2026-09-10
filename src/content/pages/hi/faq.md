@@ -122,4 +122,4 @@ Deep Work Plan किसी रिपॉज़िटरी को एक सं�
 
 GitHub पर एक चर्चा या issue खोलें। जो प्रश्न बार-बार आते हैं उन्हें इस पृष्ठ में जोड़ा जाता है।
 
-[GitHub पर पूछें](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[GitHub पर पूछें](https://github.com/DailybotHQ/deepworkplan-website/issues)

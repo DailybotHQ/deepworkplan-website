@@ -122,4 +122,4 @@ La metodologia e la skill sono con licenza MIT e gratuite; nei flussi principali
 
 Apra una discussione o una issue su GitHub. Le domande che ricorrono vengono aggiunte a questa pagina.
 
-[Chiedi su GitHub](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[Chiedi su GitHub](https://github.com/DailybotHQ/deepworkplan-website/issues)

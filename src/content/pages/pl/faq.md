@@ -122,4 +122,4 @@ Metodyka i skill są na licencji MIT i bezpłatne; nie ma usługi, klucza API an
 
 Otwórz dyskusję lub issue na GitHubie. Pytania powtarzające się są dodawane do tej strony.
 
-[Zapytaj na GitHubie](https://github.com/DailybotHQ/deepworkplan-website/discussions)
+[Zapytaj na GitHubie](https://github.com/DailybotHQ/deepworkplan-website/issues)
