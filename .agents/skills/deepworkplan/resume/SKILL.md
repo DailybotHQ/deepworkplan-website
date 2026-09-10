@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-resume
 description: Resume an interrupted Deep Work Plan from its recorded progress state — reconcile Markdown, state.json and the actual workspace, recover safely at any interruption boundary without duplicating a gate, commit or report, take over from another agent, and continue with a bounded working context. Use when the developer wants to continue a plan in .dwp/plans/ that was paused or interrupted mid-execution.
-version: "2.17.1"
+version: "3.0.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -121,7 +121,7 @@ pointer**, never by replaying everything.
    | Interrupted… | Evidence to check | Then |
    |---|---|---|
    | before the gate ran | uncommitted changes; no gate record | finish the implementation if incomplete; run the gate **once** |
-   | after the gate, before the commit | gate record present and inputs unchanged (fingerprint) | reuse the gate result; commit **once** |
+   | after the gate, before the commit | gate record present, `passes: true`, and inputs unchanged (fingerprint) | reuse the passing gate result; commit **once** |
    | after the commit, before the README/log update | commit exists in `git log`; README still `[ ]` | complete log → README → PROGRESS → `state.json`; do **not** re-commit |
    | between Markdown and `state.json` updates | README `[x]`, state stale | regenerate `state.json`; nothing else |
    | after an external action (report, push, PR, message) | the action's own evidence (report id, remote branch, PR URL in the log) | do **not** repeat it; record that it already happened |

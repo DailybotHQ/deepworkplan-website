@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-refine
 description: Refine a Deep Work Plan draft or modify an existing final plan — add, edit, split or reorder tasks, update the README, convert a draft, or explicitly migrate a legacy plan — keeping README links, task IDs, dependencies and the state layer synchronized and never silently rewriting completed work. Use when the developer wants to adjust scope, tasks, or details of a draft in .dwp/drafts/ or a plan in .dwp/plans/.
-version: "2.17.1"
+version: "3.0.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -227,8 +227,9 @@ when the developer asks for it explicitly (`../spec/DWP_SPECIFICATION.md` §6.5,
    `../create/SKILL.md` Step 4.4 item 3, incl. the security pass, final-state
    validation, skills reconciliation, completion and report offer). If the
    Security Review already ran, keep it and replace only the two unstarted
-   closing tasks with the Final Review's remaining parts (b)–(d). Record the
-   decision in `PROGRESS.md`.
+   closing tasks with the Final Review's remaining parts (b)–(d); the Final
+   Review security pass (a) still runs the required local review over the
+   accumulated change set. Record the decision in `PROGRESS.md`.
 4. **Add the new-shape elements** to unstarted tasks and to the plan: a Touched
    Surface (planned surface, risk class, selected gate — derived from
    `docs/TESTING_GUIDE.md`, or the full-suite fallback where the repository

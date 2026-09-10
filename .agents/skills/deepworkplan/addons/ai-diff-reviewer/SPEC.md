@@ -284,18 +284,18 @@ an additional post-existing-checks step:
 
 - The step is **MUST**, with honest degradation: when the vendored skill or
   the extension file is absent, the security pass **MUST** record a `local
-  reviewer not installed` finding in `SECURITY_REVIEW.md`, **SHOULD** install
-  the missing piece (§4.1–§4.2, same pinned command) when the run is
-  authorized to write to the harness and then run the review, and **MUST
-  NOT** fail-close the plan when it cannot — the finding is carried into the
-  completion report. A coding-agent / upstream-skill invocation error of a
-  review that could start follows §7.
+  reviewer not installed` finding in `SECURITY_REVIEW.md` and carry it into
+  the completion report. Installation is an onboarding action; the Final
+  Review **MUST NOT** surprise-bootstrap a missing piece. A coding-agent /
+  upstream-skill invocation error of a review that could start follows §7.
   Do **not** treat an unset CI provider secret as an invocation skip — that
   secret is Flow B CI/gate only. Once a local review **did** run, severity
   handling above (§6.1 item 4) still applies.
 - The augmentation is **additive**. The Final Review's own manual security
-  reasoning is preserved. On repos without the addon, the Final Review template
-  body is unchanged.
+  reasoning is preserved. Every new 2.3.0 Final Review template includes this
+  local-review step; when the reviewer is absent, the step records its missing-
+  reviewer finding instead of being omitted. Legacy plans retain their own
+  recorded shape.
 - **Legacy plans.** A plan created under the pre-2.3.0 lifecycle carries a
   separate `{N-2}.task_security_review.md`. The addon augments *that* task in
   such a plan — same additive step, same severity contract — because a plan is
@@ -348,8 +348,8 @@ completion until fixed or explicitly accepted.
   failed invocation in `SECURITY_REVIEW.md`, continue the primary task,
   **not** retry automatically, and **not** enter a diagnostic loop. An
   **absent** skill or extension file is not an invocation failure: it is
-  handled by §6.1 (recorded finding plus an install attempt when authorized),
-  never by a silent skip. This mirrors the upstream skill's own
+  handled by §6.1 (recorded finding; installation is onboarding-only), never by
+  a silent skip. This mirrors the upstream skill's own
   trust-boundary guarantees. The local parent default flow runs via the
   coding agent and does **not** require a CI provider secret — an unset
   `CURSOR_API_KEY` (or other provider secret) **MUST NOT** suppress the
@@ -407,8 +407,8 @@ A repo is **conformant to this addon** when **all** hold (after acceptance):
 4. The chosen flow (A or B) is recorded in `AGENTS.md` (or equivalent
    docs), and the DWP execution docs describe the security-pass
    local review as **required with honest degradation**: a missing skill or
-   extension is a recorded finding with an install attempt when authorized
-   (§6.1), invocation errors soft-fail (§7); `critical` findings from a
+  extension is a recorded finding and installation remains onboarding-only
+  (§6.1), invocation errors soft-fail (§7); `critical` findings from a
    **completed** pass still follow the SR contract (§6.1 / §7).
 5. (Flow B only) `.github/workflows/pr-review.yml` exists with the upstream
    Action pinned to `@v2` (or a specific tag), the stable-named gate job
@@ -456,7 +456,7 @@ A repo is **conformant to this addon** when **all** hold (after acceptance):
   [`setup/reference.md`](https://github.com/DailybotHQ/ai-diff-reviewer/blob/main/skills/ai-diff-reviewer/setup/reference.md),
   `open-pr/SKILL.md`, `apply-review/SKILL.md`.
 - Marketplace listing: ["AI Diff Reviewer"](https://github.com/marketplace/actions/ai-diff-reviewer).
-- [`../../create/SKILL.md`](../../create/SKILL.md) §"Three mandatory final tasks" — where the SR augmentation callout is wired.
+- [`../../create/SKILL.md`](../../create/SKILL.md) Step 4.4 (“Local review step (required)”) — where the Final Review local-review wiring is authored into every 2.3.0 plan.
 - [`../../guide/authoring.md`](../../guide/authoring.md) §5.4 — the canonical security-discipline rules the Final Review's security pass applies.
 
 ---

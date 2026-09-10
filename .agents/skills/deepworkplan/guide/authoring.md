@@ -365,11 +365,11 @@ plan at the end (`spec/DWP_SPECIFICATION.md` §6.1):
 
 The Final Review's security pass runs the
 [`ai-diff-reviewer` addon](../addons/ai-diff-reviewer/SKILL.md)'s local review
-as a required step; `onboard` installs the reviewer (Phase 7a) so it is present
-in every 2.3.0 repository. Degradation is honest, never silent: an absent
+as a required step; `onboard` installs the reviewer (Phase 7a) unless declined
+or unavailable. Degradation is honest, never silent: an absent
 upstream skill or extension file is recorded as a `local reviewer not
-installed` finding (with an install attempt when the run may write to the
-harness), and a local review invocation error produces a warning + record,
+installed` finding, carried into the completion report; installation belongs to
+onboarding or an explicit addon invocation, and a local review invocation error produces a warning + record,
 never a failed task (addon SPEC §6.1, §7).
 Flow A needs no CI provider secret; an unset `CURSOR_API_KEY` (or other
 provider secret) must not suppress the local pass — that secret is Flow B CI /

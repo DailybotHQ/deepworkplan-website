@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-create
 description: Create a Deep Work Plan. Gather context, analyze requirements, and materialize a single final plan under .dwp/plans/ — guided mode stages a refined draft in .dwp/drafts/ for review; trust mode materializes directly. Use when the developer wants a new structured multi-task plan.
-version: "2.17.1"
+version: "3.0.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -36,7 +36,7 @@ nobody asked for.
 - [`../shared/adaptation.md`](../shared/adaptation.md) — reasoning-over-copy-paste
   and the two repository archetypes (individual repo vs orchestrator hub).
 - **Guide (essential — read for this flow):** [`../guide/authoring.md`](../guide/authoring.md) (plan README structure §4, task-file anatomy §5 incl. the Touched Surface, test and security discipline §5.3–§5.4) and [`../guide/structure.md`](../guide/structure.md) (folders §1, naming §2, lifecycle §10).
-- **Guide (conditional — read only when the trigger fires):** [`orchestrator.md`](orchestrator.md) (this directory) plus [`../guide/orchestrator.md`](../guide/orchestrator.md) if Step 2.6 detects an orchestrator plan; [`team-agents.md`](team-agents.md) (this directory) plus [`../guide/team-agents.md`](../guide/team-agents.md) **only if Step 2.10 finds parallelizable tasks** (the host merely *having* team agents is not a trigger); [`addon-augmentations.md`](addon-augmentations.md) (this directory) if the target repo has an installed addon that augments the Final Review; [`../guide/prompts.md`](../guide/prompts.md) §7 when composing prompt text; [`../guide/skills-integration.md`](../guide/skills-integration.md) §11 when a task references skills or agents; [`../guide/execution.md`](../guide/execution.md) §6.1 when writing the Final Review task. Do not read other guide files for this flow; [`../guide/GUIDE.md`](../guide/GUIDE.md) is the routing index, consulted only when a section is not named above.
+- **Guide (conditional — read only when the trigger fires):** [`orchestrator.md`](orchestrator.md) (this directory) plus [`../guide/orchestrator.md`](../guide/orchestrator.md) if Step 2.6 detects an orchestrator plan; [`team-agents.md`](team-agents.md) (this directory) plus [`../guide/team-agents.md`](../guide/team-agents.md) **only if Step 2.10 finds parallelizable tasks** (the host merely *having* team agents is not a trigger); [`addon-augmentations.md`](addon-augmentations.md) (this directory) **always when composing the Final Review** (required local-review step on every 2.3.0 plan — do not gate this read on whether the target already has the reviewer installed); [`../guide/prompts.md`](../guide/prompts.md) §7 when composing prompt text; [`../guide/skills-integration.md`](../guide/skills-integration.md) §11 when a task references skills or agents; [`../guide/execution.md`](../guide/execution.md) §6.1 when writing the Final Review task. Do not read other guide files for this flow; [`../guide/GUIDE.md`](../guide/GUIDE.md) is the routing index, consulted only when a section is not named above.
 - [`../examples/CREATE_PLAN.md`](../examples/CREATE_PLAN.md) — prompt patterns.
 - [`../examples/PROMPTS_TEMPLATE.md`](../examples/PROMPTS_TEMPLATE.md) — the
   `PROMPTS.md` template for each plan.
@@ -383,8 +383,9 @@ Create:
    warranted authoring before (b) is final; no whole-plan rediscovery, no second
    report. **(d) Completion** — report deliverables, evidence, limitations and
    PR links; **offer the Executive Report once** (generate only on request; an
-   explicit request recorded in the plan guidelines counts); send the completion
-   report through the configured channel regardless of the answer.
+   explicit request recorded in the plan guidelines counts); where a reporting
+   channel is configured (`AGENT_PROTOCOL.md` §5), send the completion report
+   best-effort; otherwise skip it.
 
    **Local review step (required):** read
    [`addon-augmentations.md`](addon-augmentations.md) (this directory) and add
@@ -392,8 +393,9 @@ Create:
    security pass — it applies to every 2.3.0 plan. When the target repo lacks
    `.agents/skills/ai-diff-reviewer/` or an extension file at one of the three
    recognized paths, the step's degradation clause (record a `local reviewer
-   not installed` finding, install when authorized, otherwise carry the
-   finding) applies at execution time; do not omit the step.
+   not installed` finding) and carry it into the completion report. Installation
+   belongs to onboarding or an explicit addon invocation; Final Review never
+   surprise-bootstraps it. Do not omit the step.
 
 4. **PROMPTS.md** — from `../examples/PROMPTS_TEMPLATE.md`, replacing
    `{PLAN_NAME}` with the plan name. The template is written for **you**, so
@@ -417,7 +419,7 @@ Create:
    (write-temp-then-rename); valid against `../spec/schema/plan-state.schema.json`
    (no extra fields — the schema is closed). `manifest.json` was written in item 1
    and is not touched here.
-8. **README.md** (content — written as the skeleton in item 1b) — Goal; Context; Plan Variables (incl. `Standard: DWP
+8. **README.md** (content — written as the skeleton in item 1b) — Goal; Context; Plan Variables (incl. `**Standard:** DWP
    spec 2.3.0`, the tier and why, and in trust mode `Pre-approved for unattended
    execution: yes (trust)`); Global Guidelines (incl. an explicit Executive
    Report request if the user made one); Task List with `[ ]` checkboxes + links
