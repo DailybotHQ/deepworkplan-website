@@ -167,7 +167,9 @@ describe('faqPage and comparePage copy', () => {
             `${lang}/${item.id}`
           ).toBeGreaterThan(0);
           if (item.linkPath) {
-            expect(item.linkPath, `${lang}/${item.id}`).toMatch(/^\//);
+            expect(item.linkPath, `${lang}/${item.id}`).toMatch(
+              /^(\/|https?:\/\/)/
+            );
             expect(
               item.linkLabel?.trim().length,
               `${lang}/${item.id}`

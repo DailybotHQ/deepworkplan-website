@@ -91,7 +91,37 @@ Build a fast, accessible, bilingual site that:
 - Permanent redirects from `/setup` and `/onboarding` (plus `/es/` variants) to `/init`
 - Stays in sync with the companion skill repo `DailybotHQ/deepworkplan-skill`
 
-### 6. Agent-Friendly Markdown Endpoints (AEO)
+### 6. Compare and FAQ
+
+**Purpose:** Help readers understand where Deep Work Plan fits among
+spec-driven tools, agent workflow frameworks, vendor-native plan modes and the
+broader AI-native SDLC conversation.
+
+**Features:**
+- `/compare` uses neutral capability values, official dated sources and an
+  explicit honest-limits section; it is a map for choosing the right layer,
+  not a ranking.
+- `/faq` answers recurring questions about the methodology, validation gates,
+  resumption, adoption and comparison, with `FAQPage` structured data.
+- Both pages are available in every active language and have native Markdown
+  mirrors at `/compare.md`, `/faq.md` and their localized forms.
+- The pages link to Claude by Anthropic's [AI-Native SDLC
+  Playbook](https://claude.com/blog/the-ai-native-sdlc-playbook), reviewed on
+  2026-09-10. That playbook describes a six-stage Plan, Design, Build, Test,
+  Deploy and Maintain loop with committed artifacts between stages. DWP is
+  positioned as the repository-native execution harness for the plan,
+  verification, auditability and resumability concerns across agents; it does
+  not claim to provide continuous model evals, production monitoring or the
+  complete intent-to-incident lifecycle.
+
+**Comparison content policy:** Each alternative is described first on its own
+terms and linked to official documentation. Matrix cells use only “Built in,”
+“Optional or via extension” and “Not in scope.” The page avoids evaluative
+language, volatile counts, benchmark claims and token or cost percentages. It
+shows the review date, states DWP's limits and invites corrections through the
+website repository.
+
+### 7. Agent-Friendly Markdown Endpoints (AEO)
 
 **Purpose:** Make site content natively accessible to AI agents and LLMs.
 

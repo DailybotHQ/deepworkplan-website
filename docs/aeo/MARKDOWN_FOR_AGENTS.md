@@ -27,8 +27,8 @@ Cloudflare offers [Markdown for Agents](https://blog.cloudflare.com/markdown-for
 
 | Pattern | Example |
 |---------|---------|
-| `/{page}.md` (EN) | `/about.md`, `/contact.md`, `/init.md` |
-| `/es/{page}.md` (ES) | `/es/about.md`, `/es/init.md` |
+| `/{page}.md` (EN) | `/about.md`, `/contact.md`, `/compare.md`, `/faq.md`, `/init.md` |
+| `/{lang}/{page}.md` | `/es/about.md`, `/es/compare.md`, `/es/faq.md`, `/es/init.md` |
 
 Source: `src/content/pages/{en,es}/` content collection.
 
