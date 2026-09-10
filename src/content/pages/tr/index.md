@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — yapay zeka kodlama ajanları için yapılandırılmış yürütme"
 description: "Bağlam modellerden daha çok önemlidir. Deep Work Plan, herhangi bir depoyu, herhangi bir kodlama ajanının uzun soluklu işi bitirdiği yapılandırılmış bir ortama dönüştürür."
-lastUpdated: 2026-06-03
+lastUpdated: 2026-09-10
 ---
 
 ## Modeller önemlidir. Bağlam daha çok önemlidir.
@@ -19,14 +19,56 @@ Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini pla
 
 ---
 
-## Sorun ve yanıt
+## İnsanlar dümen tutar. Ajanlar yürütür.
 
-Yapay zeka kodlama ajanları, kısa anlarda dikkat çekici ölçüde etkilidir. Uzun soluklu işlerde — bir geçiş, yeni bir alt sistem, onlarca dosyaya yayılan bir refactor — savrulurlar: bağlam dolar, kararlar unutulur ve birkaç saatlik görevler yarı yolda terk edilir.
+Neyin bitti sayılacağına ve sınırların nerede olacağına siz karar verirsiniz. Plan niyetinizi taşır; ajanlar saatleri çalışır — sürekli gözetim yok, yirmi dakikada bir düzeltme yok.
 
-Deep Work Plan buna **spec odaklı geliştirmeyle** yanıt verir: plan kalıcı doğruluk kaynağıdır ve ajanlar açık kabul kriterlerine ve doğrulama kapılarına karşı çalışır. Sapma düşer, iş doğrulanabilir kalır ve herhangi bir ajan onu oturumlar arasında sürdürebilir. Tek bir IDE ya da satıcıya bağlı spec odaklı araçların (GitHub Spec Kit, Amazon Kiro, Tessl) aksine, DWP araçtan bağımsız ve repo-native’dir.
+- Siz: niyet, kabul kriterleri, inceleme
+- Ajanlar: yürütme, görev görev
+- Plan: ikisi arasındaki sözleşme
 
-Aynı zamanda taşınabilir hale getirilmiş **harness mühendisliğidir**. Bir ajan harness’ı, bir modelin etrafındaki iskeledir — bağlam, araçlar, kontrol döngüsü, güvenlik bariyerleri, sürdürülebilir durum — ve onu güvenilir kılan şeydir. Deep Work Plan o harness’ı deponun kendisine kurar; böylece herhangi bir ajan herhangi bir depoyu pilotlayabilir.
+[Metodolojiyi okuyun](/tr/methodology)
 
+---
+
+## Ajanların sapamayacağı bir plan.
+
+Uzun görevler her modelin bağlamını doldurur. Ayrıntılar kayar ve ajan saptar. Yazılı bir plan — atomik görevler, doğrulama kapıları, sürdürülebilir durum — her turda geri döndüğü çıpadır.
+
+1. Plan
+2. Atomik görevler
+3. Doğrulama kapıları
+4. Tamamlanma
+5. Devam ettirilebilir durum
+
+[Çekirdek döngüyü görün](/tr/methodology)
+
+---
+
+## Bitti bir sözleşmedir, bir his değil.
+
+Her görev, kabul kriterlerini ve geçmesi gereken kontrolleri adlandırır. Ajan kendini bitmiş hissedemez — geçmek zorundadır, aksi hâlde görev açık kalır.
+
+- Testler geçer
+- Tür denetimi geçer
+- Kabul kriterleri karşılanır
+- Yoksa görev açık kalır
+
+[Şartnamayı okuyun](/tr/spec)
+
+---
+
+## Depo, harness’tir.
+
+Bağlam, araçlar, koruma bariyerleri ve durum; herhangi bir ajanın okuyabileceği düz dosyalar olarak deponuzda yaşar. Kilitlenme yok, dış beyin yok — bağlam sıfırlamalarını atlatır.
+
+- Diskte kalıcı spesifikasyon
+- His değil doğrulama kapıları
+- Bağlam sıfırlamalarını atlatır
+
+**PE · ASK · HECK · TAT · OOL**
+
+[Onboarding çıktısını görün](/tr/quickstart)
 ---
 
 ## Ne elde edersiniz

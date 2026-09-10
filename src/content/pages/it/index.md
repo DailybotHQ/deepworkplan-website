@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — esecuzione strutturata per agenti di coding AI"
 description: "Il contesto conta più dei modelli. Deep Work Plan trasforma qualsiasi repository in un ambiente strutturato in cui ogni agente di coding porta a termine il lavoro a lungo termine."
-lastUpdated: 2026-06-03
+lastUpdated: 2026-09-10
 ---
 
 ## I modelli contano. Il contesto conta di più.
@@ -19,14 +19,56 @@ Deep Work Plan (DWP) è una metodologia e un kit aperti, sotto licenza MIT, per 
 
 ---
 
-## Il problema e la risposta
+## Gli umani governano. Gli agenti eseguono.
 
-Gli agenti di coding AI sono notevolmente efficaci in brevi sessioni. Sul lavoro a lungo termine — una migrazione, un nuovo sottosistema, un refactoring su decine di file — vanno alla deriva: il contesto si riempie, le decisioni vengono dimenticate e le attività di più ore vengono abbandonate a metà.
+Sei tu a decidere cosa significa “fatto” e dove corrono i confini. Il piano porta la tua intenzione; gli agenti mettono le ore — senza supervisione continua, senza correzioni ogni venti minuti.
 
-Deep Work Plan risponde con lo **spec-driven development**: il piano è la fonte di verità duratura e gli agenti eseguono rispetto a criteri di accettazione e validation gate espliciti. La deriva si riduce, il lavoro resta verificabile e qualsiasi agente può riprenderlo tra una sessione e l’altra. A differenza degli strumenti spec-driven legati a un singolo IDE o fornitore (GitHub Spec Kit, Amazon Kiro, Tessl), DWP è indipendente dallo strumento e nativo del repository.
+- Tu: intento, criteri di accettazione, revisione
+- Agenti: esecuzione, attività per attività
+- Il piano: il contratto tra loro
 
-È anche **harness engineering** reso portabile. Una harness per agenti è l’impalcatura attorno a un modello — contesto, strumenti, ciclo di controllo, salvaguardie, stato ripristinabile — che lo rende affidabile. Deep Work Plan installa quella harness nel repository stesso, così qualsiasi agente può pilotare qualsiasi repo.
+[Leggi la metodologia](/it/methodology)
 
+---
+
+## Un piano da cui gli agenti non possono deviare.
+
+I task lunghi riempiono il contesto di qualsiasi modello. I dettagli sfumano e l’agente deriva. Un piano scritto — task atomici, validation gate, stato ripristinabile — è ciò a cui torna, giro dopo giro.
+
+1. Piano
+2. Attività atomiche
+3. Porte di validazione
+4. Completamento
+5. Stato riprendibile
+
+[Vedi il ciclo principale](/it/methodology)
+
+---
+
+## Fatto è un contratto, non una sensazione.
+
+Ogni task nomina i propri criteri di accettazione e le verifiche che devono passare. L’agente non può sentirsi finito — deve passare, o il task resta aperto.
+
+- I test passano
+- I tipi vengono verificati
+- I criteri di accettazione sono soddisfatti
+- O il task resta aperto
+
+[Leggi la specifica](/it/spec)
+
+---
+
+## Il repository è il harness.
+
+Contesto, strumenti, guardrail e stato vivono nel tuo repository come semplici file che qualsiasi agente può leggere. Niente lock-in, niente cervello esterno — sopravvive ai reset del contesto.
+
+- Specifica durevole su disco
+- Gate di validazione, non sensazioni
+- Sopravvive ai reset del contesto
+
+**PE · ASK · HECK · TAT · OOL**
+
+[Vedi cosa genera l’onboarding](/it/quickstart)
 ---
 
 ## Cosa ottieni

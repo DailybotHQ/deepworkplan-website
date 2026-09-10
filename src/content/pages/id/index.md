@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — eksekusi terstruktur untuk AI coding agent"
 description: "Konteks lebih penting daripada model. Deep Work Plan mengubah repositori apa pun menjadi lingkungan terstruktur tempat coding agent menyelesaikan pekerjaan jangka panjang."
-lastUpdated: 2026-06-03
+lastUpdated: 2026-09-10
 ---
 
 ## Model itu penting. Konteks lebih penting.
@@ -19,14 +19,56 @@ Deep Work Plan (DWP) adalah metodologi dan kit terbuka berlisensi MIT untuk mere
 
 ---
 
-## Masalah dan jawabannya
+## Manusia memegang kemudi. Agent mengeksekusi.
 
-AI coding agent sangat efektif dalam tugas singkat. Pada pekerjaan jangka panjang — migrasi, subsistem baru, atau refaktor lintas puluhan berkas — mereka melenceng: konteks penuh, keputusan terlupakan, dan tugas multijam ditinggalkan di tengah jalan.
+Anda yang memutuskan arti selesai dan di mana batasnya. Rencana membawa niat Anda; agen yang menghabiskan waktu — tanpa pengawasan terus-menerus, tanpa koreksi setiap dua puluh menit.
 
-Deep Work Plan menjawabnya dengan **spec-driven development**: rencana adalah sumber kebenaran yang tahan lama, dan agent mengeksekusi terhadap acceptance criteria serta validation gate yang eksplisit. Penyimpangan berkurang, pekerjaan tetap dapat diverifikasi, dan agent mana pun dapat melanjutkannya lintas sesi. Tidak seperti alat spec-driven yang terikat pada satu IDE atau vendor (GitHub Spec Kit, Amazon Kiro, Tessl), DWP agnostik terhadap alat dan repo-native.
+- Anda: maksud, kriteria penerimaan, tinjauan
+- Agent: eksekusi, tugas demi tugas
+- Rencana: kontrak di antara keduanya
 
-Ini juga **harness engineering** yang dibuat portabel. Sebuah agent harness adalah perancah di sekitar model — konteks, alat, control loop, pengaman, status yang dapat dilanjutkan — yang membuatnya andal. Deep Work Plan memasang harness itu ke dalam repositori itu sendiri, sehingga agent mana pun dapat mengemudikan repo mana pun.
+[Baca metodologi](/id/methodology)
 
+---
+
+## Rencana yang tidak bisa disimpangi oleh agen.
+
+Tugas panjang mengisi konteks model mana pun. Detail hilang dan agen menyimpang. Rencana tertulis — tugas atomik, gerbang verifikasi, status yang dapat dilanjutkan — adalah tempat kembali setiap putaran.
+
+1. Rencana
+2. Tugas atomik
+3. Gerbang validasi
+4. Penyelesaian
+5. Status yang dapat dilanjutkan
+
+[Lihat loop inti](/id/methodology)
+
+---
+
+## Selesai itu kontrak, bukan perasaan.
+
+Setiap tugas menyebutkan kriteria penerimaan dan pemeriksaan yang harus lulus. Agen tidak bisa merasa selesai — harus lulus, atau tugas tetap terbuka.
+
+- Tes lolos
+- Tipe terverifikasi
+- Kriteria penerimaan terpenuhi
+- Atau tugas tetap terbuka
+
+[Baca spesifikasi](/id/spec)
+
+---
+
+## Repositori adalah harness.
+
+Konteks, alat, pagar pengaman, dan status tinggal di repositori Anda sebagai berkas sederhana yang dapat dibaca agen mana pun. Tanpa lock-in, tanpa otak eksternal — bertahan melewati reset konteks.
+
+- Spesifikasi awet di disk
+- Gerbang validasi, bukan perasaan
+- Selamat dari reset konteks
+
+**PE · ASK · HECK · TAT · OOL**
+
+[Lihat hasil onboarding](/id/quickstart)
 ---
 
 ## Apa yang Anda dapatkan
