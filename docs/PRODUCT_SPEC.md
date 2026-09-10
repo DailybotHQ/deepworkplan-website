@@ -105,9 +105,9 @@ broader AI-native SDLC conversation.
   resumption, adoption and comparison, with `FAQPage` structured data.
 - Both pages are available in every active language and have native Markdown
   mirrors at `/compare.md`, `/faq.md` and their localized forms.
-- The pages link to Claude by Anthropic's [AI-Native SDLC
-  Playbook](https://claude.com/blog/the-ai-native-sdlc-playbook), reviewed on
-  2026-09-10. That playbook describes a six-stage Plan, Design, Build, Test,
+- The site's product documentation links to Claude by Anthropic's [AI-Native
+  SDLC Playbook](https://claude.com/blog/the-ai-native-sdlc-playbook), reviewed
+  on 2026-09-10. That playbook describes a six-stage Plan, Design, Build, Test,
   Deploy and Maintain loop with committed artifacts between stages. DWP is
   positioned as the repository-native execution harness for the plan,
   verification, auditability and resumability concerns across agents; it does
