@@ -9,7 +9,7 @@ The site has three jobs: (1) explain and sell the methodology, (2) host the read
 Beyond turning a repository AI-first, DWP lets that repository **evolve its own kit** and **maintain itself**:
 
 - **The author sub-skill** — invoked through `/skill-create` and `/agent-create`, it reasons about the repository's existing `.agents/` layout and conventions and authors new skills, agents, or thin command delegators that match them, keeping the catalog in sync. The repository grows its own kit instead of inheriting a generic one. The same sub-skill backs the mandatory Skills & Agents Discovery task.
-- **Maintenance add-ons** — opt-in extensions, never required for conformance. The **dependency-upgrade** add-on reasons about the repository's actual package manager (not assuming npm) and upgrades dependencies in small, validated, revertible batches, running the repository's real gate after each batch.
+- **Maintenance add-ons** — opt-in extensions, never required for conformance (the AI Diff Reviewer local review is the one required component since standard 2.3.0; its CI surface stays optional). The **dependency-upgrade** add-on reasons about the repository's actual package manager (not assuming npm) and upgrades dependencies in small, validated, revertible batches, running the repository's real gate after each batch.
 
 ### This repository dogfoods DWP
 

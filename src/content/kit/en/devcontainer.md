@@ -23,4 +23,4 @@ Roughly 85% of the devcontainer is a stable common skeleton; the remaining 15% â
 
 ## Notes
 
-Opt-in and never required. A repo is fully conformant with zero addons.
+Opt-in and never required. A repo is fully conformant with zero optional addons.

@@ -158,7 +158,13 @@ Rules (strict):
 2. **For each task** — open `N.task_{title}.md`, read it fully, follow its
    instructions and Execution Checklist. Read its `Read Before Starting`
    pointers and its Touched Surface (planned surface, risk class, selected gate).
-   Then implement.
+   Then implement. Before selecting or running gates, make the **skills decision**
+   (`../spec/DWP_SPECIFICATION.md` §6.2): record `none` / `update <existing>` /
+   `create <name>` / `defer — <reason, owner>`, checking the existing `.agents/`
+   catalog for duplicates. Finish any warranted, in-scope skill/agent authoring
+   and catalog updates now, so the actual surface and its validation include
+   them. Append real candidates to `analysis_results/SKILLS_CANDIDATES.md` by
+   stable ID `T{N}-{seq}`; update an existing ID on resume (`none` needs no row).
 
 3. **Select and run the validation gate — from the actual surface.** After
    implementing, and before running anything:
@@ -240,13 +246,10 @@ Rules (strict):
 
 5. **Task-local closure (before the commit).** When every acceptance criterion
    is met and every selected gate passed:
-   - **Skills decision** (`../spec/DWP_SPECIFICATION.md` §6.2): decide `none` /
-     `update <existing>` / `create <name>` / `defer — <reason, owner>` from this
-     task's evidence and the existing `.agents/` catalog; do any warranted,
-     in-scope authoring **now** (skill/agent + catalog entry) so it is covered
-     by the same gate; append a real candidate to
-     `analysis_results/SKILLS_CANDIDATES.md` by stable ID `T{N}-{seq}` (update
-     an existing ID on resume; `none` needs no ledger row).
+   - **Reconcile the skills decision** recorded before validation. If closure
+     reveals additional warranted authoring, return to implementation and Step 3:
+     reconcile the changed surface and rerun affected gates before closing.
+     A gate from before that edit does not validate the new artifact.
    - **Complete the log**, then the projections, in this order
      (`../spec/PLAN_STATE.md` §5.1): the task's Completion & Log (status,
      timestamp, summary, files changed, gate records, skills disposition,
@@ -363,17 +366,21 @@ this order and do not reorder:
   secrets, injection and unsafe input handling, new attack surface, weakened
   auth, sensitive data in logs/docs/outputs; dependency audit best-effort;
   `docs/SECURITY.md` currency; write `analysis_results/SECURITY_REVIEW.md` even
-  when clean. **Addon augmentation:** if `.agents/skills/ai-diff-reviewer/` is
-  present **AND** an extension file exists at one of the three recognized paths
-  (`.review/extension.md` > `.github/ai-diff-reviewer/extension.md` >
+  when clean. **Required local review:** when `.agents/skills/ai-diff-reviewer/`
+  is present **AND** an extension file exists at one of the three recognized
+  paths (`.review/extension.md` > `.github/ai-diff-reviewer/extension.md` >
   `.github/ai-pr-reviewer/extension.md`), read
   [`../create/addon-augmentations.md`](../create/addon-augmentations.md) and run
-  the local review pass, appending its output to `SECURITY_REVIEW.md`. Skill
-  present without an extension → warn once that the addon install is
-  incomplete and continue (do not bootstrap an extension mid-review). The
-  augmentation is best-effort on *invocation* only; once a review runs,
-  `critical` findings follow the security-pass contract: **fix or obtain
-  explicit acceptance before completion**.
+  the local review pass, appending its output to `SECURITY_REVIEW.md`. When
+  the skill or the extension is missing, record a `local reviewer not
+  installed` finding in `SECURITY_REVIEW.md`; if the run is authorized to
+  write to the harness (trust mode or explicit approval), install the missing
+  piece per `../onboard/addons.md` Phase 7a (pinned skill, `generate-extension`)
+  and then run the review; otherwise leave the finding and name it in the
+  completion report — never a silent skip, never a hard stop. An invocation
+  error of a review that could start: warn once, record, continue. Once a
+  review runs, `critical` findings follow the security-pass contract: **fix or
+  obtain explicit acceptance before completion**.
 - **(b) Final-state validation:** the repository's complete applicable test,
   lint, type-check and format suites run and pass on the final state
   (`../spec/DWP_SPECIFICATION.md` §5.1.3). Any fix made during (a) or (b)
