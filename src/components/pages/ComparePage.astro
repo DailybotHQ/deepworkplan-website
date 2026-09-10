@@ -1,0 +1,244 @@
+---
+import Kicker from '@/components/editorial/Kicker.astro';
+import Lead from '@/components/editorial/Lead.astro';
+import Rule from '@/components/editorial/Rule.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import CompareMatrix from '@/components/pages/CompareMatrix.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import {
+  ALTERNATIVES,
+  type AlternativeCategory,
+  COMPARE_REVIEWED_ON,
+} from '@/lib/compare-data';
+import { REPO_URLS } from '@/lib/constants/repos';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const c = t.comparePage;
+const prefix = getUrlPrefix(lang);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+const issuesUrl = `${REPO_URLS.website}/issues`;
+
+const reviewedOn = new Date(
+  `${COMPARE_REVIEWED_ON}T00:00:00Z`
+).toLocaleDateString(lang, {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+
+const CATEGORY_ORDER: AlternativeCategory[] = [
+  'sdd',
+  'agent-framework',
+  'vendor-native',
+];
+const categoryLabel: Record<AlternativeCategory, string> = {
+  methodology: c.categories.methodology,
+  sdd: c.categories.sdd,
+  'agent-framework': c.categories.agentFramework,
+  'vendor-native': c.categories.vendorNative,
+};
+const others = ALTERNATIVES.filter((alt) => alt.id !== 'dwp');
+const grouped = CATEGORY_ORDER.map((category) => ({
+  category,
+  items: others.filter((alt) => alt.category === category),
+})).filter((group) => group.items.length > 0);
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: c.meta.title,
+  description: c.meta.description,
+  url: `${siteUrl}${prefix}/compare`,
+  dateModified: COMPARE_REVIEWED_ON,
+  about: ALTERNATIVES.map((alt) => ({
+    '@type': 'SoftwareApplication',
+    name: c.alternatives[alt.id].name,
+    url: alt.homepage,
+  })),
+};
+---
+
+<MainLayout lang={lang} title={c.meta.title} description={c.meta.description}>
+  <JsonLd slot="head" data={webPageSchema} />
+
+  <article class="main-container py-16 md:py-24">
+    <header class="max-w-3xl">
+      <Kicker>{c.eyebrow}</Kicker>
+      <h1
+        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl"
+        style="color: var(--color-ink);"
+      >
+        {c.title}
+      </h1>
+      <Lead class="mt-6">{c.intro}</Lead>
+    </header>
+
+    <Rule class="my-12" />
+
+    <section class="max-w-3xl" aria-labelledby="compare-how-to-read">
+      <h2 id="compare-how-to-read" class="font-display text-2xl font-semibold" style="color: var(--color-ink);">
+        {c.howToRead.title}
+      </h2>
+      <p class="mt-3 text-lg leading-relaxed" style="color: var(--color-muted);">
+        {c.howToRead.body}
+      </p>
+      <dl class="mt-5 grid gap-3 sm:grid-cols-3">
+        <div class="border-t pt-3" style="border-color: var(--color-line);">
+          <dt class="font-semibold" style="color: var(--color-ink);">
+            <span aria-hidden="true" class="font-mono" style="color: var(--color-secondary);">✓</span>
+            {c.howToRead.values.builtIn}
+          </dt>
+        </div>
+        <div class="border-t pt-3" style="border-color: var(--color-line);">
+          <dt class="font-semibold" style="color: var(--color-ink);">
+            <span aria-hidden="true" class="font-mono" style="color: var(--color-muted);">◐</span>
+            {c.howToRead.values.optional}
+          </dt>
+        </div>
+        <div class="border-t pt-3" style="border-color: var(--color-line);">
+          <dt class="font-semibold" style="color: var(--color-ink);">
+            <span aria-hidden="true" class="font-mono" style="color: var(--color-muted);">–</span>
+            {c.howToRead.values.notInScope}
+          </dt>
+        </div>
+      </dl>
+      <p class="kicker mt-6">
+        {c.reviewedOnLabel}: <time datetime={COMPARE_REVIEWED_ON}>{reviewedOn}</time>
+      </p>
+    </section>
+
+    <Rule class="my-12" />
+
+    <section aria-labelledby="compare-alternatives">
+      <h2 id="compare-alternatives" class="font-display text-2xl font-semibold" style="color: var(--color-ink);">
+        {c.alternativesTitle}
+      </h2>
+      {
+        grouped.map((group) => (
+          <div class="mt-8">
+            <p class="kicker">{categoryLabel[group.category]}</p>
+            <ul class="mt-3 grid gap-px sm:grid-cols-2" style="background-color: var(--color-line);">
+              {group.items.map((alt) => (
+                <li class="flex flex-col gap-2 p-5" style="background-color: var(--color-paper);">
+                  <h3 class="font-display text-xl font-semibold" style="color: var(--color-ink);">
+                    {c.alternatives[alt.id].name}
+                  </h3>
+                  <p class="leading-relaxed" style="color: var(--color-ink);">
+                    {c.alternatives[alt.id].whatItDoesWell}
+                  </p>
+                  <p class="leading-relaxed" style="color: var(--color-muted);">
+                    {c.alternatives[alt.id].audience}
+                  </p>
+                  <p class="mt-auto pt-2">
+                    <a
+                      href={alt.homepage}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="font-semibold underline decoration-1 underline-offset-4 transition hover:opacity-80"
+                      style="color: var(--color-ink);"
+                    >
+                      {c.officialSiteLabel}
+                    </a>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </section>
+
+    <Rule class="my-12" />
+
+    <section aria-labelledby="compare-matrix">
+      <h2 id="compare-matrix" class="font-display text-2xl font-semibold" style="color: var(--color-ink);">
+        {c.matrix.title}
+      </h2>
+      <div class="mt-6">
+        <CompareMatrix lang={lang} />
+      </div>
+    </section>
+
+    <Rule class="my-12" />
+
+    <section aria-labelledby="compare-strengths">
+      <h2 id="compare-strengths" class="font-display text-2xl font-semibold" style="color: var(--color-ink);">
+        {c.dwpStrengths.title}
+      </h2>
+      <ul class="mt-6 grid gap-x-10 gap-y-6 md:grid-cols-2">
+        {
+          c.dwpStrengths.items.map((item) => (
+            <li class="border-t pt-4" style="border-color: var(--color-line);">
+              <h3 class="font-display text-lg font-semibold" style="color: var(--color-ink);">
+                {item.title}
+              </h3>
+              <p class="mt-2 leading-relaxed" style="color: var(--color-muted);">
+                {item.body}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <Rule class="my-12" />
+
+    <section class="max-w-3xl" aria-labelledby="compare-limits">
+      <h2 id="compare-limits" class="font-display text-2xl font-semibold" style="color: var(--color-ink);">
+        {c.honestLimits.title}
+      </h2>
+      <p class="mt-3 text-lg leading-relaxed" style="color: var(--color-muted);">
+        {c.honestLimits.body}
+      </p>
+    </section>
+
+    <Rule class="my-12" />
+
+    <section class="max-w-3xl" aria-labelledby="compare-correction">
+      <Kicker>{c.correction.title}</Kicker>
+      <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-muted);">
+        {c.correction.body}
+      </p>
+      <div class="mt-6">
+        <a
+          href={issuesUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center rounded-sm border px-5 py-3 font-semibold transition hover:opacity-80"
+          style="border-color: var(--color-line); color: var(--color-ink);"
+        >
+          {c.correction.ctaLabel}
+        </a>
+      </div>
+    </section>
+
+    <Rule class="my-12" />
+
+    <section class="max-w-3xl" aria-labelledby="compare-sources">
+      <h2 id="compare-sources" class="font-display text-xl font-semibold" style="color: var(--color-ink);">
+        {c.sourcesTitle}
+      </h2>
+      <ul class="mt-4 space-y-2 text-sm" style="color: var(--color-muted);">
+        {
+          ALTERNATIVES.map((alt) => (
+            <li>
+              <span class="font-semibold" style="color: var(--color-ink);">{c.alternatives[alt.id].name}</span>
+              {' — '}
+              <a href={alt.docsUrl} target="_blank" rel="noopener noreferrer" class="underline decoration-1 underline-offset-4 break-all">
+                {alt.docsUrl}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </article>
+</MainLayout>

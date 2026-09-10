@@ -1088,7 +1088,7 @@ export const fr: SiteTranslations = {
         whatItDoesWell:
           'A planning system with a .planning directory, requirement ids, phase plans, fresh-context execution and a verification pass against stated must-haves.',
         audience:
-          'Solo developers and small teams who want context engineering and verification without heavy ceremony.',
+          'Solo developers and small teams who want context engineering and verification with little ceremony.',
       },
       'vendor-native': {
         name: 'Vendor-native plan modes',
