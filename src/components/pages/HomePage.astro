@@ -1,4 +1,8 @@
 ---
+import ActDoneIsAContract from '@/components/home/ActDoneIsAContract.astro';
+import ActHumansSteer from '@/components/home/ActHumansSteer.astro';
+import ActPlanNoDrift from '@/components/home/ActPlanNoDrift.astro';
+import ActRepoAsHarness from '@/components/home/ActRepoAsHarness.astro';
 import Agents from '@/components/home/Agents.astro';
 import Archetypes from '@/components/home/Archetypes.astro';
 import Comparison from '@/components/home/Comparison.astro';
@@ -44,6 +48,10 @@ const schema = {
 <MainLayout lang={lang} title={m.title} description={m.description}>
   <JsonLd slot="head" data={schema} />
   <Hero lang={lang} />
+  <ActHumansSteer lang={lang} />
+  <ActPlanNoDrift lang={lang} />
+  <ActDoneIsAContract lang={lang} />
+  <ActRepoAsHarness lang={lang} />
   <Onboarding lang={lang} />
   <Quickstart lang={lang} />
   <Outcomes lang={lang} />

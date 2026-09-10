@@ -29,10 +29,10 @@
 | HP-03 | `Quickstart.astro` → above/beside the 4 steps | ▦ | H | 16:9 · 880×495 | transparent | `home/quickstart-flow.webp` | done |
 | HP-04 | `Onboarding.astro` → beside numbered steps | ▦ | M | 16:9 · 880×495 | transparent | `home/onboarding-sequence.webp` | done |
 | HP-05 | `Archetypes.astro` → between the two cards | ▦ | M | 1:1 · 640×640 | transparent | `home/archetypes-compare.webp` | done |
-| HP-06 | `diagrams/home/HumansSteer.astro` → Act I plate art (four-act story block) | 🖼 | ★ | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-humans-steer.png` | awaiting-assets |
-| HP-07 | `diagrams/home/PlanNoDrift.astro` → Act II plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-plan-no-drift.png` | awaiting-assets |
-| HP-08 | `diagrams/home/DoneIsAContract.astro` → Act III plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-done-is-a-contract.png` | awaiting-assets |
-| HP-09 | `diagrams/home/RepoAsHarnessPlate.astro` → Act IV plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-repo-as-harness.png` | awaiting-assets |
+| HP-06 | `diagrams/home/HumansSteer.astro` → Act I plate art (four-act story block) | 🖼 | ★ | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-humans-steer.png` | done |
+| HP-07 | `diagrams/home/PlanNoDrift.astro` → Act II plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-plan-no-drift.png` | done |
+| HP-08 | `diagrams/home/DoneIsAContract.astro` → Act III plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-done-is-a-contract.png` | done |
+| HP-09 | `diagrams/home/RepoAsHarnessPlate.astro` → Act IV plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-repo-as-harness.png` | done |
 
 > `Comparison.astro` and `Origin.astro`: candidate `skip` — Comparison is a table
 > (status marks may be CSS, not an asset); Origin already carries the Dailybot
@@ -104,14 +104,14 @@
 
 | Area | Slots | Flagships | Done | Skip |
 | :-- | :-: | :-- | :-: | :-: |
-| Homepage | 9 | HP-01, HP-06 | 5 | 2 (Comparison → CSS ticks; Origin → has logo) |
+| Homepage | 9 | HP-01, HP-06 | 9 | 2 (Comparison → CSS ticks; Origin → has logo) |
 | Methodology | 6 | ME-01, ME-02 | 6 | — |
 | Spec | 5 | — | 5 (SP-02/03/05 reuse ME assets) | — |
 | Kit | 10 | KT-01 | 10 | — |
 | **Total** | **30** | **5** | **26** | **2** |
 
 _Homepage = HP-01/HP-02 (illustrations, images) · HP-03/04/05 (diagram components) ·
-HP-06…HP-09 (home story plates, PLAN_home_storytelling_upgrade — registered
-`awaiting-assets`; flips to `done` when their plan's integration task lands).
+HP-06…HP-09 (home story plates, PLAN_home_storytelling_upgrade — integrated
+on the homepage).
 SP-02/SP-03/SP-05 reuse methodology components ME-03/ME-02/ME-06. All diagrams (▦)
 are HTML/CSS components, not images._

@@ -78,16 +78,21 @@ src/
 │   ├── FormattedDate.astro  # Date formatting (per-language)
 │   ├── HeaderLink.astro     # Navigation link
 │   │
-│   ├── home/                # Homepage sections
-│   │   ├── HeroSection/
-│   │   │   ├── HeroSection.astro
-│   │   │   └── TypewriterWords.astro
-│   │   ├── HomeSection/
-│   │   │   ├── HomeSection.astro
-│   │   │   ├── HomeSectionContent.astro
-│   │   │   ├── HomeSectionImage.astro
-│   │   │   └── enum.ts
-│   │   └── ...                  # Methodology / spec / kit preview sections
+│   ├── home/                # Homepage sections (rendered by HomePage.astro)
+│   │   ├── Hero.astro                # Value proposition + copy-init.md CTA
+│   │   ├── ActHumansSteer.astro      # Story Act I — Humans steer. Agents execute.
+│   │   ├── ActPlanNoDrift.astro      # Story Act II — A plan agents can't drift from.
+│   │   ├── ActDoneIsAContract.astro  # Story Act III — Done is a contract, not a vibe.
+│   │   ├── ActRepoAsHarness.astro    # Story Act IV — The repository is the harness.
+│   │   ├── Onboarding.astro          # Reasoning-based onboarding steps
+│   │   ├── Quickstart.astro          # One-instruction quickstart
+│   │   ├── Outcomes.astro            # What onboarding generates
+│   │   ├── Agents.astro              # Supported coding agents
+│   │   ├── Stacks.astro              # Stack presets
+│   │   ├── Archetypes.astro          # Individual repo vs orchestrator hub
+│   │   ├── Comparison.astro          # Methodology vs tool comparison table
+│   │   ├── Origin.astro              # Origin quote
+│   │   └── FinalCta.astro            # Closing call to action
 │   │
 │   ├── editorial/          # Editorial primitives (Kicker, Rule, Lead, Figure, Reference)
 │   │
