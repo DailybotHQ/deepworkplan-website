@@ -31,6 +31,8 @@ Potraktuj to jako ustrukturyzowane zadanie inżynierskie — Deep Work Plan — 
 
 ## 0. Przeczytaj metodykę i specyfikację
 
+Metodyka opiera się na trzech filarach: **spec-driven development** (spisana specyfikacja jest źródłem prawdy), **harness engineering** (repozytorium niesie kontekst, narzędzia, zabezpieczenia i stan) oraz **efektywność tokenów** (harness ładuje się stopniowo, a walidacja dotyka tylko tego, co zmienione — praca na długi dystans z założenia, wydajna z samej konstrukcji).
+
 Zanim cokolwiek zmienisz, przeczytaj kanoniczne źródła, aby zrozumieć standard, który przyjmujesz:
 
 - Metodyka: https://deepworkplan.com/methodology.md
@@ -47,6 +49,7 @@ Najpierw zrozum repozytorium, a potem zaproponuj, co zrobisz.
 - **Sklasyfikuj archetyp.** Pojedyncze repozytorium (przypadek typowy), centrum orkiestracji albo
   przestrzeń robocza agenta — długotrwały dom autonomicznego agenta, gdzie git jest zalecany, a nie
   zakładany z góry — wraz z dowodami.
+- **Rozpoznaj istniejącą instalację DWP.** Jeśli `AGENTS.md` i `.agents/` już istnieją, poszukaj wiersza proweniencji `DWP standard:`. Harness starszy niż aktualny standard otrzymuje **celową aktualizację**: ponowna instalacja skilla to cała ścieżka aktualizacji, a onboarding uzgadnia wyłącznie brakujące lub przestarzałe elementy — każda pisana ręcznie sekcja, każdy własny skill i każdy plan w toku pozostaje zachowany, a drugie uruchomienie niczego nie zmienia.
 - **Sporządź inwentarz tego, co już istnieje.** `AGENTS.md`, `CLAUDE.md`, `docs/`, jakąkolwiek konfigurację `.agents/` lub skilli/agentów,
   `.dwp/` i `.gitignore`. Odnotuj wszystko, co już częściowo wykonuje to zadanie.
 - **Zaproponuj plan onboardingu.** Przedstaw zwięzłą listę: pliki, które utworzysz, pliki, które

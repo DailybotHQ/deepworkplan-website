@@ -24,7 +24,7 @@ Die Leistungsfähigkeit eines KI-Coding-Agenten hängt weniger vom Modell ab als
 
 Das stellt neu dar, was es bedeutet, gut zu delegieren. Gute Delegation heißt nicht, einen Agenten um Arbeit zu bitten — sie heißt, die Arbeit klar genug zu definieren, sodass sie korrekt ausgeführt werden kann: das Ziel, die Rahmenbedingungen, den Kontext, der dem Agenten sonst fehlen würde, und die Kriterien, die entscheiden, ob er erfolgreich war. Der größte Teil des Werts entsteht, bevor die Ausführung beginnt.
 
-Deep Work Plan ist die Disziplin, diese vorgelagerte Arbeit in einer dauerhaften, wiederholbaren Form zu leisten. Seine zwei Pfeiler sind die beiden Hälften guter Richtung: Eine **Spezifikation** legt fest, wie „korrekt“ aussieht, und ein **Harness** gibt dem Agenten den Kontext und die Werkzeuge, um es zu erreichen. Gemeinsam verwandeln sie die rohe Fähigkeit eines Modells in verlässliches Engineering — über eine Aufgabe hinweg aufrechterhalten, die stundenlang läuft, und über Agenten hinweg bewahrt, die zwischen Sitzungen wechseln.
+Deep Work Plan ist die Disziplin, diese vorgelagerte Arbeit in einer dauerhaften, wiederholbaren Form zu leisten. Seine zwei Gründungspfeiler sind die beiden Hälften guter Richtung: Eine **Spezifikation** legt fest, wie „korrekt“ aussieht, und ein **Harness** gibt dem Agenten den Kontext und die Werkzeuge, um es zu erreichen. Eine dritte Disziplin hält die Kombination in großem Maßstab bezahlbar: die **Token-Effizienz** — denn ein Harness, der funktioniert, ist einer, den der Agent über einen langen Horizont tragen kann. Gemeinsam verwandeln sie die rohe Fähigkeit eines Modells in verlässliches Engineering — über eine Aufgabe hinweg aufrechterhalten, die stundenlang läuft, und über Agenten hinweg bewahrt, die zwischen Sitzungen wechseln.
 
 ## Spec-driven von Grund auf
 
@@ -59,6 +59,18 @@ Dies ist der zweite Pfeiler der Methodik, und er verdient eine klare Definition 
 <RepoAsHarness lang="en" class="not-prose my-10" />
 
 Weil jedes Element eine Datei im Repository ist statt ein Feature eines Werkzeugs, ist das Harness von Natur aus portabel. Das ist die einzeilige Behauptung, auf der der Rest der Methodik ruht: *Das Repository selbst wird zum Harness*, sodass jeder Agent jedes Repository steuern kann — ohne maßgeschneidertes Framework je Werkzeug.
+
+## Effizient durch Konstruktion
+
+Der erste Pfeiler macht die Arbeit korrekt; der zweite macht sie portabel. Der dritte hält sie **bezahlbar** — denn Kontext ist die knappste Ressource, über die ein KI-Coding-Agent verfügt, und eine Methodik, die ihn verschwendet, scheitert genau dann, wenn die Arbeit lang wird.
+
+Drei Mechanismen leisten diese Arbeit:
+
+- **Schrittweises Nachladen.** Der Agent liest einen wesentlichen Kern, und jeder Abschnitt eines Leitfadens oder der Spezifikation wird erst geladen, wenn der Auslöser des Ablaufs selbst auslöst. Der Agent trägt das Kapitel, das er braucht — nicht das ganze Buch.
+- **Validierung nach berührter Oberfläche.** Jede Aufgabe zeichnet auf, was sie ändert, und wählt ihr Gate nach Risikoklasse — eine kleine, isolierte Änderung wird eng nachgewiesen; eine Änderung an geteilter Mechanik wird breit nachgewiesen. Validierung wird nach Wirkung gewählt, nicht nach Gewohnheit.
+- **Aufgabenlokales Lernen.** Wenn eine Aufgabe ein wiederverwendbares Muster hervorbringt, fällt die Entscheidung innerhalb dieser Aufgabe, wo die Belege frisch sind — nicht in einer Retrospektive, die niemand liest.
+
+Nirgends steht die Behauptung, all das sei von Grund auf verlustfrei, und nirgends wird mit erfundenen Prozentwerten geworben. Die Instruction-Bytes, die jeder Ablauf benötigt, werden gemessen und veröffentlicht; die Aussagen zum Verhalten sind durch Replays mit gezielt eingeschleusten Fehlern belegt. Was sich nüchtern sagen lässt: Der Agent liest weniger, das er nicht braucht, führt weniger erneut aus, das sich nicht geändert hat, und entscheidet mehr dort, wo die Belege liegen — und diese Einsparungen summieren sich über einen langen Horizont.
 
 ## Warum strukturierte autonome Ausführung zählt
 

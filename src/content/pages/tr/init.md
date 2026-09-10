@@ -34,6 +34,8 @@ olarak ele alın.
 
 ## 0. Metodolojiyi ve spesifikasyonu okuyun
 
+Metodoloji, üç temel direk üzerinde durur: **spec odaklı geliştirme** (yazılı spesifikasyon doğruluk kaynağıdır), **harness mühendisliği** (depo, bağlamı, araçları, güvenlik bariyerlerini ve durumu taşır) ve **token verimliliği** (harness kademeli olarak yüklenir ve doğrulama yalnızca değişene dokunur — uzun ufuklu iş tasarım gereği, verimlilik yapı gereği).
+
 Herhangi bir şeyi değiştirmeden önce, benimsediğiniz standardı anlamanız için kanonik kaynakları okuyun:
 
 - Metodoloji: https://deepworkplan.com/methodology.md
@@ -49,6 +51,11 @@ Herhangi bir şeyi değiştirmeden önce, benimsediğiniz standardı anlamanız 
 - **Arketipi sınıflandırın.** Bir bireysel depo (yaygın durum), bir orkestratör merkezi ya da bir
   ajan çalışma alanı — git'in varsayılan değil önerilen olduğu, otonom bir ajanın uzun ömürlü evi —
   kanıtlarıyla birlikte.
+- **Var olan bir DWP kurulumunu tanıyın.** `AGENTS.md` ve `.agents/` zaten varsa, `DWP standard:` kaynak
+  satırını arayın. Mevcut standardın öncesine dayanan bir harness, hedefli bir yükseltme alır: skill'i
+  yeniden kurmak yükseltme yolunun tamamıdır ve onboarding yalnızca eksik ya da güncelliğini yitirmiş
+  parçaları uzlaştırır — elle yazılmış her bölüm, her özel skill ve yürürlükteki her plan korunur; ikinci
+  bir çalıştırma hiçbir şeyi değiştirmez.
 - **Zaten var olanların envanterini çıkarın.** `AGENTS.md`, `CLAUDE.md`, `docs/`, herhangi bir `.agents/`
   ya da skills/agents kurulumu, `.dwp/` ve `.gitignore`. Bu işin bir kısmını zaten yapan her şeyi not edin.
 - **Onboarding planını önerin.** Özlü bir liste sunun: oluşturacağınız dosyalar, değiştireceğiniz

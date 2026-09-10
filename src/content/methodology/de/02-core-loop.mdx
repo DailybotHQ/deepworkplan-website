@@ -1,6 +1,6 @@
 ---
 title: Die Kernschleife
-description: "Der Workflow aus create, execute, refine, resume, status und verify, das per gitignore ausgeschlossene .dwp-Ausgabeverzeichnis, die neunteilige Aufgaben-Anatomie und wie Validierung funktioniert."
+description: "Der Workflow aus create, execute, refine, resume, status und verify, das per gitignore ausgeschlossene .dwp-Ausgabeverzeichnis, die zehnteilige Aufgaben-Anatomie und wie Validierung funktioniert."
 order: 2
 lang: de
 summary: Wie die zentralen DWP-Operationen einen Plan vom Ziel zum verifizierten Abschluss treiben.
@@ -19,7 +19,7 @@ Diese Schleife ist die operative Form von spec-driven Development. Der Plan ist 
 
 <CoreLoop lang="en" class="not-prose my-10" />
 
-- **create** — Einen neuen Plan aus einem Ziel erzeugen. Der Agent analysiert das Ziel, zerlegt es in aufeinanderfolgende Aufgaben und schreibt die Plandateien. Bei einem mehrdeutigen Ziel sollte er vor dem Schreiben klärende Fragen stellen.
+- **create** — Einen neuen Plan aus einem Ziel erzeugen. Im geführten Modus wird der Plan als überarbeiteter Entwurf zur Review vorbereitet; im Trust-Modus materialisiert er direkt — Analyse und Qualitätsprüfungen laufen in jedem Fall. Der Agent analysiert das Ziel, zerlegt es in aufeinanderfolgende Aufgaben und schreibt die Plandateien. Bei einem mehrdeutigen Ziel sollte er vor dem Schreiben klärende Fragen stellen.
 - **execute** — Den Plan Aufgabe für Aufgabe ausführen. Der Agent aktualisiert nach jeder Aufgabe das Fortschrittsprotokoll und markiert den Abschlussstatus der Aufgabe. Er darf keine Aufgaben überspringen, ohne festzuhalten, warum.
 - **refine** — Einen bestehenden Plan ändern. Der Agent darf Aufgaben hinzufügen, entfernen oder umordnen, muss aber abgeschlossene Arbeit bewahren und die Aufgabentabelle aktualisieren.
 - **resume** — Einen unterbrochenen Plan fortsetzen. Der Agent liest das Fortschrittsprotokoll und die Aufgabendateien, um den Zustand zu rekonstruieren, und setzt dann ab der ersten unvollständigen Aufgabe fort.
@@ -40,22 +40,23 @@ Alle DWP-Artefakte liegen unter einem per gitignore ausgeschlossenen `.dwp/`-Ver
 └── config.yaml
 ```
 
-## Die neunteilige Aufgaben-Anatomie
+## Die zehnteilige Aufgaben-Anatomie
 
 <TaskAnatomy lang="en" class="not-prose my-10" />
 
-Jede Aufgabendatei enthält diese neun Abschnitte, in dieser Reihenfolge. Die Struktur garantiert, dass jede Arbeitseinheit in sich geschlossen und prüfbar ist:
+Jede Aufgabendatei enthält diese zehn Abschnitte, in dieser Reihenfolge. Die Struktur garantiert, dass jede Arbeitseinheit in sich geschlossen und prüfbar ist:
 
 1. **Goal** — ein Absatz, der festhält, was die Aufgabe erreicht.
 2. **Context** — Hintergrund, Links und warum diese Aufgabe existiert.
-3. **Steps** — geordnete, konkrete auszuführende Handlungen.
-4. **Acceptance criteria** — eine Checkliste von Bedingungen, die „erledigt“ definieren.
-5. **Validation** — Befehle oder Tests, die auszuführen sind, um die Arbeit zu verifizieren.
-6. **Files** — Pfade, die voraussichtlich erstellt oder geändert werden.
-7. **Dependencies** — andere Aufgaben oder externe Voraussetzungen.
-8. **Risks** — was schiefgehen könnte und Gegenmaßnahmen.
-9. **Completion & Log** — eine Statusmarkierung plus chronologische Notizen.
+3. **Touched Surface** — was die Aufgabe ändert und die Risikoklasse, die ihre Validierung wählt.
+4. **Steps** — geordnete, konkrete auszuführende Handlungen.
+5. **Acceptance criteria** — eine Checkliste von Bedingungen, die „erledigt“ definieren.
+6. **Validation** — Befehle oder Tests, die auszuführen sind, um die Arbeit zu verifizieren.
+7. **Files** — Pfade, die voraussichtlich erstellt oder geändert werden.
+8. **Dependencies** — andere Aufgaben oder externe Voraussetzungen.
+9. **Risks** — was schiefgehen könnte und Gegenmaßnahmen.
+10. **Completion & Log** — eine Statusmarkierung plus chronologische Notizen.
 
 ## Validierung, Abschluss und Wiederaufnahme
 
-Validierung ist Teil der Aufgabe, kein nachträglicher Gedanke: Jede Aufgabe benennt die Befehle oder Tests, die belegen, dass sie erledigt ist, und der Agent führt sie aus, bevor er den Abschluss markiert. Tests sind hier erstklassig — eine Aufgabe, die neue Funktionalität hinzufügt oder Verhalten ändert, muss automatisierte Tests für dieses Verhalten hinzufügen oder aktualisieren und die vollständige Code-Qualitätsprüfung des Repositorys ausführen (Tests plus Lint und Typprüfung), nicht nur bestätigen, dass der Build gelingt; bestehende Tests müssen grün bleiben, an das beabsichtigte Verhalten angepasst statt übersprungen. Sicherheit ist auf dieselbe Weise erstklassig — jede Aufgabe, die Authentifizierung, Eingabeverarbeitung, Secrets, Netzwerk-Oberfläche oder Abhängigkeiten berührt, trägt die Sicherheitserwartungen dieser Änderung in ihren Akzeptanzkriterien und hält jeden Commit frei von Secrets, und jeder Plan endet mit einem Security Review, das den gesamten Änderungssatz auditiert. Der Abschluss wird mit einer expliziten Statusmarkierung (`[ ]` nicht begonnen, `[~]` in Arbeit, `[x]` erledigt, `[!]` blockiert) im Abschnitt Completion & Log festgehalten. Die Wiederaufnahme stützt sich auf diese Markierungen und das Fortschrittsprotokoll — ein Agent kann genau rekonstruieren, wo der Plan stehengeblieben ist, und ab der ersten unvollständigen Aufgabe fortsetzen, ohne fertige Arbeit erneut zu erledigen.
+Validierung ist Teil der Aufgabe, kein nachträglicher Gedanke: Jede Aufgabe benennt die Befehle oder Tests, die belegen, dass sie erledigt ist, und der Agent führt sie aus, bevor er den Abschluss markiert. Tests sind hier erstklassig — eine Aufgabe, die neue Funktionalität hinzufügt oder Verhalten ändert, muss automatisierte Tests für dieses Verhalten hinzufügen oder aktualisieren und die vollständige Code-Qualitätsprüfung des Repositorys ausführen (Tests plus Lint und Typprüfung), nicht nur bestätigen, dass der Build gelingt; bestehende Tests müssen grün bleiben, an das beabsichtigte Verhalten angepasst statt übersprungen. Sicherheit ist auf dieselbe Weise erstklassig — jede Aufgabe, die Authentifizierung, Eingabeverarbeitung, Secrets, Netzwerk-Oberfläche oder Abhängigkeiten berührt, trägt die Sicherheitserwartungen dieser Änderung in ihren Akzeptanzkriterien und hält jeden Commit frei von Secrets, und jeder Plan schließt mit dem Final Review — dem Sicherheitstest über den gesamten Änderungssatz, der vollständigen Validierung auf dem Endzustand und dem Abgleich der Skills-Entscheidungen. Der Abschluss wird mit einer expliziten Statusmarkierung (`[ ]` nicht begonnen, `[~]` in Arbeit, `[x]` erledigt, `[!]` blockiert) im Abschnitt Completion & Log festgehalten. Die Wiederaufnahme stützt sich auf diese Markierungen und das Fortschrittsprotokoll — ein Agent kann genau rekonstruieren, wo der Plan stehengeblieben ist, und ab der ersten unvollständigen Aufgabe fortsetzen, ohne fertige Arbeit erneut zu erledigen.

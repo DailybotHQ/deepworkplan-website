@@ -32,6 +32,8 @@ Hãy coi đây như một tác vụ kỹ thuật có cấu trúc — một Deep 
 
 ## 0. Đọc phương pháp luận và đặc tả
 
+Phương pháp luận đứng trên ba trụ cột: **phát triển dựa trên đặc tả** (đặc tả viết ra là nguồn chân lý), **kỹ thuật harness** (repository mang theo ngữ cảnh, công cụ, hàng rào bảo vệ và trạng thái), và **hiệu quả token** (harness được nạp theo kiểu tiệm tiến và việc kiểm chứng chỉ chạm vào những gì đã thay đổi — công việc tầm xa ngay từ thiết kế, hiệu quả ngay từ cách dựng).
+
 Trước khi thay đổi bất cứ thứ gì, hãy đọc các nguồn chuẩn để bạn hiểu tiêu chuẩn mình đang áp dụng:
 
 - Phương pháp luận: https://deepworkplan.com/methodology.md
@@ -48,6 +50,11 @@ Trước hết hãy hiểu repository, rồi đề xuất điều bạn sẽ là
 - **Phân loại kiểu hình.** Một repository độc lập (trường hợp phổ biến), một trung tâm điều phối, hay một
   không gian làm việc agent — ngôi nhà tồn tại lâu dài của một agent tự chủ, nơi git được khuyến
   nghị thay vì mặc định — kèm bằng chứng.
+- **Nhận diện một bản cài DWP hiện có.** Nếu `AGENTS.md` và `.agents/` đã tồn tại, hãy tìm dòng
+  xuất xứ `DWP standard:`. Một harness ra đời trước tiêu chuẩn hiện tại nhận một đợt **nâng cấp
+  có mục tiêu**: cài lại skill là toàn bộ lộ trình nâng cấp, và việc khởi tạo chỉ đối chiếu những
+  phần còn thiếu hoặc đã cũ — mọi phần viết tay, skill tùy chỉnh và kế hoạch đang thực thi đều
+  được giữ nguyên, và lượt chạy thứ hai không thay đổi gì.
 - **Kiểm kê những gì đã tồn tại.** `AGENTS.md`, `CLAUDE.md`, `docs/`, bất kỳ thiết lập `.agents/` hay skill/agent
   nào, `.dwp/`, và `.gitignore`. Ghi chú bất cứ thứ gì đã làm một phần công việc này.
 - **Đề xuất kế hoạch khởi tạo.** Trình bày một danh sách súc tích: các tệp bạn sẽ tạo, các tệp bạn sẽ

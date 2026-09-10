@@ -24,7 +24,7 @@ Năng lực của một agent lập trình AI phụ thuộc vào chất lượng
 
 Điều này định hình lại ý nghĩa của việc ủy thác tốt. Ủy thác tốt không phải là yêu cầu agent làm việc — mà là định nghĩa công việc đủ rõ ràng để nó được thực thi đúng đắn: mục tiêu, các ràng buộc, ngữ cảnh mà agent ắt sẽ thiếu, và các tiêu chí quyết định nó thành công hay không. Phần lớn giá trị được tạo ra trước khi việc thực thi bắt đầu.
 
-Deep Work Plan là kỷ luật thực hiện phần việc thượng nguồn đó dưới một hình thức bền vững, lặp lại được. Hai trụ cột của nó là hai nửa của một định hướng tốt: một **đặc tả** nói rõ "đúng" trông như thế nào, và một **harness** trao cho agent ngữ cảnh và công cụ để đạt tới đó. Cùng nhau, chúng chuyển hóa năng lực thô của mô hình thành kỹ thuật đáng tin cậy — được duy trì xuyên suốt một tác vụ chạy hàng giờ, và được bảo toàn qua các agent thay đổi giữa các phiên.
+Deep Work Plan là kỷ luật thực hiện phần việc thượng nguồn đó dưới một hình thức bền vững, lặp lại được. Hai trụ cột nền tảng của nó là hai nửa của một định hướng tốt: một **đặc tả** nói rõ "đúng" trông như thế nào, và một **harness** trao cho agent ngữ cảnh và công cụ để đạt tới đó. Một kỷ luật thứ ba giữ cho tổ hợp này vẫn khả thi về chi phí khi mở rộng quy mô: **hiệu quả token** — vì một harness thực sự dùng được là harness mà agent có thể mang theo suốt một chân trời dài. Cùng nhau, chúng chuyển hóa năng lực thô của mô hình thành kỹ thuật đáng tin cậy — được duy trì xuyên suốt một tác vụ chạy hàng giờ, và được bảo toàn qua các agent thay đổi giữa các phiên.
 
 ## Dựa trên đặc tả ngay từ thiết kế
 
@@ -59,6 +59,18 @@ Deep Work Plan là kỷ luật thực hiện phần việc thượng nguồn đ�
 <RepoAsHarness lang="vi" class="not-prose my-10" />
 
 Vì mỗi thành phần là một tệp trong repository chứ không phải một tính năng của một công cụ, harness có tính di động ngay từ cách dựng. Đó là tuyên bố một dòng mà phần còn lại của phương pháp luận đặt nền tảng lên: *bản thân repository trở thành harness*, nên mọi agent đều có thể điều khiển mọi repo — không cần framework đặt riêng cho từng công cụ.
+
+## Hiệu quả ngay từ cách dựng
+
+Trụ cột thứ nhất làm cho công việc đúng đắn; trụ cột thứ hai làm nó di động. Trụ cột thứ ba giữ cho nó **dễ chi trả** — vì ngữ cảnh là tài nguyên khan hiếm nhất mà một agent lập trình có, và một phương pháp luận lãng phí nó sẽ thất bại đúng lúc công việc bắt đầu dài ra.
+
+Ba cơ chế làm nên điều đó:
+
+- **Tiết lộ tiệm tiến.** Agent đọc một lõi thiết yếu, và mỗi phần của hướng dẫn hay đặc tả chỉ được nạp khi chính luồng công việc đó phát tín hiệu kích hoạt. Agent mang theo chương nó cần, chứ không phải cả quyển sách.
+- **Kiểm chứng được chọn theo bề mặt bị chạm tới.** Mỗi tác vụ ghi lại những gì nó thay đổi và chọn cổng của mình theo lớp rủi ro — một thay đổi nhỏ, cô lập tự chứng minh trong phạm vi hẹp; một thay đổi vào phần máy móc dùng chung tự chứng minh trong phạm vi rộng. Kiểm chứng được chọn theo hiệu ứng, không phải theo thói quen.
+- **Học ngay trong tác vụ.** Khi một tác vụ tạo ra một mẫu dùng lại được, quyết định diễn ra bên trong chính tác vụ đó, nơi bằng chứng còn mới — chứ không phải trong một buổi nhìn lại mà không ai đọc.
+
+Không điều nào trong số này được tuyên bố là không mất mát ngay từ cách dựng, và không điều nào được tiếp thị bằng những con số phần trăm bịa ra. Số byte hướng dẫn mà mỗi luồng cần được đo lường và công bố; các tuyên bố về hành vi được hậu thuẫn bằng các lần chạy lại với lỗi được cài sẵn. Điều có thể nói một cách rõ ràng là: agent đọc ít hơn những gì nó không cần, chạy lại ít hơn những gì chưa thay đổi, và quyết định nhiều hơn ngay nơi bằng chứng nằm ở đó — và những khoản tiết kiệm ấy cộng dồn qua một chân trời dài.
 
 ## Vì sao thực thi tự chủ có cấu trúc lại quan trọng
 

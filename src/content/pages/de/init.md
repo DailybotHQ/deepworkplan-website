@@ -51,6 +51,8 @@ Sie sind dabei, Code in diesem Repository zu installieren und auszuführen. Prü
 
 ## 0. Die Methodik und Spezifikation lesen
 
+Die Methodik ruht auf drei Pfeilern: **spec-driven Development** (die geschriebene Spezifikation ist die Quelle der Wahrheit), **Harness Engineering** (das Repository trägt Kontext, Werkzeuge, Leitplanken und Zustand) und **Token-Effizienz** (der Harness lädt schrittweise nach, und die Validierung berührt nur das Geänderte — Arbeit über lange Horizonte ist von Anfang an eingeplant, Effizienz durch Konstruktion).
+
 Bevor Sie etwas ändern, lesen Sie die kanonischen Quellen, damit Sie den Standard verstehen, den Sie übernehmen:
 
 - Methodik: https://deepworkplan.com/methodology.md
@@ -67,6 +69,7 @@ Verstehen Sie zuerst das Repository, schlagen Sie dann vor, was Sie tun werden.
 - **Den Archetyp klassifizieren.** Ein Einzel-Repository (der Regelfall), ein Orchestrator-Hub oder ein
   Agenten-Arbeitsbereich — das langlebige Zuhause eines autonomen Agenten, wo git empfohlen statt
   vorausgesetzt wird — mit den Belegen.
+- **Eine bestehende DWP-Installation erkennen.** Wenn `AGENTS.md` und `.agents/` bereits existieren, suchen Sie nach der Provenienzzeile `DWP standard:`. Ein Harness aus der Zeit vor dem aktuellen Standard erhält ein **gezieltes Upgrade**: Die erneute Installation des Skills ist der gesamte Upgrade-Pfad, und das Onboarding gleicht nur die fehlenden oder veralteten Teile ab — jeder handgeschriebene Abschnitt, jedes eigene Skill und jeder laufende Plan bleibt erhalten, und ein zweiter Durchlauf ändert nichts.
 - **Inventarisieren, was bereits existiert.** `AGENTS.md`, `CLAUDE.md`, `docs/`, ein etwaiges `.agents/`- oder Skills/Agents-
   Setup, `.dwp/` und `.gitignore`. Notieren Sie alles, was bereits einen Teil dieser Aufgabe erledigt.
 - **Den Onboarding-Plan vorschlagen.** Präsentieren Sie eine prägnante Liste: Dateien, die Sie erstellen, Dateien, die Sie

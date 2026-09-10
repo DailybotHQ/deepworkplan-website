@@ -32,6 +32,8 @@ Perlakukan ini sebagai tugas teknik yang terstruktur — sebuah Deep Work Plan �
 
 ## 0. Baca metodologi dan spesifikasi
 
+Metodologi ini berdiri di atas tiga pilar: **spec-driven development** (spec tertulis adalah sumber kebenaran), **harness engineering** (repositori membawa konteks, alat, pengaman, dan status), dan **efisiensi token** (harness memuat secara progresif dan validasi menyentuh apa yang berubah — pekerjaan horizon panjang sejak rancangan, efisien secara konstruksi).
+
 Sebelum mengubah apa pun, baca sumber kanonis agar Anda memahami standar yang Anda adopsi:
 
 - Metodologi: https://deepworkplan.com/methodology.md
@@ -48,6 +50,11 @@ Pahami dahulu repositori, lalu usulkan apa yang akan Anda lakukan.
 - **Klasifikasikan arketipe.** Sebuah repositori individual (kasus umum), orchestrator hub, atau
   ruang kerja agent — rumah long-lived dari agent otonom, di mana git direkomendasikan bukan
   diasumsikan — dengan buktinya.
+- **Kenali instalasi DWP yang sudah ada.** Jika `AGENTS.md` dan `.agents/` sudah ada, cari baris provenans
+  `DWP standard:`. Harness yang mendahului standar saat ini mendapat **peningkatan tertarget**: memasang
+  ulang skill adalah seluruh jalur peningkatannya, dan onboarding hanya merekonsiliasi bagian yang hilang
+  atau usang — setiap bagian yang ditulis tangan, skill kustom, dan rencana yang sedang berjalan
+  dipertahankan, dan eksekusi kedua tidak mengubah apa pun.
 - **Inventarisasi apa yang sudah ada.** `AGENTS.md`, `CLAUDE.md`, `docs/`, penyiapan `.agents/` atau skills/agents
   apa pun, `.dwp/`, dan `.gitignore`. Catat apa pun yang sudah melakukan sebagian dari pekerjaan ini.
 - **Usulkan rencana onboarding.** Sajikan daftar ringkas: berkas yang akan Anda buat, berkas yang akan Anda
