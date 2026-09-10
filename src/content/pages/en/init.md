@@ -31,6 +31,9 @@ methodology. Treat this as a structured engineering task — a Deep Work Plan �
 
 ## 0. Read the methodology and specification
 
+The methodology stands on three pillars: **spec-driven development** (the written spec is the source of truth), **harness engineering** (the repository carries the context, tools, guardrails, and state), and **token efficiency** (the harness loads progressively and validation touches what changed — long-horizon work by design, efficient by construction).
+
+
 Before changing anything, read the canonical sources so you understand the standard you are adopting:
 
 - Methodology: https://deepworkplan.com/methodology.md
@@ -47,6 +50,12 @@ First understand the repository, then propose what you will do.
 - **Classify the archetype.** An individual repository (the common case), an orchestrator hub, or an
   agent workspace — the long-lived home of an autonomous agent, where git is recommended rather than
   assumed — with the evidence.
+- **Recognize an existing DWP installation.** If `AGENTS.md` and `.agents/` already exist, look for the
+  `DWP standard:` provenance line. A harness that predates the current standard gets a **targeted
+  upgrade**: reinstalling the skill is the whole upgrade path, and onboarding reconciles only the
+  missing or outdated pieces — every handwritten section, custom skill, and in-flight plan is
+  preserved, and a second run changes nothing. Plans authored under an earlier version keep their
+  recorded shape and close with their own final tasks; they are never forced into the new one.
 - **Inventory what already exists.** `AGENTS.md`, `CLAUDE.md`, `docs/`, any `.agents/` or skills/agents
   setup, `.dwp/`, and `.gitignore`. Note anything that already does part of this job.
 - **Propose the onboarding plan.** Present a concise list: files you will create, files you will

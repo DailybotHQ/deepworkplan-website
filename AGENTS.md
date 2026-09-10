@@ -32,10 +32,11 @@
 
 The site explains and positions the DWP methodology, hosts the readable specification and kit catalog, ships agent-friendly Markdown endpoints, and exposes a canonical adoption endpoint at **`/init`**. The repository **dogfoods** the methodology it documents.
 
-**Positioning — two narrative pillars** (weave through all copy):
+**Positioning — three narrative pillars** (weave through all copy):
 
 1. **Spec-driven development (SDD).** The plan/spec is the durable source of truth; agents execute against explicit acceptance criteria and validation gates (reduces drift, enables verification, survives across sessions/agents). DWP's plan → atomic tasks → gates → completion loop *is* SDD — and unlike tool-bound SDD (GitHub Spec Kit, Amazon Kiro, Tessl), DWP is **tool-agnostic and repo-native**.
 2. **Harness engineering — the repository is the harness.** DWP delivers the agent scaffolding (context, tools, control loop, guardrails, state/resumability) as a **portable methodology + kit installed into the repository**, not a per-tool framework — so any agent can pilot any repo. One-liner: *"Deep Work Plan is spec-driven development where the repository itself becomes the harness."*
+3. **Token efficiency — long-horizon by design, efficient by construction.** Context is the agent's scarcest resource. The harness is engineered so the plan pays for itself: instructions load progressively by trigger, validation is selected from each task's Touched Surface, and skills are decided task-locally — measured in instruction bytes per flow (public evaluation ledger), never in invented token percentages.
 
 **Companion skill repo:** the site is paired with **[`DailybotHQ/deepworkplan-skill`](https://github.com/DailybotHQ/deepworkplan-skill)** (DWP packaged as an installable agent skill). Adoption messaging (the `/init` endpoint, methodology, and kit) stays in sync with that repo: install the skill → onboard the agent → generate and execute long-horizon plans. Do **not** attribute the DWP name to any external author or popular-productivity source; the DWP name stands on its own (focused, long-horizon agent execution). Design-system reference: **[Brand Guide](docs/BRAND_GUIDE.md)** (palette + serif type + editorial primitives in `src/components/editorial/`).
 
