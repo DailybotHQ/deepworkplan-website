@@ -18,7 +18,7 @@ export interface ChangelogEntryLike {
 }
 
 export function sortChangelogEntries<T extends ChangelogEntryLike>(
-  entries: readonly T[],
+  entries: readonly T[]
 ): T[] {
   return [...entries].sort((a, b) => {
     const dateDelta = b.data.date.getTime() - a.data.date.getTime();
@@ -32,7 +32,7 @@ export function sortChangelogEntries<T extends ChangelogEntryLike>(
 }
 
 export function getFeaturedChangelogEntry<T extends ChangelogEntryLike>(
-  entries: readonly T[],
+  entries: readonly T[]
 ): T | undefined {
   return sortChangelogEntries(entries).find((entry) => entry.data.featured);
 }

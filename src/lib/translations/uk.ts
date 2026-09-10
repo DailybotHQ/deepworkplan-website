@@ -34,6 +34,7 @@ export const uk: SiteTranslations = {
     github: 'GitHub',
     faq: 'FAQ',
     compare: 'Порівняння',
+    changelog: 'Журнал змін',
     resources: 'Ресурси',
     resourcesDesc: 'Приклади, довіра, FAQ та порівняння',
     repo: {
@@ -45,6 +46,24 @@ export const uk: SiteTranslations = {
     },
     menu: 'Відкрити меню',
     closeMenu: 'Закрити меню',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Журнал змін Deep Work Plan',
+      description:
+        'Важливі оновлення навички, методології та портативного каркаса агентів Deep Work Plan.',
+    },
+    eyebrow: 'Журнал змін',
+    title: 'Робота за методологією',
+    intro:
+      'Хронологія з посиланнями на джерела: релізи та дизайнерські рішення, які роблять Deep Work Plan надійним для тривалої роботи агентів.',
+    viewDetail: 'Читати оновлення',
+    backToIndex: 'Усі оновлення',
+    sourceLabel: 'Джерело',
+    featuredLabel: 'Основний реліз',
+    relatedTitle: 'Пов’язані оновлення',
   },
 
   // Footer

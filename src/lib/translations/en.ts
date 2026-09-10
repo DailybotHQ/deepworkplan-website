@@ -29,6 +29,7 @@ export const en: SiteTranslations = {
     github: 'GitHub',
     faq: 'FAQ',
     compare: 'Compare',
+    changelog: 'Changelog',
     resources: 'Resources',
     resourcesDesc: 'Examples, comparison, FAQ and trust',
     repo: {
@@ -40,6 +41,24 @@ export const en: SiteTranslations = {
     },
     menu: 'Open menu',
     closeMenu: 'Close menu',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Deep Work Plan Changelog',
+      description:
+        'Important updates to the Deep Work Plan skill, methodology, and portable agent harness.',
+    },
+    eyebrow: 'Changelog',
+    title: 'The work behind the method',
+    intro:
+      'A source-backed timeline of the releases and design decisions that make Deep Work Plan reliable for long-horizon agent work.',
+    viewDetail: 'Read the update',
+    backToIndex: 'All updates',
+    sourceLabel: 'Source',
+    featuredLabel: 'Featured release',
+    relatedTitle: 'Related updates',
   },
 
   // Footer

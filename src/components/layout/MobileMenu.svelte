@@ -123,6 +123,7 @@ onDestroy(() => {
     <a href="{prefix}/methodology" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'methodology', source: 'mobile' })}>{nav.methodology}</a>
     <a href="{prefix}/spec" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'spec', source: 'mobile' })}>{nav.spec}</a>
     <a href="{prefix}/kit" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'kit', source: 'mobile' })}>{nav.kit}</a>
+    <a href="{prefix}/changelog" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'changelog', source: 'mobile' })}>{nav.changelog}</a>
     <a href="{prefix}/examples" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'examples', source: 'mobile' })}>{nav.examples}</a>
     <a href="{prefix}/compare" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'compare', source: 'mobile' })}>{nav.compare}</a>
     <a href="{prefix}/faq" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'faq', source: 'mobile' })}>{nav.faq}</a>

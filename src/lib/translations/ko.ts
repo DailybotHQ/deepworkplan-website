@@ -33,6 +33,7 @@ export const ko: SiteTranslations = {
     github: 'GitHub',
     faq: '자주 묻는 질문',
     compare: '비교',
+    changelog: '변경 기록',
     resources: '리소스',
     resourcesDesc: '예시, 신뢰, 자주 묻는 질문, 비교',
     repo: {
@@ -44,6 +45,24 @@ export const ko: SiteTranslations = {
     },
     menu: '메뉴 열기',
     closeMenu: '메뉴 닫기',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Deep Work Plan 변경 기록',
+      description:
+        'Deep Work Plan 스킬, 방법론, 이식 가능한 에이전트 하네스의 주요 업데이트입니다.',
+    },
+    eyebrow: '변경 기록',
+    title: '방법론을 만든 작업',
+    intro:
+      '장기 에이전트 작업을 안정적으로 만드는 릴리스와 설계 결정을 출처와 함께 보여 주는 타임라인입니다.',
+    viewDetail: '업데이트 읽기',
+    backToIndex: '모든 업데이트',
+    sourceLabel: '출처',
+    featuredLabel: '주요 릴리스',
+    relatedTitle: '관련 업데이트',
   },
 
   // Footer

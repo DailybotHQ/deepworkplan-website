@@ -1,0 +1,115 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import Kicker from '@/components/editorial/Kicker.astro';
+import Lead from '@/components/editorial/Lead.astro';
+import Rule from '@/components/editorial/Rule.astro';
+import FormattedDate from '@/components/FormattedDate.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getChangelogUrl, sortChangelogEntries } from '@/lib/changelog';
+import { getUrlPrefix, type Language, stripEntryLangPrefix } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+  entry: CollectionEntry<'changelog'>;
+}
+
+const { lang, entry } = Astro.props;
+const t = getTranslations(lang);
+const c = t.changelogPage;
+const prefix = getUrlPrefix(lang);
+const slug = stripEntryLangPrefix(entry.id);
+const { Content } = await render(entry);
+const related = sortChangelogEntries(
+  (await getCollection('changelog')).filter(
+    (candidate) => candidate.data.lang === lang && candidate.id !== entry.id
+  )
+).slice(0, 2);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: entry.data.title,
+  description: entry.data.description,
+  datePublished: entry.data.date.toISOString(),
+  url: `${siteUrl}${getChangelogUrl(lang, slug)}`,
+};
+---
+
+<MainLayout lang={lang} title={entry.data.title} description={entry.data.description}>
+  <JsonLd slot="head" data={articleSchema} />
+
+  <article class="main-container py-16 md:py-24">
+    <a
+      href={`${prefix}/changelog`}
+      class="kicker inline-flex items-center hover:opacity-80"
+      style="color: var(--color-secondary);"
+    >
+      &larr; {c.backToIndex}
+    </a>
+
+    <header class="mt-8 max-w-3xl">
+      <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <FormattedDate date={entry.data.date} lang={lang} />
+        <span class="kicker" style="color: var(--color-secondary);">{entry.data.version}</span>
+      </div>
+      <h1
+        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl"
+        style="color: var(--color-ink);"
+      >
+        {entry.data.title}
+      </h1>
+      <Lead class="mt-6">{entry.data.description}</Lead>
+    </header>
+
+    <Rule class="my-12" />
+
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,48rem)_14rem] lg:items-start">
+      <div class="prose prose-lg max-w-none dark:prose-invert prose-headings:font-display prose-a:text-secondary">
+        <Content />
+      </div>
+
+      <aside class="border-t pt-6 lg:sticky lg:top-24 lg:border-l lg:border-t-0 lg:pl-6" style="border-color: var(--color-line);">
+        <Kicker>{c.sourceLabel}</Kicker>
+        {entry.data.sourceUrl && (
+          <a
+            href={entry.data.sourceUrl}
+            class="mt-3 block text-sm leading-relaxed underline decoration-secondary underline-offset-4"
+            style="color: var(--color-ink);"
+            rel="noreferrer"
+          >
+            {entry.data.sourceLabel}
+          </a>
+        )}
+      </aside>
+    </div>
+
+    <Rule class="my-12" />
+
+    <section aria-labelledby="related-updates">
+      <Kicker>{c.relatedTitle}</Kicker>
+      <div class="mt-6 grid gap-6 md:grid-cols-2">
+        {
+          related.map((candidate) => (
+            <a
+              href={getChangelogUrl(lang, stripEntryLangPrefix(candidate.id))}
+              class="border p-5 transition hover:opacity-90"
+              style="border-color: var(--color-line);"
+            >
+              <span class="kicker" style="color: var(--color-secondary);">{candidate.data.version}</span>
+              <h2 class="font-display mt-2 text-xl font-semibold" style="color: var(--color-ink);">
+                {candidate.data.title}
+              </h2>
+              <p class="mt-2 text-sm leading-relaxed" style="color: var(--color-muted);">
+                {candidate.data.description}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </article>
+</MainLayout>

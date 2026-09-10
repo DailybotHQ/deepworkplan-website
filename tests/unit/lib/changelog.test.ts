@@ -1,17 +1,17 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  type ChangelogEntryLike,
   getChangelogUrl,
   getFeaturedChangelogEntry,
   sortChangelogEntries,
-  type ChangelogEntryLike,
 } from '@/lib/changelog';
 
 const entry = (
   id: string,
   date: string,
   order: number,
-  featured = false,
+  featured = false
 ): ChangelogEntryLike => ({
   id,
   data: { date: new Date(date), order, featured },
@@ -43,10 +43,10 @@ describe('changelog display helpers', () => {
 
   it('builds localized detail URLs without a language prefix for English', () => {
     expect(getChangelogUrl('en', 'deep-work-plan-v3')).toBe(
-      '/changelog/deep-work-plan-v3',
+      '/changelog/deep-work-plan-v3'
     );
     expect(getChangelogUrl('es', 'deep-work-plan-v3')).toBe(
-      '/es/changelog/deep-work-plan-v3',
+      '/es/changelog/deep-work-plan-v3'
     );
   });
 });

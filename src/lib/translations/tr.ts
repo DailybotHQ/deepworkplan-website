@@ -34,6 +34,7 @@ export const tr: SiteTranslations = {
     github: 'GitHub',
     faq: 'SSS',
     compare: 'Karşılaştırma',
+    changelog: 'Değişiklik günlüğü',
     resources: 'Kaynaklar',
     resourcesDesc: 'Örnekler, güven, SSS ve karşılaştırma',
     repo: {
@@ -45,6 +46,24 @@ export const tr: SiteTranslations = {
     },
     menu: 'Menüyü aç',
     closeMenu: 'Menüyü kapat',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Deep Work Plan Değişiklik Günlüğü',
+      description:
+        'Deep Work Plan becerisi, metodolojisi ve taşınabilir aracı altyapısındaki önemli güncellemeler.',
+    },
+    eyebrow: 'Değişiklik günlüğü',
+    title: 'Metodun arkasındaki çalışma',
+    intro:
+      'Deep Work Plan’ı uzun vadeli ajan çalışmaları için güvenilir kılan sürümleri ve tasarım kararlarını kaynaklarıyla izleyen zaman çizelgesi.',
+    viewDetail: 'Güncellemeyi oku',
+    backToIndex: 'Tüm güncellemeler',
+    sourceLabel: 'Kaynak',
+    featuredLabel: 'Öne çıkan sürüm',
+    relatedTitle: 'İlgili güncellemeler',
   },
 
   // Footer

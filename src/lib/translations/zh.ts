@@ -33,6 +33,7 @@ export const zh: SiteTranslations = {
     github: 'GitHub',
     faq: '常见问题',
     compare: '对比',
+    changelog: '更新日志',
     resources: '资源',
     resourcesDesc: '示例、信任、常见问题与对比',
     repo: {
@@ -44,6 +45,24 @@ export const zh: SiteTranslations = {
     },
     menu: '打开菜单',
     closeMenu: '关闭菜单',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Deep Work Plan 更新日志',
+      description:
+        'Deep Work Plan 技能、方法论和可移植代理工作框架的重要更新。',
+    },
+    eyebrow: '更新日志',
+    title: '方法背后的工作',
+    intro:
+      '以来源为依据的时间线，记录让 Deep Work Plan 适用于长期代理工作的版本和设计决策。',
+    viewDetail: '阅读更新',
+    backToIndex: '所有更新',
+    sourceLabel: '来源',
+    featuredLabel: '重点发布',
+    relatedTitle: '相关更新',
   },
 
   // Footer

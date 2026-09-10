@@ -33,6 +33,7 @@ export const th: SiteTranslations = {
     github: 'GitHub',
     faq: 'คำถามที่พบบ่อย',
     compare: 'เปรียบเทียบ',
+    changelog: 'บันทึกการเปลี่ยนแปลง',
     resources: 'ทรัพยากร',
     resourcesDesc: 'ตัวอย่าง ความน่าเชื่อถือ คำถามที่พบบ่อย และการเปรียบเทียบ',
     repo: {
@@ -44,6 +45,24 @@ export const th: SiteTranslations = {
     },
     menu: 'เปิดเมนู',
     closeMenu: 'ปิดเมนู',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'บันทึกการเปลี่ยนแปลง Deep Work Plan',
+      description:
+        'การอัปเดตสำคัญของสกิล ระเบียบวิธี และ harness สำหรับเอเจนต์แบบพกพาของ Deep Work Plan',
+    },
+    eyebrow: 'บันทึกการเปลี่ยนแปลง',
+    title: 'งานเบื้องหลังระเบียบวิธี',
+    intro:
+      'ไทม์ไลน์ที่มีแหล่งอ้างอิงของรุ่นและการตัดสินใจด้านการออกแบบ ซึ่งทำให้ Deep Work Plan เชื่อถือได้สำหรับงานเอเจนต์ระยะยาว',
+    viewDetail: 'อ่านการอัปเดต',
+    backToIndex: 'การอัปเดตทั้งหมด',
+    sourceLabel: 'แหล่งที่มา',
+    featuredLabel: 'รุ่นเด่น',
+    relatedTitle: 'การอัปเดตที่เกี่ยวข้อง',
   },
 
   // Footer

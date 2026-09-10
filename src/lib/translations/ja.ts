@@ -34,6 +34,7 @@ export const ja: SiteTranslations = {
     github: 'GitHub',
     faq: 'よくある質問',
     compare: '比較',
+    changelog: '変更履歴',
     resources: 'リソース',
     resourcesDesc: '事例、信頼、よくある質問、比較',
     repo: {
@@ -45,6 +46,24 @@ export const ja: SiteTranslations = {
     },
     menu: 'メニューを開く',
     closeMenu: 'メニューを閉じる',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Deep Work Plan 変更履歴',
+      description:
+        'Deep Work Plan のスキル、方法論、ポータブルなエージェント用ハーネスに関する重要な更新。',
+    },
+    eyebrow: '変更履歴',
+    title: '方法論を支える仕事',
+    intro:
+      '長期的なエージェント作業を信頼できるものにするリリースと設計判断を、根拠とともにたどるタイムラインです。',
+    viewDetail: '更新を読む',
+    backToIndex: 'すべての更新',
+    sourceLabel: '出典',
+    featuredLabel: '注目のリリース',
+    relatedTitle: '関連する更新',
   },
 
   // Footer

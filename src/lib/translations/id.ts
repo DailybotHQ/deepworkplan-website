@@ -33,6 +33,7 @@ export const id: SiteTranslations = {
     github: 'GitHub',
     faq: 'FAQ',
     compare: 'Perbandingan',
+    changelog: 'Log perubahan',
     resources: 'Sumber daya',
     resourcesDesc: 'Contoh, kepercayaan, FAQ, dan perbandingan',
     repo: {
@@ -44,6 +45,24 @@ export const id: SiteTranslations = {
     },
     menu: 'Buka menu',
     closeMenu: 'Tutup menu',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Log Perubahan Deep Work Plan',
+      description:
+        'Pembaruan penting pada skill, metodologi, dan harness agen portabel Deep Work Plan.',
+    },
+    eyebrow: 'Log perubahan',
+    title: 'Pekerjaan di balik metode',
+    intro:
+      'Linimasa berbasis sumber tentang rilis dan keputusan desain yang membuat Deep Work Plan andal untuk pekerjaan agen jangka panjang.',
+    viewDetail: 'Baca pembaruan',
+    backToIndex: 'Semua pembaruan',
+    sourceLabel: 'Sumber',
+    featuredLabel: 'Rilis unggulan',
+    relatedTitle: 'Pembaruan terkait',
   },
 
   // Footer

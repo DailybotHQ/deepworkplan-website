@@ -34,6 +34,7 @@ export const pl: SiteTranslations = {
     github: 'GitHub',
     faq: 'FAQ',
     compare: 'Porównanie',
+    changelog: 'Dziennik zmian',
     resources: 'Zasoby',
     resourcesDesc: 'Przykłady, zaufanie, FAQ i porównanie',
     repo: {
@@ -45,6 +46,24 @@ export const pl: SiteTranslations = {
     },
     menu: 'Otwórz menu',
     closeMenu: 'Zamknij menu',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Dziennik zmian Deep Work Plan',
+      description:
+        'Najważniejsze aktualizacje umiejętności, metodyki i przenośnego harnessu agentów Deep Work Plan.',
+    },
+    eyebrow: 'Dziennik zmian',
+    title: 'Praca za metodyką',
+    intro:
+      'Oparta na źródłach oś czasu wydań i decyzji projektowych, które sprawiają, że Deep Work Plan nadaje się do długiej pracy agentów.',
+    viewDetail: 'Przeczytaj aktualizację',
+    backToIndex: 'Wszystkie aktualizacje',
+    sourceLabel: 'Źródło',
+    featuredLabel: 'Wyróżnione wydanie',
+    relatedTitle: 'Powiązane aktualizacje',
   },
 
   // Footer

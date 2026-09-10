@@ -33,6 +33,7 @@ export const hi: SiteTranslations = {
     github: 'GitHub',
     faq: 'सामान्य प्रश्न',
     compare: 'तुलना',
+    changelog: 'परिवर्तन लॉग',
     resources: 'संसाधन',
     resourcesDesc: 'उदाहरण, भरोसा, सामान्य प्रश्न और तुलना',
     repo: {
@@ -44,6 +45,24 @@ export const hi: SiteTranslations = {
     },
     menu: 'मेनू खोलें',
     closeMenu: 'मेनू बंद करें',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Deep Work Plan परिवर्तन लॉग',
+      description:
+        'Deep Work Plan स्किल, पद्धति और पोर्टेबल एजेंट हार्नेस के महत्वपूर्ण अपडेट।',
+    },
+    eyebrow: 'परिवर्तन लॉग',
+    title: 'पद्धति के पीछे का काम',
+    intro:
+      'स्रोत-आधारित टाइमलाइन जो लंबे एजेंट कार्य के लिए Deep Work Plan को विश्वसनीय बनाने वाले रिलीज़ और डिज़ाइन निर्णयों को दिखाती है।',
+    viewDetail: 'अपडेट पढ़ें',
+    backToIndex: 'सभी अपडेट',
+    sourceLabel: 'स्रोत',
+    featuredLabel: 'प्रमुख रिलीज़',
+    relatedTitle: 'संबंधित अपडेट',
   },
 
   // Footer

@@ -34,6 +34,7 @@ export const fr: SiteTranslations = {
     github: 'GitHub',
     faq: 'FAQ',
     compare: 'Comparatif',
+    changelog: 'Journal des changements',
     resources: 'Ressources',
     resourcesDesc: 'Exemples, confiance, FAQ et comparaison',
     repo: {
@@ -45,6 +46,24 @@ export const fr: SiteTranslations = {
     },
     menu: 'Ouvrir le menu',
     closeMenu: 'Fermer le menu',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Journal des changements de Deep Work Plan',
+      description:
+        'Les mises à jour importantes du skill, de la méthodologie et du harness portable d’agents Deep Work Plan.',
+    },
+    eyebrow: 'Journal des changements',
+    title: 'Le travail derrière la méthode',
+    intro:
+      'Une chronologie sourcée des versions et des choix de conception qui rendent Deep Work Plan fiable pour le travail d’agents au long cours.',
+    viewDetail: 'Lire la mise à jour',
+    backToIndex: 'Toutes les mises à jour',
+    sourceLabel: 'Source',
+    featuredLabel: 'Version à la une',
+    relatedTitle: 'Mises à jour connexes',
   },
 
   // Footer

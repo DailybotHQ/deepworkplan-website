@@ -34,6 +34,7 @@ export const ru: SiteTranslations = {
     github: 'GitHub',
     faq: 'FAQ',
     compare: 'Сравнение',
+    changelog: 'Изменения',
     resources: 'Ресурсы',
     resourcesDesc: 'Примеры, доверие, FAQ и сравнение',
     repo: {
@@ -45,6 +46,24 @@ export const ru: SiteTranslations = {
     },
     menu: 'Открыть меню',
     closeMenu: 'Закрыть меню',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Изменения Deep Work Plan',
+      description:
+        'Важные обновления навыка, методологии и переносимого агентского каркаса Deep Work Plan.',
+    },
+    eyebrow: 'Изменения',
+    title: 'Работа за методологией',
+    intro:
+      'Хронология с указанием источников: релизы и проектные решения, которые делают Deep Work Plan надёжным для долгой работы агентов.',
+    viewDetail: 'Читать обновление',
+    backToIndex: 'Все обновления',
+    sourceLabel: 'Источник',
+    featuredLabel: 'Главный релиз',
+    relatedTitle: 'Связанные обновления',
   },
 
   // Footer

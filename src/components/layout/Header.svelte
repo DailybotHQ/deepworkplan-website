@@ -200,6 +200,7 @@ function closeOnEscape(event: KeyboardEvent) {
         <a href="{prefix}/methodology" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'methodology' })}>{nav.methodology}</a>
         <a href="{prefix}/spec" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'spec' })}>{nav.spec}</a>
         <a href="{prefix}/kit" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'kit' })}>{nav.kit}</a>
+        <a href="{prefix}/changelog" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'changelog' })}>{nav.changelog}</a>
         <!-- Resources disclosure: groups Examples, Compare, FAQ and Trust so the
              masthead stays uncluttered. Same disclosure pattern as the repo and
              language selectors below (aria-expanded + aria-controls, no role=menu). -->

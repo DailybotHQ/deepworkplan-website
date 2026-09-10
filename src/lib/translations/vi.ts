@@ -34,6 +34,7 @@ export const vi: SiteTranslations = {
     github: 'GitHub',
     faq: 'Câu hỏi thường gặp',
     compare: 'So sánh',
+    changelog: 'Nhật ký thay đổi',
     resources: 'Tài nguyên',
     resourcesDesc: 'Ví dụ, tin tưởng, câu hỏi thường gặp và so sánh',
     repo: {
@@ -45,6 +46,24 @@ export const vi: SiteTranslations = {
     },
     menu: 'Mở menu',
     closeMenu: 'Đóng menu',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Nhật ký thay đổi Deep Work Plan',
+      description:
+        'Các cập nhật quan trọng cho skill, phương pháp luận và harness agent có thể mang theo của Deep Work Plan.',
+    },
+    eyebrow: 'Nhật ký thay đổi',
+    title: 'Công việc phía sau phương pháp',
+    intro:
+      'Dòng thời gian có nguồn dẫn về các bản phát hành và quyết định thiết kế giúp Deep Work Plan đáng tin cậy cho công việc agent dài hạn.',
+    viewDetail: 'Đọc cập nhật',
+    backToIndex: 'Tất cả cập nhật',
+    sourceLabel: 'Nguồn',
+    featuredLabel: 'Bản phát hành nổi bật',
+    relatedTitle: 'Cập nhật liên quan',
   },
 
   // Footer
