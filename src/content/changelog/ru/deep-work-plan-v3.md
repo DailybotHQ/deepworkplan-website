@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan v3: репозиторий становится средой агента"
 description: "Deep Work Plan v3 усиливает жизненный цикл и гарантии проверки работы агентов."
-date: 2026-09-10
+date: 2026-07-16
 version: "v3 · DWP standard 2.3.0"
 kind: release
 lang: ru
@@ -12,4 +12,3 @@ sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a
 ---
 
 Обновление превращает репозиторий в среду агента с контекстом, правилами, проверками и возобновляемым состоянием.
-

@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan v3: repozytorium staje się harness"
 description: "Deep Work Plan v3 wzmacnia cykl, zgodność i gwarancje przeglądu pracy agentów."
-date: 2026-09-10
+date: 2026-07-16
 version: "v3 · DWP standard 2.3.0"
 kind: release
 lang: pl
@@ -12,4 +12,3 @@ sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a
 ---
 
 Ta aktualizacja zmienia repozytorium w harness agenta, łącząc kontekst, reguły, walidację i stan możliwy do wznowienia.
-

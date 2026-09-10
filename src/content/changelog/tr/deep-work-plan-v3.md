@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan v3: depo çalışma ortamına dönüşüyor"
 description: "Deep Work Plan v3 yaşam döngüsünü, uyumluluğu ve inceleme güvencelerini güçlendiriyor."
-date: 2026-09-10
+date: 2026-07-16
 version: "v3 · DWP standard 2.3.0"
 kind: release
 lang: tr
@@ -12,4 +12,3 @@ sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a
 ---
 
 Bu güncelleme bağlamı, korumaları, doğrulamayı ve sürdürülebilir durumu depoda birleştiriyor.
-

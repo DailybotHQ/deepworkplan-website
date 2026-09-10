@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan v3: repositori menjadi harness"
 description: "Deep Work Plan v3 memperkuat siklus, kepatuhan, dan jaminan peninjauan pekerjaan agen."
-date: 2026-09-10
+date: 2026-07-16
 version: "v3 · DWP standard 2.3.0"
 kind: release
 lang: id
@@ -12,4 +12,3 @@ sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a
 ---
 
 Pembaruan ini menjadikan repositori sebagai harness agen dengan konteks, aturan, validasi, dan status yang dapat dilanjutkan.
-

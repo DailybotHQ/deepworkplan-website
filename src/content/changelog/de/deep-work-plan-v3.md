@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan v3: Das Repository wird zum Harness"
 description: "Deep Work Plan v3 stärkt Lebenszyklus, Konformitätsgrenze und Review-Garantien."
-date: 2026-09-10
+date: 2026-07-16
 version: "v3 · DWP standard 2.3.0"
 kind: release
 lang: de
@@ -12,4 +12,3 @@ sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a
 ---
 
 Diese Aktualisierung macht das Repository zum Harness des Agenten und bündelt Kontext, Regeln, Validierung und fortsetzbaren Zustand.
-

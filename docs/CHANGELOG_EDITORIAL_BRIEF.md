@@ -22,7 +22,7 @@ the methodology/skill major release.
 
 ### `deep-work-plan-v3`
 
-- Date: 2026-09-10
+- Date: 2026-07-16
 - Label: Deep Work Plan v3 · DWP standard 2.3.0
 - Status: release-day major-release commit
 - Summary: The skill's command surface stays familiar while plan lifecycle, conformance, and review guarantees become substantially stronger.
