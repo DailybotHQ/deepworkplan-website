@@ -14,6 +14,7 @@ const PLATES = [
   'PlanNoDrift.astro',
   'DoneIsAContract.astro',
   'RepoAsHarnessPlate.astro',
+  'ContextEconomy.astro',
 ] as const;
 
 const languages = getSupportedLanguages();
