@@ -50,6 +50,7 @@ Prima comprendi il repository, poi proponi cosa farai.
 - **Classifica l’archetipo.** Un repository individuale (il caso più comune), un hub orchestratore, o un
   workspace agente — la casa di lunga durata di un agente autonomo, dove git è raccomandato anziché
   dato per scontato — con le relative evidenze.
+- **Riconosci un’installazione DWP esistente.** Se `AGENTS.md` e `.agents/` esistono già, cerca la riga di provenienza `DWP standard:`. Un harness precedente allo standard attuale riceve un **aggiornamento mirato**: reinstallare la skill è l’intero percorso di aggiornamento, e l’onboarding riconcilia solo le parti mancanti o obsolete — ogni sezione scritta a mano, skill personalizzata e piano in corso viene preservata, e una seconda esecuzione non cambia nulla.
 - **Inventaria ciò che già esiste.** `AGENTS.md`, `CLAUDE.md`, `docs/`, qualsiasi configurazione `.agents/` o di skill/agenti,
   `.dwp/` e `.gitignore`. Annota qualsiasi cosa svolga già parte di questo compito.
 - **Proponi il piano di onboarding.** Presenta un elenco conciso: i file che creerai, i file che
