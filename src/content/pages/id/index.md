@@ -6,7 +6,7 @@ lastUpdated: 2026-09-10
 
 ## Model itu penting. Konteks lebih penting.
 
-Deep Work Plan mengubah repositori apa pun menjadi lingkungan terstruktur — konteks, pengaman, dan rencana yang tahan lama — tempat coding agent mana pun mengeksekusi dengan presisi dan menyelesaikan pekerjaan jangka panjang.
+Deep Work Plan mengubah repositori apa pun menjadi lingkungan terstruktur — konteks, pagar pengaman, dan rencana yang tahan lama — tempat agen coding mana pun mengeksekusi dengan presisi dan efisien serta menyelesaikan kerja jangka panjang.
 
 Deep Work Plan (DWP) adalah metodologi dan kit terbuka berlisensi MIT untuk merencanakan dan mengeksekusi pekerjaan perangkat lunak yang kompleks bersama AI agent. Anda tidak memilih metode pemasangan atau menyalin template — Anda menyalin prompt init.md dan menempelkannya ke agent Anda:
 

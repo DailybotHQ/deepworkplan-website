@@ -82,7 +82,7 @@ export const tr: SiteTranslations = {
       title: 'Modeller önemlidir.',
       titleEmphasis: 'Bağlam daha da önemlidir.',
       subtitle:
-        'Deep Work Plan, herhangi bir depoyu yapılandırılmış bir ortama — bağlam, güvenlik bariyerleri ve kalıcı bir plana — dönüştürür; böylece herhangi bir kodlama ajanı işini tam isabetle yürütür ve uzun soluklu işi tamamlar.',
+        'Deep Work Plan, herhangi bir depoyu yapılandırılmış bir ortama dönüştürür — bağlam, koruma bariyerleri ve kalıcı bir plan — herhangi bir kodlama ajanı burada hassas ve verimli çalışır ve uzun soluklu işi tamamlar.',
       instructionLabel: 'Ajanınıza kopyalayın',
       instruction:
         'init.md istemini kopyalayıp kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırarak herhangi bir depoyu AI-first hale getirin.',

@@ -80,7 +80,7 @@ export const ko: SiteTranslations = {
       title: '모델은 중요합니다.',
       titleEmphasis: '컨텍스트는 더 중요합니다.',
       subtitle:
-        'Deep Work Plan은 어떤 리포지토리든 구조화된 환경 — 컨텍스트, 가드레일, 견고한 계획 — 으로 바꾸어, 어떤 코딩 에이전트든 정밀하게 실행하고 장시간 작업을 끝까지 완수하도록 합니다.',
+        'Deep Work Plan은 어떤 저장소든 구조화된 환경 — 컨텍스트, 가드레일, 지속되는 계획 — 으로 바꾸어, 어떤 코딩 에이전트든 정확하고 효율적으로 실행하며 장기 작업을 끝까지 완수합니다.',
       instructionLabel: '에이전트에 복사하기',
       instruction:
         'init.md 프롬프트를 복사하여 코딩 에이전트 — Claude Code, Cursor, Codex, 또는 다른 에이전트 — 에 붙여넣어 어떤 리포지토리든 AI-first로 만드세요.',

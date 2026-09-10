@@ -80,7 +80,7 @@ export const th: SiteTranslations = {
       title: 'โมเดลสำคัญ',
       titleEmphasis: 'บริบทสำคัญกว่า',
       subtitle:
-        'Deep Work Plan เปลี่ยน repository ใดก็ได้ให้เป็นสภาพแวดล้อมที่มีโครงสร้าง พร้อมบริบท ราวกั้นความปลอดภัย และแผนงานที่คงทน ที่ coding agent ใดก็ทำงานได้อย่างแม่นยำและทำงานระยะยาวจนเสร็จ',
+        'Deep Work Plan เปลี่ยนทุก repository ให้เป็นสภาพแวดล้อมที่มีโครงสร้าง — บริบท ราวกันตก และแผนงานที่ยั่งยืน — ซึ่งเอเจนต์เขียนโค้ดใดก็ทำงานได้อย่างแม่นยำและมีประสิทธิภาพ และลงมือกับงานระยะยาวจนสำเร็จ',
       instructionLabel: 'คัดลอกไปยัง agent ของคุณ',
       instruction:
         'คัดลอก prompt ของ init.md และวางลงใน coding agent ของคุณ — Claude Code, Cursor, Codex หรืออื่น ๆ — เพื่อทำให้ repository ใดก็ได้เป็น AI-first',

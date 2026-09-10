@@ -6,7 +6,7 @@ lastUpdated: 2026-09-10
 
 ## Mô hình quan trọng. Ngữ cảnh còn quan trọng hơn.
 
-Deep Work Plan biến mọi repository thành một môi trường có cấu trúc — ngữ cảnh, hàng rào bảo vệ và một kế hoạch bền vững — nơi mọi agent lập trình thực thi với độ chính xác cao và hoàn thành công việc dài hơi.
+Deep Work Plan biến mọi repository thành một môi trường có cấu trúc — ngữ cảnh, rào chắn và một kế hoạch bền vững — nơi bất kỳ agent lập trình nào cũng thực thi chính xác và hiệu quả, và hoàn thành công việc dài hơi.
 
 Deep Work Plan (DWP) là một phương pháp luận và bộ kit mở, cấp phép MIT, để lập kế hoạch và thực thi công việc phần mềm phức tạp cùng các agent AI. Bạn không phải chọn một cách cài đặt hay sao chép một mẫu — bạn sao chép prompt init.md và dán vào agent của mình:
 

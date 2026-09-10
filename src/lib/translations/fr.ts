@@ -81,7 +81,7 @@ export const fr: SiteTranslations = {
       title: 'Les modèles comptent.',
       titleEmphasis: 'Le contexte compte davantage.',
       subtitle:
-        'Deep Work Plan transforme n’importe quel dépôt en un environnement structuré — contexte, garde-fous et un plan durable — où tout agent de code s’exécute avec précision et mène à terme un travail de longue haleine.',
+        'Deep Work Plan transforme n’importe quel dépôt en un environnement structuré — contexte, garde-fous et un plan durable — où n’importe quel agent de codage exécute avec précision et efficacité et mène à bien le travail de longue haleine.',
       instructionLabel: 'Copier dans votre agent',
       instruction:
         "Copiez le prompt init.md et collez-le dans votre agent de code — Claude Code, Cursor, Codex ou tout autre — pour rendre n'importe quel dépôt AI-first.",

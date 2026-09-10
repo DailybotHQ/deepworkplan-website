@@ -80,7 +80,7 @@ export const zh: SiteTranslations = {
       title: '模型很重要。',
       titleEmphasis: '上下文更重要。',
       subtitle:
-        'Deep Work Plan 将任意代码仓库转化为结构化环境——上下文、防护栏与一份持久的计划——让任意编码代理都能精准执行并完成长周期工作。',
+        'Deep Work Plan 将任何仓库转变为结构化环境——上下文、防护栏和持久计划——任何编码代理都能在其中精准而高效地执行，并完成长程工作。',
       instructionLabel: '复制到你的代理',
       instruction:
         '复制 init.md 提示并将其粘贴到你的编码代理中——Claude Code、Cursor、Codex 或任何其他代理——让任意代码仓库变为 AI-first。',

@@ -81,7 +81,7 @@ export const de: SiteTranslations = {
       title: 'Modelle zählen.',
       titleEmphasis: 'Kontext zählt mehr.',
       subtitle:
-        'Deep Work Plan verwandelt jedes Repository in eine strukturierte Umgebung — Kontext, Leitplanken und einen dauerhaften Plan — in der jeder Coding-Agent präzise arbeitet und langfristige Aufgaben abschließt.',
+        'Deep Work Plan verwandelt jedes Repository in eine strukturierte Umgebung — Kontext, Guardrails und einen dauerhaften Plan — in der jeder Coding-Agent präzise und effizient arbeitet und langlaufende Arbeit abschließt.',
       instructionLabel: 'In Ihren Agenten kopieren',
       instruction:
         'Kopieren Sie den init.md-Prompt und fügen Sie ihn in Ihren Coding-Agenten ein — Claude Code, Cursor, Codex oder einen anderen — um jedes Repository AI-first zu machen.',

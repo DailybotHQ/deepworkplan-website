@@ -81,7 +81,7 @@ export const it: SiteTranslations = {
       title: 'I modelli contano.',
       titleEmphasis: 'Il contesto conta di più.',
       subtitle:
-        'Deep Work Plan trasforma qualsiasi repository in un ambiente strutturato — contesto, salvaguardie e un piano duraturo — in cui ogni agente di coding esegue con precisione e porta a termine il lavoro a lungo termine.',
+        'Deep Work Plan trasforma qualsiasi repository in un ambiente strutturato — contesto, guardrail e un piano duraturo — dove qualsiasi agente di coding esegue con precisione ed efficienza e porta a termine il lavoro di lungo corso.',
       instructionLabel: 'Copia nel Suo agente',
       instruction:
         'Copi il prompt di init.md e lo incolli nel Suo agente di coding — Claude Code, Cursor, Codex o qualsiasi altro — per rendere qualsiasi repository AI-first.',

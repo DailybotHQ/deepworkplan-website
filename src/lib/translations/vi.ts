@@ -81,7 +81,7 @@ export const vi: SiteTranslations = {
       title: 'Mô hình quan trọng.',
       titleEmphasis: 'Ngữ cảnh quan trọng hơn.',
       subtitle:
-        'Deep Work Plan biến mọi repository thành một môi trường có cấu trúc — ngữ cảnh, hàng rào bảo vệ và một kế hoạch bền vững — nơi bất kỳ agent lập trình nào cũng thực thi chính xác và hoàn thành công việc dài hơi.',
+        'Deep Work Plan biến mọi repository thành một môi trường có cấu trúc — ngữ cảnh, rào chắn và một kế hoạch bền vững — nơi bất kỳ agent lập trình nào cũng thực thi chính xác và hiệu quả, và hoàn thành công việc dài hơi.',
       instructionLabel: 'Sao chép vào agent của bạn',
       instruction:
         'Sao chép prompt init.md và dán vào agent lập trình của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác — để biến mọi repository thành AI-first.',

@@ -6,7 +6,7 @@ lastUpdated: 2026-09-10
 
 ## Modele mają znaczenie. Kontekst ma znaczenie większe.
 
-Deep Work Plan zamienia dowolne repozytorium w ustrukturyzowane środowisko — kontekst, zabezpieczenia i trwały plan — w którym dowolny agent kodujący wykonuje pracę z precyzją i doprowadza do końca zadania o długim horyzoncie.
+Deep Work Plan przekształca każde repozytorium w ustrukturyzowane środowisko — kontekst, zabezpieczenia i trwały plan — w którym każdy agent kodowania pracuje precyzyjnie i wydajnie oraz kończy pracę długoterminową.
 
 Deep Work Plan (DWP) to otwarta metodyka i kit na licencji MIT, służące do planowania i wykonywania złożonej pracy programistycznej z agentami AI. Nie wybierasz metody instalacji ani nie kopiujesz szablonu — kopiujesz prompt init.md i wklejasz go do swojego agenta:
 

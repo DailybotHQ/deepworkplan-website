@@ -82,7 +82,7 @@ export const pl: SiteTranslations = {
       title: 'Modele mają znaczenie.',
       titleEmphasis: 'Kontekst znaczy więcej.',
       subtitle:
-        'Deep Work Plan zamienia dowolne repozytorium w uporządkowane środowisko — kontekst, zabezpieczenia i trwały plan — w którym każdy agent kodujący działa precyzyjnie i kończy długodystansową pracę.',
+        'Deep Work Plan przekształca każde repozytorium w ustrukturyzowane środowisko — kontekst, zabezpieczenia i trwały plan — w którym każdy agent kodowania pracuje precyzyjnie i wydajnie oraz kończy pracę długoterminową.',
       instructionLabel: 'Skopiuj do swojego agenta',
       instruction:
         'Skopiuj prompt init.md i wklej go do swojego agenta kodowania — Claude Code, Cursor, Codex lub innego — aby uczynić dowolne repozytorium AI-first.',
