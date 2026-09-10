@@ -39,6 +39,9 @@ describe('changelog display helpers', () => {
     ];
 
     expect(getFeaturedChangelogEntry(entries)?.id).toBe('newer-featured');
+    expect(
+      getFeaturedChangelogEntry([entry('plain', '2026-09-10', 1)])
+    ).toBeUndefined();
   });
 
   it('builds localized detail URLs without a language prefix for English', () => {

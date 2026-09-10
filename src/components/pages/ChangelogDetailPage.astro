@@ -45,7 +45,7 @@ const articleSchema = {
   <article class="main-container py-16 md:py-24">
     <a
       href={`${prefix}/changelog`}
-      class="kicker inline-flex items-center hover:opacity-80"
+      class="kicker inline-flex items-center hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
       style="color: var(--color-secondary);"
     >
       &larr; {c.backToIndex}
@@ -90,13 +90,13 @@ const articleSchema = {
     <Rule class="my-12" />
 
     <section aria-labelledby="related-updates">
-      <Kicker>{c.relatedTitle}</Kicker>
+      <h2 id="related-updates" class="kicker">{c.relatedTitle}</h2>
       <div class="mt-6 grid gap-6 md:grid-cols-2">
         {
           related.map((candidate) => (
             <a
               href={getChangelogUrl(lang, stripEntryLangPrefix(candidate.id))}
-              class="border p-5 transition hover:opacity-90"
+              class="border p-5 transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
               style="border-color: var(--color-line);"
             >
               <span class="kicker" style="color: var(--color-secondary);">{candidate.data.version}</span>

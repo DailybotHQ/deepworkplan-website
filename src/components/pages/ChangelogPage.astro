@@ -4,6 +4,7 @@ import Kicker from '@/components/editorial/Kicker.astro';
 import Lead from '@/components/editorial/Lead.astro';
 import Rule from '@/components/editorial/Rule.astro';
 import FormattedDate from '@/components/FormattedDate.astro';
+import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getChangelogUrl, sortChangelogEntries } from '@/lib/changelog';
 import { getUrlPrefix, type Language, stripEntryLangPrefix } from '@/lib/i18n';
@@ -20,20 +21,18 @@ const prefix = getUrlPrefix(lang);
 const entries = sortChangelogEntries(
   (await getCollection('changelog')).filter((entry) => entry.data.lang === lang)
 );
-const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
-
 const collectionSchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   name: c.meta.title,
   description: c.meta.description,
-  url: `${siteUrl}${prefix}/changelog`,
+  url: `${Astro.site?.href?.replace(/\/$/, '') ?? ''}${prefix}/changelog`,
 };
 ---
 
 <MainLayout lang={lang} title={c.meta.title} description={c.meta.description}>
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+    <JsonLd slot="head" data={collectionSchema} />
   </Fragment>
 
   <article class="main-container py-16 md:py-24">
@@ -76,7 +75,10 @@ const collectionSchema = {
                 ]}
                 style="color: var(--color-ink);"
               >
-                <a href={getChangelogUrl(lang, slug)} class="hover:text-secondary">
+                <a
+                  href={getChangelogUrl(lang, slug)}
+                  class="hover:text-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
+                >
                   {entry.data.title}
                 </a>
               </h2>
@@ -85,7 +87,7 @@ const collectionSchema = {
               </p>
               <a
                 href={getChangelogUrl(lang, slug)}
-                class="kicker mt-4 inline-flex items-center gap-2 hover:opacity-80"
+                class="kicker mt-4 inline-flex items-center gap-2 hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
                 style="color: var(--color-secondary);"
               >
                 {c.viewDetail} <span aria-hidden="true">→</span>
