@@ -29,8 +29,8 @@ Przekształć repozytorium w bazę kodu AI-first, sterowaną specyfikacją (spec
 4. Wygenerowanie `docs/` (architektura, standardy, testowanie, bezpieczeństwo i inne) oraz dokumentacji poszczególnych modułów.
 5. Wygenerowanie `.agents/` (agenci, cienkie komendy `dwp-*`, skille odpowiednie dla stacku, katalog) oraz `.claude → .agents`.
 6. Instalacja skilla i utworzenie szkieletu pomijanego przez git `.dwp/` (plany, szkice) oraz przestrzeni roboczej `tmp/`.
-7. Zaproponowanie opcjonalnych addonów, a następnie autoweryfikacja.
+7. Zainstalowanie wymaganego lokalnego przeglądu AI Diff Reviewer, zaproponowanie opcjonalnych addonów, a następnie autoweryfikacja.
 
 ## Uwagi
 
-Repozytorium jest w pełni zgodne nawet bez żadnego addonu. Wykryta rzeczywistość zawsze ma pierwszeństwo przed założeniami presetu.
+Repozytorium jest w pełni zgodne nawet bez żadnego opcjonalnego addonu; lokalny przegląd AI Diff Reviewer jest częścią linii bazowej od standardu 2.3.0. Wykryta rzeczywistość zawsze ma pierwszeństwo przed założeniami presetu.

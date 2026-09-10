@@ -24,7 +24,19 @@ La capacidad de un agente de programación con IA depende menos del modelo que d
 
 Esto replantea qué significa delegar bien. Delegar bien no es pedirle trabajo a un agente — es definir el trabajo con suficiente claridad para que pueda ejecutarse correctamente: el objetivo, las restricciones, el contexto que al agente le faltaría de otro modo y los criterios que deciden si tuvo éxito. La mayor parte del valor se crea antes de que comience la ejecución.
 
-Deep Work Plan es la disciplina de hacer ese trabajo aguas arriba de forma duradera y repetible. Sus dos pilares son las dos mitades de una buena dirección: una **especificación** declara qué aspecto tiene lo "correcto", y un **harness** le da al agente el contexto y las herramientas para alcanzarlo. Juntos convierten la capacidad bruta de un modelo en ingeniería confiable — sostenida a lo largo de una tarea que dura horas y preservada entre agentes que cambian de una sesión a otra.
+Deep Work Plan es la disciplina de hacer ese trabajo aguas arriba de forma duradera y repetible. Sus dos pilares fundacionales son las dos mitades de una buena dirección: una **especificación** declara qué aspecto tiene lo "correcto", y un **harness** le da al agente el contexto y las herramientas para alcanzarlo. Juntos convierten la capacidad bruta de un modelo en ingeniería confiable — sostenida a lo largo de una tarea que dura horas y preservada entre agentes que cambian de una sesión a otra. Una tercera disciplina mantiene la combinación asequible a escala: la **eficiencia de tokens**, porque un harness que funciona es uno que el agente puede cargar a través de un horizonte largo.
+
+## Eficiente por construcción
+
+El primer pilar hace el trabajo correcto; el segundo lo hace portable. El tercero lo mantiene **asequible** — porque el contexto es el recurso más escaso que tiene un agente de código, y una metodología que lo desperdicia falla justo cuando el trabajo se alarga.
+
+Tres mecanismos hacen el trabajo:
+
+- **Divulgación progresiva.** El agente lee un núcleo esencial, y cada guía o sección de la especificación se carga solo cuando el propio flujo dispara su desencadenante. El agente lleva el capítulo que necesita, no el libro entero.
+- **Validación seleccionada por la superficie tocada.** Cada tarea registra lo que cambia y elige su puerta por clase de riesgo — un cambio pequeño y aislado se prueba de forma acotada; un cambio en maquinaria compartida se prueba a fondo.
+- **Aprendizaje local por tarea.** Cuando una tarea produce un patrón reutilizable, la decisión ocurre dentro de esa tarea, donde la evidencia está fresca — no en una retrospectiva que nadie lee.
+
+Nada de esto afirma ser sin pérdidas por construcción, ni se promociona con porcentajes inventados. Los bytes de instrucción que cada flujo requiere se miden y publican; las afirmaciones de comportamiento están respaldadas por replays con fallos sembrados. Lo que se puede decir llanamente es esto: el agente lee menos de lo que no necesita, vuelve a ejecutar menos de lo que no cambió y decide más donde vive la evidencia — y esos ahorros se componen a lo largo de un horizonte largo.
 
 ## Guiado por especificación desde el diseño
 

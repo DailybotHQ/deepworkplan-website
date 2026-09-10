@@ -85,6 +85,18 @@ export const SITE_SECTIONS: {
     description: 'Get DWP running in a repository quickly.',
   },
   {
+    name: 'Compare',
+    path: '/compare',
+    description:
+      'Deep Work Plan next to spec-driven tools, agent frameworks and vendor plan modes — each on its own terms, with sources and a review date.',
+  },
+  {
+    name: 'FAQ',
+    path: '/faq',
+    description:
+      'Answers to the questions people ask: what DWP does, how gates and resumption work, how it compares, how to adopt it.',
+  },
+  {
     name: 'Init / Adoption',
     path: '/init',
     description: 'Canonical adoption endpoint — make any repository AI-first.',

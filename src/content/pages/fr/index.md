@@ -1,12 +1,12 @@
 ---
 title: "Deep Work Plan — exécution structurée pour les agents de code IA"
 description: "Le contexte compte plus que les modèles. Deep Work Plan transforme tout dépôt en un environnement structuré où tout agent de code mène à terme un travail de longue haleine."
-lastUpdated: 2026-06-03
+lastUpdated: 2026-09-10
 ---
 
 ## Les modèles comptent. Le contexte compte davantage.
 
-Deep Work Plan transforme n’importe quel dépôt en un environnement structuré — contexte, garde-fous et un plan durable — où tout agent de code s’exécute avec précision et mène à terme un travail de longue haleine.
+Deep Work Plan transforme n’importe quel dépôt en un environnement structuré — contexte, garde-fous et un plan durable — où n’importe quel agent de codage exécute avec précision et efficacité et mène à bien le travail de longue haleine.
 
 Deep Work Plan (DWP) est une méthodologie et un kit ouverts, sous licence MIT, pour planifier et exécuter un travail logiciel complexe avec des agents IA. Vous ne choisissez pas de méthode d’installation et ne copiez aucun modèle — vous copiez le prompt init.md et le collez dans votre agent :
 
@@ -21,12 +21,63 @@ Deep Work Plan (DWP) est une méthodologie et un kit ouverts, sous licence MIT, 
 
 ## Le problème et la réponse
 
-Les agents de code IA sont remarquablement efficaces sur de courtes séquences. Sur un travail de longue haleine — une migration, un nouveau sous-système, un refactoring sur des dizaines de fichiers — ils dérivent : le contexte se remplit, les décisions s’oublient et les tâches de plusieurs heures sont abandonnées à mi-parcours.
+En courtes salves, les agents de codage sont remarquables. Confiez-leur une mission de long terme — une migration, un nouveau sous-système, une refactorisation de dizaines de fichiers — ils dérivent : le contexte se remplit, les décisions s’effacent et des heures de travail restent inachevées.
 
-Deep Work Plan répond par le **développement piloté par la spécification** : le plan est la source de vérité durable, et les agents s’exécutent face à des critères d’acceptation explicites et des portes de validation. La dérive diminue, le travail reste vérifiable, et n’importe quel agent peut le reprendre d’une session à l’autre. Contrairement aux outils pilotés par la spécification liés à un seul IDE ou fournisseur (GitHub Spec Kit, Amazon Kiro, Tessl), DWP est indépendant de l’outil et natif du dépôt.
+Deep Work Plan répond par le développement piloté par la spécification : un plan durable, des tâches atomiques et des validation gates que l’agent doit franchir. Le travail reste vérifiable — et n’importe quel agent peut le reprendre entre les sessions.
 
-C’est aussi de l’**ingénierie de harness** rendue portable. Un harness d’agent, c’est l’échafaudage autour d’un modèle — contexte, outils, boucle de contrôle, garde-fous, état reprenable — qui le rend fiable. Deep Work Plan installe ce harness dans le dépôt lui-même, pour que tout agent puisse piloter tout dépôt.
+Et parce que le contexte est la ressource la plus rare de votre agent, le harness est conçu pour l’efficacité des tokens : les instructions se chargent progressivement, la validation ne touche que ce qui a changé, et chaque tâche apprend localement — le travail de longue haleine reste abordable.
+---
 
+## Les humains dirigent. Les agents exécutent.
+
+Vous décidez de ce que « terminé » signifie et des limites à ne pas franchir. Le plan porte votre intention ; les agents font les heures — sans surveillance permanente, sans correction toutes les vingt minutes.
+
+- Vous : intention, critères d’acceptation, revue
+- Agents : exécution, tâche par tâche
+- Le plan : le contrat entre les deux
+
+[Lire la méthodologie](/fr/methodology)
+
+---
+
+## Un plan dont les agents ne peuvent pas dévier.
+
+Les longues tâches remplissent le contexte de n’importe quel modèle. Les détails s’effacent et l’agent dérive. Un plan écrit — tâches atomiques, portes de validation, état reprenable — est le repère vers lequel il revient, tour après tour.
+
+1. Plan
+2. Tâches atomiques
+3. Portes de validation
+4. Achèvement
+5. État reprenable
+
+[Voir la boucle principale](/fr/methodology)
+
+---
+
+## Terminé est un contrat, pas une impression.
+
+Chaque tâche nomme ses critères d’acceptation et les vérifications qui doivent passer. L’agent ne peut pas se sentir fini — il doit passer, sinon la tâche reste ouverte.
+
+- Les tests passent
+- Les types sont vérifiés
+- Les critères d’acceptation sont remplis
+- Ou la tâche reste ouverte
+
+[Lire la spécification](/fr/spec)
+
+---
+
+## Le dépôt est le harness.
+
+Contexte, outils, garde-fous et état vivent dans votre dépôt sous forme de fichiers simples que n’importe quel agent peut lire. Pas d’enfermement, pas de cerveau externe — tout survit aux réinitialisations de contexte.
+
+- Spécification durable sur disque
+- Portes de validation, pas d’intuition
+- Survit aux réinitialisations de contexte
+
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
+
+[Voir ce que l’onboarding génère](/fr/quickstart)
 ---
 
 ## Ce que vous obtenez

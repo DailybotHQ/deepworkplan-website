@@ -29,8 +29,8 @@ Ubah sebuah repositori menjadi codebase AI-first yang spec-driven. Ini adalah su
 4. Hasilkan `docs/` (arsitektur, standar, pengujian, keamanan, dan lainnya) serta dokumen per modul.
 5. Hasilkan `.agents/` (agent, command `dwp-*` yang ramping, skill sesuai stack, katalog) + `.claude → .agents`.
 6. Pasang skill dan siapkan `.dwp/` ber-gitignore (plan, draft) serta ruang kerja sementara `tmp/`.
-7. Tawarkan addon opsional, lalu lakukan swauji.
+7. Pasang tinjauan lokal AI Diff Reviewer yang wajib, tawarkan addon opsional, lalu lakukan swauji.
 
 ## Catatan
 
-Sebuah repositori sepenuhnya konform tanpa addon sama sekali. Realitas yang terdeteksi selalu mengalahkan asumsi preset.
+Sebuah repositori sepenuhnya konform tanpa addon opsional sama sekali; tinjauan lokal AI Diff Reviewer adalah bagian dari baseline sejak standar 2.3.0. Realitas yang terdeteksi selalu mengalahkan asumsi preset.

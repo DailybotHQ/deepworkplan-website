@@ -34,7 +34,7 @@ Ten dodatek jest przeznaczony dla repozytoriów z co najmniej jedną rzeczywist�
 - **`visual-ui` jest domyślnie włączony po wykryciu** — arkusz stylów z niestandardowymi właściwościami CSS, konfiguracja Tailwind lub blok `@theme`, komponenty UI albo przewodnik marki/stylu. Onboarding stosuje go w trybie zaufania i zdecydowanie zaleca w trybie z przewodnikiem.
 - **`cli-output` i `conversational` są zalecane po wykryciu — i zawsze poprzedzone pytaniem, nigdy stosowane automatycznie**, nawet w trybie zaufania. Biblioteka renderowania CLI wraz z celową warstwą wyświetlania sygnalizuje ten pierwszy; SDK platformy czatowej lub warstwa kompozycji wiadomości — ten drugi. Goły parser argumentów z surowymi wydrukami się nie kwalifikuje.
 
-Nigdy nie jest wymagany — repozytorium z zerową liczbą dodatków jest w pełni zgodne i zawsze możesz odmówić dowolnego profilu lub całego dodatku. Plik `DESIGN.md` utworzony, zanim istniały profile, jest poprawnym jednoprofilowym plikiem wizualnym: bez migracji.
+Nigdy nie jest wymagany — repozytorium z zerową liczbą opcjonalnych dodatków jest w pełni zgodne i zawsze możesz odmówić dowolnego profilu lub całego dodatku. Plik `DESIGN.md` utworzony, zanim istniały profile, jest poprawnym jednoprofilowym plikiem wizualnym: bez migracji.
 
 ## Opcjonalna komenda
 

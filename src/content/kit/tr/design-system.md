@@ -34,7 +34,7 @@ Bu eklenti, en az bir gerçek arayüz yüzeyi olan depolar içindir; hiçbir ara
 - **`visual-ui` saptandığında varsayılan açıktır** — CSS özel özellikleri içeren bir stil sayfası, bir Tailwind yapılandırması veya `@theme` bloğu, UI bileşenleri ya da bir marka/stil kılavuzu. Kuruluma alma onu güven modunda uygular ve rehberli modda güçlü biçimde önerir.
 - **`cli-output` ve `conversational`, saptandığında önerilir — ve her zaman sorulur, asla otomatik uygulanmaz**, güven modunda bile. Bir CLI işleme kitaplığı artı bilinçli bir görüntüleme katmanı ilkine işaret eder; bir sohbet platformu SDK’sı veya mesaj oluşturma katmanı ikincisine işaret eder. Ham yazdırmalar yapan yalın bir argüman ayrıştırıcısı bu kapsama girmez.
 
-Asla gerekli değildir — sıfır eklentili bir depo tamamen uyumludur ve herhangi bir profili ya da eklentinin tamamını her zaman reddedebilirsiniz. Profiller var olmadan önce oluşturulmuş bir `DESIGN.md`, geçerli tek profilli bir görsel dosyadır: geçiş gerekmez.
+Asla gerekli değildir — sıfır isteğe bağlı eklentili bir depo tamamen uyumludur ve herhangi bir profili ya da eklentinin tamamını her zaman reddedebilirsiniz. Profiller var olmadan önce oluşturulmuş bir `DESIGN.md`, geçerli tek profilli bir görsel dosyadır: geçiş gerekmez.
 
 ## İsteğe bağlı komut
 

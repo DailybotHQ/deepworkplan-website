@@ -1,6 +1,6 @@
 ---
 title: Eklentiler
-description: "İsteğe bağlı DWP uzantıları: beş eklenti (devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), eklenti sözleşmesi ve kit kavramları."
+description: "DWP eklentileri: dört isteğe bağlı uzantı (devcontainer, Dailybot, dependency-upgrade, design-system), gerekli AI Diff Reviewer yerel incelemesi ve onun isteğe bağlı CI yüzeyi, eklenti sözleşmesi ve kit kavramları."
 order: 5
 lang: tr
 section: Addons
@@ -8,7 +8,7 @@ section: Addons
 
 # Eklentiler
 
-**Sürüm 2.0.** Eklentiler, temel Deep Work Plan metodolojisine isteğe bağlı uzantılardır. **Uyumluluk için asla gerekli değildir** — sıfır eklentili bir depo tamamen AI-first ve DWP uyumludur. Her eklenti onboarding sırasında sunulur, açıkça kabul veya reddedilir ve — kabul edildiğinde — mevcut kurulumu ezmek yerine **uzlaştırır**.
+**Sürüm 2.1.** Eklentiler, temel Deep Work Plan metodolojisine uzantılardır. Beşin dördü isteğe bağlıdır ve **uyumluluk için asla gerekli değildir** — sıfır isteğe bağlı eklentili bir depo tamamen AI-first ve DWP uyumludur. Her isteğe bağlı eklenti onboarding sırasında sunulur, açıkça kabul veya reddedilir ve — kabul edildiğinde — mevcut kurulumu ezmek yerine **uzlaştırır**. Bir bileşen beyan edilen istisnadır: 2.3.0 standardından itibaren **AI Diff Reviewer yerel incelemesi** gerekli temelin bir parçasıdır — onboarding onu kurar ve her Final Review onu çalıştırır — CI yüzeyi ise isteğe bağlı kalır.
 
 ## Eklenti sözleşmesi
 
@@ -25,7 +25,7 @@ Keşif: `onboard` akışı `skills/deepworkplan/addons/` dizinini numaralandır�
 
 ## Üretim eklentileri (beş)
 
-Bugün beş eklenti sunulmaktadır. Her birinin kullanıcıya yönelik ayrıntılı bir **kit katalog sayfası** ve Deep Work Plan skill'i içinde **normatif spec**'i vardır.
+Bugün beş eklenti sunulmaktadır — dört opt-in artı gerekli yerel inceleme. Her birinin kullanıcıya yönelik ayrıntılı bir **kit katalog sayfası** ve Deep Work Plan skill'i içinde **normatif spec**'i vardır.
 
 ### Devcontainer (birinci eklenti)
 
@@ -65,23 +65,24 @@ Tutarlı UI, CLI veya konuşma çıktısı için herhangi bir kodlama agent'ın�
 - **Profil gücü:** visual-ui **tespit edildiğinde varsayılan açık**; cli-output ve conversational **tespit edildiğinde önerilir, her zaman sorulur, asla otomatik uygulanmaz**
 - **Ne zaman sunulur:** yalnızca kullanıcıya yönelik arayüz yüzeyi tespit edildiğinde — saf kütüphaneler, headless servisler veya yalnızca altyapı depoları için değil
 
-### AI Diff Reviewer (beşinci eklenti)
+### AI Diff Reviewer (beşinci eklenti — gerekli yerel inceleme, isteğe bağlı CI yüzeyi)
 
-Zorunlu Güvenlik İncelemesini yapılandırılmış yerel bir incelemeyle güçlendiren ve isteğe bağlı olarak CI'da pull request'leri kapı altına alan **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**'a (marketplace **"AI Diff Reviewer"**, mevcut sürüm **v2.0.0**) isteğe bağlı bir bağlantı.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, mevcut sürüm **v2.0.0**), zorunlu Final Review güvenlik incelemesine yapılandırılmış bir yerel inceleme kazandırır ve isteğe bağlı olarak CI'da pull request'leri kapı altına alır. 2.3.0 standardından itibaren **yerel inceleme temelin bir parçasıdır**; yalnızca CI yüzeyi isteğe bağlıdır.
 
 - **Kit sayfası:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — tam yetenek referansı
-- **DWP eklentisinin bağladıkları:** upstream skill'in üst varsayılan akışı aracılığıyla yerel Güvenlik İncelemesi güçlendirmesi; gerekli `.review/extension.md` (skill tek başına eksiktir); Flow B isteğe bağlı olarak `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) yükler ve `apply-review`'i geliştirici tarafından çağrılabilir bir yardımcı olarak sunar — asla bir plan görevi değil
-- **Akışlar:** **A — yalnızca yerel** (skill + uzantı) veya **B — çift yüzey** (skill + uzantı + CI Action). Eklenti **MUTLAKA sormalıdır** hangi akışın seçileceğini; asla varsayılan seçmemeli
-- **Yumuşak başarısızlık vs kapı:** eksik skill/uzantı/çağrı hataları asla bloke etmez; **tamamlanmış** bir yerel geçişten gelen `critical` sonuçlar hâlâ Güvenlik İncelemesi sözleşmesini izler
+- **Onboarding'de gerekli (Faz 7a):** vendored skill'in etikete sabitlenmiş kurulumu (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) artı depoya uyarlanmış bir `.review/extension.md` (`generate-extension` aracılığıyla), onboarding onayı altında; hedeflenmiş bir harness yükseltmesi her ikisini de eksik olduğunda uzlaştırır; bir reddediş, beyan edilmiş bir istisna olarak kaydedilir ve kurulana kadar `verify` tarafından raporlanır
+- **Her Final Review'da gerekli:** güvenlik incelemesi, upstream üst varsayılan akışını birikmiş değişiklik kümesi üzerinde çalıştırır ve çıktısını `analysis_results/SECURITY_REVIEW.md` dosyasına ekler; eksik bir skill veya uzantı, kaydedilmiş bir `local reviewer not installed` bulgusudur — çalışma harness'a yazabiliyorsa kurulur — asla sessiz bir atlama değildir; tamamlanmış bir geçişten gelen `critical` bulgular, düzeltilene veya açıkça kabul edilene kadar tamamlanmayı bloke eder
+- **İsteğe bağlı CI yüzeyi (Flow B):** upstream `setup` alt-skill'i aracılığıyla `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`), artı geliştirici tarafından çağrılabilir bir yardımcı olarak `apply-review` — açıkça sunulur, istenmeden asla kurulmaz, asla varsayılan değildir, asla bir plan görevi değildir
+- **Asla bloke etmeme (yalnızca çağrı):** başlayabilen ama hata veren bir yerel inceleme bir kez uyarır, kaydedilir ve devam edilir; görevi asla başarısız kılmaz
 - **Eşlik (Flow B):** paylaşılan `prompt.md` + uzantı metodoloji/önem derecesini hizalar; CI Yineleme Farkındalıklı İnceleme, yerel geçiş tam kalırken 2.+ turları kısaltabilir
-- **Sağlayıcıdan bağımsız güvence:** çekirdek DWP'nin AI Diff Reviewer'a **sıfır** bağımlılığı vardır; asla herkes için otomatik yükleme
-- **Ne zaman teklif edilir:** geliştirici veya ekip yapılandırılmış yerel inceleme ve/veya CI PR birleştirme kapısı ister
+- **Sağlayıcıdan bağımsız güvence:** hiçbir Deep Work Plan akışı ticari bir servis, CI sağlayıcısı veya sır gerektirmez — inceleyici, geliştiricinin kendi kodlama agent'ı tarafından çalıştırılan MIT lisanslı, etikete sabitlenmiş bir skill'dir
+- **Uyumluluk:** `verify`, eksik bir yerel inceleyiciyi 2.3.0 veya daha yeni bir standart beyan eden depolar için bir başarısızlık olarak, eski depolar için ise bir harness-sürüm bulgusu olarak raporlar
 
 ## Skill'ler
 
 Skill'ler adıyla çağrılan yeniden kullanılabilir prosedürlerdir. Bir skill tekrarlanabilir bir iş akışını paketler (test çalıştırma, lint düzeltme, bileşen oluşturma).
 
-Metodoloji küçük bir temel alt-skill seti sunar. Bunlar arasında **author** alt-skill'i bir deponun **kendi kit'ini büyütmesini** sağlar: `/skill-create` ve `/agent-create` ile çağrılır, deponun mevcut `.agents/` düzenini ve kurallarını akıl yürütür, ardından bunlara uyan yeni bir skill, agent veya ince komut delegatörü yazar ve kataloğu senkron tutar. Aynı alt-skill zorunlu Skills & Agents Discovery görevini yürütür.
+Metodoloji küçük bir temel alt-skill seti sunar. Bunlar arasında **author** alt-skill'i bir deponun **kendi kit'ini büyütmesini** sağlar: `/skill-create` ve `/agent-create` ile çağrılır, deponun mevcut `.agents/` düzenini ve kurallarını akıl yürütür, ardından bunlara uyan yeni bir skill, agent veya ince komut delegatörü yazar ve kataloğu senkron tutar. Aynı alt-skill Final Review'in skills uzlaştırma geçişini destekler.
 
 Kit girişi: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 

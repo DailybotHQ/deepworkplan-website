@@ -34,7 +34,7 @@ Addon ini untuk repo dengan setidaknya satu permukaan antarmuka nyata; ia tidak 
 - **`visual-ui` aktif secara default ketika terdeteksi** — sebuah stylesheet dengan CSS custom properties, sebuah konfigurasi Tailwind atau blok `@theme`, komponen UI, atau sebuah panduan brand/gaya. Onboarding menerapkannya dalam mode trust dan sangat merekomendasikannya dalam mode terpandu.
 - **`cli-output` dan `conversational` direkomendasikan ketika terdeteksi — dan selalu ditanyakan, tidak pernah diterapkan otomatis**, bahkan dalam mode trust. Sebuah library perenderan CLI ditambah lapisan display yang disengaja menandakan yang pertama; sebuah SDK platform chat atau lapisan penyusunan pesan menandakan yang kedua. Sebuah argument parser polos dengan print mentah tidak memenuhi syarat.
 
-Ia tidak pernah wajib — sebuah repositori dengan nol addon sepenuhnya konforman, dan Anda selalu dapat menolak profil mana pun atau seluruh addon. Sebuah `DESIGN.md` yang dibuat sebelum profil ada adalah berkas visual satu-profil yang valid: tanpa migrasi.
+Ia tidak pernah wajib — sebuah repositori dengan nol addon opsional sepenuhnya konforman, dan Anda selalu dapat menolak profil mana pun atau seluruh addon. Sebuah `DESIGN.md` yang dibuat sebelum profil ada adalah berkas visual satu-profil yang valid: tanpa migrasi.
 
 ## Command opsional
 

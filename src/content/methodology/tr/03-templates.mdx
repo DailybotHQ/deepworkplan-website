@@ -1,6 +1,6 @@
 ---
 title: Plan ve görev şablonları
-description: "Plan ve görev dosyalarının yapısı, her planın bitmesi gereken üç zorunlu son görev ve bir planı okunabilir tutan README ile PROGRESS kuralları."
+description: "Plan ve görev dosyalarının yapısı, her planın bitmesi gereken Final Review ve bir planı okunabilir tutan README ile PROGRESS kuralları."
 order: 3
 lang: tr
 summary: Planların ve görevlerin diskte nasıl yapılandırıldığı ve onları okunabilir tutan kurallar.
@@ -24,15 +24,15 @@ Bir plan, `.dwp/plans/` altında `PLAN_<slug>/` olarak adlandırılmış bir diz
 
 ## Görev dosyası yapısı
 
-Her görev dosyası `<n>.task_<slug>.md` olarak adlandırılır ve dokuz bölümlü anatomiyi izler: Hedef, Bağlam, Adımlar, Kabul kriterleri, Doğrulama, Dosyalar, Bağımlılıklar, Riskler ve Tamamlama ve Günlük. Bölümler her zaman bu sırayla görünür; böylece her okuyucu nereye bakacağını bilir. Her görev, harekete geçmeden önce planın hedefine yeniden bağlanır; bu da bir ajanın uzun, çok saatlik bir ufukta yönünü kaybetmesini önler.
+Her görev dosyası `<n>.task_<slug>.md` olarak adlandırılır ve on bölümlü anatomiyi izler: Hedef, Bağlam, Dokunulan Yüzey, Adımlar, Kabul kriterleri, Doğrulama, Dosyalar, Bağımlılıklar, Riskler ve Tamamlama ve Günlük. Bölümler her zaman bu sırayla görünür; böylece her okuyucu nereye bakacağını bilir. Her görev, harekete geçmeden önce planın hedefine yeniden bağlanır; bu da bir ajanın uzun, çok saatlik bir ufukta yönünü kaybetmesini önler.
 
-## Üç zorunlu son görev
+## Final Review
 
-Her plan üç standart görevle bitmelidir. Bunlar, işin denetlenmesini, bilginin yakalanmasını ve paydaşların bilgilendirilmesini sağlar:
+Her plan, tam olarak tek bir zorunlu görevle bitmelidir: **Final Review**. Planı üç sıralı geçişle kapatır — güvenlik incelemesinde hiçbir şey gevşetilmez:
 
-1. **Security Review** — planın değiştirdiği her şeyi sırlar, enjeksiyon riskleri ve yeni saldırı yüzeyi açısından denetler ve `docs/SECURITY.md` dosyasını güncel tutar. Güvenlik, sona iliştirilen ayrı bir iş kolu değildir: her plan kendi değişikliklerini denetlenmiş bırakır ve kritik bir bulgu tamamlanmayı engeller.
-2. **Skills & Agents Discovery** — plan sırasında oluşturulan yeniden kullanılabilir skill’leri ve ajanları belirler; böylece iş, bu tek çabanın ötesinde birikir.
-3. **Executive Report** — paydaşlar için yazılmış, teslim edileni geriye kalandan ayıran özlü bir sonuç özeti.
+1. **Güvenlik incelemesi** — planın değiştirdiği her şeyi sırlar, enjeksiyon riskleri ve yeni saldırı yüzeyi açısından denetler ve `docs/SECURITY.md` dosyasını güncel tutar. Güvenlik, sona iliştirilen ayrı bir iş kolu değildir: her plan kendi değişikliklerini denetlenmiş bırakır ve kritik bir bulgu tamamlanmayı engeller.
+2. **Son-durum doğrulaması** — deponun eksiksiz doğrulaması, son düzeltmeden sonra, son ilgili durum üzerinde çalışır ve geçer.
+3. **Skill uzlaştırması** — her görev, kendi skill kararını kanıtı tazeyken kaydetti; inceleme defteri uzlaştırır. Executive Report talep üzerine kullanılabilir kalır.
 
 ## README ve PROGRESS kuralları
 

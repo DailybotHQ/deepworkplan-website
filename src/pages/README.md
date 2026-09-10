@@ -65,6 +65,8 @@ Files without brackets become static routes:
 ```
 pages/about.astro → /about
 pages/contact.astro → /contact
+pages/compare/index.astro → /compare
+pages/faq/index.astro     → /faq
 ```
 
 ### Dynamic Routes

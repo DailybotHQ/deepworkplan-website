@@ -34,7 +34,7 @@ Cet addon est destiné aux dépôts possédant au moins une véritable surface d
 - **`visual-ui` est activé par défaut lorsqu’il est détecté** — une feuille de style avec des propriétés personnalisées CSS, une configuration Tailwind ou un bloc `@theme`, des composants UI, ou un guide de marque/de style. L’onboarding l’applique en mode confiance et le recommande fortement en mode guidé.
 - **`cli-output` et `conversational` sont recommandés lorsqu’ils sont détectés — et toujours soumis à une question, jamais appliqués automatiquement**, même en mode confiance. Une bibliothèque de rendu CLI plus une couche d’affichage délibérée signale le premier ; un SDK de plateforme de chat ou une couche de composition de messages signale le second. Un simple analyseur d’arguments avec des prints bruts ne qualifie pas.
 
-Il n’est jamais requis — un dépôt sans aucun addon est pleinement conforme, et vous pouvez toujours refuser n’importe quel profil ou l’addon entier. Un `DESIGN.md` créé avant l’existence des profils est un fichier visuel à profil unique valide : aucune migration.
+Il n’est jamais requis — un dépôt sans aucun addon optionnel est pleinement conforme, et vous pouvez toujours refuser n’importe quel profil ou l’addon entier. Un `DESIGN.md` créé avant l’existence des profils est un fichier visuel à profil unique valide : aucune migration.
 
 ## Commande optionnelle
 

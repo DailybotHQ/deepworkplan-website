@@ -29,8 +29,8 @@ Transformer un dépôt en une base de code AI-first, pilotée par la spécificat
 4. Générer `docs/` (architecture, standards, tests, sécurité, et davantage) et la doc par module.
 5. Générer `.agents/` (agents, commandes `dwp-*` légères, skills adaptés à la stack, catalogue) + `.claude → .agents`.
 6. Installer le skill et échafauder un `.dwp/` ignoré par git (plans, ébauches) et un espace de travail temporaire `tmp/`.
-7. Proposer les addons facultatifs, puis effectuer une auto-vérification.
+7. Installer la revue locale requise d’AI Diff Reviewer, proposer les addons facultatifs, puis effectuer une auto-vérification.
 
 ## Notes
 
-Un dépôt est pleinement conforme avec zéro addon. La réalité détectée l’emporte toujours sur les hypothèses des presets.
+Un dépôt est pleinement conforme avec zéro addon optionnel ; la revue locale d’AI Diff Reviewer fait partie de la ligne de base depuis le standard 2.3.0. La réalité détectée l’emporte toujours sur les hypothèses des presets.

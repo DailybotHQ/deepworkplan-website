@@ -1,12 +1,12 @@
 ---
 title: "Deep Work Plan — ejecución estructurada para agentes de IA"
 description: "El contexto importa más que el modelo. Deep Work Plan hace de cualquier repositorio un entorno estructurado donde un agente completa trabajo de largo aliento."
-lastUpdated: 2026-06-03
+lastUpdated: 2026-09-10
 ---
 
 ## Los modelos importan. El contexto importa más.
 
-Deep Work Plan convierte cualquier repositorio en un entorno estructurado — contexto, guardrails y un plan duradero — donde cualquier agente de código ejecuta con precisión y completa el trabajo de largo aliento.
+Deep Work Plan convierte cualquier repositorio en un entorno estructurado — contexto, guardarraíles y un plan duradero — donde cualquier agente de código ejecuta con precisión y eficiencia y completa el trabajo de largo alcance.
 
 Deep Work Plan (DWP) es una metodología y un kit abiertos, con licencia MIT, para planificar y ejecutar trabajo de software complejo con agentes de IA. No eliges un método de instalación ni copias una plantilla: copias el prompt de init.md y lo pegas en tu agente:
 
@@ -21,12 +21,63 @@ Deep Work Plan (DWP) es una metodología y un kit abiertos, con licencia MIT, pa
 
 ## El problema y la respuesta
 
-Los agentes de programación de IA son muy eficaces en ráfagas cortas. En trabajo de largo alcance — una migración, un subsistema nuevo, una refactorización en decenas de archivos — se desvían: el contexto se llena, las decisiones se olvidan y las tareas de varias horas se abandonan a medio camino.
+En ráfagas cortas, los agentes de programación son notables. Encomienda a uno una misión de largo alcance — una migración, un subsistema nuevo, una refactorización en decenas de archivos — Pero tras una ejecución larga — una migración, un subsistema nuevo, una refactorización en decenas de archivos — el agente se desvía: el contexto se llena, las decisiones anteriores se desvanecen y horas de trabajo se quedan a medio camino.
 
-Deep Work Plan responde con **desarrollo guiado por especificación**: el plan es la fuente de verdad duradera y los agentes ejecutan contra criterios de aceptación y puertas de validación explícitos. La desviación baja, el trabajo se mantiene verificable y cualquier agente puede reanudarlo entre sesiones. A diferencia de las herramientas guiadas por especificación atadas a un IDE o proveedor (GitHub Spec Kit, Amazon Kiro, Tessl), DWP es independiente de la herramienta y nativa del repositorio.
+Deep Work Plan responde con desarrollo guiado por especificación: un plan duradero, tareas atómicas y puertas de validación que el agente debe pasar. El trabajo sigue siendo verificable — y cualquier agente puede reanudarlo entre sesiones.
 
-También es **ingeniería de harness** hecha portable. Un harness de agente es el andamiaje alrededor de un modelo — contexto, herramientas, bucle de control, barreras, estado reanudable — que lo hace fiable. Deep Work Plan instala ese harness en el propio repositorio, para que cualquier agente pueda pilotar cualquier repo.
+Y como el contexto es el recurso más escaso de tu agente, el harness está diseñado para la eficiencia de tokens: las instrucciones se cargan progresivamente, la validación solo toca lo que cambió y cada tarea aprende localmente — así el trabajo de largo alcance se mantiene asequible.
+---
 
+## Los humanos dirigen. Los agentes ejecutan.
+
+Tú decides qué significa «hecho» y dónde están los límites. El plan lleva tu intención; los agentes ponen las horas — sin supervisión constante, sin corregir cada veinte minutos.
+
+- Tú: intención, criterios de aceptación, revisión
+- Agentes: ejecución, tarea a tarea
+- El plan: el contrato entre ambos
+
+[Lee la metodología](/es/methodology)
+
+---
+
+## Un plan del que los agentes no pueden desviarse.
+
+Las tareas largas llenan el contexto de cualquier modelo. Los detalles se pierden y el agente se desvía. Un plan escrito — tareas atómicas, puertas de validación, estado reanudable — es aquello a lo que vuelve, vuelta tras vuelta.
+
+1. Plan
+2. Tareas atómicas
+3. Puertas de validación
+4. Finalización
+5. Estado reanudable
+
+[Ve el bucle principal](/es/methodology)
+
+---
+
+## Hecho es un contrato, no una intuición.
+
+Cada tarea nombra sus criterios de aceptación y las comprobaciones que deben pasar. El agente no puede sentirse terminado — tiene que pasar, o la tarea sigue abierta.
+
+- Los tests pasan
+- Los tipos se verifican
+- Los criterios de aceptación se cumplen
+- O la tarea sigue abierta
+
+[Lee la especificación](/es/spec)
+
+---
+
+## El repositorio es el harness.
+
+El contexto, las herramientas, los guardarraíles y el estado viven en tu repositorio como archivos planos que cualquier agente puede leer. Sin dependencias, sin cerebro externo — sobrevive a los reinicios de contexto.
+
+- Especificación duradera en disco
+- Puertas de validación, no corazonadas
+- Sobrevive a los reinicios de contexto
+
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
+
+[Ve qué genera la incorporación](/es/quickstart)
 ---
 
 ## Qué obtienes

@@ -1,12 +1,12 @@
 ---
 title: "Deep Work Plan — thực thi có cấu trúc cho các agent lập trình AI"
 description: "Ngữ cảnh quan trọng hơn mô hình. Deep Work Plan biến mọi repository thành một môi trường có cấu trúc nơi mọi agent lập trình hoàn thành công việc dài hơi."
-lastUpdated: 2026-06-03
+lastUpdated: 2026-09-10
 ---
 
 ## Mô hình quan trọng. Ngữ cảnh còn quan trọng hơn.
 
-Deep Work Plan biến mọi repository thành một môi trường có cấu trúc — ngữ cảnh, hàng rào bảo vệ và một kế hoạch bền vững — nơi mọi agent lập trình thực thi với độ chính xác cao và hoàn thành công việc dài hơi.
+Deep Work Plan biến mọi repository thành một môi trường có cấu trúc — ngữ cảnh, rào chắn và một kế hoạch bền vững — nơi bất kỳ agent lập trình nào cũng thực thi chính xác và hiệu quả, và hoàn thành công việc dài hơi.
 
 Deep Work Plan (DWP) là một phương pháp luận và bộ kit mở, cấp phép MIT, để lập kế hoạch và thực thi công việc phần mềm phức tạp cùng các agent AI. Bạn không phải chọn một cách cài đặt hay sao chép một mẫu — bạn sao chép prompt init.md và dán vào agent của mình:
 
@@ -21,12 +21,63 @@ Deep Work Plan (DWP) là một phương pháp luận và bộ kit mở, cấp ph
 
 ## Vấn đề và lời giải
 
-Các agent lập trình AI cực kỳ hiệu quả trong những đợt ngắn. Với công việc dài hơi — một cuộc di trú, một hệ thống con mới, một đợt tái cấu trúc trải khắp hàng chục tệp — chúng trôi dạt: ngữ cảnh đầy lên, các quyết định bị quên đi, và những tác vụ kéo dài nhiều giờ bị bỏ dở giữa chừng.
+Trong những đợt ngắn, agent lập trình rất ấn tượng. Giao cho nó một nhiệm vụ dài hơi — một bản di chuyển, một phân hệ mới, một bản refactor hàng chục tệp — nó sẽ trôi dạt: ngữ cảnh đầy lên, các quyết định trước đó phai nhạt và hàng giờ công việc dở dang giữa chừng.
 
-Deep Work Plan đáp lại bằng **phát triển dựa trên đặc tả**: kế hoạch là nguồn chân lý bền vững, và các agent thực thi dựa trên tiêu chí chấp nhận rõ ràng cùng các cổng kiểm chứng. Sự trôi dạt giảm xuống, công việc luôn kiểm chứng được, và mọi agent đều có thể tiếp tục nó qua các phiên. Khác với các công cụ dựa trên đặc tả bị ràng buộc vào một IDE hay nhà cung cấp (GitHub Spec Kit, Amazon Kiro, Tessl), DWP độc lập với công cụ và thuần repo.
+Deep Work Plan trả lời bằng phát triển theo đặc tả: một kế hoạch bền vững, các tác vụ nguyên tử và cổng kiểm chứng agent buộc phải qua. Công việc vẫn được kiểm chứng — và bất kỳ agent nào cũng có thể tiếp tục qua các phiên.
 
-Nó cũng là **kỹ thuật harness** được làm cho dễ mang theo. Một harness agent là khung giàn bao quanh một mô hình — ngữ cảnh, công cụ, vòng điều khiển, hàng rào bảo vệ, trạng thái có thể tiếp tục — thứ khiến nó đáng tin cậy. Deep Work Plan cài harness đó vào chính repository, nên mọi agent đều có thể điều khiển mọi repo.
+Và vì ngữ cảnh là tài nguyên khan hiếm nhất của agent, harness được thiết kế cho hiệu suất token: hướng dẫn tải tiến tiến, kiểm chứng chỉ chạm vào phần thay đổi và mỗi tác vụ học tại chỗ — công việc dài hơi vẫn khả thi.
+---
 
+## Con người cầm lái. Agent thực thi.
+
+Bạn quyết định “xong” nghĩa là gì và ranh giới ở đâu. Kế hoạch mang theo ý định của bạn; các agent làm phần giờ giấc — không cần trông chừng, không cần sửa mỗi hai mươi phút.
+
+- Bạn: ý định, tiêu chí nghiệm thu, đánh giá
+- Agent: thực thi, từng nhiệm vụ một
+- Kế hoạch: hợp đồng giữa hai bên
+
+[Đọc phương pháp luận](/vi/methodology)
+
+---
+
+## Một kế hoạch mà các tác tử không thể lệch khỏi.
+
+Tác vụ dài làm đầy ngữ cảnh của bất kỳ mô hình nào. Chi tiết rơi rụng và agent trôi dạt. Một kế hoạch viết ra — tác vụ nguyên tử, cổng kiểm chứng, trạng thái có thể tiếp tục — chính là nơi nó quay về, vòng này qua vòng khác.
+
+1. Kế hoạch
+2. Tác vụ nguyên tử
+3. Cổng xác minh
+4. Hoàn thành
+5. Trạng thái có thể tiếp tục
+
+[Xem vòng lặp lõi](/vi/methodology)
+
+---
+
+## Hoàn thành là một hợp đồng, không phải một cảm giác.
+
+Mỗi tác vụ nêu rõ tiêu chí chấp nhận và các bước kiểm tra bắt buộc phải qua. Agent không được “cảm thấy đã xong” — phải qua kiểm tra, nếu không task vẫn mở.
+
+- Các kiểm thử vượt qua
+- Các kiểu được kiểm tra
+- Tiêu chí nghiệm thu được đáp ứng
+- Hoặc nhiệm vụ vẫn mở
+
+[Đọc đặc tả](/vi/spec)
+
+---
+
+## Kho lưu trữ chính là harness.
+
+Ngữ cảnh, công cụ, rào chắn và trạng thái nằm trong repository của bạn dưới dạng tệp thuần mà bất kỳ agent nào cũng đọc được. Không khóa chặt, không bộ não bên ngoài — sống sót qua mọi lần đặt lại ngữ cảnh.
+
+- Bản đặc tả bền vững trên đĩa
+- Cổng kiểm chứng, không phải cảm tính
+- Sống sót qua việc đặt lại ngữ cảnh
+
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
+
+[Xem onboarding tạo ra gì](/vi/quickstart)
 ---
 
 ## Bạn nhận được gì

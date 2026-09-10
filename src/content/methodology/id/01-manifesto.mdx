@@ -24,7 +24,7 @@ Kemampuan sebuah AI coding agent lebih bergantung pada kualitas arah yang diberi
 
 Ini membingkai ulang arti mendelegasikan dengan baik. Delegasi yang baik bukanlah meminta pekerjaan dari agent — melainkan mendefinisikan pekerjaan dengan cukup jelas sehingga dapat dieksekusi dengan benar: tujuan, batasan, konteks yang tanpanya agent akan kekurangan, dan kriteria yang menentukan apakah ia berhasil. Sebagian besar nilai diciptakan sebelum eksekusi dimulai.
 
-Deep Work Plan adalah disiplin melakukan pekerjaan hulu itu dalam bentuk yang tahan lama dan dapat diulang. Kedua pilarnya adalah dua paruh dari arah yang baik: sebuah **spesifikasi** menyatakan seperti apa "benar" itu, dan sebuah **harness** memberi agent konteks dan alat untuk mencapainya. Bersama-sama keduanya mengubah kemampuan mentah sebuah model menjadi rekayasa yang dapat diandalkan — dipertahankan sepanjang tugas yang berjalan berjam-jam, dan dilestarikan lintas agent yang berganti antar sesi.
+Deep Work Plan adalah disiplin melakukan pekerjaan hulu itu dalam bentuk yang tahan lama dan dapat diulang. Kedua pilar pendirinya adalah dua paruh dari arah yang baik: sebuah **spesifikasi** menyatakan seperti apa "benar" itu, dan sebuah **harness** memberi agent konteks dan alat untuk mencapainya. Disiplin ketiga menjaga kombinasi itu tetap terjangkau pada skala besar: **efisiensi token** — karena harness yang benar-benar bekerja adalah harness yang dapat dibawa agent menempuh horizon yang panjang. Bersama-sama keduanya mengubah kemampuan mentah sebuah model menjadi rekayasa yang dapat diandalkan — dipertahankan sepanjang tugas yang berjalan berjam-jam, dan dilestarikan lintas agent yang berganti antar sesi.
 
 ## Spec-driven sejak rancangan
 
@@ -56,9 +56,21 @@ Ini adalah pilar kedua metodologi, dan ia pantas mendapat definisi yang gamblang
 | **Pengaman** | apa yang menjaganya tetap benar | acceptance criteria dan validation gate yang eksplisit |
 | **Status** | bagaimana ia bertahan dari interupsi | rencana, draf, dan log kemajuan `.dwp/` yang di-gitignore |
 
-<RepoAsHarness lang="en" class="not-prose my-10" />
+<RepoAsHarness lang="id" class="not-prose my-10" />
 
 Karena setiap elemen adalah berkas di dalam repositori, bukan fitur sebuah alat, harness ini portabel secara konstruksi. Itulah klaim satu baris yang menjadi landasan seluruh sisa metodologi: *repositori itu sendiri menjadi harness*, sehingga agent mana pun dapat mengemudikan repo mana pun — tanpa framework buatan per-alat.
+
+## Efisien secara konstruksi
+
+Pilar pertama membuat pekerjaan menjadi benar; pilar kedua membuatnya portabel. Pilar ketiga menjaganya tetap **terjangkau** — karena konteks adalah sumber daya paling langka yang dimiliki sebuah coding agent, dan metodologi yang menyia-nyiakannya justru gagal tepat ketika pekerjaan mulai menjadi panjang.
+
+Tiga mekanisme yang mengerjakan hal itu:
+
+- **Pengungkapan progresif.** Agent membaca inti yang esensial, dan setiap bagian panduan atau spesifikasi hanya dimuat ketika pemicu alurnya sendiri terpicu. Agent membawa bab yang ia butuhkan, bukan seluruh bukunya.
+- **Validasi yang dipilih menurut permukaan yang disentuh.** Setiap tugas mencatat apa yang ia ubah dan memilih gate-nya menurut kelas risiko — perubahan kecil yang terisolasi membuktikan dirinya secara sempit; perubahan pada mesin bersama membuktikan dirinya secara luas. Validasi dipilih menurut efeknya, bukan menurut kebiasaan.
+- **Pembelajaran di tingkat tugas.** Ketika sebuah tugas menghasilkan pola yang dapat dipakai ulang, keputusan diambil di dalam tugas itu sendiri, tempat buktinya masih segar — bukan dalam retrospektif yang tak dibaca siapa pun.
+
+Tidak satu pun dari ini diklaim bebas kehilangan secara konstruksi, dan tidak satu pun dipasarkan dengan persentase yang dikarang. Byte instruksi yang dibutuhkan setiap alur diukur dan diterbitkan; klaim perilakunya didukung oleh pengujian ulang dengan kesalahan yang sengaja ditanam. Yang dapat dikatakan dengan gamblang adalah ini: agent membaca lebih sedikit hal yang tidak ia perlukan, menjalankan ulang lebih sedikit hal yang tidak berubah, dan lebih sering mengambil keputusan tepat di tempat bukti berada — dan penghematan itu terakumulasi sepanjang horizon yang panjang.
 
 ## Mengapa eksekusi otonom yang terstruktur penting
 

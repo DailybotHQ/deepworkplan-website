@@ -50,7 +50,7 @@ Oba pliki MUSZĄ być zapisywane atomowo: zapis do pliku tymczasowego w tym samy
 ```json
 {
   "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.2.0",
+  "spec_version": "2.3.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
@@ -146,7 +146,7 @@ Zadanie NIE MOŻE być oznaczone jako `completed` w `state.json`, gdy którykolw
 
 Ukończone zadanie POWINNO zawierać rekord `outcome`: co `tried` (próbowano), co `failed` (zawiodło), co `worked` (zadziałało) oraz swobodne `notes` (notatki). Każdy wpis należy ograniczyć do jednej linii.
 
-Rekordy wyników czynią ukończony plan odtwarzalną **pamięcią epizodyczną**: agent (lub platforma indeksowania pamięci) może później przypomnieć sobie, jak rozwiązano problem, a nie tylko że tak się stało. Zasilają one obowiązkowe zadanie wykrywania Skills i Agentów, które POWINNO je czytać podczas wyszukiwania wzorców. Na platformach takich jak Hermes, które indeksują pamięć agenta, rekordy wyników w `state.json` sprawiają, że ukończone plany stają się bezpośrednio odtwarzalne w przyszłych sesjach.
+Rekordy wyników czynią ukończony plan odtwarzalną **pamięcią epizodyczną**: agent (lub platforma indeksowania pamięci) może później przypomnieć sobie, jak rozwiązano problem, a nie tylko że tak się stało. Zasilają one rozstrzygnięcia dotyczące skilli zapisywane lokalnie w zadaniach oraz uzgodnienie decyzji dotyczących skilli w Final Review, które czyta je podczas wyszukiwania wzorców. Na platformach takich jak Hermes, które indeksują pamięć agenta, rekordy wyników w `state.json` sprawiają, że ukończone plany stają się bezpośrednio odtwarzalne w przyszłych sesjach.
 
 ### Punkt kontrolny i stan zablokowania
 

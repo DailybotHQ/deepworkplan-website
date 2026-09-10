@@ -23,4 +23,4 @@ Rund 85 % des Devcontainers sind ein stabiles, gemeinsames Grundgerüst; die üb
 
 ## Hinweise
 
-Opt-in und nie erforderlich. Ein Repository ist mit null Addons vollständig konform.
+Opt-in und nie erforderlich. Ein Repository ist mit null optionalen Addons vollständig konform.

@@ -23,4 +23,4 @@ Cerca del 85% del devcontainer es un esqueleto com√∫n estable; el 15% restante ‚
 
 ## Notas
 
-Opcional y nunca obligatorio. Un repo es plenamente conforme con cero addons.
+Opcional y nunca obligatorio. Un repo es plenamente conforme con cero addons opcionales.

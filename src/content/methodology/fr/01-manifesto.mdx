@@ -24,7 +24,19 @@ La capacité d’un agent de code IA dépend moins du modèle que de la qualité
 
 Cela redéfinit ce que signifie bien déléguer. Une bonne délégation, ce n’est pas demander du travail à un agent — c’est définir le travail assez clairement pour qu’il puisse être exécuté correctement : l’objectif, les contraintes, le contexte qui manquerait sinon à l’agent, et les critères qui décident s’il a réussi. L’essentiel de la valeur se crée avant que l’exécution ne commence.
 
-Deep Work Plan est la discipline qui consiste à accomplir ce travail en amont sous une forme durable et reproductible. Ses deux piliers sont les deux moitiés d’une bonne direction : une **spécification** énonce à quoi ressemble le « correct », et un **harness** donne à l’agent le contexte et les outils pour l’atteindre. Ensemble, ils convertissent la capacité brute d’un modèle en ingénierie fiable — soutenue tout au long d’une tâche qui dure des heures, et préservée entre des agents qui changent d’une session à l’autre.
+Deep Work Plan est la discipline qui consiste à accomplir ce travail en amont sous une forme durable et reproductible. Ses deux piliers fondateurs sont les deux moitiés d’une bonne direction : une **spécification** énonce à quoi ressemble le « correct », et un **harness** donne à l’agent le contexte et les outils pour l’atteindre. Ensemble, ils convertissent la capacité brute d’un modèle en ingénierie fiable — soutenue tout au long d’une tâche qui dure des heures, et préservée entre des agents qui changent d’une session à l’autre. Une troisième discipline maintient l’ensemble abordable à l’échelle : l’**efficacité des tokens**, car un harness qui fonctionne est un harness que l’agent peut porter sur un long horizon.
+
+## Efficace par construction
+
+Le premier pilier rend le travail correct ; le second le rend portable. Le troisième le maintient **abordable** — parce que le contexte est la ressource la plus rare qu’un agent de codage possède, et une méthodologie qui le gaspille échoue précisément quand le travail s’allonge.
+
+Trois mécanismes font le travail :
+
+- **Divulgation progressive.** L’agent lit un noyau essentiel, et chaque guide ou section de la spécification se charge uniquement lorsque le déclencheur du flux se déclenche. L’agent porte le chapitre dont il a besoin, pas le livre entier.
+- **Validation sélectionnée par la surface touchée.** Chaque tâche enregistre ce qu’elle modifie et choisit sa porte par classe de risque — un changement petit et isolé se prouve de manière délimitée ; un changement de machinerie partagée se prouve largement.
+- **Apprentissage local par tâche.** Lorsqu’une tâche produit un modèle réutilisable, la décision se prend en son sein, où la preuve est fraîche — pas dans une rétrospective que personne ne lit.
+
+Rien de tout cela ne prétend être sans perte par construction, ni n’est promu avec des pourcentages inventés. Ce qui peut se dire simplement : l’agent lit moins ce dont il n’a pas besoin, réexécute moins ce qui n’a pas changé et décide davantage là où se trouve la preuve — et ces économies se composent sur un long horizon.
 
 ## Piloté par la spécification, par conception
 

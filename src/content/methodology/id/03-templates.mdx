@@ -1,6 +1,6 @@
 ---
 title: Plan and task templates
-description: "Struktur berkas rencana dan tugas, tiga tugas akhir wajib yang harus mengakhiri setiap rencana, serta konvensi README dan PROGRESS yang menjaga rencana tetap mudah dibaca."
+description: "Struktur berkas rencana dan tugas, Final Review yang harus mengakhiri setiap rencana, serta konvensi README dan PROGRESS yang menjaga rencana tetap mudah dibaca."
 order: 3
 lang: id
 summary: Bagaimana rencana dan tugas distrukturkan di disk, dan konvensi yang menjaganya tetap mudah dibaca.
@@ -14,7 +14,7 @@ Sebuah Deep Work Plan adalah sebuah direktori berkas Markdown. Bentuk direktori 
 
 ## Struktur rencana
 
-<PlanTree lang="en" class="not-prose my-10" />
+<PlanTree lang="id" class="not-prose my-10" />
 
 Sebuah rencana adalah sebuah direktori di bawah `.dwp/plans/` bernama `PLAN_<slug>/`. Ia berisi:
 
@@ -24,15 +24,15 @@ Sebuah rencana adalah sebuah direktori di bawah `.dwp/plans/` bernama `PLAN_<slu
 
 ## Struktur berkas tugas
 
-Setiap berkas tugas bernama `<n>.task_<slug>.md` dan mengikuti anatomi sembilan bagian: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, dan Completion & Log. Bagian-bagian itu selalu muncul dalam urutan tersebut sehingga setiap pembaca tahu di mana harus mencari. Setiap tugas berlabuh kembali ke tujuan rencana sebelum ia bertindak, yang mencegah agent menyimpang sepanjang rentang panjang yang berjam-jam.
+Setiap berkas tugas bernama `<n>.task_<slug>.md` dan mengikuti anatomi sepuluh bagian: Goal, Context, Touched Surface, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, dan Completion & Log. Bagian-bagian itu selalu muncul dalam urutan tersebut sehingga setiap pembaca tahu di mana harus mencari. Setiap tugas berlabuh kembali ke tujuan rencana sebelum ia bertindak, yang mencegah agent menyimpang sepanjang rentang panjang yang berjam-jam.
 
-## Tiga tugas akhir wajib
+## Final Review
 
-Setiap rencana harus diakhiri dengan tiga tugas standar. Ketiganya memastikan bahwa pekerjaan teraudit, pengetahuan tertangkap, dan pemangku kepentingan diberi tahu:
+Setiap rencana harus diakhiri dengan tepat satu tugas wajib: **Final Review**. Ia menutup rencana dalam tiga tahap berurutan — tidak ada bagian dari pemeriksaan keamanan yang dilonggarkan:
 
-1. **Security Review** — mengaudit segala sesuatu yang diubah rencana untuk secret, risiko injeksi, dan permukaan serangan baru, serta menjaga `docs/SECURITY.md` tetap mutakhir. Keamanan bukanlah alur kerja terpisah yang ditempelkan di akhir: setiap rencana meninggalkan perubahannya sendiri dalam keadaan teraudit, dan sebuah temuan kritis memblokir penyelesaian.
-2. **Skills & Agents Discovery** — mengidentifikasi skill dan agent yang dapat dipakai ulang yang dibuat selama rencana, sehingga pekerjaan berlipat melampaui upaya tunggal ini.
-3. **Executive Report** — ringkasan padat tentang hasil yang ditulis untuk pemangku kepentingan, membedakan apa yang sudah diserahkan dari apa yang tersisa.
+1. **Pemeriksaan keamanan** — mengaudit segala sesuatu yang diubah rencana untuk secret, risiko injeksi, dan permukaan serangan baru, serta menjaga `docs/SECURITY.md` tetap mutakhir. Keamanan bukanlah alur kerja terpisah yang ditempelkan di akhir: setiap rencana meninggalkan perubahannya sendiri dalam keadaan teraudit, dan sebuah temuan kritis memblokir penyelesaian.
+2. **Validasi status akhir** — validasi penuh repositori berjalan dan lulus pada status relevan terakhir, setelah perbaikan final.
+3. **Rekonsiliasi skills** — setiap tugas telah mencatat disposisi skills-nya sendiri selagi buktinya masih segar; tinjauan ini merekonsiliasi catatannya. Executive Report tetap tersedia atas permintaan.
 
 ## Konvensi README dan PROGRESS
 

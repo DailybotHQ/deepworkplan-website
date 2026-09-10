@@ -1,6 +1,6 @@
 ---
 title: Il core loop
-description: "Il flusso create, execute, refine, resume, status e verify, la directory di output .dwp esclusa da git, l’anatomia in nove sezioni di un’attività e come funziona la validazione."
+description: "Il flusso create, execute, refine, resume, status e verify, la directory di output .dwp esclusa da git, l’anatomia in dieci sezioni di un’attività e come funziona la validazione."
 order: 2
 lang: it
 summary: Come le operazioni fondamentali di DWP guidano un piano dall’obiettivo al completamento verificato.
@@ -40,22 +40,23 @@ Tutti gli artefatti DWP vivono in una directory `.dwp/` esclusa da git nella rad
 └── config.yaml
 ```
 
-## L’anatomia in nove sezioni di un’attività
+## L’anatomia in dieci sezioni di un’attività
 
 <TaskAnatomy lang="it" class="not-prose my-10" />
 
-Ogni file di attività contiene queste nove sezioni, nell’ordine. La struttura garantisce che ogni unità di lavoro sia autosufficiente e revisionabile:
+Ogni file di attività contiene queste dieci sezioni, nell’ordine. La struttura garantisce che ogni unità di lavoro sia autosufficiente e revisionabile:
 
 1. **Goal** — un paragrafo che dichiara cosa l’attività realizza.
 2. **Context** — contesto, link e il perché questa attività esiste.
-3. **Steps** — azioni ordinate e concrete da svolgere.
-4. **Acceptance criteria** — una checklist di condizioni che definiscono il completamento.
-5. **Validation** — comandi o test da eseguire per verificare il lavoro.
-6. **Files** — percorsi che ci si aspetta vengano creati o modificati.
-7. **Dependencies** — altre attività o prerequisiti esterni.
-8. **Risks** — cosa potrebbe andare storto e le relative mitigazioni.
-9. **Completion & Log** — un marcatore di stato più note cronologiche.
+3. **Superficie toccata**: ciò che l’attività modifica e la classe di rischio che seleziona la sua validazione.
+4. **Steps** — azioni ordinate e concrete da svolgere.
+5. **Acceptance criteria** — una checklist di condizioni che definiscono il completamento.
+6. **Validation** — comandi o test da eseguire per verificare il lavoro.
+7. **Files** — percorsi che ci si aspetta vengano creati o modificati.
+8. **Dependencies** — altre attività o prerequisiti esterni.
+9. **Risks** — cosa potrebbe andare storto e le relative mitigazioni.
+10. **Completion & Log** — un marcatore di stato più note cronologiche.
 
 ## Validazione, completamento e ripresa
 
-La validazione è parte dell’attività, non un ripensamento: ogni attività indica i comandi o i test che ne provano il completamento e l’agente li esegue prima di segnare il completamento. I test sono di prima classe qui — un’attività che aggiunge nuove funzionalità o modifica il comportamento deve aggiungere o aggiornare test automatizzati per quel comportamento ed eseguire il controllo completo di qualità del codice del repository (test più lint e type-check), non limitarsi a confermare che la build riesce; i test esistenti devono restare verdi, aggiornati al comportamento previsto anziché saltati. La sicurezza è di prima classe allo stesso modo — qualsiasi attività che tocchi l'autenticazione, la gestione dell'input, i segreti, la superficie di rete o le dipendenze porta con sé le aspettative di sicurezza di quella modifica nei propri criteri di accettazione e mantiene ogni commit privo di segreti, e ogni piano termina con una Security Review che verifica l'intero insieme di modifiche. Il completamento è registrato con un marcatore di stato esplicito (`[ ]` non iniziata, `[~]` in corso, `[x]` completata, `[!]` bloccata) nella sezione Completion & Log. La ripresa si basa su questi marcatori e sul log dei progressi — un agente può ricostruire esattamente dove il piano si è fermato e proseguire dalla prima attività incompleta senza rifare il lavoro già concluso.
+La validazione è parte dell’attività, non un ripensamento: ogni attività indica i comandi o i test che ne provano il completamento e l’agente li esegue prima di segnare il completamento. I test sono di prima classe qui — un’attività che aggiunge nuove funzionalità o modifica il comportamento deve aggiungere o aggiornare test automatizzati per quel comportamento ed eseguire il controllo completo di qualità del codice del repository (test più lint e type-check), non limitarsi a confermare che la build riesce; i test esistenti devono restare verdi, aggiornati al comportamento previsto anziché saltati. La sicurezza è di prima classe allo stesso modo — qualsiasi attività che tocchi l'autenticazione, la gestione dell'input, i segreti, la superficie di rete o le dipendenze porta con sé le aspettative di sicurezza di quella modifica nei propri criteri di accettazione e mantiene ogni commit privo di segreti, e ogni piano si chiude con il Final Review — il passaggio di sicurezza sull'intero insieme di modifiche, la validazione completa sullo stato finale e la riconciliazione delle decisioni sulle skill. Il completamento è registrato con un marcatore di stato esplicito (`[ ]` non iniziata, `[~]` in corso, `[x]` completata, `[!]` bloccata) nella sezione Completion & Log. La ripresa si basa su questi marcatori e sul log dei progressi — un agente può ricostruire esattamente dove il piano si è fermato e proseguire dalla prima attività incompleta senza rifare il lavoro già concluso.

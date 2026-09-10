@@ -8,11 +8,13 @@ lastUpdated: 2026-05-30
 
 Deep Work Plan (DWP) ist eine offene, framework-agnostische Methodik, um strukturierte, autonome Engineering-Arbeit mit KI-Coding-Agenten auszuführen. Sie verwandelt ein vages Ziel in einen prüfbaren Plan, den ein Agent ausführen, pausieren, wiederaufnehmen und über den er berichten kann — ohne den Kontext zu verlieren.
 
-DWP ruht auf zwei Pfeilern.
+DWP ruht auf drei Pfeilern.
 
 **Spec-driven Development.** Statt einen Chat-Verlauf als Quelle der Wahrheit zu behandeln, schreiben Sie zuerst auf, *was* wahr sein soll — Ziel, Umfang, Akzeptanzkriterien und die Prüfungen, die belegen, dass es erledigt ist —, und der Agent führt gegen diese Spezifikation aus. Bei DWP *ist* der Plan die Spezifikation: Plan → atomare Aufgaben → Validierungs-Gates → Completion. Die Spezifikation zuerst zu schreiben reduziert das Abdriften (der Agent wird an festgelegten Kriterien gemessen), macht die Arbeit überprüfbar (jedes Gate besteht oder fällt durch) und macht sie wiederaufnehmbar (die Spezifikation überdauert jede Sitzung oder jeden Agenten). Werkzeugunabhängig und repo-nativ, unterscheidet es sich von werkzeuggebundenen spec-driven Systemen wie GitHub Spec Kit, Amazon Kiro und Tessl.
 
 **Harness Engineering — das Repository wird zum Harness.** Ein Sprachmodell allein ist nur ein Textvorhersager; was es zu einem verlässlichen Ingenieur macht, ist das *Harness* um es herum — Kontext, Werkzeuge, eine Steuerschleife, Leitplanken und ein dauerhafter Zustand. Harness Engineering heißt, dieses Gerüst bewusst zu entwerfen. Die Position von DWP ist, dass es im Repository leben sollte, nicht in einem Werkzeug: Kontext als `AGENTS.md` + `docs/`, Werkzeuge als das `.agents/`-Kit, die Steuerschleife als der Plan, Leitplanken als die Validierungs-Gates und Zustand als das per gitignore ausgeschlossene `.dwp/`. Weil jeder Teil eine Datei im Repository ist, ist das Harness portabel — sodass jeder Agent jedes Repository steuern kann.
+
+**Token-Effizienz — auf lange Horizonte ausgelegt, durch Konstruktion effizient.** Kontext ist die knappste Ressource eines Coding-Agenten, und eine Methodik, die ihn verschwendet, scheitert genau dann, wenn die Arbeit lang wird. DWP lädt Anweisungen schrittweise nach — jeder Leitfaden lädt, wenn sein Auslöser feuert —, wählt die Validierung aus dem, was jede Aufgabe tatsächlich berührt, und entscheidet Skills aufgaben-lokal. Die Anweisungsbytes, die jeder Ablauf benötigt, werden gemessen und veröffentlicht; keine erfundenen Token-Prozentsätze.
 
 Die Methodik wird in fünf Kapiteln erklärt:
 

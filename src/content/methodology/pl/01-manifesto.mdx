@@ -24,7 +24,7 @@ Możliwości agenta kodującego AI zależą mniej od modelu niż od jakości kie
 
 To na nowo ujmuje, co znaczy dobrze delegować. Dobra delegacja to nie proszenie agenta o pracę — to definiowanie pracy na tyle jasno, by mogła zostać wykonana poprawnie: cel, ograniczenia, kontekst, którego agentowi inaczej brakuje, oraz kryteria rozstrzygające, czy się powiodło. Większość wartości powstaje, zanim rozpocznie się realizacja.
 
-Deep Work Plan to dyscyplina wykonywania tej wstępnej pracy w trwałej, powtarzalnej formie. Jego dwa filary to dwie połowy dobrego kierunku: **specyfikacja** określa, jak wygląda „poprawne”, a **harness** daje agentowi kontekst i narzędzia, by to osiągnąć. Razem zamieniają surową zdolność modelu w niezawodną inżynierię — podtrzymywaną przez zadanie trwające godzinami i zachowaną pomiędzy agentami, którzy zmieniają się między sesjami.
+Deep Work Plan to dyscyplina wykonywania tej wstępnej pracy w trwałej, powtarzalnej formie. Jego dwa filary założycielskie to dwie połowy dobrego kierunku: **specyfikacja** określa, jak wygląda „poprawne”, a **harness** daje agentowi kontekst i narzędzia, by to osiągnąć. Trzecia dyscyplina sprawia, że ta kombinacja pozostaje przystępna kosztowo w skali: **efektywność tokenów** — bo harness, który działa, to taki, który agent jest w stanie nieść przez długi dystans. Razem zamieniają surową zdolność modelu w niezawodną inżynierię — podtrzymywaną przez zadanie trwające godzinami i zachowaną pomiędzy agentami, którzy zmieniają się między sesjami.
 
 ## Spec-driven z założenia
 
@@ -59,6 +59,18 @@ To drugi filar metodyki i zasługuje na jasną definicję — „harness” sta�
 <RepoAsHarness lang="pl" class="not-prose my-10" />
 
 Ponieważ każdy element jest plikiem w repozytorium, a nie funkcją narzędzia, harness jest przenośny z samej konstrukcji. To jednolinijkowa teza, na której opiera się reszta metodyki: *samo repozytorium staje się harness*, więc dowolny agent może pilotować dowolne repo — bez autorskiego frameworka per narzędzie.
+
+## Wydajność z samej konstrukcji
+
+Pierwszy filar czyni pracę poprawną; drugi czyni ją przenośną. Trzeci dba o to, by pozostawała **przystępna kosztowo** — bo kontekst to najrzadszy zasób, jakim dysponuje agent kodujący, a metodyka, która go marnuje, zawodzi dokładnie wtedy, gdy praca robi się długa.
+
+Pracę tę wykonują trzy mechanizmy:
+
+- **Stopniowe odsłanianie.** Agent czyta istotny rdzeń, a każdy rozdział przewodnika czy specyfikacji ładuje się dopiero, gdy zadziała własny wyzwalacz danego przepływu. Agent niesie rozdział, którego potrzebuje — nie całą książkę.
+- **Walidacja dobrana według powierzchni dotkniętej.** Każde zadanie zapisuje, co zmienia, i wybiera swoją bramkę według klasy ryzyka — mała, izolowana zmiana wymaga wąskiego dowodu, a zmiana we wspólnej mechanice dowodu szerokiego. O walidacji decyduje skutek, nie nawyk.
+- **Uczenie wewnątrz zadania.** Kiedy zadanie wytwarza wzorzec nadający się do ponownego użycia, decyzja zapada wewnątrz tego zadania, gdzie dowody są świeże — a nie podczas retrospektywy, której nikt nie czyta.
+
+Nic z tego nie jest obiecane jako wolne od strat z samej konstrukcji i nic z tego nie jest reklamowane wymyślonymi procentami. Liczba bajtów instrukcji, których wymaga każdy przepływ, jest mierzona i publikowana; twierdzenia o zachowaniu opierają się na odtworzonych przebiegach z podłożonymi błędami. Mówiąc wprost: agent czyta mniej tego, czego nie potrzebuje, ponownie uruchamia mniej tego, co się nie zmieniło, i częściej decyduje tam, gdzie leżą dowody — a te oszczędności rosną na długim dystansie.
 
 ## Dlaczego uporządkowana, autonomiczna realizacja ma znaczenie
 

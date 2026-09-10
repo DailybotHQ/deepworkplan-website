@@ -50,7 +50,7 @@ Both files MUST be written atomically: write to a temporary file in the same dir
 ```json
 {
   "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.2.0",
+  "spec_version": "2.3.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
@@ -146,7 +146,7 @@ A task MUST NOT be marked `completed` in `state.json` while any of its gate reco
 
 A `completed` task SHOULD carry an `outcome` record: what was `tried`, what `failed`, what `worked`, and free-form `notes`. Keep each entry to one line.
 
-Outcome records make a finished plan retrievable **episodic memory**: an agent (or a memory-indexing platform) can later recall how a problem was solved, not just that it was. They feed the mandatory Skills & Agents Discovery task, which SHOULD read them when mining patterns. On platforms such as Hermes that index agent memory, outcome records in `state.json` make completed plans directly retrievable across future sessions.
+Outcome records make a finished plan retrievable **episodic memory**: an agent (or a memory-indexing platform) can later recall how a problem was solved, not just that it was. They feed task-local skills dispositions and the Final Review's skills reconciliation, which reads them when mining patterns. On platforms such as Hermes that index agent memory, outcome records in `state.json` make completed plans directly retrievable across future sessions.
 
 ### Checkpoint and blocked state
 

@@ -31,6 +31,9 @@ methodology. Treat this as a structured engineering task — a Deep Work Plan �
 
 ## 0. Read the methodology and specification
 
+The methodology stands on three pillars: **spec-driven development** (the written spec is the source of truth), **harness engineering** (the repository carries the context, tools, guardrails, and state), and **token efficiency** (the harness loads progressively and validation touches what changed — long-horizon work by design, efficient by construction).
+
+
 Before changing anything, read the canonical sources so you understand the standard you are adopting:
 
 - Methodology: https://deepworkplan.com/methodology.md
@@ -47,6 +50,12 @@ First understand the repository, then propose what you will do.
 - **Classify the archetype.** An individual repository (the common case), an orchestrator hub, or an
   agent workspace — the long-lived home of an autonomous agent, where git is recommended rather than
   assumed — with the evidence.
+- **Recognize an existing DWP installation.** If `AGENTS.md` and `.agents/` already exist, look for the
+  `DWP standard:` provenance line. A harness that predates the current standard gets a **targeted
+  upgrade**: reinstalling the skill is the whole upgrade path, and onboarding reconciles only the
+  missing or outdated pieces — every handwritten section, custom skill, and in-flight plan is
+  preserved, and a second run changes nothing. Plans authored under an earlier version keep their
+  recorded shape and close with their own final tasks; they are never forced into the new one.
 - **Inventory what already exists.** `AGENTS.md`, `CLAUDE.md`, `docs/`, any `.agents/` or skills/agents
   setup, `.dwp/`, and `.gitignore`. Note anything that already does part of this job.
 - **Propose the onboarding plan.** Present a concise list: files you will create, files you will
@@ -109,6 +118,42 @@ Or clone and run the setup script:
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh
 ```
 
+### Current standard and execution model
+
+The current repository-facing standard is **DWP 2.3.0**, implemented by the
+Deep Work Plan skill release installed above. The current skill pack includes
+the router and eight sub-skills: `create`, `execute`, `refine`, `resume`,
+`status`, `verify`, `onboard`, and `author`. The standard is deliberately
+proportional: use an inline goal, acceptance criteria, and gate for a small
+single-concern change; use a full plan for multi-step work; and use the deep
+tier when work spans parallel groups, child repositories, or unattended
+sessions.
+
+For a full plan, the repository is the durable execution surface. The plan
+contains atomic tasks, a **Touched Surface** that explains what changed and
+which consumers are affected, acceptance criteria, and a validation gate
+selected from the repository's documented test map. A new plan writes its
+identity manifest first, records its analysis, creates the task list, and flips
+the live state last so an interrupted creation can be recovered instead of
+guessed at. When the state layer is present, `manifest.json` describes the
+plan and `state.json` records checkpoints, task status, gate results, and
+blockers.
+
+Every plan has one mandatory closing task: **Final Review**. It runs the
+security pass over the accumulated change set, including the required local
+AI Diff Reviewer review, validates the final repository state, reconciles the
+skills used by the tasks, and records the evidence and limitations. The local
+review skill is installed at a pinned release; the current documented command
+uses `DailybotHQ/ai-diff-reviewer@v2.0.1`. The GitHub Action is a separate,
+optional CI surface and is never required for the core methodology.
+
+Unattended execution is supported only for a plan approved in advance. It
+requires the machine-readable state layer, a declared DWP standard, bounded
+authority, and explicit stop conditions. If a gate fails outside the planned
+repair scope, the repository diverges, or a new approval or credential is
+needed, the agent records the blocker and stops. No flow weakens a validation
+gate to claim completion.
+
 ## 3. Onboard the repository (reasoned and non-destructive)
 
 Invoke the onboard sub-skill (`/deepworkplan-onboard`). Reason about the real repo and adapt everything
@@ -140,11 +185,15 @@ methodology) instead of overwriting — and confirm with the user before replaci
 6. **`.dwp/` + `tmp/`.** Scaffold a gitignored `.dwp/` with `plans/` and `drafts/`, plus a `tmp/`
    scratch space — both added to `.gitignore` non-destructively (append, never rewrite).
 
-## 4. Offer the opt-in addons
+## 4. Install the required local review, then offer the opt-in addons
 
-After the baseline onboarding, enumerate the five addons (devcontainer, Dailybot, dependency-upgrade,
-design-system, AI Diff Reviewer) and offer each as an explicit opt-in. A repository is fully
-conformant with **zero** addons — never auto-install them.
+After the baseline onboarding, install the **AI Diff Reviewer local review** (Phase 7a — required
+since standard 2.3.0): the tag-pinned vendored skill
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus a
+repo-tailored `.review/extension.md` via `generate-extension`, under the onboarding consent. Then
+enumerate the four optional addons (devcontainer, Dailybot, dependency-upgrade, design-system) and
+offer each as an explicit opt-in. A repository is fully conformant with **zero** optional addons —
+never auto-install those.
 
 - **Devcontainer support** — a reproducible, isolated dev container with persistent AI-CLI auth.
 - **Dailybot integration** — four lifecycle events (kickoff, significant task, blocked, completion) as best-effort progress reports for teams already using Dailybot, with optional autonomous hook enforcement (`dailybot-cli >= 3.7.0`). Installing the paired Dailybot agent skill (3.10.3) also exposes chat, check-ins, forms authoring, ask AI, per-repo API keys, and more — the addon wires only reporting into DWP execution. The core methodology has zero Dailybot dependency.
@@ -154,12 +203,13 @@ conformant with **zero** addons — never auto-install them.
   (not offered for pure libraries, headless services, or infra-only repos). Three profiles stack in
   one file: visual-ui (default-on when detected), cli-output, and conversational — the latter two
   are always asked, never auto-applied.
-- **AI Diff Reviewer** — augments the mandatory Security Review with a structured local review via
-  [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + required
-  `.review/extension.md`). Always ask **Flow A** (local-only) vs **Flow B** (dual-surface CI gate
-  with `pr-review.yml`); never default. Soft-fail only on missing skill/extension/invocation errors;
-  `critical` findings from a completed local pass still block Security Review completion. The core
-  methodology has zero AI Diff Reviewer dependency.
+- **AI Diff Reviewer** — the required local review (not an opt-in): every Final Review's security
+  pass runs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + required
+  `.review/extension.md`) over the plan's accumulated change set. A missing skill or extension is a
+  recorded `local reviewer not installed` finding, installed when the run may write to the harness —
+  never a silent skip; invocation errors soft-fail; `critical` findings from a completed pass still
+  block completion. **Flow B** (the CI gate with `pr-review.yml`) is offered as an explicit opt-in and
+  never installed unrequested. No Deep Work Plan flow requires a commercial service, CI provider, or secret.
 
 ## 5. Evolve the kit (author sub-skill)
 
@@ -179,9 +229,10 @@ Generate Deep Work Plans for any task and run them task by task:
 - `/dwp-resume` — reconstruct state and continue an interrupted plan.
 - `/dwp-verify` — objective pass/fail conformance report for the repo (or a specific plan).
 
-Every plan ends with three mandatory final tasks — a **Security Review** of the plan's own
-changes (keeping `docs/SECURITY.md` current; a critical finding blocks completion), Skills &
-Agents Discovery, and the Executive Report.
+Every plan closes with the Final Review — a security pass over the plan's own
+changes (keeping `docs/SECURITY.md` current; a critical finding blocks completion), the
+final-state validation, and the reconciliation of skills decisions. The Executive Report
+remains available on request.
 
 ## 7. Verify
 

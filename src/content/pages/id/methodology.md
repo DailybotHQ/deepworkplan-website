@@ -8,11 +8,13 @@ lastUpdated: 2026-05-30
 
 Deep Work Plan (DWP) adalah metodologi terbuka dan agnostik terhadap framework untuk menjalankan pekerjaan teknik yang terstruktur dan otonom dengan AI coding agent. Ia mengubah tujuan yang samar menjadi rencana yang dapat ditinjau yang dapat dieksekusi, dijeda, dilanjutkan, dan dilaporkan oleh agent — tanpa kehilangan konteks.
 
-DWP berpijak pada dua pilar.
+DWP berpijak pada tiga pilar.
 
 **Spec-driven development.** Alih-alih memperlakukan transkrip obrolan sebagai sumber kebenaran, Anda terlebih dahulu menuliskan *apa* yang harus benar — tujuan, lingkup, acceptance criteria, dan pemeriksaan yang membuktikan bahwa pekerjaan selesai — dan agent mengeksekusi terhadap spesifikasi itu. Dalam DWP, rencana *adalah* spec: rencana → tugas atomik → validation gate → penyelesaian. Menulis spec terlebih dahulu mengurangi penyimpangan (agent diukur terhadap kriteria yang dinyatakan), membuat pekerjaan dapat diverifikasi (setiap gate lulus atau gagal), dan membuatnya dapat dilanjutkan (spec bertahan melampaui sesi atau agent mana pun). Agnostik terhadap alat dan repo-native, ia berbeda dari sistem spec-driven yang terikat alat seperti GitHub Spec Kit, Amazon Kiro, dan Tessl.
 
 **Harness engineering — repositori menjadi harness.** Sebuah language model semata hanyalah peramal teks; yang membuatnya menjadi insinyur yang andal adalah *harness* di sekelilingnya — konteks, alat, sebuah control loop, pengaman, dan status yang persisten. Harness engineering adalah merancang perancah itu secara sengaja. Posisi DWP adalah bahwa harness itu seharusnya berada di repositori, bukan di sebuah alat: konteks sebagai `AGENTS.md` + `docs/`, alat sebagai kit `.agents/`, control loop sebagai rencana, pengaman sebagai validation gate, dan status sebagai `.dwp/` yang di-gitignore. Karena setiap bagiannya adalah berkas di dalam repo, harness ini portabel — sehingga agent mana pun dapat mengemudikan repo mana pun.
+
+**Efisiensi token — berhorizon panjang secara desain, efisien secara konstruksi.** Konteks adalah sumber daya paling langka yang dimiliki sebuah coding agent, dan metodologi yang menyia-nyiakannya gagal tepat ketika pekerjaan menjadi panjang. DWP memuat instruksi secara progresif — setiap panduan dimuat ketika pemicunya terpicu — memilih validasi dari apa yang sebenarnya disentuh setiap tugas, dan memutuskan skills di tingkat tugas. Byte instruksi yang dibutuhkan setiap alur diukur dan diterbitkan; tanpa persentase token yang dikarang.
 
 Metodologi ini dijelaskan dalam lima bab:
 

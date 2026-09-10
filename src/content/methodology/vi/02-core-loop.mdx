@@ -1,6 +1,6 @@
 ---
 title: Vòng lặp lõi
-description: "Quy trình create, execute, refine, resume, status và verify, thư mục đầu ra .dwp được gitignore, cấu trúc tác vụ chín phần, và cách kiểm chứng hoạt động."
+description: "Quy trình create, execute, refine, resume, status và verify, thư mục đầu ra .dwp được gitignore, cấu trúc tác vụ mười phần, và cách kiểm chứng hoạt động."
 order: 2
 lang: vi
 summary: Cách các thao tác lõi của DWP đưa một kế hoạch từ mục tiêu tới hoàn tất đã kiểm chứng.
@@ -40,22 +40,23 @@ Tất cả thành phần DWP sống dưới một thư mục `.dwp/` được gi
 └── config.yaml
 ```
 
-## Cấu trúc tác vụ chín phần
+## Cấu trúc tác vụ mười phần
 
 <TaskAnatomy lang="vi" class="not-prose my-10" />
 
-Mỗi tệp tác vụ chứa chín phần này, theo thứ tự. Cấu trúc bảo đảm rằng mỗi đơn vị công việc đều khép kín và rà soát được:
+Mỗi tệp tác vụ chứa mười phần này, theo thứ tự. Cấu trúc bảo đảm rằng mỗi đơn vị công việc đều khép kín và rà soát được:
 
 1. **Goal** — một đoạn nêu rõ tác vụ đạt được điều gì.
 2. **Context** — bối cảnh, liên kết và lý do tác vụ này tồn tại.
-3. **Steps** — các hành động cụ thể, có thứ tự cần thực hiện.
-4. **Acceptance criteria** — một danh sách kiểm các điều kiện định nghĩa thế nào là xong.
-5. **Validation** — các lệnh hoặc test cần chạy để kiểm chứng công việc.
-6. **Files** — các đường dẫn dự kiến được tạo hoặc sửa đổi.
-7. **Dependencies** — các tác vụ khác hoặc điều kiện tiên quyết bên ngoài.
-8. **Risks** — điều gì có thể sai, và các biện pháp giảm thiểu.
-9. **Completion & Log** — một dấu trạng thái cùng các ghi chú theo trình tự thời gian.
+3. **Touched Surface** — hợp đồng giữa những gì tác vụ thay đổi và những gì phải được kiểm chứng.
+4. **Steps** — các hành động cụ thể, có thứ tự cần thực hiện.
+5. **Acceptance criteria** — một danh sách kiểm các điều kiện định nghĩa thế nào là xong.
+6. **Validation** — các lệnh hoặc test cần chạy để kiểm chứng công việc.
+7. **Files** — các đường dẫn dự kiến được tạo hoặc sửa đổi.
+8. **Dependencies** — các tác vụ khác hoặc điều kiện tiên quyết bên ngoài.
+9. **Risks** — điều gì có thể sai, và các biện pháp giảm thiểu.
+10. **Completion & Log** — một dấu trạng thái cùng các ghi chú theo trình tự thời gian.
 
 ## Kiểm chứng, hoàn tất và tiếp tục
 
-Kiểm chứng là một phần của tác vụ, không phải điều nghĩ thêm sau: mỗi tác vụ nêu tên các lệnh hoặc test chứng minh nó đã xong, và agent chạy chúng trước khi đánh dấu hoàn tất. Test ở đây là hạng nhất — một tác vụ thêm chức năng mới hoặc thay đổi hành vi phải thêm hoặc cập nhật các test tự động cho hành vi đó và chạy kiểm tra chất lượng mã đầy đủ của repository (test cùng lint và kiểm tra kiểu), không chỉ xác nhận rằng bước build thành công; các test hiện có phải tiếp tục xanh, được cập nhật theo hành vi dự kiến thay vì bị bỏ qua. Bảo mật là hạng nhất theo cùng cách đó — bất kỳ tác vụ nào chạm đến xác thực, xử lý đầu vào, bí mật, bề mặt mạng, hoặc các phụ thuộc đều mang các kỳ vọng bảo mật của thay đổi đó trong tiêu chí chấp nhận của nó và giữ mọi commit không chứa bí mật, và mọi kế hoạch kết thúc với một Security Review kiểm toán toàn bộ tập thay đổi. Việc hoàn tất được ghi lại bằng một dấu trạng thái rõ ràng (`[ ]` chưa bắt đầu, `[~]` đang làm, `[x]` đã xong, `[!]` bị chặn) trong phần Completion & Log. Việc tiếp tục dựa vào các dấu này và nhật ký tiến độ — một agent có thể tái dựng chính xác nơi kế hoạch dừng lại và tiếp tục từ tác vụ chưa hoàn tất đầu tiên mà không làm lại công việc đã xong.
+Kiểm chứng là một phần của tác vụ, không phải điều nghĩ thêm sau: mỗi tác vụ nêu tên các lệnh hoặc test chứng minh nó đã xong, và agent chạy chúng trước khi đánh dấu hoàn tất. Test ở đây là hạng nhất — một tác vụ thêm chức năng mới hoặc thay đổi hành vi phải thêm hoặc cập nhật các test tự động cho hành vi đó và chạy kiểm tra chất lượng mã đầy đủ của repository (test cùng lint và kiểm tra kiểu), không chỉ xác nhận rằng bước build thành công; các test hiện có phải tiếp tục xanh, được cập nhật theo hành vi dự kiến thay vì bị bỏ qua. Bảo mật là hạng nhất theo cùng cách đó — bất kỳ tác vụ nào chạm đến xác thực, xử lý đầu vào, bí mật, bề mặt mạng, hoặc các phụ thuộc đều mang các kỳ vọng bảo mật của thay đổi đó trong tiêu chí chấp nhận của nó và giữ mọi commit không chứa bí mật, và mọi kế hoạch khép lại bằng Final Review — bước rà soát bảo mật trên toàn bộ tập thay đổi, việc kiểm chứng đầy đủ trên trạng thái cuối cùng, và sự đối chiếu các quyết định về skill. Việc hoàn tất được ghi lại bằng một dấu trạng thái rõ ràng (`[ ]` chưa bắt đầu, `[~]` đang làm, `[x]` đã xong, `[!]` bị chặn) trong phần Completion & Log. Việc tiếp tục dựa vào các dấu này và nhật ký tiến độ — một agent có thể tái dựng chính xác nơi kế hoạch dừng lại và tiếp tục từ tác vụ chưa hoàn tất đầu tiên mà không làm lại công việc đã xong.

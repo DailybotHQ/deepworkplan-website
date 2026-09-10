@@ -29,8 +29,8 @@ Ein Repository in eine AI-first, spec-driven Codebasis verwandeln. Dies ist die 
 4. `docs/` (Architektur, Standards, Testing, Sicherheit und mehr) und Dokumentation je Modul erzeugen.
 5. `.agents/` (Agenten, schlanke `dwp-*`-Befehle, stack-passende Skills, Katalog) + `.claude → .agents` erzeugen.
 6. Die Skill installieren und ein gitignore-ausgeschlossenes `.dwp/` (Pläne, Entwürfe) sowie einen `tmp/`-Scratch-Bereich anlegen.
-7. Die Opt-in-Addons anbieten, dann eine Selbstprüfung durchführen.
+7. Die erforderliche lokale Überprüfung des AI Diff Reviewer installieren, die optionalen Addons anbieten, dann eine Selbstprüfung durchführen.
 
 ## Hinweise
 
-Ein Repository ist mit null Addons vollständig konform. Die erkannte Realität gewinnt stets über Preset-Annahmen.
+Ein Repository ist mit null optionalen Addons vollständig konform; die lokale Überprüfung des AI Diff Reviewer ist seit Standard 2.3.0 Teil der Baseline. Die erkannte Realität gewinnt stets über Preset-Annahmen.

@@ -42,8 +42,8 @@ yang di-gitignore untuk rencana dan draf. Tidak ada yang ditemplatkan; semuanya 
 ### 3. Kembangkan kit dan terima addon
 
 Gunakan `/skill-create` dan `/agent-create` (sub-skill author) untuk menumbuhkan skill, agent, dan command
-yang sesuai stack. Onboarding juga menawarkan lima addon opt-in — devcontainer, Dailybot,
-dependency-upgrade, design-system, dan AI Diff Reviewer — yang Anda terima hanya ketika cocok. Sebuah repo sepenuhnya konforman dengan nol addon.
+yang sesuai stack. Onboarding memasang tinjauan lokal AI Diff Reviewer yang wajib (gerbang CI-nya tetap
+opsional) dan menawarkan empat addon opt-in — devcontainer, Dailybot, dependency-upgrade, dan design-system — yang Anda terima hanya ketika cocok. Sebuah repo sepenuhnya konforman dengan nol addon opsional.
 
 ### 4. Rencanakan dan eksekusi
 

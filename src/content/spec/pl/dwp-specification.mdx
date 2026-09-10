@@ -1,6 +1,6 @@
 ---
 title: Specyfikacja DWP
-description: "Normatywna specyfikacja Deep Work Plan: struktura planu, dziewięciosekcyjna anatomia zadania, pięciooperacyjna pętla realizacji, przestrzeń robocza wyników oraz wersjonowanie."
+description: "Normatywna specyfikacja Deep Work Plan: struktura planu, dziesięciosekcyjna anatomia zadania, dobór bramek według powierzchni dotkniętej, pięciooperacyjna pętla realizacji, przestrzeń robocza wyników oraz wersjonowanie."
 order: 2
 lang: pl
 section: Workflow
@@ -11,15 +11,25 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Specyfikacja DWP
 
-**Wersja 1.2. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
+**Wersja 2.3.0. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 
-> **Addytywne w wersji 1.2.** Cztery addytywne możliwości, bez zmian niekompatybilnych wstecz: (1) **warstwa stanu planu odczytywalnego maszynowo** (`manifest.json` + `state.json`, zob. [Stan planu](/spec/plan-state)); (2) **poziomy proporcjonalnej rygorystyczności** (micro / standard / deep, zob. [Proporcjonalna rygorystyczność](#proportional-rigor)); (3) opcjonalna **sekcja Delta** w anatomii zadania dla zmian zachowania w systemach istniejących; oraz (4) **Protokół Wznowienia DWP** jest awansowany do nazwanego, cytowalnego rytuału składającego się z sześciu kroków. Istniejące plany w wersji 1.1 pozostają zgodne.
+> **Addytywne w tej rewizji, bez zmian niekompatybilnych wstecz.** (1) Sekcja **Powierzchnia dotknięta** — kontrakt między tym, co zadanie zmienia, i tym, co musi zostać zwalidowane, z doborem bramki według klasy ryzyka (izolowana / szew / współdzielony-rdzeń / nieznana); (2) pełna walidacja staje się **wymogiem stanu końcowego** uruchamianym w jedynym obowiązkowym **Final Review** planu, z jawnymi regułami ponownego użycia dowodów; (3) **lokalne decyzje dotyczące skilli** przenoszą się do zadania będącego właścicielem, a raport wykonawczy staje się **opcjonalny, na życzenie**; (4) **przepływ create świadomy trybu** — tryb trust materializuje się bezpośrednio, zachowując analizę i kontrole jakości; oraz (5) jawna **macierz kompatybilności**: plany i repozytoria z wcześniejszych wersji pozostają zgodne.
 
 ## Definicja
 
 Deep Work Plan to uporządkowany artefakt oparty wyłącznie na Markdown, opisujący złożone zadanie inżynierskie rozłożone na sekwencyjne, podatne na przegląd jednostki pracy, zaprojektowany tak, by tworzyły go, realizowały i utrzymywały agenci kodujący AI pracujący autonomicznie.
 
 DWP jest spec-driven: plan jest specyfikacją, a agenci MUSZĄ pracować w odniesieniu do jej jawnych kryteriów akceptacji i bramek walidacyjnych, zamiast improwizować. Specyfikacja — a nie transkrypcja czatu — jest trwałym źródłem prawdy, dzięki czemu praca jest weryfikowalna i wznawialna między sesjami i agentami. To także harness engineering w przenośnej formie: kontekst, pętla sterująca, zabezpieczenia i wznawialny stan, które czynią agenta niezawodnym, instalowane są w samym repozytorium jako zwykły Markdown, więc każdy zgodny agent MOŻE pilotować repozytorium bez frameworka właściwego dla narzędzia.
+
+## Przepływ create — jeden krok, świadomy trybu
+
+Przepływ `create` zbiera cel, kontekst, ograniczenia i zarys zadań raz, wykonuje swoją **analizę wymagań** (zakres, kolejność zależności między zadaniami, dobór walidacji z Powierzchni dotkniętej, poziom proporcjonalnej rygorystyczności), a następnie materializuje się zgodnie z trybem wybranym przez programistę:
+
+- **Tryb guided (domyślny).** Przepływ tworzy dokładnie **jeden** artefakt do przeglądu: **dopracowany szkic** w `.dwp/drafts/`, wystarczająco ustrukturyzowany, by zatwierdzić lub zgłosić poprawki w jednym przebiegu. Folder planu jest materializowany dopiero po zatwierdzeniu.
+- **Tryb trust (`trust` / `auto`).** Przepływ **materializuje plan bezpośrednio**, bez pliku szkicu — programista zrzekł się pośredniego przeglądu. Analiza wymagań, kolejność zależności i **kontrola jakości planu** wciąż się wykonują: trust zrzeka się *przeglądu*, nie *analizy*. Plan w trybie trust jest zapisywany jako **wstępnie zatwierdzony do wykonania nieobsługiwanego**.
+- **Jawne tryby szkicu.** `refined-draft {name}` i `from-refined-draft {file}` pozostają dostępne w obu trybach; programista, który poprosi o szkic, go dostaje.
+
+W każdym trybie przepływ nigdy nie tworzy pośredniego, niedopracowanego szkicu jako osobnego kroku podlegającego przeglądowi.
 
 ## Struktura planu
 
@@ -35,21 +45,35 @@ Plan MOŻE dodatkowo zawierać warstwę stanu odczytywalnego maszynowo: `manifes
 
 <TaskAnatomy lang="pl" class="not-prose my-10" />
 
-Każdy plik zadania MUSI zawierać te dziewięć sekcji, w kolejności:
+Każdy plik zadania MUSI zawierać te dziesięć sekcji, w kolejności:
 
 1. **Cel** — jednoakapitowe sformułowanie tego, co zadanie osiąga.
 2. **Kontekst** — tło, odnośniki i powód istnienia tego zadania.
-3. **Kroki** — uporządkowane, konkretne działania do wykonania.
-4. **Kryteria akceptacji** — lista warunków definiujących ukończenie.
-5. **Walidacja** — polecenia lub testy do uruchomienia w celu weryfikacji.
-6. **Pliki** — ścieżki, które mają zostać utworzone lub zmodyfikowane.
-7. **Zależności** — inne zadania lub zewnętrzne wymagania wstępne.
-8. **Ryzyka** — co może pójść nie tak oraz środki zaradcze.
-9. **Ukończenie i dziennik** — znacznik statusu plus chronologiczne notatki.
+3. **Powierzchnia dotknięta** — kontrakt między tym, co zadanie zmienia, i tym, co musi zostać zwalidowane.
+4. **Kroki** — uporządkowane, konkretne działania do wykonania.
+5. **Kryteria akceptacji** — lista warunków definiujących ukończenie.
+6. **Walidacja** — polecenia lub testy do uruchomienia w celu weryfikacji, dobrane z Powierzchni dotkniętej.
+7. **Pliki** — ścieżki, które mają zostać utworzone lub zmodyfikowane.
+8. **Zależności** — inne zadania lub zewnętrzne wymagania wstępne.
+9. **Ryzyka** — co może pójść nie tak oraz środki zaradcze.
+10. **Ukończenie i dziennik** — znacznik statusu plus chronologiczne notatki.
 
 Zadanie MOŻE dodatkowo zawierać **sekcję Delta** (ZALECANA dla zmian zachowania w systemach istniejących — zob. poniżej) oraz **sekcję Rollback** (ZALECANA dla migracji, zmian infrastruktury lub wdrożeń).
 
-### Sekcja Delta (zmiany w systemach istniejących)
+## Powierzchnia dotknięta
+
+Powierzchnia dotknięta to kontrakt między tym, co zadanie zmienia, i tym, co musi zostać zwalidowane. Istnieje po to, by walidacja była **dobierana według efektu**, a nie z przyzwyczajenia, i by późniejszy czytelnik widział, dlaczego wybrano daną bramkę. Zadanie zmieniające zachowanie MUSI zapisać:
+
+- **Powierzchnię planowaną** — ścieżki, moduły, pakiety lub konfigurację, które zadanie zamierza zmienić, zapisane przed edycją.
+- **Powierzchnię rzeczywistą** — uzgodnioną listę po edycji, wziętą z rzeczywistego diffu. Agent MUSI uzgodnić powierzchnię planowaną z rzeczywistą przed wyborem bramki.
+- **Dotkniętych konsumentów** — moduły, pakiety lub usługi zależne od powierzchni rzeczywistej, na tyle, na ile pozwala udokumentowane mapowanie repozytorium. Tam, gdzie nie pozwala, wpis MUSI to stwierdzać.
+- **Klasę ryzyka** — jedną z: *izolowana* (ograniczona do jednego modułu i jego testów); *szew* (zmienia kontrakt, warstwę utrwalania, routing, serializację, uwierzytelnianie lub powiązania frameworka między współpracownikami); *współdzielona/rdzeń* (szeroko importowana albo zmiana zależności, migracji, konfiguracji budowania/testów, schematu lub łańcucha narzędzi); *nieznana* (mapowanie jest nieobecne, nieaktualne lub niezweryfikowane).
+- **Użyte mapowanie testów** — które udokumentowane mapowanie lub narzędzie wygenerowało wybór.
+- **Wybraną bramkę i uzasadnienie** — dokładne polecenia oraz to, dlaczego pokrywają powierzchnię rzeczywistą.
+
+Pliki konfiguracyjne, schematy, manifesty zależności, szablony, fikstury, migracje i pliki instrukcji dla agentów **mogą zmieniać zachowanie** i MUSZĄ być klasyfikowane według swojego efektu, nigdy według rozszerzenia pliku. Zadanie, które zmienia wyłącznie prozę, komentarze lub artefakty badawcze, MOŻE zadeklarować powierzchnię jako nie dotyczy i wciąż uruchamia kontrole nieuruchomieniowe repozytorium.
+
+## Sekcja Delta (zmiany w systemach istniejących)
 
 Większość prawdziwej pracy modyfikuje istniejące zachowanie, a nie tworzy nowe. Zadanie, które zmienia sposób działania istniejącego systemu, POWINNO zawierać **sekcję Delta** opisującą zmianę jako jawny kontrakt przed/po, używając trzech nagłówków list:
 
@@ -57,29 +81,61 @@ Większość prawdziwej pracy modyfikuje istniejące zachowanie, a nie tworzy no
 - **MODIFIED** — zachowanie, które istnieje w obu stanach, podane jako `was: … → now: …`.
 - **REMOVED** — zachowanie, które istniało wcześniej i jest celowo usunięte po zadaniu.
 
-Każdy wpis MUSI być obserwowalnym zachowaniem — odpowiedzią endpointu, flagą CLI, stanem UI, wartością domyślną — a nie szczegółem implementacji. Sekcja Delta to diff recenzenta na poziomie zachowania: kryteria akceptacji weryfikują wpisy ADDED/MODIFIED, a wpisy REMOVED są jawnym zezwoleniem na usunięcie. Wszystko, co nie jest wymienione jako REMOVED, MUSI nadal działać, a bramka walidacyjna zadania (istniejące testy pozostają zielone) to egzekwuje.
+Każdy wpis MUSI być obserwowalnym zachowaniem — odpowiedzią endpointu, flagą CLI, stanem UI, wartością domyślną — a nie szczegółem implementacji. Sekcja Delta to diff recenzenta na poziomie zachowania: kryteria akceptacji weryfikują wpisy ADDED/MODIFIED, a wpisy REMOVED są jawnym zezwoleniem na usunięcie. Wszystko, co nie jest wymienione jako REMOVED, MUSI nadal działać.
 
-## Bramki walidacyjne i testy
+## Bramki walidacyjne — dobierane według klasy ryzyka
 
-Walidacja jest bramką, która zamienia deklarację ukończenia w jego dowód: zadanie NIE MOŻE zostać oznaczone jako ukończone, dopóki każde polecenie z jego sekcji Walidacja nie zostanie uruchomione i nie przejdzie pomyślnie. Testy są pełnoprawną częścią tej bramki, a nie opcjonalnym dodatkiem — to one sprawiają, że kod dostarczany przez plan jest niezawodny i weryfikowalny.
+Walidacja jest bramką, która zamienia deklarację ukończenia w jego dowód: zadanie NIE MOŻE zostać oznaczone jako ukończone, dopóki każde polecenie z jego sekcji Walidacja nie zostanie uruchomione i nie przejdzie pomyślnie. Bramka zadania zmieniającego zachowanie jest dobierana z jego uzgodnionej Powierzchni dotkniętej, według klasy ryzyka:
 
-Gdy zadanie dodaje nową kluczową funkcjonalność lub istotnie zmienia istniejące zachowanie:
+| Klasa ryzyka | Wymagana walidacja |
+|------|------|
+| **izolowana** | Testy zmienionego zachowania oraz jego dotkniętych konsumentów, plus kontrole statyczne pokrywające powierzchnię rzeczywistą. |
+| **szew** | Powyższe plus testy integracyjne lub kontraktowe dla tego szwu — dodane w tym zadaniu, jeśli żadne nie istnieją. Kontroli integracyjnych na szwie nie odracza się na koniec planu. |
+| **współdzielona/rdzeń** | Rozszerz na dotknięte pakiety i ich przechodnich konsumentów; tam, gdzie wpływu nie da się wiarygodnie ograniczyć, uruchom pełną walidację. |
+| **nieznana** | Zbadaj i popraw wybór; jeśli wciąż nie da się go ustalić, uruchom szersze lub pełne polecenie. |
+| **nie dotyczy** (proza/badania) | Kontrole nieuruchomieniowe repozytorium, z powodem zapisanym w Powierzchni dotkniętej. |
 
-- Jego **kryteria akceptacji** MUSZĄ obejmować automatyczne pokrycie testami nowego lub zmienionego zachowania (ścieżkę pozytywną oraz znaczące przypadki brzegowe i błędne), zgodnie z konwencją testów repozytorium i oczekiwanym poziomem pokrycia.
-- Jego **walidacja** MUSI uruchamiać testy repozytorium razem z jego kontrolami lintu, sprawdzania typów i formatowania — pełną kontrolą jakości kodu, którą definiuje repozytorium — a nie samym budowaniem. „To się buduje" nie jest wystarczającą bramką dla zmiany zachowania.
-- Istniejące testy MUSZĄ pozostać zielone. Zmiana, która psuje test pokrywający dotknięty kod, MUSI zaktualizować ten test do zamierzonego nowego zachowania; NIE MOŻE usuwać, pomijać ani osłabiać testu wyłącznie po to, by wymusić zaliczenie bramki.
+Zmiana zachowania MUSI dawać niepusty, adekwatny wybór testów — nieprawidłowy selektor lub runner, który wybrał zero testów, nie jest pokryciem. Tam, gdzie mapa testów repozytorium jest nieaktualna, wyprowadza się prawidłowe wywołanie i zapisuje aktualizację mapowania; drobne brakujące polecenie nigdy nie wymaga pełnego przebiegu onboardingu. Tam, gdzie nie istnieje wywołanie o zawężonym zakresie, obowiązuje pełny stosowny zestaw — zachowanie zgodne ze starszą wersją, nigdy błąd.
 
-Zadania czysto dokumentacyjne, konfiguracyjne lub badawcze są zwolnione z tworzenia testów, lecz wciąż MUSZĄ uruchamiać dowolną bramkę walidacyjną, którą definiuje repozytorium. Głębokość testowania jest proporcjonalna do rozmiaru zmiany i dojrzałości repozytorium. Tam, gdzie repozytorium nie ma w ogóle żadnego łańcucha narzędzi do testów ani lintu, agent NIE MOŻE po cichu pomijać tej dyscypliny — opiera się na łańcuchu narzędzi zaproponowanym podczas onboardingu (zob. [Zgodność](/spec)).
+Gdy zadanie dodaje nową kluczową funkcjonalność lub istotnie zmienia istniejące zachowanie, jego kryteria akceptacji MUSZĄ obejmować automatyczne pokrycie testami nowego lub zmienionego zachowania, a jego walidacja uruchamia testy repozytorium razem z kontrolami lintu, sprawdzania typów i formatowania — a nie samym budowaniem. Istniejące testy MUSZĄ pozostać zielone.
+
+## Walidacja stanu końcowego
+
+Bramki na poziomie zadania walidują to, czego dotknęło każde zadanie; nie zastępują walidacji planu jako całości. Zanim plan zostanie ukończony, **pełna stosowna** walidacja repozytorium MUSI zostać uruchomiona i zaliczona na **końcowym istotnym stanie**, po ostatniej merytorycznej zmianie — w ramach Final Review. Szersze przebiegi wcześniej odbywają się na granicach integracji lub po zmianach współdzielonych/rdzenia, a nie według harmonogramu opartego na liczbie zadań. Zaliczony wynik MOŻE być użyty ponownie wyłącznie z dowodem, że istotne dane wejściowe są równoważne; w przeciwnym razie jest uruchamiany ponownie. Każdy przebieg bramki zostawia zwięzły zapis: polecenie, zakres, rewizję, wynik i ścieżkę do dowodów.
 
 ## Dyscyplina bezpieczeństwa
 
-Bezpieczeństwo jest pełnoprawne tak samo jak testy i podąża za tym samym dwuwarstwowym modelem: dyscyplina na poziomie zadania w trakcie pracy plus obowiązkowa bramka Security Review nad całym zestawem zmian na końcu. Ilekroć zadanie dotyka uwierzytelniania lub autoryzacji, obsługi wejścia, sekretów lub konfiguracji, powierzchni sieci, plików lub shell, albo zależności:
+Bezpieczeństwo jest pełnoprawne tak samo jak testy i podąża za tym samym dwuwarstwowym modelem: dyscyplina na poziomie zadania w trakcie pracy plus przegląd bezpieczeństwa Final Review nad całym zestawem zmian na końcu. Ilekroć zadanie dotyka uwierzytelniania lub autoryzacji, obsługi wejścia, sekretów lub konfiguracji, powierzchni sieci, plików lub shell, albo zależności:
 
 - Jego **kryteria akceptacji** MUSZĄ określać oczekiwania bezpieczeństwa dotyczące zmiany — wejście zwalidowane i poddane escapowaniu, brak materiału sekretnego w kodzie lub fiksturach, kontrole uwierzytelniania zachowane lub wzmocnione — zgodnie z `docs/SECURITY.md`.
 - Każdy commit MUSI zostać potwierdzony jako wolny od sekretów lub poświadczeń, zanim trafi do gałęzi, wliczając fikstury testów i przykłady w dokumentacji. Sekret w wypchniętym commicie MUSI być traktowany jako ujawniony i poddany rotacji, a nie jedynie usunięty.
 - Tam, gdzie praca wrażliwa na bezpieczeństwo jest znacząca, dedykowane zadanie hardeningu POWINNO być umieszczone bezpośrednio po zadaniach implementacyjnych, a przed zadaniem kompleksowych testów, tak aby ustalenia były naprawione, zanim testy zakodują zachowanie, i aby każde ustalenie stawało się przypadkiem regresji, a nie ponowną pracą.
 
-Ta dyscyplina na poziomie zadania nie zastępuje końcowego zadania Security Review: kontrole na poziomie zadania wychwytują problemy w commicie, w którym się rodzą, podczas gdy bramka końcowa audytuje cały plan — w tym same zadania testów i dokumentacji. Dlatego każdy plan kończy się trzema obowiązkowymi zadaniami końcowymi — Security Review, następnie Skills & Agents Discovery, następnie Executive Report — a krytyczne ustalenie bezpieczeństwa blokuje ukończenie, dopóki nie zostanie naprawione lub jawnie zaakceptowane.
+Ta dyscyplina na poziomie zadania nie zastępuje przeglądu bezpieczeństwa w Final Review: kontrole na poziomie zadania wychwytują problemy w commicie, w którym się rodzą, podczas gdy bramka końcowa audytuje cały plan — w tym same zadania testów i dokumentacji.
+
+## Cykl życia planu — Final Review
+
+Każdy zgodny plan utworzony pod tę wersję kończy się dokładnie **jednym** obowiązkowym zadaniem: **Final Review** (zadanie N). Dwie odpowiedzialności, które wcześniejsze wersje umieszczały w osobnych zadaniach zamykających, zostają przeniesione: decyzje dotyczące skilli trafiają do zadania, które wytworzyło wzorzec, a raport wykonawczy staje się artefaktem opcjonalnym, na życzenie. Nic w przeglądzie bezpieczeństwa nie zostaje złagodzone.
+
+Final Review MUSI, w tej kolejności:
+
+**(a) Przegląd bezpieczeństwa** — przejrzeć pełny, skumulowany zestaw zmian planu pod kątem zakodowanych na sztywno sekretów, ryzyk iniekcji, nowej powierzchni ataku, osłabionego uwierzytelniania oraz danych wrażliwych w logach lub dokumentacji; zaudytować wprowadzone zależności; zweryfikować, że `docs/SECURITY.md` nadal odzwierciedla rzeczywistość; napisać raport z przeglądu bezpieczeństwa nawet wtedy, gdy jest czysto. Krytyczne ustalenie jest naprawiane — albo jawnie akceptowane przez użytkownika — zanim plan zostanie ukończony.
+
+**(b) Walidacja stanu końcowego** — pełna stosowna walidacja repozytorium uruchamia się i przechodzi na końcowym istotnym stanie.
+
+**(c) Uzgodnienie decyzji dotyczących skilli** — każde zadanie niesie rozstrzygnięcie dotyczące skilli, a każdy zapisany kandydat ma rozstrzygnięcie; bez drugiego raportu z odkrywania.
+
+**(d) Ukończenie** — zgłoszenie ukończenia wraz z produktami pracy, dowodami walidacji i ograniczeniami; jednorazowa oferta raportu wykonawczego. Plan jest ukończony niezależnie od tego, czy oferta zostanie przyjęta.
+
+Final Review wykonuje się sekwencyjnie po wszystkich pozostałych zadaniach i nigdy nie jest umieszczany w grupie równoległej.
+
+## Lokalne decyzje dotyczące skilli
+
+Pytanie „czy ta praca wytworzyła wzorzec wielokrotnego użytku wart skilla lub agenta?" znajduje odpowiedź wewnątrz zadania, które wytworzyło ten wzorzec, dopóki jego dowody są w kontekście. Sekcja Ukończenie i dziennik każdego zadania niesie **rozstrzygnięcie dotyczące skilli**: brak, aktualizacja istniejącego skilla, utworzenie nazwanego artefaktu albo odroczenie z powodem. Uzasadnione tworzenie odbywa się wewnątrz tego zadania, przed jego bramką walidacyjną i commitem, po sprawdzeniu istniejącego katalogu pod kątem duplikatów.
+
+## Raport wykonawczy — opcjonalny, na życzenie
+
+Raport wykonawczy nie jest już obowiązkowym zadaniem. Przy ukończeniu agent proponuje go raz; jest generowany wyłącznie na jawną prośbę, na podstawie trwałych dowodów, bez odtwarzania planu. Brak odpowiedzi lub przebieg nieobsługiwany pozostawia plan ukończony bez wygenerowanego raportu.
 
 ## Protokół ukończenia zadania
 
@@ -133,7 +189,7 @@ Rygorystyczność MUSI być proporcjonalna do pracy. Ceremonia przy trywialnych 
 | Poziom | Kiedy | Forma |
 |--------|-------|-------|
 | **micro** | Pojedyncza zmiana atomowa: jedna kwestia, mniej więcej jedno posiedzenie, bez koordynacji. Naprawa błędu, zmiana tekstu, poprawka konfiguracji. | Brak folderu planu. Agent podaje cel, kryteria akceptacji i bramkę walidacyjną bezpośrednio w rozmowie, wykonuje, waliduje, commituje. |
-| **standard** | Praca wieloetapowa z prawdziwym zakresem: funkcja, refaktoryzacja, migracja w jednym repozytorium. Domyślny poziom. | Pełny plan: folder planu, zadania z dziewięcioma sekcjami, obowiązkowe zadania końcowe. |
+| **standard** | Praca wieloetapowa z prawdziwym zakresem: funkcja, refaktoryzacja, migracja w jednym repozytorium. Domyślny poziom. | Pełny plan: folder planu, zadania z dziesięcioma sekcjami, Final Review. |
 | **deep** | Praca długookresowa obejmująca równoległe grupy, repozytoria potomne lub wiele nieobsługiwanych sesji. | Standardowy plan plus możliwości orkiestratora i/lub agentów zespołowych oraz warstwa stanu. |
 
 Agent poproszony o stworzenie planu dla pracy na poziomie micro MUSI powiedzieć, że plan jest nieproporcjonalny, i zaproponować formę wbudowaną. Folder planu NIE MOŻE być tworzony dla trywialnej zmiany w jednym pliku.
@@ -141,6 +197,17 @@ Agent poproszony o stworzenie planu dla pracy na poziomie micro MUSI powiedzieć
 Praca na poziomie micro wciąż zachowuje to, co niezbywalne: jawny cel, bramkę walidacyjną, która działa i przechodzi, oraz dyscyplinę testową dla zmian zachowania. Poziom zmienia opakowanie, nigdy bramki.
 
 Gdy zakres rośnie w locie — zadanie micro odkrywa prawdziwy zakres, standardowy plan kiełkuje podrepozytoriami — agent MUSI się zatrzymać i awansować pracę do następnego poziomu, zamiast rozciągać bieżący.
+
+## Kompatybilność
+
+Plany i repozytoria z wcześniejszych wersji pozostają zgodne, a mechanizm sprawdzania zgodności MUSI odróżniać znany artefakt starszej wersji (akceptowany) od artefaktu, który deklaruje tę wersję i jest w jej ramach obiektywnie nieprawidłowy (odrzucany):
+
+| Przypadek | Reguła |
+|------|------|
+| **Plan utworzony pod wcześniejszą wersją** (trzy obowiązkowe zadania końcowe; zadania bez Powierzchni dotkniętej) wykonywany przez tę wersję | Wspierany. Wykonywany w swoim własnym zapisanym kształcie — zadania końcowe nie są dodawane, usuwane ani przestawiane, żadna Powierzchnia dotknięta nie jest dodawana w locie, a walidacja wraca do pełnego stosownego zestawu. Sesja `refine` MOŻE go świadomie zmigrować. |
+| **Repozytorium onboardowane pod wcześniejszą wersją**, onboardowane lub planowane przez tę wersję | Wspierane. Plany wracają do bramek na pełnym zestawie; brakująca dokumentacja wywołań o zawężonym zakresie jest znaleziskiem wskazującym ukierunkowany upgrade harnessu, nigdy niepowodzeniem. |
+| **Plan utworzony pod tę wersję**, agent podążający za tą wersją | Wspierany — to jest cel. |
+| **Plan utworzony pod tę wersję**, agent podążający za wcześniejszą wersją | Niewspierany; udokumentowany. Repozytoria przypinające starszy skill POWINNY zaktualizować skilla przed przyjęciem nowych planów. |
 
 ## Wersjonowanie
 

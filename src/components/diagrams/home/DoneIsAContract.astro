@@ -1,0 +1,296 @@
+---
+/**
+ * DoneIsAContract — Act III plate of the homepage four-act story.
+ *
+ * A two-layer editorial asset: the text-free AI-engraved raster pair
+ * (light/dark, 1600×1000, transparent background) as the art layer, plus real
+ * HTML text from an inline language-keyed i18n map as the text layer. Unlike
+ * the SVG-as-code diagrams, this one is illustration-led and reuses the
+ * .editorial-asset / .editorial-plate frame family. Spec: HP-08
+ * (analysis_results/ILLUSTRATION_PROMPTS.md).
+ *
+ * Static: no JS, no motion. role="img" with a localized aria-label; the art
+ * pair keeps an explicit 16/10 aspect (no CLS) and dark mode swaps rasters
+ * via Tailwind dark: utilities. See docs/DIAGRAM_COMPONENTS.md.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Editorial plate: done is a contract, not a vibe — tests pass, types check, acceptance criteria met, or the task stays open.',
+    statement: 'Done is a contract, not a vibe.',
+    statementEmphasis: 'contract',
+    points: [
+      'Tests pass',
+      'Types check',
+      'Acceptance criteria met',
+      'Or the task stays open',
+    ],
+    alt: 'Engraved illustration of a hand pressing an embossed wax seal onto a contract document with blank check rows, an inkwell at its side.',
+  },
+  es: {
+    ariaLabel:
+      'Lámina editorial: hecho es un contrato, no una intuición — los tests pasan, los tipos se verifican, los criterios de aceptación se cumplen, o la tarea sigue abierta.',
+    statement: 'Hecho es un contrato, no una intuición.',
+    statementEmphasis: 'contrato',
+    points: [
+      'Los tests pasan',
+      'Los tipos se verifican',
+      'Los criterios de aceptación se cumplen',
+      'O la tarea sigue abierta',
+    ],
+    alt: 'Ilustración grabada de una mano que presiona un sello de laca en relieve sobre un documento de contrato con filas de casillas en blanco, con un tintero a su lado.',
+  },
+  pt: {
+    ariaLabel:
+      'Prancha editorial: feito é um contrato, não uma vibe — os testes passam, os tipos são verificados, os critérios de aceitação são cumpridos, ou a tarefa continua aberta.',
+    statement: 'Feito é um contrato, não uma vibe.',
+    statementEmphasis: 'contrato',
+    points: [
+      'Os testes passam',
+      'Os tipos são verificados',
+      'Os critérios de aceitação são cumpridos',
+      'Ou a tarefa continua aberta',
+    ],
+    alt: 'Ilustração gravada de uma mão pressionando um selo de laca em relevo sobre um documento de contrato com linhas de caixas em branco, com um tinteiro ao lado.',
+  },
+  zh: {
+    ariaLabel:
+      '编辑版画：完成是一份契约，不是一种感觉——测试通过、类型检查通过、验收标准达成，否则任务保持开启。',
+    statement: '完成是一份契约，不是一种感觉。',
+    statementEmphasis: '契约',
+    points: ['测试通过', '类型检查通过', '验收标准达成', '否则任务保持开启'],
+    alt: '雕刻插画：一只手将浮雕蜡封印章按在带有空白待勾选行的合同文件上，旁边放着一只墨水瓶。',
+  },
+  ja: {
+    ariaLabel:
+      'エディトリアル図版：完了は契約であり、感覚ではありません。テストが通り、型チェックが通り、受け入れ基準を満たす。さもなければタスクは未完了のままです。',
+    statement: '完了は契約であり、感覚ではない。',
+    statementEmphasis: '契約',
+    points: [
+      'テストが通る',
+      '型チェックが通る',
+      '受け入れ基準を満たす',
+      'さもなければタスクは未完了のまま',
+    ],
+    alt: '空白のチェック行が並んだ契約書に浮き彫りの蝋封印を押す手を描いた版画イラスト。その脇にはインク壺が置かれています。',
+  },
+  de: {
+    ariaLabel:
+      'Editoriale Tafel: fertig ist ein Vertrag, kein Gefühl — die Tests bestehen, die Typenprüfung läuft durch, die Akzeptanzkriterien sind erfüllt, oder die Aufgabe bleibt offen.',
+    statement: 'Fertig ist ein Vertrag, kein Gefühl.',
+    statementEmphasis: 'Vertrag',
+    points: [
+      'Die Tests bestehen',
+      'Die Typenprüfung läuft durch',
+      'Die Akzeptanzkriterien sind erfüllt',
+      'Oder die Aufgabe bleibt offen',
+    ],
+    alt: 'Gravierte Illustration einer Hand, die ein geprägtes Wachssiegel auf ein Vertragsdokument mit leeren Ankreuzfeldern drückt, daneben ein Tintenfass.',
+  },
+  fr: {
+    ariaLabel:
+      'Planche éditoriale : terminé est un contrat, pas une impression — les tests passent, les types sont vérifiés, les critères d’acceptation sont remplis, ou la tâche reste ouverte.',
+    statement: 'Terminé est un contrat, pas une impression.',
+    statementEmphasis: 'contrat',
+    points: [
+      'Les tests passent',
+      'Les types sont vérifiés',
+      'Les critères d’acceptation sont remplis',
+      'Ou la tâche reste ouverte',
+    ],
+    alt: 'Gravure illustrant une main pressant un sceau de cire gaufré sur un document contractuel aux lignes de cases vides, un encrier posé à ses côtés.',
+  },
+  ko: {
+    ariaLabel:
+      '에디토리얼 판화: 완료는 계약이지 감이 아닙니다. 테스트가 통과하고, 타입 검사가 통과하고, 승인 기준이 충족되어야 하며, 그렇지 않으면 작업은 열려 있습니다.',
+    statement: '완료는 계약이지 감이 아닙니다.',
+    statementEmphasis: '계약',
+    points: [
+      '테스트가 통과한다',
+      '타입 검사가 통과한다',
+      '승인 기준이 충족된다',
+      '아니면 작업은 열려 있다',
+    ],
+    alt: '빈 체크란이 늘어선 계약서 문서에 볼록한 밀랍 인장을 누르는 손을 그린 판화 일러스트, 옆에는 잉크병이 놓여 있습니다.',
+  },
+  ru: {
+    ariaLabel:
+      'Редакционная гравюра: готово — это контракт, а не ощущение — тесты проходят, типы проверяются, критерии приёмки соблюдены, или задача остаётся открытой.',
+    statement: 'Готово — это контракт, а не ощущение.',
+    statementEmphasis: 'контракт',
+    points: [
+      'Тесты проходят',
+      'Типы проверяются',
+      'Критерии приёмки соблюдены',
+      'Или задача остаётся открытой',
+    ],
+    alt: 'Гравюра с рукой, прижимающей рельефную сургучную печать к договору с пустыми строками для отметок, рядом — чернильница.',
+  },
+  it: {
+    ariaLabel:
+      'Tavola editoriale: fatto è un contratto, non una sensazione — i test passano, i tipi vengono verificati, i criteri di accettazione sono soddisfatti, o il task resta aperto.',
+    statement: 'Fatto è un contratto, non una sensazione.',
+    statementEmphasis: 'contratto',
+    points: [
+      'I test passano',
+      'I tipi vengono verificati',
+      'I criteri di accettazione sono soddisfatti',
+      'O il task resta aperto',
+    ],
+    alt: 'Incisione di una mano che preme un sigillo di cera in rilievo su un documento contrattuale con righe di caselle vuote, con un calamaio al fianco.',
+  },
+  tr: {
+    ariaLabel:
+      'Editoryal levha: bitti bir sözleşmedir, bir his değil — testler geçer, tür denetimi geçer, kabul kriterleri karşılanır, yoksa görev açık kalır.',
+    statement: 'Bitti bir sözleşmedir, bir his değil.',
+    statementEmphasis: 'sözleşme',
+    points: [
+      'Testler geçer',
+      'Tür denetimi geçer',
+      'Kabul kriterleri karşılanır',
+      'Yoksa görev açık kalır',
+    ],
+    alt: 'Boş onay kutuları bulunan bir sözleşme belgesine kabartma balmumu mührü basan eli gösteren gravür illüstrasyon, yanında bir mürekkep hokkası.',
+  },
+  id: {
+    ariaLabel:
+      'Pelat editorial: selesai itu kontrak, bukan perasaan — tes lolos, tipe terverifikasi, kriteria penerimaan terpenuhi, atau tugas tetap terbuka.',
+    statement: 'Selesai itu kontrak, bukan perasaan.',
+    statementEmphasis: 'kontrak',
+    points: [
+      'Tes lolos',
+      'Tipe terverifikasi',
+      'Kriteria penerimaan terpenuhi',
+      'Atau tugas tetap terbuka',
+    ],
+    alt: 'Ilustrasi ukiran tangan yang menekan segel lilin timbul ke dokumen kontrak dengan baris kotak centang kosong, dengan tempat tinta di sisinya.',
+  },
+  vi: {
+    ariaLabel:
+      'Hình khắc biên tập: hoàn thành là một hợp đồng, không phải một cảm giác — các kiểm thử vượt qua, các kiểu được kiểm tra, tiêu chí nghiệm thu được đáp ứng, hoặc nhiệm vụ vẫn mở.',
+    statement: 'Hoàn thành là một hợp đồng, không phải một cảm giác.',
+    statementEmphasis: 'hợp đồng',
+    points: [
+      'Các kiểm thử vượt qua',
+      'Các kiểu được kiểm tra',
+      'Tiêu chí nghiệm thu được đáp ứng',
+      'Hoặc nhiệm vụ vẫn mở',
+    ],
+    alt: 'Hình khắc minh họa bàn tay ấn con dấu sáp nổi lên văn bản hợp đồng có các hàng ô trống để đánh dấu, bên cạnh là một lọ mực.',
+  },
+  hi: {
+    ariaLabel:
+      'संपादकीय चित्रफलक: पूर्णता एक अनुबंध है, कोई भावना नहीं — परीक्षण पास हों, टाइप जाँच पास हो, स्वीकृति मानदंड पूरे हों, या कार्य खुला रहे।',
+    statement: 'पूर्णता एक अनुबंध है, कोई भावना नहीं।',
+    statementEmphasis: 'अनुबंध',
+    points: [
+      'परीक्षण पास हों',
+      'टाइप जाँच पास हो',
+      'स्वीकृति मानदंड पूरे हों',
+      'या कार्य खुला रहे',
+    ],
+    alt: 'उत्कीर्ण चित्र: खाली टिक-पंक्तियों वाले अनुबंध दस्तावेज़ पर उभरे मोम की मुहर दबाता एक हाथ, उसके साथ एक स्याहीदान।',
+  },
+  pl: {
+    ariaLabel:
+      'Redakcyjna plansza: skończone to kontrakt, nie wrażenie — testy przechodzą, typy się zgadzają, kryteria akceptacji są spełnione, albo zadanie pozostaje otwarte.',
+    statement: 'Skończone to kontrakt, nie wrażenie.',
+    statementEmphasis: 'kontrakt',
+    points: [
+      'Testy przechodzą',
+      'Typy się zgadzają',
+      'Kryteria akceptacji są spełnione',
+      'Albo zadanie pozostaje otwarte',
+    ],
+    alt: 'Ilustracja grawerska dłoni dociskającej wypukłą pieczęć woskową do dokumentu kontraktu z pustymi wierszami do odhaczenia, obok kałamarz.',
+  },
+  uk: {
+    ariaLabel:
+      'Редакційна гравюра: готово — це контракт, а не відчуття — тести проходять, типи перевіряються, критерії приймання виконані, або завдання залишається відкритим.',
+    statement: 'Готово — це контракт, а не відчуття.',
+    statementEmphasis: 'контракт',
+    points: [
+      'Тести проходять',
+      'Типи перевіряються',
+      'Критерії приймання виконані',
+      'Або завдання залишається відкритим',
+    ],
+    alt: 'Гравюра із рукою, що притискає рельєфну сургучну печать до договору з порожніми рядками для позначок, поруч — чорнильниця.',
+  },
+  th: {
+    ariaLabel:
+      'ภาพพิมพ์บรรณาธิการ: เสร็จคือสัญญา ไม่ใช่ความรู้สึก — เทสผ่าน ตรวจสอบไทป์ผ่าน บรรลุเกณฑ์การยอมรับ มิฉะนั้นงานยังเปิดอยู่',
+    statement: 'เสร็จคือสัญญา ไม่ใช่ความรู้สึก',
+    statementEmphasis: 'สัญญา',
+    points: ['เทสผ่าน', 'ตรวจสอบไทป์ผ่าน', 'บรรลุเกณฑ์การยอมรับ', 'มิฉะนั้นงานยังเปิดอยู่'],
+    alt: 'ภาพพิมพ์แกะสลักมือกดตราประทับขี้ผึ้งนูนลงบนเอกสารสัญญาที่มีแถวช่องทำเครื่องหมายเปล่า โดยมีขวดหมึกอยู่ข้าง ๆ',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+
+// Split the statement around the emphasized word so the markup binds
+// t.statementEmphasis (an exact substring of t.statement in every locale).
+const emphasisAt = t.statement.indexOf(t.statementEmphasis);
+const statementBefore =
+  emphasisAt >= 0 ? t.statement.slice(0, emphasisAt) : t.statement;
+const statementAfter =
+  emphasisAt >= 0
+    ? t.statement.slice(emphasisAt + t.statementEmphasis.length)
+    : '';
+---
+
+<figure
+  class={`editorial-asset editorial-plate ${className}`}
+  role="img"
+  aria-label={t.ariaLabel}
+>
+  <img
+    src="/images/visuals/home/plate-done-is-a-contract.png"
+    alt={t.alt}
+    width="1600"
+    height="1000"
+    loading="lazy"
+    class="plate-frame-img dark:hidden"
+  />
+  <img
+    src="/images/visuals/home/plate-done-is-a-contract-dark.png"
+    alt={t.alt}
+    width="1600"
+    height="1000"
+    loading="lazy"
+    class="plate-frame-img hidden dark:block"
+  />
+  <figcaption>
+    <p class="plate-statement">
+      {statementBefore}<span class="plate-statement-em">{t.statementEmphasis}</span>{statementAfter}
+    </p>
+    <ul class="plate-points">
+      {
+        t.points.map((point) => (
+          <li>
+            <span class="ea-label">{point}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </figcaption>
+</figure>
+
+<style>
+  /* Explicit art-frame aspect for the 1600×1000 rasters — no CLS. The shared
+   * .plate-frame-img rule already carries it; the plate restates it so the
+   * no-CLS contract holds in this component's own scope. */
+  .plate-frame-img {
+    aspect-ratio: 16 / 10;
+  }
+</style>

@@ -1,12 +1,12 @@
 ---
 title: "Deep Work Plan — strukturierte Ausführung für KI-Coding-Agenten"
 description: "Kontext zählt mehr als Modelle. Deep Work Plan verwandelt jedes Repository in eine strukturierte Umgebung, in der jeder Coding-Agent langfristige Arbeit zu Ende bringt."
-lastUpdated: 2026-06-03
+lastUpdated: 2026-09-10
 ---
 
 ## Modelle zählen. Kontext zählt mehr.
 
-Deep Work Plan verwandelt jedes Repository in eine strukturierte Umgebung — Kontext, Leitplanken und einen dauerhaften Plan — in der jeder Coding-Agent präzise arbeitet und langfristige Aufgaben abschließt.
+Deep Work Plan verwandelt jedes Repository in eine strukturierte Umgebung — Kontext, Guardrails und einen dauerhaften Plan — in der jeder Coding-Agent präzise und effizient arbeitet und langlaufende Arbeit abschließt.
 
 Deep Work Plan (DWP) ist eine offene, MIT-lizenzierte Methodik und ein Kit zum Planen und Ausführen komplexer Softwarearbeit mit KI-Agenten. Sie wählen keine Installationsmethode und kopieren keine Vorlage — Sie kopieren den init.md-Prompt und fügen ihn in Ihren Agenten ein:
 
@@ -21,12 +21,63 @@ Deep Work Plan (DWP) ist eine offene, MIT-lizenzierte Methodik und ein Kit zum P
 
 ## Das Problem und die Antwort
 
-KI-Coding-Agenten sind in kurzen Schüben bemerkenswert wirksam. Bei langfristiger Arbeit — einer Migration, einem neuen Subsystem, einem Refactoring über Dutzende Dateien hinweg — driften sie ab: Der Kontext füllt sich, Entscheidungen geraten in Vergessenheit, und mehrstündige Aufgaben werden auf halbem Weg abgebrochen.
+In kurzen Spitzen sind Coding-Agenten beeindruckend. Übergeben Sie ihnen eine langlaufende Mission — eine Migration, ein neues Subsystem, eine Refaktorierung über Dutzende Dateien —, driftet der Agent ab: Der Kontext füllt sich, frühere Entscheidungen verblassen und stundenlange Arbeit bleibt auf halbem Weg liegen.
 
-Deep Work Plan antwortet mit **spec-driven Development**: Der Plan ist die dauerhafte Quelle der Wahrheit, und Agenten führen gegen explizite Akzeptanzkriterien und Validierungs-Gates aus. Das Abdriften nimmt ab, die Arbeit bleibt überprüfbar, und jeder Agent kann sie über Sitzungen hinweg wiederaufnehmen. Anders als an eine IDE oder einen Anbieter gebundene spec-driven Werkzeuge (GitHub Spec Kit, Amazon Kiro, Tessl) ist DWP werkzeugunabhängig und repo-nativ.
+Deep Work Plan antwortet mit spec-driven development: ein dauerhafter Plan, atomare Aufgaben und Validierungs-Gates, die der Agent bestehen muss. Die Arbeit bleibt überprüfbar — und jeder Agent kann sie über Sitzungen hinweg fortsetzen.
 
-Es ist zugleich **Harness Engineering**, portabel gemacht. Ein Agenten-Harness ist das Gerüst um ein Modell herum — Kontext, Werkzeuge, Steuerschleife, Leitplanken, wiederaufnehmbarer Zustand —, das es verlässlich macht. Deep Work Plan installiert dieses Harness in das Repository selbst, sodass jeder Agent jedes Repository steuern kann.
+Und weil der Kontext die knappste Ressource Ihres Agenten ist, ist das Harness auf Token-Effizienz ausgelegt: Anweisungen laden progressiv, Validierung berührt nur Geändertes, und jede Aufgabe lernt lokal — so bleibt langlaufende Arbeit erschwinglich.
+---
 
+## Menschen steuern. Agenten führen aus.
+
+Sie entscheiden, was „fertig“ heißt und wo die Grenzen verlaufen. Der Plan trägt Ihre Absicht; die Agenten verrichten die Stundenarbeit — ohne ständige Beaufsichtigung, ohne Korrekturen alle zwanzig Minuten.
+
+- Sie: Absicht, Akzeptanzkriterien, Review
+- Agenten: Ausführung, Aufgabe für Aufgabe
+- Der Plan: der Vertrag zwischen beiden
+
+[Lesen Sie die Methodik](/de/methodology)
+
+---
+
+## Ein Plan, von dem Agenten nicht abweichen können.
+
+Lange Aufgaben füllen den Kontext jedes Modells. Details gehen verloren, der Agent driftet. Ein geschriebener Plan — atomare Aufgaben, Validierungs-Gates, wiederaufnehmbarer Zustand — ist der Ankerpunkt, zu dem er Runde für Runde zurückkehrt.
+
+1. Plan
+2. Atomare Aufgaben
+3. Validierungsschranken
+4. Abschluss
+5. Fortsetzbarer Zustand
+
+[Kernzyklus ansehen](/de/methodology)
+
+---
+
+## Fertig ist ein Vertrag, kein Gefühl.
+
+Jede Aufgabe nennt ihre Abnahmekriterien und die Prüfungen, die bestehen müssen. Der Agent darf sich nicht fertig fühlen — er muss bestehen, sonst bleibt die Aufgabe offen.
+
+- Die Tests bestehen
+- Die Typenprüfung läuft durch
+- Die Akzeptanzkriterien sind erfüllt
+- Oder die Aufgabe bleibt offen
+
+[Spezifikation lesen](/de/spec)
+
+---
+
+## Das Repository ist das Harness.
+
+Kontext, Werkzeuge, Leitplanken und Zustand liegen als einfache Dateien in Ihrem Repository, die jeder Agent lesen kann. Kein Lock-in, kein externes Gehirn — übersteht Kontext-Resets.
+
+- Dauerhafte Spezifikation auf der Festplatte
+- Validierungsgates statt Bauchgefühl
+- Übersteht Kontext-Resets
+
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
+
+[Sehen Sie, was das Onboarding erzeugt](/de/quickstart)
 ---
 
 ## Was Sie erhalten

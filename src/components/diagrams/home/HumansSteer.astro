@@ -1,0 +1,281 @@
+---
+/**
+ * HumansSteer — Act I plate of the home four-act narrative (two-layer).
+ *
+ * Layer 1 (art): an engraved, text-free raster pair fixed by the plan's prompt
+ * pack — light ink on paper plus a dark-mode variant, transparent background,
+ * 16:10. Layer 2 (text): real HTML — the localized statement with one
+ * oxblood-emphasized word and three point rows — driven by an inline
+ * language-keyed i18n map with an `en` fallback (docs/DIAGRAM_COMPONENTS.md
+ * §4; adding a language = adding a key). The statement is a paragraph, never a
+ * heading: the figure is role="img", so its aria-label carries the content and
+ * the visual text is presentational. No JS, no motion.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Act I of the Deep Work Plan story: humans steer and agents execute. You bring the intent, the acceptance criteria and the review; agents carry out the execution, task by task; and the plan is the contract between them.',
+    statement: 'Humans steer. Agents execute.',
+    statementEmphasis: 'steer',
+    points: [
+      'You: intent, acceptance criteria, review',
+      'Agents: execution, task by task',
+      'The plan: the contract between them',
+    ],
+    alt: 'Engraving of a ship at sea: the hand of the captain holds the wheel at the helm, the crew works the sails, and a bold course line runs across the plate.',
+  },
+  es: {
+    ariaLabel:
+      'Acto I de la historia de Deep Work Plan: los humanos dirigen y los agentes ejecutan. Tú aportas la intención, los criterios de aceptación y la revisión; los agentes realizan la ejecución, tarea a tarea; y el plan es el contrato entre ambos.',
+    statement: 'Los humanos dirigen. Los agentes ejecutan.',
+    statementEmphasis: 'dirigen',
+    points: [
+      'Tú: intención, criterios de aceptación, revisión',
+      'Agentes: ejecución, tarea a tarea',
+      'El plan: el contrato entre ambos',
+    ],
+    alt: 'Grabado de un barco en el mar: la mano del capitán sostiene el timón, la tripulación trabaja en las velas y una línea de rumbo marcada cruza la lámina.',
+  },
+  pt: {
+    ariaLabel:
+      'Ato I da história do Deep Work Plan: os humanos dirigem e os agentes executam. Você traz a intenção, os critérios de aceitação e a revisão; os agentes realizam a execução, tarefa por tarefa; e o plano é o contrato entre eles.',
+    statement: 'Os humanos dirigem. Os agentes executam.',
+    statementEmphasis: 'dirigem',
+    points: [
+      'Você: intenção, critérios de aceitação, revisão',
+      'Agentes: execução, tarefa por tarefa',
+      'O plano: o contrato entre eles',
+    ],
+    alt: 'Gravura de um navio no mar: a mão do capitão segura o leme, a tripulação trabalha nas velas e uma linha de rumo marcada atravessa a prancha.',
+  },
+  zh: {
+    ariaLabel:
+      'Deep Work Plan 故事的第一幕：人类掌舵，代理执行。你负责意图、验收标准与评审；代理逐项执行任务；计划则是双方之间的契约。',
+    statement: '人类掌舵，代理执行。',
+    statementEmphasis: '掌舵',
+    points: [
+      '你：意图、验收标准、评审',
+      '代理：逐项执行任务',
+      '计划：双方之间的契约',
+    ],
+    alt: '海上船只的版画插图：船长的手握住舵轮，船员在帆上作业，一条醒目的航线横贯画面。',
+  },
+  ja: {
+    ariaLabel:
+      'Deep Work Plan の物語の第一幕を描くエディトリアル図版です。人間が舵を取り、エージェントが実行します。あなたは意図、受け入れ基準、レビューを担い、エージェントはタスクを一つずつ実行し、計画は両者を結ぶ契約です。',
+    statement: '人間が舵を取る。エージェントが実行する。',
+    statementEmphasis: '舵を取る',
+    points: [
+      'あなた：意図、受け入れ基準、レビュー',
+      'エージェント：タスクを一つずつ実行',
+      '計画：両者を結ぶ契約',
+    ],
+    alt: '海上の船の版画イラストです。船長の手が舵輪を握り、乗組員が帆を操作し、太い針路線が図版を横切っています。',
+  },
+  de: {
+    ariaLabel:
+      'Akt I der Geschichte von Deep Work Plan: Menschen steuern, Agenten führen aus. Sie bringen die Absicht, die Akzeptanzkriterien und das Review ein; Agenten tragen die Ausführung voran, Aufgabe für Aufgabe; und der Plan ist der Vertrag zwischen beiden.',
+    statement: 'Menschen steuern. Agenten führen aus.',
+    statementEmphasis: 'steuern',
+    points: [
+      'Sie: Absicht, Akzeptanzkriterien, Review',
+      'Agenten: Ausführung, Aufgabe für Aufgabe',
+      'Der Plan: der Vertrag zwischen beiden',
+    ],
+    alt: 'Gravur eines Schiffs auf See: Die Hand des Kapitäns hält das Steuerrad, die Crew arbeitet an den Segeln, und eine markante Kurslinie durchzieht die Grafik.',
+  },
+  fr: {
+    ariaLabel:
+      'Acte I de l’histoire de Deep Work Plan : les humains dirigent et les agents exécutent. Vous apportez l’intention, les critères d’acceptation et la revue ; les agents mènent l’exécution, tâche par tâche ; et le plan est le contrat qui les unit.',
+    statement: 'Les humains dirigent. Les agents exécutent.',
+    statementEmphasis: 'dirigent',
+    points: [
+      'Vous : intention, critères d’acceptation, revue',
+      'Agents : exécution, tâche par tâche',
+      'Le plan : le contrat entre les deux',
+    ],
+    alt: 'Gravure d’un navire en mer : la main du capitaine tient la barre, l’équipage manœuvre les voiles, et une ligne de cap marquée traverse la planche.',
+  },
+  ko: {
+    ariaLabel:
+      'Deep Work Plan 스토리의 1막 에디토리얼 플레이트입니다. 인간은 방향을 잡고 에이전트가 실행합니다. 당신은 의도, 수용 기준, 리뷰를 담당하고, 에이전트는 한 작업씩 실행하며, 계획은 둘 사이의 계약입니다.',
+    statement: '인간은 방향을 잡습니다. 에이전트가 실행합니다.',
+    statementEmphasis: '방향',
+    points: [
+      '당신: 의도, 수용 기준, 리뷰',
+      '에이전트: 실행, 한 작업씩',
+      '계획: 둘 사이의 계약',
+    ],
+    alt: '바다 위 배를 그린 판화 일러스트레이션입니다. 선장의 손이 타륨을 잡고 선원들이 돛을 조작하며, 굵은 항로선이 그림을 가로지릅니다.',
+  },
+  ru: {
+    ariaLabel:
+      'Акт I истории Deep Work Plan: люди управляют, агенты исполняют. Вы вносите замысел, критерии приёмки и проверку; агенты ведут исполнение, задача за задачей; а план — договор между ними.',
+    statement: 'Люди управляют. Агенты исполняют.',
+    statementEmphasis: 'управляют',
+    points: [
+      'Вы: замысел, критерии приёмки, проверка',
+      'Агенты: исполнение, задача за задачей',
+      'План: договор между ними',
+    ],
+    alt: 'Гравюра с кораблём в море: рука капитана держит штурвал, команда работает с парусами, а жирная линия курса пересекает гравюру.',
+  },
+  it: {
+    ariaLabel:
+      'Atto I della storia di Deep Work Plan: gli umani governano e gli agenti eseguono. Tu porti l’intento, i criteri di accettazione e la revisione; gli agenti svolgono l’esecuzione, attività per attività; e il piano è il contratto tra loro.',
+    statement: 'Gli umani governano. Gli agenti eseguono.',
+    statementEmphasis: 'governano',
+    points: [
+      'Tu: intento, criteri di accettazione, revisione',
+      'Agenti: esecuzione, attività per attività',
+      'Il piano: il contratto tra loro',
+    ],
+    alt: 'Incisione di una nave in mare: la mano del capitano tiene il timone, l’equipaggio lavora alle vele e una decisa linea di rotta attraversa la tavola.',
+  },
+  tr: {
+    ariaLabel:
+      'Deep Work Plan hikâyesinin I. perdesi: insanlar dümen tutar, ajanlar yürütür. Siz niyeti, kabul kriterlerini ve incelemeyi üstlenirsiniz; ajanlar yürütmeyi görev görev gerçekleştirir; plan ise ikisi arasındaki sözleşmedir.',
+    statement: 'İnsanlar dümen tutar. Ajanlar yürütür.',
+    statementEmphasis: 'dümen',
+    points: [
+      'Siz: niyet, kabul kriterleri, inceleme',
+      'Ajanlar: yürütme, görev görev',
+      'Plan: ikisi arasındaki sözleşme',
+    ],
+    alt: 'Açık denizde bir geminin gravür illüstrasyonu: kaptanın eli dümeni tutarken mürettebat yelkenlerde çalışır ve belirgin bir rota çizgisi çizimi enine keser.',
+  },
+  id: {
+    ariaLabel:
+      'Bab I kisah Deep Work Plan: manusia memegang kemudi dan agent mengeksekusi. Anda membawa maksud, kriteria penerimaan, dan tinjauan; agent menjalankan eksekusi, tugas demi tugas; dan rencana adalah kontrak di antara keduanya.',
+    statement: 'Manusia memegang kemudi. Agent mengeksekusi.',
+    statementEmphasis: 'kemudi',
+    points: [
+      'Anda: maksud, kriteria penerimaan, tinjauan',
+      'Agent: eksekusi, tugas demi tugas',
+      'Rencana: kontrak di antara keduanya',
+    ],
+    alt: 'Ilustrasi gravir kapal di laut: tangan nakhoda memegang kemudi, awak kapal bekerja di layar, dan garis arah yang tegas memotong gambar.',
+  },
+  vi: {
+    ariaLabel:
+      'Hồi I của câu chuyện Deep Work Plan: con người cầm lái, agent thực thi. Bạn đóng góp ý định, tiêu chí nghiệm thu và đánh giá; agent thực hiện việc thi hành, từng nhiệm vụ một; và kế hoạch là hợp đồng giữa hai bên.',
+    statement: 'Con người cầm lái. Agent thực thi.',
+    statementEmphasis: 'lái',
+    points: [
+      'Bạn: ý định, tiêu chí nghiệm thu, đánh giá',
+      'Agent: thực thi, từng nhiệm vụ một',
+      'Kế hoạch: hợp đồng giữa hai bên',
+    ],
+    alt: 'Tranh khắc họa con thuyền trên biển: tay thuyền trưởng giữ bánh lái, thủy thủ đoàn thao tác cánh buồm và một đường hành trình đậm cắt ngang bức tranh.',
+  },
+  hi: {
+    ariaLabel:
+      'Deep Work Plan कथा का अंक एक: मनुष्य पतवार संभालते हैं और एजेंट निष्पादन करते हैं। आप अभिप्राय, स्वीकृति मानदंड और समीक्षा लाते हैं; एजेंट कार्य दर कार्य निष्पादन करते हैं; और योजना दोनों के बीच का अनुबंध है।',
+    statement: 'मनुष्य पतवार संभालते हैं। एजेंट निष्पादन करते हैं।',
+    statementEmphasis: 'पतवार',
+    points: [
+      'आप: अभिप्राय, स्वीकृति मानदंड, समीक्षा',
+      'एजेंट: निष्पादन, कार्य दर कार्य',
+      'योजना: दोनों के बीच का अनुबंध',
+    ],
+    alt: 'समुद्र में जहाज़ का उत्कीर्ण चित्रण: कप्तान का हाथ पतवार थामे हुए है, चालक दल पालों पर काम कर रहा है, और एक बड़ी रेखा चित्र को पार करती है।',
+  },
+  pl: {
+    ariaLabel:
+      'Akt I historii Deep Work Plan: ludzie sterują, agenci wykonują. Ty wnosisz intencję, kryteria akceptacji i przegląd; agenci realizują wykonanie, zadanie po zadaniu; a plan jest umową między nimi.',
+    statement: 'Ludzie sterują. Agenci wykonują.',
+    statementEmphasis: 'sterują',
+    points: [
+      'Ty: intencja, kryteria akceptacji, przegląd',
+      'Agenci: wykonanie, zadanie po zadaniu',
+      'Plan: umowa między nimi',
+    ],
+    alt: 'Grawer przedstawiający statek na morzu: dłoń kapitana trzyma ster, załoga pracuje przy żaglach, a wyraźna linia kursu przecina planszę.',
+  },
+  uk: {
+    ariaLabel:
+      'Акт I історії Deep Work Plan: люди керують, агенти виконують. Ви несете намір, критерії приймання та перевірку; агенти провадять виконання, завдання за завданням; а план — це договір між ними.',
+    statement: 'Люди керують. Агенти виконують.',
+    statementEmphasis: 'керують',
+    points: [
+      'Ви: намір, критерії приймання, перевірка',
+      'Агенти: виконання, завдання за завданням',
+      'План: договір між ними',
+    ],
+    alt: 'Гравюра з кораблем у морі: рука капітана тримає штурвал, команда працює з вітрилами, а жирна лінія курсу перетинає гравюру.',
+  },
+  th: {
+    ariaLabel:
+      'องก์ที่หนึ่งของเรื่องราว Deep Work Plan: มนุษย์นำทิศ agent ลงมือทำ คุณนำเจตนา เกณฑ์การยอมรับ และการรีวิว agent ลงมือทำทีละงาน และแผนคือสัญญาระหว่างกัน',
+    statement: 'มนุษย์นำทิศ agent ลงมือทำ',
+    statementEmphasis: 'นำทิศ',
+    points: [
+      'คุณ: เจตนา เกณฑ์การยอมรับ การรีวิว',
+      'agent: ลงมือทำ ทีละงาน',
+      'แผน: สัญญาระหว่างกัน',
+    ],
+    alt: 'ภาพแกะสลักเรือในทะเล: มือกัปตันจับพวงมาลัย ลูกเรือทำงานที่เรือใบ และเส้นเดินเรือที่ชัดเจนพาดผ่านภาพ',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+
+// Split the statement around the first occurrence of the emphasized word so
+// each language keeps its own word order around the single oxblood accent.
+const emStart = t.statement.indexOf(t.statementEmphasis);
+const emFound = emStart !== -1;
+const statementHead = emFound ? t.statement.slice(0, emStart) : '';
+const statementTail = emFound
+  ? t.statement.slice(emStart + t.statementEmphasis.length)
+  : t.statement;
+
+// The leading "Label:" segment (ASCII or full-width colon) becomes the
+// small-caps row label; rows without a colon render as plain text.
+const splitLabel = (point: string): { label: string; text: string } => {
+  const colon = point.search(/[:：]/);
+  if (colon === -1) {
+    return { label: '', text: point };
+  }
+  return { label: point.slice(0, colon + 1), text: point.slice(colon + 1) };
+};
+
+const pointRows = t.points.map(splitLabel);
+---
+
+<figure class={`editorial-asset editorial-plate ${className}`} role="img" aria-label={t.ariaLabel}>
+  <img
+    src="/images/visuals/home/plate-humans-steer.png"
+    alt={t.alt}
+    width="1600"
+    height="1000"
+    loading="lazy"
+    class="plate-frame-img dark:hidden"
+  />
+  <img
+    src="/images/visuals/home/plate-humans-steer-dark.png"
+    alt={t.alt}
+    width="1600"
+    height="1000"
+    loading="lazy"
+    class="plate-frame-img hidden dark:block"
+  />
+  <p class="plate-statement">
+    {statementHead}{emFound && <span class="plate-statement-em ea-accent">{t.statementEmphasis}</span>}{statementTail}
+  </p>
+  <ul class="plate-points">
+    {
+      pointRows.map((row) => (
+        <li>{row.label && <span class="ea-label">{row.label}</span>}{row.text}</li>
+      ))
+    }
+  </ul>
+</figure>

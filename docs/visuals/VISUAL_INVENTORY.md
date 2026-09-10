@@ -10,11 +10,12 @@
 > every ▦ diagram slot (HP-03/04/05, all ME/SP/KT) is built as an HTML/CSS component
 > under `src/components/diagrams/` (see [`docs/DIAGRAM_COMPONENTS.md`](../DIAGRAM_COMPONENTS.md));
 > these prompt entries are kept as the **component specs / i18n seed**. Only the
-> 🖼 illustrations (HP-01, HP-02) are generated as images.
+> 🖼 illustrations (HP-01, HP-02, HP-06…HP-11) are generated as images.
 
 **Priority key:** ★ flagship · H high · M medium · L low.
 **Type:** 🖼 illustration (→ image) · ▦ diagram (→ component).
 **Status:** `todo` (no prompt yet) · `done` (schema-complete prompt written) ·
+`awaiting-assets` (prompt written; image pending developer generation) ·
 `skip` (intentionally no visual — reason noted).
 
 ---
@@ -28,6 +29,12 @@
 | HP-03 | `Quickstart.astro` → above/beside the 4 steps | ▦ | H | 16:9 · 880×495 | transparent | `home/quickstart-flow.webp` | done |
 | HP-04 | `Onboarding.astro` → beside numbered steps | ▦ | M | 16:9 · 880×495 | transparent | `home/onboarding-sequence.webp` | done |
 | HP-05 | `Archetypes.astro` → between the two cards | ▦ | M | 1:1 · 640×640 | transparent | `home/archetypes-compare.webp` | done |
+| HP-06 | `diagrams/home/HumansSteer.astro` → Act I plate art (four-act story block) | 🖼 | ★ | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-humans-steer.png` | done |
+| HP-07 | `diagrams/home/PlanNoDrift.astro` → Act II plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-plan-no-drift.png` | done |
+| HP-08 | `diagrams/home/DoneIsAContract.astro` → Act III plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-done-is-a-contract.png` | done |
+| HP-09 | `diagrams/home/RepoAsHarnessPlate.astro` → Act IV plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-repo-as-harness.png` | done |
+| HP-10 | `Pitch.astro` → problem/answer diptych, illustration left | 🖼 | H | 4:5 · 520×650 | transparent (dual-ink PNG) | `home/plate-pitch-problem.png` | done |
+| HP-11 | `diagrams/home/ContextEconomy.astro` → Act V plate art (token economy) | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-context-economy.png` | done |
 
 > `Comparison.astro` and `Origin.astro`: candidate `skip` — Comparison is a table
 > (status marks may be CSS, not an asset); Origin already carries the Dailybot
@@ -88,10 +95,11 @@
 
 | ID | Surface | Type | Pri | Aspect/size | Light/dark | Asset path | Status |
 | :-- | :-- | :-: | :-: | :-- | :-- | :-- | :-- |
-| PG-01 | `NotFoundPage.astro` → right column (404 / sailed off the chart) | 🖼 | M | 1:1 · 720×720 (square) | pair | `pages/not-found-offmap.webp` | done |
+| PG-01 | `NotFoundPage.astro` → right column (404 / ship to lighthouse) | 🖼 | M | ~4:5 · 1122×1402 | pair | `pages/not-found-offmap.webp` | done |
+| PG-02 | `FaqPage.astro` → hero right column (blank ledger / charted answers) | 🖼 | M | 4:3 · 1152×864 | pair | `pages/faq-index.webp` | done |
 
 > New `pages` asset area for standalone routes outside home/methodology/spec/kit
-> (extends STYLE_GUIDE §6). PG-01 is wordless, so one light/dark pair serves EN+ES.
+> (extends STYLE_GUIDE §6). PG-01 and PG-02 are wordless, so one light/dark pair serves every language.
 
 ---
 
@@ -99,12 +107,14 @@
 
 | Area | Slots | Flagships | Done | Skip |
 | :-- | :-: | :-- | :-: | :-: |
-| Homepage | 5 | HP-01 | 5 | 2 (Comparison → CSS ticks; Origin → has logo) |
+| Homepage | 9 | HP-01, HP-06 | 9 | 2 (Comparison → CSS ticks; Origin → has logo) |
 | Methodology | 6 | ME-01, ME-02 | 6 | — |
 | Spec | 5 | — | 5 (SP-02/03/05 reuse ME assets) | — |
 | Kit | 10 | KT-01 | 10 | — |
-| **Total** | **26** | **4** | **26** | **2** |
+| **Total** | **30** | **5** | **26** | **2** |
 
-_Homepage = HP-01/HP-02 (illustrations, images) · HP-03/04/05 (diagram components).
+_Homepage = HP-01/HP-02 (illustrations, images) · HP-03/04/05 (diagram components) ·
+HP-06…HP-09 (home story plates, PLAN_home_storytelling_upgrade — integrated
+on the homepage).
 SP-02/SP-03/SP-05 reuse methodology components ME-03/ME-02/ME-06. All diagrams (▦)
 are HTML/CSS components, not images._

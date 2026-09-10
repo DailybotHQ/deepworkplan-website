@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Agent protocol
 
-**Version 1.2.** This protocol defines how an AI coding agent MUST behave when working with Deep Work Plans. The keywords MUST, SHOULD, and MAY follow RFC 2119.
+**Version 1.3.** This protocol defines how an AI coding agent MUST behave when working with Deep Work Plans. The keywords MUST, SHOULD, and MAY follow RFC 2119.
 
 > **Additive in v1.2.** Two additions, no breaking changes: (1) autonomous agent platforms (OpenClaw, Hermes) join the supported-agents table; (2) the **Execution profiles** section defines unattended execution — bounded authority, mandatory state layer, stop conditions, and scheduled continuation.
 
@@ -52,8 +52,8 @@ The testing and validation toolchain is essential, not optional context: validat
 When creating a plan, the agent MUST:
 
 - Decompose the goal into sequential, reviewable tasks.
-- Write each task with the nine-section anatomy.
-- End with the three mandatory final tasks (Security Review, Skills & Agents Discovery, Executive Report).
+- Write each task with the ten-section anatomy — the Touched Surface records what the task changes and selects its validation gate by risk class.
+- End with the single mandatory Final Review (security pass, final-state validation, skills reconciliation).
 - Ask clarifying questions when the goal is ambiguous.
 
 ## Execution
@@ -66,7 +66,8 @@ During execution, the agent MUST:
 - Mark task status accurately.
 - For any task that adds new functionality or changes behavior, add or update automated tests for that behavior and run the repository's tests and lint/type-check checks before marking the task complete; never delete or skip a test to force the gate to pass.
 - For any task that touches authentication, input handling, secrets or configuration, network surface, or dependencies, meet the security expectations declared in its acceptance criteria and confirm the diff carries no secret material before committing.
-- Stop and ask when blocked rather than guessing.
+- Proceed from a passing gate to the next task without asking for confirmation; attempt repairs within the task's authorized scope when a gate fails — with a concrete hypothesis, stopping blind retries after two attempts without new evidence.
+- Stop and ask only at a genuine approval boundary or an unresolved blocker rather than guessing.
 
 ## Refinement
 
@@ -98,7 +99,7 @@ A human is present in the session. The agent proposes, the human approves the re
 
 The plan runs with no human watching — an autonomous platform's scheduled turn, a cloud session, an overnight run. Unattended execution is opt-in per plan and MUST satisfy all of the following:
 
-- **Pre-approved plan.** The refined draft was approved by a human before any unattended turn. An agent MUST NOT create and execute a plan unattended in one turn; plan approval is the human control point.
+- **Pre-approved plan.** The plan was approved before any unattended turn — in guided mode the human approved the refined draft; in trust mode the developer's explicit `trust` instruction is the recorded approval. An agent MUST NOT create and execute a plan unattended in one turn without either; plan approval is the human control point.
 - **State layer REQUIRED.** The plan MUST carry `manifest.json` and `state.json` so any later session — agent or human — can read exact progress without replaying a transcript. See [Plan state](/spec/plan-state).
 - **Bounded authority.** The agent's authority is the plan: it MUST NOT expand scope, MUST NOT perform destructive or outward-facing actions the plan does not explicitly authorize, and MUST NOT stretch a task's instructions to cover discovered-but-unplanned work — discovered work is recorded for the next `refine`, not improvised.
 - **One atomic task per turn, gates always.** Each turn runs the DWP Resume Protocol, executes at most the next task, passes its validation gate, completes per the task completion protocol, and yields. A failing gate is a stop condition, never "continue anyway".

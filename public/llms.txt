@@ -27,6 +27,8 @@ How an agent should engage: fetch the [adoption prompt](https://deepworkplan.com
 - [Kit](https://deepworkplan.com/kit): presets, adapters, and commands for installing DWP into a repository
 - [Examples](https://deepworkplan.com/examples): worked examples of the methodology in practice
 - [Quickstart](https://deepworkplan.com/quickstart): get DWP running in a repo quickly
+- [Compare](https://deepworkplan.com/compare): Deep Work Plan next to spec-driven tools, agent frameworks and vendor plan modes — each on its own terms, sourced and dated
+- [FAQ](https://deepworkplan.com/faq): answers to the questions people ask — what it does, gates and resumption, how it compares, how to adopt it
 - [Init / Adoption](https://deepworkplan.com/init): make any repository AI-first — install the skill, onboard the repo, then plan and execute (self-contained agent prompt at [init.md](https://deepworkplan.com/init.md))
 - [Developers](https://deepworkplan.com/developers): the agent & developer surface — OpenAPI spec, MCP server, zero-auth API, install CLI
 - [Trust](https://deepworkplan.com/trust): why the skill is safe to adopt — MIT, verifiable installs, disclosure policy

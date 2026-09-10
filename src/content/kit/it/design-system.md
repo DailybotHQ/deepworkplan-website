@@ -34,7 +34,7 @@ Questo addon è per repo con almeno una vera superficie di interfaccia; non vien
 - **`visual-ui` è attivo di default quando rilevato** — un foglio di stile con proprietà personalizzate CSS, una configurazione Tailwind o un blocco `@theme`, componenti UI o una guida di brand/stile. L’onboarding lo applica in modalità trust e lo raccomanda con forza in modalità guidata.
 - **`cli-output` e `conversational` sono raccomandati quando rilevati — e sempre proposti con una domanda, mai applicati automaticamente**, anche in modalità trust. Una libreria di rendering CLI più un livello di visualizzazione deliberato segnala il primo; un SDK di piattaforma chat o un livello di composizione dei messaggi segnala il secondo. Un semplice parser di argomenti con print grezzi non qualifica.
 
-Non è mai obbligatorio — un repository con zero addon è pienamente conforme, e puoi sempre rifiutare qualsiasi profilo o l’intero addon. Un `DESIGN.md` creato prima che esistessero i profili è un file visuale a profilo singolo valido: nessuna migrazione.
+Non è mai obbligatorio — un repository con zero addon opzionali è pienamente conforme, e puoi sempre rifiutare qualsiasi profilo o l’intero addon. Un `DESIGN.md` creato prima che esistessero i profili è un file visuale a profilo singolo valido: nessuna migrazione.
 
 ## Comando opzionale
 

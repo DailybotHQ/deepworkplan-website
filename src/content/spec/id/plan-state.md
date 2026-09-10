@@ -50,7 +50,7 @@ Kedua berkas MUST ditulis secara atomik: tulis ke berkas sementara di direktori 
 ```json
 {
   "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.2.0",
+  "spec_version": "2.3.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
@@ -146,7 +146,7 @@ Sebuah tugas MUST NOT ditandai `completed` di `state.json` selama salah satu cat
 
 Sebuah tugas `completed` SHOULD membawa catatan `outcome`: apa yang `tried`, apa yang `failed`, apa yang `worked`, dan `notes` bentuk bebas. Pertahankan setiap entri dalam satu baris.
 
-Catatan outcome menjadikan rencana yang selesai sebagai **memori episodik** yang dapat diambil kembali: sebuah agent (atau platform pengindeksan memori) dapat kemudian mengingat kembali bagaimana sebuah masalah diselesaikan, bukan sekadar bahwa masalah itu sudah selesai. Catatan ini memberi masukan ke tugas wajib Skills & Agents Discovery, yang SHOULD membacanya ketika menggali pola. Pada platform seperti Hermes yang mengindeks memori agent, catatan outcome di `state.json` membuat rencana yang selesai dapat langsung diambil kembali lintas sesi mendatang.
+Catatan outcome menjadikan rencana yang selesai sebagai **memori episodik** yang dapat diambil kembali: sebuah agent (atau platform pengindeksan memori) dapat kemudian mengingat kembali bagaimana sebuah masalah diselesaikan, bukan sekadar bahwa masalah itu sudah selesai. Catatan ini memberi masukan ke disposisi skills per-tugas dan ke rekonsiliasi skills pada Final Review, yang membacanya ketika menggali pola. Pada platform seperti Hermes yang mengindeks memori agent, catatan outcome di `state.json` membuat rencana yang selesai dapat langsung diambil kembali lintas sesi mendatang.
 
 ### Checkpoint dan status terblokir
 

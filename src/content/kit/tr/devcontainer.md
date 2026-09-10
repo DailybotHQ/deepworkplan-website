@@ -23,4 +23,4 @@ Devcontainer’ın kabaca %85’i kararlı, ortak bir iskelettir; kalan %15’i 
 
 ## Notlar
 
-İsteğe bağlıdır ve hiçbir zaman zorunlu değildir. Bir depo, sıfır eklentiyle tümüyle uyumludur.
+İsteğe bağlıdır ve hiçbir zaman zorunlu değildir. Bir depo, sıfır isteğe bağlı eklentiyle tümüyle uyumludur.

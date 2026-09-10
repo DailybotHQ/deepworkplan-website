@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Giao thức agent
 
-**Phiên bản 1.2.** Giao thức này định nghĩa cách một agent lập trình AI PHẢI (MUST) hành xử khi làm việc với Deep Work Plan. Các từ khóa MUST, SHOULD và MAY tuân theo RFC 2119.
+**Phiên bản 1.3.** Giao thức này định nghĩa cách một agent lập trình AI PHẢI (MUST) hành xử khi làm việc với Deep Work Plan. Các từ khóa MUST, SHOULD và MAY tuân theo RFC 2119.
 
 > **Bổ sung trong v1.2.** Hai bổ sung, không có thay đổi phá vỡ: (1) các nền tảng agent tự chủ (OpenClaw, Hermes) tham gia bảng supported-agents; (2) phần **Hồ sơ thực thi** định nghĩa thực thi không có giám sát — quyền hạn giới hạn, lớp trạng thái bắt buộc, các điều kiện dừng và tiếp tục theo lịch.
 
@@ -52,8 +52,8 @@ Bộ công cụ test và kiểm chứng là ngữ cảnh thiết yếu, không p
 Khi tạo một kế hoạch, agent PHẢI:
 
 - Phân rã mục tiêu thành các tác vụ tuần tự, rà soát được.
-- Viết mỗi tác vụ theo cấu trúc chín phần.
-- Kết thúc bằng ba tác vụ cuối bắt buộc (Security Review, Skills & Agents Discovery, Executive Report).
+- Viết mỗi tác vụ theo cấu trúc mười phần — Touched Surface ghi lại những gì tác vụ thay đổi và chọn cổng kiểm chứng của nó theo lớp rủi ro.
+- Kết thúc bằng Final Review bắt buộc duy nhất (bước rà soát bảo mật, kiểm chứng trạng thái cuối cùng, đối chiếu skill).
 - Đặt câu hỏi làm rõ khi mục tiêu còn mập mờ.
 
 ## Thực thi
@@ -66,7 +66,8 @@ Trong quá trình thực thi, agent PHẢI:
 - Đánh dấu trạng thái tác vụ một cách chính xác.
 - Đối với bất kỳ tác vụ nào thêm chức năng mới hoặc thay đổi hành vi, thêm hoặc cập nhật các test tự động cho hành vi đó và chạy các test cùng các bước kiểm tra lint/kiểm tra kiểu của repository trước khi đánh dấu tác vụ hoàn tất; không bao giờ xóa hay bỏ qua một test để ép cổng đạt.
 - Đối với bất kỳ tác vụ nào chạm tới xác thực, xử lý đầu vào, bí mật hay cấu hình, bề mặt mạng, hoặc các phụ thuộc, đáp ứng các kỳ vọng bảo mật được khai báo trong tiêu chí chấp nhận của nó và xác nhận diff không mang tư liệu bí mật nào trước khi commit.
-- Dừng lại và hỏi khi bị chặn thay vì phỏng đoán.
+- Tiến từ một cổng đạt sang tác vụ tiếp theo mà không xin xác nhận; khi một cổng thất bại, cố gắng sửa chữa trong phạm vi được ủy quyền của tác vụ — với một giả thuyết cụ thể, ngừng các lần thử mù quáng sau hai lần không có bằng chứng mới.
+- Chỉ dừng lại và hỏi tại một ranh giới phê duyệt thực sự hoặc một điểm chặn chưa giải quyết được, thay vì phỏng đoán.
 
 ## Tinh chỉnh
 
@@ -98,7 +99,7 @@ Một con người hiện diện trong phiên. Agent đề xuất, con người 
 
 Kế hoạch chạy mà không có con người theo dõi — một lượt theo lịch của nền tảng tự chủ, một cloud session, một lần chạy qua đêm. Thực thi không có giám sát là tự nguyện theo từng kế hoạch và PHẢI thỏa mãn tất cả những điều sau:
 
-- **Kế hoạch đã được chấp thuận trước.** Bản nháp đã tinh chỉnh được một con người chấp thuận trước bất kỳ lượt không có giám sát nào. Một agent KHÔNG ĐƯỢC tạo và thực thi một kế hoạch không có giám sát trong một lượt; chấp thuận kế hoạch là điểm kiểm soát của con người.
+- **Kế hoạch đã được chấp thuận trước.** Kế hoạch được chấp thuận trước bất kỳ lượt không có giám sát nào — trong chế độ hướng dẫn, con người chấp thuận bản nháp đã tinh chỉnh; trong chế độ tin cậy, chỉ thị `trust` rõ ràng của nhà phát triển là sự chấp thuận được ghi lại. Một agent KHÔNG ĐƯỢC tạo và thực thi một kế hoạch không có giám sát trong một lượt mà thiếu một trong hai; chấp thuận kế hoạch là điểm kiểm soát của con người.
 - **Lớp trạng thái BẮT BUỘC.** Kế hoạch PHẢI mang `manifest.json` và `state.json` để bất kỳ phiên nào sau — agent hay con người — đều có thể đọc tiến độ chính xác mà không cần phát lại bản chép. Xem [Trạng thái kế hoạch](/spec/plan-state).
 - **Quyền hạn giới hạn.** Quyền hạn của agent là kế hoạch: nó KHÔNG ĐƯỢC mở rộng phạm vi, KHÔNG ĐƯỢC thực hiện các hành động phá hủy hoặc hướng ra ngoài mà kế hoạch không ủy quyền rõ ràng, và KHÔNG ĐƯỢC kéo dài hướng dẫn của tác vụ để bao gồm công việc được khám phá nhưng chưa lên kế hoạch — công việc được khám phá được ghi lại cho lần `refine` tiếp theo, không được tùy hứng thực hiện.
 - **Một tác vụ nguyên tử mỗi lượt, cổng luôn áp dụng.** Mỗi lượt chạy Giao thức Tiếp tục DWP, thực thi tối đa tác vụ tiếp theo, vượt qua cổng kiểm chứng của nó, hoàn tất theo giao thức hoàn tất tác vụ, và nhường. Một cổng thất bại là điều kiện dừng, không bao giờ là "tiếp tục dù sao".

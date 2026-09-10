@@ -34,6 +34,15 @@ pitch chart HP-02) stay AI-generated images — line art and
 atmosphere are not a good HTML/CSS fit, and the team generates those with an image
 agent. See `docs/visuals/` for those prompts.
 
+> **Home story plates (HP-06…HP-09) — illustration-led two-layer components.**
+> The homepage's four-act story block does NOT use the SVG diagram technique: each
+> act is an AI-engraved, text-free raster vignette (**transparent-background PNG**,
+> light/dark ink variants) wrapped in this system's `.editorial-asset` frame with a
+> real HTML text layer (inline 17-language i18n map, `role="img"` + localized
+> `aria-label`, statement as a non-heading paragraph). Components live in
+> `src/components/diagrams/home/`; slot catalog in `docs/visuals/VISUAL_INVENTORY.md`;
+> canonical prompts in `docs/visuals/prompts/01-homepage.md`.
+
 ---
 
 ## 1. Core rules (mandatory)
@@ -238,5 +247,6 @@ Status: `todo` → `built`. Spec column → entry in `docs/visuals/prompts/`.
 | HP-04 | `OnboardingSequence` | home | 01-homepage#hp-04 | built |
 | HP-05 | `ArchetypesCompare` | home | 01-homepage#hp-05 | built |
 
-**Illustrations kept as images (not in this system):** HP-01 (faro hero) and HP-02
-(pitch chart) — see `docs/visuals/`.
+**Illustrations kept as images (not in this system):** HP-01 (faro hero), HP-02
+(pitch chart), and HP-06…HP-09 (home story plates — see the §0 note) — see
+`docs/visuals/`.

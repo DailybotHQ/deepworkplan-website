@@ -1,12 +1,12 @@
 ---
 title: "Deep Work Plan — yapay zeka kodlama ajanları için yapılandırılmış yürütme"
 description: "Bağlam modellerden daha çok önemlidir. Deep Work Plan, herhangi bir depoyu, herhangi bir kodlama ajanının uzun soluklu işi bitirdiği yapılandırılmış bir ortama dönüştürür."
-lastUpdated: 2026-06-03
+lastUpdated: 2026-09-10
 ---
 
 ## Modeller önemlidir. Bağlam daha çok önemlidir.
 
-Deep Work Plan, herhangi bir depoyu yapılandırılmış bir ortama — bağlam, güvenlik bariyerleri ve kalıcı bir plan — dönüştürür; burada herhangi bir kodlama ajanı kesinlikle yürütür ve uzun soluklu işi bitirir.
+Deep Work Plan, herhangi bir depoyu yapılandırılmış bir ortama dönüştürür — bağlam, koruma bariyerleri ve kalıcı bir plan — herhangi bir kodlama ajanı burada hassas ve verimli çalışır ve uzun soluklu işi tamamlar.
 
 Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini planlamak ve yürütmek için açık, MIT lisanslı bir metodoloji ve kittir. Bir kurulum yöntemi seçmez ya da bir şablon kopyalamazsınız — init.md istemini kopyalayıp ajanınıza yapıştırırsınız:
 
@@ -19,14 +19,65 @@ Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini pla
 
 ---
 
-## Sorun ve yanıt
+## Sorun ve çözüm
 
-Yapay zeka kodlama ajanları, kısa anlarda dikkat çekici ölçüde etkilidir. Uzun soluklu işlerde — bir geçiş, yeni bir alt sistem, onlarca dosyaya yayılan bir refactor — savrulurlar: bağlam dolar, kararlar unutulur ve birkaç saatlik görevler yarı yolda terk edilir.
+Kısa hamlelerde kodlama ajanları etkileyicidir. Ona uzun soluklu bir misyon verin — bir göç, yeni bir alt sistem, onlarca dosyayı kapsayan bir yeniden yapılandırma — ve ajan sapar: bağlam dolar, önceki kararlar solur ve saatler süren iş yarı yolda kalır.
 
-Deep Work Plan buna **spec odaklı geliştirmeyle** yanıt verir: plan kalıcı doğruluk kaynağıdır ve ajanlar açık kabul kriterlerine ve doğrulama kapılarına karşı çalışır. Sapma düşer, iş doğrulanabilir kalır ve herhangi bir ajan onu oturumlar arasında sürdürebilir. Tek bir IDE ya da satıcıya bağlı spec odaklı araçların (GitHub Spec Kit, Amazon Kiro, Tessl) aksine, DWP araçtan bağımsız ve repo-native’dir.
+Deep Work Plan, spesifikasyon odaklı geliştirme ile yanıt verir: dayanıklı bir plan, atomik görevler ve ajanın geçmesi gereken doğrulama kapıları. İş doğrulanabilir kalır — ve her ajan oturumlar arasında sürdürebilir.
 
-Aynı zamanda taşınabilir hale getirilmiş **harness mühendisliğidir**. Bir ajan harness’ı, bir modelin etrafındaki iskeledir — bağlam, araçlar, kontrol döngüsü, güvenlik bariyerleri, sürdürülebilir durum — ve onu güvenilir kılan şeydir. Deep Work Plan o harness’ı deponun kendisine kurar; böylece herhangi bir ajan herhangi bir depoyu pilotlayabilir.
+Ve bağlam, ajanınızın en kıt kaynağıdır. Bu yüzden harness token verimliliği için tasarlandı: talimatlar aşamalı yüklenir, doğrulama yalnızca değişene dokunur ve her görev kendi yerinde öğrenir — uzun soluklu iş ulaşılabilir kalır.
+---
 
+## İnsanlar dümen tutar. Ajanlar yürütür.
+
+Neyin bitti sayılacağına ve sınırların nerede olacağına siz karar verirsiniz. Plan niyetinizi taşır; ajanlar saatleri çalışır — sürekli gözetim yok, yirmi dakikada bir düzeltme yok.
+
+- Siz: niyet, kabul kriterleri, inceleme
+- Ajanlar: yürütme, görev görev
+- Plan: ikisi arasındaki sözleşme
+
+[Metodolojiyi okuyun](/tr/methodology)
+
+---
+
+## Ajanların sapamayacağı bir plan.
+
+Uzun görevler her modelin bağlamını doldurur. Ayrıntılar kayar ve ajan saptar. Yazılı bir plan — atomik görevler, doğrulama kapıları, sürdürülebilir durum — her turda geri döndüğü çıpadır.
+
+1. Plan
+2. Atomik görevler
+3. Doğrulama kapıları
+4. Tamamlanma
+5. Devam ettirilebilir durum
+
+[Çekirdek döngüyü görün](/tr/methodology)
+
+---
+
+## Bitti bir sözleşmedir, bir his değil.
+
+Her görev, kabul kriterlerini ve geçmesi gereken kontrolleri adlandırır. Ajan kendini bitmiş hissedemez — geçmek zorundadır, aksi hâlde görev açık kalır.
+
+- Testler geçer
+- Tür denetimi geçer
+- Kabul kriterleri karşılanır
+- Yoksa görev açık kalır
+
+[Şartnamayı okuyun](/tr/spec)
+
+---
+
+## Depo, harness’tir.
+
+Bağlam, araçlar, koruma bariyerleri ve durum; herhangi bir ajanın okuyabileceği düz dosyalar olarak deponuzda yaşar. Kilitlenme yok, dış beyin yok — bağlam sıfırlamalarını atlatır.
+
+- Diskte kalıcı spesifikasyon
+- His değil doğrulama kapıları
+- Bağlam sıfırlamalarını atlatır
+
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
+
+[Onboarding çıktısını görün](/tr/quickstart)
 ---
 
 ## Ne elde edersiniz

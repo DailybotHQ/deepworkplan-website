@@ -1,6 +1,6 @@
 ---
 title: DWP specification
-description: "Normative Deep Work Plan specification: plan structure, the nine-section task anatomy, the five-operation execution loop, the output workspace, and versioning."
+description: "Normative Deep Work Plan specification: plan structure, the ten-section task anatomy, gate selection by touched surface, the five-operation execution loop, the output workspace, and versioning."
 order: 2
 lang: en
 section: Workflow
@@ -11,15 +11,25 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP specification
 
-**Version 1.2. Status: Stable.** This document is the normative specification for the Deep Work Plan (DWP) methodology. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
+**Version 2.3.0. Status: Stable.** This document is the normative specification for the Deep Work Plan (DWP) methodology. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
-> **Additive in v1.2.** Four additive capabilities, no breaking changes: (1) the **machine-readable plan state layer** (`manifest.json` + `state.json`, see [Plan state](/spec/plan-state)); (2) **proportional rigor tiers** (micro / standard / deep, see [Proportional rigor](#proportional-rigor)); (3) the optional **Delta section** in the task anatomy for brownfield behavior changes; and (4) the **DWP Resume Protocol** is promoted to a named, citable six-step ritual. Existing v1.1 plans remain conformant.
+> **Additive in this revision, no breaking changes.** (1) The **Touched Surface** section — the contract between what a task changes and what must be validated, with gate selection by risk class (isolated / seam / shared-core / unknown); (2) full validation becomes a **final-state requirement** run in the plan's single mandatory **Final Review**, with explicit evidence-reuse rules; (3) **task-local skills decisions** move into the owning task, and the Executive Report becomes **optional, on request**; (4) a **mode-aware create flow** — trust mode materializes directly while keeping the analysis and quality checks; and (5) an explicit **compatibility matrix**: plans and repositories from earlier versions remain conformant.
 
 ## Definition
 
 A Deep Work Plan is a structured, markdown-only artifact that describes a complex engineering task decomposed into sequential, reviewable units of work, designed to be created, executed, and maintained by AI coding agents working autonomously.
 
 DWP is spec-driven: the plan is the specification, and agents MUST execute against its explicit acceptance criteria and validation gates rather than improvising. The specification — not a chat transcript — is the durable source of truth, so the work is verifiable and resumable across sessions and agents. It is also harness engineering made portable: the context, control loop, guardrails, and resumable state that make an agent reliable are installed into the repository itself as plain markdown, so any conformant agent MAY pilot the repository without a tool-specific framework.
+
+## Create flow — single step, mode-aware
+
+The `create` flow gathers the objective, context, constraints, and task outline once, performs its **requirements analysis** (scope, dependency ordering between tasks, validation selection from the Touched Surface, proportional-rigor tier), and then materializes according to the mode the developer chose:
+
+- **Guided mode (default).** The flow produces exactly **one** artifact for review: a **refined draft** in `.dwp/drafts/`, with enough structure to approve or request changes in one pass. The plan folder is materialized only after approval.
+- **Trust mode (`trust` / `auto`).** The flow **materializes the plan directly**, without a draft file — the developer waived the intermediate review. The requirements analysis, dependency ordering, and a **plan-quality check** still run: trust waives the *review*, not the *analysis*. A trust-mode plan is recorded as **pre-approved for unattended execution**.
+- **Explicit draft modes.** `refined-draft {name}` and `from-refined-draft {file}` remain available in both modes; a developer who asks for a draft gets one.
+
+In every mode the flow never produces an intermediate non-refined draft as a separate reviewable step.
 
 ## Plan structure
 
@@ -35,21 +45,21 @@ A plan MAY additionally carry the machine-readable state layer: `manifest.json` 
 
 <TaskAnatomy lang="en" class="not-prose my-10" />
 
-Each task file MUST contain these nine sections, in order:
+Every task file follows the ten normative sections rendered above, in the order defined by the installed skill.
+## The Touched Surface
 
-1. **Goal** — a one-paragraph statement of what the task achieves.
-2. **Context** — background, links, and why this task exists.
-3. **Steps** — ordered, concrete actions to perform.
-4. **Acceptance criteria** — a checklist of conditions that define done.
-5. **Validation** — commands or tests to run to verify.
-6. **Files** — paths expected to be created or modified.
-7. **Dependencies** — other tasks or external prerequisites.
-8. **Risks** — what could go wrong, and mitigations.
-9. **Completion & Log** — a status marker plus chronological notes.
+The Touched Surface is the contract between what a task changes and what must be validated. It exists so that validation is **selected by effect**, not by habit, and so a later reader can see why a gate was chosen. A behavior-changing task MUST record:
 
-A task MAY additionally include a **Delta section** (RECOMMENDED for brownfield behavior changes — see below) and a **Rollback section** (RECOMMENDED for migrations, infrastructure changes, or deployments).
+- **Planned surface** — the paths, modules, packages, or configuration the task intends to change, written before editing.
+- **Actual surface** — the reconciled list after editing, taken from the real diff. The agent MUST reconcile planned and actual surfaces before selecting the gate.
+- **Affected consumers** — modules, packages, or services that depend on the actual surface, as far as the repository's documented mapping can establish. Where it cannot, the entry MUST say so.
+- **Risk class** — one of: *isolated* (confined to one module and its tests); *seam* (alters a contract, persistence, routing, serialization, auth, or framework wiring between collaborators); *shared/core* (imported widely, or a dependency, migration, build/test config, schema, or toolchain change); *unknown* (the mapping is missing, stale, or unverified).
+- **Test mapping used** — which documented mapping or tool produced the selection.
+- **Selected gate and reason** — the exact commands and why they cover the actual surface.
 
-### The Delta section (brownfield changes)
+Configuration files, schemas, dependency manifests, templates, fixtures, migrations, and agent instruction files **can change behavior** and MUST be classified by their effect, never by file extension. A task that changes only prose, comments, or research artifacts MAY declare the surface not applicable and still runs the repository's non-runtime checks.
+
+## The Delta section (brownfield changes)
 
 Most real work modifies existing behavior rather than creating new behavior. A task that changes how an existing system behaves SHOULD carry a **Delta section** describing the change as an explicit before/after contract, using three list headings:
 
@@ -57,29 +67,61 @@ Most real work modifies existing behavior rather than creating new behavior. A t
 - **MODIFIED** — behavior that exists in both, stated as `was: … → now: …`.
 - **REMOVED** — behavior that existed before and is intentionally gone after.
 
-Each entry MUST be observable behavior — an endpoint's response, a CLI flag, a UI state, a default value — not an implementation detail. The Delta section is the reviewer's diff at the behavior level: acceptance criteria verify the ADDED/MODIFIED entries, and the REMOVED entries are the explicit license to delete. Anything not listed as REMOVED MUST keep working, and the task's validation gate (existing tests staying green) is what enforces it.
+Each entry MUST be observable behavior — an endpoint's response, a CLI flag, a UI state, a default value — not an implementation detail. The Delta section is the reviewer's diff at the behavior level: acceptance criteria verify the ADDED/MODIFIED entries, and the REMOVED entries are the explicit license to delete. Anything not listed as REMOVED MUST keep working.
 
-## Validation gates and tests
+## Validation gates — selected by risk class
 
-Validation is the gate that turns a claim of completion into evidence of it: a task MUST NOT be marked complete until every command in its Validation section has run and passed. Tests are a first-class part of this gate, not an optional add-on — they are what makes the code a plan ships reliable and verifiable.
+Validation is the gate that turns a claim of completion into evidence of it: a task MUST NOT be marked complete until every command in its Validation section has run and passed. The gate of a behavior-changing task is selected from its reconciled Touched Surface, by risk class:
 
-When a task adds new core functionality or materially changes existing behavior:
+| Risk class | Required validation |
+|------|------|
+| **isolated** | The tests of the changed behavior and of its affected consumers, plus the static checks covering the actual surface. |
+| **seam** | The above, plus the integration or contract tests for that seam — added in this task if none exist. Integration checks at a seam are not deferred to the end of the plan. |
+| **shared/core** | Widen to the affected packages and their transitive consumers; where impact cannot be bounded reliably, run the full validation. |
+| **unknown** | Investigate and correct the selection; if it still cannot be established, run the broader or full command. |
+| **not applicable** (prose/research) | The repository's non-runtime checks, with the reason recorded in the Touched Surface. |
 
-- Its **acceptance criteria** MUST include automated test coverage for the new or changed behavior (the happy path plus the meaningful edge and error cases), following the repository's test convention and coverage expectation.
-- Its **validation** MUST run the repository's tests together with its lint, type-check, and format checks — the full code-quality check the repository defines — not the build alone. "It builds" is not a sufficient gate for a behavior change.
-- Existing tests MUST stay green. A change that breaks a test covering the affected code MUST update that test to the intended new behavior; it MUST NOT delete, skip, or weaken a test merely to force the gate to pass.
+A behavior change MUST produce a non-empty, relevant test selection — an invalid selector or a runner that selected zero tests is not coverage. Where the repository's testing map is stale, the correct invocation is derived and the mapping update recorded; a small missing command never requires a full onboarding run. Where no scoped invocation exists, the full applicable suite applies — legacy behavior, never an error.
 
-Pure-documentation, configuration, or research tasks are exempt from creating tests but still MUST run whatever validation gate the repository defines. The depth of testing is proportional to the size of the change and the repository's maturity. Where a repository has no test or lint toolchain at all, the agent MUST NOT silently skip this discipline — it relies on the toolchain proposed during onboarding (see [Conformance](/spec)).
+When a task adds new core functionality or materially changes existing behavior, its acceptance criteria MUST include automated test coverage for the new or changed behavior, and its validation runs the repository's tests together with lint, type-check, and format checks — not the build alone. Existing tests MUST stay green.
+
+## Final-state validation
+
+Per-task gates validate what each task touched; they do not replace validation of the plan as a whole. Before a plan completes, the repository's **complete applicable** validation MUST run and pass on the **final relevant state**, after the last substantive change — in the Final Review. Broader runs earlier happen at integration boundaries or after shared/core changes, not on a task-count schedule. A passing result MAY be reused only with evidence that the relevant inputs are equivalent; otherwise it is rerun. Each gate run leaves a concise record: command, scope, revision, result, and an evidence path.
 
 ## Security discipline
 
-Security is first-class in the same way tests are, and it follows the same two-layer model: per-task discipline while the work happens, plus a mandatory Security Review gate over the full change set at the end. Whenever a task touches authentication or authorization, input handling, secrets or configuration, network, file, or shell surface, or dependencies:
+Security is first-class in the same way tests are, and it follows the same two-layer model: per-task discipline while the work happens, plus the security pass of the Final Review over the full change set at the end. Whenever a task touches authentication or authorization, input handling, secrets or configuration, network, file, or shell surface, or dependencies:
 
 - Its **acceptance criteria** MUST state the security expectations of the change — input validated and escaped, no secret material in code or fixtures, auth checks preserved or strengthened — consistent with `docs/SECURITY.md`.
 - Every commit MUST be confirmed free of secrets or credentials before it lands, test fixtures and documentation examples included. A secret in a pushed commit MUST be treated as leaked and rotated, not merely removed.
 - Where the security-sensitive work is substantial, a dedicated hardening task SHOULD be placed immediately after the implementation tasks and before the comprehensive-tests task, so findings are fixed before tests encode the behavior and each finding becomes a regression case rather than rework.
 
-This per-task discipline does not replace the Security Review final task: per-task checks catch issues in the commit where they are born, while the final gate audits the whole plan — including the tests and documentation tasks themselves. Every plan therefore ends with three mandatory final tasks — Security Review, then Skills & Agents Discovery, then the Executive Report — and a critical security finding blocks completion until it is fixed or explicitly accepted.
+This per-task discipline does not replace the Final Review's security pass: per-task checks catch issues in the commit where they are born, while the final gate audits the whole plan — including the tests and documentation tasks themselves.
+
+## Plan lifecycle — the Final Review
+
+Every conformant plan authored under this version ends with exactly **one** mandatory task: the **Final Review** (task N). Two responsibilities earlier versions placed in separate closing tasks are relocated: skills decisions move into the task that produced the pattern, and the Executive Report becomes an optional, on-request artifact. Nothing in the security pass is relaxed.
+
+The Final Review MUST, in order:
+
+**(a) Security pass** — review the plan's full accumulated change set for hardcoded secrets, injection risks, new attack surface, weakened auth, and sensitive data in logs or docs; audit introduced dependencies; verify `docs/SECURITY.md` still reflects reality; write the security review report even when clean. A critical finding is fixed — or explicitly accepted by the user — before the plan completes.
+
+**(b) Final-state validation** — the repository's complete applicable validation runs and passes on the final relevant state.
+
+**(c) Skills reconciliation** — every task carries a skills disposition and every recorded candidate has a disposition; no second discovery report.
+
+**(d) Completion** — report completion with deliverables, validation evidence, and limitations; offer the Executive Report once. The plan is complete whether or not the offer is answered.
+
+The Final Review runs sequentially after all other tasks and is never placed in a parallel group.
+
+## Task-local skills decisions
+
+The question "did this work create a reusable pattern worth a skill or agent?" is answered inside the task that produced the pattern, while its evidence is in context. Every task's Completion & Log carries a **skills disposition**: none, update an existing skill, create a named artifact, or a deferral with a reason. Warranted authoring happens inside that task, before its validation gate and commit, after checking the existing catalog for duplicates.
+
+## Executive report — optional, on request
+
+The Executive Report is no longer a mandatory task. At completion the agent offers it once; it is generated only on an explicit request, satisfied from durable evidence without replaying the plan. No answer or an unattended run leaves the plan complete with no report generated.
 
 ## Task completion protocol
 
@@ -133,7 +175,7 @@ Rigor MUST be proportional to the work. Ceremony on trivial changes is a methodo
 | Tier | When | Form |
 |------|------|------|
 | **micro** | A single atomic change: one concern, roughly one sitting, no coordination. A bug fix, a copy change, a config tweak. | No plan folder. The agent states the goal, the acceptance criteria, and the validation gate inline in conversation, executes, validates, commits. |
-| **standard** | Multi-step work with real scope: a feature, a refactor, a migration within one repo. The default tier. | A full plan: plan folder, nine-section tasks, mandatory final tasks. |
+| **standard** | Multi-step work with real scope: a feature, a refactor, a migration within one repo. The default tier. | A full plan: plan folder, ten-section tasks, the Final Review. |
 | **deep** | Long-horizon work spanning parallel groups, child repositories, or multiple unattended sessions. | A standard plan plus orchestrator and/or team-agents capabilities, and the state layer. |
 
 An agent asked to create a plan for micro-tier work MUST say that a plan is disproportionate and offer the inline form instead. A plan folder MUST NOT be created for a trivial single-file change.
@@ -141,6 +183,17 @@ An agent asked to create a plan for micro-tier work MUST say that a plan is disp
 Micro-tier work still keeps the non-negotiables: an explicit goal, a validation gate that runs and passes, and test discipline for behavior changes. The tier changes the packaging, never the gates.
 
 When scope grows mid-flight — a micro task uncovers real scope, a standard plan sprouts sub-repositories — the agent MUST stop and promote the work to the next tier rather than stretching the current one.
+
+## Compatibility
+
+Plans and repositories from earlier versions remain conformant, and a conformance checker MUST distinguish a known legacy artifact (accepted) from an artifact that declares this version and is objectively invalid under it (rejected):
+
+| Case | Rule |
+|------|------|
+| **Plan authored under an earlier version** (three mandatory final tasks; tasks without a Touched Surface) executed by this version | Supported. Executed under its own recorded shape — final tasks are not added, removed, or reordered, no Touched Surface is added mid-flight, and validation falls back to the full applicable suite. A `refine` session MAY migrate it deliberately. |
+| **Repository onboarded under an earlier version**, onboarded or planned by this version | Supported. Plans fall back to full-suite gates; the missing scoped-invocation documentation is a finding naming the targeted harness upgrade, never a failure. |
+| **Plan authored under this version**, agent following this version | Supported — the target. |
+| **Plan authored under this version**, agent following an earlier version | Not supported; documented. Repositories pinning an older skill SHOULD upgrade the skill before adopting new plans. |
 
 ## Versioning
 

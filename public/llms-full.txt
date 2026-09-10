@@ -46,6 +46,8 @@ Deep Work Plan grew out of real engineering work at Dailybot and is now maintain
 - [Kit](https://deepworkplan.com/kit) — The kit catalog: presets, adapters, and commands available for installing DWP into a repository
 - [Examples](https://deepworkplan.com/examples) — Worked examples that show the methodology applied to real engineering work
 - [Quickstart](https://deepworkplan.com/quickstart) — A short path to getting DWP running in a repository
+- [Compare](https://deepworkplan.com/compare) — Deep Work Plan compared with spec-driven tools, agent workflow frameworks and vendor-native plan modes: each described on its own terms, three neutral capability values, official sources, a review date and an invitation to correct
+- [FAQ](https://deepworkplan.com/faq) — Frequently asked questions: what Deep Work Plan does, how validation gates and resumption work, how it differs from other tools, and how to adopt or upgrade
 - [Init / Adoption](https://deepworkplan.com/init) — Make any repository AI-first: install the skill, onboard the repo, then plan and execute. Includes a self-contained onboarding prompt at [init.md](https://deepworkplan.com/init.md) to hand to an agent
 - [Developers](https://deepworkplan.com/developers) — The agent & developer surface: a read-only, zero-auth API described by an OpenAPI spec, a stateless MCP server at /api/mcp, per-page Markdown in 17 languages, and the `npx skills` install CLI. Alias: /docs redirects here
 - [Trust](https://deepworkplan.com/trust) — Why the skill is safe to adopt: open source, MIT, verifiable installs (SHA256SUMS), and a clear vulnerability-disclosure policy

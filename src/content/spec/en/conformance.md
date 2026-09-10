@@ -8,7 +8,7 @@ section: Conformance
 
 # Conformance
 
-**Version 1.1. Status: Stable.** This document defines what it means for a repository to be *Deep Work Plan-conformant* — that is, AI-first and agent-pilotable. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
+**Version 1.2. Status: Stable.** This document defines what it means for a repository to be *Deep Work Plan-conformant* — that is, AI-first and agent-pilotable. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
 Conformance exists so that "AI-first" is an objective, checkable property rather than an impression. A repository either meets the criteria below or it does not. The [`verify` sub-skill](/kit) (`/dwp-verify`) checks them mechanically.
 
@@ -23,7 +23,7 @@ A DWP-conformant repository MUST satisfy all of the following. Every artifact MU
 5. **A gitignored `.dwp/` workspace.** The repository MUST contain a `.dwp/` directory with `plans/` and `drafts/`, and `.dwp/` MUST be gitignored. A `tmp/` scratch space SHOULD exist and SHOULD be gitignored.
 6. **The methodology skill is resolvable.** The Deep Work Plan skill MUST be installed or referenced such that an agent in the repository can invoke its sub-skills.
 
-A repository is **fully conformant with zero addons**. Addons (devcontainer, Dailybot, dependency-upgrade, design-system) are opt-in and MUST NOT be required for conformance.
+A repository is **fully conformant with zero optional addons**. The optional addons (devcontainer, Dailybot, dependency-upgrade, design-system) MUST NOT be required for conformance. Since standard 2.3.0 the **AI Diff Reviewer local review** (vendored skill + extension file) is part of the baseline: its absence is a failure for a repository declaring 2.3.0 or newer and a harness-version finding for a legacy repository. Its CI surface stays optional.
 
 ## A well-formed plan
 
@@ -33,11 +33,11 @@ A Deep Work Plan in `.dwp/plans/` is well-formed when:
 2. Every task that adds new core functionality or changes product behavior MUST include automated test coverage for that behavior in its acceptance criteria, and MUST run the repository's tests together with its lint and type-check checks in its validation gate — not the build alone. Existing tests MUST stay green; a behavior change MUST update a test it breaks rather than delete or skip it. Pure-documentation, configuration, or research tasks are exempt from creating tests but still run the repository's gate.
 3. Every task that touches authentication, input handling, secrets or configuration, network surface, or dependencies MUST carry the security expectations of that change in its acceptance criteria, and every commit MUST be free of secret material.
 4. The plan MUST persist progress so that work survives interruption and can be resumed by a different agent.
-5. The plan MUST include the three mandatory final tasks — Security Review, Skills & Agents Discovery, and the Executive Report. A critical security finding blocks completion until fixed or explicitly accepted.
+5. The plan MUST close with its recorded final review. A plan authored under this version MUST end with exactly one mandatory **Final Review** — the security pass, the final-state validation, and skills reconciliation. A plan authored under an earlier version ends with the three mandatory final tasks (Security Review, Skills & Agents Discovery, Executive Report) and remains conformant. A critical security finding blocks completion until fixed or explicitly accepted.
 6. Tasks SHOULD re-anchor to the plan's goal before executing, to prevent drift over a long horizon.
 
 ## Verifying conformance
 
-Conformance SHOULD be verified mechanically rather than by inspection. Running `/dwp-verify` produces a pass/fail report against the criteria above: the presence and real-content of `AGENTS.md`, the `CLAUDE.md` resolution, the `docs/` categories, the `.agents/` catalog-versus-disk match, the `.dwp/` and `tmp/` gitignore status, and — for a plan — that every task carries acceptance criteria and a validation gate, with test coverage for behavior-changing tasks and the three mandatory final tasks present, the Security Review included.
+Conformance SHOULD be verified mechanically rather than by inspection. Running `/dwp-verify` produces a pass/fail report against the criteria above: the presence and real-content of `AGENTS.md`, the `CLAUDE.md` resolution, the `docs/` categories, the `.agents/` catalog-versus-disk match, the `.dwp/` and `tmp/` gitignore status, and — for a plan — that every task carries acceptance criteria and a validation gate, with test coverage for behavior-changing tasks and the recorded final review present. The checker is **version-aware**: it MUST accept a legacy plan (three mandatory final tasks, no Touched Surface) as conformant, and MUST reject a plan that declares this version and is objectively invalid under it. It also reports a missing or stale `DWP standard:` provenance line as a finding that names the targeted harness upgrade.
 
 A repository SHOULD be re-verified after onboarding and after each completed plan, so that conformance is maintained rather than asserted once.

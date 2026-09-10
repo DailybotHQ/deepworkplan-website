@@ -51,6 +51,8 @@ Sie sind dabei, Code in diesem Repository zu installieren und auszuführen. Prü
 
 ## 0. Die Methodik und Spezifikation lesen
 
+Die Methodik ruht auf drei Pfeilern: **spec-driven Development** (die geschriebene Spezifikation ist die Quelle der Wahrheit), **Harness Engineering** (das Repository trägt Kontext, Werkzeuge, Leitplanken und Zustand) und **Token-Effizienz** (der Harness lädt schrittweise nach, und die Validierung berührt nur das Geänderte — Arbeit über lange Horizonte ist von Anfang an eingeplant, Effizienz durch Konstruktion).
+
 Bevor Sie etwas ändern, lesen Sie die kanonischen Quellen, damit Sie den Standard verstehen, den Sie übernehmen:
 
 - Methodik: https://deepworkplan.com/methodology.md
@@ -67,6 +69,7 @@ Verstehen Sie zuerst das Repository, schlagen Sie dann vor, was Sie tun werden.
 - **Den Archetyp klassifizieren.** Ein Einzel-Repository (der Regelfall), ein Orchestrator-Hub oder ein
   Agenten-Arbeitsbereich — das langlebige Zuhause eines autonomen Agenten, wo git empfohlen statt
   vorausgesetzt wird — mit den Belegen.
+- **Eine bestehende DWP-Installation erkennen.** Wenn `AGENTS.md` und `.agents/` bereits existieren, suchen Sie nach der Provenienzzeile `DWP standard:`. Ein Harness aus der Zeit vor dem aktuellen Standard erhält ein **gezieltes Upgrade**: Die erneute Installation des Skills ist der gesamte Upgrade-Pfad, und das Onboarding gleicht nur die fehlenden oder veralteten Teile ab — jeder handgeschriebene Abschnitt, jedes eigene Skill und jeder laufende Plan bleibt erhalten, und ein zweiter Durchlauf ändert nichts. Pläne, die unter einer früheren Version verfasst wurden, behalten ihre aufgezeichnete Form und schließen mit ihren eigenen Abschlussaufgaben; sie werden niemals in die neue gezwungen.
 - **Inventarisieren, was bereits existiert.** `AGENTS.md`, `CLAUDE.md`, `docs/`, ein etwaiges `.agents/`- oder Skills/Agents-
   Setup, `.dwp/` und `.gitignore`. Notieren Sie alles, was bereits einen Teil dieser Aufgabe erledigt.
 - **Den Onboarding-Plan vorschlagen.** Präsentieren Sie eine prägnante Liste: Dateien, die Sie erstellen, Dateien, die Sie
@@ -127,11 +130,13 @@ Methodik angleichen), statt es zu überschreiben — und bestätigen Sie mit dem
 6. **`.dwp/` + `tmp/`.** Legen Sie ein per gitignore ausgeschlossenes `.dwp/` mit `plans/` und `drafts/` an, plus einen `tmp/`-
    Scratch-Bereich — beide nicht-destruktiv zur `.gitignore` hinzugefügt (anhängen, niemals neu schreiben).
 
-## 4. Die Opt-in-Addons anbieten
+## 4. Die erforderliche lokale Überprüfung installieren, dann die Opt-in-Addons anbieten
 
-Nach dem Baseline-Onboarding zählen Sie die fünf Addons auf (devcontainer, Dailybot, dependency-upgrade,
-design-system, AI Diff Reviewer) und bieten Sie jedes als explizites Opt-in an. Ein Repository ist
-mit **null** Addons vollständig konform — installieren Sie sie niemals automatisch.
+Installieren Sie nach dem Baseline-Onboarding die **lokale Überprüfung des AI Diff Reviewer** (Phase 7a — seit Standard 2.3.0 erforderlich): die tag-gepinnte vendorte Skill
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus eine
+repo-zugeschnittene `.review/extension.md` via `generate-extension`, unter der Onboarding-Zustimmung. Zählen Sie dann die vier optionalen Addons auf (devcontainer, Dailybot, dependency-upgrade,
+design-system) und bieten Sie jedes als explizites Opt-in an. Ein Repository ist
+mit **null** optionalen Addons vollständig konform — installieren Sie diese niemals automatisch.
 
 - **Devcontainer-Unterstützung** — ein reproduzierbarer, isolierter Dev-Container mit persistenter AI-CLI-Authentifizierung.
 - **Dailybot-Integration** — vier Lifecycle-Events (Kickoff, bedeutende Aufgabe, Blockiert, Abschluss) als Best-Effort-Fortschrittsberichte für Teams, die Dailybot bereits nutzen, mit optionaler autonomer Hook-Durchsetzung (`dailybot-cli >= 3.7.0`). Die Installation der gepaarten Dailybot-Agenten-Skill (3.10.3) bietet zusätzlich Chat, Check-ins, Formular-Erstellung, KI-Abfrage, Per-Repo-API-Keys und mehr — das Addon verbindet lediglich die Berichterstattung mit der DWP-Ausführung. Die zentrale Methodik hat keine Dailybot-Abhängigkeit.
@@ -141,8 +146,13 @@ mit **null** Addons vollständig konform — installieren Sie sie niemals automa
   (nicht angeboten für reine Bibliotheken, Headless-Dienste oder reine Infrastruktur-Repos). Drei Profile
   werden in einer Datei gestapelt: visual-ui (standardmäßig aktiviert bei Erkennung), cli-output und
   conversational — die letzten beiden werden immer gefragt, niemals automatisch angewendet.
-- **AI Diff Reviewer** — erweitert die obligatorische Sicherheitsprüfung um eine strukturierte lokale Überprüfung
-  über [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (Skill + erforderliches `.review/extension.md`). Immer **Flow A** (nur lokal) vs. **Flow B** (dualer CI-Gate mit `pr-review.yml`) fragen; niemals Standard setzen. Soft-Fail nur bei fehlenden Skill/Erweiterungs/Aufruffehlern; `critical`-Ergebnisse eines abgeschlossenen lokalen Durchlaufs blockieren weiterhin die Fertigstellung der Sicherheitsprüfung. Die zentrale Methodik hat keine AI Diff Reviewer-Abhängigkeit.
+- **AI Diff Reviewer** — die erforderliche lokale Überprüfung (kein Opt-in): der Sicherheitstest jedes Final Review führt
+  [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (Skill + erforderliches
+  `.review/extension.md`) über den akkumulierten Änderungssatz des Plans aus. Eine fehlende Skill oder Erweiterung ist ein
+  aufgezeichneter `local reviewer not installed`-Befund, installiert, wenn der Lauf in das Harness schreiben darf —
+  niemals ein stilles Überspringen; Aufruffehler soft-failen; `critical`-Ergebnisse eines abgeschlossenen Durchlaufs blockieren
+  weiterhin den Abschluss. **Flow B** (das CI-Gate mit `pr-review.yml`) wird als explizites Opt-in angeboten und
+  niemals ungefragt installiert. Kein Deep Work Plan-Ablauf erfordert einen kommerziellen Dienst, CI-Anbieter oder Secret.
 
 ## 5. Das Kit weiterentwickeln (author-Sub-Skill)
 
@@ -162,9 +172,9 @@ Erzeugen Sie Deep Work Plans für jede Aufgabe und führen Sie sie Aufgabe für 
 - `/dwp-resume` — den Zustand rekonstruieren und einen unterbrochenen Plan fortsetzen.
 - `/dwp-verify` — objektiver Bestanden/Nicht-bestanden-Konformitätsbericht für das Repository (oder einen spezifischen Plan).
 
-Jeder Plan endet mit drei verpflichtenden Abschlussaufgaben — einem **Security Review** der
-eigenen Änderungen des Plans (das `docs/SECURITY.md` aktuell hält; ein kritischer Befund
-blockiert den Abschluss), Skills & Agents Discovery und dem Executive Report.
+Jeder Plan schließt mit dem Final Review — einem Sicherheitstest über die eigenen
+Änderungen des Plans (der `docs/SECURITY.md` aktuell hält; ein kritischer Befund blockiert den
+Abschluss), der Validierung des Endzustands und der Abstimmung der Skills-Entscheidungen. Der Executive Report bleibt auf Anfrage verfügbar.
 
 ## 7. Verifizieren
 

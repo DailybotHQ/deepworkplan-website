@@ -9,7 +9,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 
 # Protocole de l'agent
 
-**Version 1.2.** Ce protocole définit comment un agent de code IA MUST se comporter lorsqu'il travaille avec des Deep Work Plans. Les mots-clés MUST, SHOULD et MAY suivent la RFC 2119.
+**Version 1.3.** Ce protocole définit comment un agent de code IA MUST se comporter lorsqu’il travaille avec des Deep Work Plans. Les mots-clés MUST, SHOULD et MAY suivent la RFC 2119.
 
 > **Additif en v1.2.** Deux ajouts, sans changement de rupture : (1) les plateformes d'agents autonomes (OpenClaw, Hermes) rejoignent le tableau des agents supportés ; (2) la section **Profils d'exécution** définit l'exécution sans surveillance — autorité bornée, couche d'état obligatoire, conditions d'arrêt et continuation planifiée.
 
@@ -52,8 +52,8 @@ La chaîne d'outils de test et de validation est un contexte essentiel, pas facu
 Lors de la création d'un plan, l'agent MUST :
 
 - Décomposer l'objectif en tâches séquentielles et relisibles.
-- Écrire chaque tâche avec l'anatomie en neuf sections.
-- Terminer par les trois tâches finales obligatoires (Security Review, Skills & Agents Discovery, Executive Report).
+- Écrire chaque tâche avec l’anatomie en dix sections — la Surface touchée enregistre ce que la tâche modifie et sélectionne sa porte de validation par classe de risque.
+- Terminer par l’unique Final Review obligatoire (passe de sécurité, validation de l’état final, réconciliation des skills).
 - Poser des questions de clarification lorsque l'objectif est ambigu.
 
 ## Exécution
@@ -66,7 +66,8 @@ Pendant l'exécution, l'agent MUST :
 - Marquer le statut des tâches avec exactitude.
 - Pour toute tâche qui ajoute une nouvelle fonctionnalité ou modifie un comportement, ajouter ou mettre à jour des tests automatisés pour ce comportement et exécuter les tests du dépôt ainsi que les vérifications de lint et de typage avant de marquer la tâche comme achevée ; ne jamais supprimer ni ignorer un test pour forcer le passage de la porte.
 - Pour toute tâche qui touche à l'authentification, au traitement des entrées, aux secrets ou à la configuration, à la surface réseau ou aux dépendances, satisfaire les attentes de sécurité déclarées dans ses critères d'acceptation et confirmer que le diff ne contient aucun matériau secret avant le commit.
-- S'arrêter et demander en cas de blocage plutôt que de deviner.
+- Passer d’une porte réussie à la tâche suivante sans demander de confirmation ; tenter les réparations dans le périmètre autorisé de la tâche lorsqu’une porte échoue — avec une hypothèse concrète, en interrompant les tentatives à l’aveugle après deux essais sans nouvelle preuve.
+- S’arrêter et demander uniquement à une véritable frontière d’approbation ou devant un blocage non résolu, plutôt que de deviner.
 
 ## Raffinement
 
@@ -98,7 +99,7 @@ Un humain est présent dans la session. L'agent propose, l'humain approuve le br
 
 Le plan s'exécute sans humain pour surveiller — un tour planifié d'une plateforme autonome, une session cloud, une exécution nocturne. L'exécution sans surveillance est opt-in par plan et MUST satisfaire tous les critères suivants :
 
-- **Plan pré-approuvé.** Le brouillon affiné a été approuvé par un humain avant tout tour sans surveillance. Un agent MUST NOT créer et exécuter un plan sans surveillance en un seul tour ; l'approbation du plan est le point de contrôle humain.
+- **Plan pré-approuvé.** Le plan a été approuvé avant tout tour sans surveillance — en mode guidé, l’humain a approuvé le brouillon affiné ; en mode trust, l’instruction `trust` explicite du développeur est l’approbation enregistrée. Un agent MUST NOT créer et exécuter un plan sans surveillance en un seul tour sans l’une ou l’autre ; l’approbation du plan est le point de contrôle humain.
 - **Couche d'état REQUIRED.** Le plan MUST porter `manifest.json` et `state.json` afin que toute session ultérieure — agent ou humain — puisse lire la progression exacte sans rejouer une transcription. Voir [État du plan](/spec/plan-state).
 - **Autorité bornée.** L'autorité de l'agent est le plan : il MUST NOT étendre le périmètre, MUST NOT effectuer des actions destructrices ou orientées vers l'extérieur que le plan n'autorise pas explicitement, et MUST NOT étirer les instructions d'une tâche pour couvrir un travail découvert mais non planifié — le travail découvert est consigné pour le prochain `refine`, pas improvisé.
 - **Une tâche atomique par tour, portes toujours.** Chaque tour exécute le Protocole de reprise DWP, exécute au plus la tâche suivante, passe sa porte de validation, se termine selon le protocole d'achèvement de tâche, et cède la main. Une porte en échec est une condition d'arrêt, jamais « continuer quand même ».

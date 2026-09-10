@@ -50,7 +50,7 @@ Entrambi i file DEVONO essere scritti atomicamente: scrivere in un file temporan
 ```json
 {
   "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.2.0",
+  "spec_version": "2.3.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
@@ -146,7 +146,7 @@ Un'attività NON DEVE essere segnata come `completed` in `state.json` se uno qua
 
 Un'attività `completed` DOVREBBE portare un record `outcome`: cosa è stato `tried`, cosa è `failed`, cosa ha `worked` e `notes` in formato libero. Ogni voce DEVE essere di una riga.
 
-Gli outcome record rendono un piano terminato una **memoria episodica** recuperabile: un agente (o una piattaforma di indicizzazione della memoria) può in seguito richiamare come un problema è stato risolto, non solo che lo è stato. Alimentano l'attività obbligatoria Skills & Agents Discovery, che DOVREBBE leggerli durante l'analisi dei pattern. Su piattaforme come Hermes che indicizzano la memoria degli agenti, gli outcome record in `state.json` rendono i piani completati direttamente recuperabili nelle sessioni future.
+Gli outcome record rendono un piano terminato una **memoria episodica** recuperabile: un agente (o una piattaforma di indicizzazione della memoria) può in seguito richiamare come un problema è stato risolto, non solo che lo è stato. Alimentano le disposizioni locali per attività sulle skill e la riconciliazione delle skill del Final Review, che li legge durante l'analisi dei pattern. Su piattaforme come Hermes che indicizzano la memoria degli agenti, gli outcome record in `state.json` rendono i piani completati direttamente recuperabili nelle sessioni future.
 
 ### Checkpoint e stato bloccato
 

@@ -10,7 +10,7 @@ order: 2
 
 Hubungkan eksekusi Deep Work Plan ke **tim Dailybot** agar manusia melihat apa yang dibangun agen — kickoff, progres pertengahan rencana, pemblokiran, dan penyelesaian — tanpa menambah rapat atau toolchain kedua. Addon **opt-in** untuk tim yang sudah menggunakan [Dailybot](https://www.dailybot.com).
 
-Metodologi Deep Work Plan inti memiliki **nol** ketergantungan pada Dailybot. Repositori tanpa addon sepenuhnya konforman. Tawarkan addon ini hanya ketika pengembang atau tim sudah menggunakan Dailybot; jangan pernah menginstal otomatis untuk semua orang.
+Metodologi Deep Work Plan inti memiliki **nol** ketergantungan pada Dailybot. Repositori tanpa addon opsional sepenuhnya konforman. Tawarkan addon ini hanya ketika pengembang atau tim sudah menggunakan Dailybot; jangan pernah menginstal otomatis untuk semua orang.
 
 ## Kapan menggunakannya
 
@@ -123,7 +123,7 @@ Referensi publik: [dailybot.com/skill.md](https://www.dailybot.com/skill.md). Su
 
 ## Alur onboarding
 
-Selama DWP `onboard` **Fase 7b**, setelah scaffolding AI-first inti, alur menawarkan lima addon opt-in. Jika pengembang menerima Dailybot:
+Selama DWP `onboard` **Fase 7b**, setelah scaffolding AI-first inti, alur menawarkan empat addon opt-in (tinjauan lokal AI Diff Reviewer sudah dipasang pada Fase 7a). Jika pengembang menerima Dailybot:
 
 1. Deteksi setup yang ada (skill, CLI, `.dailybot/profile.json`, hook, langkah laporan).
 2. Tawarkan instalasi skill/CLI melalui alur persetujuan Dailybot.

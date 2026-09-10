@@ -1,6 +1,6 @@
 ---
 title: Dokümantasyon standardı
-description: "Deep Work Plan’lerin yapılarını, görevlerini ve ilerlemelerini nasıl belgelediğine ilişkin normatif standart: README kuralları, durum işaretleri ve üç zorunlu son görev."
+description: "Deep Work Plan’lerin yapılarını, görevlerini ve ilerlemelerini nasıl belgelediğine ilişkin normatif standart: README kuralları, durum işaretleri, on bölümlü görev anatomisi ve Final Review."
 order: 1
 lang: tr
 section: Standard
@@ -8,7 +8,7 @@ section: Standard
 
 # Dokümantasyon standardı
 
-**Sürüm 1.0.** Bu standart, Deep Work Plan’lerin yapılarını, görevlerini ve ilerlemelerini nasıl belgelediğini tanımlar. DWP metodolojisi altında oluşturulan her plan için geçerlidir. MUST, SHOULD ve MAY anahtar kelimeleri, RFC 2119’da tanımlandığı şekilde kullanılır.
+**Sürüm 1.1.** Bu standart, Deep Work Plan’lerin yapılarını, görevlerini ve ilerlemelerini nasıl belgelediğini tanımlar. DWP metodolojisi altında oluşturulan her plan için geçerlidir. MUST, SHOULD ve MAY anahtar kelimeleri, RFC 2119’da tanımlandığı şekilde kullanılır.
 
 ## Plan README
 
@@ -22,7 +22,7 @@ Her plan, şunları içeren bir `README.md` dosyasına SAHİP OLMALIDIR:
 
 ## Görev dosyaları
 
-Her görev dosyası `<n>.task_<slug>.md` olarak adlandırılMALI ve dokuz bölümlü anatomiyi İÇERMELİDİR.
+Her görev dosyası `<n>.task_<slug>.md` olarak adlandırılMALI ve on bölümlü anatomiyi İÇERMELİDİR — dokuz klasik bölüm artı **Dokunulan Yüzey**: görevin neyi değiştirdiği ile neyin doğrulanması gerektiği arasındaki sözleşme (planlanan ve gerçekleşen yüzey, etkilenen tüketiciler, *izole*, *seam*, *paylaşılan/çekirdek* veya *bilinmeyen* risk sınıflarından biri, kullanılan test eşlemesi ve seçilmiş kapı ile gerekçesi).
 
 ## PROGRESS.md
 
@@ -44,10 +44,10 @@ Her görev dosyası `<n>.task_<slug>.md` olarak adlandırılMALI ve dokuz bölü
 
 Tüm başlıklar cümle düzenini KULLANMALIDIR. Belgeler, pazarlama dilinden ve ünlem işaretlerinden KAÇINMALIDIR.
 
-## Üç zorunlu son görev
+## Final Review, görev-yerel skill kararları ve isteğe bağlı rapor
 
-Her plan üç standart görevle bitMELİDİR:
+Bu sürüm altında yazılmış her plan, tam olarak tek bir zorunlu görevle bitMELİDİR: **Final Review** — planın tüm değişiklik kümesi üzerindeki güvenlik incelemesi, son ilgili durum üzerindeki son-durum doğrulaması ve skill kararlarının uzlaştırılması. Kritik bir güvenlik bulgusu tamamlanmayı engeller.
 
-1. **Security Review** — planın tüm değişiklik kümesini sırlar, enjeksiyon riskleri ve yeni saldırı yüzeyi açısından denetler ve `docs/SECURITY.md` dosyasının hâlâ gerçeği yansıttığını doğrular. Kritik bir bulgu tamamlanmayı engeller.
-2. **Skills & Agents Discovery** — oluşturulan yeniden kullanılabilir skill’leri ve ajanları belirler.
-3. **Executive Report** — paydaşlar için bir sonuç özeti.
+- **Görev-yerel skill kararları.** Her görevin Tamamlama ve Günlük bölümü bir **skill kararı** taşır — `none`, mevcut bir skill veya ajana güncelleme, adlandırılmış bir oluşturma ya da gerekçesi ve sahibiyle birlikte bir erteleme. Gerekçeli yazma, sahipli görevin içinde, onun doğrulama kapısından önce, `.agents/` kataloğuna karşı bir yinelenen denetiminden sonra gerçekleşir; gerekçeli girişler, planın skill-adayları defterinde kararlı adaylar (`T{task}-{seq}`) olarak kaydedilir.
+- **Executive Report isteğe bağlıdır, talep üzerine.** Tamamlanmada bir kez sunulur; yalnızca açık bir istek üzerine, kalıcı kanıtlardan üretilir. Yanıt gelmemesi veya gözetimsiz bir çalışma, planı onsuz tamamlanmış bırakır.
+- **Eski planlar.** Önceki sürümler altında yazılmış planlar üç zorunlu son görevle biter ve uyumlu kalır — bir uyumluluk denetleyicisi bu şekli KABUL ETMELİDİR.

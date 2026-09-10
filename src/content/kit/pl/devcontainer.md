@@ -23,4 +23,4 @@ Około 85% devcontainera to stabilny, wspólny szkielet; pozostałe 15% — obra
 
 ## Uwagi
 
-Opcjonalny i nigdy nie wymagany. Repozytorium jest w pełni zgodne nawet bez żadnego addonu.
+Opcjonalny i nigdy nie wymagany. Repozytorium jest w pełni zgodne nawet bez żadnego opcjonalnego addonu.

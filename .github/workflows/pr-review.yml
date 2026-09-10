@@ -1,6 +1,6 @@
 name: PR review
 
-# AI-driven pre-merge review for the DWP website, powered by `DailybotHQ/ai-diff-reviewer@v2`
+# AI-driven pre-merge review for the DWP website, powered by `DailybotHQ/ai-diff-reviewer@v2.0.1`
 # (marketplace listing: "AI Diff Reviewer"). Cursor-only, label-gated on
 # `ready`, gated on write-tier authorship (author-association whitelist),
 # stable-named merge gate for branch protection. Runs the same review
@@ -164,7 +164,7 @@ jobs:
           # with broad local access; a persisted token on disk is an exfil
           # surface. The reviewer talks to the GitHub API in-process.
           persist-credentials: false
-      - uses: DailybotHQ/ai-diff-reviewer@v2
+      - uses: DailybotHQ/ai-diff-reviewer@v2.0.1
         with:
           provider: cursor
           api-key: ${{ secrets.CURSOR_API_KEY }}

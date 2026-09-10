@@ -24,7 +24,19 @@ A capacidade de um agente de código de IA depende menos do modelo do que da qua
 
 Isso reformula o que significa delegar bem. Boa delegação não é pedir trabalho a um agente — é definir o trabalho com clareza suficiente para que ele possa ser executado corretamente: o objetivo, as restrições, o contexto que o agente de outra forma não teria e os critérios que decidem se ele foi bem-sucedido. A maior parte do valor é criada antes de a execução começar.
 
-O Deep Work Plan é a disciplina de fazer esse trabalho de montante de forma duradoura e repetível. Seus dois pilares são as duas metades de uma boa direção: uma **especificação** declara como é o "correto" e um **harness** dá ao agente o contexto e as ferramentas para alcançá-lo. Juntos, eles convertem a habilidade bruta de um modelo em engenharia confiável — sustentada ao longo de uma tarefa que dura horas e preservada entre agentes que mudam de uma sessão para outra.
+O Deep Work Plan é a disciplina de fazer esse trabalho de montante de forma duradoura e repetível. Seus dois pilares fundacionais são as duas metades de uma boa direção: uma **especificação** declara como é o "correto" e um **harness** dá ao agente o contexto e as ferramentas para alcançá-lo. Juntos, eles convertem a habilidade bruta de um modelo em engenharia confiável — sustentada ao longo de uma tarefa que dura horas e preservada entre agentes que mudam de uma sessão para outra. Uma terceira disciplina mantém a combinação acessível em escala: a **eficiência de tokens**, porque um harness que funciona é um que o agente pode carregar por um horizonte longo.
+
+## Eficiente por construção
+
+O primeiro pilar torna o trabalho correto; o segundo o torna portátil. O terceiro o mantém **acessível** — porque o contexto é o recurso mais escasso que um agente de código tem, e uma metodologia que o desperdiça falha exatamente quando o trabalho se alonga.
+
+Três mecanismos fazem o trabalho:
+
+- **Divulgação progressiva.** O agente lê um núcleo essencial, e cada guia ou seção da especificação é carregado apenas quando o próprio fluxo dispara o gatilho. O agente carrega o capítulo de que precisa, não o livro inteiro.
+- **Validação selecionada pela superfície tocada.** Cada tarefa registra o que muda e escolhe seu portão pela classe de risco — uma mudança pequena e isolada se prova de forma delimitada; uma mudança em maquinaria compartilhada se prova amplamente.
+- **Aprendizado local por tarefa.** Quando uma tarefa produz um padrão reutilizável, a decisão acontece dentro dela, onde a evidência está fresca — não em uma retrospectiva que ninguém lê.
+
+Nada disso afirma ser sem perdas por construção, nem é promovido com porcentagens inventadas. Os bytes de instrução que cada fluxo exige são medidos e publicados; as afirmações comportamentais são respaldadas por replays com falhas semeadas. O que se pode dizer claramente é isto: o agente lê menos do que não precisa, reexecuta menos do que não mudou e decide mais onde a evidência vive — e essas economias se acumulam ao longo de um horizonte longo.
 
 ## Orientado a especificação por design
 

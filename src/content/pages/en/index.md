@@ -1,12 +1,12 @@
 ---
 title: "Deep Work Plan — structured execution for AI coding agents"
 description: "Context matters more than models. Deep Work Plan turns any repository into a structured environment where any coding agent finishes long-horizon work."
-lastUpdated: 2026-06-03
+lastUpdated: 2026-09-10
 ---
 
 ## Models matter. Context matters more.
 
-Deep Work Plan turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and finishes long-horizon work.
+Deep Work Plan turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and efficiency and finishes long-horizon work.
 
 Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning and executing complex software work with AI agents. You do not pick an install method or copy a template — you copy the init.md prompt and paste it into your agent:
 
@@ -21,12 +21,63 @@ Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning a
 
 ## The problem and the answer
 
-AI coding agents are remarkably effective in short bursts. On long-horizon work — a migration, a new subsystem, a refactor across dozens of files — they drift: context fills up, decisions are forgotten, and multi-hour tasks are abandoned halfway through.
+A coding agent performs beautifully on short tasks. But hand it a long-horizon mission — a migration, a new subsystem, a refactor at scale — and drift sets in: the context window fills, earlier decisions fade, and hours of work stall halfway through.
 
-Deep Work Plan answers with **spec-driven development**: the plan is the durable source of truth, and agents execute against explicit acceptance criteria and validation gates. Drift drops, the work stays verifiable, and any agent can resume it across sessions. Unlike spec-driven tools tied to one IDE or vendor (GitHub Spec Kit, Amazon Kiro, Tessl), DWP is tool-agnostic and repo-native.
+Deep Work Plan answers with spec-driven development: a durable plan, atomic tasks, and validation gates the agent must pass. Work stays verifiable — and any agent can resume it across sessions.
 
-It is also **harness engineering** made portable. An agent harness is the scaffolding around a model — context, tools, control loop, guardrails, resumable state — that makes it reliable. Deep Work Plan installs that harness into the repository itself, so any agent can pilot any repo.
+And because context is the scarcest resource your agent has, the harness is engineered for token efficiency: instructions load progressively, validation touches only what changed, and every task learns locally — so long-horizon work stays affordable.
+---
 
+## Humans steer. Agents execute.
+
+You decide what done means and where the lines are. The plan carries your intent; the agents do the hours — no babysitting, no correcting every twenty minutes.
+
+- You: intent, acceptance criteria, review
+- Agents: execution, task by task
+- The plan: the contract between them
+
+[Read the methodology](/methodology)
+
+---
+
+## A plan agents can't drift from.
+
+Long tasks fill any model's context. Details fall away and the agent drifts. A written plan — atomic tasks, validation gates, resumable state — is what it returns to, lap after lap.
+
+1. Plan
+2. Atomic tasks
+3. Validation gates
+4. Completion
+5. Resumable state
+
+[See the core loop](/methodology)
+
+---
+
+## Done is a contract, not a vibe.
+
+Each task names its acceptance criteria and the checks that must pass. The agent doesn't get to feel finished — it has to pass, or the task stays open.
+
+- Tests pass
+- Types check
+- Acceptance criteria met
+- Or the task stays open
+
+[Read the specification](/spec)
+
+---
+
+## The repository is the harness.
+
+Context, tools, guardrails, and state live in your repository as plain files any agent can read. No lock-in, no external brain — it survives context resets.
+
+- Durable spec on disk
+- Validation gates, not vibes
+- Survives context resets
+
+**SPEC · TASKS · CHECKS · STATE · TOOLS**
+
+[See what onboarding generates](/quickstart)
 ---
 
 ## What you get

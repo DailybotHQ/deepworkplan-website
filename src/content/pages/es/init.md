@@ -34,6 +34,8 @@ Plan — no como una edición rápida.
 
 ## 0. Lee la metodología y la especificación
 
+La metodología se apoya en tres pilares: **desarrollo guiado por especificación** (la especificación escrita es la fuente de la verdad), **ingeniería de harness** (el repositorio lleva el contexto, las herramientas, los guardarraíles y el estado) y **eficiencia de tokens** (el harness carga progresivamente y la validación toca solo lo que cambió — trabajo de largo alcance por diseño, eficiente por construcción).
+
 Antes de cambiar nada, lee las fuentes canónicas para entender el estándar que estás adoptando:
 
 - Metodología: https://deepworkplan.com/methodology.md
@@ -50,6 +52,7 @@ Primero entiende el repositorio, luego propón qué harás.
 - **Clasifica el arquetipo.** Un repositorio individual (el caso común), un hub orquestador, o un
   espacio de trabajo de agente — el hogar de larga duración de un agente autónomo, donde git se
   recomienda en lugar de suponerse — con la evidencia.
+- **Reconoce una instalación DWP existente.** Si `AGENTS.md` y `.agents/` ya existen, busca la línea de procedencia `DWP standard:`. Un harness anterior al estándar actual recibe una **actualización dirigida**: reinstalar el skill es todo el camino de actualización, y el onboarding reconcilia solo las piezas faltantes o desactualizadas — cada sección escrita a mano, cada skill personalizada y cada plan en curso se preserva, y una segunda ejecución no cambia nada. Los planes redactados bajo una versión anterior conservan su forma registrada y se cierran con sus propias tareas finales; nunca se fuerzan hacia la nueva.
 - **Inventaría lo que ya existe.** `AGENTS.md`, `CLAUDE.md`, `docs/`, cualquier configuración
   `.agents/` o de skills/agentes, `.dwp/` y `.gitignore`. Anota lo que ya cumpla parte de este trabajo.
 - **Propón el plan de incorporación.** Presenta una lista concisa: archivos que crearás, archivos que
@@ -141,11 +144,15 @@ metodología) en vez de sobrescribir — y confirma con el usuario antes de reem
 6. **`.dwp/` + `tmp/`.** Crea un `.dwp/` ignorado por git con `plans/` y `drafts/`, más un espacio de
    trabajo `tmp/` — ambos añadidos a `.gitignore` de forma no destructiva (añadir, nunca reescribir).
 
-## 4. Ofrece los addons opcionales
+## 4. Instala la revisión local requerida y luego ofrece los addons opcionales
 
-Tras la incorporación base, enumera los cinco addons (devcontainer, Dailybot, dependency-upgrade,
-design-system, AI Diff Reviewer) y ofrece cada uno como una opción explícita. Un repositorio es
-totalmente conforme con **cero** addons — nunca los instales automáticamente.
+Tras la incorporación base, instala la **revisión local de AI Diff Reviewer** (Fase 7a — requerida
+desde el estándar 2.3.0): la skill vendorizada fijada por tag
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) más un
+`.review/extension.md` a medida del repo vía `generate-extension`, bajo el consentimiento del
+onboarding. Luego enumera los cuatro addons opcionales (devcontainer, Dailybot, dependency-upgrade,
+design-system) y ofrece cada uno como una opción explícita. Un repositorio es totalmente conforme con
+**cero** addons opcionales — nunca instales esos automáticamente.
 
 - **Soporte de devcontainer** — un contenedor de desarrollo reproducible y aislado con autenticación
   de CLI de IA persistente.
@@ -156,8 +163,14 @@ totalmente conforme con **cero** addons — nunca los instales automáticamente.
   (no se ofrece para bibliotecas puras, servicios headless o repos solo de infra). Tres perfiles se
   apilan en un archivo: visual-ui (activado por defecto al detectarse), cli-output y conversacional —
   estos dos últimos siempre se preguntan, nunca se aplican automáticamente.
-- **AI Diff Reviewer** — amplía la Revisión de Seguridad obligatoria con una revisión local estructurada
-  mediante [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md` requerido). Pregunta siempre **Flujo A** (solo local) vs **Flujo B** (compuerta CI de doble superficie con `pr-review.yml`); nunca elijas por defecto. Fallo suave solo para errores de skill/extensión/invocación ausentes; los hallazgos `critical` de un pase local completado siguen bloqueando la finalización de la Revisión de Seguridad. La metodología central tiene cero dependencia de AI Diff Reviewer.
+- **AI Diff Reviewer** — la revisión local requerida (no una opción): el pase de seguridad de cada Final Review
+  ejecuta [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md`
+  requerido) sobre el conjunto acumulado de cambios del plan. Una skill o extensión ausente es un hallazgo
+  registrado `local reviewer not installed`, instalada cuando la ejecución puede escribir en el harness —
+  nunca una omisión silenciosa; los errores de invocación fallan suave; los hallazgos `critical` de un pase
+  completado siguen bloqueando la finalización. El **Flujo B** (la compuerta CI con `pr-review.yml`) se ofrece
+  como opción explícita y nunca se instala sin pedirlo. Ningún flujo de Deep Work Plan exige un servicio
+  comercial, un proveedor de CI ni un secreto.
 
 ## 5. Haz evolucionar el kit (sub-skill author)
 
@@ -179,9 +192,9 @@ Genera Deep Work Plans para cualquier tarea y ejecútalos tarea por tarea:
 - `/dwp-resume` — reconstruye el estado y continúa un plan interrumpido.
 - `/dwp-verify` — informe objetivo de conformidad (aprobado/fallido) para el repo (o un plan específico).
 
-Todo plan termina con tres tareas finales obligatorias — una **Revisión de seguridad** de los propios
+Todo plan se cierra con el Final Review — un pase de seguridad sobre los propios
 cambios del plan (manteniendo `docs/SECURITY.md` al día; un hallazgo crítico bloquea la finalización),
-el Descubrimiento de habilidades y agentes y el Informe ejecutivo.
+la validación del estado final y la reconciliación de las decisiones sobre skills. El Reporte Ejecutivo sigue disponible a petición.
 
 ## 7. Verifica
 

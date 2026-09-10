@@ -8,7 +8,7 @@ section: Conformidad
 
 # Conformidad
 
-**Versión 1.1. Estado: Estable.** Este documento define qué significa que un repositorio sea *conforme con Deep Work Plan* — es decir, AI-first y pilotable por agentes. Las palabras clave DEBE, NO DEBE, DEBERÍA, NO DEBERÍA y PUEDE se interpretan como se describe en el RFC 2119.
+**Versión 1.2. Estado: Estable.** Este documento define qué significa que un repositorio sea *conforme con Deep Work Plan* — es decir, AI-first y pilotable por agentes. Las palabras clave DEBE, NO DEBE, DEBERÍA, NO DEBERÍA y PUEDE se interpretan como se describe en el RFC 2119.
 
 La conformidad existe para que "AI-first" sea una propiedad objetiva y comprobable, no una impresión. Un repositorio cumple los criterios de abajo o no los cumple. La [sub-skill `verify`](/es/kit) (`/dwp-verify`) los comprueba de forma mecánica.
 
@@ -23,7 +23,7 @@ Un repositorio conforme con DWP DEBE cumplir todo lo siguiente. Cada artefacto D
 5. **Un espacio `.dwp/` ignorado por git.** El repositorio DEBE contener un directorio `.dwp/` con `plans/` y `drafts/`, y `.dwp/` DEBE estar ignorado por git. Un espacio de trabajo `tmp/` DEBERÍA existir y DEBERÍA estar ignorado por git.
 6. **El skill de la metodología es resoluble.** El skill de Deep Work Plan DEBE estar instalado o referenciado de modo que un agente en el repositorio pueda invocar sus sub-skills.
 
-Un repositorio es **totalmente conforme con cero addons**. Los addons (devcontainer, Dailybot, dependency-upgrade, design-system) son opcionales y NO DEBEN ser requeridos para la conformidad.
+Un repositorio es **totalmente conforme con cero addons opcionales**. Los addons opcionales (devcontainer, Dailybot, dependency-upgrade, design-system) NO DEBEN ser requeridos para la conformidad. Desde el estándar 2.3.0 la **revisión local de AI Diff Reviewer** (skill vendorizada + archivo de extensión) es parte de la línea base: su ausencia es un fallo para un repositorio que declare 2.3.0 o posterior, y un hallazgo de versión del harness para un repositorio heredado. Su superficie de CI sigue siendo opcional.
 
 ## Un plan bien formado
 
@@ -33,11 +33,11 @@ Un Deep Work Plan en `.dwp/plans/` está bien formado cuando:
 2. Cada tarea que agrega nueva funcionalidad central o cambia el comportamiento del producto DEBE incluir cobertura de pruebas automatizadas para ese comportamiento en sus criterios de aceptación, y DEBE ejecutar las pruebas del repositorio junto con sus comprobaciones de linter y de tipos en su puerta de validación — no solo la compilación. Las pruebas existentes DEBEN seguir en verde; un cambio de comportamiento DEBE actualizar una prueba que rompa en lugar de eliminarla u omitirla. Las tareas de pura documentación, configuración o investigación están exentas de crear pruebas, pero aun así ejecutan la puerta del repositorio.
 3. Cada tarea que toque autenticación, manejo de entradas, secretos o configuración, superficie de red o dependencias DEBE llevar las expectativas de seguridad de ese cambio en sus criterios de aceptación, y cada commit DEBE estar libre de material secreto.
 4. El plan DEBE persistir el progreso para que el trabajo sobreviva a la interrupción y pueda ser reanudado por un agente distinto.
-5. El plan DEBE incluir las tres tareas finales obligatorias — Revisión de Seguridad, Descubrimiento de Skills y Agentes y el Reporte Ejecutivo. Un hallazgo de seguridad crítico bloquea la finalización hasta que se corrija o se acepte explícitamente.
+5. El plan DEBE cerrarse con su revisión final registrada. Un plan redactado bajo esta versión DEBE terminar con exactamente un **Final Review** obligatorio — el pase de seguridad, la validación de estado final y la reconciliación de skills. Un plan redactado bajo una versión anterior termina con las tres tareas finales obligatorias (Revisión de Seguridad, Descubrimiento de Skills y Agentes, Reporte Ejecutivo) y sigue siendo conforme. Un hallazgo de seguridad crítico bloquea la finalización hasta que se corrija o se acepte explícitamente.
 6. Las tareas DEBERÍAN reanclarse al objetivo del plan antes de ejecutarse, para evitar la desviación en un horizonte largo.
 
 ## Verificar la conformidad
 
-La conformidad DEBERÍA verificarse de forma mecánica y no por inspección. Ejecutar `/dwp-verify` produce un informe de aprobado/fallido frente a los criterios de arriba: la presencia y el contenido real de `AGENTS.md`, la resolución de `CLAUDE.md`, las categorías de `docs/`, la coincidencia catálogo-versus-disco de `.agents/`, el estado de gitignore de `.dwp/` y `tmp/` y — para un plan — que cada tarea lleve criterios de aceptación y una puerta de validación, con cobertura de pruebas para las tareas que cambian el comportamiento y las tres tareas finales obligatorias presentes, incluida la Revisión de Seguridad.
+La conformidad DEBERÍA verificarse de forma mecánica y no por inspección. Ejecutar `/dwp-verify` produce un informe de aprobado/fallido frente a los criterios de arriba: la presencia y el contenido real de `AGENTS.md`, la resolución de `CLAUDE.md`, las categorías de `docs/`, la coincidencia catálogo-versus-disco de `.agents/`, el estado de gitignore de `.dwp/` y `tmp/` y — para un plan — que cada tarea lleve criterios de aceptación y una puerta de validación, con cobertura de pruebas para las tareas que cambian el comportamiento y la revisión final registrada presente. El comprobador es **consciente de la versión**: DEBE aceptar como conforme un plan heredado (tres tareas finales obligatorias, sin Superficie tocada), y DEBE rechazar un plan que declare esta versión y sea objetivamente inválido bajo ella. También reporta una línea de procedencia `DWP standard:` ausente o desactualizada como un hallazgo que nombra la actualización dirigida del harness.
 
 Un repositorio DEBERÍA reverificarse tras la incorporación y tras cada plan completado, de modo que la conformidad se mantenga en lugar de afirmarse una sola vez.

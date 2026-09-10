@@ -13,41 +13,41 @@ const t = getTranslations(lang);
 const p = t.home.pitch;
 ---
 
-<section class="border-b py-16 md:py-20" style="border-color: var(--color-line);">
-  <div class="main-container">
-    <div
-      class="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:items-center lg:gap-12"
-    >
-      <div class="max-w-3xl">
-        <Kicker>{p.kicker}</Kicker>
-        <div class="mt-6 space-y-5">
-          <Lead dropCap>{p.problem}</Lead>
-          <p class="text-lg leading-relaxed" style="color: var(--color-ink);">
-            {p.answer}
-          </p>
-          <p class="text-lg leading-relaxed" style="color: var(--color-muted);">
-            {p.origin}
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-10 block lg:mt-0">
-        <img
-          src="/images/visuals/home/pitch-chart.webp"
-          alt={p.illustrationAlt}
-          width="760"
-          height="950"
-          loading="lazy"
-          class="mx-auto h-auto w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] dark:hidden"
-        />
-        <img
-          src="/images/visuals/home/pitch-chart-dark.webp"
-          alt={p.illustrationAlt}
-          width="760"
-          height="950"
-          loading="lazy"
-          class="mx-auto hidden h-auto w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] dark:block"
-        />
+<section id="problem-answer" class="border-b py-16 md:py-20" style="border-color: var(--color-line);">
+  <div
+    class="main-container flex flex-col lg:grid lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:items-center lg:gap-12"
+  >
+    <div class="order-2 mt-10 lg:order-1 lg:mt-0">
+      <img
+        src="/images/visuals/home/plate-pitch-problem.png"
+        alt={p.illustrationAlt}
+        width="1040"
+        height="1300"
+        loading="lazy"
+        class="mx-auto h-auto w-full max-w-[320px] sm:max-w-[380px] dark:hidden"
+      />
+      <img
+        src="/images/visuals/home/plate-pitch-problem-dark.png"
+        alt={p.illustrationAlt}
+        width="1040"
+        height="1300"
+        loading="lazy"
+        class="mx-auto hidden h-auto w-full max-w-[320px] sm:max-w-[380px] dark:block"
+      />
+    </div>
+    <div class="order-1 max-w-3xl lg:order-2">
+      <Kicker>{p.kicker}</Kicker>
+      <div class="mt-6 space-y-5">
+        <Lead dropCap>{p.problem}</Lead>
+        <Lead>
+          {p.answer.split('Deep Work Plan').map((part, i, arr) => (
+            <>
+              {part}
+              {i < arr.length - 1 && <strong class="font-semibold">Deep Work Plan</strong>}
+            </>
+          ))}
+        </Lead>
+        <Lead>{p.efficiency}</Lead>
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@ section: Conformance
 
 # Konformität
 
-**Version 1.1. Status: Stabil.** Dieses Dokument definiert, was es bedeutet, dass ein Repository *Deep Work Plan-konform* ist — also AI-first und agenten-steuerbar. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
+**Version 1.2. Status: Stabil.** Dieses Dokument definiert, was es bedeutet, dass ein Repository *Deep Work Plan-konform* ist — also AI-first und agenten-steuerbar. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
 Konformität existiert, damit „AI-first“ eine objektive, prüfbare Eigenschaft ist und kein Eindruck. Ein Repository erfüllt die untenstehenden Kriterien entweder oder nicht. Die [`verify`-Sub-Skill](/kit) (`/dwp-verify`) prüft sie mechanisch.
 
@@ -23,7 +23,7 @@ Ein DWP-konformes Repository MUSS alles Folgende erfüllen. Jedes Artefakt MUSS 
 5. **Ein per gitignore ausgeschlossener `.dwp/`-Arbeitsbereich.** Das Repository MUSS ein `.dwp/`-Verzeichnis mit `plans/` und `drafts/` enthalten, und `.dwp/` MUSS per gitignore ausgeschlossen sein. Ein `tmp/`-Scratch-Bereich SOLLTE existieren und SOLLTE per gitignore ausgeschlossen sein.
 6. **Die Methodik-Skill ist auflösbar.** Die Deep Work Plan Skill MUSS so installiert oder referenziert sein, dass ein Agent im Repository ihre Sub-Skills aufrufen kann.
 
-Ein Repository ist **mit null Addons vollständig konform**. Addons (devcontainer, Dailybot, dependency-upgrade, design-system) sind Opt-in und DÜRFEN NICHT für die Konformität erforderlich sein.
+Ein Repository ist **mit null optionalen Addons vollständig konform**. Die optionalen Addons (devcontainer, Dailybot, dependency-upgrade, design-system) DÜRFEN NICHT für die Konformität erforderlich sein. Seit Standard 2.3.0 ist die **lokale Überprüfung des AI Diff Reviewer** (vendorte Skill + Erweiterungsdatei) Teil der Baseline: Ihr Fehlen ist ein Fehler für ein Repository, das 2.3.0 oder neuer deklariert, und ein Harness-Versions-Befund für ein Legacy-Repository. Ihre CI-Oberfläche bleibt optional.
 
 ## Ein wohlgeformter Plan
 
@@ -33,11 +33,11 @@ Ein Deep Work Plan in `.dwp/plans/` ist wohlgeformt, wenn:
 2. Jede Aufgabe, die neue Kernfunktionalität hinzufügt oder Produktverhalten ändert, MUSS automatisierte Testabdeckung für dieses Verhalten in ihren Akzeptanzkriterien umfassen und MUSS die Tests des Repositorys zusammen mit seinen Lint- und Typprüfungen in ihrem Validierungs-Gate ausführen — nicht den Build allein. Bestehende Tests MÜSSEN grün bleiben; eine Verhaltensänderung MUSS einen Test, den sie bricht, anpassen, statt ihn zu löschen oder zu überspringen. Reine Dokumentations-, Konfigurations- oder Recherche-Aufgaben sind von der Erstellung von Tests befreit, führen aber dennoch das Gate des Repositorys aus.
 3. Jede Aufgabe, die Authentifizierung, Eingabeverarbeitung, Geheimnisse oder Konfiguration, Netzwerkoberfläche oder Abhängigkeiten berührt, MUSS die Sicherheitserwartungen dieser Änderung in ihren Akzeptanzkriterien tragen, und jeder Commit MUSS frei von Geheimnismaterial sein.
 4. Der Plan MUSS den Fortschritt persistieren, sodass die Arbeit eine Unterbrechung übersteht und von einem anderen Agenten wiederaufgenommen werden kann.
-5. Der Plan MUSS die drei verpflichtenden Abschlussaufgaben enthalten — Security Review, Skills & Agents Discovery und den Executive Report. Ein kritischer Sicherheitsbefund blockiert den Abschluss, bis er behoben oder ausdrücklich akzeptiert wurde.
+5. Der Plan MUSS mit seiner aufgezeichneten Abschlussprüfung schließen. Ein Plan, der unter dieser Version verfasst wurde, MUSS mit genau einem verpflichtenden **Final Review** enden — dem Sicherheitstest, der Validierung des Endzustands und dem Abgleich der Skills-Entscheidungen. Ein Plan, der unter einer früheren Version verfasst wurde, endet mit den drei verpflichtenden Abschlussaufgaben (Security Review, Skills & Agents Discovery, Executive Report) und bleibt konform. Ein kritischer Sicherheitsbefund blockiert den Abschluss, bis er behoben oder ausdrücklich akzeptiert wurde.
 6. Aufgaben SOLLTEN sich vor der Ausführung erneut am Ziel des Plans verankern, um ein Abdriften über einen langen Horizont zu verhindern.
 
 ## Konformität verifizieren
 
-Konformität SOLLTE mechanisch verifiziert werden statt durch Inspektion. Das Ausführen von `/dwp-verify` erzeugt einen Bestanden/Nicht-bestanden-Bericht anhand der obigen Kriterien: das Vorhandensein und der echte Inhalt von `AGENTS.md`, die `CLAUDE.md`-Auflösung, die `docs/`-Kategorien, der `.agents/`-Abgleich Katalog gegen Festplatte, der gitignore-Status von `.dwp/` und `tmp/` und — für einen Plan —, dass jede Aufgabe Akzeptanzkriterien und ein Validierungs-Gate trägt, mit Testabdeckung für verhaltensändernde Aufgaben und dem Vorhandensein der drei verpflichtenden Abschlussaufgaben, das Security Review eingeschlossen.
+Konformität SOLLTE mechanisch verifiziert werden statt durch Inspektion. Das Ausführen von `/dwp-verify` erzeugt einen Bestanden/Nicht-bestanden-Bericht anhand der obigen Kriterien: das Vorhandensein und der echte Inhalt von `AGENTS.md`, die `CLAUDE.md`-Auflösung, die `docs/`-Kategorien, der `.agents/`-Abgleich Katalog gegen Festplatte, der gitignore-Status von `.dwp/` und `tmp/` und — für einen Plan —, dass jede Aufgabe Akzeptanzkriterien und ein Validierungs-Gate trägt, mit Testabdeckung für verhaltensändernde Aufgaben und dem Vorhandensein der aufgezeichneten Abschlussprüfung. Der Prüfer ist **versionsbewusst**: Er MUSS einen Legacy-Plan (drei verpflichtende Abschlussaufgaben, keine Touched Surface) als konform akzeptieren und MUSS einen Plan zurückweisen, der diese Version deklariert und objektiv unter ihr ungültig ist. Er meldet außerdem eine fehlende oder veraltete `DWP standard:`-Provenienzzeile als Befund, der das zielgerichtete Harness-Upgrade benennt.
 
 Ein Repository SOLLTE nach dem Onboarding und nach jedem abgeschlossenen Plan erneut verifiziert werden, sodass die Konformität aufrechterhalten und nicht nur einmal behauptet wird.

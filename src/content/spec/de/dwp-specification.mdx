@@ -1,6 +1,6 @@
 ---
 title: DWP-Spezifikation
-description: "Normative Deep Work Plan Spezifikation: Planstruktur, die neunteilige Aufgaben-Anatomie, die Ausführungsschleife aus fünf Operationen, der Ausgabe-Arbeitsbereich und die Versionierung."
+description: "Normative Deep Work Plan Spezifikation: Planstruktur, die zehnteilige Aufgaben-Anatomie, Gate-Auswahl nach Touched Surface, die Ausführungsschleife aus fünf Operationen, der Ausgabe-Arbeitsbereich und die Versionierung."
 order: 2
 lang: de
 section: Workflow
@@ -11,15 +11,25 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP-Spezifikation
 
-**Version 1.2. Status: Stabil.** Dieses Dokument ist die normative Spezifikation für die Deep Work Plan (DWP) Methodik. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
+**Version 2.3.0. Status: Stabil.** Dieses Dokument ist die normative Spezifikation für die Deep Work Plan (DWP) Methodik. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
-> **Additiv in v1.2.** Vier additive Fähigkeiten, keine Breaking Changes: (1) die **maschinenlesbare Plan-Zustandsschicht** (`manifest.json` + `state.json`, siehe [Plan-Zustand](/spec/plan-state)); (2) **proportionale Rigor-Stufen** (micro / standard / deep, siehe [Proportionaler Rigor](#proportional-rigor)); (3) der optionale **Delta-Abschnitt** in der Aufgaben-Anatomie für Brownfield-Verhaltensänderungen; und (4) das **DWP-Wiederaufnahme-Protokoll** wird zu einem benannten, zitierbaren sechsstufigen Ritual befördert. Bestehende v1.1-Pläne bleiben konform.
+> **Additiv in dieser Revision, keine Breaking Changes.** (1) Der Abschnitt **Touched Surface** — der Vertrag zwischen dem, was eine Aufgabe ändert, und dem, was validiert werden muss, mit Gate-Auswahl nach Risikoklasse (isoliert / Nahtstelle / geteilt-zentral / unbekannt); (2) die vollständige Validierung wird zu einer **Endzustands-Anforderung**, die im einzigen verpflichtenden **Final Review** des Plans läuft, mit expliziten Regeln zur Beweiswiederverwendung; (3) **aufgaben-lokale Skills-Entscheidungen** wandern in die erzeugende Aufgabe, und der Executive Report wird **optional, auf Anfrage**; (4) ein **modus-bewusster create-Ablauf** — der Trust-Modus materialisiert direkt, behält aber Analyse und Qualitätsprüfungen; und (5) eine explizite **Kompatibilitätsmatrix**: Pläne und Repositorys aus früheren Versionen bleiben konform.
 
 ## Definition
 
 Ein Deep Work Plan ist ein strukturiertes, reines Markdown-Artefakt, das eine komplexe Engineering-Aufgabe beschreibt, zerlegt in aufeinanderfolgende, prüfbare Arbeitseinheiten, entworfen, um von autonom arbeitenden KI-Coding-Agenten erstellt, ausgeführt und gepflegt zu werden.
 
 DWP ist spec-driven: Der Plan ist die Spezifikation, und Agenten MÜSSEN gegen seine expliziten Akzeptanzkriterien und Validierungs-Gates ausführen, statt zu improvisieren. Die Spezifikation — nicht ein Chat-Verlauf — ist die dauerhafte Quelle der Wahrheit, sodass die Arbeit über Sitzungen und Agenten hinweg überprüfbar und wiederaufnehmbar ist. Es ist zugleich Harness Engineering, portabel gemacht: Der Kontext, die Steuerschleife, die Leitplanken und der wiederaufnehmbare Zustand, die einen Agenten verlässlich machen, werden als reines Markdown in das Repository selbst installiert, sodass jeder konforme Agent das Repository ohne werkzeugspezifisches Framework steuern KANN.
+
+## Create-Ablauf — ein Schritt, modus-bewusst
+
+Der `create`-Ablauf erhebt Ziel, Kontext, Einschränkungen und Aufgaben-Gliederung einmal, führt seine **Anforderungsanalyse** durch (Umfang, Abhängigkeitsreihenfolge zwischen den Aufgaben, Auswahl der Validierung aus der Touched Surface, Proportionalitäts-Stufe) und materialisiert dann gemäß dem Modus, den der Entwickler gewählt hat:
+
+- **Geführter Modus (Standard).** Der Ablauf erzeugt genau **ein** Artefakt zur Review: einen **überarbeiteten Entwurf** in `.dwp/drafts/`, mit genug Struktur, um in einem Durchgang zu genehmigen oder Änderungen anzufordern. Der Plan-Ordner wird erst nach der Genehmigung materialisiert.
+- **Trust-Modus (`trust` / `auto`).** Der Ablauf **materialisiert den Plan direkt**, ohne Entwurfsdatei — der Entwickler hat auf die zwischengeschaltete Review verzichtet. Die Anforderungsanalyse, die Abhängigkeitsreihenfolge und eine **Plan-Qualitätsprüfung** laufen dennoch: Trust verzichtet auf die *Review*, nicht auf die *Analyse*. Ein Trust-Modus-Plan wird als **für unbeaufsichtigte Ausführung vorgenehmigt** aufgezeichnet.
+- **Explizite Entwurfsmodi.** `refined-draft {name}` und `from-refined-draft {file}` bleiben in beiden Modi verfügbar; ein Entwickler, der einen Entwurf anfordert, bekommt einen.
+
+In jedem Modus erzeugt der Ablauf niemals einen zwischengeschalteten, nicht überarbeiteten Entwurf als separaten prüfbaren Schritt.
 
 ## Planstruktur
 
@@ -33,23 +43,37 @@ Ein Plan KANN zusätzlich die maschinenlesbare Zustandsschicht tragen: `manifest
 
 ## Aufgaben-Anatomie
 
-<TaskAnatomy lang="en" class="not-prose my-10" />
+<TaskAnatomy lang="de" class="not-prose my-10" />
 
-Jede Aufgabendatei MUSS diese neun Abschnitte enthalten, in dieser Reihenfolge:
+Jede Aufgabendatei MUSS diese zehn Abschnitte enthalten, in dieser Reihenfolge:
 
 1. **Goal** — eine Formulierung in einem Absatz, was die Aufgabe erreicht.
 2. **Context** — Hintergrund, Links und warum diese Aufgabe existiert.
-3. **Steps** — geordnete, konkrete auszuführende Handlungen.
-4. **Acceptance criteria** — eine Checkliste von Bedingungen, die „erledigt" definieren.
-5. **Validation** — Befehle oder Tests, die zur Verifizierung auszuführen sind.
-6. **Files** — Pfade, die voraussichtlich erstellt oder geändert werden.
-7. **Dependencies** — andere Aufgaben oder externe Voraussetzungen.
-8. **Risks** — was schiefgehen könnte und Gegenmaßnahmen.
-9. **Completion & Log** — eine Statusmarkierung plus chronologische Notizen.
+3. **Touched Surface** — der Vertrag zwischen dem, was die Aufgabe ändert, und dem, was validiert werden muss.
+4. **Steps** — geordnete, konkrete auszuführende Handlungen.
+5. **Acceptance criteria** — eine Checkliste von Bedingungen, die „erledigt" definieren.
+6. **Validation** — Befehle oder Tests, die zur Verifizierung auszuführen sind, ausgewählt aus der Touched Surface.
+7. **Files** — Pfade, die voraussichtlich erstellt oder geändert werden.
+8. **Dependencies** — andere Aufgaben oder externe Voraussetzungen.
+9. **Risks** — was schiefgehen könnte und Gegenmaßnahmen.
+10. **Completion & Log** — eine Statusmarkierung plus chronologische Notizen.
 
 Eine Aufgabe KANN zusätzlich einen **Delta-Abschnitt** enthalten (EMPFOHLEN für Brownfield-Verhaltensänderungen — siehe unten) sowie einen **Rollback-Abschnitt** (EMPFOHLEN für Migrationen, Infrastrukturänderungen oder Deployments).
 
-### Der Delta-Abschnitt (Brownfield-Änderungen)
+## Die Touched Surface
+
+Die Touched Surface ist der Vertrag zwischen dem, was eine Aufgabe ändert, und dem, was validiert werden muss. Sie existiert, damit Validierung **nach Wirkung ausgewählt** wird, nicht nach Gewohnheit, und damit ein späterer Leser sehen kann, warum ein Gate gewählt wurde. Eine verhaltensändernde Aufgabe MUSS festhalten:
+
+- **Geplante Oberfläche** — die Pfade, Module, Pakete oder Konfigurationen, die die Aufgabe zu ändern beabsichtigt, geschrieben vor dem Editieren.
+- **Tatsächliche Oberfläche** — die abgeglichene Liste nach dem Editieren, entnommen aus dem echten Diff. Der Agent MUSS geplante und tatsächliche Oberflächen abgleichen, bevor er das Gate wählt.
+- **Betroffene Konsumenten** — Module, Pakete oder Dienste, die von der tatsächlichen Oberfläche abhängen, soweit die dokumentierte Abbildung des Repositorys es feststellen kann. Wo sie es nicht kann, MUSS der Eintrag dies sagen.
+- **Risikoklasse** — eine von: *isoliert* (auf ein Modul und seine Tests beschränkt); *Nahtstelle* (ändert einen Vertrag, Persistenz, Routing, Serialisierung, Authentifizierung oder Framework-Verdrahtung zwischen Kollaborateuren); *geteilt/zentral* (breit importiert oder eine Abhängigkeits-, Migrations-, Build-/Test-Konfigurations-, Schema- oder Toolchain-Änderung); *unbekannt* (die Abbildung fehlt, ist veraltet oder unverifiziert).
+- **Verwendete Test-Abbildung** — welche dokumentierte Abbildung oder welches Werkzeug die Auswahl erzeugt hat.
+- **Gewähltes Gate und Begründung** — die exakten Befehle und warum sie die tatsächliche Oberfläche abdecken.
+
+Konfigurationsdateien, Schemata, Abhängigkeits-Manifeste, Templates, Fixtures, Migrationen und Agenten-Instruktionsdateien **können Verhalten ändern** und MÜSSEN nach ihrer Wirkung klassifiziert werden, niemals nach Dateiendung. Eine Aufgabe, die nur Prosa, Kommentare oder Recherche-Artefakte ändert, KANN die Oberfläche als nicht zutreffend deklarieren und führt dennoch die nicht-laufzeitbezogenen Prüfungen des Repositorys aus.
+
+## Der Delta-Abschnitt (Brownfield-Änderungen)
 
 Die meisten reale Arbeit verändert bestehendes Verhalten, anstatt neues zu schaffen. Eine Aufgabe, die das Verhalten eines bestehenden Systems ändert, SOLLTE einen **Delta-Abschnitt** tragen, der die Änderung als expliziten Vorher/Nachher-Vertrag beschreibt, unter Verwendung von drei Listenüberschriften:
 
@@ -57,29 +81,61 @@ Die meisten reale Arbeit verändert bestehendes Verhalten, anstatt neues zu scha
 - **MODIFIED** — Verhalten, das in beiden Zuständen existiert, dargestellt als `was: … → now: …`.
 - **REMOVED** — Verhalten, das vorher existierte und danach absichtlich nicht mehr vorhanden ist.
 
-Jeder Eintrag MUSS beobachtbares Verhalten sein — die Antwort eines Endpunkts, ein CLI-Flag, ein UI-Zustand, ein Standardwert — kein Implementierungsdetail. Der Delta-Abschnitt ist das Diff des Reviewers auf Verhaltensebene: Akzeptanzkriterien verifizieren die ADDED/MODIFIED-Einträge, und die REMOVED-Einträge sind die explizite Erlaubnis zum Löschen. Alles, was nicht als REMOVED aufgeführt ist, MUSS weiterhin funktionieren, und das Validierungs-Gate der Aufgabe (bestehende Tests bleiben grün) ist das, was dies durchsetzt.
+Jeder Eintrag MUSS beobachtbares Verhalten sein — die Antwort eines Endpunkts, ein CLI-Flag, ein UI-Zustand, ein Standardwert — kein Implementierungsdetail. Der Delta-Abschnitt ist das Diff des Reviewers auf Verhaltensebene: Akzeptanzkriterien verifizieren die ADDED/MODIFIED-Einträge, und die REMOVED-Einträge sind die explizite Erlaubnis zum Löschen. Alles, was nicht als REMOVED aufgeführt ist, MUSS weiterhin funktionieren.
 
-## Validierungs-Gates und Tests
+## Validierungs-Gates — Auswahl nach Risikoklasse
 
-Die Validierung ist das Gate, das eine Behauptung des Abschlusses in einen Beleg dafür verwandelt: Eine Aufgabe DARF NICHT als abgeschlossen markiert werden, bevor nicht jeder Befehl in ihrem Validation-Abschnitt ausgeführt wurde und bestanden hat. Tests sind ein erstklassiger Bestandteil dieses Gates, kein optionales Beiwerk — sie sind es, was den Code, den ein Plan ausliefert, verlässlich und überprüfbar macht.
+Die Validierung ist das Gate, das eine Behauptung des Abschlusses in einen Beleg dafür verwandelt: Eine Aufgabe DARF NICHT als abgeschlossen markiert werden, bevor nicht jeder Befehl in ihrem Validation-Abschnitt ausgeführt wurde und bestanden hat. Das Gate einer verhaltensändernden Aufgabe wird aus ihrer abgeglichenen Touched Surface gewählt, nach Risikoklasse:
 
-Wenn eine Aufgabe neue Kernfunktionalität hinzufügt oder bestehendes Verhalten wesentlich ändert:
+| Risikoklasse | Erforderliche Validierung |
+|------|------|
+| **isoliert** | Die Tests des geänderten Verhaltens und seiner betroffenen Konsumenten, plus die statischen Prüfungen, die die tatsächliche Oberfläche abdecken. |
+| **Nahtstelle** | Das oben Genannte, plus die Integrations- oder Vertragstests für diese Nahtstelle — in dieser Aufgabe hinzugefügt, wenn keine existieren. Integrationsprüfungen an einer Nahtstelle werden nicht an das Planende verschoben. |
+| **geteilt/zentral** | Auf die betroffenen Pakete und ihre transitiven Konsumenten ausweiten; wo sich die Auswirkung nicht zuverlässig begrenzen lässt, die vollständige Validierung ausführen. |
+| **unbekannt** | Die Auswahl untersuchen und korrigieren; lässt sie sich weiterhin nicht feststellen, den breiteren oder vollständigen Befehl ausführen. |
+| **nicht zutreffend** (Prosa/Recherche) | Die nicht-laufzeitbezogenen Prüfungen des Repositorys, mit der im Touched-Surface-Abschnitt aufgezeichneten Begründung. |
 
-- Ihre **Akzeptanzkriterien** MÜSSEN automatisierte Testabdeckung für das neue oder geänderte Verhalten umfassen (den Happy Path plus die wesentlichen Rand- und Fehlerfälle), entsprechend der Test-Konvention und der Abdeckungserwartung des Repositorys.
-- Ihre **Validierung** MUSS die Tests des Repositorys zusammen mit seinen Lint-, Typprüfungs- und Formatprüfungen ausführen — die vollständige Code-Qualitätsprüfung, die das Repository definiert — nicht den Build allein. „Es baut" ist kein hinreichendes Gate für eine Verhaltensänderung.
-- Bestehende Tests MÜSSEN grün bleiben. Eine Änderung, die einen Test bricht, der den betroffenen Code abdeckt, MUSS diesen Test an das beabsichtigte neue Verhalten anpassen; sie DARF NICHT einen Test löschen, überspringen oder abschwächen, nur um das Gate zum Bestehen zu zwingen.
+Eine Verhaltensänderung MUSS eine nicht-leere, relevante Testauswahl hervorbringen — ein ungültiger Selektor oder ein Runner, der null Tests ausgewählt hat, ist keine Abdeckung. Wo die Test-Abbildung des Repositorys veraltet ist, wird die korrekte Aufrufform abgeleitet und die Aktualisierung der Abbildung aufgezeichnet; ein kleiner fehlender Befehl erfordert niemals einen vollständigen Onboarding-Lauf. Wo keine eingegrenzte Aufrufform existiert, gilt die vollständige zutreffende Suite — Legacy-Verhalten, niemals ein Fehler.
 
-Reine Dokumentations-, Konfigurations- oder Recherche-Aufgaben sind von der Erstellung von Tests befreit, MÜSSEN aber dennoch jenes Validierungs-Gate ausführen, das das Repository definiert. Die Tiefe des Testens ist proportional zur Größe der Änderung und zur Reife des Repositorys. Wo ein Repository überhaupt keine Test- oder Lint-Toolchain hat, DARF der Agent diese Disziplin NICHT stillschweigend überspringen — er stützt sich auf die während des Onboardings vorgeschlagene Toolchain (siehe [Konformität](/spec)).
+Wenn eine Aufgabe neue Kernfunktionalität hinzufügt oder bestehendes Verhalten wesentlich ändert, MÜSSEN ihre Akzeptanzkriterien automatisierte Testabdeckung für das neue oder geänderte Verhalten umfassen, und ihre Validierung führt die Tests des Repositorys zusammen mit Lint-, Typprüfungs- und Formatprüfungen aus — nicht den Build allein. Bestehende Tests MÜSSEN grün bleiben.
+
+## Validierung des Endzustands
+
+Gates je Aufgabe validieren, was jede Aufgabe berührt hat; sie ersetzen nicht die Validierung des Plans als Ganzem. Bevor ein Plan abschließt, MUSS die **vollständige zutreffende** Validierung des Repositorys auf dem **finalen relevanten Zustand** ausgeführt werden und bestehen — nach der letzten substanziellen Änderung, im Final Review. Breitere Läufe zuvor geschehen an Integrationsgrenzen oder nach geteilt/zentral-Änderungen, nicht nach einem Aufgabenanzahl-Zeitplan. Ein bestandenes Ergebnis DARF nur mit dem Nachweis wiederverwendet werden, dass die relevanten Eingaben gleichwertig sind; andernfalls wird es erneut ausgeführt. Jeder Gate-Lauf hinterlässt einen knappen Eintrag: Befehl, Umfang, Revision, Ergebnis und einen Beweispfad.
 
 ## Sicherheitsdisziplin
 
-Sicherheit ist erstklassig auf dieselbe Weise wie Tests und folgt demselben zweischichtigen Modell: Disziplin je Aufgabe, während die Arbeit geschieht, plus ein verpflichtendes Security-Review-Gate über den gesamten Änderungssatz am Ende. Wann immer eine Aufgabe Authentifizierung oder Autorisierung, die Eingabeverarbeitung, Secrets oder Konfiguration, die Netzwerk-, Datei- oder Shell-Oberfläche oder Abhängigkeiten berührt:
+Sicherheit ist erstklassig auf dieselbe Weise wie Tests und folgt demselben zweischichtigen Modell: Disziplin je Aufgabe, während die Arbeit geschieht, plus der Sicherheitstest des Final Review über den gesamten Änderungssatz am Ende. Wann immer eine Aufgabe Authentifizierung oder Autorisierung, die Eingabeverarbeitung, Secrets oder Konfiguration, die Netzwerk-, Datei- oder Shell-Oberfläche oder Abhängigkeiten berührt:
 
 - Ihre **Akzeptanzkriterien** MÜSSEN die Sicherheitserwartungen der Änderung benennen — Eingaben validiert und maskiert, kein geheimes Material in Code oder Fixtures, Authentifizierungsprüfungen erhalten oder gestärkt — in Übereinstimmung mit `docs/SECURITY.md`.
 - Jeder Commit MUSS vor dem Einfließen als frei von Secrets oder Anmeldedaten bestätigt werden, Test-Fixtures und Dokumentationsbeispiele eingeschlossen. Ein Secret in einem bereits gepushten Commit MUSS als geleakt behandelt und rotiert werden, nicht bloß entfernt.
 - Wo die sicherheitsrelevante Arbeit erheblich ist, SOLLTE eine eigene Härtungsaufgabe unmittelbar nach den Implementierungsaufgaben und vor der Aufgabe der umfassenden Tests platziert werden, damit Befunde behoben werden, bevor die Tests das Verhalten festschreiben, und jeder Befund zu einem Regressionsfall statt zu Nacharbeit wird.
 
-Diese Disziplin je Aufgabe ersetzt nicht die finale Aufgabe Security Review: Prüfungen je Aufgabe fangen Probleme in dem Commit ab, in dem sie entstehen, während das finale Gate den gesamten Plan auditiert — einschließlich der Test- und Dokumentationsaufgaben selbst. Jeder Plan endet daher mit drei verpflichtenden finalen Aufgaben — Security Review, dann Skills & Agents Discovery, dann der Executive Report — und ein kritischer Sicherheitsbefund blockiert den Abschluss, bis er behoben oder ausdrücklich akzeptiert ist.
+Diese Disziplin je Aufgabe ersetzt nicht den Sicherheitstest des Final Review: Prüfungen je Aufgabe fangen Probleme in dem Commit ab, in dem sie entstehen, während das finale Gate den gesamten Plan auditiert — einschließlich der Test- und Dokumentationsaufgaben selbst.
+
+## Plan-Lebenszyklus — das Final Review
+
+Jeder konforme Plan, der unter dieser Version verfasst wird, endet mit genau **einer** verpflichtenden Aufgabe: dem **Final Review** (Aufgabe N). Zwei Verantwortlichkeiten, die frühere Versionen in separate Abschlussaufgaben gelegt hatten, werden verlagert: Skills-Entscheidungen wandern in die Aufgabe, die das Muster erzeugt hat, und der Executive Report wird zu einem optionalen Artefakt auf Anfrage. Nichts am Sicherheitstest wird abgeschwächt.
+
+Das Final Review MUSS, in dieser Reihenfolge:
+
+**(a) Sicherheitstest** — den vollständigen akkumulierten Änderungssatz des Plans auf hartkodierte Secrets, Injection-Risiken, neue Angriffsfläche, geschwächte Authentifizierung und sensible Daten in Logs oder Dokumenten prüfen; eingeführte Abhängigkeiten auditieren; verifizieren, dass `docs/SECURITY.md` weiterhin die Realität widerspiegelt; den Sicherheitsbericht auch dann schreiben, wenn er sauber ist. Ein kritischer Befund wird behoben — oder vom Nutzer explizit akzeptiert —, bevor der Plan abschließt.
+
+**(b) Validierung des Endzustands** — die vollständige zutreffende Validierung des Repositorys läuft auf dem finalen relevanten Zustand und besteht.
+
+**(c) Abgleich der Skills** — jede Aufgabe trägt eine Skills-Disposition, und jeder aufgezeichnete Kandidat hat eine Disposition; kein zweiter Discovery-Bericht.
+
+**(d) Abschluss** — den Abschluss mit Lieferungen, Validierungsbeweisen und Einschränkungen berichten; den Executive Report einmal anbieten. Der Plan ist abgeschlossen, ob das Angebot beantwortet wird oder nicht.
+
+Das Final Review läuft sequenziell nach allen anderen Aufgaben und wird niemals in eine parallele Gruppe platziert.
+
+## Aufgaben-lokale Skills-Entscheidungen
+
+Die Frage „hat diese Arbeit ein wiederverwendbares Muster erzeugt, das eine Skill oder einen Agenten wert ist?" wird innerhalb der Aufgabe beantwortet, die das Muster erzeugt hat, während ihre Beweise im Kontext sind. Der Completion-&-Log-Abschnitt jeder Aufgabe trägt eine **Skills-Disposition**: keine, ein Update einer bestehenden Skill, die Erstellung eines benannten Artefakts oder eine Verschiebung mit Begründung. Berechtigte Autorenschaft geschieht innerhalb dieser Aufgabe, vor ihrem Validierungs-Gate und Commit, nach einer Duplikatprüfung gegen den bestehenden Katalog.
+
+## Executive-Bericht — optional, auf Anfrage
+
+Der Executive Report ist keine verpflichtende Aufgabe mehr. Beim Abschluss bietet ihn der Agent einmal an; er wird nur auf explizite Anfrage erzeugt, aus dauerhaften Belegen befriedigt, ohne den Plan abzuspielen. Bleibt die Antwort aus oder läuft der Plan unbeaufsichtigt, bleibt der Plan abgeschlossen, ohne dass ein Bericht erzeugt wird.
 
 ## Aufgabenabschlussprotokoll
 
@@ -104,7 +160,7 @@ Der Agent MUSS abgeschlossenen (`[x]`) Markierungen vertrauen und DARF abgeschlo
 
 ## Die Ausführungsschleife
 
-<CoreLoop lang="en" class="not-prose my-10" />
+<CoreLoop lang="de" class="not-prose my-10" />
 
 DWP definiert fünf Operationen:
 
@@ -116,7 +172,7 @@ DWP definiert fünf Operationen:
 
 ## Ausgabe-Arbeitsbereich
 
-<OutputWorkspace lang="en" class="not-prose my-10" />
+<OutputWorkspace lang="de" class="not-prose my-10" />
 
 Alle DWP-Artefakte MÜSSEN unter einem per gitignore ausgeschlossenen `.dwp/`-Verzeichnis im Repository-Stammverzeichnis leben.
 
@@ -133,7 +189,7 @@ Rigor MUSS proportional zur Arbeit sein. Zeremonie bei trivialen Änderungen ist
 | Stufe | Wann | Form |
 |-------|------|------|
 | **micro** | Eine einzelne atomare Änderung: ein Anliegen, ungefähr eine Sitzung, keine Koordination. Ein Bugfix, eine Textänderung, eine Konfigurationsanpassung. | Kein Plan-Ordner. Der Agent formuliert Ziel, Akzeptanzkriterien und Validierungs-Gate inline im Gespräch, führt aus, validiert, committet. |
-| **standard** | Mehrstufige Arbeit mit realem Umfang: ein Feature, ein Refactoring, eine Migration innerhalb eines Repositorys. Die Standardstufe. | Ein vollständiger Plan: Plan-Ordner, neunteilige Aufgaben, verpflichtende Abschlussaufgaben. |
+| **standard** | Mehrstufige Arbeit mit realem Umfang: ein Feature, ein Refactoring, eine Migration innerhalb eines Repositorys. Die Standardstufe. | Ein vollständiger Plan: Plan-Ordner, zehnteilige Aufgaben, das Final Review. |
 | **deep** | Langfristige Arbeit, die parallele Gruppen, untergeordnete Repositorys oder mehrere unbeaufsichtigte Sitzungen umspannt. | Ein Standard-Plan plus Orchestrator- und/oder Team-Agenten-Fähigkeiten sowie die Zustandsschicht. |
 
 Ein Agent, der gebeten wird, einen Plan für Micro-Stufen-Arbeit zu erstellen, MUSS mitteilen, dass ein Plan unverhältnismäßig ist, und stattdessen die Inline-Form anbieten. Ein Plan-Ordner DARF NICHT für eine triviale Einzeldatei-Änderung erstellt werden.
@@ -141,6 +197,17 @@ Ein Agent, der gebeten wird, einen Plan für Micro-Stufen-Arbeit zu erstellen, M
 Micro-Stufen-Arbeit hält dennoch die Nicht-Verhandelbaren: ein explizites Ziel, ein Validierungs-Gate, das ausgeführt wird und besteht, sowie Testdisziplin für Verhaltensänderungen. Die Stufe ändert die Verpackung, niemals die Gates.
 
 Wenn der Umfang während der Ausführung wächst — eine Micro-Aufgabe deckt realen Umfang auf, ein Standard-Plan bekommt Sub-Repositorys — MUSS der Agent stoppen und die Arbeit in die nächste Stufe befördern, anstatt die aktuelle zu dehnen.
+
+## Kompatibilität
+
+Pläne und Repositorys aus früheren Versionen bleiben konform, und ein Konformitätsprüfer MUSS ein bekanntes Legacy-Artefakt (akzeptiert) von einem Artefakt unterscheiden, das diese Version deklariert und objektiv unter ihr ungültig ist (zurückgewiesen):
+
+| Fall | Regel |
+|------|------|
+| **Plan unter einer früheren Version verfasst** (drei verpflichtende Abschlussaufgaben; Aufgaben ohne Touched Surface), von dieser Version ausgeführt | Unterstützt. Wird unter seiner eigenen aufgezeichneten Form ausgeführt — Abschlussaufgaben werden nicht hinzugefügt, entfernt oder umgeordnet, keine Touched Surface wird während des Laufs hinzugefügt, und die Validierung fällt auf die vollständige zutreffende Suite zurück. Eine `refine`-Sitzung KANN ihn gezielt migrieren. |
+| **Repository unter einer früheren Version onboardet**, von dieser Version onboardet oder geplant | Unterstützt. Pläne fallen auf Voll-Suite-Gates zurück; die fehlende Dokumentation eingegrenzter Aufrufformen ist ein Befund, der das zielgerichtete Harness-Upgrade benennt, niemals ein Fehler. |
+| **Plan unter dieser Version verfasst**, Agent folgt dieser Version | Unterstützt — das Ziel. |
+| **Plan unter dieser Version verfasst**, Agent folgt einer früheren Version | Nicht unterstützt; dokumentiert. Repositorys mit einer älteren gepinnten Skill SOLLTEN die Skill aktualisieren, bevor sie neue Pläne annehmen. |
 
 ## Versionierung
 

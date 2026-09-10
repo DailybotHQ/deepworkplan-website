@@ -1,6 +1,6 @@
 ---
 title: 애드온
-description: "선택적 DWP 확장: 다섯 가지 출시 애드온(devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer), 애드온 계약 및 키트 개념(skills, agents, presets)을 설명합니다."
+description: "DWP 애드온: 네 가지 옵트인 확장(devcontainer, Dailybot, dependency-upgrade, design-system), 선택적 CI 표면을 갖는 필수 AI Diff Reviewer 로컬 리뷰, 애드온 계약 및 키트 개념을 설명합니다."
 order: 5
 lang: ko
 section: Addons
@@ -8,7 +8,7 @@ section: Addons
 
 # 애드온
 
-**버전 2.0.** 애드온은 핵심 Deep Work Plan 방법론에 대한 선택적 확장입니다. **적합성에 절대 필요하지 않습니다** — 애드온이 없는 저장소도 완전히 AI-first이며 DWP 적합합니다. 각 애드온은 온보딩 중 제안되며 명시적으로 수락 또는 거부되고, — 수락 시 — 기존 설정을 덮어쓰지 않고 **조정**합니다.
+**버전 2.1.** 애드온은 핵심 Deep Work Plan 방법론에 대한 확장입니다. 다섯 가지 중 네 가지는 선택적이며 **적합성에 절대 필요하지 않습니다** — 선택적 애드온이 없는 저장소도 완전히 AI-first이며 DWP 적합합니다. 각 선택적 애드온은 온보딩 중 제안되며 명시적으로 수락 또는 거부되고, — 수락 시 — 기존 설정을 덮어쓰지 않고 **조정**합니다. 한 가지 구성 요소가 명시된 예외입니다: 표준 2.3.0부터 **AI Diff Reviewer 로컬 리뷰**는 필수 기준선의 일부입니다 — 온보딩이 이를 설치하고 모든 Final Review가 이를 실행합니다 — 반면 그 CI 표면은 옵트인으로 남습니다.
 
 ## 애드온 계약
 
@@ -25,7 +25,7 @@ section: Addons
 
 ## 출시 애드온(다섯 가지)
 
-현재 다섯 가지 애드온이 출시됩니다. 각각 **키트 카탈로그 페이지**(사용자 대상 세부)와 Deep Work Plan 스킬 내 **규범 스펙**이 있습니다.
+현재 다섯 가지 애드온이 출시됩니다 — 네 가지 옵트인과 필수 로컬 리뷰입니다. 각각 **키트 카탈로그 페이지**(사용자 대상 세부)와 Deep Work Plan 스킬 내 **규범 스펙**이 있습니다.
 
 ### Devcontainer(첫 번째 애드온)
 
@@ -65,23 +65,24 @@ section: Addons
 - **프로필 강도:** visual-ui는 감지 시 **기본 켜짐**; cli-output과 conversational은 감지 시 **권장, 항상 질문, 자동 적용 안 함**
 - **제안 시점:** 사용자 대상 인터페이스 표면이 감지된 경우에만 — 순수 라이브러리, 헤드리스 서비스 또는 인프라 전용 저장소에는 해당 없음
 
-### AI Diff Reviewer(다섯 번째 애드온)
+### AI Diff Reviewer(다섯 번째 애드온 — 필수 로컬 리뷰, 선택적 CI 표면)
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**(marketplace **"AI Diff Reviewer"**, 현재 버전 **v2.0.0**)에 대한 선택적 연결로, 필수 보안 검토를 구조화된 로컬 검토로 강화하고 선택적으로 CI에서 pull request를 게이트합니다.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**(marketplace **"AI Diff Reviewer"**, 현재 버전 **v2.0.0**)는 필수 Final Review 보안 점검에 구조화된 로컬 리뷰를 부여하고, 선택적으로 CI에서 pull request를 게이트합니다. 표준 2.3.0부터 **로컬 리뷰는 기준선의 일부**입니다; 옵트인인 것은 CI 표면뿐입니다.
 
 - **키트 페이지:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 전체 기능 참조
-- **DWP 애드온이 연결하는 것:** upstream skill의 부모 기본 플로우를 통한 로컬 보안 검토 강화; 필수 `.review/extension.md` (skill만으로는 불완전함); Flow B는 선택적으로 `pr-review.yml`(`DailybotHQ/ai-diff-reviewer@v2`)을 설치하고 `apply-review`를 개발자가 호출 가능한 컴패니언으로 제공 — 절대 플랜 작업이 아님
-- **플로우:** **A — 로컬 전용** (skill + 확장) 또는 **B — 이중 서피스** (skill + 확장 + CI Action). 애드온은 어떤 플로우인지 **반드시 질문해야 함**; 절대 기본값을 가정하지 않음
-- **소프트 실패 vs 게이트:** 누락된 skill/확장/호출 오류는 절대 차단하지 않음; **완료된** 로컬 패스의 `critical` 결과는 여전히 보안 검토 계약을 따름
-- **동일성(Flow B):** 공유 `prompt.md` + 확장으로 방법론/심각도 정렬; CI Iteration-Aware Review는 로컬 패스가 완전하게 유지되는 동안 2+ 라운드를 줄일 수 있음
-- **공급자 중립 보호:** 핵심 DWP는 AI Diff Reviewer에 대한 **제로** 의존성을 가짐; 모든 사람에게 절대 자동 설치하지 않음
-- **제안 시점:** 개발자 또는 팀이 구조화된 로컬 검토 및/또는 CI PR 병합 게이트를 원할 때
+- **온보딩 시 필수(7a 단계):** 온보딩 동의 아래 벤더 스킬의 태그 고정 설치(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) 더하기 저장소 맞춤 `.review/extension.md`(`generate-extension` 경유); 표적 하니스 업그레이드는 둘 중 무엇이 누락되었는지 조정; 거부는 선언된 예외로 기록되며 설치될 때까지 `verify`가 보고
+- **모든 Final Review에서 필수:** 보안 점검은 누적 변경 집합에 대해 upstream 부모 기본 플로우를 실행하고 그 출력을 `analysis_results/SECURITY_REVIEW.md`에 덧붙임; 누락된 스킬 또는 확장은 기록된 `local reviewer not installed` 발견 사항 — 실행이 하니스에 쓸 수 있을 때 설치됨 — 절대 조용한 건너뜀이 아님; 완료된 패스의 `critical` 발견은 수정되거나 명시적으로 수락될 때까지 완료를 차단
+- **선택적 CI 표면(Flow B):** upstream `setup` 서브스킬을 통한 `pr-review.yml`(`DailybotHQ/ai-diff-reviewer@v2`), 더해서 개발자 호출 컴패니언으로 `apply-review` — 명시적으로 제안되며 요청하지 않으면 설치하지 않고, 절대 기본값이 아니며, 절대 플랜 작업이 아님
+- **차단 없음(호출만):** 시작할 수 있었지만 오류가 난 로컬 리뷰는 한 번 경고하고 기록한 뒤 계속; 그 작업을 실패시키지 않음
+- **동일성(Flow B):** 공유 `prompt.md` + 확장으로 방법론/심각도 정렬; CI Iteration-Aware Review는 로컬 패스가 완전한 채로 남는 동안 2 라운드 이상을 줄일 수 있음
+- **벤더 중립 가드레일:** 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않음 — 이 리뷰어는 개발자 자신의 코딩 에이전트가 실행하는 MIT 라이선스의 태그 고정 스킬
+- **적합성:** `verify`는 표준 2.3.0 이상을 선언한 저장소에 대해서는 누락된 로컬 리뷰어를 실패로 보고하고, 레거시 저장소에 대해서는 하니스 버전 발견 사항으로 보고
 
 ## 스킬
 
 스킬은 이름으로 호출하는 재사용 가능한 절차. 스킬은 반복 가능한 워크플로(테스트 실행, lint 수정, 컴포넌트 생성)를 패키징합니다.
 
-방법론은 소수의 핵심 서브스킬을 제공합니다. 그중 **author** 서브스킬은 저장소가 **자체 키트를 키우게** 합니다: `/skill-create` 및 `/agent-create`로 호출되며 기존 `.agents/` 레이아웃과 규약에 대해 추론한 뒤 맞는 새 스킬, 에이전트 또는 얇은 명령 위임자를 작성하고 카탈로그를 동기화합니다. 동일 서브스킬이 필수 Skills & Agents Discovery 작업을 실행합니다.
+방법론은 소수의 핵심 서브스킬을 제공합니다. 그중 **author** 서브스킬은 저장소가 **자체 키트를 키우게** 합니다: `/skill-create` 및 `/agent-create`로 호출되며 기존 `.agents/` 레이아웃과 규약에 대해 추론한 뒤 맞는 새 스킬, 에이전트 또는 얇은 명령 위임자를 작성하고 카탈로그를 동기화합니다. 동일 서브스킬이 Final Review의 스킬 조정 단계를 뒷받침합니다.
 
 키트 항목: [Skill create](/kit/skill-create), [Agent create](/kit/agent-create).
 

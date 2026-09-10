@@ -1,0 +1,260 @@
+---
+/**
+ * ContextEconomy — Act V of the homepage story: the token-efficiency act.
+ *
+ * Two-layer editorial plate: transparent-background engraving (light/dark ink
+ * pair) + real text from an inline language-keyed i18n map (en fallback).
+ * Static, zero JS. Statement is a non-heading paragraph inside the role="img"
+ * figure per docs/DIAGRAM_COMPONENTS.md.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'Act V of the Deep Work Plan story: every token counts — the harness loads context progressively, validates only what changed, and learns task by task.',
+    statement: 'Every token counts.',
+    statementEmphasis: 'counts',
+    points: [
+      'Progressive context loading',
+      'Validation that touches only what changed',
+      'Task-local learning, captured where it happens',
+    ],
+    alt: 'An engraved purser’s cabin: a balance scale weighing cargo crates against a strongbox beside an open ledger with blank tally rows — an engraving evoking that every token counts.',
+  },
+  es: {
+    ariaLabel:
+      'Acto V de la historia de Deep Work Plan: cada token cuenta — el harness carga el contexto progresivamente, valida solo lo que cambió y aprende tarea a tarea.',
+    statement: 'Cada token cuenta.',
+    statementEmphasis: 'cuenta',
+    points: [
+      'Carga progresiva del contexto',
+      'Validación que solo toca lo que cambió',
+      'Aprendizaje local, capturado donde ocurre',
+    ],
+    alt: 'La cabina del contramaestre grabada: una balanza que pesa cajas de carga contra una caja fuerte junto a un libro de cuentas con filas en blanco — un grabado que evoca que cada token cuenta.',
+  },
+  pt: {
+    ariaLabel:
+      'Ato V da história do Deep Work Plan: cada token conta — o harness carrega o contexto progressivamente, valida apenas o que mudou e aprende tarefa a tarefa.',
+    statement: 'Cada token conta.',
+    statementEmphasis: 'conta',
+    points: [
+      'Carregamento progressivo do contexto',
+      'Validação que toca apenas o que mudou',
+      'Aprendizado local, capturado onde acontece',
+    ],
+    alt: 'A cabina do contramestre gravada: uma balança pesando caixas de carga contra um cofre ao lado de um livro-razão aberto com linhas em branco — uma gravura que evoca que cada token conta.',
+  },
+  zh: {
+    ariaLabel:
+      'Deep Work Plan 故事的第五幕：每个 token 都算数——harness 渐进加载上下文，只验证改动，按任务学习。',
+    statement: '每一个 token 都算数。',
+    statementEmphasis: '算数',
+    points: ['渐进式上下文加载', '只验证改动的部分', '任务本地的学习'],
+    alt: '雕版画中的事务长舱室：天平称量货箱与强宝箱并列于空白账册旁——寓意每个 token 都算数。',
+  },
+  ja: {
+    ariaLabel:
+      'Deep Work Plan の物語の第五幕：すべてのトークンに意味がある——ハーネスはコンテキストを段階的に読み込み、変更だけを検証し、タスクごとに学習します。',
+    statement: 'すべてのトークンに意味がある。',
+    statementEmphasis: 'トークン',
+    points: [
+      '段階的なコンテキスト読み込み',
+      '変更された箇所だけを検証',
+      'タスクごとのローカル学習',
+    ],
+    alt: '彫版画されたパーサー室：空欄の集計行が並ぶ開いた帳簿のそばで、貨物箱と金庫を天秤で量る様子——すべてのトークンに意味があることを表現しています。',
+  },
+  de: {
+    ariaLabel:
+      'Akt V der Deep-Work-Plan-Geschichte: jedes Token zählt — das Harness lädt den Kontext progressiv, validiert nur Geändertes und lernt Aufgabe für Aufgabe.',
+    statement: 'Jedes Token zählt.',
+    statementEmphasis: 'zählt',
+    points: [
+      'Progressives Kontext-Laden',
+      'Validierung nur des Geänderten',
+      'Aufgabenlokales Lernen',
+    ],
+    alt: 'Eine gravurartige Purser-Kabine: eine Waage wiegt Frachtkisten gegen einen Tresen neben einem offenen Hauptbuch mit leeren Zeilen — ein Stich, der zeigt, dass jedes Token zählt.',
+  },
+  fr: {
+    ariaLabel:
+      'Acte V de l’histoire du Deep Work Plan : chaque token compte — le harness charge le contexte progressivement, ne valide que ce qui a changé et apprend tâche par tâche.',
+    statement: 'Chaque token compte.',
+    statementEmphasis: 'compte',
+    points: [
+      'Chargement progressif du contexte',
+      'Validation limitée au changé',
+      'Apprentissage local à chaque tâche',
+    ],
+    alt: 'La cabine du commis gravée : une balance pesant des caisses contre un coffre à côté d’un grand livre aux lignes vides — une gravure évoquant que chaque token compte.',
+  },
+  ko: {
+    ariaLabel:
+      'Deep Work Plan 스토리의 제5막: 모든 토큰이 중요합니다 — 하네스는 컨텍스트를 점진적으로 로드하고, 변경된 부분만 검증하며, 작업마다 학습합니다.',
+    statement: '모든 토큰이 중요합니다.',
+    statementEmphasis: '중요합니다',
+    points: [
+      '점진적 컨텍스트 로딩',
+      '변경된 부분만 검증',
+      '작업 자리에서의 학습',
+    ],
+    alt: '판화로 새겨진 선장 보조실: 열이 비어 있는 장부 옆에서 화물 상자와 금고를 저울로 다는 모습 — 모든 토큰이 중요함을 표현합니다.',
+  },
+  ru: {
+    ariaLabel:
+      'Акт V истории Deep Work Plan: каждый токен на счету — harness загружает контекст прогрессивно, проверяет только изменённое и учится задача за задачей.',
+    statement: 'Каждый токен на счету.',
+    statementEmphasis: 'токен',
+    points: [
+      'Прогрессивная загрузка контекста',
+      'Проверка только изменённого',
+      'Обучение на месте задачи',
+    ],
+    alt: 'Гравированная каюта судомеханика: весы, взвешивающие ящики груза против сейфа рядом с открытым гроссбухом с пустыми строками — гравюра о том, что каждый токен на счету.',
+  },
+  it: {
+    ariaLabel:
+      'Atto V della storia del Deep Work Plan: ogni token conta — l’harness carica il contesto progressivamente, valida solo i cambiamenti e impara task per task.',
+    statement: 'Ogni token conta.',
+    statementEmphasis: 'conta',
+    points: [
+      'Caricamento progressivo del contesto',
+      'Validazione solo dei cambiamenti',
+      'Apprendimento locale per task',
+    ],
+    alt: 'La cabina dell’assaiatore incisa: una bilancia che pesa casse di carico contro una cassaforte accanto a un registro aperto con righe vuote — un’incisione che evoca che ogni token conta.',
+  },
+  tr: {
+    ariaLabel:
+      'Deep Work Plan hikâyesinin Perde V’si: her token önemlidir — harness bağlamı aşamalı yükler, yalnızca değişeni doğrular ve görev başına öğrenir.',
+    statement: 'Her token önemlidir.',
+    statementEmphasis: 'token',
+    points: [
+      'Aşamalı bağlam yükleme',
+      'Yalnızca değişeni doğrulama',
+      'Görev başına yerinde öğrenme',
+    ],
+    alt: 'Gravür edilmiş kamarot kabini: boş satırlı bir defterin yanında teraziyle kargo kasalarını kasaya karşı tartan bir denge — her tokenin önemli olduğunu anlatır.',
+  },
+  id: {
+    ariaLabel:
+      'Babak V dari kisah Deep Work Plan: setiap token berarti — harness memuat konteks progresif, memvalidasi hanya yang berubah, dan belajar per tugas.',
+    statement: 'Setiap token berarti.',
+    statementEmphasis: 'token',
+    points: [
+      'Pemuatan konteks progresif',
+      'Validasi hanya yang berubah',
+      'Pembelajaran lokal per tugas',
+    ],
+    alt: 'Kabin juru tulis terukir: timbangan yang menimbang peti kargo melawan brankas di samping buku besar terbuka dengan baris kosong — ukiran yang menggambarkan setiap token berarti.',
+  },
+  vi: {
+    ariaLabel:
+      'Hồi V của câu chuyện Deep Work Plan: mỗi token đều có giá trị — harness tải ngữ cảnh tiến tiến, chỉ kiểm chứng phần thay đổi và học theo từng tác vụ.',
+    statement: 'Mỗi token đều có giá trị.',
+    statementEmphasis: 'token',
+    points: [
+      'Tải ngữ cảnh tiến tiến',
+      'Chỉ kiểm chứng phần thay đổi',
+      'Học tập địa phương theo tác vụ',
+    ],
+    alt: 'Buồng thủ quỹ được khắc: cân weighing thùng hàng against két sắt bên cạnh sổ cái mở với các dòng trống—bản khắc gợi ý rằng mỗi token đều có giá trị.',
+  },
+  hi: {
+    ariaLabel:
+      'Deep Work Plan कहानी का अंक V: हर टोकन मायने रखता है — harness संदर्भ प्रगतिशील रूप से लोड करता है, केवल बदले हुए को सत्यापित करता है, और कार्य दर कार्य सीखता है।',
+    statement: 'हर टोकन मायने रखता है।',
+    statementEmphasis: 'टोकन',
+    points: [
+      'प्रगतिशील संदर्भ लोडिंग',
+      'केवल बदले हुए का सत्यापन',
+      'कार्य-स्थानीय अधिगम',
+    ],
+    alt: 'उत्कीर्ण खजांची कक्ष: खाली पंक्तियों वाली खुली बही के साथ तिजोरी के मुकाबले माल की पेटियाँ तौलती तराजू—एक उत्कीर्णन जो दर्शाता है कि हर टोकन मायने रखता है।',
+  },
+  pl: {
+    ariaLabel:
+      'Akt V historii Deep Work Plan: każdy token się liczy — harness ładuje kontekst progresywnie, waliduje tylko zmiany i uczy się zadanie po zadaniu.',
+    statement: 'Każdy token się liczy.',
+    statementEmphasis: 'liczy',
+    points: [
+      'Progresywne ładowanie kontekstu',
+      'Walidacja tylko zmian',
+      'Uczenie się lokalne per zadanie',
+    ],
+    alt: 'Grawerowana kasa skarbca: waga ważąca skrzynie ładunku obok sejfu z otwartą księgą rachunkową o pustych wierszach — grawerowanie pokazujące, że każdy token się liczy.',
+  },
+  uk: {
+    ariaLabel:
+      'Акт V історії Deep Work Plan: кожен токен на рахунку — harness завантажує контекст поступово, перевіряє лише змінене та вчиться завдання за завданням.',
+    statement: 'Кожен токен на рахунку.',
+    statementEmphasis: 'токен',
+    points: [
+      'Прогресивне завантаження контексту',
+      'Перевірка лише зміненого',
+      'Навчання на місці завдання',
+    ],
+    alt: 'Гравійована каюта помічника капітана: терези, що зважують ящики вантажу проти сейфа поруч із відкритою книгою з порожніми рядками — гравюра про те, що кожен токен на рахунку.',
+  },
+  th: {
+    ariaLabel:
+      'องก์ที่ 5 ของเรื่อง Deep Work Plan: ทุกโทเคนมีความสำคัญ — harness โหลดบริบทแบบขั้นเป็นขั้น ตรวจสอบเฉพาะสิ่งที่เปลี่ยน และเรียนรู้รายงาน',
+    statement: 'ทุกโทเคนมีความสำคัญ',
+    statementEmphasis: 'โทเคน',
+    points: [
+      'โหลดบริบทแบบขั้นเป็นขั้น',
+      'ตรวจสอบเฉพาะสิ่งที่เปลี่ยน',
+      'เรียนรู้รายงานในที่เกิดเหตุ',
+    ],
+    alt: 'ห้องลงทัเบียนที่แกะสลัก: ตาชั่งชั่งกล่องสินค้ากับตู้นิรภัยข้างสมุดบัญชีเปิดที่มีแถวว่าง—งานแกะสลักที่สื่อว่าทุกโทเคนมีความสำคัญ',
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+const emIndex = t.statement.indexOf(t.statementEmphasis);
+const pre = emIndex > 0 ? t.statement.slice(0, emIndex) : t.statement;
+const post =
+  emIndex > 0 ? t.statement.slice(emIndex + t.statementEmphasis.length) : '';
+---
+
+<figure class={`editorial-asset editorial-plate ${className}`} role="img" aria-label={t.ariaLabel}>
+  <img
+    src="/images/visuals/home/plate-context-economy.png"
+    alt={t.alt}
+    width="1600"
+    height="1000"
+    loading="lazy"
+    class="plate-frame-img dark:hidden"
+  />
+  <img
+    src="/images/visuals/home/plate-context-economy-dark.png"
+    alt={t.alt}
+    width="1600"
+    height="1000"
+    loading="lazy"
+    class="plate-frame-img hidden dark:block"
+  />
+  <div class="editorial-asset__body">
+    <p class="plate-statement">
+      {pre}<span class="plate-statement-em ea-accent">{t.statementEmphasis}</span>{post}
+    </p>
+    <ul class="plate-points">
+      {
+        t.points.map((point) => (
+          <li>
+            <span class="ea-label">{point}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</figure>
