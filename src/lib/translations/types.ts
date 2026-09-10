@@ -141,6 +141,7 @@ export interface SiteTranslations {
       kicker: string;
       problem: string;
       answer: string;
+      efficiency: string;
       illustrationAlt: string;
     };
     story: {

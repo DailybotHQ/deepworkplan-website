@@ -101,9 +101,11 @@ export const fr: SiteTranslations = {
       problem:
         'Les agents de codage excellent en courtes salves. Sur le travail de long terme — une migration, un nouveau sous-système, une refonte à grande échelle — ils dérivent : le contexte se remplit, les décisions s’effacent et les tâches de plusieurs heures restent à moitié faites.',
       answer:
-        'Deep Work Plan répond par le développement piloté par la spécification : un plan durable, des tâches atomiques et des validation gates que l’agent doit franchir. Le travail reste vérifiable — et n’importe quel agent peut le reprendre entre les sessions.',
+        'Deep Work Plan répond par le développement piloté par la spécification : un plan durable, des tâches atomiques et des validation gates que l’agent doit franchir. « Fini » cesse d’être une impression — cela devient une preuve vérifiable et relisible.',
+      efficiency:
+        'Et parce que le contexte est la ressource la plus rare de votre agent, le harness est conçu pour l’efficacité des tokens : les instructions se chargent progressivement, la validation ne touche que ce qui a changé, et chaque tâche apprend localement — le travail de longue haleine reste abordable.',
       illustrationAlt:
-        'Une carte marine avec un seul cap tracé qui contourne les dangers en toute sécurité — une gravure évoquant le plan comme la direction qui garde le travail sur sa route.',
+        'Un diptyque gravé : d’un côté un navire à la dérive dans le brouillard près des rochers, de l’autre le même navire sur un cap tracé vers un feu de port.',
     },
     story: {
       act1: {

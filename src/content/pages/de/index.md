@@ -24,6 +24,8 @@ Deep Work Plan (DWP) ist eine offene, MIT-lizenzierte Methodik und ein Kit zum P
 KI-Coding-Agenten glänzen in kurzen Spitzen. Bei langlaufender Arbeit — einer Migration, einem neuen Subsystem, einer Refaktorierung im großen Stil — driftet der Agent ab: Der Kontext füllt sich, Entscheidungen gehen verloren, mehrstuündige Aufgaben bleiben auf halbem Weg liegen.
 
 Deep Work Plan antwortet mit spec-driven development: ein dauerhafter Plan, atomare Aufgaben und Validierungs-Gates, die der Agent bestehen muss. Die Arbeit bleibt überprüfbar — und jeder Agent kann sie über Sitzungen hinweg fortsetzen.
+
+Und weil der Kontext die knappste Ressource Ihres Agenten ist, ist das Harness auf Token-Effizienz ausgelegt: Anweisungen laden progressiv, Validierung berührt nur Geändertes, und jede Aufgabe lernt lokal — so bleibt langlaufende Arbeit erschwinglich.
 ---
 
 ## Menschen steuern. Agenten führen aus.

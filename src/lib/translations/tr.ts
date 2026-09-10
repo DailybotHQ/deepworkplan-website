@@ -102,9 +102,11 @@ export const tr: SiteTranslations = {
       problem:
         'Kodlama ajanları kısa hamlelerde mükemmeldir. Uzun soluklu işlerde — bir göç, yeni bir alt sistem, ölçekli bir yeniden yapılandırma — saparlar: bağlam dolar, kararlar kaybolur ve saatler süren işler yarı yolda kalır.',
       answer:
-        'Deep Work Plan, spesifikasyon odaklı geliştirme ile yanıt verir: dayanıklı bir plan, atomik görevler ve ajanın geçmesi gereken doğrulama kapıları. İş doğrulanabilir kalır — ve her ajan oturumlar arasında sürdürebilir.',
+        'Deep Work Plan, spesifikasyon odaklı geliştirme ile yanıt verir: dayanıklı bir plan, atomik görevler ve ajanın geçmesi gereken doğrulama kapıları. "Bitti" bir his olmaktan çıkar — geçerlenebilir, gözden geçirilebilir kanıta dönüşür.',
+      efficiency:
+        'Ve bağlam, ajanınızın en kıt kaynağıdır. Bu yüzden harness token verimliliği için tasarlandı: talimatlar aşamalı yüklenir, doğrulama yalnızca değişene dokunur ve her görev kendi yerinde öğrenir — uzun soluklu iş ulaşılabilir kalır.',
       illustrationAlt:
-        'Tek bir rotayla tehlikeleri güvenle geçen bir deniz haritası gravürü — planı, işi doğru rotada tutan yön olarak simgeler.',
+        'Bir yandan sisli kayalıklar arasında sürüklenen bir gemi, diğer yandan aynı geminin çizili rotayla liman fenerine ilerleyişi — bir gravür diptiği.',
     },
     story: {
       act1: {

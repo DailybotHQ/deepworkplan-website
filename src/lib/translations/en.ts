@@ -96,9 +96,11 @@ export const en: SiteTranslations = {
       problem:
         'AI coding agents excel in short bursts. On long-horizon work — a migration, a new subsystem, a refactor at scale — they drift: context fills up, decisions vanish, and multi-hour tasks stall halfway.',
       answer:
-        'Deep Work Plan answers with spec-driven development: a durable plan, atomic tasks, and validation gates the agent must pass. Work stays verifiable — and any agent can resume it across sessions.',
+        'Deep Work Plan answers with spec-driven development: a durable plan, atomic tasks, and validation gates the agent must pass. Done stops being a feeling — it becomes verifiable, reviewable evidence.',
+      efficiency:
+        'And because context is the scarcest resource your agent has, the harness is engineered for token efficiency: instructions load progressively, validation touches only what changed, and every task learns locally — so long-horizon work stays affordable.',
       illustrationAlt:
-        'A nautical chart with a single plotted course threading safely past hazards — an engraving evoking the plan as the direction that keeps work on course.',
+        'An engraved diptych: a ship adrift in fog beside jagged rocks on one side, and the same ship steady on a plotted course toward a harbor beacon on the other.',
     },
     story: {
       act1: {

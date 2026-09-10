@@ -102,9 +102,11 @@ export const pl: SiteTranslations = {
       problem:
         'Agenci kodowania błyszczą w krótkich seriach. Przy długiej pracy — migracja, nowy podsystem, refaktoryzacja na skalę — dryfują: kontekst się zapełnia, decyzje znikają, a wielogodzinne zadania zatrzymują się w połowie.',
       answer:
-        'Deep Work Plan odpowiada programowaniem sterowanym specyfikacją: trwały plan, zadania atomowe i bramki walidacyjne, które agent musi przejść. Praca pozostaje weryfikowalna — i każdy agent może ją wznowić między sesjami.',
+        'Deep Work Plan odpowiada programowaniem sterowanym specyfikacją: trwały plan, zadania atomowe i bramki walidacyjne, które agent musi przejść. „Skończone” przestaje być odczuciem — staje się dowodem: zweryfikowanym i możliwym do przejrzenia.',
+      efficiency:
+        'A ponieważ kontekst to najrzadszy zasób Twojego agenta, harness zaprojektowano pod wydajność tokenów: instrukcje ładują się progresywnie, walidacja dotyka tylko zmian, a każde zadanie uczy się lokalnie — długa praca pozostaje przystępna.',
       illustrationAlt:
-        'Mapa morska z pojedynczym wykresem kursu, bezpiecznie omijającym niebezpieczeństwa — grawer sugerujący, że plan to kierunek, który utrzymuje pracę na kursie.',
+        'Dyptyk: z jednej strony statek dryfujący we mgle wśród skał, z drugiej ten sam statek pewnie na wykreowanym kursie ku latarni portu.',
     },
     story: {
       act1: {

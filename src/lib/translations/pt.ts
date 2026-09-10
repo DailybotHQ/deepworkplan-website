@@ -102,9 +102,11 @@ export const pt: SiteTranslations = {
       problem:
         'Agentes de código brilham em rajadas curtas. Em trabalho de longo alcance — uma migração, um subsistema novo, uma refatoração em escala — eles desviam: o contexto enche, as decisões somem e tarefas de horas ficam pela metade.',
       answer:
-        'O Deep Work Plan responde com desenvolvimento guiado por especificação: um plano duradouro, tarefas atômicas e validation gates que o agente precisa passar. O trabalho continua verificável — e qualquer agente pode retomá-lo entre sessões.',
+        'O Deep Work Plan responde com desenvolvimento guiado por especificação: um plano duradouro, tarefas atômicas e validation gates que o agente precisa passar. Done deixa de ser uma sensação — vira evidência verificável e revisável.',
+      efficiency:
+        'E como o contexto é o recurso mais escasso do seu agente, o harness é projetado para a eficiência de tokens: instruções carregam progressivamente, a validação toca apenas o que mudou e cada tarefa aprende localmente — assim o trabalho de longo prazo continua acessível.',
       illustrationAlt:
-        'Uma carta náutica com um único rumo traçado que contorna os perigos com segurança — uma gravura que evoca o plano como a direção que mantém o trabalho no rumo.',
+        'Um díptico gravado: de um lado um navio à deriva na névoa junto a rochas escarpadas, do outro o mesmo navio firme em um rumo traçado em direção ao farol de um porto.',
     },
     story: {
       act1: {

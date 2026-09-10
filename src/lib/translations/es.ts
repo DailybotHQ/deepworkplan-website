@@ -96,9 +96,11 @@ export const es: SiteTranslations = {
       problem:
         'Los agentes de programación destacan en ráfagas cortas. En trabajo de largo alcance — una migración, un subsistema nuevo, una refactorización a escala — se desvían: el contexto se llena, las decisiones se olvidan y las tareas de varias horas se quedan a medio camino.',
       answer:
-        'Deep Work Plan responde con desarrollo guiado por especificación: un plan duradero, tareas atómicas y puertas de validación que el agente debe pasar. El trabajo sigue siendo verificable — y cualquier agente puede reanudarlo entre sesiones.',
+        'Deep Work Plan responde con desarrollo guiado por especificación: un plan duradero, tareas atómicas y puertas de validación que el agente debe pasar. «Hecho» deja de ser una sensación — se convierte en evidencia verificable y revisable.',
+      efficiency:
+        'Y como el contexto es el recurso más escaso de tu agente, el harness está diseñado para la eficiencia de tokens: las instrucciones se cargan progresivamente, la validación solo toca lo que cambió y cada tarea aprende localmente — así el trabajo de largo alcance se mantiene asequible.',
       illustrationAlt:
-        'Una carta náutica con un único rumbo trazado que sortea los peligros con seguridad — un grabado que evoca el plan como la dirección que mantiene el trabajo en curso.',
+        'Un díptico grabado: un barco a la deriva en la niebla junto a rocas escarpadas a un lado, y el mismo barco firme sobre un rumbo trazado hacia una baliza de puerto al otro.',
     },
     story: {
       act1: {
