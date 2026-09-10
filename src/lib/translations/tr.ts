@@ -97,6 +97,15 @@ export const tr: SiteTranslations = {
         'Kayalık bir kıyıdaki bir deniz feneri, küçük bir tekneye yol gösteren tek bir ışık huzmesi gönderiyor — deponun, herhangi bir ajana rehberlik eden sağlam bir harness olduğunu çağrıştıran bir gravür.',
       scrollCta: 'Nasıl çalıştığını görün',
     },
+    pitch: {
+      kicker: 'Sorun ve çözüm',
+      problem:
+        'Kodlama ajanları kısa hamlelerde mükemmeldir. Uzun soluklu işlerde — bir göç, yeni bir alt sistem, ölçekli bir yeniden yapılandırma — saparlar: bağlam dolar, kararlar kaybolur ve saatler süren işler yarı yolda kalır.',
+      answer:
+        'Deep Work Plan, spesifikasyon odaklı geliştirme ile yanıt verir: dayanıklı bir plan, atomik görevler ve ajanın geçmesi gereken doğrulama kapıları. İş doğrulanabilir kalır — ve her ajan oturumlar arasında sürdürebilir.',
+      illustrationAlt:
+        'Tek bir rotayla tehlikeleri güvenle geçen bir deniz haritası gravürü — planı, işi doğru rotada tutan yön olarak simgeler.',
+    },
     story: {
       act1: {
         kicker: 'Yöntem · Perde I',

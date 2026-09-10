@@ -19,6 +19,13 @@ Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini pla
 
 ---
 
+## Sorun ve çözüm
+
+Kodlama ajanları kısa hamlelerde mükemmeldir. Uzun soluklu işlerde — bir göç, yeni bir alt sistem, ölçekli bir yeniden yapılandırma — saparlar: bağlam dolar, kararlar kaybolur ve saatler süren işler yarı yolda kalır.
+
+Deep Work Plan, spesifikasyon odaklı geliştirme ile yanıt verir: dayanıklı bir plan, atomik görevler ve ajanın geçmesi gereken doğrulama kapıları. İş doğrulanabilir kalır — ve her ajan oturumlar arasında sürdürebilir.
+---
+
 ## İnsanlar dümen tutar. Ajanlar yürütür.
 
 Neyin bitti sayılacağına ve sınırların nerede olacağına siz karar verirsiniz. Plan niyetinizi taşır; ajanlar saatleri çalışır — sürekli gözetim yok, yirmi dakikada bir düzeltme yok.

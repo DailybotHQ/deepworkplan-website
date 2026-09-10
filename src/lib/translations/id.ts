@@ -95,6 +95,15 @@ export const id: SiteTranslations = {
         'Sebuah mercusuar di pesisir berbatu memancarkan satu berkas cahaya yang memandu kapal kecil — ukiran yang menggambarkan repositori sebagai harness mantap yang memandu agent mana pun.',
       scrollCta: 'Lihat cara kerjanya',
     },
+    pitch: {
+      kicker: 'Masalah dan jawabannya',
+      problem:
+        'Agen coding unggul dalam ledakan singkat. Pada kerja panjang — sebuah migrasi, subsistem baru, refaktor skala besar — mereka menyimpang: konteks penuh, keputusan hilang, dan tugas berjam-jam mandek di setengah jalan.',
+      answer:
+        'Deep Work Plan menjawabnya dengan pengembangan berbasis spesifikasi: rencana yang tahan lama, tugas atomik, dan gerbang verifikasi yang harus dilalui agen. Pekerjaan tetap dapat diverifikasi — dan agen mana pun dapat melanjutkannya lintas sesi.',
+      illustrationAlt:
+        'Sebuah peta laut berukir dengan satu jalur yang selamat melewati bahaya—menggambarkan rencana sebagai arah yang menjaga pekerjaan tetap pada jalurnya.',
+    },
     story: {
       act1: {
         kicker: 'Metode · Babak I',

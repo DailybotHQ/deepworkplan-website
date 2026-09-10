@@ -97,6 +97,15 @@ export const pt: SiteTranslations = {
         'Um farol em uma costa rochosa projeta um único feixe que guia uma pequena embarcação — uma gravura que evoca o repositório como um harness firme que guia qualquer agente.',
       scrollCta: 'Veja como funciona',
     },
+    pitch: {
+      kicker: 'O problema e a resposta',
+      problem:
+        'Agentes de código brilham em rajadas curtas. Em trabalho de longo alcance — uma migração, um subsistema novo, uma refatoração em escala — eles desviam: o contexto enche, as decisões somem e tarefas de horas ficam pela metade.',
+      answer:
+        'O Deep Work Plan responde com desenvolvimento guiado por especificação: um plano duradouro, tarefas atômicas e validation gates que o agente precisa passar. O trabalho continua verificável — e qualquer agente pode retomá-lo entre sessões.',
+      illustrationAlt:
+        'Uma carta náutica com um único rumo traçado que contorna os perigos com segurança — uma gravura que evoca o plano como a direção que mantém o trabalho no rumo.',
+    },
     story: {
       act1: {
         kicker: 'O método · Ato I',

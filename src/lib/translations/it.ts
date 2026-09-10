@@ -96,6 +96,15 @@ export const it: SiteTranslations = {
         'Un faro su una costa rocciosa proietta un unico fascio che guida una piccola imbarcazione — un’incisione che evoca il repository come una harness stabile che guida qualsiasi agente.',
       scrollCta: 'Scopri come funziona',
     },
+    pitch: {
+      kicker: 'Il problema e la risposta',
+      problem:
+        'Gli agenti di coding eccellono nei burst brevi. Sul lavoro di lungo corso — una migrazione, un nuovo sottosistema, un refactoring su larga scala — derivano: il contesto si riempie, le decisioni si perdono e i task di ore si fermano a metà.',
+      answer:
+        'Deep Work Plan risponde con lo sviluppo guidato dalla specifica: un piano duraturo, task atomici e validation gate che l’agente deve superare. Il lavoro resta verificabile — e qualsiasi agente può riprenderlo tra le sessioni.',
+      illustrationAlt:
+        'Una carta nautica con una singola rotta tracciata che supera sicuramente i pericoli — un’incisione che evoca il piano come la direzione che tiene il lavoro in rotta.',
+    },
     story: {
       act1: {
         kicker: 'Il metodo · Atto I',

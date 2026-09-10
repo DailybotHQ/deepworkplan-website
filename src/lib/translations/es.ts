@@ -91,6 +91,15 @@ export const es: SiteTranslations = {
         'Un faro en una costa rocosa proyecta un único haz que guía a una pequeña embarcación — un grabado que evoca el repositorio como un harness estable que guía a cualquier agente.',
       scrollCta: 'Ve cómo funciona',
     },
+    pitch: {
+      kicker: 'El problema y la respuesta',
+      problem:
+        'Los agentes de programación destacan en ráfagas cortas. En trabajo de largo alcance — una migración, un subsistema nuevo, una refactorización a escala — se desvían: el contexto se llena, las decisiones se olvidan y las tareas de varias horas se quedan a medio camino.',
+      answer:
+        'Deep Work Plan responde con desarrollo guiado por especificación: un plan duradero, tareas atómicas y puertas de validación que el agente debe pasar. El trabajo sigue siendo verificable — y cualquier agente puede reanudarlo entre sesiones.',
+      illustrationAlt:
+        'Una carta náutica con un único rumbo trazado que sortea los peligros con seguridad — un grabado que evoca el plan como la dirección que mantiene el trabajo en curso.',
+    },
     story: {
       act1: {
         kicker: 'El método · Acto I',

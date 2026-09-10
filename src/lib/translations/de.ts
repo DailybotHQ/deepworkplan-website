@@ -96,6 +96,15 @@ export const de: SiteTranslations = {
         'Ein Leuchtturm an felsiger Küste wirft einen einzelnen Strahl, der ein kleines Schiff lenkt — ein Stich, der das Repository als stabilen Anker („harness“) zeigt, der jeden Agenten führt.',
       scrollCta: 'So funktioniert es',
     },
+    pitch: {
+      kicker: 'Das Problem und die Antwort',
+      problem:
+        'KI-Coding-Agenten glänzen in kurzen Spitzen. Bei langlaufender Arbeit — einer Migration, einem neuen Subsystem, einer Refaktorierung im großen Stil — driftet der Agent ab: Der Kontext füllt sich, Entscheidungen gehen verloren, mehrstuündige Aufgaben bleiben auf halbem Weg liegen.',
+      answer:
+        'Deep Work Plan antwortet mit spec-driven development: ein dauerhafter Plan, atomare Aufgaben und Validierungs-Gates, die der Agent bestehen muss. Die Arbeit bleibt überprüfbar — und jeder Agent kann sie über Sitzungen hinweg fortsetzen.',
+      illustrationAlt:
+        'Eine nautische Karte mit einem einzigen eingetragenen Kurs, der sicher an Gefahren vorbeiführt — ein Kupferstich, der den Plan als Richtung veranschaulicht, die die Arbeit auf Kurs hält.',
+    },
     story: {
       act1: {
         kicker: 'Die Methode · Akt I',

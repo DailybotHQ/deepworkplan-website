@@ -91,6 +91,15 @@ export const en: SiteTranslations = {
         'A lighthouse on a rocky shore casts a single beam guiding a small vessel — an engraving evoking the repository as a steady harness that guides any agent.',
       scrollCta: 'See how it works',
     },
+    pitch: {
+      kicker: 'The problem and the answer',
+      problem:
+        'AI coding agents excel in short bursts. On long-horizon work — a migration, a new subsystem, a refactor at scale — they drift: context fills up, decisions vanish, and multi-hour tasks stall halfway.',
+      answer:
+        'Deep Work Plan answers with spec-driven development: a durable plan, atomic tasks, and validation gates the agent must pass. Work stays verifiable — and any agent can resume it across sessions.',
+      illustrationAlt:
+        'A nautical chart with a single plotted course threading safely past hazards — an engraving evoking the plan as the direction that keeps work on course.',
+    },
     story: {
       act1: {
         kicker: 'The method · Act I',

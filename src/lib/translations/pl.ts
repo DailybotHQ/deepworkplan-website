@@ -97,6 +97,15 @@ export const pl: SiteTranslations = {
         'Latarnia morska na skalistym brzegu rzuca pojedynczy snop światła prowadzący niewielki statek — rycina przywołująca repozytorium jako stabilny harness, który prowadzi każdego agenta.',
       scrollCta: 'Zobacz, jak to działa',
     },
+    pitch: {
+      kicker: 'Problem i odpowiedź',
+      problem:
+        'Agenci kodowania błyszczą w krótkich seriach. Przy długiej pracy — migracja, nowy podsystem, refaktoryzacja na skalę — dryfują: kontekst się zapełnia, decyzje znikają, a wielogodzinne zadania zatrzymują się w połowie.',
+      answer:
+        'Deep Work Plan odpowiada programowaniem sterowanym specyfikacją: trwały plan, zadania atomowe i bramki walidacyjne, które agent musi przejść. Praca pozostaje weryfikowalna — i każdy agent może ją wznowić między sesjami.',
+      illustrationAlt:
+        'Mapa morska z pojedynczym wykresem kursu, bezpiecznie omijającym niebezpieczeństwa — grawer sugerujący, że plan to kierunek, który utrzymuje pracę na kursie.',
+    },
     story: {
       act1: {
         kicker: 'Metoda · Akt I',

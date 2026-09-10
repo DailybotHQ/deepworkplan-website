@@ -19,6 +19,13 @@ O Deep Work Plan (DWP) é uma metodologia e um kit abertos, licenciados sob MIT,
 
 ---
 
+## O problema e a resposta
+
+Agentes de código brilham em rajadas curtas. Em trabalho de longo alcance — uma migração, um subsistema novo, uma refatoração em escala — eles desviam: o contexto enche, as decisões somem e tarefas de horas ficam pela metade.
+
+O Deep Work Plan responde com desenvolvimento guiado por especificação: um plano duradouro, tarefas atômicas e validation gates que o agente precisa passar. O trabalho continua verificável — e qualquer agente pode retomá-lo entre sessões.
+---
+
 ## Os humanos dirigem. Os agentes executam.
 
 Você decide o que significa concluído e onde estão os limites. O plano carrega a sua intenção; os agentes cumprem as horas — sem supervisão constante, sem correções a cada vinte minutos.

@@ -96,6 +96,15 @@ export const vi: SiteTranslations = {
         'Một ngọn hải đăng trên bờ đá phát ra một luồng sáng duy nhất dẫn đường cho con tàu nhỏ — bản khắc gợi hình ảnh repository như một harness vững vàng dẫn lối cho mọi agent.',
       scrollCta: 'Xem cách hoạt động',
     },
+    pitch: {
+      kicker: 'Vấn đề và lời giải',
+      problem:
+        'Agent lập mã xuất sắc trong những đợt ngắn. Với công việc dài hạn — một bản di chuyển, một phân hệ mới, một bản refactor quy mô lớn — chúng trôi dạt: ngữ cảnh đầy, quyết định mất đi và task nhiều giờ dở dang giữa chừng.',
+      answer:
+        'Deep Work Plan trả lời bằng phát triển theo đặc tả: một kế hoạch bền vững, các tác vụ nguyên tử và cổng kiểm chứng agent buộc phải qua. Công việc vẫn được kiểm chứng — và bất kỳ agent nào cũng có thể tiếp tục qua các phiên.',
+      illustrationAlt:
+        'Một hải đồ khắc họa lộ trình duy nhất đi qua an toàn các nguy hiểm—điêu khắc gợi ý kế hoạch là hướng đi giữ công việc đúng tuyến.',
+    },
     story: {
       act1: {
         kicker: 'Phương pháp · Hồi I',

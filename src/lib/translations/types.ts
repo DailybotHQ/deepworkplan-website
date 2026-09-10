@@ -137,6 +137,12 @@ export interface SiteTranslations {
       illustrationAlt: string;
       scrollCta: string;
     };
+    pitch: {
+      kicker: string;
+      problem: string;
+      answer: string;
+      illustrationAlt: string;
+    };
     story: {
       act1: {
         kicker: string;

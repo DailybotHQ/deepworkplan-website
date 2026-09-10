@@ -19,6 +19,13 @@ Deep Work Plan (DWP) là một phương pháp luận và bộ kit mở, cấp ph
 
 ---
 
+## Vấn đề và lời giải
+
+Agent lập mã xuất sắc trong những đợt ngắn. Với công việc dài hạn — một bản di chuyển, một phân hệ mới, một bản refactor quy mô lớn — chúng trôi dạt: ngữ cảnh đầy, quyết định mất đi và task nhiều giờ dở dang giữa chừng.
+
+Deep Work Plan trả lời bằng phát triển theo đặc tả: một kế hoạch bền vững, các tác vụ nguyên tử và cổng kiểm chứng agent buộc phải qua. Công việc vẫn được kiểm chứng — và bất kỳ agent nào cũng có thể tiếp tục qua các phiên.
+---
+
 ## Con người cầm lái. Agent thực thi.
 
 Bạn quyết định “xong” nghĩa là gì và ranh giới ở đâu. Kế hoạch mang theo ý định của bạn; các agent làm phần giờ giấc — không cần trông chừng, không cần sửa mỗi hai mươi phút.

@@ -96,6 +96,15 @@ export const fr: SiteTranslations = {
         'Un phare sur une côte rocheuse projette un faisceau unique qui guide un petit navire — une gravure évoquant le dépôt comme un harness stable qui guide tout agent.',
       scrollCta: 'Voir comment ça marche',
     },
+    pitch: {
+      kicker: 'Le problème et la réponse',
+      problem:
+        'Les agents de codage excellent en courtes salves. Sur le travail de long terme — une migration, un nouveau sous-système, une refonte à grande échelle — ils dérivent : le contexte se remplit, les décisions s’effacent et les tâches de plusieurs heures restent à moitié faites.',
+      answer:
+        'Deep Work Plan répond par le développement piloté par la spécification : un plan durable, des tâches atomiques et des validation gates que l’agent doit franchir. Le travail reste vérifiable — et n’importe quel agent peut le reprendre entre les sessions.',
+      illustrationAlt:
+        'Une carte marine avec un seul cap tracé qui contourne les dangers en toute sécurité — une gravure évoquant le plan comme la direction qui garde le travail sur sa route.',
+    },
     story: {
       act1: {
         kicker: 'La méthode · Acte I',
