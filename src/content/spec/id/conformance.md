@@ -8,7 +8,7 @@ section: Conformance
 
 # Conformance
 
-**Versi 1.1. Status: Stabil.** Dokumen ini mendefinisikan apa artinya sebuah repositori menjadi *konforman terhadap Deep Work Plan* — yaitu, AI-first dan dapat dikemudikan agent. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
+**Versi 1.2. Status: Stabil.** Dokumen ini mendefinisikan apa artinya sebuah repositori menjadi *konforman terhadap Deep Work Plan* — yaitu, AI-first dan dapat dikemudikan agent. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
 Konformansi ada agar "AI-first" menjadi properti yang objektif dan dapat diperiksa, bukan sekadar kesan. Sebuah repositori entah memenuhi kriteria di bawah atau tidak. [Sub-skill `verify`](/kit) (`/dwp-verify`) memeriksanya secara mekanis.
 
@@ -23,7 +23,7 @@ Sebuah repositori konforman DWP MUST memenuhi semua hal berikut. Setiap artefak 
 5. **Sebuah ruang kerja `.dwp/` yang di-gitignore.** Repositori MUST berisi sebuah direktori `.dwp/` dengan `plans/` dan `drafts/`, dan `.dwp/` MUST di-gitignore. Sebuah ruang scratch `tmp/` SHOULD ada dan SHOULD di-gitignore.
 6. **Skill metodologi dapat di-resolve.** Skill Deep Work Plan MUST terpasang atau dirujuk sedemikian rupa sehingga sebuah agent di repositori dapat memanggil sub-skill-nya.
 
-Sebuah repositori **sepenuhnya konforman dengan nol addon**. Addon (devcontainer, Dailybot, dependency-upgrade, design-system) bersifat opt-in dan MUST NOT diwajibkan untuk konformansi.
+Sebuah repositori **sepenuhnya konforman dengan nol addon opsional**. Addon opsional (devcontainer, Dailybot, dependency-upgrade, design-system) MUST NOT diwajibkan untuk konformansi. Sejak standar 2.3.0 **tinjauan lokal AI Diff Reviewer** (skill vendored + berkas ekstensi) adalah bagian dari baseline: ketiadaannya adalah kegagalan bagi repositori yang menyatakan 2.3.0 atau lebih baru, dan sebuah temuan versi-harness bagi repositori lama. Permukaan CI-nya tetap opsional.
 
 ## Sebuah rencana yang terbentuk baik
 
@@ -33,11 +33,11 @@ Sebuah Deep Work Plan di `.dwp/plans/` terbentuk baik ketika:
 2. Setiap tugas yang menambahkan fungsionalitas inti baru atau mengubah perilaku produk MUST menyertakan cakupan test otomatis untuk perilaku itu dalam acceptance criteria-nya, dan MUST menjalankan test repositori bersama dengan pemeriksaan lint dan type-check-nya dalam validation gate-nya — bukan build saja. Test yang ada MUST tetap hijau; sebuah perubahan perilaku MUST memperbarui test yang dirusaknya alih-alih menghapus atau melewatinya. Tugas dokumentasi-murni, konfigurasi, atau riset dikecualikan dari pembuatan test tetapi tetap menjalankan gate repositori.
 3. Setiap tugas yang menyentuh autentikasi, penanganan input, secret atau konfigurasi, permukaan jaringan, atau dependensi MUST membawa ekspektasi keamanan dari perubahan itu dalam acceptance criteria-nya, dan setiap commit MUST bebas dari materi secret.
 4. Rencana MUST mempersistenkan kemajuan sehingga pekerjaan bertahan dari interupsi dan dapat dilanjutkan oleh agent yang berbeda.
-5. Rencana MUST menyertakan tiga tugas akhir wajib — Security Review, Skills & Agents Discovery, dan Executive Report. Sebuah temuan keamanan kritis memblokir penyelesaian sampai diperbaiki atau diterima secara eksplisit.
+5. Rencana MUST mempersistenkan kemajuan sehingga pekerjaan bertahan dari interupsi dan dapat dilanjutkan oleh agent yang berbeda — dan ia MUST ditutup dengan tinjauan akhir yang tercatat miliknya. Sebuah rencana yang ditulis di bawah versi ini MUST diakhiri dengan tepat satu **Final Review** wajib — pemeriksaan keamanan, validasi status akhir, dan rekonsiliasi skills. Sebuah rencana yang ditulis di bawah versi sebelumnya diakhiri dengan tiga tugas akhir wajib (Security Review, Skills & Agents Discovery, Executive Report) dan tetap konforman. Sebuah temuan keamanan kritis memblokir penyelesaian sampai diperbaiki atau diterima secara eksplisit.
 6. Tugas SHOULD berlabuh kembali ke tujuan rencana sebelum mengeksekusi, untuk mencegah penyimpangan sepanjang rentang yang panjang.
 
 ## Memverifikasi konformansi
 
-Konformansi SHOULD diverifikasi secara mekanis ketimbang dengan inspeksi. Menjalankan `/dwp-verify` menghasilkan laporan lulus/gagal terhadap kriteria di atas: keberadaan dan kenyataan-konten `AGENTS.md`, resolusi `CLAUDE.md`, kategori-kategori `docs/`, kecocokan katalog-versus-disk `.agents/`, status gitignore `.dwp/` dan `tmp/`, dan — untuk sebuah rencana — bahwa setiap tugas membawa acceptance criteria dan sebuah validation gate, dengan cakupan test untuk tugas yang mengubah perilaku dan ketiga tugas akhir wajib hadir, termasuk Security Review.
+Konformansi SHOULD diverifikasi secara mekanis ketimbang dengan inspeksi. Menjalankan `/dwp-verify` menghasilkan laporan lulus/gagal terhadap kriteria di atas: keberadaan dan kenyataan-konten `AGENTS.md`, resolusi `CLAUDE.md`, kategori-kategori `docs/`, kecocokan katalog-versus-disk `.agents/`, status gitignore `.dwp/` dan `tmp/`, dan — untuk sebuah rencana — bahwa setiap tugas membawa acceptance criteria dan sebuah validation gate, dengan cakupan test untuk tugas yang mengubah perilaku dan tinjauan akhir yang tercatat hadir. Pemeriksanya bersifat **sadar-versi**: ia MUST menerima rencana lama (tiga tugas akhir wajib, tanpa Touched Surface) sebagai konforman, dan MUST menolak rencana yang menyatakan versi ini namun secara objektif tidak valid di bawahnya. Ia juga melaporkan baris provenans `DWP standard:` yang hilang atau usang sebagai temuan yang menyebutkan upgrade harness tertarget.
 
 Sebuah repositori SHOULD diverifikasi ulang setelah onboarding dan setelah setiap rencana yang selesai, sehingga konformansi dipelihara ketimbang ditegaskan sekali saja.

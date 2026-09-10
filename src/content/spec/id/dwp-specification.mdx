@@ -1,6 +1,6 @@
 ---
 title: DWP specification
-description: "Spesifikasi normatif Deep Work Plan: struktur rencana, anatomi tugas sembilan bagian, loop eksekusi lima operasi, ruang kerja keluaran, dan pemberian versi."
+description: "Spesifikasi normatif Deep Work Plan: struktur rencana, anatomi tugas sepuluh bagian, pemilihan gate berdasarkan touched surface, loop eksekusi lima operasi, ruang kerja keluaran, dan pemberian versi."
 order: 2
 lang: id
 section: Workflow
@@ -11,15 +11,25 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP specification
 
-**Versi 1.2. Status: Stabil.** Dokumen ini adalah spesifikasi normatif untuk metodologi Deep Work Plan (DWP). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
+**Versi 2.3.0. Status: Stabil.** Dokumen ini adalah spesifikasi normatif untuk metodologi Deep Work Plan (DWP). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
-> **Tambahan di v1.2.** Empat kemampuan tambahan, tanpa perubahan yang merusak: (1) **lapisan status rencana yang dapat dibaca mesin** (`manifest.json` + `state.json`, lihat [Status rencana](/spec/plan-state)); (2) **tingkatan rigor proporsional** (micro / standard / deep, lihat [Rigor proporsional](#proportional-rigor)); (3) **bagian Delta** opsional dalam anatomi tugas untuk perubahan perilaku brownfield; dan (4) **Protokol Resume DWP** dipromosikan menjadi ritual enam langkah yang bernama dan dapat dikutip. Rencana v1.1 yang ada tetap konforman.
+> **Bersifat menambah pada revisi ini, tanpa perubahan yang merusak.** (1) Bagian **Touched Surface** — kontrak antara apa yang diubah sebuah tugas dan apa yang harus divalidasi, dengan pemilihan gate berdasarkan kelas risiko (isolated / seam / shared-core / unknown); (2) validasi penuh menjadi **persyaratan status akhir** yang dijalankan dalam satu-satunya **Final Review** wajib milik rencana, dengan aturan penggunaan-ulang bukti yang eksplisit; (3) **keputusan skills per-tugas** berpindah ke dalam tugas pemiliknya, dan Executive Report menjadi **opsional, atas permintaan**; (4) sebuah **alur create yang sadar-mode** — mode trust melakukan materialisasi secara langsung sambil tetap menjalankan analisis dan pemeriksaan kualitas; dan (5) sebuah **matriks kompatibilitas** yang eksplisit: rencana dan repositori dari versi sebelumnya tetap konforman.
 
 ## Definisi
 
 Sebuah Deep Work Plan adalah artefak terstruktur berbasis Markdown saja yang menggambarkan tugas teknik yang kompleks yang terurai menjadi unit-unit pekerjaan yang berurutan dan dapat ditinjau, dirancang untuk dibuat, dieksekusi, dan dipelihara oleh AI coding agent yang bekerja secara otonom.
 
 DWP bersifat spec-driven: rencana adalah spesifikasi, dan agent MUST mengeksekusi terhadap acceptance criteria dan validation gate-nya yang eksplisit alih-alih berimprovisasi. Spesifikasi — bukan transkrip obrolan — adalah sumber kebenaran yang tahan lama, sehingga pekerjaan dapat diverifikasi dan dapat dilanjutkan lintas sesi dan agent. Ia juga harness engineering yang dibuat portabel: konteks, control loop, pengaman, dan status yang dapat dilanjutkan yang membuat agent andal dipasang ke dalam repositori itu sendiri sebagai Markdown polos, sehingga agent konforman mana pun MAY mengemudikan repositori tanpa framework khusus alat.
+
+## Alur create — satu langkah, sadar-mode
+
+Alur `create` mengumpulkan tujuan, konteks, batasan, dan kerangka tugas satu kali, melakukan **analisis kebutuhan**-nya (cakupan, pengurutan dependensi antar tugas, pemilihan validasi dari Touched Surface, tingkatan rigor proporsional), lalu melakukan materialisasi sesuai mode yang dipilih pengembang:
+
+- **Mode terpandu (default).** Alur menghasilkan tepat **satu** artefak untuk ditinjau: sebuah **draf yang disempurnakan** di `.dwp/drafts/`, dengan struktur yang cukup untuk disetujui atau dimintakan perubahan dalam satu kali jalan. Folder rencana baru dimaterialisasikan setelah persetujuan.
+- **Mode trust (`trust` / `auto`).** Alur **langsung melakukan materialisasi rencana**, tanpa berkas draf — pengembang telah melepaskan tinjauan perantara. Analisis kebutuhan, pengurutan dependensi, dan sebuah **pemeriksaan kualitas rencana** tetap berjalan: trust melepaskan *tinjauannya*, bukan *analisisnya*. Rencana mode trust dicatat sebagai **disetujui di muka untuk eksekusi tanpa pengawasan**.
+- **Mode draf eksplisit.** `refined-draft {name}` dan `from-refined-draft {file}` tetap tersedia di kedua mode; pengembang yang meminta sebuah draf akan mendapatkannya.
+
+Dalam setiap mode, alur ini tidak pernah menghasilkan draf perantara yang belum disempurnakan sebagai langkah tinjauan terpisah.
 
 ## Struktur rencana
 
@@ -33,23 +43,37 @@ Sebuah rencana MAY juga membawa lapisan status yang dapat dibaca mesin: `manifes
 
 ## Anatomi tugas
 
-<TaskAnatomy lang="en" class="not-prose my-10" />
+<TaskAnatomy lang="id" class="not-prose my-10" />
 
-Setiap berkas tugas MUST berisi sembilan bagian ini, secara berurutan:
+Setiap berkas tugas MUST berisi sepuluh bagian ini, secara berurutan:
 
 1. **Goal** — pernyataan satu paragraf tentang apa yang dicapai tugas.
 2. **Context** — latar belakang, tautan, dan mengapa tugas ini ada.
-3. **Steps** — tindakan konkret yang berurutan untuk dilakukan.
-4. **Acceptance criteria** — daftar periksa kondisi yang mendefinisikan selesai.
-5. **Validation** — perintah atau test yang dijalankan untuk memverifikasi.
-6. **Files** — path yang diperkirakan akan dibuat atau diubah.
-7. **Dependencies** — tugas lain atau prasyarat eksternal.
-8. **Risks** — apa yang bisa salah, dan mitigasinya.
-9. **Completion & Log** — penanda status ditambah catatan kronologis.
+3. **Touched Surface** — kontrak antara apa yang diubah tugas dan apa yang harus divalidasi.
+4. **Steps** — tindakan konkret yang berurutan untuk dilakukan.
+5. **Acceptance criteria** — daftar periksa kondisi yang mendefinisikan selesai.
+6. **Validation** — perintah atau test yang dijalankan untuk memverifikasi, dipilih dari Touched Surface.
+7. **Files** — path yang diperkirakan akan dibuat atau diubah.
+8. **Dependencies** — tugas lain atau prasyarat eksternal.
+9. **Risks** — apa yang bisa salah, dan mitigasinya.
+10. **Completion & Log** — penanda status ditambah catatan kronologis.
 
 Sebuah tugas MAY juga menyertakan **bagian Delta** (RECOMMENDED untuk perubahan perilaku brownfield — lihat di bawah) dan **bagian Rollback** (RECOMMENDED untuk migrasi, perubahan infrastruktur, atau deployment).
 
-### Bagian Delta (perubahan brownfield)
+## Touched Surface
+
+Touched Surface adalah kontrak antara apa yang diubah sebuah tugas dan apa yang harus divalidasi. Ia ada agar validasi **dipilih berdasarkan efek**, bukan berdasarkan kebiasaan, dan agar pembaca di kemudian hari dapat melihat mengapa sebuah gate dipilih. Sebuah tugas yang mengubah perilaku MUST mencatat:
+
+- **Permukaan yang direncanakan** — path, modul, paket, atau konfigurasi yang hendak diubah tugas, ditulis sebelum penyuntingan.
+- **Permukaan aktual** — daftar hasil rekonsiliasi setelah penyuntingan, diambil dari diff yang nyata. Agent MUST merekonsiliasi permukaan yang direncanakan dan yang aktual sebelum memilih gate.
+- **Konsumen yang terdampak** — modul, paket, atau layanan yang bergantung pada permukaan aktual, sejauh pemetaan terdokumentasi repositori dapat menetapkannya. Di mana ia tidak dapat, entri itu MUST menyatakannya.
+- **Kelas risiko** — salah satu dari: *isolated* (terbatas pada satu modul dan test-nya); *seam* (mengubah sebuah kontrak, persistensi, routing, serialisasi, auth, atau perkabelan framework antar kolaborator); *shared/core* (diimpor secara luas, atau sebuah perubahan dependensi, migrasi, konfigurasi build/test, skema, atau toolchain); *unknown* (pemetaannya hilang, usang, atau belum diverifikasi).
+- **Pemetaan test yang dipakai** — pemetaan atau alat terdokumentasi mana yang menghasilkan pemilihan itu.
+- **Gate yang dipilih dan alasannya** — perintah persisnya dan mengapa perintah itu mencakup permukaan aktual.
+
+Berkas konfigurasi, skema, manifes dependensi, template, fixture, migrasi, dan berkas instruksi agent **dapat mengubah perilaku** dan MUST diklasifikasikan berdasarkan efeknya, tidak pernah berdasarkan ekstensi berkas. Sebuah tugas yang hanya mengubah prosa, komentar, atau artefak riset MAY menyatakan permukaannya tidak berlaku dan tetap menjalankan pemeriksaan non-runtime repositori.
+
+## Bagian Delta (perubahan brownfield)
 
 Sebagian besar pekerjaan nyata memodifikasi perilaku yang ada alih-alih menciptakan perilaku baru. Sebuah tugas yang mengubah cara kerja sistem yang ada SHOULD membawa **bagian Delta** yang menggambarkan perubahan sebagai kontrak sebelum/sesudah yang eksplisit, menggunakan tiga judul daftar:
 
@@ -57,29 +81,61 @@ Sebagian besar pekerjaan nyata memodifikasi perilaku yang ada alih-alih mencipta
 - **MODIFIED** — perilaku yang ada di keduanya, dinyatakan sebagai `was: … → now: …`.
 - **REMOVED** — perilaku yang ada sebelumnya dan secara sengaja hilang setelahnya.
 
-Setiap entri MUST berupa perilaku yang dapat diamati — respons endpoint, flag CLI, status UI, nilai default — bukan detail implementasi. Bagian Delta adalah diff peninjau pada tingkat perilaku: acceptance criteria memverifikasi entri ADDED/MODIFIED, dan entri REMOVED adalah izin eksplisit untuk menghapus. Apa pun yang tidak terdaftar sebagai REMOVED MUST tetap berfungsi, dan gate validasi tugas (test yang ada tetap hijau) adalah yang menegakkannya.
+Setiap entri MUST berupa perilaku yang dapat diamati — respons endpoint, flag CLI, status UI, nilai default — bukan detail implementasi. Bagian Delta adalah diff peninjau pada tingkat perilaku: acceptance criteria memverifikasi entri ADDED/MODIFIED, dan entri REMOVED adalah izin eksplisit untuk menghapus. Apa pun yang tidak terdaftar sebagai REMOVED MUST tetap berfungsi.
 
-## Validation gate dan test
+## Validation gate — dipilih berdasarkan kelas risiko
 
-Validasi adalah gate yang mengubah klaim penyelesaian menjadi bukti penyelesaian: sebuah tugas MUST NOT ditandai selesai sampai setiap perintah di bagian Validation-nya telah dijalankan dan lulus. Test adalah bagian kelas satu dari gate ini, bukan tambahan opsional — itulah yang membuat kode yang dikirim sebuah rencana andal dan dapat diverifikasi.
+Validasi adalah gate yang mengubah klaim penyelesaian menjadi bukti penyelesaian: sebuah tugas MUST NOT ditandai selesai sampai setiap perintah di bagian Validation-nya telah dijalankan dan lulus. Gate sebuah tugas yang mengubah perilaku dipilih dari Touched Surface-nya yang telah direkonsiliasi, berdasarkan kelas risiko:
 
-Ketika sebuah tugas menambahkan fungsionalitas inti baru atau secara material mengubah perilaku yang ada:
+| Kelas risiko | Validasi yang diwajibkan |
+|------|------|
+| **isolated** | Test dari perilaku yang berubah dan dari konsumen yang terdampak olehnya, ditambah pemeriksaan statis yang mencakup permukaan aktual. |
+| **seam** | Semua di atas, ditambah test integrasi atau kontrak untuk seam itu — ditambahkan dalam tugas ini jika belum ada. Pemeriksaan integrasi pada sebuah seam tidak ditunda ke akhir rencana. |
+| **shared/core** | Perluas ke paket-paket yang terdampak dan konsumen transitifnya; di mana dampaknya tidak dapat dibatasi secara andal, jalankan validasi penuh. |
+| **unknown** | Selidiki dan perbaiki pemilihannya; jika ia tetap tidak dapat ditetapkan, jalankan perintah yang lebih luas atau yang penuh. |
+| **tidak berlaku** (prosa/riset) | Pemeriksaan non-runtime repositori, dengan alasannya dicatat dalam Touched Surface. |
 
-- **Acceptance criteria**-nya MUST menyertakan cakupan test otomatis untuk perilaku yang baru atau berubah (jalur bahagia ditambah kasus tepi dan kasus kesalahan yang bermakna), mengikuti konvensi test dan ekspektasi cakupan repositori.
-- **Validation**-nya MUST menjalankan test repositori bersama dengan pemeriksaan lint, type-check, dan format-nya — pemeriksaan kualitas kode lengkap yang didefinisikan repositori — bukan build saja. "Ia berhasil di-build" bukanlah gate yang memadai untuk sebuah perubahan perilaku.
-- Test yang ada MUST tetap hijau. Sebuah perubahan yang merusak test yang mencakup kode terdampak MUST memperbarui test tersebut ke perilaku baru yang dimaksudkan; ia MUST NOT menghapus, melewati, atau melemahkan sebuah test semata-mata untuk memaksa gate lulus.
+Sebuah perubahan perilaku MUST menghasilkan pemilihan test yang tidak kosong dan relevan — sebuah selector yang tidak valid atau runner yang memilih nol test bukanlah cakupan. Di mana peta pengujian repositori sudah usang, pemanggilan yang benar diturunkan dan pembaruan pemetaannya dicatat; sebuah perintah kecil yang hilang tidak pernah menuntut jalannya onboarding penuh. Di mana tidak ada pemanggilan bercakupan sempit, suite lengkap yang berlaku yang dipakai — perilaku lama, tidak pernah sebuah kesalahan.
 
-Tugas dokumentasi-murni, konfigurasi, atau riset dikecualikan dari pembuatan test tetapi tetap MUST menjalankan validation gate apa pun yang didefinisikan repositori. Kedalaman pengujian sebanding dengan ukuran perubahan dan kematangan repositori. Di mana sebuah repositori sama sekali tidak memiliki toolchain test atau lint, agent MUST NOT diam-diam melewati disiplin ini — ia bersandar pada toolchain yang diusulkan selama onboarding (lihat [Conformance](/spec)).
+Ketika sebuah tugas menambahkan fungsionalitas inti baru atau secara material mengubah perilaku yang ada, acceptance criteria-nya MUST menyertakan cakupan test otomatis untuk perilaku yang baru atau berubah, dan validasinya menjalankan test repositori bersama dengan pemeriksaan lint, type-check, dan format — bukan build saja. Test yang ada MUST tetap hijau.
+
+## Validasi status akhir
+
+Gate per-tugas memvalidasi apa yang disentuh setiap tugas; ia tidak menggantikan validasi rencana secara keseluruhan. Sebelum sebuah rencana selesai, validasi **lengkap yang berlaku** milik repositori MUST dijalankan dan lulus pada **status relevan terakhir**, setelah perubahan substantif terakhir — di dalam Final Review. Jalannya validasi yang lebih luas lebih awal terjadi pada batas integrasi atau setelah perubahan shared/core, bukan menurut jadwal berdasarkan jumlah tugas. Sebuah hasil yang lulus MAY dipakai ulang hanya dengan bukti bahwa masukan yang relevan setara; jika tidak, ia dijalankan ulang. Setiap kali gate dijalankan ia meninggalkan catatan ringkas: perintah, cakupan, revisi, hasil, dan sebuah path bukti.
 
 ## Disiplin keamanan
 
-Keamanan bersifat kelas satu dengan cara yang sama seperti test, dan ia mengikuti model dua lapis yang sama: disiplin per-tugas selama pekerjaan berlangsung, ditambah gate Security Review wajib atas seluruh kumpulan perubahan di akhir. Setiap kali sebuah tugas menyentuh autentikasi atau otorisasi, penanganan input, secrets atau konfigurasi, permukaan jaringan, berkas, atau shell, atau dependensi:
+Keamanan bersifat kelas satu dengan cara yang sama seperti test, dan ia mengikuti model dua lapis yang sama: disiplin per-tugas selama pekerjaan berlangsung, ditambah pemeriksaan keamanan dari Final Review atas seluruh kumpulan perubahan di akhir. Setiap kali sebuah tugas menyentuh autentikasi atau otorisasi, penanganan input, secrets atau konfigurasi, permukaan jaringan, berkas, atau shell, atau dependensi:
 
 - **Acceptance criteria**-nya MUST menyatakan ekspektasi keamanan dari perubahan tersebut — input divalidasi dan di-escape, tidak ada material rahasia di dalam kode atau fixture, pemeriksaan auth dipertahankan atau diperkuat — konsisten dengan `docs/SECURITY.md`.
 - Setiap commit MUST dipastikan bebas dari secrets atau kredensial sebelum ia mendarat, termasuk fixture test dan contoh dokumentasi. Sebuah secret dalam commit yang telah didorong MUST diperlakukan sebagai bocor dan dirotasi, bukan sekadar dihapus.
 - Di mana pekerjaan yang sensitif terhadap keamanan bersifat substansial, sebuah tugas hardening khusus SHOULD ditempatkan tepat setelah tugas-tugas implementasi dan sebelum tugas test komprehensif, sehingga temuan diperbaiki sebelum test mengodekan perilaku tersebut dan setiap temuan menjadi kasus regresi alih-alih pengerjaan ulang.
 
-Disiplin per-tugas ini tidak menggantikan tugas akhir Security Review: pemeriksaan per-tugas menangkap masalah di commit tempat masalah itu lahir, sementara gate akhir mengaudit seluruh rencana — termasuk tugas test dan dokumentasi itu sendiri. Oleh karena itu setiap rencana berakhir dengan tiga tugas akhir wajib — Security Review, lalu Skills & Agents Discovery, lalu Executive Report — dan sebuah temuan keamanan kritis memblokir penyelesaian sampai ia diperbaiki atau diterima secara eksplisit.
+Disiplin per-tugas ini tidak menggantikan pemeriksaan keamanan Final Review: pemeriksaan per-tugas menangkap masalah di commit tempat masalah itu lahir, sementara gate akhir mengaudit seluruh rencana — termasuk tugas test dan dokumentasi itu sendiri.
+
+## Siklus hidup rencana — Final Review
+
+Setiap rencana konforman yang ditulis di bawah versi ini berakhir dengan tepat **satu** tugas wajib: **Final Review** (tugas N). Dua tanggung jawab yang ditempatkan versi sebelumnya pada tugas-tugas penutup terpisah dipindahkan: keputusan skills berpindah ke dalam tugas yang menghasilkan polanya, dan Executive Report menjadi artefak opsional atas permintaan. Tidak ada bagian dari pemeriksaan keamanan yang dilonggarkan.
+
+Final Review MUST, secara berurutan:
+
+**(a) Pemeriksaan keamanan** — meninjau seluruh kumpulan perubahan rencana yang terakumulasi untuk secret yang di-hardcode, risiko injeksi, permukaan serangan baru, auth yang melemah, dan data sensitif di dalam log atau dokumen; mengaudit dependensi yang diperkenalkan; memverifikasi bahwa `docs/SECURITY.md` masih mencerminkan kenyataan; menulis laporan tinjauan keamanan bahkan ketika bersih. Sebuah temuan kritis diperbaiki — atau diterima secara eksplisit oleh pengguna — sebelum rencana selesai.
+
+**(b) Validasi status akhir** — validasi lengkap yang berlaku milik repositori dijalankan dan lulus pada status relevan terakhir.
+
+**(c) Rekonsiliasi skills** — setiap tugas membawa sebuah disposisi skills dan setiap kandidat yang tercatat memiliki disposisi; tidak ada laporan penemuan kedua.
+
+**(d) Penyelesaian** — melaporkan penyelesaian beserta deliverable, bukti validasi, dan keterbatasan; menawarkan Executive Report satu kali. Rencana selesai, terjawab atau tidak tawaran itu.
+
+Final Review berjalan secara berurutan setelah semua tugas lain dan tidak pernah ditempatkan dalam kelompok paralel.
+
+## Keputusan skills per-tugas
+
+Pertanyaan "apakah pekerjaan ini menghasilkan pola yang dapat dipakai ulang dan layak menjadi sebuah skill atau agent?" dijawab di dalam tugas yang menghasilkan pola itu, selagi buktinya masih ada dalam konteks. Completion & Log setiap tugas membawa sebuah **disposisi skills**: tidak ada, memperbarui skill yang ada, membuat artefak yang dinamai, atau sebuah penundaan disertai alasan. Penulisan yang beralasan terjadi di dalam tugas itu, sebelum validation gate dan commit-nya, setelah memeriksa katalog yang ada untuk duplikat.
+
+## Executive report — opsional, atas permintaan
+
+Executive Report tidak lagi menjadi tugas wajib. Saat penyelesaian, agent menawarkannya satu kali; ia dihasilkan hanya atas permintaan eksplisit, dipenuhi dari bukti yang tahan lama tanpa memutar ulang rencana. Tanpa jawaban, atau pada eksekusi tanpa pengawasan, rencana tetap selesai tanpa laporan yang dihasilkan.
 
 ## Protokol penyelesaian tugas
 
@@ -104,7 +160,7 @@ Agent MUST mempercayai tanda selesai (`[x]`) dan MUST NOT memvalidasi ulang tuga
 
 ## Loop eksekusi
 
-<CoreLoop lang="en" class="not-prose my-10" />
+<CoreLoop lang="id" class="not-prose my-10" />
 
 DWP mendefinisikan lima operasi:
 
@@ -116,7 +172,7 @@ DWP mendefinisikan lima operasi:
 
 ## Ruang kerja keluaran
 
-<OutputWorkspace lang="en" class="not-prose my-10" />
+<OutputWorkspace lang="id" class="not-prose my-10" />
 
 Semua artefak DWP MUST berada di bawah direktori `.dwp/` yang di-gitignore di akar repositori.
 
@@ -133,7 +189,7 @@ Rigor MUST sebanding dengan pekerjaan. Seremonial pada perubahan sepele adalah k
 | Tingkatan | Kapan | Bentuk |
 |------|------|------|
 | **micro** | Satu perubahan atomik: satu concern, kira-kira satu sesi, tanpa koordinasi. Perbaikan bug, perubahan teks, penyesuaian konfigurasi. | Tidak ada folder rencana. Agent menyatakan tujuan, acceptance criteria, dan validation gate secara inline dalam percakapan, mengeksekusi, memvalidasi, melakukan commit. |
-| **standard** | Pekerjaan multi-langkah dengan cakupan nyata: sebuah fitur, sebuah refactor, sebuah migrasi dalam satu repo. Tingkatan default. | Rencana penuh: folder rencana, tugas sembilan bagian, tugas akhir wajib. |
+| **standard** | Pekerjaan multi-langkah dengan cakupan nyata: sebuah fitur, sebuah refactor, sebuah migrasi dalam satu repo. Tingkatan default. | Rencana penuh: folder rencana, tugas sepuluh bagian, Final Review. |
 | **deep** | Pekerjaan berjangka panjang yang mencakup kelompok paralel, repositori turunan, atau beberapa sesi tanpa pengawasan. | Rencana standard ditambah kemampuan orchestrator dan/atau team-agents, dan lapisan status. |
 
 Sebuah agent yang diminta membuat rencana untuk pekerjaan tingkatan micro MUST menyatakan bahwa rencana tidak proporsional dan menawarkan bentuk inline sebagai gantinya. Folder rencana MUST NOT dibuat untuk perubahan satu berkas yang sepele.
@@ -141,6 +197,17 @@ Sebuah agent yang diminta membuat rencana untuk pekerjaan tingkatan micro MUST m
 Pekerjaan tingkatan micro tetap menjaga hal yang tidak bisa dinegosiasikan: tujuan yang eksplisit, validation gate yang berjalan dan lulus, serta disiplin test untuk perubahan perilaku. Tingkatan mengubah kemasan, tidak pernah gate-nya.
 
 Ketika cakupan berkembang di tengah jalan — sebuah tugas micro menemukan cakupan nyata, sebuah rencana standard memunculkan sub-repositori — agent MUST berhenti dan mempromosikan pekerjaan ke tingkatan berikutnya alih-alih meregangkan yang sekarang.
+
+## Kompatibilitas
+
+Rencana dan repositori dari versi sebelumnya tetap konforman, dan sebuah pemeriksa konformansi MUST membedakan artefak lama yang dikenal (diterima) dari artefak yang menyatakan versi ini namun secara objektif tidak valid di bawahnya (ditolak):
+
+| Kasus | Aturan |
+|------|------|
+| **Rencana yang ditulis di bawah versi sebelumnya** (tiga tugas akhir wajib; tugas tanpa Touched Surface) dieksekusi oleh versi ini | Didukung. Dieksekusi di bawah bentuknya sendiri yang tercatat — tugas akhir tidak ditambah, dihapus, atau diurutkan ulang, tidak ada Touched Surface yang ditambahkan di tengah jalan, dan validasi kembali ke suite lengkap yang berlaku. Sebuah sesi `refine` MAY memigrasikannya secara sengaja. |
+| **Repositori yang di-onboarding di bawah versi sebelumnya**, di-onboarding atau direncanakan oleh versi ini | Didukung. Rencana kembali ke gate suite penuh; dokumentasi pemanggilan bercakupan sempit yang hilang adalah sebuah temuan yang menyebutkan upgrade harness tertarget, tidak pernah sebuah kegagalan. |
+| **Rencana yang ditulis di bawah versi ini**, agent mengikuti versi ini | Didukung — sasarannya. |
+| **Rencana yang ditulis di bawah versi ini**, agent mengikuti versi sebelumnya | Tidak didukung; terdokumentasi. Repositori yang menyematkan skill lama SHOULD memutakhirkan skill sebelum mengadopsi rencana baru. |
 
 ## Pemberian versi
 

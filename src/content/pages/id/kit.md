@@ -47,13 +47,13 @@ dan sebuah fallback generik.
 
 ### Addon (opt-in)
 
-Kemampuan opsional yang dapat ditambahkan alur onboard ke sebuah repo — tidak pernah menjadi bagian dari baseline AI-first:
+Kemampuan yang ditambahkan alur onboard ke sebuah repo. Empat bersifat opsional dan tidak pernah menjadi bagian dari baseline AI-first; tinjauan lokal AI Diff Reviewer wajib sejak standar 2.3.0:
 
 - **Devcontainer** — kontainer pengembangan yang terisolasi dan dapat direproduksi dengan autentikasi AI-CLI yang persisten.
 - **Dailybot** — pelaporan kemajuan dan milestone secara best-effort untuk tim yang memakai Dailybot.
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan.
 - **Sistem desain** — sebuah `DESIGN.md` bercakupan antarmuka (di `docs/DESIGN.md`, dirujuk dari `AGENTS.md`) yang dinalar dari sumber desain nyata repo, dengan profil untuk UI visual, output CLI yang bergaya, dan perpesanan percakapan, sehingga agent menghasilkan keluaran antarmuka yang sesuai brand; profil visual aktif secara default ketika sebuah sistem desain terdeteksi, profil CLI dan percakapan direkomendasikan ketika terdeteksi dan selalu ditanyakan.
-- **AI Diff Reviewer** — meningkatkan Security Review dengan tinjauan lokal terstruktur ([AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md` wajib); Flow B opsional menambahkan gerbang merge PR CI yang berbagi ekstensi yang sama. Selalu tanyakan Flow A vs Flow B; jangan pernah instal otomatis.
+- **AI Diff Reviewer** — tinjauan lokal yang wajib: onboarding memasang [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md`, dan pemeriksaan keamanan setiap Final Review menjalankannya; Flow B opsional menambahkan gerbang merge PR CI yang berbagi ekstensi yang sama, ditawarkan secara eksplisit dan tidak pernah dipasang tanpa diminta.
 
 ### Contoh
 
