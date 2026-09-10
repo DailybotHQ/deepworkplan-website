@@ -74,16 +74,28 @@ const articleSchema = {
 
       <aside class="border-t pt-6 lg:sticky lg:top-24 lg:border-l lg:border-t-0 lg:pl-6" style="border-color: var(--color-line);">
         <Kicker>{c.sourceLabel}</Kicker>
-        {entry.data.sourceUrl && (
-          <a
-            href={entry.data.sourceUrl}
-            class="mt-3 block text-sm leading-relaxed underline decoration-secondary underline-offset-4"
-            style="color: var(--color-ink);"
-            rel="noreferrer"
-          >
-            {entry.data.sourceLabel}
-          </a>
-        )}
+        <div class="mt-3 space-y-3">
+          {entry.data.sourceLinks?.map((source) => (
+            <a
+              href={source.url}
+              class="block text-sm leading-relaxed underline decoration-secondary underline-offset-4"
+              style="color: var(--color-ink);"
+              rel="noreferrer"
+            >
+              {source.label}
+            </a>
+          ))}
+          {!entry.data.sourceLinks && entry.data.sourceUrl && (
+            <a
+              href={entry.data.sourceUrl}
+              class="block text-sm leading-relaxed underline decoration-secondary underline-offset-4"
+              style="color: var(--color-ink);"
+              rel="noreferrer"
+            >
+              {entry.data.sourceLabel}
+            </a>
+          )}
+        </div>
       </aside>
     </div>
 

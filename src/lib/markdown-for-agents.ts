@@ -224,6 +224,7 @@ interface ChangelogSerializeEntry {
     version: string;
     sourceLabel?: string;
     sourceUrl?: string;
+    sourceLinks?: { label: string; url: string }[];
   };
 }
 
@@ -286,7 +287,15 @@ export function serializeChangelogEntryToAgentMarkdown(
   ];
 
   if (entry.body) lines.push(entry.body.trim(), '');
-  if (entry.data.sourceLabel && entry.data.sourceUrl) {
+  if (entry.data.sourceLinks?.length) {
+    lines.push(
+      'Sources:',
+      ...entry.data.sourceLinks.map(
+        (source) => `- [${source.label}](${source.url})`
+      ),
+      ''
+    );
+  } else if (entry.data.sourceLabel && entry.data.sourceUrl) {
     lines.push(
       `Source: [${entry.data.sourceLabel}](${entry.data.sourceUrl})`,
       ''

@@ -9,6 +9,13 @@ order: 2
 featured: false
 sourceLabel: "Skill changelog 2.17.0"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
+sourceLinks:
+  - label: "Dailybot — How we run long-horizon agent work"
+    url: "https://www.dailybot.com/blog/how-we-run-long-horizon-agent-work/"
+  - label: "Xergio Alex — Deep Work Plan"
+    url: "https://xergioalex.com/blog/deep-work-plan/"
+  - label: "Deep Work Plan skill changelog"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
 ---
 
 Today we are shipping the first official Deep Work Plan release. The repository becomes the harness: it carries the context, guardrails, validation contract, and state an agent needs for reliable long-horizon work.

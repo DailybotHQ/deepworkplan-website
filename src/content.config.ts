@@ -78,6 +78,14 @@ const changelog = defineCollection({
     featured: z.boolean().default(false),
     sourceLabel: z.string().optional(),
     sourceUrl: z.string().url().optional(),
+    sourceLinks: z
+      .array(
+        z.object({
+          label: z.string(),
+          url: z.string().url(),
+        })
+      )
+      .optional(),
   }),
 });
 

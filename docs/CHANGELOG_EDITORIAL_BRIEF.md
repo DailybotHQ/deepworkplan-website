@@ -25,9 +25,9 @@ the methodology/skill major release.
 - Date: 2026-09-10
 - Label: Deep Work Plan v3 · DWP standard 2.3.0
 - Status: release-day major-release commit
-- Summary: Today's major release strengthens the lifecycle, conformance, and review guarantees built on the official harness.
+- Summary: Today's major release keeps DWP's current behavior while making it more agile, improving the user experience, and extending structured execution to small tasks with token-efficient defaults.
 - Evidence: `d050474`, `skills/deepworkplan/spec/DWP_SPECIFICATION.md`, `AGENTS.md`
-- Core points: one Final Review for new plans; AI Diff Reviewer local review as baseline; zero optional addons as the conformance floor; guide routing index; standard provenance in AGENTS.md; explicit legacy-plan compatibility and migration path.
+- Core points: one Final Review for new plans; AI Diff Reviewer local review as baseline; zero optional addons as the conformance floor; guide routing index; standard provenance in AGENTS.md; explicit legacy-plan compatibility and migration path; progressive disclosure, affected validation, and fewer unnecessary loops.
 
 ### `repository-becomes-the-harness`
 
