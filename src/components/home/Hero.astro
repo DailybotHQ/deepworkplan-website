@@ -132,18 +132,20 @@ const initMarkdown = await getCanonicalInitMarkdown();
         <img
           src="/images/visuals/home/hero-harness.webp"
           alt={h.illustrationAlt}
-          width="1122"
-          height="1402"
+          width="960"
+          height="1200"
           class="mx-auto h-auto w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[480px] dark:hidden"
-          loading="lazy"
+          loading="eager"
+          fetchpriority="high"
         />
         <img
           src="/images/visuals/home/hero-harness-dark.webp"
           alt={h.illustrationAlt}
-          width="1122"
-          height="1402"
+          width="960"
+          height="1200"
           class="mx-auto hidden h-auto w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[480px] dark:block"
-          loading="lazy"
+          loading="eager"
+          fetchpriority="high"
         />
       </div>
     </div>
