@@ -5,6 +5,8 @@
  * Each locale file (en.ts, es.ts) must satisfy the SiteTranslations interface.
  */
 
+import type { AlternativeId, CapabilityId } from '@/lib/compare-data';
+
 export interface PagePassion {
   title: string;
   description: string;
@@ -77,6 +79,11 @@ export interface SiteTranslations {
     developers: string;
     privacy: string;
     github: string;
+    faq: string;
+    compare: string;
+    // Header disclosure grouping Examples, Compare, FAQ and Trust
+    resources: string;
+    resourcesDesc: string;
     // Source-code repo selector (header + mobile)
     repo: {
       label: string;
@@ -112,6 +119,7 @@ export interface SiteTranslations {
       getStarted: string;
       project: string;
       connect: string;
+      learn: string;
     };
   };
 
@@ -503,6 +511,59 @@ export interface SiteTranslations {
   };
 
   // Trust & security page
+  // FAQ page
+  faqPage: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    intro: string;
+    groups: {
+      id: string;
+      title: string;
+      items: {
+        id: string;
+        question: string;
+        answer: string;
+        /** Optional deeper link: site-relative path, prefixed per language at render time. */
+        linkLabel?: string;
+        linkPath?: string;
+      }[];
+    }[];
+    stillHaveQuestions: { title: string; body: string; ctaLabel: string };
+  };
+
+  // Compare page — facts live in src/lib/compare-data.ts; only words live here
+  comparePage: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    intro: string;
+    howToRead: {
+      title: string;
+      body: string;
+      values: { builtIn: string; optional: string; notInScope: string };
+    };
+    reviewedOnLabel: string;
+    alternativesTitle: string;
+    officialSiteLabel: string;
+    categories: {
+      methodology: string;
+      sdd: string;
+      agentFramework: string;
+      vendorNative: string;
+    };
+    matrix: { title: string; caption: string; capabilityColumn: string };
+    capabilities: Record<CapabilityId, { label: string; help: string }>;
+    alternatives: Record<
+      AlternativeId,
+      { name: string; whatItDoesWell: string; audience: string }
+    >;
+    dwpStrengths: { title: string; items: { title: string; body: string }[] };
+    honestLimits: { title: string; body: string };
+    correction: { title: string; body: string; ctaLabel: string };
+    sourcesTitle: string;
+  };
+
   trustPage: {
     meta: { title: string; description: string };
     eyebrow: string;

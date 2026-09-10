@@ -147,3 +147,48 @@ describe('re-exports from translations/index.ts', () => {
     expect(getDefaultLanguage()).toBe('en');
   });
 });
+
+// ─── FAQ and compare copy (PLAN_compare_and_faq_pages) ──
+
+describe('faqPage and comparePage copy', () => {
+  it('every language has non-empty FAQ groups, questions, answers and links', () => {
+    for (const lang of getSupportedLanguages()) {
+      const { faqPage } = getTranslations(lang);
+      expect(faqPage.groups.length, lang).toBeGreaterThan(0);
+      for (const group of faqPage.groups) {
+        expect(group.items.length, `${lang}/${group.id}`).toBeGreaterThan(0);
+        for (const item of group.items) {
+          expect(
+            item.question.trim().length,
+            `${lang}/${item.id}`
+          ).toBeGreaterThan(0);
+          expect(
+            item.answer.trim().length,
+            `${lang}/${item.id}`
+          ).toBeGreaterThan(0);
+          if (item.linkPath) {
+            expect(item.linkPath, `${lang}/${item.id}`).toMatch(/^\//);
+            expect(
+              item.linkLabel?.trim().length,
+              `${lang}/${item.id}`
+            ).toBeGreaterThan(0);
+          }
+        }
+      }
+    }
+  });
+
+  it('every language names every compare capability and alternative', () => {
+    for (const lang of getSupportedLanguages()) {
+      const { comparePage } = getTranslations(lang);
+      for (const capability of Object.values(comparePage.capabilities)) {
+        expect(capability.label.trim().length, lang).toBeGreaterThan(0);
+      }
+      for (const alt of Object.values(comparePage.alternatives)) {
+        expect(alt.name.trim().length, lang).toBeGreaterThan(0);
+        expect(alt.whatItDoesWell.trim().length, lang).toBeGreaterThan(0);
+      }
+      expect(comparePage.dwpStrengths.items.length, lang).toBe(6);
+    }
+  });
+});
