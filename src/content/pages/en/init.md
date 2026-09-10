@@ -188,7 +188,7 @@ Generate Deep Work Plans for any task and run them task by task:
 - `/dwp-resume` — reconstruct state and continue an interrupted plan.
 - `/dwp-verify` — objective pass/fail conformance report for the repo (or a specific plan).
 
-Every plan ends with three mandatory final tasks — a **Security Review** of the plan's own
+Every plan closes with the Final Review — a security pass over the plan's own
 changes (keeping `docs/SECURITY.md` current; a critical finding blocks completion), Skills &
 Agents Discovery, and the Executive Report.
 

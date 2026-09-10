@@ -1,6 +1,6 @@
 ---
 /**
- * TaskAnatomy (ME-03) — the nine ordered sections of a task file.
+ * TaskAnatomy (ME-03) — the ten ordered sections of a task file.
  * Spec: docs/visuals/prompts/02-methodology.md#me-03. HTML/CSS panels; the ninth
  * (Completion & Log) carries the oxblood accent. Language-keyed i18n (en
  * fallback); role="img"; dark mode; zero JS. See docs/DIAGRAM_COMPONENTS.md.
@@ -17,12 +17,13 @@ const { lang = 'en', class: className = '' } = Astro.props;
 const i18n = {
   en: {
     ariaLabel:
-      'The nine ordered sections of a DWP task file: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, and Completion & Log.',
+      'The ten ordered sections of a DWP task file: Goal, Context, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, and Completion & Log.',
     title: 'Task file',
     sections: [
       'Goal',
       'Context',
       'Steps',
+      'Touched Surface',
       'Acceptance criteria',
       'Validation',
       'Files',
@@ -31,16 +32,17 @@ const i18n = {
       'Completion & Log',
     ],
     caption:
-      'Every task file follows the same nine ordered sections, so each unit of work is self-contained and reviewable.',
+      'Every task file follows the same ten ordered sections, so each unit of work is self-contained and reviewable.',
   },
   es: {
     ariaLabel:
-      'Las nueve secciones ordenadas de un archivo de tarea de DWP: Objetivo, Contexto, Pasos, Criterios de aceptación, Validación, Archivos, Dependencias, Riesgos y Finalización y registro.',
+      'Las diez secciones ordenadas de un archivo de tarea de DWP: Objetivo, Contexto, Pasos, Criterios de aceptación, Validación, Archivos, Dependencias, Riesgos y Finalización y registro.',
     title: 'Archivo de tarea',
     sections: [
       'Objetivo',
       'Contexto',
       'Pasos',
+      'Superficie tocada',
       'Criterios de aceptación',
       'Validación',
       'Archivos',
@@ -49,16 +51,17 @@ const i18n = {
       'Finalización y registro',
     ],
     caption:
-      'Cada archivo de tarea sigue las mismas nueve secciones ordenadas, para que cada unidad de trabajo sea autónoma y revisable.',
+      'Cada archivo de tarea sigue las mismas diez secciones ordenadas, para que cada unidad de trabajo sea autónoma y revisable.',
   },
   pt: {
     ariaLabel:
-      'As nove seções ordenadas de um arquivo de tarefa do DWP: Objetivo, Contexto, Passos, Critérios de aceitação, Validação, Arquivos, Dependências, Riscos e Conclusão e registro.',
+      'As dez seções ordenadas de um arquivo de tarefa do DWP: Objetivo, Contexto, Passos, Critérios de aceitação, Validação, Arquivos, Dependências, Riscos e Conclusão e registro.',
     title: 'Arquivo de tarefa',
     sections: [
       'Objetivo',
       'Contexto',
       'Passos',
+      'Superfície tocada',
       'Critérios de aceitação',
       'Validação',
       'Arquivos',
@@ -67,16 +70,17 @@ const i18n = {
       'Conclusão e registro',
     ],
     caption:
-      'Cada arquivo de tarefa segue as mesmas nove seções ordenadas, para que cada unidade de trabalho seja autônoma e revisável.',
+      'Cada arquivo de tarefa segue as mesmas dez seções ordenadas, para que cada unidade de trabalho seja autônoma e revisável.',
   },
   zh: {
     ariaLabel:
-      'DWP 任务文件的九个有序部分：目标、上下文、步骤、验收标准、验证、文件、依赖、风险以及完成与日志。',
+      'DWP 任务文件的十个有序部分：目标、上下文、步骤、验收标准、验证、文件、依赖、风险以及完成与日志。',
     title: '任务文件',
     sections: [
       '目标',
       '上下文',
       '步骤',
+      '触及面',
       '验收标准',
       '验证',
       '文件',
@@ -85,16 +89,17 @@ const i18n = {
       '完成与日志',
     ],
     caption:
-      '每个任务文件都遵循相同的九个有序部分，使每一项工作单元自成一体且可供审阅。',
+      '每个任务文件都遵循相同的十个有序部分，使每一项工作单元自成一体且可供审阅。',
   },
   ja: {
     ariaLabel:
-      'DWP タスクファイルの順序付けられた 9 つのセクションです。目標、コンテキスト、手順、受け入れ基準、検証、ファイル、依存関係、リスク、完了とログ。',
+      'DWP タスクファイルの順序付けられた 10 つのセクションです。目標、コンテキスト、手順、受け入れ基準、検証、ファイル、依存関係、リスク、完了とログ。',
     title: 'タスクファイル',
     sections: [
       '目標',
       'コンテキスト',
       '手順',
+      '変更対象',
       '受け入れ基準',
       '検証',
       'ファイル',
@@ -103,16 +108,17 @@ const i18n = {
       '完了とログ',
     ],
     caption:
-      'すべてのタスクファイルは同じ 9 つの順序付けられたセクションに従うため、各作業単位は自己完結し、レビュー可能です。',
+      'すべてのタスクファイルは同じ 10 つの順序付けられたセクションに従うため、各作業単位は自己完結し、レビュー可能です。',
   },
   de: {
     ariaLabel:
-      'Die neun geordneten Abschnitte einer DWP-Aufgabendatei: Ziel, Kontext, Schritte, Akzeptanzkriterien, Validierung, Dateien, Abhängigkeiten, Risiken sowie Abschluss und Protokoll.',
+      'Die zehn geordneten Abschnitte einer DWP-Aufgabendatei: Ziel, Kontext, Schritte, Akzeptanzkriterien, Validierung, Dateien, Abhängigkeiten, Risiken sowie Abschluss und Protokoll.',
     title: 'Aufgabendatei',
     sections: [
       'Ziel',
       'Kontext',
       'Schritte',
+      'Berührte Oberfläche',
       'Akzeptanzkriterien',
       'Validierung',
       'Dateien',
@@ -121,16 +127,17 @@ const i18n = {
       'Abschluss und Protokoll',
     ],
     caption:
-      'Jede Aufgabendatei folgt denselben neun geordneten Abschnitten, sodass jede Arbeitseinheit in sich abgeschlossen und überprüfbar ist.',
+      'Jede Aufgabendatei folgt denselben zehn geordneten Abschnitten, sodass jede Arbeitseinheit in sich abgeschlossen und überprüfbar ist.',
   },
   fr: {
     ariaLabel:
-      'Les neuf sections ordonnées d’un fichier de tâche DWP : Objectif, Contexte, Étapes, Critères d’acceptation, Validation, Fichiers, Dépendances, Risques et Achèvement et journal.',
+      'Les dix sections ordonnées d’un fichier de tâche DWP : Objectif, Contexte, Étapes, Critères d’acceptation, Validation, Fichiers, Dépendances, Risques et Achèvement et journal.',
     title: 'Fichier de tâche',
     sections: [
       'Objectif',
       'Contexte',
       'Étapes',
+      'Surface touchée',
       'Critères d’acceptation',
       'Validation',
       'Fichiers',
@@ -139,16 +146,17 @@ const i18n = {
       'Achèvement et journal',
     ],
     caption:
-      'Chaque fichier de tâche suit les mêmes neuf sections ordonnées, afin que chaque unité de travail soit autonome et révisable.',
+      'Chaque fichier de tâche suit les mêmes dix sections ordonnées, afin que chaque unité de travail soit autonome et révisable.',
   },
   ko: {
     ariaLabel:
-      'DWP 작업 파일의 순서가 정해진 아홉 개 섹션입니다. 목표, 맥락, 단계, 수용 기준, 검증, 파일, 의존성, 위험, 완료 및 로그.',
+      'DWP 작업 파일의 순서가 정해진 열 개 섹션입니다. 목표, 맥락, 단계, 수용 기준, 검증, 파일, 의존성, 위험, 완료 및 로그.',
     title: '작업 파일',
     sections: [
       '목표',
       '맥락',
       '단계',
+      '변경 대상',
       '수용 기준',
       '검증',
       '파일',
@@ -157,16 +165,17 @@ const i18n = {
       '완료 및 로그',
     ],
     caption:
-      '모든 작업 파일은 동일한 아홉 개의 순서가 정해진 섹션을 따르므로, 각 작업 단위는 자체적으로 완결되고 검토 가능합니다.',
+      '모든 작업 파일은 동일한 열 개의 순서가 정해진 섹션을 따르므로, 각 작업 단위는 자체적으로 완결되고 검토 가능합니다.',
   },
   ru: {
     ariaLabel:
-      'Девять упорядоченных разделов файла задачи DWP: цель, контекст, шаги, критерии приёмки, проверка, файлы, зависимости, риски и завершение и журнал.',
+      'Десять упорядоченных разделов файла задачи DWP: цель, контекст, шаги, критерии приёмки, проверка, файлы, зависимости, риски и завершение и журнал.',
     title: 'Файл задачи',
     sections: [
       'Цель',
       'Контекст',
       'Шаги',
+      'Затронутая поверхность',
       'Критерии приёмки',
       'Проверка',
       'Файлы',
@@ -175,16 +184,17 @@ const i18n = {
       'Завершение и журнал',
     ],
     caption:
-      'Каждый файл задачи следует одним и тем же девяти упорядоченным разделам, чтобы каждая единица работы была самодостаточной и поддавалась проверке.',
+      'Каждый файл задачи следует одним и тем же десяти упорядоченным разделам, чтобы каждая единица работы была самодостаточной и поддавалась проверке.',
   },
   it: {
     ariaLabel:
-      'Le nove sezioni ordinate di un file di attività DWP: Obiettivo, Contesto, Passi, Criteri di accettazione, Convalida, File, Dipendenze, Rischi e Completamento e registro.',
+      'Le dieci sezioni ordinate di un file di attività DWP: Obiettivo, Contesto, Passi, Criteri di accettazione, Convalida, File, Dipendenze, Rischi e Completamento e registro.',
     title: 'File di attività',
     sections: [
       'Obiettivo',
       'Contesto',
       'Passi',
+      'Superficie toccata',
       'Criteri di accettazione',
       'Convalida',
       'File',
@@ -193,16 +203,17 @@ const i18n = {
       'Completamento e registro',
     ],
     caption:
-      'Ogni file di attività segue le stesse nove sezioni ordinate, in modo che ciascuna unità di lavoro sia autonoma e revisionabile.',
+      'Ogni file di attività segue le stesse dieci sezioni ordinate, in modo che ciascuna unità di lavoro sia autonoma e revisionabile.',
   },
   tr: {
     ariaLabel:
-      'Bir DWP görev dosyasının sıralı dokuz bölümü: Amaç, Bağlam, Adımlar, Kabul ölçütleri, Doğrulama, Dosyalar, Bağımlılıklar, Riskler ve Tamamlama ve günlük.',
+      'Bir DWP görev dosyasının sıralı on bölümü: Amaç, Bağlam, Adımlar, Kabul ölçütleri, Doğrulama, Dosyalar, Bağımlılıklar, Riskler ve Tamamlama ve günlük.',
     title: 'Görev dosyası',
     sections: [
       'Amaç',
       'Bağlam',
       'Adımlar',
+      'Dokunulan Yüzey',
       'Kabul ölçütleri',
       'Doğrulama',
       'Dosyalar',
@@ -211,16 +222,17 @@ const i18n = {
       'Tamamlama ve günlük',
     ],
     caption:
-      'Her görev dosyası aynı sıralı dokuz bölümü izler; böylece her iş birimi kendi içinde bütünlüklü ve incelenebilir olur.',
+      'Her görev dosyası aynı sıralı on bölümü izler; böylece her iş birimi kendi içinde bütünlüklü ve incelenebilir olur.',
   },
   id: {
     ariaLabel:
-      'Sembilan bagian terurut dalam berkas tugas DWP: Tujuan, Konteks, Langkah, Kriteria penerimaan, Validasi, Berkas, Dependensi, Risiko, serta Penyelesaian dan catatan.',
+      'Sepuluh bagian terurut dalam berkas tugas DWP: Tujuan, Konteks, Langkah, Kriteria penerimaan, Validasi, Berkas, Dependensi, Risiko, serta Penyelesaian dan catatan.',
     title: 'Berkas tugas',
     sections: [
       'Tujuan',
       'Konteks',
       'Langkah',
+      'Permukaan yang Disentuh',
       'Kriteria penerimaan',
       'Validasi',
       'Berkas',
@@ -233,12 +245,13 @@ const i18n = {
   },
   vi: {
     ariaLabel:
-      'Chín phần được sắp xếp theo thứ tự của một tệp nhiệm vụ DWP: Mục tiêu, Bối cảnh, Các bước, Tiêu chí chấp nhận, Xác minh, Tệp, Phụ thuộc, Rủi ro và Hoàn thành và nhật ký.',
+      'Mười phần được sắp xếp theo thứ tự của một tệp nhiệm vụ DWP: Mục tiêu, Bối cảnh, Các bước, Tiêu chí chấp nhận, Xác minh, Tệp, Phụ thuộc, Rủi ro và Hoàn thành và nhật ký.',
     title: 'Tệp nhiệm vụ',
     sections: [
       'Mục tiêu',
       'Bối cảnh',
       'Các bước',
+      'Bề mặt bị chạm đến',
       'Tiêu chí chấp nhận',
       'Xác minh',
       'Tệp',
@@ -247,16 +260,17 @@ const i18n = {
       'Hoàn thành và nhật ký',
     ],
     caption:
-      'Mỗi tệp nhiệm vụ đều tuân theo cùng chín phần được sắp xếp theo thứ tự, để mỗi đơn vị công việc tự chứa và có thể xem xét.',
+      'Mỗi tệp nhiệm vụ đều tuân theo cùng mười phần được sắp xếp theo thứ tự, để mỗi đơn vị công việc tự chứa và có thể xem xét.',
   },
   hi: {
     ariaLabel:
-      'DWP कार्य फ़ाइल के नौ क्रमबद्ध अनुभाग: लक्ष्य, संदर्भ, चरण, स्वीकृति मानदंड, सत्यापन, फ़ाइलें, निर्भरताएँ, जोखिम, और समापन और लॉग।',
+      'DWP कार्य फ़ाइल के दस क्रमबद्ध अनुभाग: लक्ष्य, संदर्भ, चरण, स्वीकृति मानदंड, सत्यापन, फ़ाइलें, निर्भरताएँ, जोखिम, और समापन और लॉग।',
     title: 'कार्य फ़ाइल',
     sections: [
       'लक्ष्य',
       'संदर्भ',
       'चरण',
+      'स्पर्शित सतह',
       'स्वीकृति मानदंड',
       'सत्यापन',
       'फ़ाइलें',
@@ -265,16 +279,17 @@ const i18n = {
       'समापन और लॉग',
     ],
     caption:
-      'प्रत्येक कार्य फ़ाइल उन्हीं नौ क्रमबद्ध अनुभागों का पालन करती है, ताकि कार्य की प्रत्येक इकाई आत्मनिर्भर और समीक्षा-योग्य हो।',
+      'प्रत्येक कार्य फ़ाइल उन्हीं दस क्रमबद्ध अनुभागों का पालन करती है, ताकि कार्य की प्रत्येक इकाई आत्मनिर्भर और समीक्षा-योग्य हो।',
   },
   pl: {
     ariaLabel:
-      'Dziewięć uporządkowanych sekcji pliku zadania DWP: Cel, Kontekst, Kroki, Kryteria akceptacji, Walidacja, Pliki, Zależności, Ryzyka oraz Zakończenie i dziennik.',
+      'Dziesięć uporządkowanych sekcji pliku zadania DWP: Cel, Kontekst, Kroki, Kryteria akceptacji, Walidacja, Pliki, Zależności, Ryzyka oraz Zakończenie i dziennik.',
     title: 'Plik zadania',
     sections: [
       'Cel',
       'Kontekst',
       'Kroki',
+      'Dotknięta powierzchnia',
       'Kryteria akceptacji',
       'Walidacja',
       'Pliki',
@@ -287,12 +302,13 @@ const i18n = {
   },
   uk: {
     ariaLabel:
-      'Дев’ять упорядкованих розділів файлу завдання DWP: ціль, контекст, кроки, критерії приймання, перевірка, файли, залежності, ризики та завершення і журнал.',
+      'Десять упорядкованих розділів файлу завдання DWP: ціль, контекст, кроки, критерії приймання, перевірка, файли, залежності, ризики та завершення і журнал.',
     title: 'Файл завдання',
     sections: [
       'Ціль',
       'Контекст',
       'Кроки',
+      'Торкнута поверхня',
       'Критерії приймання',
       'Перевірка',
       'Файли',
@@ -305,12 +321,13 @@ const i18n = {
   },
   th: {
     ariaLabel:
-      'เก้าส่วนเรียงลำดับของไฟล์งาน DWP ได้แก่ เป้าหมาย บริบท ขั้นตอน เกณฑ์การยอมรับ การตรวจสอบ ไฟล์ การพึ่งพา ความเสี่ยง และการเสร็จสิ้นและบันทึก',
+      'สิบส่วนเรียงลำดับของไฟล์งาน DWP ได้แก่ เป้าหมาย บริบท ขั้นตอน เกณฑ์การยอมรับ การตรวจสอบ ไฟล์ การพึ่งพา ความเสี่ยง และการเสร็จสิ้นและบันทึก',
     title: 'ไฟล์งาน',
     sections: [
       'เป้าหมาย',
       'บริบท',
       'ขั้นตอน',
+      'พื้นผิวที่สัมผัส',
       'เกณฑ์การยอมรับ',
       'การตรวจสอบ',
       'ไฟล์',
@@ -319,7 +336,7 @@ const i18n = {
       'การเสร็จสิ้นและบันทึก',
     ],
     caption:
-      'ไฟล์งานทุกไฟล์ยึดตามเก้าส่วนที่เรียงลำดับเดียวกัน เพื่อให้แต่ละหน่วยงานเป็นอิสระและสามารถตรวจทานได้',
+      'ไฟล์งานทุกไฟล์ยึดตามสิบส่วนที่เรียงลำดับเดียวกัน เพื่อให้แต่ละหน่วยงานเป็นอิสระและสามารถตรวจทานได้',
   },
 } as const;
 
