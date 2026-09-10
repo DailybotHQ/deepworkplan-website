@@ -100,7 +100,7 @@ export const pl: SiteTranslations = {
     pitch: {
       kicker: 'Problem i odpowiedź',
       problem:
-        'Agenci kodowania błyszczą w krótkich seriach. Przy długiej pracy — migracja, nowy podsystem, refaktoryzacja na skalę — dryfują: kontekst się zapełnia, decyzje znikają, a wielogodzinne zadania zatrzymują się w połowie.',
+        'W krótkich seriach agenci kodowania są imponujący. Powierz im długą misję — migrację, nowy podsystem, refaktoryzację dziesiątek plików — a zaczną dryfować: kontekst się zapełnia, wcześniejsze decyzje blakną, a wielogodzinna praca zatrzymuje się w połowie.',
       answer:
         'Deep Work Plan odpowiada programowaniem sterowanym specyfikacją: trwały plan, zadania atomowe i bramki walidacyjne, które agent musi przejść. „Skończone” przestaje być odczuciem — staje się dowodem: zweryfikowanym i możliwym do przejrzenia.',
       efficiency:

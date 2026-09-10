@@ -99,7 +99,7 @@ export const vi: SiteTranslations = {
     pitch: {
       kicker: 'Vấn đề và lời giải',
       problem:
-        'Agent lập mã xuất sắc trong những đợt ngắn. Với công việc dài hạn — một bản di chuyển, một phân hệ mới, một bản refactor quy mô lớn — chúng trôi dạt: ngữ cảnh đầy, quyết định mất đi và task nhiều giờ dở dang giữa chừng.',
+        'Trong những đợt ngắn, agent lập trình rất ấn tượng. Giao cho nó một nhiệm vụ dài hơi — một bản di chuyển, một phân hệ mới, một bản refactor hàng chục tệp — nó sẽ trôi dạt: ngữ cảnh đầy lên, các quyết định trước đó phai nhạt và hàng giờ công việc dở dang giữa chừng.',
       answer:
         'Deep Work Plan trả lời bằng phát triển theo đặc tả: một kế hoạch bền vững, các tác vụ nguyên tử và cổng kiểm chứng agent buộc phải qua. “Xong” không còn là cảm giác — trở thành bằng chứng kiểm chứng được và review được.',
       efficiency:

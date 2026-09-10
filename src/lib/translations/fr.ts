@@ -99,7 +99,7 @@ export const fr: SiteTranslations = {
     pitch: {
       kicker: 'Le problème et la réponse',
       problem:
-        'Les agents de codage excellent en courtes salves. Sur le travail de long terme — une migration, un nouveau sous-système, une refonte à grande échelle — ils dérivent : le contexte se remplit, les décisions s’effacent et les tâches de plusieurs heures restent à moitié faites.',
+        'En courtes salves, les agents de codage sont remarquables. Confiez-leur une mission de long terme — une migration, un nouveau sous-système, une refactorisation de dizaines de fichiers — ils dérivent : le contexte se remplit, les décisions s’effacent et des heures de travail restent inachevées.',
       answer:
         'Deep Work Plan répond par le développement piloté par la spécification : un plan durable, des tâches atomiques et des validation gates que l’agent doit franchir. « Fini » cesse d’être une impression — cela devient une preuve vérifiable et relisible.',
       efficiency:

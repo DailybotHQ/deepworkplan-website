@@ -99,7 +99,7 @@ export const de: SiteTranslations = {
     pitch: {
       kicker: 'Das Problem und die Antwort',
       problem:
-        'KI-Coding-Agenten glänzen in kurzen Spitzen. Bei langlaufender Arbeit — einer Migration, einem neuen Subsystem, einer Refaktorierung im großen Stil — driftet der Agent ab: Der Kontext füllt sich, Entscheidungen gehen verloren, mehrstuündige Aufgaben bleiben auf halbem Weg liegen.',
+        'In kurzen Spitzen sind Coding-Agenten beeindruckend. Übergeben Sie ihnen eine langlaufende Mission — eine Migration, ein neues Subsystem, eine Refaktorierung über Dutzende Dateien —, driftet der Agent ab: Der Kontext füllt sich, frühere Entscheidungen verblassen und stundenlange Arbeit bleibt auf halbem Weg liegen.',
       answer:
         'Deep Work Plan antwortet mit spec-driven development: ein dauerhafter Plan, atomare Aufgaben und Validierungs-Gates, die der Agent bestehen muss. „Fertig“ ist kein Gefühl mehr — es wird zu überprüfbarer, reviewbarer Evidenz.',
       efficiency:

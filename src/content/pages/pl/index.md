@@ -21,7 +21,7 @@ Deep Work Plan (DWP) to otwarta metodyka i kit na licencji MIT, służące do pl
 
 ## Problem i odpowiedź
 
-Agenci kodowania błyszczą w krótkich seriach. Przy długiej pracy — migracja, nowy podsystem, refaktoryzacja na skalę — dryfują: kontekst się zapełnia, decyzje znikają, a wielogodzinne zadania zatrzymują się w połowie.
+W krótkich seriach agenci kodowania są imponujący. Powierz im długą misję — migrację, nowy podsystem, refaktoryzację dziesiątek plików — a zaczną dryfować: kontekst się zapełnia, wcześniejsze decyzje blakną, a wielogodzinna praca zatrzymuje się w połowie.
 
 Deep Work Plan odpowiada programowaniem sterowanym specyfikacją: trwały plan, zadania atomowe i bramki walidacyjne, które agent musi przejść. Praca pozostaje weryfikowalna — i każdy agent może ją wznowić między sesjami.
 

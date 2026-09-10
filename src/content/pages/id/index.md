@@ -21,7 +21,7 @@ Deep Work Plan (DWP) adalah metodologi dan kit terbuka berlisensi MIT untuk mere
 
 ## Masalah dan jawabannya
 
-Agen coding unggul dalam ledakan singkat. Pada kerja panjang — sebuah migrasi, subsistem baru, refaktor skala besar — mereka menyimpang: konteks penuh, keputusan hilang, dan tugas berjam-jam mandek di setengah jalan.
+Dalam ledakan singkat, agen coding mengesankan. Serahkan misi jangka panjang — sebuah migrasi, subsistem baru, refaktor puluhan file — dan mereka menyimpang: konteks penuh, keputusan sebelumnya memudar, dan kerja berjam-jam mandek di tengah jalan.
 
 Deep Work Plan menjawabnya dengan pengembangan berbasis spesifikasi: rencana yang tahan lama, tugas atomik, dan gerbang verifikasi yang harus dilalui agen. Pekerjaan tetap dapat diverifikasi — dan agen mana pun dapat melanjutkannya lintas sesi.
 

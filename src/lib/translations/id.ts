@@ -98,7 +98,7 @@ export const id: SiteTranslations = {
     pitch: {
       kicker: 'Masalah dan jawabannya',
       problem:
-        'Agen coding unggul dalam ledakan singkat. Pada kerja panjang — sebuah migrasi, subsistem baru, refaktor skala besar — mereka menyimpang: konteks penuh, keputusan hilang, dan tugas berjam-jam mandek di setengah jalan.',
+        'Dalam ledakan singkat, agen coding mengesankan. Serahkan misi jangka panjang — sebuah migrasi, subsistem baru, refaktor puluhan file — dan mereka menyimpang: konteks penuh, keputusan sebelumnya memudar, dan kerja berjam-jam mandek di tengah jalan.',
       answer:
         'Deep Work Plan menjawabnya dengan pengembangan berbasis spesifikasi: rencana yang tahan lama, tugas atomik, dan gerbang verifikasi yang harus dilalui agen. "Selesai" berhenti menjadi perasaan — menjadi bukti yang dapat diverifikasi dan ditinjau.',
       efficiency:
