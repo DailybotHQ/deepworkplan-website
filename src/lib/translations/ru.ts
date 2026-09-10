@@ -52,7 +52,7 @@ export const ru: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Новое',
+    badge: 'Новое · Эффективный по токенам',
     text: 'Deep Work Plan сегодня на Product Hunt',
     tagline: 'дайте агенту план',
     linkText: 'Поддержать',

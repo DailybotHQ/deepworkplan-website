@@ -51,7 +51,7 @@ export const hi: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'नया',
+    badge: 'नया · टोकन-कुशल',
     text: 'Deep Work Plan आज Product Hunt पर है',
     tagline: 'अपने एजेंट को एक प्लान दें',
     linkText: 'अपवोट करें',

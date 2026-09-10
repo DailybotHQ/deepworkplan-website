@@ -52,7 +52,7 @@ export const vi: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Mới',
+    badge: 'Mới · Tiết kiệm token',
     text: 'Deep Work Plan có mặt trên Product Hunt hôm nay',
     tagline: 'trao cho agent một kế hoạch',
     linkText: 'Ủng hộ ngay',

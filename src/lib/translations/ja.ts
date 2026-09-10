@@ -52,7 +52,7 @@ export const ja: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'New',
+    badge: 'New · トークン効率',
     text: 'Deep Work Plan が本日 Product Hunt に登場',
     tagline: 'エージェントに計画を',
     linkText: '応援する',

@@ -51,7 +51,7 @@ export const zh: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: '最新',
+    badge: '最新 · Token 高效',
     text: 'Deep Work Plan 今天登陆 Product Hunt',
     tagline: '给你的智能体一个计划',
     linkText: '去支持',

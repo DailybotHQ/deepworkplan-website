@@ -47,7 +47,7 @@ export const en: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'New',
+    badge: 'New · Token-efficient',
     text: 'Deep Work Plan is live on Product Hunt today',
     tagline: 'give your agent a plan',
     linkText: 'Upvote it',

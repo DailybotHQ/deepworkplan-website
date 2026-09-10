@@ -47,7 +47,7 @@ export const es: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Nuevo',
+    badge: 'Nuevo · Eficiente en tokens',
     text: 'Deep Work Plan ya está en Product Hunt',
     tagline: 'dale un plan a tu agente',
     linkText: 'Vótalo',
@@ -94,7 +94,7 @@ export const es: SiteTranslations = {
     pitch: {
       kicker: 'El problema y la respuesta',
       problem:
-        'En ráfagas cortas, los agentes de programación son notables. Encomienda a uno una misión de largo alcance — una migración, un subsistema nuevo, una refactorización en decenas de archivos — Pero tras una ejecución larga — una migración, un subsistema nuevo, una refactorización en decenas de archivos — el agente se desvía: el contexto se llena, las decisiones anteriores se desvanecen y horas de trabajo se quedan a medio camino.',
+        'Un agente de programación rinde de maravilla en tareas cortas. Pero en una misión de largo alcance — una migración, un subsistema nuevo, una refactorización a escala — la deriva llega: el contexto se llena, las decisiones se olvidan y las tareas de varias horas se quedan a medio camino.',
       answer:
         'Deep Work Plan responde con desarrollo guiado por especificación: un plan duradero, tareas atómicas y puertas de validación que el agente debe pasar. «Hecho» deja de ser una sensación — se convierte en evidencia verificable y revisable.',
       efficiency:

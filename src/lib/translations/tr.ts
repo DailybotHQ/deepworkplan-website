@@ -52,7 +52,7 @@ export const tr: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Yeni',
+    badge: 'Yeni · Token verimli',
     text: 'Deep Work Plan bugün Product Hunt’ta',
     tagline: 'ajanına bir plan ver',
     linkText: 'Oy ver',

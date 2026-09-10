@@ -51,7 +51,7 @@ export const th: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'ใหม่',
+    badge: 'ใหม่ · ประหยัดโทเคน',
     text: 'Deep Work Plan เปิดตัวบน Product Hunt วันนี้',
     tagline: 'มอบแผนให้เอเจนต์ของคุณ',
     linkText: 'โหวตเลย',

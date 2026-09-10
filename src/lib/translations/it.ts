@@ -52,7 +52,7 @@ export const it: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Novità',
+    badge: 'Novità · Efficiente nei token',
     text: 'Deep Work Plan è su Product Hunt oggi',
     tagline: 'dai un piano al tuo agente',
     linkText: 'Vota ora',

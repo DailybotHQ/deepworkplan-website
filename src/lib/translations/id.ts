@@ -51,7 +51,7 @@ export const id: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Baru',
+    badge: 'Baru · Efisien token',
     text: 'Deep Work Plan hadir di Product Hunt hari ini',
     tagline: 'beri agenmu sebuah rencana',
     linkText: 'Dukung kami',
