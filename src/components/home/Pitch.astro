@@ -39,7 +39,14 @@ const p = t.home.pitch;
       <Kicker>{p.kicker}</Kicker>
       <div class="mt-6 space-y-5">
         <Lead dropCap>{p.problem}</Lead>
-        <Lead>{p.answer}</Lead>
+        <Lead>
+          {p.answer.split('Deep Work Plan').map((part, i, arr) => (
+            <>
+              {part}
+              {i < arr.length - 1 && <strong class="font-semibold">Deep Work Plan</strong>}
+            </>
+          ))}
+        </Lead>
         <Lead>{p.efficiency}</Lead>
       </div>
     </div>
