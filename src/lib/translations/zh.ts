@@ -167,7 +167,7 @@ export const zh: SiteTranslations = {
         {
           title: '安装 DWP 技能并搭建 .dwp/',
           description:
-            '接入 Deep Work Plan 技能，并创建被 gitignore 的 .dwp/ 目录以存放计划与草稿，然后可选地叠加诸如 devcontainer 支持这样的可选附加组件。',
+            '接入 Deep Work Plan 技能，并创建被 gitignore 的 .dwp/ 目录以存放计划与草稿，安装必需的 AI Diff Reviewer 本地评审，然后可选地叠加诸如 devcontainer 支持这样的可选附加组件。',
         },
       ],
     },
@@ -592,7 +592,7 @@ export const zh: SiteTranslations = {
     eyebrow: '套件',
     title: '套件',
     intro:
-      '运行这套方法论所需的一切：技能及其各子技能、斜杠命令、代理适配器、接入预设、可选附加组件与实战示例。',
+      '运行这套方法论所需的一切：技能及其各子技能、斜杠命令、代理适配器、接入预设、必需的本地评审与可选附加组件，以及实战示例。',
     groups: {
       command: {
         title: '子技能与命令',
@@ -615,7 +615,7 @@ export const zh: SiteTranslations = {
       addon: {
         title: '附加组件（可选）',
         description:
-          'onboard 流程可向仓库叠加的可选能力——绝非 AI-first 基线的一部分。',
+          'onboard 流程为仓库叠加的能力：必需的 AI Diff Reviewer 本地评审，外加四个绝非 AI-first 基线组成部分的可选附加组件。',
       },
     },
     viewDetail: '查看详情',
@@ -673,7 +673,7 @@ export const zh: SiteTranslations = {
       {
         title: '演化套件并采纳附加组件',
         description:
-          '使用 /skill-create 与 /agent-create（author 子技能）来培育与技术栈相适配的技能、代理与命令。接入流程还会提供五个可选附加组件——devcontainer、Dailybot、dependency-upgrade、design-system 与 AI Diff Reviewer——你只在它们契合时才采纳。',
+          '使用 /skill-create 与 /agent-create（author 子技能）来培育与技术栈相适配的技能、代理与命令。接入流程会安装必需的 AI Diff Reviewer 本地评审（其 CI 门禁仍为可选），并提供四个可选附加组件——devcontainer、Dailybot、dependency-upgrade 与 design-system——你只在它们契合时才采纳。',
       },
       {
         title: '规划并执行',
@@ -744,9 +744,9 @@ export const zh: SiteTranslations = {
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: '接受可选附加组件',
+        title: '本地评审与可选附加组件',
         description:
-          '接入流程提供五个可选附加组件——devcontainer、Dailybot、dependency-upgrade、design-system 与 AI Diff Reviewer——你只在它们契合时才采纳。一个仓库即便不带任何附加组件，也完全符合规范。使用 /skill-create 与 /agent-create（author 子技能）来培育超越基线的技能、代理与命令。',
+          '接入流程会安装必需的 AI Diff Reviewer 本地评审（其 CI 门禁仍为可选），并提供四个可选附加组件——devcontainer、Dailybot、dependency-upgrade 与 design-system——你只在它们契合时才采纳。一个仓库即便不带任何可选附加组件，也完全符合规范。使用 /skill-create 与 /agent-create（author 子技能）来培育超越基线的技能、代理与命令。',
       },
       {
         title: '规划并执行',

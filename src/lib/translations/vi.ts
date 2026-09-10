@@ -169,7 +169,7 @@ export const vi: SiteTranslations = {
         {
           title: 'Cài skill DWP và dựng .dwp/',
           description:
-            'Kết nối skill Deep Work Plan và tạo thư mục .dwp/ được gitignore cho các kế hoạch và bản nháp, rồi tùy chọn bổ sung các addon tự nguyện như hỗ trợ devcontainer.',
+            'Kết nối skill Deep Work Plan và tạo thư mục .dwp/ được gitignore cho các kế hoạch và bản nháp, cài đặt bản đánh giá cục bộ bắt buộc của AI Diff Reviewer, rồi tùy chọn bổ sung các addon tự nguyện như hỗ trợ devcontainer.',
         },
       ],
     },
@@ -596,7 +596,7 @@ export const vi: SiteTranslations = {
     eyebrow: 'Kit',
     title: 'Bộ kit',
     intro:
-      'Mọi thứ bạn cần để chạy phương pháp luận: skill cùng các sub-skill, slash command, bộ chuyển đổi agent, preset khởi tạo, addon tự nguyện và các ví dụ đã giải.',
+      'Mọi thứ bạn cần để chạy phương pháp luận: skill cùng các sub-skill, slash command, bộ chuyển đổi agent, preset khởi tạo, bản đánh giá cục bộ bắt buộc và addon tự nguyện, cùng các ví dụ đã giải.',
     groups: {
       command: {
         title: 'Sub-skill & command',
@@ -620,7 +620,7 @@ export const vi: SiteTranslations = {
       addon: {
         title: 'Addon (tự nguyện)',
         description:
-          'Các năng lực tùy chọn mà luồng onboard có thể bổ sung lên một repo — không bao giờ là một phần của nền tảng AI-first cơ bản.',
+          'Các năng lực mà luồng onboard bổ sung lên một repo: bản đánh giá cục bộ bắt buộc của AI Diff Reviewer cùng bốn addon tùy chọn không bao giờ là một phần của nền tảng AI-first cơ bản.',
       },
     },
     viewDetail: 'Xem chi tiết',
@@ -679,7 +679,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Phát triển bộ kit và chấp nhận các addon',
         description:
-          'Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack. Khởi tạo cũng đề xuất năm addon tự nguyện — devcontainer, Dailybot, dependency-upgrade, design-system và AI Diff Reviewer — mà bạn chỉ chấp nhận khi chúng phù hợp.',
+          'Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack. Khởi tạo cài đặt bản đánh giá cục bộ bắt buộc của AI Diff Reviewer (cổng CI của nó vẫn là tùy chọn) và đề xuất bốn addon tự nguyện — devcontainer, Dailybot, dependency-upgrade và design-system — mà bạn chỉ chấp nhận khi chúng phù hợp.',
       },
       {
         title: 'Lập kế hoạch và thực thi',
@@ -750,9 +750,9 @@ export const vi: SiteTranslations = {
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Chấp nhận các addon tự nguyện',
+        title: 'Đánh giá cục bộ và addon tự nguyện',
         description:
-          'Khởi tạo đề xuất năm addon tự nguyện — devcontainer, Dailybot, dependency-upgrade, design-system và AI Diff Reviewer — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không cần addon nào. Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack vượt ra ngoài cơ sở.',
+          'Khởi tạo cài đặt bản đánh giá cục bộ bắt buộc của AI Diff Reviewer (cổng CI của nó vẫn là tùy chọn) và đề xuất bốn addon tự nguyện — devcontainer, Dailybot, dependency-upgrade và design-system — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không cần addon tùy chọn nào. Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack vượt ra ngoài cơ sở.',
       },
       {
         title: 'Lập kế hoạch và thực thi',

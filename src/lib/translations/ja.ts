@@ -171,7 +171,7 @@ export const ja: SiteTranslations = {
         {
           title: 'DWP スキルをインストールし、.dwp/ を整備する',
           description:
-            'Deep Work Plan スキルを組み込み、計画とドラフトのための gitignore された .dwp/ フォルダを作成します。その後、devcontainer サポートなどのオプトイン式アドオンを任意で重ねられます。',
+            'Deep Work Plan スキルを組み込み、計画とドラフトのための gitignore された .dwp/ フォルダを作成し、必須の AI Diff Reviewer ローカルレビューをインストールします。その後、devcontainer サポートなどのオプトイン式アドオンを任意で重ねられます。',
         },
       ],
     },
@@ -601,7 +601,7 @@ export const ja: SiteTranslations = {
     eyebrow: 'キット',
     title: 'キット',
     intro:
-      'この方法論を実行するために必要なものすべて。スキルとそのサブスキル、スラッシュコマンド、エージェントアダプター、オンボーディングプリセット、オプトイン式アドオン、そして実例つきのウォークスルー。',
+      'この方法論を実行するために必要なものすべて。スキルとそのサブスキル、スラッシュコマンド、エージェントアダプター、オンボーディングプリセット、必須のローカルレビューとオプトイン式アドオン、そして実例つきのウォークスルー。',
     groups: {
       command: {
         title: 'サブスキルとコマンド',
@@ -625,7 +625,7 @@ export const ja: SiteTranslations = {
       addon: {
         title: 'アドオン（オプトイン）',
         description:
-          'onboard フローがリポジトリに重ねられる任意の機能。AI-first の基本構成には決して含まれません。',
+          'onboard フローがリポジトリに重ねる機能。必須の AI Diff Reviewer ローカルレビューと、AI-first の基本構成には決して含まれない四つの任意アドオンです。',
       },
     },
     viewDetail: '詳細を見る',
@@ -684,7 +684,7 @@ export const ja: SiteTranslations = {
       {
         title: 'キットを進化させ、アドオンを受け入れる',
         description:
-          '/skill-create と /agent-create（author サブスキル）を使って、スタックに合ったスキル、エージェント、コマンドを育てます。オンボーディングは五つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）も提案します。適合する場合にのみ受け入れてください。',
+          '/skill-create と /agent-create（author サブスキル）を使って、スタックに合ったスキル、エージェント、コマンドを育てます。オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、四つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system）も提案します。適合する場合にのみ受け入れてください。',
       },
       {
         title: '計画して実行する',
@@ -755,9 +755,9 @@ export const ja: SiteTranslations = {
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'オプトインのアドオンを受け入れる',
+        title: 'ローカルレビューとオプトインのアドオン',
         description:
-          'オンボーディングは五つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、AI Diff Reviewer）を提案します。適合する場合にのみ受け入れてください。アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
+          'オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、四つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system）を提案します。適合する場合にのみ受け入れてください。任意アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
       },
       {
         title: '計画して実行する',

@@ -169,7 +169,7 @@ export const de: SiteTranslations = {
         {
           title: 'Installiert die DWP-Skill und legt .dwp/ an',
           description:
-            'Bindet die Deep Work Plan Skill ein und erstellt den per gitignore ausgeschlossenen .dwp/-Ordner für Pläne und Entwürfe, und ergänzt anschließend optional Opt-in-Addons wie Devcontainer-Unterstützung.',
+            'Bindet die Deep Work Plan Skill ein und erstellt den per gitignore ausgeschlossenen .dwp/-Ordner für Pläne und Entwürfe, installiert das verpflichtende lokale AI Diff Reviewer-Review und ergänzt anschließend optional Opt-in-Addons wie Devcontainer-Unterstützung.',
         },
       ],
     },
@@ -599,7 +599,7 @@ export const de: SiteTranslations = {
     eyebrow: 'Kit',
     title: 'Das Kit',
     intro:
-      'Alles, was Sie zur Ausführung der Methodik brauchen: die Skill und ihre Sub-Skills, Slash-Befehle, Agenten-Adapter, Onboarding-Presets, Opt-in-Addons und durchgearbeitete Beispiele.',
+      'Alles, was Sie zur Ausführung der Methodik brauchen: die Skill und ihre Sub-Skills, Slash-Befehle, Agenten-Adapter, Onboarding-Presets, das verpflichtende lokale Review und Opt-in-Addons sowie durchgearbeitete Beispiele.',
     groups: {
       command: {
         title: 'Sub-Skills & Befehle',
@@ -623,7 +623,7 @@ export const de: SiteTranslations = {
       addon: {
         title: 'Addons (Opt-in)',
         description:
-          'Optionale Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügen kann — nie Teil der AI-first-Baseline.',
+          'Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügt: das verpflichtende lokale AI Diff Reviewer-Review sowie vier optionale Addons, die nie Teil der AI-first-Baseline sind.',
       },
     },
     viewDetail: 'Details ansehen',
@@ -682,7 +682,7 @@ export const de: SiteTranslations = {
       {
         title: 'Das Kit weiterentwickeln und Addons annehmen',
         description:
-          'Nutzen Sie /skill-create und /agent-create (die author-Sub-Skill), um stack-passende Skills, Agenten und Befehle aufzubauen. Das Onboarding bietet außerdem fünf Opt-in-Addons — devcontainer, Dailybot, dependency-upgrade, design-system und AI Diff Reviewer —, die Sie nur annehmen, wenn sie passen.',
+          'Nutzen Sie /skill-create und /agent-create (die author-Sub-Skill), um stack-passende Skills, Agenten und Befehle aufzubauen. Das Onboarding installiert das verpflichtende lokale AI Diff Reviewer-Review (sein CI-Gate bleibt optional) und bietet vier Opt-in-Addons — devcontainer, Dailybot, dependency-upgrade und design-system —, die Sie nur annehmen, wenn sie passen.',
       },
       {
         title: 'Planen und ausführen',
@@ -753,9 +753,9 @@ export const de: SiteTranslations = {
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Opt-in-Addons annehmen',
+        title: 'Lokales Review und Opt-in-Addons',
         description:
-          'Das Onboarding bietet fünf Opt-in-Addons — devcontainer, Dailybot, dependency-upgrade, design-system und AI Diff Reviewer —, die Sie nur annehmen, wenn sie passen. Ein Repository ist mit null Addons vollständig konform. Nutzen Sie /skill-create und /agent-create (die author-Sub-Skill), um stack-passende Skills, Agenten und Befehle über die Basislinie hinaus aufzubauen.',
+          'Das Onboarding installiert das verpflichtende lokale AI Diff Reviewer-Review (sein CI-Gate bleibt optional) und bietet vier Opt-in-Addons — devcontainer, Dailybot, dependency-upgrade und design-system —, die Sie nur annehmen, wenn sie passen. Ein Repository ist mit null optionalen Addons vollständig konform. Nutzen Sie /skill-create und /agent-create (die author-Sub-Skill), um stack-passende Skills, Agenten und Befehle über die Basislinie hinaus aufzubauen.',
       },
       {
         title: 'Planen und ausführen',

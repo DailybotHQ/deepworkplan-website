@@ -169,7 +169,7 @@ export const it: SiteTranslations = {
         {
           title: 'Installa la skill DWP e predispone .dwp/',
           description:
-            'Collega la skill Deep Work Plan e crea la cartella .dwp/ esclusa da git per piani e bozze, poi aggiunge facoltativamente addon opt-in come il supporto devcontainer.',
+            'Collega la skill Deep Work Plan e crea la cartella .dwp/ esclusa da git per piani e bozze, installa la revisione locale obbligatoria di AI Diff Reviewer, poi aggiunge facoltativamente addon opt-in come il supporto devcontainer.',
         },
       ],
     },
@@ -599,7 +599,7 @@ export const it: SiteTranslations = {
     eyebrow: 'Kit',
     title: 'Il kit',
     intro:
-      'Tutto ciò che serve per eseguire la metodologia: la skill e le sue sub-skill, gli slash command, gli adapter per gli agenti, i preset di onboarding, gli addon opt-in ed esempi pratici.',
+      'Tutto ciò che serve per eseguire la metodologia: la skill e le sue sub-skill, gli slash command, gli adapter per gli agenti, i preset di onboarding, la revisione locale obbligatoria e gli addon opt-in, ed esempi pratici.',
     groups: {
       command: {
         title: 'Sub-skill e comandi',
@@ -623,7 +623,7 @@ export const it: SiteTranslations = {
       addon: {
         title: 'Addon (opt-in)',
         description:
-          'Capacità opzionali che il flusso di onboard può aggiungere a un repo — mai parte della baseline AI-first.',
+          'Capacità che il flusso di onboard aggiunge a un repo: la revisione locale obbligatoria di AI Diff Reviewer più quattro addon opzionali che non fanno mai parte della baseline AI-first.',
       },
     },
     viewDetail: 'Visualizza i dettagli',
@@ -682,7 +682,7 @@ export const it: SiteTranslations = {
       {
         title: 'Faccia evolvere il kit e accetti gli addon',
         description:
-          'Usi /skill-create e /agent-create (la sub-skill author) per far crescere skill, agenti e comandi adatti allo stack. L’onboarding offre anche cinque addon opt-in — devcontainer, Dailybot, dependency-upgrade, design-system e AI Diff Reviewer — che accetta solo quando sono pertinenti.',
+          'Usi /skill-create e /agent-create (la sub-skill author) per far crescere skill, agenti e comandi adatti allo stack. L’onboarding installa la revisione locale obbligatoria di AI Diff Reviewer (il suo gate CI resta opzionale) e offre quattro addon opt-in — devcontainer, Dailybot, dependency-upgrade e design-system — che accetta solo quando sono pertinenti.',
       },
       {
         title: 'Pianifichi ed esegua',
@@ -753,9 +753,9 @@ export const it: SiteTranslations = {
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Accetti gli addon opzionali',
+        title: 'Revisione locale e addon opt-in',
         description:
-          'L’onboarding offre cinque addon opt-in — devcontainer, Dailybot, dependency-upgrade, design-system e AI Diff Reviewer — che accetta solo quando sono pertinenti. Un repo è pienamente conforme anche con zero addon. Usi /skill-create e /agent-create (la sub-skill author) per far crescere skill, agenti e comandi oltre la configurazione di base.',
+          'L’onboarding installa la revisione locale obbligatoria di AI Diff Reviewer (il suo gate CI resta opzionale) e offre quattro addon opt-in — devcontainer, Dailybot, dependency-upgrade e design-system — che accetta solo quando sono pertinenti. Un repo è pienamente conforme anche con zero addon opzionali. Usi /skill-create e /agent-create (la sub-skill author) per far crescere skill, agenti e comandi oltre la configurazione di base.',
       },
       {
         title: 'Pianifichi ed esegua',

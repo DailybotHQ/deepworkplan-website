@@ -169,7 +169,7 @@ export const id: SiteTranslations = {
         {
           title: 'Memasang skill DWP dan menyiapkan .dwp/',
           description:
-            'Menyambungkan skill Deep Work Plan dan membuat folder .dwp/ yang di-gitignore untuk rencana dan draf, lalu secara opsional menambahkan addon opt-in seperti dukungan devcontainer.',
+            'Menyambungkan skill Deep Work Plan dan membuat folder .dwp/ yang di-gitignore untuk rencana dan draf, memasang review lokal AI Diff Reviewer yang wajib, lalu secara opsional menambahkan addon opt-in seperti dukungan devcontainer.',
         },
       ],
     },
@@ -599,7 +599,7 @@ export const id: SiteTranslations = {
     eyebrow: 'Kit',
     title: 'Kit',
     intro:
-      'Semua yang Anda perlukan untuk menjalankan metodologi: skill dan sub-skill-nya, slash command, adapter agent, preset onboarding, addon opt-in, dan contoh terkerjakan.',
+      'Semua yang Anda perlukan untuk menjalankan metodologi: skill dan sub-skill-nya, slash command, adapter agent, preset onboarding, review lokal yang wajib dan addon opt-in, serta contoh terkerjakan.',
     groups: {
       command: {
         title: 'Sub-skill & command',
@@ -623,7 +623,7 @@ export const id: SiteTranslations = {
       addon: {
         title: 'Addon (opt-in)',
         description:
-          'Kemampuan opsional yang dapat ditambahkan alur onboard ke sebuah repo — tidak pernah menjadi bagian dari baseline AI-first.',
+          'Kemampuan yang ditambahkan alur onboard ke sebuah repo: review lokal AI Diff Reviewer yang wajib ditambah empat addon opsional yang tidak pernah menjadi bagian dari baseline AI-first.',
       },
     },
     viewDetail: 'Lihat detail',
@@ -682,7 +682,7 @@ export const id: SiteTranslations = {
       {
         title: 'Kembangkan kit dan terima addon',
         description:
-          'Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack. Onboarding juga menawarkan lima addon opt-in — devcontainer, Dailybot, dependency-upgrade, design-system, dan AI Diff Reviewer — yang Anda terima hanya ketika cocok.',
+          'Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack. Onboarding memasang review lokal AI Diff Reviewer yang wajib (gerbang CI-nya tetap opsional) dan menawarkan empat addon opt-in — devcontainer, Dailybot, dependency-upgrade, dan design-system — yang Anda terima hanya ketika cocok.',
       },
       {
         title: 'Rencanakan dan eksekusi',
@@ -753,9 +753,9 @@ export const id: SiteTranslations = {
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Terima addon opt-in',
+        title: 'Review lokal dan addon opt-in',
         description:
-          'Onboarding menawarkan lima addon opt-in — devcontainer, Dailybot, dependency-upgrade, design-system, dan AI Diff Reviewer — yang Anda terima hanya ketika cocok. Sebuah repo sepenuhnya konforman dengan nol addon. Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack di luar baseline.',
+          'Onboarding memasang review lokal AI Diff Reviewer yang wajib (gerbang CI-nya tetap opsional) dan menawarkan empat addon opt-in — devcontainer, Dailybot, dependency-upgrade, dan design-system — yang Anda terima hanya ketika cocok. Sebuah repo sepenuhnya konforman dengan nol addon opsional. Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack di luar baseline.',
       },
       {
         title: 'Rencanakan dan eksekusi',

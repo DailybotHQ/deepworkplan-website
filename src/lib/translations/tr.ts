@@ -171,7 +171,7 @@ export const tr: SiteTranslations = {
         {
           title: 'DWP skill’ini kurar ve .dwp/ yapısını oluşturur',
           description:
-            'Deep Work Plan skill’ini bağlar ve planlar ile taslaklar için gitignore’lanmış .dwp/ klasörünü oluşturur, ardından isteğe bağlı olarak devcontainer desteği gibi tercihe dayalı eklentileri katmanlar.',
+            'Deep Work Plan skill’ini bağlar ve planlar ile taslaklar için gitignore’lanmış .dwp/ klasörünü oluşturur, zorunlu AI Diff Reviewer yerel incelemesini kurar, ardından isteğe bağlı olarak devcontainer desteği gibi tercihe dayalı eklentileri katmanlar.',
         },
       ],
     },
@@ -600,7 +600,7 @@ export const tr: SiteTranslations = {
     eyebrow: 'Kit',
     title: 'Kit',
     intro:
-      'Metodolojiyi çalıştırmak için ihtiyacınız olan her şey: skill ve alt skill’leri, eğik çizgi komutları, ajan adaptörleri, kuruluma alma hazır ayarları, tercihe dayalı eklentiler ve işlenmiş örnekler.',
+      'Metodolojiyi çalıştırmak için ihtiyacınız olan her şey: skill ve alt skill’leri, eğik çizgi komutları, ajan adaptörleri, kuruluma alma hazır ayarları, zorunlu yerel inceleme ve tercihe dayalı eklentiler ile işlenmiş örnekler.',
     groups: {
       command: {
         title: 'Alt skill’ler ve komutlar',
@@ -624,7 +624,7 @@ export const tr: SiteTranslations = {
       addon: {
         title: 'Eklentiler (tercihe dayalı)',
         description:
-          'onboard akışının bir depoya katmanlayabileceği isteğe bağlı yetenekler — asla AI-first temel hattının parçası değildir.',
+          'onboard akışının bir depoya katmanladığı yetenekler: zorunlu AI Diff Reviewer yerel incelemesi ve asla AI-first temel hattının parçası olmayan dört isteğe bağlı eklenti.',
       },
     },
     viewDetail: 'Ayrıntıları görüntüle',
@@ -683,7 +683,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Kiti geliştirin ve eklentileri kabul edin',
         description:
-          'Yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın. Kuruluma alma ayrıca beş tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade, design-system ve AI Diff Reviewer — yalnızca uygun olduklarında kabul edersiniz.',
+          'Yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın. Kuruluma alma, zorunlu AI Diff Reviewer yerel incelemesini kurar (CI kapısı isteğe bağlı kalır) ve dört tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade ve design-system — yalnızca uygun olduklarında kabul edersiniz.',
       },
       {
         title: 'Planlayın ve yürütün',
@@ -754,9 +754,9 @@ export const tr: SiteTranslations = {
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Tercihe dayalı eklentileri kabul edin',
+        title: 'Yerel inceleme ve tercihe dayalı eklentiler',
         description:
-          'Kuruluma alma beş tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade, design-system ve AI Diff Reviewer — yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
+          'Kuruluma alma, zorunlu AI Diff Reviewer yerel incelemesini kurar (CI kapısı isteğe bağlı kalır) ve dört tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade ve design-system — yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır isteğe bağlı eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
       },
       {
         title: 'Planlayın ve yürütün',

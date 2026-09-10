@@ -168,7 +168,7 @@ export const ko: SiteTranslations = {
         {
           title: 'DWP 스킬을 설치하고 .dwp/를 구성합니다',
           description:
-            'Deep Work Plan 스킬을 연결하고 계획과 초안을 위한 gitignore된 .dwp/ 폴더를 생성한 뒤, 필요하면 devcontainer 지원 같은 선택형 애드온을 추가로 얹습니다.',
+            'Deep Work Plan 스킬을 연결하고 계획과 초안을 위한 gitignore된 .dwp/ 폴더를 생성한 뒤, 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고, 필요하면 devcontainer 지원 같은 선택형 애드온을 추가로 얹습니다.',
         },
       ],
     },
@@ -597,7 +597,7 @@ export const ko: SiteTranslations = {
     eyebrow: '키트',
     title: '키트',
     intro:
-      '방법론을 실행하는 데 필요한 모든 것: 스킬과 그 하위 스킬, 슬래시 명령, 에이전트 어댑터, 온보딩 프리셋, 선택형 애드온, 그리고 실제 예시.',
+      '방법론을 실행하는 데 필요한 모든 것: 스킬과 그 하위 스킬, 슬래시 명령, 에이전트 어댑터, 온보딩 프리셋, 필수 로컬 리뷰와 선택형 애드온, 그리고 실제 예시.',
     groups: {
       command: {
         title: '하위 스킬 & 명령',
@@ -620,7 +620,7 @@ export const ko: SiteTranslations = {
       addon: {
         title: '애드온(선택형)',
         description:
-          'onboard 흐름이 리포지토리에 얹을 수 있는 선택 기능 — AI-first 기준선의 일부는 결코 아닙니다.',
+          'onboard 흐름이 리포지토리에 얹는 기능: 필수인 AI Diff Reviewer 로컬 리뷰와, AI-first 기준선의 일부가 결코 아닌 네 가지 선택형 애드온.',
       },
     },
     viewDetail: '상세 보기',
@@ -679,7 +679,7 @@ export const ko: SiteTranslations = {
       {
         title: '키트 발전과 애드온 채택',
         description:
-          '/skill-create와 /agent-create(author 하위 스킬)로 스택에 맞는 스킬, 에이전트, 명령을 키우세요. 온보딩은 또한 다섯 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer — 을 제안하며, 맞을 때만 채택하면 됩니다.',
+          '/skill-create와 /agent-create(author 하위 스킬)로 스택에 맞는 스킬, 에이전트, 명령을 키우세요. 온보딩은 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고(그 CI 게이트는 선택으로 남습니다), 네 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system — 을 제안하며, 맞을 때만 채택하면 됩니다.',
       },
       {
         title: '계획하고 실행',
@@ -750,9 +750,9 @@ export const ko: SiteTranslations = {
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: '선택형 애드온 채택',
+        title: '로컬 리뷰와 선택형 애드온',
         description:
-          '온보딩은 다섯 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system, AI Diff Reviewer — 을 제안하며, 맞을 때만 채택하면 됩니다. 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다. /skill-create와 /agent-create(author 하위 스킬)로 기본 구성을 넘어 스택에 맞는 스킬, 에이전트, 명령을 키우세요.',
+          '온보딩은 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고(그 CI 게이트는 선택으로 남습니다), 네 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system — 을 제안하며, 맞을 때만 채택하면 됩니다. 선택형 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다. /skill-create와 /agent-create(author 하위 스킬)로 기본 구성을 넘어 스택에 맞는 스킬, 에이전트, 명령을 키우세요.',
       },
       {
         title: '계획하고 실행',

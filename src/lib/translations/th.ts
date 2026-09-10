@@ -167,7 +167,7 @@ export const th: SiteTranslations = {
         {
           title: 'ติดตั้งสกิล DWP และวางโครง .dwp/',
           description:
-            'เชื่อมต่อสกิล Deep Work Plan และสร้างโฟลเดอร์ .dwp/ ที่ถูก gitignore ไว้สำหรับเก็บแผนและฉบับร่าง จากนั้นเลือกเสริม addon แบบสมัครใจ เช่น การรองรับ devcontainer',
+            'เชื่อมต่อสกิล Deep Work Plan และสร้างโฟลเดอร์ .dwp/ ที่ถูก gitignore ไว้สำหรับเก็บแผนและฉบับร่าง ติดตั้งการรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer จากนั้นเลือกเสริม addon แบบสมัครใจ เช่น การรองรับ devcontainer',
         },
       ],
     },
@@ -592,7 +592,7 @@ export const th: SiteTranslations = {
     eyebrow: 'ชุดเครื่องมือ',
     title: 'ชุดเครื่องมือ',
     intro:
-      'ทุกสิ่งที่คุณต้องใช้ในการรันระเบียบวิธี ทั้งสกิลและสกิลย่อย slash command อะแดปเตอร์สำหรับ agent พรีเซ็ตการเริ่มต้น addon แบบสมัครใจ และตัวอย่างที่ลงมือทำจริง',
+      'ทุกสิ่งที่คุณต้องใช้ในการรันระเบียบวิธี ทั้งสกิลและสกิลย่อย slash command อะแดปเตอร์สำหรับ agent พรีเซ็ตการเริ่มต้น การรีวิวในเครื่องที่จำเป็นและ addon แบบสมัครใจ และตัวอย่างที่ลงมือทำจริง',
     groups: {
       command: {
         title: 'สกิลย่อยและคำสั่ง',
@@ -616,7 +616,7 @@ export const th: SiteTranslations = {
       addon: {
         title: 'Addon (สมัครใจ)',
         description:
-          'ความสามารถเสริมที่กระบวนการ onboard สามารถวางทับลงบน repo ไม่ใช่ส่วนหนึ่งของพื้นฐาน AI-first',
+          'ความสามารถที่กระบวนการ onboard วางทับลงบน repo ได้แก่ การรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer และ addon เสริมอีกสี่ตัวซึ่งไม่ใช่ส่วนหนึ่งของพื้นฐาน AI-first',
       },
     },
     viewDetail: 'ดูรายละเอียด',
@@ -675,7 +675,7 @@ export const th: SiteTranslations = {
       {
         title: 'พัฒนาชุดเครื่องมือและรับ addon',
         description:
-          'ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตก การเริ่มต้นยังเสนอ addon แบบสมัครใจห้าตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade, design-system และ AI Diff Reviewer ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม',
+          'ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตก การเริ่มต้นจะติดตั้งการรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer (เกต CI ยังคงเป็นทางเลือก) และเสนอ addon แบบสมัครใจสี่ตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade และ design-system ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม',
       },
       {
         title: 'วางแผนและลงมือทำ',
@@ -1161,9 +1161,9 @@ export const th: SiteTranslations = {
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'รับ addon แบบสมัครใจ',
+        title: 'การรีวิวในเครื่องและ addon แบบสมัครใจ',
         description:
-          'การ onboarding เสนอ addon แบบสมัครใจห้าตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade, design-system และ AI Diff Reviewer ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม repo สอดคล้องอย่างสมบูรณ์โดยมี addon ศูนย์ตัว ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตกเกินกว่าชุดพื้นฐาน',
+          'การ onboarding จะติดตั้งการรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer (เกต CI ยังคงเป็นทางเลือก) และเสนอ addon แบบสมัครใจสี่ตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade และ design-system ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม repo สอดคล้องอย่างสมบูรณ์โดยมี addon เสริมศูนย์ตัว ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตกเกินกว่าชุดพื้นฐาน',
       },
       {
         title: 'วางแผนและดำเนินการ',
