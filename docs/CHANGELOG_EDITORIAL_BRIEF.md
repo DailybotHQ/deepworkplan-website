@@ -22,43 +22,25 @@ the methodology/skill major release.
 
 ### `deep-work-plan-v3`
 
-- Date: 2026-07-16
+- Date: 2026-09-10
 - Label: Deep Work Plan v3 · DWP standard 2.3.0
 - Status: release-day major-release commit
-- Summary: The skill's command surface stays familiar while plan lifecycle, conformance, and review guarantees become substantially stronger.
+- Summary: Today's major release strengthens the lifecycle, conformance, and review guarantees built on the official harness.
 - Evidence: `d050474`, `skills/deepworkplan/spec/DWP_SPECIFICATION.md`, `AGENTS.md`
 - Core points: one Final Review for new plans; AI Diff Reviewer local review as baseline; zero optional addons as the conformance floor; guide routing index; standard provenance in AGENTS.md; explicit legacy-plan compatibility and migration path.
 
-### `token-efficiency-by-construction`
+### `repository-becomes-the-harness`
 
-- Date: 2026-09-09
-- Label: Architecture · token efficiency
-- Status: architecture decision published that day
-- Summary: DWP reduces context cost by loading less, repeating less, and running expensive validation only when the touched surface warrants it.
-- Evidence: `docs/adr/0001-token-efficiency-architecture.md`, `docs/evaluations/token-efficiency.md`, commits `a3e7018` through `0da548e`
-- Core points: progressive disclosure, affected validation, task-local learning, direct trust-mode creation, bounded working context.
-
-### `resumable-plan-materialization`
-
-- Date: 2026-09-10
-- Label: Reliability · resumability
-- Status: release-day reliability amendment
-- Summary: Plan creation becomes recoverable from the first write instead of leaving an opaque half-created artifact.
-- Evidence: `69b03ea`, `9ac6584`, `89d3889`
-- Core points: manifest first, README skeleton with intended task list, recorded PLAN_ANALYSIS, task files in order, state layer, status flipped last.
-
-### `reviewable-conformance-floor`
-
-- Date: 2026-07-16 to 2026-09-10
-- Label: Trust · reviewability
-- Status: trust work published across the 2.17.x release line
-- Summary: The methodology makes security and provenance part of the default harness rather than an optional afterthought.
-- Evidence: `CHANGELOG.md` entries for `2.17.0`, `2.17.1`, commit `606c1c0`, `docs/SECURITY.md`, `TRUST.md`
-- Core points: local AI review baseline, pinned addon installs, trust boundaries, checksummed provenance, legacy compatibility without silent weakening.
+- Date: 2026-07-16
+- Label: Official release · foundation
+- Status: first official release
+- Summary: The repository becomes the harness for reliable, long-horizon agent work.
+- Evidence: `CHANGELOG.md` entry for `2.17.0`, `TRUST.md`, and the initial adoption kit.
+- Core points: repository-native context, guardrails, validation, and resumable state.
 
 ### `from-spec-to-portable-harness`
 
-- Date: 2026-06-05 to 2026-06-12
+- Date: 2026-06-12
 - Label: Foundation · adoption
 - Status: selected historical milestone
 - Summary: DWP grew from a plan loop into a portable kit for onboarding repositories, checking conformance, and adapting to multiple stacks and agent hosts.

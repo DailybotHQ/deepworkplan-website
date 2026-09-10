@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan v3: o repositório se torna o harness"
 description: "O Deep Work Plan v3 fortalece o ciclo, a conformidade e a revisão do trabalho de agentes."
-date: 2026-07-16
+date: 2026-09-10
 version: "v3 · DWP standard 2.3.0"
 kind: release
 lang: pt

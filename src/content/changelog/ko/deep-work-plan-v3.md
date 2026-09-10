@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan v3: 저장소가 하니스가 됩니다"
 description: "Deep Work Plan v3는 장기 에이전트 작업의 수명 주기와 검토 보장을 강화합니다."
-date: 2026-07-16
+date: 2026-09-10
 version: "v3 · DWP standard 2.3.0"
 kind: release
 lang: ko

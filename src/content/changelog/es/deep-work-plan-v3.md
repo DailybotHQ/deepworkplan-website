@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan v3: el repositorio se convierte en el arnés"
 description: "Deep Work Plan v3 refuerza el ciclo, la conformidad y la revisión del trabajo prolongado con agentes."
-date: 2026-07-16
+date: 2026-09-10
 version: "v3 · DWP standard 2.3.0"
 kind: release
 lang: es

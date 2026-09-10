@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan v3 : le dépôt devient le harness"
 description: "Deep Work Plan v3 renforce le cycle, la conformité et les garanties de revue."
-date: 2026-07-16
+date: 2026-09-10
 version: "v3 · DWP standard 2.3.0"
 kind: release
 lang: fr

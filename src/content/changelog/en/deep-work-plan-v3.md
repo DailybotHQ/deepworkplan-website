@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan v3: the repository becomes the harness"
 description: "Deep Work Plan v3 strengthens the lifecycle, conformance floor, and review guarantees behind long-horizon agent work."
-date: 2026-07-16
+date: 2026-09-10
 version: "v3 · DWP standard 2.3.0"
 kind: release
 lang: en
