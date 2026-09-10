@@ -18,6 +18,7 @@ export let nav: SiteTranslations['nav'];
 let open: boolean = false;
 let languageOpen = false;
 let repoOpen = false;
+let resourcesOpen = false;
 
 // Dropdown label: full native name + Title-case code, e.g. "English (En)",
 // "Português (Pt)". The trigger itself stays code-only (e.g. "EN").
@@ -113,15 +114,21 @@ $: lampLabel = isDark ? 'Switch to light mode' : 'Switch to dark mode';
 function openDropdown(which: string) {
   languageOpen = which === 'language';
   repoOpen = which === 'repo';
+  resourcesOpen = which === 'resources';
 }
 
 function closeAllDropdowns() {
   languageOpen = false;
   repoOpen = false;
+  resourcesOpen = false;
+}
+
+function closeOnEscape(event: KeyboardEvent) {
+  if (event.key === 'Escape') closeAllDropdowns();
 }
 </script>
 
-<svelte:window on:click={closeAllDropdowns} />
+<svelte:window on:click={closeAllDropdowns} on:keydown={closeOnEscape} />
 
 <header class="bg-paper text-ink dark:bg-main dark:text-white sticky top-0 z-50 border-b border-line transition-colors duration-300">
   <nav class="main-container flex items-center justify-between">
@@ -193,8 +200,56 @@ function closeAllDropdowns() {
         <a href="{prefix}/methodology" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'methodology' })}>{nav.methodology}</a>
         <a href="{prefix}/spec" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'spec' })}>{nav.spec}</a>
         <a href="{prefix}/kit" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'kit' })}>{nav.kit}</a>
-        <a href="{prefix}/examples" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'examples' })}>{nav.examples}</a>
-        <a href="{prefix}/trust" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'trust' })}>{nav.trust}</a>
+        <!-- Resources disclosure: groups Examples, Compare, FAQ and Trust so the
+             masthead stays uncluttered. Same disclosure pattern as the repo and
+             language selectors below (aria-expanded + aria-controls, no role=menu). -->
+        <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_noninteractive_element_interactions -->
+        <div
+          role="group"
+          class="relative group"
+          on:mouseenter={() => openDropdown('resources')}
+          on:mouseleave={() => resourcesOpen = false}
+          on:click|stopPropagation={() => {}}
+        >
+          <button
+            class="nav-link flex items-center gap-1 cursor-pointer select-none"
+            aria-expanded={resourcesOpen}
+            aria-haspopup="true"
+            aria-controls="resources-dropdown"
+            type="button"
+            on:click={() => resourcesOpen ? closeAllDropdowns() : openDropdown('resources')}
+          >
+            {nav.resources}
+            <svg
+              class="w-4 h-4 transition-transform duration-200"
+              style="transform: rotate({resourcesOpen ? '180deg' : '0deg'});"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          {#if resourcesOpen}
+            <div
+              class="absolute left-0 top-full min-w-[14rem]"
+              style="height: 12px; pointer-events: auto;"
+            ></div>
+            <div
+              id="resources-dropdown"
+              class="absolute left-0 top-full min-w-[14rem] bg-paper dark:bg-main text-ink dark:text-white border border-line rounded shadow-lg z-50 transition-all duration-200"
+              style="pointer-events: auto; opacity: 1; transform: translateY(12px);"
+              aria-label={nav.resourcesDesc}
+            >
+              <a href="{prefix}/examples" class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-ink dark:text-white transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'examples' })}>{nav.examples}</a>
+              <a href="{prefix}/compare" class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-ink dark:text-white transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'compare' })}>{nav.compare}</a>
+              <a href="{prefix}/faq" class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-ink dark:text-white transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'faq' })}>{nav.faq}</a>
+              <a href="{prefix}/trust" class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-ink dark:text-white transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'trust' })}>{nav.trust}</a>
+            </div>
+          {/if}
+        </div>
         <!-- Source-code repo selector: GitHub trigger opens a disclosure with
              links to both the website repo and the installable skill repo.
              Mirrors the language-selector disclosure pattern below. -->
