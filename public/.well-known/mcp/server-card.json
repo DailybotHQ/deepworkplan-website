@@ -1,7 +1,7 @@
 {
   "serverInfo": {
     "name": "deep-work-plan-site",
-    "version": "4.0.4",
+    "version": "4.0.5",
     "description": "deepworkplan.com — the Deep Work Plan methodology, specification, and kit. Read-only agent surface exposing the canonical /init adoption prompt, the site map, and every page as source Markdown. Served over Streamable HTTP at /api/mcp and, in the browser, via WebMCP (navigator.modelContext) on every page; documented for agents at /.well-known/agent-skills/index.json."
   },
   "transport": {
