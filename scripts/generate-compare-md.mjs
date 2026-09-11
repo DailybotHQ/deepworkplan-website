@@ -9,7 +9,10 @@
  *   node --experimental-strip-types scripts/generate-compare-md.mjs
  */
 import { writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { ALTERNATIVES, CAPABILITY_IDS } from '../src/lib/compare-data.ts';
+
+const ROOT = resolve(import.meta.dirname, '..');
 
 // Import each locale module directly (bypassing the i18n.ts / translations
 // barrel, which use extensionless specifiers Node's native ESM loader can't
@@ -156,7 +159,7 @@ function buildMarkdown(t) {
 for (const lang of LANGUAGES) {
   const t = await getTranslations(lang);
   const md = buildMarkdown(t);
-  const path = `src/content/pages/${lang}/compare.md`;
+  const path = resolve(ROOT, `src/content/pages/${lang}/compare.md`);
   writeFileSync(path, md, 'utf-8');
   console.log(`wrote ${path}`);
 }
