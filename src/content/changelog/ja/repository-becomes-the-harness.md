@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://xergioalex.com/blog/deep-work-plan/"
   - label: "Deep Work Plan skill changelog"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
+  - label: "Deep Work Plan on Product Hunt"
+    url: "https://www.producthunt.com/products/deep-work-plan"
 ---
 
 本日、Deep Work Plan の最初の正式リリースをお届けします。リポジトリがハーネスになります。信頼できる長時間にわたるエージェントの作業に必要なコンテキスト、ガードレール、検証契約、状態を運びます。

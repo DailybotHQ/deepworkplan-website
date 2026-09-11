@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://xergioalex.com/blog/deep-work-plan/"
   - label: "Deep Work Plan skill changelog"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
+  - label: "Deep Work Plan on Product Hunt"
+    url: "https://www.producthunt.com/products/deep-work-plan"
 ---
 
 오늘 Deep Work Plan의 첫 공식 릴리스를 출시합니다. 저장소가 하니스가 됩니다. 신뢰할 수 있는 장기 에이전트 작업에 필요한 컨텍스트, 가드레일, 검증 계약, 상태를 담습니다.

@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://xergioalex.com/blog/deep-work-plan/"
   - label: "Deep Work Plan skill changelog"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
+  - label: "Deep Work Plan on Product Hunt"
+    url: "https://www.producthunt.com/products/deep-work-plan"
 ---
 
 วันนี้เราเปิดตัว Deep Work Plan อย่างเป็นทางการครั้งแรก รีโพสิโทรีกลายเป็น harness โดยพกพาบริบท กฎป้องกัน ข้อตกลงการตรวจสอบ และสถานะที่เอเจนต์ต้องใช้เพื่อทำงานระยะยาวได้อย่างน่าเชื่อถือ

@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://xergioalex.com/blog/deep-work-plan/"
   - label: "Deep Work Plan skill changelog"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
+  - label: "Deep Work Plan on Product Hunt"
+    url: "https://www.producthunt.com/products/deep-work-plan"
 ---
 
 Сьогодні ми випускаємо перший офіційний реліз Deep Work Plan. Репозиторій стає середовищем агента: він несе контекст, захисні правила, контракт перевірки та стан, потрібні агенту для надійної тривалої роботи.

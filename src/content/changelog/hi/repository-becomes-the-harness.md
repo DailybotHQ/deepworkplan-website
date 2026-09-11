@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://xergioalex.com/blog/deep-work-plan/"
   - label: "Deep Work Plan skill changelog"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
+  - label: "Deep Work Plan on Product Hunt"
+    url: "https://www.producthunt.com/products/deep-work-plan"
 ---
 
 आज हम पहली आधिकारिक Deep Work Plan रिलीज़ जारी कर रहे हैं। रिपॉज़िटरी ही harness बन जाती है: यह वह संदर्भ, सुरक्षा नियम, सत्यापन अनुबंध और स्थिति रखती है जिनकी एक एजेंट को विश्वसनीय दीर्घकालिक कार्य के लिए आवश्यकता होती है।

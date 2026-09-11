@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://xergioalex.com/blog/deep-work-plan/"
   - label: "Deep Work Plan skill changelog"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
+  - label: "Deep Work Plan on Product Hunt"
+    url: "https://www.producthunt.com/products/deep-work-plan"
 ---
 
 Bugün ilk resmi Deep Work Plan sürümünü yayınlıyoruz. Depo, çalışma ortamına dönüşüyor: güvenilir, uzun soluklu çalışma için bir ajanın ihtiyaç duyduğu bağlamı, korumaları, doğrulama sözleşmesini ve durumu taşıyor.

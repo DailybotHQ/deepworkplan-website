@@ -92,24 +92,18 @@ const webPageSchema = {
         {c.howToRead.body}
       </p>
       <ul class="mt-5 grid gap-3 sm:grid-cols-3" aria-label={c.howToRead.title}>
-        <div class="border-t pt-3" style="border-color: var(--color-line);">
-          <li class="font-semibold" style="color: var(--color-ink);">
-            <span aria-hidden="true" class="font-mono" style="color: var(--color-secondary);">✓</span>
-            {c.howToRead.values.builtIn}
-          </li>
-        </div>
-        <div class="border-t pt-3" style="border-color: var(--color-line);">
-          <li class="font-semibold" style="color: var(--color-ink);">
-            <span aria-hidden="true" class="font-mono" style="color: var(--color-muted);">◐</span>
-            {c.howToRead.values.optional}
-          </li>
-        </div>
-        <div class="border-t pt-3" style="border-color: var(--color-line);">
-          <li class="font-semibold" style="color: var(--color-ink);">
-            <span aria-hidden="true" class="font-mono" style="color: var(--color-muted);">–</span>
-            {c.howToRead.values.notInScope}
-          </li>
-        </div>
+        <li class="border-t pt-3 font-semibold" style="border-color: var(--color-line); color: var(--color-ink);">
+          <span aria-hidden="true" class="font-mono" style="color: var(--color-secondary);">✓</span>
+          {c.howToRead.values.builtIn}
+        </li>
+        <li class="border-t pt-3 font-semibold" style="border-color: var(--color-line); color: var(--color-ink);">
+          <span aria-hidden="true" class="font-mono" style="color: var(--color-muted);">◐</span>
+          {c.howToRead.values.optional}
+        </li>
+        <li class="border-t pt-3 font-semibold" style="border-color: var(--color-line); color: var(--color-ink);">
+          <span aria-hidden="true" class="font-mono" style="color: var(--color-muted);">–</span>
+          {c.howToRead.values.notInScope}
+        </li>
       </ul>
       <p class="kicker mt-6">
         {c.reviewedOnLabel}: <time datetime={COMPARE_REVIEWED_ON}>{reviewedOn}</time>

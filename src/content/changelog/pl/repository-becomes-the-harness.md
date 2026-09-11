@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://xergioalex.com/blog/deep-work-plan/"
   - label: "Deep Work Plan skill changelog"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
+  - label: "Deep Work Plan on Product Hunt"
+    url: "https://www.producthunt.com/products/deep-work-plan"
 ---
 
 Dziś wydajemy pierwszą oficjalną wersję Deep Work Plan. Repozytorium staje się harnessem: niesie kontekst, zasady ochronne, kontrakt walidacyjny i stan, których agent potrzebuje do niezawodnej, długotrwałej pracy.

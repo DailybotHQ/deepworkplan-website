@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://xergioalex.com/blog/deep-work-plan/"
   - label: "Deep Work Plan skill changelog"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
+  - label: "Deep Work Plan on Product Hunt"
+    url: "https://www.producthunt.com/products/deep-work-plan"
 ---
 
 Hari ini kami merilis rilis resmi pertama Deep Work Plan. Repositori menjadi harness: ia membawa konteks, pagar pengaman, kontrak validasi, dan status yang dibutuhkan agen untuk bekerja secara andal dalam jangka panjang.

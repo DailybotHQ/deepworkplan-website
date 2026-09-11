@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://xergioalex.com/blog/deep-work-plan/"
   - label: "Deep Work Plan skill changelog"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
+  - label: "Deep Work Plan on Product Hunt"
+    url: "https://www.producthunt.com/products/deep-work-plan"
 ---
 
 Hôm nay chúng tôi phát hành bản chính thức đầu tiên của Deep Work Plan. Kho mã trở thành harness: nó mang theo ngữ cảnh, rào chắn, hợp đồng xác thực và trạng thái mà một tác nhân cần để làm việc đáng tin cậy trong thời gian dài.
