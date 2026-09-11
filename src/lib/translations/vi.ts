@@ -188,7 +188,7 @@ export const vi: SiteTranslations = {
         {
           title: 'Cài skill DWP và dựng .dwp/',
           description:
-            'Kết nối skill Deep Work Plan và tạo thư mục .dwp/ được gitignore cho các kế hoạch và bản nháp, cài đặt bản đánh giá cục bộ bắt buộc của AI Diff Reviewer, rồi tùy chọn bổ sung các addon tự nguyện như hỗ trợ devcontainer.',
+            'Kết nối skill Deep Work Plan và tạo thư mục .dwp/ được gitignore cho các kế hoạch, cài đặt bản đánh giá cục bộ bắt buộc của AI Diff Reviewer, rồi tùy chọn bổ sung các addon tự nguyện như hỗ trợ devcontainer.',
         },
       ],
     },
@@ -265,7 +265,7 @@ export const vi: SiteTranslations = {
         {
           label: 'Thuần git, có thể tiếp tục, .dwp/',
           detail:
-            'Không daemon, không trạng thái ngoài. Kế hoạch và bản nháp nằm trong thư mục .dwp/ được gitignore, và mọi tác vụ tiếp tục chỉ từ git — kể cả sau khi ngữ cảnh tràn.',
+            'Không daemon, không trạng thái ngoài. Kế hoạch nằm trong thư mục .dwp/ được gitignore, và mọi tác vụ tiếp tục chỉ từ git — kể cả sau khi ngữ cảnh tràn.',
         },
       ],
     },
@@ -765,7 +765,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Chạy khởi tạo repository',
         description:
-          'Gọi sub-skill onboard và để agent suy luận về repo thực tế — stack, trình quản lý gói và các lệnh kiểm chứng thực sự của nó. Sau đó nó sinh ra AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục .agents/ dùng chung giữa các agent (với các symlink .claude → .agents và .cursor → .agents), kết nối các command dwp-* mỏng và dựng một .dwp/ được gitignore cho kế hoạch và bản nháp. Với các repo lớn, sub-skill onboard sử dụng đường dẫn dựa trên kế hoạch: hoàn thành khảo sát, sau đó phát hành một Deep Work Plan khởi tạo. Không gì là rập khuôn; mọi thứ đều được thích ứng với repository của bạn.',
+          'Gọi sub-skill onboard và để agent suy luận về repo thực tế — stack, trình quản lý gói và các lệnh kiểm chứng thực sự của nó. Sau đó nó sinh ra AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục .agents/ dùng chung giữa các agent (với các symlink .claude → .agents và .cursor → .agents), kết nối các command dwp-* mỏng và dựng một .dwp/ được gitignore cho kế hoạch. Với các repo lớn, sub-skill onboard sử dụng đường dẫn dựa trên kế hoạch: hoàn thành khảo sát, sau đó phát hành một Deep Work Plan khởi tạo. Không gì là rập khuôn; mọi thứ đều được thích ứng với repository của bạn.',
         commands: ['/deepworkplan-onboard'],
       },
       {

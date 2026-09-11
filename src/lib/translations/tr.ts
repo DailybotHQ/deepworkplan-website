@@ -190,7 +190,7 @@ export const tr: SiteTranslations = {
         {
           title: 'DWP skill’ini kurar ve .dwp/ yapısını oluşturur',
           description:
-            'Deep Work Plan skill’ini bağlar ve planlar ile taslaklar için gitignore’lanmış .dwp/ klasörünü oluşturur, zorunlu AI Diff Reviewer yerel incelemesini kurar, ardından isteğe bağlı olarak devcontainer desteği gibi tercihe dayalı eklentileri katmanlar.',
+            'Deep Work Plan skill’ini bağlar ve planlar için gitignore’lanmış .dwp/ klasörünü oluşturur, zorunlu AI Diff Reviewer yerel incelemesini kurar, ardından isteğe bağlı olarak devcontainer desteği gibi tercihe dayalı eklentileri katmanlar.',
         },
       ],
     },
@@ -267,7 +267,7 @@ export const tr: SiteTranslations = {
         {
           label: 'Git-native, sürdürülebilir, .dwp/',
           detail:
-            'Daemon yok, harici durum yok. Planlar ve taslaklar gitignore’lanmış bir .dwp/ klasörüne iner ve herhangi bir görev — bağlam taştıktan sonra bile — yalnızca git üzerinden kaldığı yerden sürdürülür.',
+            'Daemon yok, harici durum yok. Planlar gitignore’lanmış bir .dwp/ klasörüne iner ve herhangi bir görev — bağlam taştıktan sonra bile — yalnızca git üzerinden kaldığı yerden sürdürülür.',
         },
       ],
     },
@@ -769,7 +769,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Depo kuruluma almasını çalıştırın',
         description:
-          'onboard alt skill’ini çağırın ve ajanın gerçek depo hakkında — yığını, paket yöneticisi ve gerçek doğrulama komutları — akıl yürütmesine izin verin. Ardından AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve ajandan bağımsız bir .agents/ yuvası (.claude → .agents ve .cursor → .agents sembolik bağlarıyla) üretir, ince dwp-* komutlarını bağlar ve planlar ile taslaklar için gitignore’lanmış bir .dwp/ yapısı oluşturur. Büyük depolarda onboard alt skill’i plan odaklı bir yol kullanır: keşfi tamamlar, ardından bir kuruluma alma Deep Work Plan’ı üretir. Hiçbir şey şablonlanmaz; her şey deponuza uyarlanır.',
+          'onboard alt skill’ini çağırın ve ajanın gerçek depo hakkında — yığını, paket yöneticisi ve gerçek doğrulama komutları — akıl yürütmesine izin verin. Ardından AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve ajandan bağımsız bir .agents/ yuvası (.claude → .agents ve .cursor → .agents sembolik bağlarıyla) üretir, ince dwp-* komutlarını bağlar ve planlar için gitignore’lanmış bir .dwp/ yapısı oluşturur. Büyük depolarda onboard alt skill’i plan odaklı bir yol kullanır: keşfi tamamlar, ardından bir kuruluma alma Deep Work Plan’ı üretir. Hiçbir şey şablonlanmaz; her şey deponuza uyarlanır.',
         commands: ['/deepworkplan-onboard'],
       },
       {

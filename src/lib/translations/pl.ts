@@ -190,7 +190,7 @@ export const pl: SiteTranslations = {
         {
           title: 'Instaluje skill DWP i tworzy .dwp/',
           description:
-            'Podłącza skill Deep Work Plan i tworzy ignorowany przez git katalog .dwp/ na plany i szkice, instaluje wymaganą lokalną recenzję AI Diff Reviewer, a następnie opcjonalnie dokłada dobrowolne dodatki, takie jak wsparcie devcontainer.',
+            'Podłącza skill Deep Work Plan i tworzy ignorowany przez git katalog .dwp/ na plany, instaluje wymaganą lokalną recenzję AI Diff Reviewer, a następnie opcjonalnie dokłada dobrowolne dodatki, takie jak wsparcie devcontainer.',
         },
       ],
     },
@@ -268,7 +268,7 @@ export const pl: SiteTranslations = {
         {
           label: 'Natywny dla git, wznawialny, .dwp/',
           detail:
-            'Bez demona i bez zewnętrznego stanu. Plany i szkice trafiają do ignorowanego przez git katalogu .dwp/, a każde zadanie wznawia się z samego git — nawet po przepełnieniu kontekstu.',
+            'Bez demona i bez zewnętrznego stanu. Plany trafiają do ignorowanego przez git katalogu .dwp/, a każde zadanie wznawia się z samego git — nawet po przepełnieniu kontekstu.',
         },
       ],
     },
@@ -1306,7 +1306,7 @@ export const pl: SiteTranslations = {
       {
         title: 'Uruchom onboarding repozytorium',
         description:
-          'Wywołaj sub-skill onboard i pozwól agentowi przeprowadzić rozumowanie o rzeczywistym repo — jego stosie technologicznym, menedżerze pakietów i realnych poleceniach walidacyjnych. Następnie generuje AGENTS.md, bazę wiedzy docs/, dokumentację per moduł oraz międzyagentowy katalog .agents/ (z dowiązaniami .claude → .agents i .cursor → .agents), podłącza cienkie polecenia dwp-* i tworzy ignorowany przez git .dwp/ na plany i szkice. W przypadku dużych repozytoriów sub-skill onboard stosuje ścieżkę opartą na planie: przeprowadza rekonesans, a następnie generuje onboardingowy Deep Work Plan. Nic nie jest szablonowe; wszystko dostosowane jest do Twojego repozytorium.',
+          'Wywołaj sub-skill onboard i pozwól agentowi przeprowadzić rozumowanie o rzeczywistym repo — jego stosie technologicznym, menedżerze pakietów i realnych poleceniach walidacyjnych. Następnie generuje AGENTS.md, bazę wiedzy docs/, dokumentację per moduł oraz międzyagentowy katalog .agents/ (z dowiązaniami .claude → .agents i .cursor → .agents), podłącza cienkie polecenia dwp-* i tworzy ignorowany przez git .dwp/ na plany. W przypadku dużych repozytoriów sub-skill onboard stosuje ścieżkę opartą na planie: przeprowadza rekonesans, a następnie generuje onboardingowy Deep Work Plan. Nic nie jest szablonowe; wszystko dostosowane jest do Twojego repozytorium.',
         commands: ['/deepworkplan-onboard'],
       },
       {

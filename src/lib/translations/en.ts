@@ -182,7 +182,7 @@ export const en: SiteTranslations = {
         {
           title: 'Installs the DWP skill and scaffolds .dwp/',
           description:
-            'Wires the Deep Work Plan skill and creates the gitignored .dwp/ folder for plans and drafts, installs the required AI Diff Reviewer local review, then optionally layers opt-in addons such as devcontainer support.',
+            'Wires the Deep Work Plan skill and creates the gitignored .dwp/ folder for plans, installs the required AI Diff Reviewer local review, then optionally layers opt-in addons such as devcontainer support.',
         },
       ],
     },
@@ -259,7 +259,7 @@ export const en: SiteTranslations = {
         {
           label: 'Git-native, resumable, .dwp/',
           detail:
-            'No daemon and no external state. Plans and drafts land in a gitignored .dwp/ folder, and any task resumes from git alone — even after context overflows.',
+            'No daemon and no external state. Plans land in a gitignored .dwp/ folder, and any task resumes from git alone — even after context overflows.',
         },
       ],
     },
@@ -760,7 +760,7 @@ export const en: SiteTranslations = {
       {
         title: 'Run repository onboarding',
         description:
-          'Invoke the onboard sub-skill and let the agent reason about the actual repo — its stack, package manager, and real validation commands. It generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents and .cursor → .agents symlinks), wires thin dwp-* commands, and scaffolds a gitignored .dwp/ for plans and drafts. For large repos the onboard sub-skill uses a plan-driven path: it completes reconnaissance, then emits an onboarding Deep Work Plan. Nothing is templated; everything is adapted to your repository.',
+          'Invoke the onboard sub-skill and let the agent reason about the actual repo — its stack, package manager, and real validation commands. It generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents and .cursor → .agents symlinks), wires thin dwp-* commands, and scaffolds a gitignored .dwp/ for plans. For large repos the onboard sub-skill uses a plan-driven path: it completes reconnaissance, then emits an onboarding Deep Work Plan. Nothing is templated; everything is adapted to your repository.',
         commands: ['/deepworkplan-onboard'],
       },
       {

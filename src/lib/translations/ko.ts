@@ -187,7 +187,7 @@ export const ko: SiteTranslations = {
         {
           title: 'DWP 스킬을 설치하고 .dwp/를 구성합니다',
           description:
-            'Deep Work Plan 스킬을 연결하고 계획과 초안을 위한 gitignore된 .dwp/ 폴더를 생성한 뒤, 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고, 필요하면 devcontainer 지원 같은 선택형 애드온을 추가로 얹습니다.',
+            'Deep Work Plan 스킬을 연결하고 계획을 위한 gitignore된 .dwp/ 폴더를 생성한 뒤, 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고, 필요하면 devcontainer 지원 같은 선택형 애드온을 추가로 얹습니다.',
         },
       ],
     },
@@ -264,7 +264,7 @@ export const ko: SiteTranslations = {
         {
           label: 'Git 네이티브, 재개 가능, .dwp/',
           detail:
-            '데몬도 외부 상태도 없습니다. 계획과 초안은 gitignore된 .dwp/ 폴더에 저장되며, 컨텍스트가 넘쳐도 git만으로 어떤 작업이든 재개됩니다.',
+            '데몬도 외부 상태도 없습니다. 계획은 gitignore된 .dwp/ 폴더에 저장되며, 컨텍스트가 넘쳐도 git만으로 어떤 작업이든 재개됩니다.',
         },
       ],
     },
@@ -765,7 +765,7 @@ export const ko: SiteTranslations = {
       {
         title: '리포지토리 온보딩 실행',
         description:
-          'onboard 하위 스킬을 호출하고 에이전트가 실제 리포지토리 — 스택, 패키지 관리자, 실제 검증 명령 — 를 추론하게 하세요. 그런 다음 AGENTS.md, docs/ 지식 베이스, 모듈별 문서, 교차 에이전트용 .agents/ 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)을 생성하고, 얇은 dwp-* 명령을 연결하며, 계획과 초안을 위한 gitignore된 .dwp/를 구성합니다. 대규모 리포지토리의 경우 onboard 하위 스킬은 계획 주도 경로를 사용합니다: 정찰을 완료한 뒤 온보딩 Deep Work Plan을 생성합니다. 어떤 것도 템플릿이 아니라 모두 리포지토리에 맞게 적응됩니다.',
+          'onboard 하위 스킬을 호출하고 에이전트가 실제 리포지토리 — 스택, 패키지 관리자, 실제 검증 명령 — 를 추론하게 하세요. 그런 다음 AGENTS.md, docs/ 지식 베이스, 모듈별 문서, 교차 에이전트용 .agents/ 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)을 생성하고, 얇은 dwp-* 명령을 연결하며, 계획을 위한 gitignore된 .dwp/를 구성합니다. 대규모 리포지토리의 경우 onboard 하위 스킬은 계획 주도 경로를 사용합니다: 정찰을 완료한 뒤 온보딩 Deep Work Plan을 생성합니다. 어떤 것도 템플릿이 아니라 모두 리포지토리에 맞게 적응됩니다.',
         commands: ['/deepworkplan-onboard'],
       },
       {

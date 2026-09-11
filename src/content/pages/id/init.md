@@ -63,8 +63,8 @@ Pahami dahulu repositori, lalu usulkan apa yang akan Anda lakukan.
   ubah, dan apa pun yang ada yang Anda usulkan untuk direkonsiliasi atau diganti — lalu **minta pengguna mengonfirmasi**
   sebelum melanjutkan. Untuk repositori besar (banyak modul atau banyak artefak yang perlu dihasilkan),
   sub-skill onboard menggunakan jalur berbasis rencana: menyelesaikan pengintaian, menghasilkan
-  `AGENTS.md`, lalu mengeluarkan Deep Work Plan onboarding di bawah `.dwp/drafts/` dan mendelegasikan
-  ke `/dwp-refine` → `/dwp-execute` → `/dwp-resume` sesuai kebutuhan.
+  `AGENTS.md`, lalu mengeluarkan Deep Work Plan onboarding di bawah `.dwp/plans/` dan mendelegasikan
+  ke `/dwp-execute` → `/dwp-resume` sesuai kebutuhan.
 
 ## Kepercayaan dan verifikasi (sebelum Anda memasang)
 
@@ -98,6 +98,8 @@ sampai sudah diperiksa.
 - **Laporkan masalah.** Laporkan masalah keamanan **secara pribadi melalui pelaporan kerentanan GitHub** di repositori yang relevan — `https://github.com/DailybotHQ/deepworkplan-skill/security` atau `https://github.com/DailybotHQ/deepworkplan-website/security` — bukan sebagai issue publik. Lihat juga `SECURITY.md` setiap repositori, `https://deepworkplan.com/.well-known/security.txt`, dan halaman kepercayaan `https://deepworkplan.com/trust`.
 
 ## 2. Pasang skill Deep Work Plan
+
+> **Jalur singkat.** Skill ini membawa onboarding-nya sendiri, jadi cukup memasangnya. Setelah terpasang, jalankan `/deepworkplan-onboard` dan ia akan melakukan semua yang dijelaskan bagian 3–7: pengintaian, `AGENTS.md`, `docs/`, dokumentasi per modul, `.agents/`, tinjauan lokal yang diwajibkan, addon opsional, dan swa-uji akhir. Lanjutkan membaca untuk mengetahui apa yang akan dilakukan sub-skill itu — dan jalur cadangan ketika sebuah agen tidak dapat memuat skill.
 
 Pasang skill agar agent repositori ini dapat merencanakan dan mengeksekusi pekerjaan terstruktur. Ia membawa sebuah router
 ditambah delapan sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, dan `author`.
@@ -145,7 +147,7 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
 5. **Skill DWP, disesuaikan.** Skill yang terpasang adalah mesinnya; kit milik repositori sendiri
    (skills, agents, commands) harus **dipikirkan untuk repo ini** — tidak pernah menyalin-tempel kit
    repositori lain.
-6. **`.dwp/` + `tmp/`.** Siapkan `.dwp/` yang di-gitignore dengan `plans/` dan `drafts/`, ditambah ruang
+6. **`.dwp/` + `tmp/`.** Siapkan `.dwp/` yang di-gitignore dengan `plans/`, ditambah ruang
    scratch `tmp/` — keduanya ditambahkan ke `.gitignore` secara non-destruktif (tambahkan, jangan pernah menulis ulang).
 
 ## 4. Pasang tinjauan lokal yang wajib, lalu tawarkan addon opt-in
@@ -188,7 +190,7 @@ tetap selaras dengan apa yang ada di disk.
 
 Hasilkan Deep Work Plan untuk tugas apa pun dan jalankan tugas demi tugas:
 
-- `/dwp-create <goal>` — uraikan sebuah tujuan menjadi tugas berurutan dan bernomor dengan validation gate.
+- `/dwp-create <tujuan>` — mengubah sebuah tujuan menjadi rencana yang dapat dieksekusi. Sejak standar 2.4.0 sebuah rencana punya dua format: **Lite**, yang catatan tugasnya berada inline di README rencana, untuk pekerjaan kecil dan terbatas; dan **Full**, satu berkas per tugas, untuk pekerjaan berjangka panjang. Keduanya membawa kontrak yang sama — id tugas yang stabil, permukaan tersentuh, kriteria penerimaan, gerbang validasi, bukti penyelesaian, dan satu Final Review — sehingga Lite hanya lebih murah direpresentasikan, bukan lebih lemah. Tambahkan `lite` atau `full` untuk memaksa format dan `trust` untuk memateraikan tanpa ronde tinjauan; tanpa preferensi, DWP merekomendasikan satu dan menjelaskan alasannya. Rencana Lite dipromosikan dengan `/dwp-refine promote`.
 - `/dwp-execute` — eksekusi rencana tugas demi tugas, perbarui kemajuan dan validasi setiap gate.
 - `/dwp-status` — laporkan kemajuan tanpa membuat perubahan.
 - `/dwp-refine` — tambah, hapus, atau susun ulang tugas sambil mempertahankan pekerjaan yang selesai.
@@ -214,7 +216,7 @@ lalu konfirmasikan:
 - [ ] `.agents/` ada dengan `agents/`, `commands/` (delegator `dwp-*` tipis yang mereferensikan skill,
       bukan alur yang disalin), `skills/`, dan sebuah katalog yang sesuai dengan apa yang ada di disk;
       `.claude → .agents` dan `.cursor → .agents` me-resolve.
-- [ ] `.dwp/` ada, di-gitignore, dan memiliki `plans/` dan `drafts/`; `tmp/` ada dan di-gitignore.
+- [ ] `.dwp/` ada, di-gitignore, dan memiliki `plans/`; `tmp/` ada dan di-gitignore.
 - [ ] Konten pengguna yang ada dipertahankan atau direkonsiliasi dengan persetujuan — tidak ada yang dihancurkan secara diam-diam.
 - [ ] Anda dapat menghasilkan sebuah Deep Work Plan dan mengeksekusinya tugas demi tugas, memvalidasi setiap gate.
 
