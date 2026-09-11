@@ -1,7 +1,7 @@
 ---
 title: 附加组件
 description: "DWP 附加组件：四个可选扩展（devcontainer、Dailybot、dependency-upgrade、design-system）、必备的 AI Diff Reviewer 本地审查及其可选 CI 层面、附加组件合约，以及套件相关概念（skills、agents、presets）说明。"
-order: 5
+order: 6
 lang: zh
 section: Addons
 ---

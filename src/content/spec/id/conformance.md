@@ -1,7 +1,7 @@
 ---
 title: Conformance
 description: "Definisi normatif sebuah repositori konforman DWP yang AI-first: artefak yang HARUS dan SEBAIKNYA dimilikinya, apa yang membuat rencana terbentuk baik, dan cara memverifikasinya."
-order: 6
+order: 7
 lang: id
 section: Conformance
 ---

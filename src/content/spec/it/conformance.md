@@ -1,7 +1,7 @@
 ---
 title: Conformità
 description: "La definizione normativa di un repository conforme a DWP e AI-first: gli artefatti che DEVE e DOVREBBE avere, cosa rende un piano ben formato e come verificarlo."
-order: 6
+order: 7
 lang: it
 section: Conformance
 ---

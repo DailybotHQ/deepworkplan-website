@@ -11,9 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP specification
 
-**Version 2.3.0. Status: Stable.** This document is the normative specification for the Deep Work Plan (DWP) methodology. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
+**Version 2.4.0. Status: Stable.** This document is the normative specification for the Deep Work Plan (DWP) methodology. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
-> **Additive in this revision, no breaking changes.** (1) The **Touched Surface** section — the contract between what a task changes and what must be validated, with gate selection by risk class (isolated / seam / shared-core / unknown); (2) full validation becomes a **final-state requirement** run in the plan's single mandatory **Final Review**, with explicit evidence-reuse rules; (3) **task-local skills decisions** move into the owning task, and the Executive Report becomes **optional, on request**; (4) a **mode-aware create flow** — trust mode materializes directly while keeping the analysis and quality checks; and (5) an explicit **compatibility matrix**: plans and repositories from earlier versions remain conformant.
+> **Additive in this revision, no breaking changes.** (1) The **Touched Surface** section — the contract between what a task changes and what must be validated, with gate selection by risk class (isolated / seam / shared-core / unknown); (2) full validation becomes a **final-state requirement** run in the plan's single mandatory **Final Review**, with explicit evidence-reuse rules; (3) **task-local skills decisions** move into the owning task, and the Executive Report becomes **optional, on request**; (4) a **mode-aware create flow** — trust mode materializes directly while keeping the analysis and quality checks; (5) **Lite-first plan materialization** — guided create produces a directly executable Lite plan instead of a non-executable draft, promotable to a Full plan at any point (see [Lite plans](/spec/lite-plans)); and (6) an explicit **compatibility matrix**: plans and repositories from earlier versions remain conformant.
 
 ## Definition
 
@@ -25,19 +25,17 @@ DWP is spec-driven: the plan is the specification, and agents MUST execute again
 
 The `create` flow gathers the objective, context, constraints, and task outline once, performs its **requirements analysis** (scope, dependency ordering between tasks, validation selection from the Touched Surface, proportional-rigor tier), and then materializes according to the mode the developer chose:
 
-- **Guided mode (default).** The flow produces exactly **one** artifact for review: a **refined draft** in `.dwp/drafts/`, with enough structure to approve or request changes in one pass. The plan folder is materialized only after approval.
-- **Trust mode (`trust` / `auto`).** The flow **materializes the plan directly**, without a draft file — the developer waived the intermediate review. The requirements analysis, dependency ordering, and a **plan-quality check** still run: trust waives the *review*, not the *analysis*. A trust-mode plan is recorded as **pre-approved for unattended execution**.
-- **Explicit draft modes.** `refined-draft {name}` and `from-refined-draft {file}` remain available in both modes; a developer who asks for a draft gets one.
+- **Guided mode (default).** The flow materializes a **Lite plan** directly — a compact, already-executable proposal with inline `{#task-N}` task records, reviewable in one pass — and asks the developer to retain it as Lite, promote it to a Full plan, request edits, or stop. No intermediate non-executable draft is produced.
+- **Trust mode (`trust` / `auto`).** The flow **materializes the chosen representation** (Lite, or Lite followed immediately by promotion to Full) directly, with no review step — the developer waived it. The requirements analysis, dependency ordering, and a **plan-quality check** still run: trust waives the *review*, not the *analysis*. A trust-mode plan is recorded as **pre-approved for unattended execution**.
 
-In every mode the flow never produces an intermediate non-refined draft as a separate reviewable step.
+Both modes decide the plan's format (Lite or Full) as part of the same requirements analysis, never as an afterthought. See [Lite plans](/spec/lite-plans) for the full representation, creation-and-selection, and promotion lifecycle.
 
 ## Plan structure
 
-A plan MUST be a directory under `.dwp/plans/` named `PLAN_<slug>/`. The directory MUST contain:
+A plan MUST be a directory under `.dwp/plans/` named `PLAN_<slug>/`, in one of two representations:
 
-- `README.md` — plan overview, goal, task table, and status.
-- One file per task, named `<n>.task_<slug>.md`.
-- `PROGRESS.md` — a running log of execution.
+- **Full.** The directory MUST contain `README.md` (plan overview, goal, task table, and status), one file per task named `<n>.task_<slug>.md`, and `PROGRESS.md` (a running log of execution).
+- **Lite.** Compact, fully executable task records live inline in `README.md` behind stable `{#task-N}` anchors instead of separate task files — each record still carries a goal, Touched Surface, acceptance criteria, validation, and completion log. `PROGRESS.md` is still REQUIRED. A Lite plan MAY be promoted to Full at any point. See [Lite plans](/spec/lite-plans) for the full lifecycle rather than duplicating it here.
 
 A plan MAY additionally carry the machine-readable state layer: `manifest.json` (static identity, written once at materialization) and `state.json` (live per-task execution state). The state layer is RECOMMENDED for new plans and REQUIRED for unattended execution and for agent workspaces without git. See [Plan state](/spec/plan-state).
 

@@ -1,7 +1,7 @@
 ---
 title: Відповідність
 description: "Нормативне визначення відповідного DWP, AI-first репозиторію: артефакти, які він MUST та SHOULD мати, що робить план коректним і як це перевірити."
-order: 6
+order: 7
 lang: uk
 section: Conformance
 ---

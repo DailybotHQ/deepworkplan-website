@@ -1,7 +1,7 @@
 ---
 title: Modules complémentaires
 description: "Addons DWP : quatre extensions optionnelles (devcontainer, Dailybot, dependency-upgrade, design-system), la revue locale AI Diff Reviewer requise avec sa surface CI optionnelle, contrat d’addon et concepts du kit."
-order: 5
+order: 6
 lang: fr
 section: Addons
 ---

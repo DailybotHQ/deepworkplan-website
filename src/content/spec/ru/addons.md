@@ -1,7 +1,7 @@
 ---
 title: Аддоны
 description: "Аддоны DWP: четыре опциональных расширения (devcontainer, Dailybot, dependency-upgrade, design-system), обязательный локальный обзор AI Diff Reviewer с опциональной CI-поверхностью, контракт аддона и понятия kit."
-order: 5
+order: 6
 lang: ru
 section: Addons
 ---

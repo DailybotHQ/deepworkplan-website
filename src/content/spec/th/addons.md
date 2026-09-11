@@ -1,7 +1,7 @@
 ---
 title: ส่วนเสริม
 description: "addon ของ DWP: สี่ส่วนขยายแบบเลือกใช้ (devcontainer, Dailybot, dependency-upgrade, design-system), การตรวจสอบในเครื่องของ AI Diff Reviewer ที่จำเป็นพร้อมพื้นผิว CI แบบเลือกใช้, สัญญา addon และแนวคิด kit"
-order: 5
+order: 6
 lang: th
 section: Addons
 ---

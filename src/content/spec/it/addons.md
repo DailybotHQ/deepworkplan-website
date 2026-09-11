@@ -1,7 +1,7 @@
 ---
 title: Add-on
 description: "Addon DWP: quattro estensioni opzionali (devcontainer, Dailybot, dependency-upgrade, design-system), la revisione locale AI Diff Reviewer richiesta con la sua superficie CI opzionale, contratto degli addon e concetti del kit."
-order: 5
+order: 6
 lang: it
 section: Addons
 ---

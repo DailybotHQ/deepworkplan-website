@@ -1,7 +1,7 @@
 ---
 title: Add-on
 description: "Addon DWP: bốn phần mở rộng tùy chọn (devcontainer, Dailybot, dependency-upgrade, design-system), đánh giá cục bộ AI Diff Reviewer bắt buộc kèm bề mặt CI tùy chọn, hợp đồng addon và khái niệm kit."
-order: 5
+order: 6
 lang: vi
 section: Addons
 ---

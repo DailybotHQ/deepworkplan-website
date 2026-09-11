@@ -11,9 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Spécification DWP
 
-**Version 2.3.0. Statut : stable.** Ce document est la spécification normative de la méthodologie Deep Work Plan (DWP). Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
+**Version 2.4.0. Statut : stable.** Ce document est la spécification normative de la méthodologie Deep Work Plan (DWP). Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 
-> **Additif dans cette révision, sans changement de rupture.** (1) La section **Surface touchée** — le contrat entre ce qu'une tâche modifie et ce qui doit être validé, avec sélection de la porte par classe de risque (isolée / couture / partagée-cœur / inconnue) ; (2) la validation complète devient une **exigence d'état final** exécutée dans l'unique **Final Review** obligatoire du plan, avec des règles explicites de réutilisation des preuves ; (3) les **décisions de skills par tâche** rejoignent la tâche qui les motive, et l'Executive Report devient **optionnel, sur demande** ; (4) un **flux `create` conscient du mode** — le mode trust matérialise directement tout en conservant l'analyse et les contrôles de qualité ; et (5) une **matrice de compatibilité** explicite : les plans et dépôts des versions antérieures restent conformes.
+> **Additif dans cette révision, sans changement de rupture.** (1) La section **Surface touchée** — le contrat entre ce qu'une tâche modifie et ce qui doit être validé, avec sélection de la porte par classe de risque (isolée / couture / partagée-cœur / inconnue) ; (2) la validation complète devient une **exigence d'état final** exécutée dans l'unique **Final Review** obligatoire du plan, avec des règles explicites de réutilisation des preuves ; (3) les **décisions de skills par tâche** rejoignent la tâche qui les motive, et l'Executive Report devient **optionnel, sur demande** ; (4) un **flux `create` conscient du mode** — le mode trust matérialise directement tout en conservant l'analyse et les contrôles de qualité ; (5) **matérialisation Lite-first des plans** — le create guidé produit directement un plan Lite exécutable au lieu d'une ébauche non exécutable, promouvable en plan Full à tout moment (voir [Plans Lite](/spec/lite-plans)) ; et (6) une **matrice de compatibilité** explicite : les plans et dépôts des versions antérieures restent conformes.
 
 ## Définition
 
@@ -25,19 +25,17 @@ DWP est piloté par la spécification : le plan est la spécification, et les ag
 
 Le flux `create` recueille une seule fois l'objectif, le contexte, les contraintes et l'esquisse des tâches, effectue son **analyse des exigences** (périmètre, ordonnancement des dépendances entre tâches, sélection de la validation à partir de la Surface touchée, niveau de rigueur proportionnelle), puis matérialise selon le mode choisi par le développeur :
 
-- **Mode guidé (par défaut).** Le flux produit exactement **un** artefact à relire : une **ébauche affinée** dans `.dwp/drafts/`, avec assez de structure pour approuver ou demander des changements en une seule passe. Le dossier du plan n'est matérialisé qu'après approbation.
-- **Mode trust (`trust` / `auto`).** Le flux **matérialise le plan directement**, sans fichier d'ébauche — le développeur a renoncé à la relecture intermédiaire. L'analyse des exigences, l'ordonnancement des dépendances et un **contrôle de qualité du plan** s'exécutent toujours : trust renonce à la *relecture*, pas à l'*analyse*. Un plan en mode trust est enregistré comme **pré-approuvé pour une exécution sans surveillance**.
-- **Modes d'ébauche explicites.** `refined-draft {name}` et `from-refined-draft {file}` restent disponibles dans les deux modes ; un développeur qui demande une ébauche l'obtient.
+- **Mode guidé (par défaut).** Le flux matérialise un **plan Lite** directement — une proposition compacte et déjà exécutable avec des enregistrements de tâche `{#task-N}` en ligne, relisible en une seule passe — et demande au développeur de le conserver en Lite, de le promouvoir en plan Full, de demander des modifications, ou d'arrêter. Aucune ébauche intermédiaire non exécutable n'est produite.
+- **Mode trust (`trust` / `auto`).** Le flux **matérialise la représentation choisie** (Lite, ou Lite suivi immédiatement d'une promotion vers Full) directement, sans étape de relecture — le développeur y a renoncé. L'analyse des exigences, l'ordonnancement des dépendances et un **contrôle de qualité du plan** s'exécutent toujours : trust renonce à la *relecture*, pas à l'*analyse*. Un plan en mode trust est enregistré comme **pré-approuvé pour une exécution sans surveillance**.
 
-Dans tous les modes, le flux ne produit jamais d'ébauche intermédiaire non affinée comme étape relisible distincte.
+Les deux modes décident du format du plan (Lite ou Full) dans le cadre de la même analyse des exigences, jamais après coup. Voir [Plans Lite](/spec/lite-plans) pour le cycle de vie complet de représentation, de création-et-sélection, et de promotion.
 
 ## Structure du plan
 
-Un plan MUST être un répertoire sous `.dwp/plans/` nommé `PLAN_<slug>/`. Le répertoire MUST contenir :
+Un plan MUST être un répertoire sous `.dwp/plans/` nommé `PLAN_<slug>/`, selon l'une de deux représentations :
 
-- `README.md` — vue d'ensemble du plan, objectif, tableau des tâches et statut.
-- Un fichier par tâche, nommé `<n>.task_<slug>.md`.
-- `PROGRESS.md` — un journal d'exécution continu.
+- **Full.** Le répertoire MUST contenir `README.md` (vue d'ensemble du plan, objectif, tableau des tâches et statut), un fichier par tâche nommé `<n>.task_<slug>.md`, et `PROGRESS.md` (un journal d'exécution continu).
+- **Lite.** Des enregistrements de tâche compacts et totalement exécutables vivent en ligne dans `README.md` derrière des ancres stables `{#task-N}` au lieu de fichiers de tâche séparés — chaque enregistrement porte toujours un objectif, une Surface touchée, des critères d'acceptation, une validation et un Completion & Log. `PROGRESS.md` reste REQUIRED. Un plan Lite MAY être promu en Full à tout moment. Voir [Plans Lite](/spec/lite-plans) pour le cycle de vie complet plutôt que de le dupliquer ici.
 
 Un plan MAY également porter la couche d'état lisible par machine : `manifest.json` (identité statique, écrit une fois à la matérialisation) et `state.json` (état d'exécution en direct par tâche). La couche d'état est RECOMMENDED pour les nouveaux plans et REQUIRED pour l'exécution sans surveillance et pour les espaces de travail d'agents sans git. Voir [État du plan](/spec/plan-state).
 

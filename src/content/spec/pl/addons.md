@@ -1,7 +1,7 @@
 ---
 title: Dodatki
 description: "Dodatki DWP: cztery opcjonalne rozszerzenia (devcontainer, Dailybot, dependency-upgrade, design-system), wymagany lokalny przegląd AI Diff Reviewer z opcjonalną powierzchnią CI, kontrakt i pojęcia kitu."
-order: 5
+order: 6
 lang: pl
 section: Addons
 ---

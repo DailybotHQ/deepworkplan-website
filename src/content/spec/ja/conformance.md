@@ -1,7 +1,7 @@
 ---
 title: 適合性
 description: "DWP に適合した AI-first リポジトリの規範的な定義。備えなければならない（MUST）／備えるべき（SHOULD）成果物、計画がよく形成されているとはどういうことか、そしてその検証方法。"
-order: 6
+order: 7
 lang: ja
 section: Conformance
 ---

@@ -1,7 +1,7 @@
 ---
 title: Add-ons
 description: "DWP-Addons: vier optionale Erweiterungen (devcontainer, Dailybot, dependency-upgrade, design-system), die erforderliche lokale AI-Diff-Reviewer-Überprüfung mit optionaler CI-Oberfläche, Addon-Vertrag und Kit-Konzepte."
-order: 5
+order: 6
 lang: de
 section: Addons
 ---

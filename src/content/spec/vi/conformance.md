@@ -1,7 +1,7 @@
 ---
 title: Tuân thủ
 description: "Định nghĩa quy phạm về một repository tuân thủ DWP, AI-first: các thành phần nó PHẢI và NÊN có, điều gì làm một kế hoạch chỉnh dạng, và cách kiểm chứng nó."
-order: 6
+order: 7
 lang: vi
 section: Conformance
 ---

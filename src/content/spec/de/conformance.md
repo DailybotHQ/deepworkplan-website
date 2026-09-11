@@ -1,7 +1,7 @@
 ---
 title: Konformität
 description: "Die normative Definition eines DWP-konformen, AI-first Repositorys: die Artefakte, die es haben MUSS und SOLLTE, was einen Plan wohlgeformt macht und wie man es verifiziert."
-order: 6
+order: 7
 lang: de
 section: Conformance
 ---

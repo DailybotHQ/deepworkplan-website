@@ -1,7 +1,7 @@
 ---
 title: 적합성
 description: "DWP 적합, AI-first 리포지토리의 규범적 정의: 반드시 그리고 권장으로 갖춰야 하는 산출물, 무엇이 계획을 잘 구성되게 하는지, 그리고 검증 방법."
-order: 6
+order: 7
 lang: ko
 section: Conformance
 ---

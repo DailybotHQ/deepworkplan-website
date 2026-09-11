@@ -1,7 +1,7 @@
 ---
 title: 애드온
 description: "DWP 애드온: 네 가지 옵트인 확장(devcontainer, Dailybot, dependency-upgrade, design-system), 선택적 CI 표면을 갖는 필수 AI Diff Reviewer 로컬 리뷰, 애드온 계약 및 키트 개념을 설명합니다."
-order: 5
+order: 6
 lang: ko
 section: Addons
 ---

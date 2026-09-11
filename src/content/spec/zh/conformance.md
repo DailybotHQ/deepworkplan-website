@@ -1,7 +1,7 @@
 ---
 title: 符合性
 description: "对一个符合 DWP、AI-first 代码仓库的规范性定义：它 MUST 与 SHOULD 拥有的产物、什么使一份计划结构良好，以及如何验证它。"
-order: 6
+order: 7
 lang: zh
 section: Conformance
 ---

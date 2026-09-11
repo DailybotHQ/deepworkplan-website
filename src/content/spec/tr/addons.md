@@ -1,7 +1,7 @@
 ---
 title: Eklentiler
 description: "DWP eklentileri: dört isteğe bağlı uzantı (devcontainer, Dailybot, dependency-upgrade, design-system), gerekli AI Diff Reviewer yerel incelemesi ve onun isteğe bağlı CI yüzeyi, eklenti sözleşmesi ve kit kavramları."
-order: 5
+order: 6
 lang: tr
 section: Addons
 ---

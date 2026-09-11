@@ -1,7 +1,7 @@
 ---
 title: Uyumluluk
 description: "DWP uyumlu, AI-first bir deponun normatif tanımı: sahip OLMASI GEREKEN ve OLMALI olan yapılar, bir planı iyi biçimlendiren şey ve onun nasıl doğrulanacağı."
-order: 6
+order: 7
 lang: tr
 section: Conformance
 ---

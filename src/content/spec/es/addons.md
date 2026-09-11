@@ -1,7 +1,7 @@
 ---
 title: Complementos
 description: "Addons de DWP: cuatro opcionales (devcontainer, Dailybot, dependency-upgrade, design-system), la revisión local requerida de AI Diff Reviewer con superficie de CI opcional, contrato de addon y conceptos del kit."
-order: 5
+order: 6
 lang: es
 section: Addons
 ---

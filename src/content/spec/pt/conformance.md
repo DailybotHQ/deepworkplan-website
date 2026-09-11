@@ -1,7 +1,7 @@
 ---
 title: Conformidade
 description: "A definição normativa de um repositório AI-first, conforme ao DWP: os artefatos que ele DEVE e DEVERIA ter, o que torna um plano bem formado e como verificá-lo."
-order: 6
+order: 7
 lang: pt
 section: Conformance
 ---

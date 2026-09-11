@@ -1,7 +1,7 @@
 ---
 title: アドオン
 description: "DWP アドオン：4 つのオプトイン拡張機能（devcontainer、Dailybot、dependency-upgrade、design-system）、必須となった AI Diff Reviewer ローカルレビューとそのオプションの CI サーフェス、アドオン契約、およびキットの基本概念（skills・agents・presets）を説明します。"
-order: 5
+order: 6
 lang: ja
 section: Addons
 ---

@@ -1,7 +1,7 @@
 ---
 title: ความสอดคล้อง
 description: "นิยามเชิงบรรทัดฐานของ repository ที่สอดคล้องกับ DWP และเป็น AI-first: สิ่งประดิษฐ์ที่ต้องมีและควรมี สิ่งที่ทำให้แผนมีรูปแบบที่ถูกต้อง และวิธีตรวจสอบ"
-order: 6
+order: 7
 lang: th
 section: Conformance
 ---

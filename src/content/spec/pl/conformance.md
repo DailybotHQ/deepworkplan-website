@@ -1,7 +1,7 @@
 ---
 title: Zgodność
 description: "Normatywna definicja repozytorium zgodnego z DWP, w pełni AI-first: artefakty, które MUSI i POWINNO mieć, co czyni plan dobrze sformułowanym i jak to zweryfikować."
-order: 6
+order: 7
 lang: pl
 section: Conformance
 ---

@@ -1,14 +1,14 @@
 ---
 title: Plan durumu
 description: "Makine tarafından okunabilir plan durum katmanı: manifest.json ve state.json, kapı kayıtları, bölümsel bellek olarak sonuç kayıtları, uzlaştırma ve ne zaman gerekli olduğu."
-order: 7
+order: 8
 lang: tr
 section: State
 ---
 
 # Plan durumu
 
-**Sürüm 1.0. Durum: Kararlı.** Bu belge, Deep Work Plan metodolojisinin makine tarafından okunabilir plan durum katmanını belirtir. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
+**Sürüm 1.1. Durum: Kararlı.** Bu belge, Deep Work Plan metodolojisinin makine tarafından okunabilir plan durum katmanını belirtir. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 
 İki JSON yapısı — `manifest.json` (planın statik kimliği) ve `state.json` (doğrulama kapısı sonuçları dahil canlı, görev bazında yürütme durumu) — her planın Markdown dosyalarının yanında TASIYABİLECEĞİ ve gözetimsiz yürütmenin (bkz. [Ajan protokolü](/spec/agent-protocol#execution-profiles)) ile git içermeyen çalışma alanlarının (bkz. [Arketipler](/spec/archetypes) §3) TAŞIMAK ZORUNDA OLDUĞU yapılardır.
 
@@ -49,12 +49,13 @@ Her iki dosya da atomik olarak YAZILMALIDIR: aynı dizinde geçici bir dosyaya y
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.3.0",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
+  "spec_version": "2.4.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
+  "plan_format": "full",
   "created_at": "2026-06-09T14:00:00Z",
   "created_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "tags": ["backend", "payments"],
@@ -63,11 +64,13 @@ Her iki dosya da atomik olarak YAZILMALIDIR: aynı dizinde geçici bir dosyaya y
 }
 ```
 
-`schema`, `spec_version`, `name`, `archetype`, `rigor`, `created_at` ve `task_count` ZORUNLUDUR.
+`schema`, `spec_version`, `name`, `archetype`, `rigor`, `created_at`, `task_count` ve `plan_format` ZORUNLUDUR.
 
 `archetype`, `individual`, `orchestrator-hub` veya `agent-workspace` değerlerinden biri OLMALIDIR.
 
 `rigor`, `micro`, `standard` veya `deep` değerlerinden biri OLMALIDIR (bkz. [Orantılı titizlik](/spec/dwp-specification#proportional-rigor)).
+
+`plan_format`, oluşturma sırasında seçilen temsil olan `lite` veya `full` değerlerinden biri OLMALIDIR (bkz. [Lite planlar](/spec/lite-plans)). Manifest düzeyinde değiştirilemezdir: Lite'tan Full'a daha sonraki bir yükseltme, manifestoyu yeniden yazarak değil, `state.json`'da kaydedilir.
 
 `parent_plan`, bir alt planı orkestratör planıyla ilişkilendirir (`{repo}:{plan_name}` veya `null`).
 
@@ -77,17 +80,21 @@ Her iki dosya da atomik olarak YAZILMALIDIR: aynı dizinde geçici bir dosyaya y
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v1.json",
+  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
   "plan": "PLAN_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",
   "completed_count": 2,
   "task_count": 7,
+  "format": "full",
+  "materialization": "ready",
+  "approval": "approved",
+  "promotion": null,
   "tasks": [
     {
       "id": 1,
-      "file": "1.task_webhook_endpoint.md",
+      "locator": { "kind": "file", "value": "1.task_webhook_endpoint.md" },
       "title": "Create webhook endpoint",
       "status": "completed",
       "started_at": "2026-06-09T14:10:00Z",
@@ -111,7 +118,7 @@ Her iki dosya da atomik olarak YAZILMALIDIR: aynı dizinde geçici bir dosyaya y
     },
     {
       "id": 3,
-      "file": "3.task_retry_queue.md",
+      "locator": { "kind": "file", "value": "3.task_retry_queue.md" },
       "title": "Add retry queue",
       "status": "in_progress",
       "started_at": "2026-06-09T16:30:00Z",
@@ -128,9 +135,33 @@ Her iki dosya da atomik olarak YAZILMALIDIR: aynı dizinde geçici bir dosyaya y
 }
 ```
 
+Bir Lite planın görev girdileri, ayrı bir dosya yerine görevin `README.md` içindeki çapasına işaret eden bir `inline` locator kullanır — girdi hakkındaki her şey (gates, outcome, status) aynı şekilde çalışmaya devam eder:
+
+```json
+{
+  "format": "lite",
+  "materialization": "ready",
+  "approval": "pre_approved",
+  "promotion": null,
+  "tasks": [
+    {
+      "id": 2,
+      "locator": { "kind": "inline", "value": "#task-2" },
+      "title": "Add retry queue",
+      "status": "pending",
+      "gates": []
+    }
+  ]
+}
+```
+
+### Biçim, somutlaştırma, onay ve yükseltme
+
+`format`, manifestonun `plan_format` alanını yansıtan `lite` veya `full` değerlerinden biri OLMALIDIR — ancak manifestodan farklı olarak burada değiştirilebilirdir, çünkü bir Lite plan daha sonra Full'a YÜKSELTİLEBİLİR. `materialization`, `materializing` (plan klasörü yazılıyor), `ready` (somutlaştırma tamamlandı) veya `promoting` (bir Lite'tan Full'a yükseltme sürüyor) değerlerinden biri OLMALIDIR. `approval`, `pending`, `approved`, `pre_approved` değerlerinden biri OLMALIDIR; bu şemada İSTEĞE BAĞLIDIR, böylece kaydedilmeden önce yazılmış bir plan hâlâ geçerli sayılır — yoksa, README'nin `Approval` satırı değer olarak kabul edilir ve ikisi de yoksa `pending` kabul edilir. `promotion`, bir yükseltme dışında `null`'dır veya `materialization` `promoting` iken yükseltmenin amacını ve hedef görevlerini kaydeden bir nesnedir. Bu alanların kodladığı tam yaşam döngüsü için bkz. [Lite planlar](/spec/lite-plans).
+
 ### Görev girdileri
 
-Plandaki her görev dosyasının `tasks` içinde numarasıyla (`id`) ve dosya adıyla (`file`) anahtarlanmış tam olarak bir girdisi OLMALIDIR.
+Her görev — bir Full planda ayrı bir dosya, ya da bir Lite planda inline bir `{#task-N}` kaydı — `tasks` içinde, numarasıyla (`id`) ve `locator`'ıyla anahtarlanmış tam olarak bir girdiye sahip OLMALIDIR. `locator.kind`, `file` (Full — `value` görevin dosya adıdır) veya `inline` (Lite — `value` görevin çapasıdır, `#task-N`) OLMALIDIR.
 
 `status`, `pending`, `in_progress`, `completed`, `blocked` veya `skipped` değerlerinden biri OLMALIDIR. `skipped` yalnızca kullanıcı `refine` aracılığıyla görevi açıkça kapsam dışına bıraktığında geçerlidir; `state.json`, işi sessizce atlamak için KULLANILMAMALDIR.
 
@@ -166,4 +197,4 @@ Yürüten ajan dışındaki araçlar her iki JSON dosyasını da salt okunur ola
 
 ## Şema sürümleme
 
-Her iki şema da URL ile sürümlüdür (`/v1.json`). Bir sürüm içinde ekleyici alanlar izinlidir; bir alanı yeniden adlandırmak veya yeniden yazmak, spec değişiklik günlüğünde bir geçiş notu ile birlikte `/v2.json` gerektirir. Manifest'teki `spec_version` alanı, planın altında oluşturulduğu DWP spec sürümünü sabitler; kurulu spec'inden daha yeni bir planla karşılaşan bir ajan, tahmin yapmak yerine bunu BELİRTMELİDİR.
+Her iki şema da URL ile sürümlüdür. Bir sürüm içinde ekleyici alanlara izin verilir; bir alanı yeniden adlandırmak veya yeniden yazmak, yeni bir şema sürümü ve spec değişiklik günlüğünde bir geçiş notu gerektirir. Bu revizyon her iki şema için de `/v2.json`'u tanıtır: görev girdisinin `file` alanı tipli bir `locator`'a dönüşür (`{"kind": "file" | "inline", "value": ...}`), manifesto `plan_format` kazanır ve durum dosyası `format`, `materialization`, `approval` ve `promotion` kazanır — birlikte Lite planların ihtiyaç duyduğu alanlar (bkz. [Lite planlar](/spec/lite-plans)). `/v1.json` manifestoları ve durum dosyaları geçerli kalır ve asla sessizce v2'ye yeniden yazılmaz; bir `refine` oturumu birini kasıtlı olarak göç ETTİREBİLİR. Manifestodaki `spec_version` alanı, planın altında oluşturulduğu DWP spec sürümünü sabitler; kurulu spec'inden daha yeni bir planla karşılaşan bir ajan, tahmin etmek yerine bunu belirtMELİDİR.

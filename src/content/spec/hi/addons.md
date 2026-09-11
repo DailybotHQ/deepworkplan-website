@@ -1,7 +1,7 @@
 ---
 title: ऐडऑन
 description: "DWP ऐडऑन: चार ऑप्ट-इन विस्तार (devcontainer, Dailybot, dependency-upgrade, design-system), आवश्यक AI Diff Reviewer स्थानीय समीक्षा अपनी वैकल्पिक CI सतह के साथ, ऐडऑन अनुबंध और kit अवधारणाएँ।"
-order: 5
+order: 6
 lang: hi
 section: Addons
 ---

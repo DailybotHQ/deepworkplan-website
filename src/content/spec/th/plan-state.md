@@ -1,14 +1,14 @@
 ---
 title: สถานะแผน
 description: "ชั้นสถานะแผนที่เครื่องอ่านได้: manifest.json และ state.json บันทึก gate บันทึกผลลัพธ์ในฐานะหน่วยความจำเชิงลำดับเหตุการณ์ การปรับประสานงาน และเมื่อใดที่จำเป็น"
-order: 7
+order: 8
 lang: th
 section: State
 ---
 
 # สถานะแผน
 
-**เวอร์ชัน 1.0. สถานะ: เสถียร** เอกสารนี้ระบุชั้นสถานะแผนที่เครื่องอ่านได้ของระเบียบวิธี Deep Work Plan คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
+**เวอร์ชัน 1.1. สถานะ: เสถียร** เอกสารนี้ระบุชั้นสถานะแผนที่เครื่องอ่านได้ของระเบียบวิธี Deep Work Plan คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
 
 สิ่งประดิษฐ์ JSON สองชิ้น — `manifest.json` (เอกลักษณ์คงที่ของแผน) และ `state.json` (สถานะการดำเนินงานต่อหนึ่งงานแบบสด รวมถึงผลลัพธ์ validation gate) — ที่ทุกแผน MAY พกไว้ร่วมกับไฟล์ markdown และที่การดำเนินงานแบบไม่มีผู้ดูแล (ดู [โปรโตคอลของเอเจนต์](/spec/agent-protocol#execution-profiles)) และ workspace ที่ไม่มี git (ดู [Archetype](/spec/archetypes) §3) MUST พก
 
@@ -49,12 +49,13 @@ section: State
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.3.0",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
+  "spec_version": "2.4.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
+  "plan_format": "full",
   "created_at": "2026-06-09T14:00:00Z",
   "created_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "tags": ["backend", "payments"],
@@ -63,11 +64,13 @@ section: State
 }
 ```
 
-`schema`, `spec_version`, `name`, `archetype`, `rigor`, `created_at` และ `task_count` REQUIRED
+`schema`, `spec_version`, `name`, `archetype`, `rigor`, `created_at`, `task_count` และ `plan_format` REQUIRED
 
 `archetype` MUST เป็นหนึ่งใน `individual`, `orchestrator-hub`, `agent-workspace`
 
 `rigor` MUST เป็นหนึ่งใน `micro`, `standard`, `deep` (ดู [ความเข้มงวดตามสัดส่วน](/spec/dwp-specification#proportional-rigor))
+
+`plan_format` MUST เป็นหนึ่งใน `lite`, `full` — คือรูปแบบที่ถูกเลือกไว้ตอนสร้าง (ดู [แผน Lite](/spec/lite-plans)) มันเป็นค่าคงที่ในระดับ manifest: การเลื่อนขั้นจาก Lite เป็น Full ในภายหลังถูกบันทึกไว้ใน `state.json` ไม่ใช่ด้วยการเขียน manifest ใหม่
 
 `parent_plan` เชื่อมแผนลูกกับแผน orchestrator ของมัน (`{repo}:{plan_name}` หรือ `null`)
 
@@ -77,17 +80,21 @@ section: State
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v1.json",
+  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
   "plan": "PLAN_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",
   "completed_count": 2,
   "task_count": 7,
+  "format": "full",
+  "materialization": "ready",
+  "approval": "approved",
+  "promotion": null,
   "tasks": [
     {
       "id": 1,
-      "file": "1.task_webhook_endpoint.md",
+      "locator": { "kind": "file", "value": "1.task_webhook_endpoint.md" },
       "title": "Create webhook endpoint",
       "status": "completed",
       "started_at": "2026-06-09T14:10:00Z",
@@ -111,7 +118,7 @@ section: State
     },
     {
       "id": 3,
-      "file": "3.task_retry_queue.md",
+      "locator": { "kind": "file", "value": "3.task_retry_queue.md" },
       "title": "Add retry queue",
       "status": "in_progress",
       "started_at": "2026-06-09T16:30:00Z",
@@ -128,9 +135,33 @@ section: State
 }
 ```
 
+รายการงานของแผน Lite ใช้ locator แบบ `inline` ที่ชี้ไปยัง anchor ของงานนั้นใน `README.md` แทนที่จะเป็นไฟล์แยกต่างหาก — ส่วนที่เหลือของรายการ (gate, ผลลัพธ์, สถานะ) ทำงานแบบเดียวกันทุกประการ:
+
+```json
+{
+  "format": "lite",
+  "materialization": "ready",
+  "approval": "pre_approved",
+  "promotion": null,
+  "tasks": [
+    {
+      "id": 2,
+      "locator": { "kind": "inline", "value": "#task-2" },
+      "title": "Add retry queue",
+      "status": "pending",
+      "gates": []
+    }
+  ]
+}
+```
+
+### format, materialization, approval และ promotion
+
+`format` MUST เป็นหนึ่งใน `lite`, `full` และสะท้อน `plan_format` ของ manifest — แต่แก้ไขได้ที่นี่ ต่างจาก manifest เพราะแผน Lite MAY เลื่อนขั้นเป็น Full ในภายหลัง `materialization` MUST เป็นหนึ่งใน `materializing` (โฟลเดอร์แผนกำลังถูกเขียน), `ready` (materialization เสร็จสมบูรณ์) หรือ `promoting` (การเลื่อนขั้นจาก Lite เป็น Full กำลังดำเนินอยู่) `approval` MUST เป็นหนึ่งใน `pending`, `approved`, `pre_approved` มันเป็น OPTIONAL ใน schema นี้ เพื่อให้แผนที่เขียนขึ้นก่อนที่ฟิลด์นี้จะถูกบันทึกยังคงผ่านการตรวจสอบ — เมื่อมันไม่มีอยู่ ให้ถือว่าแถว `Approval` ของ README เป็นค่านั้น และเป็น `pending` เมื่อไม่มีทั้งสองอย่าง `promotion` เป็น `null` นอกช่วงการเลื่อนขั้น หรือเป็น object ที่บันทึกความตั้งใจและงานปลายทางของการเลื่อนขั้น ขณะที่ `materialization` เป็น `promoting` ดูวงจรชีวิตเต็มรูปแบบที่ฟิลด์เหล่านี้เข้ารหัสไว้ได้ที่ [แผน Lite](/spec/lite-plans)
+
 ### รายการงาน
 
-ไฟล์งานทุกไฟล์ในแผน MUST มีรายการหนึ่งรายการใน `tasks` โดยระบุด้วยหมายเลข (`id`) และชื่อไฟล์ (`file`)
+ทุกงาน — ไม่ว่าจะเป็นไฟล์แยกต่างหากในแผน Full หรือบันทึกแบบ inline `{#task-N}` ในแผน Lite — MUST มีรายการหนึ่งรายการใน `tasks` พอดี โดยระบุด้วยหมายเลข (`id`) และ `locator` ของมัน `locator.kind` MUST เป็น `file` (Full — `value` คือชื่อไฟล์ของงาน) หรือ `inline` (Lite — `value` คือ anchor ของงาน, `#task-N`)
 
 `status` MUST เป็นหนึ่งใน `pending`, `in_progress`, `completed`, `blocked`, `skipped` `skipped` ใช้ได้เฉพาะเมื่อผู้ใช้ลบงานออกจากขอบเขตอย่างชัดเจนผ่าน `refine` เท่านั้น `state.json` MUST NOT ถูกใช้เพื่อข้ามงานอย่างเงียบ ๆ
 
@@ -166,4 +197,4 @@ sub-skill `verify` MUST ถือว่าการเบี่ยงเบน�
 
 ## การกำหนดเวอร์ชัน schema
 
-ทั้งสอง schema มีเวอร์ชันตาม URL (`/v1.json`) ฟิลด์เพิ่มเติมได้รับอนุญาตภายในเวอร์ชัน การเปลี่ยนชื่อหรือเปลี่ยนประเภทฟิลด์ต้องใช้ `/v2.json` และหมายเหตุการย้ายใน changelog ของ spec ฟิลด์ `spec_version` ใน manifest ปักหมุดเวอร์ชัน DWP spec ที่แผนถูกสร้างขึ้น เอเจนต์ที่พบแผนที่ใหม่กว่า spec ที่ติดตั้งอยู่ SHOULD บอกเช่นนั้นแทนที่จะเดา
+ทั้งสอง schema มีเวอร์ชันตาม URL ฟิลด์เพิ่มเติมได้รับอนุญาตภายในเวอร์ชัน การเปลี่ยนชื่อหรือเปลี่ยนประเภทฟิลด์ต้องใช้ schema เวอร์ชันใหม่และหมายเหตุการย้ายใน changelog ของ spec การแก้ไขฉบับนี้นำ `/v2.json` มาใช้กับทั้งสอง schema: ฟิลด์ `file` ของรายการงานกลายเป็น `locator` ที่มีชนิดข้อมูล (`{"kind": "file" | "inline", "value": ...}`) manifest ได้ `plan_format` เพิ่มมา และไฟล์สถานะได้ `format`, `materialization`, `approval` และ `promotion` เพิ่มมา — รวมกันแล้วคือฟิลด์ที่แผน Lite ต้องการ (ดู [แผน Lite](/spec/lite-plans)) manifest และไฟล์สถานะแบบ `/v1.json` ยังคงใช้งานได้และจะไม่ถูกเขียนทับเป็น v2 อย่างเงียบ ๆ เลย เซสชัน `refine` MAY ย้ายมันอย่างตั้งใจ ฟิลด์ `spec_version` ใน manifest ปักหมุดเวอร์ชัน DWP spec ที่แผนถูกสร้างขึ้น เอเจนต์ที่พบแผนที่ใหม่กว่า spec ที่ติดตั้งอยู่ SHOULD บอกเช่นนั้นแทนที่จะเดา

@@ -1,7 +1,7 @@
 ---
 title: Conformité
 description: "La définition normative d’un dépôt conforme DWP, AI-first : les artefacts qu’il MUST et SHOULD posséder, ce qui rend un plan bien formé, et comment le vérifier."
-order: 6
+order: 7
 lang: fr
 section: Conformance
 ---

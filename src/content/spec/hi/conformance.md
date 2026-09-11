@@ -1,7 +1,7 @@
 ---
 title: अनुरूपता
 description: "एक DWP-अनुरूप, AI-first रिपॉज़िटरी की मानक परिभाषा: वे आर्टिफ़ैक्ट जो इसके पास MUST और SHOULD हों, क्या एक योजना को सुगठित बनाता है, और इसे कैसे सत्यापित करें।"
-order: 6
+order: 7
 lang: hi
 section: Conformance
 ---

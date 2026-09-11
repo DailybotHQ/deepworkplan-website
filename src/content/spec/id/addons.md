@@ -1,7 +1,7 @@
 ---
 title: Add-on
 description: "Addon DWP: empat ekstensi opsional (devcontainer, Dailybot, dependency-upgrade, design-system), tinjauan lokal AI Diff Reviewer yang wajib dengan permukaan CI opsionalnya, kontrak addon, dan konsep kit."
-order: 5
+order: 6
 lang: id
 section: Addons
 ---

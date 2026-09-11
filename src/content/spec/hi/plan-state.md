@@ -1,14 +1,14 @@
 ---
 title: योजना-स्थिति
 description: "मशीन-पठनीय योजना-स्थिति परत: manifest.json और state.json, गेट रिकॉर्ड, एपिसोडिक मेमोरी के रूप में परिणाम रिकॉर्ड, पुनर्मेल, और यह कब आवश्यक है।"
-order: 7
+order: 8
 lang: hi
 section: State
 ---
 
 # योजना-स्थिति
 
-**संस्करण 1.0. स्थिति: स्थिर।** यह दस्तावेज़ Deep Work Plan पद्धति की मशीन-पठनीय योजना-स्थिति परत का विनिर्देश करता है। कीवर्ड MUST, MUST NOT, SHOULD, SHOULD NOT और MAY की व्याख्या RFC 2119 में वर्णित अनुसार की जानी है।
+**संस्करण 1.1. स्थिति: स्थिर।** यह दस्तावेज़ Deep Work Plan पद्धति की मशीन-पठनीय योजना-स्थिति परत का विनिर्देश करता है। कीवर्ड MUST, MUST NOT, SHOULD, SHOULD NOT और MAY की व्याख्या RFC 2119 में वर्णित अनुसार की जानी है।
 
 दो JSON आर्टिफ़ैक्ट — `manifest.json` (योजना की स्थिर पहचान) और `state.json` (सत्यापन-गेट परिणामों सहित प्रति-कार्य निष्पादन की सजीव स्थिति) — जो हर योजना अपनी markdown फ़ाइलों के साथ MAY रख सकती है, और जिन्हें अनुपस्थित निष्पादन (देखें [एजेंट प्रोटोकॉल](/spec/agent-protocol#execution-profiles)) और गैर-git कार्यस्थल (देखें [आर्किटाइप](/spec/archetypes) §3) के लिए MUST रखना चाहिए।
 
@@ -49,12 +49,13 @@ v1.1 तक, योजनाएँ केवल-गद्य markdown थीं�
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.3.0",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
+  "spec_version": "2.4.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
+  "plan_format": "full",
   "created_at": "2026-06-09T14:00:00Z",
   "created_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "tags": ["backend", "payments"],
@@ -63,11 +64,13 @@ v1.1 तक, योजनाएँ केवल-गद्य markdown थीं�
 }
 ```
 
-`schema`, `spec_version`, `name`, `archetype`, `rigor`, `created_at`, और `task_count` REQUIRED हैं।
+`schema`, `spec_version`, `name`, `archetype`, `rigor`, `created_at`, `task_count`, और `plan_format` REQUIRED हैं।
 
 `archetype` MUST इनमें से एक होना चाहिए: `individual`, `orchestrator-hub`, `agent-workspace`।
 
 `rigor` MUST इनमें से एक होना चाहिए: `micro`, `standard`, `deep` (देखें [आनुपातिक कठोरता](/spec/dwp-specification#proportional-rigor))।
+
+`plan_format` MUST इनमें से एक होना चाहिए: `lite`, `full` — निर्माण के समय चुना गया प्रतिनिधित्व (देखें [Lite योजनाएँ](/spec/lite-plans))। यह manifest स्तर पर अपरिवर्तनीय है: बाद में Lite से Full में कोई भी प्रोन्नति `state.json` में दर्ज होती है, manifest को फिर से लिखकर कभी नहीं।
 
 `parent_plan` एक चाइल्ड योजना को उसकी ऑर्केस्ट्रेटर योजना से जोड़ता है (`{repo}:{plan_name}`, या `null`)।
 
@@ -77,17 +80,21 @@ v1.1 तक, योजनाएँ केवल-गद्य markdown थीं�
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v1.json",
+  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
   "plan": "PLAN_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",
   "completed_count": 2,
   "task_count": 7,
+  "format": "full",
+  "materialization": "ready",
+  "approval": "approved",
+  "promotion": null,
   "tasks": [
     {
       "id": 1,
-      "file": "1.task_webhook_endpoint.md",
+      "locator": { "kind": "file", "value": "1.task_webhook_endpoint.md" },
       "title": "Create webhook endpoint",
       "status": "completed",
       "started_at": "2026-06-09T14:10:00Z",
@@ -111,7 +118,7 @@ v1.1 तक, योजनाएँ केवल-गद्य markdown थीं�
     },
     {
       "id": 3,
-      "file": "3.task_retry_queue.md",
+      "locator": { "kind": "file", "value": "3.task_retry_queue.md" },
       "title": "Add retry queue",
       "status": "in_progress",
       "started_at": "2026-06-09T16:30:00Z",
@@ -128,9 +135,33 @@ v1.1 तक, योजनाएँ केवल-गद्य markdown थीं�
 }
 ```
 
+Lite योजना की कार्य-प्रविष्टियाँ अलग फ़ाइल के बजाय `README.md` में कार्य के एंकर की ओर इशारा करने वाले `inline` locator का उपयोग करती हैं — प्रविष्टि के बारे में बाकी सब कुछ (gates, outcome, status) उसी तरह काम करता है:
+
+```json
+{
+  "format": "lite",
+  "materialization": "ready",
+  "approval": "pre_approved",
+  "promotion": null,
+  "tasks": [
+    {
+      "id": 2,
+      "locator": { "kind": "inline", "value": "#task-2" },
+      "title": "Add retry queue",
+      "status": "pending",
+      "gates": []
+    }
+  ]
+}
+```
+
+### Format, materialization, approval, और promotion
+
+`format` MUST इनमें से एक होना चाहिए: `lite`, `full` और manifest के `plan_format` को प्रतिबिंबित करता है — यहाँ यह परिवर्तनीय है, manifest के विपरीत, क्योंकि एक Lite योजना MAY बाद में Full में प्रोन्नत हो। `materialization` MUST इनमें से एक होना चाहिए: `materializing` (योजना फ़ोल्डर लिखा जा रहा है), `ready` (मैटेरियलाइज़ेशन पूर्ण है), या `promoting` (एक Lite-से-Full प्रोन्नति प्रगति में है)। `approval` MUST इनमें से एक होना चाहिए: `pending`, `approved`, `pre_approved`; यह इस स्कीमा में OPTIONAL है ताकि इसके दर्ज होने से पहले लिखी गई कोई योजना अब भी सत्यापित हो — जब यह अनुपस्थित हो, README की `Approval` पंक्ति को मान मानें, और दोनों अनुपस्थित होने पर `pending` मानें। `promotion` किसी प्रोन्नति के बाहर `null` है, या यह एक ऑब्जेक्ट है जो प्रोन्नति के इरादे और लक्ष्य कार्यों को दर्ज करता है जबकि `materialization` का मान `promoting` होता है। इन फ़ील्ड्स द्वारा एनकोड किए गए पूर्ण जीवनचक्र के लिए देखें [Lite योजनाएँ](/spec/lite-plans)।
+
 ### कार्य प्रविष्टियाँ
 
-योजना की हर कार्य फ़ाइल का `tasks` में ठीक एक प्रविष्टि MUST होनी चाहिए, जो उसके नंबर (`id`) और फ़ाइलनाम (`file`) द्वारा कुंजीबद्ध हो।
+हर कार्य — Full योजना में एक अलग फ़ाइल, या Lite योजना में एक इनलाइन `{#task-N}` रिकॉर्ड — का `tasks` में ठीक एक प्रविष्टि MUST होनी चाहिए, जो उसके नंबर (`id`) और उसके `locator` द्वारा कुंजीबद्ध हो। `locator.kind` MUST `file` होना चाहिए (Full — `value` कार्य का फ़ाइलनाम है) या `inline` (Lite — `value` कार्य का एंकर है, `#task-N`)।
 
 `status` MUST इनमें से एक होना चाहिए: `pending`, `in_progress`, `completed`, `blocked`, `skipped`। `skipped` तभी मान्य है जब उपयोगकर्ता ने `refine` के माध्यम से स्पष्ट रूप से कार्य को दायरे से हटाया हो; `state.json` MUST NOT काम को चुपचाप छोड़ने के लिए उपयोग किया जाना चाहिए।
 
@@ -166,4 +197,4 @@ markdown MUST हर असहमति जीतनी चाहिए। य�
 
 ## स्कीमा संस्करण-निर्धारण
 
-दोनों स्कीमा URL द्वारा संस्करणबद्ध हैं (`/v1.json`)। एक संस्करण के भीतर योगात्मक फ़ील्ड की अनुमति है; किसी फ़ील्ड का नाम बदलने या पुनः-टाइप करने के लिए `/v2.json` और spec changelog में एक माइग्रेशन नोट की आवश्यकता है। manifest में `spec_version` फ़ील्ड वह DWP spec संस्करण पिन करता है जिसके अंतर्गत योजना बनाई गई थी; अपने स्थापित spec से नई योजना से सामना होने वाले एजेंट को SHOULD अनुमान लगाने के बजाय यह कहना चाहिए।
+दोनों स्कीमा URL द्वारा संस्करणबद्ध हैं। एक संस्करण के भीतर योगात्मक फ़ील्ड की अनुमति है; किसी फ़ील्ड का नाम बदलने या पुनः-टाइप करने के लिए एक नए स्कीमा संस्करण और spec changelog में एक माइग्रेशन नोट की आवश्यकता है। यह संशोधन दोनों स्कीमा के लिए `/v2.json` पेश करता है: कार्य-प्रविष्टि की `file` फ़ील्ड एक टाइप्ड `locator` (`{"kind": "file" | "inline", "value": ...}`) बन जाती है, manifest को `plan_format` मिलता है, और state फ़ाइल को `format`, `materialization`, `approval`, और `promotion` मिलते हैं — साथ मिलकर वे फ़ील्ड जो Lite योजनाओं को चाहिए (देखें [Lite योजनाएँ](/spec/lite-plans))। `/v1.json` manifest और state फ़ाइलें मान्य बनी रहती हैं और कभी चुपचाप v2 में फिर से नहीं लिखी जातीं; एक `refine` सत्र किसी एक को जानबूझकर माइग्रेट कर MAY। manifest में `spec_version` फ़ील्ड वह DWP spec संस्करण पिन करता है जिसके अंतर्गत योजना बनाई गई थी; अपने स्थापित spec से नई योजना से सामना होने वाले एजेंट को SHOULD अनुमान लगाने के बजाय यह कहना चाहिए।

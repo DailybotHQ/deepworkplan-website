@@ -1,14 +1,14 @@
 ---
 title: Plan state
 description: "机器可读的计划状态层：manifest.json 与 state.json、关卡记录、作为情节记忆的 outcome 记录、协调机制，以及何时需要该层。"
-order: 7
+order: 8
 lang: zh
 section: State
 ---
 
 # Plan state
 
-**版本 1.0。状态：稳定。** 本文档规定了 Deep Work Plan 方法论的机器可读计划状态层。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
+**版本 1.1。状态：稳定。** 本文档规定了 Deep Work Plan 方法论的机器可读计划状态层。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
 两个 JSON 产物——`manifest.json`（计划的静态标识）与 `state.json`（包含验证关卡结果的实时逐任务执行状态）——每份计划 MAY 将其与 Markdown 文件一并携带，而无人值守执行（参见 [代理协议](/spec/agent-protocol#execution-profiles)）与无 git 的工作区（参见 [原型](/spec/archetypes) §3）MUST 携带。
 
@@ -49,12 +49,13 @@ Markdown 计划仍是**人类可读的事实来源**。JSON 层是一份**派生
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.3.0",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
+  "spec_version": "2.4.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
+  "plan_format": "full",
   "created_at": "2026-06-09T14:00:00Z",
   "created_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "tags": ["backend", "payments"],
@@ -63,11 +64,13 @@ Markdown 计划仍是**人类可读的事实来源**。JSON 层是一份**派生
 }
 ```
 
-`schema`、`spec_version`、`name`、`archetype`、`rigor`、`created_at` 与 `task_count` 为 REQUIRED。
+`schema`、`spec_version`、`name`、`archetype`、`rigor`、`created_at`、`task_count` 与 `plan_format` 为 REQUIRED。
 
 `archetype` MUST 为 `individual`、`orchestrator-hub`、`agent-workspace` 之一。
 
 `rigor` MUST 为 `micro`、`standard`、`deep` 之一（参见 [比例严格度](/spec/dwp-specification#proportional-rigor)）。
+
+`plan_format` MUST 为 `lite`、`full` 之一——即创建时所选择的形态（参见 [Lite 计划](/spec/lite-plans)）。它在清单层面是不可变的：后续从 Lite 到 Full 的晋升记录在 `state.json` 中，绝不通过重写清单来完成。
 
 `parent_plan` 将子计划链接至其编排者计划（`{repo}:{plan_name}`，或 `null`）。
 
@@ -77,17 +80,21 @@ Markdown 计划仍是**人类可读的事实来源**。JSON 层是一份**派生
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v1.json",
+  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
   "plan": "PLAN_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",
   "completed_count": 2,
   "task_count": 7,
+  "format": "full",
+  "materialization": "ready",
+  "approval": "approved",
+  "promotion": null,
   "tasks": [
     {
       "id": 1,
-      "file": "1.task_webhook_endpoint.md",
+      "locator": { "kind": "file", "value": "1.task_webhook_endpoint.md" },
       "title": "Create webhook endpoint",
       "status": "completed",
       "started_at": "2026-06-09T14:10:00Z",
@@ -111,7 +118,7 @@ Markdown 计划仍是**人类可读的事实来源**。JSON 层是一份**派生
     },
     {
       "id": 3,
-      "file": "3.task_retry_queue.md",
+      "locator": { "kind": "file", "value": "3.task_retry_queue.md" },
       "title": "Add retry queue",
       "status": "in_progress",
       "started_at": "2026-06-09T16:30:00Z",
@@ -128,9 +135,33 @@ Markdown 计划仍是**人类可读的事实来源**。JSON 层是一份**派生
 }
 ```
 
+一份 Lite 计划的任务条目使用 `inline` 定位符，指向该任务在 `README.md` 中的锚点，而非单独的文件——条目的其余部分（关卡、outcome、状态）工作方式完全相同：
+
+```json
+{
+  "format": "lite",
+  "materialization": "ready",
+  "approval": "pre_approved",
+  "promotion": null,
+  "tasks": [
+    {
+      "id": 2,
+      "locator": { "kind": "inline", "value": "#task-2" },
+      "title": "Add retry queue",
+      "status": "pending",
+      "gates": []
+    }
+  ]
+}
+```
+
+### 格式、物化、批准与晋升
+
+`format` MUST 为 `lite`、`full` 之一，并与清单的 `plan_format` 保持一致——但此处可变，与清单不同，因为一份 Lite 计划 MAY 之后晋升为 Full。`materialization` MUST 为 `materializing`（计划文件夹正在写入）、`ready`（物化已完成）或 `promoting`（一次 Lite 到 Full 的晋升正在进行）之一。`approval` MUST 为 `pending`、`approved`、`pre_approved` 之一；它在本模式中是 OPTIONAL 的，使得在其被记录之前写入的计划仍然符合规范——当它缺失时，将 README 的 `Approval` 行视为其值，若两者皆无则视为 `pending`。`promotion` 在晋升之外为 `null`，或者在 `materialization` 为 `promoting` 期间，是一个记录晋升意图与目标任务的对象。这些字段所编码的完整生命周期参见 [Lite 计划](/spec/lite-plans)。
+
 ### 任务条目
 
-计划中的每个任务文件 MUST 在 `tasks` 中恰好有一条记录，以其编号（`id`）和文件名（`file`）为键。
+每项任务——在 Full 计划中是单独的文件，在 Lite 计划中是内联的 `{#task-N}` 记录——MUST 在 `tasks` 中恰好有一条记录，以其编号（`id`）与其 `locator` 为键。`locator.kind` MUST 为 `file`（Full——`value` 是任务的文件名）或 `inline`（Lite——`value` 是任务的锚点，`#task-N`）。
 
 `status` MUST 为 `pending`、`in_progress`、`completed`、`blocked`、`skipped` 之一。`skipped` 仅在用户通过 `refine` 明确将任务从范围中移除时有效；`state.json` MUST NOT 被用于静默跳过工作。
 
@@ -166,4 +197,4 @@ Markdown MUST 在每次分歧中获胜。若 `state.json` 显示任务 4 已 `co
 
 ## 模式版本控制
 
-两个模式均通过 URL 进行版本控制（`/v1.json`）。版本内允许添加字段；重命名或重新定义字段类型需要 `/v2.json` 及规范变更日志中的迁移说明。清单中的 `spec_version` 字段固定了计划创建时所依据的 DWP 规范版本；遇到比其已安装规范更新的计划时，代理 SHOULD 明确说明，而非猜测。
+两个模式均通过 URL 进行版本控制。版本内允许添加字段；重命名或重新定义字段类型需要新的模式版本以及规范变更日志中的迁移说明。本次修订为两个模式引入了 `/v2.json`：任务条目的 `file` 字段变为一个带类型的 `locator`（`{"kind": "file" | "inline", "value": ...}`），清单新增 `plan_format`，状态文件新增 `format`、`materialization`、`approval` 与 `promotion`——这些字段共同满足了 Lite 计划的需要（参见 [Lite 计划](/spec/lite-plans)）。`/v1.json` 的清单与状态文件仍然有效，绝不会被静默重写为 v2；一次 `refine` 会话 MAY 有意迁移它。清单中的 `spec_version` 字段固定了计划创建时所依据的 DWP 规范版本；遇到比其已安装规范更新的计划时，代理 SHOULD 明确说明，而非猜测。
