@@ -25,7 +25,7 @@ Dalam ledakan singkat, agen coding mengesankan. Serahkan misi jangka panjang —
 
 Deep Work Plan menjawabnya dengan pengembangan berbasis spesifikasi: rencana yang tahan lama, tugas atomik, dan gerbang verifikasi yang harus dilalui agen. Pekerjaan tetap dapat diverifikasi — dan agen mana pun dapat melanjutkannya lintas sesi.
 
-Dan karena konteks adalah sumber daya paling langka bagi agen Anda, harness dirancang untuk efisiensi token: instruksi dimuat progresif, verifikasi hanya menyentuh yang berubah, dan setiap tugas belajar secara lokal — kerja panjang tetap terjangkau.
+Dan karena konteks adalah sumber daya paling langka bagi agen Anda, harness dirancang untuk efisiensi token: instruksi dimuat progresif, verifikasi hanya menyentuh yang berubah, dan setiap tugas belajar secara lokal — kerja panjang tetap terjangkau. Rencana itu sendiri berskala dengan cara yang sama: rencana Lite untuk perbaikan berbatas, rencana Full untuk pekerjaan yang berlangsung berjam-jam — format selalu mengikuti cakupan pekerjaan, bukan sebaliknya.
 ---
 
 ## Manusia memegang kemudi. Agent mengeksekusi.

@@ -122,7 +122,7 @@ export const en: SiteTranslations = {
       answer:
         'Deep Work Plan answers with spec-driven development: a durable plan, atomic tasks, and validation gates the agent must pass. Done stops being a feeling — it becomes verifiable, reviewable evidence.',
       efficiency:
-        'And because context is the scarcest resource your agent has, the harness is engineered for token efficiency: instructions load progressively, validation touches only what changed, and every task learns locally — so long-horizon work stays affordable.',
+        'And because context is the scarcest resource your agent has, the harness is engineered for token efficiency: instructions load progressively, validation touches only what changed, and every task learns locally — so long-horizon work stays affordable. The plan itself scales the same way: a Lite plan for a bounded fix, a Full plan for work that spans hours, the format always following the scope of the work, not the other way around.',
       illustrationAlt:
         'An engraved diptych: a ship adrift in fog beside jagged rocks on one side, and the same ship steady on a plotted course toward a harbor beacon on the other.',
     },

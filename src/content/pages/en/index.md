@@ -25,7 +25,7 @@ A coding agent performs beautifully on short tasks. But hand it a long-horizon m
 
 Deep Work Plan answers with spec-driven development: a durable plan, atomic tasks, and validation gates the agent must pass. Work stays verifiable — and any agent can resume it across sessions.
 
-And because context is the scarcest resource your agent has, the harness is engineered for token efficiency: instructions load progressively, validation touches only what changed, and every task learns locally — so long-horizon work stays affordable.
+And because context is the scarcest resource your agent has, the harness is engineered for token efficiency: instructions load progressively, validation touches only what changed, and every task learns locally — so long-horizon work stays affordable. The plan itself scales the same way: a Lite plan for a bounded fix, a Full plan for work that spans hours, the format always following the scope of the work, not the other way around.
 ---
 
 ## Humans steer. Agents execute.
