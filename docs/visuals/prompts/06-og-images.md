@@ -603,6 +603,6 @@ Maintain identical proportions, padding, and visual hierarchy. Output a single P
 ## After generating
 
 1. Drop each file into `public/images/og/og-default-<code>.png`.
-2. **Verify file size** is in the 250 – 400 KB range. If your generator outputs heavier PNGs (some tools default to ~2 MB), compress with `pngquant --quality=70-90 --speed=1 -o out.png in.png` or convert via `cwebp` and re-encode. Social platforms (LinkedIn, X, WhatsApp) cache poorly above ~1 MB and may refuse to render previews >2 MB.
+2. **Verify file size** is in the 250 – 400 KB range. Generators routinely output oversized/mis-sized PNGs (~2 MB at non-spec dimensions) — run `pnpm run images:optimize:og` to resize every `og-default*.png` in that directory to 1200×630 and re-compress as a palette PNG in one pass (`scripts/optimize-og-images.mjs`). Social platforms (LinkedIn, X, WhatsApp) cache poorly above ~1 MB and may refuse to render previews >2 MB.
 3. Run `pnpm run build` and grep `dist/<code>/index.html` for `og-default-<code>.png` — the build picks it up automatically through `BaseHead.astro`'s `existsSync` check. No code change is needed.
 4. Spot-check by sharing a `/<lang>/` URL on Facebook/LinkedIn/X debug tools to confirm the correct OG image renders.
