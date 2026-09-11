@@ -1,11 +1,11 @@
 ---
-title: "Репозиторій стає середовищем агента"
-description: "The first official Deep Work Plan release establishes the repository as the agent's working harness."
+title: "DWP v2: репозиторій стає середовищем агента"
+description: "Перший офіційний реліз Deep Work Plan робить сам репозиторій робочим середовищем агента — контекст, захисні правила, перевірка та стан, усе органічно вбудоване в репозиторій."
 date: 2026-07-16
-version: "Official release · foundation"
+version: "v2 · Офіційний реліз"
 kind: foundation
 lang: uk
-order: 2
+order: 3
 featured: false
 sourceLabel: "Skill changelog 2.17.0"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
@@ -18,6 +18,6 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
 ---
 
-Today we are shipping the first official Deep Work Plan release. The repository becomes the harness: it carries the context, guardrails, validation contract, and state an agent needs for reliable long-horizon work.
+Сьогодні ми випускаємо перший офіційний реліз Deep Work Plan. Репозиторій стає середовищем агента: він несе контекст, захисні правила, контракт перевірки та стан, потрібні агенту для надійної тривалої роботи.
 
-This release establishes the foundation for the work ahead. Plans are no longer isolated documents; they are part of a repository-native system that can be inspected, checked, and continued by compatible agents.
+Цей реліз закладає основу для всього, що буде далі. План більше не є ізольованим документом, переданим одній сесії, — він є частиною системи, органічної для репозиторію, яку будь-який сумісний агент може перевірити, оцінити на відповідність і продовжити точно з того місця, де зупинилася попередня сесія.

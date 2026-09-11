@@ -1,11 +1,11 @@
 ---
-title: "The repository becomes the harness"
-description: "The first official Deep Work Plan release establishes the repository as the agent's working harness."
+title: "DWP v2: the repository becomes the harness"
+description: "The first official Deep Work Plan release makes the repository itself the agent's working harness — context, guardrails, validation, and state, all native to the repo."
 date: 2026-07-16
-version: "Official release · foundation"
+version: "v2 · Official release"
 kind: foundation
 lang: en
-order: 2
+order: 3
 featured: false
 sourceLabel: "Skill changelog 2.17.0"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
@@ -20,4 +20,4 @@ sourceLinks:
 
 Today we are shipping the first official Deep Work Plan release. The repository becomes the harness: it carries the context, guardrails, validation contract, and state an agent needs for reliable long-horizon work.
 
-This release establishes the foundation for the work ahead. Plans are no longer isolated documents; they are part of a repository-native system that can be inspected, checked, and continued by compatible agents.
+This release establishes the foundation for everything that follows. A plan is no longer an isolated document handed to a single session — it is part of a repository-native system that any compatible agent can inspect, check for conformance, and continue exactly where a previous session left off.

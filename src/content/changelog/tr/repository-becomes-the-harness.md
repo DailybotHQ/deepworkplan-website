@@ -1,11 +1,11 @@
 ---
-title: "Depo çalışma ortamına dönüşüyor"
-description: "The first official Deep Work Plan release establishes the repository as the agent's working harness."
+title: "DWP v2: depo çalışma ortamına dönüşüyor"
+description: "İlk resmi Deep Work Plan sürümü, deponun kendisini ajanın çalışma ortamı hâline getiriyor — bağlam, korumalar, doğrulama ve durum artık depoya özgü."
 date: 2026-07-16
-version: "Official release · foundation"
+version: "v2 · Resmi sürüm"
 kind: foundation
 lang: tr
-order: 2
+order: 3
 featured: false
 sourceLabel: "Skill changelog 2.17.0"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
@@ -18,6 +18,6 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
 ---
 
-Today we are shipping the first official Deep Work Plan release. The repository becomes the harness: it carries the context, guardrails, validation contract, and state an agent needs for reliable long-horizon work.
+Bugün ilk resmi Deep Work Plan sürümünü yayınlıyoruz. Depo, çalışma ortamına dönüşüyor: güvenilir, uzun soluklu çalışma için bir ajanın ihtiyaç duyduğu bağlamı, korumaları, doğrulama sözleşmesini ve durumu taşıyor.
 
-This release establishes the foundation for the work ahead. Plans are no longer isolated documents; they are part of a repository-native system that can be inspected, checked, and continued by compatible agents.
+Bu sürüm, bundan sonra gelecek her şeyin temelini atıyor. Bir plan artık tek bir oturuma teslim edilen izole bir belge değil; herhangi bir uyumlu ajanın uygunluğunu denetleyebileceği ve önceki bir oturumun tam olarak bıraktığı yerden devam ettirebileceği depoya özgü bir sistemin parçası.

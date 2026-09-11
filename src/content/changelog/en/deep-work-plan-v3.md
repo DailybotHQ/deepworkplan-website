@@ -1,32 +1,22 @@
 ---
-title: "Deep Work Plan v3: the repository becomes the harness"
-description: "Deep Work Plan v3 strengthens the lifecycle, conformance floor, and review guarantees behind long-horizon agent work."
+title: "DWP v3: token efficiency by construction"
+description: "Deep Work Plan v3 rebuilds the harness around context cost — progressive disclosure, affected-only validation, and a single mandatory Final Review — while raising the trust and conformance floor."
 date: 2026-09-10
-version: "v3 · DWP standard 2.3.0"
+version: "v3 · Token efficiency"
 kind: release
 lang: en
-order: 1
-featured: true
+order: 2
+featured: false
 sourceLabel: "Skill release commit d050474"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a2b7675ce851efb377833b4960367"
 ---
 
-Today we are releasing Deep Work Plan v3. The goal is to keep Deep Work Plan working the way it does today while making it faster to use, clearer to navigate, and valuable for small tasks as well as long-horizon work. The command surface stays familiar, but the contract becomes stronger: new plans end with one mandatory Final Review, the local AI Diff Reviewer joins the baseline, and conformance starts from zero optional addons.
+Today we are releasing Deep Work Plan v3. Context is an agent's scarcest resource, and this release treats that as an engineering problem rather than an informal promise: compress the scaffolding, never the instructions.
 
-The goal of this release is straightforward: make spec-driven development portable by turning the repository itself into the harness. The repository carries the context, guardrails, validation contract, and resumable state that any compatible coding agent can read, without making a focused change feel heavier than the work itself.
+`GUIDE.md` becomes a routing index instead of a document every agent reads in full, so an agent loads only the guidance a given step actually needs. Validation gates are now selected from each task's touched surface instead of re-running the full suite on every change, and creating a plan can go straight to trust mode when a developer already knows what they want, skipping the intermediate review. None of this weakens the gates: it removes repeated reading, redundant context loading, and validation work that does not match what actually changed.
 
-This release follows DWP standard `2.3.0`. It is a skill release: the website and other adopters can carry it independently as they update their own packages.
+Alongside the efficiency work, this release raises the trust floor. One mandatory Final Review replaces the three closing tasks that used to end a plan, the AI Diff Reviewer local review becomes a required baseline component, and conformance now starts from zero optional addons — security and provenance are requirements, not optional polish. `AGENTS.md` records the repository's DWP standard provenance, and legacy plans keep their recorded shape with an explicit migration path instead of being silently rewritten.
 
-## What changed
+This release follows DWP standard `2.3.0`. Instruction-load and replay behavior are measured against a public evaluation ledger, never reported as an invented savings percentage.
 
-- One Final Review replaces the three closing tasks for new plans.
-- The AI Diff Reviewer local review is a required baseline component.
-- `GUIDE.md` becomes a routing index, so agents load only the relevant guidance.
-- `AGENTS.md` records the repository's DWP standard provenance.
-- Legacy plans keep their recorded shape and receive an explicit migration path instead of being silently rewritten.
-
-## Why it matters
-
-This release makes reliability and cost efficiency part of the methodology rather than informal promises. Plans should avoid unnecessary loops, repeated context loading, and validation work that does not match the touched surface, while remaining inspectable in plain files and enforceable through gates. A long-running plan and a small focused task should both get the right amount of structure for the work at hand.
-
-Read the [normative specification](https://deepworkplan.com/spec), explore the [kit](https://deepworkplan.com/kit/), or start adoption from [`/init`](https://deepworkplan.com/init).
+Read the [token-efficiency architecture](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/docs/adr/0001-token-efficiency-architecture.md) and its [evaluation record](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/docs/evaluations/token-efficiency.md), or explore the [normative specification](https://deepworkplan.com/spec) and the [kit](https://deepworkplan.com/kit/).

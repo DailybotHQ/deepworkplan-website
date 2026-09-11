@@ -1,11 +1,11 @@
 ---
-title: "リポジトリがハーネスになる"
-description: "The first official Deep Work Plan release establishes the repository as the agent's working harness."
+title: "DWP v2：リポジトリがハーネスになる"
+description: "Deep Work Plan の最初の正式リリースにより、リポジトリ自体がエージェントの作業用ハーネスになります——コンテキスト、ガードレール、検証、状態のすべてがリポジトリにネイティブに備わります。"
 date: 2026-07-16
-version: "Official release · foundation"
+version: "v2 · 正式リリース"
 kind: foundation
 lang: ja
-order: 2
+order: 3
 featured: false
 sourceLabel: "Skill changelog 2.17.0"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
@@ -18,6 +18,6 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
 ---
 
-Today we are shipping the first official Deep Work Plan release. The repository becomes the harness: it carries the context, guardrails, validation contract, and state an agent needs for reliable long-horizon work.
+本日、Deep Work Plan の最初の正式リリースをお届けします。リポジトリがハーネスになります。信頼できる長時間にわたるエージェントの作業に必要なコンテキスト、ガードレール、検証契約、状態を運びます。
 
-This release establishes the foundation for the work ahead. Plans are no longer isolated documents; they are part of a repository-native system that can be inspected, checked, and continued by compatible agents.
+このリリースは、この先すべての基盤となります。計画はもはや単一のセッションに手渡される孤立したドキュメントではなく、対応するどのエージェントでも検査し、適合性を確認し、前のセッションが終えたところから正確に続行できる、リポジトリにネイティブなシステムの一部になります。

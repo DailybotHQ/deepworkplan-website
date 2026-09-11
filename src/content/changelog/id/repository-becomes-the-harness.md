@@ -1,11 +1,11 @@
 ---
-title: "Repositori menjadi harness"
-description: "The first official Deep Work Plan release establishes the repository as the agent's working harness."
+title: "DWP v2: repositori menjadi harness"
+description: "Rilis resmi pertama Deep Work Plan menjadikan repositori itu sendiri sebagai harness kerja agen — konteks, pagar pengaman, validasi, dan status, semuanya menyatu dengan repositori."
 date: 2026-07-16
-version: "Official release · foundation"
+version: "v2 · Rilis resmi"
 kind: foundation
 lang: id
-order: 2
+order: 3
 featured: false
 sourceLabel: "Skill changelog 2.17.0"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
@@ -18,6 +18,6 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
 ---
 
-Today we are shipping the first official Deep Work Plan release. The repository becomes the harness: it carries the context, guardrails, validation contract, and state an agent needs for reliable long-horizon work.
+Hari ini kami merilis rilis resmi pertama Deep Work Plan. Repositori menjadi harness: ia membawa konteks, pagar pengaman, kontrak validasi, dan status yang dibutuhkan agen untuk bekerja secara andal dalam jangka panjang.
 
-This release establishes the foundation for the work ahead. Plans are no longer isolated documents; they are part of a repository-native system that can be inspected, checked, and continued by compatible agents.
+Rilis ini meletakkan fondasi untuk semua yang akan datang. Sebuah rencana tidak lagi menjadi dokumen terisolasi yang diserahkan ke satu sesi — ia menjadi bagian dari sistem yang menyatu dengan repositori, yang dapat diperiksa kepatuhannya dan dilanjutkan persis dari titik terakhir sesi sebelumnya oleh agen mana pun yang kompatibel.

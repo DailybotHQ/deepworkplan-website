@@ -1,6 +1,7 @@
 import { getCollection } from 'astro:content';
 import type { APIRoute, GetStaticPaths } from 'astro';
 
+import { sortChangelogEntries } from '@/lib/changelog';
 import { getActiveNonDefaultLanguages } from '@/lib/i18n';
 import { serializeChangelogIndexToAgentMarkdown } from '@/lib/markdown-for-agents';
 
@@ -17,7 +18,7 @@ export const GET: APIRoute = async ({ params }) => {
     (candidate) => candidate.data.lang === lang
   );
   const markdown = serializeChangelogIndexToAgentMarkdown(
-    localizedEntries,
+    sortChangelogEntries(localizedEntries),
     lang
   );
   return new Response(markdown, {

@@ -1,15 +1,20 @@
 ---
-title: "From a plan loop to a portable harness"
-description: "DWP grew into a kit for onboarding repositories, checking conformance, and adapting long-horizon work across agents and stacks."
+title: "DWP v1：計画のループからポータブルなハーネスへ"
+description: "Deep Work Plan は、単一の計画作成ループから、トラストと来歴、より幅広いエージェント対応、そしてどのリポジトリでも実行できる適合性チェッカーを備えた、持ち運び可能な導入キットへと進化します。"
 date: 2026-06-12
-version: "Foundation · adoption"
+version: "v1 · 基盤"
 kind: foundation
 lang: ja
-order: 5
+order: 4
 featured: false
 sourceLabel: "Skill changelog 2.3.0–2.16.0"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
 ---
 
-DWP grew into a kit for onboarding repositories, checking conformance, and adapting long-horizon work across agents and stacks.
+これまで Deep Work Plan は、単一のセッション内で一つのエージェントが従う計画作成ループでした。この一連のリリースは、それをリポジトリが自らの条件で導入できるものへと変えます——単一のエージェントと単一のセッションを超えることを目指した、最初のバージョンです。
 
+このスキルはチェックサムによる来歴を備えたトラストステートメントを獲得し、開発者はインストール前に何を読み書きするのかを正確に確認できるようになります。オンボーディングのプリセットと対応するエージェントホストは大幅に広がり、テストの規律はおまけではなく、あらゆるタスクの中核をなす要素になります。適合性チェッカーは、リポジトリが標準を満たしているかどうかを——推測ではなく客観的に——検証できるようにします。状態と再開のプロトコルにより、中断された計画は最初からやり直すのではなく、中断した箇所から再開できます。内部では、`.claude` と `.cursor` の互換性が単一の正規ディレクトリ `.agents` に集約され、対応するすべてのエージェントが同じキットを読み込みます。
+
+これらのリリースは、次の段階に向けた基盤を築きます。リポジトリは単に計画が保存される場所であることをやめ、エージェントの作業用ハーネスになり始めます。
+
+全体の流れについては、[スキルのリリース履歴](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md)を参照してください。
