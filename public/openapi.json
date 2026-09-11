@@ -559,6 +559,72 @@
         }
       }
     },
+    "/.well-known/dwp-trust.json": {
+      "get": {
+        "operationId": "getDwpTrust",
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "Trust, provenance and integrity metadata",
+        "description": "License, repository, skill version, checksum-verification and security-reporting metadata for the Deep Work Plan methodology, website and skill.",
+        "responses": {
+          "200": {
+            "description": "Trust metadata (JSON).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/oauth-authorization-server": {
+      "get": {
+        "operationId": "getOAuthAuthorizationServerMetadata",
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "OAuth authorization server metadata (RFC 8414 / OIDC Discovery, stub)",
+        "description": "Published for agent-readiness compliance. deepworkplan.com has no protected APIs today — endpoints are reserved paths and do not accept real OAuth flows; see /auth.md, which every listed field's agent_auth block points to, for the actual (anonymous, zero-auth) access model.",
+        "responses": {
+          "200": {
+            "description": "Authorization server metadata (JSON).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/oauth-protected-resource": {
+      "get": {
+        "operationId": "getOAuthProtectedResourceMetadata",
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "OAuth protected resource metadata (RFC 9728, stub)",
+        "description": "Published for agent-readiness compliance. deepworkplan.com is a static content site with no OAuth-protected resources today; see /auth.md for the actual (anonymous, zero-auth) access model.",
+        "responses": {
+          "200": {
+            "description": "Protected resource metadata (JSON).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/.well-known/security.txt": {
       "get": {
         "operationId": "getSecurityTxt",

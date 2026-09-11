@@ -25,6 +25,7 @@ How an agent should engage: fetch the [adoption prompt](https://deepworkplan.com
 - [Methodology](https://deepworkplan.com/methodology): what DWP is, its principles, and how to adopt it
 - [Specification](https://deepworkplan.com/spec): the normative DWP standard — task anatomy, validation gates, completion protocol, archetypes, addons
 - [Kit](https://deepworkplan.com/kit): presets, adapters, and commands for installing DWP into a repository
+- [Changelog](https://deepworkplan.com/changelog): a source-backed timeline of DWP releases and design decisions
 - [Examples](https://deepworkplan.com/examples): worked examples of the methodology in practice
 - [Quickstart](https://deepworkplan.com/quickstart): get DWP running in a repo quickly
 - [Compare](https://deepworkplan.com/compare): Deep Work Plan next to spec-driven tools, agent frameworks and vendor plan modes — each on its own terms, sourced and dated
