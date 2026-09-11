@@ -192,6 +192,7 @@ All content MUST exist in every active language:
 - Page wrappers: `src/pages/<slug>.astro` (default-lang) + `src/pages/[lang]/<slug>.astro` (all non-default). One dynamic file covers all 16 non-default languages.
 - Methodology/spec/kit/pages content: `src/content/{methodology,spec,kit,pages}/<lang>/<slug>.md` for every active `<lang>`
 - Translations: every `src/lib/translations/<lang>.ts` file (`pnpm run i18n:check` enforces parity)
+- `.md` sibling **content** (not just existence): `pnpm run md:check` verifies every HTML page has a `.md` file; `pnpm run md:content-check` verifies the `.md` actually carries equivalent content (a similarity signal plus an MDX source-leak detector) — see [Markdown for Agents → Verifying Content Parity](aeo/MARKDOWN_FOR_AGENTS.md#verifying-content-parity-not-just-existence)
 
 ## Social Media (OG + Twitter)
 

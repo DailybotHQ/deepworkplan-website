@@ -157,6 +157,35 @@ Each event captures: bot name (or `"unknown"`), requested path, source, and User
 
 **Performance impact:** Zero for HTML visitors — tracking only fires on markdown requests.
 
+## Verifying Content Parity (not just existence)
+
+`pnpm run md:check` (`scripts/check-md-parity.mjs`) only verifies that a
+`.md` file **exists** at the expected path for every built HTML page — it
+never opens either file, so a `.md` sibling that is empty, stale, or leaks
+raw MDX source still passes that check.
+
+`pnpm run md:content-check` (`scripts/check-md-content-parity.mjs`) checks
+the **content** itself, for every page pair `md:check` covers, across all
+17 active languages:
+
+1. A content-similarity signal — character-trigram Jaccard overlap
+   (script-agnostic, so it works for CJK/Thai too) + a length ratio + a
+   heading-set overlap — flags pages whose Markdown and HTML have
+   diverged (stale content, a truncated mirror, or a genuinely different
+   document).
+2. An MDX source-leak detector — a precise regex check for bare
+   `import … from '…'` lines and unrendered JSX-style component tags
+   left in the Markdown output (a serializer bug, not a content-authoring
+   gap).
+
+Run it after `pnpm run build`, same as `md:check`. It is **advisory**: it
+writes `analysis_results/MD_HTML_CONTENT_PARITY.md` (a summary + a ranked
+worst-offenders list) and a full per-pair CSV, exits `0` regardless of
+findings, and never edits a file. Some flagged pages are **intentional**
+— a collection index page's `.md` may legitimately be a denser standalone
+summary than its card-grid HTML landing page — so treat findings as
+candidates for review, not automatic defects.
+
 ## Maintenance
 
 - **Page Markdown MUST stay in sync with HTML content** — when translation strings (`en.ts`/`es.ts`) or page components (`*Page.astro`) change, update the corresponding files in `src/content/pages/{en,es}/`

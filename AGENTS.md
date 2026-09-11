@@ -317,6 +317,7 @@ pnpm run test:coverage      # Tests with coverage
 pnpm run images:optimize    # Process staged images
 pnpm run md:check           # Verify every HTML page has a matching .md for agents
 pnpm run md:check:strict    # Same as above; exits 1 on missing (for CI)
+pnpm run md:content-check   # Verify the .md actually carries equivalent content (not just exists)
 pnpm run i18n:check         # Verify translation parity across all 17 active languages
 pnpm run i18n:scaffold <code>  # Scaffold strings + content for a new language code
 pnpm run lighthouse         # Lighthouse CI audit (mobile)
