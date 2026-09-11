@@ -26,8 +26,14 @@
  *   node scripts/check-md-content-parity.mjs [--out <path>] [--data <path>]
  */
 
-import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import {
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+} from 'node:fs';
+import { dirname, join } from 'node:path';
 
 const DIST_DIR = join(process.cwd(), 'dist');
 const OUT_ARG_IDX = process.argv.indexOf('--out');
@@ -402,6 +408,7 @@ if (worstOffenders.length === 0) {
 
 report += `Full per-pair data (all ${results.length} pairs): see \`MD_HTML_CONTENT_PARITY_DATA.csv\` alongside this report.\n`;
 
+mkdirSync(dirname(OUT_PATH), { recursive: true });
 writeFileSync(OUT_PATH, report, 'utf-8');
 
 const csvHeader =
@@ -422,6 +429,7 @@ const csvRows = results
     ].join(',')
   )
   .join('\n');
+mkdirSync(dirname(DATA_PATH), { recursive: true });
 writeFileSync(DATA_PATH, `${csvHeader}${csvRows}\n`, 'utf-8');
 
 console.log(
