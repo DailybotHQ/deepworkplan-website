@@ -71,10 +71,11 @@ description: "面向 AI 代理的可执行接入提示：在任意代码仓库�
 - **提议接入计划。** 给出一份简明清单：你将创建的文件、你将
   修改的文件，以及你提议要协调或替换的任何既有内容——然后在继续之前**请用户确认**。
   对于大型仓库（模块众多或需要生成大量产物），onboard 子技能会使用计划驱动的路径：它先完成勘察，
-  生成 `AGENTS.md`，然后在 `.dwp/drafts/` 下发出一份接入 Deep Work Plan，并按需移交给 `/dwp-refine`
-  → `/dwp-execute` → `/dwp-resume`。
+  生成 `AGENTS.md`，然后在 `.dwp/plans/` 下发出一份接入 Deep Work Plan，并按需移交给 `/dwp-execute` → `/dwp-resume`。
 
 ## 2. 安装 Deep Work Plan 技能
+
+> **捷径。** 该 skill 自带接入流程，因此安装它就够了。安装完成后运行 `/deepworkplan-onboard`，它会完成第 3–7 节描述的全部工作：勘察、`AGENTS.md`、`docs/`、按模块的文档、`.agents/`、必需的本地审查、可选插件以及最终自检。继续阅读可了解该子技能将要做什么，以及当智能体无法加载 skill 时的备用路径。
 
 安装技能，让这个仓库的代理能够规划并执行结构化的工作。它附带一个路由器
 外加八个子技能——`create`、`execute`、`refine`、`resume`、`status`、`verify`、`onboard` 与 `author`。
@@ -122,7 +123,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 5. **DWP 技能，已适配。** 已安装的技能是引擎；仓库自己的套件
    （技能、代理、命令）必须**为这个仓库经过推理**——绝非对另一个
    仓库套件的复制粘贴。
-6. **`.dwp/` + `tmp/`。** 搭建一个含 `plans/` 与 `drafts/` 的、被 gitignore 的 `.dwp/`，外加一个 `tmp/`
+6. **`.dwp/` + `tmp/`。** 搭建一个含 `plans/` 的、被 gitignore 的 `.dwp/`，外加一个 `tmp/`
    草稿空间——两者都以非破坏性方式（追加，而非重写）加入 `.gitignore`。
 
 ## 4. 安装必备的本地审查，然后提供可选的附加组件
@@ -150,7 +151,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 为任意任务生成 Deep Work Plan 并逐任务运行它们：
 
-- `/dwp-create <goal>` —— 把一个目标分解为带验证关卡的、编号、连续的任务。
+- `/dwp-create <目标>` —— 把一个目标转化为可执行的计划。自标准 2.4.0 起，计划有两种格式：**Lite**，其任务记录内联存放在计划的 README 中，适用于小而有界的工作；以及 **Full**，每个任务一个文件，适用于长周期工作。两者承载相同的契约——稳定的任务 id、触及面、验收标准、验证门、完成证据和一次最终评审——因此 Lite 的表示成本更低，但并不更弱。加上 `lite` 或 `full` 可强制指定格式，加上 `trust` 可跳过评审轮直接落地；未指定偏好时，DWP 会推荐一种并说明理由。Lite 计划可用 `/dwp-refine promote` 升级。
 - `/dwp-execute` —— 逐任务执行计划，更新进展并验证每一道关卡。
 - `/dwp-status` —— 报告进展而不做任何改动。
 - `/dwp-refine` —— 在保全已完成工作的同时增加、删除或重排任务。
@@ -174,7 +175,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
       测试/lint 配置（非空、非桩代码）；各主要模块都有一个 `README.md`。
 - [ ] `.agents/` 存在，含 `agents/`、`commands/`（轻量 `dwp-*` 委派器，引用技能而非拷贝的流程）、
       `skills/`，以及一份与磁盘上存在之物相一致的目录；`.claude → .agents` 和 `.cursor → .agents` 可解析。
-- [ ] `.dwp/` 存在、被 gitignore，并含 `plans/` 与 `drafts/`；`tmp/` 存在且被 gitignore。
+- [ ] `.dwp/` 存在、被 gitignore，并含 `plans/`；`tmp/` 存在且被 gitignore。
 - [ ] 既有的用户内容在征得同意后被保全或协调——没有任何东西被悄悄销毁。
 - [ ] 你能够生成一份 Deep Work Plan 并逐任务执行它，验证每一道关卡。
 

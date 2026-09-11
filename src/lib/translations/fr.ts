@@ -189,7 +189,7 @@ export const fr: SiteTranslations = {
         {
           title: 'Installe le skill DWP et échafaude .dwp/',
           description:
-            'Branche le skill Deep Work Plan et crée le dossier .dwp/ (ignoré par git) pour les plans et les ébauches, installe la revue locale obligatoire AI Diff Reviewer, puis superpose en option des addons facultatifs comme la prise en charge du devcontainer.',
+            'Branche le skill Deep Work Plan et crée le dossier .dwp/ (ignoré par git) pour les plans, installe la revue locale obligatoire AI Diff Reviewer, puis superpose en option des addons facultatifs comme la prise en charge du devcontainer.',
         },
       ],
     },
@@ -267,7 +267,7 @@ export const fr: SiteTranslations = {
         {
           label: 'Natif git, reprenable, .dwp/',
           detail:
-            'Aucun démon ni état externe. Les plans et les ébauches atterrissent dans un dossier .dwp/ ignoré par git, et toute tâche reprend à partir de git seul — même après un débordement de contexte.',
+            'Aucun démon ni état externe. Les plans atterrissent dans un dossier .dwp/ ignoré par git, et toute tâche reprend à partir de git seul — même après un débordement de contexte.',
         },
       ],
     },
@@ -772,7 +772,7 @@ export const fr: SiteTranslations = {
       {
         title: 'Lancer l’onboarding du dépôt',
         description:
-          'Invoquez le sous-skill onboard et laissez l’agent raisonner sur le dépôt réel — sa stack, son gestionnaire de paquets et ses vraies commandes de validation. Il génère alors AGENTS.md, une base de connaissances docs/, une doc par module et un foyer .agents/ partagé entre agents (avec les liens symboliques .claude → .agents et .cursor → .agents), branche les commandes dwp-* légères et échafaude un .dwp/ ignoré par git pour les plans et les ébauches. Pour les grands dépôts, le sous-skill onboard utilise un chemin piloté par plan : il complète la reconnaissance, puis émet un Deep Work Plan d’intégration. Rien n’est issu d’un modèle ; tout est adapté à votre dépôt.',
+          'Invoquez le sous-skill onboard et laissez l’agent raisonner sur le dépôt réel — sa stack, son gestionnaire de paquets et ses vraies commandes de validation. Il génère alors AGENTS.md, une base de connaissances docs/, une doc par module et un foyer .agents/ partagé entre agents (avec les liens symboliques .claude → .agents et .cursor → .agents), branche les commandes dwp-* légères et échafaude un .dwp/ ignoré par git pour les plans. Pour les grands dépôts, le sous-skill onboard utilise un chemin piloté par plan : il complète la reconnaissance, puis émet un Deep Work Plan d’intégration. Rien n’est issu d’un modèle ; tout est adapté à votre dépôt.',
         commands: ['/deepworkplan-onboard'],
       },
       {

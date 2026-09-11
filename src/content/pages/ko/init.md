@@ -56,8 +56,7 @@ description: "AI 에이전트를 위한 실행 가능한 온보딩 프롬프트:
   파일, 그리고 조정하거나 교체하려는 기존 것 — 그런 다음 진행하기 전에 **사용자에게 확인을 요청**
   하세요. 큰 리포지토리(많은 모듈 또는 생성할 산출물이 많은 경우)의 경우, onboard
   하위 스킬은 계획 주도 경로를 사용합니다: 정찰을 완료하고, `AGENTS.md`를 생성한 다음,
-  `.dwp/drafts/` 아래에 온보딩 Deep Work Plan을 생성하고 필요에 따라 `/dwp-refine` →
-  `/dwp-execute` → `/dwp-resume`에 위임합니다.
+  `.dwp/plans/` 아래에 온보딩 Deep Work Plan을 생성하고 필요에 따라 `/dwp-execute` → `/dwp-resume`에 위임합니다.
 
 ## 신뢰와 검증 (설치하기 전에)
 
@@ -88,6 +87,8 @@ description: "AI 에이전트를 위한 실행 가능한 온보딩 프롬프트:
 - **문제를 신고하세요.** 보안 문제는 해당 리포지토리에서 **GitHub의 취약점 신고** 기능을 통해 비공개로 신고해 주세요 — `https://github.com/DailybotHQ/deepworkplan-skill/security` 또는 `https://github.com/DailybotHQ/deepworkplan-website/security` — 공개 이슈로 신고하지 마세요. 각 리포지토리의 `SECURITY.md`, `https://deepworkplan.com/.well-known/security.txt`, 그리고 신뢰 페이지 `https://deepworkplan.com/trust`도 참고하세요.
 
 ## 2. Deep Work Plan 스킬을 설치하세요
+
+> **지름길.** 이 skill은 자체 온보딩을 포함하고 있으므로 설치만으로 충분합니다. 설치한 뒤 `/deepworkplan-onboard`를 실행하면 3–7절이 설명하는 모든 것을 수행합니다. 정찰, `AGENTS.md`, `docs/`, 모듈별 문서, `.agents/`, 필수 로컬 리뷰, 선택 애드온, 그리고 최종 자체 점검입니다. 해당 서브 스킬이 무엇을 하는지, 그리고 에이전트가 skill을 로드할 수 없을 때의 대체 경로는 아래에서 확인하세요.
 
 이 리포지토리의 에이전트가 구조화된 작업을 계획하고 실행할 수 있도록 스킬을 설치하세요. 라우터와
 여덟 개의 하위 스킬 — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` — 을 제공합니다.
@@ -135,7 +136,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 5. **DWP 스킬, 적응됨.** 설치된 스킬은 엔진이고, 리포지토리 자체의 키트
    (스킬, 에이전트, 명령)는 **이 리포지토리를 위해 추론되어야** 합니다 — 결코 다른
    리포지토리 키트의 복사·붙여넣기여서는 안 됩니다.
-6. **`.dwp/` + `tmp/`.** `plans/`와 `drafts/`를 갖춘 gitignore된 `.dwp/`, 그리고 `tmp/`
+6. **`.dwp/` + `tmp/`.** `plans/`를 갖춘 gitignore된 `.dwp/`, 그리고 `tmp/`
    스크래치 공간을 구성하세요 — 둘 다 `.gitignore`에 비파괴적으로 추가하세요(추가하되 결코 다시 쓰지 마세요).
 
 ## 4. 필수 로컬 리뷰를 설치한 뒤 선택형 애드온을 제안하세요
@@ -168,7 +169,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 
 어떤 작업이든 Deep Work Plan을 생성하고 task 단위로 실행하세요.
 
-- `/dwp-create <goal>` — 목표를 검증 게이트를 갖춘 번호 매겨진 순차 task로 분해합니다.
+- `/dwp-create <목표>` — 목표를 실행 가능한 계획으로 바꿉니다. 표준 2.4.0부터 계획에는 두 가지 형식이 있습니다. **Lite**는 작업 기록이 계획 README 안에 인라인으로 존재하며 작고 경계가 분명한 작업에 적합하고, **Full**은 작업마다 파일 하나를 두어 장기 작업에 적합합니다. 둘 다 동일한 계약을 따릅니다 — 안정적인 작업 id, 접촉 표면, 수용 기준, 검증 게이트, 완료 증거, 그리고 하나의 최종 리뷰. 따라서 Lite는 표현 비용이 낮을 뿐 더 약하지 않습니다. `lite` 또는 `full`을 덧붙이면 형식을 강제하고, `trust`를 덧붙이면 리뷰 라운드 없이 구체화합니다. 선호가 없으면 DWP가 하나를 추천하고 이유를 설명합니다. Lite 계획은 `/dwp-refine promote`로 승격합니다.
 - `/dwp-execute` — 계획을 task 단위로 실행하며, 진행 상황을 갱신하고 각 게이트를 검증합니다.
 - `/dwp-status` — 변경 없이 진행 상황을 보고합니다.
 - `/dwp-refine` — 완료된 작업을 보존하면서 task를 추가, 제거, 재배열합니다.
@@ -192,7 +193,7 @@ CI 호환 기계적 계층인 `bash {skill_dir}/verify/conformance.sh`).
 - [ ] `.agents/`가 `agents/`, `commands/`(복사된 흐름이 아니라 스킬을 참조하는 얇은 `dwp-*`
       위임자), `skills/`, 그리고 디스크에 존재하는 것과 일치하는 카탈로그와 함께 존재하고,
       `.claude → .agents`와 `.cursor → .agents`가 해석된다.
-- [ ] `.dwp/`가 존재하고 gitignore되며 `plans/`와 `drafts/`를 갖고, `tmp/`가 존재하고 gitignore된다.
+- [ ] `.dwp/`가 존재하고 gitignore되며 `plans/`를 갖고, `tmp/`가 존재하고 gitignore된다.
 - [ ] 기존 사용자 콘텐츠가 동의를 받아 보존되거나 조정되었다 — 아무것도 조용히 파괴되지 않았다.
 - [ ] Deep Work Plan을 생성하고 task 단위로 실행하며 각 게이트를 검증할 수 있다.
 

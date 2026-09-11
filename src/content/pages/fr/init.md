@@ -58,7 +58,7 @@ Comprenez d’abord le dépôt, puis proposez ce que vous allez faire.
   modifier, et tout élément existant que vous proposez de réconcilier ou de remplacer — puis **demandez à l’utilisateur de confirmer**
   avant de poursuivre. Pour un dépôt volumineux (de nombreux modules ou de nombreux artefacts à générer), le
   sous-skill onboard utilise un chemin piloté par plan : il complète la reconnaissance, génère `AGENTS.md`, puis
-  émet un Deep Work Plan d'onboarding sous `.dwp/drafts/` et passe le relais à `/dwp-refine` → `/dwp-execute`
+  émet un Deep Work Plan d'onboarding sous `.dwp/plans/` et passe le relais à `/dwp-execute`
   → `/dwp-resume` selon les besoins.
 
 ## Confiance et vérification (avant d'installer)
@@ -93,6 +93,8 @@ qu'il ait été contrôlé.
 - **Signalez un problème.** Signalez les problèmes de sécurité **en privé via le système de signalement de vulnérabilités de GitHub** sur le dépôt concerné — `https://github.com/DailybotHQ/deepworkplan-skill/security` ou `https://github.com/DailybotHQ/deepworkplan-website/security` — et non comme un ticket public. Consultez également le `SECURITY.md` de chaque dépôt, `https://deepworkplan.com/.well-known/security.txt` et la page de confiance `https://deepworkplan.com/trust`.
 
 ## 2. Installer le skill Deep Work Plan
+
+> **Le chemin court.** La skill embarque son propre onboarding : l’installer suffit. Une fois installée, lancez `/deepworkplan-onboard` : elle réalise tout ce que décrivent les sections 3 à 7 — reconnaissance, `AGENTS.md`, `docs/`, documentation par module, `.agents/`, la revue locale requise, les addons optionnels et l’auto-vérification finale. Lisez la suite pour savoir ce que fera cette sous-skill — et pour le chemin de repli quand un agent ne peut pas charger de skills.
 
 Installez le skill pour que les agents de ce dépôt puissent planifier et exécuter un travail structuré. Il fournit un routeur
 accompagné de huit sous-skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard` et `author`.
@@ -140,7 +142,7 @@ méthodologie) au lieu d’écraser — et confirmez avec l’utilisateur avant 
 5. **Le skill DWP, adapté.** Le skill installé est le moteur ; le kit propre au dépôt
    (skills, agents, commandes) doit être **raisonné pour ce dépôt** — jamais un copier-coller du kit
    d’un autre dépôt.
-6. **`.dwp/` + `tmp/`.** Échafaudez un `.dwp/` ignoré par git avec `plans/` et `drafts/`, ainsi qu’un espace de travail
+6. **`.dwp/` + `tmp/`.** Échafaudez un `.dwp/` ignoré par git avec `plans/`, ainsi qu’un espace de travail
    temporaire `tmp/` — tous deux ajoutés au `.gitignore` de manière non destructive (ajouter, jamais réécrire).
 
 ## 4. Installer la revue locale requise, puis proposer les addons facultatifs
@@ -182,7 +184,7 @@ le catalogue `.agents/docs/` synchronisé avec ce qui existe sur disque.
 
 Générez des Deep Work Plans pour n’importe quelle tâche et exécutez-les tâche par tâche :
 
-- `/dwp-create <goal>` — décomposer un objectif en tâches numérotées et séquentielles assorties de portes de validation.
+- `/dwp-create <objectif>` — transforme un objectif en plan exécutable. Depuis le standard 2.4.0, un plan a deux formats : **Lite**, dont les enregistrements de tâche vivent en ligne dans le README du plan, pour un travail petit et borné ; et **Full**, un fichier par tâche, pour un travail de longue haleine. Les deux portent le même contrat — identifiants de tâche stables, surface touchée, critères d’acceptation, portes de validation, preuves d’achèvement et une Revue finale — Lite coûte donc moins cher à représenter sans être plus faible. Ajoutez `lite` ou `full` pour forcer un format et `trust` pour matérialiser sans tour de revue ; sans préférence, DWP en recommande un et explique pourquoi. Un plan Lite se promeut avec `/dwp-refine promote`.
 - `/dwp-execute` — exécuter le plan tâche par tâche, en mettant à jour la progression et en validant chaque porte.
 - `/dwp-status` — rendre compte de la progression sans apporter de changements.
 - `/dwp-refine` — ajouter, retirer ou réordonner des tâches tout en préservant le travail achevé.
@@ -208,7 +210,7 @@ Puis confirmez :
 - [ ] `.agents/` existe avec `agents/`, `commands/` (délégateurs `dwp-*` légers qui référencent le skill,
       pas des flux copiés), `skills/`, et un catalogue qui correspond à ce qui existe sur disque ;
       `.claude → .agents` et `.cursor → .agents` se résolvent.
-- [ ] `.dwp/` existe, est ignoré par git, et comporte `plans/` et `drafts/` ; `tmp/` existe et est ignoré par git.
+- [ ] `.dwp/` existe, est ignoré par git, et comporte `plans/` ; `tmp/` existe et est ignoré par git.
 - [ ] Le contenu utilisateur existant a été préservé ou réconcilié avec consentement — rien n’a été détruit en silence.
 - [ ] Vous pouvez générer un Deep Work Plan et l’exécuter tâche par tâche, en validant chaque porte.
 

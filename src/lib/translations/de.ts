@@ -188,7 +188,7 @@ export const de: SiteTranslations = {
         {
           title: 'Installiert die DWP-Skill und legt .dwp/ an',
           description:
-            'Bindet die Deep Work Plan Skill ein und erstellt den per gitignore ausgeschlossenen .dwp/-Ordner für Pläne und Entwürfe, installiert das verpflichtende lokale AI Diff Reviewer-Review und ergänzt anschließend optional Opt-in-Addons wie Devcontainer-Unterstützung.',
+            'Bindet die Deep Work Plan Skill ein und erstellt den per gitignore ausgeschlossenen .dwp/-Ordner für Pläne, installiert das verpflichtende lokale AI Diff Reviewer-Review und ergänzt anschließend optional Opt-in-Addons wie Devcontainer-Unterstützung.',
         },
       ],
     },
@@ -265,7 +265,7 @@ export const de: SiteTranslations = {
         {
           label: 'Git-nativ, wiederaufnehmbar, .dwp/',
           detail:
-            'Kein Daemon und kein externer Zustand. Pläne und Entwürfe landen in einem per gitignore ausgeschlossenen .dwp/-Ordner, und jede Aufgabe setzt allein aus git wieder auf — selbst nach einem Kontextüberlauf.',
+            'Kein Daemon und kein externer Zustand. Pläne landen in einem per gitignore ausgeschlossenen .dwp/-Ordner, und jede Aufgabe setzt allein aus git wieder auf — selbst nach einem Kontextüberlauf.',
         },
       ],
     },
@@ -768,7 +768,7 @@ export const de: SiteTranslations = {
       {
         title: 'Das Repository-Onboarding ausführen',
         description:
-          'Rufen Sie die onboard-Sub-Skill auf und lassen Sie den Agenten über das tatsächliche Repository schlussfolgern — seinen Stack, Paketmanager und die echten Validierungsbefehle. Anschließend erzeugt er AGENTS.md, eine docs/-Wissensbasis, Dokumentation je Modul und ein agentenübergreifendes .agents/-Verzeichnis (mit den .claude → .agents- und .cursor → .agents-Symlinks), bindet die schlanken dwp-*-Befehle ein und legt ein per gitignore ausgeschlossenes .dwp/ für Pläne und Entwürfe an. Bei großen Repositories nutzt die onboard-Sub-Skill einen plangesteuerten Pfad: Sie schließt die Aufklärung ab und gibt dann einen Onboarding-Deep-Work-Plan aus. Nichts wird aus Vorlagen erzeugt; alles wird an Ihr Repository angepasst.',
+          'Rufen Sie die onboard-Sub-Skill auf und lassen Sie den Agenten über das tatsächliche Repository schlussfolgern — seinen Stack, Paketmanager und die echten Validierungsbefehle. Anschließend erzeugt er AGENTS.md, eine docs/-Wissensbasis, Dokumentation je Modul und ein agentenübergreifendes .agents/-Verzeichnis (mit den .claude → .agents- und .cursor → .agents-Symlinks), bindet die schlanken dwp-*-Befehle ein und legt ein per gitignore ausgeschlossenes .dwp/ für Pläne an. Bei großen Repositories nutzt die onboard-Sub-Skill einen plangesteuerten Pfad: Sie schließt die Aufklärung ab und gibt dann einen Onboarding-Deep-Work-Plan aus. Nichts wird aus Vorlagen erzeugt; alles wird an Ihr Repository angepasst.',
         commands: ['/deepworkplan-onboard'],
       },
       {

@@ -62,7 +62,7 @@ First understand the repository, then propose what you will do.
   modify, and anything existing you propose to reconcile or replace — then **ask the user to confirm**
   before proceeding. For a large repository (many modules or many artifacts to generate), the onboard
   sub-skill uses a plan-driven path: it completes reconnaissance, generates `AGENTS.md`, then emits
-  an onboarding Deep Work Plan under `.dwp/drafts/` and hands off to `/dwp-refine` → `/dwp-execute`
+  an onboarding Deep Work Plan under `.dwp/plans/` and hands off to `/dwp-execute`
   → `/dwp-resume` as needed.
 
 ## Trust and verification (before you install)
@@ -99,6 +99,8 @@ is encouraged: a careful agent treats a fetched prompt as untrusted until it has
 
 ## 2. Install the Deep Work Plan skill
 
+> **The short path.** The skill carries its own onboarding, so installing it is enough. Once it is installed, run `/deepworkplan-onboard` and it performs everything sections 3–7 describe: reconnaissance, `AGENTS.md`, `docs/`, per-module docs, `.agents/`, the required local review, the opt-in addons and the final self-check. Read on for what that sub-skill will do — and for the fallback when an agent cannot load skills.
+
 Install the skill so this repository's agents can plan and execute structured work. It ships a router
 plus eight sub-skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, and `author`.
 
@@ -120,14 +122,21 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Current standard and execution model
 
-The current repository-facing standard is **DWP 2.3.0**, implemented by the
+The current repository-facing standard is **DWP 2.4.0**, implemented by the
 Deep Work Plan skill release installed above. The current skill pack includes
 the router and eight sub-skills: `create`, `execute`, `refine`, `resume`,
-`status`, `verify`, `onboard`, and `author`. The standard is deliberately
-proportional: use an inline goal, acceptance criteria, and gate for a small
-single-concern change; use a full plan for multi-step work; and use the deep
-tier when work spans parallel groups, child repositories, or unattended
-sessions.
+`status`, `verify`, `onboard`, and `author`.
+
+The standard is deliberately proportional, and 2.4.0 makes that proportion a
+property of the plan rather than of the developer's discipline. A plan is
+either **Lite** — task records inline in the plan's README, for small bounded
+work — or **Full**, one file per task, for long-horizon work. The choice is
+about representation cost, not rigor: both formats carry stable task ids, a
+Touched Surface, acceptance criteria, validation gates, completion evidence
+and one Final Review, so a Lite plan is a real plan, not a sketch. Format,
+materialization, approval and execution are independent axes; a Lite plan is
+promoted to Full with `/dwp-refine promote` when compact records stop carrying
+a requirement or a gate.
 
 For a full plan, the repository is the durable execution surface. The plan
 contains atomic tasks, a **Touched Surface** that explains what changed and
@@ -182,7 +191,7 @@ methodology) instead of overwriting — and confirm with the user before replaci
 5. **The DWP skill, adapted.** The installed skill is the engine; the repository's own kit
    (skills, agents, commands) must be **reasoned for this repo** — never a copy-paste of another
    repository's kit.
-6. **`.dwp/` + `tmp/`.** Scaffold a gitignored `.dwp/` with `plans/` and `drafts/`, plus a `tmp/`
+6. **`.dwp/` + `tmp/`.** Scaffold a gitignored `.dwp/` with `plans/`, plus a `tmp/`
    scratch space — both added to `.gitignore` non-destructively (append, never rewrite).
 
 ## 4. Install the required local review, then offer the opt-in addons
@@ -222,7 +231,7 @@ as a thin delegator. Keep the `.agents/docs/` catalog in sync with what exists o
 
 Generate Deep Work Plans for any task and run them task by task:
 
-- `/dwp-create <goal>` — decompose a goal into numbered, sequential tasks with validation gates.
+- `/dwp-create <goal>` — turn a goal into an executable plan. Since standard 2.4.0 a plan has two formats: **Lite**, whose task records live inline in the plan's README, for small bounded work; and **Full**, one file per task, for long-horizon work. Both carry the same contract — stable task ids, touched surface, acceptance criteria, validation gates, completion evidence and one Final Review — so Lite costs less to represent without being weaker. Add `lite` or `full` to force a format and `trust` to materialize without a review round; with no preference DWP recommends one and explains why. A Lite plan is promoted with `/dwp-refine promote`.
 - `/dwp-execute` — execute the plan task by task, updating progress and validating each gate.
 - `/dwp-status` — report progress without making changes.
 - `/dwp-refine` — add, remove, or reorder tasks while preserving completed work.
@@ -248,7 +257,7 @@ Then confirm:
 - [ ] `.agents/` exists with `agents/`, `commands/` (thin `dwp-*` delegators that reference the skill,
       not copied flows), `skills/`, and a catalog that matches what exists on disk;
       `.claude → .agents` and `.cursor → .agents` resolve.
-- [ ] `.dwp/` exists, is gitignored, and has `plans/` and `drafts/`; `tmp/` exists and is gitignored.
+- [ ] `.dwp/` exists, is gitignored, and has `plans/`; `tmp/` exists and is gitignored.
 - [ ] Existing user content was preserved or reconciled with consent — nothing was destroyed silently.
 - [ ] You can generate a Deep Work Plan and execute it task by task, validating each gate.
 
