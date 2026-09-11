@@ -833,6 +833,14 @@ export const id: SiteTranslations = {
             linkPath: '/quickstart',
           },
           {
+            id: 'lite-vs-full',
+            question: 'Apa bedanya rencana Lite dan rencana Full?',
+            answer:
+              'Pilihan representasi, bukan trade-off rigor. Setiap rencana dimulai sebagai folder Lite: README ringkas dengan catatan tugas berjangkar yang sudah dapat dieksekusi, bukan draf sebagian. `create` memperluas menjadi file tugas Full hanya ketika detail instruksi, dependensi, atau kontrak sebuah tugas tidak muat dalam catatan ringkas yang bisa ditinjau; permintaan eksplisit untuk salah satu format tetap dihormati, dan rencana Lite bisa dipromosikan ke Full kemudian tanpa kehilangan pekerjaan yang sudah selesai. Kedua format membawa kriteria penerimaan, gerbang verifikasi, bukti, dan Final Review wajib yang sama.',
+            linkLabel: 'Baca metodologinya',
+            linkPath: '/methodology',
+          },
+          {
             id: 'is-it-a-tool',
             question: 'Apakah ini tool, framework, atau metodologi?',
             answer:
@@ -849,28 +857,35 @@ export const id: SiteTranslations = {
             linkPath: '/kit',
           },
           {
-            id: 'what-is-installed',
-            question: 'What exactly gets installed, and where?',
+            id: 'how-to-use',
+            question: 'Bagaimana cara menggunakannya?',
             answer:
-              'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles AGENTS.md, docs/, .agents/ and the gitignored .dwp/ workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
-            linkLabel: 'See the adoption flow',
+              'Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx skills add DailybotHQ/deepworkplan-skill` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.',
+            linkLabel: 'Mulai Cepat',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'what-is-installed',
+            question: 'Apa saja yang sebenarnya terpasang, dan di mana?',
+            answer:
+              'Skill agent terpasang di mana pun agent Anda memuat skill project atau user. Onboarding kemudian menyesuaikan repositori itu sendiri: ia membuat atau merekonsiliasi `AGENTS.md`, `docs/`, `.agents/`, dan area kerja `.dwp/` yang di-gitignore. Skill mengajari agent metodenya; repositori menyimpan konteks, kit, dan bukti rencana yang dibutuhkan agent lain untuk melanjutkan.',
+            linkLabel: 'Lihat alur adopsinya',
             linkPath: '/init',
           },
           {
             id: 'requires-git',
-            question: 'Does Deep Work Plan require Git?',
+            question: 'Apakah Deep Work Plan memerlukan Git?',
             answer:
-              'Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including state.json checkpoints and gate records, is required so recovery does not depend on a chat transcript.',
-            linkLabel: 'Read about repository archetypes',
+              'Git direkomendasikan untuk repositori karena riwayatnya menjadi bagian dari permukaan pemulihan dan tinjauan, tetapi metodologinya juga bisa berjalan di workspace agent tanpa repositori Git. Dalam kasus itu, lapisan status terbaca mesin, termasuk checkpoint `state.json` dan catatan gerbang, wajib ada agar pemulihan tidak bergantung pada transkrip chat.',
+            linkLabel: 'Baca tentang arketipe repositori',
             linkPath: '/spec/archetypes',
           },
           {
             id: 'skill-plan-spec',
-            question:
-              'What is the difference between a skill, a plan and a product specification?',
+            question: 'Apa bedanya skill, rencana, dan spesifikasi produk?',
             answer:
-              'A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.',
-            linkLabel: 'Read the specification',
+              'Sebuah skill mendeskripsikan cara agent menjalankan sebuah prosedur berulang. Rencana DWP mendeskripsikan perubahan konkret melalui cakupan, kriteria penerimaan, gerbang verifikasi, dan bukti. Spesifikasi produk mendeskripsikan perilaku produk saat ini dan berevolusi lewat delta setelah implementasi; skill dan rencana juga merupakan spesifikasi, tetapi keduanya mendeskripsikan prosedur dan perubahan, bukan merawat kontrak produk kanonis itu.',
+            linkLabel: 'Baca spesifikasinya',
             linkPath: '/spec/dwp-specification',
           },
         ],
@@ -879,14 +894,6 @@ export const id: SiteTranslations = {
         id: 'how',
         title: 'Bagaimana sebuah rencana berjalan',
         items: [
-          {
-            id: 'how-to-use',
-            question: 'Bagaimana cara menggunakannya?',
-            answer:
-              'Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx skills add DailybotHQ/deepworkplan-skill` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit draf atau rencana yang sedang berjalan; `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.',
-            linkLabel: 'Mulai Cepat',
-            linkPath: '/quickstart',
-          },
           {
             id: 'gates',
             question:
@@ -950,18 +957,20 @@ export const id: SiteTranslations = {
           },
           {
             id: 'gate-fails',
-            question: 'What happens when a validation gate fails?',
+            question:
+              'Apa yang terjadi ketika sebuah gerbang verifikasi gagal?',
             answer:
-              'The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.',
-            linkLabel: 'Read the agent protocol',
+              'Tugas dicatat sebagai terblokir dan agent berhenti sebelum mengklaim selesai. Anda bisa memeriksa buktinya, memperbaiki kode, atau menyempurnakan tugasnya, lalu melanjutkan; command yang gagal adalah isyarat untuk menyelesaikan ketidaksesuaian, bukan izin untuk melemahkan gerbangnya.',
+            linkLabel: 'Baca protokol agent',
             linkPath: '/spec/agent-protocol',
           },
           {
             id: 'unattended-runs',
-            question: 'Can a plan run unattended overnight or in CI?',
+            question:
+              'Bisakah sebuah rencana berjalan tanpa pengawasan semalaman atau di CI?',
             answer:
-              'Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.',
-            linkLabel: 'Read the unattended protocol',
+              'Bisa, ketika rencana sudah disetujui sebelumnya, membawa lapisan status yang diwajibkan, dan memberi agent otoritas terbatas. Eksekusi tanpa pengawasan wajib berhenti dan mencatat blocker ketika kenyataan menyimpang, sebuah gerbang gagal di luar cakupan perbaikan yang direncanakan, atau dibutuhkan persetujuan atau kredensial baru.',
+            linkLabel: 'Baca protokol tanpa pengawasan',
             linkPath: '/spec/agent-protocol',
           },
         ],
@@ -1015,18 +1024,19 @@ export const id: SiteTranslations = {
           {
             id: 'core-and-addons',
             question:
-              'Can I use the core methodology without installing add-ons?',
+              'Bisakah saya memakai metodologi inti tanpa memasang add-on?',
             answer:
-              'Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.',
-            linkLabel: 'Browse the add-ons',
+              'Bisa. Add-on adalah lapisan opt-in, dan repositori tanpa add-on apa pun tetap sepenuhnya konform DWP. Devcontainer, pelaporan Dailybot, upgrade dependensi, dukungan design-system, dan tinjauan CI opsional hanya ditawarkan ketika cocok dengan repositori Anda dan Anda menerimanya secara eksplisit.',
+            linkLabel: 'Telusuri add-on',
             linkPath: '/spec/addons',
           },
           {
             id: 'no-test-toolchain',
-            question: 'What if my repository has no tests or linting yet?',
+            question:
+              'Bagaimana jika repositori saya belum punya test atau linting?',
             answer:
-              'DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.',
-            linkLabel: 'Read the agent protocol',
+              'DWP tidak memperlakukan absennya toolchain sebagai jalan bebas. Selama onboarding, agent mengusulkan setup validasi yang sesuai dengan stack, mencatat command tersebut di dokumentasi repositori, dan memakai command itu sebagai target gerbang di masa depan; usulan itu tetap terlihat agar Anda bisa meninjaunya.',
+            linkLabel: 'Baca protokol agent',
             linkPath: '/spec/agent-protocol',
           },
           {

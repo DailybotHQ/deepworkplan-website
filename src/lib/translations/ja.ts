@@ -835,6 +835,14 @@ export const ja: SiteTranslations = {
             linkPath: '/quickstart',
           },
           {
+            id: 'lite-vs-full',
+            question: 'Lite プランと Full プランの違いは何ですか？',
+            answer:
+              '厳密さのトレードオフではなく、表現形式の選択です。すべての計画は Lite フォルダとして始まります。アンカー付きのタスク記録を備えたコンパクトな README であり、部分的なドラフトではなく、すでに実行可能です。`create` は、タスクの指示の詳細・依存関係・契約がレビュー可能なコンパクト記録に収まらない場合にのみ、Full のタスクファイルへ展開します。どちらの形式を明示的に求めても尊重され、Lite プランは完了済みの作業を失うことなく、後から Full に昇格できます。両方の形式とも、同じ受け入れ基準・検証ゲート・証拠・必須の Final Review を備えています。',
+            linkLabel: '方法論を読む',
+            linkPath: '/methodology',
+          },
+          {
             id: 'is-it-a-tool',
             question: 'ツール、フレームワーク、それとも方法論のどれですか？',
             answer:
@@ -851,28 +859,35 @@ export const ja: SiteTranslations = {
             linkPath: '/kit',
           },
           {
-            id: 'what-is-installed',
-            question: 'What exactly gets installed, and where?',
+            id: 'how-to-use',
+            question: 'どう使いますか？',
             answer:
-              'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles AGENTS.md, docs/, .agents/ and the gitignored .dwp/ workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
-            linkLabel: 'See the adoption flow',
+              '三つのステップです。まず、コーディングエージェントに Deep Work Plan スキルをインストールします——最も速い方法は `npx skills add DailybotHQ/deepworkplan-skill`（またはスキルリポジトリをクローンして `./setup.sh` を実行）です。次に、リポジトリに一度オンボーディングし、エージェントに `AGENTS.md`、`docs/`、`.agents/` キット、gitignore された `.dwp/` 領域をあなたのスタックに適応させます：https://deepworkplan.com/init.md を指すか、`/deepworkplan-onboard` を実行します。第三に、薄いコマンドで計画と実行を行います：`/dwp-create <goal>` が計画を構築し、`/dwp-execute` が各ゲートに対してタスク単位で実行し、`/dwp-refine` が進行中の計画（スコープ、タスク、または Lite プランから Full への昇格）を編集し、`/dwp-resume` が中断後に続行し、`/dwp-status` が実行せずに進捗を報告し、`/dwp-verify` が客観的な適合性レポートを生成します。`/` をインターセプトするエージェントは `#` を使うことが多いです（例：`#dwp-execute`）。アダプションエンドポイントとクイックスタートが、同じ経路をより詳しく説明します。',
+            linkLabel: 'クイックスタート',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'what-is-installed',
+            question: '具体的に何が、どこにインストールされますか？',
+            answer:
+              'エージェントスキルは、あなたのエージェントがプロジェクトまたはユーザーのスキルを読み込む場所にインストールされます。続いてオンボーディングがリポジトリ自体を適応させます。`AGENTS.md`、`docs/`、`.agents/`、そして gitignore された `.dwp/` ワークスペースを作成または調整します。スキルはエージェントにこの方法を教え、リポジトリは他のエージェントが作業を続けるために必要なコンテキスト・キット・計画の証拠を保持します。',
+            linkLabel: '採用フローを見る',
             linkPath: '/init',
           },
           {
             id: 'requires-git',
-            question: 'Does Deep Work Plan require Git?',
+            question: 'Deep Work Plan には Git が必要ですか？',
             answer:
-              'Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including state.json checkpoints and gate records, is required so recovery does not depend on a chat transcript.',
-            linkLabel: 'Read about repository archetypes',
+              'リポジトリには Git を推奨します。その履歴が復旧とレビューの対象面の一部を成すためです。ただし方法論は、Git リポジトリを持たないエージェントのワークスペースでも動作します。その場合、`state.json` のチェックポイントとゲートの記録を含む機械可読の状態レイヤーが必須となり、復旧がチャットの記録に依存しないようにします。',
+            linkLabel: 'リポジトリのアーキタイプを読む',
             linkPath: '/spec/archetypes',
           },
           {
             id: 'skill-plan-spec',
-            question:
-              'What is the difference between a skill, a plan and a product specification?',
+            question: 'スキル、計画、プロダクト仕様の違いは何ですか？',
             answer:
-              'A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.',
-            linkLabel: 'Read the specification',
+              'スキルは、エージェントが繰り返し可能な手順をどう実行するかを記述します。DWP の計画は、スコープ・受け入れ基準・検証ゲート・証拠を通じて具体的な変更を記述します。プロダクト仕様はプロダクトの現在の挙動を記述し、実装後は差分を通じて進化します。スキルと計画も広い意味では仕様ですが、それらは手順と変更を記述するものであり、その正典的なプロダクト契約を維持するものではありません。',
+            linkLabel: '仕様を読む',
             linkPath: '/spec/dwp-specification',
           },
         ],
@@ -881,14 +896,6 @@ export const ja: SiteTranslations = {
         id: 'how',
         title: '計画の実行方法',
         items: [
-          {
-            id: 'how-to-use',
-            question: 'どう使いますか？',
-            answer:
-              '三つのステップです。まず、コーディングエージェントに Deep Work Plan スキルをインストールします——最も速い方法は `npx skills add DailybotHQ/deepworkplan-skill`（またはスキルリポジトリをクローンして `./setup.sh` を実行）です。次に、リポジトリに一度オンボーディングし、エージェントに `AGENTS.md`、`docs/`、`.agents/` キット、gitignore された `.dwp/` 領域をあなたのスタックに適応させます：https://deepworkplan.com/init.md を指すか、`/deepworkplan-onboard` を実行します。第三に、薄いコマンドで計画と実行を行います：`/dwp-create <goal>` が計画を構築し、`/dwp-execute` が各ゲートに対してタスク単位で実行し、`/dwp-refine` がドラフトまたは進行中の計画を編集し、`/dwp-resume` が中断後に続行し、`/dwp-status` が実行せずに進捗を報告し、`/dwp-verify` が客観的な適合性レポートを生成します。`/` をインターセプトするエージェントは `#` を使うことが多いです（例：`#dwp-execute`）。アダプションエンドポイントとクイックスタートが、同じ経路をより詳しく説明します。',
-            linkLabel: 'クイックスタート',
-            linkPath: '/quickstart',
-          },
           {
             id: 'gates',
             question:
@@ -952,18 +959,18 @@ export const ja: SiteTranslations = {
           },
           {
             id: 'gate-fails',
-            question: 'What happens when a validation gate fails?',
+            question: '検証ゲートが失敗するとどうなりますか？',
             answer:
-              'The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.',
-            linkLabel: 'Read the agent protocol',
+              'タスクはブロックとして記録され、エージェントは完了を主張する前に停止します。証拠を確認し、コードを修正するかタスクをリファインしたうえで再開できます。失敗したコマンドは不整合を解消せよという合図であり、ゲートを緩めてよいという許可ではありません。',
+            linkLabel: 'エージェントプロトコルを読む',
             linkPath: '/spec/agent-protocol',
           },
           {
             id: 'unattended-runs',
-            question: 'Can a plan run unattended overnight or in CI?',
+            question: '計画は夜間や CI で無人実行できますか？',
             answer:
-              'Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.',
-            linkLabel: 'Read the unattended protocol',
+              'できます。計画が事前に承認され、必須の状態レイヤーを備え、エージェントに範囲の定まった権限を与えている場合です。無人実行は、現実が計画から乖離したとき、ゲートが計画された修復範囲の外で失敗したとき、あるいは新たな承認や認証情報が必要になったときには、停止してブロッカーを記録しなければなりません。',
+            linkLabel: '無人実行プロトコルを読む',
             linkPath: '/spec/agent-protocol',
           },
         ],
@@ -1017,18 +1024,19 @@ export const ja: SiteTranslations = {
           {
             id: 'core-and-addons',
             question:
-              'Can I use the core methodology without installing add-ons?',
+              'アドオンをインストールせずにコアの方法論だけを使えますか？',
             answer:
-              'Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.',
-            linkLabel: 'Browse the add-ons',
+              'できます。アドオンはオプトインのレイヤーであり、一つも導入していないリポジトリも完全に DWP 準拠です。Devcontainers、Dailybot レポーティング、依存関係のアップグレード、デザインシステム対応、そしてオプションの CI レビューは、あなたのリポジトリに適合し、あなたが明示的に受け入れた場合にのみ提供されます。',
+            linkLabel: 'アドオンを見る',
             linkPath: '/spec/addons',
           },
           {
             id: 'no-test-toolchain',
-            question: 'What if my repository has no tests or linting yet?',
+            question:
+              'リポジトリにまだテストやリンティングがない場合はどうなりますか？',
             answer:
-              'DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.',
-            linkLabel: 'Read the agent protocol',
+              'DWP は、ツールチェーンがないことを免罪符として扱いません。オンボーディング中にエージェントは、あなたのスタックに適した検証セットアップを提案し、そのコマンドをリポジトリのドキュメントに記録し、以後のゲートの目標としてそれらのコマンドを使用します。その提案はあなたがレビューできるよう、そのまま見える状態で残ります。',
+            linkLabel: 'エージェントプロトコルを読む',
             linkPath: '/spec/agent-protocol',
           },
           {

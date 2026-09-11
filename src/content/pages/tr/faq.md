@@ -1,7 +1,7 @@
 ---
 title: "Sıkça sorulan sorular — Deep Work Plan"
 description: "Deep Work Plan hakkında sorulan soruların yanıtları: ne yaptığı, doğrulama kapıları ve sürdürme, araçlarla karşılaştırma ve benimseme."
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-11
 ---
 
 ## Sıkça sorulan sorular
@@ -22,6 +22,12 @@ Kodlama ajanlarına gerçek, çok adımlı işler veren ve bu işin bitmesini is
 
 [Hızlı başlangıç](https://deepworkplan.com/tr/quickstart)
 
+### Lite plan ile Full plan arasındaki fark nedir?
+
+Bir gösterim tercihidir, titizlik ödünleşmesi değil. Her plan bir Lite klasör olarak başlar: sabitlenmiş görev kayıtları içeren, zaten yürütülebilir kompakt bir README — kısmi bir taslak değil. `create`, yalnızca bir görevin talimat ayrıntısı, bağımlılıkları veya sözleşmeleri incelenebilir kompakt bir kayda sığmadığında Full görev dosyalarına genişler; iki biçimden biri için açık bir istek her zaman karşılanır ve bir Lite plan, tamamlanmış işi kaybetmeden daha sonra Full'e yükseltilebilir. Her iki biçim de aynı kabul kriterlerini, doğrulama kapılarını ve kanıtı taşır; ikisi de zorunlu Final Review ile kapanır.
+
+[Metodolojiyi okuyun](https://deepworkplan.com/tr/methodology)
+
 ### Bir araç mı, çerçeve mi yoksa metodoloji mi?
 
 Kurulabilir bir skill olarak paketlenmiş bir metodoloji. Sunucu yok, hesap yok, tescilli biçim yok ve zaten kullandığınız kodlama ajanının ötesinde bir çalışma zamanı yok. Kurulan şey, ajanın okuduğu talimatlar; bağlam tespiti ve uyumluluk denetimi için küçük bir shell betiği kümesi; ve deponuzun benimsediği kurallardır. Planın ürettiği her şey deponuzdaki Markdown ve JSON'dur; hiçbir araç olmadan okunabilir.
@@ -34,13 +40,31 @@ Depo dosyalarını okuyan herhangi bir ajan. Skill, açık Agent Skills standard
 
 [Kite göz atın](https://deepworkplan.com/tr/kit)
 
-## Bir plan nasıl çalışır
-
 ### Nasıl kullanılır?
 
-Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx skills add DailybotHQ/deepworkplan-skill` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` bir taslağı veya devam eden bir planı düzenler; `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.
+Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx skills add DailybotHQ/deepworkplan-skill` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.
 
 [Hızlı başlangıç](https://deepworkplan.com/tr/quickstart)
+
+### Tam olarak ne kurulur ve nereye?
+
+Ajan skill'i, ajanınızın proje veya kullanıcı skill'lerini yüklediği her yere kurulur. Kuruluma alma daha sonra deponun kendisini uyarlar: `AGENTS.md`, `docs/`, `.agents/` ve gitignore'lanmış `.dwp/` çalışma alanını oluşturur veya uzlaştırır. Skill ajana metodu öğretir; depo ise diğer ajanların devam edebilmesi için gereken bağlamı, kiti ve plan kanıtını tutar.
+
+[Benimseme akışına bakın](https://deepworkplan.com/tr/init)
+
+### Deep Work Plan Git gerektirir mi?
+
+Depolar için Git önerilir, çünkü geçmişi kurtarma ve inceleme yüzeyinin bir parçasıdır; ancak metodoloji bir Git deposu olmadan da bir ajan çalışma alanında çalışabilir. Bu durumda, kurtarmanın bir sohbet dökümüne bağlı olmaması için `state.json` kontrol noktaları ve kapı kayıtları dahil makine tarafından okunabilir durum katmanı zorunludur.
+
+[Depo arketiplerini okuyun](https://deepworkplan.com/tr/spec/archetypes)
+
+### Bir skill, bir plan ve bir ürün spesifikasyonu arasındaki fark nedir?
+
+Bir skill, ajanın tekrarlanabilir bir prosedürü nasıl gerçekleştirdiğini tanımlar. Bir DWP planı, kapsam, kabul kriterleri, doğrulama kapıları ve kanıt yoluyla somut bir değişikliği tanımlar. Bir ürün spesifikasyonu ürünün mevcut davranışını tanımlar ve uygulamadan sonra delta'lar yoluyla evrilir; skill'ler ve planlar da birer spesifikasyondur, ancak bu kanonik ürün sözleşmesini sürdürmek yerine prosedürleri ve değişiklikleri tanımlarlar.
+
+[Spesifikasyonu okuyun](https://deepworkplan.com/tr/spec/dwp-specification)
+
+## Bir plan nasıl çalışır
 
 ### Doğrulama kapıları nasıl uygulanır? İnsan onayı gerekir mi?
 
@@ -84,6 +108,18 @@ Her planın zorunlu tek kapanış görevi. Sırayla: planın birikmiş tam deği
 
 [Spesifikasyon](https://deepworkplan.com/tr/spec/dwp-specification)
 
+### Bir doğrulama kapısı başarısız olduğunda ne olur?
+
+Görev engellenmiş olarak kaydedilir ve ajan tamamlandığını iddia etmeden önce durur. Kanıtı inceleyebilir, kodu onarabilir veya görevi iyileştirebilir, ardından sürdürebilirsiniz; başarısız bir komut, kapıyı zayıflatma izni değil, uyuşmazlığı çözme sinyalidir.
+
+[Ajan protokolünü okuyun](https://deepworkplan.com/tr/spec/agent-protocol)
+
+### Bir plan gece boyunca veya CI içinde gözetimsiz çalışabilir mi?
+
+Evet, plan önceden onaylanmışsa, gerekli durum katmanını taşıyorsa ve ajana sınırlı bir yetki veriyorsa. Gözetimsiz bir çalıştırma; gerçeklik saptığında, bir kapı planlanan onarım kapsamının dışında başarısız olduğunda veya yeni bir onay ya da kimlik bilgisi gerektiğinde durmalı ve bir engel kaydetmelidir.
+
+[Gözetimsiz protokolü okuyun](https://deepworkplan.com/tr/spec/agent-protocol)
+
 ## Diğerleriyle karşılaştırma
 
 ### Spec Kit, OpenSpec veya Kiro gibi spec odaklı araçlardan nasıl farklıdır?
@@ -94,7 +130,7 @@ Bitişik sorunları çözerler. Spec odaklı araçlar neyin değişmesi gerekti�
 
 ### BMAD, Superpowers, Get Shit Done veya Gentle-AI gibi ajan iş akışı araçlarından nasıl farklıdır?
 
-Bu çerçeveler güçlü çalışma stilleri getirir: roller, ilkeler, test-first adımlar, doğrulama alışkanlıkları. Deep Work Plan ikisinden de farklıdır; repoda ne kalır ve ne kontrol edilebilir odaklanır: soğuk okunabilen herhangi bir harness, kabul kriterleri ve kapılarla görev dosyaları, oturumu atlatan durum, CI-dostu çıkış kodlu uyumluluk denetleyicisi ve her akışın kaç talimat byte’ı yüklediğinin yayımlanmış ölçümü. Yapı gereği araçtan bağımsızdır ve core loop’a hizmet, sağlayıcı veya secret eklememez. Karşılaştırma sayfası her yaklaşımın yerleşik, isteğe bağlı veya kapsam dışı olduğu yerleri gösterir. Gentle-AI, halihazırda kullandığınız kodlama ajanlarını yapılandırır: oturumlar arasında kalıcı bellek (Engram), seçilmiş beceriler, persona'lar, MCP sunucuları, isteğe bağlı Spec-Driven Development ve isteğe bağlı kanıta dayalı inceleme (Receipt-Driven Development). Her ajanın yapılandırma dizinlerine yazır ve planlama çıktılarını Engram'da, OpenSpec dosyalarında veya her ikisinde tutabilir. Katmanlar bir arada durabilir: Gentle-AI ajana donanım sağlar; Deep Work Plan uzun işi repoda kalıcı ve doğrulanabilir kılar.
+Bu çerçeveler güçlü çalışma stilleri getirir: roller, ilkeler, test-first adımlar, doğrulama alışkanlıkları. Deep Work Plan ikisinden de farklıdır; repoda ne kalır ve ne kontrol edilebilir odaklanır: soğuk okunabilen herhangi bir harness, kabul kriterleri ve kapılarla görev dosyaları, oturumu atlatan durum, CI-dostu çıkış kodlu uyumluluk denetleyicisi ve her akışın kaç talimat byte'ı yüklediğinin yayımlanmış ölçümü. Yapı gereği araçtan bağımsızdır ve core loop'a hizmet, sağlayıcı veya secret eklememez. Karşılaştırma sayfası her yaklaşımın yerleşik, isteğe bağlı veya kapsam dışı olduğu yerleri gösterir. Gentle-AI, halihazırda kullandığınız kodlama ajanlarını yapılandırır: oturumlar arasında kalıcı bellek (Engram), seçilmiş beceriler, persona'lar, MCP sunucuları, isteğe bağlı Spec-Driven Development ve isteğe bağlı kanıta dayalı inceleme (Receipt-Driven Development). Her ajanın yapılandırma dizinlerine yazır ve planlama çıktılarını Engram'da, OpenSpec dosyalarında veya her ikisinde tutabilir. Katmanlar bir arada durabilir: Gentle-AI ajana donanım sağlar; Deep Work Plan uzun işi repoda kalıcı ve doğrulanabilir kılar.
 
 [Karşılaştırmayı görün](https://deepworkplan.com/tr/compare)
 
@@ -111,6 +147,18 @@ Yerleşik plan modları kullanışlıdır ve Deep Work Plan aynı alt yapı üze
 Kuruluma alma yıkıcı değildir: mevcut `AGENTS.md`, `docs/`, `.agents/` veya `CLAUDE.md` dosyasını algılar, üzerine yazmak yerine uzlaştırır ve bir şeyi değiştirmeden önce sorar. Gerçek komutlarla `AGENTS.md` dizini, akıl yürütülmüş bir `docs/` ağacı, modül başına docs, ince `dwp-*` komutlarıyla `.agents/` kiti, gitignore'lanmış bir `.dwp/` çıktı alanı, doğrulanmış bir test haritası ve zorunlu yerel kod incelemesi (AI Diff Reviewer skill'i artı repoya uyarlanmış inceleme eklentisi) yazır. Sonra ne üretildiğini görebilmeniz için self-check ve uyumluluk denetleyicisini çalıştırır. Daha önceki bir sürümle kuruluma alınmış bir repo, yalnızca eksik olanları değiştiren hedefli bir yükseltme alır.
 
 [Benimseme uç noktası](https://deepworkplan.com/tr/init)
+
+### Eklentileri kurmadan çekirdek metodolojiyi kullanabilir miyim?
+
+Evet. Eklentiler isteğe bağlı katmanlardır ve hiçbirini içermeyen bir depo tamamen DWP uyumludur. Devcontainer'lar, Dailybot raporlaması, bağımlılık yükseltmeleri, tasarım sistemi desteği ve isteğe bağlı CI incelemesi yalnızca deponuza uyduğunda ve bunları açıkça kabul ettiğinizde sunulur.
+
+[Eklentilere göz atın](https://deepworkplan.com/tr/spec/addons)
+
+### Depomda henüz test veya lint yoksa ne olur?
+
+DWP, bir araç zincirinin yokluğunu bir muafiyet olarak görmez. Kuruluma alma sırasında ajan, yığına uygun bir doğrulama kurulumu önerir, komutları depo dokümantasyonuna kaydeder ve bu komutları gelecekteki kapılar için hedef olarak kullanır; öneri incelemeniz için görünür kalır.
+
+[Ajan protokolünü okuyun](https://deepworkplan.com/tr/spec/agent-protocol)
 
 ### Maliyeti nedir ve verimlilik nasıl ölçülür?
 

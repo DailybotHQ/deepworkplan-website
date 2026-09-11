@@ -1,7 +1,7 @@
 ---
 title: "Pertanyaan yang sering diajukan — Deep Work Plan"
 description: "Jawaban atas pertanyaan seputar Deep Work Plan: apa yang dilakukannya, cara kerja gerbang dan pelanjutan, perbandingan dengan alat lain, dan cara adopsinya."
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-11
 ---
 
 ## Pertanyaan yang sering diajukan
@@ -22,6 +22,12 @@ Pengembang dan tim yang menyerahkan pekerjaan nyata dan multilangkah kepada codi
 
 [Mulai Cepat](https://deepworkplan.com/id/quickstart)
 
+### Apa bedanya rencana Lite dan rencana Full?
+
+Pilihan representasi, bukan trade-off rigor. Setiap rencana dimulai sebagai folder Lite: README ringkas dengan catatan tugas berjangkar yang sudah dapat dieksekusi, bukan draf sebagian. `create` memperluas menjadi file tugas Full hanya ketika detail instruksi, dependensi, atau kontrak sebuah tugas tidak muat dalam catatan ringkas yang bisa ditinjau; permintaan eksplisit untuk salah satu format tetap dihormati, dan rencana Lite bisa dipromosikan ke Full kemudian tanpa kehilangan pekerjaan yang sudah selesai. Kedua format membawa kriteria penerimaan, gerbang verifikasi, bukti, dan Final Review wajib yang sama.
+
+[Baca metodologinya](https://deepworkplan.com/id/methodology)
+
 ### Apakah ini tool, framework, atau metodologi?
 
 Sebuah metodologi yang dikemas sebagai skill yang dapat dipasang. Tidak ada server, tidak ada akun, tidak ada format proprietary, dan tidak ada runtime selain coding agent yang sudah Anda pakai. Yang terpasang adalah instruksi yang dibaca agent, sejumlah kecil shell script untuk deteksi konteks dan pemeriksaan konformansi, serta konvensi yang diadopsi repositori Anda. Semua yang dihasilkan rencana berupa Markdown dan JSON di repositori Anda, dapat dibaca tanpa tool apa pun.
@@ -34,13 +40,31 @@ Agent mana pun yang membaca file repositori. Skill ini mengikuti standar Agent S
 
 [Telusuri kit](https://deepworkplan.com/id/kit)
 
-## Bagaimana sebuah rencana berjalan
-
 ### Bagaimana cara menggunakannya?
 
-Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx skills add DailybotHQ/deepworkplan-skill` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit draf atau rencana yang sedang berjalan; `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.
+Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx skills add DailybotHQ/deepworkplan-skill` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.
 
 [Mulai Cepat](https://deepworkplan.com/id/quickstart)
+
+### Apa saja yang sebenarnya terpasang, dan di mana?
+
+Skill agent terpasang di mana pun agent Anda memuat skill project atau user. Onboarding kemudian menyesuaikan repositori itu sendiri: ia membuat atau merekonsiliasi `AGENTS.md`, `docs/`, `.agents/`, dan area kerja `.dwp/` yang di-gitignore. Skill mengajari agent metodenya; repositori menyimpan konteks, kit, dan bukti rencana yang dibutuhkan agent lain untuk melanjutkan.
+
+[Lihat alur adopsinya](https://deepworkplan.com/id/init)
+
+### Apakah Deep Work Plan memerlukan Git?
+
+Git direkomendasikan untuk repositori karena riwayatnya menjadi bagian dari permukaan pemulihan dan tinjauan, tetapi metodologinya juga bisa berjalan di workspace agent tanpa repositori Git. Dalam kasus itu, lapisan status terbaca mesin, termasuk checkpoint `state.json` dan catatan gerbang, wajib ada agar pemulihan tidak bergantung pada transkrip chat.
+
+[Baca tentang arketipe repositori](https://deepworkplan.com/id/spec/archetypes)
+
+### Apa bedanya skill, rencana, dan spesifikasi produk?
+
+Sebuah skill mendeskripsikan cara agent menjalankan sebuah prosedur berulang. Rencana DWP mendeskripsikan perubahan konkret melalui cakupan, kriteria penerimaan, gerbang verifikasi, dan bukti. Spesifikasi produk mendeskripsikan perilaku produk saat ini dan berevolusi lewat delta setelah implementasi; skill dan rencana juga merupakan spesifikasi, tetapi keduanya mendeskripsikan prosedur dan perubahan, bukan merawat kontrak produk kanonis itu.
+
+[Baca spesifikasinya](https://deepworkplan.com/id/spec/dwp-specification)
+
+## Bagaimana sebuah rencana berjalan
 
 ### Bagaimana gerbang verifikasi diimplementasikan? Apakah memerlukan persetujuan manusia?
 
@@ -84,6 +108,18 @@ Satu-satunya tugas penutup wajib dari setiap rencana. Secara berurutan: pemeriks
 
 [Spesifikasinya](https://deepworkplan.com/id/spec/dwp-specification)
 
+### Apa yang terjadi ketika sebuah gerbang verifikasi gagal?
+
+Tugas dicatat sebagai terblokir dan agent berhenti sebelum mengklaim selesai. Anda bisa memeriksa buktinya, memperbaiki kode, atau menyempurnakan tugasnya, lalu melanjutkan; command yang gagal adalah isyarat untuk menyelesaikan ketidaksesuaian, bukan izin untuk melemahkan gerbangnya.
+
+[Baca protokol agent](https://deepworkplan.com/id/spec/agent-protocol)
+
+### Bisakah sebuah rencana berjalan tanpa pengawasan semalaman atau di CI?
+
+Bisa, ketika rencana sudah disetujui sebelumnya, membawa lapisan status yang diwajibkan, dan memberi agent otoritas terbatas. Eksekusi tanpa pengawasan wajib berhenti dan mencatat blocker ketika kenyataan menyimpang, sebuah gerbang gagal di luar cakupan perbaikan yang direncanakan, atau dibutuhkan persetujuan atau kredensial baru.
+
+[Baca protokol tanpa pengawasan](https://deepworkplan.com/id/spec/agent-protocol)
+
 ## Perbandingannya dengan alat lain
 
 ### Apa bedanya dengan tool spec-driven seperti Spec Kit, OpenSpec, atau Kiro?
@@ -111,6 +147,18 @@ Mode rencana bawaan berguna, dan Deep Work Plan membangun di atas substrat yang 
 Onboarding bersifat non-destruktif: ia mendeteksi `AGENTS.md`, `docs/`, `.agents/`, atau `CLAUDE.md` yang sudah ada, merekonsiliasi alih-alih menimpa, dan bertanya sebelum mengganti apa pun. Ia menulis indeks `AGENTS.md` dengan command nyata, pohon `docs/` yang beralasan, dokumentasi per modul, kit `.agents/` dengan command `dwp-*` yang tipis, area keluaran `.dwp/` yang di-gitignore, peta pengujian yang terverifikasi, dan tinjauan kode lokal yang diwajibkan (skill AI Diff Reviewer plus ekstensi review yang disesuaikan repo). Ia kemudian menjalankan self-check dan pemeriksa konformansi agar Anda bisa melihat apa yang dihasilkan. Repositori yang di-onboard di bawah versi sebelumnya mendapat upgrade tertarget yang hanya mengubah apa yang kurang.
 
 [Endpoint adopsi](https://deepworkplan.com/id/init)
+
+### Bisakah saya memakai metodologi inti tanpa memasang add-on?
+
+Bisa. Add-on adalah lapisan opt-in, dan repositori tanpa add-on apa pun tetap sepenuhnya konform DWP. Devcontainer, pelaporan Dailybot, upgrade dependensi, dukungan design-system, dan tinjauan CI opsional hanya ditawarkan ketika cocok dengan repositori Anda dan Anda menerimanya secara eksplisit.
+
+[Telusuri add-on](https://deepworkplan.com/id/spec/addons)
+
+### Bagaimana jika repositori saya belum punya test atau linting?
+
+DWP tidak memperlakukan absennya toolchain sebagai jalan bebas. Selama onboarding, agent mengusulkan setup validasi yang sesuai dengan stack, mencatat command tersebut di dokumentasi repositori, dan memakai command itu sebagai target gerbang di masa depan; usulan itu tetap terlihat agar Anda bisa meninjaunya.
+
+[Baca protokol agent](https://deepworkplan.com/id/spec/agent-protocol)
 
 ### Berapa biayanya, dan bagaimana efisiensi diukur?
 

@@ -834,6 +834,14 @@ export const tr: SiteTranslations = {
             linkPath: '/quickstart',
           },
           {
+            id: 'lite-vs-full',
+            question: 'Lite plan ile Full plan arasındaki fark nedir?',
+            answer:
+              'Bir gösterim tercihidir, titizlik ödünleşmesi değil. Her plan bir Lite klasör olarak başlar: sabitlenmiş görev kayıtları içeren, zaten yürütülebilir kompakt bir README — kısmi bir taslak değil. `create`, yalnızca bir görevin talimat ayrıntısı, bağımlılıkları veya sözleşmeleri incelenebilir kompakt bir kayda sığmadığında Full görev dosyalarına genişler; iki biçimden biri için açık bir istek her zaman karşılanır ve bir Lite plan, tamamlanmış işi kaybetmeden daha sonra Full’e yükseltilebilir. Her iki biçim de aynı kabul kriterlerini, doğrulama kapılarını ve kanıtı taşır; ikisi de zorunlu Final Review ile kapanır.',
+            linkLabel: 'Metodolojiyi okuyun',
+            linkPath: '/methodology',
+          },
+          {
             id: 'is-it-a-tool',
             question: 'Bir araç mı, çerçeve mi yoksa metodoloji mi?',
             answer:
@@ -850,28 +858,36 @@ export const tr: SiteTranslations = {
             linkPath: '/kit',
           },
           {
-            id: 'what-is-installed',
-            question: 'What exactly gets installed, and where?',
+            id: 'how-to-use',
+            question: 'Nasıl kullanılır?',
             answer:
-              'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles AGENTS.md, docs/, .agents/ and the gitignored .dwp/ workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
-            linkLabel: 'See the adoption flow',
+              "Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx skills add DailybotHQ/deepworkplan-skill` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.",
+            linkLabel: 'Hızlı başlangıç',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'what-is-installed',
+            question: 'Tam olarak ne kurulur ve nereye?',
+            answer:
+              'Ajan skill’i, ajanınızın proje veya kullanıcı skill’lerini yüklediği her yere kurulur. Kuruluma alma daha sonra deponun kendisini uyarlar: `AGENTS.md`, `docs/`, `.agents/` ve gitignore’lanmış `.dwp/` çalışma alanını oluşturur veya uzlaştırır. Skill ajana metodu öğretir; depo ise diğer ajanların devam edebilmesi için gereken bağlamı, kiti ve plan kanıtını tutar.',
+            linkLabel: 'Benimseme akışına bakın',
             linkPath: '/init',
           },
           {
             id: 'requires-git',
-            question: 'Does Deep Work Plan require Git?',
+            question: 'Deep Work Plan Git gerektirir mi?',
             answer:
-              'Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including state.json checkpoints and gate records, is required so recovery does not depend on a chat transcript.',
-            linkLabel: 'Read about repository archetypes',
+              'Depolar için Git önerilir, çünkü geçmişi kurtarma ve inceleme yüzeyinin bir parçasıdır; ancak metodoloji bir Git deposu olmadan da bir ajan çalışma alanında çalışabilir. Bu durumda, kurtarmanın bir sohbet dökümüne bağlı olmaması için `state.json` kontrol noktaları ve kapı kayıtları dahil makine tarafından okunabilir durum katmanı zorunludur.',
+            linkLabel: 'Depo arketiplerini okuyun',
             linkPath: '/spec/archetypes',
           },
           {
             id: 'skill-plan-spec',
             question:
-              'What is the difference between a skill, a plan and a product specification?',
+              'Bir skill, bir plan ve bir ürün spesifikasyonu arasındaki fark nedir?',
             answer:
-              'A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.',
-            linkLabel: 'Read the specification',
+              'Bir skill, ajanın tekrarlanabilir bir prosedürü nasıl gerçekleştirdiğini tanımlar. Bir DWP planı, kapsam, kabul kriterleri, doğrulama kapıları ve kanıt yoluyla somut bir değişikliği tanımlar. Bir ürün spesifikasyonu ürünün mevcut davranışını tanımlar ve uygulamadan sonra delta’lar yoluyla evrilir; skill’ler ve planlar da birer spesifikasyondur, ancak bu kanonik ürün sözleşmesini sürdürmek yerine prosedürleri ve değişiklikleri tanımlarlar.',
+            linkLabel: 'Spesifikasyonu okuyun',
             linkPath: '/spec/dwp-specification',
           },
         ],
@@ -880,14 +896,6 @@ export const tr: SiteTranslations = {
         id: 'how',
         title: 'Bir plan nasıl çalışır',
         items: [
-          {
-            id: 'how-to-use',
-            question: 'Nasıl kullanılır?',
-            answer:
-              "Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx skills add DailybotHQ/deepworkplan-skill` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` bir taslağı veya devam eden bir planı düzenler; `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.",
-            linkLabel: 'Hızlı başlangıç',
-            linkPath: '/quickstart',
-          },
           {
             id: 'gates',
             question:
@@ -951,18 +959,19 @@ export const tr: SiteTranslations = {
           },
           {
             id: 'gate-fails',
-            question: 'What happens when a validation gate fails?',
+            question: 'Bir doğrulama kapısı başarısız olduğunda ne olur?',
             answer:
-              'The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.',
-            linkLabel: 'Read the agent protocol',
+              'Görev engellenmiş olarak kaydedilir ve ajan tamamlandığını iddia etmeden önce durur. Kanıtı inceleyebilir, kodu onarabilir veya görevi iyileştirebilir, ardından sürdürebilirsiniz; başarısız bir komut, kapıyı zayıflatma izni değil, uyuşmazlığı çözme sinyalidir.',
+            linkLabel: 'Ajan protokolünü okuyun',
             linkPath: '/spec/agent-protocol',
           },
           {
             id: 'unattended-runs',
-            question: 'Can a plan run unattended overnight or in CI?',
+            question:
+              'Bir plan gece boyunca veya CI içinde gözetimsiz çalışabilir mi?',
             answer:
-              'Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.',
-            linkLabel: 'Read the unattended protocol',
+              'Evet, plan önceden onaylanmışsa, gerekli durum katmanını taşıyorsa ve ajana sınırlı bir yetki veriyorsa. Gözetimsiz bir çalıştırma; gerçeklik saptığında, bir kapı planlanan onarım kapsamının dışında başarısız olduğunda veya yeni bir onay ya da kimlik bilgisi gerektiğinde durmalı ve bir engel kaydetmelidir.',
+            linkLabel: 'Gözetimsiz protokolü okuyun',
             linkPath: '/spec/agent-protocol',
           },
         ],
@@ -1016,18 +1025,18 @@ export const tr: SiteTranslations = {
           {
             id: 'core-and-addons',
             question:
-              'Can I use the core methodology without installing add-ons?',
+              'Eklentileri kurmadan çekirdek metodolojiyi kullanabilir miyim?',
             answer:
-              'Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.',
-            linkLabel: 'Browse the add-ons',
+              'Evet. Eklentiler isteğe bağlı katmanlardır ve hiçbirini içermeyen bir depo tamamen DWP uyumludur. Devcontainer’lar, Dailybot raporlaması, bağımlılık yükseltmeleri, tasarım sistemi desteği ve isteğe bağlı CI incelemesi yalnızca deponuza uyduğunda ve bunları açıkça kabul ettiğinizde sunulur.',
+            linkLabel: 'Eklentilere göz atın',
             linkPath: '/spec/addons',
           },
           {
             id: 'no-test-toolchain',
-            question: 'What if my repository has no tests or linting yet?',
+            question: 'Depomda henüz test veya lint yoksa ne olur?',
             answer:
-              'DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.',
-            linkLabel: 'Read the agent protocol',
+              'DWP, bir araç zincirinin yokluğunu bir muafiyet olarak görmez. Kuruluma alma sırasında ajan, yığına uygun bir doğrulama kurulumu önerir, komutları depo dokümantasyonuna kaydeder ve bu komutları gelecekteki kapılar için hedef olarak kullanır; öneri incelemeniz için görünür kalır.',
+            linkLabel: 'Ajan protokolünü okuyun',
             linkPath: '/spec/agent-protocol',
           },
           {

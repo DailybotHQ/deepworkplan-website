@@ -830,6 +830,15 @@ export const vi: SiteTranslations = {
             linkPath: '/quickstart',
           },
           {
+            id: 'lite-vs-full',
+            question:
+              'Sự khác biệt giữa một kế hoạch Lite và một kế hoạch Full là gì?',
+            answer:
+              'Đây là một lựa chọn về cách biểu diễn, không phải một sự đánh đổi về độ chặt chẽ. Mọi kế hoạch đều bắt đầu như một thư mục Lite: một README gọn gàng với các bản ghi tác vụ được neo (anchored), đã có thể thực thi được ngay, không phải một bản nháp dang dở. Lệnh `create` chỉ mở rộng thành các tệp tác vụ Full khi mức chi tiết hướng dẫn, các phụ thuộc hoặc hợp đồng của một tác vụ không vừa với một bản ghi gọn gàng có thể rà soát được; một yêu cầu rõ ràng cho một trong hai định dạng luôn được tôn trọng, và một kế hoạch Lite có thể được nâng cấp thành Full sau đó mà không mất công việc đã hoàn thành. Cả hai định dạng đều mang cùng tiêu chí chấp nhận, cổng kiểm chứng, bằng chứng và Final Review bắt buộc như nhau.',
+            linkLabel: 'Đọc phương pháp luận',
+            linkPath: '/methodology',
+          },
+          {
             id: 'is-it-a-tool',
             question:
               'Nó là một công cụ, một framework hay một phương pháp luận?',
@@ -847,28 +856,36 @@ export const vi: SiteTranslations = {
             linkPath: '/kit',
           },
           {
-            id: 'what-is-installed',
-            question: 'What exactly gets installed, and where?',
+            id: 'how-to-use',
+            question: 'Tôi dùng nó như thế nào?',
             answer:
-              'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles AGENTS.md, docs/, .agents/ and the gitignored .dwp/ workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
-            linkLabel: 'See the adoption flow',
+              'Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx skills add DailybotHQ/deepworkplan-skill` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.',
+            linkLabel: 'Khởi động nhanh',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'what-is-installed',
+            question: 'Chính xác thì những gì được cài đặt, và ở đâu?',
+            answer:
+              'Agent skill được cài ở bất cứ đâu agent của bạn tải skill cấp dự án hoặc cấp người dùng. Sau đó, onboarding thích ứng chính repository: nó tạo mới hoặc hòa giải `AGENTS.md`, `docs/`, `.agents/` và không gian làm việc `.dwp/` được gitignore. Skill dạy agent phương pháp; repository giữ ngữ cảnh, bộ kit và bằng chứng kế hoạch mà các agent khác cần để tiếp tục.',
+            linkLabel: 'Xem luồng áp dụng',
             linkPath: '/init',
           },
           {
             id: 'requires-git',
-            question: 'Does Deep Work Plan require Git?',
+            question: 'Deep Work Plan có yêu cầu Git không?',
             answer:
-              'Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including state.json checkpoints and gate records, is required so recovery does not depend on a chat transcript.',
-            linkLabel: 'Read about repository archetypes',
+              'Git được khuyến nghị cho repository vì lịch sử của nó là một phần của bề mặt khôi phục và rà soát, nhưng phương pháp luận cũng có thể chạy trong một không gian làm việc agent mà không cần repository Git. Trong trường hợp đó, tầng trạng thái đọc được bằng máy — gồm các điểm kiểm tra `state.json` và bản ghi cổng kiểm chứng — là bắt buộc, để việc khôi phục không phụ thuộc vào bản ghi hội thoại.',
+            linkLabel: 'Đọc về các nguyên mẫu repository',
             linkPath: '/spec/archetypes',
           },
           {
             id: 'skill-plan-spec',
             question:
-              'What is the difference between a skill, a plan and a product specification?',
+              'Sự khác biệt giữa một skill, một kế hoạch và một đặc tả sản phẩm là gì?',
             answer:
-              'A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.',
-            linkLabel: 'Read the specification',
+              'Một skill mô tả cách agent thực hiện một quy trình có thể lặp lại. Một kế hoạch DWP mô tả một thay đổi cụ thể thông qua phạm vi, tiêu chí chấp nhận, cổng kiểm chứng và bằng chứng. Một đặc tả sản phẩm mô tả hành vi hiện tại của sản phẩm và tiến hóa qua các delta sau khi triển khai; skill và kế hoạch cũng là đặc tả, nhưng chúng mô tả quy trình và thay đổi chứ không duy trì hợp đồng sản phẩm chuẩn tắc đó.',
+            linkLabel: 'Đọc đặc tả',
             linkPath: '/spec/dwp-specification',
           },
         ],
@@ -877,14 +894,6 @@ export const vi: SiteTranslations = {
         id: 'how',
         title: 'Cách một kế hoạch vận hành',
         items: [
-          {
-            id: 'how-to-use',
-            question: 'Tôi dùng nó như thế nào?',
-            answer:
-              'Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx skills add DailybotHQ/deepworkplan-skill` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa bản nháp hoặc kế hoạch đang chạy; `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.',
-            linkLabel: 'Khởi động nhanh',
-            linkPath: '/quickstart',
-          },
           {
             id: 'gates',
             question:
@@ -948,18 +957,19 @@ export const vi: SiteTranslations = {
           },
           {
             id: 'gate-fails',
-            question: 'What happens when a validation gate fails?',
+            question: 'Điều gì xảy ra khi một cổng kiểm chứng thất bại?',
             answer:
-              'The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.',
-            linkLabel: 'Read the agent protocol',
+              'Tác vụ được ghi nhận là bị chặn và agent dừng lại trước khi tuyên bố hoàn thành. Bạn có thể kiểm tra bằng chứng, sửa mã hoặc tinh chỉnh tác vụ, rồi tiếp tục; một lệnh thất bại là tín hiệu để giải quyết sự sai lệch, không phải giấy phép để làm yếu cổng kiểm chứng.',
+            linkLabel: 'Đọc giao thức agent',
             linkPath: '/spec/agent-protocol',
           },
           {
             id: 'unattended-runs',
-            question: 'Can a plan run unattended overnight or in CI?',
+            question:
+              'Một kế hoạch có thể chạy không giám sát qua đêm hoặc trong CI không?',
             answer:
-              'Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.',
-            linkLabel: 'Read the unattended protocol',
+              'Có, khi kế hoạch đã được phê duyệt từ trước, mang tầng trạng thái bắt buộc và trao cho agent thẩm quyền có giới hạn. Một lượt chạy không giám sát phải dừng lại và ghi nhận một điểm chặn khi thực tế lệch khỏi kế hoạch, một cổng kiểm chứng thất bại ngoài phạm vi sửa chữa đã định, hoặc cần một phê duyệt hay thông tin xác thực mới.',
+            linkLabel: 'Đọc giao thức chạy không giám sát',
             linkPath: '/spec/agent-protocol',
           },
         ],
@@ -1013,18 +1023,19 @@ export const vi: SiteTranslations = {
           {
             id: 'core-and-addons',
             question:
-              'Can I use the core methodology without installing add-ons?',
+              'Tôi có thể dùng phương pháp luận cốt lõi mà không cài add-on nào không?',
             answer:
-              'Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.',
-            linkLabel: 'Browse the add-ons',
+              'Có. Add-on là các tầng tùy chọn, và một repository không dùng add-on nào vẫn tuân thủ DWP đầy đủ. Devcontainer, báo cáo Dailybot, nâng cấp phụ thuộc, hỗ trợ design-system và review CI tùy chọn chỉ được đề xuất khi chúng phù hợp với repository của bạn và bạn chấp nhận chúng một cách rõ ràng.',
+            linkLabel: 'Xem các add-on',
             linkPath: '/spec/addons',
           },
           {
             id: 'no-test-toolchain',
-            question: 'What if my repository has no tests or linting yet?',
+            question:
+              'Nếu repository của tôi chưa có test hay linting thì sao?',
             answer:
-              'DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.',
-            linkLabel: 'Read the agent protocol',
+              'DWP không coi việc thiếu một toolchain là một lối thoát miễn trừ. Trong quá trình onboarding, agent đề xuất một thiết lập kiểm chứng phù hợp với stack, ghi các lệnh đó vào tài liệu repository và dùng chính các lệnh đó làm mục tiêu cho các cổng kiểm chứng sau này; đề xuất vẫn hiển thị để bạn rà soát.',
+            linkLabel: 'Đọc giao thức agent',
             linkPath: '/spec/agent-protocol',
           },
           {

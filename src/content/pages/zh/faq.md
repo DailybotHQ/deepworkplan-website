@@ -1,7 +1,7 @@
 ---
 title: "常见问题 — Deep Work Plan"
 description: "人们关于 Deep Work Plan 最常提出的疑问，都在这里得到简明解答：它究竟做什么、逐任务的验证关卡如何实现、会话中断后如何从磁盘恢复执行、它与规范驱动工具、代理工作流框架和各代理自带的计划模式相比有何异同，以及如何把它接入你的代码仓库，开始第一份计划。"
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-11
 ---
 
 ## 常见问题
@@ -22,6 +22,12 @@ Deep Work Plan 将一个代码仓库转变为结构化环境，让编码代理�
 
 [快速开始](https://deepworkplan.com/zh/quickstart)
 
+### Lite 计划与 Full 计划有什么区别？
+
+这是一种呈现形式的选择，而非严格程度的取舍。每份计划都以 Lite 文件夹的形式开始：一份带有锚定任务记录的紧凑 README，它已经可以执行，而不是一份未完成的草稿。只有当某项任务的指令细节、依赖关系或契约无法容纳进一份可审阅的紧凑记录时，`create` 才会展开为 Full 任务文件；对任一格式的明确要求都会被遵从，而且 Lite 计划之后可以被提升为 Full，且不会丢失已完成的工作。两种格式承载着相同的验收标准、验证关卡、证据与强制性的 Final Review。
+
+[阅读方法论](https://deepworkplan.com/zh/methodology)
+
 ### 它是工具、框架还是方法论？
 
 一套被打包为可安装技能的方法论。没有服务器、没有账号、没有专有格式，除你已在使用的编码代理之外也没有额外的运行时。被安装的是代理阅读的指令、一小组用于上下文检测与符合性检查的 shell 脚本，以及你的仓库所采纳的约定。计划产出的一切都是你仓库中的 Markdown 与 JSON，无需任何工具即可阅读。
@@ -34,13 +40,31 @@ Deep Work Plan 将一个代码仓库转变为结构化环境，让编码代理�
 
 [浏览套件](https://deepworkplan.com/zh/kit)
 
-## 计划如何运行
-
 ### 如何使用？
 
-三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx skills add DailybotHQ/deepworkplan-skill`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑草稿或进行中的计划；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。
+三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx skills add DailybotHQ/deepworkplan-skill`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑一份进行中的计划（范围、任务，或将 Lite 计划提升为 Full）；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。
 
 [快速开始](https://deepworkplan.com/zh/quickstart)
+
+### 具体会安装什么、安装到哪里？
+
+代理技能会被安装到你的代理加载项目或用户技能的位置。随后，接入会适配仓库本身：创建或调和 `AGENTS.md`、`docs/`、`.agents/` 以及被 gitignore 的 `.dwp/` 工作区。技能教会代理这套方法；仓库则保存其他代理接续工作所需的上下文、套件与计划证据。
+
+[查看采用流程](https://deepworkplan.com/zh/init)
+
+### Deep Work Plan 需要 Git 吗？
+
+对代码仓库而言推荐使用 Git，因为其历史记录是恢复与审查界面的一部分；但该方法论也可以在没有 Git 仓库的代理工作区中运行。在那种情况下，必须具备可机器读取的状态层——包括 `state.json` 检查点与关卡记录——以使恢复不依赖聊天记录。
+
+[了解仓库原型](https://deepworkplan.com/zh/spec/archetypes)
+
+### 技能、计划与产品规范之间有什么区别？
+
+技能描述代理如何执行一套可重复的流程。DWP 计划通过范围、验收标准、验证关卡与证据来描述一项具体的变更。产品规范描述产品当前的行为，并在实现之后通过增量持续演进；技能与计划本身也是规范，只是它们描述的是流程与变更，而非维护那份权威的产品契约。
+
+[阅读规范](https://deepworkplan.com/zh/spec/dwp-specification)
+
+## 计划如何运行
 
 ### 验证关卡是如何实现的？需要人工签署吗？
 
@@ -84,6 +108,18 @@ Deep Work Plan 将一个代码仓库转变为结构化环境，让编码代理�
 
 [查看规范](https://deepworkplan.com/zh/spec/dwp-specification)
 
+### 验证关卡失败时会发生什么？
+
+该任务会被记录为受阻，代理会在宣称完成之前停下。你可以查看证据、修复代码或精炼任务，然后再恢复执行；命令失败是需要解决不一致之处的信号，而不是削弱关卡的许可。
+
+[阅读代理协议](https://deepworkplan.com/zh/spec/agent-protocol)
+
+### 计划可以在夜间或 CI 中无人值守地运行吗？
+
+可以，前提是该计划已提前获得批准、具备所需的状态层，并赋予代理有界的权限。当现实与计划出现分歧、关卡失败且超出其计划内的修复范围，或需要新的批准或凭据时，无人值守的运行必须停止并记录一个阻塞项。
+
+[阅读无人值守协议](https://deepworkplan.com/zh/spec/agent-protocol)
+
 ## 它与其他方案的对比
 
 ### 它与 Spec Kit、OpenSpec 或 Kiro 等规范驱动工具有何不同？
@@ -111,6 +147,18 @@ Deep Work Plan 将一个代码仓库转变为结构化环境，让编码代理�
 接入是非破坏性的：它会检测已有的 `AGENTS.md`、`docs/`、`.agents/` 或 `CLAUDE.md`，采取调和而非覆盖，并在替换任何内容之前先询问。它会写入带真实命令的 `AGENTS.md` 索引、一棵经过推理的 `docs/` 树、各模块文档、带轻量 `dwp-*` 命令的 `.agents/` 套件、一个被 gitignore 的 `.dwp/` 输出区、一份经过验证的测试映射，以及必备的本地代码审查（AI Diff Reviewer 技能加一份为仓库定制的审查扩展）。随后它会运行自检与符合性检查器，让你看到产出了什么。在更早版本下接入的仓库会得到一次定向升级，只补上缺失的部分。
 
 [采用入口](https://deepworkplan.com/zh/init)
+
+### 不安装附加组件，也能使用核心方法论吗？
+
+可以。附加组件是可选叠加层，未安装任何附加组件的仓库依然完全符合 DWP 规范。Devcontainer、Dailybot 报告、依赖升级、设计系统支持以及可选的 CI 审查，只有在适合你的仓库、且你明确接受时才会提供。
+
+[浏览附加组件](https://deepworkplan.com/zh/spec/addons)
+
+### 如果我的仓库还没有测试或 lint，该怎么办？
+
+DWP 不会把缺少工具链当作免检的理由。在接入过程中，代理会提出与技术栈相匹配的验证方案，将相应命令记录进仓库文档，并以这些命令作为未来关卡的目标；该提案会保持可见，供你审阅。
+
+[阅读代理协议](https://deepworkplan.com/zh/spec/agent-protocol)
 
 ### 它收费吗？效率如何衡量？
 
