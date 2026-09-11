@@ -76,10 +76,12 @@ Verstehen Sie zuerst das Repository, schlagen Sie dann vor, was Sie tun werden.
   ändern, und alles Bestehende, das Sie abgleichen oder ersetzen wollen — und **bitten Sie den Benutzer um Bestätigung**,
   bevor Sie fortfahren. Bei einem großen Repository (viele Module oder viele zu generierende Artefakte) nutzt die
   onboard-Sub-Skill einen plangesteuerten Pfad: Sie schließt die Erkundung ab, generiert `AGENTS.md`, gibt dann
-  einen Onboarding-Deep-Work-Plan unter `.dwp/drafts/` aus und übergibt an `/dwp-refine` → `/dwp-execute`
+  einen Onboarding-Deep-Work-Plan unter `.dwp/plans/` aus und übergibt an `/dwp-execute`
   → `/dwp-resume` nach Bedarf.
 
 ## 2. Die Deep Work Plan Skill installieren
+
+> **Der kurze Weg.** Die Skill bringt ihr eigenes Onboarding mit, daher genügt die Installation. Führen Sie nach der Installation `/deepworkplan-onboard` aus — sie erledigt alles, was die Abschnitte 3–7 beschreiben: Reconnaissance, `AGENTS.md`, `docs/`, Dokumentation je Modul, `.agents/`, die erforderliche lokale Überprüfung, die optionalen Addons und die abschließende Selbstprüfung. Lesen Sie weiter, um zu erfahren, was diese Sub-Skill tut — und für den Ersatzweg, wenn ein Agent keine Skills laden kann.
 
 Installieren Sie die Skill, sodass die Agenten dieses Repositorys strukturierte Arbeit planen und ausführen können. Sie liefert einen Router
 plus acht Sub-Skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard` und `author`.
@@ -127,7 +129,7 @@ Methodik angleichen), statt es zu überschreiben — und bestätigen Sie mit dem
 5. **Die DWP-Skill, angepasst.** Die installierte Skill ist die Engine; das eigene Kit des Repositorys
    (Skills, Agenten, Befehle) muss **für dieses Repository durchdacht** sein — niemals eine Kopie des Kits eines anderen
    Repositorys.
-6. **`.dwp/` + `tmp/`.** Legen Sie ein per gitignore ausgeschlossenes `.dwp/` mit `plans/` und `drafts/` an, plus einen `tmp/`-
+6. **`.dwp/` + `tmp/`.** Legen Sie ein per gitignore ausgeschlossenes `.dwp/` mit `plans/` an, plus einen `tmp/`-
    Scratch-Bereich — beide nicht-destruktiv zur `.gitignore` hinzugefügt (anhängen, niemals neu schreiben).
 
 ## 4. Die erforderliche lokale Überprüfung installieren, dann die Opt-in-Addons anbieten
@@ -165,7 +167,7 @@ den `.agents/docs/`-Katalog synchron mit dem, was auf der Festplatte existiert.
 
 Erzeugen Sie Deep Work Plans für jede Aufgabe und führen Sie sie Aufgabe für Aufgabe aus:
 
-- `/dwp-create <goal>` — ein Ziel in nummerierte, aufeinanderfolgende Aufgaben mit Validierungs-Gates zerlegen.
+- `/dwp-create <Ziel>` — verwandelt ein Ziel in einen ausführbaren Plan. Seit Standard 2.4.0 hat ein Plan zwei Formate: **Lite**, dessen Task-Datensätze inline in der README des Plans liegen, für kleine, abgegrenzte Arbeit; und **Full**, eine Datei je Task, für langlaufende Arbeit. Beide tragen denselben Vertrag — stabile Task-IDs, berührte Oberfläche, Akzeptanzkriterien, Validierungs-Gates, Abschlussnachweise und ein Final Review — Lite ist also günstiger in der Darstellung, ohne schwächer zu sein. Ergänzen Sie `lite` oder `full`, um ein Format zu erzwingen, und `trust`, um ohne Review-Runde zu materialisieren; ohne Präferenz empfiehlt DWP eines und begründet es. Ein Lite-Plan wird mit `/dwp-refine promote` hochgestuft.
 - `/dwp-execute` — den Plan Aufgabe für Aufgabe ausführen, den Fortschritt aktualisieren und jedes Gate validieren.
 - `/dwp-status` — über den Fortschritt berichten, ohne Änderungen vorzunehmen.
 - `/dwp-refine` — Aufgaben hinzufügen, entfernen oder umordnen, während abgeschlossene Arbeit bewahrt wird.
@@ -190,7 +192,7 @@ Bestätigen Sie dann:
 - [ ] `.agents/` existiert mit `agents/`, `commands/` (schlanke `dwp-*`-Delegatoren, die auf die Skill verweisen,
       keine kopierten Abläufe), `skills/` und einem Katalog, der dem entspricht, was auf der Festplatte existiert;
       `.claude → .agents` und `.cursor → .agents` lösen sich auf.
-- [ ] `.dwp/` existiert, ist per gitignore ausgeschlossen und hat `plans/` und `drafts/`; `tmp/` existiert und ist per gitignore ausgeschlossen.
+- [ ] `.dwp/` existiert, ist per gitignore ausgeschlossen und hat `plans/`; `tmp/` existiert und ist per gitignore ausgeschlossen.
 - [ ] Bestehender Benutzerinhalt wurde mit Einwilligung bewahrt oder abgeglichen — nichts wurde stillschweigend zerstört.
 - [ ] Sie können einen Deep Work Plan erzeugen und ihn Aufgabe für Aufgabe ausführen, wobei Sie jedes Gate validieren.
 

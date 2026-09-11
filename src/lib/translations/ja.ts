@@ -190,7 +190,7 @@ export const ja: SiteTranslations = {
         {
           title: 'DWP スキルをインストールし、.dwp/ を整備する',
           description:
-            'Deep Work Plan スキルを組み込み、計画とドラフトのための gitignore された .dwp/ フォルダを作成し、必須の AI Diff Reviewer ローカルレビューをインストールします。その後、devcontainer サポートなどのオプトイン式アドオンを任意で重ねられます。',
+            'Deep Work Plan スキルを組み込み、計画のための gitignore された .dwp/ フォルダを作成し、必須の AI Diff Reviewer ローカルレビューをインストールします。その後、devcontainer サポートなどのオプトイン式アドオンを任意で重ねられます。',
         },
       ],
     },
@@ -268,7 +268,7 @@ export const ja: SiteTranslations = {
         {
           label: 'Git ネイティブ、再開可能、.dwp/',
           detail:
-            'デーモンも外部状態もありません。計画とドラフトは gitignore された .dwp/ フォルダに置かれ、どのタスクも git だけから再開できます。コンテキストが溢れたあとでも。',
+            'デーモンも外部状態もありません。計画は gitignore された .dwp/ フォルダに置かれ、どのタスクも git だけから再開できます。コンテキストが溢れたあとでも。',
         },
       ],
     },
@@ -770,7 +770,7 @@ export const ja: SiteTranslations = {
       {
         title: 'リポジトリのオンボーディングを実行する',
         description:
-          'onboard サブスキルを呼び出し、エージェントに実際のリポジトリ（スタック、パッケージマネージャー、実際の検証コマンド）を推論させます。その後、AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、エージェント横断の .agents/ 拠点（.claude → .agents および .cursor → .agents シンボリックリンクつき）を生成し、薄い dwp-* コマンドを配線し、計画とドラフトのための gitignore された .dwp/ を整備します。大規模なリポジトリでは、onboard サブスキルはプラン駆動パスを使用します。偵察を完了してから、オンボーディング用の Deep Work Plan を出力します。テンプレートは一切なく、すべてがリポジトリに適応されます。',
+          'onboard サブスキルを呼び出し、エージェントに実際のリポジトリ（スタック、パッケージマネージャー、実際の検証コマンド）を推論させます。その後、AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、エージェント横断の .agents/ 拠点（.claude → .agents および .cursor → .agents シンボリックリンクつき）を生成し、薄い dwp-* コマンドを配線し、計画のための gitignore された .dwp/ を整備します。大規模なリポジトリでは、onboard サブスキルはプラン駆動パスを使用します。偵察を完了してから、オンボーディング用の Deep Work Plan を出力します。テンプレートは一切なく、すべてがリポジトリに適応されます。',
         commands: ['/deepworkplan-onboard'],
       },
       {

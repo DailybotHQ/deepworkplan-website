@@ -188,7 +188,7 @@ export const id: SiteTranslations = {
         {
           title: 'Memasang skill DWP dan menyiapkan .dwp/',
           description:
-            'Menyambungkan skill Deep Work Plan dan membuat folder .dwp/ yang di-gitignore untuk rencana dan draf, memasang review lokal AI Diff Reviewer yang wajib, lalu secara opsional menambahkan addon opt-in seperti dukungan devcontainer.',
+            'Menyambungkan skill Deep Work Plan dan membuat folder .dwp/ yang di-gitignore untuk rencana, memasang review lokal AI Diff Reviewer yang wajib, lalu secara opsional menambahkan addon opt-in seperti dukungan devcontainer.',
         },
       ],
     },
@@ -265,7 +265,7 @@ export const id: SiteTranslations = {
         {
           label: 'Git-native, dapat dilanjutkan, .dwp/',
           detail:
-            'Tanpa daemon dan tanpa status eksternal. Rencana dan draf tersimpan di folder .dwp/ yang di-gitignore, dan tugas apa pun dapat dilanjutkan hanya dari git — bahkan setelah konteks meluap.',
+            'Tanpa daemon dan tanpa status eksternal. Rencana tersimpan di folder .dwp/ yang di-gitignore, dan tugas apa pun dapat dilanjutkan hanya dari git — bahkan setelah konteks meluap.',
         },
       ],
     },
@@ -768,7 +768,7 @@ export const id: SiteTranslations = {
       {
         title: 'Jalankan onboarding repositori',
         description:
-          'Panggil sub-skill onboard dan biarkan agent bernalar tentang repo yang sebenarnya — stack, package manager, dan perintah validasi nyatanya. Ia kemudian menghasilkan AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah .agents/ lintas agent (dengan symlink .claude → .agents dan .cursor → .agents), menyambungkan command dwp-* yang tipis, dan menyiapkan .dwp/ yang di-gitignore untuk rencana dan draf. Untuk repo besar, sub-skill onboard menggunakan jalur berbasis rencana: menyelesaikan rekognisi, lalu menghasilkan Deep Work Plan onboarding. Tidak ada yang ditemplatkan; semuanya disesuaikan dengan repositori Anda.',
+          'Panggil sub-skill onboard dan biarkan agent bernalar tentang repo yang sebenarnya — stack, package manager, dan perintah validasi nyatanya. Ia kemudian menghasilkan AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah .agents/ lintas agent (dengan symlink .claude → .agents dan .cursor → .agents), menyambungkan command dwp-* yang tipis, dan menyiapkan .dwp/ yang di-gitignore untuk rencana. Untuk repo besar, sub-skill onboard menggunakan jalur berbasis rencana: menyelesaikan rekognisi, lalu menghasilkan Deep Work Plan onboarding. Tidak ada yang ditemplatkan; semuanya disesuaikan dengan repositori Anda.',
         commands: ['/deepworkplan-onboard'],
       },
       {

@@ -63,7 +63,7 @@ Trước hết hãy hiểu repository, rồi đề xuất điều bạn sẽ là
   sửa đổi, và bất cứ thứ gì hiện có mà bạn đề nghị đối chiếu hay thay thế — rồi **đề nghị người dùng xác nhận**
   trước khi tiến hành. Với một repository lớn (nhiều mô-đun hoặc nhiều thành phần cần sinh ra), sub-skill
   onboard sử dụng lộ trình hướng kế hoạch: nó hoàn tất trinh sát, sinh `AGENTS.md`, rồi phát ra một
-  Deep Work Plan khởi tạo dưới `.dwp/drafts/` và chuyển giao cho `/dwp-refine` → `/dwp-execute`
+  Deep Work Plan khởi tạo dưới `.dwp/plans/` và chuyển giao cho `/dwp-execute`
   → `/dwp-resume` khi cần.
 
 ## Tin tưởng và xác minh (trước khi bạn cài đặt)
@@ -97,6 +97,8 @@ nó đã được kiểm tra.
 - **Báo cáo vấn đề.** Báo cáo các vấn đề bảo mật **riêng tư qua tính năng báo cáo lỗ hổng bảo mật của GitHub** trên repository liên quan — `https://github.com/DailybotHQ/deepworkplan-skill/security` hoặc `https://github.com/DailybotHQ/deepworkplan-website/security` — không phải dưới dạng issue công khai. Xem thêm `SECURITY.md` của mỗi repository, `https://deepworkplan.com/.well-known/security.txt`, và trang tin tưởng `https://deepworkplan.com/trust`.
 
 ## 2. Cài skill Deep Work Plan
+
+> **Đường tắt.** Skill mang theo quy trình onboarding của riêng nó, nên chỉ cần cài đặt là đủ. Sau khi cài, hãy chạy `/deepworkplan-onboard`: nó thực hiện mọi thứ mà các mục 3–7 mô tả — trinh sát, `AGENTS.md`, `docs/`, tài liệu theo từng mô-đun, `.agents/`, bản đánh giá cục bộ bắt buộc, các addon tùy chọn và bước tự kiểm tra cuối cùng. Hãy đọc tiếp để biết sub-skill đó sẽ làm gì — và đường dự phòng khi một tác nhân không thể nạp skill.
 
 Cài skill để các agent của repository này có thể lập kế hoạch và thực thi công việc có cấu trúc. Nó đi kèm một bộ định tuyến
 cùng tám sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard` và `author`.
@@ -144,7 +146,7 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
 5. **Skill DWP, đã thích ứng.** Skill đã cài là động cơ; bộ kit của riêng repository
    (skill, agent, command) phải **được suy luận cho repo này** — không bao giờ là một bản sao chép-dán bộ kit của repo
    khác.
-6. **`.dwp/` + `tmp/`.** Dựng một `.dwp/` được gitignore với `plans/` và `drafts/`, cùng một không gian nháp
+6. **`.dwp/` + `tmp/`.** Dựng một `.dwp/` được gitignore với `plans/`, cùng một không gian nháp
    `tmp/` — cả hai đều được thêm vào `.gitignore` một cách không phá hủy (nối thêm, không bao giờ viết lại).
 
 ## 4. Cài đặt đánh giá cục bộ bắt buộc, rồi đề xuất các addon tùy chọn
@@ -185,7 +187,7 @@ catalog `.agents/docs/` đồng bộ với những gì có trên đĩa.
 
 Sinh các Deep Work Plan cho mọi tác vụ và chạy chúng từng tác vụ một:
 
-- `/dwp-create <goal>` — phân rã một mục tiêu thành các tác vụ đánh số, tuần tự, với các cổng kiểm chứng.
+- `/dwp-create <mục tiêu>` — biến một mục tiêu thành kế hoạch thực thi được. Kể từ chuẩn 2.4.0, một kế hoạch có hai định dạng: **Lite**, với bản ghi công việc nằm nội tuyến trong README của kế hoạch, dành cho công việc nhỏ và có giới hạn rõ; và **Full**, mỗi công việc một tệp, dành cho công việc dài hơi. Cả hai mang cùng một hợp đồng — id công việc ổn định, bề mặt bị chạm tới, tiêu chí chấp nhận, cổng xác thực, bằng chứng hoàn thành và một Final Review — nên Lite chỉ rẻ hơn về biểu diễn chứ không yếu hơn. Thêm `lite` hoặc `full` để ép định dạng và `trust` để hiện thực hóa mà không cần vòng đánh giá; nếu không nêu ưu tiên, DWP sẽ đề xuất một định dạng và giải thích lý do. Kế hoạch Lite được nâng cấp bằng `/dwp-refine promote`.
 - `/dwp-execute` — thực thi kế hoạch từng tác vụ một, cập nhật tiến độ và kiểm chứng mỗi cổng.
 - `/dwp-status` — báo cáo tiến độ mà không thay đổi gì.
 - `/dwp-refine` — thêm, bớt hoặc sắp xếp lại các tác vụ trong khi giữ nguyên công việc đã hoàn tất.
@@ -211,7 +213,7 @@ Rồi xác nhận:
 - [ ] `.agents/` tồn tại với `agents/`, `commands/` (các bộ ủy thác `dwp-*` mỏng tham chiếu đến skill,
       không phải luồng sao chép), `skills/`, và một catalog khớp với thực tế trên đĩa;
       `.claude → .agents` và `.cursor → .agents` phân giải được.
-- [ ] `.dwp/` tồn tại, được gitignore, và có `plans/` cùng `drafts/`; `tmp/` tồn tại và được gitignore.
+- [ ] `.dwp/` tồn tại, được gitignore, và có `plans/`; `tmp/` tồn tại và được gitignore.
 - [ ] Nội dung hiện có của người dùng được giữ nguyên hoặc đối chiếu có sự đồng ý — không gì bị phá hủy lặng lẽ.
 - [ ] Bạn có thể sinh một Deep Work Plan và thực thi nó từng tác vụ một, kiểm chứng mỗi cổng.
 

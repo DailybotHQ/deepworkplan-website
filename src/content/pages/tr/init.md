@@ -63,8 +63,8 @@ Herhangi bir şeyi değiştirmeden önce, benimsediğiniz standardı anlamanız 
   dosyalar ve uzlaştırmayı ya da değiştirmeyi önerdiğiniz var olan her şey — ardından devam etmeden önce
   **kullanıcıdan onaylamasını isteyin**. Büyük bir depo (birçok modül veya üretilecek çok sayıda
   artefakt) için onboard alt skill'i plan güdümlü bir yol kullanır: keşfi tamamlar, `AGENTS.md`'yi
-  oluşturur, ardından `.dwp/drafts/` altında bir onboarding Deep Work Plan çıkarır ve gerektiğinde
-  `/dwp-refine` → `/dwp-execute` → `/dwp-resume`'a devreder.
+  oluşturur, ardından `.dwp/plans/` altında bir onboarding Deep Work Plan çıkarır ve gerektiğinde
+  `/dwp-execute` → `/dwp-resume`'a devreder.
 
 ## Güven ve doğrulama (kurmadan önce)
 
@@ -96,6 +96,8 @@ teşvik edilir: dikkatli bir ajan, denetlenene kadar alınan bir istemi güvenil
 - **Bir sorun bildirin.** Güvenlik sorunlarını ilgili depoda **GitHub'ın güvenlik açığı bildirme özelliği aracılığıyla özel olarak** bildirin — `https://github.com/DailybotHQ/deepworkplan-skill/security` veya `https://github.com/DailybotHQ/deepworkplan-website/security` — kamuya açık bir issue olarak değil. Ayrıca her deponun `SECURITY.md` dosyasına, `https://deepworkplan.com/.well-known/security.txt` adresine ve güven sayfası `https://deepworkplan.com/trust` adresine bakın.
 
 ## 2. Deep Work Plan skill’ini kurun
+
+> **Kısa yol.** Skill kendi onboarding’ini taşır, bu yüzden kurmak yeterlidir. Kurduktan sonra `/deepworkplan-onboard` komutunu çalıştırın; 3–7. bölümlerin anlattığı her şeyi yapar: keşif, `AGENTS.md`, `docs/`, modül başına dokümantasyon, `.agents/`, zorunlu yerel inceleme, isteğe bağlı eklentiler ve son öz denetim. Bu alt skill’in ne yapacağını — ve bir ajan skill yükleyemediğinde izlenecek yedek yolu — aşağıda okuyabilirsiniz.
 
 Bu deponun ajanlarının yapılandırılmış işi planlayıp yürütebilmesi için skill’i kurun. Bir yönlendirici
 ile sekiz alt skill içerir — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard` ve `author`.
@@ -144,7 +146,7 @@ teyit edin.
 5. **Uyarlanmış DWP skill’i.** Kurulu skill motordur; deponun kendi kiti
    (skill’ler, ajanlar, komutlar) **bu depo için akıl yürütülmüş** olmalıdır — asla başka bir deponun
    kitinin kopyala-yapıştırı değil.
-6. **`.dwp/` + `tmp/`.** `plans/` ve `drafts/` içeren gitignore’lanmış bir `.dwp/` ve bir `tmp/` karalama
+6. **`.dwp/` + `tmp/`.** `plans/` içeren gitignore’lanmış bir `.dwp/` ve bir `tmp/` karalama
    alanı iskeletleyin — ikisi de `.gitignore`’a tahrip edici olmadan eklenir (ekleyin, asla yeniden
    yazmayın).
 
@@ -184,7 +186,7 @@ olanla eşitli tutun.
 
 Herhangi bir görev için Deep Work Plan’ler üretin ve onları görev görev çalıştırın:
 
-- `/dwp-create <goal>` — bir hedefi doğrulama kapıları içeren numaralandırılmış, ardışık görevlere ayrıştırır.
+- `/dwp-create <hedef>` — bir hedefi çalıştırılabilir bir plana dönüştürür. 2.4.0 standardından beri bir planın iki biçimi vardır: görev kayıtları planın README’si içinde satır içi duran ve küçük, sınırlı işler için uygun **Lite**; ve görev başına bir dosya tutan, uzun soluklu işler için uygun **Full**. İkisi de aynı sözleşmeyi taşır — kararlı görev id’leri, dokunulan yüzey, kabul ölçütleri, doğrulama kapıları, tamamlanma kanıtı ve tek bir Final Review — yani Lite yalnızca temsil maliyeti düşüktür, daha zayıf değildir. Biçimi zorlamak için `lite` ya da `full`, inceleme turu olmadan somutlaştırmak için `trust` ekleyin; tercih belirtilmezse DWP birini önerir ve nedenini açıklar. Bir Lite plan `/dwp-refine promote` ile yükseltilir.
 - `/dwp-execute` — planı görev görev yürütür, ilerlemeyi günceller ve her kapıyı doğrular.
 - `/dwp-status` — değişiklik yapmadan ilerlemeyi raporlar.
 - `/dwp-refine` — tamamlanmış işi korurken görev ekler, çıkarır veya yeniden sıralar.
@@ -209,7 +211,7 @@ ardından şunları teyit edin:
 - [ ] `.agents/`, `agents/`, `commands/` (kopyalanmış akışlar değil, skill’e referans veren ince
       `dwp-*` yetki devredicileri), `skills/` ve diskte olanla eşleşen bir katalog ile vardır;
       `.claude → .agents` ve `.cursor → .agents` çözümlenir.
-- [ ] `.dwp/` vardır, gitignore’lanmıştır ve `plans/` ile `drafts/` içerir; `tmp/` vardır ve gitignore’lanmıştır.
+- [ ] `.dwp/` vardır, gitignore’lanmıştır ve `plans/` içerir; `tmp/` vardır ve gitignore’lanmıştır.
 - [ ] Var olan kullanıcı içeriği korundu ya da onayla uzlaştırıldı — hiçbir şey sessizce yok edilmedi.
 - [ ] Bir Deep Work Plan üretip onu görev görev yürütebilir, her kapıyı doğrulayabilirsiniz.
 

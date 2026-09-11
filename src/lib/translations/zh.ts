@@ -186,7 +186,7 @@ export const zh: SiteTranslations = {
         {
           title: '安装 DWP 技能并搭建 .dwp/',
           description:
-            '接入 Deep Work Plan 技能，并创建被 gitignore 的 .dwp/ 目录以存放计划与草稿，安装必需的 AI Diff Reviewer 本地评审，然后可选地叠加诸如 devcontainer 支持这样的可选附加组件。',
+            '接入 Deep Work Plan 技能，并创建被 gitignore 的 .dwp/ 目录以存放计划，安装必需的 AI Diff Reviewer 本地评审，然后可选地叠加诸如 devcontainer 支持这样的可选附加组件。',
         },
       ],
     },
@@ -263,7 +263,7 @@ export const zh: SiteTranslations = {
         {
           label: 'Git 原生、可恢复、.dwp/',
           detail:
-            '无守护进程，无外部状态。计划与草稿落入被 gitignore 的 .dwp/ 目录，任意任务仅凭 git 即可恢复——即便上下文溢出之后也是如此。',
+            '无守护进程，无外部状态。计划落入被 gitignore 的 .dwp/ 目录，任意任务仅凭 git 即可恢复——即便上下文溢出之后也是如此。',
         },
       ],
     },
@@ -759,7 +759,7 @@ export const zh: SiteTranslations = {
       {
         title: '运行代码仓库接入',
         description:
-          '调用 onboard 子技能，让代理对真实的仓库进行推理——它的技术栈、包管理器与真实的验证命令。随后它会生成 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个跨代理的 .agents/ 目录（含 .claude → .agents 和 .cursor → .agents 符号链接），接入轻量的 dwp-* 命令，并搭建一个被 gitignore 的 .dwp/ 以存放计划与草稿。对于大型仓库，onboard 子技能采用计划驱动路径：先完成探查，然后生成一份接入用的 Deep Work Plan。没有任何东西套用模板；一切都适配于你的代码仓库。',
+          '调用 onboard 子技能，让代理对真实的仓库进行推理——它的技术栈、包管理器与真实的验证命令。随后它会生成 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个跨代理的 .agents/ 目录（含 .claude → .agents 和 .cursor → .agents 符号链接），接入轻量的 dwp-* 命令，并搭建一个被 gitignore 的 .dwp/ 以存放计划。对于大型仓库，onboard 子技能采用计划驱动路径：先完成探查，然后生成一份接入用的 Deep Work Plan。没有任何东西套用模板；一切都适配于你的代码仓库。',
         commands: ['/deepworkplan-onboard'],
       },
       {
