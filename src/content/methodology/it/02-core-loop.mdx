@@ -19,7 +19,7 @@ Questo ciclo è la forma operativa dello spec-driven development. Il piano è la
 
 <CoreLoop lang="it" class="not-prose my-10" />
 
-- **create** — Genera un nuovo piano da un obiettivo. L’agente analizza l’obiettivo, lo scompone in attività sequenziali e scrive i file del piano. Dovrebbe porre domande di chiarimento prima di scrivere quando l’obiettivo è ambiguo.
+- **create** — Genera un nuovo piano da un obiettivo. L’agente analizza l’obiettivo, lo scompone in attività sequenziali e scrive i file del piano. Dovrebbe porre domande di chiarimento prima di scrivere quando l’obiettivo è ambiguo. In modalità guidata, l’agente materializza direttamente un [piano Lite](/spec/lite-plans) — una proposta compatta e già eseguibile — e lo sviluppatore decide se mantenerlo, promuoverlo a un piano Full a file di attività, modificarlo o fermarsi; in modalità trust, l’agente materializza direttamente la rappresentazione scelta (Lite o Full), senza passaggio di revisione. Vedi la [specifica](/spec/dwp-specification) per entrambe le rappresentazioni. L’analisi dei requisiti e il controllo di qualità del piano vengono eseguiti in entrambi i casi.
 - **execute** — Esegue il piano attività per attività. L’agente aggiorna il log dei progressi dopo ogni attività e ne segna lo stato di completamento. Non deve saltare attività senza registrarne il motivo.
 - **refine** — Modifica un piano esistente. L’agente può aggiungere, rimuovere o riordinare attività, ma deve preservare il lavoro completato e aggiornare la tabella delle attività.
 - **resume** — Continua un piano interrotto. L’agente legge il log dei progressi e i file delle attività per ricostruire lo stato, poi prosegue dalla prima attività incompleta.

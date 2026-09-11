@@ -19,7 +19,7 @@ Ta pętla jest operacyjną formą spec-driven development. Plan jest specyfikacj
 
 <CoreLoop lang="pl" class="not-prose my-10" />
 
-- **create** — Wygeneruj nowy plan na podstawie celu. W trybie guided plan jest przygotowywany jako dopracowany szkic do przeglądu; w trybie trust materializuje się bezpośrednio — analiza i kontrole jakości działają w każdym przypadku. Agent analizuje cel, rozkłada go na sekwencyjne zadania i zapisuje pliki planu. Gdy cel jest niejednoznaczny, powinien zadać pytania doprecyzowujące przed zapisem.
+- **create** — Wygeneruj nowy plan na podstawie celu. Agent analizuje cel, rozkłada go na sekwencyjne zadania i zapisuje pliki planu. Gdy cel jest niejednoznaczny, powinien zadać pytania doprecyzowujące przed zapisem. W trybie guided agent od razu materializuje [plan Lite](/spec/lite-plans) — kompaktową, już wykonywalną propozycję — a deweloper decyduje, czy go zachować, podnieść do planu Full z plikami zadań, edytować, czy zatrzymać się; w trybie trust agent od razu materializuje wybraną reprezentację (Lite lub Full) bez etapu przeglądu. Zobacz [specyfikację](/spec/dwp-specification) dla obu reprezentacji. Analiza wymagań i kontrola jakości planu działają w każdym przypadku.
 - **execute** — Realizuj plan zadanie po zadaniu. Agent aktualizuje dziennik postępu po każdym zadaniu i oznacza jego status ukończenia. Nie wolno mu pomijać zadań bez zapisania powodu.
 - **refine** — Zmodyfikuj istniejący plan. Agent może dodawać, usuwać lub zmieniać kolejność zadań, ale musi zachować ukończoną pracę i zaktualizować tabelę zadań.
 - **resume** — Kontynuuj przerwany plan. Agent czyta dziennik postępu i pliki zadań, by zrekonstruować stan, a następnie kontynuuje od pierwszego nieukończonego zadania.

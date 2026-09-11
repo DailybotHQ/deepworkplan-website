@@ -19,7 +19,7 @@ Cette boucle est la forme opérationnelle du développement piloté par la spéc
 
 <CoreLoop lang="fr" class="not-prose my-10" />
 
-- **create** — Génère un nouveau plan à partir d’un objectif. L’agent analyse l’objectif, le décompose en tâches séquentielles et écrit les fichiers du plan. Il doit poser des questions de clarification avant d’écrire lorsque l’objectif est ambigu.
+- **create** — Génère un nouveau plan à partir d’un objectif. L’agent analyse l’objectif, le décompose en tâches séquentielles et écrit les fichiers du plan. Il doit poser des questions de clarification avant d’écrire lorsque l’objectif est ambigu. En mode guidé, l’agent matérialise directement un [plan Lite](/spec/lite-plans) — une proposition compacte et déjà exécutable — et le développeur choisit de le conserver, de le promouvoir vers un plan Full à fichiers de tâche, de le modifier ou d’arrêter ; en mode trust, l’agent matérialise directement la représentation choisie (Lite ou Full), sans étape de relecture. Voir la [spécification](/spec/dwp-specification) pour les deux représentations. L’analyse des exigences et la vérification de la qualité du plan s’exécutent dans tous les cas.
 - **execute** — Exécute le plan tâche par tâche. L’agent met à jour le journal de progression après chaque tâche et marque le statut d’achèvement de la tâche. Il ne doit pas sauter de tâches sans en consigner la raison.
 - **refine** — Modifie un plan existant. L’agent peut ajouter, retirer ou réordonner des tâches, mais il doit préserver le travail achevé et mettre à jour le tableau des tâches.
 - **resume** — Poursuit un plan interrompu. L’agent lit le journal de progression et les fichiers de tâche pour reconstruire l’état, puis reprend à partir de la première tâche inachevée.

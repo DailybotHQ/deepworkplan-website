@@ -19,7 +19,7 @@ Este ciclo es la forma operativa del desarrollo guiado por especificación. El p
 
 <CoreLoop lang="es" class="not-prose my-10" />
 
-- **crear**: generar un plan nuevo a partir de un objetivo. El agente analiza el objetivo, lo descompone en tareas secuenciales y escribe los archivos del plan. Debe formular preguntas aclaratorias antes de escribir cuando el objetivo es ambiguo.
+- **crear**: generar un plan nuevo a partir de un objetivo. El agente analiza el objetivo, lo descompone en tareas secuenciales y escribe los archivos del plan. Debe formular preguntas aclaratorias antes de escribir cuando el objetivo es ambiguo. En modo guiado, el agente materializa directamente un [plan Lite](/es/spec/lite-plans) — una propuesta compacta y ya ejecutable — y el desarrollador decide conservarlo, promoverlo a un plan Full de archivo por tarea, editarlo o detenerse; en modo trust, el agente materializa directamente la representación elegida (Lite o Full), sin paso de revisión. Consulta la [especificación](/es/spec/dwp-specification) para ambas representaciones. El análisis de requisitos y la comprobación de calidad del plan se ejecutan en ambos casos.
 - **ejecutar**: recorrer el plan tarea por tarea. El agente actualiza el registro de avance tras cada tarea y marca su estado de finalización. No debe omitir tareas sin registrar el motivo.
 - **refinar**: modificar un plan existente. El agente puede agregar, quitar o reordenar tareas, pero debe preservar el trabajo completado y actualizar la tabla de tareas.
 - **reanudar**: continuar un plan interrumpido. El agente lee el registro de avance y los archivos de tarea para reconstruir el estado, y luego continúa desde la primera tarea incompleta.

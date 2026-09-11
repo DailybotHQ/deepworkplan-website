@@ -19,7 +19,7 @@ Esse loop é a forma operacional do desenvolvimento orientado a especificação.
 
 <CoreLoop lang="pt" class="not-prose my-10" />
 
-- **create** — Gera um novo plano a partir de um objetivo. O agente analisa o objetivo, decompõe-o em tarefas sequenciais e escreve os arquivos do plano. Ele deve fazer perguntas de esclarecimento antes de escrever quando o objetivo for ambíguo.
+- **create** — Gera um novo plano a partir de um objetivo. O agente analisa o objetivo, decompõe-o em tarefas sequenciais e escreve os arquivos do plano. Ele deve fazer perguntas de esclarecimento antes de escrever quando o objetivo for ambíguo. No modo guiado, o agente materializa diretamente um [plano Lite](/spec/lite-plans) — uma proposta compacta e já executável — e o desenvolvedor decide mantê-lo, promovê-lo a um plano Full por arquivo de tarefa, editá-lo ou parar; no modo trust, o agente materializa diretamente a representação escolhida (Lite ou Full), sem etapa de revisão. Veja a [especificação](/spec/dwp-specification) para ambas as representações. A análise de requisitos e a verificação de qualidade do plano são executadas em ambos os casos.
 - **execute** — Executa o plano tarefa a tarefa. O agente atualiza o registro de progresso após cada tarefa e marca o status de conclusão da tarefa. Ele não deve pular tarefas sem registrar o motivo.
 - **refine** — Modifica um plano existente. O agente pode adicionar, remover ou reordenar tarefas, mas deve preservar o trabalho concluído e atualizar a tabela de tarefas.
 - **resume** — Continua um plano interrompido. O agente lê o registro de progresso e os arquivos de tarefa para reconstruir o estado, e então continua a partir da primeira tarefa incompleta.

@@ -19,7 +19,7 @@ This loop is the operational form of spec-driven development. The plan is the sp
 
 <CoreLoop lang="en" class="not-prose my-10" />
 
-- **create** — Generate a new plan from a goal. The agent analyzes the goal, decomposes it into sequential tasks, and writes the plan files. It should ask clarifying questions before writing when the goal is ambiguous. In guided mode the plan is staged as a refined draft for review; in trust mode it materializes directly — the analysis and quality checks run either way.
+- **create** — Generate a new plan from a goal. The agent analyzes the goal, decomposes it into sequential tasks, and writes the plan files. It should ask clarifying questions before writing when the goal is ambiguous. In guided mode the agent materializes a [Lite plan](/spec/lite-plans) directly — a compact, already-executable proposal — and the developer chooses to retain it, promote it to a Full task-file plan, edit it, or stop; in trust mode the agent materializes the chosen representation (Lite or Full) directly with no review step. See the [specification](/spec/dwp-specification) for both representations. The requirements analysis and plan-quality check run either way.
 - **execute** — Run the plan task by task. The agent updates the progress log after each task and marks the task's completion status. It must not skip tasks without recording why.
 - **refine** — Modify an existing plan. The agent may add, remove, or reorder tasks, but it must preserve completed work and update the task table.
 - **resume** — Continue an interrupted plan. The agent reads the progress log and the task files to reconstruct state, then continues from the first incomplete task.

@@ -19,7 +19,7 @@ Bu döngü, spec odaklı geliştirmenin işlevsel biçimidir. Plan, bir ajanın 
 
 <CoreLoop lang="tr" class="not-prose my-10" />
 
-- **create** — Bir hedeften yeni bir plan üretir. Ajan, hedefi analiz eder, ardışık görevlere ayırır ve plan dosyalarını yazar. Hedef belirsiz olduğunda yazmadan önce açıklayıcı sorular sormalıdır.
+- **create** — Bir hedeften yeni bir plan üretir. Ajan, hedefi analiz eder, ardışık görevlere ayırır ve plan dosyalarını yazar. Hedef belirsiz olduğunda yazmadan önce açıklayıcı sorular sormalıdır. Yönlendirilmiş modda ajan, doğrudan bir [Lite plan](/spec/lite-plans) — kompakt, zaten yürütülebilir bir öneri — somutlaştırır ve geliştirici bunu korumayı, görev dosyalı bir Full plana yükseltmeyi, düzenlemeyi ya da durdurmayı seçer; trust modunda ajan, seçilen temsili (Lite veya Full) inceleme adımı olmadan doğrudan somutlaştırır. Her iki temsil için [spesifikasyona](/spec/dwp-specification) bakın. Gereksinim analizi ve plan kalite kontrolü her iki durumda da çalışır.
 - **execute** — Planı görev görev çalıştırır. Ajan, her görevden sonra ilerleme günlüğünü günceller ve görevin tamamlanma durumunu işaretler. Nedenini kaydetmeden görevleri atlamamalıdır.
 - **refine** — Mevcut bir planı değiştirir. Ajan görev ekleyebilir, kaldırabilir veya yeniden sıralayabilir, ancak tamamlanmış işi korumalı ve görev tablosunu güncellemelidir.
 - **resume** — Kesintiye uğramış bir planı sürdürür. Ajan, durumu yeniden oluşturmak için ilerleme günlüğünü ve görev dosyalarını okur, ardından ilk tamamlanmamış görevden devam eder.
