@@ -970,7 +970,8 @@ export const pt: SiteTranslations = {
           },
           {
             id: 'unattended-runs',
-            question: 'Um plano pode rodar sem supervisão durante a noite ou em CI?',
+            question:
+              'Um plano pode rodar sem supervisão durante a noite ou em CI?',
             answer:
               'Sim, quando o plano foi aprovado com antecedência, carrega a camada de estado exigida e dá ao agente uma autoridade limitada. Uma execução sem supervisão deve parar e registrar um bloqueio quando a realidade diverge, um gate falha fora do escopo de reparo planejado, ou uma nova aprovação ou credencial é necessária.',
             linkLabel: 'Leia o protocolo de execução sem supervisão',
@@ -996,7 +997,7 @@ export const pt: SiteTranslations = {
             question:
               'Como ele difere de ferramentas de fluxo de trabalho para agentes como BMAD, Superpowers, Get Shit Done ou Gentle-AI?',
             answer:
-              'Esses frameworks trazem estilos de trabalho fortes: papéis, princípios, passos de teste primeiro, hábitos de verificação. O Deep Work Plan difere de ambos: se concentra no que fica no repositório e no que pode ser verificado: um harness que qualquer agente lê sem contexto prévio, arquivos de tarefa com critérios de aceitação e gates, estado que sobrevive a uma sessão, um verificador de conformidade com código de saída amigável a CI e uma medição publicada de quantos bytes de instrução cada fluxo carrega. Ele é independente de ferramenta por construção e não acrescenta serviço, provedor nem segredo ao ciclo principal. A página de comparação mostra onde cada abordagem é integrada, opcional ou está fora do escopo. Gentle-AI configura os agentes de codificação que você já usa: memória persistente entre sessões (Engram), skills curadas, personas, servidores MCP, Spec-Driven Development opcional e revisão baseada em evidências opcional (Receipt-Driven Development). Ele escreve nos diretórios de configuração de cada agente e pode manter artefatos de planejamento no Engram, em arquivos OpenSpec ou em ambos. O Deep Work Plan instala-se no próprio repositório — um harness que qualquer agente lê sem contexto prévio, arquivos de tarefa com critérios de aceitação e gates, estado retomável em disco, um verificador de conformidade com código de saída amigável a CI e um registro publicado de bytes de instrução — sem acrescentar serviço, provedor nem segredo ao ciclo principal. As camadas podem coexistir: Gentle-AI equipa o agente; o Deep Work Plan torna o trabalho longo durável e verificável dentro do repositório.',
+              'Frameworks de fluxo de trabalho para agentes como BMAD, Superpowers e Get Shit Done trazem estilos de trabalho fortes: papéis, princípios, passos de teste primeiro, hábitos de verificação. O Gentle-AI fica em uma categoria vizinha como configurador de ecossistema de agentes: equipa os agentes de codificação que você já usa com memória persistente entre sessões (Engram), skills selecionadas, personas, servidores MCP, Spec-Driven Development opcional e revisão opcional baseada em evidências (Receipt-Driven Development), escrevendo nos diretórios de configuração de cada agente. O Deep Work Plan difere de ambos: ele se concentra no que permanece no repositório e no que pode ser verificado — um harness que qualquer agente lê sem contexto prévio, arquivos de tarefa com critérios de aceitação e gates, estado que sobrevive a uma sessão, um verificador de conformidade com um código de saída amigável a CI e uma medição publicada de quantos bytes de instrução cada fluxo carrega. Ele é independente de ferramenta por construção e não acrescenta serviço, provedor nem segredo ao ciclo principal. As camadas podem coexistir: os frameworks e o Gentle-AI moldam como o agente trabalha; o Deep Work Plan torna o trabalho longo durável e verificável dentro do repositório. A página de comparação mostra onde cada abordagem é integrada, opcional ou está fora do escopo.',
             linkLabel: 'Veja a comparação',
             linkPath: '/compare',
           },
@@ -1035,7 +1036,8 @@ export const pt: SiteTranslations = {
           },
           {
             id: 'no-test-toolchain',
-            question: 'E se meu repositório ainda não tiver testes nem linting?',
+            question:
+              'E se meu repositório ainda não tiver testes nem linting?',
             answer:
               'O DWP não trata a ausência de um toolchain como um passe livre. Durante o onboarding, o agente propõe uma configuração de validação adequada ao stack, registra os comandos na documentação do repositório e os usa como alvo para os futuros gates; a proposta permanece visível para você revisar.',
             linkLabel: 'Leia o protocolo do agente',

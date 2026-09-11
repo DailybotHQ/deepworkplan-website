@@ -978,7 +978,7 @@ export const zh: SiteTranslations = {
             question:
               '它与 BMAD、Superpowers、Get Shit Done 或 Gentle-AI 等代理工作流工具有何不同？',
             answer:
-              '这些框架带来了成熟的工作风格：角色、原则、测试先行的步骤、验证的习惯。Deep Work Plan 与两者都不同，聚焦于什么留在仓库里、什么可以被检查：任何代理都能冷启动读取的 harness、带验收标准与关卡的任务文件、能在会话结束后存续的状态、带 CI 友好退出码的符合性检查器，以及对每个流程加载多少指令字节的公开测量。它在构造上即是工具无关的，并且不向核心循环添加任何服务、提供商或密钥。对比页面标明了每种做法在何处内置、可选或不在范围内。Gentle-AI 属于相邻的一类——代理生态系统配置器——下一题会专门说明。 Gentle-AI 配置您已经在用的编码代理：跨会话的持久记忆（Engram）、精选技能、人设、MCP 服务器、可选的 Spec-Driven Development，以及可选的基于证据的审查（Receipt-Driven Development）。它写入各代理的配置目录，并可将规划产物保存在 Engram、OpenSpec 文件中，或两者兼有。Deep Work Plan 则安装进仓库本身——任何代理都能冷启动读取的 harness、带验收标准与关卡的任务文件、可恢复的磁盘状态、带 CI 友好退出码的符合性检查器，以及已发布的指令字节台账——而不向核心循环添加任何服务、提供商或密钥。这两层可以并存：Gentle-AI 装备代理；Deep Work Plan 让长周期工作在仓库内持久且可核查。',
+              '像 BMAD、Superpowers 和 Get Shit Done 这样的代理工作流框架带来了成熟的工作风格：角色、原则、测试先行的步骤、验证的习惯。Gentle-AI 处于相邻的类别，作为代理生态系统配置器：它为你已经在用的编码代理配备跨会话的持久记忆（Engram）、精选技能、角色设定（persona）、MCP 服务器、可选的 Spec-Driven Development 和可选的基于证据的审查（Receipt-Driven Development），并写入每个代理的配置目录。Deep Work Plan 与两者都不同：它专注于什么留在仓库里、什么可以被检查——任何代理都能冷启动读取的 harness、带验收标准与关卡（gate）的任务文件、能在会话结束后存续的状态、带有 CI 友好退出码的合规检查器，以及一份公开发布的、关于每个流程加载多少指令字节的测量。它在构造上与工具无关，不会给核心循环增加任何服务、提供方或密钥。这些层可以共存：框架和 Gentle-AI 塑造代理的工作方式；Deep Work Plan 让长期工作在仓库内变得持久且可验证。对比页面展示了每种方法在哪些方面是内置的、可选的，或不在范围内。',
             linkLabel: '查看对比',
             linkPath: '/compare',
           },
