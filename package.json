@@ -39,10 +39,10 @@
     "aeo:audit": "node scripts/audit-aeo.mjs",
     "i18n:check": "node scripts/i18n/check.mjs",
     "i18n:scaffold": "node scripts/i18n/scaffold-language.mjs",
-    "lighthouse": "lhci autorun",
-    "lighthouse:full": "lhci autorun --config=lighthouserc.full.cjs",
-    "lighthouse:desktop": "lhci autorun --config=lighthouserc.desktop.cjs",
-    "lighthouse:desktop:full": "lhci autorun --config=lighthouserc.desktop.full.cjs",
+    "lighthouse": "mkdir -p .lighthouseci && lhci autorun",
+    "lighthouse:full": "mkdir -p .lighthouseci && lhci autorun --config=lighthouserc.full.cjs",
+    "lighthouse:desktop": "mkdir -p .lighthouseci && lhci autorun --config=lighthouserc.desktop.cjs",
+    "lighthouse:desktop:full": "mkdir -p .lighthouseci && lhci autorun --config=lighthouserc.desktop.full.cjs",
     "release": "bash .github/scripts/prepare_release.sh"
   },
   "dependencies": {
