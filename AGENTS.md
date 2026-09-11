@@ -294,42 +294,14 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 
   **Current vendored provenance (2026-09-10, Task 23 of the token-efficiency upgrade):** this copy was re-adapted from the upstream branch `feat/token-efficiency-upgrade` at commit `69b03ea` (PR [DailybotHQ/deepworkplan-skill#36](https://github.com/DailybotHQ/deepworkplan-skill/pull/36)) with **zero local adaptations** — the previous copy was byte-identical to the v2.17.1 baseline, so this is a clean upgrade to v2.17.1+. Highlights: GUIDE split into focused guides with conditional loading, targeted upgrade mode (Phase 0), Final Review consolidation, `verify/conformance.sh` + bats suites, 14 onboarding presets, and — since the 2026-09-10 amendment — the AI Diff Reviewer local review as a required baseline component (installed by onboard Phase 7a, run by every Final Review's security pass; the CI Action stays opt-in) and resumable plan materialization (manifest first, README skeleton with the intended task list, recorded `PLAN_ANALYSIS.md`, status flipped last). This repository already satisfies the reviewer requirement (vendored skill + `.review/extension.md`). The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed.
 
-### PR review workflow — Cursor-based, `ready`-label gated (Action `@v2`)
+### Local AI Diff Reviewer
 
-The website ships an AI code-review workflow at [`.github/workflows/pr-review.yml`](.github/workflows/pr-review.yml) powered by [`DailybotHQ/ai-diff-reviewer@v2`](https://github.com/marketplace/actions/ai-diff-reviewer) (GitHub Marketplace listing: **"AI Diff Reviewer"**, skill + Action **v2**). It runs on every `pull_request` to `main` that carries the `ready` label AND is opened by a write-tier author (OWNER / MEMBER / COLLABORATOR), single Cursor provider (`model: auto`), and applies the `pr-reviewed` label on success. `critical` findings block the merge; `warning` and `info` findings are reported but non-blocking. CI runs Iteration-Aware Review (IAR) by default; local skill reviews remain a full pass.
-
-**Labels.**
-
-| Label | Role |
-|-------|------|
-| `ready` | Trigger / unlock the review (toggle off→on to re-run) |
-| `pr-reviewed` | Applied automatically after a successful, non-skipped review |
-| `skip-ai-review` | Opt-in emergency bypass — short-circuits the LLM with a successful check + ⏭️ skipped tracking comment. Protect with a ruleset if the AI review is a merge gate. Distinct from `full-review-please` (IAR escape) |
-
-**How to use it.**
-
-1. Open a PR against `main` as normal.
-2. Apply the `ready` label. The workflow triggers.
-3. If the review passes, `pr-reviewed` is applied automatically and the `AI review gate` check turns green.
-4. If a `critical` finding is posted, address it (edit, push a fix, or add an inline reply if you disagree), then toggle the `ready` label off and on to re-run.
-5. Hotfix / mechanical revert only: apply `skip-ai-review` while `ready` is present (or apply both, then toggle `ready`) to bypass the LLM.
-
-**Branch-protection integration.** Mark ONLY the stable-named `AI review gate` job as a required status check in Settings > Branches > Protection rules. GitHub treats `skipped` required checks as passing, so a PR without `ready` becomes mergeable without a review — pair this with a separate rule that enforces `ready` on every PR if that's the workflow you want.
-
-**Setup: `CURSOR_API_KEY` secret.**
-
-1. Get a Cursor subscription key from Cursor's dashboard (unlimited reviews on Pro).
-2. Repo Settings > Secrets and variables > Actions > **New repository secret**.
-3. Name: exactly `CURSOR_API_KEY`. Value: the key. Save.
-4. Without the secret, the `AI review gate` job fails loud with an actionable message ("CURSOR_API_KEY is not configured on this repo").
-
-**Local ↔ CI ↔ apply-review three-moment loop.** The same [`ai-diff-reviewer`](https://skills.sh/DailybotHQ/ai-diff-reviewer) skill vendored at `.agents/skills/ai-diff-reviewer/` powers both the local pre-push review and the CI pass — the skill's `prompt.md` is byte-identical to the CI Action's shipped `prompts/default.md` at the same tag (enforced by upstream CI). Three moments in a maintainer's day:
-
-1. **Local review** (required inside every DWP Final Review's security pass; also recommended before any push) — run the `ai-diff-reviewer` skill's parent default flow (`/ai-diff-reviewer` or "Review my current branch") before pushing. Shares the same methodology and severity model as CI (byte-identical `prompt.md` + this extension); under v2 Iteration-Aware Review, CI round 2+ may be shorter while the local pass stays full.
-2. **CI review** — push, apply `ready`, this workflow runs.
-3. **Post-CI walkthrough** (optional) — invoke the skill's `apply-review` sub-skill to walk through the CI-posted findings per-finding (apply / defer / skip) with explicit consent. Read-only by default; edits require per-finding yes; never commits or pushes.
-
-**Shared override file: [`.review/extension.md`](.review/extension.md).** Repo-tailored severity overrides + "don't comment on" scopes + repo-specific context. The local skill and the CI Action read the SAME file via `prompt-extension-file:` — one source of truth for what maps to `critical` vs `warning` vs `info` in this codebase.
+The vendored [`ai-diff-reviewer`](.agents/skills/ai-diff-reviewer/) skill remains
+available for the required local review during each Deep Work Plan Final Review.
+This website does not ship or run an AI Reviewer GitHub Actions workflow; CI
+does not require a reviewer secret or review labels. The shared
+[`.review/extension.md`](.review/extension.md) continues to provide the
+repository-specific local review guidance.
 
 ## Quick Commands
 

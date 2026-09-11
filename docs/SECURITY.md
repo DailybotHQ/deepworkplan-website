@@ -230,20 +230,11 @@ commit them, never echo them from a `run:` step, never persist them to disk:
 
 | Secret | Required by | Purpose | Failure mode when absent |
 |--------|-------------|---------|---------------------------|
-| `CURSOR_API_KEY` | `pr-review.yml` | Authenticates the [`DailybotHQ/ai-diff-reviewer`](https://github.com/marketplace/actions/ai-diff-reviewer) Action against Cursor's review provider | The `AI review gate` job fails loud with an actionable message ("`CURSOR_API_KEY` is not configured on this repo") |
 | `AUTOMATION_GITHUB_TOKEN` (optional) | `release_and_publish.yml` | Bot user PAT so the release commit + tag can push to protected `main` | Falls back to `GITHUB_TOKEN`, which will fail at the push step unless `github-actions[bot]` is in the branch-protection bypass list |
 
-`pr-review.yml` follows a minimal-permission posture that is worth calling out:
-
-- The `review` job uses `actions/checkout@v4` with `persist-credentials: false`
-  because the Cursor CLI has broad local access — a persisted GitHub token
-  on disk is an exfil surface. The reviewer talks to the GitHub API in-process
-  via the injected `github-token:` input instead.
-- The workflow runs on `pull_request` (NOT `pull_request_target`), so
-  untrusted fork code never executes with elevated privileges.
-- The three-tier scope gate (author-association write-tier → `ready` label
-  → `CURSOR_API_KEY` presence) short-circuits before any diff fetch happens
-  from external contributors' branches.
+The local AI Diff Reviewer skill is intentionally not a GitHub Actions job.
+It runs through the developer's coding agent during the Final Review and does
+not require a provider secret to be configured in repository CI.
 
 ## Headers and CSP
 
