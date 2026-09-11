@@ -93,13 +93,13 @@ Setiap rencana dieksekusi di bawah tepat satu dari dua profil. Profil mengubah s
 
 ### Interaktif (default)
 
-Seorang manusia hadir dalam sesi. Agent mengusulkan, manusia menyetujui draf yang telah disempurnakan, agent mengeksekusi tugas demi tugas, dan ambiguitas diselesaikan dengan bertanya. Semua bagian protokol di atas menggambarkan profil interaktif.
+Seorang manusia hadir dalam sesi. Agent mengusulkan, manusia menyetujui rencana yang dimaterialisasi secara langsung, agent mengeksekusi tugas demi tugas, dan ambiguitas diselesaikan dengan bertanya. Semua bagian protokol di atas menggambarkan profil interaktif.
 
 ### Tanpa pengawasan
 
 Rencana berjalan tanpa manusia yang mengawasi — giliran terjadwal platform otonom, sesi cloud, jalannya semalam. Eksekusi tanpa pengawasan bersifat opt-in per rencana dan MUST memenuhi semua hal berikut:
 
-- **Rencana yang telah disetujui sebelumnya.** Rencana telah disetujui sebelum giliran tanpa pengawasan mana pun — dalam mode terpandu manusia menyetujui draf yang disempurnakan; dalam mode trust instruksi `trust` eksplisit dari pengembang adalah persetujuan yang tercatat. Sebuah agent MUST NOT membuat dan mengeksekusi rencana tanpa pengawasan dalam satu giliran tanpa salah satunya; persetujuan rencana adalah titik kontrol manusia.
+- **Rencana yang telah disetujui sebelumnya.** Rencana telah disetujui sebelum giliran tanpa pengawasan mana pun — dalam mode terpandu manusia menyetujui rencana yang dimaterialisasi secara langsung; dalam mode trust instruksi `trust` eksplisit dari pengembang adalah persetujuan yang tercatat. Sebuah agent MUST NOT membuat dan mengeksekusi rencana tanpa pengawasan dalam satu giliran tanpa salah satunya; persetujuan rencana adalah titik kontrol manusia.
 - **Lapisan status REQUIRED.** Rencana MUST membawa `manifest.json` dan `state.json` sehingga sesi berikutnya — agent atau manusia — dapat membaca kemajuan yang tepat tanpa memutar ulang transkrip. Lihat [Status rencana](/spec/plan-state).
 - **Otoritas terbatas.** Otoritas agent adalah rencana: ia MUST NOT memperluas cakupan, MUST NOT melakukan tindakan destruktif atau menghadap keluar yang tidak secara eksplisit diotorisasi rencana, dan MUST NOT meregangkan instruksi tugas untuk mencakup pekerjaan yang ditemukan-tetapi-tidak-direncanakan — pekerjaan yang ditemukan dicatat untuk `refine` berikutnya, tidak diimprovisasi.
 - **Satu tugas atomik per giliran, gate selalu.** Setiap giliran menjalankan Protokol Resume DWP, mengeksekusi paling banyak tugas berikutnya, melewati validation gate-nya, menyelesaikan per protokol penyelesaian tugas, dan yield. Gate yang gagal adalah kondisi berhenti, tidak pernah "lanjutkan saja".

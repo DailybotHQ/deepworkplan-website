@@ -93,13 +93,13 @@ Every plan executes under exactly one of two profiles. The profile changes who w
 
 ### Interactive (default)
 
-A human is present in the session. The agent proposes, the human approves the refined draft, the agent executes task by task, and ambiguity is resolved by asking. All protocol sections above describe the interactive profile.
+A human is present in the session. The agent proposes, the human approves the materialized plan directly, the agent executes task by task, and ambiguity is resolved by asking. All protocol sections above describe the interactive profile.
 
 ### Unattended
 
 The plan runs with no human watching — an autonomous platform's scheduled turn, a cloud session, an overnight run. Unattended execution is opt-in per plan and MUST satisfy all of the following:
 
-- **Pre-approved plan.** The plan was approved before any unattended turn — in guided mode the human approved the refined draft; in trust mode the developer's explicit `trust` instruction is the recorded approval. An agent MUST NOT create and execute a plan unattended in one turn without either; plan approval is the human control point.
+- **Pre-approved plan.** The plan was approved before any unattended turn — in guided mode the human approved the materialized plan directly; in trust mode the developer's explicit `trust` instruction is the recorded approval. An agent MUST NOT create and execute a plan unattended in one turn without either; plan approval is the human control point.
 - **State layer REQUIRED.** The plan MUST carry `manifest.json` and `state.json` so any later session — agent or human — can read exact progress without replaying a transcript. See [Plan state](/spec/plan-state).
 - **Bounded authority.** The agent's authority is the plan: it MUST NOT expand scope, MUST NOT perform destructive or outward-facing actions the plan does not explicitly authorize, and MUST NOT stretch a task's instructions to cover discovered-but-unplanned work — discovered work is recorded for the next `refine`, not improvised.
 - **One atomic task per turn, gates always.** Each turn runs the DWP Resume Protocol, executes at most the next task, passes its validation gate, completes per the task completion protocol, and yields. A failing gate is a stop condition, never "continue anyway".

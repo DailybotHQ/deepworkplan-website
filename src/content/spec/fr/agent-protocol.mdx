@@ -93,13 +93,13 @@ Chaque plan s'exécute sous exactement l'un des deux profils. Le profil change q
 
 ### Interactif (par défaut)
 
-Un humain est présent dans la session. L'agent propose, l'humain approuve le brouillon affiné, l'agent exécute tâche par tâche, et l'ambiguïté est résolue en posant des questions. Toutes les sections de protocole ci-dessus décrivent le profil interactif.
+Un humain est présent dans la session. L'agent propose, l'humain approuve directement le plan matérialisé, l'agent exécute tâche par tâche, et l'ambiguïté est résolue en posant des questions. Toutes les sections de protocole ci-dessus décrivent le profil interactif.
 
 ### Sans surveillance
 
 Le plan s'exécute sans humain pour surveiller — un tour planifié d'une plateforme autonome, une session cloud, une exécution nocturne. L'exécution sans surveillance est opt-in par plan et MUST satisfaire tous les critères suivants :
 
-- **Plan pré-approuvé.** Le plan a été approuvé avant tout tour sans surveillance — en mode guidé, l’humain a approuvé le brouillon affiné ; en mode trust, l’instruction `trust` explicite du développeur est l’approbation enregistrée. Un agent MUST NOT créer et exécuter un plan sans surveillance en un seul tour sans l’une ou l’autre ; l’approbation du plan est le point de contrôle humain.
+- **Plan pré-approuvé.** Le plan a été approuvé avant tout tour sans surveillance — en mode guidé, l’humain a approuvé directement le plan matérialisé ; en mode trust, l’instruction `trust` explicite du développeur est l’approbation enregistrée. Un agent MUST NOT créer et exécuter un plan sans surveillance en un seul tour sans l’une ou l’autre ; l’approbation du plan est le point de contrôle humain.
 - **Couche d'état REQUIRED.** Le plan MUST porter `manifest.json` et `state.json` afin que toute session ultérieure — agent ou humain — puisse lire la progression exacte sans rejouer une transcription. Voir [État du plan](/spec/plan-state).
 - **Autorité bornée.** L'autorité de l'agent est le plan : il MUST NOT étendre le périmètre, MUST NOT effectuer des actions destructrices ou orientées vers l'extérieur que le plan n'autorise pas explicitement, et MUST NOT étirer les instructions d'une tâche pour couvrir un travail découvert mais non planifié — le travail découvert est consigné pour le prochain `refine`, pas improvisé.
 - **Une tâche atomique par tour, portes toujours.** Chaque tour exécute le Protocole de reprise DWP, exécute au plus la tâche suivante, passe sa porte de validation, se termine selon le protocole d'achèvement de tâche, et cède la main. Une porte en échec est une condition d'arrêt, jamais « continuer quand même ».

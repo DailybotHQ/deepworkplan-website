@@ -93,13 +93,13 @@ Każdy plan jest realizowany dokładnie pod jednym z dwóch profili. Profil zmie
 
 ### Interaktywny (domyślny)
 
-W sesji obecny jest człowiek. Agent proponuje, człowiek zatwierdza dopracowany szkic, agent wykonuje zadanie po zadaniu, a niejednoznaczności są rozwiązywane przez pytanie. Wszystkie powyższe sekcje protokołu opisują profil interaktywny.
+W sesji obecny jest człowiek. Agent proponuje, człowiek bezpośrednio zatwierdza zmaterializowany plan, agent wykonuje zadanie po zadaniu, a niejednoznaczności są rozwiązywane przez pytanie. Wszystkie powyższe sekcje protokołu opisują profil interaktywny.
 
 ### Nieobsługiwany
 
 Plan działa bez obserwacji człowieka — zaplanowana tura autonomicznej platformy, sesja chmurowa, nocne uruchomienie. Wykonanie nieobsługiwane jest opcjonalne dla każdego planu i MUSI spełniać wszystkie poniższe wymagania:
 
-- **Wstępnie zatwierdzony plan.** Plan został zatwierdzony przed jakąkolwiek turą nieobsługiwaną — w trybie guided człowiek zatwierdził dopracowany szkic; w trybie trust jawna instrukcja `trust` programisty jest zapisanym zatwierdzeniem. Agent NIE MOŻE bez żadnego z nich tworzyć i wykonywać planu nieobsługiwanego w jednej turze; zatwierdzenie planu jest ludzkim punktem kontrolnym.
+- **Wstępnie zatwierdzony plan.** Plan został zatwierdzony przed jakąkolwiek turą nieobsługiwaną — w trybie guided człowiek bezpośrednio zatwierdził zmaterializowany plan; w trybie trust jawna instrukcja `trust` programisty jest zapisanym zatwierdzeniem. Agent NIE MOŻE bez żadnego z nich tworzyć i wykonywać planu nieobsługiwanego w jednej turze; zatwierdzenie planu jest ludzkim punktem kontrolnym.
 - **Warstwa stanu WYMAGANA.** Plan MUSI zawierać `manifest.json` i `state.json`, aby każda późniejsza sesja — agenta lub człowieka — mogła odczytać dokładny postęp bez odtwarzania transkryptu. Zob. [Stan planu](/spec/plan-state).
 - **Ograniczony zakres uprawnień.** Zakres uprawnień agenta to plan: NIE MOŻE rozszerzać zakresu, NIE MOŻE wykonywać destrukcyjnych ani zewnętrznych akcji, których plan nie autoryzuje jawnie, i NIE MOŻE rozciągać instrukcji zadania na odkrytą, ale nieplanowaną pracę — odkryta praca jest rejestrowana do następnego `refine`, a nie improwizowana.
 - **Jedno zadanie atomowe na turę, bramki zawsze.** Każda tura uruchamia Protokół Wznowienia DWP, wykonuje co najwyżej następne zadanie, zalicza jego bramkę walidacyjną, kończy zgodnie z protokołem ukończenia zadania i wykonuje yield. Nieudana bramka jest warunkiem zatrzymania, nigdy „kontynuuj mimo to".

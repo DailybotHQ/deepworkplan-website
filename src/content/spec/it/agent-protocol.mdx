@@ -93,13 +93,13 @@ Ogni piano viene eseguito sotto esattamente uno dei due profili. Il profilo camb
 
 ### Interattivo (predefinito)
 
-Un essere umano è presente nella sessione. L'agente propone, l'essere umano approva la bozza raffinata, l'agente esegue attività per attività e le ambiguità vengono risolte chiedendo. Tutte le sezioni del protocollo sopra descritte riguardano il profilo interattivo.
+Un essere umano è presente nella sessione. L'agente propone, l'essere umano approva direttamente il piano materializzato, l'agente esegue attività per attività e le ambiguità vengono risolte chiedendo. Tutte le sezioni del protocollo sopra descritte riguardano il profilo interattivo.
 
 ### Non presidiato
 
 Il piano viene eseguito senza un essere umano che osserva — il turno pianificato di una piattaforma autonoma, una sessione cloud, un'esecuzione notturna. L'esecuzione non presidiata è opt-in per piano e DEVE soddisfare tutti i seguenti requisiti:
 
-- **Piano pre-approvato.** Il piano è stato approvato prima di qualsiasi turno non presidiato — in modalità guidata l'essere umano ha approvato la bozza raffinata; in modalità trust l'istruzione `trust` esplicita dello sviluppatore è l'approvazione registrata. Un agente NON DEVE creare ed eseguire un piano non presidiato in un unico turno senza l'una o l'altra; l'approvazione del piano è il punto di controllo umano.
+- **Piano pre-approvato.** Il piano è stato approvato prima di qualsiasi turno non presidiato — in modalità guidata l'essere umano ha approvato direttamente il piano materializzato; in modalità trust l'istruzione `trust` esplicita dello sviluppatore è l'approvazione registrata. Un agente NON DEVE creare ed eseguire un piano non presidiato in un unico turno senza l'una o l'altra; l'approvazione del piano è il punto di controllo umano.
 - **Livello di stato OBBLIGATORIO.** Il piano DEVE portare `manifest.json` e `state.json` affinché qualsiasi sessione successiva — agente o umana — possa leggere l'avanzamento esatto senza riprodurre una trascrizione. Vedi [Stato del piano](/spec/plan-state).
 - **Autorità limitata.** L'autorità dell'agente è il piano: NON DEVE espandere l'ambito, NON DEVE eseguire azioni distruttive o rivolte all'esterno che il piano non autorizza esplicitamente, e NON DEVE estendere le istruzioni di un'attività per coprire lavoro scoperto ma non pianificato — il lavoro scoperto viene registrato per il prossimo `refine`, non improvvisato.
 - **Un'attività atomica per turno, gate sempre.** Ogni turno esegue il Protocollo di Ripresa DWP, esegue al massimo la prossima attività, supera il suo validation gate, completa secondo il protocollo di completamento dell'attività e cede il controllo. Un gate che fallisce è una stop condition, mai «continua comunque».

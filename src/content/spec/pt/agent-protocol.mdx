@@ -93,13 +93,13 @@ Todo plano é executado sob exatamente um de dois perfis. O perfil muda quem obs
 
 ### Interativo (padrão)
 
-Um humano está presente na sessão. O agente propõe, o humano aprova o rascunho refinado, o agente executa tarefa a tarefa e a ambiguidade é resolvida perguntando. Todas as seções de protocolo acima descrevem o perfil interativo.
+Um humano está presente na sessão. O agente propõe, o humano aprova o plano materializado diretamente, o agente executa tarefa a tarefa e a ambiguidade é resolvida perguntando. Todas as seções de protocolo acima descrevem o perfil interativo.
 
 ### Não supervisionado
 
 O plano é executado sem nenhum humano observando — um turno agendado de plataforma autônoma, uma sessão em nuvem, uma execução noturna. A execução não supervisionada é opt-in por plano e DEVE (MUST) satisfazer todos os seguintes requisitos:
 
-- **Plano pré-aprovado.** O plano foi aprovado antes de qualquer turno não supervisionado — no modo guiado o humano aprovou o rascunho refinado; no modo trust a instrução `trust` explícita do desenvolvedor é a aprovação registrada. Um agente NÃO DEVE (MUST NOT) criar e executar um plano não supervisionado em um único turno sem uma ou outra; a aprovação do plano é o ponto de controle humano.
+- **Plano pré-aprovado.** O plano foi aprovado antes de qualquer turno não supervisionado — no modo guiado o humano aprovou o plano materializado diretamente; no modo trust a instrução `trust` explícita do desenvolvedor é a aprovação registrada. Um agente NÃO DEVE (MUST NOT) criar e executar um plano não supervisionado em um único turno sem uma ou outra; a aprovação do plano é o ponto de controle humano.
 - **Camada de estado OBRIGATÓRIA.** O plano DEVE (MUST) carregar `manifest.json` e `state.json` para que qualquer sessão posterior — agente ou humano — possa ler o progresso exato sem reproduzir uma transcrição. Veja [Estado do plano](/spec/plan-state).
 - **Autoridade limitada.** A autoridade do agente é o plano: NÃO DEVE (MUST NOT) expandir o escopo, NÃO DEVE (MUST NOT) realizar ações destrutivas ou voltadas para o exterior que o plano não autoriza explicitamente, e NÃO DEVE (MUST NOT) estender as instruções de uma tarefa para cobrir trabalho descoberto mas não planejado — o trabalho descoberto é registrado para o próximo `refine`, não improvisado.
 - **Uma tarefa atômica por turno, gates sempre.** Cada turno executa o Protocolo de Retomada do DWP, executa no máximo a próxima tarefa, passa pelo seu validation gate, conclui conforme o protocolo de conclusão de tarefa e cede. Um gate com falha é uma condição de parada, nunca "continuar mesmo assim".

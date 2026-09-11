@@ -93,13 +93,13 @@ Her plan tam olarak iki profilden birinin altında yürütülür. Profil, kimin 
 
 ### Etkileşimli (varsayılan)
 
-Oturumda bir insan bulunur. Ajan önerir, insan iyileştirilmiş taslağı onaylar, ajan görevi görev yürütür ve belirsizlik sorarak çözülür. Yukarıdaki tüm protokol bölümleri etkileşimli profili tanımlar.
+Oturumda bir insan bulunur. Ajan önerir, insan somutlaştırılmış planı doğrudan onaylar, ajan görevi görev yürütür ve belirsizlik sorarak çözülür. Yukarıdaki tüm protokol bölümleri etkileşimli profili tanımlar.
 
 ### Gözetimsiz
 
 Plan, insan gözetimi olmadan çalışır — otonom bir platformun zamanlanmış dönüşü, bir bulut oturumu, bir gece çalışması. Gözetimsiz yürütme, plan bazında isteğe bağlıdır ve aşağıdakilerin tümünü KARŞILAMAK ZORUNDADIR:
 
-- **Önceden onaylanmış plan.** Plan, herhangi bir gözetimsiz dönüşten önce onaylanmıştır — yönlendirilmiş modda iyileştirilmiş taslağı bir insan onaylamıştır; trust modunda geliştiricinin açık `trust` talimatı kayıtlı onaydır. Bir ajan, ikisiz tek dönüşte gözetimsiz olarak plan oluşturup yürüTEMEZ; plan onayı, insan kontrol noktasıdır.
+- **Önceden onaylanmış plan.** Plan, herhangi bir gözetimsiz dönüşten önce onaylanmıştır — yönlendirilmiş modda somutlaştırılmış planı bir insan doğrudan onaylamıştır; trust modunda geliştiricinin açık `trust` talimatı kayıtlı onaydır. Bir ajan, ikisiz tek dönüşte gözetimsiz olarak plan oluşturup yürüTEMEZ; plan onayı, insan kontrol noktasıdır.
 - **Durum katmanı ZORUNLUDUR.** Plan, daha sonraki herhangi bir oturumun — ajan veya insan — bir dökümü yeniden oynamadan kesin ilerlemeyi okuyabilmesi için `manifest.json` ve `state.json` TAŞIMAK ZORUNDADIR. Bkz. [Plan durumu](/spec/plan-state).
 - **Sınırlı yetki.** Ajanın yetkisi plandır: kapsamı GENİŞLETMEMELİ, planın açıkça yetkilendirmediği yıkıcı veya dışarı yönelik eylemler GERÇEKLEŞTİRMEMELİ ve keşfedilen-ancak-planlanmamış çalışmayı kapsamak için görevin talimatlarını ESSNETMEMELİDİR — keşfedilen çalışma, doğaçlama yapılmak yerine bir sonraki `refine` için kaydedilir.
 - **Dönüş başına tek atomik görev, kapılar her zaman.** Her dönüş DWP Resume Protocol'ü çalıştırır, en fazla bir sonraki görevi yürütür, doğrulama kapısını geçer, görev tamamlama protokolüne göre tamamlar ve verir. Başarısız bir kapı, durma koşuludur; asla "yine de devam et" değil.
