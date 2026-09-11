@@ -1125,74 +1125,74 @@ export const en: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'Turns a feature into an executable specification through a constitution, a spec, a plan and a task list, driven by slash commands that integrate with more than fifty coding agents.',
+          'Turns a feature into an executable specification through a constitution, a spec, a plan and a task list, driven by slash commands that integrate with more than fifty coding agents, and can check the artifacts stay consistent with each other before implementation starts.',
         audience:
           'Teams that want a repeatable specify, plan, tasks and implement workflow inside the agent they already use.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'Captures each change as a proposal with delta specs (added, modified, removed) and RFC 2119 requirements with scenarios, then archives them into living specifications.',
+          'Captures each change as a proposal with delta specs (added, modified, removed) and RFC 2119 requirements with scenarios, then archives them into living specifications, with a validator that checks proposal completeness and scenario coverage before a change is accepted.',
         audience:
           'Teams working on existing systems who want specifications to grow one change at a time.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'An agentic IDE and CLI whose specs move from EARS-style requirements to design to tasks, with steering files and hooks that run on editor events.',
+          'An agentic IDE and CLI whose specs move from EARS-style requirements to design to tasks, with steering files and hooks that run on editor events, and that can generate specs for an existing codebase to catch requirement gaps before design begins.',
         audience:
           'Developers who want spec-driven development built into their editor with AWS-backed tooling.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'An agile framework of specialized agent roles (analysis, product, architecture, development, quality) that produces briefs, requirements, architecture documents and story files.',
+          'An agile framework of specialized agent roles (analysis, product, architecture, development, quality) that produces briefs, requirements, architecture documents and story files, with a Definition of Done that requires each story to be reviewed by a teammate or an AI peer reviewer before it counts as finished.',
         audience:
           'Teams that like role-based ceremonies and want a full agile lifecycle for agent work.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'A skills library and workflow for brainstorming, planning in small test-first steps, executing with subagents and reviewing before completion.',
+          'A skills library and workflow for brainstorming, planning in small test-first steps, executing with subagents and reviewing before completion, integrated with more coding-agent hosts than any other alternative here, plus a two-stage subagent review (spec compliance, then code quality) on every task.',
         audience:
           'Developers who want disciplined test-driven execution inside their coding agent.',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          'A planning system with a .planning directory, requirement ids, phase plans, fresh-context execution and a verification pass against stated must-haves.',
+          'A planning system with a .planning directory, requirement ids, phase plans, fresh-context execution and a verification pass against the user-observable deliverables extracted from each plan, purpose-built to fight context rot by running research, planning and execution in disposable subagents and catching stale verification with content-fingerprint checks.',
         audience:
           'Solo developers and small teams who want context engineering and verification with little ceremony.',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          'Configures the coding agents you already use with persistent memory that also routes across sessions and models, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development. Its configuration is written to your global agent settings by default; a workspace-scoped install is opt-in.',
         audience:
           'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
       },
       'claude-ai-native-sdlc': {
         name: "Claude's AI-native SDLC",
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with human approval gated at every stage, durable artifacts committed to the repository between stages, a dedicated security-tagged review pass before deploy, and continuous evals that publish leading and lagging delivery indicators.',
         audience:
           "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
       },
       'vendor-native': {
         name: 'Native agent features (varies by vendor)',
         whatItDoesWell:
-          'Agent products may provide plan modes, instruction files and skills, but the exact behavior depends on the vendor, client and version.',
+          'Agent products may provide plan modes, instruction files and skills built on the open, cross-vendor AGENTS.md and Agent Skills standards, though the exact plan-mode behavior still depends on the vendor, client and version. Agent Skills in particular load only a short summary at startup and the full instructions on activation, keeping unused capability out of context.',
         audience:
           'Anyone who wants planning inside one agent and is comfortable with vendor-specific behavior.',
       },
     },
     aiNative: {
       title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage commits an artifact the next stage reads, with a human approval gate at every stage and a dedicated security pass before deploy, while production feedback becomes new intent.",
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP shares the durable-artifact and gated-approval ideas: intent becomes a plan, tasks leave evidence, a security pass runs before completion, and the repository remains readable by the next agent.',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+        "The real difference is scope, not rigor: the playbook is built around Claude Code specifically, while DWP's harness and plan format are read by any agent that follows the AGENTS.md and Agent Skills standards. The playbook also covers continuous evaluation and production operations that DWP does not claim; those operational practices can complement a DWP-run repository rather than compete with it.",
       sourceLabel: "Read Claude's AI-native SDLC playbook",
     },
     profileCta: 'See the comparison',
