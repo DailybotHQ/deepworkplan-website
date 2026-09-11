@@ -766,7 +766,7 @@ This repository runs on the methodology it documents.
 - **Thin command delegators.** The committed `dwp-*` commands (`/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`) are ~20-line delegators that read the installed skill's sub-skills and follow them — no embedded logic in the command files themselves.
 - **The author sub-skill.** `/skill-create` and `/agent-create` are thin delegators to the skill's **author** sub-skill, which grows the repository's own skills, agents, and commands and keeps the `.agents/docs/` catalog in sync.
 - **The dependency-upgrade add-on.** `/lib-upgrade` delegates to the opt-in **dependency-upgrade** add-on, which reasons about the actual package manager (pnpm here) and upgrades in validated, revertible batches.
-- **`.dwp/` output.** All Deep Work Plan working state (plans, drafts) lives in the gitignored `.dwp/` directory (`.dwp/plans/`, `.dwp/drafts/`). The legacy homegrown command engine has been retired in favor of the installed skill.
+- **`.dwp/` output.** All Deep Work Plan working state (plans) lives in the gitignored `.dwp/` directory (`.dwp/plans/`) — Lite and Full plans alike; there is no separate draft artifact. The legacy homegrown command engine has been retired in favor of the installed skill.
 
 ## Build & Deployment
 

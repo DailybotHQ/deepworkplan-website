@@ -66,10 +66,10 @@ Tracking documentation coverage for deepworkplan.com.
 
 | File | Status | Description |
 |------|--------|-------------|
-| [deepworkplan skill](../.agents/skills/deepworkplan/) | ✅ Current | Installed DWP skill (create/execute/refine/resume plans) — git-ignored, not vendored |
+| [deepworkplan skill](../.agents/skills/deepworkplan/) | ✅ Current | Installed DWP skill (create/execute/refine/resume plans) — vendored, tracked in git |
 | [author sub-skill](../.agents/skills/deepworkplan/author/SKILL.md) | ✅ Current | Skills/agents/commands creation system |
 | [dependency-upgrade addon](../.agents/skills/deepworkplan/addons/dependency-upgrade/SKILL.md) | ✅ Current | Dependency upgrade addon |
-| `.dwp/` | ✅ Current | Deep Work Plan output (plans/drafts) — git-ignored working state |
+| `.dwp/` | ✅ Current | Deep Work Plan output (plans) — git-ignored working state |
 
 ### .agents/ Documentation
 

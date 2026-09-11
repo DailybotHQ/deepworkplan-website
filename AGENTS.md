@@ -81,7 +81,7 @@ docs/                    # Project documentation
 .agents/                 # Cross-agent skills, commands, agents, settings (canonical)
 .claude → .agents        # Backward-compat symlink for Claude Code
 .cursor → .agents        # Backward-compat symlink for Cursor
-.dwp/                    # Deep Work Plan output (plans/drafts) — git-ignored working state
+.dwp/                    # Deep Work Plan output (plans) — git-ignored working state
 tmp/                     # Temporary workspace (git-ignored, see below)
 ```
 
@@ -292,7 +292,7 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 - **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the next release will overwrite those edits. Contribute upstream, then merge any PR to trigger a website release that picks up the new upstream tag.
 - **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: changes there must be intentional and reviewed. Prefer contributing reusable improvements upstream in `DailybotHQ/deepworkplan-skill`, then re-adapting this copy deliberately — never rely on the release dogfood step to pull it in.
 
-  **Current vendored provenance (2026-09-10, v3.0.0 release):** this copy mirrors the upstream `main` branch at commit `c4419ed` (release `v3.0.0`) with **zero local adaptations**. Highlights: the current DWP 2.3.0 standard, progressive guide loading, targeted harness upgrades, Final Review consolidation, resumable plan materialization, and the required local AI Diff Reviewer baseline. This repository keeps the reviewer local-only; it does not ship an AI Reviewer CI workflow. The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed.
+  **Current vendored provenance (2026-09-11, v4.0.0 release):** this copy mirrors the upstream `main` branch at commit `218e55e` (release `v4.0.0`) with **zero local adaptations**. Highlights: the Lite-first plan lifecycle (Lite plans for bounded work, Full task-file plans for longer work) on DWP standard 2.4.0, the `.dwp/drafts/` staging step removed entirely — `create` now materializes the plan directly, no separate draft artifact — and the new `spec/LITE_PLANS.md` document plus v2 manifest/state JSON Schemas. This repository keeps the AI Diff Reviewer local-only; it does not ship an AI Reviewer CI workflow. The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed.
 
 ### Local AI Diff Reviewer
 
