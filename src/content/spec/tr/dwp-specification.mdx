@@ -11,9 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP spesifikasyonu
 
-**Sürüm 2.3.0. Durum: Kararlı.** Bu belge, Deep Work Plan (DWP) metodolojisinin normatif spesifikasyonudur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
+**Sürüm 2.4.0. Durum: Kararlı.** Bu belge, Deep Work Plan (DWP) metodolojisinin normatif spesifikasyonudur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 
-> **Bu revizyonda eklemeli, kırıcı değişiklik yok.** (1) **Dokunulan Yüzey** bölümü — görevin neyi değiştirdiği ile neyin doğrulanması gerektiği arasındaki sözleşme, risk sınıfına göre kapı seçimiyle (izole / seam / paylaşılan-çekirdek / bilinmeyen); (2) eksiksiz doğrulama, planın tek zorunlu **Final Review**'inde, açık kanıt-yeniden-kullanım kurallarıyla çalıştırılan bir **son-durum gereksinimi** hâline gelir; (3) **görev-yerel skill kararları** sahipli göreve taşınır ve Executive Report **isteğe bağlı, talep üzerine** hâline gelir; (4) **mod-farkındalıklı bir create akışı** — trust modu, analiz ve kalite denetimlerini korurken planı doğrudan somutlaştırır; ve (5) açık bir **uyumluluk matrisi**: önceki sürümlerden planlar ve depolar uyumlu kalır.
+> **Bu revizyonda eklemeli, kırıcı değişiklik yok.** (1) **Dokunulan Yüzey** bölümü — görevin neyi değiştirdiği ile neyin doğrulanması gerektiği arasındaki sözleşme, risk sınıfına göre kapı seçimiyle (izole / seam / paylaşılan-çekirdek / bilinmeyen); (2) eksiksiz doğrulama, planın tek zorunlu **Final Review**'inde, açık kanıt-yeniden-kullanım kurallarıyla çalıştırılan bir **son-durum gereksinimi** hâline gelir; (3) **görev-yerel skill kararları** sahipli göreve taşınır ve Executive Report **isteğe bağlı, talep üzerine** hâline gelir; (4) **mod-farkındalıklı bir create akışı** — trust modu, analiz ve kalite denetimlerini korurken planı doğrudan somutlaştırır; (5) bir **Lite-first plan somutlaştırması** — yönlendirilmiş create, yürütülemeyen bir taslak yerine doğrudan yürütülebilir bir Lite plan üretir; bu plan istenildiği an bir Full plana yükseltilebilir (bkz. [Lite planlar](/spec/lite-plans)); ve (6) açık bir **uyumluluk matrisi**: önceki sürümlerden planlar ve depolar uyumlu kalır.
 
 ## Tanım
 
@@ -25,19 +25,17 @@ DWP spec odaklıdır: plan spesifikasyondur ve ajanlar, doğaçlama yapmak yerin
 
 `create` akışı hedefi, bağlamı, kısıtları ve görev taslağını bir kez toplar, **gereksinim analizini** gerçekleştirir (kapsam, görevler arası bağımlılık sıralaması, Dokunulan Yüzey'den doğrulama seçimi, orantılı-titizlik kademesi) ve ardından geliştiricinin seçtiği moda göre somutlaştırır:
 
-- **Yönlendirilmiş mod (varsayılan).** Akış, gözden geçirme için tam olarak **bir** yapıt üretir: `.dwp/drafts/` içinde **rafine edilmiş bir taslak** — tek geçişte onaylamak veya değişiklik istemek için yeterli yapıyla. Plan klasörü yalnızca onaydan sonra somutlaştırılır.
-- **Trust modu (`trust` / `auto`).** Akış, **planı doğrudan somutlaştırır** — taslak dosyası olmadan; geliştirici ara gözden geçirmeden feragat etti. Gereksinim analizi, bağımlılık sıralaması ve bir **plan-kalite denetimi** yine de çalışır: trust, *analizi* değil, *gözden geçirmeyi* feragat eder. Trust modundaki bir plan, **gözetimsiz yürütme için önceden onaylanmış** olarak kaydedilir.
-- **Açık taslak modları.** `refined-draft {name}` ve `from-refined-draft {file}`, her iki modda da kullanılabilir kalır; taslak isteyen bir geliştirici taslak alır.
+- **Yönlendirilmiş mod (varsayılan).** Akış, doğrudan bir **Lite plan** somutlaştırır — inline `{#task-N}` görev kayıtlarına sahip, tek geçişte gözden geçirilebilir, kompakt ve zaten yürütülebilir bir öneri — ve geliştiriciden onu Lite olarak koruma, bir Full plana yükseltme, değişiklik isteme veya durdurma arasında seçim yapmasını ister. Ara, yürütülemeyen bir taslak üretilmez.
+- **Trust modu (`trust` / `auto`).** Akış, **seçilen temsili doğrudan somutlaştırır** (Lite, ya da hemen ardından Full'a yükseltilen Lite), gözden geçirme adımı olmadan — geliştirici bundan feragat etmiştir. Gereksinim analizi, bağımlılık sıralaması ve bir **plan-kalite denetimi** yine de çalışır: trust, *gözden geçirmeden* feragat eder, *analizden* değil. Trust modundaki bir plan, **gözetimsiz yürütme için önceden onaylanmış** olarak kaydedilir.
 
-Her modda akış, ayrı bir gözden geçirilebilir adım olarak ara bir rafine-edilmemiş taslak üretmez.
+Her iki mod da planın biçimini (Lite veya Full) aynı gereksinim analizinin bir parçası olarak belirler, asla sonradan akla gelen bir düşünce olarak değil. Tam temsil, oluşturma-ve-seçim ile yükseltme yaşam döngüsü için bkz. [Lite planlar](/spec/lite-plans).
 
 ## Plan yapısı
 
-Bir plan, `.dwp/plans/` altında `PLAN_<slug>/` olarak adlandırılmış bir dizin OLMALIDIR. Dizin şunları İÇERMELİDİR:
+Bir plan, `.dwp/plans/` altında `PLAN_<slug>/` olarak adlandırılmış bir dizin OLMALIDIR; iki temsilden biri biçiminde:
 
-- `README.md` — plan genel görünümü, hedef, görev tablosu ve durum.
-- Görev başına bir dosya, `<n>.task_<slug>.md` olarak adlandırılır.
-- `PROGRESS.md` — yürütmenin çalışan bir günlüğü.
+- **Full.** Dizin, `README.md` (plan genel görünümü, hedef, görev tablosu ve durum), görev başına bir dosya (`<n>.task_<slug>.md` olarak adlandırılır) ve `PROGRESS.md` (yürütmenin çalışan bir günlüğü) İÇERMELİDİR.
+- **Lite.** Kompakt, tam olarak yürütülebilir görev kayıtları, ayrı görev dosyaları yerine, kararlı `{#task-N}` çapaları arkasında `README.md` içinde satır içi yaşar — her kayıt yine de bir hedef, bir Dokunulan Yüzey, kabul kriterleri, doğrulama ve tamamlanma günlüğü taşır. `PROGRESS.md` hâlâ ZORUNLUDUR. Bir Lite plan herhangi bir anda Full'a YÜKSELTİLEBİLİR. Tam yaşam döngüsü için burada yinelemek yerine bkz. [Lite planlar](/spec/lite-plans).
 
 Bir plan ek olarak makine tarafından okunabilir durum katmanını TASIYABİLİR: `manifest.json` (somutlaştırma sırasında bir kez yazılan statik kimlik) ve `state.json` (görev bazında canlı yürütme durumu). Durum katmanı yeni planlar için ÖNERİLİR ve gözetimsiz yürütme ile git içermeyen ajan çalışma alanları için ZORUNLUDUR. Bkz. [Plan durumu](/spec/plan-state).
 

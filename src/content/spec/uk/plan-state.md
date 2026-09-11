@@ -1,14 +1,14 @@
 ---
 title: Стан плану
 description: "Машиночитаний рівень стану плану: manifest.json та state.json, записи gate, записи результатів як епізодична памʼять, узгодження й умови застосування."
-order: 7
+order: 8
 lang: uk
 section: State
 ---
 
 # Стан плану
 
-**Версія 1.0. Статус: стабільний.** Цей документ специфікує машиночитаний рівень стану плану методології Deep Work Plan. Ключові слова MUST, MUST NOT, SHOULD, SHOULD NOT та MAY тлумачаються згідно з RFC 2119.
+**Версія 1.1. Статус: стабільний.** Цей документ специфікує машиночитаний рівень стану плану методології Deep Work Plan. Ключові слова MUST, MUST NOT, SHOULD, SHOULD NOT та MAY тлумачаються згідно з RFC 2119.
 
 Два JSON-артефакти — `manifest.json` (статична ідентичність плану) та `state.json` (живий стан виконання по завданнях, включно з результатами валідаційних gate) — що будь-який план MAY нести поряд зі своїми markdown-файлами, а автономне виконання (див. [Протокол агента](/spec/agent-protocol#execution-profiles)) та робочі простори без git (див. [Архетипи](/spec/archetypes) §3) MUST нести.
 
@@ -49,12 +49,13 @@ Markdown-план залишається **людиночитаним джере
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.3.0",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
+  "spec_version": "2.4.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
+  "plan_format": "full",
   "created_at": "2026-06-09T14:00:00Z",
   "created_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "tags": ["backend", "payments"],
@@ -63,11 +64,13 @@ Markdown-план залишається **людиночитаним джере
 }
 ```
 
-`schema`, `spec_version`, `name`, `archetype`, `rigor`, `created_at` та `task_count` є REQUIRED.
+`schema`, `spec_version`, `name`, `archetype`, `rigor`, `created_at`, `task_count` та `plan_format` є REQUIRED.
 
 `archetype` MUST бути одним із `individual`, `orchestrator-hub`, `agent-workspace`.
 
 `rigor` MUST бути одним із `micro`, `standard`, `deep` (див. [Пропорційна строгість](/spec/dwp-specification#proportional-rigor)).
+
+`plan_format` MUST бути одним із `lite`, `full` — представлення, обране під час створення (див. [Lite-плани](/spec/lite-plans)). Воно незмінне на рівні маніфесту: подальше підвищення з Lite до Full фіксується в `state.json`, а не переписуванням маніфесту.
 
 `parent_plan` повʼязує дочірній план із його планом-оркестратором (`{repo}:{plan_name}` або `null`).
 
@@ -77,17 +80,21 @@ Markdown-план залишається **людиночитаним джере
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v1.json",
+  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
   "plan": "PLAN_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",
   "completed_count": 2,
   "task_count": 7,
+  "format": "full",
+  "materialization": "ready",
+  "approval": "approved",
+  "promotion": null,
   "tasks": [
     {
       "id": 1,
-      "file": "1.task_webhook_endpoint.md",
+      "locator": { "kind": "file", "value": "1.task_webhook_endpoint.md" },
       "title": "Create webhook endpoint",
       "status": "completed",
       "started_at": "2026-06-09T14:10:00Z",
@@ -111,7 +118,7 @@ Markdown-план залишається **людиночитаним джере
     },
     {
       "id": 3,
-      "file": "3.task_retry_queue.md",
+      "locator": { "kind": "file", "value": "3.task_retry_queue.md" },
       "title": "Add retry queue",
       "status": "in_progress",
       "started_at": "2026-06-09T16:30:00Z",
@@ -128,9 +135,33 @@ Markdown-план залишається **людиночитаним джере
 }
 ```
 
+Записи завдань у Lite-плані використовують локатор `inline`, що вказує на якір завдання в `README.md`, замість окремого файлу — все інше в записі (gates, outcome, status) працює так само:
+
+```json
+{
+  "format": "lite",
+  "materialization": "ready",
+  "approval": "pre_approved",
+  "promotion": null,
+  "tasks": [
+    {
+      "id": 2,
+      "locator": { "kind": "inline", "value": "#task-2" },
+      "title": "Add retry queue",
+      "status": "pending",
+      "gates": []
+    }
+  ]
+}
+```
+
+### Формат, матеріалізація, схвалення та підвищення
+
+`format` MUST бути одним із `lite`, `full` і віддзеркалює `plan_format` маніфесту — тут воно змінюване, на відміну від маніфесту, бо Lite-план MAY пізніше бути підвищений до Full. `materialization` MUST бути одним із `materializing` (папка плану записується), `ready` (матеріалізація завершена) або `promoting` (виконується підвищення з Lite до Full). `approval` MUST бути одним із `pending`, `approved`, `pre_approved`; воно OPTIONAL у цій схемі, щоб план, записаний до того, як це поле почало фіксуватися, все одно валідувався — коли воно відсутнє, значенням вважається рядок `Approval` у README, а коли відсутні обидва — `pending`. `promotion` дорівнює `null` поза підвищенням, або є обʼєктом, що фіксує намір підвищення та цільові завдання, поки `materialization` має значення `promoting`. Див. [Lite-плани](/spec/lite-plans) — повний життєвий цикл, який кодують ці поля.
+
 ### Записи завдань
 
-Кожен файл завдання в плані MUST мати рівно один запис у `tasks`, ідентифікований своїм номером (`id`) та іменем файлу (`file`).
+Кожне завдання — окремий файл у Full-плані або інлайн-запис `{#task-N}` у Lite-плані — MUST мати рівно один запис у `tasks`, ідентифікований своїм номером (`id`) та своїм `locator`. `locator.kind` MUST бути `file` (Full — `value` це імʼя файлу завдання) або `inline` (Lite — `value` це якір завдання, `#task-N`).
 
 `status` MUST бути одним із `pending`, `in_progress`, `completed`, `blocked`, `skipped`. `skipped` є дійсним лише тоді, коли користувач явно вилучив завдання зі scope через `refine`; `state.json` MUST NOT використовуватися для мовчазного пропускання роботи.
 
@@ -166,4 +197,4 @@ Markdown MUST перемагати в кожному розбіжності. Я�
 
 ## Версіонування схем
 
-Обидві схеми версіонуються за URL (`/v1.json`). Адитивні поля дозволені в межах однієї версії; перейменування або зміна типу поля вимагає `/v2.json` та нотатки про міграцію в журналі змін специфікації. Поле `spec_version` у маніфесті фіксує версію специфікації DWP, під якою було створено план; агент, що зустрічає план новіший за встановлену специфікацію, SHOULD повідомити про це, а не здогадуватися.
+Обидві схеми версіонуються за URL. Адитивні поля дозволені в межах однієї версії; перейменування або зміна типу поля вимагає нової версії схеми та нотатки про міграцію в журналі змін специфікації. Ця редакція вводить `/v2.json` для обох схем: поле `file` запису завдання стає типізованим `locator` (`{"kind": "file" | "inline", "value": ...}`), маніфест отримує `plan_format`, а файл стану отримує `format`, `materialization`, `approval` та `promotion` — разом поля, потрібні Lite-планам (див. [Lite-плани](/spec/lite-plans)). Маніфести та файли стану `/v1.json` залишаються дійсними й ніколи не переписуються в v2 мовчки; сесія `refine` MAY свідомо мігрувати один із них. Поле `spec_version` у маніфесті фіксує версію специфікації DWP, під якою було створено план; агент, що зустрічає план новіший за встановлену специфікацію, SHOULD повідомити про це, а не здогадуватися.

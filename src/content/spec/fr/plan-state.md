@@ -1,14 +1,14 @@
 ---
 title: État du plan
 description: "La couche d'état lisible par machine : manifest.json et state.json, enregistrements de portes, enregistrements de résultats comme mémoire épisodique, réconciliation, et quand elle est requise."
-order: 7
+order: 8
 lang: fr
 section: State
 ---
 
 # État du plan
 
-**Version 1.0. Statut : stable.** Ce document spécifie la couche d'état lisible par machine de la méthodologie Deep Work Plan. Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
+**Version 1.1. Statut : stable.** Ce document spécifie la couche d'état lisible par machine de la méthodologie Deep Work Plan. Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 
 Deux artefacts JSON — `manifest.json` (l'identité statique du plan) et `state.json` (l'état d'exécution en direct, par tâche, incluant les résultats des portes de validation) — qu'un plan MAY porter aux côtés de ses fichiers markdown, et que l'exécution sans surveillance (voir [Protocole de l'agent](/spec/agent-protocol#execution-profiles)) et les espaces de travail sans git (voir [Archétypes](/spec/archetypes) §3) MUST porter.
 
@@ -49,12 +49,13 @@ Les deux fichiers MUST être écrits de façon atomique : écrire dans un fichie
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.3.0",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
+  "spec_version": "2.4.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
+  "plan_format": "full",
   "created_at": "2026-06-09T14:00:00Z",
   "created_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "tags": ["backend", "payments"],
@@ -63,11 +64,13 @@ Les deux fichiers MUST être écrits de façon atomique : écrire dans un fichie
 }
 ```
 
-`schema`, `spec_version`, `name`, `archetype`, `rigor`, `created_at` et `task_count` sont REQUIRED.
+`schema`, `spec_version`, `name`, `archetype`, `rigor`, `created_at`, `task_count` et `plan_format` sont REQUIRED.
 
 `archetype` MUST être l'une des valeurs suivantes : `individual`, `orchestrator-hub`, `agent-workspace`.
 
 `rigor` MUST être l'une des valeurs suivantes : `micro`, `standard`, `deep` (voir [Rigueur proportionnelle](/spec/dwp-specification#proportional-rigor)).
+
+`plan_format` MUST être l'une des valeurs suivantes : `lite`, `full` — la représentation choisie à la création (voir [Plans Lite](/spec/lite-plans)). Il est immuable au niveau du manifeste : une promotion ultérieure de Lite vers Full est enregistrée dans `state.json`, jamais en réécrivant le manifeste.
 
 `parent_plan` relie un plan enfant à son plan orchestrateur (`{repo}:{plan_name}`, ou `null`).
 
@@ -77,17 +80,21 @@ Les deux fichiers MUST être écrits de façon atomique : écrire dans un fichie
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v1.json",
+  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
   "plan": "PLAN_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",
   "completed_count": 2,
   "task_count": 7,
+  "format": "full",
+  "materialization": "ready",
+  "approval": "approved",
+  "promotion": null,
   "tasks": [
     {
       "id": 1,
-      "file": "1.task_webhook_endpoint.md",
+      "locator": { "kind": "file", "value": "1.task_webhook_endpoint.md" },
       "title": "Create webhook endpoint",
       "status": "completed",
       "started_at": "2026-06-09T14:10:00Z",
@@ -111,7 +118,7 @@ Les deux fichiers MUST être écrits de façon atomique : écrire dans un fichie
     },
     {
       "id": 3,
-      "file": "3.task_retry_queue.md",
+      "locator": { "kind": "file", "value": "3.task_retry_queue.md" },
       "title": "Add retry queue",
       "status": "in_progress",
       "started_at": "2026-06-09T16:30:00Z",
@@ -128,9 +135,33 @@ Les deux fichiers MUST être écrits de façon atomique : écrire dans un fichie
 }
 ```
 
+Les entrées de tâche d'un plan Lite utilisent un locator `inline` pointant vers l'ancre de la tâche dans `README.md` au lieu d'un fichier séparé — le reste de l'entrée (portes, résultat, statut) fonctionne de la même façon :
+
+```json
+{
+  "format": "lite",
+  "materialization": "ready",
+  "approval": "pre_approved",
+  "promotion": null,
+  "tasks": [
+    {
+      "id": 2,
+      "locator": { "kind": "inline", "value": "#task-2" },
+      "title": "Add retry queue",
+      "status": "pending",
+      "gates": []
+    }
+  ]
+}
+```
+
+### Format, matérialisation, approbation et promotion
+
+`format` MUST être l'une des valeurs suivantes : `lite`, `full` et reflète le `plan_format` du manifeste — mutable ici, contrairement au manifeste, car un plan Lite MAY être promu plus tard vers Full. `materialization` MUST être l'une des valeurs suivantes : `materializing` (le dossier du plan est en cours d'écriture), `ready` (la matérialisation est terminée), ou `promoting` (une promotion de Lite vers Full est en cours). `approval` MUST être l'une des valeurs suivantes : `pending`, `approved`, `pre_approved` ; il est OPTIONAL dans ce schéma afin qu'un plan écrit avant qu'il ne soit consigné reste valide — lorsqu'il est absent, on prend la ligne `Approval` du README comme valeur, et `pending` lorsque ni l'un ni l'autre n'est présent. `promotion` vaut `null` en dehors d'une promotion, ou un objet consignant l'intention de la promotion et les tâches de destination pendant que `materialization` vaut `promoting`. Voir [Plans Lite](/spec/lite-plans) pour le cycle de vie complet que ces champs codent.
+
 ### Entrées de tâches
 
-Chaque fichier de tâche du plan MUST avoir exactement une entrée dans `tasks`, identifiée par son numéro (`id`) et son nom de fichier (`file`).
+Chaque tâche — un fichier séparé dans un plan Full, ou un enregistrement `{#task-N}` en ligne dans un plan Lite — MUST avoir exactement une entrée dans `tasks`, identifiée par son numéro (`id`) et son `locator`. `locator.kind` MUST être `file` (Full — `value` est le nom de fichier de la tâche) ou `inline` (Lite — `value` est l'ancre de la tâche, `#task-N`).
 
 `status` MUST être l'une des valeurs suivantes : `pending`, `in_progress`, `completed`, `blocked`, `skipped`. `skipped` n'est valide que lorsque l'utilisateur a explicitement retiré la tâche du périmètre via `refine` ; `state.json` MUST NOT être utilisé pour ignorer du travail silencieusement.
 
@@ -166,4 +197,4 @@ Les outils autres que l'agent exécutant MUST traiter les deux fichiers JSON en 
 
 ## Versionnage des schémas
 
-Les deux schémas sont versionnés par URL (`/v1.json`). Les champs additifs sont autorisés dans une version ; renommer ou changer le type d'un champ nécessite `/v2.json` et une note de migration dans le changelog de la spec. Le champ `spec_version` dans le manifeste fixe la version de la spec DWP sous laquelle le plan a été créé ; un agent rencontrant un plan plus récent que sa spec installée SHOULD le signaler plutôt que de deviner.
+Les deux schémas sont versionnés par URL. Les champs additifs sont autorisés au sein d'une version ; renommer ou changer le type d'un champ nécessite une nouvelle version de schéma et une note de migration dans le changelog de la spécification. Cette révision introduit `/v2.json` pour les deux schémas : le champ `file` de l'entrée de tâche devient un `locator` typé (`{"kind": "file" | "inline", "value": ...}`), le manifeste gagne `plan_format`, et le fichier d'état gagne `format`, `materialization`, `approval` et `promotion` — ensemble, les champs dont les plans Lite ont besoin (voir [Plans Lite](/spec/lite-plans)). Les manifestes et fichiers d'état `/v1.json` restent valides et ne sont jamais réécrits silencieusement en v2 ; une session `refine` MAY en migrer un délibérément. Le champ `spec_version` du manifeste fixe la version de la spec DWP sous laquelle le plan a été créé ; un agent rencontrant un plan plus récent que sa spec installée SHOULD le signaler plutôt que de deviner.

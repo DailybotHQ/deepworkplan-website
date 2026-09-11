@@ -28,9 +28,9 @@ Utwórz nowy Deep Work Plan na podstawie ogólnego celu.
 
 ## Tryby
 
-`dwp-create` domyślnie działa w trybie **prowadzonym**: zbiera kontekst, zapisuje pojedynczy dopracowany szkic, **pokazuje go tobie i prosi o potwierdzenie przed wygenerowaniem ostatecznego planu** — dzięki czemu zawsze czytasz plan, zanim powstanie. To zalecane ustawienie domyślne, zwłaszcza za pierwszymi razami.
+`dwp-create` domyślnie działa w trybie **prowadzonym**: zbiera kontekst, uruchamia analizę i od razu materializuje plan Lite — kompaktową, już wykonywalną propozycję, a nie szkic do wyrzucenia — **pokazuje go tobie i pyta, czy zachować go jako Lite, podnieść do planu Full z plikami zadań, edytować, czy zatrzymać się** — dzięki czemu zawsze czytasz prawdziwy plan przed podjęciem decyzji. To zalecane ustawienie domyślne, zwłaszcza za pierwszymi razami.
 
-Dopisz **`trust`** (lub `auto`) jako ostatnie słowo, aby pominąć potwierdzenia — agent zapisuje dopracowany szkic i przechodzi bezpośrednio do ostatecznego planu:
+Dopisz **`trust`** (lub `auto`) jako ostatnie słowo, aby pominąć ten przegląd — agent przechodzi od razu do wcześniej zatwierdzonego, gotowego do uruchomienia planu (Lite lub Full, wybranego na podstawie tych samych sygnałów):
 
 ```
 /dwp-create <goal> trust
@@ -42,7 +42,7 @@ Tryb trust to skrót dla zaawansowanych użytkowników, gdy już ufasz przepływ
 
 1. Analiza celu i kontekstu repozytorium.
 2. Zadanie pytań doprecyzowujących, jeśli cel jest niejednoznaczny.
-3. Zapis dopracowanego szkicu do `.dwp/drafts/` (w trybie prowadzonym przejrzyj go i potwierdź).
+3. Materializacja planu bezpośrednio w `.dwp/plans/PLAN_<name>/` — domyślnie plan Lite, lub Full dla większych prac (w trybie prowadzonym przejrzyj go i wybierz: zachować jako Lite, podnieść do Full, edytować, czy zatrzymać się).
 4. Rozłożenie na sekwencyjne zadania oraz zapis README, plików zadań i PROGRESS.
 5. Zakończenie Final Review (przegląd bezpieczeństwa, walidacja stanu końcowego, uzgodnienie decyzji dotyczących skilli).
 

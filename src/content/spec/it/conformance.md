@@ -1,7 +1,7 @@
 ---
 title: Conformità
 description: "La definizione normativa di un repository conforme a DWP e AI-first: gli artefatti che DEVE e DOVREBBE avere, cosa rende un piano ben formato e come verificarlo."
-order: 6
+order: 7
 lang: it
 section: Conformance
 ---
@@ -20,7 +20,7 @@ Un repository conforme a DWP DEVE soddisfare tutto quanto segue. Ogni artefatto 
 2. **`CLAUDE.md` si risolve in `AGENTS.md`.** Un `CLAUDE.md` DEVE esistere e risolversi in `AGENTS.md` (un symlink, o un equivalente che garantisca un’unica fonte di verità). I due NON DEVONO divergere.
 3. **Una gerarchia `docs/`.** Il repository DEVE contenere una directory `docs/` che copra le categorie standard (architettura, standard, testing, comandi di sviluppo, sicurezza e onboarding degli agenti) con contenuto reale e specifico del repository. I moduli complessi DOVREBBERO avere un proprio `README.md`. La guida al testing DEVE definire una toolchain reale di test, lint e type-check — oppure, per un repository che non ne ha alcuna, un setup concreto **proposto** a partire dallo stack durante l’onboarding. Una guida al testing vuota o «nessun test» non soddisfa questo criterio: senza un modo definito per validare il comportamento, un piano non ha alcun validation gate oggettivo.
 4. **Una home `.agents/`.** Il repository DEVE contenere una directory `.agents/` con `agents/`, `commands/` e `skills/`, più un catalogo sotto `.agents/docs/` che **corrisponda a ciò che è su disco**. I comandi `dwp-*` DEVONO essere sottili delegatori alla skill installata. Un percorso `.claude` DEVE risolversi in `.agents`.
-5. **Un workspace `.dwp/` escluso da git.** Il repository DEVE contenere una directory `.dwp/` con `plans/` e `drafts/`, e `.dwp/` DEVE essere escluso da git. Uno spazio di lavoro temporaneo `tmp/` DOVREBBE esistere e DOVREBBE essere escluso da git.
+5. **Un workspace `.dwp/` escluso da git.** Il repository DEVE contenere una directory `.dwp/` con `plans/`, e `.dwp/` DEVE essere escluso da git. Uno spazio di lavoro temporaneo `tmp/` DOVREBBE esistere e DOVREBBE essere escluso da git.
 6. **La skill della metodologia è risolvibile.** La skill Deep Work Plan DEVE essere installata o referenziata in modo tale che un agente nel repository possa invocarne le sub-skill.
 
 Un repository è **pienamente conforme con zero addon opzionali**. Gli addon opzionali (devcontainer, Dailybot, dependency-upgrade, design-system) NON DEVONO essere richiesti per la conformità. Dallo standard 2.3.0 la **revisione locale AI Diff Reviewer** (skill vendorizzata + file di estensione) fa parte della baseline: la sua assenza è un fallimento per un repository che dichiara la 2.3.0 o successiva e un rilievo sulla versione della harness per un repository legacy. La sua superficie CI resta opzionale.

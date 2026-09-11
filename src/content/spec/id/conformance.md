@@ -1,7 +1,7 @@
 ---
 title: Conformance
 description: "Definisi normatif sebuah repositori konforman DWP yang AI-first: artefak yang HARUS dan SEBAIKNYA dimilikinya, apa yang membuat rencana terbentuk baik, dan cara memverifikasinya."
-order: 6
+order: 7
 lang: id
 section: Conformance
 ---
@@ -20,7 +20,7 @@ Sebuah repositori konforman DWP MUST memenuhi semua hal berikut. Setiap artefak 
 2. **`CLAUDE.md` me-resolve ke `AGENTS.md`.** Sebuah `CLAUDE.md` MUST ada dan me-resolve ke `AGENTS.md` (sebuah symlink, atau padanan yang menjamin satu sumber kebenaran). Keduanya MUST NOT menyimpang.
 3. **Sebuah hierarki `docs/`.** Repositori MUST berisi sebuah direktori `docs/` yang mencakup kategori-kategori standar (arsitektur, standar, pengujian, perintah pengembangan, keamanan, dan onboarding agent) dengan konten nyata yang spesifik repositori. Modul kompleks SHOULD membawa `README.md`-nya sendiri. Panduan pengujian MUST mendefinisikan toolchain test, lint, dan type-check yang nyata — atau, untuk sebuah repositori yang tidak memiliki satu pun, sebuah penyiapan konkret yang **diusulkan** dari stack selama onboarding. Sebuah panduan pengujian yang kosong atau "tanpa test" tidak memenuhi kriteria ini: tanpa cara yang terdefinisi untuk memvalidasi perilaku, sebuah rencana tidak memiliki validation gate yang objektif.
 4. **Sebuah rumah `.agents/`.** Repositori MUST berisi sebuah direktori `.agents/` dengan `agents/`, `commands/`, dan `skills/`, ditambah sebuah katalog di bawah `.agents/docs/` yang **sesuai dengan apa yang ada di disk**. Command `dwp-*` MUST menjadi delegator tipis ke skill yang terpasang. Sebuah path `.claude` MUST me-resolve ke `.agents`.
-5. **Sebuah ruang kerja `.dwp/` yang di-gitignore.** Repositori MUST berisi sebuah direktori `.dwp/` dengan `plans/` dan `drafts/`, dan `.dwp/` MUST di-gitignore. Sebuah ruang scratch `tmp/` SHOULD ada dan SHOULD di-gitignore.
+5. **Sebuah ruang kerja `.dwp/` yang di-gitignore.** Repositori MUST berisi sebuah direktori `.dwp/` dengan `plans/`, dan `.dwp/` MUST di-gitignore. Sebuah ruang scratch `tmp/` SHOULD ada dan SHOULD di-gitignore.
 6. **Skill metodologi dapat di-resolve.** Skill Deep Work Plan MUST terpasang atau dirujuk sedemikian rupa sehingga sebuah agent di repositori dapat memanggil sub-skill-nya.
 
 Sebuah repositori **sepenuhnya konforman dengan nol addon opsional**. Addon opsional (devcontainer, Dailybot, dependency-upgrade, design-system) MUST NOT diwajibkan untuk konformansi. Sejak standar 2.3.0 **tinjauan lokal AI Diff Reviewer** (skill vendored + berkas ekstensi) adalah bagian dari baseline: ketiadaannya adalah kegagalan bagi repositori yang menyatakan 2.3.0 atau lebih baru, dan sebuah temuan versi-harness bagi repositori lama. Permukaan CI-nya tetap opsional.

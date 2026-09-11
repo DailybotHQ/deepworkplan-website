@@ -1,7 +1,7 @@
 ---
 title: 符合性
 description: "对一个符合 DWP、AI-first 代码仓库的规范性定义：它 MUST 与 SHOULD 拥有的产物、什么使一份计划结构良好，以及如何验证它。"
-order: 6
+order: 7
 lang: zh
 section: Conformance
 ---
@@ -20,7 +20,7 @@ section: Conformance
 2. **`CLAUDE.md` 解析到 `AGENTS.md`。** MUST 存在一个 `CLAUDE.md` 并解析到 `AGENTS.md`（一个符号链接，或保证单一事实来源的等价方式）。两者 MUST NOT 相互背离。
 3. **一套 `docs/` 层级结构。** 仓库 MUST 包含一个 `docs/` 目录，涵盖标准的各类别（架构、规范、测试、开发命令、安全与代理接入），并具备真实、仓库专属的内容。复杂模块 SHOULD 携带各自的 `README.md`。测试指南 MUST 定义一套真实的测试、lint 与类型检查工具链——或者，对于一个完全没有这类工具链的仓库，定义一套在接入期间从其技术栈**提议**而来的具体方案。一份空白的测试指南或“无测试”都不满足这项标准：在没有一种已定义的方式来验证行为的情况下，一份计划就没有客观的验证关卡。
 4. **一个 `.agents/` 目录。** 仓库 MUST 包含一个 `.agents/` 目录，含 `agents/`、`commands/` 与 `skills/`，外加 `.agents/docs/` 之下一份**与磁盘上一致**的目录。`dwp-*` 命令 MUST 是委派给已安装技能的轻量委派器。一个 `.claude` 路径 MUST 解析到 `.agents`。
-5. **一个被 gitignore 的 `.dwp/` 工作区。** 仓库 MUST 包含一个含 `plans/` 与 `drafts/` 的 `.dwp/` 目录，且 `.dwp/` MUST 被 gitignore。一个 `tmp/` 草稿空间 SHOULD 存在，并 SHOULD 被 gitignore。
+5. **一个被 gitignore 的 `.dwp/` 工作区。** 仓库 MUST 包含一个含 `plans/` 的 `.dwp/` 目录，且 `.dwp/` MUST 被 gitignore。一个 `tmp/` 草稿空间 SHOULD 存在，并 SHOULD 被 gitignore。
 6. **方法论技能可被解析。** Deep Work Plan 技能 MUST 被安装或被引用，使得仓库中的代理能够调用其各子技能。
 
 一个仓库**在零可选附加组件下即完全符合规范**。可选附加组件（devcontainer、Dailybot、dependency-upgrade、design-system）MUST NOT 作为符合性的必要条件。自标准 2.3.0 起，**AI Diff Reviewer 本地审查**（vendored skill + 扩展文件）属于基线的一部分：对声明 2.3.0 或更新版本的仓库，它的缺失是一项失败；对旧版仓库则是一项 harness 版本发现。其 CI 层面保持可选。

@@ -1,7 +1,7 @@
 ---
 title: "Questions fréquentes — Deep Work Plan"
 description: "Réponses aux questions fréquentes sur Deep Work Plan : son rôle, les portes de validation et la reprise, la comparaison avec d’autres outils, l’adoption."
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-11
 ---
 
 ## Questions fréquentes
@@ -22,6 +22,12 @@ Aux développeurs et aux équipes qui confient un vrai travail en plusieurs éta
 
 [Démarrage rapide](https://deepworkplan.com/fr/quickstart)
 
+### Quelle est la différence entre un plan Lite et un plan Full ?
+
+Un choix de représentation, non un compromis sur la rigueur. Tout plan commence comme un dossier Lite : un README compact avec des enregistrements de tâches ancrés, déjà exécutable, et non une ébauche partielle. `create` ne s’étend en fichiers de tâche Full que lorsque le détail des instructions, les dépendances ou les contrats d’une tâche ne tiennent pas dans un enregistrement compact et relisible ; une demande explicite pour l’un ou l’autre format est honorée, et un plan Lite peut être promu en Full plus tard sans perdre le travail déjà accompli. Les deux formats portent les mêmes critères d’acceptation, portes de validation, preuves et le Final Review obligatoire.
+
+[Lire la méthodologie](https://deepworkplan.com/fr/methodology)
+
 ### Est-ce un outil, un framework ou une méthodologie ?
 
 Une méthodologie empaquetée sous la forme d’un skill installable. Il n’y a ni serveur, ni compte, ni format propriétaire, ni runtime au-delà de l’agent de code que vous utilisez déjà. Ce qui s’installe, ce sont des instructions que l’agent lit, un petit ensemble de scripts shell pour la détection du contexte et la vérification de conformité, et les conventions que votre dépôt adopte. Tout ce que le plan produit est du Markdown et du JSON dans votre dépôt, lisibles sans aucun outil.
@@ -34,13 +40,31 @@ Tout agent qui lit les fichiers d’un dépôt. Le skill suit le standard ouvert
 
 [Parcourir le kit](https://deepworkplan.com/fr/kit)
 
-## Comment se déroule un plan
-
 ### Comment l’utiliser ?
 
-Trois étapes. D’abord, installez la skill Deep Work Plan dans votre agent de code — le chemin le plus rapide est `npx skills add DailybotHQ/deepworkplan-skill` (ou clonez le dépôt de la skill et exécutez `./setup.sh`). Ensuite, intégrez le dépôt une fois pour que l’agent adapte `AGENTS.md`, `docs/`, le kit `.agents/` et une zone `.dwp/` ignorée par git à votre stack : pointez-le vers https://deepworkplan.com/init.md, ou exécutez `/deepworkplan-onboard`. Enfin, planifiez et exécutez le travail avec les commandes légères : `/dwp-create <goal>` construit un plan ; `/dwp-execute` l’exécute tâche par tâche face à chaque porte ; `/dwp-refine` modifie un brouillon ou un plan en cours ; `/dwp-resume` reprend après une interruption ; `/dwp-status` rapporte la progression sans exécuter ; `/dwp-verify` produit un rapport objectif de conformité. Les agents qui interceptent `/` utilisent souvent `#` à la place (par exemple `#dwp-execute`). Le point d’adoption et le démarrage rapide reprennent le même chemin en plus de détails.
+Trois étapes. D’abord, installez la skill Deep Work Plan dans votre agent de code — le chemin le plus rapide est `npx skills add DailybotHQ/deepworkplan-skill` (ou clonez le dépôt de la skill et exécutez `./setup.sh`). Ensuite, intégrez le dépôt une fois pour que l’agent adapte `AGENTS.md`, `docs/`, le kit `.agents/` et une zone `.dwp/` ignorée par git à votre stack : pointez-le vers https://deepworkplan.com/init.md, ou exécutez `/deepworkplan-onboard`. Enfin, planifiez et exécutez le travail avec les commandes légères : `/dwp-create <goal>` construit un plan ; `/dwp-execute` l’exécute tâche par tâche face à chaque porte ; `/dwp-refine` modifie un plan en cours (le périmètre, les tâches, ou la promotion d’un plan Lite en Full) ; `/dwp-resume` reprend après une interruption ; `/dwp-status` rapporte la progression sans exécuter ; `/dwp-verify` produit un rapport objectif de conformité. Les agents qui interceptent `/` utilisent souvent `#` à la place (par exemple `#dwp-execute`). Le point d’adoption et le démarrage rapide reprennent le même chemin en plus de détails.
 
 [Démarrage rapide](https://deepworkplan.com/fr/quickstart)
+
+### Qu’est-ce qui est installé exactement, et où ?
+
+La skill d’agent s’installe partout où votre agent charge les skills de projet ou d’utilisateur. L’onboarding adapte ensuite le dépôt lui-même : il crée ou réconcilie `AGENTS.md`, `docs/`, `.agents/` et l’espace de travail `.dwp/` ignoré par git. La skill enseigne la méthode à l’agent ; le dépôt conserve le contexte, le kit et les preuves de plan dont les autres agents ont besoin pour continuer.
+
+[Voir le flux d’adoption](https://deepworkplan.com/fr/init)
+
+### Deep Work Plan nécessite-t-il Git ?
+
+Git est recommandé pour les dépôts parce que son historique fait partie de la surface de récupération et de revue, mais la méthodologie peut aussi fonctionner dans un espace de travail d’agent sans dépôt Git. Dans ce cas, la couche d’état lisible par machine, y compris les points de contrôle `state.json` et les enregistrements de porte, est requise pour que la récupération ne dépende pas d’une transcription de conversation.
+
+[Lire les archétypes de dépôt](https://deepworkplan.com/fr/spec/archetypes)
+
+### Quelle est la différence entre une skill, un plan et une spécification produit ?
+
+Une skill décrit comment un agent exécute une procédure répétable. Un plan DWP décrit un changement concret via son périmètre, des critères d’acceptation, des portes de validation et des preuves. Une spécification produit décrit le comportement actuel du produit et évolue par deltas après l’implémentation ; les skills et les plans sont eux aussi des spécifications, mais ils décrivent des procédures et des changements plutôt que de maintenir ce contrat produit canonique.
+
+[Lire la spécification](https://deepworkplan.com/fr/spec/dwp-specification)
+
+## Comment se déroule un plan
 
 ### Comment les portes de validation sont-elles mises en œuvre ? Exigent-elles une validation humaine ?
 
@@ -84,6 +108,18 @@ L’unique tâche de clôture obligatoire de chaque plan. Dans l’ordre : une p
 
 [La spécification](https://deepworkplan.com/fr/spec/dwp-specification)
 
+### Que se passe-t-il quand une porte de validation échoue ?
+
+La tâche est enregistrée comme bloquée et l’agent s’arrête avant de revendiquer un achèvement. Vous pouvez inspecter les preuves, corriger le code ou raffiner la tâche, puis reprendre ; une commande en échec est un signal pour résoudre l’écart, pas une permission d’affaiblir la porte.
+
+[Lire le protocole d’agent](https://deepworkplan.com/fr/spec/agent-protocol)
+
+### Un plan peut-il s’exécuter sans supervision, de nuit ou en CI ?
+
+Oui, quand le plan a été approuvé à l’avance, porte la couche d’état requise et confère à l’agent une autorité bornée. Une exécution sans supervision doit s’arrêter et enregistrer un blocage quand la réalité diverge, quand une porte échoue en dehors de son périmètre de réparation prévu, ou quand une nouvelle approbation ou un identifiant est nécessaire.
+
+[Lire le protocole d’exécution sans supervision](https://deepworkplan.com/fr/spec/agent-protocol)
+
 ## Comment il se compare
 
 ### En quoi diffère-t-il des outils pilotés par la spécification comme Spec Kit, OpenSpec ou Kiro ?
@@ -94,7 +130,7 @@ Ils résolvent des problèmes adjacents. Les outils pilotés par la spécificati
 
 ### En quoi diffère-t-il d’outils de workflow d’agents comme BMAD, Superpowers, Get Shit Done ou Gentle-AI ?
 
-Ces frameworks apportent des styles de travail solides : des rôles, des principes, des étapes test-first, des habitudes de vérification. Deep Work Plan diffère des deux et se concentre sur ce qui reste dans le dépôt et sur ce qui peut être vérifié : un harness que tout agent lit à froid, des fichiers de tâche avec critères d’acceptation et portes, un état qui survit à une session, un vérificateur de conformité avec un code de sortie adapté à la CI, et une mesure publiée du nombre d’octets d’instructions chargés par chaque flux. La méthodologie est indépendante de l’outil par construction et n’ajoute aucun service, fournisseur ni secret à la boucle centrale. La page de comparaison montre où chaque approche est intégrée, optionnelle ou hors périmètre. Gentle-AI configure les agents de codage que vous utilisez déjà : mémoire persistante entre les sessions (Engram), skills sélectionnées, personas, serveurs MCP, Spec-Driven Development en option et revue fondée sur les preuves en option (Receipt-Driven Development). Il écrit dans les répertoires de configuration de chaque agent et peut conserver les artefacts de planification dans Engram, dans des fichiers OpenSpec, ou les deux. Deep Work Plan s’installe dans le dépôt lui-même — un harness que tout agent lit à froid, des fichiers de tâche avec critères d’acceptation et portes, un état reprenable sur disque, un vérificateur de conformité avec un code de sortie adapté à la CI et un registre publié d’octets d’instructions — sans ajouter de service, de fournisseur ni de secret à la boucle centrale. Les couches peuvent coexister : Gentle-AI équipe l’agent ; Deep Work Plan rend le travail de longue durée durable et vérifiable dans le dépôt.
+Les frameworks de flux de travail pour agents comme BMAD, Superpowers et Get Shit Done apportent des styles de travail solides : rôles, principes, étapes test-first, habitudes de vérification. Gentle-AI se situe dans une catégorie voisine, comme configurateur d'écosystème d'agents : il équipe les agents de codage que vous utilisez déjà avec une mémoire persistante entre les sessions (Engram), des skills sélectionnées, des personas, des serveurs MCP, un Spec-Driven Development optionnel et une revue optionnelle fondée sur les preuves (Receipt-Driven Development), en écrivant dans les répertoires de configuration de chaque agent. Deep Work Plan diffère des deux : il se concentre sur ce qui reste dans le dépôt et sur ce qui peut être vérifié — un harness que tout agent lit à froid, des fichiers de tâche avec critères d'acceptation et portes, un état qui survit à une session, un vérificateur de conformité avec un code de sortie adapté à la CI, et une mesure publiée du nombre d'octets d'instructions chargés par chaque flux. Il est indépendant de l'outil par construction et n'ajoute aucun service, fournisseur ni secret à la boucle centrale. Les couches peuvent coexister : les frameworks et Gentle-AI façonnent la manière dont l'agent travaille ; Deep Work Plan rend le travail long durable et vérifiable dans le dépôt. La page de comparaison montre où chaque approche est intégrée, optionnelle ou hors périmètre.
 
 [Voir la comparaison](https://deepworkplan.com/fr/compare)
 
@@ -111,6 +147,18 @@ Les modes de planification intégrés sont utiles, et Deep Work Plan s’appuie 
 L’onboarding est non destructif : il détecte un `AGENTS.md`, `docs/`, `.agents/` ou `CLAUDE.md` existant, réconcilie au lieu d’écraser, et demande avant de remplacer quoi que ce soit. Il écrit l’index `AGENTS.md` avec de vraies commandes, une arborescence `docs/` raisonnée, des documentations par module, le kit `.agents/` avec ses commandes `dwp-*` légères, une zone de sortie `.dwp/` ignorée par git, une carte des tests vérifiée, et la revue locale de code requise (le skill AI Diff Reviewer plus une extension de revue adaptée au dépôt). Il lance ensuite un autocontrôle et le vérificateur de conformité, pour que vous voyiez ce qui a été produit. Un dépôt intégré sous une version antérieure reçoit une mise à niveau ciblée qui ne change que ce qui manque.
 
 [L’endpoint d’adoption](https://deepworkplan.com/fr/init)
+
+### Puis-je utiliser la méthodologie de base sans installer d’add-ons ?
+
+Oui. Les add-ons sont des couches optionnelles, et un dépôt sans aucun d’entre eux est pleinement conforme DWP. Devcontainers, le reporting Dailybot, les mises à niveau de dépendances, le support du design-system et la revue CI optionnelle ne sont proposés que lorsqu’ils conviennent à votre dépôt et que vous les acceptez explicitement.
+
+[Parcourir les add-ons](https://deepworkplan.com/fr/spec/addons)
+
+### Et si mon dépôt n’a pas encore de tests ni de lint ?
+
+DWP ne traite pas l’absence d’outillage comme un laissez-passer. Pendant l’onboarding, l’agent propose une configuration de validation adaptée à la stack, consigne les commandes dans la documentation du dépôt et utilise ces commandes comme cible pour les portes futures ; la proposition reste visible pour que vous la revoyiez.
+
+[Lire le protocole d’agent](https://deepworkplan.com/fr/spec/agent-protocol)
 
 ### Combien cela coûte-t-il, et comment l’efficacité est-elle mesurée ?
 

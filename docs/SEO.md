@@ -176,7 +176,7 @@ Automatically generated in `BaseHead.astro` using `getAlternateUrls()` from `src
 
 Built from `Astro.url.pathname` + `Astro.site`. Each language version has its own canonical URL (no cross-language canonicals).
 
-**Exception — agent endpoint `/init.md`:** the agent prompt is always served from the canonical English URL `https://deepworkplan.com/init.md` regardless of which locale the user is browsing. The methodology, spec, and skill stay in English; only the human-facing `/init` page is translated. See `CANONICAL_INIT_MD_PATH` / `getCanonicalInitMdUrl()` in `src/lib/i18n.ts`.
+**Exception — agent endpoint `/init.md`:** the prompt link the UI promotes (the Hero section and the `/init` page's own "copy this for your agent" action) always points at the canonical, root English URL `https://deepworkplan.com/init.md`, regardless of which locale the visitor is browsing — see `CANONICAL_INIT_MD_PATH` / `getCanonicalInitMdUrl()` in `src/lib/i18n.ts`. This is a UI-promotion guarantee, not a routing restriction: each locale's own `/{lang}/init.md` (e.g. `/es/init.md`) still exists and is genuinely translated, as the ordinary Markdown mirror of that locale's `/{lang}/init` page — the same ordinary policy every other page gets, not a special case. The methodology, spec, and skill content stay English-only; only the `/init` page (and its per-locale `.md` mirror) is translated.
 
 ### Open Graph alternate locales
 
@@ -192,6 +192,7 @@ All content MUST exist in every active language:
 - Page wrappers: `src/pages/<slug>.astro` (default-lang) + `src/pages/[lang]/<slug>.astro` (all non-default). One dynamic file covers all 16 non-default languages.
 - Methodology/spec/kit/pages content: `src/content/{methodology,spec,kit,pages}/<lang>/<slug>.md` for every active `<lang>`
 - Translations: every `src/lib/translations/<lang>.ts` file (`pnpm run i18n:check` enforces parity)
+- `.md` sibling **content** (not just existence): `pnpm run md:check` verifies every HTML page has a `.md` file; `pnpm run md:content-check` verifies the `.md` actually carries equivalent content (a similarity signal plus an MDX source-leak detector) — see [Markdown for Agents → Verifying Content Parity](aeo/MARKDOWN_FOR_AGENTS.md#verifying-content-parity-not-just-existence)
 
 ## Social Media (OG + Twitter)
 
@@ -272,7 +273,7 @@ When adding a machine-readable endpoint or agent surface:
 
 ### Current AI Crawlers Allowed
 
-GPTBot, ChatGPT-User, ClaudeBot, anthropic-ai, Google-Extended, Bytespider, CCBot, PerplexityBot, Applebot-Extended, Amazonbot, Meta-ExternalAgent, cohere-ai.
+GPTBot, ChatGPT-User, ClaudeBot, anthropic-ai, Google-Extended, Bytespider, CCBot, PerplexityBot, Applebot-Extended, Amazonbot, Meta-ExternalAgent, cohere-ai, OAI-SearchBot.
 
 ## Images & Performance
 

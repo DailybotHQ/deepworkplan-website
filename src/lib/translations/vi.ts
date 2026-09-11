@@ -34,6 +34,7 @@ export const vi: SiteTranslations = {
     github: 'GitHub',
     faq: 'Câu hỏi thường gặp',
     compare: 'So sánh',
+    changelog: 'Changelog',
     resources: 'Tài nguyên',
     resourcesDesc: 'Ví dụ, tin tưởng, câu hỏi thường gặp và so sánh',
     repo: {
@@ -45,6 +46,24 @@ export const vi: SiteTranslations = {
     },
     menu: 'Mở menu',
     closeMenu: 'Đóng menu',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Nhật ký thay đổi Deep Work Plan',
+      description:
+        'Các cập nhật quan trọng cho skill, phương pháp luận và harness agent có thể mang theo của Deep Work Plan.',
+    },
+    eyebrow: 'Nhật ký thay đổi',
+    title: 'Công việc phía sau phương pháp',
+    intro:
+      'Dòng thời gian có nguồn dẫn về các bản phát hành và quyết định thiết kế giúp Deep Work Plan đáng tin cậy cho công việc agent dài hạn.',
+    viewDetail: 'Đọc cập nhật',
+    backToIndex: 'Tất cả cập nhật',
+    sourceLabel: 'Nguồn',
+    featuredLabel: 'Bản phát hành nổi bật',
+    relatedTitle: 'Cập nhật liên quan',
   },
 
   // Footer
@@ -108,7 +127,7 @@ export const vi: SiteTranslations = {
       answer:
         'Deep Work Plan trả lời bằng phát triển theo đặc tả: một kế hoạch bền vững, các tác vụ nguyên tử và cổng kiểm chứng agent buộc phải qua. “Xong” không còn là cảm giác — trở thành bằng chứng kiểm chứng được và review được.',
       efficiency:
-        'Và vì ngữ cảnh là tài nguyên khan hiếm nhất của agent, harness được thiết kế cho hiệu suất token: hướng dẫn tải tiến tiến, kiểm chứng chỉ chạm vào phần thay đổi và mỗi tác vụ học tại chỗ — công việc dài hơi vẫn khả thi.',
+        'Và vì ngữ cảnh là tài nguyên khan hiếm nhất của agent, harness được thiết kế cho hiệu suất token: hướng dẫn tải tiến tiến, kiểm chứng chỉ chạm vào phần thay đổi và mỗi tác vụ học tại chỗ — công việc dài hơi vẫn khả thi. Bản thân kế hoạch cũng mở rộng theo cùng nguyên tắc: một kế hoạch Lite cho một bản sửa lỗi có giới hạn, một kế hoạch Full cho công việc kéo dài hàng giờ — định dạng luôn đi theo phạm vi công việc, chứ không phải ngược lại.',
       illustrationAlt:
         'Một bản khắc hai tầng: một bên là con tàu trôi dạt trong sương mù cạnh đá ngầm, bên kia là chính con tàu vững vàng theo lộ trình đã vẽ về ngọn hải đăng cảng.',
     },
@@ -811,6 +830,15 @@ export const vi: SiteTranslations = {
             linkPath: '/quickstart',
           },
           {
+            id: 'lite-vs-full',
+            question:
+              'Sự khác biệt giữa một kế hoạch Lite và một kế hoạch Full là gì?',
+            answer:
+              'Đây là một lựa chọn về cách biểu diễn, không phải một sự đánh đổi về độ chặt chẽ. Mọi kế hoạch đều bắt đầu như một thư mục Lite: một README gọn gàng với các bản ghi tác vụ được neo (anchored), đã có thể thực thi được ngay, không phải một bản nháp dang dở. Lệnh `create` chỉ mở rộng thành các tệp tác vụ Full khi mức chi tiết hướng dẫn, các phụ thuộc hoặc hợp đồng của một tác vụ không vừa với một bản ghi gọn gàng có thể rà soát được; một yêu cầu rõ ràng cho một trong hai định dạng luôn được tôn trọng, và một kế hoạch Lite có thể được nâng cấp thành Full sau đó mà không mất công việc đã hoàn thành. Cả hai định dạng đều mang cùng tiêu chí chấp nhận, cổng kiểm chứng, bằng chứng và Final Review bắt buộc như nhau.',
+            linkLabel: 'Đọc phương pháp luận',
+            linkPath: '/methodology',
+          },
+          {
             id: 'is-it-a-tool',
             question:
               'Nó là một công cụ, một framework hay một phương pháp luận?',
@@ -828,28 +856,36 @@ export const vi: SiteTranslations = {
             linkPath: '/kit',
           },
           {
-            id: 'what-is-installed',
-            question: 'What exactly gets installed, and where?',
+            id: 'how-to-use',
+            question: 'Tôi dùng nó như thế nào?',
             answer:
-              'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles AGENTS.md, docs/, .agents/ and the gitignored .dwp/ workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
-            linkLabel: 'See the adoption flow',
+              'Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx skills add DailybotHQ/deepworkplan-skill` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.',
+            linkLabel: 'Khởi động nhanh',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'what-is-installed',
+            question: 'Chính xác thì những gì được cài đặt, và ở đâu?',
+            answer:
+              'Agent skill được cài ở bất cứ đâu agent của bạn tải skill cấp dự án hoặc cấp người dùng. Sau đó, onboarding thích ứng chính repository: nó tạo mới hoặc hòa giải `AGENTS.md`, `docs/`, `.agents/` và không gian làm việc `.dwp/` được gitignore. Skill dạy agent phương pháp; repository giữ ngữ cảnh, bộ kit và bằng chứng kế hoạch mà các agent khác cần để tiếp tục.',
+            linkLabel: 'Xem luồng áp dụng',
             linkPath: '/init',
           },
           {
             id: 'requires-git',
-            question: 'Does Deep Work Plan require Git?',
+            question: 'Deep Work Plan có yêu cầu Git không?',
             answer:
-              'Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including state.json checkpoints and gate records, is required so recovery does not depend on a chat transcript.',
-            linkLabel: 'Read about repository archetypes',
+              'Git được khuyến nghị cho repository vì lịch sử của nó là một phần của bề mặt khôi phục và rà soát, nhưng phương pháp luận cũng có thể chạy trong một không gian làm việc agent mà không cần repository Git. Trong trường hợp đó, tầng trạng thái đọc được bằng máy — gồm các điểm kiểm tra `state.json` và bản ghi cổng kiểm chứng — là bắt buộc, để việc khôi phục không phụ thuộc vào bản ghi hội thoại.',
+            linkLabel: 'Đọc về các nguyên mẫu repository',
             linkPath: '/spec/archetypes',
           },
           {
             id: 'skill-plan-spec',
             question:
-              'What is the difference between a skill, a plan and a product specification?',
+              'Sự khác biệt giữa một skill, một kế hoạch và một đặc tả sản phẩm là gì?',
             answer:
-              'A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.',
-            linkLabel: 'Read the specification',
+              'Một skill mô tả cách agent thực hiện một quy trình có thể lặp lại. Một kế hoạch DWP mô tả một thay đổi cụ thể thông qua phạm vi, tiêu chí chấp nhận, cổng kiểm chứng và bằng chứng. Một đặc tả sản phẩm mô tả hành vi hiện tại của sản phẩm và tiến hóa qua các delta sau khi triển khai; skill và kế hoạch cũng là đặc tả, nhưng chúng mô tả quy trình và thay đổi chứ không duy trì hợp đồng sản phẩm chuẩn tắc đó.',
+            linkLabel: 'Đọc đặc tả',
             linkPath: '/spec/dwp-specification',
           },
         ],
@@ -858,14 +894,6 @@ export const vi: SiteTranslations = {
         id: 'how',
         title: 'Cách một kế hoạch vận hành',
         items: [
-          {
-            id: 'how-to-use',
-            question: 'Tôi dùng nó như thế nào?',
-            answer:
-              'Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx skills add DailybotHQ/deepworkplan-skill` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa bản nháp hoặc kế hoạch đang chạy; `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.',
-            linkLabel: 'Khởi động nhanh',
-            linkPath: '/quickstart',
-          },
           {
             id: 'gates',
             question:
@@ -929,18 +957,19 @@ export const vi: SiteTranslations = {
           },
           {
             id: 'gate-fails',
-            question: 'What happens when a validation gate fails?',
+            question: 'Điều gì xảy ra khi một cổng kiểm chứng thất bại?',
             answer:
-              'The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.',
-            linkLabel: 'Read the agent protocol',
+              'Tác vụ được ghi nhận là bị chặn và agent dừng lại trước khi tuyên bố hoàn thành. Bạn có thể kiểm tra bằng chứng, sửa mã hoặc tinh chỉnh tác vụ, rồi tiếp tục; một lệnh thất bại là tín hiệu để giải quyết sự sai lệch, không phải giấy phép để làm yếu cổng kiểm chứng.',
+            linkLabel: 'Đọc giao thức agent',
             linkPath: '/spec/agent-protocol',
           },
           {
             id: 'unattended-runs',
-            question: 'Can a plan run unattended overnight or in CI?',
+            question:
+              'Một kế hoạch có thể chạy không giám sát qua đêm hoặc trong CI không?',
             answer:
-              'Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.',
-            linkLabel: 'Read the unattended protocol',
+              'Có, khi kế hoạch đã được phê duyệt từ trước, mang tầng trạng thái bắt buộc và trao cho agent thẩm quyền có giới hạn. Một lượt chạy không giám sát phải dừng lại và ghi nhận một điểm chặn khi thực tế lệch khỏi kế hoạch, một cổng kiểm chứng thất bại ngoài phạm vi sửa chữa đã định, hoặc cần một phê duyệt hay thông tin xác thực mới.',
+            linkLabel: 'Đọc giao thức chạy không giám sát',
             linkPath: '/spec/agent-protocol',
           },
         ],
@@ -963,7 +992,7 @@ export const vi: SiteTranslations = {
             question:
               'Nó khác các công cụ quy trình agent như BMAD, Superpowers, Get Shit Done hay Gentle-AI thế nào?',
             answer:
-              'Những framework đó mang các phong cách làm việc mạnh: vai trò, nguyên tắc, các bước test trước, thói quen xác minh. Deep Work Plan khác cả hai và tập trung vào cái gì ở lại trong repository và cái gì kiểm tra được: một harness mà bất kỳ agent nào cũng đọc hiểu được khi mới vào, các tệp tác vụ với tiêu chí chấp nhận và cổng, trạng thái sống sót qua phiên, một công cụ kiểm tra tính tuân thủ với mã thoát thân thiện CI, và một phép đo công khai về số byte hướng dẫn mà mỗi luồng tải. Nó độc lập với công cụ ngay từ cấu trúc và không thêm dịch vụ, nhà cung cấp hay bí mật nào vào vòng lặp lõi. Trang so sánh cho thấy mỗi cách tiếp cận nằm ở đâu: tích hợp sẵn, tùy chọn hay ngoài phạm vi. Gentle-AI cấu hình các coding agent bạn đã dùng: bộ nhớ bền vững qua phiên (Engram), kỹ năng được chọn lọc, persona, máy chủ MCP, Spec-Driven Development tùy chọn, và đánh giá dựa trên bằng chứng tùy chọn (Receipt-Driven Development). Nó ghi vào thư mục cấu hình của từng agent và có thể lưu các artifact lập kế hoạch trong Engram, trong tệp OpenSpec, hoặc cả hai. Deep Work Plan cài vào chính repository — một harness mà bất kỳ agent nào cũng đọc hiểu được khi mới vào, các tệp tác vụ với tiêu chí chấp nhận và cổng, trạng thái trên đĩa có thể tiếp tục, một công cụ kiểm tra tính tuân thủ với mã thoát thân thiện CI, và sổ cái byte hướng dẫn đã công bố — mà không thêm dịch vụ, nhà cung cấp hay bí mật nào vào vòng lặp lõi. Hai tầng có thể đi cùng nhau: Gentle-AI trang bị agent; Deep Work Plan giúp công việc dài bền vững và kiểm tra được trong repo.',
+              'Các framework quy trình làm việc cho agent như BMAD, Superpowers và Get Shit Done mang lại phong cách làm việc mạnh mẽ: vai trò, nguyên tắc, các bước test-first, thói quen xác minh. Gentle-AI nằm ở một hạng mục lân cận với vai trò là bộ cấu hình hệ sinh thái agent: nó trang bị cho các coding agent bạn đã dùng bộ nhớ bền vững qua các phiên (Engram), các skill được tuyển chọn, persona, máy chủ MCP, Spec-Driven Development tùy chọn và đánh giá dựa trên bằng chứng tùy chọn (Receipt-Driven Development), bằng cách ghi vào thư mục cấu hình của từng agent. Deep Work Plan khác cả hai: nó tập trung vào những gì còn lại trong repository và những gì có thể kiểm tra được — một harness mà bất kỳ agent nào cũng đọc được ngay, các tệp task với tiêu chí chấp nhận và gate, trạng thái tồn tại qua một phiên, một bộ kiểm tra tuân thủ với mã thoát thân thiện CI, và một phép đo được công bố về số byte hướng dẫn mà mỗi flow tải. Nó độc lập với công cụ theo thiết kế và không thêm bất kỳ dịch vụ, nhà cung cấp hay bí mật nào vào vòng lặp cốt lõi. Các lớp có thể cùng tồn tại: các framework và Gentle-AI định hình cách agent hoạt động; Deep Work Plan làm cho công việc dài hạn bền vững và có thể kiểm chứng bên trong repository. Trang so sánh cho thấy mỗi cách tiếp cận được tích hợp sẵn, tùy chọn, hay nằm ngoài phạm vi.',
             linkLabel: 'Xem trang so sánh',
             linkPath: '/compare',
           },
@@ -994,18 +1023,19 @@ export const vi: SiteTranslations = {
           {
             id: 'core-and-addons',
             question:
-              'Can I use the core methodology without installing add-ons?',
+              'Tôi có thể dùng phương pháp luận cốt lõi mà không cài add-on nào không?',
             answer:
-              'Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.',
-            linkLabel: 'Browse the add-ons',
+              'Có. Add-on là các tầng tùy chọn, và một repository không dùng add-on nào vẫn tuân thủ DWP đầy đủ. Devcontainer, báo cáo Dailybot, nâng cấp phụ thuộc, hỗ trợ design-system và review CI tùy chọn chỉ được đề xuất khi chúng phù hợp với repository của bạn và bạn chấp nhận chúng một cách rõ ràng.',
+            linkLabel: 'Xem các add-on',
             linkPath: '/spec/addons',
           },
           {
             id: 'no-test-toolchain',
-            question: 'What if my repository has no tests or linting yet?',
+            question:
+              'Nếu repository của tôi chưa có test hay linting thì sao?',
             answer:
-              'DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.',
-            linkLabel: 'Read the agent protocol',
+              'DWP không coi việc thiếu một toolchain là một lối thoát miễn trừ. Trong quá trình onboarding, agent đề xuất một thiết lập kiểm chứng phù hợp với stack, ghi các lệnh đó vào tài liệu repository và dùng chính các lệnh đó làm mục tiêu cho các cổng kiểm chứng sau này; đề xuất vẫn hiển thị để bạn rà soát.',
+            linkLabel: 'Đọc giao thức agent',
             linkPath: '/spec/agent-protocol',
           },
           {
@@ -1102,6 +1132,18 @@ export const vi: SiteTranslations = {
         label: 'Đặc tả sống cho hệ thống hiện có',
         help: 'Các thay đổi được đặc tả dưới dạng delta hợp nhất vào đặc tả ngày càng đầy đủ của hệ thống.',
       },
+      crossProjectMemory: {
+        label: 'Bộ nhớ tác nhân liên tục giữa các dự án',
+        help: 'Bộ nhớ đi theo tác nhân qua các kho mã và phiên làm việc khác nhau, không chỉ là trạng thái trên đĩa của một kế hoạch.',
+      },
+      roleBasedAgents: {
+        label: 'Các vai trò tác nhân chuyên biệt riêng biệt',
+        help: 'Các vai trò được đặt tên (như nhà phân tích, kiến trúc sư hoặc người đánh giá) chia nhỏ công việc, thay vì một tác nhân thực hiện mọi bước.',
+      },
+      nativeIdeProduct: {
+        label: 'Là một IDE hoặc trình soạn thảo riêng',
+        help: 'Công cụ này tự thân là một môi trường phát triển tích hợp, không phải là phần bổ sung cho một tác nhân lập trình đã có sẵn.',
+      },
     },
     alternatives: {
       dwp: {
@@ -1114,74 +1156,74 @@ export const vi: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'Biến một tính năng thành đặc tả thực thi được thông qua một bản hiến chương, một đặc tả, một kế hoạch và một danh sách tác vụ, điều khiển bằng các lệnh slash tích hợp với hơn năm mươi agent lập trình.',
+          'Biến một tính năng thành đặc tả thực thi được thông qua một bản hiến chương, một đặc tả, một kế hoạch và một danh sách tác vụ, điều khiển bằng các lệnh slash tích hợp với hơn năm mươi agent lập trình, và có thể kiểm tra xem các artifact có nhất quán với nhau hay không trước khi bắt đầu triển khai.',
         audience:
           'Các nhóm muốn một quy trình đặc tả, lập kế hoạch, phân tác vụ và triển khai có thể lặp lại ngay trong agent họ đã dùng.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'Ghi lại mỗi thay đổi thành một đề xuất với các đặc tả delta (thêm, sửa, bỏ) và các yêu cầu RFC 2119 kèm kịch bản, rồi lưu trữ chúng thành các đặc tả sống.',
+          'Ghi lại mỗi thay đổi thành một đề xuất với các đặc tả delta (thêm, sửa, bỏ) và các yêu cầu RFC 2119 kèm kịch bản, rồi lưu trữ chúng thành các đặc tả sống, cùng một trình xác thực kiểm tra tính đầy đủ của đề xuất và độ bao phủ kịch bản trước khi một thay đổi được chấp nhận.',
         audience:
           'Các nhóm làm trên hệ thống hiện có, muốn đặc tả lớn dần theo từng thay đổi.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'Một IDE và CLI dạng agentic với đặc tả đi từ yêu cầu kiểu EARS sang thiết kế rồi sang tác vụ, cùng các tệp steering và hook chạy theo sự kiện của trình soạn thảo.',
+          'Một IDE và CLI dạng agentic với đặc tả đi từ yêu cầu kiểu EARS sang thiết kế rồi sang tác vụ, cùng các tệp steering và hook chạy theo sự kiện của trình soạn thảo, và có thể tạo đặc tả cho một codebase hiện có để phát hiện lỗ hổng yêu cầu trước khi bắt đầu thiết kế.',
         audience:
           'Các nhà phát triển muốn phát triển theo đặc tả được tích hợp sẵn trong trình soạn thảo, cùng công cụ được AWS hỗ trợ.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'Một framework agile gồm các vai trò agent chuyên biệt (phân tích, sản phẩm, kiến trúc, phát triển, chất lượng), tạo ra các bản tóm tắt, yêu cầu, tài liệu kiến trúc và tệp story.',
+          'Một framework agile gồm các vai trò agent chuyên biệt (phân tích, sản phẩm, kiến trúc, phát triển, chất lượng), tạo ra các bản tóm tắt, yêu cầu, tài liệu kiến trúc và tệp story, với một Definition of Done yêu cầu mỗi story phải được một thành viên trong nhóm hoặc một AI đánh giá ngang hàng xem xét trước khi được coi là hoàn tất.',
         audience:
           'Các nhóm thích các nghi thức theo vai trò và muốn một vòng đời agile đầy đủ cho công việc của agent.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'Một thư viện skill và quy trình làm việc để thảo luận ý tưởng, lập kế hoạch theo các bước nhỏ test trước, thực thi với subagent và review trước khi hoàn tất.',
+          'Một thư viện skill và quy trình làm việc để thảo luận ý tưởng, lập kế hoạch theo các bước nhỏ test trước, thực thi với subagent và review trước khi hoàn tất, tích hợp với nhiều nền tảng agent lập trình hơn bất kỳ lựa chọn thay thế nào khác ở đây, cộng thêm một lượt review hai giai đoạn bằng subagent (trước tiên là tuân thủ đặc tả, sau đó là chất lượng mã) cho mỗi tác vụ.',
         audience:
           'Các nhà phát triển muốn thực thi theo hướng test-driven có kỷ luật ngay trong agent lập trình của mình.',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          'Một hệ thống lập kế hoạch với thư mục .planning, id yêu cầu, kế hoạch theo pha, thực thi trong ngữ cảnh mới và một lượt xác minh đối chiếu các điều kiện bắt buộc đã nêu.',
+          'Một hệ thống lập kế hoạch với thư mục .planning, id yêu cầu, kế hoạch theo pha, thực thi trong ngữ cảnh mới và một lượt xác minh đối chiếu với các kết quả bàn giao mà người dùng có thể quan sát được, trích xuất từ bản tóm tắt của mỗi kế hoạch — được thiết kế riêng để chống lại tình trạng “context rot” bằng cách chạy nghiên cứu, lập kế hoạch và thực thi trong các subagent dùng một lần, đồng thời phát hiện xác minh đã lỗi thời bằng kiểm tra dấu vân tay nội dung.',
         audience:
           'Nhà phát triển độc lập và nhóm nhỏ muốn kỹ thuật ngữ cảnh và xác minh với ít nghi thức.',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          'Cấu hình các coding agent mà bạn đã dùng với bộ nhớ bền vững có định tuyến cả giữa các phiên và các mô hình, các skill được tuyển chọn, các máy chủ MCP, các persona, và tùy chọn Spec-Driven Development hoặc Receipt-Driven Development. Theo mặc định, cấu hình được ghi vào cài đặt agent toàn cục của bạn; việc cài đặt giới hạn trong phạm vi workspace là tùy chọn (opt-in).',
         audience:
-          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+          'Các nhà phát triển muốn một hệ sinh thái agent đã được cấu hình, ghi nhớ công việc qua các phiên và có thể tạo ra bằng chứng theo yêu cầu.',
       },
       'claude-ai-native-sdlc': {
-        name: "Claude's AI-native SDLC",
+        name: 'AI-native SDLC của Claude',
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          'Một vòng lặp sáu giai đoạn từ Plan và Design qua Build, Test, Deploy và Maintain, với một cổng phê duyệt của con người ở mỗi giai đoạn, các artifact bền vững được commit vào repository giữa các giai đoạn, một lượt review được gắn nhãn bảo mật riêng trước khi deploy, và các đánh giá liên tục (evals) công bố các chỉ số bàn giao dẫn trước và trễ.',
         audience:
-          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+          'Các nhóm đang đánh giá playbook chuyển giao phần mềm toàn trình của Claude Code và vòng phản hồi từ production của nó.',
       },
       'vendor-native': {
         name: 'Chế độ lập kế hoạch có sẵn từ nhà cung cấp',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor và Gemini CLI tích hợp sẵn các chế độ lập kế hoạch, tệp hướng dẫn và skill tuân theo các chuẩn AGENTS.md và Agent Skills.',
+          'Claude Code, Codex, Cursor và Gemini CLI tích hợp sẵn các chế độ lập kế hoạch, tệp hướng dẫn và skill được xây dựng trên các chuẩn mở, đa nhà cung cấp AGENTS.md và Agent Skills, dù hành vi chính xác của chế độ lập kế hoạch vẫn phụ thuộc vào nhà cung cấp, client và phiên bản. Agent Skills nói riêng chỉ tải một bản tóm tắt ngắn khi khởi động và tải đầy đủ hướng dẫn khi được kích hoạt, giữ cho năng lực chưa dùng đến không chiếm ngữ cảnh.',
         audience:
           'Bất kỳ ai muốn lập kế hoạch ngay trong một agent duy nhất mà không cần áp dụng một phương pháp luận.',
       },
     },
     aiNative: {
-      title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      title: 'Vị trí của điều này trong AI-native SDLC',
+      body: 'Playbook AI-native SDLC của Claude mô tả một vòng lặp đầy đủ: Plan, Design, Build, Test, Deploy và Maintain. Mỗi giai đoạn commit một artifact để giai đoạn tiếp theo đọc, với một cổng phê duyệt của con người ở mỗi giai đoạn và một lượt review bảo mật riêng trước khi deploy, trong khi phản hồi từ production trở thành intent mới.',
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP chia sẻ ý tưởng về artifact bền vững và phê duyệt theo cổng: intent trở thành một kế hoạch, các tác vụ để lại bằng chứng, một lượt review bảo mật chạy trước khi hoàn tất, và repository vẫn có thể đọc được đối với agent tiếp theo.',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+        'Khác biệt thực sự nằm ở phạm vi, không phải ở mức độ chặt chẽ: playbook được xây dựng riêng quanh Claude Code, trong khi harness và định dạng kế hoạch của DWP được đọc bởi bất kỳ agent nào tuân theo các chuẩn AGENTS.md và Agent Skills. Playbook cũng bao phủ việc đánh giá liên tục và các hoạt động production mà DWP không tuyên bố hỗ trợ; các thực hành vận hành đó có thể bổ trợ cho một repository chạy theo DWP thay vì cạnh tranh với nó.',
       sourceLabel: "Read Claude's AI-native SDLC playbook",
     },
     profileCta: 'Xem so sánh',
@@ -1224,7 +1266,7 @@ export const vi: SiteTranslations = {
     },
     honestLimits: {
       title: 'Những giới hạn thành thật',
-      body: 'Deep Work Plan không có cơ chế đặc tả sống hay đặc tả delta; OpenSpec và các công cụ tương tự mạnh hơn ở khoản đó. Chưa có benchmark độc lập nào cho phương pháp luận; một đợt đánh giá công khai đăng ký trước đang được lên kế hoạch. Sổ cái tải hướng dẫn đo byte được tải, không đo token, chi phí hay kết quả.',
+      body: 'Deep Work Plan không có cơ chế đặc tả sống hay đặc tả delta; OpenSpec và các công cụ tương tự mạnh hơn ở khoản đó. Chưa có benchmark độc lập nào cho phương pháp luận; một đợt đánh giá công khai đăng ký trước đang được lên kế hoạch. Sổ cái tải hướng dẫn đo byte được tải, không đo token, chi phí hay kết quả. DWP cố tình giới hạn phạm vi ở kho mã: đây không phải là hệ thống bộ nhớ liên dự án, không phải khung tác nhân theo vai trò, và cũng không phải một IDE, nên nó cũng không cạnh tranh trên những khía cạnh đó — hãy kết hợp với một công cụ đáp ứng khía cạnh đó khi công việc thực sự cần.',
     },
     correction: {
       title: 'Giúp chúng tôi giữ trang này chính xác',

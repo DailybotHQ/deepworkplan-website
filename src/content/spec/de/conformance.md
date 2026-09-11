@@ -1,7 +1,7 @@
 ---
 title: Konformität
 description: "Die normative Definition eines DWP-konformen, AI-first Repositorys: die Artefakte, die es haben MUSS und SOLLTE, was einen Plan wohlgeformt macht und wie man es verifiziert."
-order: 6
+order: 7
 lang: de
 section: Conformance
 ---
@@ -20,7 +20,7 @@ Ein DWP-konformes Repository MUSS alles Folgende erfüllen. Jedes Artefakt MUSS 
 2. **`CLAUDE.md` löst sich zu `AGENTS.md` auf.** Eine `CLAUDE.md` MUSS existieren und sich zu `AGENTS.md` auflösen (ein Symlink oder ein Äquivalent, das eine einzige Quelle der Wahrheit garantiert). Die beiden DÜRFEN NICHT auseinandergehen.
 3. **Eine `docs/`-Hierarchie.** Das Repository MUSS ein `docs/`-Verzeichnis enthalten, das die Standardkategorien (Architektur, Standards, Testing, Entwicklungsbefehle, Sicherheit und Agenten-Onboarding) mit echtem, repository-spezifischem Inhalt abdeckt. Komplexe Module SOLLTEN ihre eigene `README.md` tragen. Der Testing-Leitfaden MUSS eine echte Test-, Lint- und Typprüfungs-Toolchain definieren — oder, für ein Repository, das keine hat, ein konkretes Setup, das während des Onboardings aus dem Stack **vorgeschlagen** wird. Ein leerer Testing-Leitfaden oder „keine Tests“ erfüllt dieses Kriterium nicht: Ohne einen definierten Weg, Verhalten zu validieren, hat ein Plan kein objektives Validierungs-Gate.
 4. **Ein `.agents/`-Verzeichnis.** Das Repository MUSS ein `.agents/`-Verzeichnis mit `agents/`, `commands/` und `skills/` enthalten, plus einen Katalog unter `.agents/docs/`, der **dem entspricht, was auf der Festplatte liegt**. Die `dwp-*`-Befehle MÜSSEN schlanke Delegatoren an die installierte Skill sein. Ein `.claude`-Pfad MUSS sich zu `.agents` auflösen.
-5. **Ein per gitignore ausgeschlossener `.dwp/`-Arbeitsbereich.** Das Repository MUSS ein `.dwp/`-Verzeichnis mit `plans/` und `drafts/` enthalten, und `.dwp/` MUSS per gitignore ausgeschlossen sein. Ein `tmp/`-Scratch-Bereich SOLLTE existieren und SOLLTE per gitignore ausgeschlossen sein.
+5. **Ein per gitignore ausgeschlossener `.dwp/`-Arbeitsbereich.** Das Repository MUSS ein `.dwp/`-Verzeichnis mit `plans/` enthalten, und `.dwp/` MUSS per gitignore ausgeschlossen sein. Ein `tmp/`-Scratch-Bereich SOLLTE existieren und SOLLTE per gitignore ausgeschlossen sein.
 6. **Die Methodik-Skill ist auflösbar.** Die Deep Work Plan Skill MUSS so installiert oder referenziert sein, dass ein Agent im Repository ihre Sub-Skills aufrufen kann.
 
 Ein Repository ist **mit null optionalen Addons vollständig konform**. Die optionalen Addons (devcontainer, Dailybot, dependency-upgrade, design-system) DÜRFEN NICHT für die Konformität erforderlich sein. Seit Standard 2.3.0 ist die **lokale Überprüfung des AI Diff Reviewer** (vendorte Skill + Erweiterungsdatei) Teil der Baseline: Ihr Fehlen ist ein Fehler für ein Repository, das 2.3.0 oder neuer deklariert, und ein Harness-Versions-Befund für ein Legacy-Repository. Ihre CI-Oberfläche bleibt optional.

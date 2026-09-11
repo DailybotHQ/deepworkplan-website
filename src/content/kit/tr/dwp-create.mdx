@@ -28,9 +28,9 @@ import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
 
 ## Modlar
 
-`dwp-create`, varsayılan olarak **rehberli** modda çalışır: bağlamı toplar, tek bir rafine taslak yazar, **bunu size gösterir ve nihai planı oluşturmadan önce onay ister** — böylece planı oluşturulmadan önce her zaman okursunuz. Bu, özellikle ilk birkaç kullanımda önerilen varsayılandır.
+`dwp-create`, varsayılan olarak **rehberli** modda çalışır: bağlamı toplar, analizi çalıştırır ve doğrudan bir Lite plan somutlaştırır — atılacak bir taslak değil, zaten yürütülebilir kompakt bir öneri — **bunu size gösterir ve Lite olarak tutmak mı, görev dosyalı bir Full plana yükseltmek mi, düzenlemek mi yoksa durdurmak mı istediğinizi sorar** — böylece karar vermeden önce her zaman gerçek planı okursunuz. Bu, özellikle ilk birkaç kullanımda önerilen varsayılandır.
 
-Onayları atlamak için son sözcük olarak **`trust`** (ya da `auto`) ekleyin — ajan rafine taslağı yazar ve doğrudan nihai plana geçer:
+Bu incelemeyi atlamak için son sözcük olarak **`trust`** (ya da `auto`) ekleyin — ajan doğrudan önceden onaylanmış, çalıştırmaya hazır bir plana geçer (aynı sinyallerle seçilen Lite veya Full):
 
 ```
 /dwp-create <goal> trust
@@ -42,7 +42,7 @@ Trust modu, akışa güvendiğinizde güçlü kullanıcılara yönelik bir kısa
 
 1. Hedefi ve depo bağlamını analiz edin.
 2. Belirsizse açıklayıcı sorular sorun.
-3. `.dwp/drafts/` içine bir rafine taslak yazın (rehberli modda bunu inceleyip onaylayın).
+3. Planı doğrudan `.dwp/plans/PLAN_<name>/` altına somutlaştırın — varsayılan olarak bir Lite plan, daha büyük işler için Full plan (rehberli modda inceleyip Lite olarak tutmayı, Full’a yükseltmeyi, düzenlemeyi ya da durdurmayı seçin).
 4. Sıralı görevlere ayrıştırın ve README, görev dosyaları ile PROGRESS dosyasını yazın.
 5. Final Review ile tamamlayın (güvenlik incelemesi, son-durum doğrulaması, skill uzlaştırması).
 

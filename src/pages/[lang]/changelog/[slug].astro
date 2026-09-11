@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import ChangelogDetailPage from '@/components/pages/ChangelogDetailPage.astro';
+import {
+  getActiveNonDefaultLanguages,
+  type Language,
+  stripEntryLangPrefix,
+} from '@/lib/i18n';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('changelog');
+  return getActiveNonDefaultLanguages().flatMap((lang) =>
+    entries
+      .filter((entry) => entry.data.lang === lang)
+      .map((entry) => ({
+        params: { lang, slug: stripEntryLangPrefix(entry.id) },
+        props: { lang, entry },
+      }))
+  );
+}
+
+const { lang, entry } = Astro.props as {
+  lang: Language;
+  entry: Awaited<ReturnType<typeof getCollection<'changelog'>>>[number];
+};
+---
+
+<ChangelogDetailPage lang={lang} entry={entry} />

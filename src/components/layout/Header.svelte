@@ -200,6 +200,7 @@ function closeOnEscape(event: KeyboardEvent) {
         <a href="{prefix}/methodology" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'methodology' })}>{nav.methodology}</a>
         <a href="{prefix}/spec" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'spec' })}>{nav.spec}</a>
         <a href="{prefix}/kit" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'kit' })}>{nav.kit}</a>
+        <a href="{prefix}/changelog" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'changelog' })}>{nav.changelog}</a>
         <!-- Resources disclosure: groups Examples, Compare, FAQ and Trust so the
              masthead stays uncluttered. Same disclosure pattern as the repo and
              language selectors below (aria-expanded + aria-controls, no role=menu). -->
@@ -244,9 +245,9 @@ function closeOnEscape(event: KeyboardEvent) {
               aria-label={nav.resourcesDesc}
             >
               <a href="{prefix}/examples" class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-ink dark:text-white transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'examples' })}>{nav.examples}</a>
-              <a href="{prefix}/compare" class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-ink dark:text-white transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'compare' })}>{nav.compare}</a>
-              <a href="{prefix}/faq" class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-ink dark:text-white transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'faq' })}>{nav.faq}</a>
               <a href="{prefix}/trust" class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-ink dark:text-white transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'trust' })}>{nav.trust}</a>
+              <a href="{prefix}/faq" class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-ink dark:text-white transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'faq' })}>{nav.faq}</a>
+              <a href="{prefix}/compare" class="block w-full text-left whitespace-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-ink dark:text-white transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'compare' })}>{nav.compare}</a>
             </div>
           {/if}
         </div>

@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-execute
-description: Execute an existing Deep Work Plan task-by-task — select each task's validation from its actual touched surface, repair or stop on failure without weakening a gate, close each task locally (skills decision, compact log, gate record, state), and finish with the Final Review and an optional report offer. Use when the developer wants to run or continue executing a plan in .dwp/plans/.
-version: "2.17.1"
+description: Execute Lite or Full Deep Work Plans task-by-task — select validation from the actual surface, preserve state and evidence, recover safely, and finish with the Final Review.
+version: "4.0.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -28,7 +28,7 @@ successful task.
   installation, missing test command, unsupported host capability,
   inconsistent plan state).
 - **Guide (essential — read for this flow):** [`../guide/execution.md`](../guide/execution.md) (agent execution rules §6, Final Review and task-local lifecycle §6.1, per-task commit workflow, completion tracking).
-- **Guide (conditional — read only when the trigger fires):** [`orchestrator.md`](orchestrator.md) (this directory) plus [`../guide/orchestrator.md`](../guide/orchestrator.md) §13 when Step 2.1 detects an orchestrator plan; [`team-agents.md`](team-agents.md) (this directory) plus [`../guide/team-agents.md`](../guide/team-agents.md) §14 when Step 2.2 finds a Team Agents Configuration and team mode is selected; [`../guide/authoring.md`](../guide/authoring.md) §5.3–§5.4 when judging a task's test or security discipline; [`../guide/prompts.md`](../guide/prompts.md) §9 for resume scenarios; [`../create/addon-augmentations.md`](../create/addon-augmentations.md) when the Final Review runs and an augmenting addon is installed; the repository's `docs/TESTING_GUIDE.md` when a task's gate must be widened or derived. Do not read other guide files for this flow; [`../guide/GUIDE.md`](../guide/GUIDE.md) is the routing index, consulted only when a section is not named above.
+- **Guide (conditional — read only when the trigger fires):** [`orchestrator.md`](orchestrator.md) (this directory) plus [`../guide/orchestrator.md`](../guide/orchestrator.md) §13 when Step 2.1 detects an orchestrator plan; [`team-agents.md`](team-agents.md) (this directory) plus [`../guide/team-agents.md`](../guide/team-agents.md) §14 when Step 2.2 finds a Team Agents Configuration and team mode is selected; [`../guide/authoring.md`](../guide/authoring.md) §5.3–§5.4 when judging a task's test or security discipline; [`../guide/prompts.md`](../guide/prompts.md) §9 for resume scenarios; [`../create/addon-augmentations.md`](../create/addon-augmentations.md) when the Final Review runs (required local-review pass on every 2.3.0 plan — load even if the reviewer is not yet installed, so the missing-install finding path is available); the repository's `docs/TESTING_GUIDE.md` when a task's gate must be widened or derived. Do not read other guide files for this flow; [`../guide/GUIDE.md`](../guide/GUIDE.md) is the routing index, consulted only when a section is not named above.
 - [`../spec/PLAN_STATE.md`](../spec/PLAN_STATE.md) — the machine-readable state
   layer (`manifest.json` + `state.json`); update it at every completion when the
   plan carries it.
@@ -43,8 +43,33 @@ successful task.
 
 Normalize names by adding the `PLAN_` prefix if missing. Validate that
 `.dwp/plans/PLAN_{name}/` and its `README.md` exist; if not, show available plans
-and ask the user to choose. A folder **without** `README.md`, or whose README says `Plan Status:
-materializing`, is a partial materialization — point to `refine` and stop.
+and ask the user to choose. A folder **without** `README.md`, whose README says
+`Plan Status: materializing`, or whose README **links a task file that does not
+exist**, is a partial materialization — point to `refine` and stop.
+
+## Lite plan execution
+
+Read `spec/LITE_PLANS.md` when the plan declares v2 state or `Plan Format: Lite`.
+A Lite plan is valid without task files. Its canonical README task index and
+anchored `#task-N` records are the source of truth; completion logs and state
+are evidence, not competing task status. Ignore fenced example checkboxes.
+
+Before execution, read `Materialization` and `Approval`. Refuse `materializing`
+and `promoting` plans — those are recovery boundaries, not proposals. Approval is
+a separate axis: a `ready` plan whose approval is still `pending` is a valid
+proposal, and **an explicit execute request for it approves its current scope** —
+record `Approval: approved` in the README and state before the first task, then
+proceed. What is never allowed is starting a proposal that nobody asked for: a
+plan created with trust is `pre_approved` but still begins only on an explicit
+execute request, and `create` never calls execute itself. Read the first
+unchecked anchored task, perform its gate, update its compact log, then README,
+PROGRESS and state in the usual safe order. The inline Final Review remains last
+and performs the same security, final validation and skills reconciliation.
+
+When scope exceeds the compact task record, stop for refine rather than silently
+expanding work. A v2 state locator is authoritative: `inline` resolves to a
+unique README anchor; `file` resolves to one Full task file. Missing, duplicate,
+absolute or traversal locators are invalid plans, not fallback guesses.
 
 ## Trust boundary (write scope)
 
@@ -238,7 +263,8 @@ Rules (strict):
      choose a different approach, or record an actionable blocker.
    - **Pre-existing failure** (present before the task's change, confirmed on
      the starting revision): record it as pre-existing under the repository's
-     waiver policy; it neither passes nor blocks silently — say so.
+     waiver policy. It remains non-passing; mark `[x]` only when that policy
+     explicitly permits closure with the failure recorded. Otherwise stop/block.
    - **Stop:** log the issue in the task's Completion & Log, do NOT mark `[x]`,
      populate `state.json.blocked` (task, reason, what it needs) where the state
      layer exists, and report. Interactive: wait for guidance. Unattended: halt
@@ -271,8 +297,8 @@ Rules (strict):
    it matters. Do NOT report intermediate setup tasks; the plan-completion report
    (Step 7) covers those. Never use internal "Completed Task N" phrasing. If
    reporting fails, or the session has no Dailybot authorization, continue
-   without blocking. The `dailybot` skill is installed alongside this skill in
-   the agent's skills directory — invoke it there.
+   without blocking. Invoke the `dailybot` skill only when the optional addon is
+   installed and authorized; it is not bundled with DWP.
 
 8. **Show the compact result (Step 6) and move to the next `[ ]` task.** Do not
    ask whether to continue after a successful task — inside the plan's
@@ -357,7 +383,8 @@ what was tried, the blocker if any, and `[ ]` retained.
 ### Step 7 — Completion
 
 The plan completes through its **Final Review** task (or, for a legacy plan, its
-three closing tasks executed as written). For the Final Review
+three closing tasks executed as written, with the required local-review
+augmentation applied to its Security Review task). For the Final Review
 (`../spec/DWP_SPECIFICATION.md` §6.1; `../guide/execution.md` §6.1), execute in
 this order and do not reorder:
 
@@ -373,12 +400,10 @@ this order and do not reorder:
   [`../create/addon-augmentations.md`](../create/addon-augmentations.md) and run
   the local review pass, appending its output to `SECURITY_REVIEW.md`. When
   the skill or the extension is missing, record a `local reviewer not
-  installed` finding in `SECURITY_REVIEW.md`; if the run is authorized to
-  write to the harness (trust mode or explicit approval), install the missing
-  piece per `../onboard/addons.md` Phase 7a (pinned skill, `generate-extension`)
-  and then run the review; otherwise leave the finding and name it in the
-  completion report — never a silent skip, never a hard stop. An invocation
-  error of a review that could start: warn once, record, continue. Once a
+  installed` finding in `SECURITY_REVIEW.md` and name it in the completion
+  report. Installation belongs to onboarding or an explicit addon invocation;
+  Final Review never surprise-bootstraps it. An invocation error of a review
+  that could start: warn once, record, continue. Once a
   review runs, `critical` findings follow the security-pass contract: **fix or
   obtain explicit acceptance before completion**.
 - **(b) Final-state validation:** the repository's complete applicable test,
@@ -409,17 +434,22 @@ and reports no unresolved critical finding (`../spec/DWP_SPECIFICATION.md`
 §6.1). If a critical finding is open, the plan is **blocked**, not complete —
 fix it or obtain the user's explicit acceptance before reporting completion.
 
-**🔔 GOLDEN RULE — Dailybot Plan-Completion Report (MANDATORY when Dailybot is
-authorized in the session; best-effort, never blocking):**
+**🔔 GOLDEN RULE — Dailybot Plan-Completion Report (only when the optional
+Dailybot addon is installed **and** authorized in the session; best-effort,
+never blocking; never required for DWP conformance — `../spec/ADDONS.md` §2 /
+§6.2):**
 
-> When a DWP plan finishes execution, you MUST ALWAYS send a Dailybot progress
-> report **as a milestone**. A completed plan is always a significant milestone.
+> When a DWP plan finishes execution **and** Dailybot is available, send a
+> Dailybot progress report **as a milestone**. If the Dailybot skill is not
+> installed, not authorized, or `.dailybot/disabled` is present, **skip
+> silently** — do not invent an install and do not block completion. Dailybot
+> is **not** shipped inside the DWP pack.
 
-Trigger the `dailybot` skill (e.g. `/dailybot_report` or "report this milestone
-to Dailybot") in Daily Standup style describing WHAT the plan accomplished and
-its impact. Mark it as a **milestone** with structured data
-(completed/in-progress/blockers). NEVER use internal references (plan names, task
-counts, DWP terminology).
+When reporting: trigger the `dailybot` skill (e.g. `/dailybot_report` or
+"report this milestone to Dailybot") in Daily Standup style describing WHAT the
+plan accomplished and its impact. Mark it as a **milestone** with structured
+data (completed/in-progress/blockers). NEVER use internal references (plan
+names, task counts, DWP terminology).
 - GOOD: *"Finished the authentication refactor — the API now uses JWT tokens
   across all services with centralized middleware validation."*
 - BAD: *"Plan completed: PLAN_auth_refactor - All 8 tasks completed."*
@@ -430,9 +460,7 @@ milestone. Where the plan carries the state layer (`../spec/PLAN_STATE.md`),
 derive the report's `--json-data` from `state.json` — `completed` from completed
 tasks phrased as outcomes, `blockers` empty on a clean finish — rather than
 recounting from memory. The completion report never waits for, or requires, an
-Executive Report. The `dailybot` skill is installed alongside this skill —
-invoke it there. If reporting fails or is unauthorized, continue without
-blocking.
+Executive Report. If reporting fails, continue without blocking.
 
 For orchestrator plans, the completion rules in [`orchestrator.md`](orchestrator.md)
 (this directory) apply in addition.

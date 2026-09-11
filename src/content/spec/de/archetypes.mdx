@@ -1,7 +1,7 @@
 ---
 title: Archetypen
 description: "Normative Beschreibung der DWP-Repository-Archetypen: das Einzel-Repository, der Orchestrator-Hub und der Agenten-Arbeitsbereich, sowie wie sich das Onboarding für jeden unterscheidet."
-order: 4
+order: 5
 lang: de
 section: Archetypes
 ---
@@ -45,7 +45,7 @@ Die Erkenntnis, die diesen Archetyp ermöglicht: **das Harness ist ein Arbeitsbe
 | `AGENTS.md` (Regeln, Schnellbefehle) | Der stehende Kontext des Arbeitsbereichs — `AGENTS.md` selbst oder die Stehende-Anweisungen-Datei der Plattform |
 | `docs/` (dauerhaftes Wissen) | Arbeitsbereich-Wissensdateien und Speicherdokumente |
 | `.agents/` (Skills, Agenten, Befehle) | Das Skill-Verzeichnis der Plattform — OpenClaw scannt nativ `<workspace>/.agents/skills/` |
-| `.dwp/` (Pläne, Entwürfe) | `.dwp/` im Arbeitsbereich-Stammverzeichnis — unverändert |
+| `.dwp/` (Pläne) | `.dwp/` im Arbeitsbereich-Stammverzeichnis — unverändert |
 | git-Protokoll (Zustand, Wiederaufnehmbarkeit) | `state.json` je Plan ([Plan-Zustand](/spec/plan-state)), hier ERFORDERLICH |
 
 Ein Agenten-Arbeitsbereich MUSS `AGENTS.md`, `.agents/` und `.dwp/` im Arbeitsbereich-Stammverzeichnis bereitstellen.

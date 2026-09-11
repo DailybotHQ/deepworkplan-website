@@ -28,9 +28,9 @@ Tạo một Deep Work Plan mới từ một mục tiêu tổng quát.
 
 ## Các chế độ
 
-`dwp-create` mặc định ở chế độ **có hướng dẫn**: nó thu thập bối cảnh, viết một bản nháp tinh chỉnh duy nhất, **trình bày cho bạn, và yêu cầu xác nhận trước khi sinh ra kế hoạch cuối cùng** — để bạn luôn đọc kế hoạch trước khi nó được tạo. Đây là mặc định được khuyến nghị, đặc biệt trong vài lần đầu.
+`dwp-create` mặc định ở chế độ **có hướng dẫn**: nó thu thập bối cảnh, chạy phân tích, và vật liệu hóa trực tiếp một kế hoạch Lite — một đề xuất gọn nhẹ đã có thể thực thi, không phải một bản nháp để bỏ đi — **trình bày cho bạn, và hỏi bạn muốn giữ nguyên là Lite, nâng cấp lên kế hoạch Full theo tệp tác vụ, chỉnh sửa, hay dừng lại** — để bạn luôn đọc kế hoạch thật trước khi quyết định. Đây là mặc định được khuyến nghị, đặc biệt trong vài lần đầu.
 
-Thêm **`trust`** (hoặc `auto`) làm từ cuối cùng để bỏ qua các bước xác nhận — agent viết bản nháp tinh chỉnh và đi thẳng đến kế hoạch cuối cùng:
+Thêm **`trust`** (hoặc `auto`) làm từ cuối cùng để bỏ qua bước rà soát này — agent đi thẳng đến một kế hoạch đã được phê duyệt trước, sẵn sàng chạy (Lite hoặc Full, được chọn theo cùng các tín hiệu):
 
 ```
 /dwp-create <goal> trust
@@ -42,7 +42,7 @@ Chế độ trust là lối tắt cho người dùng thành thạo một khi b�
 
 1. Phân tích mục tiêu và bối cảnh của repository.
 2. Đặt câu hỏi làm rõ nếu còn mơ hồ.
-3. Ghi một bản nháp tinh chỉnh vào `.dwp/drafts/` (ở chế độ có hướng dẫn, hãy rà soát và xác nhận nó).
+3. Vật liệu hóa kế hoạch trực tiếp dưới `.dwp/plans/PLAN_<name>/` — mặc định là kế hoạch Lite, hoặc Full cho công việc lớn hơn (ở chế độ có hướng dẫn, hãy rà soát và chọn giữ nguyên là Lite, nâng cấp lên Full, chỉnh sửa, hoặc dừng lại).
 4. Phân rã thành các tác vụ tuần tự và ghi README, các file tác vụ, cùng PROGRESS.
 5. Kết thúc bằng Final Review (bước rà soát bảo mật, kiểm chứng trạng thái cuối cùng, đối chiếu skill).
 

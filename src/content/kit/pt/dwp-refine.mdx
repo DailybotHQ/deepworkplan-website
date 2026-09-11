@@ -34,6 +34,10 @@ O `dwp-refine` modifica um plano existente. Ele pode adicionar, remover ou reord
 4. Atualizar a tabela de tarefas.
 5. Registrar o que mudou e por quê.
 
+## Promover um plano Lite a Full
+
+`/dwp-refine promote {plan_name}` muda a representação autorizada de um plano Lite dos registros de tarefa em linha no README para arquivos por tarefa, preservando o trabalho concluído e os IDs de tarefa sem alterar o escopo. A promoção é apenas de representação: nunca chama o execute. Planos Full não são rebaixados automaticamente a Lite.
+
 ## Aliases
 
 - `dwp:refine`

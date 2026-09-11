@@ -28,9 +28,9 @@ Buat Deep Work Plan baru dari tujuan tingkat tinggi.
 
 ## Mode
 
-`dwp-create` secara default berjalan dalam mode **guided**: ia mengumpulkan konteks, menulis satu draf yang telah disempurnakan, **menunjukkannya kepada Anda, dan meminta konfirmasi sebelum menghasilkan rencana final** — sehingga Anda selalu membaca rencana sebelum dibuat. Ini adalah default yang direkomendasikan, terutama pada beberapa kali pertama.
+`dwp-create` secara default berjalan dalam mode **guided**: ia mengumpulkan konteks, menjalankan analisis, dan langsung melakukan materialisasi sebuah rencana Lite — proposal ringkas yang sudah dapat dieksekusi, bukan draf yang akan dibuang — **menunjukkannya kepada Anda, dan menanyakan apakah ingin mempertahankannya sebagai Lite, mempromosikannya menjadi rencana Full berbasis berkas tugas, mengeditnya, atau berhenti** — sehingga Anda selalu membaca rencana yang sebenarnya sebelum memutuskan. Ini adalah default yang direkomendasikan, terutama pada beberapa kali pertama.
 
-Tambahkan **`trust`** (atau `auto`) sebagai kata terakhir untuk melewati konfirmasi — agent menulis draf yang telah disempurnakan dan langsung menuju rencana final:
+Tambahkan **`trust`** (atau `auto`) sebagai kata terakhir untuk melewati tinjauan ini — agent langsung menuju rencana yang telah disetujui sebelumnya dan siap dijalankan (Lite atau Full, dipilih berdasarkan sinyal yang sama):
 
 ```
 /dwp-create <goal> trust
@@ -42,7 +42,7 @@ Mode trust adalah pintasan bagi power user setelah Anda memercayai alurnya; mode
 
 1. Analisis tujuan dan konteks repositori.
 2. Ajukan pertanyaan klarifikasi bila ambigu.
-3. Tulis draf yang telah disempurnakan ke `.dwp/drafts/` (dalam mode guided, tinjau dan konfirmasi).
+3. Lakukan materialisasi rencana langsung di bawah `.dwp/plans/PLAN_<name>/` — rencana Lite secara default, atau Full untuk pekerjaan yang lebih besar (dalam mode guided, tinjau dan pilih mempertahankan sebagai Lite, mempromosikan ke Full, mengedit, atau berhenti).
 4. Uraikan menjadi tugas-tugas sekuensial dan tulis README, file tugas, serta PROGRESS.
 5. Akhiri dengan Final Review (pemeriksaan keamanan, validasi status akhir, rekonsiliasi skills).
 

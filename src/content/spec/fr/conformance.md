@@ -1,7 +1,7 @@
 ---
 title: Conformité
 description: "La définition normative d’un dépôt conforme DWP, AI-first : les artefacts qu’il MUST et SHOULD posséder, ce qui rend un plan bien formé, et comment le vérifier."
-order: 6
+order: 7
 lang: fr
 section: Conformance
 ---
@@ -20,7 +20,7 @@ Un dépôt conforme DWP MUST satisfaire l’ensemble des points suivants. Chaque
 2. **`CLAUDE.md` se résout vers `AGENTS.md`.** Un `CLAUDE.md` MUST exister et se résoudre vers `AGENTS.md` (un lien symbolique, ou un équivalent qui garantit une source de vérité unique). Les deux MUST NOT diverger.
 3. **Une hiérarchie `docs/`.** Le dépôt MUST contenir un répertoire `docs/` couvrant les catégories standard (architecture, standards, tests, commandes de développement, sécurité et onboarding des agents) avec un contenu réel, spécifique au dépôt. Les modules complexes SHOULD porter leur propre `README.md`. Le guide de tests MUST définir une véritable chaîne d’outils de test, de lint et de typage — ou, pour un dépôt qui n’en a aucune, une configuration concrète **proposée** à partir de la stack pendant l’onboarding. Un guide de tests vide ou « pas de tests » ne satisfait pas ce critère : sans moyen défini de valider le comportement, un plan n’a pas de porte de validation objective.
 4. **Un foyer `.agents/`.** Le dépôt MUST contenir un répertoire `.agents/` avec `agents/`, `commands/` et `skills/`, ainsi qu’un catalogue sous `.agents/docs/` qui **correspond à ce qui est sur disque**. Les commandes `dwp-*` MUST être de légers délégateurs vers le skill installé. Un chemin `.claude` MUST se résoudre vers `.agents`.
-5. **Un espace de travail `.dwp/` ignoré par git.** Le dépôt MUST contenir un répertoire `.dwp/` avec `plans/` et `drafts/`, et `.dwp/` MUST être ignoré par git. Un espace de travail temporaire `tmp/` SHOULD exister et SHOULD être ignoré par git.
+5. **Un espace de travail `.dwp/` ignoré par git.** Le dépôt MUST contenir un répertoire `.dwp/` avec `plans/`, et `.dwp/` MUST être ignoré par git. Un espace de travail temporaire `tmp/` SHOULD exister et SHOULD être ignoré par git.
 6. **Le skill de la méthodologie est résolvable.** Le skill Deep Work Plan MUST être installé ou référencé de sorte qu’un agent dans le dépôt puisse invoquer ses sous-skills.
 
 Un dépôt est **pleinement conforme avec zéro addon optionnel**. Les addons optionnels (devcontainer, Dailybot, dependency-upgrade, design-system) MUST NOT être requis pour la conformité. Depuis le standard 2.3.0, la **revue locale AI Diff Reviewer** (skill vendorisée + fichier d’extension) fait partie du socle : son absence est un échec pour un dépôt déclarant la 2.3.0 ou plus récente, et un constat de version de la harness pour un dépôt legacy. Sa surface CI reste optionnelle.

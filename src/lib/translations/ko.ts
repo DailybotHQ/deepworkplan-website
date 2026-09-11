@@ -33,6 +33,7 @@ export const ko: SiteTranslations = {
     github: 'GitHub',
     faq: '자주 묻는 질문',
     compare: '비교',
+    changelog: 'Changelog',
     resources: '리소스',
     resourcesDesc: '예시, 신뢰, 자주 묻는 질문, 비교',
     repo: {
@@ -44,6 +45,24 @@ export const ko: SiteTranslations = {
     },
     menu: '메뉴 열기',
     closeMenu: '메뉴 닫기',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Deep Work Plan 변경 기록',
+      description:
+        'Deep Work Plan 스킬, 방법론, 이식 가능한 에이전트 하네스의 주요 업데이트입니다.',
+    },
+    eyebrow: '변경 기록',
+    title: '방법론을 만든 작업',
+    intro:
+      '장기 에이전트 작업을 안정적으로 만드는 릴리스와 설계 결정을 출처와 함께 보여 주는 타임라인입니다.',
+    viewDetail: '업데이트 읽기',
+    backToIndex: '모든 업데이트',
+    sourceLabel: '출처',
+    featuredLabel: '주요 릴리스',
+    relatedTitle: '관련 업데이트',
   },
 
   // Footer
@@ -107,7 +126,7 @@ export const ko: SiteTranslations = {
       answer:
         'Deep Work Plan은 스펙 주도 개발로 답합니다. 지속되는 계획, 원자적 작업, 그리고 에이전트가 통과해야 하는 검증 게이트. 완료는 느낌이 아니라 — 검증 가능하고 리뷰 가능한 증거가 됩니다.',
       efficiency:
-        '그리고 컨텍스트는 에이전트에게 가장 희소한 자원입니다. 그래서 하네스는 토큰 효율을 위해 설계되었습니다: 지시사항은 점진적으로 로드하고, 검증은 변경된 부분만 다루며, 학습은 작업 자리에서 이루어집니다 — 긴 작업도 경제적으로 지속됩니다.',
+        '그리고 컨텍스트는 에이전트에게 가장 희소한 자원입니다. 그래서 하네스는 토큰 효율을 위해 설계되었습니다: 지시사항은 점진적으로 로드하고, 검증은 변경된 부분만 다루며, 학습은 작업 자리에서 이루어집니다 — 긴 작업도 경제적으로 지속됩니다. 계획 자체도 같은 원리를 따릅니다: 범위가 한정된 수정에는 Lite 계획을, 몇 시간에 걸친 작업에는 Full 계획을 — 형식은 항상 작업의 범위를 따르며, 그 반대가 아닙니다.',
       illustrationAlt:
         '한쪽은 안개 속 암초 옆을 표류하는 배, 다른 쪽은 같은 배가 그려진 항로를 따라 항구 등불로 나아가는 모습의 판화 디프틱.',
     },
@@ -811,6 +830,14 @@ export const ko: SiteTranslations = {
             linkPath: '/quickstart',
           },
           {
+            id: 'lite-vs-full',
+            question: 'Lite 계획과 Full 계획의 차이는 무엇인가요?',
+            answer:
+              '엄격도의 트레이드오프가 아니라 표현 방식의 선택입니다. 모든 계획은 Lite 폴더로 시작합니다: 앵커가 달린 작업 기록을 담은 간결한 README로, 부분적인 초안이 아니라 이미 실행 가능한 형태입니다. `create`는 작업의 지시 세부사항, 의존성, 계약이 검토 가능한 간결한 기록에 맞지 않을 때만 Full 작업 파일로 확장합니다; 둘 중 하나를 명시적으로 요청하면 그대로 반영되며, Lite 계획은 나중에 완료된 작업을 잃지 않고 Full로 승격될 수 있습니다. 두 형식 모두 동일한 인수 기준, 검증 게이트, 증거, 필수 Final Review를 갖춥니다.',
+            linkLabel: '방법론 읽기',
+            linkPath: '/methodology',
+          },
+          {
             id: 'is-it-a-tool',
             question: '도구인가요, 프레임워크인가요, 방법론인가요?',
             answer:
@@ -827,28 +854,35 @@ export const ko: SiteTranslations = {
             linkPath: '/kit',
           },
           {
-            id: 'what-is-installed',
-            question: 'What exactly gets installed, and where?',
+            id: 'how-to-use',
+            question: '어떻게 사용하나요?',
             answer:
-              'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles AGENTS.md, docs/, .agents/ and the gitignored .dwp/ workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
-            linkLabel: 'See the adoption flow',
+              '세 단계입니다. 먼저 코딩 에이전트에 Deep Work Plan 스킬을 설치합니다——가장 빠른 방법은 `npx skills add DailybotHQ/deepworkplan-skill`(또는 스킬 리포지토리를 클론한 뒤 `./setup.sh` 실행)입니다. 두 번째로 리포지토리를 한 번 온보딩하여 에이전트가 `AGENTS.md`, `docs/`, `.agents/` 키트와 gitignore된 `.dwp/` 영역을 스택에 맞게 적응시킵니다: https://deepworkplan.com/init.md 를 가리키거나 `/deepworkplan-onboard` 를 실행합니다. 세 번째로 얇은 명령으로 작업을 계획하고 실행합니다: `/dwp-create <goal>` 이 계획을 빌드하고, `/dwp-execute` 가 각 게이트에 대해 작업 단위로 실행하고, `/dwp-refine` 이 진행 중인 계획을 편집하고(범위, 작업, 또는 Lite 계획을 Full로 승격), `/dwp-resume` 이 중단 후 계속하고, `/dwp-status` 는 실행하지 않고 진행 상황을 보고하고, `/dwp-verify` 는 객관적인 적합성 보고서를 생성합니다. `/` 를 intercept하는 에이전트는 `#` 을 쓰는 경우가 많습니다(예: `#dwp-execute`). 도입 엔드포인트와 빠른 시작이 같은 경로를 더 자세히 안내합니다.',
+            linkLabel: '빠른 시작',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'what-is-installed',
+            question: '정확히 무엇이 설치되며, 어디에 설치되나요?',
+            answer:
+              '에이전트 스킬은 에이전트가 프로젝트 또는 사용자 스킬을 로드하는 위치라면 어디든 설치됩니다. 그런 다음 온보딩이 리포지토리 자체를 적응시킵니다: `AGENTS.md`, `docs/`, `.agents/`, 그리고 gitignore된 `.dwp/` 작업공간을 생성하거나 조정합니다. 스킬은 에이전트에게 방법론을 가르치고, 리포지토리는 다른 에이전트가 이어가는 데 필요한 컨텍스트, 키트, 계획 증거를 보관합니다.',
+            linkLabel: '채택 흐름 보기',
             linkPath: '/init',
           },
           {
             id: 'requires-git',
-            question: 'Does Deep Work Plan require Git?',
+            question: 'Deep Work Plan은 Git이 필요한가요?',
             answer:
-              'Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including state.json checkpoints and gate records, is required so recovery does not depend on a chat transcript.',
-            linkLabel: 'Read about repository archetypes',
+              '리포지토리에는 Git을 권장합니다. Git의 히스토리가 복구와 리뷰 표면의 일부이기 때문입니다. 하지만 방법론은 Git 리포지토리가 없는 에이전트 작업공간에서도 실행될 수 있습니다. 그 경우 `state.json` 체크포인트와 게이트 기록을 포함한 기계 판독 가능한 상태 계층이 필요하며, 그래야 복구가 대화 기록에 의존하지 않습니다.',
+            linkLabel: '리포지토리 아키타입에 대해 읽기',
             linkPath: '/spec/archetypes',
           },
           {
             id: 'skill-plan-spec',
-            question:
-              'What is the difference between a skill, a plan and a product specification?',
+            question: '스킬, 계획, 제품 스펙의 차이는 무엇인가요?',
             answer:
-              'A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.',
-            linkLabel: 'Read the specification',
+              '스킬은 에이전트가 반복 가능한 절차를 수행하는 방법을 기술합니다. DWP 계획은 범위, 인수 기준, 검증 게이트, 증거를 통해 구체적인 변경을 기술합니다. 제품 스펙은 제품의 현재 동작을 기술하며 구현 이후 델타를 통해 발전합니다; 스킬과 계획도 스펙이지만, 그 정식 제품 계약을 유지하는 것이 아니라 절차와 변경을 기술한다는 점이 다릅니다.',
+            linkLabel: '스펙 읽기',
             linkPath: '/spec/dwp-specification',
           },
         ],
@@ -857,14 +891,6 @@ export const ko: SiteTranslations = {
         id: 'how',
         title: '계획이 실행되는 방식',
         items: [
-          {
-            id: 'how-to-use',
-            question: '어떻게 사용하나요?',
-            answer:
-              '세 단계입니다. 먼저 코딩 에이전트에 Deep Work Plan 스킬을 설치합니다——가장 빠른 방법은 `npx skills add DailybotHQ/deepworkplan-skill`(또는 스킬 리포지토리를 클론한 뒤 `./setup.sh` 실행)입니다. 두 번째로 리포지토리를 한 번 온보딩하여 에이전트가 `AGENTS.md`, `docs/`, `.agents/` 키트와 gitignore된 `.dwp/` 영역을 스택에 맞게 적응시킵니다: https://deepworkplan.com/init.md 를 가리키거나 `/deepworkplan-onboard` 를 실행합니다. 세 번째로 얇은 명령으로 작업을 계획하고 실행합니다: `/dwp-create <goal>` 이 계획을 빌드하고, `/dwp-execute` 가 각 게이트에 대해 작업 단위로 실행하고, `/dwp-refine` 이 초안 또는 진행 중인 계획을 편집하고, `/dwp-resume` 이 중단 후 계속하고, `/dwp-status` 는 실행하지 않고 진행 상황을 보고하고, `/dwp-verify` 는 객관적인 적합성 보고서를 생성합니다. `/` 를 intercept하는 에이전트는 `#` 을 쓰는 경우가 많습니다(예: `#dwp-execute`). 도입 엔드포인트와 빠른 시작이 같은 경로를 더 자세히 안내합니다.',
-            linkLabel: '빠른 시작',
-            linkPath: '/quickstart',
-          },
           {
             id: 'gates',
             question:
@@ -928,18 +954,18 @@ export const ko: SiteTranslations = {
           },
           {
             id: 'gate-fails',
-            question: 'What happens when a validation gate fails?',
+            question: '검증 게이트가 실패하면 어떻게 되나요?',
             answer:
-              'The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.',
-            linkLabel: 'Read the agent protocol',
+              '해당 작업은 차단됨으로 기록되고, 에이전트는 완료를 주장하기 전에 멈춥니다. 증거를 살펴보고 코드를 수정하거나 작업을 다듬은 뒤 재개할 수 있습니다; 실패한 명령은 게이트를 약화시켜도 된다는 허락이 아니라 불일치를 해결하라는 신호입니다.',
+            linkLabel: '에이전트 프로토콜 읽기',
             linkPath: '/spec/agent-protocol',
           },
           {
             id: 'unattended-runs',
-            question: 'Can a plan run unattended overnight or in CI?',
+            question: '계획이 밤새 또는 CI에서 무인으로 실행될 수 있나요?',
             answer:
-              'Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.',
-            linkLabel: 'Read the unattended protocol',
+              '예, 계획이 사전에 승인되었고 필요한 상태 계층을 갖추었으며 에이전트에 한정된 권한이 주어진 경우에 가능합니다. 무인 실행은 현실이 계획과 어긋나거나, 계획된 수리 범위 밖에서 게이트가 실패하거나, 새로운 승인이나 자격 증명이 필요할 때 멈추고 차단 사유를 기록해야 합니다.',
+            linkLabel: '무인 실행 프로토콜 읽기',
             linkPath: '/spec/agent-protocol',
           },
         ],
@@ -962,7 +988,7 @@ export const ko: SiteTranslations = {
             question:
               'BMAD, Superpowers, Get Shit Done, Gentle-AI 같은 에이전트 워크플로 도구와 어떻게 다른가요?',
             answer:
-              '그 프레임워크들은 강력한 작업 방식을 가져옵니다: 역할, 원칙, 테스트 우선 단계, 검증 습관. Deep Work Plan은 둘과 다르며, 리포지토리에 무엇이 남고 무엇을 검사할 수 있는지에 집중합니다: 어떤 에이전트든 처음 보고 읽을 수 있는 하니스, 인수 기준과 게이트를 갖춘 작업 파일, 세션을 넘어 살아남는 상태, CI 친화적 종료 코드를 가진 적합성 검사기, 그리고 각 플로우가 몇 바이트의 지시사항을 로드하는지에 대한 공개 측정. 구조상 도구 비종속이며 핵심 루프에 서비스, 공급자, 비밀을 추가하지 않습니다. 비교 페이지는 각 접근 방식에서 무엇이 내장이고, 선택이고, 범위 밖인지 보여줍니다. Gentle-AI는 이미 사용 중인 코딩 에이전트를 설정합니다: 세션을 넘나드는 영속 메모리(Engram), 엄선된 스킬, 페르소나, MCP 서버, 선택적 Spec-Driven Development, 선택적 증거 기반 검토(Receipt-Driven Development). 각 에이전트의 설정 디렉터리에 쓰고, 계획 산출물을 Engram, OpenSpec 파일 또는 양쪽 모두에 보관할 수 있습니다. Deep Work Plan은 리포지토리 자체에 설치됩니다——어떤 에이전트든 처음 보고 읽을 수 있는 하니스, 인수 기준과 게이트를 갖춘 작업 파일, 재개 가능한 디스크 상태, CI 친화적 종료 코드를 가진 적합성 검사기, 공개된 지시 바이트 원장——을 핵심 루프에 서비스, 공급자, 비밀을 추가하지 않고 제공합니다. 두 레이어는 함께 맞물릴 수 있습니다. Gentle-AI는 에이전트를 갖추게 하고, Deep Work Plan은 긴 작업을 리포지토리 안에서 지속 가능하고 검증 가능하게 만듭니다.',
+              'BMAD, Superpowers, Get Shit Done과 같은 에이전트 워크플로 프레임워크는 강력한 작업 방식을 제공합니다: 역할, 원칙, 테스트 우선 단계, 검증 습관. Gentle-AI는 에이전트 생태계 구성 도구로서 인접한 범주에 속합니다: 이미 사용 중인 코딩 에이전트에 세션 간 지속되는 메모리(Engram), 선별된 skill, 페르소나, MCP 서버, 선택적 Spec-Driven Development, 선택적 증거 기반 리뷰(Receipt-Driven Development)를 장착시키며, 각 에이전트의 설정 디렉터리에 기록합니다. Deep Work Plan은 이 둘과 다릅니다: 저장소에 무엇이 남고 무엇을 검증할 수 있는지에 집중합니다 — 어떤 에이전트든 사전 맥락 없이 읽을 수 있는 harness, 인수 기준과 gate를 갖춘 task 파일, 세션을 넘어 유지되는 state, CI 친화적인 종료 코드를 가진 준수 검사기, 그리고 각 flow가 로드하는 instruction byte 수를 공개적으로 측정한 값. 구조적으로 도구에 구애받지 않으며 핵심 루프에 서비스, 제공자, 시크릿을 전혀 추가하지 않습니다. 이 계층들은 공존할 수 있습니다: 프레임워크와 Gentle-AI는 에이전트가 작동하는 방식을 형성하고, Deep Work Plan은 긴 작업을 저장소 내에서 지속 가능하고 검증 가능하게 만듭니다. 비교 페이지는 각 접근 방식이 어디에 내장되어 있는지, 선택적인지, 범위 밖인지를 보여줍니다.',
             linkLabel: '비교 보기',
             linkPath: '/compare',
           },
@@ -992,18 +1018,18 @@ export const ko: SiteTranslations = {
           {
             id: 'core-and-addons',
             question:
-              'Can I use the core methodology without installing add-ons?',
+              '애드온을 설치하지 않고도 핵심 방법론을 사용할 수 있나요?',
             answer:
-              'Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.',
-            linkLabel: 'Browse the add-ons',
+              '예. 애드온은 선택적으로 채택하는 계층이며, 아무것도 설치하지 않은 리포지토리도 완전히 DWP에 적합합니다. Devcontainer, Dailybot 보고, 의존성 업그레이드, 디자인 시스템 지원, 선택적 CI 리뷰는 리포지토리에 맞고 명시적으로 수용할 때만 제공됩니다.',
+            linkLabel: '애드온 둘러보기',
             linkPath: '/spec/addons',
           },
           {
             id: 'no-test-toolchain',
-            question: 'What if my repository has no tests or linting yet?',
+            question: '리포지토리에 아직 테스트나 린트가 없다면 어떻게 되나요?',
             answer:
-              'DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.',
-            linkLabel: 'Read the agent protocol',
+              'DWP는 툴체인의 부재를 무료 통과권으로 취급하지 않습니다. 온보딩 동안 에이전트는 스택에 맞는 검증 설정을 제안하고, 그 명령을 리포지토리 문서에 기록하며, 이후 게이트의 목표로 그 명령을 사용합니다; 제안 내용은 검토할 수 있도록 계속 보입니다.',
+            linkLabel: '에이전트 프로토콜 읽기',
             linkPath: '/spec/agent-protocol',
           },
           {
@@ -1100,6 +1126,18 @@ export const ko: SiteTranslations = {
         label: '기존 시스템을 위한 살아있는 스펙',
         help: '변경이 시스템의 커져 가는 스펙으로 병합되는 델타로 명세됩니다.',
       },
+      crossProjectMemory: {
+        label: '프로젝트 간 지속되는 에이전트 메모리',
+        help: '메모리는 하나의 플랜의 디스크 상태에 그치지 않고, 서로 다른 저장소와 세션에 걸쳐 에이전트를 따라갑니다.',
+      },
+      roleBasedAgents: {
+        label: '역할별로 구분된 전문 에이전트',
+        help: '분석가, 아키텍트, 리뷰어 같은 이름이 붙은 페르소나가 작업을 분담하며, 하나의 에이전트가 모든 단계를 수행하지 않습니다.',
+      },
+      nativeIdeProduct: {
+        label: '자체 IDE 또는 에디터로 제공',
+        help: '이 도구 자체가 하나의 통합 개발 환경이며, 기존 코딩 에이전트에 추가되는 부가 기능이 아닙니다.',
+      },
     },
     alternatives: {
       dwp: {
@@ -1112,74 +1150,74 @@ export const ko: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          '컨스티튜션, 스펙, 계획, 작업 목록을 통해 기능을 실행 가능한 스펙으로 바꾸며, 50개가 넘는 코딩 에이전트와 통합되는 슬래시 명령으로 구동됩니다.',
+          '컨스티튜션, 스펙, 계획, 작업 목록을 통해 기능을 실행 가능한 스펙으로 바꾸며, 50개가 넘는 코딩 에이전트와 통합되는 슬래시 명령으로 구동됩니다. 구현을 시작하기 전에 산출물들이 서로 일관되는지 확인할 수도 있습니다.',
         audience:
           '이미 쓰고 있는 에이전트 안에서 반복 가능한 스펙 작성, 계획, 작업화, 구현 워크플로를 원하는 팀.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          '각 변경을 델타 스펙(추가, 수정, 제거)과 시나리오를 갖춘 RFC 2119 요구사항의 제안으로 포착한 뒤, 살아있는 스펙으로 보관합니다.',
+          '각 변경을 델타 스펙(추가, 수정, 제거)과 시나리오를 갖춘 RFC 2119 요구사항의 제안으로 포착한 뒤, 살아있는 스펙으로 보관합니다. 변경이 수락되기 전에 제안의 완전성과 시나리오 커버리지를 검사하는 검증기도 갖추고 있습니다.',
         audience:
           '기존 시스템에서 스펙이 변경 한 번에 한 걸음씩 자라나기를 원하는 팀.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'EARS 스타일 요구사항에서 설계로, 다시 작업으로 이동하는 스펙을 갖춘 에이전트형 IDE와 CLI이며, 편집기 이벤트에서 실행되는 스티어링 파일과 훅을 제공합니다.',
+          'EARS 스타일 요구사항에서 설계로, 다시 작업으로 이동하는 스펙을 갖춘 에이전트형 IDE와 CLI이며, 편집기 이벤트에서 실행되는 스티어링 파일과 훅을 제공합니다. 기존 코드베이스에 대한 스펙을 생성해 설계를 시작하기 전에 요구사항의 공백을 찾아낼 수도 있습니다.',
         audience:
           'AWS 지원 도구와 함께 편집기에 스펙 주도 개발이 내장되기를 원하는 개발자.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          '전문화된 에이전트 역할(분석, 제품, 아키텍처, 개발, 품질)이 브리프, 요구사항, 아키텍처 문서, 스토리 파일을 만들어 내는 애자일 프레임워크입니다.',
+          '전문화된 에이전트 역할(분석, 제품, 아키텍처, 개발, 품질)이 브리프, 요구사항, 아키텍처 문서, 스토리 파일을 만들어 내는 애자일 프레임워크입니다. 완료의 정의(Definition of Done)에는 각 스토리가 완료로 인정되기 전에 팀원이나 AI 동료 리뷰어의 검토를 받도록 요구하는 절차가 포함되어 있습니다.',
         audience:
           '역할 기반 세레모니를 선호하고 에이전트 작업을 위한 완전한 애자일 라이프사이클을 원하는 팀.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          '브레인스토밍, 작은 테스트 우선 단계로 계획하기, 서브에이전트로 실행하기, 완료 전에 검토하기 위한 스킬 라이브러리와 워크플로.',
+          '브레인스토밍, 작은 테스트 우선 단계로 계획하기, 서브에이전트로 실행하기, 완료 전에 검토하기 위한 스킬 라이브러리와 워크플로이며, 여기 소개된 다른 어떤 대안보다 많은 코딩 에이전트 호스트와 통합되어 있고, 모든 작업에 2단계 서브에이전트 검토(스펙 준수 확인 후 코드 품질 확인)를 적용합니다.',
         audience:
           '코딩 에이전트 안에서 규율 있는 테스트 주도 실행을 원하는 개발자.',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          '.planning 디렉터리, 요구사항 id, 단계 계획, 새 컨텍스트 실행, 명시된 필수 사항에 대한 검증 패스를 갖춘 계획 시스템.',
+          '.planning 디렉터리, 요구사항 id, 단계 계획, 새 컨텍스트 실행, 그리고 각 계획의 요약에서 추출한 사용자가 관찰 가능한 산출물에 대한 검증 패스를 갖춘 계획 시스템입니다. 연구·계획·실행을 일회용 서브에이전트에서 실행하고 콘텐츠 지문(fingerprint) 검사로 오래된 검증을 잡아내어, 컨텍스트 저하(context rot)에 정면으로 맞서도록 설계되었습니다.',
         audience:
           '적은 세레모니로 컨텍스트 엔지니어링과 검증을 원하는 1인 개발자와 소규모 팀.',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          '이미 사용 중인 코딩 에이전트를 세션과 모델을 넘나들며 라우팅도 수행하는 영구 메모리, 엄선된 스킬, MCP 서버, 페르소나, 그리고 선택적인 Spec-Driven Development 또는 Receipt-Driven Development로 구성합니다. 설정은 기본적으로 에이전트의 전역 설정에 기록되며, 워크스페이스 범위 설치는 선택 사항입니다.',
         audience:
-          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+          '세션 전반에 걸쳐 작업을 기억하고 필요할 때 근거 자료를 생성할 수 있는, 구성된 에이전트 생태계를 원하는 개발자를 위한 것입니다.',
       },
       'claude-ai-native-sdlc': {
         name: "Claude's AI-native SDLC",
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          'Plan과 Design에서 Build, Test, Deploy, Maintain으로 이어지는 6단계 루프이며, 각 단계마다 사람의 승인을 거치도록 게이트가 걸려 있고, 단계 사이마다 저장소에 내구성 있는 산출물을 커밋하며, 배포 전에 보안 전용 검토 패스를 두고, 선행 및 후행 딜리버리 지표를 공개하는 지속적인 평가를 갖추고 있습니다.',
         audience:
-          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+          'Claude Code의 엔드투엔드 소프트웨어 제공 플레이북과 그 프로덕션 피드백 루프를 평가하는 팀을 위한 것입니다.',
       },
       'vendor-native': {
         name: '벤더 네이티브 계획 모드',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor, Gemini CLI가 AGENTS.md와 Agent Skills 표준을 따르는 계획 모드, 지시사항 파일, 스킬을 제공합니다.',
+          '에이전트 제품은 개방적이고 벤더에 종속되지 않는 AGENTS.md 및 Agent Skills 표준을 기반으로 계획 모드, 지시사항 파일, 스킬을 제공할 수 있지만, 계획 모드의 정확한 동작은 여전히 벤더, 클라이언트, 버전에 따라 달라집니다. 특히 Agent Skills는 시작 시 짧은 요약만 불러오고 활성화될 때 전체 지시사항을 불러오므로, 사용하지 않는 기능을 컨텍스트 밖에 둘 수 있습니다.',
         audience:
           '방법론을 채택하지 않고 단일 에이전트 안에서 계획을 원하는 모든 사람.',
       },
     },
     aiNative: {
-      title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      title: 'AI 네이티브 SDLC에서의 위치',
+      body: 'Claude의 AI-native SDLC 플레이북은 Plan, Design, Build, Test, Deploy, Maintain으로 이어지는 완전한 루프를 설명합니다. 각 단계는 다음 단계가 읽을 산출물을 커밋하고, 각 단계마다 사람의 승인 게이트를 두며, 배포 전에 보안 전용 검토 패스를 거치고, 프로덕션 피드백은 새로운 intent가 됩니다.',
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP는 내구성 있는 산출물과 게이트를 통한 승인이라는 개념을 공유합니다: intent는 계획이 되고, 작업은 증거를 남기며, 완료 전에 보안 검토가 실행되고, 저장소는 다음 에이전트가 읽을 수 있는 상태로 남습니다.',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+        '진짜 차이는 엄격함이 아니라 범위에 있습니다. 이 플레이북은 Claude Code를 중심으로 구축된 반면, DWP의 하니스와 계획 형식은 AGENTS.md와 Agent Skills 표준을 따르는 모든 에이전트가 읽을 수 있습니다. 이 플레이북은 DWP가 내세우지 않는 지속적인 평가와 프로덕션 운영도 다루며, 이러한 운영 관행은 DWP로 운영되는 저장소와 경쟁하기보다 이를 보완할 수 있습니다.',
       sourceLabel: "Read Claude's AI-native SDLC playbook",
     },
     profileCta: '비교 보기',
@@ -1222,7 +1260,7 @@ export const ko: SiteTranslations = {
     },
     honestLimits: {
       title: '정직한 한계',
-      body: 'Deep Work Plan에는 살아있는 스펙이나 델타 스펙 메커니즘이 없습니다; 그 부분에서는 OpenSpec과 유사한 도구가 더 강합니다. 방법론의 독립적인 벤치마크는 아직 존재하지 않으며, 사전 등록된 공개 평가가 계획되어 있습니다. 지시사항 로드 원장은 로드된 바이트를 측정하며, 토큰, 비용, 결과가 아닙니다.',
+      body: 'Deep Work Plan에는 살아있는 스펙이나 델타 스펙 메커니즘이 없습니다; 그 부분에서는 OpenSpec과 유사한 도구가 더 강합니다. 방법론의 독립적인 벤치마크는 아직 존재하지 않으며, 사전 등록된 공개 평가가 계획되어 있습니다. 지시사항 로드 원장은 로드된 바이트를 측정하며, 토큰, 비용, 결과가 아닙니다. DWP는 의도적으로 저장소 범위로 한정되어 있습니다. 프로젝트 간 메모리 시스템도, 역할 기반 에이전트 프레임워크도, IDE도 아니므로 이러한 축에서는 경쟁하지 않습니다 — 그런 능력이 필요한 작업에는 이를 제공하는 도구와 함께 사용하세요.',
     },
     correction: {
       title: '정확성을 유지하도록 도와주세요',

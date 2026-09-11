@@ -1,14 +1,14 @@
 ---
 title: 계획 상태
 description: "기계 가독 계획 상태 레이어: manifest.json과 state.json, 게이트 기록, 에피소드 메모리로서의 결과 기록, 조정, 그리고 필요한 시점."
-order: 7
+order: 8
 lang: ko
 section: State
 ---
 
 # 계획 상태
 
-**버전 1.0. 상태: 안정(Stable).** 이 문서는 Deep Work Plan 방법론의 기계 가독 계획 상태 레이어를 명시합니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
+**버전 1.1. 상태: 안정(Stable).** 이 문서는 Deep Work Plan 방법론의 기계 가독 계획 상태 레이어를 명시합니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
 
 두 JSON 산출물 — `manifest.json`(계획의 정적 식별 정보)과 `state.json`(검증 게이트 결과를 포함한 라이브 작업별 실행 상태) — 은 모든 계획이 Markdown 파일과 함께 MAY로 담을 수 있으며, 무인(unattended) 실행(참고: [에이전트 프로토콜](/spec/agent-protocol#execution-profiles))과 git이 없는 에이전트 작업 공간(참고: [아키타입](/spec/archetypes) §3)에서는 MUST로 담아야 합니다.
 
@@ -49,12 +49,13 @@ v1.1까지 계획은 산문 Markdown만이었습니다. 그것은 감사 가능�
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-  "spec_version": "2.3.0",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
+  "spec_version": "2.4.0",
   "name": "PLAN_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
+  "plan_format": "full",
   "created_at": "2026-06-09T14:00:00Z",
   "created_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "tags": ["backend", "payments"],
@@ -63,11 +64,13 @@ v1.1까지 계획은 산문 Markdown만이었습니다. 그것은 감사 가능�
 }
 ```
 
-`schema`, `spec_version`, `name`, `archetype`, `rigor`, `created_at`, `task_count`는 REQUIRED입니다.
+`schema`, `spec_version`, `name`, `archetype`, `rigor`, `created_at`, `task_count`, 그리고 `plan_format`은 REQUIRED입니다.
 
 `archetype`은 `individual`, `orchestrator-hub`, `agent-workspace` 중 하나여야(MUST) 합니다.
 
 `rigor`는 `micro`, `standard`, `deep` 중 하나여야(MUST) 합니다(참고: [비례적 엄격도](/spec/dwp-specification#proportional-rigor)).
+
+`plan_format`은 `lite`, `full` 중 하나여야(MUST) 하며 — 생성 시점에 선택된 표현 형식입니다(참고: [Lite 계획](/spec/lite-plans)). 이는 매니페스트 수준에서 불변입니다: 이후의 Lite에서 Full로의 승격은 `state.json`에 기록되며, 매니페스트를 다시 씀으로써 기록되는 일은 결코 없습니다.
 
 `parent_plan`은 자식 계획을 오케스트레이터 계획에 연결합니다(`{repo}:{plan_name}`, 또는 `null`).
 
@@ -77,17 +80,21 @@ v1.1까지 계획은 산문 Markdown만이었습니다. 그것은 감사 가능�
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v1.json",
+  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
   "plan": "PLAN_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",
   "completed_count": 2,
   "task_count": 7,
+  "format": "full",
+  "materialization": "ready",
+  "approval": "approved",
+  "promotion": null,
   "tasks": [
     {
       "id": 1,
-      "file": "1.task_webhook_endpoint.md",
+      "locator": { "kind": "file", "value": "1.task_webhook_endpoint.md" },
       "title": "Create webhook endpoint",
       "status": "completed",
       "started_at": "2026-06-09T14:10:00Z",
@@ -111,7 +118,7 @@ v1.1까지 계획은 산문 Markdown만이었습니다. 그것은 감사 가능�
     },
     {
       "id": 3,
-      "file": "3.task_retry_queue.md",
+      "locator": { "kind": "file", "value": "3.task_retry_queue.md" },
       "title": "Add retry queue",
       "status": "in_progress",
       "started_at": "2026-06-09T16:30:00Z",
@@ -128,9 +135,33 @@ v1.1까지 계획은 산문 Markdown만이었습니다. 그것은 감사 가능�
 }
 ```
 
+Lite 계획의 작업 항목은 별도 파일 대신 `README.md` 안의 작업 앵커를 가리키는 `inline` locator를 사용합니다 — 항목의 나머지 부분(게이트, 결과, 상태)은 똑같이 작동합니다:
+
+```json
+{
+  "format": "lite",
+  "materialization": "ready",
+  "approval": "pre_approved",
+  "promotion": null,
+  "tasks": [
+    {
+      "id": 2,
+      "locator": { "kind": "inline", "value": "#task-2" },
+      "title": "Add retry queue",
+      "status": "pending",
+      "gates": []
+    }
+  ]
+}
+```
+
+### format, materialization, approval, promotion
+
+`format`은 `lite`, `full` 중 하나여야(MUST) 하며 매니페스트의 `plan_format`을 반영합니다 — 다만 매니페스트와 달리 여기서는 가변적인데, Lite 계획이 나중에 Full로 승격될 수(MAY) 있기 때문입니다. `materialization`은 `materializing`(계획 폴더가 작성되는 중), `ready`(구체화 완료), 또는 `promoting`(Lite에서 Full로의 승격이 진행 중) 중 하나여야(MUST) 합니다. `approval`은 `pending`, `approved`, `pre_approved` 중 하나여야(MUST) 하며, 이 스키마에서는 OPTIONAL입니다. 그것이 기록되기 이전에 작성된 계획도 여전히 검증을 통과하도록 하기 위해서입니다 — 그것이 없을 때는 README의 `Approval` 행을 그 값으로 취급하고, 둘 다 없으면 `pending`으로 취급합니다. `promotion`은 승격 상황이 아닐 때는 `null`이며, `materialization`이 `promoting`인 동안에는 승격의 의도와 목적지 작업들을 기록하는 객체입니다. 이 필드들이 표현하는 전체 라이프사이클은 [Lite 계획](/spec/lite-plans)을 참고하십시오.
+
 ### 작업 항목
 
-계획의 모든 작업 파일은 `tasks`에 정확히 하나의 항목을 가져야(MUST) 하며, 번호(`id`)와 파일 이름(`file`)으로 키를 가집니다.
+모든 작업 — Full 계획에서는 별도의 파일, Lite 계획에서는 인라인 `{#task-N}` 레코드 — 은 `tasks`에 정확히 하나의 항목을 가져야(MUST) 하며, 번호(`id`)와 `locator`로 키를 가집니다. `locator.kind`는 `file`(Full — `value`는 작업의 파일 이름) 또는 `inline`(Lite — `value`는 작업의 앵커, `#task-N`) 중 하나여야(MUST) 합니다.
 
 `status`는 `pending`, `in_progress`, `completed`, `blocked`, `skipped` 중 하나여야(MUST) 합니다. `skipped`는 사용자가 `refine`을 통해 명시적으로 작업을 범위에서 제거했을 때만 유효합니다; `state.json`을 작업을 조용히 건너뛰는 데 사용해서는 안 됩니다(MUST NOT).
 
@@ -166,4 +197,4 @@ Markdown은 모든 불일치에서 이겨야(MUST) 합니다. `state.json`이 �
 
 ## 스키마 버전 관리
 
-두 스키마 모두 URL로 버전이 관리됩니다(`/v1.json`). 추가 필드는 버전 내에서 허용됩니다; 필드의 이름 변경 또는 타입 변경은 `/v2.json`과 스펙 변경 로그의 마이그레이션 메모가 필요합니다. 매니페스트의 `spec_version` 필드는 계획이 생성된 DWP 스펙 버전을 고정합니다; 설치된 스펙보다 최신 계획을 만난 에이전트는 추측하는 대신 그렇다고 알려야(SHOULD) 합니다.
+두 스키마 모두 URL로 버전이 관리됩니다. 추가 필드는 버전 내에서 허용됩니다; 필드의 이름 변경 또는 타입 변경은 새로운 스키마 버전과 스펙 변경 로그의 마이그레이션 메모가 필요합니다. 이번 개정에서는 두 스키마 모두에 `/v2.json`을 도입합니다: 작업 항목의 `file` 필드는 타입이 있는 `locator`(`{"kind": "file" | "inline", "value": ...}`)가 되고, 매니페스트는 `plan_format`을 얻으며, 상태 파일은 `format`, `materialization`, `approval`, `promotion`을 얻습니다 — 이는 모두 합쳐 Lite 계획에 필요한 필드입니다(참고: [Lite 계획](/spec/lite-plans)). `/v1.json` 매니페스트와 상태 파일은 계속 유효하며 조용히 v2로 재작성되는 일은 결코 없습니다; `refine` 세션이 의도적으로 마이그레이션할 수(MAY) 있습니다. 매니페스트의 `spec_version` 필드는 계획이 생성된 DWP 스펙 버전을 고정합니다; 설치된 스펙보다 최신 계획을 만난 에이전트는 추측하는 대신 그렇다고 알려야(SHOULD) 합니다.

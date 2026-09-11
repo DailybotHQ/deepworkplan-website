@@ -11,7 +11,7 @@
  */
 
 /** ISO date of the last fact review; rendered on the page in the reader's locale. */
-export const COMPARE_REVIEWED_ON = '2026-09-10';
+export const COMPARE_REVIEWED_ON = '2026-09-11';
 
 /** The three neutral cell values. Never "no", "missing" or "lacks". */
 export type CellValue = 'built-in' | 'optional' | 'not-in-scope';
@@ -34,6 +34,9 @@ export const CAPABILITY_IDS = [
   'instructionBudgetLedger',
   'onboardingScaffold',
   'brownfieldSpecs',
+  'crossProjectMemory',
+  'roleBasedAgents',
+  'nativeIdeProduct',
 ] as const;
 
 export type CapabilityId = (typeof CAPABILITY_IDS)[number];
@@ -94,6 +97,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'built-in',
       onboardingScaffold: 'built-in',
       brownfieldSpecs: 'not-in-scope',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'optional',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -110,8 +116,11 @@ export const ALTERNATIVES: readonly Alternative[] = [
       finalReview: 'optional',
       conformanceChecker: 'optional',
       instructionBudgetLedger: 'not-in-scope',
-      onboardingScaffold: 'optional',
+      onboardingScaffold: 'built-in',
       brownfieldSpecs: 'optional',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -126,10 +135,13 @@ export const ALTERNATIVES: readonly Alternative[] = [
       perTaskGates: 'not-in-scope',
       resumableState: 'built-in',
       finalReview: 'optional',
-      conformanceChecker: 'optional',
+      conformanceChecker: 'built-in',
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'optional',
       brownfieldSpecs: 'built-in',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -147,7 +159,10 @@ export const ALTERNATIVES: readonly Alternative[] = [
       conformanceChecker: 'optional',
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'optional',
-      brownfieldSpecs: 'optional',
+      brownfieldSpecs: 'built-in',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'built-in',
     },
   },
   {
@@ -166,6 +181,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'optional',
       brownfieldSpecs: 'optional',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'built-in',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -184,6 +202,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'not-in-scope',
       brownfieldSpecs: 'not-in-scope',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -195,13 +216,16 @@ export const ALTERNATIVES: readonly Alternative[] = [
       toolAgnostic: 'built-in',
       repoNativeHarness: 'optional',
       taskAcceptanceCriteria: 'built-in',
-      perTaskGates: 'optional',
+      perTaskGates: 'built-in',
       resumableState: 'built-in',
       finalReview: 'optional',
-      conformanceChecker: 'not-in-scope',
+      conformanceChecker: 'optional',
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'built-in',
       brownfieldSpecs: 'optional',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -216,10 +240,13 @@ export const ALTERNATIVES: readonly Alternative[] = [
       perTaskGates: 'optional',
       resumableState: 'built-in',
       finalReview: 'optional',
-      conformanceChecker: 'not-in-scope',
+      conformanceChecker: 'optional',
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'not-in-scope',
       brownfieldSpecs: 'optional',
+      crossProjectMemory: 'built-in',
+      roleBasedAgents: 'optional',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -229,15 +256,18 @@ export const ALTERNATIVES: readonly Alternative[] = [
     docsUrl: 'https://claude.com/blog/the-ai-native-sdlc-playbook',
     cells: {
       toolAgnostic: 'not-in-scope',
-      repoNativeHarness: 'optional',
-      taskAcceptanceCriteria: 'optional',
+      repoNativeHarness: 'built-in',
+      taskAcceptanceCriteria: 'built-in',
       perTaskGates: 'optional',
-      resumableState: 'optional',
-      finalReview: 'optional',
-      conformanceChecker: 'not-in-scope',
+      resumableState: 'built-in',
+      finalReview: 'built-in',
+      conformanceChecker: 'optional',
       instructionBudgetLedger: 'not-in-scope',
-      onboardingScaffold: 'not-in-scope',
+      onboardingScaffold: 'built-in',
       brownfieldSpecs: 'optional',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -256,6 +286,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'optional',
       brownfieldSpecs: 'not-in-scope',
+      crossProjectMemory: 'optional',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'optional',
     },
   },
 ];

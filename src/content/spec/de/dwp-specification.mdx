@@ -11,9 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP-Spezifikation
 
-**Version 2.3.0. Status: Stabil.** Dieses Dokument ist die normative Spezifikation für die Deep Work Plan (DWP) Methodik. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
+**Version 2.4.0. Status: Stabil.** Dieses Dokument ist die normative Spezifikation für die Deep Work Plan (DWP) Methodik. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
-> **Additiv in dieser Revision, keine Breaking Changes.** (1) Der Abschnitt **Touched Surface** — der Vertrag zwischen dem, was eine Aufgabe ändert, und dem, was validiert werden muss, mit Gate-Auswahl nach Risikoklasse (isoliert / Nahtstelle / geteilt-zentral / unbekannt); (2) die vollständige Validierung wird zu einer **Endzustands-Anforderung**, die im einzigen verpflichtenden **Final Review** des Plans läuft, mit expliziten Regeln zur Beweiswiederverwendung; (3) **aufgaben-lokale Skills-Entscheidungen** wandern in die erzeugende Aufgabe, und der Executive Report wird **optional, auf Anfrage**; (4) ein **modus-bewusster create-Ablauf** — der Trust-Modus materialisiert direkt, behält aber Analyse und Qualitätsprüfungen; und (5) eine explizite **Kompatibilitätsmatrix**: Pläne und Repositorys aus früheren Versionen bleiben konform.
+> **Additiv in dieser Revision, keine Breaking Changes.** (1) Der Abschnitt **Touched Surface** — der Vertrag zwischen dem, was eine Aufgabe ändert, und dem, was validiert werden muss, mit Gate-Auswahl nach Risikoklasse (isoliert / Nahtstelle / geteilt-zentral / unbekannt); (2) die vollständige Validierung wird zu einer **Endzustands-Anforderung**, die im einzigen verpflichtenden **Final Review** des Plans läuft, mit expliziten Regeln zur Beweiswiederverwendung; (3) **aufgaben-lokale Skills-Entscheidungen** wandern in die erzeugende Aufgabe, und der Executive Report wird **optional, auf Anfrage**; (4) ein **modus-bewusster create-Ablauf** — der Trust-Modus materialisiert direkt, behält aber Analyse und Qualitätsprüfungen; (5) eine **Lite-first-Plan-Materialisierung** — der geführte create-Ablauf erzeugt direkt einen ausführbaren Lite-Plan anstelle eines nicht ausführbaren Entwurfs, der jederzeit zu einem Full-Plan befördert werden kann (siehe [Lite-Pläne](/spec/lite-plans)); und (6) eine explizite **Kompatibilitätsmatrix**: Pläne und Repositorys aus früheren Versionen bleiben konform.
 
 ## Definition
 
@@ -25,19 +25,17 @@ DWP ist spec-driven: Der Plan ist die Spezifikation, und Agenten MÜSSEN gegen s
 
 Der `create`-Ablauf erhebt Ziel, Kontext, Einschränkungen und Aufgaben-Gliederung einmal, führt seine **Anforderungsanalyse** durch (Umfang, Abhängigkeitsreihenfolge zwischen den Aufgaben, Auswahl der Validierung aus der Touched Surface, Proportionalitäts-Stufe) und materialisiert dann gemäß dem Modus, den der Entwickler gewählt hat:
 
-- **Geführter Modus (Standard).** Der Ablauf erzeugt genau **ein** Artefakt zur Review: einen **überarbeiteten Entwurf** in `.dwp/drafts/`, mit genug Struktur, um in einem Durchgang zu genehmigen oder Änderungen anzufordern. Der Plan-Ordner wird erst nach der Genehmigung materialisiert.
-- **Trust-Modus (`trust` / `auto`).** Der Ablauf **materialisiert den Plan direkt**, ohne Entwurfsdatei — der Entwickler hat auf die zwischengeschaltete Review verzichtet. Die Anforderungsanalyse, die Abhängigkeitsreihenfolge und eine **Plan-Qualitätsprüfung** laufen dennoch: Trust verzichtet auf die *Review*, nicht auf die *Analyse*. Ein Trust-Modus-Plan wird als **für unbeaufsichtigte Ausführung vorgenehmigt** aufgezeichnet.
-- **Explizite Entwurfsmodi.** `refined-draft {name}` und `from-refined-draft {file}` bleiben in beiden Modi verfügbar; ein Entwickler, der einen Entwurf anfordert, bekommt einen.
+- **Geführter Modus (Standard).** Der Ablauf materialisiert direkt einen **Lite-Plan** — einen kompakten, bereits ausführbaren Vorschlag mit inline `{#task-N}`-Aufgabendatensätzen, der in einem Durchgang überprüfbar ist — und bittet den Entwickler, ihn als Lite beizubehalten, zu einem Full-Plan zu befördern, Änderungen anzufordern oder zu stoppen. Es wird kein zwischengeschalteter, nicht ausführbarer Entwurf erzeugt.
+- **Trust-Modus (`trust` / `auto`).** Der Ablauf **materialisiert die gewählte Darstellung** (Lite, oder Lite unmittelbar gefolgt von einer Beförderung zu Full) direkt, ohne Review-Schritt — der Entwickler hat darauf verzichtet. Die Anforderungsanalyse, die Abhängigkeitsreihenfolge und eine **Plan-Qualitätsprüfung** laufen dennoch: Trust verzichtet auf die *Review*, nicht auf die *Analyse*. Ein Trust-Modus-Plan wird als **für unbeaufsichtigte Ausführung vorgenehmigt** aufgezeichnet.
 
-In jedem Modus erzeugt der Ablauf niemals einen zwischengeschalteten, nicht überarbeiteten Entwurf als separaten prüfbaren Schritt.
+Beide Modi entscheiden das Format des Plans (Lite oder Full) als Teil derselben Anforderungsanalyse, niemals nachträglich. Siehe [Lite-Pläne](/spec/lite-plans) für den vollständigen Lebenszyklus von Darstellung, Erstellung und Auswahl sowie Beförderung.
 
 ## Planstruktur
 
-Ein Plan MUSS ein Verzeichnis unter `.dwp/plans/` mit dem Namen `PLAN_<slug>/` sein. Das Verzeichnis MUSS Folgendes enthalten:
+Ein Plan MUSS ein Verzeichnis unter `.dwp/plans/` mit dem Namen `PLAN_<slug>/` sein, in einer von zwei Darstellungen:
 
-- `README.md` — Planübersicht, Ziel, Aufgabentabelle und Status.
-- Eine Datei je Aufgabe, benannt `<n>.task_<slug>.md`.
-- `PROGRESS.md` — ein laufendes Protokoll der Ausführung.
+- **Full.** Das Verzeichnis MUSS `README.md` (Planübersicht, Ziel, Aufgabentabelle und Status), eine Datei je Aufgabe, benannt `<n>.task_<slug>.md`, und `PROGRESS.md` (ein laufendes Protokoll der Ausführung) enthalten.
+- **Lite.** Kompakte, vollständig ausführbare Aufgabendatensätze leben inline in `README.md` hinter stabilen `{#task-N}`-Ankern anstelle separater Aufgabendateien — jeder Datensatz trägt weiterhin ein Ziel, eine Touched Surface, Akzeptanzkriterien, eine Validierung und ein Abschlussprotokoll. `PROGRESS.md` ist weiterhin ERFORDERLICH. Ein Lite-Plan KANN jederzeit zu Full befördert werden. Siehe [Lite-Pläne](/spec/lite-plans) für den vollständigen Lebenszyklus, statt ihn hier zu duplizieren.
 
 Ein Plan KANN zusätzlich die maschinenlesbare Zustandsschicht tragen: `manifest.json` (statische Identität, einmal bei der Materialisierung geschrieben) und `state.json` (lebendiger aufgabenbezogener Ausführungszustand). Die Zustandsschicht ist für neue Pläne EMPFOHLEN und für unbeaufsichtigte Ausführung sowie für Agenten-Arbeitsbereiche ohne git ERFORDERLICH. Siehe [Plan-Zustand](/spec/plan-state).
 

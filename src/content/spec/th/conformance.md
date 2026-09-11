@@ -1,7 +1,7 @@
 ---
 title: ความสอดคล้อง
 description: "นิยามเชิงบรรทัดฐานของ repository ที่สอดคล้องกับ DWP และเป็น AI-first: สิ่งประดิษฐ์ที่ต้องมีและควรมี สิ่งที่ทำให้แผนมีรูปแบบที่ถูกต้อง และวิธีตรวจสอบ"
-order: 6
+order: 7
 lang: th
 section: Conformance
 ---
@@ -20,7 +20,7 @@ repository ที่สอดคล้องกับ DWP MUST เป็นไ�
 2. **`CLAUDE.md` แปลงไปยัง `AGENTS.md`** `CLAUDE.md` MUST มีอยู่และแปลงไปยัง `AGENTS.md` (symlink หรือสิ่งเทียบเท่าที่รับประกันแหล่งความจริงเดียว) ทั้งสอง MUST NOT แตกต่างกัน
 3. **ลำดับชั้น `docs/`** repository MUST มีไดเรกทอรี `docs/` ที่ครอบคลุมหมวดมาตรฐาน (สถาปัตยกรรม มาตรฐาน การทดสอบ คำสั่งสำหรับการพัฒนา ความปลอดภัย และการออนบอร์ดเอเจนต์) ด้วยเนื้อหาจริงที่เฉพาะกับ repository โมดูลที่ซับซ้อน SHOULD มี `README.md` ของตัวเอง คู่มือการทดสอบ MUST นิยาม toolchain การทดสอบ, lint และ type-check ที่มีอยู่จริง — หรือสำหรับ repository ที่ไม่มีเลย ก็เป็นการตั้งค่าที่เป็นรูปธรรมซึ่ง **ถูกเสนอ** จากสแตกระหว่างการออนบอร์ด คู่มือการทดสอบที่ว่างเปล่าหรือ "ไม่มีการทดสอบ" ไม่เป็นไปตามเกณฑ์นี้ เพราะหากไม่มีวิธีที่นิยามไว้สำหรับตรวจสอบพฤติกรรม แผนก็ไม่มี validation gate ที่เป็นวัตถุวิสัย
 4. **บ้าน `.agents/`** repository MUST มีไดเรกทอรี `.agents/` พร้อม `agents/`, `commands/` และ `skills/` รวมถึงแคตตาล็อกภายใต้ `.agents/docs/` ที่ **ตรงกับสิ่งที่อยู่บนดิสก์** คำสั่ง `dwp-*` MUST เป็นตัวส่งต่อบาง ๆ ไปยัง skill ที่ติดตั้งไว้ พาธ `.claude` MUST แปลงไปยัง `.agents`
-5. **พื้นที่ทำงาน `.dwp/` ที่ถูก gitignore** repository MUST มีไดเรกทอรี `.dwp/` พร้อม `plans/` และ `drafts/` และ `.dwp/` MUST ถูก gitignore พื้นที่ scratch `tmp/` SHOULD มีอยู่และ SHOULD ถูก gitignore
+5. **พื้นที่ทำงาน `.dwp/` ที่ถูก gitignore** repository MUST มีไดเรกทอรี `.dwp/` พร้อม `plans/` และ `.dwp/` MUST ถูก gitignore พื้นที่ scratch `tmp/` SHOULD มีอยู่และ SHOULD ถูก gitignore
 6. **skill ของระเบียบวิธีแปลงได้** skill ของ Deep Work Plan MUST ถูกติดตั้งหรืออ้างอิงในลักษณะที่เอเจนต์ใน repository สามารถเรียกใช้ sub-skill ของมันได้
 
 repository **สอดคล้องอย่างสมบูรณ์โดยไม่มี addon แบบเลือกใช้ใด ๆ** addon แบบเลือกใช้ (devcontainer, Dailybot, dependency-upgrade, design-system) MUST NOT จำเป็นต่อความสอดคล้อง ตั้งแต่มาตรฐาน 2.3.0 **การตรวจสอบในเครื่องของ AI Diff Reviewer** (vendored skill + ไฟล์ส่วนขยาย) เป็นส่วนหนึ่งของพื้นฐาน: การไม่มีมันเป็นความล้มเหลวสำหรับ repository ที่ประกาศ 2.3.0 หรือใหม่กว่า และเป็นข้อค้นพบเวอร์ชัน harness สำหรับ repository แบบ legacy พื้นผิว CI ของมันยังคงเป็นแบบเลือกใช้

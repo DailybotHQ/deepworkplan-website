@@ -26,7 +26,7 @@ JSON Schemas for both artifacts ship with this specification in
 
 | Field | Value |
 |-------|-------|
-| **Version** | 2.3.0 |
+| **Version** | 2.4.0 |
 | **Status** | Stable |
 | **Supersedes** | `PLAN_STATE.md` 2.2.0 (net-new in 2.2.0; no prior equivalent) |
 | **Companions** | `DWP_SPECIFICATION.md`, `AGENT_PROTOCOL.md`, `ARCHETYPES.md`, `DOCUMENTATION_STANDARD.md`, `ADDONS.md` |
@@ -294,8 +294,9 @@ Conforms to [`schema/plan-state.schema.json`](schema/plan-state.schema.json)
   found in the tree but not committed is **not** redone; a commit that already
   exists is **not** repeated; a gate whose recorded inputs are unchanged is
   **not** rerun; a report or external write already sent is **not** resent. The
-  resumed action is **idempotent**: it completes whichever of validate → commit →
-  README → `PROGRESS.md` → `state.json` is missing, in that order.
+  resumed action is **idempotent**: it completes whichever of validate → task log
+  → README/status → `PROGRESS.md` → commit → `state.json` is missing, in that
+  order.
 - **Stale results.** A change to a task's requirements (a `refine` edit), a fix
   landed after a gate ran, or a resumed edit to the same surface **invalidates**
   the affected gate records even when the checkbox is already set; the agent
@@ -360,10 +361,15 @@ declares a standard it objectively violates (`DWP_SPECIFICATION.md` §6.5).
 
 - [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
 - [`schema/plan-manifest.schema.json`](schema/plan-manifest.schema.json),
-  [`schema/plan-state.schema.json`](schema/plan-state.schema.json)
+  [`schema/plan-state.schema.json`](schema/plan-state.schema.json),
+  [`schema/plan-manifest-v2.schema.json`](schema/plan-manifest-v2.schema.json),
+  [`schema/plan-state-v2.schema.json`](schema/plan-state-v2.schema.json)
+- [`LITE_PLANS.md`](LITE_PLANS.md) defines v2 Lite/Full representation, typed
+  task locators and promotion recovery. v1 state remains immutable for plans
+  created with it; new Lite and Full plans declare the v2 schema URLs.
 - `DWP_SPECIFICATION.md` (§4, §5, §11), `AGENT_PROTOCOL.md` (§7), `ARCHETYPES.md` (§4)
 - [JSON Schema 2020-12](https://json-schema.org/specification)
 
 ---
 
-*Part of the DeepWorkPlan methodology v2.3.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*
+*Part of the DeepWorkPlan methodology v2.4.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*

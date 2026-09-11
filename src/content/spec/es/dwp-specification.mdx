@@ -11,9 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Especificación de DWP
 
-**Versión 2.3.0. Estado: estable.** Este documento es la especificación normativa de la metodología Deep Work Plan (DWP). Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
+**Versión 2.4.0. Estado: estable.** Este documento es la especificación normativa de la metodología Deep Work Plan (DWP). Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
 
-> **Aditivo en esta revisión, sin cambios rupturistas.** (1) La sección **Superficie tocada** — el contrato entre lo que una tarea cambia y lo que debe validarse, con selección de puerta por clase de riesgo (aislada / costura / compartida-núcleo / desconocida); (2) la validación completa pasa a ser un **requisito de estado final** que se ejecuta en el único **Final Review** obligatorio del plan, con reglas explícitas de reutilización de evidencia; (3) las **decisiones de skills por tarea** se mudan a la tarea que las origina, y el Reporte Ejecutivo pasa a ser **opcional, a petición**; (4) un **flujo `create` consciente del modo** — el modo trust materializa directamente conservando el análisis y las comprobaciones de calidad; y (5) una **matriz de compatibilidad** explícita: los planes y repositorios de versiones anteriores siguen siendo conformes.
+> **Aditivo en esta revisión, sin cambios rupturistas.** (1) La sección **Superficie tocada** — el contrato entre lo que una tarea cambia y lo que debe validarse, con selección de puerta por clase de riesgo (aislada / costura / compartida-núcleo / desconocida); (2) la validación completa pasa a ser un **requisito de estado final** que se ejecuta en el único **Final Review** obligatorio del plan, con reglas explícitas de reutilización de evidencia; (3) las **decisiones de skills por tarea** se mudan a la tarea que las origina, y el Reporte Ejecutivo pasa a ser **opcional, a petición**; (4) un **flujo `create` consciente del modo** — el modo trust materializa directamente conservando el análisis y las comprobaciones de calidad; (5) **materialización de planes Lite primero** — el create guiado produce un plan Lite directamente ejecutable en lugar de un borrador no ejecutable, promovible a un plan Full en cualquier momento (véase [Planes Lite](/spec/lite-plans)); y (6) una **matriz de compatibilidad** explícita: los planes y repositorios de versiones anteriores siguen siendo conformes.
 
 ## Definición
 
@@ -25,19 +25,17 @@ DWP está guiado por especificación: el plan es la especificación, y los agent
 
 El flujo `create` recoge una sola vez el objetivo, el contexto, las restricciones y el esquema de tareas, ejecuta su **análisis de requisitos** (alcance, orden de dependencias entre tareas, selección de validación a partir de la Superficie tocada, nivel de rigor proporcional) y luego materializa según el modo que eligió el desarrollador:
 
-- **Modo guiado (por defecto).** El flujo produce exactamente **un** artefacto para revisión: un **borrador refinado** en `.dwp/drafts/`, con estructura suficiente para aprobar o pedir cambios en una sola pasada. La carpeta del plan se materializa solo tras la aprobación.
-- **Modo trust (`trust` / `auto`).** El flujo **materializa el plan directamente**, sin archivo de borrador — el desarrollador renunció a la revisión intermedia. El análisis de requisitos, el orden de dependencias y una **comprobación de calidad del plan** siguen ejecutándose: trust renuncia a la *revisión*, no al *análisis*. Un plan en modo trust se registra como **preaprobado para ejecución desatendida**.
-- **Modos de borrador explícitos.** `refined-draft {name}` y `from-refined-draft {file}` siguen disponibles en ambos modos; un desarrollador que pida un borrador lo obtiene.
+- **Modo guiado (por defecto).** El flujo materializa un **plan Lite** directamente — una propuesta compacta y ya ejecutable con registros de tarea `{#task-N}` en línea, revisable en una sola pasada — y pide al desarrollador que lo conserve como Lite, lo promueva a un plan Full, solicite cambios o se detenga. No se produce ningún borrador intermedio no ejecutable.
+- **Modo trust (`trust` / `auto`).** El flujo **materializa la representación elegida** (Lite, o Lite seguido inmediatamente de la promoción a Full) directamente, sin paso de revisión — el desarrollador renunció a ella. El análisis de requisitos, el orden de dependencias y una **comprobación de calidad del plan** siguen ejecutándose: trust renuncia a la *revisión*, no al *análisis*. Un plan en modo trust se registra como **preaprobado para ejecución desatendida**.
 
-En todos los modos el flujo nunca produce un borrador intermedio no refinado como paso revisable separado.
+Ambos modos deciden el formato del plan (Lite o Full) como parte del mismo análisis de requisitos, nunca como algo posterior. Véase [Planes Lite](/spec/lite-plans) para el ciclo de vida completo de representación, creación-y-selección, y promoción.
 
 ## Estructura del plan
 
-Un plan DEBE ser un directorio bajo `.dwp/plans/` llamado `PLAN_<slug>/`. El directorio DEBE contener:
+Un plan DEBE ser un directorio bajo `.dwp/plans/` llamado `PLAN_<slug>/`, en una de dos representaciones:
 
-- `README.md`: resumen del plan, objetivo, tabla de tareas y estado.
-- Un archivo por tarea, con el nombre `<n>.task_<slug>.md`.
-- `PROGRESS.md`: un registro continuo de la ejecución.
+- **Full.** El directorio DEBE contener `README.md` (resumen del plan, objetivo, tabla de tareas y estado), un archivo por tarea con el nombre `<n>.task_<slug>.md`, y `PROGRESS.md` (un registro continuo de la ejecución).
+- **Lite.** Los registros de tarea, compactos y totalmente ejecutables, viven en línea dentro de `README.md` tras anclas estables `{#task-N}` en lugar de archivos de tarea separados — cada registro sigue llevando un objetivo, una Superficie tocada, criterios de aceptación, validación y un registro de finalización. `PROGRESS.md` sigue siendo REQUERIDO. Un plan Lite PUEDE promoverse a Full en cualquier momento. Véase [Planes Lite](/spec/lite-plans) para el ciclo de vida completo, en lugar de duplicarlo aquí.
 
 Un plan PUEDE llevar adicionalmente la capa de estado legible por máquina: `manifest.json` (identidad estática, escrito una vez en la materialización) y `state.json` (estado de ejecución activo por tarea). La capa de estado es RECOMENDADA para planes nuevos y REQUERIDA para la ejecución desatendida y para espacios de trabajo de agente sin git. Véase [Estado del plan](/spec/plan-state).
 

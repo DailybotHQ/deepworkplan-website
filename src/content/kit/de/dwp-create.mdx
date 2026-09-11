@@ -28,9 +28,9 @@ Einen neuen Deep Work Plan aus einem übergeordneten Ziel erstellen.
 
 ## Modi
 
-`dwp-create` verwendet standardmäßig den **geführten** Modus: Es sammelt Kontext, schreibt einen einzigen verfeinerten Entwurf, **zeigt ihn Ihnen und bittet vor der Erzeugung des endgültigen Plans um Bestätigung** — sodass Sie den Plan stets lesen, bevor er erstellt wird. Dies ist die empfohlene Voreinstellung, besonders die ersten Male.
+`dwp-create` verwendet standardmäßig den **geführten** Modus: Es sammelt Kontext, führt die Analyse durch und materialisiert direkt einen Lite-Plan — einen kompakten, bereits ausführbaren Vorschlag, keinen Wegwerf-Entwurf — **zeigt ihn Ihnen und fragt, ob Sie ihn als Lite behalten, zu einem Full-Plan mit Aufgabendateien befördern, bearbeiten oder abbrechen möchten** — sodass Sie stets den echten Plan lesen, bevor Sie entscheiden. Dies ist die empfohlene Voreinstellung, besonders die ersten Male.
 
-Hängen Sie **`trust`** (oder `auto`) als letztes Wort an, um die Bestätigungen zu überspringen — der Agent schreibt den verfeinerten Entwurf und geht direkt zum endgültigen Plan über:
+Hängen Sie **`trust`** (oder `auto`) als letztes Wort an, um diese Prüfung zu überspringen — der Agent geht direkt zu einem vorab genehmigten, startbereiten Plan über (Lite oder Full, anhand derselben Signale gewählt):
 
 ```
 /dwp-create <goal> trust
@@ -42,7 +42,7 @@ Der Trust-Modus ist die Abkürzung für Power-User, sobald Sie dem Ablauf vertra
 
 1. Das Ziel und den Repository-Kontext analysieren.
 2. Bei Mehrdeutigkeit klärende Fragen stellen.
-3. Einen verfeinerten Entwurf nach `.dwp/drafts/` schreiben (im geführten Modus prüfen und bestätigen).
+3. Den Plan direkt unter `.dwp/plans/PLAN_<name>/` materialisieren — standardmäßig einen Lite-Plan, bei größeren Vorhaben einen Full-Plan (im geführten Modus prüfen und wählen: als Lite behalten, zu Full befördern, bearbeiten oder abbrechen).
 4. In aufeinanderfolgende Aufgaben zerlegen und die README, die Aufgabendateien und PROGRESS schreiben.
 5. Mit dem Final Review enden (Sicherheitstest, Validierung des Endzustands, Abgleich der Skills-Entscheidungen).
 

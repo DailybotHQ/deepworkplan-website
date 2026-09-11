@@ -11,9 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Specyfikacja DWP
 
-**Wersja 2.3.0. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
+**Wersja 2.4.0. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 
-> **Addytywne w tej rewizji, bez zmian niekompatybilnych wstecz.** (1) Sekcja **Powierzchnia dotknięta** — kontrakt między tym, co zadanie zmienia, i tym, co musi zostać zwalidowane, z doborem bramki według klasy ryzyka (izolowana / szew / współdzielony-rdzeń / nieznana); (2) pełna walidacja staje się **wymogiem stanu końcowego** uruchamianym w jedynym obowiązkowym **Final Review** planu, z jawnymi regułami ponownego użycia dowodów; (3) **lokalne decyzje dotyczące skilli** przenoszą się do zadania będącego właścicielem, a raport wykonawczy staje się **opcjonalny, na życzenie**; (4) **przepływ create świadomy trybu** — tryb trust materializuje się bezpośrednio, zachowując analizę i kontrole jakości; oraz (5) jawna **macierz kompatybilności**: plany i repozytoria z wcześniejszych wersji pozostają zgodne.
+> **Addytywne w tej rewizji, bez zmian niekompatybilnych wstecz.** (1) Sekcja **Powierzchnia dotknięta** — kontrakt między tym, co zadanie zmienia, i tym, co musi zostać zwalidowane, z doborem bramki według klasy ryzyka (izolowana / szew / współdzielony-rdzeń / nieznana); (2) pełna walidacja staje się **wymogiem stanu końcowego** uruchamianym w jedynym obowiązkowym **Final Review** planu, z jawnymi regułami ponownego użycia dowodów; (3) **lokalne decyzje dotyczące skilli** przenoszą się do zadania będącego właścicielem, a raport wykonawczy staje się **opcjonalny, na życzenie**; (4) **przepływ create świadomy trybu** — tryb trust materializuje się bezpośrednio, zachowując analizę i kontrole jakości; (5) **materializacja Lite-first** — guided create tworzy bezpośrednio wykonywalny plan Lite zamiast niewykonywalnego szkicu, który można w każdej chwili podnieść do planu Full (zob. [Plany Lite](/spec/lite-plans)); oraz (6) jawna **macierz kompatybilności**: plany i repozytoria z wcześniejszych wersji pozostają zgodne.
 
 ## Definicja
 
@@ -25,19 +25,17 @@ DWP jest spec-driven: plan jest specyfikacją, a agenci MUSZĄ pracować w odnie
 
 Przepływ `create` zbiera cel, kontekst, ograniczenia i zarys zadań raz, wykonuje swoją **analizę wymagań** (zakres, kolejność zależności między zadaniami, dobór walidacji z Powierzchni dotkniętej, poziom proporcjonalnej rygorystyczności), a następnie materializuje się zgodnie z trybem wybranym przez programistę:
 
-- **Tryb guided (domyślny).** Przepływ tworzy dokładnie **jeden** artefakt do przeglądu: **dopracowany szkic** w `.dwp/drafts/`, wystarczająco ustrukturyzowany, by zatwierdzić lub zgłosić poprawki w jednym przebiegu. Folder planu jest materializowany dopiero po zatwierdzeniu.
-- **Tryb trust (`trust` / `auto`).** Przepływ **materializuje plan bezpośrednio**, bez pliku szkicu — programista zrzekł się pośredniego przeglądu. Analiza wymagań, kolejność zależności i **kontrola jakości planu** wciąż się wykonują: trust zrzeka się *przeglądu*, nie *analizy*. Plan w trybie trust jest zapisywany jako **wstępnie zatwierdzony do wykonania nieobsługiwanego**.
-- **Jawne tryby szkicu.** `refined-draft {name}` i `from-refined-draft {file}` pozostają dostępne w obu trybach; programista, który poprosi o szkic, go dostaje.
+- **Tryb guided (domyślny).** Przepływ materializuje **plan Lite** bezpośrednio — kompaktową, już wykonywalną propozycję z inline'owymi rekordami zadań `{#task-N}`, możliwą do przejrzenia w jednym przebiegu — i prosi programistę o zachowanie go jako Lite, podniesienie do planu Full, zgłoszenie poprawek lub zatrzymanie. Nie powstaje żaden pośredni niewykonywalny szkic.
+- **Tryb trust (`trust` / `auto`).** Przepływ **materializuje wybraną reprezentację** (Lite, albo Lite z natychmiastowym podniesieniem do Full) bezpośrednio, bez etapu przeglądu — programista się go zrzekł. Analiza wymagań, kolejność zależności oraz **kontrola jakości planu** wciąż się wykonują: trust zrzeka się *przeglądu*, nie *analizy*. Plan w trybie trust jest zapisywany jako **wstępnie zatwierdzony do wykonania nieobsługiwanego**.
 
-W każdym trybie przepływ nigdy nie tworzy pośredniego, niedopracowanego szkicu jako osobnego kroku podlegającego przeglądowi.
+Oba tryby decydują o formacie planu (Lite lub Full) w ramach tej samej analizy wymagań, nigdy jako refleksja po fakcie. Zob. [Plany Lite](/spec/lite-plans) — pełny opis reprezentacji, tworzenia-i-wyboru oraz cyklu życia podniesienia.
 
 ## Struktura planu
 
-Plan MUSI być katalogiem w `.dwp/plans/` o nazwie `PLAN_<slug>/`. Katalog MUSI zawierać:
+Plan MUSI być katalogiem w `.dwp/plans/` o nazwie `PLAN_<slug>/`, w jednej z dwóch reprezentacji:
 
-- `README.md` — przegląd planu, cel, tabelę zadań i status.
-- Jeden plik na zadanie, o nazwie `<n>.task_<slug>.md`.
-- `PROGRESS.md` — bieżący dziennik realizacji.
+- **Full.** Katalog MUSI zawierać `README.md` (przegląd planu, cel, tabelę zadań i status), jeden plik na zadanie o nazwie `<n>.task_<slug>.md`, oraz `PROGRESS.md` (bieżący dziennik realizacji).
+- **Lite.** Kompaktowe, w pełni wykonywalne rekordy zadań żyją inline w `README.md` za stabilnymi kotwicami `{#task-N}` zamiast osobnych plików zadań — każdy rekord nadal niesie cel, Powierzchnię dotkniętą, kryteria akceptacji, walidację i dziennik ukończenia. `PROGRESS.md` nadal jest WYMAGANY. Plan Lite MOŻE zostać podniesiony do Full w dowolnym momencie. Zob. [Plany Lite](/spec/lite-plans) — pełny cykl życia, zamiast go tu powielać.
 
 Plan MOŻE dodatkowo zawierać warstwę stanu odczytywalnego maszynowo: `manifest.json` (statyczna tożsamość, zapisywana raz podczas materializacji) i `state.json` (aktywny stan realizacji poszczególnych zadań). Warstwa stanu jest ZALECANA dla nowych planów i WYMAGANA przy wykonaniu nieobsługiwanym oraz w przestrzeniach roboczych agenta bez gita. Zob. [Stan planu](/spec/plan-state).
 

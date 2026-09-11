@@ -1,7 +1,7 @@
 ---
 title: "Frequently asked questions — Deep Work Plan"
 description: "Answers to the questions people ask about Deep Work Plan: what it does, how gates and resumption work, how it compares with other tools, and how to adopt it."
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-11
 ---
 
 ## Frequently asked questions
@@ -22,6 +22,12 @@ Developers and teams who hand real, multi-step work to coding agents and want it
 
 [Quickstart](https://deepworkplan.com/quickstart)
 
+### What's the difference between a Lite and a Full plan?
+
+A representation choice, not a rigor tradeoff. Every plan starts as a Lite folder: a compact README with anchored task records that is already executable, not a partial draft. `create` expands to Full task files only when a task's instruction detail, dependencies or contracts do not fit a reviewable compact record; an explicit request for either format is honored, and a Lite plan can be promoted to Full later without losing completed work. Both formats carry the same acceptance criteria, validation gates, evidence and mandatory Final Review.
+
+[Read the methodology](https://deepworkplan.com/methodology)
+
 ### Is it a tool, a framework or a methodology?
 
 A methodology packaged as an installable skill. There is no server, no account, no proprietary format and no runtime beyond the coding agent you already use. What gets installed is instructions the agent reads, a small set of shell scripts for context detection and conformance checking, and the conventions your repository adopts. Everything the plan produces is Markdown and JSON in your repository, readable without any tool.
@@ -33,6 +39,12 @@ A methodology packaged as an installable skill. There is no server, no account, 
 Any agent that reads repository files. The skill follows the open Agent Skills standard and the `AGENTS.md` convention, so Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot and others pick it up through their normal skill and instruction loading. The methodology's own evaluation shows a plan started by one vendor's agent and resumed by another's in both directions. Installation coverage and behavioral evidence are listed per agent in the compatibility matrix, and the two are never conflated.
 
 [Browse the kit](https://deepworkplan.com/kit)
+
+### How do I use it?
+
+Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx skills add DailybotHQ/deepworkplan-skill` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits an in-flight plan (scope, tasks, or promoting a Lite plan to Full); `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.
+
+[Quickstart](https://deepworkplan.com/quickstart)
 
 ### What exactly gets installed, and where?
 
@@ -53,12 +65,6 @@ A skill describes how an agent performs a repeatable procedure. A DWP plan descr
 [Read the specification](https://deepworkplan.com/spec/dwp-specification)
 
 ## How a plan runs
-
-### How do I use it?
-
-Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx skills add DailybotHQ/deepworkplan-skill` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits a draft or an in-flight plan; `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.
-
-[Quickstart](https://deepworkplan.com/quickstart)
 
 ### How are the validation gates implemented? Do they need human sign-off?
 
@@ -126,7 +132,7 @@ Claude's AI-native SDLC playbook makes a related case for durable artifacts acro
 
 ### How is it different from agent workflow tools such as BMAD, Superpowers, Get Shit Done or Gentle-AI?
 
-Agent workflow frameworks such as BMAD, Superpowers and Get Shit Done bring strong working styles: roles, principles, test-first steps, verification habits. Gentle-AI sits nearby as an agent ecosystem configurator: it equips the coding agents you already use with persistent memory across sessions (Engram), curated skills, personas, MCP servers, optional Spec-Driven Development and optional evidence-based review (Receipt-Driven Development), writing into each agent\
+Agent workflow frameworks such as BMAD, Superpowers and Get Shit Done bring strong working styles: roles, principles, test-first steps, verification habits. Gentle-AI sits nearby as an agent ecosystem configurator: it equips the coding agents you already use with persistent memory across sessions (Engram), curated skills, personas, MCP servers, optional Spec-Driven Development and optional evidence-based review (Receipt-Driven Development), writing into each agent's config directories. Deep Work Plan differs from both: it focuses on what stays in the repository and what can be checked — a harness any agent reads cold, task files with acceptance criteria and gates, state that survives a session, a conformance checker with a CI-friendly exit code, and a published measurement of how many instruction bytes each flow loads. It is tool-agnostic by construction and adds no service, provider or secret to the core loop. The layers can sit together: frameworks and Gentle-AI shape how the agent works; Deep Work Plan makes long work durable and checkable inside the repo. The comparison page shows where each approach is built in, optional or out of scope.
 
 [See the comparison](https://deepworkplan.com/compare)
 
@@ -164,6 +170,6 @@ The methodology and the skill are MIT-licensed and free; there is no service, no
 
 ## Still have a question?
 
-Open an issue on GitHub. Questions that come up repeatedly are added to this page.
+Open a discussion or an issue on GitHub. Questions that come up repeatedly are added to this page.
 
 [Ask on GitHub](https://github.com/DailybotHQ/deepworkplan-website/issues)

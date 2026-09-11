@@ -1,7 +1,7 @@
 ---
 title: Protocolo del agente
 description: "El contrato normativo de comportamiento para agentes de IA con Deep Work Plans: incorporación, planificación, ejecución, refinamiento, reanudación y seguridad."
-order: 3
+order: 4
 lang: es
 section: Protocol
 ---
@@ -93,13 +93,13 @@ Todo plan se ejecuta bajo exactamente uno de dos perfiles. El perfil cambia qui�
 
 ### Interactivo (por defecto)
 
-Un ser humano está presente en la sesión. El agente propone, el humano aprueba el borrador refinado, el agente ejecuta tarea por tarea, y la ambigüedad se resuelve preguntando. Todas las secciones del protocolo anteriores describen el perfil interactivo.
+Un ser humano está presente en la sesión. El agente propone, el humano aprueba el plan materializado directamente, el agente ejecuta tarea por tarea, y la ambigüedad se resuelve preguntando. Todas las secciones del protocolo anteriores describen el perfil interactivo.
 
 ### Desatendido
 
 El plan se ejecuta sin ningún humano observando — el turno programado de una plataforma autónoma, una sesión en la nube, una ejecución nocturna. La ejecución desatendida es opt-in por plan y DEBE satisfacer todo lo siguiente:
 
-- **Plan preaprobado.** El plan fue aprobado antes de cualquier turno desatendido — en modo guiado el humano aprobó el borrador refinado; en modo trust la instrucción `trust` explícita del desarrollador es la aprobación registrada. Un agente NO DEBE crear y ejecutar un plan de forma desatendida en un mismo turno sin una u otra; la aprobación del plan es el punto de control humano.
+- **Plan preaprobado.** El plan fue aprobado antes de cualquier turno desatendido — en modo guiado el humano aprobó el plan materializado directamente; en modo trust la instrucción `trust` explícita del desarrollador es la aprobación registrada. Un agente NO DEBE crear y ejecutar un plan de forma desatendida en un mismo turno sin una u otra; la aprobación del plan es el punto de control humano.
 - **Capa de estado REQUERIDA.** El plan DEBE llevar `manifest.json` y `state.json` para que cualquier sesión posterior — agente o humano — pueda leer el progreso exacto sin reproducir una transcripción. Véase [Estado del plan](/spec/plan-state).
 - **Autoridad acotada.** La autoridad del agente es el plan: NO DEBE ampliar el alcance, NO DEBE realizar acciones destructivas o de cara al exterior que el plan no autorice explícitamente, y NO DEBE estirar las instrucciones de una tarea para cubrir trabajo descubierto-pero-no-planificado — el trabajo descubierto se registra para el siguiente `refine`, no se improvisa.
 - **Una tarea atómica por turno, puertas siempre.** Cada turno ejecuta el Protocolo de Reanudación DWP, ejecuta como máximo la siguiente tarea, pasa su puerta de validación, completa según el protocolo de finalización de tarea y cede. Una puerta fallida es una condición de parada, nunca "continuar de todos modos".

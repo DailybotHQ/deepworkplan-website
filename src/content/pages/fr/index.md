@@ -25,7 +25,7 @@ En courtes salves, les agents de codage sont remarquables. Confiez-leur une miss
 
 Deep Work Plan répond par le développement piloté par la spécification : un plan durable, des tâches atomiques et des validation gates que l’agent doit franchir. Le travail reste vérifiable — et n’importe quel agent peut le reprendre entre les sessions.
 
-Et parce que le contexte est la ressource la plus rare de votre agent, le harness est conçu pour l’efficacité des tokens : les instructions se chargent progressivement, la validation ne touche que ce qui a changé, et chaque tâche apprend localement — le travail de longue haleine reste abordable.
+Et parce que le contexte est la ressource la plus rare de votre agent, le harness est conçu pour l’efficacité des tokens : les instructions se chargent progressivement, la validation ne touche que ce qui a changé, et chaque tâche apprend localement — le travail de longue haleine reste abordable. Le plan lui-même suit le même principe : un plan Lite pour une correction bornée, un plan Full pour un travail qui s’étend sur des heures — le format suit toujours l’ampleur du travail, jamais l’inverse.
 ---
 
 ## Les humains dirigent. Les agents exécutent.

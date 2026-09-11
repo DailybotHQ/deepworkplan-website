@@ -1,7 +1,7 @@
 ---
 title: Archétypes
 description: "Description normative des archétypes de dépôt DWP : le dépôt individuel, le hub orchestrateur et l'espace de travail d'agent, l'heuristique de classification, et en quoi l'onboarding diffère."
-order: 4
+order: 5
 lang: fr
 section: Archetypes
 ---
@@ -45,7 +45,7 @@ L'intuition qui rend cet archétype possible : **le harness est un espace de tra
 | `AGENTS.md` (règles, commandes rapides) | Le contexte permanent de l'espace de travail — `AGENTS.md` lui-même, ou le fichier d'ordres permanents de la plateforme |
 | `docs/` (connaissances durables) | Fichiers de connaissances et documents mémoire de l'espace de travail |
 | `.agents/` (skills, agents, commandes) | Le répertoire de skills de la plateforme — OpenClaw scanne nativement `<workspace>/.agents/skills/` |
-| `.dwp/` (plans, brouillons) | `.dwp/` à la racine de l'espace de travail — inchangé |
+| `.dwp/` (plans) | `.dwp/` à la racine de l'espace de travail — inchangé |
 | Journal git (état, reprenabilité) | `state.json` par plan ([État du plan](/spec/plan-state)), REQUIRED ici |
 
 Un espace de travail d'agent MUST fournir `AGENTS.md`, `.agents/` et `.dwp/` à la racine de l'espace de travail.

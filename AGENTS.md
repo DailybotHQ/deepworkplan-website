@@ -81,7 +81,7 @@ docs/                    # Project documentation
 .agents/                 # Cross-agent skills, commands, agents, settings (canonical)
 .claude → .agents        # Backward-compat symlink for Claude Code
 .cursor → .agents        # Backward-compat symlink for Cursor
-.dwp/                    # Deep Work Plan output (plans/drafts) — git-ignored working state
+.dwp/                    # Deep Work Plan output (plans) — git-ignored working state
 tmp/                     # Temporary workspace (git-ignored, see below)
 ```
 
@@ -292,7 +292,7 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 - **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the next release will overwrite those edits. Contribute upstream, then merge any PR to trigger a website release that picks up the new upstream tag.
 - **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: changes there must be intentional and reviewed. Prefer contributing reusable improvements upstream in `DailybotHQ/deepworkplan-skill`, then re-adapting this copy deliberately — never rely on the release dogfood step to pull it in.
 
-  **Current vendored provenance (2026-09-10, Task 23 of the token-efficiency upgrade):** this copy was re-adapted from the upstream branch `feat/token-efficiency-upgrade` at commit `69b03ea` (PR [DailybotHQ/deepworkplan-skill#36](https://github.com/DailybotHQ/deepworkplan-skill/pull/36)) with **zero local adaptations** — the previous copy was byte-identical to the v2.17.1 baseline, so this is a clean upgrade to v2.17.1+. Highlights: GUIDE split into focused guides with conditional loading, targeted upgrade mode (Phase 0), Final Review consolidation, `verify/conformance.sh` + bats suites, 14 onboarding presets, and — since the 2026-09-10 amendment — the AI Diff Reviewer local review as a required baseline component (installed by onboard Phase 7a, run by every Final Review's security pass; the CI Action stays opt-in) and resumable plan materialization (manifest first, README skeleton with the intended task list, recorded `PLAN_ANALYSIS.md`, status flipped last). This repository already satisfies the reviewer requirement (vendored skill + `.review/extension.md`). The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed.
+  **Current vendored provenance (2026-09-11, v4.0.0 release):** this copy mirrors the upstream `main` branch at commit `218e55e` (release `v4.0.0`) with **zero local adaptations**. Highlights: the Lite-first plan lifecycle (Lite plans for bounded work, Full task-file plans for longer work) on DWP standard 2.4.0, the `.dwp/drafts/` staging step removed entirely — `create` now materializes the plan directly, no separate draft artifact — and the new `spec/LITE_PLANS.md` document plus v2 manifest/state JSON Schemas. This repository keeps the AI Diff Reviewer local-only; it does not ship an AI Reviewer CI workflow. The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed.
 
 ### Local AI Diff Reviewer
 
@@ -317,6 +317,7 @@ pnpm run test:coverage      # Tests with coverage
 pnpm run images:optimize    # Process staged images
 pnpm run md:check           # Verify every HTML page has a matching .md for agents
 pnpm run md:check:strict    # Same as above; exits 1 on missing (for CI)
+pnpm run md:content-check   # Verify the .md actually carries equivalent content (not just exists)
 pnpm run i18n:check         # Verify translation parity across all 17 active languages
 pnpm run i18n:scaffold <code>  # Scaffold strings + content for a new language code
 pnpm run lighthouse         # Lighthouse CI audit (mobile)

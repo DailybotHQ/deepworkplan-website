@@ -1,7 +1,7 @@
 ---
 title: "Câu hỏi thường gặp — Deep Work Plan"
 description: "Câu trả lời cho các câu hỏi về Deep Work Plan: nó làm gì, cổng kiểm chứng và tiếp tục sau gián đoạn thế nào, so sánh với công cụ khác, và cách áp dụng."
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-11
 ---
 
 ## Câu hỏi thường gặp
@@ -22,6 +22,12 @@ Những nhà phát triển và nhóm giao công việc thật, nhiều bước c
 
 [Khởi động nhanh](https://deepworkplan.com/vi/quickstart)
 
+### Sự khác biệt giữa một kế hoạch Lite và một kế hoạch Full là gì?
+
+Đây là một lựa chọn về cách biểu diễn, không phải một sự đánh đổi về độ chặt chẽ. Mọi kế hoạch đều bắt đầu như một thư mục Lite: một README gọn gàng với các bản ghi tác vụ được neo (anchored), đã có thể thực thi được ngay, không phải một bản nháp dang dở. Lệnh `create` chỉ mở rộng thành các tệp tác vụ Full khi mức chi tiết hướng dẫn, các phụ thuộc hoặc hợp đồng của một tác vụ không vừa với một bản ghi gọn gàng có thể rà soát được; một yêu cầu rõ ràng cho một trong hai định dạng luôn được tôn trọng, và một kế hoạch Lite có thể được nâng cấp thành Full sau đó mà không mất công việc đã hoàn thành. Cả hai định dạng đều mang cùng tiêu chí chấp nhận, cổng kiểm chứng, bằng chứng và Final Review bắt buộc như nhau.
+
+[Đọc phương pháp luận](https://deepworkplan.com/vi/methodology)
+
 ### Nó là một công cụ, một framework hay một phương pháp luận?
 
 Một phương pháp luận được đóng gói thành skill cài đặt được. Không có server, không có tài khoản, không có định dạng độc quyền và không có runtime nào ngoài agent lập trình bạn đã dùng. Những gì được cài là các hướng dẫn cho agent đọc, một bộ nhỏ script shell để nhận diện ngữ cảnh và kiểm tra tính tuân thủ, cùng các quy ước mà repository của bạn áp dụng. Mọi thứ kế hoạch tạo ra đều là Markdown và JSON trong repository của bạn, đọc được mà không cần công cụ nào.
@@ -34,13 +40,31 @@ Bất kỳ agent nào đọc được các tệp của repository. Skill tuân t
 
 [Xem bộ kit](https://deepworkplan.com/vi/kit)
 
-## Cách một kế hoạch vận hành
-
 ### Tôi dùng nó như thế nào?
 
-Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx skills add DailybotHQ/deepworkplan-skill` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa bản nháp hoặc kế hoạch đang chạy; `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.
+Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx skills add DailybotHQ/deepworkplan-skill` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.
 
 [Khởi động nhanh](https://deepworkplan.com/vi/quickstart)
+
+### Chính xác thì những gì được cài đặt, và ở đâu?
+
+Agent skill được cài ở bất cứ đâu agent của bạn tải skill cấp dự án hoặc cấp người dùng. Sau đó, onboarding thích ứng chính repository: nó tạo mới hoặc hòa giải `AGENTS.md`, `docs/`, `.agents/` và không gian làm việc `.dwp/` được gitignore. Skill dạy agent phương pháp; repository giữ ngữ cảnh, bộ kit và bằng chứng kế hoạch mà các agent khác cần để tiếp tục.
+
+[Xem luồng áp dụng](https://deepworkplan.com/vi/init)
+
+### Deep Work Plan có yêu cầu Git không?
+
+Git được khuyến nghị cho repository vì lịch sử của nó là một phần của bề mặt khôi phục và rà soát, nhưng phương pháp luận cũng có thể chạy trong một không gian làm việc agent mà không cần repository Git. Trong trường hợp đó, tầng trạng thái đọc được bằng máy — gồm các điểm kiểm tra `state.json` và bản ghi cổng kiểm chứng — là bắt buộc, để việc khôi phục không phụ thuộc vào bản ghi hội thoại.
+
+[Đọc về các nguyên mẫu repository](https://deepworkplan.com/vi/spec/archetypes)
+
+### Sự khác biệt giữa một skill, một kế hoạch và một đặc tả sản phẩm là gì?
+
+Một skill mô tả cách agent thực hiện một quy trình có thể lặp lại. Một kế hoạch DWP mô tả một thay đổi cụ thể thông qua phạm vi, tiêu chí chấp nhận, cổng kiểm chứng và bằng chứng. Một đặc tả sản phẩm mô tả hành vi hiện tại của sản phẩm và tiến hóa qua các delta sau khi triển khai; skill và kế hoạch cũng là đặc tả, nhưng chúng mô tả quy trình và thay đổi chứ không duy trì hợp đồng sản phẩm chuẩn tắc đó.
+
+[Đọc đặc tả](https://deepworkplan.com/vi/spec/dwp-specification)
+
+## Cách một kế hoạch vận hành
 
 ### Các cổng kiểm chứng được triển khai thế nào? Chúng có cần con người phê duyệt không?
 
@@ -84,6 +108,18 @@ Tác vụ kết thúc bắt buộc duy nhất của mọi kế hoạch. Theo th�
 
 [Đặc tả](https://deepworkplan.com/vi/spec/dwp-specification)
 
+### Điều gì xảy ra khi một cổng kiểm chứng thất bại?
+
+Tác vụ được ghi nhận là bị chặn và agent dừng lại trước khi tuyên bố hoàn thành. Bạn có thể kiểm tra bằng chứng, sửa mã hoặc tinh chỉnh tác vụ, rồi tiếp tục; một lệnh thất bại là tín hiệu để giải quyết sự sai lệch, không phải giấy phép để làm yếu cổng kiểm chứng.
+
+[Đọc giao thức agent](https://deepworkplan.com/vi/spec/agent-protocol)
+
+### Một kế hoạch có thể chạy không giám sát qua đêm hoặc trong CI không?
+
+Có, khi kế hoạch đã được phê duyệt từ trước, mang tầng trạng thái bắt buộc và trao cho agent thẩm quyền có giới hạn. Một lượt chạy không giám sát phải dừng lại và ghi nhận một điểm chặn khi thực tế lệch khỏi kế hoạch, một cổng kiểm chứng thất bại ngoài phạm vi sửa chữa đã định, hoặc cần một phê duyệt hay thông tin xác thực mới.
+
+[Đọc giao thức chạy không giám sát](https://deepworkplan.com/vi/spec/agent-protocol)
+
 ## So sánh với các công cụ khác
 
 ### Nó khác các công cụ theo đặc tả như Spec Kit, OpenSpec hay Kiro thế nào?
@@ -94,7 +130,7 @@ Chúng giải quyết các vấn đề kề nhau. Các công cụ theo đặc t�
 
 ### Nó khác các công cụ quy trình agent như BMAD, Superpowers, Get Shit Done hay Gentle-AI thế nào?
 
-Những framework đó mang các phong cách làm việc mạnh: vai trò, nguyên tắc, các bước test trước, thói quen xác minh. Deep Work Plan khác cả hai và tập trung vào cái gì ở lại trong repository và cái gì kiểm tra được: một harness mà bất kỳ agent nào cũng đọc hiểu được khi mới vào, các tệp tác vụ với tiêu chí chấp nhận và cổng, trạng thái sống sót qua phiên, một công cụ kiểm tra tính tuân thủ với mã thoát thân thiện CI, và một phép đo công khai về số byte hướng dẫn mà mỗi luồng tải. Nó độc lập với công cụ ngay từ cấu trúc và không thêm dịch vụ, nhà cung cấp hay bí mật nào vào vòng lặp lõi. Trang so sánh cho thấy mỗi cách tiếp cận nằm ở đâu: tích hợp sẵn, tùy chọn hay ngoài phạm vi. Gentle-AI cấu hình các coding agent bạn đã dùng: bộ nhớ bền vững qua phiên (Engram), kỹ năng được chọn lọc, persona, máy chủ MCP, Spec-Driven Development tùy chọn, và đánh giá dựa trên bằng chứng tùy chọn (Receipt-Driven Development). Nó ghi vào thư mục cấu hình của từng agent và có thể lưu các artifact lập kế hoạch trong Engram, trong tệp OpenSpec, hoặc cả hai. Deep Work Plan cài vào chính repository — một harness mà bất kỳ agent nào cũng đọc hiểu được khi mới vào, các tệp tác vụ với tiêu chí chấp nhận và cổng, trạng thái trên đĩa có thể tiếp tục, một công cụ kiểm tra tính tuân thủ với mã thoát thân thiện CI, và sổ cái byte hướng dẫn đã công bố — mà không thêm dịch vụ, nhà cung cấp hay bí mật nào vào vòng lặp lõi. Hai tầng có thể đi cùng nhau: Gentle-AI trang bị agent; Deep Work Plan giúp công việc dài bền vững và kiểm tra được trong repo.
+Các framework quy trình làm việc cho agent như BMAD, Superpowers và Get Shit Done mang lại phong cách làm việc mạnh mẽ: vai trò, nguyên tắc, các bước test-first, thói quen xác minh. Gentle-AI nằm ở một hạng mục lân cận với vai trò là bộ cấu hình hệ sinh thái agent: nó trang bị cho các coding agent bạn đã dùng bộ nhớ bền vững qua các phiên (Engram), các skill được tuyển chọn, persona, máy chủ MCP, Spec-Driven Development tùy chọn và đánh giá dựa trên bằng chứng tùy chọn (Receipt-Driven Development), bằng cách ghi vào thư mục cấu hình của từng agent. Deep Work Plan khác cả hai: nó tập trung vào những gì còn lại trong repository và những gì có thể kiểm tra được — một harness mà bất kỳ agent nào cũng đọc được ngay, các tệp task với tiêu chí chấp nhận và gate, trạng thái tồn tại qua một phiên, một bộ kiểm tra tuân thủ với mã thoát thân thiện CI, và một phép đo được công bố về số byte hướng dẫn mà mỗi flow tải. Nó độc lập với công cụ theo thiết kế và không thêm bất kỳ dịch vụ, nhà cung cấp hay bí mật nào vào vòng lặp cốt lõi. Các lớp có thể cùng tồn tại: các framework và Gentle-AI định hình cách agent hoạt động; Deep Work Plan làm cho công việc dài hạn bền vững và có thể kiểm chứng bên trong repository. Trang so sánh cho thấy mỗi cách tiếp cận được tích hợp sẵn, tùy chọn, hay nằm ngoài phạm vi.
 
 [Xem trang so sánh](https://deepworkplan.com/vi/compare)
 
@@ -111,6 +147,18 @@ Các chế độ lập kế hoạch có sẵn rất hữu ích, và Deep Work Pl
 Onboarding không phá hủy gì: nó phát hiện `AGENTS.md`, `docs/`, `.agents/` hay `CLAUDE.md` sẵn có, hòa giải thay vì ghi đè, và hỏi trước khi thay thế bất cứ thứ gì. Nó ghi chỉ mục `AGENTS.md` với các lệnh thật, một cây `docs/` có lý lẽ, tài liệu cho từng mô-đun, bộ kit `.agents/` với các lệnh `dwp-*` mỏng, một vùng xuất `.dwp/` được gitignore, một bản đồ kiểm thử đã xác minh, và phần review mã cục bộ bắt buộc (skill AI Diff Reviewer cùng một tiện ích mở rộng review được điều chỉnh theo repo). Sau đó nó chạy tự kiểm tra và công cụ kiểm tra tính tuân thủ để bạn thấy cái gì đã được tạo. Một repository đã onboard ở phiên bản sớm hơn sẽ nhận một bản nâng cấp có mục tiêu, chỉ thay đổi phần còn thiếu.
 
 [Điểm cuối áp dụng](https://deepworkplan.com/vi/init)
+
+### Tôi có thể dùng phương pháp luận cốt lõi mà không cài add-on nào không?
+
+Có. Add-on là các tầng tùy chọn, và một repository không dùng add-on nào vẫn tuân thủ DWP đầy đủ. Devcontainer, báo cáo Dailybot, nâng cấp phụ thuộc, hỗ trợ design-system và review CI tùy chọn chỉ được đề xuất khi chúng phù hợp với repository của bạn và bạn chấp nhận chúng một cách rõ ràng.
+
+[Xem các add-on](https://deepworkplan.com/vi/spec/addons)
+
+### Nếu repository của tôi chưa có test hay linting thì sao?
+
+DWP không coi việc thiếu một toolchain là một lối thoát miễn trừ. Trong quá trình onboarding, agent đề xuất một thiết lập kiểm chứng phù hợp với stack, ghi các lệnh đó vào tài liệu repository và dùng chính các lệnh đó làm mục tiêu cho các cổng kiểm chứng sau này; đề xuất vẫn hiển thị để bạn rà soát.
+
+[Đọc giao thức agent](https://deepworkplan.com/vi/spec/agent-protocol)
 
 ### Chi phí là bao nhiêu, và hiệu suất được đo thế nào?
 

@@ -1,7 +1,7 @@
 ---
 title: Giao thức agent
 description: "Hợp đồng hành vi quy phạm cho các agent lập trình AI: khởi tạo, lập kế hoạch, thực thi, an toàn và các hồ sơ thực thi — vận hành tương tác so với không có giám sát."
-order: 3
+order: 4
 lang: vi
 section: Protocol
 ---
@@ -93,13 +93,13 @@ Mọi kế hoạch thực thi dưới đúng một trong hai hồ sơ. Hồ sơ 
 
 ### Tương tác (mặc định)
 
-Một con người hiện diện trong phiên. Agent đề xuất, con người chấp thuận bản nháp đã tinh chỉnh, agent thực thi từng tác vụ, và sự mơ hồ được giải quyết bằng cách hỏi. Tất cả các phần giao thức ở trên mô tả hồ sơ tương tác.
+Một con người hiện diện trong phiên. Agent đề xuất, con người chấp thuận trực tiếp kế hoạch đã được vật liệu hóa, agent thực thi từng tác vụ, và sự mơ hồ được giải quyết bằng cách hỏi. Tất cả các phần giao thức ở trên mô tả hồ sơ tương tác.
 
 ### Không có giám sát
 
 Kế hoạch chạy mà không có con người theo dõi — một lượt theo lịch của nền tảng tự chủ, một cloud session, một lần chạy qua đêm. Thực thi không có giám sát là tự nguyện theo từng kế hoạch và PHẢI thỏa mãn tất cả những điều sau:
 
-- **Kế hoạch đã được chấp thuận trước.** Kế hoạch được chấp thuận trước bất kỳ lượt không có giám sát nào — trong chế độ hướng dẫn, con người chấp thuận bản nháp đã tinh chỉnh; trong chế độ tin cậy, chỉ thị `trust` rõ ràng của nhà phát triển là sự chấp thuận được ghi lại. Một agent KHÔNG ĐƯỢC tạo và thực thi một kế hoạch không có giám sát trong một lượt mà thiếu một trong hai; chấp thuận kế hoạch là điểm kiểm soát của con người.
+- **Kế hoạch đã được chấp thuận trước.** Kế hoạch được chấp thuận trước bất kỳ lượt không có giám sát nào — trong chế độ hướng dẫn, con người chấp thuận trực tiếp kế hoạch đã được vật liệu hóa; trong chế độ tin cậy, chỉ thị `trust` rõ ràng của nhà phát triển là sự chấp thuận được ghi lại. Một agent KHÔNG ĐƯỢC tạo và thực thi một kế hoạch không có giám sát trong một lượt mà thiếu một trong hai; chấp thuận kế hoạch là điểm kiểm soát của con người.
 - **Lớp trạng thái BẮT BUỘC.** Kế hoạch PHẢI mang `manifest.json` và `state.json` để bất kỳ phiên nào sau — agent hay con người — đều có thể đọc tiến độ chính xác mà không cần phát lại bản chép. Xem [Trạng thái kế hoạch](/spec/plan-state).
 - **Quyền hạn giới hạn.** Quyền hạn của agent là kế hoạch: nó KHÔNG ĐƯỢC mở rộng phạm vi, KHÔNG ĐƯỢC thực hiện các hành động phá hủy hoặc hướng ra ngoài mà kế hoạch không ủy quyền rõ ràng, và KHÔNG ĐƯỢC kéo dài hướng dẫn của tác vụ để bao gồm công việc được khám phá nhưng chưa lên kế hoạch — công việc được khám phá được ghi lại cho lần `refine` tiếp theo, không được tùy hứng thực hiện.
 - **Một tác vụ nguyên tử mỗi lượt, cổng luôn áp dụng.** Mỗi lượt chạy Giao thức Tiếp tục DWP, thực thi tối đa tác vụ tiếp theo, vượt qua cổng kiểm chứng của nó, hoàn tất theo giao thức hoàn tất tác vụ, và nhường. Một cổng thất bại là điều kiện dừng, không bao giờ là "tiếp tục dù sao".

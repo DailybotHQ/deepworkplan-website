@@ -1,7 +1,12 @@
 import type { CollectionEntry } from 'astro:content';
+import {
+  type Alternative,
+  CAPABILITY_IDS,
+  type CellValue,
+} from '@/lib/compare-data';
 import { REPO_URLS } from '@/lib/constants/repos';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
-import { getTranslations } from '@/lib/translations';
+import { getTranslations, type SiteTranslations } from '@/lib/translations';
 
 const SITE_URL = 'https://deepworkplan.com';
 
@@ -75,6 +80,7 @@ function generateSiteNavigation(lang: string): string {
       links: [
         { label: t.nav.compare, path: '/compare' },
         { label: t.nav.faq, path: '/faq' },
+        { label: t.nav.changelog, path: '/changelog' },
       ],
     },
     {
@@ -119,6 +125,28 @@ function buildUrlPrefix(lang: string): string {
   return getUrlPrefix(lang as Language);
 }
 
+/** Bare MDX `import … from '…'` lines — never legitimate prose. */
+const MDX_IMPORT_LINE = /^import\s+.+\s+from\s+['"].+['"];?\s*$/gm;
+/** JSX-style component tags (capitalized tag name), e.g. `<RepoAsHarness lang="en" />`. */
+const MDX_COMPONENT_TAG = /<\/?[A-Z][A-Za-z0-9]*(?:\s[^>]*)?\/?>/g;
+
+/**
+ * Strip MDX-only syntax (import statements, JSX-style diagram component
+ * tags) from a raw entry body before serializing it to agent-facing
+ * Markdown. Content collections render these to real diagrams in HTML;
+ * left unstripped, the Markdown mirror leaked the raw source instead
+ * (`analysis_results/MD_HTML_CONTENT_PARITY.md`, PLAN_site_v4_seo_aeo_audit
+ * Task 6/7). Plain Markdown/prose is unaffected — both patterns only match
+ * MDX-specific syntax that never appears in ordinary body text.
+ */
+export function stripMdxArtifacts(body: string): string {
+  return body
+    .replace(MDX_IMPORT_LINE, '')
+    .replace(MDX_COMPONENT_TAG, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 /**
  * Serialize a static page to agent-friendly Markdown.
  * Returns clean Markdown with metadata header + page body.
@@ -152,7 +180,7 @@ export function serializePageToAgentMarkdown(
   lines.push('');
 
   if (page.body) {
-    lines.push(page.body.trim());
+    lines.push(stripMdxArtifacts(page.body));
   }
 
   lines.push(generateSiteNavigation(lang));
@@ -205,8 +233,177 @@ export function serializeReaderEntryToAgentMarkdown(
   lines.push('');
 
   if (entry.body) {
-    lines.push(entry.body.trim());
+    lines.push(stripMdxArtifacts(entry.body));
   }
+
+  lines.push(generateSiteNavigation(lang));
+
+  return `${lines.join('\n')}\n`;
+}
+
+interface ChangelogSerializeEntry {
+  id?: string;
+  body?: string;
+  data: {
+    title: string;
+    description: string;
+    date: Date;
+    version: string;
+    sourceLabel?: string;
+    sourceUrl?: string;
+    sourceLinks?: { label: string; url: string }[];
+  };
+}
+
+export function serializeChangelogIndexToAgentMarkdown(
+  entries: ChangelogSerializeEntry[],
+  lang: string
+): string {
+  const t = getTranslations(lang as Language);
+  const prefix = buildUrlPrefix(lang);
+  const lines = [
+    `# ${t.changelogPage.title}`,
+    '',
+    `> ${t.changelogPage.meta.description}`,
+    '',
+    `Language: ${lang}`,
+    `Canonical: ${SITE_URL}${prefix}/changelog`,
+    buildMarkdownAccessLine(lang),
+    '',
+    '---',
+    '',
+  ];
+
+  for (const entry of entries) {
+    const slug = entry.id?.replace(`${lang}/`, '') ?? '';
+    lines.push(
+      `## [${entry.data.title}](${prefix}/changelog/${slug})`,
+      '',
+      `> ${entry.data.description}`,
+      '',
+      `Date: ${formatDate(entry.data.date)}`,
+      `Version: ${entry.data.version}`,
+      ''
+    );
+  }
+
+  lines.push(generateSiteNavigation(lang));
+  return `${lines.join('\n')}\n`;
+}
+
+export function serializeChangelogEntryToAgentMarkdown(
+  entry: ChangelogSerializeEntry,
+  options: { slug: string; lang: string; index?: boolean }
+): string {
+  const { slug, lang, index = false } = options;
+  const prefix = buildUrlPrefix(lang);
+  const pagePath = index ? '/changelog' : `/changelog/${slug}`;
+  const lines = [
+    `# ${entry.data.title}`,
+    '',
+    `> ${entry.data.description}`,
+    '',
+    `Language: ${lang}`,
+    `Canonical: ${SITE_URL}${prefix}${pagePath}`,
+    buildMarkdownAccessLine(lang),
+    `Date: ${formatDate(entry.data.date)}`,
+    `Version: ${entry.data.version}`,
+    '',
+    '---',
+    '',
+  ];
+
+  if (entry.body) lines.push(stripMdxArtifacts(entry.body), '');
+  if (entry.data.sourceLinks?.length) {
+    lines.push(
+      'Sources:',
+      ...entry.data.sourceLinks.map(
+        (source) => `- [${source.label}](${source.url})`
+      ),
+      ''
+    );
+  } else if (entry.data.sourceLabel && entry.data.sourceUrl) {
+    lines.push(
+      `Source: [${entry.data.sourceLabel}](${entry.data.sourceUrl})`,
+      ''
+    );
+  }
+  lines.push(generateSiteNavigation(lang));
+  return `${lines.join('\n')}\n`;
+}
+
+const CELL_VALUE_LABEL: Record<CellValue, (t: SiteTranslations) => string> = {
+  'built-in': (t) => t.comparePage.howToRead.values.builtIn,
+  optional: (t) => t.comparePage.howToRead.values.optional,
+  'not-in-scope': (t) => t.comparePage.howToRead.values.notInScope,
+};
+
+/**
+ * Serialize a single `/compare/{slug}` alternative-detail page to
+ * agent-facing Markdown. Mirrors what the HTML page renders, including the
+ * per-capability comparison table — an earlier version of this serializer
+ * omitted the table entirely (`analysis_results/MD_HTML_CONTENT_PARITY.md`,
+ * PLAN_site_v4_seo_aeo_audit Task 6/7), silently dropping the page's core
+ * factual content (13 capability rows) from the Markdown mirror.
+ */
+export function serializeCompareAlternativeToAgentMarkdown(
+  alternative: Alternative,
+  dwp: Alternative,
+  lang: string
+): string {
+  const t = getTranslations(lang as Language);
+  const c = t.comparePage;
+  const details = c.alternatives[alternative.id];
+  const prefix = buildUrlPrefix(lang);
+  const canonicalUrl = `${SITE_URL}${prefix}/compare/${alternative.id}`;
+
+  const lines: string[] = [];
+  lines.push(`# ${details.name} × Deep Work Plan`);
+  lines.push('');
+  lines.push(`> ${details.whatItDoesWell}`);
+  lines.push('');
+  lines.push(`Language: ${lang}`);
+  lines.push(`Canonical: ${canonicalUrl}`);
+  lines.push(buildMarkdownAccessLine(lang));
+  lines.push('');
+  lines.push('---');
+  lines.push('');
+
+  lines.push(`## ${details.name}`);
+  lines.push('');
+  lines.push(details.whatItDoesWell);
+  lines.push('');
+  lines.push(details.audience);
+  lines.push('');
+
+  lines.push(`## ${c.profile.capabilityTitle}`);
+  lines.push('');
+  lines.push(c.matrix.caption);
+  lines.push('');
+  const header = [
+    c.matrix.capabilityColumn,
+    c.alternatives.dwp.name,
+    details.name,
+  ];
+  lines.push(`| ${header.join(' | ')} |`);
+  lines.push(`|${header.map(() => '---').join('|')}|`);
+  for (const capability of CAPABILITY_IDS) {
+    const row = [
+      c.capabilities[capability].label,
+      CELL_VALUE_LABEL[dwp.cells[capability]](t),
+      CELL_VALUE_LABEL[alternative.cells[capability]](t),
+    ];
+    lines.push(`| ${row.join(' | ')} |`);
+  }
+  lines.push('');
+
+  lines.push(`## ${c.dwpStrengths.title}`);
+  lines.push('');
+  for (const item of c.dwpStrengths.items) {
+    lines.push(`- **${item.title}:** ${item.body}`);
+  }
+  lines.push('');
+  lines.push(`[${c.profile.sourceLabel}](${alternative.docsUrl})`);
 
   lines.push(generateSiteNavigation(lang));
 

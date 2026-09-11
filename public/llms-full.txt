@@ -44,6 +44,7 @@ Deep Work Plan grew out of real engineering work at Dailybot and is now maintain
 - [Methodology](https://deepworkplan.com/methodology) — The narrative methodology: what DWP is, its principles, the workflow, and how to adopt it
 - [Specification](https://deepworkplan.com/spec) — The readable, normative DWP standard: task anatomy, validation gates, completion protocol, mandatory final tasks, archetypes, and addons
 - [Kit](https://deepworkplan.com/kit) — The kit catalog: presets, adapters, and commands available for installing DWP into a repository
+- [Changelog](https://deepworkplan.com/changelog) — A source-backed timeline of the releases and design decisions behind Deep Work Plan (e.g. v3's token efficiency, v4's Lite-first plans)
 - [Examples](https://deepworkplan.com/examples) — Worked examples that show the methodology applied to real engineering work
 - [Quickstart](https://deepworkplan.com/quickstart) — A short path to getting DWP running in a repository
 - [Compare](https://deepworkplan.com/compare) — Deep Work Plan compared with spec-driven tools, agent workflow frameworks and vendor-native plan modes: each described on its own terms, three neutral capability values, official sources, a review date and an invitation to correct

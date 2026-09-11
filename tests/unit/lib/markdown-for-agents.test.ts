@@ -1,9 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
+import { CAPABILITY_IDS, getAlternative } from '@/lib/compare-data';
 import {
   buildMarkdownAccessLine,
+  serializeCompareAlternativeToAgentMarkdown,
   serializePageToAgentMarkdown,
   serializeReaderEntryToAgentMarkdown,
+  stripMdxArtifacts,
 } from '@/lib/markdown-for-agents';
 
 // ─── Mock Data ─────────────────────────────────────────
@@ -172,5 +175,166 @@ describe('serializeReaderEntryToAgentMarkdown', () => {
 
     expect(result).toContain(PT_ACCESS_LINE);
     expect(result).toContain('Accept: text/markdown');
+  });
+
+  it('strips leaked MDX import statements and diagram component tags from the body', () => {
+    const result = serializeReaderEntryToAgentMarkdown(
+      {
+        data: {
+          title: 'Manifesto',
+          description: 'What a Deep Work Plan is.',
+        },
+        body: [
+          "import RepoAsHarness from '@/components/diagrams/methodology/RepoAsHarness.astro';",
+          '',
+          '# Manifesto',
+          '',
+          'A Deep Work Plan is a markdown-only methodology.',
+          '',
+          '<RepoAsHarness lang="en" class="not-prose my-10" />',
+          '',
+          '## Deep work, for agents',
+        ].join('\n'),
+      },
+      { basePath: 'methodology', slug: '01-manifesto', lang: 'en' }
+    );
+
+    expect(result).not.toContain('import RepoAsHarness');
+    expect(result).not.toContain('<RepoAsHarness');
+    expect(result).toContain(
+      'A Deep Work Plan is a markdown-only methodology.'
+    );
+    expect(result).toContain('## Deep work, for agents');
+  });
+});
+
+describe('stripMdxArtifacts', () => {
+  it('removes a bare MDX import line', () => {
+    const body = [
+      "import CoreLoop from '@/components/diagrams/methodology/CoreLoop.astro';",
+      '',
+      'Regular prose about the core loop.',
+    ].join('\n');
+
+    const result = stripMdxArtifacts(body);
+
+    expect(result).not.toContain('import CoreLoop');
+    expect(result).toContain('Regular prose about the core loop.');
+  });
+
+  it('removes a self-closing JSX-style component tag but keeps surrounding prose', () => {
+    const body = [
+      'Before the diagram.',
+      '',
+      '<TaskAnatomy lang="en" class="not-prose my-10" />',
+      '',
+      'After the diagram.',
+    ].join('\n');
+
+    const result = stripMdxArtifacts(body);
+
+    expect(result).not.toContain('<TaskAnatomy');
+    expect(result).toContain('Before the diagram.');
+    expect(result).toContain('After the diagram.');
+  });
+
+  it('removes both an import line and multiple component tags in the same body', () => {
+    const body = [
+      "import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';",
+      '# Create',
+      '<CmdCreate lang="en" class="not-prose my-8" />',
+      'Some more text.',
+      '<CmdCreate lang="en" variant="compact" />',
+    ].join('\n');
+
+    const result = stripMdxArtifacts(body);
+
+    expect(result).not.toContain('import CmdCreate');
+    expect(result).not.toContain('<CmdCreate');
+    expect(result).toContain('# Create');
+    expect(result).toContain('Some more text.');
+  });
+
+  it('leaves ordinary Markdown prose untouched when there is nothing to strip', () => {
+    const body =
+      '# Title\n\nOrdinary prose with a [link](https://example.com) and **bold** text.';
+
+    expect(stripMdxArtifacts(body)).toBe(body);
+  });
+
+  it('does not touch standard lowercase HTML tags used in content', () => {
+    const body =
+      'Some prose with a <br> line break and <img src="x.png" alt="">.';
+
+    expect(stripMdxArtifacts(body)).toBe(body);
+  });
+
+  it('collapses the blank lines left behind by stripped lines', () => {
+    const body = [
+      "import Foo from '@/components/diagrams/Foo.astro';",
+      '',
+      '',
+      '<Foo lang="en" />',
+      '',
+      '',
+      'Text after.',
+    ].join('\n');
+
+    const result = stripMdxArtifacts(body);
+
+    expect(result).not.toMatch(/\n{3,}/);
+    expect(result).toContain('Text after.');
+  });
+});
+
+describe('serializeCompareAlternativeToAgentMarkdown', () => {
+  const dwp = getAlternative('dwp');
+  const amazonKiro = getAlternative('amazon-kiro');
+
+  it('includes the capability comparison table, not just the prose summary', () => {
+    const result = serializeCompareAlternativeToAgentMarkdown(
+      amazonKiro,
+      dwp,
+      'en'
+    );
+
+    expect(result).toContain('Capability snapshot');
+    // Every capability row label must appear — this is the exact content
+    // gap PLAN_site_v4_seo_aeo_audit Task 6/7 found: the table was
+    // entirely missing from the Markdown mirror.
+    expect(CAPABILITY_IDS.length).toBeGreaterThan(0);
+    expect(result).toContain('| Capability | Deep Work Plan | Amazon Kiro |');
+    expect(result).toContain('Works with any coding agent');
+    expect(result).toContain('Built in');
+  });
+
+  it('includes the canonical URL, access line, and official docs link', () => {
+    const result = serializeCompareAlternativeToAgentMarkdown(
+      amazonKiro,
+      dwp,
+      'en'
+    );
+
+    expect(result).toContain(
+      'Canonical: https://deepworkplan.com/compare/amazon-kiro'
+    );
+    expect(result).toContain('Accept: text/markdown');
+    expect(result).toContain(`[Official documentation](${amazonKiro.docsUrl})`);
+  });
+
+  it('localizes the table and prose for a non-default language', () => {
+    const result = serializeCompareAlternativeToAgentMarkdown(
+      amazonKiro,
+      dwp,
+      'es'
+    );
+
+    expect(result).toContain(
+      'Canonical: https://deepworkplan.com/es/compare/amazon-kiro'
+    );
+    expect(result).toContain('Accept: text/markdown');
+    // Spanish "Capability snapshot" label — confirms the table heading is
+    // localized, not hardcoded English.
+    expect(result).not.toContain('Capability snapshot');
   });
 });

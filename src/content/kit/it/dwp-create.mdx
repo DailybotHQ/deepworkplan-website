@@ -28,9 +28,9 @@ Crea un nuovo Deep Work Plan da un obiettivo di alto livello.
 
 ## Modalità
 
-`dwp-create` usa per impostazione predefinita la modalità **guidata**: raccoglie il contesto, scrive un’unica bozza raffinata, **gliela mostra e chiede conferma prima di generare il piano finale** — così Lei legge sempre il piano prima che venga creato. È l’impostazione predefinita consigliata, soprattutto le prime volte.
+`dwp-create` usa per impostazione predefinita la modalità **guidata**: raccoglie il contesto, esegue l’analisi e materializza direttamente un piano Lite — una proposta compatta e già eseguibile, non una bozza usa e getta — **glielo mostra e chiede se mantenerlo come Lite, promuoverlo a un piano Full a file di attività, modificarlo o fermarsi** — così Lei legge sempre il piano reale prima di decidere. È l’impostazione predefinita consigliata, soprattutto le prime volte.
 
-Aggiunga **`trust`** (o `auto`) come ultima parola per saltare le conferme — l’agente scrive la bozza raffinata e passa direttamente al piano finale:
+Aggiunga **`trust`** (o `auto`) come ultima parola per saltare questa revisione — l’agente passa direttamente a un piano pre-approvato e pronto all’esecuzione (Lite o Full, scelto in base agli stessi segnali):
 
 ```
 /dwp-create <goal> trust
@@ -42,7 +42,7 @@ La modalità trust è la scorciatoia per utenti esperti, una volta che si fida d
 
 1. Analizza l’obiettivo e il contesto del repository.
 2. Pone domande di chiarimento se ambiguo.
-3. Scrive una bozza raffinata in `.dwp/drafts/` (in modalità guidata, la revisiona e la conferma).
+3. Materializza il piano direttamente sotto `.dwp/plans/PLAN_<name>/` — un piano Lite per impostazione predefinita, o Full per lavori più grandi (in modalità guidata, lo revisiona e sceglie se mantenerlo come Lite, promuoverlo a Full, modificarlo o fermarsi).
 4. Scompone in attività sequenziali e scrive il README, i file delle attività e PROGRESS.
 5. Conclude con il Final Review (passaggio di sicurezza, validazione dello stato finale, riconciliazione delle skill).
 

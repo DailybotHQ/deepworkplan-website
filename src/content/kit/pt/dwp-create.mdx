@@ -28,9 +28,9 @@ O `dwp-create` recebe um objetivo de alto nível e o transforma em um plano estr
 
 ## Modos
 
-O `dwp-create` usa por padrão o modo **guiado**: ele reúne contexto, escreve um único rascunho refinado, **mostra-o a você e pede confirmação antes de gerar o plano final** — para que você sempre leia o plano antes de ele ser criado. Esse é o padrão recomendado, especialmente nas primeiras vezes.
+O `dwp-create` usa por padrão o modo **guiado**: reúne contexto, executa a análise, e materializa diretamente um plano Lite — uma proposta compacta que já é executável, não um rascunho descartável — **mostra-o a você e pergunta se deseja mantê-lo como Lite, promovê-lo a um plano Full por arquivo de tarefa, editá-lo ou parar** — para que você sempre leia o plano real antes de decidir. Esse é o padrão recomendado, especialmente nas primeiras vezes.
 
-Acrescente **`trust`** (ou `auto`) como última palavra para pular as confirmações — o agente escreve o rascunho refinado e vai direto para o plano final:
+Acrescente **`trust`** (ou `auto`) como última palavra para pular essa revisão — o agente vai direto para um plano pré-aprovado e pronto para executar (Lite ou Full, escolhido pelos mesmos sinais):
 
 ```
 /dwp-create <goal> trust
@@ -42,7 +42,7 @@ O modo trust é o atalho para usuários avançados, depois que você confia no f
 
 1. Analisar o objetivo e o contexto do repositório.
 2. Fazer perguntas de esclarecimento se houver ambiguidade.
-3. Escrever um rascunho refinado em `.dwp/drafts/` (no modo guiado, revisá-lo e confirmá-lo).
+3. Materializar o plano diretamente em `.dwp/plans/PLAN_<name>/` — um plano Lite por padrão, ou Full para trabalhos maiores (no modo guiado, revisá-lo e escolher mantê-lo como Lite, promovê-lo a Full, editá-lo ou parar).
 4. Decompor em tarefas sequenciais e escrever o README, os arquivos de tarefa e o PROGRESS.
 5. Terminar com o Final Review (passe de segurança, validação do estado final, reconciliação de skills).
 

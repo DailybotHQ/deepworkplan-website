@@ -34,6 +34,10 @@ import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
 4. task table अपडेट करें।
 5. दर्ज करें कि क्या बदला और क्यों।
 
+## एक Lite योजना को Full में प्रोन्नत करना
+
+`/dwp-refine promote {plan_name}` एक Lite योजना के आधिकारिक प्रतिनिधित्व को README के इनलाइन task रिकॉर्ड से बदलकर प्रति-task फ़ाइलों में ले जाता है, दायरा बदले बिना पूर्ण किए गए काम और task ID को सुरक्षित रखते हुए। प्रोन्नति केवल प्रतिनिधित्व से संबंधित है — यह कभी execute को कॉल नहीं करती। Full योजनाएँ स्वतः वापस Lite में अवनत नहीं होतीं।
+
 ## उपनाम
 
 - `dwp:refine`

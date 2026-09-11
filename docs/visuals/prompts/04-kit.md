@@ -112,12 +112,12 @@ per command. Negative boilerplate (STYLE_GUIDE §9) applies to every one.
 - **Purpose / trust rationale:** Shows create turns a goal into a structured plan on disk.
 - **Aspect & dimensions:** 16:9 · 880 × 495 · @2x (1760 × 990)
 - **Light/dark strategy:** transparent (invertible)
-- **Prompt:** Use the shared skeleton with: kicker **"/dwp-create"**; INPUT = **"GOAL + CONTEXT"** (a target glyph); PROCESS = **"DECOMPOSE → REFINED DRAFT"** (branching glyph); OUTPUT = **"PLAN ON DISK"** (a `PLAN_<name>/` folder glyph, oxblood).
-- **In-image text (EN):** /dwp-create · GOAL + CONTEXT · DECOMPOSE → REFINED DRAFT · PLAN ON DISK
-- **In-image text (ES):** /dwp-create · OBJETIVO + CONTEXTO · DESCOMPONER → BORRADOR REFINADO · PLAN EN DISCO
+- **Prompt:** Use the shared skeleton with: kicker **"/dwp-create"**; INPUT = **"GOAL + CONTEXT"** (a target glyph); PROCESS = **"DECOMPOSE → MATERIALIZE PLAN"** (branching glyph); OUTPUT = **"PLAN ON DISK"** (a `PLAN_<name>/` folder glyph, oxblood).
+- **In-image text (EN):** /dwp-create · GOAL + CONTEXT · DECOMPOSE → MATERIALIZE PLAN · PLAN ON DISK
+- **In-image text (ES):** /dwp-create · OBJETIVO + CONTEXTO · DESCOMPONER → MATERIALIZAR PLAN · PLAN EN DISCO
 - **Suggested asset path:** `public/images/visuals/kit/cmd-create.webp` (+ `-es`)
-- **Alt text (EN):** Input-process-output figure for dwp-create: a goal and context are decomposed into a refined draft, producing a plan on disk.
-- **Alt text (ES):** Figura entrada-proceso-salida de dwp-create: un objetivo y contexto se descomponen en un borrador refinado, produciendo un plan en disco.
+- **Alt text (EN):** Input-process-output figure for dwp-create: a goal and context are decomposed and materialized directly into a plan on disk.
+- **Alt text (ES):** Figura entrada-proceso-salida de dwp-create: un objetivo y contexto se descomponen y se materializan directamente en un plan en disco.
 - **Caption (EN):** `/dwp-create` turns a goal into an ordered plan.
 - **Caption (ES):** `/dwp-create` convierte un objetivo en un plan ordenado.
 - **Integration note:** `Figure` at the top of the dwp-create doc. `width="880" height="495"`.
@@ -147,15 +147,15 @@ per command. Negative boilerplate (STYLE_GUIDE §9) applies to every one.
 
 - **Target surface:** `src/content/kit/en/dwp-refine.md` → top of the doc, rendered at `/kit/dwp-refine`.
 - **Type:** diagram · **Priority:** medium
-- **Purpose / trust rationale:** Shows refine modifies a draft or plan while preserving completed work.
+- **Purpose / trust rationale:** Shows refine modifies a Lite or Full plan while preserving completed work.
 - **Aspect & dimensions:** 16:9 · 880 × 495 · @2x (1760 × 990)
 - **Light/dark strategy:** transparent (invertible)
-- **Prompt:** Shared skeleton with: kicker **"/dwp-refine"**; INPUT = **"DRAFT OR PLAN"** (document glyph); PROCESS = **"MODIFY · PRESERVE DONE TASKS"** (an edit glyph beside locked/checked tasks); OUTPUT = **"REVISED PLAN"** (updated folder, oxblood).
-- **In-image text (EN):** /dwp-refine · DRAFT OR PLAN · MODIFY · PRESERVE DONE TASKS · REVISED PLAN
-- **In-image text (ES):** /dwp-refine · BORRADOR O PLAN · MODIFICAR · PRESERVAR TAREAS HECHAS · PLAN REVISADO
+- **Prompt:** Shared skeleton with: kicker **"/dwp-refine"**; INPUT = **"LITE OR FULL PLAN"** (document glyph); PROCESS = **"MODIFY · PRESERVE DONE TASKS"** (an edit glyph beside locked/checked tasks); OUTPUT = **"REVISED PLAN"** (updated folder, oxblood).
+- **In-image text (EN):** /dwp-refine · LITE OR FULL PLAN · MODIFY · PRESERVE DONE TASKS · REVISED PLAN
+- **In-image text (ES):** /dwp-refine · PLAN LITE O FULL · MODIFICAR · PRESERVAR TAREAS HECHAS · PLAN REVISADO
 - **Suggested asset path:** `public/images/visuals/kit/cmd-refine.webp` (+ `-es`)
-- **Alt text (EN):** Input-process-output figure for dwp-refine: a draft or plan is modified while completed tasks are preserved, producing a revised plan.
-- **Alt text (ES):** Figura entrada-proceso-salida de dwp-refine: un borrador o plan se modifica preservando las tareas completadas, produciendo un plan revisado.
+- **Alt text (EN):** Input-process-output figure for dwp-refine: a Lite or Full plan is modified while completed tasks are preserved, producing a revised plan.
+- **Alt text (ES):** Figura entrada-proceso-salida de dwp-refine: un plan Lite o Full se modifica preservando las tareas completadas, produciendo un plan revisado.
 - **Caption (EN):** `/dwp-refine` edits the plan without losing completed work.
 - **Caption (ES):** `/dwp-refine` edita el plan sin perder el trabajo completado.
 - **Integration note:** `Figure` at the top of the dwp-refine doc. `width="880" height="495"`.

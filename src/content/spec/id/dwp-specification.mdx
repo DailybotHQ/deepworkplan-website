@@ -11,9 +11,9 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP specification
 
-**Versi 2.3.0. Status: Stabil.** Dokumen ini adalah spesifikasi normatif untuk metodologi Deep Work Plan (DWP). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
+**Versi 2.4.0. Status: Stabil.** Dokumen ini adalah spesifikasi normatif untuk metodologi Deep Work Plan (DWP). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
-> **Bersifat menambah pada revisi ini, tanpa perubahan yang merusak.** (1) Bagian **Touched Surface** — kontrak antara apa yang diubah sebuah tugas dan apa yang harus divalidasi, dengan pemilihan gate berdasarkan kelas risiko (isolated / seam / shared-core / unknown); (2) validasi penuh menjadi **persyaratan status akhir** yang dijalankan dalam satu-satunya **Final Review** wajib milik rencana, dengan aturan penggunaan-ulang bukti yang eksplisit; (3) **keputusan skills per-tugas** berpindah ke dalam tugas pemiliknya, dan Executive Report menjadi **opsional, atas permintaan**; (4) sebuah **alur create yang sadar-mode** — mode trust melakukan materialisasi secara langsung sambil tetap menjalankan analisis dan pemeriksaan kualitas; dan (5) sebuah **matriks kompatibilitas** yang eksplisit: rencana dan repositori dari versi sebelumnya tetap konforman.
+> **Bersifat menambah pada revisi ini, tanpa perubahan yang merusak.** (1) Bagian **Touched Surface** — kontrak antara apa yang diubah sebuah tugas dan apa yang harus divalidasi, dengan pemilihan gate berdasarkan kelas risiko (isolated / seam / shared-core / unknown); (2) validasi penuh menjadi **persyaratan status akhir** yang dijalankan dalam satu-satunya **Final Review** wajib milik rencana, dengan aturan penggunaan-ulang bukti yang eksplisit; (3) **keputusan skills per-tugas** berpindah ke dalam tugas pemiliknya, dan Executive Report menjadi **opsional, atas permintaan**; (4) sebuah **alur create yang sadar-mode** — mode trust melakukan materialisasi secara langsung sambil tetap menjalankan analisis dan pemeriksaan kualitas; (5) **materialisasi rencana Lite-first** — create terpandu menghasilkan sebuah rencana Lite yang langsung dapat dieksekusi, alih-alih draf yang tidak dapat dieksekusi, yang dapat dipromosikan menjadi rencana Full kapan saja (lihat [Rencana Lite](/spec/lite-plans)); dan (6) sebuah **matriks kompatibilitas** yang eksplisit: rencana dan repositori dari versi sebelumnya tetap konforman.
 
 ## Definisi
 
@@ -25,19 +25,17 @@ DWP bersifat spec-driven: rencana adalah spesifikasi, dan agent MUST mengeksekus
 
 Alur `create` mengumpulkan tujuan, konteks, batasan, dan kerangka tugas satu kali, melakukan **analisis kebutuhan**-nya (cakupan, pengurutan dependensi antar tugas, pemilihan validasi dari Touched Surface, tingkatan rigor proporsional), lalu melakukan materialisasi sesuai mode yang dipilih pengembang:
 
-- **Mode terpandu (default).** Alur menghasilkan tepat **satu** artefak untuk ditinjau: sebuah **draf yang disempurnakan** di `.dwp/drafts/`, dengan struktur yang cukup untuk disetujui atau dimintakan perubahan dalam satu kali jalan. Folder rencana baru dimaterialisasikan setelah persetujuan.
-- **Mode trust (`trust` / `auto`).** Alur **langsung melakukan materialisasi rencana**, tanpa berkas draf — pengembang telah melepaskan tinjauan perantara. Analisis kebutuhan, pengurutan dependensi, dan sebuah **pemeriksaan kualitas rencana** tetap berjalan: trust melepaskan *tinjauannya*, bukan *analisisnya*. Rencana mode trust dicatat sebagai **disetujui di muka untuk eksekusi tanpa pengawasan**.
-- **Mode draf eksplisit.** `refined-draft {name}` dan `from-refined-draft {file}` tetap tersedia di kedua mode; pengembang yang meminta sebuah draf akan mendapatkannya.
+- **Mode terpandu (default).** Alur langsung melakukan materialisasi sebuah **rencana Lite** — sebuah proposal kompak yang sudah dapat dieksekusi dengan catatan tugas inline `{#task-N}`, dapat ditinjau dalam satu kali jalan — dan meminta pengembang untuk mempertahankannya sebagai Lite, mempromosikannya menjadi rencana Full, meminta perubahan, atau berhenti. Tidak ada draf perantara yang tidak dapat dieksekusi yang dihasilkan.
+- **Mode trust (`trust` / `auto`).** Alur **melakukan materialisasi representasi yang dipilih** (Lite, atau Lite yang segera diikuti oleh promosi ke Full) secara langsung, tanpa langkah tinjauan — pengembang telah melepaskannya. Analisis kebutuhan, pengurutan dependensi, dan sebuah **pemeriksaan kualitas rencana** tetap berjalan: trust melepaskan *tinjauannya*, bukan *analisisnya*. Sebuah rencana mode trust dicatat sebagai **disetujui di muka untuk eksekusi tanpa pengawasan**.
 
-Dalam setiap mode, alur ini tidak pernah menghasilkan draf perantara yang belum disempurnakan sebagai langkah tinjauan terpisah.
+Kedua mode memutuskan format rencana (Lite atau Full) sebagai bagian dari analisis kebutuhan yang sama, tidak pernah sebagai pemikiran belakangan. Lihat [Rencana Lite](/spec/lite-plans) untuk siklus hidup representasi, pembuatan-dan-pemilihan, serta promosi secara lengkap.
 
 ## Struktur rencana
 
-Sebuah rencana MUST berupa sebuah direktori di bawah `.dwp/plans/` bernama `PLAN_<slug>/`. Direktori itu MUST berisi:
+Sebuah rencana MUST berupa sebuah direktori di bawah `.dwp/plans/` bernama `PLAN_<slug>/`, dalam salah satu dari dua representasi:
 
-- `README.md` — ikhtisar rencana, tujuan, tabel tugas, dan status.
-- Satu berkas per tugas, bernama `<n>.task_<slug>.md`.
-- `PROGRESS.md` — log eksekusi yang berjalan.
+- **Full.** Direktori itu MUST berisi `README.md` (ikhtisar rencana, tujuan, tabel tugas, dan status), satu berkas per tugas bernama `<n>.task_<slug>.md`, dan `PROGRESS.md` (log eksekusi yang berjalan).
+- **Lite.** Catatan tugas yang kompak dan sepenuhnya dapat dieksekusi hidup inline di `README.md` di balik jangkar `{#task-N}` yang stabil, alih-alih berkas tugas terpisah — setiap catatan tetap membawa sebuah tujuan, Touched Surface, acceptance criteria, validasi, dan log penyelesaian. `PROGRESS.md` tetap REQUIRED. Sebuah rencana Lite MAY dipromosikan menjadi Full kapan saja. Lihat [Rencana Lite](/spec/lite-plans) untuk siklus hidup lengkapnya alih-alih menduplikasinya di sini.
 
 Sebuah rencana MAY juga membawa lapisan status yang dapat dibaca mesin: `manifest.json` (identitas statis, ditulis sekali saat materialisasi) dan `state.json` (status eksekusi per-tugas yang berjalan). Lapisan status RECOMMENDED untuk rencana baru dan REQUIRED untuk eksekusi tanpa pengawasan dan untuk ruang kerja agent tanpa git. Lihat [Status rencana](/spec/plan-state).
 

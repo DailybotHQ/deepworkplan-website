@@ -34,6 +34,10 @@ import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
 4. 更新任务表。
 5. 记录改动了什么以及为什么。
 
+## 将 Lite 计划晋升为 Full
+
+`/dwp-refine promote {plan_name}` 把一份 Lite 计划的权威表现形式，从 README 中内联的任务记录切换为按任务分文件的形式，在不改变范围的前提下保全已完成的工作与任务 ID。晋升只涉及表现形式——它从不调用 execute。Full 计划不会自动降级回 Lite。
+
 ## 别名
 
 - `dwp:refine`

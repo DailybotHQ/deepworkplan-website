@@ -25,11 +25,12 @@ follows the existing security-pass contract
 findings are appended and reported but do not block. Degradation is honest,
 never silent (addon SPEC §6.1, §7): when the vendored skill or the extension
 file is absent, record a `local reviewer not installed` finding in
-`SECURITY_REVIEW.md`, install the missing piece when the run is authorized to
-write to the harness (`../onboard/addons.md` Phase 7a — pinned skill,
-`generate-extension`) and then review, otherwise carry the finding into the
-completion report; when a review that could start errors at invocation, warn
-once, record it and continue — NEVER fail the task for either. Flow A needs
+`SECURITY_REVIEW.md`. Installation belongs to onboarding (`../onboard/addons.md`
+Phase 7a — pinned skill, `generate-extension`) and is not a Final Review side
+effect. Carry the finding into the completion report. When a review that could
+start errors at invocation, warn once, record it
+and continue; critical findings from a completed review still follow the normal
+blocking contract. Flow A needs
 **no** CI provider secret — do NOT
 treat an unset `CURSOR_API_KEY` (or other provider secret) as a reason to
 skip the local security pass; that secret is Flow B CI / gate
@@ -41,3 +42,12 @@ skip) with explicit consent — read-only by default, edits require per-finding
 yes, never commits or pushes. This is surfaced as an available option during
 `execute`; the addon MUST NOT insert an `apply-review` task file into any
 plan (would violate the single-Final-Review rule).
+
+## Legacy plans
+
+For a pre-2.3.0 plan, apply this same required local-review step to the
+`{N-2}.task_security_review.md` task. If that task is already completed and the
+plan is being explicitly migrated, preserve its completed contents and include
+the local review in the new Final Review security pass instead; record a missing
+reviewer finding there when the reviewer is unavailable. Never silently omit the
+baseline because the plan retains its legacy final-task shape.

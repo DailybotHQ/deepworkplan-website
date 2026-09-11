@@ -16,7 +16,7 @@ When an agent is instructed to use this system, it must obey:
    - Once completed, mark it `[x]` and move to the next.
 
 3. **Validation required**
-   - Never mark a task as completed without running and considering the validations defined in the task file.
+   - Never mark a task as completed unless every Validation command in the task file has been **run and passed**. On failure, stop, log, and do not mark `[x]` (`spec/DWP_SPECIFICATION.md` §5.1).
    - For behavior-changing tasks, the validations **must** include the repo's tests and its lint/type-check/format checks **selected from the task's Touched Surface** (falling back to the full suite when the change is shared/core or no scoped invocation is documented), and the task must have added/updated tests for the new behavior (`authoring.md` §5.3). The complete suite runs on the final state in the Final Review.
 
 4. **Logging & commits**
@@ -37,15 +37,15 @@ When an agent is instructed to use this system, it must obey:
    - If a validation fails or something is unclear, stop and log.
    - Do not continue blindly.
 
-6. **Progress reporting** — handled by the optional Dailybot addon at [`addons/dailybot/`](../addons/dailybot/SKILL.md). Trigger by intent ("report this to Dailybot") or via `/dailybot_report` on Claude Code. The addon defers auth to the Dailybot skill and is opt-in and never-blocking.
+6. **Progress reporting** — handled by the **optional** Dailybot addon at [`addons/dailybot/`](../addons/dailybot/SKILL.md) (`spec/ADDONS.md` §2 / §6.2). A repo with **zero optional addons** is fully conformant; Dailybot is **not** part of the DWP baseline (the only declared baseline exception is the AI Diff Reviewer **local** review). Apply the rules below **only when** the Dailybot skill is installed and authorized in the session; otherwise skip silently and never invent an install. Trigger by intent ("report this to Dailybot") or via `/dailybot_report` on Claude Code. Auth is deferred to the Dailybot skill; reporting is never-blocking.
 
-   **Per-task reports (only for individually significant tasks):**
+   **Per-task reports (only when Dailybot is installed/authorized; only for individually significant tasks):**
    - After a task that ships a feature, fixes a bug, or completes a major refactor, trigger the skill with a standup-style message — e.g., *"Implemented JWT middleware for the API gateway — all protected routes now validate tokens."*
-   - **Skip** intermediate/setup tasks (scaffolding, base classes, config changes) — they'll be covered by the plan completion report.
+   - **Skip** intermediate/setup tasks (scaffolding, base classes, config changes) — they'll be covered by the plan completion report when Dailybot is in use.
    - **NEVER use** internal references: *"Completed Task N: {title} - PLAN_{name}"* — this is tracking, not a standup update.
 
-   **🔔 Plan completion report (MANDATORY — golden rule):**
-   - When ALL tasks in a plan are complete, you MUST send a Dailybot report as a **milestone** with **structured data** (completed/in-progress/blockers) and **metadata** (plan name, repo). The skill prompts for these fields when reporting plan completions.
+   **🔔 Plan completion report (when Dailybot is installed and authorized — golden rule for that channel; never required for DWP conformance):**
+   - When ALL tasks in a plan are complete **and** Dailybot is available, send a Dailybot report as a **milestone** with **structured data** (completed/in-progress/blockers) and **metadata** (plan name, repo). If Dailybot is absent or unauthorized, skip — do not block completion.
    - **The message MUST describe what was BUILT, not that a plan ran.** This is the #1 anti-pattern — never send vague reports.
    - **If an Executive Report is requested:** generate it from durable evidence (task logs, PROGRESS.md, `analysis_results/`, the state layer, PR summaries) without replaying the plan. Do not generate it unrequested.
 
@@ -54,12 +54,12 @@ When an agent is instructed to use this system, it must obey:
      - ❌ NEVER (vague, no detail): *"Completed a deep work plan with multiple tasks executed and validated"*
      - ❌ NEVER (process-focused): *"Plan completed: PLAN_auth_refactor - 8 tasks completed successfully"*
 
-   See [`addons/dailybot/templates/INTEGRATION.md`](../addons/dailybot/templates/INTEGRATION.md) for the full pattern.
+   See [`addons/dailybot/templates/INTEGRATION.md`](../addons/dailybot/templates/INTEGRATION.md) for the full pattern when the addon is in use.
 
-   **General rules:**
+   **General rules (when Dailybot reporting runs):**
    - ALWAYS in English, regardless of conversation language
    - If the reporting script fails or times out, **continue without blocking** — progress reporting is secondary to the actual work.
-   - See `AGENTS.md` "Agent Progress Reporting" section and the progress report skill for the complete standard.
+   - See `AGENTS.md` "Agent Progress Reporting" section and the Dailybot skill for the complete standard.
 
 7. **Multi-repository commits** (for plans spanning multiple projects)
    - Commit changes in **each affected repository separately**
@@ -84,7 +84,7 @@ This task closes the plan, in this order:
 - Verifies `docs/SECURITY.md` still reflects reality and updates it when the plan changed secrets handling, the auth model, or data boundaries
 - Writes `analysis_results/SECURITY_REVIEW.md`, even when the conclusion is "no findings"
 - A critical finding (e.g. a committed secret) blocks plan completion until fixed or explicitly accepted by the user
-- Runs the required AI Diff Reviewer local review (`authoring.md` §5.4) and records a `local reviewer not installed` finding when the reviewer is missing (installing it when the run is authorized to write to the harness); other installed addons that augment the pass run here under their never-block rules
+- Runs the required AI Diff Reviewer local review (`authoring.md` §5.4) and records a `local reviewer not installed` finding when the reviewer is missing; installation belongs to onboarding, while other installed addons that augment the pass run here under their never-block rules
 
 Security is not a separate workstream bolted on at the end of a project — every plan leaves the repository's security documentation current and its own changes audited.
 
@@ -92,7 +92,7 @@ Security is not a separate workstream bolted on at the end of a project — ever
 
 **(c) Skills reconciliation** — checks that every task's log carries a skills disposition and that every entry in `analysis_results/SKILLS_CANDIDATES.md` has one; finishes any warranted authoring still open (and validates it before (b) is final). It does **not** re-read the whole plan to rediscover patterns and writes **no** second discovery report — the ledger is the record.
 
-**(d) Completion** — reports deliverables, validation evidence, limitations and PR links; offers the Executive Report **once**; sends the completion report through the configured channel (e.g. the Dailybot milestone) regardless of the answer. The plan is complete at this point.
+**(d) Completion** — reports deliverables, validation evidence, limitations and PR links; offers the Executive Report **once**; when Dailybot (or another configured reporting channel) is installed and authorized, sends the completion report there (best-effort, never blocking). Absence of Dailybot does not block completion. The plan is complete at this point.
 
 ### Task-Local Skills Decisions (Every Task)
 
@@ -230,24 +230,27 @@ When executing multi-project plans, the agent **MUST**:
 cd repositories/api-services && codecheck
 cd ../web-app && npm run test && npm run lint
 
-# 3. Commit in api-services
+# 3. Fill each task's Completion & Log and update the plan projections
+#    (task log → README checkbox/status → PROGRESS.md)
+#
+# 4. Commit in api-services
 cd ../api-services
 git add -A
 git commit -m "feat(api): add user preferences model and endpoints - Task 3 of PLAN_user_preferences"
 git push
 
-# 4. Commit in web-app
+# 5. Commit in web-app
 cd ../web-app
 git add -A
 git commit -m "feat(ui): add user preferences settings page - Task 3 of PLAN_user_preferences"
 git push
 
-# 5. Update plan tracking
+# 6. Update the state layer, if present
 cd ..
-# Edit plan README.md: [ ] → [x] for Task 3
-# Update Plan Status section
+# Rewrite state.json atomically with the completed task, gate records, outcome,
+# and commit hash.
 
-# 6. Report to user
+# 7. Report to user
 # "Task 3 complete. Committed and pushed:
 #  - api-services: feat(api): add user preferences model and endpoints
 #  - web-app: feat(ui): add user preferences settings page"
@@ -271,9 +274,9 @@ The plan README's task list (`[ ]` / `[x]`) is the **SINGLE SOURCE OF TRUTH** fo
 
 **IMMEDIATELY after completing EACH task, the agent MUST:**
 
-1. **Update the plan README.md** - Change `[ ]` to `[x]` for the completed task
-2. **Update the Plan Status table** - Update the phase status and completed count
-3. **Update the task file's Completion & Log section** - Record status, timestamp, and summary
+1. **Update the task file's Completion & Log section** - Record status, timestamp, and summary
+2. **Update the plan README.md** - Change `[ ]` to `[x]` for the completed task
+3. **Update the Plan Status table** - Update the phase status and completed count
 4. **Update PROGRESS.md** - Add a short task summary (a few lines), key decisions, important values — the full narrative stays in the task file's Completion & Log; keep PROGRESS.md a bounded working index
 
 ### Example: Before and After

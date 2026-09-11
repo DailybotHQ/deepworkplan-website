@@ -81,6 +81,7 @@ export interface SiteTranslations {
     github: string;
     faq: string;
     compare: string;
+    changelog: string;
     // Header disclosure grouping Examples, Compare, FAQ and Trust
     resources: string;
     resourcesDesc: string;
@@ -444,6 +445,19 @@ export interface SiteTranslations {
     prev: string;
     next: string;
     backToIndex: string;
+  };
+
+  // Deep Work Plan — Changelog timeline + detail reader
+  changelogPage: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    intro: string;
+    viewDetail: string;
+    backToIndex: string;
+    sourceLabel: string;
+    featuredLabel: string;
+    relatedTitle: string;
   };
 
   // Deep Work Plan — Examples gallery + detail

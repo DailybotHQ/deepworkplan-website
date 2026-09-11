@@ -1,7 +1,7 @@
 ---
 title: Agentenprotokoll
 description: "Der normative Verhaltensvertrag für KI-Coding-Agenten: Onboarding, Planung, Ausführung, Sicherheit und Ausführungsprofile — interaktiver versus unbeaufsichtigter Betrieb."
-order: 3
+order: 4
 lang: de
 section: Protocol
 ---
@@ -93,13 +93,13 @@ Jeder Plan wird unter genau einem von zwei Profilen ausgeführt. Das Profil änd
 
 ### Interaktiv (Standard)
 
-Ein Mensch ist in der Sitzung anwesend. Der Agent schlägt vor, der Mensch genehmigt den überarbeiteten Entwurf, der Agent führt Aufgabe für Aufgabe aus, und Unklarheiten werden durch Nachfragen gelöst. Alle obigen Protokollabschnitte beschreiben das interaktive Profil.
+Ein Mensch ist in der Sitzung anwesend. Der Agent schlägt vor, der Mensch genehmigt den materialisierten Plan direkt, der Agent führt Aufgabe für Aufgabe aus, und Unklarheiten werden durch Nachfragen gelöst. Alle obigen Protokollabschnitte beschreiben das interaktive Profil.
 
 ### Unbeaufsichtigt
 
 Der Plan läuft ohne menschliche Aufsicht — der geplante Turn einer autonomen Plattform, eine Cloud-Sitzung, ein Nachtlauf. Unbeaufsichtigte Ausführung ist per Plan opt-in und MUSS alle folgenden Bedingungen erfüllen:
 
-- **Vorab genehmigter Plan.** Der Plan wurde vor jedem unbeaufsichtigten Turn genehmigt — im geführten Modus genehmigte der Mensch den überarbeiteten Entwurf; im Trust-Modus ist die explizite `trust`-Anweisung des Entwicklers die aufgezeichnete Genehmigung. Ein Agent DARF NICHT ohne eines von beidem in einem Turn unbeaufsichtigt einen Plan erstellen und ausführen; die Plan-Genehmigung ist der menschliche Kontrollpunkt.
+- **Vorab genehmigter Plan.** Der Plan wurde vor jedem unbeaufsichtigten Turn genehmigt — im geführten Modus genehmigte der Mensch den materialisierten Plan direkt; im Trust-Modus ist die explizite `trust`-Anweisung des Entwicklers die aufgezeichnete Genehmigung. Ein Agent DARF NICHT ohne eines von beidem in einem Turn unbeaufsichtigt einen Plan erstellen und ausführen; die Plan-Genehmigung ist der menschliche Kontrollpunkt.
 - **Zustandsschicht ERFORDERLICH.** Der Plan MUSS `manifest.json` und `state.json` tragen, damit jede spätere Sitzung — Agent oder Mensch — den genauen Fortschritt lesen kann, ohne ein Transkript abzuspielen. Siehe [Plan-Zustand](/spec/plan-state).
 - **Begrenzte Autorität.** Die Autorität des Agenten ist der Plan: Er DARF den Umfang NICHT ausweiten, DARF KEINE destruktiven oder nach außen gerichteten Aktionen durchführen, die der Plan nicht explizit autorisiert, und DARF die Anweisungen einer Aufgabe NICHT dehnen, um entdeckte, aber nicht geplante Arbeit abzudecken — entdeckte Arbeit wird für das nächste `refine` aufgezeichnet, nicht improvisiert.
 - **Eine atomare Aufgabe pro Turn, Gates immer.** Jeder Turn führt das DWP-Wiederaufnahme-Protokoll aus, führt höchstens die nächste Aufgabe aus, besteht ihr Validierungs-Gate, schließt gemäß dem Aufgabenabschlussprotokoll ab und gibt frei. Ein fehlschlagendes Gate ist eine Stopbedingung, niemals „trotzdem weiterfahren".

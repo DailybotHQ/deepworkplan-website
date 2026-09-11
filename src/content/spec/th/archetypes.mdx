@@ -1,7 +1,7 @@
 ---
 title: Archetype
 description: "คำอธิบายเชิงบรรทัดฐานของ archetype ของ repository ใน DWP: repository เดี่ยว orchestrator hub และ agent workspace หลักการจำแนกประเภท และความแตกต่างของการออนบอร์ด"
-order: 4
+order: 5
 lang: th
 section: Archetypes
 ---
@@ -45,7 +45,7 @@ agent workspace คือบ้านทำงานที่มีอายุ�
 | `AGENTS.md` (กฎ คำสั่งด่วน) | บริบทคงอยู่ของ workspace — `AGENTS.md` เอง หรือไฟล์ standing-orders ของแพลตฟอร์ม |
 | `docs/` (ความรู้ที่ยั่งยืน) | ไฟล์ความรู้ workspace และเอกสารหน่วยความจำ |
 | `.agents/` (skill, agent, คำสั่ง) | ไดเรกทอรี skill ของแพลตฟอร์ม — OpenClaw สแกน `<workspace>/.agents/skills/` แบบ native |
-| `.dwp/` (แผน ร่าง) | `.dwp/` ที่รากของ workspace — ไม่เปลี่ยนแปลง |
+| `.dwp/` (แผน) | `.dwp/` ที่รากของ workspace — ไม่เปลี่ยนแปลง |
 | git log (สถานะ ความสามารถ resume) | `state.json` ต่อแผน ([สถานะแผน](/spec/plan-state)) REQUIRED ที่นี่ |
 
 agent workspace MUST มี `AGENTS.md`, `.agents/` และ `.dwp/` ที่รากของ workspace

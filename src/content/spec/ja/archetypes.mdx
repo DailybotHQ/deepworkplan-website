@@ -1,7 +1,7 @@
 ---
 title: アーキタイプ
 description: "DWP のリポジトリアーキタイプの規範的な記述。個別リポジトリ、オーケストレーターハブ、エージェントワークスペース、分類のヒューリスティック、そしてオンボーディングがどう異なるか。"
-order: 4
+order: 5
 lang: ja
 section: Archetypes
 ---
@@ -45,7 +45,7 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 | `AGENTS.md`（ルール、クイックコマンド） | ワークスペースの常設コンテキスト — `AGENTS.md` 自体、またはプラットフォームのスタンディングオーダーファイル |
 | `docs/`（永続的な知識） | ワークスペースの知識ファイルとメモリードキュメント |
 | `.agents/`（スキル、エージェント、コマンド） | プラットフォームのスキルディレクトリ — OpenClaw は `<workspace>/.agents/skills/` をネイティブにスキャンする |
-| `.dwp/`（計画、ドラフト） | ワークスペースルートの `.dwp/` — 変更なし |
+| `.dwp/`（計画） | ワークスペースルートの `.dwp/` — 変更なし |
 | git ログ（状態、再開可能性） | 計画ごとの `state.json`（[計画の状態](/spec/plan-state)）、ここでは REQUIRED |
 
 エージェントワークスペースはワークスペースルートに `AGENTS.md`、`.agents/`、`.dwp/` を MUST 持たなければなりません。

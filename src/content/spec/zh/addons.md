@@ -1,14 +1,14 @@
 ---
 title: 附加组件
 description: "DWP 附加组件：四个可选扩展（devcontainer、Dailybot、dependency-upgrade、design-system）、必备的 AI Diff Reviewer 本地审查及其可选 CI 层面、附加组件合约，以及套件相关概念（skills、agents、presets）说明。"
-order: 5
+order: 6
 lang: zh
 section: Addons
 ---
 
 # 附加组件
 
-**版本 2.1。** 附加组件是对核心 Deep Work Plan 方法论的扩展。五个之中有四个是可选的，且**绝非符合性所必需**——零可选附加组件的仓库完全符合 AI-first 与 DWP 规范。每个可选附加组件在接入期间提供，由开发者明确接受或拒绝，且——接受后——**调和**现有设置而非覆盖。一个组件是声明的例外：自标准 2.3.0 起，**AI Diff Reviewer 本地审查**属于必备基线——接入时安装它，每份 Final Review 都运行它——而其 CI 层面保持可选。
+**版本 2.4.0。** 附加组件是对核心 Deep Work Plan 方法论的扩展。五个之中有四个是可选的，且**绝非符合性所必需**——零可选附加组件的仓库完全符合 AI-first 与 DWP 规范。每个可选附加组件在接入期间提供，由开发者明确接受或拒绝，且——接受后——**调和**现有设置而非覆盖。一个组件是声明的例外：自标准 2.3.0 起，**AI Diff Reviewer 本地审查**属于必备基线——接入时安装它，每份 Final Review 都运行它——而其 CI 层面保持可选。
 
 ## 附加组件合约
 

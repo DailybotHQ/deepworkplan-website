@@ -19,7 +19,7 @@ Vòng lặp này là hình thức vận hành của phát triển dựa trên đ
 
 <CoreLoop lang="vi" class="not-prose my-10" />
 
-- **create** — Sinh ra một kế hoạch mới từ một mục tiêu. Agent phân tích mục tiêu, phân rã nó thành các tác vụ tuần tự và viết các tệp kế hoạch. Nó nên đặt câu hỏi làm rõ trước khi viết khi mục tiêu còn mập mờ.
+- **create** — Sinh ra một kế hoạch mới từ một mục tiêu. Agent phân tích mục tiêu, phân rã nó thành các tác vụ tuần tự và viết các tệp kế hoạch. Nó nên đặt câu hỏi làm rõ trước khi viết khi mục tiêu còn mập mờ. Ở chế độ guided, agent vật liệu hóa trực tiếp một [kế hoạch Lite](/spec/lite-plans) — một đề xuất gọn nhẹ và đã có thể thực thi — và người phát triển chọn giữ nguyên, nâng cấp lên kế hoạch Full theo tệp tác vụ, chỉnh sửa, hoặc dừng lại; ở chế độ trust, agent vật liệu hóa trực tiếp biểu diễn đã chọn (Lite hoặc Full) mà không có bước rà soát. Xem [đặc tả](/spec/dwp-specification) để biết cả hai biểu diễn. Việc phân tích yêu cầu và kiểm tra chất lượng kế hoạch đều chạy trong cả hai trường hợp.
 - **execute** — Chạy kế hoạch từng tác vụ một. Agent cập nhật nhật ký tiến độ sau mỗi tác vụ và đánh dấu trạng thái hoàn tất của tác vụ. Nó không được bỏ qua tác vụ mà không ghi lại lý do.
 - **refine** — Sửa đổi một kế hoạch hiện có. Agent có thể thêm, bớt hoặc sắp xếp lại các tác vụ, nhưng phải giữ nguyên công việc đã hoàn tất và cập nhật bảng tác vụ.
 - **resume** — Tiếp tục một kế hoạch bị gián đoạn. Agent đọc nhật ký tiến độ và các tệp tác vụ để tái dựng trạng thái, rồi tiếp tục từ tác vụ chưa hoàn tất đầu tiên.

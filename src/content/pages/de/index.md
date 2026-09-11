@@ -25,7 +25,7 @@ In kurzen Spitzen sind Coding-Agenten beeindruckend. Übergeben Sie ihnen eine l
 
 Deep Work Plan antwortet mit spec-driven development: ein dauerhafter Plan, atomare Aufgaben und Validierungs-Gates, die der Agent bestehen muss. Die Arbeit bleibt überprüfbar — und jeder Agent kann sie über Sitzungen hinweg fortsetzen.
 
-Und weil der Kontext die knappste Ressource Ihres Agenten ist, ist das Harness auf Token-Effizienz ausgelegt: Anweisungen laden progressiv, Validierung berührt nur Geändertes, und jede Aufgabe lernt lokal — so bleibt langlaufende Arbeit erschwinglich.
+Und weil der Kontext die knappste Ressource Ihres Agenten ist, ist das Harness auf Token-Effizienz ausgelegt: Anweisungen laden progressiv, Validierung berührt nur Geändertes, und jede Aufgabe lernt lokal — so bleibt langlaufende Arbeit erschwinglich. Der Plan selbst skaliert nach demselben Prinzip: ein Lite-Plan für eine begrenzte Korrektur, ein Full-Plan für Arbeit, die sich über Stunden erstreckt — das Format folgt immer dem Umfang der Arbeit, nicht umgekehrt.
 ---
 
 ## Menschen steuern. Agenten führen aus.

@@ -1,7 +1,7 @@
 ---
 title: Arquetipos
 description: "Descripción normativa de los arquetipos de repositorio de DWP: el repositorio individual, el centro orquestador y el espacio de trabajo de agente, y cómo difiere la incorporación para cada uno."
-order: 4
+order: 5
 lang: es
 section: Archetypes
 ---
@@ -45,7 +45,7 @@ La idea que hace posible este arquetipo: **el harness es un espacio de trabajo, 
 | `AGENTS.md` (reglas, comandos rápidos) | El contexto permanente del workspace — `AGENTS.md` en sí, o el archivo de órdenes permanentes de la plataforma |
 | `docs/` (conocimiento duradero) | Archivos de conocimiento del workspace y documentos de memoria |
 | `.agents/` (skills, agentes, comandos) | El directorio de skills de la plataforma — OpenClaw escanea nativamente `<workspace>/.agents/skills/` |
-| `.dwp/` (planes, borradores) | `.dwp/` en la raíz del workspace — sin cambios |
+| `.dwp/` (planes) | `.dwp/` en la raíz del workspace — sin cambios |
 | Registro git (estado, reanudabilidad) | `state.json` por plan ([Estado del plan](/spec/plan-state)), REQUERIDO aquí |
 
 Un espacio de trabajo de agente DEBE proporcionar `AGENTS.md`, `.agents/` y `.dwp/` en la raíz del workspace.

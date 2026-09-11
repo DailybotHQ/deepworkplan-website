@@ -1,7 +1,7 @@
 ---
 title: 原型
 description: "对 DWP 代码仓库原型的规范性描述：单一代码仓库、编排枢纽与代理工作区，以及归类判定法则和接入差异。"
-order: 4
+order: 5
 lang: zh
 section: Archetypes
 ---
@@ -45,7 +45,7 @@ import ArchetypesTree from '@/components/diagrams/methodology/ArchetypesTree.ast
 | `AGENTS.md`（规则、快捷命令） | 工作区的常态上下文——`AGENTS.md` 本身，或平台的常设指令文件 |
 | `docs/`（持久知识） | 工作区知识文件与记忆文档 |
 | `.agents/`（技能、代理、命令） | 平台的技能目录——OpenClaw 原生扫描 `<workspace>/.agents/skills/` |
-| `.dwp/`（计划、草案） | 工作区根目录下的 `.dwp/`——不变 |
+| `.dwp/`（计划） | 工作区根目录下的 `.dwp/`——不变 |
 | git 日志（状态、可恢复性） | 每份计划的 `state.json`（[Plan state](/spec/plan-state)），此处 REQUIRED |
 
 代理工作区 MUST 在工作区根目录提供 `AGENTS.md`、`.agents/` 与 `.dwp/`。

@@ -33,6 +33,7 @@ export const hi: SiteTranslations = {
     github: 'GitHub',
     faq: 'सामान्य प्रश्न',
     compare: 'तुलना',
+    changelog: 'Changelog',
     resources: 'संसाधन',
     resourcesDesc: 'उदाहरण, भरोसा, सामान्य प्रश्न और तुलना',
     repo: {
@@ -44,6 +45,24 @@ export const hi: SiteTranslations = {
     },
     menu: 'मेनू खोलें',
     closeMenu: 'मेनू बंद करें',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Deep Work Plan परिवर्तन लॉग',
+      description:
+        'Deep Work Plan स्किल, पद्धति और पोर्टेबल एजेंट हार्नेस के महत्वपूर्ण अपडेट।',
+    },
+    eyebrow: 'परिवर्तन लॉग',
+    title: 'पद्धति के पीछे का काम',
+    intro:
+      'स्रोत-आधारित टाइमलाइन जो लंबे एजेंट कार्य के लिए Deep Work Plan को विश्वसनीय बनाने वाले रिलीज़ और डिज़ाइन निर्णयों को दिखाती है।',
+    viewDetail: 'अपडेट पढ़ें',
+    backToIndex: 'सभी अपडेट',
+    sourceLabel: 'स्रोत',
+    featuredLabel: 'प्रमुख रिलीज़',
+    relatedTitle: 'संबंधित अपडेट',
   },
 
   // Footer
@@ -107,7 +126,7 @@ export const hi: SiteTranslations = {
       answer:
         'Deep Work Plan स्पेसिफिकेशन-संचालित विकास से जवाब देता है: एक टिकाऊ योजना, परमाणु कार्य, और सत्यापन द्वार जिन्हें एजेंट को पास करना होता है। “पूर्ण” एक भावना नहीं रहता — यह सत्यापित, समीक्षित साक्ष्य बन जाता है।',
       efficiency:
-        'और क्योंकि संदर्भ आपके एजेंट का सबसे दुर्लभ संसाधन है, harness टोकन-दक्षता के लिए डिज़ाइन किया गया है: निर्देश प्रगतिशील रूप से लोड होते हैं, सत्यापन केवल बदले हुए पर लागू होता है, और हर कार्य स्थानीय रूप से सीखता है — लंबा कार्य किफ़ायती रहता है।',
+        'और क्योंकि संदर्भ आपके एजेंट का सबसे दुर्लभ संसाधन है, harness टोकन-दक्षता के लिए डिज़ाइन किया गया है: निर्देश प्रगतिशील रूप से लोड होते हैं, सत्यापन केवल बदले हुए पर लागू होता है, और हर कार्य स्थानीय रूप से सीखता है — लंबा कार्य किफ़ायती रहता है। प्लान खुद भी इसी सिद्धांत के अनुसार स्केल करता है: एक सीमित सुधार के लिए Lite प्लान, घंटों तक चलने वाले काम के लिए Full प्लान — फ़ॉर्मेट हमेशा काम के दायरे के अनुरूप होता है, इसका उल्टा नहीं।',
       illustrationAlt:
         'एक उत्कीर्ण डिप्टिक: एक ओर कोहरे में चट्टानों के पास बहता जहाज़, दूसरी ओर वही जहाज़ बनाए गए मार्ग पर बंदरगाह की लौ की ओर स्थिर।',
     },
@@ -732,6 +751,14 @@ export const hi: SiteTranslations = {
             linkPath: '/quickstart',
           },
           {
+            id: 'lite-vs-full',
+            question: 'Lite और Full योजना में क्या अंतर है?',
+            answer:
+              'यह एक प्रस्तुति-विकल्प है, कठोरता का समझौता नहीं। हर योजना एक Lite फ़ोल्डर के रूप में शुरू होती है: anchored कार्य-रिकॉर्ड्स वाला एक संक्षिप्त README जो पहले से ही निष्पादन योग्य है, कोई आंशिक ड्राफ्ट नहीं। `create` केवल तभी Full कार्य फ़ाइलों तक विस्तारित होता है जब किसी कार्य का निर्देश-विवरण, निर्भरताएँ या अनुबंध किसी समीक्षा योग्य संक्षिप्त रिकॉर्ड में फ़िट न बैठें; किसी भी प्रारूप के लिए स्पष्ट अनुरोध का सम्मान किया जाता है, और एक Lite योजना को बाद में पूर्ण किए गए कार्य को खोए बिना Full में उन्नत किया जा सकता है। दोनों प्रारूप समान स्वीकृति मानदंड, सत्यापन द्वार, साक्ष्य और अनिवार्य Final Review ले जाते हैं।',
+            linkLabel: 'पद्धति पढ़ें',
+            linkPath: '/methodology',
+          },
+          {
             id: 'is-it-a-tool',
             question: 'क्या यह कोई उपकरण है, फ़्रेमवर्क है, या पद्धति?',
             answer:
@@ -748,28 +775,35 @@ export const hi: SiteTranslations = {
             linkPath: '/kit',
           },
           {
-            id: 'what-is-installed',
-            question: 'What exactly gets installed, and where?',
+            id: 'how-to-use',
+            question: 'इसे कैसे उपयोग करें?',
             answer:
-              'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles AGENTS.md, docs/, .agents/ and the gitignored .dwp/ workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
-            linkLabel: 'See the adoption flow',
+              'तीन चरण। पहले, Deep Work Plan स्किल को अपने coding agent में इंस्टॉल करें — सबसे तेज़ रास्ता `npx skills add DailybotHQ/deepworkplan-skill` है (या skill repo क्लोन करें और `./setup.sh` चलाएँ)। दूसरे, रिपॉज़िटरी को एक बार onboard करें ताकि एजेंट `AGENTS.md`, `docs/`, `.agents/` किट और gitignore की गई `.dwp/` क्षेत्र को आपके stack के अनुसार ढाले: https://deepworkplan.com/init.md पर इशारा करें, या `/deepworkplan-onboard` चलाएँ। तीसरे, पतले commands से काम की योजना बनाएँ और चलाएँ: `/dwp-create <goal>` योजना बनाता है; `/dwp-execute` प्रत्येक gate के विरुद्ध कार्य-दर-कार्य चलाता है; `/dwp-refine` एक चल रही योजना को संपादित करता है (scope, कार्य, या किसी Lite योजना को Full में उन्नत करना); `/dwp-resume` रुकावट के बाद जारी रखता है; `/dwp-status` बिना निष्पादन प्रगति रिपोर्ट करता है; `/dwp-verify` एक वस्तुनिष्ठ अनुरूपता रिपोर्ट तैयार करता है। `/` को intercept करने वाले एजेंट अक्सर `#` का उपयोग करते हैं (उदाहरण `#dwp-execute`)। adoption endpoint और त्वरित शुरुआत उसी रास्ते को अधिक विस्तार से बताते हैं।',
+            linkLabel: 'त्वरित शुरुआत',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'what-is-installed',
+            question: 'वास्तव में क्या इंस्टॉल होता है, और कहाँ?',
+            answer:
+              'एजेंट स्किल वहीं इंस्टॉल होती है जहाँ आपका एजेंट प्रोजेक्ट या यूज़र स्किल्स लोड करता है। इसके बाद ऑनबोर्डिंग रिपॉज़िटरी को स्वयं ढालती है: यह `AGENTS.md`, `docs/`, `.agents/` और gitignored `.dwp/` कार्यक्षेत्र बनाती या सुलझाती है। स्किल एजेंट को पद्धति सिखाती है; रिपॉज़िटरी वह संदर्भ, किट और योजना-साक्ष्य रखती है जिनकी अन्य एजेंटों को जारी रखने के लिए आवश्यकता होती है।',
+            linkLabel: 'अपनाने का प्रवाह देखें',
             linkPath: '/init',
           },
           {
             id: 'requires-git',
-            question: 'Does Deep Work Plan require Git?',
+            question: 'क्या Deep Work Plan के लिए Git आवश्यक है?',
             answer:
-              'Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including state.json checkpoints and gate records, is required so recovery does not depend on a chat transcript.',
-            linkLabel: 'Read about repository archetypes',
+              'रिपॉज़िटरी के लिए Git की सिफ़ारिश की जाती है क्योंकि उसका इतिहास पुनर्प्राप्ति और समीक्षा सतह का हिस्सा है, लेकिन पद्धति बिना Git रिपॉज़िटरी के भी किसी एजेंट कार्यक्षेत्र में चल सकती है। उस स्थिति में मशीन-पठनीय state परत — जिसमें `state.json` checkpoints और gate रिकॉर्ड शामिल हैं — आवश्यक होती है ताकि पुनर्प्राप्ति किसी चैट ट्रांसक्रिप्ट पर निर्भर न रहे।',
+            linkLabel: 'रिपॉज़िटरी आर्किटाइप्स के बारे में पढ़ें',
             linkPath: '/spec/archetypes',
           },
           {
             id: 'skill-plan-spec',
-            question:
-              'What is the difference between a skill, a plan and a product specification?',
+            question: 'स्किल, योजना और प्रोडक्ट विनिर्देश के बीच क्या अंतर है?',
             answer:
-              'A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.',
-            linkLabel: 'Read the specification',
+              'स्किल वर्णन करती है कि एजेंट कोई दोहराने योग्य प्रक्रिया कैसे निष्पादित करता है। एक DWP योजना scope, स्वीकृति मानदंड, सत्यापन द्वार और साक्ष्य के माध्यम से किसी ठोस बदलाव का वर्णन करती है। प्रोडक्ट विनिर्देश प्रोडक्ट के वर्तमान व्यवहार का वर्णन करता है और कार्यान्वयन के बाद deltas के माध्यम से विकसित होता है; स्किल्स और योजनाएँ भी विनिर्देश हैं, लेकिन वे उस विहित प्रोडक्ट-अनुबंध को बनाए रखने के बजाय प्रक्रियाओं और बदलावों का वर्णन करती हैं।',
+            linkLabel: 'विनिर्देश पढ़ें',
             linkPath: '/spec/dwp-specification',
           },
         ],
@@ -778,14 +812,6 @@ export const hi: SiteTranslations = {
         id: 'how',
         title: 'एक योजना कैसे चलती है',
         items: [
-          {
-            id: 'how-to-use',
-            question: 'इसे कैसे उपयोग करें?',
-            answer:
-              'तीन चरण। पहले, Deep Work Plan स्किल को अपने coding agent में इंस्टॉल करें — सबसे तेज़ रास्ता `npx skills add DailybotHQ/deepworkplan-skill` है (या skill repo क्लोन करें और `./setup.sh` चलाएँ)। दूसरे, रिपॉज़िटरी को एक बार onboard करें ताकि एजेंट `AGENTS.md`, `docs/`, `.agents/` किट और gitignore की गई `.dwp/` क्षेत्र को आपके stack के अनुसार ढाले: https://deepworkplan.com/init.md पर इशारा करें, या `/deepworkplan-onboard` चलाएँ। तीसरे, पतले commands से काम की योजना बनाएँ और चलाएँ: `/dwp-create <goal>` योजना बनाता है; `/dwp-execute` प्रत्येक gate के विरुद्ध कार्य-दर-कार्य चलाता है; `/dwp-refine` ड्राफ्ट या चल रही योजना संपादित करता है; `/dwp-resume` रुकावट के बाद जारी रखता है; `/dwp-status` बिना निष्पादन प्रगति रिपोर्ट करता है; `/dwp-verify` एक वस्तुनिष्ठ अनुरूपता रिपोर्ट तैयार करता है। `/` को intercept करने वाले एजेंट अक्सर `#` का उपयोग करते हैं (उदाहरण `#dwp-execute`)। adoption endpoint और त्वरित शुरुआत उसी रास्ते को अधिक विस्तार से बताते हैं।',
-            linkLabel: 'त्वरित शुरुआत',
-            linkPath: '/quickstart',
-          },
           {
             id: 'gates',
             question:
@@ -848,18 +874,18 @@ export const hi: SiteTranslations = {
           },
           {
             id: 'gate-fails',
-            question: 'What happens when a validation gate fails?',
+            question: 'जब कोई सत्यापन द्वार विफल होता है तो क्या होता है?',
             answer:
-              'The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.',
-            linkLabel: 'Read the agent protocol',
+              'कार्य को अवरुद्ध दर्ज किया जाता है और एजेंट पूर्णता का दावा करने से पहले रुक जाता है। आप साक्ष्य का निरीक्षण कर सकते हैं, कोड की मरम्मत कर सकते हैं या कार्य को परिशोधित कर सकते हैं, फिर पुनरारंभ कर सकते हैं; एक विफल कमांड बेमेल को सुलझाने का संकेत है, द्वार को कमज़ोर करने की अनुमति नहीं।',
+            linkLabel: 'एजेंट प्रोटोकॉल पढ़ें',
             linkPath: '/spec/agent-protocol',
           },
           {
             id: 'unattended-runs',
-            question: 'Can a plan run unattended overnight or in CI?',
+            question: 'क्या कोई योजना रात भर या CI में बिना निगरानी के चल सकती है?',
             answer:
-              'Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.',
-            linkLabel: 'Read the unattended protocol',
+              'हाँ, जब योजना को पहले से स्वीकृति मिली हो, वह आवश्यक state परत रखती हो, और एजेंट को सीमाबद्ध अधिकार देती हो। बिना-निगरानी रन को रुककर एक अवरोधक दर्ज करना होगा जब वास्तविकता भटक जाए, कोई द्वार अपने नियोजित मरम्मत-दायरे से बाहर विफल हो जाए, या किसी नई स्वीकृति या क्रेडेंशियल की आवश्यकता हो।',
+            linkLabel: 'बिना-निगरानी प्रोटोकॉल पढ़ें',
             linkPath: '/spec/agent-protocol',
           },
         ],
@@ -882,7 +908,7 @@ export const hi: SiteTranslations = {
             question:
               'यह BMAD, Superpowers, Get Shit Done या Gentle-AI जैसे एजेंट वर्कफ़्लो टूल से कैसे भिन्न है?',
             answer:
-              'वे फ़्रेमवर्क मज़बूत कार्यशैलियाँ लाते हैं: भूमिकाएँ, सिद्धांत, टेस्ट-पहले चरण, सत्यापन की आदतें। Deep Work Plan दोनों से भिन्न है और इस पर केंद्रित है कि क्या रिपॉज़िटरी में रहता है और क्या जाँचा जा सकता है: एक ऐसा हार्नेस जिसे कोई भी एजेंट बिना पूर्व संदर्भ पढ़ सकता है, स्वीकृति मानदंडों और द्वारों वाली कार्य फ़ाइलें, सत्र के बाद भी बची रहने वाली स्थिति, CI-अनुकूल एग्ज़िट कोड वाला एक अनुरूपता परीक्षक, और यह प्रकाशित माप कि हर flow कितने instruction bytes लोड करता है। यह निर्माण से ही टूल-निरपेक्ष है और मुख्य चक्र में कोई सेवा, प्रदाता या रहस्य नहीं जोड़ता। तुलना पृष्ठ दिखाता है कि हर दृष्टिकोण में क्या अंतर्निहित है, क्या वैकल्पिक है और क्या दायरे से बाहर है।. Gentle-AI उन coding agents को कॉन्फ़िगर करता है जिन्हें आप पहले से उपयोग करते हैं: सत्रों के बीच स्थायी मेमोरी (Engram), चुने हुए skills, personas, MCP सर्वर, वैकल्पिक Spec-Driven Development, और वैकल्पिक साक्ष्य-आधारित समीक्षा (Receipt-Driven Development)। यह प्रत्येक एजेंट की config निर्देशिकाओं में लिखता है और योजना artifacts को Engram में, OpenSpec फ़ाइलों में, या दोनों में रख सकता है। Deep Work Plan रिपॉज़िटरी में स्वयं इंस्टॉल होता है — एक हार्नेस जिसे कोई भी एजेंट बिना पूर्व संदर्भ पढ़ सकता है, स्वीकृति मानदंडों और द्वारों वाली कार्य फ़ाइलें, फिर से शुरू होने योग्य on-disk स्थिति, CI-अनुकूल एग्ज़िट कोड वाला एक अनुरूपता परीक्षक, और एक प्रकाशित instruction-byte ledger — मुख्य चक्र में कोई सेवा, प्रदाता या रहस्य न जोड़ते हुए। दोनों परतें साथ रह सकती हैं: Gentle-AI एजेंट को सुसज्जित करता है; Deep Work Plan लंबे काम को repo के भीतर टिकाऊ और जाँचने योग्य बनाता है।',
+              'BMAD, Superpowers और Get Shit Done जैसे एजेंट वर्कफ़्लो फ्रेमवर्क मज़बूत कार्यशैलियाँ लाते हैं: भूमिकाएँ, सिद्धांत, टेस्ट-फर्स्ट चरण, सत्यापन की आदतें। Gentle-AI एक पड़ोसी श्रेणी में एजेंट इकोसिस्टम कॉन्फ़िगरेटर के रूप में बैठता है: यह उन कोडिंग एजेंट्स को, जिन्हें आप पहले से उपयोग कर रहे हैं, सेशन के बीच स्थायी मेमोरी (Engram), चुनी हुई skills, personas, MCP सर्वर, वैकल्पिक Spec-Driven Development और वैकल्पिक साक्ष्य-आधारित समीक्षा (Receipt-Driven Development) से लैस करता है, और हर एजेंट की कॉन्फ़िगरेशन डायरेक्टरी में लिखता है। Deep Work Plan दोनों से अलग है: यह इस पर ध्यान केंद्रित करता है कि रिपॉज़िटरी में क्या रहता है और क्या जाँचा जा सकता है — एक harness जिसे कोई भी एजेंट बिना पूर्व संदर्भ के पढ़ सके, स्वीकृति मानदंड और gates वाली task फ़ाइलें, वह state जो सेशन के बाद भी बचा रहे, CI-अनुकूल एग्ज़िट कोड वाला एक conformance checker, और यह प्रकाशित माप कि हर flow कितने instruction bytes लोड करता है। यह संरचना से tool-agnostic है और core loop में कोई सेवा, प्रदाता या secret नहीं जोड़ता। परतें साथ रह सकती हैं: फ्रेमवर्क और Gentle-AI यह तय करते हैं कि एजेंट कैसे काम करता है; Deep Work Plan लंबे काम को रिपॉज़िटरी के भीतर टिकाऊ और सत्यापन योग्य बनाता है। तुलना पेज दिखाता है कि हर दृष्टिकोण कहाँ built-in है, वैकल्पिक है, या दायरे से बाहर है।',
             linkLabel: 'तुलना देखें',
             linkPath: '/compare',
           },
@@ -911,19 +937,19 @@ export const hi: SiteTranslations = {
           },
           {
             id: 'core-and-addons',
-            question:
-              'Can I use the core methodology without installing add-ons?',
+            question: 'क्या मैं ऐडऑन इंस्टॉल किए बिना मुख्य पद्धति का उपयोग कर सकता हूँ?',
             answer:
-              'Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.',
-            linkLabel: 'Browse the add-ons',
+              'हाँ। ऐडऑन ऑप्ट-इन परतें हैं, और शून्य ऐडऑन वाली रिपॉज़िटरी भी पूर्णतः DWP-अनुरूप होती है। devcontainer, Dailybot रिपोर्टिंग, dependency-upgrade, design-system समर्थन और वैकल्पिक CI समीक्षा तभी प्रस्तावित होते हैं जब वे आपकी रिपॉज़िटरी के अनुकूल हों और आप उन्हें स्पष्ट रूप से स्वीकार करें।',
+            linkLabel: 'ऐडऑन ब्राउज़ करें',
             linkPath: '/spec/addons',
           },
           {
             id: 'no-test-toolchain',
-            question: 'What if my repository has no tests or linting yet?',
+            question:
+              'अगर मेरी रिपॉज़िटरी में अभी तक टेस्ट या लिंटिंग नहीं है तो क्या होगा?',
             answer:
-              'DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.',
-            linkLabel: 'Read the agent protocol',
+              'DWP टूलचेन की अनुपस्थिति को मुफ़्त छूट नहीं मानता। ऑनबोर्डिंग के दौरान एजेंट स्टैक-उपयुक्त सत्यापन सेटअप का प्रस्ताव देता है, कमांड्स को रिपॉज़िटरी दस्तावेज़ीकरण में दर्ज करता है, और भविष्य के द्वारों के लिए उन्हीं कमांड्स को लक्ष्य के रूप में उपयोग करता है; प्रस्ताव आपकी समीक्षा के लिए दृश्यमान रहता है।',
+            linkLabel: 'एजेंट प्रोटोकॉल पढ़ें',
             linkPath: '/spec/agent-protocol',
           },
           {
@@ -1020,6 +1046,18 @@ export const hi: SiteTranslations = {
         label: 'मौजूदा सिस्टम के लिए जीवंत विनिर्देश',
         help: 'बदलाव डेल्टा के रूप में निर्दिष्ट होते हैं जो सिस्टम के बढ़ते विनिर्देश में विलीन होते हैं।',
       },
+      crossProjectMemory: {
+        label: 'प्रोजेक्ट्स के आर-पार स्थायी एजेंट मेमोरी',
+        help: 'मेमोरी एजेंट के साथ अलग-अलग रिपॉज़िटरी और सत्रों में चलती है, न कि केवल एक योजना की डिस्क-स्थिति तक सीमित।',
+      },
+      roleBasedAgents: {
+        label: 'अलग-अलग विशेषीकृत एजेंट भूमिकाएँ',
+        help: 'नामित पर्सोना (जैसे analyst, architect या reviewer) काम को बाँटते हैं, बजाय इसके कि एक ही एजेंट हर चरण चलाए।',
+      },
+      nativeIdeProduct: {
+        label: 'स्वयं एक IDE या एडिटर के रूप में शिप होता है',
+        help: 'यह उपकरण स्वयं में एक पूर्ण इंटीग्रेटेड डेवलपमेंट एनवायरनमेंट है, किसी मौजूदा कोडिंग एजेंट का ऐड-ऑन नहीं।',
+      },
     },
     alternatives: {
       dwp: {
@@ -1032,74 +1070,74 @@ export const hi: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'एक संविधान, एक विनिर्देश, एक योजना और एक कार्य-सूची के माध्यम से किसी फ़ीचर को निष्पादन योग्य विनिर्देश में बदलता है, उन slash कमांड्स से संचालित जो पचास से अधिक कोडिंग एजेंटों से जुड़ती हैं।',
+          'एक संविधान, एक विनिर्देश, एक योजना और एक कार्य-सूची के माध्यम से किसी फ़ीचर को निष्पादन योग्य विनिर्देश में बदलता है, उन slash कमांड्स से संचालित जो पचास से अधिक कोडिंग एजेंटों से जुड़ती हैं, और यह लागू करने से पहले जाँच सकता है कि सभी आर्टिफ़ैक्ट्स आपस में सुसंगत हैं।',
         audience:
           'वे टीमें जो अपने मौजूदा एजेंट के भीतर एक दोहराने योग्य specify, plan, tasks और implement वर्कफ़्लो चाहती हैं।',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'हर बदलाव को डेल्टा स्पेक्स (added, modified, removed) और परिदृश्यों सहित RFC 2119 आवश्यकताओं वाले एक प्रस्ताव के रूप में पकड़ता है, फिर उन्हें जीवंत विनिर्देशों में संग्रहित करता है।',
+          'हर बदलाव को डेल्टा स्पेक्स (added, modified, removed) और परिदृश्यों सहित RFC 2119 आवश्यकताओं वाले एक प्रस्ताव के रूप में पकड़ता है, फिर उन्हें जीवंत विनिर्देशों में संग्रहित करता है, साथ ही एक वैलिडेटर के साथ जो बदलाव स्वीकार करने से पहले प्रस्ताव की पूर्णता और परिदृश्य कवरेज जाँचता है।',
         audience:
           'मौजूदा सिस्टम पर काम करती वे टीमें जो चाहती हैं कि विनिर्देश एक-एक बदलाव के साथ बढ़ें।',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'एक एजेंटिक IDE और CLI जिसके विनिर्देश EARS-शैली आवश्यकताओं से डिज़ाइन तक और फिर कार्यों तक बढ़ते हैं, साथ में स्टीयरिंग फ़ाइलें और वे hooks जो एडिटर इवेंट पर चलते हैं।',
+          'एक एजेंटिक IDE और CLI जिसके विनिर्देश EARS-शैली आवश्यकताओं से डिज़ाइन तक और फिर कार्यों तक बढ़ते हैं, साथ में स्टीयरिंग फ़ाइलें और वे hooks जो एडिटर इवेंट पर चलते हैं, और यह डिज़ाइन शुरू होने से पहले आवश्यकता संबंधी कमियाँ पकड़ने के लिए मौजूदा कोडबेस के लिए विनिर्देश बना सकता है।',
         audience:
           'वे डेवलपर्स जो AWS-समर्थित टूलिंग के साथ अपने एडिटर में बना स्पेक-ड्रिवन डेवलपमेंट चाहते हैं।',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'विशेषज्ञ एजेंट भूमिकाओं (analysis, product, architecture, development, quality) का एक एजाइल फ़्रेमवर्क जो ब्रीफ़, आवश्यकताएँ, आर्किटेक्चर दस्तावेज़ और स्टोरी फ़ाइलें उत्पन्न करता है।',
+          'विशेषज्ञ एजेंट भूमिकाओं (analysis, product, architecture, development, quality) का एक एजाइल फ़्रेमवर्क जो ब्रीफ़, आवश्यकताएँ, आर्किटेक्चर दस्तावेज़ और स्टोरी फ़ाइलें उत्पन्न करता है, साथ ही एक Definition of Done जिसमें हर स्टोरी को पूर्ण मानने से पहले किसी टीम-साथी या AI पीयर-रिव्यूअर द्वारा समीक्षित होना आवश्यक है।',
         audience:
           'वे टीमें जिन्हें भूमिका-आधारित औपचारिकताएँ पसंद हैं और एजेंट कार्य के लिए पूर्ण एजाइल जीवनचक्र चाहिए।',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'स्किल्स की एक लाइब्रेरी और वर्कफ़्लो — ब्रेनस्टॉर्मिंग, छोटे टेस्ट-पहले चरणों में योजना बनाने, सब-एजेंटों से निष्पादन और पूर्णता से पहले समीक्षा के लिए।',
+          'स्किल्स की एक लाइब्रेरी और वर्कफ़्लो — ब्रेनस्टॉर्मिंग, छोटे टेस्ट-पहले चरणों में योजना बनाने, सब-एजेंटों से निष्पादन और पूर्णता से पहले समीक्षा के लिए, यहाँ की किसी भी अन्य विकल्प से अधिक कोडिंग-एजेंट होस्ट्स के साथ एकीकृत, साथ ही हर कार्य पर एक दो-चरणीय सब-एजेंट समीक्षा (पहले विनिर्देश-अनुपालन, फिर कोड गुणवत्ता)।',
         audience:
           'वे डेवलपर्स जो अपने कोडिंग एजेंट के भीतर अनुशासित टेस्ट-संचालित निष्पादन चाहते हैं।',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          'एक प्लानिंग सिस्टम — .planning डायरेक्टरी, आवश्यकता ids, चरण योजनाएँ, फ़्रेश-कॉन्टेक्स्ट निष्पादन और बताई गई अनिवार्यताओं के विरुद्ध एक सत्यापन पास के साथ।',
+          'एक प्लानिंग सिस्टम — .planning डायरेक्टरी, आवश्यकता ids, चरण योजनाएँ, फ़्रेश-कॉन्टेक्स्ट निष्पादन और हर योजना से निकाले गए उपयोगकर्ता-अवलोकनीय डिलिवरेबल्स के विरुद्ध एक सत्यापन पास के साथ — जिसे कॉन्टेक्स्ट-रॉट से बचने के लिए बनाया गया है: रिसर्च, प्लानिंग और निष्पादन को डिस्पोज़ेबल सब-एजेंटों में चलाकर और कंटेंट-फ़िंगरप्रिंट जाँच से पुराने हो चुके सत्यापन को पकड़कर।',
         audience:
           'सोलो डेवलपर्स और छोटी टीमें जो कम औपचारिकता में कॉन्टेक्स्ट इंजीनियरिंग और सत्यापन चाहते हैं।',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          'उन कोडिंग एजेंटों को कॉन्फ़िगर करता है जिन्हें आप पहले से उपयोग करते हैं — सत्रों और मॉडलों के बीच रूटिंग करने वाली पर्सिस्टेंट मेमोरी, चुनी हुई स्किल्स, MCP सर्वर, पर्सोना और वैकल्पिक Spec-Driven Development या Receipt-Driven Development के साथ। इसका कॉन्फ़िगरेशन डिफ़ॉल्ट रूप से आपकी ग्लोबल एजेंट सेटिंग्स में लिखा जाता है; वर्कस्पेस-स्कोप्ड इंस्टॉल वैकल्पिक है।',
         audience:
-          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+          'वे डेवलपर्स जो एक ऐसा कॉन्फ़िगर्ड एजेंट इकोसिस्टम चाहते हैं जो सत्रों में काम याद रखे और माँगे जाने पर साक्ष्य प्रस्तुत कर सके।',
       },
       'claude-ai-native-sdlc': {
         name: "Claude's AI-native SDLC",
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          'Plan और Design से लेकर Build, Test, Deploy और Maintain तक का छह-चरणीय लूप, जिसमें हर चरण पर मानव अनुमोदन आवश्यक है, चरणों के बीच रिपॉज़िटरी में कमिट किए गए स्थायी आर्टिफ़ैक्ट हैं, डिप्लॉय से पहले एक समर्पित सिक्योरिटी-टैग की गई समीक्षा है, और सतत evals हैं जो अग्रणी व अनुगामी डिलीवरी संकेतक प्रकाशित करते हैं।',
         audience:
-          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+          'वे टीमें जो Claude Code के एंड-टू-एंड सॉफ़्टवेयर डिलीवरी प्लेबुक और उसके प्रोडक्शन फ़ीडबैक लूप का मूल्यांकन कर रही हैं।',
       },
       'vendor-native': {
         name: 'वेंडर-नेटिव प्लान मोड',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor और Gemini CLI प्लान मोड, निर्देश फ़ाइलें और ऐसी स्किल्स शिप करते हैं जो AGENTS.md और Agent Skills मानकों का पालन करती हैं।',
+          'Claude Code, Codex, Cursor और Gemini CLI प्लान मोड, निर्देश फ़ाइलें और ऐसी स्किल्स शिप करते हैं जो खुले, वेंडर-निरपेक्ष AGENTS.md और Agent Skills मानकों पर आधारित हैं, हालाँकि सटीक प्लान-मोड व्यवहार अब भी वेंडर, क्लाइंट और वर्शन पर निर्भर करता है। विशेष रूप से Agent Skills शुरुआत में केवल एक संक्षिप्त सारांश लोड करती हैं और पूरे निर्देश सक्रियण पर लोड होते हैं, जिससे अप्रयुक्त क्षमता कॉन्टेक्स्ट से बाहर रहती है।',
         audience:
           'वे सभी जो बिना कोई पद्धति अपनाए किसी एक एजेंट के भीतर योजना बनाना चाहते हैं।',
       },
     },
     aiNative: {
-      title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      title: 'AI-native SDLC में यह कहाँ फिट होता है',
+      body: 'Claude का AI-native SDLC प्लेबुक एक पूरा लूप बताता है: Plan, Design, Build, Test, Deploy और Maintain। हर चरण एक आर्टिफ़ैक्ट कमिट करता है जिसे अगला चरण पढ़ता है, हर चरण पर मानव अनुमोदन के साथ और डिप्लॉय से पहले एक समर्पित सिक्योरिटी पास के साथ, जबकि प्रोडक्शन फ़ीडबैक नई intent बन जाता है।',
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP भी स्थायी-आर्टिफ़ैक्ट और गेटेड-अप्रूवल के विचार साझा करता है: intent एक योजना बन जाती है, कार्य साक्ष्य छोड़ते हैं, पूर्णता से पहले एक सिक्योरिटी पास चलता है, और रिपॉज़िटरी अगले एजेंट के लिए पठनीय बनी रहती है।',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+        'असली अंतर दायरे का है, कठोरता का नहीं: यह प्लेबुक विशेष रूप से Claude Code के इर्द-गिर्द बनाया गया है, जबकि DWP का हार्नेस और प्लान फ़ॉर्मैट किसी भी ऐसे एजेंट द्वारा पढ़ा जा सकता है जो AGENTS.md और Agent Skills मानकों का पालन करता है। यह प्लेबुक सतत मूल्यांकन और प्रोडक्शन संचालन को भी कवर करता है जिसका DWP दावा नहीं करता; वे परिचालन प्रथाएँ किसी DWP-संचालित रिपॉज़िटरी के साथ प्रतिस्पर्धा करने के बजाय उसे पूरक बना सकती हैं।',
       sourceLabel: "Read Claude's AI-native SDLC playbook",
     },
     profileCta: 'तुलना देखें',
@@ -1142,7 +1180,7 @@ export const hi: SiteTranslations = {
     },
     honestLimits: {
       title: 'ईमानदार सीमाएँ',
-      body: 'Deep Work Plan में जीवंत या डेल्टा विनिर्देश तंत्र नहीं है; OpenSpec और ऐसे उपकरण वहाँ मज़बूत हैं। पद्धति का कोई स्वतंत्र बेंचमार्क अभी तक मौजूद नहीं है; एक पूर्व-पंजीकृत सार्वजनिक मूल्यांकन योजनाबद्ध है। इंस्ट्रक्शन-लोड लेजर लोड किए गए bytes मापता है, टोकन, लागत या परिणाम नहीं।',
+      body: 'Deep Work Plan में जीवंत या डेल्टा विनिर्देश तंत्र नहीं है; OpenSpec और ऐसे उपकरण वहाँ मज़बूत हैं। पद्धति का कोई स्वतंत्र बेंचमार्क अभी तक मौजूद नहीं है; एक पूर्व-पंजीकृत सार्वजनिक मूल्यांकन योजनाबद्ध है। इंस्ट्रक्शन-लोड लेजर लोड किए गए bytes मापता है, टोकन, लागत या परिणाम नहीं। DWP जानबूझकर रिपॉज़िटरी तक सीमित है: यह न तो कोई क्रॉस-प्रोजेक्ट मेमोरी सिस्टम है, न भूमिका-आधारित एजेंट फ़्रेमवर्क, न ही कोई IDE — इसलिए यह इन क्षेत्रों में प्रतिस्पर्धा नहीं करता; जब काम की यही ज़रूरत हो तो इसे उस क्षेत्र को कवर करने वाले किसी उपकरण के साथ जोड़ें।',
     },
     correction: {
       title: 'इसे सटीक बनाए रखने में मदद करें',

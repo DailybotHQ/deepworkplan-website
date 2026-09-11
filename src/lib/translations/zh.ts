@@ -33,6 +33,7 @@ export const zh: SiteTranslations = {
     github: 'GitHub',
     faq: '常见问题',
     compare: '对比',
+    changelog: 'Changelog',
     resources: '资源',
     resourcesDesc: '示例、信任、常见问题与对比',
     repo: {
@@ -44,6 +45,24 @@ export const zh: SiteTranslations = {
     },
     menu: '打开菜单',
     closeMenu: '关闭菜单',
+  },
+
+  // Footer
+  changelogPage: {
+    meta: {
+      title: 'Deep Work Plan 更新日志',
+      description:
+        'Deep Work Plan 技能、方法论和可移植代理工作框架的重要更新。',
+    },
+    eyebrow: '更新日志',
+    title: '方法背后的工作',
+    intro:
+      '以来源为依据的时间线，记录让 Deep Work Plan 适用于长期代理工作的版本和设计决策。',
+    viewDetail: '阅读更新',
+    backToIndex: '所有更新',
+    sourceLabel: '来源',
+    featuredLabel: '重点发布',
+    relatedTitle: '相关更新',
   },
 
   // Footer
@@ -107,7 +126,7 @@ export const zh: SiteTranslations = {
       answer:
         'Deep Work Plan 以规范驱动开发应对：一份持久的计划、原子任务，以及代理必须通过的验证关卡。“完成”不再是感觉——而是可验证、可审查的证据。',
       efficiency:
-        '上下文是代理最稀缺的资源，因此 harness 为 token 效率而生：指令渐进加载，验证只触及改动之处，每项任务就地学习——长程工作依然划算。',
+        '上下文是代理最稀缺的资源，因此 harness 为 token 效率而生：指令渐进加载，验证只触及改动之处，每项任务就地学习——长程工作依然划算。计划本身也遵循同样的原则：范围明确的修复对应 Lite 计划，持续数小时的工作对应 Full 计划——形式始终服从工作的范围，而非相反。',
       illustrationAlt:
         '一幅雕版双联画：一侧是浓雾中触礁漂流的船只，另一侧是同一艘船沿既定航线稳健驶向港口灯塔。',
     },
@@ -805,6 +824,14 @@ export const zh: SiteTranslations = {
             linkPath: '/quickstart',
           },
           {
+            id: 'lite-vs-full',
+            question: 'Lite 计划与 Full 计划有什么区别？',
+            answer:
+              '这是一种呈现形式的选择，而非严格程度的取舍。每份计划都以 Lite 文件夹的形式开始：一份带有锚定任务记录的紧凑 README，它已经可以执行，而不是一份未完成的草稿。只有当某项任务的指令细节、依赖关系或契约无法容纳进一份可审阅的紧凑记录时，`create` 才会展开为 Full 任务文件；对任一格式的明确要求都会被遵从，而且 Lite 计划之后可以被提升为 Full，且不会丢失已完成的工作。两种格式承载着相同的验收标准、验证关卡、证据与强制性的 Final Review。',
+            linkLabel: '阅读方法论',
+            linkPath: '/methodology',
+          },
+          {
             id: 'is-it-a-tool',
             question: '它是工具、框架还是方法论？',
             answer:
@@ -821,28 +848,35 @@ export const zh: SiteTranslations = {
             linkPath: '/kit',
           },
           {
-            id: 'what-is-installed',
-            question: 'What exactly gets installed, and where?',
+            id: 'how-to-use',
+            question: '如何使用？',
             answer:
-              'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles AGENTS.md, docs/, .agents/ and the gitignored .dwp/ workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
-            linkLabel: 'See the adoption flow',
+              '三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx skills add DailybotHQ/deepworkplan-skill`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑一份进行中的计划（范围、任务，或将 Lite 计划提升为 Full）；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。',
+            linkLabel: '快速开始',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'what-is-installed',
+            question: '具体会安装什么、安装到哪里？',
+            answer:
+              '代理技能会被安装到你的代理加载项目或用户技能的位置。随后，接入会适配仓库本身：创建或调和 `AGENTS.md`、`docs/`、`.agents/` 以及被 gitignore 的 `.dwp/` 工作区。技能教会代理这套方法；仓库则保存其他代理接续工作所需的上下文、套件与计划证据。',
+            linkLabel: '查看采用流程',
             linkPath: '/init',
           },
           {
             id: 'requires-git',
-            question: 'Does Deep Work Plan require Git?',
+            question: 'Deep Work Plan 需要 Git 吗？',
             answer:
-              'Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including state.json checkpoints and gate records, is required so recovery does not depend on a chat transcript.',
-            linkLabel: 'Read about repository archetypes',
+              '对代码仓库而言推荐使用 Git，因为其历史记录是恢复与审查界面的一部分；但该方法论也可以在没有 Git 仓库的代理工作区中运行。在那种情况下，必须具备可机器读取的状态层——包括 `state.json` 检查点与关卡记录——以使恢复不依赖聊天记录。',
+            linkLabel: '了解仓库原型',
             linkPath: '/spec/archetypes',
           },
           {
             id: 'skill-plan-spec',
-            question:
-              'What is the difference between a skill, a plan and a product specification?',
+            question: '技能、计划与产品规范之间有什么区别？',
             answer:
-              'A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.',
-            linkLabel: 'Read the specification',
+              '技能描述代理如何执行一套可重复的流程。DWP 计划通过范围、验收标准、验证关卡与证据来描述一项具体的变更。产品规范描述产品当前的行为，并在实现之后通过增量持续演进；技能与计划本身也是规范，只是它们描述的是流程与变更，而非维护那份权威的产品契约。',
+            linkLabel: '阅读规范',
             linkPath: '/spec/dwp-specification',
           },
         ],
@@ -851,14 +885,6 @@ export const zh: SiteTranslations = {
         id: 'how',
         title: '计划如何运行',
         items: [
-          {
-            id: 'how-to-use',
-            question: '如何使用？',
-            answer:
-              '三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx skills add DailybotHQ/deepworkplan-skill`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑草稿或进行中的计划；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。',
-            linkLabel: '快速开始',
-            linkPath: '/quickstart',
-          },
           {
             id: 'gates',
             question: '验证关卡是如何实现的？需要人工签署吗？',
@@ -918,18 +944,18 @@ export const zh: SiteTranslations = {
           },
           {
             id: 'gate-fails',
-            question: 'What happens when a validation gate fails?',
+            question: '验证关卡失败时会发生什么？',
             answer:
-              'The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.',
-            linkLabel: 'Read the agent protocol',
+              '该任务会被记录为受阻，代理会在宣称完成之前停下。你可以查看证据、修复代码或精炼任务，然后再恢复执行；命令失败是需要解决不一致之处的信号，而不是削弱关卡的许可。',
+            linkLabel: '阅读代理协议',
             linkPath: '/spec/agent-protocol',
           },
           {
             id: 'unattended-runs',
-            question: 'Can a plan run unattended overnight or in CI?',
+            question: '计划可以在夜间或 CI 中无人值守地运行吗？',
             answer:
-              'Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.',
-            linkLabel: 'Read the unattended protocol',
+              '可以，前提是该计划已提前获得批准、具备所需的状态层，并赋予代理有界的权限。当现实与计划出现分歧、关卡失败且超出其计划内的修复范围，或需要新的批准或凭据时，无人值守的运行必须停止并记录一个阻塞项。',
+            linkLabel: '阅读无人值守协议',
             linkPath: '/spec/agent-protocol',
           },
         ],
@@ -952,7 +978,7 @@ export const zh: SiteTranslations = {
             question:
               '它与 BMAD、Superpowers、Get Shit Done 或 Gentle-AI 等代理工作流工具有何不同？',
             answer:
-              '这些框架带来了成熟的工作风格：角色、原则、测试先行的步骤、验证的习惯。Deep Work Plan 与两者都不同，聚焦于什么留在仓库里、什么可以被检查：任何代理都能冷启动读取的 harness、带验收标准与关卡的任务文件、能在会话结束后存续的状态、带 CI 友好退出码的符合性检查器，以及对每个流程加载多少指令字节的公开测量。它在构造上即是工具无关的，并且不向核心循环添加任何服务、提供商或密钥。对比页面标明了每种做法在何处内置、可选或不在范围内。Gentle-AI 属于相邻的一类——代理生态系统配置器——下一题会专门说明。 Gentle-AI 配置您已经在用的编码代理：跨会话的持久记忆（Engram）、精选技能、人设、MCP 服务器、可选的 Spec-Driven Development，以及可选的基于证据的审查（Receipt-Driven Development）。它写入各代理的配置目录，并可将规划产物保存在 Engram、OpenSpec 文件中，或两者兼有。Deep Work Plan 则安装进仓库本身——任何代理都能冷启动读取的 harness、带验收标准与关卡的任务文件、可恢复的磁盘状态、带 CI 友好退出码的符合性检查器，以及已发布的指令字节台账——而不向核心循环添加任何服务、提供商或密钥。这两层可以并存：Gentle-AI 装备代理；Deep Work Plan 让长周期工作在仓库内持久且可核查。',
+              '像 BMAD、Superpowers 和 Get Shit Done 这样的代理工作流框架带来了成熟的工作风格：角色、原则、测试先行的步骤、验证的习惯。Gentle-AI 处于相邻的类别，作为代理生态系统配置器：它为你已经在用的编码代理配备跨会话的持久记忆（Engram）、精选技能、角色设定（persona）、MCP 服务器、可选的 Spec-Driven Development 和可选的基于证据的审查（Receipt-Driven Development），并写入每个代理的配置目录。Deep Work Plan 与两者都不同：它专注于什么留在仓库里、什么可以被检查——任何代理都能冷启动读取的 harness、带验收标准与关卡（gate）的任务文件、能在会话结束后存续的状态、带有 CI 友好退出码的合规检查器，以及一份公开发布的、关于每个流程加载多少指令字节的测量。它在构造上与工具无关，不会给核心循环增加任何服务、提供方或密钥。这些层可以共存：框架和 Gentle-AI 塑造代理的工作方式；Deep Work Plan 让长期工作在仓库内变得持久且可验证。对比页面展示了每种方法在哪些方面是内置的、可选的，或不在范围内。',
             linkLabel: '查看对比',
             linkPath: '/compare',
           },
@@ -980,19 +1006,18 @@ export const zh: SiteTranslations = {
           },
           {
             id: 'core-and-addons',
-            question:
-              'Can I use the core methodology without installing add-ons?',
+            question: '不安装附加组件，也能使用核心方法论吗？',
             answer:
-              'Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.',
-            linkLabel: 'Browse the add-ons',
+              '可以。附加组件是可选叠加层，未安装任何附加组件的仓库依然完全符合 DWP 规范。Devcontainer、Dailybot 报告、依赖升级、设计系统支持以及可选的 CI 审查，只有在适合你的仓库、且你明确接受时才会提供。',
+            linkLabel: '浏览附加组件',
             linkPath: '/spec/addons',
           },
           {
             id: 'no-test-toolchain',
-            question: 'What if my repository has no tests or linting yet?',
+            question: '如果我的仓库还没有测试或 lint，该怎么办？',
             answer:
-              'DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.',
-            linkLabel: 'Read the agent protocol',
+              'DWP 不会把缺少工具链当作免检的理由。在接入过程中，代理会提出与技术栈相匹配的验证方案，将相应命令记录进仓库文档，并以这些命令作为未来关卡的目标；该提案会保持可见，供你审阅。',
+            linkLabel: '阅读代理协议',
             linkPath: '/spec/agent-protocol',
           },
           {
@@ -1089,6 +1114,18 @@ export const zh: SiteTranslations = {
         label: '面向存量系统的活规范',
         help: '变更以增量形式规范，并合并进一份不断生长的系统规范。',
       },
+      crossProjectMemory: {
+        label: '跨项目的持久代理记忆',
+        help: '记忆跟随代理跨越不同的仓库和会话，而不仅仅是单个计划的磁盘状态。',
+      },
+      roleBasedAgents: {
+        label: '职责分明的专业代理角色',
+        help: '分析师、架构师、审查者等具名角色分担工作，而不是由一个代理执行每一步。',
+      },
+      nativeIdeProduct: {
+        label: '本身即为一款 IDE 或编辑器',
+        help: '该工具本身就是一个集成开发环境，而不是现有编码代理的附加组件。',
+      },
     },
     alternatives: {
       dwp: {
@@ -1101,70 +1138,70 @@ export const zh: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          '通过一部宪章、一份规范、一份计划和一份任务清单，把一个功能转变为可执行的规范，由与五十余个编码代理集成的斜杠命令驱动。',
+          '通过一部宪章、一份规范、一份计划和一份任务清单，把一个功能转变为可执行的规范，由与五十余个编码代理集成的斜杠命令驱动，并能在开始实现前检查各产出物之间是否保持一致。',
         audience:
           '希望在自己已在使用的代理内部获得可复用的“规范、计划、任务、实现”工作流的团队。',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          '把每次变更捕捉为一份提案，带增量规范（新增、修改、移除）与含场景的 RFC 2119 需求，随后将它们归档为不断生长的活规范。',
+          '把每次变更捕捉为一份提案，带增量规范（新增、修改、移除）与含场景的 RFC 2119 需求，随后将它们归档为不断生长的活规范，并配有验证器在变更被接受前检查提案完整性与场景覆盖度。',
         audience: '在存量系统上工作、希望规范随每次变更逐步生长的团队。',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          '一款代理式 IDE 与 CLI，其规范从 EARS 风格需求推进到设计再到任务，并带有在编辑器事件上运行的引导文件与钩子。',
+          '一款代理式 IDE 与 CLI，其规范从 EARS 风格需求推进到设计再到任务，并带有在编辑器事件上运行的引导文件与钩子，还能为已有代码库生成规范，在设计开始前发现需求缺口。',
         audience:
           '希望规范驱动开发内置于编辑器、并配有 AWS 支撑工具链的开发者。',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          '一套由专业化代理角色（分析、产品、架构、开发、质量）组成的敏捷框架，产出简报、需求、架构文档与故事文件。',
+          '一套由专业化代理角色（分析、产品、架构、开发、质量）组成的敏捷框架，产出简报、需求、架构文档与故事文件，其完成定义要求每个故事在被视为完成前必须经过队友或 AI 同行评审代理的审查。',
         audience: '偏好角色化仪式、并希望代理工作拥有完整敏捷生命周期的团队。',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          '一套技能库与工作流，用于头脑风暴、以测试先行的小步骤规划、用子代理执行，并在完成前审查。',
+          '一套技能库与工作流，用于头脑风暴、以测试先行的小步骤规划、用子代理执行，并在完成前审查，其支持的编码代理宿主数量超过本页任何其他方案，并对每个任务执行两阶段子代理审查（先检查是否符合规范，再检查代码质量）。',
         audience: '希望在编码代理内部获得纪律化测试驱动执行的开发者。',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          '一套计划系统，带有 .planning 目录、需求编号、阶段计划、全新上下文执行，以及针对声明必备项的验证环节。',
+          '一套计划系统，带有 .planning 目录、需求编号、阶段计划、全新上下文执行，以及针对从每份计划摘要中提取的、用户可观察交付物的验证环节；它专为对抗“上下文腐化”而设计——在一次性子代理中运行调研、规划与执行，并通过内容指纹检查发现已过时的验证结果。',
         audience:
           '想要上下文工程与验证、又不想有太多仪式的独立开发者与小团队。',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          '为你已经在使用的编码代理配置持久记忆（同时可跨会话、跨模型进行路由）、精选技能、MCP 服务器、人设，以及可选的 Spec-Driven Development 或 Receipt-Driven Development。其配置默认写入代理的全局设置；按工作区范围安装则是可选项。',
         audience:
-          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+          '面向希望拥有一个能跨会话记住工作、并可按需生成证据的已配置代理生态系统的开发者。',
       },
       'claude-ai-native-sdlc': {
         name: "Claude's AI-native SDLC",
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          '一个从 Plan、Design 到 Build、Test、Deploy、Maintain 的六阶段循环，每个阶段都设有人工批准关卡，各阶段之间把持久产出物提交到仓库，在部署前设有专门的安全审查环节，并通过持续评估发布领先与滞后的交付指标。',
         audience:
-          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+          '面向正在评估 Claude Code 端到端软件交付手册及其生产反馈循环的团队。',
       },
       'vendor-native': {
         name: '厂商原生计划模式',
         whatItDoesWell:
-          'Claude Code、Codex、Cursor 与 Gemini CLI 都内置了计划模式，以及遵循 AGENTS.md 与 Agent Skills 标准的指令文件和技能。',
+          '代理产品可能提供计划模式、指令文件与技能，它们建立在开放、跨厂商的 AGENTS.md 与 Agent Skills 标准之上，但计划模式的具体行为仍取决于厂商、客户端与版本。其中 Agent Skills 在启动时只加载简短摘要，仅在被激活时才加载完整指令，从而把未使用的能力留在上下文之外。',
         audience: '希望在单个代理内部获得规划能力、而无需采纳一套方法论的人。',
       },
     },
     aiNative: {
-      title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      title: '这如何契合 AI 原生 SDLC',
+      body: 'Claude 的 AI-native SDLC 手册描述了一个完整循环：Plan、Design、Build、Test、Deploy 与 Maintain。每个阶段都会提交下一阶段要读取的产出物，每个阶段都设有人工批准关卡，部署前设有专门的安全审查环节，生产环境的反馈则会转化为新的 intent。',
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP 与之共享持久产出物与关卡式批准的理念：intent 变成计划，任务留下证据，完成前会运行一次安全审查，仓库对下一个代理始终保持可读。',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+        '真正的区别在于范围而非严格程度：该手册是围绕 Claude Code 专门构建的，而 DWP 的执行框架与计划格式可被任何遵循 AGENTS.md 与 Agent Skills 标准的代理读取。该手册还涵盖了 DWP 并未声称具备的持续评估与生产运维，这些运维实践可以与由 DWP 驱动的仓库互补，而非彼此竞争。',
       sourceLabel: "Read Claude's AI-native SDLC playbook",
     },
     profileCta: '查看比较',
@@ -1207,7 +1244,7 @@ export const zh: SiteTranslations = {
     },
     honestLimits: {
       title: '诚实的局限',
-      body: 'Deep Work Plan 没有活规范或增量规范机制；OpenSpec 及类似工具在那一面更强。该方法论尚无独立基准测试；一项预注册的公开评估已在计划之中。指令加载台账测量的是加载的字节数，而非 token、成本或结果。',
+      body: 'Deep Work Plan 没有活规范或增量规范机制；OpenSpec 及类似工具在那一面更强。该方法论尚无独立基准测试；一项预注册的公开评估已在计划之中。指令加载台账测量的是加载的字节数，而非 token、成本或结果。DWP 有意将范围限定在仓库之内：它不是跨项目记忆系统，不是基于角色的代理框架，也不是一款 IDE，因此它也不在这些维度上参与竞争——当工作确实需要这些能力时，请将它与覆盖该能力的工具搭配使用。',
     },
     correction: {
       title: '帮助我们保持准确',

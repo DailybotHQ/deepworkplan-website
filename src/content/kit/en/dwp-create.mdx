@@ -28,9 +28,9 @@ Create a new Deep Work Plan from a high-level goal.
 
 ## Modes
 
-`dwp-create` defaults to **guided** mode: it gathers context, writes a single refined draft, **shows it to you, and asks for confirmation before generating the final plan** — so you always read the plan before it is created. This is the recommended default, especially the first few times.
+`dwp-create` defaults to **guided** mode: it gathers context, runs the analysis, and materializes a Lite plan directly — a compact proposal that is already executable, not a throwaway draft — **shows it to you, and asks whether to retain it as Lite, promote it to a Full task-file plan, edit it, or stop** — so you always read the real plan before deciding. This is the recommended default, especially the first few times.
 
-Append **`trust`** (or `auto`) as the last word to skip the confirmations — the agent writes the refined draft and goes straight to the final plan:
+Append **`trust`** (or `auto`) as the last word to skip that review — the agent goes straight to a pre-approved, ready-to-run plan (Lite or Full, chosen by the same signals):
 
 ```
 /dwp-create <goal> trust
@@ -42,7 +42,7 @@ Trust mode is the power-user shortcut once you trust the flow; guided mode keeps
 
 1. Analyze the goal and repository context.
 2. Ask clarifying questions if ambiguous.
-3. Write a refined draft to `.dwp/drafts/` (in guided mode, review and confirm it).
+3. Materialize the plan directly under `.dwp/plans/PLAN_<name>/` — a Lite plan by default, or Full for larger work (in guided mode, review it and choose to retain Lite, promote to Full, edit, or stop).
 4. Decompose into sequential tasks and write the README, task files, and PROGRESS.
 5. End with the Final Review (security pass, final-state validation, skills reconciliation).
 

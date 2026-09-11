@@ -54,6 +54,41 @@ const kit = defineCollection({
     .loose(),
 });
 
+/**
+ * Changelog — source-backed updates to the Deep Work Plan skill and
+ * methodology. Each entry is localized under `src/content/changelog/{lang}`
+ * and keeps an English slug across every language.
+ */
+const changelog = defineCollection({
+  loader: glob({ base: './src/content/changelog', pattern: '**/*.{md,mdx}' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    version: z.string(),
+    kind: z.enum([
+      'release',
+      'architecture',
+      'reliability',
+      'trust',
+      'foundation',
+    ]),
+    lang: langEnum,
+    order: z.number(),
+    featured: z.boolean().default(false),
+    sourceLabel: z.string().optional(),
+    sourceUrl: z.string().url().optional(),
+    sourceLinks: z
+      .array(
+        z.object({
+          label: z.string(),
+          url: z.string().url(),
+        })
+      )
+      .optional(),
+  }),
+});
+
 const pages = defineCollection({
   // Markdown source files for agent-friendly .md endpoints (static pages)
   loader: glob({
@@ -73,4 +108,5 @@ export const collections = {
   methodology,
   spec,
   kit,
+  changelog,
 };

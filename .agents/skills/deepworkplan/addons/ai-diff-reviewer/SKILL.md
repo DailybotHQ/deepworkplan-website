@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-addon-ai-diff-reviewer
-description: "DeepWorkPlan addon — required local review (baseline since standard 2.3.0), optional CI surface — that connects an AI-first repo to the AI Diff Reviewer (DailybotHQ/ai-diff-reviewer on GitHub, \"AI Diff Reviewer\" on the Marketplace, current v2.0.0) — installing (with consent) the vendored coding-agent skill (DailybotHQ/ai-diff-reviewer, five sub-skills — parent default flow, generate-extension, setup, open-pr, apply-review) and, if the developer picks Flow B (dual-surface), letting the upstream setup sub-skill write .github/workflows/pr-review.yml so every pull request to the target repo is reviewed in CI with byte-identical parity to the local review. Wires the security pass of the mandatory DWP Final Review to run the parent default flow (\"Review my current branch\") as an additive step producing verdict + findings table + severity, appended under a dedicated heading in analysis_results/SECURITY_REVIEW.md. In Flow B, also surfaces the upstream apply-review sub-skill as an OPTIONAL developer-invoked companion during execute for walking through CI-posted findings per-finding (apply / defer / skip) with explicit consent. The local review is required: onboard installs it and the Final Review's security pass runs it; a missing install is a recorded finding (with an install attempt when authorized), never a silent skip; invocation errors never block (completed-review critical findings still follow the Final Review contract), reconciles existing setups instead of clobbering them, defers all install/auth/wizard details to the upstream skill's own consent flows, and applies Flow A (local-only) as the baseline and offers Flow B (dual-surface) as an explicit opt-in — never installs the CI surface unrequested. Runs from onboard Phase 7a and the targeted harness upgrade, or directly when the developer wants the optional CI merge gate on DWP work."
-version: "2.17.1"
+description: "DeepWorkPlan addon — required local review (baseline since standard 2.3.0), optional CI surface — connects an AI-first repo to the AI Diff Reviewer. Onboarding installs the vendored coding-agent skill and extension with consent; the Final Review runs the local pass when present or records a missing-reviewer finding without bootstrapping. Flow B CI setup remains an explicit opt-in delegated to upstream. Invocation errors never block, completed-review critical findings still follow the Final Review contract, and all install/auth/wizard details defer to upstream consent flows."
+version: "4.0.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -75,9 +75,10 @@ extension = same review, locally and in CI.
 ## Read these first (all relative inside the skill)
 
 - [`SPEC.md`](SPEC.md) — the normative (RFC-2119) contract: two flows, what is
-  installed (all opt-in), how auth is deferred, how the security-pass
-  augmentation is wired, the optional `apply-review` companion, the
-  never-block rule, and the vendor-neutral guardrail.
+  installed (local review required since 2.3.0; CI surface opt-in), how auth
+  is deferred, how the security-pass augmentation is wired, the optional
+  `apply-review` companion, the never-block rule, and the vendor-neutral
+  guardrail.
 - [`templates/INTEGRATION.md`](templates/INTEGRATION.md) — reasoning guidance
   (NOT copy-paste): detect-if-already-installed, how to ask for the flow, how
   to wire the security-pass augmentation, and the consent / never-block
@@ -93,8 +94,8 @@ extension = same review, locally and in CI.
 - From the **targeted harness upgrade** (`onboard` Phase 0) — when a
   previously onboarded repository lacks the vendored skill or the extension
   file, the upgrade reconciles the missing piece.
-- From **`execute`** — when the Final Review's security pass finds the
-  reviewer missing and the run is authorized to write to the harness.
+- From **`execute`** — the Final Review's security pass runs the local review
+  when installed, or records a missing-reviewer finding; it never installs.
 - **Directly** — `/deepworkplan-addon-ai-diff-reviewer` on an already-onboarded
   repo to add the review integration.
 
@@ -242,7 +243,7 @@ Run the pinned install unless the developer explicitly declined in Step 0
 Security-pass detection (SPEC §6.1 / `create` / `execute`) requires
 **skill + an extension file** at one of the three recognized paths. Do
 **not** finish addon onboarding without one — otherwise every later Final
-Review security pass records an `install incomplete` finding instead of a
+Review security pass records a `local reviewer not installed` finding instead of a
 review.
 
 1. If an extension already exists at a recognized path → record it; do not
@@ -315,12 +316,11 @@ This is the integration value. Reasoning guidance is in
 - The local review is **required, with honest degradation**: it runs whenever
   the vendored skill is present **and** an extension file is detected. When
   either is missing, the security pass records a `local reviewer not
-  installed` finding in `SECURITY_REVIEW.md`, installs the missing piece when
-  the run is authorized to write to the harness (trust mode or explicit
-  approval) and then reviews, or otherwise carries the finding into the
-  completion report. It **MUST NOT hard-stop** `create` or `execute`; an
-  invocation error of a review that could start is warn-once-record-and-
-  continue (see SPEC §6.1 and §7). Do **not** skip the local pass because a
+  installed` finding in `SECURITY_REVIEW.md` and carries it into the completion
+  report. Installation is an onboarding action, not a Final Review side effect;
+  mid-plan `execute` MUST NOT bootstrap the missing piece. It **MUST NOT
+  hard-stop** `create` or `execute`; an invocation error of a review that could
+  start is warn-once-record-and-continue (see SPEC §6.1 and §7). Do **not** skip the local pass because a
   CI provider secret is unset; that secret is Flow B CI / gate messaging only.
 
 - The reviewer's `.review/extension.md` (repo-tailored via the upstream
@@ -343,8 +343,9 @@ skip, and do not fail the onboarding.
 ## Failure-mode guardrails
 
 - **Required locally; invocation never blocking.** A missing vendored skill or
-  extension file is a recorded finding — plus an install attempt when the run
-  is authorized — never a silent skip and never a hard stop of the plan; a
+  extension file is a recorded finding, never a silent skip and never a hard
+  stop of the plan; installation is handled only by onboarding or an explicit
+  addon invocation. A
   declined install is a recorded declared exception that `verify` keeps
   reporting. A local review invocation error is warn-once-record-and-continue.
   Once a local review **ran**, open `critical`

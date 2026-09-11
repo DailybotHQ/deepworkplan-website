@@ -35,7 +35,7 @@ describe('Header: Resources disclosure', () => {
     const hrefs = Array.from(panel?.querySelectorAll('a') ?? []).map((a) =>
       a.getAttribute('href')
     );
-    expect(hrefs).toEqual(['/examples', '/compare', '/faq', '/trust']);
+    expect(hrefs).toEqual(['/examples', '/trust', '/faq', '/compare']);
   });
 
   it('closes on Escape', async () => {
@@ -64,7 +64,7 @@ describe('Header: Resources disclosure', () => {
 });
 
 describe('MobileMenu: Compare and FAQ entries', () => {
-  it('lists /compare and /faq between Examples and Trust', () => {
+  it('lists /trust and /faq between Examples and Compare', () => {
     render(MobileMenu, {
       props: { lang: 'en', nav, open: true, toggleMenu: () => {} },
     });
@@ -74,9 +74,9 @@ describe('MobileMenu: Compare and FAQ entries', () => {
       .filter((href): href is string => href !== null && href.startsWith('/'));
     const examples = links.indexOf('/examples');
     expect(examples).toBeGreaterThanOrEqual(0);
-    expect(links[examples + 1]).toBe('/compare');
+    expect(links[examples + 1]).toBe('/trust');
     expect(links[examples + 2]).toBe('/faq');
-    expect(links[examples + 3]).toBe('/trust');
+    expect(links[examples + 3]).toBe('/compare');
   });
 });
 
