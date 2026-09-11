@@ -10,7 +10,7 @@
 **The methodology site for planning and executing complex software work with AI coding agents.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Astro](https://img.shields.io/badge/Astro-6.x-FF5D01?logo=astro)](https://astro.build)
+[![Astro](https://img.shields.io/badge/Astro-7.x-FF5D01?logo=astro)](https://astro.build)
 [![Svelte](https://img.shields.io/badge/Svelte-5.x-FF3E00?logo=svelte)](https://svelte.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38BDF8?logo=tailwindcss)](https://tailwindcss.com)
 
@@ -26,11 +26,21 @@
 
 **Models matter; context matters more.** DWP turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and finishes long-horizon work. Put another way: *Deep Work Plan is spec-driven development where the repository itself becomes the harness.*
 
+The methodology rests on five ideas, and the site is built to argue them:
+
+1. **You steer; the agents do the hours.** You decide what *done* means and where the lines are. The plan carries your intent, so the work does not need correcting every twenty minutes.
+2. **The plan is what the agent returns to.** Long work fills any model's context and detail falls away. Atomic tasks, validation gates, and resumable state give the agent something durable to come back to.
+3. **Done is a contract, not a feeling.** Every task names its acceptance criteria and the checks that must pass. An agent does not get to *decide* it finished — it passes, or the task stays open.
+4. **The repository is the harness.** Context, tools, guardrails, and state live in the repo as plain files any agent can read. No lock-in, no external brain; it survives a context reset or a change of agent mid-flight.
+5. **Context is the scarcest resource.** Instructions load progressively by trigger, validation is selected from what each task touched, and skills are decided task-locally — so the plan pays for itself.
+
+Work is planned at the size it deserves: a compact **Lite** plan for bounded changes, a per-task **Full** plan for long-horizon work, with the same contract — stable task ids, touched surface, acceptance criteria, gates, completion evidence, and one final review — behind both.
+
 The site is a fast, fully multilingual static site built with [Astro](https://astro.build) — 17 languages ship today (English, Spanish, Portuguese, Chinese, Japanese, German, French, Korean, Russian, Italian, Turkish, Indonesian, Vietnamese, Hindi, Polish, Ukrainian, Thai). It explains and sells the methodology, hosts the readable specification, and catalogs the kit (presets, adapters, commands) for installing DWP into any repository. The repository **dogfoods** the methodology it documents.
 
 ### This repository dogfoods DWP
 
-The repository practices the methodology it documents. The official DeepWorkPlan skill is installed under `.agents/skills/deepworkplan/` as a **reference install** — the skill source is gitignored, and a committed `skills-lock.json` pins it. What is committed is the thin `dwp-*` command delegators, the `/skill-create` and `/agent-create` delegators (which route to the skill's **author** sub-skill that grows the repo's own kit), the `/lib-upgrade` delegator for the opt-in **dependency-upgrade** add-on, and the `/init` adoption flow. All Deep Work Plan output lives in the gitignored `.dwp/` directory. The legacy homegrown command engine has been retired in favor of the installed skill. See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md#dogfooding-dwp) for details.
+The repository practices the methodology it documents. The official DeepWorkPlan skill is **vendored** under `.agents/skills/deepworkplan/` — the whole pack is committed and pinned by `skills-lock.json`, so every agent that clones this repo gets the exact same harness with no install step. Alongside it live the thin `dwp-*` command delegators, the `/skill-create` and `/agent-create` delegators (which route to the skill's **author** sub-skill that grows the repo's own kit), the `/lib-upgrade` delegator for the opt-in **dependency-upgrade** add-on, and the `/init` adoption flow. All Deep Work Plan output lives in the gitignored `.dwp/` directory. Running `/dwp-verify` here checks this repository against the same standard the site publishes. See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md#dogfooding-dwp) for details.
 
 ### Highlights
 
@@ -43,6 +53,8 @@ The repository practices the methodology it documents. The official DeepWorkPlan
 | 🌙 **Dark mode** | Inline hurricane-lamp toggle in the masthead with localStorage persistence |
 | ⚡ **Performance-first** | Static site, minimal JS, optimized assets, 90+ Lighthouse |
 | 🔍 **SEO + AEO** | Sitemap, Open Graph, structured data, agent-friendly Markdown endpoints |
+| 🚀 **`/init` adoption endpoint** | A canonical, copy-paste onboarding prompt at [deepworkplan.com/init](https://deepworkplan.com/init) — paste it into any agent and it adopts the methodology in the current repo |
+| 🔌 **Agent API + MCP** | Markdown endpoints for every page, a published `openapi.json`, and an MCP server at the edge so agents can query the methodology directly |
 | 🤖 **Agent-friendly** | Shared `.agents/` home for skills, commands, and agent definitions across Claude Code, Codex, Cursor, Gemini |
 
 > **Note:** The site focuses on the methodology, specification, and kit readers plus agent-friendly Markdown endpoints. Earlier blog, slides/tech-talks, and personal pages have been removed.
@@ -53,7 +65,7 @@ The repository practices the methodology it documents. The official DeepWorkPlan
 
 | Layer | Technology |
 | :---- | :--------- |
-| Framework | [Astro](https://astro.build) 6.x |
+| Framework | [Astro](https://astro.build) 7.x |
 | UI | [Svelte](https://svelte.dev) 5.x |
 | Styling | [Tailwind CSS](https://tailwindcss.com) 4.x |
 | Language | [TypeScript](https://www.typescriptlang.org) 6.x |
