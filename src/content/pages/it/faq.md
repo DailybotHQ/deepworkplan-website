@@ -1,7 +1,7 @@
 ---
 title: "Domande frequenti — Deep Work Plan"
 description: "Risposte alle domande più frequenti su Deep Work Plan: cosa fa, come funzionano i gate e la ripresa, il confronto con gli altri strumenti e come adottarlo."
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-11
 ---
 
 ## Domande frequenti
@@ -22,6 +22,12 @@ Sviluppatori e team che affidano lavoro reale e multi-step ad agenti di coding e
 
 [Avvio rapido](https://deepworkplan.com/it/quickstart)
 
+### Qual è la differenza tra un piano Lite e uno Full?
+
+Una scelta di rappresentazione, non un compromesso sul rigore. Ogni piano inizia come una cartella Lite: un README compatto con record di task ancorati che è già eseguibile, non una bozza parziale. `create` si espande in file di task Full solo quando il dettaglio delle istruzioni, le dipendenze o i contratti di un task non rientrano in un record compatto e revisionabile; una richiesta esplicita per l’uno o l’altro formato viene rispettata, e un piano Lite può essere promosso a Full in un secondo momento senza perdere il lavoro già completato. Entrambi i formati portano gli stessi criteri di accettazione, validation gate, evidenze e il Final Review obbligatorio.
+
+[Leggi la metodologia](https://deepworkplan.com/it/methodology)
+
 ### È uno strumento, un framework o una metodologia?
 
 Una metodologia distribuita come skill installabile. Non c’è server, né account, né formato proprietario, né runtime al di fuori dell’agente di coding che già utilizza. Ciò che viene installato sono istruzioni che l’agente legge, un piccolo insieme di script shell per il rilevamento del contesto e la verifica di conformità, e le convenzioni che il Suo repository adotta. Tutto ciò che il piano produce è Markdown e JSON nel Suo repository, leggibile senza alcuno strumento.
@@ -34,13 +40,31 @@ Qualsiasi agente che legge i file del repository. La skill segue lo standard ape
 
 [Esplora il kit](https://deepworkplan.com/it/kit)
 
-## Come viene eseguito un piano
-
 ### Come si usa?
 
-Tre passaggi. Per prima cosa, installa la skill Deep Work Plan nel tuo agente di coding — la via più rapida è `npx skills add DailybotHQ/deepworkplan-skill` (oppure clona il repository della skill ed esegui `./setup.sh`). In secondo luogo, fai l’onboarding del repository una volta, così l’agente adatta `AGENTS.md`, `docs/`, il kit `.agents/` e un’area `.dwp/` ignorata da git al tuo stack: punta a https://deepworkplan.com/init.md, oppure esegui `/deepworkplan-onboard`. In terzo luogo, pianifica ed esegui il lavoro con i comandi leggeri: `/dwp-create <goal>` costruisce un piano; `/dwp-execute` lo esegue task per task contro ogni gate; `/dwp-refine` modifica una bozza o un piano in corso; `/dwp-resume` continua dopo un’interruzione; `/dwp-status` riporta l’avanzamento senza eseguire; `/dwp-verify` produce un rapporto oggettivo di conformità. Gli agenti che intercettano `/` usano spesso `#` invece (per esempio `#dwp-execute`). Il punto di adozione e l’avvio rapido percorrono lo stesso cammino con più dettaglio.
+Tre passaggi. Per prima cosa, installa la skill Deep Work Plan nel tuo agente di coding — la via più rapida è `npx skills add DailybotHQ/deepworkplan-skill` (oppure clona il repository della skill ed esegui `./setup.sh`). In secondo luogo, fai l’onboarding del repository una volta, così l’agente adatta `AGENTS.md`, `docs/`, il kit `.agents/` e un’area `.dwp/` ignorata da git al tuo stack: punta a https://deepworkplan.com/init.md, oppure esegui `/deepworkplan-onboard`. In terzo luogo, pianifica ed esegui il lavoro con i comandi leggeri: `/dwp-create <goal>` costruisce un piano; `/dwp-execute` lo esegue task per task contro ogni gate; `/dwp-refine` modifica un piano in corso (ambito, task, o la promozione di un piano Lite a Full); `/dwp-resume` continua dopo un’interruzione; `/dwp-status` riporta l’avanzamento senza eseguire; `/dwp-verify` produce un rapporto oggettivo di conformità. Gli agenti che intercettano `/` usano spesso `#` invece (per esempio `#dwp-execute`). Il punto di adozione e l’avvio rapido percorrono lo stesso cammino con più dettaglio.
 
 [Avvio rapido](https://deepworkplan.com/it/quickstart)
+
+### Cosa viene installato esattamente, e dove?
+
+La skill dell’agente viene installata ovunque il Suo agente carichi le skill di progetto o utente. L’onboarding adatta poi il repository stesso: crea o riconcilia `AGENTS.md`, `docs/`, `.agents/` e l’area di lavoro `.dwp/` esclusa da git. La skill insegna il metodo all’agente; il repository conserva il contesto, il kit e le evidenze del piano di cui gli altri agenti hanno bisogno per proseguire.
+
+[Vedi il flusso di adozione](https://deepworkplan.com/it/init)
+
+### Deep Work Plan richiede Git?
+
+Git è consigliato per i repository perché la sua cronologia fa parte della superficie di recupero e revisione, ma la metodologia può funzionare anche in uno spazio di lavoro dell’agente senza un repository Git. In tal caso è richiesto lo strato di stato leggibile dalle macchine, inclusi i checkpoint di `state.json` e i record dei gate, così il recupero non dipende da una trascrizione della chat.
+
+[Legga gli archetipi di repository](https://deepworkplan.com/it/spec/archetypes)
+
+### Qual è la differenza tra una skill, un piano e una specifica di prodotto?
+
+Una skill descrive come un agente esegue una procedura ripetibile. Un piano DWP descrive una modifica concreta attraverso ambito, criteri di accettazione, validation gate ed evidenze. Una specifica di prodotto descrive il comportamento attuale del prodotto ed evolve tramite delta dopo l’implementazione; anche le skill e i piani sono specifiche, ma descrivono procedure e modifiche anziché mantenere quel contratto di prodotto canonico.
+
+[Leggi la specifica](https://deepworkplan.com/it/spec/dwp-specification)
+
+## Come viene eseguito un piano
 
 ### Come sono implementati i validation gate? Richiedono un’approvazione umana?
 
@@ -84,6 +108,18 @@ L’unico task di chiusura obbligatorio di ogni piano. In ordine: un passaggio d
 
 [La specifica](https://deepworkplan.com/it/spec/dwp-specification)
 
+### Cosa succede quando un validation gate fallisce?
+
+Il task viene registrato come bloccato e l’agente si ferma prima di dichiarare il completamento. Lei può ispezionare le evidenze, riparare il codice o rifinire il task, quindi riprendere; un comando fallito è un segnale per risolvere la discrepanza, non un permesso per indebolire il gate.
+
+[Legga il protocollo dell’agente](https://deepworkplan.com/it/spec/agent-protocol)
+
+### Un piano può essere eseguito senza supervisione, di notte o in CI?
+
+Sì, quando il piano è stato approvato in anticipo, porta lo strato di stato richiesto e conferisce all’agente un’autorità delimitata. Un’esecuzione senza supervisione deve fermarsi e registrare un blocco quando la realtà diverge, un gate fallisce al di fuori del suo ambito di riparazione pianificato, oppure serve una nuova approvazione o una credenziale.
+
+[Legga il protocollo per le esecuzioni senza supervisione](https://deepworkplan.com/it/spec/agent-protocol)
+
 ## Come si confronta
 
 ### In cosa differisce dagli strumenti spec-driven come Spec Kit, OpenSpec o Kiro?
@@ -111,6 +147,18 @@ Le modalità plan integrate sono utili e Deep Work Plan si basa sullo stesso sub
 L’onboarding è non distruttivo: rileva un `AGENTS.md`, un `docs/`, un `.agents/` o un `CLAUDE.md` esistente, riconcilia anziché sovrascrivere e chiede prima di sostituire qualsiasi cosa. Scrive l’indice `AGENTS.md` con i comandi reali, un albero `docs/` ragionato, documentazione per modulo, il kit `.agents/` con i sottili comandi `dwp-*`, un’area di output `.dwp/` esclusa da git, una mappa dei test verificata e la revisione locale del codice obbligatoria (la skill AI Diff Reviewer più un’estensione di revisione adattata al repository). Esegue poi un self-check e il verificatore di conformità, così può vedere cosa è stato prodotto. Un repository sottoposto a onboarding con una versione precedente riceve un aggiornamento mirato che cambia solo ciò che manca.
 
 [L’endpoint di adozione](https://deepworkplan.com/it/init)
+
+### Posso usare la metodologia core senza installare gli add-on?
+
+Sì. Gli add-on sono livelli opzionali e un repository senza nessuno di essi è pienamente conforme a DWP. I devcontainer, la rendicontazione Dailybot, gli aggiornamenti delle dipendenze, il supporto al design system e la revisione CI opzionale vengono offerti solo quando si adattano al Suo repository e Lei li accetta esplicitamente.
+
+[Esplora gli add-on](https://deepworkplan.com/it/spec/addons)
+
+### Cosa succede se il mio repository non ha ancora test o linting?
+
+DWP non tratta l’assenza di una toolchain come un lasciapassare. Durante l’onboarding l’agente propone una configurazione di validazione adeguata allo stack, registra i comandi nella documentazione del repository e usa quei comandi come obiettivo per i gate futuri; la proposta resta visibile perché Lei la riveda.
+
+[Legga il protocollo dell’agente](https://deepworkplan.com/it/spec/agent-protocol)
 
 ### Quanto costa e come si misura l’efficienza?
 

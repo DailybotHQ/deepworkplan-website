@@ -827,6 +827,14 @@ export const es: SiteTranslations = {
             linkPath: '/quickstart',
           },
           {
+            id: 'lite-vs-full',
+            question: '¿Cuál es la diferencia entre un plan Lite y uno Full?',
+            answer:
+              'Una decisión de representación, no un compromiso de rigor. Todo plan empieza como una carpeta Lite: un README compacto con registros de tareas anclados que ya es ejecutable, no un borrador parcial. `create` solo se expande a archivos de tarea Full cuando el detalle de instrucciones, las dependencias o los contratos de una tarea no caben en un registro compacto y revisable; una solicitud explícita de cualquiera de los dos formatos se respeta, y un plan Lite puede promoverse a Full más adelante sin perder el trabajo ya completado. Ambos formatos llevan los mismos criterios de aceptación, puertas de validación, evidencias y el Final Review obligatorio.',
+            linkLabel: 'Leer la metodología',
+            linkPath: '/methodology',
+          },
+          {
             id: 'is-it-a-tool',
             question: '¿Es una herramienta, un framework o una metodología?',
             answer:
@@ -841,6 +849,14 @@ export const es: SiteTranslations = {
               'Con cualquier agente que lea archivos del repositorio. La skill sigue el estándar abierto Agent Skills y la convención `AGENTS.md`, de modo que Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot y otros la reconocen a través de su carga normal de skills e instrucciones. La propia evaluación de la metodología muestra un plan iniciado por el agente de un proveedor y reanudado por el de otro, en ambas direcciones. La cobertura de instalación y la evidencia de comportamiento se listan por agente en la matriz de compatibilidad, y ambas nunca se confunden.',
             linkLabel: 'Explorar el kit',
             linkPath: '/kit',
+          },
+          {
+            id: 'how-to-use',
+            question: '¿Cómo lo uso?',
+            answer:
+              'Tres pasos. Primero, instala la skill Deep Work Plan en tu agente de código — la vía más rápida es `npx skills add DailybotHQ/deepworkplan-skill` (o clona el repositorio de la skill y ejecuta `./setup.sh`). Segundo, incorpora el repositorio una vez para que el agente adapte `AGENTS.md`, `docs/`, el kit `.agents/` y un área `.dwp/` ignorada por git a tu stack: apúntalo a https://deepworkplan.com/init.md, o ejecuta `/deepworkplan-onboard`. Tercero, planifica y ejecuta el trabajo con los comandos ligeros: `/dwp-create <goal>` construye un plan; `/dwp-execute` lo ejecuta tarea por tarea frente a cada puerta; `/dwp-refine` edita un plan en curso (alcance, tareas, o promover un plan Lite a Full); `/dwp-resume` continúa tras una interrupción; `/dwp-status` informa del progreso sin ejecutar; `/dwp-verify` produce un informe objetivo de conformidad. Los agentes que interceptan `/` suelen usar `#` en su lugar (por ejemplo `#dwp-execute`). El endpoint de adopción y el inicio rápido recorren el mismo camino con más detalle.',
+            linkLabel: 'Inicio rápido',
+            linkPath: '/quickstart',
           },
           {
             id: 'what-is-installed',
@@ -873,14 +889,6 @@ export const es: SiteTranslations = {
         id: 'how',
         title: 'Cómo se ejecuta un plan',
         items: [
-          {
-            id: 'how-to-use',
-            question: '¿Cómo lo uso?',
-            answer:
-              'Tres pasos. Primero, instala la skill Deep Work Plan en tu agente de código — la vía más rápida es `npx skills add DailybotHQ/deepworkplan-skill` (o clona el repositorio de la skill y ejecuta `./setup.sh`). Segundo, incorpora el repositorio una vez para que el agente adapte `AGENTS.md`, `docs/`, el kit `.agents/` y un área `.dwp/` ignorada por git a tu stack: apúntalo a https://deepworkplan.com/init.md, o ejecuta `/deepworkplan-onboard`. Tercero, planifica y ejecuta el trabajo con los comandos ligeros: `/dwp-create <goal>` construye un plan; `/dwp-execute` lo ejecuta tarea por tarea frente a cada puerta; `/dwp-refine` edita un borrador o un plan en curso; `/dwp-resume` continúa tras una interrupción; `/dwp-status` informa del progreso sin ejecutar; `/dwp-verify` produce un informe objetivo de conformidad. Los agentes que interceptan `/` suelen usar `#` en su lugar (por ejemplo `#dwp-execute`). El endpoint de adopción y el inicio rápido recorren el mismo camino con más detalle.',
-            linkLabel: 'Inicio rápido',
-            linkPath: '/quickstart',
-          },
           {
             id: 'gates',
             question:

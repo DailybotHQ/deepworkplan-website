@@ -837,6 +837,15 @@ export const fr: SiteTranslations = {
             linkPath: '/quickstart',
           },
           {
+            id: 'lite-vs-full',
+            question:
+              'Quelle est la différence entre un plan Lite et un plan Full ?',
+            answer:
+              'Un choix de représentation, non un compromis sur la rigueur. Tout plan commence comme un dossier Lite : un README compact avec des enregistrements de tâches ancrés, déjà exécutable, et non une ébauche partielle. `create` ne s’étend en fichiers de tâche Full que lorsque le détail des instructions, les dépendances ou les contrats d’une tâche ne tiennent pas dans un enregistrement compact et relisible ; une demande explicite pour l’un ou l’autre format est honorée, et un plan Lite peut être promu en Full plus tard sans perdre le travail déjà accompli. Les deux formats portent les mêmes critères d’acceptation, portes de validation, preuves et le Final Review obligatoire.',
+            linkLabel: 'Lire la méthodologie',
+            linkPath: '/methodology',
+          },
+          {
             id: 'is-it-a-tool',
             question: 'Est-ce un outil, un framework ou une méthodologie ?',
             answer:
@@ -853,28 +862,36 @@ export const fr: SiteTranslations = {
             linkPath: '/kit',
           },
           {
-            id: 'what-is-installed',
-            question: 'What exactly gets installed, and where?',
+            id: 'how-to-use',
+            question: 'Comment l’utiliser ?',
             answer:
-              'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles AGENTS.md, docs/, .agents/ and the gitignored .dwp/ workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
-            linkLabel: 'See the adoption flow',
+              'Trois étapes. D’abord, installez la skill Deep Work Plan dans votre agent de code — le chemin le plus rapide est `npx skills add DailybotHQ/deepworkplan-skill` (ou clonez le dépôt de la skill et exécutez `./setup.sh`). Ensuite, intégrez le dépôt une fois pour que l’agent adapte `AGENTS.md`, `docs/`, le kit `.agents/` et une zone `.dwp/` ignorée par git à votre stack : pointez-le vers https://deepworkplan.com/init.md, ou exécutez `/deepworkplan-onboard`. Enfin, planifiez et exécutez le travail avec les commandes légères : `/dwp-create <goal>` construit un plan ; `/dwp-execute` l’exécute tâche par tâche face à chaque porte ; `/dwp-refine` modifie un plan en cours (le périmètre, les tâches, ou la promotion d’un plan Lite en Full) ; `/dwp-resume` reprend après une interruption ; `/dwp-status` rapporte la progression sans exécuter ; `/dwp-verify` produit un rapport objectif de conformité. Les agents qui interceptent `/` utilisent souvent `#` à la place (par exemple `#dwp-execute`). Le point d’adoption et le démarrage rapide reprennent le même chemin en plus de détails.',
+            linkLabel: 'Démarrage rapide',
+            linkPath: '/quickstart',
+          },
+          {
+            id: 'what-is-installed',
+            question: 'Qu’est-ce qui est installé exactement, et où ?',
+            answer:
+              'La skill d’agent s’installe partout où votre agent charge les skills de projet ou d’utilisateur. L’onboarding adapte ensuite le dépôt lui-même : il crée ou réconcilie `AGENTS.md`, `docs/`, `.agents/` et l’espace de travail `.dwp/` ignoré par git. La skill enseigne la méthode à l’agent ; le dépôt conserve le contexte, le kit et les preuves de plan dont les autres agents ont besoin pour continuer.',
+            linkLabel: 'Voir le flux d’adoption',
             linkPath: '/init',
           },
           {
             id: 'requires-git',
-            question: 'Does Deep Work Plan require Git?',
+            question: 'Deep Work Plan nécessite-t-il Git ?',
             answer:
-              'Git is recommended for repositories because its history is part of the recovery and review surface, but the methodology can also run in an agent workspace without a Git repository. In that case the machine-readable state layer, including state.json checkpoints and gate records, is required so recovery does not depend on a chat transcript.',
-            linkLabel: 'Read about repository archetypes',
+              'Git est recommandé pour les dépôts parce que son historique fait partie de la surface de récupération et de revue, mais la méthodologie peut aussi fonctionner dans un espace de travail d’agent sans dépôt Git. Dans ce cas, la couche d’état lisible par machine, y compris les points de contrôle `state.json` et les enregistrements de porte, est requise pour que la récupération ne dépende pas d’une transcription de conversation.',
+            linkLabel: 'Lire les archétypes de dépôt',
             linkPath: '/spec/archetypes',
           },
           {
             id: 'skill-plan-spec',
             question:
-              'What is the difference between a skill, a plan and a product specification?',
+              'Quelle est la différence entre une skill, un plan et une spécification produit ?',
             answer:
-              'A skill describes how an agent performs a repeatable procedure. A DWP plan describes a concrete change through scope, acceptance criteria, validation gates and evidence. A product specification describes the product current behavior and evolves through deltas after implementation; skills and plans are specifications too, but they describe procedures and changes rather than maintaining that canonical product contract.',
-            linkLabel: 'Read the specification',
+              'Une skill décrit comment un agent exécute une procédure répétable. Un plan DWP décrit un changement concret via son périmètre, des critères d’acceptation, des portes de validation et des preuves. Une spécification produit décrit le comportement actuel du produit et évolue par deltas après l’implémentation ; les skills et les plans sont eux aussi des spécifications, mais ils décrivent des procédures et des changements plutôt que de maintenir ce contrat produit canonique.',
+            linkLabel: 'Lire la spécification',
             linkPath: '/spec/dwp-specification',
           },
         ],
@@ -883,14 +900,6 @@ export const fr: SiteTranslations = {
         id: 'how',
         title: 'Comment se déroule un plan',
         items: [
-          {
-            id: 'how-to-use',
-            question: 'Comment l’utiliser ?',
-            answer:
-              'Trois étapes. D’abord, installez la skill Deep Work Plan dans votre agent de code — le chemin le plus rapide est `npx skills add DailybotHQ/deepworkplan-skill` (ou clonez le dépôt de la skill et exécutez `./setup.sh`). Ensuite, intégrez le dépôt une fois pour que l’agent adapte `AGENTS.md`, `docs/`, le kit `.agents/` et une zone `.dwp/` ignorée par git à votre stack : pointez-le vers https://deepworkplan.com/init.md, ou exécutez `/deepworkplan-onboard`. Enfin, planifiez et exécutez le travail avec les commandes légères : `/dwp-create <goal>` construit un plan ; `/dwp-execute` l’exécute tâche par tâche face à chaque porte ; `/dwp-refine` modifie un brouillon ou un plan en cours ; `/dwp-resume` reprend après une interruption ; `/dwp-status` rapporte la progression sans exécuter ; `/dwp-verify` produit un rapport objectif de conformité. Les agents qui interceptent `/` utilisent souvent `#` à la place (par exemple `#dwp-execute`). Le point d’adoption et le démarrage rapide reprennent le même chemin en plus de détails.',
-            linkLabel: 'Démarrage rapide',
-            linkPath: '/quickstart',
-          },
           {
             id: 'gates',
             question:
@@ -955,18 +964,20 @@ export const fr: SiteTranslations = {
           },
           {
             id: 'gate-fails',
-            question: 'What happens when a validation gate fails?',
+            question:
+              'Que se passe-t-il quand une porte de validation échoue ?',
             answer:
-              'The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.',
-            linkLabel: 'Read the agent protocol',
+              'La tâche est enregistrée comme bloquée et l’agent s’arrête avant de revendiquer un achèvement. Vous pouvez inspecter les preuves, corriger le code ou raffiner la tâche, puis reprendre ; une commande en échec est un signal pour résoudre l’écart, pas une permission d’affaiblir la porte.',
+            linkLabel: 'Lire le protocole d’agent',
             linkPath: '/spec/agent-protocol',
           },
           {
             id: 'unattended-runs',
-            question: 'Can a plan run unattended overnight or in CI?',
+            question:
+              'Un plan peut-il s’exécuter sans supervision, de nuit ou en CI ?',
             answer:
-              'Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.',
-            linkLabel: 'Read the unattended protocol',
+              'Oui, quand le plan a été approuvé à l’avance, porte la couche d’état requise et confère à l’agent une autorité bornée. Une exécution sans supervision doit s’arrêter et enregistrer un blocage quand la réalité diverge, quand une porte échoue en dehors de son périmètre de réparation prévu, ou quand une nouvelle approbation ou un identifiant est nécessaire.',
+            linkLabel: 'Lire le protocole d’exécution sans supervision',
             linkPath: '/spec/agent-protocol',
           },
         ],
@@ -1020,18 +1031,18 @@ export const fr: SiteTranslations = {
           {
             id: 'core-and-addons',
             question:
-              'Can I use the core methodology without installing add-ons?',
+              'Puis-je utiliser la méthodologie de base sans installer d’add-ons ?',
             answer:
-              'Yes. Add-ons are opt-in layers and a repository with none is fully DWP-conformant. Devcontainers, Dailybot reporting, dependency upgrades, design-system support and optional CI review are offered only when they fit your repository and you accept them explicitly.',
-            linkLabel: 'Browse the add-ons',
+              'Oui. Les add-ons sont des couches optionnelles, et un dépôt sans aucun d’entre eux est pleinement conforme DWP. Devcontainers, le reporting Dailybot, les mises à niveau de dépendances, le support du design-system et la revue CI optionnelle ne sont proposés que lorsqu’ils conviennent à votre dépôt et que vous les acceptez explicitement.',
+            linkLabel: 'Parcourir les add-ons',
             linkPath: '/spec/addons',
           },
           {
             id: 'no-test-toolchain',
-            question: 'What if my repository has no tests or linting yet?',
+            question: 'Et si mon dépôt n’a pas encore de tests ni de lint ?',
             answer:
-              'DWP does not treat the absence of a toolchain as a free pass. During onboarding the agent proposes a stack-appropriate validation setup, records the commands in the repository documentation and uses those commands as the target for future gates; the proposal remains visible for you to review.',
-            linkLabel: 'Read the agent protocol',
+              'DWP ne traite pas l’absence d’outillage comme un laissez-passer. Pendant l’onboarding, l’agent propose une configuration de validation adaptée à la stack, consigne les commandes dans la documentation du dépôt et utilise ces commandes comme cible pour les portes futures ; la proposition reste visible pour que vous la revoyiez.',
+            linkLabel: 'Lire le protocole d’agent',
             linkPath: '/spec/agent-protocol',
           },
           {

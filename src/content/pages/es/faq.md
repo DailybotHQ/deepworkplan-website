@@ -1,7 +1,7 @@
 ---
 title: "Preguntas frecuentes — Deep Work Plan"
 description: "Respuestas a las preguntas sobre Deep Work Plan: qué hace, cómo funcionan las puertas de validación y la reanudación, cómo se compara y cómo adoptarlo."
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-11
 ---
 
 ## Preguntas frecuentes
@@ -22,6 +22,12 @@ Desarrolladores y equipos que entregan trabajo real de varios pasos a agentes de
 
 [Inicio rápido](https://deepworkplan.com/es/quickstart)
 
+### ¿Cuál es la diferencia entre un plan Lite y uno Full?
+
+Una decisión de representación, no un compromiso de rigor. Todo plan empieza como una carpeta Lite: un README compacto con registros de tareas anclados que ya es ejecutable, no un borrador parcial. `create` solo se expande a archivos de tarea Full cuando el detalle de instrucciones, las dependencias o los contratos de una tarea no caben en un registro compacto y revisable; una solicitud explícita de cualquiera de los dos formatos se respeta, y un plan Lite puede promoverse a Full más adelante sin perder el trabajo ya completado. Ambos formatos llevan los mismos criterios de aceptación, puertas de validación, evidencias y el Final Review obligatorio.
+
+[Leer la metodología](https://deepworkplan.com/es/methodology)
+
 ### ¿Es una herramienta, un framework o una metodología?
 
 Una metodología empaquetada como una skill instalable. No hay servidor, ni cuenta, ni formato propietario, ni runtime más allá del agente de código que ya usas. Lo que se instala son instrucciones que el agente lee, un pequeño conjunto de scripts de shell para la detección de contexto y la comprobación de conformidad, y las convenciones que tu repositorio adopta. Todo lo que el plan produce es Markdown y JSON en tu repositorio, legible sin ninguna herramienta.
@@ -33,6 +39,12 @@ Una metodología empaquetada como una skill instalable. No hay servidor, ni cuen
 Con cualquier agente que lea archivos del repositorio. La skill sigue el estándar abierto Agent Skills y la convención `AGENTS.md`, de modo que Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot y otros la reconocen a través de su carga normal de skills e instrucciones. La propia evaluación de la metodología muestra un plan iniciado por el agente de un proveedor y reanudado por el de otro, en ambas direcciones. La cobertura de instalación y la evidencia de comportamiento se listan por agente en la matriz de compatibilidad, y ambas nunca se confunden.
 
 [Explorar el kit](https://deepworkplan.com/es/kit)
+
+### ¿Cómo lo uso?
+
+Tres pasos. Primero, instala la skill Deep Work Plan en tu agente de código — la vía más rápida es `npx skills add DailybotHQ/deepworkplan-skill` (o clona el repositorio de la skill y ejecuta `./setup.sh`). Segundo, incorpora el repositorio una vez para que el agente adapte `AGENTS.md`, `docs/`, el kit `.agents/` y un área `.dwp/` ignorada por git a tu stack: apúntalo a https://deepworkplan.com/init.md, o ejecuta `/deepworkplan-onboard`. Tercero, planifica y ejecuta el trabajo con los comandos ligeros: `/dwp-create <goal>` construye un plan; `/dwp-execute` lo ejecuta tarea por tarea frente a cada puerta; `/dwp-refine` edita un plan en curso (alcance, tareas, o promover un plan Lite a Full); `/dwp-resume` continúa tras una interrupción; `/dwp-status` informa del progreso sin ejecutar; `/dwp-verify` produce un informe objetivo de conformidad. Los agentes que interceptan `/` suelen usar `#` en su lugar (por ejemplo `#dwp-execute`). El endpoint de adopción y el inicio rápido recorren el mismo camino con más detalle.
+
+[Inicio rápido](https://deepworkplan.com/es/quickstart)
 
 ### ¿Qué se instala exactamente y dónde?
 
@@ -53,12 +65,6 @@ Una skill describe cómo ejecuta un agente un procedimiento repetible. Un plan d
 [Leer la especificación](https://deepworkplan.com/es/spec/dwp-specification)
 
 ## Cómo se ejecuta un plan
-
-### ¿Cómo lo uso?
-
-Tres pasos. Primero, instala la skill Deep Work Plan en tu agente de código — la vía más rápida es `npx skills add DailybotHQ/deepworkplan-skill` (o clona el repositorio de la skill y ejecuta `./setup.sh`). Segundo, incorpora el repositorio una vez para que el agente adapte `AGENTS.md`, `docs/`, el kit `.agents/` y un área `.dwp/` ignorada por git a tu stack: apúntalo a https://deepworkplan.com/init.md, o ejecuta `/deepworkplan-onboard`. Tercero, planifica y ejecuta el trabajo con los comandos ligeros: `/dwp-create <goal>` construye un plan; `/dwp-execute` lo ejecuta tarea por tarea frente a cada puerta; `/dwp-refine` edita un borrador o un plan en curso; `/dwp-resume` continúa tras una interrupción; `/dwp-status` informa del progreso sin ejecutar; `/dwp-verify` produce un informe objetivo de conformidad. Los agentes que interceptan `/` suelen usar `#` en su lugar (por ejemplo `#dwp-execute`). El endpoint de adopción y el inicio rápido recorren el mismo camino con más detalle.
-
-[Inicio rápido](https://deepworkplan.com/es/quickstart)
 
 ### ¿Cómo se implementan las puertas de validación? ¿Necesitan aprobación humana?
 
@@ -162,6 +168,6 @@ La metodología y la skill tienen licencia MIT y son gratuitas; no hay servicio,
 
 ## ¿Te queda alguna pregunta?
 
-Abre un issue en GitHub. Las preguntas que surgen repetidamente se añaden a esta página.
+Abre una discusión o un issue en GitHub. Las preguntas que surgen repetidamente se añaden a esta página.
 
 [Pregunta en GitHub](https://github.com/DailybotHQ/deepworkplan-website/issues)
