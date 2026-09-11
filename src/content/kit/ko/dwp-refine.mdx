@@ -34,6 +34,10 @@ import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
 4. task 표를 갱신합니다.
 5. 무엇이 왜 바뀌었는지 기록합니다.
 
+## Lite 계획을 Full로 승격하기
+
+`/dwp-refine promote {plan_name}`은 Lite 계획의 권위 있는 표현을 README의 인라인 task 기록에서 task별 파일로 전환하며, 범위를 바꾸지 않고 완료된 작업과 task ID를 보존합니다. 승격은 표현 방식에만 관련됩니다 — execute를 호출하는 일은 결코 없습니다. Full 계획이 자동으로 Lite로 강등되지는 않습니다.
+
 ## 별칭
 
 - `dwp:refine`

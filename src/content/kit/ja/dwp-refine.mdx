@@ -34,6 +34,10 @@ import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
 4. タスク表を更新する。
 5. 何が、なぜ変わったかを記録する。
 
+## Lite 計画を Full へ昇格させる
+
+`/dwp-refine promote {plan_name}` は、Lite 計画の正本表現を README 内のインラインなタスク記録からタスクごとのファイルへ切り替え、範囲を変えずに完了済みの作業とタスク ID を保持します。昇格は表現形式のみに関わるものです——execute を呼び出すことは決してありません。Full 計画が自動的に Lite へ降格されることはありません。
+
 ## エイリアス
 
 - `dwp:refine`
