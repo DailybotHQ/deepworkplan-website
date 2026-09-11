@@ -35,6 +35,7 @@
     "md:check": "node scripts/check-md-parity.mjs",
     "md:check:strict": "node scripts/check-md-parity.mjs --strict",
     "seo:audit": "node scripts/audit-seo.mjs",
+    "aeo:audit": "node scripts/audit-aeo.mjs",
     "i18n:check": "node scripts/i18n/check.mjs",
     "i18n:scaffold": "node scripts/i18n/scaffold-language.mjs",
     "lighthouse": "lhci autorun",
