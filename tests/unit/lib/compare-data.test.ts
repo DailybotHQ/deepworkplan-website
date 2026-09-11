@@ -67,12 +67,36 @@ describe('compare-data: sources and review date', () => {
 });
 
 describe('compare-data: Deep Work Plan row', () => {
-  it('is built in for the nine DWP capabilities and not in scope for living specs', () => {
+  it('is honest about DWP: built in on its own capabilities, and not the leader on every row', () => {
     const dwp = getAlternative('dwp');
+    const exceptions: Partial<Record<(typeof CAPABILITY_IDS)[number], string>> =
+      {
+        brownfieldSpecs: 'not-in-scope',
+        crossProjectMemory: 'not-in-scope',
+        roleBasedAgents: 'optional',
+        nativeIdeProduct: 'not-in-scope',
+      };
     for (const capability of CAPABILITY_IDS) {
-      const expected =
-        capability === 'brownfieldSpecs' ? 'not-in-scope' : 'built-in';
+      const expected = exceptions[capability] ?? 'built-in';
       expect(dwp.cells[capability], capability).toBe(expected);
+    }
+    // The matrix must not be structurally DWP-shaped: at least one row exists
+    // where DWP itself is not `built-in`, and at least one alternative is
+    // `built-in` on a row where DWP is not — otherwise every comparison would
+    // always show the same DWP-centric capabilities by construction.
+    const dwpNotBuiltIn = CAPABILITY_IDS.filter(
+      (c) => dwp.cells[c] !== 'built-in'
+    );
+    expect(dwpNotBuiltIn.length).toBeGreaterThan(0);
+    const otherAlternatives = ALTERNATIVES.filter((a) => a.id !== 'dwp');
+    for (const capability of dwpNotBuiltIn) {
+      const someAlternativeLeads = otherAlternatives.some(
+        (a) => a.cells[capability] === 'built-in'
+      );
+      expect(
+        someAlternativeLeads,
+        `${capability} has no built-in alternative`
+      ).toBe(true);
     }
   });
 
