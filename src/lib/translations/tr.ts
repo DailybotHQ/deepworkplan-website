@@ -34,7 +34,7 @@ export const tr: SiteTranslations = {
     github: 'GitHub',
     faq: 'SSS',
     compare: 'Karşılaştırma',
-    changelog: 'Değişiklik günlüğü',
+    changelog: 'Changelog',
     resources: 'Kaynaklar',
     resourcesDesc: 'Örnekler, güven, SSS ve karşılaştırma',
     repo: {
@@ -1124,6 +1124,18 @@ export const tr: SiteTranslations = {
         label: 'Mevcut sistemler için yaşayan spec’ler',
         help: 'Değişiklikler, sistemin büyüyen spesifikasyonuna birleşen delta’lar olarak belirtilir.',
       },
+      crossProjectMemory: {
+        label: 'Projeler arasında kalıcı ajan belleği',
+        help: 'Bellek, yalnızca bir planın diskteki durumuyla sınırlı kalmadan, ajanı farklı depolar ve oturumlar arasında takip eder.',
+      },
+      roleBasedAgents: {
+        label: 'Ayrı, uzmanlaşmış ajan rolleri',
+        help: 'İsimlendirilmiş roller (analist, mimar veya inceleyen gibi) işi paylaştırır; tek bir ajan her adımı yürütmez.',
+      },
+      nativeIdeProduct: {
+        label: 'Kendi IDE’si veya editörü olarak sunulur',
+        help: 'Araç, mevcut bir kodlama ajanına eklenti olmak yerine, kendi başına eksiksiz bir geliştirme ortamıdır.',
+      },
     },
     alternatives: {
       dwp: {
@@ -1136,74 +1148,74 @@ export const tr: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'Bir özelliği bir anayasa, bir spec, bir plan ve bir görev listesiyle yürütülebilir bir spesifikasyona dönüştürür; elliden fazla kodlama ajanıyla entegre slash komutlarıyla yönlendirilir.',
+          'Bir özelliği bir anayasa, bir spec, bir plan ve bir görev listesiyle yürütülebilir bir spesifikasyona dönüştürür; elliden fazla kodlama ajanıyla entegre slash komutlarıyla yönlendirilir ve uygulamaya başlamadan önce yapıtların birbiriyle tutarlı kalıp kalmadığını denetleyebilir.',
         audience:
           'Zaten kullandıkları ajanın içinde tekrarlanabilir specify, plan, tasks ve implement iş akışı isteyen ekipler.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'Her değişikliği delta spec’lerle (eklenen, değiştirilen, kaldırılan) ve senaryolarla RFC 2119 gereksinimleri içeren bir öneri olarak yakalar, ardından bunları yaşayan spesifikasyonlara arşivler.',
+          'Her değişikliği delta spec’lerle (eklenen, değiştirilen, kaldırılan) ve senaryolarla RFC 2119 gereksinimleri içeren bir öneri olarak yakalar, ardından bunları yaşayan spesifikasyonlara arşivler; bir değişiklik kabul edilmeden önce öneri eksiksizliğini ve senaryo kapsamını denetleyen bir doğrulayıcıyla.',
         audience:
           'Mevcut sistemlerde çalışan ve spesifikasyonların değişiklik değişiklik büyümesini isteyen ekipler.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'Spec’leri EARS tarzı gereksinimlerden tasarıma ve görevlere taşıyan, düzenleyici olaylarında çalışan steering dosyaları ve hook’larla bir agentic IDE ve CLI.',
+          'Spec’leri EARS tarzı gereksinimlerden tasarıma ve görevlere taşıyan, düzenleyici olaylarında çalışan steering dosyaları ve hook’larla bir agentic IDE ve CLI; ayrıca mevcut bir kod tabanı için spec üreterek tasarım başlamadan önce gereksinim boşluklarını yakalayabilir.',
         audience:
           'Düzenleyicisine AWS destekli araçlarla spec odaklı geliştirme yerleşik isteyen geliştiriciler.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'Brief, gereksinim, mimari belgeler ve story dosyaları üreten uzmanlaşmış ajan rollerinden (analiz, ürün, mimari, geliştirme, kalite) oluşan bir agile çerçeve.',
+          'Brief, gereksinim, mimari belgeler ve story dosyaları üreten uzmanlaşmış ajan rollerinden (analiz, ürün, mimari, geliştirme, kalite) oluşan bir agile çerçeve; bir story’nin tamamlanmış sayılabilmesi için bir takım arkadaşı ya da bir yapay zekâ meslektaş inceleyicisi tarafından incelenmesini zorunlu kılan bir Definition of Done ile.',
         audience:
           'Rol tabanlı törenleri seven ve ajan işi için tam bir agile yaşam döngüsü isteyen ekipler.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'Beyin fırtınası, küçük test-first adımlarla planlama, alt ajanlarla yürütme ve tamamlamadan önce inceleme için bir skill kütüphanesi ve iş akışı.',
+          'Beyin fırtınası, küçük test-first adımlarla planlama, alt ajanlarla yürütme ve tamamlamadan önce inceleme için bir skill kütüphanesi ve iş akışı; buradaki diğer tüm alternatiflerden daha fazla kodlama ajanı barındırıcısıyla entegre, ayrıca her görevde iki aşamalı bir alt ajan incelemesiyle (önce spec uyumu, sonra kod kalitesi).',
         audience:
           'Kodlama ajanlarında disiplinli test odaklı yürütme isteyen geliştiriciler.',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          'Bir .planning dizini, gereksinim kimlikleri, faz planları, taze bağlam yürütmesi ve belirtilen must-have’lere karşı bir doğrulama geçişiyle bir planlama sistemi.',
+          'Bir .planning dizini, gereksinim kimlikleri, faz planları, taze bağlam yürütmesi ve her planın özetinden çıkarılan, kullanıcının gözlemleyebileceği çıktılara karşı bir doğrulama geçişiyle bir planlama sistemi; araştırma, planlama ve yürütmeyi tek kullanımlık alt ajanlarda çalıştırarak “bağlam çürümesiyle” mücadele etmek ve içerik parmak izi denetimleriyle güncelliğini yitirmiş doğrulamaları yakalamak üzere özel olarak tasarlanmıştır.',
         audience:
           'Az törenle bağlam mühendisliği ve doğrulama isteyen solo geliştiriciler ve küçük ekipler.',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          'Zaten kullandığınız kodlama ajanlarını, oturumlar ve modeller arasında da yönlendirme yapan kalıcı bellek, derlenmiş skill’ler, MCP sunucuları, personalar ve isteğe bağlı Spec-Driven Development ya da Receipt-Driven Development ile yapılandırır. Yapılandırması varsayılan olarak global ajan ayarlarınıza yazılır; çalışma alanına özel bir kurulum isteğe bağlıdır (opt-in).',
         audience:
-          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+          'Oturumlar arasında işi hatırlayan ve talep üzerine kanıt üretebilen, yapılandırılmış bir ajan ekosistemi isteyen geliştiriciler.',
       },
       'claude-ai-native-sdlc': {
-        name: "Claude's AI-native SDLC",
+        name: 'Claude’un AI-native SDLC’si',
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          'Plan ve Design’dan Build, Test, Deploy ve Maintain’e uzanan altı aşamalı bir döngü; her aşamada zorunlu bir onay, aşamalar arasında depoya commit edilen kalıcı yapıtlar, deploy öncesi güvenlik etiketli özel bir inceleme geçişi ve teslimatın öncü ve gecikmeli göstergelerini yayımlayan sürekli değerlendirmelerle (evals).',
         audience:
-          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+          'Claude Code’un uçtan uca yazılım teslim playbook’unu ve üretim geri bildirim döngüsünü değerlendiren ekipler.',
       },
       'vendor-native': {
         name: 'Satıcı yerel plan modları',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor ve Gemini CLI, AGENTS.md ve Agent Skills standartlarını izleyen plan modları, talimat dosyaları ve skill’ler sunar.',
+          'Claude Code, Codex, Cursor ve Gemini CLI, açık ve satıcılar arası AGENTS.md ve Agent Skills standartları üzerine kurulu plan modları, talimat dosyaları ve skill’ler sunabilir; ancak tam plan modu davranışı yine de satıcıya, istemciye ve sürüme bağlıdır. Özellikle Agent Skills, başlangıçta yalnızca kısa bir özeti yükler, tam talimatları ise yalnızca etkinleştirildiğinde yükleyerek kullanılmayan kapasiteyi bağlam dışında tutar.',
         audience:
           'Metodoloji benimsemek istemeyen, tek bir ajanın içinde planlama isteyen herkes.',
       },
     },
     aiNative: {
-      title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      title: 'Bunun AI-native SDLC içindeki yeri',
+      body: 'Claude’un AI-native SDLC playbook’u tam bir döngü tanımlar: Plan, Design, Build, Test, Deploy ve Maintain. Her aşama bir sonraki aşamanın okuyacağı bir yapıtı commit eder; her aşamada bir insan onay kapısı ve deploy öncesi özel bir güvenlik incelemesi vardır; bu arada üretim geri bildirimi yeni bir intent’e dönüşür.',
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP, kalıcı yapıt ve kapılı onay fikirlerini paylaşır: intent bir plana dönüşür, görevler kanıt bırakır, tamamlanmadan önce bir güvenlik incelemesi çalışır ve depo bir sonraki ajan için okunabilir kalır.',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+        'Gerçek fark, titizlikte değil kapsamdadır: playbook özel olarak Claude Code etrafında kuruludur; DWP’nin harness’ı ve plan biçimi ise AGENTS.md ve Agent Skills standartlarını izleyen herhangi bir ajan tarafından okunabilir. Playbook ayrıca DWP’nin iddia etmediği sürekli değerlendirme ve üretim operasyonlarını da kapsar; bu operasyonel pratikler DWP ile çalışan bir depoyla rekabet etmek yerine onu tamamlayabilir.',
       sourceLabel: "Read Claude's AI-native SDLC playbook",
     },
     profileCta: 'Karşılaştırmayı gör',
@@ -1246,7 +1258,7 @@ export const tr: SiteTranslations = {
     },
     honestLimits: {
       title: 'Dürüst sınırlar',
-      body: 'Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil.',
+      body: 'Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil. DWP kasıtlı olarak depoyla sınırlıdır: ne projeler arası bir bellek sistemi, ne rol tabanlı bir ajan çerçevesi, ne de bir IDE’dir; dolayısıyla bu eksenlerde de rekabet etmez — iş bunu gerektirdiğinde, o eksenlerden birini kapsayan bir araçla birlikte kullanın.',
     },
     correction: {
       title: 'Bu sayfanın doğruluğunu korumamıza yardım edin',

@@ -33,7 +33,7 @@ export const id: SiteTranslations = {
     github: 'GitHub',
     faq: 'FAQ',
     compare: 'Perbandingan',
-    changelog: 'Log perubahan',
+    changelog: 'Changelog',
     resources: 'Sumber daya',
     resourcesDesc: 'Contoh, kepercayaan, FAQ, dan perbandingan',
     repo: {
@@ -1123,6 +1123,18 @@ export const id: SiteTranslations = {
         label: 'Spesifikasi hidup untuk sistem yang sudah ada',
         help: 'Perubahan dispesifikasikan sebagai delta yang menyatu ke dalam spesifikasi sistem yang terus bertumbuh.',
       },
+      crossProjectMemory: {
+        label: 'Memori agen yang persisten lintas proyek',
+        help: 'Memori mengikuti agen di berbagai repositori dan sesi, bukan hanya status satu rencana yang tersimpan di disk.',
+      },
+      roleBasedAgents: {
+        label: 'Peran agen khusus yang berbeda-beda',
+        help: 'Persona bernama (seperti analis, arsitek, atau peninjau) membagi pekerjaan, alih-alih satu agen menjalankan semua langkah.',
+      },
+      nativeIdeProduct: {
+        label: 'Hadir sebagai IDE atau editornya sendiri',
+        help: 'Alat ini merupakan lingkungan pengembangan terintegrasi tersendiri, bukan tambahan untuk agen coding yang sudah ada.',
+      },
     },
     alternatives: {
       dwp: {
@@ -1135,74 +1147,74 @@ export const id: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'Mengubah sebuah fitur menjadi spesifikasi yang dapat dieksekusi melalui konstitusi, spesifikasi, rencana, dan daftar tugas, digerakkan oleh slash command yang berintegrasi dengan lebih dari lima puluh coding agent.',
+          'Mengubah sebuah fitur menjadi spesifikasi yang dapat dieksekusi melalui konstitusi, spesifikasi, rencana, dan daftar tugas, digerakkan oleh slash command yang berintegrasi dengan lebih dari lima puluh coding agent, dan dapat memeriksa agar semua artefak tetap konsisten satu sama lain sebelum implementasi dimulai.',
         audience:
           'Tim yang menginginkan alur specify, plan, tasks, dan implement yang dapat diulang di dalam agent yang sudah mereka pakai.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'Menangkap setiap perubahan sebagai proposal dengan spesifikasi delta (ditambahkan, diubah, dihapus) dan kebutuhan RFC 2119 beserta skenarionya, lalu mengarsipkannya menjadi spesifikasi hidup.',
+          'Menangkap setiap perubahan sebagai proposal dengan spesifikasi delta (ditambahkan, diubah, dihapus) dan kebutuhan RFC 2119 beserta skenarionya, lalu mengarsipkannya menjadi spesifikasi hidup, dengan validator yang memeriksa kelengkapan proposal dan cakupan skenario sebelum sebuah perubahan diterima.',
         audience:
           'Tim yang bekerja pada sistem yang sudah ada dan ingin spesifikasinya bertumbuh satu perubahan dalam satu waktu.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'IDE dan CLI agentic yang spesifikasinya bergerak dari kebutuhan bergaya EARS ke desain lalu ke tugas, dengan file steering dan hook yang berjalan pada event editor.',
+          'IDE dan CLI agentic yang spesifikasinya bergerak dari kebutuhan bergaya EARS ke desain lalu ke tugas, dengan file steering dan hook yang berjalan pada event editor, serta dapat menghasilkan spesifikasi untuk basis kode yang sudah ada guna menangkap celah kebutuhan sebelum desain dimulai.',
         audience:
           'Pengembang yang menginginkan pengembangan spec-driven di dalam editor mereka, dengan tooling yang ditopang AWS.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'Framework agile berisi peran agent yang terspesialisasi (analisis, produk, arsitektur, pengembangan, kualitas) yang menghasilkan brief, kebutuhan, dokumen arsitektur, dan file story.',
+          'Framework agile berisi peran agent yang terspesialisasi (analisis, produk, arsitektur, pengembangan, kualitas) yang menghasilkan brief, kebutuhan, dokumen arsitektur, dan file story, dengan Definition of Done yang mewajibkan setiap story ditinjau oleh rekan tim atau peninjau sejawat AI sebelum dianggap selesai.',
         audience:
           'Tim yang menyukai seremoni berbasis peran dan menginginkan siklus hidup agile penuh untuk pekerjaan agent.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'Pustaka skill dan alur kerja untuk brainstorming, perencanaan dalam langkah test-first kecil, eksekusi dengan subagent, dan peninjauan sebelum selesai.',
+          'Pustaka skill dan alur kerja untuk brainstorming, perencanaan dalam langkah test-first kecil, eksekusi dengan subagent, dan peninjauan sebelum selesai, terintegrasi dengan lebih banyak host coding agent dibanding alternatif lain di sini, ditambah peninjauan subagent dua tahap (kesesuaian spec, lalu kualitas kode) pada setiap tugas.',
         audience:
           'Pengembang yang menginginkan eksekusi test-driven yang disiplin di dalam coding agent mereka.',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          'Sistem perencanaan dengan direktori .planning, id kebutuhan, rencana fase, eksekusi konteks segar, dan pemeriksaan verifikasi terhadap must-have yang dinyatakan.',
+          'Sistem perencanaan dengan direktori .planning, id kebutuhan, rencana fase, eksekusi konteks segar, dan pemeriksaan verifikasi terhadap deliverable yang dapat diamati pengguna yang diekstrak dari ringkasan tiap rencana, dirancang khusus untuk melawan “context rot” dengan menjalankan riset, perencanaan, dan eksekusi dalam subagent sekali pakai serta menangkap verifikasi yang basi lewat pemeriksaan sidik jari konten.',
         audience:
           'Pengembang solo dan tim kecil yang menginginkan context engineering dan verifikasi dengan sedikit seremoni.',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          'Mengonfigurasi coding agent yang sudah Anda pakai dengan memori persisten yang juga merutekan lintas sesi dan model, skill terkurasi, server MCP, persona, dan opsi Spec-Driven Development atau Receipt-Driven Development. Konfigurasinya secara default ditulis ke pengaturan agent global Anda; pemasangan dengan cakupan workspace bersifat opt-in.',
         audience:
-          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+          'Pengembang yang menginginkan ekosistem agent yang sudah dikonfigurasi, mengingat pekerjaan lintas sesi, dan dapat menghasilkan bukti sesuai permintaan.',
       },
       'claude-ai-native-sdlc': {
-        name: "Claude's AI-native SDLC",
+        name: 'AI-native SDLC dari Claude',
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          'Loop enam tahap dari Plan dan Design melalui Build, Test, Deploy, dan Maintain, dengan persetujuan manusia yang diwajibkan di setiap tahap, artefak tahan lama yang di-commit ke repositori di antara tahap, satu putaran peninjauan berlabel keamanan khusus sebelum deploy, dan evaluasi berkelanjutan yang mempublikasikan indikator pengiriman leading dan lagging.',
         audience:
-          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+          'Tim yang mengevaluasi playbook pengiriman perangkat lunak ujung-ke-ujung dari Claude Code dan siklus umpan balik produksinya.',
       },
       'vendor-native': {
         name: 'Mode rencana bawaan vendor',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor, dan Gemini CLI menghadirkan mode rencana, file instruksi, dan skill yang mengikuti standar AGENTS.md dan Agent Skills.',
+          'Claude Code, Codex, Cursor, dan Gemini CLI dapat menghadirkan mode rencana, file instruksi, dan skill yang dibangun di atas standar AGENTS.md dan Agent Skills yang terbuka dan lintas vendor, meskipun perilaku mode rencana yang persis tetap bergantung pada vendor, klien, dan versinya. Agent Skills khususnya hanya memuat ringkasan singkat saat startup dan memuat instruksi lengkap hanya saat diaktifkan, sehingga kapasitas yang tidak dipakai tidak membebani konteks.',
         audience:
           'Siapa pun yang menginginkan perencanaan di dalam satu agent tanpa harus mengadopsi sebuah metodologi.',
       },
     },
     aiNative: {
-      title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      title: 'Posisi ini dalam AI-native SDLC',
+      body: 'Playbook AI-native SDLC dari Claude menjelaskan satu loop penuh: Plan, Design, Build, Test, Deploy, dan Maintain. Setiap tahap meng-commit artefak yang dibaca tahap berikutnya, dengan gerbang persetujuan manusia di setiap tahap dan satu putaran peninjauan keamanan khusus sebelum deploy, sementara umpan balik dari produksi menjadi intent baru.',
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP berbagi gagasan artefak tahan lama dan persetujuan bergerbang: intent menjadi rencana, tugas meninggalkan bukti, satu putaran peninjauan keamanan berjalan sebelum selesai, dan repositori tetap dapat dibaca oleh agent berikutnya.',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+        'Perbedaan sesungguhnya ada pada cakupan, bukan pada ketatnya proses: playbook ini dibangun khusus di sekitar Claude Code, sementara harness dan format rencana DWP dapat dibaca oleh agent mana pun yang mengikuti standar AGENTS.md dan Agent Skills. Playbook ini juga mencakup evaluasi berkelanjutan dan operasi produksi yang tidak diklaim oleh DWP; praktik operasional tersebut dapat melengkapi repositori yang dijalankan dengan DWP, bukan bersaing dengannya.',
       sourceLabel: "Read Claude's AI-native SDLC playbook",
     },
     profileCta: 'Lihat perbandingan',
@@ -1245,7 +1257,7 @@ export const id: SiteTranslations = {
     },
     honestLimits: {
       title: 'Keterbatasan yang jujur',
-      body: 'Deep Work Plan tidak memiliki mekanisme spesifikasi hidup maupun delta; OpenSpec dan tool sejenis lebih kuat di aspek itu. Belum ada benchmark independen atas metodologi ini; sebuah evaluasi publik yang praregistrasi sedang direncanakan. Ledger beban instruksi mengukur byte yang dimuat, bukan token, biaya, atau hasil.',
+      body: 'Deep Work Plan tidak memiliki mekanisme spesifikasi hidup maupun delta; OpenSpec dan tool sejenis lebih kuat di aspek itu. Belum ada benchmark independen atas metodologi ini; sebuah evaluasi publik yang praregistrasi sedang direncanakan. Ledger beban instruksi mengukur byte yang dimuat, bukan token, biaya, atau hasil. DWP secara sengaja dibatasi pada repositori: ini bukan sistem memori lintas proyek, bukan kerangka kerja agen berbasis peran, dan bukan IDE, sehingga tidak bersaing di sumbu-sumbu itu juga — padukan dengan alat yang mencakup salah satu sumbu tersebut saat pekerjaan membutuhkannya.',
     },
     correction: {
       title: 'Bantu kami menjaga keakuratan halaman ini',

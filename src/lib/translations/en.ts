@@ -1113,6 +1113,18 @@ export const en: SiteTranslations = {
         label: 'Living product specs for existing systems',
         help: 'A canonical specification describes the product’s current behavior, accepts change deltas and is updated as each change is implemented.',
       },
+      crossProjectMemory: {
+        label: 'Persistent agent memory across projects',
+        help: 'Memory follows the agent across different repositories and sessions, not just one plan’s on-disk state.',
+      },
+      roleBasedAgents: {
+        label: 'Distinct specialized agent roles',
+        help: 'Named personas (such as analyst, architect or reviewer) divide the work, rather than one agent running every step.',
+      },
+      nativeIdeProduct: {
+        label: 'Ships as its own IDE or editor',
+        help: 'The tool is an integrated development environment in its own right, not an add-on to an existing coding agent.',
+      },
     },
     alternatives: {
       dwp: {
@@ -1235,7 +1247,7 @@ export const en: SiteTranslations = {
     },
     honestLimits: {
       title: 'Honest limits',
-      body: 'A DWP skill is a specification too: it describes how an agent should perform a procedure, such as creating a component. DWP plans are also change specifications: they define scope, acceptance criteria, validation gates and evidence. This row means something narrower: a canonical specification that describes the product’s current behavior and is updated with deltas after each change. DWP does not currently maintain that product-level living specification for every adopted system; OpenSpec is stronger when that lifecycle is the primary need. You can combine the layers by feeding a product spec or delta proposal into a DWP plan. No independent benchmark of the methodology exists yet; a pre-registered public evaluation is planned. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes.',
+      body: 'A DWP skill is a specification too: it describes how an agent should perform a procedure, such as creating a component. DWP plans are also change specifications: they define scope, acceptance criteria, validation gates and evidence. This row means something narrower: a canonical specification that describes the product’s current behavior and is updated with deltas after each change. DWP does not currently maintain that product-level living specification for every adopted system; OpenSpec is stronger when that lifecycle is the primary need. You can combine the layers by feeding a product spec or delta proposal into a DWP plan. No independent benchmark of the methodology exists yet; a pre-registered public evaluation is planned. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes. DWP is deliberately scoped to the repository: it is not a cross-project memory system, not a role-based agent framework and not an IDE, so it does not compete on those axes either — pair it with a tool that covers one of them when that is what the work needs.',
     },
     correction: {
       title: 'Help us keep this accurate',

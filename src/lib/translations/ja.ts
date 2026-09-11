@@ -34,7 +34,7 @@ export const ja: SiteTranslations = {
     github: 'GitHub',
     faq: 'よくある質問',
     compare: '比較',
-    changelog: '変更履歴',
+    changelog: 'Changelog',
     resources: 'リソース',
     resourcesDesc: '事例、信頼、よくある質問、比較',
     repo: {
@@ -1125,6 +1125,18 @@ export const ja: SiteTranslations = {
         label: '既存システムのための生きた仕様',
         help: '変更が、システムの成長していく仕様へとマージされるデルタとして記述されます。',
       },
+      crossProjectMemory: {
+        label: 'プロジェクトをまたぐ永続的なエージェントメモリ',
+        help: 'メモリは1つのプランのディスク上の状態にとどまらず、異なるリポジトリやセッションをまたいでエージェントに追従します。',
+      },
+      roleBasedAgents: {
+        label: '役割ごとに分かれた専門エージェント',
+        help: 'アナリスト、アーキテクト、レビュアーなど名前付きのペルソナが作業を分担し、1つのエージェントがすべての工程を実行するわけではありません。',
+      },
+      nativeIdeProduct: {
+        label: '独自のIDEまたはエディタとして提供',
+        help: 'ツール自体が独立した統合開発環境であり、既存のコーディングエージェントへの追加機能ではありません。',
+      },
     },
     alternatives: {
       dwp: {
@@ -1137,74 +1149,74 @@ export const ja: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          '憲章、仕様、計画、タスクリストを通じて機能を実行可能な仕様に変え、五十を超えるコーディングエージェントと統合するスラッシュコマンドで駆動します。',
+          '憲章、仕様、計画、タスクリストを通じて機能を実行可能な仕様に変え、五十を超えるコーディングエージェントと統合するスラッシュコマンドで駆動します。実装前に各成果物が互いに整合しているかを確認できます。',
         audience:
           'すでに使っているエージェントの内側で、繰り返し可能な specify・plan・tasks・implement のワークフローを求めるチーム。',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          '各変更を、デルタ仕様（追加・変更・削除）とシナリオ付き RFC 2119 要件を備えた提案として捉え、生きた仕様へとアーカイブします。',
+          '各変更を、デルタ仕様（追加・変更・削除）とシナリオ付き RFC 2119 要件を備えた提案として捉え、生きた仕様へとアーカイブします。変更が受け入れられる前に、提案の完全性とシナリオの網羅性を検証するバリデーターも備えます。',
         audience:
           '既存のシステムを扱い、仕様を一度に一つの変更ずつ育てたいチーム。',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'エージェント的な IDE と CLI。仕様は EARS 形式の要件から設計へ、そしてタスクへと進み、ステアリングファイルとエディタのイベントで走るフックを備えます。',
+          'エージェント的な IDE と CLI。仕様は EARS 形式の要件から設計へ、そしてタスクへと進み、ステアリングファイルとエディタのイベントで走るフックを備えます。既存のコードベースから仕様を生成し、設計に入る前に要件の抜け漏れを見つけることもできます。',
         audience:
           'AWS 基盤のツールとともに、エディタに組み込まれた仕様駆動開発を求める開発者。',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          '専門化されたエージェントロール（分析、プロダクト、アーキテクチャ、開発、品質）からなるアジャイルフレームワークで、ブリーフ、要件、アーキテクチャドキュメント、ストーリーファイルを生成します。',
+          '専門化されたエージェントロール（分析、プロダクト、アーキテクチャ、開発、品質）からなるアジャイルフレームワークで、ブリーフ、要件、アーキテクチャドキュメント、ストーリーファイルを生成します。完了の定義には、各ストーリーが完了と見なされる前にチームメイトまたは AI ピアレビュアーによるレビューを受けることが含まれます。',
         audience:
           'ロールベースの作法を好み、エージェント作業に完全なアジャイルライフサイクルを求めるチーム。',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'ブレインストーミング、小さなテストファーストのステップでの計画、サブエージェントによる実行、完了前のレビューのためのスキルライブラリとワークフロー。',
+          'ブレインストーミング、小さなテストファーストのステップでの計画、サブエージェントによる実行、完了前のレビューのためのスキルライブラリとワークフロー。ここに挙げたどの選択肢よりも多くのコーディングエージェントホストと統合されており、すべてのタスクで二段階のサブエージェントレビュー（仕様準拠、続いてコード品質)を実施します。',
         audience:
           'コーディングエージェントの内側で、規律あるテスト駆動の実行を求める開発者。',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          '.planning ディレクトリ、要件 ID、フェーズ計画、新しいコンテキストでの実行、宣言された must-have に対する検証パスを備えた計画システム。',
+          '.planning ディレクトリ、要件 ID、フェーズ計画、新しいコンテキストでの実行、各計画のサマリーから抽出したユーザーが観察可能な成果物に対する検証パスを備えた計画システム。調査・計画・実行を使い捨てのサブエージェントで行い、内容のフィンガープリントで古くなった検証を検出することで、コンテキストの劣化に正面から対処するよう設計されています。',
         audience:
           '儀式を少なくコンテキストエンジニアリングと検証を求める、個人開発者と小さなチーム。',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          'すでに使っているコーディングエージェントを、セッションやモデルをまたいでルーティングも行う永続メモリ、厳選されたスキル、MCP サーバー、ペルソナ、そしてオプションの Spec-Driven Development や Receipt-Driven Development で構成します。設定はデフォルトでエージェントのグローバル設定に書き込まれ、ワークスペース単位のインストールはオプトインです。',
         audience:
-          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+          'セッションをまたいで作業を記憶し、必要に応じて証跡を生成できる、構成済みのエージェントエコシステムを求める開発者向け。',
       },
       'claude-ai-native-sdlc': {
         name: "Claude's AI-native SDLC",
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          'Plan と Design から Build、Test、Deploy、Maintain までの六段階のループで、各段階で人間による承認をゲートとし、各段階の間でリポジトリに耐久性のある成果物をコミットし、デプロイ前にセキュリティに特化したレビューパスを設け、先行指標と遅行指標の両方のデリバリー指標を公開する継続的な評価を備えます。',
         audience:
-          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+          'Claude Code のエンドツーエンドのソフトウェア提供プレイブックと、その本番フィードバックループを評価するチーム向け。',
       },
       'vendor-native': {
         name: 'ベンダー純正のプランモード',
         whatItDoesWell:
-          'Claude Code、Codex、Cursor、Gemini CLI は、AGENTS.md と Agent Skills 標準に従うプランモード、指示ファイル、スキルを同梱しています。',
+          'エージェント製品は、オープンでベンダー横断的な AGENTS.md と Agent Skills 標準の上に構築されたプランモード、指示ファイル、スキルを提供することがありますが、プランモードの正確な挙動はベンダー、クライアント、バージョンに依然として左右されます。特に Agent Skills は起動時に短い要約だけを読み込み、使用時にのみ完全な指示を読み込むため、使われない機能をコンテキストの外に保てます。',
         audience:
           '方法論を採用せずに、単一のエージェントの内側で計画したいすべての人。',
       },
     },
     aiNative: {
-      title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      title: 'AI ネイティブ SDLC におけるこの位置づけ',
+      body: 'Claude の AI-native SDLC プレイブックは、Plan、Design、Build、Test、Deploy、Maintain という完全なループを描きます。各段階は次の段階が読み取る成果物をコミットし、各段階で人間による承認ゲートを設け、デプロイ前にセキュリティに特化したレビューパスを行い、本番環境からのフィードバックが新しい intent になります。',
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP は、耐久性のある成果物とゲート付き承認という考え方を共有しています。intent は計画になり、タスクはエビデンスを残し、完了前にセキュリティレビューが実行され、リポジトリは次のエージェントにとって読みやすいままです。',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+        '本当の違いは厳格さではなく範囲にあります。このプレイブックは Claude Code を中心に構築されているのに対し、DWP のハーネスと計画フォーマットは AGENTS.md と Agent Skills 標準に従うあらゆるエージェントが読み取れます。プレイブックは DWP が謳っていない継続的な評価や本番運用もカバーしており、それらの運用面のプラクティスは DWP で運用するリポジトリと競合するのではなく補完し得ます。',
       sourceLabel: "Read Claude's AI-native SDLC playbook",
     },
     profileCta: '比較を見る',
@@ -1247,7 +1259,7 @@ export const ja: SiteTranslations = {
     },
     honestLimits: {
       title: '正直な限界',
-      body: 'Deep Work Plan には生きた仕様やデルタ仕様の仕組みがなく、その領域では OpenSpec などのツールが優れています。方法論の独立したベンチマークはまだ存在せず、事前登録された公開評価が計画されています。指示読み込みの台帳は読み込まれたバイト数を測るものであり、トークン、コスト、成果ではありません。',
+      body: 'Deep Work Plan には生きた仕様やデルタ仕様の仕組みがなく、その領域では OpenSpec などのツールが優れています。方法論の独立したベンチマークはまだ存在せず、事前登録された公開評価が計画されています。指示読み込みの台帳は読み込まれたバイト数を測るものであり、トークン、コスト、成果ではありません。DWP はあえてリポジトリの範囲に限定されています。プロジェクトをまたぐメモリシステムでも、役割ベースのエージェントフレームワークでも、IDE でもないため、これらの軸では競合しません——その能力が必要な作業には、それをカバーするツールと組み合わせてください。',
     },
     correction: {
       title: '正確さを保つためにご協力ください',

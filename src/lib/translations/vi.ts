@@ -34,7 +34,7 @@ export const vi: SiteTranslations = {
     github: 'GitHub',
     faq: 'Câu hỏi thường gặp',
     compare: 'So sánh',
-    changelog: 'Nhật ký thay đổi',
+    changelog: 'Changelog',
     resources: 'Tài nguyên',
     resourcesDesc: 'Ví dụ, tin tưởng, câu hỏi thường gặp và so sánh',
     repo: {
@@ -1121,6 +1121,18 @@ export const vi: SiteTranslations = {
         label: 'Đặc tả sống cho hệ thống hiện có',
         help: 'Các thay đổi được đặc tả dưới dạng delta hợp nhất vào đặc tả ngày càng đầy đủ của hệ thống.',
       },
+      crossProjectMemory: {
+        label: 'Bộ nhớ tác nhân liên tục giữa các dự án',
+        help: 'Bộ nhớ đi theo tác nhân qua các kho mã và phiên làm việc khác nhau, không chỉ là trạng thái trên đĩa của một kế hoạch.',
+      },
+      roleBasedAgents: {
+        label: 'Các vai trò tác nhân chuyên biệt riêng biệt',
+        help: 'Các vai trò được đặt tên (như nhà phân tích, kiến trúc sư hoặc người đánh giá) chia nhỏ công việc, thay vì một tác nhân thực hiện mọi bước.',
+      },
+      nativeIdeProduct: {
+        label: 'Là một IDE hoặc trình soạn thảo riêng',
+        help: 'Công cụ này tự thân là một môi trường phát triển tích hợp, không phải là phần bổ sung cho một tác nhân lập trình đã có sẵn.',
+      },
     },
     alternatives: {
       dwp: {
@@ -1133,74 +1145,74 @@ export const vi: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'Biến một tính năng thành đặc tả thực thi được thông qua một bản hiến chương, một đặc tả, một kế hoạch và một danh sách tác vụ, điều khiển bằng các lệnh slash tích hợp với hơn năm mươi agent lập trình.',
+          'Biến một tính năng thành đặc tả thực thi được thông qua một bản hiến chương, một đặc tả, một kế hoạch và một danh sách tác vụ, điều khiển bằng các lệnh slash tích hợp với hơn năm mươi agent lập trình, và có thể kiểm tra xem các artifact có nhất quán với nhau hay không trước khi bắt đầu triển khai.',
         audience:
           'Các nhóm muốn một quy trình đặc tả, lập kế hoạch, phân tác vụ và triển khai có thể lặp lại ngay trong agent họ đã dùng.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'Ghi lại mỗi thay đổi thành một đề xuất với các đặc tả delta (thêm, sửa, bỏ) và các yêu cầu RFC 2119 kèm kịch bản, rồi lưu trữ chúng thành các đặc tả sống.',
+          'Ghi lại mỗi thay đổi thành một đề xuất với các đặc tả delta (thêm, sửa, bỏ) và các yêu cầu RFC 2119 kèm kịch bản, rồi lưu trữ chúng thành các đặc tả sống, cùng một trình xác thực kiểm tra tính đầy đủ của đề xuất và độ bao phủ kịch bản trước khi một thay đổi được chấp nhận.',
         audience:
           'Các nhóm làm trên hệ thống hiện có, muốn đặc tả lớn dần theo từng thay đổi.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'Một IDE và CLI dạng agentic với đặc tả đi từ yêu cầu kiểu EARS sang thiết kế rồi sang tác vụ, cùng các tệp steering và hook chạy theo sự kiện của trình soạn thảo.',
+          'Một IDE và CLI dạng agentic với đặc tả đi từ yêu cầu kiểu EARS sang thiết kế rồi sang tác vụ, cùng các tệp steering và hook chạy theo sự kiện của trình soạn thảo, và có thể tạo đặc tả cho một codebase hiện có để phát hiện lỗ hổng yêu cầu trước khi bắt đầu thiết kế.',
         audience:
           'Các nhà phát triển muốn phát triển theo đặc tả được tích hợp sẵn trong trình soạn thảo, cùng công cụ được AWS hỗ trợ.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'Một framework agile gồm các vai trò agent chuyên biệt (phân tích, sản phẩm, kiến trúc, phát triển, chất lượng), tạo ra các bản tóm tắt, yêu cầu, tài liệu kiến trúc và tệp story.',
+          'Một framework agile gồm các vai trò agent chuyên biệt (phân tích, sản phẩm, kiến trúc, phát triển, chất lượng), tạo ra các bản tóm tắt, yêu cầu, tài liệu kiến trúc và tệp story, với một Definition of Done yêu cầu mỗi story phải được một thành viên trong nhóm hoặc một AI đánh giá ngang hàng xem xét trước khi được coi là hoàn tất.',
         audience:
           'Các nhóm thích các nghi thức theo vai trò và muốn một vòng đời agile đầy đủ cho công việc của agent.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'Một thư viện skill và quy trình làm việc để thảo luận ý tưởng, lập kế hoạch theo các bước nhỏ test trước, thực thi với subagent và review trước khi hoàn tất.',
+          'Một thư viện skill và quy trình làm việc để thảo luận ý tưởng, lập kế hoạch theo các bước nhỏ test trước, thực thi với subagent và review trước khi hoàn tất, tích hợp với nhiều nền tảng agent lập trình hơn bất kỳ lựa chọn thay thế nào khác ở đây, cộng thêm một lượt review hai giai đoạn bằng subagent (trước tiên là tuân thủ đặc tả, sau đó là chất lượng mã) cho mỗi tác vụ.',
         audience:
           'Các nhà phát triển muốn thực thi theo hướng test-driven có kỷ luật ngay trong agent lập trình của mình.',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          'Một hệ thống lập kế hoạch với thư mục .planning, id yêu cầu, kế hoạch theo pha, thực thi trong ngữ cảnh mới và một lượt xác minh đối chiếu các điều kiện bắt buộc đã nêu.',
+          'Một hệ thống lập kế hoạch với thư mục .planning, id yêu cầu, kế hoạch theo pha, thực thi trong ngữ cảnh mới và một lượt xác minh đối chiếu với các kết quả bàn giao mà người dùng có thể quan sát được, trích xuất từ bản tóm tắt của mỗi kế hoạch — được thiết kế riêng để chống lại tình trạng “context rot” bằng cách chạy nghiên cứu, lập kế hoạch và thực thi trong các subagent dùng một lần, đồng thời phát hiện xác minh đã lỗi thời bằng kiểm tra dấu vân tay nội dung.',
         audience:
           'Nhà phát triển độc lập và nhóm nhỏ muốn kỹ thuật ngữ cảnh và xác minh với ít nghi thức.',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          'Cấu hình các coding agent mà bạn đã dùng với bộ nhớ bền vững có định tuyến cả giữa các phiên và các mô hình, các skill được tuyển chọn, các máy chủ MCP, các persona, và tùy chọn Spec-Driven Development hoặc Receipt-Driven Development. Theo mặc định, cấu hình được ghi vào cài đặt agent toàn cục của bạn; việc cài đặt giới hạn trong phạm vi workspace là tùy chọn (opt-in).',
         audience:
-          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+          'Các nhà phát triển muốn một hệ sinh thái agent đã được cấu hình, ghi nhớ công việc qua các phiên và có thể tạo ra bằng chứng theo yêu cầu.',
       },
       'claude-ai-native-sdlc': {
-        name: "Claude's AI-native SDLC",
+        name: 'AI-native SDLC của Claude',
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          'Một vòng lặp sáu giai đoạn từ Plan và Design qua Build, Test, Deploy và Maintain, với một cổng phê duyệt của con người ở mỗi giai đoạn, các artifact bền vững được commit vào repository giữa các giai đoạn, một lượt review được gắn nhãn bảo mật riêng trước khi deploy, và các đánh giá liên tục (evals) công bố các chỉ số bàn giao dẫn trước và trễ.',
         audience:
-          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+          'Các nhóm đang đánh giá playbook chuyển giao phần mềm toàn trình của Claude Code và vòng phản hồi từ production của nó.',
       },
       'vendor-native': {
         name: 'Chế độ lập kế hoạch có sẵn từ nhà cung cấp',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor và Gemini CLI tích hợp sẵn các chế độ lập kế hoạch, tệp hướng dẫn và skill tuân theo các chuẩn AGENTS.md và Agent Skills.',
+          'Claude Code, Codex, Cursor và Gemini CLI tích hợp sẵn các chế độ lập kế hoạch, tệp hướng dẫn và skill được xây dựng trên các chuẩn mở, đa nhà cung cấp AGENTS.md và Agent Skills, dù hành vi chính xác của chế độ lập kế hoạch vẫn phụ thuộc vào nhà cung cấp, client và phiên bản. Agent Skills nói riêng chỉ tải một bản tóm tắt ngắn khi khởi động và tải đầy đủ hướng dẫn khi được kích hoạt, giữ cho năng lực chưa dùng đến không chiếm ngữ cảnh.',
         audience:
           'Bất kỳ ai muốn lập kế hoạch ngay trong một agent duy nhất mà không cần áp dụng một phương pháp luận.',
       },
     },
     aiNative: {
-      title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      title: 'Vị trí của điều này trong AI-native SDLC',
+      body: 'Playbook AI-native SDLC của Claude mô tả một vòng lặp đầy đủ: Plan, Design, Build, Test, Deploy và Maintain. Mỗi giai đoạn commit một artifact để giai đoạn tiếp theo đọc, với một cổng phê duyệt của con người ở mỗi giai đoạn và một lượt review bảo mật riêng trước khi deploy, trong khi phản hồi từ production trở thành intent mới.',
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP chia sẻ ý tưởng về artifact bền vững và phê duyệt theo cổng: intent trở thành một kế hoạch, các tác vụ để lại bằng chứng, một lượt review bảo mật chạy trước khi hoàn tất, và repository vẫn có thể đọc được đối với agent tiếp theo.',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+        'Khác biệt thực sự nằm ở phạm vi, không phải ở mức độ chặt chẽ: playbook được xây dựng riêng quanh Claude Code, trong khi harness và định dạng kế hoạch của DWP được đọc bởi bất kỳ agent nào tuân theo các chuẩn AGENTS.md và Agent Skills. Playbook cũng bao phủ việc đánh giá liên tục và các hoạt động production mà DWP không tuyên bố hỗ trợ; các thực hành vận hành đó có thể bổ trợ cho một repository chạy theo DWP thay vì cạnh tranh với nó.',
       sourceLabel: "Read Claude's AI-native SDLC playbook",
     },
     profileCta: 'Xem so sánh',
@@ -1243,7 +1255,7 @@ export const vi: SiteTranslations = {
     },
     honestLimits: {
       title: 'Những giới hạn thành thật',
-      body: 'Deep Work Plan không có cơ chế đặc tả sống hay đặc tả delta; OpenSpec và các công cụ tương tự mạnh hơn ở khoản đó. Chưa có benchmark độc lập nào cho phương pháp luận; một đợt đánh giá công khai đăng ký trước đang được lên kế hoạch. Sổ cái tải hướng dẫn đo byte được tải, không đo token, chi phí hay kết quả.',
+      body: 'Deep Work Plan không có cơ chế đặc tả sống hay đặc tả delta; OpenSpec và các công cụ tương tự mạnh hơn ở khoản đó. Chưa có benchmark độc lập nào cho phương pháp luận; một đợt đánh giá công khai đăng ký trước đang được lên kế hoạch. Sổ cái tải hướng dẫn đo byte được tải, không đo token, chi phí hay kết quả. DWP cố tình giới hạn phạm vi ở kho mã: đây không phải là hệ thống bộ nhớ liên dự án, không phải khung tác nhân theo vai trò, và cũng không phải một IDE, nên nó cũng không cạnh tranh trên những khía cạnh đó — hãy kết hợp với một công cụ đáp ứng khía cạnh đó khi công việc thực sự cần.',
     },
     correction: {
       title: 'Giúp chúng tôi giữ trang này chính xác',

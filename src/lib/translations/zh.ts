@@ -33,7 +33,7 @@ export const zh: SiteTranslations = {
     github: 'GitHub',
     faq: '常见问题',
     compare: '对比',
-    changelog: '更新日志',
+    changelog: 'Changelog',
     resources: '资源',
     resourcesDesc: '示例、信任、常见问题与对比',
     repo: {
@@ -1108,6 +1108,18 @@ export const zh: SiteTranslations = {
         label: '面向存量系统的活规范',
         help: '变更以增量形式规范，并合并进一份不断生长的系统规范。',
       },
+      crossProjectMemory: {
+        label: '跨项目的持久代理记忆',
+        help: '记忆跟随代理跨越不同的仓库和会话，而不仅仅是单个计划的磁盘状态。',
+      },
+      roleBasedAgents: {
+        label: '职责分明的专业代理角色',
+        help: '分析师、架构师、审查者等具名角色分担工作，而不是由一个代理执行每一步。',
+      },
+      nativeIdeProduct: {
+        label: '本身即为一款 IDE 或编辑器',
+        help: '该工具本身就是一个集成开发环境，而不是现有编码代理的附加组件。',
+      },
     },
     alternatives: {
       dwp: {
@@ -1120,70 +1132,70 @@ export const zh: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          '通过一部宪章、一份规范、一份计划和一份任务清单，把一个功能转变为可执行的规范，由与五十余个编码代理集成的斜杠命令驱动。',
+          '通过一部宪章、一份规范、一份计划和一份任务清单，把一个功能转变为可执行的规范，由与五十余个编码代理集成的斜杠命令驱动，并能在开始实现前检查各产出物之间是否保持一致。',
         audience:
           '希望在自己已在使用的代理内部获得可复用的“规范、计划、任务、实现”工作流的团队。',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          '把每次变更捕捉为一份提案，带增量规范（新增、修改、移除）与含场景的 RFC 2119 需求，随后将它们归档为不断生长的活规范。',
+          '把每次变更捕捉为一份提案，带增量规范（新增、修改、移除）与含场景的 RFC 2119 需求，随后将它们归档为不断生长的活规范，并配有验证器在变更被接受前检查提案完整性与场景覆盖度。',
         audience: '在存量系统上工作、希望规范随每次变更逐步生长的团队。',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          '一款代理式 IDE 与 CLI，其规范从 EARS 风格需求推进到设计再到任务，并带有在编辑器事件上运行的引导文件与钩子。',
+          '一款代理式 IDE 与 CLI，其规范从 EARS 风格需求推进到设计再到任务，并带有在编辑器事件上运行的引导文件与钩子，还能为已有代码库生成规范，在设计开始前发现需求缺口。',
         audience:
           '希望规范驱动开发内置于编辑器、并配有 AWS 支撑工具链的开发者。',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          '一套由专业化代理角色（分析、产品、架构、开发、质量）组成的敏捷框架，产出简报、需求、架构文档与故事文件。',
+          '一套由专业化代理角色（分析、产品、架构、开发、质量）组成的敏捷框架，产出简报、需求、架构文档与故事文件，其完成定义要求每个故事在被视为完成前必须经过队友或 AI 同行评审代理的审查。',
         audience: '偏好角色化仪式、并希望代理工作拥有完整敏捷生命周期的团队。',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          '一套技能库与工作流，用于头脑风暴、以测试先行的小步骤规划、用子代理执行，并在完成前审查。',
+          '一套技能库与工作流，用于头脑风暴、以测试先行的小步骤规划、用子代理执行，并在完成前审查，其支持的编码代理宿主数量超过本页任何其他方案，并对每个任务执行两阶段子代理审查（先检查是否符合规范，再检查代码质量）。',
         audience: '希望在编码代理内部获得纪律化测试驱动执行的开发者。',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          '一套计划系统，带有 .planning 目录、需求编号、阶段计划、全新上下文执行，以及针对声明必备项的验证环节。',
+          '一套计划系统，带有 .planning 目录、需求编号、阶段计划、全新上下文执行，以及针对从每份计划摘要中提取的、用户可观察交付物的验证环节；它专为对抗“上下文腐化”而设计——在一次性子代理中运行调研、规划与执行，并通过内容指纹检查发现已过时的验证结果。',
         audience:
           '想要上下文工程与验证、又不想有太多仪式的独立开发者与小团队。',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          '为你已经在使用的编码代理配置持久记忆（同时可跨会话、跨模型进行路由）、精选技能、MCP 服务器、人设，以及可选的 Spec-Driven Development 或 Receipt-Driven Development。其配置默认写入代理的全局设置；按工作区范围安装则是可选项。',
         audience:
-          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+          '面向希望拥有一个能跨会话记住工作、并可按需生成证据的已配置代理生态系统的开发者。',
       },
       'claude-ai-native-sdlc': {
         name: "Claude's AI-native SDLC",
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          '一个从 Plan、Design 到 Build、Test、Deploy、Maintain 的六阶段循环，每个阶段都设有人工批准关卡，各阶段之间把持久产出物提交到仓库，在部署前设有专门的安全审查环节，并通过持续评估发布领先与滞后的交付指标。',
         audience:
-          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+          '面向正在评估 Claude Code 端到端软件交付手册及其生产反馈循环的团队。',
       },
       'vendor-native': {
         name: '厂商原生计划模式',
         whatItDoesWell:
-          'Claude Code、Codex、Cursor 与 Gemini CLI 都内置了计划模式，以及遵循 AGENTS.md 与 Agent Skills 标准的指令文件和技能。',
+          '代理产品可能提供计划模式、指令文件与技能，它们建立在开放、跨厂商的 AGENTS.md 与 Agent Skills 标准之上，但计划模式的具体行为仍取决于厂商、客户端与版本。其中 Agent Skills 在启动时只加载简短摘要，仅在被激活时才加载完整指令，从而把未使用的能力留在上下文之外。',
         audience: '希望在单个代理内部获得规划能力、而无需采纳一套方法论的人。',
       },
     },
     aiNative: {
-      title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      title: '这如何契合 AI 原生 SDLC',
+      body: 'Claude 的 AI-native SDLC 手册描述了一个完整循环：Plan、Design、Build、Test、Deploy 与 Maintain。每个阶段都会提交下一阶段要读取的产出物，每个阶段都设有人工批准关卡，部署前设有专门的安全审查环节，生产环境的反馈则会转化为新的 intent。',
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP 与之共享持久产出物与关卡式批准的理念：intent 变成计划，任务留下证据，完成前会运行一次安全审查，仓库对下一个代理始终保持可读。',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+        '真正的区别在于范围而非严格程度：该手册是围绕 Claude Code 专门构建的，而 DWP 的执行框架与计划格式可被任何遵循 AGENTS.md 与 Agent Skills 标准的代理读取。该手册还涵盖了 DWP 并未声称具备的持续评估与生产运维，这些运维实践可以与由 DWP 驱动的仓库互补，而非彼此竞争。',
       sourceLabel: "Read Claude's AI-native SDLC playbook",
     },
     profileCta: '查看比较',
@@ -1226,7 +1238,7 @@ export const zh: SiteTranslations = {
     },
     honestLimits: {
       title: '诚实的局限',
-      body: 'Deep Work Plan 没有活规范或增量规范机制；OpenSpec 及类似工具在那一面更强。该方法论尚无独立基准测试；一项预注册的公开评估已在计划之中。指令加载台账测量的是加载的字节数，而非 token、成本或结果。',
+      body: 'Deep Work Plan 没有活规范或增量规范机制；OpenSpec 及类似工具在那一面更强。该方法论尚无独立基准测试；一项预注册的公开评估已在计划之中。指令加载台账测量的是加载的字节数，而非 token、成本或结果。DWP 有意将范围限定在仓库之内：它不是跨项目记忆系统，不是基于角色的代理框架，也不是一款 IDE，因此它也不在这些维度上参与竞争——当工作确实需要这些能力时，请将它与覆盖该能力的工具搭配使用。',
     },
     correction: {
       title: '帮助我们保持准确',

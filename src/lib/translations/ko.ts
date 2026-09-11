@@ -33,7 +33,7 @@ export const ko: SiteTranslations = {
     github: 'GitHub',
     faq: '자주 묻는 질문',
     compare: '비교',
-    changelog: '변경 기록',
+    changelog: 'Changelog',
     resources: '리소스',
     resourcesDesc: '예시, 신뢰, 자주 묻는 질문, 비교',
     repo: {
@@ -1119,6 +1119,18 @@ export const ko: SiteTranslations = {
         label: '기존 시스템을 위한 살아있는 스펙',
         help: '변경이 시스템의 커져 가는 스펙으로 병합되는 델타로 명세됩니다.',
       },
+      crossProjectMemory: {
+        label: '프로젝트 간 지속되는 에이전트 메모리',
+        help: '메모리는 하나의 플랜의 디스크 상태에 그치지 않고, 서로 다른 저장소와 세션에 걸쳐 에이전트를 따라갑니다.',
+      },
+      roleBasedAgents: {
+        label: '역할별로 구분된 전문 에이전트',
+        help: '분석가, 아키텍트, 리뷰어 같은 이름이 붙은 페르소나가 작업을 분담하며, 하나의 에이전트가 모든 단계를 수행하지 않습니다.',
+      },
+      nativeIdeProduct: {
+        label: '자체 IDE 또는 에디터로 제공',
+        help: '이 도구 자체가 하나의 통합 개발 환경이며, 기존 코딩 에이전트에 추가되는 부가 기능이 아닙니다.',
+      },
     },
     alternatives: {
       dwp: {
@@ -1131,74 +1143,74 @@ export const ko: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          '컨스티튜션, 스펙, 계획, 작업 목록을 통해 기능을 실행 가능한 스펙으로 바꾸며, 50개가 넘는 코딩 에이전트와 통합되는 슬래시 명령으로 구동됩니다.',
+          '컨스티튜션, 스펙, 계획, 작업 목록을 통해 기능을 실행 가능한 스펙으로 바꾸며, 50개가 넘는 코딩 에이전트와 통합되는 슬래시 명령으로 구동됩니다. 구현을 시작하기 전에 산출물들이 서로 일관되는지 확인할 수도 있습니다.',
         audience:
           '이미 쓰고 있는 에이전트 안에서 반복 가능한 스펙 작성, 계획, 작업화, 구현 워크플로를 원하는 팀.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          '각 변경을 델타 스펙(추가, 수정, 제거)과 시나리오를 갖춘 RFC 2119 요구사항의 제안으로 포착한 뒤, 살아있는 스펙으로 보관합니다.',
+          '각 변경을 델타 스펙(추가, 수정, 제거)과 시나리오를 갖춘 RFC 2119 요구사항의 제안으로 포착한 뒤, 살아있는 스펙으로 보관합니다. 변경이 수락되기 전에 제안의 완전성과 시나리오 커버리지를 검사하는 검증기도 갖추고 있습니다.',
         audience:
           '기존 시스템에서 스펙이 변경 한 번에 한 걸음씩 자라나기를 원하는 팀.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'EARS 스타일 요구사항에서 설계로, 다시 작업으로 이동하는 스펙을 갖춘 에이전트형 IDE와 CLI이며, 편집기 이벤트에서 실행되는 스티어링 파일과 훅을 제공합니다.',
+          'EARS 스타일 요구사항에서 설계로, 다시 작업으로 이동하는 스펙을 갖춘 에이전트형 IDE와 CLI이며, 편집기 이벤트에서 실행되는 스티어링 파일과 훅을 제공합니다. 기존 코드베이스에 대한 스펙을 생성해 설계를 시작하기 전에 요구사항의 공백을 찾아낼 수도 있습니다.',
         audience:
           'AWS 지원 도구와 함께 편집기에 스펙 주도 개발이 내장되기를 원하는 개발자.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          '전문화된 에이전트 역할(분석, 제품, 아키텍처, 개발, 품질)이 브리프, 요구사항, 아키텍처 문서, 스토리 파일을 만들어 내는 애자일 프레임워크입니다.',
+          '전문화된 에이전트 역할(분석, 제품, 아키텍처, 개발, 품질)이 브리프, 요구사항, 아키텍처 문서, 스토리 파일을 만들어 내는 애자일 프레임워크입니다. 완료의 정의(Definition of Done)에는 각 스토리가 완료로 인정되기 전에 팀원이나 AI 동료 리뷰어의 검토를 받도록 요구하는 절차가 포함되어 있습니다.',
         audience:
           '역할 기반 세레모니를 선호하고 에이전트 작업을 위한 완전한 애자일 라이프사이클을 원하는 팀.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          '브레인스토밍, 작은 테스트 우선 단계로 계획하기, 서브에이전트로 실행하기, 완료 전에 검토하기 위한 스킬 라이브러리와 워크플로.',
+          '브레인스토밍, 작은 테스트 우선 단계로 계획하기, 서브에이전트로 실행하기, 완료 전에 검토하기 위한 스킬 라이브러리와 워크플로이며, 여기 소개된 다른 어떤 대안보다 많은 코딩 에이전트 호스트와 통합되어 있고, 모든 작업에 2단계 서브에이전트 검토(스펙 준수 확인 후 코드 품질 확인)를 적용합니다.',
         audience:
           '코딩 에이전트 안에서 규율 있는 테스트 주도 실행을 원하는 개발자.',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          '.planning 디렉터리, 요구사항 id, 단계 계획, 새 컨텍스트 실행, 명시된 필수 사항에 대한 검증 패스를 갖춘 계획 시스템.',
+          '.planning 디렉터리, 요구사항 id, 단계 계획, 새 컨텍스트 실행, 그리고 각 계획의 요약에서 추출한 사용자가 관찰 가능한 산출물에 대한 검증 패스를 갖춘 계획 시스템입니다. 연구·계획·실행을 일회용 서브에이전트에서 실행하고 콘텐츠 지문(fingerprint) 검사로 오래된 검증을 잡아내어, 컨텍스트 저하(context rot)에 정면으로 맞서도록 설계되었습니다.',
         audience:
           '적은 세레모니로 컨텍스트 엔지니어링과 검증을 원하는 1인 개발자와 소규모 팀.',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          '이미 사용 중인 코딩 에이전트를 세션과 모델을 넘나들며 라우팅도 수행하는 영구 메모리, 엄선된 스킬, MCP 서버, 페르소나, 그리고 선택적인 Spec-Driven Development 또는 Receipt-Driven Development로 구성합니다. 설정은 기본적으로 에이전트의 전역 설정에 기록되며, 워크스페이스 범위 설치는 선택 사항입니다.',
         audience:
-          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+          '세션 전반에 걸쳐 작업을 기억하고 필요할 때 근거 자료를 생성할 수 있는, 구성된 에이전트 생태계를 원하는 개발자를 위한 것입니다.',
       },
       'claude-ai-native-sdlc': {
         name: "Claude's AI-native SDLC",
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          'Plan과 Design에서 Build, Test, Deploy, Maintain으로 이어지는 6단계 루프이며, 각 단계마다 사람의 승인을 거치도록 게이트가 걸려 있고, 단계 사이마다 저장소에 내구성 있는 산출물을 커밋하며, 배포 전에 보안 전용 검토 패스를 두고, 선행 및 후행 딜리버리 지표를 공개하는 지속적인 평가를 갖추고 있습니다.',
         audience:
-          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+          'Claude Code의 엔드투엔드 소프트웨어 제공 플레이북과 그 프로덕션 피드백 루프를 평가하는 팀을 위한 것입니다.',
       },
       'vendor-native': {
         name: '벤더 네이티브 계획 모드',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor, Gemini CLI가 AGENTS.md와 Agent Skills 표준을 따르는 계획 모드, 지시사항 파일, 스킬을 제공합니다.',
+          '에이전트 제품은 개방적이고 벤더에 종속되지 않는 AGENTS.md 및 Agent Skills 표준을 기반으로 계획 모드, 지시사항 파일, 스킬을 제공할 수 있지만, 계획 모드의 정확한 동작은 여전히 벤더, 클라이언트, 버전에 따라 달라집니다. 특히 Agent Skills는 시작 시 짧은 요약만 불러오고 활성화될 때 전체 지시사항을 불러오므로, 사용하지 않는 기능을 컨텍스트 밖에 둘 수 있습니다.',
         audience:
           '방법론을 채택하지 않고 단일 에이전트 안에서 계획을 원하는 모든 사람.',
       },
     },
     aiNative: {
-      title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      title: 'AI 네이티브 SDLC에서의 위치',
+      body: 'Claude의 AI-native SDLC 플레이북은 Plan, Design, Build, Test, Deploy, Maintain으로 이어지는 완전한 루프를 설명합니다. 각 단계는 다음 단계가 읽을 산출물을 커밋하고, 각 단계마다 사람의 승인 게이트를 두며, 배포 전에 보안 전용 검토 패스를 거치고, 프로덕션 피드백은 새로운 intent가 됩니다.',
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP는 내구성 있는 산출물과 게이트를 통한 승인이라는 개념을 공유합니다: intent는 계획이 되고, 작업은 증거를 남기며, 완료 전에 보안 검토가 실행되고, 저장소는 다음 에이전트가 읽을 수 있는 상태로 남습니다.',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+        '진짜 차이는 엄격함이 아니라 범위에 있습니다. 이 플레이북은 Claude Code를 중심으로 구축된 반면, DWP의 하니스와 계획 형식은 AGENTS.md와 Agent Skills 표준을 따르는 모든 에이전트가 읽을 수 있습니다. 이 플레이북은 DWP가 내세우지 않는 지속적인 평가와 프로덕션 운영도 다루며, 이러한 운영 관행은 DWP로 운영되는 저장소와 경쟁하기보다 이를 보완할 수 있습니다.',
       sourceLabel: "Read Claude's AI-native SDLC playbook",
     },
     profileCta: '비교 보기',
@@ -1241,7 +1253,7 @@ export const ko: SiteTranslations = {
     },
     honestLimits: {
       title: '정직한 한계',
-      body: 'Deep Work Plan에는 살아있는 스펙이나 델타 스펙 메커니즘이 없습니다; 그 부분에서는 OpenSpec과 유사한 도구가 더 강합니다. 방법론의 독립적인 벤치마크는 아직 존재하지 않으며, 사전 등록된 공개 평가가 계획되어 있습니다. 지시사항 로드 원장은 로드된 바이트를 측정하며, 토큰, 비용, 결과가 아닙니다.',
+      body: 'Deep Work Plan에는 살아있는 스펙이나 델타 스펙 메커니즘이 없습니다; 그 부분에서는 OpenSpec과 유사한 도구가 더 강합니다. 방법론의 독립적인 벤치마크는 아직 존재하지 않으며, 사전 등록된 공개 평가가 계획되어 있습니다. 지시사항 로드 원장은 로드된 바이트를 측정하며, 토큰, 비용, 결과가 아닙니다. DWP는 의도적으로 저장소 범위로 한정되어 있습니다. 프로젝트 간 메모리 시스템도, 역할 기반 에이전트 프레임워크도, IDE도 아니므로 이러한 축에서는 경쟁하지 않습니다 — 그런 능력이 필요한 작업에는 이를 제공하는 도구와 함께 사용하세요.',
     },
     correction: {
       title: '정확성을 유지하도록 도와주세요',

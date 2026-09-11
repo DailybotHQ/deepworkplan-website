@@ -29,7 +29,7 @@ export const es: SiteTranslations = {
     github: 'GitHub',
     faq: 'FAQ',
     compare: 'Comparativa',
-    changelog: 'Cambios',
+    changelog: 'Changelog',
     resources: 'Recursos',
     resourcesDesc: 'Ejemplos, confianza, FAQ y comparativa',
     repo: {
@@ -1119,6 +1119,18 @@ export const es: SiteTranslations = {
         label: 'Especificaciones vivas del producto',
         help: 'Una especificación canónica describe el comportamiento actual del producto, acepta deltas de cambio y se actualiza cuando cada cambio se implementa.',
       },
+      crossProjectMemory: {
+        label: 'Memoria persistente del agente entre proyectos',
+        help: 'La memoria acompaña al agente entre distintos repositorios y sesiones, no solo el estado en disco de un plan.',
+      },
+      roleBasedAgents: {
+        label: 'Roles de agente especializados y diferenciados',
+        help: 'Personas con nombre (como analista, arquitecto o revisor) se reparten el trabajo, en vez de que un único agente ejecute cada paso.',
+      },
+      nativeIdeProduct: {
+        label: 'Es en sí mismo un IDE o editor',
+        help: 'La herramienta es un entorno de desarrollo integrado por derecho propio, no una extensión de un agente de código ya existente.',
+      },
     },
     alternatives: {
       dwp: {
@@ -1131,74 +1143,74 @@ export const es: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'Convierte una funcionalidad en una especificación ejecutable mediante una constitución, una especificación, un plan y una lista de tareas, impulsado por comandos de barra que se integran con más de cincuenta agentes de código.',
+          'Convierte una funcionalidad en una especificación ejecutable mediante una constitución, una especificación, un plan y una lista de tareas, impulsado por comandos de barra que se integran con más de cincuenta agentes de código, y puede comprobar que los artefactos siguen siendo consistentes entre sí antes de empezar la implementación.',
         audience:
           'Equipos que quieren un flujo repetible de especificar, planificar, tareas e implementar dentro del agente que ya usan.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'Captura cada cambio como una propuesta con especificaciones delta (añadidas, modificadas, eliminadas) y requisitos RFC 2119 con escenarios, y luego los archiva en especificaciones vivas.',
+          'Captura cada cambio como una propuesta con especificaciones delta (añadidas, modificadas, eliminadas) y requisitos RFC 2119 con escenarios, y luego los archiva en especificaciones vivas, con un validador que comprueba la completitud de la propuesta y la cobertura de los escenarios antes de aceptar un cambio.',
         audience:
           'Equipos que trabajan sobre sistemas existentes y quieren que las especificaciones crezcan un cambio a la vez.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'Un IDE agéntico y una CLI cuyas especificaciones avanzan de requisitos de estilo EARS al diseño y a las tareas, con archivos steering y hooks que se ejecutan en eventos del editor.',
+          'Un IDE agéntico y una CLI cuyas especificaciones avanzan de requisitos de estilo EARS al diseño y a las tareas, con archivos steering y hooks que se ejecutan en eventos del editor, y que puede generar especificaciones de una base de código existente para detectar vacíos en los requisitos antes de empezar el diseño.',
         audience:
           'Desarrolladores que quieren el desarrollo guiado por especificación integrado en su editor con herramientas respaldadas por AWS.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'Un framework ágil de roles de agente especializados (análisis, producto, arquitectura, desarrollo, calidad) que produce briefs, requisitos, documentos de arquitectura y archivos de historias de usuario.',
+          'Un framework ágil de roles de agente especializados (análisis, producto, arquitectura, desarrollo, calidad) que produce briefs, requisitos, documentos de arquitectura y archivos de historias de usuario, con una Definición de Terminado que exige que cada historia sea revisada por un compañero de equipo o un agente revisor de IA antes de darla por concluida.',
         audience:
           'Equipos a los que les gustan las ceremonias basadas en roles y quieren un ciclo ágil completo para el trabajo de agentes.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'Una biblioteca de skills y un flujo de trabajo para hacer lluvia de ideas, planificar en pasos pequeños de prueba primero, ejecutar con subagentes y revisar antes de completar.',
+          'Una biblioteca de skills y un flujo de trabajo para hacer lluvia de ideas, planificar en pasos pequeños de prueba primero, ejecutar con subagentes y revisar antes de completar, integrada con más agentes de código anfitriones que cualquier otra alternativa de esta página, además de una revisión en dos etapas con subagentes (cumplimiento de la especificación y luego calidad del código) en cada tarea.',
         audience:
           'Desarrolladores que quieren una ejecución disciplinada guiada por pruebas dentro de su agente de código.',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          'Un sistema de planificación con un directorio .planning, ids de requisitos, planes por fases, ejecución con contexto fresco y un pase de verificación contra los requisitos imprescindibles declarados.',
+          'Un sistema de planificación con un directorio .planning, ids de requisitos, planes por fases, ejecución con contexto fresco y un pase de verificación contra los entregables observables por el usuario extraídos del resumen de cada plan, diseñado para combatir el deterioro del contexto ejecutando la investigación, la planificación y la ejecución en subagentes desechables, y detectando verificaciones obsoletas mediante huellas de contenido.',
         audience:
           'Desarrolladores en solitario y equipos pequeños que quieren ingeniería de contexto y verificación con poca ceremonia.',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configura los agentes de código que ya usas con memoria persistente, skills curadas, servidores MCP, personas y Spec-Driven Development o Receipt-Driven Development opcionales.',
+          'Configura los agentes de código que ya usas con memoria persistente que además enruta entre sesiones y modelos, skills curadas, servidores MCP, personas y Spec-Driven Development o Receipt-Driven Development opcionales. Su configuración se escribe por defecto en los ajustes globales del agente; la instalación limitada al workspace es opcional.',
         audience:
           'Para desarrolladores que quieren un ecosistema de agentes configurado, capaz de recordar el trabajo entre sesiones y producir evidencias cuando se necesitan.',
       },
       'claude-ai-native-sdlc': {
         name: 'SDLC nativo de IA de Claude',
         whatItDoesWell:
-          'Un ciclo de seis etapas, desde Planificar y Diseñar hasta Construir, Probar, Desplegar y Mantener, con artefactos duraderos que pasan de una etapa a la siguiente.',
+          'Un ciclo de seis etapas, desde Planificar y Diseñar hasta Construir, Probar, Desplegar y Mantener, con aprobación humana obligatoria en cada etapa, artefactos duraderos confirmados en el repositorio entre etapas, un pase de revisión dedicado y etiquetado como seguridad antes de desplegar, y evaluaciones continuas que publican indicadores de entrega adelantados y rezagados.',
         audience:
           'Equipos que evalúan el playbook de entrega de software de extremo a extremo de Claude Code y su ciclo de feedback en producción.',
       },
       'vendor-native': {
         name: 'Funciones nativas del agente (varían según el proveedor)',
         whatItDoesWell:
-          'Los productos de agentes pueden ofrecer modos de plan, archivos de instrucciones y skills, pero el comportamiento exacto depende del proveedor, el cliente y la versión.',
+          'Los productos de agentes pueden ofrecer modos de plan, archivos de instrucciones y skills construidos sobre los estándares abiertos y multiproveedor AGENTS.md y Agent Skills, aunque el comportamiento exacto del modo de plan sigue dependiendo del proveedor, el cliente y la versión. Agent Skills, en particular, carga solo un resumen breve al iniciar y las instrucciones completas al activarse, manteniendo fuera del contexto la capacidad que no se usa.',
         audience:
           'Para quienes quieren planificar dentro de un solo agente y aceptan un comportamiento específico del proveedor.',
       },
     },
     aiNative: {
       title: 'Dónde encaja en el SDLC nativo de IA',
-      body: 'El playbook de Claude sobre el SDLC nativo de IA describe un ciclo completo: Planificar, Diseñar, Construir, Probar, Desplegar y Mantener. Cada etapa deja un artefacto para la siguiente, mientras que el feedback de producción se convierte en nueva intención.',
+      body: 'El playbook de Claude sobre el SDLC nativo de IA describe un ciclo completo: Planificar, Diseñar, Construir, Probar, Desplegar y Mantener. Cada etapa confirma un artefacto que la siguiente lee, con una aprobación humana obligatoria en cada etapa y un pase de seguridad dedicado antes de desplegar, mientras que el feedback de producción se convierte en nueva intención.',
       shared:
-        'DWP comparte la idea de los artefactos duraderos: la intención se convierte en un plan, las tareas dejan evidencia y el repositorio sigue siendo legible para el siguiente agente.',
+        'DWP comparte las ideas de los artefactos duraderos y la aprobación con puertas: la intención se convierte en un plan, las tareas dejan evidencia, un pase de seguridad se ejecuta antes de completar y el repositorio sigue siendo legible para el siguiente agente.',
       boundary:
-        'El playbook también cubre la evaluación continua y las operaciones en producción. DWP se centra en el harness del repositorio y la ejecución de largo alcance, de modo que esas prácticas operativas pueden complementarlo sin atribuirle capacidades que no incorpora.',
+        'La diferencia real está en el alcance, no en el rigor: el playbook está construido en torno a Claude Code específicamente, mientras que el harness y el formato de plan de DWP los puede leer cualquier agente que siga los estándares AGENTS.md y Agent Skills. El playbook también cubre la evaluación continua y las operaciones en producción que DWP no reclama; esas prácticas operativas pueden complementar un repositorio gestionado con DWP en lugar de competir con él.',
       sourceLabel: 'Leer el playbook de Claude sobre el SDLC nativo de IA',
     },
     profileCta: 'Ver la comparativa',
@@ -1241,7 +1253,7 @@ export const es: SiteTranslations = {
     },
     honestLimits: {
       title: 'Límites honestos',
-      body: 'Una skill de DWP también es una especificación: describe cómo debe ejecutar un agente un procedimiento, como crear un componente. Los planes de DWP también son especificaciones de cambio: definen el alcance, los criterios de aceptación, las puertas de validación y las evidencias. Esta fila se refiere a algo más concreto: una especificación canónica que describe el comportamiento actual del producto y se actualiza con deltas después de cada cambio. Actualmente DWP no mantiene esa especificación viva a nivel de producto para cada sistema adoptado; OpenSpec es más fuerte cuando ese ciclo de vida es la necesidad principal. Las capas se pueden combinar alimentando un plan de DWP con una especificación del producto o una propuesta delta. Todavía no existe un benchmark independiente de la metodología; está planificada una evaluación pública preregistrada. El registro de carga de instrucciones mide bytes cargados, no tokens, costo ni resultados.',
+      body: 'Una skill de DWP también es una especificación: describe cómo debe ejecutar un agente un procedimiento, como crear un componente. Los planes de DWP también son especificaciones de cambio: definen el alcance, los criterios de aceptación, las puertas de validación y las evidencias. Esta fila se refiere a algo más concreto: una especificación canónica que describe el comportamiento actual del producto y se actualiza con deltas después de cada cambio. Actualmente DWP no mantiene esa especificación viva a nivel de producto para cada sistema adoptado; OpenSpec es más fuerte cuando ese ciclo de vida es la necesidad principal. Las capas se pueden combinar alimentando un plan de DWP con una especificación del producto o una propuesta delta. Todavía no existe un benchmark independiente de la metodología; está planificada una evaluación pública preregistrada. El registro de carga de instrucciones mide bytes cargados, no tokens, costo ni resultados. DWP se limita deliberadamente al repositorio: no es un sistema de memoria entre proyectos, ni un framework de agentes basado en roles, ni un IDE, así que tampoco compite en esos frentes; combínalo con una herramienta que cubra ese frente cuando el trabajo lo requiera.',
     },
     correction: {
       title: 'Ayúdanos a mantener esto preciso',

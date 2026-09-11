@@ -34,6 +34,9 @@ export const CAPABILITY_IDS = [
   'instructionBudgetLedger',
   'onboardingScaffold',
   'brownfieldSpecs',
+  'crossProjectMemory',
+  'roleBasedAgents',
+  'nativeIdeProduct',
 ] as const;
 
 export type CapabilityId = (typeof CAPABILITY_IDS)[number];
@@ -94,6 +97,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'built-in',
       onboardingScaffold: 'built-in',
       brownfieldSpecs: 'not-in-scope',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'optional',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -112,6 +118,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'built-in',
       brownfieldSpecs: 'optional',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -130,6 +139,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'optional',
       brownfieldSpecs: 'built-in',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -148,6 +160,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'optional',
       brownfieldSpecs: 'built-in',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'built-in',
     },
   },
   {
@@ -166,6 +181,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'optional',
       brownfieldSpecs: 'optional',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'built-in',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -184,6 +202,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'not-in-scope',
       brownfieldSpecs: 'not-in-scope',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -202,6 +223,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'built-in',
       brownfieldSpecs: 'optional',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -220,6 +244,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'not-in-scope',
       brownfieldSpecs: 'optional',
+      crossProjectMemory: 'built-in',
+      roleBasedAgents: 'optional',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -238,6 +265,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'built-in',
       brownfieldSpecs: 'optional',
+      crossProjectMemory: 'not-in-scope',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'not-in-scope',
     },
   },
   {
@@ -256,6 +286,9 @@ export const ALTERNATIVES: readonly Alternative[] = [
       instructionBudgetLedger: 'not-in-scope',
       onboardingScaffold: 'optional',
       brownfieldSpecs: 'not-in-scope',
+      crossProjectMemory: 'optional',
+      roleBasedAgents: 'not-in-scope',
+      nativeIdeProduct: 'optional',
     },
   },
 ];

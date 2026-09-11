@@ -34,7 +34,7 @@ export const de: SiteTranslations = {
     github: 'GitHub',
     faq: 'FAQ',
     compare: 'Vergleich',
-    changelog: 'Änderungen',
+    changelog: 'Changelog',
     resources: 'Ressourcen',
     resourcesDesc: 'Beispiele, Vertrauen, FAQ und Vergleich',
     repo: {
@@ -1123,6 +1123,18 @@ export const de: SiteTranslations = {
         label: 'Lebende Spezifikationen für bestehende Systeme',
         help: 'Änderungen werden als Deltas spezifiziert, die in eine wachsende Spezifikation des Systems einfließen.',
       },
+      crossProjectMemory: {
+        label: 'Persistentes Agentengedächtnis über Projekte hinweg',
+        help: 'Das Gedächtnis begleitet den Agenten über verschiedene Repositories und Sitzungen hinweg, nicht nur den Zustand eines einzelnen Plans auf der Festplatte.',
+      },
+      roleBasedAgents: {
+        label: 'Eigenständige, spezialisierte Agentenrollen',
+        help: 'Benannte Personas (etwa Analyst, Architekt oder Reviewer) teilen sich die Arbeit, statt dass ein Agent jeden Schritt übernimmt.',
+      },
+      nativeIdeProduct: {
+        label: 'Ist selbst eine IDE oder ein Editor',
+        help: 'Das Tool ist eine eigenständige integrierte Entwicklungsumgebung, kein Zusatz zu einem bestehenden Coding-Agenten.',
+      },
     },
     alternatives: {
       dwp: {
@@ -1135,75 +1147,75 @@ export const de: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'Überführt ein Feature über eine Konstitution, eine Spezifikation, einen Plan und eine Aufgabenliste in eine ausführbare Spezifikation, angetrieben von Slash-Befehlen, die mehr als fünfzig Coding-Agenten integrieren.',
+          'Überführt ein Feature über eine Konstitution, eine Spezifikation, einen Plan und eine Aufgabenliste in eine ausführbare Spezifikation, angetrieben von Slash-Befehlen, die mehr als fünfzig Coding-Agenten integrieren, und kann prüfen, ob die Artefakte vor Beginn der Umsetzung untereinander konsistent bleiben.',
         audience:
           'Teams, die einen wiederholbaren Workflow aus Specify, Plan, Tasks und Implement im bereits genutzten Agenten wollen.',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'Erfasst jede Änderung als Proposal mit Delta-Specs (hinzugefügt, geändert, entfernt) und RFC-2119-Anforderungen mit Szenarien und archiviert sie anschließend in lebenden Spezifikationen.',
+          'Erfasst jede Änderung als Proposal mit Delta-Specs (hinzugefügt, geändert, entfernt) und RFC-2119-Anforderungen mit Szenarien und archiviert sie anschließend in lebenden Spezifikationen, mit einem Validator, der Vollständigkeit des Proposals und Szenario-Abdeckung prüft, bevor eine Änderung akzeptiert wird.',
         audience:
           'Teams an bestehenden Systemen, deren Spezifikationen Änderung für Änderung wachsen sollen.',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'Eine agentische IDE und CLI, deren Spezifikationen von EARS-artigen Anforderungen über das Design zu Aufgaben führen, mit Steering-Dateien und Hooks, die auf Editor-Ereignissen laufen.',
+          'Eine agentische IDE und CLI, deren Spezifikationen von EARS-artigen Anforderungen über das Design zu Aufgaben führen, mit Steering-Dateien und Hooks, die auf Editor-Ereignissen laufen, und die Spezifikationen für eine bestehende Codebasis erzeugen kann, um Lücken in den Anforderungen schon vor dem Design zu erkennen.',
         audience:
           'Entwickler, die spec-driven Development fest im Editor integriert haben möchten, gestützt auf AWS-Werkzeuge.',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'Ein agiles Framework spezialisierter Agentenrollen (Analyse, Produkt, Architektur, Entwicklung, Qualität), das Briefings, Anforderungen, Architekturdokumente und Story-Dateien erzeugt.',
+          'Ein agiles Framework spezialisierter Agentenrollen (Analyse, Produkt, Architektur, Entwicklung, Qualität), das Briefings, Anforderungen, Architekturdokumente und Story-Dateien erzeugt, mit einer Definition of Done, die verlangt, dass jede Story von einem Teammitglied oder einem KI-Peer-Reviewer geprüft wird, bevor sie als abgeschlossen gilt.',
         audience:
           'Teams, die rollenbasierte Zeremonien schätzen und für Agentenarbeit einen vollständigen agilen Lebenszyklus wollen.',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'Eine Skills-Bibliothek und ein Workflow für Brainstorming, Planung in kleinen Test-first-Schritten, Ausführung mit Subagenten und Review vor dem Abschluss.',
+          'Eine Skills-Bibliothek und ein Workflow für Brainstorming, Planung in kleinen Test-first-Schritten, Ausführung mit Subagenten und Review vor dem Abschluss, mit mehr unterstützten Coding-Agenten-Hosts als jede andere Alternative auf dieser Seite, plus einem zweistufigen Subagenten-Review (Spezifikationstreue, dann Codequalität) bei jeder Aufgabe.',
         audience:
           'Entwickler, die disziplinierte testgetriebene Ausführung innerhalb ihres Coding-Agenten wollen.',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          'Ein Planungssystem mit einem .planning-Verzeichnis, Anforderungs-IDs, Phasenplänen, Ausführung mit frischem Kontext und einem Verifizierungsdurchlauf gegen genannte Must-haves.',
+          'Ein Planungssystem mit einem .planning-Verzeichnis, Anforderungs-IDs, Phasenplänen, Ausführung mit frischem Kontext und einem Verifizierungsdurchlauf gegen die aus der Zusammenfassung jedes Plans abgeleiteten, für Nutzer beobachtbaren Ergebnisse — gezielt gegen Context Rot ausgelegt, indem Recherche, Planung und Ausführung in wegwerfbaren Subagenten laufen und veraltete Verifizierungen per Content-Fingerprint erkannt werden.',
         audience:
           'Einzelentwickler und kleine Teams, die Context Engineering und Verifizierung mit wenig Zeremoniell wollen.',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          'Konfiguriert die Coding-Agenten, die Sie bereits nutzen, mit persistentem Gedächtnis, das zusätzlich über Sitzungen und Modelle hinweg routet, kuratierten Skills, MCP-Servern, Personas und optionalem Spec-Driven Development oder Receipt-Driven Development. Die Konfiguration wird standardmäßig in die globalen Agenten-Einstellungen geschrieben; eine auf das Workspace beschränkte Installation ist optional.',
         audience:
-          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+          'Entwickler, die ein konfiguriertes Agenten-Ökosystem wollen, das sich sitzungsübergreifend erinnert und bei Bedarf Nachweise liefert.',
       },
       'claude-ai-native-sdlc': {
-        name: "Claude's AI-native SDLC",
+        name: 'Claudes AI-native SDLC',
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          'Ein sechsstufiger Kreislauf von Plan und Design über Build, Test, Deploy bis Maintain, mit verpflichtender menschlicher Freigabe in jeder Stufe, dauerhaften Artefakten, die zwischen den Stufen ins Repository committet werden, einem eigenen, als Sicherheit gekennzeichneten Review-Durchlauf vor dem Deploy und kontinuierlichen Evals, die vorlaufende und nachlaufende Liefer-Indikatoren veröffentlichen.',
         audience:
-          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+          'Teams, die Claude Codes durchgängigen Software-Delivery-Playbook und seinen Produktions-Feedback-Loop evaluieren.',
       },
       'vendor-native': {
         name: 'Hersteller-native Plan-Modi',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor und Gemini CLI liefern Plan-Modi, Anweisungsdateien und Skills, die den AGENTS.md- und Agent-Skills-Standards folgen.',
+          'Claude Code, Codex, Cursor und Gemini CLI liefern Plan-Modi, Anweisungsdateien und Skills, die auf den offenen, herstellerübergreifenden Standards AGENTS.md und Agent Skills aufbauen, auch wenn das genaue Verhalten des Plan-Modus weiterhin von Hersteller, Client und Version abhängt. Agent Skills insbesondere lädt beim Start nur eine kurze Zusammenfassung und die vollständigen Anweisungen erst bei Aktivierung, sodass ungenutzte Fähigkeiten den Kontext nicht belasten.',
         audience:
           'Alle, die Planung innerhalb eines einzelnen Agenten wollen, ohne eine Methodik zu übernehmen.',
       },
     },
     aiNative: {
-      title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      title: 'Wo das in den AI-nativen SDLC passt',
+      body: 'Claudes Playbook für den AI-nativen SDLC beschreibt einen vollständigen Kreislauf: Plan, Design, Build, Test, Deploy und Maintain. Jede Stufe committet ein Artefakt, das die nächste liest, mit einer menschlichen Freigabe in jeder Stufe und einem eigenen Sicherheits-Review vor dem Deploy, während Produktions-Feedback zu neuer Absicht wird.',
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP teilt die Ideen der dauerhaften Artefakte und der freigabepflichtigen Gates: Absicht wird zu einem Plan, Aufgaben hinterlassen Nachweise, ein Sicherheits-Review läuft vor dem Abschluss, und das Repository bleibt für den nächsten Agenten lesbar.',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
-      sourceLabel: "Read Claude's AI-native SDLC playbook",
+        'Der eigentliche Unterschied liegt im Umfang, nicht in der Strenge: Das Playbook ist speziell um Claude Code herum gebaut, während das Harness und Planformat von DWP von jedem Agenten gelesen werden kann, der den AGENTS.md- und Agent-Skills-Standards folgt. Das Playbook deckt außerdem kontinuierliche Evaluierung und Produktionsbetrieb ab, was DWP nicht beansprucht; diese betrieblichen Praktiken können ein mit DWP geführtes Repository ergänzen, statt mit ihm zu konkurrieren.',
+      sourceLabel: 'Claudes Playbook für den AI-nativen SDLC lesen',
     },
     profileCta: 'Vergleich ansehen',
     profile: {
@@ -1246,7 +1258,7 @@ export const de: SiteTranslations = {
     },
     honestLimits: {
       title: 'Ehrliche Grenzen',
-      body: 'Deep Work Plan hat keinen Mechanismus für lebende oder Delta-Spezifikationen; OpenSpec und ähnliche Werkzeuge sind dort stärker. Ein unabhängiger Benchmark der Methodik existiert noch nicht; eine vorregistrierte öffentliche Evaluation ist geplant. Das Instruktionslast-Ledger misst geladene Bytes, nicht Token, Kosten oder Ergebnisse.',
+      body: 'Deep Work Plan hat keinen Mechanismus für lebende oder Delta-Spezifikationen; OpenSpec und ähnliche Werkzeuge sind dort stärker. Ein unabhängiger Benchmark der Methodik existiert noch nicht; eine vorregistrierte öffentliche Evaluation ist geplant. Das Instruktionslast-Ledger misst geladene Bytes, nicht Token, Kosten oder Ergebnisse. DWP ist bewusst auf das Repository begrenzt: Es ist kein projektübergreifendes Gedächtnissystem, kein rollenbasiertes Agenten-Framework und keine IDE, und tritt auf diesen Achsen daher auch nicht an – kombinieren Sie es bei Bedarf mit einem Werkzeug, das genau das abdeckt.',
     },
     correction: {
       title: 'Helfen Sie uns, diese Seite korrekt zu halten',

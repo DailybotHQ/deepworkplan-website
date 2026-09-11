@@ -33,7 +33,7 @@ export const th: SiteTranslations = {
     github: 'GitHub',
     faq: 'คำถามที่พบบ่อย',
     compare: 'เปรียบเทียบ',
-    changelog: 'บันทึกการเปลี่ยนแปลง',
+    changelog: 'Changelog',
     resources: 'ทรัพยากร',
     resourcesDesc: 'ตัวอย่าง ความน่าเชื่อถือ คำถามที่พบบ่อย และการเปรียบเทียบ',
     repo: {
@@ -1032,6 +1032,18 @@ export const th: SiteTranslations = {
         label: 'สเปกที่มีชีวิตสำหรับระบบที่มีอยู่แล้ว',
         help: 'การเปลี่ยนแปลงถูกระบุเป็นเดลต้าที่ผสานเข้าสู่สเปกของระบบซึ่งเติบโตขึ้นเรื่อย ๆ',
       },
+      crossProjectMemory: {
+        label: 'หน่วยความจำ agent ที่คงอยู่ข้ามโปรเจกต์',
+        help: 'หน่วยความจำติดตาม agent ข้ามที่เก็บโค้ดและเซสชันที่แตกต่างกัน ไม่ใช่แค่สถานะบนดิสก์ของแผนเดียว',
+      },
+      roleBasedAgents: {
+        label: 'บทบาท agent เฉพาะทางที่แยกจากกัน',
+        help: 'บุคลิกที่มีชื่อ (เช่น นักวิเคราะห์ สถาปนิก หรือผู้ทบทวน) แบ่งงานกันทำ แทนที่จะให้ agent เดียวทำทุกขั้นตอน',
+      },
+      nativeIdeProduct: {
+        label: 'เป็น IDE หรือ editor ของตัวเอง',
+        help: 'เครื่องมือนี้เป็นสภาพแวดล้อมการพัฒนาแบบครบวงจรในตัวเอง ไม่ใช่ส่วนเสริมของ coding agent ที่มีอยู่แล้ว',
+      },
     },
     alternatives: {
       dwp: {
@@ -1044,72 +1056,72 @@ export const th: SiteTranslations = {
       'github-spec-kit': {
         name: 'GitHub Spec Kit',
         whatItDoesWell:
-          'เปลี่ยนฟีเจอร์ให้เป็นสเปกที่ปฏิบัติการได้ ผ่านรัฐธรรมนูญ สเปก แผน และรายการงาน ขับเคลื่อนด้วย slash command ที่เชื่อมต่อกับ coding agent มากกว่าห้าสิบตัว',
+          'เปลี่ยนฟีเจอร์ให้เป็นสเปกที่ปฏิบัติการได้ ผ่านรัฐธรรมนูญ สเปก แผน และรายการงาน ขับเคลื่อนด้วย slash command ที่เชื่อมต่อกับ coding agent มากกว่าห้าสิบตัว และตรวจสอบได้ว่าอาร์ติแฟกต์ทั้งหมดสอดคล้องกันก่อนเริ่มลงมือทำจริง',
         audience:
           'ทีมที่ต้องการเวิร์กโฟลว์ specify, plan, tasks และ implement ที่ทำซ้ำได้ ภายใน agent ที่ตนใช้อยู่แล้ว',
       },
       openspec: {
         name: 'OpenSpec',
         whatItDoesWell:
-          'จับการเปลี่ยนแปลงแต่ละครั้งเป็นข้อเสนอพร้อมสเปกเดลต้า (เพิ่ม แก้ไข ลบ) และความต้องการตาม RFC 2119 ที่มาพร้อมสถานการณ์ แล้วจัดเก็บเข้าสู่สเปกที่มีชีวิต',
+          'จับการเปลี่ยนแปลงแต่ละครั้งเป็นข้อเสนอพร้อมสเปกเดลต้า (เพิ่ม แก้ไข ลบ) และความต้องการตาม RFC 2119 ที่มาพร้อมสถานการณ์ แล้วจัดเก็บเข้าสู่สเปกที่มีชีวิต พร้อมตัวตรวจสอบที่ยืนยันความสมบูรณ์ของข้อเสนอและความครอบคลุมของสถานการณ์ก่อนยอมรับการเปลี่ยนแปลง',
         audience: 'ทีมที่ทำงานบนระบบที่มีอยู่แล้ว และต้องการให้สเปกเติบโตทีละการเปลี่ยนแปลง',
       },
       'amazon-kiro': {
         name: 'Amazon Kiro',
         whatItDoesWell:
-          'IDE และ CLI แบบเอเจนต์ ที่สเปกไหลจากความต้องการสไตล์ EARS ไปสู่การออกแบบและงาน พร้อมไฟล์ steering และ hook ที่ทำงานตามเหตุการณ์ของ editor',
+          'IDE และ CLI แบบเอเจนต์ ที่สเปกไหลจากความต้องการสไตล์ EARS ไปสู่การออกแบบและงาน พร้อมไฟล์ steering และ hook ที่ทำงานตามเหตุการณ์ของ editor และสร้างสเปกให้กับโค้ดเบสที่มีอยู่แล้วเพื่อจับช่องว่างของความต้องการก่อนเริ่มออกแบบ',
         audience:
           'นักพัฒนาที่ต้องการการพัฒนาแบบขับเคลื่อนด้วยสเปกในตัว editor ของตน พร้อมเครื่องมือที่มี AWS หนุนหลัง',
       },
       'bmad-method': {
         name: 'BMAD Method',
         whatItDoesWell:
-          'เฟรมเวิร์ก agile ของบทบาท agent เฉพาะทาง (วิเคราะห์ ผลิตภัณฑ์ สถาปัตยกรรม พัฒนา คุณภาพ) ซึ่งผลิตบรีฟ ความต้องการ เอกสารสถาปัตยกรรม และไฟล์ story',
+          'เฟรมเวิร์ก agile ของบทบาท agent เฉพาะทาง (วิเคราะห์ ผลิตภัณฑ์ สถาปัตยกรรม พัฒนา คุณภาพ) ซึ่งผลิตบรีฟ ความต้องการ เอกสารสถาปัตยกรรม และไฟล์ story พร้อม Definition of Done ที่กำหนดให้ทุก story ต้องผ่านการทบทวนจากเพื่อนร่วมทีมหรือ AI peer reviewer ก่อนจึงจะถือว่าเสร็จ',
         audience:
           'ทีมที่ชอบพิธีกรรมตามบทบาท และต้องการวงจร agile ครบทั้งหมดสำหรับงานของ agent',
       },
       superpowers: {
         name: 'Superpowers',
         whatItDoesWell:
-          'ไลบรารีสกิลและเวิร์กโฟลว์สำหรับระดมสมอง วางแผนเป็นขั้นเล็ก ๆ แบบทดสอบก่อน ลงมือด้วยเอเจนต์ย่อย และทบทวนก่อนเสร็จสิ้น',
+          'ไลบรารีสกิลและเวิร์กโฟลว์สำหรับระดมสมอง วางแผนเป็นขั้นเล็ก ๆ แบบทดสอบก่อน ลงมือด้วยเอเจนต์ย่อย และทบทวนก่อนเสร็จสิ้น เชื่อมต่อกับ coding-agent host มากกว่าทางเลือกอื่นใดในหน้านี้ พร้อมการทบทวนโดยเอเจนต์ย่อยสองขั้นตอน (ตรวจความสอดคล้องกับสเปกก่อน แล้วจึงตรวจคุณภาพโค้ด) ในทุกงาน',
         audience: 'นักพัฒนาที่ต้องการการลงมือแบบทดสอบนำที่มีวินัยภายใน coding agent ของตน',
       },
       'get-shit-done': {
-        name: 'Get Shit Done',
+        name: 'GSD Core',
         whatItDoesWell:
-          'ระบบวางแผนที่มีไดเรกทอรี .planning รหัสความต้องการ แผนแบ่งเฟส การรันด้วยคอนเท็กซ์ใหม่ และการตรวจสอบเทียบกับสิ่งที่ระบุว่าต้องมี',
+          'ระบบวางแผนที่มีไดเรกทอรี .planning รหัสความต้องการ แผนแบ่งเฟส การรันด้วยคอนเท็กซ์ใหม่ และการตรวจสอบเทียบกับผลลัพธ์ที่ผู้ใช้สังเกตเห็นได้ซึ่งดึงมาจากสรุปของแต่ละแผน ออกแบบมาเพื่อต่อสู้กับ "context rot" โดยรันการค้นคว้า วางแผน และดำเนินการในซับเอเจนต์แบบใช้แล้วทิ้ง พร้อมตรวจจับการตรวจสอบที่ล้าสมัยด้วยการตรวจลายนิ้วมือของเนื้อหา',
         audience:
           'นักพัฒนาอิสระและทีมเล็กที่ต้องการ context engineering และการตรวจสอบโดยมีพิธีกรรมน้อย',
       },
       'gentle-ai': {
         name: 'Gentle-AI',
         whatItDoesWell:
-          'Configures the coding agents you already use with persistent memory, curated skills, MCP servers, personas and optional Spec-Driven Development or Receipt-Driven Development.',
+          'ปรับแต่ง coding agent ที่คุณใช้อยู่แล้วด้วยหน่วยความจำถาวรที่จัดเส้นทางข้ามเซสชันและโมเดลได้ด้วย สกิลที่คัดสรร MCP server บุคลิก (persona) และ Spec-Driven Development หรือ Receipt-Driven Development แบบเลือกใช้ได้ การตั้งค่าจะถูกเขียนลงในการตั้งค่าส่วนกลางของ agent เป็นค่าเริ่มต้น ส่วนการติดตั้งแบบจำกัดขอบเขต workspace เป็นทางเลือก',
         audience:
-          'Developers who want a configured agent ecosystem that remembers work across sessions and can produce evidence on demand.',
+          'นักพัฒนาที่ต้องการระบบนิเวศ agent ที่ตั้งค่าไว้แล้ว ซึ่งจดจำงานข้ามเซสชันได้ และสามารถสร้างหลักฐานได้เมื่อต้องการ',
       },
       'claude-ai-native-sdlc': {
         name: "Claude's AI-native SDLC",
         whatItDoesWell:
-          'A six-stage loop from Plan and Design through Build, Test, Deploy and Maintain, with durable artifacts passed between stages.',
+          'ลูปหกขั้นตอนจาก Plan และ Design ไปจนถึง Build, Test, Deploy และ Maintain โดยมีการอนุมัติจากมนุษย์เป็นเงื่อนไขในทุกขั้นตอน อาร์ติแฟกต์ที่คงทนถูก commit เข้าที่เก็บโค้ดระหว่างขั้นตอน มีการทบทวนเฉพาะด้านความปลอดภัยก่อนการ deploy และมีการประเมินผลต่อเนื่องที่เผยแพร่ตัวชี้วัดการส่งมอบทั้งเชิงคาดการณ์ล่วงหน้าและเชิงผลลัพธ์',
         audience:
-          "Teams evaluating Claude Code's end-to-end software delivery playbook and its production feedback loop.",
+          'ทีมที่กำลังประเมิน playbook การส่งมอบซอฟต์แวร์แบบครบวงจรของ Claude Code และลูปข้อเสนอแนะจากการใช้งานจริง',
       },
       'vendor-native': {
         name: 'Vendor-native plan modes',
         whatItDoesWell:
-          'Claude Code, Codex, Cursor และ Gemini CLI มาพร้อมโหมดวางแผน ไฟล์คำแนะนำ และสกิลที่ทำตามมาตรฐาน AGENTS.md และ Agent Skills',
+          'ผลิตภัณฑ์ agent อาจมีโหมดวางแผน ไฟล์คำแนะนำ และสกิลที่สร้างขึ้นบนมาตรฐานเปิดข้ามผู้ให้บริการอย่าง AGENTS.md และ Agent Skills แม้พฤติกรรมของโหมดวางแผนที่แท้จริงจะยังขึ้นอยู่กับผู้ให้บริการ ไคลเอนต์ และเวอร์ชัน โดยเฉพาะ Agent Skills ที่โหลดเพียงสรุปสั้น ๆ ตอนเริ่มต้น และโหลดคำแนะนำแบบเต็มเมื่อถูกเรียกใช้งานเท่านั้น ทำให้ความสามารถที่ยังไม่ใช้ไม่กินพื้นที่คอนเท็กซ์',
         audience:
           'ทุกคนที่ต้องการการวางแผนภายใน agent เดียว โดยไม่ต้องรับระเบียบวิธีเพิ่มเติม',
       },
     },
     aiNative: {
-      title: 'Where this fits in the AI-native SDLC',
-      body: "Claude's AI-native SDLC playbook describes a full loop: Plan, Design, Build, Test, Deploy and Maintain. Each stage leaves an artifact for the next, while production feedback becomes new intent.",
+      title: 'ตำแหน่งของสิ่งนี้ใน AI-native SDLC',
+      body: 'Playbook AI-native SDLC ของ Claude อธิบายลูปที่ครบวงจร: Plan, Design, Build, Test, Deploy และ Maintain แต่ละขั้นตอนจะ commit อาร์ติแฟกต์ให้ขั้นตอนถัดไปอ่านต่อ พร้อมการอนุมัติจากมนุษย์ในทุกขั้นตอนและการทบทวนความปลอดภัยโดยเฉพาะก่อนการ deploy ขณะที่ข้อเสนอแนะจากการใช้งานจริงกลายเป็นความตั้งใจใหม่',
       shared:
-        'DWP shares the durable-artifact idea: intent becomes a plan, tasks leave evidence, and the repository remains readable by the next agent.',
+        'DWP มีแนวคิดร่วมกันเรื่องอาร์ติแฟกต์ที่คงทนและการอนุมัติแบบมีเงื่อนไข: ความตั้งใจกลายเป็นแผน งานทิ้งหลักฐานไว้ มีการทบทวนความปลอดภัยก่อนเสร็จสิ้น และที่เก็บโค้ดยังคงอ่านได้สำหรับ agent ถัดไป',
       boundary:
-        'The playbook also covers continuous evaluation and production operations. DWP focuses on the repository harness and long-horizon execution, so those operational practices can complement it rather than being claimed as built in.',
+        'ความแตกต่างที่แท้จริงอยู่ที่ขอบเขต ไม่ใช่ความเข้มงวด: playbook นี้สร้างขึ้นโดยเฉพาะสำหรับ Claude Code ในขณะที่ harness และรูปแบบแผนของ DWP ถูกอ่านได้โดย agent ใดก็ตามที่ทำตามมาตรฐาน AGENTS.md และ Agent Skills playbook นี้ยังครอบคลุมการประเมินผลต่อเนื่องและการดำเนินงานจริง ซึ่ง DWP ไม่ได้อ้างว่ามี แนวปฏิบัติด้านการดำเนินงานเหล่านั้นสามารถเสริมที่เก็บโค้ดที่ใช้ DWP ได้ แทนที่จะแข่งขันกัน',
       sourceLabel: "Read Claude's AI-native SDLC playbook",
     },
     profileCta: 'ดูการเปรียบเทียบ',
@@ -1152,7 +1164,7 @@ export const th: SiteTranslations = {
     },
     honestLimits: {
       title: 'ข้อจำกัดที่ซื่อสัตย์',
-      body: 'Deep Work Plan ไม่มีกลไกสเปกแบบมีชีวิตหรือแบบเดลต้า ด้านนั้น OpenSpec และเครื่องมือทำนองเดียวกันทำได้ดีกว่า ยังไม่มี benchmark อิสระของระเบียบวิธี การประเมินสาธารณะแบบลงทะเบียนล่วงหน้าอยู่ในแผน ทะเบียนปริมาณคำสั่งวัดเฉพาะไบต์ที่โหลด ไม่ใช่โทเคน ต้นทุน หรือผลลัพธ์',
+      body: 'Deep Work Plan ไม่มีกลไกสเปกแบบมีชีวิตหรือแบบเดลต้า ด้านนั้น OpenSpec และเครื่องมือทำนองเดียวกันทำได้ดีกว่า ยังไม่มี benchmark อิสระของระเบียบวิธี การประเมินสาธารณะแบบลงทะเบียนล่วงหน้าอยู่ในแผน ทะเบียนปริมาณคำสั่งวัดเฉพาะไบต์ที่โหลด ไม่ใช่โทเคน ต้นทุน หรือผลลัพธ์ DWP จำกัดขอบเขตไว้ที่ระดับที่เก็บโค้ดโดยตั้งใจ: มันไม่ใช่ระบบหน่วยความจำข้ามโปรเจกต์ ไม่ใช่เฟรมเวิร์ก agent แบบแบ่งบทบาท และไม่ใช่ IDE จึงไม่แข่งขันในแกนเหล่านั้นเช่นกัน — จับคู่กับเครื่องมือที่ครอบคลุมด้านนั้นเมื่องานต้องการความสามารถนั้นจริง ๆ',
     },
     correction: {
       title: 'ช่วยกันรักษาความถูกต้องของหน้านี้',
