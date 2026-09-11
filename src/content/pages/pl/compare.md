@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan w porównaniu z alternatywami"
 description: "Jak Deep Work Plan odnosi się do narzędzi spec-driven, frameworków workflow agentów i trybów planowania dostawców: własne terminy, źródła i data przeglądu."
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-11
 ---
 
 ## Deep Work Plan i alternatywy
@@ -16,46 +16,55 @@ Trzy wartości opisują każdą możliwość. Mówią, gdzie możliwość żyje 
 - **Opcjonalnie lub przez rozszerzenie**
 - **Poza zakresem**
 
-Ostatni przegląd: 2026-09-10
+Ostatni przegląd: 2026-09-11
 
 ## Alternatywy, we własnych terminach
 
 ### Narzędzia do rozwoju spec-driven
 
-**GitHub Spec Kit** — Zamienia funkcję w wykonywalną specyfikację przez konstytucję, spec, plan i listę zadań, napędzane poleceniami slash integrującymi ponad pięćdziesiąt agentów kodujących. Zespoły chcące powtarzalnego workflow specify, plan, tasks i implement w agencie, którego już używają. [Strona oficjalna](https://github.com/github/spec-kit)
+**GitHub Spec Kit** — Zamienia funkcję w wykonywalną specyfikację przez konstytucję, spec, plan i listę zadań, napędzane poleceniami slash integrującymi ponad pięćdziesiąt agentów kodujących, i może sprawdzić spójność artefaktów między sobą przed rozpoczęciem implementacji. Zespoły chcące powtarzalnego workflow specify, plan, tasks i implement w agencie, którego już używają. [Strona oficjalna](https://github.com/github/spec-kit)
 
-**OpenSpec** — Uchwytuje każdą zmianę jako propozycję z delta-specs (dodane, zmodyfikowane, usunięte) i wymaganiami RFC 2119 ze scenariuszami, a następnie archiwizuje je w żywych specyfikacjach. Zespoły pracujące nad istniejącymi systemami, których specyfikacje powinny rosnąć zmiana po zmianie. [Strona oficjalna](https://openspec.dev)
+**OpenSpec** — Uchwytuje każdą zmianę jako propozycję z delta-specs (dodane, zmodyfikowane, usunięte) i wymaganiami RFC 2119 ze scenariuszami, a następnie archiwizuje je w żywych specyfikacjach, wraz z walidatorem sprawdzającym kompletność propozycji i pokrycie scenariuszy przed zaakceptowaniem zmiany. Zespoły pracujące nad istniejącymi systemami, których specyfikacje powinny rosnąć zmiana po zmianie. [Strona oficjalna](https://openspec.dev)
 
-**Amazon Kiro** — Agentowa IDE i CLI, w której specyfikacje przechodzą od wymagań w stylu EARS przez design do zadań, ze steering files i hookami uruchamianymi na zdarzeniach edytora. Programiści chcący rozwoju spec-driven wbudowanego w edytor z narzędziami opartymi na AWS. [Strona oficjalna](https://kiro.dev)
+**Amazon Kiro** — Agentowa IDE i CLI, w której specyfikacje przechodzą od wymagań w stylu EARS przez design do zadań, ze steering files i hookami uruchamianymi na zdarzeniach edytora, i potrafi wygenerować specyfikacje dla istniejącej bazy kodu, aby wychwycić luki w wymaganiach przed rozpoczęciem projektowania. Programiści chcący rozwoju spec-driven wbudowanego w edytor z narzędziami opartymi na AWS. [Strona oficjalna](https://kiro.dev)
 
 ### Frameworki workflow agentów
 
-**BMAD Method** — Zwinny framework wyspecjalizowanych ról agentów (analiza, produkt, architektura, rozwój, jakość) produkujący briefy, wymagania, dokumenty architektury i pliki story. Zespoły lubiące ceremonie oparte na rolach i chcące pełnego zwinnego cyklu życia pracy agentów. [Strona oficjalna](https://github.com/bmad-code-org/BMAD-METHOD)
+**BMAD Method** — Zwinny framework wyspecjalizowanych ról agentów (analiza, produkt, architektura, rozwój, jakość) produkujący briefy, wymagania, dokumenty architektury i pliki story, wraz z Definition of Done wymagającym, aby każda story została zrecenzowana przez współpracownika lub recenzenta AI, zanim zostanie uznana za ukończoną. Zespoły lubiące ceremonie oparte na rolach i chcące pełnego zwinnego cyklu życia pracy agentów. [Strona oficjalna](https://github.com/bmad-code-org/BMAD-METHOD)
 
-**Superpowers** — Biblioteka skilli i workflow do brainstormingu, planowania w małych krokach test-first, wykonania z subagentami i przeglądu przed ukończeniem. Programiści chcący zdyscyplinowanego wykonania test-driven w swoim agencie kodującym. [Strona oficjalna](https://github.com/obra/superpowers)
+**Superpowers** — Biblioteka skilli i workflow do brainstormingu, planowania w małych krokach test-first, wykonania z subagentami i przeglądu przed ukończeniem, zintegrowana z większą liczbą hostów agentów kodujących niż jakakolwiek inna alternatywa tutaj, plus dwuetapowy przegląd przez subagenta (najpierw zgodność ze specyfikacją, potem jakość kodu) przy każdym zadaniu. Programiści chcący zdyscyplinowanego wykonania test-driven w swoim agencie kodującym. [Strona oficjalna](https://github.com/obra/superpowers)
 
-**Get Shit Done** — System planowania z katalogiem .planning, identyfikatorami wymagań, planami faz, wykonaniem ze świeżym kontekstem i przejściem weryfikacji względem wymienionych must-haves. Samodzielni programiści i małe zespoły chcące context engineering i weryfikacji z niewielką ceremonią. [Strona oficjalna](https://github.com/open-gsd/gsd-core)
+**GSD Core** — System planowania z katalogiem .planning, identyfikatorami wymagań, planami faz, wykonaniem ze świeżym kontekstem i przejściem weryfikacji względem obserwowalnych przez użytkownika rezultatów wyodrębnionych z podsumowania każdego planu — zaprojektowany, by przeciwdziałać "context rot": badania, planowanie i wykonanie działają w jednorazowych subagentach, a weryfikacja wykrywa nieaktualność dzięki sprawdzaniu odcisków cyfrowych treści. Samodzielni programiści i małe zespoły chcące context engineering i weryfikacji z niewielką ceremonią. [Strona oficjalna](https://github.com/open-gsd/gsd-core)
+
+**Gentle-AI** — Konfiguruje agentów kodujących, których już używasz — z pamięcią trwałą, która dodatkowo kieruje ruch między sesjami i modelami, wyselekcjonowanymi skillami, serwerami MCP, personami oraz opcjonalnym Spec-Driven Development lub Receipt-Driven Development. Konfiguracja jest domyślnie zapisywana w globalnych ustawieniach agenta; instalacja ograniczona do workspace'u jest opcjonalna. Programiści chcący skonfigurowanego ekosystemu agentów, który pamięta pracę między sesjami i może na żądanie dostarczyć dowody. [Strona oficjalna](https://github.com/Gentleman-Programming/gentle-ai)
+
+### AI-native SDLC
+
+**Claude's AI-native SDLC** — Sześcioetapowa pętla od Plan i Design przez Build, Test, Deploy po Maintain, z zatwierdzeniem człowieka wymaganym na każdym etapie, trwałymi artefaktami commitowanymi do repozytorium między etapami, dedykowanym przeglądem oznaczonym jako bezpieczeństwo przed wdrożeniem oraz ciągłymi ewaluacjami publikującymi wiodące i opóźnione wskaźniki dostaw. Zespoły oceniające kompleksowy playbook dostarczania oprogramowania Claude Code i jego pętlę informacji zwrotnej z produkcji. [Strona oficjalna](https://claude.com/blog/the-ai-native-sdlc-playbook)
 
 ### Tryby planowania dostawców
 
-**Tryby planowania dostawców** — Claude Code, Codex, Cursor i Gemini CLI dostarczają tryby planowania, pliki instrukcji i skille zgodne ze standardami AGENTS.md i Agent Skills. Każdy, kto chce planowania w jednym agencie bez adopcji metodyki. [Strona oficjalna](https://agents.md)
+**Tryby planowania dostawców** — Claude Code, Codex, Cursor i Gemini CLI dostarczają tryby planowania, pliki instrukcji i skille oparte na otwartych, niezależnych od dostawcy standardach AGENTS.md i Agent Skills, choć dokładne zachowanie trybu planowania nadal zależy od dostawcy, klienta i wersji. W szczególności Agent Skills ładują na starcie tylko krótkie podsumowanie, a pełne instrukcje dopiero po aktywacji, dzięki czemu nieużywana funkcjonalność nie zajmuje kontekstu. Każdy, kto chce planowania w jednym agencie bez adopcji metodyki. [Strona oficjalna](https://agents.md)
 
 ## Macierz możliwości
 
 Gdzie każda możliwość żyje, per narzędzie. Wbudowane, opcjonalnie lub przez rozszerzenie, lub poza zakresem. Przegląd na podstawie oficjalnej dokumentacji.
 
-| Możliwość | Deep Work Plan | GitHub Spec Kit | OpenSpec | Amazon Kiro | BMAD Method | Superpowers | Get Shit Done | Tryby planowania dostawców |
-|---|---|---|---|---|---|---|---|---|
-| Działa z każdym agentem kodującym | Wbudowane | Wbudowane | Wbudowane | Poza zakresem | Wbudowane | Wbudowane | Wbudowane | Poza zakresem |
-| Zapisuje harness agenta w repozytorium | Wbudowane | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Poza zakresem | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie |
-| Kryteria akceptacji per zadanie | Wbudowane | Opcjonalnie lub przez rozszerzenie | Wbudowane | Wbudowane | Wbudowane | Wbudowane | Wbudowane | Opcjonalnie lub przez rozszerzenie |
-| Bramka walidacji per zadanie | Wbudowane | Opcjonalnie lub przez rozszerzenie | Poza zakresem | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Wbudowane | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie |
-| Wznawialny stan na dysku | Wbudowane | Wbudowane | Wbudowane | Wbudowane | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Wbudowane | Opcjonalnie lub przez rozszerzenie |
-| Obowiązkowy przegląd zamykający z przejściem bezpieczeństwa | Wbudowane | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie |
-| Wykonywalny sprawdzacz zgodności | Wbudowane | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Poza zakresem | Poza zakresem | Poza zakresem | Opcjonalnie lub przez rozszerzenie |
-| Opublikowany pomiar obciążenia instrukcjami | Wbudowane | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem |
-| Onboarding budujący dokumentację | Wbudowane | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Poza zakresem | Wbudowane | Opcjonalnie lub przez rozszerzenie |
-| Żywe specyfikacje dla istniejących systemów | Poza zakresem | Opcjonalnie lub przez rozszerzenie | Wbudowane | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Poza zakresem | Opcjonalnie lub przez rozszerzenie | Poza zakresem |
+| Możliwość | Deep Work Plan | GitHub Spec Kit | OpenSpec | Amazon Kiro | BMAD Method | Superpowers | GSD Core | Gentle-AI | Claude's AI-native SDLC | Tryby planowania dostawców |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Działa z każdym agentem kodującym | Wbudowane | Wbudowane | Wbudowane | Poza zakresem | Wbudowane | Wbudowane | Wbudowane | Wbudowane | Poza zakresem | Poza zakresem |
+| Zapisuje harness agenta w repozytorium | Wbudowane | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Poza zakresem | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Wbudowane | Opcjonalnie lub przez rozszerzenie |
+| Kryteria akceptacji per zadanie | Wbudowane | Opcjonalnie lub przez rozszerzenie | Wbudowane | Wbudowane | Wbudowane | Wbudowane | Wbudowane | Opcjonalnie lub przez rozszerzenie | Wbudowane | Opcjonalnie lub przez rozszerzenie |
+| Bramka walidacji per zadanie | Wbudowane | Opcjonalnie lub przez rozszerzenie | Poza zakresem | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Wbudowane | Wbudowane | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie |
+| Wznawialny stan na dysku | Wbudowane | Wbudowane | Wbudowane | Wbudowane | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Wbudowane | Wbudowane | Wbudowane | Opcjonalnie lub przez rozszerzenie |
+| Obowiązkowy przegląd zamykający z przejściem bezpieczeństwa | Wbudowane | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Wbudowane | Opcjonalnie lub przez rozszerzenie |
+| Wykonywalny sprawdzacz zgodności | Wbudowane | Opcjonalnie lub przez rozszerzenie | Wbudowane | Opcjonalnie lub przez rozszerzenie | Poza zakresem | Poza zakresem | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie |
+| Opublikowany pomiar obciążenia instrukcjami | Wbudowane | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem |
+| Onboarding budujący dokumentację | Wbudowane | Wbudowane | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Poza zakresem | Wbudowane | Poza zakresem | Wbudowane | Opcjonalnie lub przez rozszerzenie |
+| Żywe specyfikacje dla istniejących systemów | Poza zakresem | Opcjonalnie lub przez rozszerzenie | Wbudowane | Wbudowane | Opcjonalnie lub przez rozszerzenie | Poza zakresem | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Opcjonalnie lub przez rozszerzenie | Poza zakresem |
+| Trwała pamięć agenta między projektami | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Wbudowane | Poza zakresem | Opcjonalnie lub przez rozszerzenie |
+| Odrębne wyspecjalizowane role agentów | Opcjonalnie lub przez rozszerzenie | Poza zakresem | Poza zakresem | Poza zakresem | Wbudowane | Poza zakresem | Poza zakresem | Opcjonalnie lub przez rozszerzenie | Poza zakresem | Poza zakresem |
+| Jest samodzielnym IDE lub edytorem | Poza zakresem | Poza zakresem | Poza zakresem | Wbudowane | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Poza zakresem | Opcjonalnie lub przez rozszerzenie |
 
 ## Co wnosi Deep Work Plan
 
@@ -68,7 +77,7 @@ Gdzie każda możliwość żyje, per narzędzie. Wbudowane, opcjonalnie lub prze
 
 ## Uczciwe ograniczenia
 
-Deep Work Plan nie ma mechanizmu żywych ani delta-specyfikacji; OpenSpec i podobne narzędzia są tam silniejsze. Niezależny benchmark metodyki jeszcze nie istnieje; planowana jest preregistrowana publiczna ewaluacja. Rejestr obciążenia instrukcjami mierzy załadowane bajty, nie tokeny, koszty ani wyniki.
+Deep Work Plan nie ma mechanizmu żywych ani delta-specyfikacji; OpenSpec i podobne narzędzia są tam silniejsze. Niezależny benchmark metodyki jeszcze nie istnieje; planowana jest preregistrowana publiczna ewaluacja. Rejestr obciążenia instrukcjami mierzy załadowane bajty, nie tokeny, koszty ani wyniki. DWP jest celowo ograniczony do repozytorium: nie jest systemem pamięci między projektami, nie jest frameworkiem agentów opartym na rolach ani IDE, więc nie konkuruje też na tych płaszczyznach — połącz go z narzędziem pokrywającym daną potrzebę, gdy praca tego wymaga.
 
 ## Pomóż nam utrzymać dokładność
 
@@ -84,5 +93,7 @@ Ta strona jest przeglądana w podanej dacie i poprawiana na żądanie. Jeśli op
 - Amazon Kiro — https://kiro.dev/docs/
 - BMAD Method — https://github.com/bmad-code-org/BMAD-METHOD#readme
 - Superpowers — https://github.com/obra/superpowers#readme
-- Get Shit Done — https://github.com/open-gsd/gsd-core#readme
+- GSD Core — https://github.com/open-gsd/gsd-core#readme
+- Gentle-AI — https://github.com/Gentleman-Programming/gentle-ai#readme
+- Claude's AI-native SDLC — https://claude.com/blog/the-ai-native-sdlc-playbook
 - Tryby planowania dostawców — https://agentskills.io
