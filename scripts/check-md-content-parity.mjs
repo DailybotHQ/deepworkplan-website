@@ -158,6 +158,19 @@ function extractMarkdownText(md) {
   const headerEnd = body.indexOf('\n---\n');
   if (headerEnd !== -1) body = body.slice(headerEnd + 5);
 
+  // Drop the trailing site-navigation block. generateSiteNavigation() in
+  // src/lib/markdown-for-agents.ts is always the last thing appended to
+  // every serialized page, and always opens with its own '\n---\n' HR
+  // followed by a localized '## …' heading — since nothing is appended
+  // after it, the LAST remaining '\n---\n' marks where it starts. This is
+  // the Markdown-side equivalent of stripping HTML's <nav>/<footer> above;
+  // without it, this constant ~150-word link block dominates the signal
+  // for short pages and skews them toward false-positive divergence flags
+  // (confirmed against real pages during Task 7 calibration — see
+  // analysis_results/MD_HTML_CONTENT_PARITY.md).
+  const navStart = body.lastIndexOf('\n---\n');
+  if (navStart !== -1) body = body.slice(0, navStart);
+
   // Strip the known leaks before scoring content similarity — they're
   // reported separately (see extractMarkdownLeaks) and would otherwise
   // pollute the similarity signal in the opposite direction (penalizing
