@@ -42,7 +42,7 @@ Z każdym agentem, który czyta pliki repozytorium. Skill podąża za otwartym s
 
 ### Jak z tego korzystać?
 
-Trzy kroki. Najpierw zainstaluj skill Deep Work Plan w swoim agencie kodującym — najszybsza ścieżka to `npx skills add DailybotHQ/deepworkplan-skill` (lub sklonuj repozytorium skilla i uruchom `./setup.sh`). Następnie jednorazowo wprowadź repozytorium do onboardingu, aby agent dostosował `AGENTS.md`, `docs/`, zestaw `.agents/` i obszar `.dwp/` ignorowany przez git do twojego stacku: wskaż https://deepworkplan.com/init.md lub uruchom `/deepworkplan-onboard`. Na koniec planuj i wykonuj pracę za pomocą lekkich poleceń: `/dwp-create <goal>` buduje plan; `/dwp-execute` uruchamia go zadanie po zadaniu wobec każdej bramki; `/dwp-refine` edytuje plan w toku (zakres, zadania lub promocję planu Lite do Full); `/dwp-resume` kontynuuje po przerwie; `/dwp-status` raportuje postęp bez wykonywania; `/dwp-verify` tworzy obiektywny raport zgodności. Agenci przechwytujący `/` często używają zamiast tego `#` (na przykład `#dwp-execute`). Endpoint adopcji i szybki start przechodzą tę samą ścieżkę bardziej szczegółowo.
+Trzy kroki. Najpierw zainstaluj skill Deep Work Plan w swoim agencie kodującym — najszybsza ścieżka to `npx skills add DailybotHQ/deepworkplan-skill` (lub sklonuj repozytorium skilla i uruchom `./setup.sh`). Następnie jednorazowo wprowadź repozytorium do onboardingu, aby agent dostosował `AGENTS.md`, `docs/`, zestaw `.agents/` i obszar `.dwp/` ignorowany przez git do twojego stacku: wskaż https://deepworkplan.com/init.md lub uruchom `/deepworkplan-onboard`. Na koniec planuj i wykonuj pracę za pomocą lekkich poleceń: `/dwp-create <goal>` buduje plan; `/dwp-execute` uruchamia go zadanie po zadaniu wobec każdej bramki; `/dwp-refine` edytuje plan w toku (zakres, zadania lub promocję planu Lite do Full); `/dwp-resume` kontynuuje po przerwie; `/dwp-status` raportuje postęp bez wykonywania; `/dwp-verify` tworzy obiektywny raport zgodności; `/dwp-upgrade` przenosi zainstalowanego skilla na nowszy release bez dotykania istniejących planów. Agenci przechwytujący `/` często używają zamiast tego `#` (na przykład `#dwp-execute`). Endpoint adopcji i szybki start przechodzą tę samą ścieżkę bardziej szczegółowo.
 
 [Szybki start](https://deepworkplan.com/pl/quickstart)
 
@@ -114,11 +114,23 @@ Nieudana bramka to najpierw sygnał do naprawy: agent naprawia to, co mieści si
 
 [Przeczytaj protokół agenta](https://deepworkplan.com/pl/spec/agent-protocol)
 
+### Co się dzieje, gdy sprawdzacz zgodności nie może uruchomić swoich sprawdzeń?
+
+Mówi to wprost. Sprawdzacz kończy z kodem wyjścia 2 i jednoznacznym werdyktem `UNVERIFIED` — nigdy nie wypisuje zaliczenia, którego faktycznie nie zweryfikował. Gdy w środowisku brakuje zdolnego interpretera albo sprawdzenie nie może się uruchomić, uczciwy wynik to «niezweryfikowano», nie «zgodny»; zielony wynik zawsze oznacza, że każde sprawdzenie się wykonało i przeszło. Ta sama dyscyplina przenika całą metodykę: żaden przepływ nie osłabia ani nie fałszuje bramki, żeby ogłosić ukończenie.
+
+[Kontrakt zgodności](https://deepworkplan.com/pl/spec/conformance)
+
 ### Czy plan może działać bez nadzoru w nocy lub w CI?
 
 Tak, gdy plan został wcześniej zatwierdzony, niesie wymaganą warstwę stanu i daje agentowi ograniczone uprawnienia. Przebieg bez nadzoru musi się zatrzymać i zapisać blokadę, gdy rzeczywistość odbiega od planu, bramka zawiedzie poza planowanym zakresem naprawy lub potrzebne jest nowe zatwierdzenie bądź poświadczenie.
 
 [Przeczytaj protokół pracy bez nadzoru](https://deepworkplan.com/pl/spec/agent-protocol)
+
+### Czy jeden plan może obejmować wiele repozytoriów?
+
+Tak — archetyp huba-orkiestratora istnieje dokładnie po to. Repozytorium huba trzyma plan koordynujący, a każde repozytorium dziecko uruchamia własny plan we własnym odizolowanym obszarze `.dwp/`, więc dziecko nigdy nie zapisuje do stanu planów huba. Kompletność dziecka jest odczytywana z top-levelowego stanu jego własnego planu, nie przez dopasowywanie stringów w jego wnętrzu, a hub zapisuje, gdzie jest, zanim dokądkolwiek przejdzie. Każde dziecko pozostaje zwykłym repozytorium DWP, które można pilotować także samodzielnie.
+
+[Archetypy repozytoriów](https://deepworkplan.com/pl/spec/archetypes)
 
 ## Porównanie
 
@@ -144,7 +156,13 @@ Wbudowane tryby planowania są przydatne, a Deep Work Plan buduje na tym samym p
 
 ### Co onboarding zapisuje w moim repozytorium i czy dotyka istniejących plików?
 
-Onboarding jest niedestrukcyjny: wykrywa istniejący `AGENTS.md`, `docs/`, `.agents/` lub `CLAUDE.md`, uzgadnia zamiast nadpisywać i pyta przed zastąpieniem czegokolwiek. Zapisuje indeks `AGENTS.md` z realnymi poleceniami, przemyślane drzewo `docs/`, dokumentację per moduł, zestaw `.agents/` z cienkimi poleceniami `dwp-*`, obszar wyjściowy `.dwp/` wykluczony przez gitignore, zweryfikowaną mapę testów i wymagany lokalny przegląd kodu (skill AI Diff Reviewer plus rozszerzenie przeglądu dopasowane do repozytorium). Następnie uruchamia samosprawdzenie i sprawdzacz zgodności, aby pokazać, co zostało wyprodukowane. Repozytorium onboardowane pod wcześniejszym standardem dostaje ukierunkowany upgrade harnessu, który uzgadnia tylko to, czego brakuje lub co jest przestarzałe. Aktualizacja samego skilla to osobny przepływ warunkowany wyraźną zgodą (`/dwp-upgrade`): sprawdza najnowszą opublikowaną wersję w trybie tylko do odczytu, instaluje się dopiero po Twojej wyraźnej akceptacji, ponawia onboarding jak świeże przejście i nigdy nie migruje ani nie unieważnia istniejących planów pod `.dwp/`.
+Onboarding jest niedestrukcyjny: wykrywa istniejący `AGENTS.md`, `docs/`, `.agents/` lub `CLAUDE.md`, uzgadnia zamiast nadpisywać i pyta przed zastąpieniem czegokolwiek. Zapisuje indeks `AGENTS.md` z realnymi poleceniami, przemyślane drzewo `docs/`, dokumentację per moduł, zestaw `.agents/` z cienkimi poleceniami `dwp-*`, obszar wyjściowy `.dwp/` wykluczony przez gitignore, zweryfikowaną mapę testów i wymagany lokalny przegląd kodu (skill AI Diff Reviewer plus rozszerzenie przeglądu dopasowane do repozytorium). Następnie uruchamia samosprawdzenie i sprawdzacz zgodności, aby pokazać, co zostało wyprodukowane. Repozytorium onboardowane pod wcześniejszym standardem dostaje ukierunkowany upgrade harnessu, który uzgadnia tylko to, czego brakuje lub co jest przestarzałe.
+
+[Endpoint adopcji](https://deepworkplan.com/pl/init)
+
+### Jak zaktualizować skilla w repozytorium już po onboardingu?
+
+Są tu dwie różne aktualizacje i przepływ trzyma je osobno. Harness repozytorium — `AGENTS.md`, `docs/`, zestaw `.agents/` — jest uzgadniany ponownym przebiegiem onboardingu, który uzupełnia tylko to, czego brakuje lub co jest przestarzałe. Sam skill rusza dalej przez `/dwp-upgrade`: sprawdzenie najnowszego opublikowanego release’u w trybie tylko do odczytu, instalacja dokładnego taga, który zaakceptowałeś, zweryfikowana, a potem onboarding ponownie jak świeże przejście. Przepływ w każdym kroku wymaga wyraźnej zgody, lokalne adaptacje są porównywane diffem i zachowywane zamiast nadpisywane, a `.dwp/` nigdy nie jest migrowany — istniejące plany zachowują zapisany kształt i działają dalej.
 
 [Endpoint adopcji](https://deepworkplan.com/pl/init)
 
@@ -162,7 +180,7 @@ DWP nie traktuje braku łańcucha narzędzi jako wolnej przepustki. Podczas onbo
 
 ### Ile to kosztuje i jak mierzona jest wydajność?
 
-Metodyka i skill są na licencji MIT i bezpłatne; nie ma usługi, klucza API ani telemetrii w przepływach rdzeniowych. Wydajność jest raportowana jako liczba bajtów instrukcji ładowanych przez każdy przepływ, mierzona skryptem commitowanym ze skillem i publikowaną w rejestrze ewaluacji, przy czym wzrosty są raportowane tak samo otwarcie jak spadki. Nie jest raportowana jako procenty tokenów ani oszczędności kosztów, bo inwentaryzacja bajtów tego nie dowodzi; planowana jest preregistrowana publiczna ewaluacja, by właściwie zmierzyć wyniki.
+Metodyka i skill są na licencji MIT i bezpłatne; nie ma usługi, klucza API ani telemetrii w przepływach rdzeniowych. Wydajność jest raportowana jako liczba bajtów instrukcji ładowanych przez każdy przepływ, mierzona skryptem commitowanym ze skillem, ponownie mierzona na każdej linii bazowej release’u i publikowaną w rejestrze ewaluacji, przy czym wzrosty są raportowane tak samo otwarcie jak spadki. Nie jest raportowana jako procenty tokenów ani oszczędności kosztów, bo inwentaryzacja bajtów tego nie dowodzi; planowana jest preregistrowana publiczna ewaluacja, by właściwie zmierzyć wyniki.
 
 [Zaufanie i ujawnianie](https://deepworkplan.com/pl/trust)
 

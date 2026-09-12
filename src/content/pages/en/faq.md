@@ -42,7 +42,7 @@ Any agent that reads repository files. The skill follows the open Agent Skills s
 
 ### How do I use it?
 
-Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx skills add DailybotHQ/deepworkplan-skill` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits an in-flight plan (scope, tasks, or promoting a Lite plan to Full); `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.
+Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx skills add DailybotHQ/deepworkplan-skill` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits an in-flight plan (scope, tasks, or promoting a Lite plan to Full); `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report; `/dwp-upgrade` moves an installed skill to a newer release without touching existing plans. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.
 
 [Quickstart](https://deepworkplan.com/quickstart)
 
@@ -114,11 +114,23 @@ A failed gate is first a repair signal: the agent fixes what falls inside the ta
 
 [Read the agent protocol](https://deepworkplan.com/spec/agent-protocol)
 
+### What happens when the conformance checker cannot run its checks?
+
+It says so, loudly. The checker exits with code 2 and an explicit `UNVERIFIED` verdict — it never prints a pass it did not actually verify. When the environment lacks a capable interpreter or a check cannot run, the honest outcome is unverified, not conformant; a green result always means every check ran and passed. The same discipline runs through the whole methodology: no flow weakens or fakes a gate to claim completion.
+
+[The conformance contract](https://deepworkplan.com/spec/conformance)
+
 ### Can a plan run unattended overnight or in CI?
 
 Yes, when the plan was approved in advance, carries the required state layer and gives the agent bounded authority. An unattended run must stop and record a blocker when reality diverges, a gate fails outside its planned repair scope, or a new approval or credential is needed.
 
 [Read the unattended protocol](https://deepworkplan.com/spec/agent-protocol)
+
+### Can one plan span multiple repositories?
+
+Yes — the orchestrator-hub archetype exists for exactly that. A hub repository holds the coordinating plan, and each child repository runs its own plan inside its own isolated `.dwp/` workspace, so a child never writes into the hub’s plan state. Child completeness is read from each plan’s own top-level state, not by string-matching inside it, and the hub records where it is before navigating anywhere. Each child stays an ordinary DWP repository that can also be piloted on its own.
+
+[Repository archetypes](https://deepworkplan.com/spec/archetypes)
 
 ## How it compares
 
@@ -146,7 +158,13 @@ Built-in plan modes are useful and Deep Work Plan builds on the same substrate, 
 
 ### What does onboarding write into my repository, and does it touch existing files?
 
-Onboarding is non-destructive: it detects an existing `AGENTS.md`, `docs/`, `.agents/` or `CLAUDE.md`, reconciles rather than overwrites, and asks before replacing anything. It writes the `AGENTS.md` index with real commands, a reasoned `docs/` tree, per-module docs, the `.agents/` kit with thin `dwp-*` commands, a gitignored `.dwp/` output area, a verified testing map, and the required local code review (the AI Diff Reviewer skill plus a repo-tailored review extension). It then runs a self-check and the conformance checker so you can see what was produced. A repository onboarded under an earlier standard gets a targeted harness upgrade that reconciles only what is missing or outdated. Upgrading the skill itself is a separate, consent-gated flow (`/dwp-upgrade`): it checks the latest published version read-only, installs only after you explicitly accept, re-runs onboarding as a fresh pass, and never migrates or invalidates existing plans under `.dwp/`.
+Onboarding is non-destructive: it detects an existing `AGENTS.md`, `docs/`, `.agents/` or `CLAUDE.md`, reconciles rather than overwrites, and asks before replacing anything. It writes the `AGENTS.md` index with real commands, a reasoned `docs/` tree, per-module docs, the `.agents/` kit with thin `dwp-*` commands, a gitignored `.dwp/` output area, a verified testing map, and the required local code review (the AI Diff Reviewer skill plus a repo-tailored review extension). It then runs a self-check and the conformance checker so you can see what was produced. A repository onboarded under an earlier standard gets a targeted harness upgrade that reconciles only what is missing or outdated.
+
+[The adoption endpoint](https://deepworkplan.com/init)
+
+### How do I upgrade the skill in an already-onboarded repository?
+
+Two different upgrades are involved, and the flow keeps them apart. The repository harness — `AGENTS.md`, `docs/`, the `.agents/` kit — is reconciled by re-running onboarding, which fills only what is missing or outdated. The skill itself moves through `/dwp-upgrade`: a read-only check of the latest published release, an install of the exact tag you accepted, verified, and then onboarding again as a fresh pass. The flow is consent-gated throughout, local adaptations are diffed and preserved rather than overwritten, and `.dwp/` is never migrated — existing plans keep their recorded shape and keep running.
 
 [The adoption endpoint](https://deepworkplan.com/init)
 
@@ -164,7 +182,7 @@ DWP does not treat the absence of a toolchain as a free pass. During onboarding 
 
 ### What does it cost, and how is efficiency measured?
 
-The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads, measured by a script committed with the skill and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those; a pre-registered public evaluation is planned to measure outcomes properly.
+The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads, measured by a script committed with the skill, re-measured across release baselines, and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those; a pre-registered public evaluation is planned to measure outcomes properly.
 
 [Trust and disclosure](https://deepworkplan.com/trust)
 
