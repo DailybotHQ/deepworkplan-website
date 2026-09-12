@@ -57,6 +57,9 @@ const AI_BOT_PATTERNS: ReadonlyArray<{ pattern: RegExp; name: string }> = [
   { pattern: /Meta-ExternalAgent/i, name: 'Meta-ExternalAgent' },
   { pattern: /cohere-ai/i, name: 'cohere-ai' },
   { pattern: /OAI-SearchBot/i, name: 'OAI-SearchBot' },
+  { pattern: /DeepSeekBot/i, name: 'DeepSeekBot' },
+  { pattern: /Claude-SearchBot/i, name: 'Claude-SearchBot' },
+  { pattern: /Perplexity-User/i, name: 'Perplexity-User' },
 ];
 
 /**
