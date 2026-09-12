@@ -1,0 +1,37 @@
+{
+  "name": "deepworkplan",
+  "version": "0.1.0",
+  "description": "Official CLI for deepworkplan.com — the Deep Work Plan (DWP) methodology site. Read-only, zero-dependency access to the adoption prompt, site sections, every page as source Markdown, and the MCP server.",
+  "type": "module",
+  "bin": {
+    "deepworkplan": "bin/deepworkplan.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "bin/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "deepworkplan",
+    "dwp",
+    "agent",
+    "ai",
+    "mcp",
+    "cli",
+    "llm",
+    "agents"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DailybotHQ/deepworkplan-website.git",
+    "directory": "cli"
+  },
+  "homepage": "https://deepworkplan.com",
+  "bugs": {
+    "url": "https://github.com/DailybotHQ/deepworkplan-website/issues"
+  }
+}
