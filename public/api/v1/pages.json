@@ -1,0 +1,330 @@
+{
+  "version": "5.0.2",
+  "apiVersion": "v1",
+  "description": "Every agent-facing Markdown endpoint, grouped by language. Each page is fetchable as <origin>/<lang-prefix>/<slug>.md (English at the root, e.g. /developers.md; other languages at /<lang>/<slug>.md).",
+  "languages": [
+    {
+      "code": "en",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "es",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "pt",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "zh",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "ja",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "de",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "fr",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "ko",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "ru",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "it",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "tr",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "id",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "vi",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "hi",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "pl",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "uk",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    },
+    {
+      "code": "th",
+      "pages": [
+        "about",
+        "compare",
+        "contact",
+        "developers",
+        "examples",
+        "faq",
+        "index",
+        "init",
+        "kit",
+        "methodology",
+        "privacy",
+        "quickstart",
+        "spec",
+        "trust"
+      ]
+    }
+  ]
+}

@@ -27,6 +27,7 @@ import {
   isApiPath,
   prefersMarkdownOverHtml,
 } from '../src/lib/agent-recovery';
+import { deprecationHeadersFor } from '../src/lib/deprecation';
 import { stripNonStandardRobotsDirectives } from '../src/lib/robots-directives';
 
 interface AssetsFetcher {
@@ -382,11 +383,29 @@ function isDirectMarkdownUrl(pathname: string): boolean {
  * through untouched.
  */
 function finalizeResponse(context: EventContext, response: Response): Response {
+  const url = new URL(context.request.url);
+
+  // 0. Deprecation headers (see src/lib/deprecation.ts). The production map
+  //    is empty today, so this is a no-op until an endpoint is retired.
+  //    Applied to passing responses; the synthetic 404 branches below skip
+  //    them deliberately — by the time a deprecated endpoint 404s it has
+  //    been removed, and deprecation headers on a removed endpoint carry
+  //    no information.
+  const deprecation = deprecationHeadersFor(url.pathname);
+  if (deprecation && response.status !== 404) {
+    const headers = new Headers(response.headers);
+    for (const [name, value] of Object.entries(deprecation)) {
+      headers.set(name, value);
+    }
+    return new Response(response.body, {
+      status: response.status,
+      headers,
+    });
+  }
+
   if (response.status !== 404) {
     return response;
   }
-
-  const url = new URL(context.request.url);
 
   // 1. API paths → structured JSON error.
   if (isApiPath(url.pathname)) {

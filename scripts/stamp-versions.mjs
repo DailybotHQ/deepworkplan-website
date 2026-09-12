@@ -5,6 +5,10 @@
  *
  *   - public/openapi.json                     → info.version
  *   - public/api/health.json                  → version
+ *   - public/api/v1/index.json                → version
+ *   - public/api/v1/sections.json             → version
+ *   - public/api/v1/pages.json                → version
+ *   - public/api/v1/health.json               → version
  *   - public/.well-known/mcp.json             → version
  *   - public/.well-known/mcp/server-card.json → serverInfo.version
  *   - src/lib/mcp/server-info.ts              → SITE_VERSION (HTTP MCP serverInfo)
@@ -89,6 +93,20 @@ if (
   })
 ) {
   changed.push('public/api/health.json');
+}
+for (const relPath of [
+  'public/api/v1/index.json',
+  'public/api/v1/sections.json',
+  'public/api/v1/pages.json',
+  'public/api/v1/health.json',
+]) {
+  if (
+    await stampJson(relPath, (doc) => {
+      doc.version = version;
+    })
+  ) {
+    changed.push(relPath);
+  }
 }
 if (
   await stampJson('public/.well-known/mcp.json', (doc) => {

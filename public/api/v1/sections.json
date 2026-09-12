@@ -1,0 +1,77 @@
+{
+  "version": "5.0.2",
+  "apiVersion": "v1",
+  "description": "Source: src/lib/mcp/tools.ts SITE_SECTIONS — keep in sync (guarded by tests/unit/lib/api-v1.test.ts).",
+  "sections": [
+    {
+      "name": "Home",
+      "path": "/",
+      "description": "Overview of the Deep Work Plan methodology."
+    },
+    {
+      "name": "Methodology",
+      "path": "/methodology",
+      "description": "What DWP is, its principles, and how to adopt it."
+    },
+    {
+      "name": "Specification",
+      "path": "/spec",
+      "description": "The normative DWP standard: task anatomy, validation gates, completion protocol."
+    },
+    {
+      "name": "Kit",
+      "path": "/kit",
+      "description": "Presets, adapters, and commands for installing DWP into a repository."
+    },
+    {
+      "name": "Examples",
+      "path": "/examples",
+      "description": "Worked examples of the methodology in practice."
+    },
+    {
+      "name": "Quickstart",
+      "path": "/quickstart",
+      "description": "Get DWP running in a repository quickly."
+    },
+    {
+      "name": "Compare",
+      "path": "/compare",
+      "description": "Deep Work Plan next to spec-driven tools, agent frameworks and vendor plan modes — each on its own terms, with sources and a review date."
+    },
+    {
+      "name": "FAQ",
+      "path": "/faq",
+      "description": "Answers to the questions people ask: what DWP does, how gates and resumption work, how it compares, how to adopt it."
+    },
+    {
+      "name": "Init / Adoption",
+      "path": "/init",
+      "description": "Canonical adoption endpoint — make any repository AI-first."
+    },
+    {
+      "name": "Developers",
+      "path": "/developers",
+      "description": "Agent & developer surface: API, MCP server, OpenAPI spec, zero-auth access."
+    },
+    {
+      "name": "Trust",
+      "path": "/trust",
+      "description": "Trust & provenance: checksums, licensing, verification."
+    },
+    {
+      "name": "About",
+      "path": "/about",
+      "description": "What DWP is and who maintains it (Dailybot)."
+    },
+    {
+      "name": "Contact",
+      "path": "/contact",
+      "description": "How to engage with the project on GitHub."
+    },
+    {
+      "name": "Privacy",
+      "path": "/privacy",
+      "description": "Privacy policy for deepworkplan.com."
+    }
+  ]
+}

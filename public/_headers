@@ -32,11 +32,22 @@
   Cache-Control: public, max-age=300, must-revalidate
 
 # Static health marker for the agent API (the MCP endpoint sets its own headers
-# as a Cloudflare Pages Function — _headers does not apply there)
+# as a Cloudflare Pages Function — _headers does not apply there).
+# Unversioned canonical paths belong to the v1 contract (see /api/v1/).
 /api/health.json
   Content-Type: application/json
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=300, must-revalidate
+  X-API-Version: v1
+
+# Versioned (v1) agent API family — URL-path versioning; breaking changes ship
+# only in /v{N+1}/; deprecated endpoints answer Deprecation + Sunset >= 180
+# days before removal (policy: /developers).
+/api/v1/*
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300, must-revalidate
+  X-API-Version: v1
 
 /.well-known/oauth-authorization-server
   Content-Type: application/json
