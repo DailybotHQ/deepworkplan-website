@@ -135,6 +135,174 @@ describe('public/openapi.json — operations', () => {
   });
 });
 
+describe('public/openapi.json — v1 family, typed schemas, header contracts', () => {
+  const HTTP_METHODS = [
+    'get',
+    'post',
+    'put',
+    'delete',
+    'patch',
+    'head',
+    'options',
+  ];
+
+  function operationOf(path: string, method: string) {
+    return spec.paths[path]?.[method] as
+      | {
+          operationId?: string;
+          responses?: Record<
+            string,
+            {
+              headers?: Record<string, unknown>;
+              content?: Record<string, { schema?: Record<string, unknown> }>;
+            }
+          >;
+        }
+      | undefined;
+  }
+
+  /** JSON media types whose schemas must be inline-typed objects. */
+  const JSON_MEDIA = ['application/json', 'application/linkset+json'];
+
+  it('registers the four /api/v1/ GET operations with unique ids', () => {
+    const expected: Record<string, string> = {
+      '/api/v1/index.json': 'getApiV1Index',
+      '/api/v1/sections.json': 'getApiV1Sections',
+      '/api/v1/pages.json': 'getApiV1Pages',
+      '/api/v1/health.json': 'getApiV1Health',
+    };
+    for (const [path, id] of Object.entries(expected)) {
+      const op = operationOf(path, 'get');
+      expect(op, path).toBeDefined();
+      expect(op.operationId).toBe(id);
+    }
+  });
+
+  it('gives every JSON-serving operation an inline typed object schema (no bare $ref)', () => {
+    for (const [path, item] of Object.entries(spec.paths)) {
+      for (const method of HTTP_METHODS) {
+        const op = item[method] as
+          | {
+              responses?: Record<
+                string,
+                {
+                  content?: Record<
+                    string,
+                    { schema?: Record<string, unknown> }
+                  >;
+                }
+              >;
+            }
+          | undefined;
+        if (!op?.responses) continue;
+        for (const [code, resp] of Object.entries(op.responses)) {
+          if (!code.startsWith('2')) continue;
+          for (const [media, ct] of Object.entries(resp.content ?? {})) {
+            if (!JSON_MEDIA.includes(media)) continue;
+            const schema = ct.schema ?? {};
+            const isTypedObject =
+              schema.type === 'object' &&
+              Object.keys((schema.properties as object) ?? {}).length > 0;
+            const isTypedArray =
+              schema.type === 'array' &&
+              Object.keys(
+                ((schema.items as Record<string, unknown>)
+                  ?.properties as object) ?? {}
+              ).length > 0;
+            expect(
+              { path, method, media, isTypedObject, isTypedArray },
+              `${method} ${path} ${code} ${media}`
+            ).toMatchObject({ isTypedObject: true, isTypedArray: false });
+            expect(
+              schema.$ref,
+              `${method} ${path} ${media} must not be $ref-only`
+            ).toBeUndefined();
+          }
+        }
+      }
+    }
+  });
+
+  it('declares the rate-limit and version headers on the six API operations', () => {
+    const sixOps: [string, string][] = [
+      ['/api/v1/index.json', 'get'],
+      ['/api/v1/sections.json', 'get'],
+      ['/api/v1/pages.json', 'get'],
+      ['/api/v1/health.json', 'get'],
+      ['/api/health.json', 'get'],
+      ['/api/mcp', 'post'],
+    ];
+    const requiredHeaders = [
+      'RateLimit-Limit',
+      'RateLimit-Remaining',
+      'RateLimit-Reset',
+      'RateLimit-Policy',
+      'X-API-Version',
+    ];
+    for (const [path, method] of sixOps) {
+      const op = operationOf(path, method);
+      expect(op, path).toBeDefined();
+      const ok = Object.entries(op.responses ?? {}).find(
+        ([code]) => code.startsWith('2') && code !== '204'
+      );
+      expect(ok, `${method} ${path} has a 2xx response`).toBeDefined();
+      const headers = Object.keys(ok![1].headers ?? {});
+      for (const header of requiredHeaders) {
+        expect(headers, `${method} ${path} declares ${header}`).toContain(
+          header
+        );
+      }
+    }
+  });
+
+  it('declares 429 with Retry-After on the six API operations', () => {
+    const sixOps: [string, string][] = [
+      ['/api/v1/index.json', 'get'],
+      ['/api/v1/sections.json', 'get'],
+      ['/api/v1/pages.json', 'get'],
+      ['/api/v1/health.json', 'get'],
+      ['/api/health.json', 'get'],
+      ['/api/mcp', 'post'],
+    ];
+    for (const [path, method] of sixOps) {
+      const resp = operationOf(path, method)?.responses?.['429'];
+      expect(resp, `${method} ${path} 429`).toBeDefined();
+      expect(
+        Object.keys(resp?.headers ?? {}),
+        `${method} ${path} 429 Retry-After`
+      ).toContain('Retry-After');
+    }
+  });
+
+  it('documents the versioning/deprecation policy in info.description', () => {
+    expect(spec.info.description).toContain('/api/v1/');
+    expect(spec.info.description).toContain('Sunset');
+    expect(spec.info.description).toContain('RateLimit');
+  });
+
+  it('honesty guard: application/json only on API-family endpoints', () => {
+    for (const [path, item] of Object.entries(spec.paths)) {
+      for (const method of HTTP_METHODS) {
+        const op = item[method] as {
+          responses?: Record<string, { content?: Record<string, unknown> }>;
+        };
+        if (!op?.responses) continue;
+        for (const resp of Object.values(op.responses)) {
+          for (const media of Object.keys(resp.content ?? {})) {
+            if (media !== 'application/json') continue;
+            expect(
+              path.startsWith('/api/') ||
+                path.startsWith('/.well-known/') ||
+                path.startsWith('/openapi'),
+              `${method} ${path} declares application/json outside the API family`
+            ).toBe(true);
+          }
+        }
+      }
+    }
+  });
+});
+
 describe('agent artifacts stay version-stamped', () => {
   it('health.json, mcp.json, and the server card match package.json', () => {
     const readJson = (rel: string) =>
