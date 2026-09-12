@@ -39,6 +39,7 @@
     "seo:audit": "node scripts/audit-seo.mjs",
     "aeo:audit": "node scripts/audit-aeo.mjs",
     "agents:reachability": "bash scripts/check-agent-reachability.sh",
+    "agents:verify": "bash scripts/verify-agent-surface.sh",
     "i18n:check": "node scripts/i18n/check.mjs",
     "i18n:scaffold": "node scripts/i18n/scaffold-language.mjs",
     "lighthouse": "mkdir -p .lighthouseci && lhci autorun",
