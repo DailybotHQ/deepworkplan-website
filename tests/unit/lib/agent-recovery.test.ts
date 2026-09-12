@@ -4,6 +4,7 @@ import {
   buildAgentRecoveryMarkdown,
   buildApiError,
   isApiPath,
+  prefersMarkdownOverHtml,
   RECOVERY_LINKS,
 } from '@/lib/agent-recovery';
 
@@ -48,6 +49,44 @@ describe('isApiPath', () => {
     expect(isApiPath('/apiary')).toBe(false);
     expect(isApiPath('/')).toBe(false);
     expect(isApiPath('/developers')).toBe(false);
+  });
+});
+
+// ─── prefersMarkdownOverHtml ────────────────────────────
+
+describe('prefersMarkdownOverHtml', () => {
+  it('treats a wildcard Accept (curl, scanners, AI agents) as non-HTML', () => {
+    expect(prefersMarkdownOverHtml('*/*')).toBe(true);
+  });
+
+  it('treats an empty Accept header as non-HTML', () => {
+    expect(prefersMarkdownOverHtml('')).toBe(true);
+  });
+
+  it('treats an explicit HTML Accept as HTML (browser keeps the HTML 404)', () => {
+    expect(prefersMarkdownOverHtml('text/html')).toBe(false);
+  });
+
+  it('treats a real browser Accept header as HTML', () => {
+    expect(
+      prefersMarkdownOverHtml(
+        'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+      )
+    ).toBe(false);
+  });
+
+  it('treats a JSON-only Accept as non-HTML', () => {
+    expect(prefersMarkdownOverHtml('application/json')).toBe(true);
+  });
+
+  it('treats an explicit Markdown Accept as non-HTML', () => {
+    expect(prefersMarkdownOverHtml('text/markdown')).toBe(true);
+  });
+
+  it('is case-insensitive on the HTML token', () => {
+    expect(prefersMarkdownOverHtml('TEXT/HTML')).toBe(false);
+    expect(prefersMarkdownOverHtml('Text/Html,Q=1.0')).toBe(false);
+    expect(prefersMarkdownOverHtml('TEXT/MARKDOWN')).toBe(true);
   });
 });
 

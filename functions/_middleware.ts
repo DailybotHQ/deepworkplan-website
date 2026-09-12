@@ -13,9 +13,11 @@
  *    so client-side analytics are invisible to them).
  *
  * 3. **Agent-friendly errors** (post-processing): API paths never serve HTML
- *    errors — unknown /api/* paths get a structured JSON error body — and
- *    Markdown-negotiating clients that hit a 404 receive a short Markdown
- *    recovery body pointing at the sitemap, llms.txt, and /developers.
+ *    errors — unknown /api/* paths get a structured JSON error body — and any
+ *    client that does not explicitly prefer HTML (Markdown-negotiating
+ *    clients, curl, AI agents sending a wildcard Accept) receives a short
+ *    Markdown 404 recovery body pointing at the sitemap, llms.txt, and
+ *    /developers.
  *
  * Non-bot, non-markdown requests pass through with zero overhead.
  */
@@ -23,6 +25,7 @@ import {
   buildAgentRecoveryMarkdown,
   buildApiError,
   isApiPath,
+  prefersMarkdownOverHtml,
 } from '../src/lib/agent-recovery';
 import { stripNonStandardRobotsDirectives } from '../src/lib/robots-directives';
 
@@ -368,9 +371,12 @@ function isDirectMarkdownUrl(pathname: string): boolean {
  *
  * 1. **JSON errors for API paths** — an unknown /api/* path must never serve
  *    the HTML 404 page; agents get a structured JSON error they can parse.
- * 2. **Markdown 404s** — a client negotiating Markdown (Accept: text/markdown)
- *    that hits a 404 receives a short Markdown recovery body with the sitemap,
- *    llms.txt, and developer links, instead of unparsable HTML.
+ * 2. **Markdown 404s** — a client that negotiates Markdown
+ *    (Accept: text/markdown) or does not prefer HTML (curl and AI agents
+ *    send a wildcard Accept) receives a short Markdown recovery body with
+ *    the sitemap, llms.txt, and developer links when it hits a 404, instead
+ *    of unparsable HTML. Browsers (Accept: text/html) keep the designed
+ *    HTML 404 page.
  *
  * Everything else (including the HTML 404 page for regular browsers) passes
  * through untouched.
@@ -401,12 +407,14 @@ function finalizeResponse(context: EventContext, response: Response): Response {
     });
   }
 
-  // 2. Markdown-negotiating clients → Markdown recovery body.
-  //    Same eligibility rules as tryServeMarkdown: no /api/, /internal/, /_
+  // 2. Non-HTML-preferring clients → Markdown recovery body.
+  //    Eligible when the client asks for Markdown or simply does not prefer
+  //    HTML (curl/AI agents send Accept: */*); browsers keep the HTML 404
+  //    page. Same path guards as tryServeMarkdown: no /api/, /internal/, /_
   //    prefixes and no static-asset extensions.
   const accept = context.request.headers.get('accept') || '';
   const eligible =
-    accept.includes('text/markdown') &&
+    (accept.includes('text/markdown') || prefersMarkdownOverHtml(accept)) &&
     !MARKDOWN_EXCLUDED_PREFIXES.some((prefix) => url.pathname.startsWith(prefix)) &&
     !MARKDOWN_EXCLUDED_EXTENSIONS.test(url.pathname);
   if (eligible) {
