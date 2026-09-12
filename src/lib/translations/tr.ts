@@ -208,7 +208,7 @@ export const tr: SiteTranslations = {
         {
           title: 'Deep Work Plan skill’ini kurar',
           description:
-            'Skill, motordur — her depoda aynıdır. Tek bir komut, yönlendiriciyi ve alt skill’lerini (create, execute, refine, resume, status, verify, onboard, author) Claude Code, Cursor, Codex, Gemini ve Copilot için getirir.',
+            'Skill, motordur — her depoda aynıdır. Tek bir komut, yönlendiriciyi ve alt skill’lerini (create, execute, refine, resume, status, verify, onboard, author, upgrade) Claude Code, Cursor, Codex, Gemini ve Copilot için getirir.',
         },
         {
           title: 'Deponuzu uyarlar',
@@ -247,7 +247,7 @@ export const tr: SiteTranslations = {
         {
           label: 'Kurulu Deep Work Plan skill’i',
           detail:
-            'create, execute, refine, resume, status, verify, onboard ve author — ajanınıza tek bir skill paketi olarak, depo başına kopya olmadan sunulur.',
+            'create, execute, refine, resume, status, verify, onboard, author ve upgrade — ajanınıza tek bir skill paketi olarak, depo başına kopya olmadan sunulur.',
         },
         {
           label: 'Doğrulayabileceğiniz uyumluluk',
@@ -614,7 +614,7 @@ export const tr: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan Kiti',
       description:
-        'Deep Work Plan’i ajanlar ve yığınlar arasında çalıştırılabilir kılan skill ve sekiz alt skill’i, komutlar, adaptörler, hazır ayarlar, tercihe dayalı eklentiler ve örnekler.',
+        'Deep Work Plan’i ajanlar ve yığınlar arasında çalıştırılabilir kılan skill ve dokuz alt skill’i, komutlar, adaptörler, hazır ayarlar, tercihe dayalı eklentiler ve örnekler.',
     },
     eyebrow: 'Kit',
     title: 'Kit',
@@ -624,7 +624,7 @@ export const tr: SiteTranslations = {
       command: {
         title: 'Alt skill’ler ve komutlar',
         description:
-          'Skill yönlendiricisi ve alt skill’leri (create, execute, refine, resume, status, verify, onboard, author), ayrıca bunlara devreden ince eğik çizgi komutları.',
+          'Skill yönlendiricisi ve alt skill’leri (create, execute, refine, resume, status, verify, onboard, author, upgrade), ayrıca bunlara devreden ince eğik çizgi komutları.',
       },
       adapter: {
         title: 'Adaptörler',
@@ -687,7 +687,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Deep Work Plan skill’ini kurun',
         description:
-          'Skill’i deponuza ekleyin — bir yönlendirici ve sekiz alt skill (create, execute, refine, resume, status, verify, onboard, author). En hızlı yol için Skills CLI’yı kullanın ya da git ile bir kabuk mevcut olan yerde depoyu klonlayıp kurulumu çalıştırın.',
+          'Skill’i deponuza ekleyin — bir yönlendirici ve dokuz alt skill (create, execute, refine, resume, status, verify, onboard, author, upgrade). En hızlı yol için Skills CLI’yı kullanın ya da git ile bir kabuk mevcut olan yerde depoyu klonlayıp kurulumu çalıştırın.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -759,7 +759,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Skill’i kurun',
         description:
-          'Herhangi bir ajanın yapılandırılmış işi planlayıp yürütebilmesi için Deep Work Plan skill’ini ekleyin. Skill, bir yönlendirici ve sekiz alt skill ile gelir — create, execute, refine, resume, status, verify, onboard ve author.',
+          'Herhangi bir ajanın yapılandırılmış işi planlayıp yürütebilmesi için Deep Work Plan skill’ini ekleyin. Skill, bir yönlendirici ve dokuz alt skill ile gelir — create, execute, refine, resume, status, verify, onboard, author ve upgrade.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',

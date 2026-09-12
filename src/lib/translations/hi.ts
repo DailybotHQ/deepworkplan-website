@@ -206,7 +206,7 @@ export const hi: SiteTranslations = {
         {
           title: 'यह Deep Work Plan स्किल स्थापित करता है',
           description:
-            'स्किल वह इंजन है — हर रिपॉज़िटरी में एक समान। एक कमांड Claude Code, Cursor, Codex, Gemini और Copilot के लिए राउटर तथा उसके सब-स्किल्स (create, execute, refine, resume, status, verify, onboard, author) को ले आती है।',
+            'स्किल वह इंजन है — हर रिपॉज़िटरी में एक समान। एक कमांड Claude Code, Cursor, Codex, Gemini और Copilot के लिए राउटर तथा उसके सब-स्किल्स (create, execute, refine, resume, status, verify, onboard, author, upgrade) को ले आती है।',
         },
         {
           title: 'यह आपकी रिपॉज़िटरी को ढालता है',
@@ -245,7 +245,7 @@ export const hi: SiteTranslations = {
         {
           label: 'Deep Work Plan स्किल, स्थापित',
           detail:
-            'create, execute, refine, resume, status, verify, onboard और author — आपके एजेंट को एक ही स्किल पैक के रूप में उपलब्ध, बिना किसी प्रति-रिपॉज़िटरी कॉपी के।',
+            'create, execute, refine, resume, status, verify, onboard, author और upgrade — आपके एजेंट को एक ही स्किल पैक के रूप में उपलब्ध, बिना किसी प्रति-रिपॉज़िटरी कॉपी के।',
         },
         {
           label: 'अनुरूपता जिसे आप जाँच सकते हैं',
@@ -610,7 +610,7 @@ export const hi: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan किट',
       description:
-        'स्किल और उसके आठ सब-स्किल्स, कमांड्स, अडैप्टर, प्रीसेट, ऑप्ट-इन ऐडऑन और उदाहरण जो Deep Work Plan को एजेंट्स तथा स्टैक्स के पार चलाने योग्य बनाते हैं।',
+        'स्किल और उसके नौ सब-स्किल्स, कमांड्स, अडैप्टर, प्रीसेट, ऑप्ट-इन ऐडऑन और उदाहरण जो Deep Work Plan को एजेंट्स तथा स्टैक्स के पार चलाने योग्य बनाते हैं।',
     },
     eyebrow: 'किट',
     title: 'किट',
@@ -620,7 +620,7 @@ export const hi: SiteTranslations = {
       command: {
         title: 'सब-स्किल्स और कमांड्स',
         description:
-          'स्किल राउटर और उसके सब-स्किल्स (create, execute, refine, resume, status, verify, onboard, author), साथ ही वे पतले स्लैश कमांड्स जो उन्हें सौंपते हैं।',
+          'स्किल राउटर और उसके सब-स्किल्स (create, execute, refine, resume, status, verify, onboard, author, upgrade), साथ ही वे पतले स्लैश कमांड्स जो उन्हें सौंपते हैं।',
       },
       adapter: {
         title: 'अडैप्टर',
@@ -682,7 +682,7 @@ export const hi: SiteTranslations = {
       {
         title: 'Deep Work Plan स्किल स्थापित करें',
         description:
-          'अपनी रिपॉज़िटरी में स्किल जोड़ें — एक राउटर और आठ सब-स्किल्स (create, execute, refine, resume, status, verify, onboard, author)। सबसे तेज़ रास्ते के लिए Skills CLI का उपयोग करें, या रिपॉज़िटरी क्लोन करें और जहाँ git तथा शेल उपलब्ध हों वहाँ सेटअप चलाएँ।',
+          'अपनी रिपॉज़िटरी में स्किल जोड़ें — एक राउटर और नौ सब-स्किल्स (create, execute, refine, resume, status, verify, onboard, author, upgrade)। सबसे तेज़ रास्ते के लिए Skills CLI का उपयोग करें, या रिपॉज़िटरी क्लोन करें और जहाँ git तथा शेल उपलब्ध हों वहाँ सेटअप चलाएँ।',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -1287,7 +1287,7 @@ export const hi: SiteTranslations = {
       {
         title: 'स्किल स्थापित करें',
         description:
-          'Deep Work Plan स्किल जोड़ें ताकि कोई भी एजेंट संरचित काम की योजना बना सके और उसे निष्पादित कर सके। स्किल एक राउटर और आठ सब-स्किल्स के साथ आती है — create, execute, refine, resume, status, verify, onboard और author।',
+          'Deep Work Plan स्किल जोड़ें ताकि कोई भी एजेंट संरचित काम की योजना बना सके और उसे निष्पादित कर सके। स्किल एक राउटर और नौ सब-स्किल्स के साथ आती है — create, execute, refine, resume, status, verify, onboard, author और upgrade।',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',

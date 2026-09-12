@@ -8,7 +8,7 @@ section: Workflow
 
 # Planes Lite
 
-**Versión 2.4.0. Estado: estable.** Este documento especifica la representación de plan Lite introducida junto con la [Especificación de DWP](/spec/dwp-specification): un formato de plan para trabajo acotado de tamaño pequeño a mediano que se materializa directamente, sin una etapa de borrador no ejecutable. Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
+**Versión 4.0.0. Estado: estable.** Este documento especifica la representación de plan Lite introducida junto con la [Especificación de DWP](/spec/dwp-specification): un formato de plan para trabajo acotado de tamaño pequeño a mediano que se materializa directamente, sin una etapa de borrador no ejecutable. Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
 
 ## Representación y ciclo de vida
 

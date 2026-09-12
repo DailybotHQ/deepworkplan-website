@@ -91,7 +91,7 @@ description: "AI 에이전트를 위한 실행 가능한 온보딩 프롬프트:
 > **지름길.** 이 skill은 자체 온보딩을 포함하고 있으므로 설치만으로 충분합니다. 설치한 뒤 `/deepworkplan-onboard`를 실행하면 3–7절이 설명하는 모든 것을 수행합니다. 정찰, `AGENTS.md`, `docs/`, 모듈별 문서, `.agents/`, 필수 로컬 리뷰, 선택 애드온, 그리고 최종 자체 점검입니다. 해당 서브 스킬이 무엇을 하는지, 그리고 에이전트가 skill을 로드할 수 없을 때의 대체 경로는 아래에서 확인하세요.
 
 이 리포지토리의 에이전트가 구조화된 작업을 계획하고 실행할 수 있도록 스킬을 설치하세요. 라우터와
-여덟 개의 하위 스킬 — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` — 을 제공합니다.
+아홉 개의 하위 스킬 — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author`, `upgrade` — 을 제공합니다.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -182,11 +182,11 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 ## 7. 검증하세요
 
 객관적 합격/불합격 적합성 보고서를 위해 `/dwp-verify`를 실행하세요(또는 `0`/`1`로 종료하는
-CI 호환 기계적 계층인 `bash {skill_dir}/verify/conformance.sh`).
+CI 호환 기계적 계층인 `bash {skill_dir}/verify/conformance.sh`; 이 계층은 검사를 실행할 수 없을 때 명시적인 `UNVERIFIED` 판정과 함께 `2`로 종료하며, 검증하지 않은 합격을 결코 보고하지 않습니다).
 [스펙의 적합성 문서](https://deepworkplan.com/spec)의 기준을 확인합니다.
 그런 다음 확인하세요.
 
-- [ ] 스킬이 설치되어 해석 가능하며, 여덟 개의 하위 스킬이 모두 사용 가능하다.
+- [ ] 스킬이 설치되어 해석 가능하며, 아홉 개의 하위 스킬이 모두 사용 가능하다.
 - [ ] 실제 Quick Commands 블록을 갖춘 `AGENTS.md`가 루트에 존재하고, `CLAUDE.md`가 그것으로 해석된다.
 - [ ] `docs/`가 실제 리포지토리별 내용으로 표준 범주를 담고 있으며, `docs/TESTING_GUIDE.md`는
       실제 test/lint 설정을 기술하고(비어 있거나 스텁이 아님), 주요 모듈에 `README.md`가 있다.

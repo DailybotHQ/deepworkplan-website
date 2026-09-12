@@ -206,7 +206,7 @@ export const vi: SiteTranslations = {
         {
           title: 'Nó cài skill Deep Work Plan',
           description:
-            'Skill là bộ máy — giống hệt nhau trong mọi repository. Một lệnh kéo về bộ định tuyến cùng các sub-skill (create, execute, refine, resume, status, verify, onboard, author) cho Claude Code, Cursor, Codex, Gemini và Copilot.',
+            'Skill là bộ máy — giống hệt nhau trong mọi repository. Một lệnh kéo về bộ định tuyến cùng các sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade) cho Claude Code, Cursor, Codex, Gemini và Copilot.',
         },
         {
           title: 'Nó thích ứng repository của bạn',
@@ -245,7 +245,7 @@ export const vi: SiteTranslations = {
         {
           label: 'Skill Deep Work Plan, đã cài',
           detail:
-            'create, execute, refine, resume, status, verify, onboard và author — sẵn có cho agent của bạn dưới dạng một gói skill duy nhất, không cần bản sao cho từng repository.',
+            'create, execute, refine, resume, status, verify, onboard, author và upgrade — sẵn có cho agent của bạn dưới dạng một gói skill duy nhất, không cần bản sao cho từng repository.',
         },
         {
           label: 'Mức tuân thủ bạn có thể kiểm tra',
@@ -610,7 +610,7 @@ export const vi: SiteTranslations = {
     meta: {
       title: 'Bộ kit Deep Work Plan',
       description:
-        'Skill cùng tám sub-skill, các command, bộ chuyển đổi, preset, addon tự nguyện và ví dụ giúp Deep Work Plan chạy được xuyên các agent và stack.',
+        'Skill cùng chín sub-skill, các command, bộ chuyển đổi, preset, addon tự nguyện và ví dụ giúp Deep Work Plan chạy được xuyên các agent và stack.',
     },
     eyebrow: 'Kit',
     title: 'Bộ kit',
@@ -620,7 +620,7 @@ export const vi: SiteTranslations = {
       command: {
         title: 'Sub-skill & command',
         description:
-          'Bộ định tuyến skill cùng các sub-skill (create, execute, refine, resume, status, verify, onboard, author), cộng với các slash command mỏng ủy thác cho chúng.',
+          'Bộ định tuyến skill cùng các sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade), cộng với các slash command mỏng ủy thác cho chúng.',
       },
       adapter: {
         title: 'Bộ chuyển đổi',
@@ -683,7 +683,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Cài skill Deep Work Plan',
         description:
-          'Thêm skill vào repository của bạn — một bộ định tuyến cùng tám sub-skill (create, execute, refine, resume, status, verify, onboard, author). Dùng Skills CLI cho con đường nhanh nhất, hoặc clone repo và chạy setup nơi có git và một shell.',
+          'Thêm skill vào repository của bạn — một bộ định tuyến cùng chín sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade). Dùng Skills CLI cho con đường nhanh nhất, hoặc clone repo và chạy setup nơi có git và một shell.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -755,7 +755,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Cài skill',
         description:
-          'Thêm skill Deep Work Plan để mọi agent đều có thể lập kế hoạch và thực thi công việc có cấu trúc. Skill đi kèm một bộ định tuyến cùng tám sub-skill — create, execute, refine, resume, status, verify, onboard và author.',
+          'Thêm skill Deep Work Plan để mọi agent đều có thể lập kế hoạch và thực thi công việc có cấu trúc. Skill đi kèm một bộ định tuyến cùng chín sub-skill — create, execute, refine, resume, status, verify, onboard, author và upgrade.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',

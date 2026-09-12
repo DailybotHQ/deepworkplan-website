@@ -206,7 +206,7 @@ export const it: SiteTranslations = {
         {
           title: 'Installa la skill Deep Work Plan',
           description:
-            'La skill è il motore — lo stesso in ogni repository. Un solo comando importa il router e le sue sub-skill (create, execute, refine, resume, status, verify, onboard, author) per Claude Code, Cursor, Codex, Gemini e Copilot.',
+            'La skill è il motore — lo stesso in ogni repository. Un solo comando importa il router e le sue sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade) per Claude Code, Cursor, Codex, Gemini e Copilot.',
         },
         {
           title: 'Adatta il Suo repository',
@@ -245,7 +245,7 @@ export const it: SiteTranslations = {
         {
           label: 'La skill Deep Work Plan, installata',
           detail:
-            'create, execute, refine, resume, status, verify, onboard e author — a disposizione del Suo agente come un unico pacchetto di skill, senza copie per repository.',
+            'create, execute, refine, resume, status, verify, onboard, author e upgrade — a disposizione del Suo agente come un unico pacchetto di skill, senza copie per repository.',
         },
         {
           label: 'Una conformità verificabile',
@@ -613,7 +613,7 @@ export const it: SiteTranslations = {
     meta: {
       title: 'Il kit Deep Work Plan',
       description:
-        'La skill e le sue otto sub-skill, i comandi, gli adapter, i preset, gli addon opt-in e gli esempi che rendono Deep Work Plan eseguibile su agenti e stack diversi.',
+        'La skill e le sue nove sub-skill, i comandi, gli adapter, i preset, gli addon opt-in e gli esempi che rendono Deep Work Plan eseguibile su agenti e stack diversi.',
     },
     eyebrow: 'Kit',
     title: 'Il kit',
@@ -623,7 +623,7 @@ export const it: SiteTranslations = {
       command: {
         title: 'Sub-skill e comandi',
         description:
-          'Il router della skill e le sue sub-skill (create, execute, refine, resume, status, verify, onboard, author), più i sottili slash command che vi delegano.',
+          'Il router della skill e le sue sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade), più i sottili slash command che vi delegano.',
       },
       adapter: {
         title: 'Adapter',
@@ -686,7 +686,7 @@ export const it: SiteTranslations = {
       {
         title: 'Installi la skill Deep Work Plan',
         description:
-          'Aggiunga la skill al Suo repository — un router più otto sub-skill (create, execute, refine, resume, status, verify, onboard, author). Usi la Skills CLI per la via più rapida, oppure cloni il repo ed esegua il setup dove sono disponibili git e una shell.',
+          'Aggiunga la skill al Suo repository — un router più nove sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade). Usi la Skills CLI per la via più rapida, oppure cloni il repo ed esegua il setup dove sono disponibili git e una shell.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -758,7 +758,7 @@ export const it: SiteTranslations = {
       {
         title: 'Installi la skill',
         description:
-          'Aggiunga la skill Deep Work Plan così che qualsiasi agente possa pianificare ed eseguire lavoro strutturato. La skill include un router più otto sub-skill — create, execute, refine, resume, status, verify, onboard e author.',
+          'Aggiunga la skill Deep Work Plan così che qualsiasi agente possa pianificare ed eseguire lavoro strutturato. La skill include un router più nove sub-skill — create, execute, refine, resume, status, verify, onboard, author e upgrade.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',

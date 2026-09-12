@@ -206,7 +206,7 @@ export const id: SiteTranslations = {
         {
           title: 'Ia memasang skill Deep Work Plan',
           description:
-            'Skill adalah mesinnya — sama di setiap repositori. Satu perintah menarik router dan sub-skill-nya (create, execute, refine, resume, status, verify, onboard, author) untuk Claude Code, Cursor, Codex, Gemini, dan Copilot.',
+            'Skill adalah mesinnya — sama di setiap repositori. Satu perintah menarik router dan sub-skill-nya (create, execute, refine, resume, status, verify, onboard, author, upgrade) untuk Claude Code, Cursor, Codex, Gemini, dan Copilot.',
         },
         {
           title: 'Ia menyesuaikan repositori Anda',
@@ -245,7 +245,7 @@ export const id: SiteTranslations = {
         {
           label: 'Skill Deep Work Plan, terpasang',
           detail:
-            'create, execute, refine, resume, status, verify, onboard, dan author — tersedia untuk agent Anda sebagai satu paket skill, tanpa salinan per repositori.',
+            'create, execute, refine, resume, status, verify, onboard, author, dan upgrade — tersedia untuk agent Anda sebagai satu paket skill, tanpa salinan per repositori.',
         },
         {
           label: 'Konformansi yang dapat Anda periksa',
@@ -613,7 +613,7 @@ export const id: SiteTranslations = {
     meta: {
       title: 'Kit Deep Work Plan',
       description:
-        'Skill dan delapan sub-skill-nya, command, adapter, preset, addon opt-in, dan contoh yang membuat Deep Work Plan dapat dijalankan lintas agent dan stack.',
+        'Skill dan sembilan sub-skill-nya, command, adapter, preset, addon opt-in, dan contoh yang membuat Deep Work Plan dapat dijalankan lintas agent dan stack.',
     },
     eyebrow: 'Kit',
     title: 'Kit',
@@ -623,7 +623,7 @@ export const id: SiteTranslations = {
       command: {
         title: 'Sub-skill & command',
         description:
-          'Router skill dan sub-skill-nya (create, execute, refine, resume, status, verify, onboard, author), ditambah slash command tipis yang mendelegasikannya.',
+          'Router skill dan sub-skill-nya (create, execute, refine, resume, status, verify, onboard, author, upgrade), ditambah slash command tipis yang mendelegasikannya.',
       },
       adapter: {
         title: 'Adapter',
@@ -686,7 +686,7 @@ export const id: SiteTranslations = {
       {
         title: 'Pasang skill Deep Work Plan',
         description:
-          'Tambahkan skill ke repositori Anda — sebuah router ditambah delapan sub-skill (create, execute, refine, resume, status, verify, onboard, author). Gunakan Skills CLI untuk jalur tercepat, atau klona repo dan jalankan setup di tempat git dan shell tersedia.',
+          'Tambahkan skill ke repositori Anda — sebuah router ditambah sembilan sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade). Gunakan Skills CLI untuk jalur tercepat, atau klona repo dan jalankan setup di tempat git dan shell tersedia.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -758,7 +758,7 @@ export const id: SiteTranslations = {
       {
         title: 'Pasang skill',
         description:
-          'Tambahkan skill Deep Work Plan agar agent mana pun dapat merencanakan dan mengeksekusi pekerjaan terstruktur. Skill ini membawa sebuah router ditambah delapan sub-skill — create, execute, refine, resume, status, verify, onboard, dan author.',
+          'Tambahkan skill Deep Work Plan agar agent mana pun dapat merencanakan dan mengeksekusi pekerjaan terstruktur. Skill ini membawa sebuah router ditambah sembilan sub-skill — create, execute, refine, resume, status, verify, onboard, author, dan upgrade.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',

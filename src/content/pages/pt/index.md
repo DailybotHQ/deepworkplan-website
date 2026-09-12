@@ -93,7 +93,7 @@ Contexto, ferramentas, salvaguardas e estado vivem no seu repositório como arqu
 ## O que acontece quando você o executa
 
 1. **Seu agente abre o [/init.md](/init.md)** — ele lê o prompt de onboarding e a metodologia, a especificação e o kit aos quais ele se vincula.
-2. **Ele instala a skill Deep Work Plan** — o motor, idêntico em todos os repositórios: o roteador mais suas sub-skills (create, execute, refine, resume, status, verify, onboard, author), para Claude Code, Cursor, Codex, Gemini e Copilot.
+2. **Ele instala a skill Deep Work Plan** — o motor, idêntico em todos os repositórios: o roteador mais suas sub-skills (create, execute, refine, resume, status, verify, onboard, author, upgrade), para Claude Code, Cursor, Codex, Gemini e Copilot.
 3. **Ele adapta seu repositório** — raciocinando sobre sua stack real (nunca copiando e colando), ele escreve AGENTS.md, `docs/`, READMEs por módulo, um kit `.agents/` fundamentado e um `.dwp/` ignorado pelo git. Seu repositório se torna o harness.
 4. **Você planeja e executa** — Deep Work Plans de longo prazo, executados passo a passo contra critérios de aceitação e validation gates explícitos, de forma autônoma por horas.
 

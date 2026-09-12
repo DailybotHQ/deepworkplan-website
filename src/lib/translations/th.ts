@@ -204,7 +204,7 @@ export const th: SiteTranslations = {
         {
           title: 'มันติดตั้งสกิล Deep Work Plan',
           description:
-            'สกิลคือกลไก เหมือนกันในทุก repository คำสั่งเดียวจะดึงเราเตอร์และสกิลย่อย (create, execute, refine, resume, status, verify, onboard, author) เข้ามาสำหรับ Claude Code, Cursor, Codex, Gemini และ Copilot',
+            'สกิลคือกลไก เหมือนกันในทุก repository คำสั่งเดียวจะดึงเราเตอร์และสกิลย่อย (create, execute, refine, resume, status, verify, onboard, author, upgrade) เข้ามาสำหรับ Claude Code, Cursor, Codex, Gemini และ Copilot',
         },
         {
           title: 'มันปรับ repository ของคุณ',
@@ -243,7 +243,7 @@ export const th: SiteTranslations = {
         {
           label: 'สกิล Deep Work Plan ที่ติดตั้งแล้ว',
           detail:
-            'create, execute, refine, resume, status, verify, onboard และ author มอบให้ agent ของคุณในรูปแบบชุดสกิลเดียว โดยไม่ต้องคัดลอกแยกตาม repository',
+            'create, execute, refine, resume, status, verify, onboard, author และ upgrade มอบให้ agent ของคุณในรูปแบบชุดสกิลเดียว โดยไม่ต้องคัดลอกแยกตาม repository',
         },
         {
           label: 'ความสอดคล้องที่คุณตรวจสอบได้',
@@ -606,7 +606,7 @@ export const th: SiteTranslations = {
     meta: {
       title: 'ชุดเครื่องมือ Deep Work Plan',
       description:
-        'สกิลและสกิลย่อยทั้งแปด คำสั่ง อะแดปเตอร์ พรีเซ็ต ส่วนเสริมแบบสมัครใจ และตัวอย่างที่ทำให้ Deep Work Plan รันได้ข้าม agent และสแตก',
+        'สกิลและสกิลย่อยทั้งเก้า คำสั่ง อะแดปเตอร์ พรีเซ็ต ส่วนเสริมแบบสมัครใจ และตัวอย่างที่ทำให้ Deep Work Plan รันได้ข้าม agent และสแตก',
     },
     eyebrow: 'ชุดเครื่องมือ',
     title: 'ชุดเครื่องมือ',
@@ -616,7 +616,7 @@ export const th: SiteTranslations = {
       command: {
         title: 'สกิลย่อยและคำสั่ง',
         description:
-          'เราเตอร์ของสกิลและสกิลย่อย (create, execute, refine, resume, status, verify, onboard, author) พร้อม slash command บาง ๆ ที่มอบหมายงานต่อให้พวกมัน',
+          'เราเตอร์ของสกิลและสกิลย่อย (create, execute, refine, resume, status, verify, onboard, author, upgrade) พร้อม slash command บาง ๆ ที่มอบหมายงานต่อให้พวกมัน',
       },
       adapter: {
         title: 'อะแดปเตอร์',
@@ -679,7 +679,7 @@ export const th: SiteTranslations = {
       {
         title: 'ติดตั้งสกิล Deep Work Plan',
         description:
-          'เพิ่มสกิลลงใน repository ของคุณ ทั้งเราเตอร์และสกิลย่อยแปดตัว (create, execute, refine, resume, status, verify, onboard, author) ใช้ Skills CLI เพื่อความรวดเร็วที่สุด หรือโคลน repo แล้วรันสคริปต์ติดตั้งในที่ที่มี git และเชลล์',
+          'เพิ่มสกิลลงใน repository ของคุณ ทั้งเราเตอร์และสกิลย่อยเก้าตัว (create, execute, refine, resume, status, verify, onboard, author, upgrade) ใช้ Skills CLI เพื่อความรวดเร็วที่สุด หรือโคลน repo แล้วรันสคริปต์ติดตั้งในที่ที่มี git และเชลล์',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -1277,7 +1277,7 @@ export const th: SiteTranslations = {
       {
         title: 'ติดตั้งสกิล',
         description:
-          'เพิ่มสกิล Deep Work Plan เพื่อให้ agent ใดก็ได้สามารถวางแผนและดำเนินงานที่มีโครงสร้าง สกิลประกอบด้วย router และสกิลย่อยแปดตัว ได้แก่ create, execute, refine, resume, status, verify, onboard และ author',
+          'เพิ่มสกิล Deep Work Plan เพื่อให้ agent ใดก็ได้สามารถวางแผนและดำเนินงานที่มีโครงสร้าง สกิลประกอบด้วย router และสกิลย่อยเก้าตัว ได้แก่ create, execute, refine, resume, status, verify, onboard, author และ upgrade',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',

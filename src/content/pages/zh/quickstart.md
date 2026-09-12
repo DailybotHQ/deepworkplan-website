@@ -13,8 +13,8 @@ lastUpdated: 2026-05-31
 
 ### 1. 安装 Deep Work Plan 技能
 
-把技能添加到你的代码仓库。它附带一个路由器外加八个子技能——create、execute、refine、
-resume、status、verify、onboard 与 author。使用 Skills CLI 是最快的方式：
+把技能添加到你的代码仓库。它附带一个路由器外加九个子技能——create、execute、refine、
+resume、status、verify、onboard、author 与 upgrade。使用 Skills CLI 是最快的方式：
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

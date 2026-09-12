@@ -208,7 +208,7 @@ export const uk: SiteTranslations = {
         {
           title: 'Він встановлює скіл Deep Work Plan',
           description:
-            'Скіл — це рушій, однаковий у кожному репозиторії. Одна команда підтягує маршрутизатор та його суб-скіли (create, execute, refine, resume, status, verify, onboard, author) для Claude Code, Cursor, Codex, Gemini та Copilot.',
+            'Скіл — це рушій, однаковий у кожному репозиторії. Одна команда підтягує маршрутизатор та його суб-скіли (create, execute, refine, resume, status, verify, onboard, author, upgrade) для Claude Code, Cursor, Codex, Gemini та Copilot.',
         },
         {
           title: 'Він пристосовує ваш репозиторій',
@@ -248,7 +248,7 @@ export const uk: SiteTranslations = {
         {
           label: 'Встановлений скіл Deep Work Plan',
           detail:
-            'create, execute, refine, resume, status, verify, onboard та author — доступні вашому агенту як єдиний пакет скілів, без копії для кожного репозиторію.',
+            'create, execute, refine, resume, status, verify, onboard, author та upgrade — доступні вашому агенту як єдиний пакет скілів, без копії для кожного репозиторію.',
         },
         {
           label: 'Відповідність, яку можна перевірити',
@@ -617,7 +617,7 @@ export const uk: SiteTranslations = {
     meta: {
       title: 'Набір Deep Work Plan',
       description:
-        'Скіл та його вісім суб-скілів, команди, адаптери, пресети, опціональні addon і приклади, що роблять Deep Work Plan придатним до запуску в різних агентах та стеках.',
+        'Скіл та його дев’ять суб-скілів, команди, адаптери, пресети, опціональні addon і приклади, що роблять Deep Work Plan придатним до запуску в різних агентах та стеках.',
     },
     eyebrow: 'Набір',
     title: 'Набір',
@@ -627,7 +627,7 @@ export const uk: SiteTranslations = {
       command: {
         title: 'Суб-скіли та команди',
         description:
-          'Маршрутизатор скілів та його суб-скіли (create, execute, refine, resume, status, verify, onboard, author), а також тонкі slash-команди, що делегують їм.',
+          'Маршрутизатор скілів та його суб-скіли (create, execute, refine, resume, status, verify, onboard, author, upgrade), а також тонкі slash-команди, що делегують їм.',
       },
       adapter: {
         title: 'Адаптери',
@@ -690,7 +690,7 @@ export const uk: SiteTranslations = {
       {
         title: 'Встановіть скіл Deep Work Plan',
         description:
-          'Додайте скіл до свого репозиторію — маршрутизатор плюс вісім суб-скілів (create, execute, refine, resume, status, verify, onboard, author). Скористайтеся Skills CLI для найшвидшого шляху або клонуйте репозиторій і запустіть налаштування там, де доступні git та оболонка.',
+          'Додайте скіл до свого репозиторію — маршрутизатор плюс дев’ять суб-скілів (create, execute, refine, resume, status, verify, onboard, author, upgrade). Скористайтеся Skills CLI для найшвидшого шляху або клонуйте репозиторій і запустіть налаштування там, де доступні git та оболонка.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -1298,7 +1298,7 @@ export const uk: SiteTranslations = {
       {
         title: 'Встановіть скіл',
         description:
-          'Додайте скіл Deep Work Plan, щоб будь-який агент міг планувати та виконувати структуровану роботу. Скіл постачає маршрутизатор плюс вісім суб-скілів — create, execute, refine, resume, status, verify, onboard та author.',
+          'Додайте скіл Deep Work Plan, щоб будь-який агент міг планувати та виконувати структуровану роботу. Скіл постачає маршрутизатор плюс дев’ять суб-скілів — create, execute, refine, resume, status, verify, onboard, author та upgrade.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',

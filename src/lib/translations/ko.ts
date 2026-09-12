@@ -205,7 +205,7 @@ export const ko: SiteTranslations = {
         {
           title: 'Deep Work Plan 스킬을 설치합니다',
           description:
-            '스킬은 모든 리포지토리에서 동일한 엔진입니다. 명령 한 줄로 라우터와 그 하위 스킬(create, execute, refine, resume, status, verify, onboard, author)을 Claude Code, Cursor, Codex, Gemini, Copilot용으로 가져옵니다.',
+            '스킬은 모든 리포지토리에서 동일한 엔진입니다. 명령 한 줄로 라우터와 그 하위 스킬(create, execute, refine, resume, status, verify, onboard, author, upgrade)을 Claude Code, Cursor, Codex, Gemini, Copilot용으로 가져옵니다.',
         },
         {
           title: '리포지토리를 적응시킵니다',
@@ -244,7 +244,7 @@ export const ko: SiteTranslations = {
         {
           label: '설치된 Deep Work Plan 스킬',
           detail:
-            'create, execute, refine, resume, status, verify, onboard, author — 리포지토리별 복사 없이 단일 스킬 팩으로 에이전트가 사용할 수 있습니다.',
+            'create, execute, refine, resume, status, verify, onboard, author, upgrade — 리포지토리별 복사 없이 단일 스킬 팩으로 에이전트가 사용할 수 있습니다.',
         },
         {
           label: '직접 확인할 수 있는 적합성',
@@ -611,7 +611,7 @@ export const ko: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan 키트',
       description:
-        '스킬과 여덟 개의 하위 스킬, 명령, 어댑터, 프리셋, 선택형 애드온, 예시 — Deep Work Plan을 여러 에이전트와 스택에서 실행 가능하게 만듭니다.',
+        '스킬과 아홉 개의 하위 스킬, 명령, 어댑터, 프리셋, 선택형 애드온, 예시 — Deep Work Plan을 여러 에이전트와 스택에서 실행 가능하게 만듭니다.',
     },
     eyebrow: '키트',
     title: '키트',
@@ -621,7 +621,7 @@ export const ko: SiteTranslations = {
       command: {
         title: '하위 스킬 & 명령',
         description:
-          '스킬 라우터와 그 하위 스킬(create, execute, refine, resume, status, verify, onboard, author), 그리고 그것들에 위임하는 얇은 슬래시 명령.',
+          '스킬 라우터와 그 하위 스킬(create, execute, refine, resume, status, verify, onboard, author, upgrade), 그리고 그것들에 위임하는 얇은 슬래시 명령.',
       },
       adapter: {
         title: '어댑터',
@@ -683,7 +683,7 @@ export const ko: SiteTranslations = {
       {
         title: 'Deep Work Plan 스킬 설치',
         description:
-          '리포지토리에 스킬을 추가합니다 — 라우터와 여덟 개의 하위 스킬(create, execute, refine, resume, status, verify, onboard, author). 가장 빠른 경로로 Skills CLI를 사용하거나, 리포지토리를 클론한 뒤 git과 셸을 사용할 수 있는 곳에서 setup을 실행하세요.',
+          '리포지토리에 스킬을 추가합니다 — 라우터와 아홉 개의 하위 스킬(create, execute, refine, resume, status, verify, onboard, author, upgrade). 가장 빠른 경로로 Skills CLI를 사용하거나, 리포지토리를 클론한 뒤 git과 셸을 사용할 수 있는 곳에서 setup을 실행하세요.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -755,7 +755,7 @@ export const ko: SiteTranslations = {
       {
         title: '스킬 설치',
         description:
-          '어떤 에이전트든 구조화된 작업을 계획하고 실행할 수 있도록 Deep Work Plan 스킬을 추가합니다. 스킬은 라우터와 여덟 개의 하위 스킬 — create, execute, refine, resume, status, verify, onboard, author — 을 제공합니다.',
+          '어떤 에이전트든 구조화된 작업을 계획하고 실행할 수 있도록 Deep Work Plan 스킬을 추가합니다. 스킬은 라우터와 아홉 개의 하위 스킬 — create, execute, refine, resume, status, verify, onboard, author, upgrade — 을 제공합니다.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',

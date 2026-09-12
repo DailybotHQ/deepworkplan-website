@@ -12,7 +12,7 @@ Skill’i kurun, deponuzu onboarding edin, ardından herhangi bir ajanla planlay
 
 ### 1. Deep Work Plan skill’ini kurun
 
-Skill’i deponuza ekleyin. Bir yönlendirici ile sekiz alt skill içerir — create, execute, refine, resume, status, verify, onboard ve author. En hızlı yol için Skills CLI’yı kullanın:
+Skill’i deponuza ekleyin. Bir yönlendirici ile dokuz alt skill içerir — create, execute, refine, resume, status, verify, onboard, author ve upgrade. En hızlı yol için Skills CLI’yı kullanın:
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

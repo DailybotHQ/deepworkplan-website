@@ -93,7 +93,7 @@ Ngữ cảnh, công cụ, rào chắn và trạng thái nằm trong repository c
 ## Điều gì xảy ra khi bạn chạy nó
 
 1. **Agent của bạn mở [/init.md](/init.md)** — nó đọc lời nhắc khởi tạo cùng phương pháp luận, đặc tả và bộ kit mà nó liên kết tới.
-2. **Nó cài skill Deep Work Plan** — động cơ, giống hệt nhau trong mọi repository: bộ định tuyến cùng các sub-skill của nó (create, execute, refine, resume, status, verify, onboard, author), cho Claude Code, Cursor, Codex, Gemini và Copilot.
+2. **Nó cài skill Deep Work Plan** — động cơ, giống hệt nhau trong mọi repository: bộ định tuyến cùng các sub-skill của nó (create, execute, refine, resume, status, verify, onboard, author, upgrade), cho Claude Code, Cursor, Codex, Gemini và Copilot.
 3. **Nó thích ứng repository của bạn** — suy luận về stack thực của bạn (không bao giờ sao chép-dán), nó viết AGENTS.md, `docs/`, các README cho từng mô-đun, một bộ kit `.agents/` được suy luận, và một `.dwp/` được gitignore. Repository của bạn trở thành harness.
 4. **Bạn lập kế hoạch và thực thi** — các Deep Work Plan dài hơi, chạy từng bước dựa trên tiêu chí chấp nhận rõ ràng và các cổng kiểm chứng, một cách tự chủ trong nhiều giờ.
 

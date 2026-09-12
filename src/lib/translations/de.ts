@@ -206,7 +206,7 @@ export const de: SiteTranslations = {
         {
           title: 'Er installiert die Deep Work Plan Skill',
           description:
-            'Die Skill ist die Engine — in jedem Repository dieselbe. Ein Befehl bindet den Router und seine Sub-Skills (create, execute, refine, resume, status, verify, onboard, author) für Claude Code, Cursor, Codex, Gemini und Copilot ein.',
+            'Die Skill ist die Engine — in jedem Repository dieselbe. Ein Befehl bindet den Router und seine Sub-Skills (create, execute, refine, resume, status, verify, onboard, author, upgrade) für Claude Code, Cursor, Codex, Gemini und Copilot ein.',
         },
         {
           title: 'Er passt Ihr Repository an',
@@ -245,7 +245,7 @@ export const de: SiteTranslations = {
         {
           label: 'Die Deep Work Plan Skill, installiert',
           detail:
-            'create, execute, refine, resume, status, verify, onboard und author — für Ihren Agenten als ein einziges Skill-Paket verfügbar, ohne Kopie je Repository.',
+            'create, execute, refine, resume, status, verify, onboard, author und upgrade — für Ihren Agenten als ein einziges Skill-Paket verfügbar, ohne Kopie je Repository.',
         },
         {
           label: 'Konformität, die Sie prüfen können',
@@ -613,7 +613,7 @@ export const de: SiteTranslations = {
     meta: {
       title: 'Das Deep Work Plan Kit',
       description:
-        'Die Skill und ihre acht Sub-Skills, Befehle, Adapter, Presets, Opt-in-Addons und Beispiele, die Deep Work Plan über Agenten und Stacks hinweg ausführbar machen.',
+        'Die Skill und ihre neun Sub-Skills, Befehle, Adapter, Presets, Opt-in-Addons und Beispiele, die Deep Work Plan über Agenten und Stacks hinweg ausführbar machen.',
     },
     eyebrow: 'Kit',
     title: 'Das Kit',
@@ -623,7 +623,7 @@ export const de: SiteTranslations = {
       command: {
         title: 'Sub-Skills & Befehle',
         description:
-          'Der Skill-Router und seine Sub-Skills (create, execute, refine, resume, status, verify, onboard, author) sowie die schlanken Slash-Befehle, die an sie delegieren.',
+          'Der Skill-Router und seine Sub-Skills (create, execute, refine, resume, status, verify, onboard, author, upgrade) sowie die schlanken Slash-Befehle, die an sie delegieren.',
       },
       adapter: {
         title: 'Adapter',
@@ -686,7 +686,7 @@ export const de: SiteTranslations = {
       {
         title: 'Die Deep Work Plan Skill installieren',
         description:
-          'Fügen Sie die Skill zu Ihrem Repository hinzu — einen Router plus acht Sub-Skills (create, execute, refine, resume, status, verify, onboard, author). Nutzen Sie die Skills-CLI für den schnellsten Weg, oder klonen Sie das Repository und führen Sie das Setup aus, wo git und eine Shell verfügbar sind.',
+          'Fügen Sie die Skill zu Ihrem Repository hinzu — einen Router plus neun Sub-Skills (create, execute, refine, resume, status, verify, onboard, author, upgrade). Nutzen Sie die Skills-CLI für den schnellsten Weg, oder klonen Sie das Repository und führen Sie das Setup aus, wo git und eine Shell verfügbar sind.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -758,7 +758,7 @@ export const de: SiteTranslations = {
       {
         title: 'Die Skill installieren',
         description:
-          'Fügen Sie die Deep Work Plan Skill hinzu, sodass jeder Agent strukturierte Arbeit planen und ausführen kann. Die Skill liefert einen Router plus acht Sub-Skills — create, execute, refine, resume, status, verify, onboard und author.',
+          'Fügen Sie die Deep Work Plan Skill hinzu, sodass jeder Agent strukturierte Arbeit planen und ausführen kann. Die Skill liefert einen Router plus neun Sub-Skills — create, execute, refine, resume, status, verify, onboard, author und upgrade.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',

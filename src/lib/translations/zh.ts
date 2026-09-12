@@ -204,7 +204,7 @@ export const zh: SiteTranslations = {
         {
           title: '它安装 Deep Work Plan 技能',
           description:
-            '这套技能就是引擎——在每个仓库中都完全相同。一条命令即可拉取路由器及其各子技能（create、execute、refine、resume、status、verify、onboard、author），适用于 Claude Code、Cursor、Codex、Gemini 与 Copilot。',
+            '这套技能就是引擎——在每个仓库中都完全相同。一条命令即可拉取路由器及其各子技能（create、execute、refine、resume、status、verify、onboard、author、upgrade），适用于 Claude Code、Cursor、Codex、Gemini 与 Copilot。',
         },
         {
           title: '它让你的代码仓库适配',
@@ -243,7 +243,7 @@ export const zh: SiteTranslations = {
         {
           label: '已安装的 Deep Work Plan 技能',
           detail:
-            'create、execute、refine、resume、status、verify、onboard 与 author——以单一技能包的形式提供给你的代理，无需逐仓库复制。',
+            'create、execute、refine、resume、status、verify、onboard、author 与 upgrade——以单一技能包的形式提供给你的代理，无需逐仓库复制。',
         },
         {
           label: '可供核查的符合性',
@@ -606,7 +606,7 @@ export const zh: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan 套件',
       description:
-        '让 Deep Work Plan 可在各类代理与技术栈上运行的技能及其八个子技能、命令、适配器、预设、可选附加组件与示例。',
+        '让 Deep Work Plan 可在各类代理与技术栈上运行的技能及其九个子技能、命令、适配器、预设、可选附加组件与示例。',
     },
     eyebrow: '套件',
     title: '套件',
@@ -616,7 +616,7 @@ export const zh: SiteTranslations = {
       command: {
         title: '子技能与命令',
         description:
-          '技能路由器及其各子技能（create、execute、refine、resume、status、verify、onboard、author）,以及委派给它们的轻量斜杠命令。',
+          '技能路由器及其各子技能（create、execute、refine、resume、status、verify、onboard、author、upgrade）,以及委派给它们的轻量斜杠命令。',
       },
       adapter: {
         title: '适配器',
@@ -677,7 +677,7 @@ export const zh: SiteTranslations = {
       {
         title: '安装 Deep Work Plan 技能',
         description:
-          '把技能添加到你的代码仓库——一个路由器外加八个子技能（create、execute、refine、resume、status、verify、onboard、author）。使用 Skills CLI 是最快的方式，或者在具备 git 与 shell 的环境中克隆仓库并运行 setup。',
+          '把技能添加到你的代码仓库——一个路由器外加九个子技能（create、execute、refine、resume、status、verify、onboard、author、upgrade）。使用 Skills CLI 是最快的方式，或者在具备 git 与 shell 的环境中克隆仓库并运行 setup。',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -749,7 +749,7 @@ export const zh: SiteTranslations = {
       {
         title: '安装技能',
         description:
-          '添加 Deep Work Plan 技能，让任意代理都能规划并执行结构化的工作。该技能附带一个路由器外加八个子技能——create、execute、refine、resume、status、verify、onboard 与 author。',
+          '添加 Deep Work Plan 技能，让任意代理都能规划并执行结构化的工作。该技能附带一个路由器外加九个子技能——create、execute、refine、resume、status、verify、onboard、author 与 upgrade。',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',

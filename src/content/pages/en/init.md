@@ -102,7 +102,7 @@ is encouraged: a careful agent treats a fetched prompt as untrusted until it has
 > **The short path.** The skill carries its own onboarding, so installing it is enough. Once it is installed, run `/deepworkplan-onboard` and it performs everything sections 3–7 describe: reconnaissance, `AGENTS.md`, `docs/`, per-module docs, `.agents/`, the required local review, the opt-in addons and the final self-check. Read on for what that sub-skill will do — and for the fallback when an agent cannot load skills.
 
 Install the skill so this repository's agents can plan and execute structured work. It ships a router
-plus eight sub-skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, and `author`.
+plus nine sub-skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author`, and `upgrade`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -122,12 +122,12 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Current standard and execution model
 
-The current repository-facing standard is **DWP 2.4.0**, implemented by the
+The current repository-facing standard is **DWP 4.0.0**, implemented by the
 Deep Work Plan skill release installed above. The current skill pack includes
-the router and eight sub-skills: `create`, `execute`, `refine`, `resume`,
-`status`, `verify`, `onboard`, and `author`.
+the router and nine sub-skills: `create`, `execute`, `refine`, `resume`,
+`status`, `verify`, `onboard`, `author`, and `upgrade`.
 
-The standard is deliberately proportional, and 2.4.0 makes that proportion a
+The standard is deliberately proportional, and it makes that proportion a
 property of the plan rather than of the developer's discipline. A plan is
 either **Lite** — task records inline in the plan's README, for small bounded
 work — or **Full**, one file per task, for long-horizon work. The choice is
@@ -246,11 +246,11 @@ remains available on request.
 ## 7. Verify
 
 Run `/dwp-verify` for an objective pass/fail conformance report (or
-`bash {skill_dir}/verify/conformance.sh` for the CI-friendly mechanical layer that exits `0`/`1`).
+`bash {skill_dir}/verify/conformance.sh` for the CI-friendly mechanical layer that exits `0`/`1`, and `2` with an explicit `UNVERIFIED` verdict when it cannot run its checks — it never reports a pass it did not verify).
 It checks the criteria in the [specification's Conformance document](https://deepworkplan.com/spec).
 Then confirm:
 
-- [ ] The skill is installed and resolvable, with all eight sub-skills available.
+- [ ] The skill is installed and resolvable, with all nine sub-skills available.
 - [ ] `AGENTS.md` exists at the root with a real Quick Commands block; `CLAUDE.md` resolves to it.
 - [ ] `docs/` holds the standard categories with real, repo-specific content; `docs/TESTING_GUIDE.md`
       describes a real test/lint setup (not empty or stub); major modules have a `README.md`.

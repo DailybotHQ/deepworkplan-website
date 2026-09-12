@@ -78,7 +78,7 @@ description: "面向 AI 代理的可执行接入提示：在任意代码仓库�
 > **捷径。** 该 skill 自带接入流程，因此安装它就够了。安装完成后运行 `/deepworkplan-onboard`，它会完成第 3–7 节描述的全部工作：勘察、`AGENTS.md`、`docs/`、按模块的文档、`.agents/`、必需的本地审查、可选插件以及最终自检。继续阅读可了解该子技能将要做什么，以及当智能体无法加载 skill 时的备用路径。
 
 安装技能，让这个仓库的代理能够规划并执行结构化的工作。它附带一个路由器
-外加八个子技能——`create`、`execute`、`refine`、`resume`、`status`、`verify`、`onboard` 与 `author`。
+外加九个子技能——`create`、`execute`、`refine`、`resume`、`status`、`verify`、`onboard`、`author` 与 `upgrade`。
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -165,11 +165,11 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 ## 7. 验证
 
 运行 `/dwp-verify` 以获得一份客观的通过/未通过符合性报告（或
-`bash {skill_dir}/verify/conformance.sh` 以使用适用于 CI 的机械层，退出码为 `0`/`1`）。
+`bash {skill_dir}/verify/conformance.sh` 以使用适用于 CI 的机械层，退出码为 `0`/`1`；无法运行其检查时以 `2` 退出并给出明确的 `UNVERIFIED` 结论——它绝不报告未经验证的通过）。
 它会核查[规范的符合性文档](https://deepworkplan.com/spec)中的各项标准。
 然后确认：
 
-- [ ] 技能已安装且可被解析，全部八个子技能均可用。
+- [ ] 技能已安装且可被解析，全部九个子技能均可用。
 - [ ] `AGENTS.md` 存在于根目录，并带有一个真实的 Quick Commands 块；`CLAUDE.md` 解析到它。
 - [ ] `docs/` 以真实、仓库专属的内容承载标准的各类别；`docs/TESTING_GUIDE.md` 描述了真实的
       测试/lint 配置（非空、非桩代码）；各主要模块都有一个 `README.md`。

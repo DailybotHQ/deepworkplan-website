@@ -208,7 +208,7 @@ export const ja: SiteTranslations = {
         {
           title: 'Deep Work Plan スキルをインストールする',
           description:
-            'スキルはエンジンであり、どのリポジトリでも同じものです。一つのコマンドで、ルーターとそのサブスキル（create、execute、refine、resume、status、verify、onboard、author）が Claude Code、Cursor、Codex、Gemini、Copilot 向けに取り込まれます。',
+            'スキルはエンジンであり、どのリポジトリでも同じものです。一つのコマンドで、ルーターとそのサブスキル（create、execute、refine、resume、status、verify、onboard、author、upgrade）が Claude Code、Cursor、Codex、Gemini、Copilot 向けに取り込まれます。',
         },
         {
           title: 'リポジトリを適応させる',
@@ -248,7 +248,7 @@ export const ja: SiteTranslations = {
         {
           label: 'インストール済みの Deep Work Plan スキル',
           detail:
-            'create、execute、refine、resume、status、verify、onboard、author を、リポジトリごとに複製することなく、単一のスキルパックとしてエージェントが利用できます。',
+            'create、execute、refine、resume、status、verify、onboard、author、upgrade を、リポジトリごとに複製することなく、単一のスキルパックとしてエージェントが利用できます。',
         },
         {
           label: '確認できる適合性',
@@ -615,7 +615,7 @@ export const ja: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan のキット',
       description:
-        'スキルとその八つのサブスキル、コマンド、アダプター、プリセット、オプトイン式アドオン、そして事例。Deep Work Plan をエージェントとスタックをまたいで実行可能にします。',
+        'スキルとその九つのサブスキル、コマンド、アダプター、プリセット、オプトイン式アドオン、そして事例。Deep Work Plan をエージェントとスタックをまたいで実行可能にします。',
     },
     eyebrow: 'キット',
     title: 'キット',
@@ -625,7 +625,7 @@ export const ja: SiteTranslations = {
       command: {
         title: 'サブスキルとコマンド',
         description:
-          'スキルのルーターとそのサブスキル（create、execute、refine、resume、status、verify、onboard、author）、およびそれらに委譲する薄いスラッシュコマンド。',
+          'スキルのルーターとそのサブスキル（create、execute、refine、resume、status、verify、onboard、author、upgrade）、およびそれらに委譲する薄いスラッシュコマンド。',
       },
       adapter: {
         title: 'アダプター',
@@ -688,7 +688,7 @@ export const ja: SiteTranslations = {
       {
         title: 'Deep Work Plan スキルをインストールする',
         description:
-          'スキルをリポジトリに追加します。ルーターと八つのサブスキル（create、execute、refine、resume、status、verify、onboard、author）です。最速の方法には Skills CLI を使うか、リポジトリをクローンして git とシェルが使える環境でセットアップを実行します。',
+          'スキルをリポジトリに追加します。ルーターと九つのサブスキル（create、execute、refine、resume、status、verify、onboard、author、upgrade）です。最速の方法には Skills CLI を使うか、リポジトリをクローンして git とシェルが使える環境でセットアップを実行します。',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -760,7 +760,7 @@ export const ja: SiteTranslations = {
       {
         title: 'スキルをインストールする',
         description:
-          'Deep Work Plan スキルを追加し、どのエージェントも構造化された作業を計画して実行できるようにします。スキルはルーターと八つのサブスキル（create、execute、refine、resume、status、verify、onboard、author）を備えます。',
+          'Deep Work Plan スキルを追加し、どのエージェントも構造化された作業を計画して実行できるようにします。スキルはルーターと九つのサブスキル（create、execute、refine、resume、status、verify、onboard、author、upgrade）を備えます。',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',

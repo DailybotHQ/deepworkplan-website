@@ -208,7 +208,7 @@ export const ru: SiteTranslations = {
         {
           title: 'Он устанавливает навык Deep Work Plan',
           description:
-            'Навык — это движок, одинаковый в каждом репозитории. Одна команда подтягивает маршрутизатор и его под-навыки (create, execute, refine, resume, status, verify, onboard, author) для Claude Code, Cursor, Codex, Gemini и Copilot.',
+            'Навык — это движок, одинаковый в каждом репозитории. Одна команда подтягивает маршрутизатор и его под-навыки (create, execute, refine, resume, status, verify, onboard, author, upgrade) для Claude Code, Cursor, Codex, Gemini и Copilot.',
         },
         {
           title: 'Он адаптирует ваш репозиторий',
@@ -247,7 +247,7 @@ export const ru: SiteTranslations = {
         {
           label: 'Установленный навык Deep Work Plan',
           detail:
-            'create, execute, refine, resume, status, verify, onboard и author — доступны вашему агенту как единый пакет навыков, без копирования в каждый репозиторий.',
+            'create, execute, refine, resume, status, verify, onboard, author и upgrade — доступны вашему агенту как единый пакет навыков, без копирования в каждый репозиторий.',
         },
         {
           label: 'Соответствие, которое можно проверить',
@@ -616,7 +616,7 @@ export const ru: SiteTranslations = {
     meta: {
       title: 'Набор Deep Work Plan',
       description:
-        'Навык и его восемь под-навыков, команды, адаптеры, пресеты, опциональные дополнения и примеры, которые делают Deep Work Plan исполнимым для разных агентов и стеков.',
+        'Навык и его девять под-навыков, команды, адаптеры, пресеты, опциональные дополнения и примеры, которые делают Deep Work Plan исполнимым для разных агентов и стеков.',
     },
     eyebrow: 'Набор',
     title: 'Набор',
@@ -626,7 +626,7 @@ export const ru: SiteTranslations = {
       command: {
         title: 'Под-навыки и команды',
         description:
-          'Маршрутизатор навыка и его под-навыки (create, execute, refine, resume, status, verify, onboard, author), а также тонкие слеш-команды, делегирующие им работу.',
+          'Маршрутизатор навыка и его под-навыки (create, execute, refine, resume, status, verify, onboard, author, upgrade), а также тонкие слеш-команды, делегирующие им работу.',
       },
       adapter: {
         title: 'Адаптеры',
@@ -689,7 +689,7 @@ export const ru: SiteTranslations = {
       {
         title: 'Установите навык Deep Work Plan',
         description:
-          'Добавьте навык в свой репозиторий — маршрутизатор плюс восемь под-навыков (create, execute, refine, resume, status, verify, onboard, author). Используйте Skills CLI для самого быстрого пути или клонируйте репозиторий и запустите setup там, где доступны git и оболочка.',
+          'Добавьте навык в свой репозиторий — маршрутизатор плюс девять под-навыков (create, execute, refine, resume, status, verify, onboard, author, upgrade). Используйте Skills CLI для самого быстрого пути или клонируйте репозиторий и запустите setup там, где доступны git и оболочка.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -761,7 +761,7 @@ export const ru: SiteTranslations = {
       {
         title: 'Установите навык',
         description:
-          'Добавьте навык Deep Work Plan, чтобы любой агент мог планировать и выполнять структурированную работу. Навык поставляется с маршрутизатором плюс восемью под-навыками — create, execute, refine, resume, status, verify, onboard и author.',
+          'Добавьте навык Deep Work Plan, чтобы любой агент мог планировать и выполнять структурированную работу. Навык поставляется с маршрутизатором плюс девятью под-навыками — create, execute, refine, resume, status, verify, onboard, author и upgrade.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',

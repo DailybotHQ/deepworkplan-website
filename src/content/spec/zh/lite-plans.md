@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite 计划
 
-**版本 2.4.0。状态：稳定。** 本文档规定了与 [DWP 规范](/spec/dwp-specification) 一同引入的 Lite 计划形态：一种面向中小规模、边界清晰工作的计划格式，直接物化，不设不可执行的草案阶段。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
+**版本 4.0.0。状态：稳定。** 本文档规定了与 [DWP 规范](/spec/dwp-specification) 一同引入的 Lite 计划形态：一种面向中小规模、边界清晰工作的计划格式，直接物化，不设不可执行的草案阶段。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
 ## 形态与生命周期
 

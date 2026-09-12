@@ -13,8 +13,8 @@ twoje repozytorium spec-driven i sterowalnym przez agenta.
 
 ### 1. Zainstaluj skill Deep Work Plan
 
-Dodaj skill do swojego repozytorium. Dostarcza router oraz osiem sub-skilli — create, execute, refine,
-resume, status, verify, onboard i author. Użyj Skills CLI, by uzyskać najszybszą ścieżkę:
+Dodaj skill do swojego repozytorium. Dostarcza router oraz dziewięć sub-skilli — create, execute, refine,
+resume, status, verify, onboard, author i upgrade. Użyj Skills CLI, by uzyskać najszybszą ścieżkę:
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

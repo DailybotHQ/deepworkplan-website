@@ -13,8 +13,8 @@ votre dépôt piloté par la spécification et pilotable par agent.
 
 ### 1. Installer le skill Deep Work Plan
 
-Ajoutez le skill à votre dépôt. Il fournit un routeur accompagné de huit sous-skills — create, execute, refine,
-resume, status, verify, onboard et author. Utilisez la CLI Skills pour la voie la plus rapide :
+Ajoutez le skill à votre dépôt. Il fournit un routeur accompagné de neuf sous-skills — create, execute, refine,
+resume, status, verify, onboard, author et upgrade. Utilisez la CLI Skills pour la voie la plus rapide :
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
