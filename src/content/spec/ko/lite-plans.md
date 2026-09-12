@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite 계획
 
-**버전 2.4.0. 상태: 안정(Stable).** 이 문서는 [DWP 스펙](/spec/dwp-specification)과 함께 도입된 Lite 계획 표현 형식을 명시합니다: 실행 불가능한 초안 단계 없이 곧바로 구체화되는, 소규모에서 중간 규모의 경계가 분명한 작업을 위한 계획 포맷입니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
+**버전 4.0.0. 상태: 안정(Stable).** 이 문서는 [DWP 스펙](/spec/dwp-specification)과 함께 도입된 Lite 계획 표현 형식을 명시합니다: 실행 불가능한 초안 단계 없이 곧바로 구체화되는, 소규모에서 중간 규모의 경계가 분명한 작업을 위한 계획 포맷입니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
 
 ## 표현 형식과 라이프사이클
 

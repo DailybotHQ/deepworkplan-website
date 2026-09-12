@@ -204,7 +204,7 @@ export const zh: SiteTranslations = {
         {
           title: '它安装 Deep Work Plan 技能',
           description:
-            '这套技能就是引擎——在每个仓库中都完全相同。一条命令即可拉取路由器及其各子技能（create、execute、refine、resume、status、verify、onboard、author），适用于 Claude Code、Cursor、Codex、Gemini 与 Copilot。',
+            '这套技能就是引擎——在每个仓库中都完全相同。一条命令即可拉取路由器及其各子技能（create、execute、refine、resume、status、verify、onboard、author、upgrade），适用于 Claude Code、Cursor、Codex、Gemini 与 Copilot。',
         },
         {
           title: '它让你的代码仓库适配',
@@ -243,7 +243,7 @@ export const zh: SiteTranslations = {
         {
           label: '已安装的 Deep Work Plan 技能',
           detail:
-            'create、execute、refine、resume、status、verify、onboard 与 author——以单一技能包的形式提供给你的代理，无需逐仓库复制。',
+            'create、execute、refine、resume、status、verify、onboard、author 与 upgrade——以单一技能包的形式提供给你的代理，无需逐仓库复制。',
         },
         {
           label: '可供核查的符合性',
@@ -606,7 +606,7 @@ export const zh: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan 套件',
       description:
-        '让 Deep Work Plan 可在各类代理与技术栈上运行的技能及其八个子技能、命令、适配器、预设、可选附加组件与示例。',
+        '让 Deep Work Plan 可在各类代理与技术栈上运行的技能及其九个子技能、命令、适配器、预设、可选附加组件与示例。',
     },
     eyebrow: '套件',
     title: '套件',
@@ -616,7 +616,7 @@ export const zh: SiteTranslations = {
       command: {
         title: '子技能与命令',
         description:
-          '技能路由器及其各子技能（create、execute、refine、resume、status、verify、onboard、author）,以及委派给它们的轻量斜杠命令。',
+          '技能路由器及其各子技能（create、execute、refine、resume、status、verify、onboard、author、upgrade）,以及委派给它们的轻量斜杠命令。',
       },
       adapter: {
         title: '适配器',
@@ -677,7 +677,7 @@ export const zh: SiteTranslations = {
       {
         title: '安装 Deep Work Plan 技能',
         description:
-          '把技能添加到你的代码仓库——一个路由器外加八个子技能（create、execute、refine、resume、status、verify、onboard、author）。使用 Skills CLI 是最快的方式，或者在具备 git 与 shell 的环境中克隆仓库并运行 setup。',
+          '把技能添加到你的代码仓库——一个路由器外加九个子技能（create、execute、refine、resume、status、verify、onboard、author、upgrade）。使用 Skills CLI 是最快的方式，或者在具备 git 与 shell 的环境中克隆仓库并运行 setup。',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -749,7 +749,7 @@ export const zh: SiteTranslations = {
       {
         title: '安装技能',
         description:
-          '添加 Deep Work Plan 技能，让任意代理都能规划并执行结构化的工作。该技能附带一个路由器外加八个子技能——create、execute、refine、resume、status、verify、onboard 与 author。',
+          '添加 Deep Work Plan 技能，让任意代理都能规划并执行结构化的工作。该技能附带一个路由器外加九个子技能——create、execute、refine、resume、status、verify、onboard、author 与 upgrade。',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',
@@ -851,7 +851,7 @@ export const zh: SiteTranslations = {
             id: 'how-to-use',
             question: '如何使用？',
             answer:
-              '三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx skills add DailybotHQ/deepworkplan-skill`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑一份进行中的计划（范围、任务，或将 Lite 计划提升为 Full）；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。',
+              '三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx skills add DailybotHQ/deepworkplan-skill`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑一份进行中的计划（范围、任务，或将 Lite 计划提升为 Full）；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告；`/dwp-upgrade` 将已安装的技能迁移到新版本，且不触碰既有计划。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。',
             linkLabel: '快速开始',
             linkPath: '/quickstart',
           },
@@ -951,6 +951,14 @@ export const zh: SiteTranslations = {
             linkPath: '/spec/agent-protocol',
           },
           {
+            id: 'unverified',
+            question: '当符合性检查器无法运行其检查时会发生什么？',
+            answer:
+              '它会大声说出来。检查器以退出码 2 结束，并给出明确的 `UNVERIFIED` 判定——它绝不会打印一个自己并未真正验证的通过结果。当环境缺少可用的解释器或某项检查无法运行时，诚实的结果是「未验证」而非「符合」；绿色结果永远意味着每项检查都已运行并通过。同样的纪律贯穿整个方法论：没有任何流程会削弱或伪造关卡来宣称完成。',
+            linkLabel: '符合性契约',
+            linkPath: '/spec/conformance',
+          },
+          {
             id: 'unattended-runs',
             question: '计划可以在夜间或 CI 中无人值守地运行吗？',
             answer:
@@ -964,6 +972,14 @@ export const zh: SiteTranslations = {
         id: 'compare',
         title: '它与其他方案的对比',
         items: [
+          {
+            id: 'multi-repo',
+            question: '一个计划可以跨越多个仓库吗？',
+            answer:
+              '可以——编排中心原型正是为此而生。中心仓库持有协调计划，每个子仓库在自己的隔离 `.dwp/` 工作区内运行自己的计划，因此子仓库绝不会写入中心的计划状态。子仓库的完成度从每个计划自身的顶层状态读取，而不是在其内部做字符串匹配；中心在跳转到任何位置之前都会先记录自己所在的位置。每个子仓库仍然是一个普通的 DWP 仓库，也可以独立驾驶。',
+            linkLabel: '仓库原型',
+            linkPath: '/spec/archetypes',
+          },
           {
             id: 'vs-sdd-tools',
             question:
@@ -1000,7 +1016,15 @@ export const zh: SiteTranslations = {
             id: 'install',
             question: '接入会向我的仓库写入什么？会改动现有文件吗？',
             answer:
-              '接入是非破坏性的：它会检测已有的 `AGENTS.md`、`docs/`、`.agents/` 或 `CLAUDE.md`，采取调和而非覆盖，并在替换任何内容之前先询问。它会写入带真实命令的 `AGENTS.md` 索引、一棵经过推理的 `docs/` 树、各模块文档、带轻量 `dwp-*` 命令的 `.agents/` 套件、一个被 gitignore 的 `.dwp/` 输出区、一份经过验证的测试映射，以及必备的本地代码审查（AI Diff Reviewer 技能加一份为仓库定制的审查扩展）。随后它会运行自检与符合性检查器，让你看到产出了什么。在更早标准下接入的仓库会得到一次定向的 harness 升级，只调和缺失或过时的部分。升级技能本身是一个独立的、需明确同意的流程（`/dwp-upgrade`）：它以只读方式检查最新发布的版本，仅在你明确接受后才安装，把接入流程当作一次全新执行重新运行，并且绝不迁移或失效 `.dwp/` 下的既有计划。',
+              '接入是非破坏性的：它会检测已有的 `AGENTS.md`、`docs/`、`.agents/` 或 `CLAUDE.md`，采取调和而非覆盖，并在替换任何内容之前先询问。它会写入带真实命令的 `AGENTS.md` 索引、一棵经过推理的 `docs/` 树、各模块文档、带轻量 `dwp-*` 命令的 `.agents/` 套件、一个被 gitignore 的 `.dwp/` 输出区、一份经过验证的测试映射，以及必备的本地代码审查（AI Diff Reviewer 技能加一份为仓库定制的审查扩展）。随后它会运行自检与符合性检查器，让你看到产出了什么。在更早标准下接入的仓库会得到一次定向的 harness 升级，只调和缺失或过时的部分。',
+            linkLabel: '采用入口',
+            linkPath: '/init',
+          },
+          {
+            id: 'upgrade',
+            question: '在一个已经接入的仓库里，我该如何升级技能？',
+            answer:
+              '这里涉及两种不同的升级，流程把它们分开对待。仓库 harness——`AGENTS.md`、`docs/`、`.agents/` 套件——通过重新运行接入来调和，只补齐缺失或过时的部分。技能本身则通过 `/dwp-upgrade` 前进：先以只读方式检查最新发布的版本，再安装你接受的那个确切标签并加以验证，然后把接入当作一次全新执行重新运行。整个流程每一步都需明确同意，本地适配会先比对再保留而不是被覆盖，`.dwp/` 绝不会被迁移——既有计划保持其记录的形态并继续运行。',
             linkLabel: '采用入口',
             linkPath: '/init',
           },
@@ -1024,7 +1048,7 @@ export const zh: SiteTranslations = {
             id: 'cost',
             question: '它收费吗？效率如何衡量？',
             answer:
-              '方法论与技能均采用 MIT 许可，且完全免费；核心流程中没有服务、没有 API 密钥、也没有遥测。效率以每个流程加载的指令字节数来报告，由随技能一同提交的脚本测量，并发布在一本评估台账中，增长与下降同样如实呈现。它不以 token 百分比或成本节省的形式报告，因为一份字节清单无法证明这些；一项预注册的公开评估已在计划之中，用以恰当地衡量实际效果。',
+              '方法论与技能均采用 MIT 许可，且完全免费；核心流程中没有服务、没有 API 密钥、也没有遥测。效率以每个流程加载的指令字节数来报告，由随技能一同提交的脚本测量，在各发布基线上重新测量，并发布在一本评估台账中，增长与下降同样如实呈现。它不以 token 百分比或成本节省的形式报告，因为一份字节清单无法证明这些；一项预注册的公开评估已在计划之中，用以恰当地衡量实际效果。',
             linkLabel: '信任与披露',
             linkPath: '/trust',
           },

@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite-Pläne
 
-**Version 2.4.0. Status: Stabil.** Dieses Dokument spezifiziert die Lite-Plan-Darstellung, die zusammen mit der [DWP-Spezifikation](/spec/dwp-specification) eingeführt wird: ein Planformat für kleine bis mittlere, abgegrenzte Arbeiten, das direkt materialisiert wird, ohne eine nicht ausführbare Entwurfsstufe. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
+**Version 4.0.0. Status: Stabil.** Dieses Dokument spezifiziert die Lite-Plan-Darstellung, die zusammen mit der [DWP-Spezifikation](/spec/dwp-specification) eingeführt wird: ein Planformat für kleine bis mittlere, abgegrenzte Arbeiten, das direkt materialisiert wird, ohne eine nicht ausführbare Entwurfsstufe. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
 ## Darstellung und Lebenszyklus
 

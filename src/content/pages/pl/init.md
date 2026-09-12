@@ -92,7 +92,7 @@ zalecane: ostrożny agent traktuje pobrany prompt jako niezaufany, dopóki nie z
 > **Krótka droga.** Skill niesie własny onboarding, więc wystarczy ją zainstalować. Po instalacji uruchom `/deepworkplan-onboard` — wykona wszystko, co opisują sekcje 3–7: rozpoznanie, `AGENTS.md`, `docs/`, dokumentację per moduł, `.agents/`, wymagany przegląd lokalny, opcjonalne dodatki i końcową autokontrolę. Czytaj dalej, aby poznać, co zrobi ta pod-skill — oraz drogę zapasową, gdy agent nie może ładować skilli.
 
 Zainstaluj skill, aby agenci tego repozytorium mogli planować i wykonywać ustrukturyzowaną pracę. Dostarcza router
-oraz osiem sub-skilli — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard` i `author`.
+oraz dziewięć sub-skilli — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` i `upgrade`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -185,7 +185,7 @@ walidacja stanu końcowego oraz uzgodnienie decyzji dotyczących skilli. Executi
 ## 7. Zweryfikuj
 
 Uruchom `/dwp-verify`, aby uzyskać obiektywny raport zgodności zaliczenie/niezaliczenie (lub
-`bash {skill_dir}/verify/conformance.sh` dla warstwy mechanicznej kompatybilnej z CI, która kończy się kodem `0`/`1`).
+`bash {skill_dir}/verify/conformance.sh` dla warstwy mechanicznej kompatybilnej z CI, która kończy się kodem `0`/`1`, a gdy nie może uruchomić swoich sprawdzeń — kodem `2` z jawnym werdyktem `UNVERIFIED`; nigdy nie raportuje zaliczenia, którego nie zweryfikował).
 Sprawdza kryteria z [dokumentu Zgodność w specyfikacji](https://deepworkplan.com/spec).
 Następnie potwierdź:
 

@@ -5,7 +5,7 @@ date: 2026-09-10
 version: "v3 · Efisiensi token"
 kind: release
 lang: id
-order: 2
+order: 3
 featured: false
 sourceLabel: "Skill release commit d050474"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/d050474bea3a2b7675ce851efb377833b4960367"

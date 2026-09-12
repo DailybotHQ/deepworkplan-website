@@ -13,8 +13,8 @@ seu repositório orientado a especificação e pilotável por agentes.
 
 ### 1. Instale a skill Deep Work Plan
 
-Adicione a skill ao seu repositório. Ela traz um roteador mais oito sub-skills — create, execute, refine,
-resume, status, verify, onboard e author. Use a CLI de Skills para o caminho mais rápido:
+Adicione a skill ao seu repositório. Ela traz um roteador mais nove sub-skills — create, execute, refine,
+resume, status, verify, onboard, author e upgrade. Use a CLI de Skills para o caminho mais rápido:
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

@@ -93,7 +93,7 @@ Konteks, alat, pagar pengaman, dan status tinggal di repositori Anda sebagai ber
 ## Apa yang terjadi saat Anda menjalankannya
 
 1. **Agent Anda membuka [/init.md](/init.md)** — ia membaca prompt onboarding beserta metodologi, spec, dan kit yang ditautkannya.
-2. **Ia memasang skill Deep Work Plan** — mesinnya, identik di setiap repositori: router ditambah sub-skill-nya (create, execute, refine, resume, status, verify, onboard, author), untuk Claude Code, Cursor, Codex, Gemini, dan Copilot.
+2. **Ia memasang skill Deep Work Plan** — mesinnya, identik di setiap repositori: router ditambah sub-skill-nya (create, execute, refine, resume, status, verify, onboard, author, upgrade), untuk Claude Code, Cursor, Codex, Gemini, dan Copilot.
 3. **Ia menyesuaikan repositori Anda** — dengan bernalar tentang stack nyata Anda (tidak pernah menyalin-tempel), ia menulis AGENTS.md, `docs/`, README per modul, kit `.agents/` yang dipikirkan matang, dan `.dwp/` yang di-gitignore. Repositori Anda menjadi harness.
 4. **Anda merencanakan dan mengeksekusi** — Deep Work Plan jangka panjang, dijalankan langkah demi langkah terhadap acceptance criteria dan validation gate yang eksplisit, secara otonom selama berjam-jam.
 

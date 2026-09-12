@@ -93,7 +93,7 @@ Bağlam, araçlar, koruma bariyerleri ve durum; herhangi bir ajanın okuyabilece
 ## Çalıştırdığınızda ne olur
 
 1. **Ajanınız [/init.md](/init.md) dosyasını açar** — onboarding istemini ve bağlandığı metodolojiyi, spesifikasyonu ve kiti okur.
-2. **Deep Work Plan skill’ini kurar** — her depoda aynı olan motor: yönlendirici ve alt skill’leri (create, execute, refine, resume, status, verify, onboard, author); Claude Code, Cursor, Codex, Gemini ve Copilot için.
+2. **Deep Work Plan skill’ini kurar** — her depoda aynı olan motor: yönlendirici ve alt skill’leri (create, execute, refine, resume, status, verify, onboard, author, upgrade); Claude Code, Cursor, Codex, Gemini ve Copilot için.
 3. **Deponuzu uyarlar** — gerçek yığınınız hakkında akıl yürüterek (asla kopyala-yapıştır yapmadan), AGENTS.md, `docs/`, modül başına README dosyaları, akıl yürütülmüş bir `.agents/` kiti ve gitignore’lanmış bir `.dwp/` yazar. Deponuz harness haline gelir.
 4. **Planlar ve yürütürsünüz** — uzun soluklu Deep Work Plan’ler, açık kabul kriterlerine ve doğrulama kapılarına karşı adım adım, saatlerce otonom biçimde çalıştırılır.
 

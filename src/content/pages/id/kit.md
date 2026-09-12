@@ -1,6 +1,6 @@
 ---
 title: "Kit Deep Work Plan"
-description: "Skill dan delapan sub-skill-nya, command, adapter agent, preset onboarding, addon opt-in, dan contoh yang membuat Deep Work Plan dapat dijalankan di mana saja."
+description: "Skill dan sembilan sub-skill-nya, command, adapter agent, preset onboarding, addon opt-in, dan contoh yang membuat Deep Work Plan dapat dijalankan di mana saja."
 lastUpdated: 2026-05-31
 ---
 
@@ -15,7 +15,7 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ### Skill dan sub-skill-nya
 
-Skill Deep Work Plan adalah sebuah router ditambah delapan sub-skill:
+Skill Deep Work Plan adalah sebuah router ditambah sembilan sub-skill:
 
 - **create** — menguraikan sebuah tujuan menjadi rencana terstruktur (`/dwp-create`).
 - **execute** — menjalankan rencana tugas demi tugas, memvalidasi setiap gate (`/dwp-execute`).
@@ -25,6 +25,7 @@ Skill Deep Work Plan adalah sebuah router ditambah delapan sub-skill:
 - **verify** — memeriksa konformansi repositori dan rencana secara objektif (`/dwp-verify`).
 - **onboard** — menjadikan sebuah repositori AI-first (`/deepworkplan-onboard`).
 - **author** — membuat atau mengembangkan skill, agent, dan command milik repo sendiri (`/skill-create`, `/agent-create`).
+- **upgrade** — memindahkan skill terpasang ke rilis lebih baru dengan aman (`/dwp-upgrade`).
 
 ### Command
 

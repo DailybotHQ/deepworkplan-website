@@ -84,7 +84,7 @@ Verstehen Sie zuerst das Repository, schlagen Sie dann vor, was Sie tun werden.
 > **Der kurze Weg.** Die Skill bringt ihr eigenes Onboarding mit, daher genügt die Installation. Führen Sie nach der Installation `/deepworkplan-onboard` aus — sie erledigt alles, was die Abschnitte 3–7 beschreiben: Reconnaissance, `AGENTS.md`, `docs/`, Dokumentation je Modul, `.agents/`, die erforderliche lokale Überprüfung, die optionalen Addons und die abschließende Selbstprüfung. Lesen Sie weiter, um zu erfahren, was diese Sub-Skill tut — und für den Ersatzweg, wenn ein Agent keine Skills laden kann.
 
 Installieren Sie die Skill, sodass die Agenten dieses Repositorys strukturierte Arbeit planen und ausführen können. Sie liefert einen Router
-plus acht Sub-Skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard` und `author`.
+plus neun Sub-Skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` und `upgrade`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -182,11 +182,11 @@ Abschluss), der Validierung des Endzustands und der Abstimmung der Skills-Entsch
 ## 7. Verifizieren
 
 Führen Sie `/dwp-verify` für einen objektiven Bestanden/Nicht-bestanden-Konformitätsbericht aus (oder
-`bash {skill_dir}/verify/conformance.sh` für die CI-kompatible mechanische Schicht, die mit `0`/`1` endet).
+`bash {skill_dir}/verify/conformance.sh` für die CI-kompatible mechanische Schicht, die mit `0`/`1` endet — und mit `2` und einem expliziten `UNVERIFIED`-Verdiktor, wenn sie ihre Prüfungen nicht ausführen kann; sie meldet nie ein Bestehen, das sie nicht geprüft hat).
 Es prüft die Kriterien im [Konformitätsdokument der Spezifikation](https://deepworkplan.com/spec).
 Bestätigen Sie dann:
 
-- [ ] Die Skill ist installiert und auflösbar, mit allen acht verfügbaren Sub-Skills.
+- [ ] Die Skill ist installiert und auflösbar, mit allen neun verfügbaren Sub-Skills.
 - [ ] `AGENTS.md` existiert im Stammverzeichnis mit einem echten Quick-Commands-Block; `CLAUDE.md` löst sich darauf auf.
 - [ ] `docs/` enthält die Standardkategorien mit echtem, repository-spezifischem Inhalt; `docs/TESTING_GUIDE.md`
       beschreibt ein echtes Test-/Lint-Setup (nicht leer oder Stub); größere Module haben eine `README.md`.

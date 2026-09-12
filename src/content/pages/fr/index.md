@@ -93,7 +93,7 @@ Contexte, outils, garde-fous et état vivent dans votre dépôt sous forme de fi
 ## Ce qui se passe quand vous le lancez
 
 1. **Votre agent ouvre [/init.md](/init.md)** — il lit le prompt d’onboarding ainsi que la méthodologie, la spécification et le kit qu’il référence.
-2. **Il installe le skill Deep Work Plan** — le moteur, identique dans chaque dépôt : le routeur et ses sous-skills (create, execute, refine, resume, status, verify, onboard, author), pour Claude Code, Cursor, Codex, Gemini et Copilot.
+2. **Il installe le skill Deep Work Plan** — le moteur, identique dans chaque dépôt : le routeur et ses sous-skills (create, execute, refine, resume, status, verify, onboard, author, upgrade), pour Claude Code, Cursor, Codex, Gemini et Copilot.
 3. **Il adapte votre dépôt** — en raisonnant sur votre stack réelle (jamais en copiant-collant), il écrit AGENTS.md, `docs/`, des README par module, un kit `.agents/` raisonné et un `.dwp/` ignoré par git. Votre dépôt devient le harness.
 4. **Vous planifiez et exécutez** — des Deep Work Plans de longue haleine, exécutés étape par étape face à des critères d’acceptation explicites et des portes de validation, de manière autonome pendant des heures.
 

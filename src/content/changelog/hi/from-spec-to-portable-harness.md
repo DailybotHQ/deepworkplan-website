@@ -5,7 +5,7 @@ date: 2026-06-12
 version: "v1 · आधार"
 kind: foundation
 lang: hi
-order: 4
+order: 5
 featured: false
 sourceLabel: "Skill changelog 2.3.0–2.16.0"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"

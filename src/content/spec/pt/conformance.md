@@ -8,7 +8,7 @@ section: Conformance
 
 # Conformidade
 
-**Versão 1.2. Status: Estável.** Este documento define o que significa um repositório ser *conforme ao Deep Work Plan* — ou seja, AI-first e pilotável por agentes. As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
+**Versão 1.3. Status: Estável.** Este documento define o que significa um repositório ser *conforme ao Deep Work Plan* — ou seja, AI-first e pilotável por agentes. As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
 
 A conformidade existe para que "AI-first" seja uma propriedade objetiva e verificável, e não uma impressão. Um repositório atende aos critérios abaixo ou não atende. A [sub-skill `verify`](/kit) (`/dwp-verify`) os verifica de forma mecânica.
 
@@ -38,6 +38,6 @@ Um Deep Work Plan em `.dwp/plans/` é bem formado quando:
 
 ## Verificando a conformidade
 
-A conformidade DEVERIA (SHOULD) ser verificada de forma mecânica, e não por inspeção. Executar `/dwp-verify` produz um relatório de aprovado/reprovado em relação aos critérios acima: a presença e o conteúdo real do `AGENTS.md`, a resolução do `CLAUDE.md`, as categorias de `docs/`, a correspondência catálogo-versus-disco de `.agents/`, o status de gitignore de `.dwp/` e `tmp/` e — para um plano — que cada tarefa carrega critérios de aceitação e um validation gate, com cobertura de testes para tarefas que alteram o comportamento e a revisão final registrada presente. O verificador é **consciente da versão**: DEVE (MUST) aceitar como conforme um plano legado (três tarefas finais obrigatórias, sem Superfície tocada), e DEVE (MUST) rejeitar um plano que declara esta versão e é objetivamente inválido sob ela. Ele também relata uma linha de proveniência `DWP standard:` ausente ou desatualizada como um achado que nomeia a atualização dirigida do harness.
+A conformidade DEVERIA (SHOULD) ser verificada de forma mecânica, e não por inspeção. Executar `/dwp-verify` produz um relatório de aprovado/reprovado em relação aos critérios acima: a presença e o conteúdo real do `AGENTS.md`, a resolução do `CLAUDE.md`, as categorias de `docs/`, a correspondência catálogo-versus-disco de `.agents/`, o status de gitignore de `.dwp/` e `tmp/` e — para um plano — que cada tarefa carrega critérios de aceitação e um validation gate, com cobertura de testes para tarefas que alteram o comportamento e a revisão final registrada presente. O verificador é **consciente da versão**: DEVE (MUST) aceitar como conforme um plano legado (três tarefas finais obrigatórias, sem Superfície tocada), e DEVE (MUST) rejeitar um plano que declara esta versão e é objetivamente inválido sob ela. Ele também relata uma linha de proveniência `DWP standard:` ausente ou desatualizada como um achado que nomeia a atualização dirigida do harness. A camada mecânica é **honesta sobre seus limites**: sem um intérprete capaz (Python 3.9+), encerra com saída diferente de zero e um veredito `UNVERIFIED` explícito, em vez de pular suas verificações — um verificador nunca reporta um resultado que não verificou.
 
 Um repositório DEVERIA (SHOULD) ser reverificado após o onboarding e após cada plano concluído, de modo que a conformidade seja mantida, e não afirmada uma única vez.

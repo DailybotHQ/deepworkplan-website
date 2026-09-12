@@ -8,7 +8,7 @@ section: Addons
 
 # Eklentiler
 
-**Sürüm 2.4.0.** Eklentiler, temel Deep Work Plan metodolojisine uzantılardır. Beşin dördü isteğe bağlıdır ve **uyumluluk için asla gerekli değildir** — sıfır isteğe bağlı eklentili bir depo tamamen AI-first ve DWP uyumludur. Her isteğe bağlı eklenti onboarding sırasında sunulur, açıkça kabul veya reddedilir ve — kabul edildiğinde — mevcut kurulumu ezmek yerine **uzlaştırır**. Bir bileşen beyan edilen istisnadır: 2.3.0 standardından itibaren **AI Diff Reviewer yerel incelemesi** gerekli temelin bir parçasıdır — onboarding onu kurar ve her Final Review onu çalıştırır — CI yüzeyi ise isteğe bağlı kalır.
+**Sürüm 4.0.0.** Eklentiler, temel Deep Work Plan metodolojisine uzantılardır. Beşin dördü isteğe bağlıdır ve **uyumluluk için asla gerekli değildir** — sıfır isteğe bağlı eklentili bir depo tamamen AI-first ve DWP uyumludur. Her isteğe bağlı eklenti onboarding sırasında sunulur, açıkça kabul veya reddedilir ve — kabul edildiğinde — mevcut kurulumu ezmek yerine **uzlaştırır**. Bir bileşen beyan edilen istisnadır: 2.3.0 standardından itibaren **AI Diff Reviewer yerel incelemesi** gerekli temelin bir parçasıdır — onboarding onu kurar ve her Final Review onu çalıştırır — CI yüzeyi ise isteğe bağlı kalır.
 
 ## Eklenti sözleşmesi
 

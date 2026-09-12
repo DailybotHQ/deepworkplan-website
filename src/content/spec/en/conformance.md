@@ -8,7 +8,7 @@ section: Conformance
 
 # Conformance
 
-**Version 1.2. Status: Stable.** This document defines what it means for a repository to be *Deep Work Plan-conformant* — that is, AI-first and agent-pilotable. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
+**Version 1.3. Status: Stable.** This document defines what it means for a repository to be *Deep Work Plan-conformant* — that is, AI-first and agent-pilotable. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
 Conformance exists so that "AI-first" is an objective, checkable property rather than an impression. A repository either meets the criteria below or it does not. The [`verify` sub-skill](/kit) (`/dwp-verify`) checks them mechanically.
 
@@ -38,6 +38,6 @@ A Deep Work Plan in `.dwp/plans/` is well-formed when:
 
 ## Verifying conformance
 
-Conformance SHOULD be verified mechanically rather than by inspection. Running `/dwp-verify` produces a pass/fail report against the criteria above: the presence and real-content of `AGENTS.md`, the `CLAUDE.md` resolution, the `docs/` categories, the `.agents/` catalog-versus-disk match, the `.dwp/` and `tmp/` gitignore status, and — for a plan — that every task carries acceptance criteria and a validation gate, with test coverage for behavior-changing tasks and the recorded final review present. The checker is **version-aware**: it MUST accept a legacy plan (three mandatory final tasks, no Touched Surface) as conformant, and MUST reject a plan that declares this version and is objectively invalid under it. It also reports a missing or stale `DWP standard:` provenance line as a finding that names the targeted harness upgrade.
+Conformance SHOULD be verified mechanically rather than by inspection. Running `/dwp-verify` produces a pass/fail report against the criteria above: the presence and real-content of `AGENTS.md`, the `CLAUDE.md` resolution, the `docs/` categories, the `.agents/` catalog-versus-disk match, the `.dwp/` and `tmp/` gitignore status, and — for a plan — that every task carries acceptance criteria and a validation gate, with test coverage for behavior-changing tasks and the recorded final review present. The checker is **version-aware**: it MUST accept a legacy plan (three mandatory final tasks, no Touched Surface) as conformant, and MUST reject a plan that declares this version and is objectively invalid under it. It also reports a missing or stale `DWP standard:` provenance line as a finding that names the targeted harness upgrade. The mechanical layer is **honest about its limits**: without a capable interpreter (Python 3.9+) it exits non-zero with an explicit `UNVERIFIED` verdict instead of skipping its checks — a checker never reports a result it did not verify.
 
 A repository SHOULD be re-verified after onboarding and after each completed plan, so that conformance is maintained rather than asserted once.

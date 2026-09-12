@@ -42,7 +42,7 @@ Agent mana pun yang membaca file repositori. Skill ini mengikuti standar Agent S
 
 ### Bagaimana cara menggunakannya?
 
-Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx skills add DailybotHQ/deepworkplan-skill` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.
+Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx skills add DailybotHQ/deepworkplan-skill` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif; `/dwp-upgrade` memindahkan skill yang terinstal ke rilis yang lebih baru tanpa menyentuh rencana yang ada. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.
 
 [Mulai Cepat](https://deepworkplan.com/id/quickstart)
 
@@ -114,11 +114,23 @@ Gerbang yang gagal lebih dulu adalah sinyal perbaikan: agent memperbaiki apa yan
 
 [Baca protokol agent](https://deepworkplan.com/id/spec/agent-protocol)
 
+### Apa yang terjadi ketika pemeriksa konformansi tidak dapat menjalankan pemeriksaannya?
+
+Ia mengatakannya dengan tegas. Pemeriksa berakhir dengan kode keluar 2 dan vonis `UNVERIFIED` eksplisit — ia tidak pernah mencetak kelulusan yang tidak benar-benar diverifikasinya. Ketika lingkungan kekurangan interpreter yang mampu atau sebuah pemeriksaan tidak bisa berjalan, hasil yang jujur adalah “belum diverifikasi”, bukan “sesuai”; hasil hijau selalu berarti setiap pemeriksaan berjalan dan lulus. Disiplin yang sama menjangkau seluruh metodologi: tidak ada alur yang melemahkan atau memalsukan gerbang untuk mengklaim penyelesaian.
+
+[Kontrak konformansi](https://deepworkplan.com/id/spec/conformance)
+
 ### Bisakah sebuah rencana berjalan tanpa pengawasan semalaman atau di CI?
 
 Bisa, ketika rencana sudah disetujui sebelumnya, membawa lapisan status yang diwajibkan, dan memberi agent otoritas terbatas. Eksekusi tanpa pengawasan wajib berhenti dan mencatat blocker ketika kenyataan menyimpang, sebuah gerbang gagal di luar cakupan perbaikan yang direncanakan, atau dibutuhkan persetujuan atau kredensial baru.
 
 [Baca protokol tanpa pengawasan](https://deepworkplan.com/id/spec/agent-protocol)
+
+### Bisakah satu rencana mencakup beberapa repositori?
+
+Bisa — arketipe hub orkestrator ada persis untuk itu. Repositori hub memegang rencana yang mengoordinasikan, dan setiap repositori anak menjalankan rencananya sendiri di dalam area `.dwp/` terisolasinya sendiri, sehingga anak tidak pernah menulis ke status rencana hub. Kelengkapan anak dibaca dari status tingkat atas dari rencananya sendiri, bukan dengan pencocokan string di dalamnya, dan hub mencatat posisinya sebelum menavigasi ke mana pun. Setiap anak tetap repositori DWP biasa yang juga bisa dipiloti sendirian.
+
+[Arketipe repositori](https://deepworkplan.com/id/spec/archetypes)
 
 ## Perbandingannya dengan alat lain
 
@@ -144,7 +156,13 @@ Mode rencana bawaan berguna, dan Deep Work Plan membangun di atas substrat yang 
 
 ### Apa yang ditulis onboarding ke repositori saya, dan apakah ia menyentuh file yang sudah ada?
 
-Onboarding bersifat non-destruktif: ia mendeteksi `AGENTS.md`, `docs/`, `.agents/`, atau `CLAUDE.md` yang sudah ada, merekonsiliasi alih-alih menimpa, dan bertanya sebelum mengganti apa pun. Ia menulis indeks `AGENTS.md` dengan command nyata, pohon `docs/` yang beralasan, dokumentasi per modul, kit `.agents/` dengan command `dwp-*` yang tipis, area keluaran `.dwp/` yang di-gitignore, peta pengujian yang terverifikasi, dan tinjauan kode lokal yang diwajibkan (skill AI Diff Reviewer plus ekstensi review yang disesuaikan repo). Ia kemudian menjalankan self-check dan pemeriksa konformansi agar Anda bisa melihat apa yang dihasilkan. Repositori yang di-onboard di bawah standar sebelumnya mendapat upgrade harness tertarget yang merekonsiliasi hanya apa yang kurang atau usang. Meng-upgrade skill itu sendiri adalah alur terpisah yang bergantung pada persetujuan eksplisit (`/dwp-upgrade`): ia memeriksa versi terbaru yang dipublikasikan secara read-only, menginstal hanya setelah Anda menerimanya secara eksplisit, menjalankan kembali onboarding sebagai satu proses segar, dan tidak pernah memigrasi atau membatalkan rencana yang ada di bawah `.dwp/`.
+Onboarding bersifat non-destruktif: ia mendeteksi `AGENTS.md`, `docs/`, `.agents/`, atau `CLAUDE.md` yang sudah ada, merekonsiliasi alih-alih menimpa, dan bertanya sebelum mengganti apa pun. Ia menulis indeks `AGENTS.md` dengan command nyata, pohon `docs/` yang beralasan, dokumentasi per modul, kit `.agents/` dengan command `dwp-*` yang tipis, area keluaran `.dwp/` yang di-gitignore, peta pengujian yang terverifikasi, dan tinjauan kode lokal yang diwajibkan (skill AI Diff Reviewer plus ekstensi review yang disesuaikan repo). Ia kemudian menjalankan self-check dan pemeriksa konformansi agar Anda bisa melihat apa yang dihasilkan. Repositori yang di-onboard di bawah standar sebelumnya mendapat upgrade harness tertarget yang merekonsiliasi hanya apa yang kurang atau usang.
+
+[Endpoint adopsi](https://deepworkplan.com/id/init)
+
+### Bagaimana saya meng-upgrade skill di repositori yang sudah di-onboard?
+
+Ada dua upgrade berbeda, dan alurnya menjaga keduanya tetap terpisah. Harness repositori — `AGENTS.md`, `docs/`, kit `.agents/` — direkonsiliasi dengan menjalankan kembali onboarding, yang hanya mengisi apa yang kurang atau usang. Skill itu sendiri bergerak lewat `/dwp-upgrade`: pemeriksaan read-only atas rilis terbaru yang dipublikasikan, instalasi tag persis yang Anda terima, terverifikasi, lalu onboarding kembali sebagai satu proses segar. Alur bergantung pada persetujuan eksplisit di setiap langkah, adaptasi lokal dibandingkan dan dipertahankan alih-alih ditimpa, dan `.dwp/` tidak pernah dimigrasi — rencana yang ada mempertahankan bentuk tercatatnya dan terus berjalan.
 
 [Endpoint adopsi](https://deepworkplan.com/id/init)
 
@@ -162,7 +180,7 @@ DWP tidak memperlakukan absennya toolchain sebagai jalan bebas. Selama onboardin
 
 ### Berapa biayanya, dan bagaimana efisiensi diukur?
 
-Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur, diukur oleh script yang di-commit bersama skill dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu; evaluasi publik yang praregistrasi direncanakan untuk mengukur hasilnya secara semestinya.
+Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur, diukur oleh script yang di-commit bersama skill, diukur ulang pada setiap baseline rilis dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu; evaluasi publik yang praregistrasi direncanakan untuk mengukur hasilnya secara semestinya.
 
 [Kepercayaan dan pengungkapan](https://deepworkplan.com/id/trust)
 

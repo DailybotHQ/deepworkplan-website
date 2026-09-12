@@ -8,7 +8,7 @@ section: Addons
 
 # Add-ons
 
-**Version 2.4.0.** Add-ons are extensions to the core Deep Work Plan methodology. Four of the five are optional and **never required for conformance** — a repository with zero optional addons is fully AI-first and DWP-conformant. Each optional addon is offered during onboarding, accepted or declined explicitly, and — when accepted — **reconciles** with existing setup instead of clobbering it. One component is the declared exception: since standard 2.3.0 the **AI Diff Reviewer local review** is part of the required baseline — onboarding installs it and every Final Review runs it — while its CI surface stays opt-in.
+**Version 4.0.0.** Add-ons are extensions to the core Deep Work Plan methodology. Four of the five are optional and **never required for conformance** — a repository with zero optional addons is fully AI-first and DWP-conformant. Each optional addon is offered during onboarding, accepted or declined explicitly, and — when accepted — **reconciles** with existing setup instead of clobbering it. One component is the declared exception: since standard 2.3.0 the **AI Diff Reviewer local review** is part of the required baseline — onboarding installs it and every Final Review runs it — while its CI surface stays opt-in.
 
 ## The addon contract
 

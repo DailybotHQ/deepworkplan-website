@@ -93,7 +93,7 @@ Contesto, strumenti, guardrail e stato vivono nel tuo repository come semplici f
 ## Cosa succede quando lo esegui
 
 1. **Il Suo agente apre [/init.md](/init.md)** — legge il prompt di onboarding e la metodologia, la spec e il kit a cui rimanda.
-2. **Installa la skill Deep Work Plan** — il motore, identico in ogni repository: il router più le sue sub-skill (create, execute, refine, resume, status, verify, onboard, author), per Claude Code, Cursor, Codex, Gemini e Copilot.
+2. **Installa la skill Deep Work Plan** — il motore, identico in ogni repository: il router più le sue sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade), per Claude Code, Cursor, Codex, Gemini e Copilot.
 3. **Adatta il Suo repository** — ragionando sul Suo stack reale (senza mai copiare e incollare), scrive AGENTS.md, `docs/`, README per modulo, un kit `.agents/` ragionato e una `.dwp/` esclusa da git. Il Suo repository diventa la harness.
 4. **Pianifica ed esegue** — Deep Work Plan a lungo termine, eseguiti passo dopo passo rispetto a criteri di accettazione e validation gate espliciti, in autonomia per ore.
 

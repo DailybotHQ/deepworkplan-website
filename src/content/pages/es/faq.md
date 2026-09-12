@@ -42,7 +42,7 @@ Con cualquier agente que lea archivos del repositorio. La skill sigue el estánd
 
 ### ¿Cómo lo uso?
 
-Tres pasos. Primero, instala la skill Deep Work Plan en tu agente de código — la vía más rápida es `npx skills add DailybotHQ/deepworkplan-skill` (o clona el repositorio de la skill y ejecuta `./setup.sh`). Segundo, incorpora el repositorio una vez para que el agente adapte `AGENTS.md`, `docs/`, el kit `.agents/` y un área `.dwp/` ignorada por git a tu stack: apúntalo a https://deepworkplan.com/init.md, o ejecuta `/deepworkplan-onboard`. Tercero, planifica y ejecuta el trabajo con los comandos ligeros: `/dwp-create <goal>` construye un plan; `/dwp-execute` lo ejecuta tarea por tarea frente a cada puerta; `/dwp-refine` edita un plan en curso (alcance, tareas, o promover un plan Lite a Full); `/dwp-resume` continúa tras una interrupción; `/dwp-status` informa del progreso sin ejecutar; `/dwp-verify` produce un informe objetivo de conformidad. Los agentes que interceptan `/` suelen usar `#` en su lugar (por ejemplo `#dwp-execute`). El endpoint de adopción y el inicio rápido recorren el mismo camino con más detalle.
+Tres pasos. Primero, instala la skill Deep Work Plan en tu agente de código — la vía más rápida es `npx skills add DailybotHQ/deepworkplan-skill` (o clona el repositorio de la skill y ejecuta `./setup.sh`). Segundo, incorpora el repositorio una vez para que el agente adapte `AGENTS.md`, `docs/`, el kit `.agents/` y un área `.dwp/` ignorada por git a tu stack: apúntalo a https://deepworkplan.com/init.md, o ejecuta `/deepworkplan-onboard`. Tercero, planifica y ejecuta el trabajo con los comandos ligeros: `/dwp-create <goal>` construye un plan; `/dwp-execute` lo ejecuta tarea por tarea frente a cada puerta; `/dwp-refine` edita un plan en curso (alcance, tareas, o promover un plan Lite a Full); `/dwp-resume` continúa tras una interrupción; `/dwp-status` informa del progreso sin ejecutar; `/dwp-verify` produce un informe objetivo de conformidad; `/dwp-upgrade` mueve una skill instalada a una versión más reciente sin tocar los planes existentes. Los agentes que interceptan `/` suelen usar `#` en su lugar (por ejemplo `#dwp-execute`). El endpoint de adopción y el inicio rápido recorren el mismo camino con más detalle.
 
 [Inicio rápido](https://deepworkplan.com/es/quickstart)
 
@@ -114,11 +114,23 @@ Una puerta fallida es primero una señal de reparación: el agente corrige lo qu
 
 [Leer el protocolo del agente](https://deepworkplan.com/es/spec/agent-protocol)
 
+### ¿Qué pasa cuando el comprobador de conformidad no puede ejecutar sus comprobaciones?
+
+Lo dice con todas las letras. El comprobador termina con código de salida 2 y un veredicto `UNVERIFIED` explícito — nunca imprime un aprobado que no haya verificado de verdad. Cuando al entorno le falta un intérprete capaz o una comprobación no puede ejecutarse, el resultado honesto es «no verificado», no «conforme»; un resultado en verde siempre significa que cada comprobación se ejecutó y pasó. La misma disciplina recorre toda la metodología: ningún flujo debilita ni falsifica una puerta para declarar completado el trabajo.
+
+[El contrato de conformidad](https://deepworkplan.com/es/spec/conformance)
+
 ### ¿Puede un plan ejecutarse sin supervisión durante la noche o en CI?
 
 Sí, siempre que el plan se haya aprobado de antemano, incluya la capa de estado necesaria y otorgue al agente una autoridad acotada. Una ejecución sin supervisión debe detenerse y registrar un bloqueo cuando la realidad diverge, falla una puerta fuera del alcance de reparación previsto o se necesita una aprobación o credencial nueva.
 
 [Leer el protocolo sin supervisión](https://deepworkplan.com/es/spec/agent-protocol)
+
+### ¿Un plan puede abarcar varios repositorios?
+
+Sí — el arquetipo de hub orquestador existe exactamente para eso. Un repositorio hub mantiene el plan que coordina y cada repositorio hijo ejecuta su propio plan dentro de su propia área `.dwp/` aislada, de modo que un hijo nunca escribe en el estado de planes del hub. La completitud del hijo se lee del estado de nivel superior del propio plan de cada uno, no buscando cadenas dentro de él, y el hub registra dónde está antes de navegar a ninguna parte. Cada hijo sigue siendo un repositorio DWP ordinario que también puede pilotarse por sí solo.
+
+[Arquetipos de repositorio](https://deepworkplan.com/es/spec/archetypes)
 
 ## Cómo se compara
 
@@ -144,7 +156,13 @@ Los modos de planificación integrados son útiles y Deep Work Plan se construye
 
 ### ¿Qué escribe la incorporación en mi repositorio y toca algún archivo existente?
 
-La incorporación no es destructiva: detecta un `AGENTS.md`, `docs/`, `.agents/` o `CLAUDE.md` existente, reconcilia en lugar de sobrescribir y pregunta antes de reemplazar cualquier cosa. Escribe el índice `AGENTS.md` con comandos reales, un árbol `docs/` razonado, documentación por módulo, el kit `.agents/` con comandos ligeros `dwp-*`, un área de salida `.dwp/` ignorada por git, un mapa de pruebas verificado y la revisión local de código obligatoria (la skill AI Diff Reviewer más una extensión de revisión adaptada al repositorio). Luego ejecuta una autocomprobación y el comprobador de conformidad para que veas lo que se produjo. Un repositorio incorporado bajo un estándar anterior recibe una actualización dirigida del harness que reconcilia solo lo que falta o está desactualizado. Actualizar la skill en sí es un flujo separado y sujeto a consentimiento explícito (`/dwp-upgrade`): comprueba la última versión publicada sin escribir nada, instala solo tras tu aceptación explícita, reejecuta la incorporación como una pasada fresca y nunca migra ni invalida los planes existentes bajo `.dwp/`.
+La incorporación no es destructiva: detecta un `AGENTS.md`, `docs/`, `.agents/` o `CLAUDE.md` existente, reconcilia en lugar de sobrescribir y pregunta antes de reemplazar cualquier cosa. Escribe el índice `AGENTS.md` con comandos reales, un árbol `docs/` razonado, documentación por módulo, el kit `.agents/` con comandos ligeros `dwp-*`, un área de salida `.dwp/` ignorada por git, un mapa de pruebas verificado y la revisión local de código obligatoria (la skill AI Diff Reviewer más una extensión de revisión adaptada al repositorio). Luego ejecuta una autocomprobación y el comprobador de conformidad para que veas lo que se produjo. Un repositorio incorporado bajo un estándar anterior recibe una actualización dirigida del harness que reconcilia solo lo que falta o está desactualizado.
+
+[El endpoint de adopción](https://deepworkplan.com/es/init)
+
+### ¿Cómo actualizo la skill en un repositorio ya incorporado?
+
+Hay dos actualizaciones distintas y el flujo las mantiene separadas. El harness del repositorio — `AGENTS.md`, `docs/`, el kit `.agents/` — se reconcilia reejecutando la incorporación, que rellena solo lo que falta o está desactualizado. La skill en sí avanza con `/dwp-upgrade`: una comprobación de solo lectura de la última versión publicada, la instalación del tag exacto que aceptaste, verificada, y después la incorporación de nuevo como una pasada fresca. El flujo está sujeto a consentimiento explícito en todo momento, las adaptaciones locales se comparan y se preservan en lugar de sobrescribirse, y `.dwp/` nunca se migra — los planes existentes conservan su forma registrada y siguen ejecutándose.
 
 [El endpoint de adopción](https://deepworkplan.com/es/init)
 
@@ -162,7 +180,7 @@ DWP no considera que la ausencia de herramientas sea un pase libre. Durante la i
 
 ### ¿Cuánto cuesta y cómo se mide la eficiencia?
 
-La metodología y la skill tienen licencia MIT y son gratuitas; no hay servicio, clave de API ni telemetría en los flujos centrales. La eficiencia se reporta como el número de bytes de instrucción que carga cada flujo, medido por un script versionado junto con la skill y publicado en un registro de evaluación, con los aumentos reportados con la misma claridad que las disminuciones. No se reporta como porcentajes de tokens ni ahorros de costo, porque un inventario de bytes no establece eso; está planificada una evaluación pública preregistrada para medir los resultados como corresponde.
+La metodología y la skill tienen licencia MIT y son gratuitas; no hay servicio, clave de API ni telemetría en los flujos centrales. La eficiencia se reporta como el número de bytes de instrucción que carga cada flujo, medido por un script versionado junto con la skill, vuelto a medir en cada línea base de publicación y publicado en un registro de evaluación, con los aumentos reportados con la misma claridad que las disminuciones. No se reporta como porcentajes de tokens ni ahorros de costo, porque un inventario de bytes no establece eso; está planificada una evaluación pública preregistrada para medir los resultados como corresponde.
 
 [Confianza y divulgación](https://deepworkplan.com/es/trust)
 

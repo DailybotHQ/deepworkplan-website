@@ -93,7 +93,7 @@ Deep Work Plan отвечает spec-driven development: прочный план
 ## Что происходит при запуске
 
 1. **Ваш агент открывает [/init.md](/init.md)** — он читает промпт онбординга, а также методологию, спецификацию и набор, на которые тот ссылается.
-2. **Он устанавливает навык Deep Work Plan** — движок, одинаковый в каждом репозитории: маршрутизатор плюс его под-навыки (create, execute, refine, resume, status, verify, onboard, author) для Claude Code, Cursor, Codex, Gemini и Copilot.
+2. **Он устанавливает навык Deep Work Plan** — движок, одинаковый в каждом репозитории: маршрутизатор плюс его под-навыки (create, execute, refine, resume, status, verify, onboard, author, upgrade) для Claude Code, Cursor, Codex, Gemini и Copilot.
 3. **Он адаптирует ваш репозиторий** — рассуждая о вашем реальном стеке (никогда не копируя), он пишет AGENTS.md, `docs/`, README по модулям, осмысленный набор `.agents/` и игнорируемую git-ом `.dwp/`. Ваш репозиторий становится harness.
 4. **Вы планируете и выполняете** — долгосрочные Deep Work Plan, выполняемые шаг за шагом по явным критериям приёмки и validation gates, автономно на протяжении часов.
 

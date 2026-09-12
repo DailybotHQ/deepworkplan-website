@@ -1,6 +1,6 @@
 ---
 title: "Bộ kit Deep Work Plan"
-description: "Skill và tám sub-skill của nó, các command, bộ chuyển đổi agent, preset khởi tạo, các addon tự nguyện và ví dụ giúp Deep Work Plan chạy được ở mọi nơi."
+description: "Skill và chín sub-skill của nó, các command, bộ chuyển đổi agent, preset khởi tạo, các addon tự nguyện và ví dụ giúp Deep Work Plan chạy được ở mọi nơi."
 lastUpdated: 2026-05-31
 ---
 
@@ -15,7 +15,7 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ### Skill và các sub-skill của nó
 
-Skill Deep Work Plan là một bộ định tuyến cùng tám sub-skill:
+Skill Deep Work Plan là một bộ định tuyến cùng chín sub-skill:
 
 - **create** — phân rã một mục tiêu thành một kế hoạch có cấu trúc (`/dwp-create`).
 - **execute** — chạy một kế hoạch từng tác vụ một, kiểm chứng mỗi cổng (`/dwp-execute`).
@@ -25,6 +25,7 @@ Skill Deep Work Plan là một bộ định tuyến cùng tám sub-skill:
 - **verify** — kiểm tra một cách khách quan sự tuân thủ của repository và kế hoạch (`/dwp-verify`).
 - **onboard** — biến một repository thành AI-first (`/deepworkplan-onboard`).
 - **author** — tạo hoặc phát triển skill, agent và command của riêng repo (`/skill-create`, `/agent-create`).
+- **upgrade** — đưa skill đã cài sang bản phát hành mới hơn một cách an toàn (`/dwp-upgrade`).
 
 ### Command
 

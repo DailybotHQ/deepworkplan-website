@@ -13,8 +13,8 @@ repository của bạn thành dựa trên đặc tả và điều khiển đư�
 
 ### 1. Cài skill Deep Work Plan
 
-Thêm skill vào repository của bạn. Nó đi kèm một bộ định tuyến cùng tám sub-skill — create, execute, refine,
-resume, status, verify, onboard và author. Dùng Skills CLI cho con đường nhanh nhất:
+Thêm skill vào repository của bạn. Nó đi kèm một bộ định tuyến cùng chín sub-skill — create, execute, refine,
+resume, status, verify, onboard, author và upgrade. Dùng Skills CLI cho con đường nhanh nhất:
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

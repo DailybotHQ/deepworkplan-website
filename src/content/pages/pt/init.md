@@ -94,7 +94,7 @@ confiável até que tenha sido verificado.
 > **O caminho curto.** A skill traz o seu próprio onboarding, portanto instalá-la é suficiente. Depois de instalada, execute `/deepworkplan-onboard` e ela fará tudo o que as seções 3–7 descrevem: reconhecimento, `AGENTS.md`, `docs/`, documentação por módulo, `.agents/`, a revisão local obrigatória, os addons opcionais e a autoverificação final. Continue lendo para saber o que essa sub-skill fará — e para o caminho alternativo quando um agente não consegue carregar skills.
 
 Instale a skill para que os agentes deste repositório possam planejar e executar trabalho estruturado. Ela traz um roteador
-mais oito sub-skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard` e `author`.
+mais nove sub-skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` e `upgrade`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -195,11 +195,11 @@ a validação do estado final e a reconciliação das decisões de skills. O Exe
 ## 7. Verifique
 
 Execute `/dwp-verify` para obter um relatório objetivo de conformidade aprovado/reprovado (ou
-`bash {skill_dir}/verify/conformance.sh` para a camada mecânica compatível com CI que sai com `0`/`1`).
+`bash {skill_dir}/verify/conformance.sh` para a camada mecânica compatível com CI que sai com `0`/`1`, e `2` com um veredito `UNVERIFIED` explícito quando não consegue executar as suas verificações — nunca reporta uma aprovação que não verificou).
 Ele verifica os critérios no [documento de Conformidade da especificação](https://deepworkplan.com/spec).
 Então confirme:
 
-- [ ] A skill está instalada e resolvível, com todas as oito sub-skills disponíveis.
+- [ ] A skill está instalada e resolvível, com todas as nove sub-skills disponíveis.
 - [ ] O `AGENTS.md` existe na raiz com um bloco Quick Commands real; o `CLAUDE.md` resolve para ele.
 - [ ] O `docs/` contém as categorias padrão com conteúdo real e específico do repositório; `docs/TESTING_GUIDE.md`
       descreve uma configuração real de teste/lint (nem vazio nem stub); os módulos principais têm um `README.md`.

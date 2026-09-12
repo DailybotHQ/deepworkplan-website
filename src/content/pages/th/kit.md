@@ -1,6 +1,6 @@
 ---
 title: "Kit ของ Deep Work Plan"
-description: "skill และ sub-skill แปดตัว คำสั่ง adapter สำหรับเอเจนต์ preset สำหรับการออนบอร์ด ส่วนเสริมแบบเลือกเข้าร่วม และตัวอย่างที่ทำให้ Deep Work Plan รันได้ทุกที่"
+description: "skill และ sub-skill เก้าตัว คำสั่ง adapter สำหรับเอเจนต์ preset สำหรับการออนบอร์ด ส่วนเสริมแบบเลือกเข้าร่วม และตัวอย่างที่ทำให้ Deep Work Plan รันได้ทุกที่"
 lastUpdated: 2026-05-31
 ---
 
@@ -15,7 +15,7 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ### skill และ sub-skill ของมัน
 
-skill ของ Deep Work Plan คือตัวกำหนดเส้นทางพร้อม sub-skill แปดตัว
+skill ของ Deep Work Plan คือตัวกำหนดเส้นทางพร้อม sub-skill เก้าตัว
 
 - **create** — แยกย่อยเป้าหมายเป็นแผนที่มีโครงสร้าง (`/dwp-create`)
 - **execute** — ดำเนินแผนทีละงาน ตรวจสอบแต่ละ gate (`/dwp-execute`)
@@ -25,6 +25,7 @@ skill ของ Deep Work Plan คือตัวกำหนดเส้นท�
 - **verify** — ตรวจสอบความสอดคล้องของ repository และแผนอย่างเป็นวัตถุวิสัย (`/dwp-verify`)
 - **onboard** — ทำให้ repository เป็น AI-first (`/deepworkplan-onboard`)
 - **author** — สร้างหรือพัฒนา skill, agent และคำสั่งของ repo เอง (`/skill-create`, `/agent-create`)
+- **upgrade** — พาสกิลที่ติดตั้งไว้ไปสู่รีลีสใหม่อย่างปลอดภัย (`/dwp-upgrade`)
 
 ### คำสั่ง
 

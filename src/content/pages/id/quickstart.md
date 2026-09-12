@@ -13,8 +13,8 @@ repositori Anda spec-driven dan dapat dikemudikan agent.
 
 ### 1. Pasang skill Deep Work Plan
 
-Tambahkan skill ke repositori Anda. Ia membawa sebuah router ditambah delapan sub-skill — create, execute, refine,
-resume, status, verify, onboard, dan author. Gunakan Skills CLI untuk jalur tercepat:
+Tambahkan skill ke repositori Anda. Ia membawa sebuah router ditambah sembilan sub-skill — create, execute, refine,
+resume, status, verify, onboard, author, dan upgrade. Gunakan Skills CLI untuk jalur tercepat:
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

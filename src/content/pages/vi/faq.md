@@ -42,7 +42,7 @@ Bất kỳ agent nào đọc được các tệp của repository. Skill tuân t
 
 ### Tôi dùng nó như thế nào?
 
-Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx skills add DailybotHQ/deepworkplan-skill` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.
+Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx skills add DailybotHQ/deepworkplan-skill` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan; `/dwp-upgrade` chuyển một skill đã cài sang bản phát hành mới hơn mà không đụng đến các kế hoạch hiện có. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.
 
 [Khởi động nhanh](https://deepworkplan.com/vi/quickstart)
 
@@ -114,11 +114,23 @@ Một cổng thất bại trước hết là tín hiệu sửa chữa: agent kh�
 
 [Đọc giao thức agent](https://deepworkplan.com/vi/spec/agent-protocol)
 
+### Điều gì xảy ra khi công cụ kiểm tra tính tuân thủ không thể chạy các kiểm tra của nó?
+
+Nó nói rõ điều đó. Công cụ kết thúc với mã thoát 2 và một phán quyết `UNVERIFIED` tường minh — nó không bao giờ in ra một kết quả đạt mà nó không thực sự kiểm chứng. Khi môi trường thiếu một trình thông dịch đủ khả năng hoặc một kiểm tra không chạy được, kết quả trung thực là “chưa kiểm chứng”, không phải “tuân thủ”; kết quả xanh luôn có nghĩa là mọi kiểm tra đã chạy và đã đạt. Kỷ luật ấy xuyên suốt toàn bộ phương pháp luận: không luồng nào làm suy yếu hay giả mạo một cổng để tuyên bố hoàn thành.
+
+[Hợp đồng tuân thủ](https://deepworkplan.com/vi/spec/conformance)
+
 ### Một kế hoạch có thể chạy không giám sát qua đêm hoặc trong CI không?
 
 Có, khi kế hoạch đã được phê duyệt từ trước, mang tầng trạng thái bắt buộc và trao cho agent thẩm quyền có giới hạn. Một lượt chạy không giám sát phải dừng lại và ghi nhận một điểm chặn khi thực tế lệch khỏi kế hoạch, một cổng kiểm chứng thất bại ngoài phạm vi sửa chữa đã định, hoặc cần một phê duyệt hay thông tin xác thực mới.
 
 [Đọc giao thức chạy không giám sát](https://deepworkplan.com/vi/spec/agent-protocol)
+
+### Một kế hoạch có thể trải rộng trên nhiều repository không?
+
+Có — kiểu hub điều phối tồn tại chính xác cho việc đó. Một repository hub giữ kế hoạch điều phối, và mỗi repository con chạy kế hoạch riêng của mình bên trong vùng làm việc `.dwp/` biệt lập của nó, nên con không bao giờ ghi vào trạng thái kế hoạch của hub. Mức hoàn tất của con được đọc từ trạng thái tầng trên cùng của chính kế hoạch đó, chứ không phải soi chuỗi bên trong nó, và hub ghi lại vị trí của mình trước khi đi bất cứ đâu. Mỗi con vẫn là một repository DWP thông thường, có thể tự pilot một mình.
+
+[Các kiểu repository](https://deepworkplan.com/vi/spec/archetypes)
 
 ## So sánh với các công cụ khác
 
@@ -144,7 +156,13 @@ Các chế độ lập kế hoạch có sẵn rất hữu ích, và Deep Work Pl
 
 ### Onboarding ghi gì vào repository của tôi, và nó có chạm các tệp hiện có không?
 
-Onboarding không phá hủy gì: nó phát hiện `AGENTS.md`, `docs/`, `.agents/` hay `CLAUDE.md` sẵn có, hòa giải thay vì ghi đè, và hỏi trước khi thay thế bất cứ thứ gì. Nó ghi chỉ mục `AGENTS.md` với các lệnh thật, một cây `docs/` có lý lẽ, tài liệu cho từng mô-đun, bộ kit `.agents/` với các lệnh `dwp-*` mỏng, một vùng xuất `.dwp/` được gitignore, một bản đồ kiểm thử đã xác minh, và phần review mã cục bộ bắt buộc (skill AI Diff Reviewer cùng một tiện ích mở rộng review được điều chỉnh theo repo). Sau đó nó chạy tự kiểm tra và công cụ kiểm tra tính tuân thủ để bạn thấy cái gì đã được tạo. Một repository đã onboard ở một tiêu chuẩn sớm hơn sẽ nhận một bản nâng cấp harness có mục tiêu, chỉ hòa giải phần còn thiếu hoặc đã lỗi thời. Nâng cấp chính skill là một luồng riêng biệt, chỉ chạy khi được đồng ý rõ ràng (`/dwp-upgrade`): nó kiểm tra phiên bản mới nhất đã xuất bản ở chế độ chỉ đọc, chỉ cài đặt sau khi bạn chấp nhận rõ ràng, chạy lại onboarding như một lượt thực thi mới, và không bao giờ di chuyển hay vô hiệu hóa các kế hoạch hiện có dưới `.dwp/`.
+Onboarding không phá hủy gì: nó phát hiện `AGENTS.md`, `docs/`, `.agents/` hay `CLAUDE.md` sẵn có, hòa giải thay vì ghi đè, và hỏi trước khi thay thế bất cứ thứ gì. Nó ghi chỉ mục `AGENTS.md` với các lệnh thật, một cây `docs/` có lý lẽ, tài liệu cho từng mô-đun, bộ kit `.agents/` với các lệnh `dwp-*` mỏng, một vùng xuất `.dwp/` được gitignore, một bản đồ kiểm thử đã xác minh, và phần review mã cục bộ bắt buộc (skill AI Diff Reviewer cùng một tiện ích mở rộng review được điều chỉnh theo repo). Sau đó nó chạy tự kiểm tra và công cụ kiểm tra tính tuân thủ để bạn thấy cái gì đã được tạo. Một repository đã onboard ở một tiêu chuẩn sớm hơn sẽ nhận một bản nâng cấp harness có mục tiêu, chỉ hòa giải phần còn thiếu hoặc đã lỗi thời.
+
+[Điểm cuối áp dụng](https://deepworkplan.com/vi/init)
+
+### Làm thế nào để nâng cấp skill trong một repository đã onboard?
+
+Ở đây có hai loại nâng cấp khác nhau, và luồng giữ chúng tách biệt. Harness của repository — `AGENTS.md`, `docs/`, bộ kit `.agents/` — được hòa giải bằng cách chạy lại onboarding, vốn chỉ lấp phần còn thiếu hoặc đã lỗi thời. Bản thân skill đi tới bằng `/dwp-upgrade`: kiểm tra chỉ-đọc bản phát hành mới nhất, cài đặt đúng tag bạn đã chấp nhận, có xác minh, rồi onboarding lại như một lượt thực thi mới. Toàn luồng đều cần đồng ý rõ ràng, các thích nghi cục bộ được so sánh và giữ lại thay vì bị ghi đè, và `.dwp/` không bao giờ bị di chuyển — các kế hoạch hiện có giữ nguyên hình thái được ghi lại và tiếp tục chạy.
 
 [Điểm cuối áp dụng](https://deepworkplan.com/vi/init)
 
@@ -162,7 +180,7 @@ DWP không coi việc thiếu một toolchain là một lối thoát miễn tr�
 
 ### Chi phí là bao nhiêu, và hiệu suất được đo thế nào?
 
-Phương pháp luận và skill cấp phép MIT và miễn phí; không có dịch vụ, không có API key và không có telemetry trong các luồng lõi. Hiệu suất được báo cáo bằng số byte hướng dẫn mà mỗi luồng tải, đo bằng một script được commit cùng skill và công bố trong một sổ cái đánh giá, với mức tăng được báo cáo thẳng thắn như mức giảm. Nó không được báo cáo dưới dạng phần trăm token hay khoản tiết kiệm chi phí, vì một bản kê byte không chứng minh được những điều đó; một đợt đánh giá công khai đăng ký trước đang được lên kế hoạch để đo kết quả một cách đúng đắn.
+Phương pháp luận và skill cấp phép MIT và miễn phí; không có dịch vụ, không có API key và không có telemetry trong các luồng lõi. Hiệu suất được báo cáo bằng số byte hướng dẫn mà mỗi luồng tải, đo bằng một script được commit cùng skill, đo lại ở mỗi đường cơ sở phát hành và công bố trong một sổ cái đánh giá, với mức tăng được báo cáo thẳng thắn như mức giảm. Nó không được báo cáo dưới dạng phần trăm token hay khoản tiết kiệm chi phí, vì một bản kê byte không chứng minh được những điều đó; một đợt đánh giá công khai đăng ký trước đang được lên kế hoạch để đo kết quả một cách đúng đắn.
 
 [Tin tưởng và công bố](https://deepworkplan.com/vi/trust)
 

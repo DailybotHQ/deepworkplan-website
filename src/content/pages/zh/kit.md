@@ -1,6 +1,6 @@
 ---
 title: "Deep Work Plan 套件"
-description: "让 Deep Work Plan 可在任何地方运行的技能及其八个子技能、命令、代理适配器、接入预设、可选附加组件与示例。"
+description: "让 Deep Work Plan 可在任何地方运行的技能及其九个子技能、命令、代理适配器、接入预设、可选附加组件与示例。"
 lastUpdated: 2026-05-31
 ---
 
@@ -15,7 +15,7 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ### 技能及其各子技能
 
-Deep Work Plan 技能是一个路由器外加八个子技能：
+Deep Work Plan 技能是一个路由器外加九个子技能：
 
 - **create** —— 把一个目标分解为一份结构化的计划（`/dwp-create`）。
 - **execute** —— 逐任务运行一份计划，验证每一道关卡（`/dwp-execute`）。
@@ -25,6 +25,7 @@ Deep Work Plan 技能是一个路由器外加八个子技能：
 - **verify** —— 客观地核查仓库与计划的符合性（`/dwp-verify`）。
 - **onboard** —— 让一个仓库 AI-first（`/deepworkplan-onboard`）。
 - **author** —— 创建或演化仓库自己的技能、代理与命令（`/skill-create`、`/agent-create`）。
+- **upgrade** —— 将已安装的技能安全地升级到新版本（`/dwp-upgrade`）。
 
 ### 命令
 

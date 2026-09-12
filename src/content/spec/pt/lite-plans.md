@@ -8,7 +8,7 @@ section: Workflow
 
 # Planos Lite
 
-**Versão 2.4.0. Status: Estável.** Este documento especifica a representação de plano Lite introduzida junto com a [Especificação do DWP](/spec/dwp-specification): um formato de plano para trabalho pequeno a médio e delimitado que é materializado diretamente, sem uma etapa de rascunho não executável. As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
+**Versão 4.0.0. Status: Estável.** Este documento especifica a representação de plano Lite introduzida junto com a [Especificação do DWP](/spec/dwp-specification): um formato de plano para trabalho pequeno a médio e delimitado que é materializado diretamente, sem uma etapa de rascunho não executável. As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
 
 ## Representação e ciclo de vida
 

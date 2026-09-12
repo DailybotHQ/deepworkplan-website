@@ -8,7 +8,7 @@ section: Conformance
 
 # Conformance
 
-**Versi 1.2. Status: Stabil.** Dokumen ini mendefinisikan apa artinya sebuah repositori menjadi *konforman terhadap Deep Work Plan* — yaitu, AI-first dan dapat dikemudikan agent. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
+**Versi 1.3. Status: Stabil.** Dokumen ini mendefinisikan apa artinya sebuah repositori menjadi *konforman terhadap Deep Work Plan* — yaitu, AI-first dan dapat dikemudikan agent. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
 Konformansi ada agar "AI-first" menjadi properti yang objektif dan dapat diperiksa, bukan sekadar kesan. Sebuah repositori entah memenuhi kriteria di bawah atau tidak. [Sub-skill `verify`](/kit) (`/dwp-verify`) memeriksanya secara mekanis.
 
@@ -38,6 +38,6 @@ Sebuah Deep Work Plan di `.dwp/plans/` terbentuk baik ketika:
 
 ## Memverifikasi konformansi
 
-Konformansi SHOULD diverifikasi secara mekanis ketimbang dengan inspeksi. Menjalankan `/dwp-verify` menghasilkan laporan lulus/gagal terhadap kriteria di atas: keberadaan dan kenyataan-konten `AGENTS.md`, resolusi `CLAUDE.md`, kategori-kategori `docs/`, kecocokan katalog-versus-disk `.agents/`, status gitignore `.dwp/` dan `tmp/`, dan — untuk sebuah rencana — bahwa setiap tugas membawa acceptance criteria dan sebuah validation gate, dengan cakupan test untuk tugas yang mengubah perilaku dan tinjauan akhir yang tercatat hadir. Pemeriksanya bersifat **sadar-versi**: ia MUST menerima rencana lama (tiga tugas akhir wajib, tanpa Touched Surface) sebagai konforman, dan MUST menolak rencana yang menyatakan versi ini namun secara objektif tidak valid di bawahnya. Ia juga melaporkan baris provenans `DWP standard:` yang hilang atau usang sebagai temuan yang menyebutkan upgrade harness tertarget.
+Konformansi SHOULD diverifikasi secara mekanis ketimbang dengan inspeksi. Menjalankan `/dwp-verify` menghasilkan laporan lulus/gagal terhadap kriteria di atas: keberadaan dan kenyataan-konten `AGENTS.md`, resolusi `CLAUDE.md`, kategori-kategori `docs/`, kecocokan katalog-versus-disk `.agents/`, status gitignore `.dwp/` dan `tmp/`, dan — untuk sebuah rencana — bahwa setiap tugas membawa acceptance criteria dan sebuah validation gate, dengan cakupan test untuk tugas yang mengubah perilaku dan tinjauan akhir yang tercatat hadir. Pemeriksanya bersifat **sadar-versi**: ia MUST menerima rencana lama (tiga tugas akhir wajib, tanpa Touched Surface) sebagai konforman, dan MUST menolak rencana yang menyatakan versi ini namun secara objektif tidak valid di bawahnya. Ia juga melaporkan baris provenans `DWP standard:` yang hilang atau usang sebagai temuan yang menyebutkan upgrade harness tertarget. Lapisan mekanis **jujur tentang batasnya**: tanpa interpreter yang mampu (Python 3.9+), ia berakhir dengan keluaran bukan nol dan vonis `UNVERIFIED` eksplisit alih-alih melewati pemeriksaannya — sebuah pemeriksa tidak pernah melaporkan hasil yang tidak ia verifikasi.
 
 Sebuah repositori SHOULD diverifikasi ulang setelah onboarding dan setelah setiap rencana yang selesai, sehingga konformansi dipelihara ketimbang ditegaskan sekali saja.

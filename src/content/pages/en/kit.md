@@ -1,6 +1,6 @@
 ---
 title: "The Deep Work Plan Kit"
-description: "The skill and its eight sub-skills, commands, agent adapters, onboarding presets, opt-in add-ons, and examples that make Deep Work Plan runnable anywhere."
+description: "The skill and its nine sub-skills, commands, agent adapters, onboarding presets, opt-in add-ons, and examples that make Deep Work Plan runnable anywhere."
 lastUpdated: 2026-07-16
 ---
 
@@ -15,7 +15,7 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ### The skill and its sub-skills
 
-The Deep Work Plan skill is a router plus eight sub-skills:
+The Deep Work Plan skill is a router plus nine sub-skills:
 
 - **create** — decompose a goal into a structured plan (`/dwp-create`).
 - **execute** — run a plan task by task, validating each gate (`/dwp-execute`).
@@ -25,6 +25,7 @@ The Deep Work Plan skill is a router plus eight sub-skills:
 - **verify** — objectively check repository and plan conformance (`/dwp-verify`).
 - **onboard** — make a repository AI-first (`/deepworkplan-onboard`).
 - **author** — create or evolve the repo's own skills, agents, and commands (`/skill-create`, `/agent-create`).
+- **upgrade** — safely move an installed skill to a newer release (`/dwp-upgrade`).
 
 ### Commands
 

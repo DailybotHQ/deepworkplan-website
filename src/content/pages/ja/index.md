@@ -93,7 +93,7 @@ Deep Work Planは仕様駆動開発で応えます。永続する計画、原子
 ## 実行したときに起こること
 
 1. **エージェントが [/init.md](/init.md) を開く** — オンボーディングプロンプトと、そこからリンクされた方法論、仕様、キットを読む。
-2. **Deep Work Plan スキルをインストールする** — どのリポジトリでも同一のエンジン。ルーターとそのサブスキル（create、execute、refine、resume、status、verify、onboard、author）を、Claude Code、Cursor、Codex、Gemini、Copilot 向けに。
+2. **Deep Work Plan スキルをインストールする** — どのリポジトリでも同一のエンジン。ルーターとそのサブスキル（create、execute、refine、resume、status、verify、onboard、author、upgrade）を、Claude Code、Cursor、Codex、Gemini、Copilot 向けに。
 3. **リポジトリを適応させる** — 実際のスタックを推論し（コピー＆ペーストではなく)、AGENTS.md、`docs/`、モジュールごとの README、推論にもとづく `.agents/` キット、そして gitignore された `.dwp/` を書く。リポジトリ自体がハーネスになる。
 4. **計画して実行する** — 長期にわたる Deep Work Plan を、明示的な受け入れ基準と検証ゲートに照らしてステップごとに、何時間も自律的に実行する。
 

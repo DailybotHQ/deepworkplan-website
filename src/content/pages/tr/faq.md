@@ -42,7 +42,7 @@ Depo dosyalarını okuyan herhangi bir ajan. Skill, açık Agent Skills standard
 
 ### Nasıl kullanılır?
 
-Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx skills add DailybotHQ/deepworkplan-skill` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.
+Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx skills add DailybotHQ/deepworkplan-skill` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir; `/dwp-upgrade` yüklü bir skill’i var olan planlara dokunmadan daha yeni bir sürüme taşır. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.
 
 [Hızlı başlangıç](https://deepworkplan.com/tr/quickstart)
 
@@ -114,11 +114,23 @@ Başarısız bir kapı öncelikle bir onarım sinyalidir: ajan, görevin kendi k
 
 [Ajan protokolünü okuyun](https://deepworkplan.com/tr/spec/agent-protocol)
 
+### Uyumluluk denetleyicisi kontrollerini çalıştıramadığında ne olur?
+
+Bunu açıkça söyler. Denetleyici, 2 çıkış kodu ve açık bir `UNVERIFIED` kararıyla sonlanır — gerçekte doğrulamadığı bir geçiş raporu asla yazdırmaz. Ortamda yetenekli bir yorumlayıcı yoksa veya bir kontrol çalışamıyorsa, dürüst sonuç “uyumlu” değil “doğrulanmamış”tır; yeşil bir sonuç her zaman her kontrolün çalıştığı ve geçtiği anlamına gelir. Aynı disiplin metodolojinin tamamına yayılır: hiçbir akış, işi tamamlanmış ilan etmek için bir kapıyı zayıflatmaz veya sahteleştirmez.
+
+[Uyumluluk sözleşmesi](https://deepworkplan.com/tr/spec/conformance)
+
 ### Bir plan gece boyunca veya CI içinde gözetimsiz çalışabilir mi?
 
 Evet, plan önceden onaylanmışsa, gerekli durum katmanını taşıyorsa ve ajana sınırlı bir yetki veriyorsa. Gözetimsiz bir çalıştırma; gerçeklik saptığında, bir kapı planlanan onarım kapsamının dışında başarısız olduğunda veya yeni bir onay ya da kimlik bilgisi gerektiğinde durmalı ve bir engel kaydetmelidir.
 
 [Gözetimsiz protokolü okuyun](https://deepworkplan.com/tr/spec/agent-protocol)
+
+### Tek bir plan birden fazla repoya yayılabilir mi?
+
+Evet — orkestratör hub arketipi tam olarak bunun için vardır. Bir hub repo koordine eden planı tutar ve her alt repo kendi planını kendi izole `.dwp/` çalışma alanında yürütür; böylece bir alt repo asla hub’ın plan durumuna yazmaz. Alt repoların tamamlanmışlığı her planın kendi en üst düzey durumundan okunur, içeride dizgi araması yapılmaz ve hub herhangi bir yere geçmeden önce nerede olduğunu kaydeder. Her alt repo, tek başına da pilotlanabilen sıradan bir DWP repo olarak kalır.
+
+[Repo arketipleri](https://deepworkplan.com/tr/spec/archetypes)
 
 ## Diğerleriyle karşılaştırma
 
@@ -144,7 +156,13 @@ Yerleşik plan modları kullanışlıdır ve Deep Work Plan aynı alt yapı üze
 
 ### Kuruluma alma repoma ne yazar ve mevcut dosyalara dokunur mu?
 
-Kuruluma alma yıkıcı değildir: mevcut `AGENTS.md`, `docs/`, `.agents/` veya `CLAUDE.md` dosyasını algılar, üzerine yazmak yerine uzlaştırır ve bir şeyi değiştirmeden önce sorar. Gerçek komutlarla `AGENTS.md` dizini, akıl yürütülmüş bir `docs/` ağacı, modül başına docs, ince `dwp-*` komutlarıyla `.agents/` kiti, gitignore'lanmış bir `.dwp/` çıktı alanı, doğrulanmış bir test haritası ve zorunlu yerel kod incelemesi (AI Diff Reviewer skill'i artı repoya uyarlanmış inceleme eklentisi) yazar. Sonra ne üretildiğini görebilmeniz için self-check ve uyumluluk denetleyicisini çalıştırır. Daha önceki bir standartla kuruluma alınmış bir repo, yalnızca eksik veya güncel olmayan şeyleri uzlaştıran hedefli bir harness yükseltmesi alır. Skill'in kendisini yükseltmek ise açık onaya bağlı ayrı bir akıştır (`/dwp-upgrade`): son yayımlanmış sürümü salt okunur olarak denetler, yalnızca açıkça kabul etmenizden sonra kurar, onboarding'i taze bir geçiş olarak yeniden çalıştırır ve `.dwp/` altındaki mevcut planları asla göçürmez veya geçersiz kılmaz.
+Kuruluma alma yıkıcı değildir: mevcut `AGENTS.md`, `docs/`, `.agents/` veya `CLAUDE.md` dosyasını algılar, üzerine yazmak yerine uzlaştırır ve bir şeyi değiştirmeden önce sorar. Gerçek komutlarla `AGENTS.md` dizini, akıl yürütülmüş bir `docs/` ağacı, modül başına docs, ince `dwp-*` komutlarıyla `.agents/` kiti, gitignore'lanmış bir `.dwp/` çıktı alanı, doğrulanmış bir test haritası ve zorunlu yerel kod incelemesi (AI Diff Reviewer skill'i artı repoya uyarlanmış inceleme eklentisi) yazar. Sonra ne üretildiğini görebilmeniz için self-check ve uyumluluk denetleyicisini çalıştırır. Daha önceki bir standartla kuruluma alınmış bir repo, yalnızca eksik veya güncel olmayan şeyleri uzlaştıran hedefli bir harness yükseltmesi alır.
+
+[Benimseme uç noktası](https://deepworkplan.com/tr/init)
+
+### Zaten kuruluma alınmış bir repoda skill’i nasıl yükseltirim?
+
+Burada iki farklı yükseltme vardır ve akış onları ayrı tutar. Repo’nun harness’i — `AGENTS.md`, `docs/`, `.agents/` kiti — onboarding’i yeniden çalıştırarak uzlaştırılır; yalnızca eksik veya güncel olmayan kısımları doldurur. Skill’in kendisi `/dwp-upgrade` ile ilerler: son yayımlanmış sürümün salt okunur denetimi, kabul ettiğiniz etiketin doğrulanarak kurulması ve ardından onboarding’in taze bir geçiş olarak yeniden çalıştırılması. Akış boyunca her adım açık onaya bağlıdır, yerel uyarlamalar üzerine yazılmak yerine karşılaştırılır ve korunur, `.dwp/` asla göçürülmez — mevcut planlar kayıtlı biçimlerini korur ve çalışmaya devam eder.
 
 [Benimseme uç noktası](https://deepworkplan.com/tr/init)
 
@@ -162,7 +180,7 @@ DWP, bir araç zincirinin yokluğunu bir muafiyet olarak görmez. Kuruluma alma 
 
 ### Maliyeti nedir ve verimlilik nasıl ölçülür?
 
-Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın yüklediği talimat byte sayısı olarak raporlanır; skill ile commit edilen bir betikle ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz; sonuçları düzgün ölçmek için önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır.
+Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın yüklediği talimat byte sayısı olarak raporlanır; skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz; sonuçları düzgün ölçmek için önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır.
 
 [Güven ve açıklama](https://deepworkplan.com/tr/trust)
 

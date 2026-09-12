@@ -93,7 +93,7 @@ Kontekst, narzędzia, zabezpieczenia i stan mieszkają w Twoim repozytorium jako
 ## Co dzieje się po uruchomieniu
 
 1. **Twój agent otwiera [/init.md](/init.md)** — czyta prompt onboardingowy oraz metodykę, specyfikację i kit, do których odsyła.
-2. **Instaluje skill Deep Work Plan** — silnik, identyczny w każdym repozytorium: router oraz jego sub-skille (create, execute, refine, resume, status, verify, onboard, author), dla Claude Code, Cursor, Codex, Gemini i Copilot.
+2. **Instaluje skill Deep Work Plan** — silnik, identyczny w każdym repozytorium: router oraz jego sub-skille (create, execute, refine, resume, status, verify, onboard, author, upgrade), dla Claude Code, Cursor, Codex, Gemini i Copilot.
 3. **Dostosowuje twoje repozytorium** — analizując twój rzeczywisty stos (nigdy nie kopiując-wklejając), pisze AGENTS.md, `docs/`, README poszczególnych modułów, przemyślany kit `.agents/` oraz `.dwp/` objęty gitignore. Twoje repozytorium staje się harnessem.
 4. **Planujesz i wykonujesz** — Deep Work Plany o długim horyzoncie, uruchamiane krok po kroku względem jawnych kryteriów akceptacji i bramek walidacyjnych, autonomicznie przez wiele godzin.
 

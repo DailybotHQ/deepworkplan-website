@@ -96,7 +96,7 @@ finché non è stato controllato.
 > **La via breve.** La skill porta con sé il proprio onboarding, quindi installarla è sufficiente. Una volta installata, esegui `/deepworkplan-onboard`: farà tutto ciò che descrivono le sezioni 3–7 — ricognizione, `AGENTS.md`, `docs/`, documentazione per modulo, `.agents/`, la revisione locale richiesta, gli addon opzionali e l’autoverifica finale. Continua a leggere per sapere che cosa farà quella sub-skill — e per il percorso alternativo quando un agente non può caricare skill.
 
 Installa la skill così che gli agenti di questo repository possano pianificare ed eseguire lavoro strutturato. Include un router
-più otto sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard` e `author`.
+più nove sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` e `upgrade`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -198,11 +198,11 @@ completamento), la validazione dello stato finale e la riconciliazione delle dec
 ## 7. Verifica
 
 Esegui `/dwp-verify` per un report di conformità oggettivo di esito positivo/negativo (oppure
-`bash {skill_dir}/verify/conformance.sh` per il livello meccanico CI-friendly che esce con `0`/`1`).
+`bash {skill_dir}/verify/conformance.sh` per il livello meccanico CI-friendly che esce con `0`/`1`, e `2` con un verdetto `UNVERIFIED` esplicito quando non può eseguire i propri controlli — non riporta mai un esito positivo che non ha verificato).
 Verifica i criteri nel [documento di conformità della specifica](https://deepworkplan.com/spec),
 poi conferma:
 
-- [ ] La skill è installata e risolvibile, con tutte e otto le sub-skill disponibili.
+- [ ] La skill è installata e risolvibile, con tutte e nove le sub-skill disponibili.
 - [ ] `AGENTS.md` esiste nella radice con un blocco Quick Commands reale; `CLAUDE.md` si risolve in esso.
 - [ ] `docs/` contiene le categorie standard con contenuto reale e specifico del repo;
       `docs/TESTING_GUIDE.md` descrive un setup reale di test/lint (non vuoto né stub); i moduli

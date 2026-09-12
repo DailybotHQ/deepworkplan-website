@@ -97,7 +97,7 @@ qu'il ait été contrôlé.
 > **Le chemin court.** La skill embarque son propre onboarding : l’installer suffit. Une fois installée, lancez `/deepworkplan-onboard` : elle réalise tout ce que décrivent les sections 3 à 7 — reconnaissance, `AGENTS.md`, `docs/`, documentation par module, `.agents/`, la revue locale requise, les addons optionnels et l’auto-vérification finale. Lisez la suite pour savoir ce que fera cette sous-skill — et pour le chemin de repli quand un agent ne peut pas charger de skills.
 
 Installez le skill pour que les agents de ce dépôt puissent planifier et exécuter un travail structuré. Il fournit un routeur
-accompagné de huit sous-skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard` et `author`.
+accompagné de neuf sous-skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` et `upgrade`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -199,11 +199,11 @@ l’achèvement), la validation de l’état final et la réconciliation des dé
 ## 7. Vérifier
 
 Lancez `/dwp-verify` pour obtenir un rapport de conformité objectif réussite/échec (ou
-`bash {skill_dir}/verify/conformance.sh` pour la couche mécanique compatible CI qui se termine par `0`/`1`).
+`bash {skill_dir}/verify/conformance.sh` pour la couche mécanique compatible CI qui se termine par `0`/`1`, et par `2` avec un verdict `UNVERIFIED` explicite quand elle ne peut pas exécuter ses vérifications — elle ne rapporte jamais un succès qu'elle n'a pas vérifié).
 Il vérifie les critères du [document de conformité de la spécification](https://deepworkplan.com/spec).
 Puis confirmez :
 
-- [ ] Le skill est installé et résolvable, avec ses huit sous-skills disponibles.
+- [ ] Le skill est installé et résolvable, avec ses neuf sous-skills disponibles.
 - [ ] `AGENTS.md` existe à la racine avec un bloc Quick Commands réel ; `CLAUDE.md` se résout vers lui.
 - [ ] `docs/` contient les catégories standard avec un contenu réel, spécifique au dépôt ;
       `docs/TESTING_GUIDE.md` décrit une configuration réelle de test/lint (ni vide ni stub) ; les modules majeurs ont un

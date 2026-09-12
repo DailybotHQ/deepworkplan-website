@@ -97,8 +97,8 @@ que ha sido comprobado.
 > **El camino corto.** La skill trae su propio onboarding, así que instalarla basta. Una vez instalada, ejecuta `/deepworkplan-onboard` y hará todo lo que describen las secciones 3–7: reconocimiento, `AGENTS.md`, `docs/`, documentación por módulo, `.agents/`, la revisión local requerida, los addons opcionales y la autoverificación final. Sigue leyendo para saber qué hará esa sub-skill — y para el camino alternativo cuando un agente no puede cargar skills.
 
 Instala el skill para que los agentes de este repositorio puedan planificar y ejecutar trabajo
-estructurado. Incluye un router más ocho sub-skills — `create`, `execute`, `refine`, `resume`,
-`status`, `verify`, `onboard` y `author`.
+estructurado. Incluye un router más nueve sub-skills — `create`, `execute`, `refine`, `resume`,
+`status`, `verify`, `onboard`, `author` y `upgrade`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -202,11 +202,11 @@ la validación del estado final y la reconciliación de las decisiones sobre ski
 ## 7. Verifica
 
 Ejecuta `/dwp-verify` para obtener un informe objetivo de conformidad (aprobado/fallido) (o
-`bash {skill_dir}/verify/conformance.sh` para la capa mecánica compatible con CI que sale con `0`/`1`).
+`bash {skill_dir}/verify/conformance.sh` para la capa mecánica compatible con CI que sale con `0`/`1`, y `2` con un veredicto `UNVERIFIED` explícito cuando no puede ejecutar sus comprobaciones — nunca reporta una aprobación que no verificó).
 Comprueba los criterios del [documento de Conformidad de la especificación](https://deepworkplan.com/spec).
 Luego confirma:
 
-- [ ] El skill está instalado y es resoluble, con las ocho sub-skills disponibles.
+- [ ] El skill está instalado y es resoluble, con las nueve sub-skills disponibles.
 - [ ] `AGENTS.md` existe en la raíz con un bloque de Comandos Rápidos real; `CLAUDE.md` resuelve a él.
 - [ ] `docs/` contiene las categorías estándar con contenido real y específico del repo;
       `docs/TESTING_GUIDE.md` describe una configuración real de test/lint (ni vacío ni stub); los módulos

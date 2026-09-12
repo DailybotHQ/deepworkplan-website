@@ -93,7 +93,7 @@ Deep Work Plan ตอบด้วยการพัฒนาแบบขับ�
 ## เกิดอะไรขึ้นเมื่อคุณรันมัน
 
 1. **เอเจนต์ของคุณเปิด [/init.md](/init.md)** — มันอ่านพรอมต์การออนบอร์ดและระเบียบวิธี ข้อกำหนด และ kit ที่ลิงก์ไปถึง
-2. **มันติดตั้ง skill ของ Deep Work Plan** — เครื่องยนต์ที่เหมือนกันในทุก repository ได้แก่ ตัวกำหนดเส้นทางพร้อม sub-skill (create, execute, refine, resume, status, verify, onboard, author) สำหรับ Claude Code, Cursor, Codex, Gemini และ Copilot
+2. **มันติดตั้ง skill ของ Deep Work Plan** — เครื่องยนต์ที่เหมือนกันในทุก repository ได้แก่ ตัวกำหนดเส้นทางพร้อม sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade) สำหรับ Claude Code, Cursor, Codex, Gemini และ Copilot
 3. **มันปรับ repository ของคุณ** — โดยให้เหตุผลเกี่ยวกับเทคสแตกจริงของคุณ (ไม่เคยคัดลอกวาง) มันเขียน AGENTS.md, `docs/`, README ต่อโมดูล, kit `.agents/` ที่ผ่านการให้เหตุผล และ `.dwp/` ที่ถูก gitignore repository ของคุณกลายเป็น harness
 4. **คุณวางแผนและดำเนินการ** — Deep Work Plan ระยะยาว รันทีละขั้นเทียบกับเกณฑ์การยอมรับและ validation gate ที่ชัดเจน อย่างอิสระเป็นเวลาหลายชั่วโมง
 

@@ -13,8 +13,8 @@ lastUpdated: 2026-05-31
 
 ### 1. Встановіть скіл Deep Work Plan
 
-Додайте скіл до вашого репозиторію. Він постачає маршрутизатор плюс вісім суб-скілів — create, execute, refine,
-resume, status, verify, onboard та author. Skills CLI — найшвидший шлях:
+Додайте скіл до вашого репозиторію. Він постачає маршрутизатор плюс дев’ять суб-скілів — create, execute, refine,
+resume, status, verify, onboard, author та upgrade. Skills CLI — найшвидший шлях:
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

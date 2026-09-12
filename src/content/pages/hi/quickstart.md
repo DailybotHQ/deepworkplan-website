@@ -12,7 +12,7 @@ lastUpdated: 2026-05-31
 
 ### 1. Deep Work Plan स्किल स्थापित करें
 
-स्किल को अपनी रिपॉज़िटरी में जोड़ें। यह एक राउटर और आठ सब-स्किल्स भेजती है — create, execute, refine, resume, status, verify, onboard, और author। सबसे तेज़ रास्ते के लिए Skills CLI का उपयोग करें:
+स्किल को अपनी रिपॉज़िटरी में जोड़ें। यह एक राउटर और नौ सब-स्किल्स भेजती है — create, execute, refine, resume, status, verify, onboard, author और upgrade। सबसे तेज़ रास्ते के लिए Skills CLI का उपयोग करें:
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

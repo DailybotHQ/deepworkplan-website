@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite plans
 
-**Version 2.4.0. Status: Stable.** This document specifies the Lite plan representation introduced alongside the [DWP specification](/spec/dwp-specification): a plan format for small-to-medium bounded work that is materialized directly, with no non-executable draft stage. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
+**Version 4.0.0. Status: Stable.** This document specifies the Lite plan representation introduced alongside the [DWP specification](/spec/dwp-specification): a plan format for small-to-medium bounded work that is materialized directly, with no non-executable draft stage. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
 ## Representation and lifecycle
 

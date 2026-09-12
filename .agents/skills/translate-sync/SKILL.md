@@ -74,7 +74,9 @@ Map source to target paths:
 | `src/content/{collection}/<src-lang>/{slug}.md` | `src/content/{collection}/<other-lang>/{slug}.md` for **every** active `<other-lang>` |
 | `src/lib/translations/<src-lang>.ts` | every other `src/lib/translations/<other-lang>.ts` (preserve interface shape from `types.ts`) |
 
-When invoked for a single content change, prioritize the source-lang → en path first (if the source isn't English), then en → all other active languages, so the canonical English version is correct before downstream propagation. If a target file does not exist, create it using the source as a template; if it exists, update it to match the source structure.
+When invoked for a single content change, prioritize the source-lang → en path first (if the source isn't English), then en → all other active languages, so the canonical English version is correct before downstream propagation. If a target file does not exist, create it using the source as the template; if it exists, update it to match the source structure.
+
+**Translation strings ↔ Markdown endpoints:** a rendered page and its `src/content/pages/<lang>/<page>.md` mirror are two views of one surface — the page renders from `src/lib/translations/<lang>.ts`, the endpoint mirrors it for agents. When a change originates in a `<lang>.ts` file (for example a `faqPage` item edit or insertion), update the matching endpoint by **deriving it from the already-edited ts file** — read the final ts strings and write the endpoint sections to match — rather than translating the markdown in parallel. Derivation guarantees md↔ts parity by construction; parallel translation invites drift. For edits to existing endpoint text, recover the pre-edit version with `git show HEAD:<endpoint>` and apply a longest-common prefix/suffix diff so only the true delta changes. Match the endpoint's own bytes for locale quirks (for example, the `tr` endpoint historically uses ASCII `'` where the ts uses `’`). Verify with `pnpm run md:check` and `pnpm run md:content-check`.
 
 ### Step 3: Translate Content
 

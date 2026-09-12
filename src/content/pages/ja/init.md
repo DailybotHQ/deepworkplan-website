@@ -60,7 +60,7 @@ description: "AIエージェントのための実行可能なオンボーディ�
 
 > **近道。** この skill は自身のオンボーディングを内蔵しているため、インストールするだけで十分です。インストール後に `/deepworkplan-onboard` を実行すれば、第 3〜7 節が説明する内容をすべて実行します。すなわち偵察、`AGENTS.md`、`docs/`、モジュールごとのドキュメント、`.agents/`、必須のローカルレビュー、任意のアドオン、そして最終セルフチェックです。そのサブスキルが何を行うのか、そしてエージェントが skill を読み込めない場合の代替経路については、以下をお読みください。
 
-このリポジトリのエージェントが構造化された作業を計画し実行できるよう、スキルをインストールします。ルーターと八つのサブスキル、すなわち `create`、`execute`、`refine`、`resume`、`status`、`verify`、`onboard`、`author` を備えます。
+このリポジトリのエージェントが構造化された作業を計画し実行できるよう、スキルをインストールします。ルーターと九つのサブスキル、すなわち `create`、`execute`、`refine`、`resume`、`status`、`verify`、`onboard`、`author`、`upgrade` を備えます。
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -119,11 +119,11 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 ## 7. 検証する
 
 `/dwp-verify` を実行して、客観的な合否の適合性レポートを得ます（または
-`bash {skill_dir}/verify/conformance.sh` で CI 対応の機械的レイヤーを実行し、`0`/`1` で終了します）。
+`bash {skill_dir}/verify/conformance.sh` で CI 対応の機械的レイヤーを実行し、`0`/`1` で終了し、チェックを実行できないときは明示的な `UNVERIFIED` 判定とともに `2` で終了します — 検証していない合格を決して報告しません）。
 [仕様の適合性ドキュメント](https://deepworkplan.com/spec)の基準を確認します。
 その後、次を確認します。
 
-- [ ] スキルがインストールされ解決可能で、八つのサブスキルすべてが利用できる。
+- [ ] スキルがインストールされ解決可能で、九つのサブスキルすべてが利用できる。
 - [ ] ルートに実際の Quick Commands ブロックを備えた `AGENTS.md` が存在し、`CLAUDE.md` がそれに解決される。
 - [ ] `docs/` が標準的なカテゴリを実際のリポジトリ固有の内容で保持し、`docs/TESTING_GUIDE.md` が
       実際のテスト/lint セットアップを記述している（空やスタブではない）。主要なモジュールが `README.md` を持つ。

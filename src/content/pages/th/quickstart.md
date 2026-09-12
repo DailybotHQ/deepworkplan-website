@@ -13,8 +13,8 @@ repository ของคุณขับเคลื่อนด้วยข้อ
 
 ### 1. ติดตั้ง skill ของ Deep Work Plan
 
-เพิ่ม skill ลงใน repository ของคุณ มันจัดส่งตัวกำหนดเส้นทางพร้อม sub-skill แปดตัว — create, execute, refine,
-resume, status, verify, onboard และ author ใช้ Skills CLI เพื่อเส้นทางที่เร็วที่สุด
+เพิ่ม skill ลงใน repository ของคุณ มันจัดส่งตัวกำหนดเส้นทางพร้อม sub-skill เก้าตัว — create, execute, refine,
+resume, status, verify, onboard, author และ upgrade ใช้ Skills CLI เพื่อเส้นทางที่เร็วที่สุด
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

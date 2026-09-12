@@ -1,6 +1,6 @@
 ---
 title: "Deep Work Plan のキット"
-description: "スキルとその八つのサブスキル、コマンド、エージェントアダプター、オンボーディングプリセット、オプトイン式アドオン、そして Deep Work Plan をどこでも実行可能にする事例。"
+description: "スキルとその九つのサブスキル、コマンド、エージェントアダプター、オンボーディングプリセット、オプトイン式アドオン、そして Deep Work Plan をどこでも実行可能にする事例。"
 lastUpdated: 2026-06-05
 ---
 
@@ -14,7 +14,7 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ### スキルとそのサブスキル
 
-Deep Work Plan スキルは、ルーターと八つのサブスキルです。
+Deep Work Plan スキルは、ルーターと九つのサブスキルです。
 
 - **create** — 目標を構造化された計画へと分解する（`/dwp-create`)。
 - **execute** — 計画をタスクごとに実行し、各ゲートを検証する（`/dwp-execute`)。
@@ -24,6 +24,7 @@ Deep Work Plan スキルは、ルーターと八つのサブスキルです。
 - **verify** — リポジトリと計画の適合性を客観的に確認する（`/dwp-verify`)。
 - **onboard** — リポジトリを AI-first にする（`/deepworkplan-onboard`)。
 - **author** — リポジトリ自身のスキル、エージェント、コマンドを作成または進化させる（`/skill-create`、`/agent-create`)。
+- **upgrade** —— インストール済みスキルを新しいリリースへ安全に移行します（`/dwp-upgrade`）。
 
 ### コマンド
 

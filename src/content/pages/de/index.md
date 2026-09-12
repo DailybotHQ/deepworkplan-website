@@ -93,7 +93,7 @@ Kontext, Werkzeuge, Leitplanken und Zustand liegen als einfache Dateien in Ihrem
 ## Was passiert, wenn Sie es ausführen
 
 1. **Ihr Agent öffnet [/init.md](/init.md)** — er liest den Onboarding-Prompt sowie die verlinkte Methodik, Spezifikation und das Kit.
-2. **Er installiert die Deep Work Plan Skill** — die Engine, in jedem Repository identisch: der Router plus seine Sub-Skills (create, execute, refine, resume, status, verify, onboard, author), für Claude Code, Cursor, Codex, Gemini und Copilot.
+2. **Er installiert die Deep Work Plan Skill** — die Engine, in jedem Repository identisch: der Router plus seine Sub-Skills (create, execute, refine, resume, status, verify, onboard, author, upgrade), für Claude Code, Cursor, Codex, Gemini und Copilot.
 3. **Er passt Ihr Repository an** — indem er über Ihren echten Stack schlussfolgert (niemals kopiert), schreibt er AGENTS.md, `docs/`, READMEs je Modul, ein durchdachtes `.agents/`-Kit und ein per gitignore ausgeschlossenes `.dwp/`. Ihr Repository wird zum Harness.
 4. **Sie planen und führen aus** — langfristige Deep Work Plans, Schritt für Schritt gegen explizite Akzeptanzkriterien und Validierungs-Gates ausgeführt, autonom über Stunden hinweg.
 

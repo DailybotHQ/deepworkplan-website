@@ -208,7 +208,7 @@ export const tr: SiteTranslations = {
         {
           title: 'Deep Work Plan skill’ini kurar',
           description:
-            'Skill, motordur — her depoda aynıdır. Tek bir komut, yönlendiriciyi ve alt skill’lerini (create, execute, refine, resume, status, verify, onboard, author) Claude Code, Cursor, Codex, Gemini ve Copilot için getirir.',
+            'Skill, motordur — her depoda aynıdır. Tek bir komut, yönlendiriciyi ve alt skill’lerini (create, execute, refine, resume, status, verify, onboard, author, upgrade) Claude Code, Cursor, Codex, Gemini ve Copilot için getirir.',
         },
         {
           title: 'Deponuzu uyarlar',
@@ -247,7 +247,7 @@ export const tr: SiteTranslations = {
         {
           label: 'Kurulu Deep Work Plan skill’i',
           detail:
-            'create, execute, refine, resume, status, verify, onboard ve author — ajanınıza tek bir skill paketi olarak, depo başına kopya olmadan sunulur.',
+            'create, execute, refine, resume, status, verify, onboard, author ve upgrade — ajanınıza tek bir skill paketi olarak, depo başına kopya olmadan sunulur.',
         },
         {
           label: 'Doğrulayabileceğiniz uyumluluk',
@@ -614,7 +614,7 @@ export const tr: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan Kiti',
       description:
-        'Deep Work Plan’i ajanlar ve yığınlar arasında çalıştırılabilir kılan skill ve sekiz alt skill’i, komutlar, adaptörler, hazır ayarlar, tercihe dayalı eklentiler ve örnekler.',
+        'Deep Work Plan’i ajanlar ve yığınlar arasında çalıştırılabilir kılan skill ve dokuz alt skill’i, komutlar, adaptörler, hazır ayarlar, tercihe dayalı eklentiler ve örnekler.',
     },
     eyebrow: 'Kit',
     title: 'Kit',
@@ -624,7 +624,7 @@ export const tr: SiteTranslations = {
       command: {
         title: 'Alt skill’ler ve komutlar',
         description:
-          'Skill yönlendiricisi ve alt skill’leri (create, execute, refine, resume, status, verify, onboard, author), ayrıca bunlara devreden ince eğik çizgi komutları.',
+          'Skill yönlendiricisi ve alt skill’leri (create, execute, refine, resume, status, verify, onboard, author, upgrade), ayrıca bunlara devreden ince eğik çizgi komutları.',
       },
       adapter: {
         title: 'Adaptörler',
@@ -687,7 +687,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Deep Work Plan skill’ini kurun',
         description:
-          'Skill’i deponuza ekleyin — bir yönlendirici ve sekiz alt skill (create, execute, refine, resume, status, verify, onboard, author). En hızlı yol için Skills CLI’yı kullanın ya da git ile bir kabuk mevcut olan yerde depoyu klonlayıp kurulumu çalıştırın.',
+          'Skill’i deponuza ekleyin — bir yönlendirici ve dokuz alt skill (create, execute, refine, resume, status, verify, onboard, author, upgrade). En hızlı yol için Skills CLI’yı kullanın ya da git ile bir kabuk mevcut olan yerde depoyu klonlayıp kurulumu çalıştırın.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -759,7 +759,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Skill’i kurun',
         description:
-          'Herhangi bir ajanın yapılandırılmış işi planlayıp yürütebilmesi için Deep Work Plan skill’ini ekleyin. Skill, bir yönlendirici ve sekiz alt skill ile gelir — create, execute, refine, resume, status, verify, onboard ve author.',
+          'Herhangi bir ajanın yapılandırılmış işi planlayıp yürütebilmesi için Deep Work Plan skill’ini ekleyin. Skill, bir yönlendirici ve dokuz alt skill ile gelir — create, execute, refine, resume, status, verify, onboard, author ve upgrade.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',
@@ -861,7 +861,7 @@ export const tr: SiteTranslations = {
             id: 'how-to-use',
             question: 'Nasıl kullanılır?',
             answer:
-              "Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx skills add DailybotHQ/deepworkplan-skill` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.",
+              "Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx skills add DailybotHQ/deepworkplan-skill` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir; `/dwp-upgrade` yüklü bir skill’i var olan planlara dokunmadan daha yeni bir sürüme taşır. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.",
             linkLabel: 'Hızlı başlangıç',
             linkPath: '/quickstart',
           },
@@ -966,6 +966,15 @@ export const tr: SiteTranslations = {
             linkPath: '/spec/agent-protocol',
           },
           {
+            id: 'unverified',
+            question:
+              'Uyumluluk denetleyicisi kontrollerini çalıştıramadığında ne olur?',
+            answer:
+              'Bunu açıkça söyler. Denetleyici, 2 çıkış kodu ve açık bir `UNVERIFIED` kararıyla sonlanır — gerçekte doğrulamadığı bir geçiş raporu asla yazdırmaz. Ortamda yetenekli bir yorumlayıcı yoksa veya bir kontrol çalışamıyorsa, dürüst sonuç “uyumlu” değil “doğrulanmamış”tır; yeşil bir sonuç her zaman her kontrolün çalıştığı ve geçtiği anlamına gelir. Aynı disiplin metodolojinin tamamına yayılır: hiçbir akış, işi tamamlanmış ilan etmek için bir kapıyı zayıflatmaz veya sahteleştirmez.',
+            linkLabel: 'Uyumluluk sözleşmesi',
+            linkPath: '/spec/conformance',
+          },
+          {
             id: 'unattended-runs',
             question:
               'Bir plan gece boyunca veya CI içinde gözetimsiz çalışabilir mi?',
@@ -980,6 +989,14 @@ export const tr: SiteTranslations = {
         id: 'compare',
         title: 'Diğerleriyle karşılaştırma',
         items: [
+          {
+            id: 'multi-repo',
+            question: 'Tek bir plan birden fazla repoya yayılabilir mi?',
+            answer:
+              'Evet — orkestratör hub arketipi tam olarak bunun için vardır. Bir hub repo koordine eden planı tutar ve her alt repo kendi planını kendi izole `.dwp/` çalışma alanında yürütür; böylece bir alt repo asla hub’ın plan durumuna yazmaz. Alt repoların tamamlanmışlığı her planın kendi en üst düzey durumundan okunur, içeride dizgi araması yapılmaz ve hub herhangi bir yere geçmeden önce nerede olduğunu kaydeder. Her alt repo, tek başına da pilotlanabilen sıradan bir DWP repo olarak kalır.',
+            linkLabel: 'Repo arketipleri',
+            linkPath: '/spec/archetypes',
+          },
           {
             id: 'vs-sdd-tools',
             question:
@@ -1018,7 +1035,16 @@ export const tr: SiteTranslations = {
             question:
               'Kuruluma alma repoma ne yazar ve mevcut dosyalara dokunur mu?',
             answer:
-              'Kuruluma alma yıkıcı değildir: mevcut `AGENTS.md`, `docs/`, `.agents/` veya `CLAUDE.md` dosyasını algılar, üzerine yazmak yerine uzlaştırır ve bir şeyi değiştirmeden önce sorar. Gerçek komutlarla `AGENTS.md` dizini, akıl yürütülmüş bir `docs/` ağacı, modül başına docs, ince `dwp-*` komutlarıyla `.agents/` kiti, gitignore’lanmış bir `.dwp/` çıktı alanı, doğrulanmış bir test haritası ve zorunlu yerel kod incelemesi (AI Diff Reviewer skill’i artı repoya uyarlanmış inceleme eklentisi) yazar. Sonra ne üretildiğini görebilmeniz için self-check ve uyumluluk denetleyicisini çalıştırır. Daha önceki bir standartla kuruluma alınmış bir repo, yalnızca eksik veya güncel olmayan şeyleri uzlaştıran hedefli bir harness yükseltmesi alır. Skill’in kendisini yükseltmek ise açık onaya bağlı ayrı bir akıştır (`/dwp-upgrade`): son yayımlanmış sürümü salt okunur olarak denetler, yalnızca açıkça kabul etmenizden sonra kurar, onboarding’i taze bir geçiş olarak yeniden çalıştırır ve `.dwp/` altındaki mevcut planları asla göçürmez veya geçersiz kılmaz.',
+              'Kuruluma alma yıkıcı değildir: mevcut `AGENTS.md`, `docs/`, `.agents/` veya `CLAUDE.md` dosyasını algılar, üzerine yazmak yerine uzlaştırır ve bir şeyi değiştirmeden önce sorar. Gerçek komutlarla `AGENTS.md` dizini, akıl yürütülmüş bir `docs/` ağacı, modül başına docs, ince `dwp-*` komutlarıyla `.agents/` kiti, gitignore’lanmış bir `.dwp/` çıktı alanı, doğrulanmış bir test haritası ve zorunlu yerel kod incelemesi (AI Diff Reviewer skill’i artı repoya uyarlanmış inceleme eklentisi) yazar. Sonra ne üretildiğini görebilmeniz için self-check ve uyumluluk denetleyicisini çalıştırır. Daha önceki bir standartla kuruluma alınmış bir repo, yalnızca eksik veya güncel olmayan şeyleri uzlaştıran hedefli bir harness yükseltmesi alır.',
+            linkLabel: 'Benimseme uç noktası',
+            linkPath: '/init',
+          },
+          {
+            id: 'upgrade',
+            question:
+              'Zaten kuruluma alınmış bir repoda skill’i nasıl yükseltirim?',
+            answer:
+              'Burada iki farklı yükseltme vardır ve akış onları ayrı tutar. Repo’nun harness’i — `AGENTS.md`, `docs/`, `.agents/` kiti — onboarding’i yeniden çalıştırarak uzlaştırılır; yalnızca eksik veya güncel olmayan kısımları doldurur. Skill’in kendisi `/dwp-upgrade` ile ilerler: son yayımlanmış sürümün salt okunur denetimi, kabul ettiğiniz etiketin doğrulanarak kurulması ve ardından onboarding’in taze bir geçiş olarak yeniden çalıştırılması. Akış boyunca her adım açık onaya bağlıdır, yerel uyarlamalar üzerine yazılmak yerine karşılaştırılır ve korunur, `.dwp/` asla göçürülmez — mevcut planlar kayıtlı biçimlerini korur ve çalışmaya devam eder.',
             linkLabel: 'Benimseme uç noktası',
             linkPath: '/init',
           },
@@ -1043,7 +1069,7 @@ export const tr: SiteTranslations = {
             id: 'cost',
             question: 'Maliyeti nedir ve verimlilik nasıl ölçülür?',
             answer:
-              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın yüklediği talimat byte sayısı olarak raporlanır; skill ile commit edilen bir betikle ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz; sonuçları düzgün ölçmek için önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır.',
+              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın yüklediği talimat byte sayısı olarak raporlanır; skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz; sonuçları düzgün ölçmek için önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır.',
             linkLabel: 'Güven ve açıklama',
             linkPath: '/trust',
           },

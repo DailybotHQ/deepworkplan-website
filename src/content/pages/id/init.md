@@ -102,7 +102,7 @@ sampai sudah diperiksa.
 > **Jalur singkat.** Skill ini membawa onboarding-nya sendiri, jadi cukup memasangnya. Setelah terpasang, jalankan `/deepworkplan-onboard` dan ia akan melakukan semua yang dijelaskan bagian 3–7: pengintaian, `AGENTS.md`, `docs/`, dokumentasi per modul, `.agents/`, tinjauan lokal yang diwajibkan, addon opsional, dan swa-uji akhir. Lanjutkan membaca untuk mengetahui apa yang akan dilakukan sub-skill itu — dan jalur cadangan ketika sebuah agen tidak dapat memuat skill.
 
 Pasang skill agar agent repositori ini dapat merencanakan dan mengeksekusi pekerjaan terstruktur. Ia membawa sebuah router
-ditambah delapan sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, dan `author`.
+ditambah sembilan sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author`, dan `upgrade`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -206,10 +206,10 @@ validasi status akhir, dan rekonsiliasi skills. Executive Report tersedia atas p
 
 Jalankan `/dwp-verify` untuk laporan konformansi lulus/gagal yang objektif (atau
 `bash {skill_dir}/verify/conformance.sh` untuk lapisan mekanis yang ramah CI dan keluar dengan
-`0`/`1`). Ia memeriksa kriteria dalam [dokumen Konformansi spesifikasi](https://deepworkplan.com/spec),
+`0`/`1`, dan `2` dengan vonis `UNVERIFIED` eksplisit ketika tidak dapat menjalankan pemeriksaannya — tidak pernah melaporkan kelulusan yang tidak ia verifikasi). Ia memeriksa kriteria dalam [dokumen Konformansi spesifikasi](https://deepworkplan.com/spec),
 lalu konfirmasikan:
 
-- [ ] Skill terpasang dan dapat di-resolve, dengan kedelapan sub-skill tersedia.
+- [ ] Skill terpasang dan dapat di-resolve, dengan kesembilan sub-skill tersedia.
 - [ ] `AGENTS.md` ada di akar dengan blok Quick Commands yang nyata; `CLAUDE.md` me-resolve ke sana.
 - [ ] `docs/` memuat kategori-kategori standar dengan konten nyata yang spesifik repo;
       `docs/TESTING_GUIDE.md` mendeskripsikan pengaturan test/lint yang nyata (bukan kosong atau stub);
