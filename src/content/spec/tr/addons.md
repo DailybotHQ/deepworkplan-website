@@ -54,7 +54,7 @@ Paket yöneticisinden bağımsız, toplu, doğrulanmış, geri alınabilir bağ�
 - **Kit sayfası:** [Dependency upgrade](/kit/dependency-upgrade)
 - **Ne ekler:** deponun **gerçek** yöneticisini tespit eder (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, …), semver sınıflandırmalı batch'lerde yükseltir, her batch'ten sonra deponun validation gate'ini çalıştırır, başarısızlıkları geri alır, otomatik commit etmeden özetler
 - **Komut:** yalnızca kabul edildiğinde `/lib-upgrade`'i `.agents/commands/` altına kurar
-- **Ne zaman sunulur:** lockfile mevcut ve bağımlılık yoğun stack; yalnızca ilgili olduğunda öner
+- **Ne zaman sunulur:** bildirilmiş bağımlılığı olan her depo için sunulur; atıl `/lib-upgrade` delege komutu, açıkça reddedilmedikçe onboarding onayı altında kurulur — bir kurulum hiçbir yükseltme çalıştırmaz
 
 ### Design system (dördüncü eklenti)
 
@@ -62,16 +62,16 @@ Tutarlı UI, CLI veya konuşma çıktısı için herhangi bir kodlama agent'ın�
 
 - **Kit sayfası:** [Design system](/kit/design-system)
 - **Ne ekler:** `docs/DESIGN.md` (`AGENTS.md`'den referanslanır), tek dosyada üst üste en fazla üç **profil**: **visual-ui** (render edilmiş UI token'ları ve bileşenleri), **cli-output** (anlamsal terminal stilleri, TTY/`NO_COLOR` degradasyonu), **conversational** (ses, mesaj anatomisi, düz metin fallback'li platform başına render)
-- **Profil gücü:** visual-ui **tespit edildiğinde varsayılan açık**; cli-output ve conversational **tespit edildiğinde önerilir, her zaman sorulur, asla otomatik uygulanmaz**
+- **Profil gücü:** tespit, teklifi zorunlu kılar; kurulum kabul ile sınırlıdır — hem güdümlü modda hem güven modunda — visual-ui **saptandığında güçlü biçimde önerilir**; cli-output ve conversational **tespit edildiğinde önerilir, her zaman sorulur, asla otomatik uygulanmaz**
 - **Ne zaman sunulur:** yalnızca kullanıcıya yönelik arayüz yüzeyi tespit edildiğinde — saf kütüphaneler, headless servisler veya yalnızca altyapı depoları için değil
 
 ### AI Diff Reviewer (beşinci eklenti — gerekli yerel inceleme, isteğe bağlı CI yüzeyi)
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, mevcut sürüm **v2.0.0**), zorunlu Final Review güvenlik incelemesine yapılandırılmış bir yerel inceleme kazandırır ve isteğe bağlı olarak CI'da pull request'leri kapı altına alır. 2.3.0 standardından itibaren **yerel inceleme temelin bir parçasıdır**; yalnızca CI yüzeyi isteğe bağlıdır.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, mevcut sürüm **v2.0.1**), zorunlu Final Review güvenlik incelemesine yapılandırılmış bir yerel inceleme kazandırır ve isteğe bağlı olarak CI'da pull request'leri kapı altına alır. 2.3.0 standardından itibaren **yerel inceleme temelin bir parçasıdır**; yalnızca CI yüzeyi isteğe bağlıdır.
 
 - **Kit sayfası:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — tam yetenek referansı
-- **Onboarding'de gerekli (Faz 7a):** vendored skill'in etikete sabitlenmiş kurulumu (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) artı depoya uyarlanmış bir `.review/extension.md` (`generate-extension` aracılığıyla), onboarding onayı altında; hedeflenmiş bir harness yükseltmesi her ikisini de eksik olduğunda uzlaştırır; bir reddediş, beyan edilmiş bir istisna olarak kaydedilir ve kurulana kadar `verify` tarafından raporlanır
-- **Her Final Review'da gerekli:** güvenlik incelemesi, upstream üst varsayılan akışını birikmiş değişiklik kümesi üzerinde çalıştırır ve çıktısını `analysis_results/SECURITY_REVIEW.md` dosyasına ekler; eksik bir skill veya uzantı, kaydedilmiş bir `local reviewer not installed` bulgusudur — çalışma harness'a yazabiliyorsa kurulur — asla sessiz bir atlama değildir; tamamlanmış bir geçişten gelen `critical` bulgular, düzeltilene veya açıkça kabul edilene kadar tamamlanmayı bloke eder
+- **Onboarding'de gerekli (Faz 7a):** vendored skill'in etikete sabitlenmiş kurulumu (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) artı depoya uyarlanmış bir `.review/extension.md` (`generate-extension` aracılığıyla), onboarding onayı altında; hedeflenmiş bir harness yükseltmesi her ikisini de eksik olduğunda uzlaştırır; bir reddediş, beyan edilmiş bir istisna olarak kaydedilir ve kurulana kadar `verify` tarafından raporlanır
+- **Her Final Review'da gerekli:** güvenlik incelemesi, upstream üst varsayılan akışını birikmiş değişiklik kümesi üzerinde çalıştırır ve çıktısını plana yerel `analysis_results/SECURITY_REVIEW.md` dosyasına (planın kendi klasörü içinde, asla depo kökünde değil) ekler; eksik bir skill veya uzantı, kaydedilmiş bir `local reviewer not installed` bulgusudur — asla sessiz bir atlama değildir ve asla sürpriz bir önyükleme değil: kurulum, onboarding onayına veya açık bir addon çağrısına aittir; tamamlanmış bir geçişten gelen `critical` bulgular, düzeltilene veya açıkça kabul edilene kadar tamamlanmayı bloke eder
 - **İsteğe bağlı CI yüzeyi (Flow B):** upstream `setup` alt-skill'i aracılığıyla `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`), artı geliştirici tarafından çağrılabilir bir yardımcı olarak `apply-review` — açıkça sunulur, istenmeden asla kurulmaz, asla varsayılan değildir, asla bir plan görevi değildir
 - **Asla bloke etmeme (yalnızca çağrı):** başlayabilen ama hata veren bir yerel inceleme bir kez uyarır, kaydedilir ve devam edilir; görevi asla başarısız kılmaz
 - **Eşlik (Flow B):** paylaşılan `prompt.md` + uzantı metodoloji/önem derecesini hizalar; CI Yineleme Farkındalıklı İnceleme, yerel geçiş tam kalırken 2.+ turları kısaltabilir

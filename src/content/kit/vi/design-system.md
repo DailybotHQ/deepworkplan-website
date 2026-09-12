@@ -31,8 +31,8 @@ Một "bề mặt giao diện" mang nghĩa số nhiều: một **UI trực quan*
 
 Addon này dành cho các repo có ít nhất một bề mặt giao diện thực; nó không bao giờ được đề xuất cho một repo không có bề mặt nào (một thư viện thuần, một dịch vụ headless, một repo chỉ có hạ tầng). Mỗi profile mang độ mạnh khuyến nghị riêng của nó:
 
-- **`visual-ui` bật mặc định khi được phát hiện** — một stylesheet với các CSS custom property, một cấu hình Tailwind hay khối `@theme`, các component UI, hay một hướng dẫn thương hiệu/phong cách. Quá trình khởi tạo áp dụng nó ở chế độ tin cậy và mạnh mẽ khuyến nghị nó ở chế độ có hướng dẫn.
-- **`cli-output` và `conversational` được khuyến nghị khi được phát hiện — và luôn được hỏi, không bao giờ tự động áp dụng**, kể cả ở chế độ tin cậy. Một thư viện render CLI cộng với một lớp hiển thị có chủ đích báo hiệu profile thứ nhất; một SDK nền tảng chat hay một lớp soạn thông điệp báo hiệu profile thứ hai. Một trình phân tích đối số trần với các lệnh in thô không đủ điều kiện.
+- **`visual-ui` được khuyến nghị mạnh mẽ khi được phát hiện** — một stylesheet với các CSS custom property, một cấu hình Tailwind hay khối `@theme`, các component UI, hay một hướng dẫn thương hiệu/phong cách. Việc phát hiện khiến đề xuất trở thành bắt buộc nhưng không bao giờ khiến việc cài đặt tự động — profile chỉ được áp dụng sau khi bạn chấp nhận rõ ràng, như nhau ở cả chế độ có hướng dẫn lẫn chế độ tin cậy.
+- **`cli-output` và `conversational` được khuyến nghị khi được phát hiện — và luôn được hỏi, không bao giờ tự động áp dụng**, như nhau ở cả chế độ có hướng dẫn lẫn chế độ tin cậy. Một thư viện render CLI cộng với một lớp hiển thị có chủ đích báo hiệu profile thứ nhất; một SDK nền tảng chat hay một lớp soạn thông điệp báo hiệu profile thứ hai. Một trình phân tích đối số trần với các lệnh in thô không đủ điều kiện.
 
 Nó không bao giờ bắt buộc — một repository với không có addon tùy chọn nào vẫn hoàn toàn tuân thủ, và bạn luôn có thể từ chối bất kỳ profile nào hay toàn bộ addon. Một `DESIGN.md` được tạo trước khi các profile tồn tại là một tệp trực quan đơn-profile hợp lệ: không cần di trú.
 

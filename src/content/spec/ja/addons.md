@@ -54,7 +54,7 @@ section: Addons
 - **キットページ：** [Dependency upgrade](/kit/dependency-upgrade)
 - **追加内容：** リポジトリの**実際の**マネージャーを検出（npm/pnpm/yarn + ncu、pip/poetry/uv、cargo、go mod、bundler、composer…）、semver 分類バッチでアップグレード、各バッチ後にリポジトリの検証ゲートを実行、失敗バッチを元に戻し、自動コミットせずに要約
 - **コマンド：** 受け入れ時のみ `.agents/commands/` に `/lib-upgrade` をインストール
-- **提供タイミング：** ロックファイルがあり依存関係が多いスタック；関連時のみ推奨
+- **提供タイミング：** 宣言された依存関係を持つすべてのリポジトリに提供；不活性な `/lib-upgrade` デリゲーターは、明示的に拒否されない限りオンボーディングの同意の下でインストールされる — インストール自体はアップグレードを実行しない
 
 ### Design system（第 4 アドオン）
 
@@ -62,16 +62,16 @@ section: Addons
 
 - **キットページ：** [Design system](/kit/design-system)
 - **追加内容：** `docs/DESIGN.md`（`AGENTS.md` から参照）、1 ファイルに最大 3 **プロファイル**を積み重ね：**visual-ui**（レンダリング UI トークンとコンポーネント）、**cli-output**（セマンティック端末スタイル、TTY/`NO_COLOR` 劣化）、**conversational**（声、メッセージ構造、プラットフォーム別レンダリングとプレーンテキストフォールバック）
-- **プロファイル強度：** visual-ui は検出時**デフォルトオン**；cli-output と conversational は検出時**推奨、常に確認、自動適用しない**
+- **プロファイル強度：** 検出で提供が必須となり、インストールは受け入れでゲート（ガイドモードでもトラストモードでも同様）— visual-ui は検出時**強く推奨**；cli-output と conversational は検出時**推奨、常に確認、自動適用しない**
 - **提供タイミング：** ユーザー向けインターフェース表面が検出された場合のみ——純ライブラリ、ヘッドレスサービス、インフラのみのリポジトリには提供しない
 
 ### AI Diff Reviewer（第 5 アドオン——必須ローカルレビュー、オプション CI サーフェス）
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**、現在のバージョン **v2.0.0**）は、必須の Final Review セキュリティパスに構造化されたローカルレビューを与え、オプションで CI 内の pull request をゲートします。標準 2.3.0 以降、**ローカルレビューはベースラインの一部**です；オプションなのは CI サーフェスだけです。
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**、現在のバージョン **v2.0.1**）は、必須の Final Review セキュリティパスに構造化されたローカルレビューを与え、オプションで CI 内の pull request をゲートします。標準 2.3.0 以降、**ローカルレビューはベースラインの一部**です；オプションなのは CI サーフェスだけです。
 
 - **キットページ：** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 完全な機能リファレンス
-- **オンボーディングで必須（フェーズ 7a）：** オンボーディングの同意の下で、タグ固定の vendored スキル（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`）と、`generate-extension` 経由のリポジトリ調整 `.review/extension.md` をインストール；欠落時は対象を絞ったハーネスアップグレードが両方を調和；拒否は明言された例外として記録され、インストールされるまで `verify` が報告し続ける
-- **すべての Final Review で必須：** セキュリティパスが累積変更セットに対して upstream 親デフォルトフローを実行し、その出力を `analysis_results/SECURITY_REVIEW.md` に追記；スキルまたは拡張の欠落は `local reviewer not installed` の発見として記録され——実行がハーネスに書き込める場合はその場でインストールされ——黙ってスキップされることは決してない；完了したパスからの `critical` 結果は、修正または明示的に受け入れられるまで完了を阻止する
+- **オンボーディングで必須（フェーズ 7a）：** オンボーディングの同意の下で、タグ固定の vendored スキル（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`）と、`generate-extension` 経由のリポジトリ調整 `.review/extension.md` をインストール；欠落時は対象を絞ったハーネスアップグレードが両方を調和；拒否は明言された例外として記録され、インストールされるまで `verify` が報告し続ける
+- **すべての Final Review で必須：** セキュリティパスが累積変更セットに対して upstream 親デフォルトフローを実行し、その出力をプランローカルの `analysis_results/SECURITY_REVIEW.md`（プラン自身のフォルダー内であり、リポジトリルートではない）に追記；スキルまたは拡張の欠落は `local reviewer not installed` の発見として記録され——黙ってスキップされることは決してなく、決してサプライズブートストラップでもない：インストールはオンボーディングの同意または明示的なアドオン呼び出しに属する；完了したパスからの `critical` 結果は、修正または明示的に受け入れられるまで完了を阻止する
 - **オプションの CI サーフェス（Flow B）：** upstream `setup` サブスキル経由の `pr-review.yml`（`DailybotHQ/ai-diff-reviewer@v2`）に加え、開発者が呼び出すコンパニオンとしての `apply-review`——明示的に提供され、無断ではインストールされず、デフォルトにされることなく、プランタスクには決してならない
 - **決してブロックしない（呼び出しのみ）：** 開始できたにもかかわらずエラーになったローカルレビューは、一度警告して記録し、続行；その失敗でタスクを落とすことは決してない
 - **同等性（Flow B）：** 共有 `prompt.md` + 拡張が方法論/深刻度を整合；CI のイテレーション認識レビューでローカルパスを完全に保ちながらラウンド 2+ を短縮できる

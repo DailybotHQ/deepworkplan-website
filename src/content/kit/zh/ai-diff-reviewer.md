@@ -8,7 +8,7 @@ order: 5
 
 # AI Diff Reviewer 附加组件
 
-将 Deep Work Plan 的执行连接到 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace 上的 **"AI Diff Reviewer"**，当前版本 **v2.0.0**），使强制的 **Final Review** 的安全审查环节运行结构化的本地审查——裁决、结果表和严重程度——并且在选择 Flow B 时，每个 pull request 都可以在 CI 中受到同样审查的门控。自标准 2.3.0 起，**本地审查属于基线的一部分**：接入时安装它，且每份 Final Review 都运行它。只有 CI 层面是可选的。
+将 Deep Work Plan 的执行连接到 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace 上的 **"AI Diff Reviewer"**，当前版本 **v2.0.1**），使强制的 **Final Review** 的安全审查环节运行结构化的本地审查——裁决、结果表和严重程度——并且在选择 Flow B 时，每个 pull request 都可以在 CI 中受到同样审查的门控。自标准 2.3.0 起，**本地审查属于基线的一部分**：接入时安装它，且每份 Final Review 都运行它。只有 CI 层面是可选的。
 
 保持供应商中立的是那条真正要紧的边界：该审查器是一个由你**自己的**编码代理运行的 MIT 授权、标签锁定的 skill——没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密。Flow A（仅本地）是每个已接入仓库都会获得的基线；Flow B（CI Action）被明确提供，绝不未经请求安装。开发者可以拒绝本地审查器；该拒绝会被记录为一项声明的例外，且在它被安装之前，`verify` 会将仓库在该点上报告为不符合规范。
 
@@ -35,16 +35,16 @@ DWP 附加组件**不**重新发明审查器。它将安装、方法论、CI 向
 
 ### 必备的本地审查
 
-`create` 会向每份 Final Review 的安全审查环节添加本地审查步骤，`execute` 运行它。输出追加在 `analysis_results/SECURITY_REVIEW.md` 的 `## AI Diff Reviewer local review` 下。
+`create` 会向每份 Final Review 的安全审查环节添加本地审查步骤，`execute` 运行它。输出追加在计划本地的 `analysis_results/SECURITY_REVIEW.md`（位于计划自身的文件夹内，绝不在仓库根目录）的 `## AI Diff Reviewer local review` 下。
 
-- **审查器缺失——记录在案，绝不静默跳过：** skill 或扩展缺失会成为一项 `local reviewer not installed` 发现；当本次运行可写入 harness（信任模式或明确批准）时，代理会安装缺失的部分然后再审查，否则该发现被带入完成报告。
+- **审查器缺失——记录在案，绝不静默跳过：** skill 或扩展缺失会成为一项 `local reviewer not installed` 发现；Final Review 在 skill 存在时运行本地审查，否则将该发现带入完成报告——安装属于接入授权或一次显式的 addon 调用，绝不是意外引导安装。
 - **软失败（仅调用）：** 能够启动但出错的审查 → 警告一次、记录、继续；绝不因此使任务失败。
 - **完整通道后的门控：** `critical` 结果仍然阻止 Final Review 完成，直到修复或明确接受。`warning` / `info` 已记录但不阻塞。
 - **Flow A 不需要 CI 密钥。** 未设置的 `CURSOR_API_KEY` 不得抑制本地通道。
 
 ### Flow B CI 门控（可选）
 
-固定 Action `DailybotHQ/ai-diff-reviewer@v2`，通常由标签门控（`ready`），带有用于分支保护的稳定命名 **AI review gate** 作业，以及可选跳过标签 `skip-review-label: skip-ai-review`。共享的 `prompt.md` + 扩展对齐方法论和严重程度；在迭代感知审查下，CI 第 2+ 轮可能更短，而本地通道保持完整。
+Action `DailybotHQ/ai-diff-reviewer@v2`，通常由标签门控（`ready`），带有用于分支保护的稳定命名 **AI review gate** 作业，以及可选跳过标签 `skip-review-label: skip-ai-review`。共享的 `prompt.md` + 扩展对齐方法论和严重程度；在迭代感知审查下，CI 第 2+ 轮可能更短，而本地通道保持完整。
 
 ### 可选 `apply-review` 伴随工具
 

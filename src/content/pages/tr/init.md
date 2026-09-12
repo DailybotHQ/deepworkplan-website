@@ -167,11 +167,11 @@ eklentiyle tümüyle uyumludur — onları asla otomatik kurmayın.
   yükseltmeler. Kabul edildiğinde, `/lib-upgrade` komutunu kurar.
 - **Design system** — yalnızca saptanan arayüz yüzeyi olan depolar için isteğe bağlı `docs/DESIGN.md`
   (saf kütüphanelere, headless servislere veya yalnızca altyapı depolarına sunulmaz). Üç profil tek bir
-  dosyada katmanlanır: visual-ui (saptandığında varsayılan olarak açık), cli-output ve conversational —
+  dosyada katmanlanır: visual-ui (saptandığında güçlü biçimde önerilir; kurulum kabul ile sınırlı), cli-output ve conversational —
   son ikisi her zaman sorulur, asla otomatik uygulanmaz.
 - **AI Diff Reviewer** — gerekli yerel inceleme (bir opt-in değil): her Final Review’in güvenlik
   incelemesi, planın birikmiş değişiklik kümesi üzerinde [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2**’yi (skill + gerekli
-  `.review/extension.md`) çalıştırır. Eksik bir skill veya uzantı, kaydedilmiş bir `local reviewer not installed` bulgusudur — çalışma harness’a yazabiliyorsa kurulur — asla sessiz bir atlama değildir; çağrı hataları yumuşak başarısızlıkla geçer; tamamlanmış bir geçişten gelen `critical` bulgular hâlâ tamamlanmayı bloke eder. **Flow B** (`pr-review.yml` ile CI kapısı) açık bir tercih olarak sunulur ve
+  `.review/extension.md`) çalıştırır. Eksik bir skill veya uzantı, kaydedilmiş bir `local reviewer not installed` bulgusudur — asla sessiz bir atlama değildir ve asla sürpriz bir önyükleme değil: kurulum, onboarding onayına veya açık bir addon çağrısına aittir; çağrı hataları yumuşak başarısızlıkla geçer; tamamlanmış bir geçişten gelen `critical` bulgular hâlâ tamamlanmayı bloke eder. **Flow B** (`pr-review.yml` ile CI kapısı) açık bir tercih olarak sunulur ve
   istenmeden asla kurulmaz. Hiçbir Deep Work Plan akışı ticari bir servis, CI sağlayıcısı veya sır gerektirmez.
 
 ## 5. Kiti geliştirin (author alt skill’i)

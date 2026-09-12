@@ -31,8 +31,8 @@ Bir “arayüz yüzeyi” çoğuldur: işlenen bir **görsel UI**, stilize **CLI
 
 Bu eklenti, en az bir gerçek arayüz yüzeyi olan depolar içindir; hiçbir arayüz yüzeyi olmayan bir depo (saf bir kitaplık, headless bir servis, yalnızca-altyapı bir depo) için asla sunulmaz. Her profil kendi öneri gücünü taşır:
 
-- **`visual-ui` saptandığında varsayılan açıktır** — CSS özel özellikleri içeren bir stil sayfası, bir Tailwind yapılandırması veya `@theme` bloğu, UI bileşenleri ya da bir marka/stil kılavuzu. Kuruluma alma onu güven modunda uygular ve rehberli modda güçlü biçimde önerir.
-- **`cli-output` ve `conversational`, saptandığında önerilir — ve her zaman sorulur, asla otomatik uygulanmaz**, güven modunda bile. Bir CLI işleme kitaplığı artı bilinçli bir görüntüleme katmanı ilkine işaret eder; bir sohbet platformu SDK’sı veya mesaj oluşturma katmanı ikincisine işaret eder. Ham yazdırmalar yapan yalın bir argüman ayrıştırıcısı bu kapsama girmez.
+- **`visual-ui` saptandığında güçlü biçimde önerilir** — CSS özel özellikleri içeren bir stil sayfası, bir Tailwind yapılandırması veya `@theme` bloğu, UI bileşenleri ya da bir marka/stil kılavuzu. Tespit, teklifi zorunlu kılar; kurulumu asla otomatik hale getirmez — profil, yalnızca açıkça kabul edilmesinin ardından uygulanır; hem güdümlü modda hem güven modunda.
+- **`cli-output` ve `conversational`, saptandığında önerilir — ve her zaman sorulur, asla otomatik uygulanmaz**, hem güdümlü modda hem güven modunda. Bir CLI işleme kitaplığı artı bilinçli bir görüntüleme katmanı ilkine işaret eder; bir sohbet platformu SDK’sı veya mesaj oluşturma katmanı ikincisine işaret eder. Ham yazdırmalar yapan yalın bir argüman ayrıştırıcısı bu kapsama girmez.
 
 Asla gerekli değildir — sıfır isteğe bağlı eklentili bir depo tamamen uyumludur ve herhangi bir profili ya da eklentinin tamamını her zaman reddedebilirsiniz. Profiller var olmadan önce oluşturulmuş bir `DESIGN.md`, geçerli tek profilli bir görsel dosyadır: geçiş gerekmez.
 

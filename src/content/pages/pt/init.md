@@ -158,13 +158,14 @@ design-system) e ofereça cada um como uma escolha explícita. Um repositório �
   aceita, ela instala o comando `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` opcional para repos com uma superfície de interface detectada
   (não oferecido para bibliotecas puras, serviços headless ou repos exclusivamente de infra). Três perfis se
-  empilham em um único arquivo: visual-ui (ativado por padrão quando detectado), cli-output e
+  empilham em um único arquivo: visual-ui (recomendado com força quando detectado; instalação protegida por aceitação), cli-output e
   conversational — estes dois últimos são sempre perguntados, nunca aplicados automaticamente.
 - **AI Diff Reviewer** — a revisão local obrigatória (não uma opção): o passe de segurança de cada Final Review
   executa o [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + `.review/extension.md`
   obrigatório) sobre o conjunto acumulado de mudanças do plano. Uma skill ou extensão ausente é um achado
-  registrado `local reviewer not installed`, instalada quando a execução pode escrever no harness —
-  nunca uma omissão silenciosa; os erros de invocação falham de forma suave; os achados `critical` de uma passagem
+  registrado `local reviewer not installed` — nunca uma omissão silenciosa,
+  e nunca um arranque surpresa: a instalação pertence ao consentimento do
+  onboarding ou a uma invocação explícita do addon; os erros de invocação falham de forma suave; os achados `critical` de uma passagem
   concluída ainda bloqueiam a conclusão. O **Fluxo B** (o portão de CI com `pr-review.yml`) é oferecido
   como opção explícita e nunca é instalado sem ser pedido. Nenhum fluxo do Deep Work Plan exige um serviço
   comercial, um fornecedor de CI ou um segredo.

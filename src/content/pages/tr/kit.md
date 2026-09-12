@@ -49,7 +49,7 @@ Onboarding akışının bir depoya katmanladığı yetenekler. Dördü isteğe b
 - **Devcontainer** — kalıcı AI-CLI kimlik doğrulaması içeren, yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri.
 - **Dailybot** — Dailybot kullanan ekipler için en iyi çabayla ilerleme ve dönüm noktası raporlaması.
 - **Dependency upgrade** — paket yöneticisinden bağımsız, gruplanmış, doğrulanmış, geri alınabilir yükseltmeler.
-- **Design system** — deponun gerçek tasarım kaynağından akıl yürütülen, arayüz kapsamlı bir `DESIGN.md` (`docs/DESIGN.md` konumunda, `AGENTS.md`'den başvurulan); görsel UI, stilize CLI çıktısı ve konuşma tabanlı mesajlaşma için profillerle; böylece ajanlar markaya uygun arayüz çıktısı üretir; görsel profil bir tasarım sistemi saptandığında varsayılan açıktır, CLI ve konuşma profilleri saptandığında önerilir ve her zaman sorulur.
+- **Design system** — deponun gerçek tasarım kaynağından akıl yürütülen, arayüz kapsamlı bir `DESIGN.md` (`docs/DESIGN.md` konumunda, `AGENTS.md`'den başvurulan); görsel UI, stilize CLI çıktısı ve konuşma tabanlı mesajlaşma için profillerle; böylece ajanlar markaya uygun arayüz çıktısı üretir; bir tasarım sistemi saptandığında teklif zorunludur ama kurulum kabul ile sınırlıdır — görsel profil saptandığında güçlü biçimde önerilir, CLI ve konuşma profilleri saptandığında önerilir ve her zaman sorulur.
 - **AI Diff Reviewer** — gerekli yerel inceleme: onboarding, [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md` kurar ve her Final Review'in güvenlik incelemesi onu çalıştırır; isteğe bağlı Flow B, aynı uzantıyı paylaşan bir CI PR birleştirme kapısı ekler — açıkça sunulur, istenmeden asla kurulmaz.
 
 ### Örnekler

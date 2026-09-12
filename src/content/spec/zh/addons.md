@@ -54,7 +54,7 @@ section: Addons
 - **套件页：** [Dependency upgrade](/kit/dependency-upgrade)
 - **新增内容：** 检测仓库的**真实**管理器（npm/pnpm/yarn + ncu、pip/poetry/uv、cargo、go mod、bundler、composer……），按 semver 分类批次升级，每批后运行仓库验证关卡，回退失败批次，总结但不自动提交
 - **命令：** 仅在接受时向 `.agents/commands/` 安装 `/lib-upgrade`
-- **何时提供：** 存在锁文件且依赖密集型技术栈；仅在相关时推荐
+- **何时提供：** 为每个声明了依赖的仓库提供；惰性的 `/lib-upgrade` 委托命令在接入授权下安装，除非明确拒绝——安装本身不执行任何升级
 
 ### Design system（第四个附加组件）
 
@@ -62,16 +62,16 @@ section: Addons
 
 - **套件页：** [Design system](/kit/design-system)
 - **新增内容：** `docs/DESIGN.md`（由 `AGENTS.md` 引用），最多三个**配置档**叠加于同一文件：**visual-ui**（渲染 UI 令牌与组件）、**cli-output**（语义化终端样式、TTY/`NO_COLOR` 降级）、**conversational**（语态、消息结构、按平台渲染及纯文本回退）
-- **配置档强度：** 检测到 visual-ui 时**默认开启**；检测到 cli-output 与 conversational 时**推荐、始终询问、绝不自动应用**
+- **配置档强度：** 检测使提供该提案成为必须，而安装以明确接受为前提（引导模式与信任模式一视同仁）——检测到 visual-ui 时**受到强烈推荐**；检测到 cli-output 与 conversational 时**推荐、始终询问、绝不自动应用**
 - **何时提供：** 仅当检测到面向用户的界面表面时——不适用于纯库、无头服务或纯基础设施仓库
 
 ### AI Diff Reviewer（第五个附加组件——必备本地审查、可选 CI 层面）
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**，当前版本 **v2.0.0**）为强制的 Final Review 安全审查环节提供结构化的本地审查，并可选地在 CI 中对拉取请求设置门控。自标准 2.3.0 起，**本地审查属于基线的一部分**；只有 CI 层面是可选的。
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**，当前版本 **v2.0.1**）为强制的 Final Review 安全审查环节提供结构化的本地审查，并可选地在 CI 中对拉取请求设置门控。自标准 2.3.0 起，**本地审查属于基线的一部分**；只有 CI 层面是可选的。
 
 - **套件页：** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 完整能力参考
-- **接入时必备（第 7a 阶段）：** 在接入授权之下，标签锁定安装 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`），外加按仓库定制的 `.review/extension.md`（通过 `generate-extension`）；缺失时由定向 harness 升级调和二者；拒绝会被记录为一项声明的例外，并由 `verify` 持续报告，直至安装完成
-- **每份 Final Review 中必备：** 安全审查环节在累计变更集上运行上游父级默认流，并将输出追加到 `analysis_results/SECURITY_REVIEW.md`；缺少 skill 或扩展会作为一项 `local reviewer not installed` 发现被记录——若本次运行可写入 harness 则当场安装——绝不静默跳过；已完成通道中的 `critical` 发现在修复或被明确接受之前会阻止完成
+- **接入时必备（第 7a 阶段）：** 在接入授权之下，标签锁定安装 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`），外加按仓库定制的 `.review/extension.md`（通过 `generate-extension`）；缺失时由定向 harness 升级调和二者；拒绝会被记录为一项声明的例外，并由 `verify` 持续报告，直至安装完成
+- **每份 Final Review 中必备：** 安全审查环节在累计变更集上运行上游父级默认流，并将输出追加到计划本地的 `analysis_results/SECURITY_REVIEW.md`（位于计划自身的文件夹内，绝不在仓库根目录）；缺少 skill 或扩展会作为一项 `local reviewer not installed` 发现被记录——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；已完成通道中的 `critical` 发现在修复或被明确接受之前会阻止完成
 - **可选 CI 层面（Flow B）：** 通过上游 `setup` 子技能提供 `pr-review.yml`（`DailybotHQ/ai-diff-reviewer@v2`），并将 `apply-review` 作为开发者调用的伴随工具——明确提供、绝不未经请求安装、绝不作为默认、绝不作为计划任务
 - **绝不阻塞（仅限调用）：** 能够启动但出错的本地审查按「警告一次、记录后继续」处理；它绝不使任务失败
 - **奇偶性（Flow B）：** 共享 `prompt.md` + 扩展对齐方法论/严重程度；CI 迭代感知审查可缩短第 2+ 轮，而本地通道保持完整

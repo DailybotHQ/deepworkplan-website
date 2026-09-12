@@ -54,7 +54,7 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 - **Trang kit:** [Dependency upgrade](/kit/dependency-upgrade)
 - **Bổ sung:** phát hiện trình quản lý **thực** của repo (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, …), nâng cấp theo lô phân loại semver, chạy validation gate repo sau mỗi lô, hoàn tác thất bại, tóm tắt không tự commit
 - **Lệnh:** cài `/lib-upgrade` vào `.agents/commands/` chỉ khi được chấp nhận
-- **Khi đề xuất:** có lockfile và stack nhiều phụ thuộc; chỉ khuyến nghị khi liên quan
+- **Khi đề xuất:** được đề xuất cho mọi repo có phụ thuộc được khai báo; ủy quyền bất hoạt `/lib-upgrade` được cài dưới sự chấp thuận của onboarding trừ khi bị từ chối rõ ràng — một lần cài đặt không chạy bất kỳ nâng cấp nào
 
 ### Design system (addon thứ tư)
 
@@ -62,16 +62,16 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 
 - **Trang kit:** [Design system](/kit/design-system)
 - **Bổ sung:** `docs/DESIGN.md` (tham chiếu từ `AGENTS.md`) với tối đa ba **hồ sơ** xếp chồng trong một file: **visual-ui** (token và thành phần UI được render), **cli-output** (kiểu terminal ngữ nghĩa, suy giảm TTY/`NO_COLOR`), **conversational** (giọng, giải phẫu thông điệp, render theo nền tảng với fallback văn bản thuần)
-- **Độ mạnh hồ sơ:** visual-ui **bật mặc định khi phát hiện**; cli-output và conversational **khuyến nghị khi phát hiện, luôn hỏi, không bao giờ tự áp dụng**
+- **Độ mạnh hồ sơ:** việc phát hiện khiến đề xuất trở thành bắt buộc; việc cài đặt được kiểm soát bằng sự chấp nhận, như nhau ở cả chế độ có hướng dẫn lẫn chế độ tin cậy — visual-ui **được khuyến nghị mạnh mẽ khi được phát hiện**; cli-output và conversational **khuyến nghị khi phát hiện, luôn hỏi, không bao giờ tự áp dụng**
 - **Khi đề xuất:** chỉ khi phát hiện bề mặt giao diện người dùng — không cho thư viện thuần, dịch vụ headless hoặc repo chỉ hạ tầng
 
 ### AI Diff Reviewer (addon thứ năm — đánh giá cục bộ bắt buộc, bề mặt CI tùy chọn)
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, phiên bản hiện tại **v2.0.0**) trao cho bước rà soát bảo mật của Final Review bắt buộc một đánh giá cục bộ có cấu trúc, và tùy chọn kiểm soát các pull request trong CI. Kể từ chuẩn 2.3.0, **đánh giá cục bộ là một phần của chuẩn cơ sở**; chỉ bề mặt CI là opt-in.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, phiên bản hiện tại **v2.0.1**) trao cho bước rà soát bảo mật của Final Review bắt buộc một đánh giá cục bộ có cấu trúc, và tùy chọn kiểm soát các pull request trong CI. Kể từ chuẩn 2.3.0, **đánh giá cục bộ là một phần của chuẩn cơ sở**; chỉ bề mặt CI là opt-in.
 
 - **Trang kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — tài liệu tham khảo khả năng đầy đủ
-- **Bắt buộc tại onboarding (Giai đoạn 7a):** cài đặt skill vendored được ghim theo tag (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) cùng `.review/extension.md` được điều chỉnh riêng cho repo (qua `generate-extension`), dưới sự chấp thuận của onboarding; một nâng cấp harness có mục tiêu đối chiếu cả hai khi thiếu; một lần từ chối được ghi lại như một ngoại lệ được khai báo và được `verify` báo cáo cho đến khi được cài đặt
-- **Bắt buộc trong mọi Final Review:** bước rà soát bảo mật chạy luồng mặc định cha của skill thượng nguồn trên toàn bộ tập thay đổi đã tích lũy và nối thêm kết quả vào `analysis_results/SECURITY_REVIEW.md`; một skill hoặc tiện ích mở rộng bị thiếu là một phát hiện `local reviewer not installed` được ghi lại — được cài đặt khi lượt chạy có thể ghi vào harness — không bao giờ là một lần bỏ qua âm thầm; các phát hiện `critical` từ một lượt hoàn tất chặn việc hoàn tất cho đến khi được sửa hoặc được chấp nhận rõ ràng
+- **Bắt buộc tại onboarding (Giai đoạn 7a):** cài đặt skill vendored được ghim theo tag (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) cùng `.review/extension.md` được điều chỉnh riêng cho repo (qua `generate-extension`), dưới sự chấp thuận của onboarding; một nâng cấp harness có mục tiêu đối chiếu cả hai khi thiếu; một lần từ chối được ghi lại như một ngoại lệ được khai báo và được `verify` báo cáo cho đến khi được cài đặt
+- **Bắt buộc trong mọi Final Review:** bước rà soát bảo mật chạy luồng mặc định cha của skill thượng nguồn trên toàn bộ tập thay đổi đã tích lũy và nối thêm kết quả vào `analysis_results/SECURITY_REVIEW.md` nội bộ của plan (bên trong thư mục riêng của plan, không bao giờ ở thư mục gốc của repo); một skill hoặc tiện ích mở rộng bị thiếu là một phát hiện `local reviewer not installed` được ghi lại — không bao giờ là một lần bỏ qua âm thầm, và không bao giờ là một bootstrap bất ngờ: việc cài đặt thuộc về sự chấp thuận của onboarding hoặc một lời gọi addon rõ ràng; các phát hiện `critical` từ một lượt hoàn tất chặn việc hoàn tất cho đến khi được sửa hoặc được chấp nhận rõ ràng
 - **Bề mặt CI tùy chọn (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) qua sub-skill `setup` thượng nguồn, cùng `apply-review` như một công cụ đồng hành do nhà phát triển gọi — được đề xuất rõ ràng, không bao giờ cài khi chưa được yêu cầu, không bao giờ là mặc định, không bao giờ là một tệp nhiệm vụ kế hoạch
 - **Không bao giờ chặn (chỉ đối với lỗi gọi):** một đánh giá cục bộ có thể khởi động nhưng gặp lỗi thì cảnh báo một lần, ghi lại và tiếp tục; nó không bao giờ làm thất bại tác vụ
 - **Tương đồng (Flow B):** `prompt.md` dùng chung + tiện ích mở rộng căn chỉnh phương pháp luận/mức độ nghiêm trọng; Đánh giá Nhận thức Lặp lại CI có thể rút ngắn vòng 2+ trong khi lượt kiểm tra cục bộ vẫn đầy đủ

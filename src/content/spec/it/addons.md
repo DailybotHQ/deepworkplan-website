@@ -54,7 +54,7 @@ Aggiornamenti dipendenze agnostici rispetto al package manager, in batch, valida
 - **Pagina kit:** [Dependency upgrade](/kit/dependency-upgrade)
 - **Cosa aggiunge:** rileva il **vero** manager del repo (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, …), aggiorna in batch classificati per semver, esegue il validation gate del repo dopo ogni batch, annulla i fallimenti, riassume senza committare automaticamente
 - **Comando:** installa `/lib-upgrade` in `.agents/commands/` solo se accettato
-- **Quando offerto:** lockfile presente e stack con molte dipendenze; consiglia solo quando rilevante
+- **Quando offerto:** offerto per ogni repository con dipendenze dichiarate; il delegatore inerte `/lib-upgrade` si installa sotto il consenso dell'onboarding salvo rifiuto esplicito — un'installazione non esegue alcun aggiornamento
 
 ### Design system (quarto addon)
 
@@ -62,16 +62,16 @@ Un `DESIGN.md` con ambito di superficie di interfaccia che qualsiasi agente di c
 
 - **Pagina kit:** [Design system](/kit/design-system)
 - **Cosa aggiunge:** `docs/DESIGN.md` (referenziato da `AGENTS.md`) con fino a tre **profili** impilati in un unico file: **visual-ui** (token e componenti UI renderizzati), **cli-output** (stili terminali semantici, degradazione TTY/`NO_COLOR`), **conversational** (voce, anatomia del messaggio, rendering per piattaforma con fallback in testo semplice)
-- **Forza del profilo:** visual-ui è **attivo di default se rilevato**; cli-output e conversational sono **consigliati se rilevati, sempre chiesti, mai applicati automaticamente**
+- **Forza del profilo:** il rilevamento rende obbligatoria l'offerta; l'installazione è subordinata a un'accettazione, sia in modalità guidata che trust — visual-ui è **fortemente raccomandato quando rilevato**; cli-output e conversational sono **consigliati se rilevati, sempre chiesti, mai applicati automaticamente**
 - **Quando offerto:** solo quando viene rilevata una superficie di interfaccia utente — non per librerie pure, servizi headless o repo solo infrastruttura
 
 ### AI Diff Reviewer (quinto addon — revisione locale richiesta, superficie CI opzionale)
 
-L'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, versione attuale **v2.0.0**) dota il passaggio di sicurezza obbligatorio del Final Review di una revisione locale strutturata e blocca opzionalmente le pull request in CI. Dallo standard 2.3.0 la **revisione locale fa parte della baseline**; solo la superficie CI è opt-in.
+L'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, versione attuale **v2.0.1**) dota il passaggio di sicurezza obbligatorio del Final Review di una revisione locale strutturata e blocca opzionalmente le pull request in CI. Dallo standard 2.3.0 la **revisione locale fa parte della baseline**; solo la superficie CI è opt-in.
 
 - **Pagina kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — riferimento completo delle capacità
-- **Richiesto all'onboarding (Fase 7a):** installazione della skill vendorizzata fissata al tag (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) più un `.review/extension.md` su misura per il repository (via `generate-extension`), sotto il consenso dell'onboarding; un aggiornamento mirato della harness riconcilia entrambi quando mancano; un rifiuto è registrato come eccezione dichiarata e riportato da `verify` finché non viene installata
-- **Richiesto in ogni Final Review:** il passaggio di sicurezza esegue il flusso padre predefinito della skill upstream sull'insieme di modifiche accumulato e accoda il proprio output a `analysis_results/SECURITY_REVIEW.md`; una skill o un'estensione mancante è un rilievo registrato `local reviewer not installed` — installata quando l'esecuzione può scrivere nella harness — mai un salto silenzioso; i rilievi `critical` di un passaggio completato bloccano il completamento finché non sono corretti o accettati esplicitamente
+- **Richiesto all'onboarding (Fase 7a):** installazione della skill vendorizzata fissata al tag (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) più un `.review/extension.md` su misura per il repository (via `generate-extension`), sotto il consenso dell'onboarding; un aggiornamento mirato della harness riconcilia entrambi quando mancano; un rifiuto è registrato come eccezione dichiarata e riportato da `verify` finché non viene installata
+- **Richiesto in ogni Final Review:** il passaggio di sicurezza esegue il flusso padre predefinito della skill upstream sull'insieme di modifiche accumulato e accoda il proprio output al `analysis_results/SECURITY_REVIEW.md` locale del piano (dentro la cartella propria del piano, mai nella root del repository); una skill o un'estensione mancante è un rilievo registrato `local reviewer not installed` — mai un salto silenzioso, e mai un bootstrap a sorpresa: l'installazione appartiene al consenso dell'onboarding o a un'invocazione esplicita dell'addon; i rilievi `critical` di un passaggio completato bloccano il completamento finché non sono corretti o accettati esplicitamente
 - **Superficie CI opzionale (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) tramite la sub-skill upstream `setup`, più `apply-review` come compagno invocabile dallo sviluppatore — offerto esplicitamente, mai installato senza richiesta, mai il valore predefinito, mai un'attività del piano
 - **Mai bloccante (solo invocazione):** una revisione locale che può iniziare ma fallisce con un errore avvisa una volta, registra e prosegue; non fa mai fallire l'attività
 - **Parità (Flow B):** `prompt.md` condiviso + estensione allineano metodologia/gravità; la Revisione CI consapevole delle iterazioni può abbreviare il round 2+ mentre il passaggio locale rimane completo

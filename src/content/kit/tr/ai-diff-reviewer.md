@@ -8,7 +8,7 @@ order: 5
 
 # AI Diff Reviewer Eklentisi
 
-Deep Work Plan yürütmesini **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**'a (market listesi **"AI Diff Reviewer"**, mevcut sürüm **v2.0.0**) bağlayarak zorunlu **Final Review**'in güvenlik incelemesi yapılandırılmış bir yerel inceleme — karar, bulgu tablosu ve önem derecesi — çalıştırsın ve Flow B'yi seçtiğinizde her çekme isteği CI'da aynı incelemeyle kapı altına alınsın. 2.3.0 standardından itibaren **yerel inceleme temelin bir parçasıdır**: kuruluma alma onu kurar ve her Final Review onu çalıştırır. Yalnızca CI yüzeyi isteğe bağlıdır.
+Deep Work Plan yürütmesini **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**'a (market listesi **"AI Diff Reviewer"**, mevcut sürüm **v2.0.1**) bağlayarak zorunlu **Final Review**'in güvenlik incelemesi yapılandırılmış bir yerel inceleme — karar, bulgu tablosu ve önem derecesi — çalıştırsın ve Flow B'yi seçtiğinizde her çekme isteği CI'da aynı incelemeyle kapı altına alınsın. 2.3.0 standardından itibaren **yerel inceleme temelin bir parçasıdır**: kuruluma alma onu kurar ve her Final Review onu çalıştırır. Yalnızca CI yüzeyi isteğe bağlıdır.
 
 Sağlayıcıdan bağımsız kalan, önemli olan sınırdır: inceleyici, sizin **kendi** kodlama ajanınız tarafından çalıştırılan MIT lisanslı, etikete sabitlenmiş bir skill'dir — hiçbir Deep Work Plan akışı ticari bir servis, CI sağlayıcısı veya sır gerektirmez. Flow A (yalnızca yerel), kuruluma alınan her deponun aldığı temeldir; Flow B (CI Action) açıkça sunulur ve istenmeden asla kurulmaz. Bir geliştirici yerel inceleyiciyi reddedebilir; reddediş beyan edilmiş bir istisna olarak kaydedilir ve `verify`, kurulana kadar depoyu bu noktada uyumsuz olarak raporlar.
 
@@ -35,16 +35,16 @@ DWP eklentisi inceleyiciyi **yeniden icat etmez**. Kurulum, metodoloji, CI sihir
 
 ### Gerekli yerel inceleme
 
-`create`, yerel inceleme adımını her Final Review'in güvenlik incelemesine ekler ve `execute` onu çalıştırır. Çıktı, `analysis_results/SECURITY_REVIEW.md` içindeki `## AI Diff Reviewer local review` altına eklenir.
+`create`, yerel inceleme adımını her Final Review'in güvenlik incelemesine ekler ve `execute` onu çalıştırır. Çıktı, plana yerel `analysis_results/SECURITY_REVIEW.md` (planın kendi klasörü içinde, asla depo kökünde değil) içindeki `## AI Diff Reviewer local review` altına eklenir.
 
-- **Eksik inceleyici — kaydedilir, asla sessizce atlanmaz:** eksik bir skill veya uzantı, `local reviewer not installed` bulgusuna dönüşür; çalışma harness'a yazabiliyorsa (trust modu veya açık onay) ajan eksik parçayı kurar ve ardından inceleyip geçer, değilse bulgu tamamlanma raporuna taşınır.
+- **Eksik inceleyici — kaydedilir, asla sessizce atlanmaz:** eksik bir skill veya uzantı, `local reviewer not installed` bulgusuna dönüşür; Final Review, skill mevcutken yerel geçişi çalıştırır, değilse bulgu tamamlanma raporuna taşınır — kurulum, onboarding onayına veya açık bir addon çağrısına aittir, asla sürpriz bir önyükleme değildir.
 - **Yumuşak başarısızlık (yalnızca çağrı):** başlayabilen ama hata veren bir inceleme → bir kez uyar, kaydet, devam et; bu hata nedeniyle görevi hiçbir zaman başarısız sayma.
 - **Tamamlanmış geçişten sonra kapı:** `critical` bulgular düzeltilinceye veya açıkça kabul edilinceye kadar Final Review'in tamamlanmasını engellemeye devam eder. `warning` / `info` belgelenir ancak engellemez.
 - **Flow A'nın CI sırrına ihtiyacı yoktur.** Ayarlanmamış bir `CURSOR_API_KEY` yerel geçişi bastırmamalıdır.
 
 ### Flow B CI Kapısı (isteğe bağlı)
 
-Sabitlenmiş Action `DailybotHQ/ai-diff-reviewer@v2`, genellikle etiket kapılı (`ready`), dal koruması için kararlı adlandırılmış **AI review gate** işi ve isteğe bağlı atlama etiketi `skip-review-label: skip-ai-review`. Paylaşılan `prompt.md` + uzantı metodoloji ve önem derecesini hizalar; Yineleme Farkındalıklı İnceleme altında CI 2.+ turlar daha kısa olabilirken yerel geçiş tam kalır.
+Action `DailybotHQ/ai-diff-reviewer@v2`, genellikle etiket kapılı (`ready`), dal koruması için kararlı adlandırılmış **AI review gate** işi ve isteğe bağlı atlama etiketi `skip-review-label: skip-ai-review`. Paylaşılan `prompt.md` + uzantı metodoloji ve önem derecesini hizalar; Yineleme Farkındalıklı İnceleme altında CI 2.+ turlar daha kısa olabilirken yerel geçiş tam kalır.
 
 ### İsteğe Bağlı `apply-review` Yardımcısı
 
