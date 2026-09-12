@@ -1,7 +1,7 @@
 ---
 title: "Sıkça sorulan sorular — Deep Work Plan"
 description: "Deep Work Plan hakkında sorulan soruların yanıtları: ne yaptığı, doğrulama kapıları ve sürdürme, araçlarla karşılaştırma ve benimseme."
-lastUpdated: 2026-09-11
+lastUpdated: 2026-09-12
 ---
 
 ## Sıkça sorulan sorular
@@ -24,7 +24,7 @@ Kodlama ajanlarına gerçek, çok adımlı işler veren ve bu işin bitmesini is
 
 ### Lite plan ile Full plan arasındaki fark nedir?
 
-Bir gösterim tercihidir, titizlik ödünleşmesi değil. Her plan bir Lite klasör olarak başlar: sabitlenmiş görev kayıtları içeren, zaten yürütülebilir kompakt bir README — kısmi bir taslak değil. `create`, yalnızca bir görevin talimat ayrıntısı, bağımlılıkları veya sözleşmeleri incelenebilir kompakt bir kayda sığmadığında Full görev dosyalarına genişler; iki biçimden biri için açık bir istek her zaman karşılanır ve bir Lite plan, tamamlanmış işi kaybetmeden daha sonra Full'e yükseltilebilir. Her iki biçim de aynı kabul kriterlerini, doğrulama kapılarını ve kanıtı taşır; ikisi de zorunlu Final Review ile kapanır.
+Bir gösterim tercihidir, titizlik ödünleşmesi değil. Planlar varsayılan olarak Lite'tır: sabitlenmiş görev kayıtları içeren, zaten yürütülebilir kompakt bir README — kısmi bir taslak değil. Baştan bir Full plan isterseniz `create` Full görev dosyalarını doğrudan yazar; bir görevin talimat ayrıntısı, bağımlılıkları veya sözleşmeleri incelenebilir kompakt bir kayda sığmadığında da planı Full'e genişletir. Sonraki yükseltme tamamlanmış her görevi korur. Her iki biçim de aynı kabul kriterlerini, doğrulama kapılarını, kanıtı ve zorunlu Final Review'yi taşır.
 
 [Metodolojiyi okuyun](https://deepworkplan.com/tr/methodology)
 
@@ -68,7 +68,7 @@ Bir skill, ajanın tekrarlanabilir bir prosedürü nasıl gerçekleştirdiğini 
 
 ### Doğrulama kapıları nasıl uygulanır? İnsan onayı gerekir mi?
 
-Yürütülebilir onaylamalardır ve ajan bunları kendisi çalıştırır. İnsan onayı çalışmayı iki uçtan çerçeveler: bir kişi yürütmeden önce planı onaylar ve pull request sırasında son diff'i inceler; aradaki yürütme otonomdur. Her görev, genellikle deponun kendi kalite kapısı olan somut komutları adlandırır; bunlar görevin dokunduğu yüzeyden seçilir: değişen davranışın testleri ve tüketicileri, değişiklik paylaşıldığında veya sınırlandırılamadığında tam suite'e genişletilir. Bir görev, yalnızca bu komutlar başarıyla çıktığında tamamlanmış sayılır ve davranışı değiştiren görevler testleri genişletmelidir. Başarısızlıkta görev engellenmiş olarak işaretlenir ve ajan durur.
+Yürütülebilir onaylamalardır ve ajan bunları kendisi çalıştırır. İnsan onayı çalışmayı iki uçtan çerçeveler: bir kişi yürütmeden önce planı onaylar ve pull request sırasında son diff'i inceler; aradaki yürütme otonomdur. Her görev, genellikle deponun kendi kalite kapısı olan somut komutları adlandırır; bunlar görevin dokunduğu yüzeyden seçilir: değişen davranışın testleri ve tüketicileri, değişiklik paylaşıldığında veya sınırlandırılamadığında tam suite'e genişletilir. Bir görev, yalnızca bu komutlar başarıyla çıktığında tamamlanmış sayılır ve davranışı değiştiren görevler testleri genişletmelidir. Bir başarısızlıkta ajan önce görevin kendi kapsamına düşen şeyi onarır ve kapıyı yeniden çalıştırır; bu kapsamda onarılamayan bir başarısızlık görevi engellenmiş olarak işaretler ve çalışmayı durdurur.
 
 [Çekirdek döngü](https://deepworkplan.com/tr/methodology/02-core-loop)
 
@@ -110,7 +110,7 @@ Her planın zorunlu tek kapanış görevi. Sırayla: planın birikmiş tam deği
 
 ### Bir doğrulama kapısı başarısız olduğunda ne olur?
 
-Görev engellenmiş olarak kaydedilir ve ajan tamamlandığını iddia etmeden önce durur. Kanıtı inceleyebilir, kodu onarabilir veya görevi iyileştirebilir, ardından sürdürebilirsiniz; başarısız bir komut, kapıyı zayıflatma izni değil, uyuşmazlığı çözme sinyalidir.
+Başarısız bir kapı öncelikle bir onarım sinyalidir: ajan, görevin kendi kapsamına düşen şeyi düzeltir ve kapıyı yeniden çalıştırır. Bu kapsamı aşan bir başarısızlık görevi engellenmiş olarak kaydeder ve ajan tamamlandığını iddia etmeden önce durur. Kanıtı inceleyebilir, kodu onarabilir veya görevi iyileştirebilir, ardından sürdürebilirsiniz; başarısız bir komut, kapıyı zayıflatma izni değil, uyuşmazlığı çözme sinyalidir.
 
 [Ajan protokolünü okuyun](https://deepworkplan.com/tr/spec/agent-protocol)
 
@@ -144,7 +144,7 @@ Yerleşik plan modları kullanışlıdır ve Deep Work Plan aynı alt yapı üze
 
 ### Kuruluma alma repoma ne yazar ve mevcut dosyalara dokunur mu?
 
-Kuruluma alma yıkıcı değildir: mevcut `AGENTS.md`, `docs/`, `.agents/` veya `CLAUDE.md` dosyasını algılar, üzerine yazmak yerine uzlaştırır ve bir şeyi değiştirmeden önce sorar. Gerçek komutlarla `AGENTS.md` dizini, akıl yürütülmüş bir `docs/` ağacı, modül başına docs, ince `dwp-*` komutlarıyla `.agents/` kiti, gitignore'lanmış bir `.dwp/` çıktı alanı, doğrulanmış bir test haritası ve zorunlu yerel kod incelemesi (AI Diff Reviewer skill'i artı repoya uyarlanmış inceleme eklentisi) yazar. Sonra ne üretildiğini görebilmeniz için self-check ve uyumluluk denetleyicisini çalıştırır. Daha önceki bir sürümle kuruluma alınmış bir repo, yalnızca eksik olanları değiştiren hedefli bir yükseltme alır.
+Kuruluma alma yıkıcı değildir: mevcut `AGENTS.md`, `docs/`, `.agents/` veya `CLAUDE.md` dosyasını algılar, üzerine yazmak yerine uzlaştırır ve bir şeyi değiştirmeden önce sorar. Gerçek komutlarla `AGENTS.md` dizini, akıl yürütülmüş bir `docs/` ağacı, modül başına docs, ince `dwp-*` komutlarıyla `.agents/` kiti, gitignore'lanmış bir `.dwp/` çıktı alanı, doğrulanmış bir test haritası ve zorunlu yerel kod incelemesi (AI Diff Reviewer skill'i artı repoya uyarlanmış inceleme eklentisi) yazar. Sonra ne üretildiğini görebilmeniz için self-check ve uyumluluk denetleyicisini çalıştırır. Daha önceki bir standartla kuruluma alınmış bir repo, yalnızca eksik veya güncel olmayan şeyleri uzlaştıran hedefli bir harness yükseltmesi alır. Skill'in kendisini yükseltmek ise açık onaya bağlı ayrı bir akıştır (`/dwp-upgrade`): son yayımlanmış sürümü salt okunur olarak denetler, yalnızca açıkça kabul etmenizden sonra kurar, onboarding'i taze bir geçiş olarak yeniden çalıştırır ve `.dwp/` altındaki mevcut planları asla göçürmez veya geçersiz kılmaz.
 
 [Benimseme uç noktası](https://deepworkplan.com/tr/init)
 

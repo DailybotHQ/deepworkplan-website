@@ -23,7 +23,7 @@ Quattro assi descrivono lo stato di un piano, e DEVONO essere tracciati indipend
 | Approvazione | `pending`, `approved`, `pre_approved` | Se un essere umano ha revisionato il piano, o se la modalità trust lo ha pre-approvato |
 | Esecuzione | `pending`, `in_progress`, `blocked`, `completed` | Progresso per attività e complessivo |
 
-Il create guidato scrive una **proposta in sospeso revisionabile** — Lite o Full, già il piano reale, mai una bozza usa e getta. Trust materializza un piano **pronto e pre-approvato** e restituisce immediatamente il controllo. `create` e una promozione non eseguono mai lavoro di prodotto; `execute` DEVE rifiutare una proposta `pending` in attesa di approvazione e DEVE rifiutare un piano con una promozione non risolta in corso.
+Il create guidato scrive una **proposta in sospeso revisionabile** — Lite o Full, già il piano reale, mai una bozza usa e getta. Trust materializza un piano **pronto e pre-approvato** e restituisce immediatamente il controllo. `create` e una promozione non eseguono mai lavoro di prodotto; una richiesta esplicita di `execute` o `resume` approva l'ambito attuale pronto del piano e DEVE registrare quell'approvazione prima di iniziare il lavoro; senza quella richiesta, una proposta `pending` non è eseguibile; una promozione non risolta in corso DEVE essere recuperata prima del lavoro di prodotto.
 
 ## Creazione e selezione del formato
 

@@ -54,7 +54,7 @@ Upgrade dependensi agnostik package manager, bertahap, tervalidasi, dan dapat di
 - **Halaman kit:** [Dependency upgrade](/kit/dependency-upgrade)
 - **Yang ditambahkan:** mendeteksi **manajer nyata** repo (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, …), upgrade dalam batch yang diklasifikasikan semver, menjalankan validation gate repo setelah setiap batch, membalikkan kegagalan, merangkum tanpa commit otomatis
 - **Perintah:** menginstal `/lib-upgrade` ke `.agents/commands/` hanya jika diterima
-- **Kapan ditawarkan:** lockfile ada dan stack dengan banyak dependensi; rekomendasikan hanya jika relevan
+- **Kapan ditawarkan:** ditawarkan untuk setiap repo dengan dependensi yang dideklarasikan; delegator inert `/lib-upgrade` dipasang di bawah persetujuan onboarding kecuali ditolak secara eksplisit — sebuah instalasi tidak menjalankan upgrade apa pun
 
 ### Design system (addon keempat)
 
@@ -62,16 +62,16 @@ Upgrade dependensi agnostik package manager, bertahap, tervalidasi, dan dapat di
 
 - **Halaman kit:** [Design system](/kit/design-system)
 - **Yang ditambahkan:** `docs/DESIGN.md` (direferensikan dari `AGENTS.md`) dengan hingga tiga **profil** ditumpuk dalam satu file: **visual-ui** (token dan komponen UI yang dirender), **cli-output** (gaya terminal semantik, degradasi TTY/`NO_COLOR`), **conversational** (suara, anatomi pesan, rendering per platform dengan fallback teks biasa)
-- **Kekuatan profil:** visual-ui **aktif default saat terdeteksi**; cli-output dan conversational **direkomendasikan saat terdeteksi, selalu ditanyakan, tidak pernah diterapkan otomatis**
+- **Kekuatan profil:** deteksi menjadikan penawaran wajib; instalasi dijaga oleh penerimaan, baik dalam mode terpandu maupun mode trust — visual-ui **sangat direkomendasikan saat terdeteksi**; cli-output dan conversational **direkomendasikan saat terdeteksi, selalu ditanyakan, tidak pernah diterapkan otomatis**
 - **Kapan ditawarkan:** hanya ketika permukaan antarmuka pengguna terdeteksi — bukan untuk pustaka murni, layanan headless, atau repo hanya infrastruktur
 
 ### AI Diff Reviewer (addon kelima — tinjauan lokal wajib, permukaan CI opsional)
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, versi saat ini **v2.0.0**) memberi pemeriksaan keamanan Final Review wajib sebuah tinjauan lokal terstruktur, dan secara opsional mengontrol pull request di CI. Sejak standar 2.3.0 **tinjauan lokal adalah bagian dari baseline**; hanya permukaan CI yang opt-in.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, versi saat ini **v2.0.1**) memberi pemeriksaan keamanan Final Review wajib sebuah tinjauan lokal terstruktur, dan secara opsional mengontrol pull request di CI. Sejak standar 2.3.0 **tinjauan lokal adalah bagian dari baseline**; hanya permukaan CI yang opt-in.
 
 - **Halaman kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — referensi kemampuan lengkap
-- **Wajib saat onboarding (Fase 7a):** instalasi skill vendored yang dipatok pada tag (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) plus `.review/extension.md` yang disesuaikan dengan repo (melalui `generate-extension`), di bawah persetujuan onboarding; upgrade harness tertarget merekonsiliasi keduanya bila hilang; penolakan dicatat sebagai pengecualian yang dinyatakan dan dilaporkan oleh `verify` hingga terinstal
-- **Wajib di setiap Final Review:** pemeriksaan keamanan menjalankan alur default induk upstream atas kumpulan perubahan yang terakumulasi dan menambahkan outputnya ke `analysis_results/SECURITY_REVIEW.md`; skill atau ekstensi yang hilang menjadi temuan `local reviewer not installed` yang tercatat — dipasang ketika eksekusi boleh menulis ke harness — tidak pernah dilewati diam-diam; temuan `critical` dari penerusan yang selesai memblokir penyelesaian hingga diperbaiki atau diterima secara eksplisit
+- **Wajib saat onboarding (Fase 7a):** instalasi skill vendored yang dipatok pada tag (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus `.review/extension.md` yang disesuaikan dengan repo (melalui `generate-extension`), di bawah persetujuan onboarding; upgrade harness tertarget merekonsiliasi keduanya bila hilang; penolakan dicatat sebagai pengecualian yang dinyatakan dan dilaporkan oleh `verify` hingga terinstal
+- **Wajib di setiap Final Review:** pemeriksaan keamanan menjalankan alur default induk upstream atas kumpulan perubahan yang terakumulasi dan menambahkan outputnya ke `analysis_results/SECURITY_REVIEW.md` milik plan tersebut (di dalam folder plan itu sendiri, bukan di root repo); skill atau ekstensi yang hilang menjadi temuan `local reviewer not installed` yang tercatat — tidak pernah dilewati diam-diam, dan tidak pernah menjadi bootstrap kejutan: instalasi milik persetujuan onboarding atau invokasi addon yang eksplisit; temuan `critical` dari penerusan yang selesai memblokir penyelesaian hingga diperbaiki atau diterima secara eksplisit
 - **Permukaan CI opsional (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) melalui sub-skill `setup` upstream, plus `apply-review` sebagai pendamping yang dipanggil pengembang — ditawarkan secara eksplisit, tidak pernah diinstal tanpa diminta, tidak pernah menjadi default, tidak pernah menjadi tugas rencana
 - **Tidak pernah memblokir (hanya pemanggilan):** tinjauan lokal yang bisa dimulai tetapi gagal bersifat peringat-sekali-catat-dan-lanjut; itu tidak pernah menggagalkan tugas
 - **Paritas (Flow B):** `prompt.md` bersama + ekstensi menyelaraskan metodologi/tingkat keparahan; Tinjauan Sadar Iterasi CI dapat mempersingkat putaran 2+ sementara penerusan lokal tetap penuh

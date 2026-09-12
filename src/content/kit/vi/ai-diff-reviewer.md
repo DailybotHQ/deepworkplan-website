@@ -8,7 +8,7 @@ order: 5
 
 # Tiện ích bổ sung AI Diff Reviewer
 
-Kết nối quá trình thực thi Deep Work Plan với **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (được liệt kê trên marketplace là **"AI Diff Reviewer"**, phiên bản hiện tại **v2.0.0**) để bước rà soát bảo mật của **Final Review** bắt buộc chạy một đánh giá cục bộ có cấu trúc — phán quyết, bảng phát hiện và mức độ nghiêm trọng — và khi chọn Flow B, mọi pull request đều có thể được kiểm soát bởi cùng một đánh giá trên CI. Kể từ chuẩn 2.3.0, **đánh giá cục bộ là một phần của chuẩn cơ sở**: onboarding cài đặt nó và mọi Final Review chạy nó. Chỉ bề mặt CI là tùy chọn.
+Kết nối quá trình thực thi Deep Work Plan với **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (được liệt kê trên marketplace là **"AI Diff Reviewer"**, phiên bản hiện tại **v2.0.1**) để bước rà soát bảo mật của **Final Review** bắt buộc chạy một đánh giá cục bộ có cấu trúc — phán quyết, bảng phát hiện và mức độ nghiêm trọng — và khi chọn Flow B, mọi pull request đều có thể được kiểm soát bởi cùng một đánh giá trên CI. Kể từ chuẩn 2.3.0, **đánh giá cục bộ là một phần của chuẩn cơ sở**: onboarding cài đặt nó và mọi Final Review chạy nó. Chỉ bề mặt CI là tùy chọn.
 
 Điều giữ sự trung lập với nhà cung cấp là ranh giới quan trọng: reviewer là một skill MIT được ghim theo tag, chạy bởi **chính** agent lập trình của bạn — không luồng Deep Work Plan nào yêu cầu một dịch vụ thương mại, nhà cung cấp CI hay secret. Flow A (chỉ cục bộ) là chuẩn cơ sở mà mọi repository đã onboarding đều nhận được; Flow B (CI Action) được đề xuất rõ ràng và không bao giờ được cài khi chưa được yêu cầu. Một nhà phát triển có thể từ chối đánh giá cục bộ; lời từ chối được ghi lại như một ngoại lệ được khai báo và `verify` báo cáo repository là không tuân thủ ở điểm đó cho đến khi nó được cài đặt.
 
@@ -35,16 +35,16 @@ Tiện ích bổ sung DWP **không** tái tạo trình đánh giá. Nó ủy quy
 
 ### Đánh giá cục bộ bắt buộc
 
-`create` thêm bước đánh giá cục bộ vào bước rà soát bảo mật của mọi Final Review và `execute` chạy nó. Đầu ra được thêm vào bên dưới `## AI Diff Reviewer local review` trong `analysis_results/SECURITY_REVIEW.md`.
+`create` thêm bước đánh giá cục bộ vào bước rà soát bảo mật của mọi Final Review và `execute` chạy nó. Đầu ra được thêm vào bên dưới `## AI Diff Reviewer local review` trong `analysis_results/SECURITY_REVIEW.md` nội bộ của plan (bên trong thư mục riêng của plan, không bao giờ ở thư mục gốc của repo).
 
-- **Reviewer bị thiếu — được ghi lại, không bao giờ bị bỏ qua âm thầm:** một skill hoặc tệp mở rộng bị thiếu trở thành một phát hiện `local reviewer not installed`; khi lượt chạy có thể ghi vào harness (chế độ tin cậy hoặc phê duyệt rõ ràng), agent cài mảnh còn thiếu rồi đánh giá, nếu không, phát hiện được mang vào báo cáo hoàn tất.
+- **Reviewer bị thiếu — được ghi lại, không bao giờ bị bỏ qua âm thầm:** một skill hoặc tệp mở rộng bị thiếu trở thành một phát hiện `local reviewer not installed`; Final Review chạy lượt rà soát cục bộ khi skill hiện diện, nếu không thì mang phát hiện đó vào báo cáo hoàn tất — việc cài đặt thuộc về sự chấp thuận của onboarding hoặc một lời gọi addon rõ ràng, không bao giờ là một bootstrap bất ngờ.
 - **Thất bại nhẹ (chỉ gọi):** một đánh giá có thể khởi động nhưng gặp lỗi → cảnh báo một lần, ghi lại, tiếp tục; không bao giờ làm thất bại tác vụ vì điều này.
 - **Cổng sau khi lượt kiểm tra hoàn tất:** các phát hiện `critical` vẫn chặn việc hoàn thành Final Review cho đến khi được sửa hoặc chấp nhận rõ ràng. `warning` / `info` được ghi lại nhưng không chặn.
 - **Flow A không cần secret CI.** `CURSOR_API_KEY` chưa được đặt không được ức chế lượt kiểm tra cục bộ.
 
 ### Cổng CI Flow B (tùy chọn)
 
-Action được ghim `DailybotHQ/ai-diff-reviewer@v2`, thường bị kiểm soát bởi nhãn (`ready`), với công việc **AI review gate** có tên ổn định để bảo vệ nhánh và nhãn bỏ qua tùy chọn `skip-review-label: skip-ai-review`. `prompt.md` dùng chung + mở rộng căn chỉnh phương pháp luận và mức độ nghiêm trọng; trong Đánh giá Nhận thức Lặp lại, các vòng CI thứ 2 trở đi có thể ngắn hơn trong khi lượt kiểm tra cục bộ vẫn đầy đủ.
+Action `DailybotHQ/ai-diff-reviewer@v2`, thường bị kiểm soát bởi nhãn (`ready`), với công việc **AI review gate** có tên ổn định để bảo vệ nhánh và nhãn bỏ qua tùy chọn `skip-review-label: skip-ai-review`. `prompt.md` dùng chung + mở rộng căn chỉnh phương pháp luận và mức độ nghiêm trọng; trong Đánh giá Nhận thức Lặp lại, các vòng CI thứ 2 trở đi có thể ngắn hơn trong khi lượt kiểm tra cục bộ vẫn đầy đủ.
 
 ### Trợ lý `apply-review` tùy chọn
 

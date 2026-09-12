@@ -169,7 +169,7 @@ Markdown 计划仍是**人类可读的事实来源**。JSON 层是一份**派生
 
 ### 关卡记录
 
-验证命令的每次运行都 SHOULD 被记录为一条关卡记录：`command`、`passes`（布尔值）、`exit_code`、`last_run`，以及一段简短的人类可读 `evidence` 字符串（摘要行或 `analysis_results/` 下的路径，绝非完整的命令输出）。
+验证命令的每次运行都 SHOULD 被记录为一条关卡记录：`command`、`passes`（布尔值）、`exit_code`、`last_run`，以及一段简短的人类可读 `evidence` 字符串（摘要行或 计划自身 `analysis_results/`（位于计划自身的文件夹内，绝不在仓库根目录）下的路径，绝非完整的命令输出）。
 
 任务 MUST NOT 在 `state.json` 中被标记为 `completed`，如果其任何关卡记录的 `passes: false` 且没有后续通过的运行。关卡记录是"在没有证据的情况下绝不标记完成"这一模式的机器等价物——每条记录中 `passes` 标志防止过早完成的模式。
 

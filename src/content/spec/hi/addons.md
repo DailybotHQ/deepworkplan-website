@@ -54,7 +54,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 - **Kit पृष्ठ:** [Dependency upgrade](/kit/dependency-upgrade)
 - **क्या जोड़ता है:** रिपॉज़िटरी के **वास्तविक** manager का पता लगाता है (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, …), semver-वर्गीकृत बैचों में अपग्रेड, हर बैच के बाद रिपॉज़िटरी का validation gate, विफलताएँ revert, बिना auto-commit सारांश
 - **कमांड:** स्वीकार होने पर केवल `/lib-upgrade` को `.agents/commands/` में इंस्टॉल करता है
-- **कब प्रस्तावित:** lockfile मौजूद और dependency-heavy stack; केवल प्रासंगिक होने पर अनुशंसित
+- **कब प्रस्तावित:** घोषित dependencies वाले हर repo के लिए प्रस्तावित; निष्क्रिय `/lib-upgrade` डेलिगेटर, स्पष्ट रूप से अस्वीकार न हो, onboarding की सहमति के अंतर्गत इंस्टॉल होता है — इंस्टॉल कोई upgrade नहीं चलाता
 
 ### Design system (चौथा ऐडऑन)
 
@@ -62,16 +62,16 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 - **Kit पृष्ठ:** [Design system](/kit/design-system)
 - **क्या जोड़ता है:** `docs/DESIGN.md` (`AGENTS.md` से संदर्भित) अधिकतम तीन **profiles** एक फ़ाइल में: **visual-ui** (rendered UI tokens और components), **cli-output** (semantic terminal styles, TTY/`NO_COLOR` degradation), **conversational** (voice, message anatomy, per-platform rendering plain-text fallbacks के साथ)
-- **Profile strength:** visual-ui **पता चलने पर default-on**; cli-output और conversational **पता चलने पर अनुशंसित, हमेशा पूछे जाते हैं, कभी auto-applied नहीं**
+- **Profile strength:** पहचान होने पर प्रस्ताव अनिवार्य हो जाता है; इंस्टॉल स्पष्ट स्वीकृति से नियंत्रित है — guided और trust दोनों mode में — visual-ui **पता चलने पर पुरज़ोर सिफ़ारिश**; cli-output और conversational **पता चलने पर अनुशंसित, हमेशा पूछे जाते हैं, कभी auto-applied नहीं**
 - **कब प्रस्तावित:** केवल जब user-facing इंटरफ़ेस सतह पहचानी जाए — pure libraries, headless services, या infra-only रिपॉज़िटरी के लिए नहीं
 
 ### AI Diff Reviewer (पाँचवाँ ऐडऑन — आवश्यक स्थानीय समीक्षा, वैकल्पिक CI सतह)
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, वर्तमान संस्करण **v2.0.0**) अनिवार्य Final Review सुरक्षा-जाँच को एक संरचित स्थानीय समीक्षा देता है, और वैकल्पिक रूप से CI में pull requests को गेट करता है। संस्करण 2.3.0 से **स्थानीय समीक्षा baseline का हिस्सा है**; केवल CI सतह ऑप्ट-इन है।
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, वर्तमान संस्करण **v2.0.1**) अनिवार्य Final Review सुरक्षा-जाँच को एक संरचित स्थानीय समीक्षा देता है, और वैकल्पिक रूप से CI में pull requests को गेट करता है। संस्करण 2.3.0 से **स्थानीय समीक्षा baseline का हिस्सा है**; केवल CI सतह ऑप्ट-इन है।
 
 - **Kit पृष्ठ:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — पूर्ण क्षमता संदर्भ
-- **ऑनबोर्डिंग पर आवश्यक (Phase 7a):** vendored skill का tag-pinned इंस्टॉल (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) साथ ही repo के लिए ढाला गया `.review/extension.md` (`generate-extension` के माध्यम से), ऑनबोर्डिंग की सहमति के अंतर्गत; अनुपस्थित होने पर एक targeted harness upgrade दोनों को समाधान करता है; अस्वीकृति एक घोषित अपवाद के रूप में दर्ज होती है और इंस्टॉल होने तक `verify` उसकी रिपोर्ट करता है
-- **हर Final Review में आवश्यक:** सुरक्षा-जाँच संचित change set पर upstream parent डिफ़ॉल्ट प्रवाह चलाती है और अपना आउटपुट `analysis_results/SECURITY_REVIEW.md` में जोड़ती है; अनुपस्थित skill या एक्सटेंशन एक दर्ज `local reviewer not installed` निष्कर्ष है — जब रन harness में लिख सकता हो तो इंस्टॉल किया जाता है — कभी चुपचाप नहीं छोड़ा जाता; एक पूर्ण पास के `critical` निष्कर्ष ठीक या स्पष्ट रूप से स्वीकृत होने तक पूर्णता को रोकते हैं
+- **ऑनबोर्डिंग पर आवश्यक (Phase 7a):** vendored skill का tag-pinned इंस्टॉल (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) साथ ही repo के लिए ढाला गया `.review/extension.md` (`generate-extension` के माध्यम से), ऑनबोर्डिंग की सहमति के अंतर्गत; अनुपस्थित होने पर एक targeted harness upgrade दोनों को समाधान करता है; अस्वीकृति एक घोषित अपवाद के रूप में दर्ज होती है और इंस्टॉल होने तक `verify` उसकी रिपोर्ट करता है
+- **हर Final Review में आवश्यक:** सुरक्षा-जाँच संचित change set पर upstream parent डिफ़ॉल्ट प्रवाह चलाती है और अपना आउटपुट plan-local `analysis_results/SECURITY_REVIEW.md` (plan के अपने folder के अंदर, repo root में कभी नहीं) में जोड़ती है; अनुपस्थित skill या एक्सटेंशन एक दर्ज `local reviewer not installed` निष्कर्ष है — कभी चुपचाप नहीं छोड़ा जाता, और कभी अचानक बूटस्ट्रैप नहीं: इंस्टॉल onboarding की सहमति या addon की स्पष्ट invocation से संबंधित है; एक पूर्ण पास के `critical` निष्कर्ष ठीक या स्पष्ट रूप से स्वीकृत होने तक पूर्णता को रोकते हैं
 - **वैकल्पिक CI सतह (Flow B):** upstream `setup` sub-skill के माध्यम से `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`), साथ ही `apply-review` डेवलपर द्वारा इनवोक किए जाने वाले साथी के रूप में — स्पष्ट रूप से प्रस्तावित, बिना अनुरोध कभी इंस्टॉल नहीं, कभी डिफ़ॉल्ट नहीं, कभी प्लान टास्क नहीं
 - **कभी अवरोधित नहीं (केवल इनवोकेशन):** एक स्थानीय समीक्षा जो शुरू हो सकती हो पर त्रुटि दे दे, तो एक बार चेतावनी दें, दर्ज करें, जारी रखें; वह उस कार्य को कभी विफल नहीं करती
 - **समानता (Flow B):** साझा `prompt.md` + एक्सटेंशन पद्धति/गंभीरता संरेखित करते हैं; CI Iteration-Aware Review स्थानीय पास पूर्ण रहते हुए 2+ राउंड को छोटा कर सकता है

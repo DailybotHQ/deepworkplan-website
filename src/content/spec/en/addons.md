@@ -54,7 +54,7 @@ Package-manager-agnostic, batched, validated, revertible dependency upgrades.
 - **Kit page:** [Dependency upgrade](/kit/dependency-upgrade)
 - **What it adds:** detects the repo's **real** manager (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, …), upgrades in semver-classified batches, runs the repo's validation gate after each batch, reverts failures, summarizes without auto-committing
 - **Command:** installs `/lib-upgrade` into `.agents/commands/` only when accepted
-- **When offered:** lockfile present and dependency-heavy stack; recommend only when relevant
+- **When offered:** offered for every repository with declared dependencies; the inert `/lib-upgrade` delegator installs under the onboarding consent unless explicitly declined — an install runs no upgrade
 
 ### Design system (fourth addon)
 
@@ -62,16 +62,16 @@ An interface-surface-scoped `DESIGN.md` any coding agent reads for consistent UI
 
 - **Kit page:** [Design system](/kit/design-system)
 - **What it adds:** `docs/DESIGN.md` (referenced from `AGENTS.md`) with up to three **profiles** stacked in one file: **visual-ui** (rendered UI tokens and components), **cli-output** (semantic terminal styles, TTY/`NO_COLOR` degradation), **conversational** (voice, message anatomy, per-platform rendering with plain-text fallbacks)
-- **Profile strength:** visual-ui is **default-on when detected**; cli-output and conversational are **recommended when detected, always asked, never auto-applied**
+- **Profile strength:** detection makes the offer mandatory; installation is acceptance-gated in guided and trust mode alike — visual-ui is **strongly recommended when detected**; cli-output and conversational are **recommended when detected, always asked, never auto-applied**
 - **When offered:** only when a user-facing interface surface is detected — not for pure libraries, headless services, or infra-only repos
 
 ### AI Diff Reviewer (fifth addon — required local review, optional CI surface)
 
-The **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, current **v2.0.0**) gives the mandatory Final Review security pass a structured local review, and optionally gates pull requests in CI. Since standard 2.3.0 the **local review is part of the baseline**; only the CI surface is opt-in.
+The **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, current **v2.0.1**) gives the mandatory Final Review security pass a structured local review, and optionally gates pull requests in CI. Since standard 2.3.0 the **local review is part of the baseline**; only the CI surface is opt-in.
 
 - **Kit page:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — full capability reference
-- **Required at onboarding (Phase 7a):** tag-pinned install of the vendored skill (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) plus a repo-tailored `.review/extension.md` (via `generate-extension`), under the onboarding consent; a targeted harness upgrade reconciles both when missing; a decline is recorded as a declared exception and reported by `verify` until installed
-- **Required in every Final Review:** the security pass runs the upstream parent default flow over the accumulated change set and appends its output to `analysis_results/SECURITY_REVIEW.md`; a missing skill or extension is a recorded `local reviewer not installed` finding — installed when the run may write to the harness — never a silent skip; `critical` findings from a completed pass block completion until fixed or explicitly accepted
+- **Required at onboarding (Phase 7a):** tag-pinned install of the vendored skill (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus a repo-tailored `.review/extension.md` (via `generate-extension`), under the onboarding consent; a targeted harness upgrade reconciles both when missing; a decline is recorded as a declared exception and reported by `verify` until installed
+- **Required in every Final Review:** the security pass runs the upstream parent default flow over the accumulated change set and appends its output to the plan-local `analysis_results/SECURITY_REVIEW.md` (inside the plan's own folder, never the repository root); a missing skill or extension is a recorded `local reviewer not installed` finding — never a silent skip, and never a surprise bootstrap: installation belongs to the onboarding consent or an explicit addon invocation; `critical` findings from a completed pass block completion until fixed or explicitly accepted
 - **Optional CI surface (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v2`) via the upstream `setup` sub-skill, plus `apply-review` as a developer-invoked companion — offered explicitly, never installed unrequested, never the default, never a plan task
 - **Never-block (invocation only):** a local review that could start but errors is warn-once-record-and-continue; it never fails the task
 - **Parity (Flow B):** shared `prompt.md` + extension align methodology/severity; CI Iteration-Aware Review may shorten round 2+ while local stays a full pass

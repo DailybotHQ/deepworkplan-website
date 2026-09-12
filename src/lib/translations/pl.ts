@@ -760,7 +760,7 @@ export const pl: SiteTranslations = {
             id: 'lite-vs-full',
             question: 'Jaka jest różnica między planem Lite a Full?',
             answer:
-              'Wybór reprezentacji, a nie kompromis rygoru. Każdy plan zaczyna się jako folder Lite: zwarty README z zakotwiczonymi zapisami zadań, który jest już wykonywalny, a nie częściowym szkicem. `create` rozwija się do plików zadań Full tylko wtedy, gdy szczegółowość instrukcji, zależności lub kontrakty zadania nie mieszczą się w zwartym, możliwym do przejrzenia zapisie; jawna prośba o dowolny z formatów jest respektowana, a plan Lite można później promować do Full bez utraty ukończonej pracy. Oba formaty niosą te same kryteria akceptacji, bramki walidacji, dowody i obowiązkowy Final Review.',
+              'Wybór reprezentacji, a nie kompromis rygoru. Plany są domyślnie Lite: zwarty README z zakotwiczonymi zapisami zadań, który jest już wykonywalny, a nie częściowym szkicem. Jeśli od razu poprosisz o plan Full, `create` zapisuje bezpośrednio pliki zadań Full; a kiedy szczegółowość instrukcji, zależności lub kontrakty zadania przestają mieścić się w zwartym, możliwym do przejrzenia zapisie, rozwija plan do Full. Późniejsza promocja zachowuje każde ukończone zadanie. Oba formaty niosą te same kryteria akceptacji, bramki walidacji, dowody i obowiązkowy Final Review.',
             linkLabel: 'Przeczytaj metodykę',
             linkPath: '/methodology',
           },
@@ -823,7 +823,7 @@ export const pl: SiteTranslations = {
             question:
               'Jak zaimplementowane są bramki walidacji? Czy wymagają zatwierdzenia przez człowieka?',
             answer:
-              'To wykonywalne asercje, które agent uruchamia sam. Zatwierdzenie przez człowieka ramuje przebieg: osoba zatwierdza plan przed wykonaniem i przegląda końcowy diff przy pull requeście; wykonanie między tymi punktami jest autonomiczne. Każde zadanie wymienia konkretne polecenia, zwykle własną bramkę jakości repozytorium, wybrane z dotkniętej powierzchni zadania: testy zmienionego zachowania i jego konsumentów, rozszerzone do pełnej suity, gdy zmiana jest współdzielona lub nie da się jej ograniczyć. Zadanie jest oznaczone jako ukończone tylko wtedy, gdy te polecenia zakończą się sukcesem, a zadania zmieniające zachowanie muszą rozszerzyć testy. Przy niepowodzeniu zadanie jest oznaczone jako zablokowane i agent się zatrzymuje.',
+              'To wykonywalne asercje, które agent uruchamia sam. Zatwierdzenie przez człowieka ramuje przebieg: osoba zatwierdza plan przed wykonaniem i przegląda końcowy diff przy pull requeście; wykonanie między tymi punktami jest autonomiczne. Każde zadanie wymienia konkretne polecenia, zwykle własną bramkę jakości repozytorium, wybrane z dotkniętej powierzchni zadania: testy zmienionego zachowania i jego konsumentów, rozszerzone do pełnej suity, gdy zmiana jest współdzielona lub nie da się jej ograniczyć. Zadanie jest oznaczone jako ukończone tylko wtedy, gdy te polecenia zakończą się sukcesem, a zadania zmieniające zachowanie muszą rozszerzyć testy. Przy niepowodzeniu agent najpierw naprawia to, co mieści się we własnym zakresie zadania, i ponawia bramkę; niepowodzenie, którego nie da się naprawić w tym zakresie, zostawia zadanie oznaczone jako zablokowane i zatrzymuje przebieg.',
             linkLabel: 'Pętla rdzeniowa',
             linkPath: '/methodology/02-core-loop',
           },
@@ -883,7 +883,7 @@ export const pl: SiteTranslations = {
             id: 'gate-fails',
             question: 'Co się dzieje, gdy bramka walidacji zawiedzie?',
             answer:
-              'Zadanie jest zapisywane jako zablokowane, a agent zatrzymuje się przed zgłoszeniem ukończenia. Możesz sprawdzić dowody, naprawić kod lub doprecyzować zadanie, a następnie wznowić; nieudane polecenie jest sygnałem do rozwiązania niezgodności, a nie pozwoleniem na osłabienie bramki.',
+              'Nieudana bramka to najpierw sygnał do naprawy: agent naprawia to, co mieści się we własnym zakresie zadania, i ponawia bramkę. Niepowodzenie wykraczające poza ten zakres zostawia zadanie zapisane jako zablokowane, a agent zatrzymuje się przed zgłoszeniem ukończenia. Możesz sprawdzić dowody, naprawić kod lub doprecyzować zadanie, a następnie wznowić; nieudane polecenie jest sygnałem do rozwiązania niezgodności, a nie pozwoleniem na osłabienie bramki.',
             linkLabel: 'Przeczytaj protokół agenta',
             linkPath: '/spec/agent-protocol',
           },
@@ -939,7 +939,7 @@ export const pl: SiteTranslations = {
             question:
               'Co onboarding zapisuje w moim repozytorium i czy dotyka istniejących plików?',
             answer:
-              'Onboarding jest niedestrukcyjny: wykrywa istniejący `AGENTS.md`, `docs/`, `.agents/` lub `CLAUDE.md`, uzgadnia zamiast nadpisywać i pyta przed zastąpieniem czegokolwiek. Zapisuje indeks `AGENTS.md` z realnymi poleceniami, przemyślane drzewo `docs/`, dokumentację per moduł, zestaw `.agents/` z cienkimi poleceniami `dwp-*`, obszar wyjściowy `.dwp/` wykluczony przez gitignore, zweryfikowaną mapę testów i wymagany lokalny przegląd kodu (skill AI Diff Reviewer plus rozszerzenie przeglądu dopasowane do repozytorium). Następnie uruchamia samosprawdzenie i sprawdzacz zgodności, aby pokazać, co zostało wyprodukowane. Repozytorium onboardowane pod wcześniejszą wersją dostaje ukierunkowaną aktualizację zmieniającą tylko to, czego brakuje.',
+              'Onboarding jest niedestrukcyjny: wykrywa istniejący `AGENTS.md`, `docs/`, `.agents/` lub `CLAUDE.md`, uzgadnia zamiast nadpisywać i pyta przed zastąpieniem czegokolwiek. Zapisuje indeks `AGENTS.md` z realnymi poleceniami, przemyślane drzewo `docs/`, dokumentację per moduł, zestaw `.agents/` z cienkimi poleceniami `dwp-*`, obszar wyjściowy `.dwp/` wykluczony przez gitignore, zweryfikowaną mapę testów i wymagany lokalny przegląd kodu (skill AI Diff Reviewer plus rozszerzenie przeglądu dopasowane do repozytorium). Następnie uruchamia samosprawdzenie i sprawdzacz zgodności, aby pokazać, co zostało wyprodukowane. Repozytorium onboardowane pod wcześniejszym standardem dostaje ukierunkowany upgrade harnessu, który uzgadnia tylko to, czego brakuje lub co jest przestarzałe. Aktualizacja samego skilla to osobny przepływ warunkowany wyraźną zgodą (`/dwp-upgrade`): sprawdza najnowszą opublikowaną wersję w trybie tylko do odczytu, instaluje się dopiero po Twojej wyraźnej akceptacji, ponawia onboarding jak świeże przejście i nigdy nie migruje ani nie unieważnia istniejących planów pod `.dwp/`.',
             linkLabel: 'Endpoint adopcji',
             linkPath: '/init',
           },

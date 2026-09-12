@@ -51,7 +51,7 @@ onboard 흐름이 리포지토리에 얹는 기능들입니다. 네 가지는 �
 - **Devcontainer** — 영속적 AI-CLI 인증을 갖춘 재현 가능하고 격리된 개발 컨테이너.
 - **Dailybot** — Dailybot을 사용하는 팀을 위한 계획 라이프사이클 보고(kickoff, 중요 작업, 블로킹, 완료), 더하기 전체 Dailybot 에이전트 스킬(3.10.3: 채팅, 체크인, 폼, AI 질의, 저장소별 API 키 등) 접근.
 - **Dependency upgrade** — 패키지 관리자 비종속, 배치 단위, 검증되고 되돌릴 수 있는 업그레이드.
-- **Design system** — 리포지토리의 실제 디자인 소스에서 추론된 인터페이스 범위의 `DESIGN.md`(`docs/DESIGN.md`에 위치하며 `AGENTS.md`에서 참조됨)로, 비주얼 UI, 스타일이 입혀진 CLI 출력, 대화형 메시징을 위한 프로필을 갖추어 에이전트가 브랜드에 맞는 인터페이스 출력을 생성합니다. 디자인 시스템이 감지되면 비주얼 프로필은 기본 활성이고, CLI와 대화형 프로필은 감지 시 권장되며 언제나 먼저 물어봅니다.
+- **Design system** — 리포지토리의 실제 디자인 소스에서 추론된 인터페이스 범위의 `DESIGN.md`(`docs/DESIGN.md`에 위치하며 `AGENTS.md`에서 참조됨)로, 비주얼 UI, 스타일이 입혀진 CLI 출력, 대화형 메시징을 위한 프로필을 갖추어 에이전트가 브랜드에 맞는 인터페이스 출력을 생성합니다. 디자인 시스템이 감지되면 제안은 필수이지만 설치는 수락으로 제어됩니다: 비주얼 프로필은 감지 시 강력히 권장되고, CLI와 대화형 프로필은 감지 시 권장되며 언제나 먼저 물어봅니다.
 - **AI Diff Reviewer** — 필수 로컬 리뷰입니다: 온보딩이 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 + `.review/extension.md`를 설치하고, 모든 Final Review의 보안 점검이 이를 실행합니다; 선택적인 Flow B는 동일한 extension을 공유하는 CI PR 병합 게이트를 추가하며, 명시적으로 제안되고 요청 없이 설치되지 않습니다.
 
 ### 예시

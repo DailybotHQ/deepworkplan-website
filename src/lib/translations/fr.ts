@@ -841,7 +841,7 @@ export const fr: SiteTranslations = {
             question:
               'Quelle est la différence entre un plan Lite et un plan Full ?',
             answer:
-              'Un choix de représentation, non un compromis sur la rigueur. Tout plan commence comme un dossier Lite : un README compact avec des enregistrements de tâches ancrés, déjà exécutable, et non une ébauche partielle. `create` ne s’étend en fichiers de tâche Full que lorsque le détail des instructions, les dépendances ou les contrats d’une tâche ne tiennent pas dans un enregistrement compact et relisible ; une demande explicite pour l’un ou l’autre format est honorée, et un plan Lite peut être promu en Full plus tard sans perdre le travail déjà accompli. Les deux formats portent les mêmes critères d’acceptation, portes de validation, preuves et le Final Review obligatoire.',
+              'Un choix de représentation, non un compromis sur la rigueur. Les plans sont Lite par défaut : un README compact avec des enregistrements de tâches ancrés, déjà exécutable, et non une ébauche partielle. Si vous demandez un plan Full d’emblée, `create` écrit directement les fichiers de tâche Full ; et il étend un plan en Full lorsque le détail des instructions, les dépendances ou les contrats d’une tâche ne tiennent plus dans un enregistrement compact et relisible. La promotion ultérieure conserve chaque tâche accomplie. Les deux formats portent les mêmes critères d’acceptation, portes de validation, preuves et le Final Review obligatoire.',
             linkLabel: 'Lire la méthodologie',
             linkPath: '/methodology',
           },
@@ -905,7 +905,7 @@ export const fr: SiteTranslations = {
             question:
               'Comment les portes de validation sont-elles mises en œuvre ? Exigent-elles une validation humaine ?',
             answer:
-              'Ce sont des assertions exécutables que l’agent lance lui-même. La validation humaine encadre l’exécution : une personne approuve le plan avant l’exécution et relit le diff final au moment de la pull request ; l’exécution entre les deux est autonome. Chaque tâche nomme des commandes concrètes, en général la porte qualité du dépôt lui-même, choisies depuis la surface touchée par la tâche : les tests du comportement modifié et de ses consommateurs, s’élargissant à la suite complète quand le changement est partagé ou ne peut pas être borné. Une tâche n’est marquée terminée que lorsque ces commandes sortent avec succès, et les tâches qui changent un comportement doivent étendre les tests. En cas d’échec, la tâche est marquée bloquée et l’agent s’arrête.',
+              'Ce sont des assertions exécutables que l’agent lance lui-même. La validation humaine encadre l’exécution : une personne approuve le plan avant l’exécution et relit le diff final au moment de la pull request ; l’exécution entre les deux est autonome. Chaque tâche nomme des commandes concrètes, en général la porte qualité du dépôt lui-même, choisies depuis la surface touchée par la tâche : les tests du comportement modifié et de ses consommateurs, s’élargissant à la suite complète quand le changement est partagé ou ne peut pas être borné. Une tâche n’est marquée terminée que lorsque ces commandes sortent avec succès, et les tâches qui changent un comportement doivent étendre les tests. En cas d’échec, l’agent répare d’abord ce qui relève du périmètre propre de la tâche et relance la porte ; un échec impossible à réparer dans ce périmètre laisse la tâche marquée bloquée et arrête l’exécution.',
             linkLabel: 'La boucle centrale',
             linkPath: '/methodology/02-core-loop',
           },
@@ -967,7 +967,7 @@ export const fr: SiteTranslations = {
             question:
               'Que se passe-t-il quand une porte de validation échoue ?',
             answer:
-              'La tâche est enregistrée comme bloquée et l’agent s’arrête avant de revendiquer un achèvement. Vous pouvez inspecter les preuves, corriger le code ou raffiner la tâche, puis reprendre ; une commande en échec est un signal pour résoudre l’écart, pas une permission d’affaiblir la porte.',
+              'Une porte en échec est d’abord un signal de réparation : l’agent corrige ce qui relève du périmètre propre de la tâche et relance la porte. Un échec qui dépasse ce périmètre laisse la tâche enregistrée comme bloquée, et l’agent s’arrête avant de revendiquer un achèvement. Vous pouvez inspecter les preuves, corriger le code ou raffiner la tâche, puis reprendre ; une commande en échec est un signal pour résoudre l’écart, pas une permission d’affaiblir la porte.',
             linkLabel: 'Lire le protocole d’agent',
             linkPath: '/spec/agent-protocol',
           },
@@ -1024,7 +1024,7 @@ export const fr: SiteTranslations = {
             question:
               'Qu’est-ce que l’onboarding écrit dans mon dépôt, et touche-t-il aux fichiers existants ?',
             answer:
-              'L’onboarding est non destructif : il détecte un `AGENTS.md`, `docs/`, `.agents/` ou `CLAUDE.md` existant, réconcilie au lieu d’écraser, et demande avant de remplacer quoi que ce soit. Il écrit l’index `AGENTS.md` avec de vraies commandes, une arborescence `docs/` raisonnée, des documentations par module, le kit `.agents/` avec ses commandes `dwp-*` légères, une zone de sortie `.dwp/` ignorée par git, une carte des tests vérifiée, et la revue locale de code requise (le skill AI Diff Reviewer plus une extension de revue adaptée au dépôt). Il lance ensuite un autocontrôle et le vérificateur de conformité, pour que vous voyiez ce qui a été produit. Un dépôt intégré sous une version antérieure reçoit une mise à niveau ciblée qui ne change que ce qui manque.',
+              'L’onboarding est non destructif : il détecte un `AGENTS.md`, `docs/`, `.agents/` ou `CLAUDE.md` existant, réconcilie au lieu d’écraser, et demande avant de remplacer quoi que ce soit. Il écrit l’index `AGENTS.md` avec de vraies commandes, une arborescence `docs/` raisonnée, des documentations par module, le kit `.agents/` avec ses commandes `dwp-*` légères, une zone de sortie `.dwp/` ignorée par git, une carte des tests vérifiée, et la revue locale de code requise (le skill AI Diff Reviewer plus une extension de revue adaptée au dépôt). Il lance ensuite un autocontrôle et le vérificateur de conformité, pour que vous voyiez ce qui a été produit. Un dépôt intégré sous un standard antérieur reçoit une mise à niveau ciblée du harness qui réconcilie uniquement ce qui manque ou est obsolète. La mise à niveau de la skill elle-même est un flux distinct, soumis à consentement explicite (`/dwp-upgrade`) : il vérifie la dernière version publiée en lecture seule, n’installe qu’après votre acceptation explicite, rejoue l’onboarding comme une passe complète, et ne migre ni n’invalide jamais les plans existants sous `.dwp/`.',
             linkLabel: 'L’endpoint d’adoption',
             linkPath: '/init',
           },

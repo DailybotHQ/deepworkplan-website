@@ -54,7 +54,7 @@ section: Addons
 - **키트 페이지:** [Dependency upgrade](/kit/dependency-upgrade)
 - **추가 내용:** 저장소의 **실제** 관리자 감지(npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer…), semver 분류 배치로 업그레이드, 각 배치 후 저장소 검증 게이트 실행, 실패 배치 되돌리기, 자동 커밋 없이 요약
 - **명령:** 수락 시에만 `.agents/commands/`에 `/lib-upgrade` 설치
-- **제안 시점:** lockfile 존재 및 의존성이 많은 스택; 관련 있을 때만 권장
+- **제안 시점:** 선언된 의존성이 있는 모든 저장소에 제안; 불활성 `/lib-upgrade` 위임 명령은 명시적으로 거부하지 않는 한 온보딩 동의 아래 설치됨 — 설치 자체는 업그레이드를 실행하지 않음
 
 ### Design system(네 번째 애드온)
 
@@ -62,16 +62,16 @@ section: Addons
 
 - **키트 페이지:** [Design system](/kit/design-system)
 - **추가 내용:** `docs/DESIGN.md`(`AGENTS.md`에서 참조), 하나의 파일에 최대 세 **프로필** 적층: **visual-ui**(렌더링 UI 토큰 및 컴포넌트), **cli-output**(의미적 터미널 스타일, TTY/`NO_COLOR` 저하), **conversational**(목소리, 메시지 구조, 플랫폼별 렌더링 및 일반 텍스트 폴백)
-- **프로필 강도:** visual-ui는 감지 시 **기본 켜짐**; cli-output과 conversational은 감지 시 **권장, 항상 질문, 자동 적용 안 함**
+- **프로필 강도:** 감지되면 제안은 필수가 되며 설치는 수락으로 제어됩니다(가이드 모드와 신뢰 모드 모두에서 동일) — visual-ui는 감지 시 **강력히 권장**; cli-output과 conversational은 감지 시 **권장, 항상 질문, 자동 적용 안 함**
 - **제안 시점:** 사용자 대상 인터페이스 표면이 감지된 경우에만 — 순수 라이브러리, 헤드리스 서비스 또는 인프라 전용 저장소에는 해당 없음
 
 ### AI Diff Reviewer(다섯 번째 애드온 — 필수 로컬 리뷰, 선택적 CI 표면)
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**(marketplace **"AI Diff Reviewer"**, 현재 버전 **v2.0.0**)는 필수 Final Review 보안 점검에 구조화된 로컬 리뷰를 부여하고, 선택적으로 CI에서 pull request를 게이트합니다. 표준 2.3.0부터 **로컬 리뷰는 기준선의 일부**입니다; 옵트인인 것은 CI 표면뿐입니다.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**(marketplace **"AI Diff Reviewer"**, 현재 버전 **v2.0.1**)는 필수 Final Review 보안 점검에 구조화된 로컬 리뷰를 부여하고, 선택적으로 CI에서 pull request를 게이트합니다. 표준 2.3.0부터 **로컬 리뷰는 기준선의 일부**입니다; 옵트인인 것은 CI 표면뿐입니다.
 
 - **키트 페이지:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 전체 기능 참조
-- **온보딩 시 필수(7a 단계):** 온보딩 동의 아래 벤더 스킬의 태그 고정 설치(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.0 --skill ai-diff-reviewer -y`) 더하기 저장소 맞춤 `.review/extension.md`(`generate-extension` 경유); 표적 하니스 업그레이드는 둘 중 무엇이 누락되었는지 조정; 거부는 선언된 예외로 기록되며 설치될 때까지 `verify`가 보고
-- **모든 Final Review에서 필수:** 보안 점검은 누적 변경 집합에 대해 upstream 부모 기본 플로우를 실행하고 그 출력을 `analysis_results/SECURITY_REVIEW.md`에 덧붙임; 누락된 스킬 또는 확장은 기록된 `local reviewer not installed` 발견 사항 — 실행이 하니스에 쓸 수 있을 때 설치됨 — 절대 조용한 건너뜀이 아님; 완료된 패스의 `critical` 발견은 수정되거나 명시적으로 수락될 때까지 완료를 차단
+- **온보딩 시 필수(7a 단계):** 온보딩 동의 아래 벤더 스킬의 태그 고정 설치(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) 더하기 저장소 맞춤 `.review/extension.md`(`generate-extension` 경유); 표적 하니스 업그레이드는 둘 중 무엇이 누락되었는지 조정; 거부는 선언된 예외로 기록되며 설치될 때까지 `verify`가 보고
+- **모든 Final Review에서 필수:** 보안 점검은 누적 변경 집합에 대해 upstream 부모 기본 플로우를 실행하고 그 출력을 플랜 로컬 `analysis_results/SECURITY_REVIEW.md`(플랜 자체 폴더 안에 있으며 저장소 루트가 아님)에 덧붙임; 누락된 스킬 또는 확장은 기록된 `local reviewer not installed` 발견 사항 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아님: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속함; 완료된 패스의 `critical` 발견은 수정되거나 명시적으로 수락될 때까지 완료를 차단
 - **선택적 CI 표면(Flow B):** upstream `setup` 서브스킬을 통한 `pr-review.yml`(`DailybotHQ/ai-diff-reviewer@v2`), 더해서 개발자 호출 컴패니언으로 `apply-review` — 명시적으로 제안되며 요청하지 않으면 설치하지 않고, 절대 기본값이 아니며, 절대 플랜 작업이 아님
 - **차단 없음(호출만):** 시작할 수 있었지만 오류가 난 로컬 리뷰는 한 번 경고하고 기록한 뒤 계속; 그 작업을 실패시키지 않음
 - **동일성(Flow B):** 공유 `prompt.md` + 확장으로 방법론/심각도 정렬; CI Iteration-Aware Review는 로컬 패스가 완전한 채로 남는 동안 2 라운드 이상을 줄일 수 있음

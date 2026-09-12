@@ -836,7 +836,7 @@ export const id: SiteTranslations = {
             id: 'lite-vs-full',
             question: 'Apa bedanya rencana Lite dan rencana Full?',
             answer:
-              'Pilihan representasi, bukan trade-off rigor. Setiap rencana dimulai sebagai folder Lite: README ringkas dengan catatan tugas berjangkar yang sudah dapat dieksekusi, bukan draf sebagian. `create` memperluas menjadi file tugas Full hanya ketika detail instruksi, dependensi, atau kontrak sebuah tugas tidak muat dalam catatan ringkas yang bisa ditinjau; permintaan eksplisit untuk salah satu format tetap dihormati, dan rencana Lite bisa dipromosikan ke Full kemudian tanpa kehilangan pekerjaan yang sudah selesai. Kedua format membawa kriteria penerimaan, gerbang verifikasi, bukti, dan Final Review wajib yang sama.',
+              'Pilihan representasi, bukan trade-off rigor. Rencana bawaannya adalah Lite: README ringkas dengan catatan tugas berjangkar yang sudah dapat dieksekusi, bukan draf sebagian. Jika Anda meminta rencana Full dari awal, `create` menulis file tugas Full secara langsung; dan memperluas sebuah rencana ke Full ketika detail instruksi, dependensi, atau kontrak sebuah tugas tidak lagi muat dalam catatan ringkas yang bisa ditinjau. Promosi di kemudian hari menyimpan setiap tugas yang selesai. Kedua format membawa kriteria penerimaan, gerbang verifikasi, bukti, dan Final Review wajib yang sama.',
             linkLabel: 'Baca metodologinya',
             linkPath: '/methodology',
           },
@@ -899,7 +899,7 @@ export const id: SiteTranslations = {
             question:
               'Bagaimana gerbang verifikasi diimplementasikan? Apakah memerlukan persetujuan manusia?',
             answer:
-              'Gerbang itu adalah asersi yang dapat dieksekusi dan dijalankan sendiri oleh agent. Persetujuan manusia mengapit jalannya rencana: seorang manusia menyetujui rencana sebelum eksekusi dan meninjau diff akhir saat pull request; eksekusi di antaranya berjalan otonom. Setiap tugas menyebutkan command konkret, biasanya gerbang kualitas milik repositori itu sendiri, yang dipilih dari permukaan yang disentuh tugas: test dari perilaku yang berubah beserta konsumennya, diperluas ke seluruh suite ketika perubahan bersifat shared atau tidak bisa dibatasi. Sebuah tugas ditandai selesai hanya ketika command itu keluar dengan sukses, dan tugas yang mengubah perilaku wajib memperluas test. Saat gagal, tugas ditandai terblokir dan agent berhenti.',
+              'Gerbang itu adalah asersi yang dapat dieksekusi dan dijalankan sendiri oleh agent. Persetujuan manusia mengapit jalannya rencana: seorang manusia menyetujui rencana sebelum eksekusi dan meninjau diff akhir saat pull request; eksekusi di antaranya berjalan otonom. Setiap tugas menyebutkan command konkret, biasanya gerbang kualitas milik repositori itu sendiri, yang dipilih dari permukaan yang disentuh tugas: test dari perilaku yang berubah beserta konsumennya, diperluas ke seluruh suite ketika perubahan bersifat shared atau tidak bisa dibatasi. Sebuah tugas ditandai selesai hanya ketika command itu keluar dengan sukses, dan tugas yang mengubah perilaku wajib memperluas test. Saat gagal, agent lebih dulu memperbaiki apa yang berada di dalam lingkup tugas itu sendiri dan menjalankan kembali gerbangnya; kegagalan yang tidak bisa diperbaiki dalam lingkup itu meninggalkan tugas tertandai terblokir dan menghentikan eksekusi.',
             linkLabel: 'Loop inti',
             linkPath: '/methodology/02-core-loop',
           },
@@ -960,7 +960,7 @@ export const id: SiteTranslations = {
             question:
               'Apa yang terjadi ketika sebuah gerbang verifikasi gagal?',
             answer:
-              'Tugas dicatat sebagai terblokir dan agent berhenti sebelum mengklaim selesai. Anda bisa memeriksa buktinya, memperbaiki kode, atau menyempurnakan tugasnya, lalu melanjutkan; command yang gagal adalah isyarat untuk menyelesaikan ketidaksesuaian, bukan izin untuk melemahkan gerbangnya.',
+              'Gerbang yang gagal lebih dulu adalah sinyal perbaikan: agent memperbaiki apa yang berada di dalam lingkup tugas itu sendiri dan menjalankan kembali gerbangnya. Kegagalan yang melampaui lingkup itu meninggalkan tugas tercatat sebagai terblokir, dan agent berhenti sebelum mengklaim selesai. Anda bisa memeriksa buktinya, memperbaiki kode, atau menyempurnakan tugasnya, lalu melanjutkan; command yang gagal adalah isyarat untuk menyelesaikan ketidaksesuaian, bukan izin untuk melemahkan gerbangnya.',
             linkLabel: 'Baca protokol agent',
             linkPath: '/spec/agent-protocol',
           },
@@ -1017,7 +1017,7 @@ export const id: SiteTranslations = {
             question:
               'Apa yang ditulis onboarding ke repositori saya, dan apakah ia menyentuh file yang sudah ada?',
             answer:
-              'Onboarding bersifat non-destruktif: ia mendeteksi `AGENTS.md`, `docs/`, `.agents/`, atau `CLAUDE.md` yang sudah ada, merekonsiliasi alih-alih menimpa, dan bertanya sebelum mengganti apa pun. Ia menulis indeks `AGENTS.md` dengan command nyata, pohon `docs/` yang beralasan, dokumentasi per modul, kit `.agents/` dengan command `dwp-*` yang tipis, area keluaran `.dwp/` yang di-gitignore, peta pengujian yang terverifikasi, dan tinjauan kode lokal yang diwajibkan (skill AI Diff Reviewer plus ekstensi review yang disesuaikan repo). Ia kemudian menjalankan self-check dan pemeriksa konformansi agar Anda bisa melihat apa yang dihasilkan. Repositori yang di-onboard di bawah versi sebelumnya mendapat upgrade tertarget yang hanya mengubah apa yang kurang.',
+              'Onboarding bersifat non-destruktif: ia mendeteksi `AGENTS.md`, `docs/`, `.agents/`, atau `CLAUDE.md` yang sudah ada, merekonsiliasi alih-alih menimpa, dan bertanya sebelum mengganti apa pun. Ia menulis indeks `AGENTS.md` dengan command nyata, pohon `docs/` yang beralasan, dokumentasi per modul, kit `.agents/` dengan command `dwp-*` yang tipis, area keluaran `.dwp/` yang di-gitignore, peta pengujian yang terverifikasi, dan tinjauan kode lokal yang diwajibkan (skill AI Diff Reviewer plus ekstensi review yang disesuaikan repo). Ia kemudian menjalankan self-check dan pemeriksa konformansi agar Anda bisa melihat apa yang dihasilkan. Repositori yang di-onboard di bawah standar sebelumnya mendapat upgrade harness tertarget yang merekonsiliasi hanya apa yang kurang atau usang. Meng-upgrade skill itu sendiri adalah alur terpisah yang bergantung pada persetujuan eksplisit (`/dwp-upgrade`): ia memeriksa versi terbaru yang dipublikasikan secara read-only, menginstal hanya setelah Anda menerimanya secara eksplisit, menjalankan kembali onboarding sebagai satu proses segar, dan tidak pernah memigrasi atau membatalkan rencana yang ada di bawah `.dwp/`.',
             linkLabel: 'Endpoint adopsi',
             linkPath: '/init',
           },

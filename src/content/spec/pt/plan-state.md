@@ -169,7 +169,7 @@ Uma entrada `completed` DEVE (MUST) carregar `completed_at` e, onde o plano faz 
 
 ### Registros de gates
 
-Cada execução de um comando de validação DEVERIA (SHOULD) ser registrada como um registro de gate: `command`, `passes` (booleano), `exit_code`, `last_run` e uma string `evidence` curta legível por humanos (uma linha de resumo ou um caminho em `analysis_results/`, nunca a saída completa do comando).
+Cada execução de um comando de validação DEVERIA (SHOULD) ser registrada como um registro de gate: `command`, `passes` (booleano), `exit_code`, `last_run` e uma string `evidence` curta legível por humanos (uma linha de resumo ou um caminho no `analysis_results/` próprio do plano (dentro da pasta do plano, nunca na raiz do repositório), nunca a saída completa do comando).
 
 Uma tarefa NÃO DEVE (MUST NOT) ser marcada como `completed` no `state.json` enquanto qualquer um de seus registros de gate tiver `passes: false` e não houver execução aprovada posterior. Os registros de gates são o equivalente de máquina de "nunca marcar como concluído sem evidência" — o padrão de um flag `passes` por item que protege contra conclusão prematura.
 

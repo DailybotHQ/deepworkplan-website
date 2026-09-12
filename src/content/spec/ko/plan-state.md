@@ -169,7 +169,7 @@ Lite 계획의 작업 항목은 별도 파일 대신 `README.md` 안의 작업 �
 
 ### 게이트 기록
 
-검증 명령의 각 실행은 게이트 기록으로 기록해야(SHOULD) 합니다: `command`, `passes`(불리언), `exit_code`, `last_run`, 그리고 짧은 사람이 읽을 수 있는 `evidence` 문자열(요약 줄 또는 `analysis_results/` 아래 경로, 전체 명령 출력은 절대 안 됨).
+검증 명령의 각 실행은 게이트 기록으로 기록해야(SHOULD) 합니다: `command`, `passes`(불리언), `exit_code`, `last_run`, 그리고 짧은 사람이 읽을 수 있는 `evidence` 문자열(요약 줄 또는 플랜 자체 `analysis_results/`(플랜 자체 폴더 안에 있으며 저장소 루트가 아님) 아래 경로, 전체 명령 출력은 절대 안 됨).
 
 작업은 게이트 기록 중 `passes: false`인 것이 있고 이후 통과 실행이 없는 한 `state.json`에서 `completed`로 표시해서는 안 됩니다(MUST NOT). 게이트 기록은 "증거 없이 완료로 표시하지 않는다"의 기계 등가물입니다 — 조기 완료를 막는 항목별 `passes` 플래그 패턴입니다.
 

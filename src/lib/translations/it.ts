@@ -836,7 +836,7 @@ export const it: SiteTranslations = {
             id: 'lite-vs-full',
             question: 'Qual è la differenza tra un piano Lite e uno Full?',
             answer:
-              'Una scelta di rappresentazione, non un compromesso sul rigore. Ogni piano inizia come una cartella Lite: un README compatto con record di task ancorati che è già eseguibile, non una bozza parziale. `create` si espande in file di task Full solo quando il dettaglio delle istruzioni, le dipendenze o i contratti di un task non rientrano in un record compatto e revisionabile; una richiesta esplicita per l’uno o l’altro formato viene rispettata, e un piano Lite può essere promosso a Full in un secondo momento senza perdere il lavoro già completato. Entrambi i formati portano gli stessi criteri di accettazione, validation gate, evidenze e il Final Review obbligatorio.',
+              'Una scelta di rappresentazione, non un compromesso sul rigore. I piani sono Lite per impostazione predefinita: un README compatto con record di task ancorati che è già eseguibile, non una bozza parziale. Se si chiede un piano Full fin dall’inizio, `create` scrive direttamente i file di task Full; ed espande un piano a Full quando il dettaglio delle istruzioni, le dipendenze o i contratti di un task non rientrano più in un record compatto e revisionabile. La promozione successiva conserva ogni task completato. Entrambi i formati portano gli stessi criteri di accettazione, validation gate, evidenze e il Final Review obbligatorio.',
             linkLabel: 'Leggi la metodologia',
             linkPath: '/methodology',
           },
@@ -900,7 +900,7 @@ export const it: SiteTranslations = {
             question:
               'Come sono implementati i validation gate? Richiedono un’approvazione umana?',
             answer:
-              'Sono asserzioni eseguibili che l’agente esegue da sé. L’approvazione umana delimita l’esecuzione all’inizio e alla fine: una persona approva il piano prima dell’esecuzione e rivede il diff finale in fase di pull request; l’esecuzione nel mezzo è autonoma. Ogni task indica comandi concreti, in genere il quality gate del repository stesso, selezionati dalla superficie toccata dal task: i test del comportamento modificato e dei suoi consumer, ampliati alla suite completa quando la modifica è condivisa o non delimitabile. Un task viene marcato come fatto solo quando quei comandi terminano con successo, e i task che modificano il comportamento devono estendere i test. In caso di fallimento il task viene marcato come bloccato e l’agente si ferma.',
+              'Sono asserzioni eseguibili che l’agente esegue da sé. L’approvazione umana delimita l’esecuzione all’inizio e alla fine: una persona approva il piano prima dell’esecuzione e rivede il diff finale in fase di pull request; l’esecuzione nel mezzo è autonoma. Ogni task indica comandi concreti, in genere il quality gate del repository stesso, selezionati dalla superficie toccata dal task: i test del comportamento modificato e dei suoi consumer, ampliati alla suite completa quando la modifica è condivisa o non delimitabile. Un task viene marcato come fatto solo quando quei comandi terminano con successo, e i task che modificano il comportamento devono estendere i test. In caso di fallimento l’agente ripara prima ciò che ricade nell’ambito proprio della task e riesegue il gate; un fallimento non riparabile in quell’ambito lascia il task marcato come bloccato e ferma l’esecuzione.',
             linkLabel: 'Il core loop',
             linkPath: '/methodology/02-core-loop',
           },
@@ -960,7 +960,7 @@ export const it: SiteTranslations = {
             id: 'gate-fails',
             question: 'Cosa succede quando un validation gate fallisce?',
             answer:
-              'Il task viene registrato come bloccato e l’agente si ferma prima di dichiarare il completamento. Lei può ispezionare le evidenze, riparare il codice o rifinire il task, quindi riprendere; un comando fallito è un segnale per risolvere la discrepanza, non un permesso per indebolire il gate.',
+              'Un gate fallito è prima di tutto un segnale di riparazione: l’agente corregge ciò che ricade nell’ambito proprio della task e riesegue il gate. Un fallimento che eccede quell’ambito lascia il task registrato come bloccato, e l’agente si ferma prima di dichiarare il completamento. Lei può ispezionare le evidenze, riparare il codice o rifinire il task, quindi riprendere; un comando fallito è un segnale per risolvere la discrepanza, non un permesso per indebolire il gate.',
             linkLabel: 'Legga il protocollo dell’agente',
             linkPath: '/spec/agent-protocol',
           },
@@ -1018,7 +1018,7 @@ export const it: SiteTranslations = {
             question:
               'Cosa scrive l’onboarding nel mio repository e tocca i file esistenti?',
             answer:
-              'L’onboarding è non distruttivo: rileva un `AGENTS.md`, un `docs/`, un `.agents/` o un `CLAUDE.md` esistente, riconcilia anziché sovrascrivere e chiede prima di sostituire qualsiasi cosa. Scrive l’indice `AGENTS.md` con i comandi reali, un albero `docs/` ragionato, documentazione per modulo, il kit `.agents/` con i sottili comandi `dwp-*`, un’area di output `.dwp/` esclusa da git, una mappa dei test verificata e la revisione locale del codice obbligatoria (la skill AI Diff Reviewer più un’estensione di revisione adattata al repository). Esegue poi un self-check e il verificatore di conformità, così può vedere cosa è stato prodotto. Un repository sottoposto a onboarding con una versione precedente riceve un aggiornamento mirato che cambia solo ciò che manca.',
+              'L’onboarding è non distruttivo: rileva un `AGENTS.md`, un `docs/`, un `.agents/` o un `CLAUDE.md` esistente, riconcilia anziché sovrascrivere e chiede prima di sostituire qualsiasi cosa. Scrive l’indice `AGENTS.md` con i comandi reali, un albero `docs/` ragionato, documentazione per modulo, il kit `.agents/` con i sottili comandi `dwp-*`, un’area di output `.dwp/` esclusa da git, una mappa dei test verificata e la revisione locale del codice obbligatoria (la skill AI Diff Reviewer più un’estensione di revisione adattata al repository). Esegue poi un self-check e il verificatore di conformità, così può vedere cosa è stato prodotto. Un repository sottoposto a onboarding con uno standard precedente riceve un aggiornamento mirato dell’harness che riconcilia solo ciò che manca o è obsoleto. L’aggiornamento della skill stessa è un flusso separato e subordinato al consenso esplicito (`/dwp-upgrade`): verifica in modalità di sola lettura l’ultima versione pubblicata, installa solo dopo un’accettazione esplicita, riesegue l’onboarding come una passata fresca e non migra né invalida mai i piani esistenti in `.dwp/`.',
             linkLabel: 'L’endpoint di adozione',
             linkPath: '/init',
           },

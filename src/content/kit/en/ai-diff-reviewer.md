@@ -8,7 +8,7 @@ order: 5
 
 # AI Diff Reviewer addon
 
-Connect Deep Work Plan execution to the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace listing **"AI Diff Reviewer"**, current **v2.0.0**) so the security pass of the mandatory **Final Review** runs a structured local review — verdict, findings table, and severity — and, when you choose Flow B, every pull request can be gated by the same review in CI. Since standard 2.3.0 the **local review is part of the baseline**: onboarding installs it and every Final Review runs it. Only the CI surface is opt-in.
+Connect Deep Work Plan execution to the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace listing **"AI Diff Reviewer"**, current **v2.0.1**) so the security pass of the mandatory **Final Review** runs a structured local review — verdict, findings table, and severity — and, when you choose Flow B, every pull request can be gated by the same review in CI. Since standard 2.3.0 the **local review is part of the baseline**: onboarding installs it and every Final Review runs it. Only the CI surface is opt-in.
 
 What stays vendor-neutral is the boundary that matters: the reviewer is an MIT, tag-pinned skill run by your **own** coding agent — no Deep Work Plan flow requires a commercial service, CI provider, or secret. Flow A (local-only) is the baseline every onboarded repository gets; Flow B (the CI Action) is offered explicitly and never installed unrequested. A developer may decline the local reviewer; the decline is recorded as a declared exception and `verify` reports the repository as non-conformant on that point until it is installed.
 
@@ -35,16 +35,16 @@ The DWP addon does **not** reinvent the reviewer. It defers install, methodology
 
 ### The required local review
 
-`create` adds the local review step to every Final Review's security pass and `execute` runs it. Output appends under `## AI Diff Reviewer local review` in `analysis_results/SECURITY_REVIEW.md`.
+`create` adds the local review step to every Final Review's security pass and `execute` runs it. Output appends under `## AI Diff Reviewer local review` in the plan-local `analysis_results/SECURITY_REVIEW.md` (inside the plan's own folder, never the repository root).
 
-- **Missing reviewer — recorded, never skipped silently:** a missing skill or extension becomes a `local reviewer not installed` finding; when the run may write to the harness (trust mode or explicit approval) the agent installs the missing piece and then reviews, otherwise the finding is carried into the completion report.
+- **Missing reviewer — recorded, never skipped silently:** a missing skill or extension becomes a `local reviewer not installed` finding; Final Review runs the local pass when the skill is present and otherwise carries the finding into the completion report — installation belongs to the onboarding consent or an explicit addon invocation, never a surprise bootstrap.
 - **Soft-fail (invocation only):** a review that could start but errors → warn once, record, continue; never fail the task for that miss.
 - **Gate after a completed pass:** `critical` findings still block Final Review completion until fixed or explicitly accepted. `warning` / `info` are documented but non-blocking.
 - **Flow A needs no CI secret.** An unset `CURSOR_API_KEY` must not suppress the local pass.
 
 ### Flow B CI gate (optional)
 
-Pinned Action `DailybotHQ/ai-diff-reviewer@v2`, typically label-gated (`ready`), with a stable-named **AI review gate** job for branch protection and opt-in `skip-review-label: skip-ai-review`. Shared `prompt.md` + extension align methodology and severity; under Iteration-Aware Review, CI round 2+ may be shorter while the local pass stays full.
+Action `DailybotHQ/ai-diff-reviewer@v2`, typically label-gated (`ready`), with a stable-named **AI review gate** job for branch protection and opt-in `skip-review-label: skip-ai-review`. Shared `prompt.md` + extension align methodology and severity; under Iteration-Aware Review, CI round 2+ may be shorter while the local pass stays full.
 
 ### Optional `apply-review` companion
 

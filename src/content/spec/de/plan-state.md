@@ -169,7 +169,7 @@ Ein `completed`-Eintrag MUSS `completed_at` enthalten und, wo der Plan committet
 
 ### Gate-Einträge
 
-Jeder Lauf eines Validierungsbefehls SOLLTE als Gate-Eintrag aufgezeichnet werden: `command`, `passes` (boolean), `exit_code`, `last_run` und eine kurze menschenlesbare `evidence`-Zeichenkette (eine Zusammenfassungszeile oder ein Pfad unter `analysis_results/`, niemals vollständige Befehlsausgabe).
+Jeder Lauf eines Validierungsbefehls SOLLTE als Gate-Eintrag aufgezeichnet werden: `command`, `passes` (boolean), `exit_code`, `last_run` und eine kurze menschenlesbare `evidence`-Zeichenkette (eine Zusammenfassungszeile oder ein Pfad unter dem plan-eigenen `analysis_results/` (im eigenen Ordner des Plans, nie im Repository-Root), niemals vollständige Befehlsausgabe).
 
 Eine Aufgabe DARF NICHT in `state.json` als `completed` markiert werden, solange irgendein ihrer Gate-Einträge `passes: false` hat und kein späterer erfolgreicher Lauf vorliegt. Gate-Einträge sind das maschinelle Äquivalent von „niemals als abgeschlossen markieren ohne Beleg" — das Muster eines `passes`-Flags pro Eintrag, das vorzeitigen Abschluss verhindert.
 
