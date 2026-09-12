@@ -23,7 +23,7 @@ Cuatro ejes describen el estado de un plan, y DEBEN rastrearse de forma independ
 | Aprobación | `pending`, `approved`, `pre_approved` | Si un humano revisó el plan, o el modo trust lo preaprobó |
 | Ejecución | `pending`, `in_progress`, `blocked`, `completed` | Progreso por tarea y general |
 
-El create guiado escribe una **propuesta pendiente revisable** — Lite o Full, ya el plan real, nunca un borrador desechable. Trust materializa un plan **listo y preaprobado** y devuelve el control de inmediato. `create` y una promoción nunca ejecutan trabajo de producto; `execute` DEBE rechazar una propuesta `pending` que espera aprobación y DEBE rechazar un plan con una promoción sin resolver en curso.
+El create guiado escribe una **propuesta pendiente revisable** — Lite o Full, ya el plan real, nunca un borrador desechable. Trust materializa un plan **listo y preaprobado** y devuelve el control de inmediato. `create` y una promoción nunca ejecutan trabajo de producto; una petición explícita de `execute` o `resume` aprueba el alcance actual listo del plan y DEBE registrar esa aprobación antes de comenzar el trabajo; sin esa petición, una propuesta `pending` no es ejecutable; una promoción sin resolver en curso DEBE recuperarse antes del trabajo de producto.
 
 ## Creación y selección de formato
 

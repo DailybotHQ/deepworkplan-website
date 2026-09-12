@@ -169,7 +169,7 @@ Una voce `completed` DEVE portare `completed_at` e, dove il piano esegue commit,
 
 ### Gate record
 
-Ogni esecuzione di un comando di validazione DOVREBBE essere registrata come gate record: `command`, `passes` (booleano), `exit_code`, `last_run` e una breve stringa `evidence` leggibile (una riga di riepilogo o un percorso sotto `analysis_results/`, mai l'output completo del comando).
+Ogni esecuzione di un comando di validazione DOVREBBE essere registrata come gate record: `command`, `passes` (booleano), `exit_code`, `last_run` e una breve stringa `evidence` leggibile (una riga di riepilogo o un percorso nel `analysis_results/` locale del piano (dentro la cartella propria del piano, mai nella root del repository), mai l'output completo del comando).
 
 Un'attività NON DEVE essere segnata come `completed` in `state.json` se uno qualsiasi dei suoi gate record ha `passes: false` e non ha un'esecuzione successiva con esito positivo. I gate record sono l'equivalente automatico di "non segnare mai come completata senza prove" — il pattern di un flag `passes` per voce che protegge dal completamento prematuro.
 

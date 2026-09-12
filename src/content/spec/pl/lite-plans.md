@@ -23,7 +23,7 @@ Cztery osie opisują stan planu i MUSZĄ być śledzone niezależnie, a nie łą
 | Approval | `pending`, `approved`, `pre_approved` | Czy człowiek zrecenzował plan, czy tryb trust wstępnie go zatwierdził |
 | Execution | `pending`, `in_progress`, `blocked`, `completed` | Postęp na poziomie zadania i ogólny |
 
-Guided create zapisuje **propozycję oczekującą na przegląd** — Lite lub Full, już prawdziwy plan, nigdy jednorazowy szkic. Trust materializuje **gotowy, wstępnie zatwierdzony** plan i natychmiast zwraca kontrolę. `create` i podniesienie nigdy nie wykonują pracy produktowej; `execute` MUSI odrzucić propozycję `pending` oczekującą na zatwierdzenie i MUSI odrzucić plan z nierozwiązanym podniesieniem w toku.
+Guided create zapisuje **propozycję oczekującą na przegląd** — Lite lub Full, już prawdziwy plan, nigdy jednorazowy szkic. Trust materializuje **gotowy, wstępnie zatwierdzony** plan i natychmiast zwraca kontrolę. `create` i podniesienie nigdy nie wykonują pracy produktowej; jawne żądanie `execute` lub `resume` zatwierdza gotowy bieżący zakres planu i MUSI odnotować to zatwierdzenie przed rozpoczęciem pracy; bez tego żądania propozycja `pending` nie jest wykonywalna; nierozwiązane podniesienie w toku MUSI zostać najpierw odzyskane przed pracą produktową.
 
 ## Tworzenie i wybór formatu
 

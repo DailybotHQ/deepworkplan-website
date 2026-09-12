@@ -23,7 +23,7 @@ Quatro eixos descrevem o estado de um plano, e DEVEM (MUST) ser rastreados indep
 | Aprovação | `pending`, `approved`, `pre_approved` | Se um humano revisou o plano, ou o modo trust o pré-aprovou |
 | Execução | `pending`, `in_progress`, `blocked`, `completed` | Progresso por tarefa e geral |
 
-O create guiado escreve uma **proposta pendente revisável** — Lite ou Full, já o plano real, nunca um rascunho descartável. Trust materializa um plano **pronto e pré-aprovado** e devolve o controle imediatamente. `create` e uma promoção nunca executam trabalho de produto; `execute` DEVE (MUST) rejeitar uma proposta `pending` aguardando aprovação e DEVE (MUST) rejeitar um plano com uma promoção não resolvida em andamento.
+O create guiado escreve uma **proposta pendente revisável** — Lite ou Full, já o plano real, nunca um rascunho descartável. Trust materializa um plano **pronto e pré-aprovado** e devolve o controle imediatamente. `create` e uma promoção nunca executam trabalho de produto; um pedido explícito de `execute` ou `resume` aprova o escopo atual pronto do plano e DEVE (MUST) registrar essa aprovação antes de iniciar o trabalho; sem esse pedido, uma proposta `pending` não é executável; uma promoção não resolvida em andamento DEVE (MUST) ser recuperada antes do trabalho de produto.
 
 ## Criação e seleção de formato
 

@@ -169,7 +169,7 @@ Una entrada `completed` DEBE llevar `completed_at` y, cuando el plan hace commit
 
 ### Registros de puertas
 
-Cada ejecución de un comando de validación DEBERÍA registrarse como un registro de puerta: `command`, `passes` (booleano), `exit_code`, `last_run` y una cadena `evidence` breve y legible para personas (una línea de resumen o una ruta bajo `analysis_results/`, nunca la salida completa del comando).
+Cada ejecución de un comando de validación DEBERÍA registrarse como un registro de puerta: `command`, `passes` (booleano), `exit_code`, `last_run` y una cadena `evidence` breve y legible para personas (una línea de resumen o una ruta bajo el `analysis_results/` propio del plan (dentro del folder del plan, nunca en la raíz del repositorio), nunca la salida completa del comando).
 
 Una tarea NO DEBE marcarse como `completed` en `state.json` mientras alguno de sus registros de puerta tenga `passes: false` sin una ejecución posterior que pase. Los registros de puertas son el equivalente en máquina de "nunca marcar como completado sin evidencia" — el patrón de un indicador `passes` por elemento que evita la finalización prematura.
 

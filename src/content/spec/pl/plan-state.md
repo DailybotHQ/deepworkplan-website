@@ -169,7 +169,7 @@ Wpis `completed` MUSI zawierać `completed_at` oraz, w przypadkach gdzie plan wy
 
 ### Rekordy bramek
 
-Każde uruchomienie polecenia walidacyjnego POWINNO być rejestrowane jako rekord bramki: `command`, `passes` (wartość logiczna), `exit_code`, `last_run` oraz krótki, czytelny dla człowieka ciąg `evidence` (podsumowanie lub ścieżka w `analysis_results/`, nigdy pełne wyjście polecenia).
+Każde uruchomienie polecenia walidacyjnego POWINNO być rejestrowane jako rekord bramki: `command`, `passes` (wartość logiczna), `exit_code`, `last_run` oraz krótki, czytelny dla człowieka ciąg `evidence` (podsumowanie lub ścieżka w lokalnym dla planu `analysis_results/` (wewnątrz własnego folderu planu, nigdy w katalogu głównym repo), nigdy pełne wyjście polecenia).
 
 Zadanie NIE MOŻE być oznaczone jako `completed` w `state.json`, gdy którykolwiek z jego rekordów bramki ma wartość `passes: false` i nie ma późniejszego pomyślnego uruchomienia. Rekordy bramek są maszynowym odpowiednikiem zasady „nigdy nie oznaczaj jako ukończone bez dowodów" — wzorzec flagi `passes` dla każdego elementu, chroniącej przed przedwczesnym ukończeniem.
 

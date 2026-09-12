@@ -23,7 +23,7 @@ Empat sumbu menggambarkan status sebuah rencana, dan MUST dilacak secara indepen
 | Persetujuan | `pending`, `approved`, `pre_approved` | Apakah seorang manusia meninjau rencana, atau mode trust menyetujuinya di muka |
 | Eksekusi | `pending`, `in_progress`, `blocked`, `completed` | Kemajuan per-tugas dan keseluruhan |
 
-Create terpandu menulis sebuah **proposal yang menunggu dan dapat ditinjau** — Lite atau Full, sudah menjadi rencana yang sesungguhnya, tidak pernah draf yang sekali pakai. Trust melakukan materialisasi sebuah rencana yang **siap dan telah disetujui di muka** dan segera mengembalikan kendali. `create` dan sebuah promosi tidak pernah mengeksekusi pekerjaan produk; `execute` MUST menolak sebuah proposal `pending` yang menunggu persetujuan dan MUST menolak sebuah rencana dengan promosi yang belum terselesaikan sedang berlangsung.
+Create terpandu menulis sebuah **proposal yang menunggu dan dapat ditinjau** — Lite atau Full, sudah menjadi rencana yang sesungguhnya, tidak pernah draf yang sekali pakai. Trust melakukan materialisasi sebuah rencana yang **siap dan telah disetujui di muka** dan segera mengembalikan kendali. `create` dan sebuah promosi tidak pernah mengeksekusi pekerjaan produk; permintaan `execute` atau `resume` yang eksplisit menyetujui cakupan saat ini yang siap dari rencana tersebut dan MUST mencatat persetujuan itu sebelum memulai pekerjaan; tanpa permintaan itu, proposal `pending` tidak dapat dieksekusi; promosi yang belum terselesaikan sedang berlangsung MUST dipulihkan sebelum pekerjaan produk.
 
 ## Pembuatan dan pemilihan format
 

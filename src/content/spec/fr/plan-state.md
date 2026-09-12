@@ -169,7 +169,7 @@ Une entrée `completed` MUST porter `completed_at` et, lorsque le plan fait des 
 
 ### Enregistrements de portes
 
-Chaque exécution d'une commande de validation SHOULD être consignée comme un enregistrement de porte : `command`, `passes` (booléen), `exit_code`, `last_run`, et une courte chaîne `evidence` lisible par un humain (une ligne de synthèse ou un chemin sous `analysis_results/`, jamais la sortie complète de la commande).
+Chaque exécution d'une commande de validation SHOULD être consignée comme un enregistrement de porte : `command`, `passes` (booléen), `exit_code`, `last_run`, et une courte chaîne `evidence` lisible par un humain (une ligne de synthèse ou un chemin sous le `analysis_results/` propre au plan (dans le dossier propre du plan, jamais à la racine du dépôt), jamais la sortie complète de la commande).
 
 Une tâche MUST NOT être marquée `completed` dans `state.json` tant que l'un de ses enregistrements de porte a `passes: false` et qu'aucune exécution réussie ultérieure n'existe. Les enregistrements de portes sont l'équivalent machine du principe « ne jamais marquer comme achevé sans preuve » — le motif d'un indicateur `passes` par élément qui garde contre l'achèvement prématuré.
 

@@ -23,7 +23,7 @@ Bốn trục mô tả trạng thái của một kế hoạch, và PHẢI (MUST) 
 | Phê duyệt | `pending`, `approved`, `pre_approved` | Một con người đã rà soát kế hoạch, hay chế độ tin cậy đã phê duyệt trước nó |
 | Thực thi | `pending`, `in_progress`, `blocked`, `completed` | Tiến độ theo từng tác vụ và tổng thể |
 
-Create có hướng dẫn viết ra một **đề xuất đang chờ, có thể rà soát** — Lite hoặc Full, đã là kế hoạch thật sự, không bao giờ là một bản nháp dùng-rồi-bỏ. Trust vật liệu hóa một kế hoạch **đã sẵn sàng, được phê duyệt trước** và trả lại quyền kiểm soát ngay lập tức. `create` và một lần nâng cấp không bao giờ thực thi công việc sản phẩm; `execute` PHẢI (MUST) từ chối một đề xuất `pending` đang chờ phê duyệt và PHẢI (MUST) từ chối một kế hoạch đang có một lần nâng cấp chưa giải quyết xong.
+Create có hướng dẫn viết ra một **đề xuất đang chờ, có thể rà soát** — Lite hoặc Full, đã là kế hoạch thật sự, không bao giờ là một bản nháp dùng-rồi-bỏ. Trust vật liệu hóa một kế hoạch **đã sẵn sàng, được phê duyệt trước** và trả lại quyền kiểm soát ngay lập tức. `create` và một lần nâng cấp không bao giờ thực thi công việc sản phẩm; một yêu cầu `execute` hoặc `resume` rõ ràng phê duyệt phạm vi hiện tại đã sẵn sàng của kế hoạch và PHẢI (MUST) ghi lại phê duyệt đó trước khi bắt đầu công việc; không có yêu cầu đó, một đề xuất `pending` không thể thực thi; một lần nâng cấp chưa giải quyết đang diễn ra PHẢI (MUST) được khôi phục trước công việc sản phẩm.
 
 ## Tạo và chọn định dạng
 

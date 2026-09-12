@@ -169,7 +169,7 @@ Her görev — bir Full planda ayrı bir dosya, ya da bir Lite planda inline bir
 
 ### Kapı kayıtları
 
-Bir doğrulama komutunun her çalıştırması bir kapı kaydı olarak kaydedilMELİDİR: `command`, `passes` (boolean), `exit_code`, `last_run` ve kısa, insan tarafından okunabilir bir `evidence` dizesi (`analysis_results/` altında bir özet satırı veya yol; hiçbir zaman tam komut çıktısı değil).
+Bir doğrulama komutunun her çalıştırması bir kapı kaydı olarak kaydedilMELİDİR: `command`, `passes` (boolean), `exit_code`, `last_run` ve kısa, insan tarafından okunabilir bir `evidence` dizesi (plana yerel `analysis_results/` (planın kendi klasörü içinde, asla depo kökünde değil) altında bir özet satırı veya yol; hiçbir zaman tam komut çıktısı değil).
 
 Bir görev, `state.json`'daki kapı kayıtlarından herhangi birinin `passes: false` değeri varken ve sonraki geçen bir çalıştırma yokken `completed` olarak işaretlenMEMELİDİR. Kapı kayıtları, "kanıtsız tamamlandı işaretleme" kalıbının makine eşdeğeridir — erken tamamlamayı engelleyen görev başına `passes` bayrağı kalıbı.
 

@@ -169,7 +169,7 @@ Một mục nhập `completed` PHẢI mang `completed_at` và, nơi kế hoạch
 
 ### Bản ghi cổng
 
-Mỗi lần chạy một lệnh kiểm chứng NÊN được ghi lại dưới dạng bản ghi cổng: `command`, `passes` (boolean), `exit_code`, `last_run`, và một chuỗi `evidence` ngắn có thể đọc được bởi con người (một dòng tóm tắt hoặc một đường dẫn dưới `analysis_results/`, không bao giờ là đầu ra lệnh đầy đủ).
+Mỗi lần chạy một lệnh kiểm chứng NÊN được ghi lại dưới dạng bản ghi cổng: `command`, `passes` (boolean), `exit_code`, `last_run`, và một chuỗi `evidence` ngắn có thể đọc được bởi con người (một dòng tóm tắt hoặc một đường dẫn dưới `analysis_results/` nội bộ của plan (bên trong thư mục riêng của plan, không bao giờ ở thư mục gốc của repo), không bao giờ là đầu ra lệnh đầy đủ).
 
 Một tác vụ KHÔNG ĐƯỢC đánh dấu `completed` trong `state.json` trong khi bất kỳ bản ghi cổng nào của nó có `passes: false` mà không có lần chạy đạt sau đó. Các bản ghi cổng là tương đương máy của "không bao giờ đánh dấu hoàn tất mà không có bằng chứng" — mô hình của một cờ `passes` cho mỗi mục bảo vệ khỏi việc hoàn tất sớm.
 

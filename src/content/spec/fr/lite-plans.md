@@ -23,7 +23,7 @@ Quatre axes décrivent l'état d'un plan, et MUST être suivis indépendamment p
 | Approbation | `pending`, `approved`, `pre_approved` | Si un humain a relu le plan, ou si le mode trust l'a pré-approuvé |
 | Exécution | `pending`, `in_progress`, `blocked`, `completed` | Progression par tâche et globale |
 
-Le create guidé écrit une **proposition en attente relisible** — Lite ou Full, déjà le plan réel, jamais une ébauche jetable. Trust matérialise un plan **prêt et pré-approuvé** et redonne immédiatement la main. `create` et une promotion n'exécutent jamais de travail produit ; `execute` MUST rejeter une proposition `pending` en attente d'approbation et MUST rejeter un plan avec une promotion non résolue en cours.
+Le create guidé écrit une **proposition en attente relisible** — Lite ou Full, déjà le plan réel, jamais une ébauche jetable. Trust matérialise un plan **prêt et pré-approuvé** et redonne immédiatement la main. `create` et une promotion n'exécutent jamais de travail produit ; une demande explicite d'`execute` ou de `resume` approuve le périmètre actuel prêt du plan et MUST enregistrer cette approbation avant de commencer le travail ; sans cette demande, une proposition `pending` n'est pas exécutable ; une promotion non résolue en cours MUST d'abord être récupérée.
 
 ## Création et sélection du format
 
