@@ -435,7 +435,7 @@ export const zh: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: '关于这套方法论',
+    title: '关于这套方法论 — Deep Work Plan',
     subtitle: '开放方法论 · 采用 MIT 许可',
     description:
       'Deep Work Plan 是一套开放、框架无关的方法论，用于与 AI 编码代理一同开展严肃的工程工作。它从何而来，又由谁维护。',
@@ -486,7 +486,7 @@ export const zh: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: '社区与联系',
+    title: '社区与联系 — Deep Work Plan',
     subtitle: '开源 · 社区驱动',
     description:
       'Deep Work Plan 以开放方式构建。通过下方渠道找到源码、提交 issue 或加入讨论——欢迎贡献。',
@@ -554,7 +554,7 @@ export const zh: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: '页面未找到',
+    title: '页面未找到 — Deep Work Plan',
     description:
       '你查找的页面不存在或已被移动。浏览方法论，或返回首页继续浏览。',
     heading: '页面未找到',
@@ -715,7 +715,7 @@ export const zh: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — 让你的代码仓库 AI-first',
+      title: 'Init — 让你的代码仓库 AI-first — Deep Work Plan',
       description:
         '在任意代码仓库中采纳 Deep Work Plan 方法论。安装技能、运行代理接入，然后用任意 AI 编码代理规划并执行。',
     },
@@ -1280,7 +1280,7 @@ export const zh: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: '信任与安全',
+      title: '信任与安全 — Deep Work Plan',
       description:
         '为什么 Deep Work Plan 可以放心采用：开源且采用 MIT 许可、以 Markdown 为核心且无网络调用或遥测、非破坏性设计、安装可验证，并具有清晰的漏洞披露政策。',
     },

@@ -438,7 +438,7 @@ export const de: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'Über die Methodik',
+    title: 'Über die Methodik — Deep Work Plan',
     subtitle: 'Offene Methodik · MIT-lizenziert',
     description:
       'Deep Work Plan ist eine offene, framework-agnostische Methodik für ernsthafte Engineering-Arbeit mit KI-Coding-Agenten. Woher sie kommt und wer sie pflegt.',
@@ -489,7 +489,7 @@ export const de: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Community & Kontakt',
+    title: 'Community & Kontakt — Deep Work Plan',
     subtitle: 'Open Source · Community-getrieben',
     description:
       'Deep Work Plan wird offen entwickelt. Finden Sie den Quellcode, eröffnen Sie ein Issue oder beteiligen Sie sich über die untenstehenden Kanäle an der Diskussion — Beiträge sind willkommen.',
@@ -560,7 +560,7 @@ export const de: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Seite nicht gefunden',
+    title: 'Seite nicht gefunden — Deep Work Plan',
     description:
       'Die gesuchte Seite existiert nicht oder wurde verschoben. Erkunden Sie die Methodik oder kehren Sie zur Startseite zurück, um weiterzustöbern.',
     heading: 'Seite nicht gefunden',
@@ -724,7 +724,7 @@ export const de: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Machen Sie Ihr Repository AI-first',
+      title: 'Init — Machen Sie Ihr Repository AI-first — Deep Work Plan',
       description:
         'Übernehmen Sie die Deep Work Plan Methodik in jedem Repository. Installieren Sie die Skill, führen Sie das Agenten-Onboarding aus, dann planen und führen Sie mit jedem KI-Coding-Agenten aus.',
     },
@@ -1307,7 +1307,7 @@ export const de: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Vertrauen und Sicherheit',
+      title: 'Vertrauen und Sicherheit — Deep Work Plan',
       description:
         'Warum Deep Work Plan sicher zu übernehmen ist: Open Source und MIT, Markdown-first ohne Netzwerkaufrufe oder Telemetrie, nicht-destruktiv konzipiert, mit verifizierbaren Installationen und einer klaren Richtlinie zur Offenlegung von Schwachstellen.',
     },

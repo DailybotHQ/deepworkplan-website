@@ -439,7 +439,7 @@ export const tr: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'Metodoloji hakkında',
+    title: 'Metodoloji hakkında — Deep Work Plan',
     subtitle: 'Açık metodoloji · MIT lisanslı',
     description:
       'Deep Work Plan, yapay zeka kodlama ajanlarıyla ciddi mühendislik işleri için açık ve çerçeveden bağımsız bir metodolojidir. Nereden geldiği ve kimin sürdürdüğü.',
@@ -490,7 +490,7 @@ export const tr: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Topluluk ve iletişim',
+    title: 'Topluluk ve iletişim — Deep Work Plan',
     subtitle: 'Açık kaynak · Topluluk odaklı',
     description:
       'Deep Work Plan açık biçimde geliştirilir. Kaynağı bulun, bir issue açın veya aşağıdaki kanallar aracılığıyla sohbete katılın — katkılar memnuniyetle karşılanır.',
@@ -561,7 +561,7 @@ export const tr: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Sayfa Bulunamadı',
+    title: 'Sayfa Bulunamadı — Deep Work Plan',
     description:
       'Aradığınız sayfa mevcut değil ya da taşınmış. Metodolojiyi keşfedin veya gezinmeye devam etmek için ana sayfaya dönün.',
     heading: 'Sayfa Bulunamadı',
@@ -725,7 +725,7 @@ export const tr: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Deponuzu AI-first hale getirin',
+      title: 'Init — Deponuzu AI-first hale getirin — Deep Work Plan',
       description:
         'Deep Work Plan metodolojisini herhangi bir depoda benimseyin. Skill’i kurun, ajan kuruluma almasını çalıştırın, ardından herhangi bir yapay zeka kodlama ajanıyla planlayıp yürütün.',
     },
@@ -1305,7 +1305,7 @@ export const tr: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Güven ve güvenlik',
+      title: 'Güven ve güvenlik — Deep Work Plan',
       description:
         "Deep Work Plan'in neden güvenle benimsenebileceği: açık kaynak ve MIT lisanslı, ağ çağrısı veya telemetri içermeyen Markdown-first yapı, tasarım gereği yıkıcı olmayan, doğrulanabilir kurulumlar ve açık bir güvenlik açığı bildirme politikası.",
     },

@@ -190,6 +190,7 @@ const inLanguage = getActiveLanguages().map((l) => getHreflang(l));
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={absoluteImageUrl} />
 <meta property="twitter:image:alt" content={title} />
+<meta property="twitter:site" content="@dailybotHQ" />
 
 <!-- Pagination SEO -->
 {prevPage && <link rel="prev" href={prevPage} />}
@@ -277,6 +278,32 @@ const inLanguage = getActiveLanguages().map((l) => getHreflang(l));
       "https://twitter.com/dailybotHQ",
       "https://www.linkedin.com/company/dailybot",
       "https://github.com/DailybotHQ",
+    ],
+  }}
+/>
+
+<!-- JSON-LD: Organization (Deep Work Plan — the brand itself, distinct from
+     the maintainer company above; ties the two GitHub repos and dailybot.com
+     to the canonical domain so brand-name searches can consolidate entities). -->
+<JsonLd
+  data={{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Deep Work Plan",
+    alternateName: "DWP",
+    url: Astro.site?.href,
+    logo: new URL("/images/brand/dwp-mark-light.png", Astro.site ?? Astro.url)
+      .href,
+    description: SITE_DESCRIPTION,
+    parentOrganization: {
+      "@type": "Organization",
+      name: "Dailybot",
+      url: "https://www.dailybot.com",
+    },
+    sameAs: [
+      "https://github.com/DailybotHQ/deepworkplan-website",
+      "https://github.com/DailybotHQ/deepworkplan-skill",
+      "https://www.dailybot.com",
     ],
   }}
 />

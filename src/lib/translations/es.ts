@@ -433,7 +433,7 @@ export const es: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'Acerca de la metodología',
+    title: 'Acerca de la metodología — Deep Work Plan',
     subtitle: 'Metodología abierta · Licencia MIT',
     description:
       'Deep Work Plan es una metodología abierta y agnóstica de framework para trabajo de ingeniería serio con agentes de IA. De dónde viene y quién la mantiene.',
@@ -484,7 +484,7 @@ export const es: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Comunidad y contacto',
+    title: 'Comunidad y contacto — Deep Work Plan',
     subtitle: 'Código abierto · Impulsado por la comunidad',
     description:
       'Deep Work Plan se construye en abierto. Encuentra el código, abre un issue o únete a la conversación a través de los canales de abajo.',
@@ -554,7 +554,7 @@ export const es: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Página no encontrada',
+    title: 'Página no encontrada — Deep Work Plan',
     description:
       'La página que buscas no existe o ha sido movida. Explora la metodología o vuelve a la página principal para encontrar lo que necesitas.',
     heading: 'Página no encontrada',
@@ -718,7 +718,7 @@ export const es: SiteTranslations = {
   // Deep Work Plan — Init / endpoint de adopción
   initPage: {
     meta: {
-      title: 'Init — Convierte tu repositorio en AI-first',
+      title: 'Init — Convierte tu repositorio en AI-first — Deep Work Plan',
       description:
         'Adopta Deep Work Plan en cualquier repositorio: instala la skill, ejecuta la incorporación y luego planifica y ejecuta con cualquier agente de IA.',
     },
@@ -1299,7 +1299,7 @@ export const es: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Confianza y seguridad',
+      title: 'Confianza y seguridad — Deep Work Plan',
       description:
         'Por qué Deep Work Plan es seguro de adoptar: código abierto y MIT, Markdown-first sin llamadas de red ni telemetría, no destructivo por diseño, con instalaciones verificables y una política clara de divulgación de vulnerabilidades.',
     },

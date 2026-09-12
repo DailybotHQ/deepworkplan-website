@@ -440,7 +440,7 @@ export const ja: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: '方法論について',
+    title: '方法論について — Deep Work Plan',
     subtitle: 'オープンな方法論 · MIT ライセンス',
     description:
       'Deep Work Plan は、AIコーディングエージェントによる本格的なエンジニアリング作業のための、フレームワーク非依存のオープンな方法論です。その起源と、誰が維持しているか。',
@@ -491,7 +491,7 @@ export const ja: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'コミュニティとお問い合わせ',
+    title: 'コミュニティとお問い合わせ — Deep Work Plan',
     subtitle: 'オープンソース · コミュニティ主導',
     description:
       'Deep Work Plan はオープンに作られています。ソースを見つけ、Issue を立て、あるいは以下のチャネルから会話に参加してください。コントリビューションを歓迎します。',
@@ -562,7 +562,7 @@ export const ja: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'ページが見つかりません',
+    title: 'ページが見つかりません — Deep Work Plan',
     description:
       'お探しのページは存在しないか、移動されました。方法論を見るか、ホームページに戻って閲覧を続けてください。',
     heading: 'ページが見つかりません',
@@ -726,7 +726,7 @@ export const ja: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — リポジトリを AI-first にする',
+      title: 'Init — リポジトリを AI-first にする — Deep Work Plan',
       description:
         'あらゆるリポジトリで Deep Work Plan 方法論を採用する。スキルをインストールし、エージェントのオンボーディングを実行し、どのAIコーディングエージェントでも計画して実行します。',
     },
@@ -1305,7 +1305,7 @@ export const ja: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: '信頼とセキュリティ',
+      title: '信頼とセキュリティ — Deep Work Plan',
       description:
         'なぜ Deep Work Plan は安心して採用できるのか：Open Source かつ MIT ライセンス、ネットワーク呼び出しやテレメトリーのない Markdown-first、設計上の非破壊性、検証可能なインストール、そして明確な脆弱性開示ポリシー。',
     },

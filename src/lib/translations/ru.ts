@@ -439,7 +439,7 @@ export const ru: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'О методологии',
+    title: 'О методологии — Deep Work Plan',
     subtitle: 'Открытая методология · Лицензия MIT',
     description:
       'Deep Work Plan — это открытая, независимая от фреймворков методология для серьёзной инженерной работы с ИИ-агентами разработки. Откуда она появилась и кто её сопровождает.',
@@ -490,7 +490,7 @@ export const ru: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Сообщество и контакты',
+    title: 'Сообщество и контакты — Deep Work Plan',
     subtitle: 'Открытый код · Движется сообществом',
     description:
       'Deep Work Plan создаётся открыто. Найдите исходный код, заведите issue или присоединитесь к обсуждению через каналы ниже — мы приветствуем вклад.',
@@ -563,7 +563,7 @@ export const ru: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Страница не найдена',
+    title: 'Страница не найдена — Deep Work Plan',
     description:
       'Страница, которую вы ищете, не существует или была перемещена. Изучите методологию или вернитесь на главную, чтобы продолжить просмотр.',
     heading: 'Страница не найдена',
@@ -727,7 +727,7 @@ export const ru: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Сделайте свой репозиторий AI-first',
+      title: 'Init — Сделайте свой репозиторий AI-first — Deep Work Plan',
       description:
         'Примите методологию Deep Work Plan в любом репозитории. Установите навык, запустите онбординг агента, затем планируйте и выполняйте работу с любым ИИ-агентом разработки.',
     },
@@ -1307,7 +1307,7 @@ export const ru: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Доверие и безопасность',
+      title: 'Доверие и безопасность — Deep Work Plan',
       description:
         'Почему Deep Work Plan безопасно внедрять: открытый исходный код и лицензия MIT, Markdown-first без сетевых запросов и телеметрии, неразрушительный по замыслу, с проверяемыми установками и чёткой политикой раскрытия уязвимостей.',
     },

@@ -438,7 +438,7 @@ export const id: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'Tentang metodologi',
+    title: 'Tentang metodologi — Deep Work Plan',
     subtitle: 'Metodologi terbuka · Berlisensi MIT',
     description:
       'Deep Work Plan adalah metodologi terbuka dan agnostik terhadap framework untuk pekerjaan teknik yang serius dengan AI coding agent. Dari mana asalnya dan siapa yang merawatnya.',
@@ -489,7 +489,7 @@ export const id: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Komunitas & kontak',
+    title: 'Komunitas & kontak — Deep Work Plan',
     subtitle: 'Sumber terbuka · Digerakkan komunitas',
     description:
       'Deep Work Plan dibangun secara terbuka. Temukan sumbernya, ajukan issue, atau ikut percakapan melalui kanal di bawah — kontribusi sangat dihargai.',
@@ -560,7 +560,7 @@ export const id: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Halaman Tidak Ditemukan',
+    title: 'Halaman Tidak Ditemukan — Deep Work Plan',
     description:
       'Halaman yang Anda cari tidak ada atau telah dipindahkan. Jelajahi metodologinya atau kembali ke beranda untuk terus menelusuri.',
     heading: 'Halaman Tidak Ditemukan',
@@ -724,7 +724,7 @@ export const id: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Jadikan repositori Anda AI-first',
+      title: 'Init — Jadikan repositori Anda AI-first — Deep Work Plan',
       description:
         'Adopsi metodologi Deep Work Plan di repositori mana pun. Pasang skill, jalankan onboarding agent, lalu rencanakan dan eksekusi dengan AI coding agent mana pun.',
     },
@@ -1305,7 +1305,7 @@ export const id: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Kepercayaan dan keamanan',
+      title: 'Kepercayaan dan keamanan — Deep Work Plan',
       description:
         'Mengapa Deep Work Plan aman untuk diadopsi: sumber terbuka dan berlisensi MIT, Markdown-first tanpa panggilan jaringan atau telemetri, non-destruktif berdasarkan desain, dengan instalasi yang dapat diverifikasi dan kebijakan pengungkapan kerentanan yang jelas.',
     },

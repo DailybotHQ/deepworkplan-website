@@ -440,7 +440,7 @@ export const pl: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'O metodyce',
+    title: 'O metodyce — Deep Work Plan',
     subtitle: 'Otwarta metodyka · Na licencji MIT',
     description:
       'Deep Work Plan to otwarta, niezależna od frameworka metodyka poważnej pracy inżynierskiej z agentami kodującymi AI. Skąd się wzięła i kto ją utrzymuje.',
@@ -491,7 +491,7 @@ export const pl: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Społeczność i kontakt',
+    title: 'Społeczność i kontakt — Deep Work Plan',
     subtitle: 'Open source · Napędzane przez społeczność',
     description:
       'Deep Work Plan powstaje otwarcie. Znajdź kod źródłowy, zgłoś issue lub dołącz do rozmowy poprzez poniższe kanały — wkład jest mile widziany.',
@@ -562,7 +562,7 @@ export const pl: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Nie znaleziono strony',
+    title: 'Nie znaleziono strony — Deep Work Plan',
     description:
       'Strona, której szukasz, nie istnieje lub została przeniesiona. Zapoznaj się z metodyką lub wróć na stronę główną, by przeglądać dalej.',
     heading: 'Nie znaleziono strony',
@@ -1227,7 +1227,7 @@ export const pl: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Zaufanie i bezpieczeństwo',
+      title: 'Zaufanie i bezpieczeństwo — Deep Work Plan',
       description:
         'Dlaczego Deep Work Plan jest bezpieczny w adopcji: open source i MIT, Markdown-first bez połączeń sieciowych ani telemetrii, niedestrukcyjny z założenia, z weryfikowalnymi instalacjami i przejrzystą polityką ujawniania podatności.',
     },
@@ -1288,7 +1288,7 @@ export const pl: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Uczyń swoje repozytorium AI-first',
+      title: 'Init — Uczyń swoje repozytorium AI-first — Deep Work Plan',
       description:
         'Przyjmij metodykę Deep Work Plan w dowolnym repozytorium. Zainstaluj skill, uruchom onboarding agenta, a potem planuj i realizuj z dowolnym agentem kodującym AI.',
     },

@@ -437,7 +437,7 @@ export const vi: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'Về phương pháp luận',
+    title: 'Về phương pháp luận — Deep Work Plan',
     subtitle: 'Phương pháp luận mở · Cấp phép MIT',
     description:
       'Deep Work Plan là một phương pháp luận mở, độc lập với framework cho công việc kỹ thuật nghiêm túc với các agent lập trình AI. Nguồn gốc và những người duy trì nó.',
@@ -488,7 +488,7 @@ export const vi: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Cộng đồng & liên hệ',
+    title: 'Cộng đồng & liên hệ — Deep Work Plan',
     subtitle: 'Mã nguồn mở · Do cộng đồng dẫn dắt',
     description:
       'Deep Work Plan được xây dựng công khai. Tìm mã nguồn, mở một issue, hoặc tham gia trao đổi qua các kênh dưới đây — luôn hoan nghênh đóng góp.',
@@ -557,7 +557,7 @@ export const vi: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Không tìm thấy trang',
+    title: 'Không tìm thấy trang — Deep Work Plan',
     description:
       'Trang bạn đang tìm không tồn tại hoặc đã được di chuyển. Khám phá phương pháp luận hoặc quay về trang chủ để tiếp tục duyệt.',
     heading: 'Không tìm thấy trang',
@@ -721,7 +721,7 @@ export const vi: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Biến repository của bạn thành AI-first',
+      title: 'Init — Biến repository của bạn thành AI-first — Deep Work Plan',
       description:
         'Áp dụng phương pháp luận Deep Work Plan trong mọi repository. Cài skill, chạy khởi tạo agent, rồi lập kế hoạch và thực thi với mọi agent lập trình AI.',
     },
@@ -1305,7 +1305,7 @@ export const vi: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Tin tưởng và bảo mật',
+      title: 'Tin tưởng và bảo mật — Deep Work Plan',
       description:
         'Tại sao Deep Work Plan an toàn để áp dụng: mã nguồn mở và MIT, Markdown-first không có lời gọi mạng hay telemetry, không phá hủy theo thiết kế, với các lần cài đặt có thể xác minh và chính sách công bố lỗ hổng rõ ràng.',
     },

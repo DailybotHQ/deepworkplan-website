@@ -431,7 +431,7 @@ export const en: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'About the methodology',
+    title: 'About the methodology — Deep Work Plan',
     subtitle: 'Open methodology · MIT licensed',
     description:
       'Deep Work Plan is an open, framework-agnostic methodology for serious engineering work with AI coding agents. Where it came from and who maintains it.',
@@ -482,7 +482,7 @@ export const en: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Community & contact',
+    title: 'Community & contact — Deep Work Plan',
     subtitle: 'Open source · Community-driven',
     description:
       'Deep Work Plan is built in the open. Find the source, open an issue, or join the conversation through the channels below — contributions are welcome.',
@@ -552,7 +552,7 @@ export const en: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Page Not Found',
+    title: 'Page Not Found — Deep Work Plan',
     description:
       'The page you are looking for does not exist or has been moved. Explore the methodology or head back to the homepage to keep browsing.',
     heading: 'Page Not Found',
@@ -716,7 +716,7 @@ export const en: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Make your repository AI-first',
+      title: 'Init — Make your repository AI-first — Deep Work Plan',
       description:
         'Adopt the Deep Work Plan methodology in any repository. Install the skill, run agent onboarding, then plan and execute with any AI coding agent.',
     },
@@ -1293,7 +1293,7 @@ export const en: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Trust and security',
+      title: 'Trust and security — Deep Work Plan',
       description:
         'Why Deep Work Plan is safe to adopt: open source and MIT, Markdown-first with no network calls or telemetry, non-destructive by design, with verifiable installs and a clear vulnerability-disclosure policy.',
     },

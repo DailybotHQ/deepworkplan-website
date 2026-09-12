@@ -440,7 +440,7 @@ export const uk: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'Про методологію',
+    title: 'Про методологію — Deep Work Plan',
     subtitle: 'Відкрита методологія · Ліцензія MIT',
     description:
       'Deep Work Plan — відкрита, незалежна від фреймворку методологія для серйозної інженерної роботи з AI-агентами програмування. Звідки вона взялася та хто її супроводжує.',
@@ -491,7 +491,7 @@ export const uk: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Спільнота й контакти',
+    title: 'Спільнота й контакти — Deep Work Plan',
     subtitle: 'Відкритий код · Керується спільнотою',
     description:
       'Deep Work Plan створюється відкрито. Знайдіть вихідний код, відкрийте issue або долучіться до розмови через канали нижче — внески вітаються.',
@@ -564,7 +564,7 @@ export const uk: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Сторінку не знайдено',
+    title: 'Сторінку не знайдено — Deep Work Plan',
     description:
       'Сторінки, яку ви шукаєте, не існує або її переміщено. Ознайомтеся з методологією або поверніться на головну, щоб продовжити перегляд.',
     heading: 'Сторінку не знайдено',
@@ -1229,7 +1229,7 @@ export const uk: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Довіра та безпека',
+      title: 'Довіра та безпека — Deep Work Plan',
       description:
         'Чому Deep Work Plan безпечно впроваджувати: відкритий код та MIT, Markdown-first без мережевих викликів і телеметрії, неруйнівний за проєктом, із перевірюваними встановленнями та чіткою політикою розкриття вразливостей.',
     },
@@ -1290,7 +1290,7 @@ export const uk: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Зробіть свій репозиторій AI-first',
+      title: 'Init — Зробіть свій репозиторій AI-first — Deep Work Plan',
       description:
         'Впровадьте методологію Deep Work Plan у будь-якому репозиторії. Встановіть скіл, запустіть онбординг агента, а потім плануйте та виконуйте з будь-яким AI-агентом програмування.',
     },

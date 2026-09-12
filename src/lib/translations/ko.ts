@@ -437,7 +437,7 @@ export const ko: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: '방법론 소개',
+    title: '방법론 소개 — Deep Work Plan',
     subtitle: '오픈 방법론 · MIT 라이선스',
     description:
       'Deep Work Plan은 AI 코딩 에이전트와 함께하는 진지한 엔지니어링 작업을 위한 오픈, 프레임워크 비종속 방법론입니다. 어디서 왔고 누가 관리하는지 소개합니다.',
@@ -488,7 +488,7 @@ export const ko: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: '커뮤니티 & 문의',
+    title: '커뮤니티 & 문의 — Deep Work Plan',
     subtitle: '오픈소스 · 커뮤니티 주도',
     description:
       'Deep Work Plan은 공개적으로 만들어집니다. 소스를 찾고, 이슈를 열고, 아래 채널로 대화에 참여하세요 — 기여를 환영합니다.',
@@ -558,7 +558,7 @@ export const ko: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: '페이지를 찾을 수 없습니다',
+    title: '페이지를 찾을 수 없습니다 — Deep Work Plan',
     description:
       '찾으시는 페이지가 존재하지 않거나 이동되었습니다. 방법론을 살펴보거나 홈페이지로 돌아가 계속 둘러보세요.',
     heading: '페이지를 찾을 수 없습니다',
@@ -721,7 +721,7 @@ export const ko: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — 리포지토리를 AI-first로',
+      title: 'Init — 리포지토리를 AI-first로 — Deep Work Plan',
       description:
         '어떤 리포지토리에든 Deep Work Plan 방법론을 채택하세요. 스킬을 설치하고, 에이전트 온보딩을 실행한 뒤, 어떤 AI 코딩 에이전트로든 계획하고 실행하세요.',
     },
@@ -1298,7 +1298,7 @@ export const ko: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: '신뢰와 보안',
+      title: '신뢰와 보안 — Deep Work Plan',
       description:
         'Deep Work Plan을 안심하고 채택할 수 있는 이유: 오픈 소스이자 MIT 라이선스, 네트워크 호출이나 텔레메트리 없는 Markdown-first, 비파괴적 설계, 검증 가능한 설치, 그리고 명확한 취약점 공개 정책.',
     },

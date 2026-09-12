@@ -434,7 +434,7 @@ export const th: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'เกี่ยวกับระเบียบวิธี',
+    title: 'เกี่ยวกับระเบียบวิธี — Deep Work Plan',
     subtitle: 'ระเบียบวิธีแบบเปิด · ภายใต้สัญญาอนุญาต MIT',
     description:
       'Deep Work Plan คือระเบียบวิธีแบบเปิดที่ไม่ผูกกับเฟรมเวิร์กใด สำหรับงานวิศวกรรมจริงจังร่วมกับ AI coding agent ที่มาที่ไปและผู้ดูแลรักษามันคือใคร',
@@ -485,7 +485,7 @@ export const th: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'ชุมชนและการติดต่อ',
+    title: 'ชุมชนและการติดต่อ — Deep Work Plan',
     subtitle: 'โอเพนซอร์ส · ขับเคลื่อนโดยชุมชน',
     description:
       'Deep Work Plan สร้างขึ้นอย่างเปิดเผย ค้นหาซอร์สโค้ด เปิด issue หรือร่วมพูดคุยผ่านช่องทางด้านล่าง ยินดีต้อนรับการมีส่วนร่วม',
@@ -553,7 +553,7 @@ export const th: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'ไม่พบหน้านี้',
+    title: 'ไม่พบหน้านี้ — Deep Work Plan',
     description:
       'หน้าที่คุณกำลังค้นหาไม่มีอยู่หรือถูกย้ายไปแล้ว สำรวจระเบียบวิธีหรือกลับไปยังหน้าแรกเพื่อเรียกดูต่อ',
     heading: 'ไม่พบหน้านี้',
@@ -1206,7 +1206,7 @@ export const th: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'ความน่าเชื่อถือและความปลอดภัย',
+      title: 'ความน่าเชื่อถือและความปลอดภัย — Deep Work Plan',
       description:
         'ทำไม Deep Work Plan จึงปลอดภัยต่อการนำไปใช้: โอเพนซอร์สและ MIT ใช้ Markdown เป็นหลักโดยไม่มีการเรียกเครือข่ายหรือเก็บข้อมูลการใช้งาน ไม่ทำลายข้อมูลตามการออกแบบ มีการติดตั้งที่ตรวจสอบได้ และมีนโยบายการเปิดเผยช่องโหว่ที่ชัดเจน',
     },
@@ -1267,7 +1267,7 @@ export const th: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Make your repository AI-first',
+      title: 'Init — Make your repository AI-first — Deep Work Plan',
       description:
         'Adopt the Deep Work Plan methodology in any repository. Install the skill, run agent onboarding, then plan and execute with any AI coding agent.',
     },

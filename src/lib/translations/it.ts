@@ -438,7 +438,7 @@ export const it: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'Informazioni sulla metodologia',
+    title: 'Informazioni sulla metodologia — Deep Work Plan',
     subtitle: 'Metodologia aperta · Licenza MIT',
     description:
       'Deep Work Plan è una metodologia aperta e indipendente dal framework per lavoro di ingegneria serio con agenti di coding AI. Da dove nasce e chi la mantiene.',
@@ -489,7 +489,7 @@ export const it: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Community e contatti',
+    title: 'Community e contatti — Deep Work Plan',
     subtitle: 'Open source · Guidato dalla community',
     description:
       'Deep Work Plan è sviluppato in modo aperto. Trovi il codice sorgente, apra una issue o si unisca alla conversazione tramite i canali qui sotto — i contributi sono benvenuti.',
@@ -560,7 +560,7 @@ export const it: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Pagina non trovata',
+    title: 'Pagina non trovata — Deep Work Plan',
     description:
       'La pagina che sta cercando non esiste o è stata spostata. Esplori la metodologia o torni alla homepage per continuare a navigare.',
     heading: 'Pagina non trovata',
@@ -724,7 +724,7 @@ export const it: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Rendi il tuo repository AI-first',
+      title: 'Init — Rendi il tuo repository AI-first — Deep Work Plan',
       description:
         'Adotti la metodologia Deep Work Plan in qualsiasi repository. Installi la skill, esegua l’onboarding dell’agente, poi pianifichi ed esegua con qualsiasi agente di coding AI.',
     },
@@ -1306,7 +1306,7 @@ export const it: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Fiducia e sicurezza',
+      title: 'Fiducia e sicurezza — Deep Work Plan',
       description:
         'Perché Deep Work Plan è sicuro da adottare: open source e MIT, Markdown-first senza chiamate di rete né telemetria, non distruttivo per design, con installazioni verificabili e una chiara politica di divulgazione delle vulnerabilità.',
     },

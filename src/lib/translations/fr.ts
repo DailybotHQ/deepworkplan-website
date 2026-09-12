@@ -439,7 +439,7 @@ export const fr: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'À propos de la méthodologie',
+    title: 'À propos de la méthodologie — Deep Work Plan',
     subtitle: 'Méthodologie ouverte · sous licence MIT',
     description:
       'Deep Work Plan est une méthodologie ouverte et indépendante du framework pour un travail d’ingénierie sérieux avec des agents de code IA. D’où elle vient et qui la maintient.',
@@ -490,7 +490,7 @@ export const fr: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Communauté et contact',
+    title: 'Communauté et contact — Deep Work Plan',
     subtitle: 'Open source · Portée par la communauté',
     description:
       'Deep Work Plan est conçu de manière ouverte. Trouvez le code source, ouvrez une issue ou rejoignez la conversation via les canaux ci-dessous — les contributions sont les bienvenues.',
@@ -564,7 +564,7 @@ export const fr: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Page introuvable',
+    title: 'Page introuvable — Deep Work Plan',
     description:
       'La page que vous recherchez n’existe pas ou a été déplacée. Explorez la méthodologie ou revenez à l’accueil pour poursuivre votre navigation.',
     heading: 'Page introuvable',
@@ -728,7 +728,7 @@ export const fr: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Rendez votre dépôt AI-first',
+      title: 'Init — Rendez votre dépôt AI-first — Deep Work Plan',
       description:
         'Adoptez la méthodologie Deep Work Plan dans n’importe quel dépôt. Installez le skill, lancez l’onboarding de l’agent, puis planifiez et exécutez avec n’importe quel agent de code IA.',
     },
@@ -1312,7 +1312,7 @@ export const fr: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Confiance et sécurité',
+      title: 'Confiance et sécurité — Deep Work Plan',
       description:
         'Pourquoi Deep Work Plan est sûr à adopter : open source et MIT, Markdown-first sans appels réseau ni télémétrie, non destructif par conception, avec des installations vérifiables et une politique claire de divulgation des vulnérabilités.',
     },

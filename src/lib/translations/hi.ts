@@ -437,7 +437,7 @@ export const hi: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'पद्धति के बारे में',
+    title: 'पद्धति के बारे में — Deep Work Plan',
     subtitle: 'खुली पद्धति · MIT लाइसेंस प्राप्त',
     description:
       'Deep Work Plan AI कोडिंग एजेंट्स के साथ गंभीर इंजीनियरिंग कार्य के लिए एक खुली, फ़्रेमवर्क-निरपेक्ष पद्धति है। यह कहाँ से आई और इसका रखरखाव कौन करता है।',
@@ -488,7 +488,7 @@ export const hi: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'समुदाय और संपर्क',
+    title: 'समुदाय और संपर्क — Deep Work Plan',
     subtitle: 'ओपन सोर्स · समुदाय-संचालित',
     description:
       'Deep Work Plan खुले रूप में निर्मित है। नीचे दिए चैनलों के माध्यम से स्रोत खोजें, एक इश्यू खोलें, या चर्चा में शामिल हों — योगदान का स्वागत है।',
@@ -557,7 +557,7 @@ export const hi: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'पृष्ठ नहीं मिला',
+    title: 'पृष्ठ नहीं मिला — Deep Work Plan',
     description:
       'आप जिस पृष्ठ को खोज रहे हैं वह मौजूद नहीं है या स्थानांतरित कर दिया गया है। पद्धति देखें या ब्राउज़िंग जारी रखने के लिए मुखपृष्ठ पर लौटें।',
     heading: 'पृष्ठ नहीं मिला',
@@ -1216,7 +1216,7 @@ export const hi: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'भरोसा और सुरक्षा',
+      title: 'भरोसा और सुरक्षा — Deep Work Plan',
       description:
         'Deep Work Plan को अपनाना क्यों सुरक्षित है: ओपन सोर्स और MIT, बिना नेटवर्क कॉल या टेलीमेट्री के Markdown-first, डिज़ाइन से गैर-विनाशकारी, सत्यापन योग्य इंस्टॉल और स्पष्ट भेद्यता-प्रकटीकरण नीति के साथ।',
     },
@@ -1277,7 +1277,7 @@ export const hi: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — अपनी रिपॉज़िटरी को AI-first बनाएँ',
+      title: 'Init — अपनी रिपॉज़िटरी को AI-first बनाएँ — Deep Work Plan',
       description:
         'किसी भी रिपॉज़िटरी में Deep Work Plan पद्धति अपनाएँ। स्किल स्थापित करें, एजेंट ऑनबोर्डिंग चलाएँ, फिर किसी भी AI कोडिंग एजेंट के साथ योजना बनाएँ और निष्पादित करें।',
     },

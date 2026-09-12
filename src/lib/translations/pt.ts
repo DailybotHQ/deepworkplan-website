@@ -439,7 +439,7 @@ export const pt: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'Sobre a metodologia',
+    title: 'Sobre a metodologia — Deep Work Plan',
     subtitle: 'Metodologia aberta · Licenciada sob MIT',
     description:
       'O Deep Work Plan é uma metodologia aberta e independente de framework para trabalho de engenharia sério com agentes de código de IA. De onde veio e quem a mantém.',
@@ -490,7 +490,7 @@ export const pt: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Comunidade e contato',
+    title: 'Comunidade e contato — Deep Work Plan',
     subtitle: 'Código aberto · Orientado pela comunidade',
     description:
       'O Deep Work Plan é construído de forma aberta. Encontre o código-fonte, abra uma issue ou participe da conversa pelos canais abaixo — contribuições são bem-vindas.',
@@ -564,7 +564,7 @@ export const pt: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Página não encontrada',
+    title: 'Página não encontrada — Deep Work Plan',
     description:
       'A página que você procura não existe ou foi movida. Explore a metodologia ou volte à página inicial para continuar navegando.',
     heading: 'Página não encontrada',
@@ -728,7 +728,7 @@ export const pt: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Torne seu repositório AI-first',
+      title: 'Init — Torne seu repositório AI-first — Deep Work Plan',
       description:
         'Adote a metodologia Deep Work Plan em qualquer repositório. Instale a skill, execute o onboarding do agente e planeje e execute com qualquer agente de código de IA.',
     },
@@ -1309,7 +1309,7 @@ export const pt: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Confiança e segurança',
+      title: 'Confiança e segurança — Deep Work Plan',
       description:
         'Por que o Deep Work Plan é seguro de adotar: código aberto e MIT, Markdown-first sem chamadas de rede nem telemetria, não destrutivo por design, com instalações verificáveis e uma política clara de divulgação de vulnerabilidades.',
     },
