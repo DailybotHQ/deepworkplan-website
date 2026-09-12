@@ -32,7 +32,10 @@ const CORS_HEADERS: Record<string, string> = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, MCP-Protocol-Version, Authorization',
-  'Access-Control-Expose-Headers': 'MCP-Protocol-Version, X-API-Version',
+  // The rate-limit headers are attached by the root middleware; expose them
+  // so browser-based agents can read them (RFC 9331 names, see src/lib/rate-limit.ts).
+  'Access-Control-Expose-Headers':
+    'MCP-Protocol-Version, X-API-Version, RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset, RateLimit-Policy, Retry-After',
   'Access-Control-Max-Age': '86400',
 };
 
