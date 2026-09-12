@@ -1369,7 +1369,7 @@ export const tr: SiteTranslations = {
       title:
         "Geliştiriciler — Deep Work Plan ajan API'si, MCP sunucusu ve dokümanları",
       description:
-        "Deep Work Plan ajan yüzeyi: salt okunur, kimlik doğrulamasız API, OpenAPI spesifikasyonu, /api/mcp MCP sunucusu, 17 dilde Markdown ve npx skills CLI'si.",
+        "Deep Work Plan'ın ajan yüzeyi: sürümlü, salt okunur ve kimlik doğrulamasız bir API — OpenAPI, MCP sunucusu, 17 dilde sayfa başına Markdown ve resmî bir CLI.",
     },
     eyebrow: 'Ajan ve geliştirici yüzeyi',
     title: 'Geliştiriciler ve yapay zeka ajanları için Deep Work Plan',
@@ -1432,6 +1432,30 @@ export const tr: SiteTranslations = {
           'Spesifikasyona ve bu portala bağlantılar içeren statik sağlık işareti.',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'v1 ailesinin sürümlü kataloğu: uç nokta yolları, site sürümü ve belirtim bağlantıları.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          'Site haritası tipli JSON olarak — her bölüm için ad, yol ve açıklama.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          'Her dildeki tüm Markdown uç noktaları, dil koduna göre gruplanmış.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description:
+          "Sürümlü sağlık göstergesi — /api/health.json'un v1 aynası.",
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1444,6 +1468,12 @@ export const tr: SiteTranslations = {
           'ARD yetenek manifestosu — robots.txt içinde bildirilen agentmap.',
       },
     ],
+    versioningTitle: 'Sürümleme ve kullanımdan kaldırma',
+    versioningBody:
+      'Sürümlü JSON ailesi /api/v1/ altında yaşar — index, sections, pages ve health — ve sürümsüz kanonik yollar (/llms.txt, /{page}.md, /api/mcp) aynı v1 sözleşmesine aittir. Yıkıcı değişiklikler yalnızca yeni bir /api/v{N+1}/ ailesinde yayımlanır, asla v1 içinde olmaz. Bir uç nokta kullanımdan kaldırıldığında yanıtları Deprecation: true taşır ve kaldırılmadan en az 180 gün önce bir Sunset tarihi içerir; bir Link başlığı halefi gösterir.',
+    rateLimitsTitle: 'İstek limitleri',
+    rateLimitsBody:
+      '/api/* yanıtları RFC 9331 istek limiti başlıklarını taşır — RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset ve RateLimit-Policy — böylece ajanlar kendilerini gerçek zamanlı yavaşlatabilir; bir 429 yanıtı Retry-After ekler. Uygulama uçta elden geldiğince (best-effort) yapılır (ziyaretçi başına 60 saniyede 120 istek) ve erişim anonim kalır: anahtar yok, kayıt yok, kademe yok.',
     mcpTitle: 'MCP sunucusu',
     mcpIntro:
       'Streamable HTTP üzerinden durumsuz bir Model Context Protocol sunucusu. Üç salt okunur araç: get_init_prompt, list_site_sections ve read_page. 2025-03-26 ve 2025-06-18 protokol sürümleri desteklenir; oturum gerekmez.',
@@ -1459,9 +1489,9 @@ export const tr: SiteTranslations = {
     cliTitle: "Kit'i kurun",
     cliIntro:
       "Deep Work Plan skill'i için resmî kurulum yolu — /init uç noktasının ajanlara verdiği komutla aynıdır. Skills uyumlu herhangi bir kodlama ajanıyla çalışır (Claude Code, Cursor, Codex, Gemini ve diğerleri).",
-    cliCodeLabel: 'Terminal — skills CLI',
+    cliCodeLabel: 'Terminal — skills CLI ve resmî CLI',
     cliNote:
-      'Skill, deponuzun içindeki .agents/skills/deepworkplan/ klasörüne yerleştirilir; böylece depoya dokunan her ajan aynı metodolojiyi paylaşır.',
+      'Skill, deponuzun içindeki .agents/skills/deepworkplan/ klasörüne yerleştirilir; böylece depoya dokunan her ajan aynı metodolojiyi paylaşır. Resmî deepworkplan CLI — aynı API üzerinde sıfır bağımlılıklı bir istemci (init, sections, read, open, mcp) — npm için hazırlandı ve yayımlanana kadar site deposunun cli/ dizininde durur.',
     resourcesTitle: 'Makine tarafından okunabilir kaynaklar',
     resources: [
       {

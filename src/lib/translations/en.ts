@@ -1355,7 +1355,7 @@ export const en: SiteTranslations = {
     meta: {
       title: 'Developers — Deep Work Plan agent API, MCP server & docs',
       description:
-        'The Deep Work Plan agent surface: a read-only, zero-auth API with an OpenAPI spec, an MCP server, per-page Markdown in 17 languages, and the npx skills CLI.',
+        'The Deep Work Plan agent surface: a read-only, zero-auth, versioned API with an OpenAPI spec, MCP server, per-page Markdown in 17 languages, and an official CLI.',
     },
     eyebrow: 'Agent & developer surface',
     title: 'Deep Work Plan for developers and AI agents',
@@ -1418,6 +1418,30 @@ export const en: SiteTranslations = {
           'Static health marker with links to the spec and this portal.',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'Versioned catalog of the v1 family: endpoint paths, site version, and spec links.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          'The site map as typed JSON — name, path, and description per section.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          'Every Markdown endpoint in every language, grouped by language code.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description:
+          'Versioned health marker — the v1 mirror of /api/health.json.',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1430,6 +1454,12 @@ export const en: SiteTranslations = {
           'ARD capability manifest — the agentmap declared in robots.txt.',
       },
     ],
+    versioningTitle: 'Versioning & deprecation',
+    versioningBody:
+      'The versioned JSON family lives under /api/v1/ — index, sections, pages, and health — and the unversioned canonical paths (/llms.txt, /{page}.md, /api/mcp) belong to the same v1 contract. Breaking changes ship only in a new /api/v{N+1}/ family, never inside v1. When an endpoint is deprecated, its responses carry Deprecation: true and a Sunset date at least 180 days before removal, and a Link header points at the successor.',
+    rateLimitsTitle: 'Rate limits',
+    rateLimitsBody:
+      'Responses on /api/* carry RFC 9331 rate-limit headers — RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset, and RateLimit-Policy — so agents can self-throttle in real time; a 429 response adds Retry-After. Enforcement is best-effort at the edge (120 requests per 60 seconds per visitor), and access stays anonymous: no keys, no registration, no tiers.',
     mcpTitle: 'MCP server',
     mcpIntro:
       'A stateless Model Context Protocol server over Streamable HTTP. Three read-only tools: get_init_prompt, list_site_sections, and read_page. Protocol versions 2025-03-26 and 2025-06-18 are supported; no session is required.',
@@ -1445,9 +1475,9 @@ export const en: SiteTranslations = {
     cliTitle: 'Install the kit',
     cliIntro:
       'The official install path for the Deep Work Plan skill — the same command the /init endpoint gives agents. It works with any skills-compatible coding agent (Claude Code, Cursor, Codex, Gemini, and others).',
-    cliCodeLabel: 'Terminal — skills CLI',
+    cliCodeLabel: 'Terminal — skills CLI & official CLI',
     cliNote:
-      'The skill vendors into .agents/skills/deepworkplan/ inside your repository, so every agent that touches the repo shares the same methodology.',
+      'The skill vendors into .agents/skills/deepworkplan/ inside your repository, so every agent that touches the repo shares the same methodology. The official deepworkplan CLI — a zero-dependency client over this same API (init, sections, read, open, mcp) — is prepared for npm and lives in the cli/ directory of the site repository until publication.',
     resourcesTitle: 'Machine-readable resources',
     resources: [
       { label: 'OpenAPI spec (/openapi.json)', href: '/openapi.json' },

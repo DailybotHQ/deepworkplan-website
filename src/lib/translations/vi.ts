@@ -1368,7 +1368,7 @@ export const vi: SiteTranslations = {
       title:
         'Nhà phát triển — API agent, máy chủ MCP và tài liệu của Deep Work Plan',
       description:
-        'Bề mặt agent của Deep Work Plan: API chỉ đọc, không cần xác thực kèm đặc tả OpenAPI, máy chủ MCP, Markdown theo từng trang bằng 17 ngôn ngữ, và CLI npx skills.',
+        'Bề mặt agent của Deep Work Plan: API có phiên bản, chỉ đọc, không cần xác thực, với OpenAPI, máy chủ MCP và Markdown theo từng trang bằng 17 ngôn ngữ.',
     },
     eyebrow: 'Bề mặt agent và nhà phát triển',
     title: 'Deep Work Plan dành cho nhà phát triển và AI agent',
@@ -1431,6 +1431,30 @@ export const vi: SiteTranslations = {
           'Dấu hiệu trạng thái tĩnh kèm liên kết đến đặc tả và cổng thông tin này.',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'Danh mục có phiên bản của họ v1: đường dẫn endpoint, phiên bản trang web và liên kết đến đặc tả.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          'Sơ đồ trang web ở dạng JSON có kiểu — tên, đường dẫn và mô tả cho từng phần.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          'Mọi endpoint Markdown bằng mọi ngôn ngữ, được nhóm theo mã ngôn ngữ.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description:
+          'Dấu hiệu tình trạng có phiên bản — bản phản chiếu v1 của /api/health.json.',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1443,6 +1467,12 @@ export const vi: SiteTranslations = {
           'Manifest năng lực ARD — agentmap được khai báo trong robots.txt.',
       },
     ],
+    versioningTitle: 'Quản lý phiên bản và đánh dấu lỗi thời',
+    versioningBody:
+      'Họ JSON có phiên bản nằm dưới /api/v1/ — index, sections, pages và health — và các đường dẫn chính thức không có phiên bản (/llms.txt, /{page}.md, /api/mcp) thuộc cùng hợp đồng v1. Các thay đổi phá vỡ tương thích chỉ xuất hiện trong họ /api/v{N+1}/ mới, không bao giờ trong v1. Khi một endpoint bị đánh dấu lỗi thời, phản hồi của nó mang Deprecation: true và ngày Sunset ít nhất 180 ngày trước khi gỡ bỏ, và header Link chỉ đến phần thay thế.',
+    rateLimitsTitle: 'Giới hạn tốc độ',
+    rateLimitsBody:
+      'Phản hồi trên /api/* mang các header giới hạn tốc độ RFC 9331 — RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset và RateLimit-Policy — để agent có thể tự điều chỉnh tốc độ theo thời gian thực; phản hồi 429 bổ sung Retry-After. Việc áp dụng là tốt nhất có thể ở biên (120 yêu cầu mỗi 60 giây mỗi khách truy cập) và quyền truy cập vẫn ẩn danh: không khóa, không đăng ký, không phân tầng.',
     mcpTitle: 'Máy chủ MCP',
     mcpIntro:
       'Máy chủ Model Context Protocol không trạng thái qua Streamable HTTP. Ba công cụ chỉ đọc: get_init_prompt, list_site_sections, và read_page. Hỗ trợ phiên bản giao thức 2025-03-26 và 2025-06-18; không cần phiên làm việc.',
@@ -1458,9 +1488,9 @@ export const vi: SiteTranslations = {
     cliTitle: 'Cài đặt bộ kit',
     cliIntro:
       'Đường dẫn cài đặt chính thức cho skill Deep Work Plan — cùng một lệnh mà endpoint /init đưa cho agent. Nó hoạt động với bất kỳ coding agent tương thích skills nào (Claude Code, Cursor, Codex, Gemini và các agent khác).',
-    cliCodeLabel: 'Terminal — skills CLI',
+    cliCodeLabel: 'Terminal — skills CLI và CLI chính thức',
     cliNote:
-      'Skill được vendor vào .agents/skills/deepworkplan/ bên trong repository của bạn, nên mọi agent chạm đến repo đều dùng chung một phương pháp luận.',
+      'Skill được vendor vào .agents/skills/deepworkplan/ bên trong repository của bạn, nên mọi agent chạm đến repo đều dùng chung một phương pháp luận. CLI chính thức deepworkplan — một ứng dụng khách không phụ thuộc trên cùng API này (init, sections, read, open, mcp) — đã sẵn sàng cho npm và nằm trong thư mục cli/ của repository trang web cho đến khi xuất bản.',
     resourcesTitle: 'Tài nguyên máy có thể đọc được',
     resources: [
       { label: 'Đặc tả OpenAPI (/openapi.json)', href: '/openapi.json' },

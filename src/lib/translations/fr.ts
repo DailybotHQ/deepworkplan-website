@@ -1375,7 +1375,7 @@ export const fr: SiteTranslations = {
       title:
         'Développeurs — API pour agents, serveur MCP et documentation de Deep Work Plan',
       description:
-        'La surface pour agents de Deep Work Plan : API en lecture seule sans authentification, OpenAPI, serveur MCP sur /api/mcp et Markdown par page en 17 langues.',
+        'La surface pour agents de Deep Work Plan : API versionnée, en lecture seule et sans authentification — OpenAPI, serveur MCP, Markdown par page en 17 langues et CLI officielle.',
     },
     eyebrow: 'Surface pour agents et développeurs',
     title: 'Deep Work Plan pour les développeurs et les agents IA',
@@ -1438,6 +1438,30 @@ export const fr: SiteTranslations = {
           'Marqueur d’état statique avec des liens vers la spécification et ce portail.',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'Catalogue versionné de la famille v1 : chemins des endpoints, version du site et liens vers la spécification.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          'Le plan du site en JSON typé — nom, chemin et description par section.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          'Tous les endpoints Markdown dans chaque langue, groupés par code de langue.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description:
+          'Marqueur d’état versionné — le miroir v1 de /api/health.json.',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1450,6 +1474,12 @@ export const fr: SiteTranslations = {
           'Manifeste de capacités ARD — l’agentmap déclaré dans robots.txt.',
       },
     ],
+    versioningTitle: 'Versionnement et dépréciation',
+    versioningBody:
+      'La famille JSON versionnée vit sous /api/v1/ — index, sections, pages et health — et les chemins canoniques non versionnés (/llms.txt, /{page}.md, /api/mcp) appartiennent au même contrat v1. Les changements cassants paraissent uniquement dans une nouvelle famille /api/v{N+1}/, jamais au sein de v1. Quand un endpoint est déprécié, ses réponses portent Deprecation: true et une date Sunset au moins 180 jours avant le retrait, et un en-tête Link pointe vers le successeur.',
+    rateLimitsTitle: 'Limites de débit',
+    rateLimitsBody:
+      'Les réponses sur /api/* portent des en-têtes de limite RFC 9331 — RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset et RateLimit-Policy — pour que les agents puissent s’auto-réguler en temps réel ; une réponse 429 ajoute Retry-After. L’application est best-effort en périphérie (120 requêtes par 60 secondes par visiteur) et l’accès reste anonyme : pas de clés, pas d’inscription, pas de paliers.',
     mcpTitle: 'Serveur MCP',
     mcpIntro:
       'Un serveur Model Context Protocol sans état sur Streamable HTTP. Trois outils en lecture seule : get_init_prompt, list_site_sections et read_page. Les versions de protocole 2025-03-26 et 2025-06-18 sont prises en charge ; aucune session n’est requise.',
@@ -1465,9 +1495,9 @@ export const fr: SiteTranslations = {
     cliTitle: 'Installez le kit',
     cliIntro:
       'Le chemin d’installation officiel de la skill Deep Work Plan — la même commande que l’endpoint /init donne aux agents. Elle fonctionne avec tout agent de code compatible skills (Claude Code, Cursor, Codex, Gemini et d’autres).',
-    cliCodeLabel: 'Terminal — CLI de skills',
+    cliCodeLabel: 'Terminal — CLI de skills et CLI officielle',
     cliNote:
-      'La skill s’installe par vendoring dans .agents/skills/deepworkplan/ à l’intérieur de votre dépôt, pour que chaque agent qui touche le dépôt partage la même méthodologie.',
+      'La skill s’installe par vendoring dans .agents/skills/deepworkplan/ à l’intérieur de votre dépôt, pour que chaque agent qui touche le dépôt partage la même méthodologie. La CLI officielle deepworkplan — un client sans dépendances sur la même API (init, sections, read, open, mcp) — est prête pour npm et vit dans le répertoire cli/ du dépôt du site jusqu’à sa publication.',
     resourcesTitle: 'Ressources lisibles par machine',
     resources: [
       { label: 'Spécification OpenAPI (/openapi.json)', href: '/openapi.json' },

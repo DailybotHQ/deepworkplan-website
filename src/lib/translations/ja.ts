@@ -1368,7 +1368,7 @@ export const ja: SiteTranslations = {
       title:
         '開発者 — Deep Work Plan のエージェント API、MCP サーバーとドキュメント',
       description:
-        'Deep Work Plan のエージェントサーフェス：OpenAPI 仕様付きの読み取り専用・認証不要 API、/api/mcp の MCP サーバー、17 言語のページ単位 Markdown、npx skills インストール CLI。',
+        'Deep Work Plan のエージェントサーフェス：読み取り専用・認証不要・バージョン付きの API——OpenAPI 仕様、MCP サーバー、17 言語のページ単位 Markdown、公式 CLI。',
     },
     eyebrow: 'エージェントと開発者のサーフェス',
     title: '開発者と AI エージェントのための Deep Work Plan',
@@ -1430,6 +1430,30 @@ export const ja: SiteTranslations = {
         description: '仕様とこのポータルへのリンクを備えた静的ヘルスマーカー。',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'v1 ファミリーのバージョン付きカタログ：エンドポイントのパス、サイトのバージョン、仕様へのリンク。',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          '型付き JSON によるサイトマップ——セクションごとの名前・パス・説明。',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          'すべての言語のすべての Markdown エンドポイントを、言語コードごとにグループ化した一覧。',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description:
+          'バージョン付きのヘルスマーカー——/api/health.json の v1 ミラー。',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1441,6 +1465,12 @@ export const ja: SiteTranslations = {
         description: 'ARD 能力マニフェスト——robots.txt で宣言された agentmap。',
       },
     ],
+    versioningTitle: 'バージョニングと廃止',
+    versioningBody:
+      'バージョン付き JSON ファミリーは /api/v1/ 配下に存在します——index、sections、pages、health——そして、バージョンなしの正規パス（/llms.txt、/{page}.md、/api/mcp）も同じ v1 契約に属します。破壊的変更は新しい /api/v{N+1}/ ファミリーとしてのみ提供され、v1 の内部で行われることはありません。エンドポイントが廃止されると、そのレスポンスは Deprecation: true と、削除の少なくとも 180 日前を示す Sunset 日付を伴い、Link ヘッダーが後継を指します。',
+    rateLimitsTitle: 'レート制限',
+    rateLimitsBody:
+      '/api/* のレスポンスは RFC 9331 のレート制限ヘッダー——RateLimit-Limit、RateLimit-Remaining、RateLimit-Reset、RateLimit-Policy——を伴うため、エージェントはリアルタイムに自分のペースを調整できます。429 レスポンスには Retry-After が追加されます。実施はエッジでのベストエフォート（訪問者あたり 60 秒につき 120 リクエスト）で、アクセスは匿名のままです：キーも登録も階層もありません。',
     mcpTitle: 'MCP サーバー',
     mcpIntro:
       'Streamable HTTP 上のステートレスな Model Context Protocol サーバーです。読み取り専用の 3 つのツール: get_init_prompt、list_site_sections、read_page。プロトコルバージョン 2025-03-26 と 2025-06-18 をサポートしており、セッションは不要です。',
@@ -1456,9 +1486,9 @@ export const ja: SiteTranslations = {
     cliTitle: 'キットをインストール',
     cliIntro:
       'Deep Work Plan スキルの公式インストールパスです——/init エンドポイントがエージェントに与えるのと同じコマンドです。skills 互換の任意のコーディングエージェント（Claude Code、Cursor、Codex、Gemini など）で動作します。',
-    cliCodeLabel: 'ターミナル — skills CLI',
+    cliCodeLabel: 'ターミナル — skills CLI と公式 CLI',
     cliNote:
-      'スキルはリポジトリ内の .agents/skills/deepworkplan/ にベンダーされるため、リポジトリを扱うすべてのエージェントが同じ方法論を共有します。',
+      'スキルはリポジトリ内の .agents/skills/deepworkplan/ にベンダーされるため、リポジトリを扱うすべてのエージェントが同じ方法論を共有します。公式 deepworkplan CLI——同じ API の上に作られた依存関係ゼロのクライアント（init、sections、read、open、mcp）——は npm に向けて準備済みで、公開までサイトリポジトリの cli/ ディレクトリにあります。',
     resourcesTitle: '機械可読リソース',
     resources: [
       { label: 'OpenAPI 仕様 (/openapi.json)', href: '/openapi.json' },

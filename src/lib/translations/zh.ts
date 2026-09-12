@@ -1341,7 +1341,7 @@ export const zh: SiteTranslations = {
     meta: {
       title: '开发者 — Deep Work Plan 代理 API、MCP 服务器与文档',
       description:
-        'Deep Work Plan 的代理接口面：只读、零认证的 API（附 OpenAPI 规范）、位于 /api/mcp 的 MCP 服务器、17 种语言的逐页 Markdown，以及 npx skills 安装 CLI。',
+        'Deep Work Plan 的代理接口面：只读、零认证、带版本管理的 API，附 OpenAPI 规范、MCP 服务器、17 种语言的逐页 Markdown 与官方 CLI。',
     },
     eyebrow: '代理与开发者接口面',
     title: '面向开发者与 AI 代理的 Deep Work Plan',
@@ -1401,6 +1401,27 @@ export const zh: SiteTranslations = {
         description: '静态健康标记，附带指向规范与本门户的链接。',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description: 'v1 家族的版本化目录：端点路径、站点版本与规范链接。',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          '以带类型 JSON 呈现的站点地图——每个分区的名称、路径与描述。',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description: '每种语言下的全部 Markdown 端点，按语言代码分组。',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description: '版本化健康标记——/api/health.json 的 v1 镜像。',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1412,6 +1433,12 @@ export const zh: SiteTranslations = {
         description: 'ARD 能力清单——robots.txt 中声明的 agentmap。',
       },
     ],
+    versioningTitle: '版本管理与弃用',
+    versioningBody:
+      '版本化的 JSON 家族位于 /api/v1/ 之下——index、sections、pages 与 health——而未加版本的规范路径（/llms.txt、/{page}.md、/api/mcp）属于同一个 v1 契约。破坏性变更只会随新的 /api/v{N+1}/ 家族发布，绝不会发生在 v1 内部。当某个端点被弃用时，其响应会携带 Deprecation: true 与至少早于移除 180 天的 Sunset 日期，并由 Link 头指向继任者。',
+    rateLimitsTitle: '速率限制',
+    rateLimitsBody:
+      '/api/* 的响应携带 RFC 9331 速率限制头——RateLimit-Limit、RateLimit-Remaining、RateLimit-Reset 与 RateLimit-Policy——让代理能够实时自我节流；429 响应额外携带 Retry-After。限流在边缘尽力执行（每位访客每 60 秒 120 次请求），访问保持匿名：无密钥、无注册、无层级。',
     mcpTitle: 'MCP 服务器',
     mcpIntro:
       '一个基于 Streamable HTTP 的无状态 Model Context Protocol 服务器。三个只读工具：get_init_prompt、list_site_sections 与 read_page。支持协议版本 2025-03-26 与 2025-06-18；无需会话。',
@@ -1427,9 +1454,9 @@ export const zh: SiteTranslations = {
     cliTitle: '安装套件',
     cliIntro:
       'Deep Work Plan 技能的官方安装路径——与 /init 端点交给代理的命令完全相同。它适用于任何兼容 skills 的编码代理（Claude Code、Cursor、Codex、Gemini 等）。',
-    cliCodeLabel: '终端 — skills CLI',
+    cliCodeLabel: '终端 — skills CLI 与官方 CLI',
     cliNote:
-      '该技能会内嵌到你仓库内的 .agents/skills/deepworkplan/，因此每个接触该仓库的代理都共享同一套方法论。',
+      '该技能会内嵌到你仓库内的 .agents/skills/deepworkplan/，因此每个接触该仓库的代理都共享同一套方法论。官方 deepworkplan CLI——一个基于同一 API 的零依赖客户端（init、sections、read、open、mcp）——已为 npm 做好准备，在发布之前存放于站点仓库的 cli/ 目录。',
     resourcesTitle: '机器可读资源',
     resources: [
       { label: 'OpenAPI 规范 (/openapi.json)', href: '/openapi.json' },

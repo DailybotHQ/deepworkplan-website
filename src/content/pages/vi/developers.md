@@ -1,6 +1,6 @@
 ---
 title: "Nhà phát triển — API agent của Deep Work Plan"
-description: "Bề mặt agent của deepworkplan.com dành cho nhà phát triển và AI agent: API chỉ đọc, không cần xác thực được mô tả bằng đặc tả OpenAPI, máy chủ MCP không trạng thái tại /api/mcp, Markdown theo từng trang bằng 17 ngôn ngữ, và CLI cài đặt npx skills."
+description: "Bề mặt agent của Deep Work Plan: API có phiên bản, chỉ đọc, không cần xác thực, với OpenAPI, máy chủ MCP và Markdown theo từng trang bằng 17 ngôn ngữ."
 ---
 
 ## Không cần xác thực theo thiết kế
@@ -21,10 +21,22 @@ Không có API key để tạo, không quy trình OAuth, và không có sandbox 
 | GET | `/init.md` | Lời nhắc áp dụng DWP chính tắc. |
 | GET | `/{page}.md` | Bất kỳ trang nào dưới dạng Markdown nguồn, bằng cả 17 ngôn ngữ. |
 | GET | `/api/health.json` | Dấu hiệu trạng thái tĩnh. |
+| GET | `/api/v1/index.json` | Danh mục có phiên bản của họ v1: đường dẫn endpoint, phiên bản trang web và liên kết đến đặc tả. |
+| GET | `/api/v1/sections.json` | Sơ đồ trang web ở dạng JSON có kiểu — tên, đường dẫn và mô tả cho từng phần. |
+| GET | `/api/v1/pages.json` | Mọi endpoint Markdown bằng mọi ngôn ngữ, được nhóm theo mã ngôn ngữ. |
+| GET | `/api/v1/health.json` | Dấu hiệu tình trạng có phiên bản — bản phản chiếu v1 của `/api/health.json`. |
 | POST | `/api/mcp` | Máy chủ MCP (Streamable HTTP, không trạng thái). |
 | GET | `/.well-known/ai-catalog.json` | Manifest năng lực ARD (agentmap). |
 
 Các đường dẫn `/api/*` không xác định trả về lỗi JSON có cấu trúc kèm gợi ý giải quyết, không bao giờ trả về trang lỗi HTML.
+
+## Quản lý phiên bản và đánh dấu lỗi thời
+
+Họ JSON có phiên bản nằm dưới `/api/v1/` — index, sections, pages và health — và các đường dẫn chính thức không có phiên bản (`/llms.txt`, `/{page}.md`, `/api/mcp`) thuộc cùng hợp đồng v1. Các thay đổi phá vỡ tương thích chỉ xuất hiện trong họ `/api/v{N+1}/` mới, không bao giờ trong v1. Khi một endpoint bị đánh dấu lỗi thời, phản hồi của nó mang `Deprecation: true` và ngày `Sunset` ít nhất 180 ngày trước khi gỡ bỏ, và header `Link` chỉ đến phần thay thế.
+
+## Giới hạn tốc độ
+
+Phản hồi trên `/api/*` mang các header giới hạn tốc độ RFC 9331 — `RateLimit-Limit`, `RateLimit-Remaining`, `RateLimit-Reset` và `RateLimit-Policy` — để agent có thể tự điều chỉnh tốc độ theo thời gian thực; phản hồi `429` bổ sung `Retry-After`. Việc áp dụng là tốt nhất có thể ở biên (120 yêu cầu mỗi 60 giây mỗi khách truy cập) và quyền truy cập vẫn ẩn danh: không khóa, không đăng ký, không phân tầng.
 
 ## Máy chủ MCP
 
@@ -70,10 +82,16 @@ curl -s https://deepworkplan.com/es/developers.md
 Đường dẫn cài đặt chính thức cho skill Deep Work Plan — cùng một lệnh mà endpoint /init đưa cho agent. Nó hoạt động với bất kỳ coding agent tương thích skills nào (Claude Code, Cursor, Codex, Gemini và các agent khác):
 
 ```bash
+# 1. Install the DWP skill — same command the /init endpoint gives agents
 npx skills add DailybotHQ/deepworkplan-skill@latest
+
+# 2. Official CLI — zero-dependency client over this API (Node >= 18),
+#    prepared in the site repo's cli/ directory pending npm publication
+deepworkplan init
+deepworkplan read /es/developers
 ```
 
-Skill được vendor vào `.agents/skills/deepworkplan/` bên trong repository của bạn, nên mọi agent chạm đến repo đều dùng chung một phương pháp luận.
+Skill được vendor vào `.agents/skills/deepworkplan/` bên trong repository của bạn, nên mọi agent chạm đến repo đều dùng chung một phương pháp luận. CLI chính thức `deepworkplan` — một ứng dụng khách không phụ thuộc trên cùng API này (`init`, `sections`, `read`, `open`, `mcp`) — đã sẵn sàng cho npm và nằm trong thư mục [cli/](https://github.com/DailybotHQ/deepworkplan-website/tree/main/cli) của repository trang web cho đến khi xuất bản.
 
 ## Tài nguyên máy có thể đọc được
 

@@ -1360,7 +1360,7 @@ export const ko: SiteTranslations = {
     meta: {
       title: '개발자 — Deep Work Plan 에이전트 API, MCP 서버 및 문서',
       description:
-        'Deep Work Plan의 에이전트 표면: OpenAPI 스펙을 갖춘 읽기 전용 무인증 API, /api/mcp의 MCP 서버, 17개 언어의 페이지별 Markdown, npx skills 설치 CLI.',
+        'Deep Work Plan의 에이전트 표면: 읽기 전용이며 인증 없는 버전 관리 API — OpenAPI 스펙, MCP 서버, 17개 언어의 페이지별 Markdown, 공식 CLI.',
     },
     eyebrow: '에이전트 및 개발자 표면',
     title: '개발자와 AI 에이전트를 위한 Deep Work Plan',
@@ -1422,6 +1422,29 @@ export const ko: SiteTranslations = {
         description: '스펙과 이 포털로 연결되는 정적 헬스 마커입니다.',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'v1 제품군의 버전 관리 카탈로그: 엔드포인트 경로, 사이트 버전, 스펙 링크.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          '타입이 지정된 JSON 사이트맵 — 각 섹션의 이름, 경로, 설명.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          '모든 언어의 Markdown 엔드포인트를 언어 코드별로 묶은 목록.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description: '버전 관리 상태 표시 — /api/health.json의 v1 미러.',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1434,6 +1457,12 @@ export const ko: SiteTranslations = {
           'ARD 역량 매니페스트 — robots.txt에 선언된 agentmap입니다.',
       },
     ],
+    versioningTitle: '버전 관리와 지원 중단',
+    versioningBody:
+      '버전 관리 JSON 제품군은 /api/v1/ 아래에 있습니다(index, sections, pages, health). 버전이 없는 정규 경로(/llms.txt, /{page}.md, /api/mcp)도 같은 v1 계약에 속합니다. 호환성을 깨는 변경은 새로운 /api/v{N+1}/ 제품군으로만 출시되며 v1 내부에서는 절대 이루어지지 않습니다. 엔드포인트가 지원 중단되면 응답은 Deprecation: true와 제거 최소 180일 전의 Sunset 날짜를 담고, Link 헤더가 후속 경로를 가리킵니다.',
+    rateLimitsTitle: '요청 제한',
+    rateLimitsBody:
+      '/api/* 응답은 RFC 9331 요청 제한 헤더(RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset, RateLimit-Policy)를 담아 에이전트가 실시간으로 스스로 속도를 조절할 수 있으며, 429 응답에는 Retry-After가 추가됩니다. 적용은 엣지에서 최선(best-effort)으로 이루어지고(방문자당 60초에 120 요청), 접근은 익명으로 유지됩니다: 키도, 등록도, 등급도 없습니다.',
     mcpTitle: 'MCP 서버',
     mcpIntro:
       'Streamable HTTP 위의 스테이트리스 Model Context Protocol 서버입니다. 세 가지 읽기 전용 도구: get_init_prompt, list_site_sections, read_page. 프로토콜 버전 2025-03-26과 2025-06-18을 지원하며 세션은 필요하지 않습니다.',
@@ -1449,9 +1478,9 @@ export const ko: SiteTranslations = {
     cliTitle: '키트 설치',
     cliIntro:
       'Deep Work Plan 스킬의 공식 설치 경로입니다 — /init 엔드포인트가 에이전트에게 주는 것과 같은 명령입니다. skills 호환 코딩 에이전트(Claude Code, Cursor, Codex, Gemini 등)라면 무엇이든 작동합니다.',
-    cliCodeLabel: '터미널 — skills CLI',
+    cliCodeLabel: '터미널 — skills CLI와 공식 CLI',
     cliNote:
-      '스킬은 리포지토리 내 .agents/skills/deepworkplan/에 벤더되므로, 리포지토리를 다루는 모든 에이전트가 같은 방법론을 공유합니다.',
+      '스킬은 리포지토리 내 .agents/skills/deepworkplan/에 벤더되므로, 리포지토리를 다루는 모든 에이전트가 같은 방법론을 공유합니다. 공식 deepworkplan CLI(동일한 API 위의 의존성 없는 클라이언트 — init, sections, read, open, mcp)는 npm 발행을 준비해 두었고, 출시 전까지 사이트 리포지토리의 cli/ 디렉터리에 있습니다.',
     resourcesTitle: '기계 판독 가능 리소스',
     resources: [
       { label: 'OpenAPI 스펙 (/openapi.json)', href: '/openapi.json' },

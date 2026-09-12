@@ -1358,7 +1358,7 @@ export const hi: SiteTranslations = {
     meta: {
       title: 'डेवलपर — Deep Work Plan एजेंट API, MCP सर्वर और दस्तावेज़',
       description:
-        'Deep Work Plan की एजेंट सतह: OpenAPI स्पेसिफिकेशन के साथ रीड-ओनली, ज़ीरो-ऑथ API, MCP सर्वर, 17 भाषाओं में प्रति-पृष्ठ Markdown और npx skills इंस्टॉल CLI।',
+        'Deep Work Plan का एजेंट सतह: संस्करणित, केवल-पठन, बिना-प्रमाणीकरण API — OpenAPI स्पेक, MCP सर्वर, 17 भाषाओं में प्रति-पृष्ठ Markdown और आधिकारिक CLI।',
     },
     eyebrow: 'एजेंट और डेवलपर सतह',
     title: 'डेवलपर्स और AI एजेंटों के लिए Deep Work Plan',
@@ -1419,6 +1419,28 @@ export const hi: SiteTranslations = {
         description: 'विनिर्देश और इस पोर्टल के लिंक के साथ स्थैतिक हेल्थ मार्कर।',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'v1 परिवार की संस्करणित सूची: एंडपॉइंट पथ, साइट संस्करण और स्पेक लिंक।',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          'टाइप किए गए JSON में साइट का नक्शा — प्रत्येक अनुभाग का नाम, पथ और विवरण।',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description: 'हर भाषा का हर Markdown एंडपॉइंट, भाषा कोड से समूहबद्ध।',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description: 'संस्करणित स्वास्थ्य संकेतक — /api/health.json का v1 मिरर।',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1430,6 +1452,12 @@ export const hi: SiteTranslations = {
         description: 'ARD क्षमता मैनिफ़ेस्टो — robots.txt में घोषित agentmap।',
       },
     ],
+    versioningTitle: 'संस्करण और पदावनति',
+    versioningBody:
+      'संस्करणित JSON परिवार /api/v1/ के अंतर्गत रहता है — index, sections, pages और health — और बिना संस्करण के मानक पथ (/llms.txt, /{page}.md, /api/mcp) उसी v1 अनुबंध के हिस्से हैं। तोड़ने वाले बदलाव केवल नए /api/v{N+1}/ परिवार में आते हैं, कभी v1 के भीतर नहीं। जब कोई एंडपॉइंट पदावनत होता है, तो उसकी प्रतिक्रियाएँ हटाने से कम-से-कम 180 दिन पहले Deprecation: true और Sunset तिथि ले जाती हैं, और एक Link हेडर उत्तराधिकारी की ओर इशारा करता है।',
+    rateLimitsTitle: 'दर सीमाएँ',
+    rateLimitsBody:
+      '/api/* की प्रतिक्रियाएँ RFC 9331 दर-सीमा हेडर — RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset और RateLimit-Policy — ले जाती हैं, ताकि एजेंट वास्तविक समय में स्वयं को धीमा कर सकें; 429 प्रतिक्रिया Retry-After जोड़ती है। प्रवर्तन एज पर सर्वश्रेष्ठ-प्रयास (120 अनुरोध प्रति 60 सेकंड प्रति आगंतुक) है और पहुँच गुमनाम बनी रहती है: कोई कुंजी नहीं, कोई पंजीकरण नहीं, कोई स्तर नहीं।',
     mcpTitle: 'MCP सर्वर',
     mcpIntro:
       'Streamable HTTP पर एक स्टेटलेस Model Context Protocol सर्वर। तीन रीड-ओनली टूल: get_init_prompt, list_site_sections और read_page। प्रोटोकॉल संस्करण 2025-03-26 और 2025-06-18 समर्थित हैं; किसी सत्र की आवश्यकता नहीं है।',
@@ -1445,9 +1473,9 @@ export const hi: SiteTranslations = {
     cliTitle: 'किट इंस्टॉल करें',
     cliIntro:
       'Deep Work Plan स्किल के लिए आधिकारिक इंस्टॉल पथ — वही कमांड जो /init एंडपॉइंट एजेंटों को देता है। यह skills-संगत किसी भी कोडिंग एजेंट के साथ काम करता है (Claude Code, Cursor, Codex, Gemini और अन्य)।',
-    cliCodeLabel: 'टर्मिनल — skills CLI',
+    cliCodeLabel: 'टर्मिनल — skills CLI और आधिकारिक CLI',
     cliNote:
-      'स्किल आपकी रिपॉज़िटरी के अंदर .agents/skills/deepworkplan/ में वेंडर हो जाती है, इसलिए रेपो को छूने वाला हर एजेंट एक ही पद्धति साझा करता है।',
+      'स्किल आपकी रिपॉज़िटरी के अंदर .agents/skills/deepworkplan/ में वेंडर हो जाती है, इसलिए रेपो को छूने वाला हर एजेंट एक ही पद्धति साझा करता है। आधिकारिक deepworkplan CLI — इसी API पर एक शून्य-निर्भरता क्लाइंट (init, sections, read, open, mcp) — npm के लिए तैयार है और प्रकाशन तक साइट रिपॉज़िटरी की cli/ निर्देशिका में रहता है।',
     resourcesTitle: 'मशीन-पठनीय संसाधन',
     resources: [
       {

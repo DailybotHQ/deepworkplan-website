@@ -1,6 +1,6 @@
 ---
 title: "開発者 — Deep Work Plan のエージェント API"
-description: "deepworkplan.com の開発者と AI エージェント向けサーフェス: OpenAPI 仕様で記述された読み取り専用・認証不要 API、/api/mcp のステートレスな MCP サーバー、17 言語のページ単位 Markdown、npx skills インストール CLI。"
+description: "Deep Work Plan のエージェントサーフェス：読み取り専用・認証不要・バージョン付きの API——OpenAPI 仕様、MCP サーバー、17 言語のページ単位 Markdown、公式 CLI。"
 ---
 
 ## 認証ゼロの設計
@@ -21,10 +21,22 @@ description: "deepworkplan.com の開発者と AI エージェント向けサー
 | GET | `/init.md` | 正規の DWP 採用プロンプト。 |
 | GET | `/{page}.md` | 任意のページをソース Markdown で。全 17 言語。 |
 | GET | `/api/health.json` | 静的ヘルスマーカー。 |
+| GET | `/api/v1/index.json` | v1 ファミリーのバージョン付きカタログ：エンドポイントのパス、サイトのバージョン、仕様へのリンク。 |
+| GET | `/api/v1/sections.json` | 型付き JSON によるサイトマップ——セクションごとの名前・パス・説明。 |
+| GET | `/api/v1/pages.json` | すべての言語のすべての Markdown エンドポイントを、言語コードごとにグループ化した一覧。 |
+| GET | `/api/v1/health.json` | バージョン付きのヘルスマーカー——`/api/health.json` の v1 ミラー。 |
 | POST | `/api/mcp` | MCP サーバー（Streamable HTTP、ステートレス）。 |
 | GET | `/.well-known/ai-catalog.json` | ARD 能力マニフェスト（agentmap）。 |
 
 不明な `/api/*` パスは解決ヒント付きの構造化 JSON エラーを返し、HTML エラーページは決して返しません。
+
+## バージョニングと廃止
+
+バージョン付き JSON ファミリーは `/api/v1/` 配下に存在します——index、sections、pages、health——そして、バージョンなしの正規パス（`/llms.txt`、`/{page}.md`、`/api/mcp`）も同じ v1 契約に属します。破壊的変更は新しい `/api/v{N+1}/` ファミリーとしてのみ提供され、v1 の内部で行われることはありません。エンドポイントが廃止されると、そのレスポンスは `Deprecation: true` と、削除の少なくとも 180 日前を示す `Sunset` 日付を伴い、`Link` ヘッダーが後継を指します。
+
+## レート制限
+
+`/api/*` のレスポンスは RFC 9331 のレート制限ヘッダー——`RateLimit-Limit`、`RateLimit-Remaining`、`RateLimit-Reset`、`RateLimit-Policy`——を伴うため、エージェントはリアルタイムに自分のペースを調整できます。`429` レスポンスには `Retry-After` が追加されます。実施はエッジでのベストエフォート（訪問者あたり 60 秒につき 120 リクエスト）で、アクセスは匿名のままです：キーも登録も階層もありません。
 
 ## MCP サーバー
 
@@ -70,10 +82,16 @@ curl -s https://deepworkplan.com/es/developers.md
 Deep Work Plan スキルの公式インストールパスです——/init エンドポイントがエージェントに与えるのと同じコマンドです。skills 互換の任意のコーディングエージェント（Claude Code、Cursor、Codex、Gemini など）で動作します:
 
 ```bash
+# 1. Install the DWP skill — same command the /init endpoint gives agents
 npx skills add DailybotHQ/deepworkplan-skill@latest
+
+# 2. Official CLI — zero-dependency client over this API (Node >= 18),
+#    prepared in the site repo's cli/ directory pending npm publication
+deepworkplan init
+deepworkplan read /es/developers
 ```
 
-スキルはリポジトリ内の `.agents/skills/deepworkplan/` にベンダーされるため、リポジトリを扱うすべてのエージェントが同じ方法論を共有します。
+スキルはリポジトリ内の `.agents/skills/deepworkplan/` にベンダーされるため、リポジトリを扱うすべてのエージェントが同じ方法論を共有します。公式 `deepworkplan` CLI——同じ API の上に作られた依存関係ゼロのクライアント（`init`、`sections`、`read`、`open`、`mcp`）——は npm に向けて準備済みで、公開までサイトリポジトリの [cli/](https://github.com/DailybotHQ/deepworkplan-website/tree/main/cli) ディレクトリにあります。
 
 ## 機械可読リソース
 

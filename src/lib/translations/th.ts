@@ -1348,7 +1348,7 @@ export const th: SiteTranslations = {
     meta: {
       title: 'นักพัฒนา — agent API, MCP server และเอกสารของ Deep Work Plan',
       description:
-        'ส่วนติดต่อสำหรับ agent ของ Deep Work Plan: API แบบอ่านอย่างเดียว ไร้การยืนยันตัวตน พร้อมสเปก OpenAPI, MCP server, Markdown 17 ภาษา และ npx skills CLI',
+        'พื้นผิว agent ของ Deep Work Plan: API แบบมีเวอร์ชัน อ่านอย่างเดียว ไม่ต้องยืนยันตัวตน พร้อม OpenAPI, MCP เซิร์ฟเวอร์ และ Markdown รายหน้าใน 17 ภาษา',
     },
     eyebrow: 'ส่วนติดต่อสำหรับ agent และนักพัฒนา',
     title: 'Deep Work Plan สำหรับนักพัฒนาและ AI agent',
@@ -1409,6 +1409,28 @@ export const th: SiteTranslations = {
         description: 'ตัวบ่งชี้สถานะสุขภาพแบบคงที่ พร้อมลิงก์ไปยังสเปกและพอร์ทัลนี้',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'แคตตาล็อกแบบมีเวอร์ชันของตระกูล v1: เส้นทาง endpoint เวอร์ชันของไซต์ และลิงก์ไปยัง spec',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          'แผนผังไซต์เป็น JSON แบบมีชนิดข้อมูล — ชื่อ เส้นทาง และคำอธิบายของแต่ละส่วน',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description: 'endpoint แบบ Markdown ทุกรายการในทุกภาษา จัดกลุ่มตามรหัสภาษา',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description: 'ตัวบ่งชี้สถานะแบบมีเวอร์ชัน — ภาพสะท้อน v1 ของ /api/health.json',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1420,6 +1442,12 @@ export const th: SiteTranslations = {
         description: 'แมนิเฟสต์ความสามารถ ARD — agentmap ที่ประกาศไว้ใน robots.txt',
       },
     ],
+    versioningTitle: 'การกำหนดเวอร์ชันและการเลิกใช้',
+    versioningBody:
+      'ตระกูล JSON แบบมีเวอร์ชันอยู่ภายใต้ /api/v1/ — index, sections, pages และ health — และเส้นทางมาตรฐานที่ไม่มีเวอร์ชัน (/llms.txt, /{page}.md, /api/mcp) จัดอยู่ในสัญญา v1 เดียวกัน การเปลี่ยนแปลงที่ทำลายความเข้ากันได้ออกเฉพาะในตระกูล /api/v{N+1}/ ใหม่เท่านั้น ไม่มีทางเกิดขึ้นภายใน v1 เมื่อ endpoint ถูกเลิกใช้ คำตอบจะมี Deprecation: true และวันที่ Sunset ล่วงหน้าอย่างน้อย 180 วันก่อนการลบ และ header แบบ Link ชี้ไปยังตัวแทน',
+    rateLimitsTitle: 'ขีดจำกัดอัตราการร้องขอ',
+    rateLimitsBody:
+      'คำตอบบน /api/* มี header ขีดจำกัดอัตราแบบ RFC 9331 — RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset และ RateLimit-Policy — เพื่อให้ agent ปรับความเร็วของตัวเองได้แบบเรียลไทม์ คำตอบ 429 เพิ่ม Retry-After การบังคับใช้เป็นแบบ best-effort ที่ขอบเครือข่าย (120 คำขอต่อ 60 วินาทีต่อผู้เยี่ยมชม) และการเข้าถึงยังคงไม่ระบุตัวตน: ไม่มีคีย์ ไม่มีการลงทะเบียน ไม่มีการแบ่งระดับ',
     mcpTitle: 'MCP server',
     mcpIntro:
       'Model Context Protocol server แบบ stateless ผ่าน Streamable HTTP เครื่องมือแบบอ่านอย่างเดียวสามตัว: get_init_prompt, list_site_sections และ read_page รองรับเวอร์ชันโปรโตคอล 2025-03-26 และ 2025-06-18 และไม่ต้องมีเซสชัน',
@@ -1435,9 +1463,9 @@ export const th: SiteTranslations = {
     cliTitle: 'ติดตั้งชุดเครื่องมือ',
     cliIntro:
       'เส้นทางติดตั้งอย่างเป็นทางการของสกิล Deep Work Plan — คำสั่งเดียวกับที่ endpoint /init มอบให้ agent ใช้ได้กับ coding agent ใดก็ตามที่รองรับ skills (Claude Code, Cursor, Codex, Gemini และอื่น ๆ)',
-    cliCodeLabel: 'เทอร์มินัล — skills CLI',
+    cliCodeLabel: 'เทอร์มินัล — skills CLI และ CLI อย่างเป็นทางการ',
     cliNote:
-      'สกิลถูกฝังไปที่ .agents/skills/deepworkplan/ ภายใน repository ของคุณ จึงทำให้ agent ทุกตัวที่แตะ repo นี้ใช้ระเบียบวิธีเดียวกัน',
+      'สกิลถูกฝังไปที่ .agents/skills/deepworkplan/ ภายใน repository ของคุณ จึงทำให้ agent ทุกตัวที่แตะ repo นี้ใช้ระเบียบวิธีเดียวกัน CLI อย่างเป็นทางการ deepworkplan — client ที่ไม่มี dependency บน API เดียวกันนี้ (init, sections, read, open, mcp) — เตรียมพร้อมสำหรับ npm แล้วและอยู่ที่ไดเรกทอรี cli/ ของ repository ไซต์จนกว่าจะเผยแพร่',
     resourcesTitle: 'ทรัพยากรที่อ่านได้ด้วยเครื่อง',
     resources: [
       {

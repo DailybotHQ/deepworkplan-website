@@ -1369,7 +1369,7 @@ export const id: SiteTranslations = {
       title:
         'Pengembang — API agent, server MCP, dan dokumentasi Deep Work Plan',
       description:
-        'Permukaan agent Deep Work Plan: API read-only tanpa autentikasi, spesifikasi OpenAPI, server MCP di /api/mcp, Markdown 17 bahasa, dan CLI npx skills.',
+        'Permukaan agen Deep Work Plan: API read-only tanpa autentikasi dan berversi, dengan OpenAPI, server MCP, dan Markdown per halaman dalam 17 bahasa.',
     },
     eyebrow: 'Permukaan agent & pengembang',
     title: 'Deep Work Plan untuk pengembang dan agent AI',
@@ -1432,6 +1432,30 @@ export const id: SiteTranslations = {
           'Penanda health statis dengan link ke spesifikasi dan portal ini.',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'Katalog berversi dari keluarga v1: jalur endpoint, versi situs, dan tautan ke spesifikasi.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          'Peta situs sebagai JSON bertipe — nama, jalur, dan deskripsi per bagian.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          'Setiap endpoint Markdown dalam setiap bahasa, dikelompokkan per kode bahasa.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description:
+          'Penanda kesehatan berversi — cermin v1 dari /api/health.json.',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1444,6 +1468,12 @@ export const id: SiteTranslations = {
           'Manifest kapabilitas ARD — agentmap yang dinyatakan di robots.txt.',
       },
     ],
+    versioningTitle: 'Pemberversian dan deprekasi',
+    versioningBody:
+      'Keluarga JSON berversi berada di bawah /api/v1/ — index, sections, pages, dan health — dan jalur kanonik tanpa versi (/llms.txt, /{page}.md, /api/mcp) termasuk dalam kontrak v1 yang sama. Perubahan yang merusak kompatibilitas hanya dikirim dalam keluarga /api/v{N+1}/ baru, tidak pernah di dalam v1. Saat sebuah endpoint dideprekasi, responsnya membawa Deprecation: true dan tanggal Sunset setidaknya 180 hari sebelum penghapusan, dan header Link menunjuk ke penerusnya.',
+    rateLimitsTitle: 'Batas laju permintaan',
+    rateLimitsBody:
+      'Respons pada /api/* membawa header batas laju RFC 9331 — RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset, dan RateLimit-Policy — agar agent dapat mengatur dirinya secara real-time; respons 429 menambahkan Retry-After. Penegakan dilakukan sebaik mungkin di edge (120 permintaan per 60 detik per pengunjung) dan akses tetap anonim: tanpa kunci, tanpa pendaftaran, tanpa tingkatan.',
     mcpTitle: 'Server MCP',
     mcpIntro:
       'Server Model Context Protocol stateless melalui Streamable HTTP. Tiga tool read-only: get_init_prompt, list_site_sections, dan read_page. Versi protokol 2025-03-26 dan 2025-06-18 didukung; tidak ada sesi yang diperlukan.',
@@ -1459,9 +1489,9 @@ export const id: SiteTranslations = {
     cliTitle: 'Pasang kit',
     cliIntro:
       'Jalur instalasi resmi untuk skill Deep Work Plan — perintah yang sama dengan yang diberikan endpoint /init kepada agent. Bekerja dengan coding agent apa pun yang kompatibel dengan skills (Claude Code, Cursor, Codex, Gemini, dan lainnya).',
-    cliCodeLabel: 'Terminal — skills CLI',
+    cliCodeLabel: 'Terminal — skills CLI dan CLI resmi',
     cliNote:
-      'Skill di-vendor ke .agents/skills/deepworkplan/ di dalam repositori Anda, sehingga setiap agent yang menyentuh repo berbagi metodologi yang sama.',
+      'Skill di-vendor ke dalam .agents/skills/deepworkplan/ di dalam repositori Anda, sehingga setiap agent yang menyentuh repo berbagi metodologi yang sama. CLI resmi deepworkplan — klien tanpa dependensi di atas API yang sama (init, sections, read, open, mcp) — telah disiapkan untuk npm dan berada di direktori cli/ repositori situs hingga dipublikasikan.',
     resourcesTitle: 'Sumber daya yang dapat dibaca mesin',
     resources: [
       {

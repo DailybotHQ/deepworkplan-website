@@ -4,14 +4,23 @@ API endpoints and data formats for deepworkplan.com.
 
 ## Overview
 
-deepworkplan.com is a static site. It exposes agent-friendly Markdown endpoints and a sitemap rather than dynamic JSON APIs:
+deepworkplan.com is a static site with an edge middleware. It exposes a read-only, zero-auth agent API: static JSON artifacts (versioned under `/api/v1/`), agent-friendly Markdown endpoints, a stateless MCP server, and a sitemap:
 
 | Endpoint | Type | Purpose |
 |----------|------|---------|
-| `/{page}.md`, `/es/{page}.md` | Markdown | Agent-friendly page content |
-| `/methodology/{slug}.md`, `/spec/{slug}.md`, `/kit/{slug}.md`, `/examples/{slug}.md` | Markdown | Agent-friendly content-collection docs (EN + `/es/`) |
+| `/api/v1/index.json` | JSON (static) | Versioned catalog of the v1 family: endpoint paths, site version, spec links |
+| `/api/v1/sections.json` | JSON (static) | Site map as typed JSON — name, path, description per section |
+| `/api/v1/pages.json` | JSON (static) | Every Markdown endpoint in every language, grouped by language code |
+| `/api/v1/health.json` | JSON (static) | Versioned health marker (v1 mirror of `/api/health.json`) |
+| `/api/health.json` | JSON (static) | Unversioned canonical health marker |
+| `/api/mcp` | JSON-RPC (edge) | MCP server (Streamable HTTP, stateless) — see `functions/api/mcp.ts` |
+| `/openapi.json` | JSON (static) | OpenAPI 3.1 specification of the whole agent API |
+| `/{page}.md`, `/{lang}/{page}.md` | Markdown | Agent-friendly page content (17 languages) |
+| `/methodology/{slug}.md`, `/spec/{slug}.md`, `/kit/{slug}.md`, `/examples/{slug}.md` | Markdown | Agent-friendly content-collection docs (every language) |
 | `/init.md` | Markdown | Canonical agent adoption prompt |
 | `/sitemap-index.xml` | Sitemap | Search engine indexing |
+
+A zero-dependency command-line client over this API — `deepworkplan` (`init`, `sections`, `read`, `open`, `mcp`) — lives in [`cli/`](../cli/) at the repo root, self-contained with its own `package.json` (never installed by the site build). Publication to npm is a credential-gated external step; see `cli/README.md`.
 
 ## Markdown Endpoints
 
@@ -238,10 +247,41 @@ interface APIError {
 
 ## Rate Limiting
 
-Cloudflare Pages can use Workers for rate limiting. If needed, consider:
+Implemented (not aspirational). The edge middleware (`functions/_middleware.ts`)
+applies a best-effort fixed-window limiter to `/api/*` requests using
+`src/lib/rate-limit.ts`:
 
-- Moving to a host with edge functions (Vercel, Netlify)
-- Adding a CDN with rate limiting (Cloudflare)
+- **Policy:** `q=120; window=60; burst=0` — 120 requests per rolling 60-second
+  window per visitor (keyed by `CF-Connecting-IP`, falling back to
+  `anonymous`). The window is tracked per edge isolate with oldest-entry
+  eviction at 10,000 keys, so enforcement is honest best-effort, never a
+  platform-global guarantee.
+- **Headers (RFC 9331):** every `/api/*` response carries `RateLimit-Limit`,
+  `RateLimit-Remaining`, `RateLimit-Reset`, and `RateLimit-Policy`; a `429`
+  response additionally carries `Retry-After` (seconds until the window resets)
+  and a structured JSON `ApiError` body.
+- **Anonymous access unchanged:** no keys, no registration, no tiers — the
+  headers exist so agents can self-throttle in real time (declared in
+  `/auth.md`).
+
+## Versioning & Deprecation
+
+- **URL-path versioning:** the versioned JSON family lives under `/api/v1/`
+  (`index`, `sections`, `pages`, `health` — static artifacts in
+  `public/api/v1/`; `pages.json` is regenerated at prebuild time by
+  `scripts/generate-api-v1-pages.mjs`, with the release version stamped by
+  `scripts/stamp-versions.mjs`). The unversioned canonical paths
+  (`/llms.txt`, `/{page}.md`, `/api/health.json`, `/api/mcp`) belong to the
+  same v1 contract. Breaking changes ship only in a new `/api/v{N+1}/` family.
+- **Deprecation contract (RFC 9745/8594 semantics):** when a path is
+  deprecated, its responses carry `Deprecation: true@<unix-epoch>` and a
+  `Sunset` date at least 180 days before removal, plus a
+  `Link: <successor>; rel="deprecation"` header. The active map lives in
+  `src/lib/deprecation.ts` (`DEPRECATED_PATHS` — empty today; exact and
+  wildcard entries, longest match wins). `X-API-Version: v1` is returned by
+  `/api/mcp`.
+- The policy is published to agents at `/developers` (17 languages) and in
+  `public/openapi.json` (`info.description`).
 
 ## TypeScript Types
 

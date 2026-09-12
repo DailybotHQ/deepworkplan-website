@@ -1369,7 +1369,7 @@ export const pl: SiteTranslations = {
       title:
         'Programiści — agentowe API Deep Work Plan, serwer MCP i dokumentacja',
       description:
-        'Agentowe API Deep Work Plan: tylko odczyt, bez logowania i kluczy (OpenAPI), serwer MCP pod /api/mcp, Markdown każdej strony w 17 językach i npx skills.',
+        'Powierzchnia agentowa Deep Work Plan: wersjonowane, tylko-do-odczytu API bez uwierzytelniania, ze specyfikacją OpenAPI, serwerem MCP i Markdown dla każdej strony w 17 językach.',
     },
     eyebrow: 'Powierzchnia dla agentów i programistów',
     title: 'Deep Work Plan dla programistów i agentów AI',
@@ -1432,6 +1432,30 @@ export const pl: SiteTranslations = {
           'Statyczny znacznik stanu z linkami do specyfikacji i do tego portalu.',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'Wersjonowany katalog rodziny v1: ścieżki endpointów, wersja serwisu i odnośniki do specyfikacji.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          'Mapa serwisu jako typowane JSON — nazwa, ścieżka i opis dla każdej sekcji.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          'Każdy endpoint Markdown w każdym języku, pogrupowane według kodu języka.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description:
+          'Wersjonowany wskaźnik stanu — lustrzany v1 odpowiednik /api/health.json.',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1444,6 +1468,12 @@ export const pl: SiteTranslations = {
           'Manifest możliwości ARD — agentmap zadeklarowany w robots.txt.',
       },
     ],
+    versioningTitle: 'Wersjonowanie i wycofywanie',
+    versioningBody:
+      'Wersjonowana rodzina JSON żyje pod /api/v1/ — index, sections, pages i health — a kanoniczne ścieżki bez wersji (/llms.txt, /{page}.md, /api/mcp) należą do tego samego kontraktu v1. Zmiany łamiące zgodność wchodzą wyłącznie w nowej rodzinie /api/v{N+1}/, nigdy wewnątrz v1. Gdy endpoint jest wycofywany, jego odpowiedzi niosą Deprecation: true i datę Sunset co najmniej 180 dni przed usunięciem, a nagłówek Link wskazuje następcę.',
+    rateLimitsTitle: 'Limity zapytań',
+    rateLimitsBody:
+      'Odpowiedzi na /api/* niosą nagłówki limitów RFC 9331 — RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset i RateLimit-Policy — dzięki czemu agenci mogą sami dostosowywać tempo w czasie rzeczywistym; odpowiedź 429 dodaje Retry-After. Egzekwowanie jest best-effort na krawędzi (120 zapytań na 60 sekund na odwiedzającego), a dostęp pozostaje anonimowy: bez kluczy, bez rejestracji, bez poziomów.',
     mcpTitle: 'Serwer MCP',
     mcpIntro:
       'Bezstanowy serwer Model Context Protocol przez Streamable HTTP. Trzy narzędzia tylko do odczytu: get_init_prompt, list_site_sections i read_page. Obsługiwane wersje protokołu to 2025-03-26 i 2025-06-18; sesja nie jest wymagana.',
@@ -1459,9 +1489,9 @@ export const pl: SiteTranslations = {
     cliTitle: 'Zainstaluj zestaw',
     cliIntro:
       'Oficjalna ścieżka instalacji umiejętności Deep Work Plan — ta sama komenda, którą punkt końcowy /init przekazuje agentom. Działa z każdym agentem do kodu zgodnym ze skills (Claude Code, Cursor, Codex, Gemini i inne).',
-    cliCodeLabel: 'Terminal — CLI skills',
+    cliCodeLabel: 'Terminal — CLI skills i oficjalna CLI',
     cliNote:
-      'Umiejętność wdraża się (vendoring) do .agents/skills/deepworkplan/ wewnątrz Twojego repozytorium, więc każdy agent dotykający repozytorium dzieli tę samą metodykę.',
+      'Umiejętność wdraża się (vendoring) do .agents/skills/deepworkplan/ wewnątrz Twojego repozytorium, więc każdy agent dotykający repozytorium dzieli tę samą metodykę. Oficjalna CLI deepworkplan — klient bez zależności na tym samym API (init, sections, read, open, mcp) — jest przygotowana na npm i do publikacji żyje w katalogu cli/ repozytorium serwisu.',
     resourcesTitle: 'Zasoby czytelne maszynowo',
     resources: [
       { label: 'Specyfikacja OpenAPI (/openapi.json)', href: '/openapi.json' },

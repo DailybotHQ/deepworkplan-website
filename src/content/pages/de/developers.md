@@ -1,6 +1,6 @@
 ---
 title: "Entwickler — die Deep-Work-Plan-Agent-API"
-description: "Die deepworkplan.com-Agentenoberfläche für Entwickler und KI-Agenten: eine read-only API ohne Anmeldung, beschrieben durch OpenAPI, ein zustandsloser MCP-Server unter /api/mcp, Markdown pro Seite in 17 Sprachen und die npx-skills-CLI."
+description: "Die Agentenoberfläche von Deep Work Plan: versionierte, read-only API ohne Authentifizierung — mit OpenAPI-Spec, MCP-Server und Markdown pro Seite in 17 Sprachen."
 ---
 
 ## Bewusst ohne Authentifizierung
@@ -21,10 +21,22 @@ Es gibt keine API-Schlüssel zu erzeugen, keinen OAuth-Aufwand und keine von der
 | GET | `/init.md` | Der kanonische DWP-Adoptions-Prompt. |
 | GET | `/{page}.md` | Jede Seite als Quell-Markdown, in allen 17 Sprachen. |
 | GET | `/api/health.json` | Statischer Health-Marker. |
+| GET | `/api/v1/index.json` | Versionierter Katalog der v1-Familie: Endpunkt-Pfade, Website-Version und Links zur Spec. |
+| GET | `/api/v1/sections.json` | Die Sitemap als typisiertes JSON — Name, Pfad und Beschreibung je Abschnitt. |
+| GET | `/api/v1/pages.json` | Alle Markdown-Endpunkte in jeder Sprache, gruppiert nach Sprachcode. |
+| GET | `/api/v1/health.json` | Versionierter Health-Marker — das v1-Pendant zu `/api/health.json`. |
 | POST | `/api/mcp` | MCP-Server (Streamable HTTP, zustandslos). |
 | GET | `/.well-known/ai-catalog.json` | ARD-Fähigkeitsmanifest (Agentmap). |
 
 Unbekannte `/api/*`-Pfade geben einen strukturierten JSON-Fehler mit einem Lösungshinweis zurück, nie eine HTML-Fehlerseite.
+
+## Versionierung und Deprecation
+
+Die versionierte JSON-Familie liegt unter `/api/v1/` — index, sections, pages und health — und die unversionierten kanonischen Pfade (`/llms.txt`, `/{page}.md`, `/api/mcp`) gehören zum selben v1-Vertrag. Breaking Changes erscheinen ausschließlich in einer neuen Familie `/api/v{N+1}/`, nie innerhalb von v1. Wird ein Endpunkt deprecated, tragen seine Antworten `Deprecation: true` und ein `Sunset`-Datum mindestens 180 Tage vor der Abschaltung, und ein `Link`-Header verweist auf den Nachfolger.
+
+## Rate-Limits
+
+Antworten auf `/api/*` tragen RFC-9331-Rate-Limit-Header — `RateLimit-Limit`, `RateLimit-Remaining`, `RateLimit-Reset` und `RateLimit-Policy` —, damit Agents sich in Echtzeit selbst drosseln können; eine `429`-Antwort ergänzt `Retry-After`. Die Durchsetzung ist Best-Effort an der Edge (120 Anfragen pro 60 Sekunden pro Besucher), und der Zugriff bleibt anonym: keine Schlüssel, keine Registrierung, keine Stufen.
 
 ## MCP-Server
 
@@ -70,10 +82,16 @@ curl -s https://deepworkplan.com/es/developers.md
 Der offizielle Installationspfad für das Deep Work Plan Skill — derselbe Befehl, den der /init-Endpunkt Agenten übergibt. Er funktioniert mit jedem Skills-kompatiblen Coding-Agenten (Claude Code, Cursor, Codex, Gemini und andere):
 
 ```bash
+# 1. Install the DWP skill — same command the /init endpoint gives agents
 npx skills add DailybotHQ/deepworkplan-skill@latest
+
+# 2. Official CLI — zero-dependency client over this API (Node >= 18),
+#    prepared in the site repo's cli/ directory pending npm publication
+deepworkplan init
+deepworkplan read /es/developers
 ```
 
-Das Skill wird unter `.agents/skills/deepworkplan/` in Ihr Repository eingebettet, sodass jeder Agent, der das Repository bearbeitet, dieselbe Methodik teilt.
+Das Skill wird unter `.agents/skills/deepworkplan/` in Ihr Repository eingebettet, sodass jeder Agent, der das Repository bearbeitet, dieselbe Methodik teilt. Die offizielle `deepworkplan`-CLI — ein Client ohne Abhängigkeiten über dieselbe API (`init`, `sections`, `read`, `open`, `mcp`) — ist für npm vorbereitet und liegt bis zur Veröffentlichung im Verzeichnis [cli/](https://github.com/DailybotHQ/deepworkplan-website/tree/main/cli) des Website-Repositorys.
 
 ## Maschinenlesbare Ressourcen
 
