@@ -5,8 +5,8 @@ date: 2026-09-11
 version: "v4 · Planes Lite primero"
 kind: release
 lang: es
-order: 1
-featured: true
+order: 2
+featured: false
 sourceLabel: "Skill release commit 3daab90"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/3daab90"
 ---

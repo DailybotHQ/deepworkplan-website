@@ -5,7 +5,7 @@ date: 2026-07-16
 version: "v2 · आधिकारिक रिलीज़"
 kind: foundation
 lang: hi
-order: 3
+order: 4
 featured: false
 sourceLabel: "Skill changelog 2.17.0"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/blob/main/CHANGELOG.md"
