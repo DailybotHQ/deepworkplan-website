@@ -41,6 +41,7 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 | `/dwp-refine` | `.agents/commands/dwp-refine.md` → `.agents/skills/deepworkplan/SKILL.md` | Refine a draft or modify an existing final plan |
 | `/dwp-resume` | `.agents/commands/dwp-resume.md` → `.agents/skills/deepworkplan/SKILL.md` | Resume an interrupted deep work plan |
 | `/dwp-status` | `.agents/commands/dwp-status.md` → `.agents/skills/deepworkplan/SKILL.md` | Check status of deep work plans without executing |
+| `/dwp-upgrade` | `.agents/commands/dwp-upgrade.md` → `.agents/skills/deepworkplan/SKILL.md` | Check for a newer DeepWorkPlan skill; install and re-onboard only on explicit acceptance |
 
 ## Git & Version Control
 
