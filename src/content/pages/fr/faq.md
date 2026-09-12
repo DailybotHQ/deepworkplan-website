@@ -42,7 +42,7 @@ Tout agent qui lit les fichiers d’un dépôt. Le skill suit le standard ouvert
 
 ### Comment l’utiliser ?
 
-Trois étapes. D’abord, installez la skill Deep Work Plan dans votre agent de code — le chemin le plus rapide est `npx skills add DailybotHQ/deepworkplan-skill` (ou clonez le dépôt de la skill et exécutez `./setup.sh`). Ensuite, intégrez le dépôt une fois pour que l’agent adapte `AGENTS.md`, `docs/`, le kit `.agents/` et une zone `.dwp/` ignorée par git à votre stack : pointez-le vers https://deepworkplan.com/init.md, ou exécutez `/deepworkplan-onboard`. Enfin, planifiez et exécutez le travail avec les commandes légères : `/dwp-create <goal>` construit un plan ; `/dwp-execute` l’exécute tâche par tâche face à chaque porte ; `/dwp-refine` modifie un plan en cours (le périmètre, les tâches, ou la promotion d’un plan Lite en Full) ; `/dwp-resume` reprend après une interruption ; `/dwp-status` rapporte la progression sans exécuter ; `/dwp-verify` produit un rapport objectif de conformité. Les agents qui interceptent `/` utilisent souvent `#` à la place (par exemple `#dwp-execute`). Le point d’adoption et le démarrage rapide reprennent le même chemin en plus de détails.
+Trois étapes. D’abord, installez la skill Deep Work Plan dans votre agent de code — le chemin le plus rapide est `npx skills add DailybotHQ/deepworkplan-skill` (ou clonez le dépôt de la skill et exécutez `./setup.sh`). Ensuite, intégrez le dépôt une fois pour que l’agent adapte `AGENTS.md`, `docs/`, le kit `.agents/` et une zone `.dwp/` ignorée par git à votre stack : pointez-le vers https://deepworkplan.com/init.md, ou exécutez `/deepworkplan-onboard`. Enfin, planifiez et exécutez le travail avec les commandes légères : `/dwp-create <goal>` construit un plan ; `/dwp-execute` l’exécute tâche par tâche face à chaque porte ; `/dwp-refine` modifie un plan en cours (le périmètre, les tâches, ou la promotion d’un plan Lite en Full) ; `/dwp-resume` reprend après une interruption ; `/dwp-status` rapporte la progression sans exécuter ; `/dwp-verify` produit un rapport objectif de conformité ; `/dwp-upgrade` déplace une skill installée vers une version plus récente sans toucher aux plans existants. Les agents qui interceptent `/` utilisent souvent `#` à la place (par exemple `#dwp-execute`). Le point d’adoption et le démarrage rapide reprennent le même chemin en plus de détails.
 
 [Démarrage rapide](https://deepworkplan.com/fr/quickstart)
 
@@ -114,11 +114,23 @@ Une porte en échec est d’abord un signal de réparation : l’agent corrige c
 
 [Lire le protocole d’agent](https://deepworkplan.com/fr/spec/agent-protocol)
 
+### Que se passe-t-il quand le vérificateur de conformité ne peut pas exécuter ses vérifications ?
+
+Il le dit clairement. Le vérificateur se termine avec le code de sortie 2 et un verdict `UNVERIFIED` explicite — il n’imprime jamais une conformité qu’il n’a pas réellement vérifiée. Quand l’environnement manque d’un interpréteur capable ou qu’une vérification ne peut pas tourner, le résultat honnête est « non vérifié », pas « conforme » ; un résultat vert signifie toujours que chaque vérification a tourné et a passé. La même discipline traverse toute la méthodologie : aucun flux n’affaiblit ni ne falsifie une porte pour déclarer le travail terminé.
+
+[Le contrat de conformité](https://deepworkplan.com/fr/spec/conformance)
+
 ### Un plan peut-il s’exécuter sans supervision, de nuit ou en CI ?
 
 Oui, quand le plan a été approuvé à l’avance, porte la couche d’état requise et confère à l’agent une autorité bornée. Une exécution sans supervision doit s’arrêter et enregistrer un blocage quand la réalité diverge, quand une porte échoue en dehors de son périmètre de réparation prévu, ou quand une nouvelle approbation ou un identifiant est nécessaire.
 
 [Lire le protocole d’exécution sans supervision](https://deepworkplan.com/fr/spec/agent-protocol)
+
+### Un plan peut-il s’étendre sur plusieurs dépôts ?
+
+Oui — l’archétype du hub orchestrateur existe exactement pour cela. Un dépôt hub porte le plan qui coordonne, et chaque dépôt enfant exécute son propre plan dans sa propre zone `.dwp/` isolée, si bien qu’un enfant n’écrit jamais dans l’état des plans du hub. L’achèvement d’un enfant se lit dans l’état de plus haut niveau de son propre plan, pas par recherche de chaînes en son sein, et le hub enregistre où il en est avant de naviguer où que ce soit. Chaque enfant reste un dépôt DWP ordinaire, qui peut aussi être piloté seul.
+
+[Archétypes de dépôts](https://deepworkplan.com/fr/spec/archetypes)
 
 ## Comment il se compare
 
@@ -144,7 +156,13 @@ Les modes de planification intégrés sont utiles, et Deep Work Plan s’appuie 
 
 ### Qu’est-ce que l’onboarding écrit dans mon dépôt, et touche-t-il aux fichiers existants ?
 
-L’onboarding est non destructif : il détecte un `AGENTS.md`, `docs/`, `.agents/` ou `CLAUDE.md` existant, réconcilie au lieu d’écraser, et demande avant de remplacer quoi que ce soit. Il écrit l’index `AGENTS.md` avec de vraies commandes, une arborescence `docs/` raisonnée, des documentations par module, le kit `.agents/` avec ses commandes `dwp-*` légères, une zone de sortie `.dwp/` ignorée par git, une carte des tests vérifiée, et la revue locale de code requise (le skill AI Diff Reviewer plus une extension de revue adaptée au dépôt). Il lance ensuite un autocontrôle et le vérificateur de conformité, pour que vous voyiez ce qui a été produit. Un dépôt intégré sous un standard antérieur reçoit une mise à niveau ciblée du harness qui réconcilie uniquement ce qui manque ou est obsolète. La mise à niveau de la skill elle-même est un flux distinct, soumis à consentement explicite (`/dwp-upgrade`) : il vérifie la dernière version publiée en lecture seule, n’installe qu’après votre acceptation explicite, rejoue l’onboarding comme une passe complète, et ne migre ni n’invalide jamais les plans existants sous `.dwp/`.
+L’onboarding est non destructif : il détecte un `AGENTS.md`, `docs/`, `.agents/` ou `CLAUDE.md` existant, réconcilie au lieu d’écraser, et demande avant de remplacer quoi que ce soit. Il écrit l’index `AGENTS.md` avec de vraies commandes, une arborescence `docs/` raisonnée, des documentations par module, le kit `.agents/` avec ses commandes `dwp-*` légères, une zone de sortie `.dwp/` ignorée par git, une carte des tests vérifiée, et la revue locale de code requise (le skill AI Diff Reviewer plus une extension de revue adaptée au dépôt). Il lance ensuite un autocontrôle et le vérificateur de conformité, pour que vous voyiez ce qui a été produit. Un dépôt intégré sous un standard antérieur reçoit une mise à niveau ciblée du harness qui réconcilie uniquement ce qui manque ou est obsolète.
+
+[L’endpoint d’adoption](https://deepworkplan.com/fr/init)
+
+### Comment mettre à niveau la skill dans un dépôt déjà intégré ?
+
+Deux mises à niveau différentes sont en jeu, et le flux les garde séparées. Le harness du dépôt — `AGENTS.md`, `docs/`, le kit `.agents/` — se réconcilie en rejouant l’onboarding, qui ne comble que ce qui manque ou est obsolète. La skill elle-même avance via `/dwp-upgrade` : une vérification en lecture seule de la dernière version publiée, l’installation du tag exact que vous avez accepté, vérifiée, puis l’onboarding rejoué comme une passe complète. Le flux est soumis à consentement explicite de bout en bout, les adaptations locales sont comparées et préservées plutôt qu’écrasées, et `.dwp/` n’est jamais migré — les plans existants gardent leur forme enregistrée et continuent de s’exécuter.
 
 [L’endpoint d’adoption](https://deepworkplan.com/fr/init)
 
@@ -162,7 +180,7 @@ DWP ne traite pas l’absence d’outillage comme un laissez-passer. Pendant l�
 
 ### Combien cela coûte-t-il, et comment l’efficacité est-elle mesurée ?
 
-La méthodologie et le skill sont sous licence MIT et gratuits ; il n’y a ni service, ni clé d’API, ni télémétrie dans les flux centraux. L’efficacité est rapportée comme le nombre d’octets d’instructions chargés par chaque flux, mesuré par un script livré avec le skill et publié dans un registre d’évaluation, les hausses étant rapportées aussi platement que les baisses. Elle n’est pas rapportée en pourcentages de tokens ni en économies de coût, parce qu’un inventaire d’octets n’établit pas ces choses ; une évaluation publique préenregistrée est prévue pour mesurer correctement les résultats.
+La méthodologie et le skill sont sous licence MIT et gratuits ; il n’y a ni service, ni clé d’API, ni télémétrie dans les flux centraux. L’efficacité est rapportée comme le nombre d’octets d’instructions chargés par chaque flux, mesuré par un script livré avec le skill, remesuré à chaque ligne de base de publication et publié dans un registre d’évaluation, les hausses étant rapportées aussi platement que les baisses. Elle n’est pas rapportée en pourcentages de tokens ni en économies de coût, parce qu’un inventaire d’octets n’établit pas ces choses ; une évaluation publique préenregistrée est prévue pour mesurer correctement les résultats.
 
 [Confiance et divulgation](https://deepworkplan.com/fr/trust)
 

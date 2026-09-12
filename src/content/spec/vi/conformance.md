@@ -8,7 +8,7 @@ section: Conformance
 
 # Tuân thủ
 
-**Phiên bản 1.2. Trạng thái: Ổn định.** Tài liệu này định nghĩa thế nào là một repository *tuân thủ Deep Work Plan* — tức là AI-first và điều khiển được bằng agent. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
+**Phiên bản 1.3. Trạng thái: Ổn định.** Tài liệu này định nghĩa thế nào là một repository *tuân thủ Deep Work Plan* — tức là AI-first và điều khiển được bằng agent. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
 Sự tuân thủ tồn tại để "AI-first" là một đặc tính khách quan, kiểm tra được thay vì một ấn tượng. Một repository hoặc đạt các tiêu chí dưới đây hoặc không. [Sub-skill `verify`](/kit) (`/dwp-verify`) kiểm tra chúng một cách máy móc.
 
@@ -38,6 +38,6 @@ Một Deep Work Plan trong `.dwp/plans/` là chỉnh dạng khi:
 
 ## Kiểm chứng sự tuân thủ
 
-Sự tuân thủ NÊN được kiểm chứng một cách máy móc thay vì bằng việc xem xét thủ công. Chạy `/dwp-verify` tạo một báo cáo đạt/không đạt so với các tiêu chí trên: sự hiện diện và nội dung thật của `AGENTS.md`, sự phân giải của `CLAUDE.md`, các hạng mục `docs/`, sự khớp giữa catalog `.agents/` và đĩa, trạng thái gitignore của `.dwp/` và `tmp/`, và — đối với một kế hoạch — rằng mỗi tác vụ mang tiêu chí chấp nhận và một cổng kiểm chứng, cùng độ phủ test cho các tác vụ thay đổi hành vi và sự hiện diện của bước rà soát cuối được ghi lại. Trình kiểm tra **nhận thức phiên bản**: nó PHẢI chấp nhận một kế hoạch cũ (ba tác vụ cuối bắt buộc, không có Touched Surface) là tuân thủ, và PHẢI từ chối một kế hoạch khai báo phiên bản này mà về khách quan không hợp lệ dưới nó. Nó cũng báo cáo một dòng xuất xứ `DWP standard:` bị thiếu hoặc lỗi thời là một phát hiện nêu tên nâng cấp harness có mục tiêu.
+Sự tuân thủ NÊN được kiểm chứng một cách máy móc thay vì bằng việc xem xét thủ công. Chạy `/dwp-verify` tạo một báo cáo đạt/không đạt so với các tiêu chí trên: sự hiện diện và nội dung thật của `AGENTS.md`, sự phân giải của `CLAUDE.md`, các hạng mục `docs/`, sự khớp giữa catalog `.agents/` và đĩa, trạng thái gitignore của `.dwp/` và `tmp/`, và — đối với một kế hoạch — rằng mỗi tác vụ mang tiêu chí chấp nhận và một cổng kiểm chứng, cùng độ phủ test cho các tác vụ thay đổi hành vi và sự hiện diện của bước rà soát cuối được ghi lại. Trình kiểm tra **nhận thức phiên bản**: nó PHẢI chấp nhận một kế hoạch cũ (ba tác vụ cuối bắt buộc, không có Touched Surface) là tuân thủ, và PHẢI từ chối một kế hoạch khai báo phiên bản này mà về khách quan không hợp lệ dưới nó. Nó cũng báo cáo một dòng xuất xứ `DWP standard:` bị thiếu hoặc lỗi thời là một phát hiện nêu tên nâng cấp harness có mục tiêu. Lớp cơ học **trung thực về giới hạn của mình**: không có trình thông dịch đủ khả năng (Python 3.9+), nó kết thúc bằng mã thoát khác 0 và phán quyết `UNVERIFIED` rõ ràng thay vì bỏ qua các bước kiểm tra — một trình kiểm chứng không bao giờ báo cáo kết quả mà nó chưa kiểm tra.
 
 Một repository NÊN được kiểm chứng lại sau khi khởi tạo và sau mỗi kế hoạch hoàn tất, để sự tuân thủ được duy trì thay vì chỉ được tuyên bố một lần.

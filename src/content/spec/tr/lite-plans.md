@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite planlar
 
-**Sürüm 2.4.0. Durum: Kararlı.** Bu belge, [DWP spesifikasyonu](/spec/dwp-specification) ile birlikte tanıtılan Lite plan temsilini belirtir: yürütülemeyen bir taslak aşaması olmadan doğrudan somutlaştırılan, küçük ila orta ölçekli, sınırlı işler için bir plan biçimi. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
+**Sürüm 4.0.0. Durum: Kararlı.** Bu belge, [DWP spesifikasyonu](/spec/dwp-specification) ile birlikte tanıtılan Lite plan temsilini belirtir: yürütülemeyen bir taslak aşaması olmadan doğrudan somutlaştırılan, küçük ila orta ölçekli, sınırlı işler için bir plan biçimi. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 
 ## Temsil ve yaşam döngüsü
 

@@ -93,7 +93,7 @@ Deep Work Plan은 스펙 주도 개발로 답합니다. 지속되는 계획, 원
 ## 실행하면 무슨 일이 일어나는가
 
 1. **에이전트가 [/init.md](/init.md)를 엽니다** — 온보딩 프롬프트와 그것이 링크하는 방법론, 스펙, 키트를 읽습니다.
-2. **Deep Work Plan 스킬을 설치합니다** — 모든 리포지토리에서 동일한 엔진입니다: 라우터와 그 하위 스킬(create, execute, refine, resume, status, verify, onboard, author)을, Claude Code, Cursor, Codex, Gemini, Copilot용으로.
+2. **Deep Work Plan 스킬을 설치합니다** — 모든 리포지토리에서 동일한 엔진입니다: 라우터와 그 하위 스킬(create, execute, refine, resume, status, verify, onboard, author, upgrade)을, Claude Code, Cursor, Codex, Gemini, Copilot용으로.
 3. **리포지토리를 적응시킵니다** — 실제 스택을 추론하여(복사·붙여넣기가 아니라) AGENTS.md, `docs/`, 모듈별 README, 추론된 `.agents/` 키트, gitignore된 `.dwp/`를 작성합니다. 리포지토리가 하니스가 됩니다.
 4. **계획하고 실행합니다** — 장시간 Deep Work Plan을 명시적인 인수 기준과 검증 게이트에 대비해 단계별로, 수 시간 동안 자율적으로 실행합니다.
 

@@ -1,6 +1,6 @@
 ---
 title: "Deep Work Plan kiti"
-description: "Skill ve sekiz alt skill'i, komutlar, ajan adaptörleri, onboarding hazır ayarları, tercihe dayalı eklentiler ve örnekler — Deep Work Plan'i her yerde çalıştırılabilir kılan her şey."
+description: "Skill ve dokuz alt skill'i, komutlar, ajan adaptörleri, onboarding hazır ayarları, tercihe dayalı eklentiler ve örnekler — Deep Work Plan'i her yerde çalıştırılabilir kılan her şey."
 lastUpdated: 2026-05-31
 ---
 
@@ -15,7 +15,7 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ### Skill ve alt skill'leri
 
-Deep Work Plan skill'i, bir yönlendirici ile sekiz alt skill'den oluşur:
+Deep Work Plan skill'i, bir yönlendirici ile dokuz alt skill'den oluşur:
 
 - **create** — bir hedefi yapılandırılmış bir plana ayrıştırır (`/dwp-create`).
 - **execute** — bir planı görev görev çalıştırır, her kapıyı doğrular (`/dwp-execute`).
@@ -25,6 +25,7 @@ Deep Work Plan skill'i, bir yönlendirici ile sekiz alt skill'den oluşur:
 - **verify** — depo ve plan uyumluluğunu nesnel olarak denetler (`/dwp-verify`).
 - **onboard** — bir depoyu AI-first hâle getirir (`/deepworkplan-onboard`).
 - **author** — deponun kendi skill'lerini, ajanlarını ve komutlarını oluşturur veya geliştirir (`/skill-create`, `/agent-create`).
+- **upgrade** — yüklü bir skill'i güvenli biçimde yeni bir sürüme taşır (`/dwp-upgrade`).
 
 ### Komutlar
 

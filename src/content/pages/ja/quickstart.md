@@ -12,7 +12,7 @@ lastUpdated: 2026-05-31
 
 ### 1. Deep Work Plan スキルをインストールする
 
-スキルをリポジトリに追加します。ルーターと八つのサブスキル、すなわち create、execute、refine、resume、status、verify、onboard、author を備えます。最速の方法には Skills CLI を使います。
+スキルをリポジトリに追加します。ルーターと九つのサブスキル、すなわち create、execute、refine、resume、status、verify、onboard、author、upgrade を備えます。最速の方法には Skills CLI を使います。
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

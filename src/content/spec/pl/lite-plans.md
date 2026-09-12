@@ -8,7 +8,7 @@ section: Workflow
 
 # Plany Lite
 
-**Wersja 2.4.0. Status: stabilna.** Ten dokument specyfikuje reprezentację planu Lite, wprowadzoną obok [Specyfikacji DWP](/spec/dwp-specification): format planu dla małej i średniej ograniczonej pracy, który jest materializowany bezpośrednio, bez etapu niewykonywalnego szkicu. Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
+**Wersja 4.0.0. Status: stabilna.** Ten dokument specyfikuje reprezentację planu Lite, wprowadzoną obok [Specyfikacji DWP](/spec/dwp-specification): format planu dla małej i średniej ograniczonej pracy, który jest materializowany bezpośrednio, bez etapu niewykonywalnego szkicu. Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 
 ## Reprezentacja i cykl życia
 

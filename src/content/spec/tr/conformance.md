@@ -8,7 +8,7 @@ section: Conformance
 
 # Uyumluluk
 
-**Sürüm 1.2. Durum: Kararlı.** Bu belge, bir deponun *Deep Work Plan uyumlu* — yani AI-first ve ajan-pilotlanabilir — olmasının ne anlama geldiğini tanımlar. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119’da açıklandığı şekilde yorumlanacaktır.
+**Sürüm 1.3. Durum: Kararlı.** Bu belge, bir deponun *Deep Work Plan uyumlu* — yani AI-first ve ajan-pilotlanabilir — olmasının ne anlama geldiğini tanımlar. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119’da açıklandığı şekilde yorumlanacaktır.
 
 Uyumluluk, “AI-first”ün bir izlenim değil, nesnel, denetlenebilir bir özellik olması için vardır. Bir depo, aşağıdaki ölçütleri ya karşılar ya da karşılamaz. [`verify` alt skill’i](/kit) (`/dwp-verify`) bunları mekanik olarak denetler.
 
@@ -38,6 +38,6 @@ Bir depo, **sıfır isteğe bağlı eklentiyle tamamen uyumludur**. İsteğe ba�
 
 ## Uyumluluğu doğrulama
 
-Uyumluluk, inceleme yoluyla değil, mekanik olarak doğrulanMALIDIR. `/dwp-verify` çalıştırmak, yukarıdaki ölçütlere karşı bir geçti/kaldı raporu üretir: `AGENTS.md`’nin varlığı ve gerçek içeriği, `CLAUDE.md` çözümlemesi, `docs/` kategorileri, `.agents/` katalog-ile-disk eşleşmesi, `.dwp/` ve `tmp/` gitignore durumu ve — bir plan için — her görevin kabul kriterleri ile bir doğrulama kapısı taşıdığı, davranış değiştiren görevler için test kapsamıyla ve kayıtlı son incelemenin mevcut olmasıyla birlikte. Denetleyici **sürüme duyarlıdır**: eski bir planı (üç zorunlu son görev, Dokunulan Yüzey yok) uyumlu olarak KABUL ETMELİ ve bu sürümü beyan eden, ona göre nesnel olarak geçersiz olan bir planı REDDETMELİDİR. Ayrıca eksik veya bayat bir `DWP standard:` provenance satırını, hedeflenen harness yükseltmesini adlandıran bir bulgu olarak raporlar.
+Uyumluluk, inceleme yoluyla değil, mekanik olarak doğrulanMALIDIR. `/dwp-verify` çalıştırmak, yukarıdaki ölçütlere karşı bir geçti/kaldı raporu üretir: `AGENTS.md`’nin varlığı ve gerçek içeriği, `CLAUDE.md` çözümlemesi, `docs/` kategorileri, `.agents/` katalog-ile-disk eşleşmesi, `.dwp/` ve `tmp/` gitignore durumu ve — bir plan için — her görevin kabul kriterleri ile bir doğrulama kapısı taşıdığı, davranış değiştiren görevler için test kapsamıyla ve kayıtlı son incelemenin mevcut olmasıyla birlikte. Denetleyici **sürüme duyarlıdır**: eski bir planı (üç zorunlu son görev, Dokunulan Yüzey yok) uyumlu olarak KABUL ETMELİ ve bu sürümü beyan eden, ona göre nesnel olarak geçersiz olan bir planı REDDETMELİDİR. Ayrıca eksik veya bayat bir `DWP standard:` provenance satırını, hedeflenen harness yükseltmesini adlandıran bir bulgu olarak raporlar. Mekanik katman **sınırlarına karşı dürüsttür**: yetenekli bir yorumlayıcı (Python 3.9+) olmadan, kontrollerini atlamak yerine sıfırdan farklı bir kodla ve açık bir `UNVERIFIED` bildirimiyle çıkar — bir doğrulayıcı, doğrulamadığı bir sonucu asla raporlamaz.
 
 Bir depo, uyumluluğun bir kez iddia edilmek yerine sürdürülmesi için kuruluma almadan sonra ve tamamlanan her plandan sonra yeniden doğrulanMALIDIR.

@@ -1,6 +1,6 @@
 ---
 title: "Deep Work Plan 키트"
-description: "Deep Work Plan을 어디서든 실행 가능하게 만드는 스킬과 여덟 개의 하위 스킬, 명령, 에이전트 어댑터, 온보딩 프리셋, 선택형 애드온, 예시."
+description: "Deep Work Plan을 어디서든 실행 가능하게 만드는 스킬과 아홉 개의 하위 스킬, 명령, 에이전트 어댑터, 온보딩 프리셋, 선택형 애드온, 예시."
 lastUpdated: 2026-05-31
 ---
 
@@ -15,7 +15,7 @@ npx skills add DailybotHQ/deepworkplan-skill
 
 ### 스킬과 그 하위 스킬
 
-Deep Work Plan 스킬은 라우터와 여덟 개의 하위 스킬입니다.
+Deep Work Plan 스킬은 라우터와 아홉 개의 하위 스킬입니다.
 
 - **create** — 목표를 구조화된 계획으로 분해합니다(`/dwp-create`).
 - **execute** — 계획을 task 단위로 실행하며 각 게이트를 검증합니다(`/dwp-execute`).
@@ -25,6 +25,7 @@ Deep Work Plan 스킬은 라우터와 여덟 개의 하위 스킬입니다.
 - **verify** — 리포지토리와 계획의 적합성을 객관적으로 확인합니다(`/dwp-verify`).
 - **onboard** — 리포지토리를 AI-first로 만듭니다(`/deepworkplan-onboard`).
 - **author** — 리포지토리 자체의 스킬, 에이전트, 명령을 생성하거나 발전시킵니다(`/skill-create`, `/agent-create`).
+- **upgrade** — 설치된 스킬을 새 릴리스로 안전하게 이동합니다 (`/dwp-upgrade`).
 
 ### 명령
 

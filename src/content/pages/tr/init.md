@@ -100,7 +100,7 @@ teşvik edilir: dikkatli bir ajan, denetlenene kadar alınan bir istemi güvenil
 > **Kısa yol.** Skill kendi onboarding’ini taşır, bu yüzden kurmak yeterlidir. Kurduktan sonra `/deepworkplan-onboard` komutunu çalıştırın; 3–7. bölümlerin anlattığı her şeyi yapar: keşif, `AGENTS.md`, `docs/`, modül başına dokümantasyon, `.agents/`, zorunlu yerel inceleme, isteğe bağlı eklentiler ve son öz denetim. Bu alt skill’in ne yapacağını — ve bir ajan skill yükleyemediğinde izlenecek yedek yolu — aşağıda okuyabilirsiniz.
 
 Bu deponun ajanlarının yapılandırılmış işi planlayıp yürütebilmesi için skill’i kurun. Bir yönlendirici
-ile sekiz alt skill içerir — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard` ve `author`.
+ile dokuz alt skill içerir — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` ve `upgrade`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -199,11 +199,11 @@ Her plan, Final Review ile kapanır — planın kendi değişiklikleri üzerinde
 ## 7. Doğrulayın
 
 Nesnel bir geçti/kaldı uyumluluk raporu için `/dwp-verify` çalıştırın (veya `0`/`1`
-ile çıkan CI uyumlu mekanik katman olan `bash {skill_dir}/verify/conformance.sh`).
+ile çıkan CI uyumlu mekanik katman olan `bash {skill_dir}/verify/conformance.sh`; kontrollerini çalıştıramadığında açık bir `UNVERIFIED` bildirimiyle `2` ile çıkar — doğrulamadığı bir geçişi asla raporlamaz).
 [Spesifikasyonun Uyumluluk belgesindeki](https://deepworkplan.com/spec) ölçütleri denetler,
 ardından şunları teyit edin:
 
-- [ ] Skill kuruludur ve çözümlenebilir, sekiz alt skill’in tümü kullanılabilir.
+- [ ] Skill kuruludur ve çözümlenebilir, dokuz alt skill’in tümü kullanılabilir.
 - [ ] Kökte gerçek bir Hızlı Komutlar bloğuyla bir `AGENTS.md` vardır; `CLAUDE.md` ona çözümlenir.
 - [ ] `docs/`, standart kategorileri gerçek, depoya özgü içerikle barındırır;
       `docs/TESTING_GUIDE.md` gerçek bir test/lint kurulumunu tanımlar (boş ya da taslak değil);

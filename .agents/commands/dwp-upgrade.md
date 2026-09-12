@@ -1,22 +1,19 @@
 ---
-description: Check for a newer DeepWorkPlan skill and, only on explicit acceptance, install it and re-run onboarding
+description: Check for a newer DeepWorkPlan skill and upgrade only with explicit consent (provided by the installed `deepworkplan` skill)
 ---
 
-# /dwp-upgrade
+# /dwp-upgrade — provided by the `deepworkplan` skill
 
-Delegate to the **deepworkplan** skill (upgrade flow).
-
-**Skill:** `.agents/skills/deepworkplan/SKILL.md`
+> Thin alias. The flow lives in the installed `deepworkplan` skill — this file
+> only routes to it, so there is a single source of truth and no drift.
 
 ## What to do
 
-1. Read `.agents/skills/deepworkplan/SKILL.md` and route to the **upgrade** sub-skill (`upgrade/SKILL.md`).
-2. Follow that sub-skill's procedure exactly. Do not improvise.
-3. The check phase is read-only; the download and re-onboarding run only after explicit acceptance.
-4. Plans under `.dwp/` are never migrated or rewritten by an upgrade.
+Route this invocation to the **upgrade** sub-skill of the installed `deepworkplan`
+skill and follow it: read `.agents/skills/deepworkplan/upgrade/SKILL.md` and execute
+its flow. The check phase is **read-only**; nothing installs without your explicit
+acceptance, and `.dwp/` plan history is never migrated by an upgrade.
 
-## Notes
-
-- Re-runs onboarding as if executing `https://deepworkplan.com/init.md` fresh, preserving local adaptations.
-- This repository's vendored `deepworkplan` copy is repo-adapted: the consent phase must surface the adaptation diff before anything is overwritten.
-- First-time onboarding and plan work route through their own sub-skills (`onboard`, `create`, `execute`).
+> Other agents: invoke the skill's `deepworkplan-upgrade` sub-skill directly
+> (`/deepworkplan-upgrade` in Claude Code, `#deepworkplan-upgrade` elsewhere).
+> This `dwp-upgrade` file is the shorter, conventional alias.

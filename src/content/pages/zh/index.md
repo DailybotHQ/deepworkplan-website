@@ -93,7 +93,7 @@ Deep Work Plan 以规范驱动开发应对：一份持久的计划、原子任�
 ## 运行后会发生什么
 
 1. **你的代理打开 [/init.md](/init.md)** —— 它会阅读接入提示，以及其中链接的方法论、规范与套件。
-2. **它安装 Deep Work Plan 技能** —— 这个引擎在每个仓库中都完全相同：路由器及其各子技能（create、execute、refine、resume、status、verify、onboard、author），适用于 Claude Code、Cursor、Codex、Gemini 与 Copilot。
+2. **它安装 Deep Work Plan 技能** —— 这个引擎在每个仓库中都完全相同：路由器及其各子技能（create、execute、refine、resume、status、verify、onboard、author、upgrade），适用于 Claude Code、Cursor、Codex、Gemini 与 Copilot。
 3. **它让你的代码仓库适配** —— 它针对你真实的技术栈进行推理（绝不复制粘贴），写出 AGENTS.md、`docs/`、各模块的 README、一份经过推理的 `.agents/` 套件，以及被 gitignore 的 `.dwp/`。你的代码仓库由此成为 harness（运行支架）。
 4. **你来规划并执行** —— 长周期的 Deep Work Plan，依据明确的验收标准与验证关卡逐步运行，自主运行数小时。
 

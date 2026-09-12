@@ -13,8 +13,8 @@ lastUpdated: 2026-05-31
 
 ### 1. Установите навык Deep Work Plan
 
-Добавьте навык в свой репозиторий. Он поставляется с маршрутизатором плюс восемью под-навыками — create, execute, refine,
-resume, status, verify, onboard и author. Используйте Skills CLI для самого быстрого пути:
+Добавьте навык в свой репозиторий. Он поставляется с маршрутизатором плюс девятью под-навыками — create, execute, refine,
+resume, status, verify, onboard, author и upgrade. Используйте Skills CLI для самого быстрого пути:
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

@@ -8,7 +8,7 @@ section: Workflow
 
 # Kế hoạch Lite
 
-**Phiên bản 2.4.0. Trạng thái: Ổn định.** Tài liệu này đặc tả biểu diễn kế hoạch Lite được giới thiệu cùng với [Đặc tả DWP](/spec/dwp-specification): một định dạng kế hoạch cho công việc có giới hạn, quy mô nhỏ đến vừa, được vật liệu hóa trực tiếp, không qua giai đoạn bản nháp không thể thực thi. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
+**Phiên bản 4.0.0. Trạng thái: Ổn định.** Tài liệu này đặc tả biểu diễn kế hoạch Lite được giới thiệu cùng với [Đặc tả DWP](/spec/dwp-specification): một định dạng kế hoạch cho công việc có giới hạn, quy mô nhỏ đến vừa, được vật liệu hóa trực tiếp, không qua giai đoạn bản nháp không thể thực thi. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
 ## Biểu diễn và vòng đời
 

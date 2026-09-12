@@ -13,8 +13,8 @@ lastUpdated: 2026-05-31
 
 ### 1. Deep Work Plan 스킬 설치
 
-리포지토리에 스킬을 추가하세요. 라우터와 여덟 개의 하위 스킬 — create, execute, refine,
-resume, status, verify, onboard, author — 을 제공합니다. 가장 빠른 경로로 Skills CLI를 사용하세요.
+리포지토리에 스킬을 추가하세요. 라우터와 아홉 개의 하위 스킬 — create, execute, refine,
+resume, status, verify, onboard, author, upgrade — 을 제공합니다. 가장 빠른 경로로 Skills CLI를 사용하세요.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

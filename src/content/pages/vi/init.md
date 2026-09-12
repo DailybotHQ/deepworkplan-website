@@ -101,7 +101,7 @@ nó đã được kiểm tra.
 > **Đường tắt.** Skill mang theo quy trình onboarding của riêng nó, nên chỉ cần cài đặt là đủ. Sau khi cài, hãy chạy `/deepworkplan-onboard`: nó thực hiện mọi thứ mà các mục 3–7 mô tả — trinh sát, `AGENTS.md`, `docs/`, tài liệu theo từng mô-đun, `.agents/`, bản đánh giá cục bộ bắt buộc, các addon tùy chọn và bước tự kiểm tra cuối cùng. Hãy đọc tiếp để biết sub-skill đó sẽ làm gì — và đường dự phòng khi một tác nhân không thể nạp skill.
 
 Cài skill để các agent của repository này có thể lập kế hoạch và thực thi công việc có cấu trúc. Nó đi kèm một bộ định tuyến
-cùng tám sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard` và `author`.
+cùng chín sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` và `upgrade`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
@@ -202,11 +202,11 @@ kiểm chứng trạng thái cuối cùng và đối chiếu skill. Executive Re
 ## 7. Kiểm chứng
 
 Chạy `/dwp-verify` để có một báo cáo tuân thủ đạt/không đạt khách quan (hoặc
-`bash {skill_dir}/verify/conformance.sh` cho lớp cơ học tương thích CI, thoát `0`/`1`).
+`bash {skill_dir}/verify/conformance.sh` cho lớp cơ học tương thích CI, thoát `0`/`1`, và `2` với phán quyết `UNVERIFIED` rõ ràng khi không thể chạy các bước kiểm tra — nó không bao giờ báo cáo một kết quả đậu mà nó chưa kiểm tra).
 Nó kiểm tra các tiêu chí trong [tài liệu Tuân thủ của đặc tả](https://deepworkplan.com/spec).
 Rồi xác nhận:
 
-- [ ] Skill đã được cài và phân giải được, với cả tám sub-skill sẵn sàng.
+- [ ] Skill đã được cài và phân giải được, với cả chín sub-skill sẵn sàng.
 - [ ] `AGENTS.md` tồn tại tại gốc với một khối Quick Commands thật; `CLAUDE.md` phân giải tới nó.
 - [ ] `docs/` chứa các hạng mục chuẩn với nội dung thật, riêng cho repo; `docs/TESTING_GUIDE.md`
       mô tả thiết lập test/lint thật (không trống hay chỉ là stub); các mô-đun chính có một

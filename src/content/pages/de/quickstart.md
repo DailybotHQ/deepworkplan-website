@@ -13,8 +13,8 @@ Ihr Repository spec-driven und agenten-steuerbar machen.
 
 ### 1. Die Deep Work Plan Skill installieren
 
-Fügen Sie die Skill zu Ihrem Repository hinzu. Sie liefert einen Router plus acht Sub-Skills — create, execute, refine,
-resume, status, verify, onboard und author. Nutzen Sie die Skills-CLI für den schnellsten Weg:
+Fügen Sie die Skill zu Ihrem Repository hinzu. Sie liefert einen Router plus neun Sub-Skills — create, execute, refine,
+resume, status, verify, onboard, author und upgrade. Nutzen Sie die Skills-CLI für den schnellsten Weg:
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill

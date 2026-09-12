@@ -8,7 +8,7 @@ section: Conformance
 
 # Zgodność
 
-**Wersja 1.2. Status: Stabilny.** Ten dokument definiuje, co oznacza, że repozytorium jest *zgodne z Deep Work Plan* — czyli AI-first i sterowalne przez agenta. Słowa kluczowe MUSI, NIE MOŻE, POWINNO, NIE POWINNO oraz MOŻE należy interpretować zgodnie z opisem w RFC 2119.
+**Wersja 1.3. Status: Stabilny.** Ten dokument definiuje, co oznacza, że repozytorium jest *zgodne z Deep Work Plan* — czyli AI-first i sterowalne przez agenta. Słowa kluczowe MUSI, NIE MOŻE, POWINNO, NIE POWINNO oraz MOŻE należy interpretować zgodnie z opisem w RFC 2119.
 
 Zgodność istnieje po to, aby „AI-first" było obiektywną, sprawdzalną właściwością, a nie wrażeniem. Repozytorium albo spełnia poniższe kryteria, albo nie. [Sub-skill `verify`](/kit) (`/dwp-verify`) sprawdza je mechanicznie.
 
@@ -38,6 +38,6 @@ Deep Work Plan w `.dwp/plans/` jest dobrze sformułowany, gdy:
 
 ## Weryfikacja zgodności
 
-Zgodność POWINNA być weryfikowana mechanicznie, a nie przez inspekcję. Uruchomienie `/dwp-verify` generuje raport zaliczenia/niezaliczenia względem powyższych kryteriów: obecności i rzeczywistej treści `AGENTS.md`, rozwiązania `CLAUDE.md`, kategorii `docs/`, zgodności katalogu `.agents/` z dyskiem, statusu gitignore dla `.dwp/` i `tmp/` oraz — dla planu — tego, że każde zadanie ma kryteria akceptacji i bramkę walidacyjną, z pokryciem testami dla zadań zmieniających zachowanie oraz z obecnym zapisanym przeglądem końcowym. Sprawdzający jest **wrażliwy na wersję**: MUSI zaakceptować starszy plan (trzy obowiązkowe zadania końcowe, bez Powierzchni dotkniętej) jako zgodny oraz MUSI odrzucić plan, który deklaruje tę wersję i jest obiektywnie nieprawidłowy w jej ramach. Zgłasza też brakującą lub nieaktualną linię pochodzenia `DWP standard:` jako znalezisko wskazujące ukierunkowany upgrade harnessu.
+Zgodność POWINNA być weryfikowana mechanicznie, a nie przez inspekcję. Uruchomienie `/dwp-verify` generuje raport zaliczenia/niezaliczenia względem powyższych kryteriów: obecności i rzeczywistej treści `AGENTS.md`, rozwiązania `CLAUDE.md`, kategorii `docs/`, zgodności katalogu `.agents/` z dyskiem, statusu gitignore dla `.dwp/` i `tmp/` oraz — dla planu — tego, że każde zadanie ma kryteria akceptacji i bramkę walidacyjną, z pokryciem testami dla zadań zmieniających zachowanie oraz z obecnym zapisanym przeglądem końcowym. Sprawdzający jest **wrażliwy na wersję**: MUSI zaakceptować starszy plan (trzy obowiązkowe zadania końcowe, bez Powierzchni dotkniętej) jako zgodny oraz MUSI odrzucić plan, który deklaruje tę wersję i jest obiektywnie nieprawidłowy w jej ramach. Zgłasza też brakującą lub nieaktualną linię pochodzenia `DWP standard:` jako znalezisko wskazujące ukierunkowany upgrade harnessu. Warstwa mechaniczna jest **uczciwa co do swoich ograniczeń**: bez zdolnego interpretera (Python 3.9+) kończy się niezerowym kodem wyjścia i jawnym werdyktem `UNVERIFIED` zamiast pomijać swoje sprawdzenia — weryfikator nigdy nie raportuje wyniku, którego nie zweryfikował.
 
 Repozytorium POWINNO być ponownie weryfikowane po onboardingu i po każdym ukończonym planie, aby zgodność była utrzymywana, a nie deklarowana jednorazowo.

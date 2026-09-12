@@ -206,7 +206,7 @@ export const it: SiteTranslations = {
         {
           title: 'Installa la skill Deep Work Plan',
           description:
-            'La skill è il motore — lo stesso in ogni repository. Un solo comando importa il router e le sue sub-skill (create, execute, refine, resume, status, verify, onboard, author) per Claude Code, Cursor, Codex, Gemini e Copilot.',
+            'La skill è il motore — lo stesso in ogni repository. Un solo comando importa il router e le sue sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade) per Claude Code, Cursor, Codex, Gemini e Copilot.',
         },
         {
           title: 'Adatta il Suo repository',
@@ -245,7 +245,7 @@ export const it: SiteTranslations = {
         {
           label: 'La skill Deep Work Plan, installata',
           detail:
-            'create, execute, refine, resume, status, verify, onboard e author — a disposizione del Suo agente come un unico pacchetto di skill, senza copie per repository.',
+            'create, execute, refine, resume, status, verify, onboard, author e upgrade — a disposizione del Suo agente come un unico pacchetto di skill, senza copie per repository.',
         },
         {
           label: 'Una conformità verificabile',
@@ -613,7 +613,7 @@ export const it: SiteTranslations = {
     meta: {
       title: 'Il kit Deep Work Plan',
       description:
-        'La skill e le sue otto sub-skill, i comandi, gli adapter, i preset, gli addon opt-in e gli esempi che rendono Deep Work Plan eseguibile su agenti e stack diversi.',
+        'La skill e le sue nove sub-skill, i comandi, gli adapter, i preset, gli addon opt-in e gli esempi che rendono Deep Work Plan eseguibile su agenti e stack diversi.',
     },
     eyebrow: 'Kit',
     title: 'Il kit',
@@ -623,7 +623,7 @@ export const it: SiteTranslations = {
       command: {
         title: 'Sub-skill e comandi',
         description:
-          'Il router della skill e le sue sub-skill (create, execute, refine, resume, status, verify, onboard, author), più i sottili slash command che vi delegano.',
+          'Il router della skill e le sue sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade), più i sottili slash command che vi delegano.',
       },
       adapter: {
         title: 'Adapter',
@@ -686,7 +686,7 @@ export const it: SiteTranslations = {
       {
         title: 'Installi la skill Deep Work Plan',
         description:
-          'Aggiunga la skill al Suo repository — un router più otto sub-skill (create, execute, refine, resume, status, verify, onboard, author). Usi la Skills CLI per la via più rapida, oppure cloni il repo ed esegua il setup dove sono disponibili git e una shell.',
+          'Aggiunga la skill al Suo repository — un router più nove sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade). Usi la Skills CLI per la via più rapida, oppure cloni il repo ed esegua il setup dove sono disponibili git e una shell.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
@@ -758,7 +758,7 @@ export const it: SiteTranslations = {
       {
         title: 'Installi la skill',
         description:
-          'Aggiunga la skill Deep Work Plan così che qualsiasi agente possa pianificare ed eseguire lavoro strutturato. La skill include un router più otto sub-skill — create, execute, refine, resume, status, verify, onboard e author.',
+          'Aggiunga la skill Deep Work Plan così che qualsiasi agente possa pianificare ed eseguire lavoro strutturato. La skill include un router più nove sub-skill — create, execute, refine, resume, status, verify, onboard, author e upgrade.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',
@@ -860,7 +860,7 @@ export const it: SiteTranslations = {
             id: 'how-to-use',
             question: 'Come si usa?',
             answer:
-              'Tre passaggi. Per prima cosa, installa la skill Deep Work Plan nel tuo agente di coding — la via più rapida è `npx skills add DailybotHQ/deepworkplan-skill` (oppure clona il repository della skill ed esegui `./setup.sh`). In secondo luogo, fai l’onboarding del repository una volta, così l’agente adatta `AGENTS.md`, `docs/`, il kit `.agents/` e un’area `.dwp/` ignorata da git al tuo stack: punta a https://deepworkplan.com/init.md, oppure esegui `/deepworkplan-onboard`. In terzo luogo, pianifica ed esegui il lavoro con i comandi leggeri: `/dwp-create <goal>` costruisce un piano; `/dwp-execute` lo esegue task per task contro ogni gate; `/dwp-refine` modifica un piano in corso (ambito, task, o la promozione di un piano Lite a Full); `/dwp-resume` continua dopo un’interruzione; `/dwp-status` riporta l’avanzamento senza eseguire; `/dwp-verify` produce un rapporto oggettivo di conformità. Gli agenti che intercettano `/` usano spesso `#` invece (per esempio `#dwp-execute`). Il punto di adozione e l’avvio rapido percorrono lo stesso cammino con più dettaglio.',
+              'Tre passaggi. Per prima cosa, installa la skill Deep Work Plan nel tuo agente di coding — la via più rapida è `npx skills add DailybotHQ/deepworkplan-skill` (oppure clona il repository della skill ed esegui `./setup.sh`). In secondo luogo, fai l’onboarding del repository una volta, così l’agente adatta `AGENTS.md`, `docs/`, il kit `.agents/` e un’area `.dwp/` ignorata da git al tuo stack: punta a https://deepworkplan.com/init.md, oppure esegui `/deepworkplan-onboard`. In terzo luogo, pianifica ed esegui il lavoro con i comandi leggeri: `/dwp-create <goal>` costruisce un piano; `/dwp-execute` lo esegue task per task contro ogni gate; `/dwp-refine` modifica un piano in corso (ambito, task, o la promozione di un piano Lite a Full); `/dwp-resume` continua dopo un’interruzione; `/dwp-status` riporta l’avanzamento senza eseguire; `/dwp-verify` produce un rapporto oggettivo di conformità; `/dwp-upgrade` sposta una skill installata a una versione più recente senza toccare i piani esistenti. Gli agenti che intercettano `/` usano spesso `#` invece (per esempio `#dwp-execute`). Il punto di adozione e l’avvio rapido percorrono lo stesso cammino con più dettaglio.',
             linkLabel: 'Avvio rapido',
             linkPath: '/quickstart',
           },
@@ -965,6 +965,15 @@ export const it: SiteTranslations = {
             linkPath: '/spec/agent-protocol',
           },
           {
+            id: 'unverified',
+            question:
+              'Cosa succede quando il verificatore di conformità non può eseguire i suoi controlli?',
+            answer:
+              'Lo dice chiaramente. Il verificatore termina con codice di uscita 2 e un verdetto `UNVERIFIED` esplicito — non stampa mai un esito positivo che non abbia effettivamente verificato. Se l’ambiente manca di un interprete capace o un controllo non può girare, l’esito onesto è «non verificato», non «conforme»; un risultato verde significa sempre che ogni controllo è stato eseguito ed è passato. La stessa disciplina attraversa tutta la metodologia: nessun flusso indebolisce o falsifica un gate per dichiarare il lavoro completato.',
+            linkLabel: 'Il contratto di conformità',
+            linkPath: '/spec/conformance',
+          },
+          {
             id: 'unattended-runs',
             question:
               'Un piano può essere eseguito senza supervisione, di notte o in CI?',
@@ -980,6 +989,14 @@ export const it: SiteTranslations = {
         id: 'compare',
         title: 'Come si confronta',
         items: [
+          {
+            id: 'multi-repo',
+            question: 'Un piano può estendersi su più repository?',
+            answer:
+              'Sì — l’archetipo dell’hub orchestratore esiste esattamente per questo. Un repository hub tiene il piano che coordina, e ogni repository figlio esegue il proprio piano dentro la propria area `.dwp/` isolata, quindi un figlio non scrive mai nello stato dei piani dell’hub. Il completamento del figlio si legge dallo stato di livello superiore del piano stesso, non cercando stringhe al suo interno, e l’hub registra dove si trova prima di navigare da qualsiasi parte. Ogni figlio resta un repository DWP ordinario, che può essere pilotato anche da solo.',
+            linkLabel: 'Archetipi di repository',
+            linkPath: '/spec/archetypes',
+          },
           {
             id: 'vs-sdd-tools',
             question:
@@ -1018,7 +1035,16 @@ export const it: SiteTranslations = {
             question:
               'Cosa scrive l’onboarding nel mio repository e tocca i file esistenti?',
             answer:
-              'L’onboarding è non distruttivo: rileva un `AGENTS.md`, un `docs/`, un `.agents/` o un `CLAUDE.md` esistente, riconcilia anziché sovrascrivere e chiede prima di sostituire qualsiasi cosa. Scrive l’indice `AGENTS.md` con i comandi reali, un albero `docs/` ragionato, documentazione per modulo, il kit `.agents/` con i sottili comandi `dwp-*`, un’area di output `.dwp/` esclusa da git, una mappa dei test verificata e la revisione locale del codice obbligatoria (la skill AI Diff Reviewer più un’estensione di revisione adattata al repository). Esegue poi un self-check e il verificatore di conformità, così può vedere cosa è stato prodotto. Un repository sottoposto a onboarding con uno standard precedente riceve un aggiornamento mirato dell’harness che riconcilia solo ciò che manca o è obsoleto. L’aggiornamento della skill stessa è un flusso separato e subordinato al consenso esplicito (`/dwp-upgrade`): verifica in modalità di sola lettura l’ultima versione pubblicata, installa solo dopo un’accettazione esplicita, riesegue l’onboarding come una passata fresca e non migra né invalida mai i piani esistenti in `.dwp/`.',
+              'L’onboarding è non distruttivo: rileva un `AGENTS.md`, un `docs/`, un `.agents/` o un `CLAUDE.md` esistente, riconcilia anziché sovrascrivere e chiede prima di sostituire qualsiasi cosa. Scrive l’indice `AGENTS.md` con i comandi reali, un albero `docs/` ragionato, documentazione per modulo, il kit `.agents/` con i sottili comandi `dwp-*`, un’area di output `.dwp/` esclusa da git, una mappa dei test verificata e la revisione locale del codice obbligatoria (la skill AI Diff Reviewer più un’estensione di revisione adattata al repository). Esegue poi un self-check e il verificatore di conformità, così può vedere cosa è stato prodotto. Un repository sottoposto a onboarding con uno standard precedente riceve un aggiornamento mirato dell’harness che riconcilia solo ciò che manca o è obsoleto.',
+            linkLabel: 'L’endpoint di adozione',
+            linkPath: '/init',
+          },
+          {
+            id: 'upgrade',
+            question:
+              'Come aggiorno la skill in un repository già sottoposto a onboarding?',
+            answer:
+              'Sono due aggiornamenti diversi, e il flusso li tiene separati. L’harness del repository — `AGENTS.md`, `docs/`, il kit `.agents/` — si riconcilia rieseguendo l’onboarding, che colma solo ciò che manca o è obsoleto. La skill stessa avanza con `/dwp-upgrade`: un controllo in sola lettura dell’ultima versione pubblicata, l’installazione del tag esatto che hai accettato, verificata, e poi l’onboarding di nuovo come una passata fresca. Il flusso è subordinato al consenso esplicito in ogni passo, le adattazioni locali vengono confrontate e preservate invece di sovrascritte, e `.dwp/` non viene mai migrato — i piani esistenti mantengono la loro forma registrata e continuano a girare.',
             linkLabel: 'L’endpoint di adozione',
             linkPath: '/init',
           },
@@ -1044,7 +1070,7 @@ export const it: SiteTranslations = {
             id: 'cost',
             question: 'Quanto costa e come si misura l’efficienza?',
             answer:
-              'La metodologia e la skill sono con licenza MIT e gratuite; nei flussi principali non c’è servizio, né chiave API, né telemetria. L’efficienza è riportata come numero di byte di istruzioni caricati da ogni flusso, misurata da uno script sottoposto a commit insieme alla skill e pubblicata in un registro di valutazione, con gli aumenti riportati con la stessa evidenza delle diminuzioni. Non è riportata come percentuali di token o risparmi, perché un inventario di byte non li stabilisce; è prevista una valutazione pubblica pre-registrata per misurare gli esiti in modo corretto.',
+              'La metodologia e la skill sono con licenza MIT e gratuite; nei flussi principali non c’è servizio, né chiave API, né telemetria. L’efficienza è riportata come numero di byte di istruzioni caricati da ogni flusso, misurata da uno script sottoposto a commit insieme alla skill, rimisurata su ogni baseline di rilascio e pubblicata in un registro di valutazione, con gli aumenti riportati con la stessa evidenza delle diminuzioni. Non è riportata come percentuali di token o risparmi, perché un inventario di byte non li stabilisce; è prevista una valutazione pubblica pre-registrata per misurare gli esiti in modo corretto.',
             linkLabel: 'Fiducia e trasparenza',
             linkPath: '/trust',
           },
