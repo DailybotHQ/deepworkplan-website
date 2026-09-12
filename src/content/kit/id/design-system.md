@@ -31,8 +31,8 @@ Sebuah "permukaan antarmuka" bersifat jamak: sebuah **UI visual** yang dirender,
 
 Addon ini untuk repo dengan setidaknya satu permukaan antarmuka nyata; ia tidak pernah ditawarkan untuk repo yang tidak memilikinya (library murni, layanan headless, repo hanya-infrastruktur). Setiap profil membawa kekuatan rekomendasinya sendiri:
 
-- **`visual-ui` aktif secara default ketika terdeteksi** — sebuah stylesheet dengan CSS custom properties, sebuah konfigurasi Tailwind atau blok `@theme`, komponen UI, atau sebuah panduan brand/gaya. Onboarding menerapkannya dalam mode trust dan sangat merekomendasikannya dalam mode terpandu.
-- **`cli-output` dan `conversational` direkomendasikan ketika terdeteksi — dan selalu ditanyakan, tidak pernah diterapkan otomatis**, bahkan dalam mode trust. Sebuah library perenderan CLI ditambah lapisan display yang disengaja menandakan yang pertama; sebuah SDK platform chat atau lapisan penyusunan pesan menandakan yang kedua. Sebuah argument parser polos dengan print mentah tidak memenuhi syarat.
+- **`visual-ui` sangat direkomendasikan ketika terdeteksi** — sebuah stylesheet dengan CSS custom properties, sebuah konfigurasi Tailwind atau blok `@theme`, komponen UI, atau sebuah panduan brand/gaya. Deteksi menjadikan penawaran wajib; deteksi tidak pernah membuat instalasi otomatis — profil diterapkan hanya setelah diterima secara eksplisit, baik dalam mode terpandu maupun mode trust.
+- **`cli-output` dan `conversational` direkomendasikan ketika terdeteksi — dan selalu ditanyakan, tidak pernah diterapkan otomatis**, baik dalam mode terpandu maupun mode trust. Sebuah library perenderan CLI ditambah lapisan display yang disengaja menandakan yang pertama; sebuah SDK platform chat atau lapisan penyusunan pesan menandakan yang kedua. Sebuah argument parser polos dengan print mentah tidak memenuhi syarat.
 
 Ia tidak pernah wajib — sebuah repositori dengan nol addon opsional sepenuhnya konforman, dan Anda selalu dapat menolak profil mana pun atau seluruh addon. Sebuah `DESIGN.md` yang dibuat sebelum profil ada adalah berkas visual satu-profil yang valid: tanpa migrasi.
 

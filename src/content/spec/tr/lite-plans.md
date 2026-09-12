@@ -23,7 +23,7 @@ Dört eksen bir planın durumunu tanımlar ve karıştırılmak yerine bağıms�
 | Onay | `pending`, `approved`, `pre_approved` | Bir insanın planı gözden geçirip geçirmediği, ya da trust modunun onu önceden onaylayıp onaylamadığı |
 | Yürütme | `pending`, `in_progress`, `blocked`, `completed` | Görev başına ve genel ilerleme |
 
-Yönlendirilmiş create, **gözden geçirilebilir, bekleyen bir öneri** yazar — Lite veya Full, zaten gerçek plan, asla bir kullan-at taslak değil. Trust, **hazır, önceden onaylanmış** bir planı somutlaştırır ve kontrolü hemen geri verir. `create` ve bir yükseltme asla ürün işi yürütmez; `execute`, onay bekleyen `pending` bir öneriyi REDDETMEK ZORUNDADIR ve çözülmemiş bir yükseltme süren bir planı REDDETMEK ZORUNDADIR.
+Yönlendirilmiş create, **gözden geçirilebilir, bekleyen bir öneri** yazar — Lite veya Full, zaten gerçek plan, asla bir kullan-at taslak değil. Trust, **hazır, önceden onaylanmış** bir planı somutlaştırır ve kontrolü hemen geri verir. `create` ve bir yükseltme asla ürün işi yürütmez; açık bir `execute` veya `resume` isteği planın hazır güncel kapsamını onaylar ve çalışmaya başlamadan önce bu onayı kaydetmek ZORUNDADIR; bu istek olmadan `pending` bir öneri yürütülebilir değildir; süren çözülmemiş bir yükseltme ürün işinden önce kurtarılmak ZORUNDADIR.
 
 ## Oluşturma ve biçim seçimi
 

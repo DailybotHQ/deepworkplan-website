@@ -31,8 +31,8 @@ Eine „Interface-Oberfläche" ist Plural: eine gerenderte **visuelle UI**, gest
 
 Dieses Addon ist für Repos mit mindestens einer echten Interface-Oberfläche; es wird nie für ein Repo ohne eine solche angeboten (eine reine Bibliothek, ein Headless-Service, ein reines Infrastruktur-Repo). Jedes Profil trägt seine eigene Empfehlungsstärke:
 
-- **`visual-ui` ist standardmäßig aktiv bei Erkennung** — ein Stylesheet mit CSS Custom Properties, eine Tailwind-Konfiguration oder ein `@theme`-Block, UI-Komponenten oder ein Marken-/Styleguide. Das Onboarding wendet es im Trust-Modus an und empfiehlt es im geführten Modus nachdrücklich.
-- **`cli-output` und `conversational` werden bei Erkennung empfohlen — und stets erfragt, nie automatisch angewendet**, selbst im Trust-Modus. Eine CLI-Rendering-Bibliothek plus eine bewusste Display-Schicht signalisiert das erste; ein Chat-Plattform-SDK oder eine Schicht zur Nachrichtenkomposition signalisiert das zweite. Ein bloßer Argument-Parser mit rohen Prints qualifiziert nicht.
+- **`visual-ui` ist bei Erkennung dringend empfohlen** — ein Stylesheet mit CSS Custom Properties, eine Tailwind-Konfiguration oder ein `@theme`-Block, UI-Komponenten oder ein Marken-/Styleguide. Die Erkennung macht das Angebot verpflichtend; sie macht die Installation niemals automatisch — das Profil wird erst angewendet, nachdem es ausdrücklich akzeptiert wurde, im Guide- wie im Trust-Mode.
+- **`cli-output` und `conversational` werden bei Erkennung empfohlen — und stets erfragt, nie automatisch angewendet**, im Guide- wie im Trust-Mode. Eine CLI-Rendering-Bibliothek plus eine bewusste Display-Schicht signalisiert das erste; ein Chat-Plattform-SDK oder eine Schicht zur Nachrichtenkomposition signalisiert das zweite. Ein bloßer Argument-Parser mit rohen Prints qualifiziert nicht.
 
 Es ist nie erforderlich — ein Repository mit null optionalen Addons ist vollständig konform, und du kannst jedes Profil oder das gesamte Addon jederzeit ablehnen. Eine `DESIGN.md`, die vor der Einführung der Profile erstellt wurde, ist eine gültige visuelle Datei mit einem einzigen Profil: keine Migration.
 

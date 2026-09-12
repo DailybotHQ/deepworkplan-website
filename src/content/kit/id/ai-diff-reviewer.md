@@ -8,7 +8,7 @@ order: 5
 
 # Add-on AI Diff Reviewer
 
-Menghubungkan eksekusi Deep Work Plan ke **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (daftar marketplace **"AI Diff Reviewer"**, versi saat ini **v2.0.0**) sehingga pemeriksaan keamanan dari **Final Review** wajib menjalankan tinjauan lokal terstruktur — putusan, tabel temuan, dan tingkat keparahan — dan, saat memilih Flow B, setiap pull request dapat dibatasi oleh tinjauan yang sama di CI. Sejak standar 2.3.0 **tinjauan lokal adalah bagian dari baseline**: onboarding memasangnya dan setiap Final Review menjalankannya. Hanya permukaan CI yang bersifat opt-in.
+Menghubungkan eksekusi Deep Work Plan ke **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (daftar marketplace **"AI Diff Reviewer"**, versi saat ini **v2.0.1**) sehingga pemeriksaan keamanan dari **Final Review** wajib menjalankan tinjauan lokal terstruktur — putusan, tabel temuan, dan tingkat keparahan — dan, saat memilih Flow B, setiap pull request dapat dibatasi oleh tinjauan yang sama di CI. Sejak standar 2.3.0 **tinjauan lokal adalah bagian dari baseline**: onboarding memasangnya dan setiap Final Review menjalankannya. Hanya permukaan CI yang bersifat opt-in.
 
 Yang tetap netral terhadap vendor adalah batas yang penting: pengulas adalah skill MIT yang dipatok pada tag dan dijalankan oleh coding agent **Anda sendiri** — tidak ada alur Deep Work Plan yang memerlukan layanan komersial, penyedia CI, atau secret. Flow A (hanya lokal) adalah baseline yang diperoleh setiap repositori yang telah di-onboarding; Flow B (CI Action) ditawarkan secara eksplisit dan tidak pernah dipasang tanpa diminta. Pengembang boleh menolak pengulas lokal; penolakan itu dicatat sebagai pengecualian yang dinyatakan dan `verify` melaporkan repositori sebagai tidak sesuai pada poin tersebut hingga ia dipasang.
 
@@ -35,16 +35,16 @@ Add-on DWP **tidak** menemukan ulang pengulas. Ini mendelegasikan instalasi, met
 
 ### Tinjauan lokal yang wajib
 
-`create` menambahkan langkah tinjauan lokal ke pemeriksaan keamanan setiap Final Review dan `execute` menjalankannya. Output ditambahkan di bawah `## AI Diff Reviewer local review` di `analysis_results/SECURITY_REVIEW.md`.
+`create` menambahkan langkah tinjauan lokal ke pemeriksaan keamanan setiap Final Review dan `execute` menjalankannya. Output ditambahkan di bawah `## AI Diff Reviewer local review` di `analysis_results/SECURITY_REVIEW.md` milik plan tersebut (di dalam folder plan itu sendiri, bukan di root repo).
 
-- **Pengulas tidak ada — dicatat, tidak pernah dilewati diam-diam:** skill atau ekstensi yang hilang menjadi temuan `local reviewer not installed`; ketika eksekusi boleh menulis ke harness (mode trust atau persetujuan eksplisit), agent memasang bagian yang hilang lalu meninjau, jika tidak, temuan itu dibawa ke laporan penyelesaian.
+- **Pengulas tidak ada — dicatat, tidak pernah dilewati diam-diam:** skill atau ekstensi yang hilang menjadi temuan `local reviewer not installed`; Final Review menjalankan penerusan lokal saat skill ada dan sebaliknya membawa temuan itu ke laporan penyelesaian — instalasi milik persetujuan onboarding atau invokasi addon yang eksplisit, tidak pernah menjadi bootstrap kejutan.
 - **Kegagalan lunak (hanya pemanggilan):** tinjauan yang bisa dimulai tetapi gagal → peringatkan sekali, catat, lanjutkan; jangan pernah gagalkan tugas karena hal itu.
 - **Gerbang setelah penerusan selesai:** temuan `critical` masih memblokir penyelesaian Final Review hingga diperbaiki atau diterima secara eksplisit. `warning` / `info` didokumentasikan tetapi tidak memblokir.
 - **Flow A tidak memerlukan secret CI.** `CURSOR_API_KEY` yang tidak disetel tidak boleh menekan penerusan lokal.
 
 ### Gerbang CI Flow B (opsional)
 
-Action tetap `DailybotHQ/ai-diff-reviewer@v2`, biasanya dibatasi label (`ready`), dengan pekerjaan **AI review gate** bernama stabil untuk perlindungan cabang dan label lewati opsional `skip-review-label: skip-ai-review`. `prompt.md` bersama + ekstensi menyelaraskan metodologi dan tingkat keparahan; di bawah Tinjauan Sadar Iterasi, putaran CI 2+ mungkin lebih pendek sementara penerusan lokal tetap penuh.
+Action `DailybotHQ/ai-diff-reviewer@v2`, biasanya dibatasi label (`ready`), dengan pekerjaan **AI review gate** bernama stabil untuk perlindungan cabang dan label lewati opsional `skip-review-label: skip-ai-review`. `prompt.md` bersama + ekstensi menyelaraskan metodologi dan tingkat keparahan; di bawah Tinjauan Sadar Iterasi, putaran CI 2+ mungkin lebih pendek sementara penerusan lokal tetap penuh.
 
 ### Pendamping `apply-review` Opsional
 

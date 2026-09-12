@@ -166,14 +166,15 @@ konforman dengan **nol** addon opsional — jangan pernah memasang yang itu seca
   diterima, ia memasang command `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` opsional hanya untuk repositori dengan permukaan antarmuka yang
   terdeteksi (tidak ditawarkan untuk pustaka murni, layanan headless, atau repositori khusus
-  infrastruktur). Tiga profil ditumpuk dalam satu berkas: visual-ui (aktif secara default saat
-  terdeteksi), cli-output, dan conversational — dua yang terakhir selalu ditanyakan, tidak pernah
+  infrastruktur). Tiga profil ditumpuk dalam satu berkas: visual-ui (sangat direkomendasikan saat
+  terdeteksi; instalasi dijaga oleh penerimaan), cli-output, dan conversational — dua yang terakhir selalu ditanyakan, tidak pernah
   diterapkan secara otomatis.
 - **AI Diff Reviewer** — tinjauan lokal yang wajib (bukan opt-in): pemeriksaan keamanan setiap Final
   Review menjalankan [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill +
   `.review/extension.md` wajib) atas kumpulan perubahan rencana yang terakumulasi. Skill atau ekstensi
-  yang hilang adalah temuan `local reviewer not installed` yang tercatat, dipasang ketika eksekusi boleh
-  menulis ke harness — tidak pernah dilewati diam-diam; kesalahan pemanggilan bersifat kegagalan lunak;
+  yang hilang adalah temuan `local reviewer not installed` yang tercatat — tidak pernah dilewati diam-diam,
+  dan tidak pernah menjadi bootstrap kejutan: instalasi milik persetujuan
+  onboarding atau invokasi addon yang eksplisit; kesalahan pemanggilan bersifat kegagalan lunak;
   temuan `critical` dari penerusan yang selesai tetap memblokir penyelesaian. **Flow B** (gerbang CI
   dengan `pr-review.yml`) ditawarkan sebagai opt-in eksplisit dan tidak pernah dipasang tanpa diminta.
   Tidak ada alur Deep Work Plan yang memerlukan layanan komersial, penyedia CI, atau secret.

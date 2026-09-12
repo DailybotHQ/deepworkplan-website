@@ -23,7 +23,7 @@ Four axes describe a plan's state, and MUST be tracked independently rather than
 | Approval | `pending`, `approved`, `pre_approved` | Whether a human reviewed the plan, or trust mode pre-approved it |
 | Execution | `pending`, `in_progress`, `blocked`, `completed` | Per-task and overall progress |
 
-Guided create writes a **reviewable pending proposal** — Lite or Full, already the real plan, never a throwaway draft. Trust materializes a **ready, pre-approved** plan and returns control immediately. `create` and a promotion never execute product work; `execute` MUST reject a `pending` proposal awaiting approval and MUST reject a plan with an unresolved promotion in progress.
+Guided create writes a **reviewable pending proposal** — Lite or Full, already the real plan, never a throwaway draft. Trust materializes a **ready, pre-approved** plan and returns control immediately. `create` and a promotion never execute product work; an explicit `execute` or `resume` request approves the plan's ready current scope and MUST record that approval before starting work; without that request a `pending` proposal is not executable; an unresolved promotion in progress MUST be recovered before product work.
 
 ## Creation and format selection
 

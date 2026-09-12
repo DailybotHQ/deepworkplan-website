@@ -156,9 +156,9 @@ dodatków — nigdy nie instaluj ich automatycznie.
   zaakceptowaniu instaluje komendę `/lib-upgrade`.
 - **Design system** — opcjonalny `docs/DESIGN.md` tylko dla repozytoriów z wykrytą powierzchnią interfejsu
   (nie jest oferowany dla czystych bibliotek, usług headless ani repozytoriów wyłącznie infrastrukturalnych). Trzy
-  profile nakładają się w jednym pliku: visual-ui (domyślnie włączony po wykryciu), cli-output i konwersacyjny —
+  profile nakładają się w jednym pliku: visual-ui (zdecydowanie zalecany po wykryciu; instalacja uzależniona od akceptacji), cli-output i konwersacyjny —
   dwa ostatnie zawsze są pytane, nigdy auto-stosowane.
-- **AI Diff Reviewer** — wymagany przegląd lokalny (nie opcja do wyboru): przegląd bezpieczeństwa każdego Final Review uruchamia [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + wymagany `.review/extension.md`) na skumulowanym zestawie zmian planu. Brakująca skill lub rozszerzenie to zapisane znalezisko `local reviewer not installed`, instalowane, gdy przebieg może zapisywać w harnessie — nigdy ciche pominięcie; błędy wywołania kończą się soft-failem; wyniki `critical` z zakończonego przebiegu nadal blokują ukończenie. **Flow B** (bramka CI z `pr-review.yml`) jest proponowany jako wyraźna opcja do wyboru i nigdy nie jest instalowany bez prośby. Żaden przepływ Deep Work Plan nie wymaga komercyjnej usługi, dostawcy CI ani sekretu.
+- **AI Diff Reviewer** — wymagany przegląd lokalny (nie opcja do wyboru): przegląd bezpieczeństwa każdego Final Review uruchamia [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + wymagany `.review/extension.md`) na skumulowanym zestawie zmian planu. Brakująca skill lub rozszerzenie to zapisane znalezisko `local reviewer not installed` — nigdy ciche pominięcie i nigdy zaskakujący bootstrap: instalacja należy do zgody onboardingu albo jawnego wywołania addonu; błędy wywołania kończą się soft-failem; wyniki `critical` z zakończonego przebiegu nadal blokują ukończenie. **Flow B** (bramka CI z `pr-review.yml`) jest proponowany jako wyraźna opcja do wyboru i nigdy nie jest instalowany bez prośby. Żaden przepływ Deep Work Plan nie wymaga komercyjnej usługi, dostawcy CI ani sekretu.
 
 ## 5. Rozwijaj kit (sub-skill author)
 

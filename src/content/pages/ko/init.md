@@ -154,9 +154,9 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
   채택되면 `/lib-upgrade` 명령을 설치합니다.
 - **Design system** — 감지된 인터페이스 표면이 있는 리포지토리에만 제공되는 선택형 `docs/DESIGN.md`
   (순수 라이브러리, 헤드리스 서비스, 인프라 전용 리포지토리에는 제공하지 않음). 세 가지 프로필이
-  하나의 파일에 쌓입니다: visual-ui(감지되면 기본 활성화), cli-output, conversational — 후자 두 개는
+  하나의 파일에 쌓입니다: visual-ui(감지되면 강력히 권장; 설치는 수락으로 제어), cli-output, conversational — 후자 두 개는
   항상 질문하며 자동 적용하지 않습니다.
-- **AI Diff Reviewer** — 필수 로컬 리뷰입니다(선택형 아님): 모든 Final Review의 보안 점검이 계획의 누적 변경 집합에 대해 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2**(skill + 필수 `.review/extension.md`)를 실행합니다. 누락된 스킬이나 확장은 기록된 `local reviewer not installed` 발견 사항이며, 실행이 하니스에 쓸 수 있을 때 설치됩니다 — 절대 조용한 건너뜀이 아닙니다. 호출 오류는 소프트 실패하며, 완료된 패스의 `critical` 결과는 여전히 완료를 차단합니다. **Flow B**(`pr-review.yml`을 갖춘 CI 게이트)는 명시적 선택형으로 제안되며 요청 없이 설치되는 일이 결코 없습니다. 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않습니다.
+- **AI Diff Reviewer** — 필수 로컬 리뷰입니다(선택형 아님): 모든 Final Review의 보안 점검이 계획의 누적 변경 집합에 대해 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2**(skill + 필수 `.review/extension.md`)를 실행합니다. 누락된 스킬이나 확장은 기록된 `local reviewer not installed` 발견 사항입니다 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아닙니다: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속합니다. 호출 오류는 소프트 실패하며, 완료된 패스의 `critical` 결과는 여전히 완료를 차단합니다. **Flow B**(`pr-review.yml`을 갖춘 CI 게이트)는 명시적 선택형으로 제안되며 요청 없이 설치되는 일이 결코 없습니다. 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않습니다.
 
 ## 5. 키트를 발전시키세요 (author 하위 스킬)
 

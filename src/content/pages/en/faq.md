@@ -1,7 +1,7 @@
 ---
 title: "Frequently asked questions — Deep Work Plan"
 description: "Answers to the questions people ask about Deep Work Plan: what it does, how gates and resumption work, how it compares with other tools, and how to adopt it."
-lastUpdated: 2026-09-11
+lastUpdated: 2026-09-12
 ---
 
 ## Frequently asked questions
@@ -24,7 +24,7 @@ Developers and teams who hand real, multi-step work to coding agents and want it
 
 ### What's the difference between a Lite and a Full plan?
 
-A representation choice, not a rigor tradeoff. Every plan starts as a Lite folder: a compact README with anchored task records that is already executable, not a partial draft. `create` expands to Full task files only when a task's instruction detail, dependencies or contracts do not fit a reviewable compact record; an explicit request for either format is honored, and a Lite plan can be promoted to Full later without losing completed work. Both formats carry the same acceptance criteria, validation gates, evidence and mandatory Final Review.
+A representation choice, not a rigor tradeoff. Plans default to Lite: a compact README with anchored task records that is already executable, not a partial draft. `create` writes Full task files directly when you ask for a Full plan up front, and expands a plan to Full when a task's instruction detail, dependencies or contracts no longer fit a reviewable compact record; promotion later keeps every completed task. Both formats carry the same acceptance criteria, validation gates, evidence and mandatory Final Review.
 
 [Read the methodology](https://deepworkplan.com/methodology)
 
@@ -68,7 +68,7 @@ A skill describes how an agent performs a repeatable procedure. A DWP plan descr
 
 ### How are the validation gates implemented? Do they need human sign-off?
 
-They are executable assertions the agent runs itself. Human sign-off bookends the run: a person approves the plan before execution and reviews the final diff at pull-request time; execution in between is autonomous. Every task names concrete commands, typically the repository's own quality gate, selected from the task's touched surface: the tests of the changed behavior and its consumers, widening to the full suite when the change is shared or cannot be bounded. A task is marked done only when those commands exit successfully, and tasks that change behavior must extend the tests. On failure the task is marked blocked and the agent stops.
+They are executable assertions the agent runs itself. Human sign-off bookends the run: a person approves the plan before execution and reviews the final diff at pull-request time; execution in between is autonomous. Every task names concrete commands, typically the repository's own quality gate, selected from the task's touched surface: the tests of the changed behavior and its consumers, widening to the full suite when the change is shared or cannot be bounded. A task is marked done only when those commands exit successfully, and tasks that change behavior must extend the tests. On failure the agent first repairs what falls inside the task's own scope and re-runs the gate; a failure it cannot repair in scope leaves the task marked blocked and stops the run.
 
 [The core loop](https://deepworkplan.com/methodology/02-core-loop)
 
@@ -110,7 +110,7 @@ The single mandatory closing task of every plan. In order: a security pass over 
 
 ### What happens when a validation gate fails?
 
-The task is recorded as blocked and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.
+A failed gate is first a repair signal: the agent fixes what falls inside the task's own scope and re-runs the gate. A failure that exceeds that scope leaves the task recorded as blocked, and the agent stops before claiming completion. You can inspect the evidence, repair the code or refine the task, then resume; a failed command is a signal to resolve the mismatch, not permission to weaken the gate.
 
 [Read the agent protocol](https://deepworkplan.com/spec/agent-protocol)
 
@@ -146,7 +146,7 @@ Built-in plan modes are useful and Deep Work Plan builds on the same substrate, 
 
 ### What does onboarding write into my repository, and does it touch existing files?
 
-Onboarding is non-destructive: it detects an existing `AGENTS.md`, `docs/`, `.agents/` or `CLAUDE.md`, reconciles rather than overwrites, and asks before replacing anything. It writes the `AGENTS.md` index with real commands, a reasoned `docs/` tree, per-module docs, the `.agents/` kit with thin `dwp-*` commands, a gitignored `.dwp/` output area, a verified testing map, and the required local code review (the AI Diff Reviewer skill plus a repo-tailored review extension). It then runs a self-check and the conformance checker so you can see what was produced. A repository onboarded under an earlier version gets a targeted upgrade that changes only what is missing.
+Onboarding is non-destructive: it detects an existing `AGENTS.md`, `docs/`, `.agents/` or `CLAUDE.md`, reconciles rather than overwrites, and asks before replacing anything. It writes the `AGENTS.md` index with real commands, a reasoned `docs/` tree, per-module docs, the `.agents/` kit with thin `dwp-*` commands, a gitignored `.dwp/` output area, a verified testing map, and the required local code review (the AI Diff Reviewer skill plus a repo-tailored review extension). It then runs a self-check and the conformance checker so you can see what was produced. A repository onboarded under an earlier standard gets a targeted harness upgrade that reconciles only what is missing or outdated. Upgrading the skill itself is a separate, consent-gated flow (`/dwp-upgrade`): it checks the latest published version read-only, installs only after you explicitly accept, re-runs onboarding as a fresh pass, and never migrates or invalidates existing plans under `.dwp/`.
 
 [The adoption endpoint](https://deepworkplan.com/init)
 

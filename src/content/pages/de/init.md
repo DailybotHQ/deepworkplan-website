@@ -146,13 +146,14 @@ mit **null** optionalen Addons vollständig konform — installieren Sie diese n
   angenommen, installiert es den `/lib-upgrade`-Befehl.
 - **Design System** — optionale `docs/DESIGN.md` nur für Repositories mit einer erkannten Interface-Oberfläche
   (nicht angeboten für reine Bibliotheken, Headless-Dienste oder reine Infrastruktur-Repos). Drei Profile
-  werden in einer Datei gestapelt: visual-ui (standardmäßig aktiviert bei Erkennung), cli-output und
+  werden in einer Datei gestapelt: visual-ui (bei Erkennung dringend empfohlen; Installation zustimmungsgesteuert), cli-output und
   conversational — die letzten beiden werden immer gefragt, niemals automatisch angewendet.
 - **AI Diff Reviewer** — die erforderliche lokale Überprüfung (kein Opt-in): der Sicherheitstest jedes Final Review führt
   [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (Skill + erforderliches
   `.review/extension.md`) über den akkumulierten Änderungssatz des Plans aus. Eine fehlende Skill oder Erweiterung ist ein
-  aufgezeichneter `local reviewer not installed`-Befund, installiert, wenn der Lauf in das Harness schreiben darf —
-  niemals ein stilles Überspringen; Aufruffehler soft-failen; `critical`-Ergebnisse eines abgeschlossenen Durchlaufs blockieren
+  aufgezeichneter `local reviewer not installed`-Befund — niemals ein stilles
+  Überspringen, und niemals ein Überraschungs-Bootstrap: die Installation gehört
+  zur Onboarding-Zustimmung oder zu einem expliziten Addon-Aufruf; Aufruffehler soft-failen; `critical`-Ergebnisse eines abgeschlossenen Durchlaufs blockieren
   weiterhin den Abschluss. **Flow B** (das CI-Gate mit `pr-review.yml`) wird als explizites Opt-in angeboten und
   niemals ungefragt installiert. Kein Deep Work Plan-Ablauf erfordert einen kommerziellen Dienst, CI-Anbieter oder Secret.
 

@@ -169,7 +169,7 @@ A `completed` entry MUST carry `completed_at` and, where the plan commits, the s
 
 ### Gate records
 
-Each run of a validation command SHOULD be recorded as a gate record: `command`, `passes` (boolean), `exit_code`, `last_run`, and a short human-readable `evidence` string (a summary line or a path under `analysis_results/`, never full command output).
+Each run of a validation command SHOULD be recorded as a gate record: `command`, `passes` (boolean), `exit_code`, `last_run`, and a short human-readable `evidence` string (a summary line or a path under the plan's own `analysis_results/` (inside the plan's folder, never the repository root), never full command output).
 
 A task MUST NOT be marked `completed` in `state.json` while any of its gate records has `passes: false` and no later passing run. Gate records are the machine equivalent of "never mark complete without evidence" — the pattern of a per-item `passes` flag guarding premature completion.
 

@@ -23,7 +23,7 @@ Vier Achsen beschreiben den Zustand eines Plans und MÜSSEN unabhängig voneinan
 | Genehmigung | `pending`, `approved`, `pre_approved` | Ob ein Mensch den Plan geprüft hat, oder ob der Trust-Modus ihn vorgenehmigt hat |
 | Ausführung | `pending`, `in_progress`, `blocked`, `completed` | Fortschritt je Aufgabe und insgesamt |
 
-Der geführte create-Ablauf schreibt einen **überprüfbaren, ausstehenden Vorschlag** — Lite oder Full, bereits der echte Plan, niemals ein Wegwerf-Entwurf. Trust materialisiert einen **fertigen, vorgenehmigten** Plan und gibt die Kontrolle sofort zurück. `create` und eine Beförderung führen niemals Produktarbeit aus; `execute` MUSS einen `pending`-Vorschlag, der auf Genehmigung wartet, ablehnen und MUSS einen Plan mit einer laufenden, nicht abgeschlossenen Beförderung ablehnen.
+Der geführte create-Ablauf schreibt einen **überprüfbaren, ausstehenden Vorschlag** — Lite oder Full, bereits der echte Plan, niemals ein Wegwerf-Entwurf. Trust materialisiert einen **fertigen, vorgenehmigten** Plan und gibt die Kontrolle sofort zurück. `create` und eine Beförderung führen niemals Produktarbeit aus; eine explizite `execute`- oder `resume`-Anfrage genehmigt den aktuellen fertigen Umfang des Plans und MUSS diese Genehmigung vor Arbeitsbeginn festhalten; ohne diese Anfrage ist ein `pending`-Vorschlag nicht ausführbar; eine laufende, nicht abgeschlossene Beförderung MUSS zuerst wiederaufgenommen werden.
 
 ## Erstellung und Formatauswahl
 

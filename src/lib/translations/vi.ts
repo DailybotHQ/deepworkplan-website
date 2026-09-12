@@ -834,7 +834,7 @@ export const vi: SiteTranslations = {
             question:
               'Sự khác biệt giữa một kế hoạch Lite và một kế hoạch Full là gì?',
             answer:
-              'Đây là một lựa chọn về cách biểu diễn, không phải một sự đánh đổi về độ chặt chẽ. Mọi kế hoạch đều bắt đầu như một thư mục Lite: một README gọn gàng với các bản ghi tác vụ được neo (anchored), đã có thể thực thi được ngay, không phải một bản nháp dang dở. Lệnh `create` chỉ mở rộng thành các tệp tác vụ Full khi mức chi tiết hướng dẫn, các phụ thuộc hoặc hợp đồng của một tác vụ không vừa với một bản ghi gọn gàng có thể rà soát được; một yêu cầu rõ ràng cho một trong hai định dạng luôn được tôn trọng, và một kế hoạch Lite có thể được nâng cấp thành Full sau đó mà không mất công việc đã hoàn thành. Cả hai định dạng đều mang cùng tiêu chí chấp nhận, cổng kiểm chứng, bằng chứng và Final Review bắt buộc như nhau.',
+              'Đây là một lựa chọn về cách biểu diễn, không phải một sự đánh đổi về độ chặt chẽ. Kế hoạch mặc định ở dạng Lite: một README gọn gàng với các bản ghi tác vụ được neo (anchored), đã có thể thực thi được ngay, không phải một bản nháp dang dở. Nếu bạn yêu cầu một kế hoạch Full ngay từ đầu, `create` viết trực tiếp các tệp tác vụ Full; và mở rộng một kế hoạch sang Full khi mức chi tiết hướng dẫn, các phụ thuộc hoặc hợp đồng của một tác vụ không còn vừa với một bản ghi gọn gàng có thể rà soát. Việc nâng cấp sau này giữ nguyên mỗi tác vụ đã hoàn thành. Cả hai định dạng đều mang cùng tiêu chí chấp nhận, cổng kiểm chứng, bằng chứng và Final Review bắt buộc.',
             linkLabel: 'Đọc phương pháp luận',
             linkPath: '/methodology',
           },
@@ -899,7 +899,7 @@ export const vi: SiteTranslations = {
             question:
               'Các cổng kiểm chứng được triển khai thế nào? Chúng có cần con người phê duyệt không?',
             answer:
-              'Chúng là các assertion thực thi được, do chính agent chạy. Việc phê duyệt của con người chỉ đóng khung hai đầu lượt chạy: một người duyệt kế hoạch trước khi thực thi và xem xét diff cuối cùng lúc mở pull request; phần thực thi ở giữa là tự chủ. Mỗi tác vụ nêu tên các lệnh cụ thể, thường là chính cổng chất lượng của repository, được chọn từ Touched Surface của tác vụ: các test của hành vi bị thay đổi và các bên tiêu thụ nó, mở rộng ra toàn bộ bộ test khi thay đổi dùng chung hoặc không thể giới hạn. Một tác vụ chỉ được đánh dấu xong khi các lệnh đó thoát thành công, và các tác vụ thay đổi hành vi phải mở rộng test. Khi thất bại, tác vụ được đánh dấu bị chặn và agent dừng lại.',
+              'Chúng là các assertion thực thi được, do chính agent chạy. Việc phê duyệt của con người chỉ đóng khung hai đầu lượt chạy: một người duyệt kế hoạch trước khi thực thi và xem xét diff cuối cùng lúc mở pull request; phần thực thi ở giữa là tự chủ. Mỗi tác vụ nêu tên các lệnh cụ thể, thường là chính cổng chất lượng của repository, được chọn từ Touched Surface của tác vụ: các test của hành vi bị thay đổi và các bên tiêu thụ nó, mở rộng ra toàn bộ bộ test khi thay đổi dùng chung hoặc không thể giới hạn. Một tác vụ chỉ được đánh dấu xong khi các lệnh đó thoát thành công, và các tác vụ thay đổi hành vi phải mở rộng test. Khi thất bại, agent sửa chữa trước những gì nằm trong phạm vi của chính tác vụ và chạy lại cổng; một thất bại không thể sửa trong phạm vi đó để tác vụ bị đánh dấu là bị chặn và dừng lượt chạy.',
             linkLabel: 'Vòng lặp lõi',
             linkPath: '/methodology/02-core-loop',
           },
@@ -959,7 +959,7 @@ export const vi: SiteTranslations = {
             id: 'gate-fails',
             question: 'Điều gì xảy ra khi một cổng kiểm chứng thất bại?',
             answer:
-              'Tác vụ được ghi nhận là bị chặn và agent dừng lại trước khi tuyên bố hoàn thành. Bạn có thể kiểm tra bằng chứng, sửa mã hoặc tinh chỉnh tác vụ, rồi tiếp tục; một lệnh thất bại là tín hiệu để giải quyết sự sai lệch, không phải giấy phép để làm yếu cổng kiểm chứng.',
+              'Một cổng thất bại trước hết là tín hiệu sửa chữa: agent khắc phục những gì nằm trong phạm vi của chính tác vụ và chạy lại cổng. Một thất bại vượt quá phạm vi đó khiến tác vụ được ghi nhận là bị chặn, và agent dừng lại trước khi tuyên bố hoàn thành. Bạn có thể kiểm tra bằng chứng, sửa mã hoặc tinh chỉnh tác vụ, rồi tiếp tục; một lệnh thất bại là tín hiệu để giải quyết sự sai lệch, không phải giấy phép để làm yếu cổng kiểm chứng.',
             linkLabel: 'Đọc giao thức agent',
             linkPath: '/spec/agent-protocol',
           },
@@ -1016,7 +1016,7 @@ export const vi: SiteTranslations = {
             question:
               'Onboarding ghi gì vào repository của tôi, và nó có chạm các tệp hiện có không?',
             answer:
-              'Onboarding không phá hủy gì: nó phát hiện `AGENTS.md`, `docs/`, `.agents/` hay `CLAUDE.md` sẵn có, hòa giải thay vì ghi đè, và hỏi trước khi thay thế bất cứ thứ gì. Nó ghi chỉ mục `AGENTS.md` với các lệnh thật, một cây `docs/` có lý lẽ, tài liệu cho từng mô-đun, bộ kit `.agents/` với các lệnh `dwp-*` mỏng, một vùng xuất `.dwp/` được gitignore, một bản đồ kiểm thử đã xác minh, và phần review mã cục bộ bắt buộc (skill AI Diff Reviewer cùng một tiện ích mở rộng review được điều chỉnh theo repo). Sau đó nó chạy tự kiểm tra và công cụ kiểm tra tính tuân thủ để bạn thấy cái gì đã được tạo. Một repository đã onboard ở phiên bản sớm hơn sẽ nhận một bản nâng cấp có mục tiêu, chỉ thay đổi phần còn thiếu.',
+              'Onboarding không phá hủy gì: nó phát hiện `AGENTS.md`, `docs/`, `.agents/` hay `CLAUDE.md` sẵn có, hòa giải thay vì ghi đè, và hỏi trước khi thay thế bất cứ thứ gì. Nó ghi chỉ mục `AGENTS.md` với các lệnh thật, một cây `docs/` có lý lẽ, tài liệu cho từng mô-đun, bộ kit `.agents/` với các lệnh `dwp-*` mỏng, một vùng xuất `.dwp/` được gitignore, một bản đồ kiểm thử đã xác minh, và phần review mã cục bộ bắt buộc (skill AI Diff Reviewer cùng một tiện ích mở rộng review được điều chỉnh theo repo). Sau đó nó chạy tự kiểm tra và công cụ kiểm tra tính tuân thủ để bạn thấy cái gì đã được tạo. Một repository đã onboard ở một tiêu chuẩn sớm hơn sẽ nhận một bản nâng cấp harness có mục tiêu, chỉ hòa giải phần còn thiếu hoặc đã lỗi thời. Nâng cấp chính skill là một luồng riêng biệt, chỉ chạy khi được đồng ý rõ ràng (`/dwp-upgrade`): nó kiểm tra phiên bản mới nhất đã xuất bản ở chế độ chỉ đọc, chỉ cài đặt sau khi bạn chấp nhận rõ ràng, chạy lại onboarding như một lượt thực thi mới, và không bao giờ di chuyển hay vô hiệu hóa các kế hoạch hiện có dưới `.dwp/`.',
             linkLabel: 'Điểm cuối áp dụng',
             linkPath: '/init',
           },

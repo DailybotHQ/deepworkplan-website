@@ -830,7 +830,7 @@ export const es: SiteTranslations = {
             id: 'lite-vs-full',
             question: '¿Cuál es la diferencia entre un plan Lite y uno Full?',
             answer:
-              'Una decisión de representación, no un compromiso de rigor. Todo plan empieza como una carpeta Lite: un README compacto con registros de tareas anclados que ya es ejecutable, no un borrador parcial. `create` solo se expande a archivos de tarea Full cuando el detalle de instrucciones, las dependencias o los contratos de una tarea no caben en un registro compacto y revisable; una solicitud explícita de cualquiera de los dos formatos se respeta, y un plan Lite puede promoverse a Full más adelante sin perder el trabajo ya completado. Ambos formatos llevan los mismos criterios de aceptación, puertas de validación, evidencias y el Final Review obligatorio.',
+              'Una decisión de representación, no un compromiso de rigor. Los planes son Lite por defecto: un README compacto con registros de tareas anclados que ya es ejecutable, no un borrador parcial. Si pides un plan Full desde el principio, `create` escribe directamente los archivos de tarea Full; y expande un plan a Full cuando el detalle de instrucciones, las dependencias o los contratos de una tarea dejan de caber en un registro compacto y revisable. La promoción posterior conserva cada tarea completada. Ambos formatos llevan los mismos criterios de aceptación, puertas de validación, evidencias y el Final Review obligatorio.',
             linkLabel: 'Leer la metodología',
             linkPath: '/methodology',
           },
@@ -894,7 +894,7 @@ export const es: SiteTranslations = {
             question:
               '¿Cómo se implementan las puertas de validación? ¿Necesitan aprobación humana?',
             answer:
-              'Son aserciones ejecutables que el propio agente ejecuta. La aprobación humana enmarca la ejecución: una persona aprueba el plan antes de la ejecución y revisa el diff final a la hora del pull request; la ejecución intermedia es autónoma. Cada tarea nombra comandos concretos, normalmente el propio control de calidad del repositorio, seleccionados de la superficie tocada de la tarea: las pruebas del comportamiento cambiado y de sus consumidores, ampliando a la suite completa cuando el cambio es compartido o no puede acotarse. Una tarea se marca como hecha solo cuando esos comandos terminan con éxito, y las tareas que cambian comportamiento deben ampliar las pruebas. Ante un fallo, la tarea se marca como bloqueada y el agente se detiene.',
+              'Son aserciones ejecutables que el propio agente ejecuta. La aprobación humana enmarca la ejecución: una persona aprueba el plan antes de la ejecución y revisa el diff final a la hora del pull request; la ejecución intermedia es autónoma. Cada tarea nombra comandos concretos, normalmente el propio control de calidad del repositorio, seleccionados de la superficie tocada de la tarea: las pruebas del comportamiento cambiado y de sus consumidores, ampliando a la suite completa cuando el cambio es compartido o no puede acotarse. Una tarea se marca como hecha solo cuando esos comandos terminan con éxito, y las tareas que cambian comportamiento deben ampliar las pruebas. Ante un fallo, el agente primero repara lo que cae dentro del propio alcance de la tarea y vuelve a ejecutar la puerta; un fallo que no pueda repararse dentro de ese alcance deja la tarea marcada como bloqueada y detiene la ejecución.',
             linkLabel: 'El bucle principal',
             linkPath: '/methodology/02-core-loop',
           },
@@ -954,7 +954,7 @@ export const es: SiteTranslations = {
             id: 'gate-fails',
             question: '¿Qué ocurre cuando falla una puerta de validación?',
             answer:
-              'La tarea queda registrada como bloqueada y el agente se detiene antes de declarar que está terminada. Puedes revisar la evidencia, corregir el código o refinar la tarea y después reanudarla; un comando fallido es una señal para resolver la discrepancia, no un permiso para debilitar la puerta.',
+              'Una puerta fallida es primero una señal de reparación: el agente corrige lo que cae dentro del propio alcance de la tarea y vuelve a ejecutar la puerta. Un fallo que excede ese alcance deja la tarea registrada como bloqueada, y el agente se detiene antes de declarar que está terminada. Puedes revisar la evidencia, corregir el código o refinar la tarea y después reanudarla; un comando fallido es una señal para resolver la discrepancia, no un permiso para debilitar la puerta.',
             linkLabel: 'Leer el protocolo del agente',
             linkPath: '/spec/agent-protocol',
           },
@@ -1011,7 +1011,7 @@ export const es: SiteTranslations = {
             question:
               '¿Qué escribe la incorporación en mi repositorio y toca algún archivo existente?',
             answer:
-              'La incorporación no es destructiva: detecta un `AGENTS.md`, `docs/`, `.agents/` o `CLAUDE.md` existente, reconcilia en lugar de sobrescribir y pregunta antes de reemplazar cualquier cosa. Escribe el índice `AGENTS.md` con comandos reales, un árbol `docs/` razonado, documentación por módulo, el kit `.agents/` con comandos ligeros `dwp-*`, un área de salida `.dwp/` ignorada por git, un mapa de pruebas verificado y la revisión local de código obligatoria (la skill AI Diff Reviewer más una extensión de revisión adaptada al repositorio). Luego ejecuta una autocomprobación y el comprobador de conformidad para que veas lo que se produjo. Un repositorio incorporado con una versión anterior recibe una actualización dirigida que cambia solo lo que falta.',
+              'La incorporación no es destructiva: detecta un `AGENTS.md`, `docs/`, `.agents/` o `CLAUDE.md` existente, reconcilia en lugar de sobrescribir y pregunta antes de reemplazar cualquier cosa. Escribe el índice `AGENTS.md` con comandos reales, un árbol `docs/` razonado, documentación por módulo, el kit `.agents/` con comandos ligeros `dwp-*`, un área de salida `.dwp/` ignorada por git, un mapa de pruebas verificado y la revisión local de código obligatoria (la skill AI Diff Reviewer más una extensión de revisión adaptada al repositorio). Luego ejecuta una autocomprobación y el comprobador de conformidad para que veas lo que se produjo. Un repositorio incorporado bajo un estándar anterior recibe una actualización dirigida del harness que reconcilia solo lo que falta o está desactualizado. Actualizar la skill en sí es un flujo separado y sujeto a consentimiento explícito (`/dwp-upgrade`): comprueba la última versión publicada sin escribir nada, instala solo tras tu aceptación explícita, reejecuta la incorporación como una pasada fresca y nunca migra ni invalida los planes existentes bajo `.dwp/`.',
             linkLabel: 'El endpoint de adopción',
             linkPath: '/init',
           },

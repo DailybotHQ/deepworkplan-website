@@ -8,7 +8,7 @@ order: 5
 
 # AI Diff Reviewer 애드온
 
-Deep Work Plan 실행을 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**(마켓플레이스 목록 **"AI Diff Reviewer"**, 현재 버전 **v2.0.0**)에 연결하여, 필수 **Final Review**의 보안 점검이 구조화된 로컬 검토 — 판정, 결과 표, 심각도 — 를 실행하도록 하고, Flow B를 선택하면 모든 풀 리퀘스트를 CI에서 동일한 검토로 게이트할 수 있습니다. 표준 2.3.0부터 **로컬 리뷰는 기준선의 일부**입니다. 온보딩이 이를 설치하고 모든 Final Review가 이를 실행합니다. 옵트인인 것은 CI 표면뿐입니다.
+Deep Work Plan 실행을 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**(마켓플레이스 목록 **"AI Diff Reviewer"**, 현재 버전 **v2.0.1**)에 연결하여, 필수 **Final Review**의 보안 점검이 구조화된 로컬 검토 — 판정, 결과 표, 심각도 — 를 실행하도록 하고, Flow B를 선택하면 모든 풀 리퀘스트를 CI에서 동일한 검토로 게이트할 수 있습니다. 표준 2.3.0부터 **로컬 리뷰는 기준선의 일부**입니다. 온보딩이 이를 설치하고 모든 Final Review가 이를 실행합니다. 옵트인인 것은 CI 표면뿐입니다.
 
 벤더 중립으로 남는 것은 실제로 중요한 경계입니다. 이 리뷰어는 개발자 **자신의** 코딩 에이전트가 실행하는 MIT 라이선스의 태그 고정 스킬입니다 — 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않습니다. Flow A(로컬 전용)는 온보딩된 모든 저장소가 받는 기준선이고, Flow B(CI Action)는 명시적으로 제안되며 요청 없이 설치되는 일이 결코 없습니다. 개발자는 로컬 리뷰어를 거절할 수 있습니다. 거절은 선언된 예외로 기록되며, 설치될 때까지 `verify`는 그 지점에서 저장소를 비적합으로 보고합니다.
 
@@ -35,16 +35,16 @@ DWP 애드온은 리뷰어를 **재발명하지 않습니다**. 설치, 방법�
 
 ### 필수 로컬 리뷰
 
-`create`가 모든 Final Review의 보안 점검에 로컬 리뷰 단계를 추가하고 `execute`가 이를 실행합니다. 출력은 `analysis_results/SECURITY_REVIEW.md`의 `## AI Diff Reviewer local review` 아래에 추가됩니다.
+`create`가 모든 Final Review의 보안 점검에 로컬 리뷰 단계를 추가하고 `execute`가 이를 실행합니다. 출력은 플랜 로컬 `analysis_results/SECURITY_REVIEW.md`(플랜 자체 폴더 안에 있으며 저장소 루트가 아님)의 `## AI Diff Reviewer local review` 아래에 추가됩니다.
 
-- **리뷰어 누락 — 기록됨, 절대 조용히 건너뜀 없음:** 누락된 스킬이나 확장은 `local reviewer not installed` 발견 사항이 됩니다. 실행이 하니스에 쓸 수 있을 때(신뢰 모드 또는 명시적 승인) 에이전트는 누락된 조각을 설치한 뒤 검토하고, 그렇지 않으면 발견 사항이 완료 보고로 전달됩니다.
+- **리뷰어 누락 — 기록됨, 절대 조용히 건너뜀 없음:** 누락된 스킬이나 확장은 `local reviewer not installed` 발견 사항이 됩니다. Final Review는 스킬이 있을 때 로컬 패스를 실행하고, 없을 때는 발견 사항을 완료 보고로 전달합니다 — 설치는 온보딩 동의 또는 명시적 애드온 호출에 속하며 절대 깜짝 부트스트랩이 아닙니다.
 - **소프트 실패(호출만):** 시작할 수 있었지만 오류가 난 검토 → 한 번 경고하고 기록한 뒤 계속; 그 누락으로 작업을 실패시키지 않음.
 - **완료된 패스 후 게이트:** `critical` 결과는 수정되거나 명시적으로 수락될 때까지 Final Review 완료를 계속 차단합니다. `warning` / `info`는 문서화되지만 차단하지 않습니다.
 - **Flow A는 CI 시크릿이 필요 없습니다.** 설정되지 않은 `CURSOR_API_KEY`가 로컬 패스를 억제해서는 안 됩니다.
 
 ### Flow B CI 게이트(선택적)
 
-고정된 Action `DailybotHQ/ai-diff-reviewer@v2`, 일반적으로 레이블 게이트(`ready`), 브랜치 보호를 위한 안정적으로 명명된 **AI review gate** 작업, 선택적 건너뜀 레이블 `skip-review-label: skip-ai-review`. 공유 `prompt.md` + 확장으로 방법론 및 심각도 정렬; 반복 인식 검토에서 CI 2 라운드 이상이 더 짧을 수 있고 로컬 패스는 완전하게 유지됩니다.
+Action `DailybotHQ/ai-diff-reviewer@v2`, 일반적으로 레이블 게이트(`ready`), 브랜치 보호를 위한 안정적으로 명명된 **AI review gate** 작업, 선택적 건너뜀 레이블 `skip-review-label: skip-ai-review`. 공유 `prompt.md` + 확장으로 방법론 및 심각도 정렬; 반복 인식 검토에서 CI 2 라운드 이상이 더 짧을 수 있고 로컬 패스는 완전하게 유지됩니다.
 
 ### 선택적 `apply-review` 컴패니언
 

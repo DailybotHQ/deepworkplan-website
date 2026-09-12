@@ -169,7 +169,7 @@ Sebuah entri `completed` MUST membawa `completed_at` dan, di mana rencana melaku
 
 ### Catatan gate
 
-Setiap jalannya perintah validasi SHOULD dicatat sebagai catatan gate: `command`, `passes` (boolean), `exit_code`, `last_run`, dan string `evidence` singkat yang dapat dibaca manusia (sebuah baris ringkasan atau sebuah path di bawah `analysis_results/`, tidak pernah keluaran perintah lengkap).
+Setiap jalannya perintah validasi SHOULD dicatat sebagai catatan gate: `command`, `passes` (boolean), `exit_code`, `last_run`, dan string `evidence` singkat yang dapat dibaca manusia (sebuah baris ringkasan atau sebuah path di bawah `analysis_results/` milik plan tersebut (di dalam folder plan itu sendiri, bukan di root repo), tidak pernah keluaran perintah lengkap).
 
 Sebuah tugas MUST NOT ditandai `completed` di `state.json` selama salah satu catatan gate-nya memiliki `passes: false` dan tidak ada jalannya yang kemudian lulus. Catatan gate adalah padanan mesin dari "jangan pernah tandai selesai tanpa bukti" — pola flag `passes` per-item yang menjaga penyelesaian prematur.
 

@@ -1,7 +1,7 @@
 ---
 title: "Perguntas frequentes — Deep Work Plan"
 description: "Respostas às perguntas mais comuns sobre o Deep Work Plan: o que ele faz, como funcionam gates e retomada, comparação com outras ferramentas e como adotá-lo."
-lastUpdated: 2026-09-11
+lastUpdated: 2026-09-12
 ---
 
 ## Perguntas frequentes
@@ -24,7 +24,7 @@ Desenvolvedores e equipes que entregam trabalho real e de várias etapas a agent
 
 ### Qual é a diferença entre um plano Lite e um Full?
 
-Uma escolha de representação, não uma troca de rigor. Todo plano começa como uma pasta Lite: um README compacto com registros de tarefas ancorados que já é executável, não um rascunho parcial. O `create` só se expande para arquivos de tarefa Full quando o detalhe das instruções, as dependências ou os contratos de uma tarefa não cabem em um registro compacto e revisável; um pedido explícito por qualquer um dos formatos é respeitado, e um plano Lite pode ser promovido a Full mais tarde sem perder o trabalho já concluído. Ambos os formatos carregam os mesmos critérios de aceitação, gates de validação, evidências e o Final Review obrigatório.
+Uma escolha de representação, não uma troca de rigor. Os planos são Lite por padrão: um README compacto com registros de tarefas ancorados que já é executável, não um rascunho parcial. Se você pede um plano Full desde o início, o `create` escreve os arquivos de tarefa Full diretamente; e expande um plano para Full quando o detalhe das instruções, as dependências ou os contratos de uma tarefa deixam de caber em um registro compacto e revisável. A promoção posterior conserva cada tarefa concluída. Ambos os formatos carregam os mesmos critérios de aceitação, gates de validação, evidências e o Final Review obrigatório.
 
 [Leia a metodologia](https://deepworkplan.com/pt/methodology)
 
@@ -68,7 +68,7 @@ Uma skill descreve como um agente executa um procedimento repetível. Um plano D
 
 ### Como os gates de validação são implementados? Eles exigem aprovação humana?
 
-São asserções executáveis que o próprio agente roda. A aprovação humana enquadra a execução: uma pessoa aprova o plano antes da execução e revisa o diff final na hora do pull request; o que fica entre as duas pontas é autônomo. Cada tarefa nomeia comandos concretos, normalmente o próprio gate de qualidade do repositório, selecionados a partir da superfície tocada pela tarefa: os testes do comportamento alterado e dos seus consumidores, ampliando para a suíte completa quando a mudança é compartilhada ou não pode ser delimitada. Uma tarefa é marcada como concluída somente quando esses comandos terminam com sucesso, e tarefas que alteram comportamento devem estender os testes. Em caso de falha, a tarefa é marcada como bloqueada e o agente para.
+São asserções executáveis que o próprio agente roda. A aprovação humana enquadra a execução: uma pessoa aprova o plano antes da execução e revisa o diff final na hora do pull request; o que fica entre as duas pontas é autônomo. Cada tarefa nomeia comandos concretos, normalmente o próprio gate de qualidade do repositório, selecionados a partir da superfície tocada pela tarefa: os testes do comportamento alterado e dos seus consumidores, ampliando para a suíte completa quando a mudança é compartilhada ou não pode ser delimitada. Uma tarefa é marcada como concluída somente quando esses comandos terminam com sucesso, e tarefas que alteram comportamento devem estender os testes. Em caso de falha, o agente primeiro repara o que está dentro do escopo da própria tarefa e roda o gate de novo; uma falha que não pode ser reparada nesse escopo deixa a tarefa marcada como bloqueada e para a execução.
 
 [O ciclo principal](https://deepworkplan.com/pt/methodology/02-core-loop)
 
@@ -110,7 +110,7 @@ A única tarefa de encerramento obrigatória de todo plano. Em ordem: um passe d
 
 ### O que acontece quando um gate de validação falha?
 
-A tarefa é registrada como bloqueada e o agente para antes de declarar conclusão. Você pode inspecionar a evidência, corrigir o código ou refinar a tarefa e então retomar; um comando que falha é um sinal para resolver a divergência, não uma permissão para enfraquecer o gate.
+Um gate que falha é primeiro um sinal de reparo: o agente corrige o que está dentro do escopo da própria tarefa e roda o gate de novo. Uma falha que excede esse escopo deixa a tarefa registrada como bloqueada, e o agente para antes de declarar conclusão. Você pode inspecionar a evidência, corrigir o código ou refinar a tarefa e então retomar; um comando que falha é um sinal para resolver a divergência, não uma permissão para enfraquecer o gate.
 
 [Leia o protocolo do agente](https://deepworkplan.com/pt/spec/agent-protocol)
 
@@ -144,7 +144,7 @@ Os modos de planejamento nativos são úteis, e o Deep Work Plan se apoia no mes
 
 ### O que o onboarding escreve no meu repositório e ele toca em arquivos existentes?
 
-O onboarding é não destrutivo: ele detecta um `AGENTS.md`, `docs/`, `.agents/` ou `CLAUDE.md` existente, reconcilia em vez de sobrescrever e pergunta antes de substituir qualquer coisa. Ele escreve o índice `AGENTS.md` com comandos reais, uma árvore `docs/` fundamentada, docs por módulo, o kit `.agents/` com comandos enxutos `dwp-*`, uma área de saída `.dwp/` ignorada pelo git, um mapa de testes verificado e a revisão local de código obrigatória (a skill AI Diff Reviewer mais uma extensão de revisão adaptada ao repositório). Ele então executa uma autoverificação e o verificador de conformidade, para que você veja o que foi produzido. Um repositório integrado sob uma versão anterior recebe uma atualização direcionada que altera apenas o que falta.
+O onboarding é não destrutivo: ele detecta um `AGENTS.md`, `docs/`, `.agents/` ou `CLAUDE.md` existente, reconcilia em vez de sobrescrever e pergunta antes de substituir qualquer coisa. Ele escreve o índice `AGENTS.md` com comandos reais, uma árvore `docs/` fundamentada, docs por módulo, o kit `.agents/` com comandos enxutos `dwp-*`, uma área de saída `.dwp/` ignorada pelo git, um mapa de testes verificado e a revisão local de código obrigatória (a skill AI Diff Reviewer mais uma extensão de revisão adaptada ao repositório). Ele então executa uma autoverificação e o verificador de conformidade, para que você veja o que foi produzido. Um repositório integrado sob um padrão anterior recebe uma atualização direcionada do harness que reconcilia apenas o que falta ou está desatualizado. Atualizar a skill em si é um fluxo separado e condicionado a consentimento explícito (`/dwp-upgrade`): verifica a última versão publicada sem escrever nada, instala somente após a sua aceitação explícita, reexecuta o onboarding como uma passada nova e nunca migra nem invalida os planos existentes sob `.dwp/`.
 
 [O endpoint de adoção](https://deepworkplan.com/pt/init)
 

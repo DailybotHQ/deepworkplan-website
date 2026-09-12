@@ -1,7 +1,7 @@
 ---
 title: "Pertanyaan yang sering diajukan — Deep Work Plan"
 description: "Jawaban atas pertanyaan seputar Deep Work Plan: apa yang dilakukannya, cara kerja gerbang dan pelanjutan, perbandingan dengan alat lain, dan cara adopsinya."
-lastUpdated: 2026-09-11
+lastUpdated: 2026-09-12
 ---
 
 ## Pertanyaan yang sering diajukan
@@ -24,7 +24,7 @@ Pengembang dan tim yang menyerahkan pekerjaan nyata dan multilangkah kepada codi
 
 ### Apa bedanya rencana Lite dan rencana Full?
 
-Pilihan representasi, bukan trade-off rigor. Setiap rencana dimulai sebagai folder Lite: README ringkas dengan catatan tugas berjangkar yang sudah dapat dieksekusi, bukan draf sebagian. `create` memperluas menjadi file tugas Full hanya ketika detail instruksi, dependensi, atau kontrak sebuah tugas tidak muat dalam catatan ringkas yang bisa ditinjau; permintaan eksplisit untuk salah satu format tetap dihormati, dan rencana Lite bisa dipromosikan ke Full kemudian tanpa kehilangan pekerjaan yang sudah selesai. Kedua format membawa kriteria penerimaan, gerbang verifikasi, bukti, dan Final Review wajib yang sama.
+Pilihan representasi, bukan trade-off rigor. Rencana bawaannya adalah Lite: README ringkas dengan catatan tugas berjangkar yang sudah dapat dieksekusi, bukan draf sebagian. Jika Anda meminta rencana Full dari awal, `create` menulis file tugas Full secara langsung; dan memperluas sebuah rencana ke Full ketika detail instruksi, dependensi, atau kontrak sebuah tugas tidak lagi muat dalam catatan ringkas yang bisa ditinjau. Promosi di kemudian hari menyimpan setiap tugas yang selesai. Kedua format membawa kriteria penerimaan, gerbang verifikasi, bukti, dan Final Review wajib yang sama.
 
 [Baca metodologinya](https://deepworkplan.com/id/methodology)
 
@@ -68,7 +68,7 @@ Sebuah skill mendeskripsikan cara agent menjalankan sebuah prosedur berulang. Re
 
 ### Bagaimana gerbang verifikasi diimplementasikan? Apakah memerlukan persetujuan manusia?
 
-Gerbang itu adalah asersi yang dapat dieksekusi dan dijalankan sendiri oleh agent. Persetujuan manusia mengapit jalannya rencana: seorang manusia menyetujui rencana sebelum eksekusi dan meninjau diff akhir saat pull request; eksekusi di antaranya berjalan otonom. Setiap tugas menyebutkan command konkret, biasanya gerbang kualitas milik repositori itu sendiri, yang dipilih dari permukaan yang disentuh tugas: test dari perilaku yang berubah beserta konsumennya, diperluas ke seluruh suite ketika perubahan bersifat shared atau tidak bisa dibatasi. Sebuah tugas ditandai selesai hanya ketika command itu keluar dengan sukses, dan tugas yang mengubah perilaku wajib memperluas test. Saat gagal, tugas ditandai terblokir dan agent berhenti.
+Gerbang itu adalah asersi yang dapat dieksekusi dan dijalankan sendiri oleh agent. Persetujuan manusia mengapit jalannya rencana: seorang manusia menyetujui rencana sebelum eksekusi dan meninjau diff akhir saat pull request; eksekusi di antaranya berjalan otonom. Setiap tugas menyebutkan command konkret, biasanya gerbang kualitas milik repositori itu sendiri, yang dipilih dari permukaan yang disentuh tugas: test dari perilaku yang berubah beserta konsumennya, diperluas ke seluruh suite ketika perubahan bersifat shared atau tidak bisa dibatasi. Sebuah tugas ditandai selesai hanya ketika command itu keluar dengan sukses, dan tugas yang mengubah perilaku wajib memperluas test. Saat gagal, agent lebih dulu memperbaiki apa yang berada di dalam lingkup tugas itu sendiri dan menjalankan kembali gerbangnya; kegagalan yang tidak bisa diperbaiki dalam lingkup itu meninggalkan tugas tertandai terblokir dan menghentikan eksekusi.
 
 [Loop inti](https://deepworkplan.com/id/methodology/02-core-loop)
 
@@ -110,7 +110,7 @@ Satu-satunya tugas penutup wajib dari setiap rencana. Secara berurutan: pemeriks
 
 ### Apa yang terjadi ketika sebuah gerbang verifikasi gagal?
 
-Tugas dicatat sebagai terblokir dan agent berhenti sebelum mengklaim selesai. Anda bisa memeriksa buktinya, memperbaiki kode, atau menyempurnakan tugasnya, lalu melanjutkan; command yang gagal adalah isyarat untuk menyelesaikan ketidaksesuaian, bukan izin untuk melemahkan gerbangnya.
+Gerbang yang gagal lebih dulu adalah sinyal perbaikan: agent memperbaiki apa yang berada di dalam lingkup tugas itu sendiri dan menjalankan kembali gerbangnya. Kegagalan yang melampaui lingkup itu meninggalkan tugas tercatat sebagai terblokir, dan agent berhenti sebelum mengklaim selesai. Anda bisa memeriksa buktinya, memperbaiki kode, atau menyempurnakan tugasnya, lalu melanjutkan; command yang gagal adalah isyarat untuk menyelesaikan ketidaksesuaian, bukan izin untuk melemahkan gerbangnya.
 
 [Baca protokol agent](https://deepworkplan.com/id/spec/agent-protocol)
 
@@ -144,7 +144,7 @@ Mode rencana bawaan berguna, dan Deep Work Plan membangun di atas substrat yang 
 
 ### Apa yang ditulis onboarding ke repositori saya, dan apakah ia menyentuh file yang sudah ada?
 
-Onboarding bersifat non-destruktif: ia mendeteksi `AGENTS.md`, `docs/`, `.agents/`, atau `CLAUDE.md` yang sudah ada, merekonsiliasi alih-alih menimpa, dan bertanya sebelum mengganti apa pun. Ia menulis indeks `AGENTS.md` dengan command nyata, pohon `docs/` yang beralasan, dokumentasi per modul, kit `.agents/` dengan command `dwp-*` yang tipis, area keluaran `.dwp/` yang di-gitignore, peta pengujian yang terverifikasi, dan tinjauan kode lokal yang diwajibkan (skill AI Diff Reviewer plus ekstensi review yang disesuaikan repo). Ia kemudian menjalankan self-check dan pemeriksa konformansi agar Anda bisa melihat apa yang dihasilkan. Repositori yang di-onboard di bawah versi sebelumnya mendapat upgrade tertarget yang hanya mengubah apa yang kurang.
+Onboarding bersifat non-destruktif: ia mendeteksi `AGENTS.md`, `docs/`, `.agents/`, atau `CLAUDE.md` yang sudah ada, merekonsiliasi alih-alih menimpa, dan bertanya sebelum mengganti apa pun. Ia menulis indeks `AGENTS.md` dengan command nyata, pohon `docs/` yang beralasan, dokumentasi per modul, kit `.agents/` dengan command `dwp-*` yang tipis, area keluaran `.dwp/` yang di-gitignore, peta pengujian yang terverifikasi, dan tinjauan kode lokal yang diwajibkan (skill AI Diff Reviewer plus ekstensi review yang disesuaikan repo). Ia kemudian menjalankan self-check dan pemeriksa konformansi agar Anda bisa melihat apa yang dihasilkan. Repositori yang di-onboard di bawah standar sebelumnya mendapat upgrade harness tertarget yang merekonsiliasi hanya apa yang kurang atau usang. Meng-upgrade skill itu sendiri adalah alur terpisah yang bergantung pada persetujuan eksplisit (`/dwp-upgrade`): ia memeriksa versi terbaru yang dipublikasikan secara read-only, menginstal hanya setelah Anda menerimanya secara eksplisit, menjalankan kembali onboarding sebagai satu proses segar, dan tidak pernah memigrasi atau membatalkan rencana yang ada di bawah `.dwp/`.
 
 [Endpoint adopsi](https://deepworkplan.com/id/init)
 

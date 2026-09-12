@@ -160,13 +160,14 @@ design-system) e proponi ciascuno come opt-in esplicito. Un repository è pienam
   accettato, installa il comando `/lib-upgrade`.
 - **Design system** — un `docs/DESIGN.md` opt-in solo per i repository con una superficie di interfaccia
   rilevata (non offerto per librerie pure, servizi headless o repository solo infra). Tre profili si
-  sovrappongono in un unico file: visual-ui (attivo per default quando rilevato), cli-output e
+  sovrappongono in un unico file: visual-ui (fortemente raccomandato quando rilevato; installazione subordinata a un'accettazione), cli-output e
   conversational — gli ultimi due vengono sempre chiesti, mai applicati automaticamente.
 - **AI Diff Reviewer** — la revisione locale richiesta (non un opt-in): il passaggio di sicurezza di
   ogni Final Review esegue [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill +
   `.review/extension.md` obbligatorio) sull’insieme di modifiche accumulato dal piano. Una skill o un’estensione
-  mancante è un rilievo registrato `local reviewer not installed`, installata quando l’esecuzione può scrivere
-  nella harness — mai un salto silenzioso; gli errori di invocazione sono soft-fail; i rilievi `critical` di un
+  mancante è un rilievo registrato `local reviewer not installed` — mai un salto silenzioso,
+  e mai un bootstrap a sorpresa: l'installazione appartiene al consenso
+  dell'onboarding o a un'invocazione esplicita dell'addon; gli errori di invocazione sono soft-fail; i rilievi `critical` di un
   passaggio completato bloccano comunque il completamento. **Flow B** (il gate CI con `pr-review.yml`) è offerto
   come opt-in esplicito e mai installato senza richiesta. Nessun flusso Deep Work Plan richiede un servizio
   commerciale, un provider CI o un segreto.

@@ -1,7 +1,7 @@
 ---
 title: "Häufig gestellte Fragen — Deep Work Plan"
 description: "Antworten auf häufige Fragen zu Deep Work Plan: Was es tut, wie Gates und Wiederaufnahme funktionieren, der Vergleich mit anderen Werkzeugen und die Adoption."
-lastUpdated: 2026-09-11
+lastUpdated: 2026-09-12
 ---
 
 ## Häufig gestellte Fragen
@@ -24,7 +24,7 @@ Entwickler und Teams, die Coding-Agenten echte, mehrschrittige Arbeit übergeben
 
 ### Was ist der Unterschied zwischen einem Lite- und einem Full-Plan?
 
-Eine Entscheidung der Darstellung, kein Kompromiss beim Rigor. Jeder Plan beginnt als Lite-Ordner: ein kompaktes README mit verankerten Aufgabenprotokollen, das bereits ausführbar ist, kein partieller Entwurf. `create` erweitert sich nur dann zu Full-Aufgabendateien, wenn der Detailgrad der Anweisungen, die Abhängigkeiten oder die Verträge einer Aufgabe nicht in ein überprüfbares kompaktes Protokoll passen; eine ausdrückliche Anfrage nach einem der beiden Formate wird respektiert, und ein Lite-Plan kann später zu Full befördert werden, ohne abgeschlossene Arbeit zu verlieren. Beide Formate tragen dieselben Akzeptanzkriterien, Validierungs-Gates, Evidenz und den verpflichtenden Final Review.
+Eine Entscheidung der Darstellung, kein Kompromiss beim Rigor. Pläne sind standardmäßig Lite: ein kompaktes README mit verankerten Aufgabenprotokollen, das bereits ausführbar ist, kein partieller Entwurf. Wer von Anfang an einen Full-Plan verlangt, bekommt von `create` direkt Full-Aufgabendateien geschrieben; und ein Plan wird zu Full erweitert, wenn der Detailgrad der Anweisungen, die Abhängigkeiten oder die Verträge einer Aufgabe nicht mehr in ein überprüfbares kompaktes Protokoll passen. Eine spätere Beförderung behält jede abgeschlossene Aufgabe. Beide Formate tragen dieselben Akzeptanzkriterien, Validierungs-Gates, Evidenz und den verpflichtenden Final Review.
 
 [Methodik lesen](https://deepworkplan.com/de/methodology)
 
@@ -68,7 +68,7 @@ Eine Skill beschreibt, wie ein Agent ein wiederholbares Verfahren ausführt. Ein
 
 ### Wie sind die Validierungs-Gates implementiert? Erfordern sie eine menschliche Freigabe?
 
-Es sind ausführbare Zusicherungen, die der Agent selbst ausführt. Die menschliche Freigabe rahmt den Durchlauf: Eine Person genehmigt den Plan vor der Ausführung und prüft den finalen Diff zum Zeitpunkt des Pull Requests; die Ausführung dazwischen ist autonom. Jede Aufgabe nennt konkrete Befehle, typischerweise das eigene Quality-Gate des Repositorys, ausgewählt aus der berührten Oberfläche der Aufgabe: die Tests des geänderten Verhaltens und seiner Konsumenten, ausgeweitet auf die gesamte Suite, wenn die Änderung geteilt ist oder sich nicht abgrenzen lässt. Eine Aufgabe wird erst dann als erledigt markiert, wenn diese Befehle erfolgreich durchlaufen, und Aufgaben, die Verhalten ändern, müssen die Tests erweitern. Schlägt ein Befehl fehl, wird die Aufgabe als blockiert markiert und der Agent stoppt.
+Es sind ausführbare Zusicherungen, die der Agent selbst ausführt. Die menschliche Freigabe rahmt den Durchlauf: Eine Person genehmigt den Plan vor der Ausführung und prüft den finalen Diff zum Zeitpunkt des Pull Requests; die Ausführung dazwischen ist autonom. Jede Aufgabe nennt konkrete Befehle, typischerweise das eigene Quality-Gate des Repositorys, ausgewählt aus der berührten Oberfläche der Aufgabe: die Tests des geänderten Verhaltens und seiner Konsumenten, ausgeweitet auf die gesamte Suite, wenn die Änderung geteilt ist oder sich nicht abgrenzen lässt. Eine Aufgabe wird erst dann als erledigt markiert, wenn diese Befehle erfolgreich durchlaufen, und Aufgaben, die Verhalten ändern, müssen die Tests erweitern. Schlägt ein Befehl fehl, repariert der Agent zuerst, was in den eigenen Geltungsbereich der Aufgabe fällt, und führt das Gate erneut aus; ein Fehler, der sich in diesem Rahmen nicht beheben lässt, hinterlässt die Aufgabe als blockiert markiert und stoppt den Durchlauf.
 
 [Die Kernschleife](https://deepworkplan.com/de/methodology/02-core-loop)
 
@@ -110,7 +110,7 @@ Die einzige verpflichtende Abschlussaufgabe jedes Plans. Der Reihe nach: ein Sic
 
 ### Was passiert, wenn ein Validierungs-Gate fehlschlägt?
 
-Die Aufgabe wird als blockiert aufgezeichnet, und der Agent stoppt, bevor er den Abschluss behauptet. Sie können die Evidenz prüfen, den Code reparieren oder die Aufgabe verfeinern und dann fortsetzen; ein fehlgeschlagener Befehl ist ein Signal, die Abweichung zu beheben, keine Erlaubnis, das Gate abzuschwächen.
+Ein fehlgeschlagenes Gate ist zuerst ein Reparatursignal: Der Agent behebt, was in den eigenen Geltungsbereich der Aufgabe fällt, und führt das Gate erneut aus. Ein Fehler, der diesen Rahmen übersteigt, hinterlässt die Aufgabe als blockiert aufgezeichnet, und der Agent stoppt, bevor er den Abschluss behauptet. Sie können die Evidenz prüfen, den Code reparieren oder die Aufgabe verfeinern und dann fortsetzen; ein fehlgeschlagener Befehl ist ein Signal, die Abweichung zu beheben, keine Erlaubnis, das Gate abzuschwächen.
 
 [Agenten-Protokoll lesen](https://deepworkplan.com/de/spec/agent-protocol)
 
@@ -144,7 +144,7 @@ Eingebaute Plan-Modi sind nützlich, und Deep Work Plan baut auf demselben Subst
 
 ### Was schreibt das Onboarding in mein Repository, und fasst es bestehende Dateien an?
 
-Das Onboarding ist nicht-destruktiv: Es erkennt eine bestehende `AGENTS.md`, `docs/`, `.agents/` oder `CLAUDE.md`, gleicht ab, statt zu überschreiben, und fragt nach, bevor es etwas ersetzt. Es schreibt den `AGENTS.md`-Index mit echten Befehlen, einen durchdachten `docs/`-Baum, Dokumentation je Modul, das `.agents/`-Kit mit schlanken `dwp-*`-Befehlen, einen per gitignore ausgeschlossenen `.dwp/`-Ausgabebereich, eine verifizierte Testkarte und das erforderliche lokale Code-Review (die AI Diff Reviewer-Skill plus eine auf das Repository zugeschnittene Review-Erweiterung). Anschließend führt es einen Selbstcheck und den Konformitätsprüfer aus, damit Sie sehen, was erzeugt wurde. Ein unter einer früheren Version geonboardetes Repository erhält ein gezieltes Upgrade, das nur das ändert, was fehlt.
+Das Onboarding ist nicht-destruktiv: Es erkennt eine bestehende `AGENTS.md`, `docs/`, `.agents/` oder `CLAUDE.md`, gleicht ab, statt zu überschreiben, und fragt nach, bevor es etwas ersetzt. Es schreibt den `AGENTS.md`-Index mit echten Befehlen, einen durchdachten `docs/`-Baum, Dokumentation je Modul, das `.agents/`-Kit mit schlanken `dwp-*`-Befehlen, einen per gitignore ausgeschlossenen `.dwp/`-Ausgabebereich, eine verifizierte Testkarte und das erforderliche lokale Code-Review (die AI Diff Reviewer-Skill plus eine auf das Repository zugeschnittene Review-Erweiterung). Anschließend führt es einen Selbstcheck und den Konformitätsprüfer aus, damit Sie sehen, was erzeugt wurde. Ein unter einem früheren Standard geonboardetes Repository erhält ein gezieltes Harness-Upgrade, das nur abgleicht, was fehlt oder veraltet ist. Das Upgrade der Skill selbst ist ein separater, zustimmungspflichtiger Ablauf (`/dwp-upgrade`): Er prüft die neueste veröffentlichte Version ohne schreibende Zugriffe, installiert erst nach ausdrücklicher Zustimmung, führt das Onboarding als frischen Durchlauf erneut aus und migriert oder invalidiert bestehende Pläne unter `.dwp/` niemals.
 
 [Der Adoptions-Endpunkt](https://deepworkplan.com/de/init)
 

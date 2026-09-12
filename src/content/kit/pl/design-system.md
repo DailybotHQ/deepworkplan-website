@@ -31,8 +31,8 @@ Nadaj repozytorium z **powierzchnią interfejsu skierowaną do użytkownika** pl
 
 Ten dodatek jest przeznaczony dla repozytoriów z co najmniej jedną rzeczywistą powierzchnią interfejsu; nigdy nie jest oferowany dla repozytorium bez żadnej (czysta biblioteka, usługa headless, repozytorium wyłącznie infrastrukturalne). Każdy profil ma własną siłę zalecenia:
 
-- **`visual-ui` jest domyślnie włączony po wykryciu** — arkusz stylów z niestandardowymi właściwościami CSS, konfiguracja Tailwind lub blok `@theme`, komponenty UI albo przewodnik marki/stylu. Onboarding stosuje go w trybie zaufania i zdecydowanie zaleca w trybie z przewodnikiem.
-- **`cli-output` i `conversational` są zalecane po wykryciu — i zawsze poprzedzone pytaniem, nigdy stosowane automatycznie**, nawet w trybie zaufania. Biblioteka renderowania CLI wraz z celową warstwą wyświetlania sygnalizuje ten pierwszy; SDK platformy czatowej lub warstwa kompozycji wiadomości — ten drugi. Goły parser argumentów z surowymi wydrukami się nie kwalifikuje.
+- **`visual-ui` jest zdecydowanie zalecany po wykryciu** — arkusz stylów z niestandardowymi właściwościami CSS, konfiguracja Tailwind lub blok `@theme`, komponenty UI albo przewodnik marki/stylu. Wykrycie czyni propozycję obowiązkową, ale nigdy nie czyni instalacji automatyczną — profil jest stosowany dopiero po wyraźnej akceptacji, tak w trybie guidowanym, jak i trust.
+- **`cli-output` i `conversational` są zalecane po wykryciu — i zawsze poprzedzone pytaniem, nigdy stosowane automatycznie**, tak w trybie guidowanym, jak i trust. Biblioteka renderowania CLI wraz z celową warstwą wyświetlania sygnalizuje ten pierwszy; SDK platformy czatowej lub warstwa kompozycji wiadomości — ten drugi. Goły parser argumentów z surowymi wydrukami się nie kwalifikuje.
 
 Nigdy nie jest wymagany — repozytorium z zerową liczbą opcjonalnych dodatków jest w pełni zgodne i zawsze możesz odmówić dowolnego profilu lub całego dodatku. Plik `DESIGN.md` utworzony, zanim istniały profile, jest poprawnym jednoprofilowym plikiem wizualnym: bez migracji.
 

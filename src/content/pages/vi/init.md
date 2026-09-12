@@ -165,13 +165,14 @@ với **không** addon tùy chọn nào — đừng bao giờ tự động cài 
   được chấp nhận, nó cài command `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` tự nguyện dành cho các repo có bề mặt giao diện được phát hiện
   (không đề xuất cho thư viện thuần, dịch vụ headless hay repo chỉ hạ tầng). Ba profile xếp chồng trong
-  một tệp: visual-ui (bật mặc định khi phát hiện), cli-output và hội thoại — hai profile sau
+  một tệp: visual-ui (được khuyến nghị mạnh mẽ khi phát hiện; cài đặt kiểm soát bằng sự chấp nhận), cli-output và hội thoại — hai profile sau
   luôn được hỏi, không bao giờ tự động áp dụng.
 - **AI Diff Reviewer** — đánh giá cục bộ bắt buộc (không phải tùy chọn): bước rà soát bảo mật của mọi
   Final Review chạy [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill +
   `.review/extension.md` bắt buộc) trên toàn bộ tập thay đổi đã tích lũy của kế hoạch. Một skill hoặc
-  tiện ích mở rộng bị thiếu là một phát hiện `local reviewer not installed` được ghi lại, và được cài
-  khi lượt chạy có thể ghi vào harness — không bao giờ là một lần bỏ qua âm thầm; lỗi gọi chỉ thất bại
+  tiện ích mở rộng bị thiếu là một phát hiện `local reviewer not installed` được ghi lại — không bao giờ là một lần bỏ qua âm thầm,
+  và không bao giờ là một bootstrap bất ngờ: việc cài đặt thuộc về sự chấp thuận
+  của onboarding hoặc một lời gọi addon rõ ràng; lỗi gọi chỉ thất bại
   nhẹ; kết quả `critical` từ một lượt hoàn tất vẫn chặn việc hoàn thành. **Flow B** (cổng CI với
   `pr-review.yml`) được đề xuất như một lựa chọn tự nguyện rõ ràng và không bao giờ được cài khi chưa
   được yêu cầu. Không luồng Deep Work Plan nào yêu cầu một dịch vụ thương mại, nhà cung cấp CI hay bí mật.

@@ -51,7 +51,7 @@ onboard 流程向仓库叠加的各项能力。其中四个是可选的，绝非
 - **Devcontainer** —— 一个可复现、隔离的开发容器，具备持久的 AI-CLI 认证。
 - **Dailybot** —— 面向使用 Dailybot 的团队的尽力而为式进展与里程碑报告。
 - **Dependency upgrade** —— 包管理器无关、分批次、经验证、可回退的升级。
-- **Design system** —— 一份限定于界面范围的 `DESIGN.md`（位于 `docs/DESIGN.md`，从 `AGENTS.md` 引用），从仓库真实的设计来源推理而来，并为可视化 UI、带样式的 CLI 输出与会话式消息提供配置档，使代理生成契合品牌的界面输出；当检测到一套设计系统时可视化配置档默认开启，CLI 与会话式配置档在检测到时被推荐且始终先询问。
+- **Design system** —— 一份限定于界面范围的 `DESIGN.md`（位于 `docs/DESIGN.md`，从 `AGENTS.md` 引用），从仓库真实的设计来源推理而来，并为可视化 UI、带样式的 CLI 输出与会话式消息提供配置档，使代理生成契合品牌的界面输出；检测到设计系统时提供该提案是必须的，而安装以明确接受为前提——可视化配置档在检测到时受到强烈推荐，CLI 与会话式配置档在检测到时被推荐且始终先询问。
 - **AI Diff Reviewer** —— 必备的本地审查：接入时安装 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v2 与 `.review/extension.md`，且每份 Final Review 的安全审查环节都会运行它；可选的 Flow B 添加一个共享同一扩展的 CI PR 合并门控——明确提供，绝不未经请求安装。
 
 ### 示例

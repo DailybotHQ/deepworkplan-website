@@ -8,7 +8,7 @@ order: 5
 
 # Dodatek AI Diff Reviewer
 
-Łączy wykonanie Deep Work Plan z **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (wpis na marketplace **"AI Diff Reviewer"**, aktualna wersja **v2.0.0**), dzięki czemu przegląd bezpieczeństwa obowiązkowego **Final Review** uruchamia strukturalny lokalny przegląd — werdykt, tabelę wyników i poziom ważności — a przy wyborze Flow B każde pull request może być zablokowane przez ten sam przegląd w CI. Od standardu 2.3.0 **lokalny przegląd jest częścią linii bazowej**: onboarding go instaluje, a każde Final Review go uruchamia. Opcjonalna pozostaje wyłącznie powierzchnia CI.
+Łączy wykonanie Deep Work Plan z **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (wpis na marketplace **"AI Diff Reviewer"**, aktualna wersja **v2.0.1**), dzięki czemu przegląd bezpieczeństwa obowiązkowego **Final Review** uruchamia strukturalny lokalny przegląd — werdykt, tabelę wyników i poziom ważności — a przy wyborze Flow B każde pull request może być zablokowane przez ten sam przegląd w CI. Od standardu 2.3.0 **lokalny przegląd jest częścią linii bazowej**: onboarding go instaluje, a każde Final Review go uruchamia. Opcjonalna pozostaje wyłącznie powierzchnia CI.
 
 Neutralna wobec dostawcy pozostaje granica, która ma znaczenie: reviewer to skill na licencji MIT przypięty do tagu, uruchamiany przez **własnego** agenta kodującego — żaden przepływ Deep Work Plan nie wymaga komercyjnej usługi, dostawcy CI ani sekretu. Flow A (tylko lokalnie) to linia bazowa, którą otrzymuje każde repozytorium po onboardingu; Flow B (CI Action) jest proponowany wyraźnie i nigdy nie jest instalowany bez prośby. Deweloper może odmówić lokalnego reviewera; odmowa jest zapisywana jako zadeklarowany wyjątek, a `verify` zgłasza repozytorium jako niezgodne w tym punkcie do czasu instalacji.
 
@@ -35,16 +35,16 @@ Dodatek DWP **nie** wynajduje recenzenta na nowo. Deleguje instalację, metodolo
 
 ### Wymagany lokalny przegląd
 
-`create` dodaje krok lokalnego przeglądu do przeglądu bezpieczeństwa każdego Final Review, a `execute` go uruchamia. Wynik jest dołączany pod `## AI Diff Reviewer local review` w `analysis_results/SECURITY_REVIEW.md`.
+`create` dodaje krok lokalnego przeglądu do przeglądu bezpieczeństwa każdego Final Review, a `execute` go uruchamia. Wynik jest dołączany pod `## AI Diff Reviewer local review` w lokalnym dla planu `analysis_results/SECURITY_REVIEW.md` (wewnątrz własnego folderu planu, nigdy w katalogu głównym repo).
 
-- **Brakujący reviewer — zapisany, nigdy cicho pominięty:** brakująca skill lub rozszerzenie staje się znaleziskiem `local reviewer not installed`; gdy przebieg może zapisywać w harnessie (tryb trust lub wyraźne zatwierdzenie), agent instaluje brakujący element i dopiero potem przegląda, w przeciwnym razie znalezisko trafia do raportu z ukończenia.
+- **Brakujący reviewer — zapisany, nigdy cicho pominięty:** brakująca skill lub rozszerzenie staje się znaleziskiem `local reviewer not installed`; Final Review uruchamia lokalny przebieg, gdy skill jest obecna, a w przeciwnym razie przenosi znalezisko do raportu z ukończenia — instalacja należy do zgody onboardingu lub jawnego wywołania addonu, nigdy nie jest zaskakującym bootstrapem.
 - **Miękka porażka (tylko wywołanie):** przegląd, który mógł wystartować, ale kończy się błędem → ostrzeż raz, zapisz, kontynuuj; nigdy nie powoduj porażki zadania z tego powodu.
 - **Bramka po ukończonym przebiegu:** wyniki `critical` nadal blokują ukończenie Final Review do czasu naprawienia lub wyraźnej akceptacji. `warning` / `info` są dokumentowane, ale nieblokujące.
 - **Flow A nie potrzebuje sekretu CI.** Nieustawiony `CURSOR_API_KEY` nie może tłumić lokalnego przebiegu.
 
 ### Bramka CI Flow B (opcjonalna)
 
-Przypięta Action `DailybotHQ/ai-diff-reviewer@v2`, zazwyczaj bramkowana etykietą (`ready`), ze stabilnie nazwanym zadaniem **AI review gate** do ochrony gałęzi i opcjonalną etykietą pomijania `skip-review-label: skip-ai-review`. Wspólny `prompt.md` + rozszerzenie wyrównuje metodologię i ważność; w ramach Przeglądu Świadomego Iteracji rundy CI 2+ mogą być krótsze, podczas gdy lokalny przebieg pozostaje pełny.
+Action `DailybotHQ/ai-diff-reviewer@v2`, zazwyczaj bramkowana etykietą (`ready`), ze stabilnie nazwanym zadaniem **AI review gate** do ochrony gałęzi i opcjonalną etykietą pomijania `skip-review-label: skip-ai-review`. Wspólny `prompt.md` + rozszerzenie wyrównuje metodologię i ważność; w ramach Przeglądu Świadomego Iteracji rundy CI 2+ mogą być krótsze, podczas gdy lokalny przebieg pozostaje pełny.
 
 ### Opcjonalny towarzysz `apply-review`
 

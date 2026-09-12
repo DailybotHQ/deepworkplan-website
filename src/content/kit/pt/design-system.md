@@ -31,8 +31,8 @@ Uma "superfície de interface" é plural: uma **UI visual** renderizada, uma **s
 
 Este addon é para repositórios com pelo menos uma superfície de interface real; ele nunca é oferecido para um repositório sem nenhuma (uma biblioteca pura, um serviço headless, um repositório apenas de infraestrutura). Cada perfil carrega sua própria força de recomendação:
 
-- **`visual-ui` é ativado por padrão quando detectado** — uma folha de estilos com propriedades CSS personalizadas, uma configuração do Tailwind ou bloco `@theme`, componentes de UI ou um guia de marca/estilo. O onboarding o aplica em modo de confiança e o recomenda fortemente no modo guiado.
-- **`cli-output` e `conversational` são recomendados quando detectados — e sempre perguntados, nunca aplicados automaticamente**, mesmo em modo de confiança. Uma biblioteca de renderização de CLI mais uma camada de exibição deliberada sinaliza o primeiro; um SDK de plataforma de chat ou uma camada de composição de mensagens sinaliza o segundo. Um simples parser de argumentos com prints sem formatação não qualifica.
+- **`visual-ui` é recomendado com força quando detectado** — uma folha de estilos com propriedades CSS personalizadas, uma configuração do Tailwind ou bloco `@theme`, componentes de UI ou um guia de marca/estilo. A deteção torna a oferta obrigatória; nunca torna a instalação automática — o perfil é aplicado apenas após você o aceitar explicitamente, tanto em modo guiado como em modo de confiança.
+- **`cli-output` e `conversational` são recomendados quando detectados — e sempre perguntados, nunca aplicados automaticamente**, tanto em modo guiado como em modo de confiança. Uma biblioteca de renderização de CLI mais uma camada de exibição deliberada sinaliza o primeiro; um SDK de plataforma de chat ou uma camada de composição de mensagens sinaliza o segundo. Um simples parser de argumentos com prints sem formatação não qualifica.
 
 Ele nunca é obrigatório — um repositório com zero addons opcionais é totalmente conforme, e você sempre pode recusar qualquer perfil ou o addon inteiro. Um `DESIGN.md` criado antes de os perfis existirem é um arquivo visual de perfil único válido: sem migração.
 
