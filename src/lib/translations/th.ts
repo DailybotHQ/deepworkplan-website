@@ -666,23 +666,23 @@ export const th: SiteTranslations = {
     meta: {
       title: 'เริ่มใช้งานเร็ว — Deep Work Plan',
       description:
-        'Adopt the Deep Work Plan methodology in any repository. Install the skill, run agent onboarding, then plan and execute with any AI coding agent.',
+        'นำระเบียบวิธี Deep Work Plan ไปใช้ใน repository ใดก็ได้ ติดตั้ง skill รัน onboarding ของ agent แล้ววางแผนและดำเนินการด้วย AI coding agent ใดก็ได้',
     },
     eyebrow: 'เริ่มใช้งานเร็ว',
-    title: 'Make this repository AI-first',
+    title: 'ทำให้ repository นี้เป็น AI-first',
     intro:
-      'One endpoint to turn any repository into a spec-driven, agent-ready codebase. Install the skill, let an agent onboard the repo, then plan and execute structured work with any coding agent.',
+      'หน้าเดียวสำหรับเปลี่ยน repository ใดก็ได้ให้เป็นโค้ดเบสที่ขับเคลื่อนด้วยสเปกและพร้อมสำหรับ agent ติดตั้ง skill ให้ agent ทำ onboarding ให้กับ repo แล้ววางแผนและดำเนินงานที่มีโครงสร้างด้วย coding agent ใดก็ได้',
     handoffTitle: 'คัดลอกไปยัง agent ของคุณ',
     handoffBody:
       'คัดลอก prompt ของ init.md ทั้งหมดและวางลงใน AI coding agent ของคุณ — Claude Code, Cursor, Codex หรืออื่น ๆ โดยมันจะอ่านระเบียบวิธีและข้อกำหนด ติดตั้ง skill และทำ onboarding ให้กับ repository นี้สำหรับ Deep Work Plan',
     handoffInstruction:
       'อ่านและทำตามคำแนะนำที่ https://deepworkplan.com/init.md เพื่อทำให้รีพอซิทอรีนี้เป็น AI-first',
-    handoffMdLabel: 'Self-contained agent prompt',
+    handoffMdLabel: 'พรอมต์ agent แบบสมบูรณ์ในตัวเอง',
     codeLabel: 'เทอร์มินัล',
-    whatTitle: 'What this does',
+    whatTitle: 'สิ่งนี้ทำอะไร',
     whatBody: [
-      'Adoption changes the repository in two durable ways — the pillars of the methodology.',
-      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, per-module docs, and a .agents/ skill home (with the .claude → .agents and .cursor → .agents symlinks) give every agent the context and commands it needs.',
+      'การนำไปใช้เปลี่ยนแปลง repository ในสองทางที่ยั่งยืน — เสาหลักของระเบียบวิธี',
+      'ประการแรก repository จะขับเคลื่อนด้วยสเปก: งานเริ่มต้นจากแผนและสเปกที่เขียนไว้ ไม่ใช่จากพรอมต์เฉพาะกิจ ประการที่สอง repository เองจะกลายเป็น harness ของ agent — AGENTS.md, ฐานความรู้ docs/, เอกสารแต่ละโมดูล และโฮม skill .agents/ (พร้อม symlink .claude → .agents และ .cursor → .agents) มอบบริบทและคำสั่งที่ agent ทุกตัวต้องการ',
     ],
     sequenceTitle: 'เส้นทางการนำไปใช้',
     orLabel: 'หรือ',
@@ -729,13 +729,13 @@ export const th: SiteTranslations = {
         commands: ['/dwp-verify'],
       },
     ],
-    outcomeTitle: 'The outcome',
+    outcomeTitle: 'ผลลัพธ์',
     outcome:
-      'The repository becomes spec-driven and the repository itself becomes the agent harness — context and commands travel with the code.',
+      'repository จะขับเคลื่อนด้วยสเปกและ repository เองจะกลายเป็น harness ของ agent — บริบทและคำสั่งเดินทางไปพร้อมกับโค้ด',
     nextStepsTitle: 'ขั้นตอนถัดไป',
     nextSteps: [
       { label: 'อ่านระเบียบวิธี', href: '/methodology' },
-      { label: 'Spec', href: '/spec' },
+      { label: 'อ่านสเปก', href: '/spec' },
       { label: 'เรียกดูชุดเครื่องมือ', href: '/kit' },
       { label: 'ดูตัวอย่าง', href: '/examples' },
     ],
