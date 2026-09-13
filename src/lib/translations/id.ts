@@ -1344,6 +1344,102 @@ export const id: SiteTranslations = {
         body: 'Error JSON terstruktur pada path /api, body pemulihan 404 Markdown, katalog API RFC 9727, dan manifest kapabilitas ARD — dibangun untuk konsumsi agent.',
       },
     ],
+    planTitle: 'Merencanakan dan menjalankan dengan skill',
+    planIntro:
+      'API di atas memungkinkan agent membaca situs ini. Skill DWP adalah yang memungkinkan agent menjalankan metodologinya — pasang sekali di sebuah repositori, dan skill ini membawa router beserta sembilan sub-skill, dipanggil sebagai slash command (atau dengan namanya, untuk agent yang meng-intercept slash — kebanyakan memakai # sebagai gantinya, misalnya #dwp-execute).',
+    formatTitle:
+      'Dua pilihan independen: format, dan seberapa banyak review yang Anda inginkan',
+    formatIntro:
+      'Setiap rencana memilih satu nilai dari masing-masing sumbu. Keduanya independen — rencana Lite bisa berjalan dalam mode trust, rencana Full bisa berjalan dalam mode guided, dan keduanya bisa berganti mode nanti tanpa mengganti format.',
+    formatAxes: [
+      {
+        title: 'Lite',
+        body: 'Catatan tugas hidup langsung di README rencana, di balik anchor #task-N yang stabil — tanpa file tugas terpisah. Dibuat untuk pekerjaan kecil dan berbatas: satu concern, kira-kira satu sesi kerja. Tetap rencana yang lengkap: id tugas yang stabil, sebuah Touched Surface, kriteria penerimaan, sebuah validation gate, dan Final Review — tidak pernah sekadar sketsa yang dipangkas.',
+      },
+      {
+        title: 'Full',
+        body: 'Satu file per tugas di bawah N.task_<slug>.md, untuk pekerjaan berjangka panjang yang berlangsung berjam-jam atau berhari-hari, atau ketika sebuah rencana memiliki dependensi nyata antar tugas. Sebuah rencana Lite dipromosikan ke Full belakangan dengan /dwp-refine promote saat catatan ringkas tidak lagi cukup — promosi tidak pernah menjalankan ulang pekerjaan yang sudah selesai.',
+      },
+      {
+        title: 'Guided (bawaan)',
+        body: 'dwp-create menganalisis goal, menguraikannya, dan mewujudkan rencana yang dapat ditinjau — yang sudah merupakan rencana nyata dan dapat dieksekusi, bukan sekadar draf yang akan dibuang — lalu bertanya: pertahankan, promosikan Lite ke Full, edit, atau hentikan. Manusia tetap berada dalam loop sebelum pekerjaan produk apa pun dimulai. Direkomendasikan untuk beberapa kali pertama, atau untuk apa pun yang risikonya lebih tinggi.',
+      },
+      {
+        title: 'Trust (atau auto)',
+        body: 'Tambahkan trust (atau auto) sebagai kata terakhir — misalnya /dwp-create <goal> trust — dan agent melewati putaran review, mewujudkan rencana yang sudah disetujui sebelumnya, dan langsung mengembalikan perintah execute. Jalan pintas power-user begitu Anda percaya pada alurnya; tetap mencatat setiap keputusan dan gate, hanya saja tidak berhenti untuk bertanya.',
+      },
+    ],
+    commandsTitle: 'Sembilan sub-skill',
+    commandsIntro:
+      'Setiap sub-skill dipanggil sebagai slash command di dalam repositori yang memasang skill tersebut — bukan terhadap situs web ini. Referensi lengkap untuk masing-masing ada di kit catalog.',
+    commands: [
+      {
+        name: '/dwp-create <goal>',
+        description:
+          'Mengubah sebuah goal menjadi rencana — Lite secara bawaan, Full untuk pekerjaan yang lebih besar, kedua mode dipilih dari tabel di atas.',
+        href: '/kit/dwp-create',
+      },
+      {
+        name: '/dwp-execute',
+        description:
+          'Menjalankan rencana yang ada tugas demi tugas: membacanya secara utuh, mengeksekusi setiap tugas secara berurutan, memvalidasi gate-nya, memperbarui progres.',
+        href: '/kit/dwp-execute',
+      },
+      {
+        name: '/dwp-refine',
+        description:
+          'Menambah, menghapus, atau menyusun ulang urutan tugas dalam rencana yang ada sambil menjaga pekerjaan yang sudah selesai beserta buktinya yang tercatat.',
+        href: '/kit/dwp-refine',
+      },
+      {
+        name: '/dwp-resume',
+        description:
+          'Merekonstruksi status dari file-file rencana itu sendiri dan melanjutkan rencana yang terhenti dari tugas pertamanya yang belum selesai.',
+        href: '/kit/dwp-resume',
+      },
+      {
+        name: '/dwp-status',
+        description:
+          'Melaporkan progres sebuah rencana — tugas yang selesai, sedang berjalan, tertunda — tanpa membuat perubahan apa pun.',
+        href: '/kit/dwp-status',
+      },
+      {
+        name: '/dwp-verify',
+        description:
+          'Memeriksa secara mekanis apakah repositori bersifat AI-first dan apakah rencananya terbentuk dengan baik. Tidak mengubah apa pun; melaporkan lulus atau gagal.',
+        href: '/kit/dwp-verify',
+      },
+      {
+        name: '/deepworkplan-onboard',
+        description:
+          'Menjadikan sebuah repositori AI-first: bernalar tentang stack-nya, lalu menghasilkan AGENTS.md, docs/, .agents/ yang disesuaikan, dan .dwp/ yang di-gitignore.',
+        href: '/kit/deepworkplan-onboard',
+      },
+      {
+        name: '/skill-create, /agent-create',
+        description:
+          'Sub-skill penulis: menumbuhkan kit milik repositori itu sendiri — sebuah skill yang dapat dipakai ulang untuk prosedur yang berulang, atau sebuah agent untuk peran berulang dengan model dan tool-nya sendiri.',
+        href: '/kit/skill-create',
+      },
+      {
+        name: '/dwp-upgrade',
+        description:
+          'Memeriksa apakah ada rilis skill baru yang dipublikasikan dan, hanya setelah persetujuan eksplisit, memasangnya lalu menjalankan ulang onboarding sebagai proses baru — setiap rencana yang sedang berjalan di bawah .dwp/ dibiarkan tidak tersentuh.',
+        href: '/kit',
+      },
+    ],
+    examplesTitle: 'Dua cara menjalankannya',
+    examplesIntro:
+      'Skill yang sama, sembilan perintah yang sama — format dan mode review berubah mengikuti besar dan taruhan pekerjaannya, bukan alatnya.',
+    quickFixLabel: 'Perbaikan kecil dan berbatas — Lite, trust',
+    quickFixBody:
+      'Satu concern, kira-kira satu sesi kerja, risiko rendah: lewati putaran review dan biarkan agent langsung mewujudkan serta menjalankan rencana Lite.',
+    longHorizonLabel: 'Pekerjaan berjangka panjang — Full, guided',
+    longHorizonBody:
+      'Ada dependensi nyata antar tugas, atau risikonya lebih tinggi: tinjau rencana yang diusulkan sebelum pekerjaan produk apa pun dimulai, promosikan ke Full jika ternyata goal-nya membutuhkan itu, lalu eksekusi dan lanjutkan lintas sesi sesuai kebutuhan.',
+    planCodeLabel: 'Terminal — slash command',
+    planNote:
+      'Output setiap rencana — manifest, progress log, catatan tugas, bukti gate — hidup di dalam direktori .dwp/ yang di-gitignore, di dalam repositori itu sendiri. Tidak ada yang dikirim ke atau disimpan oleh deepworkplan.com; skill ini sama sekali tidak melakukan panggilan jaringan.',
     endpointsTitle: 'Endpoint',
     endpointsIntro:
       'Endpoint inti dari API agent. Spesifikasi lengkap dan bertipe — setiap operasi, parameter, dan skema respons — berada di dokumen OpenAPI.',

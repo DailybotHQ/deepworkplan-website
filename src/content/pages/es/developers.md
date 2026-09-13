@@ -12,6 +12,52 @@ No hay claves de API que generar, ningún flujo de OAuth y ningún sandbox separ
 - **Gratis y de código abierto** — el contenido del sitio y la skill DWP tienen licencia MIT.
 - **Pensado para las máquinas** — errores JSON estructurados en `/api/*`, cuerpos de recuperación 404 en Markdown, un catálogo de API RFC 9727 y un manifiesto de capacidades ARD.
 
+## Planifica y ejecuta con la skill
+
+La API descrita arriba permite a un agente leer este sitio. La skill DWP es lo que permite a un agente ejecutar la metodología — instálala una vez en un repositorio y proporciona un enrutador más nueve sub-skills, invocadas como comandos de barra (o por su nombre, para agentes que interceptan `/` — la mayoría usa `#` en su lugar, por ejemplo `#dwp-execute`).
+
+Cada plan elige un valor en cada uno de los dos ejes independientes:
+
+- **Lite** — los registros de tareas viven en línea en el README del plan, tras anclas estables `#task-N`. Pensado para trabajo pequeño y acotado: un solo asunto, aproximadamente una sesión.
+- **Full** — un archivo por tarea bajo `N.task_<slug>.md`, para trabajo de largo horizonte que se extiende por horas o días, o cuando las tareas tienen dependencias reales. Un plan Lite se promueve a Full más tarde con `/dwp-refine promote`.
+- **Guided (por defecto)** — `dwp-create` analiza el objetivo, lo descompone y materializa un plan revisable, y luego pregunta: conservarlo, promover Lite a Full, editarlo o detenerse. Una persona permanece en el bucle antes de que empiece cualquier trabajo de producto.
+- **Trust (o auto)** — añade `trust` (o `auto`) como última palabra, por ejemplo `/dwp-create <goal> trust`, y el agente se salta la ronda de revisión y devuelve directamente el comando de ejecución.
+
+Las nueve sub-skills:
+
+| Comando | Propósito |
+|---------|-----------|
+| `/dwp-create <goal>` | Convierte un objetivo en un plan — Lite por defecto, Full para trabajo más grande. |
+| `/dwp-execute` | Ejecuta un plan existente tarea por tarea: lo lee por completo, ejecuta cada tarea en orden, valida su puerta, actualiza el progreso. |
+| `/dwp-refine` | Añade, elimina o reordena tareas en un plan existente preservando el trabajo completado y su evidencia registrada. |
+| `/dwp-resume` | Reconstruye el estado a partir de los propios archivos del plan y continúa un plan interrumpido desde su primera tarea incompleta. |
+| `/dwp-status` | Informa del progreso de un plan — tareas completadas, en curso, pendientes — sin hacer ningún cambio. |
+| `/dwp-verify` | Comprueba, mecánicamente, si el repositorio es AI-first y si sus planes están bien formados. No cambia nada; informa de aprobado o no aprobado. |
+| `/deepworkplan-onboard` | Hace que un repositorio sea AI-first: razona sobre su stack y luego genera un `AGENTS.md` adaptado, `docs/`, `.agents/` y un `.dwp/` ignorado por git. |
+| `/skill-create`, `/agent-create` | La sub-skill autora: hace crecer el kit propio del repositorio — una skill reutilizable para un procedimiento repetible, o un agente para un rol recurrente con su propio modelo y herramientas. |
+| `/dwp-upgrade` | Comprueba si hay una versión más reciente de la skill publicada y, solo tras aprobación explícita, la instala y vuelve a ejecutar la incorporación. |
+
+Una corrección pequeña y acotada — Lite, trust:
+
+```bash
+# A small, bounded fix: skip the review round, run it directly.
+/dwp-create fix the flaky checkout test trust
+/dwp-execute
+```
+
+Trabajo de largo horizonte — Full, guided:
+
+```bash
+# Long-horizon work with real stakes: review before anything runs.
+/dwp-create migrate the billing service to the new payments API
+# ...review the proposed plan, then:
+/dwp-execute
+# ...interrupted? pick up again, even in a fresh session:
+/dwp-resume
+```
+
+La salida de cada plan — manifiesto, registro de progreso, registros de tareas, evidencia de puertas — vive en un directorio `.dwp/` ignorado por git en el propio repositorio. Nada se envía a ni se almacena por deepworkplan.com; la skill no realiza ninguna llamada de red.
+
 ## Endpoints
 
 | Método | Ruta | Propósito |

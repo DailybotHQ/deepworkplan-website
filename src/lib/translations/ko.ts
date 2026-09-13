@@ -1335,6 +1335,101 @@ export const ko: SiteTranslations = {
         body: '/api 경로의 구조화된 JSON 오류, Markdown 404 복구 본문, RFC 9727 API 카탈로그, ARD 역량 매니페스트 — 에이전트 소비를 위해 구축되었습니다.',
       },
     ],
+    planTitle: '스킬로 계획하고 실행하기',
+    planIntro:
+      '위의 API는 에이전트가 이 사이트를 읽을 수 있게 해줍니다. DWP 스킬은 에이전트가 방법론을 실행할 수 있게 해주는 것입니다 — 리포지토리에 한 번 설치하면 라우터와 아홉 개의 하위 스킬이 함께 제공되며, 슬래시 명령으로 호출됩니다(또는 이름으로 호출합니다. 슬래시를 가로채는 에이전트는 대부분 대신 #을 사용합니다. 예: #dwp-execute).',
+    formatTitle: '두 가지 독립적인 선택: 형식, 그리고 원하는 검토의 정도',
+    formatIntro:
+      '모든 계획은 각 축에서 하나의 값을 선택합니다. 이 두 축은 서로 독립적입니다 — Lite 계획도 trust로 실행할 수 있고, Full 계획도 guided로 실행할 수 있으며, 어느 쪽이든 형식을 바꾸지 않고 나중에 모드를 전환할 수 있습니다.',
+    formatAxes: [
+      {
+        title: 'Lite',
+        body: '작업 기록은 계획의 README 안에, 안정적인 #task-N 앵커 뒤에 인라인으로 존재합니다 — 별도의 작업 파일은 없습니다. 범위가 작고 한정된 작업을 위해 만들어졌습니다: 하나의 관심사를, 대략 한 번의 작업 시간에. 그럼에도 완전한 계획입니다: 안정적인 작업 ID, Touched Surface, 인수 기준, 검증 게이트, 그리고 Final Review를 갖추고 있으며, 축소된 스케치가 아닙니다.',
+      },
+      {
+        title: 'Full',
+        body: 'N.task_<slug>.md 아래에 작업마다 하나의 파일을 둡니다. 몇 시간에서 며칠에 걸친 장기 작업이나, 계획에 작업 간 실제 의존성이 있을 때를 위한 것입니다. 간결한 기록만으로는 부족해지면 Lite 계획은 나중에 /dwp-refine promote로 Full로 승격할 수 있습니다 — 승격은 완료된 작업을 다시 실행하지 않습니다.',
+      },
+      {
+        title: 'Guided (default)',
+        body: 'dwp-create는 목표를 분석하고 분해하여, 검토 가능한 계획을 구체화합니다 — 이미 실제로 실행 가능한 계획이며, 버릴 수 있는 초안이 아닙니다 — 그런 다음 묻습니다: 그대로 유지할지, Lite를 Full로 승격할지, 편집할지, 아니면 중단할지. 실제 제품 작업이 시작되기 전에 사람이 루프 안에 머뭅니다. 처음 몇 번이나, 위험 부담이 더 큰 작업에 권장됩니다.',
+      },
+      {
+        title: 'Trust (or auto)',
+        body: '마지막 단어로 trust(또는 auto)를 붙이면 — 예: /dwp-create <goal> trust — 에이전트는 검토 단계를 건너뛰고, 사전 승인된 계획을 구체화하여 실행 명령을 곧바로 반환합니다. 흐름을 신뢰하게 된 후의 파워 유저용 지름길입니다. 모든 결정과 게이트는 여전히 기록되며, 다만 확인을 위해 멈추지 않을 뿐입니다.',
+      },
+    ],
+    commandsTitle: '아홉 개의 하위 스킬',
+    commandsIntro:
+      '각 하위 스킬은 스킬을 설치한 리포지토리 내부에서 슬래시 명령으로 호출됩니다 — 이 웹사이트를 대상으로 하지 않습니다. 각각의 전체 레퍼런스는 키트 카탈로그에 있습니다.',
+    commands: [
+      {
+        name: '/dwp-create <goal>',
+        description:
+          '목표를 계획으로 바꿉니다 — 기본은 Lite, 더 큰 작업에는 Full, 어느 모드든 위 표를 따릅니다.',
+        href: '/kit/dwp-create',
+      },
+      {
+        name: '/dwp-execute',
+        description:
+          '기존 계획을 작업 단위로 실행합니다: 계획 전체를 읽고, 각 작업을 순서대로 실행하고, 게이트를 검증하고, 진행 상황을 업데이트합니다.',
+        href: '/kit/dwp-execute',
+      },
+      {
+        name: '/dwp-refine',
+        description:
+          '완료된 작업과 그 기록된 증거를 보존하면서 기존 계획의 작업을 추가, 제거, 또는 재정렬합니다.',
+        href: '/kit/dwp-refine',
+      },
+      {
+        name: '/dwp-resume',
+        description:
+          '계획 자체의 파일에서 상태를 재구성하고, 중단된 계획을 첫 번째 미완료 작업부터 이어갑니다.',
+        href: '/kit/dwp-resume',
+      },
+      {
+        name: '/dwp-status',
+        description:
+          '계획의 진행 상황 — 완료, 진행 중, 대기 중인 작업 — 을 아무것도 변경하지 않고 보고합니다.',
+        href: '/kit/dwp-status',
+      },
+      {
+        name: '/dwp-verify',
+        description:
+          '리포지토리가 AI-first인지, 그 계획들이 올바른 형식을 갖추었는지를 기계적으로 확인합니다. 아무것도 바꾸지 않으며, 통과 또는 실패만 보고합니다.',
+        href: '/kit/dwp-verify',
+      },
+      {
+        name: '/deepworkplan-onboard',
+        description:
+          '리포지토리를 AI-first로 만듭니다: 그 스택에 대해 추론한 다음, 적응된 AGENTS.md, docs/, .agents/, 그리고 gitignore된 .dwp/를 생성합니다.',
+        href: '/kit/deepworkplan-onboard',
+      },
+      {
+        name: '/skill-create, /agent-create',
+        description:
+          '작성자용 하위 스킬입니다: 리포지토리 자체의 키트를 키웁니다 — 반복 가능한 절차를 위한 재사용 가능한 스킬이나, 자체 모델과 도구를 가진 반복되는 역할을 위한 에이전트입니다.',
+        href: '/kit/skill-create',
+      },
+      {
+        name: '/dwp-upgrade',
+        description:
+          '더 새로운 공개 스킬 릴리스가 있는지 확인하고, 명시적 승인 후에만 그것을 설치하고 온보딩을 새로 다시 실행합니다 — .dwp/ 아래의 진행 중인 모든 계획은 그대로 유지됩니다.',
+        href: '/kit',
+      },
+    ],
+    examplesTitle: '실행하는 두 가지 방법',
+    examplesIntro:
+      '같은 스킬, 같은 아홉 개의 명령 — 도구가 아니라 작업의 규모와 위험 부담에 따라 형식과 검토 모드가 달라집니다.',
+    quickFixLabel: '작고 한정된 수정 — Lite, trust',
+    quickFixBody:
+      '하나의 관심사를, 대략 한 번의 작업 시간에, 위험 부담은 낮게: 검토 단계를 건너뛰고 에이전트가 Lite 계획을 곧바로 구체화하고 실행하게 합니다.',
+    longHorizonLabel: '장기적인 작업 — Full, guided',
+    longHorizonBody:
+      '작업 간 실제 의존성이 있거나 위험 부담이 더 클 때: 실제 제품 작업이 시작되기 전에 제안된 계획을 검토하고, 목표에 필요하다면 Full로 승격한 다음, 필요에 따라 세션을 넘나들며 실행하고 재개합니다.',
+    planCodeLabel: '터미널 — 슬래시 명령',
+    planNote:
+      '모든 계획의 결과물 — 매니페스트, 진행 로그, 작업 기록, 게이트 증거 — 은 리포지토리 자체 안의 gitignore된 .dwp/ 디렉터리 아래에 있습니다. deepworkplan.com으로 전송되거나 저장되는 것은 전혀 없습니다. 이 스킬은 어떠한 네트워크 호출도 하지 않습니다.',
     endpointsTitle: '엔드포인트',
     endpointsIntro:
       '에이전트 API의 핵심 엔드포인트입니다. 완전하고 타입이 지정된 스펙 — 모든 작업, 매개변수, 응답 스키마 — 은 OpenAPI 문서에 있습니다.',

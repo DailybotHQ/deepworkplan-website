@@ -12,6 +12,52 @@ description: "Deep Work Plan 的代理接口面：只读、零认证、带版本
 - **免费且开源** — 站点内容与 DWP 技能均采用 MIT 许可。
 - **机器优先** — `/api/*` 返回结构化的 JSON 错误、Markdown 404 恢复响应体、RFC 9727 API 目录，以及 ARD 能力清单。
 
+## 通过技能规划并执行
+
+上面的 API 让代理能够读取本站点。DWP 技能则让代理能够运行这套方法论——只需在仓库中安装一次，它就会附带一个路由器和九项子技能，以斜杠命令的形式调用（或按名称调用，对于会拦截斜杠的代理，大多数改用 `#` 代替，例如 `#dwp-execute`）。
+
+每个计划都从两个独立的维度中各选取一个值：
+
+- **Lite** — 任务记录直接内嵌在计划的 README 中，位于稳定的 `#task-N` 锚点之后。专为范围明确的小型工作而设计：一个关注点，大约一次坐下就能完成。
+- **Full** — 在 `N.task_<slug>.md` 下每个任务对应一个文件，用于持续数小时或数天的长周期工作，或当任务之间存在真正的依赖关系时。Lite 计划可以之后通过 `/dwp-refine promote` 提升为 Full。
+- **Guided (default)** — `dwp-create` 会分析目标并具体化出一份可供审阅的计划，随后询问：保留它、将 Lite 提升为 Full、编辑它，还是停止。在任何实际产品工作开始之前，都会有人类留在决策环节中。
+- **Trust (or auto)** — 在末尾附加 `trust`（或 `auto`），代理就会跳过审阅环节，直接具体化出一份预先批准的计划，并直接返回执行命令。
+
+九项子技能：
+
+| 命令 | 说明 |
+|------|------|
+| `/dwp-create <goal>` | 把一个目标变成一份计划——默认是 Lite，更大的工作则用 Full。 |
+| `/dwp-execute` | 逐任务运行一份既有计划：完整读取计划，按顺序执行每个任务，验证其关卡，更新进度。 |
+| `/dwp-refine` | 在保留已完成工作及其记录证据的前提下，对既有计划中的任务进行增加、移除或重新排序。 |
+| `/dwp-resume` | 从计划自身的文件中重建状态，并从第一个未完成的任务继续一份被中断的计划。 |
+| `/dwp-status` | 报告一份计划的进度——已完成、进行中、待处理的任务——而不做任何改动。 |
+| `/dwp-verify` | 机械式地检查该仓库是否 AI-first，以及其计划是否格式规范。 |
+| `/deepworkplan-onboard` | 让一个仓库变得 AI-first：生成经过适配的 `AGENTS.md`、`docs/`、`.agents/`，以及一个被 gitignore 的 `.dwp/`。 |
+| `/skill-create`、`/agent-create` | 作者向的子技能：壮大仓库自身的套件。 |
+| `/dwp-upgrade` | 检查是否有已发布的更新版技能，仅在获得明确批准后才安装并重新执行上线流程。 |
+
+一次范围明确的小修复——Lite、trust：
+
+```bash
+# A small, bounded fix: skip the review round, run it directly.
+/dwp-create fix the flaky checkout test trust
+/dwp-execute
+```
+
+长周期工作——Full、guided：
+
+```bash
+# Long-horizon work with real stakes: review before anything runs.
+/dwp-create migrate the billing service to the new payments API
+# ...review the proposed plan, then:
+/dwp-execute
+# ...interrupted? pick up again, even in a fresh session:
+/dwp-resume
+```
+
+每一份计划的输出——清单、进度日志、任务记录、关卡证据——都保存在仓库自身内部一个被 gitignore 的 `.dwp/` 目录下。没有任何内容会被发送到 deepworkplan.com 或由其存储。
+
 ## 端点
 
 | 方法 | 路径 | 用途 |

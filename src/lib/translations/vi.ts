@@ -1343,6 +1343,101 @@ export const vi: SiteTranslations = {
         body: 'Lỗi JSON có cấu trúc trên các đường dẫn /api, phần thân khôi phục 404 bằng Markdown, danh mục API RFC 9727, và manifest năng lực ARD — được xây dựng cho agent tiêu thụ.',
       },
     ],
+    planTitle: 'Lập kế hoạch và thực thi bằng skill',
+    planIntro:
+      'API ở trên cho phép agent đọc trang web này. Skill DWP là thứ cho phép agent chạy phương pháp luận — cài đặt một lần vào một repository và nó cung cấp một router cùng chín sub-skill, được gọi dưới dạng slash command (hoặc theo tên, đối với các agent chặn dấu gạch chéo — hầu hết dùng # thay thế, ví dụ #dwp-execute).',
+    formatTitle: 'Hai lựa chọn độc lập: định dạng, và mức độ rà soát bạn muốn',
+    formatIntro:
+      'Mỗi kế hoạch chọn một giá trị từ mỗi trục. Hai trục này độc lập với nhau — một kế hoạch Lite có thể chạy ở chế độ trust, một kế hoạch Full có thể chạy ở chế độ guided, và cả hai đều có thể chuyển chế độ sau này mà không cần đổi định dạng.',
+    formatAxes: [
+      {
+        title: 'Lite',
+        body: 'Bản ghi tác vụ nằm trực tiếp trong README của kế hoạch, phía sau các anchor #task-N ổn định — không có tệp tác vụ riêng. Được xây dựng cho công việc nhỏ, có giới hạn: một mối quan tâm, trong khoảng một lần ngồi làm. Vẫn là một kế hoạch đầy đủ: id tác vụ ổn định, một Touched Surface, tiêu chí chấp nhận, một cổng kiểm chứng, và một Final Review — không bao giờ là một bản phác thảo bị cắt xén.',
+      },
+      {
+        title: 'Full',
+        body: 'Mỗi tác vụ có một tệp riêng dưới dạng N.task_<slug>.md, dành cho công việc dài hơi kéo dài hàng giờ hoặc hàng ngày, hoặc khi kế hoạch có các phụ thuộc thực sự giữa các tác vụ. Một kế hoạch Lite có thể được nâng cấp lên Full sau này bằng /dwp-refine promote khi các bản ghi gọn gàng không còn đủ nữa — việc nâng cấp không bao giờ thực thi lại công việc đã hoàn thành.',
+      },
+      {
+        title: 'Guided (default)',
+        body: 'dwp-create phân tích mục tiêu, phân rã nó, và cụ thể hóa một kế hoạch có thể rà soát — đã là kế hoạch thật, có thể thực thi, không bao giờ là một bản nháp dùng để bỏ đi — sau đó hỏi: giữ nguyên, nâng cấp Lite lên Full, chỉnh sửa, hay dừng lại. Con người luôn ở trong vòng lặp trước khi bất kỳ công việc sản phẩm nào bắt đầu. Được khuyến nghị cho vài lần đầu, hoặc cho bất cứ việc gì có rủi ro cao hơn.',
+      },
+      {
+        title: 'Trust (or auto)',
+        body: 'Thêm trust (hoặc auto) làm từ cuối cùng — ví dụ /dwp-create <goal> trust — và agent sẽ bỏ qua vòng rà soát, cụ thể hóa một kế hoạch đã được phê duyệt trước, và trả về ngay lệnh thực thi. Đây là lối tắt dành cho người dùng thành thạo một khi bạn đã tin tưởng quy trình; nó vẫn ghi lại mọi quyết định và cổng kiểm chứng, chỉ là không dừng lại để hỏi.',
+      },
+    ],
+    commandsTitle: 'Chín sub-skill',
+    commandsIntro:
+      'Mỗi sub-skill được gọi dưới dạng một slash command bên trong repository đã cài đặt skill — không phải nhắm vào trang web này. Tài liệu tham khảo đầy đủ cho từng cái nằm trong danh mục kit.',
+    commands: [
+      {
+        name: '/dwp-create <goal>',
+        description:
+          'Biến một mục tiêu thành một kế hoạch — mặc định là Lite, Full cho công việc lớn hơn, cả hai chế độ đều theo bảng ở trên.',
+        href: '/kit/dwp-create',
+      },
+      {
+        name: '/dwp-execute',
+        description:
+          'Chạy một kế hoạch hiện có theo từng tác vụ: đọc toàn bộ kế hoạch, thực thi từng tác vụ theo thứ tự, kiểm chứng cổng của nó, cập nhật tiến độ.',
+        href: '/kit/dwp-execute',
+      },
+      {
+        name: '/dwp-refine',
+        description:
+          'Thêm, xóa, hoặc sắp xếp lại các tác vụ trong một kế hoạch hiện có trong khi vẫn giữ nguyên công việc đã hoàn thành và bằng chứng đã ghi lại của nó.',
+        href: '/kit/dwp-refine',
+      },
+      {
+        name: '/dwp-resume',
+        description:
+          'Tái tạo trạng thái từ chính các tệp của kế hoạch và tiếp tục một kế hoạch bị gián đoạn từ tác vụ chưa hoàn thành đầu tiên của nó.',
+        href: '/kit/dwp-resume',
+      },
+      {
+        name: '/dwp-status',
+        description:
+          'Báo cáo tiến độ của một kế hoạch — các tác vụ đã hoàn thành, đang thực hiện, đang chờ — mà không thực hiện bất kỳ thay đổi nào.',
+        href: '/kit/dwp-status',
+      },
+      {
+        name: '/dwp-verify',
+        description:
+          'Kiểm tra, một cách máy móc, xem repository có phải AI-first hay không và các kế hoạch của nó có đúng định dạng hay không. Không thay đổi gì cả; chỉ báo cáo đạt hay không đạt.',
+        href: '/kit/dwp-verify',
+      },
+      {
+        name: '/deepworkplan-onboard',
+        description:
+          'Biến một repository thành AI-first: suy luận về stack của nó, sau đó tạo ra AGENTS.md, docs/, .agents/ đã được điều chỉnh, và một .dwp/ được gitignore.',
+        href: '/kit/deepworkplan-onboard',
+      },
+      {
+        name: '/skill-create, /agent-create',
+        description:
+          'Sub-skill dành cho tác giả: phát triển kit của chính repository — một skill có thể tái sử dụng cho một quy trình lặp lại, hoặc một agent cho một vai trò lặp lại với mô hình và công cụ riêng của nó.',
+        href: '/kit/skill-create',
+      },
+      {
+        name: '/dwp-upgrade',
+        description:
+          'Kiểm tra xem có bản phát hành skill mới hơn đã công bố hay không, và chỉ sau khi được phê duyệt rõ ràng mới cài đặt nó và chạy lại onboarding như một lượt hoàn toàn mới — mọi kế hoạch đang chạy dở dưới .dwp/ đều được giữ nguyên, không bị đụng tới.',
+        href: '/kit',
+      },
+    ],
+    examplesTitle: 'Hai cách để chạy nó',
+    examplesIntro:
+      'Cùng một skill, cùng chín lệnh — định dạng và chế độ rà soát thay đổi theo quy mô và rủi ro của công việc, chứ không phải theo công cụ.',
+    quickFixLabel: 'Một bản sửa lỗi nhỏ, có giới hạn — Lite, trust',
+    quickFixBody:
+      'Một mối quan tâm, trong khoảng một lần ngồi làm, rủi ro thấp: bỏ qua vòng rà soát và để agent cụ thể hóa và chạy trực tiếp một kế hoạch Lite.',
+    longHorizonLabel: 'Công việc dài hơi — Full, guided',
+    longHorizonBody:
+      'Có các phụ thuộc thực sự giữa các tác vụ, hoặc rủi ro cao hơn: rà soát kế hoạch được đề xuất trước khi bất kỳ công việc sản phẩm nào bắt đầu, nâng cấp lên Full nếu mục tiêu thực sự cần điều đó, sau đó thực thi và tiếp tục qua nhiều phiên khi cần.',
+    planCodeLabel: 'Terminal — slash command',
+    planNote:
+      'Đầu ra của mỗi kế hoạch — manifest, nhật ký tiến độ, bản ghi tác vụ, bằng chứng cổng — nằm trong một thư mục .dwp/ được gitignore, bên trong chính repository. Không có gì được gửi đến hay lưu trữ bởi deepworkplan.com; skill này hoàn toàn không thực hiện bất kỳ lệnh gọi mạng nào.',
     endpointsTitle: 'Các endpoint',
     endpointsIntro:
       'Các endpoint cốt lõi của API agent. Đặc tả hoàn chỉnh, có kiểu — mọi thao tác, tham số và schema phản hồi — nằm trong tài liệu OpenAPI.',

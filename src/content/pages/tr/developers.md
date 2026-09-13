@@ -12,6 +12,52 @@ description: "Deep Work Plan'ın ajan yüzeyi: sürümlü, salt okunur ve kimlik
 - **Ücretsiz ve açık kaynak** — site içeriği ve DWP skill'i MIT lisanslıdır.
 - **Makine öncelikli** — `/api/*` yollarında yapılandırılmış JSON hataları, Markdown 404 kurtarma gövdeleri, RFC 9727 API kataloğu ve bir ARD yetenek manifestosu.
 
+## Skill ile planlayın ve yürütün
+
+Yukarıdaki API, bir ajanın bu siteyi okumasını sağlar. DWP skill'i ise bir ajanın metodolojiyi çalıştırmasını sağlayan şeydir — bir depoya bir kez kurulur ve bir yönlendirici ile dokuz alt skill getirir; bunlar eğik çizgi komutları olarak çağrılır (ya da isimle, eğik çizgiyi yakalayan ajanlar için — çoğu bunun yerine `#` kullanır, örn. `#dwp-execute`).
+
+Her plan, birbirinden bağımsız iki eksenin her birinden bir değer seçer:
+
+- **Lite** — Görev kayıtları, planın README'sinde, sabit `#task-N` çapaları arkasında yaşar. Küçük, sınırlı işler için tasarlanmıştır: tek bir konu, yaklaşık bir oturum.
+- **Full** — `N.task_<slug>.md` altında görev başına bir dosya; saatler veya günler süren uzun soluklu işler için, ya da görevler arasında gerçek bağımlılıklar olduğunda. Bir Lite plan sonradan `/dwp-refine promote` ile Full'e yükseltilir.
+- **Guided (varsayılan)** — `dwp-create` hedefi analiz eder, onu ayrıştırır ve incelenebilir bir plan somutlaştırır, ardından sorar: koru, Lite'ı Full'e yükselt, düzenle ya da durdur. Herhangi bir ürün işi başlamadan önce bir insan döngüde kalır.
+- **Trust (veya auto)** — Son kelime olarak `trust` (veya `auto`) ekleyin, örn. `/dwp-create <goal> trust`, ve ajan inceleme turunu atlayıp execute komutunu doğrudan döndürür.
+
+Dokuz alt skill:
+
+| Komut | Amaç |
+|---------|---------|
+| `/dwp-create <goal>` | Bir hedefi plana dönüştürür — varsayılan olarak Lite, daha büyük işler için Full. |
+| `/dwp-execute` | Var olan bir planı görev görev çalıştırır: tamamen okur, her görevi sırayla yürütür, kapısını doğrular, ilerlemeyi günceller. |
+| `/dwp-refine` | Tamamlanmış işi ve kayıtlı kanıtını koruyarak var olan bir plandaki görevleri ekler, kaldırır veya yeniden sıralar. |
+| `/dwp-resume` | Durumu planın kendi dosyalarından yeniden inşa eder ve kesintiye uğramış bir planı ilk tamamlanmamış görevinden itibaren sürdürür. |
+| `/dwp-status` | Hiçbir değişiklik yapmadan bir planın ilerlemesini raporlar — tamamlanan, sürmekte olan, bekleyen görevler. |
+| `/dwp-verify` | Deponun AI-first olup olmadığını ve planlarının iyi biçimlendirilip biçimlendirilmediğini mekanik olarak denetler. Hiçbir şeyi değiştirmez; geçti ya da kaldı raporu verir. |
+| `/deepworkplan-onboard` | Bir depoyu AI-first hale getirir: yığını hakkında akıl yürütür, ardından uyarlanmış bir `AGENTS.md`, `docs/`, `.agents/` ve gitignore edilmiş bir `.dwp/` üretir. |
+| `/skill-create`, `/agent-create` | Yazar alt skill'i: deponun kendi kitini büyütür — tekrarlanan bir prosedür için yeniden kullanılabilir bir skill, ya da yinelenen bir rol için bir ajan. |
+| `/dwp-upgrade` | Daha yeni yayımlanmış bir skill sürümü olup olmadığını denetler ve yalnızca açık onaydan sonra onu kurar, onboarding'i tekrar çalıştırır. |
+
+Küçük, sınırlı bir düzeltme — Lite, trust:
+
+```bash
+# A small, bounded fix: skip the review round, run it directly.
+/dwp-create fix the flaky checkout test trust
+/dwp-execute
+```
+
+Uzun soluklu iş — Full, guided:
+
+```bash
+# Long-horizon work with real stakes: review before anything runs.
+/dwp-create migrate the billing service to the new payments API
+# ...review the proposed plan, then:
+/dwp-execute
+# ...interrupted? pick up again, even in a fresh session:
+/dwp-resume
+```
+
+Her planın çıktısı — manifesto, ilerleme günlüğü, görev kayıtları, kapı kanıtı — deponun kendi içinde gitignore edilmiş bir `.dwp/` dizininde yaşar. Hiçbir şey deepworkplan.com'a gönderilmez ya da orada saklanmaz; skill hiçbir ağ çağrısı yapmaz.
+
 ## Uç noktalar
 
 | Metot | Yol | Amaç |

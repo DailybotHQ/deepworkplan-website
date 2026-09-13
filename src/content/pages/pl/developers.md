@@ -12,6 +12,48 @@ Nie ma tu kluczy API do wygenerowania, żadnego tańca z OAuth i żadnej piaskow
 - **Bezpłatnie i open source** — treści witryny i umiejętność DWP są na licencji MIT.
 - **Najpierw maszyny** — ustrukturyzowane błędy JSON na `/api/*`, treści odzyskiwania 404 w Markdown, katalog API RFC 9727 i manifest możliwości ARD.
 
+## Planuj i wykonuj za pomocą skilla
+
+Powyższe API pozwala agentowi czytać tę witrynę. Skill DWP to to, co pozwala agentowi uruchamiać metodykę — zainstaluj go raz w repozytorium, a przyniesie router plus dziewięć sub-skilli, wywoływanych jako komendy ze slashem.
+
+- **Lite** — zapisy zadań bezpośrednio w README planu, dla małej, ograniczonej pracy.
+- **Full** — jeden plik na zadanie, dla pracy długoterminowej lub z realnymi zależnościami między zadaniami.
+- **Guided (domyślnie)** — agent materializuje plan gotowy do recenzji i pyta przed rozpoczęciem pracy produktowej.
+- **Trust (lub auto)** — pomija rundę recenzji i od razu wykonuje wcześniej zatwierdzony plan.
+
+| Komenda | Opis |
+|---------|------|
+| `/dwp-create <goal>` | Zamienia cel w plan — Lite domyślnie, Full dla większej pracy. |
+| `/dwp-execute` | Wykonuje istniejący plan zadanie po zadaniu: czyta go w całości, wykonuje każde zadanie po kolei, waliduje jego bramkę, aktualizuje postęp. |
+| `/dwp-refine` | Dodaje, usuwa lub zmienia kolejność zadań w istniejącym planie, zachowując ukończoną pracę i jej zarejestrowane dowody. |
+| `/dwp-resume` | Odtwarza stan z własnych plików planu i kontynuuje przerwany plan od pierwszego nieukończonego zadania. |
+| `/dwp-status` | Raportuje postęp planu — ukończone, w toku, oczekujące — bez wprowadzania żadnych zmian. |
+| `/dwp-verify` | Mechanicznie sprawdza, czy repozytorium jest AI-first i czy jego plany są dobrze skonstruowane. Niczego nie zmienia; raportuje pass albo fail. |
+| `/deepworkplan-onboard` | Czyni repozytorium AI-first: analizuje jego stack, a następnie generuje dostosowany AGENTS.md, docs/, .agents/ i ignorowany przez git .dwp/. |
+| `/skill-create`, `/agent-create` | Sub-skill autorski: rozwija własny kit repozytorium — skilla albo agenta. |
+| `/dwp-upgrade` | Sprawdza, czy jest nowsze wydanie skilla, i dopiero po zgodzie instaluje je oraz ponownie uruchamia onboarding. |
+
+Mała, ograniczona poprawka — Lite, trust:
+
+```bash
+# A small, bounded fix: skip the review round, run it directly.
+/dwp-create fix the flaky checkout test trust
+/dwp-execute
+```
+
+Praca długoterminowa — Full, guided:
+
+```bash
+# Long-horizon work with real stakes: review before anything runs.
+/dwp-create migrate the billing service to the new payments API
+# ...review the proposed plan, then:
+/dwp-execute
+# ...interrupted? pick up again, even in a fresh session:
+/dwp-resume
+```
+
+Wynik każdego planu — manifest, log postępu, zapisy zadań, dowody bramek — żyje pod ignorowanym przez git katalogiem `.dwp/` w samym repozytorium. Nic nie jest wysyłane do deepworkplan.com ani przez niego przechowywane; skill nie wykonuje żadnych połączeń sieciowych.
+
 ## Punkty końcowe
 
 | Metoda | Ścieżka | Cel |

@@ -12,6 +12,52 @@ Tidak ada kunci API untuk dibuat, tidak ada alur OAuth, dan tidak ada sandbox ya
 - **Gratis dan open source** — konten situs dan skill DWP berlisensi MIT.
 - **Machine-first** — error JSON terstruktur pada `/api/*`, body pemulihan 404 Markdown, katalog API RFC 9727, dan manifest kapabilitas ARD.
 
+## Merencanakan dan menjalankan dengan skill
+
+API di atas memungkinkan agent membaca situs ini. Skill DWP adalah yang memungkinkan agent menjalankan metodologinya — pasang sekali di sebuah repositori, dan skill ini membawa router beserta sembilan sub-skill, dipanggil sebagai slash command (atau dengan namanya, untuk agent yang meng-intercept slash — kebanyakan memakai `#` sebagai gantinya, misalnya `#dwp-execute`).
+
+Setiap rencana memilih satu nilai dari masing-masing dua sumbu yang independen:
+
+- **Lite** — Catatan tugas hidup langsung di README rencana, di balik anchor `#task-N` yang stabil. Dibuat untuk pekerjaan kecil dan berbatas: satu concern, kira-kira satu sesi kerja.
+- **Full** — Satu file per tugas di bawah `N.task_<slug>.md`, untuk pekerjaan berjangka panjang yang berlangsung berjam-jam atau berhari-hari, atau ketika ada dependensi nyata antar tugas. Sebuah rencana Lite dipromosikan ke Full belakangan dengan `/dwp-refine promote`.
+- **Guided (bawaan)** — `dwp-create` menganalisis goal, menguraikannya, dan mewujudkan rencana yang dapat ditinjau, lalu bertanya: pertahankan, promosikan Lite ke Full, edit, atau hentikan. Manusia tetap berada dalam loop sebelum pekerjaan produk apa pun dimulai.
+- **Trust (atau auto)** — Tambahkan `trust` (atau `auto`) sebagai kata terakhir, misalnya `/dwp-create <goal> trust`, dan agent melewati putaran review lalu langsung mengembalikan perintah execute.
+
+Sembilan sub-skill:
+
+| Perintah | Tujuan |
+|---------|---------|
+| `/dwp-create <goal>` | Mengubah sebuah goal menjadi rencana — Lite secara bawaan, Full untuk pekerjaan yang lebih besar. |
+| `/dwp-execute` | Menjalankan rencana yang ada tugas demi tugas: membacanya secara utuh, mengeksekusi setiap tugas secara berurutan, memvalidasi gate-nya, memperbarui progres. |
+| `/dwp-refine` | Menambah, menghapus, atau menyusun ulang urutan tugas dalam rencana yang ada sambil menjaga pekerjaan yang sudah selesai beserta buktinya yang tercatat. |
+| `/dwp-resume` | Merekonstruksi status dari file-file rencana itu sendiri dan melanjutkan rencana yang terhenti dari tugas pertamanya yang belum selesai. |
+| `/dwp-status` | Melaporkan progres sebuah rencana — tugas yang selesai, sedang berjalan, tertunda — tanpa membuat perubahan apa pun. |
+| `/dwp-verify` | Memeriksa secara mekanis apakah repositori bersifat AI-first dan apakah rencananya terbentuk dengan baik. Tidak mengubah apa pun; melaporkan lulus atau gagal. |
+| `/deepworkplan-onboard` | Menjadikan sebuah repositori AI-first: bernalar tentang stack-nya, lalu menghasilkan `AGENTS.md`, `docs/`, `.agents/` yang disesuaikan, dan `.dwp/` yang di-gitignore. |
+| `/skill-create`, `/agent-create` | Sub-skill penulis: menumbuhkan kit milik repositori itu sendiri — sebuah skill yang dapat dipakai ulang untuk prosedur yang berulang, atau sebuah agent untuk peran berulang. |
+| `/dwp-upgrade` | Memeriksa apakah ada rilis skill baru yang dipublikasikan dan, hanya setelah persetujuan eksplisit, memasangnya lalu menjalankan ulang onboarding. |
+
+Perbaikan kecil dan berbatas — Lite, trust:
+
+```bash
+# A small, bounded fix: skip the review round, run it directly.
+/dwp-create fix the flaky checkout test trust
+/dwp-execute
+```
+
+Pekerjaan berjangka panjang — Full, guided:
+
+```bash
+# Long-horizon work with real stakes: review before anything runs.
+/dwp-create migrate the billing service to the new payments API
+# ...review the proposed plan, then:
+/dwp-execute
+# ...interrupted? pick up again, even in a fresh session:
+/dwp-resume
+```
+
+Output setiap rencana — manifest, progress log, catatan tugas, bukti gate — hidup di dalam direktori `.dwp/` yang di-gitignore, di dalam repositori itu sendiri. Tidak ada yang dikirim ke atau disimpan oleh deepworkplan.com; skill ini sama sekali tidak melakukan panggilan jaringan.
+
 ## Endpoint
 
 | Metode | Path | Tujuan |

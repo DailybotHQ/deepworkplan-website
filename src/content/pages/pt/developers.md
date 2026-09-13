@@ -12,6 +12,48 @@ Não há chaves de API para gerar, nenhum fluxo de OAuth e nenhum sandbox separa
 - **Grátis e de código aberto** — o conteúdo do site e a skill DWP são licenciados sob MIT.
 - **Pensado para as máquinas** — erros JSON estruturados em `/api/*`, corpos de recuperação 404 em Markdown, um catálogo de API RFC 9727 e um manifesto de capacidades ARD.
 
+## Planeje e execute com a skill
+
+A API acima permite que um agente leia este site. A skill DWP é o que permite que um agente execute a metodologia — instale-a uma vez em um repositório e ela traz um roteador mais nove sub-skills, invocadas como comandos de barra.
+
+- **Lite** — registros de tarefa inline no README do plano, feito para trabalho pequeno e delimitado.
+- **Full** — um arquivo por tarefa, para trabalho de longo alcance ou com dependências reais entre tarefas.
+- **Guided (padrão)** — o agente materializa um plano revisável e pergunta antes de começar qualquer trabalho de produto.
+- **Trust (ou auto)** — pula a rodada de revisão e executa o plano pré-aprovado diretamente.
+
+| Comando | Descrição |
+|---------|-----------|
+| `/dwp-create <goal>` | Transforma um objetivo em plano — Lite por padrão, Full para trabalho maior. |
+| `/dwp-execute` | Executa um plano existente tarefa por tarefa: lê-o por completo, executa cada tarefa em ordem, valida seu gate, atualiza o progresso. |
+| `/dwp-refine` | Adiciona, remove ou reordena tarefas em um plano existente preservando o trabalho concluído e suas evidências registradas. |
+| `/dwp-resume` | Reconstrói o estado a partir dos próprios arquivos do plano e continua um plano interrompido a partir da primeira tarefa incompleta. |
+| `/dwp-status` | Reporta o progresso de um plano — concluídas, em andamento, pendentes — sem fazer nenhuma alteração. |
+| `/dwp-verify` | Verifica, mecanicamente, se o repositório é AI-first e se seus planos estão bem formados. Não muda nada; reporta aprovado ou reprovado. |
+| `/deepworkplan-onboard` | Torna um repositório AI-first: raciocina sobre seu stack e gera um AGENTS.md, docs/, .agents/ adaptados e um .dwp/ ignorado pelo git. |
+| `/skill-create`, `/agent-create` | A sub-skill de autoria: expande o próprio kit do repositório — uma skill ou um agente. |
+| `/dwp-upgrade` | Verifica se há um release mais novo da skill e, somente após aprovação, instala-o e reexecuta o onboarding. |
+
+Uma correção pequena e delimitada — Lite, trust:
+
+```bash
+# A small, bounded fix: skip the review round, run it directly.
+/dwp-create fix the flaky checkout test trust
+/dwp-execute
+```
+
+Trabalho de longo alcance — Full, guided:
+
+```bash
+# Long-horizon work with real stakes: review before anything runs.
+/dwp-create migrate the billing service to the new payments API
+# ...review the proposed plan, then:
+/dwp-execute
+# ...interrupted? pick up again, even in a fresh session:
+/dwp-resume
+```
+
+A saída de cada plano — manifesto, log de progresso, registros de tarefa, evidência de gate — vive sob um diretório `.dwp/` ignorado pelo git no próprio repositório. Nada é enviado a ou armazenado pelo deepworkplan.com; a skill não faz nenhuma chamada de rede.
+
 ## Endpoints
 
 | Método | Rota | Propósito |

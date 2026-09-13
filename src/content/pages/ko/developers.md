@@ -12,6 +12,52 @@ description: "Deep Work Plan의 에이전트 표면: 읽기 전용이며 인증 
 - **무료 및 오픈 소스** — 사이트 콘텐츠와 DWP 스킬은 MIT 라이선스입니다.
 - **머신 퍼스트** — `/api/*`의 구조화된 JSON 오류, Markdown 404 복구 본문, RFC 9727 API 카탈로그, ARD 역량 매니페스트.
 
+## 스킬로 계획하고 실행하기
+
+위의 API는 에이전트가 이 사이트를 읽을 수 있게 해줍니다. DWP 스킬은 에이전트가 방법론을 실행할 수 있게 해주는 것입니다 — 리포지토리에 한 번 설치하면 라우터와 아홉 개의 하위 스킬이 함께 제공되며, 슬래시 명령으로 호출됩니다(또는 이름으로 호출합니다. 슬래시를 가로채는 에이전트는 대부분 대신 `#`을 사용합니다. 예: `#dwp-execute`).
+
+모든 계획은 두 가지 독립적인 축에서 각각 하나의 값을 선택합니다.
+
+- **Lite** — 작업 기록은 계획의 README 안에, 안정적인 `#task-N` 앵커 뒤에 인라인으로 존재합니다. 범위가 작고 한정된 작업을 위해 만들어졌습니다: 하나의 관심사를, 대략 한 번의 작업 시간에.
+- **Full** — `N.task_<slug>.md` 아래에 작업마다 하나의 파일을 둡니다. 몇 시간에서 며칠에 걸친 장기 작업이나, 작업 간 실제 의존성이 있을 때를 위한 것입니다. Lite 계획은 나중에 `/dwp-refine promote`로 Full로 승격할 수 있습니다.
+- **Guided (default)** — `dwp-create`는 목표를 분석하여 검토 가능한 계획을 구체화한 다음, 그대로 유지할지, Lite를 Full로 승격할지, 편집할지, 아니면 중단할지 묻습니다. 실제 제품 작업이 시작되기 전에 사람이 루프 안에 머뭅니다.
+- **Trust (or auto)** — 마지막 단어로 `trust`(또는 `auto`)를 붙이면 에이전트는 검토 단계를 건너뛰고, 사전 승인된 계획을 구체화하여 실행 명령을 곧바로 반환합니다.
+
+아홉 개의 하위 스킬:
+
+| 명령 | 설명 |
+|------|------|
+| `/dwp-create <goal>` | 목표를 계획으로 바꿉니다 — 기본은 Lite, 더 큰 작업에는 Full. |
+| `/dwp-execute` | 기존 계획을 작업 단위로 실행합니다: 계획 전체를 읽고, 각 작업을 순서대로 실행하고, 게이트를 검증하고, 진행 상황을 업데이트합니다. |
+| `/dwp-refine` | 완료된 작업과 그 기록된 증거를 보존하면서 기존 계획의 작업을 추가, 제거, 또는 재정렬합니다. |
+| `/dwp-resume` | 계획 자체의 파일에서 상태를 재구성하고, 중단된 계획을 첫 번째 미완료 작업부터 이어갑니다. |
+| `/dwp-status` | 계획의 진행 상황 — 완료, 진행 중, 대기 중인 작업 — 을 아무것도 변경하지 않고 보고합니다. |
+| `/dwp-verify` | 리포지토리가 AI-first인지, 그 계획들이 올바른 형식을 갖추었는지를 기계적으로 확인합니다. |
+| `/deepworkplan-onboard` | 리포지토리를 AI-first로 만듭니다: 적응된 `AGENTS.md`, `docs/`, `.agents/`, 그리고 gitignore된 `.dwp/`를 생성합니다. |
+| `/skill-create`, `/agent-create` | 작성자용 하위 스킬입니다: 리포지토리 자체의 키트를 키웁니다. |
+| `/dwp-upgrade` | 더 새로운 공개 스킬 릴리스가 있는지 확인하고, 명시적 승인 후에만 설치하고 온보딩을 재실행합니다. |
+
+작고 한정된 수정 — Lite, trust:
+
+```bash
+# A small, bounded fix: skip the review round, run it directly.
+/dwp-create fix the flaky checkout test trust
+/dwp-execute
+```
+
+장기적인 작업 — Full, guided:
+
+```bash
+# Long-horizon work with real stakes: review before anything runs.
+/dwp-create migrate the billing service to the new payments API
+# ...review the proposed plan, then:
+/dwp-execute
+# ...interrupted? pick up again, even in a fresh session:
+/dwp-resume
+```
+
+모든 계획의 결과물 — 매니페스트, 진행 로그, 작업 기록, 게이트 증거 — 은 리포지토리 자체 안의 gitignore된 `.dwp/` 디렉터리 아래에 있습니다. deepworkplan.com으로 전송되거나 저장되는 것은 전혀 없습니다.
+
 ## 엔드포인트
 
 | 메서드 | 경로 | 용도 |
