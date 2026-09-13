@@ -81,15 +81,15 @@ Markdown: send header `Accept: text/markdown` on any URL to receive Markdown ins
 
 Every serialized markdown output includes a **Site Navigation** section appended at the end. This mirrors the HTML navbar and footer, ensuring AI agents can discover all site pages from any entry point.
 
-The navigation is generated programmatically by `generateSiteNavigation(lang)` in `markdown-for-agents.ts` — a single source of truth that is language-aware (applies the correct URL prefix for EN/ES). The navigation structure is defined as data (`SITE_NAV_SECTIONS`) in the same file, organized into sections: Main, Work, About, and Connect (social links).
+The navigation is generated programmatically by `generateSiteNavigation(lang)` in `markdown-for-agents.ts` — a single source of truth that is language-aware (applies the correct URL prefix for every active language, not just EN/ES). The navigation is defined as an inline `sections` array inside that function, organized into five sections: Methodology, Get started, Learn, Project, and Connect (social/repo links, external). It must list every real top-level route in `KNOWN_BASE_PATHS` (`src/middleware.ts`) that is not a redirect (`setup`/`onboarding`/`docs` redirect to `/init` and are correctly never listed) — `tests/unit/lib/markdown-for-agents.test.ts`'s "Site Navigation block" tests assert this set exactly, so a route silently missing from the array (as happened for `/developers`, `/init`, and `/privacy` before this fix) now fails the test rather than shipping unnoticed.
 
 **Why programmatic instead of a `.md` partial file?**
-- Language-aware: automatically applies `/es/` prefix for Spanish pages
-- Single definition: one data structure generates both EN and ES navigation
+- Language-aware: automatically applies the correct `/{lang}/` prefix for every active language
+- Single definition: one data structure generates navigation for every active language
 - No manual sync: adding the nav to new serialization functions requires only one line (`generateSiteNavigation(lang)`)
 - Always consistent: impossible for individual page markdown files to have stale navigation
 
-**When to update:** If a new page is added to the site navbar, add it to `SITE_NAV_SECTIONS` in `src/lib/markdown-for-agents.ts`.
+**When to update:** If a new top-level page is added to the site, add it to the appropriate section's `links` array inside `generateSiteNavigation()` in `src/lib/markdown-for-agents.ts`, and update the expected route set in `tests/unit/lib/markdown-for-agents.test.ts`'s "Site Navigation block" tests so a future omission fails the build instead of shipping silently.
 
 ### Content Collections
 

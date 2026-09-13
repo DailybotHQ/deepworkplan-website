@@ -138,6 +138,101 @@ describe('serializePageToAgentMarkdown', () => {
   });
 });
 
+// ─── Site Navigation block ─────────────────────────────
+
+/** Extract every `path` from `[label](prefix + path)` markdown links in the
+ * "Site Navigation" footer, stripping the given language prefix so paths are
+ * comparable across languages. */
+function extractNavPaths(markdown: string, prefix: string): string[] {
+  // The Site Navigation block is always the last section appended by every
+  // serializer, so its "## <localized heading>" is the last H2 in the
+  // output — anchor on that rather than a literal (language-specific) title.
+  const navStart = markdown.lastIndexOf('\n## ');
+  const nav = navStart >= 0 ? markdown.slice(navStart) : markdown;
+  const linkPattern = /\[[^\]]+\]\(([^)]+)\)/g;
+  const paths: string[] = [];
+  let match: RegExpExecArray | null = linkPattern.exec(nav);
+  while (match !== null) {
+    const url = match[1];
+    if (!url.startsWith('http')) {
+      paths.push(
+        prefix && url.startsWith(prefix) ? url.slice(prefix.length) : url
+      );
+    }
+    match = linkPattern.exec(nav);
+  }
+  return paths;
+}
+
+/** Every real top-level route the "Site Navigation" block must list —
+ * home, methodology, spec, kit, init, quickstart, examples, compare, faq,
+ * changelog, developers, trust, about, contact, privacy (15 routes; /404
+ * and /internal/* are correctly never nav targets). */
+const EXPECTED_NAV_PATHS = [
+  '/',
+  '/methodology',
+  '/spec',
+  '/kit',
+  '/init',
+  '/quickstart',
+  '/examples',
+  '/compare',
+  '/faq',
+  '/changelog',
+  '/developers',
+  '/trust',
+  '/about',
+  '/contact',
+  '/privacy',
+];
+
+describe('Site Navigation block (generateSiteNavigation via serializePageToAgentMarkdown)', () => {
+  it('lists every one of the 15 real public routes for English', () => {
+    const result = serializePageToAgentMarkdown(mockPage as any, {
+      slug: 'about',
+      lang: 'en',
+    });
+    const paths = extractNavPaths(result, '');
+    expect(new Set(paths)).toEqual(new Set(EXPECTED_NAV_PATHS));
+  });
+
+  it('lists every one of the 15 real public routes for a non-English language (es), with localized labels', () => {
+    const result = serializePageToAgentMarkdown(mockPageNoLastUpdated as any, {
+      slug: 'contact',
+      lang: 'es',
+    });
+    const paths = extractNavPaths(result, '/es');
+    expect(new Set(paths)).toEqual(new Set(EXPECTED_NAV_PATHS));
+    expect(result).toContain('[Desarrolladores](/es/developers)');
+    expect(result).toContain('[Privacidad](/es/privacy)');
+    expect(result).toContain('[Init](/es/init)');
+  });
+
+  it('places /init first in "Get started", /developers last in "Learn", and /privacy last in "Project"', () => {
+    const result = serializePageToAgentMarkdown(mockPage as any, {
+      slug: 'about',
+      lang: 'en',
+    });
+    const getStartedIdx = result.indexOf('**Get started:**');
+    const learnIdx = result.indexOf('**Learn:**');
+    const projectIdx = result.indexOf('**Project:**');
+    const connectIdx = result.indexOf('**Connect:**');
+
+    const getStartedBlock = result.slice(getStartedIdx, learnIdx);
+    expect(getStartedBlock.indexOf('/init')).toBeLessThan(
+      getStartedBlock.indexOf('/quickstart')
+    );
+
+    const learnBlock = result.slice(learnIdx, projectIdx);
+    const learnPaths = extractNavPaths(learnBlock, '');
+    expect(learnPaths[learnPaths.length - 1]).toBe('/developers');
+
+    const projectBlock = result.slice(projectIdx, connectIdx);
+    const projectPaths = extractNavPaths(projectBlock, '');
+    expect(projectPaths[projectPaths.length - 1]).toBe('/privacy');
+  });
+});
+
 // ─── serializeReaderEntryToAgentMarkdown ───────────────
 
 describe('serializeReaderEntryToAgentMarkdown', () => {
