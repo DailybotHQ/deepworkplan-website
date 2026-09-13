@@ -120,14 +120,14 @@ Standard jest celowo proporcjonalny i czyni tę proporcjonalność właściwośc
 a nie dyscypliny dewelopera. Plan jest albo **Lite** — rekordy zadań inline w README
 planu, dla małej, ograniczonej pracy — albo **Full**, jeden plik na zadanie, dla
 długofalowej pracy. Wybór dotyczy kosztu reprezentacji, nie rygoru: oba formaty
-niosą stabilne id zadań, Powierzchnię dotkniętą, kryteria akceptacji, bramki
+niosą stabilne id zadań, dotkniętą powierzchnię, kryteria akceptacji, bramki
 walidacyjne i dowody ukończenia, więc plan Lite to prawdziwy plan, a nie szkic.
 Format, materializacja, zatwierdzenie i wykonanie to niezależne osie; plan Lite jest
 awansowany do Full poleceniem `/dwp-refine promote`, gdy kompaktowe rekordy przestają
 nieść wymaganie lub bramkę.
 
 Dla planu Full repozytorium jest trwałą powierzchnią wykonania. Plan zawiera atomowe
-zadania, **Powierzchnię dotkniętą**, która wyjaśnia, co się zmieniło i którzy
+zadania, **dotkniętą powierzchnię**, która wyjaśnia, co się zmieniło i którzy
 konsumenci są dotknięci, kryteria akceptacji oraz bramkę walidacyjną wybraną z
 udokumentowanej mapy testów repozytorium. Nowy plan najpierw zapisuje swój manifest
 tożsamości, rejestruje swoją analizę, tworzy listę zadań i dopiero na końcu włącza
