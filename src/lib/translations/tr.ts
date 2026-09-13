@@ -75,7 +75,7 @@ export const tr: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Yeni · Token verimli',
+    badge: 'Yeni · Yapı gereği bağlam verimli',
     text: 'Deep Work Plan bugün Product Hunt’ta',
     tagline: 'ajanına bir plan ver',
     linkText: 'Oy ver',
@@ -112,7 +112,7 @@ export const tr: SiteTranslations = {
         'init.md istemini kopyalayıp kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırarak herhangi bir depoyu AI-first hale getirin.',
       copyLabel: 'init.md kopyala',
       copiedLabel: 'Kopyalandı',
-      viewInitCta: 'Tam /init istemini görüntüle',
+      viewInitCta: 'Hızlı başlangıcı görüntüle',
       pullQuote:
         'Deep Work Plan, deponun kendisinin harness haline geldiği spec odaklı geliştirmedir.',
       primaryCta: 'Metodolojiyi okuyun',
@@ -674,62 +674,9 @@ export const tr: SiteTranslations = {
     meta: {
       title: 'Hızlı başlangıç — Deep Work Plan',
       description:
-        'Skill’i kurun, deponuzu kuruluma alın, ardından herhangi bir ajanla planlayıp yürütün — deponuzu spec odaklı ve ajan-pilotlanabilir kılan adımlar.',
-    },
-    eyebrow: 'Hızlı başlangıç',
-    title: 'Dakikalar içinde başlayın',
-    intro:
-      'Skill’i kurun, deponuzu kuruluma alın, ardından herhangi bir ajanla planlayıp yürütün — deponuzu spec odaklı ve ajan-pilotlanabilir kılan adımlar.',
-    sequenceTitle: 'Benimseme yolu',
-    codeLabel: 'Terminal',
-    orLabel: 'veya',
-    steps: [
-      {
-        title: 'Deep Work Plan skill’ini kurun',
-        description:
-          'Skill’i deponuza ekleyin — bir yönlendirici ve dokuz alt skill (create, execute, refine, resume, status, verify, onboard, author, upgrade). En hızlı yol için Skills CLI’yı kullanın ya da git ile bir kabuk mevcut olan yerde depoyu klonlayıp kurulumu çalıştırın.',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: 'Depoyu kuruluma alın',
-        description:
-          'onboard alt skill’ini çalıştırın ve ajanın gerçek deponuz hakkında akıl yürütmesine izin verin. AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve ajandan bağımsız bir .agents/ yuvası (.claude → .agents ve .cursor → .agents sembolik bağlarıyla) üretir, ince dwp-* komutlarını bağlar ve gitignore’lanmış bir .dwp/ yapısı oluşturur.',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: 'Kiti geliştirin ve eklentileri kabul edin',
-        description:
-          'Yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın. Kuruluma alma, zorunlu AI Diff Reviewer yerel incelemesini kurar (CI kapısı isteğe bağlı kalır) ve dört tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade ve design-system — yalnızca uygun olduklarında kabul edersiniz.',
-      },
-      {
-        title: 'Planlayın ve yürütün',
-        description:
-          'Bir Deep Work Plan üretin ve görev görev çalıştırın; her kapıyı doğrulayıp oturumlar arasında kaldığınız yerden sürdürün — depoyu kendi spesifikasyonuna karşı pilotlayarak.',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: 'Sonuç',
-    outcome:
-      'Deponuz spec odaklı ve ajan-pilotlanabilir hale gelir: plan, kalıcı doğruluk kaynağıdır ve deponun kendisi, herhangi bir ajanın karşısında çalıştığı harness haline gelir.',
-    nextStepsTitle: 'Sonraki adımlar',
-    nextSteps: [
-      { label: 'Metodolojiyi okuyun', href: '/methodology' },
-      { label: 'Kite göz atın', href: '/kit' },
-      { label: 'Örnekleri görün', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — Deponuzu AI-first hale getirin — Deep Work Plan',
-      description:
         'Deep Work Plan metodolojisini herhangi bir depoda benimseyin. Skill’i kurun, ajan kuruluma almasını çalıştırın, ardından herhangi bir yapay zeka kodlama ajanıyla planlayıp yürütün.',
     },
-    eyebrow: 'Benimseme',
+    eyebrow: 'Hızlı başlangıç',
     title: 'Bu depoyu AI-first hale getirin',
     intro:
       'Herhangi bir depoyu spec odaklı, ajana hazır bir kod tabanına dönüştürmek için tek bir uç nokta. Skill’i kurun, bir ajanın depoyu kuruluma almasını sağlayın, ardından herhangi bir kodlama ajanıyla yapılandırılmış işi planlayıp yürütün.',
@@ -739,13 +686,13 @@ export const tr: SiteTranslations = {
     handoffInstruction:
       'Bu depoyu AI-first hale getirmek için https://deepworkplan.com/init.md adresindeki talimatları oku ve uygula.',
     handoffMdLabel: 'Bağımsız ajan istemi',
-    codeLabel: 'agent',
+    codeLabel: 'Terminal',
     whatTitle: 'Bu ne yapar',
     whatBody: [
       'Benimseme, depoyu kalıcı iki şekilde değiştirir — metodolojinin temel direkleri.',
       'İlk olarak, depo spec odaklı hale gelir: iş, gelişigüzel istemlerden değil, yazılı bir plan ve spesifikasyondan başlar. İkinci olarak, deponun kendisi ajan harness’ı haline gelir — bir AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve bir .agents/ skill yuvası (.claude → .agents ve .cursor → .agents sembolik bağlarıyla), her ajana ihtiyaç duyduğu bağlamı ve komutları verir.',
     ],
-    sequenceTitle: 'Benimseme dizisi',
+    sequenceTitle: 'Benimseme yolu',
     orLabel: 'veya',
     steps: [
       {
@@ -781,6 +728,7 @@ export const tr: SiteTranslations = {
         title: 'Planlayın ve yürütün',
         description:
           '/dwp-create ile Deep Work Plan’ler üretin ve /dwp-execute ile çalıştırın, ardından iş ilerledikçe /dwp-status, /dwp-refine, /dwp-resume ve /dwp-verify kullanın. Her plan, numaralı görevler, doğrulama kapıları ve bir tamamlama protokolü taşır — ve tam olarak tek bir zorunlu Final Review ile kapanır (güvenlik geçişi, son-durum doğrulaması ve skills uzlaştırması). Executive Report istek üzerine hâlâ kullanılabilir.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: 'Uyumluluk doğrulaması',
@@ -792,12 +740,12 @@ export const tr: SiteTranslations = {
     outcomeTitle: 'Sonuç',
     outcome:
       'Depo spec odaklı hale gelir ve deponun kendisi ajan harness’ı haline gelir — bağlam ve komutlar kodla birlikte gezer.',
-    nextStepsTitle: 'Sonra okuyun',
+    nextStepsTitle: 'Sonraki adımlar',
     nextSteps: [
-      { label: 'Hızlı başlangıç', href: '/quickstart' },
-      { label: 'Metodoloji', href: '/methodology' },
+      { label: 'Metodolojiyi okuyun', href: '/methodology' },
       { label: 'Spesifikasyon', href: '/spec' },
-      { label: 'Kit', href: '/kit' },
+      { label: 'Kite göz atın', href: '/kit' },
+      { label: 'Örnekleri görün', href: '/examples' },
     ],
   },
 
@@ -871,7 +819,7 @@ export const tr: SiteTranslations = {
             answer:
               'Ajan skill’i, ajanınızın proje veya kullanıcı skill’lerini yüklediği her yere kurulur. Kuruluma alma daha sonra deponun kendisini uyarlar: `AGENTS.md`, `docs/`, `.agents/` ve gitignore’lanmış `.dwp/` çalışma alanını oluşturur veya uzlaştırır. Skill ajana metodu öğretir; depo ise diğer ajanların devam edebilmesi için gereken bağlamı, kiti ve plan kanıtını tutar.',
             linkLabel: 'Benimseme akışına bakın',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1037,7 +985,7 @@ export const tr: SiteTranslations = {
             answer:
               'Kuruluma alma yıkıcı değildir: mevcut `AGENTS.md`, `docs/`, `.agents/` veya `CLAUDE.md` dosyasını algılar, üzerine yazmak yerine uzlaştırır ve bir şeyi değiştirmeden önce sorar. Gerçek komutlarla `AGENTS.md` dizini, akıl yürütülmüş bir `docs/` ağacı, modül başına docs, ince `dwp-*` komutlarıyla `.agents/` kiti, gitignore’lanmış bir `.dwp/` çıktı alanı, doğrulanmış bir test haritası ve zorunlu yerel kod incelemesi (AI Diff Reviewer skill’i artı repoya uyarlanmış inceleme eklentisi) yazar. Sonra ne üretildiğini görebilmeniz için self-check ve uyumluluk denetleyicisini çalıştırır. Daha önceki bir standartla kuruluma alınmış bir repo, yalnızca eksik veya güncel olmayan şeyleri uzlaştıran hedefli bir harness yükseltmesi alır.',
             linkLabel: 'Benimseme uç noktası',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1046,7 +994,7 @@ export const tr: SiteTranslations = {
             answer:
               'Burada iki farklı yükseltme vardır ve akış onları ayrı tutar. Repo’nun harness’i — `AGENTS.md`, `docs/`, `.agents/` kiti — onboarding’i yeniden çalıştırarak uzlaştırılır; yalnızca eksik veya güncel olmayan kısımları doldurur. Skill’in kendisi `/dwp-upgrade` ile ilerler: son yayımlanmış sürümün salt okunur denetimi, kabul ettiğiniz etiketin doğrulanarak kurulması ve ardından onboarding’in taze bir geçiş olarak yeniden çalıştırılması. Akış boyunca her adım açık onaya bağlıdır, yerel uyarlamalar üzerine yazılmak yerine karşılaştırılır ve korunur, `.dwp/` asla göçürülmez — mevcut planlar kayıtlı biçimlerini korur ve çalışmaya devam eder.',
             linkLabel: 'Benimseme uç noktası',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1069,7 +1017,7 @@ export const tr: SiteTranslations = {
             id: 'cost',
             question: 'Maliyeti nedir ve verimlilik nasıl ölçülür?',
             answer:
-              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın yüklediği talimat byte sayısı olarak raporlanır; skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz. Donmuş bir protokol altında taze aracılarla bir kamu değerlendirmesi artık yürütüldü: aynı iki özellik; harness olmadan, önceki ana sürümle ve geçerli sürümle — her biri temiz klonlardan inşa edildi. Harness taşıyan ağaçtaki aracıların her iki görevde daha az byte okuduğunu ve geçerli sürümün özellik oturumlarının her iki görevde önceki ana sürümünkinden daha az model girdi ve çıktısı tükettiğini buldu — harness tarafından raporlandığı şekliyle, tek bir iş yükünde. Dürüst sınırları da buldu: onboarding, akışlar kullanıldığında geri ödeyen tek seferlik bir maliyettir; iş yükü başına net token yönü karışıktı; duvar saati avantajı iddia edilmez; ve taze bir aracı akışlara kendi başına girmez — akışlar sizin ya da onları çağırmayı bilen bir aracının çalıştırdığı komutlardır.',
+              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın **girişte** yüklediği talimat byte sayısı olarak raporlanır — bir oturumun başındaki paket — ve buna ek olarak, işin gerçekten sürdüğünde akışın kendi tetikleyicilerinin yüklediklerini de ekleyen adlandırılmış **uçtan uca yollar** ile birlikte yayımlanır (örneğin yürütmeye devam eden bir sürdürme akışı genellikle giriş paketinin birkaç katını yükler). Bu iki rakamdan hiçbiri bir oturumu sınırlamaz: gerçek bir çalışma ayrıca deponun kendi dosyalarını, araç çıktısını ve planın çalışma dosyalarını da okur; bunların hiçbiri bu defterde sayılmaz. Her iki sayı da skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz. Donmuş bir protokol altında taze aracılarla bir kamu değerlendirmesi artık yürütüldü: aynı iki özellik; harness olmadan, önceki ana sürümle ve geçerli sürümle — her biri temiz klonlardan inşa edildi. Harness taşıyan ağaçtaki aracıların her iki görevde daha az byte okuduğunu ve geçerli sürümün özellik oturumlarının her iki görevde önceki ana sürümünkinden daha az model girdi ve çıktısı tükettiğini buldu — harness tarafından raporlandığı şekliyle, tek bir iş yükünde. Dürüst sınırları da buldu: onboarding, akışlar kullanıldığında geri ödeyen tek seferlik bir maliyettir; iş yükü başına net token yönü karışıktı; duvar saati avantajı iddia edilmez; ve taze bir aracı akışlara kendi başına girmez — akışlar sizin ya da onları çağırmayı bilen bir aracının çalıştırdığı komutlardır.',
             linkLabel: 'Güven ve açıklama',
             linkPath: '/trust',
           },
@@ -1287,13 +1235,13 @@ export const tr: SiteTranslations = {
         },
         {
           title: 'Ölçülen ve yayımlanan talimat yükü',
-          body: 'Commit edilmiş bir betik her akışın kaç byte yüklediğini ölçer; sonuçlar, artışlar dahil, byte olarak yayımlanır — asla token veya maliyet yüzdesi olarak değil.',
+          body: 'Commit edilmiş bir betik her akış için iki ölçüm yayımlar — bir oturumun başında yüklenen giriş paketi ve gerçek tetikleyiciler devreye girdiğinde ortaya çıkan uçtan uca yol — ayrıca her ölçümün neyi hariç tuttuğunu da; böylece yalnızca giriş rakamı bir çalışmanın toplam maliyeti olarak okunmaz. Sonuçlar, artışlar dahil, byte olarak yayımlanır — asla token veya maliyet yüzdesi olarak değil.',
         },
       ],
     },
     honestLimits: {
       title: 'Dürüst sınırlar',
-      body: 'Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; kendi yürüttüğümüz taze-aracı değerlendirmesi donmuş bir protokol altında koşuldu — küçük ölçekte: tek iş yükü, yapılandırma başına iki özellik, bir makine — ve sonuçları her iki yönde yayımlanır: harness taşıyan ağaçlardaki aracılar her iki görevde daha az byte okudu; geçerli sürümün oturumları, harness tarafından raporlanan model girdi ve çıktısını önceki ana sürümünden daha az tüketti; buna karşılık iş yükü başına net token yönü karışıktı ve duvar saati avantajı iddia edilmiyor. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil. DWP kasıtlı olarak depoyla sınırlıdır: ne projeler arası bir bellek sistemi, ne rol tabanlı bir ajan çerçevesi, ne de bir IDE’dir; dolayısıyla bu eksenlerde de rekabet etmez — iş bunu gerektirdiğinde, o eksenlerden birini kapsayan bir araçla birlikte kullanın.',
+      body: 'Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; kendi yürüttüğümüz taze-aracı değerlendirmesi donmuş bir protokol altında koşuldu — küçük ölçekte: tek iş yükü, yapılandırma başına iki özellik, bir makine — ve sonuçları her iki yönde yayımlanır: harness taşıyan ağaçlardaki aracılar her iki görevde daha az byte okudu; geçerli sürümün oturumları, harness tarafından raporlanan model girdi ve çıktısını önceki ana sürümünden daha az tüketti; buna karşılık iş yükü başına net token yönü karışıktı ve duvar saati avantajı iddia edilmiyor. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil — ve giriş paketi rakamı bir çalışmanın okuduklarına bir sınır değildir. DWP kasıtlı olarak depoyla sınırlıdır: ne projeler arası bir bellek sistemi, ne rol tabanlı bir ajan çerçevesi, ne de bir IDE’dir; dolayısıyla bu eksenlerde de rekabet etmez — iş bunu gerektirdiğinde, o eksenlerden birini kapsayan bir araçla birlikte kullanın.',
     },
     correction: {
       title: 'Bu sayfanın doğruluğunu korumamıza yardım edin',
@@ -1360,7 +1308,7 @@ export const tr: SiteTranslations = {
     ctaBody:
       'Metodolojiyi ve spesifikasyonu okuyun, bir ajanı init uç noktasına yönlendirin ve çalıştırmadan önce kurulumu doğrulayın.',
     ctaPrimary: 'Metodolojiyi okuyun',
-    ctaSecondary: 'Benimseme (init)',
+    ctaSecondary: 'Hızlı başlangıç',
   },
 
   // Developers — agent & developer surface

@@ -8,7 +8,7 @@ section: Addons
 
 # Dodatki
 
-**Wersja 4.0.0.** Dodatki to rozszerzenia podstawowej metodyki Deep Work Plan. Cztery z pięciu są opcjonalne i **nigdy nie są wymagane do zgodności** — repozytorium bez opcjonalnych addonów jest w pełni AI-first i zgodne z DWP. Każdy opcjonalny addon jest proponowany podczas onboardingu, wyraźnie akceptowany lub odrzucany, a po akceptacji **uzgadnia** się z istniejącą konfiguracją zamiast ją nadpisywać. Jeden komponent jest zadeklarowanym wyjątkiem: od standardu 2.3.0 **lokalny przegląd AI Diff Reviewer** jest częścią wymaganej linii bazowej — onboarding go instaluje, a każde Final Review go uruchamia — podczas gdy jego powierzchnia CI pozostaje opcjonalna.
+**Wersja 2.1.0.** Dodatki to rozszerzenia podstawowej metodyki Deep Work Plan. Cztery z pięciu są opcjonalne i **nigdy nie są wymagane do zgodności** — repozytorium bez opcjonalnych addonów jest w pełni AI-first i zgodne z DWP. Każdy opcjonalny addon jest proponowany podczas onboardingu, wyraźnie akceptowany lub odrzucany, a po akceptacji **uzgadnia** się z istniejącą konfiguracją zamiast ją nadpisywać. Jeden komponent jest zadeklarowanym wyjątkiem: od standardu 2.3.0 **lokalny przegląd AI Diff Reviewer** jest częścią wymaganej linii bazowej — onboarding go instaluje, a każde Final Review go uruchamia — podczas gdy jego powierzchnia CI pozostaje opcjonalna.
 
 ## Kontrakt addonu
 
@@ -67,7 +67,7 @@ Aktualizacje zależności niezależne od menedżera pakietów, partiami, zwalido
 
 ### AI Diff Reviewer (piąty addon — wymagany lokalny przegląd, opcjonalna powierzchnia CI)
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, aktualna wersja **v2.0.1**) nadaje obowiązkowemu przeglądowi bezpieczeństwa Final Review strukturalny lokalny przegląd i opcjonalnie blokuje pull requesty w CI. Od standardu 2.3.0 **lokalny przegląd jest częścią linii bazowej**; tylko powierzchnia CI jest opcjonalna.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) nadaje obowiązkowemu przeglądowi bezpieczeństwa Final Review strukturalny lokalny przegląd i opcjonalnie blokuje pull requesty w CI. Od standardu 2.3.0 **lokalny przegląd jest częścią linii bazowej**; tylko powierzchnia CI jest opcjonalna. Ten addon jest automatycznie odświeżany przy każdym release'ie, więc jego aktualna wersja nigdy nie jest przypięta w tym tekście — sprawdź własny `SKILL.md` addonu lub jego wydania na GitHubie, aby poznać faktycznie zwendorowany tag.
 
 - **Strona kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — pełna referencja możliwości
 - **Wymagany przy onboardingu (Phase 7a):** instalacja vendored skilla przypięta do tagu (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus dopasowane do repo `.review/extension.md` (przez `generate-extension`), za zgodą onboardingu; ukierunkowany upgrade harnessu uzgadnia oba elementy, gdy ich brakuje; odmowa jest zapisywana jako zadeklarowany wyjątek i zgłaszana przez `verify` do czasu instalacji

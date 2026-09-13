@@ -96,7 +96,7 @@ src/
 │   │
 │   ├── editorial/          # Editorial primitives (Kicker, Rule, Lead, Figure, Reference)
 │   │
-│   ├── pages/              # Shared page components (*Page.astro, InitPage, readers)
+│   ├── pages/              # Shared page components (*Page.astro, QuickstartPage, readers)
 │   │   ├── ComparePage.astro       # Objective comparison and source notes
 │   │   ├── CompareMatrix.astro     # Responsive capability matrix
 │   │   └── FaqPage.astro           # Grouped FAQ with FAQPage JSON-LD
@@ -401,8 +401,7 @@ src/pages/
 ├── examples.astro       → /examples
 ├── compare.astro        → /compare
 ├── faq.astro            → /faq
-├── quickstart.astro     → /quickstart
-├── init.astro           → /init
+├── quickstart/           → /quickstart (canonical adoption page; /init, /setup, /onboarding 301 here)
 ├── methodology/
 │   ├── index.astro      → /methodology
 │   ├── [slug].astro     → /methodology/what-is-dwp
@@ -446,7 +445,7 @@ const { Content } = await render(doc);
 
 `src/middleware.ts` enforces an **allowlist** of single-segment top-level paths. Any single-segment URL not in the set is rewritten to `/404` — **even if the file exists at `src/pages/<name>/index.astro`**. The allowlist is **derived** from one hand-edited set plus the language registry, so adding a new language requires no middleware edit at all:
 
-- `KNOWN_BASE_PATHS` — per-language page slugs (e.g. `about`, `contact`, `compare`, `faq`, `methodology`, `spec`, `kit`, `examples`, `quickstart`, `init`, `trust`, `developers`, `privacy`, `setup`, `onboarding`, `docs`). These exist for **every** language: at the root for the default language and under `/<lang>/<slug>` for every other active language. ONE place, covers all languages. (`setup`/`onboarding` redirect to `/init`; `docs` redirects to `/developers`.)
+- `KNOWN_BASE_PATHS` — per-language page slugs (e.g. `about`, `contact`, `compare`, `faq`, `methodology`, `spec`, `kit`, `examples`, `quickstart`, `init`, `trust`, `developers`, `privacy`, `setup`, `onboarding`, `docs`). These exist for **every** language: at the root for the default language and under `/<lang>/<slug>` for every other active language. ONE place, covers all languages. (`init`/`setup`/`onboarding` redirect to `/quickstart`, the single canonical adoption page; `docs` redirects to `/developers`. `/init.md` itself is a standalone static file — `public/init.md` — never redirected, no HTML sibling, English-only.)
 - `ROOT_ONLY_PATHS` — non-per-language paths (`api`, `internal`, `404`, `favicon.ico`, `favicon.svg`, `sitemap-index.xml`).
 - `PREFIXED_LANGUAGES` — active non-default language codes (`es`, `pt`, `zh`, …), derived from `getActiveNonDefaultLanguages()` in `src/lib/i18n.ts`. These are the valid single-segment language roots (`/es`, `/pt`, …).
 - `KNOWN_ROOT_PATHS` — derived union of the three sets above (`KNOWN_BASE_PATHS` ∪ `ROOT_ONLY_PATHS` ∪ `PREFIXED_LANGUAGES`).
@@ -468,7 +467,7 @@ When you add a new top-level page (e.g. `/guides`, `/foo`), you only edit ONE pl
 
 The bypass conditions (path contains `.` or starts with `/_astro/`, `/__vite`, `/@`) exist to let assets, HMR, and build artifacts through.
 
-**Adoption endpoint `/init`.** The canonical adoption surface lives at `/init` (default language) and `/<lang>/init` for every other active language (`/es/init`, `/pt/init`, `/zh/init`, …), served by `InitPage.astro` + the page-wrapper pattern. `init` is present in `KNOWN_BASE_PATHS`, so it works in every language without a per-language allowlist edit. Its agent prompt is published at the **canonical English-only** URL `/init.md` (regardless of which locale a user is browsing) through the dynamic `[page].md.ts` route, sourced from `src/content/pages/en/init.md` — see `CANONICAL_INIT_MD_PATH` in `src/lib/i18n.ts`. `/setup` and `/onboarding` (plus their `/<lang>/` variants) are permanent 301 redirects to `/init`, configured in `astro.config.mjs`; the redirect source paths are also in `KNOWN_BASE_PATHS`.
+**Adoption page `/quickstart` and adoption prompt `/init.md`.** The canonical adoption surface lives at `/quickstart` (default language) and `/<lang>/quickstart` for every other active language (`/es/quickstart`, `/pt/quickstart`, `/zh/quickstart`, …), served by `QuickstartPage.astro` + the page-wrapper pattern. `quickstart` is present in `KNOWN_BASE_PATHS`, so it works in every language without a per-language allowlist edit. Its companion agent prompt is published at the **canonical English-only, standalone** URL `/init.md` (regardless of which locale a user is browsing) — a plain static file at `public/init.md`, not a content-collection page: it has no HTML sibling and is never redirected. See `CANONICAL_INIT_MD_PATH` and `getCanonicalInitMarkdown()` in `src/lib/i18n.ts` / `src/lib/init-prompt.ts`. `/init`, `/setup`, and `/onboarding` (plus their `/<lang>/` variants) are permanent 301 redirects to `/quickstart`, configured in `astro.config.mjs`; the redirect source paths are also in `KNOWN_BASE_PATHS`.
 
 ## Agent API
 
@@ -662,8 +661,7 @@ src/components/pages/           # Shared page components (handle MainLayout inte
 ├── AboutPage.astro
 ├── ContactPage.astro
 ├── ExamplesPage.astro
-├── QuickstartPage.astro
-├── InitPage.astro
+├── QuickstartPage.astro        # Canonical adoption page (/init, /setup, /onboarding redirect here)
 └── ...                         # Methodology / spec / kit readers
 
 src/pages/                      # Thin routing wrappers (3 lines each)

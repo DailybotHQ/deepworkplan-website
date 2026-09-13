@@ -70,7 +70,7 @@ Este é o segundo pilar da metodologia e merece uma definição clara — "harne
 
 <RepoAsHarness lang="pt" class="not-prose my-10" />
 
-Como cada elemento é um arquivo no repositório, e não um recurso de uma ferramenta, o harness é portátil por construção. Essa é a afirmação de uma linha sobre a qual o restante da metodologia se apoia: *o próprio repositório se torna o harness*, de modo que qualquer agente pode pilotar qualquer repositório — sem nenhum framework sob medida por ferramenta.
+Como cada elemento é um arquivo no repositório, e não um recurso de uma ferramenta, o harness é portátil por construção: qualquer agente que leia markdown e execute comandos de shell pode abrir os mesmos arquivos, sem nenhum framework sob medida por ferramenta. Essa é a afirmação de uma linha sobre a qual o restante da metodologia se apoia: *o próprio repositório se torna o harness*. É uma afirmação sobre o que o repositório carrega, não uma garantia de que um modelo encontre de forma confiável o fluxo correto sem ajuda diante de uma solicitação nova — por isso o kit também inclui pontos de entrada explícitos `dwp-*` e um `SKILL.md` roteador: portabilidade de arquivos e roteamento confiável são propriedades diferentes, e apenas a primeira é construída por si só.
 
 ## Por que a execução autônoma estruturada importa
 

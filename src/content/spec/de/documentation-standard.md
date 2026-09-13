@@ -8,7 +8,13 @@ section: Standard
 
 # Dokumentationsstandard
 
-**Version 1.1.** Dieser Standard definiert, wie Deep Work Plans ihre Struktur, Aufgaben und Fortschritte dokumentieren. Er gilt für jeden Plan, der unter der DWP-Methodik erstellt wird. Die Schlüsselwörter MUSS, SOLLTE und KANN werden so verwendet, wie in RFC 2119 definiert.
+**Version 5.0.0.** Dieser Standard definiert, wie Deep Work Plans ihre Struktur, Aufgaben und Fortschritte dokumentieren, und wie sich ein Repository selbst so dokumentiert, dass ein Agent sicher darauf handeln kann. Er gilt für jeden Plan, der unter der DWP-Methodik erstellt wird. Diese Version gleicht die eigene Version des Dokuments an den DWP-Standard an, den es begleitet — keine bestehende Anforderung ändert sich — und fügt die unten beschriebene Durchsetzung des Lean-Index-Budgets sowie die Feature-Ebene hinzu. Die Schlüsselwörter MUSS, SOLLTE und KANN werden so verwendet, wie in RFC 2119 definiert.
+
+## AGENTS.md als kompakter Einstiegspunkt
+
+Die Wurzel-`AGENTS.md`-Datei SOLLTE innerhalb eines Budgets von 150–500 Zeilen bleiben. Würde generierter oder vom Harness gepflegter Inhalt dieses Budget überschreiten, MUSS der Agent das Detail in den `docs/`-Guide (oder das Modul-/Feature-Dokument) verschieben, dem es gehört, und von der Index-Datei aus verlinken — nichts wird verworfen, nur verlagert, und der Index MUSS jedes Dokument verlinken, das verlagerten Inhalt erhalten hat. Eine bestehende, handgeschriebene `AGENTS.md` über dem Budget wird niemals stillschweigend umgeschrieben: Der Agent schlägt eine konkrete Migration vor (was wohin verschoben wird, welche Links hinzukommen) und wendet sie nur mit der Zustimmung des Entwicklers an. Ein Konformitätsprüfer behandelt das Budget als Empfehlung, denn eine Zeilenzahl ist objektiv, Autorenschaft jedoch nicht — das MUSS bindet das Harness, das die Datei erzeugt oder aktualisiert, nicht die Vermutung eines Prüfers darüber, wer sie geschrieben hat. `AGENTS.md` DARF NICHT auf eine `docs/`-Datei verlinken, die nicht existiert.
+
+Über der Pro-Modul-Dokumentationsebene (unten) liegt eine **Feature-Ebene**: Ein größerer Fähigkeitsbereich — größer als ein einzelnes Modul — erhält einen eigenen `docs/`-Ordner neben seinem Code, erschlossen über ein eigenes `README.md`. Ein Bereich qualifiziert sich, wenn er zwei oder mehr Hauptmodule umspannt, ein in sich geschlossenes Sub-App- oder Subsystem-Verzeichnis besitzt oder eigene Verträge trägt (eine API-Oberfläche, Event- oder Schema-Verträge), von denen mehrere Konsumenten abhängen. Sobald ein Bereich als bedeutend erfasst ist, SOLLTE sein Feature-`docs/`-Ordner existieren, und seine wichtigsten Einträge SOLLTEN von den Modulen, die er umspannt, sowie vom Wurzel-`AGENTS.md`-Index aus verlinkt werden, genau wie Pro-Modul-Dokumente. Ein Bereich, der bewusst undokumentiert bleibt, trägt einen festgehaltenen Grund — eine Entscheidung, kein Versehen.
 
 ## Plan-README
 

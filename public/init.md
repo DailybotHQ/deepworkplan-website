@@ -1,9 +1,13 @@
----
-title: Init — Make your repository AI-first
-description: "The executable onboarding prompt for AI agents: adopt Deep Work Plan in any repository — analyze, document, install the skill, and leave it agent-pilotable."
----
+# Init — Make your repository AI-first
 
-# Init — Onboarding prompt for AI agents
+> The executable onboarding prompt for AI agents: adopt Deep Work Plan in any repository — analyze, document, install the skill, and leave it agent-pilotable.
+
+Language: en
+Canonical: https://deepworkplan.com/init.md
+Human-readable version: https://deepworkplan.com/quickstart
+Markdown: send header `Accept: text/markdown` on any URL to receive Markdown instead of HTML.
+
+---
 
 You are an AI coding agent. Read this entire prompt first, then make the current repository
 **AI-first**, **spec-driven**, and **agent-pilotable** by adopting the Deep Work Plan (DWP)
@@ -122,7 +126,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Current standard and execution model
 
-The current repository-facing standard is **DWP 4.0.0**, implemented by the
+The current repository-facing standard is **DWP 5.0.0**, implemented by the
 Deep Work Plan skill release installed above. The current skill pack includes
 the router and nine sub-skills: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, and `upgrade`.
@@ -273,3 +277,4 @@ methodology:
    verifiable work.
 
 Anyone can run this prompt on any repository — and end with a codebase any AI agent can pilot.
+

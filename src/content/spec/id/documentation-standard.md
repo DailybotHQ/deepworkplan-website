@@ -8,7 +8,13 @@ section: Standard
 
 # Documentation standard
 
-**Versi 1.1.** Standar ini mendefinisikan bagaimana Deep Work Plan mendokumentasikan struktur, tugas, dan kemajuannya. Ia berlaku untuk setiap rencana yang dibuat di bawah metodologi DWP. Kata kunci MUST, SHOULD, dan MAY digunakan sebagaimana didefinisikan dalam RFC 2119.
+**Versi 5.0.0.** Standar ini mendefinisikan bagaimana Deep Work Plan mendokumentasikan struktur, tugas, dan kemajuannya, serta bagaimana sebuah repositori mendokumentasikan dirinya sendiri agar sebuah agent dapat bertindak dengan aman di dalamnya. Ia berlaku untuk setiap rencana yang dibuat di bawah metodologi DWP. Versi ini menyelaraskan nomor versi dokumen ini dengan standar DWP yang menyertainya — tidak ada persyaratan yang ada berubah — dan menambahkan penegakan anggaran indeks-ramping serta tier fitur yang dijelaskan di bawah. Kata kunci MUST, SHOULD, dan MAY digunakan sebagaimana didefinisikan dalam RFC 2119.
+
+## AGENTS.md sebagai titik masuk yang ringkas
+
+Berkas `AGENTS.md` di root SHOULD tetap berada dalam anggaran 150–500 baris. Ketika konten yang dihasilkan atau dipelihara harness akan melebihinya, agent MUST memindahkan detailnya ke panduan `docs/` (atau dokumen modul/fitur) yang memilikinya dan menautkannya dari indeks — tidak ada yang dibuang, hanya dipindahkan, dan indeks MUST menautkan setiap dokumen yang menerima konten yang dipindahkan. Sebuah `AGENTS.md` tulisan tangan yang sudah melebihi anggaran tidak pernah ditulis ulang secara diam-diam: agent mengusulkan sebuah migrasi konkret (apa yang pindah ke mana, tautan apa yang ditambahkan) dan menerapkannya hanya dengan persetujuan pengembang. Sebuah pemeriksa konformansi memperlakukan anggaran ini sebagai advisory, karena jumlah baris bersifat objektif tetapi kepenulisan tidak — MUST ini mengikat harness yang menghasilkan atau memperbarui berkas tersebut, bukan tebakan pemeriksa tentang siapa yang menulisnya. `AGENTS.md` MUST NOT menautkan sebuah berkas `docs/` yang tidak ada.
+
+Di atas tier dokumentasi per-modul (di bawah) terdapat sebuah **tier fitur**: sebuah area kemampuan utama — lebih besar dari satu modul — mendapatkan `docs/`-nya sendiri di samping kodenya, dimasuki melalui `README.md`-nya sendiri. Sebuah area memenuhi syarat ketika ia mencakup dua atau lebih modul utama, memiliki direktori sub-app atau subsistem yang berdiri sendiri, atau membawa kontraknya sendiri (sebuah permukaan API, kontrak event atau schema) yang bergantung padanya banyak konsumen. Setelah sebuah area dicatat sebagai utama, `docs/` fiturnya SHOULD ada, dan entri paling signifikannya SHOULD ditautkan dari modul-modul yang dicakup area tersebut dan dari indeks `AGENTS.md` root, persis seperti dokumen per-modul. Sebuah area yang sengaja dibiarkan tidak terdokumentasi membawa alasan yang tercatat — sebuah keputusan, bukan sebuah kelalaian.
 
 ## README rencana
 

@@ -8,7 +8,7 @@ section: Addons
 
 # Modules complémentaires
 
-**Version 4.0.0.** Les modules complémentaires sont des extensions de la méthodologie centrale de Deep Work Plan. Quatre des cinq sont optionnels et **jamais requis pour la conformité** — un dépôt sans addons optionnels est pleinement AI-first et conforme DWP. Chaque addon optionnel est proposé lors de l’onboarding, accepté ou refusé explicitement et — lorsqu’il est accepté — **réconcilie** avec la configuration existante au lieu de l’écraser. Un composant est l’exception déclarée : depuis le standard 2.3.0, la **revue locale AI Diff Reviewer** fait partie du socle requis — l’onboarding l’installe et chaque Final Review l’exécute — tandis que sa surface CI reste optionnelle.
+**Version 2.1.0.** Les modules complémentaires sont des extensions de la méthodologie centrale de Deep Work Plan. Quatre des cinq sont optionnels et **jamais requis pour la conformité** — un dépôt sans addons optionnels est pleinement AI-first et conforme DWP. Chaque addon optionnel est proposé lors de l’onboarding, accepté ou refusé explicitement et — lorsqu’il est accepté — **réconcilie** avec la configuration existante au lieu de l’écraser. Un composant est l’exception déclarée : depuis le standard 2.3.0, la **revue locale AI Diff Reviewer** fait partie du socle requis — l’onboarding l’installe et chaque Final Review l’exécute — tandis que sa surface CI reste optionnelle.
 
 ## Le contrat d'addon
 
@@ -67,7 +67,7 @@ Un `DESIGN.md` à portée de surface d'interface que tout agent de codage lit po
 
 ### AI Diff Reviewer (cinquième addon — revue locale requise, surface CI optionnelle)
 
-L’**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, version actuelle **v2.0.1**) dote la passe de sécurité obligatoire du Final Review d’une revue locale structurée et bloque optionnellement les pull requests en CI. Depuis le standard 2.3.0, la **revue locale fait partie du socle** ; seule la surface CI est optionnelle.
+L’**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) dote la passe de sécurité obligatoire du Final Review d’une revue locale structurée et bloque optionnellement les pull requests en CI. Depuis le standard 2.3.0, la **revue locale fait partie du socle** ; seule la surface CI est optionnelle. Cet addon est actualisé automatiquement à chaque publication, si bien que sa version courante n’est jamais figée dans ce texte : consultez le `SKILL.md` propre à l’addon ou ses releases GitHub pour connaître le tag réellement vendorisé.
 
 - **Page kit :** [AI Diff Reviewer](/kit/ai-diff-reviewer) — référence complète des capacités
 - **Requise à l’onboarding (Phase 7a) :** installation de la skill vendorisée épinglée à un tag (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus un `.review/extension.md` adapté au dépôt (via `generate-extension`), sous le consentement de l’onboarding ; une mise à niveau ciblée de la harness réconcilie les deux lorsqu’ils manquent ; un refus est enregistré comme exception déclarée et signalé par `verify` jusqu’à son installation

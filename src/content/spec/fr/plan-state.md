@@ -8,7 +8,7 @@ section: State
 
 # État du plan
 
-**Version 1.1. Statut : stable.** Ce document spécifie la couche d'état lisible par machine de la méthodologie Deep Work Plan. Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
+**Version 5.0.0. Statut : stable.** Ce document spécifie la couche d'état lisible par machine de la méthodologie Deep Work Plan, désormais alignée sur le numéro de version propre du standard DWP — aucune exigence existante n'est affaiblie par cette renumérotation. Cette révision documente également le metteur à jour d'état sous garde, la publication vérifiée de plan, et les règles de vérité de preuve qu'un plan achevé doit satisfaire (voir ci-dessous). Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 
 Deux artefacts JSON — `manifest.json` (l'identité statique du plan) et `state.json` (l'état d'exécution en direct, par tâche, incluant les résultats des portes de validation) — qu'un plan MAY porter aux côtés de ses fichiers markdown, et que l'exécution sans surveillance (voir [Protocole de l'agent](/spec/agent-protocol#execution-profiles)) et les espaces de travail sans git (voir [Archétypes](/spec/archetypes) §3) MUST porter.
 
@@ -35,7 +35,7 @@ Un plan utilisant la couche d'état a cette organisation :
 
 `manifest.json` MUST être écrit exactement une fois, lorsque le flux `create` matérialise le plan, et MUST NOT changer par la suite, sauf pour une migration de version de spec consignée dans `PROGRESS.md`.
 
-`state.json` MUST être réécrit par l'agent à chacun de ces points de protocole : matérialisation du plan (toutes les tâches `pending`), démarrage d'une tâche (`in_progress`), chaque exécution d'une porte de validation (enregistrement de porte ajouté ou mis à jour), et achèvement d'une tâche (`completed`, dans le cadre du protocole d'achèvement de tâche de la [Spécification DWP](/spec/dwp-specification#task-completion-protocol)).
+`state.json` MUST être réécrit par l'agent à chacun de ces points de protocole : matérialisation du plan (toutes les tâches `pending`), démarrage d'une tâche (`in_progress`), chaque exécution d'une porte de validation (enregistrement de porte ajouté ou mis à jour), et achèvement d'une tâche (`completed`, dans le cadre du protocole d'achèvement de tâche de la [Spécification DWP](/spec/dwp-specification#task-completion-protocol)), un point de contrôle avant toute interruption planifiée, et un arrêt `blocked`.
 
 Les deux fichiers MUST être écrits de façon atomique : écrire dans un fichier temporaire dans le même répertoire, puis le renommer par-dessus la cible. Un write interrompu MUST NOT laisser un fichier JSON tronqué en place.
 
@@ -194,6 +194,30 @@ Un agent reprenant MUST comparer la liste des cases du README contre `state.json
 Le sous-skill `verify` MUST traiter la désynchronisation comme un constat de non-conformité : signaler les tâches qui divergent et dans quel sens.
 
 Les outils autres que l'agent exécutant MUST traiter les deux fichiers JSON en lecture seule.
+
+## Mises à jour d'état sous garde
+
+Les écritures de progression ordinaires passent par un metteur à jour ciblé livré avec le kit, plutôt que par une réécriture complète du fichier. Il rejette d'emblée tout état malformé, et il refuse de marquer une tâche `completed` sans preuve de porte non vide qui l'accompagne — une forme `--gate-json` est disponible pour une commande dont la propre sortie contient des caractères pipe, et le metteur à jour accepte le même objet de porte clos décrit plus haut. Les nouvelles tentatives ne remplacent que leur propre commande ; une commande différente conserve son propre enregistrement séparé. `--block-reason` consigne un blocage ; `--resolve-blocker` ne résout que le blocage de la tâche courante, jamais celui d'une autre tâche. Un travail sauté ne peut jamais rendre un plan `completed`. `--reopen-reason` consigne l'intention d'un appelant de modifier le plan via `refine` — l'amendement et toute preuve qu'il invalide MUST d'abord être consignés dans le journal de tâche. `--expected-sha256` rejette une écriture par rapport à un instantané d'état qui a depuis évolué. Un répertoire `.lock` coopératif sérialise les écrivains concurrents ; le verrou d'un écrivain planté MUST être inspecté avant suppression, et aucune protection n'est revendiquée contre un éditeur qui contourne entièrement le verrou. Ces enregistrements affirment des résultats — ils ne prouvent pas en eux-mêmes qu'une commande s'est exécutée, ni que sa sortie a été acceptée sémantiquement.
+
+## Publication de plan vérifiée
+
+Avant d'annoncer l'achèvement, les journaux de tâche terminés (chacun portant sa **disposition des skills** et, dans le Final Review, sa **décision de documentation**), l'index du README, et `PROGRESS.md` MUST être rédigés à partir de source acquise et de résultats d'acceptation réels. La tâche finale du plan se clôt alors via le finaliseur livré avec le kit : sa transition terminale valide le candidat achevé par rapport à chaque artefact du plan avant d'écrire l'état, vérifie ensuite les fichiers, et consigne un reçu `analysis_results/FINALIZATION.json`. Une porte de validation inventée comme passante MUST NOT étayer cette transition — le reçu est une preuve externe de ce qui a réellement été vérifié, jamais son propre prérequis. `bash ../verify/conformance.sh --plan PLAN_name` s'exécute ensuite, contre les artefacts réels sur disque.
+
+Une publication interrompue laisse un marqueur `.finalizing.json` en place ; la vérification normale échoue tant que la preuve n'a pas été inspectée et que l'assistant de récupération n'a pas réussi contre le même candidat — rien ne reprend une publication par simple supposition. Un verrou coopératif obsolète exige de confirmer qu'aucun écrivain ne reste actif avant sa suppression. Rien dans cette couche ne commite, ne pousse, n'exécute une commande de porte stockée, ni ne répare silencieusement le markdown du plan. Un interpréteur Python manquant produit `UNVERIFIED`, jamais `completed`.
+
+## Vérité des preuves et amendements
+
+Chaque changement dans le périmètre, les critères d'acceptation ou le report d'une tâche porte un enregistrement d'amendement durable : le critère original textuel, ce qui a été observé, la disposition, la raison, l'autorité à l'origine (utilisateur, développeur, ou preuve), les tâches affectées, et quelle preuve a été invalidée ou préservée. Les amendements sont ajoutés en fin de journal, jamais antidatés ; `manifest.json` conserve sa provenance de création et n'est jamais réécrit pour correspondre à un périmètre vivant modifié.
+
+Cinq états de preuve décrivent ce sur quoi un enregistrement de tâche peut se clore :
+
+- **Investigation achevée** — un travail réel consigné ; elle ne clôt une tâche que par rapport à un critère révisé qui la nomme, jamais par rapport à l'original tel qu'écrit.
+- **Scénario non exécuté** — consigné comme non réalisé ; il ne contribue à aucune preuve passante, quelle que soit l'époque.
+- **Exigence reportée** — le critère se déplace vers une tâche de destination nommée avec une autorité consignée ; seul cet amendement clôt la source.
+- **Porte échouée** — reste en échec jusqu'à ce que la même intention d'acceptation soit rejouée et réussisse ; une nouvelle tentative ne remplace que sa propre commande.
+- **Résultat produit atteint** — le critère tel qu'écrit, vérifié par sa propre porte ; le seul état qui achève une tâche sans changement.
+
+L'application est mécanique partout où les enregistrements le permettent. Une preuve de porte marquée « invalidée par refine » reste un historique conservé, jamais une preuve passante, et une tâche achevée qui s'appuie encore dessus est signalée par le vérificateur. Un enregistrement passant dont le texte lui-même admet que la vérification n'a jamais eu lieu (par exemple « jamais entré », « ne s'est pas exécuté », ou « ne peut pas être mesuré ») est une contradiction, signalée de la même façon — tout comme une tâche à l'état achevé dont le propre journal affiche encore `Status: pending`. Les contradictions narratives au-delà de celles-ci — un rapport dont les conclusions divergent de sa propre checklist — exigent un relecteur humain ; le vérificateur rapporte ce que disent les enregistrements, pas ce que la prose signifie. Un utilisateur MAY accepter explicitement une exception bornée avec une autorité consignée ; une pré-approbation sans surveillance n'est jamais une permission générale d'abandonner un objectif central, et un critère obligatoire impossible à satisfaire est un blocage, jamais un travail achevé.
 
 ## Versionnage des schémas
 

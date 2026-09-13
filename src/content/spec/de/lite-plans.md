@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite-Pläne
 
-**Version 4.0.0. Status: Stabil.** Dieses Dokument spezifiziert die Lite-Plan-Darstellung, die zusammen mit der [DWP-Spezifikation](/spec/dwp-specification) eingeführt wird: ein Planformat für kleine bis mittlere, abgegrenzte Arbeiten, das direkt materialisiert wird, ohne eine nicht ausführbare Entwurfsstufe. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
+**Version 5.0.0. Status: Stabil.** Dieses Dokument spezifiziert die Lite-Plan-Darstellung, die zusammen mit der [DWP-Spezifikation](/spec/dwp-specification) eingeführt wird: ein Planformat für kleine bis mittlere, abgegrenzte Arbeiten, das direkt materialisiert wird, ohne eine nicht ausführbare Entwurfsstufe. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
 ## Darstellung und Lebenszyklus
 
@@ -41,6 +41,8 @@ Der geführte create-Ablauf schreibt einen **überprüfbaren, ausstehenden Vorsc
 Das Wiederholen derselben Option ist idempotent; `lite` und `full` gemeinsam anzufordern ist ein Fehler. `--` beendet das Parsen der Optionen.
 
 Wenn keine Formatpräferenz angegeben wird, empfiehlt `create` eine und erklärt warum. Eine explizite **Full**-Anfrage gewinnt immer. Eine explizite **Lite**-Anfrage wird respektiert, es sei denn, die Anforderungen oder Validierungs-Gates der Arbeit würden nicht in kompakte Inline-Datensätze passen — in diesem Fall vermerkt `create`, warum stattdessen Full erforderlich ist. Die Auswahl MUSS den beobachteten Umfang, die Abhängigkeiten, die erforderliche Detailtiefe der Anweisungen und die Unbekannten hinter der Entscheidung festhalten — ein prüfbares Urteil, keine Garantie, die über jedes Modell oder jeden Agenten hinweg gilt.
+
+Lite trägt die Parallelisierungsentscheidung auf dieselbe Weise wie Full: die Zeile `Execution: sequential — {rationale}`, oder einen Abschnitt Team Agents Configuration, mit pro Aufgabe angehängten Team Agents-Metadaten direkt an den verankerten Aufgabendatensätzen statt in einer separaten Aufgabendatei. Die Entscheidung bleibt auch in Lite niemals stillschweigend — ein Lite-Plan hält sie exakt so fest, wie es ein Full-Plan täte.
 
 ## Beförderung und Kompatibilität
 

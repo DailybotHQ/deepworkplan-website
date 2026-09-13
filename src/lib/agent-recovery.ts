@@ -54,7 +54,7 @@ export const RECOVERY_LINKS: { label: string; path: string }[] = [
   { label: 'Quickstart', path: '/quickstart' },
   { label: 'Compare with alternatives', path: '/compare' },
   { label: 'FAQ', path: '/faq' },
-  { label: 'Init / adoption prompt', path: '/init' },
+  { label: 'Init / adoption prompt', path: '/init.md' },
 ];
 
 /**

@@ -75,7 +75,7 @@ export const pt: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Novo · Eficiente em tokens',
+    badge: 'Novo · Eficiente em contexto por construção',
     text: 'Deep Work Plan está no Product Hunt hoje',
     tagline: 'dê um plano ao seu agente',
     linkText: 'Vote nele',
@@ -112,7 +112,7 @@ export const pt: SiteTranslations = {
         'Copie o prompt do init.md e cole-o no seu agente de código — Claude Code, Cursor, Codex, ou qualquer outro — para tornar qualquer repositório AI-first.',
       copyLabel: 'Copiar init.md',
       copiedLabel: 'Copiado',
-      viewInitCta: 'Ver o prompt completo do /init',
+      viewInitCta: 'Ver o início rápido',
       pullQuote:
         'O Deep Work Plan é desenvolvimento orientado a especificação no qual o próprio repositório se torna o harness.',
       primaryCta: 'Leia a metodologia',
@@ -677,62 +677,9 @@ export const pt: SiteTranslations = {
     meta: {
       title: 'Início rápido — Deep Work Plan',
       description:
-        'Instale a skill, faça o onboarding do seu repositório e planeje e execute com qualquer agente — os passos que tornam seu repositório orientado a especificação e pilotável por agentes.',
-    },
-    eyebrow: 'Início rápido',
-    title: 'Comece em minutos',
-    intro:
-      'Instale a skill, faça o onboarding do seu repositório e planeje e execute com qualquer agente — os passos que tornam seu repositório orientado a especificação e pilotável por agentes.',
-    sequenceTitle: 'O caminho de adoção',
-    codeLabel: 'Terminal',
-    orLabel: 'ou',
-    steps: [
-      {
-        title: 'Instale a skill Deep Work Plan',
-        description:
-          'Adicione a skill ao seu repositório — um roteador mais nove sub-skills (create, execute, refine, resume, status, verify, onboard, author, upgrade). Use a CLI de Skills para o caminho mais rápido, ou clone o repositório e execute a configuração onde git e um shell estiverem disponíveis.',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: 'Faça o onboarding do repositório',
-        description:
-          'Execute a sub-skill onboard e deixe o agente raciocinar sobre seu repositório real. Ele gera AGENTS.md, uma base de conhecimento em docs/, docs por módulo e um diretório .agents/ multiagente (com os symlinks de .claude → .agents e .cursor → .agents), conecta os comandos enxutos dwp-* e estrutura um .dwp/ ignorado pelo git.',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: 'Evolua o kit e aceite addons',
-        description:
-          'Use /skill-create e /agent-create (a sub-skill author) para desenvolver skills, agents e commands apropriados à sua stack. O onboarding instala a revisão local obrigatória do AI Diff Reviewer (seu gate de CI permanece opcional) e oferece quatro addons opcionais — devcontainer, Dailybot, dependency-upgrade e design-system — que você aceita apenas quando fizerem sentido.',
-      },
-      {
-        title: 'Planeje e execute',
-        description:
-          'Gere um Deep Work Plan e execute-o tarefa a tarefa, validando cada gate e retomando entre sessões — pilotando o repositório contra sua própria especificação.',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: 'O resultado',
-    outcome:
-      'Seu repositório se torna orientado a especificação e pilotável por agentes: o plano é a fonte de verdade duradoura e o próprio repositório se torna o harness contra o qual qualquer agente executa.',
-    nextStepsTitle: 'Próximos passos',
-    nextSteps: [
-      { label: 'Leia a metodologia', href: '/methodology' },
-      { label: 'Explore o kit', href: '/kit' },
-      { label: 'Veja exemplos', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — Torne seu repositório AI-first — Deep Work Plan',
-      description:
         'Adote a metodologia Deep Work Plan em qualquer repositório. Instale a skill, execute o onboarding do agente e planeje e execute com qualquer agente de código de IA.',
     },
-    eyebrow: 'Adoção',
+    eyebrow: 'Início rápido',
     title: 'Torne este repositório AI-first',
     intro:
       'Um único endpoint para transformar qualquer repositório em uma base de código orientada a especificação e pronta para agentes. Instale a skill, deixe um agente fazer o onboarding do repositório e então planeje e execute trabalho estruturado com qualquer agente de código.',
@@ -742,13 +689,13 @@ export const pt: SiteTranslations = {
     handoffInstruction:
       'Leia e siga as instruções em https://deepworkplan.com/init.md para tornar este repositório AI-first.',
     handoffMdLabel: 'Prompt de agente autocontido',
-    codeLabel: 'agent',
+    codeLabel: 'Terminal',
     whatTitle: 'O que isto faz',
     whatBody: [
       'A adoção altera o repositório de duas formas duradouras — os pilares da metodologia.',
       'Primeiro, o repositório se torna orientado a especificação: o trabalho começa a partir de um plano e uma especificação escritos, não de prompts ad hoc. Segundo, o próprio repositório se torna o harness do agente — um AGENTS.md, uma base de conhecimento em docs/, docs por módulo e um diretório de skills .agents/ (com os symlinks de .claude → .agents e .cursor → .agents) dão a cada agente o contexto e os comandos de que ele precisa.',
     ],
-    sequenceTitle: 'A sequência de adoção',
+    sequenceTitle: 'O caminho de adoção',
     orLabel: 'ou',
     steps: [
       {
@@ -784,6 +731,7 @@ export const pt: SiteTranslations = {
         title: 'Planeje e execute',
         description:
           'Gere Deep Work Plans com /dwp-create e execute-os com /dwp-execute, depois /dwp-status, /dwp-refine, /dwp-resume e /dwp-verify conforme o trabalho avança. Cada plano carrega tarefas numeradas, validation gates e um protocolo de conclusão — e se encerra com um único Final Review obrigatório (passe de segurança, validação de estado final e reconciliação de skills). O Executive Report permanece disponível sob pedido.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: 'Verifique a conformidade',
@@ -795,12 +743,12 @@ export const pt: SiteTranslations = {
     outcomeTitle: 'O resultado',
     outcome:
       'O repositório se torna orientado a especificação e o próprio repositório se torna o harness do agente — contexto e comandos viajam junto com o código.',
-    nextStepsTitle: 'Leia a seguir',
+    nextStepsTitle: 'Próximos passos',
     nextSteps: [
-      { label: 'Início rápido', href: '/quickstart' },
-      { label: 'Metodologia', href: '/methodology' },
+      { label: 'Leia a metodologia', href: '/methodology' },
       { label: 'Especificação', href: '/spec' },
-      { label: 'Kit', href: '/kit' },
+      { label: 'Explore o kit', href: '/kit' },
+      { label: 'Veja exemplos', href: '/examples' },
     ],
   },
 
@@ -874,7 +822,7 @@ export const pt: SiteTranslations = {
             answer:
               'A skill do agente é instalada onde quer que o seu agente carregue skills de projeto ou de usuário. O onboarding então adapta o próprio repositório: cria ou reconcilia `AGENTS.md`, `docs/`, `.agents/` e a área `.dwp/` ignorada pelo git. A skill ensina o método ao agente; o repositório mantém o contexto, o kit e a evidência do plano que os outros agentes precisam para continuar.',
             linkLabel: 'Veja o fluxo de adoção',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1040,7 +988,7 @@ export const pt: SiteTranslations = {
             answer:
               'O onboarding é não destrutivo: ele detecta um `AGENTS.md`, `docs/`, `.agents/` ou `CLAUDE.md` existente, reconcilia em vez de sobrescrever e pergunta antes de substituir qualquer coisa. Ele escreve o índice `AGENTS.md` com comandos reais, uma árvore `docs/` fundamentada, docs por módulo, o kit `.agents/` com comandos enxutos `dwp-*`, uma área de saída `.dwp/` ignorada pelo git, um mapa de testes verificado e a revisão local de código obrigatória (a skill AI Diff Reviewer mais uma extensão de revisão adaptada ao repositório). Ele então executa uma autoverificação e o verificador de conformidade, para que você veja o que foi produzido. Um repositório integrado sob um padrão anterior recebe uma atualização direcionada do harness que reconcilia apenas o que falta ou está desatualizado.',
             linkLabel: 'O endpoint de adoção',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1049,7 +997,7 @@ export const pt: SiteTranslations = {
             answer:
               'São dois upgrades diferentes, e o fluxo os mantém separados. O harness do repositório — `AGENTS.md`, `docs/`, o kit `.agents/` — é reconciliado reexecutando o onboarding, que preenche apenas o que falta ou está desatualizado. A skill em si avança com `/dwp-upgrade`: uma verificação somente leitura da última versão publicada, a instalação da tag exata que você aceitou, verificada, e depois o onboarding novamente como uma passada nova. O fluxo é condicionado a consentimento explícito do início ao fim, as adaptações locais são comparadas e preservadas em vez de sobrescritas, e `.dwp/` nunca é migrado — os planos existentes mantêm a forma registrada e continuam rodando.',
             linkLabel: 'O endpoint de adoção',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1073,7 +1021,7 @@ export const pt: SiteTranslations = {
             id: 'cost',
             question: 'Quanto custa e como a eficiência é medida?',
             answer:
-              'A metodologia e a skill são licenciadas sob MIT e gratuitas; não há serviço, chave de API nem telemetria nos fluxos centrais. A eficiência é relatada como o número de bytes de instrução que cada fluxo carrega, medido por um script comitado junto com a skill, remedido em cada linha de base de lançamento e publicado em um registro de avaliação, com aumentos relatados com a mesma franqueza das reduções. Ela não é relatada como porcentagens de tokens ou economias de custo, porque um inventário de bytes não estabelece essas coisas. Uma avaliação pública com agentes novos já foi executada sob um protocolo congelado: os mesmos dois recursos construídos a partir de clones limpos sem harness, com a versão maior anterior e com a atual. Ela constatou que os agentes em uma árvore com harness leram menos bytes nas duas tarefas, e que as sessões de recurso da versão atual consumiram menos entrada e saída de modelo do que as da versão maior anterior nas duas tarefas — conforme reportado pelo harness, em uma única carga de trabalho. Ela também constatou os limites honestos: o onboarding é um custo único que só se paga quando os fluxos são usados, a direção líquida de tokens por carga de trabalho foi mista, não se reivindica vantagem de tempo de relógio, e um agente novo não entra nos fluxos sozinho — os fluxos são comandos que você ou o agente invocam.',
+              'A metodologia e a skill são licenciadas sob MIT e gratuitas; não há serviço, chave de API nem telemetria nos fluxos centrais. A eficiência é relatada como o número de bytes de instrução que cada fluxo carrega **na entrada** — seu pacote de entrada no início de uma sessão —, publicado ao lado de **caminhos de ponta a ponta** nomeados que somam o que os próprios gatilhos do fluxo carregam quando o trabalho real continua (por exemplo, um resume que segue para execute costuma carregar várias vezes seu pacote de entrada). Nenhum dos dois números limita uma sessão: uma execução real também lê os próprios arquivos do repositório, a saída das ferramentas e os arquivos de trabalho do plano, nada disso contado por este registro. Ambos os números são medidos por um script comitado junto com a skill, remedido em cada linha de base de lançamento e publicado em um registro de avaliação, com aumentos relatados com a mesma franqueza das reduções. Ela não é relatada como porcentagens de tokens ou economias de custo, porque um inventário de bytes não estabelece essas coisas. Uma avaliação pública com agentes novos já foi executada sob um protocolo congelado: os mesmos dois recursos construídos a partir de clones limpos sem harness, com a versão maior anterior e com a atual. Ela constatou que os agentes em uma árvore com harness leram menos bytes nas duas tarefas, e que as sessões de recurso da versão atual consumiram menos entrada e saída de modelo do que as da versão maior anterior nas duas tarefas — conforme reportado pelo harness, em uma única carga de trabalho. Ela também constatou os limites honestos: o onboarding é um custo único que só se paga quando os fluxos são usados, a direção líquida de tokens por carga de trabalho foi mista, não se reivindica vantagem de tempo de relógio, e um agente novo não entra nos fluxos sozinho — os fluxos são comandos que você ou o agente invocam.',
             linkLabel: 'Confiança e divulgação',
             linkPath: '/trust',
           },
@@ -1291,13 +1239,13 @@ export const pt: SiteTranslations = {
         },
         {
           title: 'Carga de instrução medida e publicada',
-          body: 'Um script comitado mede quantos bytes cada fluxo carrega; os resultados, incluindo os aumentos, são publicados como bytes, nunca como porcentagens de tokens ou de custo.',
+          body: 'Um script comitado publica duas medições por fluxo — o pacote de entrada que carrega no início de uma sessão, e o caminho de ponta a ponta quando seus gatilhos reais disparam —, além do que cada uma exclui, de modo que o número de entrada nunca seja lido como o custo total de uma execução. Os resultados, incluindo os aumentos, são publicados como bytes, nunca como porcentagens de tokens ou de custo.',
         },
       ],
     },
     honestLimits: {
       title: 'Limitações honestas',
-      body: 'O Deep Work Plan não tem um mecanismo de especificação viva ou delta; OpenSpec e ferramentas semelhantes são mais fortes aí. Ainda não existe um benchmark independente da metodologia; uma avaliação própria com agentes novos já foi executada sob um protocolo congelado, em pequena escala — uma carga de trabalho, dois recursos por configuração, uma máquina — e seus resultados são publicados nas duas direções: agentes em árvores com harness leram menos bytes nas duas tarefas, e as sessões da versão atual consumiram menos entrada e saída de modelo, reportada pelo harness, do que as da versão maior anterior, enquanto a direção líquida de tokens por carga de trabalho foi mista e nenhuma vantagem de tempo de relógio é reivindicada. O registro de carga de instrução mede bytes carregados, não tokens, custo ou resultados. O DWP é deliberadamente limitado ao repositório: não é um sistema de memória entre projetos, nem um framework de agentes baseado em papéis, nem um IDE, então também não compete nessas frentes — combine-o com uma ferramenta que cubra essa frente quando for isso que o trabalho exigir.',
+      body: 'O Deep Work Plan não tem um mecanismo de especificação viva ou delta; OpenSpec e ferramentas semelhantes são mais fortes aí. Ainda não existe um benchmark independente da metodologia; uma avaliação própria com agentes novos já foi executada sob um protocolo congelado, em pequena escala — uma carga de trabalho, dois recursos por configuração, uma máquina — e seus resultados são publicados nas duas direções: agentes em árvores com harness leram menos bytes nas duas tarefas, e as sessões da versão atual consumiram menos entrada e saída de modelo, reportada pelo harness, do que as da versão maior anterior, enquanto a direção líquida de tokens por carga de trabalho foi mista e nenhuma vantagem de tempo de relógio é reivindicada. O registro de carga de instrução mede bytes carregados, não tokens, custo ou resultados, e seu número de pacote de entrada não limita o que uma execução lê. O DWP é deliberadamente limitado ao repositório: não é um sistema de memória entre projetos, nem um framework de agentes baseado em papéis, nem um IDE, então também não compete nessas frentes — combine-o com uma ferramenta que cubra essa frente quando for isso que o trabalho exigir.',
     },
     correction: {
       title: 'Ajude-nos a manter esta página exata',
@@ -1364,7 +1312,7 @@ export const pt: SiteTranslations = {
     ctaBody:
       'Leia a metodologia e a especificação, aponte um agente para o endpoint de init e verifique a instalação antes de executá-la.',
     ctaPrimary: 'Leia a metodologia',
-    ctaSecondary: 'Adoção (init)',
+    ctaSecondary: 'Início rápido',
   },
 
   developersPage: {

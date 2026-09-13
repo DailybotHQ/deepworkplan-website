@@ -75,7 +75,7 @@ export const pl: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Nowość · Wydajny tokenowo',
+    badge: 'Nowość · Wydajny kontekstowo z założenia',
     text: 'Deep Work Plan jest dziś na Product Hunt',
     tagline: 'daj agentowi plan',
     linkText: 'Zagłosuj',
@@ -112,7 +112,7 @@ export const pl: SiteTranslations = {
         'Skopiuj prompt init.md i wklej go do swojego agenta kodowania — Claude Code, Cursor, Codex lub innego — aby uczynić dowolne repozytorium AI-first.',
       copyLabel: 'Kopiuj init.md',
       copiedLabel: 'Skopiowano',
-      viewInitCta: 'Zobacz pełny prompt /init',
+      viewInitCta: 'Zobacz szybki start',
       pullQuote:
         'Deep Work Plan to spec-driven development, w którym samo repozytorium staje się harness (rusztowaniem agenta).',
       primaryCta: 'Przeczytaj metodykę',
@@ -675,49 +675,76 @@ export const pl: SiteTranslations = {
     meta: {
       title: 'Szybki start — Deep Work Plan',
       description:
-        'Zainstaluj skill, przeprowadź onboarding repozytorium, a potem planuj i realizuj z dowolnym agentem — kroki, które czynią repozytorium spec-driven i pilotowalnym przez agenta.',
+        'Przyjmij metodykę Deep Work Plan w dowolnym repozytorium. Zainstaluj skill, uruchom onboarding agenta, a potem planuj i realizuj z dowolnym agentem kodującym AI.',
     },
     eyebrow: 'Szybki start',
-    title: 'Zacznij w kilka minut',
+    title: 'Uczyń to repozytorium AI-first',
     intro:
-      'Zainstaluj skill, przeprowadź onboarding repozytorium, a potem planuj i realizuj z dowolnym agentem — kroki, które czynią repozytorium spec-driven i pilotowalnym przez agenta.',
-    sequenceTitle: 'Ścieżka adopcji',
+      'Jeden endpoint, by zamienić dowolne repozytorium w bazę kodu spec-driven, gotową dla agentów. Zainstaluj skill, pozwól agentowi przeprowadzić onboarding repo, a potem planuj i realizuj uporządkowaną pracę z dowolnym agentem kodującym.',
+    handoffTitle: 'Skopiuj do swojego agenta',
+    handoffBody:
+      'Skopiuj pełny prompt init.md i wklej go do swojego agenta kodowania AI — Claude Code, Cursor, Codex lub innego. Przeczyta metodykę i specyfikację, zainstaluje skill i przeprowadzi onboarding tego repozytorium pod Deep Work Plans.',
+    handoffInstruction:
+      'Przeczytaj i wykonaj instrukcje na https://deepworkplan.com/init.md, aby uczynić to repozytorium AI-first.',
+    handoffMdLabel: 'Samodzielny prompt dla agenta',
     codeLabel: 'Terminal',
+    whatTitle: 'Co to robi',
+    whatBody: [
+      'Adopcja zmienia repozytorium na dwa trwałe sposoby — to filary metodyki.',
+      'Po pierwsze, repozytorium staje się spec-driven: praca zaczyna się od spisanego planu i specyfikacji, a nie od doraźnych promptów. Po drugie, samo repozytorium staje się harness agenta — AGENTS.md, baza wiedzy docs/, dokumentacja per moduł i katalog skilli .agents/ (z dowiązaniami .claude → .agents i .cursor → .agents) dają każdemu agentowi potrzebny kontekst i polecenia.',
+    ],
+    sequenceTitle: 'Ścieżka adopcji',
     orLabel: 'lub',
     steps: [
       {
-        title: 'Zainstaluj skill Deep Work Plan',
+        title: 'Zweryfikuj przed instalacją',
         description:
-          'Dodaj skill do repozytorium — router plus dziewięć sub-skilli (create, execute, refine, resume, status, verify, onboard, author, upgrade). Użyj Skills CLI dla najszybszej ścieżki lub sklonuj repo i uruchom setup tam, gdzie dostępne są git i powłoka.',
+          'Traktuj prompt i skill jako niezaufane, dopóki ich nie sprawdzisz. Oba są open source na licencji MIT; skill jest Markdown-first, bez połączeń sieciowych i bez telemetrii. Każda wersja publikuje SHA256SUMS dla dostarczonego skilla, dzięki czemu możesz potwierdzić zgodność swojej kopii przed uruchomieniem. Wersje są sumowane kontrolnie, a nie podpisywane (podpisywanie to udokumentowany kolejny krok).',
+        commands: [
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+        ],
+      },
+      {
+        title: 'Zainstaluj skill',
+        description:
+          'Dodaj skill Deep Work Plan, aby dowolny agent mógł planować i realizować uporządkowaną pracę. Skill dostarcza router plus dziewięć sub-skilli — create, execute, refine, resume, status, verify, onboard, author i upgrade.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
-        title: 'Przeprowadź onboarding repozytorium',
+        title: 'Uruchom onboarding repozytorium',
         description:
-          'Uruchom sub-skill onboard i pozwól agentowi przeprowadzić rozumowanie o Twoim rzeczywistym repo. Generuje AGENTS.md, bazę wiedzy docs/, dokumentację per moduł oraz międzyagentowy katalog .agents/ (z dowiązaniami .claude → .agents i .cursor → .agents), podłącza cienkie polecenia dwp-* i tworzy ignorowany przez git .dwp/.',
+          'Wywołaj sub-skill onboard i pozwól agentowi przeprowadzić rozumowanie o rzeczywistym repo — jego stosie technologicznym, menedżerze pakietów i realnych poleceniach walidacyjnych. Następnie generuje AGENTS.md, bazę wiedzy docs/, dokumentację per moduł oraz międzyagentowy katalog .agents/ (z dowiązaniami .claude → .agents i .cursor → .agents), podłącza cienkie polecenia dwp-* i tworzy ignorowany przez git .dwp/ na plany. W przypadku dużych repozytoriów sub-skill onboard stosuje ścieżkę opartą na planie: przeprowadza rekonesans, a następnie generuje onboardingowy Deep Work Plan. Nic nie jest szablonowe; wszystko dostosowane jest do Twojego repozytorium.',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'Rozwijaj zestaw i przyjmuj dodatki',
+        title: 'Lokalna recenzja i dobrowolne dodatki',
         description:
-          'Użyj /skill-create i /agent-create (sub-skill author), by rozwijać skille, agentów i polecenia dopasowane do stosu technologicznego. Onboarding instaluje wymaganą lokalną recenzję AI Diff Reviewer (jej bramka CI pozostaje opcjonalna) i oferuje cztery dobrowolne dodatki — devcontainer, Dailybot, dependency-upgrade i design-system — które przyjmujesz tylko, gdy pasują.',
+          'Onboarding instaluje wymaganą lokalną recenzję AI Diff Reviewer (jej bramka CI pozostaje opcjonalna) i oferuje cztery opcjonalne dodatki — devcontainer, Dailybot, dependency-upgrade i design-system — które przyjmujesz tylko, gdy pasują. Repo jest w pełni zgodne z zerową liczbą opcjonalnych dodatków. Użyj /skill-create i /agent-create (sub-skill author), by rozwijać skille, agentów i polecenia wykraczające poza bazowy zestaw.',
       },
       {
         title: 'Planuj i realizuj',
         description:
-          'Wygeneruj Deep Work Plan i realizuj go zadanie po zadaniu, walidując każdą bramkę i wznawiając między sesjami — pilotując repozytorium względem jego własnej specyfikacji.',
+          'Generuj Deep Work Plans za pomocą /dwp-create i realizuj je przez /dwp-execute, a następnie /dwp-status, /dwp-refine, /dwp-resume i /dwp-verify w miarę postępu prac. Każdy plan niesie ponumerowane zadania, bramki walidacyjne i protokół ukończenia — i zamyka się dokładnie jednym obowiązkowym Final Review (przejście bezpieczeństwa, walidacja stanu końcowego i uzgodnienie decyzji o skillach). Executive Report pozostaje dostępny na żądanie.',
         commands: ['/dwp-create <goal>', '/dwp-execute'],
+      },
+      {
+        title: 'Zweryfikuj zgodność',
+        description:
+          'Uruchom /dwp-verify, aby uzyskać obiektywny raport pozytywny/negatywny względem specyfikacji. Potwierdź, że AGENTS.md, docs/ (z prawdziwą treścią, nie zaślepkami), .agents/ (z cienkimi delegatorami dwp-* i katalogiem zgodnym z dyskiem), .dwp/ i tmp/ są na miejscu — nic szablonowego, wszystko przemyślane dla tego repozytorium.',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: 'Efekt',
     outcome:
-      'Twoje repozytorium staje się spec-driven i pilotowalne przez agenta: plan jest trwałym źródłem prawdy, a samo repozytorium staje się harness, względem którego działa każdy agent.',
+      'Repozytorium staje się spec-driven, a samo repozytorium staje się harness agenta — kontekst i polecenia podróżują razem z kodem.',
     nextStepsTitle: 'Kolejne kroki',
     nextSteps: [
       { label: 'Przeczytaj metodykę', href: '/methodology' },
+      { label: 'Specyfikacja', href: '/spec' },
       { label: 'Przejrzyj zestaw', href: '/kit' },
       { label: 'Zobacz przykłady', href: '/examples' },
     ],
@@ -794,7 +821,7 @@ export const pl: SiteTranslations = {
             answer:
               'Skill agenta jest instalowany tam, gdzie twój agent ładuje skille projektu lub użytkownika. Onboarding następnie dostosowuje samo repozytorium: tworzy lub uzgadnia `AGENTS.md`, `docs/`, `.agents/` oraz obszar roboczy `.dwp/` wykluczony przez gitignore. Skill uczy agenta metody; repozytorium przechowuje kontekst, zestaw i dowody planu, których potrzebują inni agenci, by kontynuować.',
             linkLabel: 'Zobacz przepływ adopcji',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -958,7 +985,7 @@ export const pl: SiteTranslations = {
             answer:
               'Onboarding jest niedestrukcyjny: wykrywa istniejący `AGENTS.md`, `docs/`, `.agents/` lub `CLAUDE.md`, uzgadnia zamiast nadpisywać i pyta przed zastąpieniem czegokolwiek. Zapisuje indeks `AGENTS.md` z realnymi poleceniami, przemyślane drzewo `docs/`, dokumentację per moduł, zestaw `.agents/` z cienkimi poleceniami `dwp-*`, obszar wyjściowy `.dwp/` wykluczony przez gitignore, zweryfikowaną mapę testów i wymagany lokalny przegląd kodu (skill AI Diff Reviewer plus rozszerzenie przeglądu dopasowane do repozytorium). Następnie uruchamia samosprawdzenie i sprawdzacz zgodności, aby pokazać, co zostało wyprodukowane. Repozytorium onboardowane pod wcześniejszym standardem dostaje ukierunkowany upgrade harnessu, który uzgadnia tylko to, czego brakuje lub co jest przestarzałe.',
             linkLabel: 'Endpoint adopcji',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -967,7 +994,7 @@ export const pl: SiteTranslations = {
             answer:
               'Są tu dwie różne aktualizacje i przepływ trzyma je osobno. Harness repozytorium — `AGENTS.md`, `docs/`, zestaw `.agents/` — jest uzgadniany ponownym przebiegiem onboardingu, który uzupełnia tylko to, czego brakuje lub co jest przestarzałe. Sam skill rusza dalej przez `/dwp-upgrade`: sprawdzenie najnowszego opublikowanego release’u w trybie tylko do odczytu, instalacja dokładnego taga, który zaakceptowałeś, zweryfikowana, a potem onboarding ponownie jak świeże przejście. Przepływ w każdym kroku wymaga wyraźnej zgody, lokalne adaptacje są porównywane diffem i zachowywane zamiast nadpisywane, a `.dwp/` nigdy nie jest migrowany — istniejące plany zachowują zapisany kształt i działają dalej.',
             linkLabel: 'Endpoint adopcji',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -991,7 +1018,7 @@ export const pl: SiteTranslations = {
             id: 'cost',
             question: 'Ile to kosztuje i jak mierzona jest wydajność?',
             answer:
-              'Metodyka i skill są na licencji MIT i bezpłatne; nie ma usługi, klucza API ani telemetrii w przepływach rdzeniowych. Wydajność jest raportowana jako liczba bajtów instrukcji ładowanych przez każdy przepływ, mierzona skryptem commitowanym ze skillem, ponownie mierzona na każdej linii bazowej release’u i publikowaną w rejestrze ewaluacji, przy czym wzrosty są raportowane tak samo otwarcie jak spadki. Nie jest raportowana jako procenty tokenów ani oszczędności kosztów, bo inwentaryzacja bajtów tego nie dowodzi. Publiczna ewaluacja na świeżych agentach została już przeprowadzona według zamrożonego protokołu: te same dwa featury zbudowane z czystych klonów bez harnessu, z poprzednią wersją główną i z obecną. Wykazała, że agenci na drzewie z harnessem czytali mniej bajtów w obu zadaniach, a sesje featurów obecnej wersji zużywały mniej wejścia i wyjścia modelu niż poprzedniej wersji głównej w obu zadaniach — tak, jak zaraportował harness, na pojedynczym obciążeniu. Wykazała też uczciwe ograniczenia: onboarding to jednorazowy koszt, który zwraca się tylko wtedy, gdy przepływy są używane; netto-kierunek tokenów na obciążenie był mieszany; nie rości się żadnej przewagi czasu zegarowego; a świeży agent nie wchodzi w przepływy sam z siebie — przepływy to komendy wywoływane przez Ciebie lub przez agenta, który wie, jak je wywołać.',
+              'Metodyka i skill są na licencji MIT i bezpłatne; nie ma usługi, klucza API ani telemetrii w przepływach rdzeniowych. Wydajność jest raportowana jako liczba bajtów instrukcji, które każdy przepływ ładuje **na wejściu** — jego pakiet na początku sesji — publikowana razem z nazwanymi **ścieżkami end-to-end**, które dodają to, co ładują właściwe wyzwalacze przepływu, gdy praca faktycznie jest kontynuowana (na przykład wznowienie, które przechodzi do wykonania, zazwyczaj ładuje kilkukrotność swojego pakietu wejściowego). Żadna z tych dwóch liczb nie ogranicza sesji: rzeczywiste uruchomienie czyta też własne pliki repozytorium, wynik narzędzi i pliki robocze planu, których ten rejestr nie liczy. Obie liczby są mierzone skryptem commitowanym ze skillem, ponownie mierzone na każdej linii bazowej release’u i publikowaną w rejestrze ewaluacji, przy czym wzrosty są raportowane tak samo otwarcie jak spadki. Nie jest raportowana jako procenty tokenów ani oszczędności kosztów, bo inwentaryzacja bajtów tego nie dowodzi. Publiczna ewaluacja na świeżych agentach została już przeprowadzona według zamrożonego protokołu: te same dwa featury zbudowane z czystych klonów bez harnessu, z poprzednią wersją główną i z obecną. Wykazała, że agenci na drzewie z harnessem czytali mniej bajtów w obu zadaniach, a sesje featurów obecnej wersji zużywały mniej wejścia i wyjścia modelu niż poprzedniej wersji głównej w obu zadaniach — tak, jak zaraportował harness, na pojedynczym obciążeniu. Wykazała też uczciwe ograniczenia: onboarding to jednorazowy koszt, który zwraca się tylko wtedy, gdy przepływy są używane; netto-kierunek tokenów na obciążenie był mieszany; nie rości się żadnej przewagi czasu zegarowego; a świeży agent nie wchodzi w przepływy sam z siebie — przepływy to komendy wywoływane przez Ciebie lub przez agenta, który wie, jak je wywołać.',
             linkLabel: 'Zaufanie i ujawnianie',
             linkPath: '/trust',
           },
@@ -1209,13 +1236,13 @@ export const pl: SiteTranslations = {
         },
         {
           title: 'Obciążenie instrukcjami mierzone i publikowane',
-          body: 'Commitowany skrypt mierzy, ile bajtów ładuje każdy przepływ; wyniki, w tym wzrosty, są publikowane jako bajty, nigdy jako procenty tokenów ani kosztów.',
+          body: 'Commitowany skrypt publikuje dwa pomiary dla każdego przepływu — pakiet wejściowy ładowany na początku sesji oraz ścieżkę end-to-end po uruchomieniu jego właściwych wyzwalaczy — a także to, co każdy z nich wyklucza, dzięki czemu sama liczba wejściowa nigdy nie jest odczytywana jako całkowity koszt uruchomienia. Wyniki, w tym wzrosty, są publikowane jako bajty, nigdy jako procenty tokenów ani kosztów.',
         },
       ],
     },
     honestLimits: {
       title: 'Uczciwe ograniczenia',
-      body: 'Deep Work Plan nie ma mechanizmu żywych ani delta-specyfikacji; OpenSpec i podobne narzędzia są tam silniejsze. Niezależny benchmark metodyki jeszcze nie istnieje; autorska ewaluacja na świeżych agentach została już przeprowadzona według zamrożonego protokołu, w małej skali — jedno obciążenie, dwa featury na konfigurację, jedna maszyna — a jej wyniki są publikowane w obu kierunkach: agenci na drzewach z harnessem czytali mniej bajtów w obu zadaniach, a sesje obecnej wersji zużywały mniej zaraportowanego przez harness wejścia i wyjścia modelu niż poprzednia wersja główna, przy czym netto-kierunek tokenów na obciążenie był mieszany i nie rości się żadnej przewagi czasu zegarowego. Rejestr obciążenia instrukcjami mierzy załadowane bajty, nie tokeny, koszty ani wyniki. DWP jest celowo ograniczony do repozytorium: nie jest systemem pamięci między projektami, nie jest frameworkiem agentów opartym na rolach ani IDE, więc nie konkuruje też na tych płaszczyznach — połącz go z narzędziem pokrywającym daną potrzebę, gdy praca tego wymaga.',
+      body: 'Deep Work Plan nie ma mechanizmu żywych ani delta-specyfikacji; OpenSpec i podobne narzędzia są tam silniejsze. Niezależny benchmark metodyki jeszcze nie istnieje; autorska ewaluacja na świeżych agentach została już przeprowadzona według zamrożonego protokołu, w małej skali — jedno obciążenie, dwa featury na konfigurację, jedna maszyna — a jej wyniki są publikowane w obu kierunkach: agenci na drzewach z harnessem czytali mniej bajtów w obu zadaniach, a sesje obecnej wersji zużywały mniej zaraportowanego przez harness wejścia i wyjścia modelu niż poprzednia wersja główna, przy czym netto-kierunek tokenów na obciążenie był mieszany i nie rości się żadnej przewagi czasu zegarowego. Rejestr obciążenia instrukcjami mierzy załadowane bajty, nie tokeny, koszty ani wyniki, a jego wartość pakietu wejściowego nie jest limitem tego, co odczytuje uruchomienie. DWP jest celowo ograniczony do repozytorium: nie jest systemem pamięci między projektami, nie jest frameworkiem agentów opartym na rolach ani IDE, więc nie konkuruje też na tych płaszczyznach — połącz go z narzędziem pokrywającym daną potrzebę, gdy praca tego wymaga.',
     },
     correction: {
       title: 'Pomóż nam utrzymać dokładność',
@@ -1282,86 +1309,7 @@ export const pl: SiteTranslations = {
     ctaBody:
       'Przeczytaj metodykę i specyfikację, skieruj agenta na endpoint init i zweryfikuj instalację przed uruchomieniem.',
     ctaPrimary: 'Przeczytaj metodykę',
-    ctaSecondary: 'Adopcja (init)',
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — Uczyń swoje repozytorium AI-first — Deep Work Plan',
-      description:
-        'Przyjmij metodykę Deep Work Plan w dowolnym repozytorium. Zainstaluj skill, uruchom onboarding agenta, a potem planuj i realizuj z dowolnym agentem kodującym AI.',
-    },
-    eyebrow: 'Adopcja',
-    title: 'Uczyń to repozytorium AI-first',
-    intro:
-      'Jeden endpoint, by zamienić dowolne repozytorium w bazę kodu spec-driven, gotową dla agentów. Zainstaluj skill, pozwól agentowi przeprowadzić onboarding repo, a potem planuj i realizuj uporządkowaną pracę z dowolnym agentem kodującym.',
-    handoffTitle: 'Skopiuj do swojego agenta',
-    handoffBody:
-      'Skopiuj pełny prompt init.md i wklej go do swojego agenta kodowania AI — Claude Code, Cursor, Codex lub innego. Przeczyta metodykę i specyfikację, zainstaluje skill i przeprowadzi onboarding tego repozytorium pod Deep Work Plans.',
-    handoffInstruction:
-      'Przeczytaj i wykonaj instrukcje na https://deepworkplan.com/init.md, aby uczynić to repozytorium AI-first.',
-    handoffMdLabel: 'Samodzielny prompt dla agenta',
-    codeLabel: 'agent',
-    whatTitle: 'Co to robi',
-    whatBody: [
-      'Adopcja zmienia repozytorium na dwa trwałe sposoby — to filary metodyki.',
-      'Po pierwsze, repozytorium staje się spec-driven: praca zaczyna się od spisanego planu i specyfikacji, a nie od doraźnych promptów. Po drugie, samo repozytorium staje się harness agenta — AGENTS.md, baza wiedzy docs/, dokumentacja per moduł i katalog skilli .agents/ (z dowiązaniami .claude → .agents i .cursor → .agents) dają każdemu agentowi potrzebny kontekst i polecenia.',
-    ],
-    sequenceTitle: 'Sekwencja adopcji',
-    orLabel: 'lub',
-    steps: [
-      {
-        title: 'Zweryfikuj przed instalacją',
-        description:
-          'Traktuj prompt i skill jako niezaufane, dopóki ich nie sprawdzisz. Oba są open source na licencji MIT; skill jest Markdown-first, bez połączeń sieciowych i bez telemetrii. Każda wersja publikuje SHA256SUMS dla dostarczonego skilla, dzięki czemu możesz potwierdzić zgodność swojej kopii przed uruchomieniem. Wersje są sumowane kontrolnie, a nie podpisywane (podpisywanie to udokumentowany kolejny krok).',
-        commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
-        ],
-      },
-      {
-        title: 'Zainstaluj skill',
-        description:
-          'Dodaj skill Deep Work Plan, aby dowolny agent mógł planować i realizować uporządkowaną pracę. Skill dostarcza router plus dziewięć sub-skilli — create, execute, refine, resume, status, verify, onboard, author i upgrade.',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'openclaw skills install deepworkplan',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: 'Uruchom onboarding repozytorium',
-        description:
-          'Wywołaj sub-skill onboard i pozwól agentowi przeprowadzić rozumowanie o rzeczywistym repo — jego stosie technologicznym, menedżerze pakietów i realnych poleceniach walidacyjnych. Następnie generuje AGENTS.md, bazę wiedzy docs/, dokumentację per moduł oraz międzyagentowy katalog .agents/ (z dowiązaniami .claude → .agents i .cursor → .agents), podłącza cienkie polecenia dwp-* i tworzy ignorowany przez git .dwp/ na plany. W przypadku dużych repozytoriów sub-skill onboard stosuje ścieżkę opartą na planie: przeprowadza rekonesans, a następnie generuje onboardingowy Deep Work Plan. Nic nie jest szablonowe; wszystko dostosowane jest do Twojego repozytorium.',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: 'Lokalna recenzja i dobrowolne dodatki',
-        description:
-          'Onboarding instaluje wymaganą lokalną recenzję AI Diff Reviewer (jej bramka CI pozostaje opcjonalna) i oferuje cztery opcjonalne dodatki — devcontainer, Dailybot, dependency-upgrade i design-system — które przyjmujesz tylko, gdy pasują. Repo jest w pełni zgodne z zerową liczbą opcjonalnych dodatków. Użyj /skill-create i /agent-create (sub-skill author), by rozwijać skille, agentów i polecenia wykraczające poza bazowy zestaw.',
-      },
-      {
-        title: 'Planuj i realizuj',
-        description:
-          'Generuj Deep Work Plans za pomocą /dwp-create i realizuj je przez /dwp-execute, a następnie /dwp-status, /dwp-refine, /dwp-resume i /dwp-verify w miarę postępu prac. Każdy plan niesie ponumerowane zadania, bramki walidacyjne i protokół ukończenia — i zamyka się dokładnie jednym obowiązkowym Final Review (przejście bezpieczeństwa, walidacja stanu końcowego i uzgodnienie decyzji o skillach). Executive Report pozostaje dostępny na żądanie.',
-      },
-      {
-        title: 'Zweryfikuj zgodność',
-        description:
-          'Uruchom /dwp-verify, aby uzyskać obiektywny raport pozytywny/negatywny względem specyfikacji. Potwierdź, że AGENTS.md, docs/ (z prawdziwą treścią, nie zaślepkami), .agents/ (z cienkimi delegatorami dwp-* i katalogiem zgodnym z dyskiem), .dwp/ i tmp/ są na miejscu — nic szablonowego, wszystko przemyślane dla tego repozytorium.',
-        commands: ['/dwp-verify'],
-      },
-    ],
-    outcomeTitle: 'Efekt',
-    outcome:
-      'Repozytorium staje się spec-driven, a samo repozytorium staje się harness agenta — kontekst i polecenia podróżują razem z kodem.',
-    nextStepsTitle: 'Przeczytaj dalej',
-    nextSteps: [
-      { label: 'Szybki start', href: '/quickstart' },
-      { label: 'Metodyka', href: '/methodology' },
-      { label: 'Specyfikacja', href: '/spec' },
-      { label: 'Zestaw', href: '/kit' },
-    ],
+    ctaSecondary: 'Szybki start',
   },
 
   developersPage: {

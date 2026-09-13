@@ -71,9 +71,12 @@ function generateSiteNavigation(lang: string): string {
     {
       title: t.agentNav.sections.getStarted,
       links: [
-        { label: t.nav.init, path: '/init' },
         { label: t.nav.quickstart, path: '/quickstart' },
         { label: t.nav.examples, path: '/examples' },
+        // The standalone, English-only agent prompt (never a /{lang}/init.md
+        // variant) — mark external so it is never prefixed with the page's
+        // language, matching CANONICAL_INIT_MD_PATH's contract elsewhere.
+        { label: t.nav.init, path: '/init.md', external: true },
       ],
     },
     {

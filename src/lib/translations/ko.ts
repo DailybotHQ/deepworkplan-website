@@ -74,7 +74,7 @@ export const ko: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'New · 토큰 효율적',
+    badge: 'New · 구조적으로 컨텍스트 효율적',
     text: 'Deep Work Plan이 오늘 Product Hunt에 출시됐어요',
     tagline: '에이전트에게 계획을',
     linkText: '추천하기',
@@ -110,7 +110,7 @@ export const ko: SiteTranslations = {
         'init.md 프롬프트를 복사하여 코딩 에이전트 — Claude Code, Cursor, Codex, 또는 다른 에이전트 — 에 붙여넣어 어떤 리포지토리든 AI-first로 만드세요.',
       copyLabel: 'init.md 복사',
       copiedLabel: '복사됨',
-      viewInitCta: '전체 /init 프롬프트 보기',
+      viewInitCta: '빠른 시작 보기',
       pullQuote:
         'Deep Work Plan은 리포지토리 자체가 하니스(harness)가 되는 스펙 주도 개발입니다.',
       primaryCta: '방법론 읽기',
@@ -670,62 +670,9 @@ export const ko: SiteTranslations = {
     meta: {
       title: '빠른 시작 — Deep Work Plan',
       description:
-        '스킬을 설치하고 리포지토리를 온보딩한 뒤 어떤 에이전트로든 계획하고 실행하세요 — 리포지토리를 스펙 주도이며 에이전트가 조종 가능하게 만드는 단계.',
-    },
-    eyebrow: '빠른 시작',
-    title: '몇 분 만에 시작',
-    intro:
-      '스킬을 설치하고 리포지토리를 온보딩한 뒤 어떤 에이전트로든 계획하고 실행하세요 — 리포지토리를 스펙 주도이며 에이전트가 조종 가능하게 만드는 단계.',
-    sequenceTitle: '채택 경로',
-    codeLabel: '터미널',
-    orLabel: '또는',
-    steps: [
-      {
-        title: 'Deep Work Plan 스킬 설치',
-        description:
-          '리포지토리에 스킬을 추가합니다 — 라우터와 아홉 개의 하위 스킬(create, execute, refine, resume, status, verify, onboard, author, upgrade). 가장 빠른 경로로 Skills CLI를 사용하거나, 리포지토리를 클론한 뒤 git과 셸을 사용할 수 있는 곳에서 setup을 실행하세요.',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: '리포지토리 온보딩',
-        description:
-          'onboard 하위 스킬을 실행하고 에이전트가 실제 리포지토리를 추론하게 하세요. AGENTS.md, docs/ 지식 베이스, 모듈별 문서, 교차 에이전트용 .agents/ 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)을 생성하고, 얇은 dwp-* 명령을 연결하며, gitignore된 .dwp/를 구성합니다.',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: '키트 발전과 애드온 채택',
-        description:
-          '/skill-create와 /agent-create(author 하위 스킬)로 스택에 맞는 스킬, 에이전트, 명령을 키우세요. 온보딩은 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고(그 CI 게이트는 선택으로 남습니다), 네 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system — 을 제안하며, 맞을 때만 채택하면 됩니다.',
-      },
-      {
-        title: '계획하고 실행',
-        description:
-          'Deep Work Plan을 생성하고 작업 단위로 실행하면서, 각 게이트를 검증하고 세션을 넘어 재개하세요 — 리포지토리를 자체 스펙에 대비해 조종합니다.',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: '결과',
-    outcome:
-      '리포지토리가 스펙 주도이며 에이전트가 조종 가능해집니다. 계획이 견고한 단일 진실 공급원이 되고, 리포지토리 자체가 어떤 에이전트든 실행하는 하니스가 됩니다.',
-    nextStepsTitle: '다음 단계',
-    nextSteps: [
-      { label: '방법론 읽기', href: '/methodology' },
-      { label: '키트 둘러보기', href: '/kit' },
-      { label: '예시 보기', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — 리포지토리를 AI-first로 — Deep Work Plan',
-      description:
         '어떤 리포지토리에든 Deep Work Plan 방법론을 채택하세요. 스킬을 설치하고, 에이전트 온보딩을 실행한 뒤, 어떤 AI 코딩 에이전트로든 계획하고 실행하세요.',
     },
-    eyebrow: '채택',
+    eyebrow: '빠른 시작',
     title: '이 리포지토리를 AI-first로 만들기',
     intro:
       '어떤 리포지토리든 스펙 주도이며 에이전트가 준비된 코드베이스로 바꾸는 단일 엔드포인트. 스킬을 설치하고, 에이전트가 리포지토리를 온보딩하게 한 뒤, 어떤 코딩 에이전트로든 구조화된 작업을 계획하고 실행하세요.',
@@ -735,13 +682,13 @@ export const ko: SiteTranslations = {
     handoffInstruction:
       'https://deepworkplan.com/init.md 의 지침을 읽고 따라 이 리포지토리를 AI-first로 만드세요.',
     handoffMdLabel: '자체 완결형 에이전트 프롬프트',
-    codeLabel: 'agent',
+    codeLabel: '터미널',
     whatTitle: '이것이 하는 일',
     whatBody: [
       '채택은 리포지토리를 두 가지 견고한 방식으로 바꿉니다 — 방법론의 두 기둥입니다.',
       '첫째, 리포지토리가 스펙 주도가 됩니다. 작업이 즉흥적인 프롬프트가 아니라 작성된 계획과 스펙에서 시작됩니다. 둘째, 리포지토리 자체가 에이전트 하니스가 됩니다 — AGENTS.md, docs/ 지식 베이스, 모듈별 문서, .agents/ 스킬 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)이 모든 에이전트에 필요한 컨텍스트와 명령을 제공합니다.',
     ],
-    sequenceTitle: '채택 순서',
+    sequenceTitle: '채택 경로',
     orLabel: '또는',
     steps: [
       {
@@ -777,6 +724,7 @@ export const ko: SiteTranslations = {
         title: '계획하고 실행',
         description:
           '/dwp-create로 Deep Work Plan을 생성하고 /dwp-execute로 실행한 뒤, 작업이 진행됨에 따라 /dwp-status, /dwp-refine, /dwp-resume, /dwp-verify를 사용하세요. 각 계획은 번호가 매겨진 작업, 검증 게이트, 완료 프로토콜을 담으며 — 단 하나의 필수 Final Review(보안 패스, 최종 상태 검증, 스킬 결정 조정)로 마무리됩니다. Executive Report는 요청 시 제공됩니다.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: '적합성 검증',
@@ -788,12 +736,12 @@ export const ko: SiteTranslations = {
     outcomeTitle: '결과',
     outcome:
       '리포지토리가 스펙 주도가 되고 리포지토리 자체가 에이전트 하니스가 됩니다 — 컨텍스트와 명령이 코드와 함께 움직입니다.',
-    nextStepsTitle: '다음에 읽을 것',
+    nextStepsTitle: '다음 단계',
     nextSteps: [
-      { label: '빠른 시작', href: '/quickstart' },
-      { label: '방법론', href: '/methodology' },
+      { label: '방법론 읽기', href: '/methodology' },
       { label: '스펙', href: '/spec' },
-      { label: '키트', href: '/kit' },
+      { label: '키트 둘러보기', href: '/kit' },
+      { label: '예시 보기', href: '/examples' },
     ],
   },
 
@@ -867,7 +815,7 @@ export const ko: SiteTranslations = {
             answer:
               '에이전트 스킬은 에이전트가 프로젝트 또는 사용자 스킬을 로드하는 위치라면 어디든 설치됩니다. 그런 다음 온보딩이 리포지토리 자체를 적응시킵니다: `AGENTS.md`, `docs/`, `.agents/`, 그리고 gitignore된 `.dwp/` 작업공간을 생성하거나 조정합니다. 스킬은 에이전트에게 방법론을 가르치고, 리포지토리는 다른 에이전트가 이어가는 데 필요한 컨텍스트, 키트, 계획 증거를 보관합니다.',
             linkLabel: '채택 흐름 보기',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1030,7 +978,7 @@ export const ko: SiteTranslations = {
             answer:
               '온보딩은 비파괴적입니다: 기존의 `AGENTS.md`, `docs/`, `.agents/`, `CLAUDE.md`를 감지하고 덮어쓰는 대신 조정하며, 무언가를 교체하기 전에 묻습니다. 실제 명령을 담은 `AGENTS.md` 인덱스, 이유가 담긴 `docs/` 트리, 모듈별 문서, 얇은 `dwp-*` 명령의 `.agents/` 키트, gitignore된 `.dwp/` 출력 영역, 검증된 테스팅 맵, 그리고 필수 로컬 코드 리뷰(AI Diff Reviewer 스킬 더하기 리포지토리 맞춤 리뷰 확장)를 작성합니다. 그런 다음 자기 점검과 적합성 검사기를 실행해 무엇이 만들어졌는지 볼 수 있게 합니다. 이전 표준에서 온보딩된 리포지토리는 빠지거나 오래된 부분만 조정하는 표적 harness 업그레이드를 받습니다.',
             linkLabel: '채택 엔드포인트',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1039,7 +987,7 @@ export const ko: SiteTranslations = {
             answer:
               '서로 다른 두 가지 업그레이드가 있고, 흐름은 이들을 분리합니다. 리포지토리 harness — `AGENTS.md`, `docs/`, `.agents/` 키트 — 는 온보딩을 다시 실행해서 조정되며, 빠지거나 오래된 부분만 채웁니다. 스킬 자체는 `/dwp-upgrade` 로 움직입니다: 최신 공개 릴리스를 읽기 전용으로 확인하고, 여러분이 받아들인 정확한 태그를 검증해서 설치한 뒤, 온보딩을 처음부터 새로 실행합니다. 흐름 전체가 명시적 동의로 진행되고, 로컬 적응은 덮어쓰지 않고 비교해 보존되며, `.dwp/` 는 결코 이전되지 않습니다 — 기존 계획은 기록된 형태를 유지한 채 계속 실행됩니다.',
             linkLabel: '채택 엔드포인트',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1062,7 +1010,7 @@ export const ko: SiteTranslations = {
             id: 'cost',
             question: '비용은 얼마인가요? 효율은 어떻게 측정되나요?',
             answer:
-              '방법론과 스킬은 MIT 라이선스이며 무료입니다; 핵심 플로우에는 서비스도, API 키도, 텔레메트리도 없습니다. 효율은 각 플로우가 로드하는 지시사항 바이트 수로 보고됩니다. 스킬과 함께 커밋된 스크립트가 측정하고 릴리스 베이스라인마다 다시 측정하여 평가 원장에 공개하며, 증가는 감소만큼 평범하게 보고됩니다. 바이트 목록은 그런 것을 입증하지 못하므로 토큰 백분율이나 비용 절감으로 보고하지 않습니다. 이제 동결된 프로토콜 아래에서 새로운 에이전트 대상의 공개 평가가 이미 실행되었습니다: 동일한 두 기능을 하네스 없이, 이전 메이저 버전으로, 현재 버전으로 — 각각 깨끗한 클론에서 구축했습니다. 그 결과, 하네스가 있는 트리에서 작업한 에이전트는 두 작업 모두에서 더 적은 바이트를 읽었고, 현재 버전의 기능 세션은 두 작업 모두에서 이전 메이저 버전보다 적은 모델 입력과 출력을 소비했습니다 — 하네스가 보고한 값이며 단일 워크로드 기준입니다. 이 평가는 정직한 한계도 밝혔습니다: 온보딩은 플로우가 사용될 때에만 회수되는 일회성 비용이고, 워크로드별 토큰 순 방향은 섞여 있었으며, 경과 시간 우위는 주장하지 않고, 새로운 에이전트는 스스로 플로우에 들어가지 않습니다 — 플로우는 사용자가, 또는 이를 아는 에이전트가 호출하는 명령입니다.',
+              '방법론과 스킬은 MIT 라이선스이며 무료입니다; 핵심 플로우에는 서비스도, API 키도, 텔레메트리도 없습니다. 효율은 각 플로우가 **진입 시점에** 로드하는 지시사항 바이트 수 — 세션 시작 시의 번들 — 로 보고되며, 플로우 자체의 트리거가 실제 작업이 계속될 때 추가로 로드하는 양을 더한 이름 붙은 **엔드투엔드 경로**와 함께 공개됩니다(예를 들어, 실행까지 이어지는 재개는 일반적으로 진입 번들의 몇 배를 로드합니다). 두 수치 모두 세션의 상한이 아닙니다: 실제 실행은 저장소 자체의 파일, 도구 출력, 계획의 작업 파일도 읽으며, 이 원장은 그중 어느 것도 세지 않습니다. 두 수치는 모두 스킬과 함께 커밋된 스크립트가 측정하고 릴리스 베이스라인마다 다시 측정하여 평가 원장에 공개하며, 증가는 감소만큼 평범하게 보고됩니다. 바이트 목록은 그런 것을 입증하지 못하므로 토큰 백분율이나 비용 절감으로 보고하지 않습니다. 이제 동결된 프로토콜 아래에서 새로운 에이전트 대상의 공개 평가가 실행되었습니다: 동일한 두 기능을 하네스 없이, 이전 메이저 버전으로, 현재 버전으로 — 각각 깨끗한 클론에서 구축했습니다. 그 결과, 하네스가 있는 트리에서 작업한 에이전트는 두 작업 모두에서 더 적은 바이트를 읽었고, 현재 버전의 기능 세션은 두 작업 모두에서 이전 메이저 버전보다 적은 모델 입력과 출력을 소비했습니다 — 하네스가 보고한 값이며 단일 워크로드 기준입니다. 이 평가는 정직한 한계도 밝혔습니다: 온보딩은 플로우가 사용될 때에만 회수되는 일회성 비용이고, 워크로드별 토큰 순 방향은 섞여 있었으며, 경과 시간 우위는 주장하지 않고, 새로운 에이전트는 스스로 플로우에 들어가지 않습니다 — 플로우는 사용자나 에이전트가 호출하는 명령입니다.',
             linkLabel: '신뢰와 공개',
             linkPath: '/trust',
           },
@@ -1280,13 +1228,13 @@ export const ko: SiteTranslations = {
         },
         {
           title: '측정되고 공개되는 지시사항 로드량',
-          body: '커밋된 스크립트가 각 플로우가 로드하는 바이트를 측정합니다; 증가를 포함한 결과는 바이트로 공개되며, 토큰이나 비용 백분율로는 결코 공개되지 않습니다.',
+          body: '커밋된 스크립트가 플로우마다 두 가지 측정값을 공개합니다 — 세션 시작 시 로드하는 진입 번들과, 실제 트리거가 발동한 이후의 엔드투엔드 경로 — 그리고 각각이 무엇을 제외하는지도 함께 공개하여, 진입 수치만으로 실행의 총비용을 읽지 않도록 합니다. 증가를 포함한 결과는 바이트로 공개되며, 토큰이나 비용 백분율로는 결코 공개되지 않습니다.',
         },
       ],
     },
     honestLimits: {
       title: '정직한 한계',
-      body: 'Deep Work Plan에는 살아있는 스펙이나 델타 스펙 메커니즘이 없습니다; 그 부분에서는 OpenSpec과 유사한 도구가 더 강합니다. 방법론의 독립적인 벤치마크는 아직 존재하지 않습니다. 다만 자체적으로 새로운 에이전트 대상 평가가 동결된 프로토콜 아래 이미 실행되었습니다 — 규모는 작습니다: 단일 워크로드, 구성별 두 기능, 한 대의 머신 — 그 결과는 양방향으로 공개됩니다: 하네스가 있는 트리의 에이전트는 두 작업 모두에서 바이트를 덜 읽었고, 현재 버전의 세션은 하네스가 보고한 모델 입력과 출력을 이전 메이저 버전보다 덜 소비했습니다. 반면 워크로드별 토큰 순 방향은 섞여 있었고 경과 시간 우위는 주장되지 않습니다. 지시사항 로드 원장은 로드된 바이트를 측정하며, 토큰, 비용, 결과가 아닙니다. DWP는 의도적으로 저장소 범위로 한정되어 있습니다. 프로젝트 간 메모리 시스템도, 역할 기반 에이전트 프레임워크도, IDE도 아니므로 이러한 축에서는 경쟁하지 않습니다 — 그런 능력이 필요한 작업에는 이를 제공하는 도구와 함께 사용하세요.',
+      body: 'Deep Work Plan에는 살아있는 스펙이나 델타 스펙 메커니즘이 없습니다; 그 부분에서는 OpenSpec과 유사한 도구가 더 강합니다. 방법론의 독립적인 벤치마크는 아직 존재하지 않습니다. 다만 자체적으로 새로운 에이전트 대상 평가가 동결된 프로토콜 아래 이미 실행되었습니다 — 규모는 작습니다: 단일 워크로드, 구성별 두 기능, 한 대의 머신 — 그 결과는 양방향으로 공개됩니다: 하네스가 있는 트리의 에이전트는 두 작업 모두에서 바이트를 덜 읽었고, 현재 버전의 세션은 하네스가 보고한 모델 입력과 출력을 이전 메이저 버전보다 덜 소비했습니다. 반면 워크로드별 토큰 순 방향은 섞여 있었고 경과 시간 우위는 주장되지 않습니다. 지시사항 로드 원장은 로드된 바이트를 측정하며, 토큰, 비용, 결과가 아닙니다. 진입 번들 수치는 실행에서 실제로 읽히는 양의 상한이 아닙니다. DWP는 의도적으로 저장소 범위로 한정되어 있습니다. 프로젝트 간 메모리 시스템도, 역할 기반 에이전트 프레임워크도, IDE도 아니므로 이러한 축에서는 경쟁하지 않습니다 — 그런 능력이 필요한 작업에는 이를 제공하는 도구와 함께 사용하세요.',
     },
     correction: {
       title: '정확성을 유지하도록 도와주세요',
@@ -1353,7 +1301,7 @@ export const ko: SiteTranslations = {
     ctaBody:
       '방법론과 스펙을 읽고, 에이전트를 init 엔드포인트로 향하게 한 뒤, 실행하기 전에 설치를 검증하세요.',
     ctaPrimary: '방법론 읽기',
-    ctaSecondary: '채택(Init)',
+    ctaSecondary: '빠른 시작',
   },
 
   developersPage: {

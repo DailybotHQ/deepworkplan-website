@@ -27,10 +27,14 @@ Cloudflare offers [Markdown for Agents](https://blog.cloudflare.com/markdown-for
 
 | Pattern | Example |
 |---------|---------|
-| `/{page}.md` (EN) | `/about.md`, `/contact.md`, `/compare.md`, `/faq.md`, `/init.md` |
-| `/{lang}/{page}.md` | `/es/about.md`, `/es/compare.md`, `/es/faq.md`, `/es/init.md` |
+| `/{page}.md` (EN) | `/about.md`, `/contact.md`, `/compare.md`, `/faq.md`, `/quickstart.md` |
+| `/{lang}/{page}.md` | `/es/about.md`, `/es/compare.md`, `/es/faq.md`, `/es/quickstart.md` |
 
-Source: `src/content/pages/{en,es}/` content collection.
+Source: `src/content/pages/{en,es}/` content collection. `/init.md` is a separate case — see below.
+
+### Standalone agent artifacts (not content-collection pages)
+
+A handful of top-level agent-facing files are hand-maintained static files under `public/`, served verbatim with no per-language variant and no HTML sibling: `/llms.txt`, `/llms-full.txt`, `/openapi.json`, `/init.md`. `/init.md` in particular is the canonical, English-only, self-contained onboarding prompt — the human-readable equivalent lives at `/quickstart` (all 17 languages), but the two are maintained independently and are not required to be byte-identical.
 
 ## Response Format
 
@@ -81,7 +85,7 @@ Markdown: send header `Accept: text/markdown` on any URL to receive Markdown ins
 
 Every serialized markdown output includes a **Site Navigation** section appended at the end. This mirrors the HTML navbar and footer, ensuring AI agents can discover all site pages from any entry point.
 
-The navigation is generated programmatically by `generateSiteNavigation(lang)` in `markdown-for-agents.ts` — a single source of truth that is language-aware (applies the correct URL prefix for every active language, not just EN/ES). The navigation is defined as an inline `sections` array inside that function, organized into five sections: Methodology, Get started, Learn, Project, and Connect (social/repo links, external). It must list every real top-level route in `KNOWN_BASE_PATHS` (`src/middleware.ts`) that is not a redirect (`setup`/`onboarding`/`docs` redirect to `/init` and are correctly never listed) — `tests/unit/lib/markdown-for-agents.test.ts`'s "Site Navigation block" tests assert this set exactly, so a route silently missing from the array (as happened for `/developers`, `/init`, and `/privacy` before this fix) now fails the test rather than shipping unnoticed.
+The navigation is generated programmatically by `generateSiteNavigation(lang)` in `markdown-for-agents.ts` — a single source of truth that is language-aware (applies the correct URL prefix for every active language, not just EN/ES). The navigation is defined as an inline `sections` array inside that function, organized into five sections: Methodology, Get started, Learn, Project, and Connect (social/repo links, external). It must list every real top-level route in `KNOWN_BASE_PATHS` (`src/middleware.ts`) that is not a redirect (`init`/`setup`/`onboarding`/`docs` redirect to `/quickstart`/`/developers` and are correctly never listed as page routes) — `tests/unit/lib/markdown-for-agents.test.ts`'s "Site Navigation block" tests assert this set exactly, so a route silently missing from the array (as happened for `/developers`, `/init`, and `/privacy` before an earlier fix) now fails the test rather than shipping unnoticed. The one exception is `/init.md` itself: it is listed as an `external: true` entry (so it is never given a `/{lang}/` prefix) because it is a standalone, English-only agent artifact with no HTML page behind it — not one of the "real top-level routes" in the usual sense.
 
 **Why programmatic instead of a `.md` partial file?**
 - Language-aware: automatically applies the correct `/{lang}/` prefix for every active language

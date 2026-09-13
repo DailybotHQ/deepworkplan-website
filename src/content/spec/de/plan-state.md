@@ -8,7 +8,7 @@ section: State
 
 # Plan-Zustand
 
-**Version 1.1. Status: Stabil.** Dieses Dokument spezifiziert die maschinenlesbare Plan-Zustandsschicht der Deep Work Plan Methodik. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
+**Version 5.0.0. Status: Stabil.** Dieses Dokument spezifiziert die maschinenlesbare Plan-Zustandsschicht der Deep Work Plan Methodik, nun an die eigene Version des DWP-Standards angeglichen — keine bestehende Anforderung wird durch die Neunummerierung abgeschwächt. Diese Revision dokumentiert außerdem den abgesicherten Zustands-Updater, die verifizierte Plan-Veröffentlichung und die Nachweis-Wahrheitsregeln, die ein abgeschlossener Plan erfüllen muss (siehe unten). Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
 Zwei JSON-Artefakte — `manifest.json` (die statische Identität des Plans) und `state.json` (der lebendige, aufgabenbezogene Ausführungszustand einschließlich Validierungs-Gate-Ergebnisse) — die jeder Plan gemeinsam mit seinen Markdown-Dateien führen KANN, und die unbeaufsichtigte Ausführung (siehe [Agentenprotokoll](/spec/agent-protocol#execution-profiles)) und Nicht-git-Arbeitsbereiche (siehe [Archetypen](/spec/archetypes) §3) führen MÜSSEN.
 
@@ -35,7 +35,7 @@ Ein Plan, der die Zustandsschicht verwendet, hat dieses Layout:
 
 `manifest.json` MUSS genau einmal geschrieben werden, wenn der `create`-Ablauf den Plan materialisiert, und DARF danach NICHT verändert werden, außer bei einer Spezifikationsversions-Migration, die in `PROGRESS.md` vermerkt wird.
 
-`state.json` MUSS vom Agenten bei jedem dieser Protokollpunkte neu geschrieben werden: Plan-Materialisierung (alle Aufgaben `pending`), Aufgabenstart (`in_progress`), jeder Validierungs-Gate-Lauf (Gate-Eintrag wird angehängt oder aktualisiert) und Aufgabenabschluss (`completed`, als Teil des Aufgabenabschlussprotokolls in der [DWP-Spezifikation](/spec/dwp-specification#task-completion-protocol)).
+`state.json` MUSS vom Agenten bei jedem dieser Protokollpunkte neu geschrieben werden: Plan-Materialisierung (alle Aufgaben `pending`), Aufgabenstart (`in_progress`), jeder Validierungs-Gate-Lauf (Gate-Eintrag wird angehängt oder aktualisiert), Aufgabenabschluss (`completed`, als Teil des Aufgabenabschlussprotokolls in der [DWP-Spezifikation](/spec/dwp-specification#task-completion-protocol)), einem Checkpoint vor jeder geplanten Unterbrechung und einem `blocked`-Stopp.
 
 Beide Dateien MÜSSEN atomar geschrieben werden: in eine temporäre Datei im selben Verzeichnis schreiben, dann über das Ziel umbenennen. Ein abgebrochener Schreibvorgang DARF KEINE abgeschnittene JSON-Datei hinterlassen.
 
@@ -194,6 +194,30 @@ Ein wiederaufnehmender Agent MUSS die README-Checkbox-Liste gegen `state.json` a
 Die `verify`-Sub-Skill MUSS Desync als Konformitätsbefund behandeln: berichten, welche Aufgaben nicht übereinstimmen und in welcher Richtung.
 
 Andere Werkzeuge als der ausführende Agent MÜSSEN beide JSON-Dateien als schreibgeschützt behandeln.
+
+## Abgesicherte Zustandsaktualisierungen
+
+Gewöhnliche Fortschritts-Schreibvorgänge laufen über einen mitgelieferten, gezielten Updater statt über ein vollständiges Umschreiben der Datei. Er weist fehlerhaften Zustand rundweg zurück und verweigert es, eine Aufgabe als `completed` zu markieren, ohne dass ein nicht-leerer Gate-Nachweis angehängt ist — für einen Befehl, dessen eigene Ausgabe Pipe-Zeichen enthält, steht eine `--gate-json`-Form zur Verfügung, und der Updater akzeptiert dasselbe geschlossene Gate-Objekt, das oben beschrieben ist. Wiederholungen ersetzen nur ihren eigenen Befehl; ein anderer Befehl behält seinen eigenen, separaten Datensatz. `--block-reason` zeichnet einen Blocker auf; `--resolve-blocker` löst nur den Blocker der aktuellen Aufgabe auf, niemals den einer anderen Aufgabe. Übersprungene Arbeit kann einen Plan niemals `completed` machen. `--reopen-reason` zeichnet die Absicht eines Aufrufers auf, den Plan über `refine` zu ändern — die Änderung und jeder dadurch entwertete Nachweis MÜSSEN zuerst im Aufgabenprotokoll festgehalten werden. `--expected-sha256` weist einen Schreibvorgang gegen einen Zustands-Snapshot zurück, der sich inzwischen weiterbewegt hat. Ein kooperatives `.lock`-Verzeichnis serialisiert gleichzeitige Schreiber; die Sperre eines abgestürzten Schreibers MUSS vor dem Entfernen inspiziert werden, und es wird kein Schutz gegen einen Editor beansprucht, der die Sperre vollständig umgeht. Diese Datensätze behaupten Ergebnisse — sie beweisen selbst nicht, dass ein Befehl ausgeführt wurde oder dass seine Ausgabe semantisch akzeptiert wurde.
+
+## Verifizierte Plan-Veröffentlichung
+
+Vor der Ankündigung des Abschlusses MÜSSEN die fertigen Aufgabenprotokolle (jedes mit seiner **Skills-Disposition** und, im Final Review, seiner **Dokumentations-Entscheidung**), der README-Index und `PROGRESS.md` aus verdienter Quelle und Akzeptanzergebnissen verfasst sein. Die letzte Aufgabe des Plans schließt dann über den mitgelieferten Finalizer ab: Sein terminaler Übergang validiert den abgeschlossenen Kandidaten gegen jedes Plan-Artefakt, bevor er den Zustand schreibt, verifiziert die Dateien danach und zeichnet einen `analysis_results/FINALIZATION.json`-Beleg auf. Ein erfundenes bestehendes Gate DARF diesen Übergang NICHT stützen — der Beleg ist externer Nachweis dessen, was tatsächlich geprüft wurde, niemals seine eigene Voraussetzung. `bash ../verify/conformance.sh --plan PLAN_name` läuft anschließend gegen die tatsächlichen Artefakte auf der Festplatte.
+
+Eine unterbrochene Veröffentlichung hinterlässt eine `.finalizing.json`-Markierung; die normale Verifikation schlägt fehl, bis der Nachweis inspiziert wurde und der Wiederherstellungs-Helfer gegen denselben Kandidaten erfolgreich war — nichts setzt eine Veröffentlichung aufgrund einer Annahme fort. Eine veraltete kooperative Sperre erfordert die Bestätigung, dass kein Schreiber mehr aktiv ist, bevor sie entfernt wird. Nichts in dieser Schicht committet, pusht, führt einen gespeicherten Gate-Befehl aus oder repariert stillschweigend das Markdown des Plans. Ein fehlender Python-Interpreter liefert `UNVERIFIED`, niemals `completed`.
+
+## Nachweis-Wahrheit und Änderungen
+
+Jede Änderung am Umfang, an den Akzeptanzkriterien oder an der Zurückstellung einer Aufgabe trägt einen dauerhaften Änderungsdatensatz: das ursprüngliche Kriterium wörtlich, was beobachtet wurde, die Disposition, den Grund, die dahinterstehende Autorität (Nutzer, Entwickler oder Nachweis), die betroffenen Aufgaben und welcher Nachweis entwertet oder erhalten wurde. Änderungen werden angehängt, niemals rückdatiert; `manifest.json` behält seine Erstellungs-Provenienz und wird niemals umgeschrieben, um zu einem veränderten Live-Umfang zu passen.
+
+Fünf Nachweiszustände beschreiben, wogegen ein Aufgabendatensatz abschließen darf:
+
+- **Abgeschlossene Untersuchung** — echte, aufgezeichnete Arbeit; sie schließt eine Aufgabe nur gegen ein überarbeitetes Kriterium ab, das sie benennt, niemals gegen das Original wie geschrieben.
+- **Nicht ausgeführtes Szenario** — als nicht durchgeführt aufgezeichnet; es trägt in keiner Ära bestehenden Nachweis bei.
+- **Zurückgestellte Anforderung** — das Kriterium wandert zu einer benannten Zielaufgabe mit aufgezeichneter Autorität; nur diese Änderung schließt die Quelle ab.
+- **Fehlgeschlagenes Gate** — bleibt fehlschlagend, bis dieselbe Akzeptanzabsicht erneut ausgeführt wird und besteht; eine Wiederholung ersetzt nur ihren eigenen Befehl.
+- **Erreichtes Produktergebnis** — das Kriterium wie geschrieben, verifiziert durch sein eigenes Gate; der einzige Zustand, der eine Aufgabe unverändert abschließt.
+
+Die Durchsetzung ist mechanisch, wo immer die Datensätze es zulassen. Als „durch refine entwertet" markierter Gate-Nachweis ist erhaltene Historie, niemals bestehender Nachweis, und eine abgeschlossene Aufgabe, die sich noch darauf stützt, wird vom Prüfer gemeldet. Ein bestehender Datensatz, dessen eigener Text zugibt, dass die Prüfung nie lief (zum Beispiel „nie betreten", „lief nicht" oder „kann nicht gemessen werden"), ist ein Widerspruch und wird ebenso gemeldet — ebenso eine abgeschlossene Zustandsaufgabe, deren eigenes Protokoll noch `Status: pending` liest. Narrative Widersprüche darüber hinaus — ein Bericht, dessen Schlussfolgerungen seiner eigenen Checkliste widersprechen — erfordern einen menschlichen Prüfer; der Prüfer meldet, was die Datensätze sagen, nicht was die Prosa bedeutet. Ein Nutzer KANN eine begrenzte Ausnahme mit aufgezeichneter Autorität explizit akzeptieren; unbeaufsichtigte Vorabgenehmigung ist niemals eine pauschale Erlaubnis, ein Kernziel aufzugeben, und ein unerfüllbares verpflichtendes Kriterium ist ein Blocker, niemals abgeschlossene Arbeit.
 
 ## Schema-Versionierung
 

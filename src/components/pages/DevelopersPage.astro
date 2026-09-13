@@ -5,7 +5,7 @@ import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import type { Language } from '@/lib/i18n';
-import { getUrlPrefix } from '@/lib/i18n';
+import { CANONICAL_INIT_MD_PATH, getUrlPrefix } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -304,7 +304,7 @@ const breadcrumbSchema = {
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
         <a
-          href={`${prefix}/init`}
+          href={CANONICAL_INIT_MD_PATH}
           class="inline-flex items-center rounded-sm px-6 py-3 font-semibold transition hover:opacity-90"
           style="background-color: var(--color-ink); color: var(--color-paper);"
         >

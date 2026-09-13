@@ -1,67 +1,277 @@
 ---
 title: "Bắt đầu nhanh — Deep Work Plan"
-description: "Cài skill, khởi tạo repository, rồi lập kế hoạch và thực thi với mọi agent — các bước biến repo của bạn thành dựa trên đặc tả và điều khiển được bằng agent."
-lastUpdated: 2026-05-31
+description: "Lời nhắc khởi tạo thực thi được cho agent AI: áp dụng Deep Work Plan trong mọi repository — phân tích, lập tài liệu, cài skill, để repo điều khiển được bằng agent."
+lastUpdated: 2026-09-13
 ---
 
-## Bắt đầu nhanh
+Bạn là một agent lập trình AI. Hãy đọc toàn bộ lời nhắc này trước, rồi biến repository hiện tại thành
+**AI-first**, **dựa trên đặc tả** và **điều khiển được bằng agent** bằng cách áp dụng phương pháp luận Deep Work Plan (DWP).
+Hãy coi đây như một tác vụ kỹ thuật có cấu trúc — một Deep Work Plan — chứ không phải một chỉnh sửa nhanh.
 
-Cài skill, khởi tạo repository, rồi lập kế hoạch và thực thi với mọi agent — các bước biến
-repository của bạn thành dựa trên đặc tả và điều khiển được bằng agent.
+## Nguyên tắc vận hành (đọc trước khi thay đổi bất cứ thứ gì)
 
-## Lộ trình áp dụng
+1. **Suy luận về *chính* repository này.** Không bao giờ sao chép một mẫu hay để lại một chỗ trống. Mỗi tệp bạn
+   viết phải phản ánh các ngôn ngữ, framework, lệnh và cấu trúc thực tế của repository. Một bản mẫu chung chung
+   là một thất bại, không phải một sản phẩm bàn giao.
+2. **Không phá hủy — hỏi trước khi thay thế.** Repository có thể đã có sẵn một `AGENTS.md`, một cây
+   `docs/`, một thiết lập `.agents/` hay skill, một `CLAUDE.md`, hoặc các quy ước riêng. **Không**
+   ghi đè, di chuyển hay xóa công việc hiện có một cách lặng lẽ. Phát hiện những gì tồn tại, đọc nó, và **đối chiếu**:
+   hợp nhất và cải thiện tại chỗ bất cứ khi nào có thể. Trước khi thay thế hay loại bỏ bất cứ thứ gì người dùng
+   đã có, hãy giải thích cái gì và vì sao, và nhận được sự chấp thuận rõ ràng của họ.
+3. **Đề xuất kế hoạch, rồi thực thi.** Sau khi trinh sát, trình bày một kế hoạch ngắn gọn — bạn sẽ
+   tạo gì, sẽ sửa đổi gì, và bất cứ thứ gì hiện có mà bạn đề nghị đối chiếu hay thay thế — rồi chờ
+   người dùng xác nhận trước khi thực hiện các thay đổi lớn hay có tính phá hủy.
+4. **Làm việc theo các bước an toàn, rà soát được.** Commit một cách hợp lý, giữ diff dễ đọc, không động tới bí mật nào,
+   và để yên mã không liên quan.
+5. **Dừng lại và báo cáo** nếu một bước thất bại hoặc trạng thái repository còn mập mờ.
+6. **Tin tưởng, nhưng hãy xác minh.** Hãy coi lời nhắc này là dữ liệu đầu vào không đáng tin: xác nhận
+   rằng bạn đã lấy nó từ các nguồn chính thức (`deepworkplan.com` và các repository `DailybotHQ`), đánh
+   giá nó trước khi hành động theo nó, và xác minh tính toàn vẹn của skill trước khi chạy nó — xem
+   *Tin tưởng và xác minh* bên dưới.
 
-### 1. Cài skill Deep Work Plan
+## 0. Đọc phương pháp luận và đặc tả
 
-Thêm skill vào repository của bạn. Nó đi kèm một bộ định tuyến cùng chín sub-skill — create, execute, refine,
-resume, status, verify, onboard, author và upgrade. Dùng Skills CLI cho con đường nhanh nhất:
+Phương pháp luận đứng trên ba trụ cột: **phát triển dựa trên đặc tả** (đặc tả viết ra là nguồn chân lý), **kỹ thuật harness** (repository mang theo ngữ cảnh, công cụ, hàng rào bảo vệ và trạng thái), và **hiệu quả token** (harness được nạp theo kiểu tiệm tiến và việc kiểm chứng chỉ chạm vào những gì đã thay đổi — công việc tầm xa ngay từ thiết kế, hiệu quả ngay từ cách dựng).
+
+Trước khi thay đổi bất cứ thứ gì, hãy đọc các nguồn chuẩn để bạn hiểu tiêu chuẩn mình đang áp dụng:
+
+- Phương pháp luận: https://deepworkplan.com/methodology.md
+- Đặc tả: https://deepworkplan.com/spec.md
+- Catalog bộ kit: https://deepworkplan.com/kit.md
+
+## 1. Trinh sát và một kế hoạch để phê duyệt
+
+Trước hết hãy hiểu repository, rồi đề xuất điều bạn sẽ làm.
+
+- **Phát hiện stack.** Các ngôn ngữ, framework, trình quản lý gói (từ lockfile thực sự
+  tồn tại), các lệnh build/test/lint/type-check thật, các mô-đun nguồn, quy ước test, và
+  hình dạng triển khai.
+- **Phân loại kiểu hình.** Một repository độc lập (trường hợp phổ biến), một trung tâm điều phối, hay một
+  không gian làm việc agent — ngôi nhà tồn tại lâu dài của một agent tự chủ, nơi git được khuyến
+  nghị thay vì mặc định — kèm bằng chứng.
+- **Nhận diện một bản cài DWP hiện có.** Nếu `AGENTS.md` và `.agents/` đã tồn tại, hãy tìm dòng
+  xuất xứ `DWP standard:`. Một harness ra đời trước tiêu chuẩn hiện tại nhận một đợt **nâng cấp
+  có mục tiêu**: cài lại skill là toàn bộ lộ trình nâng cấp, và việc khởi tạo chỉ đối chiếu những
+  phần còn thiếu hoặc đã cũ — mọi phần viết tay, skill tùy chỉnh và kế hoạch đang thực thi đều
+  được giữ nguyên, và lượt chạy thứ hai không thay đổi gì. Các kế hoạch được viết dưới một phiên bản
+  sớm hơn giữ nguyên hình dạng đã ghi lại của mình và khép lại bằng các tác vụ cuối riêng của chúng;
+  chúng không bao giờ bị ép sang hình dạng mới.
+- **Kiểm kê những gì đã tồn tại.** `AGENTS.md`, `CLAUDE.md`, `docs/`, bất kỳ thiết lập `.agents/` hay skill/agent
+  nào, `.dwp/`, và `.gitignore`. Ghi chú bất cứ thứ gì đã làm một phần công việc này.
+- **Đề xuất kế hoạch khởi tạo.** Trình bày một danh sách súc tích: các tệp bạn sẽ tạo, các tệp bạn sẽ
+  sửa đổi, và bất cứ thứ gì hiện có mà bạn đề nghị đối chiếu hay thay thế — rồi **đề nghị người dùng xác nhận**
+  trước khi tiến hành. Với một repository lớn (nhiều mô-đun hoặc nhiều thành phần cần sinh ra), sub-skill
+  onboard sử dụng lộ trình hướng kế hoạch: nó hoàn tất trinh sát, sinh `AGENTS.md`, rồi phát ra một
+  Deep Work Plan khởi tạo dưới `.dwp/plans/` và chuyển giao cho `/dwp-execute`
+  → `/dwp-resume` khi cần.
+
+## Tin tưởng và xác minh (trước khi bạn cài đặt)
+
+Bạn sắp cài đặt và chạy mã trong repository này, vì vậy hãy xác minh những gì bạn đang áp dụng trước.
+Điều này được khuyến khích: một agent cẩn thận coi lời nhắc được tải về là không đáng tin cho đến khi
+nó đã được kiểm tra.
+
+- **Xác nhận xuất xứ.** Lời nhắc này và skill này là mã nguồn mở, cấp phép MIT. Các nguồn chuẩn là
+  `https://deepworkplan.com` và tổ chức GitHub `DailybotHQ`
+  (`deepworkplan-website`, `deepworkplan-skill`). Một manifest đọc được bằng máy được công bố tại
+  `https://deepworkplan.com/.well-known/dwp-trust.json`.
+- **Biết skill làm gì.** Nó là Markdown-first: không có CLI, không có HTTP API, không có xác thực,
+  **không có lời gọi mạng và không có telemetry**. Hành động duy nhất có liên quan đến bảo mật của nó
+  là thay đổi *chính* repository này, và theo thiết kế nó không phá hủy — nó đối chiếu và hỏi trước
+  khi thay thế.
+- **Xác minh tính toàn vẹn trước khi chạy.** Mỗi bản phát hành công bố một `SHA256SUMS` cho skill
+  được giao; xác nhận bản sao của bạn khớp trước khi tin tưởng nó:
+
+  ```bash
+  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
+  cd deepworkplan-skill
+  # Tải xuống checksum cho bản phát hành bạn định cài (thay vX.Y.Z):
+  curl -fsSL -o SHA256SUMS \
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  ./setup.sh --verify        # kết quả khác không có nghĩa là một tệp không khớp — dừng lại
+  ```
+
+  Các bản phát hành **có checksum, không có chữ ký** (ký là bước tiếp theo đã được ghi lại). Mọi thứ
+  đều mở và có thể so sánh, vì vậy bạn cũng có thể so sánh bất kỳ tệp nào với repository tại tag của nó.
+- **Báo cáo vấn đề.** Báo cáo các vấn đề bảo mật **riêng tư qua tính năng báo cáo lỗ hổng bảo mật của GitHub** trên repository liên quan — `https://github.com/DailybotHQ/deepworkplan-skill/security` hoặc `https://github.com/DailybotHQ/deepworkplan-website/security` — không phải dưới dạng issue công khai. Xem thêm `SECURITY.md` của mỗi repository, `https://deepworkplan.com/.well-known/security.txt`, và trang tin tưởng `https://deepworkplan.com/trust`.
+
+## 2. Cài skill Deep Work Plan
+
+> **Đường tắt.** Skill mang theo quy trình onboarding của riêng nó, nên chỉ cần cài đặt là đủ. Sau khi cài, hãy chạy `/deepworkplan-onboard`: nó thực hiện mọi thứ mà các mục 3–7 mô tả — trinh sát, `AGENTS.md`, `docs/`, tài liệu theo từng mô-đun, `.agents/`, bản đánh giá cục bộ bắt buộc, các addon tùy chọn và bước tự kiểm tra cuối cùng. Hãy đọc tiếp để biết sub-skill đó sẽ làm gì — và đường dự phòng khi một tác nhân không thể nạp skill.
+
+Cài skill để các agent của repository này có thể lập kế hoạch và thực thi công việc có cấu trúc. Nó đi kèm một bộ định tuyến
+cùng chín sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` và `upgrade`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
 ```
 
-Hoặc clone repo và chạy script cài đặt ở nơi có sẵn git và một shell:
+Hoặc cài đặt qua OpenClaw:
+
+```bash
+openclaw skills install deepworkplan
+```
+
+Hoặc clone và chạy script cài đặt:
 
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh
 ```
 
-### 2. Khởi tạo repository
+### Tiêu chuẩn hiện tại và mô hình thực thi
 
-Chạy sub-skill onboard và để agent suy luận về repo thực tế của bạn — stack, trình quản lý gói,
-và các lệnh kiểm chứng thật của nó:
+Tiêu chuẩn hướng-repository hiện tại là **DWP 5.0.0**, được triển khai bởi phiên
+bản skill Deep Work Plan đã cài ở trên. Gói skill hiện tại bao gồm bộ định tuyến
+và chín sub-skill: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
+`onboard`, `author` và `upgrade`.
 
-```bash
-/deepworkplan-onboard
-```
+Tiêu chuẩn này được thiết kế có chủ đích theo tỷ lệ, và biến sự tỷ lệ đó thành
+một thuộc tính của kế hoạch chứ không phải kỷ luật của nhà phát triển. Một kế
+hoạch hoặc là **Lite** — các bản ghi tác vụ nằm trực tiếp trong README của kế
+hoạch, dành cho công việc nhỏ và giới hạn — hoặc là **Full**, mỗi tác vụ một
+tệp, dành cho công việc dài hơi. Lựa chọn này liên quan đến chi phí biểu diễn,
+không phải mức độ nghiêm ngặt: cả hai định dạng đều mang id tác vụ ổn định, một
+Bề mặt bị chạm tới, tiêu chí chấp nhận, cổng kiểm định và bằng chứng hoàn thành,
+nên một kế hoạch Lite là một kế hoạch thật sự, không phải bản phác thảo. Định
+dạng, cụ thể hóa, phê duyệt và thực thi là các trục độc lập; một kế hoạch Lite
+được nâng cấp lên Full bằng `/dwp-refine promote` khi các bản ghi gọn nhẹ không
+còn đủ để mang một yêu cầu hay một cổng.
 
-Nó sinh ra `AGENTS.md`, một cơ sở tri thức `docs/`, tài liệu cho từng mô-đun, và một ngôi nhà `.agents/` xuyên agent
-(cùng symlink `.claude → .agents`), kết nối các command `dwp-*` mỏng, và dựng một `.dwp/` được gitignore
-cho các kế hoạch và bản nháp. Không gì là mẫu cứng; mọi thứ đều được thích ứng cho repository của bạn.
+Đối với một kế hoạch Full, repository là bề mặt thực thi lâu dài. Kế hoạch chứa
+các tác vụ nguyên tử, một **Bề mặt bị chạm tới** giải thích điều gì đã thay đổi và
+những người tiêu dùng nào bị ảnh hưởng, tiêu chí chấp nhận, và một cổng kiểm
+định được chọn từ bản đồ kiểm thử đã được ghi lại của repository. Một kế hoạch
+mới trước tiên ghi manifest định danh của nó, ghi lại phân tích của nó, tạo
+danh sách tác vụ, và chỉ kích hoạt trạng thái trực tiếp sau cùng, để việc tạo
+bị gián đoạn có thể được khôi phục thay vì bị đoán mò. Khi lớp trạng thái hiện
+diện, `manifest.json` mô tả kế hoạch và `state.json` ghi lại các checkpoint,
+trạng thái tác vụ, kết quả cổng và các điểm chặn.
 
-### 3. Phát triển bộ kit và chấp nhận addon
+Mỗi kế hoạch có một tác vụ kết thúc bắt buộc: **Final Review**. Nó chạy bước
+kiểm tra bảo mật trên toàn bộ tập thay đổi đã tích lũy, bao gồm cả đánh giá cục
+bộ AI Diff Reviewer bắt buộc, xác thực trạng thái cuối cùng của repository,
+đối chiếu các skill mà các tác vụ đã sử dụng, và ghi lại bằng chứng cùng các
+giới hạn. Skill đánh giá cục bộ được cài đặt ở một phiên bản cố định; lệnh
+được ghi lại hiện tại sử dụng `DailybotHQ/ai-diff-reviewer@v2.0.1`. GitHub
+Action là một bề mặt CI riêng biệt, tùy chọn, và không bao giờ là bắt buộc đối
+với phương pháp luận cốt lõi.
 
-Dùng `/skill-create` và `/agent-create` (sub-skill author) để nuôi lớn các skill, agent và command phù hợp với stack.
-Quá trình khởi tạo cài đánh giá cục bộ AI Diff Reviewer bắt buộc (cổng CI của nó vẫn tùy chọn) và đề
-xuất bốn addon tùy chọn — devcontainer, Dailybot, dependency-upgrade và design-system — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không addon tùy chọn nào.
+Thực thi không giám sát chỉ được hỗ trợ cho một kế hoạch đã được phê duyệt
+trước. Nó đòi hỏi lớp trạng thái mà máy có thể đọc được, một tiêu chuẩn DWP đã
+khai báo, quyền hạn giới hạn, và các điều kiện dừng rõ ràng. Nếu một cổng thất
+bại ngoài phạm vi sửa chữa đã lên kế hoạch, repository phân kỳ, hoặc cần một
+sự phê duyệt hay thông tin xác thực mới, tác nhân sẽ ghi lại điểm chặn và
+dừng lại. Không luồng nào làm suy yếu một cổng kiểm định để tuyên bố hoàn
+thành.
 
-### 4. Lập kế hoạch và thực thi
+## 3. Khởi tạo repository (có suy luận và không phá hủy)
 
-Sinh một Deep Work Plan và chạy nó từng tác vụ một:
+Gọi sub-skill onboard (`/deepworkplan-onboard`). Suy luận về repo thực và thích ứng mọi thứ
+cho nó. Với mỗi thành phần dưới đây, **nếu nó đã tồn tại, hãy đối chiếu nó** (hợp nhất, cải thiện, căn chỉnh theo
+phương pháp luận) thay vì ghi đè — và xác nhận với người dùng trước khi thay thế bất cứ thứ gì.
 
-```bash
-/dwp-create <goal>
-/dwp-execute
-```
+1. **`AGENTS.md` + `CLAUDE.md`.** Tạo ra một `AGENTS.md` tại gốc — một chỉ mục, các quy tắc bắt buộc
+   (chỉ tiếng Anh, conventional commit, mẫu test thật của repo và các cổng rà soát), và một khối Quick
+   Commands với các lệnh **thật, chạy được** của repo. Nếu một `AGENTS.md` đã tồn tại, hãy hợp nhất
+   vào nó thay vì thay thế nó. Tạo symlink `CLAUDE.md → AGENTS.md` (đừng ghi đè một
+   `CLAUDE.md` hiện có mà không hỏi). Cũng tạo `.cursor → .agents` nếu chưa có.
+2. **`docs/`.** Lấp đầy các hạng mục chuẩn bằng nội dung thật, riêng cho repo: `PRODUCT_SPEC.md` (tài liệu sản phẩm/lý do phi kỹ thuật — bắt buộc cho mọi repo, kể cả thư viện), `ARCHITECTURE.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md` (không bao giờ
+   bị bỏ qua — mọi repository đều có một tư thế bảo mật, ngay cả khi không có bí mật nào),
+   `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, cùng `PERFORMANCE.md` và một chỉ mục `docs/README.md`.
+   Nếu tài liệu đã tồn tại, hãy tích hợp và mở rộng chúng — đừng nhân bản.
+3. **Tài liệu cho từng mô-đun.** Thêm một `README.md` (và một thư mục con `docs/` cho các mô-đun phức tạp) bên trong mỗi
+   mô-đun nguồn chính được phát hiện trong quá trình trinh sát.
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Tạo ngôi nhà chuẩn, xuyên agent: một catalog **được suy luận**
+   gồm `agents/`, `skills/` phù hợp với stack, và các `commands/` `dwp-*` mỏng ủy thác tới skill
+   đã cài — mỗi mục đều được biện minh cho *chính* repository này, không sao chép từ repo khác. Thêm một
+   catalog `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) khớp với những gì có trên
+   đĩa, cùng `settings.json`, và các symlink `.claude → .agents` cùng `.cursor → .agents`. Gộp bất kỳ skill/agent hiện có nào
+   vào catalog.
+5. **Skill DWP, đã thích ứng.** Skill đã cài là động cơ; bộ kit của riêng repository
+   (skill, agent, command) phải **được suy luận cho repo này** — không bao giờ là một bản sao chép-dán bộ kit của repo
+   khác.
+6. **`.dwp/` + `tmp/`.** Dựng một `.dwp/` được gitignore với `plans/`, cùng một không gian nháp
+   `tmp/` — cả hai đều được thêm vào `.gitignore` một cách không phá hủy (nối thêm, không bao giờ viết lại).
 
-Dùng `/dwp-status`, `/dwp-refine` và `/dwp-resume` khi công việc tiến triển. Mỗi kế hoạch mang các tác vụ đánh số,
-các cổng kiểm chứng, và một giao thức hoàn tất để công việc luôn có cấu trúc và tiếp tục được qua các phiên.
+## 4. Cài đặt đánh giá cục bộ bắt buộc, rồi đề xuất các addon tùy chọn
+
+Sau khi khởi tạo nền tảng, hãy cài **đánh giá cục bộ AI Diff Reviewer** (Giai đoạn 7a — bắt buộc kể từ
+chuẩn 2.3.0): skill vendored được ghim theo tag
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) cùng một
+`.review/extension.md` được điều chỉnh riêng cho repo qua `generate-extension`, dưới sự chấp thuận của
+quá trình khởi tạo. Sau đó liệt kê bốn addon tùy chọn (devcontainer, Dailybot, dependency-upgrade,
+design-system) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository hoàn toàn tuân thủ
+với **không** addon tùy chọn nào — đừng bao giờ tự động cài chúng.
+
+- **Hỗ trợ devcontainer** — một dev container tái lập được, cô lập, với xác thực AI-CLI bền vững.
+- **Tích hợp Dailybot** — bốn sự kiện vòng đời (kickoff, tác vụ quan trọng, bị chặn, hoàn tất) dưới dạng báo cáo tiến độ theo nỗ lực tối đa cho các đội đã dùng Dailybot, với lớp hook tự hành tùy chọn (`dailybot-cli >= 3.7.0`). Cài skill agent Dailybot đi kèm (3.10.3) cũng mở ra chat, check-in, tạo biểu mẫu, hỏi AI, API key theo repo và nhiều hơn — addon chỉ đấu nối phần báo cáo vào quá trình thực thi DWP. Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
+- **Nâng cấp phụ thuộc** — nâng cấp độc lập với trình quản lý gói, theo lô, được kiểm chứng, hoàn nguyên được. Khi
+  được chấp nhận, nó cài command `/lib-upgrade`.
+- **Design system** — `docs/DESIGN.md` tự nguyện dành cho các repo có bề mặt giao diện được phát hiện
+  (không đề xuất cho thư viện thuần, dịch vụ headless hay repo chỉ hạ tầng). Ba profile xếp chồng trong
+  một tệp: visual-ui (được khuyến nghị mạnh mẽ khi phát hiện; cài đặt kiểm soát bằng sự chấp nhận), cli-output và hội thoại — hai profile sau
+  luôn được hỏi, không bao giờ tự động áp dụng.
+- **AI Diff Reviewer** — đánh giá cục bộ bắt buộc (không phải tùy chọn): bước rà soát bảo mật của mọi
+  Final Review chạy [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill +
+  `.review/extension.md` bắt buộc) trên toàn bộ tập thay đổi đã tích lũy của kế hoạch. Một skill hoặc
+  tiện ích mở rộng bị thiếu là một phát hiện `local reviewer not installed` được ghi lại — không bao giờ là một lần bỏ qua âm thầm,
+  và không bao giờ là một bootstrap bất ngờ: việc cài đặt thuộc về sự chấp thuận
+  của onboarding hoặc một lời gọi addon rõ ràng; lỗi gọi chỉ thất bại
+  nhẹ; kết quả `critical` từ một lượt hoàn tất vẫn chặn việc hoàn thành. **Flow B** (cổng CI với
+  `pr-review.yml`) được đề xuất như một lựa chọn tự nguyện rõ ràng và không bao giờ được cài khi chưa
+  được yêu cầu. Không luồng Deep Work Plan nào yêu cầu một dịch vụ thương mại, nhà cung cấp CI hay bí mật.
+
+## 5. Phát triển bộ kit (sub-skill author)
+
+Dùng sub-skill `author` để nuôi lớn bộ kit của riêng repository sau khi khởi tạo. Các bộ ủy thác mỏng `/skill-create` và
+`/agent-create` định tuyến tới nó. Tạo một **skill** cho một quy trình lặp lại trong phiên, một **agent** cho
+một vai trò lặp lại với hạng mô hình và công cụ riêng, và một **command** chỉ như một bộ ủy thác mỏng. Giữ
+catalog `.agents/docs/` đồng bộ với những gì có trên đĩa.
+
+## 6. Lập kế hoạch và thực thi
+
+Sinh các Deep Work Plan cho mọi tác vụ và chạy chúng từng tác vụ một:
+
+- `/dwp-create <mục tiêu>` — biến một mục tiêu thành kế hoạch thực thi được. Kể từ chuẩn 2.4.0, một kế hoạch có hai định dạng: **Lite**, với bản ghi công việc nằm nội tuyến trong README của kế hoạch, dành cho công việc nhỏ và có giới hạn rõ; và **Full**, mỗi công việc một tệp, dành cho công việc dài hơi. Cả hai mang cùng một hợp đồng — id công việc ổn định, bề mặt bị chạm tới, tiêu chí chấp nhận, cổng xác thực, bằng chứng hoàn thành và một Final Review — nên Lite chỉ rẻ hơn về biểu diễn chứ không yếu hơn. Thêm `lite` hoặc `full` để ép định dạng và `trust` để hiện thực hóa mà không cần vòng đánh giá; nếu không nêu ưu tiên, DWP sẽ đề xuất một định dạng và giải thích lý do. Kế hoạch Lite được nâng cấp bằng `/dwp-refine promote`.
+- `/dwp-execute` — thực thi kế hoạch từng tác vụ một, cập nhật tiến độ và kiểm chứng mỗi cổng.
+- `/dwp-status` — báo cáo tiến độ mà không thay đổi gì.
+- `/dwp-refine` — thêm, bớt hoặc sắp xếp lại các tác vụ trong khi giữ nguyên công việc đã hoàn tất.
+- `/dwp-resume` — tái dựng trạng thái và tiếp tục một kế hoạch bị gián đoạn.
+- `/dwp-verify` — báo cáo tuân thủ đạt/không đạt khách quan cho repo (hoặc một kế hoạch cụ thể).
+
+Mỗi kế hoạch khép lại bằng Final Review — một bước rà soát bảo mật trên các thay đổi của
+chính kế hoạch (giữ `docs/SECURITY.md` luôn cập nhật; một phát hiện nghiêm trọng chặn việc hoàn tất),
+kiểm chứng trạng thái cuối cùng và đối chiếu skill. Executive Report vẫn được cung cấp theo yêu cầu.
+
+## 7. Kiểm chứng
+
+Chạy `/dwp-verify` để có một báo cáo tuân thủ đạt/không đạt khách quan (hoặc
+`bash {skill_dir}/verify/conformance.sh` cho lớp cơ học tương thích CI, thoát `0`/`1`, và `2` với phán quyết `UNVERIFIED` rõ ràng khi không thể chạy các bước kiểm tra — nó không bao giờ báo cáo một kết quả đậu mà nó chưa kiểm tra).
+Nó kiểm tra các tiêu chí trong [tài liệu Tuân thủ của đặc tả](https://deepworkplan.com/spec).
+Rồi xác nhận:
+
+- [ ] Skill đã được cài và phân giải được, với cả chín sub-skill sẵn sàng.
+- [ ] `AGENTS.md` tồn tại tại gốc với một khối Quick Commands thật; `CLAUDE.md` phân giải tới nó.
+- [ ] `docs/` chứa các hạng mục chuẩn với nội dung thật, riêng cho repo; `docs/TESTING_GUIDE.md`
+      mô tả thiết lập test/lint thật (không trống hay chỉ là stub); các mô-đun chính có một
+      `README.md`.
+- [ ] `.agents/` tồn tại với `agents/`, `commands/` (các bộ ủy thác `dwp-*` mỏng tham chiếu đến skill,
+      không phải luồng sao chép), `skills/`, và một catalog khớp với thực tế trên đĩa;
+      `.claude → .agents` và `.cursor → .agents` phân giải được.
+- [ ] `.dwp/` tồn tại, được gitignore, và có `plans/`; `tmp/` tồn tại và được gitignore.
+- [ ] Nội dung hiện có của người dùng được giữ nguyên hoặc đối chiếu có sự đồng ý — không gì bị phá hủy lặng lẽ.
+- [ ] Bạn có thể sinh một Deep Work Plan và thực thi nó từng tác vụ một, kiểm chứng mỗi cổng.
 
 ## Kết quả
 
-Repository của bạn trở thành dựa trên đặc tả và điều khiển được bằng agent: kế hoạch là nguồn chân lý bền vững, và
-chính repository trở thành harness mà mọi agent chạy dựa vào.
+Khi quá trình khởi tạo hoàn tất, repository thay đổi theo hai cách bền vững — hai trụ cột của
+phương pháp luận:
 
-- [Đọc phương pháp luận](/methodology)
-- [Duyệt đặc tả](/spec)
-- [Khám phá bộ kit](/kit)
+1. **Repository dựa trên đặc tả.** Công việc bắt đầu từ một kế hoạch và đặc tả viết ra, không phải từ
+   các lời nhắc tùy hứng.
+2. **Chính repository là harness của agent.** `AGENTS.md`, `docs/`, tài liệu cho từng mô-đun, và ngôi nhà
+   skill `.agents/` trao cho mọi agent ngữ cảnh và các lệnh nó cần để làm công việc có cấu trúc,
+   kiểm chứng được.
+
+Bất cứ ai cũng có thể chạy lời nhắc này trên bất kỳ repository nào — và kết thúc với một codebase mà mọi agent AI đều có thể điều khiển.

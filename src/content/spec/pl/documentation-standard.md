@@ -8,7 +8,13 @@ section: Standard
 
 # Standard dokumentacji
 
-**Wersja 1.1.** Ten standard definiuje sposób, w jaki Deep Work Plany dokumentują swoją strukturę, zadania i postęp. Dotyczy każdego planu utworzonego w ramach metodyki DWP. Słowa kluczowe MUSI, POWINNO i MOŻE są używane zgodnie z definicją w RFC 2119.
+**Wersja 5.0.0.** Ten standard definiuje sposób, w jaki Deep Work Plany dokumentują swoją strukturę, zadania i postęp, oraz sposób, w jaki repozytorium dokumentuje samo siebie, aby agent mógł bezpiecznie na nim działać. Dotyczy każdego planu utworzonego w ramach metodyki DWP. Ta wersja dostosowuje własny numer wersji dokumentu do standardu DWP, któremu towarzyszy — żadne istniejące wymaganie się nie zmienia — i dodaje egzekwowanie budżetu lean-index oraz opisany poniżej poziom funkcji. Słowa kluczowe MUSI, POWINNO i MOŻE są używane zgodnie z definicją w RFC 2119.
+
+## AGENTS.md jako zwięzły punkt wejścia
+
+Główny plik `AGENTS.md` POWINIEN mieścić się w budżecie 150–500 linii. Gdy treść generowana lub utrzymywana przez harness przekroczyłaby ten budżet, agent MUSI przenieść szczegóły do przewodnika `docs/` (lub dokumentu modułu/funkcji), który jest ich właścicielem, i podlinkować go z indeksu — nic nie jest odrzucane, tylko przenoszone, a indeks MUSI linkować do każdego dokumentu, który otrzymał przeniesioną treść. Istniejący, ręcznie napisany `AGENTS.md` przekraczający budżet nigdy nie jest po cichu przepisywany: agent proponuje konkretną migrację (co się przenosi dokąd, jakie linki są dodawane) i stosuje ją wyłącznie za zgodą dewelopera. Sprawdzający zgodność traktuje budżet jako doradczy, ponieważ liczba linii jest obiektywna, ale autorstwo już nie — MUSI wiąże harness, który generuje lub aktualizuje plik, a nie domysł sprawdzającego co do tego, kto go napisał. `AGENTS.md` NIE MOŻE linkować do pliku `docs/`, który nie istnieje.
+
+Ponad poziomem dokumentacji per moduł (poniżej) znajduje się **poziom funkcji**: duży obszar możliwości — większy niż jeden moduł — otrzymuje własny folder `docs/` obok swojego kodu, z wejściem przez własny `README.md`. Obszar kwalifikuje się, gdy obejmuje dwa lub więcej głównych modułów, posiada samodzielny podaplikację lub katalog podsystemu, albo niesie własne kontrakty (powierzchnię API, kontrakty zdarzeń lub schematów), od których zależy wielu konsumentów. Gdy obszar zostanie odnotowany jako główny, jego `docs/` na poziomie funkcji POWINIEN istnieć, a jego najistotniejsze wpisy POWINNY być podlinkowane z modułów, które obejmuje, oraz z głównego indeksu `AGENTS.md`, dokładnie tak jak dokumentacja per moduł. Obszar celowo pozostawiony bez dokumentacji niesie odnotowany powód — decyzję, a nie przeoczenie.
 
 ## README planu
 

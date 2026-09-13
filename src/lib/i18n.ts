@@ -40,8 +40,10 @@ export const DEFAULT_LANGUAGE: Language = 'en';
  * The canonical adoption bootstrap endpoint. `init.md` is first-class English
  * content for the agent: the bootstrap command and every agent-facing reference
  * must point to the **root, English** `/init.md` regardless of the visitor's
- * locale. The human-facing `/init` page is still localized; only this endpoint
- * is pinned to English.
+ * locale. It is a standalone static file (`public/init.md`), not a
+ * content-collection page — it has no HTML sibling and no per-language
+ * variant. The human-facing adoption page is `/quickstart`, which is fully
+ * localized; `/init` itself is only a 301 redirect to `/quickstart`.
  */
 export const CANONICAL_INIT_MD_PATH = '/init.md';
 

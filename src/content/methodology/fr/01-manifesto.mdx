@@ -70,7 +70,7 @@ C’est le second pilier de la méthodologie, et il mérite une définition clai
 
 <RepoAsHarness lang="fr" class="not-prose my-10" />
 
-Parce que chaque élément est un fichier du dépôt plutôt qu’une fonctionnalité d’un outil, le harness est portable par construction. C’est l’affirmation en une ligne sur laquelle repose le reste de la méthodologie : *le dépôt lui-même devient le harness*, de sorte que tout agent peut piloter tout dépôt — sans aucun framework sur mesure propre à un outil.
+Parce que chaque élément est un fichier du dépôt plutôt qu’une fonctionnalité d’un outil, le harness est portable par construction : tout agent qui lit du markdown et exécute des commandes shell peut ouvrir les mêmes fichiers, sans aucun framework sur mesure propre à un outil. C’est l’affirmation en une ligne sur laquelle repose le reste de la méthodologie : *le dépôt lui-même devient le harness*. C’est une affirmation sur ce que le dépôt porte, pas une garantie qu’un modèle trouve de manière fiable le bon flux sans aide sur une demande inédite — c’est pourquoi le kit fournit aussi des points d’entrée `dwp-*` explicites et un `SKILL.md` routeur : la portabilité des fichiers et un routage fiable sont des propriétés différentes, et seule la première est construite par construction seule.
 
 ## Pourquoi l’exécution autonome structurée compte
 

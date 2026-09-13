@@ -70,7 +70,7 @@ Este es el segundo pilar de la metodología, y merece una definición sencilla �
 
 <RepoAsHarness lang="es" class="not-prose my-10" />
 
-Como cada elemento es un archivo del repositorio y no una función de una herramienta, el harness es portable por construcción. Esa es la afirmación de una línea sobre la que descansa el resto de la metodología: *el propio repositorio se convierte en el harness*, para que cualquier agente pueda pilotar cualquier repo — sin un framework a medida por herramienta.
+Como cada elemento es un archivo del repositorio y no una función de una herramienta, el harness es portable por construcción: cualquier agente que lea Markdown y ejecute comandos de shell puede abrir los mismos archivos, sin un framework a medida por herramienta. Esa es la afirmación de una línea sobre la que descansa el resto de la metodología: *el propio repositorio se convierte en el harness*. Es una afirmación sobre lo que lleva el repositorio, no una garantía de que un modelo encuentre de forma fiable el flujo correcto sin ayuda ante una solicitud nueva — por eso el kit también incluye puntos de entrada explícitos `dwp-*` y un `SKILL.md` enrutador: la portabilidad de archivos y el enrutamiento fiable son propiedades distintas, y solo la primera se construye por sí sola.
 
 ## Por qué importa la ejecución autónoma estructurada
 

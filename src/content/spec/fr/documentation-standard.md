@@ -8,7 +8,13 @@ section: Standard
 
 # Standard de documentation
 
-**Version 1.1.** Ce standard définit comment les Deep Work Plans documentent leur structure, leurs tâches et leur progression. Il s’applique à tout plan créé sous la méthodologie DWP. Les mots-clés MUST, SHOULD et MAY sont employés tels que définis dans la RFC 2119.
+**Version 5.0.0.** Ce standard définit comment les Deep Work Plans documentent leur structure, leurs tâches et leur progression, et comment un dépôt se documente lui-même afin qu’un agent puisse y agir en toute sécurité. Il s’applique à tout plan créé sous la méthodologie DWP. Cette version aligne le numéro de version du document sur celui du standard DWP qu’il accompagne — aucune exigence existante ne change — et ajoute l’application du budget d’index compact et le palier de fonctionnalité décrits ci-dessous. Les mots-clés MUST, SHOULD et MAY sont employés tels que définis dans la RFC 2119.
+
+## AGENTS.md comme point d’entrée compact
+
+Le fichier `AGENTS.md` à la racine SHOULD rester dans un budget de 150 à 500 lignes. Lorsque du contenu généré ou maintenu par le harness dépasserait ce budget, l’agent MUST déplacer le détail vers le guide `docs/` (ou la documentation de module/fonctionnalité) qui en a la responsabilité et le relier depuis l’index — rien n’est supprimé, seulement déplacé, et l’index MUST relier chaque document ayant reçu du contenu déplacé. Un `AGENTS.md` existant écrit à la main et dépassant le budget n’est jamais réécrit silencieusement : l’agent propose une migration concrète (ce qui se déplace où, quels liens sont ajoutés) et ne l’applique qu’avec le consentement du développeur. Un vérificateur de conformité traite le budget comme indicatif, car un nombre de lignes est objectif mais la paternité du texte ne l’est pas — le MUST engage le harness qui génère ou met à jour le fichier, pas la supposition d’un vérificateur sur qui l’a écrit. `AGENTS.md` MUST NOT relier un fichier `docs/` qui n’existe pas.
+
+Au-dessus du palier de documentation par module (ci-dessous) se trouve un **palier de fonctionnalité** : une zone de capacité majeure — plus grande qu’un seul module — reçoit son propre dossier `docs/` à côté de son code, avec pour point d’entrée son propre `README.md`. Une zone est éligible lorsqu’elle s’étend sur deux modules majeurs ou plus, possède un répertoire de sous-application ou de sous-système autonome, ou porte ses propres contrats (une surface d’API, des contrats d’événements ou de schéma) dont dépendent plusieurs consommateurs. Une fois qu’une zone est enregistrée comme majeure, son `docs/` de fonctionnalité SHOULD exister, et ses entrées les plus significatives SHOULD être reliées depuis les modules qu’elle traverse et depuis l’index `AGENTS.md` à la racine, exactement comme la documentation par module. Une zone délibérément laissée sans documentation porte une raison consignée — une décision, pas un oubli.
 
 ## README du plan
 

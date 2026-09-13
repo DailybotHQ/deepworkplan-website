@@ -74,7 +74,7 @@ export const id: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Baru · Efisien token',
+    badge: 'Baru · Efisien konteks secara konstruksi',
     text: 'Deep Work Plan hadir di Product Hunt hari ini',
     tagline: 'beri agenmu sebuah rencana',
     linkText: 'Dukung kami',
@@ -110,7 +110,7 @@ export const id: SiteTranslations = {
         'Salin prompt init.md dan tempelkan ke agent coding Anda — Claude Code, Cursor, Codex, atau lainnya — untuk menjadikan repositori apa pun AI-first.',
       copyLabel: 'Salin init.md',
       copiedLabel: 'Tersalin',
-      viewInitCta: 'Lihat prompt /init lengkap',
+      viewInitCta: 'Lihat mulai cepat',
       pullQuote:
         'Deep Work Plan adalah spec-driven development tempat repositori itu sendiri menjadi harness.',
       primaryCta: 'Baca metodologinya',
@@ -673,62 +673,9 @@ export const id: SiteTranslations = {
     meta: {
       title: 'Mulai Cepat — Deep Work Plan',
       description:
-        'Pasang skill, onboard repositori Anda, lalu rencanakan dan eksekusi dengan agent mana pun — langkah yang membuat repositori spec-driven dan dapat dikemudikan agent.',
-    },
-    eyebrow: 'Mulai Cepat',
-    title: 'Mulai dalam hitungan menit',
-    intro:
-      'Pasang skill, onboard repositori Anda, lalu rencanakan dan eksekusi dengan agent mana pun — langkah yang membuat repositori spec-driven dan dapat dikemudikan agent.',
-    sequenceTitle: 'Jalur adopsi',
-    codeLabel: 'Terminal',
-    orLabel: 'atau',
-    steps: [
-      {
-        title: 'Pasang skill Deep Work Plan',
-        description:
-          'Tambahkan skill ke repositori Anda — sebuah router ditambah sembilan sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade). Gunakan Skills CLI untuk jalur tercepat, atau klona repo dan jalankan setup di tempat git dan shell tersedia.',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: 'Onboard repositori',
-        description:
-          'Jalankan sub-skill onboard dan biarkan agent bernalar tentang repo Anda yang sebenarnya. Ia menghasilkan AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah .agents/ lintas agent (dengan symlink .claude → .agents dan .cursor → .agents), menyambungkan command dwp-* yang tipis, dan menyiapkan .dwp/ yang di-gitignore.',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: 'Kembangkan kit dan terima addon',
-        description:
-          'Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack. Onboarding memasang review lokal AI Diff Reviewer yang wajib (gerbang CI-nya tetap opsional) dan menawarkan empat addon opt-in — devcontainer, Dailybot, dependency-upgrade, dan design-system — yang Anda terima hanya ketika cocok.',
-      },
-      {
-        title: 'Rencanakan dan eksekusi',
-        description:
-          'Hasilkan Deep Work Plan dan jalankan tugas demi tugas, validasi setiap gate dan lanjutkan lintas sesi — mengemudikan repositori terhadap spec-nya sendiri.',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: 'Hasilnya',
-    outcome:
-      'Repositori Anda menjadi spec-driven dan dapat dikemudikan agent: rencana adalah sumber kebenaran yang tahan lama, dan repositori itu sendiri menjadi harness tempat agent mana pun bekerja.',
-    nextStepsTitle: 'Langkah berikutnya',
-    nextSteps: [
-      { label: 'Baca metodologinya', href: '/methodology' },
-      { label: 'Telusuri kit', href: '/kit' },
-      { label: 'Lihat contoh', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — Jadikan repositori Anda AI-first — Deep Work Plan',
-      description:
         'Adopsi metodologi Deep Work Plan di repositori mana pun. Pasang skill, jalankan onboarding agent, lalu rencanakan dan eksekusi dengan AI coding agent mana pun.',
     },
-    eyebrow: 'Adopsi',
+    eyebrow: 'Mulai Cepat',
     title: 'Jadikan repositori ini AI-first',
     intro:
       'Satu endpoint untuk mengubah repositori apa pun menjadi basis kode spec-driven yang siap agent. Pasang skill, biarkan agent meng-onboard repo, lalu rencanakan dan eksekusi pekerjaan terstruktur dengan coding agent mana pun.',
@@ -738,13 +685,13 @@ export const id: SiteTranslations = {
     handoffInstruction:
       'Baca dan ikuti instruksi di https://deepworkplan.com/init.md untuk menjadikan repositori ini AI-first.',
     handoffMdLabel: 'Prompt agent mandiri',
-    codeLabel: 'agent',
+    codeLabel: 'Terminal',
     whatTitle: 'Apa yang dilakukannya',
     whatBody: [
       'Adopsi mengubah repositori dengan dua cara yang tahan lama — kedua pilar metodologi.',
       'Pertama, repositori menjadi spec-driven: pekerjaan dimulai dari rencana dan spesifikasi tertulis, bukan dari prompt dadakan. Kedua, repositori itu sendiri menjadi agent harness — AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah skill .agents/ (dengan symlink .claude → .agents dan .cursor → .agents) memberi setiap agent konteks dan command yang dibutuhkannya.',
     ],
-    sequenceTitle: 'Urutan adopsi',
+    sequenceTitle: 'Jalur adopsi',
     orLabel: 'atau',
     steps: [
       {
@@ -780,6 +727,7 @@ export const id: SiteTranslations = {
         title: 'Rencanakan dan eksekusi',
         description:
           'Hasilkan Deep Work Plan dengan /dwp-create dan jalankan dengan /dwp-execute, lalu /dwp-status, /dwp-refine, /dwp-resume, dan /dwp-verify seiring pekerjaan berjalan. Setiap rencana membawa tugas bernomor, validation gate, dan completion protocol — dan ditutup dengan tepat satu Final Review wajib (pemeriksaan keamanan, validasi status akhir, dan rekonsiliasi skills). Executive Report tetap tersedia atas permintaan.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: 'Verifikasi kepatuhan',
@@ -791,12 +739,12 @@ export const id: SiteTranslations = {
     outcomeTitle: 'Hasilnya',
     outcome:
       'Repositori menjadi spec-driven dan repositori itu sendiri menjadi agent harness — konteks dan command ikut bersama kode.',
-    nextStepsTitle: 'Baca selanjutnya',
+    nextStepsTitle: 'Langkah berikutnya',
     nextSteps: [
-      { label: 'Mulai Cepat', href: '/quickstart' },
-      { label: 'Metodologi', href: '/methodology' },
+      { label: 'Baca metodologinya', href: '/methodology' },
       { label: 'Spesifikasi', href: '/spec' },
-      { label: 'Kit', href: '/kit' },
+      { label: 'Telusuri kit', href: '/kit' },
+      { label: 'Lihat contoh', href: '/examples' },
     ],
   },
 
@@ -870,7 +818,7 @@ export const id: SiteTranslations = {
             answer:
               'Skill agent terpasang di mana pun agent Anda memuat skill project atau user. Onboarding kemudian menyesuaikan repositori itu sendiri: ia membuat atau merekonsiliasi `AGENTS.md`, `docs/`, `.agents/`, dan area kerja `.dwp/` yang di-gitignore. Skill mengajari agent metodenya; repositori menyimpan konteks, kit, dan bukti rencana yang dibutuhkan agent lain untuk melanjutkan.',
             linkLabel: 'Lihat alur adopsinya',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1036,7 +984,7 @@ export const id: SiteTranslations = {
             answer:
               'Onboarding bersifat non-destruktif: ia mendeteksi `AGENTS.md`, `docs/`, `.agents/`, atau `CLAUDE.md` yang sudah ada, merekonsiliasi alih-alih menimpa, dan bertanya sebelum mengganti apa pun. Ia menulis indeks `AGENTS.md` dengan command nyata, pohon `docs/` yang beralasan, dokumentasi per modul, kit `.agents/` dengan command `dwp-*` yang tipis, area keluaran `.dwp/` yang di-gitignore, peta pengujian yang terverifikasi, dan tinjauan kode lokal yang diwajibkan (skill AI Diff Reviewer plus ekstensi review yang disesuaikan repo). Ia kemudian menjalankan self-check dan pemeriksa konformansi agar Anda bisa melihat apa yang dihasilkan. Repositori yang di-onboard di bawah standar sebelumnya mendapat upgrade harness tertarget yang merekonsiliasi hanya apa yang kurang atau usang.',
             linkLabel: 'Endpoint adopsi',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1045,7 +993,7 @@ export const id: SiteTranslations = {
             answer:
               'Ada dua upgrade berbeda, dan alurnya menjaga keduanya tetap terpisah. Harness repositori — `AGENTS.md`, `docs/`, kit `.agents/` — direkonsiliasi dengan menjalankan kembali onboarding, yang hanya mengisi apa yang kurang atau usang. Skill itu sendiri bergerak lewat `/dwp-upgrade`: pemeriksaan read-only atas rilis terbaru yang dipublikasikan, instalasi tag persis yang Anda terima, terverifikasi, lalu onboarding kembali sebagai satu proses segar. Alur bergantung pada persetujuan eksplisit di setiap langkah, adaptasi lokal dibandingkan dan dipertahankan alih-alih ditimpa, dan `.dwp/` tidak pernah dimigrasi — rencana yang ada mempertahankan bentuk tercatatnya dan terus berjalan.',
             linkLabel: 'Endpoint adopsi',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1069,7 +1017,7 @@ export const id: SiteTranslations = {
             id: 'cost',
             question: 'Berapa biayanya, dan bagaimana efisiensi diukur?',
             answer:
-              'Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur, diukur oleh script yang di-commit bersama skill, diukur ulang pada setiap baseline rilis dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu. Evaluasi publik dengan agen segar kini telah dijalankan di bawah protokol beku: dua fitur yang sama dibangun dari klon bersih tanpa harness, dengan versi mayor sebelumnya, dan dengan versi saat ini. Evaluasi menemukan bahwa agen pada pohon berkemampuan-harness membaca lebih sedikit byte pada kedua tugas, dan bahwa sesi fitur versi saat ini mengonsumsi lebih sedikit masukan dan keluaran model daripada versi mayor sebelumnya pada kedua tugas — sebagaimana dilaporkan harness, pada satu beban kerja. Evaluasi juga menemukan batas-batasnya yang jujur: onboarding adalah biaya sekali bayar yang hanya terbayar kembali saat alurnya digunakan, arah token bersih per beban kerja bersifat campuran, tidak ada klaim keunggulan waktu dinding, dan agen segar tidak memasuki alur dengan sendirinya — alur adalah perintah yang Anda atau agen yang tahu memanggilnya.',
+              'Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur **saat masuk** — paket awalnya di permulaan sesi — dipublikasikan berdampingan dengan **jalur end-to-end** bernama yang menambahkan apa yang benar-benar dimuat oleh pemicu alur itu sendiri saat pekerjaan sungguh berlanjut (misalnya, resume yang berlanjut ke eksekusi biasanya memuat beberapa kali lipat paket masuknya). Tak satu pun dari kedua angka ini membatasi sebuah sesi: eksekusi nyata juga membaca file repositori itu sendiri, keluaran tool, dan file kerja rencana, yang tak satu pun dihitung dalam ledger ini. Kedua angka diukur oleh script yang di-commit bersama skill, diukur ulang pada setiap baseline rilis dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu. Evaluasi publik dengan agen segar kini telah dijalankan di bawah protokol beku: dua fitur yang sama dibangun dari klon bersih tanpa harness, dengan versi mayor sebelumnya, dan dengan versi saat ini. Evaluasi menemukan bahwa agen pada pohon berkemampuan-harness membaca lebih sedikit byte pada kedua tugas, dan bahwa sesi fitur versi saat ini mengonsumsi lebih sedikit masukan dan keluaran model daripada versi mayor sebelumnya pada kedua tugas — sebagaimana dilaporkan harness, pada satu beban kerja. Evaluasi juga menemukan batas-batasnya yang jujur: onboarding adalah biaya sekali bayar yang hanya terbayar kembali saat alurnya digunakan, arah token bersih per beban kerja bersifat campuran, tidak ada klaim keunggulan waktu dinding, dan agen segar tidak memasuki alur dengan sendirinya — alur adalah perintah yang Anda atau agen yang tahu memanggilnya.',
             linkLabel: 'Kepercayaan dan pengungkapan',
             linkPath: '/trust',
           },
@@ -1287,13 +1235,13 @@ export const id: SiteTranslations = {
         },
         {
           title: 'Beban instruksi diukur dan dipublikasikan',
-          body: 'Script yang di-commit mengukur berapa byte yang dimuat setiap alur; hasilnya, termasuk kenaikan, dipublikasikan sebagai byte, tidak pernah sebagai persentase token atau biaya.',
+          body: 'Script yang di-commit mempublikasikan dua pengukuran per alur — paket masuk yang dimuat di permulaan sesi, dan jalur end-to-end setelah pemicu nyatanya aktif — beserta apa yang dikecualikan masing-masing, sehingga angka masuk saja tidak pernah dibaca sebagai total biaya sebuah eksekusi. Hasilnya, termasuk kenaikan, dipublikasikan sebagai byte, tidak pernah sebagai persentase token atau biaya.',
         },
       ],
     },
     honestLimits: {
       title: 'Keterbatasan yang jujur',
-      body: 'Deep Work Plan tidak memiliki mekanisme spesifikasi hidup maupun delta; OpenSpec dan tool sejenis lebih kuat di aspek itu. Belum ada benchmark independen atas metodologi ini; evaluasi pihak pertama dengan agen segar telah dijalankan di bawah protokol beku, dalam skala kecil — satu beban kerja, dua fitur per konfigurasi, satu mesin — dan hasilnya dipublikasikan ke dua arah: agen pada pohon berkemampuan-harness membaca lebih sedikit byte pada kedua tugas dan sesi versi saat ini mengonsumsi lebih sedikit masukan dan keluaran model yang dilaporkan harness daripada versi mayor sebelumnya, sementara arah token bersih per beban kerja bersifat campuran dan tidak ada klaim keunggulan waktu dinding. Ledger beban instruksi mengukur byte yang dimuat, bukan token, biaya, atau hasil. DWP secara sengaja dibatasi pada repositori: ini bukan sistem memori lintas proyek, bukan kerangka kerja agen berbasis peran, dan bukan IDE, sehingga tidak bersaing di sumbu-sumbu itu juga — padukan dengan alat yang mencakup salah satu sumbu tersebut saat pekerjaan membutuhkannya.',
+      body: 'Deep Work Plan tidak memiliki mekanisme spesifikasi hidup maupun delta; OpenSpec dan tool sejenis lebih kuat di aspek itu. Belum ada benchmark independen atas metodologi ini; evaluasi pihak pertama dengan agen segar telah dijalankan di bawah protokol beku, dalam skala kecil — satu beban kerja, dua fitur per konfigurasi, satu mesin — dan hasilnya dipublikasikan ke dua arah: agen pada pohon berkemampuan-harness membaca lebih sedikit byte pada kedua tugas dan sesi versi saat ini mengonsumsi lebih sedikit masukan dan keluaran model yang dilaporkan harness daripada versi mayor sebelumnya, sementara arah token bersih per beban kerja bersifat campuran dan tidak ada klaim keunggulan waktu dinding. Ledger beban instruksi mengukur byte yang dimuat, bukan token, biaya, atau hasil, dan angka paket masuknya bukan batas atas untuk apa yang dibaca sebuah eksekusi. DWP secara sengaja dibatasi pada repositori: ini bukan sistem memori lintas proyek, bukan kerangka kerja agen berbasis peran, dan bukan IDE, sehingga tidak bersaing di sumbu-sumbu itu juga — padukan dengan alat yang mencakup salah satu sumbu tersebut saat pekerjaan membutuhkannya.',
     },
     correction: {
       title: 'Bantu kami menjaga keakuratan halaman ini',
@@ -1360,7 +1308,7 @@ export const id: SiteTranslations = {
     ctaBody:
       'Baca metodologi dan spesifikasinya, arahkan agent ke endpoint init, dan verifikasi instalasi sebelum Anda menjalankannya.',
     ctaPrimary: 'Baca metodologinya',
-    ctaSecondary: 'Adopsi (init)',
+    ctaSecondary: 'Mulai Cepat',
   },
 
   // Developers — agent & developer surface

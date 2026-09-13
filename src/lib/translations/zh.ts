@@ -74,7 +74,7 @@ export const zh: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: '最新 · Token 高效',
+    badge: '最新 · 结构性上下文高效',
     text: 'Deep Work Plan 今天登陆 Product Hunt',
     tagline: '给你的智能体一个计划',
     linkText: '去支持',
@@ -110,7 +110,7 @@ export const zh: SiteTranslations = {
         '复制 init.md 提示并将其粘贴到你的编码代理中——Claude Code、Cursor、Codex 或任何其他代理——让任意代码仓库变为 AI-first。',
       copyLabel: '复制 init.md',
       copiedLabel: '已复制',
-      viewInitCta: '查看完整的 /init 提示',
+      viewInitCta: '查看快速开始',
       pullQuote:
         'Deep Work Plan 是一种规范驱动的开发方式，在其中代码仓库本身成为执行的 harness（运行支架）。',
       primaryCta: '阅读方法论',
@@ -664,62 +664,9 @@ export const zh: SiteTranslations = {
     meta: {
       title: '快速开始 — Deep Work Plan',
       description:
-        '安装技能，接入你的代码仓库，然后用任意代理规划并执行——让你的仓库变得规范驱动、可被代理驾驭的各个步骤。',
-    },
-    eyebrow: '快速开始',
-    title: '几分钟即可上手',
-    intro:
-      '安装技能，接入你的代码仓库，然后用任意代理规划并执行——让你的仓库变得规范驱动、可被代理驾驭的各个步骤。',
-    sequenceTitle: '采纳路径',
-    codeLabel: '终端',
-    orLabel: '或',
-    steps: [
-      {
-        title: '安装 Deep Work Plan 技能',
-        description:
-          '把技能添加到你的代码仓库——一个路由器外加九个子技能（create、execute、refine、resume、status、verify、onboard、author、upgrade）。使用 Skills CLI 是最快的方式，或者在具备 git 与 shell 的环境中克隆仓库并运行 setup。',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: '接入代码仓库',
-        description:
-          '运行 onboard 子技能，让代理对你真实的仓库进行推理。它会生成 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个跨代理的 .agents/ 目录（含 .claude → .agents 和 .cursor → .agents 符号链接）,接入轻量的 dwp-* 命令，并搭建一个被 gitignore 的 .dwp/。',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: '演化套件并采纳附加组件',
-        description:
-          '使用 /skill-create 与 /agent-create（author 子技能）来培育与技术栈相适配的技能、代理与命令。接入流程会安装必需的 AI Diff Reviewer 本地评审（其 CI 门禁仍为可选），并提供四个可选附加组件——devcontainer、Dailybot、dependency-upgrade 与 design-system——你只在它们契合时才采纳。',
-      },
-      {
-        title: '规划并执行',
-        description:
-          '生成一份 Deep Work Plan 并逐任务运行，验证每一道关卡并跨会话恢复——让仓库依据自身的规范被驾驭。',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: '成果',
-    outcome:
-      '你的代码仓库变得规范驱动、可被代理驾驭：计划是持久的事实来源，而代码仓库本身成为任意代理依据其运行的 harness（运行支架）。',
-    nextStepsTitle: '后续步骤',
-    nextSteps: [
-      { label: '阅读方法论', href: '/methodology' },
-      { label: '浏览套件', href: '/kit' },
-      { label: '查看示例', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — 让你的代码仓库 AI-first — Deep Work Plan',
-      description:
         '在任意代码仓库中采纳 Deep Work Plan 方法论。安装技能、运行代理接入，然后用任意 AI 编码代理规划并执行。',
     },
-    eyebrow: '采纳',
+    eyebrow: '快速开始',
     title: '让这个代码仓库 AI-first',
     intro:
       '一个端点，将任意代码仓库转化为规范驱动、面向代理就绪的代码库。安装技能，让代理接入仓库，然后用任意编码代理规划并执行结构化的工作。',
@@ -729,13 +676,13 @@ export const zh: SiteTranslations = {
     handoffInstruction:
       '请阅读并按照 https://deepworkplan.com/init.md 中的说明操作，将此仓库变为 AI-first。',
     handoffMdLabel: '自包含的代理提示',
-    codeLabel: 'agent',
+    codeLabel: '终端',
     whatTitle: '它做了什么',
     whatBody: [
       '采纳会以两种持久的方式改变代码仓库——这正是方法论的两大支柱。',
       '其一，代码仓库变得规范驱动：工作从一份书面的计划与规范开始，而非从临时提示开始。其二，代码仓库本身成为代理的 harness（运行支架）——一份 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个 .agents/ 技能目录（含 .claude → .agents 和 .cursor → .agents 符号链接）,为每个代理提供它所需的上下文与命令。',
     ],
-    sequenceTitle: '采纳流程',
+    sequenceTitle: '采纳路径',
     orLabel: '或',
     steps: [
       {
@@ -771,6 +718,7 @@ export const zh: SiteTranslations = {
         title: '规划并执行',
         description:
           '用 /dwp-create 生成 Deep Work Plan 并用 /dwp-execute 运行它们，随着工作推进再使用 /dwp-status、/dwp-refine、/dwp-resume 与 /dwp-verify。每份计划都带有编号任务、验证关卡与一套完成协议——并以唯一的强制 Final Review 收尾（安全审查、最终状态验证与技能决策核对）。Executive Report 仍可按需提供。',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: '验证一致性',
@@ -782,12 +730,12 @@ export const zh: SiteTranslations = {
     outcomeTitle: '成果',
     outcome:
       '代码仓库变得规范驱动，而代码仓库本身成为代理的 harness（运行支架）——上下文与命令随代码一同传递。',
-    nextStepsTitle: '接下来阅读',
+    nextStepsTitle: '后续步骤',
     nextSteps: [
-      { label: '快速开始', href: '/quickstart' },
-      { label: '方法论', href: '/methodology' },
+      { label: '阅读方法论', href: '/methodology' },
       { label: '规范', href: '/spec' },
-      { label: '套件', href: '/kit' },
+      { label: '浏览套件', href: '/kit' },
+      { label: '查看示例', href: '/examples' },
     ],
   },
 
@@ -861,7 +809,7 @@ export const zh: SiteTranslations = {
             answer:
               '代理技能会被安装到你的代理加载项目或用户技能的位置。随后，接入会适配仓库本身：创建或调和 `AGENTS.md`、`docs/`、`.agents/` 以及被 gitignore 的 `.dwp/` 工作区。技能教会代理这套方法；仓库则保存其他代理接续工作所需的上下文、套件与计划证据。',
             linkLabel: '查看采用流程',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1018,7 +966,7 @@ export const zh: SiteTranslations = {
             answer:
               '接入是非破坏性的：它会检测已有的 `AGENTS.md`、`docs/`、`.agents/` 或 `CLAUDE.md`，采取调和而非覆盖，并在替换任何内容之前先询问。它会写入带真实命令的 `AGENTS.md` 索引、一棵经过推理的 `docs/` 树、各模块文档、带轻量 `dwp-*` 命令的 `.agents/` 套件、一个被 gitignore 的 `.dwp/` 输出区、一份经过验证的测试映射，以及必备的本地代码审查（AI Diff Reviewer 技能加一份为仓库定制的审查扩展）。随后它会运行自检与符合性检查器，让你看到产出了什么。在更早标准下接入的仓库会得到一次定向的 harness 升级，只调和缺失或过时的部分。',
             linkLabel: '采用入口',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1026,7 +974,7 @@ export const zh: SiteTranslations = {
             answer:
               '这里涉及两种不同的升级，流程把它们分开对待。仓库 harness——`AGENTS.md`、`docs/`、`.agents/` 套件——通过重新运行接入来调和，只补齐缺失或过时的部分。技能本身则通过 `/dwp-upgrade` 前进：先以只读方式检查最新发布的版本，再安装你接受的那个确切标签并加以验证，然后把接入当作一次全新执行重新运行。整个流程每一步都需明确同意，本地适配会先比对再保留而不是被覆盖，`.dwp/` 绝不会被迁移——既有计划保持其记录的形态并继续运行。',
             linkLabel: '采用入口',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1048,7 +996,7 @@ export const zh: SiteTranslations = {
             id: 'cost',
             question: '它收费吗？效率如何衡量？',
             answer:
-              '方法论与技能均采用 MIT 许可，且完全免费；核心流程中没有服务、没有 API 密钥、也没有遥测。效率以每个流程加载的指令字节数来报告，由随技能一同提交的脚本测量，在各发布基线上重新测量，并发布在一本评估台账中，增长与下降同样如实呈现。它不以 token 百分比或成本节省的形式报告，因为一份字节清单无法证明这些。一项公开的新代理评估已在冻结协议下执行：同样的两个功能，分别在无 harness、上一大版本与本版本的干净克隆上构建。它发现带有 harness 的代理在两项任务中都读取了更少的字节，且本版本的功能会话在两项任务中消耗的模型输入与输出均少于上一大版本——由 harness 报告，单一工作负载。它同样给出了诚实的边界：onboarding 是一次性成本，只有在流程被使用时才会回本；每个工作负载的 token 净方向结果不一；不主张任何时钟时间优势；新代理不会自行进入流程——流程是由你或知道调用它的代理执行的命令。',
+              '方法论与技能均采用 MIT 许可，且完全免费；核心流程中没有服务、没有 API 密钥、也没有遥测。效率以每个流程**在入口处**加载的指令字节数来报告——即会话开始时加载的入口包——并与命名的**端到端路径**一并发布，后者加上了该流程真实触发条件在工作实际推进后所加载的内容（例如，一次进入执行阶段的 resume 通常会加载数倍于其入口包的字节）。这两个数字都不是会话的上限：一次真实运行还会读取仓库自身的文件、工具输出以及计划的工作文件，这些都不计入此账本。两个数字均由随技能一同提交的脚本测量，在各发布基线上重新测量，并发布在一本评估台账中，增长与下降同样如实呈现。它不以 token 百分比或成本节省的形式报告，因为一份字节清单无法证明这些。一项公开的新代理评估已在冻结协议下执行：同样的两个功能，分别在无 harness、上一大版本与本版本的干净克隆上构建。它发现带有 harness 的代理在两项任务中都读取了更少的字节，且本版本的功能会话在两项任务中消耗的模型输入与输出均少于上一大版本——由 harness 报告，单一工作负载。它同样给出了诚实的边界：onboarding 是一次性成本，只有在流程被使用时才会回本；每个工作负载的 token 净方向结果不一；不主张任何时钟时间优势；新代理不会自行进入流程——流程是由你或知道调用它的代理执行的命令。',
             linkLabel: '信任与披露',
             linkPath: '/trust',
           },
@@ -1262,13 +1210,13 @@ export const zh: SiteTranslations = {
         },
         {
           title: '指令加载的测量与发布',
-          body: '一个随仓库提交的脚本测量每个流程加载多少字节；结果——包括增长——以字节数发布，从不用 token 或成本百分比表示。',
+          body: '一个已提交的脚本为每个流程发布两项测量——会话开始时加载的入口包，以及其真实触发条件启动后的端到端路径——并说明各自的排除范围，因此入口数字本身从不会被当作一次运行的总成本。结果——包括增长——以字节数发布，从不用 token 或成本百分比表示。',
         },
       ],
     },
     honestLimits: {
       title: '诚实的局限',
-      body: 'Deep Work Plan 没有活规范或增量规范机制；OpenSpec 及类似工具在那一面更强。该方法论尚无独立基准测试；一项第一方新代理评估已在冻结协议下执行，规模较小——单一工作负载、每种配置两个功能、一台机器——其结果双向公布：带 harness 的代理在两项任务中读取字节更少，本版本的会话消耗的由 harness 报告的模型输入与输出少于上一大版本，同时每个工作负载的 token 净方向结果不一，且不主张任何时钟时间优势。指令加载台账测量的是加载的字节数，而非 token、成本或结果。DWP 有意将范围限定在仓库之内：它不是跨项目记忆系统，不是基于角色的代理框架，也不是一款 IDE，因此它也不在这些维度上参与竞争——当工作确实需要这些能力时，请将它与覆盖该能力的工具搭配使用。',
+      body: 'Deep Work Plan 没有活规范或增量规范机制；OpenSpec 及类似工具在那一面更强。该方法论尚无独立基准测试；一项第一方新代理评估已在冻结协议下执行，规模较小——单一工作负载、每种配置两个功能、一台机器——其结果双向公布：带 harness 的代理在两项任务中读取字节更少，本版本的会话消耗的由 harness 报告的模型输入与输出少于上一大版本，同时每个工作负载的 token 净方向结果不一，且不主张任何时钟时间优势。指令加载台账测量的是加载的字节数，而非 token、成本或结果，其入口包数字也并非一次运行的上限。DWP 有意将范围限定在仓库之内：它不是跨项目记忆系统，不是基于角色的代理框架，也不是一款 IDE，因此它也不在这些维度上参与竞争——当工作确实需要这些能力时，请将它与覆盖该能力的工具搭配使用。',
     },
     correction: {
       title: '帮助我们保持准确',
@@ -1334,7 +1282,7 @@ export const zh: SiteTranslations = {
     ctaTitle: '放心采用',
     ctaBody: '阅读方法论和规范，将代理指向 init 端点，并在运行之前验证安装。',
     ctaPrimary: '阅读方法论',
-    ctaSecondary: '采纳（Init）',
+    ctaSecondary: '快速开始',
   },
 
   developersPage: {

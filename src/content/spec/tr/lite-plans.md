@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite planlar
 
-**Sürüm 4.0.0. Durum: Kararlı.** Bu belge, [DWP spesifikasyonu](/spec/dwp-specification) ile birlikte tanıtılan Lite plan temsilini belirtir: yürütülemeyen bir taslak aşaması olmadan doğrudan somutlaştırılan, küçük ila orta ölçekli, sınırlı işler için bir plan biçimi. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
+**Sürüm 5.0.0. Durum: Kararlı.** Bu belge, [DWP spesifikasyonu](/spec/dwp-specification) ile birlikte tanıtılan Lite plan temsilini belirtir: yürütülemeyen bir taslak aşaması olmadan doğrudan somutlaştırılan, küçük ila orta ölçekli, sınırlı işler için bir plan biçimi. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 
 ## Temsil ve yaşam döngüsü
 
@@ -41,6 +41,8 @@ Yönlendirilmiş create, **gözden geçirilebilir, bekleyen bir öneri** yazar �
 Aynı seçeneği tekrarlamak idempotenttir; `lite` ve `full`'u birlikte istemek bir hatadır. `--`, seçenek ayrıştırmayı sonlandırır.
 
 Hiçbir biçim tercihi verilmediğinde, `create` birini önerir ve nedenini açıklar. Açık bir **Full** isteği her zaman kazanır. Açık bir **Lite** isteği, işin gereksinimleri veya doğrulama kapıları kompakt satır içi kayıtlara sığmayacaksa, saygı görmez — bu durumda `create`, bunun yerine neden Full gerektiğini kaydeder. Seçim, gözlemlenen kapsamı, bağımlılıkları, gereken talimat ayrıntı düzeyini ve seçimin ardındaki bilinmeyenleri KAYDETMEK ZORUNDADIR — denetlenebilir bir yargı çağrısıdır, her model veya ajan genelinde geçerli olan bir garanti değildir.
+
+Bir Lite plan, paralelleştirme kararını tıpkı Full gibi taşır: `Execution: sequential — {rationale}` satırı ya da bir Team Agents Configuration bölümü, görev başına Team Agents Metadata'sı ayrı bir görev dosyası yerine doğrudan çapalanmış görev kayıtlarına eklenmiş olarak. Karar Lite'ta da asla sessiz değildir — bir Lite plan bunu tam olarak bir Full planın yapacağı gibi belirtir.
 
 ## Yükseltme ve uyumluluk
 

@@ -29,7 +29,7 @@
         { key: 'spec', name: 'Specification', path: '/spec' },
         { key: 'kit', name: 'Kit', path: '/kit' },
         { key: 'examples', name: 'Examples', path: '/examples' },
-        { key: 'init', name: 'Adoption (/init)', path: '/init' },
+        { key: 'quickstart', name: 'Quickstart (adoption)', path: '/quickstart' },
       ];
 
       const text = (t) => ({ content: [{ type: 'text', text: t }] });
@@ -52,7 +52,7 @@
         {
           name: 'list_site_sections',
           description:
-            'List the main sections of deepworkplan.com (methodology, specification, kit, examples, init) with their URLs.',
+            'List the main sections of deepworkplan.com (methodology, specification, kit, examples, quickstart) with their URLs.',
           inputSchema: { type: 'object', properties: {}, additionalProperties: false },
           execute: () =>
             text(sections.map((s) => s.name + ': ' + url(s.path)).join('\n')),

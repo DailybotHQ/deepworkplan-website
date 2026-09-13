@@ -8,7 +8,13 @@ section: Standard
 
 # Chuẩn tài liệu
 
-**Phiên bản 1.1.** Chuẩn này định nghĩa cách các Deep Work Plan ghi lại cấu trúc, tác vụ và tiến độ của chúng. Nó áp dụng cho mọi kế hoạch được tạo theo phương pháp luận DWP. Các từ khóa MUST, SHOULD và MAY được dùng như định nghĩa trong RFC 2119.
+**Phiên bản 5.0.0.** Chuẩn này định nghĩa cách các Deep Work Plan ghi lại cấu trúc, tác vụ và tiến độ của chúng, và cách một kho lưu trữ tự ghi lại chính nó để một agent có thể hành động an toàn. Nó áp dụng cho mọi kế hoạch được tạo theo phương pháp luận DWP. Phiên bản này căn chỉnh số phiên bản riêng của tài liệu với chuẩn DWP mà nó đi kèm — không yêu cầu hiện có nào thay đổi — và bổ sung việc thực thi ngân sách chỉ mục gọn nhẹ cùng tầng tính năng được mô tả dưới đây. Các từ khóa MUST, SHOULD và MAY được dùng như định nghĩa trong RFC 2119.
+
+## AGENTS.md như một điểm vào gọn nhẹ
+
+Tệp `AGENTS.md` ở gốc NÊN giữ trong ngân sách 150–500 dòng. Khi nội dung được tạo ra hoặc được harness duy trì sẽ vượt quá đó, agent PHẢI chuyển chi tiết sang tài liệu hướng dẫn `docs/` (hoặc tài liệu module/tính năng) sở hữu nó và liên kết từ chỉ mục — không có gì bị bỏ đi, chỉ được chuyển vị trí, và chỉ mục PHẢI liên kết tới mọi tài liệu đã nhận nội dung được chuyển. Một `AGENTS.md` viết tay đã vượt ngân sách không bao giờ bị viết lại âm thầm: agent đề xuất một kế hoạch di chuyển cụ thể (cái gì chuyển đi đâu, liên kết nào được thêm) và chỉ áp dụng khi có sự đồng ý của nhà phát triển. Một trình kiểm tra tuân thủ coi ngân sách này là mang tính tư vấn, vì số dòng là khách quan nhưng quyền tác giả thì không — MUST này ràng buộc harness tạo ra hoặc cập nhật tệp, không phải phỏng đoán của trình kiểm tra về ai đã viết nó. `AGENTS.md` KHÔNG ĐƯỢC liên kết tới một tệp `docs/` không tồn tại.
+
+Phía trên tầng tài liệu theo từng module (bên dưới) là một **tầng tính năng**: một khu vực năng lực lớn — lớn hơn một module — có `docs/` riêng của nó đặt cạnh mã nguồn, được vào bằng `README.md` riêng của nó. Một khu vực đủ điều kiện khi nó bao trùm hai module chính trở lên, sở hữu một thư mục sub-app hay hệ thống con tự chứa, hoặc mang các hợp đồng riêng của nó (một bề mặt API, các hợp đồng sự kiện hay schema) mà nhiều bên tiêu thụ phụ thuộc vào. Một khi một khu vực được ghi nhận là chính, `docs/` tính năng của nó NÊN tồn tại, và các mục quan trọng nhất của nó NÊN được liên kết từ các module mà khu vực đó bao trùm và từ chỉ mục `AGENTS.md` gốc, giống hệt như tài liệu theo từng module. Một khu vực cố ý bị bỏ không ghi tài liệu mang theo một lý do được ghi lại — một quyết định, không phải một sự bỏ sót.
 
 ## README của kế hoạch
 

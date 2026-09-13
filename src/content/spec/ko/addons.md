@@ -8,7 +8,7 @@ section: Addons
 
 # 애드온
 
-**버전 4.0.0.** 애드온은 핵심 Deep Work Plan 방법론에 대한 확장입니다. 다섯 가지 중 네 가지는 선택적이며 **적합성에 절대 필요하지 않습니다** — 선택적 애드온이 없는 저장소도 완전히 AI-first이며 DWP 적합합니다. 각 선택적 애드온은 온보딩 중 제안되며 명시적으로 수락 또는 거부되고, — 수락 시 — 기존 설정을 덮어쓰지 않고 **조정**합니다. 한 가지 구성 요소가 명시된 예외입니다: 표준 2.3.0부터 **AI Diff Reviewer 로컬 리뷰**는 필수 기준선의 일부입니다 — 온보딩이 이를 설치하고 모든 Final Review가 이를 실행합니다 — 반면 그 CI 표면은 옵트인으로 남습니다.
+**버전 2.1.0.** 애드온은 핵심 Deep Work Plan 방법론에 대한 확장입니다. 다섯 가지 중 네 가지는 선택적이며 **적합성에 절대 필요하지 않습니다** — 선택적 애드온이 없는 저장소도 완전히 AI-first이며 DWP 적합합니다. 각 선택적 애드온은 온보딩 중 제안되며 명시적으로 수락 또는 거부되고, — 수락 시 — 기존 설정을 덮어쓰지 않고 **조정**합니다. 한 가지 구성 요소가 명시된 예외입니다: 표준 2.3.0부터 **AI Diff Reviewer 로컬 리뷰**는 필수 기준선의 일부입니다 — 온보딩이 이를 설치하고 모든 Final Review가 이를 실행합니다 — 반면 그 CI 표면은 옵트인으로 남습니다.
 
 ## 애드온 계약
 
@@ -67,7 +67,7 @@ section: Addons
 
 ### AI Diff Reviewer(다섯 번째 애드온 — 필수 로컬 리뷰, 선택적 CI 표면)
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**(marketplace **"AI Diff Reviewer"**, 현재 버전 **v2.0.1**)는 필수 Final Review 보안 점검에 구조화된 로컬 리뷰를 부여하고, 선택적으로 CI에서 pull request를 게이트합니다. 표준 2.3.0부터 **로컬 리뷰는 기준선의 일부**입니다; 옵트인인 것은 CI 표면뿐입니다.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**(marketplace **"AI Diff Reviewer"**)는 필수 Final Review 보안 점검에 구조화된 로컬 리뷰를 부여하고, 선택적으로 CI에서 pull request를 게이트합니다. 이 애드온은 릴리스마다 자동으로 갱신되므로, 이 글에서는 현재 버전을 고정하여 명시하지 않습니다 — 실제로 벤더링된 태그는 애드온 자체의 `SKILL.md` 또는 GitHub 릴리스에서 확인하세요. 표준 2.3.0부터 **로컬 리뷰는 기준선의 일부**입니다; 옵트인인 것은 CI 표면뿐입니다.
 
 - **키트 페이지:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 전체 기능 참조
 - **온보딩 시 필수(7a 단계):** 온보딩 동의 아래 벤더 스킬의 태그 고정 설치(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) 더하기 저장소 맞춤 `.review/extension.md`(`generate-extension` 경유); 표적 하니스 업그레이드는 둘 중 무엇이 누락되었는지 조정; 거부는 선언된 예외로 기록되며 설치될 때까지 `verify`가 보고

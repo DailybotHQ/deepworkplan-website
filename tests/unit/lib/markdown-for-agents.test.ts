@@ -165,15 +165,17 @@ function extractNavPaths(markdown: string, prefix: string): string[] {
 }
 
 /** Every real top-level route the "Site Navigation" block must list —
- * home, methodology, spec, kit, init, quickstart, examples, compare, faq,
- * changelog, developers, trust, about, contact, privacy (15 routes; /404
- * and /internal/* are correctly never nav targets). */
+ * home, methodology, spec, kit, quickstart, examples, compare, faq,
+ * changelog, developers, trust, about, contact, privacy (14 real HTML
+ * routes; /404 and /internal/* are correctly never nav targets) — plus
+ * the one standalone, non-page agent artifact, /init.md (English-only,
+ * never a /{lang}/init.md variant; /init itself now redirects to
+ * /quickstart, so it is no longer a distinct route to list). */
 const EXPECTED_NAV_PATHS = [
   '/',
   '/methodology',
   '/spec',
   '/kit',
-  '/init',
   '/quickstart',
   '/examples',
   '/compare',
@@ -184,6 +186,7 @@ const EXPECTED_NAV_PATHS = [
   '/about',
   '/contact',
   '/privacy',
+  '/init.md',
 ];
 
 describe('Site Navigation block (generateSiteNavigation via serializePageToAgentMarkdown)', () => {
@@ -205,10 +208,12 @@ describe('Site Navigation block (generateSiteNavigation via serializePageToAgent
     expect(new Set(paths)).toEqual(new Set(EXPECTED_NAV_PATHS));
     expect(result).toContain('[Desarrolladores](/es/developers)');
     expect(result).toContain('[Privacidad](/es/privacy)');
-    expect(result).toContain('[Init](/es/init)');
+    // /init.md is external (never localized) — its link is unprefixed even
+    // on the Spanish page, unlike every other entry in the block.
+    expect(result).toContain('[Init](/init.md)');
   });
 
-  it('places /init first in "Get started", /developers last in "Learn", and /privacy last in "Project"', () => {
+  it('places /quickstart first in "Get started" and /init.md last (unprefixed), /developers last in "Learn", and /privacy last in "Project"', () => {
     const result = serializePageToAgentMarkdown(mockPage as any, {
       slug: 'about',
       lang: 'en',
@@ -219,9 +224,9 @@ describe('Site Navigation block (generateSiteNavigation via serializePageToAgent
     const connectIdx = result.indexOf('**Connect:**');
 
     const getStartedBlock = result.slice(getStartedIdx, learnIdx);
-    expect(getStartedBlock.indexOf('/init')).toBeLessThan(
-      getStartedBlock.indexOf('/quickstart')
-    );
+    const getStartedPaths = extractNavPaths(getStartedBlock, '');
+    expect(getStartedPaths[0]).toBe('/quickstart');
+    expect(getStartedPaths[getStartedPaths.length - 1]).toBe('/init.md');
 
     const learnBlock = result.slice(learnIdx, projectIdx);
     const learnPaths = extractNavPaths(learnBlock, '');

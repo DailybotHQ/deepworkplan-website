@@ -8,7 +8,7 @@ section: State
 
 # Trạng thái kế hoạch
 
-**Phiên bản 1.1. Trạng thái: Ổn định.** Tài liệu này đặc tả lớp trạng thái kế hoạch có thể đọc bằng máy của phương pháp luận Deep Work Plan. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
+**Phiên bản 5.0.0. Trạng thái: Ổn định.** Tài liệu này đặc tả lớp trạng thái kế hoạch có thể đọc bằng máy của phương pháp luận Deep Work Plan, nay đã được căn chỉnh với phiên bản riêng của chuẩn DWP — việc đánh số lại không làm suy yếu bất kỳ yêu cầu hiện có nào. Bản sửa đổi này cũng ghi lại bộ cập nhật trạng thái được bảo vệ, việc công bố kế hoạch đã kiểm chứng, và các quy tắc về tính trung thực của bằng chứng mà một kế hoạch đã hoàn tất phải thỏa mãn (xem bên dưới). Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
 Hai thành phần JSON — `manifest.json` (danh tính tĩnh của kế hoạch) và `state.json` (trạng thái thực thi trực tiếp theo tác vụ bao gồm kết quả cổng kiểm chứng) — mà mọi kế hoạch CÓ THỂ (MAY) mang theo bên cạnh các tệp markdown, và mà thực thi không có giám sát (xem [Giao thức agent](/spec/agent-protocol#execution-profiles)) và các không gian làm việc không có git (xem [Các kiểu hình](/spec/archetypes) §3) PHẢI (MUST) mang theo.
 
@@ -35,7 +35,7 @@ Một kế hoạch sử dụng lớp trạng thái có bố cục sau:
 
 `manifest.json` PHẢI được ghi đúng một lần, khi luồng `create` vật liệu hóa kế hoạch, và KHÔNG ĐƯỢC thay đổi sau đó trừ khi có một lần di chuyển phiên bản spec được ghi lại trong `PROGRESS.md`.
 
-`state.json` PHẢI được agent ghi lại tại mỗi điểm giao thức sau: vật liệu hóa kế hoạch (tất cả tác vụ `pending`), khởi đầu tác vụ (`in_progress`), mỗi lần chạy cổng kiểm chứng (bản ghi cổng được thêm hoặc cập nhật), và hoàn tất tác vụ (`completed`, như một phần của giao thức hoàn tất tác vụ trong [Đặc tả DWP](/spec/dwp-specification#task-completion-protocol)).
+`state.json` PHẢI được agent ghi lại tại mỗi điểm giao thức sau: vật liệu hóa kế hoạch (tất cả tác vụ `pending`), khởi đầu tác vụ (`in_progress`), mỗi lần chạy cổng kiểm chứng (bản ghi cổng được thêm hoặc cập nhật), và hoàn tất tác vụ (`completed`, như một phần của giao thức hoàn tất tác vụ trong [Đặc tả DWP](/spec/dwp-specification#task-completion-protocol)), một điểm kiểm tra trước bất kỳ gián đoạn có kế hoạch nào, và một lần dừng `blocked`.
 
 Cả hai tệp PHẢI được ghi nguyên tử: ghi vào một tệp tạm thời trong cùng thư mục, sau đó đổi tên đè lên đích. Một lần ghi bị lỗi KHÔNG ĐƯỢC để lại một tệp JSON bị cắt bớt.
 
@@ -194,6 +194,30 @@ Một agent tiếp tục PHẢI so sánh danh sách ô chọn README với `stat
 Sub-skill `verify` PHẢI coi desync là một phát hiện tuân thủ: báo cáo tác vụ nào bất đồng và theo hướng nào.
 
 Các công cụ khác ngoài agent thực thi PHẢI coi cả hai tệp JSON là chỉ đọc.
+
+## Cập nhật trạng thái được bảo vệ
+
+Các lần ghi tiến độ thông thường đi qua một bộ cập nhật có mục tiêu đi kèm skill, thay vì viết lại toàn bộ tệp. Nó từ chối thẳng thừng trạng thái sai định dạng, và từ chối đánh dấu một tác vụ là `completed` mà không có bằng chứng cổng khác rỗng đi kèm — một dạng `--gate-json` có sẵn cho một lệnh mà đầu ra của nó chứa ký tự pipe, và bộ cập nhật chấp nhận cùng đối tượng cổng đóng được mô tả ở trên. Các lần thử lại chỉ thay thế lệnh của chính nó; một lệnh khác giữ bản ghi riêng của nó. `--block-reason` ghi lại một điểm chặn; `--resolve-blocker` chỉ giải quyết điểm chặn của tác vụ hiện tại, không bao giờ của tác vụ khác. Công việc bị bỏ qua không bao giờ có thể làm một kế hoạch thành `completed`. `--reopen-reason` ghi lại ý định của người gọi để sửa đổi kế hoạch thông qua `refine` — sự sửa đổi và bất kỳ bằng chứng nào nó làm mất hiệu lực PHẢI được ghi lại trong nhật ký tác vụ trước tiên. `--expected-sha256` từ chối một lần ghi đối với một ảnh chụp trạng thái đã lỗi thời. Một thư mục `.lock` hợp tác tuần tự hóa các bên ghi đồng thời; khóa của một bên ghi bị crash PHẢI được kiểm tra trước khi gỡ bỏ, và không có sự bảo vệ nào được tuyên bố chống lại một trình soạn thảo bỏ qua hoàn toàn khóa đó. Các bản ghi này khẳng định kết quả — bản thân chúng không chứng minh rằng một lệnh đã thực sự chạy, hay rằng đầu ra của nó đã được chấp nhận về mặt ngữ nghĩa.
+
+## Công bố kế hoạch đã kiểm chứng
+
+Trước khi công bố hoàn tất, các nhật ký tác vụ đã hoàn thành (mỗi cái mang **Skills disposition** riêng và, trong Final Review, **Documentation decision** riêng), chỉ mục README, và `PROGRESS.md` PHẢI được viết từ các kết quả nguồn và chấp nhận đã đạt được thực sự. Tác vụ cuối cùng của kế hoạch sau đó đóng lại qua bộ hoàn tất hóa đi kèm skill: quá trình chuyển đổi cuối cùng của nó xác minh ứng viên đã hoàn thành đối chiếu với mọi hiện vật của kế hoạch trước khi ghi trạng thái, xác minh các tệp sau đó, và ghi lại một biên nhận `analysis_results/FINALIZATION.json`. Một cổng đạt được bịa đặt KHÔNG ĐƯỢC làm cơ sở cho quá trình chuyển đổi này — biên nhận là bằng chứng bên ngoài về những gì thực sự đã được kiểm tra, không bao giờ là điều kiện tiên quyết của chính nó. `bash ../verify/conformance.sh --plan PLAN_name` chạy tiếp theo, đối chiếu với các hiện vật thực tế trên đĩa.
+
+Một lần công bố bị gián đoạn để lại một dấu hiệu `.finalizing.json`; việc kiểm chứng bình thường thất bại cho đến khi bằng chứng được kiểm tra và công cụ khôi phục thành công đối với cùng ứng viên đó — không có gì tiếp tục một lần công bố dựa trên phỏng đoán. Một khóa hợp tác đã lỗi thời đòi hỏi xác nhận rằng không còn bên ghi nào đang hoạt động trước khi gỡ bỏ. Không có gì trong lớp này thực hiện commit, push, chạy một lệnh cổng đã lưu trữ, hay âm thầm sửa chữa markdown của kế hoạch. Một trình thông dịch Python bị thiếu sẽ cho ra `UNVERIFIED`, không bao giờ là `completed`.
+
+## Tính trung thực của bằng chứng và các sửa đổi
+
+Mỗi thay đổi đối với phạm vi, tiêu chí chấp nhận, hoặc việc hoãn của một tác vụ mang theo một bản ghi sửa đổi bền vững: tiêu chí gốc nguyên văn, những gì đã được quan sát, kết luận, lý do, thẩm quyền đứng sau nó (người dùng, nhà phát triển, hoặc bằng chứng), các tác vụ bị ảnh hưởng, và bằng chứng nào đã bị vô hiệu hóa hoặc được giữ lại. Các sửa đổi được thêm vào, không bao giờ được ghi lùi ngày; `manifest.json` giữ nguồn gốc tạo lập của nó và không bao giờ bị viết lại để khớp với một phạm vi trực tiếp đã thay đổi.
+
+Năm trạng thái bằng chứng mô tả những gì một bản ghi tác vụ có thể đóng lại dựa vào:
+
+- **Điều tra đã hoàn tất** — công việc thực sự đã được ghi lại; nó chỉ đóng một tác vụ đối chiếu với một tiêu chí đã sửa đổi có nêu tên nó, không bao giờ đối chiếu với tiêu chí gốc như đã viết.
+- **Kịch bản chưa thực thi** — được ghi lại là chưa thực hiện; nó không đóng góp bất kỳ bằng chứng đạt nào trong bất kỳ thời kỳ nào.
+- **Yêu cầu bị hoãn** — tiêu chí chuyển sang một tác vụ đích được nêu tên với thẩm quyền được ghi lại; chỉ sự sửa đổi đó đóng nguồn.
+- **Cổng thất bại** — vẫn thất bại cho đến khi cùng ý định chấp nhận được chạy lại và đạt; một lần thử lại chỉ thay thế lệnh của chính nó.
+- **Kết quả sản phẩm đạt được** — tiêu chí như đã viết, được xác minh bởi cổng của chính nó; trạng thái duy nhất hoàn tất một tác vụ mà không thay đổi.
+
+Việc thực thi mang tính máy móc ở bất cứ nơi nào các bản ghi cho phép. Bằng chứng cổng được đánh dấu "invalidated by refine" là lịch sử được giữ lại, không bao giờ là bằng chứng đạt, và một tác vụ đã hoàn tất vẫn dựa vào nó sẽ bị trình kiểm tra báo cáo. Một bản ghi đạt mà chính văn bản của nó thừa nhận rằng việc kiểm tra chưa bao giờ chạy (ví dụ "never entered," "did not run," hay "cannot be measured") là một mâu thuẫn, được báo cáo theo cùng cách — cũng như một tác vụ trạng thái đã hoàn tất mà nhật ký của chính nó vẫn ghi `Status: pending`. Các mâu thuẫn tường thuật vượt ra ngoài những điều này — một báo cáo mà kết luận của nó mâu thuẫn với danh sách kiểm tra của chính nó — đòi hỏi một người rà soát; trình kiểm tra báo cáo những gì các bản ghi nói, không phải những gì văn xuôi có ý nghĩa. Một người dùng CÓ THỂ (MAY) chấp nhận rõ ràng một ngoại lệ có giới hạn với thẩm quyền được ghi lại; sự phê duyệt trước không giám sát không bao giờ là một sự cho phép chung để từ bỏ một mục tiêu cốt lõi, và một tiêu chí bắt buộc không thể đáp ứng là một điểm chặn, không bao giờ là công việc đã hoàn tất.
 
 ## Phiên bản hóa schema
 

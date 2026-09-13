@@ -8,7 +8,7 @@ section: State
 
 # Stato del piano
 
-**Versione 1.1. Stato: Stabile.** Questo documento specifica il livello di stato del piano leggibile dalle macchine della metodologia Deep Work Plan. Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
+**Versione 5.0.0. Stato: Stabile.** Questo documento specifica il livello di stato del piano leggibile dalle macchine della metodologia Deep Work Plan, ora allineato alla versione dello standard DWP stesso — nessun requisito esistente viene indebolito dalla rinumerazione. Questa revisione documenta anche l'aggiornatore di stato protetto, la pubblicazione verificata del piano e le regole di verità dell'evidenza che un piano completato deve soddisfare (vedi sotto). Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
 
 Due artefatti JSON — `manifest.json` (l'identità statica del piano) e `state.json` (lo stato di esecuzione live per attività, inclusi i risultati dei validation gate) — che ogni piano PUÒ portare insieme ai suoi file markdown, e che l'esecuzione non presidiata (vedi [Protocollo degli agenti](/spec/agent-protocol#profili-di-esecuzione)) e i workspace senza git (vedi [Archetipi](/spec/archetypes) §3) DEVONO portare.
 
@@ -35,7 +35,7 @@ Un piano che utilizza il livello di stato ha questa struttura:
 
 `manifest.json` DEVE essere scritto esattamente una volta, quando il flusso `create` materializza il piano, e NON DEVE cambiare in seguito, tranne per una migrazione della versione della spec registrata in `PROGRESS.md`.
 
-`state.json` DEVE essere riscritto dall'agente in ciascuno di questi punti di protocollo: materializzazione del piano (tutte le attività `pending`), avvio di un'attività (`in_progress`), ogni esecuzione di un validation gate (gate record aggiunto o aggiornato) e completamento di un'attività (`completed`, come parte del protocollo di completamento dell'attività nella [Specifica DWP](/spec/dwp-specification#protocollo-di-completamento-dellattivita)).
+`state.json` DEVE essere riscritto dall'agente in ciascuno di questi punti di protocollo: materializzazione del piano (tutte le attività `pending`), avvio di un'attività (`in_progress`), ogni esecuzione di un validation gate (gate record aggiunto o aggiornato) e completamento di un'attività (`completed`, come parte del protocollo di completamento dell'attività nella [Specifica DWP](/spec/dwp-specification#protocollo-di-completamento-dellattivita)), un checkpoint prima di qualsiasi interruzione pianificata, e uno stop `blocked`.
 
 Entrambi i file DEVONO essere scritti atomicamente: scrivere in un file temporaneo nella stessa directory, poi rinominare sovrascrivendo il target. Una scrittura interrotta NON DEVE lasciare un file JSON troncato al suo posto.
 
@@ -194,6 +194,30 @@ Un agente che riprende l'esecuzione DEVE confrontare la lista delle caselle del 
 La sub-skill `verify` DEVE trattare la desincronizzazione come un rilievo di conformità: riportare quali attività divergono e in quale direzione.
 
 Gli strumenti diversi dall'agente in esecuzione DEVONO trattare entrambi i file JSON come di sola lettura.
+
+## Aggiornamenti protetti dello stato
+
+Le normali scritture di avanzamento passano attraverso un aggiornatore mirato incluso nella skill, anziché una riscrittura completa del file. Rifiuta lo stato malformato apertamente, e rifiuta di segnare un'attività come `completed` senza evidenza di gate non vuota allegata — è disponibile una forma `--gate-json` per un comando il cui output contiene caratteri pipe, e l'aggiornatore accetta lo stesso oggetto gate chiuso descritto sopra. I retry sostituiscono solo il proprio comando; un comando diverso mantiene il proprio record separato. `--block-reason` registra un blocco; `--resolve-blocker` risolve solo il blocco dell'attività corrente, mai di un'altra attività. Il lavoro saltato non può mai rendere un piano `completed`. `--reopen-reason` registra l'intento di chi chiama di modificare il piano tramite `refine` — la modifica e qualsiasi evidenza che invalida DEVONO essere registrate prima nel log dell'attività. `--expected-sha256` rifiuta una scrittura contro uno snapshot di stato ormai superato. Una directory `.lock` cooperativa serializza gli scrittori concorrenti; il lock di uno scrittore in crash DEVE essere ispezionato prima della rimozione, e non viene rivendicata alcuna protezione contro un editor che aggira del tutto il lock. Questi record attestano risultati — non dimostrano di per sé che un comando sia stato eseguito, né che il suo output sia stato accettato semanticamente.
+
+## Pubblicazione verificata del piano
+
+Prima di annunciare il completamento, i log delle attività terminate (ciascuno con la propria **Skills disposition** e, nel Final Review, la propria **Documentation decision**), l'indice del README e `PROGRESS.md` DEVONO essere redatti a partire da risultati di origine e di accettazione guadagnati. L'attività finale del piano si chiude quindi attraverso il finalizzatore incluso nella skill: la sua transizione terminale valida il candidato completato rispetto a ogni artefatto del piano prima di scrivere lo stato, verifica i file in seguito e registra una ricevuta `analysis_results/FINALIZATION.json`. Un gate positivo inventato NON DEVE sostenere questa transizione — la ricevuta è evidenza esterna di ciò che è stato effettivamente verificato, mai un proprio prerequisito. `bash ../verify/conformance.sh --plan PLAN_name` viene eseguito subito dopo, contro gli artefatti reali su disco.
+
+Una pubblicazione interrotta lascia un marcatore `.finalizing.json` in essere; la verifica normale fallisce finché l'evidenza non viene ispezionata e l'helper di recupero non riesce contro lo stesso candidato — nulla riprende una pubblicazione per supposizione. Un lock cooperativo obsoleto richiede di confermare che nessuno scrittore sia ancora attivo prima della rimozione. Nulla in questo livello esegue commit, push, comandi di gate memorizzati, né ripara silenziosamente il markdown del piano. Un interprete Python mancante produce `UNVERIFIED`, mai `completed`.
+
+## Verità dell'evidenza e modifiche
+
+Ogni modifica all'ambito, ai criteri di accettazione o al rinvio di un'attività porta un record di modifica durevole: il criterio originale testuale, ciò che è stato osservato, la disposizione, il motivo, l'autorità dietro di essa (utente, sviluppatore o evidenza), le attività interessate e quale evidenza è stata invalidata o preservata. Le modifiche vengono aggiunte, mai retrodatate; `manifest.json` mantiene la propria provenienza di creazione e non viene mai riscritto per adattarsi a un ambito live cambiato.
+
+Cinque stati di evidenza descrivono contro cosa un record di attività può chiudersi:
+
+- **Indagine completata** — lavoro reale registrato; chiude un'attività solo contro un criterio rivisto che la nomina, mai contro l'originale come scritto.
+- **Scenario non eseguito** — registrato come non eseguito; non contribuisce ad alcuna evidenza positiva in nessuna epoca.
+- **Requisito rinviato** — il criterio si sposta verso un'attività di destinazione nominata con autorità registrata; solo quella modifica chiude l'origine.
+- **Gate fallito** — resta fallito finché lo stesso intento di accettazione non viene rieseguito e superato; un retry sostituisce solo il proprio comando.
+- **Esito di prodotto raggiunto** — il criterio come scritto, verificato dal proprio gate; l'unico stato che completa un'attività invariata.
+
+L'applicazione è meccanica ovunque i record lo consentano. L'evidenza di gate marcata "invalidated by refine" è storia conservata, mai evidenza positiva, e un'attività completata che vi si affida ancora viene segnalata dal checker. Un record positivo il cui stesso testo ammette che il controllo non è mai stato eseguito (per esempio "never entered", "did not run" o "cannot be measured") è una contraddizione, segnalata allo stesso modo — così come un'attività di stato completata il cui log riporta ancora `Status: pending`. Contraddizioni narrative oltre queste — un report le cui conclusioni contraddicono la propria checklist — richiedono un revisore umano; il checker riporta ciò che dicono i record, non ciò che significa la prosa. Un utente PUÒ accettare esplicitamente un'eccezione delimitata con autorità registrata; una pre-approvazione non presidiata non è mai un permesso generale ad abbandonare un obiettivo centrale, e un criterio obbligatorio non soddisfacibile è un blocco, mai lavoro completato.
 
 ## Versionamento degli schema
 

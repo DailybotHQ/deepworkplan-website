@@ -8,7 +8,7 @@ section: Addons
 
 # Add-ons
 
-**Version 4.0.0.** Add-ons are extensions to the core Deep Work Plan methodology. Four of the five are optional and **never required for conformance** — a repository with zero optional addons is fully AI-first and DWP-conformant. Each optional addon is offered during onboarding, accepted or declined explicitly, and — when accepted — **reconciles** with existing setup instead of clobbering it. One component is the declared exception: since standard 2.3.0 the **AI Diff Reviewer local review** is part of the required baseline — onboarding installs it and every Final Review runs it — while its CI surface stays opt-in.
+**Version 2.1.0.** Add-ons are extensions to the core Deep Work Plan methodology. Four of the five are optional and **never required for conformance** — a repository with zero optional addons is fully AI-first and DWP-conformant. Each optional addon is offered during onboarding, accepted or declined explicitly, and — when accepted — **reconciles** with existing setup instead of clobbering it. One component is the declared exception: since standard 2.3.0 the **AI Diff Reviewer local review** is part of the required baseline — onboarding installs it and every Final Review runs it — while its CI surface stays opt-in.
 
 ## The addon contract
 
@@ -67,7 +67,7 @@ An interface-surface-scoped `DESIGN.md` any coding agent reads for consistent UI
 
 ### AI Diff Reviewer (fifth addon — required local review, optional CI surface)
 
-The **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, current **v2.0.1**) gives the mandatory Final Review security pass a structured local review, and optionally gates pull requests in CI. Since standard 2.3.0 the **local review is part of the baseline**; only the CI surface is opt-in.
+The **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) gives the mandatory Final Review security pass a structured local review, and optionally gates pull requests in CI. Since standard 2.3.0 the **local review is part of the baseline**; only the CI surface is opt-in. This addon is release-auto-refreshed, so its current version is never pinned in this prose — check the addon's own `SKILL.md` or its GitHub releases for the tag actually vendored.
 
 - **Kit page:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — full capability reference
 - **Required at onboarding (Phase 7a):** tag-pinned install of the vendored skill (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus a repo-tailored `.review/extension.md` (via `generate-extension`), under the onboarding consent; a targeted harness upgrade reconciles both when missing; a decline is recorded as a declared exception and reported by `verify` until installed

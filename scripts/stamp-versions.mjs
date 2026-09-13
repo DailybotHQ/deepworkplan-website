@@ -13,6 +13,15 @@
  *   - public/.well-known/mcp/server-card.json → serverInfo.version
  *   - src/lib/mcp/server-info.ts              → SITE_VERSION (HTTP MCP serverInfo)
  *
+ * One artifact tracks a different version line: the vendored DeepWorkPlan
+ * *skill*, not the website package —
+ *
+ *   - public/.well-known/dwp-trust.json → skill.version (+ lastUpdated)
+ *
+ * sourced from `.agents/skills/deepworkplan/SKILL.md`'s `version:` frontmatter
+ * so it never drifts from what is actually vendored, and only rewritten (with
+ * `lastUpdated` bumped) when that version actually changes.
+ *
  * Idempotent: files are rewritten only when the stamped value differs.
  * Run automatically as part of `prebuild` (see package.json).
  *
@@ -52,6 +61,44 @@ async function stampJson(relPath, mutate) {
     return false;
   }
   await writeFile(abs, next, 'utf8');
+  return true;
+}
+
+/** Read the vendored DeepWorkPlan skill's own version from its SKILL.md frontmatter. */
+async function readSkillVersion() {
+  const relPath = '.agents/skills/deepworkplan/SKILL.md';
+  const abs = resolve(ROOT, relPath);
+  const raw = await readFile(abs, 'utf8');
+  const match = raw.match(/^version:\s*"?([^"\n]+?)"?\s*$/m);
+  if (!match) {
+    throw new Error(`${relPath} has no version: frontmatter field`);
+  }
+  return match[1];
+}
+
+/**
+ * Stamp the trust manifest's skill.version from the vendored skill (not the
+ * site package), bumping lastUpdated only when the version actually changes
+ * — unlike the other artifacts above, lastUpdated must not churn on every
+ * run of an unrelated site release.
+ */
+async function stampTrustManifest(skillVersion) {
+  const relPath = 'public/.well-known/dwp-trust.json';
+  const abs = resolve(ROOT, relPath);
+  let raw;
+  try {
+    raw = await readFile(abs, 'utf8');
+  } catch {
+    console.warn(`[stamp-versions] skip (missing): ${relPath}`);
+    return false;
+  }
+  const doc = JSON.parse(raw);
+  if (doc.skill?.version === skillVersion) {
+    return false;
+  }
+  doc.skill.version = skillVersion;
+  doc.lastUpdated = new Date().toISOString().slice(0, 10);
+  await writeFile(abs, `${JSON.stringify(doc, null, 2)}\n`, 'utf8');
   return true;
 }
 
@@ -124,6 +171,9 @@ if (
 }
 if (await stampServerInfo(version)) {
   changed.push('src/lib/mcp/server-info.ts');
+}
+if (await stampTrustManifest(await readSkillVersion())) {
+  changed.push('public/.well-known/dwp-trust.json');
 }
 
 if (changed.length > 0) {

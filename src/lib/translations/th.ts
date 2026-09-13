@@ -74,7 +74,7 @@ export const th: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'ใหม่ · ประหยัดโทเคน',
+    badge: 'ใหม่ · ประหยัดบริบทโดยโครงสร้าง',
     text: 'Deep Work Plan เปิดตัวบน Product Hunt วันนี้',
     tagline: 'มอบแผนให้เอเจนต์ของคุณ',
     linkText: 'โหวตเลย',
@@ -110,7 +110,7 @@ export const th: SiteTranslations = {
         'คัดลอก prompt ของ init.md และวางลงใน coding agent ของคุณ — Claude Code, Cursor, Codex หรืออื่น ๆ — เพื่อทำให้ repository ใดก็ได้เป็น AI-first',
       copyLabel: 'คัดลอก init.md',
       copiedLabel: 'คัดลอกแล้ว',
-      viewInitCta: 'ดูพรอมต์ /init ฉบับเต็ม',
+      viewInitCta: 'ดูการเริ่มใช้งานเร็ว',
       pullQuote:
         'Deep Work Plan คือ spec-driven development ที่ตัว repository เองกลายเป็น harness',
       primaryCta: 'อ่านระเบียบวิธี',
@@ -666,49 +666,76 @@ export const th: SiteTranslations = {
     meta: {
       title: 'เริ่มใช้งานเร็ว — Deep Work Plan',
       description:
-        'ติดตั้งสกิล เริ่มต้น repository ของคุณ แล้ววางแผนและลงมือทำกับ agent ใดก็ได้ ขั้นตอนที่ทำให้ repository ของคุณเป็น spec-driven และขับเคลื่อนด้วย agent ได้',
+        'นำระเบียบวิธี Deep Work Plan ไปใช้ใน repository ใดก็ได้ ติดตั้ง skill รัน onboarding ของ agent แล้ววางแผนและดำเนินการด้วย AI coding agent ใดก็ได้',
     },
     eyebrow: 'เริ่มใช้งานเร็ว',
-    title: 'เริ่มได้ในไม่กี่นาที',
+    title: 'ทำให้ repository นี้เป็น AI-first',
     intro:
-      'ติดตั้งสกิล เริ่มต้น repository ของคุณ แล้ววางแผนและลงมือทำกับ agent ใดก็ได้ ขั้นตอนที่ทำให้ repository ของคุณเป็น spec-driven และขับเคลื่อนด้วย agent ได้',
-    sequenceTitle: 'เส้นทางการนำไปใช้',
+      'หน้าเดียวสำหรับเปลี่ยน repository ใดก็ได้ให้เป็นโค้ดเบสที่ขับเคลื่อนด้วยสเปกและพร้อมสำหรับ agent ติดตั้ง skill ให้ agent ทำ onboarding ให้กับ repo แล้ววางแผนและดำเนินงานที่มีโครงสร้างด้วย coding agent ใดก็ได้',
+    handoffTitle: 'คัดลอกไปยัง agent ของคุณ',
+    handoffBody:
+      'คัดลอก prompt ของ init.md ทั้งหมดและวางลงใน AI coding agent ของคุณ — Claude Code, Cursor, Codex หรืออื่น ๆ โดยมันจะอ่านระเบียบวิธีและข้อกำหนด ติดตั้ง skill และทำ onboarding ให้กับ repository นี้สำหรับ Deep Work Plan',
+    handoffInstruction:
+      'อ่านและทำตามคำแนะนำที่ https://deepworkplan.com/init.md เพื่อทำให้รีพอซิทอรีนี้เป็น AI-first',
+    handoffMdLabel: 'พรอมต์ agent แบบสมบูรณ์ในตัวเอง',
     codeLabel: 'เทอร์มินัล',
+    whatTitle: 'สิ่งนี้ทำอะไร',
+    whatBody: [
+      'การนำไปใช้เปลี่ยนแปลง repository ในสองทางที่ยั่งยืน — เสาหลักของระเบียบวิธี',
+      'ประการแรก repository จะขับเคลื่อนด้วยสเปก: งานเริ่มต้นจากแผนและสเปกที่เขียนไว้ ไม่ใช่จากพรอมต์เฉพาะกิจ ประการที่สอง repository เองจะกลายเป็น harness ของ agent — AGENTS.md, ฐานความรู้ docs/, เอกสารแต่ละโมดูล และโฮม skill .agents/ (พร้อม symlink .claude → .agents และ .cursor → .agents) มอบบริบทและคำสั่งที่ agent ทุกตัวต้องการ',
+    ],
+    sequenceTitle: 'เส้นทางการนำไปใช้',
     orLabel: 'หรือ',
     steps: [
       {
-        title: 'ติดตั้งสกิล Deep Work Plan',
+        title: 'ตรวจสอบก่อนติดตั้ง',
         description:
-          'เพิ่มสกิลลงใน repository ของคุณ ทั้งเราเตอร์และสกิลย่อยเก้าตัว (create, execute, refine, resume, status, verify, onboard, author, upgrade) ใช้ Skills CLI เพื่อความรวดเร็วที่สุด หรือโคลน repo แล้วรันสคริปต์ติดตั้งในที่ที่มี git และเชลล์',
+          'ปฏิบัติต่อพรอมต์และสกิลว่าเป็นสิ่งที่ไม่น่าเชื่อถือจนกว่าจะได้ตรวจสอบ ทั้งสองเป็นโอเพนซอร์สและ MIT สกิลเป็น Markdown-first ไม่มีการเรียกเครือข่ายและไม่มีการเก็บข้อมูลการใช้งาน ทุกรีลีสเผยแพร่ SHA256SUMS สำหรับสกิลที่ส่งมา คุณจึงสามารถยืนยันว่าสำเนาของคุณตรงกันก่อนรัน รีลีสถูกตรวจสอบด้วย checksum ไม่ใช่ลายเซ็น (การลงนามเป็นขั้นตอนถัดไปที่ได้รับการจัดทำเป็นเอกสาร)',
+        commands: [
+          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+        ],
+      },
+      {
+        title: 'ติดตั้งสกิล',
+        description:
+          'เพิ่มสกิล Deep Work Plan เพื่อให้ agent ใดก็ได้สามารถวางแผนและดำเนินงานที่มีโครงสร้าง สกิลประกอบด้วย router และสกิลย่อยเก้าตัว ได้แก่ create, execute, refine, resume, status, verify, onboard, author และ upgrade',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
+          'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
       },
       {
-        title: 'เริ่มต้น repository',
+        title: 'รันการ onboard repository',
         description:
-          'รันสกิลย่อย onboard แล้วให้ agent ให้เหตุผลเกี่ยวกับ repo จริงของคุณ มันจะสร้าง AGENTS.md ฐานความรู้ docs/ เอกสารแยกตามโมดูล และที่อยู่ .agents/ ที่ใช้ร่วมกันข้าม agent (พร้อมซิมลิงก์ .claude → .agents และ .cursor → .agents) เชื่อมต่อคำสั่ง dwp-* บาง ๆ และวางโครง .dwp/ ที่ถูก gitignore ไว้',
+          'เรียกสกิลย่อย onboard และให้ agent วิเคราะห์ repo จริง ได้แก่ สแตก ตัวจัดการแพ็กเกจ และคำสั่งตรวจสอบจริง จากนั้นจะสร้าง AGENTS.md, ฐานความรู้ docs/, เอกสารแต่ละโมดูล และโฮม .agents/ ข้ามเอเจนต์ (พร้อม symlink .claude → .agents และ .cursor → .agents), ต่อสายคำสั่ง dwp-* แบบบาง และสร้างโครง .dwp/ ที่ถูก gitignore สำหรับแผน สำหรับ repo ขนาดใหญ่ สกิลย่อย onboard ใช้เส้นทางแบบขับเคลื่อนด้วยแผน: ทำการสำรวจก่อน จากนั้นสร้าง Deep Work Plan สำหรับการ onboarding ไม่มีอะไรเป็นเทมเพลต ทุกอย่างถูกปรับให้เหมาะกับ repository ของคุณ',
         commands: ['/deepworkplan-onboard'],
       },
       {
-        title: 'พัฒนาชุดเครื่องมือและรับ addon',
+        title: 'การรีวิวในเครื่องและ addon แบบสมัครใจ',
         description:
-          'ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตก การเริ่มต้นจะติดตั้งการรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer (เกต CI ยังคงเป็นทางเลือก) และเสนอ addon แบบสมัครใจสี่ตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade และ design-system ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม',
+          'การ onboarding จะติดตั้งการรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer (เกต CI ยังคงเป็นทางเลือก) และเสนอ addon แบบสมัครใจสี่ตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade และ design-system ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม repo สอดคล้องอย่างสมบูรณ์โดยมี addon เสริมศูนย์ตัว ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตกเกินกว่าชุดพื้นฐาน',
       },
       {
-        title: 'วางแผนและลงมือทำ',
+        title: 'วางแผนและดำเนินการ',
         description:
-          'สร้าง Deep Work Plan แล้วรันทีละงาน ตรวจสอบทุก gate และกลับมาทำต่อข้ามเซสชัน ขับเคลื่อน repository ตามข้อกำหนดของตัวมันเอง',
+          'สร้าง Deep Work Plans ด้วย /dwp-create และรันด้วย /dwp-execute จากนั้นใช้ /dwp-status, /dwp-refine, /dwp-resume และ /dwp-verify ตามความคืบหน้าของงาน แต่ละแผนมีงานที่มีหมายเลข gate การตรวจสอบ และโปรโตคอลการเสร็จสิ้น และปิดด้วย Final Review บังคับเพียงหนึ่งงาน (การตรวจความปลอดภัย การตรวจสถานะสุดท้าย และการกระทบยอดการตัดสินใจสกิล) Executive Report ยังพร้อมให้ใช้เมื่อคุณร้องขอ',
         commands: ['/dwp-create <goal>', '/dwp-execute'],
+      },
+      {
+        title: 'ตรวจสอบความสอดคล้อง',
+        description:
+          'รัน /dwp-verify เพื่อรับรายงานผ่าน/ไม่ผ่านอย่างเป็นกลางเทียบกับสเปก ยืนยันว่า AGENTS.md, docs/ (มีเนื้อหาจริง ไม่ใช่ stub), .agents/ (มี delegator dwp-* แบบบางและ catalog ที่ตรงกับดิสก์), .dwp/ และ tmp/ อยู่ในที่ — ไม่มีอะไรเป็นเทมเพลต ทุกอย่างถูกคิดมาสำหรับ repo นี้',
+        commands: ['/dwp-verify'],
       },
     ],
     outcomeTitle: 'ผลลัพธ์',
     outcome:
-      'repository ของคุณกลายเป็น spec-driven และขับเคลื่อนด้วย agent ได้ แผนงานเป็นแหล่งความจริงที่คงทน และตัว repository เองกลายเป็น harness ที่ agent ใดก็รันได้',
+      'repository จะขับเคลื่อนด้วยสเปกและ repository เองจะกลายเป็น harness ของ agent — บริบทและคำสั่งเดินทางไปพร้อมกับโค้ด',
     nextStepsTitle: 'ขั้นตอนถัดไป',
     nextSteps: [
       { label: 'อ่านระเบียบวิธี', href: '/methodology' },
+      { label: 'อ่านสเปก', href: '/spec' },
       { label: 'เรียกดูชุดเครื่องมือ', href: '/kit' },
       { label: 'ดูตัวอย่าง', href: '/examples' },
     ],
@@ -785,7 +812,7 @@ export const th: SiteTranslations = {
             answer:
               'สกิลของ agent ถูกติดตั้งในตำแหน่งใดก็ตามที่ agent ของคุณโหลดสกิลระดับโปรเจกต์หรือระดับผู้ใช้ จากนั้นการเริ่มต้นจะปรับตัว repository เอง: มันสร้างหรือประสาน `AGENTS.md`, `docs/`, `.agents/` และพื้นที่ทำงาน `.dwp/` ที่ถูก gitignore ไว้ สกิลสอนวิธีการให้ agent ส่วน repository เก็บบริบท ชุดเครื่องมือ และหลักฐานของแผนที่ agent ตัวอื่นต้องใช้เพื่อทำต่อ',
             linkLabel: 'ดูขั้นตอนการนำไปใช้',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -942,7 +969,7 @@ export const th: SiteTranslations = {
             answer:
               'การเริ่มต้นไม่ทำลายของเดิม: มันตรวจพบ `AGENTS.md`, `docs/`, `.agents/` หรือ `CLAUDE.md` ที่มีอยู่เดิม ประสานแทนที่จะเขียนทับ และถามก่อนแทนที่สิ่งใด มันเขียนดัชนี `AGENTS.md` พร้อมคำสั่งจริง โครงสร้าง `docs/` ที่ผ่านการให้เหตุผล เอกสารแยกตามโมดูล ชุดเครื่องมือ `.agents/` พร้อมคำสั่ง `dwp-*` แบบบาง พื้นที่ผลลัพธ์ `.dwp/` ที่ถูก gitignore ไว้ คู่มือการทดสอบที่ผ่านการตรวจทาน และการตรวจโค้ดในเครื่องที่จำเป็น (สกิล AI Diff Reviewer บวกส่วนขยายการรีวิวที่ปรับให้เข้ากับ repo) จากนั้นมันรัน self-check และตัวตรวจสอบความสอดคล้อง เพื่อให้คุณเห็นว่ามีอะไรถูกสร้างขึ้น repository ที่เริ่มต้นด้วยมาตรฐานก่อนหน้าจะได้รับการอัปเกรด harness แบบเจาะจง ที่ประสานเฉพาะสิ่งที่ยังขาดหรือล้าสมัย',
             linkLabel: 'endpoint การนำไปใช้',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -950,7 +977,7 @@ export const th: SiteTranslations = {
             answer:
               'มีการอัปเกรดสองแบบที่ต่างกัน และโฟลว์แยกสองอย่างนี้ออกจากกัน harness ของ repository — `AGENTS.md`, `docs/`, ชุด `.agents/` — ถูกประสานใหม่ด้วยการรันการเริ่มต้นซ้ำ ซึ่งเติมเฉพาะสิ่งที่ยังขาดหรือล้าสมัย ตัวสกิลเองเคลื่อนด้วย `/dwp-upgrade`: ตรวจรีลีสล่าสุดที่เผยแพร่แบบอ่านอย่างเดียว ติดตั้งแท็กที่แน่นอนที่คุณยอมรับพร้อมการตรวจสอบ แล้วเรียกการเริ่มต้นใหม่เหมือนรันครั้งใหม่ทั้งหมด ทั้งโฟลว์ต้องได้รับความยินยอมชัดเจนทุกขั้น การปรับให้เข้ากับท้องถิ่นถูกเทียบ diff และรักษาไว้แทนที่จะเขียนทับ และ `.dwp/` ไม่เคยถูกย้าย — แผนที่มีอยู่คงรูปแบบที่บันทึกไว้และทำงานต่อไป',
             linkLabel: 'endpoint การนำไปใช้',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -972,7 +999,7 @@ export const th: SiteTranslations = {
             id: 'cost',
             question: 'ค่าใช้จ่ายเท่าไร และวัดประสิทธิภาพอย่างไร?',
             answer:
-              'ระเบียบวิธีและสกิลอยู่ภายใต้สัญญาอนุญาต MIT และใช้ได้ฟรี ไม่มีบริการ ไม่มี API key และไม่มีการเก็บข้อมูลการใช้งานในโฟลว์หลัก ประสิทธิภาพถูกรายงานเป็นจำนวนไบต์ของคำสั่งที่แต่ละโฟลว์โหลด วัดด้วยสคริปต์ที่คอมมิตไว้พร้อมสกิล วัดซ้ำในทุกเส้นฐานของการเผยแพร่ และเผยแพร่ในทะเบียนการประเมิน โดยรายงานตัวเลขที่เพิ่มขึ้นอย่างเปิดเผยเท่ากับตัวเลขที่ลดลง ไม่มีการรายงานเป็นเปอร์เซ็นต์ของโทเคนหรือการประหยัดค่าใช้จ่าย เพราะการนับไบต์ไม่อาจสถาปนาข้อสรุปเหล่านั้นได้ การประเมินสาธารณะด้วยเอเจนต์ใหม่ได้ดำเนินการไปแล้วภายใต้โปรโตคอลที่ถูกตรึงไว้: ฟีเจอร์เดียวกันสองชิ้นถูกสร้างจากโคลนที่สะอาดโดยไม่มี harness ด้วยเวอร์ชันหลักก่อนหน้า และด้วยเวอร์ชันปัจจุบัน การประเมินพบว่าเอเจนต์บนต้นไม้ที่มี harness อ่านไบต์น้อยกว่าในทั้งสองงาน และเซสชันฟีเจอร์ของเวอร์ชันปัจจุบันใช้อินพุตและเอาต์พุตของโมเดลน้อยกว่าเวอร์ชันหลักก่อนหน้าในทั้งสองงาน — ตามที่ harness รายงาน บนปริมาณงานเดียว การประเมินยังพบขีดจำกัดที่ซื่อตรง: การออนบอร์ดเป็นต้นทุนครั้งเดียวที่คุ้มค่าเมื่อโฟลว์ถูกใช้เท่านั้น ทิศทางโทเคนสุทธิต่อปริมาณงานเป็นแบบผสม ไม่มีการอ้างความได้เปรียบด้านเวลาตามนาฬิกา และเอเจนต์ใหม่ไม่เข้าสู่โฟลว์ด้วยตัวเอง — โฟลว์คือคำสั่งที่คุณหรือเอเจนต์ที่รู้วิธีเรียกใช้เป็นผู้สั่ง',
+              'ระเบียบวิธีและสกิลอยู่ภายใต้สัญญาอนุญาต MIT และใช้ได้ฟรี ไม่มีบริการ ไม่มี API key และไม่มีการเก็บข้อมูลการใช้งานในโฟลว์หลัก ประสิทธิภาพถูกรายงานเป็นจำนวนไบต์ของคำสั่งที่แต่ละโฟลว์โหลด **ณ จุดเริ่มต้น** — ชุดคำสั่งเริ่มต้นของมันตอนต้นเซสชัน — เผยแพร่คู่กับ **เส้นทางครบวงจร (end-to-end path)** ที่มีชื่อเรียก ซึ่งรวมสิ่งที่ทริกเกอร์จริงของโฟลว์นั้นโหลดเพิ่มเมื่องานจริงดำเนินต่อ (ตัวอย่างเช่น resume ที่ดำเนินต่อไปจนถึง execute มักโหลดมากกว่าชุดคำสั่งเริ่มต้นของมันหลายเท่า) ตัวเลขทั้งสองไม่ใช่เพดานของเซสชัน: การรันจริงยังอ่านไฟล์ของ repository เอง เอาต์พุตของเครื่องมือ และไฟล์ทำงานของแผน ซึ่งทะเบียนนี้ไม่ได้นับรวมไว้ ตัวเลขทั้งสองวัดด้วยสคริปต์ที่คอมมิตไว้พร้อมสกิล วัดซ้ำในทุกเส้นฐานของการเผยแพร่ และเผยแพร่ในทะเบียนการประเมิน โดยรายงานตัวเลขที่เพิ่มขึ้นอย่างเปิดเผยเท่ากับตัวเลขที่ลดลง ไม่มีการรายงานเป็นเปอร์เซ็นต์ของโทเคนหรือการประหยัดค่าใช้จ่าย เพราะการนับไบต์ไม่อาจสถาปนาข้อสรุปเหล่านั้นได้ การประเมินสาธารณะด้วยเอเจนต์ใหม่ได้ดำเนินการไปแล้วภายใต้โปรโตคอลที่ถูกตรึงไว้: ฟีเจอร์เดียวกันสองชิ้นถูกสร้างจากโคลนที่สะอาดโดยไม่มี harness ด้วยเวอร์ชันหลักก่อนหน้า และด้วยเวอร์ชันปัจจุบัน การประเมินพบว่าเอเจนต์บนต้นไม้ที่มี harness อ่านไบต์น้อยกว่าในทั้งสองงาน และเซสชันฟีเจอร์ของเวอร์ชันปัจจุบันใช้อินพุตและเอาต์พุตของโมเดลน้อยกว่าเวอร์ชันหลักก่อนหน้าในทั้งสองงาน — ตามที่ harness รายงาน บนปริมาณงานเดียว การประเมินยังพบขีดจำกัดที่ซื่อตรง: การออนบอร์ดเป็นต้นทุนครั้งเดียวที่คุ้มค่าเมื่อโฟลว์ถูกใช้เท่านั้น ทิศทางโทเคนสุทธิต่อปริมาณงานเป็นแบบผสม ไม่มีการอ้างความได้เปรียบด้านเวลาตามนาฬิกา และเอเจนต์ใหม่ไม่เข้าสู่โฟลว์ด้วยตัวเอง — โฟลว์คือคำสั่งที่คุณหรือเอเจนต์ที่รู้วิธีเรียกใช้เป็นผู้สั่ง',
             linkLabel: 'ความน่าเชื่อถือและการเปิดเผย',
             linkPath: '/trust',
           },
@@ -1188,13 +1215,13 @@ export const th: SiteTranslations = {
         },
         {
           title: 'ปริมาณคำสั่งที่โหลดถูกวัดและเผยแพร่',
-          body: 'สคริปต์ที่คอมมิตไว้วัดว่าแต่ละโฟลว์โหลดกี่ไบต์ ผลลัพธ์ รวมถึงตัวเลขที่เพิ่มขึ้น ถูกเผยแพร่เป็นไบต์ ไม่เคยเป็นเปอร์เซ็นต์ของโทเคนหรือต้นทุน',
+          body: 'สคริปต์ที่คอมมิตไว้เผยแพร่การวัดสองค่าต่อโฟลว์ — ชุดคำสั่งเริ่มต้นที่โหลดตอนต้นเซสชัน และเส้นทางครบวงจรเมื่อทริกเกอร์จริงของมันทำงาน — พร้อมสิ่งที่แต่ละค่าไม่นับรวม เพื่อไม่ให้ตัวเลขชุดเริ่มต้นเพียงอย่างเดียวถูกอ่านว่าเป็นต้นทุนรวมของการรัน ผลลัพธ์ รวมถึงตัวเลขที่เพิ่มขึ้น ถูกเผยแพร่เป็นไบต์ ไม่เคยเป็นเปอร์เซ็นต์ของโทเคนหรือต้นทุน',
         },
       ],
     },
     honestLimits: {
       title: 'ข้อจำกัดที่ซื่อสัตย์',
-      body: 'Deep Work Plan ไม่มีกลไกสเปกแบบมีชีวิตหรือแบบเดลต้า ด้านนั้น OpenSpec และเครื่องมือทำนองเดียวกันทำได้ดีกว่า ยังไม่มี benchmark อิสระของระเบียบวิธี แต่การประเมินด้วยเอเจนต์ใหม่โดยทีมงานเองได้ดำเนินการไปแล้วภายใต้โปรโตคอลที่ถูกตรึงไว้ ในสเกลเล็ก — ปริมาณงานเดียว สองฟีเจอร์ต่อหนึ่งการตั้งค่า เครื่องเดียว — และผลลัพธ์ถูกเผยแพร่ทั้งสองทิศทาง: เอเจนต์บนต้นไม้ที่มี harness อ่านไบต์น้อยกว่าในทั้งสองงาน และเซสชันของเวอร์ชันปัจจุบันใช้อินพุตและเอาต์พุตของโมเดลที่ harness รายงานน้อยกว่าเวอร์ชันหลักก่อนหน้า ขณะที่ทิศทางโทเคนสุทธิต่อปริมาณงานเป็นแบบผสมและไม่มีการอ้างความได้เปรียบด้านเวลาตามนาฬิกา ทะเบียนปริมาณคำสั่งวัดเฉพาะไบต์ที่โหลด ไม่ใช่โทเคน ต้นทุน หรือผลลัพธ์ DWP จำกัดขอบเขตไว้ที่ระดับที่เก็บโค้ดโดยตั้งใจ: มันไม่ใช่ระบบหน่วยความจำข้ามโปรเจกต์ ไม่ใช่เฟรมเวิร์ก agent แบบแบ่งบทบาท และไม่ใช่ IDE จึงไม่แข่งขันในแกนเหล่านั้นเช่นกัน — จับคู่กับเครื่องมือที่ครอบคลุมด้านนั้นเมื่องานต้องการความสามารถนั้นจริง ๆ',
+      body: 'Deep Work Plan ไม่มีกลไกสเปกแบบมีชีวิตหรือแบบเดลต้า ด้านนั้น OpenSpec และเครื่องมือทำนองเดียวกันทำได้ดีกว่า ยังไม่มี benchmark อิสระของระเบียบวิธี แต่การประเมินด้วยเอเจนต์ใหม่โดยทีมงานเองได้ดำเนินการไปแล้วภายใต้โปรโตคอลที่ถูกตรึงไว้ ในสเกลเล็ก — ปริมาณงานเดียว สองฟีเจอร์ต่อหนึ่งการตั้งค่า เครื่องเดียว — และผลลัพธ์ถูกเผยแพร่ทั้งสองทิศทาง: เอเจนต์บนต้นไม้ที่มี harness อ่านไบต์น้อยกว่าในทั้งสองงาน และเซสชันของเวอร์ชันปัจจุบันใช้อินพุตและเอาต์พุตของโมเดลที่ harness รายงานน้อยกว่าเวอร์ชันหลักก่อนหน้า ขณะที่ทิศทางโทเคนสุทธิต่อปริมาณงานเป็นแบบผสมและไม่มีการอ้างความได้เปรียบด้านเวลาตามนาฬิกา ทะเบียนปริมาณคำสั่งวัดเฉพาะไบต์ที่โหลด ไม่ใช่โทเคน ต้นทุน หรือผลลัพธ์ และตัวเลขชุดคำสั่งเริ่มต้นของมันไม่ใช่เพดานของสิ่งที่การรันหนึ่งครั้งจะอ่าน DWP จำกัดขอบเขตไว้ที่ระดับที่เก็บโค้ดโดยตั้งใจ: มันไม่ใช่ระบบหน่วยความจำข้ามโปรเจกต์ ไม่ใช่เฟรมเวิร์ก agent แบบแบ่งบทบาท และไม่ใช่ IDE จึงไม่แข่งขันในแกนเหล่านั้นเช่นกัน — จับคู่กับเครื่องมือที่ครอบคลุมด้านนั้นเมื่องานต้องการความสามารถนั้นจริง ๆ',
     },
     correction: {
       title: 'ช่วยกันรักษาความถูกต้องของหน้านี้',
@@ -1261,86 +1288,7 @@ export const th: SiteTranslations = {
     ctaBody:
       'อ่านระเบียบวิธีและข้อกำหนด ชี้ agent ไปที่ init endpoint และตรวจสอบการติดตั้งก่อนรัน',
     ctaPrimary: 'อ่านระเบียบวิธี',
-    ctaSecondary: 'การนำไปใช้ (init)',
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — Make your repository AI-first — Deep Work Plan',
-      description:
-        'Adopt the Deep Work Plan methodology in any repository. Install the skill, run agent onboarding, then plan and execute with any AI coding agent.',
-    },
-    eyebrow: 'Adoption',
-    title: 'Make this repository AI-first',
-    intro:
-      'One endpoint to turn any repository into a spec-driven, agent-ready codebase. Install the skill, let an agent onboard the repo, then plan and execute structured work with any coding agent.',
-    handoffTitle: 'คัดลอกไปยัง agent ของคุณ',
-    handoffBody:
-      'คัดลอก prompt ของ init.md ทั้งหมดและวางลงใน AI coding agent ของคุณ — Claude Code, Cursor, Codex หรืออื่น ๆ โดยมันจะอ่านระเบียบวิธีและข้อกำหนด ติดตั้ง skill และทำ onboarding ให้กับ repository นี้สำหรับ Deep Work Plan',
-    handoffInstruction:
-      'อ่านและทำตามคำแนะนำที่ https://deepworkplan.com/init.md เพื่อทำให้รีพอซิทอรีนี้เป็น AI-first',
-    handoffMdLabel: 'Self-contained agent prompt',
-    codeLabel: 'agent',
-    whatTitle: 'What this does',
-    whatBody: [
-      'Adoption changes the repository in two durable ways — the pillars of the methodology.',
-      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, per-module docs, and a .agents/ skill home (with the .claude → .agents and .cursor → .agents symlinks) give every agent the context and commands it needs.',
-    ],
-    sequenceTitle: 'The adoption sequence',
-    orLabel: 'or',
-    steps: [
-      {
-        title: 'ตรวจสอบก่อนติดตั้ง',
-        description:
-          'ปฏิบัติต่อพรอมต์และสกิลว่าเป็นสิ่งที่ไม่น่าเชื่อถือจนกว่าจะได้ตรวจสอบ ทั้งสองเป็นโอเพนซอร์สและ MIT สกิลเป็น Markdown-first ไม่มีการเรียกเครือข่ายและไม่มีการเก็บข้อมูลการใช้งาน ทุกรีลีสเผยแพร่ SHA256SUMS สำหรับสกิลที่ส่งมา คุณจึงสามารถยืนยันว่าสำเนาของคุณตรงกันก่อนรัน รีลีสถูกตรวจสอบด้วย checksum ไม่ใช่ลายเซ็น (การลงนามเป็นขั้นตอนถัดไปที่ได้รับการจัดทำเป็นเอกสาร)',
-        commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
-        ],
-      },
-      {
-        title: 'ติดตั้งสกิล',
-        description:
-          'เพิ่มสกิล Deep Work Plan เพื่อให้ agent ใดก็ได้สามารถวางแผนและดำเนินงานที่มีโครงสร้าง สกิลประกอบด้วย router และสกิลย่อยเก้าตัว ได้แก่ create, execute, refine, resume, status, verify, onboard, author และ upgrade',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'openclaw skills install deepworkplan',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: 'รันการ onboard repository',
-        description:
-          'เรียกสกิลย่อย onboard และให้ agent วิเคราะห์ repo จริง ได้แก่ สแตก ตัวจัดการแพ็กเกจ และคำสั่งตรวจสอบจริง จากนั้นจะสร้าง AGENTS.md, ฐานความรู้ docs/, เอกสารแต่ละโมดูล และโฮม .agents/ ข้ามเอเจนต์ (พร้อม symlink .claude → .agents และ .cursor → .agents), ต่อสายคำสั่ง dwp-* แบบบาง และสร้างโครง .dwp/ ที่ถูก gitignore สำหรับแผน สำหรับ repo ขนาดใหญ่ สกิลย่อย onboard ใช้เส้นทางแบบขับเคลื่อนด้วยแผน: ทำการสำรวจก่อน จากนั้นสร้าง Deep Work Plan สำหรับการ onboarding ไม่มีอะไรเป็นเทมเพลต ทุกอย่างถูกปรับให้เหมาะกับ repository ของคุณ',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: 'การรีวิวในเครื่องและ addon แบบสมัครใจ',
-        description:
-          'การ onboarding จะติดตั้งการรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer (เกต CI ยังคงเป็นทางเลือก) และเสนอ addon แบบสมัครใจสี่ตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade และ design-system ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม repo สอดคล้องอย่างสมบูรณ์โดยมี addon เสริมศูนย์ตัว ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตกเกินกว่าชุดพื้นฐาน',
-      },
-      {
-        title: 'วางแผนและดำเนินการ',
-        description:
-          'สร้าง Deep Work Plans ด้วย /dwp-create และรันด้วย /dwp-execute จากนั้นใช้ /dwp-status, /dwp-refine, /dwp-resume และ /dwp-verify ตามความคืบหน้าของงาน แต่ละแผนมีงานที่มีหมายเลข gate การตรวจสอบ และโปรโตคอลการเสร็จสิ้น และปิดด้วย Final Review บังคับเพียงหนึ่งงาน (การตรวจความปลอดภัย การตรวจสถานะสุดท้าย และการกระทบยอดการตัดสินใจสกิล) Executive Report ยังพร้อมให้ใช้เมื่อคุณร้องขอ',
-      },
-      {
-        title: 'ตรวจสอบความสอดคล้อง',
-        description:
-          'รัน /dwp-verify เพื่อรับรายงานผ่าน/ไม่ผ่านอย่างเป็นกลางเทียบกับสเปก ยืนยันว่า AGENTS.md, docs/ (มีเนื้อหาจริง ไม่ใช่ stub), .agents/ (มี delegator dwp-* แบบบางและ catalog ที่ตรงกับดิสก์), .dwp/ และ tmp/ อยู่ในที่ — ไม่มีอะไรเป็นเทมเพลต ทุกอย่างถูกคิดมาสำหรับ repo นี้',
-        commands: ['/dwp-verify'],
-      },
-    ],
-    outcomeTitle: 'The outcome',
-    outcome:
-      'The repository becomes spec-driven and the repository itself becomes the agent harness — context and commands travel with the code.',
-    nextStepsTitle: 'Read next',
-    nextSteps: [
-      { label: 'Quickstart', href: '/quickstart' },
-      { label: 'Methodology', href: '/methodology' },
-      { label: 'Spec', href: '/spec' },
-      { label: 'Kit', href: '/kit' },
-    ],
+    ctaSecondary: 'เริ่มใช้งานเร็ว',
   },
 
   // Developers — agent & developer surface

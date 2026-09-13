@@ -18,16 +18,20 @@ import { satteriHastPlugins } from './src/lib/satteri-markdown-plugins.mjs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// /init is the canonical adoption endpoint. /setup and /onboarding redirect to
-// it in every language — one page, one .md endpoint, no canonical/AEO
-// duplication. Generated from the language registry so adding a language needs
-// no edit here.
+// /quickstart is the single canonical onboarding page (HTML + one .md
+// endpoint per language). /init, /setup, and /onboarding all redirect to it —
+// one destination, no canonical/AEO duplication. /init.md itself is a
+// separate, hand-maintained, English-only standalone artifact served from
+// public/init.md (never redirected — it has no HTML page to redirect to).
+// Generated from the language registry so adding a language needs no edit
+// here.
 const adoptionRedirects = Object.fromEntries(
   LANGUAGE_CODES.flatMap((code) => {
     const prefix = code === DEFAULT_LANGUAGE_CODE ? '' : `/${code}`;
     return [
-      [`${prefix}/setup`, { status: 301, destination: `${prefix}/init` }],
-      [`${prefix}/onboarding`, { status: 301, destination: `${prefix}/init` }],
+      [`${prefix}/init`, { status: 301, destination: `${prefix}/quickstart` }],
+      [`${prefix}/setup`, { status: 301, destination: `${prefix}/quickstart` }],
+      [`${prefix}/onboarding`, { status: 301, destination: `${prefix}/quickstart` }],
     ];
   })
 );

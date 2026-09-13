@@ -8,7 +8,7 @@ section: State
 
 # Plan durumu
 
-**Sürüm 1.1. Durum: Kararlı.** Bu belge, Deep Work Plan metodolojisinin makine tarafından okunabilir plan durum katmanını belirtir. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
+**Sürüm 5.0.0. Durum: Kararlı.** Bu belge, Deep Work Plan metodolojisinin makine tarafından okunabilir plan durum katmanını belirtir; artık DWP standardının kendi sürümüyle hizalıdır — yeniden numaralandırma mevcut hiçbir gereksinimi zayıflatmaz. Bu revizyon ayrıca korumalı durum güncelleyicisini, doğrulanmış plan yayınlamasını ve tamamlanmış bir planın karşılaması gereken kanıt-doğruluğu kurallarını belgeler (aşağıya bakın). MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 
 İki JSON yapısı — `manifest.json` (planın statik kimliği) ve `state.json` (doğrulama kapısı sonuçları dahil canlı, görev bazında yürütme durumu) — her planın Markdown dosyalarının yanında TASIYABİLECEĞİ ve gözetimsiz yürütmenin (bkz. [Ajan protokolü](/spec/agent-protocol#execution-profiles)) ile git içermeyen çalışma alanlarının (bkz. [Arketipler](/spec/archetypes) §3) TAŞIMAK ZORUNDA OLDUĞU yapılardır.
 
@@ -35,7 +35,7 @@ Durum katmanını kullanan bir planın bu düzeni vardır:
 
 `manifest.json`, `create` akışı planı somutlaştırdığında tam olarak bir kez YAZILMALIDIR ve `PROGRESS.md`'de kayıt altına alınan bir spec sürümü geçişi dışında sonrasında DEĞİŞTİRİLMEMELİDİR.
 
-`state.json`, ajan tarafından şu protokol noktalarının her birinde YENİDEN YAZILMALIDIR: plan somutlaştırma (tüm görevler `pending`), görev başlangıcı (`in_progress`), her doğrulama kapısı çalıştırması (kapı kaydı eklendi veya güncellendi) ve görev tamamlama ([DWP spesifikasyonu](/spec/dwp-specification#task-completion-protocol)'ndaki görev tamamlama protokolünün parçası olarak `completed`).
+`state.json`, ajan tarafından şu protokol noktalarının her birinde YENİDEN YAZILMALIDIR: plan somutlaştırma (tüm görevler `pending`), görev başlangıcı (`in_progress`), her doğrulama kapısı çalıştırması (kapı kaydı eklendi veya güncellendi) ve görev tamamlama ([DWP spesifikasyonu](/spec/dwp-specification#task-completion-protocol)'ndaki görev tamamlama protokolünün parçası olarak `completed`), planlı herhangi bir kesintiden önce bir kontrol noktası ve bir `blocked` durması.
 
 Her iki dosya da atomik olarak YAZILMALIDIR: aynı dizinde geçici bir dosyaya yazın, ardından hedefin üzerine yeniden adlandırın. Çökmüş bir yazma işlemi yerinde kesik bir JSON dosyası BIRAKMAMALDIR.
 
@@ -194,6 +194,30 @@ Devam eden bir ajan, devam etmeden önce README onay kutusu listesini `state.jso
 `verify` alt skill'i, desenkronizasyonu bir uyumluluk bulgusu olarak ele ALMALIDIR: hangi görevlerin hangi yönde ayrıştığını raporlayın.
 
 Yürüten ajan dışındaki araçlar her iki JSON dosyasını da salt okunur olarak ele ALMALIDIR.
+
+## Korumalı durum güncellemeleri
+
+Sıradan ilerleme yazmaları, tam dosya yeniden yazımı yerine skill ile birlikte gelen hedeflenmiş bir güncelleyiciden geçer. Bozuk durumu açıkça reddeder ve boş olmayan kapı kanıtı eklenmeden bir görevi `completed` olarak işaretlemeyi reddeder — çıktısında boru karakteri (`|`) bulunan bir komut için bir `--gate-json` biçimi mevcuttur ve güncelleyici yukarıda tanımlanan aynı kapalı kapı nesnesini kabul eder. Yeniden denemeler yalnızca kendi komutlarının yerini alır; farklı bir komut kendi ayrı kaydını tutar. `--block-reason` bir engelleyiciyi kaydeder; `--resolve-blocker` yalnızca mevcut görevin engelleyicisini çözer, asla başka bir görevinkini değil. Atlanan iş bir planı asla `completed` yapamaz. `--reopen-reason`, çağıranın planı `refine` aracılığıyla değiştirme niyetini kaydeder — değişiklik ve geçersiz kıldığı herhangi bir kanıt önce görev günlüğüne KAYDEDİLMEK ZORUNDADIR. `--expected-sha256`, artık geçerliliğini yitirmiş bir durum anlık görüntüsüne karşı bir yazmayı reddeder. İşbirlikçi bir `.lock` dizini eşzamanlı yazıcıları sıralar; çökmüş bir yazıcının kilidi kaldırılmadan önce İNCELENMEK ZORUNDADIR ve kilidi tamamen atlayan bir düzenleyiciye karşı hiçbir koruma iddia edilmez. Bu kayıtlar sonuçları doğrular — bir komutun gerçekten çalıştırıldığını veya çıktısının anlamsal olarak kabul edildiğini kendi başlarına kanıtlamazlar.
+
+## Doğrulanmış plan yayınlama
+
+Tamamlanma duyurulmadan önce, biten görev günlükleri (her biri kendi **Skills disposition**'ını ve Final Review'da kendi **Documentation decision**'ını taşıyarak), README dizini ve `PROGRESS.md`, kazanılmış kaynak ve kabul sonuçlarından YAZILMAK ZORUNDADIR. Planın son görevi daha sonra skill ile birlikte gelen sonlandırıcı aracılığıyla kapanır: sonlanma geçişi, durumu yazmadan önce tamamlanmış adayı her plan artefaktına karşı doğrular, ardından dosyaları doğrular ve bir `analysis_results/FINALIZATION.json` makbuzu kaydeder. Uydurulmuş, geçen bir kapı bu geçişi DESTEKLEMEMELİDİR — makbuz, gerçekten neyin kontrol edildiğine dair dışsal bir kanıttır, asla kendi ön koşulu değildir. `bash ../verify/conformance.sh --plan PLAN_name`, hemen ardından, diskteki gerçek artefaktlara karşı çalıştırılır.
+
+Kesintiye uğrayan bir yayınlama yerinde bir `.finalizing.json` işaretleyicisi bırakır; normal doğrulama, kanıt incelenip kurtarma yardımcısı aynı adaya karşı başarılı olana kadar başarısız olur — hiçbir şey bir yayınlamayı varsayımla devam ettirmez. Eski bir işbirlikçi kilit, kaldırılmadan önce hiçbir yazıcının hâlâ etkin olmadığının doğrulanmasını gerektirir. Bu katmandaki hiçbir şey commit atmaz, push yapmaz, kaydedilmiş bir kapı komutunu çalıştırmaz veya planın markdown'unu sessizce onarmaz. Eksik bir Python yorumlayıcısı `completed` değil, `UNVERIFIED` üretir.
+
+## Kanıt doğruluğu ve değişiklikler
+
+Bir görevin kapsamına, kabul kriterlerine veya ertelemesine yapılan her değişiklik, tek bir kalıcı değişiklik kaydı taşır: özgün kriterin tam metni, gözlemlenen şey, karar, gerekçe, bunun arkasındaki otorite (kullanıcı, geliştirici veya kanıt), etkilenen görevler ve hangi kanıtın geçersiz kılındığı veya korunduğu. Değişiklikler eklenir, asla geriye tarihlenmez; `manifest.json` kendi oluşturma kökenini korur ve değişen bir canlı kapsama uyacak şekilde asla yeniden yazılmaz.
+
+Beş kanıt durumu, bir görev kaydının neye karşı kapanabileceğini tanımlar:
+
+- **Tamamlanmış araştırma** — gerçek, kaydedilmiş iş; bir görevi yalnızca onu adlandıran, gözden geçirilmiş bir kritere karşı kapatır, asla yazıldığı haliyle özgün kritere karşı değil.
+- **Yürütülmemiş senaryo** — gerçekleştirilmedi olarak kaydedilir; hiçbir dönemde geçerli kanıt sağlamaz.
+- **Ertelenmiş gereksinim** — kriter, kaydedilmiş yetkiyle adlandırılmış bir hedef göreve taşınır; yalnızca bu değişiklik kaynağı kapatır.
+- **Başarısız kapı** — aynı kabul niyeti yeniden çalıştırılıp geçene kadar başarısız kalır; bir yeniden deneme yalnızca kendi komutunun yerini alır.
+- **Ulaşılan ürün sonucu** — yazıldığı haliyle kriter, kendi kapısıyla doğrulanmış; bir görevi değişmeden tamamlayan tek durum.
+
+Uygulama, kayıtların izin verdiği her yerde mekaniktir. "invalidated by refine" olarak işaretlenmiş kapı kanıtı korunmuş tarihtir, asla geçerli kanıt değildir ve buna hâlâ dayanan tamamlanmış bir görev denetleyici tarafından raporlanır. Kendi metni kontrolün hiç çalışmadığını kabul eden geçerli bir kayıt (örneğin "never entered", "did not run" veya "cannot be measured") bir çelişkidir, aynı şekilde raporlanır — tıpkı günlüğü hâlâ `Status: pending` yazan tamamlanmış bir durum görevi gibi. Bunların ötesindeki anlatı çelişkileri — kendi kontrol listesiyle çelişen sonuçlara sahip bir rapor — bir insan gözden geçirici GEREKTİRİR; denetleyici, düzyazının ne anlama geldiğini değil, kayıtların ne söylediğini raporlar. Bir kullanıcı, kaydedilmiş yetkiyle sınırlı bir istisnayı açıkça kabul EDEBİLİR; gözetimsiz ön onay asla temel bir hedefi terk etmek için genel bir izin değildir ve karşılanamaz zorunlu bir kriter, asla tamamlanmış iş değil, bir engelleyicidir.
 
 ## Şema sürümleme
 
