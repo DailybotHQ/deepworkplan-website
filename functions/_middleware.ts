@@ -23,7 +23,11 @@
  *    client that does not explicitly prefer HTML (Markdown-negotiating
  *    clients, curl, AI agents sending a wildcard Accept) receives a short
  *    Markdown 404 recovery body pointing at the sitemap, llms.txt, and
- *    /developers.
+ *    /developers. An explicit `text/markdown` or `application/json` Accept
+ *    also admits extension-bearing unknown paths (e.g. /nope.json) to the
+ *    Markdown body. Every 404 (API JSON, Markdown body, and the HTML
+ *    passthrough alike) carries a recovery `Link` header
+ *    (src/lib/agent-recovery.ts `recoveryLinkHeaders`).
  *
  * 5. **Rate limiting** (/api/* only, request-time): a best-effort per-isolate
  *    fixed-window limiter (src/lib/rate-limit.ts) attaches RFC 9331
@@ -36,9 +40,11 @@ import {
   API_DOCS_URL,
   buildAgentRecoveryMarkdown,
   buildApiError,
+  explicitlyAcceptsMarkdownOrJson,
   isApiPath,
   OPENAPI_URL,
   prefersMarkdownOverHtml,
+  recoveryLinkHeaders,
 } from '../src/lib/agent-recovery';
 import { deprecationHeadersFor } from '../src/lib/deprecation';
 import { buildPageJsonEnvelope, prefersJsonOverHtml } from '../src/lib/json-envelope';
@@ -515,6 +521,8 @@ function finalizeResponse(
   const url = new URL(context.request.url);
 
   if (response.status === 404) {
+    const linkHeader = recoveryLinkHeaders(url.origin);
+
     // 1. API paths → structured JSON error, carrying the caller's rate-limit
     //    headers so even a 404 tells agents where their window stands.
     if (isApiPath(url.pathname)) {
@@ -531,6 +539,7 @@ function finalizeResponse(
           'Content-Type': 'application/json',
           'Cache-Control': 'no-store',
           'Access-Control-Allow-Origin': '*',
+          Link: linkHeader,
           ...(rateLimit ? rateLimitHeaders(rateLimit) : {}),
         },
       });
@@ -540,13 +549,20 @@ function finalizeResponse(
     //    Eligible when the client asks for Markdown or simply does not prefer
     //    HTML (curl/AI agents send Accept: */*); browsers keep the HTML 404
     //    page. Same path guards as tryServeMarkdown: no /api/, /internal/, /_
-    //    prefixes and no static-asset extensions (so rateLimit is always null
-    //    on this branch).
+    //    prefixes (so rateLimit is always null on this branch). An
+    //    extension-bearing path (e.g. /nope.json) is normally excluded (it
+    //    looks like a stray asset request) — admitted only when the client
+    //    *explicitly* asked for text/markdown or application/json, not a bare
+    //    wildcard Accept.
     const accept = context.request.headers.get('accept') || '';
+    const notExcludedPrefix = !MARKDOWN_EXCLUDED_PREFIXES.some((prefix) =>
+      url.pathname.startsWith(prefix)
+    );
+    const hasExtension = MARKDOWN_EXCLUDED_EXTENSIONS.test(url.pathname);
     const eligible =
+      notExcludedPrefix &&
       (accept.includes('text/markdown') || prefersMarkdownOverHtml(accept)) &&
-      !MARKDOWN_EXCLUDED_PREFIXES.some((prefix) => url.pathname.startsWith(prefix)) &&
-      !MARKDOWN_EXCLUDED_EXTENSIONS.test(url.pathname);
+      (!hasExtension || explicitlyAcceptsMarkdownOrJson(accept));
     if (eligible) {
       return new Response(buildAgentRecoveryMarkdown(url.origin), {
         status: 404,
@@ -555,11 +571,20 @@ function finalizeResponse(
           'Cache-Control': 'public, max-age=600',
           Vary: 'Accept',
           'X-Content-Negotiation': 'markdown',
+          Link: linkHeader,
         },
       });
     }
 
-    return response;
+    // 3. Browser HTML passthrough — same designed 404 page, now also
+    //    carrying the recovery Link header (upstream Response is treated as
+    //    immutable; construct a new one to add the header).
+    const headers = new Headers(response.headers);
+    headers.set('Link', linkHeader);
+    return new Response(response.body, {
+      status: response.status,
+      headers,
+    });
   }
 
   // 0. Passing responses: merge deprecation headers (see

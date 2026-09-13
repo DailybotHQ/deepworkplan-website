@@ -304,6 +304,45 @@ else
       failed "HTML 404 (browser Accept)" "status $BR_STATUS (want 404)"
     fi
 
+    # Recovery Link header present on every 404 channel (Task 3): API JSON,
+    # Markdown body, and the HTML passthrough alike.
+    LINK_MD=$(curl -s -H "Accept: */*" -D - -o /dev/null "$E/no-such-page" | tr -d '\r')
+    LINK_HTML=$(curl -s -H "Accept: text/html,application/xhtml+xml,*/*" -D - -o /dev/null "$E/no-such-page" | tr -d '\r')
+    LINK_API=$(curl -s -D - -o /dev/null "$E/api/nope" | tr -d '\r')
+    if printf '%s' "$LINK_MD" | grep -qi 'rel="sitemap"' \
+      && printf '%s' "$LINK_HTML" | grep -qi 'rel="sitemap"' \
+      && printf '%s' "$LINK_API" | grep -qi 'rel="sitemap"'; then
+      passed "404 Link recovery header (all three channels)" 'rel="sitemap" present'
+    else
+      failed "404 Link recovery header (all three channels)" "markdown:$(printf '%s' "$LINK_MD" | grep -io 'link:.*' || echo none); html:$(printf '%s' "$LINK_HTML" | grep -io 'link:.*' || echo none); api:$(printf '%s' "$LINK_API" | grep -io 'link:.*' || echo none)"
+    fi
+
+    # Markdown body starts with the recovery document's H1 (full-credit signal).
+    MD_FIRST_LINE=$(printf '%s' "$MD_BODY" | head -n 1)
+    if [ "$MD_FIRST_LINE" = "# 404 — Not Found" ]; then
+      passed "markdown 404 body first line" "$MD_FIRST_LINE"
+    else
+      failed "markdown 404 body first line" "got: $MD_FIRST_LINE"
+    fi
+
+    # Extension-bearing unknown path: explicit Markdown/JSON Accept still gets
+    # the Markdown recovery body; a bare wildcard Accept keeps the HTML 404
+    # (Task 3 eligibility — explicitlyAcceptsMarkdownOrJson).
+    EXT_EXPLICIT_STATUS=$(edge_status "/nope.json" "application/json")
+    EXT_EXPLICIT_CT=$(curl -s -H "Accept: application/json" -o /dev/null -w '%{content_type}' "$E/nope.json")
+    if [ "$EXT_EXPLICIT_STATUS" = "404" ] && printf '%s' "$EXT_EXPLICIT_CT" | grep -qi markdown; then
+      passed "extension-bearing 404 (explicit Accept: application/json)" "404 + $EXT_EXPLICIT_CT"
+    else
+      failed "extension-bearing 404 (explicit Accept: application/json)" "status $EXT_EXPLICIT_STATUS, content-type '$EXT_EXPLICIT_CT' (want 404 markdown)"
+    fi
+    EXT_WILDCARD_STATUS=$(edge_status "/nope.json" "*/*")
+    EXT_WILDCARD_CT=$(curl -s -H "Accept: */*" -o /dev/null -w '%{content_type}' "$E/nope.json")
+    if [ "$EXT_WILDCARD_STATUS" = "404" ] && printf '%s' "$EXT_WILDCARD_CT" | grep -qi html; then
+      passed "extension-bearing 404 (wildcard Accept stays HTML)" "404 + $EXT_WILDCARD_CT"
+    else
+      failed "extension-bearing 404 (wildcard Accept stays HTML)" "status $EXT_WILDCARD_STATUS, content-type '$EXT_WILDCARD_CT' (want 404 html)"
+    fi
+
     # MCP initialize: 200 JSON-RPC result + X-API-Version + RateLimit headers.
     MCP_RESP=$(curl -s -D /tmp/agents-verify-mcp-headers.txt -o /tmp/agents-verify-mcp-body.json \
       -X POST -H 'Content-Type: application/json' -H 'Accept: application/json, text/*' \

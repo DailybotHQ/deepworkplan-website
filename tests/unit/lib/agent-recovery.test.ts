@@ -3,9 +3,11 @@ import { describe, expect, it } from 'vitest';
 import {
   buildAgentRecoveryMarkdown,
   buildApiError,
+  explicitlyAcceptsMarkdownOrJson,
   isApiPath,
   prefersMarkdownOverHtml,
   RECOVERY_LINKS,
+  recoveryLinkHeaders,
 } from '@/lib/agent-recovery';
 
 // ─── buildApiError ──────────────────────────────────────
@@ -130,5 +132,68 @@ describe('buildAgentRecoveryMarkdown', () => {
       expect(known.has(link.path)).toBe(true);
     }
     expect(RECOVERY_LINKS.length).toBe(known.size);
+  });
+});
+
+// ─── explicitlyAcceptsMarkdownOrJson ────────────────────
+
+describe('explicitlyAcceptsMarkdownOrJson', () => {
+  it('admits an explicit text/markdown Accept', () => {
+    expect(explicitlyAcceptsMarkdownOrJson('text/markdown')).toBe(true);
+  });
+
+  it('admits an explicit application/json Accept', () => {
+    expect(explicitlyAcceptsMarkdownOrJson('application/json')).toBe(true);
+  });
+
+  it('admits a +json suffix type', () => {
+    expect(explicitlyAcceptsMarkdownOrJson('application/ld+json')).toBe(true);
+  });
+
+  it('does not admit a bare wildcard Accept (looks like a stray asset request)', () => {
+    expect(explicitlyAcceptsMarkdownOrJson('*/*')).toBe(false);
+  });
+
+  it('does not admit an empty Accept header', () => {
+    expect(explicitlyAcceptsMarkdownOrJson('')).toBe(false);
+  });
+
+  it('does not admit an explicit HTML Accept even if it also lists other types', () => {
+    expect(
+      explicitlyAcceptsMarkdownOrJson(
+        'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+      )
+    ).toBe(false);
+  });
+
+  it('is case-insensitive', () => {
+    expect(explicitlyAcceptsMarkdownOrJson('TEXT/MARKDOWN')).toBe(true);
+    expect(explicitlyAcceptsMarkdownOrJson('APPLICATION/JSON')).toBe(true);
+  });
+});
+
+// ─── recoveryLinkHeaders ─────────────────────────────────
+
+describe('recoveryLinkHeaders', () => {
+  it('includes sitemap, llms.txt, and developers targets with the caller-supplied origin', () => {
+    const header = recoveryLinkHeaders('https://deepworkplan.com');
+    expect(header).toContain(
+      '<https://deepworkplan.com/sitemap-index.xml>; rel="sitemap"'
+    );
+    expect(header).toContain(
+      '<https://deepworkplan.com/llms.txt>; rel="alternate"; type="text/markdown"'
+    );
+    expect(header).toContain(
+      '<https://deepworkplan.com/developers>; rel="help"'
+    );
+  });
+
+  it('is a single comma-separated RFC 8288-shaped header value', () => {
+    const header = recoveryLinkHeaders('https://example.org');
+    const links = header.split(', ');
+    expect(links).toHaveLength(3);
+    for (const link of links) {
+      expect(link).toMatch(/^<https:\/\/example\.org\/.+>; rel="[a-z]+"/);
+    }
   });
 });
