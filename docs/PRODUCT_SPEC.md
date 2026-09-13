@@ -4,7 +4,7 @@
 
 **Deep Work Plan** ([deepworkplan.com](https://deepworkplan.com)) is the official website for the **Deep Work Plan (DWP)** methodology — a framework-agnostic, agent-agnostic approach for AI coding agents to execute complex, multi-step software work reliably over hours or days.
 
-The site has three jobs: (1) explain and sell the methodology, (2) host the readable specification, and (3) catalog the kit (presets, adapters, commands) used to install DWP into a repository. It is a fast, fully bilingual (English + Spanish) static site, and it **dogfoods** the methodology it documents.
+The site has three jobs: (1) explain and sell the methodology, (2) host the readable specification, and (3) catalog the kit (presets, adapters, commands) used to install DWP into a repository. It is a fast, fully multilingual (17 active languages: en, es, pt, zh, ja, de, fr, ko, ru, it, tr, id, vi, hi, pl, uk, th) static site, and it **dogfoods** the methodology it documents.
 
 Beyond turning a repository AI-first, DWP lets that repository **evolve its own kit** and **maintain itself**:
 
@@ -25,14 +25,14 @@ The website repository practices the methodology it documents. The official Deep
 
 ## Vision
 
-Build a fast, accessible, bilingual site that:
+Build a fast, accessible, multilingual site that:
 
 - Communicates within seconds what DWP is and who it is for
 - Presents the methodology clearly enough that an engineer can adopt it from the page
 - Publishes the normative specification in a readable, navigable form
 - Catalogs the installable kit (presets, adapters, commands) for real repositories
 - Serves agent-friendly Markdown endpoints so AI agents can consume content natively
-- Supports English and Spanish at full parity
+- Supports all 17 active languages at full parity
 - Delivers excellent performance and accessibility (Lighthouse 90+, WCAG AA)
 - Is easy for AI agents and humans to maintain and extend
 
@@ -57,7 +57,7 @@ Build a fast, accessible, bilingual site that:
 **Purpose:** Explain and teach the methodology — the primary content of the site.
 
 **Features:**
-- Bilingual content collection (`methodology/{en,es}/`)
+- Multilingual content collection (`methodology/{en,es,pt,zh,…}/`, 17 active languages)
 - Narrative docs: what DWP is, how to adopt it, principles, and the end-to-end workflow
 - Cross-links into the specification and kit
 - Agent-friendly Markdown endpoints for every page
@@ -67,7 +67,7 @@ Build a fast, accessible, bilingual site that:
 **Purpose:** Publish the normative DWP standard in a readable form.
 
 **Features:**
-- Bilingual content collection (`spec/{en,es}/`)
+- Multilingual content collection (`spec/{en,es,pt,zh,…}/`, 17 active languages)
 - The DWP workflow: plan folder structure, the task anatomy and its sections, validation gates, completion protocol, resume, the two mandatory final tasks, archetypes, and addons
 - RFC-2119 normative language preserved (MUST / SHOULD / MAY)
 
@@ -76,7 +76,7 @@ Build a fast, accessible, bilingual site that:
 **Purpose:** Catalog the installable assets for adopting DWP in a repository.
 
 **Features:**
-- Bilingual content collection (`kit/{en,es}/`)
+- Multilingual content collection (`kit/{en,es,pt,zh,…}/`, 17 active languages)
 - Presets, adapters, and commands (`/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`)
 - Guidance for installing DWP into an existing repo
 - Cross-links to the companion skill repo [`DailybotHQ/deepworkplan-skill`](https://github.com/DailybotHQ/deepworkplan-skill)
@@ -133,18 +133,16 @@ website repository.
 
 **Technical details:** See [Markdown for Agents](aeo/MARKDOWN_FOR_AGENTS.md)
 
-### 7. Bilingual Support
+### 8. Multilingual Support
 
 **Purpose:** Reach a broader audience at full parity.
 
-**Languages:**
-- English (default) — `/`
-- Spanish — `/es/`
+**Languages:** 17 active languages, derived from `src/lib/translations/*.ts` file presence — English (default, `/`) plus es, pt, zh, ja, de, fr, ko, ru, it, tr, id, vi, hi, pl, uk, and th (each under `/{lang}/`). Adding a language requires no page-wrapper edits; see [I18N Guide](I18N_GUIDE.md).
 
 **Implementation:**
-- Separate route structure per language; language switcher in the header
+- Single dynamic `[lang]` route tree serves every non-default language; the default language is served from the root (page-wrapper pattern, see [Architecture](ARCHITECTURE.md))
 - `lang` prop passed to page components (page-wrapper pattern)
-- Spanish content carries full diacritics (`ñ`, tildes, `¿`/`¡`)
+- Each language's content carries correct native diacritics and scripts (Spanish `ñ`/tildes/`¿`/`¡`, CJK full-width punctuation, Cyrillic, Thai, Devanagari, etc.)
 
 ## Design Principles
 
@@ -200,7 +198,7 @@ See **[Brand Guide](BRAND_GUIDE.md)** for the complete "Broadsheet" palette (war
 
 - Clarity: a first-time visitor understands what DWP is and who it is for within seconds
 - Reach: the methodology, spec, and kit are each reachable in one click from the homepage
-- Parity: every page exists and reads correctly in both English and Spanish
+- Parity: every page exists and reads correctly in all 17 active languages
 
 ### Engagement
 
@@ -216,7 +214,7 @@ See **[Brand Guide](BRAND_GUIDE.md)** for the complete "Broadsheet" palette (war
 
 ### Content Health
 
-- Methodology / spec / kit pages in sync across EN and ES
+- Methodology / spec / kit pages in sync across all 17 active languages
 - Markdown endpoint parity (`pnpm run md:check`) clean
 - No placeholder content in shipped pages
 
@@ -230,7 +228,7 @@ See **[Brand Guide](BRAND_GUIDE.md)** for the complete "Broadsheet" palette (war
 
 ### Content
 
-- **Language** — code and docs in English; site content bilingual EN/ES
+- **Language** — code and docs in English; site content multilingual (17 active languages)
 - **Voice** — serious, neutral, technical throughout
 
 ## Deployment
