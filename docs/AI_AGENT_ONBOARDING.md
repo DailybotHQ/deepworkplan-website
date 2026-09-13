@@ -17,7 +17,7 @@ Quick start guide for AI coding assistants (Cursor AI, Claude Code, ChatGPT, Gem
 
 - **Methodology documentation and marketing site** for deepworkplan.com
 - **Static Site Generation (SSG)** - builds to static HTML
-- **Multilingual** - English (default) and Spanish
+- **Multilingual** - English (default) plus 16 other active languages (es, pt, zh, ja, de, fr, ko, ru, it, tr, id, vi, hi, pl, uk, th)
 - **Deployed to** Cloudflare Pages
 
 ## Repository Structure
@@ -96,12 +96,12 @@ Always support dark mode:
 
 ### 7. Content Creation Workflow
 
-Methodology/spec/kit docs live in bilingual content collections.
+Methodology/spec/kit docs live in multilingual content collections (17 active languages).
 
-- Create both language files in the same task: `src/content/{collection}/en/` and `.../es/` (same English slug)
-- Spanish content MUST carry correct diacritics (ñ, tildes, ¿/¡)
-- Keep the matching `src/content/pages/{en,es}/*.md` endpoint in sync (`pnpm run md:check`)
-- Validate with `pnpm run build`
+- Create the file in every active language folder in the same task: `src/content/{collection}/en/`, `.../es/`, `.../pt/`, `.../zh/`, … (same English slug throughout; use the `/translate-sync` skill)
+- Every non-English language MUST carry correct diacritics/scripts for that language (Spanish ñ/tildes/¿/¡; CJK full-width punctuation; Cyrillic; Thai; Devanagari; etc.)
+- Keep the matching `src/content/pages/{en,es,pt,zh,…}/*.md` endpoint in sync (`pnpm run md:check`)
+- Validate with `pnpm run build` and `pnpm run i18n:check`
 
 ### 8. Analytics Verification Policy
 
@@ -130,7 +130,7 @@ pnpm run build            # Production build (Cloudflare Pages)
 
 ### Content Collections
 
-Methodology docs in `src/content/methodology/{en,es}/`:
+Methodology docs in `src/content/methodology/{en,es,pt,zh,…}/` (17 active languages):
 
 ```yaml
 ---
@@ -187,10 +187,10 @@ export const GET: APIRoute = async () => {
 
 ### Add a Methodology / Spec / Kit Doc
 
-1. Create EN + ES files in the same task under `src/content/{collection}/{en,es}/` (same English slug)
+1. Create the file in every active language folder in the same task under `src/content/{collection}/{en,es,pt,zh,…}/` (same English slug throughout; use the `/translate-sync` skill)
 2. Verify frontmatter includes required fields (`title`, `description`, `order`, `lang`)
-3. Keep the matching `src/content/pages/{en,es}/*.md` endpoint in sync (`pnpm run md:check`)
-4. Run `pnpm run build` to validate Content Collections
+3. Keep the matching `src/content/pages/{en,es,pt,zh,…}/*.md` endpoint in sync (`pnpm run md:check`)
+4. Run `pnpm run build` and `pnpm run i18n:check` to validate
 
 ### Add a Component
 
