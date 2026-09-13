@@ -14,20 +14,46 @@ const prefix = getUrlPrefix(lang as Language);
 
 const githubUrl = REPO_URLS.website;
 
-const links = [
-  { href: `${prefix}/methodology`, label: t.nav.methodology },
-  { href: `${prefix}/spec`, label: t.nav.spec },
-  { href: `${prefix}/kit`, label: t.nav.kit },
-  { href: `${prefix}/examples`, label: t.nav.examples },
-  { href: `${prefix}/trust`, label: t.nav.trust },
-  { href: `${prefix}/faq`, label: t.nav.faq },
-  { href: `${prefix}/compare`, label: t.nav.compare },
-  { href: `${prefix}/changelog`, label: t.nav.changelog },
-  { href: `${prefix}/init`, label: t.nav.init },
-  { href: `${prefix}/developers`, label: t.nav.developers },
-  { href: `${prefix}/about`, label: t.nav.about },
-  { href: `${prefix}/contact`, label: t.nav.contact },
-  { href: `${prefix}/privacy`, label: t.nav.privacy },
+// Sitemap grouped to mirror the taxonomy already established (and translated
+// in every active language) for the agent-facing markdown nav — see
+// t.agentNav.sections in generateSiteNavigation() (src/lib/markdown-for-agents.ts).
+// Reusing those section labels keeps the human footer and the AEO markdown
+// nav conceptually in sync without adding new translation keys.
+const groups: { title: string; links: { href: string; label: string }[] }[] = [
+  {
+    title: t.agentNav.sections.methodology,
+    links: [
+      { href: `${prefix}/methodology`, label: t.nav.methodology },
+      { href: `${prefix}/spec`, label: t.nav.spec },
+      { href: `${prefix}/kit`, label: t.nav.kit },
+    ],
+  },
+  {
+    title: t.agentNav.sections.getStarted,
+    links: [
+      { href: `${prefix}/quickstart`, label: t.nav.quickstart },
+      { href: `${prefix}/init`, label: t.nav.init },
+      { href: `${prefix}/examples`, label: t.nav.examples },
+    ],
+  },
+  {
+    title: t.agentNav.sections.learn,
+    links: [
+      { href: `${prefix}/compare`, label: t.nav.compare },
+      { href: `${prefix}/faq`, label: t.nav.faq },
+      { href: `${prefix}/changelog`, label: t.nav.changelog },
+      { href: `${prefix}/developers`, label: t.nav.developers },
+    ],
+  },
+  {
+    title: t.agentNav.sections.project,
+    links: [
+      { href: `${prefix}/trust`, label: t.nav.trust },
+      { href: `${prefix}/about`, label: t.nav.about },
+      { href: `${prefix}/contact`, label: t.nav.contact },
+      { href: `${prefix}/privacy`, label: t.nav.privacy },
+    ],
+  },
 ];
 ---
 
@@ -35,8 +61,8 @@ const links = [
   class="bg-paper text-ink dark:bg-main dark:text-white border-t border-line transition-colors duration-300"
   style="padding-bottom: env(safe-area-inset-bottom);"
 >
-  <div class="main-container py-12">
-    <div class="flex flex-col items-center gap-6 text-sm">
+  <div class="main-container py-12 md:py-16">
+    <div class="flex flex-col items-center gap-10 md:gap-12">
       <!-- Footer logo-only treatment (per-mode light/dark). Do not regress. -->
       <a
         href={prefix || '/'}
@@ -61,72 +87,95 @@ const links = [
         />
       </a>
 
+      <!-- Sitemap: grouped columns instead of one undifferentiated wall of
+           links. 2 columns on phones (still grouped, never a flat list),
+           4 across from the sm breakpoint up. Each group keeps the same
+           links in the same order at every width. -->
       <nav
-        class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
+        class="grid w-full max-w-4xl grid-cols-2 gap-x-6 gap-y-8 text-sm sm:grid-cols-4 sm:gap-x-8"
         aria-label="Footer"
       >
         {
-          links.map((link) => (
-            <a
-              href={link.href}
-              class="hover:text-secondary transition-colors"
-              style="color: var(--color-muted);"
-            >
-              {link.label}
-            </a>
+          groups.map((group) => (
+            <div>
+              <p class="kicker mb-3">{group.title}</p>
+              <ul class="flex flex-col gap-2.5">
+                {group.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="hover:text-secondary transition-colors"
+                      style="color: var(--color-muted);"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))
         }
-        <a
-          href={githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-secondary transition-colors"
-          style="color: var(--color-muted);"
-        >
-          {t.nav.github}
-        </a>
-        <a
-          href="https://opensource.org/licenses/MIT"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-secondary transition-colors"
-          style="color: var(--color-muted);"
-        >
-          MIT
-        </a>
       </nav>
 
-      <!-- Engineering as marketing: give Dailybot visibility -->
-      <a
-        href="https://www.dailybot.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-2 hover:opacity-80 transition-opacity"
-        aria-label={`${t.footer.poweredBy} Dailybot`}
-      >
-        <span class="kicker" style="color: var(--color-muted);"
-          >{t.footer.poweredBy}</span
+      <div class="h-px w-full max-w-4xl bg-line" aria-hidden="true"></div>
+
+      <!-- Meta row: source/license on one side, Dailybot credit on the other.
+           Stacks and centers below the sm breakpoint so it never competes
+           with the sitemap grid for width. -->
+      <div class="flex w-full max-w-4xl flex-col items-center gap-6 text-sm sm:flex-row sm:justify-between">
+        <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 order-2 sm:order-1">
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-secondary transition-colors"
+            style="color: var(--color-muted);"
+          >
+            {t.nav.github}
+          </a>
+          <a
+            href="https://opensource.org/licenses/MIT"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-secondary transition-colors"
+            style="color: var(--color-muted);"
+          >
+            MIT
+          </a>
+        </div>
+
+        <!-- Engineering as marketing: give Dailybot visibility -->
+        <a
+          href="https://www.dailybot.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="order-1 flex items-center gap-2 hover:opacity-80 transition-opacity sm:order-2"
+          aria-label={`${t.footer.poweredBy} Dailybot`}
         >
-        <!-- Decorative within this labeled link (localized aria-label conveys the
-             purpose). alt="" so the logo doesn't add a token that mismatches the
-             localized accessible name (fixes label-content-name-mismatch on /es/). -->
-        <img
-          class="h-5 w-auto block dark:hidden"
-          src="/images/dailybot/logo-horizontal-black.svg"
-          alt=""
-          width="82"
-          height="20"
-          loading="lazy"
-        />
-        <img
-          class="h-5 w-auto hidden dark:block"
-          src="/images/dailybot/logo-horizontal-white.svg"
-          alt=""
-          width="82"
-          height="20"
-          loading="lazy"
-        />
-      </a>
+          <span class="kicker" style="color: var(--color-muted);"
+            >{t.footer.poweredBy}</span
+          >
+          <!-- Decorative within this labeled link (localized aria-label conveys the
+               purpose). alt="" so the logo doesn't add a token that mismatches the
+               localized accessible name (fixes label-content-name-mismatch on /es/). -->
+          <img
+            class="h-5 w-auto block dark:hidden"
+            src="/images/dailybot/logo-horizontal-black.svg"
+            alt=""
+            width="82"
+            height="20"
+            loading="lazy"
+          />
+          <img
+            class="h-5 w-auto hidden dark:block"
+            src="/images/dailybot/logo-horizontal-white.svg"
+            alt=""
+            width="82"
+            height="20"
+            loading="lazy"
+          />
+        </a>
+      </div>
 
       <div class="kicker text-center">
         &copy; <span id="copyright-year">{new Date().getFullYear()}</span> Deep Work
