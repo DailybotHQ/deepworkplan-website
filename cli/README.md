@@ -104,6 +104,10 @@ safe.
   proceeds unaffected.
 - **Manual fallback:** `cd cli && npm publish --access public` (needs an
   npm login with 2FA).
+- **Namespace:** this package intentionally keeps the bare unscoped name
+  `deepworkplan` — it is the client for the site, and the name matches the
+  domain. The `@deepworkplan` npm org scope is reserved for future
+  methodology tooling; do not rename this package into it.
 
 ## License
 

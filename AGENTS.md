@@ -310,6 +310,14 @@ absent, Step 6 skips with a loud warning and the website release proceeds
 unaffected. The token lives only in GitHub Actions secrets — never in the
 tree, never in chat.
 
+**Namespace strategy (deliberate — do not "fix"):** the bare unscoped name
+`deepworkplan` belongs to the *website client*, matching the domain exactly;
+never rename this package to `@deepworkplan/cli`. The `@deepworkplan` npm
+org (reserved 2026-09-13) is the home for future *methodology* packages —
+a methodology installer either grows this same CLI (`deepworkplan init`
+gaining a real installer) or ships under that scope. npm org names and
+unscoped package names are separate namespaces, so both coexist.
+
 ### Local AI Diff Reviewer
 
 The vendored [`ai-diff-reviewer`](.agents/skills/ai-diff-reviewer/) skill remains
