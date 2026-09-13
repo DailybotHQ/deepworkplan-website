@@ -123,6 +123,45 @@ else
   failed "openapi.json" "$OUT"
 fi
 
+# OpenAPI round-2 counters (Task 2 of PLAN_is_agentic_100_round2): JSON
+# content share, 100% named $ref on JSON/linkset schemas, every component a
+# typed object with non-empty properties. Extends (does not replace) the
+# operationId/version check above.
+if OUT=$(DIST="$DIST" node -e '
+  const fs = require("fs");
+  const spec = JSON.parse(fs.readFileSync(`${process.env.DIST}/openapi.json`, "utf8"));
+  const METHODS = new Set(["get","post","put","patch","delete","head","options","trace"]);
+  const JSON_MEDIA = new Set(["application/json", "application/linkset+json"]);
+  let totalOps = 0, jsonOps = 0, inlineJson = 0;
+  for (const [, item] of Object.entries(spec.paths)) {
+    for (const [m, op] of Object.entries(item)) {
+      if (!METHODS.has(m)) continue;
+      totalOps += 1;
+      let hasJson = false;
+      for (const resp of Object.values(op.responses || {})) {
+        for (const [media, ct] of Object.entries(resp.content || {})) {
+          if (!JSON_MEDIA.has(media)) continue;
+          if (media === "application/json") hasJson = true;
+          if (!(ct.schema && ct.schema["$ref"])) inlineJson += 1;
+        }
+      }
+      if (hasJson) jsonOps += 1;
+    }
+  }
+  const schemas = spec.components && spec.components.schemas || {};
+  const untyped = Object.entries(schemas).filter(
+    ([, s]) => s.type !== "object" || !s.properties || Object.keys(s.properties).length === 0
+  );
+  if (jsonOps < 17) { console.error(`only ${jsonOps}/${totalOps} ops declare application/json (want >= 17)`); process.exit(1); }
+  if (inlineJson > 0) { console.error(`${inlineJson} inline (non-$ref) JSON/linkset schema(s) remain`); process.exit(1); }
+  if (untyped.length) { console.error(`untyped component schema(s): ${untyped.map(([n]) => n).join(", ")}`); process.exit(1); }
+  console.log(`${jsonOps}/${totalOps} json-ops; ${Object.keys(schemas).length} typed components; 0 inline`);
+' 2>&1); then
+  passed "openapi.json round-2 counters" "$OUT"
+else
+  failed "openapi.json round-2 counters" "$OUT"
+fi
+
 json_check "well-known/api-catalog" ".well-known/api-catalog" \
   'Array.isArray(doc.linkset) && doc.linkset.every((e) => e.anchor && Array.isArray(e.links) && e.links.every((l) => l.rel && l.href)) === true'
 json_check "well-known/ai-catalog.json" ".well-known/ai-catalog.json"
@@ -341,6 +380,44 @@ else
       passed "extension-bearing 404 (wildcard Accept stays HTML)" "404 + $EXT_WILDCARD_CT"
     else
       failed "extension-bearing 404 (wildcard Accept stays HTML)" "status $EXT_WILDCARD_STATUS, content-type '$EXT_WILDCARD_CT' (want 404 html)"
+    fi
+
+    # JSON content negotiation (Task 1 of PLAN_is_agentic_100_round2): an
+    # explicit application/json Accept on a page path returns the typed
+    # envelope, not HTML.
+    JSON_STATUS=$(edge_status "/" "application/json")
+    JSON_CT=$(curl -s -H "Accept: application/json" -o /dev/null -w '%{content_type}' "$E/")
+    JSON_BODY=$(curl -s -H "Accept: application/json" "$E/")
+    if [ "$JSON_STATUS" = "200" ] && printf '%s' "$JSON_CT" | grep -qi json \
+      && printf '%s' "$JSON_BODY" | grep -q '"contentFormat":"markdown"' \
+      && printf '%s' "$JSON_BODY" | grep -q '"recovery"'; then
+      passed "JSON envelope (Accept: application/json on /)" "200 + $JSON_CT + contentFormat/recovery present"
+    else
+      failed "JSON envelope (Accept: application/json on /)" "status $JSON_STATUS, content-type '$JSON_CT', body: ${JSON_BODY:0:120}"
+    fi
+
+    # Localized JSON envelope: /es/ reports language: es.
+    ES_JSON_BODY=$(curl -s -H "Accept: application/json" "$E/es/")
+    if printf '%s' "$ES_JSON_BODY" | grep -q '"language":"es"'; then
+      passed "JSON envelope language (Accept: application/json on /es/)" '"language":"es"'
+    else
+      failed "JSON envelope language (Accept: application/json on /es/)" "body: ${ES_JSON_BODY:0:120}"
+    fi
+
+    # Precedence: Markdown wins over JSON when both are accepted.
+    BOTH_CT=$(curl -s -H "Accept: text/markdown, application/json" -o /dev/null -w '%{content_type}' "$E/")
+    if printf '%s' "$BOTH_CT" | grep -qi markdown; then
+      passed "negotiation precedence (text/markdown + application/json)" "markdown wins: $BOTH_CT"
+    else
+      failed "negotiation precedence (text/markdown + application/json)" "content-type '$BOTH_CT' (want text/markdown)"
+    fi
+
+    # Browsers are unaffected by the new JSON negotiation branch.
+    BROWSER_CT=$(curl -s -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" -o /dev/null -w '%{content_type}' "$E/")
+    if printf '%s' "$BROWSER_CT" | grep -qi html; then
+      passed "browser Accept on / stays HTML" "$BROWSER_CT"
+    else
+      failed "browser Accept on / stays HTML" "content-type '$BROWSER_CT' (want text/html)"
     fi
 
     # MCP initialize: 200 JSON-RPC result + X-API-Version + RateLimit headers.
