@@ -1344,6 +1344,101 @@ export const tr: SiteTranslations = {
         body: '/api yollarında yapılandırılmış JSON hataları, Markdown 404 kurtarma gövdeleri, RFC 9727 API kataloğu ve bir ARD yetenek manifestosu — ajan tüketimi için tasarlanmıştır.',
       },
     ],
+    planTitle: 'Skill ile planlayın ve yürütün',
+    planIntro:
+      "Yukarıdaki API, bir ajanın bu siteyi okumasını sağlar. DWP skill'i ise bir ajanın metodolojiyi çalıştırmasını sağlayan şeydir — bir depoya bir kez kurulur ve bir yönlendirici ile dokuz alt skill getirir; bunlar eğik çizgi komutları olarak çağrılır (ya da isimle, eğik çizgiyi yakalayan ajanlar için — çoğu bunun yerine # kullanır, örn. #dwp-execute).",
+    formatTitle: 'İki bağımsız seçim: biçim ve ne kadar inceleme istediğiniz',
+    formatIntro:
+      'Her plan her eksenden bir değer seçer. Bunlar birbirinden bağımsızdır — bir Lite plan trust modunda çalışabilir, bir Full plan guided modunda çalışabilir ve her ikisi de biçimi değiştirmeden sonradan modu değiştirebilir.',
+    formatAxes: [
+      {
+        title: 'Lite',
+        body: "Görev kayıtları, planın README'sinde, sabit #task-N çapaları arkasında yaşar — ayrı görev dosyası yoktur. Küçük, sınırlı işler için tasarlanmıştır: tek bir konu, yaklaşık bir oturum. Yine de eksiksiz bir plandır: sabit görev kimlikleri, bir Touched Surface, kabul kriterleri, bir doğrulama kapısı ve bir Final Review — asla sadeleştirilmiş bir taslak değil.",
+      },
+      {
+        title: 'Full',
+        body: "N.task_<slug>.md altında görev başına bir dosya; saatler veya günler süren uzun soluklu işler için, ya da bir planda görevler arasında gerçek bağımlılıklar olduğunda. Kompakt kayıtlar yetmemeye başladığında bir Lite plan /dwp-refine promote ile sonradan Full'e yükseltilir — yükseltme tamamlanmış işi asla yeniden çalıştırmaz.",
+      },
+      {
+        title: 'Guided (varsayılan)',
+        body: "dwp-create hedefi analiz eder, onu ayrıştırır ve incelenebilir bir plan somutlaştırır — bu zaten gerçek, yürütülebilir bir plandır, asla atılacak bir taslak değil — ardından sorar: koru, Lite'ı Full'e yükselt, düzenle ya da durdur. Herhangi bir ürün işi başlamadan önce bir insan döngüde kalır. İlk birkaç seferde ya da daha yüksek riskli her şey için önerilir.",
+      },
+      {
+        title: 'Trust (veya auto)',
+        body: 'Son kelime olarak trust (veya auto) ekleyin — örn. /dwp-create <goal> trust — ve ajan inceleme turunu atlar, önceden onaylanmış bir plan somutlaştırır ve execute komutunu doğrudan döndürür. Akışa güvendiğinizde kullanılacak güçlü kullanıcı kısayolu; yine de her kararı ve her kapıyı kaydeder, sadece sormak için durmaz.',
+      },
+    ],
+    commandsTitle: 'Dokuz alt skill',
+    commandsIntro:
+      "Her alt skill, skill'i kuran deponun içinde bir eğik çizgi komutu olarak çağrılır — bu web sitesine karşı değil. Her biri için tam referans kit kataloğunda yer alır.",
+    commands: [
+      {
+        name: '/dwp-create <goal>',
+        description:
+          'Bir hedefi plana dönüştürür — varsayılan olarak Lite, daha büyük işler için Full; her iki mod da yukarıdaki tablodan seçilir.',
+        href: '/kit/dwp-create',
+      },
+      {
+        name: '/dwp-execute',
+        description:
+          'Var olan bir planı görev görev çalıştırır: tamamen okur, her görevi sırayla yürütür, kapısını doğrular, ilerlemeyi günceller.',
+        href: '/kit/dwp-execute',
+      },
+      {
+        name: '/dwp-refine',
+        description:
+          'Tamamlanmış işi ve kayıtlı kanıtını koruyarak var olan bir plandaki görevleri ekler, kaldırır veya yeniden sıralar.',
+        href: '/kit/dwp-refine',
+      },
+      {
+        name: '/dwp-resume',
+        description:
+          'Durumu planın kendi dosyalarından yeniden inşa eder ve kesintiye uğramış bir planı ilk tamamlanmamış görevinden itibaren sürdürür.',
+        href: '/kit/dwp-resume',
+      },
+      {
+        name: '/dwp-status',
+        description:
+          'Hiçbir değişiklik yapmadan bir planın ilerlemesini raporlar — tamamlanan, sürmekte olan, bekleyen görevler.',
+        href: '/kit/dwp-status',
+      },
+      {
+        name: '/dwp-verify',
+        description:
+          'Deponun AI-first olup olmadığını ve planlarının iyi biçimlendirilip biçimlendirilmediğini mekanik olarak denetler. Hiçbir şeyi değiştirmez; geçti ya da kaldı raporu verir.',
+        href: '/kit/dwp-verify',
+      },
+      {
+        name: '/deepworkplan-onboard',
+        description:
+          'Bir depoyu AI-first hale getirir: yığını hakkında akıl yürütür, ardından uyarlanmış bir AGENTS.md, docs/, .agents/ ve gitignore edilmiş bir .dwp/ üretir.',
+        href: '/kit/deepworkplan-onboard',
+      },
+      {
+        name: '/skill-create, /agent-create',
+        description:
+          "Yazar alt skill'i: deponun kendi kitini büyütür — tekrarlanan bir prosedür için yeniden kullanılabilir bir skill, ya da kendi modeli ve araçlarına sahip yinelenen bir rol için bir ajan.",
+        href: '/kit/skill-create',
+      },
+      {
+        name: '/dwp-upgrade',
+        description:
+          "Daha yeni yayımlanmış bir skill sürümü olup olmadığını denetler ve yalnızca açık onaydan sonra onu kurar, onboarding'i yeni bir geçiş olarak tekrar çalıştırır — .dwp/ altındaki devam eden her plana dokunulmaz.",
+        href: '/kit',
+      },
+    ],
+    examplesTitle: 'Onu çalıştırmanın iki yolu',
+    examplesIntro:
+      'Aynı skill, aynı dokuz komut — biçim ve inceleme modu işin büyüklüğü ve riskiyle değişir, araçla değil.',
+    quickFixLabel: 'Küçük, sınırlı bir düzeltme — Lite, trust',
+    quickFixBody:
+      'Tek bir konu, yaklaşık bir oturum, düşük risk: inceleme turunu atlayın ve ajanın bir Lite planı doğrudan somutlaştırıp çalıştırmasına izin verin.',
+    longHorizonLabel: 'Uzun soluklu iş — Full, guided',
+    longHorizonBody:
+      "Görevler arasında gerçek bağımlılıklar, ya da daha yüksek risk: herhangi bir ürün işi başlamadan önce önerilen planı inceleyin, hedef gerektiriyorsa Full'e yükseltin, ardından gerektikçe oturumlar arasında yürütün ve sürdürün.",
+    planCodeLabel: 'Terminal — eğik çizgi komutları',
+    planNote:
+      "Her planın çıktısı — manifesto, ilerleme günlüğü, görev kayıtları, kapı kanıtı — deponun kendi içinde gitignore edilmiş bir .dwp/ dizininde yaşar. Hiçbir şey deepworkplan.com'a gönderilmez ya da orada saklanmaz; skill hiçbir ağ çağrısı yapmaz.",
     endpointsTitle: 'Uç noktalar',
     endpointsIntro:
       "Ajan API'sinin temel uç noktaları. Eksiksiz ve türlendirilmiş spesifikasyon — her işlem, parametre ve yanıt şeması — OpenAPI belgesinde yer alır.",

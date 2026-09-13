@@ -12,6 +12,52 @@ Không có API key để tạo, không quy trình OAuth, và không có sandbox 
 - **Miễn phí và mã nguồn mở** — nội dung trang web và skill DWP đều theo giấy phép MIT.
 - **Máy trước** — lỗi JSON có cấu trúc trên `/api/*`, phần thân khôi phục 404 bằng Markdown, danh mục API RFC 9727, và manifest năng lực ARD.
 
+## Lập kế hoạch và thực thi bằng skill
+
+API ở trên cho phép agent đọc trang web này. Skill DWP là thứ cho phép agent chạy phương pháp luận — cài đặt một lần vào một repository và nó cung cấp một router cùng chín sub-skill, được gọi dưới dạng slash command (hoặc theo tên, đối với các agent chặn dấu gạch chéo — hầu hết dùng `#` thay thế, ví dụ `#dwp-execute`).
+
+Mỗi kế hoạch chọn một giá trị từ mỗi trong hai trục độc lập:
+
+- **Lite** — bản ghi tác vụ nằm trực tiếp trong README của kế hoạch, phía sau các anchor `#task-N` ổn định. Được xây dựng cho công việc nhỏ, có giới hạn: một mối quan tâm, trong khoảng một lần ngồi làm.
+- **Full** — mỗi tác vụ có một tệp riêng dưới dạng `N.task_<slug>.md`, dành cho công việc dài hơi kéo dài hàng giờ hoặc hàng ngày, hoặc khi có các phụ thuộc thực sự giữa các tác vụ. Một kế hoạch Lite có thể được nâng cấp lên Full sau này bằng `/dwp-refine promote`.
+- **Guided (default)** — `dwp-create` phân tích mục tiêu và cụ thể hóa một kế hoạch có thể rà soát, sau đó hỏi: giữ nguyên, nâng cấp Lite lên Full, chỉnh sửa, hay dừng lại. Con người luôn ở trong vòng lặp trước khi bất kỳ công việc sản phẩm nào bắt đầu.
+- **Trust (or auto)** — thêm `trust` (hoặc `auto`) làm từ cuối cùng, agent sẽ bỏ qua vòng rà soát, cụ thể hóa một kế hoạch đã được phê duyệt trước, và trả về ngay lệnh thực thi.
+
+Chín sub-skill:
+
+| Lệnh | Mô tả |
+|------|-------|
+| `/dwp-create <goal>` | Biến một mục tiêu thành một kế hoạch — mặc định là Lite, Full cho công việc lớn hơn. |
+| `/dwp-execute` | Chạy một kế hoạch hiện có theo từng tác vụ: đọc toàn bộ kế hoạch, thực thi từng tác vụ theo thứ tự, kiểm chứng cổng của nó, cập nhật tiến độ. |
+| `/dwp-refine` | Thêm, xóa, hoặc sắp xếp lại các tác vụ trong một kế hoạch hiện có trong khi vẫn giữ nguyên công việc đã hoàn thành và bằng chứng đã ghi lại của nó. |
+| `/dwp-resume` | Tái tạo trạng thái từ chính các tệp của kế hoạch và tiếp tục một kế hoạch bị gián đoạn từ tác vụ chưa hoàn thành đầu tiên của nó. |
+| `/dwp-status` | Báo cáo tiến độ của một kế hoạch — các tác vụ đã hoàn thành, đang thực hiện, đang chờ — mà không thực hiện bất kỳ thay đổi nào. |
+| `/dwp-verify` | Kiểm tra, một cách máy móc, xem repository có phải AI-first hay không và các kế hoạch của nó có đúng định dạng hay không. |
+| `/deepworkplan-onboard` | Biến một repository thành AI-first: tạo ra `AGENTS.md`, `docs/`, `.agents/` đã được điều chỉnh, và một `.dwp/` được gitignore. |
+| `/skill-create`, `/agent-create` | Sub-skill dành cho tác giả: phát triển kit của chính repository. |
+| `/dwp-upgrade` | Kiểm tra xem có bản phát hành skill mới hơn hay không, và chỉ cài đặt sau khi được phê duyệt rõ ràng, rồi chạy lại onboarding. |
+
+Một bản sửa lỗi nhỏ, có giới hạn — Lite, trust:
+
+```bash
+# A small, bounded fix: skip the review round, run it directly.
+/dwp-create fix the flaky checkout test trust
+/dwp-execute
+```
+
+Công việc dài hơi — Full, guided:
+
+```bash
+# Long-horizon work with real stakes: review before anything runs.
+/dwp-create migrate the billing service to the new payments API
+# ...review the proposed plan, then:
+/dwp-execute
+# ...interrupted? pick up again, even in a fresh session:
+/dwp-resume
+```
+
+Đầu ra của mỗi kế hoạch — manifest, nhật ký tiến độ, bản ghi tác vụ, bằng chứng cổng — nằm trong một thư mục `.dwp/` được gitignore, bên trong chính repository. Không có gì được gửi đến hay lưu trữ bởi deepworkplan.com.
+
 ## Các endpoint
 
 | Phương thức | Đường dẫn | Mục đích |

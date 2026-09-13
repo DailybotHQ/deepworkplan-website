@@ -12,6 +12,52 @@ Il n’y a aucune clé d’API à générer, aucun flux OAuth et aucun bac à sa
 - **Gratuit et open source** — le contenu du site et la skill DWP sont sous licence MIT.
 - **Pensé d’abord pour les machines** — erreurs JSON structurées sur `/api/*`, corps de récupération 404 en Markdown, un catalogue d’API RFC 9727 et un manifeste de capacités ARD.
 
+## Planifier et exécuter avec la skill
+
+L’API décrite ci-dessus permet à un agent de lire ce site. La skill DWP est ce qui permet à un agent d’exécuter la méthodologie — installez-la une fois dans un dépôt, et elle fournit un routeur plus neuf sub-skills, invoquées comme des commandes slash (ou par leur nom, pour les agents qui interceptent le `/` — la plupart utilisent `#` à la place, par exemple `#dwp-execute`).
+
+Chaque plan choisit une valeur sur chacun des deux axes indépendants :
+
+- **Lite** — les enregistrements de tâches vivent en ligne dans le README du plan, derrière des ancres stables `#task-N`. Conçu pour un travail petit et borné : une seule préoccupation, environ une session.
+- **Full** — un fichier par tâche sous `N.task_<slug>.md`, pour un travail à long horizon s’étendant sur des heures ou des jours, ou lorsque les tâches ont de vraies dépendances. Un plan Lite est promu en Full plus tard avec `/dwp-refine promote`.
+- **Guided (par défaut)** — `dwp-create` analyse l’objectif, le décompose et matérialise un plan relisible, puis demande : le conserver, promouvoir Lite en Full, le modifier, ou arrêter. Un humain reste dans la boucle avant que tout travail produit ne commence.
+- **Trust (ou auto)** — ajoutez `trust` (ou `auto`) comme dernier mot, par exemple `/dwp-create <goal> trust`, et l’agent saute le tour de relecture et renvoie directement la commande d’exécution.
+
+Les neuf sub-skills :
+
+| Commande | Objectif |
+|----------|----------|
+| `/dwp-create <goal>` | Transforme un objectif en plan — Lite par défaut, Full pour un travail plus important. |
+| `/dwp-execute` | Exécute un plan existant tâche par tâche : le lit intégralement, exécute chaque tâche dans l’ordre, valide sa porte, met à jour la progression. |
+| `/dwp-refine` | Ajoute, supprime ou réordonne des tâches dans un plan existant tout en préservant le travail terminé et ses preuves enregistrées. |
+| `/dwp-resume` | Reconstruit l’état à partir des propres fichiers du plan et poursuit un plan interrompu depuis sa première tâche incomplète. |
+| `/dwp-status` | Rapporte la progression d’un plan — tâches terminées, en cours, en attente — sans effectuer aucun changement. |
+| `/dwp-verify` | Vérifie, mécaniquement, si le dépôt est AI-first et si ses plans sont bien formés. Ne change rien ; rapporte réussite ou échec. |
+| `/deepworkplan-onboard` | Rend un dépôt AI-first : raisonne sur sa stack, puis génère un `AGENTS.md` adapté, `docs/`, `.agents/`, et un `.dwp/` ignoré par git. |
+| `/skill-create`, `/agent-create` | La sub-skill auteure : fait grandir le kit propre du dépôt — une skill réutilisable pour une procédure répétable, ou un agent pour un rôle récurrent avec son propre modèle et ses propres outils. |
+| `/dwp-upgrade` | Vérifie s’il existe une version plus récente de la skill publiée et, seulement après approbation explicite, l’installe et relance l’intégration. |
+
+Une correction petite et bornée — Lite, trust :
+
+```bash
+# A small, bounded fix: skip the review round, run it directly.
+/dwp-create fix the flaky checkout test trust
+/dwp-execute
+```
+
+Travail à long horizon — Full, guided :
+
+```bash
+# Long-horizon work with real stakes: review before anything runs.
+/dwp-create migrate the billing service to the new payments API
+# ...review the proposed plan, then:
+/dwp-execute
+# ...interrupted? pick up again, even in a fresh session:
+/dwp-resume
+```
+
+La sortie de chaque plan — manifeste, journal de progression, enregistrements de tâches, preuves de porte — vit dans un répertoire `.dwp/` ignoré par git, dans le dépôt lui-même. Rien n’est envoyé à ni stocké par deepworkplan.com ; la skill n’effectue aucun appel réseau.
+
 ## Endpoints
 
 | Méthode | Chemin | Rôle |

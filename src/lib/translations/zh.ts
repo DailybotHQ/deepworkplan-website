@@ -1316,6 +1316,101 @@ export const zh: SiteTranslations = {
         body: '/api 路径返回结构化的 JSON 错误、Markdown 404 恢复响应体、RFC 9727 API 目录，以及 ARD 能力清单——为代理消费而构建。',
       },
     ],
+    planTitle: '通过技能规划并执行',
+    planIntro:
+      '上面的 API 让代理能够读取本站点。DWP 技能则让代理能够运行这套方法论——只需在仓库中安装一次，它就会附带一个路由器和九项子技能，以斜杠命令的形式调用（或按名称调用，对于会拦截斜杠的代理，大多数改用 # 代替，例如 #dwp-execute）。',
+    formatTitle: '两个独立的选择：格式，以及你想要多少审阅',
+    formatIntro:
+      '每个计划都从每个维度中选取一个值。这两个维度相互独立——Lite 计划可以以 trust 模式运行，Full 计划也可以以 guided 模式运行，而且两者都可以在之后切换模式而不切换格式。',
+    formatAxes: [
+      {
+        title: 'Lite',
+        body: '任务记录直接内嵌在计划的 README 中，位于稳定的 #task-N 锚点之后——没有单独的任务文件。专为范围明确的小型工作而设计：一个关注点，大约一次坐下就能完成。它仍然是一份完整的计划：稳定的任务 ID、Touched Surface、验收标准、验证关卡与 Final Review——绝不是被削减过的草图。',
+      },
+      {
+        title: 'Full',
+        body: '在 N.task_<slug>.md 下每个任务对应一个文件，用于持续数小时或数天的长周期工作，或当计划中任务之间存在真正的依赖关系时。当紧凑记录不再够用时，Lite 计划可以之后通过 /dwp-refine promote 提升为 Full——提升过程绝不会重新执行已完成的工作。',
+      },
+      {
+        title: 'Guided (default)',
+        body: 'dwp-create 会分析目标、对其进行分解，并具体化出一份可供审阅的计划——它已经是真正可执行的计划，而不是可丢弃的草稿——随后询问：保留它、将 Lite 提升为 Full、编辑它，还是停止。在任何实际产品工作开始之前，都会有人类留在决策环节中。建议在最初几次使用时，或用于风险较高的工作。',
+      },
+      {
+        title: 'Trust (or auto)',
+        body: '在末尾附加 trust（或 auto）——例如 /dwp-create <goal> trust——代理就会跳过审阅环节，直接具体化出一份预先批准的计划，并直接返回执行命令。这是当你信任这套流程之后，给高级用户准备的捷径；它依然会记录每一个决策与关卡，只是不会停下来询问。',
+      },
+    ],
+    commandsTitle: '九项子技能',
+    commandsIntro:
+      '每一项子技能都作为斜杠命令，在安装了该技能的仓库内部调用——而不是针对本网站。每一项的完整参考文档都在套件目录中。',
+    commands: [
+      {
+        name: '/dwp-create <goal>',
+        description:
+          '把一个目标变成一份计划——默认是 Lite，更大的工作则用 Full，两种模式均如上表所述。',
+        href: '/kit/dwp-create',
+      },
+      {
+        name: '/dwp-execute',
+        description:
+          '逐任务运行一份既有计划：完整读取计划，按顺序执行每个任务，验证其关卡，更新进度。',
+        href: '/kit/dwp-execute',
+      },
+      {
+        name: '/dwp-refine',
+        description:
+          '在保留已完成工作及其记录证据的前提下，对既有计划中的任务进行增加、移除或重新排序。',
+        href: '/kit/dwp-refine',
+      },
+      {
+        name: '/dwp-resume',
+        description:
+          '从计划自身的文件中重建状态，并从第一个未完成的任务继续一份被中断的计划。',
+        href: '/kit/dwp-resume',
+      },
+      {
+        name: '/dwp-status',
+        description:
+          '报告一份计划的进度——已完成、进行中、待处理的任务——而不做任何改动。',
+        href: '/kit/dwp-status',
+      },
+      {
+        name: '/dwp-verify',
+        description:
+          '机械式地检查该仓库是否 AI-first，以及其计划是否格式规范。不改动任何内容；只报告通过或失败。',
+        href: '/kit/dwp-verify',
+      },
+      {
+        name: '/deepworkplan-onboard',
+        description:
+          '让一个仓库变得 AI-first：先推理其技术栈，再生成经过适配的 AGENTS.md、docs/、.agents/，以及一个被 gitignore 的 .dwp/。',
+        href: '/kit/deepworkplan-onboard',
+      },
+      {
+        name: '/skill-create, /agent-create',
+        description:
+          '作者向的子技能：壮大仓库自身的套件——为可重复的流程添加一项可复用的技能，或为一个经常性的角色添加一个拥有自己模型与工具的代理。',
+        href: '/kit/skill-create',
+      },
+      {
+        name: '/dwp-upgrade',
+        description:
+          '检查是否有已发布的更新版技能，并且只有在获得明确批准后，才安装它并将上线流程作为全新的一遍重新执行——.dwp/ 下每一份进行中的计划都保持不变。',
+        href: '/kit',
+      },
+    ],
+    examplesTitle: '两种运行方式',
+    examplesIntro:
+      '同一项技能，同样的九个命令——随工作的规模与风险而变化的是格式与审阅模式，而不是工具本身。',
+    quickFixLabel: '一次范围明确的小修复——Lite、trust',
+    quickFixBody:
+      '一个关注点，大约一次坐下就能完成，风险较低：跳过审阅环节，直接让代理具体化并运行一份 Lite 计划。',
+    longHorizonLabel: '长周期工作——Full、guided',
+    longHorizonBody:
+      '任务之间存在真正的依赖关系，或者风险较高：在任何产品工作开始之前先审阅提议的计划，如果目标确实需要就提升为 Full，然后按需跨会话执行与恢复。',
+    planCodeLabel: '终端——斜杠命令',
+    planNote:
+      '每一份计划的输出——清单、进度日志、任务记录、关卡证据——都保存在仓库自身内部一个被 gitignore 的 .dwp/ 目录下。没有任何内容会被发送到 deepworkplan.com 或由其存储；该技能完全不发起任何网络调用。',
     endpointsTitle: '端点',
     endpointsIntro:
       '代理 API 的核心端点。完整且带类型的规范——每一项操作、参数与响应模式——位于 OpenAPI 文档中。',

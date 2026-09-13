@@ -366,6 +366,27 @@ export interface SiteTranslations {
     accessTitle: string;
     accessIntro: string;
     accessPoints: { title: string; body: string }[];
+    planTitle: string;
+    planIntro: string;
+    formatTitle: string;
+    formatIntro: string;
+    // Four combinations: Lite, Full (the format axis) and Guided, Trust (the
+    // review axis) — title/body pairs, same shape as accessPoints.
+    formatAxes: { title: string; body: string }[];
+    commandsTitle: string;
+    commandsIntro: string;
+    // name is code (never localized); description is translated; href points
+    // at the matching /kit/{slug} detail page (unlocalized path, prefixed by
+    // the template like every other internal link).
+    commands: { name: string; description: string; href: string }[];
+    examplesTitle: string;
+    examplesIntro: string;
+    quickFixLabel: string;
+    quickFixBody: string;
+    longHorizonLabel: string;
+    longHorizonBody: string;
+    planCodeLabel: string;
+    planNote: string;
     endpointsTitle: string;
     endpointsIntro: string;
     endpointsNote: string;

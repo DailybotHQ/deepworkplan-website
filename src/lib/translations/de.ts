@@ -1344,6 +1344,102 @@ export const de: SiteTranslations = {
         body: 'Strukturierte JSON-Fehler auf /api-Pfaden, Markdown-Wiederherstellungstexte bei 404, ein RFC-9727-API-Katalog und ein ARD-Fähigkeitsmanifest — gebaut für die Nutzung durch Agenten.',
       },
     ],
+    planTitle: 'Planen und mit der Skill ausführen',
+    planIntro:
+      'Die API oben lässt einen Agenten diese Website lesen. Die DWP-Skill lässt einen Agenten die Methodik ausführen — installieren Sie sie einmal in einem Repository, und sie liefert einen Router plus neun Sub-Skills, aufgerufen als Slash-Befehle (oder namentlich, für Agenten, die Slash abfangen — die meisten verwenden stattdessen #, z. B. #dwp-execute).',
+    formatTitle:
+      'Zwei unabhängige Entscheidungen: Format und gewünschter Review-Umfang',
+    formatIntro:
+      'Jeder Plan wählt einen Wert aus jeder Achse. Sie sind unabhängig — ein Lite-Plan kann trust ausführen, ein Full-Plan kann guided ausführen, und beide können den Modus später wechseln, ohne das Format zu wechseln.',
+    formatAxes: [
+      {
+        title: 'Lite',
+        body: 'Aufgabenprotokolle leben inline im README des Plans, hinter stabilen #task-N-Ankern — keine separaten Aufgabendateien. Gebaut für kleine, begrenzte Arbeit: ein Anliegen, ungefähr eine Sitzung. Trotzdem ein vollständiger Plan: stabile Aufgaben-IDs, eine Touched Surface, Akzeptanzkriterien, ein Validierungs-Gate und ein Final Review — nie eine abgespeckte Skizze.',
+      },
+      {
+        title: 'Full',
+        body: 'Eine Datei pro Aufgabe unter N.task_<slug>.md, für langfristige Arbeit über Stunden oder Tage, oder wenn ein Plan echte Abhängigkeiten zwischen Aufgaben hat. Ein Lite-Plan wird später mit /dwp-refine promote zu Full befördert, wenn kompakte Protokolle nicht mehr ausreichen — die Beförderung führt abgeschlossene Arbeit nie erneut aus.',
+      },
+      {
+        title: 'Guided (Standard)',
+        body: 'dwp-create analysiert das Ziel, zerlegt es und materialisiert einen überprüfbaren Plan — bereits der echte, ausführbare Plan, nie eine Wegwerfskizze — und fragt dann: behalten, Lite zu Full befördern, bearbeiten oder abbrechen. Ein Mensch bleibt im Loop, bevor irgendeine Produktarbeit beginnt. Empfohlen für die ersten Male oder bei allem mit höherem Risiko.',
+      },
+      {
+        title: 'Trust (oder auto)',
+        body: 'Hängen Sie trust (oder auto) als letztes Wort an — z. B. /dwp-create <goal> trust — und der Agent überspringt die Review-Runde, materialisiert einen vorab genehmigten Plan und liefert direkt den Ausführungsbefehl zurück. Die Abkürzung für erfahrene Nutzer, sobald Sie dem Ablauf vertrauen; er protokolliert weiterhin jede Entscheidung und jedes Gate, fragt nur nicht nach.',
+      },
+    ],
+    commandsTitle: 'Die neun Sub-Skills',
+    commandsIntro:
+      'Jede Sub-Skill wird als Slash-Befehl innerhalb des Repositorys aufgerufen, in dem die Skill installiert ist — nicht gegen diese Website. Die vollständige Referenz für jede lebt im Kit-Katalog.',
+    commands: [
+      {
+        name: '/dwp-create <goal>',
+        description:
+          'Verwandelt ein Ziel in einen Plan — standardmäßig Lite, Full für größere Arbeit, beide Modi aus der Tabelle oben.',
+        href: '/kit/dwp-create',
+      },
+      {
+        name: '/dwp-execute',
+        description:
+          'Führt einen bestehenden Plan Aufgabe für Aufgabe aus: liest ihn vollständig, führt jede Aufgabe der Reihe nach aus, validiert ihr Gate, aktualisiert den Fortschritt.',
+        href: '/kit/dwp-execute',
+      },
+      {
+        name: '/dwp-refine',
+        description:
+          'Fügt Aufgaben in einem bestehenden Plan hinzu, entfernt oder ordnet sie neu, ohne abgeschlossene Arbeit und ihre protokollierten Nachweise zu verlieren.',
+        href: '/kit/dwp-refine',
+      },
+      {
+        name: '/dwp-resume',
+        description:
+          'Rekonstruiert den Zustand aus den eigenen Dateien des Plans und setzt einen unterbrochenen Plan bei seiner ersten unvollständigen Aufgabe fort.',
+        href: '/kit/dwp-resume',
+      },
+      {
+        name: '/dwp-status',
+        description:
+          'Meldet den Fortschritt eines Plans — abgeschlossen, in Arbeit, ausstehende Aufgaben — ohne etwas zu verändern.',
+        href: '/kit/dwp-status',
+      },
+      {
+        name: '/dwp-verify',
+        description:
+          'Prüft mechanisch, ob das Repository AI-first ist und ob seine Pläne wohlgeformt sind. Ändert nichts; meldet bestanden oder nicht bestanden.',
+        href: '/kit/dwp-verify',
+      },
+      {
+        name: '/deepworkplan-onboard',
+        description:
+          'Macht ein Repository AI-first: denkt über seinen Stack nach und erzeugt dann eine angepasste AGENTS.md, docs/, .agents/ und ein gitignoriertes .dwp/.',
+        href: '/kit/deepworkplan-onboard',
+      },
+      {
+        name: '/skill-create, /agent-create',
+        description:
+          'Die Autoren-Sub-Skill: lässt das eigene Kit des Repositorys wachsen — eine wiederverwendbare Skill für ein wiederholbares Verfahren oder einen Agenten für eine wiederkehrende Rolle mit eigenem Modell und eigenen Tools.',
+        href: '/kit/skill-create',
+      },
+      {
+        name: '/dwp-upgrade',
+        description:
+          'Prüft auf ein neueres veröffentlichtes Skill-Release und installiert es — erst nach ausdrücklicher Zustimmung — und führt das Onboarding als frischen Durchlauf erneut aus; jeder laufende Plan unter .dwp/ bleibt unangetastet.',
+        href: '/kit',
+      },
+    ],
+    examplesTitle: 'Zwei Wege, sie auszuführen',
+    examplesIntro:
+      'Dieselbe Skill, dieselben neun Befehle — Format und Review-Modus ändern sich mit der Größe und dem Risiko der Arbeit, nicht mit dem Werkzeug.',
+    quickFixLabel: 'Eine kleine, begrenzte Korrektur — Lite, trust',
+    quickFixBody:
+      'Ein Anliegen, ungefähr eine Sitzung, geringes Risiko: die Review-Runde überspringen und den Agenten einen Lite-Plan direkt materialisieren und ausführen lassen.',
+    longHorizonLabel: 'Langfristige Arbeit — Full, guided',
+    longHorizonBody:
+      'Echte Abhängigkeiten zwischen Aufgaben oder höheres Risiko: den vorgeschlagenen Plan prüfen, bevor irgendeine Produktarbeit beginnt, bei Bedarf zu Full befördern, dann ausführen und bei Bedarf über Sitzungen hinweg fortsetzen.',
+    planCodeLabel: 'Terminal — Slash-Befehle',
+    planNote:
+      'Die Ausgabe jedes Plans — Manifest, Fortschrittsprotokoll, Aufgabenprotokolle, Gate-Nachweise — lebt in einem gitignorierten .dwp/-Verzeichnis im Repository selbst. Nichts wird an deepworkplan.com gesendet oder dort gespeichert; die Skill führt überhaupt keine Netzwerkaufrufe aus.',
     endpointsTitle: 'Endpunkte',
     endpointsIntro:
       'Die Kern-Endpunkte der Agent-API. Die vollständige, typisierte Spezifikation — jede Operation, jeder Parameter und jedes Antwort-Schema — liegt im OpenAPI-Dokument.',

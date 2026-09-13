@@ -1331,6 +1331,102 @@ export const en: SiteTranslations = {
         body: 'Structured JSON errors on /api paths, Markdown 404 recovery bodies, RFC 9727 API catalog, and an ARD capability manifest — built for agent consumption.',
       },
     ],
+    planTitle: 'Plan and execute with the skill',
+    planIntro:
+      'The API above lets an agent read this site. The DWP skill is what lets an agent run the methodology — install it once in a repository and it ships a router plus nine sub-skills, invoked as slash commands (or by name, for agents that intercept slash — most use # instead, e.g. #dwp-execute).',
+    formatTitle:
+      'Two independent choices: format, and how much review you want',
+    formatIntro:
+      'Every plan picks one value from each axis. They are independent — a Lite plan can run trust, a Full plan can run guided, and either can switch mode later without switching format.',
+    formatAxes: [
+      {
+        title: 'Lite',
+        body: 'Task records live inline in the plan’s README, behind stable #task-N anchors — no separate task files. Built for small, bounded work: one concern, roughly one sitting. Still a complete plan: stable task ids, a Touched Surface, acceptance criteria, a validation gate, and a Final Review — never a stripped-down sketch.',
+      },
+      {
+        title: 'Full',
+        body: 'One file per task under N.task_<slug>.md, for long-horizon work spanning hours or days, or when a plan has real dependencies between tasks. A Lite plan promotes to Full later with /dwp-refine promote when compact records stop being enough — promotion never re-executes finished work.',
+      },
+      {
+        title: 'Guided (default)',
+        body: 'dwp-create analyzes the goal, decomposes it, and materializes a reviewable plan — already the real, executable plan, never a throwaway draft — then asks: retain it, promote Lite to Full, edit it, or stop. A human stays in the loop before any product work starts. Recommended the first few times, or for anything higher-stakes.',
+      },
+      {
+        title: 'Trust (or auto)',
+        body: 'Append trust (or auto) as the last word — e.g. /dwp-create <goal> trust — and the agent skips the review round, materializes a pre-approved plan, and returns the execute command directly. The power-user shortcut once you trust the flow; still records every decision and gate, it just does not stop to ask.',
+      },
+    ],
+    commandsTitle: 'The nine sub-skills',
+    commandsIntro:
+      'Each sub-skill is invoked as a slash command inside the repository that installed the skill — not against this website. The full reference for each lives in the kit catalog.',
+    commands: [
+      {
+        name: '/dwp-create <goal>',
+        description:
+          'Turn a goal into a plan — Lite by default, Full for larger work, either mode from the table above.',
+        href: '/kit/dwp-create',
+      },
+      {
+        name: '/dwp-execute',
+        description:
+          'Run an existing plan task by task: read it fully, execute each task in order, validate its gate, update progress.',
+        href: '/kit/dwp-execute',
+      },
+      {
+        name: '/dwp-refine',
+        description:
+          'Add, remove, or reorder tasks in an existing plan while preserving completed work and its recorded evidence.',
+        href: '/kit/dwp-refine',
+      },
+      {
+        name: '/dwp-resume',
+        description:
+          'Reconstruct state from the plan’s own files and continue an interrupted plan from its first incomplete task.',
+        href: '/kit/dwp-resume',
+      },
+      {
+        name: '/dwp-status',
+        description:
+          'Report a plan’s progress — completed, in-progress, pending tasks — without making any change.',
+        href: '/kit/dwp-status',
+      },
+      {
+        name: '/dwp-verify',
+        description:
+          'Check, mechanically, whether the repository is AI-first and whether its plans are well-formed. Changes nothing; reports pass or fail.',
+        href: '/kit/dwp-verify',
+      },
+      {
+        name: '/deepworkplan-onboard',
+        description:
+          'Make a repository AI-first: reason about its stack, then generate an adapted AGENTS.md, docs/, .agents/, and a gitignored .dwp/.',
+        href: '/kit/deepworkplan-onboard',
+      },
+      {
+        name: '/skill-create, /agent-create',
+        description:
+          'The author sub-skill: grow the repository’s own kit — a reusable skill for a repeatable procedure, or an agent for a recurring role with its own model and tools.',
+        href: '/kit/skill-create',
+      },
+      {
+        name: '/dwp-upgrade',
+        description:
+          'Check for a newer published skill release and, only after explicit approval, install it and re-run onboarding as a fresh pass — every in-flight plan under .dwp/ is left untouched.',
+        href: '/kit',
+      },
+    ],
+    examplesTitle: 'Two ways to run it',
+    examplesIntro:
+      'The same skill, the same nine commands — the format and review mode change with the size and stakes of the work, not the tool.',
+    quickFixLabel: 'A small, bounded fix — Lite, trust',
+    quickFixBody:
+      'One concern, roughly one sitting, low stakes: skip the review round and let the agent materialize and run a Lite plan directly.',
+    longHorizonLabel: 'Long-horizon work — Full, guided',
+    longHorizonBody:
+      'Real dependencies between tasks, or higher stakes: review the proposed plan before any product work starts, promote to Full if the goal turns out to need it, then execute and resume across sessions as needed.',
+    planCodeLabel: 'Terminal — slash commands',
+    planNote:
+      'Every plan’s output — manifest, progress log, task records, gate evidence — lives under a gitignored .dwp/ directory in the repository itself. Nothing is sent to or stored by deepworkplan.com; the skill makes no network calls at all.',
     endpointsTitle: 'Endpoints',
     endpointsIntro:
       'The core endpoints of the agent API. The complete, typed specification — every operation, parameter, and response schema — lives at the OpenAPI document.',

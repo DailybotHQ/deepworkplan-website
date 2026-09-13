@@ -12,6 +12,52 @@ description: "Deep Work Plan のエージェントサーフェス：読み取り
 - **無料かつオープンソース** — サイトのコンテンツと DWP スキルは MIT ライセンスです。
 - **マシンファースト** — `/api/*` での構造化 JSON エラー、Markdown の 404 リカバリーボディ、RFC 9727 API カタログ、ARD 能力マニフェスト。
 
+## スキルで計画し、実行する
+
+上記の API はエージェントがこのサイトを読み取ることを可能にします。DWP スキルは、エージェントが方法論を実行することを可能にするものです——リポジトリに一度インストールすれば、ルーターと九つのサブスキルが提供され、スラッシュコマンドとして（または名前で、スラッシュを傍受するエージェントの場合はほとんどが代わりに `#` を使います。例：`#dwp-execute`）呼び出せます。
+
+すべての計画は、二つの独立した軸からそれぞれ一つの値を選びます。
+
+- **Lite** — タスク記録は計画の README 内に、安定した `#task-N` アンカーの下でインラインに存在します。小さく範囲の定まった作業向けです:一つの関心事を、おおよそ一回の作業時間で。
+- **Full** — `N.task_<slug>.md` の下にタスクごとに一つのファイルを持ちます。数時間から数日にわたる長期的な作業や、タスク間に実際の依存関係がある場合向けです。Lite の計画は後から `/dwp-refine promote` で Full に昇格できます。
+- **Guided (default)** — `dwp-create` は目標を分析し、レビュー可能な計画を具体化してから、そのまま採用するか、Lite を Full に昇格するか、編集するか、停止するかを尋ねます。実際のプロダクト作業が始まる前に、人間がループに留まります。
+- **Trust (or auto)** — 最後の単語として `trust`（または `auto`）を付け加えると、エージェントはレビューの段階を省略し、事前承認済みの計画を具体化して、実行コマンドを直接返します。
+
+九つのサブスキル:
+
+| コマンド | 内容 |
+|---------|------|
+| `/dwp-create <goal>` | 目標を計画に変えます——デフォルトは Lite、より大きな作業には Full。 |
+| `/dwp-execute` | 既存の計画をタスクごとに実行します:計画全体を読み、各タスクを順番に実行し、そのゲートを検証し、進捗を更新します。 |
+| `/dwp-refine` | 完了した作業とその記録された証拠を保持したまま、既存の計画のタスクを追加・削除・並べ替えます。 |
+| `/dwp-resume` | 計画自身のファイルから状態を再構築し、中断された計画を最初の未完了タスクから継続します。 |
+| `/dwp-status` | 計画の進捗——完了・進行中・保留中のタスク——を、何も変更せずに報告します。 |
+| `/dwp-verify` | リポジトリが AI-first であるか、その計画群が適切な形式であるかを機械的にチェックします。 |
+| `/deepworkplan-onboard` | リポジトリを AI-first にします:適応した `AGENTS.md`、`docs/`、`.agents/`、そして gitignore された `.dwp/` を生成します。 |
+| `/skill-create`、`/agent-create` | 作者向けのサブスキルです:リポジトリ自身のキットを育てます。 |
+| `/dwp-upgrade` | 公開されている新しいスキルのリリースを確認し、承認後にのみインストールしてオンボーディングを再実行します。 |
+
+小さく範囲の定まった修正——Lite、trust:
+
+```bash
+# A small, bounded fix: skip the review round, run it directly.
+/dwp-create fix the flaky checkout test trust
+/dwp-execute
+```
+
+長期にわたる作業——Full、guided:
+
+```bash
+# Long-horizon work with real stakes: review before anything runs.
+/dwp-create migrate the billing service to the new payments API
+# ...review the proposed plan, then:
+/dwp-execute
+# ...interrupted? pick up again, even in a fresh session:
+/dwp-resume
+```
+
+すべての計画の出力——マニフェスト、進捗ログ、タスク記録、ゲートの証拠——は、リポジトリ自体の中にある gitignore された `.dwp/` ディレクトリの下に置かれます。deepworkplan.com に送信されたり保存されたりすることは一切ありません。
+
 ## エンドポイント
 
 | メソッド | パス | 用途 |

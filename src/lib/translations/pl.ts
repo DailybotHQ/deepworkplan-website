@@ -1344,6 +1344,101 @@ export const pl: SiteTranslations = {
         body: 'Ustrukturyzowane błędy JSON na ścieżkach /api, treści odzyskiwania 404 w Markdown, katalog API RFC 9727 i manifest możliwości ARD — zbudowane do konsumpcji przez agentów.',
       },
     ],
+    planTitle: 'Planuj i wykonuj za pomocą skilla',
+    planIntro:
+      'Powyższe API pozwala agentowi czytać tę witrynę. Skill DWP to to, co pozwala agentowi uruchamiać metodykę — zainstaluj go raz w repozytorium, a przyniesie router plus dziewięć sub-skilli, wywoływanych jako komendy ze slashem (albo po nazwie — dla agentów przechwytujących slash, większość używa zamiast tego #, np. #dwp-execute).',
+    formatTitle: 'Dwa niezależne wybory: format i ile chcesz recenzji',
+    formatIntro:
+      'Każdy plan wybiera jedną wartość na każdej osi. Są niezależne — plan Lite może działać w trust, plan Full może działać w guided, i każdy z nich może później przełączyć tryb bez zmiany formatu.',
+    formatAxes: [
+      {
+        title: 'Lite',
+        body: 'Zapisy zadań żyją bezpośrednio w README planu, za stabilnymi kotwicami #task-N — bez osobnych plików zadań. Zbudowany dla małej, ograniczonej pracy: jedna sprawa, mniej więcej jedna sesja. Wciąż pełny plan: stabilne id zadań, Touched Surface, kryteria akceptacji, bramka walidacji i Final Review — nigdy okrojony szkic.',
+      },
+      {
+        title: 'Full',
+        body: 'Jeden plik na zadanie pod N.task_<slug>.md — dla pracy długoterminowej rozciągniętej na godziny lub dni, albo gdy plan ma realne zależności między zadaniami. Plan Lite jest później promowany do Full poleceniem /dwp-refine promote, gdy kompaktowe zapisy przestają wystarczać — promocja nigdy nie wykonuje ponownie ukończonej już pracy.',
+      },
+      {
+        title: 'Guided (domyślnie)',
+        body: 'dwp-create analizuje cel, dekomponuje go i materializuje plan gotowy do recenzji — już rzeczywisty, wykonywalny plan, nigdy jednorazowy szkic — a potem pyta: zachować go, promować Lite do Full, edytować czy zatrzymać. Człowiek pozostaje w pętli przed rozpoczęciem jakiejkolwiek pracy produktowej. Zalecane w pierwsze kilka razy albo dla czegoś o wyższej stawce.',
+      },
+      {
+        title: 'Trust (lub auto)',
+        body: 'Dodaj trust (lub auto) jako ostatnie słowo — np. /dwp-create <goal> trust — a agent pomija rundę recenzji, materializuje wcześniej zatwierdzony plan i od razu zwraca komendę wykonania. Skrót dla zaawansowanych użytkowników, gdy już ufasz przepływowi; wciąż zapisuje każdą decyzję i bramkę, po prostu nie zatrzymuje się, by zapytać.',
+      },
+    ],
+    commandsTitle: 'Dziewięć sub-skilli',
+    commandsIntro:
+      'Każdy sub-skill jest wywoływany jako komenda ze slashem wewnątrz repozytorium, które zainstalowało skilla — nie wobec tej witryny. Pełne odniesienie dla każdego znajduje się w katalogu kitu.',
+    commands: [
+      {
+        name: '/dwp-create <goal>',
+        description:
+          'Zamienia cel w plan — Lite domyślnie, Full dla większej pracy, dowolny tryb z tabeli powyżej.',
+        href: '/kit/dwp-create',
+      },
+      {
+        name: '/dwp-execute',
+        description:
+          'Wykonuje istniejący plan zadanie po zadaniu: czyta go w całości, wykonuje każde zadanie po kolei, waliduje jego bramkę, aktualizuje postęp.',
+        href: '/kit/dwp-execute',
+      },
+      {
+        name: '/dwp-refine',
+        description:
+          'Dodaje, usuwa lub zmienia kolejność zadań w istniejącym planie, zachowując ukończoną pracę i jej zarejestrowane dowody.',
+        href: '/kit/dwp-refine',
+      },
+      {
+        name: '/dwp-resume',
+        description:
+          'Odtwarza stan z własnych plików planu i kontynuuje przerwany plan od pierwszego nieukończonego zadania.',
+        href: '/kit/dwp-resume',
+      },
+      {
+        name: '/dwp-status',
+        description:
+          'Raportuje postęp planu — zadania ukończone, w toku, oczekujące — bez wprowadzania żadnych zmian.',
+        href: '/kit/dwp-status',
+      },
+      {
+        name: '/dwp-verify',
+        description:
+          'Mechanicznie sprawdza, czy repozytorium jest AI-first i czy jego plany są dobrze skonstruowane. Niczego nie zmienia; raportuje pass albo fail.',
+        href: '/kit/dwp-verify',
+      },
+      {
+        name: '/deepworkplan-onboard',
+        description:
+          'Czyni repozytorium AI-first: analizuje jego stack, a następnie generuje dostosowany AGENTS.md, docs/, .agents/ i ignorowany przez git .dwp/.',
+        href: '/kit/deepworkplan-onboard',
+      },
+      {
+        name: '/skill-create, /agent-create',
+        description:
+          'Sub-skill autorski: rozwija własny kit repozytorium — wielokrotnego użytku skill dla powtarzalnej procedury albo agenta dla powtarzającej się roli z własnym modelem i narzędziami.',
+        href: '/kit/skill-create',
+      },
+      {
+        name: '/dwp-upgrade',
+        description:
+          'Sprawdza, czy jest nowsze opublikowane wydanie skilla, i dopiero po wyraźnej zgodzie instaluje je oraz ponownie uruchamia onboarding jako świeże przejście — każdy plan w toku pod .dwp/ pozostaje nietknięty.',
+        href: '/kit',
+      },
+    ],
+    examplesTitle: 'Dwa sposoby, by go uruchomić',
+    examplesIntro:
+      'Ten sam skill, te same dziewięć komend — format i tryb recenzji zmieniają się wraz z rozmiarem i stawką pracy, nie z narzędziem.',
+    quickFixLabel: 'Mała, ograniczona poprawka — Lite, trust',
+    quickFixBody:
+      'Jedna sprawa, mniej więcej jedna sesja, niska stawka: pomiń rundę recenzji i pozwól agentowi bezpośrednio zmaterializować i uruchomić plan Lite.',
+    longHorizonLabel: 'Praca długoterminowa — Full, guided',
+    longHorizonBody:
+      'Realne zależności między zadaniami albo wyższa stawka: przejrzyj proponowany plan przed rozpoczęciem jakiejkolwiek pracy produktowej, promuj do Full, jeśli cel okaże się tego wymagać, następnie wykonuj i wznawiaj między sesjami w razie potrzeby.',
+    planCodeLabel: 'Terminal — komendy ze slashem',
+    planNote:
+      'Wynik każdego planu — manifest, log postępu, zapisy zadań, dowody bramek — żyje pod ignorowanym przez git katalogiem .dwp/ w samym repozytorium. Nic nie jest wysyłane do deepworkplan.com ani przez niego przechowywane; skill nie wykonuje żadnych połączeń sieciowych.',
     endpointsTitle: 'Punkty końcowe',
     endpointsIntro:
       'Główne punkty końcowe agentowego API. Kompletna, typowana specyfikacja — każda operacja, parametr i schemat odpowiedzi — mieszka w dokumencie OpenAPI.',

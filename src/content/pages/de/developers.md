@@ -12,6 +12,52 @@ Es gibt keine API-Schlüssel zu erzeugen, keinen OAuth-Aufwand und keine von der
 - **Kostenlos und Open Source** — die Website-Inhalte und das DWP-Skill sind MIT-lizenziert.
 - **Maschinen zuerst** — strukturierte JSON-Fehler auf `/api/*`, Markdown-Wiederherstellungstexte bei 404, ein RFC-9727-API-Katalog und ein ARD-Fähigkeitsmanifest.
 
+## Planen und mit der Skill ausführen
+
+Die oben beschriebene API lässt einen Agenten diese Website lesen. Die DWP-Skill ist das, was einen Agenten die Methodik ausführen lässt — installieren Sie sie einmal in einem Repository, und sie liefert einen Router plus neun Sub-Skills, aufgerufen als Slash-Befehle (oder namentlich, für Agenten, die `/` abfangen — die meisten verwenden stattdessen `#`, z. B. `#dwp-execute`).
+
+Jeder Plan wählt einen Wert aus jeder der zwei unabhängigen Achsen:
+
+- **Lite** — Aufgabenprotokolle leben inline im README des Plans, hinter stabilen `#task-N`-Ankern. Gebaut für kleine, begrenzte Arbeit: ein Anliegen, ungefähr eine Sitzung.
+- **Full** — eine Datei pro Aufgabe unter `N.task_<slug>.md`, für langfristige Arbeit über Stunden oder Tage, oder wenn Aufgaben echte Abhängigkeiten haben. Ein Lite-Plan wird später mit `/dwp-refine promote` zu Full befördert.
+- **Guided (Standard)** — `dwp-create` analysiert das Ziel, zerlegt es und materialisiert einen überprüfbaren Plan, und fragt dann: behalten, Lite zu Full befördern, bearbeiten oder abbrechen. Ein Mensch bleibt im Loop, bevor irgendeine Produktarbeit beginnt.
+- **Trust (oder auto)** — hängen Sie `trust` (oder `auto`) als letztes Wort an, z. B. `/dwp-create <goal> trust`, und der Agent überspringt die Review-Runde und liefert direkt den Ausführungsbefehl zurück.
+
+Die neun Sub-Skills:
+
+| Befehl | Zweck |
+|--------|-------|
+| `/dwp-create <goal>` | Verwandelt ein Ziel in einen Plan — standardmäßig Lite, Full für größere Arbeit. |
+| `/dwp-execute` | Führt einen bestehenden Plan Aufgabe für Aufgabe aus: liest ihn vollständig, führt jede Aufgabe der Reihe nach aus, validiert ihr Gate, aktualisiert den Fortschritt. |
+| `/dwp-refine` | Fügt Aufgaben in einem bestehenden Plan hinzu, entfernt oder ordnet sie neu, ohne abgeschlossene Arbeit und ihre protokollierten Nachweise zu verlieren. |
+| `/dwp-resume` | Rekonstruiert den Zustand aus den eigenen Dateien des Plans und setzt einen unterbrochenen Plan bei seiner ersten unvollständigen Aufgabe fort. |
+| `/dwp-status` | Meldet den Fortschritt eines Plans — abgeschlossen, in Arbeit, ausstehende Aufgaben — ohne etwas zu verändern. |
+| `/dwp-verify` | Prüft mechanisch, ob das Repository AI-first ist und ob seine Pläne wohlgeformt sind. Ändert nichts; meldet bestanden oder nicht bestanden. |
+| `/deepworkplan-onboard` | Macht ein Repository AI-first: denkt über seinen Stack nach und erzeugt dann eine angepasste `AGENTS.md`, `docs/`, `.agents/` und ein gitignoriertes `.dwp/`. |
+| `/skill-create`, `/agent-create` | Die Autoren-Sub-Skill: lässt das eigene Kit des Repositorys wachsen — eine wiederverwendbare Skill für ein wiederholbares Verfahren oder einen Agenten für eine wiederkehrende Rolle mit eigenem Modell und eigenen Tools. |
+| `/dwp-upgrade` | Prüft auf ein neueres veröffentlichtes Skill-Release und installiert es — erst nach ausdrücklicher Zustimmung — und führt das Onboarding erneut aus. |
+
+Eine kleine, begrenzte Korrektur — Lite, trust:
+
+```bash
+# A small, bounded fix: skip the review round, run it directly.
+/dwp-create fix the flaky checkout test trust
+/dwp-execute
+```
+
+Langfristige Arbeit — Full, guided:
+
+```bash
+# Long-horizon work with real stakes: review before anything runs.
+/dwp-create migrate the billing service to the new payments API
+# ...review the proposed plan, then:
+/dwp-execute
+# ...interrupted? pick up again, even in a fresh session:
+/dwp-resume
+```
+
+Die Ausgabe jedes Plans — Manifest, Fortschrittsprotokoll, Aufgabenprotokolle, Gate-Nachweise — lebt in einem gitignorierten `.dwp/`-Verzeichnis im Repository selbst. Nichts wird an deepworkplan.com gesendet oder dort gespeichert; die Skill führt überhaupt keine Netzwerkaufrufe aus.
+
 ## Endpunkte
 
 | Methode | Pfad | Zweck |
