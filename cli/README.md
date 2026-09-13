@@ -85,6 +85,23 @@ The CLI wraps the documented, read-only, zero-auth agent API of deepworkplan.com
 
 The CLI follows the site API's `v1` contract: breaking API changes ship only in a new `/api/v{N+1}/` family, and deprecated endpoints answer `Deprecation` and `Sunset` headers at least 180 days before removal.
 
+## Publishing
+
+The CLI ships automatically with website releases: [`release_and_publish.yml`](../.github/workflows/release_and_publish.yml)
+**Step 6** publishes this package to npm on every release, guarded by an
+idempotence check — it publishes only when the exact version in
+`package.json` is not already on the registry, so re-running a release is
+safe.
+
+- **To ship a new CLI version:** bump `version` in `cli/package.json` in any
+  PR to `main`; the next release publishes it.
+- **One-time setup:** add an npm **Automation** token as the `NPM_TOKEN`
+  repository secret in GitHub (Settings → Secrets and variables → Actions).
+  Without it, Step 6 skips with a warning and the website release proceeds
+  unaffected.
+- **Manual fallback:** `cd cli && npm publish --access public` (needs an
+  npm login with 2FA).
+
 ## License
 
 MIT © Dailybot, Inc. — see [LICENSE](./LICENSE).
