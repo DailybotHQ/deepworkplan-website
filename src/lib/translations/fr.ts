@@ -1375,7 +1375,7 @@ export const fr: SiteTranslations = {
       title:
         'Développeurs — API pour agents, serveur MCP et documentation de Deep Work Plan',
       description:
-        'La surface pour agents de Deep Work Plan : API versionnée, en lecture seule et sans authentification — OpenAPI, serveur MCP, Markdown par page en 17 langues et CLI officielle.',
+        'La surface pour agents de Deep Work Plan : API versionnée, en lecture seule et sans authentification — OpenAPI, MCP, Markdown en 17 langues et CLI officielle.',
     },
     eyebrow: 'Surface pour agents et développeurs',
     title: 'Deep Work Plan pour les développeurs et les agents IA',

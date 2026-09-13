@@ -1,6 +1,6 @@
 ---
 title: "Développeurs — l’API pour agents de Deep Work Plan"
-description: "La surface pour agents de Deep Work Plan : API versionnée, en lecture seule et sans authentification — OpenAPI, serveur MCP, Markdown par page en 17 langues et CLI officielle."
+description: "La surface pour agents de Deep Work Plan : API versionnée, en lecture seule et sans authentification — OpenAPI, MCP, Markdown en 17 langues et CLI officielle."
 ---
 
 ## Sans authentification, par conception

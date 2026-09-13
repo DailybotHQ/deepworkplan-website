@@ -181,6 +181,9 @@ kill_tree() { # kill_tree <pid>
 cleanup() {
   if [ -n "$PREVIEW_PID" ]; then kill_tree "$PREVIEW_PID"; PREVIEW_PID=""; fi
   if [ -n "$EDGE_PID" ]; then kill_tree "$EDGE_PID"; EDGE_PID=""; fi
+  # The astro preview can be re-parented (PPID 1) when the pnpm wrapper dies
+  # first, escaping kill_tree; match it by the port we launched it on.
+  pkill -f -- "preview --port $PORT" 2>/dev/null || true
   # workerd can outlive the wrangler CLI and be re-parented (PPID 1), escaping
   # kill_tree; match it by the exact socket-addr it was given for this port.
   pkill -f "socket-addr=entry=localhost:$EDGE_PORT" 2>/dev/null || true

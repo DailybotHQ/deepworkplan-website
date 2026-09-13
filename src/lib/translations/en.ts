@@ -1355,7 +1355,7 @@ export const en: SiteTranslations = {
     meta: {
       title: 'Developers — Deep Work Plan agent API, MCP server & docs',
       description:
-        'The Deep Work Plan agent surface: a read-only, zero-auth, versioned API with an OpenAPI spec, MCP server, per-page Markdown in 17 languages, and an official CLI.',
+        'The Deep Work Plan agent surface: read-only, zero-auth, versioned API with an OpenAPI spec, MCP server, Markdown mirrors in 17 languages, and the official CLI.',
     },
     eyebrow: 'Agent & developer surface',
     title: 'Deep Work Plan for developers and AI agents',

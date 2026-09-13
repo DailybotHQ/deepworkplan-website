@@ -1,6 +1,6 @@
 ---
 title: "Разработчикам — агентное API Deep Work Plan"
-description: "Поверхность Deep Work Plan для агентов: версионируемый read-only API без аутентификации, спецификация OpenAPI, MCP-сервер и Markdown для каждой страницы на 17 языках."
+description: "Поверхность Deep Work Plan для агентов: версионируемый read-only API без аутентификации, спецификация OpenAPI, MCP-сервер и Markdown на 17 языках."
 ---
 
 ## Без авторизации по замыслу

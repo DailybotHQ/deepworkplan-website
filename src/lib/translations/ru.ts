@@ -1370,7 +1370,7 @@ export const ru: SiteTranslations = {
       title:
         'Разработчикам — агентное API Deep Work Plan, MCP-сервер и документация',
       description:
-        'Поверхность Deep Work Plan для агентов: версионируемый read-only API без аутентификации, спецификация OpenAPI, MCP-сервер и Markdown для каждой страницы на 17 языках.',
+        'Поверхность Deep Work Plan для агентов: версионируемый read-only API без аутентификации, спецификация OpenAPI, MCP-сервер и Markdown на 17 языках.',
     },
     eyebrow: 'Поверхность для агентов и разработчиков',
     title: 'Deep Work Plan для разработчиков и ИИ-агентов',

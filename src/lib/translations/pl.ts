@@ -1369,7 +1369,7 @@ export const pl: SiteTranslations = {
       title:
         'Programiści — agentowe API Deep Work Plan, serwer MCP i dokumentacja',
       description:
-        'Powierzchnia agentowa Deep Work Plan: wersjonowane, tylko-do-odczytu API bez uwierzytelniania, ze specyfikacją OpenAPI, serwerem MCP i Markdown dla każdej strony w 17 językach.',
+        'Powierzchnia agentowa Deep Work Plan: wersjonowane, tylko-do-odczytu API bez uwierzytelniania, ze specyfikacją OpenAPI, serwerem MCP i Markdown w 17 językach.',
     },
     eyebrow: 'Powierzchnia dla agentów i programistów',
     title: 'Deep Work Plan dla programistów i agentów AI',

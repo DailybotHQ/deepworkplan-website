@@ -1369,7 +1369,7 @@ export const de: SiteTranslations = {
     meta: {
       title: 'Entwickler — Deep Work Plan Agent-API, MCP-Server & Docs',
       description:
-        'Die Agentenoberfläche von Deep Work Plan: versionierte, read-only API ohne Authentifizierung — mit OpenAPI-Spec, MCP-Server und Markdown pro Seite in 17 Sprachen.',
+        'Agentenoberfläche von Deep Work Plan: versionierte, read-only API ohne Authentifizierung — mit OpenAPI-Spec, MCP-Server und Markdown-Spiegeln in 17 Sprachen.',
     },
     eyebrow: 'Oberfläche für Agenten & Entwickler',
     title: 'Deep Work Plan für Entwickler und KI-Agenten',
