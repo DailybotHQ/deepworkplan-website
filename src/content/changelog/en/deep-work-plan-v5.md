@@ -1,6 +1,6 @@
 ---
 title: "DWP v5: the promises, now guaranteed"
-description: "Deep Work Plan v5 turns eight standing promises into tested contracts — an honest verifier, one approval rule, orchestration that cannot corrupt, and a safe upgrade path."
+description: "Deep Work Plan v5 turns eight standing promises into tested, versioned contracts — an honest verifier, safe orchestration, and a proven upgrade path."
 date: 2026-09-12
 version: "v5 · Guaranteed by tests"
 kind: release
@@ -11,7 +11,7 @@ sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
 ---
 
-Today we are releasing Deep Work Plan v5. The honest summary of this release: the methodology already promised all of this — now it guarantees it. Before v5, an agent that followed the documentation to the letter could still land in real failure scenarios; each one is now closed and pinned by an executable test. The skill's contract suite grew from 132 to 258 tests in this cycle, and every guarantee below was validated live against the released tag — installed into a clean repository and taken through its own flows before this entry was written.
+Today we are releasing Deep Work Plan v5. This is not a rewrite: it is months of real usage — including a direct audit of 108 real plans — surfacing exactly where the methodology's promises and an agent's actual behavior could diverge, gap by gap. The honest summary of this release: the methodology already promised all of this — now it guarantees it. Before v5, an agent that followed the documentation to the letter could still land in real failure scenarios; each one identified through that usage and feedback is now closed and pinned by an executable test, not patched over with more prose. The skill's contract suite grew from 132 to 258 tests in this cycle, and every guarantee below was validated live against the released tag — installed into a clean repository and taken through its own flows before this entry was written.
 
 **A verifier that never claims unverified success.** Conformance checks used to degrade silently: without a capable interpreter they skipped every verification and still printed a conforming verdict, and bold text inside a field could be mistaken for a missing field. Now the verifier exits with an explicit `UNVERIFIED` verdict whenever it cannot actually verify. A verifier never reports a success it did not check — trust in gates is the whole proposition, and a gate that can skip its own check breaks the chain.
 
@@ -29,4 +29,6 @@ Today we are releasing Deep Work Plan v5. The honest summary of this release: th
 
 **Honest, measurable evidence.** Efficiency claims are now re-measured across three baselines — v3.0.0, v4.0.3, and the final tree — with the measurement script committed to the repository. Results are reported in filesystem bytes and never converted into token counts or cost figures we cannot stand behind, and every claim that cannot be verified is quarantined as such in the evaluation record.
 
-Deep Work Plan v5 follows DWP standard 4.0.0. Read the [normative specification](https://deepworkplan.com/spec), see the [skill repository](https://github.com/DailybotHQ/deepworkplan-skill), or start adoption from [`/init`](https://deepworkplan.com/init).
+**A versioned contract, published.** Every promise above is backed by data other tooling can read, not just prose: the plan-manifest and plan-state formats are now versioned as the v5 schema line — [`plan-manifest/v5.json`](https://deepworkplan.com/schema/plan-manifest/v5.json) and [`plan-state/v5.json`](https://deepworkplan.com/schema/plan-state/v5.json) — so a plan, a verifier, or a third-party tool can check conformance against a published, machine-readable contract instead of a paragraph of documentation. Nothing in the v5 line changes shape relative to v2: existing plans referencing v1 or v2 schemas remain valid and are never rewritten.
+
+Deep Work Plan v5 follows DWP standard 5.0.0. Read the [normative specification](https://deepworkplan.com/spec), see the [skill repository](https://github.com/DailybotHQ/deepworkplan-skill), or start adoption from [`/init`](https://deepworkplan.com/init).
