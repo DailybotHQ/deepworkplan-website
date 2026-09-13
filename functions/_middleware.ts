@@ -1,38 +1,47 @@
 /**
- * Cloudflare Pages Middleware — AI Bot Analytics & Markdown Content Negotiation
+ * Cloudflare Pages Middleware — AI Bot Analytics & Content Negotiation
  *
- * Three responsibilities:
+ * Responsibilities:
  *
  * 1. **Markdown for Agents**: If a request sends `Accept: text/markdown`,
  *    serves the static `.md` version of the page (if it exists) instead of HTML.
  *    This enables AI agents to get clean, token-efficient Markdown content
  *    without parsing HTML. See: https://blog.cloudflare.com/markdown-for-agents/
  *
- * 2. **AI Bot Analytics**: Detects AI crawler visits via User-Agent matching
+ * 2. **JSON for Agents**: If a request explicitly prefers `application/json`
+ *    over HTML and Markdown, serves a typed JSON envelope wrapping the same
+ *    page mirror (src/lib/json-envelope.ts) — `{ url, contentFormat, title,
+ *    markdown, language, recovery }`. Markdown still wins when both are
+ *    accepted (round-1 precedence preserved); browsers are unaffected.
+ *
+ * 3. **AI Bot Analytics**: Detects AI crawler visits via User-Agent matching
  *    and tracks them server-side to Umami (AI bots don't execute JavaScript,
  *    so client-side analytics are invisible to them).
  *
- * 3. **Agent-friendly errors** (post-processing): API paths never serve HTML
+ * 4. **Agent-friendly errors** (post-processing): API paths never serve HTML
  *    errors — unknown /api/* paths get a structured JSON error body — and any
  *    client that does not explicitly prefer HTML (Markdown-negotiating
  *    clients, curl, AI agents sending a wildcard Accept) receives a short
  *    Markdown 404 recovery body pointing at the sitemap, llms.txt, and
  *    /developers.
  *
- * 4. **Rate limiting** (/api/* only, request-time): a best-effort per-isolate
+ * 5. **Rate limiting** (/api/* only, request-time): a best-effort per-isolate
  *    fixed-window limiter (src/lib/rate-limit.ts) attaches RFC 9331
  *    RateLimit-* headers to every /api/* response and short-circuits tripped
  *    callers to a 429 with Retry-After.
  *
- * Non-bot, non-markdown requests pass through with zero overhead.
+ * Non-bot, non-markdown, non-JSON requests pass through with zero overhead.
  */
 import {
+  API_DOCS_URL,
   buildAgentRecoveryMarkdown,
   buildApiError,
   isApiPath,
+  OPENAPI_URL,
   prefersMarkdownOverHtml,
 } from '../src/lib/agent-recovery';
 import { deprecationHeadersFor } from '../src/lib/deprecation';
+import { buildPageJsonEnvelope, prefersJsonOverHtml } from '../src/lib/json-envelope';
 import {
   createRateLimiter,
   rateLimitHeaders,
@@ -329,6 +338,75 @@ async function tryServeMarkdown(
   }
 }
 
+/**
+ * Check if the request explicitly prefers JSON over HTML/Markdown and serve
+ * the typed JSON envelope (src/lib/json-envelope.ts) if a `.md` mirror exists
+ * for the path. Same asset resolution and fallback as `tryServeMarkdown`;
+ * only the negotiation predicate and response shape differ.
+ */
+async function tryServeJsonEnvelope(
+  context: EventContext
+): Promise<Response | null> {
+  const accept = context.request.headers.get('accept') || '';
+  if (!prefersJsonOverHtml(accept)) return null;
+
+  const url = new URL(context.request.url);
+  const pathname = url.pathname;
+
+  // Skip excluded paths
+  for (const prefix of MARKDOWN_EXCLUDED_PREFIXES) {
+    if (pathname.startsWith(prefix)) return null;
+  }
+
+  // Skip requests for static assets (already have an extension)
+  if (MARKDOWN_EXCLUDED_EXTENSIONS.test(pathname)) return null;
+
+  const mdPath = resolveMarkdownPath(pathname);
+
+  try {
+    const mdUrl = new URL(mdPath, url.origin);
+    let assetResponse = await context.env.ASSETS.fetch(
+      new Request(mdUrl.toString())
+    );
+
+    // Fallback: /path.md → /path/index.md (for directory-style paths like /es/, /methodology/)
+    if (!assetResponse.ok && !mdPath.endsWith('/index.md')) {
+      const indexMdPath = `${mdPath.replace(/\.md$/, '')}/index.md`;
+      const indexMdUrl = new URL(indexMdPath, url.origin);
+      assetResponse = await context.env.ASSETS.fetch(
+        new Request(indexMdUrl.toString())
+      );
+    }
+
+    if (!assetResponse.ok) return null;
+
+    const markdown = await assetResponse.text();
+    const envelope = buildPageJsonEnvelope({
+      url: url.toString(),
+      pathname,
+      markdown,
+      recovery: {
+        llmsTxt: new URL('/llms.txt', url.origin).toString(),
+        sitemap: new URL('/sitemap-index.xml', url.origin).toString(),
+        openapi: OPENAPI_URL,
+        developers: API_DOCS_URL,
+      },
+    });
+
+    return new Response(JSON.stringify(envelope), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Cache-Control': 'public, max-age=3600',
+        'Vary': 'Accept',
+        'X-Content-Negotiation': 'json',
+      },
+    });
+  } catch {
+    return null;
+  }
+}
+
 /** Track a markdown request to Umami analytics */
 function trackMarkdownRequest(
   context: EventContext,
@@ -536,6 +614,13 @@ export async function onRequest(context: EventContext): Promise<Response> {
   if (markdownResponse) {
     trackMarkdownRequest(context, 'content_negotiation');
     return markdownResponse;
+  }
+
+  // 2b. JSON content negotiation — serve the typed envelope when the client
+  //     explicitly prefers application/json over HTML and Markdown.
+  const jsonEnvelopeResponse = await tryServeJsonEnvelope(context);
+  if (jsonEnvelopeResponse) {
+    return jsonEnvelopeResponse;
   }
 
   // 3. Track direct .md URL requests (e.g., /about.md, /methodology/x.md)

@@ -62,8 +62,9 @@ Markdown: send header `Accept: text/markdown` on any URL to receive Markdown ins
 
 | File | Purpose |
 |------|---------|
-| `functions/_middleware.ts` | Content negotiation (Accept: text/markdown) |
+| `functions/_middleware.ts` | Content negotiation (Accept: text/markdown, Accept: application/json) |
 | `src/lib/markdown-for-agents.ts` | Serialization helpers |
+| `src/lib/json-envelope.ts` | JSON envelope negotiation (precedence, title/language detection, envelope shape) |
 | `src/pages/[page].md.ts` | EN page endpoint |
 | `src/pages/es/[page].md.ts` | ES page endpoint |
 | `src/content/pages/{en,es}/` | Page Markdown source files |
@@ -143,6 +144,58 @@ curl https://deepworkplan.com/about.md
 - `Cache-Control: public, max-age=3600`
 - `Vary: Accept` — tells caches that response varies by Accept header
 - `X-Content-Negotiation: markdown` — signals the response was content-negotiated
+
+## Content Negotiation via `Accept: application/json`
+
+The same middleware also serves a typed `application/json` envelope for the
+same page mirrors, for clients (agents, function-calling tool wrappers) that
+explicitly prefer JSON over both HTML and Markdown. The logic is pure and
+dependency-free in `src/lib/json-envelope.ts`.
+
+**Precedence order (normative):**
+1. `Accept: text/markdown` (or any type containing it) → the Markdown mirror
+   above — wins first, even when `application/json` is also accepted.
+2. Accept explicitly prefers `application/json` (or a `+json` suffix type)
+   and does not also prefer `text/html` or `text/markdown` → the JSON
+   envelope.
+3. Otherwise (browsers, a wildcard Accept, empty Accept) → HTML, unchanged.
+
+**Envelope shape:**
+
+```json
+{
+  "url": "https://deepworkplan.com/about",
+  "contentFormat": "markdown",
+  "title": "About the methodology",
+  "markdown": "# About the methodology\n\n...",
+  "language": "en",
+  "recovery": {
+    "llmsTxt": "https://deepworkplan.com/llms.txt",
+    "sitemap": "https://deepworkplan.com/sitemap-index.xml",
+    "openapi": "https://deepworkplan.com/openapi.json",
+    "developers": "https://deepworkplan.com/developers"
+  }
+}
+```
+
+- `title` — the first `# ` heading of the page's Markdown source (falls back
+  to the request path).
+- `language` — detected from the first path segment when it is one of the 17
+  active language codes, else `en`.
+- `markdown` — the same original Markdown source served by the `.md` mirror
+  (`contentFormat` records that it is Markdown, not that it has been
+  converted).
+
+**Testing with curl:**
+```bash
+curl -H "Accept: application/json" https://deepworkplan.com/about
+```
+
+**Response headers for the JSON envelope:**
+- `Content-Type: application/json; charset=utf-8`
+- `Cache-Control: public, max-age=3600`
+- `Vary: Accept`
+- `X-Content-Negotiation: json`
 
 ## Analytics
 
