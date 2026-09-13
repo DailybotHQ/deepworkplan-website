@@ -74,7 +74,7 @@ const nav = getTranslations(lang as Language).nav;
     </a>
     {ANNOUNCEMENT.enabled && <AnnouncementBar lang={lang} />}
     <Header client:load lang={lang} nav={nav} />
-    <main id="main-content" class="flex-1 bg-paper">
+    <main id="main-content" class="min-w-0 flex-1 bg-paper">
       <slot />
     </main>
     <Footer lang={lang} />
