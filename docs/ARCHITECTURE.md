@@ -489,7 +489,7 @@ The site has **no Astro API routes** (`src/pages/api/` does not exist). The agen
 | File | Responsibility |
 |------|----------------|
 | `functions/api/mcp.ts` | Stateless MCP server at `/api/mcp` (Streamable HTTP, JSON-RPC 2.0: `initialize`, `ping`, `tools/list`, `tools/call`; tools `get_init_prompt`, `list_site_sections`, `read_page`). Thin adapter — all protocol logic lives in `src/lib/mcp/` (unit-tested; Astro-import-free because the Functions runtime is a CF Worker that cannot bundle `astro:content` or the `@/` alias — use relative imports) |
-| `functions/_middleware.ts` | (1) robots.txt Lighthouse rewrite, (2) `Accept: text/markdown` content negotiation, (3) AI-bot analytics to Umami, (4) **agent-friendly errors**: unknown `/api/*` paths get structured JSON errors (`src/lib/agent-recovery.ts`), and Markdown-negotiating clients that hit a 404 get a Markdown recovery body |
+| `functions/_middleware.ts` | (1) robots.txt Lighthouse rewrite, (2) `Accept: text/markdown` content negotiation, (2b) `Accept: application/json` content negotiation — a typed JSON envelope for page mirrors (`src/lib/json-envelope.ts`; Markdown still wins when both are accepted), (3) AI-bot analytics to Umami, (4) **agent-friendly errors**: unknown `/api/*` paths get structured JSON errors (`src/lib/agent-recovery.ts`), and Markdown-negotiating clients that hit a 404 get a Markdown recovery body — an extension-bearing unknown path (e.g. `/nope.json`) is also admitted when the client explicitly sends `text/markdown` or `application/json`; every 404 (API JSON, Markdown body, and the HTML passthrough alike) carries a recovery `Link` header (`recoveryLinkHeaders`) pointing at the sitemap, llms.txt, and `/developers` |
 
 Notes:
 

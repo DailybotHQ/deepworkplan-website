@@ -128,6 +128,7 @@ onDestroy(() => {
     <a href="{prefix}/trust" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'trust', source: 'mobile' })}>{nav.trust}</a>
     <a href="{prefix}/faq" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'faq', source: 'mobile' })}>{nav.faq}</a>
     <a href="{prefix}/compare" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'compare', source: 'mobile' })}>{nav.compare}</a>
+    <a href="{prefix}/developers" class="masthead-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'developers', source: 'mobile' })}>{nav.developers}</a>
     <button
       class="masthead-link text-xl text-center flex items-center justify-center gap-2 focus:outline-none cursor-pointer"
       on:click={() => repoOpen = !repoOpen}

@@ -71,6 +71,7 @@ function generateSiteNavigation(lang: string): string {
     {
       title: t.agentNav.sections.getStarted,
       links: [
+        { label: t.nav.init, path: '/init' },
         { label: t.nav.quickstart, path: '/quickstart' },
         { label: t.nav.examples, path: '/examples' },
       ],
@@ -81,6 +82,7 @@ function generateSiteNavigation(lang: string): string {
         { label: t.nav.compare, path: '/compare' },
         { label: t.nav.faq, path: '/faq' },
         { label: t.nav.changelog, path: '/changelog' },
+        { label: t.nav.developers, path: '/developers' },
       ],
     },
     {
@@ -89,6 +91,7 @@ function generateSiteNavigation(lang: string): string {
         { label: t.nav.trust, path: '/trust' },
         { label: t.nav.about, path: '/about' },
         { label: t.nav.contact, path: '/contact' },
+        { label: t.nav.privacy, path: '/privacy' },
       ],
     },
     {

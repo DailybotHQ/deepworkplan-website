@@ -161,8 +161,20 @@ describe('public/openapi.json — v1 family, typed schemas, header contracts', (
       | undefined;
   }
 
-  /** JSON media types whose schemas must be inline-typed objects. */
+  /** JSON media types whose schemas must resolve to a named component. */
   const JSON_MEDIA = ['application/json', 'application/linkset+json'];
+
+  /** The 8 markdown-mirror operations Task 1 negotiates a JSON envelope for. */
+  const NEGOTIATED_JSON_MARKDOWN_MIRROR_OPERATION_IDS = new Set([
+    'getInitMarkdown',
+    'getHomeMarkdown',
+    'getPageMarkdown',
+    'getLocalizedPageMarkdown',
+    'getMethodologyDocMarkdown',
+    'getSpecDocMarkdown',
+    'getKitDocMarkdown',
+    'getExampleMarkdown',
+  ]);
 
   it('registers the four /api/v1/ GET operations with unique ids', () => {
     const expected: Record<string, string> = {
@@ -178,7 +190,14 @@ describe('public/openapi.json — v1 family, typed schemas, header contracts', (
     }
   });
 
-  it('gives every JSON-serving operation an inline typed object schema (no bare $ref)', () => {
+  it('gives every JSON-serving response a named $ref component schema (typed object)', () => {
+    // Round 2 (Task 2): every application/json (and linkset+json) response —
+    // at any status code — must resolve to a NAMED components.schemas entry,
+    // never an inline object. The scanner's schema-coverage rule counts named
+    // typed schemas, not inline objects, so this is the opposite assertion of
+    // round 1's "no bare $ref" — see docs/aeo/MARKDOWN_FOR_AGENTS.md and the
+    // plan's analysis for why the rule inverted.
+    let refCount = 0;
     for (const [path, item] of Object.entries(spec.paths)) {
       for (const method of HTTP_METHODS) {
         const op = item[method] as
@@ -196,31 +215,37 @@ describe('public/openapi.json — v1 family, typed schemas, header contracts', (
           | undefined;
         if (!op?.responses) continue;
         for (const [code, resp] of Object.entries(op.responses)) {
-          if (!code.startsWith('2')) continue;
           for (const [media, ct] of Object.entries(resp.content ?? {})) {
             if (!JSON_MEDIA.includes(media)) continue;
             const schema = ct.schema ?? {};
-            const isTypedObject =
-              schema.type === 'object' &&
-              Object.keys((schema.properties as object) ?? {}).length > 0;
-            const isTypedArray =
-              schema.type === 'array' &&
-              Object.keys(
-                ((schema.items as Record<string, unknown>)
-                  ?.properties as object) ?? {}
-              ).length > 0;
-            expect(
-              { path, method, media, isTypedObject, isTypedArray },
-              `${method} ${path} ${code} ${media}`
-            ).toMatchObject({ isTypedObject: true, isTypedArray: false });
             expect(
               schema.$ref,
-              `${method} ${path} ${media} must not be $ref-only`
-            ).toBeUndefined();
+              `${method} ${path} ${code} ${media} must be a named component $ref`
+            ).toBeDefined();
+            const refName = (schema.$ref as string).replace(
+              '#/components/schemas/',
+              ''
+            );
+            const component = spec.components.schemas[refName] as
+              | { type?: string; properties?: Record<string, unknown> }
+              | undefined;
+            expect(
+              component,
+              `${method} ${path} ${code} ${media} $ref target "${refName}" exists in components.schemas`
+            ).toBeDefined();
+            const isTypedObject =
+              component?.type === 'object' &&
+              Object.keys(component?.properties ?? {}).length > 0;
+            expect(
+              isTypedObject,
+              `${method} ${path} ${code} ${media} component "${refName}" is a typed object with properties`
+            ).toBe(true);
+            refCount += 1;
           }
         }
       }
     }
+    expect(refCount).toBeGreaterThan(0);
   });
 
   it('declares the rate-limit and version headers on the six API operations', () => {
@@ -280,26 +305,106 @@ describe('public/openapi.json — v1 family, typed schemas, header contracts', (
     expect(spec.info.description).toContain('RateLimit');
   });
 
-  it('honesty guard: application/json only on API-family endpoints', () => {
+  it('honesty guard: application/json only on API-family endpoints or explicitly negotiated markdown mirrors', () => {
     for (const [path, item] of Object.entries(spec.paths)) {
       for (const method of HTTP_METHODS) {
         const op = item[method] as {
+          operationId?: string;
           responses?: Record<string, { content?: Record<string, unknown> }>;
         };
         if (!op?.responses) continue;
         for (const resp of Object.values(op.responses)) {
           for (const media of Object.keys(resp.content ?? {})) {
             if (media !== 'application/json') continue;
-            expect(
+            const isApiFamily =
               path.startsWith('/api/') ||
-                path.startsWith('/.well-known/') ||
-                path.startsWith('/openapi'),
-              `${method} ${path} declares application/json outside the API family`
+              path.startsWith('/.well-known/') ||
+              path.startsWith('/openapi');
+            const isNegotiatedMirror =
+              NEGOTIATED_JSON_MARKDOWN_MIRROR_OPERATION_IDS.has(
+                op.operationId ?? ''
+              );
+            expect(
+              isApiFamily || isNegotiatedMirror,
+              `${method} ${path} declares application/json outside the API family or the negotiated markdown mirrors`
             ).toBe(true);
           }
         }
       }
     }
+  });
+
+  it('counts >= 17 operations (measured design: 22) with application/json response content', () => {
+    // Task 1 of PLAN_is_agentic_100_round2 negotiates a typed application/json
+    // envelope for the 8 markdown-mirror operations; combined with the 14
+    // pre-existing JSON-serving discovery/API operations this clears the
+    // is-agentic scanner's ">60% of operations with application/json content"
+    // bar (22/27 ≈ 81%). Floor 17 so the gate fails loudly on a regression,
+    // exact 22 so a silent removal is caught too.
+    let jsonOpCount = 0;
+    for (const [, item] of Object.entries(spec.paths)) {
+      for (const method of HTTP_METHODS) {
+        const op = item[method] as
+          | {
+              responses?: Record<string, { content?: Record<string, unknown> }>;
+            }
+          | undefined;
+        if (!op?.responses) continue;
+        const hasJson = Object.values(op.responses).some((resp) =>
+          Object.keys(resp.content ?? {}).includes('application/json')
+        );
+        if (hasJson) jsonOpCount += 1;
+      }
+    }
+    expect(jsonOpCount).toBeGreaterThanOrEqual(17);
+    expect(jsonOpCount).toBe(22);
+  });
+
+  it('gives every components.schemas entry a typed object shape with non-empty properties', () => {
+    for (const [name, schema] of Object.entries(spec.components.schemas)) {
+      const s = schema as {
+        type?: string;
+        properties?: Record<string, unknown>;
+      };
+      const isTypedObject =
+        s.type === 'object' && Object.keys(s.properties ?? {}).length > 0;
+      expect(
+        isTypedObject,
+        `components.schemas.${name} is a typed object`
+      ).toBe(true);
+    }
+  });
+
+  it('matches Task 1 runtime envelope contract field-for-field in PageJsonEnvelope', () => {
+    const envelope = spec.components.schemas.PageJsonEnvelope as {
+      type: string;
+      required: string[];
+      properties: Record<string, { properties?: Record<string, unknown> }>;
+    };
+    expect(envelope.type).toBe('object');
+    expect(envelope.required.sort()).toEqual(
+      [
+        'url',
+        'contentFormat',
+        'title',
+        'markdown',
+        'language',
+        'recovery',
+      ].sort()
+    );
+    expect(Object.keys(envelope.properties).sort()).toEqual(
+      [
+        'url',
+        'contentFormat',
+        'title',
+        'markdown',
+        'language',
+        'recovery',
+      ].sort()
+    );
+    expect(
+      Object.keys(envelope.properties.recovery.properties ?? {}).sort()
+    ).toEqual(['llmsTxt', 'sitemap', 'openapi', 'developers'].sort());
   });
 });
 

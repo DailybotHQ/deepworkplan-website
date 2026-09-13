@@ -1,6 +1,6 @@
 ---
 title: "DWP v5: vaatler, artık garanti altında"
-description: "Deep Work Plan v5, köklü sekiz vaadi test edilmiş sözleşmelere dönüştürüyor — dürüst bir doğrulayıcı, tek bir onay kuralı, bozmayan orkestrasyon ve güvenli bir yükseltme yolu."
+description: "Deep Work Plan v5, köklü sekiz vaadi test edilmiş ve sürümlenmiş sözleşmelere dönüştürüyor — dürüst bir doğrulayıcı, güvenli orkestrasyon ve kanıtlanmış bir yükseltme yolu."
 date: 2026-09-12
 version: "v5 · Testlerle garanti altında"
 kind: release
@@ -11,7 +11,7 @@ sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
 ---
 
-Bugün Deep Work Plan v5'i yayınlıyoruz. Bu sürümün dürüst özeti şu: metodoloji bunların hepsini zaten vaat ediyordu — artık garanti ediyor. v5 öncesinde, belgeleri harfiyen izleyen bir ajan bile gerçek başarısızlık senaryolarına düşebiliyordu; bunların her biri artık kapatıldı ve çalıştırılabilir bir testle sabitlendi. Bu döngüde beceri paketinin sözleşme takımı 132'den 258 teste büyüdü ve aşağıdaki her garanti, yayınlanan etikete karşı canlı olarak doğrulandı — temiz bir depoya kurulup kendi akışlarından geçirildi, sonra bu yazı kaleme alındı.
+Bugün Deep Work Plan v5'i yayınlıyoruz. Bu bir yeniden yazım değil: aylar süren gerçek kullanımın — 108 gerçek planın doğrudan denetimi de dahil — boşluk boşluk ortaya çıkardığı, metodolojinin vaatleri ile bir ajanın gerçek davranışının nerede birbirinden ayrışabildiğinin sonucu. Bu sürümün dürüst özeti şu: metodoloji bunların hepsini zaten vaat ediyordu — artık garanti ediyor. v5 öncesinde, belgeleri harfiyen izleyen bir ajan bile gerçek başarısızlık senaryolarına düşebiliyordu; bu kullanım ve geri bildirimler sayesinde tespit edilen her biri artık kapatıldı ve çalıştırılabilir bir testle sabitlendi, daha fazla düzyazıyla üzeri örtülmedi. Bu döngüde beceri paketinin sözleşme takımı 132'den 258 teste büyüdü ve aşağıdaki her garanti, yayınlanan etikete karşı canlı olarak doğrulandı — temiz bir depoya kurulup kendi akışlarından geçirildi, sonra bu yazı kaleme alındı.
 
 **Doğrulamadığı bir başarını asla iddia etmeyen doğrulayıcı.** Uyum denetimleri eskiden sessizce bozuluyordu: yetenekli bir yorumlayıcı yokken tüm doğrulamaları atlıyor, yine de 'uyumlu' bildirimi basıyordu; bir alanın içindeki kalın metin, eksik alan sanılabiliyordu. Artık doğrulayıcı, gerçekten doğrulayamadığı her durumda açık bir `UNVERIFIED` bildirimiyle çıkıyor. Bir doğrulayıcı, kontrol etmediği bir başarıyı hiçbir zaman raporlamaz — kapılara güven tüm önerinin ta kendisidir ve kendi kontrolünü atlayabilen bir kapı bu zinciri kırar.
 
@@ -29,4 +29,6 @@ Bugün Deep Work Plan v5'i yayınlıyoruz. Bu sürümün dürüst özeti şu: me
 
 **Dürüst ve ölçülebilir kanıt.** Verimlilik iddiaları artık üç taban çizgisinde — v3.0.0, v4.0.3 ve son ağaç — yeniden ölçülüyor; ölçüm betiği depoya işlenmiştir. Sonuçlar dosya sistemi baytlarıyla raporlanır ve arkasında duramayacağımız token ya da maliyet rakamlarına asla dönüştürülmez; doğrulanamayan her iddia, değerlendirme kaydında bu şekilde ayrı tutulur.
 
-Deep Work Plan v5, DWP standardı 4.0.0'ı izler. [Normatif belirtimi](https://deepworkplan.com/spec) okuyun, [beceri deposuna](https://github.com/DailybotHQ/deepworkplan-skill) bakın ya da benimsemeye [`/init`](https://deepworkplan.com/init) adresinden başlayın.
+**Sürümlenmiş, yayımlanmış bir sözleşme.** Yukarıdaki her vaat, yalnızca düzyazıyla değil, başka araçların okuyabileceği verilerle destekleniyor: plan-manifest ve plan-state biçimleri artık v5 şema serisi olarak sürümleniyor — [`plan-manifest/v5.json`](https://deepworkplan.com/schema/plan-manifest/v5.json) ve [`plan-state/v5.json`](https://deepworkplan.com/schema/plan-state/v5.json) — böylece bir plan, bir doğrulayıcı veya üçüncü taraf bir araç, bir belge paragrafı yerine yayımlanmış, makine tarafından okunabilir bir sözleşmeye karşı uygunluğu denetleyebilir. v5 serisinde v2'ye göre şekil değişmiyor: v1 veya v2 şemalarına referans veren mevcut planlar geçerliliğini koruyor ve asla yeniden yazılmıyor.
+
+Deep Work Plan v5, DWP standardı 5.0.0'ı izler. [Normatif belirtimi](https://deepworkplan.com/spec) okuyun, [beceri deposuna](https://github.com/DailybotHQ/deepworkplan-skill) bakın ya da benimsemeye [`/init`](https://deepworkplan.com/init) adresinden başlayın.

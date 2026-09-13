@@ -1,6 +1,6 @@
 ---
 title: "DWP v5: janji-janji, kini terjamin"
-description: "Deep Work Plan v5 mengubah delapan janji lama menjadi kontrak yang teruji — verifikator yang jujur, satu aturan persetujuan, orkestrasi yang tidak merusak, dan jalur pembaruan yang aman."
+description: "Deep Work Plan v5 mengubah delapan janji lama menjadi kontrak yang teruji dan memiliki versi — verifikator yang jujur, orkestrasi yang aman, dan jalur pembaruan yang terbukti."
 date: 2026-09-12
 version: "v5 · Dijamin oleh pengujian"
 kind: release
@@ -11,7 +11,7 @@ sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
 ---
 
-Hari ini kami merilis Deep Work Plan v5. Ringkasan yang jujur dari rilis ini: metodologinya memang sudah menjanjikan semua ini — sekarang ia menjaminnya. Sebelum v5, agen yang mengikuti dokumentasi secara harfiah masih bisa berakhir dalam skenario kegagalan nyata; setiap skenario tersebut kini tertutup dan dikunci dengan tes yang dapat dieksekusi. Rangkaian kontrak skill tumbuh dari 132 menjadi 258 tes dalam siklus ini, dan setiap jaminan di bawah divalidasi secara langsung terhadap tag yang dirilis — dipasang ke dalam repositori bersih dan dijalankan melalui alurnya sendiri sebelum entri ini ditulis.
+Hari ini kami merilis Deep Work Plan v5. Ini bukan penulisan ulang: ini adalah hasil berbulan-bulan penggunaan nyata — termasuk audit langsung terhadap 108 rencana nyata — yang mengungkap, celah demi celah, di mana janji metodologi dan perilaku nyata agen bisa menyimpang. Ringkasan yang jujur dari rilis ini: metodologinya memang sudah menjanjikan semua ini — sekarang ia menjaminnya. Sebelum v5, agen yang mengikuti dokumentasi secara harfiah masih bisa berakhir dalam skenario kegagalan nyata; setiap skenario tersebut, yang teridentifikasi lewat penggunaan dan masukan itu, kini tertutup dan dikunci dengan tes yang dapat dieksekusi, bukan ditambal dengan lebih banyak narasi. Rangkaian kontrak skill tumbuh dari 132 menjadi 258 tes dalam siklus ini, dan setiap jaminan di bawah divalidasi secara langsung terhadap tag yang dirilis — dipasang ke dalam repositori bersih dan dijalankan melalui alurnya sendiri sebelum entri ini ditulis.
 
 **Verifikator yang tidak pernah mengklaim keberhasilan yang tidak diverifikasi.** Pemeriksaan kesesuaian dulu terdegradasi secara diam-diam: tanpa interpreter yang mampu, mereka melewati semua verifikasi namun tetap mencetak vonis sesuai, dan teks tebal di dalam sebuah bidang bisa disalahartikan sebagai bidang yang hilang. Kini verifikator berakhir dengan vonis `UNVERIFIED` yang eksplisit setiap kali ia tidak dapat memverifikasi secara nyata. Verifikator tidak pernah melaporkan keberhasilan yang tidak ia periksa — kepercayaan pada gerbang adalah seluruh proposisinya, dan gerbang yang bisa melewati pemeriksaannya sendiri memutus rantai itu.
 
@@ -29,4 +29,6 @@ Hari ini kami merilis Deep Work Plan v5. Ringkasan yang jujur dari rilis ini: me
 
 **Bukti yang jujur dan terukur.** Klaim efisiensi kini diukur ulang pada tiga baseline — v3.0.0, v4.0.3, dan pohon final — dengan skrip pengukuran yang di-commit ke repositori. Hasil dilaporkan dalam bita sistem berkas dan tidak pernah dikonversi menjadi angka token atau biaya yang tidak bisa kami pertanggungjawabkan, dan setiap klaim yang tidak dapat diverifikasi dikarantina demikian dalam catatan evaluasi.
 
-Deep Work Plan v5 mengikuti standar DWP 4.0.0. Baca [spesifikasi normatif](https://deepworkplan.com/spec), lihat [repositori skill](https://github.com/DailybotHQ/deepworkplan-skill), atau mulai adopsi dari [`/init`](https://deepworkplan.com/init).
+**Kontrak yang diberi versi dan dipublikasikan.** Setiap janji di atas didukung oleh data yang bisa dibaca alat lain, bukan hanya narasi: format plan-manifest dan plan-state kini diberi versi sebagai lini skema v5 — [`plan-manifest/v5.json`](https://deepworkplan.com/schema/plan-manifest/v5.json) dan [`plan-state/v5.json`](https://deepworkplan.com/schema/plan-state/v5.json) — sehingga sebuah rencana, verifikator, atau alat pihak ketiga dapat memeriksa kesesuaian terhadap kontrak yang dipublikasikan dan dapat dibaca mesin, bukan terhadap paragraf dokumentasi. Tidak ada yang berubah bentuk pada lini v5 dibanding v2: rencana yang sudah ada dan merujuk ke skema v1 atau v2 tetap valid dan tidak pernah ditulis ulang.
+
+Deep Work Plan v5 mengikuti standar DWP 5.0.0. Baca [spesifikasi normatif](https://deepworkplan.com/spec), lihat [repositori skill](https://github.com/DailybotHQ/deepworkplan-skill), atau mulai adopsi dari [`/init`](https://deepworkplan.com/init).

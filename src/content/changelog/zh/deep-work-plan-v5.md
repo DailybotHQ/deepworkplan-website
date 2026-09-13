@@ -1,6 +1,6 @@
 ---
 title: "DWP v5：承诺，如今由测试保证"
-description: "Deep Work Plan v5 把八项长期承诺变成经过测试的契约——诚实的验证器、唯一的审批规则、不会破坏状态的编排，以及一条安全的升级路径。"
+description: "Deep Work Plan v5 把八项长期承诺变成经过测试、有版本号的契约——诚实的验证器、安全的编排，以及一条经过验证的升级路径。"
 date: 2026-09-12
 version: "v5 · 由测试保证"
 kind: release
@@ -11,7 +11,7 @@ sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
 ---
 
-今天我们发布 Deep Work Plan v5。对这个版本最诚实的概括：这些能力方法论早已承诺——现在它做出了保证。在 v5 之前，一个逐字照着文档执行的智能体仍可能落入真实的失败场景；如今每一个这样的场景都已关闭，并由可执行的测试锁定。本周期内技能的契约测试套件从 132 个增长到 258 个，且下文的每一项保证都是针对已发布的 tag 在实测中验证的——先安装进一个干净的仓库，再跑完它自己的全部流程，然后才写下这篇条目。
+今天我们发布 Deep Work Plan v5。这不是一次重写：这是数月真实使用的结果——包括对 108 个真实计划的直接审计——一处又一处地揭示出方法论的承诺与智能体实际行为可能出现分歧的地方。对这个版本最诚实的概括：这些能力方法论早已承诺——现在它做出了保证。在 v5 之前，一个逐字照着文档执行的智能体仍可能落入真实的失败场景；如今每一个这样的场景，都是通过这些实际使用和反馈被发现的，已经关闭，并由可执行的测试锁定——而不是靠更多文字掩盖过去。本周期内技能的契约测试套件从 132 个增长到 258 个，且下文的每一项保证都是针对已发布的 tag 在实测中验证的——先安装进一个干净的仓库，再跑完它自己的全部流程，然后才写下这篇条目。
 
 **绝不谎报未验证成功的验证器。** 一致性检查过去会静默降级：在没有可用解释器的情况下，它会跳过所有验证，却仍然打印出「符合」的判定；字段内的粗体文本也可能被误判为字段缺失。现在，只要验证器无法真正完成验证，它就会以显式的 `UNVERIFIED` 判定退出。验证器绝不报告自己没有检查过的成功——对验证闸门的信任就是全部主张，而一个能跳过自身检查的闸门会毁掉整条信任链。
 
@@ -29,4 +29,6 @@ sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
 
 **诚实、可度量的证据。** 效率主张现在在三个基线上重新度量——v3.0.0、v4.0.3 与最终代码树——度量脚本已提交到仓库。结果以文件系统字节数报告，绝不换算成我们无法背书的 token 数或成本数字；每一个无法验证的主张都在评估记录中被明确隔离标注。
 
-Deep Work Plan v5 遵循 DWP 标准 4.0.0。阅读[规范文本](https://deepworkplan.com/spec)，查看[技能仓库](https://github.com/DailybotHQ/deepworkplan-skill)，或从 [`/init`](https://deepworkplan.com/init) 开始采纳。
+**一份有版本号、已发布的契约。** 上述每一项承诺都由其他工具可以读取的数据支撑，而不只是文字：plan-manifest 与 plan-state 格式现在作为 v5 schema 系列进行版本管理——[`plan-manifest/v5.json`](https://deepworkplan.com/schema/plan-manifest/v5.json) 与 [`plan-state/v5.json`](https://deepworkplan.com/schema/plan-state/v5.json)——这样一个计划、一个验证器，或第三方工具都可以对照已发布、机器可读的契约来检查一致性，而不是对照一段文档文字。v5 系列相对 v2 没有任何形状上的变化：引用 v1 或 v2 schema 的现有计划依然有效，永远不会被重写。
+
+Deep Work Plan v5 遵循 DWP 标准 5.0.0。阅读[规范文本](https://deepworkplan.com/spec)，查看[技能仓库](https://github.com/DailybotHQ/deepworkplan-skill)，或从 [`/init`](https://deepworkplan.com/init) 开始采纳。

@@ -68,6 +68,39 @@ export function prefersMarkdownOverHtml(accept: string): boolean {
 }
 
 /**
+ * True when the Accept header explicitly names `text/markdown` or
+ * `application/json` (a `+json` suffix type counts) — stronger than
+ * `prefersMarkdownOverHtml`, which also matches a bare wildcard Accept.
+ * Used to admit an extension-bearing unknown path (e.g. `/nope.json`) to the
+ * Markdown 404 recovery body only when the client unambiguously asked for
+ * machine-readable content — a wildcard-only Accept on such a path still
+ * gets the HTML 404 (it looks like a stray asset request, not an agent).
+ */
+export function explicitlyAcceptsMarkdownOrJson(accept: string): boolean {
+  const lower = accept.toLowerCase();
+  if (lower.includes('text/html')) return false;
+  return (
+    lower.includes('text/markdown') ||
+    /application\/(?:[a-z0-9.-]+\+)?json\b/.test(lower)
+  );
+}
+
+/**
+ * RFC 8288 `Link` header value pointing recovery-relevant agents at the
+ * sitemap, llms.txt, and the developer portal. Applied to every 404
+ * response (API JSON error, Markdown recovery body, and the HTML
+ * passthrough alike) so the recovery signal is present on the response
+ * itself, not only in the body.
+ */
+export function recoveryLinkHeaders(origin: string): string {
+  return [
+    `<${origin}/sitemap-index.xml>; rel="sitemap"`,
+    `<${origin}/llms.txt>; rel="alternate"; type="text/markdown"`,
+    `<${origin}/developers>; rel="help"`,
+  ].join(', ');
+}
+
+/**
  * Markdown body served for 404 responses to clients that accept Markdown
  * (Accept: text/markdown) or do not prefer HTML (see prefersMarkdownOverHtml).
  * Short on purpose: the goal is recovery, not prose.

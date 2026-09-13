@@ -62,8 +62,9 @@ Markdown: send header `Accept: text/markdown` on any URL to receive Markdown ins
 
 | File | Purpose |
 |------|---------|
-| `functions/_middleware.ts` | Content negotiation (Accept: text/markdown) |
+| `functions/_middleware.ts` | Content negotiation (Accept: text/markdown, Accept: application/json) |
 | `src/lib/markdown-for-agents.ts` | Serialization helpers |
+| `src/lib/json-envelope.ts` | JSON envelope negotiation (precedence, title/language detection, envelope shape) |
 | `src/pages/[page].md.ts` | EN page endpoint |
 | `src/pages/es/[page].md.ts` | ES page endpoint |
 | `src/content/pages/{en,es}/` | Page Markdown source files |
@@ -80,15 +81,15 @@ Markdown: send header `Accept: text/markdown` on any URL to receive Markdown ins
 
 Every serialized markdown output includes a **Site Navigation** section appended at the end. This mirrors the HTML navbar and footer, ensuring AI agents can discover all site pages from any entry point.
 
-The navigation is generated programmatically by `generateSiteNavigation(lang)` in `markdown-for-agents.ts` — a single source of truth that is language-aware (applies the correct URL prefix for EN/ES). The navigation structure is defined as data (`SITE_NAV_SECTIONS`) in the same file, organized into sections: Main, Work, About, and Connect (social links).
+The navigation is generated programmatically by `generateSiteNavigation(lang)` in `markdown-for-agents.ts` — a single source of truth that is language-aware (applies the correct URL prefix for every active language, not just EN/ES). The navigation is defined as an inline `sections` array inside that function, organized into five sections: Methodology, Get started, Learn, Project, and Connect (social/repo links, external). It must list every real top-level route in `KNOWN_BASE_PATHS` (`src/middleware.ts`) that is not a redirect (`setup`/`onboarding`/`docs` redirect to `/init` and are correctly never listed) — `tests/unit/lib/markdown-for-agents.test.ts`'s "Site Navigation block" tests assert this set exactly, so a route silently missing from the array (as happened for `/developers`, `/init`, and `/privacy` before this fix) now fails the test rather than shipping unnoticed.
 
 **Why programmatic instead of a `.md` partial file?**
-- Language-aware: automatically applies `/es/` prefix for Spanish pages
-- Single definition: one data structure generates both EN and ES navigation
+- Language-aware: automatically applies the correct `/{lang}/` prefix for every active language
+- Single definition: one data structure generates navigation for every active language
 - No manual sync: adding the nav to new serialization functions requires only one line (`generateSiteNavigation(lang)`)
 - Always consistent: impossible for individual page markdown files to have stale navigation
 
-**When to update:** If a new page is added to the site navbar, add it to `SITE_NAV_SECTIONS` in `src/lib/markdown-for-agents.ts`.
+**When to update:** If a new top-level page is added to the site, add it to the appropriate section's `links` array inside `generateSiteNavigation()` in `src/lib/markdown-for-agents.ts`, and update the expected route set in `tests/unit/lib/markdown-for-agents.test.ts`'s "Site Navigation block" tests so a future omission fails the build instead of shipping silently.
 
 ### Content Collections
 
@@ -143,6 +144,58 @@ curl https://deepworkplan.com/about.md
 - `Cache-Control: public, max-age=3600`
 - `Vary: Accept` — tells caches that response varies by Accept header
 - `X-Content-Negotiation: markdown` — signals the response was content-negotiated
+
+## Content Negotiation via `Accept: application/json`
+
+The same middleware also serves a typed `application/json` envelope for the
+same page mirrors, for clients (agents, function-calling tool wrappers) that
+explicitly prefer JSON over both HTML and Markdown. The logic is pure and
+dependency-free in `src/lib/json-envelope.ts`.
+
+**Precedence order (normative):**
+1. `Accept: text/markdown` (or any type containing it) → the Markdown mirror
+   above — wins first, even when `application/json` is also accepted.
+2. Accept explicitly prefers `application/json` (or a `+json` suffix type)
+   and does not also prefer `text/html` or `text/markdown` → the JSON
+   envelope.
+3. Otherwise (browsers, a wildcard Accept, empty Accept) → HTML, unchanged.
+
+**Envelope shape:**
+
+```json
+{
+  "url": "https://deepworkplan.com/about",
+  "contentFormat": "markdown",
+  "title": "About the methodology",
+  "markdown": "# About the methodology\n\n...",
+  "language": "en",
+  "recovery": {
+    "llmsTxt": "https://deepworkplan.com/llms.txt",
+    "sitemap": "https://deepworkplan.com/sitemap-index.xml",
+    "openapi": "https://deepworkplan.com/openapi.json",
+    "developers": "https://deepworkplan.com/developers"
+  }
+}
+```
+
+- `title` — the first `# ` heading of the page's Markdown source (falls back
+  to the request path).
+- `language` — detected from the first path segment when it is one of the 17
+  active language codes, else `en`.
+- `markdown` — the same original Markdown source served by the `.md` mirror
+  (`contentFormat` records that it is Markdown, not that it has been
+  converted).
+
+**Testing with curl:**
+```bash
+curl -H "Accept: application/json" https://deepworkplan.com/about
+```
+
+**Response headers for the JSON envelope:**
+- `Content-Type: application/json; charset=utf-8`
+- `Cache-Control: public, max-age=3600`
+- `Vary: Accept`
+- `X-Content-Negotiation: json`
 
 ## Analytics
 

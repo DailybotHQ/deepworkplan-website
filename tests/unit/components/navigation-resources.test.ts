@@ -10,15 +10,15 @@ import { getTranslations } from '@/lib/translations';
 
 /**
  * Navigation contract for the Compare and FAQ pages (PLAN_compare_and_faq_pages
- * Task 5): the header groups Examples, Compare, FAQ and Trust behind a
- * "Resources" disclosure (aria-expanded/aria-controls, no role="menu"), the
- * mobile menu lists both pages, and the footer links them.
+ * Task 5): the header groups Examples, Compare, FAQ, Trust and Developers
+ * behind a "Resources" disclosure (aria-expanded/aria-controls, no
+ * role="menu"), the mobile menu lists both pages, and the footer links them.
  */
 
 const nav = getTranslations('en').nav;
 
 describe('Header: Resources disclosure', () => {
-  it('starts closed and opens on click, exposing the four grouped links', async () => {
+  it('starts closed and opens on click, exposing the grouped links', async () => {
     const { container } = render(Header, { props: { lang: 'en', nav } });
     const trigger = container.querySelector<HTMLButtonElement>(
       'button[aria-controls="resources-dropdown"]'
@@ -35,7 +35,13 @@ describe('Header: Resources disclosure', () => {
     const hrefs = Array.from(panel?.querySelectorAll('a') ?? []).map((a) =>
       a.getAttribute('href')
     );
-    expect(hrefs).toEqual(['/examples', '/trust', '/faq', '/compare']);
+    expect(hrefs).toEqual([
+      '/examples',
+      '/trust',
+      '/faq',
+      '/compare',
+      '/developers',
+    ]);
   });
 
   it('closes on Escape', async () => {
