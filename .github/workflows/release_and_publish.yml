@@ -278,19 +278,22 @@ jobs:
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
       - name: Step 6 - 📦 Publish the official deepworkplan CLI to npm
         id: publish_npm_package
-        # Ships `cli/` (the official `deepworkplan` npm package) together
-        # with every website release. The CLI owns its own version line,
-        # independent of the website version: publishing happens only when
-        # the exact `cli/package.json` version is NOT already on the
-        # registry, so re-running a release is idempotent and never fails
-        # here. To ship a new CLI version, bump `version` in
-        # `cli/package.json` in any PR. Requires the `NPM_TOKEN` repository
-        # secret (npm Automation token); when absent the step skips with a
+        # Ships `cli/` (the official unscoped `deepworkplan` npm package —
+        # same listing pattern as the org's other packages, via the
+        # publishing account) together with every website release. The CLI
+        # owns its own version line, independent of the website version:
+        # publishing happens only when the exact `cli/package.json` version
+        # is NOT already on the registry, so re-running a release is
+        # idempotent and never fails here. To ship a new CLI version, bump
+        # `version` in `cli/package.json` in any PR. Requires the `NPM_TOKEN`
+        # repository secret (npm Automation token from the company account
+        # that should own the package); when absent the step skips with a
         # loud warning so the website release itself is never blocked.
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           set -euo pipefail
+          CLI_NAME=$(node -p "require('./cli/package.json').name")
           CLI_VERSION=$(node -p "require('./cli/package.json').version")
 
           if [ -z "${NODE_AUTH_TOKEN:-}" ]; then
@@ -304,12 +307,12 @@ jobs:
             exit 0
           fi
 
-          if npm view "deepworkplan@$CLI_VERSION" version >/dev/null 2>&1; then
-            echo "::notice::deepworkplan@$CLI_VERSION is already on npm — nothing to publish."
+          if npm view "$CLI_NAME@$CLI_VERSION" version >/dev/null 2>&1; then
+            echo "::notice::$CLI_NAME@$CLI_VERSION is already on npm — nothing to publish."
             {
               echo "## Official CLI"
               echo ""
-              echo "**deepworkplan@$CLI_VERSION** — already published, nothing to do."
+              echo "**$CLI_NAME@$CLI_VERSION** — already published, nothing to do."
             } >> "$GITHUB_STEP_SUMMARY"
             echo "package_version=$CLI_VERSION" >> "$GITHUB_OUTPUT"
             exit 0
@@ -321,7 +324,7 @@ jobs:
           {
             echo "## Official CLI"
             echo ""
-            echo "**Published deepworkplan@$CLI_VERSION to npm.**"
+            echo "**Published $CLI_NAME@$CLI_VERSION to npm.**"
           } >> "$GITHUB_STEP_SUMMARY"
           echo "package_version=$CLI_VERSION" >> "$GITHUB_OUTPUT"
 

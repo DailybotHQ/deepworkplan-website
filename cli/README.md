@@ -97,8 +97,11 @@ safe.
   PR to `main`; the next release publishes it.
 - **One-time setup:** add an npm **Automation** token as the `NPM_TOKEN`
   repository secret in GitHub (Settings → Secrets and variables → Actions).
-  Without it, Step 6 skips with a warning and the website release proceeds
-  unaffected.
+  Generate the token from the company npm account that should own the
+  package (the one maintaining the org's other packages, e.g.
+  `universal-emoji-parser`) so `deepworkplan` is listed alongside them.
+  Without the secret, Step 6 skips with a warning and the website release
+  proceeds unaffected.
 - **Manual fallback:** `cd cli && npm publish --access public` (needs an
   npm login with 2FA).
 

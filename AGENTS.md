@@ -296,16 +296,19 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 
 ### Official CLI publishing (same release workflow)
 
-`release_and_publish.yml` **Step 6** publishes the official `deepworkplan`
-npm package (`cli/`) together with every website release. The CLI keeps its
-**own version line** (independent of the website version): Step 6 publishes
-only when the exact `cli/package.json` version is not already on the
-registry — re-running a release is idempotent. To ship a new CLI version,
-bump `version` in `cli/package.json` in any PR to `main`. Requires the
-`NPM_TOKEN` repository secret (npm **Automation** token — bypasses 2FA for
-CI publishing); when the secret is absent, Step 6 skips with a loud warning
-and the website release proceeds unaffected. The token lives only in GitHub
-Actions secrets — never in the tree, never in chat.
+`release_and_publish.yml` **Step 6** publishes the official CLI — the
+unscoped npm package **`deepworkplan`** — together with every website
+release. The package is owned by whichever npm account the `NPM_TOKEN`
+Automation token belongs to: generate it from the company account that
+maintains the org's other packages (e.g. `universal-emoji-parser`) and
+`deepworkplan` is listed alongside them. The CLI keeps its **own version
+line** (independent of the website version): Step 6 publishes only when
+the exact `cli/package.json` version is not already on the registry —
+re-running a release is idempotent. To ship a new CLI version, bump
+`version` in `cli/package.json` in any PR to `main`. When the secret is
+absent, Step 6 skips with a loud warning and the website release proceeds
+unaffected. The token lives only in GitHub Actions secrets — never in the
+tree, never in chat.
 
 ### Local AI Diff Reviewer
 
