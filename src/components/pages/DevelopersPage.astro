@@ -44,8 +44,13 @@ curl -s https://deepworkplan.com/methodology \\
 # Or fetch the .md mirror directly — every page has one, in every language
 curl -s https://deepworkplan.com/es/developers.md`;
 
-const cliExample = `# The official install path — same command the /init endpoint gives agents
-npx skills add DailybotHQ/deepworkplan-skill@latest`;
+const cliExample = `# 1. Install the DWP skill — same command the /init endpoint gives agents
+npx skills add DailybotHQ/deepworkplan-skill@latest
+
+# 2. Official CLI — zero-dependency client over this API (Node >= 18),
+#    prepared in the site repo's cli/ directory pending npm publication
+deepworkplan init
+deepworkplan read /es/developers`;
 
 const developersSchema = {
   '@context': 'https://schema.org',
@@ -170,6 +175,26 @@ const breadcrumbSchema = {
       </div>
       <p class="mt-4 leading-relaxed" style="color: var(--color-muted);">
         {p.endpointsNote}
+      </p>
+    </section>
+
+    <Rule class="my-12" />
+
+    {/* Versioning & deprecation */}
+    <section class="max-w-3xl">
+      <Kicker>{p.versioningTitle}</Kicker>
+      <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-ink);">
+        {p.versioningBody}
+      </p>
+    </section>
+
+    <Rule class="my-12" />
+
+    {/* Rate limits */}
+    <section class="max-w-3xl">
+      <Kicker>{p.rateLimitsTitle}</Kicker>
+      <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-ink);">
+        {p.rateLimitsBody}
       </p>
     </section>
 

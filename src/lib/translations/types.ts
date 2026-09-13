@@ -371,6 +371,10 @@ export interface SiteTranslations {
     endpointsNote: string;
     // method + path are code (never localized); description is translated.
     endpoints: { method: string; path: string; description: string }[];
+    versioningTitle: string;
+    versioningBody: string;
+    rateLimitsTitle: string;
+    rateLimitsBody: string;
     mcpTitle: string;
     mcpIntro: string;
     mcpCodeLabel: string;

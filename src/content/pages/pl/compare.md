@@ -77,7 +77,7 @@ Gdzie każda możliwość żyje, per narzędzie. Wbudowane, opcjonalnie lub prze
 
 ## Uczciwe ograniczenia
 
-Deep Work Plan nie ma mechanizmu żywych ani delta-specyfikacji; OpenSpec i podobne narzędzia są tam silniejsze. Niezależny benchmark metodyki jeszcze nie istnieje; planowana jest preregistrowana publiczna ewaluacja. Rejestr obciążenia instrukcjami mierzy załadowane bajty, nie tokeny, koszty ani wyniki. DWP jest celowo ograniczony do repozytorium: nie jest systemem pamięci między projektami, nie jest frameworkiem agentów opartym na rolach ani IDE, więc nie konkuruje też na tych płaszczyznach — połącz go z narzędziem pokrywającym daną potrzebę, gdy praca tego wymaga.
+Deep Work Plan nie ma mechanizmu żywych ani delta-specyfikacji; OpenSpec i podobne narzędzia są tam silniejsze. Niezależny benchmark metodyki jeszcze nie istnieje; autorska ewaluacja na świeżych agentach została już przeprowadzona według zamrożonego protokołu, w małej skali — jedno obciążenie, dwa featury na konfigurację, jedna maszyna — a jej wyniki są publikowane w obu kierunkach: agenci na drzewach z harnessem czytali mniej bajtów w obu zadaniach, a sesje obecnej wersji zużywały mniej zaraportowanego przez harness wejścia i wyjścia modelu niż poprzednia wersja główna, przy czym netto-kierunek tokenów na obciążenie był mieszany i nie rości się żadnej przewagi czasu zegarowego. Rejestr obciążenia instrukcjami mierzy załadowane bajty, nie tokeny, koszty ani wyniki. DWP jest celowo ograniczony do repozytorium: nie jest systemem pamięci między projektami, nie jest frameworkiem agentów opartym na rolach ani IDE, więc nie konkuruje też na tych płaszczyznach — połącz go z narzędziem pokrywającym daną potrzebę, gdy praca tego wymaga.
 
 ## Pomóż nam utrzymać dokładność
 

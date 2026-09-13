@@ -44,6 +44,9 @@ All public, read-only, and zero-auth (no API keys, no registration) — declared
 - [OpenAPI spec](https://deepworkplan.com/openapi.json): every endpoint, parameter, and response schema of the agent API
 - [MCP server](https://deepworkplan.com/api/mcp): Streamable HTTP (JSON-RPC 2.0) — manifest at [mcp.json](https://deepworkplan.com/.well-known/mcp.json)
 - [Health](https://deepworkplan.com/api/health.json): static health marker for the agent API
+- [Versioned API catalog](https://deepworkplan.com/api/v1/index.json): the `/api/v1/` family — sections, pages, health — with the site version and spec links
+- [Official CLI](https://github.com/DailybotHQ/deepworkplan-website/tree/main/cli): `deepworkplan` — zero-dependency command-line client over the agent API (npm publication pending)
+- Versioning & rate limits: breaking changes ship only in a new `/api/v{N+1}/`; RFC 9331 `RateLimit-*` headers on `/api/*` — documented at the [developer portal](https://deepworkplan.com/developers)
 - [API catalog](https://deepworkplan.com/.well-known/api-catalog): RFC 9727 linkset of service documents
 - [ARD capability manifest](https://deepworkplan.com/.well-known/ai-catalog.json): the agentmap declared in robots.txt
 - [Agent Skills index](https://deepworkplan.com/.well-known/agent-skills/index.json): agent-readiness skills this site adopts

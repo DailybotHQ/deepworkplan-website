@@ -25,7 +25,7 @@ Kısa hamlelerde kodlama ajanları etkileyicidir. Ona uzun soluklu bir misyon ve
 
 Deep Work Plan, spesifikasyon odaklı geliştirme ile yanıt verir: dayanıklı bir plan, atomik görevler ve ajanın geçmesi gereken doğrulama kapıları. İş doğrulanabilir kalır — ve her ajan oturumlar arasında sürdürebilir.
 
-Ve bağlam, ajanınızın en kıt kaynağıdır. Bu yüzden harness token verimliliği için tasarlandı: talimatlar aşamalı yüklenir, doğrulama yalnızca değişene dokunur ve her görev kendi yerinde öğrenir — uzun soluklu iş ulaşılabilir kalır. Planın kendisi de aynı şekilde ölçeklenir: sınırlı bir düzeltme için Lite plan, saatler süren bir iş için Full plan — biçim her zaman işin kapsamını izler, tam tersi değil.
+Ve bağlam, ajanınızın en kıt kaynağıdır. Bu yüzden harness, kendi talimat yükünü küçük ve denetlenebilir tutmak için tasarlandı: talimatlar aşamalı yüklenir, doğrulama yalnızca değişene dokunur ve her görev kendi yerinde öğrenir. Her akışın yükü bayt cinsinden ölçülür ve her yayında yayımlanır — son yayında yürütme akışı yüzde 45,7, sürdürme akışı yüzde 67,5 küçüldü. Planın kendisi de aynı şekilde ölçeklenir: sınırlı bir düzeltme için Lite plan, saatler süren bir iş için Full plan — biçim her zaman işin kapsamını izler, tam tersi değil.
 ---
 
 ## İnsanlar dümen tutar. Ajanlar yürütür.

@@ -58,8 +58,19 @@ export const RECOVERY_LINKS: { label: string; path: string }[] = [
 ];
 
 /**
+ * True when a 404 should be answered with the Markdown recovery body:
+ * any client that does not explicitly prefer HTML. Browsers always send
+ * Accept: text/html; curl, validators, and AI agents send a wildcard
+ * Accept or a specific non-HTML type.
+ */
+export function prefersMarkdownOverHtml(accept: string): boolean {
+  return !accept.toLowerCase().includes('text/html');
+}
+
+/**
  * Markdown body served for 404 responses to clients that accept Markdown
- * (Accept: text/markdown). Short on purpose: the goal is recovery, not prose.
+ * (Accept: text/markdown) or do not prefer HTML (see prefersMarkdownOverHtml).
+ * Short on purpose: the goal is recovery, not prose.
  */
 export function buildAgentRecoveryMarkdown(
   origin = 'https://deepworkplan.com'

@@ -32,9 +32,15 @@ const CORS_HEADERS: Record<string, string> = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, MCP-Protocol-Version, Authorization',
-  'Access-Control-Expose-Headers': 'MCP-Protocol-Version',
+  // The rate-limit headers are attached by the root middleware; expose them
+  // so browser-based agents can read them (RFC 9331 names, see src/lib/rate-limit.ts).
+  'Access-Control-Expose-Headers':
+    'MCP-Protocol-Version, X-API-Version, RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset, RateLimit-Policy, Retry-After',
   'Access-Control-Max-Age': '86400',
 };
+
+/** Version signal for the agent API: unversioned canonical paths belong to v1. */
+const API_VERSION_HEADER: Record<string, string> = { 'X-API-Version': 'v1' };
 
 function jsonResponse(
   status: number,
@@ -47,6 +53,7 @@ function jsonResponse(
       'Content-Type': 'application/json',
       'Cache-Control': 'no-store',
       ...CORS_HEADERS,
+      ...API_VERSION_HEADER,
       ...extra,
     },
   });
@@ -56,7 +63,7 @@ function methodNotAllowed(allow: string, withBody = true): Response {
   if (!withBody) {
     return new Response(null, {
       status: 405,
-      headers: { Allow: allow, ...CORS_HEADERS },
+      headers: { Allow: allow, ...CORS_HEADERS, ...API_VERSION_HEADER },
     });
   }
   return jsonResponse(
@@ -133,4 +140,7 @@ export const onRequestPatch: PagesFunctionHandler = async () => methodNotAllowed
 export const onRequestHead: PagesFunctionHandler = async () => methodNotAllowed('POST, OPTIONS', false);
 
 export const onRequestOptions: PagesFunctionHandler = async () =>
-  new Response(null, { status: 204, headers: CORS_HEADERS });
+  new Response(null, {
+    status: 204,
+    headers: { ...CORS_HEADERS, ...API_VERSION_HEADER },
+  });

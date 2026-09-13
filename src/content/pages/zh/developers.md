@@ -1,6 +1,6 @@
 ---
 title: "开发者 — Deep Work Plan 代理 API"
-description: "deepworkplan.com 面向开发者与 AI 代理的接口面：只读、零认证的 API（附 OpenAPI 规范）、位于 /api/mcp 的无状态 MCP 服务器、17 种语言的逐页 Markdown，以及 npx skills 安装 CLI。"
+description: "Deep Work Plan 的代理接口面：只读、零认证、带版本管理的 API，附 OpenAPI 规范、MCP 服务器、17 种语言的逐页 Markdown 与官方 CLI。"
 ---
 
 ## 设计上的零认证
@@ -21,10 +21,22 @@ description: "deepworkplan.com 面向开发者与 AI 代理的接口面：只读
 | GET | `/init.md` | 权威的 DWP 采纳提示。 |
 | GET | `/{page}.md` | 任意页面的源 Markdown，覆盖全部 17 种语言。 |
 | GET | `/api/health.json` | 静态健康标记。 |
+| GET | `/api/v1/index.json` | v1 家族的版本化目录：端点路径、站点版本与规范链接。 |
+| GET | `/api/v1/sections.json` | 以带类型 JSON 呈现的站点地图——每个分区的名称、路径与描述。 |
+| GET | `/api/v1/pages.json` | 每种语言下的全部 Markdown 端点，按语言代码分组。 |
+| GET | `/api/v1/health.json` | 版本化健康标记——`/api/health.json` 的 v1 镜像。 |
 | POST | `/api/mcp` | MCP 服务器（Streamable HTTP、无状态）。 |
 | GET | `/.well-known/ai-catalog.json` | ARD 能力清单（agentmap）。 |
 
 未知的 `/api/*` 路径会返回带解决提示的结构化 JSON 错误，绝不返回 HTML 错误页。
+
+## 版本管理与弃用
+
+版本化的 JSON 家族位于 `/api/v1/` 之下——index、sections、pages 与 health——而未加版本的规范路径（`/llms.txt`、`/{page}.md`、`/api/mcp`）属于同一个 v1 契约。破坏性变更只会随新的 `/api/v{N+1}/` 家族发布，绝不会发生在 v1 内部。当某个端点被弃用时，其响应会携带 `Deprecation: true` 与至少早于移除 180 天的 `Sunset` 日期，并由 `Link` 头指向继任者。
+
+## 速率限制
+
+`/api/*` 的响应携带 RFC 9331 速率限制头——`RateLimit-Limit`、`RateLimit-Remaining`、`RateLimit-Reset` 与 `RateLimit-Policy`——让代理能够实时自我节流；`429` 响应额外携带 `Retry-After`。限流在边缘尽力执行（每位访客每 60 秒 120 次请求），访问保持匿名：无密钥、无注册、无层级。
 
 ## MCP 服务器
 
@@ -70,10 +82,16 @@ curl -s https://deepworkplan.com/es/developers.md
 Deep Work Plan 技能的官方安装路径——与 /init 端点交给代理的命令完全相同。它适用于任何兼容 skills 的编码代理（Claude Code、Cursor、Codex、Gemini 等）：
 
 ```bash
+# 1. Install the DWP skill — same command the /init endpoint gives agents
 npx skills add DailybotHQ/deepworkplan-skill@latest
+
+# 2. Official CLI — zero-dependency client over this API (Node >= 18),
+#    prepared in the site repo's cli/ directory pending npm publication
+deepworkplan init
+deepworkplan read /es/developers
 ```
 
-该技能会内嵌到你仓库内的 `.agents/skills/deepworkplan/`，因此每个接触该仓库的代理都共享同一套方法论。
+该技能会内嵌到你仓库内的 `.agents/skills/deepworkplan/`，因此每个接触该仓库的代理都共享同一套方法论。官方 `deepworkplan` CLI——一个基于同一 API 的零依赖客户端（`init`、`sections`、`read`、`open`、`mcp`）——已为 npm 做好准备，在发布之前存放于站点仓库的 [cli/](https://github.com/DailybotHQ/deepworkplan-website/tree/main/cli) 目录。
 
 ## 机器可读资源
 

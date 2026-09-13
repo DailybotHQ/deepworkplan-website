@@ -1,6 +1,6 @@
 ---
 title: "Pengembang — API agent Deep Work Plan"
-description: "Permukaan agent deepworkplan.com untuk pengembang dan agent AI: API read-only tanpa autentikasi yang dideskripsikan oleh spesifikasi OpenAPI, server MCP stateless di /api/mcp, Markdown per halaman dalam 17 bahasa, dan CLI npx skills."
+description: "Permukaan agen Deep Work Plan: API read-only tanpa autentikasi dan berversi, dengan OpenAPI, server MCP, dan Markdown per halaman dalam 17 bahasa."
 ---
 
 ## Tanpa autentikasi secara desain
@@ -21,10 +21,22 @@ Tidak ada kunci API untuk dibuat, tidak ada alur OAuth, dan tidak ada sandbox ya
 | GET | `/init.md` | Prompt adopsi DWP kanonik. |
 | GET | `/{page}.md` | Halaman apa pun sebagai Markdown sumber, dalam semua 17 bahasa. |
 | GET | `/api/health.json` | Penanda health statis. |
+| GET | `/api/v1/index.json` | Katalog berversi dari keluarga v1: jalur endpoint, versi situs, dan tautan ke spesifikasi. |
+| GET | `/api/v1/sections.json` | Peta situs sebagai JSON bertipe — nama, jalur, dan deskripsi per bagian. |
+| GET | `/api/v1/pages.json` | Setiap endpoint Markdown dalam setiap bahasa, dikelompokkan per kode bahasa. |
+| GET | `/api/v1/health.json` | Penanda kesehatan berversi — cermin v1 dari `/api/health.json`. |
 | POST | `/api/mcp` | Server MCP (Streamable HTTP, stateless). |
 | GET | `/.well-known/ai-catalog.json` | Manifest kapabilitas ARD (agentmap). |
 
 Path `/api/*` yang tidak dikenal mengembalikan error JSON terstruktur dengan petunjuk resolusi, bukan halaman error HTML.
+
+## Pemberversian dan deprekasi
+
+Keluarga JSON berversi berada di bawah `/api/v1/` — index, sections, pages, dan health — dan jalur kanonik tanpa versi (`/llms.txt`, `/{page}.md`, `/api/mcp`) termasuk dalam kontrak v1 yang sama. Perubahan yang merusak kompatibilitas hanya dikirim dalam keluarga `/api/v{N+1}/` baru, tidak pernah di dalam v1. Saat sebuah endpoint dideprekasi, responsnya membawa `Deprecation: true` dan tanggal `Sunset` setidaknya 180 hari sebelum penghapusan, dan header `Link` menunjuk ke penerusnya.
+
+## Batas laju permintaan
+
+Respons pada `/api/*` membawa header batas laju RFC 9331 — `RateLimit-Limit`, `RateLimit-Remaining`, `RateLimit-Reset`, dan `RateLimit-Policy` — agar agent dapat mengatur dirinya secara real-time; respons `429` menambahkan `Retry-After`. Penegakan dilakukan sebaik mungkin di edge (120 permintaan per 60 detik per pengunjung) dan akses tetap anonim: tanpa kunci, tanpa pendaftaran, tanpa tingkatan.
 
 ## Server MCP
 
@@ -70,10 +82,16 @@ curl -s https://deepworkplan.com/es/developers.md
 Jalur instalasi resmi untuk skill Deep Work Plan — perintah yang sama dengan yang diberikan endpoint /init kepada agent. Bekerja dengan coding agent apa pun yang kompatibel dengan skills (Claude Code, Cursor, Codex, Gemini, dan lainnya):
 
 ```bash
+# 1. Install the DWP skill — same command the /init endpoint gives agents
 npx skills add DailybotHQ/deepworkplan-skill@latest
+
+# 2. Official CLI — zero-dependency client over this API (Node >= 18),
+#    prepared in the site repo's cli/ directory pending npm publication
+deepworkplan init
+deepworkplan read /es/developers
 ```
 
-Skill di-vendor ke `.agents/skills/deepworkplan/` di dalam repositori Anda, sehingga setiap agent yang menyentuh repo berbagi metodologi yang sama.
+Skill di-vendor ke dalam `.agents/skills/deepworkplan/` di dalam repositori Anda, sehingga setiap agent yang menyentuh repo berbagi metodologi yang sama. CLI resmi `deepworkplan` — klien tanpa dependensi di atas API yang sama (`init`, `sections`, `read`, `open`, `mcp`) — telah disiapkan untuk npm dan berada di direktori [cli/](https://github.com/DailybotHQ/deepworkplan-website/tree/main/cli) repositori situs hingga dipublikasikan.
 
 ## Sumber daya yang dapat dibaca mesin
 

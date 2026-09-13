@@ -199,6 +199,8 @@ Bots in the watchlist are currently ignored but should be reviewed periodically 
    - **Remove from watchlist**: If the bot is dead (no visits for 3+ months)
 4. Update this table, `functions/_middleware.ts`, and `robots.txt` accordingly
 
+**Sync rule:** the `AI_BOT_PATTERNS` list in `functions/_middleware.ts` mirrors the "AI/LLM Crawlers - Explicitly allowed" section of `public/robots.txt` — any User-Agent added to one MUST be added to the other in the same change. Reachability of those agents at the edge is verified with `pnpm run agents:reachability` (see `docs/technical/AGENT_CRAWLER_ACCESS_RUNBOOK.md`).
+
 **Event payload:**
 
 ```json

@@ -126,7 +126,7 @@ export const id: SiteTranslations = {
       answer:
         'Deep Work Plan menjawabnya dengan pengembangan berbasis spesifikasi: rencana yang tahan lama, tugas atomik, dan gerbang verifikasi yang harus dilalui agen. "Selesai" berhenti menjadi perasaan — menjadi bukti yang dapat diverifikasi dan ditinjau.',
       efficiency:
-        'Dan karena konteks adalah sumber daya paling langka bagi agen Anda, harness dirancang untuk efisiensi token: instruksi dimuat progresif, verifikasi hanya menyentuh yang berubah, dan setiap tugas belajar secara lokal — kerja panjang tetap terjangkau. Rencana itu sendiri berskala dengan cara yang sama: rencana Lite untuk perbaikan berbatas, rencana Full untuk pekerjaan yang berlangsung berjam-jam — format selalu mengikuti cakupan pekerjaan, bukan sebaliknya.',
+        'Dan karena konteks adalah sumber daya paling langka bagi agen Anda, harness dirancang untuk menjaga beban instruksinya sendiri tetap kecil dan dapat diaudit: instruksi dimuat progresif, verifikasi hanya menyentuh yang berubah, dan setiap tugas belajar secara lokal. Beban per alur diukur dalam byte dan dipublikasikan pada setiap rilis — rilis terbaru memangkas alur eksekusi 45,7% dan alur lanjut 67,5%. Rencana itu sendiri berskala dengan cara yang sama: rencana Lite untuk perbaikan berbatas, rencana Full untuk pekerjaan yang berlangsung berjam-jam — format selalu mengikuti cakupan pekerjaan, bukan sebaliknya.',
       illustrationAlt:
         'Diptych ukiran: satu sisi kapal yang hanyut di kabut dekat karang, sisi lain kapal yang sama menuju mercusuar pelabuhan di jalur yang tergambar.',
     },
@@ -157,7 +157,7 @@ export const id: SiteTranslations = {
       },
       act5: {
         kicker: 'Metode · Babak V',
-        lead: 'Konteks adalah sumber daya paling langka bagi agen Anda. Harness memuat progresif, memvalidasi yang berubah, dan belajar per tugas — rencana membayar dirinya sendiri.',
+        lead: 'Konteks adalah sumber daya paling langka bagi agen Anda. Harness memuat progresif, memvalidasi yang berubah, dan belajar per tugas — beban instruksi setiap alur terukur dan dipublikasikan, rilis demi rilis.',
         deepLinkLabel: 'Baca metodologi',
         deepLinkHref: '/methodology',
       },
@@ -438,7 +438,7 @@ export const id: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'Tentang metodologi',
+    title: 'Tentang metodologi — Deep Work Plan',
     subtitle: 'Metodologi terbuka · Berlisensi MIT',
     description:
       'Deep Work Plan adalah metodologi terbuka dan agnostik terhadap framework untuk pekerjaan teknik yang serius dengan AI coding agent. Dari mana asalnya dan siapa yang merawatnya.',
@@ -489,7 +489,7 @@ export const id: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Komunitas & kontak',
+    title: 'Komunitas & kontak — Deep Work Plan',
     subtitle: 'Sumber terbuka · Digerakkan komunitas',
     description:
       'Deep Work Plan dibangun secara terbuka. Temukan sumbernya, ajukan issue, atau ikut percakapan melalui kanal di bawah — kontribusi sangat dihargai.',
@@ -560,7 +560,7 @@ export const id: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Halaman Tidak Ditemukan',
+    title: 'Halaman Tidak Ditemukan — Deep Work Plan',
     description:
       'Halaman yang Anda cari tidak ada atau telah dipindahkan. Jelajahi metodologinya atau kembali ke beranda untuk terus menelusuri.',
     heading: 'Halaman Tidak Ditemukan',
@@ -724,7 +724,7 @@ export const id: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Jadikan repositori Anda AI-first',
+      title: 'Init — Jadikan repositori Anda AI-first — Deep Work Plan',
       description:
         'Adopsi metodologi Deep Work Plan di repositori mana pun. Pasang skill, jalankan onboarding agent, lalu rencanakan dan eksekusi dengan AI coding agent mana pun.',
     },
@@ -1069,7 +1069,7 @@ export const id: SiteTranslations = {
             id: 'cost',
             question: 'Berapa biayanya, dan bagaimana efisiensi diukur?',
             answer:
-              'Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur, diukur oleh script yang di-commit bersama skill, diukur ulang pada setiap baseline rilis dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu; evaluasi publik yang praregistrasi direncanakan untuk mengukur hasilnya secara semestinya.',
+              'Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur, diukur oleh script yang di-commit bersama skill, diukur ulang pada setiap baseline rilis dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu. Evaluasi publik dengan agen segar kini telah dijalankan di bawah protokol beku: dua fitur yang sama dibangun dari klon bersih tanpa harness, dengan versi mayor sebelumnya, dan dengan versi saat ini. Evaluasi menemukan bahwa agen pada pohon berkemampuan-harness membaca lebih sedikit byte pada kedua tugas, dan bahwa sesi fitur versi saat ini mengonsumsi lebih sedikit masukan dan keluaran model daripada versi mayor sebelumnya pada kedua tugas — sebagaimana dilaporkan harness, pada satu beban kerja. Evaluasi juga menemukan batas-batasnya yang jujur: onboarding adalah biaya sekali bayar yang hanya terbayar kembali saat alurnya digunakan, arah token bersih per beban kerja bersifat campuran, tidak ada klaim keunggulan waktu dinding, dan agen segar tidak memasuki alur dengan sendirinya — alur adalah perintah yang Anda atau agen yang tahu memanggilnya.',
             linkLabel: 'Kepercayaan dan pengungkapan',
             linkPath: '/trust',
           },
@@ -1293,7 +1293,7 @@ export const id: SiteTranslations = {
     },
     honestLimits: {
       title: 'Keterbatasan yang jujur',
-      body: 'Deep Work Plan tidak memiliki mekanisme spesifikasi hidup maupun delta; OpenSpec dan tool sejenis lebih kuat di aspek itu. Belum ada benchmark independen atas metodologi ini; sebuah evaluasi publik yang praregistrasi sedang direncanakan. Ledger beban instruksi mengukur byte yang dimuat, bukan token, biaya, atau hasil. DWP secara sengaja dibatasi pada repositori: ini bukan sistem memori lintas proyek, bukan kerangka kerja agen berbasis peran, dan bukan IDE, sehingga tidak bersaing di sumbu-sumbu itu juga — padukan dengan alat yang mencakup salah satu sumbu tersebut saat pekerjaan membutuhkannya.',
+      body: 'Deep Work Plan tidak memiliki mekanisme spesifikasi hidup maupun delta; OpenSpec dan tool sejenis lebih kuat di aspek itu. Belum ada benchmark independen atas metodologi ini; evaluasi pihak pertama dengan agen segar telah dijalankan di bawah protokol beku, dalam skala kecil — satu beban kerja, dua fitur per konfigurasi, satu mesin — dan hasilnya dipublikasikan ke dua arah: agen pada pohon berkemampuan-harness membaca lebih sedikit byte pada kedua tugas dan sesi versi saat ini mengonsumsi lebih sedikit masukan dan keluaran model yang dilaporkan harness daripada versi mayor sebelumnya, sementara arah token bersih per beban kerja bersifat campuran dan tidak ada klaim keunggulan waktu dinding. Ledger beban instruksi mengukur byte yang dimuat, bukan token, biaya, atau hasil. DWP secara sengaja dibatasi pada repositori: ini bukan sistem memori lintas proyek, bukan kerangka kerja agen berbasis peran, dan bukan IDE, sehingga tidak bersaing di sumbu-sumbu itu juga — padukan dengan alat yang mencakup salah satu sumbu tersebut saat pekerjaan membutuhkannya.',
     },
     correction: {
       title: 'Bantu kami menjaga keakuratan halaman ini',
@@ -1305,7 +1305,7 @@ export const id: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Kepercayaan dan keamanan',
+      title: 'Kepercayaan dan keamanan — Deep Work Plan',
       description:
         'Mengapa Deep Work Plan aman untuk diadopsi: sumber terbuka dan berlisensi MIT, Markdown-first tanpa panggilan jaringan atau telemetri, non-destruktif berdasarkan desain, dengan instalasi yang dapat diverifikasi dan kebijakan pengungkapan kerentanan yang jelas.',
     },
@@ -1369,7 +1369,7 @@ export const id: SiteTranslations = {
       title:
         'Pengembang — API agent, server MCP, dan dokumentasi Deep Work Plan',
       description:
-        'Permukaan agent Deep Work Plan: API read-only tanpa autentikasi, spesifikasi OpenAPI, server MCP di /api/mcp, Markdown 17 bahasa, dan CLI npx skills.',
+        'Permukaan agen Deep Work Plan: API read-only tanpa autentikasi dan berversi, dengan OpenAPI, server MCP, dan Markdown per halaman dalam 17 bahasa.',
     },
     eyebrow: 'Permukaan agent & pengembang',
     title: 'Deep Work Plan untuk pengembang dan agent AI',
@@ -1432,6 +1432,30 @@ export const id: SiteTranslations = {
           'Penanda health statis dengan link ke spesifikasi dan portal ini.',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'Katalog berversi dari keluarga v1: jalur endpoint, versi situs, dan tautan ke spesifikasi.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          'Peta situs sebagai JSON bertipe — nama, jalur, dan deskripsi per bagian.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          'Setiap endpoint Markdown dalam setiap bahasa, dikelompokkan per kode bahasa.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description:
+          'Penanda kesehatan berversi — cermin v1 dari /api/health.json.',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1444,6 +1468,12 @@ export const id: SiteTranslations = {
           'Manifest kapabilitas ARD — agentmap yang dinyatakan di robots.txt.',
       },
     ],
+    versioningTitle: 'Pemberversian dan deprekasi',
+    versioningBody:
+      'Keluarga JSON berversi berada di bawah /api/v1/ — index, sections, pages, dan health — dan jalur kanonik tanpa versi (/llms.txt, /{page}.md, /api/mcp) termasuk dalam kontrak v1 yang sama. Perubahan yang merusak kompatibilitas hanya dikirim dalam keluarga /api/v{N+1}/ baru, tidak pernah di dalam v1. Saat sebuah endpoint dideprekasi, responsnya membawa Deprecation: true dan tanggal Sunset setidaknya 180 hari sebelum penghapusan, dan header Link menunjuk ke penerusnya.',
+    rateLimitsTitle: 'Batas laju permintaan',
+    rateLimitsBody:
+      'Respons pada /api/* membawa header batas laju RFC 9331 — RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset, dan RateLimit-Policy — agar agent dapat mengatur dirinya secara real-time; respons 429 menambahkan Retry-After. Penegakan dilakukan sebaik mungkin di edge (120 permintaan per 60 detik per pengunjung) dan akses tetap anonim: tanpa kunci, tanpa pendaftaran, tanpa tingkatan.',
     mcpTitle: 'Server MCP',
     mcpIntro:
       'Server Model Context Protocol stateless melalui Streamable HTTP. Tiga tool read-only: get_init_prompt, list_site_sections, dan read_page. Versi protokol 2025-03-26 dan 2025-06-18 didukung; tidak ada sesi yang diperlukan.',
@@ -1459,9 +1489,9 @@ export const id: SiteTranslations = {
     cliTitle: 'Pasang kit',
     cliIntro:
       'Jalur instalasi resmi untuk skill Deep Work Plan — perintah yang sama dengan yang diberikan endpoint /init kepada agent. Bekerja dengan coding agent apa pun yang kompatibel dengan skills (Claude Code, Cursor, Codex, Gemini, dan lainnya).',
-    cliCodeLabel: 'Terminal — skills CLI',
+    cliCodeLabel: 'Terminal — skills CLI dan CLI resmi',
     cliNote:
-      'Skill di-vendor ke .agents/skills/deepworkplan/ di dalam repositori Anda, sehingga setiap agent yang menyentuh repo berbagi metodologi yang sama.',
+      'Skill di-vendor ke dalam .agents/skills/deepworkplan/ di dalam repositori Anda, sehingga setiap agent yang menyentuh repo berbagi metodologi yang sama. CLI resmi deepworkplan — klien tanpa dependensi di atas API yang sama (init, sections, read, open, mcp) — telah disiapkan untuk npm dan berada di direktori cli/ repositori situs hingga dipublikasikan.',
     resourcesTitle: 'Sumber daya yang dapat dibaca mesin',
     resources: [
       {

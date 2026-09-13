@@ -128,7 +128,7 @@ export const ja: SiteTranslations = {
       answer:
         'Deep Work Planは仕様駆動開発で応えます。永続する計画、原子タスク、そしてエージェントが通過すべき検証ゲート。「完了」は気分ではなく——検証可能でレビューできる証拠になります。',
       efficiency:
-        'コンテキストはエージェントにとって最も希少な資源です。だからハーネスはトークン効率のために設計されています：指示は段階的に読み込み、検証は変更された箇所だけに触れ、学習はタスクごとに記録——長期の作業でも経済的に続きます。計画そのものも同じ原理に従います：範囲が限定された修正には Lite 計画を、数時間に及ぶ作業には Full 計画を——形式は常に作業の範囲に従い、その逆ではありません。',
+        'コンテキストはエージェントにとって最も希少な資源です。だからハーネスは自身の指示負荷を小さく監査可能に保つよう設計されています：指示は段階的に読み込み、検証は変更された箇所だけに触れ、学習はタスクごとに記録されます。各フローの負荷はバイトで測定され、リリースごとに公開されます——最新のリリースでは実行フローが 45.7%、再開フローが 67.5% 縮小しました。計画そのものも同じ原理に従います：範囲が限定された修正には Lite 計画を、数時間に及ぶ作業には Full 計画を——形式は常に作業の範囲に従い、その逆ではありません。',
       illustrationAlt:
         '彫版の二連作：片側は霧の中で岩場に漂う船、もう片側は同じ船が描かれた航路に沿って港の灯台へ穏やかに進む様子。',
     },
@@ -159,7 +159,7 @@ export const ja: SiteTranslations = {
       },
       act5: {
         kicker: 'メソッド · 第五幕',
-        lead: 'コンテキストはエージェントにとって最も希少な資源です。ハーネスは段階的に読み込み、変更された箇所だけを検証し、タスクごとに学習します——長期の作業でも経済的に続けられる設計です。',
+        lead: 'コンテキストはエージェントにとって最も希少な資源です。ハーネスは段階的に読み込み、変更された箇所だけを検証し、タスクごとに学習します——各フローの指示負荷は測定のうえ公開され、リリースを重ねるごとに更新されます。',
         deepLinkLabel: '方法論を読む',
         deepLinkHref: '/methodology',
       },
@@ -440,7 +440,7 @@ export const ja: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: '方法論について',
+    title: '方法論について — Deep Work Plan',
     subtitle: 'オープンな方法論 · MIT ライセンス',
     description:
       'Deep Work Plan は、AIコーディングエージェントによる本格的なエンジニアリング作業のための、フレームワーク非依存のオープンな方法論です。その起源と、誰が維持しているか。',
@@ -491,7 +491,7 @@ export const ja: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'コミュニティとお問い合わせ',
+    title: 'コミュニティとお問い合わせ — Deep Work Plan',
     subtitle: 'オープンソース · コミュニティ主導',
     description:
       'Deep Work Plan はオープンに作られています。ソースを見つけ、Issue を立て、あるいは以下のチャネルから会話に参加してください。コントリビューションを歓迎します。',
@@ -562,7 +562,7 @@ export const ja: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'ページが見つかりません',
+    title: 'ページが見つかりません — Deep Work Plan',
     description:
       'お探しのページは存在しないか、移動されました。方法論を見るか、ホームページに戻って閲覧を続けてください。',
     heading: 'ページが見つかりません',
@@ -726,7 +726,7 @@ export const ja: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — リポジトリを AI-first にする',
+      title: 'Init — リポジトリを AI-first にする — Deep Work Plan',
       description:
         'あらゆるリポジトリで Deep Work Plan 方法論を採用する。スキルをインストールし、エージェントのオンボーディングを実行し、どのAIコーディングエージェントでも計画して実行します。',
     },
@@ -1069,7 +1069,7 @@ export const ja: SiteTranslations = {
             id: 'cost',
             question: '費用はいくらですか？効率はどのように測定されますか？',
             answer:
-              '方法論とスキルは MIT ライセンスで無料です。中核のフローにサービスも API キーもテレメトリーもありません。効率は、各フローが読み込む指示バイト数として報告されます。スキルとともにコミットされたスクリプトによって計測され、リリースのベースラインごとに再計測され、評価台帳として公開され、増加は減少と同じようにはっきり報告されます。バイトの目録はそれらを立証しないため、トークンのパーセンテージやコスト削減として報告されることはありません。成果を適切に測定するため、事前登録された公開評価が計画されています。',
+              '方法論とスキルは MIT ライセンスで無料です。中核のフローにサービスも API キーもテレメトリーもありません。効率は、各フローが読み込む指示バイト数として報告されます。スキルとともにコミットされたスクリプトによって計測され、リリースのベースラインごとに再計測され、評価台帳として公開され、増加は減少と同じようにはっきり報告されます。バイトの目録はそれらを立証しないため、トークンのパーセンテージやコスト削減として報告されることはありません。凍結されたプロトコルの下、公開のフレッシュエージェント評価がすでに実行されました：同じ2つの機能を、ハーネスなし・前のメジャーバージョン・現行版のクリーンなクローンでそれぞれ構築したものです。その結果、ハーネスを持つツリー上のエージェントは両タスクでより少ないバイトを読み、現行版の機能セッションは両タスクで前のメジャーバージョンより少ないモデル入出力を消費しました——ハーネス報告による、単一ワークロードでの値です。同時に正直な限界も判明しました：オンボーディングは一回限りのコストであり、フローが使われて初めて回収されること、ワークロードごとのトークンの純方向は混在していたこと、ウォールクロックの優位は主張しないこと、そしてフレッシュなエージェントは自力ではフローに入らないこと——フローはあなたか、呼び出し方を知るエージェントが実行するコマンドです。',
             linkLabel: '信頼と開示',
             linkPath: '/trust',
           },
@@ -1293,7 +1293,7 @@ export const ja: SiteTranslations = {
     },
     honestLimits: {
       title: '正直な限界',
-      body: 'Deep Work Plan には生きた仕様やデルタ仕様の仕組みがなく、その領域では OpenSpec などのツールが優れています。方法論の独立したベンチマークはまだ存在せず、事前登録された公開評価が計画されています。指示読み込みの台帳は読み込まれたバイト数を測るものであり、トークン、コスト、成果ではありません。DWP はあえてリポジトリの範囲に限定されています。プロジェクトをまたぐメモリシステムでも、役割ベースのエージェントフレームワークでも、IDE でもないため、これらの軸では競合しません——その能力が必要な作業には、それをカバーするツールと組み合わせてください。',
+      body: 'Deep Work Plan には生きた仕様やデルタ仕様の仕組みがなく、その領域では OpenSpec などのツールが優れています。方法論の独立したベンチマークはまだ存在しません。一方、ファーストパーティによるフレッシュエージェント評価が凍結プロトコルの下で実行済みです——規模は小さく、単一ワークロード、構成ごとに2つの機能、1台のマシン——その結果は両方向で公開されています：ハーネスを持つツリー上のエージェントは両タスクでバイト読取量が少なく、現行版のセッションは前のメジャーバージョンより少ない、ハーネス報告のモデル入出力を消費した一方、ワークロードごとのトークンの純方向は混在し、ウォールクロックの優位は主張されていません。指示読み込みの台帳は読み込まれたバイト数を測るものであり、トークン、コスト、成果ではありません。DWP はあえてリポジトリの範囲に限定されています。プロジェクトをまたぐメモリシステムでも、役割ベースのエージェントフレームワークでも、IDE でもないため、これらの軸では競合しません——その能力が必要な作業には、それをカバーするツールと組み合わせてください。',
     },
     correction: {
       title: '正確さを保つためにご協力ください',
@@ -1305,7 +1305,7 @@ export const ja: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: '信頼とセキュリティ',
+      title: '信頼とセキュリティ — Deep Work Plan',
       description:
         'なぜ Deep Work Plan は安心して採用できるのか：Open Source かつ MIT ライセンス、ネットワーク呼び出しやテレメトリーのない Markdown-first、設計上の非破壊性、検証可能なインストール、そして明確な脆弱性開示ポリシー。',
     },
@@ -1368,7 +1368,7 @@ export const ja: SiteTranslations = {
       title:
         '開発者 — Deep Work Plan のエージェント API、MCP サーバーとドキュメント',
       description:
-        'Deep Work Plan のエージェントサーフェス：OpenAPI 仕様付きの読み取り専用・認証不要 API、/api/mcp の MCP サーバー、17 言語のページ単位 Markdown、npx skills インストール CLI。',
+        'Deep Work Plan のエージェントサーフェス：読み取り専用・認証不要・バージョン付きの API——OpenAPI 仕様、MCP サーバー、17 言語のページ単位 Markdown、公式 CLI。',
     },
     eyebrow: 'エージェントと開発者のサーフェス',
     title: '開発者と AI エージェントのための Deep Work Plan',
@@ -1430,6 +1430,30 @@ export const ja: SiteTranslations = {
         description: '仕様とこのポータルへのリンクを備えた静的ヘルスマーカー。',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'v1 ファミリーのバージョン付きカタログ：エンドポイントのパス、サイトのバージョン、仕様へのリンク。',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          '型付き JSON によるサイトマップ——セクションごとの名前・パス・説明。',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          'すべての言語のすべての Markdown エンドポイントを、言語コードごとにグループ化した一覧。',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description:
+          'バージョン付きのヘルスマーカー——/api/health.json の v1 ミラー。',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1441,6 +1465,12 @@ export const ja: SiteTranslations = {
         description: 'ARD 能力マニフェスト——robots.txt で宣言された agentmap。',
       },
     ],
+    versioningTitle: 'バージョニングと廃止',
+    versioningBody:
+      'バージョン付き JSON ファミリーは /api/v1/ 配下に存在します——index、sections、pages、health——そして、バージョンなしの正規パス（/llms.txt、/{page}.md、/api/mcp）も同じ v1 契約に属します。破壊的変更は新しい /api/v{N+1}/ ファミリーとしてのみ提供され、v1 の内部で行われることはありません。エンドポイントが廃止されると、そのレスポンスは Deprecation: true と、削除の少なくとも 180 日前を示す Sunset 日付を伴い、Link ヘッダーが後継を指します。',
+    rateLimitsTitle: 'レート制限',
+    rateLimitsBody:
+      '/api/* のレスポンスは RFC 9331 のレート制限ヘッダー——RateLimit-Limit、RateLimit-Remaining、RateLimit-Reset、RateLimit-Policy——を伴うため、エージェントはリアルタイムに自分のペースを調整できます。429 レスポンスには Retry-After が追加されます。実施はエッジでのベストエフォート（訪問者あたり 60 秒につき 120 リクエスト）で、アクセスは匿名のままです：キーも登録も階層もありません。',
     mcpTitle: 'MCP サーバー',
     mcpIntro:
       'Streamable HTTP 上のステートレスな Model Context Protocol サーバーです。読み取り専用の 3 つのツール: get_init_prompt、list_site_sections、read_page。プロトコルバージョン 2025-03-26 と 2025-06-18 をサポートしており、セッションは不要です。',
@@ -1456,9 +1486,9 @@ export const ja: SiteTranslations = {
     cliTitle: 'キットをインストール',
     cliIntro:
       'Deep Work Plan スキルの公式インストールパスです——/init エンドポイントがエージェントに与えるのと同じコマンドです。skills 互換の任意のコーディングエージェント（Claude Code、Cursor、Codex、Gemini など）で動作します。',
-    cliCodeLabel: 'ターミナル — skills CLI',
+    cliCodeLabel: 'ターミナル — skills CLI と公式 CLI',
     cliNote:
-      'スキルはリポジトリ内の .agents/skills/deepworkplan/ にベンダーされるため、リポジトリを扱うすべてのエージェントが同じ方法論を共有します。',
+      'スキルはリポジトリ内の .agents/skills/deepworkplan/ にベンダーされるため、リポジトリを扱うすべてのエージェントが同じ方法論を共有します。公式 deepworkplan CLI——同じ API の上に作られた依存関係ゼロのクライアント（init、sections、read、open、mcp）——は npm に向けて準備済みで、公開までサイトリポジトリの cli/ ディレクトリにあります。',
     resourcesTitle: '機械可読リソース',
     resources: [
       { label: 'OpenAPI 仕様 (/openapi.json)', href: '/openapi.json' },

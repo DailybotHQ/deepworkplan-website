@@ -50,7 +50,7 @@ Deep Work Plan grew out of real engineering work at Dailybot and is now maintain
 - [Compare](https://deepworkplan.com/compare) — Deep Work Plan compared with spec-driven tools, agent workflow frameworks and vendor-native plan modes: each described on its own terms, three neutral capability values, official sources, a review date and an invitation to correct
 - [FAQ](https://deepworkplan.com/faq) — Frequently asked questions: what Deep Work Plan does, how validation gates and resumption work, how it differs from other tools, and how to adopt or upgrade
 - [Init / Adoption](https://deepworkplan.com/init) — Make any repository AI-first: install the skill, onboard the repo, then plan and execute. Includes a self-contained onboarding prompt at [init.md](https://deepworkplan.com/init.md) to hand to an agent
-- [Developers](https://deepworkplan.com/developers) — The agent & developer surface: a read-only, zero-auth API described by an OpenAPI spec, a stateless MCP server at /api/mcp, per-page Markdown in 17 languages, and the `npx skills` install CLI. Alias: /docs redirects here
+- [Developers](https://deepworkplan.com/developers) — The agent & developer surface: a read-only, zero-auth, versioned API described by an OpenAPI spec, a stateless MCP server at /api/mcp, per-page Markdown in 17 languages, the `npx skills` install CLI, and the official `deepworkplan` CLI. Alias: /docs redirects here
 - [Trust](https://deepworkplan.com/trust) — Why the skill is safe to adopt: open source, MIT, verifiable installs (SHA256SUMS), and a clear vulnerability-disclosure policy
 - [About](https://deepworkplan.com/about) — What Deep Work Plan is, its core principles, and who maintains it
 - [Contact](https://deepworkplan.com/contact) — How to engage with the project: source, issues, and discussions on GitHub
@@ -134,6 +134,9 @@ The site exposes a read-only, zero-auth agent API — no keys, no registration, 
 - [OpenAPI 3.1 spec](https://deepworkplan.com/openapi.json) — every endpoint, parameter, and response schema
 - [MCP server](https://deepworkplan.com/api/mcp) — stateless Model Context Protocol over Streamable HTTP (JSON-RPC 2.0). Tools: `get_init_prompt`, `list_site_sections`, `read_page`. Manifest: [mcp.json](https://deepworkplan.com/.well-known/mcp.json); server card: [server-card.json](https://deepworkplan.com/.well-known/mcp/server-card.json). Supports protocol versions 2025-03-26 and 2025-06-18
 - [Health](https://deepworkplan.com/api/health.json) — static status marker
+- [Versioned API catalog](https://deepworkplan.com/api/v1/index.json) — the `/api/v1/` family (sections, pages, health) with the site version and spec links; the unversioned canonical paths belong to the same v1 contract
+- [Official CLI](https://github.com/DailybotHQ/deepworkplan-website/tree/main/cli) — `deepworkplan`: a zero-dependency command-line client over this API (`init`, `sections`, `read`, `open`, `mcp`); npm publication pending
+- Versioning & rate limits — breaking changes ship only in a new `/api/v{N+1}/` family; deprecated endpoints answer with `Deprecation` and `Sunset` headers at least 180 days before removal; `/api/*` responses carry RFC 9331 `RateLimit-Limit`/`-Remaining`/`-Reset`/`-Policy` headers and `Retry-After` on 429 (best-effort, 120 requests per 60 seconds, anonymous access unchanged)
 - [Developer portal](https://deepworkplan.com/developers) — quickstarts, curl examples, and the install CLI ([/docs](https://deepworkplan.com/docs) redirects there)
 - **Errors**: unknown `/api/*` paths return structured JSON errors (`{"error":{"code","message","hint"}}`), never HTML; Markdown-negotiating clients that hit a 404 receive a Markdown recovery body listing the sitemap, llms.txt, and key pages
 

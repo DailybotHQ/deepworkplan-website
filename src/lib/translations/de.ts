@@ -127,7 +127,7 @@ export const de: SiteTranslations = {
       answer:
         'Deep Work Plan antwortet mit spec-driven development: ein dauerhafter Plan, atomare Aufgaben und Validierungs-Gates, die der Agent bestehen muss. „Fertig“ ist kein Gefühl mehr — es wird zu überprüfbarer, reviewbarer Evidenz.',
       efficiency:
-        'Und weil der Kontext die knappste Ressource Ihres Agenten ist, ist das Harness auf Token-Effizienz ausgelegt: Anweisungen laden progressiv, Validierung berührt nur Geändertes, und jede Aufgabe lernt lokal — so bleibt langlaufende Arbeit erschwinglich. Der Plan selbst skaliert nach demselben Prinzip: ein Lite-Plan für eine begrenzte Korrektur, ein Full-Plan für Arbeit, die sich über Stunden erstreckt — das Format folgt immer dem Umfang der Arbeit, nicht umgekehrt.',
+        'Und weil der Kontext die knappste Ressource Ihres Agenten ist, ist das Harness darauf ausgelegt, seine eigene Instruktionslast klein und prüfbar zu halten: Anweisungen laden progressiv, Validierung berührt nur Geändertes, und jede Aufgabe lernt lokal. Die Last pro Flow wird in Bytes gemessen und mit jedem Release veröffentlicht — das letzte Release senkte den Execute-Flow um 45,7% und den Resume-Flow um 67,5%. Der Plan selbst skaliert nach demselben Prinzip: ein Lite-Plan für eine begrenzte Korrektur, ein Full-Plan für Arbeit, die sich über Stunden erstreckt — das Format folgt immer dem Umfang der Arbeit, nicht umgekehrt.',
       illustrationAlt:
         'Ein Diptychon: links ein im Nebel neben Felsen abtreibendes Schiff, rechts dasselbe Schiff auf gezeichnetem Kurs ruhig Richtung Hafenfeuer.',
     },
@@ -158,7 +158,7 @@ export const de: SiteTranslations = {
       },
       act5: {
         kicker: 'Die Methode · Akt V',
-        lead: 'Der Kontext ist die knappste Ressource Ihres Agenten. Das Harness lädt progressiv, validiert nur Geändertes und lernt Aufgabe für Aufgabe — so amortisiert sich der Plan selbst.',
+        lead: 'Der Kontext ist die knappste Ressource Ihres Agenten. Das Harness lädt progressiv, validiert nur Geändertes und lernt Aufgabe für Aufgabe — mit der Instruktionslast jedes Flows gemessen und veröffentlicht, Release für Release.',
         deepLinkLabel: 'Lesen Sie die Methodik',
         deepLinkHref: '/methodology',
       },
@@ -438,7 +438,7 @@ export const de: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'Über die Methodik',
+    title: 'Über die Methodik — Deep Work Plan',
     subtitle: 'Offene Methodik · MIT-lizenziert',
     description:
       'Deep Work Plan ist eine offene, framework-agnostische Methodik für ernsthafte Engineering-Arbeit mit KI-Coding-Agenten. Woher sie kommt und wer sie pflegt.',
@@ -489,7 +489,7 @@ export const de: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Community & Kontakt',
+    title: 'Community & Kontakt — Deep Work Plan',
     subtitle: 'Open Source · Community-getrieben',
     description:
       'Deep Work Plan wird offen entwickelt. Finden Sie den Quellcode, eröffnen Sie ein Issue oder beteiligen Sie sich über die untenstehenden Kanäle an der Diskussion — Beiträge sind willkommen.',
@@ -560,7 +560,7 @@ export const de: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Seite nicht gefunden',
+    title: 'Seite nicht gefunden — Deep Work Plan',
     description:
       'Die gesuchte Seite existiert nicht oder wurde verschoben. Erkunden Sie die Methodik oder kehren Sie zur Startseite zurück, um weiterzustöbern.',
     heading: 'Seite nicht gefunden',
@@ -724,7 +724,7 @@ export const de: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Machen Sie Ihr Repository AI-first',
+      title: 'Init — Machen Sie Ihr Repository AI-first — Deep Work Plan',
       description:
         'Übernehmen Sie die Deep Work Plan Methodik in jedem Repository. Installieren Sie die Skill, führen Sie das Agenten-Onboarding aus, dann planen und führen Sie mit jedem KI-Coding-Agenten aus.',
     },
@@ -1070,7 +1070,7 @@ export const de: SiteTranslations = {
             id: 'cost',
             question: 'Was kostet es, und wie wird Effizienz gemessen?',
             answer:
-              'Die Methodik und die Skill sind MIT-lizenziert und kostenlos; es gibt keinen Dienst, keinen API-Schlüssel und keine Telemetrie in den Kern-Flows. Effizienz wird als Anzahl der Instruktions-Bytes berichtet, die jeder Flow lädt — gemessen von einem Skript, das mit der Skill committet, über Release-Baselines hinweg neu gemessen und in einem Evaluations-Ledger veröffentlicht wird, wobei Zunahmen so offen berichtet werden wie Abnahmen. Nicht berichtet wird in Token-Prozenten oder eingesparten Kosten, weil eine Byte-Bestandsaufnahme das nicht belegen kann; eine vorregistrierte öffentliche Evaluation ist geplant, um Ergebnisse ordentlich zu messen.',
+              'Die Methodik und die Skill sind MIT-lizenziert und kostenlos; es gibt keinen Dienst, keinen API-Schlüssel und keine Telemetrie in den Kern-Flows. Effizienz wird als Anzahl der Instruktions-Bytes berichtet, die jeder Flow lädt — gemessen von einem Skript, das mit der Skill committet, über Release-Baselines hinweg neu gemessen und in einem Evaluations-Ledger veröffentlicht wird, wobei Zunahmen so offen berichtet werden wie Abnahmen. Nicht berichtet wird in Token-Prozenten oder eingesparten Kosten, weil eine Byte-Bestandsaufnahme das nicht belegen kann. Eine öffentliche Evaluation mit frischen Agenten ist unter einem eingefrorenen Protokoll bereits gelaufen: dieselben zwei Features, gebaut aus sauberen Klonen ohne Harness, mit der vorherigen Major-Version und mit der aktuellen. Sie ergab, dass Agenten auf einem Harness-tragenden Baum in beiden Aufgaben weniger Bytes lasen und dass die Feature-Sitzungen der aktuellen Version in beiden Aufgaben weniger Modell-Ein- und -Ausgabe verbrauchten als die der vorherigen Major-Version — vom Harness berichtet, auf einer einzelnen Workload. Sie benannte auch die ehrlichen Grenzen: Onboarding ist ein einmaliger Aufwand, der sich nur zurückzahlt, wenn die Flows genutzt werden; die Netto-Token-Richtung je Workload war gemischt; kein Wanduhr-Vorteil wird beansprucht; und ein frischer Agent betritt die Flows nicht von selbst — die Flows sind Befehle, die Sie oder ein Agent, der sie kennt, aufrufen.',
             linkLabel: 'Vertrauen und Offenlegung',
             linkPath: '/trust',
           },
@@ -1295,7 +1295,7 @@ export const de: SiteTranslations = {
     },
     honestLimits: {
       title: 'Ehrliche Grenzen',
-      body: 'Deep Work Plan hat keinen Mechanismus für lebende oder Delta-Spezifikationen; OpenSpec und ähnliche Werkzeuge sind dort stärker. Ein unabhängiger Benchmark der Methodik existiert noch nicht; eine vorregistrierte öffentliche Evaluation ist geplant. Das Instruktionslast-Ledger misst geladene Bytes, nicht Token, Kosten oder Ergebnisse. DWP ist bewusst auf das Repository begrenzt: Es ist kein projektübergreifendes Gedächtnissystem, kein rollenbasiertes Agenten-Framework und keine IDE, und tritt auf diesen Achsen daher auch nicht an – kombinieren Sie es bei Bedarf mit einem Werkzeug, das genau das abdeckt.',
+      body: 'Deep Work Plan hat keinen Mechanismus für lebende oder Delta-Spezifikationen; OpenSpec und ähnliche Werkzeuge sind dort stärker. Ein unabhängiger Benchmark der Methodik existiert noch nicht; eine eigene Evaluation mit frischen Agenten ist unter einem eingefrorenen Protokoll gelaufen — im kleinen Maßstab: eine Workload, zwei Features pro Konfiguration, eine Maschine — und ihre Ergebnisse werden in beide Richtungen veröffentlicht: Agenten auf Harness-tragenden Bäumen lasen in beiden Aufgaben weniger Bytes, und die Sitzungen der aktuellen Version verbrauchten weniger vom Harness berichtete Modell-Ein- und -Ausgabe als die der vorherigen Major-Version, während die Netto-Token-Richtung je Workload gemischt war und kein Wanduhr-Vorteil beansprucht wird. Das Instruktionslast-Ledger misst geladene Bytes, nicht Token, Kosten oder Ergebnisse. DWP ist bewusst auf das Repository begrenzt: Es ist kein projektübergreifendes Gedächtnissystem, kein rollenbasiertes Agenten-Framework und keine IDE, und tritt auf diesen Achsen daher auch nicht an – kombinieren Sie es bei Bedarf mit einem Werkzeug, das genau das abdeckt.',
     },
     correction: {
       title: 'Helfen Sie uns, diese Seite korrekt zu halten',
@@ -1307,7 +1307,7 @@ export const de: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Vertrauen und Sicherheit',
+      title: 'Vertrauen und Sicherheit — Deep Work Plan',
       description:
         'Warum Deep Work Plan sicher zu übernehmen ist: Open Source und MIT, Markdown-first ohne Netzwerkaufrufe oder Telemetrie, nicht-destruktiv konzipiert, mit verifizierbaren Installationen und einer klaren Richtlinie zur Offenlegung von Schwachstellen.',
     },
@@ -1369,7 +1369,7 @@ export const de: SiteTranslations = {
     meta: {
       title: 'Entwickler — Deep Work Plan Agent-API, MCP-Server & Docs',
       description:
-        'Agentenoberfläche von Deep Work Plan: read-only API ohne Login (OpenAPI), MCP-Server unter /api/mcp, Markdown pro Seite in 17 Sprachen, npx-skills-CLI.',
+        'Agentenoberfläche von Deep Work Plan: versionierte, read-only API ohne Authentifizierung — mit OpenAPI-Spec, MCP-Server und Markdown-Spiegeln in 17 Sprachen.',
     },
     eyebrow: 'Oberfläche für Agenten & Entwickler',
     title: 'Deep Work Plan für Entwickler und KI-Agenten',
@@ -1432,6 +1432,30 @@ export const de: SiteTranslations = {
           'Statischer Health-Marker mit Links zur Spezifikation und zu diesem Portal.',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'Versionierter Katalog der v1-Familie: Endpunkt-Pfade, Website-Version und Links zur Spec.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          'Die Sitemap als typisiertes JSON — Name, Pfad und Beschreibung je Abschnitt.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          'Alle Markdown-Endpunkte in jeder Sprache, gruppiert nach Sprachcode.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description:
+          'Versionierter Health-Marker — das v1-Pendant zu /api/health.json.',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1444,6 +1468,12 @@ export const de: SiteTranslations = {
           'ARD-Fähigkeitsmanifest — die in robots.txt deklarierte Agentmap.',
       },
     ],
+    versioningTitle: 'Versionierung und Deprecation',
+    versioningBody:
+      'Die versionierte JSON-Familie liegt unter /api/v1/ — index, sections, pages und health — und die unversionierten kanonischen Pfade (/llms.txt, /{page}.md, /api/mcp) gehören zum selben v1-Vertrag. Breaking Changes erscheinen ausschließlich in einer neuen Familie /api/v{N+1}/, nie innerhalb von v1. Wird ein Endpunkt deprecated, tragen seine Antworten Deprecation: true und ein Sunset-Datum mindestens 180 Tage vor der Abschaltung, und ein Link-Header verweist auf den Nachfolger.',
+    rateLimitsTitle: 'Rate-Limits',
+    rateLimitsBody:
+      'Antworten auf /api/* tragen RFC-9331-Rate-Limit-Header — RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset und RateLimit-Policy —, damit Agents sich in Echtzeit selbst drosseln können; eine 429-Antwort ergänzt Retry-After. Die Durchsetzung ist Best-Effort an der Edge (120 Anfragen pro 60 Sekunden pro Besucher), und der Zugriff bleibt anonym: keine Schlüssel, keine Registrierung, keine Stufen.',
     mcpTitle: 'MCP-Server',
     mcpIntro:
       'Ein zustandsloser Model-Context-Protocol-Server über Streamable HTTP. Drei nur lesende Tools: get_init_prompt, list_site_sections und read_page. Die Protokollversionen 2025-03-26 und 2025-06-18 werden unterstützt; eine Sitzung ist nicht erforderlich.',
@@ -1459,9 +1489,9 @@ export const de: SiteTranslations = {
     cliTitle: 'Das Kit installieren',
     cliIntro:
       'Der offizielle Installationspfad für das Deep Work Plan Skill — derselbe Befehl, den der /init-Endpunkt Agenten übergibt. Er funktioniert mit jedem Skills-kompatiblen Coding-Agenten (Claude Code, Cursor, Codex, Gemini und andere).',
-    cliCodeLabel: 'Terminal — Skills-CLI',
+    cliCodeLabel: 'Terminal — Skills-CLI und offizielle CLI',
     cliNote:
-      'Das Skill wird unter .agents/skills/deepworkplan/ in Ihr Repository eingebettet, sodass jeder Agent, der das Repository bearbeitet, dieselbe Methodik teilt.',
+      'Das Skill wird unter .agents/skills/deepworkplan/ in Ihr Repository eingebettet, sodass jeder Agent, der das Repository bearbeitet, dieselbe Methodik teilt. Die offizielle deepworkplan-CLI — ein Client ohne Abhängigkeiten über dieselbe API (init, sections, read, open, mcp) — ist für npm vorbereitet und liegt bis zur Veröffentlichung im Verzeichnis cli/ des Website-Repositorys.',
     resourcesTitle: 'Maschinenlesbare Ressourcen',
     resources: [
       { label: 'OpenAPI-Spezifikation (/openapi.json)', href: '/openapi.json' },
