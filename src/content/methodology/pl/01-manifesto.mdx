@@ -58,7 +58,7 @@ To drugi filar metodyki i zasługuje na jasną definicję — „harness” sta�
 
 <RepoAsHarness lang="pl" class="not-prose my-10" />
 
-Ponieważ każdy element jest plikiem w repozytorium, a nie funkcją narzędzia, harness jest przenośny z samej konstrukcji. To jednolinijkowa teza, na której opiera się reszta metodyki: *samo repozytorium staje się harness*, więc dowolny agent może pilotować dowolne repo — bez autorskiego frameworka per narzędzie.
+Ponieważ każdy element jest plikiem w repozytorium, a nie funkcją narzędzia, harness jest przenośny z samej konstrukcji: dowolny agent, który czyta markdown i uruchamia polecenia powłoki, może otworzyć te same pliki, bez autorskiego frameworka per narzędzie. To jednolinijkowa teza, na której opiera się reszta metodyki: *samo repozytorium staje się harness*. Jest to twierdzenie o tym, co niesie repozytorium, a nie gwarancja, że model niezawodnie znajdzie właściwy przepływ bez pomocy przy świeżym żądaniu — dlatego kit dostarcza również jawne punkty wejścia `dwp-*` oraz router `SKILL.md`: przenośność plików i niezawodne routowanie to różne właściwości, a tylko ta pierwsza jest zbudowana z samej konstrukcji.
 
 ## Wydajność z samej konstrukcji
 

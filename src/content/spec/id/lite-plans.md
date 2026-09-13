@@ -8,7 +8,7 @@ section: Workflow
 
 # Rencana Lite
 
-**Versi 4.0.0. Status: Stabil.** Dokumen ini menetapkan representasi rencana Lite yang diperkenalkan bersama [Spesifikasi DWP](/spec/dwp-specification): sebuah format rencana untuk pekerjaan terbatas berskala kecil hingga menengah yang dimaterialisasikan secara langsung, tanpa tahap draf yang tidak dapat dieksekusi. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
+**Versi 5.0.0. Status: Stabil.** Dokumen ini menetapkan representasi rencana Lite yang diperkenalkan bersama [Spesifikasi DWP](/spec/dwp-specification): sebuah format rencana untuk pekerjaan terbatas berskala kecil hingga menengah yang dimaterialisasikan secara langsung, tanpa tahap draf yang tidak dapat dieksekusi. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
 ## Representasi dan siklus hidup
 
@@ -41,6 +41,8 @@ Create terpandu menulis sebuah **proposal yang menunggu dan dapat ditinjau** —
 Mengulangi opsi yang sama bersifat idempoten; meminta `lite` dan `full` bersamaan adalah sebuah kesalahan. `--` mengakhiri penguraian opsi.
 
 Ketika tidak ada preferensi format yang diberikan, `create` merekomendasikan satu dan menjelaskan alasannya. Sebuah permintaan **Full** eksplisit selalu menang. Sebuah permintaan **Lite** eksplisit dihormati kecuali kebutuhan atau validation gate pekerjaan tidak akan muat dalam catatan inline yang kompak — dalam kasus itu `create` mencatat mengapa Full diperlukan sebagai gantinya. Pemilihan MUST mencatat cakupan yang diamati, dependensi, detail instruksi yang diperlukan, dan hal-hal yang tidak diketahui di balik pilihan tersebut — sebuah keputusan penilaian yang dapat diaudit, bukan jaminan yang berlaku di semua model atau agent.
+
+Rencana Lite membawa keputusan paralelisasi dengan cara yang sama seperti Full: baris `Execution: sequential — {rationale}`, atau sebuah bagian Team Agents Configuration, dengan Team Agents Metadata per-tugas yang dilampirkan langsung ke catatan tugas yang berjangkar, bukan ke berkas tugas terpisah. Keputusan itu tidak pernah diam-diam bahkan di Lite — sebuah rencana Lite menyatakannya persis seperti yang akan dilakukan rencana Full.
 
 ## Promosi dan kompatibilitas
 

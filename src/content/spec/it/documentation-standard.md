@@ -8,7 +8,13 @@ section: Standard
 
 # Standard di documentazione
 
-**Versione 1.1.** Questo standard definisce come i Deep Work Plan documentano struttura, attività e progressi. Si applica a ogni piano creato secondo la metodologia DWP. Le parole chiave MUST, SHOULD e MAY sono usate come definito nella RFC 2119.
+**Versione 5.0.0.** Questo standard definisce come i Deep Work Plan documentano struttura, attività e progressi, e come un repository documenta se stesso affinché un agente possa agire in modo sicuro. Si applica a ogni piano creato secondo la metodologia DWP. Questa versione allinea il numero di versione del documento allo standard DWP che accompagna — nessun requisito esistente cambia — e aggiunge l'applicazione del budget dell'indice snello e il livello feature descritti di seguito. Le parole chiave MUST, SHOULD e MAY sono usate come definito nella RFC 2119.
+
+## AGENTS.md come punto di ingresso compatto
+
+Il file `AGENTS.md` alla radice DOVREBBE restare entro un budget di 150–500 righe. Quando il contenuto generato o mantenuto dalla harness lo supererebbe, l'agente DEVE spostare il dettaglio nella guida `docs/` (o nel documento di modulo/feature) che lo possiede e collegarlo dall'indice — nulla viene eliminato, solo riallocato, e l'indice DEVE collegare ogni documento che ha ricevuto contenuto spostato. Un `AGENTS.md` scritto a mano che supera il budget non viene mai riscritto silenziosamente: l'agente propone una migrazione concreta (cosa si sposta dove, quali link si aggiungono) e la applica solo con il consenso dello sviluppatore. Un checker di conformità tratta il budget come consultivo, poiché un conteggio di righe è oggettivo ma la paternità del contenuto non lo è — il MUST vincola la harness che genera o aggiorna il file, non la supposizione di un checker su chi lo ha scritto. `AGENTS.md` NON DEVE collegare un file `docs/` che non esiste.
+
+Sopra il livello di documentazione per modulo (di seguito) si colloca un **livello feature**: un'area di capacità importante — più ampia di un singolo modulo — riceve una propria cartella `docs/` accanto al proprio codice, con accesso tramite un proprio `README.md`. Un'area si qualifica quando copre due o più moduli principali, possiede una sub-app o una directory di sottosistema autonoma, oppure porta propri contratti (una superficie API, contratti di eventi o schema) da cui dipendono più consumatori. Una volta che un'area è registrata come importante, la sua `docs/` di feature DOVREBBE esistere, e le sue voci più significative DOVREBBERO essere collegate dai moduli che l'area attraversa e dall'indice `AGENTS.md` radice, esattamente come per i documenti per modulo. Un'area deliberatamente lasciata non documentata porta un motivo registrato — una decisione, non una svista.
 
 ## README del piano
 

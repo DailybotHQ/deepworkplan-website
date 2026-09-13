@@ -8,7 +8,7 @@ section: State
 
 # Stan planu
 
-**Wersja 1.1. Status: stabilna.** Niniejszy dokument specyfikuje warstwę stanu planu odczytywalnego maszynowo metodyki Deep Work Plan. Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
+**Wersja 5.0.0. Status: stabilna.** Niniejszy dokument specyfikuje warstwę stanu planu odczytywalnego maszynowo metodyki Deep Work Plan, teraz dostosowaną do własnego numeru wersji standardu DWP — żadne istniejące wymaganie nie zostaje osłabione przez tę zmianę numeracji. Ta rewizja dokumentuje również strzeżony aktualizator stanu, zweryfikowaną publikację planu oraz zasady prawdziwości dowodów, które musi spełniać ukończony plan (zob. poniżej). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 
 Dwa artefakty JSON — `manifest.json` (statyczna tożsamość planu) i `state.json` (aktywny stan realizacji poszczególnych zadań, w tym wyniki bramek walidacyjnych) — które każdy plan MOŻE przechowywać obok swoich plików Markdown, a które wykonanie nieobsługiwane (zob. [Protokół agenta](/spec/agent-protocol#execution-profiles)) oraz przestrzenie robocze bez gita (zob. [Archetypy](/spec/archetypes) §3) MUSZĄ przechowywać.
 
@@ -35,7 +35,7 @@ Plan korzystający z warstwy stanu ma następującą strukturę:
 
 `manifest.json` MUSI być zapisany dokładnie raz, gdy przepływ `create` materializuje plan, i NIE MOŻE zostać zmieniony poza migracją wersji specyfikacji odnotowaną w `PROGRESS.md`.
 
-`state.json` MUSI być nadpisywany przez agenta w każdym z następujących punktów protokołu: materializacja planu (wszystkie zadania `pending`), rozpoczęcie zadania (`in_progress`), każde uruchomienie bramki walidacyjnej (rekord bramki dodany lub zaktualizowany) oraz ukończenie zadania (`completed`, w ramach protokołu ukończenia zadania w [Specyfikacji DWP](/spec/dwp-specification#task-completion-protocol)).
+`state.json` MUSI być nadpisywany przez agenta w każdym z następujących punktów protokołu: materializacja planu (wszystkie zadania `pending`), rozpoczęcie zadania (`in_progress`), każde uruchomienie bramki walidacyjnej (rekord bramki dodany lub zaktualizowany) ukończenie zadania (`completed`, w ramach protokołu ukończenia zadania w [Specyfikacji DWP](/spec/dwp-specification#task-completion-protocol)), punkt kontrolny przed każdą planowaną przerwą oraz zatrzymanie `blocked`.
 
 Oba pliki MUSZĄ być zapisywane atomowo: zapis do pliku tymczasowego w tym samym katalogu, następnie nadpisanie docelowego. Przerwany zapis NIE MOŻE pozostawić po sobie obciętego pliku JSON.
 
@@ -194,6 +194,30 @@ Wznawiający agent MUSI porównać listę pól wyboru z README z `state.json` pr
 Sub-skill `verify` MUSI traktować desynchronizację jako wynik niezgodności: raportować, które zadania są niezgodne i w jakim kierunku.
 
 Narzędzia inne niż wykonujący agent MUSZĄ traktować oba pliki JSON jako tylko do odczytu.
+
+## Strzeżone aktualizacje stanu
+
+Zwykłe zapisy postępu przechodzą przez dostarczony, celowany aktualizator zamiast przez przepisanie całego pliku. Odrzuca on od razu zniekształcony stan i odmawia oznaczenia zadania jako `completed` bez dołączonego niepustego dowodu bramki — dostępna jest forma `--gate-json` dla polecenia, którego własne wyjście zawiera znaki potoku (pipe), a aktualizator akceptuje ten sam zamknięty obiekt bramki opisany powyżej. Ponowne próby zastępują wyłącznie własne polecenie; inne polecenie zachowuje swój osobny rekord. `--block-reason` odnotowuje blokadę; `--resolve-blocker` rozwiązuje wyłącznie blokadę bieżącego zadania, nigdy innego zadania. Pominięta praca nigdy nie może uczynić planu `completed`. `--reopen-reason` odnotowuje zamiar wywołującego, by poprawić plan przez `refine` — poprawka oraz wszelkie dowody, które unieważnia, MUSZĄ zostać najpierw odnotowane w dzienniku zadania. `--expected-sha256` odrzuca zapis względem zrzutu stanu, który od tego czasu się zmienił. Współdziałający katalog `.lock` serializuje równoczesnych zapisujących; blokada po awarii zapisującego MUSI zostać sprawdzona przed usunięciem, a żadna ochrona nie jest deklarowana przed edytorem, który całkowicie omija blokadę. Te rekordy stwierdzają wyniki — same w sobie nie dowodzą, że polecenie zostało wykonane ani że jego wyjście zostało semantycznie zaakceptowane.
+
+## Zweryfikowana publikacja planu
+
+Przed ogłoszeniem ukończenia dzienniki ukończonych zadań (każdy niosący swoje **rozstrzygnięcie dotyczące skilli** oraz, w Final Review, swoją **decyzję dotyczącą dokumentacji**), indeks README i `PROGRESS.md` MUSZĄ zostać sporządzone na podstawie zdobytego źródła i wyników akceptacji. Ostatnie zadanie planu zamyka się następnie przez dostarczony finalizator: jego końcowe przejście waliduje ukończonego kandydata względem każdego artefaktu planu przed zapisaniem stanu, następnie weryfikuje pliki i odnotowuje potwierdzenie `analysis_results/FINALIZATION.json`. Wymyślona przechodząca bramka NIE MOŻE stanowić podstawy tego przejścia — potwierdzenie jest zewnętrznym dowodem tego, co faktycznie zostało sprawdzone, nigdy własnym warunkiem wstępnym. Następnie uruchamiane jest `bash ../verify/conformance.sh --plan PLAN_name`, względem rzeczywistych artefaktów na dysku.
+
+Przerwana publikacja pozostawia na miejscu znacznik `.finalizing.json`; zwykła weryfikacja kończy się niepowodzeniem, dopóki dowody nie zostaną sprawdzone, a pomocnik odzyskiwania nie powiedzie się względem tego samego kandydata — nic nie wznawia publikacji przez domniemanie. Nieaktualna współdziałająca blokada wymaga potwierdzenia, że żaden zapisujący nie pozostaje aktywny, przed usunięciem. Nic w tej warstwie nie wykonuje commitu, nie pushuje, nie uruchamia zapisanej komendy bramki ani po cichu nie naprawia Markdown planu. Brakujący interpreter Pythona daje `UNVERIFIED`, nigdy `completed`.
+
+## Prawdziwość dowodów i poprawki
+
+Każda zmiana zakresu zadania, kryteriów akceptacji lub odroczenia niesie jeden trwały rekord poprawki: dosłowne oryginalne kryterium, co zaobserwowano, rozstrzygnięcie, powód, władzę za nim stojącą (użytkownik, deweloper lub dowód), dotknięte zadania oraz to, który dowód został unieważniony lub zachowany. Poprawki są dopisywane, nigdy z datą wsteczną; `manifest.json` zachowuje swoją proweniencję utworzenia i nigdy nie jest przepisywany, aby dopasować się do zmienionego bieżącego zakresu.
+
+Pięć stanów dowodu opisuje, względem czego może zamknąć się rekord zadania:
+
+- **Ukończone dochodzenie** — rzeczywista odnotowana praca; zamyka zadanie wyłącznie względem zmienionego kryterium, które je wskazuje z nazwy, nigdy względem oryginału tak, jak został zapisany.
+- **Niewykonany scenariusz** — odnotowany jako niewykonany; nie wnosi żadnego przechodzącego dowodu w żadnej erze.
+- **Odroczone wymaganie** — kryterium przenosi się do nazwanego zadania docelowego z odnotowaną władzą; wyłącznie ta poprawka zamyka źródło.
+- **Nieudana bramka** — pozostaje nieudana, dopóki ta sama intencja akceptacji nie zostanie ponownie uruchomiona i nie przejdzie; ponowna próba zastępuje wyłącznie własne polecenie.
+- **Osiągnięty wynik produktu** — kryterium tak, jak zostało zapisane, zweryfikowane przez własną bramkę; jedyny stan, który zamyka zadanie bez zmian.
+
+Egzekwowanie jest mechaniczne wszędzie tam, gdzie pozwalają na to rekordy. Dowód bramki oznaczony jako „unieważniony przez refine” jest zachowaną historią, nigdy przechodzącym dowodem, a ukończone zadanie, które nadal na nim polega, jest zgłaszane przez sprawdzającego. Przechodzący rekord, którego własny tekst przyznaje, że sprawdzenie nigdy nie zostało wykonane (na przykład „nigdy nie wykonano”, „nie uruchomiono” lub „nie da się zmierzyć”) jest sprzecznością, zgłaszaną w ten sam sposób — podobnie jak ukończone zadanie stanu, którego własny dziennik nadal pokazuje `Status: pending`. Sprzeczności narracyjne wykraczające poza te przypadki — raport, którego wnioski są niezgodne z jego własną listą kontrolną — wymagają recenzenta-człowieka; sprawdzający zgłasza to, co mówią rekordy, a nie to, co oznacza tekst. Użytkownik MOŻE wyraźnie zaakceptować ograniczony wyjątek z odnotowaną władzą; wstępne zatwierdzenie w trybie nieobsługiwanym nigdy nie jest ogólnym pozwoleniem na porzucenie podstawowego celu, a niemożliwe do spełnienia obowiązkowe kryterium jest blokadą, nigdy ukończoną pracą.
 
 ## Wersjonowanie schematów
 

@@ -8,7 +8,7 @@ section: Workflow
 
 # Kế hoạch Lite
 
-**Phiên bản 4.0.0. Trạng thái: Ổn định.** Tài liệu này đặc tả biểu diễn kế hoạch Lite được giới thiệu cùng với [Đặc tả DWP](/spec/dwp-specification): một định dạng kế hoạch cho công việc có giới hạn, quy mô nhỏ đến vừa, được vật liệu hóa trực tiếp, không qua giai đoạn bản nháp không thể thực thi. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
+**Phiên bản 5.0.0. Trạng thái: Ổn định.** Tài liệu này đặc tả biểu diễn kế hoạch Lite được giới thiệu cùng với [Đặc tả DWP](/spec/dwp-specification): một định dạng kế hoạch cho công việc có giới hạn, quy mô nhỏ đến vừa, được vật liệu hóa trực tiếp, không qua giai đoạn bản nháp không thể thực thi. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
 ## Biểu diễn và vòng đời
 
@@ -41,6 +41,8 @@ Create có hướng dẫn viết ra một **đề xuất đang chờ, có thể 
 Lặp lại cùng một tùy chọn có tính idempotent; yêu cầu cả `lite` và `full` cùng lúc là một lỗi. `--` kết thúc việc phân tích tùy chọn.
 
 Khi không có tùy chọn định dạng nào được đưa ra, `create` đề xuất một định dạng và giải thích lý do. Một yêu cầu **Full** rõ ràng luôn thắng. Một yêu cầu **Lite** rõ ràng được tôn trọng trừ khi các yêu cầu hoặc cổng kiểm chứng của công việc sẽ không vừa trong các bản ghi nội tuyến gọn nhẹ — trong trường hợp đó `create` ghi lại lý do vì sao Full là cần thiết thay vào đó. Việc lựa chọn PHẢI (MUST) ghi lại phạm vi quan sát được, các phụ thuộc, mức độ chi tiết hướng dẫn cần thiết và những điều chưa biết đằng sau lựa chọn đó — một phán đoán có thể kiểm toán, không phải một sự bảo đảm đúng trên mọi mô hình hay agent.
+
+Một kế hoạch Lite mang quyết định song song hóa theo cùng cách như Full: dòng `Execution: sequential — {rationale}`, hoặc một mục Team Agents Configuration, với Team Agents Metadata theo từng tác vụ được đính kèm trực tiếp vào các bản ghi tác vụ đã neo thay vì vào một tệp tác vụ riêng. Quyết định này không bao giờ im lặng ngay cả trong Lite — một kế hoạch Lite phát biểu nó chính xác như một kế hoạch Full sẽ làm.
 
 ## Nâng cấp và tính tương thích
 

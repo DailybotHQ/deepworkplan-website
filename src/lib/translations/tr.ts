@@ -75,7 +75,7 @@ export const tr: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Yeni · Token verimli',
+    badge: 'Yeni · Yapı gereği bağlam verimli',
     text: 'Deep Work Plan bugün Product Hunt’ta',
     tagline: 'ajanına bir plan ver',
     linkText: 'Oy ver',
@@ -1069,7 +1069,7 @@ export const tr: SiteTranslations = {
             id: 'cost',
             question: 'Maliyeti nedir ve verimlilik nasıl ölçülür?',
             answer:
-              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın yüklediği talimat byte sayısı olarak raporlanır; skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz. Donmuş bir protokol altında taze aracılarla bir kamu değerlendirmesi artık yürütüldü: aynı iki özellik; harness olmadan, önceki ana sürümle ve geçerli sürümle — her biri temiz klonlardan inşa edildi. Harness taşıyan ağaçtaki aracıların her iki görevde daha az byte okuduğunu ve geçerli sürümün özellik oturumlarının her iki görevde önceki ana sürümünkinden daha az model girdi ve çıktısı tükettiğini buldu — harness tarafından raporlandığı şekliyle, tek bir iş yükünde. Dürüst sınırları da buldu: onboarding, akışlar kullanıldığında geri ödeyen tek seferlik bir maliyettir; iş yükü başına net token yönü karışıktı; duvar saati avantajı iddia edilmez; ve taze bir aracı akışlara kendi başına girmez — akışlar sizin ya da onları çağırmayı bilen bir aracının çalıştırdığı komutlardır.',
+              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın **girişte** yüklediği talimat byte sayısı olarak raporlanır — bir oturumun başındaki paket — ve buna ek olarak, işin gerçekten sürdüğünde akışın kendi tetikleyicilerinin yüklediklerini de ekleyen adlandırılmış **uçtan uca yollar** ile birlikte yayımlanır (örneğin yürütmeye devam eden bir sürdürme akışı genellikle giriş paketinin birkaç katını yükler). Bu iki rakamdan hiçbiri bir oturumu sınırlamaz: gerçek bir çalışma ayrıca deponun kendi dosyalarını, araç çıktısını ve planın çalışma dosyalarını da okur; bunların hiçbiri bu defterde sayılmaz. Her iki sayı da skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz. Donmuş bir protokol altında taze aracılarla bir kamu değerlendirmesi artık yürütüldü: aynı iki özellik; harness olmadan, önceki ana sürümle ve geçerli sürümle — her biri temiz klonlardan inşa edildi. Harness taşıyan ağaçtaki aracıların her iki görevde daha az byte okuduğunu ve geçerli sürümün özellik oturumlarının her iki görevde önceki ana sürümünkinden daha az model girdi ve çıktısı tükettiğini buldu — harness tarafından raporlandığı şekliyle, tek bir iş yükünde. Dürüst sınırları da buldu: onboarding, akışlar kullanıldığında geri ödeyen tek seferlik bir maliyettir; iş yükü başına net token yönü karışıktı; duvar saati avantajı iddia edilmez; ve taze bir aracı akışlara kendi başına girmez — akışlar sizin ya da onları çağırmayı bilen bir aracının çalıştırdığı komutlardır.',
             linkLabel: 'Güven ve açıklama',
             linkPath: '/trust',
           },
@@ -1287,13 +1287,13 @@ export const tr: SiteTranslations = {
         },
         {
           title: 'Ölçülen ve yayımlanan talimat yükü',
-          body: 'Commit edilmiş bir betik her akışın kaç byte yüklediğini ölçer; sonuçlar, artışlar dahil, byte olarak yayımlanır — asla token veya maliyet yüzdesi olarak değil.',
+          body: 'Commit edilmiş bir betik her akış için iki ölçüm yayımlar — bir oturumun başında yüklenen giriş paketi ve gerçek tetikleyiciler devreye girdiğinde ortaya çıkan uçtan uca yol — ayrıca her ölçümün neyi hariç tuttuğunu da; böylece yalnızca giriş rakamı bir çalışmanın toplam maliyeti olarak okunmaz. Sonuçlar, artışlar dahil, byte olarak yayımlanır — asla token veya maliyet yüzdesi olarak değil.',
         },
       ],
     },
     honestLimits: {
       title: 'Dürüst sınırlar',
-      body: 'Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; kendi yürüttüğümüz taze-aracı değerlendirmesi donmuş bir protokol altında koşuldu — küçük ölçekte: tek iş yükü, yapılandırma başına iki özellik, bir makine — ve sonuçları her iki yönde yayımlanır: harness taşıyan ağaçlardaki aracılar her iki görevde daha az byte okudu; geçerli sürümün oturumları, harness tarafından raporlanan model girdi ve çıktısını önceki ana sürümünden daha az tüketti; buna karşılık iş yükü başına net token yönü karışıktı ve duvar saati avantajı iddia edilmiyor. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil. DWP kasıtlı olarak depoyla sınırlıdır: ne projeler arası bir bellek sistemi, ne rol tabanlı bir ajan çerçevesi, ne de bir IDE’dir; dolayısıyla bu eksenlerde de rekabet etmez — iş bunu gerektirdiğinde, o eksenlerden birini kapsayan bir araçla birlikte kullanın.',
+      body: 'Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; kendi yürüttüğümüz taze-aracı değerlendirmesi donmuş bir protokol altında koşuldu — küçük ölçekte: tek iş yükü, yapılandırma başına iki özellik, bir makine — ve sonuçları her iki yönde yayımlanır: harness taşıyan ağaçlardaki aracılar her iki görevde daha az byte okudu; geçerli sürümün oturumları, harness tarafından raporlanan model girdi ve çıktısını önceki ana sürümünden daha az tüketti; buna karşılık iş yükü başına net token yönü karışıktı ve duvar saati avantajı iddia edilmiyor. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil — ve giriş paketi rakamı bir çalışmanın okuduklarına bir sınır değildir. DWP kasıtlı olarak depoyla sınırlıdır: ne projeler arası bir bellek sistemi, ne rol tabanlı bir ajan çerçevesi, ne de bir IDE’dir; dolayısıyla bu eksenlerde de rekabet etmez — iş bunu gerektirdiğinde, o eksenlerden birini kapsayan bir araçla birlikte kullanın.',
     },
     correction: {
       title: 'Bu sayfanın doğruluğunu korumamıza yardım edin',

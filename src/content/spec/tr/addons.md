@@ -8,7 +8,7 @@ section: Addons
 
 # Eklentiler
 
-**Sürüm 4.0.0.** Eklentiler, temel Deep Work Plan metodolojisine uzantılardır. Beşin dördü isteğe bağlıdır ve **uyumluluk için asla gerekli değildir** — sıfır isteğe bağlı eklentili bir depo tamamen AI-first ve DWP uyumludur. Her isteğe bağlı eklenti onboarding sırasında sunulur, açıkça kabul veya reddedilir ve — kabul edildiğinde — mevcut kurulumu ezmek yerine **uzlaştırır**. Bir bileşen beyan edilen istisnadır: 2.3.0 standardından itibaren **AI Diff Reviewer yerel incelemesi** gerekli temelin bir parçasıdır — onboarding onu kurar ve her Final Review onu çalıştırır — CI yüzeyi ise isteğe bağlı kalır.
+**Sürüm 2.1.0.** Eklentiler, temel Deep Work Plan metodolojisine uzantılardır. Beşin dördü isteğe bağlıdır ve **uyumluluk için asla gerekli değildir** — sıfır isteğe bağlı eklentili bir depo tamamen AI-first ve DWP uyumludur. Her isteğe bağlı eklenti onboarding sırasında sunulur, açıkça kabul veya reddedilir ve — kabul edildiğinde — mevcut kurulumu ezmek yerine **uzlaştırır**. Bir bileşen beyan edilen istisnadır: 2.3.0 standardından itibaren **AI Diff Reviewer yerel incelemesi** gerekli temelin bir parçasıdır — onboarding onu kurar ve her Final Review onu çalıştırır — CI yüzeyi ise isteğe bağlı kalır.
 
 ## Eklenti sözleşmesi
 
@@ -67,7 +67,7 @@ Tutarlı UI, CLI veya konuşma çıktısı için herhangi bir kodlama agent'ın�
 
 ### AI Diff Reviewer (beşinci eklenti — gerekli yerel inceleme, isteğe bağlı CI yüzeyi)
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, mevcut sürüm **v2.0.1**), zorunlu Final Review güvenlik incelemesine yapılandırılmış bir yerel inceleme kazandırır ve isteğe bağlı olarak CI'da pull request'leri kapı altına alır. 2.3.0 standardından itibaren **yerel inceleme temelin bir parçasıdır**; yalnızca CI yüzeyi isteğe bağlıdır.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**), zorunlu Final Review güvenlik incelemesine yapılandırılmış bir yerel inceleme kazandırır ve isteğe bağlı olarak CI'da pull request'leri kapı altına alır. 2.3.0 standardından itibaren **yerel inceleme temelin bir parçasıdır**; yalnızca CI yüzeyi isteğe bağlıdır. Bu eklenti her yayında otomatik olarak güncellenir, bu yüzden geçerli sürümü bu metinde asla sabitlenmez — vendored edilen etiketi görmek için eklentinin kendi `SKILL.md`'sine veya GitHub sürümlerine bakın.
 
 - **Kit sayfası:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — tam yetenek referansı
 - **Onboarding'de gerekli (Faz 7a):** vendored skill'in etikete sabitlenmiş kurulumu (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) artı depoya uyarlanmış bir `.review/extension.md` (`generate-extension` aracılığıyla), onboarding onayı altında; hedeflenmiş bir harness yükseltmesi her ikisini de eksik olduğunda uzlaştırır; bir reddediş, beyan edilmiş bir istisna olarak kaydedilir ve kurulana kadar `verify` tarafından raporlanır

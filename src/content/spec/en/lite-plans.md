@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite plans
 
-**Version 4.0.0. Status: Stable.** This document specifies the Lite plan representation introduced alongside the [DWP specification](/spec/dwp-specification): a plan format for small-to-medium bounded work that is materialized directly, with no non-executable draft stage. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
+**Version 5.0.0. Status: Stable.** This document specifies the Lite plan representation introduced alongside the [DWP specification](/spec/dwp-specification): a plan format for small-to-medium bounded work that is materialized directly, with no non-executable draft stage. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
 ## Representation and lifecycle
 
@@ -41,6 +41,8 @@ Guided create writes a **reviewable pending proposal** — Lite or Full, already
 Repeating the same option is idempotent; requesting `lite` and `full` together is an error. `--` ends option parsing.
 
 When no format preference is given, `create` recommends one and explains why. An explicit **Full** request always wins. An explicit **Lite** request is honored unless the work's requirements or validation gates would not fit in compact inline records — in that case `create` records why Full is required instead. The selection MUST record the observed scope, dependencies, required instruction detail, and unknowns behind the choice — an auditable judgment call, not a guarantee that holds across every model or agent.
+
+Lite carries the parallelization decision the same way Full does: the `Execution: sequential — {rationale}` line, or a Team Agents Configuration section, with per-task Team Agents Metadata attached directly to the anchored task records instead of a separate task file. The decision is never silent in Lite either — a Lite plan states it exactly as a Full plan would.
 
 ## Promotion and compatibility
 

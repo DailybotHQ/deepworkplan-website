@@ -8,7 +8,7 @@ section: State
 
 # Plan state
 
-**Version 1.1. Status: Stable.** This document specifies the machine-readable plan state layer of the Deep Work Plan methodology. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
+**Version 5.0.0. Status: Stable.** This document specifies the machine-readable plan state layer of the Deep Work Plan methodology, now aligned with the DWP standard's own version — no existing requirement is weakened by the renumbering. This revision also documents the guarded state updater, verified plan publication, and the evidence-truth rules a completed plan must satisfy (see below). The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
 Two JSON artifacts — `manifest.json` (the plan's static identity) and `state.json` (the live, per-task execution state including validation-gate results) — that every plan MAY carry alongside its markdown files, and that unattended execution (see [Agent protocol](/spec/agent-protocol#execution-profiles)) and non-git workspaces (see [Archetypes](/spec/archetypes) §3) MUST carry.
 
@@ -35,7 +35,7 @@ A plan using the state layer has this layout:
 
 `manifest.json` MUST be written exactly once, when the `create` flow materializes the plan, and MUST NOT change afterward except for a spec-version migration recorded in `PROGRESS.md`.
 
-`state.json` MUST be rewritten by the agent at each of these protocol points: plan materialization (all tasks `pending`), task start (`in_progress`), each validation-gate run (gate record appended or updated), and task completion (`completed`, as part of the task completion protocol in [DWP specification](/spec/dwp-specification#task-completion-protocol)).
+`state.json` MUST be rewritten by the agent at each of these protocol points: plan materialization (all tasks `pending`), task start (`in_progress`), each validation-gate run (gate record appended or updated), task completion (`completed`, as part of the task completion protocol in [DWP specification](/spec/dwp-specification#task-completion-protocol)), a checkpoint before any planned interruption, and a `blocked` stop.
 
 Both files MUST be written atomically: write to a temporary file in the same directory, then rename over the target. A crashed write MUST NOT leave a truncated JSON file in place.
 
@@ -194,6 +194,30 @@ A resuming agent MUST compare the README checkbox list against `state.json` befo
 The `verify` sub-skill MUST treat desync as a conformance finding: report which tasks disagree and in which direction.
 
 Tools other than the executing agent MUST treat both JSON files as read-only.
+
+## Guarded state updates
+
+Ordinary progress writes go through a shipped, targeted updater rather than a full-file rewrite. It rejects malformed state outright, and it refuses to mark a task `completed` without nonempty gate evidence attached — a `--gate-json` form is available for a command whose own output contains pipe characters, and the updater accepts the same closed gate object described above. Retries supersede only their own command; a different command keeps its own separate record. `--block-reason` records a blocker; `--resolve-blocker` resolves only the current task's blocker, never another task's. Skipped work can never make a plan `completed`. `--reopen-reason` records a caller's intent to amend the plan through `refine` — the amendment and any evidence it invalidates MUST be recorded in the task log first. `--expected-sha256` rejects a write against a state snapshot that has since moved on. A cooperative `.lock` directory serializes concurrent writers; a crashed writer's lock MUST be inspected before removal, and no protection is claimed against an editor that bypasses the lock entirely. These records assert results — they do not themselves prove a command executed, or that its output was semantically accepted.
+
+## Verified plan publication
+
+Before announcing completion, the finished task logs (each carrying its **Skills disposition** and, in the Final Review, its **Documentation decision**), the README index, and `PROGRESS.md` MUST be authored from earned source and acceptance results. The plan's final task then closes through the shipped finalizer: its terminal transition validates the completed candidate against every plan artifact before writing state, verifies the files afterward, and records a `analysis_results/FINALIZATION.json` receipt. An invented passing gate MUST NOT back this transition — the receipt is external evidence of what was actually checked, never its own prerequisite. `bash ../verify/conformance.sh --plan PLAN_name` runs next, against the real artifacts on disk.
+
+An interrupted publication leaves a `.finalizing.json` marker in place; normal verification fails until the evidence is inspected and the recovery helper succeeds against the same candidate — nothing resumes a publication by assumption. A stale cooperative lock requires confirming no writer remains active before removal. Nothing in this layer commits, pushes, executes a stored gate command, or silently repairs the plan's markdown. A missing Python interpreter yields `UNVERIFIED`, never `completed`.
+
+## Evidence truth and amendments
+
+Every change to a task's scope, acceptance criteria, or deferral carries one durable amendment record: the original criterion verbatim, what was observed, the disposition, the reason, the authority behind it (user, developer, or evidence), the affected tasks, and which evidence was invalidated or preserved. Amendments are appended, never backdated; `manifest.json` keeps its creation provenance and is never rewritten to match a changed live scope.
+
+Five evidence states describe what a task record may close against:
+
+- **Completed investigation** — real recorded work; it closes a task only against a revised criterion that names it, never against the original as written.
+- **Unexecuted scenario** — recorded as not performed; it contributes no passing evidence in any era.
+- **Deferred requirement** — the criterion moves to a named destination task with recorded authority; only that amendment closes the source.
+- **Failed gate** — remains failing until the same acceptance intent is re-run and passes; a retry supersedes only its own command.
+- **Achieved product outcome** — the criterion as written, verified by its own gate; the only state that completes a task unchanged.
+
+Enforcement is mechanical wherever the records allow it. Gate evidence marked "invalidated by refine" is retained history, never passing evidence, and a completed task that still relies on it is reported by the checker. A passing record whose own text admits the check never ran (for example "never entered," "did not run," or "cannot be measured") is a contradiction, reported the same way — as is a completed state task whose own log still reads `Status: pending`. Narrative contradictions beyond these — a report whose conclusions disagree with its own checklist — require a human reviewer; the checker reports what the records say, not what the prose means. A user MAY explicitly accept a bounded exception with recorded authority; unattended pre-approval is never blanket permission to abandon a core objective, and an unmeetable mandatory criterion is a blocker, never completed work.
 
 ## Schema versioning
 

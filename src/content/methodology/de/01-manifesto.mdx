@@ -58,7 +58,7 @@ Dies ist der zweite Pfeiler der Methodik, und er verdient eine klare Definition 
 
 <RepoAsHarness lang="de" class="not-prose my-10" />
 
-Weil jedes Element eine Datei im Repository ist statt ein Feature eines Werkzeugs, ist das Harness von Natur aus portabel. Das ist die einzeilige Behauptung, auf der der Rest der Methodik ruht: *Das Repository selbst wird zum Harness*, sodass jeder Agent jedes Repository steuern kann — ohne maßgeschneidertes Framework je Werkzeug.
+Weil jedes Element eine Datei im Repository ist statt ein Feature eines Werkzeugs, ist das Harness von Natur aus portabel: Jeder Agent, der Markdown liest und Shell-Befehle ausführt, kann dieselben Dateien öffnen — ohne maßgeschneidertes Framework je Werkzeug. Das ist die einzeilige Behauptung, auf der der Rest der Methodik ruht: *Das Repository selbst wird zum Harness*. Das ist eine Aussage darüber, was das Repository trägt, keine Garantie, dass ein Modell bei einer neuen Anfrage unbeaufsichtigt zuverlässig den richtigen Flow findet — weshalb das Kit zusätzlich explizite `dwp-*`-Einstiegspunkte und ein Router-`SKILL.md` mitliefert: Dateiportabilität und zuverlässiges Routing sind unterschiedliche Eigenschaften, und nur die erste entsteht allein durch Konstruktion.
 
 ## Effizient durch Konstruktion
 

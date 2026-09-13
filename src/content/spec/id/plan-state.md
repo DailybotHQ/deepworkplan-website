@@ -8,7 +8,7 @@ section: State
 
 # Status rencana
 
-**Versi 1.1. Status: Stabil.** Dokumen ini menetapkan lapisan status rencana yang dapat dibaca mesin dari metodologi Deep Work Plan. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
+**Versi 5.0.0. Status: Stabil.** Dokumen ini menetapkan lapisan status rencana yang dapat dibaca mesin dari metodologi Deep Work Plan, kini diselaraskan dengan versi standar DWP itu sendiri — tidak ada persyaratan yang ada dilemahkan oleh penomoran ulang ini. Revisi ini juga mendokumentasikan updater status yang dijaga, publikasi rencana yang terverifikasi, dan aturan kebenaran-bukti yang harus dipenuhi sebuah rencana yang selesai (lihat di bawah). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
 Dua artefak JSON — `manifest.json` (identitas statis rencana) dan `state.json` (status eksekusi per-tugas yang berjalan, termasuk hasil validasi gate) — yang setiap rencana MAY bawa bersama berkas markdown-nya, dan yang wajib dibawa oleh eksekusi tanpa pengawasan (lihat [Protokol agent](/spec/agent-protocol#execution-profiles)) serta ruang kerja tanpa git (lihat [Arketipe](/spec/archetypes) §3).
 
@@ -35,7 +35,7 @@ Sebuah rencana yang menggunakan lapisan status memiliki tata letak ini:
 
 `manifest.json` MUST ditulis tepat sekali, ketika alur `create` mematerilasiasikan rencana, dan MUST NOT berubah setelahnya kecuali untuk migrasi versi spec yang dicatat di `PROGRESS.md`.
 
-`state.json` MUST ditulis ulang oleh agent pada setiap titik protokol berikut: materialisasi rencana (semua tugas `pending`), mulai tugas (`in_progress`), setiap jalannya validation gate (catatan gate ditambahkan atau diperbarui), dan penyelesaian tugas (`completed`, sebagai bagian dari protokol penyelesaian tugas di [Spesifikasi DWP](/spec/dwp-specification#task-completion-protocol)).
+`state.json` MUST ditulis ulang oleh agent pada setiap titik protokol berikut: materialisasi rencana (semua tugas `pending`), mulai tugas (`in_progress`), setiap jalannya validation gate (catatan gate ditambahkan atau diperbarui), dan penyelesaian tugas (`completed`, sebagai bagian dari protokol penyelesaian tugas di [Spesifikasi DWP](/spec/dwp-specification#task-completion-protocol)), sebuah checkpoint sebelum interupsi yang direncanakan, dan sebuah penghentian `blocked`.
 
 Kedua berkas MUST ditulis secara atomik: tulis ke berkas sementara di direktori yang sama, kemudian ganti nama ke target. Penulisan yang gagal di tengah jalan MUST NOT meninggalkan berkas JSON yang terpotong.
 
@@ -194,6 +194,30 @@ Sebuah agent yang melanjutkan MUST membandingkan daftar kotak centang README ter
 Sub-skill `verify` MUST memperlakukan desinkronisasi sebagai temuan konformansi: melaporkan tugas mana yang berbeda dan dalam arah mana.
 
 Alat selain agent yang mengeksekusi MUST memperlakukan kedua berkas JSON sebagai hanya-baca.
+
+## Pembaruan status yang dijaga
+
+Penulisan kemajuan biasa melewati sebuah updater bertarget bawaan skill, bukan penulisan ulang seluruh berkas. Ia menolak status yang cacat secara langsung, dan menolak menandai sebuah tugas sebagai `completed` tanpa bukti gate yang tidak kosong terlampir — sebuah bentuk `--gate-json` tersedia untuk sebuah perintah yang keluarannya mengandung karakter pipe, dan updater menerima objek gate tertutup yang sama seperti dijelaskan di atas. Percobaan ulang hanya menggantikan perintahnya sendiri; sebuah perintah yang berbeda menyimpan catatannya sendiri secara terpisah. `--block-reason` mencatat sebuah blocker; `--resolve-blocker` hanya menyelesaikan blocker tugas saat ini, tidak pernah tugas lain. Pekerjaan yang dilewati tidak pernah bisa membuat sebuah rencana `completed`. `--reopen-reason` mencatat niat pemanggil untuk mengubah rencana melalui `refine` — amandemen dan bukti apa pun yang dibatalkannya MUST dicatat lebih dulu di log tugas. `--expected-sha256` menolak sebuah penulisan terhadap snapshot status yang sudah berubah. Sebuah direktori `.lock` kooperatif menyerialkan penulis yang bersamaan; kunci milik sebuah penulis yang crash MUST diperiksa sebelum dihapus, dan tidak ada perlindungan yang diklaim terhadap sebuah editor yang melewati kunci itu sepenuhnya. Catatan ini menegaskan hasil — mereka sendiri tidak membuktikan bahwa sebuah perintah benar-benar dijalankan, atau bahwa keluarannya diterima secara semantik.
+
+## Publikasi rencana yang terverifikasi
+
+Sebelum mengumumkan penyelesaian, log tugas yang telah selesai (masing-masing membawa **Skills disposition**-nya dan, pada Final Review, **Documentation decision**-nya), indeks README, dan `PROGRESS.md` MUST ditulis dari hasil sumber dan penerimaan yang benar-benar diperoleh. Tugas terakhir rencana kemudian ditutup melalui finalizer bawaan skill: transisi terminalnya memvalidasi kandidat yang selesai terhadap setiap artefak rencana sebelum menulis status, memverifikasi berkas-berkasnya sesudahnya, dan mencatat sebuah tanda terima `analysis_results/FINALIZATION.json`. Sebuah gate lulus yang direkayasa MUST NOT mendasari transisi ini — tanda terima itu adalah bukti eksternal tentang apa yang benar-benar diperiksa, tidak pernah menjadi prasyaratnya sendiri. `bash ../verify/conformance.sh --plan PLAN_name` dijalankan berikutnya, terhadap artefak nyata di disk.
+
+Sebuah publikasi yang terinterupsi meninggalkan sebuah penanda `.finalizing.json`; verifikasi normal gagal hingga bukti diperiksa dan helper pemulihan berhasil terhadap kandidat yang sama — tidak ada yang melanjutkan sebuah publikasi berdasarkan asumsi. Sebuah kunci kooperatif yang basi memerlukan konfirmasi bahwa tidak ada penulis yang masih aktif sebelum dihapus. Tidak ada apa pun di lapisan ini yang melakukan commit, push, menjalankan perintah gate yang tersimpan, atau memperbaiki markdown rencana secara diam-diam. Sebuah interpreter Python yang hilang menghasilkan `UNVERIFIED`, tidak pernah `completed`.
+
+## Kebenaran bukti dan amandemen
+
+Setiap perubahan pada cakupan, acceptance criteria, atau penundaan sebuah tugas membawa satu catatan amandemen yang tahan lama: kriteria asli secara verbatim, apa yang diamati, disposisinya, alasannya, otoritas di baliknya (pengguna, pengembang, atau bukti), tugas-tugas yang terdampak, dan bukti mana yang dibatalkan atau dipertahankan. Amandemen ditambahkan, tidak pernah diberi tanggal mundur; `manifest.json` mempertahankan provenance pembuatannya dan tidak pernah ditulis ulang untuk mencocokkan cakupan langsung yang berubah.
+
+Lima status bukti menggambarkan terhadap apa sebuah catatan tugas boleh ditutup:
+
+- **Investigasi selesai** — pekerjaan nyata yang tercatat; ia menutup sebuah tugas hanya terhadap kriteria revisian yang menamainya, tidak pernah terhadap yang asli seperti yang ditulis.
+- **Skenario tidak dieksekusi** — dicatat sebagai tidak dilakukan; ia tidak menyumbang bukti lulus apa pun di era mana pun.
+- **Kebutuhan yang ditunda** — kriteria berpindah ke sebuah tugas tujuan yang dinamai dengan otoritas yang tercatat; hanya amandemen itu yang menutup sumbernya.
+- **Gate gagal** — tetap gagal hingga niat penerimaan yang sama dijalankan ulang dan lulus; sebuah percobaan ulang hanya menggantikan perintahnya sendiri.
+- **Hasil produk tercapai** — kriteria seperti yang ditulis, diverifikasi oleh gate-nya sendiri; satu-satunya status yang menyelesaikan sebuah tugas tanpa perubahan.
+
+Penegakan bersifat mekanis di mana pun catatan mengizinkannya. Bukti gate yang ditandai "invalidated by refine" adalah sejarah yang dipertahankan, tidak pernah bukti lulus, dan sebuah tugas selesai yang masih bergantung padanya dilaporkan oleh pemeriksa. Sebuah catatan lulus yang teksnya sendiri mengakui bahwa pemeriksaan tidak pernah berjalan (misalnya "never entered," "did not run," atau "cannot be measured") adalah sebuah kontradiksi, dilaporkan dengan cara yang sama — begitu juga sebuah tugas status selesai yang log-nya sendiri masih membaca `Status: pending`. Kontradiksi naratif di luar ini — sebuah laporan yang kesimpulannya bertentangan dengan checklist-nya sendiri — memerlukan seorang peninjau manusia; pemeriksa melaporkan apa yang dikatakan catatan, bukan apa yang dimaksud prosa. Seorang pengguna MAY secara eksplisit menerima sebuah pengecualian terbatas dengan otoritas yang tercatat; persetujuan di muka tanpa pengawasan tidak pernah menjadi izin umum untuk meninggalkan sebuah tujuan inti, dan sebuah kriteria wajib yang tidak dapat dipenuhi adalah sebuah blocker, tidak pernah pekerjaan yang selesai.
 
 ## Pemberian versi skema
 

@@ -58,7 +58,7 @@ This is the second pillar of the methodology, and it deserves a plain definition
 
 <RepoAsHarness lang="en" class="not-prose my-10" />
 
-Because every element is a file in the repository rather than a feature of a tool, the harness is portable by construction. That is the one-line claim the rest of the methodology rests on: *the repository itself becomes the harness*, so any agent can pilot any repo — with no bespoke per-tool framework.
+Because every element is a file in the repository rather than a feature of a tool, the harness is portable by construction: any agent that reads markdown and runs shell commands can open the same files, with no bespoke per-tool framework. That is the one-line claim the rest of the methodology rests on: *the repository itself becomes the harness*. It is a claim about what the repository carries, not a guarantee that a model reliably finds the right flow unaided on a fresh request — which is why the kit also ships explicit `dwp-*` entry points and a router `SKILL.md`: file portability and reliable routing are different properties, and only the first is built by construction alone.
 
 ## Efficient by construction
 

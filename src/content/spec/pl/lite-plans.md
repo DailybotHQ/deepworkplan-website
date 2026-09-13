@@ -8,7 +8,7 @@ section: Workflow
 
 # Plany Lite
 
-**Wersja 4.0.0. Status: stabilna.** Ten dokument specyfikuje reprezentację planu Lite, wprowadzoną obok [Specyfikacji DWP](/spec/dwp-specification): format planu dla małej i średniej ograniczonej pracy, który jest materializowany bezpośrednio, bez etapu niewykonywalnego szkicu. Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
+**Wersja 5.0.0. Status: stabilna.** Ten dokument specyfikuje reprezentację planu Lite, wprowadzoną obok [Specyfikacji DWP](/spec/dwp-specification): format planu dla małej i średniej ograniczonej pracy, który jest materializowany bezpośrednio, bez etapu niewykonywalnego szkicu. Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 
 ## Reprezentacja i cykl życia
 
@@ -41,6 +41,8 @@ Guided create zapisuje **propozycję oczekującą na przegląd** — Lite lub Fu
 Powtórzenie tej samej opcji jest idempotentne; żądanie `lite` i `full` razem jest błędem. `--` kończy parsowanie opcji.
 
 Gdy nie podano preferencji formatu, `create` rekomenduje jedną i wyjaśnia dlaczego. Jawne żądanie **Full** zawsze wygrywa. Jawne żądanie **Lite** jest honorowane, chyba że wymagania pracy lub bramki walidacyjne nie zmieściłyby się w kompaktowych rekordach inline — w takim przypadku `create` odnotowuje, dlaczego zamiast tego wymagany jest Full. Wybór MUSI odnotować zaobserwowany zakres, zależności, wymagany poziom szczegółowości instrukcji oraz niewiadome stojące za decyzją — możliwą do zaudytowania ocenę, a nie gwarancję obowiązującą dla każdego modelu czy agenta.
+
+Plan Lite niesie decyzję o zrównolegleniu w ten sam sposób co Full: linię `Execution: sequential — {rationale}` albo sekcję Team Agents Configuration, z metadanymi Team Agents Metadata per zadanie dołączonymi bezpośrednio do zakotwiczonych rekordów zadań zamiast do osobnego pliku zadania. Decyzja nigdy nie jest milcząca również w Lite — plan Lite podaje ją dokładnie tak, jak zrobiłby to plan Full.
 
 ## Podniesienie i kompatybilność
 

@@ -8,7 +8,7 @@ section: Workflow
 
 # Planos Lite
 
-**Versão 4.0.0. Status: Estável.** Este documento especifica a representação de plano Lite introduzida junto com a [Especificação do DWP](/spec/dwp-specification): um formato de plano para trabalho pequeno a médio e delimitado que é materializado diretamente, sem uma etapa de rascunho não executável. As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
+**Versão 5.0.0. Status: Estável.** Este documento especifica a representação de plano Lite introduzida junto com a [Especificação do DWP](/spec/dwp-specification): um formato de plano para trabalho pequeno a médio e delimitado que é materializado diretamente, sem uma etapa de rascunho não executável. As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
 
 ## Representação e ciclo de vida
 
@@ -41,6 +41,8 @@ O create guiado escreve uma **proposta pendente revisável** — Lite ou Full, j
 Repetir a mesma opção é idempotente; solicitar `lite` e `full` juntos é um erro. `--` encerra a análise de opções.
 
 Quando nenhuma preferência de formato é dada, `create` recomenda uma e explica por quê. Um pedido explícito de **Full** sempre prevalece. Um pedido explícito de **Lite** é atendido a menos que os requisitos ou os validation gates do trabalho não caibam em registros compactos em linha — nesse caso `create` registra por que Full é exigido em vez disso. A seleção DEVE (MUST) registrar o escopo observado, as dependências, o nível de detalhe de instrução exigido, e as incertezas por trás da escolha — um julgamento auditável, não uma garantia que se sustente em todo modelo ou agente.
+
+Um plano Lite carrega a decisão de paralelização da mesma forma que Full: a linha `Execution: sequential — {rationale}`, ou uma seção de Configuração de Team Agents, com Metadados de Team Agents por tarefa anexados diretamente aos registros de tarefa ancorados, em vez de a um arquivo de tarefa separado. A decisão nunca é silenciosa em Lite também — um plano Lite a declara exatamente como um plano Full o faria.
 
 ## Promoção e compatibilidade
 

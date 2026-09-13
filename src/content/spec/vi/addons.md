@@ -8,7 +8,7 @@ section: Addons
 
 # Add-on
 
-**Phiên bản 4.0.0.** Add-on là phần mở rộng của phương pháp Deep Work Plan cốt lõi. Bốn trong năm addon là tùy chọn và **không bao giờ bắt buộc để tuân thủ** — kho lưu trữ không có addon tùy chọn nào vẫn hoàn toàn AI-first và tuân thủ DWP. Mỗi addon tùy chọn được đề xuất trong onboarding, chấp nhận hoặc từ chối rõ ràng và — khi được chấp nhận — **đối chiếu** với thiết lập hiện có thay vì ghi đè. Một thành phần là ngoại lệ được khai báo: kể từ chuẩn 2.3.0, **đánh giá cục bộ AI Diff Reviewer** là một phần của chuẩn cơ sở bắt buộc — onboarding cài đặt nó và mọi Final Review chạy nó — trong khi bề mặt CI của nó vẫn là opt-in.
+**Phiên bản 2.1.0.** Add-on là phần mở rộng của phương pháp Deep Work Plan cốt lõi. Bốn trong năm addon là tùy chọn và **không bao giờ bắt buộc để tuân thủ** — kho lưu trữ không có addon tùy chọn nào vẫn hoàn toàn AI-first và tuân thủ DWP. Mỗi addon tùy chọn được đề xuất trong onboarding, chấp nhận hoặc từ chối rõ ràng và — khi được chấp nhận — **đối chiếu** với thiết lập hiện có thay vì ghi đè. Một thành phần là ngoại lệ được khai báo: kể từ chuẩn 2.3.0, **đánh giá cục bộ AI Diff Reviewer** là một phần của chuẩn cơ sở bắt buộc — onboarding cài đặt nó và mọi Final Review chạy nó — trong khi bề mặt CI của nó vẫn là opt-in.
 
 ## Hợp đồng addon
 
@@ -67,7 +67,7 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 
 ### AI Diff Reviewer (addon thứ năm — đánh giá cục bộ bắt buộc, bề mặt CI tùy chọn)
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**, phiên bản hiện tại **v2.0.1**) trao cho bước rà soát bảo mật của Final Review bắt buộc một đánh giá cục bộ có cấu trúc, và tùy chọn kiểm soát các pull request trong CI. Kể từ chuẩn 2.3.0, **đánh giá cục bộ là một phần của chuẩn cơ sở**; chỉ bề mặt CI là opt-in.
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) trao cho bước rà soát bảo mật của Final Review bắt buộc một đánh giá cục bộ có cấu trúc, và tùy chọn kiểm soát các pull request trong CI. Kể từ chuẩn 2.3.0, **đánh giá cục bộ là một phần của chuẩn cơ sở**; chỉ bề mặt CI là opt-in. Addon này được tự động cập nhật theo mỗi bản phát hành, nên phiên bản hiện tại của nó không bao giờ được ghim trong đoạn văn này — hãy kiểm tra `SKILL.md` riêng của addon hoặc các bản phát hành GitHub của nó để biết tag thực sự đang được vendor.
 
 - **Trang kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — tài liệu tham khảo khả năng đầy đủ
 - **Bắt buộc tại onboarding (Giai đoạn 7a):** cài đặt skill vendored được ghim theo tag (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) cùng `.review/extension.md` được điều chỉnh riêng cho repo (qua `generate-extension`), dưới sự chấp thuận của onboarding; một nâng cấp harness có mục tiêu đối chiếu cả hai khi thiếu; một lần từ chối được ghi lại như một ngoại lệ được khai báo và được `verify` báo cáo cho đến khi được cài đặt

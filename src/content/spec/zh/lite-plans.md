@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite 计划
 
-**版本 4.0.0。状态：稳定。** 本文档规定了与 [DWP 规范](/spec/dwp-specification) 一同引入的 Lite 计划形态：一种面向中小规模、边界清晰工作的计划格式，直接物化，不设不可执行的草案阶段。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
+**版本 5.0.0。状态：稳定。** 本文档规定了与 [DWP 规范](/spec/dwp-specification) 一同引入的 Lite 计划形态：一种面向中小规模、边界清晰工作的计划格式，直接物化，不设不可执行的草案阶段。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
 ## 形态与生命周期
 
@@ -41,6 +41,8 @@ section: Workflow
 重复同一个选项是幂等的；同时要求 `lite` 与 `full` 是一个错误。`--` 结束选项解析。
 
 当未给出格式偏好时，`create` 会推荐一个并说明理由。明确的 **Full** 请求总是获胜。明确的 **Lite** 请求会被采纳，除非该工作的需求或验证关卡无法容纳于紧凑的内联记录中——在这种情况下，`create` 会记录为何转而要求 Full。该选择 MUST 记录其背后所观察到的范围、依赖关系、所需的指令细节与未知因素——这是一项可审计的判断，而非在所有模型或代理上都成立的保证。
+
+Lite 计划以与 Full 相同的方式携带并行化决策：`Execution: sequential — {rationale}` 这一行，或一个 Team Agents 配置小节，并将逐任务的 Team Agents 元数据直接附加在被锚定的任务记录上，而非单独的任务文件中。该决策在 Lite 中同样绝不沉默——一份 Lite 计划会像 Full 计划那样明确声明它。
 
 ## 晋升与兼容性
 

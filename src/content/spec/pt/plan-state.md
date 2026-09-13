@@ -8,7 +8,7 @@ section: State
 
 # Estado do plano
 
-**Versão 1.1. Status: Estável.** Este documento especifica a camada de estado legível por máquina da metodologia Deep Work Plan. As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
+**Versão 5.0.0. Status: Estável.** Este documento especifica a camada de estado legível por máquina da metodologia Deep Work Plan, agora alinhada com a versão própria do padrão DWP — nenhum requisito existente é enfraquecido pela renumeração. Esta revisão também documenta o atualizador de estado protegido, a publicação verificada de planos e as regras de veracidade de evidência que um plano concluído deve satisfazer (veja abaixo). As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
 
 Dois artefatos JSON — `manifest.json` (a identidade estática do plano) e `state.json` (o estado de execução ao vivo, por tarefa, incluindo os resultados dos validation gates) — que todo plano PODE (MAY) carregar junto com seus arquivos markdown, e que a execução não supervisionada (veja [Protocolo do agente](/spec/agent-protocol#execution-profiles)) e os espaços de trabalho sem git (veja [Arquétipos](/spec/archetypes) §3) DEVEM (MUST) carregar.
 
@@ -35,7 +35,7 @@ Um plano que usa a camada de estado tem este layout:
 
 `manifest.json` DEVE (MUST) ser escrito exatamente uma vez, quando o fluxo `create` materializa o plano, e NÃO DEVE (MUST NOT) ser alterado depois, exceto para uma migração de versão de spec registrada no `PROGRESS.md`.
 
-`state.json` DEVE (MUST) ser reescrito pelo agente em cada um destes pontos de protocolo: materialização do plano (todas as tarefas `pending`), início da tarefa (`in_progress`), cada execução de validation gate (registro de gate anexado ou atualizado) e conclusão da tarefa (`completed`, como parte do protocolo de conclusão de tarefa na [Especificação do DWP](/spec/dwp-specification#task-completion-protocol)).
+`state.json` DEVE (MUST) ser reescrito pelo agente em cada um destes pontos de protocolo: materialização do plano (todas as tarefas `pending`), início da tarefa (`in_progress`), cada execução de validation gate (registro de gate anexado ou atualizado), conclusão da tarefa (`completed`, como parte do protocolo de conclusão de tarefa na [Especificação do DWP](/spec/dwp-specification#task-completion-protocol)), um checkpoint antes de qualquer interrupção planejada, e uma parada `blocked`.
 
 Ambos os arquivos DEVEM (MUST) ser escritos atomicamente: escrever em um arquivo temporário no mesmo diretório e depois renomear sobre o alvo. Uma escrita interrompida NÃO DEVE (MUST NOT) deixar um arquivo JSON truncado no lugar.
 
@@ -194,6 +194,30 @@ Um agente que retoma DEVE (MUST) comparar a lista de caixas de seleção do READ
 A sub-skill `verify` DEVE (MUST) tratar a dessincronização como uma descoberta de conformidade: relatar quais tarefas discordam e em qual direção.
 
 Ferramentas que não sejam o agente em execução DEVEM (MUST) tratar ambos os arquivos JSON como somente leitura.
+
+## Atualizações de estado protegidas
+
+As escritas de progresso comuns passam por um atualizador direcionado e distribuído junto com a skill, em vez de uma reescrita completa do arquivo. Ele rejeita totalmente o estado malformado, e recusa-se a marcar uma tarefa como `completed` sem evidência de gate não vazia anexada — uma forma `--gate-json` está disponível para um comando cuja própria saída contenha caracteres de pipe, e o atualizador aceita o mesmo objeto de gate fechado descrito acima. Repetições substituem apenas o próprio comando; um comando diferente mantém seu próprio registro separado. `--block-reason` registra um bloqueio; `--resolve-blocker` resolve apenas o bloqueio da tarefa atual, nunca o de outra tarefa. Trabalho pulado nunca pode tornar um plano `completed`. `--reopen-reason` registra a intenção de quem chama de emendar o plano via `refine` — a emenda e qualquer evidência que ela invalide DEVEM (MUST) ser registradas primeiro no log da tarefa. `--expected-sha256` rejeita uma escrita contra um snapshot de estado que já avançou. Um diretório `.lock` cooperativo serializa escritores concorrentes; o lock de um escritor que travou DEVE (MUST) ser inspecionado antes da remoção, e nenhuma proteção é reivindicada contra um editor que contorne o lock completamente. Esses registros afirmam resultados — eles não provam por si mesmos que um comando foi executado, ou que sua saída foi aceita semanticamente.
+
+## Publicação verificada do plano
+
+Antes de anunciar a conclusão, os logs de tarefa finalizados (cada um carregando sua **disposição de skills** e, no Final Review, sua **decisão de documentação**), o índice do README e o `PROGRESS.md` DEVEM (MUST) ser redigidos a partir de resultados de origem e aceitação obtidos. A tarefa final do plano então se fecha por meio do finalizador distribuído: sua transição terminal valida o candidato concluído contra cada artefato do plano antes de escrever o estado, verifica os arquivos depois, e registra um recibo `analysis_results/FINALIZATION.json`. Um gate aprovado inventado NÃO DEVE (MUST NOT) sustentar essa transição — o recibo é evidência externa do que foi realmente verificado, nunca seu próprio pré-requisito. `bash ../verify/conformance.sh --plan PLAN_name` é executado em seguida, contra os artefatos reais em disco.
+
+Uma publicação interrompida deixa um marcador `.finalizing.json` no lugar; a verificação normal falha até que a evidência seja inspecionada e o auxiliar de recuperação tenha sucesso contra o mesmo candidato — nada retoma uma publicação por suposição. Um lock cooperativo obsoleto requer confirmar que nenhum escritor permanece ativo antes da remoção. Nada nesta camada faz commit, push, executa um comando de gate armazenado, ou repara silenciosamente o markdown do plano. Um interpretador Python ausente produz `UNVERIFIED`, nunca `completed`.
+
+## Veracidade da evidência e emendas
+
+Toda mudança no escopo, nos critérios de aceitação ou no adiamento de uma tarefa carrega um registro de emenda durável: o critério original textual, o que foi observado, a disposição, o motivo, a autoridade por trás dela (usuário, desenvolvedor ou evidência), as tarefas afetadas e qual evidência foi invalidada ou preservada. As emendas são anexadas, nunca retrodatadas; o `manifest.json` mantém sua procedência de criação e nunca é reescrito para corresponder a um escopo ao vivo alterado.
+
+Cinco estados de evidência descrevem contra o que um registro de tarefa pode se fechar:
+
+- **Investigação concluída** — trabalho real registrado; fecha uma tarefa apenas contra um critério revisado que a nomeia, nunca contra o original tal como escrito.
+- **Cenário não executado** — registrado como não realizado; não contribui com evidência aprovada em nenhuma era.
+- **Requisito adiado** — o critério se move para uma tarefa de destino nomeada com autoridade registrada; apenas essa emenda fecha a origem.
+- **Gate falho** — permanece falhando até que a mesma intenção de aceitação seja reexecutada e passe; uma repetição substitui apenas o próprio comando.
+- **Resultado de produto alcançado** — o critério tal como escrito, verificado pelo seu próprio gate; o único estado que conclui uma tarefa sem alterações.
+
+A aplicação é mecânica onde quer que os registros permitam. Evidência de gate marcada "invalidada por refine" é histórico preservado, nunca evidência aprovada, e uma tarefa concluída que ainda depende dela é relatada pelo verificador. Um registro aprovado cujo próprio texto admite que a verificação nunca foi executada (por exemplo, "nunca entrou", "não foi executado" ou "não pode ser medido") é uma contradição, relatada da mesma forma — assim como uma tarefa de estado concluída cujo próprio log ainda diz `Status: pending`. Contradições narrativas além dessas — um relatório cujas conclusões discordam de sua própria checklist — requerem um revisor humano; o verificador relata o que os registros dizem, não o que a prosa significa. Um usuário PODE (MAY) aceitar explicitamente uma exceção delimitada com autoridade registrada; a pré-aprovação não supervisionada nunca é permissão geral para abandonar um objetivo central, e um critério obrigatório que não pode ser cumprido é um bloqueio, nunca trabalho concluído.
 
 ## Versionamento do schema
 

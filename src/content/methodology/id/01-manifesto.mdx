@@ -58,7 +58,7 @@ Ini adalah pilar kedua metodologi, dan ia pantas mendapat definisi yang gamblang
 
 <RepoAsHarness lang="id" class="not-prose my-10" />
 
-Karena setiap elemen adalah berkas di dalam repositori, bukan fitur sebuah alat, harness ini portabel secara konstruksi. Itulah klaim satu baris yang menjadi landasan seluruh sisa metodologi: *repositori itu sendiri menjadi harness*, sehingga agent mana pun dapat mengemudikan repo mana pun — tanpa framework buatan per-alat.
+Karena setiap elemen adalah berkas di dalam repositori, bukan fitur sebuah alat, harness ini portabel secara konstruksi: agent mana pun yang dapat membaca Markdown dan menjalankan perintah shell dapat membuka berkas yang sama, tanpa framework buatan per-alat. Itulah klaim satu baris yang menjadi landasan seluruh sisa metodologi: *repositori itu sendiri menjadi harness*. Ini adalah klaim tentang apa yang dibawa repositori, bukan jaminan bahwa sebuah model akan menemukan alur yang tepat secara andal tanpa bantuan pada sebuah permintaan baru — itulah sebabnya kit juga menyediakan titik masuk `dwp-*` yang eksplisit dan sebuah `SKILL.md` router: portabilitas berkas dan perutean yang andal adalah properti yang berbeda, dan hanya yang pertama yang dibangun secara konstruksi semata.
 
 ## Efisien secara konstruksi
 

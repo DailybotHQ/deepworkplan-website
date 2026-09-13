@@ -8,7 +8,7 @@ section: State
 
 # Estado del plan
 
-**Versión 1.1. Estado: estable.** Este documento especifica la capa de estado del plan legible por máquina de la metodología Deep Work Plan. Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
+**Versión 5.0.0. Estado: estable.** Este documento especifica la capa de estado del plan legible por máquina de la metodología Deep Work Plan, ahora alineada con la versión propia del estándar DWP — ningún requisito existente se debilita con la renumeración. Esta revisión también documenta el actualizador de estado protegido, la publicación verificada de planes y las reglas de veracidad de la evidencia que un plan completado debe cumplir (véase más abajo). Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
 
 Dos artefactos JSON — `manifest.json` (la identidad estática del plan) y `state.json` (el estado de ejecución activo por tarea, incluidos los resultados de las puertas de validación) — que todo plan PUEDE llevar junto con sus archivos Markdown, y que la ejecución desatendida (véase [Protocolo del agente](/spec/agent-protocol#execution-profiles)) y los espacios de trabajo de agente sin git (véase [Arquetipos](/spec/archetypes) §3) DEBEN llevar.
 
@@ -35,7 +35,7 @@ Un plan que usa la capa de estado tiene esta estructura:
 
 `manifest.json` DEBE escribirse exactamente una vez, cuando el flujo `create` materializa el plan, y NO DEBE cambiar después, salvo en una migración de versión de spec registrada en `PROGRESS.md`.
 
-`state.json` DEBE ser reescrito por el agente en cada uno de estos puntos de protocolo: materialización del plan (todas las tareas en `pending`), inicio de tarea (`in_progress`), cada ejecución de puerta de validación (registro de puerta añadido o actualizado) y finalización de tarea (`completed`, como parte del protocolo de finalización de tarea en [Especificación de DWP](/spec/dwp-specification#task-completion-protocol)).
+`state.json` DEBE ser reescrito por el agente en cada uno de estos puntos de protocolo: materialización del plan (todas las tareas en `pending`), inicio de tarea (`in_progress`), cada ejecución de puerta de validación (registro de puerta añadido o actualizado), finalización de tarea (`completed`, como parte del protocolo de finalización de tarea en [Especificación de DWP](/spec/dwp-specification#task-completion-protocol)), un punto de control antes de cualquier interrupción planificada, y una parada `blocked`.
 
 Ambos archivos DEBEN escribirse de forma atómica: escribir en un archivo temporal en el mismo directorio y luego renombrarlo sobre el destino. Una escritura interrumpida NO DEBE dejar un archivo JSON truncado en su lugar.
 
@@ -194,6 +194,30 @@ Un agente que reanuda DEBE comparar la lista de casillas del README con `state.j
 La sub-skill `verify` DEBE tratar la desincronización como un hallazgo de conformidad: reportar qué tareas discrepan y en qué dirección.
 
 Las herramientas distintas del agente ejecutor DEBEN tratar ambos archivos JSON como de solo lectura.
+
+## Actualizaciones de estado protegidas
+
+Las escrituras de avance ordinarias pasan por un actualizador dirigido y distribuido con la skill, en lugar de reescribir el archivo completo. Rechaza de plano el estado malformado, y se niega a marcar una tarea como `completed` sin evidencia de puerta no vacía adjunta — existe una forma `--gate-json` para un comando cuya propia salida contenga caracteres de barra vertical, y el actualizador acepta el mismo objeto de puerta cerrado descrito arriba. Los reintentos solo sustituyen a su propio comando; un comando distinto conserva su propio registro separado. `--block-reason` registra un bloqueo; `--resolve-blocker` resuelve solo el bloqueo de la tarea actual, nunca el de otra tarea. El trabajo omitido nunca puede dejar un plan `completed`. `--reopen-reason` registra la intención de quien llama de enmendar el plan mediante `refine` — la enmienda y cualquier evidencia que invalide DEBEN registrarse primero en el registro de la tarea. `--expected-sha256` rechaza una escritura contra una instantánea de estado que ya haya avanzado. Un directorio `.lock` cooperativo serializa a los escritores concurrentes; el bloqueo de un escritor caído DEBE inspeccionarse antes de eliminarlo, y no se reclama ninguna protección contra un editor que se salte el bloqueo por completo. Estos registros afirman resultados — no demuestran por sí mismos que un comando se ejecutó, ni que su salida fue aceptada semánticamente.
+
+## Publicación verificada del plan
+
+Antes de anunciar la finalización, los registros de tarea terminados (cada uno con su **disposición de skills** y, en el Final Review, su **decisión de documentación**), el índice del README y `PROGRESS.md` DEBEN redactarse a partir de resultados de origen y aceptación ganados. La tarea final del plan entonces se cierra mediante el finalizador distribuido: su transición terminal valida el candidato completado contra cada artefacto del plan antes de escribir el estado, verifica los archivos después y registra un recibo `analysis_results/FINALIZATION.json`. Una puerta aprobada inventada NO DEBE respaldar esta transición — el recibo es evidencia externa de lo que realmente se comprobó, nunca su propio prerrequisito. `bash ../verify/conformance.sh --plan PLAN_name` se ejecuta a continuación, contra los artefactos reales en disco.
+
+Una publicación interrumpida deja un marcador `.finalizing.json` en su lugar; la verificación normal falla hasta que se inspecciona la evidencia y el ayudante de recuperación tiene éxito contra el mismo candidato — nada reanuda una publicación por suposición. Un bloqueo cooperativo obsoleto requiere confirmar que ningún escritor sigue activo antes de eliminarlo. Nada en esta capa hace commit, push, ejecuta un comando de puerta almacenado, ni repara en silencio el Markdown del plan. Un intérprete de Python ausente produce `UNVERIFIED`, nunca `completed`.
+
+## Veracidad de la evidencia y enmiendas
+
+Todo cambio en el alcance, los criterios de aceptación o el aplazamiento de una tarea lleva un registro de enmienda duradero: el criterio original textual, lo observado, la disposición, el motivo, la autoridad detrás de ella (usuario, desarrollador o evidencia), las tareas afectadas y qué evidencia se invalidó o preservó. Las enmiendas se anexan, nunca se retrofechan; `manifest.json` conserva su procedencia de creación y nunca se reescribe para igualar un alcance en vivo modificado.
+
+Cinco estados de evidencia describen contra qué puede cerrarse un registro de tarea:
+
+- **Investigación completada** — trabajo real registrado; cierra una tarea solo contra un criterio revisado que la nombre, nunca contra el original tal como se escribió.
+- **Escenario no ejecutado** — registrado como no realizado; no aporta evidencia de aprobación en ninguna era.
+- **Requisito aplazado** — el criterio se traslada a una tarea de destino nombrada con autoridad registrada; solo esa enmienda cierra el origen.
+- **Puerta fallida** — permanece en fallo hasta que la misma intención de aceptación se reejecute y pase; un reintento solo sustituye a su propio comando.
+- **Resultado de producto logrado** — el criterio tal como se escribió, verificado por su propia puerta; el único estado que completa una tarea sin cambios.
+
+La aplicación es mecánica dondequiera que los registros lo permitan. La evidencia de puerta marcada «invalidada por refine» es historial conservado, nunca evidencia de aprobación, y una tarea completada que aún dependa de ella es reportada por el comprobador. Un registro de aprobación cuyo propio texto admite que la comprobación nunca se ejecutó (por ejemplo «nunca se entró», «no se ejecutó» o «no se puede medir») es una contradicción, reportada de la misma forma — igual que una tarea de estado completada cuyo propio registro todavía dice `Status: pending`. Las contradicciones narrativas más allá de estas — un reporte cuyas conclusiones discrepan de su propia lista de verificación — requieren un revisor humano; el comprobador reporta lo que dicen los registros, no lo que significa la prosa. Un usuario PUEDE aceptar explícitamente una excepción acotada con autoridad registrada; la preaprobación desatendida nunca es un permiso general para abandonar un objetivo central, y un criterio obligatorio que no se puede cumplir es un bloqueo, nunca trabajo completado.
 
 ## Versionado de esquemas
 

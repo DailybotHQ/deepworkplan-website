@@ -8,7 +8,7 @@ section: Workflow
 
 # Planes Lite
 
-**Versión 4.0.0. Estado: estable.** Este documento especifica la representación de plan Lite introducida junto con la [Especificación de DWP](/spec/dwp-specification): un formato de plan para trabajo acotado de tamaño pequeño a mediano que se materializa directamente, sin una etapa de borrador no ejecutable. Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
+**Versión 5.0.0. Estado: estable.** Este documento especifica la representación de plan Lite introducida junto con la [Especificación de DWP](/spec/dwp-specification): un formato de plan para trabajo acotado de tamaño pequeño a mediano que se materializa directamente, sin una etapa de borrador no ejecutable. Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
 
 ## Representación y ciclo de vida
 
@@ -41,6 +41,8 @@ El create guiado escribe una **propuesta pendiente revisable** — Lite o Full, 
 Repetir la misma opción es idempotente; solicitar `lite` y `full` juntos es un error. `--` termina el análisis de opciones.
 
 Cuando no se da ninguna preferencia de formato, `create` recomienda una y explica por qué. Una solicitud explícita de **Full** siempre prevalece. Una solicitud explícita de **Lite** se honra a menos que los requisitos o las puertas de validación del trabajo no quepan en registros compactos en línea — en ese caso `create` registra por qué se requiere Full en su lugar. La selección DEBE registrar el alcance observado, las dependencias, el detalle de instrucciones requerido y las incertidumbres detrás de la elección — un juicio auditable, no una garantía que se sostenga en todos los modelos o agentes.
+
+Un plan Lite lleva la decisión de paralelización de la misma forma que Full: la línea `Execution: sequential — {rationale}`, o una sección de Configuración de Team Agents, con Metadatos de Team Agents por tarea adjuntos directamente a los registros de tarea anclados en lugar de a un archivo de tarea separado. La decisión nunca es silenciosa en Lite tampoco — un plan Lite la declara exactamente igual que lo haría un plan Full.
 
 ## Promoción y compatibilidad
 

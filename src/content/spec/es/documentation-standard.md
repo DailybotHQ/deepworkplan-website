@@ -8,7 +8,13 @@ section: Standard
 
 # Estándar de documentación
 
-**Versión 1.1.** Este estándar define cómo los Deep Work Plans documentan su estructura, tareas y avance. Se aplica a todo plan creado bajo la metodología DWP. Las palabras clave MUST (DEBE), SHOULD (DEBERÍA) y MAY (PUEDE) se usan según las define el RFC 2119.
+**Versión 5.0.0.** Este estándar define cómo los Deep Work Plans documentan su estructura, tareas y avance, y cómo un repositorio se documenta a sí mismo para que un agente pueda actuar con seguridad. Se aplica a todo plan creado bajo la metodología DWP. Esta versión alinea la versión propia del documento con el estándar DWP que acompaña — sin cambios en los requisitos existentes — y añade la aplicación del presupuesto de índice esbelto y el nivel de funcionalidad descritos a continuación. Las palabras clave MUST (DEBE), SHOULD (DEBERÍA) y MAY (PUEDE) se usan según las define el RFC 2119.
+
+## AGENTS.md como punto de entrada compacto
+
+El archivo raíz `AGENTS.md` DEBERÍA mantenerse dentro de un presupuesto de 150–500 líneas. Cuando el contenido generado o mantenido por el harness lo superaría, el agente DEBE mover el detalle a la guía de `docs/` (o al documento de módulo/funcionalidad) que lo posee y enlazarlo desde el índice — nada se descarta, solo se reubica, y el índice DEBE enlazar cada documento que recibió contenido desplazado. Un `AGENTS.md` escrito a mano que exceda el presupuesto nunca se reescribe en silencio: el agente propone una migración concreta (qué se mueve adónde, qué enlaces se añaden) y la aplica solo con el consentimiento del desarrollador. Un comprobador de conformidad trata el presupuesto como asesor, ya que un conteo de líneas es objetivo pero la autoría no lo es — el DEBE vincula al harness que genera o actualiza el archivo, no la suposición de un comprobador sobre quién lo escribió. `AGENTS.md` NO DEBE enlazar un archivo de `docs/` que no exista.
+
+Por encima del nivel de documentación por módulo (más abajo) hay un **nivel de funcionalidad**: un área de capacidad importante — más grande que un módulo — obtiene su propia carpeta `docs/` junto a su código, con acceso mediante su propio `README.md`. Un área califica cuando abarca dos o más módulos importantes, posee un directorio de subaplicación o subsistema autocontenido, o lleva sus propios contratos (una superficie de API, contratos de eventos o esquemas) de los que dependen múltiples consumidores. Una vez que un área se registra como importante, su `docs/` de funcionalidad DEBERÍA existir, y sus entradas más significativas DEBERÍAN enlazarse desde los módulos que abarca y desde el índice raíz de `AGENTS.md`, igual que la documentación por módulo. Un área deliberadamente dejada sin documentar lleva un motivo registrado — una decisión, no un descuido.
 
 ## README del plan
 

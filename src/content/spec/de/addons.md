@@ -8,7 +8,7 @@ section: Addons
 
 # Add-ons
 
-**Version 4.0.0.** Add-ons sind Erweiterungen der zentralen Deep Work Plan-Methodik. Vier der fünf sind optional und **niemals für Konformität erforderlich** — ein Repository ohne optionale Addons ist vollständig AI-first und DWP-konform. Jedes optionale Addon wird beim Onboarding angeboten, explizit angenommen oder abgelehnt und — bei Annahme — mit bestehendem Setup **abgeglichen**, statt es zu überschreiben. Eine Komponente ist die deklarierte Ausnahme: Seit Standard 2.3.0 ist die **lokale Überprüfung des AI Diff Reviewer** Teil der erforderlichen Baseline — das Onboarding installiert sie und jedes Final Review führt sie aus —, während ihre CI-Oberfläche Opt-in bleibt.
+**Version 2.1.0.** Add-ons sind Erweiterungen der zentralen Deep Work Plan-Methodik. Vier der fünf sind optional und **niemals für Konformität erforderlich** — ein Repository ohne optionale Addons ist vollständig AI-first und DWP-konform. Jedes optionale Addon wird beim Onboarding angeboten, explizit angenommen oder abgelehnt und — bei Annahme — mit bestehendem Setup **abgeglichen**, statt es zu überschreiben. Eine Komponente ist die deklarierte Ausnahme: Seit Standard 2.3.0 ist die **lokale Überprüfung des AI Diff Reviewer** Teil der erforderlichen Baseline — das Onboarding installiert sie und jedes Final Review führt sie aus —, während ihre CI-Oberfläche Opt-in bleibt.
 
 ## Der Addon-Vertrag
 
@@ -67,7 +67,7 @@ Ein interface-oberflächenbezogenes `DESIGN.md`, das jeder Coding-Agent für kon
 
 ### AI Diff Reviewer (fünftes Addon — erforderliche lokale Überprüfung, optionale CI-Oberfläche)
 
-Der **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (Marketplace **"AI Diff Reviewer"**, aktuelle Version **v2.0.1**) versieht den Sicherheitstest des obligatorischen Final Review mit einer strukturierten lokalen Überprüfung und sperrt optional Pull Requests in CI. Seit Standard 2.3.0 ist die **lokale Überprüfung Teil der Baseline**; nur die CI-Oberfläche ist Opt-in.
+Der **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (Marketplace **"AI Diff Reviewer"**) versieht den Sicherheitstest des obligatorischen Final Review mit einer strukturierten lokalen Überprüfung und sperrt optional Pull Requests in CI. Dieses Addon wird release-auto-aktualisiert, daher ist seine aktuelle Version in diesem Text nie festgeschrieben — die tatsächlich vendorte Version ist der eigenen `SKILL.md` des Addons oder seinen GitHub-Releases zu entnehmen. Seit Standard 2.3.0 ist die **lokale Überprüfung Teil der Baseline**; nur die CI-Oberfläche ist Opt-in.
 
 - **Kit-Seite:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — vollständige Fähigkeitsreferenz
 - **Beim Onboarding erforderlich (Phase 7a):** tag-gepinnte Installation der vendorten Skill (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus eine auf das Repo zugeschnittene `.review/extension.md` (via `generate-extension`), unter der Onboarding-Zustimmung; ein zielgerichtetes Harness-Upgrade gleicht beide ab, wenn sie fehlen; eine Ablehnung wird als deklarierte Ausnahme aufgezeichnet und von `verify` gemeldet, bis sie installiert ist

@@ -8,7 +8,7 @@ section: Addons
 
 # 附加组件
 
-**版本 4.0.0。** 附加组件是对核心 Deep Work Plan 方法论的扩展。五个之中有四个是可选的，且**绝非符合性所必需**——零可选附加组件的仓库完全符合 AI-first 与 DWP 规范。每个可选附加组件在接入期间提供，由开发者明确接受或拒绝，且——接受后——**调和**现有设置而非覆盖。一个组件是声明的例外：自标准 2.3.0 起，**AI Diff Reviewer 本地审查**属于必备基线——接入时安装它，每份 Final Review 都运行它——而其 CI 层面保持可选。
+**版本 2.1.0。** 附加组件是对核心 Deep Work Plan 方法论的扩展。五个之中有四个是可选的，且**绝非符合性所必需**——零可选附加组件的仓库完全符合 AI-first 与 DWP 规范。每个可选附加组件在接入期间提供，由开发者明确接受或拒绝，且——接受后——**调和**现有设置而非覆盖。一个组件是声明的例外：自标准 2.3.0 起，**AI Diff Reviewer 本地审查**属于必备基线——接入时安装它，每份 Final Review 都运行它——而其 CI 层面保持可选。
 
 ## 附加组件合约
 
@@ -67,7 +67,7 @@ section: Addons
 
 ### AI Diff Reviewer（第五个附加组件——必备本地审查、可选 CI 层面）
 
-**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**，当前版本 **v2.0.1**）为强制的 Final Review 安全审查环节提供结构化的本地审查，并可选地在 CI 中对拉取请求设置门控。自标准 2.3.0 起，**本地审查属于基线的一部分**；只有 CI 层面是可选的。
+**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**）为强制的 Final Review 安全审查环节提供结构化的本地审查，并可选地在 CI 中对拉取请求设置门控。自标准 2.3.0 起，**本地审查属于基线的一部分**；只有 CI 层面是可选的。此附加组件会随每次发布自动刷新，因此其当前版本从不在本文中锁定——请查阅该附加组件自身的 `SKILL.md` 或其 GitHub 发布记录，以了解实际所装的标签版本。
 
 - **套件页：** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 完整能力参考
 - **接入时必备（第 7a 阶段）：** 在接入授权之下，标签锁定安装 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`），外加按仓库定制的 `.review/extension.md`（通过 `generate-extension`）；缺失时由定向 harness 升级调和二者；拒绝会被记录为一项声明的例外，并由 `verify` 持续报告，直至安装完成

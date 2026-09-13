@@ -8,7 +8,7 @@ section: Workflow
 
 # Piani Lite
 
-**Versione 4.0.0. Stato: Stabile.** Questo documento specifica la rappresentazione di piano Lite introdotta insieme alla [Specifica DWP](/spec/dwp-specification): un formato di piano per lavoro delimitato di dimensione piccola-media che viene materializzato direttamente, senza una fase di bozza non eseguibile. Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
+**Versione 5.0.0. Stato: Stabile.** Questo documento specifica la rappresentazione di piano Lite introdotta insieme alla [Specifica DWP](/spec/dwp-specification): un formato di piano per lavoro delimitato di dimensione piccola-media che viene materializzato direttamente, senza una fase di bozza non eseguibile. Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
 
 ## Rappresentazione e ciclo di vita
 
@@ -41,6 +41,8 @@ Il create guidato scrive una **proposta in sospeso revisionabile** — Lite o Fu
 Ripetere la stessa opzione è idempotente; richiedere `lite` e `full` insieme è un errore. `--` termina l'analisi delle opzioni.
 
 Quando non viene fornita alcuna preferenza di formato, `create` ne raccomanda una e spiega perché. Una richiesta esplicita di **Full** prevale sempre. Una richiesta esplicita di **Lite** viene onorata a meno che i requisiti o i validation gate del lavoro non entrino in record compatti inline — in tal caso `create` registra perché Full è richiesto invece. La selezione DEVE registrare l'ambito osservato, le dipendenze, il livello di dettaglio delle istruzioni richiesto e le incognite dietro la scelta — un giudizio verificabile, non una garanzia che valga per ogni modello o agente.
+
+Un piano Lite porta la decisione di parallelizzazione nello stesso modo di un piano Full: la riga `Execution: sequential — {rationale}`, oppure una sezione Team Agents Configuration, con i Team Agents Metadata per attività allegati direttamente ai record di attività ancorati invece che a un file di attività separato. La decisione non è mai silenziosa nemmeno in Lite — un piano Lite la dichiara esattamente come farebbe un piano Full.
 
 ## Promozione e compatibilità
 

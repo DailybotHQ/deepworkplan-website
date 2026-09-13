@@ -8,7 +8,7 @@ section: Workflow
 
 # Plans Lite
 
-**Version 4.0.0. Statut : stable.** Ce document spécifie la représentation de plan Lite introduite aux côtés de la [Spécification DWP](/spec/dwp-specification) : un format de plan pour un travail borné de petite à moyenne taille qui est matérialisé directement, sans étape d'ébauche non exécutable. Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
+**Version 5.0.0. Statut : stable.** Ce document spécifie la représentation de plan Lite introduite aux côtés de la [Spécification DWP](/spec/dwp-specification) : un format de plan pour un travail borné de petite à moyenne taille qui est matérialisé directement, sans étape d'ébauche non exécutable. Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 
 ## Représentation et cycle de vie
 
@@ -41,6 +41,8 @@ Le create guidé écrit une **proposition en attente relisible** — Lite ou Ful
 Répéter la même option est idempotent ; demander `lite` et `full` ensemble est une erreur. `--` termine l'analyse des options.
 
 Lorsqu'aucune préférence de format n'est donnée, `create` en recommande une et explique pourquoi. Une demande explicite de **Full** l'emporte toujours. Une demande explicite de **Lite** est honorée à moins que les exigences ou les portes de validation du travail ne tiennent pas dans des enregistrements compacts en ligne — dans ce cas `create` consigne pourquoi Full est requis à la place. La sélection MUST consigner le périmètre observé, les dépendances, le niveau de détail d'instruction requis, et les inconnues derrière le choix — un jugement auditable, pas une garantie qui tienne pour tout modèle ou agent.
+
+Lite porte la décision de parallélisation de la même manière que Full : la ligne `Execution: sequential — {rationale}`, ou une section Configuration Team Agents, avec des Métadonnées Team Agents par tâche rattachées directement aux enregistrements de tâche ancrés plutôt qu'à un fichier de tâche séparé. La décision n'est jamais tacite dans Lite non plus — un plan Lite l'énonce exactement comme le ferait un plan Full.
 
 ## Promotion et compatibilité
 
