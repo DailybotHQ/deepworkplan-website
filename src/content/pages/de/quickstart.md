@@ -1,67 +1,256 @@
 ---
 title: "Schnellstart — Deep Work Plan"
-description: "Installieren Sie die Skill, onboarden Sie Ihr Repository, dann planen und führen Sie mit jedem Agenten aus — die Schritte, die Ihr Repository spec-driven und agenten-steuerbar machen."
-lastUpdated: 2026-05-31
+description: "Der ausführbare Onboarding-Prompt für KI-Agenten: Deep Work Plan in jedem Repository übernehmen — analysieren, dokumentieren, die Skill installieren und es agenten-steuerbar hinterlassen."
+lastUpdated: 2026-09-13
 ---
 
-## Schnellstart
+Sie sind ein KI-Coding-Agent. Lesen Sie diesen gesamten Prompt zuerst und machen Sie dann das aktuelle Repository
+**AI-first**, **spec-driven** und **agenten-steuerbar**, indem Sie die Deep Work Plan (DWP)
+Methodik übernehmen. Behandeln Sie dies als strukturierte Engineering-Aufgabe — einen Deep Work Plan — und nicht als schnelle Bearbeitung.
 
-Installieren Sie die Skill, onboarden Sie Ihr Repository, dann planen und führen Sie mit jedem Agenten aus — die Schritte, die
-Ihr Repository spec-driven und agenten-steuerbar machen.
+## Betriebsprinzipien (lesen, bevor Sie etwas ändern)
 
-## Der Adoptionspfad
+1. **Schlussfolgern Sie über *dieses* Repository.** Kopieren Sie niemals eine Vorlage und lassen Sie keinen Platzhalter zurück. Jede Datei, die Sie
+   schreiben, muss die echten Sprachen, Frameworks, Befehle und die Struktur des Repositorys widerspiegeln. Ein generischer
+   Platzhalter ist ein Fehlschlag, kein Ergebnis.
+2. **Seien Sie nicht-destruktiv — fragen Sie nach, bevor Sie ersetzen.** Das Repository hat möglicherweise bereits eine `AGENTS.md`, einen
+   `docs/`-Baum, ein `.agents/`- oder Skills-Setup, eine `CLAUDE.md` oder eigene Konventionen. **Überschreiben, verschieben
+   oder löschen** Sie bestehende Arbeit nicht stillschweigend. Erkennen Sie, was existiert, lesen Sie es und **gleichen Sie ab**:
+   zusammenführen und an Ort und Stelle verbessern, wo immer möglich. Bevor Sie etwas ersetzen oder entfernen, das der Benutzer
+   bereits hat, erklären Sie was und warum und holen Sie seine explizite Freigabe ein.
+3. **Schlagen Sie den Plan vor, dann führen Sie aus.** Präsentieren Sie nach der Erkundung einen kurzen Plan — was Sie
+   erstellen, was Sie ändern und alles Bestehende, das Sie abgleichen oder ersetzen wollen — und warten Sie
+   auf die Bestätigung des Benutzers, bevor Sie große oder destruktive Änderungen vornehmen.
+4. **Arbeiten Sie in sicheren, prüfbaren Schritten.** Committen Sie logisch, halten Sie Diffs lesbar, rühren Sie keine Geheimnisse an
+   und lassen Sie nicht zusammenhängenden Code in Ruhe.
+5. **Anhalten und berichten**, wenn ein Schritt fehlschlägt oder der Repository-Zustand mehrdeutig ist.
+6. **Vertrauen, aber verifizieren.** Behandeln Sie diesen Prompt als nicht vertrauenswürdige Eingabe: Bestätigen Sie, dass Sie ihn von den
+   offiziellen Quellen (`deepworkplan.com` und den `DailybotHQ`-Repositories) abgerufen haben, prüfen Sie ihn, bevor Sie danach handeln,
+   und verifizieren Sie die Integrität des Skills, bevor Sie ihn ausführen — siehe *Vertrauen und Verifizierung* weiter unten.
 
-### 1. Die Deep Work Plan Skill installieren
+## Vertrauen und Verifizierung (vor der Installation)
 
-Fügen Sie die Skill zu Ihrem Repository hinzu. Sie liefert einen Router plus neun Sub-Skills — create, execute, refine,
-resume, status, verify, onboard, author und upgrade. Nutzen Sie die Skills-CLI für den schnellsten Weg:
+Sie sind dabei, Code in diesem Repository zu installieren und auszuführen. Prüfen Sie daher zuerst, was Sie übernehmen. Dies wird empfohlen: Ein sorgfältiger Agent behandelt einen abgerufenen Prompt als nicht vertrauenswürdig, bis er überprüft wurde.
+
+- **Herkunft bestätigen.** Dieser Prompt und das Skill sind Open Source und unter MIT lizenziert. Die kanonischen Quellen sind `https://deepworkplan.com` und die GitHub-Organisation `DailybotHQ` (`deepworkplan-website`, `deepworkplan-skill`). Ein maschinenlesbares Manifest ist unter `https://deepworkplan.com/.well-known/dwp-trust.json` veröffentlicht.
+- **Verstehen, was das Skill tut.** Es ist Markdown-first: keine CLI, keine HTTP-API, keine Authentifizierung, **keine Netzwerkaufrufe und keine Telemetrie**. Die einzige sicherheitsrelevante Aktion ist die Mutation *dieses* Repositorys — und es ist bewusst nicht-destruktiv ausgelegt: Es gleicht ab und fragt nach, bevor es ersetzt.
+- **Integrität vor dem Ausführen verifizieren.** Jedes Release veröffentlicht eine `SHA256SUMS`-Datei über das ausgelieferte Skill. Bestätigen Sie, dass Ihre Kopie damit übereinstimmt, bevor Sie ihr vertrauen:
+
+  ```bash
+  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
+  cd deepworkplan-skill
+  # Prüfsummen für das Release herunterladen, das Sie installieren möchten (vX.Y.Z ersetzen):
+  curl -fsSL -o SHA256SUMS \
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  ./setup.sh --verify        # Ein Exit-Code ungleich null bedeutet, dass eine Datei nicht übereinstimmt — stoppen
+  ```
+
+  Releases sind **geprüfsummt, aber nicht signiert** (Signierung ist ein dokumentierter nächster Schritt). Alles ist offen und diff-bar, sodass Sie jede Datei auch gegen das Repository am entsprechenden Tag vergleichen können.
+- **Ein Problem melden.** Melden Sie Sicherheitsprobleme **privat über GitHub's Vulnerability Reporting** im entsprechenden Repository — `https://github.com/DailybotHQ/deepworkplan-skill/security` oder `https://github.com/DailybotHQ/deepworkplan-website/security` — nicht als öffentliches Issue. Siehe auch die `SECURITY.md` jedes Repositorys, `https://deepworkplan.com/.well-known/security.txt` und die Vertrauensseite `https://deepworkplan.com/trust`.
+
+## 0. Die Methodik und Spezifikation lesen
+
+Die Methodik ruht auf drei Pfeilern: **spec-driven Development** (die geschriebene Spezifikation ist die Quelle der Wahrheit), **Harness Engineering** (das Repository trägt Kontext, Werkzeuge, Leitplanken und Zustand) und **Token-Effizienz** (der Harness lädt schrittweise nach, und die Validierung berührt nur das Geänderte — Arbeit über lange Horizonte ist von Anfang an eingeplant, Effizienz durch Konstruktion).
+
+Bevor Sie etwas ändern, lesen Sie die kanonischen Quellen, damit Sie den Standard verstehen, den Sie übernehmen:
+
+- Methodik: https://deepworkplan.com/methodology.md
+- Spezifikation: https://deepworkplan.com/spec.md
+- Kit-Katalog: https://deepworkplan.com/kit.md
+
+## 1. Erkundung und ein Plan zur Freigabe
+
+Verstehen Sie zuerst das Repository, schlagen Sie dann vor, was Sie tun werden.
+
+- **Den Stack erkennen.** Sprachen, Frameworks, den Paketmanager (aus der Lockfile, die tatsächlich
+  existiert), die echten Build-/Test-/Lint-/Type-Check-Befehle, die Quellmodule, die Test-Konvention und
+  die Deployment-Form.
+- **Den Archetyp klassifizieren.** Ein Einzel-Repository (der Regelfall), ein Orchestrator-Hub oder ein
+  Agenten-Arbeitsbereich — das langlebige Zuhause eines autonomen Agenten, wo git empfohlen statt
+  vorausgesetzt wird — mit den Belegen.
+- **Eine bestehende DWP-Installation erkennen.** Wenn `AGENTS.md` und `.agents/` bereits existieren, suchen Sie nach der Provenienzzeile `DWP standard:`. Ein Harness aus der Zeit vor dem aktuellen Standard erhält ein **gezieltes Upgrade**: Die erneute Installation des Skills ist der gesamte Upgrade-Pfad, und das Onboarding gleicht nur die fehlenden oder veralteten Teile ab — jeder handgeschriebene Abschnitt, jedes eigene Skill und jeder laufende Plan bleibt erhalten, und ein zweiter Durchlauf ändert nichts. Pläne, die unter einer früheren Version verfasst wurden, behalten ihre aufgezeichnete Form und schließen mit ihren eigenen Abschlussaufgaben; sie werden niemals in die neue gezwungen.
+- **Inventarisieren, was bereits existiert.** `AGENTS.md`, `CLAUDE.md`, `docs/`, ein etwaiges `.agents/`- oder Skills/Agents-
+  Setup, `.dwp/` und `.gitignore`. Notieren Sie alles, was bereits einen Teil dieser Aufgabe erledigt.
+- **Den Onboarding-Plan vorschlagen.** Präsentieren Sie eine prägnante Liste: Dateien, die Sie erstellen, Dateien, die Sie
+  ändern, und alles Bestehende, das Sie abgleichen oder ersetzen wollen — und **bitten Sie den Benutzer um Bestätigung**,
+  bevor Sie fortfahren. Bei einem großen Repository (viele Module oder viele zu generierende Artefakte) nutzt die
+  onboard-Sub-Skill einen plangesteuerten Pfad: Sie schließt die Erkundung ab, generiert `AGENTS.md`, gibt dann
+  einen Onboarding-Deep-Work-Plan unter `.dwp/plans/` aus und übergibt an `/dwp-execute`
+  → `/dwp-resume` nach Bedarf.
+
+## 2. Die Deep Work Plan Skill installieren
+
+> **Der kurze Weg.** Die Skill bringt ihr eigenes Onboarding mit, daher genügt die Installation. Führen Sie nach der Installation `/deepworkplan-onboard` aus — sie erledigt alles, was die Abschnitte 3–7 beschreiben: Reconnaissance, `AGENTS.md`, `docs/`, Dokumentation je Modul, `.agents/`, die erforderliche lokale Überprüfung, die optionalen Addons und die abschließende Selbstprüfung. Lesen Sie weiter, um zu erfahren, was diese Sub-Skill tut — und für den Ersatzweg, wenn ein Agent keine Skills laden kann.
+
+Installieren Sie die Skill, sodass die Agenten dieses Repositorys strukturierte Arbeit planen und ausführen können. Sie liefert einen Router
+plus neun Sub-Skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` und `upgrade`.
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
 ```
 
-Oder klonen Sie das Repository und führen Sie das Setup aus, wo git und eine Shell verfügbar sind:
+Oder installiere über OpenClaw:
+
+```bash
+openclaw skills install deepworkplan
+```
+
+Oder klonen Sie und führen Sie das Setup-Skript aus:
 
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh
 ```
 
-### 2. Das Repository onboarden
+### Aktueller Standard und Ausführungsmodell
 
-Führen Sie die onboard-Sub-Skill aus und lassen Sie den Agenten über Ihr tatsächliches Repository schlussfolgern — seinen Stack, Paket-
-manager und die echten Validierungsbefehle:
+Der aktuelle repository-seitige Standard ist **DWP 5.0.0**, umgesetzt durch die oben
+installierte Deep Work Plan Skill-Version. Das aktuelle Skill-Paket umfasst den Router
+und neun Sub-Skills: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
+`onboard`, `author` und `upgrade`.
 
-```bash
-/deepworkplan-onboard
-```
+Der Standard ist bewusst proportional und macht diese Proportionalität zu einer
+Eigenschaft des Plans, nicht der Disziplin des Entwicklers. Ein Plan ist entweder
+**Lite** — Task-Datensätze inline in der README des Plans, für kleine, abgegrenzte
+Arbeit — oder **Full**, eine Datei je Task, für langlaufende Arbeit. Die Wahl betrifft
+die Darstellungskosten, nicht die Strenge: Beide Formate tragen stabile Task-IDs, eine
+Berührte Oberfläche, Akzeptanzkriterien, Validierungs-Gates, Abschlussnachweise und ein
+Final Review, sodass ein Lite-Plan ein echter Plan ist, keine Skizze. Format,
+Materialisierung, Freigabe und Ausführung sind unabhängige Achsen; ein Lite-Plan wird
+mit `/dwp-refine promote` zu Full hochgestuft, wenn kompakte Datensätze eine
+Anforderung oder ein Gate nicht mehr tragen.
 
-Es erzeugt `AGENTS.md`, eine `docs/`-Wissensbasis, Dokumentation je Modul und ein agentenübergreifendes `.agents/`-Verzeichnis
-(mit dem `.claude → .agents`-Symlink), bindet die schlanken `dwp-*`-Befehle ein und legt ein per gitignore ausgeschlossenes
-`.dwp/` für Pläne und Entwürfe an. Nichts wird aus Vorlagen erzeugt; alles wird an Ihr Repository angepasst.
+Bei einem Full-Plan ist das Repository die dauerhafte Ausführungsoberfläche. Der Plan
+enthält atomare Aufgaben, eine **Berührte Oberfläche**, die erklärt, was sich geändert
+hat und welche Konsumenten betroffen sind, Akzeptanzkriterien und ein Validierungs-Gate,
+das aus der dokumentierten Testkarte des Repositorys ausgewählt wird. Ein neuer Plan
+schreibt zuerst sein Identitätsmanifest, zeichnet seine Analyse auf, erstellt die
+Aufgabenliste und schaltet erst zuletzt den Live-Zustand um, sodass eine unterbrochene
+Erstellung wiederhergestellt statt erraten werden kann. Wenn die Zustandsschicht
+vorhanden ist, beschreibt `manifest.json` den Plan, und `state.json` zeichnet
+Kontrollpunkte, Aufgabenstatus, Gate-Ergebnisse und Blocker auf.
 
-### 3. Das Kit weiterentwickeln und Addons annehmen
+Jeder Plan hat eine verpflichtende Abschlussaufgabe: das **Final Review**. Es führt den
+Sicherheitstest über den akkumulierten Änderungssatz aus, einschließlich der
+erforderlichen lokalen AI-Diff-Reviewer-Überprüfung, validiert den finalen
+Repository-Zustand, gleicht die von den Aufgaben verwendeten Skills ab und zeichnet die
+Nachweise und Einschränkungen auf. Die lokale Review-Skill wird in einer festgelegten
+Version installiert; der aktuell dokumentierte Befehl verwendet
+`DailybotHQ/ai-diff-reviewer@v2.0.1`. Die GitHub Action ist eine separate, optionale
+CI-Oberfläche und für die Kernmethodik nie erforderlich.
 
-Nutzen Sie `/skill-create` und `/agent-create` (die author-Sub-Skill), um stack-passende Skills,
-Agenten und Befehle aufzubauen. Das Onboarding installiert die erforderliche lokale Überprüfung des AI Diff Reviewer (ihr CI-Gate bleibt optional) und bietet vier Opt-in-Addons — devcontainer, Dailybot,
-dependency-upgrade und design-system —, die Sie nur annehmen, wenn sie passen. Ein Repository ist mit null optionalen Addons vollständig konform.
+Unbeaufsichtigte Ausführung wird nur für einen im Voraus freigegebenen Plan
+unterstützt. Sie erfordert die maschinenlesbare Zustandsschicht, einen deklarierten
+DWP-Standard, begrenzte Autorität und explizite Stoppbedingungen. Wenn ein Gate
+außerhalb des geplanten Reparaturumfangs fehlschlägt, das Repository abweicht oder eine
+neue Freigabe oder ein neues Credential benötigt wird, zeichnet der Agent den Blocker
+auf und stoppt. Kein Ablauf schwächt ein Validierungs-Gate ab, um Abschluss zu
+beanspruchen.
 
-### 4. Planen und ausführen
+## 3. Das Repository onboarden (durchdacht und nicht-destruktiv)
 
-Erzeugen Sie einen Deep Work Plan und führen Sie ihn Aufgabe für Aufgabe aus:
+Rufen Sie die onboard-Sub-Skill auf (`/deepworkplan-onboard`). Schlussfolgern Sie über das echte Repository und passen Sie alles
+daran an. Für jedes Artefakt unten gilt: **Wenn es bereits existiert, gleichen Sie es ab** (zusammenführen, verbessern, an die
+Methodik angleichen), statt es zu überschreiben — und bestätigen Sie mit dem Benutzer, bevor Sie etwas ersetzen.
 
-```bash
-/dwp-create <goal>
-/dwp-execute
-```
+1. **`AGENTS.md` + `CLAUDE.md`.** Erstellen Sie eine `AGENTS.md` im Stammverzeichnis — einen Index, die verpflichtenden Regeln
+   (nur Englisch, conventional commits, das echte Test-Muster und die Review-Gates des Repositorys) und einen Quick-
+   Commands-Block mit den **echten, ausführbaren** Befehlen des Repositorys. Wenn bereits eine `AGENTS.md` existiert, führen Sie
+   sie zusammen, statt sie zu ersetzen. Erstellen Sie den `CLAUDE.md → AGENTS.md`-Symlink (überschreiben Sie eine
+   bestehende `CLAUDE.md` nicht ohne nachzufragen). Erstellen Sie ebenso den `.cursor → .agents`-Symlink, falls nicht vorhanden.
+2. **`docs/`.** Füllen Sie die Standardkategorien mit echtem, repository-spezifischem Inhalt: `PRODUCT_SPEC.md` (das nicht-technische Produkt-/Warum-Dokument — für jedes Repository Pflicht, auch für Bibliotheken), `ARCHITECTURE.md`,
+   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
+   (wird niemals übersprungen — jedes Repository hat eine Sicherheitslage, auch ohne Geheimnisse),
+   `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, plus `PERFORMANCE.md` und einen `docs/README.md`-Index.
+   Wenn bereits Dokumentation existiert, integrieren und erweitern Sie sie — duplizieren Sie nicht.
+3. **Dokumentation je Modul.** Fügen Sie eine `README.md` (und einen `docs/`-Unterordner für komplexe Module) in jedes
+   größere Quellmodul ein, das bei der Erkundung entdeckt wurde.
+4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Erstellen Sie das kanonische, agentenübergreifende Verzeichnis: einen **durchdachten** Katalog
+   von `agents/`, stack-passenden `skills/` und schlanken `dwp-*`-`commands/`, die an die
+   installierte Skill delegieren — jeder Eintrag begründet für *dieses* Repository, nicht aus einem anderen kopiert. Fügen Sie einen
+   `docs/`-Katalog hinzu (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`), der dem entspricht, was auf der
+   Festplatte existiert, plus `settings.json` und die Symlinks `.claude → .agents` und `.cursor → .agents`. Nehmen Sie etwaige bestehende Skills/Agenten
+   in den Katalog auf.
+5. **Die DWP-Skill, angepasst.** Die installierte Skill ist die Engine; das eigene Kit des Repositorys
+   (Skills, Agenten, Befehle) muss **für dieses Repository durchdacht** sein — niemals eine Kopie des Kits eines anderen
+   Repositorys.
+6. **`.dwp/` + `tmp/`.** Legen Sie ein per gitignore ausgeschlossenes `.dwp/` mit `plans/` an, plus einen `tmp/`-
+   Scratch-Bereich — beide nicht-destruktiv zur `.gitignore` hinzugefügt (anhängen, niemals neu schreiben).
 
-Nutzen Sie `/dwp-status`, `/dwp-refine` und `/dwp-resume` im Verlauf der Arbeit. Jeder Plan trägt nummerierte Aufgaben,
-Validierungs-Gates und ein Completion-Protokoll, sodass die Arbeit strukturiert und über Sitzungen hinweg wiederaufnehmbar bleibt.
+## 4. Die erforderliche lokale Überprüfung installieren, dann die Opt-in-Addons anbieten
 
-## Das Ergebnis
+Installieren Sie nach dem Baseline-Onboarding die **lokale Überprüfung des AI Diff Reviewer** (Phase 7a — seit Standard 2.3.0 erforderlich): die tag-gepinnte vendorte Skill
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus eine
+repo-zugeschnittene `.review/extension.md` via `generate-extension`, unter der Onboarding-Zustimmung. Zählen Sie dann die vier optionalen Addons auf (devcontainer, Dailybot, dependency-upgrade,
+design-system) und bieten Sie jedes als explizites Opt-in an. Ein Repository ist
+mit **null** optionalen Addons vollständig konform — installieren Sie diese niemals automatisch.
 
-Ihr Repository wird spec-driven und agenten-steuerbar: Der Plan ist die dauerhafte Quelle der Wahrheit, und
-das Repository selbst wird zum Harness, gegen das jeder Agent läuft.
+- **Devcontainer-Unterstützung** — ein reproduzierbarer, isolierter Dev-Container mit persistenter AI-CLI-Authentifizierung.
+- **Dailybot-Integration** — vier Lifecycle-Events (Kickoff, bedeutende Aufgabe, Blockiert, Abschluss) als Best-Effort-Fortschrittsberichte für Teams, die Dailybot bereits nutzen, mit optionaler autonomer Hook-Durchsetzung (`dailybot-cli >= 3.7.0`). Die Installation der gepaarten Dailybot-Agenten-Skill (3.10.3) bietet zusätzlich Chat, Check-ins, Formular-Erstellung, KI-Abfrage, Per-Repo-API-Keys und mehr — das Addon verbindet lediglich die Berichterstattung mit der DWP-Ausführung. Die zentrale Methodik hat keine Dailybot-Abhängigkeit.
+- **Dependency-Upgrade** — paketmanager-agnostische, chargenweise, validierte, rücknehmbare Upgrades. Wenn
+  angenommen, installiert es den `/lib-upgrade`-Befehl.
+- **Design System** — optionale `docs/DESIGN.md` nur für Repositories mit einer erkannten Interface-Oberfläche
+  (nicht angeboten für reine Bibliotheken, Headless-Dienste oder reine Infrastruktur-Repos). Drei Profile
+  werden in einer Datei gestapelt: visual-ui (bei Erkennung dringend empfohlen; Installation zustimmungsgesteuert), cli-output und
+  conversational — die letzten beiden werden immer gefragt, niemals automatisch angewendet.
+- **AI Diff Reviewer** — die erforderliche lokale Überprüfung (kein Opt-in): der Sicherheitstest jedes Final Review führt
+  [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (Skill + erforderliches
+  `.review/extension.md`) über den akkumulierten Änderungssatz des Plans aus. Eine fehlende Skill oder Erweiterung ist ein
+  aufgezeichneter `local reviewer not installed`-Befund — niemals ein stilles
+  Überspringen, und niemals ein Überraschungs-Bootstrap: die Installation gehört
+  zur Onboarding-Zustimmung oder zu einem expliziten Addon-Aufruf; Aufruffehler soft-failen; `critical`-Ergebnisse eines abgeschlossenen Durchlaufs blockieren
+  weiterhin den Abschluss. **Flow B** (das CI-Gate mit `pr-review.yml`) wird als explizites Opt-in angeboten und
+  niemals ungefragt installiert. Kein Deep Work Plan-Ablauf erfordert einen kommerziellen Dienst, CI-Anbieter oder Secret.
 
-- [Methodik lesen](/methodology)
-- [Die Spezifikation durchstöbern](/spec)
-- [Das Kit erkunden](/kit)
+## 5. Das Kit weiterentwickeln (author-Sub-Skill)
+
+Nutzen Sie die `author`-Sub-Skill, um das eigene Kit des Repositorys nach dem Onboarding aufzubauen. Die schlanken Delegatoren `/skill-create` und
+`/agent-create` leiten an sie weiter. Erstellen Sie eine **Skill** für eine wiederholbare in-Sitzung-Prozedur, einen **Agenten** für
+eine wiederkehrende Rolle mit eigener Modellstufe und eigenen Werkzeugen und einen **Befehl** nur als schlanken Delegator. Halten Sie
+den `.agents/docs/`-Katalog synchron mit dem, was auf der Festplatte existiert.
+
+## 6. Planen und ausführen
+
+Erzeugen Sie Deep Work Plans für jede Aufgabe und führen Sie sie Aufgabe für Aufgabe aus:
+
+- `/dwp-create <Ziel>` — verwandelt ein Ziel in einen ausführbaren Plan. Seit Standard 2.4.0 hat ein Plan zwei Formate: **Lite**, dessen Task-Datensätze inline in der README des Plans liegen, für kleine, abgegrenzte Arbeit; und **Full**, eine Datei je Task, für langlaufende Arbeit. Beide tragen denselben Vertrag — stabile Task-IDs, berührte Oberfläche, Akzeptanzkriterien, Validierungs-Gates, Abschlussnachweise und ein Final Review — Lite ist also günstiger in der Darstellung, ohne schwächer zu sein. Ergänzen Sie `lite` oder `full`, um ein Format zu erzwingen, und `trust`, um ohne Review-Runde zu materialisieren; ohne Präferenz empfiehlt DWP eines und begründet es. Ein Lite-Plan wird mit `/dwp-refine promote` hochgestuft.
+- `/dwp-execute` — den Plan Aufgabe für Aufgabe ausführen, den Fortschritt aktualisieren und jedes Gate validieren.
+- `/dwp-status` — über den Fortschritt berichten, ohne Änderungen vorzunehmen.
+- `/dwp-refine` — Aufgaben hinzufügen, entfernen oder umordnen, während abgeschlossene Arbeit bewahrt wird.
+- `/dwp-resume` — den Zustand rekonstruieren und einen unterbrochenen Plan fortsetzen.
+- `/dwp-verify` — objektiver Bestanden/Nicht-bestanden-Konformitätsbericht für das Repository (oder einen spezifischen Plan).
+
+Jeder Plan schließt mit dem Final Review — einem Sicherheitstest über die eigenen
+Änderungen des Plans (der `docs/SECURITY.md` aktuell hält; ein kritischer Befund blockiert den
+Abschluss), der Validierung des Endzustands und der Abstimmung der Skills-Entscheidungen. Der Executive Report bleibt auf Anfrage verfügbar.
+
+## 7. Verifizieren
+
+Führen Sie `/dwp-verify` für einen objektiven Bestanden/Nicht-bestanden-Konformitätsbericht aus (oder
+`bash {skill_dir}/verify/conformance.sh` für die CI-kompatible mechanische Schicht, die mit `0`/`1` endet — und mit `2` und einem expliziten `UNVERIFIED`-Verdiktor, wenn sie ihre Prüfungen nicht ausführen kann; sie meldet nie ein Bestehen, das sie nicht geprüft hat).
+Es prüft die Kriterien im [Konformitätsdokument der Spezifikation](https://deepworkplan.com/spec).
+Bestätigen Sie dann:
+
+- [ ] Die Skill ist installiert und auflösbar, mit allen neun verfügbaren Sub-Skills.
+- [ ] `AGENTS.md` existiert im Stammverzeichnis mit einem echten Quick-Commands-Block; `CLAUDE.md` löst sich darauf auf.
+- [ ] `docs/` enthält die Standardkategorien mit echtem, repository-spezifischem Inhalt; `docs/TESTING_GUIDE.md`
+      beschreibt ein echtes Test-/Lint-Setup (nicht leer oder Stub); größere Module haben eine `README.md`.
+- [ ] `.agents/` existiert mit `agents/`, `commands/` (schlanke `dwp-*`-Delegatoren, die auf die Skill verweisen,
+      keine kopierten Abläufe), `skills/` und einem Katalog, der dem entspricht, was auf der Festplatte existiert;
+      `.claude → .agents` und `.cursor → .agents` lösen sich auf.
+- [ ] `.dwp/` existiert, ist per gitignore ausgeschlossen und hat `plans/`; `tmp/` existiert und ist per gitignore ausgeschlossen.
+- [ ] Bestehender Benutzerinhalt wurde mit Einwilligung bewahrt oder abgeglichen — nichts wurde stillschweigend zerstört.
+- [ ] Sie können einen Deep Work Plan erzeugen und ihn Aufgabe für Aufgabe ausführen, wobei Sie jedes Gate validieren.
+
+## Ergebnis
+
+Wenn das Onboarding abgeschlossen ist, ist das Repository auf zwei dauerhafte Weisen verändert — die Pfeiler der
+Methodik:
+
+1. **Das Repository ist spec-driven.** Die Arbeit beginnt mit einem geschriebenen Plan und einer Spezifikation, nicht mit
+   Ad-hoc-Prompts.
+2. **Das Repository selbst ist das Agenten-Harness.** `AGENTS.md`, `docs/`, Dokumentation je Modul und das
+   `.agents/` Skill-Verzeichnis geben jedem Agenten den Kontext und die Befehle, die er für strukturierte,
+   verifizierbare Arbeit braucht.
+
+Jeder kann diesen Prompt auf jedem Repository ausführen — und mit einer Codebasis enden, die jeder KI-Agent steuern kann.
+</content>

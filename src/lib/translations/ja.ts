@@ -112,7 +112,7 @@ export const ja: SiteTranslations = {
         'init.md のプロンプトをコピーして、お使いのコーディングエージェント — Claude Code、Cursor、Codex、またはその他のツール — に貼り付けることで、あらゆるリポジトリを AI-first にします。',
       copyLabel: 'init.md をコピー',
       copiedLabel: 'コピーしました',
-      viewInitCta: '完全な /init プロンプトを見る',
+      viewInitCta: 'クイックスタートを見る',
       pullQuote:
         'Deep Work Plan とは、リポジトリそのものがハーネス（harness）になる、仕様駆動開発です。',
       primaryCta: '方法論を読む',
@@ -675,62 +675,9 @@ export const ja: SiteTranslations = {
     meta: {
       title: 'クイックスタート — Deep Work Plan',
       description:
-        'スキルをインストールし、リポジトリをオンボーディングし、どのエージェントでも計画して実行する。リポジトリを仕様駆動でエージェントが操縦できる状態にする手順。',
-    },
-    eyebrow: 'クイックスタート',
-    title: '数分で始める',
-    intro:
-      'スキルをインストールし、リポジトリをオンボーディングし、どのエージェントでも計画して実行する。リポジトリを仕様駆動でエージェントが操縦できる状態にする手順。',
-    sequenceTitle: '採用への道のり',
-    codeLabel: 'ターミナル',
-    orLabel: 'または',
-    steps: [
-      {
-        title: 'Deep Work Plan スキルをインストールする',
-        description:
-          'スキルをリポジトリに追加します。ルーターと九つのサブスキル（create、execute、refine、resume、status、verify、onboard、author、upgrade）です。最速の方法には Skills CLI を使うか、リポジトリをクローンして git とシェルが使える環境でセットアップを実行します。',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: 'リポジトリをオンボーディングする',
-        description:
-          'onboard サブスキルを実行し、エージェントに実際のリポジトリを推論させます。AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、そしてエージェント横断の .agents/ 拠点（.claude → .agents および .cursor → .agents シンボリックリンクつき）を生成し、薄い dwp-* コマンドを配線し、gitignore された .dwp/ を整備します。',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: 'キットを進化させ、アドオンを受け入れる',
-        description:
-          '/skill-create と /agent-create（author サブスキル）を使って、スタックに合ったスキル、エージェント、コマンドを育てます。オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、四つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system）も提案します。適合する場合にのみ受け入れてください。',
-      },
-      {
-        title: '計画して実行する',
-        description:
-          'Deep Work Plan を生成し、各ゲートを検証しセッションをまたいで再開しながら、タスクごとに実行します。リポジトリを自身の仕様に照らして操縦します。',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: '成果',
-    outcome:
-      'リポジトリが仕様駆動でエージェントが操縦できる状態になります。計画が永続的な信頼できる情報源となり、リポジトリそのものが、どのエージェントも照らして走るハーネスになります。',
-    nextStepsTitle: '次のステップ',
-    nextSteps: [
-      { label: '方法論を読む', href: '/methodology' },
-      { label: 'キットを見る', href: '/kit' },
-      { label: '事例を見る', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — リポジトリを AI-first にする — Deep Work Plan',
-      description:
         'あらゆるリポジトリで Deep Work Plan 方法論を採用する。スキルをインストールし、エージェントのオンボーディングを実行し、どのAIコーディングエージェントでも計画して実行します。',
     },
-    eyebrow: '採用',
+    eyebrow: 'クイックスタート',
     title: 'このリポジトリを AI-first にする',
     intro:
       'あらゆるリポジトリを、仕様駆動でエージェント対応のコードベースに変える単一のエンドポイント。スキルをインストールし、エージェントにリポジトリをオンボーディングさせ、どのコーディングエージェントでも構造化された作業を計画して実行します。',
@@ -740,13 +687,13 @@ export const ja: SiteTranslations = {
     handoffInstruction:
       'https://deepworkplan.com/init.md にある手順を読み、その指示に従って、このリポジトリを AI-first にします。',
     handoffMdLabel: '自己完結したエージェント用プロンプト',
-    codeLabel: 'agent',
+    codeLabel: 'ターミナル',
     whatTitle: 'これが行うこと',
     whatBody: [
       '採用は、この方法論の二本の柱として、リポジトリを二つの永続的なかたちで変えます。',
       'まず、リポジトリが仕様駆動になります。作業は場当たり的なプロンプトからではなく、書かれた計画と仕様から始まります。次に、リポジトリそのものがエージェントハーネスになります。AGENTS.md、docs/ のナレッジベース、モジュールごとのドキュメント、そして .agents/ のスキル拠点（.claude → .agents および .cursor → .agents シンボリックリンクつき）が、すべてのエージェントに必要なコンテキストとコマンドを与えます。',
     ],
-    sequenceTitle: '採用の手順',
+    sequenceTitle: '採用への道のり',
     orLabel: 'または',
     steps: [
       {
@@ -782,6 +729,7 @@ export const ja: SiteTranslations = {
         title: '計画して実行する',
         description:
           '/dwp-create で Deep Work Plan を生成し、/dwp-execute で実行し、作業の進行に応じて /dwp-status、/dwp-refine、/dwp-resume、/dwp-verify を使います。各計画には番号つきのタスク、検証ゲート、完了プロトコルが含まれ、ちょうど一つの必須 Final Review（セキュリティパス、最終状態の検証、スキル決定の突き合わせ）で締めくくられます。Executive Report はリクエスト時に利用できます。',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: '適合性を検証する',
@@ -793,12 +741,12 @@ export const ja: SiteTranslations = {
     outcomeTitle: '成果',
     outcome:
       'リポジトリが仕様駆動になり、リポジトリそのものがエージェントハーネスになります。コンテキストとコマンドがコードとともに移動します。',
-    nextStepsTitle: '次に読む',
+    nextStepsTitle: '次のステップ',
     nextSteps: [
-      { label: 'クイックスタート', href: '/quickstart' },
-      { label: '方法論', href: '/methodology' },
+      { label: '方法論を読む', href: '/methodology' },
       { label: '仕様', href: '/spec' },
-      { label: 'キット', href: '/kit' },
+      { label: 'キットを見る', href: '/kit' },
+      { label: '事例を見る', href: '/examples' },
     ],
   },
 
@@ -872,7 +820,7 @@ export const ja: SiteTranslations = {
             answer:
               'エージェントスキルは、あなたのエージェントがプロジェクトまたはユーザーのスキルを読み込む場所にインストールされます。続いてオンボーディングがリポジトリ自体を適応させます。`AGENTS.md`、`docs/`、`.agents/`、そして gitignore された `.dwp/` ワークスペースを作成または調整します。スキルはエージェントにこの方法を教え、リポジトリは他のエージェントが作業を続けるために必要なコンテキスト・キット・計画の証拠を保持します。',
             linkLabel: '採用フローを見る',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1036,7 +984,7 @@ export const ja: SiteTranslations = {
             answer:
               'オンボーディングは非破壊的です。既存の `AGENTS.md`、`docs/`、`.agents/`、`CLAUDE.md` を検出し、上書きではなく調整し、何かを置き換える前には確認を求めます。実際のコマンドを備えた `AGENTS.md` インデックス、推論にもとづく `docs/` ツリー、モジュールごとのドキュメント、薄い `dwp-*` コマンドを備えた `.agents/` キット、gitignore された `.dwp/` 出力領域、検証済みのテストマップ、そして必須のローカルコードレビュー（AI Diff Reviewer スキルとリポジトリ仕立てのレビュー拡張）を書き込みます。その後セルフチェックと適合性チェッカーを実行するため、何が生成されたかを確認できます。より前の標準でオンボーディングされたリポジトリには、欠けているか古くなっているものだけを調整する、対象を絞ったハーネスアップグレードが適用されます。',
             linkLabel: '採用エンドポイント',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1045,7 +993,7 @@ export const ja: SiteTranslations = {
             answer:
               '2 種類のアップグレードがあり、フローはそれらを分けて扱います。リポジトリハーネス——`AGENTS.md`、`docs/`、`.agents/` キット——はオンボーディングの再実行によって調整され、欠けているか古くなったものだけを埋めます。スキル自体は `/dwp-upgrade` で移動します：最新の公開リリースを読み取り専用で確認し、あなたが受け入れた正確なタグを検証してインストールし、その後オンボーディングを最初からの実行としてやり直します。フロー全体を通じて明示的な同意が求められ、ローカルの適応は上書きではなく差分比較して保持され、`.dwp/` は決して移行されません——既存のプランは記録された形のまま動き続けます。',
             linkLabel: '採用エンドポイント',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1360,7 +1308,7 @@ export const ja: SiteTranslations = {
     ctaBody:
       '方法論と仕様を読み、エージェントを init エンドポイントに向け、実行する前にインストールを検証してください。',
     ctaPrimary: '方法論を読む',
-    ctaSecondary: '採用（Init）',
+    ctaSecondary: 'クイックスタート',
   },
 
   developersPage: {

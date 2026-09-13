@@ -126,7 +126,7 @@ describe('buildAgentRecoveryMarkdown', () => {
       '/quickstart',
       '/compare',
       '/faq',
-      '/init',
+      '/init.md',
     ]);
     for (const link of RECOVERY_LINKS) {
       expect(known.has(link.path)).toBe(true);

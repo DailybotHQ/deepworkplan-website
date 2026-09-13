@@ -111,7 +111,7 @@ export const de: SiteTranslations = {
         'Kopieren Sie den init.md-Prompt und fügen Sie ihn in Ihren Coding-Agenten ein — Claude Code, Cursor, Codex oder einen anderen — um jedes Repository AI-first zu machen.',
       copyLabel: 'init.md kopieren',
       copiedLabel: 'Kopiert',
-      viewInitCta: 'Den vollständigen /init-Prompt ansehen',
+      viewInitCta: 'Schnellstart ansehen',
       pullQuote:
         'Deep Work Plan ist spec-driven Development, bei der das Repository selbst zum Harness wird.',
       primaryCta: 'Methodik lesen',
@@ -673,62 +673,9 @@ export const de: SiteTranslations = {
     meta: {
       title: 'Schnellstart — Deep Work Plan',
       description:
-        'Installieren Sie die Skill, onboarden Sie Ihr Repository, dann planen und führen Sie mit jedem Agenten aus — die Schritte, die Ihr Repository spec-driven und agenten-steuerbar machen.',
-    },
-    eyebrow: 'Schnellstart',
-    title: 'In Minuten starten',
-    intro:
-      'Installieren Sie die Skill, onboarden Sie Ihr Repository, dann planen und führen Sie mit jedem Agenten aus — die Schritte, die Ihr Repository spec-driven und agenten-steuerbar machen.',
-    sequenceTitle: 'Der Adoptionspfad',
-    codeLabel: 'Terminal',
-    orLabel: 'oder',
-    steps: [
-      {
-        title: 'Die Deep Work Plan Skill installieren',
-        description:
-          'Fügen Sie die Skill zu Ihrem Repository hinzu — einen Router plus neun Sub-Skills (create, execute, refine, resume, status, verify, onboard, author, upgrade). Nutzen Sie die Skills-CLI für den schnellsten Weg, oder klonen Sie das Repository und führen Sie das Setup aus, wo git und eine Shell verfügbar sind.',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: 'Das Repository onboarden',
-        description:
-          'Führen Sie die onboard-Sub-Skill aus und lassen Sie den Agenten über Ihr tatsächliches Repository schlussfolgern. Es erzeugt AGENTS.md, eine docs/-Wissensbasis, Dokumentation je Modul und ein agentenübergreifendes .agents/-Verzeichnis (mit den .claude → .agents- und .cursor → .agents-Symlinks), bindet die schlanken dwp-*-Befehle ein und legt ein per gitignore ausgeschlossenes .dwp/ an.',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: 'Das Kit weiterentwickeln und Addons annehmen',
-        description:
-          'Nutzen Sie /skill-create und /agent-create (die author-Sub-Skill), um stack-passende Skills, Agenten und Befehle aufzubauen. Das Onboarding installiert das verpflichtende lokale AI Diff Reviewer-Review (sein CI-Gate bleibt optional) und bietet vier Opt-in-Addons — devcontainer, Dailybot, dependency-upgrade und design-system —, die Sie nur annehmen, wenn sie passen.',
-      },
-      {
-        title: 'Planen und ausführen',
-        description:
-          'Erzeugen Sie einen Deep Work Plan und führen Sie ihn Aufgabe für Aufgabe aus, validieren Sie jedes Gate und nehmen Sie über Sitzungen hinweg wieder auf — das Repository wird gegen seine eigene Spezifikation gesteuert.',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: 'Das Ergebnis',
-    outcome:
-      'Ihr Repository wird spec-driven und agenten-steuerbar: Der Plan ist die dauerhafte Quelle der Wahrheit, und das Repository selbst wird zum Harness, gegen das jeder Agent läuft.',
-    nextStepsTitle: 'Nächste Schritte',
-    nextSteps: [
-      { label: 'Methodik lesen', href: '/methodology' },
-      { label: 'Das Kit durchstöbern', href: '/kit' },
-      { label: 'Beispiele ansehen', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — Machen Sie Ihr Repository AI-first — Deep Work Plan',
-      description:
         'Übernehmen Sie die Deep Work Plan Methodik in jedem Repository. Installieren Sie die Skill, führen Sie das Agenten-Onboarding aus, dann planen und führen Sie mit jedem KI-Coding-Agenten aus.',
     },
-    eyebrow: 'Adoption',
+    eyebrow: 'Schnellstart',
     title: 'Machen Sie dieses Repository AI-first',
     intro:
       'Ein Endpunkt, um jedes Repository in eine spec-driven, agentenbereite Codebasis zu verwandeln. Installieren Sie die Skill, lassen Sie einen Agenten das Repository onboarden, dann planen und führen Sie strukturierte Arbeit mit jedem Coding-Agenten aus.',
@@ -738,13 +685,13 @@ export const de: SiteTranslations = {
     handoffInstruction:
       'Lesen Sie die Anweisungen unter https://deepworkplan.com/init.md und befolgen Sie sie, um dieses Repository AI-first zu machen.',
     handoffMdLabel: 'Eigenständiger Agenten-Prompt',
-    codeLabel: 'agent',
+    codeLabel: 'Terminal',
     whatTitle: 'Was dies bewirkt',
     whatBody: [
       'Die Adoption verändert das Repository auf zwei dauerhafte Weisen — die Pfeiler der Methodik.',
       'Erstens wird das Repository spec-driven: Die Arbeit beginnt mit einem geschriebenen Plan und einer Spezifikation, nicht mit Ad-hoc-Prompts. Zweitens wird das Repository selbst zum Agenten-Harness — eine AGENTS.md, eine docs/-Wissensbasis, Dokumentation je Modul und ein .agents/ Skill-Verzeichnis (mit den .claude → .agents- und .cursor → .agents-Symlinks) geben jedem Agenten den Kontext und die Befehle, die er braucht.',
     ],
-    sequenceTitle: 'Die Adoptionssequenz',
+    sequenceTitle: 'Der Adoptionspfad',
     orLabel: 'oder',
     steps: [
       {
@@ -780,6 +727,7 @@ export const de: SiteTranslations = {
         title: 'Planen und ausführen',
         description:
           'Erzeugen Sie Deep Work Plans mit /dwp-create und führen Sie sie mit /dwp-execute aus, dann /dwp-status, /dwp-refine, /dwp-resume und /dwp-verify im Verlauf der Arbeit. Jeder Plan trägt nummerierte Aufgaben, Validierungs-Gates und ein Completion-Protokoll — und schließt mit genau einem verpflichtenden Final Review (Sicherheitstest, Validierung des Endzustands und Abgleich der Skills-Entscheidungen). Der Executive Report bleibt auf Anfrage verfügbar.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: 'Konformität verifizieren',
@@ -791,12 +739,12 @@ export const de: SiteTranslations = {
     outcomeTitle: 'Das Ergebnis',
     outcome:
       'Das Repository wird spec-driven, und das Repository selbst wird zum Agenten-Harness — Kontext und Befehle reisen mit dem Code.',
-    nextStepsTitle: 'Als Nächstes lesen',
+    nextStepsTitle: 'Nächste Schritte',
     nextSteps: [
-      { label: 'Schnellstart', href: '/quickstart' },
-      { label: 'Methodik', href: '/methodology' },
+      { label: 'Methodik lesen', href: '/methodology' },
       { label: 'Spezifikation', href: '/spec' },
-      { label: 'Kit', href: '/kit' },
+      { label: 'Das Kit durchstöbern', href: '/kit' },
+      { label: 'Beispiele ansehen', href: '/examples' },
     ],
   },
 
@@ -871,7 +819,7 @@ export const de: SiteTranslations = {
             answer:
               'Die Agenten-Skill wird dort installiert, wo Ihr Agent Projekt- oder Benutzer-Skills lädt. Das Onboarding passt anschließend das Repository selbst an: Es erstellt oder gleicht `AGENTS.md`, `docs/`, `.agents/` und den per gitignore ausgeschlossenen `.dwp/`-Arbeitsbereich ab. Die Skill lehrt den Agenten die Methode; das Repository bewahrt den Kontext, das Kit und die Plan-Evidenz, die andere Agenten zum Fortsetzen benötigen.',
             linkLabel: 'Den Adoptionsablauf ansehen',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1037,7 +985,7 @@ export const de: SiteTranslations = {
             answer:
               'Das Onboarding ist nicht-destruktiv: Es erkennt eine bestehende `AGENTS.md`, `docs/`, `.agents/` oder `CLAUDE.md`, gleicht ab, statt zu überschreiben, und fragt nach, bevor es etwas ersetzt. Es schreibt den `AGENTS.md`-Index mit echten Befehlen, einen durchdachten `docs/`-Baum, Dokumentation je Modul, das `.agents/`-Kit mit schlanken `dwp-*`-Befehlen, einen per gitignore ausgeschlossenen `.dwp/`-Ausgabebereich, eine verifizierte Testkarte und das erforderliche lokale Code-Review (die AI Diff Reviewer-Skill plus eine auf das Repository zugeschnittene Review-Erweiterung). Anschließend führt es einen Selbstcheck und den Konformitätsprüfer aus, damit Sie sehen, was erzeugt wurde. Ein unter einem früheren Standard geonboardetes Repository erhält ein gezieltes Harness-Upgrade, das nur abgleicht, was fehlt oder veraltet ist.',
             linkLabel: 'Der Adoptions-Endpunkt',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1046,7 +994,7 @@ export const de: SiteTranslations = {
             answer:
               'Es sind zwei verschiedene Upgrades, und der Ablauf hält sie getrennt. Der Harness des Repositories — `AGENTS.md`, `docs/`, das `.agents/`-Kit — wird durch erneutes Onboarding abgeglichen, das nur fehlende oder veraltete Teile ergänzt. Die Skill selbst wandert über `/dwp-upgrade`: eine nur-lesende Prüfung des neuesten veröffentlichten Releases, die Installation des exakten Tags, das Sie akzeptiert haben, verifiziert, und danach das Onboarding erneut als frischer Durchlauf. Der Ablauf ist durchweg zustimmungspflichtig, lokale Anpassungen werden per Diff verglichen und bewahrt statt überschrieben, und `.dwp/` wird niemals migriert — bestehende Pläne behalten ihre aufgezeichnete Form und laufen weiter.',
             linkLabel: 'Der Adoptions-Endpunkt',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1362,7 +1310,7 @@ export const de: SiteTranslations = {
     ctaBody:
       'Lesen Sie die Methodik und die Spezifikation, richten Sie einen Agenten auf den Init-Endpunkt und verifizieren Sie die Installation, bevor Sie sie ausführen.',
     ctaPrimary: 'Methodik lesen',
-    ctaSecondary: 'Adoption (Init)',
+    ctaSecondary: 'Schnellstart',
   },
 
   developersPage: {

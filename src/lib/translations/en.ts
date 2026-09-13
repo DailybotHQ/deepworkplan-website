@@ -106,7 +106,7 @@ export const en: SiteTranslations = {
         'Copy the init.md prompt and paste it into your coding agent — Claude Code, Cursor, Codex, or any other — to make any repository AI-first.',
       copyLabel: 'Copy init.md',
       copiedLabel: 'Copied',
-      viewInitCta: 'View the full /init prompt',
+      viewInitCta: 'View the quickstart',
       pullQuote:
         'Deep Work Plan is spec-driven development where the repository itself becomes the harness.',
       primaryCta: 'Read the methodology',
@@ -660,83 +660,31 @@ export const en: SiteTranslations = {
     backToGallery: 'All examples',
   },
 
-  // Deep Work Plan — Quickstart page
+  // Deep Work Plan — Quickstart page (the single canonical onboarding page;
+  // /init and /setup and /onboarding all redirect here — see astro.config.mjs)
   quickstartPage: {
     meta: {
       title: 'Quickstart — Deep Work Plan',
       description:
-        'Install the skill, onboard your repository, then plan and execute with any agent — the steps that make your repository spec-driven and agent-pilotable.',
-    },
-    eyebrow: 'Quickstart',
-    title: 'Start in minutes',
-    intro:
-      'Install the skill, onboard your repository, then plan and execute with any agent — the steps that make your repository spec-driven and agent-pilotable.',
-    sequenceTitle: 'The adoption path',
-    codeLabel: 'Terminal',
-    orLabel: 'or',
-    steps: [
-      {
-        title: 'Install the Deep Work Plan skill',
-        description:
-          'Add the skill to your repository — a router plus nine sub-skills (create, execute, refine, resume, status, verify, onboard, author, upgrade). Use the Skills CLI for the fastest path, or clone the repo and run setup where git and a shell are available.',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: 'Onboard the repository',
-        description:
-          'Run the onboard sub-skill and let the agent reason about your actual repo. It generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents and .cursor → .agents symlinks), wires the thin dwp-* commands, and scaffolds a gitignored .dwp/.',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: 'Evolve the kit and accept addons',
-        description:
-          'Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands. Onboarding installs the required AI Diff Reviewer local review (its CI gate stays optional) and offers four opt-in addons — devcontainer, Dailybot, dependency-upgrade, and design-system — that you accept only when they fit.',
-      },
-      {
-        title: 'Plan and execute',
-        description:
-          'Generate a Deep Work Plan and run it task by task, validating each gate and resuming across sessions — piloting the repository against its own spec.',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: 'The outcome',
-    outcome:
-      'Your repository becomes spec-driven and agent-pilotable: the plan is the durable source of truth, and the repository itself becomes the harness any agent runs against.',
-    nextStepsTitle: 'Next steps',
-    nextSteps: [
-      { label: 'Read the methodology', href: '/methodology' },
-      { label: 'Browse the kit', href: '/kit' },
-      { label: 'See examples', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — Make your repository AI-first — Deep Work Plan',
-      description:
         'Adopt the Deep Work Plan methodology in any repository. Install the skill, run agent onboarding, then plan and execute with any AI coding agent.',
     },
-    eyebrow: 'Adoption',
-    title: 'Make this repository AI-first',
+    eyebrow: 'Quickstart',
+    title: 'Make your repository AI-first',
     intro:
-      'One endpoint to turn any repository into a spec-driven, agent-ready codebase. Install the skill, let an agent onboard the repo, then plan and execute structured work with any coding agent.',
+      'One page to turn any repository into a spec-driven, agent-ready codebase. Install the skill, let an agent onboard the repo, then plan and execute structured work with any coding agent.',
     handoffTitle: 'Copy into your agent',
     handoffBody:
       'Copy the full init.md prompt and paste it into your AI coding agent — Claude Code, Cursor, Codex, or any other. It reads the methodology and specification, installs the skill, and onboards this repository for Deep Work Plans.',
     handoffInstruction:
       'Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.',
     handoffMdLabel: 'Self-contained agent prompt',
-    codeLabel: 'agent',
+    codeLabel: 'Terminal',
     whatTitle: 'What this does',
     whatBody: [
       'Adoption changes the repository in two durable ways — the pillars of the methodology.',
       'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, per-module docs, and a .agents/ skill home (with the .claude → .agents and .cursor → .agents symlinks) give every agent the context and commands it needs.',
     ],
-    sequenceTitle: 'The adoption sequence',
+    sequenceTitle: 'The adoption path',
     orLabel: 'or',
     steps: [
       {
@@ -748,9 +696,9 @@ export const en: SiteTranslations = {
         ],
       },
       {
-        title: 'Install the skill',
+        title: 'Install the Deep Work Plan skill',
         description:
-          'Add the Deep Work Plan skill so any agent can plan and execute structured work. The skill ships a router plus nine sub-skills — create, execute, refine, resume, status, verify, onboard, author, and upgrade.',
+          'Add the skill to your repository so any agent can plan and execute structured work. It ships a router plus nine sub-skills — create, execute, refine, resume, status, verify, onboard, author, and upgrade. Use the Skills CLI for the fastest path, or clone the repo and run setup where git and a shell are available.',
         commands: [
           'npx skills add DailybotHQ/deepworkplan-skill',
           'openclaw skills install deepworkplan',
@@ -758,7 +706,7 @@ export const en: SiteTranslations = {
         ],
       },
       {
-        title: 'Run repository onboarding',
+        title: 'Onboard the repository',
         description:
           'Invoke the onboard sub-skill and let the agent reason about the actual repo — its stack, package manager, and real validation commands. It generates AGENTS.md, a docs/ knowledge base, per-module docs, and a cross-agent .agents/ home (with the .claude → .agents and .cursor → .agents symlinks), wires thin dwp-* commands, and scaffolds a gitignored .dwp/ for plans. For large repos the onboard sub-skill uses a plan-driven path: it completes reconnaissance, then emits an onboarding Deep Work Plan. Nothing is templated; everything is adapted to your repository.',
         commands: ['/deepworkplan-onboard'],
@@ -772,6 +720,7 @@ export const en: SiteTranslations = {
         title: 'Plan and execute',
         description:
           'Generate Deep Work Plans with /dwp-create and run them with /dwp-execute, then /dwp-status, /dwp-refine, /dwp-resume, and /dwp-verify as work proceeds. Each plan carries numbered tasks, validation gates, and a completion protocol — closing with a single mandatory Final Review (security pass, final-state validation, and skills reconciliation). The Executive Report remains available on request.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: 'Verify conformance',
@@ -782,13 +731,13 @@ export const en: SiteTranslations = {
     ],
     outcomeTitle: 'The outcome',
     outcome:
-      'The repository becomes spec-driven and the repository itself becomes the agent harness — context and commands travel with the code.',
-    nextStepsTitle: 'Read next',
+      'The repository becomes spec-driven and agent-pilotable: the plan is the durable source of truth, and the repository itself becomes the harness any agent runs against.',
+    nextStepsTitle: 'Next steps',
     nextSteps: [
-      { label: 'Quickstart', href: '/quickstart' },
-      { label: 'Methodology', href: '/methodology' },
-      { label: 'Spec', href: '/spec' },
-      { label: 'Kit', href: '/kit' },
+      { label: 'Read the methodology', href: '/methodology' },
+      { label: 'Browse the spec', href: '/spec' },
+      { label: 'Browse the kit', href: '/kit' },
+      { label: 'See examples', href: '/examples' },
     ],
   },
   faqPage: {
@@ -861,7 +810,7 @@ export const en: SiteTranslations = {
             answer:
               'The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles `AGENTS.md`, `docs/`, `.agents/` and the gitignored `.dwp/` workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.',
             linkLabel: 'See the adoption flow',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1025,7 +974,7 @@ export const en: SiteTranslations = {
             answer:
               'Onboarding is non-destructive: it detects an existing `AGENTS.md`, `docs/`, `.agents/` or `CLAUDE.md`, reconciles rather than overwrites, and asks before replacing anything. It writes the `AGENTS.md` index with real commands, a reasoned `docs/` tree, per-module docs, the `.agents/` kit with thin `dwp-*` commands, a gitignored `.dwp/` output area, a verified testing map, and the required local code review (the AI Diff Reviewer skill plus a repo-tailored review extension). It then runs a self-check and the conformance checker so you can see what was produced. A repository onboarded under an earlier standard gets a targeted harness upgrade that reconciles only what is missing or outdated.',
             linkLabel: 'The adoption endpoint',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1034,7 +983,7 @@ export const en: SiteTranslations = {
             answer:
               'Two different upgrades are involved, and the flow keeps them apart. The repository harness — `AGENTS.md`, `docs/`, the `.agents/` kit — is reconciled by re-running onboarding, which fills only what is missing or outdated. The skill itself moves through `/dwp-upgrade`: a read-only check of the latest published release, an install of the exact tag you accepted, verified, and then onboarding again as a fresh pass. The flow is consent-gated throughout, local adaptations are diffed and preserved rather than overwritten, and `.dwp/` is never migrated — existing plans keep their recorded shape and keep running.',
             linkLabel: 'The adoption endpoint',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1346,9 +1295,9 @@ export const en: SiteTranslations = {
     ],
     ctaTitle: 'Adopt it with confidence',
     ctaBody:
-      'Read the methodology and the specification, point an agent at the init endpoint, and verify the install before you run it.',
+      'Read the methodology and the specification, point an agent at the init.md endpoint, and verify the install before you run it.',
     ctaPrimary: 'Read the methodology',
-    ctaSecondary: 'Adoption (init)',
+    ctaSecondary: 'Quickstart',
   },
 
   developersPage: {

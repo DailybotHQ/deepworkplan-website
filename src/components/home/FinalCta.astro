@@ -1,7 +1,7 @@
 ---
 import Kicker from '@/components/editorial/Kicker.astro';
 import type { Language } from '@/lib/i18n';
-import { getUrlPrefix } from '@/lib/i18n';
+import { CANONICAL_INIT_MD_PATH, getUrlPrefix } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -27,7 +27,7 @@ const f = t.home.finalCta;
       <p class="lead mt-4">{f.subtitle}</p>
       <div class="mt-8 flex flex-col gap-4 sm:flex-row">
         <a
-          href={`${prefix}/init`}
+          href={CANONICAL_INIT_MD_PATH}
           class="inline-flex items-center justify-center rounded-sm px-6 py-3 text-base font-semibold transition hover:opacity-90"
           style="background-color: var(--color-ink); color: var(--color-paper);"
         >

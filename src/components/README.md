@@ -14,8 +14,7 @@ components/
 │   ├── SpecPage.astro / SpecReader.astro
 │   ├── KitPage.astro / KitReader.astro
 │   ├── ExamplesPage.astro
-│   ├── QuickstartPage.astro
-│   ├── InitPage.astro
+│   ├── QuickstartPage.astro  # Canonical adoption page (/init, /setup, /onboarding redirect here)
 │   └── NotFoundPage.astro
 ├── home/               # Homepage section components
 │   ├── Hero.astro
@@ -53,7 +52,7 @@ Shared page components in `pages/` handle `MainLayout`, translations, and conten
 | `pages/MethodologyPage.astro` | Astro | Methodology reader (uses `MethodologyReader.astro`) |
 | `pages/SpecPage.astro` | Astro | Specification reader (uses `SpecReader.astro`) |
 | `pages/KitPage.astro` | Astro | Kit catalog (uses `KitReader.astro`) |
-| `pages/InitPage.astro` | Astro | Canonical `/init` adoption endpoint |
+| `pages/QuickstartPage.astro` | Astro | Canonical `/quickstart` adoption page (`/init`, `/setup`, `/onboarding` redirect here) |
 
 **Key:** Each `*Page.astro` component accepts a `lang: Language` prop and wraps content in `MainLayout` internally.
 

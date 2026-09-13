@@ -111,7 +111,7 @@ export const fr: SiteTranslations = {
         "Copiez le prompt init.md et collez-le dans votre agent de code — Claude Code, Cursor, Codex ou tout autre — pour rendre n'importe quel dépôt AI-first.",
       copyLabel: 'Copier init.md',
       copiedLabel: 'Copié',
-      viewInitCta: 'Voir le prompt /init complet',
+      viewInitCta: 'Voir le démarrage rapide',
       pullQuote:
         'Deep Work Plan, c’est le développement piloté par la spécification, où le dépôt lui-même devient le harness.',
       primaryCta: 'Lire la méthodologie',
@@ -677,62 +677,9 @@ export const fr: SiteTranslations = {
     meta: {
       title: 'Démarrage rapide — Deep Work Plan',
       description:
-        'Installez le skill, intégrez votre dépôt, puis planifiez et exécutez avec n’importe quel agent — les étapes qui rendent votre dépôt piloté par la spécification et pilotable par agent.',
-    },
-    eyebrow: 'Démarrage rapide',
-    title: 'Commencez en quelques minutes',
-    intro:
-      'Installez le skill, intégrez votre dépôt, puis planifiez et exécutez avec n’importe quel agent — les étapes qui rendent votre dépôt piloté par la spécification et pilotable par agent.',
-    sequenceTitle: 'Le parcours d’adoption',
-    codeLabel: 'Terminal',
-    orLabel: 'ou',
-    steps: [
-      {
-        title: 'Installer le skill Deep Work Plan',
-        description:
-          'Ajoutez le skill à votre dépôt — un routeur plus neuf sous-skills (create, execute, refine, resume, status, verify, onboard, author, upgrade). Utilisez la CLI Skills pour la voie la plus rapide, ou clonez le dépôt et lancez setup là où git et un shell sont disponibles.',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: 'Intégrer le dépôt',
-        description:
-          'Lancez le sous-skill onboard et laissez l’agent raisonner sur votre dépôt réel. Il génère AGENTS.md, une base de connaissances docs/, une doc par module et un foyer .agents/ partagé entre agents (avec les liens symboliques .claude → .agents et .cursor → .agents), branche les commandes dwp-* légères et échafaude un .dwp/ ignoré par git.',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: 'Faire évoluer le kit et accepter des addons',
-        description:
-          'Utilisez /skill-create et /agent-create (le sous-skill author) pour faire grandir des skills, agents et commandes adaptés à votre stack. L’onboarding installe la revue locale obligatoire AI Diff Reviewer (sa porte CI reste facultative) et propose quatre addons facultatifs — devcontainer, Dailybot, dependency-upgrade et design-system — que vous acceptez seulement lorsqu’ils conviennent.',
-      },
-      {
-        title: 'Planifier et exécuter',
-        description:
-          'Générez un Deep Work Plan et exécutez-le tâche par tâche, en validant chaque porte et en reprenant d’une session à l’autre — en pilotant le dépôt face à sa propre spécification.',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: 'Le résultat',
-    outcome:
-      'Votre dépôt devient piloté par la spécification et pilotable par agent : le plan est la source de vérité durable, et le dépôt lui-même devient le harness face auquel tout agent s’exécute.',
-    nextStepsTitle: 'Étapes suivantes',
-    nextSteps: [
-      { label: 'Lire la méthodologie', href: '/methodology' },
-      { label: 'Parcourir le kit', href: '/kit' },
-      { label: 'Voir les exemples', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — Rendez votre dépôt AI-first — Deep Work Plan',
-      description:
         'Adoptez la méthodologie Deep Work Plan dans n’importe quel dépôt. Installez le skill, lancez l’onboarding de l’agent, puis planifiez et exécutez avec n’importe quel agent de code IA.',
     },
-    eyebrow: 'Adoption',
+    eyebrow: 'Démarrage rapide',
     title: 'Rendez ce dépôt AI-first',
     intro:
       'Un seul endpoint pour transformer n’importe quel dépôt en une base de code pilotée par la spécification et prête pour les agents. Installez le skill, laissez un agent intégrer le dépôt, puis planifiez et exécutez un travail structuré avec n’importe quel agent de code.',
@@ -742,13 +689,13 @@ export const fr: SiteTranslations = {
     handoffInstruction:
       'Lisez et suivez les instructions sur https://deepworkplan.com/init.md pour rendre ce dépôt AI-first.',
     handoffMdLabel: 'Prompt d’agent autonome',
-    codeLabel: 'agent',
+    codeLabel: 'Terminal',
     whatTitle: 'Ce que cela fait',
     whatBody: [
       'L’adoption change le dépôt de deux manières durables — les piliers de la méthodologie.',
       'D’abord, le dépôt devient piloté par la spécification : le travail part d’un plan et d’une spécification écrits, et non de prompts ponctuels. Ensuite, le dépôt lui-même devient le harness de l’agent — un AGENTS.md, une base de connaissances docs/, une doc par module et un foyer de skills .agents/ (avec les liens symboliques .claude → .agents et .cursor → .agents) donnent à chaque agent le contexte et les commandes dont il a besoin.',
     ],
-    sequenceTitle: 'La séquence d’adoption',
+    sequenceTitle: 'Le parcours d’adoption',
     orLabel: 'ou',
     steps: [
       {
@@ -784,6 +731,7 @@ export const fr: SiteTranslations = {
         title: 'Planifier et exécuter',
         description:
           'Générez des Deep Work Plans avec /dwp-create et exécutez-les avec /dwp-execute, puis /dwp-status, /dwp-refine, /dwp-resume et /dwp-verify au fil du travail. Chaque plan porte des tâches numérotées, des portes de validation et un protocole d’achèvement — et se clôt par un unique Final Review obligatoire (passe de sécurité, validation de l’état final et réconciliation des skills). L’Executive Report reste disponible sur demande.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: 'Vérifier la conformité',
@@ -795,12 +743,12 @@ export const fr: SiteTranslations = {
     outcomeTitle: 'Le résultat',
     outcome:
       'Le dépôt devient piloté par la spécification et le dépôt lui-même devient le harness de l’agent — le contexte et les commandes voyagent avec le code.',
-    nextStepsTitle: 'À lire ensuite',
+    nextStepsTitle: 'Étapes suivantes',
     nextSteps: [
-      { label: 'Démarrage rapide', href: '/quickstart' },
-      { label: 'Méthodologie', href: '/methodology' },
+      { label: 'Lire la méthodologie', href: '/methodology' },
       { label: 'Spécification', href: '/spec' },
-      { label: 'Kit', href: '/kit' },
+      { label: 'Parcourir le kit', href: '/kit' },
+      { label: 'Voir les exemples', href: '/examples' },
     ],
   },
 
@@ -875,7 +823,7 @@ export const fr: SiteTranslations = {
             answer:
               'La skill d’agent s’installe partout où votre agent charge les skills de projet ou d’utilisateur. L’onboarding adapte ensuite le dépôt lui-même : il crée ou réconcilie `AGENTS.md`, `docs/`, `.agents/` et l’espace de travail `.dwp/` ignoré par git. La skill enseigne la méthode à l’agent ; le dépôt conserve le contexte, le kit et les preuves de plan dont les autres agents ont besoin pour continuer.',
             linkLabel: 'Voir le flux d’adoption',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1043,7 +991,7 @@ export const fr: SiteTranslations = {
             answer:
               'L’onboarding est non destructif : il détecte un `AGENTS.md`, `docs/`, `.agents/` ou `CLAUDE.md` existant, réconcilie au lieu d’écraser, et demande avant de remplacer quoi que ce soit. Il écrit l’index `AGENTS.md` avec de vraies commandes, une arborescence `docs/` raisonnée, des documentations par module, le kit `.agents/` avec ses commandes `dwp-*` légères, une zone de sortie `.dwp/` ignorée par git, une carte des tests vérifiée, et la revue locale de code requise (le skill AI Diff Reviewer plus une extension de revue adaptée au dépôt). Il lance ensuite un autocontrôle et le vérificateur de conformité, pour que vous voyiez ce qui a été produit. Un dépôt intégré sous un standard antérieur reçoit une mise à niveau ciblée du harness qui réconcilie uniquement ce qui manque ou est obsolète.',
             linkLabel: 'L’endpoint d’adoption',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1052,7 +1000,7 @@ export const fr: SiteTranslations = {
             answer:
               'Deux mises à niveau différentes sont en jeu, et le flux les garde séparées. Le harness du dépôt — `AGENTS.md`, `docs/`, le kit `.agents/` — se réconcilie en rejouant l’onboarding, qui ne comble que ce qui manque ou est obsolète. La skill elle-même avance via `/dwp-upgrade` : une vérification en lecture seule de la dernière version publiée, l’installation du tag exact que vous avez accepté, vérifiée, puis l’onboarding rejoué comme une passe complète. Le flux est soumis à consentement explicite de bout en bout, les adaptations locales sont comparées et préservées plutôt qu’écrasées, et `.dwp/` n’est jamais migré — les plans existants gardent leur forme enregistrée et continuent de s’exécuter.',
             linkLabel: 'L’endpoint d’adoption',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1367,7 +1315,7 @@ export const fr: SiteTranslations = {
     ctaBody:
       "Lisez la méthodologie et la spécification, pointez un agent vers l'endpoint init et vérifiez l'installation avant de l'exécuter.",
     ctaPrimary: 'Lire la méthodologie',
-    ctaSecondary: 'Adoption (init)',
+    ctaSecondary: 'Démarrage rapide',
   },
 
   developersPage: {

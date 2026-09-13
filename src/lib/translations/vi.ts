@@ -111,7 +111,7 @@ export const vi: SiteTranslations = {
         'Sao chép prompt init.md và dán vào agent lập trình của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác — để biến mọi repository thành AI-first.',
       copyLabel: 'Sao chép init.md',
       copiedLabel: 'Đã sao chép',
-      viewInitCta: 'Xem toàn bộ lời nhắc /init',
+      viewInitCta: 'Xem khởi động nhanh',
       pullQuote:
         'Deep Work Plan là phát triển dựa trên đặc tả, nơi bản thân repository trở thành harness.',
       primaryCta: 'Đọc phương pháp luận',
@@ -670,62 +670,9 @@ export const vi: SiteTranslations = {
     meta: {
       title: 'Khởi động nhanh — Deep Work Plan',
       description:
-        'Cài skill, khởi tạo repository, rồi lập kế hoạch và thực thi với mọi agent — các bước biến repository của bạn thành dựa trên đặc tả và điều khiển được bằng agent.',
-    },
-    eyebrow: 'Khởi động nhanh',
-    title: 'Bắt đầu trong vài phút',
-    intro:
-      'Cài skill, khởi tạo repository, rồi lập kế hoạch và thực thi với mọi agent — các bước biến repository của bạn thành dựa trên đặc tả và điều khiển được bằng agent.',
-    sequenceTitle: 'Lộ trình áp dụng',
-    codeLabel: 'Terminal',
-    orLabel: 'hoặc',
-    steps: [
-      {
-        title: 'Cài skill Deep Work Plan',
-        description:
-          'Thêm skill vào repository của bạn — một bộ định tuyến cùng chín sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade). Dùng Skills CLI cho con đường nhanh nhất, hoặc clone repo và chạy setup nơi có git và một shell.',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: 'Khởi tạo repository',
-        description:
-          'Chạy sub-skill onboard và để agent suy luận về repo thực tế của bạn. Nó sinh ra AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục .agents/ dùng chung giữa các agent (với các symlink .claude → .agents và .cursor → .agents), kết nối các command dwp-* mỏng và dựng một .dwp/ được gitignore.',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: 'Phát triển bộ kit và chấp nhận các addon',
-        description:
-          'Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack. Khởi tạo cài đặt bản đánh giá cục bộ bắt buộc của AI Diff Reviewer (cổng CI của nó vẫn là tùy chọn) và đề xuất bốn addon tự nguyện — devcontainer, Dailybot, dependency-upgrade và design-system — mà bạn chỉ chấp nhận khi chúng phù hợp.',
-      },
-      {
-        title: 'Lập kế hoạch và thực thi',
-        description:
-          'Sinh ra một Deep Work Plan và chạy nó từng tác vụ, kiểm chứng từng cổng và tiếp tục qua nhiều phiên — điều khiển repository dựa trên chính đặc tả của nó.',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: 'Kết quả',
-    outcome:
-      'Repository của bạn trở thành dựa trên đặc tả và điều khiển được bằng agent: kế hoạch là nguồn chân lý bền vững, và bản thân repository trở thành harness mà mọi agent chạy dựa vào.',
-    nextStepsTitle: 'Bước tiếp theo',
-    nextSteps: [
-      { label: 'Đọc phương pháp luận', href: '/methodology' },
-      { label: 'Duyệt bộ kit', href: '/kit' },
-      { label: 'Xem ví dụ', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — Biến repository của bạn thành AI-first — Deep Work Plan',
-      description:
         'Áp dụng phương pháp luận Deep Work Plan trong mọi repository. Cài skill, chạy khởi tạo agent, rồi lập kế hoạch và thực thi với mọi agent lập trình AI.',
     },
-    eyebrow: 'Áp dụng',
+    eyebrow: 'Khởi động nhanh',
     title: 'Biến repository này thành AI-first',
     intro:
       'Một endpoint để biến mọi repository thành một codebase dựa trên đặc tả, sẵn sàng cho agent. Cài skill, để một agent khởi tạo repo, rồi lập kế hoạch và thực thi công việc có cấu trúc với mọi agent lập trình.',
@@ -735,13 +682,13 @@ export const vi: SiteTranslations = {
     handoffInstruction:
       'Đọc và làm theo hướng dẫn tại https://deepworkplan.com/init.md để biến kho lưu trữ này thành AI-first.',
     handoffMdLabel: 'Lời nhắc agent độc lập',
-    codeLabel: 'agent',
+    codeLabel: 'Terminal',
     whatTitle: 'Điều này làm gì',
     whatBody: [
       'Việc áp dụng thay đổi repository theo hai cách bền vững — hai trụ cột của phương pháp luận.',
       'Thứ nhất, repository trở thành dựa trên đặc tả: công việc bắt đầu từ một kế hoạch và đặc tả được viết ra, không phải từ những lời nhắc tùy hứng. Thứ hai, bản thân repository trở thành harness của agent — một AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục skill .agents/ (với các symlink .claude → .agents và .cursor → .agents) trao cho mọi agent ngữ cảnh và các command nó cần.',
     ],
-    sequenceTitle: 'Trình tự áp dụng',
+    sequenceTitle: 'Lộ trình áp dụng',
     orLabel: 'hoặc',
     steps: [
       {
@@ -777,6 +724,7 @@ export const vi: SiteTranslations = {
         title: 'Lập kế hoạch và thực thi',
         description:
           'Sinh ra các Deep Work Plan với /dwp-create và chạy chúng với /dwp-execute, rồi /dwp-status, /dwp-refine, /dwp-resume và /dwp-verify khi công việc tiến triển. Mỗi kế hoạch mang các tác vụ được đánh số, các cổng kiểm chứng và một giao thức hoàn tất — và khép lại bằng đúng một Final Review bắt buộc (bước rà soát bảo mật, kiểm chứng trạng thái cuối và đối chiếu skill). Executive Report vẫn sẵn có khi bạn yêu cầu.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: 'Xác minh sự tuân thủ',
@@ -788,12 +736,12 @@ export const vi: SiteTranslations = {
     outcomeTitle: 'Kết quả',
     outcome:
       'Repository trở thành dựa trên đặc tả và bản thân repository trở thành harness của agent — ngữ cảnh và các command đi theo mã nguồn.',
-    nextStepsTitle: 'Đọc tiếp',
+    nextStepsTitle: 'Bước tiếp theo',
     nextSteps: [
-      { label: 'Khởi động nhanh', href: '/quickstart' },
-      { label: 'Phương pháp luận', href: '/methodology' },
+      { label: 'Đọc phương pháp luận', href: '/methodology' },
       { label: 'Đặc tả', href: '/spec' },
-      { label: 'Kit', href: '/kit' },
+      { label: 'Duyệt bộ kit', href: '/kit' },
+      { label: 'Xem ví dụ', href: '/examples' },
     ],
   },
 
@@ -869,7 +817,7 @@ export const vi: SiteTranslations = {
             answer:
               'Agent skill được cài ở bất cứ đâu agent của bạn tải skill cấp dự án hoặc cấp người dùng. Sau đó, onboarding thích ứng chính repository: nó tạo mới hoặc hòa giải `AGENTS.md`, `docs/`, `.agents/` và không gian làm việc `.dwp/` được gitignore. Skill dạy agent phương pháp; repository giữ ngữ cảnh, bộ kit và bằng chứng kế hoạch mà các agent khác cần để tiếp tục.',
             linkLabel: 'Xem luồng áp dụng',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1036,7 +984,7 @@ export const vi: SiteTranslations = {
             answer:
               'Onboarding không phá hủy gì: nó phát hiện `AGENTS.md`, `docs/`, `.agents/` hay `CLAUDE.md` sẵn có, hòa giải thay vì ghi đè, và hỏi trước khi thay thế bất cứ thứ gì. Nó ghi chỉ mục `AGENTS.md` với các lệnh thật, một cây `docs/` có lý lẽ, tài liệu cho từng mô-đun, bộ kit `.agents/` với các lệnh `dwp-*` mỏng, một vùng xuất `.dwp/` được gitignore, một bản đồ kiểm thử đã xác minh, và phần review mã cục bộ bắt buộc (skill AI Diff Reviewer cùng một tiện ích mở rộng review được điều chỉnh theo repo). Sau đó nó chạy tự kiểm tra và công cụ kiểm tra tính tuân thủ để bạn thấy cái gì đã được tạo. Một repository đã onboard ở một tiêu chuẩn sớm hơn sẽ nhận một bản nâng cấp harness có mục tiêu, chỉ hòa giải phần còn thiếu hoặc đã lỗi thời.',
             linkLabel: 'Điểm cuối áp dụng',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1045,7 +993,7 @@ export const vi: SiteTranslations = {
             answer:
               'Ở đây có hai loại nâng cấp khác nhau, và luồng giữ chúng tách biệt. Harness của repository — `AGENTS.md`, `docs/`, bộ kit `.agents/` — được hòa giải bằng cách chạy lại onboarding, vốn chỉ lấp phần còn thiếu hoặc đã lỗi thời. Bản thân skill đi tới bằng `/dwp-upgrade`: kiểm tra chỉ-đọc bản phát hành mới nhất, cài đặt đúng tag bạn đã chấp nhận, có xác minh, rồi onboarding lại như một lượt thực thi mới. Toàn luồng đều cần đồng ý rõ ràng, các thích nghi cục bộ được so sánh và giữ lại thay vì bị ghi đè, và `.dwp/` không bao giờ bị di chuyển — các kế hoạch hiện có giữ nguyên hình thái được ghi lại và tiếp tục chạy.',
             linkLabel: 'Điểm cuối áp dụng',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1360,7 +1308,7 @@ export const vi: SiteTranslations = {
     ctaBody:
       'Đọc phương pháp luận và đặc tả, trỏ một agent vào endpoint init và xác minh quá trình cài đặt trước khi bạn chạy nó.',
     ctaPrimary: 'Đọc phương pháp luận',
-    ctaSecondary: 'Áp dụng (init)',
+    ctaSecondary: 'Khởi động nhanh',
   },
 
   developersPage: {

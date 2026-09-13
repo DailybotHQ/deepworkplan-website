@@ -13,7 +13,7 @@ Beyond turning a repository AI-first, DWP lets that repository **evolve its own 
 
 ### This repository dogfoods DWP
 
-The website repository practices the methodology it documents. The official DeepWorkPlan skill is **vendored and repo-adapted** under `.agents/skills/deepworkplan/` (tracked in git; not auto-overwritten on release). Addon skills (`dailybot`, `ai-diff-reviewer`) are also vendored and **are** refreshed to latest upstream on every website release. A committed `skills-lock.json` pins install provenance. Also committed: the thin `dwp-*` command delegators (`/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`), the `/skill-create` and `/agent-create` delegators that route to the author sub-skill, the `/lib-upgrade` delegator for the dependency-upgrade add-on, the `/init` adoption flow, and the docs. All Deep Work Plan output lives in the gitignored `.dwp/` directory (`.dwp/plans/`) — Lite and Full plans alike, with no separate draft artifact. See [Architecture → Dogfooding DWP](ARCHITECTURE.md#dogfooding-dwp) and [AGENTS.md → Vendored agent skills](../AGENTS.md) for details.
+The website repository practices the methodology it documents. The official DeepWorkPlan skill is **vendored and repo-adapted** under `.agents/skills/deepworkplan/` (tracked in git; not auto-overwritten on release). Addon skills (`dailybot`, `ai-diff-reviewer`) are also vendored and **are** refreshed to latest upstream on every website release. A committed `skills-lock.json` pins install provenance. Also committed: the thin `dwp-*` command delegators (`/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`), the `/skill-create` and `/agent-create` delegators that route to the author sub-skill, the `/lib-upgrade` delegator for the dependency-upgrade add-on, the `/quickstart` adoption flow, and the docs. All Deep Work Plan output lives in the gitignored `.dwp/` directory (`.dwp/plans/`) — Lite and Full plans alike, with no separate draft artifact. See [Architecture → Dogfooding DWP](ARCHITECTURE.md#dogfooding-dwp) and [AGENTS.md → Vendored agent skills](../AGENTS.md) for details.
 
 ## Positioning
 
@@ -50,7 +50,7 @@ Build a fast, accessible, bilingual site that:
 
 **Purpose:** Communicate what DWP is, who it is for, and where to go next — fast.
 
-**Sections:** A hero that leads with the context-over-models / structured-environment positioning — *"Models matter. Context matters more."* — framing the repository as the environment (context, guardrails, durable plan) where any agent executes reliably, anchored by the harness thesis (*"the repository itself becomes the harness"*); a concise "what is a Deep Work Plan" explainer; the two narrative pillars (spec-driven development, harness engineering); the core principles (single-task focus, validation-first, git-native, resume-safe); entry points into the methodology reader, the spec reader, the kit catalog, and the `/init` adoption endpoint; and a clear primary call to action.
+**Sections:** A hero that leads with the context-over-models / structured-environment positioning — *"Models matter. Context matters more."* — framing the repository as the environment (context, guardrails, durable plan) where any agent executes reliably, anchored by the harness thesis (*"the repository itself becomes the harness"*); a concise "what is a Deep Work Plan" explainer; the two narrative pillars (spec-driven development, harness engineering); the core principles (single-task focus, validation-first, git-native, resume-safe); entry points into the methodology reader, the spec reader, the kit catalog, and the `/quickstart` adoption page; and a clear primary call to action.
 
 ### 2. Methodology Reader
 
@@ -81,14 +81,14 @@ Build a fast, accessible, bilingual site that:
 - Guidance for installing DWP into an existing repo
 - Cross-links to the companion skill repo [`DailybotHQ/deepworkplan-skill`](https://github.com/DailybotHQ/deepworkplan-skill)
 
-### 5. Adoption Endpoint (`/init`)
+### 5. Adoption Page (`/quickstart`) and Adoption Prompt (`/init.md`)
 
 **Purpose:** Give humans and agents a single canonical place to start adopting DWP.
 
 **Features:**
-- HTML page at `/init` (and `/es/init`) with a "Give this to your agent" handoff block and a numbered install → onboard → plan/execute sequence framed by the two narrative pillars
-- A self-contained, copy-pasteable agent onboarding prompt at `/init.md` (and `/es/init.md`)
-- Permanent redirects from `/setup` and `/onboarding` (plus `/es/` variants) to `/init`
+- HTML page at `/quickstart` (in all 17 active languages) with a "Give this to your agent" handoff block and a numbered verify → install → onboard → local review/addons → plan/execute → verify-conformance sequence framed by the two narrative pillars
+- A self-contained, copy-pasteable, English-only agent onboarding prompt at `/init.md` — a standalone static artifact (`public/init.md`), not a per-language content-collection page; it has no HTML sibling and is never redirected
+- Permanent redirects from `/init`, `/setup`, and `/onboarding` (plus per-language variants) to `/quickstart`
 - Stays in sync with the companion skill repo `DailybotHQ/deepworkplan-skill`
 
 ### 6. Compare and FAQ

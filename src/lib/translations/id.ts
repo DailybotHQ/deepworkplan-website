@@ -110,7 +110,7 @@ export const id: SiteTranslations = {
         'Salin prompt init.md dan tempelkan ke agent coding Anda — Claude Code, Cursor, Codex, atau lainnya — untuk menjadikan repositori apa pun AI-first.',
       copyLabel: 'Salin init.md',
       copiedLabel: 'Tersalin',
-      viewInitCta: 'Lihat prompt /init lengkap',
+      viewInitCta: 'Lihat mulai cepat',
       pullQuote:
         'Deep Work Plan adalah spec-driven development tempat repositori itu sendiri menjadi harness.',
       primaryCta: 'Baca metodologinya',
@@ -673,62 +673,9 @@ export const id: SiteTranslations = {
     meta: {
       title: 'Mulai Cepat — Deep Work Plan',
       description:
-        'Pasang skill, onboard repositori Anda, lalu rencanakan dan eksekusi dengan agent mana pun — langkah yang membuat repositori spec-driven dan dapat dikemudikan agent.',
-    },
-    eyebrow: 'Mulai Cepat',
-    title: 'Mulai dalam hitungan menit',
-    intro:
-      'Pasang skill, onboard repositori Anda, lalu rencanakan dan eksekusi dengan agent mana pun — langkah yang membuat repositori spec-driven dan dapat dikemudikan agent.',
-    sequenceTitle: 'Jalur adopsi',
-    codeLabel: 'Terminal',
-    orLabel: 'atau',
-    steps: [
-      {
-        title: 'Pasang skill Deep Work Plan',
-        description:
-          'Tambahkan skill ke repositori Anda — sebuah router ditambah sembilan sub-skill (create, execute, refine, resume, status, verify, onboard, author, upgrade). Gunakan Skills CLI untuk jalur tercepat, atau klona repo dan jalankan setup di tempat git dan shell tersedia.',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: 'Onboard repositori',
-        description:
-          'Jalankan sub-skill onboard dan biarkan agent bernalar tentang repo Anda yang sebenarnya. Ia menghasilkan AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah .agents/ lintas agent (dengan symlink .claude → .agents dan .cursor → .agents), menyambungkan command dwp-* yang tipis, dan menyiapkan .dwp/ yang di-gitignore.',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: 'Kembangkan kit dan terima addon',
-        description:
-          'Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack. Onboarding memasang review lokal AI Diff Reviewer yang wajib (gerbang CI-nya tetap opsional) dan menawarkan empat addon opt-in — devcontainer, Dailybot, dependency-upgrade, dan design-system — yang Anda terima hanya ketika cocok.',
-      },
-      {
-        title: 'Rencanakan dan eksekusi',
-        description:
-          'Hasilkan Deep Work Plan dan jalankan tugas demi tugas, validasi setiap gate dan lanjutkan lintas sesi — mengemudikan repositori terhadap spec-nya sendiri.',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: 'Hasilnya',
-    outcome:
-      'Repositori Anda menjadi spec-driven dan dapat dikemudikan agent: rencana adalah sumber kebenaran yang tahan lama, dan repositori itu sendiri menjadi harness tempat agent mana pun bekerja.',
-    nextStepsTitle: 'Langkah berikutnya',
-    nextSteps: [
-      { label: 'Baca metodologinya', href: '/methodology' },
-      { label: 'Telusuri kit', href: '/kit' },
-      { label: 'Lihat contoh', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — Jadikan repositori Anda AI-first — Deep Work Plan',
-      description:
         'Adopsi metodologi Deep Work Plan di repositori mana pun. Pasang skill, jalankan onboarding agent, lalu rencanakan dan eksekusi dengan AI coding agent mana pun.',
     },
-    eyebrow: 'Adopsi',
+    eyebrow: 'Mulai Cepat',
     title: 'Jadikan repositori ini AI-first',
     intro:
       'Satu endpoint untuk mengubah repositori apa pun menjadi basis kode spec-driven yang siap agent. Pasang skill, biarkan agent meng-onboard repo, lalu rencanakan dan eksekusi pekerjaan terstruktur dengan coding agent mana pun.',
@@ -738,13 +685,13 @@ export const id: SiteTranslations = {
     handoffInstruction:
       'Baca dan ikuti instruksi di https://deepworkplan.com/init.md untuk menjadikan repositori ini AI-first.',
     handoffMdLabel: 'Prompt agent mandiri',
-    codeLabel: 'agent',
+    codeLabel: 'Terminal',
     whatTitle: 'Apa yang dilakukannya',
     whatBody: [
       'Adopsi mengubah repositori dengan dua cara yang tahan lama — kedua pilar metodologi.',
       'Pertama, repositori menjadi spec-driven: pekerjaan dimulai dari rencana dan spesifikasi tertulis, bukan dari prompt dadakan. Kedua, repositori itu sendiri menjadi agent harness — AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah skill .agents/ (dengan symlink .claude → .agents dan .cursor → .agents) memberi setiap agent konteks dan command yang dibutuhkannya.',
     ],
-    sequenceTitle: 'Urutan adopsi',
+    sequenceTitle: 'Jalur adopsi',
     orLabel: 'atau',
     steps: [
       {
@@ -780,6 +727,7 @@ export const id: SiteTranslations = {
         title: 'Rencanakan dan eksekusi',
         description:
           'Hasilkan Deep Work Plan dengan /dwp-create dan jalankan dengan /dwp-execute, lalu /dwp-status, /dwp-refine, /dwp-resume, dan /dwp-verify seiring pekerjaan berjalan. Setiap rencana membawa tugas bernomor, validation gate, dan completion protocol — dan ditutup dengan tepat satu Final Review wajib (pemeriksaan keamanan, validasi status akhir, dan rekonsiliasi skills). Executive Report tetap tersedia atas permintaan.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: 'Verifikasi kepatuhan',
@@ -791,12 +739,12 @@ export const id: SiteTranslations = {
     outcomeTitle: 'Hasilnya',
     outcome:
       'Repositori menjadi spec-driven dan repositori itu sendiri menjadi agent harness — konteks dan command ikut bersama kode.',
-    nextStepsTitle: 'Baca selanjutnya',
+    nextStepsTitle: 'Langkah berikutnya',
     nextSteps: [
-      { label: 'Mulai Cepat', href: '/quickstart' },
-      { label: 'Metodologi', href: '/methodology' },
+      { label: 'Baca metodologinya', href: '/methodology' },
       { label: 'Spesifikasi', href: '/spec' },
-      { label: 'Kit', href: '/kit' },
+      { label: 'Telusuri kit', href: '/kit' },
+      { label: 'Lihat contoh', href: '/examples' },
     ],
   },
 
@@ -870,7 +818,7 @@ export const id: SiteTranslations = {
             answer:
               'Skill agent terpasang di mana pun agent Anda memuat skill project atau user. Onboarding kemudian menyesuaikan repositori itu sendiri: ia membuat atau merekonsiliasi `AGENTS.md`, `docs/`, `.agents/`, dan area kerja `.dwp/` yang di-gitignore. Skill mengajari agent metodenya; repositori menyimpan konteks, kit, dan bukti rencana yang dibutuhkan agent lain untuk melanjutkan.',
             linkLabel: 'Lihat alur adopsinya',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1036,7 +984,7 @@ export const id: SiteTranslations = {
             answer:
               'Onboarding bersifat non-destruktif: ia mendeteksi `AGENTS.md`, `docs/`, `.agents/`, atau `CLAUDE.md` yang sudah ada, merekonsiliasi alih-alih menimpa, dan bertanya sebelum mengganti apa pun. Ia menulis indeks `AGENTS.md` dengan command nyata, pohon `docs/` yang beralasan, dokumentasi per modul, kit `.agents/` dengan command `dwp-*` yang tipis, area keluaran `.dwp/` yang di-gitignore, peta pengujian yang terverifikasi, dan tinjauan kode lokal yang diwajibkan (skill AI Diff Reviewer plus ekstensi review yang disesuaikan repo). Ia kemudian menjalankan self-check dan pemeriksa konformansi agar Anda bisa melihat apa yang dihasilkan. Repositori yang di-onboard di bawah standar sebelumnya mendapat upgrade harness tertarget yang merekonsiliasi hanya apa yang kurang atau usang.',
             linkLabel: 'Endpoint adopsi',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1045,7 +993,7 @@ export const id: SiteTranslations = {
             answer:
               'Ada dua upgrade berbeda, dan alurnya menjaga keduanya tetap terpisah. Harness repositori — `AGENTS.md`, `docs/`, kit `.agents/` — direkonsiliasi dengan menjalankan kembali onboarding, yang hanya mengisi apa yang kurang atau usang. Skill itu sendiri bergerak lewat `/dwp-upgrade`: pemeriksaan read-only atas rilis terbaru yang dipublikasikan, instalasi tag persis yang Anda terima, terverifikasi, lalu onboarding kembali sebagai satu proses segar. Alur bergantung pada persetujuan eksplisit di setiap langkah, adaptasi lokal dibandingkan dan dipertahankan alih-alih ditimpa, dan `.dwp/` tidak pernah dimigrasi — rencana yang ada mempertahankan bentuk tercatatnya dan terus berjalan.',
             linkLabel: 'Endpoint adopsi',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1360,7 +1308,7 @@ export const id: SiteTranslations = {
     ctaBody:
       'Baca metodologi dan spesifikasinya, arahkan agent ke endpoint init, dan verifikasi instalasi sebelum Anda menjalankannya.',
     ctaPrimary: 'Baca metodologinya',
-    ctaSecondary: 'Adopsi (init)',
+    ctaSecondary: 'Mulai Cepat',
   },
 
   // Developers — agent & developer surface

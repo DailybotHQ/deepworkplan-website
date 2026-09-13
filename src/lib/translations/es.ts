@@ -106,7 +106,7 @@ export const es: SiteTranslations = {
         'Copia el prompt de init.md y pégalo en tu agente de código — Claude Code, Cursor, Codex, o cualquier otro — para hacer de cualquier repositorio uno AI-first.',
       copyLabel: 'Copiar init.md',
       copiedLabel: 'Copiado',
-      viewInitCta: 'Ver el prompt de /init',
+      viewInitCta: 'Ver el inicio rápido',
       pullQuote:
         'Deep Work Plan es desarrollo guiado por especificación donde el propio repositorio se convierte en el harness.',
       primaryCta: 'Leer la metodología',
@@ -667,62 +667,9 @@ export const es: SiteTranslations = {
     meta: {
       title: 'Inicio rápido — Deep Work Plan',
       description:
-        'Instala la skill, incorpora tu repositorio y planifica y ejecuta con cualquier agente: los pasos que vuelven tu repo spec-driven y pilotable por agentes.',
-    },
-    eyebrow: 'Inicio rápido',
-    title: 'Empieza en minutos',
-    intro:
-      'Instala la skill, incorpora tu repositorio y luego planifica y ejecuta con cualquier agente: los pasos que vuelven tu repositorio spec-driven y pilotable por agentes.',
-    sequenceTitle: 'El camino de adopción',
-    codeLabel: 'Terminal',
-    orLabel: 'o',
-    steps: [
-      {
-        title: 'Instala la skill de Deep Work Plan',
-        description:
-          'Añade la skill a tu repositorio — un enrutador y nueve sub-skills (create, execute, refine, resume, status, verify, onboard, author, upgrade). Usa la CLI de Skills para el camino más rápido, o clona el repositorio y ejecuta el setup donde tengas git y una shell.',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: 'Incorpora el repositorio',
-        description:
-          'Ejecuta la sub-skill de onboard y deja que el agente razone sobre tu repositorio real. Genera AGENTS.md, una base de conocimiento docs/, docs por módulo y un hogar multiagente .agents/ (con los enlaces simbólicos .claude → .agents y .cursor → .agents), conecta los comandos ligeros dwp-* y crea un .dwp/ ignorado por git.',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: 'Evoluciona el kit y acepta addons',
-        description:
-          'Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos adaptados a tu stack. La incorporación instala la revisión local obligatoria de AI Diff Reviewer (su gate de CI sigue siendo opcional) y ofrece cuatro addons opcionales — devcontainer, Dailybot, dependency-upgrade y design-system — que aceptas solo cuando encajan.',
-      },
-      {
-        title: 'Planifica y ejecuta',
-        description:
-          'Genera un Deep Work Plan y ejecútalo tarea por tarea, validando cada compuerta y reanudando entre sesiones — pilotando el repositorio contra su propia especificación.',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: 'El resultado',
-    outcome:
-      'Tu repositorio se vuelve spec-driven y pilotable por agentes: el plan es la fuente de verdad duradera, y el repositorio mismo se convierte en el harness contra el que corre cualquier agente.',
-    nextStepsTitle: 'Próximos pasos',
-    nextSteps: [
-      { label: 'Leer la metodología', href: '/methodology' },
-      { label: 'Explorar el kit', href: '/kit' },
-      { label: 'Ver ejemplos', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / endpoint de adopción
-  initPage: {
-    meta: {
-      title: 'Init — Convierte tu repositorio en AI-first — Deep Work Plan',
-      description:
         'Adopta Deep Work Plan en cualquier repositorio: instala la skill, ejecuta la incorporación y luego planifica y ejecuta con cualquier agente de IA.',
     },
-    eyebrow: 'Adopción',
+    eyebrow: 'Inicio rápido',
     title: 'Convierte este repositorio en AI-first',
     intro:
       'Un solo endpoint para convertir cualquier repositorio en una base de código guiada por especificación y lista para agentes. Instala la skill, deja que un agente incorpore el repo y luego planifica y ejecuta trabajo estructurado con cualquier agente de programación.',
@@ -732,13 +679,13 @@ export const es: SiteTranslations = {
     handoffInstruction:
       'Lee y sigue las instrucciones en https://deepworkplan.com/init.md para hacer este repositorio AI-first.',
     handoffMdLabel: 'Instrucción autocontenida para el agente',
-    codeLabel: 'agente',
+    codeLabel: 'Terminal',
     whatTitle: 'Qué hace esto',
     whatBody: [
       'La adopción cambia el repositorio de dos maneras duraderas: los pilares de la metodología.',
       'Primero, el repositorio se vuelve guiado por especificación: el trabajo comienza desde un plan y una especificación escritos, no desde prompts improvisados. Segundo, el repositorio mismo se convierte en el harness del agente: un AGENTS.md, una base de conocimiento docs/, docs por módulo y un hogar de skills .agents/ (con los enlaces simbólicos .claude → .agents y .cursor → .agents) dan a cada agente el contexto y los comandos que necesita.',
     ],
-    sequenceTitle: 'La secuencia de adopción',
+    sequenceTitle: 'El camino de adopción',
     orLabel: 'o',
     steps: [
       {
@@ -774,6 +721,7 @@ export const es: SiteTranslations = {
         title: 'Planifica y ejecuta',
         description:
           'Genera Deep Work Plans con /dwp-create y ejecútalos con /dwp-execute; luego usa /dwp-status, /dwp-refine, /dwp-resume y /dwp-verify a medida que avanza el trabajo. Cada plan lleva tareas numeradas, compuertas de validación y un protocolo de finalización — y se cierra con un único Final Review obligatorio (pase de seguridad, validación del estado final y reconciliación de skills). El Executive Report sigue disponible a petición.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: 'Verifica la conformidad',
@@ -785,12 +733,12 @@ export const es: SiteTranslations = {
     outcomeTitle: 'El resultado',
     outcome:
       'El repositorio se vuelve guiado por especificación y el repositorio mismo se convierte en el harness del agente: el contexto y los comandos viajan con el código.',
-    nextStepsTitle: 'Lee a continuación',
+    nextStepsTitle: 'Próximos pasos',
     nextSteps: [
-      { label: 'Inicio rápido', href: '/quickstart' },
-      { label: 'Metodología', href: '/methodology' },
+      { label: 'Leer la metodología', href: '/methodology' },
       { label: 'Especificación', href: '/spec' },
-      { label: 'Kit', href: '/kit' },
+      { label: 'Explorar el kit', href: '/kit' },
+      { label: 'Ver ejemplos', href: '/examples' },
     ],
   },
 
@@ -864,7 +812,7 @@ export const es: SiteTranslations = {
             answer:
               'La skill del agente se instala donde tu agente carga las skills de usuario o de proyecto. Después, la incorporación adapta el propio repositorio: crea o concilia `AGENTS.md`, `docs/`, `.agents/` y el área `.dwp/` ignorada por git. La skill enseña el método al agente; el repositorio conserva el contexto, el kit y la evidencia del plan que necesitan los demás agentes para continuar.',
             linkLabel: 'Ver el flujo de adopción',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1030,7 +978,7 @@ export const es: SiteTranslations = {
             answer:
               'La incorporación no es destructiva: detecta un `AGENTS.md`, `docs/`, `.agents/` o `CLAUDE.md` existente, reconcilia en lugar de sobrescribir y pregunta antes de reemplazar cualquier cosa. Escribe el índice `AGENTS.md` con comandos reales, un árbol `docs/` razonado, documentación por módulo, el kit `.agents/` con comandos ligeros `dwp-*`, un área de salida `.dwp/` ignorada por git, un mapa de pruebas verificado y la revisión local de código obligatoria (la skill AI Diff Reviewer más una extensión de revisión adaptada al repositorio). Luego ejecuta una autocomprobación y el comprobador de conformidad para que veas lo que se produjo. Un repositorio incorporado bajo un estándar anterior recibe una actualización dirigida del harness que reconcilia solo lo que falta o está desactualizado.',
             linkLabel: 'El endpoint de adopción',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1039,7 +987,7 @@ export const es: SiteTranslations = {
             answer:
               'Hay dos actualizaciones distintas y el flujo las mantiene separadas. El harness del repositorio — `AGENTS.md`, `docs/`, el kit `.agents/` — se reconcilia reejecutando la incorporación, que rellena solo lo que falta o está desactualizado. La skill en sí avanza con `/dwp-upgrade`: una comprobación de solo lectura de la última versión publicada, la instalación del tag exacto que aceptaste, verificada, y después la incorporación de nuevo como una pasada fresca. El flujo está sujeto a consentimiento explícito en todo momento, las adaptaciones locales se comparan y se preservan en lugar de sobrescribirse, y `.dwp/` nunca se migra — los planes existentes conservan su forma registrada y siguen ejecutándose.',
             linkLabel: 'El endpoint de adopción',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1354,7 +1302,7 @@ export const es: SiteTranslations = {
     ctaBody:
       'Lee la metodología y la especificación, apunta un agente al endpoint de init y verifica la instalación antes de ejecutarla.',
     ctaPrimary: 'Leer la metodología',
-    ctaSecondary: 'Adopción (init)',
+    ctaSecondary: 'Inicio rápido',
   },
 
   developersPage: {

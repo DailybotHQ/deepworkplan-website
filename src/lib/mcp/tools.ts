@@ -97,9 +97,10 @@ export const SITE_SECTIONS: {
       'Answers to the questions people ask: what DWP does, how gates and resumption work, how it compares, how to adopt it.',
   },
   {
-    name: 'Init / Adoption',
+    name: 'Init / Adoption prompt',
     path: '/init',
-    description: 'Canonical adoption endpoint — make any repository AI-first.',
+    description:
+      'The standalone, English-only, self-contained onboarding prompt (fetch via read_page, which resolves this to /init.md) — make any repository AI-first. The human-readable equivalent is /quickstart.',
   },
   {
     name: 'Developers',

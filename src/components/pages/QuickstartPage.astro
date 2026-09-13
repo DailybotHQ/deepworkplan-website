@@ -4,7 +4,13 @@ import Lead from '@/components/editorial/Lead.astro';
 import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { getUrlPrefix, type Language } from '@/lib/i18n';
+import {
+  CANONICAL_INIT_MD_PATH,
+  getCanonicalInitMdUrl,
+  getUrlPrefix,
+  type Language,
+} from '@/lib/i18n';
+import { getCanonicalInitMarkdown } from '@/lib/init-prompt';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -16,6 +22,16 @@ const t = getTranslations(lang);
 const q = t.quickstartPage;
 const prefix = getUrlPrefix(lang);
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+// The bootstrap endpoint is always the root, English /init.md (canonical
+// first-class agent content) — never a localized variant.
+const mdHref = CANONICAL_INIT_MD_PATH;
+const mdUrl = getCanonicalInitMdUrl(siteUrl || undefined);
+// "Copy init.md" copies the full canonical ENGLISH init.md (what /init.md
+// serves), regardless of page language. Button labels are shared with the home
+// hero so the call-to-action reads identically everywhere.
+const initMarkdown = await getCanonicalInitMarkdown();
+const copyLabel = t.home.hero.copyLabel;
+const copiedLabel = t.home.hero.copiedLabel;
 
 const howToSchema = {
   '@context': 'https://schema.org',
@@ -46,6 +62,65 @@ const howToSchema = {
       </h1>
       <Lead class="mt-6">{q.intro}</Lead>
     </header>
+
+    <Rule class="my-12" />
+
+    {/* Give this to your agent — prominent call-out */}
+    <section
+      class="max-w-3xl border-l-2 pl-6"
+      style="border-color: var(--color-secondary);"
+    >
+      <Kicker>{q.handoffTitle}</Kicker>
+      <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-muted);">
+        {q.handoffBody}
+      </p>
+      <div
+        class="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-sm border px-4 py-3"
+        style="border-color: var(--color-secondary);"
+      >
+        <a
+          href={mdHref}
+          class="min-w-0 break-all font-mono text-sm underline underline-offset-4 transition hover:opacity-80"
+          style="color: var(--color-secondary);">{mdUrl}</a
+        >
+        <button
+          type="button"
+          class="copy-btn kicker inline-flex cursor-pointer items-center gap-1.5 rounded-sm px-2 py-1 transition enabled:hover:opacity-80 disabled:cursor-default disabled:opacity-70"
+          style="color: var(--color-secondary);"
+          data-copy={initMarkdown}
+          data-label={copyLabel}
+          data-copied={copiedLabel}
+          data-lang={lang}
+          aria-label={copyLabel}
+        >
+          {copyLabel}
+        </button>
+      </div>
+      <p class="mt-4">
+        <a
+          href={mdHref}
+          class="font-mono text-sm underline underline-offset-4 hover:opacity-80"
+          style="color: var(--color-secondary);"
+        >
+          {q.handoffMdLabel} → {mdHref}
+        </a>
+      </p>
+    </section>
+
+    <Rule class="my-12" />
+
+    <section class="max-w-3xl">
+      <Kicker>{q.whatTitle}</Kicker>
+      <div class="mt-6 space-y-5">
+        {
+          q.whatBody.map((paragraph) => (
+            <p class="text-lg leading-relaxed" style="color: var(--color-muted);">
+              {paragraph}
+            </p>
+          ))
+        }
+      </div>
+    </section>
 
     <Rule class="my-12" />
 
@@ -131,3 +206,42 @@ const howToSchema = {
     </section>
   </article>
 </MainLayout>
+
+<script>
+  import { EVENTS, trackEvent } from '@/lib/analytics';
+
+  const COPY_FEEDBACK_MS = 2000;
+
+  // Progressive enhancement: copy the full init.md prompt to the clipboard.
+  document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
+    let busy = false;
+
+    btn.addEventListener('click', async () => {
+      if (busy || btn.disabled) return;
+
+      const text = btn.dataset.copy ?? '';
+      const label = btn.dataset.label ?? 'Copy init.md';
+      const copied = btn.dataset.copied ?? 'Copied';
+
+      busy = true;
+      try {
+        await navigator.clipboard.writeText(text);
+        trackEvent(EVENTS.COPY_INIT, {
+          source: 'quickstart_page',
+          lang: btn.dataset.lang ?? 'en',
+        });
+        btn.disabled = true;
+        btn.textContent = copied;
+        btn.setAttribute('aria-label', copied);
+        window.setTimeout(() => {
+          btn.disabled = false;
+          btn.textContent = label;
+          btn.setAttribute('aria-label', label);
+          busy = false;
+        }, COPY_FEEDBACK_MS);
+      } catch {
+        busy = false;
+      }
+    });
+  });
+</script>

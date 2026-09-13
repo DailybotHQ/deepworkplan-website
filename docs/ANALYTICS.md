@@ -329,8 +329,8 @@ do not run JavaScript). Keep this table in sync with `src/lib/analytics.ts` and
 | `language_switch` | Language toggle | `{ from, to }` | Header.svelte, MobileMenu.svelte |
 | `mobile_menu_toggle` | Hamburger menu open/close | `{ action }` | Header.svelte |
 | `theme_toggle` | Dark/light mode switch | `{ theme }` | Header.svelte |
-| `copy_init` | Copy the `init.md` prompt | `{ source: 'home' \| 'init_page', lang }` | Hero.astro, InitPage.astro |
-| `cta_click` | Home hero call-to-action click | `{ target: 'init' \| 'methodology' \| 'spec' \| 'init_md', source: 'hero' }` | Hero.astro |
+| `copy_init` | Copy the `init.md` prompt | `{ source: 'home' \| 'quickstart_page', lang }` | Hero.astro, QuickstartPage.astro |
+| `cta_click` | Home hero call-to-action click | `{ target: 'quickstart' \| 'methodology' \| 'spec' \| 'init_md', source: 'hero' }` | Hero.astro |
 | `contact_form_submit` | Contact form submitted | `{ reason }` | ContactForm.svelte |
 | `contact_form_error` | Form validation failure | `{ field_count }` | ContactForm.svelte |
 | `outbound_click` | External link click | `{ url }` | MainLayout.astro (delegated listener) |
@@ -365,8 +365,8 @@ do not run JavaScript). Keep this table in sync with `src/lib/analytics.ts` and
 | `nav_click` | Click any nav link in header | `item: "methodology"`, `source: "desktop"` |
 | `language_switch` | Click language toggle | `from: "en"`, `to: "es"` |
 | `theme_toggle` | Click the hurricane-lamp toggle | `theme: "dark"` or `"light"` |
-| `copy_init` | Click "Copy init.md" (home or /init) | `source: "home"`, `lang: "en"` |
-| `cta_click` | Click a hero CTA (init/methodology/spec) | `target: "init"`, `source: "hero"` |
+| `copy_init` | Click "Copy init.md" (home or /quickstart) | `source: "home"`, `lang: "en"` |
+| `cta_click` | Click a hero CTA (quickstart/methodology/spec) | `target: "quickstart"`, `source: "hero"` |
 | `contact_form_submit` | Submit the contact form | `reason: "project"` |
 | `scroll_depth` | Scroll to bottom of a long page | `depth: "100"` |
 | `markdown_request` (server) | `curl -H 'Accept: text/markdown' <url>/methodology` | `source: "content_negotiation"` |

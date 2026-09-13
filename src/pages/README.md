@@ -9,8 +9,7 @@ pages/
 ├── index.astro              # Homepage (/)
 ├── about.astro              # About page (/about)
 ├── contact.astro            # Contact page (/contact)
-├── quickstart/index.astro   # Quickstart (/quickstart)
-├── init/index.astro         # Canonical adoption endpoint (/init)
+├── quickstart/index.astro   # Canonical adoption page (/quickstart) — /init, /setup, /onboarding redirect here
 ├── [page].md.ts             # Agent-friendly Markdown for static pages (/{page}.md)
 ├── methodology/
 │   ├── index.astro          # Methodology reader index (/methodology)
@@ -40,8 +39,7 @@ pages/
 | `index.astro` | `/` | English homepage |
 | `about.astro` | `/about` | About page |
 | `contact.astro` | `/contact` | Contact page |
-| `quickstart/index.astro` | `/quickstart` | Quickstart guide |
-| `init/index.astro` | `/init` | Canonical adoption endpoint |
+| `quickstart/index.astro` | `/quickstart` | Canonical adoption page (`/init`, `/setup`, `/onboarding` redirect here) |
 | `[page].md.ts` | `/{page}.md` | Agent-friendly Markdown for static pages |
 | `methodology/index.astro` | `/methodology` | Methodology reader index |
 | `methodology/[slug].astro` | `/methodology/{slug}` | Methodology chapter |

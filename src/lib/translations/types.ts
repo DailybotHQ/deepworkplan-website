@@ -476,28 +476,9 @@ export interface SiteTranslations {
     backToGallery: string;
   };
 
-  // Deep Work Plan — Quickstart page
+  // Deep Work Plan — Quickstart page (the single canonical onboarding page;
+  // /init, /setup and /onboarding all redirect here)
   quickstartPage: {
-    meta: { title: string; description: string };
-    eyebrow: string;
-    title: string;
-    intro: string;
-    sequenceTitle: string;
-    codeLabel: string;
-    orLabel: string;
-    steps: {
-      title: string;
-      description: string;
-      commands?: string[];
-    }[];
-    outcomeTitle: string;
-    outcome: string;
-    nextStepsTitle: string;
-    nextSteps: { label: string; href: string }[];
-  };
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
     meta: { title: string; description: string };
     eyebrow: string;
     title: string;

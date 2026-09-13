@@ -110,7 +110,7 @@ export const ko: SiteTranslations = {
         'init.md 프롬프트를 복사하여 코딩 에이전트 — Claude Code, Cursor, Codex, 또는 다른 에이전트 — 에 붙여넣어 어떤 리포지토리든 AI-first로 만드세요.',
       copyLabel: 'init.md 복사',
       copiedLabel: '복사됨',
-      viewInitCta: '전체 /init 프롬프트 보기',
+      viewInitCta: '빠른 시작 보기',
       pullQuote:
         'Deep Work Plan은 리포지토리 자체가 하니스(harness)가 되는 스펙 주도 개발입니다.',
       primaryCta: '방법론 읽기',
@@ -670,62 +670,9 @@ export const ko: SiteTranslations = {
     meta: {
       title: '빠른 시작 — Deep Work Plan',
       description:
-        '스킬을 설치하고 리포지토리를 온보딩한 뒤 어떤 에이전트로든 계획하고 실행하세요 — 리포지토리를 스펙 주도이며 에이전트가 조종 가능하게 만드는 단계.',
-    },
-    eyebrow: '빠른 시작',
-    title: '몇 분 만에 시작',
-    intro:
-      '스킬을 설치하고 리포지토리를 온보딩한 뒤 어떤 에이전트로든 계획하고 실행하세요 — 리포지토리를 스펙 주도이며 에이전트가 조종 가능하게 만드는 단계.',
-    sequenceTitle: '채택 경로',
-    codeLabel: '터미널',
-    orLabel: '또는',
-    steps: [
-      {
-        title: 'Deep Work Plan 스킬 설치',
-        description:
-          '리포지토리에 스킬을 추가합니다 — 라우터와 아홉 개의 하위 스킬(create, execute, refine, resume, status, verify, onboard, author, upgrade). 가장 빠른 경로로 Skills CLI를 사용하거나, 리포지토리를 클론한 뒤 git과 셸을 사용할 수 있는 곳에서 setup을 실행하세요.',
-        commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
-        ],
-      },
-      {
-        title: '리포지토리 온보딩',
-        description:
-          'onboard 하위 스킬을 실행하고 에이전트가 실제 리포지토리를 추론하게 하세요. AGENTS.md, docs/ 지식 베이스, 모듈별 문서, 교차 에이전트용 .agents/ 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)을 생성하고, 얇은 dwp-* 명령을 연결하며, gitignore된 .dwp/를 구성합니다.',
-        commands: ['/deepworkplan-onboard'],
-      },
-      {
-        title: '키트 발전과 애드온 채택',
-        description:
-          '/skill-create와 /agent-create(author 하위 스킬)로 스택에 맞는 스킬, 에이전트, 명령을 키우세요. 온보딩은 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고(그 CI 게이트는 선택으로 남습니다), 네 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system — 을 제안하며, 맞을 때만 채택하면 됩니다.',
-      },
-      {
-        title: '계획하고 실행',
-        description:
-          'Deep Work Plan을 생성하고 작업 단위로 실행하면서, 각 게이트를 검증하고 세션을 넘어 재개하세요 — 리포지토리를 자체 스펙에 대비해 조종합니다.',
-        commands: ['/dwp-create <goal>', '/dwp-execute'],
-      },
-    ],
-    outcomeTitle: '결과',
-    outcome:
-      '리포지토리가 스펙 주도이며 에이전트가 조종 가능해집니다. 계획이 견고한 단일 진실 공급원이 되고, 리포지토리 자체가 어떤 에이전트든 실행하는 하니스가 됩니다.',
-    nextStepsTitle: '다음 단계',
-    nextSteps: [
-      { label: '방법론 읽기', href: '/methodology' },
-      { label: '키트 둘러보기', href: '/kit' },
-      { label: '예시 보기', href: '/examples' },
-    ],
-  },
-
-  // Deep Work Plan — Init / adoption endpoint
-  initPage: {
-    meta: {
-      title: 'Init — 리포지토리를 AI-first로 — Deep Work Plan',
-      description:
         '어떤 리포지토리에든 Deep Work Plan 방법론을 채택하세요. 스킬을 설치하고, 에이전트 온보딩을 실행한 뒤, 어떤 AI 코딩 에이전트로든 계획하고 실행하세요.',
     },
-    eyebrow: '채택',
+    eyebrow: '빠른 시작',
     title: '이 리포지토리를 AI-first로 만들기',
     intro:
       '어떤 리포지토리든 스펙 주도이며 에이전트가 준비된 코드베이스로 바꾸는 단일 엔드포인트. 스킬을 설치하고, 에이전트가 리포지토리를 온보딩하게 한 뒤, 어떤 코딩 에이전트로든 구조화된 작업을 계획하고 실행하세요.',
@@ -735,13 +682,13 @@ export const ko: SiteTranslations = {
     handoffInstruction:
       'https://deepworkplan.com/init.md 의 지침을 읽고 따라 이 리포지토리를 AI-first로 만드세요.',
     handoffMdLabel: '자체 완결형 에이전트 프롬프트',
-    codeLabel: 'agent',
+    codeLabel: '터미널',
     whatTitle: '이것이 하는 일',
     whatBody: [
       '채택은 리포지토리를 두 가지 견고한 방식으로 바꿉니다 — 방법론의 두 기둥입니다.',
       '첫째, 리포지토리가 스펙 주도가 됩니다. 작업이 즉흥적인 프롬프트가 아니라 작성된 계획과 스펙에서 시작됩니다. 둘째, 리포지토리 자체가 에이전트 하니스가 됩니다 — AGENTS.md, docs/ 지식 베이스, 모듈별 문서, .agents/ 스킬 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)이 모든 에이전트에 필요한 컨텍스트와 명령을 제공합니다.',
     ],
-    sequenceTitle: '채택 순서',
+    sequenceTitle: '채택 경로',
     orLabel: '또는',
     steps: [
       {
@@ -777,6 +724,7 @@ export const ko: SiteTranslations = {
         title: '계획하고 실행',
         description:
           '/dwp-create로 Deep Work Plan을 생성하고 /dwp-execute로 실행한 뒤, 작업이 진행됨에 따라 /dwp-status, /dwp-refine, /dwp-resume, /dwp-verify를 사용하세요. 각 계획은 번호가 매겨진 작업, 검증 게이트, 완료 프로토콜을 담으며 — 단 하나의 필수 Final Review(보안 패스, 최종 상태 검증, 스킬 결정 조정)로 마무리됩니다. Executive Report는 요청 시 제공됩니다.',
+        commands: ['/dwp-create <goal>', '/dwp-execute'],
       },
       {
         title: '적합성 검증',
@@ -788,12 +736,12 @@ export const ko: SiteTranslations = {
     outcomeTitle: '결과',
     outcome:
       '리포지토리가 스펙 주도가 되고 리포지토리 자체가 에이전트 하니스가 됩니다 — 컨텍스트와 명령이 코드와 함께 움직입니다.',
-    nextStepsTitle: '다음에 읽을 것',
+    nextStepsTitle: '다음 단계',
     nextSteps: [
-      { label: '빠른 시작', href: '/quickstart' },
-      { label: '방법론', href: '/methodology' },
+      { label: '방법론 읽기', href: '/methodology' },
       { label: '스펙', href: '/spec' },
-      { label: '키트', href: '/kit' },
+      { label: '키트 둘러보기', href: '/kit' },
+      { label: '예시 보기', href: '/examples' },
     ],
   },
 
@@ -867,7 +815,7 @@ export const ko: SiteTranslations = {
             answer:
               '에이전트 스킬은 에이전트가 프로젝트 또는 사용자 스킬을 로드하는 위치라면 어디든 설치됩니다. 그런 다음 온보딩이 리포지토리 자체를 적응시킵니다: `AGENTS.md`, `docs/`, `.agents/`, 그리고 gitignore된 `.dwp/` 작업공간을 생성하거나 조정합니다. 스킬은 에이전트에게 방법론을 가르치고, 리포지토리는 다른 에이전트가 이어가는 데 필요한 컨텍스트, 키트, 계획 증거를 보관합니다.',
             linkLabel: '채택 흐름 보기',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'requires-git',
@@ -1030,7 +978,7 @@ export const ko: SiteTranslations = {
             answer:
               '온보딩은 비파괴적입니다: 기존의 `AGENTS.md`, `docs/`, `.agents/`, `CLAUDE.md`를 감지하고 덮어쓰는 대신 조정하며, 무언가를 교체하기 전에 묻습니다. 실제 명령을 담은 `AGENTS.md` 인덱스, 이유가 담긴 `docs/` 트리, 모듈별 문서, 얇은 `dwp-*` 명령의 `.agents/` 키트, gitignore된 `.dwp/` 출력 영역, 검증된 테스팅 맵, 그리고 필수 로컬 코드 리뷰(AI Diff Reviewer 스킬 더하기 리포지토리 맞춤 리뷰 확장)를 작성합니다. 그런 다음 자기 점검과 적합성 검사기를 실행해 무엇이 만들어졌는지 볼 수 있게 합니다. 이전 표준에서 온보딩된 리포지토리는 빠지거나 오래된 부분만 조정하는 표적 harness 업그레이드를 받습니다.',
             linkLabel: '채택 엔드포인트',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'upgrade',
@@ -1039,7 +987,7 @@ export const ko: SiteTranslations = {
             answer:
               '서로 다른 두 가지 업그레이드가 있고, 흐름은 이들을 분리합니다. 리포지토리 harness — `AGENTS.md`, `docs/`, `.agents/` 키트 — 는 온보딩을 다시 실행해서 조정되며, 빠지거나 오래된 부분만 채웁니다. 스킬 자체는 `/dwp-upgrade` 로 움직입니다: 최신 공개 릴리스를 읽기 전용으로 확인하고, 여러분이 받아들인 정확한 태그를 검증해서 설치한 뒤, 온보딩을 처음부터 새로 실행합니다. 흐름 전체가 명시적 동의로 진행되고, 로컬 적응은 덮어쓰지 않고 비교해 보존되며, `.dwp/` 는 결코 이전되지 않습니다 — 기존 계획은 기록된 형태를 유지한 채 계속 실행됩니다.',
             linkLabel: '채택 엔드포인트',
-            linkPath: '/init',
+            linkPath: '/quickstart',
           },
           {
             id: 'core-and-addons',
@@ -1353,7 +1301,7 @@ export const ko: SiteTranslations = {
     ctaBody:
       '방법론과 스펙을 읽고, 에이전트를 init 엔드포인트로 향하게 한 뒤, 실행하기 전에 설치를 검증하세요.',
     ctaPrimary: '방법론 읽기',
-    ctaSecondary: '채택(Init)',
+    ctaSecondary: '빠른 시작',
   },
 
   developersPage: {
