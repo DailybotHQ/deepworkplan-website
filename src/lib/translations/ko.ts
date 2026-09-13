@@ -126,7 +126,7 @@ export const ko: SiteTranslations = {
       answer:
         'Deep Work Plan은 스펙 주도 개발로 답합니다. 지속되는 계획, 원자적 작업, 그리고 에이전트가 통과해야 하는 검증 게이트. 완료는 느낌이 아니라 — 검증 가능하고 리뷰 가능한 증거가 됩니다.',
       efficiency:
-        '그리고 컨텍스트는 에이전트에게 가장 희소한 자원입니다. 그래서 하네스는 토큰 효율을 위해 설계되었습니다: 지시사항은 점진적으로 로드하고, 검증은 변경된 부분만 다루며, 학습은 작업 자리에서 이루어집니다 — 긴 작업도 경제적으로 지속됩니다. 계획 자체도 같은 원리를 따릅니다: 범위가 한정된 수정에는 Lite 계획을, 몇 시간에 걸친 작업에는 Full 계획을 — 형식은 항상 작업의 범위를 따르며, 그 반대가 아닙니다.',
+        '그리고 컨텍스트는 에이전트에게 가장 희소한 자원입니다. 그래서 하네스는 자기 자신의 지시사항 부하를 작고 감사 가능하게 유지하도록 설계되었습니다: 지시사항은 점진적으로 로드하고, 검증은 변경된 부분만 다루며, 학습은 작업 자리에서 이루어집니다. 플로우별 부하는 바이트로 측정되어 매 릴리스마다 공개됩니다 — 최신 릴리스에서는 실행 플로우가 45.7%, 재개 플로우가 67.5% 줄었습니다. 계획 자체도 같은 원리를 따릅니다: 범위가 한정된 수정에는 Lite 계획을, 몇 시간에 걸친 작업에는 Full 계획을 — 형식은 항상 작업의 범위를 따르며, 그 반대가 아닙니다.',
       illustrationAlt:
         '한쪽은 안개 속 암초 옆을 표류하는 배, 다른 쪽은 같은 배가 그려진 항로를 따라 항구 등불로 나아가는 모습의 판화 디프틱.',
     },
@@ -157,7 +157,7 @@ export const ko: SiteTranslations = {
       },
       act5: {
         kicker: '방법론 · 제5막',
-        lead: '컨텍스트는 에이전트에게 가장 희소한 자원입니다. 하네스는 점진적으로 로드하고, 변경된 부분만 검증하며, 작업마다 학습합니다 — 계획이 스스로 비용을 회수합니다.',
+        lead: '컨텍스트는 에이전트에게 가장 희소한 자원입니다. 하네스는 점진적으로 로드하고, 변경된 부분만 검증하며, 작업마다 학습합니다 — 모든 플로우의 지시사항 부하는 측정되어 공개되고, 릴리스마다 갱신됩니다.',
         deepLinkLabel: '방법론 읽기',
         deepLinkHref: '/methodology',
       },
@@ -437,7 +437,7 @@ export const ko: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: '방법론 소개',
+    title: '방법론 소개 — Deep Work Plan',
     subtitle: '오픈 방법론 · MIT 라이선스',
     description:
       'Deep Work Plan은 AI 코딩 에이전트와 함께하는 진지한 엔지니어링 작업을 위한 오픈, 프레임워크 비종속 방법론입니다. 어디서 왔고 누가 관리하는지 소개합니다.',
@@ -488,7 +488,7 @@ export const ko: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: '커뮤니티 & 문의',
+    title: '커뮤니티 & 문의 — Deep Work Plan',
     subtitle: '오픈소스 · 커뮤니티 주도',
     description:
       'Deep Work Plan은 공개적으로 만들어집니다. 소스를 찾고, 이슈를 열고, 아래 채널로 대화에 참여하세요 — 기여를 환영합니다.',
@@ -558,7 +558,7 @@ export const ko: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: '페이지를 찾을 수 없습니다',
+    title: '페이지를 찾을 수 없습니다 — Deep Work Plan',
     description:
       '찾으시는 페이지가 존재하지 않거나 이동되었습니다. 방법론을 살펴보거나 홈페이지로 돌아가 계속 둘러보세요.',
     heading: '페이지를 찾을 수 없습니다',
@@ -721,7 +721,7 @@ export const ko: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — 리포지토리를 AI-first로',
+      title: 'Init — 리포지토리를 AI-first로 — Deep Work Plan',
       description:
         '어떤 리포지토리에든 Deep Work Plan 방법론을 채택하세요. 스킬을 설치하고, 에이전트 온보딩을 실행한 뒤, 어떤 AI 코딩 에이전트로든 계획하고 실행하세요.',
     },
@@ -1062,7 +1062,7 @@ export const ko: SiteTranslations = {
             id: 'cost',
             question: '비용은 얼마인가요? 효율은 어떻게 측정되나요?',
             answer:
-              '방법론과 스킬은 MIT 라이선스이며 무료입니다; 핵심 플로우에는 서비스도, API 키도, 텔레메트리도 없습니다. 효율은 각 플로우가 로드하는 지시사항 바이트 수로 보고됩니다. 스킬과 함께 커밋된 스크립트가 측정하고 릴리스 베이스라인마다 다시 측정하여 평가 원장에 공개하며, 증가는 감소만큼 평범하게 보고됩니다. 바이트 목록은 그런 것을 입증하지 못하므로 토큰 백분율이나 비용 절감으로 보고하지 않습니다; 결과를 제대로 측정하기 위한 사전 등록된 공개 평가가 계획되어 있습니다.',
+              '방법론과 스킬은 MIT 라이선스이며 무료입니다; 핵심 플로우에는 서비스도, API 키도, 텔레메트리도 없습니다. 효율은 각 플로우가 로드하는 지시사항 바이트 수로 보고됩니다. 스킬과 함께 커밋된 스크립트가 측정하고 릴리스 베이스라인마다 다시 측정하여 평가 원장에 공개하며, 증가는 감소만큼 평범하게 보고됩니다. 바이트 목록은 그런 것을 입증하지 못하므로 토큰 백분율이나 비용 절감으로 보고하지 않습니다. 이제 동결된 프로토콜 아래에서 새로운 에이전트 대상의 공개 평가가 이미 실행되었습니다: 동일한 두 기능을 하네스 없이, 이전 메이저 버전으로, 현재 버전으로 — 각각 깨끗한 클론에서 구축했습니다. 그 결과, 하네스가 있는 트리에서 작업한 에이전트는 두 작업 모두에서 더 적은 바이트를 읽었고, 현재 버전의 기능 세션은 두 작업 모두에서 이전 메이저 버전보다 적은 모델 입력과 출력을 소비했습니다 — 하네스가 보고한 값이며 단일 워크로드 기준입니다. 이 평가는 정직한 한계도 밝혔습니다: 온보딩은 플로우가 사용될 때에만 회수되는 일회성 비용이고, 워크로드별 토큰 순 방향은 섞여 있었으며, 경과 시간 우위는 주장하지 않고, 새로운 에이전트는 스스로 플로우에 들어가지 않습니다 — 플로우는 사용자가, 또는 이를 아는 에이전트가 호출하는 명령입니다.',
             linkLabel: '신뢰와 공개',
             linkPath: '/trust',
           },
@@ -1286,7 +1286,7 @@ export const ko: SiteTranslations = {
     },
     honestLimits: {
       title: '정직한 한계',
-      body: 'Deep Work Plan에는 살아있는 스펙이나 델타 스펙 메커니즘이 없습니다; 그 부분에서는 OpenSpec과 유사한 도구가 더 강합니다. 방법론의 독립적인 벤치마크는 아직 존재하지 않으며, 사전 등록된 공개 평가가 계획되어 있습니다. 지시사항 로드 원장은 로드된 바이트를 측정하며, 토큰, 비용, 결과가 아닙니다. DWP는 의도적으로 저장소 범위로 한정되어 있습니다. 프로젝트 간 메모리 시스템도, 역할 기반 에이전트 프레임워크도, IDE도 아니므로 이러한 축에서는 경쟁하지 않습니다 — 그런 능력이 필요한 작업에는 이를 제공하는 도구와 함께 사용하세요.',
+      body: 'Deep Work Plan에는 살아있는 스펙이나 델타 스펙 메커니즘이 없습니다; 그 부분에서는 OpenSpec과 유사한 도구가 더 강합니다. 방법론의 독립적인 벤치마크는 아직 존재하지 않습니다. 다만 자체적으로 새로운 에이전트 대상 평가가 동결된 프로토콜 아래 이미 실행되었습니다 — 규모는 작습니다: 단일 워크로드, 구성별 두 기능, 한 대의 머신 — 그 결과는 양방향으로 공개됩니다: 하네스가 있는 트리의 에이전트는 두 작업 모두에서 바이트를 덜 읽었고, 현재 버전의 세션은 하네스가 보고한 모델 입력과 출력을 이전 메이저 버전보다 덜 소비했습니다. 반면 워크로드별 토큰 순 방향은 섞여 있었고 경과 시간 우위는 주장되지 않습니다. 지시사항 로드 원장은 로드된 바이트를 측정하며, 토큰, 비용, 결과가 아닙니다. DWP는 의도적으로 저장소 범위로 한정되어 있습니다. 프로젝트 간 메모리 시스템도, 역할 기반 에이전트 프레임워크도, IDE도 아니므로 이러한 축에서는 경쟁하지 않습니다 — 그런 능력이 필요한 작업에는 이를 제공하는 도구와 함께 사용하세요.',
     },
     correction: {
       title: '정확성을 유지하도록 도와주세요',
@@ -1298,7 +1298,7 @@ export const ko: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: '신뢰와 보안',
+      title: '신뢰와 보안 — Deep Work Plan',
       description:
         'Deep Work Plan을 안심하고 채택할 수 있는 이유: 오픈 소스이자 MIT 라이선스, 네트워크 호출이나 텔레메트리 없는 Markdown-first, 비파괴적 설계, 검증 가능한 설치, 그리고 명확한 취약점 공개 정책.',
     },
@@ -1360,7 +1360,7 @@ export const ko: SiteTranslations = {
     meta: {
       title: '개발자 — Deep Work Plan 에이전트 API, MCP 서버 및 문서',
       description:
-        'Deep Work Plan의 에이전트 표면: OpenAPI 스펙을 갖춘 읽기 전용 무인증 API, /api/mcp의 MCP 서버, 17개 언어의 페이지별 Markdown, npx skills 설치 CLI.',
+        'Deep Work Plan의 에이전트 표면: 읽기 전용이며 인증 없는 버전 관리 API — OpenAPI 스펙, MCP 서버, 17개 언어의 페이지별 Markdown, 공식 CLI.',
     },
     eyebrow: '에이전트 및 개발자 표면',
     title: '개발자와 AI 에이전트를 위한 Deep Work Plan',
@@ -1422,6 +1422,29 @@ export const ko: SiteTranslations = {
         description: '스펙과 이 포털로 연결되는 정적 헬스 마커입니다.',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'v1 제품군의 버전 관리 카탈로그: 엔드포인트 경로, 사이트 버전, 스펙 링크.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          '타입이 지정된 JSON 사이트맵 — 각 섹션의 이름, 경로, 설명.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          '모든 언어의 Markdown 엔드포인트를 언어 코드별로 묶은 목록.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description: '버전 관리 상태 표시 — /api/health.json의 v1 미러.',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1434,6 +1457,12 @@ export const ko: SiteTranslations = {
           'ARD 역량 매니페스트 — robots.txt에 선언된 agentmap입니다.',
       },
     ],
+    versioningTitle: '버전 관리와 지원 중단',
+    versioningBody:
+      '버전 관리 JSON 제품군은 /api/v1/ 아래에 있습니다(index, sections, pages, health). 버전이 없는 정규 경로(/llms.txt, /{page}.md, /api/mcp)도 같은 v1 계약에 속합니다. 호환성을 깨는 변경은 새로운 /api/v{N+1}/ 제품군으로만 출시되며 v1 내부에서는 절대 이루어지지 않습니다. 엔드포인트가 지원 중단되면 응답은 Deprecation: true와 제거 최소 180일 전의 Sunset 날짜를 담고, Link 헤더가 후속 경로를 가리킵니다.',
+    rateLimitsTitle: '요청 제한',
+    rateLimitsBody:
+      '/api/* 응답은 RFC 9331 요청 제한 헤더(RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset, RateLimit-Policy)를 담아 에이전트가 실시간으로 스스로 속도를 조절할 수 있으며, 429 응답에는 Retry-After가 추가됩니다. 적용은 엣지에서 최선(best-effort)으로 이루어지고(방문자당 60초에 120 요청), 접근은 익명으로 유지됩니다: 키도, 등록도, 등급도 없습니다.',
     mcpTitle: 'MCP 서버',
     mcpIntro:
       'Streamable HTTP 위의 스테이트리스 Model Context Protocol 서버입니다. 세 가지 읽기 전용 도구: get_init_prompt, list_site_sections, read_page. 프로토콜 버전 2025-03-26과 2025-06-18을 지원하며 세션은 필요하지 않습니다.',
@@ -1449,9 +1478,9 @@ export const ko: SiteTranslations = {
     cliTitle: '키트 설치',
     cliIntro:
       'Deep Work Plan 스킬의 공식 설치 경로입니다 — /init 엔드포인트가 에이전트에게 주는 것과 같은 명령입니다. skills 호환 코딩 에이전트(Claude Code, Cursor, Codex, Gemini 등)라면 무엇이든 작동합니다.',
-    cliCodeLabel: '터미널 — skills CLI',
+    cliCodeLabel: '터미널 — skills CLI와 공식 CLI',
     cliNote:
-      '스킬은 리포지토리 내 .agents/skills/deepworkplan/에 벤더되므로, 리포지토리를 다루는 모든 에이전트가 같은 방법론을 공유합니다.',
+      '스킬은 리포지토리 내 .agents/skills/deepworkplan/에 벤더되므로, 리포지토리를 다루는 모든 에이전트가 같은 방법론을 공유합니다. 공식 deepworkplan CLI(동일한 API 위의 의존성 없는 클라이언트 — init, sections, read, open, mcp)는 npm 발행을 준비해 두었고, 출시 전까지 사이트 리포지토리의 cli/ 디렉터리에 있습니다.',
     resourcesTitle: '기계 판독 가능 리소스',
     resources: [
       { label: 'OpenAPI 스펙 (/openapi.json)', href: '/openapi.json' },

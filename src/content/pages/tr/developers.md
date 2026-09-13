@@ -1,6 +1,6 @@
 ---
 title: "Geliştiriciler — Deep Work Plan ajan API'si"
-description: "deepworkplan.com'un geliştiriciler ve yapay zeka ajanları için ajan yüzeyi: OpenAPI spesifikasyonuyla tanımlanmış salt okunur, kimlik doğrulamasız bir API, /api/mcp üzerinde durumsuz bir MCP sunucusu, 17 dilde sayfa başına Markdown ve npx skills kurulum CLI'sı."
+description: "Deep Work Plan'ın ajan yüzeyi: sürümlü, salt okunur ve kimlik doğrulamasız bir API — OpenAPI, MCP sunucusu, 17 dilde sayfa başına Markdown ve resmî bir CLI."
 ---
 
 ## Tasarım gereği kimlik doğrulamasız
@@ -21,10 +21,22 @@ description: "deepworkplan.com'un geliştiriciler ve yapay zeka ajanları için 
 | GET | `/init.md` | Kanonik DWP benimseme istemi. |
 | GET | `/{page}.md` | Herhangi bir sayfa, kaynak Markdown olarak — 17 dilin tümünde. |
 | GET | `/api/health.json` | Statik sağlık işareti. |
+| GET | `/api/v1/index.json` | v1 ailesinin sürümlü kataloğu: uç nokta yolları, site sürümü ve belirtim bağlantıları. |
+| GET | `/api/v1/sections.json` | Site haritası tipli JSON olarak — her bölüm için ad, yol ve açıklama. |
+| GET | `/api/v1/pages.json` | Her dildeki tüm Markdown uç noktaları, dil koduna göre gruplanmış. |
+| GET | `/api/v1/health.json` | Sürümlü sağlık göstergesi — `/api/health.json`'un v1 aynası. |
 | POST | `/api/mcp` | MCP sunucusu (Streamable HTTP, durumsuz). |
 | GET | `/.well-known/ai-catalog.json` | ARD yetenek manifestosu (agentmap). |
 
 Bilinmeyen `/api/*` yolları, çözüm ipucu içeren yapılandırılmış bir JSON hatası döndürür; asla bir HTML hata sayfası döndürmez.
+
+## Sürümleme ve kullanımdan kaldırma
+
+Sürümlü JSON ailesi `/api/v1/` altında yaşar — index, sections, pages ve health — ve sürümsüz kanonik yollar (`/llms.txt`, `/{page}.md`, `/api/mcp`) aynı v1 sözleşmesine aittir. Yıkıcı değişiklikler yalnızca yeni bir `/api/v{N+1}/` ailesinde yayımlanır, asla v1 içinde olmaz. Bir uç nokta kullanımdan kaldırıldığında yanıtları `Deprecation: true` taşır ve kaldırılmadan en az 180 gün önce bir `Sunset` tarihi içerir; bir `Link` başlığı halefi gösterir.
+
+## İstek limitleri
+
+`/api/*` yanıtları RFC 9331 istek limiti başlıklarını taşır — `RateLimit-Limit`, `RateLimit-Remaining`, `RateLimit-Reset` ve `RateLimit-Policy` — böylece ajanlar kendilerini gerçek zamanlı yavaşlatabilir; bir `429` yanıtı `Retry-After` ekler. Uygulama uçta elden geldiğince (best-effort) yapılır (ziyaretçi başına 60 saniyede 120 istek) ve erişim anonim kalır: anahtar yok, kayıt yok, kademe yok.
 
 ## MCP sunucusu
 
@@ -70,10 +82,16 @@ curl -s https://deepworkplan.com/es/developers.md
 Deep Work Plan skill'i için resmî kurulum yolu — /init uç noktasının ajanlara verdiği komutla aynıdır. Skills uyumlu herhangi bir kodlama ajanıyla çalışır (Claude Code, Cursor, Codex, Gemini ve diğerleri):
 
 ```bash
+# 1. Install the DWP skill — same command the /init endpoint gives agents
 npx skills add DailybotHQ/deepworkplan-skill@latest
+
+# 2. Official CLI — zero-dependency client over this API (Node >= 18),
+#    prepared in the site repo's cli/ directory pending npm publication
+deepworkplan init
+deepworkplan read /es/developers
 ```
 
-Skill, deponuzun içindeki `.agents/skills/deepworkplan/` klasörüne yerleştirilir; böylece depoya dokunan her ajan aynı metodolojiyi paylaşır.
+Skill, deponuzun içindeki `.agents/skills/deepworkplan/` klasörüne yerleştirilir; böylece depoya dokunan her ajan aynı metodolojiyi paylaşır. Resmî `deepworkplan` CLI — aynı API üzerinde sıfır bağımlılıklı bir istemci (`init`, `sections`, `read`, `open`, `mcp`) — npm için hazırlandı ve yayımlanana kadar site deposunun [cli/](https://github.com/DailybotHQ/deepworkplan-website/tree/main/cli) dizininde durur.
 
 ## Makine tarafından okunabilir kaynaklar
 

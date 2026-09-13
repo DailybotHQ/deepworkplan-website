@@ -25,7 +25,7 @@ Trong những đợt ngắn, agent lập trình rất ấn tượng. Giao cho n�
 
 Deep Work Plan trả lời bằng phát triển theo đặc tả: một kế hoạch bền vững, các tác vụ nguyên tử và cổng kiểm chứng agent buộc phải qua. Công việc vẫn được kiểm chứng — và bất kỳ agent nào cũng có thể tiếp tục qua các phiên.
 
-Và vì ngữ cảnh là tài nguyên khan hiếm nhất của agent, harness được thiết kế cho hiệu suất token: hướng dẫn tải tiến tiến, kiểm chứng chỉ chạm vào phần thay đổi và mỗi tác vụ học tại chỗ — công việc dài hơi vẫn khả thi. Bản thân kế hoạch cũng mở rộng theo cùng nguyên tắc: một kế hoạch Lite cho một bản sửa lỗi có giới hạn, một kế hoạch Full cho công việc kéo dài hàng giờ — định dạng luôn đi theo phạm vi công việc, chứ không phải ngược lại.
+Và vì ngữ cảnh là tài nguyên khan hiếm nhất của agent, harness được thiết kế để giữ chính tải lệnh hướng dẫn của nó nhỏ và có thể kiểm toán: hướng dẫn tải dần dần, kiểm chứng chỉ chạm vào phần thay đổi và mỗi tác vụ học tại chỗ. Tải của mỗi luồng được đo bằng byte và công bố ở mỗi bản phát hành — bản phát hành gần nhất đã cắt luồng thực thi 45,7% và luồng tiếp tục 67,5%. Bản thân kế hoạch cũng mở rộng theo cùng nguyên tắc: một kế hoạch Lite cho một bản sửa lỗi có giới hạn, một kế hoạch Full cho công việc kéo dài hàng giờ — định dạng luôn đi theo phạm vi công việc, chứ không phải ngược lại.
 ---
 
 ## Con người cầm lái. Agent thực thi.

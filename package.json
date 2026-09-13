@@ -9,7 +9,7 @@
     "url": "https://github.com/DailybotHQ/deepworkplan-website"
   },
   "type": "module",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "packageManager": "pnpm@11.1.2",
   "engines": {
     "node": ">=24.20.0"
@@ -17,7 +17,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
-    "prebuild": "node scripts/generate-agent-skills-index.mjs && node scripts/stamp-versions.mjs",
+    "prebuild": "node scripts/generate-agent-skills-index.mjs && node scripts/generate-api-v1-pages.mjs && node scripts/stamp-versions.mjs",
     "generate:agent-skills-index": "node scripts/generate-agent-skills-index.mjs",
     "astro": "astro",
     "astro:check": "astro check",
@@ -38,6 +38,8 @@
     "md:content-check": "node scripts/check-md-content-parity.mjs",
     "seo:audit": "node scripts/audit-seo.mjs",
     "aeo:audit": "node scripts/audit-aeo.mjs",
+    "agents:reachability": "bash scripts/check-agent-reachability.sh",
+    "agents:verify": "bash scripts/verify-agent-surface.sh",
     "i18n:check": "node scripts/i18n/check.mjs",
     "i18n:scaffold": "node scripts/i18n/scaffold-language.mjs",
     "lighthouse": "mkdir -p .lighthouseci && lhci autorun",

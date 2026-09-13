@@ -126,7 +126,7 @@ export const zh: SiteTranslations = {
       answer:
         'Deep Work Plan 以规范驱动开发应对：一份持久的计划、原子任务，以及代理必须通过的验证关卡。“完成”不再是感觉——而是可验证、可审查的证据。',
       efficiency:
-        '上下文是代理最稀缺的资源，因此 harness 为 token 效率而生：指令渐进加载，验证只触及改动之处，每项任务就地学习——长程工作依然划算。计划本身也遵循同样的原则：范围明确的修复对应 Lite 计划，持续数小时的工作对应 Full 计划——形式始终服从工作的范围，而非相反。',
+        '上下文是代理最稀缺的资源，因此 harness 的设计目标是让自身的指令负载保持小而可审计：指令渐进加载，验证只触及改动之处，每项任务就地学习。每个流程的负载以字节计量并在每次发布时公布——最新发布将执行流程的负载降低了 45.7%，将恢复流程的负载降低了 67.5%。计划本身也遵循同样的原则：范围明确的修复对应 Lite 计划，持续数小时的工作对应 Full 计划——形式始终服从工作的范围，而非相反。',
       illustrationAlt:
         '一幅雕版双联画：一侧是浓雾中触礁漂流的船只，另一侧是同一艘船沿既定航线稳健驶向港口灯塔。',
     },
@@ -157,7 +157,7 @@ export const zh: SiteTranslations = {
       },
       act5: {
         kicker: '方法论 · 第五幕',
-        lead: '上下文是任何模型最稀缺的资源。harness 渐进加载、只验证改动、按任务就地学习——让计划一轮轮自我回本。',
+        lead: '上下文是任何模型最稀缺的资源。harness 渐进加载、只验证改动、按任务就地学习——每个流程的指令负载都经过测量并对外公布，一次发布接一次发布。',
         deepLinkLabel: '阅读方法论',
         deepLinkHref: '/methodology',
       },
@@ -435,7 +435,7 @@ export const zh: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: '关于这套方法论',
+    title: '关于这套方法论 — Deep Work Plan',
     subtitle: '开放方法论 · 采用 MIT 许可',
     description:
       'Deep Work Plan 是一套开放、框架无关的方法论，用于与 AI 编码代理一同开展严肃的工程工作。它从何而来，又由谁维护。',
@@ -486,7 +486,7 @@ export const zh: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: '社区与联系',
+    title: '社区与联系 — Deep Work Plan',
     subtitle: '开源 · 社区驱动',
     description:
       'Deep Work Plan 以开放方式构建。通过下方渠道找到源码、提交 issue 或加入讨论——欢迎贡献。',
@@ -554,7 +554,7 @@ export const zh: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: '页面未找到',
+    title: '页面未找到 — Deep Work Plan',
     description:
       '你查找的页面不存在或已被移动。浏览方法论，或返回首页继续浏览。',
     heading: '页面未找到',
@@ -715,7 +715,7 @@ export const zh: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — 让你的代码仓库 AI-first',
+      title: 'Init — 让你的代码仓库 AI-first — Deep Work Plan',
       description:
         '在任意代码仓库中采纳 Deep Work Plan 方法论。安装技能、运行代理接入，然后用任意 AI 编码代理规划并执行。',
     },
@@ -1048,7 +1048,7 @@ export const zh: SiteTranslations = {
             id: 'cost',
             question: '它收费吗？效率如何衡量？',
             answer:
-              '方法论与技能均采用 MIT 许可，且完全免费；核心流程中没有服务、没有 API 密钥、也没有遥测。效率以每个流程加载的指令字节数来报告，由随技能一同提交的脚本测量，在各发布基线上重新测量，并发布在一本评估台账中，增长与下降同样如实呈现。它不以 token 百分比或成本节省的形式报告，因为一份字节清单无法证明这些；一项预注册的公开评估已在计划之中，用以恰当地衡量实际效果。',
+              '方法论与技能均采用 MIT 许可，且完全免费；核心流程中没有服务、没有 API 密钥、也没有遥测。效率以每个流程加载的指令字节数来报告，由随技能一同提交的脚本测量，在各发布基线上重新测量，并发布在一本评估台账中，增长与下降同样如实呈现。它不以 token 百分比或成本节省的形式报告，因为一份字节清单无法证明这些。一项公开的新代理评估已在冻结协议下执行：同样的两个功能，分别在无 harness、上一大版本与本版本的干净克隆上构建。它发现带有 harness 的代理在两项任务中都读取了更少的字节，且本版本的功能会话在两项任务中消耗的模型输入与输出均少于上一大版本——由 harness 报告，单一工作负载。它同样给出了诚实的边界：onboarding 是一次性成本，只有在流程被使用时才会回本；每个工作负载的 token 净方向结果不一；不主张任何时钟时间优势；新代理不会自行进入流程——流程是由你或知道调用它的代理执行的命令。',
             linkLabel: '信任与披露',
             linkPath: '/trust',
           },
@@ -1268,7 +1268,7 @@ export const zh: SiteTranslations = {
     },
     honestLimits: {
       title: '诚实的局限',
-      body: 'Deep Work Plan 没有活规范或增量规范机制；OpenSpec 及类似工具在那一面更强。该方法论尚无独立基准测试；一项预注册的公开评估已在计划之中。指令加载台账测量的是加载的字节数，而非 token、成本或结果。DWP 有意将范围限定在仓库之内：它不是跨项目记忆系统，不是基于角色的代理框架，也不是一款 IDE，因此它也不在这些维度上参与竞争——当工作确实需要这些能力时，请将它与覆盖该能力的工具搭配使用。',
+      body: 'Deep Work Plan 没有活规范或增量规范机制；OpenSpec 及类似工具在那一面更强。该方法论尚无独立基准测试；一项第一方新代理评估已在冻结协议下执行，规模较小——单一工作负载、每种配置两个功能、一台机器——其结果双向公布：带 harness 的代理在两项任务中读取字节更少，本版本的会话消耗的由 harness 报告的模型输入与输出少于上一大版本，同时每个工作负载的 token 净方向结果不一，且不主张任何时钟时间优势。指令加载台账测量的是加载的字节数，而非 token、成本或结果。DWP 有意将范围限定在仓库之内：它不是跨项目记忆系统，不是基于角色的代理框架，也不是一款 IDE，因此它也不在这些维度上参与竞争——当工作确实需要这些能力时，请将它与覆盖该能力的工具搭配使用。',
     },
     correction: {
       title: '帮助我们保持准确',
@@ -1280,7 +1280,7 @@ export const zh: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: '信任与安全',
+      title: '信任与安全 — Deep Work Plan',
       description:
         '为什么 Deep Work Plan 可以放心采用：开源且采用 MIT 许可、以 Markdown 为核心且无网络调用或遥测、非破坏性设计、安装可验证，并具有清晰的漏洞披露政策。',
     },
@@ -1341,7 +1341,7 @@ export const zh: SiteTranslations = {
     meta: {
       title: '开发者 — Deep Work Plan 代理 API、MCP 服务器与文档',
       description:
-        'Deep Work Plan 的代理接口面：只读、零认证的 API（附 OpenAPI 规范）、位于 /api/mcp 的 MCP 服务器、17 种语言的逐页 Markdown，以及 npx skills 安装 CLI。',
+        'Deep Work Plan 的代理接口面：只读、零认证、带版本管理的 API，附 OpenAPI 规范、MCP 服务器、17 种语言的逐页 Markdown 与官方 CLI。',
     },
     eyebrow: '代理与开发者接口面',
     title: '面向开发者与 AI 代理的 Deep Work Plan',
@@ -1401,6 +1401,27 @@ export const zh: SiteTranslations = {
         description: '静态健康标记，附带指向规范与本门户的链接。',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description: 'v1 家族的版本化目录：端点路径、站点版本与规范链接。',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          '以带类型 JSON 呈现的站点地图——每个分区的名称、路径与描述。',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description: '每种语言下的全部 Markdown 端点，按语言代码分组。',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description: '版本化健康标记——/api/health.json 的 v1 镜像。',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1412,6 +1433,12 @@ export const zh: SiteTranslations = {
         description: 'ARD 能力清单——robots.txt 中声明的 agentmap。',
       },
     ],
+    versioningTitle: '版本管理与弃用',
+    versioningBody:
+      '版本化的 JSON 家族位于 /api/v1/ 之下——index、sections、pages 与 health——而未加版本的规范路径（/llms.txt、/{page}.md、/api/mcp）属于同一个 v1 契约。破坏性变更只会随新的 /api/v{N+1}/ 家族发布，绝不会发生在 v1 内部。当某个端点被弃用时，其响应会携带 Deprecation: true 与至少早于移除 180 天的 Sunset 日期，并由 Link 头指向继任者。',
+    rateLimitsTitle: '速率限制',
+    rateLimitsBody:
+      '/api/* 的响应携带 RFC 9331 速率限制头——RateLimit-Limit、RateLimit-Remaining、RateLimit-Reset 与 RateLimit-Policy——让代理能够实时自我节流；429 响应额外携带 Retry-After。限流在边缘尽力执行（每位访客每 60 秒 120 次请求），访问保持匿名：无密钥、无注册、无层级。',
     mcpTitle: 'MCP 服务器',
     mcpIntro:
       '一个基于 Streamable HTTP 的无状态 Model Context Protocol 服务器。三个只读工具：get_init_prompt、list_site_sections 与 read_page。支持协议版本 2025-03-26 与 2025-06-18；无需会话。',
@@ -1427,9 +1454,9 @@ export const zh: SiteTranslations = {
     cliTitle: '安装套件',
     cliIntro:
       'Deep Work Plan 技能的官方安装路径——与 /init 端点交给代理的命令完全相同。它适用于任何兼容 skills 的编码代理（Claude Code、Cursor、Codex、Gemini 等）。',
-    cliCodeLabel: '终端 — skills CLI',
+    cliCodeLabel: '终端 — skills CLI 与官方 CLI',
     cliNote:
-      '该技能会内嵌到你仓库内的 .agents/skills/deepworkplan/，因此每个接触该仓库的代理都共享同一套方法论。',
+      '该技能会内嵌到你仓库内的 .agents/skills/deepworkplan/，因此每个接触该仓库的代理都共享同一套方法论。官方 deepworkplan CLI——一个基于同一 API 的零依赖客户端（init、sections、read、open、mcp）——已为 npm 做好准备，在发布之前存放于站点仓库的 cli/ 目录。',
     resourcesTitle: '机器可读资源',
     resources: [
       { label: 'OpenAPI 规范 (/openapi.json)', href: '/openapi.json' },

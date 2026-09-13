@@ -49,6 +49,13 @@ Tracking documentation coverage for deepworkplan.com.
 | [CHECKLIST.md](aeo/CHECKLIST.md) | ✅ Current | AEO monthly maintenance checklist |
 | [MARKDOWN_FOR_AGENTS.md](aeo/MARKDOWN_FOR_AGENTS.md) | ✅ Current | Native Markdown endpoints for agents |
 
+### docs/technical/ Folder
+
+| File | Status | Description |
+|------|--------|-------------|
+| [TEAM_AGENTS_REFERENCE.md](technical/TEAM_AGENTS_REFERENCE.md) | ✅ Current | Team agents execution mode reference |
+| [AGENT_CRAWLER_ACCESS_RUNBOOK.md](technical/AGENT_CRAWLER_ACCESS_RUNBOOK.md) | ✅ Current | Operator runbook: unblock AI crawlers at the Cloudflare edge + `pnpm run agents:reachability` verification |
+
 ### src/ README Files
 
 | File | Status | Description |

@@ -294,6 +294,30 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 
   **Current vendored provenance (2026-09-12):** this copy is the released upstream tag **`v5.1.0`** (`4ca7d62`), superseding `v5.0.0`. `npx --yes skills add DailybotHQ/deepworkplan-skill@v5.1.0 --skill deepworkplan --force -y` reproducibly hit a container mount-race on the multi-target write fanout (`ENOENT: no such file or directory, mkdir '.agents/skills/deepworkplan'` — the same class as the `O-6-2` mkdir race recorded elsewhere in this repo's build evidence) across three attempts; the CLI's own `skills-lock.json` hash computation was identical and reproducible each time (`5f7108d6…`), so the copy was installed by mirroring the tag's canonical `skills/deepworkplan/` tree byte-for-byte (`diff -rq` against the fetched tag: identical) and pinning `skills-lock.json` to that CLI-computed hash. Relative to `v5.0.0`, `v5.1.0` is exactly what Tasks 9–11 of `PLAN_v5_phase2_validation` produced and released upstream (PR #42): the stdlib plan-state updater (`shared/update-state.py`, ADR 0002 — JSON format retained, no migration), a Lite-anatomy fix requiring per-task Context, and an onboarding command-kit hardening that adds a dedicated `/dwp-verify` thin delegator and refreshes `/dwp-upgrade` wording — now a seven-command kit (`create`, `execute`, `refine`, `resume`, `status`, `upgrade`, `verify`); `.agents/commands/dwp-verify.md` was added and `.agents/commands/dwp-upgrade.md` refreshed here to match. No local adaptation beyond that command-kit addition; future updates follow the same explicit, reviewed path: install the new tag and re-stamp this paragraph. This repository keeps the AI Diff Reviewer local-only; it does not ship an AI Reviewer CI workflow. The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed.
 
+### Official CLI publishing (same release workflow)
+
+`release_and_publish.yml` **Step 6** publishes the official CLI — the
+unscoped npm package **`deepworkplan`** — together with every website
+release. The package is owned by whichever npm account the `NPM_TOKEN`
+Automation token belongs to: generate it from the company account that
+maintains the org's other packages (e.g. `universal-emoji-parser`) and
+`deepworkplan` is listed alongside them. The CLI keeps its **own version
+line** (independent of the website version): Step 6 publishes only when
+the exact `cli/package.json` version is not already on the registry —
+re-running a release is idempotent. To ship a new CLI version, bump
+`version` in `cli/package.json` in any PR to `main`. When the secret is
+absent, Step 6 skips with a loud warning and the website release proceeds
+unaffected. The token lives only in GitHub Actions secrets — never in the
+tree, never in chat.
+
+**Namespace strategy (deliberate — do not "fix"):** the bare unscoped name
+`deepworkplan` belongs to the *website client*, matching the domain exactly;
+never rename this package to `@deepworkplan/cli`. The `@deepworkplan` npm
+org (reserved 2026-09-13) is the home for future *methodology* packages —
+a methodology installer either grows this same CLI (`deepworkplan init`
+gaining a real installer) or ships under that scope. npm org names and
+unscoped package names are separate namespaces, so both coexist.
+
 ### Local AI Diff Reviewer
 
 The vendored [`ai-diff-reviewer`](.agents/skills/ai-diff-reviewer/) skill remains

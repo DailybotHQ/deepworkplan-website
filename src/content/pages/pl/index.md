@@ -25,7 +25,7 @@ W krótkich seriach agenci kodowania są imponujący. Powierz im długą misję 
 
 Deep Work Plan odpowiada programowaniem sterowanym specyfikacją: trwały plan, zadania atomowe i bramki walidacyjne, które agent musi przejść. Praca pozostaje weryfikowalna — i każdy agent może ją wznowić między sesjami.
 
-A ponieważ kontekst to najrzadszy zasób Twojego agenta, harness zaprojektowano pod wydajność tokenów: instrukcje ładują się progresywnie, walidacja dotyka tylko zmian, a każde zadanie uczy się lokalnie — długa praca pozostaje przystępna. Sam plan skaluje się w ten sam sposób: plan Lite dla ograniczonej poprawki, plan Full dla pracy rozciągniętej na godziny — format zawsze podąża za zakresem pracy, nigdy odwrotnie.
+A ponieważ kontekst to najrzadszy zasób Twojego agenta, harness zaprojektowano tak, aby jego własne obciążenie instrukcjami było małe i audytowalne: instrukcje ładują się progresywnie, walidacja dotyka tylko zmian, a każde zadanie uczy się lokalnie. Obciążenie każdego przepływu jest mierzone w bajtach i publikowane przy każdym wydaniu — ostatnie wydanie zmniejszyło przepływ execute o 45,7%, a przepływ resume o 67,5%. Sam plan skaluje się w ten sam sposób: plan Lite dla ograniczonej poprawki, plan Full dla pracy rozciągniętej na godziny — format zawsze podąża za zakresem pracy, nigdy odwrotnie.
 ---
 
 ## Ludzie sterują. Agenci wykonują.

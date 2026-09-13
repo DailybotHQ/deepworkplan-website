@@ -128,7 +128,7 @@ export const pt: SiteTranslations = {
       answer:
         'O Deep Work Plan responde com desenvolvimento guiado por especificação: um plano duradouro, tarefas atômicas e validation gates que o agente precisa passar. Done deixa de ser uma sensação — vira evidência verificável e revisável.',
       efficiency:
-        'E como o contexto é o recurso mais escasso do seu agente, o harness é projetado para a eficiência de tokens: instruções carregam progressivamente, a validação toca apenas o que mudou e cada tarefa aprende localmente — assim o trabalho de longo prazo continua acessível. O próprio plano escala da mesma forma: um plano Lite para uma correção delimitada, um plano Full para o trabalho que se estende por horas — o formato sempre segue o alcance do trabalho, e não o contrário.',
+        'E como o contexto é o recurso mais escasso do seu agente, o harness é projetado para manter sua própria carga de instruções pequena e auditável: instruções carregam progressivamente, a validação toca apenas o que mudou e cada tarefa aprende localmente. A carga por fluxo é medida em bytes e publicada a cada lançamento — o último lançamento reduziu o fluxo de execução em 45,7% e o fluxo de retomada em 67,5%. O próprio plano escala da mesma forma: um plano Lite para uma correção delimitada, um plano Full para o trabalho que se estende por horas — o formato sempre segue o alcance do trabalho, e não o contrário.',
       illustrationAlt:
         'Um díptico gravado: de um lado um navio à deriva na névoa junto a rochas escarpadas, do outro o mesmo navio firme em um rumo traçado em direção ao farol de um porto.',
     },
@@ -159,7 +159,7 @@ export const pt: SiteTranslations = {
       },
       act5: {
         kicker: 'O método · Ato V',
-        lead: 'O contexto é o recurso mais escasso do seu agente. O harness carrega progressivamente, valida o que mudou e aprende tarefa a tarefa — assim o plano se paga sozinho.',
+        lead: 'O contexto é o recurso mais escasso do seu agente. O harness carrega progressivamente, valida o que mudou e aprende tarefa a tarefa — com a carga de instruções de cada fluxo medida e publicada, lançamento após lançamento.',
         deepLinkLabel: 'Leia a metodologia',
         deepLinkHref: '/methodology',
       },
@@ -439,7 +439,7 @@ export const pt: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'Sobre a metodologia',
+    title: 'Sobre a metodologia — Deep Work Plan',
     subtitle: 'Metodologia aberta · Licenciada sob MIT',
     description:
       'O Deep Work Plan é uma metodologia aberta e independente de framework para trabalho de engenharia sério com agentes de código de IA. De onde veio e quem a mantém.',
@@ -490,7 +490,7 @@ export const pt: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Comunidade e contato',
+    title: 'Comunidade e contato — Deep Work Plan',
     subtitle: 'Código aberto · Orientado pela comunidade',
     description:
       'O Deep Work Plan é construído de forma aberta. Encontre o código-fonte, abra uma issue ou participe da conversa pelos canais abaixo — contribuições são bem-vindas.',
@@ -564,7 +564,7 @@ export const pt: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Página não encontrada',
+    title: 'Página não encontrada — Deep Work Plan',
     description:
       'A página que você procura não existe ou foi movida. Explore a metodologia ou volte à página inicial para continuar navegando.',
     heading: 'Página não encontrada',
@@ -728,7 +728,7 @@ export const pt: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Torne seu repositório AI-first',
+      title: 'Init — Torne seu repositório AI-first — Deep Work Plan',
       description:
         'Adote a metodologia Deep Work Plan em qualquer repositório. Instale a skill, execute o onboarding do agente e planeje e execute com qualquer agente de código de IA.',
     },
@@ -1073,7 +1073,7 @@ export const pt: SiteTranslations = {
             id: 'cost',
             question: 'Quanto custa e como a eficiência é medida?',
             answer:
-              'A metodologia e a skill são licenciadas sob MIT e gratuitas; não há serviço, chave de API nem telemetria nos fluxos centrais. A eficiência é relatada como o número de bytes de instrução que cada fluxo carrega, medido por um script comitado junto com a skill, remedido em cada linha de base de lançamento e publicado em um registro de avaliação, com aumentos relatados com a mesma franqueza das reduções. Ela não é relatada como porcentagens de tokens ou economias de custo, porque um inventário de bytes não estabelece essas coisas; uma avaliação pública pré-registrada está planejada para medir resultados adequadamente.',
+              'A metodologia e a skill são licenciadas sob MIT e gratuitas; não há serviço, chave de API nem telemetria nos fluxos centrais. A eficiência é relatada como o número de bytes de instrução que cada fluxo carrega, medido por um script comitado junto com a skill, remedido em cada linha de base de lançamento e publicado em um registro de avaliação, com aumentos relatados com a mesma franqueza das reduções. Ela não é relatada como porcentagens de tokens ou economias de custo, porque um inventário de bytes não estabelece essas coisas. Uma avaliação pública com agentes novos já foi executada sob um protocolo congelado: os mesmos dois recursos construídos a partir de clones limpos sem harness, com a versão maior anterior e com a atual. Ela constatou que os agentes em uma árvore com harness leram menos bytes nas duas tarefas, e que as sessões de recurso da versão atual consumiram menos entrada e saída de modelo do que as da versão maior anterior nas duas tarefas — conforme reportado pelo harness, em uma única carga de trabalho. Ela também constatou os limites honestos: o onboarding é um custo único que só se paga quando os fluxos são usados, a direção líquida de tokens por carga de trabalho foi mista, não se reivindica vantagem de tempo de relógio, e um agente novo não entra nos fluxos sozinho — os fluxos são comandos que você ou o agente invocam.',
             linkLabel: 'Confiança e divulgação',
             linkPath: '/trust',
           },
@@ -1297,7 +1297,7 @@ export const pt: SiteTranslations = {
     },
     honestLimits: {
       title: 'Limitações honestas',
-      body: 'O Deep Work Plan não tem um mecanismo de especificação viva ou delta; OpenSpec e ferramentas semelhantes são mais fortes aí. Nenhum benchmark independente da metodologia existe ainda; uma avaliação pública pré-registrada está planejada. O registro de carga de instrução mede bytes carregados, não tokens, custo ou resultados. O DWP é deliberadamente limitado ao repositório: não é um sistema de memória entre projetos, nem um framework de agentes baseado em papéis, nem um IDE, então também não compete nessas frentes — combine-o com uma ferramenta que cubra essa frente quando for isso que o trabalho exigir.',
+      body: 'O Deep Work Plan não tem um mecanismo de especificação viva ou delta; OpenSpec e ferramentas semelhantes são mais fortes aí. Ainda não existe um benchmark independente da metodologia; uma avaliação própria com agentes novos já foi executada sob um protocolo congelado, em pequena escala — uma carga de trabalho, dois recursos por configuração, uma máquina — e seus resultados são publicados nas duas direções: agentes em árvores com harness leram menos bytes nas duas tarefas, e as sessões da versão atual consumiram menos entrada e saída de modelo, reportada pelo harness, do que as da versão maior anterior, enquanto a direção líquida de tokens por carga de trabalho foi mista e nenhuma vantagem de tempo de relógio é reivindicada. O registro de carga de instrução mede bytes carregados, não tokens, custo ou resultados. O DWP é deliberadamente limitado ao repositório: não é um sistema de memória entre projetos, nem um framework de agentes baseado em papéis, nem um IDE, então também não compete nessas frentes — combine-o com uma ferramenta que cubra essa frente quando for isso que o trabalho exigir.',
     },
     correction: {
       title: 'Ajude-nos a manter esta página exata',
@@ -1309,7 +1309,7 @@ export const pt: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Confiança e segurança',
+      title: 'Confiança e segurança — Deep Work Plan',
       description:
         'Por que o Deep Work Plan é seguro de adotar: código aberto e MIT, Markdown-first sem chamadas de rede nem telemetria, não destrutivo por design, com instalações verificáveis e uma política clara de divulgação de vulnerabilidades.',
     },
@@ -1372,7 +1372,7 @@ export const pt: SiteTranslations = {
       title:
         'Desenvolvedores — API para agentes, servidor MCP e documentação do Deep Work Plan',
       description:
-        'A superfície para agentes do Deep Work Plan: API somente leitura sem autenticação, OpenAPI, servidor MCP em /api/mcp e Markdown por página em 17 idiomas.',
+        'A superfície para agentes do Deep Work Plan: API versionada, somente leitura e sem autenticação, com OpenAPI, servidor MCP e Markdown por página em 17 idiomas.',
     },
     eyebrow: 'Superfície para agentes e desenvolvedores',
     title: 'Deep Work Plan para desenvolvedores e agentes de IA',
@@ -1435,6 +1435,30 @@ export const pt: SiteTranslations = {
           'Marcador de saúde estático com links para a especificação e este portal.',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'Catálogo versionado da família v1: caminhos dos endpoints, versão do site e links para a especificação.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          'O mapa do site como JSON tipado — nome, caminho e descrição por seção.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          'Cada endpoint de Markdown em cada idioma, agrupados por código de idioma.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description:
+          'Marcador de estado versionado — o espelho v1 de /api/health.json.',
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1447,6 +1471,12 @@ export const pt: SiteTranslations = {
           'Manifesto de capacidades ARD — o agentmap declarado no robots.txt.',
       },
     ],
+    versioningTitle: 'Versionamento e descontinuação',
+    versioningBody:
+      'A família JSON versionada vive em /api/v1/ — index, sections, pages e health — e os caminhos canônicos sem versão (/llms.txt, /{page}.md, /api/mcp) pertencem ao mesmo contrato v1. Mudanças com quebra de compatibilidade são publicadas apenas em uma nova família /api/v{N+1}/, nunca dentro da v1. Quando um endpoint é descontinuado, suas respostas carregam Deprecation: true e uma data Sunset pelo menos 180 dias antes da remoção, e um cabeçalho Link aponta o sucessor.',
+    rateLimitsTitle: 'Limites de requisições',
+    rateLimitsBody:
+      'As respostas em /api/* carregam cabeçalhos de limite RFC 9331 — RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset e RateLimit-Policy — para que os agentes possam ajustar seu próprio ritmo em tempo real; uma resposta 429 adiciona Retry-After. A aplicação é best-effort na borda (120 requisições por 60 segundos por visitante) e o acesso continua anônimo: sem chaves, sem registro, sem níveis.',
     mcpTitle: 'Servidor MCP',
     mcpIntro:
       'Um servidor de Model Context Protocol sem estado sobre Streamable HTTP. Três ferramentas somente leitura: get_init_prompt, list_site_sections e read_page. As versões de protocolo 2025-03-26 e 2025-06-18 são suportadas; nenhuma sessão é necessária.',
@@ -1462,9 +1492,9 @@ export const pt: SiteTranslations = {
     cliTitle: 'Instale o kit',
     cliIntro:
       'O caminho oficial de instalação da skill Deep Work Plan — o mesmo comando que o endpoint /init dá aos agentes. Funciona com qualquer agente de código compatível com skills (Claude Code, Cursor, Codex, Gemini e outros).',
-    cliCodeLabel: 'Terminal — CLI de skills',
+    cliCodeLabel: 'Terminal — CLI de skills e CLI oficial',
     cliNote:
-      'A skill é vendorizada em .agents/skills/deepworkplan/ dentro do seu repositório, de modo que todo agente que toca o repositório compartilha a mesma metodologia.',
+      'A skill é vendorizada em .agents/skills/deepworkplan/ dentro do seu repositório, de modo que todo agente que toca o repositório compartilha a mesma metodologia. A CLI oficial deepworkplan — um cliente sem dependências sobre esta mesma API (init, sections, read, open, mcp) — está preparada para npm e vive no diretório cli/ do repositório do site até a publicação.',
     resourcesTitle: 'Recursos legíveis por máquina',
     resources: [
       { label: 'Especificação OpenAPI (/openapi.json)', href: '/openapi.json' },

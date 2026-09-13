@@ -13,9 +13,16 @@
  *    so client-side analytics are invisible to them).
  *
  * 3. **Agent-friendly errors** (post-processing): API paths never serve HTML
- *    errors — unknown /api/* paths get a structured JSON error body — and
- *    Markdown-negotiating clients that hit a 404 receive a short Markdown
- *    recovery body pointing at the sitemap, llms.txt, and /developers.
+ *    errors — unknown /api/* paths get a structured JSON error body — and any
+ *    client that does not explicitly prefer HTML (Markdown-negotiating
+ *    clients, curl, AI agents sending a wildcard Accept) receives a short
+ *    Markdown 404 recovery body pointing at the sitemap, llms.txt, and
+ *    /developers.
+ *
+ * 4. **Rate limiting** (/api/* only, request-time): a best-effort per-isolate
+ *    fixed-window limiter (src/lib/rate-limit.ts) attaches RFC 9331
+ *    RateLimit-* headers to every /api/* response and short-circuits tripped
+ *    callers to a 429 with Retry-After.
  *
  * Non-bot, non-markdown requests pass through with zero overhead.
  */
@@ -23,7 +30,15 @@ import {
   buildAgentRecoveryMarkdown,
   buildApiError,
   isApiPath,
+  prefersMarkdownOverHtml,
 } from '../src/lib/agent-recovery';
+import { deprecationHeadersFor } from '../src/lib/deprecation';
+import {
+  createRateLimiter,
+  rateLimitHeaders,
+  retryAfterSeconds,
+  type RateLimitResult,
+} from '../src/lib/rate-limit';
 import { stripNonStandardRobotsDirectives } from '../src/lib/robots-directives';
 
 interface AssetsFetcher {
@@ -57,6 +72,9 @@ const AI_BOT_PATTERNS: ReadonlyArray<{ pattern: RegExp; name: string }> = [
   { pattern: /Meta-ExternalAgent/i, name: 'Meta-ExternalAgent' },
   { pattern: /cohere-ai/i, name: 'cohere-ai' },
   { pattern: /OAI-SearchBot/i, name: 'OAI-SearchBot' },
+  { pattern: /DeepSeekBot/i, name: 'DeepSeekBot' },
+  { pattern: /Claude-SearchBot/i, name: 'Claude-SearchBot' },
+  { pattern: /Perplexity-User/i, name: 'Perplexity-User' },
 ];
 
 /**
@@ -361,60 +379,131 @@ function isDirectMarkdownUrl(pathname: string): boolean {
 }
 
 /**
- * Post-process the upstream (asset/function) response:
- *
- * 1. **JSON errors for API paths** — an unknown /api/* path must never serve
- *    the HTML 404 page; agents get a structured JSON error they can parse.
- * 2. **Markdown 404s** — a client negotiating Markdown (Accept: text/markdown)
- *    that hits a 404 receives a short Markdown recovery body with the sitemap,
- *    llms.txt, and developer links, instead of unparsable HTML.
- *
- * Everything else (including the HTML 404 page for regular browsers) passes
- * through untouched.
+ * Best-effort per-isolate fixed-window limiter for /api/* (see
+ * src/lib/rate-limit.ts). Each Cloudflare isolate counts independently —
+ * never claim platform-global enforcement. The caller key
+ * (CF-Connecting-IP) is used only as an in-memory counter key: never
+ * logged, never persisted.
  */
-function finalizeResponse(context: EventContext, response: Response): Response {
-  if (response.status !== 404) {
-    return response;
-  }
+const apiLimiter = createRateLimiter(() => Date.now());
 
-  const url = new URL(context.request.url);
-
-  // 1. API paths → structured JSON error.
-  if (isApiPath(url.pathname)) {
-    const body = JSON.stringify(
+/** 429 synthesis for a tripped /api/* caller (RFC 9331 headers + Retry-After). */
+function rateLimitResponse(result: RateLimitResult): Response {
+  return new Response(
+    JSON.stringify(
       buildApiError(
-        'not_found',
-        `Unknown API path: ${url.pathname}`,
-        'The documented agent API lives at /api/mcp (MCP over JSON-RPC 2.0, POST) and /api/health.json (GET).'
+        'rate_limited',
+        'Too many requests to the agent API. Retry after the announced window.',
+        'See RateLimit-Reset and Retry-After headers; the limit is advisory best-effort at the edge.'
       )
-    );
-    return new Response(body, {
-      status: 404,
+    ),
+    {
+      status: 429,
       headers: {
         'Content-Type': 'application/json',
         'Cache-Control': 'no-store',
         'Access-Control-Allow-Origin': '*',
+        ...rateLimitHeaders(result),
+        'Retry-After': String(retryAfterSeconds(result)),
       },
-    });
+    }
+  );
+}
+
+/**
+ * Post-process the upstream (asset/function) response:
+ *
+ * 1. **JSON errors for API paths** — an unknown /api/* path must never serve
+ *    the HTML 404 page; agents get a structured JSON error they can parse.
+ * 2. **Markdown 404s** — a client that negotiates Markdown
+ *    (Accept: text/markdown) or does not prefer HTML (curl and AI agents
+ *    send a wildcard Accept) receives a short Markdown recovery body with
+ *    the sitemap, llms.txt, and developer links when it hits a 404, instead
+ *    of unparsable HTML. Browsers (Accept: text/html) keep the designed
+ *    HTML 404 page.
+ *
+ * Everything else (including the HTML 404 page for regular browsers) passes
+ * through untouched.
+ *
+ * `rateLimit` is the result of the request-time check for /api/* paths (null
+ * for every other path); passing /api/* responses get the RateLimit-* headers
+ * here.
+ */
+function finalizeResponse(
+  context: EventContext,
+  response: Response,
+  rateLimit: RateLimitResult | null = null
+): Response {
+  const url = new URL(context.request.url);
+
+  if (response.status === 404) {
+    // 1. API paths → structured JSON error, carrying the caller's rate-limit
+    //    headers so even a 404 tells agents where their window stands.
+    if (isApiPath(url.pathname)) {
+      const body = JSON.stringify(
+        buildApiError(
+          'not_found',
+          `Unknown API path: ${url.pathname}`,
+          'The documented agent API lives at /api/mcp (MCP over JSON-RPC 2.0, POST) and /api/health.json (GET).'
+        )
+      );
+      return new Response(body, {
+        status: 404,
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store',
+          'Access-Control-Allow-Origin': '*',
+          ...(rateLimit ? rateLimitHeaders(rateLimit) : {}),
+        },
+      });
+    }
+
+    // 2. Non-HTML-preferring clients → Markdown recovery body.
+    //    Eligible when the client asks for Markdown or simply does not prefer
+    //    HTML (curl/AI agents send Accept: */*); browsers keep the HTML 404
+    //    page. Same path guards as tryServeMarkdown: no /api/, /internal/, /_
+    //    prefixes and no static-asset extensions (so rateLimit is always null
+    //    on this branch).
+    const accept = context.request.headers.get('accept') || '';
+    const eligible =
+      (accept.includes('text/markdown') || prefersMarkdownOverHtml(accept)) &&
+      !MARKDOWN_EXCLUDED_PREFIXES.some((prefix) => url.pathname.startsWith(prefix)) &&
+      !MARKDOWN_EXCLUDED_EXTENSIONS.test(url.pathname);
+    if (eligible) {
+      return new Response(buildAgentRecoveryMarkdown(url.origin), {
+        status: 404,
+        headers: {
+          'Content-Type': 'text/markdown; charset=utf-8',
+          'Cache-Control': 'public, max-age=600',
+          Vary: 'Accept',
+          'X-Content-Negotiation': 'markdown',
+        },
+      });
+    }
+
+    return response;
   }
 
-  // 2. Markdown-negotiating clients → Markdown recovery body.
-  //    Same eligibility rules as tryServeMarkdown: no /api/, /internal/, /_
-  //    prefixes and no static-asset extensions.
-  const accept = context.request.headers.get('accept') || '';
-  const eligible =
-    accept.includes('text/markdown') &&
-    !MARKDOWN_EXCLUDED_PREFIXES.some((prefix) => url.pathname.startsWith(prefix)) &&
-    !MARKDOWN_EXCLUDED_EXTENSIONS.test(url.pathname);
-  if (eligible) {
-    return new Response(buildAgentRecoveryMarkdown(url.origin), {
-      status: 404,
-      headers: {
-        'Content-Type': 'text/markdown; charset=utf-8',
-        'Cache-Control': 'public, max-age=600',
-        Vary: 'Accept',
-        'X-Content-Negotiation': 'markdown',
-      },
+  // 0. Passing responses: merge deprecation headers (see
+  //    src/lib/deprecation.ts — the production map is empty today, so that
+  //    half is a no-op until an endpoint is retired; a deprecated endpoint
+  //    that 404s has been removed, and deprecation headers on a removed
+  //    endpoint carry no information) and the rate-limit headers computed at
+  //    request time.
+  const deprecation = deprecationHeadersFor(url.pathname);
+  if (deprecation || rateLimit) {
+    const headers = new Headers(response.headers);
+    for (const [name, value] of Object.entries(deprecation ?? {})) {
+      headers.set(name, value);
+    }
+    if (rateLimit) {
+      for (const [name, value] of Object.entries(rateLimitHeaders(rateLimit))) {
+        headers.set(name, value);
+      }
+    }
+    return new Response(response.body, {
+      status: response.status,
+      headers,
     });
   }
 
@@ -428,15 +517,28 @@ export async function onRequest(context: EventContext): Promise<Response> {
   const robotsRewrite = await tryRewriteRobotsForLighthouse(context);
   if (robotsRewrite) return robotsRewrite;
 
-  // 1. Markdown content negotiation — serve .md if Accept: text/markdown
+  const url = new URL(context.request.url);
+
+  // 1. Rate limiting for /api/* — the check runs on the REQUEST so a tripped
+  //    client short-circuits to 429 before any upstream work (function
+  //    invocation or asset fetch). The same result is threaded into
+  //    finalizeResponse so passing responses carry the RateLimit-* headers.
+  //    Non-/api/* paths skip the limiter entirely (rateLimit stays null).
+  const rateLimit = isApiPath(url.pathname)
+    ? apiLimiter.check(context.request.headers.get('CF-Connecting-IP') ?? 'anonymous')
+    : null;
+  if (rateLimit && !rateLimit.allowed) {
+    return rateLimitResponse(rateLimit);
+  }
+
+  // 2. Markdown content negotiation — serve .md if Accept: text/markdown
   const markdownResponse = await tryServeMarkdown(context);
   if (markdownResponse) {
     trackMarkdownRequest(context, 'content_negotiation');
     return markdownResponse;
   }
 
-  // 2. Track direct .md URL requests (e.g., /about.md, /methodology/x.md)
-  const url = new URL(context.request.url);
+  // 3. Track direct .md URL requests (e.g., /about.md, /methodology/x.md)
   if (isDirectMarkdownUrl(url.pathname)) {
     trackMarkdownRequest(context, 'direct_url');
   }
@@ -458,7 +560,7 @@ export async function onRequest(context: EventContext): Promise<Response> {
       );
     }
 
-    return finalizeResponse(context, await context.next());
+    return finalizeResponse(context, await context.next(), rateLimit);
   }
 
   // Check for unknown bots
@@ -482,5 +584,5 @@ export async function onRequest(context: EventContext): Promise<Response> {
     }
   }
 
-  return finalizeResponse(context, await context.next());
+  return finalizeResponse(context, await context.next(), rateLimit);
 }

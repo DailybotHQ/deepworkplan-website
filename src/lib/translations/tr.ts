@@ -128,7 +128,7 @@ export const tr: SiteTranslations = {
       answer:
         'Deep Work Plan, spesifikasyon odaklı geliştirme ile yanıt verir: dayanıklı bir plan, atomik görevler ve ajanın geçmesi gereken doğrulama kapıları. "Bitti" bir his olmaktan çıkar — geçerlenebilir, gözden geçirilebilir kanıta dönüşür.',
       efficiency:
-        'Ve bağlam, ajanınızın en kıt kaynağıdır. Bu yüzden harness token verimliliği için tasarlandı: talimatlar aşamalı yüklenir, doğrulama yalnızca değişene dokunur ve her görev kendi yerinde öğrenir — uzun soluklu iş ulaşılabilir kalır. Planın kendisi de aynı şekilde ölçeklenir: sınırlı bir düzeltme için Lite plan, saatler süren bir iş için Full plan — biçim her zaman işin kapsamını izler, tam tersi değil.',
+        'Ve bağlam, ajanınızın en kıt kaynağıdır. Bu yüzden harness, kendi talimat yükünü küçük ve denetlenebilir tutmak için tasarlandı: talimatlar aşamalı yüklenir, doğrulama yalnızca değişene dokunur ve her görev kendi yerinde öğrenir. Her akışın yükü bayt cinsinden ölçülür ve her yayında yayımlanır — son yayında yürütme akışı yüzde 45,7, sürdürme akışı yüzde 67,5 küçüldü. Planın kendisi de aynı şekilde ölçeklenir: sınırlı bir düzeltme için Lite plan, saatler süren bir iş için Full plan — biçim her zaman işin kapsamını izler, tam tersi değil.',
       illustrationAlt:
         'Bir yandan sisli kayalıklar arasında sürüklenen bir gemi, diğer yandan aynı geminin çizili rotayla liman fenerine ilerleyişi — bir gravür diptiği.',
     },
@@ -159,7 +159,7 @@ export const tr: SiteTranslations = {
       },
       act5: {
         kicker: 'Yöntem · Perde V',
-        lead: 'Bağlam, ajanınızın en kıt kaynağıdır. Harness aşamalı yüklenir, yalnızca değişeni doğrular ve görev başına öğrenir — plan kendini öder.',
+        lead: 'Bağlam, ajanınızın en kıt kaynağıdır. Harness aşamalı yüklenir, yalnızca değişeni doğrular ve görev başına öğrenir — her akışın talimat yükü ölçülüp yayımlanır, yayın üstüne yayın.',
         deepLinkLabel: 'Metodolojiyi okuyun',
         deepLinkHref: '/methodology',
       },
@@ -439,7 +439,7 @@ export const tr: SiteTranslations = {
 
   // About page
   aboutPage: {
-    title: 'Metodoloji hakkında',
+    title: 'Metodoloji hakkında — Deep Work Plan',
     subtitle: 'Açık metodoloji · MIT lisanslı',
     description:
       'Deep Work Plan, yapay zeka kodlama ajanlarıyla ciddi mühendislik işleri için açık ve çerçeveden bağımsız bir metodolojidir. Nereden geldiği ve kimin sürdürdüğü.',
@@ -490,7 +490,7 @@ export const tr: SiteTranslations = {
 
   // Contact page
   contactPage: {
-    title: 'Topluluk ve iletişim',
+    title: 'Topluluk ve iletişim — Deep Work Plan',
     subtitle: 'Açık kaynak · Topluluk odaklı',
     description:
       'Deep Work Plan açık biçimde geliştirilir. Kaynağı bulun, bir issue açın veya aşağıdaki kanallar aracılığıyla sohbete katılın — katkılar memnuniyetle karşılanır.',
@@ -561,7 +561,7 @@ export const tr: SiteTranslations = {
 
   // 404 page
   notFoundPage: {
-    title: 'Sayfa Bulunamadı',
+    title: 'Sayfa Bulunamadı — Deep Work Plan',
     description:
       'Aradığınız sayfa mevcut değil ya da taşınmış. Metodolojiyi keşfedin veya gezinmeye devam etmek için ana sayfaya dönün.',
     heading: 'Sayfa Bulunamadı',
@@ -725,7 +725,7 @@ export const tr: SiteTranslations = {
   // Deep Work Plan — Init / adoption endpoint
   initPage: {
     meta: {
-      title: 'Init — Deponuzu AI-first hale getirin',
+      title: 'Init — Deponuzu AI-first hale getirin — Deep Work Plan',
       description:
         'Deep Work Plan metodolojisini herhangi bir depoda benimseyin. Skill’i kurun, ajan kuruluma almasını çalıştırın, ardından herhangi bir yapay zeka kodlama ajanıyla planlayıp yürütün.',
     },
@@ -1069,7 +1069,7 @@ export const tr: SiteTranslations = {
             id: 'cost',
             question: 'Maliyeti nedir ve verimlilik nasıl ölçülür?',
             answer:
-              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın yüklediği talimat byte sayısı olarak raporlanır; skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz; sonuçları düzgün ölçmek için önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır.',
+              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın yüklediği talimat byte sayısı olarak raporlanır; skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz. Donmuş bir protokol altında taze aracılarla bir kamu değerlendirmesi artık yürütüldü: aynı iki özellik; harness olmadan, önceki ana sürümle ve geçerli sürümle — her biri temiz klonlardan inşa edildi. Harness taşıyan ağaçtaki aracıların her iki görevde daha az byte okuduğunu ve geçerli sürümün özellik oturumlarının her iki görevde önceki ana sürümünkinden daha az model girdi ve çıktısı tükettiğini buldu — harness tarafından raporlandığı şekliyle, tek bir iş yükünde. Dürüst sınırları da buldu: onboarding, akışlar kullanıldığında geri ödeyen tek seferlik bir maliyettir; iş yükü başına net token yönü karışıktı; duvar saati avantajı iddia edilmez; ve taze bir aracı akışlara kendi başına girmez — akışlar sizin ya da onları çağırmayı bilen bir aracının çalıştırdığı komutlardır.',
             linkLabel: 'Güven ve açıklama',
             linkPath: '/trust',
           },
@@ -1293,7 +1293,7 @@ export const tr: SiteTranslations = {
     },
     honestLimits: {
       title: 'Dürüst sınırlar',
-      body: 'Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil. DWP kasıtlı olarak depoyla sınırlıdır: ne projeler arası bir bellek sistemi, ne rol tabanlı bir ajan çerçevesi, ne de bir IDE’dir; dolayısıyla bu eksenlerde de rekabet etmez — iş bunu gerektirdiğinde, o eksenlerden birini kapsayan bir araçla birlikte kullanın.',
+      body: 'Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; kendi yürüttüğümüz taze-aracı değerlendirmesi donmuş bir protokol altında koşuldu — küçük ölçekte: tek iş yükü, yapılandırma başına iki özellik, bir makine — ve sonuçları her iki yönde yayımlanır: harness taşıyan ağaçlardaki aracılar her iki görevde daha az byte okudu; geçerli sürümün oturumları, harness tarafından raporlanan model girdi ve çıktısını önceki ana sürümünden daha az tüketti; buna karşılık iş yükü başına net token yönü karışıktı ve duvar saati avantajı iddia edilmiyor. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil. DWP kasıtlı olarak depoyla sınırlıdır: ne projeler arası bir bellek sistemi, ne rol tabanlı bir ajan çerçevesi, ne de bir IDE’dir; dolayısıyla bu eksenlerde de rekabet etmez — iş bunu gerektirdiğinde, o eksenlerden birini kapsayan bir araçla birlikte kullanın.',
     },
     correction: {
       title: 'Bu sayfanın doğruluğunu korumamıza yardım edin',
@@ -1305,7 +1305,7 @@ export const tr: SiteTranslations = {
 
   trustPage: {
     meta: {
-      title: 'Güven ve güvenlik',
+      title: 'Güven ve güvenlik — Deep Work Plan',
       description:
         "Deep Work Plan'in neden güvenle benimsenebileceği: açık kaynak ve MIT lisanslı, ağ çağrısı veya telemetri içermeyen Markdown-first yapı, tasarım gereği yıkıcı olmayan, doğrulanabilir kurulumlar ve açık bir güvenlik açığı bildirme politikası.",
     },
@@ -1369,7 +1369,7 @@ export const tr: SiteTranslations = {
       title:
         "Geliştiriciler — Deep Work Plan ajan API'si, MCP sunucusu ve dokümanları",
       description:
-        "Deep Work Plan ajan yüzeyi: salt okunur, kimlik doğrulamasız API, OpenAPI spesifikasyonu, /api/mcp MCP sunucusu, 17 dilde Markdown ve npx skills CLI'si.",
+        "Deep Work Plan'ın ajan yüzeyi: sürümlü, salt okunur ve kimlik doğrulamasız bir API — OpenAPI, MCP sunucusu, 17 dilde sayfa başına Markdown ve resmî bir CLI.",
     },
     eyebrow: 'Ajan ve geliştirici yüzeyi',
     title: 'Geliştiriciler ve yapay zeka ajanları için Deep Work Plan',
@@ -1432,6 +1432,30 @@ export const tr: SiteTranslations = {
           'Spesifikasyona ve bu portala bağlantılar içeren statik sağlık işareti.',
       },
       {
+        method: 'GET',
+        path: '/api/v1/index.json',
+        description:
+          'v1 ailesinin sürümlü kataloğu: uç nokta yolları, site sürümü ve belirtim bağlantıları.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/sections.json',
+        description:
+          'Site haritası tipli JSON olarak — her bölüm için ad, yol ve açıklama.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/pages.json',
+        description:
+          'Her dildeki tüm Markdown uç noktaları, dil koduna göre gruplanmış.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health.json',
+        description:
+          "Sürümlü sağlık göstergesi — /api/health.json'un v1 aynası.",
+      },
+      {
         method: 'POST',
         path: '/api/mcp',
         description:
@@ -1444,6 +1468,12 @@ export const tr: SiteTranslations = {
           'ARD yetenek manifestosu — robots.txt içinde bildirilen agentmap.',
       },
     ],
+    versioningTitle: 'Sürümleme ve kullanımdan kaldırma',
+    versioningBody:
+      'Sürümlü JSON ailesi /api/v1/ altında yaşar — index, sections, pages ve health — ve sürümsüz kanonik yollar (/llms.txt, /{page}.md, /api/mcp) aynı v1 sözleşmesine aittir. Yıkıcı değişiklikler yalnızca yeni bir /api/v{N+1}/ ailesinde yayımlanır, asla v1 içinde olmaz. Bir uç nokta kullanımdan kaldırıldığında yanıtları Deprecation: true taşır ve kaldırılmadan en az 180 gün önce bir Sunset tarihi içerir; bir Link başlığı halefi gösterir.',
+    rateLimitsTitle: 'İstek limitleri',
+    rateLimitsBody:
+      '/api/* yanıtları RFC 9331 istek limiti başlıklarını taşır — RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset ve RateLimit-Policy — böylece ajanlar kendilerini gerçek zamanlı yavaşlatabilir; bir 429 yanıtı Retry-After ekler. Uygulama uçta elden geldiğince (best-effort) yapılır (ziyaretçi başına 60 saniyede 120 istek) ve erişim anonim kalır: anahtar yok, kayıt yok, kademe yok.',
     mcpTitle: 'MCP sunucusu',
     mcpIntro:
       'Streamable HTTP üzerinden durumsuz bir Model Context Protocol sunucusu. Üç salt okunur araç: get_init_prompt, list_site_sections ve read_page. 2025-03-26 ve 2025-06-18 protokol sürümleri desteklenir; oturum gerekmez.',
@@ -1459,9 +1489,9 @@ export const tr: SiteTranslations = {
     cliTitle: "Kit'i kurun",
     cliIntro:
       "Deep Work Plan skill'i için resmî kurulum yolu — /init uç noktasının ajanlara verdiği komutla aynıdır. Skills uyumlu herhangi bir kodlama ajanıyla çalışır (Claude Code, Cursor, Codex, Gemini ve diğerleri).",
-    cliCodeLabel: 'Terminal — skills CLI',
+    cliCodeLabel: 'Terminal — skills CLI ve resmî CLI',
     cliNote:
-      'Skill, deponuzun içindeki .agents/skills/deepworkplan/ klasörüne yerleştirilir; böylece depoya dokunan her ajan aynı metodolojiyi paylaşır.',
+      'Skill, deponuzun içindeki .agents/skills/deepworkplan/ klasörüne yerleştirilir; böylece depoya dokunan her ajan aynı metodolojiyi paylaşır. Resmî deepworkplan CLI — aynı API üzerinde sıfır bağımlılıklı bir istemci (init, sections, read, open, mcp) — npm için hazırlandı ve yayımlanana kadar site deposunun cli/ dizininde durur.',
     resourcesTitle: 'Makine tarafından okunabilir kaynaklar',
     resources: [
       {
