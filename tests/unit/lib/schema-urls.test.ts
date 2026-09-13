@@ -78,6 +78,23 @@ describe('canonical schema URL publication', () => {
     );
   });
 
+  it('publishes the v2 and v5 plan schemas the v5 line depends on', () => {
+    // v5-authored plans cite these URLs; before their publication every v5
+    // plan's schema URL 404'd. Their references live mostly in the published
+    // files themselves, so the resolve guard above cannot catch their absence.
+    const missing = [
+      'plan-manifest/v2',
+      'plan-manifest/v5',
+      'plan-state/v2',
+      'plan-state/v5',
+    ].filter(
+      (labelVersion) =>
+        !existsSync(join(PUBLIC_SCHEMA_DIR, `${labelVersion}.json`))
+    );
+
+    expect(missing, `unpublished: ${missing.join(', ')}`).toEqual([]);
+  });
+
   it('publishes every schema version the vendored DWP skill carries, byte-identical', () => {
     // The vendored skill names its files plan-manifest.schema.json (v1),
     // plan-manifest-v2.schema.json (v2), plan-manifest-v5.schema.json (v5), etc.
