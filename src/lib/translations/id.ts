@@ -126,7 +126,7 @@ export const id: SiteTranslations = {
       answer:
         'Deep Work Plan menjawabnya dengan pengembangan berbasis spesifikasi: rencana yang tahan lama, tugas atomik, dan gerbang verifikasi yang harus dilalui agen. "Selesai" berhenti menjadi perasaan — menjadi bukti yang dapat diverifikasi dan ditinjau.',
       efficiency:
-        'Dan karena konteks adalah sumber daya paling langka bagi agen Anda, harness dirancang untuk efisiensi token: instruksi dimuat progresif, verifikasi hanya menyentuh yang berubah, dan setiap tugas belajar secara lokal — kerja panjang tetap terjangkau. Rencana itu sendiri berskala dengan cara yang sama: rencana Lite untuk perbaikan berbatas, rencana Full untuk pekerjaan yang berlangsung berjam-jam — format selalu mengikuti cakupan pekerjaan, bukan sebaliknya.',
+        'Dan karena konteks adalah sumber daya paling langka bagi agen Anda, harness dirancang untuk menjaga beban instruksinya sendiri tetap kecil dan dapat diaudit: instruksi dimuat progresif, verifikasi hanya menyentuh yang berubah, dan setiap tugas belajar secara lokal. Beban per alur diukur dalam byte dan dipublikasikan pada setiap rilis — rilis terbaru memangkas alur eksekusi 45,7% dan alur lanjut 67,5%. Rencana itu sendiri berskala dengan cara yang sama: rencana Lite untuk perbaikan berbatas, rencana Full untuk pekerjaan yang berlangsung berjam-jam — format selalu mengikuti cakupan pekerjaan, bukan sebaliknya.',
       illustrationAlt:
         'Diptych ukiran: satu sisi kapal yang hanyut di kabut dekat karang, sisi lain kapal yang sama menuju mercusuar pelabuhan di jalur yang tergambar.',
     },
@@ -157,7 +157,7 @@ export const id: SiteTranslations = {
       },
       act5: {
         kicker: 'Metode · Babak V',
-        lead: 'Konteks adalah sumber daya paling langka bagi agen Anda. Harness memuat progresif, memvalidasi yang berubah, dan belajar per tugas — rencana membayar dirinya sendiri.',
+        lead: 'Konteks adalah sumber daya paling langka bagi agen Anda. Harness memuat progresif, memvalidasi yang berubah, dan belajar per tugas — beban instruksi setiap alur terukur dan dipublikasikan, rilis demi rilis.',
         deepLinkLabel: 'Baca metodologi',
         deepLinkHref: '/methodology',
       },
@@ -1069,7 +1069,7 @@ export const id: SiteTranslations = {
             id: 'cost',
             question: 'Berapa biayanya, dan bagaimana efisiensi diukur?',
             answer:
-              'Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur, diukur oleh script yang di-commit bersama skill, diukur ulang pada setiap baseline rilis dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu; evaluasi publik yang praregistrasi direncanakan untuk mengukur hasilnya secara semestinya.',
+              'Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur, diukur oleh script yang di-commit bersama skill, diukur ulang pada setiap baseline rilis dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu. Evaluasi publik dengan agen segar kini telah dijalankan di bawah protokol beku: dua fitur yang sama dibangun dari klon bersih tanpa harness, dengan versi mayor sebelumnya, dan dengan versi saat ini. Evaluasi menemukan bahwa agen pada pohon berkemampuan-harness membaca lebih sedikit byte pada kedua tugas, dan bahwa sesi fitur versi saat ini mengonsumsi lebih sedikit masukan dan keluaran model daripada versi mayor sebelumnya pada kedua tugas — sebagaimana dilaporkan harness, pada satu beban kerja. Evaluasi juga menemukan batas-batasnya yang jujur: onboarding adalah biaya sekali bayar yang hanya terbayar kembali saat alurnya digunakan, arah token bersih per beban kerja bersifat campuran, tidak ada klaim keunggulan waktu dinding, dan agen segar tidak memasuki alur dengan sendirinya — alur adalah perintah yang Anda atau agen yang tahu memanggilnya.',
             linkLabel: 'Kepercayaan dan pengungkapan',
             linkPath: '/trust',
           },
@@ -1293,7 +1293,7 @@ export const id: SiteTranslations = {
     },
     honestLimits: {
       title: 'Keterbatasan yang jujur',
-      body: 'Deep Work Plan tidak memiliki mekanisme spesifikasi hidup maupun delta; OpenSpec dan tool sejenis lebih kuat di aspek itu. Belum ada benchmark independen atas metodologi ini; sebuah evaluasi publik yang praregistrasi sedang direncanakan. Ledger beban instruksi mengukur byte yang dimuat, bukan token, biaya, atau hasil. DWP secara sengaja dibatasi pada repositori: ini bukan sistem memori lintas proyek, bukan kerangka kerja agen berbasis peran, dan bukan IDE, sehingga tidak bersaing di sumbu-sumbu itu juga — padukan dengan alat yang mencakup salah satu sumbu tersebut saat pekerjaan membutuhkannya.',
+      body: 'Deep Work Plan tidak memiliki mekanisme spesifikasi hidup maupun delta; OpenSpec dan tool sejenis lebih kuat di aspek itu. Belum ada benchmark independen atas metodologi ini; evaluasi pihak pertama dengan agen segar telah dijalankan di bawah protokol beku, dalam skala kecil — satu beban kerja, dua fitur per konfigurasi, satu mesin — dan hasilnya dipublikasikan ke dua arah: agen pada pohon berkemampuan-harness membaca lebih sedikit byte pada kedua tugas dan sesi versi saat ini mengonsumsi lebih sedikit masukan dan keluaran model yang dilaporkan harness daripada versi mayor sebelumnya, sementara arah token bersih per beban kerja bersifat campuran dan tidak ada klaim keunggulan waktu dinding. Ledger beban instruksi mengukur byte yang dimuat, bukan token, biaya, atau hasil. DWP secara sengaja dibatasi pada repositori: ini bukan sistem memori lintas proyek, bukan kerangka kerja agen berbasis peran, dan bukan IDE, sehingga tidak bersaing di sumbu-sumbu itu juga — padukan dengan alat yang mencakup salah satu sumbu tersebut saat pekerjaan membutuhkannya.',
     },
     correction: {
       title: 'Bantu kami menjaga keakuratan halaman ini',

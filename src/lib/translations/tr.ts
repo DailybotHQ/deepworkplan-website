@@ -128,7 +128,7 @@ export const tr: SiteTranslations = {
       answer:
         'Deep Work Plan, spesifikasyon odaklı geliştirme ile yanıt verir: dayanıklı bir plan, atomik görevler ve ajanın geçmesi gereken doğrulama kapıları. "Bitti" bir his olmaktan çıkar — geçerlenebilir, gözden geçirilebilir kanıta dönüşür.',
       efficiency:
-        'Ve bağlam, ajanınızın en kıt kaynağıdır. Bu yüzden harness token verimliliği için tasarlandı: talimatlar aşamalı yüklenir, doğrulama yalnızca değişene dokunur ve her görev kendi yerinde öğrenir — uzun soluklu iş ulaşılabilir kalır. Planın kendisi de aynı şekilde ölçeklenir: sınırlı bir düzeltme için Lite plan, saatler süren bir iş için Full plan — biçim her zaman işin kapsamını izler, tam tersi değil.',
+        'Ve bağlam, ajanınızın en kıt kaynağıdır. Bu yüzden harness, kendi talimat yükünü küçük ve denetlenebilir tutmak için tasarlandı: talimatlar aşamalı yüklenir, doğrulama yalnızca değişene dokunur ve her görev kendi yerinde öğrenir. Her akışın yükü bayt cinsinden ölçülür ve her yayında yayımlanır — son yayında yürütme akışı yüzde 45,7, sürdürme akışı yüzde 67,5 küçüldü. Planın kendisi de aynı şekilde ölçeklenir: sınırlı bir düzeltme için Lite plan, saatler süren bir iş için Full plan — biçim her zaman işin kapsamını izler, tam tersi değil.',
       illustrationAlt:
         'Bir yandan sisli kayalıklar arasında sürüklenen bir gemi, diğer yandan aynı geminin çizili rotayla liman fenerine ilerleyişi — bir gravür diptiği.',
     },
@@ -159,7 +159,7 @@ export const tr: SiteTranslations = {
       },
       act5: {
         kicker: 'Yöntem · Perde V',
-        lead: 'Bağlam, ajanınızın en kıt kaynağıdır. Harness aşamalı yüklenir, yalnızca değişeni doğrular ve görev başına öğrenir — plan kendini öder.',
+        lead: 'Bağlam, ajanınızın en kıt kaynağıdır. Harness aşamalı yüklenir, yalnızca değişeni doğrular ve görev başına öğrenir — her akışın talimat yükü ölçülüp yayımlanır, yayın üstüne yayın.',
         deepLinkLabel: 'Metodolojiyi okuyun',
         deepLinkHref: '/methodology',
       },
@@ -1069,7 +1069,7 @@ export const tr: SiteTranslations = {
             id: 'cost',
             question: 'Maliyeti nedir ve verimlilik nasıl ölçülür?',
             answer:
-              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın yüklediği talimat byte sayısı olarak raporlanır; skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz; sonuçları düzgün ölçmek için önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır.',
+              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın yüklediği talimat byte sayısı olarak raporlanır; skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz. Donmuş bir protokol altında taze aracılarla bir kamu değerlendirmesi artık yürütüldü: aynı iki özellik; harness olmadan, önceki ana sürümle ve geçerli sürümle — her biri temiz klonlardan inşa edildi. Harness taşıyan ağaçtaki aracıların her iki görevde daha az byte okuduğunu ve geçerli sürümün özellik oturumlarının her iki görevde önceki ana sürümünkinden daha az model girdi ve çıktısı tükettiğini buldu — harness tarafından raporlandığı şekliyle, tek bir iş yükünde. Dürüst sınırları da buldu: onboarding, akışlar kullanıldığında geri ödeyen tek seferlik bir maliyettir; iş yükü başına net token yönü karışıktı; duvar saati avantajı iddia edilmez; ve taze bir aracı akışlara kendi başına girmez — akışlar sizin ya da onları çağırmayı bilen bir aracının çalıştırdığı komutlardır.',
             linkLabel: 'Güven ve açıklama',
             linkPath: '/trust',
           },
@@ -1293,7 +1293,7 @@ export const tr: SiteTranslations = {
     },
     honestLimits: {
       title: 'Dürüst sınırlar',
-      body: 'Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil. DWP kasıtlı olarak depoyla sınırlıdır: ne projeler arası bir bellek sistemi, ne rol tabanlı bir ajan çerçevesi, ne de bir IDE’dir; dolayısıyla bu eksenlerde de rekabet etmez — iş bunu gerektirdiğinde, o eksenlerden birini kapsayan bir araçla birlikte kullanın.',
+      body: 'Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; kendi yürüttüğümüz taze-aracı değerlendirmesi donmuş bir protokol altında koşuldu — küçük ölçekte: tek iş yükü, yapılandırma başına iki özellik, bir makine — ve sonuçları her iki yönde yayımlanır: harness taşıyan ağaçlardaki aracılar her iki görevde daha az byte okudu; geçerli sürümün oturumları, harness tarafından raporlanan model girdi ve çıktısını önceki ana sürümünden daha az tüketti; buna karşılık iş yükü başına net token yönü karışıktı ve duvar saati avantajı iddia edilmiyor. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil. DWP kasıtlı olarak depoyla sınırlıdır: ne projeler arası bir bellek sistemi, ne rol tabanlı bir ajan çerçevesi, ne de bir IDE’dir; dolayısıyla bu eksenlerde de rekabet etmez — iş bunu gerektirdiğinde, o eksenlerden birini kapsayan bir araçla birlikte kullanın.',
     },
     correction: {
       title: 'Bu sayfanın doğruluğunu korumamıza yardım edin',

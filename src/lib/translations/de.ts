@@ -127,7 +127,7 @@ export const de: SiteTranslations = {
       answer:
         'Deep Work Plan antwortet mit spec-driven development: ein dauerhafter Plan, atomare Aufgaben und Validierungs-Gates, die der Agent bestehen muss. „Fertig“ ist kein Gefühl mehr — es wird zu überprüfbarer, reviewbarer Evidenz.',
       efficiency:
-        'Und weil der Kontext die knappste Ressource Ihres Agenten ist, ist das Harness auf Token-Effizienz ausgelegt: Anweisungen laden progressiv, Validierung berührt nur Geändertes, und jede Aufgabe lernt lokal — so bleibt langlaufende Arbeit erschwinglich. Der Plan selbst skaliert nach demselben Prinzip: ein Lite-Plan für eine begrenzte Korrektur, ein Full-Plan für Arbeit, die sich über Stunden erstreckt — das Format folgt immer dem Umfang der Arbeit, nicht umgekehrt.',
+        'Und weil der Kontext die knappste Ressource Ihres Agenten ist, ist das Harness darauf ausgelegt, seine eigene Instruktionslast klein und prüfbar zu halten: Anweisungen laden progressiv, Validierung berührt nur Geändertes, und jede Aufgabe lernt lokal. Die Last pro Flow wird in Bytes gemessen und mit jedem Release veröffentlicht — das letzte Release senkte den Execute-Flow um 45,7% und den Resume-Flow um 67,5%. Der Plan selbst skaliert nach demselben Prinzip: ein Lite-Plan für eine begrenzte Korrektur, ein Full-Plan für Arbeit, die sich über Stunden erstreckt — das Format folgt immer dem Umfang der Arbeit, nicht umgekehrt.',
       illustrationAlt:
         'Ein Diptychon: links ein im Nebel neben Felsen abtreibendes Schiff, rechts dasselbe Schiff auf gezeichnetem Kurs ruhig Richtung Hafenfeuer.',
     },
@@ -158,7 +158,7 @@ export const de: SiteTranslations = {
       },
       act5: {
         kicker: 'Die Methode · Akt V',
-        lead: 'Der Kontext ist die knappste Ressource Ihres Agenten. Das Harness lädt progressiv, validiert nur Geändertes und lernt Aufgabe für Aufgabe — so amortisiert sich der Plan selbst.',
+        lead: 'Der Kontext ist die knappste Ressource Ihres Agenten. Das Harness lädt progressiv, validiert nur Geändertes und lernt Aufgabe für Aufgabe — mit der Instruktionslast jedes Flows gemessen und veröffentlicht, Release für Release.',
         deepLinkLabel: 'Lesen Sie die Methodik',
         deepLinkHref: '/methodology',
       },
@@ -1070,7 +1070,7 @@ export const de: SiteTranslations = {
             id: 'cost',
             question: 'Was kostet es, und wie wird Effizienz gemessen?',
             answer:
-              'Die Methodik und die Skill sind MIT-lizenziert und kostenlos; es gibt keinen Dienst, keinen API-Schlüssel und keine Telemetrie in den Kern-Flows. Effizienz wird als Anzahl der Instruktions-Bytes berichtet, die jeder Flow lädt — gemessen von einem Skript, das mit der Skill committet, über Release-Baselines hinweg neu gemessen und in einem Evaluations-Ledger veröffentlicht wird, wobei Zunahmen so offen berichtet werden wie Abnahmen. Nicht berichtet wird in Token-Prozenten oder eingesparten Kosten, weil eine Byte-Bestandsaufnahme das nicht belegen kann; eine vorregistrierte öffentliche Evaluation ist geplant, um Ergebnisse ordentlich zu messen.',
+              'Die Methodik und die Skill sind MIT-lizenziert und kostenlos; es gibt keinen Dienst, keinen API-Schlüssel und keine Telemetrie in den Kern-Flows. Effizienz wird als Anzahl der Instruktions-Bytes berichtet, die jeder Flow lädt — gemessen von einem Skript, das mit der Skill committet, über Release-Baselines hinweg neu gemessen und in einem Evaluations-Ledger veröffentlicht wird, wobei Zunahmen so offen berichtet werden wie Abnahmen. Nicht berichtet wird in Token-Prozenten oder eingesparten Kosten, weil eine Byte-Bestandsaufnahme das nicht belegen kann. Eine öffentliche Evaluation mit frischen Agenten ist unter einem eingefrorenen Protokoll bereits gelaufen: dieselben zwei Features, gebaut aus sauberen Klonen ohne Harness, mit der vorherigen Major-Version und mit der aktuellen. Sie ergab, dass Agenten auf einem Harness-tragenden Baum in beiden Aufgaben weniger Bytes lasen und dass die Feature-Sitzungen der aktuellen Version in beiden Aufgaben weniger Modell-Ein- und -Ausgabe verbrauchten als die der vorherigen Major-Version — vom Harness berichtet, auf einer einzelnen Workload. Sie benannte auch die ehrlichen Grenzen: Onboarding ist ein einmaliger Aufwand, der sich nur zurückzahlt, wenn die Flows genutzt werden; die Netto-Token-Richtung je Workload war gemischt; kein Wanduhr-Vorteil wird beansprucht; und ein frischer Agent betritt die Flows nicht von selbst — die Flows sind Befehle, die Sie oder ein Agent, der sie kennt, aufrufen.',
             linkLabel: 'Vertrauen und Offenlegung',
             linkPath: '/trust',
           },
@@ -1295,7 +1295,7 @@ export const de: SiteTranslations = {
     },
     honestLimits: {
       title: 'Ehrliche Grenzen',
-      body: 'Deep Work Plan hat keinen Mechanismus für lebende oder Delta-Spezifikationen; OpenSpec und ähnliche Werkzeuge sind dort stärker. Ein unabhängiger Benchmark der Methodik existiert noch nicht; eine vorregistrierte öffentliche Evaluation ist geplant. Das Instruktionslast-Ledger misst geladene Bytes, nicht Token, Kosten oder Ergebnisse. DWP ist bewusst auf das Repository begrenzt: Es ist kein projektübergreifendes Gedächtnissystem, kein rollenbasiertes Agenten-Framework und keine IDE, und tritt auf diesen Achsen daher auch nicht an – kombinieren Sie es bei Bedarf mit einem Werkzeug, das genau das abdeckt.',
+      body: 'Deep Work Plan hat keinen Mechanismus für lebende oder Delta-Spezifikationen; OpenSpec und ähnliche Werkzeuge sind dort stärker. Ein unabhängiger Benchmark der Methodik existiert noch nicht; eine eigene Evaluation mit frischen Agenten ist unter einem eingefrorenen Protokoll gelaufen — im kleinen Maßstab: eine Workload, zwei Features pro Konfiguration, eine Maschine — und ihre Ergebnisse werden in beide Richtungen veröffentlicht: Agenten auf Harness-tragenden Bäumen lasen in beiden Aufgaben weniger Bytes, und die Sitzungen der aktuellen Version verbrauchten weniger vom Harness berichtete Modell-Ein- und -Ausgabe als die der vorherigen Major-Version, während die Netto-Token-Richtung je Workload gemischt war und kein Wanduhr-Vorteil beansprucht wird. Das Instruktionslast-Ledger misst geladene Bytes, nicht Token, Kosten oder Ergebnisse. DWP ist bewusst auf das Repository begrenzt: Es ist kein projektübergreifendes Gedächtnissystem, kein rollenbasiertes Agenten-Framework und keine IDE, und tritt auf diesen Achsen daher auch nicht an – kombinieren Sie es bei Bedarf mit einem Werkzeug, das genau das abdeckt.',
     },
     correction: {
       title: 'Helfen Sie uns, diese Seite korrekt zu halten',

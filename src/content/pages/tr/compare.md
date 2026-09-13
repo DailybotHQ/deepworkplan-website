@@ -77,7 +77,7 @@ Her yetenek araç başına nerede. Yerleşik, isteğe bağlı veya eklentiyle, v
 
 ## Dürüst sınırlar
 
-Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; önceden kayıtlı bir kamu değerlendirmesi planlanmaktadır. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil. DWP kasıtlı olarak depoyla sınırlıdır: ne projeler arası bir bellek sistemi, ne rol tabanlı bir ajan çerçevesi, ne de bir IDE’dir; dolayısıyla bu eksenlerde de rekabet etmez — iş bunu gerektirdiğinde, o eksenlerden birini kapsayan bir araçla birlikte kullanın.
+Deep Work Plan’in yaşayan veya delta spec mekanizması yoktur; OpenSpec ve benzeri araçlar orada daha güçlüdür. Metodolojinin bağımsız bir kıyaslaması henüz yoktur; kendi yürüttüğümüz taze-aracı değerlendirmesi donmuş bir protokol altında koşuldu — küçük ölçekte: tek iş yükü, yapılandırma başına iki özellik, bir makine — ve sonuçları her iki yönde yayımlanır: harness taşıyan ağaçlardaki aracılar her iki görevde daha az byte okudu; geçerli sürümün oturumları, harness tarafından raporlanan model girdi ve çıktısını önceki ana sürümünden daha az tüketti; buna karşılık iş yükü başına net token yönü karışıktı ve duvar saati avantajı iddia edilmiyor. Talimat yükü defteri yüklenen byte’ları ölçer; token, maliyet veya sonuçları değil. DWP kasıtlı olarak depoyla sınırlıdır: ne projeler arası bir bellek sistemi, ne rol tabanlı bir ajan çerçevesi, ne de bir IDE’dir; dolayısıyla bu eksenlerde de rekabet etmez — iş bunu gerektirdiğinde, o eksenlerden birini kapsayan bir araçla birlikte kullanın.
 
 ## Bu sayfanın doğruluğunu korumamıza yardım edin
 

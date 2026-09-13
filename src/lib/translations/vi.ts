@@ -127,7 +127,7 @@ export const vi: SiteTranslations = {
       answer:
         'Deep Work Plan trả lời bằng phát triển theo đặc tả: một kế hoạch bền vững, các tác vụ nguyên tử và cổng kiểm chứng agent buộc phải qua. “Xong” không còn là cảm giác — trở thành bằng chứng kiểm chứng được và review được.',
       efficiency:
-        'Và vì ngữ cảnh là tài nguyên khan hiếm nhất của agent, harness được thiết kế cho hiệu suất token: hướng dẫn tải tiến tiến, kiểm chứng chỉ chạm vào phần thay đổi và mỗi tác vụ học tại chỗ — công việc dài hơi vẫn khả thi. Bản thân kế hoạch cũng mở rộng theo cùng nguyên tắc: một kế hoạch Lite cho một bản sửa lỗi có giới hạn, một kế hoạch Full cho công việc kéo dài hàng giờ — định dạng luôn đi theo phạm vi công việc, chứ không phải ngược lại.',
+        'Và vì ngữ cảnh là tài nguyên khan hiếm nhất của agent, harness được thiết kế để giữ chính tải lệnh hướng dẫn của nó nhỏ và có thể kiểm toán: hướng dẫn tải dần dần, kiểm chứng chỉ chạm vào phần thay đổi và mỗi tác vụ học tại chỗ. Tải của mỗi luồng được đo bằng byte và công bố ở mỗi bản phát hành — bản phát hành gần nhất đã cắt luồng thực thi 45,7% và luồng tiếp tục 67,5%. Bản thân kế hoạch cũng mở rộng theo cùng nguyên tắc: một kế hoạch Lite cho một bản sửa lỗi có giới hạn, một kế hoạch Full cho công việc kéo dài hàng giờ — định dạng luôn đi theo phạm vi công việc, chứ không phải ngược lại.',
       illustrationAlt:
         'Một bản khắc hai tầng: một bên là con tàu trôi dạt trong sương mù cạnh đá ngầm, bên kia là chính con tàu vững vàng theo lộ trình đã vẽ về ngọn hải đăng cảng.',
     },
@@ -158,7 +158,7 @@ export const vi: SiteTranslations = {
       },
       act5: {
         kicker: 'Phương pháp · Hồi V',
-        lead: 'Ngữ cảnh là tài nguyên khan hiếm nhất của agent. Harness tải tiến tiến, chỉ kiểm chứng phần thay đổi và học theo từng tác vụ — kế hoạch tự trả phí cho chính nó.',
+        lead: 'Ngữ cảnh là tài nguyên khan hiếm nhất của agent. Harness tải dần dần, chỉ kiểm chứng phần thay đổi và học theo từng tác vụ — tải lệnh hướng dẫn của mỗi luồng được đo và công bố, bản phát hành này đến bản phát hành khác.',
         deepLinkLabel: 'Đọc phương pháp luận',
         deepLinkHref: '/methodology',
       },
@@ -1069,7 +1069,7 @@ export const vi: SiteTranslations = {
             id: 'cost',
             question: 'Chi phí là bao nhiêu, và hiệu suất được đo thế nào?',
             answer:
-              'Phương pháp luận và skill cấp phép MIT và miễn phí; không có dịch vụ, không có API key và không có telemetry trong các luồng lõi. Hiệu suất được báo cáo bằng số byte hướng dẫn mà mỗi luồng tải, đo bằng một script được commit cùng skill, đo lại ở mỗi đường cơ sở phát hành và công bố trong một sổ cái đánh giá, với mức tăng được báo cáo thẳng thắn như mức giảm. Nó không được báo cáo dưới dạng phần trăm token hay khoản tiết kiệm chi phí, vì một bản kê byte không chứng minh được những điều đó; một đợt đánh giá công khai đăng ký trước đang được lên kế hoạch để đo kết quả một cách đúng đắn.',
+              'Phương pháp luận và skill cấp phép MIT và miễn phí; không có dịch vụ, không có API key và không có telemetry trong các luồng lõi. Hiệu suất được báo cáo bằng số byte hướng dẫn mà mỗi luồng tải, đo bằng một script được commit cùng skill, đo lại ở mỗi đường cơ sở phát hành và công bố trong một sổ cái đánh giá, với mức tăng được báo cáo thẳng thắn như mức giảm. Nó không được báo cáo dưới dạng phần trăm token hay khoản tiết kiệm chi phí, vì một bản kê byte không chứng minh được những điều đó. Một đợt đánh giá công khai với các agent mới đã được thực hiện theo một giao thức đóng băng: cùng hai tính năng được xây dựng từ các bản sao sạch không harness, với phiên bản chính trước đó và với phiên bản hiện tại. Đợt đánh giá nhận thấy các agent trên cây có harness đọc ít byte hơn ở cả hai tác vụ, và các phiên làm việc tính năng của phiên bản hiện tại tiêu thụ ít đầu vào và đầu ra mô hình hơn phiên bản chính trước đó ở cả hai tác vụ — theo như harness báo cáo, trên một khối lượng công việc duy nhất. Nó cũng ghi nhận các giới hạn trung thực: onboarding là chi phí một lần chỉ được hoàn lại khi các luồng được sử dụng, hướng token ròng theo từng khối lượng công việc là hỗn hợp, không có tuyên bố ưu thế về thời gian đồng hồ, và một agent mới không tự đi vào các luồng — các luồng là các lệnh do bạn hoặc do agent biết gọi chúng khởi phát.',
             linkLabel: 'Tin tưởng và công bố',
             linkPath: '/trust',
           },
@@ -1293,7 +1293,7 @@ export const vi: SiteTranslations = {
     },
     honestLimits: {
       title: 'Những giới hạn thành thật',
-      body: 'Deep Work Plan không có cơ chế đặc tả sống hay đặc tả delta; OpenSpec và các công cụ tương tự mạnh hơn ở khoản đó. Chưa có benchmark độc lập nào cho phương pháp luận; một đợt đánh giá công khai đăng ký trước đang được lên kế hoạch. Sổ cái tải hướng dẫn đo byte được tải, không đo token, chi phí hay kết quả. DWP cố tình giới hạn phạm vi ở kho mã: đây không phải là hệ thống bộ nhớ liên dự án, không phải khung tác nhân theo vai trò, và cũng không phải một IDE, nên nó cũng không cạnh tranh trên những khía cạnh đó — hãy kết hợp với một công cụ đáp ứng khía cạnh đó khi công việc thực sự cần.',
+      body: 'Deep Work Plan không có cơ chế đặc tả sống hay đặc tả delta; OpenSpec và các công cụ tương tự mạnh hơn ở khoản đó. Chưa có benchmark độc lập nào cho phương pháp luận; một đợt đánh giá nội bộ với các agent mới đã được thực hiện theo giao thức đóng băng, ở quy mô nhỏ — một khối lượng công việc, hai tính năng cho mỗi cấu hình, một máy — và kết quả của nó được công bố theo cả hai hướng: các agent trên cây có harness đọc ít byte hơn ở cả hai tác vụ và các phiên của phiên bản hiện tại tiêu thụ ít đầu vào và đầu ra mô hình do harness báo cáo hơn phiên bản chính trước đó, trong khi hướng token ròng theo từng khối lượng công việc là hỗn hợp và không có tuyên bố ưu thế về thời gian đồng hồ. Sổ cái tải hướng dẫn đo byte được tải, không đo token, chi phí hay kết quả. DWP cố tình giới hạn phạm vi ở kho mã: đây không phải là hệ thống bộ nhớ liên dự án, không phải khung tác nhân theo vai trò, và cũng không phải một IDE, nên nó cũng không cạnh tranh trên những khía cạnh đó — hãy kết hợp với một công cụ đáp ứng khía cạnh đó khi công việc thực sự cần.',
     },
     correction: {
       title: 'Giúp chúng tôi giữ trang này chính xác',

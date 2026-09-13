@@ -122,7 +122,7 @@ export const en: SiteTranslations = {
       answer:
         'Deep Work Plan answers with spec-driven development: a durable plan, atomic tasks, and validation gates the agent must pass. Done stops being a feeling — it becomes verifiable, reviewable evidence.',
       efficiency:
-        'And because context is the scarcest resource your agent has, the harness is engineered for token efficiency: instructions load progressively, validation touches only what changed, and every task learns locally — so long-horizon work stays affordable. The plan itself scales the same way: a Lite plan for a bounded fix, a Full plan for work that spans hours, the format always following the scope of the work, not the other way around.',
+        'And because context is the scarcest resource your agent has, the harness is engineered to keep its own instruction load small and auditable: instructions load progressively, validation touches only what changed, and every task learns locally. The load per flow is measured in bytes and published every release — the latest release cut the execute flow by 45.7% and the resume flow by 67.5%. The plan itself scales the same way: a Lite plan for a bounded fix, a Full plan for work that spans hours, the format always following the scope of the work, not the other way around.',
       illustrationAlt:
         'An engraved diptych: a ship adrift in fog beside jagged rocks on one side, and the same ship steady on a plotted course toward a harbor beacon on the other.',
     },
@@ -153,7 +153,7 @@ export const en: SiteTranslations = {
       },
       act5: {
         kicker: 'The method · Act V',
-        lead: 'Context is the scarcest resource your agent has. The harness loads progressively, validates what changed, and learns task by task — so the plan pays for itself.',
+        lead: 'Context is the scarcest resource your agent has. The harness loads progressively, validates what changed, and learns task by task — with every flow’s instruction load measured and published, release after release.',
         deepLinkLabel: 'Read the methodology',
         deepLinkHref: '/methodology',
       },
@@ -1057,7 +1057,7 @@ export const en: SiteTranslations = {
             id: 'cost',
             question: 'What does it cost, and how is efficiency measured?',
             answer:
-              'The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads, measured by a script committed with the skill, re-measured across release baselines, and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those; a pre-registered public evaluation is planned to measure outcomes properly.',
+              'The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads, measured by a script committed with the skill, re-measured across release baselines, and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those. A public fresh-agent evaluation has now run under a frozen protocol: the same two features built from clean clones with no harness, with the previous major version and with the current one. It found that agents on a harness-bearing tree read fewer bytes in both tasks, and that the current version’s feature sessions consumed less model input and output than the previous major’s in both tasks — as reported by the harness, on a single workload. It also found the honest limits: onboarding is a one-time cost that only pays back when the flows are used, the net token direction per workload was mixed, no wall-clock advantage is claimed, and a fresh agent does not enter the flows unaided — the flows are commands you or the agent invoke.',
             linkLabel: 'Trust and disclosure',
             linkPath: '/trust',
           },
@@ -1281,7 +1281,7 @@ export const en: SiteTranslations = {
     },
     honestLimits: {
       title: 'Honest limits',
-      body: 'A DWP skill is a specification too: it describes how an agent should perform a procedure, such as creating a component. DWP plans are also change specifications: they define scope, acceptance criteria, validation gates and evidence. This row means something narrower: a canonical specification that describes the product’s current behavior and is updated with deltas after each change. DWP does not currently maintain that product-level living specification for every adopted system; OpenSpec is stronger when that lifecycle is the primary need. You can combine the layers by feeding a product spec or delta proposal into a DWP plan. No independent benchmark of the methodology exists yet; a pre-registered public evaluation is planned. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes. DWP is deliberately scoped to the repository: it is not a cross-project memory system, not a role-based agent framework and not an IDE, so it does not compete on those axes either — pair it with a tool that covers one of them when that is what the work needs.',
+      body: 'A DWP skill is a specification too: it describes how an agent should perform a procedure, such as creating a component. DWP plans are also change specifications: they define scope, acceptance criteria, validation gates and evidence. This row means something narrower: a canonical specification that describes the product’s current behavior and is updated with deltas after each change. DWP does not currently maintain that product-level living specification for every adopted system; OpenSpec is stronger when that lifecycle is the primary need. You can combine the layers by feeding a product spec or delta proposal into a DWP plan. No independent benchmark of the methodology exists yet; a first-party fresh-agent evaluation has run under a frozen protocol, at small scale — one workload, two features per configuration, one machine — and its results are published in both directions: agents on harness-bearing trees read fewer bytes in both tasks, and the current version’s sessions consumed less harness-reported model input and output than the previous major’s, while the net token direction per workload was mixed and no wall-clock advantage is claimed. The instruction-load ledger measures bytes loaded, not tokens, cost or outcomes. DWP is deliberately scoped to the repository: it is not a cross-project memory system, not a role-based agent framework and not an IDE, so it does not compete on those axes either — pair it with a tool that covers one of them when that is what the work needs.',
     },
     correction: {
       title: 'Help us keep this accurate',

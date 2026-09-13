@@ -128,7 +128,7 @@ export const pt: SiteTranslations = {
       answer:
         'O Deep Work Plan responde com desenvolvimento guiado por especificação: um plano duradouro, tarefas atômicas e validation gates que o agente precisa passar. Done deixa de ser uma sensação — vira evidência verificável e revisável.',
       efficiency:
-        'E como o contexto é o recurso mais escasso do seu agente, o harness é projetado para a eficiência de tokens: instruções carregam progressivamente, a validação toca apenas o que mudou e cada tarefa aprende localmente — assim o trabalho de longo prazo continua acessível. O próprio plano escala da mesma forma: um plano Lite para uma correção delimitada, um plano Full para o trabalho que se estende por horas — o formato sempre segue o alcance do trabalho, e não o contrário.',
+        'E como o contexto é o recurso mais escasso do seu agente, o harness é projetado para manter sua própria carga de instruções pequena e auditável: instruções carregam progressivamente, a validação toca apenas o que mudou e cada tarefa aprende localmente. A carga por fluxo é medida em bytes e publicada a cada lançamento — o último lançamento reduziu o fluxo de execução em 45,7% e o fluxo de retomada em 67,5%. O próprio plano escala da mesma forma: um plano Lite para uma correção delimitada, um plano Full para o trabalho que se estende por horas — o formato sempre segue o alcance do trabalho, e não o contrário.',
       illustrationAlt:
         'Um díptico gravado: de um lado um navio à deriva na névoa junto a rochas escarpadas, do outro o mesmo navio firme em um rumo traçado em direção ao farol de um porto.',
     },
@@ -159,7 +159,7 @@ export const pt: SiteTranslations = {
       },
       act5: {
         kicker: 'O método · Ato V',
-        lead: 'O contexto é o recurso mais escasso do seu agente. O harness carrega progressivamente, valida o que mudou e aprende tarefa a tarefa — assim o plano se paga sozinho.',
+        lead: 'O contexto é o recurso mais escasso do seu agente. O harness carrega progressivamente, valida o que mudou e aprende tarefa a tarefa — com a carga de instruções de cada fluxo medida e publicada, lançamento após lançamento.',
         deepLinkLabel: 'Leia a metodologia',
         deepLinkHref: '/methodology',
       },
@@ -1073,7 +1073,7 @@ export const pt: SiteTranslations = {
             id: 'cost',
             question: 'Quanto custa e como a eficiência é medida?',
             answer:
-              'A metodologia e a skill são licenciadas sob MIT e gratuitas; não há serviço, chave de API nem telemetria nos fluxos centrais. A eficiência é relatada como o número de bytes de instrução que cada fluxo carrega, medido por um script comitado junto com a skill, remedido em cada linha de base de lançamento e publicado em um registro de avaliação, com aumentos relatados com a mesma franqueza das reduções. Ela não é relatada como porcentagens de tokens ou economias de custo, porque um inventário de bytes não estabelece essas coisas; uma avaliação pública pré-registrada está planejada para medir resultados adequadamente.',
+              'A metodologia e a skill são licenciadas sob MIT e gratuitas; não há serviço, chave de API nem telemetria nos fluxos centrais. A eficiência é relatada como o número de bytes de instrução que cada fluxo carrega, medido por um script comitado junto com a skill, remedido em cada linha de base de lançamento e publicado em um registro de avaliação, com aumentos relatados com a mesma franqueza das reduções. Ela não é relatada como porcentagens de tokens ou economias de custo, porque um inventário de bytes não estabelece essas coisas. Uma avaliação pública com agentes novos já foi executada sob um protocolo congelado: os mesmos dois recursos construídos a partir de clones limpos sem harness, com a versão maior anterior e com a atual. Ela constatou que os agentes em uma árvore com harness leram menos bytes nas duas tarefas, e que as sessões de recurso da versão atual consumiram menos entrada e saída de modelo do que as da versão maior anterior nas duas tarefas — conforme reportado pelo harness, em uma única carga de trabalho. Ela também constatou os limites honestos: o onboarding é um custo único que só se paga quando os fluxos são usados, a direção líquida de tokens por carga de trabalho foi mista, não se reivindica vantagem de tempo de relógio, e um agente novo não entra nos fluxos sozinho — os fluxos são comandos que você ou o agente invocam.',
             linkLabel: 'Confiança e divulgação',
             linkPath: '/trust',
           },
@@ -1297,7 +1297,7 @@ export const pt: SiteTranslations = {
     },
     honestLimits: {
       title: 'Limitações honestas',
-      body: 'O Deep Work Plan não tem um mecanismo de especificação viva ou delta; OpenSpec e ferramentas semelhantes são mais fortes aí. Nenhum benchmark independente da metodologia existe ainda; uma avaliação pública pré-registrada está planejada. O registro de carga de instrução mede bytes carregados, não tokens, custo ou resultados. O DWP é deliberadamente limitado ao repositório: não é um sistema de memória entre projetos, nem um framework de agentes baseado em papéis, nem um IDE, então também não compete nessas frentes — combine-o com uma ferramenta que cubra essa frente quando for isso que o trabalho exigir.',
+      body: 'O Deep Work Plan não tem um mecanismo de especificação viva ou delta; OpenSpec e ferramentas semelhantes são mais fortes aí. Ainda não existe um benchmark independente da metodologia; uma avaliação própria com agentes novos já foi executada sob um protocolo congelado, em pequena escala — uma carga de trabalho, dois recursos por configuração, uma máquina — e seus resultados são publicados nas duas direções: agentes em árvores com harness leram menos bytes nas duas tarefas, e as sessões da versão atual consumiram menos entrada e saída de modelo, reportada pelo harness, do que as da versão maior anterior, enquanto a direção líquida de tokens por carga de trabalho foi mista e nenhuma vantagem de tempo de relógio é reivindicada. O registro de carga de instrução mede bytes carregados, não tokens, custo ou resultados. O DWP é deliberadamente limitado ao repositório: não é um sistema de memória entre projetos, nem um framework de agentes baseado em papéis, nem um IDE, então também não compete nessas frentes — combine-o com uma ferramenta que cubra essa frente quando for isso que o trabalho exigir.',
     },
     correction: {
       title: 'Ajude-nos a manter esta página exata',

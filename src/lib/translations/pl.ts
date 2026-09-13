@@ -128,7 +128,7 @@ export const pl: SiteTranslations = {
       answer:
         'Deep Work Plan odpowiada programowaniem sterowanym specyfikacją: trwały plan, zadania atomowe i bramki walidacyjne, które agent musi przejść. „Skończone” przestaje być odczuciem — staje się dowodem: zweryfikowanym i możliwym do przejrzenia.',
       efficiency:
-        'A ponieważ kontekst to najrzadszy zasób Twojego agenta, harness zaprojektowano pod wydajność tokenów: instrukcje ładują się progresywnie, walidacja dotyka tylko zmian, a każde zadanie uczy się lokalnie — długa praca pozostaje przystępna. Sam plan skaluje się w ten sam sposób: plan Lite dla ograniczonej poprawki, plan Full dla pracy rozciągniętej na godziny — format zawsze podąża za zakresem pracy, nigdy odwrotnie.',
+        'A ponieważ kontekst to najrzadszy zasób Twojego agenta, harness zaprojektowano tak, aby jego własne obciążenie instrukcjami było małe i audytowalne: instrukcje ładują się progresywnie, walidacja dotyka tylko zmian, a każde zadanie uczy się lokalnie. Obciążenie każdego przepływu jest mierzone w bajtach i publikowane przy każdym wydaniu — ostatnie wydanie zmniejszyło przepływ execute o 45,7%, a przepływ resume o 67,5%. Sam plan skaluje się w ten sam sposób: plan Lite dla ograniczonej poprawki, plan Full dla pracy rozciągniętej na godziny — format zawsze podąża za zakresem pracy, nigdy odwrotnie.',
       illustrationAlt:
         'Dyptyk: z jednej strony statek dryfujący we mgle wśród skał, z drugiej ten sam statek pewnie na wykreowanym kursie ku latarni portu.',
     },
@@ -159,7 +159,7 @@ export const pl: SiteTranslations = {
       },
       act5: {
         kicker: 'Metoda · Akt V',
-        lead: 'Kontekst to najrzadszy zasób Twojego agenta. Harness ładuje się progresywnie, waliduje tylko zmiany i uczy się zadanie po zadaniu — plan spłaca się sam.',
+        lead: 'Kontekst to najrzadszy zasób Twojego agenta. Harness ładuje się progresywnie, waliduje tylko zmiany i uczy się zadanie po zadaniu — obciążenie instrukcjami każdego przepływu jest mierzone i publikowane, wydanie po wydaniu.',
         deepLinkLabel: 'Przeczytaj metodologię',
         deepLinkHref: '/methodology',
       },
@@ -991,7 +991,7 @@ export const pl: SiteTranslations = {
             id: 'cost',
             question: 'Ile to kosztuje i jak mierzona jest wydajność?',
             answer:
-              'Metodyka i skill są na licencji MIT i bezpłatne; nie ma usługi, klucza API ani telemetrii w przepływach rdzeniowych. Wydajność jest raportowana jako liczba bajtów instrukcji ładowanych przez każdy przepływ, mierzona skryptem commitowanym ze skillem, ponownie mierzona na każdej linii bazowej release’u i publikowaną w rejestrze ewaluacji, przy czym wzrosty są raportowane tak samo otwarcie jak spadki. Nie jest raportowana jako procenty tokenów ani oszczędności kosztów, bo inwentaryzacja bajtów tego nie dowodzi; planowana jest preregistrowana publiczna ewaluacja, by właściwie zmierzyć wyniki.',
+              'Metodyka i skill są na licencji MIT i bezpłatne; nie ma usługi, klucza API ani telemetrii w przepływach rdzeniowych. Wydajność jest raportowana jako liczba bajtów instrukcji ładowanych przez każdy przepływ, mierzona skryptem commitowanym ze skillem, ponownie mierzona na każdej linii bazowej release’u i publikowaną w rejestrze ewaluacji, przy czym wzrosty są raportowane tak samo otwarcie jak spadki. Nie jest raportowana jako procenty tokenów ani oszczędności kosztów, bo inwentaryzacja bajtów tego nie dowodzi. Publiczna ewaluacja na świeżych agentach została już przeprowadzona według zamrożonego protokołu: te same dwa featury zbudowane z czystych klonów bez harnessu, z poprzednią wersją główną i z obecną. Wykazała, że agenci na drzewie z harnessem czytali mniej bajtów w obu zadaniach, a sesje featurów obecnej wersji zużywały mniej wejścia i wyjścia modelu niż poprzedniej wersji głównej w obu zadaniach — tak, jak zaraportował harness, na pojedynczym obciążeniu. Wykazała też uczciwe ograniczenia: onboarding to jednorazowy koszt, który zwraca się tylko wtedy, gdy przepływy są używane; netto-kierunek tokenów na obciążenie był mieszany; nie rości się żadnej przewagi czasu zegarowego; a świeży agent nie wchodzi w przepływy sam z siebie — przepływy to komendy wywoływane przez Ciebie lub przez agenta, który wie, jak je wywołać.',
             linkLabel: 'Zaufanie i ujawnianie',
             linkPath: '/trust',
           },
@@ -1215,7 +1215,7 @@ export const pl: SiteTranslations = {
     },
     honestLimits: {
       title: 'Uczciwe ograniczenia',
-      body: 'Deep Work Plan nie ma mechanizmu żywych ani delta-specyfikacji; OpenSpec i podobne narzędzia są tam silniejsze. Niezależny benchmark metodyki jeszcze nie istnieje; planowana jest preregistrowana publiczna ewaluacja. Rejestr obciążenia instrukcjami mierzy załadowane bajty, nie tokeny, koszty ani wyniki. DWP jest celowo ograniczony do repozytorium: nie jest systemem pamięci między projektami, nie jest frameworkiem agentów opartym na rolach ani IDE, więc nie konkuruje też na tych płaszczyznach — połącz go z narzędziem pokrywającym daną potrzebę, gdy praca tego wymaga.',
+      body: 'Deep Work Plan nie ma mechanizmu żywych ani delta-specyfikacji; OpenSpec i podobne narzędzia są tam silniejsze. Niezależny benchmark metodyki jeszcze nie istnieje; autorska ewaluacja na świeżych agentach została już przeprowadzona według zamrożonego protokołu, w małej skali — jedno obciążenie, dwa featury na konfigurację, jedna maszyna — a jej wyniki są publikowane w obu kierunkach: agenci na drzewach z harnessem czytali mniej bajtów w obu zadaniach, a sesje obecnej wersji zużywały mniej zaraportowanego przez harness wejścia i wyjścia modelu niż poprzednia wersja główna, przy czym netto-kierunek tokenów na obciążenie był mieszany i nie rości się żadnej przewagi czasu zegarowego. Rejestr obciążenia instrukcjami mierzy załadowane bajty, nie tokeny, koszty ani wyniki. DWP jest celowo ograniczony do repozytorium: nie jest systemem pamięci między projektami, nie jest frameworkiem agentów opartym na rolach ani IDE, więc nie konkuruje też na tych płaszczyznach — połącz go z narzędziem pokrywającym daną potrzebę, gdy praca tego wymaga.',
     },
     correction: {
       title: 'Pomóż nam utrzymać dokładność',
