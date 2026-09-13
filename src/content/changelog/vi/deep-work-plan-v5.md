@@ -1,6 +1,6 @@
 ---
 title: "DWP v5: những lời hứa, giờ được đảm bảo"
-description: "Deep Work Plan v5 biến tám lời hứa lâu nay thành các hợp đồng đã được kiểm thử — trình kiểm chứng trung thực, một quy tắc phê duyệt, điều phối không gây hỏng và đường nâng cấp an toàn."
+description: "Deep Work Plan v5 biến tám lời hứa lâu nay thành các hợp đồng đã kiểm thử và có phiên bản — trình kiểm chứng trung thực, điều phối an toàn và đường nâng cấp đã được chứng minh."
 date: 2026-09-12
 version: "v5 · Đảm bảo bằng kiểm thử"
 kind: release
@@ -11,7 +11,7 @@ sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
 ---
 
-Hôm nay chúng tôi phát hành Deep Work Plan v5. Tóm tắt trung thực của bản phát hành này: phương pháp luận đã từng hứa tất cả những điều này — giờ đây nó đảm bảo chúng. Trước v5, một agent đi theo tài liệu từng chữ vẫn có thể rơi vào các kịch bản thất bại thực; mỗi kịch bản như vậy giờ đã được đóng lại và ghim bằng một kiểm thử có thể thực thi. Bộ hợp đồng của skill đã tăng từ 132 lên 258 kiểm thử trong chu kỳ này, và mỗi đảm bảo dưới đây đã được xác thực trực tiếp trên tag đã phát hành — cài vào một kho sạch và đưa qua chính các luồng của nó trước khi mục này được viết.
+Hôm nay chúng tôi phát hành Deep Work Plan v5. Đây không phải là viết lại: đây là kết quả của nhiều tháng sử dụng thực tế — bao gồm một cuộc kiểm toán trực tiếp trên 108 kế hoạch thực — đã phơi bày, từng khoảng hở một, nơi lời hứa của phương pháp luận và hành vi thực của một agent có thể khác nhau. Tóm tắt trung thực của bản phát hành này: phương pháp luận đã từng hứa tất cả những điều này — giờ đây nó đảm bảo chúng. Trước v5, một agent đi theo tài liệu từng chữ vẫn có thể rơi vào các kịch bản thất bại thực; mỗi kịch bản như vậy, được nhận diện nhờ việc sử dụng và phản hồi đó, giờ đã được đóng lại và ghim bằng một kiểm thử có thể thực thi, chứ không phải được vá bằng thêm văn xuôi. Bộ hợp đồng của skill đã tăng từ 132 lên 258 kiểm thử trong chu kỳ này, và mỗi đảm bảo dưới đây đã được xác thực trực tiếp trên tag đã phát hành — cài vào một kho sạch và đưa qua chính các luồng của nó trước khi mục này được viết.
 
 **Một trình kiểm chứng không bao giờ tuyên bố thành công chưa được xác minh.** Các kiểm tra tuân thủ trước đây xuống cấp trong im lặng: không có trình thông dịch đủ khả năng, chúng bỏ qua mọi bước xác minh mà vẫn in ra phán quyết tuân thủ, và chữ in đậm bên trong một trường có thể bị nhầm là trường bị thiếu. Giờ đây trình kiểm chứng kết thúc bằng phán quyết `UNVERIFIED` rõ ràng mỗi khi nó không thể xác minh thật sự. Một trình kiểm chứng không bao giờ báo cáo một thành công mà nó chưa kiểm tra — niềm tin vào các cổng validation là toàn bộ đề xuất, và một cổng có thể bỏ qua chính bước kiểm tra của mình thì phá vỡ chuỗi niềm tin đó.
 
@@ -29,4 +29,6 @@ Hôm nay chúng tôi phát hành Deep Work Plan v5. Tóm tắt trung thực củ
 
 **Bằng chứng trung thực và đo lường được.** Các tuyên bố hiệu suất giờ được đo lại trên ba baseline — v3.0.0, v4.0.3 và cây cuối cùng — với script đo lường được commit vào kho. Kết quả được báo cáo theo byte hệ thống tệp và không bao giờ chuyển đổi thành số token hay chi phí mà chúng tôi không thể đứng sau lưng; mọi tuyên bố không thể xác minh đều bị cách ly như vậy trong hồ sơ đánh giá.
 
-Deep Work Plan v5 tuân theo tiêu chuẩn DWP 4.0.0. Đọc [đặc tả chuẩn mực](https://deepworkplan.com/spec), xem [kho của skill](https://github.com/DailybotHQ/deepworkplan-skill), hoặc bắt đầu áp dụng từ [`/init`](https://deepworkplan.com/init).
+**Một hợp đồng có phiên bản, đã được công bố.** Mỗi lời hứa ở trên được hậu thuẫn bởi dữ liệu mà các công cụ khác có thể đọc được, không chỉ bằng văn xuôi: các định dạng plan-manifest và plan-state giờ đây được đánh phiên bản theo dòng schema v5 — [`plan-manifest/v5.json`](https://deepworkplan.com/schema/plan-manifest/v5.json) và [`plan-state/v5.json`](https://deepworkplan.com/schema/plan-state/v5.json) — để một kế hoạch, một trình kiểm chứng, hoặc một công cụ bên thứ ba có thể kiểm tra sự tuân thủ đối chiếu với một hợp đồng đã công bố, máy có thể đọc được, thay vì một đoạn văn tài liệu. Không có gì trong dòng v5 thay đổi hình dạng so với v2: các kế hoạch hiện có tham chiếu đến schema v1 hoặc v2 vẫn hợp lệ và không bao giờ bị viết lại.
+
+Deep Work Plan v5 tuân theo tiêu chuẩn DWP 5.0.0. Đọc [đặc tả chuẩn mực](https://deepworkplan.com/spec), xem [kho của skill](https://github.com/DailybotHQ/deepworkplan-skill), hoặc bắt đầu áp dụng từ [`/init`](https://deepworkplan.com/init).

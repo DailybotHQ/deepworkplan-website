@@ -1,6 +1,6 @@
 ---
 title: "DWP v5: le promesse, ora garantite"
-description: "Deep Work Plan v5 trasforma otto promesse di lunga data in contratti testati — un verificatore onesto, un'unica regola di approvazione, un'orchestrazione che non corrompe e un percorso di aggiornamento sicuro."
+description: "Deep Work Plan v5 trasforma otto promesse di lunga data in contratti testati e versionati — un verificatore onesto, un'orchestrazione sicura e un percorso di aggiornamento collaudato."
 date: 2026-09-12
 version: "v5 · Garantito dai test"
 kind: release
@@ -11,7 +11,7 @@ sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
 ---
 
-Oggi rilasciamo Deep Work Plan v5. Il riassunto onesto di questo rilascio: la metodologia prometteva già tutto questo — ora lo garantisce. Prima di v5, un agente che seguiva la documentazione alla lettera poteva comunque finire in scenari di guasto reali; oggi ciascuno di questi scenari è chiuso e fissato da un test eseguibile. La suite di contratti dello skill è cresciuta da 132 a 258 test in questo ciclo, e ogni garanzia qui sotto è stata validata dal vivo contro il tag rilasciato — installata in un repository pulito e condotta attraverso i propri flussi prima di scrivere questa voce.
+Oggi rilasciamo Deep Work Plan v5. Non è una riscrittura: sono mesi di uso reale — incluso un audit diretto di 108 piani reali — che hanno fatto emergere, lacuna dopo lacuna, dove le promesse della metodologia e il comportamento reale di un agente potevano divergere. Il riassunto onesto di questo rilascio: la metodologia prometteva già tutto questo — ora lo garantisce. Prima di v5, un agente che seguiva la documentazione alla lettera poteva comunque finire in scenari di guasto reali; ciascuno di questi scenari, individuato grazie a quell'uso e a quel feedback, è oggi chiuso e fissato da un test eseguibile, non rattoppato con altra prosa. La suite di contratti dello skill è cresciuta da 132 a 258 test in questo ciclo, e ogni garanzia qui sotto è stata validata dal vivo contro il tag rilasciato — installata in un repository pulito e condotta attraverso i propri flussi prima di scrivere questa voce.
 
 **Un verificatore che non rivendica mai un successo non verificato.** I controlli di conformità un tempo degradavano in silenzio: senza un interprete capace saltavano ogni verifica e stampavano comunque un verdetto conforme, e il testo in grassetto dentro un campo poteva essere scambiato per un campo assente. Ora il verificatore termina con un verdetto `UNVERIFIED` esplicito ogni volta che non può verificare davvero. Un verificatore non riporta mai un successo che non ha controllato — la fiducia nei gate è l'intera proposta, e un gate che può saltare il proprio controllo spezza la catena.
 
@@ -29,4 +29,6 @@ Oggi rilasciamo Deep Work Plan v5. Il riassunto onesto di questo rilascio: la me
 
 **Evidenza onesta e misurabile.** Le affermazioni di efficienza oggi vengono rimisurate su tre baseline — v3.0.0, v4.0.3 e l'albero finale — con lo script di misura committato nel repository. I risultati sono riportati in byte del filesystem e mai convertiti in numeri di token o costi che non possiamo sostenere, e ogni affermazione non verificabile è messa in quarantena come tale nel registro di valutazione.
 
-Deep Work Plan v5 segue lo standard DWP 4.0.0. Leggi la [specifica normativa](https://deepworkplan.com/spec), consulta il [repository dello skill](https://github.com/DailybotHQ/deepworkplan-skill) o inizia l'adozione da [`/init`](https://deepworkplan.com/init).
+**Un contratto versionato, pubblicato.** Ogni promessa sopra è sostenuta da dati che altri strumenti possono leggere, non solo da prosa: i formati plan-manifest e plan-state sono ora versionati come la linea di schema v5 — [`plan-manifest/v5.json`](https://deepworkplan.com/schema/plan-manifest/v5.json) e [`plan-state/v5.json`](https://deepworkplan.com/schema/plan-state/v5.json) — così un piano, un verificatore o uno strumento di terze parti può controllare la conformità rispetto a un contratto pubblicato e leggibile da una macchina, invece che rispetto a un paragrafo di documentazione. Nulla nella linea v5 cambia forma rispetto a v2: i piani esistenti che fanno riferimento agli schemi v1 o v2 restano validi e non vengono mai riscritti.
+
+Deep Work Plan v5 segue lo standard DWP 5.0.0. Leggi la [specifica normativa](https://deepworkplan.com/spec), consulta il [repository dello skill](https://github.com/DailybotHQ/deepworkplan-skill) o inizia l'adozione da [`/init`](https://deepworkplan.com/init).
