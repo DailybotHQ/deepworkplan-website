@@ -16,12 +16,30 @@ export interface McpInputSchema {
   additionalProperties: false;
 }
 
+/** MCP tool behavioral hints (spec: readOnlyHint / destructiveHint / idempotentHint / openWorldHint). */
+export interface McpToolAnnotations {
+  readOnlyHint: boolean;
+  destructiveHint: boolean;
+  idempotentHint: boolean;
+  openWorldHint: boolean;
+}
+
 export interface McpToolDefinition {
   name: string;
   title: string;
   description: string;
   inputSchema: McpInputSchema;
+  annotations: McpToolAnnotations;
 }
+
+/** All three tools on this server are read-only, non-destructive, idempotent,
+ * and scoped to this site only (never the wider web). */
+const READ_ONLY_SITE_SCOPED_ANNOTATIONS: McpToolAnnotations = {
+  readOnlyHint: true,
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: false,
+};
 
 /** Resolves site-relative asset paths to their text content (or null). */
 export type AssetTextFetcher = (assetPath: string) => Promise<string | null>;
@@ -141,6 +159,7 @@ export const TOOL_DEFINITIONS: McpToolDefinition[] = [
       properties: {},
       additionalProperties: false,
     },
+    annotations: READ_ONLY_SITE_SCOPED_ANNOTATIONS,
   },
   {
     name: 'list_site_sections',
@@ -152,6 +171,7 @@ export const TOOL_DEFINITIONS: McpToolDefinition[] = [
       properties: {},
       additionalProperties: false,
     },
+    annotations: READ_ONLY_SITE_SCOPED_ANNOTATIONS,
   },
   {
     name: 'read_page',
@@ -170,6 +190,7 @@ export const TOOL_DEFINITIONS: McpToolDefinition[] = [
       required: ['path'],
       additionalProperties: false,
     },
+    annotations: READ_ONLY_SITE_SCOPED_ANNOTATIONS,
   },
 ];
 

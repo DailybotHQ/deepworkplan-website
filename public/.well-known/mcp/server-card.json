@@ -1,7 +1,43 @@
 {
+  "name": "deep-work-plan-site",
+  "description": "deepworkplan.com — the Deep Work Plan methodology, specification, and kit. Read-only agent surface exposing the canonical /init adoption prompt, the site map, and every page as source Markdown. Served over Streamable HTTP at /api/mcp and, in the browser, via WebMCP (navigator.modelContext) on every page; documented for agents at /.well-known/agent-skills/index.json.",
+  "version": "5.0.11",
+  "serverUrl": "https://deepworkplan.com/api/mcp",
+  "tools": [
+    {
+      "name": "get_init_prompt",
+      "description": "Return the canonical one-line instruction that makes any repository AI-first with Deep Work Plan (the /init.md adoption prompt).",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "list_site_sections",
+      "description": "List the main sections of deepworkplan.com (methodology, specification, kit, examples, init, developers) with their paths.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "read_page",
+      "description": "Fetch any page of deepworkplan.com as native source Markdown, e.g. /init or /es/methodology/01-manifesto.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    }
+  ],
   "serverInfo": {
     "name": "deep-work-plan-site",
-    "version": "5.0.10",
+    "version": "5.0.11",
     "description": "deepworkplan.com — the Deep Work Plan methodology, specification, and kit. Read-only agent surface exposing the canonical /init adoption prompt, the site map, and every page as source Markdown. Served over Streamable HTTP at /api/mcp and, in the browser, via WebMCP (navigator.modelContext) on every page; documented for agents at /.well-known/agent-skills/index.json."
   },
   "transport": {
@@ -11,22 +47,10 @@
   "capabilities": [
     "tools"
   ],
-  "tools": [
-    {
-      "name": "get_init_prompt",
-      "description": "Return the canonical one-line instruction that makes any repository AI-first with Deep Work Plan (the /init.md adoption prompt)."
-    },
-    {
-      "name": "list_site_sections",
-      "description": "List the main sections of deepworkplan.com (methodology, specification, kit, examples, init, developers) with their paths."
-    },
-    {
-      "name": "read_page",
-      "description": "Fetch any page of deepworkplan.com as native source Markdown, e.g. /init or /es/methodology/01-manifesto."
-    },
+  "browserTools": [
     {
       "name": "open_section",
-      "description": "Browser WebMCP only (navigator.modelContext): navigate the current browser tab to a section of deepworkplan.com. Not available on the HTTP transport."
+      "description": "Browser WebMCP only (navigator.modelContext): navigate the current browser tab to a section of deepworkplan.com. Not available on the HTTP transport — not counted in `tools`, which describes the Streamable HTTP surface at `serverUrl`."
     }
   ],
   "manifest": "https://deepworkplan.com/.well-known/mcp.json",
