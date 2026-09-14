@@ -106,7 +106,7 @@ export const en: SiteTranslations = {
         'Copy the init.md prompt and paste it into your coding agent — Claude Code, Cursor, Codex, or any other — to make any repository AI-first.',
       copyLabel: 'Copy init.md',
       copiedLabel: 'Copied',
-      viewInitCta: 'View the quickstart',
+      viewInitCta: 'See how it works',
       pullQuote:
         'Deep Work Plan is spec-driven development where the repository itself becomes the harness.',
       primaryCta: 'Read the methodology',

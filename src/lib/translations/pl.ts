@@ -112,7 +112,7 @@ export const pl: SiteTranslations = {
         'Skopiuj prompt init.md i wklej go do swojego agenta kodowania — Claude Code, Cursor, Codex lub innego — aby uczynić dowolne repozytorium AI-first.',
       copyLabel: 'Kopiuj init.md',
       copiedLabel: 'Skopiowano',
-      viewInitCta: 'Zobacz szybki start',
+      viewInitCta: 'Zobacz, jak to działa',
       pullQuote:
         'Deep Work Plan to spec-driven development, w którym samo repozytorium staje się harness (rusztowaniem agenta).',
       primaryCta: 'Przeczytaj metodykę',

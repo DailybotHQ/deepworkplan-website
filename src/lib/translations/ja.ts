@@ -112,7 +112,7 @@ export const ja: SiteTranslations = {
         'init.md のプロンプトをコピーして、お使いのコーディングエージェント — Claude Code、Cursor、Codex、またはその他のツール — に貼り付けることで、あらゆるリポジトリを AI-first にします。',
       copyLabel: 'init.md をコピー',
       copiedLabel: 'コピーしました',
-      viewInitCta: 'クイックスタートを見る',
+      viewInitCta: '仕組みを見る',
       pullQuote:
         'Deep Work Plan とは、リポジトリそのものがハーネス（harness）になる、仕様駆動開発です。',
       primaryCta: '方法論を読む',

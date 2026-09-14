@@ -110,7 +110,7 @@ export const th: SiteTranslations = {
         'คัดลอก prompt ของ init.md และวางลงใน coding agent ของคุณ — Claude Code, Cursor, Codex หรืออื่น ๆ — เพื่อทำให้ repository ใดก็ได้เป็น AI-first',
       copyLabel: 'คัดลอก init.md',
       copiedLabel: 'คัดลอกแล้ว',
-      viewInitCta: 'ดูการเริ่มใช้งานเร็ว',
+      viewInitCta: 'ดูว่ามันทำงานอย่างไร',
       pullQuote:
         'Deep Work Plan คือ spec-driven development ที่ตัว repository เองกลายเป็น harness',
       primaryCta: 'อ่านระเบียบวิธี',
