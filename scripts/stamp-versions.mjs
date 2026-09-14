@@ -10,7 +10,7 @@
  *   - public/api/v1/pages.json                → version
  *   - public/api/v1/health.json               → version
  *   - public/.well-known/mcp.json             → version
- *   - public/.well-known/mcp/server-card.json → serverInfo.version
+ *   - public/.well-known/mcp/server-card.json → version + serverInfo.version
  *   - src/lib/mcp/server-info.ts              → SITE_VERSION (HTTP MCP serverInfo)
  *
  * One artifact tracks a different version line: the vendored DeepWorkPlan
@@ -164,6 +164,7 @@ if (
 }
 if (
   await stampJson('public/.well-known/mcp/server-card.json', (doc) => {
+    doc.version = version;
     if (doc.serverInfo) doc.serverInfo.version = version;
   })
 ) {

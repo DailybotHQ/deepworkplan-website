@@ -15,7 +15,7 @@
 
 # Agent-readiness .well-known endpoints (RFC 9727, RFC 8414, RFC 9728, SEP-1649, agent-skills v0.2.0, ARD ai-catalog)
 /.well-known/api-catalog
-  Content-Type: application/linkset+json
+  Content-Type: application/linkset+json;profile="https://www.rfc-editor.org/info/rfc9727"
   Cache-Control: public, max-age=300, must-revalidate
 
 # ARD capability manifest (agenticresourcediscovery.org): the scanner requires

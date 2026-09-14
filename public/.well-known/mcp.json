@@ -2,6 +2,7 @@
   "name": "deep-work-plan-site",
   "version": "5.0.10",
   "description": "deepworkplan.com — the Deep Work Plan methodology, specification, and kit. Read-only MCP surface exposing the canonical /init adoption prompt, the site map, and every page as source Markdown.",
+  "icon": "https://deepworkplan.com/icons/icon-512x512.png",
   "protocolVersion": "2025-06-18",
   "supportedProtocolVersions": [
     "2025-03-26",
@@ -19,15 +20,33 @@
   "tools": [
     {
       "name": "get_init_prompt",
-      "description": "Return the canonical /init.md adoption prompt — a self-contained instruction that makes any repository AI-first with Deep Work Plan."
+      "description": "Return the canonical /init.md adoption prompt — a self-contained instruction that makes any repository AI-first with Deep Work Plan.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
     },
     {
       "name": "list_site_sections",
-      "description": "List the main sections of deepworkplan.com with their paths and one-line descriptions."
+      "description": "List the main sections of deepworkplan.com with their paths and one-line descriptions.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
     },
     {
       "name": "read_page",
-      "description": "Fetch any page of deepworkplan.com as native source Markdown, e.g. /init or /es/methodology/01-manifesto."
+      "description": "Fetch any page of deepworkplan.com as native source Markdown, e.g. /init or /es/methodology/01-manifesto.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
     }
   ],
   "serverCard": "https://deepworkplan.com/.well-known/mcp/server-card.json",
