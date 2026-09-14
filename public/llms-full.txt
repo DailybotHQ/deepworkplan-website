@@ -21,7 +21,7 @@ Reach for DWP when the job is:
 
 Skip DWP for single-file edits, throwaway scripts, or repos an agent will touch once — the structure pays off on durable, multi-session work.
 
-How an agent should engage: fetch the [adoption prompt](https://deepworkplan.com/init.md) and follow it to onboard a repository; call the MCP tools at [api/mcp](https://deepworkplan.com/api/mcp) (get_init_prompt, list_site_sections, read_page) to navigate and read this site; read the [developer portal](https://deepworkplan.com/developers) for the full API surface.
+How an agent should engage: fetch the [adoption prompt](https://deepworkplan.com/init.md) and follow it to onboard a repository; POST JSON-RPC 2.0 to the MCP endpoint at https://deepworkplan.com/api/mcp (get_init_prompt, list_site_sections, read_page — GET is not supported, see the [MCP manifest](https://deepworkplan.com/.well-known/mcp.json)) to navigate and read this site; read the [developer portal](https://deepworkplan.com/developers) for the full API surface.
 
 ## Who Maintains It
 
@@ -132,7 +132,7 @@ curl -H "Accept: text/markdown" https://deepworkplan.com/methodology
 The site exposes a read-only, zero-auth agent API — no keys, no registration, declared in [auth.md](https://deepworkplan.com/auth.md):
 
 - [OpenAPI 3.1 spec](https://deepworkplan.com/openapi.json) — every endpoint, parameter, and response schema
-- [MCP server](https://deepworkplan.com/api/mcp) — stateless Model Context Protocol over Streamable HTTP (JSON-RPC 2.0). Tools: `get_init_prompt`, `list_site_sections`, `read_page`. Manifest: [mcp.json](https://deepworkplan.com/.well-known/mcp.json); server card: [server-card.json](https://deepworkplan.com/.well-known/mcp/server-card.json). Supports protocol versions 2025-03-26 and 2025-06-18
+- [MCP server manifest](https://deepworkplan.com/.well-known/mcp.json) — describes the stateless Model Context Protocol endpoint at https://deepworkplan.com/api/mcp, served over Streamable HTTP (JSON-RPC 2.0, POST only — GET returns 405 by design, no SSE stream). Tools: `get_init_prompt`, `list_site_sections`, `read_page`. Server card: [server-card.json](https://deepworkplan.com/.well-known/mcp/server-card.json). Supports protocol versions 2025-03-26 and 2025-06-18
 - [Health](https://deepworkplan.com/api/health.json) — static status marker
 - [Versioned API catalog](https://deepworkplan.com/api/v1/index.json) — the `/api/v1/` family (sections, pages, health) with the site version and spec links; the unversioned canonical paths belong to the same v1 contract
 - [Official CLI](https://github.com/DailybotHQ/deepworkplan-website/tree/main/cli) — `deepworkplan`: a zero-dependency command-line client over this API (`init`, `sections`, `read`, `open`, `mcp`); npm publication pending

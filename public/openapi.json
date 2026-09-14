@@ -1676,7 +1676,7 @@
             }
           },
           "202": {
-            "description": "Accepted notification — empty body, no response object.",
+            "description": "Accepted notification — empty body, no response object. This is a JSON-RPC 2.0 notification acknowledgment per the MCP Streamable HTTP transport spec, not a REST async-job pattern: it does not create a job, there is nothing to poll for, and no Location or job_id follows. Every other request on this endpoint (all tool calls) resolves synchronously in the same response.",
             "headers": {
               "RateLimit-Limit": {
                 "$ref": "#/components/headers/RateLimitLimit"

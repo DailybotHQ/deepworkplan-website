@@ -148,6 +148,12 @@ describe('handleMcpRequest — tools/list', () => {
     for (const tool of tools) {
       expect(tool.inputSchema.type).toBe('object');
       expect(tool.inputSchema.additionalProperties).toBe(false);
+      expect(tool.annotations).toEqual({
+        readOnlyHint: true,
+        destructiveHint: false,
+        idempotentHint: true,
+        openWorldHint: false,
+      });
     }
     expect(TOOL_DEFINITIONS).toHaveLength(3);
   });

@@ -163,12 +163,12 @@ else
 fi
 
 json_check "well-known/api-catalog" ".well-known/api-catalog" \
-  'Array.isArray(doc.linkset) && doc.linkset.every((e) => e.anchor && Array.isArray(e.links) && e.links.every((l) => l.rel && l.href)) === true'
+  'Array.isArray(doc.linkset) && doc.linkset.every((e) => e.anchor && Array.isArray(e.item) && e.item.length > 0 && e.item.every((l) => l.href)) === true'
 json_check "well-known/ai-catalog.json" ".well-known/ai-catalog.json"
 json_check "well-known/mcp.json" ".well-known/mcp.json" \
   'doc.version === process.env.PKG_VERSION'
 json_check "well-known/mcp/server-card.json" ".well-known/mcp/server-card.json" \
-  'doc.serverInfo.version === process.env.PKG_VERSION'
+  'doc.version === process.env.PKG_VERSION && doc.serverInfo.version === process.env.PKG_VERSION && typeof doc.name === "string" && typeof doc.description === "string" && typeof doc.serverUrl === "string" && Array.isArray(doc.tools) && doc.tools.length === 3'
 json_check "well-known/oauth-authorization-server" ".well-known/oauth-authorization-server"
 json_check "well-known/oauth-protected-resource" ".well-known/oauth-protected-resource"
 json_check "well-known/agent-skills/index.json" ".well-known/agent-skills/index.json" \

@@ -65,7 +65,7 @@ interface Env {
   ASSETS: AssetsFetcher;
 }
 
-interface EventContext {
+export interface EventContext {
   request: Request;
   env: Env;
   next: () => Promise<Response>;
@@ -413,6 +413,65 @@ async function tryServeJsonEnvelope(
   }
 }
 
+/**
+ * Serve a literal `.md` twin for a machine JSON asset when one is requested
+ * by URL suffix (not Accept-header negotiation) — e.g.
+ * `/api/health.json.md`, `/.well-known/api-catalog.md`. This is a distinct
+ * mechanism from `tryServeMarkdown` (which negotiates HTML *pages* via
+ * Accept header): it targets the handful of machine `/api/*` and
+ * `/.well-known/*` JSON documents that have no HTML page behind them at
+ * all, so a plain URL-suffix request is the only way an agent could ask for
+ * one. Only wraps resources whose underlying asset is genuinely JSON;
+ * never invents content for a path that doesn't already exist.
+ */
+export async function tryServeJsonAssetAsMarkdownTwin(
+  context: EventContext
+): Promise<Response | null> {
+  const url = new URL(context.request.url);
+  const pathname = url.pathname;
+  if (!pathname.endsWith('.md')) return null;
+
+  const basePath = pathname.slice(0, -'.md'.length);
+  if (basePath === '' || basePath === '/') return null;
+  if (!basePath.startsWith('/api/') && !basePath.startsWith('/.well-known/')) {
+    return null;
+  }
+
+  try {
+    const baseUrl = new URL(basePath, url.origin);
+    const assetResponse = await context.env.ASSETS.fetch(
+      new Request(baseUrl.toString())
+    );
+    if (!assetResponse.ok) return null;
+
+    const contentType = assetResponse.headers.get('content-type') || '';
+    if (!contentType.includes('json')) return null;
+
+    const bodyText = await assetResponse.text();
+    let pretty = bodyText;
+    try {
+      pretty = JSON.stringify(JSON.parse(bodyText), null, 2);
+    } catch {
+      // Not parseable JSON despite the content-type — serve verbatim.
+    }
+
+    const title = basePath.replace(/^\//, '');
+    const markdown = `# ${title}\n\nMachine-readable resource. Canonical JSON: ${baseUrl.toString()}\n\n\`\`\`json\n${pretty}\n\`\`\`\n`;
+
+    return new Response(markdown, {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/markdown; charset=utf-8',
+        'Cache-Control': 'public, max-age=300, must-revalidate',
+        'Vary': 'Accept',
+        'X-Content-Negotiation': 'markdown-twin',
+      },
+    });
+  } catch {
+    return null;
+  }
+}
+
 /** Track a markdown request to Umami analytics */
 function trackMarkdownRequest(
   context: EventContext,
@@ -633,6 +692,11 @@ export async function onRequest(context: EventContext): Promise<Response> {
   if (rateLimit && !rateLimit.allowed) {
     return rateLimitResponse(rateLimit);
   }
+
+  // 1b. Literal `.md` twin for a machine JSON asset (/api/*, /.well-known/*)
+  //     — URL-suffix based, distinct from the Accept-header negotiation below.
+  const jsonAssetMarkdownTwin = await tryServeJsonAssetAsMarkdownTwin(context);
+  if (jsonAssetMarkdownTwin) return jsonAssetMarkdownTwin;
 
   // 2. Markdown content negotiation — serve .md if Accept: text/markdown
   const markdownResponse = await tryServeMarkdown(context);

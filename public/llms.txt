@@ -17,7 +17,7 @@ Reach for DWP when the job is:
 
 Skip DWP for single-file edits, throwaway scripts, or repos an agent will touch once — the structure pays off on durable, multi-session work.
 
-How an agent should engage: fetch the [adoption prompt](https://deepworkplan.com/init.md) and follow it to onboard a repository; call the MCP tools at [api/mcp](https://deepworkplan.com/api/mcp) (get_init_prompt, list_site_sections, read_page) to navigate and read this site; read the [developer portal](https://deepworkplan.com/developers) for the full API surface.
+How an agent should engage: fetch the [adoption prompt](https://deepworkplan.com/init.md) and follow it to onboard a repository; POST JSON-RPC 2.0 to the MCP endpoint at https://deepworkplan.com/api/mcp (get_init_prompt, list_site_sections, read_page — GET is not supported, see the [MCP manifest](https://deepworkplan.com/.well-known/mcp.json)) to navigate and read this site; read the [developer portal](https://deepworkplan.com/developers) for the full API surface.
 
 ## Core Sections
 
@@ -42,7 +42,7 @@ How an agent should engage: fetch the [adoption prompt](https://deepworkplan.com
 All public, read-only, and zero-auth (no API keys, no registration) — declared in [auth.md](https://deepworkplan.com/auth.md):
 
 - [OpenAPI spec](https://deepworkplan.com/openapi.json): every endpoint, parameter, and response schema of the agent API
-- [MCP server](https://deepworkplan.com/api/mcp): Streamable HTTP (JSON-RPC 2.0) — manifest at [mcp.json](https://deepworkplan.com/.well-known/mcp.json)
+- [MCP server manifest](https://deepworkplan.com/.well-known/mcp.json): describes the stateless Streamable HTTP (JSON-RPC 2.0) endpoint at https://deepworkplan.com/api/mcp (POST only — GET returns 405 by design, no SSE stream)
 - [Health](https://deepworkplan.com/api/health.json): static health marker for the agent API
 - [Versioned API catalog](https://deepworkplan.com/api/v1/index.json): the `/api/v1/` family — sections, pages, health — with the site version and spec links
 - [Official CLI](https://github.com/DailybotHQ/deepworkplan-website/tree/main/cli): `deepworkplan` — zero-dependency command-line client over the agent API (npm publication pending)
