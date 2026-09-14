@@ -74,7 +74,7 @@ export const id: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Baru · Efisien konteks secara konstruksi',
+    badge: 'Baru · Efisien konteks secara desain',
     text: 'Deep Work Plan hadir di Product Hunt hari ini',
     tagline: 'beri agenmu sebuah rencana',
     linkText: 'Dukung kami',

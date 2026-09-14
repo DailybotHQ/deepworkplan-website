@@ -74,7 +74,7 @@ export const ko: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'New · 구조적으로 컨텍스트 효율적',
+    badge: 'New · 설계부터 컨텍스트 효율적',
     text: 'Deep Work Plan이 오늘 Product Hunt에 출시됐어요',
     tagline: '에이전트에게 계획을',
     linkText: '추천하기',

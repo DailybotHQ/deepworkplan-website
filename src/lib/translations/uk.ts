@@ -75,7 +75,7 @@ export const uk: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Новинка · Контекстно-ефективний за побудовою',
+    badge: 'Новинка · Контекстно-ефективний за задумом',
     text: 'Deep Work Plan сьогодні на Product Hunt',
     tagline: 'дайте агенту план',
     linkText: 'Підтримати',
