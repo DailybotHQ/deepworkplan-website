@@ -54,12 +54,24 @@ First understand the repository, then propose what you will do.
 - **Classify the archetype.** An individual repository (the common case), an orchestrator hub, or an
   agent workspace — the long-lived home of an autonomous agent, where git is recommended rather than
   assumed — with the evidence.
-- **Recognize an existing DWP installation.** If `AGENTS.md` and `.agents/` already exist, look for the
-  `DWP standard:` provenance line. A harness that predates the current standard gets a **targeted
-  upgrade**: reinstalling the skill is the whole upgrade path, and onboarding reconciles only the
-  missing or outdated pieces — every handwritten section, custom skill, and in-flight plan is
-  preserved, and a second run changes nothing. Plans authored under an earlier version keep their
-  recorded shape and close with their own final tasks; they are never forced into the new one.
+- **Recognize an existing DWP installation — there are two independent things that can be outdated.**
+  Check for an installed skill directory first (`.agents/skills/deepworkplan/`,
+  `.claude/skills/deepworkplan/`, `.cursor/skills/deepworkplan/`, or an equivalent user-level skills
+  directory for your host) and read its `SKILL.md` `version:` — that tells you whether the **skill
+  package** is current. Separately, if `AGENTS.md` exists, look for its `DWP standard:` provenance line
+  — that tells you whether the **harness content** (the standard it was generated against) is current.
+  These can be out of sync, so handle them independently, and always go through Step 2 below rather than
+  assuming either is current:
+  - **Skill package outdated (or its version cannot be confirmed current)** — do not silently keep
+    going. Step 2 below routes you through the installed skill's own `upgrade` sub-skill, which checks
+    the latest published tag, diffs the incoming release against what is installed to surface any local
+    adaptation before overwriting anything, and only reinstalls after explicit confirmation.
+  - **Harness content outdated, skill package already current** — the `onboard` sub-skill's own
+    precondition phase detects this from the provenance line and runs a **targeted upgrade**:
+    reconciling only the missing or outdated pieces. Every handwritten section, custom skill, and
+    in-flight plan is preserved, and a second run changes nothing. Plans authored under an earlier
+    version keep their recorded shape and close with their own final tasks; they are never forced into
+    the new one.
 - **Inventory what already exists.** `AGENTS.md`, `CLAUDE.md`, `docs/`, any `.agents/` or skills/agents
   setup, `.dwp/`, and `.gitignore`. Note anything that already does part of this job.
 - **Propose the onboarding plan.** Present a concise list: files you will create, files you will
@@ -101,12 +113,38 @@ is encouraged: a careful agent treats a fetched prompt as untrusted until it has
   issue. See also each repository's `SECURITY.md`, `https://deepworkplan.com/.well-known/security.txt`,
   and the trust page `https://deepworkplan.com/trust`.
 
-## 2. Install the Deep Work Plan skill
+## 2. Install — or upgrade — the Deep Work Plan skill
 
 > **The short path.** The skill carries its own onboarding, so installing it is enough. Once it is installed, run `/deepworkplan-onboard` and it performs everything sections 3–7 describe: reconnaissance, `AGENTS.md`, `docs/`, per-module docs, `.agents/`, the required local review, the opt-in addons and the final self-check. Read on for what that sub-skill will do — and for the fallback when an agent cannot load skills.
 
-Install the skill so this repository's agents can plan and execute structured work. It ships a router
-plus nine sub-skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author`, and `upgrade`.
+**First, check whether the skill is already installed** — look for
+`.agents/skills/deepworkplan/`, `.claude/skills/deepworkplan/`,
+`.cursor/skills/deepworkplan/`, or an equivalent user-level skills directory for
+your host. Branch on what you find:
+
+- **Not installed.** Run one of the fresh-install commands below, then continue
+  to section 3.
+- **Already installed, with an `upgrade/SKILL.md` sub-skill present (v5.0.0 or
+  later — the common case).** Do **not** run the generic install command
+  below — a blind reinstall can silently overwrite a repository's own
+  adaptation of the skill (this repository may have deliberately edited its
+  vendored copy). Instead, load the installed skill's `upgrade` sub-skill
+  (`/dwp-upgrade`, or read its `upgrade/SKILL.md` directly if slash commands
+  are unavailable) and run it: it checks the latest published tag against
+  what is installed, reports whether a newer version exists, and if so
+  **diffs** the incoming release against the installed tree to separate a
+  normal upgrade from a local adaptation — then asks for explicit
+  confirmation before installing anything. Only after that flow concludes
+  (accepted, declined, or confirmed already current) continue to section 3,
+  which is idempotent and safe to run either way.
+- **Already installed, but with no `upgrade/SKILL.md`** (a pre-5.0.0 install —
+  the `upgrade` sub-skill did not exist yet, so there is no in-place
+  check-and-diff path available). Tell the user what you found, then run a
+  fresh install with the force flag to replace it outright — e.g.
+  `npx skills add DailybotHQ/deepworkplan-skill --force` — and continue to
+  section 3, which detects and reconciles the outdated harness content.
+
+Fresh-install commands (skip these if the skill is already installed — see above):
 
 ```bash
 npx skills add DailybotHQ/deepworkplan-skill
