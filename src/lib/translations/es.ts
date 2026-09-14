@@ -70,7 +70,7 @@ export const es: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Nuevo · Eficiente en contexto por construcción',
+    badge: 'Nuevo · Eficiente en contexto por diseño',
     text: 'Deep Work Plan ya está en Product Hunt',
     tagline: 'dale un plan a tu agente',
     linkText: 'Vótalo',

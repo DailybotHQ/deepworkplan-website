@@ -75,7 +75,7 @@ export const vi: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: 'Mới · Tiết kiệm ngữ cảnh nhờ cấu trúc',
+    badge: 'Mới · Tiết kiệm ngữ cảnh theo thiết kế',
     text: 'Deep Work Plan có mặt trên Product Hunt hôm nay',
     tagline: 'trao cho agent một kế hoạch',
     linkText: 'Ủng hộ ngay',

@@ -74,7 +74,7 @@ export const zh: SiteTranslations = {
 
   // Temporary Product Hunt launch announcement bar
   announcementBar: {
-    badge: '最新 · 结构性上下文高效',
+    badge: '最新 · 设计上的上下文高效',
     text: 'Deep Work Plan 今天登陆 Product Hunt',
     tagline: '给你的智能体一个计划',
     linkText: '去支持',

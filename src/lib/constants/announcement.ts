@@ -20,7 +20,7 @@
  */
 export const ANNOUNCEMENT = {
   /** Master on/off switch for the announcement bar. */
-  enabled: false,
+  enabled: true,
   /** Destination the whole bar links to (opens in a new tab). */
-  url: 'https://www.producthunt.com/products/deep-work-plan?utm_source=launch-bar&utm_medium=banner&utm_campaign=launch-bar',
+  url: 'https://www.producthunt.com/products/deep-work-plan?launch=deep-work-plan-2&utm_source=launch-bar&utm_medium=banner&utm_campaign=launch-bar',
 } as const;

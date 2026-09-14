@@ -12,11 +12,16 @@
 // Editorial treatment: an inverted masthead strip — warm ink ground
 // (--color-main, dark in both light & dark mode) with paper-white text and an
 // oxblood (--color-secondary) call-to-action, so it reads consistently in both
-// themes without a dark: variant.
+// themes without a dark: variant. No badge/pill chrome — the rest of the
+// site never uses that treatment, so the bar leads straight with the
+// announcement copy to stay visually native to the editorial design.
 //
 // Copy is wired into the i18n system (t.announcementBar) so it ships in every
-// active language; the link target lives in ANNOUNCEMENT.url. It was last used
-// for the Product Hunt launch.
+// active language; the link target lives in ANNOUNCEMENT.url. `t.badge` is
+// kept in the translation schema (unused here) for a future announcement
+// that wants a leading label — see git history for the Kicker-style
+// treatment this bar used previously. It was last used for the Product Hunt
+// launch.
 import { ANNOUNCEMENT } from '@/lib/constants/announcement';
 import type { Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
@@ -42,12 +47,6 @@ const ANN_URL = ANNOUNCEMENT.url;
     class="ph-bar-link group mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-x-2 gap-y-1 px-4 py-2 text-sm leading-snug transition-colors"
     style="color: #ece7da;"
   >
-    <span
-      class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em]"
-      style="background-color: rgba(255,255,255,0.08); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28);"
-    >
-      {t.badge}
-    </span>
     <span class="flex min-w-0 items-baseline gap-1.5">
       <span class="font-medium">{t.text}</span>
       <span class="hidden truncate sm:inline" style="color: rgba(236,231,218,0.7);">
