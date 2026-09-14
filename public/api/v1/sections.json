@@ -1,5 +1,5 @@
 {
-  "version": "5.0.8",
+  "version": "5.0.9",
   "apiVersion": "v1",
   "description": "Source: src/lib/mcp/tools.ts SITE_SECTIONS — keep in sync (guarded by tests/unit/lib/api-v1.test.ts).",
   "sections": [
