@@ -112,7 +112,7 @@ export const ru: SiteTranslations = {
         'Скопируйте промпт init.md и вставьте его в ваш агент разработки — Claude Code, Cursor, Codex или любой другой — чтобы сделать любой репозиторий AI-first.',
       copyLabel: 'Копировать init.md',
       copiedLabel: 'Скопировано',
-      viewInitCta: 'Смотреть быстрый старт',
+      viewInitCta: 'Как это работает',
       pullQuote:
         'Deep Work Plan — это spec-driven-разработка, в которой сам репозиторий становится harness.',
       primaryCta: 'Читать методологию',

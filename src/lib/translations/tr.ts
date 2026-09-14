@@ -112,7 +112,7 @@ export const tr: SiteTranslations = {
         'init.md istemini kopyalayıp kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırarak herhangi bir depoyu AI-first hale getirin.',
       copyLabel: 'init.md kopyala',
       copiedLabel: 'Kopyalandı',
-      viewInitCta: 'Hızlı başlangıcı görüntüle',
+      viewInitCta: 'Nasıl çalıştığını görün',
       pullQuote:
         'Deep Work Plan, deponun kendisinin harness haline geldiği spec odaklı geliştirmedir.',
       primaryCta: 'Metodolojiyi okuyun',

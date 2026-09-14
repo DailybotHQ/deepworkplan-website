@@ -112,7 +112,7 @@ export const pt: SiteTranslations = {
         'Copie o prompt do init.md e cole-o no seu agente de código — Claude Code, Cursor, Codex, ou qualquer outro — para tornar qualquer repositório AI-first.',
       copyLabel: 'Copiar init.md',
       copiedLabel: 'Copiado',
-      viewInitCta: 'Ver o início rápido',
+      viewInitCta: 'Veja como funciona',
       pullQuote:
         'O Deep Work Plan é desenvolvimento orientado a especificação no qual o próprio repositório se torna o harness.',
       primaryCta: 'Leia a metodologia',

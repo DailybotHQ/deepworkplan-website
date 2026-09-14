@@ -110,7 +110,7 @@ export const id: SiteTranslations = {
         'Salin prompt init.md dan tempelkan ke agent coding Anda — Claude Code, Cursor, Codex, atau lainnya — untuk menjadikan repositori apa pun AI-first.',
       copyLabel: 'Salin init.md',
       copiedLabel: 'Tersalin',
-      viewInitCta: 'Lihat mulai cepat',
+      viewInitCta: 'Lihat cara kerjanya',
       pullQuote:
         'Deep Work Plan adalah spec-driven development tempat repositori itu sendiri menjadi harness.',
       primaryCta: 'Baca metodologinya',
