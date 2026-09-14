@@ -54,7 +54,7 @@ pnpm run build
 ```
 
 This command:
-1. Runs `prebuild` (regenerates the agent skills index via `generate-agent-skills-index.mjs`)
+1. Runs `prebuild` — regenerates the agent skills index (`generate-agent-skills-index.mjs`), the versioned API page index (`generate-api-v1-pages.mjs`), `public/_redirects` (`generate-redirects.mjs`), and stamps the release version into every agent-facing artifact (`stamp-versions.mjs`)
 2. Runs TypeScript checking (`astro check`)
 3. Builds to `dist/` directory
 
@@ -301,7 +301,7 @@ Full `package.json` scripts:
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
-    "prebuild": "node scripts/generate-agent-skills-index.mjs",
+    "prebuild": "node scripts/generate-agent-skills-index.mjs && node scripts/generate-api-v1-pages.mjs && node scripts/generate-redirects.mjs && node scripts/stamp-versions.mjs",
     "astro": "astro",
     "astro:check": "astro check",
     "astro:preview": "astro preview",

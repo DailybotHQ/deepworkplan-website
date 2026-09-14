@@ -13,35 +13,25 @@ import { defineConfig } from 'astro/config';
 
 import excludeInternal from './src/integrations/exclude-internal';
 import { DEFAULT_LANGUAGE_CODE, LANGUAGE_CODES } from './src/lib/language-codes';
+import { REDIRECT_PAIRS } from './src/lib/redirect-map';
 import { satteriHastPlugins } from './src/lib/satteri-markdown-plugins.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// /quickstart is the single canonical onboarding page (HTML + one .md
-// endpoint per language). /init, /setup, and /onboarding all redirect to it —
-// one destination, no canonical/AEO duplication. /init.md itself is a
-// separate, hand-maintained, English-only standalone artifact served from
-// public/init.md (never redirected — it has no HTML page to redirect to).
-// Generated from the language registry so adding a language needs no edit
-// here.
-const adoptionRedirects = Object.fromEntries(
+// Expands REDIRECT_PAIRS (src/lib/redirect-map.ts, the single source of
+// truth shared with scripts/generate-redirects.mjs) across every active
+// language. This produces Astro's HTML meta-refresh fallback page for each
+// entry — the *real* server-side 301 agents and crawlers see comes from the
+// generated public/_redirects (Cloudflare Pages reads it before any static
+// asset lookup), not from this HTML page.
+const siteRedirects = Object.fromEntries(
   LANGUAGE_CODES.flatMap((code) => {
     const prefix = code === DEFAULT_LANGUAGE_CODE ? '' : `/${code}`;
-    return [
-      [`${prefix}/init`, { status: 301, destination: `${prefix}/quickstart` }],
-      [`${prefix}/setup`, { status: 301, destination: `${prefix}/quickstart` }],
-      [`${prefix}/onboarding`, { status: 301, destination: `${prefix}/quickstart` }],
-    ];
-  })
-);
-
-// /developers is the agent & developer portal; /docs is a predictable alias
-// agents and humans try first. Same per-language pattern as adoptionRedirects.
-const docsRedirects = Object.fromEntries(
-  LANGUAGE_CODES.map((code) => {
-    const prefix = code === DEFAULT_LANGUAGE_CODE ? '' : `/${code}`;
-    return [`${prefix}/docs`, { status: 301, destination: `${prefix}/developers` }];
+    return REDIRECT_PAIRS.map(({ from, to, status }) => [
+      `${prefix}/${from}`,
+      { status, destination: `${prefix}/${to}` },
+    ]);
   })
 );
 
@@ -54,7 +44,7 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
-  redirects: { ...adoptionRedirects, ...docsRedirects },
+  redirects: siteRedirects,
   // Sätteri (Rust) is the Astro 7 default Markdown/MDX pipeline. Custom hast
   // plugins restore external-link target/rel and responsive table wrappers.
   markdown: {
