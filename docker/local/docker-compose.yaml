@@ -17,7 +17,11 @@ services:
       - gh_data:/home/node/.gh_data
       - dailybot_data:/home/node/.dailybot_data
       - chelper_data:/home/node/.chelper_data
+      - cline_data:/home/node/.cline
       - opencode_data:/home/node/.opencode_data
+      - pi_data:/home/node/.pi_data
+      - herdr_data:/home/node/.herdr_data
+      - grok_data:/home/node/.grok_data
       - ${HOME}/.ssh:/home/node/.ssh_host:ro
       - ${HOME}/.gitconfig:/home/node/.gitconfig:ro
     ports:
@@ -40,4 +44,8 @@ volumes:
   gh_data: {}            # GitHub CLI session/auth (symlinked to ~/.config/gh)
   dailybot_data: {}      # Dailybot CLI config/auth (symlinked to ~/.config/dailybot)
   chelper_data: {}       # Z.AI Coding Tool Helper config (symlinked to ~/.chelper)
+  cline_data: {}         # Cline CLI session/auth/config (persisted at ~/.cline)
   opencode_data: {}      # OpenCode config + share (symlinked to ~/.config/opencode, ~/.local/share/opencode)
+  pi_data: {}            # Pi coding agent config/sessions (symlinked to ~/.pi)
+  herdr_data: {}         # Herdr config/logs (symlinked to ~/.config/herdr)
+  grok_data: {}          # Grok/xAI CLI config + binary (symlinked to ~/.grok, ~/.local/bin/grok)
