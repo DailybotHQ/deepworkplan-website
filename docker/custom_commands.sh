@@ -147,15 +147,21 @@ function install() {
 # ================================
 # Usage:
 #   codexx              - Start new session
+#   codexx -c|--continue - Continue most recent session
 #   codexx -l|--last    - Resume last session
 #   codexx -r|--resume  - Interactive session selection
 #   codexx -r <id>      - Resume specific session by ID
 function codexx() {
 	case "${1:-}" in
+		-c|--continue)
+			print.success "Continuing most recent Codex session..."
+			shift
+			command codex resume --last --dangerously-bypass-approvals-and-sandbox "$@"
+			;;
 		-l|--last)
 			print.success "Resuming last Codex session..."
 			shift
-			codex resume --last --dangerously-bypass-approvals-and-sandbox "$@"
+			command codex resume --last --dangerously-bypass-approvals-and-sandbox "$@"
 			;;
 		-r|--resume)
 			shift
@@ -164,16 +170,16 @@ function codexx() {
 				local session_id="$1"
 				shift
 				print.success "Resuming Codex session: $session_id..."
-				codex resume "$session_id" --dangerously-bypass-approvals-and-sandbox "$@"
+				command codex resume "$session_id" --dangerously-bypass-approvals-and-sandbox "$@"
 			else
 				# Interactive session selection
 				print.success "Selecting Codex session to resume..."
-				codex resume --all --dangerously-bypass-approvals-and-sandbox "$@"
+				command codex resume --all --dangerously-bypass-approvals-and-sandbox "$@"
 			fi
 			;;
 		*)
 			print.success "Starting new Codex session with full permissions..."
-			codex --dangerously-bypass-approvals-and-sandbox "$@"
+			command codex --dangerously-bypass-approvals-and-sandbox "$@"
 			;;
 	esac
 }
@@ -1888,6 +1894,7 @@ function show_welcome() {
     echo "      -r <id>         Resume specific session by ID"
     echo ""
     echo "  • codexx            - Codex with full permissions (bypass approvals and sandbox)"
+    echo "      -c, --continue  Continue most recent session"
     echo "      -l, --last      Resume last session"
     echo "      -r, --resume    Interactive session selection"
     echo "      -r <id>         Resume specific session by ID"
