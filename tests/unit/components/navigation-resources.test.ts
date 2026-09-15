@@ -8,9 +8,9 @@ describe('Footer: Compare and FAQ links', () => {
       resolve(process.cwd(), 'src/components/Footer.astro'),
       'utf8'
     );
-    // biome-ignore lint/suspicious/noTemplateCurlyInString: testing literal source code containing template placeholders
+    // biome-ignore lint/suspicious/noTemplateCurlyInString: testing literal source containing template placeholders
     expect(source).toContain('`${prefix}/compare`');
-    // biome-ignore lint/suspicious/noTemplateCurlyInString: testing literal source code containing template placeholders
+    // biome-ignore lint/suspicious/noTemplateCurlyInString: testing literal source containing template placeholders
     expect(source).toContain('`${prefix}/faq`');
   });
 });
