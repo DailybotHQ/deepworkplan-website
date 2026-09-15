@@ -3,7 +3,7 @@
   "service": "deepworkplan.com",
   "apiVersion": "v1",
   "description": "Versioned (v1) health marker of the read-only, zero-auth agent API. Unversioned canonical paths (/api/health.json, /api/mcp) belong to the v1 contract.",
-  "version": "5.0.16",
+  "version": "5.0.17",
   "links": {
     "index": "/api/v1/index.json",
     "sections": "/api/v1/sections.json",
