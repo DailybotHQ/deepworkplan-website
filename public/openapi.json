@@ -5,7 +5,7 @@
     "title": "Deep Work Plan Agent API",
     "version": "5.0.17",
     "summary": "Read-only, zero-auth agent surface for deepworkplan.com: LLM guidance files, per-page Markdown mirrors in 17 languages, machine-readable discovery documents, and a stateless MCP server.",
-    "description": "The Deep Work Plan (DWP) methodology site exposes a public, read-only, zero-auth surface built for AI agents. No API keys, no OAuth, no registration: every endpoint is anonymous GET except the MCP endpoint, which is POST.\n\n**When to use this API:** fetch the canonical adoption prompt (`/init.md`) to make any repository AI-first with DWP; read any page as native source Markdown (`Accept: text/markdown` or explicit `.md` URLs) in 17 languages; discover the site map via `llms.txt`, the sitemap, or the ARD catalog; and drive the site programmatically through the MCP server at `/api/mcp` (tools: `get_init_prompt`, `list_site_sections`, `read_page`).\n\n**When not to use it:** this is a documentation/marketing site — there are no write operations, user accounts, or telemetry endpoints. Do not look for them here.\n\nErrors: unknown `/api/*` paths return a structured JSON error (`ApiError`), never HTML. Non-API paths return the HTML 404 page (or a Markdown recovery body when `Accept: text/markdown` is sent).\n\n**Versioning and deprecation:** the agent API is URL-path versioned at `/api/v1/` (the versioned family: `index.json`, `sections.json`, `pages.json`, `health.json`). The unversioned canonical paths (`/api/mcp`, `/api/health.json`) are part of the v1 contract. Breaking changes ship only in a new `/api/v{N+1}/` family; a deprecated endpoint answers with `Deprecation` (RFC 9745) and `Sunset` (RFC 8594) headers at least 180 days before removal, plus a `Link; rel=\"deprecation\"` header pointing at the migration target.\n\n**Rate limits:** every `/api/*` response carries `RateLimit-Limit`, `RateLimit-Remaining`, `RateLimit-Reset`, and `RateLimit-Policy` (RFC 9331; policy `q=120; window=60; burst=0`). Enforcement is a best-effort per-isolate fixed-window limiter at the edge — not a global guarantee — and tripped callers receive `429` with a `Retry-After` header and an `ApiError` body.",
+    "description": "The Deep Work Plan (DWP) methodology site exposes a public, read-only, zero-auth surface built for AI agents. No API keys, no OAuth, no registration: every endpoint is anonymous GET except the MCP endpoint, which is POST.\n\n**When to use this API:** fetch the canonical adoption prompt (`/init.md`) to make any repository AI-first with DWP; read any page as native source Markdown (`Accept: text/markdown` or explicit `.md` URLs) in 17 languages; discover the site map via `llms.txt`, the sitemap, or the ARD catalog; and drive the site programmatically through the MCP server at `/api/mcp` (tools: `get_init_prompt`, `list_site_sections`, `read_page`).\n\n**When not to use it:** this is a documentation/marketing site \u2014 there are no write operations, user accounts, or telemetry endpoints. Do not look for them here.\n\nErrors: unknown `/api/*` paths return a structured JSON error (`ApiError`), never HTML. Non-API paths return the HTML 404 page (or a Markdown recovery body when `Accept: text/markdown` is sent).\n\n**Versioning and deprecation:** the agent API is URL-path versioned at `/api/v1/` (the versioned family: `index.json`, `sections.json`, `pages.json`, `health.json`). The unversioned canonical paths (`/api/mcp`, `/api/health.json`) are part of the v1 contract. Breaking changes ship only in a new `/api/v{N+1}/` family; a deprecated endpoint answers with `Deprecation` (RFC 9745) and `Sunset` (RFC 8594) headers at least 180 days before removal, plus a `Link; rel=\"deprecation\"` header pointing at the migration target.\n\n**Rate limits:** every `/api/*` response carries `RateLimit-Limit`, `RateLimit-Remaining`, `RateLimit-Reset`, and `RateLimit-Policy` (RFC 9331; policy `q=120; window=60; burst=0`). Enforcement is a best-effort per-isolate fixed-window limiter at the edge \u2014 not a global guarantee \u2014 and tripped callers receive `429` with a `Retry-After` header and an `ApiError` body.",
     "contact": {
       "name": "Dailybot (maintainer of Deep Work Plan)",
       "url": "https://www.dailybot.com",
@@ -24,7 +24,7 @@
   ],
   "externalDocs": {
     "url": "https://deepworkplan.com/developers",
-    "description": "Developer & agent portal — quickstarts, MCP examples, CLI install."
+    "description": "Developer & agent portal \u2014 quickstarts, MCP examples, CLI install."
   },
   "tags": [
     {
@@ -65,7 +65,7 @@
                 },
                 "examples": {
                   "body": {
-                    "value": "# Deep Work Plan\n\n> Context matters more than models…"
+                    "value": "# Deep Work Plan\n\n> Context matters more than models\u2026"
                   }
                 }
               }
@@ -93,7 +93,7 @@
                 },
                 "examples": {
                   "body": {
-                    "value": "# Deep Work Plan — full guide\n\n## Methodology\nWhat DWP is…"
+                    "value": "# Deep Work Plan \u2014 full guide\n\n## Methodology\nWhat DWP is\u2026"
                   }
                 }
               }
@@ -123,8 +123,8 @@
                     "value": {
                       "url": "https://deepworkplan.com/init",
                       "contentFormat": "markdown",
-                      "title": "Init — Deep Work Plan adoption prompt",
-                      "markdown": "# Init — Deep Work Plan adoption prompt\n\nYou are about to make this repository AI-first…",
+                      "title": "Init \u2014 Deep Work Plan adoption prompt",
+                      "markdown": "# Init \u2014 Deep Work Plan adoption prompt\n\nYou are about to make this repository AI-first\u2026",
                       "language": "en",
                       "recovery": {
                         "llmsTxt": "https://deepworkplan.com/llms.txt",
@@ -143,7 +143,7 @@
                 },
                 "examples": {
                   "body": {
-                    "value": "# Init — Deep Work Plan adoption prompt\n\nYou are about to make this repository AI-first…"
+                    "value": "# Init \u2014 Deep Work Plan adoption prompt\n\nYou are about to make this repository AI-first\u2026"
                   }
                 }
               }
@@ -174,7 +174,7 @@
                       "url": "https://deepworkplan.com/about",
                       "contentFormat": "markdown",
                       "title": "About the methodology",
-                      "markdown": "# About the methodology\n\n> Deep Work Plan is …",
+                      "markdown": "# About the methodology\n\n> Deep Work Plan is \u2026",
                       "language": "en",
                       "recovery": {
                         "llmsTxt": "https://deepworkplan.com/llms.txt",
@@ -233,7 +233,7 @@
           "Agent Markdown"
         ],
         "summary": "Any top-level page as Markdown (English)",
-        "description": "Native source Markdown for a top-level page in the default language (English). Every rendered HTML page on the site has one of these mirrors — this is the source Markdown, not an HTML conversion. Send `Accept: application/json` for a typed envelope of the same Markdown.",
+        "description": "Native source Markdown for a top-level page in the default language (English). Every rendered HTML page on the site has one of these mirrors \u2014 this is the source Markdown, not an HTML conversion. Send `Accept: application/json` for a typed envelope of the same Markdown.",
         "responses": {
           "200": {
             "description": "Page Markdown with metadata header (Language, Canonical) and a site-navigation footer.",
@@ -248,7 +248,7 @@
                       "url": "https://deepworkplan.com/about",
                       "contentFormat": "markdown",
                       "title": "About the methodology",
-                      "markdown": "# About the methodology\n\n> Deep Work Plan is …",
+                      "markdown": "# About the methodology\n\n> Deep Work Plan is \u2026",
                       "language": "en",
                       "recovery": {
                         "llmsTxt": "https://deepworkplan.com/llms.txt",
@@ -283,7 +283,7 @@
                 },
                 "examples": {
                   "body": {
-                    "value": "# Page not found\n\nRecovery links: sitemap, llms.txt, /developers…"
+                    "value": "# Page not found\n\nRecovery links: sitemap, llms.txt, /developers\u2026"
                   }
                 }
               }
@@ -366,7 +366,7 @@
                       "url": "https://deepworkplan.com/about",
                       "contentFormat": "markdown",
                       "title": "About the methodology",
-                      "markdown": "# About the methodology\n\n> Deep Work Plan is …",
+                      "markdown": "# About the methodology\n\n> Deep Work Plan is \u2026",
                       "language": "en",
                       "recovery": {
                         "llmsTxt": "https://deepworkplan.com/llms.txt",
@@ -385,7 +385,7 @@
                 },
                 "examples": {
                   "body": {
-                    "value": "Language: es\nCanonical: https://deepworkplan.com/es/methodology\n\n# Metodología\n"
+                    "value": "Language: es\nCanonical: https://deepworkplan.com/es/methodology\n\n# Metodolog\u00eda\n"
                   }
                 }
               }
@@ -401,7 +401,7 @@
                 },
                 "examples": {
                   "body": {
-                    "value": "# Página no encontrada\n"
+                    "value": "# P\u00e1gina no encontrada\n"
                   }
                 }
               }
@@ -444,7 +444,7 @@
                       "url": "https://deepworkplan.com/about",
                       "contentFormat": "markdown",
                       "title": "About the methodology",
-                      "markdown": "# About the methodology\n\n> Deep Work Plan is …",
+                      "markdown": "# About the methodology\n\n> Deep Work Plan is \u2026",
                       "language": "en",
                       "recovery": {
                         "llmsTxt": "https://deepworkplan.com/llms.txt",
@@ -463,7 +463,7 @@
                 },
                 "examples": {
                   "body": {
-                    "value": "# 01 — Manifesto\n\nContext matters more than models…"
+                    "value": "# 01 \u2014 Manifesto\n\nContext matters more than models\u2026"
                   }
                 }
               }
@@ -506,7 +506,7 @@
                       "url": "https://deepworkplan.com/about",
                       "contentFormat": "markdown",
                       "title": "About the methodology",
-                      "markdown": "# About the methodology\n\n> Deep Work Plan is …",
+                      "markdown": "# About the methodology\n\n> Deep Work Plan is \u2026",
                       "language": "en",
                       "recovery": {
                         "llmsTxt": "https://deepworkplan.com/llms.txt",
@@ -525,7 +525,7 @@
                 },
                 "examples": {
                   "body": {
-                    "value": "# Task anatomy\n\nEvery task is a closure…"
+                    "value": "# Task anatomy\n\nEvery task is a closure\u2026"
                   }
                 }
               }
@@ -553,7 +553,7 @@
           "Agent Markdown"
         ],
         "summary": "Kit catalog entry as Markdown",
-        "description": "Markdown mirror of a kit catalog page — presets, adapters, commands (English). Localized variants live at /{lang}/kit/{slug}.md. Send `Accept: application/json` for a typed envelope of the same Markdown.",
+        "description": "Markdown mirror of a kit catalog page \u2014 presets, adapters, commands (English). Localized variants live at /{lang}/kit/{slug}.md. Send `Accept: application/json` for a typed envelope of the same Markdown.",
         "responses": {
           "200": {
             "description": "Kit entry Markdown.",
@@ -568,7 +568,7 @@
                       "url": "https://deepworkplan.com/about",
                       "contentFormat": "markdown",
                       "title": "About the methodology",
-                      "markdown": "# About the methodology\n\n> Deep Work Plan is …",
+                      "markdown": "# About the methodology\n\n> Deep Work Plan is \u2026",
                       "language": "en",
                       "recovery": {
                         "llmsTxt": "https://deepworkplan.com/llms.txt",
@@ -587,7 +587,7 @@
                 },
                 "examples": {
                   "body": {
-                    "value": "# Presets\n\nPreset plans for common repo archetypes…"
+                    "value": "# Presets\n\nPreset plans for common repo archetypes\u2026"
                   }
                 }
               }
@@ -630,7 +630,7 @@
                       "url": "https://deepworkplan.com/about",
                       "contentFormat": "markdown",
                       "title": "About the methodology",
-                      "markdown": "# About the methodology\n\n> Deep Work Plan is …",
+                      "markdown": "# About the methodology\n\n> Deep Work Plan is \u2026",
                       "language": "en",
                       "recovery": {
                         "llmsTxt": "https://deepworkplan.com/llms.txt",
@@ -649,7 +649,7 @@
                 },
                 "examples": {
                   "body": {
-                    "value": "# Worked example\n\nFrom zero to agent-pilotable…"
+                    "value": "# Worked example\n\nFrom zero to agent-pilotable\u2026"
                   }
                 }
               }
@@ -852,7 +852,7 @@
           "Discovery"
         ],
         "summary": "DWP repository descriptor",
-        "description": "This website's own Deep Work Plan repo descriptor — the site dogfoods the methodology it documents (spec version, archetype, conformance, skill install command).",
+        "description": "This website's own Deep Work Plan repo descriptor \u2014 the site dogfoods the methodology it documents (spec version, archetype, conformance, skill install command).",
         "responses": {
           "200": {
             "description": "Repo descriptor (JSON).",
@@ -921,7 +921,7 @@
           "Discovery"
         ],
         "summary": "OAuth authorization server metadata (RFC 8414 / OIDC Discovery, stub)",
-        "description": "Published for agent-readiness compliance. deepworkplan.com has no protected APIs today — endpoints are reserved paths and do not accept real OAuth flows; see /auth.md, which every listed field's agent_auth block points to, for the actual (anonymous, zero-auth) access model.",
+        "description": "Published for agent-readiness compliance. deepworkplan.com has no protected APIs today \u2014 endpoints are reserved paths and do not accept real OAuth flows; see /auth.md, which every listed field's agent_auth block points to, for the actual (anonymous, zero-auth) access model.",
         "responses": {
           "200": {
             "description": "Authorization server metadata (JSON).",
@@ -1154,6 +1154,15 @@
               },
               "X-API-Version": {
                 "$ref": "#/components/headers/XApiVersion"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1212,6 +1221,15 @@
               },
               "Retry-After": {
                 "$ref": "#/components/headers/RetryAfter"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1239,7 +1257,7 @@
           "API"
         ],
         "summary": "Site sections catalog (v1)",
-        "description": "The main sections of deepworkplan.com (name, path, one-line description) — the same data the MCP `list_site_sections` tool returns. Part of the URL-path-versioned `/api/v1/` family. Breaking changes ship only in a new /v{N+1}/ family; deprecated endpoints answer Deprecation and Sunset headers at least 180 days before removal (policy: /developers).",
+        "description": "The main sections of deepworkplan.com (name, path, one-line description) \u2014 the same data the MCP `list_site_sections` tool returns. Part of the URL-path-versioned `/api/v1/` family. Breaking changes ship only in a new /v{N+1}/ family; deprecated endpoints answer Deprecation and Sunset headers at least 180 days before removal (policy: /developers).",
         "responses": {
           "200": {
             "description": "Sections catalog.",
@@ -1258,6 +1276,15 @@
               },
               "X-API-Version": {
                 "$ref": "#/components/headers/XApiVersion"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1320,6 +1347,15 @@
               },
               "Retry-After": {
                 "$ref": "#/components/headers/RetryAfter"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1366,6 +1402,15 @@
               },
               "X-API-Version": {
                 "$ref": "#/components/headers/XApiVersion"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1438,6 +1483,15 @@
               },
               "Retry-After": {
                 "$ref": "#/components/headers/RetryAfter"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1484,6 +1538,15 @@
               },
               "X-API-Version": {
                 "$ref": "#/components/headers/XApiVersion"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1540,6 +1603,15 @@
               },
               "Retry-After": {
                 "$ref": "#/components/headers/RetryAfter"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1664,7 +1736,7 @@
                         "content": [
                           {
                             "type": "text",
-                            "text": "# Init — …"
+                            "text": "# Init \u2014 \u2026"
                           }
                         ],
                         "isError": false
@@ -1676,7 +1748,7 @@
             }
           },
           "202": {
-            "description": "Accepted notification — empty body, no response object. This is a JSON-RPC 2.0 notification acknowledgment per the MCP Streamable HTTP transport spec, not a REST async-job pattern: it does not create a job, there is nothing to poll for, and no Location or job_id follows. Every other request on this endpoint (all tool calls) resolves synchronously in the same response.",
+            "description": "Accepted notification \u2014 empty body, no response object. This is a JSON-RPC 2.0 notification acknowledgment per the MCP Streamable HTTP transport spec, not a REST async-job pattern: it does not create a job, there is nothing to poll for, and no Location or job_id follows. Every other request on this endpoint (all tool calls) resolves synchronously in the same response.",
             "headers": {
               "RateLimit-Limit": {
                 "$ref": "#/components/headers/RateLimitLimit"
@@ -1724,7 +1796,7 @@
             }
           },
           "415": {
-            "description": "Unsupported Media Type — Content-Type must be application/json.",
+            "description": "Unsupported Media Type \u2014 Content-Type must be application/json.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1778,7 +1850,7 @@
     "schemas": {
       "ApiError": {
         "type": "object",
-        "description": "Structured error body for /api/* paths — agents should never have to parse HTML errors.",
+        "description": "Structured error body for /api/* paths \u2014 agents should never have to parse HTML errors.",
         "properties": {
           "error": {
             "type": "object",
@@ -1814,7 +1886,7 @@
       },
       "JsonRpcRequest": {
         "type": "object",
-        "description": "JSON-RPC 2.0 request object. `id` absent ⇒ notification (202, empty body). Batching (arrays) is not supported.",
+        "description": "JSON-RPC 2.0 request object. `id` absent \u21d2 notification (202, empty body). Batching (arrays) is not supported.",
         "properties": {
           "jsonrpc": {
             "const": "2.0"
@@ -1880,7 +1952,7 @@
           },
           "result": {
             "type": "object",
-            "description": "initialize: {protocolVersion, capabilities, serverInfo, instructions}; tools/list: {tools: […]}; tools/call: {content: [{type: 'text', text}], isError: boolean}; ping: {}."
+            "description": "initialize: {protocolVersion, capabilities, serverInfo, instructions}; tools/list: {tools: [\u2026]}; tools/call: {content: [{type: 'text', text}], isError: boolean}; ping: {}."
           },
           "error": {
             "$ref": "#/components/schemas/JsonRpcErrorObject"
@@ -2378,7 +2450,7 @@
       },
       "OAuthAuthorizationServerMetadata": {
         "type": "object",
-        "description": "RFC 8414 stub — the site is zero-auth today; see /auth.md.",
+        "description": "RFC 8414 stub \u2014 the site is zero-auth today; see /auth.md.",
         "properties": {
           "issuer": {
             "type": "string",
@@ -2453,7 +2525,7 @@
       },
       "OAuthProtectedResourceMetadata": {
         "type": "object",
-        "description": "RFC 9728 stub — no OAuth-protected resources today; see /auth.md.",
+        "description": "RFC 9728 stub \u2014 no OAuth-protected resources today; see /auth.md.",
         "properties": {
           "resource": {
             "type": "string",
@@ -2672,7 +2744,7 @@
       },
       "PageJsonEnvelope": {
         "type": "object",
-        "description": "Typed JSON envelope for a page mirror, served when a client sends Accept: application/json (and does not also prefer text/html or text/markdown). Wraps the same page Markdown served at Accept: text/markdown — contentFormat records that the body is Markdown, not that it was converted.",
+        "description": "Typed JSON envelope for a page mirror, served when a client sends Accept: application/json (and does not also prefer text/html or text/markdown). Wraps the same page Markdown served at Accept: text/markdown \u2014 contentFormat records that the body is Markdown, not that it was converted.",
         "properties": {
           "url": {
             "type": "string",
@@ -2691,7 +2763,7 @@
           "markdown": {
             "type": "string",
             "format": "markdown",
-            "description": "The page's original Markdown source, unmodified — the same body served at Accept: text/markdown."
+            "description": "The page's original Markdown source, unmodified \u2014 the same body served at Accept: text/markdown."
           },
           "language": {
             "type": "string",
@@ -2770,6 +2842,24 @@
       },
       "RetryAfter": {
         "description": "Seconds to wait before retrying (RFC 9331 / RFC 7231). One full window.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Deprecation": {
+        "description": "RFC 9745 deprecation marker. Value is `true@<unix-timestamp>` when the endpoint was marked deprecated.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Sunset": {
+        "description": "RFC 8594 Sunset date (IMF-fixdate). Endpoint will be removed on or after this date.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Link": {
+        "description": "RFC 8288 Link header; when deprecation is active, includes rel=\"deprecation\" pointing to migration guidance.",
         "schema": {
           "type": "string"
         }
