@@ -297,6 +297,197 @@ setup_opencode_persistence_for_user() {
 setup_opencode_persistence_for_user "/home/node"
 chown -R node:node /home/node/.opencode_data /home/node/.config/opencode /home/node/.local/share/opencode 2>/dev/null || true
 
+# Pi Coding Agent: ~/.pi (sessions, models.json, auth)
+setup_pi_persistence_for_user() {
+    USER_HOME="$1"
+    PI_DATA_DIR="${USER_HOME}/.pi_data"
+    PI_DIR="${USER_HOME}/.pi"
+
+    mkdir -p "${PI_DATA_DIR}"
+
+    if [ ! -L "${PI_DIR}" ]; then
+        if [ -d "${PI_DIR}" ]; then
+            if [ ! -d "${PI_DATA_DIR}/pi_dir" ] || [ -z "$(ls -A "${PI_DATA_DIR}/pi_dir" 2>/dev/null)" ]; then
+                cp -r "${PI_DIR}" "${PI_DATA_DIR}/pi_dir"
+            fi
+            rm -rf "${PI_DIR}"
+        else
+            mkdir -p "${PI_DATA_DIR}/pi_dir"
+        fi
+        ln -sf "${PI_DATA_DIR}/pi_dir" "${PI_DIR}"
+    fi
+}
+
+setup_pi_persistence_for_user "/home/node"
+chown -R node:node /home/node/.pi_data /home/node/.pi 2>/dev/null || true
+
+# Herdr: ~/.config/herdr (config.toml + logs; binary stays in ~/.local/bin from the image)
+setup_herdr_persistence_for_user() {
+    USER_HOME="$1"
+    HERDR_DATA_DIR="${USER_HOME}/.herdr_data"
+    HERDR_CONFIG_DIR="${USER_HOME}/.config/herdr"
+
+    mkdir -p "${HERDR_DATA_DIR}"
+    mkdir -p "${USER_HOME}/.config"
+
+    if [ ! -L "${HERDR_CONFIG_DIR}" ]; then
+        if [ -d "${HERDR_CONFIG_DIR}" ]; then
+            if [ ! -d "${HERDR_DATA_DIR}/config_herdr" ] || [ -z "$(ls -A "${HERDR_DATA_DIR}/config_herdr" 2>/dev/null)" ]; then
+                cp -r "${HERDR_CONFIG_DIR}" "${HERDR_DATA_DIR}/config_herdr"
+            fi
+            rm -rf "${HERDR_CONFIG_DIR}"
+        else
+            mkdir -p "${HERDR_DATA_DIR}/config_herdr"
+        fi
+        ln -sf "${HERDR_DATA_DIR}/config_herdr" "${HERDR_CONFIG_DIR}"
+    fi
+}
+
+setup_herdr_persistence_for_user "/home/node"
+chown -R node:node /home/node/.herdr_data /home/node/.config/herdr 2>/dev/null || true
+
+# Grok/xAI CLI: ~/.grok (binary + config) + ~/.local/bin/grok
+setup_grok_persistence_for_user() {
+    USER_HOME="$1"
+    GROK_DATA_DIR="${USER_HOME}/.grok_data"
+    GROK_DIR="${USER_HOME}/.grok"
+    GROK_BIN="${USER_HOME}/.local/bin/grok"
+
+    mkdir -p "${GROK_DATA_DIR}"
+
+    # Handle ~/.grok directory (contains downloads/ with binary + config)
+    if [ ! -L "${GROK_DIR}" ]; then
+        if [ -d "${GROK_DIR}" ]; then
+            if [ ! -d "${GROK_DATA_DIR}/grok_dir" ] || [ -z "$(ls -A "${GROK_DATA_DIR}/grok_dir" 2>/dev/null)" ]; then
+                echo "  → First run: copying fresh Grok CLI to persistent volume"
+                cp -r "${GROK_DIR}" "${GROK_DATA_DIR}/grok_dir"
+            else
+                echo "  → Preserving existing Grok CLI data from persistent volume"
+            fi
+            rm -rf "${GROK_DIR}"
+        else
+            mkdir -p "${GROK_DATA_DIR}/grok_dir"
+        fi
+        ln -sf "${GROK_DATA_DIR}/grok_dir" "${GROK_DIR}"
+    fi
+
+    # Handle ~/.local/bin/grok shim (NOT agent - agent belongs to Cursor)
+    mkdir -p "${USER_HOME}/.local/bin"
+    # If agent points to grok binary, restore it to cursor-agent
+    if [ -L "${USER_HOME}/.local/bin/agent" ]; then
+        AGENT_TARGET="$(readlink ${USER_HOME}/.local/bin/agent 2>/dev/null || true)"
+        if echo "$AGENT_TARGET" | grep -qE 'grok|grok_data'; then
+            rm -f "${USER_HOME}/.local/bin/agent"
+            # Restore cursor-agent if cursor_data has it
+            if [ -f "${USER_HOME}/.cursor_data/cursor_dir/versions/2026.09.10-fd3934a/cursor-agent" ]; then
+                ln -sf "${USER_HOME}/.cursor_data/cursor_dir/versions/2026.09.10-fd3934a/cursor-agent" "${USER_HOME}/.local/bin/agent"
+            fi
+        fi
+    fi
+    if [ ! -L "${GROK_BIN}" ]; then
+        if [ -f "${GROK_BIN}" ] && [ ! -L "${GROK_BIN}" ]; then
+            if [ ! -f "${GROK_DATA_DIR}/grok" ]; then
+                cp "${GROK_BIN}" "${GROK_DATA_DIR}/grok"
+            fi
+            rm -f "${GROK_BIN}"
+        fi
+        if [ -f "${GROK_DATA_DIR}/grok" ]; then
+            ln -sf "${GROK_DATA_DIR}/grok" "${GROK_BIN}"
+        fi
+    fi
+}
+
+setup_grok_persistence_for_user "/home/node"
+chown -R node:node /home/node/.grok_data /home/node/.grok /home/node/.local/bin/grok 2>/dev/null || true
+
+# Ensure Grok CLI is installed (install on first run if missing)
+ensure_grok_installed() {
+    if [ ! -f "/home/node/.grok/downloads/grok-linux-aarch64" ] && [ ! -f "/home/node/.grok_data/grok_dir/downloads/grok-linux-aarch64" ]; then
+        echo "Grok CLI not found, installing..."
+        GROK_BIN_DIR="/home/node/.local/bin" GROK_CHANNEL=stable bash <(curl -fsSL https://x.ai/cli/install.sh) 2>&1 | tail -5 || true
+        # Move binary to persistent location if it landed elsewhere
+        if [ -f "/home/node/.grok/downloads/grok-linux-aarch64" ]; then
+            mkdir -p "/home/node/.grok_data/grok_dir/downloads"
+            cp "/home/node/.grok/downloads/grok-linux-aarch64" "/home/node/.grok_data/grok_dir/downloads/"
+            rm -rf "/home/node/.grok"
+            ln -sf "/home/node/.grok_data/grok_dir" "/home/node/.grok"
+        fi
+    fi
+}
+
+ensure_grok_installed
+
+# Ensure Herdr panes use bash (so ~/.bashrc → custom_commands.sh loads),
+# open in /app, and capture mouse for sidebar clicks. Existing herdr_data
+# volumes may predate these keys — seed a full file or patch missing keys.
+ensure_herdr_bash_shell_config() {
+    HERDR_CONFIG="${1}/.config/herdr/config.toml"
+    mkdir -p "$(dirname "${HERDR_CONFIG}")"
+    if [ ! -f "${HERDR_CONFIG}" ] || ! grep -q 'default_shell' "${HERDR_CONFIG}" 2>/dev/null; then
+        cat > "${HERDR_CONFIG}" <<'EOF'
+# Seeded by entrypoint for DWP website container.
+# Ensures panes use bash so ~/.bashrc (custom_commands.sh) is sourced.
+# Docs: https://herdr.dev/docs/configuration/
+
+onboarding = false
+
+[terminal]
+default_shell = "/bin/bash"
+# Linux interactive non-login bash sources ~/.bashrc.
+shell_mode = "non_login"
+# New panes/tabs/workspaces land in the mounted repo root.
+new_cwd = "/app"
+
+[ui]
+# Capture mouse so sidebar workspace/tab clicks work in the terminal.
+mouse_capture = true
+EOF
+        return 0
+    fi
+
+    if ! grep -q 'new_cwd' "${HERDR_CONFIG}" 2>/dev/null; then
+        # Volume predates new_cwd — append under [terminal] without wiping user edits.
+        if grep -q '^\[terminal\]' "${HERDR_CONFIG}" 2>/dev/null; then
+            awk '
+                BEGIN { added = 0 }
+                /^\[terminal\]/ { print; print "new_cwd = \"/app\""; added = 1; next }
+                { print }
+                END {
+                    if (!added) {
+                        print ""
+                        print "[terminal]"
+                        print "new_cwd = \"/app\""
+                    }
+                }
+            ' "${HERDR_CONFIG}" > "${HERDR_CONFIG}.tmp" \
+                && mv "${HERDR_CONFIG}.tmp" "${HERDR_CONFIG}"
+        else
+            printf '\n[terminal]\nnew_cwd = "/app"\n' >> "${HERDR_CONFIG}"
+        fi
+    fi
+
+    if ! grep -q 'mouse_capture' "${HERDR_CONFIG}" 2>/dev/null; then
+        if grep -q '^\[ui\]' "${HERDR_CONFIG}" 2>/dev/null; then
+            awk '
+                BEGIN { added = 0 }
+                /^\[ui\]/ { print; print "mouse_capture = true"; added = 1; next }
+                { print }
+                END {
+                    if (!added) {
+                        print ""
+                        print "[ui]"
+                        print "mouse_capture = true"
+                    }
+                }
+            ' "${HERDR_CONFIG}" > "${HERDR_CONFIG}.tmp" \
+                && mv "${HERDR_CONFIG}.tmp" "${HERDR_CONFIG}"
+        else
+            printf '\n[ui]\nmouse_capture = true\n' >> "${HERDR_CONFIG}"
+        fi
+    fi
+}
+ensure_herdr_bash_shell_config "/home/node"
+
 # Setup SSH keys from host with correct permissions for a given user
 # This allows git operations with GitHub/GitLab
 setup_ssh_keys_for_user() {
@@ -387,6 +578,7 @@ main() {
     # Run all setup functions
     setup_nodejs
     setup_git
+    ensure_grok_installed
 
     echo "Container setup completed"
 

@@ -105,7 +105,7 @@ describe('public/openapi.json — operations', () => {
 
   it('keeps the language enum in sync with the non-default active languages', () => {
     const langParam = (
-      spec.paths['/{lang}/{page}.md']['parameters'] as {
+      spec.paths['/{lang}/{page}.md'].parameters as {
         name: string;
         schema: { enum: string[] };
       }[]
@@ -118,7 +118,7 @@ describe('public/openapi.json — operations', () => {
 
   it('keeps the page enum aligned with the site pages (incl. developers & privacy)', () => {
     const pageParam = (
-      spec.paths['/{page}.md']['parameters'] as {
+      spec.paths['/{page}.md'].parameters as {
         name: string;
         schema: { enum: string[] };
       }[]
@@ -271,7 +271,7 @@ describe('public/openapi.json — v1 family, typed schemas, header contracts', (
         ([code]) => code.startsWith('2') && code !== '204'
       );
       expect(ok, `${method} ${path} has a 2xx response`).toBeDefined();
-      const headers = Object.keys(ok![1].headers ?? {});
+      const headers = Object.keys(ok?.[1].headers ?? {});
       for (const header of requiredHeaders) {
         expect(headers, `${method} ${path} declares ${header}`).toContain(
           header
