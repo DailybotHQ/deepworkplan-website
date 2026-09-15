@@ -77,7 +77,7 @@ describe('MobileMenu: Compare and FAQ entries', () => {
     const links = screen
       .getAllByRole('link')
       .map((a) => a.getAttribute('href'))
-      .filter((href): href is string => href !== null && href.startsWith('/'));
+      .filter((href): href is string => href?.startsWith('/'));
     const examples = links.indexOf('/examples');
     expect(examples).toBeGreaterThanOrEqual(0);
     expect(links[examples + 1]).toBe('/trust');
