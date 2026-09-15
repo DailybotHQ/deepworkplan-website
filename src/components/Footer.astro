@@ -91,7 +91,7 @@ const groups: { title: string; links: { href: string; label: string }[] }[] = [
            4 across from the sm breakpoint up. Each group keeps the same
            links in the same order at every width. -->
       <nav
-        class="grid w-full max-w-4xl grid-cols-2 gap-x-6 gap-y-8 text-sm sm:grid-cols-4 sm:gap-x-8"
+        class="grid w-full grid-cols-2 gap-x-6 gap-y-8 text-sm sm:grid-cols-4 sm:gap-x-8"
         aria-label="Footer"
       >
         {
@@ -116,12 +116,12 @@ const groups: { title: string; links: { href: string; label: string }[] }[] = [
         }
       </nav>
 
-      <div class="h-px w-full max-w-4xl bg-line" aria-hidden="true"></div>
+      <div class="h-px w-full bg-line" aria-hidden="true"></div>
 
       <!-- Meta row: source/license on one side, Dailybot credit on the other.
            Stacks and centers below the sm breakpoint so it never competes
            with the sitemap grid for width. -->
-      <div class="flex w-full max-w-4xl flex-col items-center gap-6 text-sm sm:flex-row sm:justify-between">
+      <div class="flex w-full flex-col items-center gap-6 text-sm sm:flex-row sm:justify-between">
         <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 order-2 sm:order-1">
           <a
             href={githubUrl}
