@@ -1665,7 +1665,7 @@ path.write_text(json.dumps(data, indent=2) + "\n")
 PY
 }
 
-function clinex-azure() {
+function cline-azure() {
 	_cline_azure_openai_env_or_die || return 1
 	_cline_sync_azure_auth || return 1
 	local daily="${AZURE_OPENAI_MODEL_DAILY:-gpt-5.4-mini-azure}"
@@ -1865,7 +1865,7 @@ function show_welcome() {
     echo "  • chelper           - Z.AI Coding Tool Helper wizard"
     echo "  • cline             - Cline CLI (official pnpm global install)"
     echo "  • clinex            - Cline CLI with full permissions"
-    echo "  • clinex-azure      - Cline via Azure OpenAI / Foundry with full permissions"
+    echo "  • cline-azure      - Cline via Azure OpenAI / Foundry with full permissions"
     echo "  • opencode          - OpenCode CLI (official install; /connect for providers)"
     echo "  • opencodex         - OpenCode CLI with full permissions"
     echo "  • opencode-azure    - OpenCode via Azure OpenAI / Foundry with full permissions"
