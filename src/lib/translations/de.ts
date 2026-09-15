@@ -111,7 +111,7 @@ export const de: SiteTranslations = {
         'Kopieren Sie den init.md-Prompt und fügen Sie ihn in Ihren Coding-Agenten ein — Claude Code, Cursor, Codex oder einen anderen — um jedes Repository AI-first zu machen.',
       copyLabel: 'init.md kopieren',
       copiedLabel: 'Kopiert',
-      viewInitCta: 'Schnellstart ansehen',
+      viewInitCta: 'So funktioniert es',
       pullQuote:
         'Deep Work Plan ist spec-driven Development, bei der das Repository selbst zum Harness wird.',
       primaryCta: 'Methodik lesen',

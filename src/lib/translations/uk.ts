@@ -112,7 +112,7 @@ export const uk: SiteTranslations = {
         'Скопіюйте промт init.md і вставте його у свій агент програмування — Claude Code, Cursor, Codex або будь-який інший — щоб зробити будь-який репозиторій AI-first.',
       copyLabel: 'Копіювати init.md',
       copiedLabel: 'Скопійовано',
-      viewInitCta: 'Переглянути швидкий старт',
+      viewInitCta: 'Як це працює',
       pullQuote:
         'Deep Work Plan — це spec-driven розробка, у якій сам репозиторій стає harness.',
       primaryCta: 'Читати методологію',

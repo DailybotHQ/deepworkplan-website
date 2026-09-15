@@ -110,7 +110,7 @@ export const ko: SiteTranslations = {
         'init.md 프롬프트를 복사하여 코딩 에이전트 — Claude Code, Cursor, Codex, 또는 다른 에이전트 — 에 붙여넣어 어떤 리포지토리든 AI-first로 만드세요.',
       copyLabel: 'init.md 복사',
       copiedLabel: '복사됨',
-      viewInitCta: '빠른 시작 보기',
+      viewInitCta: '작동 방식 보기',
       pullQuote:
         'Deep Work Plan은 리포지토리 자체가 하니스(harness)가 되는 스펙 주도 개발입니다.',
       primaryCta: '방법론 읽기',

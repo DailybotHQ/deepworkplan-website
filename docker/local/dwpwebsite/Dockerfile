@@ -43,8 +43,12 @@ ENV PNPM_HOME=/usr/local/share/pnpm
 RUN mkdir -p "${PNPM_HOME}/bin" \
     && chown -R node:node "${PNPM_HOME}"
 
-# Make node user's CLI install dirs available on PATH (pnpm globals, Claude, Cursor agent)
-ENV PATH=${PNPM_HOME}/bin:${PNPM_HOME}:/home/node/.local/bin:/home/node/.cursor/bin:$PATH
+# Make node user's CLI install dirs available on PATH
+# (pnpm globals, Claude, Cursor agent, OpenCode official installer, Cline global install, Grok/xAI)
+ENV PATH=${PNPM_HOME}/bin:${PNPM_HOME}:/home/node/.local/bin:/home/node/.cursor/bin:/home/node/.opencode/bin:/home/node/.grok/bin:$PATH
+
+# Keep Cline's session/settings store on a persistent path inside the mounted ~/.cline volume.
+ENV CLINE_DATA_DIR=/home/node/.cline/data
 
 # Ensure the container's image-installed Node (/usr/local/bin) precedes any
 # IDE-bundled Node that gets prepended to PATH at shell startup — Cursor Server
@@ -80,7 +84,7 @@ RUN echo 'source /app/docker/custom_commands.sh' >> /home/node/.bashrc \
 
 # Pre-create persistent data dirs so the named volumes inherit node ownership on first mount
 RUN mkdir -p /home/node/.claude_data /home/node/.codex_data /home/node/.cursor_data /home/node/.gh_data \
-    /home/node/.dailybot_data /home/node/.chelper_data /home/node/.opencode_data /home/node/.ssh \
+    /home/node/.dailybot_data /home/node/.chelper_data /home/node/.cline /home/node/.opencode_data /home/node/.pi_data /home/node/.herdr_data /home/node/.ssh \
     && chown -R node:node /home/node
 
 # Install AI CLIs and configure git as node user
@@ -94,16 +98,53 @@ RUN curl -fsSL https://claude.ai/install.sh | bash \
 # Install Cursor CLI (provides the 'agent' command in ~/.cursor/bin)
 RUN curl -fsSL https://cursor.com/install | bash
 
-# Install Codex, Z.AI Coding Tool Helper, and OpenCode globally via pnpm (resolves under ${PNPM_HOME})
-# opencode-ai requires its postinstall script to download the platform binary (pnpm may skip it on global add)
-RUN corepack pnpm add -g @openai/codex @z_ai/coding-helper opencode-ai \
-    && node "$(find "${PNPM_HOME}/global" -path '*/node_modules/opencode-ai/postinstall.mjs' -print -quit)"
+# Install OpenCode CLI (official installer — https://opencode.ai/).
+# Binary lands in ~/.opencode/bin (on PATH). --no-modify-path: we own PATH via ENV
+# and .bashrc; do not let the installer append duplicate PATH exports.
+# Auth/config persists via the opencode_data volume (see entrypoint).
+RUN curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path \
+    && opencode --version
+
+# Install Codex, Cline, Pi, and Z.AI Coding Tool Helper globally via pnpm
+# (resolves under ${PNPM_HOME}). Pi needs --ignore-scripts per upstream docs.
+RUN corepack pnpm add -g @openai/codex cline @z_ai/coding-helper \
+	&& corepack pnpm add -g --ignore-scripts @earendil-works/pi-coding-agent \
+	&& pi --version
 
 # Dailybot CLI — official installer handles PEP 668 internally (uses pipx),
 # avoiding the click 8.x conflict with the system-provided python3-click.
 # Binary lands in ~/.local/bin (already on PATH); auth/config lives in
 # ~/.config/dailybot, persisted across rebuilds via the dailybot_data volume.
 RUN curl -fsSL https://cli.dailybot.com/install.sh | DAILYBOT_VERSION='>=3.7.3' bash
+
+# Herdr — terminal runtime for coding agents (https://herdr.dev/).
+# Binary lands in ~/.local/bin/herdr (already on PATH). Config/logs live in
+# ~/.config/herdr, persisted across rebuilds via the herdr_data volume.
+# Seed terminal.default_shell=/bin/bash so panes source ~/.bashrc
+# (custom_commands.sh). Without this, Herdr falls back to /bin/sh and
+# wrappers like claudex / pi-azure are "not found".
+RUN curl -fsSL https://herdr.dev/install.sh | sh \
+	&& herdr --version \
+	&& mkdir -p /home/node/.config/herdr \
+	&& printf '%s\n' \
+		'# Seeded by Dockerfile for DWP website container.' \
+		'# Ensures panes use bash so ~/.bashrc (custom_commands.sh) is sourced.' \
+		'# Docs: https://herdr.dev/docs/configuration/' \
+		'' \
+		'onboarding = false' \
+		'' \
+		'[terminal]' \
+		'default_shell = "/bin/bash"' \
+		'# Linux interactive non-login bash sources ~/.bashrc.' \
+		'shell_mode = "non_login"' \
+		'# New panes/tabs/workspaces land in the mounted repo root.' \
+		'new_cwd = "/app"' \
+		'' \
+		'[ui]' \
+		'# Capture mouse so sidebar workspace/tab clicks work in the terminal.' \
+		'mouse_capture = true' \
+		'' \
+		> /home/node/.config/herdr/config.toml
 
 # Configure Git for node user (can be overridden by mounted .gitconfig)
 RUN git config --global init.defaultBranch main \

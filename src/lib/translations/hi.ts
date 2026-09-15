@@ -110,7 +110,7 @@ export const hi: SiteTranslations = {
         'init.md प्रॉम्प्ट कॉपी करें और इसे अपने कोडिंग एजेंट — Claude Code, Cursor, Codex, या किसी भी अन्य — में पेस्ट करें, ताकि किसी भी रिपॉज़िटरी को AI-first बनाया जा सके।',
       copyLabel: 'init.md कॉपी करें',
       copiedLabel: 'कॉपी हो गया',
-      viewInitCta: 'त्वरित शुरुआत देखें',
+      viewInitCta: 'यह कैसे काम करता है, देखें',
       pullQuote:
         'Deep Work Plan स्पेक-ड्रिवन डेवलपमेंट है, जहाँ रिपॉज़िटरी स्वयं हार्नेस बन जाती है।',
       primaryCta: 'पद्धति पढ़ें',

@@ -111,7 +111,7 @@ export const vi: SiteTranslations = {
         'Sao chép prompt init.md và dán vào agent lập trình của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác — để biến mọi repository thành AI-first.',
       copyLabel: 'Sao chép init.md',
       copiedLabel: 'Đã sao chép',
-      viewInitCta: 'Xem khởi động nhanh',
+      viewInitCta: 'Xem cách hoạt động',
       pullQuote:
         'Deep Work Plan là phát triển dựa trên đặc tả, nơi bản thân repository trở thành harness.',
       primaryCta: 'Đọc phương pháp luận',

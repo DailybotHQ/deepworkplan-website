@@ -110,7 +110,7 @@ export const zh: SiteTranslations = {
         '复制 init.md 提示并将其粘贴到你的编码代理中——Claude Code、Cursor、Codex 或任何其他代理——让任意代码仓库变为 AI-first。',
       copyLabel: '复制 init.md',
       copiedLabel: '已复制',
-      viewInitCta: '查看快速开始',
+      viewInitCta: '了解它的工作原理',
       pullQuote:
         'Deep Work Plan 是一种规范驱动的开发方式，在其中代码仓库本身成为执行的 harness（运行支架）。',
       primaryCta: '阅读方法论',

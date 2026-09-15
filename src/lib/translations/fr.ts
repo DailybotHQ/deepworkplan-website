@@ -111,7 +111,7 @@ export const fr: SiteTranslations = {
         "Copiez le prompt init.md et collez-le dans votre agent de code — Claude Code, Cursor, Codex ou tout autre — pour rendre n'importe quel dépôt AI-first.",
       copyLabel: 'Copier init.md',
       copiedLabel: 'Copié',
-      viewInitCta: 'Voir le démarrage rapide',
+      viewInitCta: 'Voir comment ça marche',
       pullQuote:
         'Deep Work Plan, c’est le développement piloté par la spécification, où le dépôt lui-même devient le harness.',
       primaryCta: 'Lire la méthodologie',
