@@ -853,7 +853,7 @@ function opencode-glm() {
 # ================================
 # xAI / Grok (console.x.ai API credits)
 # Primary: pix / opencode-xai / cline-xai (full permissions)
-# Also: codex-xai / claude-xai (xAI Responses + Anthropic-compatible base)
+# Also: codex-xai (xAI Responses API)
 # Docs: https://docs.x.ai/developers/quickstart · https://opencode.ai/docs/providers/
 # ================================
 function _xai_env_or_die() {
@@ -1274,23 +1274,6 @@ function codex-xai() {
 			codex -p xai --dangerously-bypass-approvals-and-sandbox "$@"
 			;;
 	esac
-}
-
-# Claude Code via xAI Anthropic-compatible base (https://api.x.ai → /v1/messages).
-function claude-xai() {
-	_xai_env_or_die || return 1
-	local daily="${XAI_MODEL_DAILY:-grok-4.3}"
-	local reasoning="${XAI_MODEL_REASONING:-grok-4.6}"
-	local default_model="${XAI_DEFAULT_MODEL:-${daily}}"
-	print.success "Starting Claude Code with xAI Grok (${default_model}) via Anthropic-compatible API..."
-	ANTHROPIC_BASE_URL="${XAI_ANTHROPIC_BASE_URL:-https://api.x.ai}" \
-		ANTHROPIC_AUTH_TOKEN="${XAI_API_KEY}" \
-		ANTHROPIC_API_KEY="" \
-		ANTHROPIC_MODEL="${default_model}" \
-		ANTHROPIC_DEFAULT_OPUS_MODEL="${reasoning}" \
-		ANTHROPIC_DEFAULT_SONNET_MODEL="${daily}" \
-		ANTHROPIC_DEFAULT_HAIKU_MODEL="${daily}" \
-		claude --dangerously-skip-permissions "$@"
 }
 
 # ================================
@@ -1886,9 +1869,8 @@ function show_welcome() {
     echo "  • cline-xai         - Cline via xAI Grok (openai-compatible provider)"
     echo "  • grokx             - Official Grok CLI (xAI) — recommended (supports -c / -r)"
     echo "  • codex-xai         - Codex via xAI Grok (Responses API) with full permissions"
-    echo "  • claude-xai        - Claude Code via xAI (Anthropic-compatible)"
-    echo ""
-    echo "  • claude-glm        - Claude Code via Z.AI GLM with full permissions (recommended)"
+  echo ""
+  echo "  • claude-glm        - Claude Code via Z.AI GLM with full permissions (recommended)"
     echo "      -c, --continue  Continue most recent session"
     echo "      -r, --resume    Interactive session selection"
     echo "      -r <id>         Resume specific session by ID"

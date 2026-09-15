@@ -1154,6 +1154,15 @@
               },
               "X-API-Version": {
                 "$ref": "#/components/headers/XApiVersion"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1212,6 +1221,15 @@
               },
               "Retry-After": {
                 "$ref": "#/components/headers/RetryAfter"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1258,6 +1276,15 @@
               },
               "X-API-Version": {
                 "$ref": "#/components/headers/XApiVersion"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1320,6 +1347,15 @@
               },
               "Retry-After": {
                 "$ref": "#/components/headers/RetryAfter"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1366,6 +1402,15 @@
               },
               "X-API-Version": {
                 "$ref": "#/components/headers/XApiVersion"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1438,6 +1483,15 @@
               },
               "Retry-After": {
                 "$ref": "#/components/headers/RetryAfter"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1484,6 +1538,15 @@
               },
               "X-API-Version": {
                 "$ref": "#/components/headers/XApiVersion"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -1540,6 +1603,15 @@
               },
               "Retry-After": {
                 "$ref": "#/components/headers/RetryAfter"
+              },
+              "Deprecation": {
+                "$ref": "#/components/headers/Deprecation"
+              },
+              "Sunset": {
+                "$ref": "#/components/headers/Sunset"
+              },
+              "Link": {
+                "$ref": "#/components/headers/Link"
               }
             },
             "content": {
@@ -2770,6 +2842,24 @@
       },
       "RetryAfter": {
         "description": "Seconds to wait before retrying (RFC 9331 / RFC 7231). One full window.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Deprecation": {
+        "description": "RFC 9745 deprecation marker. Value is `true@<unix-timestamp>` when the endpoint was marked deprecated.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Sunset": {
+        "description": "RFC 8594 Sunset date (IMF-fixdate). Endpoint will be removed on or after this date.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Link": {
+        "description": "RFC 8288 Link header; when deprecation is active, includes rel=\"deprecation\" pointing to migration guidance.",
         "schema": {
           "type": "string"
         }
