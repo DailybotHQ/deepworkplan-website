@@ -3,7 +3,7 @@ LABEL maintainer="developers@dailybot.com"
 
 # System packages (apt requires root)
 RUN apt-get update -y && \
-    apt-get install -y less git curl gnupg ca-certificates openssh-client sudo nano \
+    apt-get install -y less git curl gnupg ca-certificates openssh-client openssh-server sudo nano \
     # pipx / python3 / python3-pip / python-is-python3: Dailybot CLI install path (PEP 668 enforced on trixie)
     pipx python3 python3-pip python-is-python3 \
     # Chromium for Lighthouse CI local audits
@@ -17,7 +17,20 @@ RUN apt-get update -y && \
     # --- Clean ---
     apt-get clean -y && \
     rm -rf /var/cache/apk/* && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    # --- SSH server setup (for herdr --remote access) ---
+    mkdir -p /var/run/sshd && \
+    # Host keys are required; without them sshd accepts the TCP connect then closes it.
+    ssh-keygen -A && \
+    # Drop-in config for key auth (herdr --remote via host port 2222)
+    printf '%s\n' \
+      'PasswordAuthentication no' \
+      'PubkeyAuthentication yes' \
+      'PermitRootLogin no' \
+      'UsePAM yes' \
+      'AllowTcpForwarding yes' \
+      'Subsystem sftp /usr/lib/openssh/sftp-server' \
+      > /etc/ssh/sshd_config.d/herdr.conf
 
 # Default terminal editor inside container (used by Git for merge/commit messages)
 ENV EDITOR=nano
@@ -143,6 +156,10 @@ RUN curl -fsSL https://herdr.dev/install.sh | sh \
 		'[ui]' \
 		'# Capture mouse so sidebar workspace/tab clicks work in the terminal.' \
 		'mouse_capture = true' \
+		'' \
+		'[experimental]' \
+		'# Allow herdr --remote from a host herdr pane (SSH inherits HERDR_ENV=1).' \
+		'allow_nested = true' \
 		'' \
 		> /home/node/.config/herdr/config.toml
 
