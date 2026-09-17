@@ -1,19 +1,20 @@
 ---
-description: Check status of deep work plans without executing
+description: Report status of a deep work plan without executing (provided by the installed `deepworkplan` skill)
 ---
 
-# /dwp-status
+# /dwp-status — provided by the `deepworkplan` skill
 
-Delegate to the **deepworkplan** skill (status flow).
-
-**Skill:** `.agents/skills/deepworkplan/SKILL.md`
+> Thin alias. The flow lives in the installed `deepworkplan` skill — this file
+> only routes to it, so there is a single source of truth and no drift.
 
 ## What to do
 
-1. Read `.agents/skills/deepworkplan/SKILL.md` and route to the **status** sub-skill.
-2. Follow that sub-skill's procedure exactly. Do not improvise.
-3. Plans live under `.dwp/plans/`. Use the repo's conventional-commit + gate rules.
+Route this invocation to the **status** sub-skill of the installed `deepworkplan`
+skill and follow it: read `.agents/skills/deepworkplan/status/SKILL.md` and execute
+its flow. Plan output lands in this repo's gitignored `.dwp/`
+(`.dwp/plans/`) — never the legacy
+`.agent_commands/agent_deep_work_plans/results/` path.
 
-## Notes
-
-- Read-only: reports plan progress without executing tasks.
+> Other agents: invoke the skill's `deepworkplan-status` sub-skill directly
+> (`/deepworkplan-status` in Claude Code, `#deepworkplan-status` elsewhere). This
+> `dwp-status` file is the shorter, conventional alias.

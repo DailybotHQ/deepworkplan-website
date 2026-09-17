@@ -1,19 +1,20 @@
 ---
-description: Create a new skill with guided workflow
+description: Author or update a reusable skill in this repo (provided by the installed `deepworkplan` skill)
 ---
 
-# /skill-create
+# /skill-create — provided by the `deepworkplan` skill
 
-Delegate to the **deepworkplan-author** sub-skill.
-
-**Skill:** `.agents/skills/deepworkplan/author/SKILL.md`
+> Thin alias. The flow lives in the installed `deepworkplan` skill — this file
+> only routes to it, so there is a single source of truth and no drift.
 
 ## What to do
 
-1. Read `.agents/skills/deepworkplan/author/SKILL.md` and follow the **skill** creation flow.
-2. Follow that sub-skill's procedure exactly. Do not improvise.
-3. New skills are written under `.agents/skills/`.
+Route this invocation to the **author** sub-skill of the installed `deepworkplan`
+skill and follow its **Create a skill** flow: read
+`.agents/skills/deepworkplan/author/SKILL.md` and execute it, passing along any
+arguments as the skill name/intent. Keep any new command thin and keep this
+repo's `.agents/docs/` catalog in sync.
 
-## Notes
-
-- For agents use `/agent-create`.
+> Other agents: invoke the skill's `deepworkplan-author` sub-skill directly
+> (`/deepworkplan-author` in Claude Code, `#deepworkplan-author` elsewhere). This
+> `skill-create` file is the shorter, conventional alias.

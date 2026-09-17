@@ -100,6 +100,48 @@ The `tmp/` directory at the project root is a **git-ignored scratch space** for 
 - When a user asks for a temporary file, prompt output, or scratch artifact, **write it to `tmp/`**
 - Subdirectories are fine (e.g., `tmp/prompts/`, `tmp/analysis/`)
 
+## Plan Output Belongs to the Plan (MANDATORY)
+
+`tmp/` is for **freeform scratch**. Anything produced **about a Deep Work Plan**
+is different: it is evidence a later session reads back by pointer, and it
+belongs in **that plan's own folder**.
+
+**The rule:** a plan's temporary and analysis output MUST be written under
+`.dwp/plans/PLAN_{name}/analysis_results/`. It MUST NOT be written to the
+repository root. This covers everything a flow produces about the plan — the
+requirements analysis, the skills ledger, the security review, gate logs, audit
+reports, scratch measurements — not just the files the standard names. Evidence
+that is not where the plan says it is has been lost.
+
+**What this means in practice.** Three of this repository's audit scripts default
+their report path to the **current working directory**, which silently creates a
+root-level `analysis_results/`:
+
+| Script | npm script | Default output |
+|--------|-----------|----------------|
+| `scripts/check-md-content-parity.mjs` | `md:content-check` | `analysis_results/MD_HTML_CONTENT_PARITY.md` + `…_DATA.csv` |
+| `scripts/audit-seo.mjs` | — | `analysis_results/SEO_AUDIT.md` |
+| `scripts/audit-aeo.mjs` | — | `analysis_results/AEO_AUDIT_SCRIPTED.md` |
+
+When running any of them **as part of a plan**, pass the explicit output flag:
+
+```bash
+pnpm run md:content-check \
+  --out  .dwp/plans/PLAN_{name}/analysis_results/MD_HTML_CONTENT_PARITY.md \
+  --data .dwp/plans/PLAN_{name}/analysis_results/MD_HTML_CONTENT_PARITY_DATA.csv
+
+node scripts/audit-seo.mjs --out .dwp/plans/PLAN_{name}/analysis_results/SEO_AUDIT.md
+```
+
+The defaults are deliberately kept so the scripts stay usable **outside** a plan
+(a maintainer auditing SEO by hand). `/analysis_results` is gitignored, so a
+missed flag can never become a commit — but an ignored file is still a lost
+artifact, so pass the flag. A root-level `analysis_results/` you find in a
+working tree is exactly that mistake, and is safe to delete.
+
+> This mirrors the normative rule in the Deep Work Plan specification
+> (`.agents/skills/deepworkplan/spec/DWP_SPECIFICATION.md` §5).
+
 ## Skills, Commands, and Agents (`.agents/`)
 
 The `.agents/` directory is the **canonical, cross-agent home** for everything that defines how AI assistants behave in this repo: skills, slash commands, agent definitions, internal documentation, and settings. The same content is consumed by Claude Code, Cursor AI, OpenAI Codex, Gemini, and any other coding agent that picks up local skills/commands.
@@ -292,7 +334,11 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 - **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the next release will overwrite those edits. Contribute upstream, then merge any PR to trigger a website release that picks up the new upstream tag.
 - **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: changes there must be intentional and reviewed. Prefer contributing reusable improvements upstream in `DailybotHQ/deepworkplan-skill`, then re-adapting this copy deliberately — never rely on the release dogfood step to pull it in.
 
-  **Current vendored provenance (2026-09-13):** this copy is the released upstream tag **`v5.3.0`** (`ab9efd7`), superseding `v5.2.0`, installed via the documented command `npx --yes skills add DailybotHQ/deepworkplan-skill@v5.3.0 --skill deepworkplan --force -y`. The known container mount-race again struck one **non-canonical** fanout target of the CLI's multi-agent write (the "Sarvam Code" mirror), but this run the canonical `.agents/skills/deepworkplan/` write completed: verified `diff -rq` **byte-identical** against the tag's canonical `skills/deepworkplan/` tree, with `skills-lock.json` updated by the CLI itself (hash `49a77d4f…`). Relative to `v5.2.0`, `v5.3.0` is the upstream **"v5 reliability closure"** release (PR #44): twelve tasks enforcing the v5 lifecycle guarantees the methodology already promised — state cannot silently contradict the Markdown (guarded writer + read-only checker), a task cannot close on evidence that admits non-execution (five evidence states in `state_contract.py`), completion is a recoverable transaction with a receipt (`finalize_plan.py` + `FINALIZATION.json`), evidence pointers stay resolvable after a handoff, an interrupted plan resumes at its exact boundary, and the docs match the shipped tree rather than prose claims — each backed by a regression scenario, with **thirteen defects found by fresh-agent acceptance runs** (frozen protocol/oracles, fault injection) folded back into the suite (324 → 398 cases). Standard remains aligned to **5.0.0** (no schema-line change). Local adaptation remains the command kit (seven `dwp-*` delegators incl. `/dwp-verify`) plus this provenance protocol; future updates follow the same explicit, reviewed path: install the new tag and re-stamp this paragraph. This repository keeps the AI Diff Reviewer local-only; it does not ship an AI Reviewer CI workflow. The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed.
+  **Current vendored provenance (2026-09-17):** this copy is the released upstream tag **`v5.4.0`** (`7f692b0`), superseding `v5.3.0`, installed via the documented command `npx --yes skills add DailybotHQ/deepworkplan-skill@v5.4.0 --skill deepworkplan --force -y`. Verified `diff -rq` **byte-identical** against the tag's canonical `skills/deepworkplan/` tree — empty output — with `skills-lock.json` updated by the CLI itself (hash `de0babb1…`, superseding `49a77d4f…`). This install ran cleanly: the container mount-race that struck earlier installs did not fire, and the canonical `.agents/skills/deepworkplan/` write completed.
+
+**`v5.4.0` is the release that absorbed this repository's own contribution.** Between 2026-09-13 and 2026-09-17 this copy deliberately ran **ahead of** upstream, carrying a reviewed re-adaptation that pinned the AI Diff Reviewer addon to v2.3.0, named the **incomplete review** as a state distinct from a clean pass, added the normative rule that a plan's temporary and analysis output belongs in that plan's own `analysis_results/`, and resolved a `tmp/`-versus-plan-output contradiction between two spec surfaces. That work was contributed upstream as `DailybotHQ/deepworkplan-skill` PR #45, merged 2026-09-17, and released as `v5.4.0` one minute later. **Installing the tag therefore closed the divergence rather than destroying it** — the only delta between the previous re-adapted tree and `v5.4.0` was the `version:` stamp in fifteen `SKILL.md` files, which is the strongest available evidence that the re-adaptation matched what shipped. Standard remains aligned to **5.0.0** (no schema-line change; `v5.4.0` is a documentation and addon-contract release).
+
+**There is currently no local divergence.** This copy is a plain released tag, so a future `npx --yes skills add DailybotHQ/deepworkplan-skill@<tag> --skill deepworkplan --force -y` overwrites nothing that is not already upstream. If a divergence is ever reintroduced — the repo-adapted path this section authorizes — re-stamp this paragraph to say what it carries and that a tag install will overwrite it, exactly as the 2026-09-13 entry did. Local adaptation remains the command kit (nine delegators: seven `dwp-*` plus `/skill-create` and `/agent-create`, refreshed from the skill's own `onboard/command-templates/` on 2026-09-17) and this provenance protocol. This repository keeps the AI Diff Reviewer local-only; it does not ship an AI Reviewer CI workflow. The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed — `ai-diff-reviewer` was refreshed to **v2.3.0** on 2026-09-17 (lock hash `903e3868…`, verified `diff -rq` against the published tag).
 
 ### Official CLI publishing (same release workflow)
 
@@ -327,7 +373,7 @@ does not require a reviewer secret or review labels. The shared
 [`.review/extension.md`](.review/extension.md) continues to provide the
 repository-specific local review guidance.
 
-DWP standard: 5.0.0 (onboarded 2026-09-11, upgraded 2026-09-13; skill 5.3.0)
+DWP standard: 5.0.0 (onboarded 2026-09-11, upgraded 2026-09-13 and 2026-09-17; skill 5.4.0)
 
 ## Quick Commands
 
@@ -521,7 +567,7 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 - [ ] Translation strings present in every `src/lib/translations/*.ts` file
 - [ ] Non-English content has correct diacritics/scripts/punctuation for its language
 - [ ] No placeholder content in published pages (`[AUTHOR:`, `[TODO:`, etc.)
-- [ ] Meta descriptions: 130-160 characters (pages in translations, collection docs in frontmatter)
+- [ ] Meta descriptions: 130-160 characters — 60-90 for CJK (`zh`, `ja`, `ko`), whose characters render about twice as wide (pages in translations, collection docs in frontmatter; see [SEO](docs/SEO.md#meta-description-standards-mandatory))
 - [ ] Accessibility: approved text contrast, image dimensions, heading hierarchy
 - [ ] Performance: lightest hydration, minimal JS
 - [ ] Commit message in English (conventional format)

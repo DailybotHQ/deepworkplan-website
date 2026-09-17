@@ -1,20 +1,24 @@
 ---
-description: Create a deep work plan (unified flow: info → draft → refine → final)
+description: Create a deep work plan for short or long work — materializes an executable Lite plan, promoted to Full task files only when needed (provided by the installed `deepworkplan` skill)
 ---
 
-# /dwp-create
+# /dwp-create — provided by the `deepworkplan` skill
 
-Delegate to the **deepworkplan** skill (create flow).
-
-**Skill:** `.agents/skills/deepworkplan/SKILL.md`
+> Thin alias. The flow lives in the installed `deepworkplan` skill — this file
+> only routes to it, so there is a single source of truth and no drift.
 
 ## What to do
 
-1. Read `.agents/skills/deepworkplan/SKILL.md` and route to the **create** sub-skill.
-2. Follow that sub-skill's procedure exactly. Do not improvise.
-3. Plans live under `.dwp/plans/`. Use the repo's conventional-commit + gate rules.
+Route this invocation to the **create** sub-skill of the installed `deepworkplan`
+skill and follow it: read `.agents/skills/deepworkplan/create/SKILL.md` and execute
+its flow. Ordinary requests — at any scale, including a single small fix —
+materialize an executable **Lite** plan under `.dwp/plans/PLAN_{name}/`; no
+draft file is written — the Lite plan is the reviewable artifact. `trust`/`auto`
+skips the review and `lite`/`full` override the recommendation, at either edge of
+the request. Plan output lands in this repo's
+gitignored `.dwp/` — never the legacy
+`.agent_commands/agent_deep_work_plans/results/` path.
 
-## Notes
-
-- Unified flow: gather info -> draft -> refine -> final.
-- For execution use `/dwp-execute`; to resume use `/dwp-resume`.
+> Other agents: invoke the skill's `deepworkplan-create` sub-skill directly
+> (`/deepworkplan-create` in Claude Code, `#deepworkplan-create` elsewhere). This
+> `dwp-create` file is the shorter, conventional alias.

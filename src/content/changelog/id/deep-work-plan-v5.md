@@ -9,6 +9,11 @@ order: 1
 featured: true
 sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
+sourceLinks:
+  - label: "Commit rilis skill ab1337d (v5.0.0)"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
+  - label: "Rilis skill v5.4.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
 ---
 
 Hari ini kami merilis Deep Work Plan v5. Ini bukan penulisan ulang: ini adalah hasil berbulan-bulan penggunaan nyata — termasuk audit langsung terhadap 108 rencana nyata — yang mengungkap, celah demi celah, di mana janji metodologi dan perilaku nyata agen bisa menyimpang. Ringkasan yang jujur dari rilis ini: metodologinya memang sudah menjanjikan semua ini — sekarang ia menjaminnya. Sebelum v5, agen yang mengikuti dokumentasi secara harfiah masih bisa berakhir dalam skenario kegagalan nyata; setiap skenario tersebut, yang teridentifikasi lewat penggunaan dan masukan itu, kini tertutup dan dikunci dengan tes yang dapat dieksekusi, bukan ditambal dengan lebih banyak narasi. Rangkaian kontrak skill tumbuh dari 132 menjadi 258 tes dalam siklus ini, dan setiap jaminan di bawah divalidasi secara langsung terhadap tag yang dirilis — dipasang ke dalam repositori bersih dan dijalankan melalui alurnya sendiri sebelum entri ini ditulis.
@@ -32,3 +37,15 @@ Hari ini kami merilis Deep Work Plan v5. Ini bukan penulisan ulang: ini adalah h
 **Kontrak yang diberi versi dan dipublikasikan.** Setiap janji di atas didukung oleh data yang bisa dibaca alat lain, bukan hanya narasi: format plan-manifest dan plan-state kini diberi versi sebagai lini skema v5 — [`plan-manifest/v5.json`](https://deepworkplan.com/schema/plan-manifest/v5.json) dan [`plan-state/v5.json`](https://deepworkplan.com/schema/plan-state/v5.json) — sehingga sebuah rencana, verifikator, atau alat pihak ketiga dapat memeriksa kesesuaian terhadap kontrak yang dipublikasikan dan dapat dibaca mesin, bukan terhadap paragraf dokumentasi. Tidak ada yang berubah bentuk pada lini v5 dibanding v2: rencana yang sudah ada dan merujuk ke skema v1 atau v2 tetap valid dan tidak pernah ditulis ulang.
 
 Deep Work Plan v5 mengikuti standar DWP 5.0.0. Baca [spesifikasi normatif](https://deepworkplan.com/spec), lihat [repositori skill](https://github.com/DailybotHQ/deepworkplan-skill), atau mulai adopsi dari [`/init`](https://deepworkplan.com/init).
+
+## Pembaruan — 2026-09-17 · skill v5.4.0
+
+Rilis titik pertama pada jalur v5 menutup satu-satunya jalan tersisa bagi sebuah rencana untuk selesai di atas pekerjaan yang tidak pernah benar-benar diperiksa, sekaligus menetapkan di mana bukti milik rencana itu berada. Standar DWP 5.0.0 tidak berubah: ini rilis kontrak add-on dan dokumentasi, bukan perubahan skema.
+
+**Tinjauan yang tidak pernah berjalan tidak lagi sulit dibedakan dari tinjauan yang bersih.** Pemeriksaan keamanan Final Review sudah memisahkan peninjau yang hilang — dicatat sebagai temuan — dari pemanggilan yang gagal, yang memberi peringatan sekali lalu melanjutkan. Peninjau di hulu menambahkan hasil ketiga: eksekusi yang mulai lalu berakhir tanpa menuliskan satu pun temuan. Tanpa nama sendiri, ia melebur ke dalam "pemeriksaan selesai dan tidak menemukan apa pun", yang akan membiarkan sebuah rencana ditutup atas tinjauan yang tidak pernah terjadi. Kini ia menjadi keadaan tersendiri: dicatat sebagai tinjauan yang tidak lengkap, tidak pernah dihitung sebagai bukti bahwa himpunan perubahan bersih, dan tidak pernah menjadi alasan menutup Final Review. Tiga hasil yang berbeda — dan tidak satu pun berarti diff telah dibaca dan ternyata bersih.
+
+**Bukti sebuah rencana adalah milik rencana itu.** Standar sudah menempatkan catatan analisis, buku skills, tinjauan keamanan, dan log gerbang di dalam `analysis_results/` milik rencana itu sendiri, tetapi tidak pernah menyatakan keeksklusifan itu sebagai aturan. Karena itu, alat audit milik repositori sendiri, yang jalur laporannya secara bawaan menunjuk direktori kerja, bisa menuliskan bukti sebuah rencana ke akar repositori tanpa ada alur yang menyadarinya. Spesifikasi kini mensyaratkannya: segala sesuatu yang dihasilkan sebuah alur tentang sebuah rencana masuk ke folder rencana itu, dan alat yang keluaran bawaannya adalah direktori kerja harus diberi opsi keluaran eksplisitnya. Bukti yang tidak berada di tempat yang disebut rencana adalah bukti yang hilang — itulah alasan praktis aturan ini, bukan selera penataan berkas.
+
+**Patokan AI Diff Reviewer naik ke v2.3.0.** Tinjauan lokal wajib kini memasang peninjau yang memisahkan runner dari backend: tinjauan yang sama dapat berjalan terhadap endpoint mana pun yang kompatibel tanpa mengubah apa yang menjadi ketergantungan DWP — jaminan netralitas justru menguat, bukan melonggar. Ditambah pemasang terverifikasi checksum, biaya bawaan yang terukur alih-alih diduga, serta putaran lanjutan yang meninjau diff baru yang sebenarnya sambil membawa temuan yang belum selesai. Yang terakhir punya konsekuensi kontraktual yang layak dikatakan terus terang: klaim model sendiri bahwa sebuah temuan sudah selesai tidak menariknya — yang menariknya adalah seorang pemelihara.
+
+Baca [spesifikasi](https://deepworkplan.com/spec) untuk teks normatifnya, [referensi add-on](https://deepworkplan.com/kit/ai-diff-reviewer) untuk apa yang kini dilakukan peninjau, atau [rilis v5.4.0](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0) untuk sumbernya.

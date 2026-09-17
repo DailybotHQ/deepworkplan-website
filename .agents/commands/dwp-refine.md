@@ -1,19 +1,20 @@
 ---
-description: Refine a draft or modify an existing final plan
+description: Modify an existing plan — edit scope, add or split tasks, promote a Lite plan to Full, or migrate a legacy plan (provided by the installed `deepworkplan` skill)
 ---
 
-# /dwp-refine
+# /dwp-refine — provided by the `deepworkplan` skill
 
-Delegate to the **deepworkplan** skill (refine flow).
-
-**Skill:** `.agents/skills/deepworkplan/SKILL.md`
+> Thin alias. The flow lives in the installed `deepworkplan` skill — this file
+> only routes to it, so there is a single source of truth and no drift.
 
 ## What to do
 
-1. Read `.agents/skills/deepworkplan/SKILL.md` and route to the **refine** sub-skill.
-2. Follow that sub-skill's procedure exactly. Do not improvise.
-3. Plans live under `.dwp/plans/`. Use the repo's conventional-commit + gate rules.
+Route this invocation to the **refine** sub-skill of the installed `deepworkplan`
+skill and follow it: read `.agents/skills/deepworkplan/refine/SKILL.md` and execute
+its flow. Plan output lands in this repo's gitignored `.dwp/`
+(`.dwp/plans/`) — never the legacy
+`.agent_commands/agent_deep_work_plans/results/` path.
 
-## Notes
-
-- Refines a draft plan or modifies an existing final plan.
+> Other agents: invoke the skill's `deepworkplan-refine` sub-skill directly
+> (`/deepworkplan-refine` in Claude Code, `#deepworkplan-refine` elsewhere). This
+> `dwp-refine` file is the shorter, conventional alias.

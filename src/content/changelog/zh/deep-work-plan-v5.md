@@ -9,6 +9,11 @@ order: 1
 featured: true
 sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
+sourceLinks:
+  - label: "技能发布提交 ab1337d（v5.0.0）"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
+  - label: "技能发布 v5.4.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
 ---
 
 今天我们发布 Deep Work Plan v5。这不是一次重写：这是数月真实使用的结果——包括对 108 个真实计划的直接审计——一处又一处地揭示出方法论的承诺与智能体实际行为可能出现分歧的地方。对这个版本最诚实的概括：这些能力方法论早已承诺——现在它做出了保证。在 v5 之前，一个逐字照着文档执行的智能体仍可能落入真实的失败场景；如今每一个这样的场景，都是通过这些实际使用和反馈被发现的，已经关闭，并由可执行的测试锁定——而不是靠更多文字掩盖过去。本周期内技能的契约测试套件从 132 个增长到 258 个，且下文的每一项保证都是针对已发布的 tag 在实测中验证的——先安装进一个干净的仓库，再跑完它自己的全部流程，然后才写下这篇条目。
@@ -32,3 +37,15 @@ sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
 **一份有版本号、已发布的契约。** 上述每一项承诺都由其他工具可以读取的数据支撑，而不只是文字：plan-manifest 与 plan-state 格式现在作为 v5 schema 系列进行版本管理——[`plan-manifest/v5.json`](https://deepworkplan.com/schema/plan-manifest/v5.json) 与 [`plan-state/v5.json`](https://deepworkplan.com/schema/plan-state/v5.json)——这样一个计划、一个验证器，或第三方工具都可以对照已发布、机器可读的契约来检查一致性，而不是对照一段文档文字。v5 系列相对 v2 没有任何形状上的变化：引用 v1 或 v2 schema 的现有计划依然有效，永远不会被重写。
 
 Deep Work Plan v5 遵循 DWP 标准 5.0.0。阅读[规范文本](https://deepworkplan.com/spec)，查看[技能仓库](https://github.com/DailybotHQ/deepworkplan-skill)，或从 [`/init`](https://deepworkplan.com/init) 开始采纳。
+
+## 更新 — 2026-09-17 · 技能 v5.4.0
+
+v5 线的首个补丁版本，堵上了计划可能凭借"从未真正检查过的工作"收尾的最后一条路径，并确定了计划自身证据的存放位置。DWP 标准 5.0.0 保持不变：这是一次附加组件契约与文档的发布，而非模式变更。
+
+**一次从未运行的审查，不再与一次干净的审查难以分辨。** Final Review 的安全审查环节此前已经区分了审查器缺失——记录为一条结果——与调用出错（警告一次后继续）。上游的审查器又带来了第三种结局：一次启动后退出、却没有写下任何结果的运行。在它没有名字的时候，它会被归入"审查完成且一无所获"，从而让计划得以凭借一次并未发生的审查收尾。如今它自成一种状态：记录为不完整的审查，绝不被算作变更集干净的凭据，也绝不构成关闭 Final Review 的理由。三种截然不同的结局，而它们当中没有任何一种意味着这份 diff 被读过且是干净的。
+
+**计划的证据属于计划。** 标准此前已经把分析记录、skills 台账、安全审查与门控日志放在计划自己的 `analysis_results/` 之下，却从未把这种排他性写成规则。于是，一个仓库自身的审计工具——其报告路径默认写入工作目录——可能悄悄把某个计划的证据写到仓库根目录，而没有任何流程察觉。规范现在明确要求：流程围绕某个计划产出的一切，都进入该计划的文件夹；对于默认输出到工作目录的工具，必须显式传入其输出选项。不在计划所说位置上的证据，就等于已经丢失——这才是这条规则的现实理由，而非归档偏好。
+
+**AI Diff Reviewer 的固定版本升至 v2.3.0。** 必备的本地审查如今安装的审查器，将 runner 与 backend 分离，因此同一份审查可以对任何兼容端点运行，而不改变 DWP 所依赖的东西——中立性保证由此得到加强，而非放松。它还带来经校验和验证的安装程序、以实测而非猜测为依据的成本默认值，以及在携带未决结果向前推进的同时审查真正新增 diff 的后续轮次。最后一点有一条值得直说的契约含义：模型自称某条结果已解决，并不能撤销它——撤销它的是维护者。
+
+规范文本见[规范](https://deepworkplan.com/spec)，审查器现在的能力见[附加组件参考](https://deepworkplan.com/kit/ai-diff-reviewer)，源头见 [v5.4.0 发布](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0)。
