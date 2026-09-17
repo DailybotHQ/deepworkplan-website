@@ -9,6 +9,11 @@ order: 1
 featured: true
 sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
+sourceLinks:
+  - label: "Beceri yayın commit'i ab1337d (v5.0.0)"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
+  - label: "Beceri yayını v5.4.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
 ---
 
 Bugün Deep Work Plan v5'i yayınlıyoruz. Bu bir yeniden yazım değil: aylar süren gerçek kullanımın — 108 gerçek planın doğrudan denetimi de dahil — boşluk boşluk ortaya çıkardığı, metodolojinin vaatleri ile bir ajanın gerçek davranışının nerede birbirinden ayrışabildiğinin sonucu. Bu sürümün dürüst özeti şu: metodoloji bunların hepsini zaten vaat ediyordu — artık garanti ediyor. v5 öncesinde, belgeleri harfiyen izleyen bir ajan bile gerçek başarısızlık senaryolarına düşebiliyordu; bu kullanım ve geri bildirimler sayesinde tespit edilen her biri artık kapatıldı ve çalıştırılabilir bir testle sabitlendi, daha fazla düzyazıyla üzeri örtülmedi. Bu döngüde beceri paketinin sözleşme takımı 132'den 258 teste büyüdü ve aşağıdaki her garanti, yayınlanan etikete karşı canlı olarak doğrulandı — temiz bir depoya kurulup kendi akışlarından geçirildi, sonra bu yazı kaleme alındı.
@@ -32,3 +37,15 @@ Bugün Deep Work Plan v5'i yayınlıyoruz. Bu bir yeniden yazım değil: aylar s
 **Sürümlenmiş, yayımlanmış bir sözleşme.** Yukarıdaki her vaat, yalnızca düzyazıyla değil, başka araçların okuyabileceği verilerle destekleniyor: plan-manifest ve plan-state biçimleri artık v5 şema serisi olarak sürümleniyor — [`plan-manifest/v5.json`](https://deepworkplan.com/schema/plan-manifest/v5.json) ve [`plan-state/v5.json`](https://deepworkplan.com/schema/plan-state/v5.json) — böylece bir plan, bir doğrulayıcı veya üçüncü taraf bir araç, bir belge paragrafı yerine yayımlanmış, makine tarafından okunabilir bir sözleşmeye karşı uygunluğu denetleyebilir. v5 serisinde v2'ye göre şekil değişmiyor: v1 veya v2 şemalarına referans veren mevcut planlar geçerliliğini koruyor ve asla yeniden yazılmıyor.
 
 Deep Work Plan v5, DWP standardı 5.0.0'ı izler. [Normatif belirtimi](https://deepworkplan.com/spec) okuyun, [beceri deposuna](https://github.com/DailybotHQ/deepworkplan-skill) bakın ya da benimsemeye [`/init`](https://deepworkplan.com/init) adresinden başlayın.
+
+## Güncelleme — 2026-09-17 · beceri v5.4.0
+
+v5 hattının ilk ara sürümü, bir planın hiç gerçekten denetlenmemiş bir iş üzerinden kapanabileceği son yolu kapatıyor ve planın kendi kanıtının nerede duracağını belirliyor. DWP standardı 5.0.0 değişmiyor: bu bir eklenti sözleşmesi ve belgelendirme yayınıdır, şema değişikliği değil.
+
+**Hiç çalışmamış bir inceleme, artık temiz bir incelemeden ayırt edilemez değil.** Final Review'in güvenlik incelemesi, eksik bir inceleyiciyi — bulgu olarak kaydedilen — hata veren bir çağrıdan, yani bir kez uyarıp devam eden durumdan zaten ayırıyordu. Yukarı akıştaki inceleyici üçüncü bir sonuç ekledi: başlayıp ardından tek bir bulgu yazmadan sonlanan bir çalışma. Adı olmadığında bu, "inceleme tamamlandı ve bir şey bulunmadı" ile aynı kefeye giriyor ve hiç gerçekleşmemiş bir incelemeye dayanarak bir planın kapanmasına izin veriyordu. Artık kendi başına bir durum: tamamlanmamış inceleme olarak kaydedilir, değişiklik kümesinin temiz olduğunun kanıtı sayılmaz ve Final Review'i kapatmak için gerekçe olmaz. Üç ayrı sonuç — ve hiçbiri diff'in okunup temiz bulunduğu anlamına gelmez.
+
+**Bir planın kanıtı o plana aittir.** Standart, analiz kaydını, skills defterini, güvenlik incelemesini ve kapı günlüklerini zaten planın kendi `analysis_results/` dizinine koyuyordu; ama bu münhasırlığı bir kural olarak hiç söylememişti. Bu yüzden, rapor yolu varsayılan olarak çalışma dizinini gösteren depoya ait bir denetim aracı, hiçbir akışın fark etmediği biçimde bir planın kanıtını deponun köküne yazabiliyordu. Belirtim artık bunu şart koşuyor: bir akışın bir plan hakkında ürettiği her şey o planın klasörüne gider ve varsayılan çıktısı çalışma dizini olan bir araca açık çıktı seçeneği verilmelidir. Planın söylediği yerde olmayan kanıt, kaybolmuş kanıttır — kuralın pratik gerekçesi budur, bir dosyalama tercihi değil.
+
+**AI Diff Reviewer sabitlemesi v2.3.0'a çıkıyor.** Zorunlu yerel inceleme artık runner ile backend'i birbirinden ayıran bir inceleyici kuruyor: aynı inceleme, DWP'nin bağlı olduğu şeyi değiştirmeden uyumlu herhangi bir uç noktaya karşı çalışabiliyor — tarafsızlık güvencesi gevşemiyor, güçleniyor. Buna sağlama toplamıyla doğrulanan kurulumcular, tahmin yerine ölçüme dayanan varsayılan maliyetler ve açık bulguları taşıyarak gerçek yeni diff'i inceleyen takip turları ekleniyor. Sonuncusunun açıkça söylenmeye değer bir sözleşme sonucu var: bir modelin bir bulguyu çözülmüş ilan etmesi onu geri çekmez — geri çeken bir bakımcıdır.
+
+Normatif metin için [belirtime](https://deepworkplan.com/spec), inceleyicinin şimdi neler yaptığı için [eklenti referansına](https://deepworkplan.com/kit/ai-diff-reviewer), kaynak için [v5.4.0 yayınına](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0) bakın.

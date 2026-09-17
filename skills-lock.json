@@ -5,7 +5,7 @@
       "source": "DailybotHQ/ai-diff-reviewer",
       "sourceType": "github",
       "skillPath": "skills/ai-diff-reviewer/SKILL.md",
-      "computedHash": "593b88f8abf3400f7247cb1403ca99ecfefedcdde762e7455f6a02316081ea01"
+      "computedHash": "903e3868c113a67296d924afebdfc2c5f6fed0d6d56387b4c35a591c3ec3b0bf"
     },
     "dailybot": {
       "source": "DailybotHQ/agent-skill",
@@ -17,7 +17,7 @@
       "source": "DailybotHQ/deepworkplan-skill",
       "sourceType": "github",
       "skillPath": "skills/deepworkplan/SKILL.md",
-      "computedHash": "49a77d4ffd9f2421355f724a21063a4ef23395c799737a627e1e3859156666a2"
+      "computedHash": "de0babb16c8ae999e378c3395a83cd679de075ea0c3b6f81aa0139fe99fdf0c4"
     }
   }
 }

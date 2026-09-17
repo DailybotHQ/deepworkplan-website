@@ -152,9 +152,11 @@ kiểm tra bảo mật trên toàn bộ tập thay đổi đã tích lũy, bao g
 bộ AI Diff Reviewer bắt buộc, xác thực trạng thái cuối cùng của repository,
 đối chiếu các skill mà các tác vụ đã sử dụng, và ghi lại bằng chứng cùng các
 giới hạn. Skill đánh giá cục bộ được cài đặt ở một phiên bản cố định; lệnh
-được ghi lại hiện tại sử dụng `DailybotHQ/ai-diff-reviewer@v2.0.1`. GitHub
+được ghi lại hiện tại sử dụng `DailybotHQ/ai-diff-reviewer@v2.3.0`. GitHub
 Action là một bề mặt CI riêng biệt, tùy chọn, và không bao giờ là bắt buộc đối
 với phương pháp luận cốt lõi.
+
+Một lượt đánh giá đã chạy và không báo gì không giống với một lượt đánh giá chưa từng tạo ra phát hiện nào. Trường hợp thứ hai là một **lượt đánh giá dở dang**: nó được ghi nhận đúng như vậy, không bao giờ được tính là bằng chứng rằng tập thay đổi đã sạch, và không bao giờ là lý do để khép lại Final Review. Cùng với trình đánh giá vắng mặt và lời gọi bị lỗi, đó là ba trạng thái khác nhau — và không trạng thái nào nghĩa là bản diff đã được đánh giá và sạch.
 
 Thực thi không giám sát chỉ được hỗ trợ cho một kế hoạch đã được phê duyệt
 trước. Nó đòi hỏi lớp trạng thái mà máy có thể đọc được, một tiêu chuẩn DWP đã
@@ -192,13 +194,13 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
    (skill, agent, command) phải **được suy luận cho repo này** — không bao giờ là một bản sao chép-dán bộ kit của repo
    khác.
 6. **`.dwp/` + `tmp/`.** Dựng một `.dwp/` được gitignore với `plans/`, cùng một không gian nháp
-   `tmp/` — cả hai đều được thêm vào `.gitignore` một cách không phá hủy (nối thêm, không bao giờ viết lại).
+   `tmp/` — cả hai đều được thêm vào `.gitignore` một cách không phá hủy (nối thêm, không bao giờ viết lại). Hai nơi này không thể thay cho nhau: mọi thứ một luồng tạo ra **về một kế hoạch** — bản phân tích, sổ ghi skills, bản rà soát bảo mật, nhật ký cổng kiểm, báo cáo kiểm toán — đều phải nằm trong `.dwp/plans/PLAN_{name}/analysis_results/` của chính kế hoạch đó, không đặt ở gốc kho và không đặt trong `tmp/`. `tmp/` dành cho phần việc mà không kế hoạch nào đọc lại.
 
 ## 4. Cài đặt đánh giá cục bộ bắt buộc, rồi đề xuất các addon tùy chọn
 
 Sau khi khởi tạo nền tảng, hãy cài **đánh giá cục bộ AI Diff Reviewer** (Giai đoạn 7a — bắt buộc kể từ
 chuẩn 2.3.0): skill vendored được ghim theo tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) cùng một
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.0 --skill ai-diff-reviewer -y`) cùng một
 `.review/extension.md` được điều chỉnh riêng cho repo qua `generate-extension`, dưới sự chấp thuận của
 quá trình khởi tạo. Sau đó liệt kê bốn addon tùy chọn (devcontainer, Dailybot, dependency-upgrade,
 design-system) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository hoàn toàn tuân thủ

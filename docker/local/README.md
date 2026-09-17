@@ -61,7 +61,7 @@ Use [Z.AI GLM Coding Plan](https://docs.z.ai/devpack/quick-start) alongside the 
 | `cline-xai` | Cline via xAI Grok (openai-compatible `https://api.x.ai/v1`) |
 | `pi-xai` | Pi via xAI Grok (`xai-grok` custom provider) |
 | `codex-xai` | Codex via xAI Responses API (`-p xai`) |
-| `claudex-xai` | Claude Code via xAI Anthropic-compatible base (`https://api.x.ai`) |
+| (no `claudex-xai`) | xAI has no Anthropic-compatible endpoint (use `opencode-xai`, `cline-xai`, `codex-xai`, etc.) |
 | `chelper` | Z.AI Coding Tool Helper wizard |
 
 `opencodex-glm` writes the `zai-coding-plan` provider into `~/.config/opencode/opencode.json` from `ZAI_CODING_API_KEY` / `ZAI_DEFAULT_*_MODEL`, whitelists those GLM ids (default `glm-5.3` + `glm-5.3-flash`), declares image modalities for vision attachments, and launches with `--auto`.
@@ -95,10 +95,10 @@ Use [console.x.ai](https://console.x.ai/) API credits with OpenCode, Cline, and 
    cline-xai       # Cline (openai-compatible → api.x.ai/v1)
    pi-xai          # Pi (xai-grok custom provider)
    codex-xai       # Codex (-p xai, Responses API)
-   claudex-xai     # Claude Code (ANTHROPIC_BASE_URL=https://api.x.ai)
+   # No claudex-xai (xAI has no Anthropic-compatible endpoint; see tmp/claude-xai-not-supported.md)
    ```
 
-`opencodex-xai` / `pi-xai` whitelist only `XAI_MODEL_DAILY` + `XAI_MODEL_REASONING` (defaults `grok-4.3` / `grok-4.6`) and enable image modalities. Codex uses xAI's OpenAI Responses endpoint; Claude Code uses xAI's Anthropic-compatible Messages base (not a native Anthropic provider).
+`opencodex-xai` / `pi-xai` whitelist only `XAI_MODEL_DAILY` + `XAI_MODEL_REASONING` (defaults `grok-4.3` / `grok-4.6`) and enable image modalities. Codex uses xAI's OpenAI Responses endpoint. Claude Code via xAI is not supported (xAI does not expose a compatible Anthropic Messages endpoint; see tmp/claude-xai-not-supported.md).
 
 ## Azure OpenAI / Foundry (optional)
 

@@ -27,6 +27,8 @@ services:
     ports:
       # Use 5555 on host to avoid conflict with macOS AirPlay Receiver (port 5555)
       - '5555:5555'
+      # SSH for herdr --remote (avoid host:2222 — Cursor often binds 127.0.0.1:2222)
+      - '22022:22'
     env_file:
       - dwpwebsite/.env
     environment:

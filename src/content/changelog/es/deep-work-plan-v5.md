@@ -9,6 +9,11 @@ order: 1
 featured: true
 sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
+sourceLinks:
+  - label: "Commit de release de la skill ab1337d (v5.0.0)"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
+  - label: "Release de la skill v5.4.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
 ---
 
 Hoy publicamos Deep Work Plan v5. Esto no es una reescritura: son meses de uso real — incluida una auditoría directa de 108 planes reales — que fueron sacando a la luz, brecha por brecha, dónde las promesas de la metodología y el comportamiento real de un agente podían divergir. El resumen honesto de este lanzamiento: la metodología ya prometía todo esto — ahora lo garantiza. Antes de v5, un agente que siguiera la documentación al pie de la letra podía terminar en escenarios de fallo reales; cada uno de ellos, identificado gracias a ese uso y a esa retroalimentación, está ahora cerrado y asegurado con una prueba ejecutable, no parchado con más prosa. La suite de contratos de la skill pasó de 132 a 258 pruebas en este ciclo, y cada garantía de abajo se validó en vivo contra el tag publicado: se instaló en un repositorio limpio y se llevó por sus propios flujos antes de escribir esta entrada.
@@ -32,3 +37,15 @@ Hoy publicamos Deep Work Plan v5. Esto no es una reescritura: son meses de uso r
 **Un contrato versionado y publicado.** Cada promesa anterior está respaldada por datos que otras herramientas pueden leer, no solo por prosa: los formatos plan-manifest y plan-state ahora están versionados como la línea de esquema v5 — [`plan-manifest/v5.json`](https://deepworkplan.com/schema/plan-manifest/v5.json) y [`plan-state/v5.json`](https://deepworkplan.com/schema/plan-state/v5.json) — de modo que un plan, un verificador o una herramienta de terceros puede comprobar la conformidad contra un contrato publicado y legible por máquina, en lugar de un párrafo de documentación. Nada en la línea v5 cambia de forma respecto a v2: los planes existentes que referencian los esquemas v1 o v2 siguen siendo válidos y nunca se reescriben.
 
 Deep Work Plan v5 sigue el estándar DWP 5.0.0. Lee la [especificación normativa](https://deepworkplan.com/spec), consulta el [repositorio de la skill](https://github.com/DailybotHQ/deepworkplan-skill) o comienza la adopción desde [`/init`](https://deepworkplan.com/init).
+
+## Actualización — 2026-09-17 · skill v5.4.0
+
+La primera versión puntual de la línea v5 cierra la última forma en que un plan podía darse por terminado sobre trabajo que nunca se comprobó de verdad, y fija dónde vive la evidencia del propio plan. El estándar DWP 5.0.0 no cambia: esta es una release de contrato de addon y documentación, no de esquema.
+
+**Una revisión que nunca se ejecutó ya no es indistinguible de una limpia.** El pase de seguridad del Final Review ya separaba un revisor ausente —registrado como hallazgo— de una invocación que falló, que avisa una vez y continúa. El revisor upstream añadió un tercer desenlace: una ejecución que arranca y termina sin escribir ningún hallazgo. Sin nombre propio, se confundía con "el pase se completó y no encontró nada", lo que permitiría cerrar un plan sobre una revisión que no ocurrió. Ahora es un estado en sí mismo: se registra como revisión incompleta, nunca cuenta como prueba de que el conjunto de cambios está limpio, y nunca es motivo para cerrar el Final Review. Tres desenlaces distintos, y ninguno significa que el diff se leyó y salió limpio.
+
+**La evidencia de un plan pertenece al plan.** El estándar ya colocaba el registro de análisis, el libro de skills, la revisión de seguridad y los logs de compuertas dentro del `analysis_results/` del propio plan, pero nunca declaró esa exclusividad como regla. Por eso, las herramientas de auditoría de un repositorio, que escriben por defecto en el directorio de trabajo, podían dejar la evidencia de un plan en la raíz del repositorio sin que ningún flujo lo notara. La especificación ahora lo exige: todo lo que un flujo produce sobre un plan va en la carpeta de ese plan, y a una herramienta cuya salida por defecto es el directorio de trabajo hay que pasarle su opción de salida explícita. La evidencia que no está donde el plan dice que está se ha perdido — esa es la razón práctica de la regla, no una preferencia de archivo.
+
+**El pin de AI Diff Reviewer pasa a v2.3.0.** La revisión local requerida instala ahora un revisor que separa el runner del backend, de modo que la misma revisión puede correr contra cualquier endpoint compatible sin cambiar de qué depende DWP — la garantía de neutralidad se refuerza en lugar de aflojarse. También trae instaladores verificados por checksum, costos por defecto medidos en vez de supuestos, y rondas de seguimiento que revisan el diff nuevo real arrastrando los hallazgos pendientes. Esto último tiene una consecuencia contractual que conviene decir sin rodeos: que un modelo afirme que un hallazgo está resuelto no lo retira — lo retira una persona mantenedora.
+
+Lee la [especificación](https://deepworkplan.com/spec) para el texto normativo, la [referencia del addon](https://deepworkplan.com/kit/ai-diff-reviewer) para saber qué hace ahora el revisor, o la [release v5.4.0](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0) para la fuente.

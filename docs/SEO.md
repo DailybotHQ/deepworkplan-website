@@ -39,12 +39,24 @@ Every page automatically gets these tags through `MainLayout` → `BaseHead`:
 
 ### Meta Description Standards (MANDATORY)
 
-**Target length:** 130-160 characters per description (both EN and ES).
+**Target length:** 130-160 characters per description, in every active
+language **written in a Latin or Cyrillic script**.
 
 **Why this range:**
 - Under 130 chars: Wastes SERP real estate, lower click-through rate
 - 130-160 chars: Optimal — fully displayed in Google/Bing results
 - Over 160 chars: Truncated with "..." in search results, losing key information
+
+**Exception — CJK (`zh`, `ja`, `ko`): target 60-90 characters.** The range
+above is a proxy for *rendered width*, not a character count for its own sake.
+A CJK ideograph occupies roughly twice the width of a Latin character and
+carries far more meaning per character, so 130-160 CJK characters would render
+at about twice the width Google truncates at — the exact failure the rule
+exists to prevent. Writing a CJK description "up to length" makes it worse, not
+better. Count characters, but compare against this range instead.
+
+**Thai (`th`) and Devanagari (`hi`)** are not full-width scripts and stay on the
+130-160 range.
 
 **Where descriptions are defined:**
 
@@ -54,7 +66,7 @@ Every page automatically gets these tags through `MainLayout` → `BaseHead`:
 | Site default | `src/lib/constances.ts` | `SITE_DESCRIPTION` |
 
 **Rules for writing meta descriptions:**
-1. **Length:** 130-160 characters (count BEFORE committing)
+1. **Length:** 130-160 characters, or 60-90 for CJK (count BEFORE committing)
 2. **Content:** Summarize what the page offers and why it matters
 3. **Keywords:** Include 1-2 relevant SEO keywords naturally
 4. **Action-oriented:** Use compelling language that encourages clicks
@@ -365,7 +377,7 @@ Structure:
 ### New Page SEO Checklist
 
 - [ ] Page component has `title` and `description` props passed to MainLayout
-- [ ] Meta description is 130-160 characters in every active language
+- [ ] Meta description is 130-160 characters in every active language (60-90 for `zh`, `ja`, `ko` — see the CJK exception)
 - [ ] BreadcrumbList JSON-LD schema added via `<Fragment slot="head">`
 - [ ] Page exists in `src/pages/` (EN) and `src/pages/[lang]/` (all non-default languages)
 - [ ] Translation strings added to every locale in `src/lib/translations/`

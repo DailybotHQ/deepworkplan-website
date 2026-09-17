@@ -346,6 +346,72 @@ setup_herdr_persistence_for_user() {
 setup_herdr_persistence_for_user "/home/node"
 chown -R node:node /home/node/.herdr_data /home/node/.config/herdr 2>/dev/null || true
 
+# SSH server: setup authorized_keys from host mount for remote herdr --remote access
+setup_ssh_server_for_user() {
+    USER_HOME="$1"
+    SSH_HOST_DIR="${USER_HOME}/.ssh_host"
+    SSH_DIR="${USER_HOME}/.ssh"
+
+    # Only proceed if host SSH directory is mounted with keys
+    if [ -d "${SSH_HOST_DIR}" ]; then
+        mkdir -p "${SSH_DIR}"
+        # Copy public keys from host to node's authorized_keys
+        if ls "${SSH_HOST_DIR}"/*.pub >/dev/null 2>&1; then
+            cat "${SSH_HOST_DIR}"/*.pub > "${SSH_DIR}/authorized_keys" 2>/dev/null || true
+            chmod 600 "${SSH_DIR}/authorized_keys"
+            chown node:node "${SSH_DIR}/authorized_keys"
+            echo "  ✓ SSH authorized_keys configured from host"
+        fi
+        # Copy private keys (for node user to SSH out if needed)
+        for key_file in "${SSH_HOST_DIR}"/id_*; do
+            if [ -f "$key_file" ] && [[ ! "$key_file" == *.pub ]]; then
+                key_name=$(basename "$key_file")
+                cp "$key_file" "${SSH_DIR}/$key_name" 2>/dev/null || true
+                chmod 600 "${SSH_DIR}/$key_name"
+                chown node:node "${SSH_DIR}/$key_name"
+            fi
+        done
+        # Copy SSH config if present
+        if [ -f "${SSH_HOST_DIR}/config" ]; then
+            cp "${SSH_HOST_DIR}/config" "${SSH_DIR}/config" 2>/dev/null || true
+            chmod 600 "${SSH_DIR}/config"
+            chown node:node "${SSH_DIR}/config"
+        fi
+    fi
+}
+
+setup_ssh_server_for_user "/home/node"
+
+# Ensure node user has a valid authorized_keys (create empty if none copied from host)
+# This allows the SSH server to start accepting connections; user can add keys later
+NODE_SSH_DIR="/home/node/.ssh"
+mkdir -p "${NODE_SSH_DIR}"
+if [ ! -f "${NODE_SSH_DIR}/authorized_keys" ]; then
+    touch "${NODE_SSH_DIR}/authorized_keys"
+    chmod 600 "${NODE_SSH_DIR}/authorized_keys"
+    chown node:node "${NODE_SSH_DIR}/authorized_keys"
+fi
+# Ensure correct ownership and permissions on .ssh dir
+chown -R node:node "${NODE_SSH_DIR}"
+chmod 700 "${NODE_SSH_DIR}"
+
+# Start SSH server (runs as root, accepts connections for node user via key auth).
+# herdr --remote connects host:22022 → container:22 (see docker-compose.yaml).
+if [ -x /usr/sbin/sshd ]; then
+    # Rebuild host keys if the image layer missed them or /etc/ssh was wiped.
+    if ! ls /etc/ssh/ssh_host_*_key >/dev/null 2>&1; then
+        echo "  → Generating SSH host keys..."
+        ssh-keygen -A
+    fi
+    if /usr/sbin/sshd -t 2>/tmp/sshd-test.err; then
+        /usr/sbin/sshd
+        echo "  ✓ SSH server started on port 22 (herdr --remote ready)"
+    else
+        echo "  ✗ SSH server config invalid — herdr --remote will fail:"
+        cat /tmp/sshd-test.err >&2 || true
+    fi
+fi
+
 # Grok/xAI CLI: ~/.grok (binary + config) + ~/.local/bin/grok
 setup_grok_persistence_for_user() {
     USER_HOME="$1"
@@ -441,6 +507,10 @@ new_cwd = "/app"
 [ui]
 # Capture mouse so sidebar workspace/tab clicks work in the terminal.
 mouse_capture = true
+
+[experimental]
+# Allow herdr --remote from a host herdr pane (SSH inherits HERDR_ENV=1).
+allow_nested = true
 EOF
         return 0
     fi
@@ -483,6 +553,28 @@ EOF
                 && mv "${HERDR_CONFIG}.tmp" "${HERDR_CONFIG}"
         else
             printf '\n[ui]\nmouse_capture = true\n' >> "${HERDR_CONFIG}"
+        fi
+    fi
+
+    # herdr --remote from a host herdr pane forwards HERDR_ENV=1; without this
+    # the remote client exits with "nested herdr is disabled by default".
+    if ! grep -q 'allow_nested' "${HERDR_CONFIG}" 2>/dev/null; then
+        if grep -q '^\[experimental\]' "${HERDR_CONFIG}" 2>/dev/null; then
+            awk '
+                BEGIN { added = 0 }
+                /^\[experimental\]/ { print; print "allow_nested = true"; added = 1; next }
+                { print }
+                END {
+                    if (!added) {
+                        print ""
+                        print "[experimental]"
+                        print "allow_nested = true"
+                    }
+                }
+            ' "${HERDR_CONFIG}" > "${HERDR_CONFIG}.tmp" \
+                && mv "${HERDR_CONFIG}.tmp" "${HERDR_CONFIG}"
+        else
+            printf '\n[experimental]\nallow_nested = true\n' >> "${HERDR_CONFIG}"
         fi
     fi
 }

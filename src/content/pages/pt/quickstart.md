@@ -147,8 +147,10 @@ incluindo a revisão local obrigatória do AI Diff Reviewer, valida o estado
 final do repositório, reconcilia as skills usadas pelas tarefas e registra
 as evidências e limitações. A skill de revisão local é instalada em uma
 versão fixada; o comando atualmente documentado usa
-`DailybotHQ/ai-diff-reviewer@v2.0.1`. A GitHub Action é uma superfície de
+`DailybotHQ/ai-diff-reviewer@v2.3.0`. A GitHub Action é uma superfície de
 CI separada e opcional, nunca obrigatória para a metodologia central.
+
+Uma revisão que correu e não reportou nada não é o mesmo que uma revisão que nunca chegou a produzir resultados. O segundo caso é uma **revisão incompleta**: fica registada como tal, nunca conta como prova de que o conjunto de alterações está limpo, e nunca é motivo para fechar o Final Review. Juntamente com um revisor ausente e uma invocação que falhou, são três estados distintos — e nenhum significa que o diff foi revisto e saiu limpo.
 
 A execução não supervisionada só é suportada para um plano aprovado com
 antecedência. Ela requer a camada de estado legível por máquina, um padrão
@@ -186,13 +188,13 @@ metodologia) em vez de sobrescrever — e confirme com o usuário antes de subst
    (skills, agents, commands) deve ser **fundamentado para este repositório** — nunca um copia e cola do kit de outro
    repositório.
 6. **`.dwp/` + `tmp/`.** Estruture um `.dwp/` ignorado pelo git com `plans/`, além de um espaço de rascunho
-   `tmp/` — ambos adicionados ao `.gitignore` de forma não destrutiva (acrescente, nunca reescreva).
+   `tmp/` — ambos adicionados ao `.gitignore` de forma não destrutiva (acrescente, nunca reescreva). Não são intercambiáveis: tudo o que um fluxo produz **sobre um plano** — a análise, o registo de skills, a revisão de segurança, os logs das comportas, os relatórios de auditoria — deve viver no `.dwp/plans/PLAN_{name}/analysis_results/` desse plano, nunca na raiz do repositório nem em `tmp/`. `tmp/` é para trabalho que nenhum plano voltará a ler.
 
 ## 4. Instale a revisão local obrigatória e depois ofereça os addons opcionais
 
 Após o onboarding de base, instale a **revisão local do AI Diff Reviewer** (Fase 7a — obrigatória
 desde o padrão 2.3.0): a skill vendorizada fixada por tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) mais um
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.0 --skill ai-diff-reviewer -y`) mais um
 `.review/extension.md` sob medida para o repositório via `generate-extension`, sob o consentimento do
 onboarding. Depois enumere os quatro addons opcionais (devcontainer, Dailybot, dependency-upgrade,
 design-system) e ofereça cada um como uma escolha explícita. Um repositório é totalmente conforme com

@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Revue locale requise dans chaque Final Review du DWP depuis le standard 2.3.0, installée par l'intégration ; la porte CI du Flow B (v2), l'extension partagée et apply-review restent optionnels."
+description: "Revue locale requise dans chaque Final Review du DWP depuis le standard 2.3.0, installée par l'intégration ; la porte CI Flow B et apply-review sont optionnels."
 kind: addon
 lang: fr
 order: 5
@@ -8,9 +8,13 @@ order: 5
 
 # Addon AI Diff Reviewer
 
-Connecte l'exécution de Deep Work Plan à l'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (référencé sur le marketplace sous **"AI Diff Reviewer"**, version actuelle **v2.0.1**) afin que la passe de sécurité du **Final Review** obligatoire exécute une revue locale structurée — verdict, tableau de résultats et sévérité — et, en choisissant Flow B, chaque pull request puisse être bloquée par la même revue en CI. Depuis le standard 2.3.0, la **revue locale fait partie de la ligne de base** : l'intégration l'installe et chaque Final Review l'exécute. Seule la surface CI est optionnelle.
+Chaque Deep Work Plan se referme de la même manière : par un **Final Review** obligatoire qui relit l'ensemble des modifications accumulées par le plan avant que le travail puisse être déclaré terminé. Sa passe de sécurité est le dernier endroit où quelque chose peut encore être repéré. Sans aide, le seul lecteur à ce moment-là est l'agent qui a écrit le code.
 
-Ce qui reste neutre vis-à-vis du fournisseur, c'est la frontière qui compte : le reviewer est une skill MIT épinglée par tag exécutée par votre **propre** agent de codage — aucun flux de Deep Work Plan n'exige de service commercial, de fournisseur de CI ni de secret. Flow A (local uniquement) est la ligne de base que reçoit tout dépôt intégré ; Flow B (l'Action CI) est proposé explicitement et jamais installé sans demande. Un développeur peut refuser le reviewer local ; le refus est enregistré comme exception déclarée et `verify` signale le dépôt comme non conforme sur ce point jusqu'à son installation.
+Cet addon place un second lecteur devant ce diff. Il branche l'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — référencé sur le marketplace sous le nom "AI Diff Reviewer", actuellement en **v2.3.0** — sur la passe de sécurité, où il renvoie non pas de la prose mais quelque chose de structuré : un verdict, un tableau de constats et une sévérité pour chacun. Un constat `critical` bloque la clôture jusqu'à ce qu'il soit corrigé ou explicitement accepté. La revue est une barrière, pas un commentaire.
+
+Depuis le standard 2.3.0, cette revue locale **fait partie du socle, ce n'est pas un supplément**. L'intégration l'installe ; chaque Final Review l'exécute. Ce qui demeure optionnel, c'est la surface CI — le Flow B, où la même revue contrôle les pull requests via la GitHub Action.
+
+La frontière qui rend l'adoption sûre est délibérément étroite. Le relecteur est une skill sous licence MIT, épinglée à un tag, exécutée par l'agent de code que vous faites déjà tourner : aucun flux de Deep Work Plan ne dépend donc d'un service commercial, d'un fournisseur de CI ou d'un secret. Le **Flow A** (local uniquement) est ce que reçoit tout dépôt intégré ; le **Flow B** est proposé explicitement et jamais installé sans demande. Un développeur peut aussi refuser le relecteur purement et simplement — ce refus est consigné comme exception déclarée, et `verify` signale le dépôt comme non conforme sur ce point tant qu'il n'est pas installé.
 
 ## Quand l'utiliser
 
@@ -49,6 +53,25 @@ Action `DailybotHQ/ai-diff-reviewer@v2`, typiquement bloquée par étiquette (`r
 ### Compagnon `apply-review` optionnel
 
 Après que CI publie une revue, le développeur peut invoquer `apply-review` pendant `execute` pour parcourir les résultats un par un (appliquer / différer / ignorer) avec consentement. Lecture seule par défaut ; jamais un fichier de tâche du plan (briserait l'ordre des tâches finales obligatoires).
+
+## Ce qui a changé depuis la v2.0.1
+
+Trois versions upstream sont parues entre la v2.0.1 et la v2.3.0. Aucune ne modifie la façon dont cet addon branche le relecteur — le Flow A, les trois chemins de détection et le contrat de blocage restent inchangés —, mais elles changent ce que reçoit celui qui l'adopte.
+
+| Changement | Ce que cela signifie pour un dépôt DWP |
+|------------|-----------------------------------------|
+| **Le runner et le backend sont des entrées distinctes** (v2.1.0) | `provider` nomme le *runner* : qui exécute la boucle de revue. Le nouveau `api-base` nomme le *backend* : où se trouve le modèle. Un `api-base` vide est identique octet pour octet à la v2.0.x, donc une installation existante se comporte exactement comme avant. |
+| **Deux runners de plus** (v2.1.0) | `openai` (en processus, sans installation) et `grok` (CLI) rejoignent l'ensemble existant. |
+| **Le coût est un palier d'un seul mot, et les valeurs par défaut sont mesurées** (v2.1.0, v2.3.0) | Le coût est piloté par un mot-clé de palier et des diffs calibrés, et il est rapporté à chaque revue. Sur xAI, `balanced` et `economy` se résolvent tous deux en `grok-4.5`, et `deep` en `grok-4.6`. |
+| **Les tours suivants relisent le vrai diff nouveau** (v2.1.0, v2.2.0) | Les constats en suspens sont reportés. `prior-findings-resolution` vaut `advisory` par défaut : le verdict « résolu » d'un modèle est rapporté, mais le constat continue de bloquer jusqu'à ce qu'un mainteneur clôture le fil. |
+| **Une revue incomplète n'est jamais une revue au vert** (v2.2.0) | Une exécution qui se termine sans écrire de constats est publiée comme revue explicitement incomplète. Toute rigueur bloquante la fait échouer, le label « relu » n'est pas apposé, et aucun tour vide ne retire un constat ouvert. |
+| **Installateurs vérifiés par somme de contrôle** (v2.2.0) | `cursor-installer-sha256` et `grok-installer-sha256` refusent d'exécuter un artefact fournisseur dont l'empreinte diffère de celle qui est épinglée. |
+
+Deux de ces points pèsent plus que les autres pour la méthodologie.
+
+**La barrière de revue incomplète comble un vrai trou dans la passe de sécurité.** Un Final Review ne doit pas pouvoir se clore sur une revue qui n'a jamais eu lieu. Avant la v2.2.0, un runner qui se terminait sans produire de constats était indiscernable d'une passe propre. C'est désormais un état nommé et non vert : « aucun constat » signifie que le relecteur a regardé et n'a rien trouvé, et non qu'il n'a jamais regardé.
+
+**`economy` n'est délibérément pas moins cher.** Le benchmark upstream du 16/09/2026 a mesuré `grok-4.3` à 0 défaut connu sur 5 — il approuve sans relire — tandis que `grok-4.5` égalait `grok-4.6` à 3 sur 5 sans faux positifs, à coût identique et pour un quart du temps. Comme il n'existe pas de modèle xAI moins cher qui relise encore réellement, `economy` se résout au même modèle que `balanced` plutôt que d'être un palier qui ne trouve rien. Le chemin xAI passe donc d'environ \$0,07 à environ \$0,40–0,75 par revue via la CLI ; `model: grok-4.3` peut toujours être épinglé explicitement pour conserver le comportement antérieur. Ces chiffres sont des mesures publiées par l'upstream, et non celles de Deep Work Plan.
 
 ## Comportement
 

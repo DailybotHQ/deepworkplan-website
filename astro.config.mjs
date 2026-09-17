@@ -85,7 +85,31 @@ export default defineConfig({
         },
       },
     },
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      // Dev-only: stamp `charset=utf-8` on Markdown responses.
+      //
+      // Vite's static middleware serves `.md` as `text/markdown` with no
+      // charset parameter, so a browser falls back to guessing — typically
+      // windows-1252 — and every non-ASCII character in the 1,600+ agent
+      // Markdown endpoints renders as mojibake (an em dash becomes `â€"`).
+      // The content is correct UTF-8 and production is correct too:
+      // Cloudflare Pages already serves `text/markdown; charset=utf-8`. This
+      // only closes the gap locally, so reviewing an endpoint in a browser
+      // does not look like data corruption that needs "fixing".
+      {
+        name: 'dwp-dev-markdown-charset',
+        apply: 'serve',
+        configureServer(server) {
+          server.middlewares.use((req, res, next) => {
+            if (req.url?.split('?')[0].endsWith('.md')) {
+              res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
+            }
+            next();
+          });
+        },
+      },
+    ],
     resolve: {
       alias: {
         '@': resolve(__dirname, './src'),

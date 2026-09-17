@@ -9,6 +9,11 @@ order: 1
 featured: true
 sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
+sourceLinks:
+  - label: "Commit phát hành skill ab1337d (v5.0.0)"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
+  - label: "Bản phát hành skill v5.4.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
 ---
 
 Hôm nay chúng tôi phát hành Deep Work Plan v5. Đây không phải là viết lại: đây là kết quả của nhiều tháng sử dụng thực tế — bao gồm một cuộc kiểm toán trực tiếp trên 108 kế hoạch thực — đã phơi bày, từng khoảng hở một, nơi lời hứa của phương pháp luận và hành vi thực của một agent có thể khác nhau. Tóm tắt trung thực của bản phát hành này: phương pháp luận đã từng hứa tất cả những điều này — giờ đây nó đảm bảo chúng. Trước v5, một agent đi theo tài liệu từng chữ vẫn có thể rơi vào các kịch bản thất bại thực; mỗi kịch bản như vậy, được nhận diện nhờ việc sử dụng và phản hồi đó, giờ đã được đóng lại và ghim bằng một kiểm thử có thể thực thi, chứ không phải được vá bằng thêm văn xuôi. Bộ hợp đồng của skill đã tăng từ 132 lên 258 kiểm thử trong chu kỳ này, và mỗi đảm bảo dưới đây đã được xác thực trực tiếp trên tag đã phát hành — cài vào một kho sạch và đưa qua chính các luồng của nó trước khi mục này được viết.
@@ -32,3 +37,15 @@ Hôm nay chúng tôi phát hành Deep Work Plan v5. Đây không phải là vi�
 **Một hợp đồng có phiên bản, đã được công bố.** Mỗi lời hứa ở trên được hậu thuẫn bởi dữ liệu mà các công cụ khác có thể đọc được, không chỉ bằng văn xuôi: các định dạng plan-manifest và plan-state giờ đây được đánh phiên bản theo dòng schema v5 — [`plan-manifest/v5.json`](https://deepworkplan.com/schema/plan-manifest/v5.json) và [`plan-state/v5.json`](https://deepworkplan.com/schema/plan-state/v5.json) — để một kế hoạch, một trình kiểm chứng, hoặc một công cụ bên thứ ba có thể kiểm tra sự tuân thủ đối chiếu với một hợp đồng đã công bố, máy có thể đọc được, thay vì một đoạn văn tài liệu. Không có gì trong dòng v5 thay đổi hình dạng so với v2: các kế hoạch hiện có tham chiếu đến schema v1 hoặc v2 vẫn hợp lệ và không bao giờ bị viết lại.
 
 Deep Work Plan v5 tuân theo tiêu chuẩn DWP 5.0.0. Đọc [đặc tả chuẩn mực](https://deepworkplan.com/spec), xem [kho của skill](https://github.com/DailybotHQ/deepworkplan-skill), hoặc bắt đầu áp dụng từ [`/init`](https://deepworkplan.com/init).
+
+## Cập nhật — 2026-09-17 · skill v5.4.0
+
+Bản phát hành điểm đầu tiên của dòng v5 khép lại con đường cuối cùng để một kế hoạch có thể kết thúc dựa trên công việc chưa từng thực sự được kiểm tra, đồng thời xác định nơi bằng chứng của chính kế hoạch đó cư trú. Chuẩn DWP 5.0.0 không đổi: đây là bản phát hành về hợp đồng tiện ích và tài liệu, không phải thay đổi lược đồ.
+
+**Một lượt đánh giá chưa từng chạy không còn khó phân biệt với một lượt đánh giá sạch.** Bước rà soát bảo mật của Final Review vốn đã tách bạch trình đánh giá vắng mặt — được ghi nhận như một phát hiện — với lời gọi bị lỗi, vốn cảnh báo một lần rồi đi tiếp. Trình đánh giá ở thượng nguồn thêm một kết cục thứ ba: một lần chạy khởi động rồi kết thúc mà không ghi ra phát hiện nào. Khi chưa có tên riêng, nó hòa lẫn vào "bước rà soát đã hoàn tất và không tìm thấy gì", và điều đó cho phép khép một kế hoạch dựa trên lượt đánh giá chưa từng diễn ra. Giờ đây nó là một trạng thái riêng: được ghi nhận là lượt đánh giá dở dang, không bao giờ được tính là bằng chứng rằng tập thay đổi đã sạch, và không bao giờ là lý do khép lại Final Review. Ba kết cục khác nhau — và không kết cục nào nghĩa là bản diff đã được đọc và sạch.
+
+**Bằng chứng của một kế hoạch thuộc về kế hoạch đó.** Chuẩn vốn đã đặt bản ghi phân tích, sổ skills, bản rà soát bảo mật và nhật ký cổng kiểm vào `analysis_results/` của chính kế hoạch, nhưng chưa bao giờ nêu tính độc quyền ấy thành một quy tắc. Vì thế, công cụ kiểm toán của chính kho mã, vốn mặc định ghi báo cáo vào thư mục làm việc, có thể ghi bằng chứng của một kế hoạch ra gốc kho mà không luồng nào nhận ra. Đặc tả nay yêu cầu điều đó: mọi thứ một luồng tạo ra về một kế hoạch đều vào thư mục của kế hoạch ấy, và với công cụ có đầu ra mặc định là thư mục làm việc thì phải truyền tùy chọn đầu ra tường minh. Bằng chứng không nằm ở nơi kế hoạch đã nói là bằng chứng đã mất — đó là lý do thực tế của quy tắc, không phải sở thích sắp xếp tệp.
+
+**Mốc ghim của AI Diff Reviewer lên v2.3.0.** Lượt đánh giá cục bộ bắt buộc nay cài một trình đánh giá tách runner khỏi backend: cùng một lượt đánh giá có thể chạy với bất kỳ endpoint tương thích nào mà không đổi thứ DWP phụ thuộc vào — bảo đảm trung lập được củng cố chứ không nới lỏng. Kèm theo đó là trình cài đặt xác minh bằng checksum, chi phí mặc định dựa trên đo đạc thay vì phỏng đoán, và các vòng tiếp theo đánh giá đúng phần diff mới trong khi mang theo những phát hiện còn tồn. Điểm cuối này có một hệ quả hợp đồng đáng nói thẳng: việc chính mô hình tuyên bố một phát hiện đã được giải quyết không thu hồi nó — người bảo trì mới thu hồi.
+
+Đọc [đặc tả](https://deepworkplan.com/spec) để có văn bản chuẩn tắc, [tài liệu tiện ích](https://deepworkplan.com/kit/ai-diff-reviewer) để biết trình đánh giá nay làm gì, hoặc [bản phát hành v5.4.0](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0) để xem nguồn.
