@@ -220,10 +220,23 @@ to it. For every artifact below, **if it already exists, reconcile it** (merge, 
 methodology) instead of overwriting — and confirm with the user before replacing anything.
 
 1. **`AGENTS.md` + `CLAUDE.md`.** Produce an `AGENTS.md` at the root — an index, the mandatory rules
-   (English-only, conventional commits, the repo's real test pattern and review gates), and a Quick
-   Commands block with the repo's **real, runnable** commands. If an `AGENTS.md` already exists, merge
-   into it rather than replacing it. Create the `CLAUDE.md → AGENTS.md` symlink (do not clobber an
-   existing `CLAUDE.md` without asking). Similarly, create the `.cursor → .agents` symlink if absent.
+   (English-only, conventional commits, the repo's real test pattern and review gates), compact
+   **working principles**, and a Quick Commands block with the repo's **real, runnable** commands.
+   If an `AGENTS.md` already exists, merge into it rather than replacing it. Create the
+   `CLAUDE.md → AGENTS.md` symlink (do not clobber an existing `CLAUDE.md` without asking).
+   Similarly, create the `.cursor → .agents` symlink if absent.
+
+   The working principles go **inline**, near the core rules — an agent that only reads the entry
+   point must find them there, not behind a link. Ten behaviors: own the outcome, be resourceful
+   before asking, decide routine matters independently, ask when judgment or authorization is
+   missing, make approvals concrete, work through obstacles, respect intent and scope, apply
+   proportionate rigor, communicate directly, and verify before declaring completion. Assess the
+   **meaning** of any rules already present before editing: keep equivalent ones in place, add only
+   what is missing, and run a second pass to confirm it produces no further diff. They are defaults
+   within the current request, never new authority — they must not override host permissions, a
+   narrower scope, plan gates, read-only flows, or this repository's own approval rules. Keep the
+   result compact (~300 words) and the whole `AGENTS.md` inside its 150–500-line budget, moving
+   detailed procedures to linked docs when it would otherwise overflow.
 2. **`docs/`.** Fill the standard categories with real, repo-specific content: `PRODUCT_SPEC.md`
    (the non-technical product/why doc — required for every repo, libraries included), `ARCHITECTURE.md`,
    `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
@@ -308,7 +321,7 @@ It checks the criteria in the [specification's Conformance document](https://dee
 Then confirm:
 
 - [ ] The skill is installed and resolvable, with all nine sub-skills available.
-- [ ] `AGENTS.md` exists at the root with a real Quick Commands block; `CLAUDE.md` resolves to it.
+- [ ] `AGENTS.md` exists at the root with a real Quick Commands block and inline working principles covering the ten behaviors; `CLAUDE.md` resolves to it.
 - [ ] `docs/` holds the standard categories with real, repo-specific content; `docs/TESTING_GUIDE.md`
       describes a real test/lint setup (not empty or stub); major modules have a `README.md`.
 - [ ] `.agents/` exists with `agents/`, `commands/` (thin `dwp-*` delegators that reference the skill,

@@ -87,60 +87,35 @@ tmp/                     # Temporary workspace (git-ignored, see below)
 
 ## Temporary Workspace (`tmp/`)
 
-The `tmp/` directory at the project root is a **git-ignored scratch space** for agents and developers.
-
-**Use it for:**
-- Temporary prompts, outputs, or drafts
-- One-off analysis results or debug logs
-- Any ephemeral file that should NOT be committed
-
-**Rules:**
-- Everything inside `tmp/` is ignored by git (except `.gitkeep`)
-- Do NOT store anything permanent or important here — it can be deleted at any time
-- When a user asks for a temporary file, prompt output, or scratch artifact, **write it to `tmp/`**
-- Subdirectories are fine (e.g., `tmp/prompts/`, `tmp/analysis/`)
+`tmp/` at the project root is a **git-ignored scratch space** for agents and developers: temporary prompts, one-off analysis, debug logs, anything ephemeral. Everything inside is ignored except `.gitkeep`; subdirectories are fine. Nothing permanent lives here — it can be deleted at any time. When a user asks for a temporary file or scratch artifact, write it to `tmp/`.
 
 ## Plan Output Belongs to the Plan (MANDATORY)
 
 `tmp/` is for **freeform scratch**. Anything produced **about a Deep Work Plan**
-is different: it is evidence a later session reads back by pointer, and it
-belongs in **that plan's own folder**.
+is different: it is evidence a later session reads back by pointer.
 
 **The rule:** a plan's temporary and analysis output MUST be written under
-`.dwp/plans/PLAN_{name}/analysis_results/`. It MUST NOT be written to the
-repository root. This covers everything a flow produces about the plan — the
-requirements analysis, the skills ledger, the security review, gate logs, audit
-reports, scratch measurements — not just the files the standard names. Evidence
-that is not where the plan says it is has been lost.
+`.dwp/plans/PLAN_{name}/analysis_results/` — the analysis, the skills ledger,
+the security review, gate logs, audit reports — and MUST NOT be written to the
+repository root. Evidence that is not where the plan says it is has been lost.
 
-**What this means in practice.** Three of this repository's audit scripts default
-their report path to the **current working directory**, which silently creates a
-root-level `analysis_results/`:
-
-| Script | npm script | Default output |
-|--------|-----------|----------------|
-| `scripts/check-md-content-parity.mjs` | `md:content-check` | `analysis_results/MD_HTML_CONTENT_PARITY.md` + `…_DATA.csv` |
-| `scripts/audit-seo.mjs` | — | `analysis_results/SEO_AUDIT.md` |
-| `scripts/audit-aeo.mjs` | — | `analysis_results/AEO_AUDIT_SCRIPTED.md` |
-
-When running any of them **as part of a plan**, pass the explicit output flag:
+**In practice:** `md:content-check`, `audit-seo.mjs` and `audit-aeo.mjs` default
+their report path to the **current working directory**. When running any of them
+as part of a plan, pass the explicit output flag:
 
 ```bash
 pnpm run md:content-check \
   --out  .dwp/plans/PLAN_{name}/analysis_results/MD_HTML_CONTENT_PARITY.md \
   --data .dwp/plans/PLAN_{name}/analysis_results/MD_HTML_CONTENT_PARITY_DATA.csv
-
-node scripts/audit-seo.mjs --out .dwp/plans/PLAN_{name}/analysis_results/SEO_AUDIT.md
 ```
 
-The defaults are deliberately kept so the scripts stay usable **outside** a plan
-(a maintainer auditing SEO by hand). `/analysis_results` is gitignored, so a
-missed flag can never become a commit — but an ignored file is still a lost
-artifact, so pass the flag. A root-level `analysis_results/` you find in a
-working tree is exactly that mistake, and is safe to delete.
+The defaults are kept deliberately so the scripts stay usable **outside** a plan.
+`/analysis_results` is gitignored, so a missed flag cannot become a commit — but
+an ignored file is still a lost artifact, so pass the flag. Per-script paths and
+the remaining invocations: [Development Commands → Audit scripts](docs/DEVELOPMENT_COMMANDS.md#audit-scripts-always-pass---out-inside-a-plan).
 
-> This mirrors the normative rule in the Deep Work Plan specification
-> (`.agents/skills/deepworkplan/spec/DWP_SPECIFICATION.md` §5).
+> Mirrors the normative rule in
+> `.agents/skills/deepworkplan/spec/DWP_SPECIFICATION.md` §5.
 
 ## Skills, Commands, and Agents (`.agents/`)
 
@@ -177,6 +152,21 @@ This means every `.claude/...` or `.cursor/...` path (e.g., `.claude/skills/foo/
 - The `.agents/README.md` documents how to add new skills, commands, and agents.
 
 **Why the rename?** The `.agents/` name signals that the folder is shared across agents, matching the project-level `AGENTS.md` convention (which is itself the canonical file that `CLAUDE.md` symlinks to). It avoids implying that the contents are Claude-only.
+
+## Working principles
+
+Work with autonomy, ownership, and sound judgment. Pursue excellence through correctness, clarity, simplicity, and verified completion. These are defaults within the current request, not new authority: they never override host permissions, a narrower scope, plan gates, read-only flows, or the consent checkpoints below.
+
+- **Own the outcome.** Carry authorized work through investigation, execution, and validation. Continue until the requested outcome is complete or a concrete blocker stops progress.
+- **Be resourceful before asking.** Inspect the code, `docs/`, the vendored skills, and prior decisions. Answer what investigation can answer instead of handing the question back.
+- **Make routine decisions independently.** Choose sensible approaches within the authorized scope and state consequential assumptions. Do not ask to confirm routine steps or already-authorized actions.
+- **Ask when judgment or authorization is missing.** Consult the user when essential information is unavailable, a material decision cannot be inferred, or an action needs approval not yet granted — bringing the investigation, the options, and a recommendation.
+- **Make approvals concrete.** Finish the authorized preparation first, then present a reviewable result and name the action that needs approval and why.
+- **Work through obstacles.** Investigate failures and attempt recovery in scope; continue independent authorized work meanwhile. Respect stop conditions and escalate when progress needs a user decision or an external change.
+- **Respect intent and scope.** An analysis request stays analysis. Propose broader improvements separately. Preserve existing work, decisions, and this repository's approval rules.
+- **Apply proportionate rigor.** Fix underlying causes, match validation to impact, and avoid unrelated changes — a content typo and a change to `src/lib/` do not warrant the same gate.
+- **Communicate directly and precisely.** Lead with the result. Distinguish verified facts from assumptions and open questions.
+- **Verify before declaring completion.** Check the result against the request, run the gates that cover it, and report what was validated and what was not. Never claim a command, check, or outcome that did not occur.
 
 ## CRITICAL: Mandatory Requirements
 
@@ -315,54 +305,15 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 | `dailybot` | `DailybotHQ/agent-skill` | **Yes** | Addon — safe to pin to latest upstream on every website release. |
 | `ai-diff-reviewer` | `DailybotHQ/ai-diff-reviewer` | **Yes** | Addon — safe to pin to latest upstream on every website release. |
 
-**How addon refresh works.** [`release_and_publish.yml`](.github/workflows/release_and_publish.yml) (which fires on every merge to `main`) has a dogfood step (Step 1a) that runs **before** the version bump and refreshes **only** `dailybot` and `ai-diff-reviewer`:
-
-1. Resolves the latest tag of each auto-refreshed upstream skill via `gh release view --repo <owner/repo>`.
-2. Compares against the vendored `SKILL.md` `version:` field. Only installs skills that actually moved.
-3. Runs `npx --yes skills add <repo>@<tag> --skill <name> --force -y` — the exact command any downstream consumer would run, so this doubles as a live smoke test. Both `--yes` (npm's proceed prompt) AND `-y` (the skills CLI's agent-picker prompt) are required in a non-TTY runner — dropping either hangs the workflow indefinitely.
-4. Asserts the invariant: installed `SKILL.md` version equals the requested tag. Refuses to proceed with the release if not.
-5. If any files changed, commits `chore: dogfood vendored skills to (…)` locally with a selective subject that names ONLY the skills that moved (e.g., `chore: dogfood vendored skills to dailybot v3.10.3, ai-diff-reviewer v2.0.0`). Step 3's `git push --follow-tags` sends this commit alongside the version-bump commit and the tag in a single atomic push, and the dogfood commit appears in the auto-generated GitHub Release notes.
-
-**Semantics.** Addon skill refresh is **release-driven**, not autonomous — no scheduled/cron refresh runs in the background. The auto-refreshed vendored copies advance only when a maintainer merges a PR to `main`, which is the same moment `release_and_publish.yml` cuts a new website release.
-
-**Failure semantics.**
-- `npx skills add` failure OR version-invariant mismatch → **fails the release** (a broken upstream tag must never quietly ship inside a website version).
-- Transient `gh release view` blip (rate limit, temporary outage) → skips only that skill for this release; the release itself proceeds.
-- Both auto-refreshed addon skills already at latest → clean no-op, no dogfood commit, release proceeds normally.
+**How refresh works, in one paragraph.** [`release_and_publish.yml`](.github/workflows/release_and_publish.yml) Step 1a fires on every merge to `main`, resolves the latest upstream tag of the two addon skills, installs only those that moved with `npx --yes skills add <repo>@<tag> --skill <name> --force -y` (both flags are required in a non-TTY runner), asserts that the installed version equals the requested tag, and commits the result alongside the version bump. A failed install or a version mismatch **fails the release**; a transient `gh` blip skips only that skill. Refresh is release-driven, never scheduled.
 
 **Editing policy.**
-- **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the next release will overwrite those edits. Contribute upstream, then merge any PR to trigger a website release that picks up the new upstream tag.
-- **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: changes there must be intentional and reviewed. Prefer contributing reusable improvements upstream in `DailybotHQ/deepworkplan-skill`, then re-adapting this copy deliberately — never rely on the release dogfood step to pull it in.
+- **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the next release overwrites those edits. Contribute upstream instead.
+- **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: changes there must be intentional and reviewed, contributed upstream first, then re-adapted deliberately.
 
-  **Current vendored provenance (2026-09-17):** this copy is the released upstream tag **`v5.4.0`** (`7f692b0`), superseding `v5.3.0`, installed via the documented command `npx --yes skills add DailybotHQ/deepworkplan-skill@v5.4.0 --skill deepworkplan --force -y`. Verified `diff -rq` **byte-identical** against the tag's canonical `skills/deepworkplan/` tree — empty output — with `skills-lock.json` updated by the CLI itself (hash `de0babb1…`, superseding `49a77d4f…`). This install ran cleanly: the container mount-race that struck earlier installs did not fire, and the canonical `.agents/skills/deepworkplan/` write completed.
+**Current vendored provenance (2026-09-17):** the `deepworkplan` copy is the released upstream tag **`v5.5.0`** (`bad1495`), installed via `npx --yes skills add DailybotHQ/deepworkplan-skill@v5.5.0 --skill deepworkplan --force -y` and verified **byte-identical** against the tag with `diff -rq`. **There is currently no local divergence**, so a future tag install overwrites nothing that is not already upstream; if one is ever reintroduced, re-stamp this paragraph to say what it carries. `ai-diff-reviewer` is at **v2.3.0**, also verified against its published tag. Local adaptation is the nine command delegators, refreshed from the skill's own `onboard/command-templates/`.
 
-**`v5.4.0` is the release that absorbed this repository's own contribution.** Between 2026-09-13 and 2026-09-17 this copy deliberately ran **ahead of** upstream, carrying a reviewed re-adaptation that pinned the AI Diff Reviewer addon to v2.3.0, named the **incomplete review** as a state distinct from a clean pass, added the normative rule that a plan's temporary and analysis output belongs in that plan's own `analysis_results/`, and resolved a `tmp/`-versus-plan-output contradiction between two spec surfaces. That work was contributed upstream as `DailybotHQ/deepworkplan-skill` PR #45, merged 2026-09-17, and released as `v5.4.0` one minute later. **Installing the tag therefore closed the divergence rather than destroying it** — the only delta between the previous re-adapted tree and `v5.4.0` was the `version:` stamp in fifteen `SKILL.md` files, which is the strongest available evidence that the re-adaptation matched what shipped. Standard remains aligned to **5.0.0** (no schema-line change; `v5.4.0` is a documentation and addon-contract release).
-
-**There is currently no local divergence.** This copy is a plain released tag, so a future `npx --yes skills add DailybotHQ/deepworkplan-skill@<tag> --skill deepworkplan --force -y` overwrites nothing that is not already upstream. If a divergence is ever reintroduced — the repo-adapted path this section authorizes — re-stamp this paragraph to say what it carries and that a tag install will overwrite it, exactly as the 2026-09-13 entry did. Local adaptation remains the command kit (nine delegators: seven `dwp-*` plus `/skill-create` and `/agent-create`, refreshed from the skill's own `onboard/command-templates/` on 2026-09-17) and this provenance protocol. This repository keeps the AI Diff Reviewer local-only; it does not ship an AI Reviewer CI workflow. The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed — `ai-diff-reviewer` was refreshed to **v2.3.0** on 2026-09-17 (lock hash `903e3868…`, verified `diff -rq` against the published tag).
-
-### Official CLI publishing (same release workflow)
-
-`release_and_publish.yml` **Step 6** publishes the official CLI — the
-unscoped npm package **`deepworkplan`** — together with every website
-release. The package is owned by whichever npm account the `NPM_TOKEN`
-Automation token belongs to: generate it from the company account that
-maintains the org's other packages (e.g. `universal-emoji-parser`) and
-`deepworkplan` is listed alongside them. The CLI keeps its **own version
-line** (independent of the website version): Step 6 publishes only when
-the exact `cli/package.json` version is not already on the registry —
-re-running a release is idempotent. To ship a new CLI version, bump
-`version` in `cli/package.json` in any PR to `main`. When the secret is
-absent, Step 6 skips with a loud warning and the website release proceeds
-unaffected. The token lives only in GitHub Actions secrets — never in the
-tree, never in chat.
-
-**Namespace strategy (deliberate — do not "fix"):** the bare unscoped name
-`deepworkplan` belongs to the *website client*, matching the domain exactly;
-never rename this package to `@deepworkplan/cli`. The `@deepworkplan` npm
-org (reserved 2026-09-13) is the home for future *methodology* packages —
-a methodology installer either grows this same CLI (`deepworkplan init`
-gaining a real installer) or ships under that scope. npm org names and
-unscoped package names are separate namespaces, so both coexist.
+> Full mechanics — the refresh sequence step by step, failure semantics, the official CLI publishing step and its namespace strategy, and the provenance history including this repository's own upstream contribution — live in [Architecture → Dogfooding DWP](docs/ARCHITECTURE.md#addon-refresh--the-full-sequence).
 
 ### Local AI Diff Reviewer
 
@@ -373,7 +324,7 @@ does not require a reviewer secret or review labels. The shared
 [`.review/extension.md`](.review/extension.md) continues to provide the
 repository-specific local review guidance.
 
-DWP standard: 5.0.0 (onboarded 2026-09-11, upgraded 2026-09-13 and 2026-09-17; skill 5.4.0)
+DWP standard: 5.0.0 (onboarded 2026-09-11, upgraded 2026-09-13 and 2026-09-17; skill 5.5.0)
 
 ## Quick Commands
 
@@ -402,97 +353,19 @@ Full command reference: **[Development Commands](docs/DEVELOPMENT_COMMANDS.md)**
 
 ## Architecture Patterns
 
-> Full patterns with code examples: **[Architecture Guide](docs/ARCHITECTURE.md)**
+The six patterns this codebase is built on, with their non-negotiable rule. Full
+explanation and worked code for each lives in
+**[Architecture Guide](docs/ARCHITECTURE.md#architecture-patterns)**; the
+corresponding failure modes are in *Common Mistakes to Avoid* below.
 
-### 1. Astro Components
-
-`.astro` files are the foundation. Script block (frontmatter) runs at build time. Use for all non-interactive content. Svelte is only for interactive components.
-
-```astro
----
-interface Props {
-  title: string;
-  count?: number;
-}
-const { title, count = 5 } = Astro.props;
----
-
-<section class="py-12">
-  <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{title}</h2>
-</section>
-```
-
-### 2. Content Collections
-
-Methodology, spec, kit, and pages content use Astro Content Collections with Zod schemas defined in `src/content.config.ts`.
-
-### 3. Svelte Integration
-
-Use Svelte for interactive components. Always include a `client:*` directive (`client:visible` preferred over `client:load`).
-
-### 4. Page Wrapper Pattern (MANDATORY)
-
-Pages in `src/pages/` are ultra-minimal routing wrappers. All logic lives in `*Page.astro` components in `src/components/pages/`. Adding a new page is exactly **two** wrappers regardless of how many languages ship: one default-language file at the root and one dynamic `[lang]` file that covers all 16 (or N) non-default languages.
-
-**Key rules:**
-
-- Page components handle `MainLayout` internally — wrappers **never** import `MainLayout`
-- The default-language wrapper passes `lang="en"` as a string literal; the dynamic wrapper derives `lang` from `Astro.params`
-- For a new page: create **1 `*Page.astro` component** + **1 default-lang wrapper** + **1 `[lang]` dynamic wrapper** (regardless of how many languages exist)
-- All user-visible text uses `getTranslations(lang)`, all URLs use `getUrlPrefix(lang)`
-- Add the new page's slug to `KNOWN_BASE_PATHS` in `src/middleware.ts` — one entry covers every language
-
-**Page component** (`src/components/pages/AboutPage.astro`):
-
-```astro
----
-import MainLayout from '@/layouts/MainLayout.astro';
-import { getTranslations } from '@/lib/translations';
-import { getUrlPrefix, type Language } from '@/lib/i18n';
-
-interface Props { lang: Language; }
-const { lang } = Astro.props;
-const t = getTranslations(lang);
-const prefix = getUrlPrefix(lang);
----
-
-<MainLayout lang={lang} title={t.aboutPage.title} description={t.aboutPage.description}>
-  <!-- page content using t.* for text, prefix for URLs -->
-</MainLayout>
-```
-
-**Default-lang wrapper** (`src/pages/about.astro` — 3 lines):
-
-```astro
----
-import AboutPage from '@/components/pages/AboutPage.astro';
----
-<AboutPage lang="en" />
-```
-
-**Dynamic `[lang]` wrapper** (`src/pages/[lang]/about.astro` — covers all non-default languages):
-
-```astro
----
-import AboutPage from '@/components/pages/AboutPage.astro';
-import { getActiveNonDefaultLanguages, type Language } from '@/lib/i18n';
-
-export function getStaticPaths() {
-  return getActiveNonDefaultLanguages().map((lang) => ({ params: { lang } }));
-}
-
-const { lang } = Astro.params as { lang: Language };
----
-<AboutPage lang={lang} />
-```
-
-### 5. i18n Routing
-
-The default language (English) is served from `src/pages/` at the root. Every non-default active language is served from the single dynamic `src/pages/[lang]/**` tree — `getStaticPaths()` enumerates the registry via `getActiveNonDefaultLanguages()`, so adding a new language requires zero edits in `src/pages/`. Page components in `src/components/pages/` receive `lang` and handle translations internally.
-
-### 6. Internal Hub (Dev-Only)
-
-Dev-only portal at `/internal/`. Uses `InternalLayout` or `ShowcaseLayout` (never `MainLayout`). English-only, no Page Wrapper pattern. Automatically excluded from production builds via three layers (post-build deletion, sitemap filter, noindex meta).
+| # | Pattern | The rule |
+|---|---------|----------|
+| 1 | **Astro components** | `.astro` is the default. Frontmatter runs at build time — no interactive logic in it. |
+| 2 | **Content Collections** | Methodology, spec, kit and pages are collections with Zod schemas in `src/content.config.ts`. |
+| 3 | **Svelte integration** | Svelte only for interactive components, and always with a `client:*` directive — prefer `client:visible` over `client:load`. |
+| 4 | **Page wrapper (MANDATORY)** | A page is exactly **1** `*Page.astro` component + **1** default-lang wrapper + **1** `[lang]` dynamic wrapper, regardless of how many languages ship. Wrappers never import `MainLayout`. |
+| 5 | **i18n routing** | English at the root of `src/pages/`; every other active language through the single dynamic `src/pages/[lang]/**` tree, enumerated from the registry. |
+| 6 | **Internal hub** | `/internal/` is dev-only: `InternalLayout` or `ShowcaseLayout`, never `MainLayout`, English-only, never referenced from a public page. |
 
 ## Methodology Content Conventions
 
