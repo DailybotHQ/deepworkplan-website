@@ -70,7 +70,7 @@ section: Addons
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**(marketplace **"AI Diff Reviewer"**)는 필수 Final Review 보안 점검에 구조화된 로컬 리뷰를 부여하고, 선택적으로 CI에서 pull request를 게이트합니다. 이 애드온은 릴리스마다 자동으로 갱신되므로, 아래에 표시된 태그는 작성 시점의 것이며 실제 벤더링된 사본보다 뒤처질 수 있습니다 — 실제로 설치된 태그는 애드온 자체의 `SKILL.md`와 GitHub 릴리스가 기준입니다. 설치는 항상 공개된 태그에 고정되며, 움직이는 브랜치를 가리키지 않습니다. 표준 2.3.0부터 **로컬 리뷰는 기준선의 일부**입니다; 옵트인인 것은 CI 표면뿐입니다.
 
 - **키트 페이지:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 전체 기능 참조
-- **온보딩 시 필수(7a 단계):** 온보딩 동의 아래 벤더 스킬의 태그 고정 설치(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.0 --skill ai-diff-reviewer -y`) 더하기 저장소 맞춤 `.review/extension.md`(`generate-extension` 경유); 표적 하니스 업그레이드는 둘 중 무엇이 누락되었는지 조정; 거부는 선언된 예외로 기록되며 설치될 때까지 `verify`가 보고
+- **온보딩 시 필수(7a 단계):** 온보딩 동의 아래 벤더 스킬의 태그 고정 설치(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.1 --skill ai-diff-reviewer -y`) 더하기 저장소 맞춤 `.review/extension.md`(`generate-extension` 경유); 표적 하니스 업그레이드는 둘 중 무엇이 누락되었는지 조정; 거부는 선언된 예외로 기록되며 설치될 때까지 `verify`가 보고
 - **모든 Final Review에서 필수:** 보안 점검은 누적 변경 집합에 대해 upstream 부모 기본 플로우를 실행하고 그 출력을 플랜 로컬 `analysis_results/SECURITY_REVIEW.md`(플랜 자체 폴더 안에 있으며 저장소 루트가 아님)에 덧붙임; 누락된 스킬 또는 확장은 기록된 `local reviewer not installed` 발견 사항 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아님: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속함; 완료된 패스의 `critical` 발견은 수정되거나 명시적으로 수락될 때까지 완료를 차단
 - **선택적 CI 표면(Flow B):** upstream `setup` 서브스킬을 통한 `pr-review.yml`(`DailybotHQ/ai-diff-reviewer@v2`), 더해서 개발자 호출 컴패니언으로 `apply-review` — 명시적으로 제안되며 요청하지 않으면 설치하지 않고, 절대 기본값이 아니며, 절대 플랜 작업이 아님
 - **차단 없음(호출만):** 시작할 수 있었지만 오류가 난 로컬 리뷰는 한 번 경고하고 기록한 뒤 계속; 그 작업을 실패시키지 않음

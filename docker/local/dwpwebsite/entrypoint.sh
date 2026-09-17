@@ -346,54 +346,14 @@ setup_herdr_persistence_for_user() {
 setup_herdr_persistence_for_user "/home/node"
 chown -R node:node /home/node/.herdr_data /home/node/.config/herdr 2>/dev/null || true
 
-# SSH server: setup authorized_keys from host mount for remote herdr --remote access
-setup_ssh_server_for_user() {
-    USER_HOME="$1"
-    SSH_HOST_DIR="${USER_HOME}/.ssh_host"
-    SSH_DIR="${USER_HOME}/.ssh"
-
-    # Only proceed if host SSH directory is mounted with keys
-    if [ -d "${SSH_HOST_DIR}" ]; then
-        mkdir -p "${SSH_DIR}"
-        # Copy public keys from host to node's authorized_keys
-        if ls "${SSH_HOST_DIR}"/*.pub >/dev/null 2>&1; then
-            cat "${SSH_HOST_DIR}"/*.pub > "${SSH_DIR}/authorized_keys" 2>/dev/null || true
-            chmod 600 "${SSH_DIR}/authorized_keys"
-            chown node:node "${SSH_DIR}/authorized_keys"
-            echo "  ✓ SSH authorized_keys configured from host"
-        fi
-        # Copy private keys (for node user to SSH out if needed)
-        for key_file in "${SSH_HOST_DIR}"/id_*; do
-            if [ -f "$key_file" ] && [[ ! "$key_file" == *.pub ]]; then
-                key_name=$(basename "$key_file")
-                cp "$key_file" "${SSH_DIR}/$key_name" 2>/dev/null || true
-                chmod 600 "${SSH_DIR}/$key_name"
-                chown node:node "${SSH_DIR}/$key_name"
-            fi
-        done
-        # Copy SSH config if present
-        if [ -f "${SSH_HOST_DIR}/config" ]; then
-            cp "${SSH_HOST_DIR}/config" "${SSH_DIR}/config" 2>/dev/null || true
-            chmod 600 "${SSH_DIR}/config"
-            chown node:node "${SSH_DIR}/config"
-        fi
-    fi
-}
-
-setup_ssh_server_for_user "/home/node"
-
-# Ensure node user has a valid authorized_keys (create empty if none copied from host)
-# This allows the SSH server to start accepting connections; user can add keys later
-NODE_SSH_DIR="/home/node/.ssh"
-mkdir -p "${NODE_SSH_DIR}"
-if [ ! -f "${NODE_SSH_DIR}/authorized_keys" ]; then
-    touch "${NODE_SSH_DIR}/authorized_keys"
-    chmod 600 "${NODE_SSH_DIR}/authorized_keys"
-    chown node:node "${NODE_SSH_DIR}/authorized_keys"
+# Mirror the host's SSH keys/config into the container (host ~/.ssh is bind-mounted
+# read-only at ~/.ssh_host). Every start, unconditionally — see sync-host-ssh.sh
+# for why, and `ssh-sync` for the on-demand equivalent.
+if [ -x /usr/local/bin/sync-host-ssh ]; then
+    /usr/local/bin/sync-host-ssh /home/node
+else
+    echo "  ⚠ /usr/local/bin/sync-host-ssh missing — host SSH keys not synced"
 fi
-# Ensure correct ownership and permissions on .ssh dir
-chown -R node:node "${NODE_SSH_DIR}"
-chmod 700 "${NODE_SSH_DIR}"
 
 # Start SSH server (runs as root, accepts connections for node user via key auth).
 # herdr --remote connects host:22022 → container:22 (see docker-compose.yaml).
@@ -580,70 +540,10 @@ EOF
 }
 ensure_herdr_bash_shell_config "/home/node"
 
-# Setup SSH keys from host with correct permissions for a given user
-# This allows git operations with GitHub/GitLab
-setup_ssh_keys_for_user() {
-    USER_HOME="$1"
-    SSH_HOST_DIR="${USER_HOME}/.ssh_host"
-    SSH_DIR="${USER_HOME}/.ssh"
-
-    # Only setup if host SSH directory is mounted
-    if [ -d "${SSH_HOST_DIR}" ]; then
-        # Create SSH directory if it doesn't exist
-        mkdir -p "${SSH_DIR}"
-
-        # Check if SSH keys already exist in container
-        KEYS_EXIST=false
-        if [ -f "${SSH_DIR}/id_rsa" ] || [ -f "${SSH_DIR}/id_ed25519" ] || [ -f "${SSH_DIR}/id_ecdsa" ]; then
-            KEYS_EXIST=true
-        fi
-
-        # Only copy if keys don't exist yet (to avoid overwriting persistent volume)
-        if [ "$KEYS_EXIST" = false ]; then
-            echo "Setting up SSH keys from host for ${USER_HOME}..."
-
-            # Copy ALL private keys from host (id_rsa, id_ed25519, id_ecdsa, id_rsa_personal, etc.)
-            for key_file in "${SSH_HOST_DIR}"/id_*; do
-                if [ -f "$key_file" ]; then
-                    key_name=$(basename "$key_file")
-                    # Skip public keys (*.pub)
-                    if [[ "$key_name" != *.pub ]]; then
-                        cp "$key_file" "${SSH_DIR}/$key_name"
-                        chmod 600 "${SSH_DIR}/$key_name"
-                        echo "  ✓ Copied $key_name"
-                    fi
-                fi
-            done
-
-            # Copy public keys
-            cp "${SSH_HOST_DIR}"/*.pub "${SSH_DIR}/" 2>/dev/null || true
-
-            # Copy config if exists
-            if [ -f "${SSH_HOST_DIR}/config" ]; then
-                cp "${SSH_HOST_DIR}/config" "${SSH_DIR}/config"
-                chmod 600 "${SSH_DIR}/config"
-                echo "  ✓ Copied SSH config"
-            fi
-
-            # Copy known_hosts if exists (git can write to it)
-            if [ -f "${SSH_HOST_DIR}/known_hosts" ]; then
-                cp "${SSH_HOST_DIR}/known_hosts" "${SSH_DIR}/known_hosts"
-                echo "  ✓ Copied known_hosts"
-            fi
-
-            echo "SSH keys setup completed for ${USER_HOME}"
-        fi
-
-        # Always ensure correct permissions (even if keys already existed)
-        chmod 700 "${SSH_DIR}" 2>/dev/null || true
-        chmod 600 "${SSH_DIR}"/id_* 2>/dev/null || true
-        chmod 600 "${SSH_DIR}/config" 2>/dev/null || true
-    fi
-}
-
-# Setup SSH keys for node user
-setup_ssh_keys_for_user "/home/node"
-chown -R node:node /home/node/.ssh 2>/dev/null || true
+# NOTE: host SSH material is mirrored by /usr/local/bin/sync-host-ssh above,
+# which runs before sshd starts. There is deliberately no second, later copy:
+# the old setup_ssh_keys_for_user() duplicated that work and skipped it entirely
+# once any key existed, which is what let ~/.ssh drift away from the host.
 
 # Setup Node.js specific configurations
 setup_nodejs() {
@@ -663,6 +563,15 @@ setup_git() {
     fi
 }
 
+# Recreate overlay targets for bind-mounted cache dirs. /app/.astro and
+# /app/dist are symlinks to /tmp/ov/* so they stay off the virtiofs mount;
+# /tmp is empty on each boot, so mkdir the parents or `astro dev` fails with
+# ENOENT on mkdir('/app/.astro').
+ensure_astro_overlay_dirs() {
+    mkdir -p /tmp/ov/astro /tmp/ov/dist
+    chown node:node /tmp/ov /tmp/ov/astro /tmp/ov/dist 2>/dev/null || true
+}
+
 # Main setup function
 main() {
     echo "Starting container setup..."
@@ -671,6 +580,7 @@ main() {
     setup_nodejs
     setup_git
     ensure_grok_installed
+    ensure_astro_overlay_dirs
 
     echo "Container setup completed"
 

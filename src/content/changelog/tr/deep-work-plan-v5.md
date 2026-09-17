@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
   - label: "Beceri yayını v5.5.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
+  - label: "Beceri yayını v5.5.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
 ---
 
 Bugün Deep Work Plan v5'i yayınlıyoruz. Bu bir yeniden yazım değil: aylar süren gerçek kullanımın — 108 gerçek planın doğrudan denetimi de dahil — boşluk boşluk ortaya çıkardığı, metodolojinin vaatleri ile bir ajanın gerçek davranışının nerede birbirinden ayrışabildiğinin sonucu. Bu sürümün dürüst özeti şu: metodoloji bunların hepsini zaten vaat ediyordu — artık garanti ediyor. v5 öncesinde, belgeleri harfiyen izleyen bir ajan bile gerçek başarısızlık senaryolarına düşebiliyordu; bu kullanım ve geri bildirimler sayesinde tespit edilen her biri artık kapatıldı ve çalıştırılabilir bir testle sabitlendi, daha fazla düzyazıyla üzeri örtülmedi. Bu döngüde beceri paketinin sözleşme takımı 132'den 258 teste büyüdü ve aşağıdaki her garanti, yayınlanan etikete karşı canlı olarak doğrulandı — temiz bir depoya kurulup kendi akışlarından geçirildi, sonra bu yazı kaleme alındı.
@@ -52,4 +54,7 @@ v5 hattının ilk ara sürümü, bir planın hiç gerçekten denetlenmemiş bir 
 
 **Çalışma ilkeleri artık harness ile birlikte geliyor.** Aynı gün çıkan `v5.5.0`, kuruluma alma aşamasının bir deponun agent'larına yalnızca deponun içinde ne olduğunu değil, *nasıl* çalışılacağını da öğretmesini sağlıyor: on derli toplu davranış — sonucu sahiplenmek, sormadan önce araştırmak, rutin kararları bağımsız vermek, muhakeme ya da yetki gerçekten eksikken yukarı taşımak ve tamamlandığını iddia etmeden önce doğrulamak, diğerlerinin yanı sıra — `AGENTS.md` içine satır içi yazılır; böylece yalnızca giriş noktasını okuyan bir agent da onları bulur. Bunlar bir istek kapsamındaki varsayılanlardır, yeni bir yetki değil: ana makine izinlerini, daha dar bir kapsamı, bir planın kapılarını ya da deponun kendi onay kurallarını geçersiz kılamazlar. Bir yükseltme bunları anahtar kelimeye göre değil anlama göre uzlaştırır; dolayısıyla dosyada zaten bulunan eşdeğer kurallar yeniden yazılmak yerine korunur.
 
-Normatif metin için [belirtime](https://deepworkplan.com/spec), inceleyicinin şimdi neler yaptığı için [eklenti referansına](https://deepworkplan.com/kit/ai-diff-reviewer), kaynak için [v5.4.0 yayınına](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0) bakın.
+**AI Diff Reviewer sabitlemesi v2.3.1'e çıkıyor.** `v5.5.1` becerisi, check, inceleme gövdesi ve izleme yorumu örtüşen inceleyiciyi kurar. `Recommendation: approve` diyen bir gövde, check'in geçtiğinin kanıtı değildir — izleme işaretinin Check status bloğunu okuyun. advisory altında, konusu zaten daraltılmış bir bulguyu doğrulanmış bir düzeltme geri çekebilir; böylece takılı bir PR gerçek bir düzeltmeden sonra yeşile dönebilir.
+
+
+Normatif metin için [belirtime](https://deepworkplan.com/spec), inceleyicinin şimdi neler yaptığı için [eklenti referansına](https://deepworkplan.com/kit/ai-diff-reviewer), kaynak için [v5.5.1 yayınına](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) bakın.

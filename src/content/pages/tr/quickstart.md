@@ -150,10 +150,10 @@ yerel AI Diff Reviewer incelemesi dâhil olmak üzere birikmiş değişiklik kü
 üzerinde güvenlik taramasını çalıştırır, nihai depo durumunu doğrular, görevler
 tarafından kullanılan skill'leri uzlaştırır ve kanıtları ile sınırlamaları kaydeder.
 Yerel inceleme skill'i sabitlenmiş bir sürümde kurulur; şu anda belgelenen komut
-`DailybotHQ/ai-diff-reviewer@v2.3.0`'i kullanır. GitHub Action, ayrı ve isteğe bağlı
+`DailybotHQ/ai-diff-reviewer@v2.3.1`'i kullanır. GitHub Action, ayrı ve isteğe bağlı
 bir CI yüzeyidir ve temel metodoloji için asla zorunlu değildir.
 
-Çalışıp hiçbir şey bildirmeyen bir inceleme ile hiç bulgu üretemeyen bir inceleme aynı şey değildir. İkincisi **tamamlanmamış bir incelemedir**: öyle kaydedilir, değişiklik kümesinin temiz olduğunun kanıtı olarak asla sayılmaz ve Final Review'i kapatmak için asla gerekçe olmaz. Eksik bir inceleyici ve hata veren bir çağrıyla birlikte bunlar üç ayrı durumdur — ve hiçbiri diff'in incelenip temiz bulunduğu anlamına gelmez.
+Çalışıp hiçbir şey bildirmeyen bir inceleme ile hiç bulgu üretemeyen bir inceleme aynı şey değildir. İkincisi **tamamlanmamış bir incelemedir**: öyle kaydedilir, değişiklik kümesinin temiz olduğunun kanıtı olarak asla sayılmaz ve Final Review'i kapatmak için asla gerekçe olmaz. Eksik bir inceleyici ve hata veren bir çağrıyla birlikte bunlar üç ayrı durumdur — ve hiçbiri diff'in incelenip temiz bulunduğu anlamına gelmez. İnceleyici v2.3.1’den beri `Recommendation: approve` diyen bir gövde de check’in geçtiğinin kanıtı değildir. Önce izleme işaretinin Highest severity / Strictness gate / Check status bloğunu okuyun — kapı başarısızken çalışma zamanı modelin `approve` satırını yeniden yazar.
 
 Gözetimsiz yürütme yalnızca önceden onaylanmış bir plan için desteklenir. Makine
 tarafından okunabilir durum katmanını, beyan edilmiş bir DWP standardını, sınırlı
@@ -198,7 +198,7 @@ teyit edin.
 
 Temel onboarding sonrasında, **AI Diff Reviewer yerel incelemesini** kurun (Faz 7a — 2.3.0
 standardından itibaren gereklidir): etikete sabitlenmiş vendored skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.0 --skill ai-diff-reviewer -y`) artı
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.1 --skill ai-diff-reviewer -y`) artı
 `generate-extension` aracılığıyla depoya uyarlanmış bir `.review/extension.md`, onboarding onayı
 altında. Ardından dört isteğe bağlı eklentiyi (devcontainer, Dailybot, dependency-upgrade,
 design-system) sıralayın ve her birini açık bir tercih olarak sunun. Bir depo, **sıfır** isteğe bağlı

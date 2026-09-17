@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
   - label: "Rilis skill v5.5.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
+  - label: "Rilis skill v5.5.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
 ---
 
 Hari ini kami merilis Deep Work Plan v5. Ini bukan penulisan ulang: ini adalah hasil berbulan-bulan penggunaan nyata — termasuk audit langsung terhadap 108 rencana nyata — yang mengungkap, celah demi celah, di mana janji metodologi dan perilaku nyata agen bisa menyimpang. Ringkasan yang jujur dari rilis ini: metodologinya memang sudah menjanjikan semua ini — sekarang ia menjaminnya. Sebelum v5, agen yang mengikuti dokumentasi secara harfiah masih bisa berakhir dalam skenario kegagalan nyata; setiap skenario tersebut, yang teridentifikasi lewat penggunaan dan masukan itu, kini tertutup dan dikunci dengan tes yang dapat dieksekusi, bukan ditambal dengan lebih banyak narasi. Rangkaian kontrak skill tumbuh dari 132 menjadi 258 tes dalam siklus ini, dan setiap jaminan di bawah divalidasi secara langsung terhadap tag yang dirilis — dipasang ke dalam repositori bersih dan dijalankan melalui alurnya sendiri sebelum entri ini ditulis.
@@ -52,4 +54,7 @@ Rilis titik pertama pada jalur v5 menutup satu-satunya jalan tersisa bagi sebuah
 
 **Prinsip kerja kini ikut terkirim bersama harness.** `v5.5.0`, di hari yang sama, membuat onboarding mengajari agent sebuah repositori *bagaimana* bekerja, bukan sekadar apa isi repositori itu: sepuluh perilaku ringkas — memiliki hasilnya, menyelidiki sebelum bertanya, memutuskan hal rutin secara mandiri, mengeskalasi ketika pertimbangan atau otorisasi memang tidak ada, dan memverifikasi sebelum mengklaim selesai, di antara yang lain — ditulis inline di `AGENTS.md`, tempat agent yang hanya membaca titik masuk akan menemukannya. Ini nilai bawaan dalam sebuah permintaan, bukan otoritas baru: keduanya tidak dapat menimpa izin host, cakupan yang lebih sempit, gerbang sebuah rencana, atau aturan persetujuan repositori itu sendiri. Pemutakhiran merekonsiliasinya berdasarkan makna, bukan kata kunci, sehingga aturan setara yang sudah ada dipertahankan alih-alih ditulis ulang.
 
-Baca [spesifikasi](https://deepworkplan.com/spec) untuk teks normatifnya, [referensi add-on](https://deepworkplan.com/kit/ai-diff-reviewer) untuk apa yang kini dilakukan peninjau, atau [rilis v5.4.0](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0) untuk sumbernya.
+**Patokan AI Diff Reviewer naik ke v2.3.1.** Skill `v5.5.1` memasang peninjau yang check, badan tinjauan, dan komentar pelacakannya selaras. Badan yang bertuliskan `Recommendation: approve` bukan bukti bahwa check lulus — baca blok Check status pada penanda pelacakan. Di bawah advisory, perbaikan yang dikuatkan dapat menarik temuan yang utasnya sudah dilipat, sehingga PR yang macet dapat menjadi hijau setelah perbaikan nyata.
+
+
+Baca [spesifikasi](https://deepworkplan.com/spec) untuk teks normatifnya, [referensi add-on](https://deepworkplan.com/kit/ai-diff-reviewer) untuk apa yang kini dilakukan peninjau, atau [rilis v5.5.1](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) untuk sumbernya.

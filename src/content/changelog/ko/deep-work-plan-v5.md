@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
   - label: "스킬 릴리스 v5.5.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
+  - label: "스킬 릴리스 v5.5.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
 ---
 
 오늘 Deep Work Plan v5를 릴리스합니다. 이것은 다시 쓰기가 아닙니다. 실제 플랜 108개에 대한 직접 감사를 포함해, 방법론의 약속과 에이전트의 실제 동작이 어디에서 어긋날 수 있는지를 격차 하나하나 드러낸 몇 달간의 실사용의 결과입니다. 이 릴리스의 정직한 요약은 이렇습니다. 이 방법론은 이미 이 모든 것을 약속해 왔습니다 — 이제는 이를 보장합니다. v5 이전에는 문서를 글자 그대로 따르는 에이전트조차 실제 실패 시나리오에 빠질 수 있었습니다. 그런 시나리오는 이러한 사용과 피드백을 통해 식별되어, 이제 하나씩 모두 닫혔고 실행 가능한 테스트로 고정되었습니다 — 더 많은 글로 덮어 가린 것이 아닙니다. 이번 주기에 스킬의 계약 스위트는 132개에서 258개 테스트로 성장했고, 아래의 모든 보장은 릴리스된 태그를 대상으로 실제로 검증되었습니다 — 깨끗한 저장소에 설치하고 고유한 흐름을 전부 통과시킨 뒤에야 이 항목을 작성했습니다.
@@ -52,4 +54,7 @@ v5 계열의 첫 포인트 릴리스는, 실제로는 한 번도 확인되지 �
 
 **작업 원칙이 이제 하니스와 함께 배포됩니다.** 같은 날 뒤이어 나온 `v5.5.0`은 온보딩이 저장소에 무엇이 있는지뿐 아니라 그 저장소의 agent가 *어떻게* 일해야 하는지까지 가르치게 합니다. 열 가지 간결한 행동 — 결과를 책임지기, 묻기 전에 조사하기, 일상적 판단은 독립적으로 내리기, 판단 근거나 권한이 정말 없을 때 에스컬레이션하기, 완료를 주장하기 전에 검증하기 등 — 을 `AGENTS.md`에 인라인으로 적어, 진입 파일만 읽는 agent도 찾을 수 있게 합니다. 이는 요청 범위 안의 기본값이지 새로운 권한이 아닙니다. 호스트 권한, 더 좁은 범위, 계획의 게이트, 저장소 자체의 승인 규칙을 무시할 수 없습니다. 업그레이드는 키워드가 아니라 의미로 조정하므로, 이미 있는 동등한 규칙은 덮어쓰지 않고 유지됩니다.
 
-규범 텍스트는 [명세](https://deepworkplan.com/spec)를, 리뷰어가 지금 무엇을 하는지는 [애드온 레퍼런스](https://deepworkplan.com/kit/ai-diff-reviewer)를, 출처는 [v5.4.0 릴리스](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0)를 보세요.
+**AI Diff Reviewer 고정 버전이 v2.3.1로 올라갑니다.** 스킬 `v5.5.1`이 설치하는 리뷰어는 check, 리뷰 본문, 추적 댓글이 서로 일치합니다. 본문이 `Recommendation: approve`라고 적혀 있어도 check가 통과했다는 증거가 아닙니다 — 추적 마커의 Check status 블록을 읽으세요. advisory 모드에서는 스레드가 이미 접힌 지적도 뒷받침된 수정으로 철회할 수 있어, 막힌 PR이 실제 수정 뒤에 초록으로 바뀔 수 있습니다.
+
+
+규범 텍스트는 [명세](https://deepworkplan.com/spec)를, 리뷰어가 지금 무엇을 하는지는 [애드온 레퍼런스](https://deepworkplan.com/kit/ai-diff-reviewer)를, 출처는 [v5.5.1 릴리스](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1)를 보세요.
