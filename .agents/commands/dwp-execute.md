@@ -1,20 +1,20 @@
 ---
-description: Execute an existing deep work plan
+description: Execute an existing deep work plan task-by-task (provided by the installed `deepworkplan` skill)
 ---
 
-# /dwp-execute
+# /dwp-execute — provided by the `deepworkplan` skill
 
-Delegate to the **deepworkplan** skill (execute flow).
-
-**Skill:** `.agents/skills/deepworkplan/SKILL.md`
+> Thin alias. The flow lives in the installed `deepworkplan` skill — this file
+> only routes to it, so there is a single source of truth and no drift.
 
 ## What to do
 
-1. Read `.agents/skills/deepworkplan/SKILL.md` and route to the **execute** sub-skill.
-2. Follow that sub-skill's procedure exactly. Do not improvise.
-3. Plans live under `.dwp/plans/`. Use the repo's conventional-commit + gate rules.
+Route this invocation to the **execute** sub-skill of the installed `deepworkplan`
+skill and follow it: read `.agents/skills/deepworkplan/execute/SKILL.md` and execute
+its flow. Plan output lands in this repo's gitignored `.dwp/`
+(`.dwp/plans/`) — never the legacy
+`.agent_commands/agent_deep_work_plans/results/` path.
 
-## Notes
-
-- Executes tasks one at a time with validation gates.
-- To resume an interrupted plan use `/dwp-resume`.
+> Other agents: invoke the skill's `deepworkplan-execute` sub-skill directly
+> (`/deepworkplan-execute` in Claude Code, `#deepworkplan-execute` elsewhere). This
+> `dwp-execute` file is the shorter, conventional alias.
