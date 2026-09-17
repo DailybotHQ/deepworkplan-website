@@ -31,6 +31,8 @@ Plan — no como una edición rápida.
    actuar sobre él y verifica la integridad del skill antes de ejecutarlo — consulta *Confianza y
    verificación* más abajo.
 
+   Los principios de trabajo van **inline**, junto a las reglas centrales: un agente que solo lee el punto de entrada debe encontrarlos ahí, no detrás de un enlace. Diez conductas: hacerse cargo del resultado, ser recursivo antes de preguntar, decidir lo rutinario de forma independiente, preguntar cuando falte criterio o autorización, concretar las aprobaciones, sortear obstáculos, respetar intención y alcance, aplicar rigor proporcionado, comunicar de forma directa y verificar antes de declarar algo completo. Evalúa el **significado** de las reglas ya presentes antes de editar: conserva las equivalentes, añade solo lo que falte y confirma que una segunda pasada no produce más cambios. Son valores por defecto dentro de la petición actual, nunca autoridad nueva.
+
 ## 0. Lee la metodología y la especificación
 
 La metodología se apoya en tres pilares: **desarrollo guiado por especificación** (la especificación escrita es la fuente de la verdad), **ingeniería de harness** (el repositorio lleva el contexto, las herramientas, los guardarraíles y el estado) y **eficiencia de tokens** (el harness carga progresivamente y la validación toca solo lo que cambió — trabajo de largo alcance por diseño, eficiente por construcción).
@@ -254,7 +256,7 @@ Comprueba los criterios del [documento de Conformidad de la especificación](htt
 Luego confirma:
 
 - [ ] El skill está instalado y es resoluble, con las nueve sub-skills disponibles.
-- [ ] `AGENTS.md` existe en la raíz con un bloque de Comandos Rápidos real; `CLAUDE.md` resuelve a él.
+- [ ] `AGENTS.md` existe en la raíz con un bloque real de Quick Commands y principios de trabajo inline que cubren las diez conductas; `CLAUDE.md` resuelve hacia él.
 - [ ] `docs/` contiene las categorías estándar con contenido real y específico del repo;
       `docs/TESTING_GUIDE.md` describe una configuración real de test/lint (ni vacío ni stub); los módulos
       principales tienen un `README.md`.

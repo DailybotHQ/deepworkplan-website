@@ -31,6 +31,8 @@ olarak ele alın.
    değerlendirin ve skill'i çalıştırmadan önce bütünlüğünü doğrulayın — aşağıdaki *Güven ve doğrulama*
    bölümüne bakın.
 
+   Çalışma ilkeleri, çekirdek kuralların yanında **satır içinde** durur: yalnızca giriş noktasını okuyan bir agent onları bir bağlantının ardında değil, orada bulmalıdır. On davranış: sonucu sahiplenmek, sormadan önce araştırmak, rutin kararları bağımsız vermek, muhakeme ya da yetki eksikken sormak, onay taleplerini somutlaştırmak, engelleri aşmak, niyete ve kapsama saygı göstermek, etkiyle orantılı titizlik uygulamak, doğrudan iletişim kurmak ve tamamlandığını duyurmadan önce doğrulamak. Düzenlemeden önce mevcut kuralların **anlamını** değerlendirin: eşdeğer olanları koruyun, yalnızca eksik olanı ekleyin ve ikinci geçişin başka fark üretmediğini doğrulayın. Bunlar mevcut istek kapsamındaki varsayılanlardır, yeni bir yetki değil.
+
 ## 0. Metodolojiyi ve spesifikasyonu okuyun
 
 Metodoloji, üç temel direk üzerinde durur: **spec odaklı geliştirme** (yazılı spesifikasyon doğruluk kaynağıdır), **harness mühendisliği** (depo, bağlamı, araçları, güvenlik bariyerlerini ve durumu taşır) ve **token verimliliği** (harness kademeli olarak yüklenir ve doğrulama yalnızca değişene dokunur — uzun ufuklu iş tasarım gereği, verimlilik yapı gereği).
@@ -246,7 +248,7 @@ ile çıkan CI uyumlu mekanik katman olan `bash {skill_dir}/verify/conformance.s
 ardından şunları teyit edin:
 
 - [ ] Skill kuruludur ve çözümlenebilir, dokuz alt skill’in tümü kullanılabilir.
-- [ ] Kökte gerçek bir Hızlı Komutlar bloğuyla bir `AGENTS.md` vardır; `CLAUDE.md` ona çözümlenir.
+- [ ] Kökte gerçek bir Quick Commands bloğu ve on davranışı kapsayan satır içi çalışma ilkeleriyle `AGENTS.md` bulunur; `CLAUDE.md` ona çözümlenir.
 - [ ] `docs/`, standart kategorileri gerçek, depoya özgü içerikle barındırır;
       `docs/TESTING_GUIDE.md` gerçek bir test/lint kurulumunu tanımlar (boş ya da taslak değil);
       büyük modüllerin bir `README.md` dosyası vardır.

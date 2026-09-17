@@ -766,6 +766,149 @@ This repository runs on the methodology it documents.
 - **The dependency-upgrade add-on.** `/lib-upgrade` delegates to the opt-in **dependency-upgrade** add-on, which reasons about the actual package manager (pnpm here) and upgrades in validated, revertible batches.
 - **`.dwp/` output.** All Deep Work Plan working state (plans) lives in the gitignored `.dwp/` directory (`.dwp/plans/`) — Lite and Full plans alike; there is no separate draft artifact. The legacy homegrown command engine has been retired in favor of the installed skill.
 
+## Architecture Patterns
+
+### 1. Astro Components
+
+`.astro` files are the foundation. Script block (frontmatter) runs at build time. Use for all non-interactive content. Svelte is only for interactive components.
+
+```astro
+---
+interface Props {
+  title: string;
+  count?: number;
+}
+const { title, count = 5 } = Astro.props;
+---
+
+<section class="py-12">
+  <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{title}</h2>
+</section>
+```
+
+### 2. Content Collections
+
+Methodology, spec, kit, and pages content use Astro Content Collections with Zod schemas defined in `src/content.config.ts`.
+
+### 3. Svelte Integration
+
+Use Svelte for interactive components. Always include a `client:*` directive (`client:visible` preferred over `client:load`).
+
+### 4. Page Wrapper Pattern (MANDATORY)
+
+Pages in `src/pages/` are ultra-minimal routing wrappers. All logic lives in `*Page.astro` components in `src/components/pages/`. Adding a new page is exactly **two** wrappers regardless of how many languages ship: one default-language file at the root and one dynamic `[lang]` file that covers all 16 (or N) non-default languages.
+
+**Key rules:**
+
+- Page components handle `MainLayout` internally — wrappers **never** import `MainLayout`
+- The default-language wrapper passes `lang="en"` as a string literal; the dynamic wrapper derives `lang` from `Astro.params`
+- For a new page: create **1 `*Page.astro` component** + **1 default-lang wrapper** + **1 `[lang]` dynamic wrapper** (regardless of how many languages exist)
+- All user-visible text uses `getTranslations(lang)`, all URLs use `getUrlPrefix(lang)`
+- Add the new page's slug to `KNOWN_BASE_PATHS` in `src/middleware.ts` — one entry covers every language
+
+**Page component** (`src/components/pages/AboutPage.astro`):
+
+```astro
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getTranslations } from '@/lib/translations';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+
+interface Props { lang: Language; }
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+---
+
+<MainLayout lang={lang} title={t.aboutPage.title} description={t.aboutPage.description}>
+  <!-- page content using t.* for text, prefix for URLs -->
+</MainLayout>
+```
+
+**Default-lang wrapper** (`src/pages/about.astro` — 3 lines):
+
+```astro
+---
+import AboutPage from '@/components/pages/AboutPage.astro';
+---
+<AboutPage lang="en" />
+```
+
+**Dynamic `[lang]` wrapper** (`src/pages/[lang]/about.astro` — covers all non-default languages):
+
+```astro
+---
+import AboutPage from '@/components/pages/AboutPage.astro';
+import { getActiveNonDefaultLanguages, type Language } from '@/lib/i18n';
+
+export function getStaticPaths() {
+  return getActiveNonDefaultLanguages().map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Language };
+---
+<AboutPage lang={lang} />
+```
+
+### 5. i18n Routing
+
+The default language (English) is served from `src/pages/` at the root. Every non-default active language is served from the single dynamic `src/pages/[lang]/**` tree — `getStaticPaths()` enumerates the registry via `getActiveNonDefaultLanguages()`, so adding a new language requires zero edits in `src/pages/`. Page components in `src/components/pages/` receive `lang` and handle translations internally.
+
+### 6. Internal Hub (Dev-Only)
+
+Dev-only portal at `/internal/`. Uses `InternalLayout` or `ShowcaseLayout` (never `MainLayout`). English-only, no Page Wrapper pattern. Automatically excluded from production builds via three layers (post-build deletion, sitemap filter, noindex meta).
+
+### Addon refresh — the full sequence
+
+**How addon refresh works.** [`release_and_publish.yml`](.github/workflows/release_and_publish.yml) (which fires on every merge to `main`) has a dogfood step (Step 1a) that runs **before** the version bump and refreshes **only** `dailybot` and `ai-diff-reviewer`:
+
+1. Resolves the latest tag of each auto-refreshed upstream skill via `gh release view --repo <owner/repo>`.
+2. Compares against the vendored `SKILL.md` `version:` field. Only installs skills that actually moved.
+3. Runs `npx --yes skills add <repo>@<tag> --skill <name> --force -y` — the exact command any downstream consumer would run, so this doubles as a live smoke test. Both `--yes` (npm's proceed prompt) AND `-y` (the skills CLI's agent-picker prompt) are required in a non-TTY runner — dropping either hangs the workflow indefinitely.
+4. Asserts the invariant: installed `SKILL.md` version equals the requested tag. Refuses to proceed with the release if not.
+5. If any files changed, commits `chore: dogfood vendored skills to (…)` locally with a selective subject that names ONLY the skills that moved (e.g., `chore: dogfood vendored skills to dailybot v3.10.3, ai-diff-reviewer v2.0.0`). Step 3's `git push --follow-tags` sends this commit alongside the version-bump commit and the tag in a single atomic push, and the dogfood commit appears in the auto-generated GitHub Release notes.
+
+**Semantics.** Addon skill refresh is **release-driven**, not autonomous — no scheduled/cron refresh runs in the background. The auto-refreshed vendored copies advance only when a maintainer merges a PR to `main`, which is the same moment `release_and_publish.yml` cuts a new website release.
+
+**Failure semantics.**
+- `npx skills add` failure OR version-invariant mismatch → **fails the release** (a broken upstream tag must never quietly ship inside a website version).
+- Transient `gh release view` blip (rate limit, temporary outage) → skips only that skill for this release; the release itself proceeds.
+- Both auto-refreshed addon skills already at latest → clean no-op, no dogfood commit, release proceeds normally.
+
+**Editing policy.**
+- **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the next release will overwrite those edits. Contribute upstream, then merge any PR to trigger a website release that picks up the new upstream tag.
+- **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: changes there must be intentional and reviewed. Prefer contributing reusable improvements upstream in `DailybotHQ/deepworkplan-skill`, then re-adapting this copy deliberately — never rely on the release dogfood step to pull it in.
+
+  **Current vendored provenance (2026-09-17):** this copy is the released upstream tag **`v5.4.0`** (`7f692b0`), superseding `v5.3.0`, installed via the documented command `npx --yes skills add DailybotHQ/deepworkplan-skill@v5.4.0 --skill deepworkplan --force -y`. Verified `diff -rq` **byte-identical** against the tag's canonical `skills/deepworkplan/` tree — empty output — with `skills-lock.json` updated by the CLI itself (hash `de0babb1…`, superseding `49a77d4f…`). This install ran cleanly: the container mount-race that struck earlier installs did not fire, and the canonical `.agents/skills/deepworkplan/` write completed.
+
+**`v5.4.0` is the release that absorbed this repository's own contribution.** Between 2026-09-13 and 2026-09-17 this copy deliberately ran **ahead of** upstream, carrying a reviewed re-adaptation that pinned the AI Diff Reviewer addon to v2.3.0, named the **incomplete review** as a state distinct from a clean pass, added the normative rule that a plan's temporary and analysis output belongs in that plan's own `analysis_results/`, and resolved a `tmp/`-versus-plan-output contradiction between two spec surfaces. That work was contributed upstream as `DailybotHQ/deepworkplan-skill` PR #45, merged 2026-09-17, and released as `v5.4.0` one minute later. **Installing the tag therefore closed the divergence rather than destroying it** — the only delta between the previous re-adapted tree and `v5.4.0` was the `version:` stamp in fifteen `SKILL.md` files, which is the strongest available evidence that the re-adaptation matched what shipped. Standard remains aligned to **5.0.0** (no schema-line change; `v5.4.0` is a documentation and addon-contract release).
+
+**There is currently no local divergence.** This copy is a plain released tag, so a future `npx --yes skills add DailybotHQ/deepworkplan-skill@<tag> --skill deepworkplan --force -y` overwrites nothing that is not already upstream. If a divergence is ever reintroduced — the repo-adapted path this section authorizes — re-stamp this paragraph to say what it carries and that a tag install will overwrite it, exactly as the 2026-09-13 entry did. Local adaptation remains the command kit (nine delegators: seven `dwp-*` plus `/skill-create` and `/agent-create`, refreshed from the skill's own `onboard/command-templates/` on 2026-09-17) and this provenance protocol. This repository keeps the AI Diff Reviewer local-only; it does not ship an AI Reviewer CI workflow. The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed — `ai-diff-reviewer` was refreshed to **v2.3.0** on 2026-09-17 (lock hash `903e3868…`, verified `diff -rq` against the published tag).
+
+### Official CLI publishing (same release workflow)
+
+`release_and_publish.yml` **Step 6** publishes the official CLI — the
+unscoped npm package **`deepworkplan`** — together with every website
+release. The package is owned by whichever npm account the `NPM_TOKEN`
+Automation token belongs to: generate it from the company account that
+maintains the org's other packages (e.g. `universal-emoji-parser`) and
+`deepworkplan` is listed alongside them. The CLI keeps its **own version
+line** (independent of the website version): Step 6 publishes only when
+the exact `cli/package.json` version is not already on the registry —
+re-running a release is idempotent. To ship a new CLI version, bump
+`version` in `cli/package.json` in any PR to `main`. When the secret is
+absent, Step 6 skips with a loud warning and the website release proceeds
+unaffected. The token lives only in GitHub Actions secrets — never in the
+tree, never in chat.
+
+**Namespace strategy (deliberate — do not "fix"):** the bare unscoped name
+`deepworkplan` belongs to the *website client*, matching the domain exactly;
+never rename this package to `@deepworkplan/cli`. The `@deepworkplan` npm
+org (reserved 2026-09-13) is the home for future *methodology* packages —
+a methodology installer either grows this same CLI (`deepworkplan init`
+gaining a real installer) or ships under that scope. npm org names and
+unscoped package names are separate namespaces, so both coexist.
+
 ## Build & Deployment
 
 ### Build Process

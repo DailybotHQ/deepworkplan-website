@@ -29,6 +29,8 @@ Sei un agente di coding AI. Leggi per intero questo prompt, poi rendi il reposit
    agire su di esso e verifica l'integrità della skill prima di eseguirla — vedi *Fiducia e
    verifica* più avanti.
 
+   I principi di lavoro stanno **inline**, vicino alle regole centrali: un agente che legge solo il punto d'ingresso deve trovarli lì, non dietro un collegamento. Dieci comportamenti: farsi carico del risultato, informarsi prima di chiedere, decidere in autonomia le questioni ordinarie, chiedere quando mancano elementi di giudizio o autorizzazione, rendere concrete le richieste di approvazione, superare gli ostacoli, rispettare intento e perimetro, applicare un rigore proporzionato, comunicare in modo diretto e verificare prima di dichiarare concluso. Valuta il **significato** delle regole già presenti prima di modificare: conserva quelle equivalenti, aggiungi solo ciò che manca e verifica che un secondo passaggio non produca altri diff. Sono impostazioni predefinite nell'ambito della richiesta corrente, mai una nuova autorità.
+
 ## 0. Leggi la metodologia e la specifica
 
 La metodologia si regge su tre pilastri: **sviluppo guidato dalla specifica** (la specifica scritta è la fonte della verità), **ingegneria della harness** (il repository porta contesto, strumenti, guardrail e stato) ed **efficienza dei token** (l’harness carica progressivamente e la validazione tocca solo ciò che è cambiato — lavoro di lungo corso by design, efficiente per costruzione).
@@ -252,7 +254,7 @@ Verifica i criteri nel [documento di conformità della specifica](https://deepwo
 poi conferma:
 
 - [ ] La skill è installata e risolvibile, con tutte e nove le sub-skill disponibili.
-- [ ] `AGENTS.md` esiste nella radice con un blocco Quick Commands reale; `CLAUDE.md` si risolve in esso.
+- [ ] `AGENTS.md` esiste nella radice con un vero blocco Quick Commands e principi di lavoro inline che coprono i dieci comportamenti; `CLAUDE.md` risolve a esso.
 - [ ] `docs/` contiene le categorie standard con contenuto reale e specifico del repo;
       `docs/TESTING_GUIDE.md` descrive un setup reale di test/lint (non vuoto né stub); i moduli
       principali hanno un `README.md`.
