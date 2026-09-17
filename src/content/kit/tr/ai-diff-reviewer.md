@@ -8,9 +8,13 @@ order: 5
 
 # AI Diff Reviewer Eklentisi
 
-Deep Work Plan yürütmesini **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**'a (market listesi **"AI Diff Reviewer"**, mevcut sürüm **v2.3.0**) bağlayarak zorunlu **Final Review**'in güvenlik incelemesi yapılandırılmış bir yerel inceleme — karar, bulgu tablosu ve önem derecesi — çalıştırsın ve Flow B'yi seçtiğinizde her çekme isteği CI'da aynı incelemeyle kapı altına alınsın. 2.3.0 standardından itibaren **yerel inceleme temelin bir parçasıdır**: kuruluma alma onu kurar ve her Final Review onu çalıştırır. Yalnızca CI yüzeyi isteğe bağlıdır.
+Her Deep Work Plan aynı şekilde kapanır: işin tamamlandı sayılabilmesinden önce planın biriktirdiği değişiklik kümesinin tamamını okuyan, zorunlu bir **Final Review** ile. İçindeki güvenlik incelemesi, bir şeyin hâlâ yakalanabileceği son noktadır. Yardım olmadan o noktadaki tek okuyucu, kodu yazan agent'ın ta kendisidir.
 
-Sağlayıcıdan bağımsız kalan, önemli olan sınırdır: inceleyici, sizin **kendi** kodlama ajanınız tarafından çalıştırılan MIT lisanslı, etikete sabitlenmiş bir skill'dir — hiçbir Deep Work Plan akışı ticari bir servis, CI sağlayıcısı veya sır gerektirmez. Flow A (yalnızca yerel), kuruluma alınan her deponun aldığı temeldir; Flow B (CI Action) açıkça sunulur ve istenmeden asla kurulmaz. Bir geliştirici yerel inceleyiciyi reddedebilir; reddediş beyan edilmiş bir istisna olarak kaydedilir ve `verify`, kurulana kadar depoyu bu noktada uyumsuz olarak raporlar.
+Bu eklenti o diff'in başına ikinci bir okuyucu oturtur. **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**'ı — markette "AI Diff Reviewer" adıyla yer alır, şu anda **v2.3.0** — güvenlik incelemesine bağlar; orada düzyazı yerine yapılandırılmış bir çıktı döndürür: bir karar, bir bulgu tablosu ve her bulgu için bir önem derecesi. `critical` bir bulgu, düzeltilene ya da açıkça kabul edilene kadar tamamlanmayı engeller. Bu inceleme bir kapıdır, bir yorum değil.
+
+2.3.0 standardından itibaren bu yerel inceleme **bir ek değil, temelin parçasıdır**. Kuruluma alma onu kurar; her Final Review onu çalıştırır. İsteğe bağlı kalan şey CI yüzeyidir — Flow B, yani aynı incelemenin GitHub Action üzerinden çekme isteklerini kapı altına aldığı yer.
+
+Bunu gönül rahatlığıyla benimsenebilir kılan sınır bilinçli olarak dardır. İnceleyici, MIT lisanslı ve etikete sabitlenmiş bir skill'dir ve hâlihazırda çalıştırdığınız kod agent'ı tarafından yürütülür; dolayısıyla hiçbir Deep Work Plan akışı ticari bir hizmete, bir CI sağlayıcısına ya da bir gizli anahtara bağlı değildir. **Flow A** (yalnızca yerel), kuruluma alınmış her deponun aldığı şeydir; **Flow B** açıkça önerilir ve istenmeden asla kurulmaz. Geliştirici inceleyiciyi büsbütün reddedebilir de — bu reddediş beyan edilmiş bir istisna olarak kaydedilir ve kurulana kadar `verify` depoyu bu noktada uyumsuz olarak raporlar.
 
 ## Ne zaman kullanılır
 

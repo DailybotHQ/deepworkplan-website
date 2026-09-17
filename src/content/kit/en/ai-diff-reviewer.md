@@ -8,9 +8,13 @@ order: 5
 
 # AI Diff Reviewer addon
 
-Connect Deep Work Plan execution to the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace listing **"AI Diff Reviewer"**, current **v2.3.0**) so the security pass of the mandatory **Final Review** runs a structured local review — verdict, findings table, and severity — and, when you choose Flow B, every pull request can be gated by the same review in CI. Since standard 2.3.0 the **local review is part of the baseline**: onboarding installs it and every Final Review runs it. Only the CI surface is opt-in.
+Every Deep Work Plan closes the same way: a mandatory **Final Review** that reads the plan's entire accumulated change set before the work can be called done. Its security pass is the last point at which anything gets caught. Without help, the only reader at that point is the same agent that wrote the code.
 
-What stays vendor-neutral is the boundary that matters: the reviewer is an MIT, tag-pinned skill run by your **own** coding agent — no Deep Work Plan flow requires a commercial service, CI provider, or secret. Flow A (local-only) is the baseline every onboarded repository gets; Flow B (the CI Action) is offered explicitly and never installed unrequested. A developer may decline the local reviewer; the decline is recorded as a declared exception and `verify` reports the repository as non-conformant on that point until it is installed.
+This addon puts a second reader on that diff. It wires the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — listed on the marketplace as "AI Diff Reviewer", currently **v2.3.0** — into the security pass, where it returns something structured rather than prose: a verdict, a findings table, and a severity on each finding. A `critical` finding blocks completion until it is fixed or explicitly accepted. The review is a gate, not a comment.
+
+Since standard 2.3.0 that local review is **part of the baseline, not an extra**. Onboarding installs it; every Final Review runs it. What stays optional is the CI surface — Flow B, where the same review gates pull requests through the GitHub Action.
+
+The boundary that makes this safe to adopt is deliberately narrow. The reviewer is an MIT-licensed, tag-pinned skill executed by the coding agent you already run, so no Deep Work Plan flow depends on a commercial service, a CI provider, or a secret. **Flow A** (local-only) is what every onboarded repository gets; **Flow B** is offered explicitly and never installed unrequested. A developer may also decline the reviewer outright — that decline is recorded as a declared exception, and `verify` reports the repository as non-conformant on that point until it is installed.
 
 ## When to use it
 

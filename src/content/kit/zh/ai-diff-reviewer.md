@@ -8,9 +8,13 @@ order: 5
 
 # AI Diff Reviewer 附加组件
 
-将 Deep Work Plan 的执行连接到 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace 上的 **"AI Diff Reviewer"**，当前版本 **v2.3.0**），使强制的 **Final Review** 的安全审查环节运行结构化的本地审查——裁决、结果表和严重程度——并且在选择 Flow B 时，每个 pull request 都可以在 CI 中受到同样审查的门控。自标准 2.3.0 起，**本地审查属于基线的一部分**：接入时安装它，且每份 Final Review 都运行它。只有 CI 层面是可选的。
+每一份 Deep Work Plan 都以同样的方式收尾：一项强制的 **Final Review**，它会在工作被判定为完成之前，通读该计划累积的全部变更。其中的安全审查环节是最后一道能够发现问题的关口。若无外援，此刻唯一的阅读者就是写下这些代码的同一个 agent。
 
-保持供应商中立的是那条真正要紧的边界：该审查器是一个由你**自己的**编码代理运行的 MIT 授权、标签锁定的 skill——没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密。Flow A（仅本地）是每个已接入仓库都会获得的基线；Flow B（CI Action）被明确提供，绝不未经请求安装。开发者可以拒绝本地审查器；该拒绝会被记录为一项声明的例外，且在它被安装之前，`verify` 会将仓库在该点上报告为不符合规范。
+这个附加组件为那份 diff 引入了第二位阅读者。它把 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（在 marketplace 上的名称为 "AI Diff Reviewer"，当前版本 **v2.3.0**）接入安全审查环节，让它给出结构化的结果而非散文：一个裁决、一张结果表，以及每条结果的严重程度。一条 `critical` 结果会阻断收尾，直到它被修复或被明确接受为止。这份审查是一道门控，而不是一条评论。
+
+自标准 2.3.0 起，该本地审查**属于基线的一部分，而非额外选项**。接入时安装它，每份 Final Review 都会运行它。仍然可选的是 CI 层面——Flow B，在那里同一份审查通过 GitHub Action 对拉取请求进行门控。
+
+让它可以放心采用的边界是刻意收窄的。该审查器是一个采用 MIT 许可、按标签固定版本的 skill，由你本就在使用的编码 agent 执行，因此没有任何 Deep Work Plan 流程依赖商业服务、CI 提供方或密钥。**Flow A**（仅本地）是每个完成接入的仓库都会获得的；**Flow B** 只会被明确提出，绝不会在未经请求时安装。开发者也可以完全拒绝该审查器——这一拒绝会被记录为一项声明的例外，并且 `verify` 会在该项上将该仓库报告为不合规，直到它被安装为止。
 
 ## 何时使用
 

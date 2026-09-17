@@ -8,9 +8,13 @@ order: 5
 
 # AI Diff Reviewer Addon
 
-Verbindet die Deep Work Plan-Ausführung mit dem **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (Marketplace-Eintrag **"AI Diff Reviewer"**, aktuelle Version **v2.3.0**), sodass der Sicherheitstest des obligatorischen **Final Review** eine strukturierte lokale Überprüfung ausführt — Urteil, Ergebnistabelle und Schweregrad — und, bei Wahl von Flow B, jeder Pull-Request durch dieselbe Überprüfung in CI gesperrt werden kann. Seit Standard 2.3.0 ist die **lokale Überprüfung Teil der Baseline**: Das Onboarding installiert sie und jedes Final Review führt sie aus. Nur die CI-Oberfläche ist Opt-in.
+Jeder Deep Work Plan endet auf dieselbe Weise: mit einem verpflichtenden **Final Review**, der den gesamten angesammelten Änderungssatz des Plans liest, bevor die Arbeit als erledigt gelten darf. Sein Sicherheitsdurchgang ist der letzte Punkt, an dem überhaupt noch etwas auffallen kann. Ohne Hilfe ist der einzige Leser an dieser Stelle derselbe Agent, der den Code geschrieben hat.
 
-Was anbieterneutral bleibt, ist die Grenze, auf die es ankommt: Der Reviewer ist eine MIT-lizenzierte, tag-gepinnte Skill, die von deinem **eigenen** Coding-Agenten ausgeführt wird — kein Deep Work Plan-Ablauf erfordert einen kommerziellen Dienst, CI-Anbieter oder Secret. Flow A (nur lokal) ist die Baseline, die jedes geonboardete Repository erhält; Flow B (die CI Action) wird explizit angeboten und niemals ungefragt installiert. Ein Entwickler kann die lokale Überprüfung ablehnen; die Ablehnung wird als deklarierte Ausnahme aufgezeichnet, und `verify` meldet das Repository in diesem Punkt als nicht konform, bis sie installiert ist.
+Dieses Addon setzt einen zweiten Leser auf dieses Diff an. Es bindet den **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — im Marketplace gelistet als "AI Diff Reviewer", derzeit **v2.3.0** — in den Sicherheitsdurchgang ein, wo er statt Prosa etwas Strukturiertes zurückgibt: ein Urteil, eine Befundtabelle und einen Schweregrad je Befund. Ein `critical`-Befund blockiert den Abschluss, bis er behoben oder ausdrücklich akzeptiert ist. Die Überprüfung ist ein Gate, kein Kommentar.
+
+Seit Standard 2.3.0 ist diese lokale Überprüfung **Teil der Baseline, kein Zusatz**. Das Onboarding installiert sie; jedes Final Review führt sie aus. Optional bleibt die CI-Oberfläche — Flow B, wo dieselbe Überprüfung Pull Requests über die GitHub Action absichert.
+
+Die Grenze, die das bedenkenlos adoptierbar macht, ist bewusst eng gezogen. Der Reviewer ist eine MIT-lizenzierte, tag-gepinnte Skill, ausgeführt von dem Coding-Agent, den Sie ohnehin betreiben — kein Deep-Work-Plan-Flow hängt damit von einem kommerziellen Dienst, einem CI-Anbieter oder einem Secret ab. **Flow A** (nur lokal) ist das, was jedes onboardete Repository erhält; **Flow B** wird ausdrücklich angeboten und nie unaufgefordert installiert. Entwickelnde können den Reviewer auch rundheraus ablehnen — diese Ablehnung wird als deklarierte Ausnahme festgehalten, und `verify` meldet das Repository in diesem Punkt als nicht konform, bis er installiert ist.
 
 ## Wann es zu verwenden ist
 

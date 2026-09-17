@@ -8,9 +8,13 @@ order: 5
 
 # Addon AI Diff Reviewer
 
-Connecte l'exécution de Deep Work Plan à l'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (référencé sur le marketplace sous **"AI Diff Reviewer"**, version actuelle **v2.3.0**) afin que la passe de sécurité du **Final Review** obligatoire exécute une revue locale structurée — verdict, tableau de résultats et sévérité — et, en choisissant Flow B, chaque pull request puisse être bloquée par la même revue en CI. Depuis le standard 2.3.0, la **revue locale fait partie de la ligne de base** : l'intégration l'installe et chaque Final Review l'exécute. Seule la surface CI est optionnelle.
+Chaque Deep Work Plan se referme de la même manière : par un **Final Review** obligatoire qui relit l'ensemble des modifications accumulées par le plan avant que le travail puisse être déclaré terminé. Sa passe de sécurité est le dernier endroit où quelque chose peut encore être repéré. Sans aide, le seul lecteur à ce moment-là est l'agent qui a écrit le code.
 
-Ce qui reste neutre vis-à-vis du fournisseur, c'est la frontière qui compte : le reviewer est une skill MIT épinglée par tag exécutée par votre **propre** agent de codage — aucun flux de Deep Work Plan n'exige de service commercial, de fournisseur de CI ni de secret. Flow A (local uniquement) est la ligne de base que reçoit tout dépôt intégré ; Flow B (l'Action CI) est proposé explicitement et jamais installé sans demande. Un développeur peut refuser le reviewer local ; le refus est enregistré comme exception déclarée et `verify` signale le dépôt comme non conforme sur ce point jusqu'à son installation.
+Cet addon place un second lecteur devant ce diff. Il branche l'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — référencé sur le marketplace sous le nom "AI Diff Reviewer", actuellement en **v2.3.0** — sur la passe de sécurité, où il renvoie non pas de la prose mais quelque chose de structuré : un verdict, un tableau de constats et une sévérité pour chacun. Un constat `critical` bloque la clôture jusqu'à ce qu'il soit corrigé ou explicitement accepté. La revue est une barrière, pas un commentaire.
+
+Depuis le standard 2.3.0, cette revue locale **fait partie du socle, ce n'est pas un supplément**. L'intégration l'installe ; chaque Final Review l'exécute. Ce qui demeure optionnel, c'est la surface CI — le Flow B, où la même revue contrôle les pull requests via la GitHub Action.
+
+La frontière qui rend l'adoption sûre est délibérément étroite. Le relecteur est une skill sous licence MIT, épinglée à un tag, exécutée par l'agent de code que vous faites déjà tourner : aucun flux de Deep Work Plan ne dépend donc d'un service commercial, d'un fournisseur de CI ou d'un secret. Le **Flow A** (local uniquement) est ce que reçoit tout dépôt intégré ; le **Flow B** est proposé explicitement et jamais installé sans demande. Un développeur peut aussi refuser le relecteur purement et simplement — ce refus est consigné comme exception déclarée, et `verify` signale le dépôt comme non conforme sur ce point tant qu'il n'est pas installé.
 
 ## Quand l'utiliser
 

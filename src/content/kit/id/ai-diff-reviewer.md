@@ -8,9 +8,13 @@ order: 5
 
 # Add-on AI Diff Reviewer
 
-Menghubungkan eksekusi Deep Work Plan ke **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (daftar marketplace **"AI Diff Reviewer"**, versi saat ini **v2.3.0**) sehingga pemeriksaan keamanan dari **Final Review** wajib menjalankan tinjauan lokal terstruktur — putusan, tabel temuan, dan tingkat keparahan — dan, saat memilih Flow B, setiap pull request dapat dibatasi oleh tinjauan yang sama di CI. Sejak standar 2.3.0 **tinjauan lokal adalah bagian dari baseline**: onboarding memasangnya dan setiap Final Review menjalankannya. Hanya permukaan CI yang bersifat opt-in.
+Setiap Deep Work Plan berakhir dengan cara yang sama: sebuah **Final Review** wajib yang membaca seluruh himpunan perubahan yang dikumpulkan rencana itu sebelum pekerjaan boleh disebut selesai. Pemeriksaan keamanan di dalamnya adalah titik terakhir di mana sesuatu masih bisa tertangkap. Tanpa bantuan, satu-satunya pembaca pada titik itu adalah agent yang sama yang menulis kodenya.
 
-Yang tetap netral terhadap vendor adalah batas yang penting: pengulas adalah skill MIT yang dipatok pada tag dan dijalankan oleh coding agent **Anda sendiri** — tidak ada alur Deep Work Plan yang memerlukan layanan komersial, penyedia CI, atau secret. Flow A (hanya lokal) adalah baseline yang diperoleh setiap repositori yang telah di-onboarding; Flow B (CI Action) ditawarkan secara eksplisit dan tidak pernah dipasang tanpa diminta. Pengembang boleh menolak pengulas lokal; penolakan itu dicatat sebagai pengecualian yang dinyatakan dan `verify` melaporkan repositori sebagai tidak sesuai pada poin tersebut hingga ia dipasang.
+Add-on ini menempatkan pembaca kedua pada diff tersebut. Ia menghubungkan **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — terdaftar di marketplace sebagai "AI Diff Reviewer", saat ini **v2.3.0** — ke pemeriksaan keamanan, tempat ia mengembalikan sesuatu yang terstruktur alih-alih prosa: sebuah putusan, tabel temuan, dan tingkat keparahan untuk setiap temuan. Temuan `critical` memblokir penyelesaian sampai diperbaiki atau diterima secara eksplisit. Tinjauan ini adalah gerbang, bukan komentar.
+
+Sejak standar 2.3.0 tinjauan lokal itu **bagian dari baseline, bukan tambahan**. Onboarding memasangnya; setiap Final Review menjalankannya. Yang tetap opsional adalah permukaan CI — Flow B, tempat tinjauan yang sama mengawal pull request melalui GitHub Action.
+
+Batas yang membuat ini aman diadopsi sengaja dibuat sempit. Peninjau adalah skill berlisensi MIT yang dipatok ke sebuah tag dan dijalankan oleh coding agent yang sudah Anda pakai, sehingga tidak ada alur Deep Work Plan yang bergantung pada layanan komersial, penyedia CI, atau sebuah secret. **Flow A** (hanya lokal) adalah yang diterima setiap repositori yang telah di-onboarding; **Flow B** ditawarkan secara eksplisit dan tidak pernah dipasang tanpa diminta. Pengembang juga boleh menolak peninjau itu sama sekali — penolakan tersebut dicatat sebagai pengecualian yang dinyatakan, dan `verify` melaporkan repositori sebagai tidak sesuai pada poin itu sampai peninjau dipasang.
 
 ## Kapan Menggunakannya
 

@@ -8,9 +8,13 @@ order: 5
 
 # Dodatek AI Diff Reviewer
 
-Łączy wykonanie Deep Work Plan z **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (wpis na marketplace **"AI Diff Reviewer"**, aktualna wersja **v2.3.0**), dzięki czemu przegląd bezpieczeństwa obowiązkowego **Final Review** uruchamia strukturalny lokalny przegląd — werdykt, tabelę wyników i poziom ważności — a przy wyborze Flow B każde pull request może być zablokowane przez ten sam przegląd w CI. Od standardu 2.3.0 **lokalny przegląd jest częścią linii bazowej**: onboarding go instaluje, a każde Final Review go uruchamia. Opcjonalna pozostaje wyłącznie powierzchnia CI.
+Każdy Deep Work Plan kończy się tak samo: obowiązkowym **Final Review**, który czyta cały zgromadzony przez plan zestaw zmian, zanim pracę wolno uznać za wykonaną. Przegląd bezpieczeństwa w jego wnętrzu to ostatni moment, w którym cokolwiek da się jeszcze wychwycić. Bez pomocy jedynym czytelnikiem w tym momencie jest ten sam agent, który napisał ten kod.
 
-Neutralna wobec dostawcy pozostaje granica, która ma znaczenie: reviewer to skill na licencji MIT przypięty do tagu, uruchamiany przez **własnego** agenta kodującego — żaden przepływ Deep Work Plan nie wymaga komercyjnej usługi, dostawcy CI ani sekretu. Flow A (tylko lokalnie) to linia bazowa, którą otrzymuje każde repozytorium po onboardingu; Flow B (CI Action) jest proponowany wyraźnie i nigdy nie jest instalowany bez prośby. Deweloper może odmówić lokalnego reviewera; odmowa jest zapisywana jako zadeklarowany wyjątek, a `verify` zgłasza repozytorium jako niezgodne w tym punkcie do czasu instalacji.
+Ten dodatek sadza nad owym diffem drugiego czytelnika. Podłącza **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — w marketplace figurujący jako "AI Diff Reviewer", obecnie **v2.3.0** — do przeglądu bezpieczeństwa, gdzie zwraca on coś ustrukturyzowanego zamiast prozy: werdykt, tabelę ustaleń oraz wagę każdego z nich. Ustalenie `critical` blokuje zamknięcie, dopóki nie zostanie naprawione albo wyraźnie zaakceptowane. Ten przegląd jest bramką, a nie komentarzem.
+
+Od standardu 2.3.0 ów lokalny przegląd **należy do linii bazowej, nie jest dodatkiem**. Onboarding go instaluje; każde Final Review go uruchamia. Opcjonalna pozostaje powierzchnia CI — Flow B, gdzie ten sam przegląd pilnuje pull requestów poprzez GitHub Action.
+
+Granica, która czyni to bezpiecznym do przyjęcia, została wytyczona celowo wąsko. Recenzent to skill na licencji MIT, przypięty do taga i wykonywany przez agenta kodu, którego i tak już uruchamiasz — żaden przepływ Deep Work Plan nie zależy więc od komercyjnej usługi, dostawcy CI ani sekretu. **Flow A** (tylko lokalnie) dostaje każde repozytorium po onboardingu; **Flow B** jest proponowany wprost i nigdy nie instaluje się bez prośby. Osoba rozwijająca może też odrzucić recenzenta w całości — taka odmowa zostaje zapisana jako zadeklarowany wyjątek, a `verify` raportuje repozytorium jako niezgodne w tym punkcie, dopóki recenzent nie zostanie zainstalowany.
 
 ## Kiedy używać
 

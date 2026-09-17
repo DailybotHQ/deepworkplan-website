@@ -8,9 +8,13 @@ order: 5
 
 # Addon de AI Diff Reviewer
 
-Conecta la ejecución de Deep Work Plan con el **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (publicado en el marketplace como **"AI Diff Reviewer"**, versión actual **v2.3.0**) para que el pase de seguridad del **Final Review** obligatorio ejecute una revisión local estructurada — veredicto, tabla de hallazgos y severidad — y, al elegir el Flujo B, cualquier pull request pueda bloquearse con la misma revisión en CI. Desde el estándar 2.3.0 la **revisión local es parte de la línea base**: el onboarding la instala y cada Final Review la ejecuta. Solo la superficie de CI es opcional.
+Todo Deep Work Plan termina igual: un **Final Review** obligatorio que lee el conjunto completo de cambios acumulados del plan antes de poder darlo por concluido. Su pase de seguridad es el último punto en el que algo puede detectarse. Sin ayuda, el único lector en ese momento es el mismo agente que escribió el código.
 
-Lo que permanece neutral respecto al proveedor es el límite que importa: el revisor es una skill MIT fijada por tag que ejecuta tu **propio** agente de codificación — ningún flujo de Deep Work Plan exige un servicio comercial, un proveedor de CI o un secreto. El Flujo A (solo local) es la línea base que recibe todo repositorio incorporado; el Flujo B (el Action de CI) se ofrece explícitamente y nunca se instala sin pedirlo. Un desarrollador puede rechazar el revisor local; el rechazo se registra como excepción declarada y `verify` reporta el repositorio como no conforme en ese punto hasta que se instale.
+Este addon pone un segundo lector sobre ese diff. Conecta el **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** —publicado en el marketplace como "AI Diff Reviewer", actualmente **v2.3.0**— al pase de seguridad, donde devuelve algo estructurado en lugar de prosa: un veredicto, una tabla de hallazgos y una severidad para cada uno. Un hallazgo `critical` bloquea la finalización hasta que se corrija o se acepte de forma explícita. La revisión es una compuerta, no un comentario.
+
+Desde el estándar 2.3.0 esa revisión local **forma parte de la línea base, no es un extra**. El onboarding la instala; cada Final Review la ejecuta. Lo que sigue siendo opcional es la superficie de CI: el Flujo B, donde la misma revisión controla los pull requests a través de la GitHub Action.
+
+El límite que hace seguro adoptarlo es deliberadamente estrecho. El revisor es una skill con licencia MIT y fijada por tag, ejecutada por el agente de código que ya usas, así que ningún flujo de Deep Work Plan depende de un servicio comercial, un proveedor de CI ni un secreto. El **Flujo A** (solo local) es lo que recibe todo repositorio onboarded; el **Flujo B** se ofrece de forma explícita y nunca se instala sin pedirlo. Quien desarrolla también puede rechazar el revisor por completo: ese rechazo se registra como excepción declarada, y `verify` reporta el repositorio como no conforme en ese punto hasta que se instale.
 
 ## Cuándo usarlo
 
