@@ -142,7 +142,7 @@ przejście bezpieczeństwa nad całym zakumulowanym zestawem zmian, w tym wymaga
 lokalną recenzję AI Diff Reviewer, waliduje finalny stan repozytorium, uzgadnia
 skille użyte przez zadania i rejestruje dowody oraz ograniczenia. Skill lokalnej
 recenzji jest instalowany w ustalonej wersji; aktualnie udokumentowane polecenie
-używa `DailybotHQ/ai-diff-reviewer@v2.3.0`. GitHub Action to osobna, opcjonalna
+używa `DailybotHQ/ai-diff-reviewer@v2.3.1`. GitHub Action to osobna, opcjonalna
 powierzchnia CI, nigdy niewymagana dla podstawowej metodyki.
 
 Przegląd, który się wykonał i niczego nie zgłosił, to nie to samo co przegląd, który w ogóle nie wytworzył ustaleń. Ten drugi przypadek to **przegląd niekompletny**: zapisuje się go jako taki, nigdy nie liczy się jako dowód, że zestaw zmian jest czysty, i nigdy nie stanowi powodu do zamknięcia Final Review. Razem z brakującym recenzentem i nieudanym wywołaniem daje to trzy odrębne stany — i żaden z nich nie oznacza, że diff został przejrzany i uznany za czysty.
@@ -188,7 +188,7 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
 
 Po onboardingu bazowym zainstaluj **lokalny przegląd AI Diff Reviewer** (Phase 7a — wymagany od
 standardu 2.3.0): vendorowaną skill przypiętą do tagu
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.0 --skill ai-diff-reviewer -y`) plus dopasowany
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.1 --skill ai-diff-reviewer -y`) plus dopasowany
 do repozytorium `.review/extension.md` przez `generate-extension`, w ramach zgody onboardingu. Następnie
 wymień cztery opcjonalne dodatki (devcontainer, Dailybot, dependency-upgrade, design-system) i zaproponuj
 każdy jako wyraźną opcję do wyboru. Repozytorium jest w pełni zgodne przy **zerowej** liczbie opcjonalnych

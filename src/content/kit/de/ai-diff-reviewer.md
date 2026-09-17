@@ -10,7 +10,7 @@ order: 5
 
 Jeder Deep Work Plan endet auf dieselbe Weise: mit einem verpflichtenden **Final Review**, der den gesamten angesammelten Änderungssatz des Plans liest, bevor die Arbeit als erledigt gelten darf. Sein Sicherheitsdurchgang ist der letzte Punkt, an dem überhaupt noch etwas auffallen kann. Ohne Hilfe ist der einzige Leser an dieser Stelle derselbe Agent, der den Code geschrieben hat.
 
-Dieses Addon setzt einen zweiten Leser auf dieses Diff an. Es bindet den **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — im Marketplace gelistet als "AI Diff Reviewer", derzeit **v2.3.0** — in den Sicherheitsdurchgang ein, wo er statt Prosa etwas Strukturiertes zurückgibt: ein Urteil, eine Befundtabelle und einen Schweregrad je Befund. Ein `critical`-Befund blockiert den Abschluss, bis er behoben oder ausdrücklich akzeptiert ist. Die Überprüfung ist ein Gate, kein Kommentar.
+Dieses Addon setzt einen zweiten Leser auf dieses Diff an. Es bindet den **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — im Marketplace gelistet als "AI Diff Reviewer", derzeit **v2.3.1** — in den Sicherheitsdurchgang ein, wo er statt Prosa etwas Strukturiertes zurückgibt: ein Urteil, eine Befundtabelle und einen Schweregrad je Befund. Ein `critical`-Befund blockiert den Abschluss, bis er behoben oder ausdrücklich akzeptiert ist. Die Überprüfung ist ein Gate, kein Kommentar.
 
 Seit Standard 2.3.0 ist diese lokale Überprüfung **Teil der Baseline, kein Zusatz**. Das Onboarding installiert sie; jedes Final Review führt sie aus. Optional bleibt die CI-Oberfläche — Flow B, wo dieselbe Überprüfung Pull Requests über die GitHub Action absichert.
 
@@ -52,26 +52,30 @@ Action `DailybotHQ/ai-diff-reviewer@v2`, typischerweise Label-gesperrt (`ready`)
 
 ### Optionaler `apply-review`-Begleiter
 
-Nach CI-Veröffentlichung einer Überprüfung kann der Entwickler `apply-review` während `execute` aufrufen, um Ergebnisse einzeln zu durchlaufen (anwenden / zurückstellen / überspringen) mit Zustimmung. Standardmäßig nur lesend; nie eine Planaufgabendatei (würde die obligatorische Aufgabenreihenfolge brechen).
+Nach CI-Veröffentlichung einer Überprüfung kann der Entwickler `apply-review` während `execute` aufrufen, um Ergebnisse einzeln zu durchlaufen (anwenden / zurückstellen / überspringen) mit Zustimmung. Standardmäßig nur lesend; nie eine Planaufgabendatei (würde die obligatorische Aufgabenreihenfolge brechen). Seit v2.3.1 ist ein Review-Text, der `Recommendation: approve` sagt, kein Beleg dafür, dass der Check bestanden hat — zuerst den Block Highest severity / Strictness gate / Check status des Tracking-Markers lesen.
 
 ## Was sich seit v2.0.1 geändert hat
 
-Zwischen v2.0.1 und v2.3.0 sind drei Upstream-Releases erschienen. Keines davon ändert, wie dieses Addon den Reviewer einbindet — Flow A, die drei Erkennungspfade und der Blockierungsvertrag bleiben unverändert —, aber sie ändern, was Anwendende bekommen.
+Zwischen v2.0.1 und v2.3.1 sind vier Upstream-Releases erschienen. Keines davon ändert, wie dieses Addon den Reviewer einbindet — Flow A, die drei Erkennungspfade und der Blockierungsvertrag bleiben unverändert —, aber sie ändern, was Anwendende bekommen.
 
 | Änderung | Was das für ein DWP-Repository bedeutet |
 |----------|------------------------------------------|
 | **Runner und Backend sind getrennte Eingaben** (v2.1.0) | `provider` benennt den *Runner* — wer die Review-Schleife ausführt. Das neue `api-base` benennt das *Backend* — wo das Modell liegt. Ein leeres `api-base` ist byte-identisch zu v2.0.x, eine bestehende Installation verhält sich also genau wie zuvor. |
 | **Zwei weitere Runner** (v2.1.0) | `openai` (in-process, ohne Installation) und `grok` (CLI) ergänzen den bisherigen Satz. |
 | **Kosten sind eine Ein-Wort-Stufe, und die Standardwerte sind gemessen** (v2.1.0, v2.3.0) | Die Kosten werden über ein Stufen-Schlüsselwort und zugeschnittene Diffs gesteuert und je Review berichtet. Bei xAI lösen `balanced` und `economy` beide zu `grok-4.5` auf, `deep` zu `grok-4.6`. |
-| **Folgerunden prüfen das tatsächlich neue Diff** (v2.1.0, v2.2.0) | Offene Befunde werden weitergetragen. `prior-findings-resolution` steht standardmäßig auf `advisory`: Das Urteil „behoben" eines Modells wird berichtet, der Befund blockiert aber weiter, bis eine wartende Person den Thread schließt. |
+| **Folgerunden prüfen das tatsächlich neue Diff** (v2.1.0, v2.2.0, v2.3.1) | Offene Befunde werden weitergetragen. `prior-findings-resolution` steht standardmäßig auf `advisory`: Das Urteil „behoben" eines Modells wird berichtet, der Befund blockiert aber weiter, bis eine wartende Person den Thread schließt. Seit v2.3.1, wenn `collapse-previous` diesen Thread bereits minimiert hat, zieht eine belegte Korrektur (Befund nicht erneut ausgegeben **und** die Datei hat sich seit dem Melden geändert oder wurde gelöscht) ihn zurück, sodass ein feststeckender PR grün werden kann. |
 | **Eine unvollständige Überprüfung ist nie eine grüne Überprüfung** (v2.2.0) | Ein Lauf, der ohne geschriebene Befunde endet, wird als ausdrücklich unvollständige Überprüfung veröffentlicht. Jede blockierende Strenge lässt ihn scheitern, das Geprüft-Label wird nicht gesetzt, und keine leere Runde zieht einen offenen Befund zurück. |
 | **Prüfsummen-verifizierte Installer** (v2.2.0) | `cursor-installer-sha256` und `grok-installer-sha256` verweigern die Ausführung eines Hersteller-Artefakts, dessen Hash vom konfigurierten Pin abweicht. |
+| **Der Check, der Review-Text und der Tracking-Kommentar stimmen überein** (v2.3.1) | Die Bestehen/Nichtbestehen-Entscheidung wird einmal berechnet, bevor die Überprüfung veröffentlicht wird. Jede Überprüfung endet mit einem zur Laufzeit geschriebenen Check-status-Block. Ein modellseitiges `Recommendation: approve` wird zu `request-changes` umgeschrieben, wenn das Gate fehlschlägt, daher muss `apply-review` den Tracking-Marker lesen, nicht die letzte Zeile des Modells. |
+| **Ein schlechter Inline-Anker kostet nicht mehr alle Kommentare** (v2.3.1) | Bei GitHub 422 versucht die Action es erneut nur mit den Kommentaren, deren Anker in einem Diff-Hunk liegt, und als letzten Ausweg nur mit der Zusammenfassung. |
 
 Zwei davon wiegen für die Methodik schwerer als der Rest.
 
 **Das Gate für unvollständige Überprüfungen schließt eine echte Lücke im Sicherheitsdurchgang.** Ein Final Review darf sich nicht auf eine Überprüfung stützen können, die nie stattgefunden hat. Vor v2.2.0 war ein Runner, der ohne Befunde endete, von einem sauberen Durchgang nicht zu unterscheiden. Jetzt ist das ein benannter, nicht grüner Zustand — „keine Befunde" heißt also, dass der Reviewer hingesehen und nichts gefunden hat, und nicht, dass er nie hingesehen hat.
 
 **`economy` ist bewusst nicht günstiger.** Der Upstream-Benchmark vom 16.09.2026 maß `grok-4.3` bei 0 von 5 bekannten Defekten — es genehmigt, ohne zu prüfen —, während `grok-4.5` mit 3 von 5 ohne Fehlalarme mit `grok-4.6` gleichzog, bei gleichen Kosten und einem Viertel der Laufzeit. Da es kein günstigeres xAI-Modell gibt, das noch wirklich prüft, löst `economy` zum selben Modell auf wie `balanced`, statt eine Stufe zu sein, die nichts findet. Der xAI-Pfad steigt dadurch über die CLI von etwa \$0,07 auf etwa \$0,40–0,75 pro Review; `model: grok-4.3` lässt sich weiterhin ausdrücklich festlegen, um das frühere Verhalten zu behalten. Diese Zahlen sind veröffentlichte Messungen des Upstream-Projekts, nicht eigene von Deep Work Plan.
+
+**Eine Überprüfung, die approve sagt, ist kein Beleg dafür, dass der Check bestanden hat.** Seit v2.3.1 schreibt die Runtime den Check-status-Block, nachdem sie das Gate berechnet hat, und schreibt ein modellseitiges `Recommendation: approve` um, wenn das Gate fehlschlägt. Das ist der Vertrag, den `apply-review` — und ein Final Review, das eine CI-Überprüfung liest — einhalten muss.
 
 ## Verhalten
 

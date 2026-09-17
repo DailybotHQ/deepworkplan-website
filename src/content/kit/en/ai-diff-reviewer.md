@@ -10,7 +10,7 @@ order: 5
 
 Every Deep Work Plan closes the same way: a mandatory **Final Review** that reads the plan's entire accumulated change set before the work can be called done. Its security pass is the last point at which anything gets caught. Without help, the only reader at that point is the same agent that wrote the code.
 
-This addon puts a second reader on that diff. It wires the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — listed on the marketplace as "AI Diff Reviewer", currently **v2.3.0** — into the security pass, where it returns something structured rather than prose: a verdict, a findings table, and a severity on each finding. A `critical` finding blocks completion until it is fixed or explicitly accepted. The review is a gate, not a comment.
+This addon puts a second reader on that diff. It wires the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — listed on the marketplace as "AI Diff Reviewer", currently **v2.3.1** — into the security pass, where it returns something structured rather than prose: a verdict, a findings table, and a severity on each finding. A `critical` finding blocks completion until it is fixed or explicitly accepted. The review is a gate, not a comment.
 
 Since standard 2.3.0 that local review is **part of the baseline, not an extra**. Onboarding installs it; every Final Review runs it. What stays optional is the CI surface — Flow B, where the same review gates pull requests through the GitHub Action.
 
@@ -52,26 +52,30 @@ Action `DailybotHQ/ai-diff-reviewer@v2`, typically label-gated (`ready`), with a
 
 ### Optional `apply-review` companion
 
-After CI posts a review, the developer may invoke `apply-review` during `execute` to walk findings per-finding (apply / defer / skip) with consent. Read-only by default; never a plan task file (would break mandatory final-task order).
+After CI posts a review, the developer may invoke `apply-review` during `execute` to walk findings per-finding (apply / defer / skip) with consent. Read-only by default; never a plan task file (would break mandatory final-task order). Since v2.3.1 a review body that says `Recommendation: approve` is not evidence the check passed — read the tracking marker's Highest severity / Strictness gate / Check status block first.
 
 ## What changed since v2.0.1
 
-Three upstream releases landed between v2.0.1 and v2.3.0. None of them changes how this addon wires the reviewer — Flow A, the three detection paths and the blocking contract are unchanged — but they change what an adopter gets.
+Four upstream releases landed between v2.0.1 and v2.3.1. None of them changes how this addon wires the reviewer — Flow A, the three detection paths and the blocking contract are unchanged — but they change what an adopter gets.
 
 | Change | What it means for a DWP repository |
 |--------|------------------------------------|
 | **Runner and backend are separate inputs** (v2.1.0) | `provider` names the *runner* — who owns the review loop. The new `api-base` names the *backend* — where the model lives. An empty `api-base` is byte-identical to v2.0.x, so an existing install behaves exactly as before. |
 | **Two more runners** (v2.1.0) | `openai` (in-process, zero install) and `grok` (CLI) join the existing set. |
 | **Cost is a one-word tier, and the defaults are measured** (v2.1.0, v2.3.0) | Cost is controlled by a tier keyword and shaped diffs, and reported per review. On xAI, `balanced` and `economy` both resolve to `grok-4.5` and `deep` to `grok-4.6`. |
-| **Follow-up rounds review the actual new diff** (v2.1.0, v2.2.0) | Outstanding findings carry forward. `prior-findings-resolution` defaults to `advisory`: a model's "resolved" verdict is reported, but the finding keeps gating until a maintainer resolves the thread. |
+| **Follow-up rounds review the actual new diff** (v2.1.0, v2.2.0, v2.3.1) | Outstanding findings carry forward. `prior-findings-resolution` defaults to `advisory`: a model's "resolved" verdict is reported, but the finding keeps gating until a maintainer resolves the thread. Since v2.3.1, when `collapse-previous` has already minimized that thread, a corroborated fix (finding not re-emitted **and** the file changed since it was raised, or was deleted) retires it so a stuck PR can go green. |
 | **An incomplete review is never a green review** (v2.2.0) | A run that exits without writing findings is posted as an explicit incomplete review. Every blocking strictness fails it, the reviewed label is not stamped, and no open finding is retired by an empty round. |
 | **Checksum-verified installers** (v2.2.0) | `cursor-installer-sha256` and `grok-installer-sha256` refuse to run a vendor artefact whose hash differs from the configured pin. |
+| **The check, the review body and the tracking comment agree** (v2.3.1) | The pass/fail decision is computed once before the review is posted. Every review ends with a runtime-written Check status block. A model `Recommendation: approve` is rewritten to `request-changes` when the gate is failing, so `apply-review` must read the tracking marker, not the model's last line. |
+| **One bad inline anchor no longer costs every comment** (v2.3.1) | On GitHub 422 the Action retries with only the comments whose anchor is inside a diff hunk, then summary-only as a last resort. |
 
 Two of these matter more than the rest for the methodology.
 
 **The incomplete-review gate closes a real hole in the security pass.** A Final Review must not be able to close on a review that did not happen. Before v2.2.0 a runner that exited without producing findings was indistinguishable from a clean pass. It is now a named, non-green state, so "no findings" means the reviewer looked and found nothing rather than that it never looked.
 
 **`economy` is deliberately not cheaper.** The upstream benchmark of 2026-09-16 measured `grok-4.3` at 0 of 5 known defects — it approves without reviewing — while `grok-4.5` matched `grok-4.6` at 3 of 5 with no false positives, at the same cost and a quarter of the wall time. Since no cheaper xAI model still reviews, `economy` resolves to the same model as `balanced` rather than being a tier that finds nothing. The xAI path therefore moves from roughly $0.07 to roughly $0.40–0.75 per review through the CLI; `model: grok-4.3` can still be pinned explicitly to keep the earlier behaviour. These figures are upstream's published measurements, not Deep Work Plan's own.
+
+**A review that says approve is not evidence the check passed.** Since v2.3.1 the runtime writes the Check status block after computing the gate, and rewrites a model `Recommendation: approve` when the gate is failing. That is the contract `apply-review` — and a Final Review that reads a CI review — must follow.
 
 ## Behavior
 

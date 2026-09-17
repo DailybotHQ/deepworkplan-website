@@ -154,7 +154,7 @@ pemeriksaan keamanan atas seluruh kumpulan perubahan yang terakumulasi, termasuk
 review lokal AI Diff Reviewer yang wajib, memvalidasi status akhir repositori,
 merekonsiliasi skill yang digunakan oleh tugas-tugas, dan mencatat bukti serta
 keterbatasan. Skill review lokal dipasang pada rilis yang dipatok; perintah yang
-saat ini didokumentasikan menggunakan `DailybotHQ/ai-diff-reviewer@v2.3.0`. GitHub
+saat ini didokumentasikan menggunakan `DailybotHQ/ai-diff-reviewer@v2.3.1`. GitHub
 Action adalah permukaan CI terpisah yang opsional, dan tidak pernah wajib untuk
 metodologi inti.
 
@@ -202,7 +202,7 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
 
 Setelah onboarding dasar, pasang **tinjauan lokal AI Diff Reviewer** (Fase 7a — wajib sejak
 standar 2.3.0): skill vendored yang dipatok pada tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.0 --skill ai-diff-reviewer -y`) ditambah
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.1 --skill ai-diff-reviewer -y`) ditambah
 `.review/extension.md` yang disesuaikan dengan repo melalui `generate-extension`, di bawah persetujuan
 onboarding. Lalu sebutkan keempat addon opsional (devcontainer, Dailybot, dependency-upgrade,
 design-system) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori sepenuhnya

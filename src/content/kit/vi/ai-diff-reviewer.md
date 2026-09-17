@@ -10,7 +10,7 @@ order: 5
 
 Mọi Deep Work Plan đều khép lại theo cùng một cách: một **Final Review** bắt buộc, đọc toàn bộ tập thay đổi mà kế hoạch đã tích lũy trước khi công việc được coi là xong. Bước rà soát bảo mật bên trong nó là điểm cuối cùng còn có thể phát hiện ra điều gì đó. Nếu không có trợ giúp, người đọc duy nhất ở thời điểm ấy chính là agent đã viết đoạn mã đó.
 
-Tiện ích này đặt thêm một người đọc thứ hai lên bản diff ấy. Nó nối **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — được liệt kê trên marketplace là "AI Diff Reviewer", hiện ở **v2.3.0** — vào bước rà soát bảo mật, nơi nó trả về thứ có cấu trúc thay vì văn xuôi: một phán quyết, một bảng phát hiện, và mức độ nghiêm trọng cho từng phát hiện. Một phát hiện `critical` chặn việc hoàn tất cho tới khi được sửa hoặc được chấp nhận một cách tường minh. Bản đánh giá này là một cánh cổng, không phải một lời bình.
+Tiện ích này đặt thêm một người đọc thứ hai lên bản diff ấy. Nó nối **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — được liệt kê trên marketplace là "AI Diff Reviewer", hiện ở **v2.3.1** — vào bước rà soát bảo mật, nơi nó trả về thứ có cấu trúc thay vì văn xuôi: một phán quyết, một bảng phát hiện, và mức độ nghiêm trọng cho từng phát hiện. Một phát hiện `critical` chặn việc hoàn tất cho tới khi được sửa hoặc được chấp nhận một cách tường minh. Bản đánh giá này là một cánh cổng, không phải một lời bình.
 
 Kể từ chuẩn 2.3.0, bản đánh giá cục bộ đó **là một phần của chuẩn cơ sở, không phải thứ thêm vào**. Onboarding cài đặt nó; mọi Final Review đều chạy nó. Thứ vẫn còn tùy chọn là bề mặt CI — Flow B, nơi cùng bản đánh giá ấy kiểm soát các pull request thông qua GitHub Action.
 
@@ -52,26 +52,30 @@ Action `DailybotHQ/ai-diff-reviewer@v2`, thường bị kiểm soát bởi nhãn
 
 ### Trợ lý `apply-review` tùy chọn
 
-Sau khi CI đăng đánh giá, nhà phát triển có thể gọi `apply-review` trong `execute` để xem xét từng phát hiện (áp dụng / trì hoãn / bỏ qua) với sự đồng ý. Chỉ đọc theo mặc định; không bao giờ là tệp nhiệm vụ kế hoạch (sẽ phá vỡ thứ tự nhiệm vụ cuối bắt buộc).
+Sau khi CI đăng đánh giá, nhà phát triển có thể gọi `apply-review` trong `execute` để xem xét từng phát hiện (áp dụng / trì hoãn / bỏ qua) với sự đồng ý. Chỉ đọc theo mặc định; không bao giờ là tệp nhiệm vụ kế hoạch (sẽ phá vỡ thứ tự nhiệm vụ cuối bắt buộc). Kể từ v2.3.1, nội dung đánh giá ghi `Recommendation: approve` không phải bằng chứng cuộc kiểm tra đã đạt — hãy đọc trước khối Highest severity / Strictness gate / Check status của dấu theo dõi.
 
 ## Những thay đổi kể từ v2.0.1
 
-Ba bản phát hành upstream đã ra mắt giữa v2.0.1 và v2.3.0. Không bản nào thay đổi cách addon này kết nối trình đánh giá — Flow A, ba đường phát hiện và hợp đồng chặn vẫn giữ nguyên — nhưng chúng thay đổi những gì người áp dụng nhận được.
+Bốn bản phát hành upstream đã ra mắt giữa v2.0.1 và v2.3.1. Không bản nào thay đổi cách addon này kết nối trình đánh giá — Flow A, ba đường phát hiện và hợp đồng chặn vẫn giữ nguyên — nhưng chúng thay đổi những gì người áp dụng nhận được.
 
 | Thay đổi | Ý nghĩa đối với một kho DWP |
 |----------|------------------------------|
 | **Runner và backend là hai tham số riêng biệt** (v2.1.0) | `provider` chỉ định *runner*: ai chạy vòng lặp đánh giá. `api-base` mới chỉ định *backend*: nơi mô hình được đặt. `api-base` để trống thì giống hệt v2.0.x đến từng byte, nên một bản cài sẵn có sẽ hoạt động y như trước. |
 | **Thêm hai runner** (v2.1.0) | `openai` (chạy trong tiến trình, không cần cài đặt) và `grok` (CLI) gia nhập nhóm hiện có. |
 | **Chi phí là một bậc gói gọn trong một từ, và giá trị mặc định được đo đạc** (v2.1.0, v2.3.0) | Chi phí được điều khiển bằng từ khóa bậc và diff đã thu hẹp, đồng thời được báo cáo cho từng lượt đánh giá. Trên xAI, `balanced` và `economy` đều phân giải thành `grok-4.5`, còn `deep` thành `grok-4.6`. |
-| **Các vòng tiếp theo đánh giá đúng phần diff mới** (v2.1.0, v2.2.0) | Các phát hiện còn tồn được chuyển tiếp. `prior-findings-resolution` mặc định là `advisory`: phán quyết "đã giải quyết" của mô hình vẫn được báo cáo, nhưng phát hiện đó tiếp tục chặn cho đến khi một người bảo trì đóng luồng thảo luận. |
+| **Các vòng tiếp theo đánh giá đúng phần diff mới** (v2.1.0, v2.2.0, v2.3.1) | Các phát hiện còn tồn được chuyển tiếp. `prior-findings-resolution` mặc định là `advisory`: phán quyết "đã giải quyết" của mô hình vẫn được báo cáo, nhưng phát hiện đó tiếp tục chặn cho đến khi một người bảo trì đóng luồng thảo luận. Kể từ v2.3.1, khi `collapse-previous` đã thu gọn luồng thảo luận đó, một bản sửa được xác nhận (phát hiện không được phát lại **và** tệp đã thay đổi kể từ lúc phát hiện được nêu, hoặc tệp đã bị xóa) sẽ thu hồi nó để PR bị kẹt có thể chuyển sang xanh. |
 | **Một lượt đánh giá dở dang không bao giờ được tính là đạt** (v2.2.0) | Lần chạy kết thúc mà không ghi ra phát hiện nào sẽ được đăng như một lượt đánh giá dở dang tường minh. Mọi mức độ nghiêm ngặt có tính chặn đều đánh trượt nó, nhãn đã-đánh-giá không được đóng, và không vòng rỗng nào thu hồi một phát hiện đang mở. |
 | **Trình cài đặt được xác minh bằng checksum** (v2.2.0) | `cursor-installer-sha256` và `grok-installer-sha256` từ chối chạy một tạo phẩm của nhà cung cấp nếu mã băm khác với giá trị đã ghim. |
+| **Cuộc kiểm tra, nội dung đánh giá và bình luận theo dõi thống nhất** (v2.3.1) | Quyết định đạt/trượt được tính một lần trước khi đánh giá được đăng. Mọi đánh giá kết thúc bằng khối Check status do runtime ghi. `Recommendation: approve` của mô hình được viết lại thành `request-changes` khi cổng đang thất bại, nên `apply-review` phải đọc dấu theo dõi, không phải dòng cuối của mô hình. |
+| **Một neo nội dòng hỏng không còn làm mất mọi bình luận** (v2.3.1) | Khi GitHub trả 422, Action thử lại chỉ với các bình luận có neo nằm trong hunk diff, rồi chỉ tóm tắt như biện pháp cuối cùng. |
 
 Hai trong số này quan trọng hơn cả đối với phương pháp luận.
 
 **Cổng chặn đánh giá dở dang bịt một lỗ hổng có thật trong bước rà soát bảo mật.** Một Final Review không được phép khép lại dựa trên một lượt đánh giá chưa từng diễn ra. Trước v2.2.0, một runner kết thúc mà không tạo ra phát hiện nào là không thể phân biệt với một lượt rà soát sạch. Giờ đây đó là một trạng thái có tên gọi và không phải màu xanh, nên "không có phát hiện" nghĩa là trình đánh giá đã xem và không thấy gì, chứ không phải nó chưa từng xem.
 
 **`economy` cố ý không rẻ hơn.** Phép đo chuẩn của upstream ngày 2026-09-16 cho thấy `grok-4.3` phát hiện 0 trên 5 lỗi đã biết — nó phê duyệt mà không đánh giá — trong khi `grok-4.5` ngang bằng `grok-4.6` với 3 trên 5 và không có dương tính giả, cùng mức chi phí và chỉ tốn một phần tư thời gian. Vì không có mô hình xAI nào rẻ hơn mà vẫn thực sự đánh giá, `economy` phân giải về cùng mô hình với `balanced` thay vì trở thành một bậc không tìm ra gì. Do đó đường xAI qua CLI tăng từ khoảng \$0,07 lên khoảng \$0,40–0,75 mỗi lượt đánh giá; vẫn có thể ghim `model: grok-4.3` một cách tường minh để giữ hành vi trước đây. Đây là các số đo do upstream công bố, không phải của Deep Work Plan.
+
+**Một đánh giá ghi approve không phải bằng chứng cuộc kiểm tra đã đạt.** Kể từ v2.3.1, runtime ghi khối Check status sau khi tính cổng, và viết lại `Recommendation: approve` của mô hình khi cổng đang thất bại. Đó là hợp đồng mà `apply-review` — và một Final Review đọc đánh giá CI — phải tuân theo.
 
 ## Hành vi
 

@@ -152,7 +152,7 @@ revisión local requerida de AI Diff Reviewer, valida el estado final del
 repositorio, reconcilia los skills usados por las tareas y registra la
 evidencia y las limitaciones. El skill de revisión local se instala en una
 versión fijada; el comando documentado actual usa
-`DailybotHQ/ai-diff-reviewer@v2.3.0`. La GitHub Action es una superficie de
+`DailybotHQ/ai-diff-reviewer@v2.3.1`. La GitHub Action es una superficie de
 CI separada y opcional, y nunca es obligatoria para la metodología central.
 
 Una revisión que se ejecutó y no reportó nada no es lo mismo que una revisión que nunca llegó a producir hallazgos. El segundo caso es una **revisión incompleta**: se registra como tal, nunca cuenta como prueba de que el conjunto de cambios está limpio, y nunca es motivo para cerrar el Final Review. Junto con un revisor ausente y una invocación que falló, son tres estados distintos — y ninguno significa que el diff se revisó y salió limpio.
@@ -199,7 +199,7 @@ metodología) en vez de sobrescribir — y confirma con el usuario antes de reem
 
 Tras la incorporación base, instala la **revisión local de AI Diff Reviewer** (Fase 7a — requerida
 desde el estándar 2.3.0): la skill vendorizada fijada por tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.0 --skill ai-diff-reviewer -y`) más un
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.1 --skill ai-diff-reviewer -y`) más un
 `.review/extension.md` a medida del repo vía `generate-extension`, bajo el consentimiento del
 onboarding. Luego enumera los cuatro addons opcionales (devcontainer, Dailybot, dependency-upgrade,
 design-system) y ofrece cada uno como una opción explícita. Un repositorio es totalmente conforme con
