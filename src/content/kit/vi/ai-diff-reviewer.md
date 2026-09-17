@@ -8,7 +8,7 @@ order: 5
 
 # Tiện ích bổ sung AI Diff Reviewer
 
-Kết nối quá trình thực thi Deep Work Plan với **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (được liệt kê trên marketplace là **"AI Diff Reviewer"**, phiên bản hiện tại **v2.0.1**) để bước rà soát bảo mật của **Final Review** bắt buộc chạy một đánh giá cục bộ có cấu trúc — phán quyết, bảng phát hiện và mức độ nghiêm trọng — và khi chọn Flow B, mọi pull request đều có thể được kiểm soát bởi cùng một đánh giá trên CI. Kể từ chuẩn 2.3.0, **đánh giá cục bộ là một phần của chuẩn cơ sở**: onboarding cài đặt nó và mọi Final Review chạy nó. Chỉ bề mặt CI là tùy chọn.
+Kết nối quá trình thực thi Deep Work Plan với **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (được liệt kê trên marketplace là **"AI Diff Reviewer"**, phiên bản hiện tại **v2.3.0**) để bước rà soát bảo mật của **Final Review** bắt buộc chạy một đánh giá cục bộ có cấu trúc — phán quyết, bảng phát hiện và mức độ nghiêm trọng — và khi chọn Flow B, mọi pull request đều có thể được kiểm soát bởi cùng một đánh giá trên CI. Kể từ chuẩn 2.3.0, **đánh giá cục bộ là một phần của chuẩn cơ sở**: onboarding cài đặt nó và mọi Final Review chạy nó. Chỉ bề mặt CI là tùy chọn.
 
 Điều giữ sự trung lập với nhà cung cấp là ranh giới quan trọng: reviewer là một skill MIT được ghim theo tag, chạy bởi **chính** agent lập trình của bạn — không luồng Deep Work Plan nào yêu cầu một dịch vụ thương mại, nhà cung cấp CI hay secret. Flow A (chỉ cục bộ) là chuẩn cơ sở mà mọi repository đã onboarding đều nhận được; Flow B (CI Action) được đề xuất rõ ràng và không bao giờ được cài khi chưa được yêu cầu. Một nhà phát triển có thể từ chối đánh giá cục bộ; lời từ chối được ghi lại như một ngoại lệ được khai báo và `verify` báo cáo repository là không tuân thủ ở điểm đó cho đến khi nó được cài đặt.
 
@@ -49,6 +49,25 @@ Action `DailybotHQ/ai-diff-reviewer@v2`, thường bị kiểm soát bởi nhãn
 ### Trợ lý `apply-review` tùy chọn
 
 Sau khi CI đăng đánh giá, nhà phát triển có thể gọi `apply-review` trong `execute` để xem xét từng phát hiện (áp dụng / trì hoãn / bỏ qua) với sự đồng ý. Chỉ đọc theo mặc định; không bao giờ là tệp nhiệm vụ kế hoạch (sẽ phá vỡ thứ tự nhiệm vụ cuối bắt buộc).
+
+## Những thay đổi kể từ v2.0.1
+
+Ba bản phát hành upstream đã ra mắt giữa v2.0.1 và v2.3.0. Không bản nào thay đổi cách addon này kết nối trình đánh giá — Flow A, ba đường phát hiện và hợp đồng chặn vẫn giữ nguyên — nhưng chúng thay đổi những gì người áp dụng nhận được.
+
+| Thay đổi | Ý nghĩa đối với một kho DWP |
+|----------|------------------------------|
+| **Runner và backend là hai tham số riêng biệt** (v2.1.0) | `provider` chỉ định *runner*: ai chạy vòng lặp đánh giá. `api-base` mới chỉ định *backend*: nơi mô hình được đặt. `api-base` để trống thì giống hệt v2.0.x đến từng byte, nên một bản cài sẵn có sẽ hoạt động y như trước. |
+| **Thêm hai runner** (v2.1.0) | `openai` (chạy trong tiến trình, không cần cài đặt) và `grok` (CLI) gia nhập nhóm hiện có. |
+| **Chi phí là một bậc gói gọn trong một từ, và giá trị mặc định được đo đạc** (v2.1.0, v2.3.0) | Chi phí được điều khiển bằng từ khóa bậc và diff đã thu hẹp, đồng thời được báo cáo cho từng lượt đánh giá. Trên xAI, `balanced` và `economy` đều phân giải thành `grok-4.5`, còn `deep` thành `grok-4.6`. |
+| **Các vòng tiếp theo đánh giá đúng phần diff mới** (v2.1.0, v2.2.0) | Các phát hiện còn tồn được chuyển tiếp. `prior-findings-resolution` mặc định là `advisory`: phán quyết "đã giải quyết" của mô hình vẫn được báo cáo, nhưng phát hiện đó tiếp tục chặn cho đến khi một người bảo trì đóng luồng thảo luận. |
+| **Một lượt đánh giá dở dang không bao giờ được tính là đạt** (v2.2.0) | Lần chạy kết thúc mà không ghi ra phát hiện nào sẽ được đăng như một lượt đánh giá dở dang tường minh. Mọi mức độ nghiêm ngặt có tính chặn đều đánh trượt nó, nhãn đã-đánh-giá không được đóng, và không vòng rỗng nào thu hồi một phát hiện đang mở. |
+| **Trình cài đặt được xác minh bằng checksum** (v2.2.0) | `cursor-installer-sha256` và `grok-installer-sha256` từ chối chạy một tạo phẩm của nhà cung cấp nếu mã băm khác với giá trị đã ghim. |
+
+Hai trong số này quan trọng hơn cả đối với phương pháp luận.
+
+**Cổng chặn đánh giá dở dang bịt một lỗ hổng có thật trong bước rà soát bảo mật.** Một Final Review không được phép khép lại dựa trên một lượt đánh giá chưa từng diễn ra. Trước v2.2.0, một runner kết thúc mà không tạo ra phát hiện nào là không thể phân biệt với một lượt rà soát sạch. Giờ đây đó là một trạng thái có tên gọi và không phải màu xanh, nên "không có phát hiện" nghĩa là trình đánh giá đã xem và không thấy gì, chứ không phải nó chưa từng xem.
+
+**`economy` cố ý không rẻ hơn.** Phép đo chuẩn của upstream ngày 2026-09-16 cho thấy `grok-4.3` phát hiện 0 trên 5 lỗi đã biết — nó phê duyệt mà không đánh giá — trong khi `grok-4.5` ngang bằng `grok-4.6` với 3 trên 5 và không có dương tính giả, cùng mức chi phí và chỉ tốn một phần tư thời gian. Vì không có mô hình xAI nào rẻ hơn mà vẫn thực sự đánh giá, `economy` phân giải về cùng mô hình với `balanced` thay vì trở thành một bậc không tìm ra gì. Do đó đường xAI qua CLI tăng từ khoảng \$0,07 lên khoảng \$0,40–0,75 mỗi lượt đánh giá; vẫn có thể ghim `model: grok-4.3` một cách tường minh để giữ hành vi trước đây. Đây là các số đo do upstream công bố, không phải của Deep Work Plan.
 
 ## Hành vi
 

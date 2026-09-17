@@ -135,7 +135,7 @@ erforderlichen lokalen AI-Diff-Reviewer-Überprüfung, validiert den finalen
 Repository-Zustand, gleicht die von den Aufgaben verwendeten Skills ab und zeichnet die
 Nachweise und Einschränkungen auf. Die lokale Review-Skill wird in einer festgelegten
 Version installiert; der aktuell dokumentierte Befehl verwendet
-`DailybotHQ/ai-diff-reviewer@v2.0.1`. Die GitHub Action ist eine separate, optionale
+`DailybotHQ/ai-diff-reviewer@v2.3.0`. Die GitHub Action ist eine separate, optionale
 CI-Oberfläche und für die Kernmethodik nie erforderlich.
 
 Unbeaufsichtigte Ausführung wird nur für einen im Voraus freigegebenen Plan
@@ -179,7 +179,7 @@ Methodik angleichen), statt es zu überschreiben — und bestätigen Sie mit dem
 ## 4. Die erforderliche lokale Überprüfung installieren, dann die Opt-in-Addons anbieten
 
 Installieren Sie nach dem Baseline-Onboarding die **lokale Überprüfung des AI Diff Reviewer** (Phase 7a — seit Standard 2.3.0 erforderlich): die tag-gepinnte vendorte Skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus eine
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.0 --skill ai-diff-reviewer -y`) plus eine
 repo-zugeschnittene `.review/extension.md` via `generate-extension`, unter der Onboarding-Zustimmung. Zählen Sie dann die vier optionalen Addons auf (devcontainer, Dailybot, dependency-upgrade,
 design-system) und bieten Sie jedes als explizites Opt-in an. Ein Repository ist
 mit **null** optionalen Addons vollständig konform — installieren Sie diese niemals automatisch.

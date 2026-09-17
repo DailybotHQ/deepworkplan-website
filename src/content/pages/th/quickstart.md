@@ -139,7 +139,7 @@ promote` เมื่อบันทึกแบบกระชับไม่�
 Reviewer ที่จำเป็น ตรวจสอบสถานะสุดท้ายของ repository ให้ถูกต้อง ตรวจสอบความ
 สอดคล้องของ skill ที่งานต่างๆ ใช้ และบันทึกหลักฐานกับข้อจำกัด skill สำหรับ
 รีวิวเฉพาะที่ถูกติดตั้งที่รุ่นที่ตรึงไว้ คำสั่งที่บันทึกไว้ในปัจจุบันใช้
-`DailybotHQ/ai-diff-reviewer@v2.0.1` GitHub Action เป็นพื้นผิว CI แยกต่างหาก
+`DailybotHQ/ai-diff-reviewer@v2.3.0` GitHub Action เป็นพื้นผิว CI แยกต่างหาก
 ที่เป็นทางเลือก และไม่เคยจำเป็นสำหรับระเบียบวิธีหลัก
 
 การดำเนินการแบบไม่มีผู้ดูแลได้รับการรองรับเฉพาะสำหรับแผนที่ได้รับการอนุมัติ
@@ -183,7 +183,7 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
 
 หลังจากการออนบอร์ดพื้นฐาน ให้ติดตั้ง **การตรวจสอบในเครื่องของ AI Diff Reviewer** (Phase 7a — จำเป็น
 ตั้งแต่มาตรฐาน 2.3.0) ได้แก่ skill ที่ฝังมาพร้อมและตรึงด้วยแท็ก
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) บวกกับ
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.0 --skill ai-diff-reviewer -y`) บวกกับ
 `.review/extension.md` ที่ปรับให้เข้ากับ repo ผ่าน `generate-extension` ภายใต้ความยินยอมของการออนบอร์ด จากนั้น
 ให้แจกแจงส่วนเสริมแบบเลือกได้สี่อย่าง (devcontainer, Dailybot, dependency-upgrade, design-system) และเสนอแต่ละอย่าง
 เป็นการเลือกเข้าร่วมอย่างชัดแจ้ง repository สอดคล้องอย่างสมบูรณ์โดยมีส่วนเสริมแบบเลือกได้ **ศูนย์** อย่าง —

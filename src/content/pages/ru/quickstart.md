@@ -143,7 +143,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 обзор AI Diff Reviewer, проверяет финальное состояние репозитория, сверяет навыки,
 использованные задачами, и фиксирует свидетельства и ограничения. Навык локального обзора
 устанавливается на закреплённом релизе; текущая задокументированная команда использует
-`DailybotHQ/ai-diff-reviewer@v2.0.1`. GitHub Action — это отдельная, опциональная
+`DailybotHQ/ai-diff-reviewer@v2.3.0`. GitHub Action — это отдельная, опциональная
 CI-поверхность, которая никогда не требуется для основной методологии.
 
 Автономное выполнение поддерживается только для плана, одобренного заранее. Оно требует
@@ -187,7 +187,7 @@ CI-поверхность, которая никогда не требуется
 
 После базового онбординга установите **локальный обзор AI Diff Reviewer** (Phase 7a — обязателен
 начиная со стандарта 2.3.0): закреплённый по тегу вендорённый skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) плюс
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.0 --skill ai-diff-reviewer -y`) плюс
 адаптированный под репозиторий `.review/extension.md` через `generate-extension`, в рамках согласия
 онбординга. Затем перечислите четыре опциональных дополнения (devcontainer, Dailybot,
 dependency-upgrade, design-system) и предложите каждое как явное согласие. Репозиторий полностью

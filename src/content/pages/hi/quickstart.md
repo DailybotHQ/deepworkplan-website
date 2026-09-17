@@ -147,7 +147,7 @@ Plan स्किल रिलीज़ द्वारा लागू कि�
 समीक्षा शामिल है, अंतिम रिपॉज़िटरी स्थिति को सत्यापित करता है, टास्क द्वारा
 उपयोग किए गए स्किल का मिलान करता है, और प्रमाण तथा सीमाओं को दर्ज करता है।
 स्थानीय समीक्षा स्किल एक निश्चित रिलीज़ पर स्थापित है; वर्तमान में प्रलेखित
-कमांड `DailybotHQ/ai-diff-reviewer@v2.0.1` का उपयोग करता है। GitHub Action
+कमांड `DailybotHQ/ai-diff-reviewer@v2.3.0` का उपयोग करता है। GitHub Action
 एक अलग, वैकल्पिक CI सतह है, और मूल पद्धति के लिए कभी आवश्यक नहीं है।
 
 अनुपस्थित-निगरानी निष्पादन केवल पहले से अनुमोदित योजना के लिए समर्थित है।
@@ -189,7 +189,7 @@ onboard सब-स्किल (`/deepworkplan-onboard`) आमंत्रि�
 
 आधाररेखा ऑनबोर्डिंग के बाद, **AI Diff Reviewer स्थानीय समीक्षा** स्थापित करें (Phase 7a — संस्करण
 2.3.0 से आवश्यक): tag-pinned vendored स्किल
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) साथ ही
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.0 --skill ai-diff-reviewer -y`) साथ ही
 `generate-extension` के माध्यम से रिपॉज़िटरी के लिए ढाली गई `.review/extension.md`, ऑनबोर्डिंग की
 सहमति के अंतर्गत। फिर चार वैकल्पिक ऐडऑन (devcontainer, Dailybot, dependency-upgrade, design-system)
 गिनाएँ और हर एक को एक स्पष्ट ऑप्ट-इन के रूप में प्रस्तुत करें। एक रिपॉज़िटरी **शून्य** वैकल्पिक ऐडऑन

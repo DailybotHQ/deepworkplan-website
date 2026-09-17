@@ -152,7 +152,7 @@ accumulés, y compris la revue locale requise d'AI Diff Reviewer, valide
 l'état final du dépôt, réconcilie les skills utilisés par les tâches et
 consigne les preuves et les limites. Le skill de revue locale est installé
 à une version fixée ; la commande actuellement documentée utilise
-`DailybotHQ/ai-diff-reviewer@v2.0.1`. La GitHub Action est une surface CI
+`DailybotHQ/ai-diff-reviewer@v2.3.0`. La GitHub Action est une surface CI
 séparée et optionnelle, jamais requise pour la méthodologie de base.
 
 L'exécution non surveillée n'est prise en charge que pour un plan approuvé
@@ -197,7 +197,7 @@ méthodologie) au lieu d’écraser — et confirmez avec l’utilisateur avant 
 
 Après l’onboarding de base, installez la **revue locale d’AI Diff Reviewer** (Phase 7a — requise
 depuis le standard 2.3.0) : la skill vendorisée épinglée par tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.0.1 --skill ai-diff-reviewer -y`) plus un
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.0 --skill ai-diff-reviewer -y`) plus un
 `.review/extension.md` taillé pour le dépôt via `generate-extension`, sous le consentement de
 l’onboarding. Énumérez ensuite les quatre addons facultatifs (devcontainer, Dailybot,
 dependency-upgrade, design-system) et proposez chacun comme un choix explicite. Un dépôt est
