@@ -190,3 +190,51 @@ clinex-azure
 ### Persistence
 
 Sessions, config, and history persist via the `cline_data` named volume mounted at `~/.cline`, with `CLINE_DATA_DIR` pinned to `~/.cline/data`.
+
+## SSH keys from the host
+
+The host's `${HOME}/.ssh` is bind-mounted **read-only** at `~/.ssh_host` inside
+the container (see `docker-compose.yaml`). `ssh(1)` needs a *writable* `~/.ssh` —
+it appends to `known_hosts` and drops control sockets there — so the mount is
+mirrored into `~/.ssh` rather than used directly.
+
+`/usr/local/bin/sync-host-ssh` does the mirroring, and the entrypoint runs it on
+**every** container start. It copies every private key, every public key and the
+`config` from the host, seeds `known_hosts` once (then leaves it container-owned
+and writable), and rebuilds `authorized_keys` from the host public keys so
+`herdr --remote` can SSH back in on `host:22022 → container:22`.
+
+The host is the source of truth and the copy is unconditional: a key added on the
+host shows up on the next start. Keys generated **inside** the container are
+never deleted — only overwritten when the host has a file of the same name.
+
+### `ssh-sync`
+
+The mirror is taken at boot, so a key or a `Host` entry added on the host *while
+the container is already running* is not visible yet. Re-run the mirror without
+restarting:
+
+```bash
+ssh-sync
+```
+
+```
+  ✓ SSH synced from host: 4 private key(s), 4 public key(s), config, known_hosts
+Host SSH material is in sync. Keys available:
+  • id_rsa
+  • id_rsa_xergioalex
+```
+
+### Troubleshooting
+
+| Symptom | Cause |
+|---------|-------|
+| `Permission denied (publickey)` on `git push` | Key added on the host after the container started — run `ssh-sync`. |
+| A `Host` alias from your host config does not resolve | Same: the config is mirrored at boot. Run `ssh-sync`. |
+| `⚠ ~/.ssh_host not mounted` on startup | `${HOME}/.ssh` is missing on the host, or `HOME` was unset when `docker compose up` ran. |
+
+Verify a remote authenticates:
+
+```bash
+ssh -T git@github.com
+```

@@ -172,7 +172,10 @@ USER root
 
 # Copy and setup entrypoint script
 COPY dwpwebsite/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+# Host SSH mirror (~/.ssh_host -> ~/.ssh). Run by the entrypoint on every start
+# and on demand by the `ssh-sync` shell command.
+COPY dwpwebsite/sync-host-ssh.sh /usr/local/bin/sync-host-ssh
+RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/sync-host-ssh
 
 # Set the entrypoint
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
