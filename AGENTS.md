@@ -100,6 +100,48 @@ The `tmp/` directory at the project root is a **git-ignored scratch space** for 
 - When a user asks for a temporary file, prompt output, or scratch artifact, **write it to `tmp/`**
 - Subdirectories are fine (e.g., `tmp/prompts/`, `tmp/analysis/`)
 
+## Plan Output Belongs to the Plan (MANDATORY)
+
+`tmp/` is for **freeform scratch**. Anything produced **about a Deep Work Plan**
+is different: it is evidence a later session reads back by pointer, and it
+belongs in **that plan's own folder**.
+
+**The rule:** a plan's temporary and analysis output MUST be written under
+`.dwp/plans/PLAN_{name}/analysis_results/`. It MUST NOT be written to the
+repository root. This covers everything a flow produces about the plan — the
+requirements analysis, the skills ledger, the security review, gate logs, audit
+reports, scratch measurements — not just the files the standard names. Evidence
+that is not where the plan says it is has been lost.
+
+**What this means in practice.** Three of this repository's audit scripts default
+their report path to the **current working directory**, which silently creates a
+root-level `analysis_results/`:
+
+| Script | npm script | Default output |
+|--------|-----------|----------------|
+| `scripts/check-md-content-parity.mjs` | `md:content-check` | `analysis_results/MD_HTML_CONTENT_PARITY.md` + `…_DATA.csv` |
+| `scripts/audit-seo.mjs` | — | `analysis_results/SEO_AUDIT.md` |
+| `scripts/audit-aeo.mjs` | — | `analysis_results/AEO_AUDIT_SCRIPTED.md` |
+
+When running any of them **as part of a plan**, pass the explicit output flag:
+
+```bash
+pnpm run md:content-check \
+  --out  .dwp/plans/PLAN_{name}/analysis_results/MD_HTML_CONTENT_PARITY.md \
+  --data .dwp/plans/PLAN_{name}/analysis_results/MD_HTML_CONTENT_PARITY_DATA.csv
+
+node scripts/audit-seo.mjs --out .dwp/plans/PLAN_{name}/analysis_results/SEO_AUDIT.md
+```
+
+The defaults are deliberately kept so the scripts stay usable **outside** a plan
+(a maintainer auditing SEO by hand). `/analysis_results` is gitignored, so a
+missed flag can never become a commit — but an ignored file is still a lost
+artifact, so pass the flag. A root-level `analysis_results/` you find in a
+working tree is exactly that mistake, and is safe to delete.
+
+> This mirrors the normative rule in the Deep Work Plan specification
+> (`.agents/skills/deepworkplan/spec/DWP_SPECIFICATION.md` §5).
+
 ## Skills, Commands, and Agents (`.agents/`)
 
 The `.agents/` directory is the **canonical, cross-agent home** for everything that defines how AI assistants behave in this repo: skills, slash commands, agent definitions, internal documentation, and settings. The same content is consumed by Claude Code, Cursor AI, OpenAI Codex, Gemini, and any other coding agent that picks up local skills/commands.

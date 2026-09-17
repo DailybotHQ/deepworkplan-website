@@ -116,6 +116,30 @@ pnpm run md:check:strict   # Same, but exits 1 on missing (for CI)
 - When missing files appear, the report lists them by language (EN / ES)
 - Script lives at `scripts/check-md-parity.mjs`
 
+### Audit scripts: always pass `--out` inside a plan
+
+`md:content-check`, `audit-seo.mjs` and `audit-aeo.mjs` write a report file. Each
+accepts an explicit output path, and each **defaults to the current working
+directory**, which creates a root-level `analysis_results/`.
+
+```bash
+# Default (outside a plan) — writes ./analysis_results/…
+pnpm run md:content-check
+
+# Inside a Deep Work Plan — write into the plan's own folder
+pnpm run md:content-check \
+  --out  .dwp/plans/PLAN_{name}/analysis_results/MD_HTML_CONTENT_PARITY.md \
+  --data .dwp/plans/PLAN_{name}/analysis_results/MD_HTML_CONTENT_PARITY_DATA.csv
+
+node scripts/audit-seo.mjs --out .dwp/plans/PLAN_{name}/analysis_results/SEO_AUDIT.md
+node scripts/audit-aeo.mjs --out .dwp/plans/PLAN_{name}/analysis_results/AEO_AUDIT_SCRIPTED.md
+```
+
+A plan's analysis output belongs in that plan's `analysis_results/` — see
+[AGENTS.md → Plan Output Belongs to the Plan](../AGENTS.md). `/analysis_results`
+is gitignored so a missed flag cannot be committed, but the artifact is still
+lost to the plan, so pass the flag.
+
 ## Package Management
 
 ### Check for Updates

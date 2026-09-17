@@ -1,7 +1,9 @@
-# build output
-dist/
-# generated types
-.astro/
+# build output (no trailing slash: a pattern like `dist/` matches a directory
+# only, so a symlinked build output — used to work around slow or broken
+# filesystems — would not be ignored and can be staged by accident)
+dist
+# generated types (same reason)
+.astro
 
 # dependencies
 node_modules/
@@ -47,6 +49,13 @@ spanish.png
 
 # Deep Work Plan output (working state, not tracked)
 .dwp/
+
+# Plan analysis output belongs in the plan's own folder
+# (.dwp/plans/PLAN_x/analysis_results/), never here. A root-level
+# analysis_results means an audit script fell back to its default --out;
+# ignored so a missed flag can never become a commit. Safe to delete.
+# No trailing slash, for the same reason as `dist` above.
+/analysis_results
 
 # Dailybot per-repo reporting opt-out (local kill-switch; profile.json IS tracked)
 .dailybot/disabled
