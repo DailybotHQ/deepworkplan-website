@@ -143,6 +143,8 @@ recenzji jest instalowany w ustalonej wersji; aktualnie udokumentowane polecenie
 używa `DailybotHQ/ai-diff-reviewer@v2.3.0`. GitHub Action to osobna, opcjonalna
 powierzchnia CI, nigdy niewymagana dla podstawowej metodyki.
 
+Przegląd, który się wykonał i niczego nie zgłosił, to nie to samo co przegląd, który w ogóle nie wytworzył ustaleń. Ten drugi przypadek to **przegląd niekompletny**: zapisuje się go jako taki, nigdy nie liczy się jako dowód, że zestaw zmian jest czysty, i nigdy nie stanowi powodu do zamknięcia Final Review. Razem z brakującym recenzentem i nieudanym wywołaniem daje to trzy odrębne stany — i żaden z nich nie oznacza, że diff został przejrzany i uznany za czysty.
+
 Wykonanie bez nadzoru jest wspierane tylko dla planu zatwierdzonego z wyprzedzeniem.
 Wymaga ono czytelnej maszynowo warstwy stanu, zadeklarowanego standardu DWP,
 ograniczonych uprawnień i jawnych warunków zatrzymania. Jeśli bramka zawiedzie poza
@@ -178,7 +180,7 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
    (skille, agenci, komendy) musi być **przemyślany dla tego repozytorium** — nigdy nie skopiowany-wklejony z kitu innego
    repozytorium.
 6. **`.dwp/` + `tmp/`.** Utwórz szkielet `.dwp/` objętego gitignore z `plans/`, a także przestrzeń roboczą `tmp/`
-   — obie dodane do `.gitignore` w sposób nieniszczący (dopisz, nigdy nie przepisuj).
+   — obie dodane do `.gitignore` w sposób nieniszczący (dopisz, nigdy nie przepisuj). Nie są wymienne: wszystko, co przepływ wytwarza **na temat planu** — analiza, rejestr skills, przegląd bezpieczeństwa, logi bramek, raporty audytu — musi znaleźć się w `.dwp/plans/PLAN_{name}/analysis_results/` tego właśnie planu, nigdy w katalogu głównym repozytorium ani w `tmp/`. `tmp/` jest dla pracy, której żaden plan już nie odczyta.
 
 ## 4. Zainstaluj wymagany przegląd lokalny, potem zaproponuj opcjonalne dodatki
 

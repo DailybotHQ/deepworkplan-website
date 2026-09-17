@@ -153,6 +153,8 @@ release fissata; il comando attualmente documentato usa
 `DailybotHQ/ai-diff-reviewer@v2.3.0`. La GitHub Action è una superficie CI
 separata e opzionale, mai richiesta per la metodologia core.
 
+Una revisione che è stata eseguita e non ha segnalato nulla non è la stessa cosa di una revisione che non ha mai prodotto alcun rilievo. Il secondo caso è una **revisione incompleta**: viene registrata come tale, non conta mai come prova che l'insieme di modifiche sia pulito, e non è mai un motivo per chiudere il Final Review. Insieme a un revisore assente e a un'invocazione fallita, sono tre stati distinti — e nessuno di essi significa che il diff sia stato revisionato e trovato pulito.
+
 L'esecuzione non presidiata è supportata solo per un piano approvato in
 anticipo. Richiede lo strato di stato leggibile da macchina, uno standard
 DWP dichiarato, autorità delimitata e condizioni di stop esplicite. Se un
@@ -189,7 +191,7 @@ metodologia) anziché sovrascriverlo — e conferma con l’utente prima di sost
    (skill, agenti, comandi) deve essere **ragionato per questo repo** — mai un copia-incolla del kit di un altro
    repository.
 6. **`.dwp/` + `tmp/`.** Predisponi una `.dwp/` esclusa da git con `plans/`, più uno spazio di lavoro temporaneo
-   `tmp/` — entrambi aggiunti a `.gitignore` in modo non distruttivo (in coda, mai riscrivendo).
+   `tmp/` — entrambi aggiunti a `.gitignore` in modo non distruttivo (in coda, mai riscrivendo). Non sono intercambiabili: tutto ciò che un flusso produce **a proposito di un piano** — l'analisi, il registro delle skills, la revisione di sicurezza, i log dei gate, i report di audit — deve stare nel `.dwp/plans/PLAN_{name}/analysis_results/` di quel piano, mai nella radice del repository né in `tmp/`. `tmp/` è per lavoro che nessun piano rileggerà.
 
 ## 4. Installa la revisione locale richiesta, poi proponi gli addon opt-in
 

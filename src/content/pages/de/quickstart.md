@@ -138,6 +138,8 @@ Version installiert; der aktuell dokumentierte Befehl verwendet
 `DailybotHQ/ai-diff-reviewer@v2.3.0`. Die GitHub Action ist eine separate, optionale
 CI-Oberfläche und für die Kernmethodik nie erforderlich.
 
+Eine Überprüfung, die lief und nichts meldete, ist nicht dasselbe wie eine, die überhaupt keine Befunde hervorgebracht hat. Der zweite Fall ist eine **unvollständige Überprüfung**: sie wird als solche festgehalten, zählt nie als Beleg dafür, dass der Änderungssatz sauber ist, und ist nie ein Grund, das Final Review zu schließen. Zusammen mit einem fehlenden Reviewer und einem fehlgeschlagenen Aufruf sind das drei verschiedene Zustände — und keiner davon heißt, das Diff sei geprüft und sauber befunden worden.
+
 Unbeaufsichtigte Ausführung wird nur für einen im Voraus freigegebenen Plan
 unterstützt. Sie erfordert die maschinenlesbare Zustandsschicht, einen deklarierten
 DWP-Standard, begrenzte Autorität und explizite Stoppbedingungen. Wenn ein Gate
@@ -174,7 +176,7 @@ Methodik angleichen), statt es zu überschreiben — und bestätigen Sie mit dem
    (Skills, Agenten, Befehle) muss **für dieses Repository durchdacht** sein — niemals eine Kopie des Kits eines anderen
    Repositorys.
 6. **`.dwp/` + `tmp/`.** Legen Sie ein per gitignore ausgeschlossenes `.dwp/` mit `plans/` an, plus einen `tmp/`-
-   Scratch-Bereich — beide nicht-destruktiv zur `.gitignore` hinzugefügt (anhängen, niemals neu schreiben).
+   Scratch-Bereich — beide nicht-destruktiv zur `.gitignore` hinzugefügt (anhängen, niemals neu schreiben). Sie sind nicht austauschbar: alles, was ein Flow **über einen Plan** erzeugt — die Analyse, das Skills-Register, die Sicherheitsüberprüfung, Gate-Logs, Audit-Berichte — gehört in das `.dwp/plans/PLAN_{name}/analysis_results/` genau dieses Plans, nie ins Repository-Root und nie nach `tmp/`. `tmp/` ist für Arbeit, die kein Plan je wieder liest.
 
 ## 4. Die erforderliche lokale Überprüfung installieren, dann die Opt-in-Addons anbieten
 

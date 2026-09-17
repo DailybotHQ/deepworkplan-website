@@ -198,6 +198,14 @@ review skill is installed at a pinned release; the current documented command
 uses `DailybotHQ/ai-diff-reviewer@v2.3.0`. The GitHub Action is a separate,
 optional CI surface and is never required for the core methodology.
 
+A review that ran and reported nothing is not the same as a review that never
+produced findings at all. The second case is an **incomplete review**: it is
+recorded as such, never counted as evidence that the change set is clean, and
+never a reason to close the Final Review. Together with a missing reviewer
+(recorded as a finding) and an invocation that errored (warned once and
+continued), that is three distinct states — and none of them means the diff was
+reviewed and found clean.
+
 Unattended execution is supported only for a plan approved in advance. It
 requires the machine-readable state layer, a declared DWP standard, bounded
 authority, and explicit stop conditions. If a gate fails outside the planned
@@ -235,6 +243,13 @@ methodology) instead of overwriting — and confirm with the user before replaci
    repository's kit.
 6. **`.dwp/` + `tmp/`.** Scaffold a gitignored `.dwp/` with `plans/`, plus a `tmp/`
    scratch space — both added to `.gitignore` non-destructively (append, never rewrite).
+   They are not interchangeable: everything a flow produces **about a plan** — the
+   analysis, the skills ledger, the security review, gate logs, audit reports — MUST
+   live in that plan's own `.dwp/plans/PLAN_{name}/analysis_results/`, never at the
+   repository root and never in `tmp/`. `tmp/` is for work no plan will ever read
+   back. When a repository's own tooling defaults a report path to the working
+   directory, pass its explicit output flag into the plan folder instead of accepting
+   the default.
 
 ## 4. Install the required local review, then offer the opt-in addons
 
