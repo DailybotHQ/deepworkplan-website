@@ -39,17 +39,17 @@ All commands run from the **repository root**. Toolchain: `vitest` 5.x,
 
 | Scope | Command | Evidence of a correct run |
 | :---- | :------ | :------------------------ |
-| Full test suite | `pnpm run test` | `Test Files 16 passed (16)` · `Tests 229 passed (229)` |
+| Full test suite | `pnpm run test` | `Test Files 24 passed (24)` · `Tests 332 passed (332)` |
 | One test file | `pnpm run test tests/unit/lib/i18n.test.ts` | `Test Files 1 passed (1)` · `Tests 49 passed (49)` |
 | One test file (equivalent) | `pnpm exec vitest run tests/unit/lib/i18n.test.ts` | same as above |
 | By test name | `pnpm exec vitest run -t "<name fragment>"` | the selected count, not `229` |
-| Full lint + format | `pnpm run biome:check` | `Checked 246 files` |
+| Full lint + format | `pnpm run biome:check` | `Checked 257 files` |
 | Scoped lint + format | `pnpm exec biome check src/lib/i18n.ts` | `Checked 1 file` |
 
 > **Trap — never pass `--` to the test script.** `pnpm run test -- <path>` does
 > **not** scope: pnpm swallows the separator and vitest receives no filter, so it
 > runs the whole suite while appearing to target one file. It prints
-> `Test Files 16 passed (16)`, not `1 passed (1)`. A gate recorded as scoped that
+> `Test Files 24 passed (24)`, not `1 passed (1)`. A gate recorded as scoped that
 > prints the full count was never scoped. Drop the `--`.
 
 ### Commands that have no scoped form
