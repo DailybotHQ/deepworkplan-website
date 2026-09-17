@@ -10,7 +10,7 @@ order: 5
 
 Ogni Deep Work Plan si chiude allo stesso modo: con un **Final Review** obbligatorio che rilegge l'intero insieme di modifiche accumulate dal piano prima che il lavoro possa dirsi concluso. Il suo passaggio di sicurezza è l'ultimo punto in cui qualcosa può ancora essere intercettato. Senza aiuto, l'unico lettore in quel momento è lo stesso agente che ha scritto il codice.
 
-Questo addon mette un secondo lettore davanti a quel diff. Collega l'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — presente nel marketplace come "AI Diff Reviewer", attualmente **v2.3.0** — al passaggio di sicurezza, dove restituisce qualcosa di strutturato anziché prosa: un verdetto, una tabella dei rilievi e una gravità per ciascuno. Un rilievo `critical` blocca la chiusura finché non viene risolto o esplicitamente accettato. La revisione è un cancello, non un commento.
+Questo addon mette un secondo lettore davanti a quel diff. Collega l'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — presente nel marketplace come "AI Diff Reviewer", attualmente **v2.3.1** — al passaggio di sicurezza, dove restituisce qualcosa di strutturato anziché prosa: un verdetto, una tabella dei rilievi e una gravità per ciascuno. Un rilievo `critical` blocca la chiusura finché non viene risolto o esplicitamente accettato. La revisione è un cancello, non un commento.
 
 Dallo standard 2.3.0 quella revisione locale **fa parte della baseline, non è un extra**. L'onboarding la installa; ogni Final Review la esegue. A restare opzionale è la superficie CI — il Flow B, dove la stessa revisione presidia le pull request tramite la GitHub Action.
 
@@ -52,26 +52,30 @@ Action `DailybotHQ/ai-diff-reviewer@v2`, tipicamente bloccata da etichetta (`rea
 
 ### Compagno `apply-review` opzionale
 
-Dopo che CI pubblica una revisione, lo sviluppatore può invocare `apply-review` durante `execute` per esaminare i risultati uno per uno (applicare / rimandare / saltare) con consenso. Solo lettura per impostazione predefinita; mai un file di task del piano (romperebbe l'ordine obbligatorio dei task finali).
+Dopo che CI pubblica una revisione, lo sviluppatore può invocare `apply-review` durante `execute` per esaminare i risultati uno per uno (applicare / rimandare / saltare) con consenso. Solo lettura per impostazione predefinita; mai un file di task del piano (romperebbe l'ordine obbligatorio dei task finali). Dalla v2.3.1 un corpo di revisione che dice `Recommendation: approve` non è prova che il controllo sia passato — leggi prima il blocco Highest severity / Strictness gate / Check status del marcatore di tracciamento.
 
 ## Cosa è cambiato dalla v2.0.1
 
-Tra la v2.0.1 e la v2.3.0 sono usciti tre rilasci upstream. Nessuno di essi cambia il modo in cui questo addon collega il revisore — il Flow A, i tre percorsi di rilevamento e il contratto di blocco restano invariati — ma cambiano ciò che ottiene chi lo adotta.
+Tra la v2.0.1 e la v2.3.1 sono usciti quattro rilasci upstream. Nessuno di essi cambia il modo in cui questo addon collega il revisore — il Flow A, i tre percorsi di rilevamento e il contratto di blocco restano invariati — ma cambiano ciò che ottiene chi lo adotta.
 
 | Cambiamento | Cosa significa per un repository DWP |
 |-------------|---------------------------------------|
 | **Runner e backend sono input distinti** (v2.1.0) | `provider` indica il *runner*: chi esegue il ciclo di revisione. Il nuovo `api-base` indica il *backend*: dove risiede il modello. Un `api-base` vuoto è identico byte per byte alla v2.0.x, quindi un'installazione esistente si comporta esattamente come prima. |
 | **Due runner in più** (v2.1.0) | `openai` (in-process, senza installazione) e `grok` (CLI) si aggiungono all'insieme esistente. |
 | **Il costo è un livello di una parola e i valori predefiniti sono misurati** (v2.1.0, v2.3.0) | Il costo è governato da una parola chiave di livello e da diff ridotti, e viene riportato per ogni revisione. Su xAI, `balanced` ed `economy` si risolvono entrambi in `grok-4.5`, e `deep` in `grok-4.6`. |
-| **I giri successivi rivedono il diff realmente nuovo** (v2.1.0, v2.2.0) | I rilievi aperti vengono riportati avanti. `prior-findings-resolution` vale `advisory` per impostazione predefinita: il verdetto «risolto» di un modello viene riportato, ma il rilievo continua a bloccare finché un manutentore non chiude la discussione. |
+| **I giri successivi rivedono il diff realmente nuovo** (v2.1.0, v2.2.0, v2.3.1) | I rilievi aperti vengono riportati avanti. `prior-findings-resolution` vale `advisory` per impostazione predefinita: il verdetto «risolto» di un modello viene riportato, ma il rilievo continua a bloccare finché un manutentore non chiude la discussione. Dalla v2.3.1, quando `collapse-previous` ha già ridotto al minimo quella discussione, una correzione corroborata (il rilievo non viene riemesso **e** il file è cambiato da quando è stato sollevato, oppure è stato eliminato) lo ritira così che una PR bloccata possa diventare verde. |
 | **Una revisione incompleta non è mai una revisione verde** (v2.2.0) | Un'esecuzione che termina senza scrivere rilievi viene pubblicata come revisione esplicitamente incompleta. Qualsiasi rigore bloccante la fa fallire, l'etichetta di revisionato non viene apposta e nessun giro vuoto ritira un rilievo aperto. |
 | **Installer verificati tramite checksum** (v2.2.0) | `cursor-installer-sha256` e `grok-installer-sha256` rifiutano di eseguire un artefatto del fornitore il cui hash differisca da quello fissato. |
+| **Il controllo, il corpo della revisione e il commento di tracciamento coincidono** (v2.3.1) | La decisione di esito (pass/fail) è calcolata una sola volta prima della pubblicazione della revisione. Ogni revisione termina con un blocco Check status scritto a runtime. Un `Recommendation: approve` del modello viene riscritto in `request-changes` quando il gate sta fallendo, quindi `apply-review` deve leggere il marcatore di tracciamento, non l'ultima riga del modello. |
+| **Un'àncora inline errata non costa più tutti i commenti** (v2.3.1) | Su un 422 di GitHub l'Action riprova solo con i commenti la cui àncora è all'interno di un hunk del diff, poi solo il riepilogo come ultima risorsa. |
 
 Due di questi contano più degli altri per la metodologia.
 
 **Il gate sulla revisione incompleta chiude un buco reale nel passaggio di sicurezza.** Un Final Review non deve potersi chiudere su una revisione che non è mai avvenuta. Prima della v2.2.0 un runner che terminava senza produrre rilievi era indistinguibile da un passaggio pulito. Ora è uno stato con un nome proprio e non verde, quindi «nessun rilievo» significa che il revisore ha guardato e non ha trovato nulla, non che non ha mai guardato.
 
 **`economy` deliberatamente non è più economico.** Il benchmark upstream del 16/09/2026 ha misurato `grok-4.3` a 0 difetti noti su 5 — approva senza revisionare — mentre `grok-4.5` ha eguagliato `grok-4.6` con 3 su 5 e nessun falso positivo, a parità di costo e con un quarto del tempo. Poiché non esiste un modello xAI più economico che revisioni ancora davvero, `economy` si risolve nello stesso modello di `balanced` anziché essere un livello che non trova nulla. Il percorso xAI passa quindi da circa \$0,07 a circa \$0,40–0,75 per revisione tramite la CLI; `model: grok-4.3` può ancora essere fissato esplicitamente per mantenere il comportamento precedente. Queste cifre sono misurazioni pubblicate dall'upstream, non di Deep Work Plan.
+
+**Una revisione che dice approve non è prova che il controllo sia passato.** Dalla v2.3.1 il runtime scrive il blocco Check status dopo aver calcolato il gate, e riscrive un `Recommendation: approve` del modello quando il gate sta fallendo. Questo è il contratto che `apply-review` — e un Final Review che legge una revisione CI — deve seguire.
 
 ## Comportamento
 

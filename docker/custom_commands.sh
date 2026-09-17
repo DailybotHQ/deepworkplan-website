@@ -1810,6 +1810,25 @@ function set_bash_prompt() {
 PROMPT_COMMAND=set_bash_prompt
 
 # ================================
+# SSH
+# ================================
+
+# Re-mirror the host's SSH keys/config into the container.
+#
+# The entrypoint runs this on every container start. Run it by hand when a key
+# or a `Host` entry is added on the host WHILE the container is already
+# running — without it the container keeps the snapshot taken at boot.
+function ssh-sync() {
+  if [ ! -x /usr/local/bin/sync-host-ssh ]; then
+    print.error "sync-host-ssh not found — rebuild the container image."
+    return 1
+  fi
+  /usr/local/bin/sync-host-ssh "${HOME}" || return 1
+  print.success "Host SSH material is in sync. Keys available:"
+  ls -1 "${HOME}"/.ssh/id_* 2>/dev/null | grep -v '\.pub$' | sed 's|.*/|  • |'
+}
+
+# ================================
 # Useful Git Aliases
 # ================================
 
@@ -1896,6 +1915,9 @@ function show_welcome() {
     echo "      -l, --list      List available sessions"
     echo "      -r, --resume    Resume last session"
     echo "      -r <id>         Resume specific session by ID"
+    echo ""
+    echo "SSH:"
+    echo "  • ssh-sync         - Re-mirror the host's SSH keys/config into the container"
     echo ""
     echo "Git shortcuts:"
     echo "  • gs   - git status"

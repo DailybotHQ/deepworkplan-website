@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
   - label: "Skill release v5.5.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
+  - label: "Skill release v5.5.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
 ---
 
 Today we are releasing Deep Work Plan v5. This is not a rewrite: it is months of real usage — including a direct audit of 108 real plans — surfacing exactly where the methodology's promises and an agent's actual behavior could diverge, gap by gap. The honest summary of this release: the methodology already promised all of this — now it guarantees it. Before v5, an agent that followed the documentation to the letter could still land in real failure scenarios; each one identified through that usage and feedback is now closed and pinned by an executable test, not patched over with more prose. The skill's contract suite grew from 132 to 258 tests in this cycle, and every guarantee below was validated live against the released tag — installed into a clean repository and taken through its own flows before this entry was written.
@@ -52,4 +54,6 @@ The v5 line's first point release closes the one remaining way a plan could fini
 
 **Working principles now ship with the harness.** `v5.5.0`, later the same day, makes onboarding teach a repository's agents how to work, not just what the repository contains: ten compact behaviors — own the outcome, investigate before asking, decide routine matters independently, escalate when judgment or authorization is genuinely missing, and verify before claiming completion, among others — written inline in `AGENTS.md` where an agent that reads only the entry point will find them. They are defaults within a request, never new authority: they cannot override host permissions, a narrower scope, plan gates, or a repository's own approval rules. An upgrade reconciles them by meaning rather than by keyword, so equivalent rules already in a file are kept rather than rewritten.
 
-Read the [specification](https://deepworkplan.com/spec) for the normative text, the [add-on reference](https://deepworkplan.com/kit/ai-diff-reviewer) for what the reviewer now does, or the [v5.4.0 release](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0) for the source.
+**The AI Diff Reviewer pin moves to v2.3.1.** Skill `v5.5.1` installs the reviewer whose check, review body and tracking comment agree. A body that says `Recommendation: approve` is not evidence the check passed — read the tracking marker's Check status block. Under advisory, a corroborated fix can retire a finding whose thread is already collapsed, so a stuck PR can go green after a real fix.
+
+Read the [specification](https://deepworkplan.com/spec) for the normative text, the [add-on reference](https://deepworkplan.com/kit/ai-diff-reviewer) for what the reviewer now does, or the [v5.5.1 release](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) for the source.

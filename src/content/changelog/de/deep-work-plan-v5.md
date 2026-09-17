@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
   - label: "Skill-Release v5.5.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
+  - label: "Skill-Release v5.5.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
 ---
 
 Heute veröffentlichen wir Deep Work Plan v5. Dies ist keine Neufassung: Es sind Monate realer Nutzung — einschließlich einer direkten Auditierung von 108 realen Plänen —, die Lücke für Lücke genau dort offengelegt haben, wo die Versprechen der Methodik und das tatsächliche Verhalten eines Agenten auseinanderfallen konnten. Die ehrliche Zusammenfassung dieses Releases: Die Methodik hat all dies bereits versprochen — jetzt garantiert sie es. Vor v5 konnte ein Agent, der die Dokumentation buchstabengetreu befolgte, dennoch in realen Fehlerszenarien landen; jedes dieser Szenarien, durch diese Nutzung und dieses Feedback identifiziert, ist jetzt geschlossen und durch einen ausführbaren Test abgesichert, statt mit mehr Prosa überdeckt. Die Vertragssuite des Skills wuchs in diesem Zyklus von 132 auf 258 Tests, und jede der folgenden Garantien wurde live gegen das veröffentlichte Tag validiert — in ein sauberes Repository installiert und durch die eigenen Abläufe geführt, bevor dieser Eintrag geschrieben wurde.
@@ -52,4 +54,7 @@ Das erste Point-Release der v5-Linie schließt den letzten Weg, auf dem ein Plan
 
 **Arbeitsprinzipien werden nun mit dem Harness ausgeliefert.** `v5.5.0`, noch am selben Tag, lässt das Onboarding den Agents eines Repositories beibringen, *wie* zu arbeiten ist — nicht nur, was das Repository enthält: zehn kompakte Verhaltensweisen — das Ergebnis verantworten, vor dem Fragen recherchieren, Routineentscheidungen eigenständig treffen, eskalieren wenn Urteilsgrundlage oder Autorisierung wirklich fehlt, und vor der Fertigmeldung verifizieren, unter anderem — inline in `AGENTS.md` geschrieben, wo ein Agent sie findet, der nur den Einstiegspunkt liest. Sie sind Vorgaben innerhalb einer Anfrage, nie neue Autorität: sie können Host-Berechtigungen, einen engeren Umfang, Plan-Gates oder die Freigaberegeln des Repositories nicht übergehen. Ein Upgrade gleicht sie nach Bedeutung statt nach Stichwort ab, sodass bereits vorhandene gleichwertige Regeln erhalten statt umgeschrieben werden.
 
-Lesen Sie die [Spezifikation](https://deepworkplan.com/spec) für den normativen Text, die [Addon-Referenz](https://deepworkplan.com/kit/ai-diff-reviewer) für das, was der Reviewer jetzt leistet, oder das [v5.4.0-Release](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0) für die Quelle.
+**Der AI-Diff-Reviewer-Pin rückt auf v2.3.1.** Skill `v5.5.1` installiert den Reviewer, dessen Check, Review-Text und Tracking-Kommentar übereinstimmen. Ein Text, der `Recommendation: approve` sagt, ist kein Beleg dafür, dass der Check bestanden hat — lesen Sie den Check status-Block des Tracking-Markers. Unter advisory kann eine belegte Korrektur einen Befund zurückziehen, dessen Thread bereits eingeklappt ist, sodass ein feststeckender PR nach einer echten Korrektur grün werden kann.
+
+
+Lesen Sie die [Spezifikation](https://deepworkplan.com/spec) für den normativen Text, die [Addon-Referenz](https://deepworkplan.com/kit/ai-diff-reviewer) für das, was der Reviewer jetzt leistet, oder das [v5.5.1-Release](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) für die Quelle.

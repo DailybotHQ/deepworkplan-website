@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
   - label: "Publication de la skill v5.5.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
+  - label: "Publication de la skill v5.5.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
 ---
 
 Nous publions aujourd'hui Deep Work Plan v5. Ce n'est pas une réécriture : ce sont des mois d'usage réel — dont un audit direct de 108 plans réels — qui ont mis au jour, écart après écart, où les promesses de la méthodologie et le comportement réel d'un agent pouvaient diverger. Le résumé honnête de cette version : la méthodologie promettait déjà tout cela — désormais, elle le garantit. Avant v5, un agent qui suivait la documentation à la lettre pouvait encore aboutir à des scénarios d'échec réels ; chacun d'eux, identifié grâce à cet usage et à ces retours, est désormais fermé et verrouillé par un test exécutable, et non recouvert de davantage de prose. La suite de contrats du skill est passée de 132 à 258 tests durant ce cycle, et chaque garantie ci-dessous a été validée en conditions réelles sur le tag publié — installée dans un dépôt propre et menée à travers ses propres flux avant la rédaction de cette entrée.
@@ -52,4 +54,7 @@ La première version ponctuelle de la lignée v5 referme le dernier chemin par l
 
 **Les principes de travail voyagent désormais avec le harnais.** La `v5.5.0`, le même jour, fait en sorte que l'intégration apprenne aux agents d'un dépôt *comment* travailler, et pas seulement ce que le dépôt contient : dix comportements compacts — assumer le résultat, chercher avant de demander, trancher seul les questions de routine, escalader quand le jugement ou l'autorisation manque réellement, et vérifier avant de se déclarer terminé, entre autres — écrits en ligne dans `AGENTS.md`, là où les trouvera un agent qui ne lit que le point d'entrée. Ce sont des valeurs par défaut dans une demande, jamais une autorité nouvelle : elles ne peuvent primer sur les permissions de l'hôte, un périmètre plus étroit, les barrières d'un plan ou les règles d'approbation du dépôt. Une mise à niveau les réconcilie par le sens plutôt que par mot-clé, si bien que des règles équivalentes déjà présentes sont conservées au lieu d'être réécrites.
 
-Lisez la [spécification](https://deepworkplan.com/spec) pour le texte normatif, la [référence de l'addon](https://deepworkplan.com/kit/ai-diff-reviewer) pour ce que fait désormais le relecteur, ou la [publication v5.4.0](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0) pour la source.
+**L'épinglage d'AI Diff Reviewer passe en v2.3.1.** La skill `v5.5.1` installe le relecteur dont le check, le corps de la revue et le commentaire de suivi s'accordent. Un corps qui dit `Recommendation: approve` n'est pas une preuve que le check a réussi — lisez le bloc Check status du marqueur de suivi. En mode advisory, une correction corroborée peut retirer un constat dont le fil est déjà replié, de sorte qu'une PR bloquée peut passer au vert après une vraie correction.
+
+
+Lisez la [spécification](https://deepworkplan.com/spec) pour le texte normatif, la [référence de l'addon](https://deepworkplan.com/kit/ai-diff-reviewer) pour ce que fait désormais le relecteur, ou la [publication v5.5.1](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) pour la source.

@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
   - label: "Bản phát hành skill v5.5.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
+  - label: "Bản phát hành skill v5.5.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
 ---
 
 Hôm nay chúng tôi phát hành Deep Work Plan v5. Đây không phải là viết lại: đây là kết quả của nhiều tháng sử dụng thực tế — bao gồm một cuộc kiểm toán trực tiếp trên 108 kế hoạch thực — đã phơi bày, từng khoảng hở một, nơi lời hứa của phương pháp luận và hành vi thực của một agent có thể khác nhau. Tóm tắt trung thực của bản phát hành này: phương pháp luận đã từng hứa tất cả những điều này — giờ đây nó đảm bảo chúng. Trước v5, một agent đi theo tài liệu từng chữ vẫn có thể rơi vào các kịch bản thất bại thực; mỗi kịch bản như vậy, được nhận diện nhờ việc sử dụng và phản hồi đó, giờ đã được đóng lại và ghim bằng một kiểm thử có thể thực thi, chứ không phải được vá bằng thêm văn xuôi. Bộ hợp đồng của skill đã tăng từ 132 lên 258 kiểm thử trong chu kỳ này, và mỗi đảm bảo dưới đây đã được xác thực trực tiếp trên tag đã phát hành — cài vào một kho sạch và đưa qua chính các luồng của nó trước khi mục này được viết.
@@ -52,4 +54,7 @@ Bản phát hành điểm đầu tiên của dòng v5 khép lại con đường 
 
 **Các nguyên tắc làm việc nay đi kèm với harness.** `v5.5.0`, ra mắt cùng ngày, khiến quá trình onboarding dạy cho các agent của một kho mã *cách* làm việc, chứ không chỉ kho đó chứa những gì: mười hành vi cô đọng — nhận trách nhiệm về kết quả, tìm hiểu trước khi hỏi, tự quyết những việc thường lệ, báo lên khi thực sự thiếu căn cứ hoặc thẩm quyền, và kiểm chứng trước khi tuyên bố hoàn tất, cùng những điều khác — được viết nội tuyến trong `AGENTS.md`, nơi một agent chỉ đọc điểm vào vẫn tìm thấy. Đây là giá trị mặc định trong phạm vi một yêu cầu, không phải thẩm quyền mới: chúng không thể lấn át quyền của môi trường chủ, một phạm vi hẹp hơn, các cổng kiểm của kế hoạch, hay chính quy tắc phê duyệt của kho mã. Một lần nâng cấp sẽ dung hòa chúng theo ý nghĩa chứ không theo từ khóa, nên những quy tắc tương đương đã có sẵn được giữ lại thay vì viết lại.
 
-Đọc [đặc tả](https://deepworkplan.com/spec) để có văn bản chuẩn tắc, [tài liệu tiện ích](https://deepworkplan.com/kit/ai-diff-reviewer) để biết trình đánh giá nay làm gì, hoặc [bản phát hành v5.4.0](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0) để xem nguồn.
+**Mốc ghim của AI Diff Reviewer lên v2.3.1.** Skill `v5.5.1` cài trình đánh giá mà check, thân bài đánh giá và bình luận theo dõi khớp nhau. Thân bài ghi `Recommendation: approve` không phải bằng chứng check đã đạt — hãy đọc khối Check status của mốc theo dõi. Ở chế độ advisory, một sửa chữa đã được xác nhận có thể thu hồi phát hiện mà luồng thảo luận đã thu gọn, nên PR bị kẹt có thể chuyển xanh sau một sửa chữa thật.
+
+
+Đọc [đặc tả](https://deepworkplan.com/spec) để có văn bản chuẩn tắc, [tài liệu tiện ích](https://deepworkplan.com/kit/ai-diff-reviewer) để biết trình đánh giá nay làm gì, hoặc [bản phát hành v5.5.1](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) để xem nguồn.

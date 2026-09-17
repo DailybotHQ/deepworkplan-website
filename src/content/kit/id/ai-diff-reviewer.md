@@ -10,7 +10,7 @@ order: 5
 
 Setiap Deep Work Plan berakhir dengan cara yang sama: sebuah **Final Review** wajib yang membaca seluruh himpunan perubahan yang dikumpulkan rencana itu sebelum pekerjaan boleh disebut selesai. Pemeriksaan keamanan di dalamnya adalah titik terakhir di mana sesuatu masih bisa tertangkap. Tanpa bantuan, satu-satunya pembaca pada titik itu adalah agent yang sama yang menulis kodenya.
 
-Add-on ini menempatkan pembaca kedua pada diff tersebut. Ia menghubungkan **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — terdaftar di marketplace sebagai "AI Diff Reviewer", saat ini **v2.3.0** — ke pemeriksaan keamanan, tempat ia mengembalikan sesuatu yang terstruktur alih-alih prosa: sebuah putusan, tabel temuan, dan tingkat keparahan untuk setiap temuan. Temuan `critical` memblokir penyelesaian sampai diperbaiki atau diterima secara eksplisit. Tinjauan ini adalah gerbang, bukan komentar.
+Add-on ini menempatkan pembaca kedua pada diff tersebut. Ia menghubungkan **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — terdaftar di marketplace sebagai "AI Diff Reviewer", saat ini **v2.3.1** — ke pemeriksaan keamanan, tempat ia mengembalikan sesuatu yang terstruktur alih-alih prosa: sebuah putusan, tabel temuan, dan tingkat keparahan untuk setiap temuan. Temuan `critical` memblokir penyelesaian sampai diperbaiki atau diterima secara eksplisit. Tinjauan ini adalah gerbang, bukan komentar.
 
 Sejak standar 2.3.0 tinjauan lokal itu **bagian dari baseline, bukan tambahan**. Onboarding memasangnya; setiap Final Review menjalankannya. Yang tetap opsional adalah permukaan CI — Flow B, tempat tinjauan yang sama mengawal pull request melalui GitHub Action.
 
@@ -52,26 +52,30 @@ Action `DailybotHQ/ai-diff-reviewer@v2`, biasanya dibatasi label (`ready`), deng
 
 ### Pendamping `apply-review` Opsional
 
-Setelah CI memposting tinjauan, pengembang dapat memanggil `apply-review` selama `execute` untuk menelusuri temuan satu per satu (terapkan / tunda / lewati) dengan persetujuan. Hanya baca secara default; tidak pernah sebagai file tugas rencana (akan merusak urutan tugas akhir wajib).
+Setelah CI memposting tinjauan, pengembang dapat memanggil `apply-review` selama `execute` untuk menelusuri temuan satu per satu (terapkan / tunda / lewati) dengan persetujuan. Hanya baca secara default; tidak pernah sebagai file tugas rencana (akan merusak urutan tugas akhir wajib). Sejak v2.3.1, isi tinjauan yang menyatakan `Recommendation: approve` bukan bukti bahwa pemeriksaan lulus — baca dulu blok Highest severity / Strictness gate / Check status pada penanda pelacakan.
 
 ## Apa yang berubah sejak v2.0.1
 
-Tiga rilis upstream muncul antara v2.0.1 dan v2.3.0. Tidak satu pun mengubah cara addon ini menghubungkan peninjau — Flow A, ketiga jalur deteksi, dan kontrak pemblokiran tetap sama — tetapi semuanya mengubah apa yang diperoleh penggunanya.
+Empat rilis upstream muncul antara v2.0.1 dan v2.3.1. Tidak satu pun mengubah cara addon ini menghubungkan peninjau — Flow A, ketiga jalur deteksi, dan kontrak pemblokiran tetap sama — tetapi semuanya mengubah apa yang diperoleh penggunanya.
 
 | Perubahan | Artinya bagi repositori DWP |
 |-----------|------------------------------|
 | **Runner dan backend adalah input terpisah** (v2.1.0) | `provider` menyebut *runner*: siapa yang menjalankan loop tinjauan. `api-base` yang baru menyebut *backend*: di mana modelnya berada. `api-base` kosong identik bita demi bita dengan v2.0.x, sehingga pemasangan yang sudah ada berperilaku persis seperti sebelumnya. |
 | **Dua runner tambahan** (v2.1.0) | `openai` (in-process, tanpa pemasangan) dan `grok` (CLI) bergabung dengan pilihan yang ada. |
 | **Biaya adalah tingkatan satu kata, dan nilai bawaannya terukur** (v2.1.0, v2.3.0) | Biaya dikendalikan oleh kata kunci tingkatan dan diff yang dipersempit, serta dilaporkan per tinjauan. Pada xAI, `balanced` dan `economy` sama-sama teruraikan menjadi `grok-4.5`, dan `deep` menjadi `grok-4.6`. |
-| **Putaran lanjutan meninjau diff baru yang sebenarnya** (v2.1.0, v2.2.0) | Temuan yang belum selesai dibawa ke putaran berikutnya. Nilai bawaan `prior-findings-resolution` adalah `advisory`: putusan "selesai" dari model dilaporkan, tetapi temuan itu tetap memblokir sampai seorang pemelihara menutup utasnya. |
+| **Putaran lanjutan meninjau diff baru yang sebenarnya** (v2.1.0, v2.2.0, v2.3.1) | Temuan yang belum selesai dibawa ke putaran berikutnya. Nilai bawaan `prior-findings-resolution` adalah `advisory`: putusan "selesai" dari model dilaporkan, tetapi temuan itu tetap memblokir sampai seorang pemelihara menutup utasnya. Sejak v2.3.1, ketika `collapse-previous` sudah meminimalkan utas itu, perbaikan yang dikuatkan (temuan tidak dikeluarkan ulang **dan** file berubah sejak temuan diangkat, atau file dihapus) menariknya sehingga PR yang macet dapat menjadi hijau. |
 | **Tinjauan yang tidak lengkap tidak pernah dianggap hijau** (v2.2.0) | Eksekusi yang berakhir tanpa menuliskan temuan diterbitkan sebagai tinjauan tidak lengkap secara eksplisit. Setiap tingkat ketat yang memblokir akan menggagalkannya, label sudah-ditinjau tidak dibubuhkan, dan putaran kosong tidak menarik temuan yang masih terbuka. |
 | **Pemasang terverifikasi checksum** (v2.2.0) | `cursor-installer-sha256` dan `grok-installer-sha256` menolak menjalankan artefak vendor yang hash-nya berbeda dari nilai yang dipatok. |
+| **Pemeriksaan, isi tinjauan, dan komentar pelacakan selaras** (v2.3.1) | Keputusan lulus/gagal dihitung sekali sebelum tinjauan diterbitkan. Setiap tinjauan diakhiri dengan blok Check status yang ditulis runtime. `Recommendation: approve` dari model ditulis ulang menjadi `request-changes` ketika gerbang sedang gagal, sehingga `apply-review` harus membaca penanda pelacakan, bukan baris terakhir model. |
+| **Satu jangkar sebaris yang buruk tidak lagi mengorbankan setiap komentar** (v2.3.1) | Pada GitHub 422, Action mencoba ulang hanya dengan komentar yang jangkarnya berada di dalam hunk diff, lalu hanya ringkasan sebagai upaya terakhir. |
 
 Dua di antaranya lebih penting bagi metodologi daripada sisanya.
 
 **Gerbang tinjauan tidak lengkap menutup lubang nyata pada pemeriksaan keamanan.** Sebuah Final Review tidak boleh bisa ditutup atas dasar tinjauan yang tidak pernah terjadi. Sebelum v2.2.0, runner yang berakhir tanpa menghasilkan temuan tidak dapat dibedakan dari pemeriksaan yang bersih. Kini itu adalah status bernama dan bukan hijau, sehingga "tanpa temuan" berarti peninjau sudah melihat dan tidak menemukan apa pun, bukan bahwa ia tidak pernah melihat.
 
 **`economy` sengaja tidak lebih murah.** Tolok ukur upstream pada 2026-09-16 mengukur `grok-4.3` pada 0 dari 5 cacat yang diketahui — ia menyetujui tanpa meninjau — sementara `grok-4.5` menyamai `grok-4.6` dengan 3 dari 5 tanpa positif palsu, pada biaya yang sama dan seperempat waktu. Karena tidak ada model xAI yang lebih murah yang masih benar-benar meninjau, `economy` teruraikan ke model yang sama dengan `balanced`, alih-alih menjadi tingkatan yang tidak menemukan apa pun. Karena itu jalur xAI naik dari sekitar \$0,07 menjadi sekitar \$0,40–0,75 per tinjauan melalui CLI; `model: grok-4.3` masih dapat dipatok secara eksplisit untuk mempertahankan perilaku sebelumnya. Angka-angka ini adalah pengukuran yang diterbitkan upstream, bukan milik Deep Work Plan.
+
+**Tinjauan yang mengatakan approve bukan bukti bahwa pemeriksaan lulus.** Sejak v2.3.1 runtime menulis blok Check status setelah menghitung gerbang, dan menulis ulang `Recommendation: approve` dari model ketika gerbang sedang gagal. Itulah kontrak yang harus diikuti `apply-review` — dan sebuah Final Review yang membaca tinjauan CI.
 
 ## Perilaku
 

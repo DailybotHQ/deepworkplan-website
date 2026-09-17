@@ -16,6 +16,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0"
   - label: "技能发布 v5.5.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
+  - label: "技能发布 v5.5.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
 ---
 
 今天我们发布 Deep Work Plan v5。这不是一次重写：这是数月真实使用的结果——包括对 108 个真实计划的直接审计——一处又一处地揭示出方法论的承诺与智能体实际行为可能出现分歧的地方。对这个版本最诚实的概括：这些能力方法论早已承诺——现在它做出了保证。在 v5 之前，一个逐字照着文档执行的智能体仍可能落入真实的失败场景；如今每一个这样的场景，都是通过这些实际使用和反馈被发现的，已经关闭，并由可执行的测试锁定——而不是靠更多文字掩盖过去。本周期内技能的契约测试套件从 132 个增长到 258 个，且下文的每一项保证都是针对已发布的 tag 在实测中验证的——先安装进一个干净的仓库，再跑完它自己的全部流程，然后才写下这篇条目。
@@ -52,4 +54,7 @@ v5 线的首个补丁版本，堵上了计划可能凭借"从未真正检查过�
 
 **工作原则如今随 harness 一同交付。** 同一天稍晚发布的 `v5.5.0` 让接入不只告诉仓库中的 agent「这个仓库里有什么」，还教它们「该怎么工作」：十项紧凑的行为——对结果负责、开口求助前先查证、独立决定例行事项、在确实缺少判断依据或授权时上报、宣布完成前先行验证等——内联写入 `AGENTS.md`，只读入口文件的 agent 也能读到。它们是单次请求范围内的默认行为，绝非新的授权：不能凌驾于宿主权限、更窄的范围、计划的门控或仓库自身的审批规则之上。升级按语义而非关键字进行调和，因此文件中已有的等效规则会被保留而不是改写。
 
-规范文本见[规范](https://deepworkplan.com/spec)，审查器现在的能力见[附加组件参考](https://deepworkplan.com/kit/ai-diff-reviewer)，源头见 [v5.4.0 发布](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.4.0)。
+**AI Diff Reviewer 的固定版本升至 v2.3.1。** 技能 `v5.5.1` 安装的审查器，其 check、审查正文与跟踪评论保持一致。正文写着 `Recommendation: approve` 并不证明 check 已通过——请阅读跟踪标记中的 Check status 区块。在 advisory 模式下，一项经证实的修复可以撤销其讨论串已折叠的结果，因此卡住的 PR 可以在真正修复后变绿。
+
+
+规范文本见[规范](https://deepworkplan.com/spec)，审查器现在的能力见[附加组件参考](https://deepworkplan.com/kit/ai-diff-reviewer)，源头见 [v5.5.1 发布](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1)。
