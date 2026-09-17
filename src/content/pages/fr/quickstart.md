@@ -157,7 +157,7 @@ consigne les preuves et les limites. Le skill de revue locale est installé
 `DailybotHQ/ai-diff-reviewer@v2.3.1`. La GitHub Action est une surface CI
 séparée et optionnelle, jamais requise pour la méthodologie de base.
 
-Une revue qui s'est exécutée sans rien signaler n'est pas la même chose qu'une revue qui n'a jamais produit le moindre constat. Le second cas est une **revue incomplète** : elle est consignée comme telle, ne compte jamais comme preuve que l'ensemble des modifications est propre, et ne justifie jamais la clôture du Final Review. Avec un relecteur absent et une invocation en échec, cela fait trois états distincts — et aucun ne signifie que le diff a été relu et jugé propre.
+Une revue qui s'est exécutée sans rien signaler n'est pas la même chose qu'une revue qui n'a jamais produit le moindre constat. Le second cas est une **revue incomplète** : elle est consignée comme telle, ne compte jamais comme preuve que l'ensemble des modifications est propre, et ne justifie jamais la clôture du Final Review. Avec un relecteur absent et une invocation en échec, cela fait trois états distincts — et aucun ne signifie que le diff a été relu et jugé propre. Depuis le relecteur v2.3.1, un corps qui dit `Recommendation: approve` n’est pas non plus une preuve que le contrôle a réussi. Lisez d’abord le bloc Highest severity / Strictness gate / Check status du marqueur de suivi — le runtime réécrit un `approve` du modèle lorsque la barrière échoue.
 
 L'exécution non surveillée n'est prise en charge que pour un plan approuvé
 à l'avance. Elle nécessite la couche d'état lisible par machine, une norme

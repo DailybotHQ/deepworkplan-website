@@ -158,7 +158,7 @@ saat ini didokumentasikan menggunakan `DailybotHQ/ai-diff-reviewer@v2.3.1`. GitH
 Action adalah permukaan CI terpisah yang opsional, dan tidak pernah wajib untuk
 metodologi inti.
 
-Tinjauan yang berjalan dan tidak melaporkan apa pun tidak sama dengan tinjauan yang sama sekali tidak menghasilkan temuan. Kasus kedua adalah **tinjauan yang tidak lengkap**: ia dicatat sebagaimana adanya, tidak pernah dihitung sebagai bukti bahwa himpunan perubahan itu bersih, dan tidak pernah menjadi alasan untuk menutup Final Review. Bersama peninjau yang hilang dan pemanggilan yang gagal, itu tiga keadaan berbeda — dan tak satu pun berarti diff telah ditinjau dan ternyata bersih.
+Tinjauan yang berjalan dan tidak melaporkan apa pun tidak sama dengan tinjauan yang sama sekali tidak menghasilkan temuan. Kasus kedua adalah **tinjauan yang tidak lengkap**: ia dicatat sebagaimana adanya, tidak pernah dihitung sebagai bukti bahwa himpunan perubahan itu bersih, dan tidak pernah menjadi alasan untuk menutup Final Review. Bersama peninjau yang hilang dan pemanggilan yang gagal, itu tiga keadaan berbeda — dan tak satu pun berarti diff telah ditinjau dan ternyata bersih. Sejak peninjau v2.3.1, isi yang menyatakan `Recommendation: approve` juga bukan bukti bahwa pemeriksaan lulus. Baca dulu blok Highest severity / Strictness gate / Check status pada penanda pelacakan — runtime menulis ulang `approve` dari model ketika gerbang sedang gagal.
 
 Eksekusi tanpa pengawasan hanya didukung untuk rencana yang telah disetujui
 sebelumnya. Ini memerlukan lapisan status yang bisa dibaca mesin, standar DWP yang

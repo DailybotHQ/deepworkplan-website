@@ -145,7 +145,7 @@ recenzji jest instalowany w ustalonej wersji; aktualnie udokumentowane polecenie
 używa `DailybotHQ/ai-diff-reviewer@v2.3.1`. GitHub Action to osobna, opcjonalna
 powierzchnia CI, nigdy niewymagana dla podstawowej metodyki.
 
-Przegląd, który się wykonał i niczego nie zgłosił, to nie to samo co przegląd, który w ogóle nie wytworzył ustaleń. Ten drugi przypadek to **przegląd niekompletny**: zapisuje się go jako taki, nigdy nie liczy się jako dowód, że zestaw zmian jest czysty, i nigdy nie stanowi powodu do zamknięcia Final Review. Razem z brakującym recenzentem i nieudanym wywołaniem daje to trzy odrębne stany — i żaden z nich nie oznacza, że diff został przejrzany i uznany za czysty.
+Przegląd, który się wykonał i niczego nie zgłosił, to nie to samo co przegląd, który w ogóle nie wytworzył ustaleń. Ten drugi przypadek to **przegląd niekompletny**: zapisuje się go jako taki, nigdy nie liczy się jako dowód, że zestaw zmian jest czysty, i nigdy nie stanowi powodu do zamknięcia Final Review. Razem z brakującym recenzentem i nieudanym wywołaniem daje to trzy odrębne stany — i żaden z nich nie oznacza, że diff został przejrzany i uznany za czysty. Od recenzenta v2.3.1 treść mówiąca `Recommendation: approve` też nie jest dowodem, że check przeszedł. Najpierw przeczytaj blok Highest severity / Strictness gate / Check status w znaczniku śledzenia — środowisko przepisuje modelowe `approve`, gdy bramka nie przechodzi.
 
 Wykonanie bez nadzoru jest wspierane tylko dla planu zatwierdzonego z wyprzedzeniem.
 Wymaga ono czytelnej maszynowo warstwy stanu, zadeklarowanego standardu DWP,

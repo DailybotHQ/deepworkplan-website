@@ -158,7 +158,7 @@ giới hạn. Skill đánh giá cục bộ được cài đặt ở một phiên
 Action là một bề mặt CI riêng biệt, tùy chọn, và không bao giờ là bắt buộc đối
 với phương pháp luận cốt lõi.
 
-Một lượt đánh giá đã chạy và không báo gì không giống với một lượt đánh giá chưa từng tạo ra phát hiện nào. Trường hợp thứ hai là một **lượt đánh giá dở dang**: nó được ghi nhận đúng như vậy, không bao giờ được tính là bằng chứng rằng tập thay đổi đã sạch, và không bao giờ là lý do để khép lại Final Review. Cùng với trình đánh giá vắng mặt và lời gọi bị lỗi, đó là ba trạng thái khác nhau — và không trạng thái nào nghĩa là bản diff đã được đánh giá và sạch.
+Một lượt đánh giá đã chạy và không báo gì không giống với một lượt đánh giá chưa từng tạo ra phát hiện nào. Trường hợp thứ hai là một **lượt đánh giá dở dang**: nó được ghi nhận đúng như vậy, không bao giờ được tính là bằng chứng rằng tập thay đổi đã sạch, và không bao giờ là lý do để khép lại Final Review. Cùng với trình đánh giá vắng mặt và lời gọi bị lỗi, đó là ba trạng thái khác nhau — và không trạng thái nào nghĩa là bản diff đã được đánh giá và sạch. Từ trình đánh giá v2.3.1, nội dung nói `Recommendation: approve` cũng không phải bằng chứng check đã đạt. Hãy đọc trước khối Highest severity / Strictness gate / Check status trên dấu theo dõi — runtime viết lại `approve` của mô hình khi cổng đang thất bại.
 
 Thực thi không giám sát chỉ được hỗ trợ cho một kế hoạch đã được phê duyệt
 trước. Nó đòi hỏi lớp trạng thái mà máy có thể đọc được, một tiêu chuẩn DWP đã

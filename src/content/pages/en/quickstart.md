@@ -157,7 +157,7 @@ review skill is installed at a pinned release; the current documented command
 uses `DailybotHQ/ai-diff-reviewer@v2.3.1`. The GitHub Action is a separate,
 optional CI surface and is never required for the core methodology.
 
-A review that ran and reported nothing is not the same as a review that never produced findings at all. The second case is an **incomplete review**: it is recorded as such, never counted as evidence that the change set is clean, and never a reason to close the Final Review. Together with a missing reviewer and an invocation that errored, that is three distinct states — and none of them means the diff was reviewed and found clean.
+A review that ran and reported nothing is not the same as a review that never produced findings at all. The second case is an **incomplete review**: it is recorded as such, never counted as evidence that the change set is clean, and never a reason to close the Final Review. Together with a missing reviewer and an invocation that errored, that is three distinct states — and none of them means the diff was reviewed and found clean. Since reviewer v2.3.1 a body that says `Recommendation: approve` is not evidence the check passed either. Read the tracking marker's Highest severity / Strictness gate / Check status block first — the runtime rewrites a model `approve` whenever the gate is failing.
 
 Unattended execution is supported only for a plan approved in advance. It
 requires the machine-readable state layer, a declared DWP standard, bounded

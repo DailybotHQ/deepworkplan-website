@@ -155,7 +155,7 @@ versión fijada; el comando documentado actual usa
 `DailybotHQ/ai-diff-reviewer@v2.3.1`. La GitHub Action es una superficie de
 CI separada y opcional, y nunca es obligatoria para la metodología central.
 
-Una revisión que se ejecutó y no reportó nada no es lo mismo que una revisión que nunca llegó a producir hallazgos. El segundo caso es una **revisión incompleta**: se registra como tal, nunca cuenta como prueba de que el conjunto de cambios está limpio, y nunca es motivo para cerrar el Final Review. Junto con un revisor ausente y una invocación que falló, son tres estados distintos — y ninguno significa que el diff se revisó y salió limpio.
+Una revisión que se ejecutó y no reportó nada no es lo mismo que una revisión que nunca llegó a producir hallazgos. El segundo caso es una **revisión incompleta**: se registra como tal, nunca cuenta como prueba de que el conjunto de cambios está limpio, y nunca es motivo para cerrar el Final Review. Junto con un revisor ausente y una invocación que falló, son tres estados distintos — y ninguno significa que el diff se revisó y salió limpio. Desde el revisor v2.3.1 un cuerpo que dice `Recommendation: approve` tampoco es prueba de que la comprobación haya pasado. Lee primero el bloque Highest severity / Strictness gate / Check status del marcador de seguimiento — el runtime reescribe un `approve` del modelo cuando la compuerta está fallando.
 
 La ejecución desatendida solo se admite para un plan aprobado de antemano.
 Requiere la capa de estado legible por máquina, un estándar DWP declarado,

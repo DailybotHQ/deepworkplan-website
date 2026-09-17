@@ -153,7 +153,7 @@ Yerel inceleme skill'i sabitlenmiş bir sürümde kurulur; şu anda belgelenen k
 `DailybotHQ/ai-diff-reviewer@v2.3.1`'i kullanır. GitHub Action, ayrı ve isteğe bağlı
 bir CI yüzeyidir ve temel metodoloji için asla zorunlu değildir.
 
-Çalışıp hiçbir şey bildirmeyen bir inceleme ile hiç bulgu üretemeyen bir inceleme aynı şey değildir. İkincisi **tamamlanmamış bir incelemedir**: öyle kaydedilir, değişiklik kümesinin temiz olduğunun kanıtı olarak asla sayılmaz ve Final Review'i kapatmak için asla gerekçe olmaz. Eksik bir inceleyici ve hata veren bir çağrıyla birlikte bunlar üç ayrı durumdur — ve hiçbiri diff'in incelenip temiz bulunduğu anlamına gelmez.
+Çalışıp hiçbir şey bildirmeyen bir inceleme ile hiç bulgu üretemeyen bir inceleme aynı şey değildir. İkincisi **tamamlanmamış bir incelemedir**: öyle kaydedilir, değişiklik kümesinin temiz olduğunun kanıtı olarak asla sayılmaz ve Final Review'i kapatmak için asla gerekçe olmaz. Eksik bir inceleyici ve hata veren bir çağrıyla birlikte bunlar üç ayrı durumdur — ve hiçbiri diff'in incelenip temiz bulunduğu anlamına gelmez. İnceleyici v2.3.1’den beri `Recommendation: approve` diyen bir gövde de check’in geçtiğinin kanıtı değildir. Önce izleme işaretinin Highest severity / Strictness gate / Check status bloğunu okuyun — kapı başarısızken çalışma zamanı modelin `approve` satırını yeniden yazar.
 
 Gözetimsiz yürütme yalnızca önceden onaylanmış bir plan için desteklenir. Makine
 tarafından okunabilir durum katmanını, beyan edilmiş bir DWP standardını, sınırlı

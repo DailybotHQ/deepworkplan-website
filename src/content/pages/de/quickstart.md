@@ -140,7 +140,7 @@ Version installiert; der aktuell dokumentierte Befehl verwendet
 `DailybotHQ/ai-diff-reviewer@v2.3.1`. Die GitHub Action ist eine separate, optionale
 CI-Oberfläche und für die Kernmethodik nie erforderlich.
 
-Eine Überprüfung, die lief und nichts meldete, ist nicht dasselbe wie eine, die überhaupt keine Befunde hervorgebracht hat. Der zweite Fall ist eine **unvollständige Überprüfung**: sie wird als solche festgehalten, zählt nie als Beleg dafür, dass der Änderungssatz sauber ist, und ist nie ein Grund, das Final Review zu schließen. Zusammen mit einem fehlenden Reviewer und einem fehlgeschlagenen Aufruf sind das drei verschiedene Zustände — und keiner davon heißt, das Diff sei geprüft und sauber befunden worden.
+Eine Überprüfung, die lief und nichts meldete, ist nicht dasselbe wie eine, die überhaupt keine Befunde hervorgebracht hat. Der zweite Fall ist eine **unvollständige Überprüfung**: sie wird als solche festgehalten, zählt nie als Beleg dafür, dass der Änderungssatz sauber ist, und ist nie ein Grund, das Final Review zu schließen. Zusammen mit einem fehlenden Reviewer und einem fehlgeschlagenen Aufruf sind das drei verschiedene Zustände — und keiner davon heißt, das Diff sei geprüft und sauber befunden worden. Seit Reviewer v2.3.1 ist ein Text, der `Recommendation: approve` sagt, ebenfalls kein Beleg dafür, dass der Check bestanden hat. Lesen Sie zuerst den Block Highest severity / Strictness gate / Check status des Tracking-Markers — die Runtime schreibt ein Modell-`approve` um, wenn das Gate fehlschlägt.
 
 Unbeaufsichtigte Ausführung wird nur für einen im Voraus freigegebenen Plan
 unterstützt. Sie erfordert die maschinenlesbare Zustandsschicht, einen deklarierten

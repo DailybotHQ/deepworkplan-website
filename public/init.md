@@ -204,7 +204,10 @@ recorded as such, never counted as evidence that the change set is clean, and
 never a reason to close the Final Review. Together with a missing reviewer
 (recorded as a finding) and an invocation that errored (warned once and
 continued), that is three distinct states — and none of them means the diff was
-reviewed and found clean.
+reviewed and found clean. Since reviewer v2.3.1 a body that says
+`Recommendation: approve` is not evidence the check passed either. Read the
+tracking marker's Highest severity / Strictness gate / Check status block
+first — the runtime rewrites a model `approve` whenever the gate is failing.
 
 Unattended execution is supported only for a plan approved in advance. It
 requires the machine-readable state layer, a declared DWP standard, bounded

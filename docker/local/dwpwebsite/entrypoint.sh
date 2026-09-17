@@ -563,6 +563,15 @@ setup_git() {
     fi
 }
 
+# Recreate overlay targets for bind-mounted cache dirs. /app/.astro and
+# /app/dist are symlinks to /tmp/ov/* so they stay off the virtiofs mount;
+# /tmp is empty on each boot, so mkdir the parents or `astro dev` fails with
+# ENOENT on mkdir('/app/.astro').
+ensure_astro_overlay_dirs() {
+    mkdir -p /tmp/ov/astro /tmp/ov/dist
+    chown node:node /tmp/ov /tmp/ov/astro /tmp/ov/dist 2>/dev/null || true
+}
+
 # Main setup function
 main() {
     echo "Starting container setup..."
@@ -571,6 +580,7 @@ main() {
     setup_nodejs
     setup_git
     ensure_grok_installed
+    ensure_astro_overlay_dirs
 
     echo "Container setup completed"
 
