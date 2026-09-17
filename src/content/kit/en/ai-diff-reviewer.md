@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Required local review in every DWP Final Review since standard 2.3.0, installed by onboarding; the Flow B CI gate (v2), shared extension, and apply-review companion stay optional."
+description: "Required local review in every DWP Final Review since standard 2.3.0, installed by onboarding; the Flow B CI gate and apply-review companion stay optional."
 kind: addon
 lang: en
 order: 5
@@ -8,7 +8,7 @@ order: 5
 
 # AI Diff Reviewer addon
 
-Connect Deep Work Plan execution to the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace listing **"AI Diff Reviewer"**, current **v2.0.1**) so the security pass of the mandatory **Final Review** runs a structured local review — verdict, findings table, and severity — and, when you choose Flow B, every pull request can be gated by the same review in CI. Since standard 2.3.0 the **local review is part of the baseline**: onboarding installs it and every Final Review runs it. Only the CI surface is opt-in.
+Connect Deep Work Plan execution to the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace listing **"AI Diff Reviewer"**, current **v2.3.0**) so the security pass of the mandatory **Final Review** runs a structured local review — verdict, findings table, and severity — and, when you choose Flow B, every pull request can be gated by the same review in CI. Since standard 2.3.0 the **local review is part of the baseline**: onboarding installs it and every Final Review runs it. Only the CI surface is opt-in.
 
 What stays vendor-neutral is the boundary that matters: the reviewer is an MIT, tag-pinned skill run by your **own** coding agent — no Deep Work Plan flow requires a commercial service, CI provider, or secret. Flow A (local-only) is the baseline every onboarded repository gets; Flow B (the CI Action) is offered explicitly and never installed unrequested. A developer may decline the local reviewer; the decline is recorded as a declared exception and `verify` reports the repository as non-conformant on that point until it is installed.
 
@@ -49,6 +49,25 @@ Action `DailybotHQ/ai-diff-reviewer@v2`, typically label-gated (`ready`), with a
 ### Optional `apply-review` companion
 
 After CI posts a review, the developer may invoke `apply-review` during `execute` to walk findings per-finding (apply / defer / skip) with consent. Read-only by default; never a plan task file (would break mandatory final-task order).
+
+## What changed since v2.0.1
+
+Three upstream releases landed between v2.0.1 and v2.3.0. None of them changes how this addon wires the reviewer — Flow A, the three detection paths and the blocking contract are unchanged — but they change what an adopter gets.
+
+| Change | What it means for a DWP repository |
+|--------|------------------------------------|
+| **Runner and backend are separate inputs** (v2.1.0) | `provider` names the *runner* — who owns the review loop. The new `api-base` names the *backend* — where the model lives. An empty `api-base` is byte-identical to v2.0.x, so an existing install behaves exactly as before. |
+| **Two more runners** (v2.1.0) | `openai` (in-process, zero install) and `grok` (CLI) join the existing set. |
+| **Cost is a one-word tier, and the defaults are measured** (v2.1.0, v2.3.0) | Cost is controlled by a tier keyword and shaped diffs, and reported per review. On xAI, `balanced` and `economy` both resolve to `grok-4.5` and `deep` to `grok-4.6`. |
+| **Follow-up rounds review the actual new diff** (v2.1.0, v2.2.0) | Outstanding findings carry forward. `prior-findings-resolution` defaults to `advisory`: a model's "resolved" verdict is reported, but the finding keeps gating until a maintainer resolves the thread. |
+| **An incomplete review is never a green review** (v2.2.0) | A run that exits without writing findings is posted as an explicit incomplete review. Every blocking strictness fails it, the reviewed label is not stamped, and no open finding is retired by an empty round. |
+| **Checksum-verified installers** (v2.2.0) | `cursor-installer-sha256` and `grok-installer-sha256` refuse to run a vendor artefact whose hash differs from the configured pin. |
+
+Two of these matter more than the rest for the methodology.
+
+**The incomplete-review gate closes a real hole in the security pass.** A Final Review must not be able to close on a review that did not happen. Before v2.2.0 a runner that exited without producing findings was indistinguishable from a clean pass. It is now a named, non-green state, so "no findings" means the reviewer looked and found nothing rather than that it never looked.
+
+**`economy` is deliberately not cheaper.** The upstream benchmark of 2026-09-16 measured `grok-4.3` at 0 of 5 known defects — it approves without reviewing — while `grok-4.5` matched `grok-4.6` at 3 of 5 with no false positives, at the same cost and a quarter of the wall time. Since no cheaper xAI model still reviews, `economy` resolves to the same model as `balanced` rather than being a tier that finds nothing. The xAI path therefore moves from roughly $0.07 to roughly $0.40–0.75 per review through the CLI; `model: grok-4.3` can still be pinned explicitly to keep the earlier behaviour. These figures are upstream's published measurements, not Deep Work Plan's own.
 
 ## Behavior
 
