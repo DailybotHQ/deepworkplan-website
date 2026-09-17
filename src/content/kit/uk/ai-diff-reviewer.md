@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Обовʼязковий локальний огляд у кожному Final Review DWP починаючи зі стандарту 2.3.0, що встановлюється онбордингом; CI-шлюз Flow B (v2), спільне extension і супутник apply-review лишаються опційними."
+description: "Обовʼязковий локальний огляд у кожному Final Review DWP зі стандарту 2.3.0, встановлюється онбордингом; CI-шлюз Flow B і apply-review лишаються опційними."
 kind: addon
 lang: uk
 order: 5

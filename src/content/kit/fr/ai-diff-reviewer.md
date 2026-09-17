@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Revue locale requise dans chaque Final Review du DWP depuis le standard 2.3.0, installée par l'intégration ; la porte CI du Flow B (v2), l'extension partagée et apply-review restent optionnels."
+description: "Revue locale requise dans chaque Final Review du DWP depuis le standard 2.3.0, installée par l'intégration ; la porte CI Flow B et apply-review sont optionnels."
 kind: addon
 lang: fr
 order: 5

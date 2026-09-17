@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Đánh giá cục bộ bắt buộc trong mọi Final Review của DWP kể từ chuẩn 2.3.0, do onboarding cài đặt; cổng CI Flow B (v2), extension dùng chung và trợ lý apply-review vẫn tùy chọn."
+description: "Đánh giá cục bộ bắt buộc trong mọi Final Review của DWP kể từ chuẩn 2.3.0, do onboarding cài đặt; cổng CI Flow B và trợ lý apply-review vẫn tùy chọn."
 kind: addon
 lang: vi
 order: 5

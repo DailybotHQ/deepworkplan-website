@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "標準 2.3.0 以降、すべての DWP Final Review で必須となりオンボーディングでインストールされるローカルレビュー。Flow B CI ゲート（v2）、共有拡張ファイル、apply-review コンパニオンはオプションのままです。"
+description: "標準 2.3.0 以降の DWP Final Review で必須のローカルレビュー。オンボーディングが導入し、Flow B CI ゲートと apply-review は任意。"
 kind: addon
 lang: ja
 order: 5

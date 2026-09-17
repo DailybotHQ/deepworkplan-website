@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Wymagany lokalny przegląd w każdym Final Review DWP od standardu 2.3.0, instalowany przy onboardingu; bramka CI Flow B (v2), wspólne extension i apply-review pozostają opcjonalne."
+description: "Wymagany lokalny przegląd w każdym Final Review DWP od standardu 2.3.0, instalowany przy onboardingu; bramka CI Flow B i apply-review pozostają opcjonalne."
 kind: addon
 lang: pl
 order: 5

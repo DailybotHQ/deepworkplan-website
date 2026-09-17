@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "2.3.0 standardından itibaren her DWP Final Review'inde gerekli, kuruluma alma tarafından kurulan yerel inceleme; Flow B CI kapısı (v2), ortak extension ve apply-review yardımcısı isteğe bağlı kalır."
+description: "2.3.0 standardından itibaren her DWP Final Review'inde gerekli, kurulumda yüklenen yerel inceleme; Flow B CI kapısı ve apply-review isteğe bağlı kalır."
 kind: addon
 lang: tr
 order: 5

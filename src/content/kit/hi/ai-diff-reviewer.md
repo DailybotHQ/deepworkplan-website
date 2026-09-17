@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "संस्करण 2.3.0 से हर DWP Final Review में आवश्यक स्थानीय समीक्षा, ऑनबोर्डिंग द्वारा इंस्टॉल; Flow B CI गेट (v2), साझा extension और apply-review साथी वैकल्पिक बने रहते हैं।"
+description: "संस्करण 2.3.0 से हर DWP Final Review में आवश्यक स्थानीय समीक्षा, ऑनबोर्डिंग द्वारा इंस्टॉल; Flow B CI गेट और apply-review साथी वैकल्पिक बने रहते हैं।"
 kind: addon
 lang: hi
 order: 5

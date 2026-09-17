@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "표준 2.3.0부터 모든 DWP Final Review에 포함되는 필수 로컬 리뷰(온보딩이 설치), Flow B CI 게이트(v2), 공유 extension 파일, apply-review 컴패니언은 선택적으로 유지됩니다."
+description: "표준 2.3.0부터 모든 DWP Final Review에 필수인 로컬 리뷰(온보딩이 설치). Flow B CI 게이트와 apply-review는 선택."
 kind: addon
 lang: ko
 order: 5

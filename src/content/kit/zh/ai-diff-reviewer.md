@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "自标准 2.3.0 起每份 DWP Final Review 中必备、由接入安装的本地审查；Flow B CI 门控（v2）、共享扩展文件与 apply-review 伴随工具保持可选。"
+description: "自标准 2.3.0 起每份 DWP Final Review 中必备、由接入安装的本地审查；Flow B CI 门控与 apply-review 保持可选。"
 kind: addon
 lang: zh
 order: 5

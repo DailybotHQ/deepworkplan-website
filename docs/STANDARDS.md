@@ -508,7 +508,7 @@ Testing is not yet configured. When implemented:
 
 ## Meta Description Length (MANDATORY)
 
-All page meta descriptions MUST be 130-160 characters (both EN and ES independently). See [SEO Guide](SEO.md#meta-description-standards-mandatory) for full rules, locations, and writing guidelines.
+All page meta descriptions MUST be 130-160 characters in every active Latin- or Cyrillic-script language, and 60-90 characters for CJK (`zh`, `ja`, `ko`), whose characters render about twice as wide. See [SEO Guide](SEO.md#meta-description-standards-mandatory) for full rules, locations, and writing guidelines.
 
 ## Documentation Standards
 
@@ -533,6 +533,6 @@ Before committing, verify:
 - [ ] `pnpm run biome:check` passes
 - [ ] `pnpm run astro:check` passes
 - [ ] Dark mode is supported in new UI
-- [ ] Meta descriptions are 130-160 characters (pages in translations)
+- [ ] Meta descriptions are 130-160 characters, or 60-90 for CJK (pages in translations)
 - [ ] Documentation is updated if needed
 - [ ] Commit message follows conventional format

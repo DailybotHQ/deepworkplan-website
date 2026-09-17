@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Erforderliche lokale Überprüfung in jedem DWP-Final-Review seit Standard 2.3.0, vom Onboarding installiert; das Flow-B-CI-Gate (v2), die gemeinsame Extension und der apply-review-Begleiter bleiben optional."
+description: "Erforderliche lokale Überprüfung in jedem DWP-Final-Review seit Standard 2.3.0, vom Onboarding installiert; Flow-B-CI-Gate und apply-review bleiben optional."
 kind: addon
 lang: de
 order: 5

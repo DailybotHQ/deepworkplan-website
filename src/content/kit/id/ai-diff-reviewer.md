@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Tinjauan lokal wajib di setiap Final Review DWP sejak standar 2.3.0, dipasang oleh onboarding; gerbang CI Flow B (v2), extension bersama, dan apply-review tetap opsional."
+description: "Tinjauan lokal wajib di setiap Final Review DWP sejak standar 2.3.0, dipasang oleh onboarding; gerbang CI Flow B dan pendamping apply-review tetap opsional."
 kind: addon
 lang: id
 order: 5

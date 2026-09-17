@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Revisione locale richiesta in ogni Final Review DWP dallo standard 2.3.0, installata dall'onboarding; il gate CI Flow B (v2), l'estensione condivisa e il compagno apply-review restano opzionali."
+description: "Revisione locale richiesta in ogni Final Review DWP dallo standard 2.3.0, installata dall'onboarding; il gate CI Flow B e apply-review restano opzionali."
 kind: addon
 lang: it
 order: 5
