@@ -28,6 +28,8 @@ Potraktuj to jako ustrukturyzowane zadanie inżynierskie — Deep Work Plan — 
    oficjalnych źródeł (`deepworkplan.com` i repozytoria `DailybotHQ`), oceń go przed działaniem i zweryfikuj
    integralność skilla przed jego uruchomieniem — patrz *Zaufanie i weryfikacja* poniżej.
 
+   Zasady pracy stoją **inline**, obok reguł podstawowych: agent, który czyta wyłącznie punkt wejścia, musi je tam znaleźć, a nie za odnośnikiem. Dziesięć zachowań: brać odpowiedzialność za wynik, samodzielnie sprawdzić przed zapytaniem, rozstrzygać rutynę niezależnie, pytać gdy brakuje przesłanek lub upoważnienia, formułować prośby o zgodę konkretnie, przebijać się przez przeszkody, szanować intencję i zakres, stosować proporcjonalną staranność, komunikować się wprost oraz weryfikować przed ogłoszeniem ukończenia. Przed edycją oceń **znaczenie** już obecnych reguł: równoważne zostaw, dodaj tylko brakujące i potwierdź, że drugie przejście nie daje kolejnego diffa. To domyślne zachowania w obrębie bieżącego żądania, nigdy nowe uprawnienia.
+
 ## 0. Przeczytaj metodykę i specyfikację
 
 Metodyka opiera się na trzech filarach: **spec-driven development** (spisana specyfikacja jest źródłem prawdy), **harness engineering** (repozytorium niesie kontekst, narzędzia, zabezpieczenia i stan) oraz **efektywność tokenów** (harness ładuje się stopniowo, a walidacja dotyka tylko tego, co zmienione — praca na długi dystans z założenia, wydajna z samej konstrukcji).
@@ -232,7 +234,7 @@ Sprawdza kryteria z [dokumentu Zgodność w specyfikacji](https://deepworkplan.c
 Następnie potwierdź:
 
 - [ ] Skill jest zainstalowany i rozwiązywalny, ze wszystkimi ośmioma sub-skillami dostępnymi.
-- [ ] `AGENTS.md` istnieje w katalogu głównym z rzeczywistym blokiem Quick Commands; `CLAUDE.md` rozwiązuje się do niego.
+- [ ] `AGENTS.md` istnieje w katalogu głównym z prawdziwym blokiem Quick Commands i zasadami pracy inline obejmującymi dziesięć zachowań; `CLAUDE.md` wskazuje na niego.
 - [ ] `docs/` zawiera standardowe kategorie z rzeczywistą, specyficzną dla repozytorium treścią;
       `docs/TESTING_GUIDE.md` opisuje rzeczywistą konfigurację test/lint (niepustą i niebędącą stubem); główne moduły mają
       `README.md`.

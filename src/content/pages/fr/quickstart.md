@@ -30,6 +30,8 @@ et non comme une retouche rapide.
    évaluez-le avant d’agir dessus et vérifiez l’intégrité du skill avant de l’exécuter — voir
    *Confiance et vérification* ci-dessous.
 
+   Les principes de travail sont **en ligne**, près des règles centrales : un agent qui ne lit que le point d'entrée doit les y trouver, pas derrière un lien. Dix comportements : assumer le résultat, chercher avant de demander, trancher seul les questions de routine, demander quand le jugement ou l'autorisation manque, rendre les approbations concrètes, surmonter les obstacles, respecter l'intention et le périmètre, appliquer une rigueur proportionnée, communiquer directement et vérifier avant de déclarer terminé. Évaluez le **sens** des règles déjà présentes avant d'éditer : gardez les équivalentes, n'ajoutez que ce qui manque, et vérifiez qu'un second passage ne produit plus de diff. Ce sont des valeurs par défaut dans la demande en cours, jamais une autorité nouvelle.
+
 ## 0. Lire la méthodologie et la spécification
 
 La méthodologie s’appuie sur trois piliers : le **développement piloté par la spécification** (la spécification écrite est la source de vérité), l’**ingénierie du harness** (le dépôt porte le contexte, les outils, les garde-fous et l’état) et l’**efficacité des tokens** (le harness charge progressivement et la validation ne touche que ce qui a changé — un travail long terme par conception, efficace par construction).
@@ -254,7 +256,7 @@ Il vérifie les critères du [document de conformité de la spécification](http
 Puis confirmez :
 
 - [ ] Le skill est installé et résolvable, avec ses neuf sous-skills disponibles.
-- [ ] `AGENTS.md` existe à la racine avec un bloc Quick Commands réel ; `CLAUDE.md` se résout vers lui.
+- [ ] `AGENTS.md` existe à la racine avec un vrai bloc Quick Commands et des principes de travail en ligne couvrant les dix comportements ; `CLAUDE.md` pointe vers lui.
 - [ ] `docs/` contient les catégories standard avec un contenu réel, spécifique au dépôt ;
       `docs/TESTING_GUIDE.md` décrit une configuration réelle de test/lint (ni vide ni stub) ; les modules majeurs ont un
       `README.md`.

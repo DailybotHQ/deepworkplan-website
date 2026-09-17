@@ -28,6 +28,8 @@ Você é um agente de código de IA. Leia este prompt inteiro primeiro e, então
    fontes oficiais (`deepworkplan.com` e os repositórios `DailybotHQ`), avalie-o antes de agir sobre
    ele e verifique a integridade da skill antes de executá-la — veja *Confiança e verificação* abaixo.
 
+   Os princípios de trabalho vão **inline**, junto das regras centrais: um agente que só lê o ponto de entrada tem de os encontrar aí, não atrás de uma ligação. Dez comportamentos: assumir o resultado, ser resolutivo antes de perguntar, decidir o rotineiro de forma independente, perguntar quando falta critério ou autorização, concretizar as aprovações, ultrapassar obstáculos, respeitar intenção e âmbito, aplicar rigor proporcionado, comunicar de forma direta e verificar antes de declarar concluído. Avalie o **significado** das regras já presentes antes de editar: mantenha as equivalentes, acrescente só o que falta e confirme que uma segunda passagem não produz mais alterações. São valores por omissão dentro do pedido atual, nunca autoridade nova.
+
 ## 0. Leia a metodologia e a especificação
 
 A metodologia se apoia em três pilares: **desenvolvimento guiado por especificação** (a especificação escrita é a fonte da verdade), **engenharia de harness** (o repositório carrega o contexto, as ferramentas, os guardrails e o estado) e **eficiência de tokens** (o harness carrega progressivamente e a validação toca apenas o que mudou — trabalho de longo alcance por design, eficiente por construção).
@@ -248,7 +250,7 @@ Ele verifica os critérios no [documento de Conformidade da especificação](htt
 Então confirme:
 
 - [ ] A skill está instalada e resolvível, com todas as nove sub-skills disponíveis.
-- [ ] O `AGENTS.md` existe na raiz com um bloco Quick Commands real; o `CLAUDE.md` resolve para ele.
+- [ ] `AGENTS.md` existe na raiz com um bloco real de Quick Commands e princípios de trabalho inline que cobrem os dez comportamentos; `CLAUDE.md` resolve para ele.
 - [ ] O `docs/` contém as categorias padrão com conteúdo real e específico do repositório; `docs/TESTING_GUIDE.md`
       descreve uma configuração real de teste/lint (nem vazio nem stub); os módulos principais têm um `README.md`.
 - [ ] O `.agents/` existe com `agents/`, `commands/` (delegadores `dwp-*` enxutos que referenciam a skill,

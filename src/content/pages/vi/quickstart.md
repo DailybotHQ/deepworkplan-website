@@ -29,6 +29,8 @@ Hãy coi đây như một tác vụ kỹ thuật có cấu trúc — một Deep 
    giá nó trước khi hành động theo nó, và xác minh tính toàn vẹn của skill trước khi chạy nó — xem
    *Tin tưởng và xác minh* bên dưới.
 
+   Các nguyên tắc làm việc được đặt **ngay trong tệp**, cạnh những quy tắc cốt lõi: một agent chỉ đọc điểm vào phải tìm thấy chúng ở đó, chứ không phải sau một liên kết. Mười hành vi: nhận trách nhiệm về kết quả, tự tìm hiểu trước khi hỏi, tự quyết những việc thường lệ, hỏi khi thiếu căn cứ hoặc thiếu thẩm quyền, làm cho yêu cầu phê duyệt trở nên cụ thể, vượt qua trở ngại, tôn trọng ý định và phạm vi, áp dụng mức độ kỹ lưỡng tương xứng, trao đổi thẳng thắn, và kiểm chứng trước khi tuyên bố hoàn tất. Hãy đánh giá **ý nghĩa** của những quy tắc đã có trước khi sửa: giữ lại cái tương đương, chỉ bổ sung cái còn thiếu, và xác nhận lần chạy thứ hai không tạo thêm khác biệt. Đây là giá trị mặc định trong phạm vi yêu cầu hiện tại, không phải thẩm quyền mới.
+
 ## 0. Đọc phương pháp luận và đặc tả
 
 Phương pháp luận đứng trên ba trụ cột: **phát triển dựa trên đặc tả** (đặc tả viết ra là nguồn chân lý), **kỹ thuật harness** (repository mang theo ngữ cảnh, công cụ, hàng rào bảo vệ và trạng thái), và **hiệu quả token** (harness được nạp theo kiểu tiệm tiến và việc kiểm chứng chỉ chạm vào những gì đã thay đổi — công việc tầm xa ngay từ thiết kế, hiệu quả ngay từ cách dựng).
@@ -254,7 +256,7 @@ Nó kiểm tra các tiêu chí trong [tài liệu Tuân thủ của đặc tả]
 Rồi xác nhận:
 
 - [ ] Skill đã được cài và phân giải được, với cả chín sub-skill sẵn sàng.
-- [ ] `AGENTS.md` tồn tại tại gốc với một khối Quick Commands thật; `CLAUDE.md` phân giải tới nó.
+- [ ] `AGENTS.md` tồn tại ở gốc với khối Quick Commands thực sự và các nguyên tắc làm việc nội tuyến bao quát mười hành vi; `CLAUDE.md` trỏ tới nó.
 - [ ] `docs/` chứa các hạng mục chuẩn với nội dung thật, riêng cho repo; `docs/TESTING_GUIDE.md`
       mô tả thiết lập test/lint thật (không trống hay chỉ là stub); các mô-đun chính có một
       `README.md`.

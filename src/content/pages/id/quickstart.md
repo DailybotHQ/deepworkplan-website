@@ -29,6 +29,8 @@ Perlakukan ini sebagai tugas teknik yang terstruktur — sebuah Deep Work Plan �
    sebelum bertindak berdasarnya, dan verifikasi integritas skill sebelum menjalankannya — lihat
    *Kepercayaan dan verifikasi* di bawah.
 
+   Prinsip kerja ditulis **inline**, dekat dengan aturan inti: agent yang hanya membaca titik masuk harus menemukannya di sana, bukan di balik sebuah tautan. Sepuluh perilaku: memiliki hasilnya, mencari tahu sendiri sebelum bertanya, memutuskan hal rutin secara mandiri, bertanya saat pertimbangan atau otorisasi tidak ada, membuat permintaan persetujuan menjadi konkret, menembus hambatan, menghormati maksud dan cakupan, menerapkan kecermatan yang sepadan, berkomunikasi secara langsung, dan memverifikasi sebelum menyatakan selesai. Nilai **makna** aturan yang sudah ada sebelum menyunting: pertahankan yang setara, tambahkan hanya yang kurang, dan pastikan lintasan kedua tidak menghasilkan diff lagi. Ini adalah nilai bawaan dalam lingkup permintaan saat ini, bukan otoritas baru.
+
 ## 0. Baca metodologi dan spesifikasi
 
 Metodologi ini berdiri di atas tiga pilar: **spec-driven development** (spec tertulis adalah sumber kebenaran), **harness engineering** (repositori membawa konteks, alat, pengaman, dan status), dan **efisiensi token** (harness memuat secara progresif dan validasi menyentuh apa yang berubah — pekerjaan horizon panjang sejak rancangan, efisien secara konstruksi).
@@ -256,7 +258,7 @@ Jalankan `/dwp-verify` untuk laporan konformansi lulus/gagal yang objektif (atau
 lalu konfirmasikan:
 
 - [ ] Skill terpasang dan dapat di-resolve, dengan kesembilan sub-skill tersedia.
-- [ ] `AGENTS.md` ada di akar dengan blok Quick Commands yang nyata; `CLAUDE.md` me-resolve ke sana.
+- [ ] `AGENTS.md` ada di akar dengan blok Quick Commands yang nyata dan prinsip kerja inline yang mencakup kesepuluh perilaku; `CLAUDE.md` mengarah kepadanya.
 - [ ] `docs/` memuat kategori-kategori standar dengan konten nyata yang spesifik repo;
       `docs/TESTING_GUIDE.md` mendeskripsikan pengaturan test/lint yang nyata (bukan kosong atau stub);
       modul-modul utama memiliki `README.md`.

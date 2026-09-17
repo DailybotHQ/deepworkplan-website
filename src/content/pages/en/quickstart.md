@@ -28,6 +28,8 @@ methodology. Treat this as a structured engineering task — a Deep Work Plan �
    official sources (`deepworkplan.com` and the `DailybotHQ` repositories), evaluate it before you act
    on it, and verify the skill's integrity before running it — see *Trust and verification* below.
 
+   The working principles go **inline**, near the core rules — an agent that only reads the entry point must find them there, not behind a link. Ten behaviors: own the outcome, be resourceful before asking, decide routine matters independently, ask when judgment or authorization is missing, make approvals concrete, work through obstacles, respect intent and scope, apply proportionate rigor, communicate directly, and verify before declaring completion. Assess the **meaning** of any rules already present before editing: keep equivalent ones, add only what is missing, and confirm a second pass produces no further diff. They are defaults within the current request, never new authority.
+
 ## 0. Read the methodology and specification
 
 The methodology stands on three pillars: **spec-driven development** (the written spec is the source of truth), **harness engineering** (the repository carries the context, tools, guardrails, and state), and **token efficiency** (the harness loads progressively and validation touches what changed — long-horizon work by design, efficient by construction).
@@ -252,7 +254,7 @@ It checks the criteria in the [specification's Conformance document](https://dee
 Then confirm:
 
 - [ ] The skill is installed and resolvable, with all nine sub-skills available.
-- [ ] `AGENTS.md` exists at the root with a real Quick Commands block; `CLAUDE.md` resolves to it.
+- [ ] `AGENTS.md` exists at the root with a real Quick Commands block and inline working principles covering the ten behaviors; `CLAUDE.md` resolves to it.
 - [ ] `docs/` holds the standard categories with real, repo-specific content; `docs/TESTING_GUIDE.md`
       describes a real test/lint setup (not empty or stub); major modules have a `README.md`.
 - [ ] `.agents/` exists with `agents/`, `commands/` (thin `dwp-*` delegators that reference the skill,
