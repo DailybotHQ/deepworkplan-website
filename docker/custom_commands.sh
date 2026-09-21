@@ -1,10 +1,38 @@
 #!/bin/bash
 
+# Restore tool dirs that Debian login / SSH may have stripped from PATH.
+#
+# Herdr panes are non-login bash (source ~/.bashrc → this file) but inherit PATH
+# from `herdr remote-client-bridge`, which is typically started over SSH. SSH
+# login runs /etc/profile, which overwrites PATH to a minimal system list and
+# drops PNPM_HOME/bin, ~/.local/bin (claude), ~/.opencode/bin, ~/.grok/bin, etc.
+# Wrappers like claudex then load as shell functions but fail with
+# `claude: command not found` / `codex: command not found`.
+#
+# Append (never prepend) so the node-first guard below can keep /usr/local/bin
+# at the front. Idempotent.
+export PNPM_HOME="${PNPM_HOME:-/usr/local/share/pnpm}"
+for _dwp_tool_dir in \
+	"${PNPM_HOME}/bin" \
+	"${HOME}/.local/bin" \
+	"${HOME}/.cursor/bin" \
+	"${HOME}/.opencode/bin" \
+	"${HOME}/.grok/bin"
+do
+	[ -d "${_dwp_tool_dir}" ] || continue
+	case ":${PATH}:" in
+		*":${_dwp_tool_dir}:"*) ;;
+		*) PATH="${PATH}:${_dwp_tool_dir}" ;;
+	esac
+done
+unset _dwp_tool_dir
+export PATH
+
 # Container-installed Node must win over IDE-bundled Node (Cursor Server's
 # ~/.cursor-server/bin/<commit>/node, VS Code Server's equivalent, etc.).
 # /etc/profile.d/00-container-node-first.sh covers login shells; this guard
 # covers non-login interactive shells that only source ~/.bashrc (editor
-# terminals, `bash -i`, the agent shell tool, …). Idempotent.
+# terminals, `bash -i`, Herdr panes, the agent shell tool, …). Idempotent.
 if [ -x /usr/local/bin/node ]; then
   case "${PATH}" in
     /usr/local/bin:*) : ;;  # already at the front
@@ -12,6 +40,41 @@ if [ -x /usr/local/bin/node ]; then
   esac
   export PATH
 fi
+
+# Load docker/local/dwpwebsite/.env into every bash that sources this file.
+#
+# Compose injects that env_file into PID 1, so `docker exec` shells and editor
+# terminals inherit it — but SSH logins (herdr --remote) do not: sshd starts
+# each session from a clean environment and PermitUserEnvironment is off, so
+# Herdr panes saw none of the API keys. The entrypoint mirrors the file into
+# /etc/environment for PAM (see publish_env_file_to_pam); this loader re-reads
+# the file itself so a fresh shell always reflects the current .env without
+# restarting anything ("edit .env, open a new shell").
+#
+# Compose env_file semantics, not `source`: one KEY=value per line, `#`
+# comments, optional matching quotes, no shell expansion. The file wins over an
+# inherited value so a stale PID-1 copy cannot shadow an edited key.
+DWP_ENV_FILE="${DWP_ENV_FILE:-/app/docker/local/dwpwebsite/.env}"
+function dwp.load_env_file {
+	local file="${1:-${DWP_ENV_FILE}}" line key value
+	[ -r "${file}" ] || return 0
+	while IFS= read -r line || [ -n "${line}" ]; do
+		line="${line#"${line%%[![:space:]]*}"}"
+		line="${line#export }"
+		case "${line}" in ''|'#'*) continue ;; *=*) ;; *) continue ;; esac
+		key="${line%%=*}"
+		value="${line#*=}"
+		[[ "${key}" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]] || continue
+		value="${value%"${value##*[![:space:]]}"}"
+		case "${value}" in
+			\"*\") value="${value#\"}"; value="${value%\"}" ;;
+			\'*\') value="${value#\'}"; value="${value%\'}" ;;
+			*) value="${value%%[[:space:]]#*}"; value="${value%"${value##*[![:space:]]}"}" ;;
+		esac
+		export "${key}=${value}"
+	done < "${file}"
+}
+dwp.load_env_file
 
 function print.success {
 	GREEN="\033[0;32m"
@@ -619,6 +682,35 @@ function claude-glm() {
 
 	# Always run with full permissions (--dangerously-skip-permissions)
 	_zai_claude_run --dangerously-skip-permissions "$@"
+}
+
+# Resume/continue a Claude Code session against Z.AI GLM (full permissions).
+# Usage mirrors claudex; session state is shared with plain claude / claudex.
+function claudex-glm() {
+	_zai_coding_env_or_die || return 1
+	case "${1:-}" in
+		-c|--continue)
+			print.success "Continuing most recent Claude Code session (Z.AI GLM: ${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3})..."
+			shift
+			_zai_claude_run --continue --dangerously-skip-permissions "$@"
+			;;
+		-r|--resume)
+			shift
+			if [[ -n "${1:-}" && "${1:0:1}" != "-" ]]; then
+				local session_id="$1"
+				shift
+				print.success "Resuming Claude Code session (Z.AI GLM): $session_id..."
+				_zai_claude_run --resume "$session_id" --dangerously-skip-permissions "$@"
+			else
+				print.success "Selecting Claude Code session to resume (Z.AI GLM)..."
+				_zai_claude_run --resume --dangerously-skip-permissions "$@"
+			fi
+			;;
+		*)
+			print.success "Starting Claude Code (Z.AI GLM) with full permissions (${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3} / ${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3})..."
+			_zai_claude_run --dangerously-skip-permissions "$@"
+			;;
+	esac
 }
 
 # ================================
@@ -1890,6 +1982,7 @@ function show_welcome() {
     echo "  • codex-xai         - Codex via xAI Grok (Responses API) with full permissions"
   echo ""
   echo "  • claude-glm        - Claude Code via Z.AI GLM with full permissions (recommended)"
+  echo "  • claudex-glm       - Claude Code via Z.AI GLM with full permissions"
     echo "      -c, --continue  Continue most recent session"
     echo "      -r, --resume    Interactive session selection"
     echo "      -r <id>         Resume specific session by ID"

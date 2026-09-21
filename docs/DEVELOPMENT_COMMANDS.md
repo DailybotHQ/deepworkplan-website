@@ -35,6 +35,18 @@ pnpm run astro:preview
 - Previews the production build locally
 - Useful for testing before deployment
 
+### Dev Containers (dev.sh)
+
+```bash
+bash dev.sh up        # start the devcontainer's runServices, detached
+bash dev.sh shell     # login shell inside the container (as node, in /app)
+bash dev.sh down      # stop and remove the containers (named volumes kept)
+```
+
+`dev.sh` (repo root) starts the containers declared in `.devcontainer/devcontainer.json` without VS Code or Cursor; the IDE plugin path keeps working against the same containers. Verbs: `setup`, `up`, `down`, `stop`, `start`, `restart`, `ps`, `logs`, `shell`, `exec`, `build`, `config`, `doctor`, `help`. `config` and `doctor` are strictly read-only. See [docker/local/README.md](../docker/local/README.md) for the full workflow.
+
+API keys live in `docker/local/dwpwebsite/.env`. Compose injects it at create time, the entrypoint mirrors it into `/etc/environment` for SSH logins (`herdr --remote`), and every new bash re-reads it via `custom_commands.sh` — so after editing the file, opening a new shell is enough. Details: [How `.env` reaches your shell](../docker/local/README.md#how-dockerlocaldwpwebsiteenv-reaches-your-shell).
+
 ## Build Commands
 
 ### Production Build

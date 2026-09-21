@@ -13,6 +13,35 @@ docker compose up -d
 
 Attach to the dev container (VS Code Dev Containers, or `docker compose exec dwpwebsitevscode bash`).
 
+## Dev containers without an IDE (`dev.sh`)
+
+`dev.sh` (repo root) starts exactly the services `.devcontainer/devcontainer.json` declares, from a plain terminal — no VS Code or Cursor required. `devcontainer.json` is the single source of truth: `runServices` decides what starts, `remoteUser` and `workspaceFolder` decide how the container is entered. Opening the project in an IDE keeps working unchanged, and both paths manage the same containers.
+
+```bash
+bash dev.sh setup                 # one-time bootstrap: .env files, shutdownAction, networks
+bash dev.sh build                 # build the image
+bash dev.sh up                    # start runServices, detached
+bash dev.sh shell                 # login shell as node, in /app
+bash dev.sh ps                    # what is running (also: logs, stop, start, restart)
+bash dev.sh exec dwpwebsitevscode pnpm run dev
+bash dev.sh down                  # stop and remove this repo's services (named volumes kept)
+bash dev.sh doctor                # read-only environment diagnosis
+```
+
+`setup` sets `"shutdownAction": "none"` in `.devcontainer/devcontainer.json` (the stack survives closing the editor window; `dev.sh down` stops it) and narrows `.env` files to `0600` — they hold API keys. `up` never recreates existing containers; pass `--recreate` to apply compose changes on purpose.
+
+### How `docker/local/dwpwebsite/.env` reaches your shell
+
+Three layers, so the file is the single source of truth no matter how you get into the container (`dev.sh`, the Dev Containers plugin, or `herdr --remote`):
+
+| Layer | Who reads the file | Covers | Picks up edits |
+|---|---|---|---|
+| compose `env_file` | Docker, at container **create** | PID 1, `docker exec`, `dev.sh shell`, editor terminals | `dev.sh up --recreate` / `rebuild` |
+| `entrypoint.sh` → `/etc/environment` | root, on every container **start** | every SSH login via PAM (`herdr --remote`, `ssh -p 22022`) | `dev.sh restart` |
+| `custom_commands.sh` → `dwp.load_env_file` | your shell, on every **new bash** | any interactive or login bash | open a new shell / pane |
+
+The last layer is why "edit `.env`, then open a new shell" is enough in practice. SSH sessions get nothing from compose on their own: sshd starts from a clean environment and `PermitUserEnvironment` stays off, which is what the PAM mirror is for. Override the path with `DWP_ENV_FILE` if you keep the file elsewhere.
+
 ## AI CLIs (installed in the image)
 
 | CLI | Install method | Command |
@@ -88,7 +117,7 @@ Use [console.x.ai](https://console.x.ai/) API credits with OpenCode, Cline, and 
    # XAI_DEFAULT_MODEL=grok-4.3
    ```
 
-2. Rebuild/restart so compose injects `.env`, then in a fresh shell:
+2. Open a fresh shell (every new bash re-reads `.env` — no rebuild or restart needed), then:
 
    ```bash
    opencodex-xai   # OpenCode (provider xai, whitelist daily/reasoning)
