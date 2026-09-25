@@ -140,7 +140,7 @@ Version installiert; der aktuell dokumentierte Befehl verwendet
 `DailybotHQ/ai-diff-reviewer@v3.1.1`. Die GitHub Action ist eine separate, optionale
 CI-Oberfläche und für die Kernmethodik nie erforderlich.
 
-Eine Überprüfung, die lief und nichts meldete, ist nicht dasselbe wie eine, die überhaupt keine Befunde hervorgebracht hat. Der zweite Fall ist eine **unvollständige Überprüfung**: sie wird als solche festgehalten, zählt nie als Beleg dafür, dass der Änderungssatz sauber ist, und ist nie ein Grund, das Final Review zu schließen. Zusammen mit einem fehlenden Reviewer und einem fehlgeschlagenen Aufruf sind das drei verschiedene Zustände — und keiner davon heißt, das Diff sei geprüft und sauber befunden worden. Ein Text, der `Recommendation: approve` sagt, ebenfalls kein Beleg dafür, dass der Check bestanden hat. Lesen Sie zuerst den Block Highest severity / Strictness gate / Check status des Tracking-Markers — die Runtime schreibt ein Modell-`approve` um, wenn das Gate fehlschlägt.
+Eine Überprüfung, die lief und nichts meldete, ist nicht dasselbe wie eine, die überhaupt keine Befunde hervorgebracht hat. Der zweite Fall ist eine **unvollständige Überprüfung**: sie wird als solche festgehalten, zählt nie als Beleg dafür, dass der Änderungssatz sauber ist, und ist nie ein Grund, das Final Review zu schließen — dieselbe rote Behandlung, die ein `timeout`-Review unter blockierender Strenge erhält (BC-04). Zusammen mit einem fehlenden Reviewer und einem fehlgeschlagenen Aufruf sind das drei verschiedene Zustände — und keiner davon heißt, das Diff sei geprüft und sauber befunden worden. Ein Text, der `Recommendation: approve` sagt, ebenfalls kein Beleg dafür, dass der Check bestanden hat. Lesen Sie zuerst den Block Highest severity / Strictness gate / Check status des Tracking-Markers — die Runtime schreibt ein Modell-`approve` um, wenn das Gate fehlschlägt.
 
 Unbeaufsichtigte Ausführung wird nur für einen im Voraus freigegebenen Plan
 unterstützt. Sie erfordert die maschinenlesbare Zustandsschicht, einen deklarierten
@@ -201,7 +201,7 @@ mit **null** optionalen Addons vollständig konform — installieren Sie diese n
   `.review/extension.md`) über den akkumulierten Änderungssatz des Plans aus. Eine fehlende Skill oder Erweiterung ist ein
   aufgezeichneter `local reviewer not installed`-Befund — niemals ein stilles
   Überspringen, und niemals ein Überraschungs-Bootstrap: die Installation gehört
-  zur Onboarding-Zustimmung oder zu einem expliziten Addon-Aufruf; Aufruffehler soft-failen; `critical`-Ergebnisse eines abgeschlossenen Durchlaufs blockieren
+  zur Onboarding-Zustimmung oder zu einem expliziten Addon-Aufruf; Aufruffehler soft-failen; **verifizierte `critical`-Ergebnisse** eines abgeschlossenen Durchlaufs blockiere (v3, BC-07 — unbestätigte kritische Behauptungen erscheinen als annotierte Warnungen, und ein `incomplete`-/`timeout`-Review ist kein sauberer Durchlauf, BC-04)n
   weiterhin den Abschluss. **Flow B** (das CI-Gate mit `pr-review.yml`) wird als explizites Opt-in angeboten und
   niemals ungefragt installiert. Kein Deep Work Plan-Ablauf erfordert einen kommerziellen Dienst, CI-Anbieter oder Secret.
 

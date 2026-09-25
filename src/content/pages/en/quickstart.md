@@ -157,7 +157,7 @@ review skill is installed at a pinned release; the current documented command
 uses `DailybotHQ/ai-diff-reviewer@v3.1.1`. The GitHub Action is a separate,
 optional CI surface and is never required for the core methodology.
 
-A review that ran and reported nothing is not the same as a review that never produced findings at all. The second case is an **incomplete review**: it is recorded as such, never counted as evidence that the change set is clean, and never a reason to close the Final Review. Together with a missing reviewer and an invocation that errored, that is three distinct states — and none of them means the diff was reviewed and found clean. A body that says `Recommendation: approve` is not evidence the check passed either. Read the tracking marker's Highest severity / Strictness gate / Check status block first — the runtime rewrites a model `approve` whenever the gate is failing.
+A review that ran and reported nothing is not the same as a review that never produced findings at all. The second case is an **incomplete review**: it is recorded as such, never counted as evidence that the change set is clean, and never a reason to close the Final Review — the same red treatment a `timeout` review gets under blocking strictness (BC-04). Together with a missing reviewer and an invocation that errored, that is three distinct states — and none of them means the diff was reviewed and found clean. A body that says `Recommendation: approve` is not evidence the check passed either. Read the tracking marker's Highest severity / Strictness gate / Check status block first — the runtime rewrites a model `approve` whenever the gate is failing.
 
 Unattended execution is supported only for a plan approved in advance. It
 requires the machine-readable state layer, a declared DWP standard, bounded
@@ -219,7 +219,7 @@ never auto-install those.
   pass runs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + required
   `.review/extension.md`) over the plan's accumulated change set. A missing skill or extension is a
   recorded `local reviewer not installed` finding — never a silent skip, and never a surprise bootstrap:
-  installation belongs to the onboarding consent or an explicit addon invocation; invocation errors soft-fail; `critical` findings from a completed pass still
+  installation belongs to the onboarding consent or an explicit addon invocation; invocation errors soft-fail; **verified** `critical` findings from a completed pass stil (v3, BC-07 — unverified critical claims arrive as annotated warnings, and an `incomplete`/`timeout` review is not a clean pass, BC-04)l
   block completion. **Flow B** (the CI gate with `pr-review.yml`) is offered as an explicit opt-in and
   never installed unrequested. No Deep Work Plan flow requires a commercial service, CI provider, or secret.
 

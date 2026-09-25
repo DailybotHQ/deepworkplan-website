@@ -3,6 +3,10 @@ name: Self-review
 # Review PRs to `main` with the AI Diff Reviewer Action — a single grok leg
 # (the maintainer's review provider), following the design of the upstream
 # `DailybotHQ/ai-diff-reviewer` `.github/workflows/self-review.yml`.
+# NOTE: external contributors cannot trigger a review that reaches the
+# secret — pair this workflow with an author-association rule (upstream
+# `setup` Q4) if the repo ever goes public.
+# `DailybotHQ/ai-diff-reviewer` `.github/workflows/self-review.yml`.
 # NOT wired as a required merge check.
 #
 #   1. LABEL-GATED, RUN-ONCE — runs only when the `ready` label is applied

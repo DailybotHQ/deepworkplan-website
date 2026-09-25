@@ -157,7 +157,7 @@ consigne les preuves et les limites. Le skill de revue locale est installé
 `DailybotHQ/ai-diff-reviewer@v3.1.1`. La GitHub Action est une surface CI
 séparée et optionnelle, jamais requise pour la méthodologie de base.
 
-Une revue qui s'est exécutée sans rien signaler n'est pas la même chose qu'une revue qui n'a jamais produit le moindre constat. Le second cas est une **revue incomplète** : elle est consignée comme telle, ne compte jamais comme preuve que l'ensemble des modifications est propre, et ne justifie jamais la clôture du Final Review. Avec un relecteur absent et une invocation en échec, cela fait trois états distincts — et aucun ne signifie que le diff a été relu et jugé propre. Un corps qui dit `Recommendation: approve` n’est pas non plus une preuve que le contrôle a réussi. Lisez d’abord le bloc Highest severity / Strictness gate / Check status du marqueur de suivi — le runtime réécrit un `approve` du modèle lorsque la barrière échoue.
+Une revue qui s'est exécutée sans rien signaler n'est pas la même chose qu'une revue qui n'a jamais produit le moindre constat. Le second cas est une **revue incomplète** : elle est consignée comme telle, ne compte jamais comme preuve que l'ensemble des modifications est propre, et ne justifie jamais la clôture du Final Review — le même traitement en rouge qu’une revue `timeout` sous stricte bloquante (BC-04). Avec un relecteur absent et une invocation en échec, cela fait trois états distincts — et aucun ne signifie que le diff a été relu et jugé propre. Un corps qui dit `Recommendation: approve` n’est pas non plus une preuve que le contrôle a réussi. Lisez d’abord le bloc Highest severity / Strictness gate / Check status du marqueur de suivi — le runtime réécrit un `approve` du modèle lorsque la barrière échoue.
 
 L'exécution non surveillée n'est prise en charge que pour un plan approuvé
 à l'avance. Elle nécessite la couche d'état lisible par machine, une norme
@@ -221,7 +221,7 @@ pleinement conforme avec **zéro** addon facultatif — ne les installez jamais 
   requis) sur l'ensemble accumulé des changements du plan. Une skill ou une extension manquante est un résultat
   consigné `local reviewer not installed` — jamais une omission silencieuse, et
   jamais un amorçage surprise : l'installation appartient au consentement de
-  l'onboarding ou à une invocation explicite de l'addon ; les erreurs d'invocation échouent en douceur ; les résultats `critical` d'un
+  l'onboarding ou à une invocation explicite de l'addon ; les erreurs d'invocation échouent en douceur ; les résultats **critiques vérifiés** d'u (v3, BC-07 — les affirmations critiques non vérifiées arrivent comme avertissements annotés, et une revue `incomplete` ou `timeout` n’est pas une passe propre, BC-04)n
   passage terminé bloquent toujours la finalisation. Le **Flow B** (la porte CI avec `pr-review.yml`) est proposé
   comme option explicite et n'est jamais installé sans demande. Aucun flux de Deep Work Plan n'exige de service
   commercial, de fournisseur de CI ni de secret.

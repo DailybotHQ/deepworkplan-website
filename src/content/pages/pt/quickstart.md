@@ -152,7 +152,7 @@ versão fixada; o comando atualmente documentado usa
 `DailybotHQ/ai-diff-reviewer@v3.1.1`. A GitHub Action é uma superfície de
 CI separada e opcional, nunca obrigatória para a metodologia central.
 
-Uma revisão que correu e não reportou nada não é o mesmo que uma revisão que nunca chegou a produzir resultados. O segundo caso é uma **revisão incompleta**: fica registada como tal, nunca conta como prova de que o conjunto de alterações está limpo, e nunca é motivo para fechar o Final Review. Juntamente com um revisor ausente e uma invocação que falhou, são três estados distintos — e nenhum significa que o diff foi revisto e saiu limpo. Um corpo que diz `Recommendation: approve` também não é prova de que a verificação tenha passado. Leia primeiro o bloco Highest severity / Strictness gate / Check status do marcador de acompanhamento — o runtime reescreve um `approve` do modelo quando a comporta está a falhar.
+Uma revisão que correu e não reportou nada não é o mesmo que uma revisão que nunca chegou a produzir resultados. O segundo caso é uma **revisão incompleta**: fica registada como tal, nunca conta como prova de que o conjunto de alterações está limpo, e nunca é motivo para fechar o Final Review — o mesmo tratamento vermelho que recebe uma revisão `timeout` sob rigor bloqueante (BC-04). Juntamente com um revisor ausente e uma invocação que falhou, são três estados distintos — e nenhum significa que o diff foi revisto e saiu limpo. Um corpo que diz `Recommendation: approve` também não é prova de que a verificação tenha passado. Leia primeiro o bloco Highest severity / Strictness gate / Check status do marcador de acompanhamento — o runtime reescreve um `approve` do modelo quando a comporta está a falhar.
 
 A execução não supervisionada só é suportada para um plano aprovado com
 antecedência. Ela requer a camada de estado legível por máquina, um padrão
@@ -215,7 +215,7 @@ design-system) e ofereça cada um como uma escolha explícita. Um repositório �
   obrigatório) sobre o conjunto acumulado de mudanças do plano. Uma skill ou extensão ausente é um achado
   registrado `local reviewer not installed` — nunca uma omissão silenciosa,
   e nunca um arranque surpresa: a instalação pertence ao consentimento do
-  onboarding ou a uma invocação explícita do addon; os erros de invocação falham de forma suave; os achados `critical` de uma passagem
+  onboarding ou a uma invocação explícita do addon; os erros de invocação falham de forma suave; os achados **críticos verificados** de uma passage (v3, BC-07 — afirmativas críticas não verificadas chegam como avisos anotados, e uma revisão `incomplete` ou `timeout` não é uma passagem limpa, BC-04)m
   concluída ainda bloqueiam a conclusão. O **Fluxo B** (o portão de CI com `pr-review.yml`) é oferecido
   como opção explícita e nunca é instalado sem ser pedido. Nenhum fluxo do Deep Work Plan exige um serviço
   comercial, um fornecedor de CI ou um segredo.
