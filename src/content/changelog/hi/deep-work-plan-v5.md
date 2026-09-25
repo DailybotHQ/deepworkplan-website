@@ -18,12 +18,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
   - label: "स्किल रिलीज़ v5.5.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
-  - label: "skill रिलीज़ v5.5.2"
+  - label: "स्किल रिलीज़ v5.5.2"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.2"
-  - label: "skill रिलीज़ v5.5.3"
+  - label: "स्किल रिलीज़ v5.5.3"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
   - label: "reviewer रिलीज़ v3.1.1"
-    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 आज हम Deep Work Plan v5 जारी कर रहे हैं। यह कोई फिर से लिखा गया संस्करण नहीं है: यह महीनों के वास्तविक उपयोग का नतीजा है — जिसमें 108 वास्तविक योजनाओं का सीधा ऑडिट भी शामिल है — जिसने कमी-दर-कमी यह उजागर किया कि पद्धति के वादे और एजेंट का वास्तविक व्यवहार कहाँ अलग हो सकते थे। इस रिलीज़ का ईमानदार सारांश: यह पद्धति यह सब पहले से ही वादा करती थी — अब यह इसकी गारंटी देती है। v5 से पहले, दस्तावेज़ का अक्षरशः पालन करने वाला एजेंट भी वास्तविक विफलता परिदृश्यों में पहुँच सकता था; इस उपयोग और फीडबैक के ज़रिए पहचाना गया ऐसा हर परिदृश्य अब बंद किया गया है और एक निष्पादनयोग्य परीक्षण से पिन किया गया है, न कि और अधिक गद्य से ढका गया है। इस चक्र में स्किल का अनुबंध सूट 132 से बढ़कर 258 परीक्षणों तक पहुँचा, और नीचे की हर गारंटी जारी टैग के विरुद्ध लाइव मान्य की गई — एक साफ रिपॉज़िटरी में इंस्टॉल करके उसके अपने ही प्रवाहों से गुज़ारा गया, तभी यह प्रविष्टि लिखी गई।

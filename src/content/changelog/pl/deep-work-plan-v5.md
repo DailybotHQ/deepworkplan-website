@@ -23,7 +23,7 @@ sourceLinks:
   - label: "Wydanie skilla v5.5.3"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
   - label: "Wydanie recenzenta v3.1.1"
-    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Dziś wydajemy Deep Work Plan v5. To nie jest przepisanie od nowa: to miesiące realnego użycia — w tym bezpośredni audyt 108 rzeczywistych planów — które luka po luce ujawniały, gdzie obietnice metodologii i rzeczywiste zachowanie agenta mogły się rozjeżdżać. Szczerze podsumowując to wydanie: metodologia obiecywała to wszystko już wcześniej — teraz tego gwarantuje. Przed v5 agent, który trzymał się dokumentacji co do litery, mógł i tak trafić w realne scenariusze awarii; każdy z nich, wykryty dzięki temu użyciu i informacji zwrotnej, jest teraz zamknięty i przypięty wykonywalnym testem, a nie załatany kolejnym akapitem prozy. W tym cyklu zestaw kontraktów skilla urósł ze 132 do 258 testów, a każda gwarancja poniżej została zwalidowana na żywo względem wydanej wersji — zainstalowana w czystym repozytorium i przeprowadzona przez własne przepływy, zanim powstał ten wpis.
@@ -73,7 +73,7 @@ Dodatek AI Diff Reviewer dokumentuje i instaluje teraz linię **v3** recenzenta,
 
 **Budżet podąża za poziomem ryzyka.** Budżet przeglądu wywodzi się z deterministycznego poziomu ryzyka zmiany — 8/20/30/40 tur od `low` do `critical` — a push bez zmian w kodzie wykonuje turę samego weryfikatora przy −93 % kosztu. `budget-profile: fixed` przywraca sprzed-v3 stałe w okresie przejściowym; rundy przyrostowe tną tokeny wejściowe o 62–76 %.
 
-**Sześć sub-skilli, z których jedna to pętla.** Router zyskuje `address-review` (nowe w v3.1.1): jedno wywołanie znajduje otwarte PR-y gałęzi, sprawdza, czy przegląd pokrywa bieżący head, przedstawia ustalenia z planem zastosuj/odłóż/pomiń, a po jednym „tak" — stosuje, kommituje w małych partiach Conventional Commits, wypycha i ponownie uzbraja recenzenta zgodnie z tym, jak repozytorium go wyzwala. `apply-review` pozostaje tylko do odczytu; ustrukturyzowany wynik (`review-output/3.0`) to maszynowa ścieżka każdej automatyzy. Linia `@v2` pozostaje zamrożona na `release/v2` z sześcioma miesiącami utrzymania bezpieczeństwa i katalogu — v3 to zalecenie, nigdy wymuszona migracja.
+**Sześć sub-skilli, z których jedna to pętla.** Router zyskuje `address-review` (nowe w v3.1.1): jedno wywołanie znajduje otwarte PR-y gałęzi, sprawdza, czy przegląd pokrywa bieżący head, przedstawia ustalenia z planem zastosuj/odłóż/pomiń, a po jednym „tak" — stosuje, kommituje w małych partiach Conventional Commits, wypycha i ponownie uzbraja recenzenta zgodnie z tym, jak repozytorium go wyzwala. `apply-review` pozostaje tylko do odczytu; ustrukturyzowany wynik (`review-output/3.0`) to maszynowa ścieżka każdej automatyzacji. Linia `@v2` pozostaje zamrożona na `release/v2` z sześcioma miesiącami utrzymania bezpieczeństwa i katalogu — v3 to zalecenie, nigdy wymuszona migracja.
 
 **Recenzent przegląda teraz własne domy.** Repozytorium skilla i ta witryna uruchamiają oba etykietowany przegląd CI — pojedynczą nogę grok przez `DailybotHQ/ai-diff-reviewer@v3`, wyzwalaną raz na nałożenie etykiety `ready` (aby powtórzyć, zdejmij i nałóż etykietę ponownie), z uczciwym pominięciem, gdy sekret dostawcy nie istnieje. Ta witryna vendoruje też recenzenta v3.1.1, więc lokalny Final Review i dokumentacja uczą teraz tej samej umowy.
 

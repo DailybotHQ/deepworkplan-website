@@ -23,7 +23,7 @@ sourceLinks:
   - label: "Release della skill v5.5.3"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
   - label: "Release del revisore v3.1.1"
-    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Oggi rilasciamo Deep Work Plan v5. Non è una riscrittura: sono mesi di uso reale — incluso un audit diretto di 108 piani reali — che hanno fatto emergere, lacuna dopo lacuna, dove le promesse della metodologia e il comportamento reale di un agente potevano divergere. Il riassunto onesto di questo rilascio: la metodologia prometteva già tutto questo — ora lo garantisce. Prima di v5, un agente che seguiva la documentazione alla lettera poteva comunque finire in scenari di guasto reali; ciascuno di questi scenari, individuato grazie a quell'uso e a quel feedback, è oggi chiuso e fissato da un test eseguibile, non rattoppato con altra prosa. La suite di contratti dello skill è cresciuta da 132 a 258 test in questo ciclo, e ogni garanzia qui sotto è stata validata dal vivo contro il tag rilasciato — installata in un repository pulito e condotta attraverso i propri flussi prima di scrivere questa voce.

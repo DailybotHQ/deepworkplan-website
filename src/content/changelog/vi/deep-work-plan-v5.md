@@ -23,7 +23,7 @@ sourceLinks:
   - label: "Phát hành skill v5.5.3"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
   - label: "Phát hành trình đánh giá v3.1.1"
-    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Hôm nay chúng tôi phát hành Deep Work Plan v5. Đây không phải là viết lại: đây là kết quả của nhiều tháng sử dụng thực tế — bao gồm một cuộc kiểm toán trực tiếp trên 108 kế hoạch thực — đã phơi bày, từng khoảng hở một, nơi lời hứa của phương pháp luận và hành vi thực của một agent có thể khác nhau. Tóm tắt trung thực của bản phát hành này: phương pháp luận đã từng hứa tất cả những điều này — giờ đây nó đảm bảo chúng. Trước v5, một agent đi theo tài liệu từng chữ vẫn có thể rơi vào các kịch bản thất bại thực; mỗi kịch bản như vậy, được nhận diện nhờ việc sử dụng và phản hồi đó, giờ đã được đóng lại và ghim bằng một kiểm thử có thể thực thi, chứ không phải được vá bằng thêm văn xuôi. Bộ hợp đồng của skill đã tăng từ 132 lên 258 kiểm thử trong chu kỳ này, và mỗi đảm bảo dưới đây đã được xác thực trực tiếp trên tag đã phát hành — cài vào một kho sạch và đưa qua chính các luồng của nó trước khi mục này được viết.

@@ -23,7 +23,7 @@ sourceLinks:
   - label: "skill 发布 v5.5.3"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
   - label: "审查器发布 v3.1.1"
-    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 今天我们发布 Deep Work Plan v5。这不是一次重写：这是数月真实使用的结果——包括对 108 个真实计划的直接审计——一处又一处地揭示出方法论的承诺与智能体实际行为可能出现分歧的地方。对这个版本最诚实的概括：这些能力方法论早已承诺——现在它做出了保证。在 v5 之前，一个逐字照着文档执行的智能体仍可能落入真实的失败场景；如今每一个这样的场景，都是通过这些实际使用和反馈被发现的，已经关闭，并由可执行的测试锁定——而不是靠更多文字掩盖过去。本周期内技能的契约测试套件从 132 个增长到 258 个，且下文的每一项保证都是针对已发布的 tag 在实测中验证的——先安装进一个干净的仓库，再跑完它自己的全部流程，然后才写下这篇条目。

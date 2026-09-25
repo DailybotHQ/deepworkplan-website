@@ -23,7 +23,7 @@ sourceLinks:
   - label: "skill sürümü v5.5.3"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
   - label: "inceleyici sürümü v3.1.1"
-    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Bugün Deep Work Plan v5'i yayınlıyoruz. Bu bir yeniden yazım değil: aylar süren gerçek kullanımın — 108 gerçek planın doğrudan denetimi de dahil — boşluk boşluk ortaya çıkardığı, metodolojinin vaatleri ile bir ajanın gerçek davranışının nerede birbirinden ayrışabildiğinin sonucu. Bu sürümün dürüst özeti şu: metodoloji bunların hepsini zaten vaat ediyordu — artık garanti ediyor. v5 öncesinde, belgeleri harfiyen izleyen bir ajan bile gerçek başarısızlık senaryolarına düşebiliyordu; bu kullanım ve geri bildirimler sayesinde tespit edilen her biri artık kapatıldı ve çalıştırılabilir bir testle sabitlendi, daha fazla düzyazıyla üzeri örtülmedi. Bu döngüde beceri paketinin sözleşme takımı 132'den 258 teste büyüdü ve aşağıdaki her garanti, yayınlanan etikete karşı canlı olarak doğrulandı — temiz bir depoya kurulup kendi akışlarından geçirildi, sonra bu yazı kaleme alındı.

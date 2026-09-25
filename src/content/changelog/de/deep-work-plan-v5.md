@@ -23,7 +23,7 @@ sourceLinks:
   - label: "Skill-Release v5.5.3"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
   - label: "Reviewer-Release v3.1.1"
-    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Heute veröffentlichen wir Deep Work Plan v5. Dies ist keine Neufassung: Es sind Monate realer Nutzung — einschließlich einer direkten Auditierung von 108 realen Plänen —, die Lücke für Lücke genau dort offengelegt haben, wo die Versprechen der Methodik und das tatsächliche Verhalten eines Agenten auseinanderfallen konnten. Die ehrliche Zusammenfassung dieses Releases: Die Methodik hat all dies bereits versprochen — jetzt garantiert sie es. Vor v5 konnte ein Agent, der die Dokumentation buchstabengetreu befolgte, dennoch in realen Fehlerszenarien landen; jedes dieser Szenarien, durch diese Nutzung und dieses Feedback identifiziert, ist jetzt geschlossen und durch einen ausführbaren Test abgesichert, statt mit mehr Prosa überdeckt. Die Vertragssuite des Skills wuchs in diesem Zyklus von 132 auf 258 Tests, und jede der folgenden Garantien wurde live gegen das veröffentlichte Tag validiert — in ein sauberes Repository installiert und durch die eigenen Abläufe geführt, bevor dieser Eintrag geschrieben wurde.
@@ -77,4 +77,4 @@ Das AI-Diff-Reviewer-Addon dokumentiert und installiert nun die **v3**-Linie des
 
 **Der Reviewer reviewt nun seine eigenen Häuser.** Sowohl das Skill-Repository als auch diese Website führen ein etikettengestütztes CI-Review aus — ein einzelnes grok-Bein via `DailybotHQ/ai-diff-reviewer@v3`, ausgelöst einmal je Anwendung des Labels `ready` (Label entfernen und neu setzen, um erneut zu prüfen), mit ehrlichem Überspringen, wenn das Provider-Secret fehlt. Diese Website vendorisiert zudem den Reviewer v3.1.1, sodass das lokale Final Review und die Dokumentation nun denselben Vertrag lehren.
 
-Lies die [Spezifikation](https://deepworkplan.com/spec), die [Addon-Referenz](https://deepworkplan.com/kit/ai-diff-reviewer) für die vollständige Liste der v3-Fähigkeiten, die [v5.5.3-Release](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3) für die Quelle oder die [v3.1.1-Release des Reviewers](https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1) für das, was upstream geändert hat.
+Lesen Sie die [Spezifikation](https://deepworkplan.com/spec), die [Addon-Referenz](https://deepworkplan.com/kit/ai-diff-reviewer) für die vollständige Liste der v3-Fähigkeiten, die [v5.5.3-Release](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3) für die Quelle oder die [v3.1.1-Release des Reviewers](https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1) für das, was upstream geändert hat.

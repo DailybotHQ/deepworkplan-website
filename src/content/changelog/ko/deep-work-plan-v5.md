@@ -23,7 +23,7 @@ sourceLinks:
   - label: "스킬 릴리스 v5.5.3"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
   - label: "리뷰어 릴리스 v3.1.1"
-    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 오늘 Deep Work Plan v5를 릴리스합니다. 이것은 다시 쓰기가 아닙니다. 실제 플랜 108개에 대한 직접 감사를 포함해, 방법론의 약속과 에이전트의 실제 동작이 어디에서 어긋날 수 있는지를 격차 하나하나 드러낸 몇 달간의 실사용의 결과입니다. 이 릴리스의 정직한 요약은 이렇습니다. 이 방법론은 이미 이 모든 것을 약속해 왔습니다 — 이제는 이를 보장합니다. v5 이전에는 문서를 글자 그대로 따르는 에이전트조차 실제 실패 시나리오에 빠질 수 있었습니다. 그런 시나리오는 이러한 사용과 피드백을 통해 식별되어, 이제 하나씩 모두 닫혔고 실행 가능한 테스트로 고정되었습니다 — 더 많은 글로 덮어 가린 것이 아닙니다. 이번 주기에 스킬의 계약 스위트는 132개에서 258개 테스트로 성장했고, 아래의 모든 보장은 릴리스된 태그를 대상으로 실제로 검증되었습니다 — 깨끗한 저장소에 설치하고 고유한 흐름을 전부 통과시킨 뒤에야 이 항목을 작성했습니다.

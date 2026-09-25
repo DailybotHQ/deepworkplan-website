@@ -23,7 +23,7 @@ sourceLinks:
   - label: "rilis skill v5.5.3"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
   - label: "rilis peninjau v3.1.1"
-    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Hari ini kami merilis Deep Work Plan v5. Ini bukan penulisan ulang: ini adalah hasil berbulan-bulan penggunaan nyata — termasuk audit langsung terhadap 108 rencana nyata — yang mengungkap, celah demi celah, di mana janji metodologi dan perilaku nyata agen bisa menyimpang. Ringkasan yang jujur dari rilis ini: metodologinya memang sudah menjanjikan semua ini — sekarang ia menjaminnya. Sebelum v5, agen yang mengikuti dokumentasi secara harfiah masih bisa berakhir dalam skenario kegagalan nyata; setiap skenario tersebut, yang teridentifikasi lewat penggunaan dan masukan itu, kini tertutup dan dikunci dengan tes yang dapat dieksekusi, bukan ditambal dengan lebih banyak narasi. Rangkaian kontrak skill tumbuh dari 132 menjadi 258 tes dalam siklus ini, dan setiap jaminan di bawah divalidasi secara langsung terhadap tag yang dirilis — dipasang ke dalam repositori bersih dan dijalankan melalui alurnya sendiri sebelum entri ini ditulis.

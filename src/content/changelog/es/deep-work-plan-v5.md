@@ -23,7 +23,7 @@ sourceLinks:
   - label: "Release de la skill v5.5.3"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
   - label: "Release del revisor v3.1.1"
-    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Hoy publicamos Deep Work Plan v5. Esto no es una reescritura: son meses de uso real — incluida una auditoría directa de 108 planes reales — que fueron sacando a la luz, brecha por brecha, dónde las promesas de la metodología y el comportamiento real de un agente podían divergir. El resumen honesto de este lanzamiento: la metodología ya prometía todo esto — ahora lo garantiza. Antes de v5, un agente que siguiera la documentación al pie de la letra podía terminar en escenarios de fallo reales; cada uno de ellos, identificado gracias a ese uso y a esa retroalimentación, está ahora cerrado y asegurado con una prueba ejecutable, no parchado con más prosa. La suite de contratos de la skill pasó de 132 a 258 pruebas en este ciclo, y cada garantía de abajo se validó en vivo contra el tag publicado: se instaló en un repositorio limpio y se llevó por sus propios flujos antes de escribir esta entrada.
@@ -66,7 +66,7 @@ Lee la [especificación](https://deepworkplan.com/spec) para el texto normativo,
 
 ## Actualización — 2026-09-25 · skill v5.5.3 + revisor v3.1.1
 
-El addon de AI Diff Reviewer ahora documenta e instala la línea **v3** del revisor, publicada el 2026-09-24 (v3.0.0 → v3.1.1, pin móvil `@v3`). La skill `v5.5.2` reescribió los documentos normativos del addon, el hook de onboarding y la plantilla de integración alrededor de lo que el revisor v3 realmente hace, y la `v5.5.3` embarcó el lado de CI. Los cambios de mayor peso, verificados contra el revisor publicado en el tag `v3.1.1`:
+El addon de AI Diff Reviewer ahora documenta e instala la línea **v3** del revisor, publicada el 2026-09-24 (v3.0.0 → v3.1.1, pin móvil `@v3`). La skill `v5.5.2` reescribió los documentos normativos del addon, el hook de onboarding y la plantilla de integración alrededor de lo que el revisor v3 realmente hace, y la `v5.5.3` entregó el lado de CI. Los cambios de mayor peso, verificados contra el revisor publicado en el tag `v3.1.1`:
 
 **Un `critical` solo filtra cuando está verificado.** Desde v3, cada hallazgo crítico que afirma un modelo —más una muestra del 30 % de las advertencias— recibe una segunda comprobación breve basada en código por una llamada de modelo separada (≈ 3 k tokens, 10 s y $0.009 por hallazgo verificado). Un `critical` se publica —y bloquea el Final Review— solo cuando ese verificador lo confirma; las afirmaciones refutadas siguen visibles como advertencias anotadas y se listan en la salida estructurada, nunca inline. Una revisión que agota su tope de turnos (`incomplete`) o su reloj (`timeout`) es roja bajo rigor bloqueante: «sin hallazgos» significa ahora siempre que el revisor miró y no encontró nada.
 
