@@ -11,7 +11,7 @@
       "source": "DailybotHQ/agent-skill",
       "sourceType": "github",
       "skillPath": "skills/dailybot/SKILL.md",
-      "computedHash": "944a8c220716d837c1ee7e1276951d831aaf71e26140531825c2b08ac6d8a230"
+      "computedHash": "b7f10a82e15332faddf3b2a620baf3e5fe4bc25c2ee99a7f5c3b988c086baf9e"
     },
     "deepworkplan": {
       "source": "DailybotHQ/deepworkplan-skill",
