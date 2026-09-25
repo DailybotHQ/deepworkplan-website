@@ -319,10 +319,13 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 
 The vendored [`ai-diff-reviewer`](.agents/skills/ai-diff-reviewer/) skill remains
 available for the required local review during each Deep Work Plan Final Review.
-This website does not ship or run an AI Reviewer GitHub Actions workflow; CI
-does not require a reviewer secret or review labels. The shared
-[`.review/extension.md`](.review/extension.md) continues to provide the
-repository-specific local review guidance.
+The website also runs a CI self-review (`.github/workflows/self-review.yml`): a
+single `grok` leg via `DailybotHQ/ai-diff-reviewer@v3`, label-gated on `ready`
+(case-insensitive, run-once per application — remove and re-add the label to
+re-run), with an honest skip when `XAI_API_KEY` is not configured. That secret
+is required only for the CI leg; the local review never needs it. The shared
+[`.review/extension.md`](.review/extension.md) configures both the local and
+the CI review.
 
 DWP standard: 5.0.0 (onboarded 2026-09-11, upgraded 2026-09-13 and 2026-09-17; skill 5.5.1)
 
