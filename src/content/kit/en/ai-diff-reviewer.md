@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Required local review in every DWP Final Review since standard 2.3.0, installed by onboarding; the Flow B CI gate and apply-review companion stay optional."
+description: "Verified-criticals local review in every DWP Final Review since standard 2.3.0; the optional CI gate and the address-review loop complete the addon."
 kind: addon
 lang: en
 order: 5
@@ -10,7 +10,7 @@ order: 5
 
 Every Deep Work Plan closes the same way: a mandatory **Final Review** that reads the plan's entire accumulated change set before the work can be called done. Its security pass is the last point at which anything gets caught. Without help, the only reader at that point is the same agent that wrote the code.
 
-This addon puts a second reader on that diff. It wires the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — listed on the marketplace as "AI Diff Reviewer", currently **v2.3.1** — into the security pass, where it returns something structured rather than prose: a verdict, a findings table, and a severity on each finding. A `critical` finding blocks completion until it is fixed or explicitly accepted. The review is a gate, not a comment.
+This addon puts a second reader on that diff. It wires the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — listed on the marketplace as "AI Diff Reviewer", current release **v3.1.1** — into the security pass, where it returns something structured rather than prose: a verdict, a findings table, and a severity on each finding. Since v3, a `critical` finding means the addon's verifier confirmed it with a second, code-grounded model call; only verified criticals block completion until fixed or explicitly accepted. The review is a gate, not a comment.
 
 Since standard 2.3.0 that local review is **part of the baseline, not an extra**. Onboarding installs it; every Final Review runs it. What stays optional is the CI surface — Flow B, where the same review gates pull requests through the GitHub Action.
 
@@ -29,13 +29,13 @@ The boundary that makes this safe to adopt is deliberately narrow. The reviewer 
 | Flow | What you get |
 |------|----------------|
 | **A — local-only (baseline)** | Vendored skill + required `.review/extension.md` (via `generate-extension`). Runs the local review inside every Final Review's security pass. No GitHub Actions workflow. |
-| **B — dual-surface** | Flow A plus `setup` writes `.github/workflows/pr-review.yml` (Action `@v2`), same extension file for local and CI. Optional `apply-review` companion after CI posts findings. |
+| **B — dual-surface** | Flow A plus `setup` writes the review workflow (Action `@v3`), same extension file for local and CI. Optional `apply-review` and `address-review` companions after CI posts findings. |
 
 Detection for the local review requires **skill + an extension file** at one of: `.review/extension.md`, `.github/ai-diff-reviewer/extension.md`, or `.github/ai-pr-reviewer/extension.md`. Skill alone is not enough.
 
 ## What this addon wires (narrow by design)
 
-The DWP addon does **not** reinvent the reviewer. It defers install, methodology, the CI wizard, extension authoring, PR drafting, and post-CI walkthrough to the upstream skill's five sub-skills (parent default flow, `generate-extension`, `setup`, `open-pr`, `apply-review`).
+The DWP addon does **not** reinvent the reviewer. It defers install, methodology, the CI wizard, extension authoring, PR drafting, and post-CI review loops to the upstream skill's six sub-skills (parent default flow, `generate-extension`, `setup`, `open-pr`, `apply-review`, `address-review`).
 
 ### The required local review
 
@@ -43,47 +43,48 @@ The DWP addon does **not** reinvent the reviewer. It defers install, methodology
 
 - **Missing reviewer — recorded, never skipped silently:** a missing skill or extension becomes a `local reviewer not installed` finding; Final Review runs the local pass when the skill is present and otherwise carries the finding into the completion report — installation belongs to the onboarding consent or an explicit addon invocation, never a surprise bootstrap.
 - **Soft-fail (invocation only):** a review that could start but errors → warn once, record, continue; never fail the task for that miss.
-- **Gate after a completed pass:** `critical` findings still block Final Review completion until fixed or explicitly accepted. `warning` / `info` are documented but non-blocking.
-- **Flow A needs no CI secret.** An unset `CURSOR_API_KEY` must not suppress the local pass.
+- **Gate after a completed pass:** **verified** `critical` findings block Final Review completion until fixed or explicitly accepted (BC-07). Unverified critical claims arrive as annotated warnings — visible, non-blocking unless `strict-unverified-criticals: true` restores claim-based gating. A review that hit its turn cap (`incomplete`) or its wall clock (`timeout`) is not a clean pass under blocking strictness (BC-04). `warning` / `info` are documented but non-blocking.
+- **Flow A needs no CI secret.** An unset provider key must not suppress the local pass.
 
 ### Flow B CI gate (optional)
 
-Action `DailybotHQ/ai-diff-reviewer@v2`, typically label-gated (`ready`), with a stable-named **AI review gate** job for branch protection and opt-in `skip-review-label: skip-ai-review`. Shared `prompt.md` + extension align methodology and severity; under Iteration-Aware Review, CI round 2+ may be shorter while the local pass stays full.
+Action `DailybotHQ/ai-diff-reviewer@v3`, typically label-gated (`ready`), with a stable-named **AI review gate** job for branch protection and opt-in `skip-review-label: skip-ai-review`. Since v3 the review budget follows the change's deterministic risk tier — 8/20/30/40 turns from `low` to `critical` under `budget-profile: auto` (`fixed` restores the pre-v3 constants during the transition) — and a push that changes no code runs a verifier-only round. Shared `prompt.md` + extension align methodology and severity; local and CI stay methodology-identical, while CI round 2+ may be shorter under Iteration-Aware Review and the local pass stays full.
 
-### Optional `apply-review` companion
+### Optional review companions
 
-After CI posts a review, the developer may invoke `apply-review` during `execute` to walk findings per-finding (apply / defer / skip) with consent. Read-only by default; never a plan task file (would break mandatory final-task order). Since v2.3.1 a review body that says `Recommendation: approve` is not evidence the check passed — read the tracking marker's Highest severity / Strictness gate / Check status block first.
+Two developer-invoked sub-skills close the loop after CI posts a review; neither is ever a plan task file (that would break mandatory final-task order).
 
-## What changed since v2.0.1
+- `apply-review` walks findings per-finding (apply / defer / skip) with consent. Read-only by default; never commits or pushes.
+- `address-review` (new in v3.1.1) is the one-invocation loop: find the branch's open PRs, check the review is fresh for the current head, present the findings with an apply/defer/skip plan, then — on one yes — apply, commit in small Conventional Commits batches, push, and re-arm the reviewer the way the repo triggers it (label-gated → toggle the label off/on; push-triggered → confirm the new run). Unlike `apply-review`, it commits and pushes; that is the loop's point. On aggregated ensemble reviews it reads the aggregate document and the `ai-pr-reviewer-aggregate` marker.
+- The machine path is the structured output, not the review body: the `review-output/3.0` document (`.aiprr/review-output.json`, located through the `structured-output-path` and `structured-output-sha256` outputs) carries the run record, findings with evidence and verification, refuted findings, and the gate. A review body that says `Recommendation: approve` is not evidence the check passed — read the tracking marker's Highest severity / Strictness gate / Check status block first.
 
-Four upstream releases landed between v2.0.1 and v2.3.1. None of them changes how this addon wires the reviewer — Flow A, the three detection paths and the blocking contract are unchanged — but they change what an adopter gets.
+## What changed in v3
+
+Three releases landed on 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) and v3.1.1 followed with the `address-review` sub-skill. None of them changes how this addon wires the reviewer — Flow A, the three detection paths and the never-block ladder are unchanged — but they change what an adopter gets.
 
 | Change | What it means for a DWP repository |
 |--------|------------------------------------|
-| **Runner and backend are separate inputs** (v2.1.0) | `provider` names the *runner* — who owns the review loop. The new `api-base` names the *backend* — where the model lives. An empty `api-base` is byte-identical to v2.0.x, so an existing install behaves exactly as before. |
-| **Two more runners** (v2.1.0) | `openai` (in-process, zero install) and `grok` (CLI) join the existing set. |
-| **Cost is a one-word tier, and the defaults are measured** (v2.1.0, v2.3.0) | Cost is controlled by a tier keyword and shaped diffs, and reported per review. On xAI, `balanced` and `economy` both resolve to `grok-4.5` and `deep` to `grok-4.6`. |
-| **Follow-up rounds review the actual new diff** (v2.1.0, v2.2.0, v2.3.1) | Outstanding findings carry forward. `prior-findings-resolution` defaults to `advisory`: a model's "resolved" verdict is reported, but the finding keeps gating until a maintainer resolves the thread. Since v2.3.1, when `collapse-previous` has already minimized that thread, a corroborated fix (finding not re-emitted **and** the file changed since it was raised, or was deleted) retires it so a stuck PR can go green. |
-| **An incomplete review is never a green review** (v2.2.0) | A run that exits without writing findings is posted as an explicit incomplete review. Every blocking strictness fails it, the reviewed label is not stamped, and no open finding is retired by an empty round. |
-| **Checksum-verified installers** (v2.2.0) | `cursor-installer-sha256` and `grok-installer-sha256` refuse to run a vendor artefact whose hash differs from the configured pin. |
-| **The check, the review body and the tracking comment agree** (v2.3.1) | The pass/fail decision is computed once before the review is posted. Every review ends with a runtime-written Check status block. A model `Recommendation: approve` is rewritten to `request-changes` when the gate is failing, so `apply-review` must read the tracking marker, not the model's last line. |
-| **One bad inline anchor no longer costs every comment** (v2.3.1) | On GitHub 422 the Action retries with only the comments whose anchor is inside a diff hunk, then summary-only as a last resort. |
+| **A `critical` publishes only when verified** (v3.0.0) | Every claimed critical — plus a 30 % sample of warnings — gets a second, short, code-grounded check by a separate model call (≈ 3 k tokens, 10 s and $0.009 per verified finding). Verified criticals gate the security pass; refuted claims stay visible as annotated warnings and are listed in the structured output, never posted inline. |
+| **Budgets follow the risk tier** (v3.0.0) | 8/20/30/40 turns from `low` to `critical`, derived from the change inventory (`budget-profile: auto`). A push that changes no code runs a verifier-only round at −93 % cost. `budget-profile: fixed` restores the pre-v3 30-turn constants. |
+| **An unfinished review is red** (v3.0.0) | `incomplete` (turn cap) and `timeout` (wall clock) post partial findings and fail blocking strictness — "no findings" now always means the reviewer looked and found nothing. |
+| **The structured output is the machine path** (v3.0.0) | The `review-output/3.0` document carries the run record, the change inventory, findings with typed evidence and verification, refuted findings, and the gate. Read the document instead of scraping review bodies. |
+| **Six sub-skills** (v3.1.1) | `address-review` joins the router: one invocation applies, commits, pushes, and re-arms the reviewer. |
+| **Optional ensemble** (v3.0.0) | `mode: emit` read-only legs plus one `aggregate` job verify the consolidated findings once and publish a single review. |
+| **`@v2` keeps working** | The v2 line is frozen on `release/v2` with six months of security and catalog maintenance. v3 is the recommendation, never a forced migration. |
 
 Two of these matter more than the rest for the methodology.
 
-**The incomplete-review gate closes a real hole in the security pass.** A Final Review must not be able to close on a review that did not happen. Before v2.2.0 a runner that exited without producing findings was indistinguishable from a clean pass. It is now a named, non-green state, so "no findings" means the reviewer looked and found nothing rather than that it never looked.
+**The verified-criticals gate hardens the security pass.** Before v3, a model could claim a `critical` freely and the gate followed the claim. Now a critical finding in a Final Review means a second model call confirmed it against the code, and the release campaign measured the difference: 771 paid evaluation runs across ten campaigns at roughly $83 total, with the critical tier reaching 63/63 recall at adjudicated precision 1.0, and incremental rounds cutting input tokens by 62–76 %. These figures are upstream's published measurements, not Deep Work Plan's own.
 
-**`economy` is deliberately not cheaper.** The upstream benchmark of 2026-09-16 measured `grok-4.3` at 0 of 5 known defects — it approves without reviewing — while `grok-4.5` matched `grok-4.6` at 3 of 5 with no false positives, at the same cost and a quarter of the wall time. Since no cheaper xAI model still reviews, `economy` resolves to the same model as `balanced` rather than being a tier that finds nothing. The xAI path therefore moves from roughly $0.07 to roughly $0.40–0.75 per review through the CLI; `model: grok-4.3` can still be pinned explicitly to keep the earlier behaviour. These figures are upstream's published measurements, not Deep Work Plan's own.
-
-**A review that says approve is not evidence the check passed.** Since v2.3.1 the runtime writes the Check status block after computing the gate, and rewrites a model `Recommendation: approve` when the gate is failing. That is the contract `apply-review` — and a Final Review that reads a CI review — must follow.
+**`economy` is deliberately not cheaper.** The upstream benchmark of 2026-09-16 measured `grok-4.3` at 0 of 5 known defects — it approves without reviewing — while `grok-4.5` matched `grok-4.6` at 3 of 5 with no false positives, at the same cost and a quarter of the wall time. Since no cheaper xAI model still reviews, `economy` resolves to the same model as `balanced` rather than being a tier that finds nothing; on the grok runner, the risk tier's turn budget, not the model choice, is what scales cost. The xAI path therefore moves from roughly $0.07 to roughly $0.40–0.75 per review through the CLI; Since the v3.0 prompt a 63-run re-measurement moved `grok-4.3` from 0 of 5 to 83 % recall with zero false positives at ~31 % lower cost — but it still fails to write its findings file about three times as often as `grok-4.5`, so `grok-4.5` remains the default and `model: grok-4.3` stays an explicit, accepted-trade-off choice. These figures are upstream's published measurements, not Deep Work Plan's own.
 
 ## Behavior
 
 - **Flow A is the baseline; Flow B is asked, never guessed.** Installing a workflow unrequested is a larger footprint than staying on Flow A.
-- **Reconcile, don't clobber.** Existing skill, extension, or `pr-review.yml` are preserved; fill gaps only.
+- **Reconcile, don't clobber.** Existing skill, extension, or review workflow are preserved; fill gaps only.
 - **Auth deferred.** Provider secrets for CI are maintainer-configured; this addon never stores credentials.
 - **Vendor-neutral.** No commercial service, CI provider, or secret is ever required; the CI surface is the only piece that touches a provider.
 
 ## Notes
 
-Local review required since standard 2.3.0; CI surface optional. Upstream skill: [DailybotHQ/ai-diff-reviewer](https://github.com/DailybotHQ/ai-diff-reviewer). Spec page: [Add-ons](/spec/addons).
+Local review required since standard 2.3.0; CI surface optional. Upstream skill: [DailybotHQ/ai-diff-reviewer](https://github.com/DailybotHQ/ai-diff-reviewer). Upstream migration guide: [docs/MIGRATION_v3.md](https://github.com/DailybotHQ/ai-diff-reviewer/blob/main/docs/MIGRATION_v3.md). Spec page: [Add-ons](/spec/addons).

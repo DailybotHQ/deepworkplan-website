@@ -18,6 +18,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
   - label: "Release de la skill v5.5.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
+  - label: "Release de la skill v5.5.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.2"
+  - label: "Release de la skill v5.5.3"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
+  - label: "Release del revisor v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Hoy publicamos Deep Work Plan v5. Esto no es una reescritura: son meses de uso real — incluida una auditoría directa de 108 planes reales — que fueron sacando a la luz, brecha por brecha, dónde las promesas de la metodología y el comportamiento real de un agente podían divergir. El resumen honesto de este lanzamiento: la metodología ya prometía todo esto — ahora lo garantiza. Antes de v5, un agente que siguiera la documentación al pie de la letra podía terminar en escenarios de fallo reales; cada uno de ellos, identificado gracias a ese uso y a esa retroalimentación, está ahora cerrado y asegurado con una prueba ejecutable, no parchado con más prosa. La suite de contratos de la skill pasó de 132 a 258 pruebas en este ciclo, y cada garantía de abajo se validó en vivo contra el tag publicado: se instaló en un repositorio limpio y se llevó por sus propios flujos antes de escribir esta entrada.
@@ -57,3 +63,17 @@ La primera versión puntual de la línea v5 cierra la última forma en que un pl
 **El pin de AI Diff Reviewer pasa a v2.3.1.** La skill `v5.5.1` instala el revisor cuyo check, cuerpo de la revisión y comentario de seguimiento coinciden. Un cuerpo que dice `Recommendation: approve` no es prueba de que el check haya pasado — lee el bloque Check status del marcador de seguimiento. En modo advisory, una corrección corroborada puede retirar un hallazgo cuyo hilo ya está colapsado, de modo que un PR atascado puede pasar a verde tras una corrección real.
 
 Lee la [especificación](https://deepworkplan.com/spec) para el texto normativo, la [referencia del addon](https://deepworkplan.com/kit/ai-diff-reviewer) para saber qué hace ahora el revisor, o la [release v5.5.1](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) para la fuente.
+
+## Actualización — 2026-09-25 · skill v5.5.3 + revisor v3.1.1
+
+El addon de AI Diff Reviewer ahora documenta e instala la línea **v3** del revisor, publicada el 2026-09-24 (v3.0.0 → v3.1.1, pin móvil `@v3`). La skill `v5.5.2` reescribió los documentos normativos del addon, el hook de onboarding y la plantilla de integración alrededor de lo que el revisor v3 realmente hace, y la `v5.5.3` entregó el lado de CI. Los cambios de mayor peso, verificados contra el revisor publicado en el tag `v3.1.1`:
+
+**Un `critical` solo filtra cuando está verificado.** Desde v3, cada hallazgo crítico que afirma un modelo —más una muestra del 30 % de las advertencias— recibe una segunda comprobación breve basada en código por una llamada de modelo separada (≈ 3 k tokens, 10 s y $0.009 por hallazgo verificado). Un `critical` se publica —y bloquea el Final Review— solo cuando ese verificador lo confirma; las afirmaciones refutadas siguen visibles como advertencias anotadas y se listan en la salida estructurada, nunca inline. Una revisión que agota su tope de turnos (`incomplete`) o su reloj (`timeout`) es roja bajo rigor bloqueante: «sin hallazgos» significa ahora siempre que el revisor miró y no encontró nada.
+
+**El presupuesto sigue el nivel de riesgo.** El presupuesto de revisión se deriva del nivel de riesgo determinista del cambio —8/20/30/40 turnos de `low` a `critical`— y un push que no cambia código ejecuta una ronda solo del verificador con −93 % de costo. `budget-profile: fixed` restablece las constantes previas a v3 durante la transición; las rondas incrementales recortan los tokens de entrada entre un 62 y un 76 %.
+
+**Seis sub-skills, una de ellas un bucle.** El router suma `address-review` (nueva en v3.1.1): una sola invocación encuentra los PR abiertos de la rama, comprueba que la revisión cubre el head actual, presenta los hallazgos y —con un solo sí— aplica, hace commits en lotes pequeños de Conventional Commits, hace push y rearma el revisor según como el repositorio lo dispara. `apply-review` sigue siendo de solo lectura; la salida estructurada (`review-output/3.0`) es la vía para máquinas de cualquier automatización. La línea `@v2` sigue congelada en `release/v2` con seis meses de mantenimiento de seguridad y catálogo — v3 es la recomendación, nunca una migración forzada.
+
+**El revisor ahora revisa sus propias casas.** El repositorio de la skill y este sitio web ejecutan ambos una revisión de CI activada por etiqueta —una pata única de grok vía `DailybotHQ/ai-diff-reviewer@v3`, disparada una vez por aplicación de la etiqueta `ready` (quítala y vuelve a ponerla para relanzarla), con un salto honesto cuando el secret del proveedor no existe. Este sitio también vendoriza el revisor v3.1.1, de modo que el Final Review local y la documentación enseñan ahora el mismo contrato.
+
+Lee la [especificación](https://deepworkplan.com/spec), la [referencia del addon](https://deepworkplan.com/kit/ai-diff-reviewer) para la lista completa de capacidades v3, la [release v5.5.3](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3) para la fuente, o la [release v3.1.1 del revisor](https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1) para lo que cambió upstream.

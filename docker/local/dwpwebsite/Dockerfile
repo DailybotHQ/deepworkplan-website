@@ -91,9 +91,21 @@ RUN rm -f /usr/local/bin/npm && \
     > /usr/local/bin/npm \
     && chmod +x /usr/local/bin/npm
 
-# Source custom commands for node user
-RUN echo 'source /app/docker/custom_commands.sh' >> /home/node/.bashrc \
-    && chown node:node /home/node/.bashrc
+# Source custom commands for every bash the node user can hit:
+# - Interactive terminals read ~/.bashrc
+# - Login shells (`dev.sh shell`, ssh) read Debian's ~/.profile (which sources
+#   ~/.bashrc) plus /etc/profile.d. Do NOT write ~/.bash_profile — that would
+#   shadow Debian's ~/.profile and drop ~/.local/bin, where claude lives.
+RUN usermod -s /bin/bash node && \
+    echo 'source /app/docker/custom_commands.sh' >> /home/node/.bashrc && \
+    printf '%s\n' \
+      '# Login shells (dev.sh shell, ssh, herdr remote). Dash cannot parse bash functions.' \
+      'if [ -n "${BASH_VERSION:-}" ] && [ -f /app/docker/custom_commands.sh ]; then' \
+      '  . /app/docker/custom_commands.sh' \
+      'fi' \
+      > /etc/profile.d/99-dwp-custom-commands.sh && \
+    chmod 0644 /etc/profile.d/99-dwp-custom-commands.sh && \
+    chown node:node /home/node/.bashrc
 
 # Pre-create persistent data dirs so the named volumes inherit node ownership on first mount
 RUN mkdir -p /home/node/.claude_data /home/node/.codex_data /home/node/.cursor_data /home/node/.gh_data \
@@ -169,6 +181,40 @@ RUN git config --global init.defaultBranch main \
     && git config --global safe.directory '*'
 
 USER root
+
+# Restore the tool directories that a LOGIN shell loses.
+#
+# Debian's /etc/profile overwrites PATH wholesale for non-root users
+# (PATH="/usr/local/bin:/usr/bin:/bin:..."), discarding the ENV PATH set above.
+# `docker exec` keeps that ENV and sees every CLI; a login shell — the editor
+# terminal, `dev.sh shell`, anything spawned as `bash -l` — silently loses
+# opencode, grok, and the pnpm globals (codex, cline, pi, chelper), while node
+# and claude keep working, which is what makes the breakage so confusing.
+#
+# profile.d is sourced AFTER that overwrite, so this repairs it. The tool dirs
+# are APPENDED, never prepended: 00-container-node-first.sh has already put
+# /usr/local/bin at the front so the image's own node wins over an IDE-bundled
+# one, and prepending here would undo exactly that.
+#
+# Deliberately a separate, later layer rather than an edit to the earlier
+# drop-in: touching that RUN would invalidate every layer after it.
+RUN printf '%s\n' \
+    '# Re-add the tool dirs that Debian'"'"'s /etc/profile drops from PATH.' \
+    'Appended, never prepended, so /usr/local/bin (set by' \
+    '00-container-node-first.sh) stays first.' \
+    'export SHELL="${SHELL:-/bin/bash}"' \
+    'export PNPM_HOME="${PNPM_HOME:-/usr/local/share/pnpm}"' \
+    'for _d in /usr/local/share/pnpm/bin "$HOME/.local/bin" "$HOME/.cursor/bin" "$HOME/.opencode/bin" "$HOME/.grok/bin"; do' \
+    '  [ -d "$_d" ] || continue' \
+    '  case ":${PATH}:" in' \
+    '    *":${_d}:"*) ;;' \
+    '    *) PATH="${PATH}:${_d}" ;;' \
+    '  esac' \
+    'done' \
+    'unset _d' \
+    'export PATH' \
+    > /etc/profile.d/01-container-tool-paths.sh \
+    && chmod 0644 /etc/profile.d/01-container-tool-paths.sh
 
 # Copy and setup entrypoint script
 COPY dwpwebsite/entrypoint.sh /usr/local/bin/entrypoint.sh

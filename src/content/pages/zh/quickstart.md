@@ -11,21 +11,21 @@ lastUpdated: 2026-09-13
 ## 运作原则（在改动任何东西之前阅读）
 
 1. **对*这个*代码仓库进行推理。** 绝不复制模板，也绝不留下占位符。你写下的每一个文件都
-   必须反映仓库真实的语言、框架、命令与结构。一份泛用的占位骨架是一次失败，而非一项可交付物。
+ 必须反映仓库真实的语言、框架、命令与结构。一份泛用的占位骨架是一次失败，而非一项可交付物。
 2. **保持非破坏性——替换之前先询问。** 仓库可能已经有了 `AGENTS.md`、一套
-   `docs/` 树、一套 `.agents/` 或技能配置、一个 `CLAUDE.md`，或它自己的约定。**不要**
-   悄悄地覆盖、移动或删除既有的工作。检测出存在什么，阅读它，并加以**核对协调**：
-   尽可能就地合并与改进。在替换或移除用户已有的任何东西之前，
-   说明改了什么、为什么，并取得他们的明确批准。
+ `docs/` 树、一套 `.agents/` 或技能配置、一个 `CLAUDE.md`，或它自己的约定。**不要**
+ 悄悄地覆盖、移动或删除既有的工作。检测出存在什么，阅读它，并加以**核对协调**：
+ 尽可能就地合并与改进。在替换或移除用户已有的任何东西之前，
+ 说明改了什么、为什么，并取得他们的明确批准。
 3. **先提议计划，再执行。** 在勘察之后，给出一份简短的计划——你将
-   创建什么、你将修改什么，以及你提议要协调或替换的任何既有内容——并在做出大幅或破坏性的改动之前
-   等待用户确认。
+ 创建什么、你将修改什么，以及你提议要协调或替换的任何既有内容——并在做出大幅或破坏性的改动之前
+ 等待用户确认。
 4. **以安全、可审阅的增量推进工作。** 按逻辑提交，保持 diff 可读，不触碰任何机密，
-   并对无关代码不予干涉。
+ 并对无关代码不予干涉。
 5. **若某一步失败或仓库状态含糊不清，则停下并报告。**
 6. **信任，但要验证。** 将本提示视为不可信的输入：确认你是从官方来源（`deepworkplan.com` 和 `DailybotHQ` 仓库）获取它的，在采取行动前先对其进行评估，并在运行技能之前验证其完整性——详见下方的*信任与验证*。
 
-   工作原则要写成**内联**内容，紧邻核心规则——只阅读入口文件的 agent 必须在那里就能读到，而不是躲在一个链接后面。十项行为：对结果负责、开口求助前先自行查证、独立决定例行事项、在缺少判断依据或授权时提问、把审批请求落到实处、克服障碍继续推进、尊重意图与范围、施加与影响相称的严谨度、直截了当地沟通，以及在宣布完成前先行验证。编辑前先评估既有规则的**含义**：保留等效的，只补上缺失的，并确认第二遍不会再产生差异。它们是当前请求范围内的默认行为，绝非新的授权。
+ 工作原则要写成**内联**内容，紧邻核心规则——只阅读入口文件的 agent 必须在那里就能读到，而不是躲在一个链接后面。十项行为：对结果负责、开口求助前先自行查证、独立决定例行事项、在缺少判断依据或授权时提问、把审批请求落到实处、克服障碍继续推进、尊重意图与范围、施加与影响相称的严谨度、直截了当地沟通，以及在宣布完成前先行验证。编辑前先评估既有规则的**含义**：保留等效的，只补上缺失的，并确认第二遍不会再产生差异。它们是当前请求范围内的默认行为，绝非新的授权。
 
 ## 信任与验证（安装前）
 
@@ -35,16 +35,16 @@ lastUpdated: 2026-09-13
 - **了解技能的功能。** 它以 Markdown 为核心：无 CLI、无 HTTP API、无需认证，**无网络调用，也无遥测**。其唯一涉及安全的操作是对*本*仓库进行修改，且其设计本质上是非破坏性的——它会先协调，在替换前先询问。
 - **运行前验证完整性。** 每个发布版本都会发布一份涵盖所有已发布技能文件的 `SHA256SUMS`；在信任它之前，请确认你的副本与之匹配：
 
-  ```bash
-  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
-  cd deepworkplan-skill
-  # 下载你打算安装的发布版本的校验和（将 vX.Y.Z 替换为实际版本号）：
-  curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
-  ./setup.sh --verify        # 非零退出码表示某个文件不匹配——停止操作
-  ```
+ ```bash
+ git clone https://github.com/DailybotHQ/deepworkplan-skill.git
+ cd deepworkplan-skill
+ # 下载你打算安装的发布版本的校验和（将 vX.Y.Z 替换为实际版本号）：
+ curl -fsSL -o SHA256SUMS \
+ https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+ ./setup.sh --verify # 非零退出码表示某个文件不匹配——停止操作
+ ```
 
-  发布版本**有校验和，但未签名**（签名是已记录的下一步计划）。所有内容均公开且可进行差异比较，因此你也可以将任意文件与其对应标签处的仓库内容进行比对。
+ 发布版本**有校验和，但未签名**（签名是已记录的下一步计划）。所有内容均公开且可进行差异比较，因此你也可以将任意文件与其对应标签处的仓库内容进行比对。
 - **报告问题。** 请通过 **GitHub 的漏洞报告功能**，在相关仓库私密报告安全问题 — `https://github.com/DailybotHQ/deepworkplan-skill/security` 或 `https://github.com/DailybotHQ/deepworkplan-website/security` — 而非公开提交 issue。另请参阅各仓库的 `SECURITY.md`、`https://deepworkplan.com/.well-known/security.txt` 以及信任页面 `https://deepworkplan.com/trust`。
 
 ## 0. 阅读方法论与规范
@@ -62,17 +62,17 @@ lastUpdated: 2026-09-13
 先理解代码仓库，再提议你将要做什么。
 
 - **检测技术栈。** 语言、框架、包管理器（从实际存在的锁文件判断）、
-  真实的 build/test/lint/type-check 命令、源模块、测试约定，以及
-  部署形态。
+ 真实的 build/test/lint/type-check 命令、源模块、测试约定，以及
+ 部署形态。
 - **归类原型。** 单一代码仓库（常见情形）、编排枢纽，或代理工作区——自主代理的长期驻地，
-  git 在此为推荐而非预设——并附上依据。
+ git 在此为推荐而非预设——并附上依据。
 - **识别既有的 DWP 安装。** 若 `AGENTS.md` 与 `.agents/` 已经存在，请寻找 `DWP standard:` 来源行。早于当前标准的 harness 会得到一次**针对性升级**：重新安装技能就是完整的升级路径，onboarding 只协调缺失或过时的部分——每一个手写的章节、自定义技能与进行中的计划都得到保全，第二次运行不会改变任何东西。根据更早版本编写的计划保持其既有形态，并以它们自己的收尾任务结束；它们绝不会被强行并入新的形态。
 - **盘点已经存在的东西。** `AGENTS.md`、`CLAUDE.md`、`docs/`、任何 `.agents/` 或技能/代理
-  配置、`.dwp/` 与 `.gitignore`。记下任何已经在做这项工作一部分的东西。
+ 配置、`.dwp/` 与 `.gitignore`。记下任何已经在做这项工作一部分的东西。
 - **提议接入计划。** 给出一份简明清单：你将创建的文件、你将
-  修改的文件，以及你提议要协调或替换的任何既有内容——然后在继续之前**请用户确认**。
-  对于大型仓库（模块众多或需要生成大量产物），onboard 子技能会使用计划驱动的路径：它先完成勘察，
-  生成 `AGENTS.md`，然后在 `.dwp/plans/` 下发出一份接入 Deep Work Plan，并按需移交给 `/dwp-execute` → `/dwp-resume`。
+ 修改的文件，以及你提议要协调或替换的任何既有内容——然后在继续之前**请用户确认**。
+ 对于大型仓库（模块众多或需要生成大量产物），onboard 子技能会使用计划驱动的路径：它先完成勘察，
+ 生成 `AGENTS.md`，然后在 `.dwp/plans/` 下发出一份接入 Deep Work Plan，并按需移交给 `/dwp-execute` → `/dwp-resume`。
 
 ## 2. 安装 Deep Work Plan 技能
 
@@ -120,10 +120,10 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 每份计划都有一项强制性的收尾任务：**Final Review**。它对累积的整个变更集
 运行安全检查（包括必需的本地 AI Diff Reviewer 审查），验证仓库的最终状态，
 核对各任务所使用的技能，并记录证据与局限。本地审查技能安装在固定版本；
-当前文档记录的命令使用 `DailybotHQ/ai-diff-reviewer@v2.3.1`。GitHub Action
+当前文档记录的命令使用 `DailybotHQ/ai-diff-reviewer@v3.1.1`。GitHub Action
 是一个独立的、可选的 CI 层面，核心方法论从不要求使用它。
 
-一次执行了却没有报告任何问题的审查，与一次根本没能产出结果的审查并不相同。后者属于**不完整的审查**：它会被如实记录，绝不被当作变更集干净的凭据，也绝不构成关闭 Final Review 的理由。连同审查器缺失与调用出错，这是三种彼此不同的状态——而它们当中没有任何一种意味着这份 diff 被审查过且是干净的。自审查器 v2.3.1 起，写着 `Recommendation: approve` 的正文也不能证明检查已通过。请先阅读跟踪标记中的 Highest severity / Strictness gate / Check status 块——当门控失败时，运行时会改写模型的 `approve`。
+一次执行了却没有报告任何问题的审查，与一次根本没能产出结果的审查并不相同。后者属于**不完整的审查**：它会被如实记录，绝不被当作变更集干净的凭据，也绝不构成关闭 Final Review 的理由——与 `timeout` 审查在阻断性严格度下得到的红色处理相同（BC-04）。连同审查器缺失与调用出错，这是三种彼此不同的状态——而它们当中没有任何一种意味着这份 diff 被审查过且是干净的。写着 `Recommendation: approve` 的正文也不能证明检查已通过。请先阅读跟踪标记中的 Highest severity / Strictness gate / Check status 块——当门控失败时，运行时会改写模型的 `approve`。
 
 无人值守执行仅支持事先获得批准的计划。它需要机器可读的状态层、已声明的
 DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在计划的修复范围之外
@@ -137,42 +137,42 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 方法论对齐），而非覆盖——并在替换任何东西之前与用户确认。
 
 1. **`AGENTS.md` + `CLAUDE.md`。** 在根目录产出一个 `AGENTS.md`——一份索引、各项强制规则
-   （仅英文、约定式提交、仓库真实的测试模式与审查关卡），以及一个 Quick
-   Commands 块，其中是仓库**真实、可运行**的命令。若 `AGENTS.md` 已存在，则合并
-   进它，而非替换它。创建 `CLAUDE.md → AGENTS.md` 符号链接（未经询问不要覆盖已有的
-   `CLAUDE.md`）。同样，如果 `.cursor → .agents` 符号链接不存在，也创建它。
+ （仅英文、约定式提交、仓库真实的测试模式与审查关卡），以及一个 Quick
+ Commands 块，其中是仓库**真实、可运行**的命令。若 `AGENTS.md` 已存在，则合并
+ 进它，而非替换它。创建 `CLAUDE.md → AGENTS.md` 符号链接（未经询问不要覆盖已有的
+ `CLAUDE.md`）。同样，如果 `.cursor → .agents` 符号链接不存在，也创建它。
 2. **`docs/`。** 用真实、仓库专属的内容填充标准的各类别：`PRODUCT_SPEC.md`（非技术性的产品/为什么文档——每个仓库必须具备，库类项目亦然）、`ARCHITECTURE.md`、
-   `STANDARDS.md`、`TESTING_GUIDE.md`、`DEVELOPMENT_COMMANDS.md`、`SECURITY.md`
-   （绝不跳过——每个仓库都有安全态势，即使没有任何机密）、
-   `AI_AGENT_ONBOARDING.md`、`AI_AGENT_COLLAB.md`，外加 `PERFORMANCE.md` 与一份 `docs/README.md` 索引。
-   若文档已存在，则整合并扩展它们——不要重复。
+ `STANDARDS.md`、`TESTING_GUIDE.md`、`DEVELOPMENT_COMMANDS.md`、`SECURITY.md`
+ （绝不跳过——每个仓库都有安全态势，即使没有任何机密）、
+ `AI_AGENT_ONBOARDING.md`、`AI_AGENT_COLLAB.md`，外加 `PERFORMANCE.md` 与一份 `docs/README.md` 索引。
+ 若文档已存在，则整合并扩展它们——不要重复。
 3. **各模块文档。** 在勘察中发现的每个主要源模块内部，添加一个 `README.md`
-   （并为复杂模块添加一个 `docs/` 子文件夹）。
+ （并为复杂模块添加一个 `docs/` 子文件夹）。
 4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`。** 创建规范的、跨代理的目录：一份**经过推理**的
-   `agents/`、与技术栈相适配的 `skills/`，以及委派给已安装技能的轻量 `dwp-*` `commands/` 目录——
-   每一项都为*这个*仓库给出理由，而非从另一个仓库复制。添加一份
-   与磁盘上存在之物相一致的 `docs/` 目录（`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`），
-   外加 `settings.json` 以及 `.claude → .agents` 和 `.cursor → .agents` 符号链接。把任何既有的技能/代理
-   纳入该目录。
+ `agents/`、与技术栈相适配的 `skills/`，以及委派给已安装技能的轻量 `dwp-*` `commands/` 目录——
+ 每一项都为*这个*仓库给出理由，而非从另一个仓库复制。添加一份
+ 与磁盘上存在之物相一致的 `docs/` 目录（`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`），
+ 外加 `settings.json` 以及 `.claude → .agents` 和 `.cursor → .agents` 符号链接。把任何既有的技能/代理
+ 纳入该目录。
 5. **DWP 技能，已适配。** 已安装的技能是引擎；仓库自己的套件
-   （技能、代理、命令）必须**为这个仓库经过推理**——绝非对另一个
-   仓库套件的复制粘贴。
+ （技能、代理、命令）必须**为这个仓库经过推理**——绝非对另一个
+ 仓库套件的复制粘贴。
 6. **`.dwp/` + `tmp/`。** 搭建一个含 `plans/` 的、被 gitignore 的 `.dwp/`，外加一个 `tmp/`
-   草稿空间——两者都以非破坏性方式（追加，而非重写）加入 `.gitignore`。它们并不可以互换：一个流程**围绕某个计划**产出的一切——分析记录、skills 台账、安全审查、门控日志、审计报告——都必须存放在该计划自己的 `.dwp/plans/PLAN_{name}/analysis_results/` 中，绝不放在仓库根目录，也绝不放在 `tmp/`。`tmp/` 留给任何计划都不会再回头读取的工作。
+ 草稿空间——两者都以非破坏性方式（追加，而非重写）加入 `.gitignore`。它们并不可以互换：一个流程**围绕某个计划**产出的一切——分析记录、skills 台账、安全审查、门控日志、审计报告——都必须存放在该计划自己的 `.dwp/plans/PLAN_{name}/analysis_results/` 中，绝不放在仓库根目录，也绝不放在 `tmp/`。`tmp/` 留给任何计划都不会再回头读取的工作。
 
 ## 4. 安装必备的本地审查，然后提供可选的附加组件
 
-在基线接入完成之后，安装 **AI Diff Reviewer 本地审查**（第 7a 阶段——自标准 2.3.0 起必备）：在接入授权之下，安装标签锁定的 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.1 --skill ai-diff-reviewer -y`），并通过 `generate-extension` 生成按仓库定制的 `.review/extension.md`。然后列举四个可选附加组件（devcontainer、Dailybot、dependency-upgrade、design-system），并把每一个作为一项明确的可选项来提供。一个仓库
+在基线接入完成之后，安装 **AI Diff Reviewer 本地审查**（第 7a 阶段——自标准 2.3.0 起必备）：在接入授权之下，安装标签锁定的 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`），并通过 `generate-extension` 生成按仓库定制的 `.review/extension.md`。然后列举四个可选附加组件（devcontainer、Dailybot、dependency-upgrade、design-system），并把每一个作为一项明确的可选项来提供。一个仓库
 在不带**任何**可选附加组件时即完全符合规范——绝不自动安装它们。
 
 - **Devcontainer 支持** —— 一个可复现、隔离的开发容器，具备持久的 AI-CLI 认证。
 - **Dailybot 集成** —— 四个生命周期事件（启动、重要任务、阻塞、完成）作为面向已在使用 Dailybot 的团队的尽力而为式进展报告，并可选启用自主的钩子强制层（`dailybot-cli >= 3.7.0`）。安装配套的 Dailybot 代理技能（3.10.3）还会暴露聊天、签到、表单创建、AI 询问、每仓库 API 密钥等功能——该附加组件仅将报告接入 DWP 执行。核心方法论对 Dailybot 零依赖。
 - **Dependency upgrade** —— 包管理器无关、分批次、经验证、可回退的升级。被
-  采纳时，它会安装 `/lib-upgrade` 命令。
+ 采纳时，它会安装 `/lib-upgrade` 命令。
 - **Design system** —— 可选的 `docs/DESIGN.md`，仅面向具备被检测到的界面表面的仓库
-  （不会向纯库、无头服务或纯基础设施仓库提供）。三个配置档堆叠在一个文件中：visual-ui
-  （检测到时受到强烈推荐；安装以明确接受为前提）、cli-output 与 conversational——后两者始终会被询问，绝不会被自动应用。
-- **AI Diff Reviewer** —— 必备的本地审查（并非可选项）：每份 Final Review 的安全审查环节都会在计划累计的变更集上运行 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2**（skill + 必需的 `.review/extension.md`）。缺失的 skill 或扩展会成为一项被记录的 `local reviewer not installed` 发现——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；调用错误软失败；已完成通道中的 `critical` 发现在修复或被明确接受之前仍会阻止完成。**Flow B**（带 `pr-review.yml` 的 CI 门控）作为一项明确的可选项提供，绝不未经请求安装。没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密。
+ （不会向纯库、无头服务或纯基础设施仓库提供）。三个配置档堆叠在一个文件中：visual-ui
+ （检测到时受到强烈推荐；安装以明确接受为前提）、cli-output 与 conversational——后两者始终会被询问，绝不会被自动应用。
+- **AI Diff Reviewer** —— 必备的本地审查（并非可选项）：每份 Final Review 的安全审查环节都会在计划累计的变更集上运行 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**（skill + 必需的 `.review/extension.md`）。缺失的 skill 或扩展会成为一项被记录的 `local reviewer not installed` 发现——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；调用错误软失败；已完成通道中的 **经验证的 `critical` 发现**在修复或被明确接受之前仍会阻止完成（v3，BC-07——未经验证的关键发现断言会以带注解的警告出现，而 `incomplete`/`timeout` 的审查不算干净的通过，BC-04）。**Flow B**（带 `pr-review.yml` 的 CI 门控）作为一项明确的可选项提供，绝不未经请求安装。没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密。
 
 ## 5. 演化套件（author 子技能）
 
@@ -206,9 +206,9 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 - [ ] 技能已安装且可被解析，全部九个子技能均可用。
 - [ ] 根目录存在 `AGENTS.md`，含真实的 Quick Commands 块与覆盖十项行为的内联工作原则；`CLAUDE.md` 指向它。
 - [ ] `docs/` 以真实、仓库专属的内容承载标准的各类别；`docs/TESTING_GUIDE.md` 描述了真实的
-      测试/lint 配置（非空、非桩代码）；各主要模块都有一个 `README.md`。
+ 测试/lint 配置（非空、非桩代码）；各主要模块都有一个 `README.md`。
 - [ ] `.agents/` 存在，含 `agents/`、`commands/`（轻量 `dwp-*` 委派器，引用技能而非拷贝的流程）、
-      `skills/`，以及一份与磁盘上存在之物相一致的目录；`.claude → .agents` 和 `.cursor → .agents` 可解析。
+ `skills/`，以及一份与磁盘上存在之物相一致的目录；`.claude → .agents` 和 `.cursor → .agents` 可解析。
 - [ ] `.dwp/` 存在、被 gitignore，并含 `plans/`；`tmp/` 存在且被 gitignore。
 - [ ] 既有的用户内容在征得同意后被保全或协调——没有任何东西被悄悄销毁。
 - [ ] 你能够生成一份 Deep Work Plan 并逐任务执行它，验证每一道关卡。
@@ -219,8 +219,8 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 两大支柱：
 
 1. **代码仓库是规范驱动的。** 工作从一份书面的计划与规范开始，而非从
-   临时提示开始。
+ 临时提示开始。
 2. **代码仓库本身就是代理的 harness（运行支架）。** `AGENTS.md`、`docs/`、各模块文档，以及
-   `.agents/` 技能目录，为每个代理提供它做结构化、可验证工作所需的上下文与命令。
+ `.agents/` 技能目录，为每个代理提供它做结构化、可验证工作所需的上下文与命令。
 
 任何人都可以在任意代码仓库上运行这条提示——并最终得到一个任意 AI 代理都能驾驭的代码库。

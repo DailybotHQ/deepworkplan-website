@@ -1,6 +1,6 @@
 ---
 title: 附加组件
-description: "DWP 附加组件：四个可选扩展（devcontainer、Dailybot、dependency-upgrade、design-system）、必备的 AI Diff Reviewer 本地审查及其可选 CI 层面、附加组件合约，以及套件相关概念（skills、agents、presets）说明。"
+description: "DWP 附加组件：四个可选扩展、必备的 AI Diff Reviewer 本地审查及其可选 CI 层面、附加组件合约与套件概念。"
 order: 6
 lang: zh
 section: Addons
@@ -70,9 +70,9 @@ section: Addons
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**）为强制的 Final Review 安全审查环节提供结构化的本地审查，并可选地在 CI 中对拉取请求设置门控。自标准 2.3.0 起，**本地审查属于基线的一部分**；只有 CI 层面是可选的。此附加组件会随每次发布自动刷新，因此下方展示的标签是撰写本文时的当前标签，可能落后于实际 vendored 的副本——该附加组件自身的 `SKILL.md` 及其 GitHub 发布记录才是实际所装标签的权威来源。安装始终固定到已发布的标签，绝不指向移动的分支。
 
 - **套件页：** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 完整能力参考
-- **接入时必备（第 7a 阶段）：** 在接入授权之下，标签锁定安装 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.1 --skill ai-diff-reviewer -y`），外加按仓库定制的 `.review/extension.md`（通过 `generate-extension`）；缺失时由定向 harness 升级调和二者；拒绝会被记录为一项声明的例外，并由 `verify` 持续报告，直至安装完成
-- **每份 Final Review 中必备：** 安全审查环节在累计变更集上运行上游父级默认流，并将输出追加到计划本地的 `analysis_results/SECURITY_REVIEW.md`（位于计划自身的文件夹内，绝不在仓库根目录）；缺少 skill 或扩展会作为一项 `local reviewer not installed` 发现被记录——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；已完成通道中的 `critical` 发现在修复或被明确接受之前会阻止完成
-- **可选 CI 层面（Flow B）：** 通过上游 `setup` 子技能提供 `pr-review.yml`（`DailybotHQ/ai-diff-reviewer@v2`），并将 `apply-review` 作为开发者调用的伴随工具——明确提供、绝不未经请求安装、绝不作为默认、绝不作为计划任务
+- **接入时必备（第 7a 阶段）：** 在接入授权之下，标签锁定安装 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`），外加按仓库定制的 `.review/extension.md`（通过 `generate-extension`）；缺失时由定向 harness 升级调和二者；拒绝会被记录为一项声明的例外，并由 `verify` 持续报告，直至安装完成
+- **每份 Final Review 中必备：** 安全审查环节在累计变更集上运行上游父级默认流，并将输出追加到计划本地的 `analysis_results/SECURITY_REVIEW.md`（位于计划自身的文件夹内，绝不在仓库根目录）；缺少 skill 或扩展会作为一项 `local reviewer not installed` 发现被记录——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；已完成通道中的**经验证的 `critical` 发现**在修复或被明确接受之前会阻止完成（v3，BC-07——未经验证的关键发现断言会以带注解的警告出现，而 `incomplete`/`timeout` 的审查不算干净的通过，BC-04）
+- **可选 CI 层面（Flow B）：** 通过上游 `setup` 子技能提供 `pr-review.yml`（`DailybotHQ/ai-diff-reviewer@v3`），并将 `apply-review`（只读）与 `address-review`（执行提交、推送并重新武装审查器；v3.1.1 新增）作为开发者调用的便利工具——明确提供、绝不未经请求安装、绝不作为默认、绝不作为计划任务
 - **绝不阻塞（仅限调用）：** 能够启动但出错的本地审查按「警告一次、记录后继续」处理；它绝不使任务失败
 - **奇偶性（Flow B）：** 共享 `prompt.md` + 扩展对齐方法论/严重程度；CI 迭代感知审查可缩短第 2+ 轮，而本地通道保持完整
 - **供应商中立护栏：** 没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密——该审查器是一个由开发者自己的编码代理运行的 MIT 授权、标签锁定的 skill

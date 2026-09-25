@@ -33,6 +33,10 @@ services:
       - dwpwebsite/.env
     environment:
       - DOCKER_DEV_ENV=vscode
+      # Herdr, SSH, and agent CLIs spawn $SHELL (or /bin/sh if unset). Wrappers
+      # like claudex-glm live in docker/custom_commands.sh as bash functions,
+      # so the default shell must be bash or those commands are "not found".
+      - SHELL=/bin/bash
     command:
       - /bin/sh
       - -c

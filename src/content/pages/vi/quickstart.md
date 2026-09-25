@@ -154,11 +154,11 @@ kiểm tra bảo mật trên toàn bộ tập thay đổi đã tích lũy, bao g
 bộ AI Diff Reviewer bắt buộc, xác thực trạng thái cuối cùng của repository,
 đối chiếu các skill mà các tác vụ đã sử dụng, và ghi lại bằng chứng cùng các
 giới hạn. Skill đánh giá cục bộ được cài đặt ở một phiên bản cố định; lệnh
-được ghi lại hiện tại sử dụng `DailybotHQ/ai-diff-reviewer@v2.3.1`. GitHub
+được ghi lại hiện tại sử dụng `DailybotHQ/ai-diff-reviewer@v3.1.1`. GitHub
 Action là một bề mặt CI riêng biệt, tùy chọn, và không bao giờ là bắt buộc đối
 với phương pháp luận cốt lõi.
 
-Một lượt đánh giá đã chạy và không báo gì không giống với một lượt đánh giá chưa từng tạo ra phát hiện nào. Trường hợp thứ hai là một **lượt đánh giá dở dang**: nó được ghi nhận đúng như vậy, không bao giờ được tính là bằng chứng rằng tập thay đổi đã sạch, và không bao giờ là lý do để khép lại Final Review. Cùng với trình đánh giá vắng mặt và lời gọi bị lỗi, đó là ba trạng thái khác nhau — và không trạng thái nào nghĩa là bản diff đã được đánh giá và sạch. Từ trình đánh giá v2.3.1, nội dung nói `Recommendation: approve` cũng không phải bằng chứng check đã đạt. Hãy đọc trước khối Highest severity / Strictness gate / Check status trên dấu theo dõi — runtime viết lại `approve` của mô hình khi cổng đang thất bại.
+Một lượt đánh giá đã chạy và không báo gì không giống với một lượt đánh giá chưa từng tạo ra phát hiện nào. Trường hợp thứ hai là một **lượt đánh giá dở dang**: nó được ghi nhận đúng như vậy, không bao giờ được tính là bằng chứng rằng tập thay đổi đã sạch, và không bao giờ là lý do để khép lại Final Review — cùng xử lý màu đỏ mà một lượt đánh giá `timeout` nhận dưới mức nghiêm ngặt có tính chặn (BC-04). Cùng với trình đánh giá vắng mặt và lời gọi bị lỗi, đó là ba trạng thái khác nhau — và không trạng thái nào nghĩa là bản diff đã được đánh giá và sạch. Nội dung nói `Recommendation: approve` cũng không phải bằng chứng check đã đạt. Hãy đọc trước khối Highest severity / Strictness gate / Check status trên dấu theo dõi — runtime viết lại `approve` của mô hình khi cổng đang thất bại.
 
 Thực thi không giám sát chỉ được hỗ trợ cho một kế hoạch đã được phê duyệt
 trước. Nó đòi hỏi lớp trạng thái mà máy có thể đọc được, một tiêu chuẩn DWP đã
@@ -202,7 +202,7 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
 
 Sau khi khởi tạo nền tảng, hãy cài **đánh giá cục bộ AI Diff Reviewer** (Giai đoạn 7a — bắt buộc kể từ
 chuẩn 2.3.0): skill vendored được ghim theo tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.1 --skill ai-diff-reviewer -y`) cùng một
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) cùng một
 `.review/extension.md` được điều chỉnh riêng cho repo qua `generate-extension`, dưới sự chấp thuận của
 quá trình khởi tạo. Sau đó liệt kê bốn addon tùy chọn (devcontainer, Dailybot, dependency-upgrade,
 design-system) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository hoàn toàn tuân thủ
@@ -217,12 +217,12 @@ với **không** addon tùy chọn nào — đừng bao giờ tự động cài 
   một tệp: visual-ui (được khuyến nghị mạnh mẽ khi phát hiện; cài đặt kiểm soát bằng sự chấp nhận), cli-output và hội thoại — hai profile sau
   luôn được hỏi, không bao giờ tự động áp dụng.
 - **AI Diff Reviewer** — đánh giá cục bộ bắt buộc (không phải tùy chọn): bước rà soát bảo mật của mọi
-  Final Review chạy [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill +
+  Final Review chạy [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill +
   `.review/extension.md` bắt buộc) trên toàn bộ tập thay đổi đã tích lũy của kế hoạch. Một skill hoặc
   tiện ích mở rộng bị thiếu là một phát hiện `local reviewer not installed` được ghi lại — không bao giờ là một lần bỏ qua âm thầm,
   và không bao giờ là một bootstrap bất ngờ: việc cài đặt thuộc về sự chấp thuận
   của onboarding hoặc một lời gọi addon rõ ràng; lỗi gọi chỉ thất bại
-  nhẹ; kết quả `critical` từ một lượt hoàn tất vẫn chặn việc hoàn thành. **Flow B** (cổng CI với
+  nhẹ; kết quả **nghiêm trọng đã xác minh** từ một lượt hoàn tất vẫn chặn việc hoàn thành (v3, BC-07 — các xác nhận nghiêm trọng chưa xác minh xuất hiện dưới dạng cảnh báo có chú thích, và một lượt đánh giá `incomplete`/`timeout` không phải là một lượt sạch, BC-04). **Flow B** (cổng CI với
   `pr-review.yml`) được đề xuất như một lựa chọn tự nguyện rõ ràng và không bao giờ được cài khi chưa
   được yêu cầu. Không luồng Deep Work Plan nào yêu cầu một dịch vụ thương mại, nhà cung cấp CI hay bí mật.
 
