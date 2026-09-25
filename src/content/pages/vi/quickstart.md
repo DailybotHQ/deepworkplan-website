@@ -158,7 +158,7 @@ giới hạn. Skill đánh giá cục bộ được cài đặt ở một phiên
 Action là một bề mặt CI riêng biệt, tùy chọn, và không bao giờ là bắt buộc đối
 với phương pháp luận cốt lõi.
 
-Một lượt đánh giá đã chạy và không báo gì không giống với một lượt đánh giá chưa từng tạo ra phát hiện nào. Trường hợp thứ hai là một **lượt đánh giá dở dang**: nó được ghi nhận đúng như vậy, không bao giờ được tính là bằng chứng rằng tập thay đổi đã sạch, và không bao giờ là lý do để khép lại Final Review. Cùng với trình đánh giá vắng mặt và lời gọi bị lỗi, đó là ba trạng thái khác nhau — và không trạng thái nào nghĩa là bản diff đã được đánh giá và sạch. Nội dung nói `Recommendation: approve` cũng không phải bằng chứng check đã đạt. Hãy đọc trước khối Highest severity / Strictness gate / Check status trên dấu theo dõi — runtime viết lại `approve` của mô hình khi cổng đang thất bại.
+Một lượt đánh giá đã chạy và không báo gì không giống với một lượt đánh giá chưa từng tạo ra phát hiện nào. Trường hợp thứ hai là một **lượt đánh giá dở dang**: nó được ghi nhận đúng như vậy, không bao giờ được tính là bằng chứng rằng tập thay đổi đã sạch, và không bao giờ là lý do để khép lại Final Review — cùng xử lý màu đỏ mà một lượt đánh giá `timeout` nhận dưới mức nghiêm ngặt có tính chặn (BC-04). Cùng với trình đánh giá vắng mặt và lời gọi bị lỗi, đó là ba trạng thái khác nhau — và không trạng thái nào nghĩa là bản diff đã được đánh giá và sạch. Nội dung nói `Recommendation: approve` cũng không phải bằng chứng check đã đạt. Hãy đọc trước khối Highest severity / Strictness gate / Check status trên dấu theo dõi — runtime viết lại `approve` của mô hình khi cổng đang thất bại.
 
 Thực thi không giám sát chỉ được hỗ trợ cho một kế hoạch đã được phê duyệt
 trước. Nó đòi hỏi lớp trạng thái mà máy có thể đọc được, một tiêu chuẩn DWP đã
@@ -222,7 +222,7 @@ với **không** addon tùy chọn nào — đừng bao giờ tự động cài 
   tiện ích mở rộng bị thiếu là một phát hiện `local reviewer not installed` được ghi lại — không bao giờ là một lần bỏ qua âm thầm,
   và không bao giờ là một bootstrap bất ngờ: việc cài đặt thuộc về sự chấp thuận
   của onboarding hoặc một lời gọi addon rõ ràng; lỗi gọi chỉ thất bại
-  nhẹ; kết quả `critical` từ một lượt hoàn tất vẫn chặn việc hoàn thành. **Flow B** (cổng CI với
+  nhẹ; kết quả **nghiêm trọng đã xác minh** từ một lượt hoàn tất vẫn chặn việc hoàn thành (v3, BC-07 — các xác nhận nghiêm trọng chưa xác minh xuất hiện dưới dạng cảnh báo có chú thích, và một lượt đánh giá `incomplete`/`timeout` không phải là một lượt sạch, BC-04). **Flow B** (cổng CI với
   `pr-review.yml`) được đề xuất như một lựa chọn tự nguyện rõ ràng và không bao giờ được cài khi chưa
   được yêu cầu. Không luồng Deep Work Plan nào yêu cầu một dịch vụ thương mại, nhà cung cấp CI hay bí mật.
 

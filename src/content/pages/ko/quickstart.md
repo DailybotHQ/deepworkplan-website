@@ -144,7 +144,7 @@ Full 계획에서는 리포지토리가 지속적인 실행 표면이 됩니다.
 `DailybotHQ/ai-diff-reviewer@v3.1.1`을 사용합니다. GitHub Action은
 별개의 선택적 CI 표면이며 핵심 방법론에는 결코 필수가 아닙니다.
 
-실행되었지만 아무것도 보고하지 않은 리뷰와, 애초에 지적을 하나도 만들어 내지 못한 리뷰는 같지 않습니다. 후자는 **불완전한 리뷰**입니다. 그대로 기록되며, 변경 사항이 깨끗하다는 근거로 결코 계산되지 않고, Final Review를 닫을 이유도 되지 않습니다. 리뷰어 부재, 호출 오류와 함께 서로 다른 세 가지 상태이며, 그 어느 것도 "diff를 검토했고 문제가 없었다"를 뜻하지 않습니다. `Recommendation: approve`라고 적힌 본문도 체크가 통과했다는 증거가 아닙니다. 추적 마커의 Highest severity / Strictness gate / Check status 블록을 먼저 읽으세요. 게이트가 실패 중이면 런타임이 모델의 `approve`를 다시 씁니다.
+실행되었지만 아무것도 보고하지 않은 리뷰와, 애초에 지적을 하나도 만들어 내지 못한 리뷰는 같지 않습니다. 후자는 **불완전한 리뷰**입니다. 그대로 기록되며, 변경 사항이 깨끗하다는 근거로 결코 계산되지 않고, Final Review를 닫을 이유도 되지 않습니다 — 차단 엄격도에서 `timeout` 검토가 받는 것과 같은 빨간 처리(BC-04). 리뷰어 부재, 호출 오류와 함께 서로 다른 세 가지 상태이며, 그 어느 것도 "diff를 검토했고 문제가 없었다"를 뜻하지 않습니다. `Recommendation: approve`라고 적힌 본문도 체크가 통과했다는 증거가 아닙니다. 추적 마커의 Highest severity / Strictness gate / Check status 블록을 먼저 읽으세요. 게이트가 실패 중이면 런타임이 모델의 `approve`를 다시 씁니다.
 
 무인 실행은 사전에 승인된 계획에 대해서만 지원됩니다. 이는 기계가
 읽을 수 있는 상태 계층, 선언된 DWP 표준, 제한된 권한, 명시적인 중단
@@ -200,7 +200,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
   (순수 라이브러리, 헤드리스 서비스, 인프라 전용 리포지토리에는 제공하지 않음). 세 가지 프로필이
   하나의 파일에 쌓입니다: visual-ui(감지되면 강력히 권장; 설치는 수락으로 제어), cli-output, conversational — 후자 두 개는
   항상 질문하며 자동 적용하지 않습니다.
-- **AI Diff Reviewer** — 필수 로컬 리뷰입니다(선택형 아님): 모든 Final Review의 보안 점검이 계획의 누적 변경 집합에 대해 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**(skill + 필수 `.review/extension.md`)를 실행합니다. 누락된 스킬이나 확장은 기록된 `local reviewer not installed` 발견 사항입니다 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아닙니다: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속합니다. 호출 오류는 소프트 실패하며, 완료된 패스의 `critical` 결과는 여전히 완료를 차단합니다. **Flow B**(`pr-review.yml`을 갖춘 CI 게이트)는 명시적 선택형으로 제안되며 요청 없이 설치되는 일이 결코 없습니다. 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않습니다.
+- **AI Diff Reviewer** — 필수 로컬 리뷰입니다(선택형 아님): 모든 Final Review의 보안 점검이 계획의 누적 변경 집합에 대해 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**(skill + 필수 `.review/extension.md`)를 실행합니다. 누락된 스킬이나 확장은 기록된 `local reviewer not installed` 발견 사항입니다 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아닙니다: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속합니다. 호출 오류는 소프트 실패하며, 완료된 패스의 **검증된 `critical` 결과**는 여전히 완료를 차단합니다 (v3, BC-07 — 검증되지 않은 크리티컬 주장은 주석 달린 경고로 표시되며, `incomplete`/`timeout` 검토는 깨끗한 패스가 아님, BC-04). **Flow B**(`pr-review.yml`을 갖춘 CI 게이트)는 명시적 선택형으로 제안되며 요청 없이 설치되는 일이 결코 없습니다. 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않습니다.
 
 ## 5. 키트를 발전시키세요 (author 하위 스킬)
 

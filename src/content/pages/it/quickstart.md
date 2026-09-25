@@ -155,7 +155,7 @@ release fissata; il comando attualmente documentato usa
 `DailybotHQ/ai-diff-reviewer@v3.1.1`. La GitHub Action è una superficie CI
 separata e opzionale, mai richiesta per la metodologia core.
 
-Una revisione che è stata eseguita e non ha segnalato nulla non è la stessa cosa di una revisione che non ha mai prodotto alcun rilievo. Il secondo caso è una **revisione incompleta**: viene registrata come tale, non conta mai come prova che l'insieme di modifiche sia pulito, e non è mai un motivo per chiudere il Final Review. Insieme a un revisore assente e a un'invocazione fallita, sono tre stati distinti — e nessuno di essi significa che il diff sia stato revisionato e trovato pulito. Un corpo che dice `Recommendation: approve` non è prova che il controllo sia passato. Leggi prima il blocco Highest severity / Strictness gate / Check status del marcatore di tracciamento — il runtime riscrive un `approve` del modello quando il gate sta fallendo.
+Una revisione che è stata eseguita e non ha segnalato nulla non è la stessa cosa di una revisione che non ha mai prodotto alcun rilievo. Il secondo caso è una **revisione incompleta**: viene registrata come tale, non conta mai come prova che l'insieme di modifiche sia pulito, e non è mai un motivo per chiudere il Final Review — lo stesso trattamento in rosso che riceve una revisione `timeout` sotto severità bloccante (BC-04). Insieme a un revisore assente e a un'invocazione fallita, sono tre stati distinti — e nessuno di essi significa che il diff sia stato revisionato e trovato pulito. Un corpo che dice `Recommendation: approve` non è prova che il controllo sia passato. Leggi prima il blocco Highest severity / Strictness gate / Check status del marcatore di tracciamento — il runtime riscrive un `approve` del modello quando il gate sta fallendo.
 
 L'esecuzione non presidiata è supportata solo per un piano approvato in
 anticipo. Richiede lo strato di stato leggibile da macchina, uno standard
@@ -218,8 +218,8 @@ design-system) e proponi ciascuno come opt-in esplicito. Un repository è pienam
   `.review/extension.md` obbligatorio) sull’insieme di modifiche accumulato dal piano. Una skill o un’estensione
   mancante è un rilievo registrato `local reviewer not installed` — mai un salto silenzioso,
   e mai un bootstrap a sorpresa: l'installazione appartiene al consenso
-  dell'onboarding o a un'invocazione esplicita dell'addon; gli errori di invocazione sono soft-fail; i rilievi `critical` di un
-  passaggio completato bloccano comunque il completamento. **Flow B** (il gate CI con `pr-review.yml`) è offerto
+  dell'onboarding o a un'invocazione esplicita dell'addon; gli errori di invocazione sono soft-fail; i rilievi **critici verificati** di un
+  passaggio completato bloccano comunque il completamento (v3, BC-07 — le affermazioni critiche non verificate arrivano come avvisi annotati, e una revisione `incomplete`/`timeout` non è un passaggio pulito, BC-04). **Flow B** (il gate CI con `pr-review.yml`) è offerto
   come opt-in esplicito e mai installato senza richiesta. Nessun flusso Deep Work Plan richiede un servizio
   commerciale, un provider CI o un segreto.
 
