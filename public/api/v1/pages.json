@@ -1,5 +1,5 @@
 {
-  "version": "5.0.22",
+  "version": "5.0.23",
   "apiVersion": "v1",
   "description": "Every agent-facing Markdown endpoint, grouped by language. Each page is fetchable as <origin>/<lang-prefix>/<slug>.md (English at the root, e.g. /developers.md; other languages at /<lang>/<slug>.md).",
   "languages": [
