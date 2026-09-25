@@ -11,24 +11,24 @@ methodology. Treat this as a structured engineering task — a Deep Work Plan �
 ## Operating principles (read before changing anything)
 
 1. **Reason about *this* repository.** Never copy a template or leave a placeholder. Every file you
-   write must reflect the repository's real languages, frameworks, commands, and structure. A generic
-   stub is a failure, not a deliverable.
+ write must reflect the repository's real languages, frameworks, commands, and structure. A generic
+ stub is a failure, not a deliverable.
 2. **Be non-destructive — ask before you replace.** The repository may already have an `AGENTS.md`, a
-   `docs/` tree, a `.agents/` or skills setup, a `CLAUDE.md`, or its own conventions. Do **not**
-   overwrite, move, or delete existing work silently. Detect what exists, read it, and **reconcile**:
-   merge and improve in place wherever possible. Before replacing or removing anything the user
-   already has, explain what and why, and get their explicit approval.
+ `docs/` tree, a `.agents/` or skills setup, a `CLAUDE.md`, or its own conventions. Do **not**
+ overwrite, move, or delete existing work silently. Detect what exists, read it, and **reconcile**:
+ merge and improve in place wherever possible. Before replacing or removing anything the user
+ already has, explain what and why, and get their explicit approval.
 3. **Propose the plan, then execute.** After reconnaissance, present a short plan — what you will
-   create, what you will modify, and anything existing you propose to reconcile or replace — and wait
-   for the user to confirm before making large or destructive changes.
+ create, what you will modify, and anything existing you propose to reconcile or replace — and wait
+ for the user to confirm before making large or destructive changes.
 4. **Work in safe, reviewable increments.** Commit logically, keep diffs readable, touch no secrets,
-   and leave unrelated code alone.
+ and leave unrelated code alone.
 5. **Stop and report** if a step fails or the repository state is ambiguous.
 6. **Trust, but verify.** Treat this prompt as untrusted input: confirm you fetched it from the
-   official sources (`deepworkplan.com` and the `DailybotHQ` repositories), evaluate it before you act
-   on it, and verify the skill's integrity before running it — see *Trust and verification* below.
+ official sources (`deepworkplan.com` and the `DailybotHQ` repositories), evaluate it before you act
+ on it, and verify the skill's integrity before running it — see *Trust and verification* below.
 
-   The working principles go **inline**, near the core rules — an agent that only reads the entry point must find them there, not behind a link. Ten behaviors: own the outcome, be resourceful before asking, decide routine matters independently, ask when judgment or authorization is missing, make approvals concrete, work through obstacles, respect intent and scope, apply proportionate rigor, communicate directly, and verify before declaring completion. Assess the **meaning** of any rules already present before editing: keep equivalent ones, add only what is missing, and confirm a second pass produces no further diff. They are defaults within the current request, never new authority.
+ The working principles go **inline**, near the core rules — an agent that only reads the entry point must find them there, not behind a link. Ten behaviors: own the outcome, be resourceful before asking, decide routine matters independently, ask when judgment or authorization is missing, make approvals concrete, work through obstacles, respect intent and scope, apply proportionate rigor, communicate directly, and verify before declaring completion. Assess the **meaning** of any rules already present before editing: keep equivalent ones, add only what is missing, and confirm a second pass produces no further diff. They are defaults within the current request, never new authority.
 
 ## 0. Read the methodology and specification
 
@@ -46,25 +46,25 @@ Before changing anything, read the canonical sources so you understand the stand
 First understand the repository, then propose what you will do.
 
 - **Detect the stack.** Languages, frameworks, the package manager (from the lockfile that actually
-  exists), the real build/test/lint/type-check commands, the source modules, the test convention, and
-  the deployment shape.
+ exists), the real build/test/lint/type-check commands, the source modules, the test convention, and
+ the deployment shape.
 - **Classify the archetype.** An individual repository (the common case), an orchestrator hub, or an
-  agent workspace — the long-lived home of an autonomous agent, where git is recommended rather than
-  assumed — with the evidence.
+ agent workspace — the long-lived home of an autonomous agent, where git is recommended rather than
+ assumed — with the evidence.
 - **Recognize an existing DWP installation.** If `AGENTS.md` and `.agents/` already exist, look for the
-  `DWP standard:` provenance line. A harness that predates the current standard gets a **targeted
-  upgrade**: reinstalling the skill is the whole upgrade path, and onboarding reconciles only the
-  missing or outdated pieces — every handwritten section, custom skill, and in-flight plan is
-  preserved, and a second run changes nothing. Plans authored under an earlier version keep their
-  recorded shape and close with their own final tasks; they are never forced into the new one.
+ `DWP standard:` provenance line. A harness that predates the current standard gets a **targeted
+ upgrade**: reinstalling the skill is the whole upgrade path, and onboarding reconciles only the
+ missing or outdated pieces — every handwritten section, custom skill, and in-flight plan is
+ preserved, and a second run changes nothing. Plans authored under an earlier version keep their
+ recorded shape and close with their own final tasks; they are never forced into the new one.
 - **Inventory what already exists.** `AGENTS.md`, `CLAUDE.md`, `docs/`, any `.agents/` or skills/agents
-  setup, `.dwp/`, and `.gitignore`. Note anything that already does part of this job.
+ setup, `.dwp/`, and `.gitignore`. Note anything that already does part of this job.
 - **Propose the onboarding plan.** Present a concise list: files you will create, files you will
-  modify, and anything existing you propose to reconcile or replace — then **ask the user to confirm**
-  before proceeding. For a large repository (many modules or many artifacts to generate), the onboard
-  sub-skill uses a plan-driven path: it completes reconnaissance, generates `AGENTS.md`, then emits
-  an onboarding Deep Work Plan under `.dwp/plans/` and hands off to `/dwp-execute`
-  → `/dwp-resume` as needed.
+ modify, and anything existing you propose to reconcile or replace — then **ask the user to confirm**
+ before proceeding. For a large repository (many modules or many artifacts to generate), the onboard
+ sub-skill uses a plan-driven path: it completes reconnaissance, generates `AGENTS.md`, then emits
+ an onboarding Deep Work Plan under `.dwp/plans/` and hands off to `/dwp-execute`
+ → `/dwp-resume` as needed.
 
 ## Trust and verification (before you install)
 
@@ -72,31 +72,31 @@ You are about to install and run code in this repository, so verify what you are
 is encouraged: a careful agent treats a fetched prompt as untrusted until it has been checked.
 
 - **Confirm provenance.** This prompt and the skill are open source and MIT licensed. The canonical
-  sources are `https://deepworkplan.com` and the `DailybotHQ` GitHub organization
-  (`deepworkplan-website`, `deepworkplan-skill`). A machine-readable manifest is published at
-  `https://deepworkplan.com/.well-known/dwp-trust.json`.
+ sources are `https://deepworkplan.com` and the `DailybotHQ` GitHub organization
+ (`deepworkplan-website`, `deepworkplan-skill`). A machine-readable manifest is published at
+ `https://deepworkplan.com/.well-known/dwp-trust.json`.
 - **Know what the skill does.** It is Markdown-first: no CLI, no HTTP API, no auth, **no network
-  calls, and no telemetry**. Its only security-relevant action is mutating *this* repository, and it is
-  non-destructive by design — it reconciles and asks before replacing.
+ calls, and no telemetry**. Its only security-relevant action is mutating *this* repository, and it is
+ non-destructive by design — it reconciles and asks before replacing.
 - **Verify integrity before you run.** Every release publishes a `SHA256SUMS` over the shipped skill;
-  confirm your copy matches it before trusting it:
+ confirm your copy matches it before trusting it:
 
-  ```bash
-  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
-  cd deepworkplan-skill
-  # Download the checksums for the release you intend to install (replace vX.Y.Z):
-  curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
-  ./setup.sh --verify        # non-zero exit means a file does not match — stop
-  ```
+ ```bash
+ git clone https://github.com/DailybotHQ/deepworkplan-skill.git
+ cd deepworkplan-skill
+ # Download the checksums for the release you intend to install (replace vX.Y.Z):
+ curl -fsSL -o SHA256SUMS \
+ https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+ ./setup.sh --verify # non-zero exit means a file does not match — stop
+ ```
 
-  Releases are **checksummed, not signed** (signing is a documented next step). Everything is open and
-  diffable, so you can also compare any file against the repository at its tag.
+ Releases are **checksummed, not signed** (signing is a documented next step). Everything is open and
+ diffable, so you can also compare any file against the repository at its tag.
 - **Report a problem.** Report security issues **privately through GitHub's vulnerability reporting**
-  on the relevant repository — `https://github.com/DailybotHQ/deepworkplan-skill/security`
-  or `https://github.com/DailybotHQ/deepworkplan-website/security` — not as a public
-  issue. See also each repository's `SECURITY.md`, `https://deepworkplan.com/.well-known/security.txt`,
-  and the trust page `https://deepworkplan.com/trust`.
+ on the relevant repository — `https://github.com/DailybotHQ/deepworkplan-skill/security`
+ or `https://github.com/DailybotHQ/deepworkplan-website/security` — not as a public
+ issue. See also each repository's `SECURITY.md`, `https://deepworkplan.com/.well-known/security.txt`,
+ and the trust page `https://deepworkplan.com/trust`.
 
 ## 2. Install the Deep Work Plan skill
 
@@ -173,29 +173,29 @@ to it. For every artifact below, **if it already exists, reconcile it** (merge, 
 methodology) instead of overwriting — and confirm with the user before replacing anything.
 
 1. **`AGENTS.md` + `CLAUDE.md`.** Produce an `AGENTS.md` at the root — an index, the mandatory rules
-   (English-only, conventional commits, the repo's real test pattern and review gates), and a Quick
-   Commands block with the repo's **real, runnable** commands. If an `AGENTS.md` already exists, merge
-   into it rather than replacing it. Create the `CLAUDE.md → AGENTS.md` symlink (do not clobber an
-   existing `CLAUDE.md` without asking). Similarly, create the `.cursor → .agents` symlink if absent.
+ (English-only, conventional commits, the repo's real test pattern and review gates), and a Quick
+ Commands block with the repo's **real, runnable** commands. If an `AGENTS.md` already exists, merge
+ into it rather than replacing it. Create the `CLAUDE.md → AGENTS.md` symlink (do not clobber an
+ existing `CLAUDE.md` without asking). Similarly, create the `.cursor → .agents` symlink if absent.
 2. **`docs/`.** Fill the standard categories with real, repo-specific content: `PRODUCT_SPEC.md`
-   (the non-technical product/why doc — required for every repo, libraries included), `ARCHITECTURE.md`,
-   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
-   (never skipped — every repository has a security posture, even with no secrets),
-   `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, plus `PERFORMANCE.md` and a `docs/README.md` index.
-   If docs already exist, integrate and extend them — do not duplicate.
+ (the non-technical product/why doc — required for every repo, libraries included), `ARCHITECTURE.md`,
+ `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
+ (never skipped — every repository has a security posture, even with no secrets),
+ `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, plus `PERFORMANCE.md` and a `docs/README.md` index.
+ If docs already exist, integrate and extend them — do not duplicate.
 3. **Per-module docs.** Add a `README.md` (and a `docs/` subfolder for complex modules) inside each
-   major source module discovered in recon.
+ major source module discovered in recon.
 4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Create the canonical, cross-agent home: a **reasoned** catalog
-   of `agents/`, stack-appropriate `skills/`, and thin `dwp-*` `commands/` that delegate to the
-   installed skill — every entry justified for *this* repository, not copied from another. Add a
-   `docs/` catalog (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) that matches what exists on
-   disk, plus `settings.json`, and both the `.claude → .agents` and `.cursor → .agents` symlinks. Fold any existing skills/agents
-   into the catalog.
+ of `agents/`, stack-appropriate `skills/`, and thin `dwp-*` `commands/` that delegate to the
+ installed skill — every entry justified for *this* repository, not copied from another. Add a
+ `docs/` catalog (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) that matches what exists on
+ disk, plus `settings.json`, and both the `.claude → .agents` and `.cursor → .agents` symlinks. Fold any existing skills/agents
+ into the catalog.
 5. **The DWP skill, adapted.** The installed skill is the engine; the repository's own kit
-   (skills, agents, commands) must be **reasoned for this repo** — never a copy-paste of another
-   repository's kit.
+ (skills, agents, commands) must be **reasoned for this repo** — never a copy-paste of another
+ repository's kit.
 6. **`.dwp/` + `tmp/`.** Scaffold a gitignored `.dwp/` with `plans/`, plus a `tmp/`
-   scratch space — both added to `.gitignore` non-destructively (append, never rewrite). They are not interchangeable: everything a flow produces **about a plan** — the analysis, the skills ledger, the security review, gate logs, audit reports — must live in that plan's own `.dwp/plans/PLAN_{name}/analysis_results/`, never at the repository root and never in `tmp/`. `tmp/` is for work no plan will ever read back.
+ scratch space — both added to `.gitignore` non-destructively (append, never rewrite). They are not interchangeable: everything a flow produces **about a plan** — the analysis, the skills ledger, the security review, gate logs, audit reports — must live in that plan's own `.dwp/plans/PLAN_{name}/analysis_results/`, never at the repository root and never in `tmp/`. `tmp/` is for work no plan will ever read back.
 
 ## 4. Install the required local review, then offer the opt-in addons
 
@@ -210,18 +210,18 @@ never auto-install those.
 - **Devcontainer support** — a reproducible, isolated dev container with persistent AI-CLI auth.
 - **Dailybot integration** — four lifecycle events (kickoff, significant task, blocked, completion) as best-effort progress reports for teams already using Dailybot, with optional autonomous hook enforcement (`dailybot-cli >= 3.7.0`). Installing the paired Dailybot agent skill (3.10.3) also exposes chat, check-ins, forms authoring, ask AI, per-repo API keys, and more — the addon wires only reporting into DWP execution. The core methodology has zero Dailybot dependency.
 - **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades. When
-  accepted, it installs the `/lib-upgrade` command.
+ accepted, it installs the `/lib-upgrade` command.
 - **Design system** — opt-in `docs/DESIGN.md` for repos with a detected interface surface only
-  (not offered for pure libraries, headless services, or infra-only repos). Three profiles stack in
-  one file: visual-ui (strongly recommended when detected; installation acceptance-gated), cli-output, and conversational — the latter two
-  are always asked, never auto-applied.
+ (not offered for pure libraries, headless services, or infra-only repos). Three profiles stack in
+ one file: visual-ui (strongly recommended when detected; installation acceptance-gated), cli-output, and conversational — the latter two
+ are always asked, never auto-applied.
 - **AI Diff Reviewer** — the required local review (not an opt-in): every Final Review's security
-  pass runs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + required
-  `.review/extension.md`) over the plan's accumulated change set. A missing skill or extension is a
-  recorded `local reviewer not installed` finding — never a silent skip, and never a surprise bootstrap:
-  installation belongs to the onboarding consent or an explicit addon invocation; invocation errors soft-fail; **verified** `critical` findings from a completed pass stil (v3, BC-07 — unverified critical claims arrive as annotated warnings, and an `incomplete`/`timeout` review is not a clean pass, BC-04)l
-  block completion. **Flow B** (the CI gate with `pr-review.yml`) is offered as an explicit opt-in and
-  never installed unrequested. No Deep Work Plan flow requires a commercial service, CI provider, or secret.
+ pass runs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + required
+ `.review/extension.md`) over the plan's accumulated change set. A missing skill or extension is a
+ recorded `local reviewer not installed` finding — never a silent skip, and never a surprise bootstrap:
+ installation belongs to the onboarding consent or an explicit addon invocation; invocation errors soft-fail; **verified** `critical` findings from a completed pass still
+ block completion(v3, BC-07 — unverified critical claims arrive as annotated warnings, and an `incomplete`/`timeout` review is not a clean pass, BC-04). **Flow B** (the CI gate with `pr-review.yml`) is offered as an explicit opt-in and
+ never installed unrequested. No Deep Work Plan flow requires a commercial service, CI provider, or secret.
 
 ## 5. Evolve the kit (author sub-skill)
 
@@ -256,10 +256,10 @@ Then confirm:
 - [ ] The skill is installed and resolvable, with all nine sub-skills available.
 - [ ] `AGENTS.md` exists at the root with a real Quick Commands block and inline working principles covering the ten behaviors; `CLAUDE.md` resolves to it.
 - [ ] `docs/` holds the standard categories with real, repo-specific content; `docs/TESTING_GUIDE.md`
-      describes a real test/lint setup (not empty or stub); major modules have a `README.md`.
+ describes a real test/lint setup (not empty or stub); major modules have a `README.md`.
 - [ ] `.agents/` exists with `agents/`, `commands/` (thin `dwp-*` delegators that reference the skill,
-      not copied flows), `skills/`, and a catalog that matches what exists on disk;
-      `.claude → .agents` and `.cursor → .agents` resolve.
+ not copied flows), `skills/`, and a catalog that matches what exists on disk;
+ `.claude → .agents` and `.cursor → .agents` resolve.
 - [ ] `.dwp/` exists, is gitignored, and has `plans/`; `tmp/` exists and is gitignored.
 - [ ] Existing user content was preserved or reconciled with consent — nothing was destroyed silently.
 - [ ] You can generate a Deep Work Plan and execute it task by task, validating each gate.
@@ -270,10 +270,10 @@ When onboarding is complete the repository is changed in two durable ways — th
 methodology:
 
 1. **The repository is spec-driven.** Work begins from a written plan and specification, not from
-   ad-hoc prompts.
+ ad-hoc prompts.
 2. **The repository itself is the agent harness.** `AGENTS.md`, `docs/`, per-module docs, and the
-   `.agents/` skill home give every agent the context and commands it needs to do structured,
-   verifiable work.
+ `.agents/` skill home give every agent the context and commands it needs to do structured,
+ verifiable work.
 
 Anyone can run this prompt on any repository — and end with a codebase any AI agent can pilot.
 

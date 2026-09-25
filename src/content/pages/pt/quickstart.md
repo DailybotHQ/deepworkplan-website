@@ -4,31 +4,31 @@ description: "O prompt executável de onboarding para agentes de IA: adote o Dee
 lastUpdated: 2026-09-13
 ---
 
-Você é um agente de código de IA. Leia este prompt inteiro primeiro e, então, torne o repositório atual
+Você é um agente de código de IA(v3, BC-07 — afirmativas críticas não verificadas chegam como avisos anotados, e uma revisão `incomplete` ou `timeout` não é uma passagem limpa, BC-04). Leia este prompt inteiro primeiro e, então, torne o repositório atual
 **AI-first**, **orientado a especificação** e **pilotável por agentes** adotando a metodologia Deep Work Plan
 (DWP). Trate isso como uma tarefa de engenharia estruturada — um Deep Work Plan — e não como uma edição rápida.
 
 ## Princípios operacionais (leia antes de alterar qualquer coisa)
 
 1. **Raciocine sobre *este* repositório.** Nunca copie um template nem deixe um placeholder. Todo arquivo que você
-   escrever deve refletir as linguagens, frameworks, comandos e estrutura reais do repositório. Um stub genérico
-   é uma falha, não uma entrega.
+ escrever deve refletir as linguagens, frameworks, comandos e estrutura reais do repositório. Um stub genérico
+ é uma falha, não uma entrega.
 2. **Seja não destrutivo — pergunte antes de substituir.** O repositório pode já ter um `AGENTS.md`, uma
-   árvore `docs/`, uma configuração `.agents/` ou de skills, um `CLAUDE.md` ou suas próprias convenções. **Não**
-   sobrescreva, mova nem exclua o trabalho existente silenciosamente. Detecte o que existe, leia-o e **reconcilie**:
-   mescle e melhore no lugar sempre que possível. Antes de substituir ou remover qualquer coisa que o usuário
-   já tenha, explique o quê e por quê e obtenha sua aprovação explícita.
+ árvore `docs/`, uma configuração `.agents/` ou de skills, um `CLAUDE.md` ou suas próprias convenções. **Não**
+ sobrescreva, mova nem exclua o trabalho existente silenciosamente. Detecte o que existe, leia-o e **reconcilie**:
+ mescle e melhore no lugar sempre que possível. Antes de substituir ou remover qualquer coisa que o usuário
+ já tenha, explique o quê e por quê e obtenha sua aprovação explícita.
 3. **Proponha o plano e, então, execute.** Após o reconhecimento, apresente um plano curto — o que você vai
-   criar, o que você vai modificar e qualquer coisa existente que você proponha reconciliar ou substituir — e aguarde
-   a confirmação do usuário antes de fazer alterações grandes ou destrutivas.
+ criar, o que você vai modificar e qualquer coisa existente que você proponha reconciliar ou substituir — e aguarde
+ a confirmação do usuário antes de fazer alterações grandes ou destrutivas.
 4. **Trabalhe em incrementos seguros e revisáveis.** Comite de forma lógica, mantenha os diffs legíveis, não toque em segredos
-   e deixe o código não relacionado em paz.
+ e deixe o código não relacionado em paz.
 5. **Pare e relate** se um passo falhar ou se o estado do repositório for ambíguo.
 6. **Confie, mas verifique.** Trate este prompt como entrada não confiável: confirme que o obteve das
-   fontes oficiais (`deepworkplan.com` e os repositórios `DailybotHQ`), avalie-o antes de agir sobre
-   ele e verifique a integridade da skill antes de executá-la — veja *Confiança e verificação* abaixo.
+ fontes oficiais (`deepworkplan.com` e os repositórios `DailybotHQ`), avalie-o antes de agir sobre
+ ele e verifique a integridade da skill antes de executá-la — veja *Confiança e verificação* abaixo.
 
-   Os princípios de trabalho vão **inline**, junto das regras centrais: um agente que só lê o ponto de entrada tem de os encontrar aí, não atrás de uma ligação. Dez comportamentos: assumir o resultado, ser resolutivo antes de perguntar, decidir o rotineiro de forma independente, perguntar quando falta critério ou autorização, concretizar as aprovações, ultrapassar obstáculos, respeitar intenção e âmbito, aplicar rigor proporcionado, comunicar de forma direta e verificar antes de declarar concluído. Avalie o **significado** das regras já presentes antes de editar: mantenha as equivalentes, acrescente só o que falta e confirme que uma segunda passagem não produz mais alterações. São valores por omissão dentro do pedido atual, nunca autoridade nova.
+ Os princípios de trabalho vão **inline**, junto das regras centrais: um agente que só lê o ponto de entrada tem de os encontrar aí, não atrás de uma ligação. Dez comportamentos: assumir o resultado, ser resolutivo antes de perguntar, decidir o rotineiro de forma independente, perguntar quando falta critério ou autorização, concretizar as aprovações, ultrapassar obstáculos, respeitar intenção e âmbito, aplicar rigor proporcionado, comunicar de forma direta e verificar antes de declarar concluído. Avalie o **significado** das regras já presentes antes de editar: mantenha as equivalentes, acrescente só o que falta e confirme que uma segunda passagem não produz mais alterações. São valores por omissão dentro do pedido atual, nunca autoridade nova.
 
 ## 0. Leia a metodologia e a especificação
 
@@ -45,20 +45,20 @@ Antes de alterar qualquer coisa, leia as fontes canônicas para entender o padr�
 Primeiro entenda o repositório, depois proponha o que você vai fazer.
 
 - **Detecte a stack.** Linguagens, frameworks, o gerenciador de pacotes (a partir do lockfile que de fato
-  existe), os comandos reais de build/teste/lint/verificação de tipos, os módulos de origem, a convenção de testes e
-  o formato de deploy.
+ existe), os comandos reais de build/teste/lint/verificação de tipos, os módulos de origem, a convenção de testes e
+ o formato de deploy.
 - **Classifique o arquétipo.** Um repositório individual (o caso comum), um hub orquestrador, ou um
-  espaço de trabalho de agente — o lar de longa duração de um agente autônomo, onde o git é
-  recomendado em vez de presumido — com as evidências.
+ espaço de trabalho de agente — o lar de longa duração de um agente autônomo, onde o git é
+ recomendado em vez de presumido — com as evidências.
 - **Reconheça uma instalação DWP existente.** Se `AGENTS.md` e `.agents/` já existem, procure a linha de procedência `DWP standard:`. Um harness anterior ao padrão atual recebe uma **atualização direcionada**: reinstalar a skill é todo o caminho de atualização, e o onboarding reconcilia apenas as peças ausentes ou desatualizadas — cada seção escrita à mão, skill personalizada e plano em andamento é preservado, e uma segunda execução não muda nada. Os planos redigidos sob uma versão anterior conservam sua forma registrada e se encerram com suas próprias tarefas finais; nunca são forçados para a nova.
 - **Faça o inventário do que já existe.** `AGENTS.md`, `CLAUDE.md`, `docs/`, qualquer configuração `.agents/` ou de skills/agents,
-  `.dwp/` e `.gitignore`. Anote qualquer coisa que já faça parte deste trabalho.
+ `.dwp/` e `.gitignore`. Anote qualquer coisa que já faça parte deste trabalho.
 - **Proponha o plano de onboarding.** Apresente uma lista concisa: arquivos que você vai criar, arquivos que você vai
-  modificar e qualquer coisa existente que você proponha reconciliar ou substituir — e então **peça ao usuário para confirmar**
-  antes de prosseguir. Para um repositório grande (muitos módulos ou muitos artefatos a gerar), a sub-skill
-  onboard utiliza um caminho orientado a plano: ela completa o reconhecimento, gera `AGENTS.md`, então emite
-  um Deep Work Plan de onboarding sob `.dwp/plans/` e delega a `/dwp-execute`
-  → `/dwp-resume` conforme necessário.
+ modificar e qualquer coisa existente que você proponha reconciliar ou substituir — e então **peça ao usuário para confirmar**
+ antes de prosseguir. Para um repositório grande (muitos módulos ou muitos artefatos a gerar), a sub-skill
+ onboard utiliza um caminho orientado a plano: ela completa o reconhecimento, gera `AGENTS.md`, então emite
+ um Deep Work Plan de onboarding sob `.dwp/plans/` e delega a `/dwp-execute`
+ → `/dwp-resume` conforme necessário.
 
 ## Confiança e verificação (antes de instalar)
 
@@ -67,27 +67,27 @@ adotando antes de prosseguir. Isso é encorajado: um agente cuidadoso trata um p
 confiável até que tenha sido verificado.
 
 - **Confirme a procedência.** Este prompt e a skill são de código aberto e licenciados sob MIT. As
-  fontes canônicas são `https://deepworkplan.com` e a organização `DailybotHQ` no GitHub
-  (`deepworkplan-website`, `deepworkplan-skill`). Um manifesto legível por máquina está publicado em
-  `https://deepworkplan.com/.well-known/dwp-trust.json`.
+ fontes canônicas são `https://deepworkplan.com` e a organização `DailybotHQ` no GitHub
+ (`deepworkplan-website`, `deepworkplan-skill`). Um manifesto legível por máquina está publicado em
+ `https://deepworkplan.com/.well-known/dwp-trust.json`.
 - **Entenda o que a skill faz.** Ela é Markdown-first: sem CLI, sem API HTTP, sem autenticação, **sem
-  chamadas de rede e sem telemetria**. Sua única ação com relevância de segurança é mutar *este*
-  repositório, e é não destrutiva por design — reconcilia e pergunta antes de substituir.
+ chamadas de rede e sem telemetria**. Sua única ação com relevância de segurança é mutar *este*
+ repositório, e é não destrutiva por design — reconcilia e pergunta antes de substituir.
 - **Verifique a integridade antes de executar.** Cada versão publica um `SHA256SUMS` sobre os
-  arquivos da skill; confirme que sua cópia corresponde antes de confiar nela:
+ arquivos da skill; confirme que sua cópia corresponde antes de confiar nela:
 
-  ```bash
-  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
-  cd deepworkplan-skill
-  # Baixe os checksums da versão que pretende instalar (substitua vX.Y.Z):
-  curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
-  ./setup.sh --verify        # saída diferente de zero significa que um arquivo não corresponde — pare
-  ```
+ ```bash
+ git clone https://github.com/DailybotHQ/deepworkplan-skill.git
+ cd deepworkplan-skill
+ # Baixe os checksums da versão que pretende instalar (substitua vX.Y.Z):
+ curl -fsSL -o SHA256SUMS \
+ https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+ ./setup.sh --verify # saída diferente de zero significa que um arquivo não corresponde — pare
+ ```
 
-  As versões têm **checksums, não assinaturas** (assinaturas são o próximo passo documentado). Tudo
-  é aberto e comparável por diff, então você também pode comparar qualquer arquivo com o repositório
-  em sua tag.
+ As versões têm **checksums, não assinaturas** (assinaturas são o próximo passo documentado). Tudo
+ é aberto e comparável por diff, então você também pode comparar qualquer arquivo com o repositório
+ em sua tag.
 - **Reporte um problema.** Reporte problemas de segurança **de forma privada pelo sistema de reporte de vulnerabilidades do GitHub** no repositório relevante — `https://github.com/DailybotHQ/deepworkplan-skill/security` ou `https://github.com/DailybotHQ/deepworkplan-website/security` — não como uma issue pública. Veja também o `SECURITY.md` de cada repositório, `https://deepworkplan.com/.well-known/security.txt` e a página de confiança `https://deepworkplan.com/trust`.
 
 ## 2. Instale a skill Deep Work Plan
@@ -169,28 +169,28 @@ a ele. Para cada artefato abaixo, **se ele já existir, reconcilie-o** (mescle, 
 metodologia) em vez de sobrescrever — e confirme com o usuário antes de substituir qualquer coisa.
 
 1. **`AGENTS.md` + `CLAUDE.md`.** Produza um `AGENTS.md` na raiz — um índice, as regras obrigatórias
-   (apenas inglês, conventional commits, o padrão de testes real e os gates de revisão do repositório) e um bloco
-   Quick Commands com os comandos **reais e executáveis** do repositório. Se um `AGENTS.md` já existir, mescle
-   nele em vez de substituí-lo. Crie o symlink `CLAUDE.md → AGENTS.md` (não sobrescreva um
-   `CLAUDE.md` existente sem perguntar). Da mesma forma, crie o symlink `.cursor → .agents` se ausente.
+ (apenas inglês, conventional commits, o padrão de testes real e os gates de revisão do repositório) e um bloco
+ Quick Commands com os comandos **reais e executáveis** do repositório. Se um `AGENTS.md` já existir, mescle
+ nele em vez de substituí-lo. Crie o symlink `CLAUDE.md → AGENTS.md` (não sobrescreva um
+ `CLAUDE.md` existente sem perguntar). Da mesma forma, crie o symlink `.cursor → .agents` se ausente.
 2. **`docs/`.** Preencha as categorias padrão com conteúdo real e específico do repositório: `PRODUCT_SPEC.md` (o documento de produto/por quê não técnico — obrigatório para todo repositório, incluindo bibliotecas), `ARCHITECTURE.md`,
-   `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
-   (nunca pulado — todo repositório tem uma postura de segurança, mesmo sem segredos),
-   `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, além de `PERFORMANCE.md` e um índice `docs/README.md`.
-   Se os docs já existirem, integre-os e estenda-os — não duplique.
+ `STANDARDS.md`, `TESTING_GUIDE.md`, `DEVELOPMENT_COMMANDS.md`, `SECURITY.md`
+ (nunca pulado — todo repositório tem uma postura de segurança, mesmo sem segredos),
+ `AI_AGENT_ONBOARDING.md`, `AI_AGENT_COLLAB.md`, além de `PERFORMANCE.md` e um índice `docs/README.md`.
+ Se os docs já existirem, integre-os e estenda-os — não duplique.
 3. **Docs por módulo.** Adicione um `README.md` (e uma subpasta `docs/` para módulos complexos) dentro de cada
-   módulo de origem principal descoberto no reconhecimento.
+ módulo de origem principal descoberto no reconhecimento.
 4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`.** Crie o diretório canônico e multiagente: um catálogo **fundamentado**
-   de `agents/`, `skills/` apropriadas à stack e `commands/` `dwp-*` enxutos que delegam à
-   skill instalada — cada entrada justificada para *este* repositório, não copiada de outro. Adicione um
-   catálogo em `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) que corresponda ao que existe em
-   disco, além de `settings.json` e os symlinks `.claude → .agents` e `.cursor → .agents`. Incorpore quaisquer skills/agents existentes
-   ao catálogo.
+ de `agents/`, `skills/` apropriadas à stack e `commands/` `dwp-*` enxutos que delegam à
+ skill instalada — cada entrada justificada para *este* repositório, não copiada de outro. Adicione um
+ catálogo em `docs/` (`skills_agents_catalog.md` + `COMMANDS_REFERENCE.md`) que corresponda ao que existe em
+ disco, além de `settings.json` e os symlinks `.claude → .agents` e `.cursor → .agents`. Incorpore quaisquer skills/agents existentes
+ ao catálogo.
 5. **A skill DWP, adaptada.** A skill instalada é o motor; o próprio kit do repositório
-   (skills, agents, commands) deve ser **fundamentado para este repositório** — nunca um copia e cola do kit de outro
-   repositório.
+ (skills, agents, commands) deve ser **fundamentado para este repositório** — nunca um copia e cola do kit de outro
+ repositório.
 6. **`.dwp/` + `tmp/`.** Estruture um `.dwp/` ignorado pelo git com `plans/`, além de um espaço de rascunho
-   `tmp/` — ambos adicionados ao `.gitignore` de forma não destrutiva (acrescente, nunca reescreva). Não são intercambiáveis: tudo o que um fluxo produz **sobre um plano** — a análise, o registo de skills, a revisão de segurança, os logs das comportas, os relatórios de auditoria — deve viver no `.dwp/plans/PLAN_{name}/analysis_results/` desse plano, nunca na raiz do repositório nem em `tmp/`. `tmp/` é para trabalho que nenhum plano voltará a ler.
+ `tmp/` — ambos adicionados ao `.gitignore` de forma não destrutiva (acrescente, nunca reescreva). Não são intercambiáveis: tudo o que um fluxo produz **sobre um plano** — a análise, o registo de skills, a revisão de segurança, os logs das comportas, os relatórios de auditoria — deve viver no `.dwp/plans/PLAN_{name}/analysis_results/` desse plano, nunca na raiz do repositório nem em `tmp/`. `tmp/` é para trabalho que nenhum plano voltará a ler.
 
 ## 4. Instale a revisão local obrigatória e depois ofereça os addons opcionais
 
@@ -205,20 +205,20 @@ design-system) e ofereça cada um como uma escolha explícita. Um repositório �
 - **Suporte a devcontainer** — um dev container reproduzível e isolado com auth de CLI de IA persistente.
 - **Integração com a Dailybot** — quatro eventos do ciclo de vida (kickoff, tarefa significativa, bloqueado, conclusão) como relatórios de progresso best-effort para equipes que já usam a Dailybot, com reforço autônomo opcional via hooks (`dailybot-cli >= 3.7.0`). A instalação da skill de agente Dailybot emparelhada (3.10.3) também expõe chat, check-ins, criação de formulários, consulta à IA, chaves API por repositório e mais — o addon conecta apenas os relatórios à execução DWP. A metodologia central tem zero dependência da Dailybot.
 - **Atualização de dependências** — atualizações independentes do gerenciador de pacotes, em lotes, validadas e reversíveis. Quando
-  aceita, ela instala o comando `/lib-upgrade`.
+ aceita, ela instala o comando `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` opcional para repos com uma superfície de interface detectada
-  (não oferecido para bibliotecas puras, serviços headless ou repos exclusivamente de infra). Três perfis se
-  empilham em um único arquivo: visual-ui (recomendado com força quando detectado; instalação protegida por aceitação), cli-output e
-  conversational — estes dois últimos são sempre perguntados, nunca aplicados automaticamente.
+ (não oferecido para bibliotecas puras, serviços headless ou repos exclusivamente de infra). Três perfis se
+ empilham em um único arquivo: visual-ui (recomendado com força quando detectado; instalação protegida por aceitação), cli-output e
+ conversational — estes dois últimos são sempre perguntados, nunca aplicados automaticamente.
 - **AI Diff Reviewer** — a revisão local obrigatória (não uma opção): o passe de segurança de cada Final Review
-  executa o [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md`
-  obrigatório) sobre o conjunto acumulado de mudanças do plano. Uma skill ou extensão ausente é um achado
-  registrado `local reviewer not installed` — nunca uma omissão silenciosa,
-  e nunca um arranque surpresa: a instalação pertence ao consentimento do
-  onboarding ou a uma invocação explícita do addon; os erros de invocação falham de forma suave; os achados **críticos verificados** de uma passage (v3, BC-07 — afirmativas críticas não verificadas chegam como avisos anotados, e uma revisão `incomplete` ou `timeout` não é uma passagem limpa, BC-04)m
-  concluída ainda bloqueiam a conclusão. O **Fluxo B** (o portão de CI com `pr-review.yml`) é oferecido
-  como opção explícita e nunca é instalado sem ser pedido. Nenhum fluxo do Deep Work Plan exige um serviço
-  comercial, um fornecedor de CI ou um segredo.
+ executa o [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md`
+ obrigatório) sobre o conjunto acumulado de mudanças do plano. Uma skill ou extensão ausente é um achado
+ registrado `local reviewer not installed` — nunca uma omissão silenciosa,
+ e nunca um arranque surpresa: a instalação pertence ao consentimento do
+ onboarding ou a uma invocação explícita do addon; os erros de invocação falham de forma suave; os achados **críticos verificados** de uma passagem
+ concluída ainda bloqueiam a conclusão. O **Fluxo B** (o portão de CI com `pr-review.yml`) é oferecido
+ como opção explícita e nunca é instalado sem ser pedido. Nenhum fluxo do Deep Work Plan exige um serviço
+ comercial, um fornecedor de CI ou um segredo.
 
 ## 5. Evolua o kit (sub-skill author)
 
@@ -252,10 +252,10 @@ Então confirme:
 - [ ] A skill está instalada e resolvível, com todas as nove sub-skills disponíveis.
 - [ ] `AGENTS.md` existe na raiz com um bloco real de Quick Commands e princípios de trabalho inline que cobrem os dez comportamentos; `CLAUDE.md` resolve para ele.
 - [ ] O `docs/` contém as categorias padrão com conteúdo real e específico do repositório; `docs/TESTING_GUIDE.md`
-      descreve uma configuração real de teste/lint (nem vazio nem stub); os módulos principais têm um `README.md`.
+ descreve uma configuração real de teste/lint (nem vazio nem stub); os módulos principais têm um `README.md`.
 - [ ] O `.agents/` existe com `agents/`, `commands/` (delegadores `dwp-*` enxutos que referenciam a skill,
-      não fluxos copiados), `skills/` e um catálogo que corresponde ao que existe em disco;
-      o `.claude → .agents` e o `.cursor → .agents` resolvem.
+ não fluxos copiados), `skills/` e um catálogo que corresponde ao que existe em disco;
+ o `.claude → .agents` e o `.cursor → .agents` resolvem.
 - [ ] O `.dwp/` existe, é ignorado pelo git e tem `plans/`; o `tmp/` existe e é ignorado pelo git.
 - [ ] O conteúdo existente do usuário foi preservado ou reconciliado com consentimento — nada foi destruído silenciosamente.
 - [ ] Você consegue gerar um Deep Work Plan e executá-lo tarefa a tarefa, validando cada gate.
@@ -266,9 +266,9 @@ Quando o onboarding está completo, o repositório é alterado de duas formas du
 metodologia:
 
 1. **O repositório é orientado a especificação.** O trabalho começa a partir de um plano e uma especificação escritos, não de
-   prompts ad hoc.
+ prompts ad hoc.
 2. **O próprio repositório é o harness do agente.** O `AGENTS.md`, os `docs/`, os docs por módulo e o
-   diretório de skills `.agents/` dão a cada agente o contexto e os comandos de que ele precisa para fazer um trabalho estruturado e
-   verificável.
+ diretório de skills `.agents/` dão a cada agente o contexto e os comandos de que ele precisa para fazer um trabalho estruturado e
+ verificável.
 
 Qualquer pessoa pode executar este prompt em qualquer repositório — e terminar com uma base de código que qualquer agente de IA pode pilotar.

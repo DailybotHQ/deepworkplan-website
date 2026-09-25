@@ -6,7 +6,6 @@ name: Self-review
 # NOTE: external contributors cannot trigger a review that reaches the
 # secret — pair this workflow with an author-association rule (upstream
 # `setup` Q4) if the repo ever goes public.
-# `DailybotHQ/ai-diff-reviewer` `.github/workflows/self-review.yml`.
 # NOT wired as a required merge check.
 #
 #   1. LABEL-GATED, RUN-ONCE — runs only when the `ready` label is applied
@@ -27,8 +26,10 @@ on:
     types: [opened, labeled]
 
 concurrency:
+  # No cancel-in-progress: any other label event must not kill an in-flight
+  # grok review (label-once semantics make queued runs harmless no-ops).
   group: self-review-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: read

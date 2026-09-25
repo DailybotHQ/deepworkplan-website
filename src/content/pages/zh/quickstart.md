@@ -167,12 +167,12 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 
 - **Devcontainer 支持** —— 一个可复现、隔离的开发容器，具备持久的 AI-CLI 认证。
 - **Dailybot 集成** —— 四个生命周期事件（启动、重要任务、阻塞、完成）作为面向已在使用 Dailybot 的团队的尽力而为式进展报告，并可选启用自主的钩子强制层（`dailybot-cli >= 3.7.0`）。安装配套的 Dailybot 代理技能（3.10.3）还会暴露聊天、签到、表单创建、AI 询问、每仓库 API 密钥等功能——该附加组件仅将报告接入 DWP 执行。核心方法论对 Dailybot 零依赖。
-- **Dependency upgrade** —— 包管理器无关、分批次、经验证、可回退的升级。被
+- **Dependency upgrade** —— 包管理器无关、分批次、经验证、可回退的升级(v3, BC-07 — 未经验证的关键发现断言会以带注解的警告出现，而 `incomplete`/`timeout` 的审查不算干净的通过, BC-04)。被
   采纳时，它会安装 `/lib-upgrade` 命令。
 - **Design system** —— 可选的 `docs/DESIGN.md`，仅面向具备被检测到的界面表面的仓库
   （不会向纯库、无头服务或纯基础设施仓库提供）。三个配置档堆叠在一个文件中：visual-ui
   （检测到时受到强烈推荐；安装以明确接受为前提）、cli-output 与 conversational——后两者始终会被询问，绝不会被自动应用。
-- **AI Diff Reviewer** —— 必备的本地审查（并非可选项）：每份 Final Review 的安全审查环节都会在计划累计的变更集上运行 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**（skill + 必需的 `.review/extension.md`）。缺失的 skill 或扩展会成为一项被记录的 `local reviewer not installed` 发现——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；调用错误软失败；已完成通道中的 **经验证的 `critical` 发现**在修复或被明确接受之前仍会阻止完成。**Flow B**（带 `pr-review (v3, BC-07 — 未经验证的关键发现断言会以带注解的警告出现，而 `incomplete`/`timeout` 的审查不算干净的通过, BC-04).yml` 的 CI 门控）作为一项明确的可选项提供，绝不未经请求安装。没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密。
+- **AI Diff Reviewer** —— 必备的本地审查（并非可选项）：每份 Final Review 的安全审查环节都会在计划累计的变更集上运行 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**（skill + 必需的 `.review/extension.md`）。缺失的 skill 或扩展会成为一项被记录的 `local reviewer not installed` 发现——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；调用错误软失败；已完成通道中的 **经验证的 `critical` 发现**在修复或被明确接受之前仍会阻止完成。**Flow B**（带 `pr-review.yml` 的 CI 门控）作为一项明确的可选项提供，绝不未经请求安装。没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密。
 
 ## 5. 演化套件（author 子技能）
 
