@@ -141,10 +141,10 @@ Full 계획에서는 리포지토리가 지속적인 실행 표면이 됩니다.
 변경 사항 전체에 대한 보안 검사를 실행하고, 최종 리포지토리 상태를
 검증하고, 작업들이 사용한 스킬을 정합화하고, 증거와 한계를 기록합니다.
 로컬 리뷰 스킬은 고정된 릴리스로 설치되며, 현재 문서화된 명령은
-`DailybotHQ/ai-diff-reviewer@v2.3.1`을 사용합니다. GitHub Action은
+`DailybotHQ/ai-diff-reviewer@v3.1.1`을 사용합니다. GitHub Action은
 별개의 선택적 CI 표면이며 핵심 방법론에는 결코 필수가 아닙니다.
 
-실행되었지만 아무것도 보고하지 않은 리뷰와, 애초에 지적을 하나도 만들어 내지 못한 리뷰는 같지 않습니다. 후자는 **불완전한 리뷰**입니다. 그대로 기록되며, 변경 사항이 깨끗하다는 근거로 결코 계산되지 않고, Final Review를 닫을 이유도 되지 않습니다. 리뷰어 부재, 호출 오류와 함께 서로 다른 세 가지 상태이며, 그 어느 것도 "diff를 검토했고 문제가 없었다"를 뜻하지 않습니다. 리뷰어 v2.3.1부터 `Recommendation: approve`라고 적힌 본문도 체크가 통과했다는 증거가 아닙니다. 추적 마커의 Highest severity / Strictness gate / Check status 블록을 먼저 읽으세요. 게이트가 실패 중이면 런타임이 모델의 `approve`를 다시 씁니다.
+실행되었지만 아무것도 보고하지 않은 리뷰와, 애초에 지적을 하나도 만들어 내지 못한 리뷰는 같지 않습니다. 후자는 **불완전한 리뷰**입니다. 그대로 기록되며, 변경 사항이 깨끗하다는 근거로 결코 계산되지 않고, Final Review를 닫을 이유도 되지 않습니다. 리뷰어 부재, 호출 오류와 함께 서로 다른 세 가지 상태이며, 그 어느 것도 "diff를 검토했고 문제가 없었다"를 뜻하지 않습니다. `Recommendation: approve`라고 적힌 본문도 체크가 통과했다는 증거가 아닙니다. 추적 마커의 Highest severity / Strictness gate / Check status 블록을 먼저 읽으세요. 게이트가 실패 중이면 런타임이 모델의 `approve`를 다시 씁니다.
 
 무인 실행은 사전에 승인된 계획에 대해서만 지원됩니다. 이는 기계가
 읽을 수 있는 상태 계층, 선언된 DWP 표준, 제한된 권한, 명시적인 중단
@@ -186,7 +186,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 ## 4. 필수 로컬 리뷰를 설치한 뒤 선택형 애드온을 제안하세요
 
 기준선 온보딩 이후, **AI Diff Reviewer 로컬 리뷰**를 설치하세요(7a 단계 — 표준 2.3.0부터 필수):
-태그 고정 벤더 스킬(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.1 --skill ai-diff-reviewer -y`)과
+태그 고정 벤더 스킬(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`)과
 `generate-extension`을 통한 저장소 맞춤 `.review/extension.md`을, 온보딩 동의 아래 설치합니다. 그런 다음
 네 가지 선택적 애드온(devcontainer, Dailybot, dependency-upgrade, design-system)을 열거하고
 각각을 명시적 선택형으로 제안하세요. 리포지토리는 선택적 애드온이 **하나도** 없어도 완전히
@@ -200,7 +200,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
   (순수 라이브러리, 헤드리스 서비스, 인프라 전용 리포지토리에는 제공하지 않음). 세 가지 프로필이
   하나의 파일에 쌓입니다: visual-ui(감지되면 강력히 권장; 설치는 수락으로 제어), cli-output, conversational — 후자 두 개는
   항상 질문하며 자동 적용하지 않습니다.
-- **AI Diff Reviewer** — 필수 로컬 리뷰입니다(선택형 아님): 모든 Final Review의 보안 점검이 계획의 누적 변경 집합에 대해 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2**(skill + 필수 `.review/extension.md`)를 실행합니다. 누락된 스킬이나 확장은 기록된 `local reviewer not installed` 발견 사항입니다 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아닙니다: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속합니다. 호출 오류는 소프트 실패하며, 완료된 패스의 `critical` 결과는 여전히 완료를 차단합니다. **Flow B**(`pr-review.yml`을 갖춘 CI 게이트)는 명시적 선택형으로 제안되며 요청 없이 설치되는 일이 결코 없습니다. 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않습니다.
+- **AI Diff Reviewer** — 필수 로컬 리뷰입니다(선택형 아님): 모든 Final Review의 보안 점검이 계획의 누적 변경 집합에 대해 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**(skill + 필수 `.review/extension.md`)를 실행합니다. 누락된 스킬이나 확장은 기록된 `local reviewer not installed` 발견 사항입니다 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아닙니다: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속합니다. 호출 오류는 소프트 실패하며, 완료된 패스의 `critical` 결과는 여전히 완료를 차단합니다. **Flow B**(`pr-review.yml`을 갖춘 CI 게이트)는 명시적 선택형으로 제안되며 요청 없이 설치되는 일이 결코 없습니다. 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않습니다.
 
 ## 5. 키트를 발전시키세요 (author 하위 스킬)
 

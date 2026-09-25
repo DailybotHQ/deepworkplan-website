@@ -154,10 +154,10 @@ security pass over the accumulated change set, including the required local
 AI Diff Reviewer review, validates the final repository state, reconciles the
 skills used by the tasks, and records the evidence and limitations. The local
 review skill is installed at a pinned release; the current documented command
-uses `DailybotHQ/ai-diff-reviewer@v2.3.1`. The GitHub Action is a separate,
+uses `DailybotHQ/ai-diff-reviewer@v3.1.1`. The GitHub Action is a separate,
 optional CI surface and is never required for the core methodology.
 
-A review that ran and reported nothing is not the same as a review that never produced findings at all. The second case is an **incomplete review**: it is recorded as such, never counted as evidence that the change set is clean, and never a reason to close the Final Review. Together with a missing reviewer and an invocation that errored, that is three distinct states — and none of them means the diff was reviewed and found clean. Since reviewer v2.3.1 a body that says `Recommendation: approve` is not evidence the check passed either. Read the tracking marker's Highest severity / Strictness gate / Check status block first — the runtime rewrites a model `approve` whenever the gate is failing.
+A review that ran and reported nothing is not the same as a review that never produced findings at all. The second case is an **incomplete review**: it is recorded as such, never counted as evidence that the change set is clean, and never a reason to close the Final Review. Together with a missing reviewer and an invocation that errored, that is three distinct states — and none of them means the diff was reviewed and found clean. A body that says `Recommendation: approve` is not evidence the check passed either. Read the tracking marker's Highest severity / Strictness gate / Check status block first — the runtime rewrites a model `approve` whenever the gate is failing.
 
 Unattended execution is supported only for a plan approved in advance. It
 requires the machine-readable state layer, a declared DWP standard, bounded
@@ -201,7 +201,7 @@ methodology) instead of overwriting — and confirm with the user before replaci
 
 After the baseline onboarding, install the **AI Diff Reviewer local review** (Phase 7a — required
 since standard 2.3.0): the tag-pinned vendored skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.1 --skill ai-diff-reviewer -y`) plus a
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) plus a
 repo-tailored `.review/extension.md` via `generate-extension`, under the onboarding consent. Then
 enumerate the four optional addons (devcontainer, Dailybot, dependency-upgrade, design-system) and
 offer each as an explicit opt-in. A repository is fully conformant with **zero** optional addons —
@@ -216,7 +216,7 @@ never auto-install those.
   one file: visual-ui (strongly recommended when detected; installation acceptance-gated), cli-output, and conversational — the latter two
   are always asked, never auto-applied.
 - **AI Diff Reviewer** — the required local review (not an opt-in): every Final Review's security
-  pass runs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + required
+  pass runs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + required
   `.review/extension.md`) over the plan's accumulated change set. A missing skill or extension is a
   recorded `local reviewer not installed` finding — never a silent skip, and never a surprise bootstrap:
   installation belongs to the onboarding consent or an explicit addon invocation; invocation errors soft-fail; `critical` findings from a completed pass still

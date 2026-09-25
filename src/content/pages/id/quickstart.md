@@ -154,11 +154,11 @@ pemeriksaan keamanan atas seluruh kumpulan perubahan yang terakumulasi, termasuk
 review lokal AI Diff Reviewer yang wajib, memvalidasi status akhir repositori,
 merekonsiliasi skill yang digunakan oleh tugas-tugas, dan mencatat bukti serta
 keterbatasan. Skill review lokal dipasang pada rilis yang dipatok; perintah yang
-saat ini didokumentasikan menggunakan `DailybotHQ/ai-diff-reviewer@v2.3.1`. GitHub
+saat ini didokumentasikan menggunakan `DailybotHQ/ai-diff-reviewer@v3.1.1`. GitHub
 Action adalah permukaan CI terpisah yang opsional, dan tidak pernah wajib untuk
 metodologi inti.
 
-Tinjauan yang berjalan dan tidak melaporkan apa pun tidak sama dengan tinjauan yang sama sekali tidak menghasilkan temuan. Kasus kedua adalah **tinjauan yang tidak lengkap**: ia dicatat sebagaimana adanya, tidak pernah dihitung sebagai bukti bahwa himpunan perubahan itu bersih, dan tidak pernah menjadi alasan untuk menutup Final Review. Bersama peninjau yang hilang dan pemanggilan yang gagal, itu tiga keadaan berbeda — dan tak satu pun berarti diff telah ditinjau dan ternyata bersih. Sejak peninjau v2.3.1, isi yang menyatakan `Recommendation: approve` juga bukan bukti bahwa pemeriksaan lulus. Baca dulu blok Highest severity / Strictness gate / Check status pada penanda pelacakan — runtime menulis ulang `approve` dari model ketika gerbang sedang gagal.
+Tinjauan yang berjalan dan tidak melaporkan apa pun tidak sama dengan tinjauan yang sama sekali tidak menghasilkan temuan. Kasus kedua adalah **tinjauan yang tidak lengkap**: ia dicatat sebagaimana adanya, tidak pernah dihitung sebagai bukti bahwa himpunan perubahan itu bersih, dan tidak pernah menjadi alasan untuk menutup Final Review. Bersama peninjau yang hilang dan pemanggilan yang gagal, itu tiga keadaan berbeda — dan tak satu pun berarti diff telah ditinjau dan ternyata bersih. Isi yang menyatakan `Recommendation: approve` juga bukan bukti bahwa pemeriksaan lulus. Baca dulu blok Highest severity / Strictness gate / Check status pada penanda pelacakan — runtime menulis ulang `approve` dari model ketika gerbang sedang gagal.
 
 Eksekusi tanpa pengawasan hanya didukung untuk rencana yang telah disetujui
 sebelumnya. Ini memerlukan lapisan status yang bisa dibaca mesin, standar DWP yang
@@ -202,7 +202,7 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
 
 Setelah onboarding dasar, pasang **tinjauan lokal AI Diff Reviewer** (Fase 7a — wajib sejak
 standar 2.3.0): skill vendored yang dipatok pada tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.1 --skill ai-diff-reviewer -y`) ditambah
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) ditambah
 `.review/extension.md` yang disesuaikan dengan repo melalui `generate-extension`, di bawah persetujuan
 onboarding. Lalu sebutkan keempat addon opsional (devcontainer, Dailybot, dependency-upgrade,
 design-system) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori sepenuhnya
@@ -218,7 +218,7 @@ konforman dengan **nol** addon opsional — jangan pernah memasang yang itu seca
   terdeteksi; instalasi dijaga oleh penerimaan), cli-output, dan conversational — dua yang terakhir selalu ditanyakan, tidak pernah
   diterapkan secara otomatis.
 - **AI Diff Reviewer** — tinjauan lokal yang wajib (bukan opt-in): pemeriksaan keamanan setiap Final
-  Review menjalankan [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill +
+  Review menjalankan [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill +
   `.review/extension.md` wajib) atas kumpulan perubahan rencana yang terakumulasi. Skill atau ekstensi
   yang hilang adalah temuan `local reviewer not installed` yang tercatat — tidak pernah dilewati diam-diam,
   dan tidak pernah menjadi bootstrap kejutan: instalasi milik persetujuan
