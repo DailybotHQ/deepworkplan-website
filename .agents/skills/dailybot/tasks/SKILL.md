@@ -1,7 +1,7 @@
 ---
 name: dailybot-tasks
 description: Manage Dailybot Tasks via the CLI — boards, tasks, projects, goals and milestones. Read the workspace (pulse, search, activity, board snapshot), poll what changed since a cursor, create/update/move/assign tasks, comment and relate them, apply bulk operations, archive safely with a server-previewed consequence, and post project updates so the team sees what an agent did. Use when the developer mentions tasks, a board, a backlog, a sprint, a kanban column, a project update, a milestone, or asks what is open / overdue / blocked. Not for check-in responses (use dailybot-checkin) or form submissions (use dailybot-forms).
-version: "3.14.0"
+version: "3.14.1"
 documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"✅","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
@@ -190,11 +190,6 @@ a reason to avoid polling; a reason not to poll every second when every thirty w
 concurrent modification is not asserted: if other people are editing while you walk a
 large project, exactly-once is not promised. When you need to know what *changed*, use
 the cursor above rather than re-walking the list.
-
-**A deep walk is approximate.** `--all` follows every page, but the API does not
-currently assert pagination under concurrent modification: if other people are editing
-while you walk a large project, exactly-once is not promised. When you need to know what
-*changed*, use the cursor above rather than re-walking the list.
 
 Full treatment: [`../shared/tasks-delta.md`](../shared/tasks-delta.md).
 
