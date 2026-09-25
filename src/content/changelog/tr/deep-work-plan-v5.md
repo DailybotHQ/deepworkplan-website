@@ -18,6 +18,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
   - label: "Beceri yayını v5.5.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
+  - label: "skill sürümü v5.5.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.2"
+  - label: "skill sürümü v5.5.3"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
+  - label: "inceleyici sürümü v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Bugün Deep Work Plan v5'i yayınlıyoruz. Bu bir yeniden yazım değil: aylar süren gerçek kullanımın — 108 gerçek planın doğrudan denetimi de dahil — boşluk boşluk ortaya çıkardığı, metodolojinin vaatleri ile bir ajanın gerçek davranışının nerede birbirinden ayrışabildiğinin sonucu. Bu sürümün dürüst özeti şu: metodoloji bunların hepsini zaten vaat ediyordu — artık garanti ediyor. v5 öncesinde, belgeleri harfiyen izleyen bir ajan bile gerçek başarısızlık senaryolarına düşebiliyordu; bu kullanım ve geri bildirimler sayesinde tespit edilen her biri artık kapatıldı ve çalıştırılabilir bir testle sabitlendi, daha fazla düzyazıyla üzeri örtülmedi. Bu döngüde beceri paketinin sözleşme takımı 132'den 258 teste büyüdü ve aşağıdaki her garanti, yayınlanan etikete karşı canlı olarak doğrulandı — temiz bir depoya kurulup kendi akışlarından geçirildi, sonra bu yazı kaleme alındı.
@@ -58,3 +64,17 @@ v5 hattının ilk ara sürümü, bir planın hiç gerçekten denetlenmemiş bir 
 
 
 Normatif metin için [belirtime](https://deepworkplan.com/spec), inceleyicinin şimdi neler yaptığı için [eklenti referansına](https://deepworkplan.com/kit/ai-diff-reviewer), kaynak için [v5.5.1 yayınına](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) bakın.
+
+## Güncelleme — 2026-09-25 · skill v5.5.3 + inceleyici v3.1.1
+
+AI Diff Reviewer eklentisi artık inceleyicinin **v3** hattını belgeliyor ve kuruyor — 2026-09-24'te yayınlandı (v3.0.0 → v3.1.1, hareketli pin `@v3`). Skill `v5.5.2`, eklentinin normatif belgelerini, onboarding kancasını ve entegrasyon şablonunu v3 inceleyicisinin gerçekte yaptığı işe göre yeniden yazdı; `v5.5.3` ise CI tarafını çıkardı. Tag `v3.1.1`'deki yayınlanmış inceleyiciye karşı doğrulanmış en yük taşıyan değişiklikler:
+
+**Bir `critical` yalnızca doğrulandığında kapı yapar.** v3'ten beri bir modelin iddia ettiği her kritik bulgu — uyarıların %30'lik bir örneğiyle birlikte — ayrı bir model çağrısıyla ikinci kısa bir kod temelli kontrol alır (doğrulanmış bulgu başına ≈ 3 k token, 10 s ve $0.009). Bir `critical` — ve Final Review'i engeller — yalnızca bu doğrulayıcı onu onayladığında yayınlanır; çürütülen iddialar ek açıklamalı uyarı olarak görünür kalır ve yapılandırılmış çıktıda listelenir, asla inline gönderilmez. Turn sınırını (`incomplete`) veya duvar saatini (`timeout`) tüketen bir inceleme, engelleyici katılık altında kırmızıdır: "bulgu yok" artık her zaman inceleyicinin baktığını ve bir şey bulamadığını ifade eder.
+
+**Bütçe risk seviyesini izler.** İnceleme bütçesi, değişikliğin deterministik risk seviyesinden türetilir — `low`'dan `critical`'a 8/20/30/40 tur — ve kod değiştirmeyen bir push, −93 % maliyetle yalnızca doğrulayıcı turu çalıştırır. `budget-profile: fixed`, geçiş döneminde v3 öncesi sabitleri geri getirir; artımlı turlar giriş tokenlarını %62–76 azaltır.
+
+**Altı sub-skill, biri bir döngü.** Router'a `address-review` katılır (v3.1.1'de yeni): tek bir çağrı, dalın açık PR'lerini bulur, incelemenin mevcut head'i kapsadığını kontrol eder, bulguları uygula/ertele/atla planıyla sunar ve — tek bir evet üzerinde — uygular, küçük Conventional Commits gruplarıyla commit'ler, push'lar ve depoyu tetikleme biçimine göre inceleyiciyi yeniden kurar. `apply-review` salt okunur kalır; yapılandırılmış çıktı (`review-output/3.0`) her otomasyon için makine yoludur. `@v2` hattı, altı ay güvenlik ve katalog bakımıyla `release/v2` üzerinde donmuş kalır — v3 bir öneridir, asla zorunlu bir göç değildir.
+
+**İnceleyici artık kendi evlerini inceliyor.** Skill deposu ve bu web sitesi, etiket kapılı bir CI öz-inceleme çalıştırıyor — `DailybotHQ/ai-diff-reviewer@v3` üzerinden tek bir grok bacağı, `ready` etiketinin her uygulanışında bir kez tetiklenir (yeniden çalıştırmak için etiketi çıkarıp yeniden ekleyin) ve sağlayıcı secret'i yokken dürüstçe atlar. Bu web sitesi ayrıca v3.1.1 inceleyiciyi vendorize ediyor; böylece yerel Final Review ve belgeler artık aynı sözleşmeyi öğretiyor.
+
+[Spesifikasyonu](https://deepworkplan.com/spec), tam v3 yetenek listesi için [eklenti referansını](https://deepworkplan.com/kit/ai-diff-reviewer), kaynak için [v5.5.3 sürümünü](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3) veya upstream'da değişenler için [inceleyici v3.1.1 sürümünü](https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1) okuyun.

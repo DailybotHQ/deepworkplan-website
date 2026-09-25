@@ -18,6 +18,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
   - label: "Bản phát hành skill v5.5.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
+  - label: "Phát hành skill v5.5.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.2"
+  - label: "Phát hành skill v5.5.3"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
+  - label: "Phát hành trình đánh giá v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Hôm nay chúng tôi phát hành Deep Work Plan v5. Đây không phải là viết lại: đây là kết quả của nhiều tháng sử dụng thực tế — bao gồm một cuộc kiểm toán trực tiếp trên 108 kế hoạch thực — đã phơi bày, từng khoảng hở một, nơi lời hứa của phương pháp luận và hành vi thực của một agent có thể khác nhau. Tóm tắt trung thực của bản phát hành này: phương pháp luận đã từng hứa tất cả những điều này — giờ đây nó đảm bảo chúng. Trước v5, một agent đi theo tài liệu từng chữ vẫn có thể rơi vào các kịch bản thất bại thực; mỗi kịch bản như vậy, được nhận diện nhờ việc sử dụng và phản hồi đó, giờ đã được đóng lại và ghim bằng một kiểm thử có thể thực thi, chứ không phải được vá bằng thêm văn xuôi. Bộ hợp đồng của skill đã tăng từ 132 lên 258 kiểm thử trong chu kỳ này, và mỗi đảm bảo dưới đây đã được xác thực trực tiếp trên tag đã phát hành — cài vào một kho sạch và đưa qua chính các luồng của nó trước khi mục này được viết.
@@ -58,3 +64,17 @@ Bản phát hành điểm đầu tiên của dòng v5 khép lại con đường 
 
 
 Đọc [đặc tả](https://deepworkplan.com/spec) để có văn bản chuẩn tắc, [tài liệu tiện ích](https://deepworkplan.com/kit/ai-diff-reviewer) để biết trình đánh giá nay làm gì, hoặc [bản phát hành v5.5.1](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) để xem nguồn.
+
+## Cập nhật — 2026-09-25 · skill v5.5.3 + trình đánh giá v3.1.1
+
+Tiện ích AI Diff Reviewer giờ đây tài liệu hóa và cài đặt dòng **v3** của trình đánh giá, phát hành ngày 2026-09-24 (v3.0.0 → v3.1.1, ghim di động `@v3`). Skill `v5.5.2` đã viết lại các tài liệu chuẩn mực của tiện ích, hook onboarding và mẫu tích hợp quanh những gì trình đánh giá v3 thực sự làm, còn `v5.5.3` đã bàn giao phía CI. Những thay đổi chịu tải nhất, được xác minh với trình đánh giá đã phát hành tại tag `v3.1.1`:
+
+**Một `critical` chỉ giữ cổng khi đã được xác minh.** Kể từ v3, mỗi xác nhận nghiêm trọng mà mô hình đưa ra — cộng thêm mẫu 30 % các cảnh báo — đều nhận một lần kiểm tra thứ hai ngắn gọn dựa trên mã bởi một lời gọi mô hình riêng biệt (≈ 3 k token, 10 giây và $0.009 mỗi phát hiện đã xác minh). Một `critical` chỉ được đăng — và chặn Final Review — khi trình xác minh đó xác nhận nó; các xác nhận bị bác bỏ vẫn hiển thị dưới dạng cảnh báo có chú thích và được liệt kê trong đầu ra có cấu trúc, không bao giờ đăng nội dòng. Một lượt đánh giá dùng hết giới hạn vòng (`incomplete`) hay đồng hồ treo tường (`timeout`) là màu đỏ dưới mức nghiêm ngặt có tính chặn: "không có phát hiện" giờ luôn nghĩa là trình đánh giá đã xem và không thấy gì.
+
+**Ngân sách theo mức độ rủi ro.** Ngân sách đánh giá suy ra từ mức độ rủi ro tất định của thay đổi — 8/20/30/40 vòng từ `low` tới `critical` — và một push không thay đổi mã sẽ chạy một vòng chỉ có trình xác minh với chi phí −93 %. `budget-profile: fixed` khôi phục các hằng số trước v3 trong thời gian chuyển tiếp; các vòng tăng dần cắt 62–76 % token đầu vào.
+
+**Sáu kỹ năng con, một trong số đó là vòng lặp.** Bộ định tuyến có thêm `address-review` (mới trong v3.1.1): một lời gọi duy nhất tìm các PR đang mở của nhánh, kiểm tra bản đánh giá đã phủ head hiện tại chưa, trình bày các phát hiện với kế hoạch áp dụng/trì hoãn/bỏ qua, rồi — sau một lời "có" duy nhất — áp dụng, commit theo các lô Conventional Commits nhỏ, push, và kích hoạt lại trình đánh giá theo cách kho lưu trữ kích hoạt nó. `apply-review` vẫn chỉ đọc; đầu ra có cấu trúc (`review-output/3.0`) là đường dành cho máy của mọi tự động hóa. Dòng `@v2` vẫn bị đóng băng tại `release/v2` với sáu tháng bảo trì bảo mật và danh mục — v3 là khuyến nghị, không bao giờ là di dời bắt buộc.
+
+**Trình đánh giá giờ đánh giá chính ngôi nhà của mình.** Cả kho lưu trữ skill lẫn trang web này đều chạy một tự đánh giá CI có cổng nhãn — một chân grok duy nhất qua `DailybotHQ/ai-diff-reviewer@v3`, kích hoạt một lần mỗi lần nhãn `ready` được áp dụng (gỡ rồi gắn lại nhãn để chạy lại), với việc bỏ qua trung thực khi secret của nhà cung cấp vắng mặt. Trang này cũng vendorize trình đánh giá v3.1.1, nên Final Review cục bộ và tài liệu nay dạy cùng một hợp đồng.
+
+Đọc [đặc tả](https://deepworkplan.com/spec), [tài liệu tham khảo tiện ích](https://deepworkplan.com/kit/ai-diff-reviewer) cho danh sách đầy đủ năng lực v3, [bản phát hành v5.5.3](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3) cho nguồn, hoặc [bản phát hành v3.1.1 của trình đánh giá](https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1) cho những gì thay đổi ở thượng nguồn.

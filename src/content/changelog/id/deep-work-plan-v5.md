@@ -18,6 +18,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
   - label: "Rilis skill v5.5.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
+  - label: "rilis skill v5.5.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.2"
+  - label: "rilis skill v5.5.3"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
+  - label: "rilis peninjau v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Hari ini kami merilis Deep Work Plan v5. Ini bukan penulisan ulang: ini adalah hasil berbulan-bulan penggunaan nyata — termasuk audit langsung terhadap 108 rencana nyata — yang mengungkap, celah demi celah, di mana janji metodologi dan perilaku nyata agen bisa menyimpang. Ringkasan yang jujur dari rilis ini: metodologinya memang sudah menjanjikan semua ini — sekarang ia menjaminnya. Sebelum v5, agen yang mengikuti dokumentasi secara harfiah masih bisa berakhir dalam skenario kegagalan nyata; setiap skenario tersebut, yang teridentifikasi lewat penggunaan dan masukan itu, kini tertutup dan dikunci dengan tes yang dapat dieksekusi, bukan ditambal dengan lebih banyak narasi. Rangkaian kontrak skill tumbuh dari 132 menjadi 258 tes dalam siklus ini, dan setiap jaminan di bawah divalidasi secara langsung terhadap tag yang dirilis — dipasang ke dalam repositori bersih dan dijalankan melalui alurnya sendiri sebelum entri ini ditulis.
@@ -58,3 +64,17 @@ Rilis titik pertama pada jalur v5 menutup satu-satunya jalan tersisa bagi sebuah
 
 
 Baca [spesifikasi](https://deepworkplan.com/spec) untuk teks normatifnya, [referensi add-on](https://deepworkplan.com/kit/ai-diff-reviewer) untuk apa yang kini dilakukan peninjau, atau [rilis v5.5.1](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) untuk sumbernya.
+
+## Pembaruan — 2026-09-25 · skill v5.5.3 + peninjau v3.1.1
+
+Add-on AI Diff Reviewer sekarang mendokumentasikan dan memasang garis **v3** peninjau, dirilis pada 2026-09-24 (v3.0.0 → v3.1.1, pin bergerak `@v3`). Skill `v5.5.2` menulis ulang dokumen normatif add-on, hook onboarding, dan template integrasi di sekitar apa yang benar-benar dilakukan peninjau v3, dan `v5.5.3` mengirimkan sisi CI. Perubahan yang paling menahan beban, diverifikasi terhadap peninjau yang dirilis pada tag `v3.1.1`:
+
+**Sebuah `critical` hanya menyaring ketika terverifikasi.** Sejak v3, setiap klaim kritis dari model — ditambah sampel 30 % dari peringatan — mendapat pemeriksaan kedua yang singkat berbasis kode oleh panggilan model terpisah (≈ 3 k token, 10 detik, dan $0.009 per temuan terverifikasi). Sebuah `critical` diterbitkan — dan memblokir Final Review — hanya ketika verifikator itu mengonfirmasinya; klaim yang dibantah tetap terlihat sebagai peringatan beranotasi dan didaftarkan dalam output terstruktur, tidak pernah inline. Tinjauan yang menghabiskan batas putarannya (`incomplete`) atau jam dindingnya (`timeout`) berwarna merah di bawah ketatan yang memblokir: "tanpa temuan" sekarang selalu berarti peninjau telah melihat dan tidak menemukan apa pun.
+
+**Anggaran mengikuti tingkat risiko.** Anggaran tinjauan diturunkan dari tingkat risiko deterministik perubahan — 8/20/30/40 putaran dari `low` hingga `critical` — dan push yang tidak mengubah kode menjalankan satu putaran khusus verifikator dengan biaya −93 %. `budget-profile: fixed` memulihkan konstanta pra-v3 selama transisi; putaran inkremental memangkas token input 62–76 %.
+
+**Enam sub-skill, salah satunya sebuah loop.** Router mendapatkan `address-review` (baru di v3.1.1): satu pemanggilan menemukan PR terbuka pada cabang, memeriksa bahwa tinjauan mencakup head saat ini, menyajikan temuan dengan rencana terapkan/tunda/lewati, lalu — dengan satu ya — menerapkan, melakukan commit dalam batch kecil Conventional Commits, push, dan melengkapi kembali peninjau sesuai cara repo memicunya. `apply-review` tetap hanya-baca; output terstruktur (`review-output/3.0`) adalah jalur mesin untuk otomasi apa pun. Garis `@v2` tetap dibekukan di `release/v2` dengan enam bulan pemeliharaan keamanan dan katalog — v3 adalah rekomendasi, bukan migrasi paksa.
+
+**Peninjau kini meninjau rumahnya sendiri.** Repositori skill dan situs web ini sama-sama menjalankan tinjauan CI berbasis label — satu kaki grok via `DailybotHQ/ai-diff-reviewer@v3`, dipicu sekali per penerapan label `ready` (lepas dan pasang kembali label untuk menjalankan ulang), dengan skip yang jujur ketika secret penyedia tidak ada. Situs ini juga mem-vendorize peninjau v3.1.1, sehingga Final Review lokal dan dokumentasi kini mengajarkan kontrak yang sama.
+
+Baca [spesifikasi](https://deepworkplan.com/spec), [referensi add-on](https://deepworkplan.com/kit/ai-diff-reviewer) untuk daftar lengkap kemampuan v3, [rilis v5.5.3](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3) untuk sumbernya, atau [rilis v3.1.1 peninjau](https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1) untuk apa yang berubah di upstream.

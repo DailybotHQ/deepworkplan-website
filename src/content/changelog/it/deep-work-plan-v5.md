@@ -18,6 +18,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
   - label: "Rilascio della skill v5.5.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
+  - label: "Release della skill v5.5.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.2"
+  - label: "Release della skill v5.5.3"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
+  - label: "Release del revisore v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Oggi rilasciamo Deep Work Plan v5. Non è una riscrittura: sono mesi di uso reale — incluso un audit diretto di 108 piani reali — che hanno fatto emergere, lacuna dopo lacuna, dove le promesse della metodologia e il comportamento reale di un agente potevano divergere. Il riassunto onesto di questo rilascio: la metodologia prometteva già tutto questo — ora lo garantisce. Prima di v5, un agente che seguiva la documentazione alla lettera poteva comunque finire in scenari di guasto reali; ciascuno di questi scenari, individuato grazie a quell'uso e a quel feedback, è oggi chiuso e fissato da un test eseguibile, non rattoppato con altra prosa. La suite di contratti dello skill è cresciuta da 132 a 258 test in questo ciclo, e ogni garanzia qui sotto è stata validata dal vivo contro il tag rilasciato — installata in un repository pulito e condotta attraverso i propri flussi prima di scrivere questa voce.
@@ -58,3 +64,17 @@ Il primo rilascio puntuale della linea v5 chiude l'ultima strada per cui un pian
 
 
 Leggi la [specifica](https://deepworkplan.com/spec) per il testo normativo, il [riferimento dell'addon](https://deepworkplan.com/kit/ai-diff-reviewer) per ciò che il revisore fa ora, o il [rilascio v5.5.1](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) per la fonte.
+
+## Aggiornamento — 2026-09-25 · skill v5.5.3 + revisore v3.1.1
+
+L'addon AI Diff Reviewer ora documenta e installa la linea **v3** del revisore, pubblicata il 2026-09-24 (v3.0.0 → v3.1.1, pin mobile `@v3`). La skill `v5.5.2` ha riscritto i documenti normativi dell'addon, l'hook di onboarding e il template di integrazione attorno a ciò che il revisore v3 fa davvero, e la `v5.5.3` ha consegnato il lato CI. I cambiamenti più strutturali, verificati contro il revisore pubblicato al tag `v3.1.1`:
+
+**Un `critical` filtra solo quando verificato.** Dalla v3, ogni riscontro critico che un modello afferma — più un campione del 30 % degli avvisi — riceve una seconda verifica breve ancorata al codice da una chiamata di modello separata (≈ 3 k token, 10 s e $0.009 per riscontro verificato). Un `critical` viene pubblicato — e blocca il Final Review — solo quando quel verificatore lo conferma; le affermazioni confutate restano visibili come avvisi annotati e sono elencate nell'output strutturato, mai inline. Una revisione che esaurisce il tetto di turni (`incomplete`) o il proprio orologio (`timeout`) è rossa sotto severità bloccante: «nessun riscontro» ora significa sempre che il revisore ha guardato e non ha trovato nulla.
+
+**Il budget segue il livello di rischio.** Il budget della revisione deriva dal livello di rischio deterministico della modifica — 8/20/30/40 turni da `low` a `critical` — e un push che non cambia codice esegue un giro di solo verificatore con −93 % di costo. `budget-profile: fixed` ripristina le costanti pre-v3 durante la transizione; i turni incrementali tagliano i token di input del 62–76 %.
+
+**Sei sub-skill, una delle quali è un ciclo.** Il router guadagna `address-review` (nuova nella v3.1.1): una sola invocazione trova i PR aperti del branch, verifica che la revisione copra l'head corrente, presenta i riscontri e — a un solo sì — applica, esegue commit in piccoli batch Conventional Commits, fa push e riarma il revisore nel modo in cui il repository lo attiva. `apply-review` resta in sola lettura; l'output strutturato (`review-output/3.0`) è la via per macchine di qualsiasi automazione. La linea `@v2` resta congelata su `release/v2` con sei mesi di manutenzione di sicurezza e catalogo — la v3 è la raccomandazione, mai una migrazione forzata.
+
+**Il revisore ora revisiona le proprie case.** Sia il repository della skill che questo sito eseguono una revisione CI attivata da etichetta — un singolo ramo grok via `DailybotHQ/ai-diff-reviewer@v3`, attivato una volta per applicazione dell'etichetta `ready` (rimuovi e riaggiungi l'etichetta per ripetere), con skip onesto quando il secret del fornitore è assente. Questo sito vendorizza anche il revisore v3.1.1, così il Final Review locale e la documentazione insegnano ora lo stesso contratto.
+
+Leggi la [specifica](https://deepworkplan.com/spec), il [riferimento dell'addon](https://deepworkplan.com/kit/ai-diff-reviewer) per l'elenco completo delle capacità v3, la [release v5.5.3](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3) per la fonte, o la [release v3.1.1 del revisore](https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1) per ciò che è cambiato upstream.

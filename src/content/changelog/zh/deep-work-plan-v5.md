@@ -18,6 +18,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
   - label: "技能发布 v5.5.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
+  - label: "skill 发布 v5.5.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.2"
+  - label: "skill 发布 v5.5.3"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
+  - label: "审查器发布 v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 今天我们发布 Deep Work Plan v5。这不是一次重写：这是数月真实使用的结果——包括对 108 个真实计划的直接审计——一处又一处地揭示出方法论的承诺与智能体实际行为可能出现分歧的地方。对这个版本最诚实的概括：这些能力方法论早已承诺——现在它做出了保证。在 v5 之前，一个逐字照着文档执行的智能体仍可能落入真实的失败场景；如今每一个这样的场景，都是通过这些实际使用和反馈被发现的，已经关闭，并由可执行的测试锁定——而不是靠更多文字掩盖过去。本周期内技能的契约测试套件从 132 个增长到 258 个，且下文的每一项保证都是针对已发布的 tag 在实测中验证的——先安装进一个干净的仓库，再跑完它自己的全部流程，然后才写下这篇条目。
@@ -58,3 +64,17 @@ v5 线的首个补丁版本，堵上了计划可能凭借"从未真正检查过�
 
 
 规范文本见[规范](https://deepworkplan.com/spec)，审查器现在的能力见[附加组件参考](https://deepworkplan.com/kit/ai-diff-reviewer)，源头见 [v5.5.1 发布](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1)。
+
+## 更新 — 2026-09-25 · skill v5.5.3 + 审查器 v3.1.1
+
+AI Diff Reviewer 附加组件现在文档化并安装审查器的 **v3** 线，发布于 2026-09-24（v3.0.0 → v3.1.1，移动引脚 `@v3`）。skill `v5.5.2` 围绕 v3 审查器的实际行为重写了附加组件的规范文档、接入钩子和集成模板，`v5.5.3` 交付了 CI 侧。经与标签 `v3.1.1` 的已发布审查器核对，最重要的变更：
+
+**`critical` 只有在验证之后才会门控。** 自 v3 起，模型声称的每条关键发现——外加 30 % 的警告样本——都会由一次独立的模型调用进行第二次简短的、基于代码的核查（每条经验证的发现约 3 k token、10 秒、$0.009）。`critical` 只有在该验证器确认之后才会发布——并阻断 Final Review；被驳回的断言仍以带注解的警告保持可见，并列入结构化输出，绝不内联发布。耗尽轮次上限（`incomplete`）或墙钟时限（`timeout`）的审查在阻断性严格度下是红色的——"没有发现"如今总是意味着审查器看过而一无所获。
+
+**预算跟随风险等级。** 审查预算从变更的确定性风险等级推导——从 `low` 到 `critical` 为 8/20/30/40 轮——不改变任何代码的推送会以 −93 % 的成本运行一轮仅验证器的审查。`budget-profile: fixed` 在过渡期恢复 v3 之前的常量；增量轮次将输入 token 削减 62–76 %。
+
+**六个子技能，其中一个是循环。** 路由器新增 `address-review`（v3.1.1 新增）：一次调用即可找到该分支打开的 PR、确认审查已覆盖当前 head、呈现各项发现，然后——在一句"好"之后——应用、以小型 Conventional Commits 批次提交、推送，并按仓库触发它的方式重新武装审查器。`apply-review` 保持只读；结构化输出（`review-output/3.0`）是任何自动化的机器路径。`@v2` 线冻结在 `release/v2`，享有六个月的安全与目录维护——v3 是建议，绝非强制迁移。
+
+**审查器现在审查自己的家。** skill 仓库与本网站都运行标签门控的 CI 自审——通过 `DailybotHQ/ai-diff-reviewer@v3` 的单条 grok 腿，每次 `ready` 标签被应用时触发一次（重新运行请取下再贴上标签），提供商密钥缺失时诚实跳过。本网站还 vendorize 了 v3.1.1 审查器，因此本地 Final Review 与文档现在传授同一个契约。
+
+阅读[规范](https://deepworkplan.com/spec)、[附加组件参考](https://deepworkplan.com/kit/ai-diff-reviewer)了解完整的 v3 能力列表、[v5.5.3 发布](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3)了解来源，或[审查器 v3.1.1 发布](https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1)了解上游变更。
