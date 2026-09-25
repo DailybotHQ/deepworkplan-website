@@ -286,11 +286,12 @@ never auto-install those.
   one file: visual-ui (strongly recommended when detected; installation acceptance-gated), cli-output, and conversational — the latter two
   are always asked, never auto-applied.
 - **AI Diff Reviewer** — the required local review (not an opt-in): every Final Review's security
-  pass runs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v2** (skill + required
+  pass runs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + required
   `.review/extension.md`) over the plan's accumulated change set. A missing skill or extension is a
   recorded `local reviewer not installed` finding — never a silent skip, and never a surprise bootstrap:
-  installation belongs to the onboarding consent or an explicit addon invocation; invocation errors soft-fail; `critical` findings from a completed pass still
-  block completion. **Flow B** (the CI gate with `pr-review.yml`) is offered as an explicit opt-in and
+  installation belongs to the onboarding consent or an explicit addon invocation; invocation errors soft-fail; **verified** `critical` findings from a completed pass still
+  block completion (v3, BC-07 — unverified critical claims arrive as annotated warnings, and an
+  `incomplete`/`timeout` review is not a clean pass, BC-04). **Flow B** (the CI gate with `pr-review.yml`) is offered as an explicit opt-in and
   never installed unrequested. No Deep Work Plan flow requires a commercial service, CI provider, or secret.
 
 ## 5. Evolve the kit (author sub-skill)

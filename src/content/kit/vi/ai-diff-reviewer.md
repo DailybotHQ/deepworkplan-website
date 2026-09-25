@@ -70,7 +70,7 @@ Ba bản phát hành ra mắt ngày 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) và v3.1
 | **Đầu ra có cấu trúc là đường dành cho máy** (v3.0.0) | Tài liệu `review-output/3.0` mang theo hồ sơ chạy, danh mục thay đổi, các phát hiện kèm bằng chứng có kiểu và xác minh, các phát hiện bị bác bỏ, và cổng. Hãy đọc tài liệu đó, thay vì cào nội dung đánh giá. |
 | **Sáu kỹ năng con** (v3.1.1) | `address-review` gia nhập bộ định tuyến: một lần gọi là áp dụng, commit, push và kích hoạt lại trình đánh giá. |
 | **Ensemble tùy chọn** (v3.0.0) | Các chân `mode: emit` chỉ đọc cộng một công việc `aggregate` xác minh các phát hiện hợp nhất một lần và đăng một đánh giá duy nhất. |
-| **`@v2` vẫn hoạt động** | Dòng v2 bị đóng băng tại `release/v2` với sáu tháng bảo trì bảo mật và danh mục. v3 là khuyến nghị, không bao giờ là di cứng bắt buộc. |
+| **`@v2` vẫn hoạt động** | Dòng v2 bị đóng băng tại `release/v2` với sáu tháng bảo trì bảo mật và danh mục. v3 là khuyến nghị, không bao giờ là việc di chuyển bắt buộc. |
 
 Hai trong số này quan trọng hơn cả đối với phương pháp luận.
 
