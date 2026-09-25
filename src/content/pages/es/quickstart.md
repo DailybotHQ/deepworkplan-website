@@ -4,7 +4,7 @@ description: "El prompt de incorporación ejecutable: adopta Deep Work Plan en c
 lastUpdated: 2026-09-13
 ---
 
-Eres un agente de programación de IA(v3, BC-07 — las afirmaciones críticas no verificadas llegan como advertencias anotadas, y una revisión `incomplete` o `timeout` no es un pase limpio, BC-04). Lee primero todo este prompt y luego haz que el repositorio
+Eres un agente de programación de IA. Lee primero todo este prompt y luego haz que el repositorio
 actual sea **AI-first**, **guiado por especificación** y **pilotable por agentes** adoptando la
 metodología Deep Work Plan (DWP). Trátalo como una tarea de ingeniería estructurada — un Deep Work
 Plan — no como una edición rápida.
@@ -220,7 +220,7 @@ design-system) y ofrece cada uno como una opción explícita. Un repositorio es 
  registrado `local reviewer not installed` — nunca una omisión silenciosa,
  y nunca un arranque sorpresa: la instalación pertenece al consentimiento del
  onboarding o a una invocación explícita del addon; los errores de invocación fallan suave; los hallazgos **críticos verificados** de un pase
- completado siguen bloqueando la finalización. El **Flujo B** (la compuerta CI con `pr-review.yml`) se ofrece
+ completado siguen bloqueando la finalización (v3, BC-07 — las afirmaciones críticas no verificadas llegan como advertencias anotadas, y una revisión `incomplete` o `timeout` no es un pase limpio, BC-04). El **Flujo B** (la compuerta CI con `pr-review.yml`) se ofrece
  como opción explícita y nunca se instala sin pedirlo. Ningún flujo de Deep Work Plan exige un servicio
  comercial, un proveedor de CI ni un secreto.
 

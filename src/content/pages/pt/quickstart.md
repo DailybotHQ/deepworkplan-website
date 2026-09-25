@@ -4,7 +4,7 @@ description: "O prompt executável de onboarding para agentes de IA: adote o Dee
 lastUpdated: 2026-09-13
 ---
 
-Você é um agente de código de IA(v3, BC-07 — afirmativas críticas não verificadas chegam como avisos anotados, e uma revisão `incomplete` ou `timeout` não é uma passagem limpa, BC-04). Leia este prompt inteiro primeiro e, então, torne o repositório atual
+Você é um agente de código de IA. Leia este prompt inteiro primeiro e, então, torne o repositório atual
 **AI-first**, **orientado a especificação** e **pilotável por agentes** adotando a metodologia Deep Work Plan
 (DWP). Trate isso como uma tarefa de engenharia estruturada — um Deep Work Plan — e não como uma edição rápida.
 
@@ -216,7 +216,7 @@ design-system) e ofereça cada um como uma escolha explícita. Um repositório �
  registrado `local reviewer not installed` — nunca uma omissão silenciosa,
  e nunca um arranque surpresa: a instalação pertence ao consentimento do
  onboarding ou a uma invocação explícita do addon; os erros de invocação falham de forma suave; os achados **críticos verificados** de uma passagem
- concluída ainda bloqueiam a conclusão. O **Fluxo B** (o portão de CI com `pr-review.yml`) é oferecido
+ concluída ainda bloqueiam a conclusão (v3, BC-07 — afirmativas críticas não verificadas chegam como avisos anotados, e uma revisão `incomplete` ou `timeout` não é uma passagem limpa, BC-04). O **Fluxo B** (o portão de CI com `pr-review.yml`) é oferecido
  como opção explícita e nunca é instalado sem ser pedido. Nenhum fluxo do Deep Work Plan exige um serviço
  comercial, um fornecedor de CI ou um segredo.
 

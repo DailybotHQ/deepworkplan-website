@@ -202,7 +202,7 @@ mit **null** optionalen Addons vollständig konform — installieren Sie diese n
  aufgezeichneter `local reviewer not installed`-Befund — niemals ein stilles
  Überspringen, und niemals ein Überraschungs-Bootstrap: die Installation gehört
  zur Onboarding-Zustimmung oder zu einem expliziten Addon-Aufruf; Aufruffehler soft-failen; **verifizierte `critical`-Ergebnisse** eines abgeschlossenen Durchlaufs blockieren
- weiterhin den Abschluss(v3, BC-07 — unbestätigte kritische Behauptungen erscheinen als annotierte Warnungen, und ein `incomplete`-/`timeout`-Review ist kein sauberer Durchlauf, BC-04). **Flow B** (das CI-Gate mit `pr-review.yml`) wird als explizites Opt-in angeboten und
+ weiterhin den Abschluss (v3, BC-07 — unbestätigte kritische Behauptungen erscheinen als annotierte Warnungen, und ein `incomplete`-/`timeout`-Review ist kein sauberer Durchlauf, BC-04). **Flow B** (das CI-Gate mit `pr-review.yml`) wird als explizites Opt-in angeboten und
  niemals ungefragt installiert. Kein Deep Work Plan-Ablauf erfordert einen kommerziellen Dienst, CI-Anbieter oder Secret.
 
 ## 5. Das Kit weiterentwickeln (author-Sub-Skill)

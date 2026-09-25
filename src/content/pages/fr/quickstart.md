@@ -4,7 +4,7 @@ description: "Le prompt d’onboarding exécutable pour les agents IA : adopter 
 lastUpdated: 2026-09-13
 ---
 
-Vous êtes un agent de code IA(v3, BC-07 — les affirmations critiques non vérifiées arrivent comme avertissements annotés, et une revue `incomplete` ou `timeout` n’est pas une passe propre, BC-04). Lisez d’abord ce prompt en entier, puis rendez le dépôt courant
+Vous êtes un agent de code IA. Lisez d’abord ce prompt en entier, puis rendez le dépôt courant
 **AI-first**, **piloté par la spécification** et **pilotable par agent** en adoptant la méthodologie
 Deep Work Plan (DWP). Traitez cela comme une tâche d’ingénierie structurée — un Deep Work Plan —
 et non comme une retouche rapide.
@@ -222,7 +222,7 @@ pleinement conforme avec **zéro** addon facultatif — ne les installez jamais 
  consigné `local reviewer not installed` — jamais une omission silencieuse, et
  jamais un amorçage surprise : l'installation appartient au consentement de
  l'onboarding ou à une invocation explicite de l'addon ; les erreurs d'invocation échouent en douceur ; les résultats **critiques vérifiés** d'un
- passage terminé bloquent toujours la finalisation. Le **Flow B** (la porte CI avec `pr-review.yml`) est proposé
+ passage terminé bloquent toujours la finalisation (v3, BC-07 — les affirmations critiques non vérifiées arrivent comme avertissements annotés, et une revue `incomplete` ou `timeout` n’est pas une passe propre, BC-04). Le **Flow B** (la porte CI avec `pr-review.yml`) est proposé
  comme option explicite et n'est jamais installé sans demande. Aucun flux de Deep Work Plan n'exige de service
  commercial, de fournisseur de CI ni de secret.
 
