@@ -633,6 +633,8 @@ function claudex() {
 # Claude Code via Z.AI GLM Coding Plan (does not change default `claude` / Anthropic auth).
 # Requires ZAI_CODING_API_KEY in docker/local/dwpwebsite/.env (survives rebuilds).
 # Model aliases (Opus/Sonnet/Haiku) are remapped to GLM only for this process — not in settings.json.
+# Z.AI always wins: a preset ANTHROPIC_API_KEY is unset for the wrapped process,
+# so /status shows the Z.AI endpoint (ANTHROPIC_BASE_URL) and auth token.
 # Docs: https://docs.z.ai/devpack/quick-start · https://docs.z.ai/devpack/latest-model
 # ================================
 function _zai_coding_env_or_die() {
@@ -647,6 +649,10 @@ function _zai_coding_env_or_die() {
 }
 
 # Build env for a single Claude Code invocation against Z.AI (process-scoped only).
+# ANTHROPIC_API_KEY (exported container-wide from the compose env_file) would take
+# precedence over ANTHROPIC_AUTH_TOKEN in Claude Code, sending the Anthropic key to
+# the Z.AI endpoint and making /status report API-key auth. A subshell unsets it so
+# the Z.AI auth token is the only credential the claude process sees.
 function _zai_claude_run() {
 	local -a claude_args=("$@")
 	local opus_model="${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3}"
@@ -656,24 +662,27 @@ function _zai_claude_run() {
 	# Optional 1M context: set models to e.g. glm-5.3[1m] and ZAI_CODING_AUTO_COMPACT_WINDOW=1000000
 	local compact_window="${ZAI_CODING_AUTO_COMPACT_WINDOW:-}"
 
-	if [[ -n "${compact_window}" ]]; then
-		ANTHROPIC_AUTH_TOKEN="${ZAI_CODING_API_KEY}" \
-			ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
-			API_TIMEOUT_MS="${timeout_ms}" \
-			ANTHROPIC_DEFAULT_OPUS_MODEL="${opus_model}" \
-			ANTHROPIC_DEFAULT_SONNET_MODEL="${sonnet_model}" \
-			ANTHROPIC_DEFAULT_HAIKU_MODEL="${haiku_model}" \
-			CLAUDE_CODE_AUTO_COMPACT_WINDOW="${compact_window}" \
-			claude "${claude_args[@]}"
-	else
-		ANTHROPIC_AUTH_TOKEN="${ZAI_CODING_API_KEY}" \
-			ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
-			API_TIMEOUT_MS="${timeout_ms}" \
-			ANTHROPIC_DEFAULT_OPUS_MODEL="${opus_model}" \
-			ANTHROPIC_DEFAULT_SONNET_MODEL="${sonnet_model}" \
-			ANTHROPIC_DEFAULT_HAIKU_MODEL="${haiku_model}" \
-			claude "${claude_args[@]}"
-	fi
+	(
+		unset ANTHROPIC_API_KEY
+		if [[ -n "${compact_window}" ]]; then
+			ANTHROPIC_AUTH_TOKEN="${ZAI_CODING_API_KEY}" \
+				ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
+				API_TIMEOUT_MS="${timeout_ms}" \
+				ANTHROPIC_DEFAULT_OPUS_MODEL="${opus_model}" \
+				ANTHROPIC_DEFAULT_SONNET_MODEL="${sonnet_model}" \
+				ANTHROPIC_DEFAULT_HAIKU_MODEL="${haiku_model}" \
+				CLAUDE_CODE_AUTO_COMPACT_WINDOW="${compact_window}" \
+				claude "${claude_args[@]}"
+		else
+			ANTHROPIC_AUTH_TOKEN="${ZAI_CODING_API_KEY}" \
+				ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
+				API_TIMEOUT_MS="${timeout_ms}" \
+				ANTHROPIC_DEFAULT_OPUS_MODEL="${opus_model}" \
+				ANTHROPIC_DEFAULT_SONNET_MODEL="${sonnet_model}" \
+				ANTHROPIC_DEFAULT_HAIKU_MODEL="${haiku_model}" \
+				claude "${claude_args[@]}"
+		fi
+	)
 }
 
 function claude-glm() {
@@ -684,34 +693,8 @@ function claude-glm() {
 	_zai_claude_run --dangerously-skip-permissions "$@"
 }
 
-# Resume/continue a Claude Code session against Z.AI GLM (full permissions).
-# Usage mirrors claudex; session state is shared with plain claude / claudex.
-function claudex-glm() {
-	_zai_coding_env_or_die || return 1
-	case "${1:-}" in
-		-c|--continue)
-			print.success "Continuing most recent Claude Code session (Z.AI GLM: ${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3})..."
-			shift
-			_zai_claude_run --continue --dangerously-skip-permissions "$@"
-			;;
-		-r|--resume)
-			shift
-			if [[ -n "${1:-}" && "${1:0:1}" != "-" ]]; then
-				local session_id="$1"
-				shift
-				print.success "Resuming Claude Code session (Z.AI GLM): $session_id..."
-				_zai_claude_run --resume "$session_id" --dangerously-skip-permissions "$@"
-			else
-				print.success "Selecting Claude Code session to resume (Z.AI GLM)..."
-				_zai_claude_run --resume --dangerously-skip-permissions "$@"
-			fi
-			;;
-		*)
-			print.success "Starting Claude Code (Z.AI GLM) with full permissions (${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3} / ${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3})..."
-			_zai_claude_run --dangerously-skip-permissions "$@"
-			;;
-	esac
-}
+# Resume flags (-c/--continue, -r/--resume [id]) pass straight through to
+# claude, sharing session state with plain claude / claudex.
 
 # ================================
 # OpenCode via Azure OpenAI / Microsoft Foundry (GPT deployments).
@@ -1982,7 +1965,6 @@ function show_welcome() {
     echo "  • codex-xai         - Codex via xAI Grok (Responses API) with full permissions"
   echo ""
   echo "  • claude-glm        - Claude Code via Z.AI GLM with full permissions (recommended)"
-  echo "  • claudex-glm       - Claude Code via Z.AI GLM with full permissions"
     echo "      -c, --continue  Continue most recent session"
     echo "      -r, --resume    Interactive session selection"
     echo "      -r <id>         Resume specific session by ID"

@@ -77,15 +77,14 @@ Use [Z.AI GLM Coding Plan](https://docs.z.ai/devpack/quick-start) alongside the 
 
 | Command | Description |
 |---------|-------------|
-| `claude-glm` | Claude Code via Z.AI (`https://api.z.ai/api/anthropic`) |
-| `claudex-glm` | Same, with `--dangerously-skip-permissions` (mirrors `claudex`) |
+| `claude-glm` | Claude Code via Z.AI (`https://api.z.ai/api/anthropic`) with full permissions; `-c` / `-r` passthrough |
 | `opencodex` | OpenCode with full permissions |
 | `opencodex-azure` | OpenCode via Azure OpenAI / Foundry with full permissions |
 | `codex-azure` | Codex via Azure OpenAI / Foundry (`-p azure` profile) with full permissions |
 | `codex-glm` | Codex via Z.AI GLM Coding Plan (`-p glm` profile, Responses `https://api.z.ai/api/v1`) with full permissions |
-| `opencodex-glm` | OpenCode via Z.AI Coding Plan (`zai-coding-plan` / `https://api.z.ai/api/coding/paas/v4`) with the same GLM model env as `claudex-glm` |
+| `opencodex-glm` | OpenCode via Z.AI Coding Plan (`zai-coding-plan` / `https://api.z.ai/api/coding/paas/v4`) with the same GLM model env as `claude-glm` |
 | `pi-azure` | Pi via Azure Foundry (`azure-foundry` custom provider; only daily/reasoning deployments) |
-| `pi-glm` | Pi via Z.AI GLM (`zai-glm` custom provider; same GLM env as `claudex-glm`) |
+| `pi-glm` | Pi via Z.AI GLM (`zai-glm` custom provider; same GLM env as `claude-glm`) |
 | `opencodex-xai` | OpenCode via xAI Grok (`XAI_API_KEY` from console.x.ai) |
 | `cline-xai` | Cline via xAI Grok (openai-compatible `https://api.x.ai/v1`) |
 | `pi-xai` | Pi via xAI Grok (`xai-grok` custom provider) |
