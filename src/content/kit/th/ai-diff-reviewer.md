@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "การตรวจสอบในเครื่องของ critical ที่ผ่านการตรวจสอบแล้วในทุก Final Review ตั้งแต่มาตรฐาน 2.3.0; เกท CI ด้วย grok และ loop address-review ยังเป็นทางเลือก"
+description: "การตรวจสอบในเครื่องของ critical ที่ผ่านการตรวจสอบแล้วในทุก Final Review ตั้งแต่มาตรฐาน 2.3.0; เกท CI แบบเลือกใช้และ loop address-review ยังเป็นทางเลือก"
 kind: addon
 lang: th
 order: 5

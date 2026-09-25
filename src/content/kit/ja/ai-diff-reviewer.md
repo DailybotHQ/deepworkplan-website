@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "標準 2.3.0 以降の Final Review で検証済みクリティカルのローカルレビューを実施；grok の CI ゲートと address-review は任意。"
+description: "標準 2.3.0 以降の Final Review で検証済みクリティカルのローカルレビューを実施；オプションの CI ゲートと address-review ループは任意。"
 kind: addon
 lang: ja
 order: 5

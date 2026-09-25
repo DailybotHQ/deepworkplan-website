@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "표준 2.3.0부터 모든 DWP Final Review에 들어가는 검증된 크리티컬 로컬 리뷰. grok CI 게이트와 address-review 루프는 선택."
+description: "표준 2.3.0부터 모든 DWP Final Review에 들어가는 검증된 크리티컬 로컬 리뷰. 선택적 CI 게이트와 address-review 루프는 선택."
 kind: addon
 lang: ko
 order: 5

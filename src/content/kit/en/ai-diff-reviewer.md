@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Verified-criticals local review in every DWP Final Review since standard 2.3.0; the grok CI gate and the address-review loop stay optional."
+description: "Verified-criticals local review in every DWP Final Review since standard 2.3.0; the optional CI gate and the address-review loop complete the addon."
 kind: addon
 lang: en
 order: 5

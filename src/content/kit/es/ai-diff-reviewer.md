@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Revisión local de críticos verificados en cada Final Review desde el estándar 2.3.0; la compuerta de CI con grok y address-review siguen siendo opcionales."
+description: "Revisión local de críticos verificados en cada Final Review desde el estándar 2.3.0; la compuerta de CI y el bucle address-review siguen siendo opcionales."
 kind: addon
 lang: es
 order: 5

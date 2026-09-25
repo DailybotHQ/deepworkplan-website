@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Revisione locale a critici verificati in ogni Final Review DWP dallo standard 2.3.0; il gate CI grok e il ciclo address-review restano opzionali."
+description: "Revisione locale a critici verificati in ogni Final Review DWP dallo standard 2.3.0; il gate CI e il ciclo address-review restano opzionali."
 kind: addon
 lang: it
 order: 5

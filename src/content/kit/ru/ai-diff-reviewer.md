@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Локальный обзор подтверждённых критических находок в каждом Final Review DWP со стандарта 2.3.0; CI-шлюз на grok и цикл address-review остаются опциональными."
+description: "Локальный обзор подтверждённых критических находок в каждом Final Review DWP со стандарта 2.3.0; CI-шлюз и цикл address-review остаются опциональными."
 kind: addon
 lang: ru
 order: 5

@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "संस्करण 2.3.0 से हर Final Review में सत्यापित गंभीर निष्कर्षों की स्थानीय समीक्षा; grok CI गेट और address-review लूप वैकल्पिक बने रहते हैं।"
+description: "संस्करण 2.3.0 से हर Final Review में सत्यापित गंभीर निष्कर्षों की स्थानीय समीक्षा; वैकल्पिक CI गेट और address-review लूप वैकल्पिक बने रहते हैं।"
 kind: addon
 lang: hi
 order: 5

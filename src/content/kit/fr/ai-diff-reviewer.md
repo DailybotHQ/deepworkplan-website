@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Revue locale à critiques vérifiés dans chaque Final Review DWP depuis le standard 2.3.0 ; la porte CI grok et la boucle address-review restent optionnelles."
+description: "Revue locale à critiques vérifiés dans chaque Final Review DWP depuis le standard 2.3.0 ; la porte CI et la boucle address-review restent optionnelles."
 kind: addon
 lang: fr
 order: 5

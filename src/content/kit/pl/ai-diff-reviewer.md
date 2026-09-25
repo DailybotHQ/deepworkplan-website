@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Lokalny przegląd zweryfikowanych ustaleń krytycznych w każdym Final Review DWP od standardu 2.3.0; bramka CI na grok i pętla address-review są opcjonalne."
+description: "Lokalny przegląd zweryfikowanych ustaleń krytycznych w każdym Final Review DWP od standardu 2.3.0; opcjonalna bramka CI i pętla address-review są opcjonalne."
 kind: addon
 lang: pl
 order: 5

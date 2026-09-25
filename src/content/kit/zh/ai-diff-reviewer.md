@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "自标准 2.3.0 起每份 Final Review 中经验证的关键发现本地审查；grok CI 门控与 address-review 保持可选。"
+description: "自标准 2.3.0 起每份 Final Review 中经验证的关键发现本地审查；可选的 CI 门控与 address-review 循环保持可选。"
 kind: addon
 lang: zh
 order: 5

@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Tinjauan lokal kritis terverifikasi di setiap Final Review sejak standar 2.3.0; gerbang CI dengan grok dan loop address-review tetap opsional."
+description: "Tinjauan lokal kritis terverifikasi di setiap Final Review sejak standar 2.3.0; gerbang CI dan loop address-review tetap opsional."
 kind: addon
 lang: id
 order: 5

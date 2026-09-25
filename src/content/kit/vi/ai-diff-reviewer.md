@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Đánh giá cục bộ các phát hiện nghiêm trọng đã xác minh trong mọi Final Review kể từ chuẩn 2.3.0; cổng CI với grok và vòng lặp address-review vẫn tùy chọn."
+description: "Đánh giá cục bộ các phát hiện nghiêm trọng đã xác minh trong mọi Final Review kể từ chuẩn 2.3.0; cổng CI và vòng lặp address-review vẫn tùy chọn."
 kind: addon
 lang: vi
 order: 5

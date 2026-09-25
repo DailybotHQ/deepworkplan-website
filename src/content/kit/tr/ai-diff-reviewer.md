@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "2.3.0 standardından itibaren her DWP Final Review'inde doğrulanmış kritik bulgularla yerel inceleme; grok CI kapısı ve address-review isteğe bağlı kalır."
+description: "2.3.0 standardından itibaren her DWP Final Review'inde doğrulanmış kritik bulgularla yerel inceleme; CI kapısı ve address-review döngüsü isteğe bağlı kalır."
 kind: addon
 lang: tr
 order: 5

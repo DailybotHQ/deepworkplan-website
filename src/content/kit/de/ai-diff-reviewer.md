@@ -1,6 +1,6 @@
 ---
 title: AI Diff Reviewer
-description: "Verifizierte kritische Findings im lokalen Review jedes DWP-Final-Reviews seit Standard 2.3.0; grok-CI-Gate und address-review-Schleife bleiben optional."
+description: "Verifizierte kritische Findings im lokalen Review jedes DWP-Final-Reviews seit Standard 2.3.0; das CI-Gate und die address-review-Schleife bleiben optional."
 kind: addon
 lang: de
 order: 5
