@@ -311,7 +311,7 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 - **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the next release overwrites those edits. Contribute upstream instead.
 - **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: changes there must be intentional and reviewed, contributed upstream first, then re-adapted deliberately.
 
-**Current vendored provenance (2026-09-17):** the `deepworkplan` copy is the released upstream tag **`v5.5.1`** (`3117819`), installed via `npx --yes skills add DailybotHQ/deepworkplan-skill@v5.5.1 --skill deepworkplan --force -y` and verified **byte-identical** against the tag with `diff -rq`. **There is currently no local divergence**, so a future tag install overwrites nothing that is not already upstream; if one is ever reintroduced, re-stamp this paragraph to say what it carries. `ai-diff-reviewer` is at **v2.3.1**, also verified against its published tag. Local adaptation is the nine command delegators, refreshed from the skill's own `onboard/command-templates/`.
+**Current vendored provenance (2026-09-25):** the `deepworkplan` copy is the released upstream tag **`v5.5.3`** (`672b266`), installed via `npx --yes skills add DailybotHQ/deepworkplan-skill@v5.5.3 --skill deepworkplan --force -y`, with the installed `version:` asserted equal to the tag. `ai-diff-reviewer` is at **v3.1.1** and `dailybot` at **v3.14.0**, refreshed and asserted the same way. The pack keeps no local divergence from upstream; a future tag install overwrites nothing that is not already upstream. Local adaptation remains the command delegators, refreshed from the skill's own `onboard/command-templates/`.
 
 > Full mechanics — the refresh sequence step by step, failure semantics, the official CLI publishing step and its namespace strategy, and the provenance history including this repository's own upstream contribution — live in [Architecture → Dogfooding DWP](docs/ARCHITECTURE.md#addon-refresh--the-full-sequence).
 
@@ -327,7 +327,7 @@ is required only for the CI leg; the local review never needs it. The shared
 [`.review/extension.md`](.review/extension.md) configures both the local and
 the CI review.
 
-DWP standard: 5.0.0 (onboarded 2026-09-11, upgraded 2026-09-13 and 2026-09-17; skill 5.5.1)
+DWP standard: 5.0.0 (onboarded 2026-09-11, upgraded 2026-09-13, 2026-09-17 and 2026-09-25; skill 5.5.3)
 
 ## Quick Commands
 
