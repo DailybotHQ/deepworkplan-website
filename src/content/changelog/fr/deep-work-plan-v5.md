@@ -18,6 +18,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
   - label: "Publication de la skill v5.5.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
+  - label: "Release de la skill v5.5.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.2"
+  - label: "Release de la skill v5.5.3"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
+  - label: "Release du relecteur v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Nous publions aujourd'hui Deep Work Plan v5. Ce n'est pas une réécriture : ce sont des mois d'usage réel — dont un audit direct de 108 plans réels — qui ont mis au jour, écart après écart, où les promesses de la méthodologie et le comportement réel d'un agent pouvaient diverger. Le résumé honnête de cette version : la méthodologie promettait déjà tout cela — désormais, elle le garantit. Avant v5, un agent qui suivait la documentation à la lettre pouvait encore aboutir à des scénarios d'échec réels ; chacun d'eux, identifié grâce à cet usage et à ces retours, est désormais fermé et verrouillé par un test exécutable, et non recouvert de davantage de prose. La suite de contrats du skill est passée de 132 à 258 tests durant ce cycle, et chaque garantie ci-dessous a été validée en conditions réelles sur le tag publié — installée dans un dépôt propre et menée à travers ses propres flux avant la rédaction de cette entrée.
@@ -58,3 +64,17 @@ La première version ponctuelle de la lignée v5 referme le dernier chemin par l
 
 
 Lisez la [spécification](https://deepworkplan.com/spec) pour le texte normatif, la [référence de l'addon](https://deepworkplan.com/kit/ai-diff-reviewer) pour ce que fait désormais le relecteur, ou la [publication v5.5.1](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) pour la source.
+
+## Mise à jour — 2026-09-25 · skill v5.5.3 + relecteur v3.1.1
+
+L'addon AI Diff Reviewer documente et installe désormais la ligne **v3** du relecteur, publiée le 2026-09-24 (v3.0.0 → v3.1.1, pin mobile `@v3`). La skill `v5.5.2` a réécrit les documents normatifs de l'addon, le hook d'onboarding et le modèle d'intégration autour de ce que le relecteur v3 fait réellement, et la `v5.5.3` a livré le volet CI. Les changements les plus structurants, vérifiés contre le relecteur publié à l'étiquette `v3.1.1` :
+
+**Un `critical` ne filtre que lorsqu'il est vérifié.** Depuis la v3, chaque constat critique qu'un modèle affirme — plus un échantillon de 30 % des avertissements — reçoit une seconde vérification brève ancrée dans le code par un appel de modèle séparé (≈ 3 k tokens, 10 s et 0,009 $ par constat vérifié). Un `critical` est publié — et bloque le Final Review — uniquement lorsque ce vérificateur le confirme ; les affirmations réfutées restent visibles comme avertissements annotés et sont listées dans la sortie structurée, jamais en ligne. Une revue qui épuise son plafond de tours (`incomplete`) ou son horloge (`timeout`) est rouge sous stricte bloquante : « aucun constat » signifie désormais toujours que le relecteur a regardé et n'a rien trouvé.
+
+**Le budget suit le niveau de risque.** Le budget de revue dérive du niveau de risque déterministe du changement — 8/20/30/40 tours de `low` à `critical` — et un push sans changement de code exécute une ronde de vérificateur seul à −93 % de coût. `budget-profile: fixed` restaure les constantes d'avant la v3 pendant la transition ; les rondes incrémentales réduisent les tokens d'entrée de 62 à 76 %.
+
+**Six sous-skills, dont une boucle.** Le routeur gagne `address-review` (nouvelle en v3.1.1) : une seule invocation trouve les PR ouverts de la branche, vérifie que la revue couvre le head courant, présente les constats puis — sur un seul oui — applique, committe par petits lots de Conventional Commits, pousse et réarme le relecteur selon la façon dont le dépôt le déclenche. `apply-review` reste en lecture seule ; la sortie structurée (`review-output/3.0`) est la voie machine de toute automatisation. La ligne `@v2` reste gelée sur `release/v2` avec six mois de maintenance de sécurité et de catalogue — la v3 est la recommandation, jamais une migration forcée.
+
+**Le relecteur relit désormais ses propres maisons.** Le dépôt de la skill et ce site exécutent tous deux une revue CI déclenchée par étiquette — une seule patte grok via `DailybotHQ/ai-diff-reviewer@v3`, déclenchée une fois par application de l'étiquette `ready` (retirez et re-ajoutez l'étiquette pour la relancer), avec un saut honnête quand le secret du fournisseur est absent. Ce site vendorise aussi le relecteur v3.1.1, si bien le Final Review local et la documentation enseignent désormais le même contrat.
+
+Lisez la [spécification](https://deepworkplan.com/spec), la [référence de l'addon](https://deepworkplan.com/kit/ai-diff-reviewer) pour la liste complète des capacités v3, la [release v5.5.3](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3) pour la source, ou la [release v3.1.1 du relecteur](https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1) pour ce qui a changé en amont.

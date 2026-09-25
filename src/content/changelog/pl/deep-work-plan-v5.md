@@ -18,6 +18,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
   - label: "Wydanie skilla v5.5.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
+  - label: "Wydanie skilla v5.5.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.2"
+  - label: "Wydanie skilla v5.5.3"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
+  - label: "Wydanie recenzenta v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 Dziś wydajemy Deep Work Plan v5. To nie jest przepisanie od nowa: to miesiące realnego użycia — w tym bezpośredni audyt 108 rzeczywistych planów — które luka po luce ujawniały, gdzie obietnice metodologii i rzeczywiste zachowanie agenta mogły się rozjeżdżać. Szczerze podsumowując to wydanie: metodologia obiecywała to wszystko już wcześniej — teraz tego gwarantuje. Przed v5 agent, który trzymał się dokumentacji co do litery, mógł i tak trafić w realne scenariusze awarii; każdy z nich, wykryty dzięki temu użyciu i informacji zwrotnej, jest teraz zamknięty i przypięty wykonywalnym testem, a nie załatany kolejnym akapitem prozy. W tym cyklu zestaw kontraktów skilla urósł ze 132 do 258 testów, a każda gwarancja poniżej została zwalidowana na żywo względem wydanej wersji — zainstalowana w czystym repozytorium i przeprowadzona przez własne przepływy, zanim powstał ten wpis.
@@ -58,3 +64,17 @@ Pierwsze wydanie punktowe linii v5 zamyka ostatnią drogę, którą plan mógł 
 
 
 Przeczytaj [specyfikację](https://deepworkplan.com/spec) po tekst normatywny, [dokumentację dodatku](https://deepworkplan.com/kit/ai-diff-reviewer) po to, co recenzent robi teraz, albo [wydanie v5.5.1](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1) po źródło.
+
+## Aktualizacja — 2026-09-25 · skill v5.5.3 + recenzent v3.1.1
+
+Dodatek AI Diff Reviewer dokumentuje i instaluje teraz linię **v3** recenzenta, wydaną 2026-09-24 (v3.0.0 → v3.1.1, ruchomy pin `@v3`). Skill `v5.5.2` przepisała normatywne dokumenty dodatku, hak onboardingowy i szablon integracji wokół tego, co recenzent v3 naprawdę robi, a `v5.5.3` dostarczyła stronę CI. Najbardziej nośne zmiany, zweryfikowane wobec wydanego recenzenta na tagu `v3.1.1`:
+
+**`critical` blokuje tylko po weryfikacji.** Od v3 każdy zgłoszony przez model finding krytyczny — plus 30-procentowa próbka ostrzeżeń — otrzymuje drugą, krótką kontrolę opartą na kodzie, od osobnego wywołania modelu (≈ 3 k tokenów, 10 s i $0.009 za zweryfikowane ustalenie). `critical` jest publikowany — i blokuje Final Review — tylko gdy weryfikator go potwierdzi; odrzucone twierdzenia pozostają widoczne jako adnotowane ostrzeżenia i są wymieniane w ustrukturyzowanym wyniku, nigdy inline. Przegląd, który wyczerpał limit tur (`incomplete`) lub zegar ścienny (`timeout`), jest czerwony przy blokującej surowości: „brak ustaleń" oznacza teraz zawsze, że recenzent patrzył i nic nie znalazł.
+
+**Budżet podąża za poziomem ryzyka.** Budżet przeglądu wywodzi się z deterministycznego poziomu ryzyka zmiany — 8/20/30/40 tur od `low` do `critical` — a push bez zmian w kodzie wykonuje turę samego weryfikatora przy −93 % kosztu. `budget-profile: fixed` przywraca sprzed-v3 stałe w okresie przejściowym; rundy przyrostowe tną tokeny wejściowe o 62–76 %.
+
+**Sześć sub-skilli, z których jedna to pętla.** Router zyskuje `address-review` (nowe w v3.1.1): jedno wywołanie znajduje otwarte PR-y gałęzi, sprawdza, czy przegląd pokrywa bieżący head, przedstawia ustalenia z planem zastosuj/odłóż/pomiń, a po jednym „tak" — stosuje, kommituje w małych partiach Conventional Commits, wypycha i ponownie uzbraja recenzenta zgodnie z tym, jak repozytorium go wyzwala. `apply-review` pozostaje tylko do odczytu; ustrukturyzowany wynik (`review-output/3.0`) to maszynowa ścieżka każdej automatyzy. Linia `@v2` pozostaje zamrożona na `release/v2` z sześcioma miesiącami utrzymania bezpieczeństwa i katalogu — v3 to zalecenie, nigdy wymuszona migracja.
+
+**Recenzent przegląda teraz własne domy.** Repozytorium skilla i ta witryna uruchamiają oba etykietowany przegląd CI — pojedynczą nogę grok przez `DailybotHQ/ai-diff-reviewer@v3`, wyzwalaną raz na nałożenie etykiety `ready` (aby powtórzyć, zdejmij i nałóż etykietę ponownie), z uczciwym pominięciem, gdy sekret dostawcy nie istnieje. Ta witryna vendoruje też recenzenta v3.1.1, więc lokalny Final Review i dokumentacja uczą teraz tej samej umowy.
+
+Przeczytaj [specyfikację](https://deepworkplan.com/spec), [odniesienie dodatku](https://deepworkplan.com/kit/ai-diff-reviewer) dla pełnej listy możliwości v3, [wydanie v5.5.3](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3) dla źródła albo [wydanie recenzenta v3.1.1](https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1) dla zmian nadrzędnych.

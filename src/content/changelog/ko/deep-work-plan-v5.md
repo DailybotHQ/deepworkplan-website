@@ -18,6 +18,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.0"
   - label: "스킬 릴리스 v5.5.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1"
+  - label: "스킬 릴리스 v5.5.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.2"
+  - label: "스킬 릴리스 v5.5.3"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3"
+  - label: "리뷰어 릴리스 v3.1.1"
+    url: "https://github.com/DailybotHQ/ai-diff-reviewer/ai-diff-reviewer/releases/tag/v3.1.1"
 ---
 
 오늘 Deep Work Plan v5를 릴리스합니다. 이것은 다시 쓰기가 아닙니다. 실제 플랜 108개에 대한 직접 감사를 포함해, 방법론의 약속과 에이전트의 실제 동작이 어디에서 어긋날 수 있는지를 격차 하나하나 드러낸 몇 달간의 실사용의 결과입니다. 이 릴리스의 정직한 요약은 이렇습니다. 이 방법론은 이미 이 모든 것을 약속해 왔습니다 — 이제는 이를 보장합니다. v5 이전에는 문서를 글자 그대로 따르는 에이전트조차 실제 실패 시나리오에 빠질 수 있었습니다. 그런 시나리오는 이러한 사용과 피드백을 통해 식별되어, 이제 하나씩 모두 닫혔고 실행 가능한 테스트로 고정되었습니다 — 더 많은 글로 덮어 가린 것이 아닙니다. 이번 주기에 스킬의 계약 스위트는 132개에서 258개 테스트로 성장했고, 아래의 모든 보장은 릴리스된 태그를 대상으로 실제로 검증되었습니다 — 깨끗한 저장소에 설치하고 고유한 흐름을 전부 통과시킨 뒤에야 이 항목을 작성했습니다.
@@ -58,3 +64,17 @@ v5 계열의 첫 포인트 릴리스는, 실제로는 한 번도 확인되지 �
 
 
 규범 텍스트는 [명세](https://deepworkplan.com/spec)를, 리뷰어가 지금 무엇을 하는지는 [애드온 레퍼런스](https://deepworkplan.com/kit/ai-diff-reviewer)를, 출처는 [v5.5.1 릴리스](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.1)를 보세요.
+
+## 업데이트 — 2026-09-25 · 스킬 v5.5.3 + 리뷰어 v3.1.1
+
+AI Diff Reviewer 애드온은 이제 2026-09-24에 출시된 리뷰어의 **v3** 라인(v3.0.0 → v3.1.1, 이동 핀 `@v3`)을 문서화하고 설치합니다. 스킬 `v5.5.2`는 애드온의 규범 문서, 온보딩 훅, 통합 템플릿을 v3 리뷰어가 실제로 하는 일에 맞춰 다시 썼고, `v5.5.3`이 CI 측을 출하했습니다. 태그 `v3.1.1`의 출시된 리뷰어에 대해 검증된 가장 중요한 변경 사항:
+
+**`critical`은 검증된 경우에만 게이트합니다.** v3부터 모델이 주장하는 각 크리티컬 발견 — 경고의 30 % 샘플 추가 — 은 별도의 모델 호출에 의한 두 번째 짧은 코드 기반 검사를 받습니다(검증된 발견당 ≈ 3 k 토큰, 10 초, $0.009). `critical`이 게시되는 — 그리고 Final Review를 차단하는 — 것은 그 검증기가 확인할 때만입니다. 반박된 주장은 주석 달린 경고로 계속 보이며 구조화된 출력에 나열되고, 인라인으로 게시되지 않습니다. 턴 한도(`incomplete`)나 벽시계(`timeout`)를 소진한 리뷰는 차단 엄격도에서 빨간색입니다. "발견 없음"은 이제 항상 리뷰어가 보았고 아무것도 찾지 못했다는 뜻입니다.
+
+**예산은 위험 등급을 따릅니다.** 리뷰 예산은 변경의 결정론적 위험 등급에서 도출됩니다 — `low`에서 `critical`까지 8/20/30/40 턴 — 그리고 코드를 전혀 변경하지 않는 푸시는 −93 % 비용으로 검증기 전용 라운드를 실행합니다. `budget-profile: fixed`는 전환 기간에 v3 이전 상수를 복원합니다. 증분 라운드는 입력 토큰을 62–76 % 절감합니다.
+
+**여섯 개의 하위 스킬, 그중 하나는 루프.** 라우터에 `address-review`(v3.1.1 신규)가 추가됩니다. 한 번의 호출로 브랜치의 열린 PR을 찾고, 리뷰가 현재 head를 커버하는지 확인하고, 발견 항목을 제시한 뒤 — 한 번의 "예"로 — 적용하고, 작은 Conventional Commits 배치로 커밋하고, 푸시하고, 저장소가 트리거하는 방식으로 리뷰어를 재무장합니다. `apply-review`는 읽기 전용으로 유지됩니다. 구조화된 출력(`review-output/3.0`)이 모든 자동화의 기계용 경로입니다. `@v2` 라인은 `release/v2`에서 6개월의 보안 및 카탈로그 유지보수와 함께 동결됩니다 — v3는 권장 사항이며 결코 강제 이전이 아닙니다.
+
+**리뷰어는 이제 자신의 home을 리뷰합니다.** 스킬 저장소와 이 웹사이트 모두 라벨 게이트식 CI 셀프 리뷰를 실행합니다 — `DailybotHQ/ai-diff-reviewer@v3`을 통한 단일 grok 레그, `ready` 라벨 적용당 한 번 트리거(재실행은 라벨을 뗐다 다시 부착), 제공자 시크릿이 없으면 정직하게 건너뜁니다. 이 웹사이트는 v3.1.1 리뷰어도 vendorize하여, 로컬 Final Review와 문서가 이제 동일한 계약을 가르칩니다.
+
+[명세](https://deepworkplan.com/spec), v3 전체 기능 목록은 [애드온 참조](https://deepworkplan.com/kit/ai-diff-reviewer), 소스는 [v5.5.3 릴리스](https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v5.5.3), 업스트림 변경 사항은 [리뷰어 v3.1.1 릴리스](https://github.com/DailybotHQ/ai-diff-reviewer/releases/tag/v3.1.1)를 읽어 주세요.
