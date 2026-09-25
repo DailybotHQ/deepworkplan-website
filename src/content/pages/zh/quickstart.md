@@ -172,11 +172,11 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 - **Design system** —— 可选的 `docs/DESIGN.md`，仅面向具备被检测到的界面表面的仓库
  （不会向纯库、无头服务或纯基础设施仓库提供）。三个配置档堆叠在一个文件中：visual-ui
  （检测到时受到强烈推荐；安装以明确接受为前提）、cli-output 与 conversational——后两者始终会被询问，绝不会被自动应用。
-- **AI Diff Reviewer** —— 必备的本地审查（并非可选项）：每份 Final Review 的安全审查环节都会在计划累计的变更集上运行 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**（skill + 必需的 `.review/extension.md`）。缺失的 skill 或扩展会成为一项被记录的 `local reviewer not installed` 发现——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；调用错误软失败；已完成通道中的 **经验证的 `critical` 发现**在修复或被明确接受之前仍会阻止完成。**Flow B**（带 `pr-review.yml` 的 CI 门控）作为一项明确的可选项提供，绝不未经请求安装。没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密。
+- **AI Diff Reviewer** —— 必备的本地审查（并非可选项）：每份 Final Review 的安全审查环节都会在计划累计的变更集上运行 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**（skill + 必需的 `.review/extension.md`）。缺失的 skill 或扩展会成为一项被记录的 `local reviewer not installed` 发现——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；调用错误软失败；已完成通道中的 **经验证的 `critical` 发现**在修复或被明确接受之前仍会阻止完成（v3，BC-07——未经验证的关键发现断言会以带注解的警告出现，而 `incomplete`/`timeout` 的审查不算干净的通过，BC-04）。**Flow B**（带 `pr-review.yml` 的 CI 门控）作为一项明确的可选项提供，绝不未经请求安装。没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密。
 
 ## 5. 演化套件（author 子技能）
 
-在接入完成后，使用 `author` 子技能来培育仓库自己的套件（v3，BC-07——未经验证的关键发现断言会以带注解的警告出现，而 `incomplete`/`timeout` 的审查不算干净的通过，BC-04）。轻量委派器 `/skill-create` 与
+在接入完成后，使用 `author` 子技能来培育仓库自己的套件。轻量委派器 `/skill-create` 与
 `/agent-create` 路由到它。为人们在会话中可重复运行的过程创建一个**技能**，为
 有独特模型档位与工具的反复出现的角色创建一个**代理**，并且只把**命令**作为轻量委派器来创建。让
 `.agents/docs/` 目录与磁盘上存在之物保持同步。
