@@ -345,7 +345,7 @@ docker compose -f docker/local/docker-compose.yaml build \
 |---------|--------|
 | SSH host port | `127.0.0.1:22022→22` (override `HERDR_SSH_HOST_PORT`; avoid 2222 on macOS) |
 | remoteUser | `node` |
-| Editor | `EDITOR=nvim` via Neovim tarball + [DailybotHQ/mu-vim](https://github.com/DailybotHQ/mu-vim) `@v0.7.0` |
+| Editor | `EDITOR=nvim` via Neovim tarball + [DailybotHQ/deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) `@v0.7.0` |
 | Peer includes | `~/.ssh_host/config.d/herdr-peers` (legacy `dailybot-peers` accepted) |
 | Workspace peers | derived `~/.ssh/config.d/herdr-workspace-peers` |
 | Catalog | optional mount `~/.local/state/herdr/client` → `~/.herdr_client_host` |

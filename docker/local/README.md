@@ -62,7 +62,7 @@ docker compose build \
 | CLI | Install method | Command | Default |
 |-----|----------------|---------|---------|
 | Herdr | Official [`curl` installer](https://herdr.dev/) | `herdr` | always |
-| mu-vim / nvim | Neovim tarball 0.12.5 + [DailybotHQ/mu-vim](https://github.com/DailybotHQ/mu-vim) `v0.7.0` | `nvim` | always |
+| mu-vim / nvim | Neovim tarball 0.12.5 + [DailybotHQ/deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) `v0.7.0` | `nvim` | always |
 | Claude Code | Official `curl` installer | `claude` / `claudex` | opt-in |
 | Codex | pnpm global | `codex` / `codexx` | opt-in |
 | Cursor agent | Official `curl` installer | `agent` / `cursorx` | opt-in |
