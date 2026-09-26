@@ -1,101 +1,105 @@
 FROM node:24.20.0-trixie-slim
 LABEL maintainer="developers@dailybot.com"
 
-# System packages (apt requires root)
+# Coding CLIs are opt-in. Only the exact string "true" installs. Flipping one
+# flag rebuilds that CLI layer, not this apt layer. herdr stays unconditional.
+ARG INSTALL_CLAUDE_CLI=false
+ARG INSTALL_CURSOR_CLI=false
+ARG INSTALL_CODEX_CLI=false
+ARG INSTALL_PI_CLI=false
+ARG INSTALL_OPENCODE_CLI=false
+ARG INSTALL_CLINE_CLI=false
+ARG INSTALL_GROK_CLI=false
+
+# One apt-get update layer: packages, sshd drop-in, lua/rg/fd links, clean.
+# Host keys are NOT generated here (private keys must not bake into layers).
+# Do not apt-install neovim — nvim is the 0.12.5 tarball under ~/.local.
+# lua5.4, ripgrep, fd-find are required by mu-vim's installer.
 RUN apt-get update -y && \
-    apt-get install -y less git curl gnupg ca-certificates openssh-client openssh-server sudo nano \
-    # pipx / python3 / python3-pip / python-is-python3: Dailybot CLI install path (PEP 668 enforced on trixie)
-    pipx python3 python3-pip python-is-python3 \
-    # Chromium for Lighthouse CI local audits
-    chromium && \
-    # Install GitHub CLI (binary is system-wide; per-user config lives in ~/.config/gh)
-    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && \
-    chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg && \
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
-    apt-get update && \
-    apt-get install -y gh && \
-    # --- Clean ---
-    apt-get clean -y && \
-    rm -rf /var/cache/apk/* && \
-    rm -rf /var/lib/apt/lists/* && \
-    # --- SSH server setup (for herdr --remote access) ---
-    mkdir -p /var/run/sshd && \
-    # Host keys are required; without them sshd accepts the TCP connect then closes it.
-    ssh-keygen -A && \
-    # Drop-in config for key auth (herdr --remote via host port 2222)
+    apt-get install --no-install-recommends -y \
+      less git curl gnupg ca-certificates openssh-client openssh-server \
+      sudo nano lua5.4 ripgrep fd-find \
+      pipx python3 python3-pip python-is-python3 python3-neovim luarocks \
+      chromium && \
+    mkdir -p /var/run/sshd /etc/ssh/sshd_config.d && \
+    rm -f /etc/ssh/ssh_host_* && \
     printf '%s\n' \
       'PasswordAuthentication no' \
       'PubkeyAuthentication yes' \
       'PermitRootLogin no' \
       'UsePAM yes' \
       'AllowTcpForwarding yes' \
-      'Subsystem sftp /usr/lib/openssh/sftp-server' \
-      > /etc/ssh/sshd_config.d/herdr.conf
+      'AllowStreamLocalForwarding yes' \
+      > /etc/ssh/sshd_config.d/herdr.conf && \
+    ln -sf "$(command -v fdfind)" /usr/local/bin/fd && \
+    ln -sf "$(command -v lua5.4)" /usr/local/bin/lua && \
+    apt-get clean -y && \
+    rm -rf /var/cache/apk/* && \
+    rm -rf /var/lib/apt/lists/*
 
-# Default terminal editor inside container (used by Git for merge/commit messages)
-ENV EDITOR=nano
-ENV VISUAL=nano
-ENV GIT_EDITOR=nano
+# GitHub CLI from the official release tarball (avoids a second apt update).
+ARG GH_VERSION=2.83.2
+RUN GH_ARCH="$(dpkg --print-architecture)" \
+    && curl -fsSL "https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_${GH_ARCH}.tar.gz" -o /tmp/gh.tar.gz \
+    && tar -xzf /tmp/gh.tar.gz -C /tmp \
+    && install -m 0755 "/tmp/gh_${GH_VERSION}_linux_${GH_ARCH}/bin/gh" /usr/local/bin/gh \
+    && rm -rf /tmp/gh.tar.gz "/tmp/gh_${GH_VERSION}_linux_${GH_ARCH}" \
+    && gh --version
+
+# mu-vim is the terminal editor. ~/.local/bin stays first on PATH for the nvim tarball.
+ENV EDITOR=nvim
+ENV VISUAL=nvim
+ENV GIT_EDITOR=nvim
 
 # Chromium path for Lighthouse CI (chrome-launcher)
 ENV CHROME_PATH=/usr/bin/chromium
 ENV CHROMIUM_FLAGS="--no-sandbox"
 
-# Add node user to sudoers (node user already exists in official node images with uid 1000)
+# Add node user to sudoers (node already exists in official node images, uid 1000)
 RUN echo 'node ALL=(root) NOPASSWD:ALL' > /etc/sudoers.d/node \
     && chmod 0440 /etc/sudoers.d/node
 
-# Enable corepack so pnpm is provisioned from the version pinned in
-# package.json's "packageManager" field. Avoid `npm install -g pnpm` —
-# it defeats the pin.
+# Enable corepack so pnpm is provisioned from package.json "packageManager".
 RUN corepack enable
 
-# pnpm global install location. pnpm writes binaries to ${PNPM_HOME}/bin,
-# so that subdirectory must be on PATH for `corepack pnpm add -g <pkg>` to succeed.
+# pnpm global install location. pnpm writes binaries to ${PNPM_HOME}/bin.
 ENV PNPM_HOME=/usr/local/share/pnpm
 RUN mkdir -p "${PNPM_HOME}/bin" \
     && chown -R node:node "${PNPM_HOME}"
 
-# Make node user's CLI install dirs available on PATH
-# (pnpm globals, Claude, Cursor agent, OpenCode official installer, Cline global install, Grok/xAI)
-ENV PATH=${PNPM_HOME}/bin:${PNPM_HOME}:/home/node/.local/bin:/home/node/.cursor/bin:/home/node/.opencode/bin:/home/node/.grok/bin:$PATH
-
-# Keep Cline's session/settings store on a persistent path inside the mounted ~/.cline volume.
+# Keep Cline's session/settings store on a persistent path inside ~/.cline.
 ENV CLINE_DATA_DIR=/home/node/.cline/data
 
-# Ensure the container's image-installed Node (/usr/local/bin) precedes any
-# IDE-bundled Node that gets prepended to PATH at shell startup — Cursor Server
-# (~/.cursor-server/bin/<commit>/node), VS Code Server, etc. Without this,
-# `node`/`npx`/`pnpm` in agent shells resolve to the IDE's bundled binary
-# (an older LTS) even though `FROM node:<X>-...` installs the right one.
-# Login shells source /etc/profile.d/*; this is the most universal anchor.
+# PATH: ~/.local/bin first (nvim tarball), then pnpm globals and optional CLIs.
+ENV PATH=/home/node/.local/bin:${PNPM_HOME}/bin:${PNPM_HOME}:/home/node/.cursor/bin:/home/node/.opencode/bin:/home/node/.grok/bin:$PATH
+
+# Container Node wins over IDE-bundled Node; ~/.local/bin stays first for nvim.
 RUN printf '%s\n' \
     '# Container-installed Node must win over IDE-bundled Node (Cursor Server, etc.).' \
-    '# This drop-in is idempotent and safe for any POSIX-ish shell.' \
+    '# ~/.local/bin stays first so the Neovim tarball wins over any apt nvim.' \
     'if [ -x /usr/local/bin/node ]; then' \
-    '  case "${PATH}" in' \
-    '    /usr/local/bin:*) : ;;  # already at the front' \
+    '  case ":${PATH}:" in' \
+    '    ":/usr/local/bin:"*) : ;;' \
     '    *) PATH="/usr/local/bin:${PATH}" ;;' \
     '  esac' \
-    '  export PATH' \
     'fi' \
+    'for d in "/usr/local/share/pnpm/bin" "$HOME/.local/share/pnpm/bin" "$HOME/.local/bin"; do' \
+    '  case ":${PATH}:" in' \
+    '    *":${d}:"*) ;;' \
+    '    *) [ -d "$d" ] && PATH="${d}:${PATH}" ;;' \
+    '  esac' \
+    'done' \
+    'export PATH' \
     > /etc/profile.d/00-container-node-first.sh \
     && chmod 0644 /etc/profile.d/00-container-node-first.sh
 
-# Redirect any `npm` invocation to pnpm — this repo uses pnpm exclusively,
-# so running npm would corrupt node_modules and pnpm-lock.yaml. Replace the
-# real npm symlink at /usr/local/bin/npm (always in PATH, regardless of how
-# the shell is launched — interactive, Remote SSH, exec, scripts).
+# Redirect npm → pnpm (this repo uses pnpm exclusively).
 RUN rm -f /usr/local/bin/npm && \
     printf '#!/bin/bash\necho "[npm→pnpm] Redirecting \"npm $*\" to pnpm (this repo uses pnpm)." >&2\nexec corepack pnpm "$@"\n' \
     > /usr/local/bin/npm \
     && chmod +x /usr/local/bin/npm
 
-# Source custom commands for every bash the node user can hit:
-# - Interactive terminals read ~/.bashrc
-# - Login shells (`dev.sh shell`, ssh) read Debian's ~/.profile (which sources
-#   ~/.bashrc) plus /etc/profile.d. Do NOT write ~/.bash_profile — that would
-#   shadow Debian's ~/.profile and drop ~/.local/bin, where claude lives.
+# Source custom commands for interactive and login bash.
 RUN usermod -s /bin/bash node && \
     echo 'source /app/docker/custom_commands.sh' >> /home/node/.bashrc && \
     printf '%s\n' \
@@ -107,101 +111,24 @@ RUN usermod -s /bin/bash node && \
     chmod 0644 /etc/profile.d/99-dwp-custom-commands.sh && \
     chown node:node /home/node/.bashrc
 
-# Pre-create persistent data dirs so the named volumes inherit node ownership on first mount
+# Pre-create persistent data dirs so named volumes inherit node ownership.
 RUN mkdir -p /home/node/.claude_data /home/node/.codex_data /home/node/.cursor_data /home/node/.gh_data \
-    /home/node/.dailybot_data /home/node/.chelper_data /home/node/.cline /home/node/.opencode_data /home/node/.pi_data /home/node/.herdr_data /home/node/.ssh \
+    /home/node/.dailybot_data /home/node/.chelper_data /home/node/.cline /home/node/.opencode_data \
+    /home/node/.pi_data /home/node/.herdr_data /home/node/.grok_data /home/node/.ssh \
     && chown -R node:node /home/node
 
-# Install AI CLIs and configure git as node user
+# Configure Git for node user (can be overridden by mounted .gitconfig).
 USER node
-
-# Install Claude Code CLI (native installer, npm method is deprecated).
-# Remove fresh install artifacts so the persistent volume isn't overwritten on rebuild.
-RUN curl -fsSL https://claude.ai/install.sh | bash \
-    && rm -rf /home/node/.claude /home/node/.claude.json
-
-# Install Cursor CLI (provides the 'agent' command in ~/.cursor/bin)
-RUN curl -fsSL https://cursor.com/install | bash
-
-# Install OpenCode CLI (official installer — https://opencode.ai/).
-# Binary lands in ~/.opencode/bin (on PATH). --no-modify-path: we own PATH via ENV
-# and .bashrc; do not let the installer append duplicate PATH exports.
-# Auth/config persists via the opencode_data volume (see entrypoint).
-RUN curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path \
-    && opencode --version
-
-# Install Codex, Cline, Pi, and Z.AI Coding Tool Helper globally via pnpm
-# (resolves under ${PNPM_HOME}). Pi needs --ignore-scripts per upstream docs.
-RUN corepack pnpm add -g @openai/codex cline @z_ai/coding-helper \
-	&& corepack pnpm add -g --ignore-scripts @earendil-works/pi-coding-agent \
-	&& pi --version
-
-# Dailybot CLI — official installer handles PEP 668 internally (uses pipx),
-# avoiding the click 8.x conflict with the system-provided python3-click.
-# Binary lands in ~/.local/bin (already on PATH); auth/config lives in
-# ~/.config/dailybot, persisted across rebuilds via the dailybot_data volume.
-RUN curl -fsSL https://cli.dailybot.com/install.sh | DAILYBOT_VERSION='>=3.7.3' bash
-
-# Herdr — terminal runtime for coding agents (https://herdr.dev/).
-# Binary lands in ~/.local/bin/herdr (already on PATH). Config/logs live in
-# ~/.config/herdr, persisted across rebuilds via the herdr_data volume.
-# Seed terminal.default_shell=/bin/bash so panes source ~/.bashrc
-# (custom_commands.sh). Without this, Herdr falls back to /bin/sh and
-# wrappers like claudex / pi-azure are "not found".
-RUN curl -fsSL https://herdr.dev/install.sh | sh \
-	&& herdr --version \
-	&& mkdir -p /home/node/.config/herdr \
-	&& printf '%s\n' \
-		'# Seeded by Dockerfile for DWP website container.' \
-		'# Ensures panes use bash so ~/.bashrc (custom_commands.sh) is sourced.' \
-		'# Docs: https://herdr.dev/docs/configuration/' \
-		'' \
-		'onboarding = false' \
-		'' \
-		'[terminal]' \
-		'default_shell = "/bin/bash"' \
-		'# Linux interactive non-login bash sources ~/.bashrc.' \
-		'shell_mode = "non_login"' \
-		'# New panes/tabs/workspaces land in the mounted repo root.' \
-		'new_cwd = "/app"' \
-		'' \
-		'[ui]' \
-		'# Capture mouse so sidebar workspace/tab clicks work in the terminal.' \
-		'mouse_capture = true' \
-		'' \
-		'[experimental]' \
-		'# Allow herdr --remote from a host herdr pane (SSH inherits HERDR_ENV=1).' \
-		'allow_nested = true' \
-		'' \
-		> /home/node/.config/herdr/config.toml
-
-# Configure Git for node user (can be overridden by mounted .gitconfig)
 RUN git config --global init.defaultBranch main \
     && git config --global pull.rebase false \
-    && git config --global safe.directory '*'
-
+    && git config --global safe.directory '*' \
+    && git config --global core.editor nvim
 USER root
 
-# Restore the tool directories that a LOGIN shell loses.
-#
-# Debian's /etc/profile overwrites PATH wholesale for non-root users
-# (PATH="/usr/local/bin:/usr/bin:/bin:..."), discarding the ENV PATH set above.
-# `docker exec` keeps that ENV and sees every CLI; a login shell — the editor
-# terminal, `dev.sh shell`, anything spawned as `bash -l` — silently loses
-# opencode, grok, and the pnpm globals (codex, cline, pi, chelper), while node
-# and claude keep working, which is what makes the breakage so confusing.
-#
-# profile.d is sourced AFTER that overwrite, so this repairs it. The tool dirs
-# are APPENDED, never prepended: 00-container-node-first.sh has already put
-# /usr/local/bin at the front so the image's own node wins over an IDE-bundled
-# one, and prepending here would undo exactly that.
-#
-# Deliberately a separate, later layer rather than an edit to the earlier
-# drop-in: touching that RUN would invalidate every layer after it.
+# Restore tool dirs that Debian /etc/profile drops from PATH on login shells.
+# Appended, never prepended: 00-container-node-first.sh keeps node/nvim order.
 RUN printf '%s\n' \
     '# Re-add the tool dirs that Debian'"'"'s /etc/profile drops from PATH.' \
-    'Appended, never prepended, so /usr/local/bin (set by' \
-    '00-container-node-first.sh) stays first.' \
     'export SHELL="${SHELL:-/bin/bash}"' \
     'export PNPM_HOME="${PNPM_HOME:-/usr/local/share/pnpm}"' \
     'for _d in /usr/local/share/pnpm/bin "$HOME/.local/bin" "$HOME/.cursor/bin" "$HOME/.opencode/bin" "$HOME/.grok/bin"; do' \
@@ -216,12 +143,120 @@ RUN printf '%s\n' \
     > /etc/profile.d/01-container-tool-paths.sh \
     && chmod 0644 /etc/profile.d/01-container-tool-paths.sh
 
-# Copy and setup entrypoint script
+# Each coding CLI is its own RUN and no-ops unless its flag is exactly true.
+# Redeclare ARG after USER; Docker drops build args at a user change.
+USER node
+ARG INSTALL_CLAUDE_CLI=false
+RUN if [ "$INSTALL_CLAUDE_CLI" = "true" ]; then \
+      curl -fsSL https://claude.ai/install.sh | bash \
+      && rm -rf /home/node/.claude /home/node/.claude.json; \
+    else echo "INSTALL_CLAUDE_CLI is not true; skipping claude"; fi
+USER root
+
+USER node
+ARG INSTALL_CURSOR_CLI=false
+RUN if [ "$INSTALL_CURSOR_CLI" = "true" ]; then \
+      curl -fsSL https://cursor.com/install | bash; \
+    else echo "INSTALL_CURSOR_CLI is not true; skipping cursor"; fi
+USER root
+ARG INSTALL_CURSOR_CLI=false
+RUN if [ "$INSTALL_CURSOR_CLI" = "true" ]; then \
+      ln -sf /home/node/.cursor/bin/agent /usr/local/bin/agent; \
+    else echo "INSTALL_CURSOR_CLI is not true; skipping agent symlink"; fi
+
+USER node
+ARG INSTALL_OPENCODE_CLI=false
+ARG INSTALL_CLINE_CLI=false
+ARG INSTALL_PI_CLI=false
+ARG INSTALL_CODEX_CLI=false
+ARG INSTALL_GROK_CLI=false
+RUN if [ "$INSTALL_OPENCODE_CLI" = "true" ]; then \
+      curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path; \
+    else echo "INSTALL_OPENCODE_CLI is not true; skipping opencode"; fi
+RUN if [ "$INSTALL_CLINE_CLI" = "true" ]; then \
+      corepack pnpm add -g cline; \
+    else echo "INSTALL_CLINE_CLI is not true; skipping cline"; fi
+RUN if [ "$INSTALL_CODEX_CLI" = "true" ]; then \
+      corepack pnpm add -g @openai/codex; \
+    else echo "INSTALL_CODEX_CLI is not true; skipping codex"; fi
+RUN if [ "$INSTALL_PI_CLI" = "true" ]; then \
+      corepack pnpm add -g --ignore-scripts @earendil-works/pi-coding-agent; \
+    else echo "INSTALL_PI_CLI is not true; skipping pi"; fi
+# Z.AI helper is small and used by optional GLM wrappers in custom_commands.sh.
+RUN corepack pnpm add -g @z_ai/coding-helper || true
+RUN if [ "$INSTALL_GROK_CLI" = "true" ]; then \
+      curl -fsSL https://x.ai/cli/install.sh | bash; \
+    else echo "INSTALL_GROK_CLI is not true; skipping grok"; fi
+
+# Dailybot CLI — official installer (pipx under the hood). Auth persists via volume.
+RUN curl -fsSL https://cli.dailybot.com/install.sh | DAILYBOT_VERSION='>=3.7.3' bash || \
+    echo "dailybot CLI install skipped or failed (non-fatal at build)"
+
+# Herdr — terminal runtime for coding agents (unconditional mesh runtime).
+RUN curl -fsSL https://herdr.dev/install.sh | sh \
+	&& herdr --version \
+	&& mkdir -p /home/node/.config/herdr \
+	&& printf '%s\n' \
+		'# Seeded by Dockerfile for DWP website container.' \
+		'onboarding = false' \
+		'' \
+		'[terminal]' \
+		'default_shell = "/bin/bash"' \
+		'shell_mode = "login"' \
+		'new_cwd = "/app"' \
+		'' \
+		'[ui]' \
+		'mouse_capture = true' \
+		'' \
+		'[experimental]' \
+		'allow_nested = true' \
+		'' \
+		> /home/node/.config/herdr/config.toml
+USER root
+# Non-login SSH only sees /usr/local/bin. node cannot write there.
+RUN ln -sfn /home/node/.local/bin/herdr /usr/local/bin/herdr
+
+# Neovim 0.12.5 tarball into ~/.local (wins over any apt nvim).
+USER node
+ARG NVIM_VERSION=0.12.5
+RUN set -eu; \
+    arch="$(dpkg --print-architecture)"; \
+    case "$arch" in \
+      amd64) nvim_arch=linux-x86_64 ;; \
+      arm64) nvim_arch=linux-arm64 ;; \
+      *) echo "unsupported arch for neovim tarball: $arch" >&2; exit 1 ;; \
+    esac; \
+    tmp="$(mktemp)"; \
+    curl -fsSL "https://github.com/neovim/neovim/releases/download/v${NVIM_VERSION}/nvim-${nvim_arch}.tar.gz" -o "$tmp"; \
+    mkdir -p /home/node/.local; \
+    tar -xzf "$tmp" -C /home/node/.local --strip-components=1; \
+    rm -f "$tmp"; \
+    test -x /home/node/.local/bin/nvim
+
+# Pin DailybotHQ/mu-vim release tag. install.lua answers: custom dir No, extras blank.
+ARG MU_VIM_REF=v0.7.0
+RUN GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
+    git clone https://github.com/DailybotHQ/mu-vim.git /home/node/.config/nvim \
+    && cd /home/node/.config/nvim \
+    && git checkout --detach "${MU_VIM_REF}" \
+    && test "$(git describe --tags --exact-match HEAD)" = "${MU_VIM_REF}" \
+    && printf 'n\n\n' | lua install.lua \
+    && test -f /home/node/.config/nvim/init.lua \
+    && test -f /home/node/.local/share/nvim/mu-vim-installed \
+    && test -d /home/node/.local/share/nvim/pckr/pckr.nvim \
+    && test -x /home/node/.local/bin/nvim \
+    && GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
+       /home/node/.local/bin/nvim --headless "+lua require('pckr.actions').sync()" "+sleep 120" "+qa!" \
+    && python3 -c 'import os,sys; pack=os.path.expanduser("~/.local/share/nvim/site/pack/pckr/opt"); required=("alpha-nvim","nvim-cmp","mason.nvim"); missing=[]; \
+assert os.path.isdir(pack), "pckr opt dir missing: "+pack; \
+[(missing.append(name) if not [e for e in os.listdir(os.path.join(pack,name)) if e!=".git"] else None) for name in sorted(os.listdir(pack)) if os.path.isdir(os.path.join(pack,name))]; \
+[missing.append(name+" (absent)") for name in required if not os.path.isdir(os.path.join(pack,name))]; \
+sys.exit("plugin sync left empty clones: "+", ".join(missing)) if missing else print("plugin sync complete")'
+USER root
+
+# Copy and setup entrypoint + host SSH mirror helper
 COPY dwpwebsite/entrypoint.sh /usr/local/bin/entrypoint.sh
-# Host SSH mirror (~/.ssh_host -> ~/.ssh). Run by the entrypoint on every start
-# and on demand by the `ssh-sync` shell command.
 COPY dwpwebsite/sync-host-ssh.sh /usr/local/bin/sync-host-ssh
 RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/sync-host-ssh
 
-# Set the entrypoint
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

@@ -347,8 +347,7 @@ setup_herdr_persistence_for_user "/home/node"
 chown -R node:node /home/node/.herdr_data /home/node/.config/herdr 2>/dev/null || true
 
 # Mirror the host's SSH keys/config into the container (host ~/.ssh is bind-mounted
-# read-only at ~/.ssh_host). Every start, unconditionally — see sync-host-ssh.sh
-# for why, and `ssh-sync` for the on-demand equivalent.
+# read-only at ~/.ssh_host). Every start, unconditionally — see sync-host-ssh.sh.
 if [ -x /usr/local/bin/sync-host-ssh ]; then
     /usr/local/bin/sync-host-ssh /home/node
 else
@@ -356,14 +355,6 @@ else
 fi
 
 # Publish the compose env_file to PAM so SSH logins (herdr --remote) see it.
-#
-# Compose injects docker/local/dwpwebsite/.env into PID 1, which `docker exec`
-# inherits — but sshd starts every session from a clean environment and
-# PermitUserEnvironment is off, so Herdr panes were missing every API key.
-# /etc/pam.d/sshd runs pam_env.so, which reads /etc/environment: mirror the
-# file there (KEY="value", root-only) on every start. The values come from the
-# file, not from $ENV, so a plain `dev.sh restart` picks up edits without a
-# recreate. custom_commands.sh re-reads the same file per shell for live edits.
 DWP_ENV_FILE="${DWP_ENV_FILE:-/app/docker/local/dwpwebsite/.env}"
 publish_env_file_to_pam() {
     local file="${DWP_ENV_FILE}" target=/etc/environment tmp line key value count=0
@@ -399,24 +390,7 @@ publish_env_file_to_pam() {
 }
 publish_env_file_to_pam
 
-# Start SSH server (runs as root, accepts connections for node user via key auth).
-# herdr --remote connects host:22022 → container:22 (see docker-compose.yaml).
-if [ -x /usr/sbin/sshd ]; then
-    # Rebuild host keys if the image layer missed them or /etc/ssh was wiped.
-    if ! ls /etc/ssh/ssh_host_*_key >/dev/null 2>&1; then
-        echo "  → Generating SSH host keys..."
-        ssh-keygen -A
-    fi
-    if /usr/sbin/sshd -t 2>/tmp/sshd-test.err; then
-        /usr/sbin/sshd
-        echo "  ✓ SSH server started on port 22 (herdr --remote ready)"
-    else
-        echo "  ✗ SSH server config invalid — herdr --remote will fail:"
-        cat /tmp/sshd-test.err >&2 || true
-    fi
-fi
-
-# Grok/xAI CLI: ~/.grok (binary + config) + ~/.local/bin/grok
+# Grok/xAI CLI persistence (opt-in install; volume may hold a prior binary)
 setup_grok_persistence_for_user() {
     USER_HOME="$1"
     GROK_DATA_DIR="${USER_HOME}/.grok_data"
@@ -425,7 +399,6 @@ setup_grok_persistence_for_user() {
 
     mkdir -p "${GROK_DATA_DIR}"
 
-    # Handle ~/.grok directory (contains downloads/ with binary + config)
     if [ ! -L "${GROK_DIR}" ]; then
         if [ -d "${GROK_DIR}" ]; then
             if [ ! -d "${GROK_DATA_DIR}/grok_dir" ] || [ -z "$(ls -A "${GROK_DATA_DIR}/grok_dir" 2>/dev/null)" ]; then
@@ -441,17 +414,11 @@ setup_grok_persistence_for_user() {
         ln -sf "${GROK_DATA_DIR}/grok_dir" "${GROK_DIR}"
     fi
 
-    # Handle ~/.local/bin/grok shim (NOT agent - agent belongs to Cursor)
     mkdir -p "${USER_HOME}/.local/bin"
-    # If agent points to grok binary, restore it to cursor-agent
     if [ -L "${USER_HOME}/.local/bin/agent" ]; then
         AGENT_TARGET="$(readlink ${USER_HOME}/.local/bin/agent 2>/dev/null || true)"
         if echo "$AGENT_TARGET" | grep -qE 'grok|grok_data'; then
             rm -f "${USER_HOME}/.local/bin/agent"
-            # Restore cursor-agent if cursor_data has it
-            if [ -f "${USER_HOME}/.cursor_data/cursor_dir/versions/2026.09.10-fd3934a/cursor-agent" ]; then
-                ln -sf "${USER_HOME}/.cursor_data/cursor_dir/versions/2026.09.10-fd3934a/cursor-agent" "${USER_HOME}/.local/bin/agent"
-            fi
         fi
     fi
     if [ ! -L "${GROK_BIN}" ]; then
@@ -470,57 +437,34 @@ setup_grok_persistence_for_user() {
 setup_grok_persistence_for_user "/home/node"
 chown -R node:node /home/node/.grok_data /home/node/.grok /home/node/.local/bin/grok 2>/dev/null || true
 
-# Ensure Grok CLI is installed (install on first run if missing)
-ensure_grok_installed() {
-    if [ ! -f "/home/node/.grok/downloads/grok-linux-aarch64" ] && [ ! -f "/home/node/.grok_data/grok_dir/downloads/grok-linux-aarch64" ]; then
-        echo "Grok CLI not found, installing..."
-        GROK_BIN_DIR="/home/node/.local/bin" GROK_CHANNEL=stable bash <(curl -fsSL https://x.ai/cli/install.sh) 2>&1 | tail -5 || true
-        # Move binary to persistent location if it landed elsewhere
-        if [ -f "/home/node/.grok/downloads/grok-linux-aarch64" ]; then
-            mkdir -p "/home/node/.grok_data/grok_dir/downloads"
-            cp "/home/node/.grok/downloads/grok-linux-aarch64" "/home/node/.grok_data/grok_dir/downloads/"
-            rm -rf "/home/node/.grok"
-            ln -sf "/home/node/.grok_data/grok_dir" "/home/node/.grok"
-        fi
-    fi
-}
-
-ensure_grok_installed
-
-# Ensure Herdr panes use bash (so ~/.bashrc → custom_commands.sh loads),
-# open in /app, and capture mouse for sidebar clicks. Existing herdr_data
-# volumes may predate these keys — seed a full file or patch missing keys.
+# Ensure Herdr panes use bash, open in /app, capture mouse, allow_nested.
+# Existing herdr_data volumes may predate these keys — seed or patch.
 ensure_herdr_bash_shell_config() {
     HERDR_CONFIG="${1}/.config/herdr/config.toml"
     mkdir -p "$(dirname "${HERDR_CONFIG}")"
     if [ ! -f "${HERDR_CONFIG}" ] || ! grep -q 'default_shell' "${HERDR_CONFIG}" 2>/dev/null; then
         cat > "${HERDR_CONFIG}" <<'EOF'
 # Seeded by entrypoint for DWP website container.
-# Ensures panes use bash so ~/.bashrc (custom_commands.sh) is sourced.
-# Docs: https://herdr.dev/docs/configuration/
-
 onboarding = false
 
 [terminal]
 default_shell = "/bin/bash"
-# Linux interactive non-login bash sources ~/.bashrc.
-shell_mode = "non_login"
-# New panes/tabs/workspaces land in the mounted repo root.
+shell_mode = "login"
 new_cwd = "/app"
 
 [ui]
-# Capture mouse so sidebar workspace/tab clicks work in the terminal.
 mouse_capture = true
 
 [experimental]
-# Allow herdr --remote from a host herdr pane (SSH inherits HERDR_ENV=1).
 allow_nested = true
 EOF
         return 0
     fi
 
+    # Prefer login shells so /etc/profile.d restores PATH for agent CLIs.
+    sed -i 's/^shell_mode = "non_login"$/shell_mode = "login"/' "${HERDR_CONFIG}" 2>/dev/null || true
+
     if ! grep -q 'new_cwd' "${HERDR_CONFIG}" 2>/dev/null; then
-        # Volume predates new_cwd — append under [terminal] without wiping user edits.
         if grep -q '^\[terminal\]' "${HERDR_CONFIG}" 2>/dev/null; then
             awk '
                 BEGIN { added = 0 }
@@ -560,8 +504,6 @@ EOF
         fi
     fi
 
-    # herdr --remote from a host herdr pane forwards HERDR_ENV=1; without this
-    # the remote client exits with "nested herdr is disabled by default".
     if ! grep -q 'allow_nested' "${HERDR_CONFIG}" 2>/dev/null; then
         if grep -q '^\[experimental\]' "${HERDR_CONFIG}" 2>/dev/null; then
             awk '
@@ -580,26 +522,216 @@ EOF
         else
             printf '\n[experimental]\nallow_nested = true\n' >> "${HERDR_CONFIG}"
         fi
+    elif grep -qE '^[[:space:]]*allow_nested[[:space:]]*=' "${HERDR_CONFIG}" 2>/dev/null; then
+        sed -i 's/^[[:space:]]*allow_nested[[:space:]]*=.*/allow_nested = true/' "${HERDR_CONFIG}" 2>/dev/null || true
     fi
 }
 ensure_herdr_bash_shell_config "/home/node"
+chown -R node:node /home/node/.herdr_data 2>/dev/null || true
 
-# NOTE: host SSH material is mirrored by /usr/local/bin/sync-host-ssh above,
-# which runs before sshd starts. There is deliberately no second, later copy:
-# the old setup_ssh_keys_for_user() duplicated that work and skipped it entirely
-# once any key existed, which is what let ~/.ssh drift away from the host.
+# ---------------------------------------------------------------------------
+# Herdr peer mesh (public names: herdr-peers / herdr-workspaces)
+# Host kits may still publish dailybot-peers; accept both.
+# ---------------------------------------------------------------------------
+install_herdr_peer_mesh() {
+  local home="$1"
+  local user="$2"
+  local ssh_config="${home}/.ssh/config"
+  local peers_public="${home}/.ssh_host/config.d/herdr-peers"
+  local peers_legacy="${home}/.ssh_host/config.d/dailybot-peers"
+  local peers_file=""
+  local include_line=""
+  local src="${home}/.herdr_client_host/endpoints.json"
+  local dest_dir="${home}/.local/state/herdr/client"
+  local dest="${dest_dir}/endpoints.json"
+
+  if [ -f "${peers_public}" ]; then
+    peers_file="${peers_public}"
+    include_line='Include ~/.ssh_host/config.d/herdr-peers'
+  elif [ -f "${peers_legacy}" ]; then
+    peers_file="${peers_legacy}"
+    include_line='Include ~/.ssh_host/config.d/dailybot-peers'
+  fi
+
+  if [ -z "${peers_file}" ]; then
+    echo "herdr peers: no herdr-peers/dailybot-peers under ~/.ssh_host/config.d; skip include"
+  elif [ -f "${ssh_config}" ]; then
+    if ! grep -qxF "${include_line}" "${ssh_config}"; then
+      local tmp
+      tmp="$(mktemp)"
+      printf '%s\n' "${include_line}" | cat - "${ssh_config}" > "${tmp}"
+      mv "${tmp}" "${ssh_config}"
+      chown "${user}:${user}" "${ssh_config}" 2>/dev/null || true
+      chmod 600 "${ssh_config}" 2>/dev/null || true
+    fi
+  else
+    mkdir -p "${home}/.ssh"
+    printf '%s\n' "${include_line}" > "${ssh_config}"
+    chown -R "${user}:${user}" "${home}/.ssh" 2>/dev/null || true
+    chmod 700 "${home}/.ssh" 2>/dev/null || true
+    chmod 600 "${ssh_config}" 2>/dev/null || true
+  fi
+
+  # Optional workspaces include (public name, then legacy).
+  local ws_public="${home}/.ssh_host/config.d/herdr-workspaces"
+  local ws_legacy="${home}/.ssh_host/config.d/dailybot-workspaces"
+  local ws_include=""
+  if [ -f "${ws_public}" ]; then
+    ws_include='Include ~/.ssh_host/config.d/herdr-workspaces'
+  elif [ -f "${ws_legacy}" ]; then
+    ws_include='Include ~/.ssh_host/config.d/dailybot-workspaces'
+  fi
+  if [ -n "${ws_include}" ]; then
+    touch "${ssh_config}"
+    if ! grep -qxF "${ws_include}" "${ssh_config}"; then
+      local tmp
+      tmp="$(mktemp)"
+      printf '%s\n' "${ws_include}" | cat - "${ssh_config}" > "${tmp}"
+      mv "${tmp}" "${ssh_config}"
+      chown "${user}:${user}" "${ssh_config}" 2>/dev/null || true
+      chmod 600 "${ssh_config}" 2>/dev/null || true
+    fi
+  fi
+
+  # Catalog refresh helper — Mac catalog is read-only; Herdr reads a local copy.
+  mkdir -p "${home}/.local/bin"
+  cat > "${home}/.local/bin/herdr-refresh-catalog" <<'EOF'
+#!/bin/sh
+src="${HOME}/.herdr_client_host/endpoints.json"
+dest="${HOME}/.local/state/herdr/client/endpoints.json"
+if [ ! -f "$src" ]; then
+  echo "herdr peers: catalog missing at $src" >&2
+  exit 1
+fi
+mkdir -p "$(dirname "$dest")"
+if [ -f "$dest" ] && cmp -s "$src" "$dest"; then
+  exit 0
+fi
+if [ -f "$dest" ]; then
+  cp -p "$dest" "${dest}.bak"
+fi
+cp -p "$src" "$dest"
+chmod 600 "$dest" 2>/dev/null || true
+EOF
+  chown "${user}:${user}" "${home}/.local/bin/herdr-refresh-catalog"
+  chmod 755 "${home}/.local/bin/herdr-refresh-catalog"
+
+  if [ ! -f "${src}" ]; then
+    echo "herdr peers: catalog missing at ${src}; skip copy"
+  else
+    mkdir -p "${dest_dir}"
+    if [ -f "${dest}" ]; then
+      cp -p "${dest}" "${dest}.bak"
+    fi
+    cp -p "${src}" "${dest}"
+    chown -R "${user}:${user}" "${dest_dir}" 2>/dev/null || true
+    chmod 600 "${dest}" 2>/dev/null || true
+  fi
+
+  # Trust ED25519 host keys for peer ports (Herdr requires ed25519).
+  local known="${home}/.ssh/known_hosts"
+  local sources=()
+  [ -n "${peers_file}" ] && [ -f "${peers_file}" ] && sources+=("${peers_file}")
+  [ -f "${home}/.ssh/config.d/herdr-workspace-peers" ] && sources+=("${home}/.ssh/config.d/herdr-workspace-peers")
+  if [ "${#sources[@]}" -gt 0 ]; then
+    touch "${known}"
+    chown "${user}:${user}" "${known}" 2>/dev/null || true
+    awk '
+      /^Host / { host=$2; port="" }
+      /^[[:space:]]*Port / && host != "" { port=$2 }
+      host != "" && port != "" {
+        printf "%s %s\n", host, port
+        host=""; port=""
+      }
+    ' "${sources[@]}" | while read -r peer_host peer_port; do
+      case "${peer_port}" in
+        ''|*[!0-9]*) continue ;;
+        2202[2-9]|2203[0-2]|22[4-9][0-9][0-9]) ;;
+        *) continue ;;
+      esac
+      if ssh-keygen -F "[host.docker.internal]:${peer_port}" -f "${known}" 2>/dev/null \
+        | grep -q 'ssh-ed25519'; then
+        continue
+      fi
+      if ! ssh-keyscan -T 4 -t ed25519 -p "${peer_port}" host.docker.internal 2>/dev/null \
+        | grep -v '^#' >>"${known}"; then
+        su -s /bin/bash "${user}" -c \
+          "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o HostKeyAlgorithms=ssh-ed25519 -o ConnectTimeout=4 -o PreferredAuthentications=publickey -p ${peer_port} host.docker.internal true" \
+          >/dev/null 2>&1 || true
+      fi
+    done
+    chmod 600 "${known}" 2>/dev/null || true
+    chown "${user}:${user}" "${known}" 2>/dev/null || true
+  fi
+}
+
+install_herdr_peer_mesh "/home/node" "node"
+
+# Authorize the host's public keys so the Mac can SSH in for Herdr --remote.
+setup_sshd_authorized_keys_for_user() {
+    USER_HOME="$1"
+    SSH_HOST_DIR="${USER_HOME}/.ssh_host"
+    SSH_DIR="${USER_HOME}/.ssh"
+
+    if [ ! -d "${SSH_HOST_DIR}" ]; then
+        echo "Host SSH directory not mounted; skipping sshd authorized_keys"
+        return
+    fi
+
+    mkdir -p "${SSH_DIR}"
+    chmod 700 "${SSH_DIR}"
+    : > "${SSH_DIR}/authorized_keys"
+    for pub in "${SSH_HOST_DIR}"/*.pub; do
+        if [ -f "${pub}" ]; then
+            cat "${pub}" >> "${SSH_DIR}/authorized_keys"
+        fi
+    done
+    chmod 600 "${SSH_DIR}/authorized_keys"
+    chown -R node:node "${SSH_DIR}"
+}
+
+# Host keys live on the herdr_data volume — never baked into the image.
+start_sshd() {
+    mkdir -p /var/run/sshd
+
+    if [ "$(id -u)" = "0" ]; then SSH_SUDO=""; else SSH_SUDO="sudo"; fi
+    HOST_KEY_DIR="/home/node/.herdr_data/ssh_host_keys"
+    ${SSH_SUDO} mkdir -p "${HOST_KEY_DIR}"
+    for key_type in rsa ecdsa ed25519; do
+        if ! ${SSH_SUDO} test -f "${HOST_KEY_DIR}/ssh_host_${key_type}_key"; then
+            echo "Generating a persistent SSH host key (${key_type})..."
+            ${SSH_SUDO} ssh-keygen -q -t "${key_type}" -N '' -f "${HOST_KEY_DIR}/ssh_host_${key_type}_key"
+        fi
+    done
+    ${SSH_SUDO} chown root:root "${HOST_KEY_DIR}" "${HOST_KEY_DIR}"/ssh_host_* 2>/dev/null || true
+    ${SSH_SUDO} chmod 700 "${HOST_KEY_DIR}"
+    ${SSH_SUDO} chmod 600 "${HOST_KEY_DIR}"/ssh_host_*_key
+    ${SSH_SUDO} chmod 644 "${HOST_KEY_DIR}"/ssh_host_*_key.pub
+    printf 'HostKey %s/ssh_host_rsa_key\nHostKey %s/ssh_host_ecdsa_key\nHostKey %s/ssh_host_ed25519_key\n' \
+        "${HOST_KEY_DIR}" "${HOST_KEY_DIR}" "${HOST_KEY_DIR}" \
+        | ${SSH_SUDO} tee /etc/ssh/sshd_config.d/00-persistent-host-keys.conf >/dev/null
+    # Drop Subsystem sftp if present in herdr.conf (Debian base already defines it).
+    if [ -f /etc/ssh/sshd_config.d/herdr.conf ]; then
+        sed -i '/^Subsystem[[:space:]]\+sftp/d' /etc/ssh/sshd_config.d/herdr.conf 2>/dev/null || true
+    fi
+    if /usr/sbin/sshd -t 2>/tmp/sshd-test.err; then
+        /usr/sbin/sshd
+        echo "  ✓ SSH server started on port 22 (herdr --remote ready; host publishes 22022)"
+    else
+        echo "  ✗ SSH server config invalid — herdr --remote will fail:"
+        cat /tmp/sshd-test.err >&2 || true
+    fi
+}
+
+setup_sshd_authorized_keys_for_user "/home/node"
 
 # Setup Node.js specific configurations
 setup_nodejs() {
-    # Ensure pnpm store and state directories exist with correct ownership.
-    # pnpm uses ~/.local/share/pnpm (store + global bin) — npm's ~/.npm is unused.
     mkdir -p /home/node/.local/share/pnpm
     chown -R node:node /home/node/.local/share/pnpm 2>/dev/null || true
 }
 
-# Setup Git configuration (simplified - main config is in Dockerfile)
 setup_git() {
-    # Check if git configuration is mounted from host
     if [ -f "/home/node/.gitconfig" ]; then
         echo "Git configuration found and mounted from host"
     else
@@ -607,30 +739,22 @@ setup_git() {
     fi
 }
 
-# Recreate overlay targets for bind-mounted cache dirs. /app/.astro and
-# /app/dist are symlinks to /tmp/ov/* so they stay off the virtiofs mount;
-# /tmp is empty on each boot, so mkdir the parents or `astro dev` fails with
-# ENOENT on mkdir('/app/.astro').
+# Recreate overlay targets for bind-mounted cache dirs.
 ensure_astro_overlay_dirs() {
     mkdir -p /tmp/ov/astro /tmp/ov/dist
     chown node:node /tmp/ov /tmp/ov/astro /tmp/ov/dist 2>/dev/null || true
 }
 
-# Main setup function
 main() {
     echo "Starting container setup..."
 
-    # Run all setup functions
     setup_nodejs
     setup_git
-    ensure_grok_installed
     ensure_astro_overlay_dirs
+    start_sshd
 
     echo "Container setup completed"
-
-    # Execute the main command
     exec "$@"
 }
 
-# Run main function with all arguments
 main "$@"
