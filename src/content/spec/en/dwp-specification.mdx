@@ -172,7 +172,7 @@ All DWP artifacts MUST live under a gitignored `.dwp/` directory at the reposito
 
 A plan MAY carry the machine-readable state layer — `manifest.json` (static identity) and `state.json` (live per-task state, validation-gate records, outcome records, checkpoint, blocked state). The markdown plan remains the source of truth; the JSON layer is a derived projection, regenerated at protocol points and reconciled on resume.
 
-The state layer is RECOMMENDED for new plans, REQUIRED for unattended execution, and REQUIRED for agent workspaces without git. See the full normative definition in [Plan state](/spec/plan-state).
+The state layer is RECOMMENDED for v5 plans, REQUIRED for unattended execution, and REQUIRED for agent workspaces without git. See the full normative definition in [Plan state](/spec/plan-state).
 
 ## Proportional rigor
 

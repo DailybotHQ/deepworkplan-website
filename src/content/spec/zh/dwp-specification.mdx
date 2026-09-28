@@ -42,7 +42,7 @@ DWP 是规范驱动的：计划即规范，代理 MUST 依据其明确的验收�
 - **Full。** 该目录 MUST 包含 `README.md`（计划概览、目标、任务表与状态）、每项任务一个、命名为 `<n>.task_<slug>.md` 的文件，以及 `PROGRESS.md`（一份持续的执行日志）。
 - **Lite。** 紧凑、完全可执行的任务记录以内联形式存在于 `README.md` 中，位于稳定的 `{#task-N}` 锚点之后，而非单独的任务文件——每条记录仍然携带目标、触及面、验收标准、验证与完成日志。`PROGRESS.md` 仍然 REQUIRED。一份 Lite 计划 MAY 在任意时刻被晋升为 Full。完整生命周期参见 [Lite 计划](/spec/lite-plans)，此处不再重复。
 
-计划 MAY 额外携带机器可读状态层：`manifest.json`（静态标识，在物化时写入一次）与 `state.json`（实时逐任务执行状态）。状态层对新计划 RECOMMENDED，对无人值守执行与无 git 的代理工作区 REQUIRED。参见 [Plan state](/spec/plan-state)。
+计划 MAY 额外携带机器可读状态层：`manifest.json`（静态标识，在物化时写入一次）与 `state.json`（实时逐任务执行状态）。状态层对 v5 计划 RECOMMENDED，对无人值守执行与无 git 的代理工作区 REQUIRED。参见 [Plan state](/spec/plan-state)。
 
 
 新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v6 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。
@@ -186,7 +186,7 @@ DWP 定义了五项操作：
 
 计划 MAY 携带机器可读状态层——`manifest.json`（静态标识）与 `state.json`（实时逐任务状态、验证关卡记录、outcome 记录、检查点、阻塞状态）。Markdown 计划仍是事实来源；JSON 层是一份派生投影，在协议节点处重新生成，并在续行时协调。
 
-状态层对新计划 RECOMMENDED，对无人值守执行 REQUIRED，对无 git 的代理工作区 REQUIRED。完整的规范性定义参见 [Plan state](/spec/plan-state)。
+状态层对 v5 计划 RECOMMENDED，对无人值守执行 REQUIRED，对无 git 的代理工作区 REQUIRED。完整的规范性定义参见 [Plan state](/spec/plan-state)。
 
 ## 比例严格度
 

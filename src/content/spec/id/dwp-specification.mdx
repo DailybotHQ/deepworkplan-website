@@ -42,7 +42,7 @@ Rencana baru MUST memakai direktori bernomor di bawah `.dwp/plans/`, seperti `PL
 - **Full.** Direktori itu MUST berisi `README.md` (ikhtisar rencana, tujuan, tabel tugas, dan status), satu berkas per tugas bernama `<n>.task_<slug>.md`, dan `PROGRESS.md` (log eksekusi yang berjalan).
 - **Lite.** Catatan tugas yang kompak dan sepenuhnya dapat dieksekusi hidup inline di `README.md` di balik jangkar `{#task-N}` yang stabil, alih-alih berkas tugas terpisah — setiap catatan tetap membawa sebuah tujuan, Touched Surface, acceptance criteria, validasi, dan log penyelesaian. `PROGRESS.md` tetap REQUIRED. Sebuah rencana Lite MAY dipromosikan menjadi Full kapan saja. Lihat [Rencana Lite](/spec/lite-plans) untuk siklus hidup lengkapnya alih-alih menduplikasinya di sini.
 
-Sebuah rencana MAY juga membawa lapisan status yang dapat dibaca mesin: `manifest.json` (identitas statis, ditulis sekali saat materialisasi) dan `state.json` (status eksekusi per-tugas yang berjalan). Lapisan status RECOMMENDED untuk rencana baru dan REQUIRED untuk eksekusi tanpa pengawasan dan untuk ruang kerja agent tanpa git. Lihat [Status rencana](/spec/plan-state).
+Sebuah rencana MAY juga membawa lapisan status yang dapat dibaca mesin: `manifest.json` (identitas statis, ditulis sekali saat materialisasi) dan `state.json` (status eksekusi per-tugas yang berjalan). Lapisan status RECOMMENDED untuk rencana v5 dan REQUIRED untuk eksekusi tanpa pengawasan dan untuk ruang kerja agent tanpa git. Lihat [Status rencana](/spec/plan-state).
 
 
 Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v6 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.
@@ -186,7 +186,7 @@ Semua artefak DWP MUST berada di bawah direktori `.dwp/` yang di-gitignore di ak
 
 Sebuah rencana MAY membawa lapisan status yang dapat dibaca mesin — `manifest.json` (identitas statis) dan `state.json` (status per-tugas berjalan, catatan validation gate, catatan outcome, checkpoint, status terblokir). Rencana markdown tetap menjadi sumber kebenaran; lapisan JSON adalah proyeksi turunan, diregenerasi pada titik protokol dan direkonsiliasi saat resume.
 
-Lapisan status RECOMMENDED untuk rencana baru, REQUIRED untuk eksekusi tanpa pengawasan, dan REQUIRED untuk ruang kerja agent tanpa git. Lihat definisi normatif lengkap di [Status rencana](/spec/plan-state).
+Lapisan status RECOMMENDED untuk rencana v5, REQUIRED untuk eksekusi tanpa pengawasan, dan REQUIRED untuk ruang kerja agent tanpa git. Lihat definisi normatif lengkap di [Status rencana](/spec/plan-state).
 
 ## Rigor proporsional
 

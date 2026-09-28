@@ -42,7 +42,7 @@ Um plano novo DEVE usar um diretório numerado em `.dwp/plans/`, como `PLAN_001_
 - **Full.** O diretório DEVE (MUST) conter `README.md` (visão geral do plano, objetivo, tabela de tarefas e status), um arquivo por tarefa chamado `<n>.task_<slug>.md`, e `PROGRESS.md` (um registro contínuo da execução).
 - **Lite.** Registros de tarefa compactos e totalmente executáveis vivem em linha em `README.md` atrás de âncoras estáveis `{#task-N}` em vez de arquivos de tarefa separados — cada registro ainda carrega um objetivo, uma Superfície tocada, critérios de aceitação, validação e um Completion & Log. `PROGRESS.md` continua OBRIGATÓRIO (REQUIRED). Um plano Lite PODE (MAY) ser promovido a Full a qualquer momento. Veja [Planos Lite](/spec/lite-plans) para o ciclo de vida completo, em vez de duplicá-lo aqui.
 
-Um plano PODE (MAY) adicionalmente carregar a camada de estado legível por máquina: `manifest.json` (identidade estática, escrito uma vez na materialização) e `state.json` (estado de execução ao vivo por tarefa). A camada de estado é RECOMENDADA (RECOMMENDED) para novos planos e OBRIGATÓRIA (REQUIRED) para execução não supervisionada e para espaços de trabalho de agentes sem git. Veja [Estado do plano](/spec/plan-state).
+Um plano PODE (MAY) adicionalmente carregar a camada de estado legível por máquina: `manifest.json` (identidade estática, escrito uma vez na materialização) e `state.json` (estado de execução ao vivo por tarefa). A camada de estado é RECOMENDADA (RECOMMENDED) para planos v5 e OBRIGATÓRIA (REQUIRED) para execução não supervisionada e para espaços de trabalho de agentes sem git. Veja [Estado do plano](/spec/plan-state).
 
 
 Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v6 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.
@@ -186,7 +186,7 @@ Todos os artefatos do DWP DEVEM (MUST) viver em um diretório `.dwp/` ignorado p
 
 Um plano PODE (MAY) carregar a camada de estado legível por máquina — `manifest.json` (identidade estática) e `state.json` (estado ao vivo por tarefa, registros de validation gate, registros de resultado, checkpoint, estado bloqueado). O plano markdown permanece a fonte de verdade; a camada JSON é uma projeção derivada, regenerada em pontos de protocolo e reconciliada na retomada.
 
-A camada de estado é RECOMENDADA (RECOMMENDED) para novos planos, OBRIGATÓRIA (REQUIRED) para execução não supervisionada e OBRIGATÓRIA (REQUIRED) para espaços de trabalho de agentes sem git. Veja a definição normativa completa em [Estado do plano](/spec/plan-state).
+A camada de estado é RECOMENDADA (RECOMMENDED) para planos v5, OBRIGATÓRIA (REQUIRED) para execução não supervisionada e OBRIGATÓRIA (REQUIRED) para espaços de trabalho de agentes sem git. Veja a definição normativa completa em [Estado do plano](/spec/plan-state).
 
 ## Rigor proporcional
 
