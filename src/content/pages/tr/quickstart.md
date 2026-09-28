@@ -122,7 +122,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 ### Güncel standart ve yürütme modeli
 
 Güncel depo odaklı standart, yukarıda kurulan Deep Work Plan skill sürümü tarafından
-uygulanan **DWP 5.0.0**'dır. Güncel skill paketi, yönlendirici ile dokuz alt skill'i
+uygulanan **DWP 6.0.0**'dır. Güncel skill paketi, yönlendirici ile dokuz alt skill'i
 içerir: `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`,
 `author` ve `upgrade`.
 
@@ -139,11 +139,17 @@ Lite plan `/dwp-refine promote` ile Full'a yükseltilir.
 Full bir plan için depo, kalıcı yürütme yüzeyidir. Plan; nelerin değiştiğini ve hangi
 tüketicilerin etkilendiğini açıklayan atomik görevler, bir **Dokunulan Yüzey**, kabul
 kriterleri ve deponun belgelenmiş test haritasından seçilen bir doğrulama kapısı
-içerir. Yeni bir plan önce kimlik manifestosunu yazar, analizini kaydeder, görev
-listesini oluşturur ve yalnızca en son canlı durumu etkinleştirir; böylece kesintiye
-uğrayan bir oluşturma tahmin edilmek yerine kurtarılabilir. Durum katmanı mevcut
-olduğunda, `manifest.json` planı tanımlar ve `state.json` kontrol noktalarını, görev
-durumunu, kapı sonuçlarını ve engelleri kaydeder.
+içerir. v6’da oluşturma önce kimlik manifestosunu, ardından sözleşmeyi ve onay olayını yazar. Yalnızca eklemeli günlük yürütmeyi kaydeder; `state.json` bu günlükten türetilen bir anlık görüntüdür. Her adım kesintiden sonra kurtarılabilir.
+
+Şema nesli her plana bağlı kalır. v5 planları `state.json` için
+https://deepworkplan.com/schema/plan-state/v5.json şemasını kullanmaya devam
+eder. Açıkça v6 ile oluşturulan planlarda `manifest.json` için
+https://deepworkplan.com/schema/plan-manifest/v6.json kullanılır; canlı
+görünüm https://deepworkplan.com/schema/plan-snapshot/v6.json adresindeki bir
+anlık görüntüdür. `plan-state/v6.json` yoktur: v6, yeniden adlandırılmış v5
+durum şeması yerine anlık görüntü kullanır. Mevcut planlar kayıtlı nesillerini
+korur ve asla yeniden yazılmaz. v6, v5 metodolojisini daha sıkı bir yapıyla
+sürdürür; ajan sonuçlarının aşağı kalmaması ölçülmemiştir.
 
 Her planın zorunlu bir kapanış görevi vardır: **Final Review**. Bu görev, gerekli
 yerel AI Diff Reviewer incelemesi dâhil olmak üzere birikmiş değişiklik kümesi
@@ -192,7 +198,9 @@ teyit edin.
    kitinin kopyala-yapıştırı değil.
 6. **`.dwp/` + `tmp/`.** `plans/` içeren gitignore’lanmış bir `.dwp/` ve bir `tmp/` karalama
    alanı iskeletleyin — ikisi de `.gitignore`’a tahrip edici olmadan eklenir (ekleyin, asla yeniden
-   yazmayın). İkisi birbirinin yerine geçmez: bir akışın **bir plan hakkında** ürettiği her şey — analiz, skills defteri, güvenlik incelemesi, kapı kayıtları, denetim raporları — o planın kendi `.dwp/plans/PLAN_{name}/analysis_results/` dizininde durmalıdır; deponun kökünde de `tmp/` içinde de değil. `tmp/`, hiçbir planın bir daha okumayacağı işler içindir.
+   yazmayın). İkisi birbirinin yerine geçmez: bir akışın **bir plan hakkında** ürettiği her şey — analiz, skills defteri, güvenlik incelemesi, kapı kayıtları, denetim raporları — o planın kendi `.dwp/plans/PLAN_001_<slug>/analysis_results/` dizininde durmalıdır; deponun kökünde de `tmp/` içinde de değil. `tmp/`, hiçbir planın bir daha okumayacağı işler içindir.
+
+Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (örneğin `PLAN_001_add_payment_webhooks/`). Dondurulmuş v5 şemaları sayısal kimliği bir sözcük saydığı için v5 slug’ları 2–4, v6 slug’ları 2–5 sözcük içerir. Mevcut numarasız `PLAN_<slug>/` klasörleri okunabilir kalır ve hiçbir zaman yeniden adlandırılmaz. Numaralı planlar varsa `latest`, sayısal kimliği en yüksek olan planı gösterir.
 
 ## 4. Gerekli yerel incelemeyi kurun, ardından tercihe dayalı eklentileri sunun
 

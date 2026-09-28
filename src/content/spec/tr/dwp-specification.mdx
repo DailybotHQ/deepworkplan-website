@@ -34,12 +34,16 @@ Her iki mod da planın biçimini (Lite veya Full) aynı gereksinim analizinin bi
 
 ## Plan yapısı
 
-Bir plan, `.dwp/plans/` altında `PLAN_<slug>/` olarak adlandırılmış bir dizin OLMALIDIR; iki temsilden biri biçiminde:
+Bir plan, `.dwp/plans/` altında `PLAN_001_<slug>/` olarak adlandırılmış bir dizin OLMALIDIR; iki temsilden biri biçiminde:
+
 
 - **Full.** Dizin, `README.md` (plan genel görünümü, hedef, görev tablosu ve durum), görev başına bir dosya (`<n>.task_<slug>.md` olarak adlandırılır) ve `PROGRESS.md` (yürütmenin çalışan bir günlüğü) İÇERMELİDİR.
 - **Lite.** Kompakt, tam olarak yürütülebilir görev kayıtları, ayrı görev dosyaları yerine, kararlı `{#task-N}` çapaları arkasında `README.md` içinde satır içi yaşar — her kayıt yine de bir hedef, bir Dokunulan Yüzey, kabul kriterleri, doğrulama ve tamamlanma günlüğü taşır. `PROGRESS.md` hâlâ ZORUNLUDUR. Bir Lite plan herhangi bir anda Full'a YÜKSELTİLEBİLİR. Tam yaşam döngüsü için burada yinelemek yerine bkz. [Lite planlar](/spec/lite-plans).
 
 Bir plan ek olarak makine tarafından okunabilir durum katmanını TASIYABİLİR: `manifest.json` (somutlaştırma sırasında bir kez yazılan statik kimlik) ve `state.json` (görev bazında canlı yürütme durumu). Durum katmanı yeni planlar için ÖNERİLİR ve gözetimsiz yürütme ile git içermeyen ajan çalışma alanları için ZORUNLUDUR. Bkz. [Plan durumu](/spec/plan-state).
+
+
+Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (örneğin `PLAN_001_add_payment_webhooks/`). Dondurulmuş v5 şemaları sayısal kimliği bir sözcük saydığı için v5 slug’ları 2–4, v6 slug’ları 2–5 sözcük içerir. Mevcut numarasız `PLAN_<slug>/` klasörleri okunabilir kalır ve hiçbir zaman yeniden adlandırılmaz. Numaralı planlar varsa `latest`, sayısal kimliği en yüksek olan planı gösterir.
 
 ## Görev anatomisi
 

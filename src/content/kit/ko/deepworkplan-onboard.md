@@ -34,3 +34,15 @@ usage: /deepworkplan-onboard
 ## 참고
 
 리포지토리는 선택적 애드온이 하나도 없어도 완전히 적합합니다; AI Diff Reviewer 로컬 리뷰는 표준 2.3.0부터 기준선의 일부입니다. 감지된 현실이 언제나 프리셋 가정보다 우선합니다.
+
+## v6 스키마 참조
+
+v6 계획의 기계 판독 가능 스키마 카탈로그는 다음의 고정 URL에 게시되어 있습니다. v6 라이브 프로젝션은 스냅샷이며 `plan-state/v6.json`은 없습니다. 기존 v5 계획은 계속 v5 상태 스키마를 사용하며, 이전 계획은 조용히 다시 작성되지 않습니다.
+
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
+- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
+- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+
+새 계획에는 최소 세 자리 숫자로 된 단조 증가 ID를 부여합니다(예: `PLAN_001_add_payment_webhooks/`). 고정된 v5 스키마는 숫자 ID를 한 단어로 세므로 v5 슬러그는 2~4단어이고 v6 슬러그는 2~5단어입니다. 기존의 번호 없는 `PLAN_<slug>/` 폴더는 계속 읽을 수 있으며 절대 이름을 바꾸지 않습니다. 번호가 있는 계획이 있으면 `latest`는 숫자 ID가 가장 큰 계획을 가리킵니다.

@@ -39,12 +39,13 @@ Hängen Sie **`trust`** (oder `auto`) als letztes Wort an, um diese Prüfung zu 
 Der Trust-Modus ist die Abkürzung für Power-User, sobald Sie dem Ablauf vertrauen; der geführte Modus hält standardmäßig einen Menschen in der Schleife.
 
 ## Verhalten
-
 1. Das Ziel und den Repository-Kontext analysieren.
 2. Bei Mehrdeutigkeit klärende Fragen stellen.
-3. Den Plan direkt unter `.dwp/plans/PLAN_<name>/` materialisieren — standardmäßig einen Lite-Plan, bei größeren Vorhaben einen Full-Plan (im geführten Modus prüfen und wählen: als Lite behalten, zu Full befördern, bearbeiten oder abbrechen).
+3. Den Plan direkt unter `.dwp/plans/PLAN_001_<slug>/` materialisieren — standardmäßig einen Lite-Plan, bei größeren Vorhaben einen Full-Plan (im geführten Modus prüfen und wählen: als Lite behalten, zu Full befördern, bearbeiten oder abbrechen).
 4. In aufeinanderfolgende Aufgaben zerlegen und die README, die Aufgabendateien und PROGRESS schreiben.
 5. Mit dem Final Review enden (Sicherheitstest, Validierung des Endzustands, Abgleich der Skills-Entscheidungen).
+
+Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v6-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
 
 ## Aliase
 

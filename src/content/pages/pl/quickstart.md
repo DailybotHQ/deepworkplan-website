@@ -113,7 +113,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Aktualny standard i model wykonania
 
-Aktualny standard zorientowany na repozytorium to **DWP 5.0.0**, wdrożony przez
+Aktualny standard zorientowany na repozytorium to **DWP 6.0.0**, wdrożony przez
 zainstalowaną powyżej wersję skilla Deep Work Plan. Aktualny pakiet skilla obejmuje
 router oraz dziewięć pod-skilli: `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author` i `upgrade`.
@@ -131,11 +131,18 @@ nieść wymaganie lub bramkę.
 Dla planu Full repozytorium jest trwałą powierzchnią wykonania. Plan zawiera atomowe
 zadania, **dotkniętą powierzchnię**, która wyjaśnia, co się zmieniło i którzy
 konsumenci są dotknięci, kryteria akceptacji oraz bramkę walidacyjną wybraną z
-udokumentowanej mapy testów repozytorium. Nowy plan najpierw zapisuje swój manifest
-tożsamości, rejestruje swoją analizę, tworzy listę zadań i dopiero na końcu włącza
-stan na żywo, dzięki czemu przerwane tworzenie można odzyskać, zamiast zgadywać. Gdy
-warstwa stanu jest obecna, `manifest.json` opisuje plan, a `state.json` rejestruje
-punkty kontrolne, status zadań, wyniki bramek i blokady.
+udokumentowanej mapy testów repozytorium. W v6 tworzenie zapisuje manifest tożsamości, następnie kontrakt i zdarzenie zatwierdzenia. Dziennik tylko do dopisywania rejestruje wykonanie; `state.json` jest migawką wyprowadzoną z dziennika. Każdy etap można wznowić po przerwaniu.
+
+Generacja schematu pozostaje przypisana do każdego planu. Plany v5 nadal
+używają `state.json` zgodnie ze schematem
+https://deepworkplan.com/schema/plan-state/v5.json. Plany jawnie tworzone w v6
+używają https://deepworkplan.com/schema/plan-manifest/v6.json dla
+`manifest.json`, a ich aktywną projekcją jest migawka ze schematu
+https://deepworkplan.com/schema/plan-snapshot/v6.json. `plan-state/v6.json`
+nie istnieje: v6 używa migawki, a nie przemianowanego schematu stanu v5.
+Istniejące plany zachowują zapisaną generację i nigdy nie są przepisywane. v6
+zachowuje metodykę v5 przy ściślejszej strukturze; nie mierzono niegorszości
+wyników agentów.
 
 Każdy plan ma jedno obowiązkowe zadanie zamykające: **Final Review**. Wykonuje ono
 przejście bezpieczeństwa nad całym zakumulowanym zestawem zmian, w tym wymaganą
@@ -182,7 +189,9 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
    (skille, agenci, komendy) musi być **przemyślany dla tego repozytorium** — nigdy nie skopiowany-wklejony z kitu innego
    repozytorium.
 6. **`.dwp/` + `tmp/`.** Utwórz szkielet `.dwp/` objętego gitignore z `plans/`, a także przestrzeń roboczą `tmp/`
-   — obie dodane do `.gitignore` w sposób nieniszczący (dopisz, nigdy nie przepisuj). Nie są wymienne: wszystko, co przepływ wytwarza **na temat planu** — analiza, rejestr skills, przegląd bezpieczeństwa, logi bramek, raporty audytu — musi znaleźć się w `.dwp/plans/PLAN_{name}/analysis_results/` tego właśnie planu, nigdy w katalogu głównym repozytorium ani w `tmp/`. `tmp/` jest dla pracy, której żaden plan już nie odczyta.
+   — obie dodane do `.gitignore` w sposób nieniszczący (dopisz, nigdy nie przepisuj). Nie są wymienne: wszystko, co przepływ wytwarza **na temat planu** — analiza, rejestr skills, przegląd bezpieczeństwa, logi bramek, raporty audytu — musi znaleźć się w `.dwp/plans/PLAN_001_<slug>/analysis_results/` tego właśnie planu, nigdy w katalogu głównym repozytorium ani w `tmp/`. `tmp/` jest dla pracy, której żaden plan już nie odczyta.
+
+Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slug v6 ma 2–5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.
 
 ## 4. Zainstaluj wymagany przegląd lokalny, potem zaproponuj opcjonalne dodatki
 

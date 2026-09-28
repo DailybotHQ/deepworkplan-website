@@ -39,12 +39,13 @@ Aggiunga **`trust`** (o `auto`) come ultima parola per saltare questa revisione 
 La modalità trust è la scorciatoia per utenti esperti, una volta che si fida del flusso; la modalità guidata mantiene per impostazione predefinita una persona nel ciclo.
 
 ## Comportamento
-
 1. Analizza l’obiettivo e il contesto del repository.
 2. Pone domande di chiarimento se ambiguo.
-3. Materializza il piano direttamente sotto `.dwp/plans/PLAN_<name>/` — un piano Lite per impostazione predefinita, o Full per lavori più grandi (in modalità guidata, lo revisiona e sceglie se mantenerlo come Lite, promuoverlo a Full, modificarlo o fermarsi).
+3. Materializza il piano direttamente sotto `.dwp/plans/PLAN_001_<slug>/` — un piano Lite per impostazione predefinita, o Full per lavori più grandi (in modalità guidata, lo revisiona e sceglie se mantenerlo come Lite, promuoverlo a Full, modificarlo o fermarsi).
 4. Scompone in attività sequenziali e scrive il README, i file delle attività e PROGRESS.
 5. Conclude con il Final Review (passaggio di sicurezza, validazione dello stato finale, riconciliazione delle skill).
+
+I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v6 ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.
 
 ## Alias
 

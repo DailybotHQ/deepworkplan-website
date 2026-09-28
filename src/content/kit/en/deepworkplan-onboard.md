@@ -34,3 +34,15 @@ Turn a repository into an AI-first, spec-driven codebase. This is the onboard su
 ## Notes
 
 A repository is fully conformant with zero optional addons; the AI Diff Reviewer local review is part of the baseline since standard 2.3.0. Detected reality always wins over preset assumptions.
+
+## v6 schema references
+
+For v6 plans, the machine-readable schema catalog is published at these stable URLs. The v6 live projection is a snapshot; there is no `plan-state/v6.json`. Existing v5 plans continue to use the v5 state schema, and old plans are never silently rewritten.
+
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
+- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
+- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+
+New plans receive monotonically increasing numeric IDs with at least three digits (for example, `PLAN_001_add_payment_webhooks/`). Because the frozen v5 schemas count the numeric ID as a word, v5 slugs contain 2–4 words; v6 slugs contain 2–5 words. Existing unnumbered `PLAN_<slug>/` folders remain readable and are never renamed. When numbered plans exist, `latest` resolves to the plan with the highest numeric ID.

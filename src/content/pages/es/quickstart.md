@@ -119,7 +119,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Estándar actual y modelo de ejecución
 
-El estándar actual orientado al repositorio es **DWP 5.0.0**, implementado por
+El estándar actual orientado al repositorio es **DWP 6.0.0**, implementado por
 la versión del skill de Deep Work Plan instalada arriba. El paquete actual del
 skill incluye el enrutador y nueve sub-skills: `create`, `execute`, `refine`,
 `resume`, `status`, `verify`, `onboard`, `author` y `upgrade`.
@@ -139,12 +139,18 @@ Para un plan Full, el repositorio es la superficie de ejecución duradera. El
 plan contiene tareas atómicas, una **Superficie tocada** que explica qué
 cambió y qué consumidores se ven afectados, criterios de aceptación y una
 puerta de validación seleccionada del mapa de pruebas documentado del
-repositorio. Un plan nuevo escribe primero su manifiesto de identidad,
-registra su análisis, crea la lista de tareas y solo al final activa el
-estado en vivo, de modo que una creación interrumpida pueda recuperarse en
-lugar de adivinarse. Cuando la capa de estado está presente, `manifest.json`
-describe el plan y `state.json` registra puntos de control, estado de las
-tareas, resultados de las puertas y bloqueos.
+repositorio. En v6, la creación escribe el manifiesto de identidad, luego el contrato y después el evento de aprobación. El diario de solo anexado registra la ejecución; `state.json` es una instantánea derivada de ese diario. Una interrupción puede recuperarse en cada paso.
+
+La generación del esquema queda asociada a cada plan. Los planes v5 conservan
+`state.json` bajo https://deepworkplan.com/schema/plan-state/v5.json. Los
+planes creados explícitamente con v6 usan
+https://deepworkplan.com/schema/plan-manifest/v6.json para `manifest.json`; su
+proyección activa es un snapshot en
+https://deepworkplan.com/schema/plan-snapshot/v6.json. No existe
+`plan-state/v6.json`: v6 usa un snapshot, no un esquema de estado v5
+renombrado. Los planes existentes conservan la generación registrada y nunca
+se reescriben. v6 conserva la metodología de v5 con una estructura más
+estricta; no se ha medido la no inferioridad de los resultados de agentes.
 
 Todo plan tiene una tarea final obligatoria: el **Final Review**. Ejecuta el
 pase de seguridad sobre el conjunto de cambios acumulado, incluida la
@@ -193,7 +199,9 @@ metodología) en vez de sobrescribir — y confirma con el usuario antes de reem
  (skills, agentes, comandos) debe estar **razonado para este repo** — nunca un copia y pega del kit
  de otro repositorio.
 6. **`.dwp/` + `tmp/`.** Crea un `.dwp/` ignorado por git con `plans/`, más un espacio de
- trabajo `tmp/` — ambos añadidos a `.gitignore` de forma no destructiva (añadir, nunca reescribir). No son intercambiables: todo lo que un flujo produce **sobre un plan** —el análisis, el registro de skills, la revisión de seguridad, los logs de las compuertas, los informes de auditoría— debe vivir en el `.dwp/plans/PLAN_{name}/analysis_results/` de ese plan, nunca en la raíz del repositorio ni en `tmp/`. `tmp/` es para trabajo que ningún plan volverá a leer.
+ trabajo `tmp/` — ambos añadidos a `.gitignore` de forma no destructiva (añadir, nunca reescribir). No son intercambiables: todo lo que un flujo produce **sobre un plan** —el análisis, el registro de skills, la revisión de seguridad, los logs de las compuertas, los informes de auditoría— debe vivir en el `.dwp/plans/PLAN_001_<slug>/analysis_results/` de ese plan, nunca en la raíz del repositorio ni en `tmp/`. `tmp/` es para trabajo que ningún plan volverá a leer.
+
+Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v6 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
 
 ## 4. Instala la revisión local requerida y luego ofrece los addons opcionales
 

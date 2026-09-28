@@ -33,7 +33,7 @@ Tous les artefacts DWP résident sous un répertoire `.dwp/` ignoré par git, à
 ```
 .dwp/
 ├── plans/
-│   └── PLAN_<slug>/
+│   └── PLAN_001_<slug>/
 │       ├── README.md
 │       ├── PROGRESS.md
 │       └── <n>.task_<slug>.md
@@ -60,3 +60,7 @@ Chaque fichier de tâche contient ces dix sections, dans l’ordre. La structure
 ## Validation, achèvement et reprise
 
 La validation fait partie de la tâche, ce n’est pas un ajout après coup : chaque tâche nomme les commandes ou tests qui prouvent qu’elle est faite, et l’agent les exécute avant de marquer l’achèvement. Les tests sont ici de premier ordre — une tâche qui ajoute une nouvelle fonctionnalité ou modifie un comportement doit ajouter ou mettre à jour des tests automatisés pour ce comportement et exécuter la vérification complète de qualité de code du dépôt (les tests plus le lint et le typage), et non simplement confirmer que le build réussit ; les tests existants doivent rester au vert, mis à jour vers le comportement voulu plutôt qu’ignorés. La sécurité est de premier ordre de la même manière — toute tâche qui touche à l’authentification, au traitement des entrées, aux secrets, à la surface réseau ou aux dépendances porte les attentes de sécurité de ce changement dans ses critères d’acceptation et maintient chaque commit exempt de secrets, et chaque plan se clôt par le Final Review — la passe de sécurité sur l’ensemble des changements, la validation complète sur l’état final et la réconciliation des décisions de skills. L’achèvement est consigné avec un marqueur de statut explicite (`[ ]` non commencé, `[~]` en cours, `[x]` fait, `[!]` bloqué) dans la section Completion & Log. La reprise s’appuie sur ces marqueurs et sur le journal de progression — un agent peut reconstruire exactement où le plan s’est arrêté et poursuivre à partir de la première tâche inachevée sans refaire le travail terminé.
+
+## v6 : la même méthodologie, une structure plus stricte
+
+v6 conserve la même méthodologie plan → tâches → barrières de validation → achèvement, les mêmes commandes slash et l’emplacement `.dwp/plans/`. La structure d’ingénierie devient plus stricte avec un contrat, un journal, des manifestes de contexte par tâche, un ordonnanceur et le refus d’une liste d’autorisations vide. La décision d’architecture est GO ; la non-infériorité empirique des résultats des agents n’a pas été mesurée.

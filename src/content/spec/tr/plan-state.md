@@ -222,3 +222,19 @@ Uygulama, kayıtların izin verdiği her yerde mekaniktir. "invalidated by refin
 ## Şema sürümleme
 
 Her iki şema da URL ile sürümlüdür. Bir sürüm içinde ekleyici alanlara izin verilir; bir alanı yeniden adlandırmak veya yeniden yazmak, yeni bir şema sürümü ve spec değişiklik günlüğünde bir geçiş notu gerektirir. Bu revizyon her iki şema için de `/v2.json`'u tanıtır: görev girdisinin `file` alanı tipli bir `locator`'a dönüşür (`{"kind": "file" | "inline", "value": ...}`), manifesto `plan_format` kazanır ve durum dosyası `format`, `materialization`, `approval` ve `promotion` kazanır — birlikte Lite planların ihtiyaç duyduğu alanlar (bkz. [Lite planlar](/spec/lite-plans)). `/v1.json` manifestoları ve durum dosyaları geçerli kalır ve asla sessizce v2'ye yeniden yazılmaz; bir `refine` oturumu birini kasıtlı olarak göç ETTİREBİLİR. Manifestodaki `spec_version` alanı, planın altında oluşturulduğu DWP spec sürümünü sabitler; kurulu spec'inden daha yeni bir planla karşılaşan bir ajan, tahmin etmek yerine bunu belirtMELİDİR.
+
+## v6 şemaları ve uyumluluk
+
+v6, v5 metodolojisini korur ve yeni planlara daha sıkı bir mühendislik yapısı ekler. Kimlik bildirimi sürümlü sözleşmeye işaret eder; yalnızca ekleme yapılan günlük yetkiyi ve olayları kaydeder; görev bağlamı bildirimleri bağlam seçimini açık hale getirir; zamanlayıcı yalnızca uygun işleri dağıtır; canlı `state.json` görünümü günlükten üretilen bir anlık görüntüdür. Boş izin listesi reddedilir. Bunlar mimari kararlardır, daha iyi ajan sonuçlarının kanıtı değildir: sonuçların aşağı kalmama durumu ölçülmemiştir.
+
+v6 bildirim ve canlı anlık görüntü şemaları:
+
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
+
+v6 canlı görünümü, yeniden adlandırılmış bir v5 durum dosyası değil, anlık görüntüdür. `plan-state/v5.json` v5 planları için yayımlanmaya devam eder; `plan-state/v6.json` yoktur. Mevcut v1, v2 ve v5 planları kayıtlı şema nesillerini korur ve sessizce yeniden yazılmaz.
+
+Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (örneğin `PLAN_001_add_payment_webhooks/`). Dondurulmuş v5 şemaları sayısal kimliği bir sözcük saydığı için v5 slug’ları 2–4, v6 slug’ları 2–5 sözcük içerir. Mevcut numarasız `PLAN_<slug>/` klasörleri okunabilir kalır ve hiçbir zaman yeniden adlandırılmaz. Numaralı planlar varsa `latest`, sayısal kimliği en yüksek olan planı gösterir.

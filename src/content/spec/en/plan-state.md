@@ -222,3 +222,19 @@ Enforcement is mechanical wherever the records allow it. Gate evidence marked "i
 ## Schema versioning
 
 Both schemas are versioned by URL. Additive fields are allowed within a version; renaming or re-typing a field requires a new schema version and a migration note in the spec changelog. This revision introduces `/v2.json` for both schemas: the task entry's `file` field becomes a typed `locator` (`{"kind": "file" | "inline", "value": ...}`), the manifest gains `plan_format`, and the state file gains `format`, `materialization`, `approval`, and `promotion` — together the fields Lite plans need (see [Lite plans](/spec/lite-plans)). `/v1.json` manifests and state files remain valid and are never silently rewritten to v2; a `refine` session MAY migrate one deliberately. The `spec_version` field in the manifest pins the DWP spec version the plan was created under; an agent encountering a newer plan than its installed spec SHOULD say so rather than guess.
+
+## v6 schemas and compatibility
+
+v6 keeps the v5 methodology and adds stricter engineering structure for new plans. Its identity manifest points to a versioned contract; an append-only journal records authority and events; task context manifests make context selection explicit; the scheduler dispatches only eligible work; and the live projection is `state.json` generated from the journal as a snapshot. An empty capability allowlist is refused. These additions are an architecture decision, not evidence of better agent outcomes: outcome non-inferiority has not been measured.
+
+The v6 manifest and live snapshot schemas are:
+
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
+
+The v6 live projection is a snapshot, not a renamed v5 state file. `plan-state/v5.json` remains published for v5 plans; there is no `plan-state/v6.json`. Existing v1, v2, and v5 plans retain their recorded schema generation and are never silently rewritten.
+
+New plans receive monotonically increasing numeric IDs with at least three digits (for example, `PLAN_001_add_payment_webhooks/`). Because the frozen v5 schemas count the numeric ID as a word, v5 slugs contain 2–4 words; v6 slugs contain 2–5 words. Existing unnumbered `PLAN_<slug>/` folders remain readable and are never renamed. When numbered plans exist, `latest` resolves to the plan with the highest numeric ID.

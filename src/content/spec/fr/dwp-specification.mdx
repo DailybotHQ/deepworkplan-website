@@ -34,12 +34,16 @@ Les deux modes décident du format du plan (Lite ou Full) dans le cadre de la m�
 
 ## Structure du plan
 
-Un plan MUST être un répertoire sous `.dwp/plans/` nommé `PLAN_<slug>/`, selon l'une de deux représentations :
+Un plan MUST être un répertoire sous `.dwp/plans/` nommé `PLAN_001_<slug>/`, selon l'une de deux représentations :
+
 
 - **Full.** Le répertoire MUST contenir `README.md` (vue d'ensemble du plan, objectif, tableau des tâches et statut), un fichier par tâche nommé `<n>.task_<slug>.md`, et `PROGRESS.md` (un journal d'exécution continu).
 - **Lite.** Des enregistrements de tâche compacts et totalement exécutables vivent en ligne dans `README.md` derrière des ancres stables `{#task-N}` au lieu de fichiers de tâche séparés — chaque enregistrement porte toujours un objectif, une Surface touchée, des critères d'acceptation, une validation et un Completion & Log. `PROGRESS.md` reste REQUIRED. Un plan Lite MAY être promu en Full à tout moment. Voir [Plans Lite](/spec/lite-plans) pour le cycle de vie complet plutôt que de le dupliquer ici.
 
 Un plan MAY également porter la couche d'état lisible par machine : `manifest.json` (identité statique, écrit une fois à la matérialisation) et `state.json` (état d'exécution en direct par tâche). La couche d'état est RECOMMENDED pour les nouveaux plans et REQUIRED pour l'exécution sans surveillance et pour les espaces de travail d'agents sans git. Voir [État du plan](/spec/plan-state).
+
+
+Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
 
 ## Anatomie d'une tâche
 

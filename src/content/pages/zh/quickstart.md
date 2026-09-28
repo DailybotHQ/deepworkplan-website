@@ -99,7 +99,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### 当前标准与执行模型
 
-当前面向仓库的标准是 **DWP 5.0.0**，由上面安装的 Deep Work Plan 技能版本实现。
+当前面向仓库的标准是 **DWP 6.0.0**，由上面安装的 Deep Work Plan 技能版本实现。
 当前技能包包含路由器和九个子技能：`create`、`execute`、`refine`、`resume`、
 `status`、`verify`、`onboard`、`author` 和 `upgrade`。
 
@@ -113,9 +113,14 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 对于 Full 计划，仓库就是持久的执行面。计划包含原子任务、说明发生了什么变化
 以及哪些消费者受到影响的**触及面**、验收标准，以及从仓库文档化的测试映射中
-选出的验证关卡。新计划首先写入其身份清单，记录其分析，创建任务列表，最后
-才激活实时状态，这样被中断的创建可以被恢复，而不是被猜测。当状态层存在时，
-`manifest.json` 描述计划，`state.json` 记录检查点、任务状态、关卡结果和阻塞。
+选出的验证关卡。在 v6 中，创建流程依次写入身份清单、契约和批准事件。仅追加的日志记录执行过程；`state.json` 是从日志生成的快照。每个步骤在中断后都可以恢复。
+
+架构代际与每个计划绑定。v5 计划继续使用 https://deepworkplan.com/schema/plan-state/v5.json 作为
+`state.json` 的架构。明确以 v6 创建的计划使用
+https://deepworkplan.com/schema/plan-manifest/v6.json 作为 `manifest.json`
+架构；其实时投影是 https://deepworkplan.com/schema/plan-snapshot/v6.json 中定义的快照。不存在
+`plan-state/v6.json`：v6 使用快照，而不是改名后的 v5 状态架构。现有计划保留记录的代际，绝不会被重写。v6 保留 v5
+方法论并采用更严格的结构；尚未测量代理结果的非劣效性。
 
 每份计划都有一项强制性的收尾任务：**Final Review**。它对累积的整个变更集
 运行安全检查（包括必需的本地 AI Diff Reviewer 审查），验证仓库的最终状态，
@@ -158,7 +163,9 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
  （技能、代理、命令）必须**为这个仓库经过推理**——绝非对另一个
  仓库套件的复制粘贴。
 6. **`.dwp/` + `tmp/`。** 搭建一个含 `plans/` 的、被 gitignore 的 `.dwp/`，外加一个 `tmp/`
- 草稿空间——两者都以非破坏性方式（追加，而非重写）加入 `.gitignore`。它们并不可以互换：一个流程**围绕某个计划**产出的一切——分析记录、skills 台账、安全审查、门控日志、审计报告——都必须存放在该计划自己的 `.dwp/plans/PLAN_{name}/analysis_results/` 中，绝不放在仓库根目录，也绝不放在 `tmp/`。`tmp/` 留给任何计划都不会再回头读取的工作。
+ 草稿空间——两者都以非破坏性方式（追加，而非重写）加入 `.gitignore`。它们并不可以互换：一个流程**围绕某个计划**产出的一切——分析记录、skills 台账、安全审查、门控日志、审计报告——都必须存放在该计划自己的 `.dwp/plans/PLAN_001_<slug>/analysis_results/` 中，绝不放在仓库根目录，也绝不放在 `tmp/`。`tmp/` 留给任何计划都不会再回头读取的工作。
+
+新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v6 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。
 
 ## 4. 安装必备的本地审查，然后提供可选的附加组件
 

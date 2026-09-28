@@ -92,29 +92,29 @@
 
 ### ME-04 — Plan directory tree
 
-- **Target surface:** `src/content/methodology/en/03-templates.md` → "Plan structure" section and the code block showing `.dwp/plans/PLAN_<slug>/` layout, rendered in the Methodology reader at `/methodology/plan-and-task-templates`
+- **Target surface:** `src/content/methodology/en/03-templates.md` → "Plan structure" section and the code block showing `.dwp/plans/PLAN_001_<slug>/` layout, rendered in the Methodology reader at `/methodology/plan-and-task-templates`
 - **Type:** diagram
 - **Priority:** medium
-- **Purpose / trust rationale:** Shows the concrete on-disk shape of a DWP plan — the `.dwp/` parent, the `PLAN_<slug>/` directory, and its three constituent files (README, PROGRESS, task files). Readers who see the file tree before reading the prose absorb the structure faster and trust that the methodology produces a tangible, inspectable artifact.
+- **Purpose / trust rationale:** Shows the concrete on-disk shape of a DWP plan — the `.dwp/` parent, the `PLAN_001_<slug>/` directory, and its three constituent files (README, PROGRESS, task files). Readers who see the file tree before reading the prose absorb the structure faster and trust that the methodology produces a tangible, inspectable artifact.
 - **Aspect & dimensions:** 16:9 · 880 × 495 px displayed · generate @2x (1760 × 990 px)
 - **Light/dark strategy:** transparent (ink on alpha, invertible)
 - **Prompt:**
   > **HOUSE STYLE —** Fine ink-line engraving / etched cross-hatching, in the manner of a 19th-century scientific broadsheet or banknote vignette. Monochrome warm ink (`#1B1A17`) on a **transparent background**, with a single **oxblood** accent (`#7A1F1F`) on one emphasis element only. Flat 2D, editorial, print-quality. No gradients, no shadows, no 3D.
   >
-  > **Subject:** A wide 16:9 diagram rendering a file-system tree in an editorial monospaced/engraved style. The tree root is the label **".dwp/"** at the top left, in small-caps. Below it, indented by one level with a vertical hairline and a horizontal branch rule, is **"plans/"**. Below that, indented a further level, is a single directory node **"PLAN_<slug>/"** rendered with angle-bracket styling to signal a variable name. Below `PLAN_<slug>/`, indented one more level, are four leaf entries connected by hairline tree rules:
+  > **Subject:** A wide 16:9 diagram rendering a file-system tree in an editorial monospaced/engraved style. The tree root is the label **".dwp/"** at the top left, in small-caps. Below it, indented by one level with a vertical hairline and a horizontal branch rule, is **"plans/"**. Below that, indented a further level, is a single directory node **"PLAN_001_<slug>/"** rendered with angle-bracket styling to signal a variable name. Below `PLAN_001_<slug>/`, indented one more level, are four leaf entries connected by hairline tree rules:
   > - **"README.md"** — followed by a small italic annotation: "goal · task table · status"
   > - **"PROGRESS.md"** — annotation: "append-only execution log"
   > - **"1.task_<slug>.md"** — annotation: "task file (nine sections)"
   > - **"2.task_<slug>.md"** — same annotation style; a short ellipsis below ("…") implies more tasks
   >
-  > An **oxblood** hairline bracket or rule highlights `PLAN_<slug>/` as the key grouping element. The diagram is left-aligned, leaving generous right-side white space. Use consistent engraved hairlines for tree branches, not modern rounded connectors. A small label **"PLAN DIRECTORY"** in small-caps editorial serif sits as a kicker above the tree.
+  > An **oxblood** hairline bracket or rule highlights `PLAN_001_<slug>/` as the key grouping element. The diagram is left-aligned, leaving generous right-side white space. Use consistent engraved hairlines for tree branches, not modern rounded connectors. A small label **"PLAN DIRECTORY"** in small-caps editorial serif sits as a kicker above the tree.
   >
   > **AVOID —** gradients, glossy/3D render, photographic realism, neon or saturated colors, drop shadows, busy or cluttered backgrounds, watermark, signature, extra logos, garbled/misspelled text, lorem ipsum, modern flat-vector "corporate memphis" style, clip-art, emoji.
-- **In-image text (EN):** PLAN DIRECTORY · .dwp/ · plans/ · PLAN_<slug>/ · README.md · PROGRESS.md · 1.task_<slug>.md · 2.task_<slug>.md · goal · task table · status · append-only execution log · task file (nine sections)
-- **In-image text (ES):** DIRECTORIO DEL PLAN · .dwp/ · plans/ · PLAN_<slug>/ · README.md · PROGRESS.md · 1.task_<slug>.md · 2.task_<slug>.md · objetivo · tabla de tareas · estado · registro de ejecución (solo anexar) · archivo de tarea (nueve secciones)
+- **In-image text (EN):** PLAN DIRECTORY · .dwp/ · plans/ · PLAN_001_<slug>/ · README.md · PROGRESS.md · 1.task_<slug>.md · 2.task_<slug>.md · goal · task table · status · append-only execution log · task file (nine sections)
+- **In-image text (ES):** DIRECTORIO DEL PLAN · .dwp/ · plans/ · PLAN_001_<slug>/ · README.md · PROGRESS.md · 1.task_<slug>.md · 2.task_<slug>.md · objetivo · tabla de tareas · estado · registro de ejecución (solo anexar) · archivo de tarea (nueve secciones)
 - **Suggested asset path:** `public/images/visuals/methodology/plan-tree.webp` (EN) · `public/images/visuals/methodology/plan-tree-es.webp` (ES)
-- **Alt text (EN):** File-system tree diagram showing the .dwp/plans/PLAN_slug/ directory structure containing README.md, PROGRESS.md, and numbered task files.
-- **Alt text (ES):** Diagrama de árbol del sistema de archivos que muestra la estructura del directorio .dwp/plans/PLAN_slug/ con README.md, PROGRESS.md y archivos de tarea numerados.
+- **Alt text (EN):** File-system tree diagram showing the .dwp/plans/PLAN_001_slug/ directory structure containing README.md, PROGRESS.md, and numbered task files.
+- **Alt text (ES):** Diagrama de árbol del sistema de archivos que muestra la estructura del directorio .dwp/plans/PLAN_001_slug/ con README.md, PROGRESS.md y archivos de tarea numerados.
 - **Caption (EN):** A DWP plan is a directory of markdown files: a README overview, an append-only PROGRESS log, and one file per task.
 - **Caption (ES):** Un plan de DWP es un directorio de archivos Markdown: un README de resumen, un registro PROGRESS de solo anexar y un archivo por tarea.
 - **Integration note:** Drop in as a `Figure` component immediately below the "Plan structure" heading in the plan-and-task-templates reader, replacing or complementing the code block. EN page uses `plan-tree.webp`; ES page uses `plan-tree-es.webp`. Width/height attributes: `width="880" height="495"`.

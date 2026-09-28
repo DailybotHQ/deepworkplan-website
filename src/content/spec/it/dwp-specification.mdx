@@ -34,12 +34,16 @@ Entrambe le modalità decidono il formato del piano (Lite o Full) come parte del
 
 ## Struttura del piano
 
-Un piano DEVE essere una directory sotto `.dwp/plans/` denominata `PLAN_<slug>/`, in una di due rappresentazioni:
+Un piano DEVE essere una directory sotto `.dwp/plans/` denominata `PLAN_001_<slug>/`, in una di due rappresentazioni:
+
 
 - **Full.** La directory DEVE contenere `README.md` (panoramica del piano, obiettivo, tabella delle attività e stato), un file per attività denominato `<n>.task_<slug>.md`, e `PROGRESS.md` (un log di esecuzione continuo).
 - **Lite.** Record di attività compatti e completamente eseguibili vivono inline in `README.md` dietro ancore stabili `{#task-N}` invece di file di attività separati — ogni record porta comunque un obiettivo, una Superficie toccata, criteri di accettazione, validazione e un Completion & Log. `PROGRESS.md` resta OBBLIGATORIO. Un piano Lite PUÒ essere promosso a Full in qualsiasi momento. Vedi [Piani Lite](/spec/lite-plans) per il ciclo di vita completo, anziché duplicarlo qui.
 
 Un piano PUÒ portare in aggiunta il livello di stato leggibile dalle macchine: `manifest.json` (identità statica, scritto una volta alla materializzazione) e `state.json` (stato di esecuzione live per attività). Il livello di stato è RACCOMANDATO per i nuovi piani e OBBLIGATORIO per l'esecuzione non presidiata e per i workspace agente senza git. Vedi [Stato del piano](/spec/plan-state).
+
+
+I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v6 ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.
 
 ## Anatomia dell'attività
 

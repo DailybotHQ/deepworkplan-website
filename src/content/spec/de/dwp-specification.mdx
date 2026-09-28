@@ -34,12 +34,16 @@ Beide Modi entscheiden das Format des Plans (Lite oder Full) als Teil derselben 
 
 ## Planstruktur
 
-Ein Plan MUSS ein Verzeichnis unter `.dwp/plans/` mit dem Namen `PLAN_<slug>/` sein, in einer von zwei Darstellungen:
+Ein Plan MUSS ein Verzeichnis unter `.dwp/plans/` mit dem Namen `PLAN_001_<slug>/` sein, in einer von zwei Darstellungen:
+
 
 - **Full.** Das Verzeichnis MUSS `README.md` (Planübersicht, Ziel, Aufgabentabelle und Status), eine Datei je Aufgabe, benannt `<n>.task_<slug>.md`, und `PROGRESS.md` (ein laufendes Protokoll der Ausführung) enthalten.
 - **Lite.** Kompakte, vollständig ausführbare Aufgabendatensätze leben inline in `README.md` hinter stabilen `{#task-N}`-Ankern anstelle separater Aufgabendateien — jeder Datensatz trägt weiterhin ein Ziel, eine Touched Surface, Akzeptanzkriterien, eine Validierung und ein Abschlussprotokoll. `PROGRESS.md` ist weiterhin ERFORDERLICH. Ein Lite-Plan KANN jederzeit zu Full befördert werden. Siehe [Lite-Pläne](/spec/lite-plans) für den vollständigen Lebenszyklus, statt ihn hier zu duplizieren.
 
 Ein Plan KANN zusätzlich die maschinenlesbare Zustandsschicht tragen: `manifest.json` (statische Identität, einmal bei der Materialisierung geschrieben) und `state.json` (lebendiger aufgabenbezogener Ausführungszustand). Die Zustandsschicht ist für neue Pläne EMPFOHLEN und für unbeaufsichtigte Ausführung sowie für Agenten-Arbeitsbereiche ohne git ERFORDERLICH. Siehe [Plan-Zustand](/spec/plan-state).
+
+
+Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v6-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
 
 ## Aufgaben-Anatomie
 

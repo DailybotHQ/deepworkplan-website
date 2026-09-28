@@ -16,11 +16,15 @@ Deep Work Plan은 Markdown 파일들의 디렉터리입니다. 그 디렉터리�
 
 <PlanTree lang="ko" class="not-prose my-10" />
 
-계획은 `PLAN_<slug>/`라는 이름으로 `.dwp/plans/` 아래에 있는 디렉터리입니다. 다음을 담습니다.
+계획은 `PLAN_001_<slug>/`라는 이름으로 `.dwp/plans/` 아래에 있는 디렉터리입니다. 다음을 담습니다.
+
 
 - `README.md` — 계획 개요: 목표, 원천 자료, 작업 표, 상태.
 - 작업당 하나의 파일, `<n>.task_<slug>.md` 형식의 이름.
 - `PROGRESS.md` — 실행의 진행 로그.
+
+
+새 계획에는 최소 세 자리 숫자로 된 단조 증가 ID를 부여합니다(예: `PLAN_001_add_payment_webhooks/`). 고정된 v5 스키마는 숫자 ID를 한 단어로 세므로 v5 슬러그는 2~4단어이고 v6 슬러그는 2~5단어입니다. 기존의 번호 없는 `PLAN_<slug>/` 폴더는 계속 읽을 수 있으며 절대 이름을 바꾸지 않습니다. 번호가 있는 계획이 있으면 `latest`는 숫자 ID가 가장 큰 계획을 가리킵니다.
 
 ## 작업 파일 구조
 

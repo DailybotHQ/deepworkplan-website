@@ -222,3 +222,19 @@ L'application est mécanique partout où les enregistrements le permettent. Une 
 ## Versionnage des schémas
 
 Les deux schémas sont versionnés par URL. Les champs additifs sont autorisés au sein d'une version ; renommer ou changer le type d'un champ nécessite une nouvelle version de schéma et une note de migration dans le changelog de la spécification. Cette révision introduit `/v2.json` pour les deux schémas : le champ `file` de l'entrée de tâche devient un `locator` typé (`{"kind": "file" | "inline", "value": ...}`), le manifeste gagne `plan_format`, et le fichier d'état gagne `format`, `materialization`, `approval` et `promotion` — ensemble, les champs dont les plans Lite ont besoin (voir [Plans Lite](/spec/lite-plans)). Les manifestes et fichiers d'état `/v1.json` restent valides et ne sont jamais réécrits silencieusement en v2 ; une session `refine` MAY en migrer un délibérément. Le champ `spec_version` du manifeste fixe la version de la spec DWP sous laquelle le plan a été créé ; un agent rencontrant un plan plus récent que sa spec installée SHOULD le signaler plutôt que de deviner.
+
+## Schémas v6 et compatibilité
+
+v6 conserve la méthodologie v5 et ajoute une structure d’ingénierie plus stricte pour les nouveaux plans. Le manifeste d’identité pointe vers un contrat versionné ; un journal en ajout seul enregistre l’autorité et les événements ; les manifestes de contexte rendent explicite la sélection du contexte par tâche ; l’ordonnanceur ne distribue que le travail admissible ; et la projection active `state.json` est un instantané généré depuis le journal. Une liste d’autorisations vide est refusée. Ce sont des décisions d’architecture, pas la preuve de meilleurs résultats d’agents : la non-infériorité des résultats n’a pas été mesurée.
+
+Les schémas v6 du manifeste et de l’instantané actif sont :
+
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
+
+La projection active de v6 est un instantané, pas un fichier d’état v5 renommé. `plan-state/v5.json` reste publié pour les plans v5 ; `plan-state/v6.json` n’existe pas. Les plans v1, v2 et v5 existants conservent leur génération de schéma enregistrée et ne sont jamais réécrits silencieusement.
+
+Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.

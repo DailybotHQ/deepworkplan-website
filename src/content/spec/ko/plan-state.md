@@ -222,3 +222,19 @@ Markdown은 모든 불일치에서 이겨야(MUST) 합니다. `state.json`이 �
 ## 스키마 버전 관리
 
 두 스키마 모두 URL로 버전이 관리됩니다. 추가 필드는 버전 내에서 허용됩니다; 필드의 이름 변경 또는 타입 변경은 새로운 스키마 버전과 스펙 변경 로그의 마이그레이션 메모가 필요합니다. 이번 개정에서는 두 스키마 모두에 `/v2.json`을 도입합니다: 작업 항목의 `file` 필드는 타입이 있는 `locator`(`{"kind": "file" | "inline", "value": ...}`)가 되고, 매니페스트는 `plan_format`을 얻으며, 상태 파일은 `format`, `materialization`, `approval`, `promotion`을 얻습니다 — 이는 모두 합쳐 Lite 계획에 필요한 필드입니다(참고: [Lite 계획](/spec/lite-plans)). `/v1.json` 매니페스트와 상태 파일은 계속 유효하며 조용히 v2로 재작성되는 일은 결코 없습니다; `refine` 세션이 의도적으로 마이그레이션할 수(MAY) 있습니다. 매니페스트의 `spec_version` 필드는 계획이 생성된 DWP 스펙 버전을 고정합니다; 설치된 스펙보다 최신 계획을 만난 에이전트는 추측하는 대신 그렇다고 알려야(SHOULD) 합니다.
+
+## v6 스키마와 호환성
+
+v6는 v5 방법론을 유지하면서 새 계획에 더 엄격한 엔지니어링 구조를 추가합니다. 식별 매니페스트는 버전이 지정된 계약을 가리키고, 추가 전용 저널은 권한과 이벤트를 기록합니다. 작업별 컨텍스트 매니페스트는 컨텍스트 선택을 명시하며 스케줄러는 실행 가능한 작업만 전달합니다. 라이브 프로젝션 `state.json`은 저널에서 생성되는 스냅샷입니다. 빈 허용 목록은 거부됩니다. 이는 아키텍처 결정이며 에이전트 성과가 더 좋다는 증거가 아닙니다. 성과 비열등성은 측정되지 않았습니다.
+
+v6 매니페스트 및 라이브 스냅샷 스키마:
+
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
+
+v6 라이브 프로젝션은 이름만 바꾼 v5 상태 파일이 아니라 스냅샷입니다. `plan-state/v5.json`은 v5 계획용으로 계속 게시되며 `plan-state/v6.json`은 없습니다. 기존 v1, v2, v5 계획은 기록된 스키마 세대를 유지하고 조용히 다시 작성되지 않습니다.
+
+새 계획에는 최소 세 자리 숫자로 된 단조 증가 ID를 부여합니다(예: `PLAN_001_add_payment_webhooks/`). 고정된 v5 스키마는 숫자 ID를 한 단어로 세므로 v5 슬러그는 2~4단어이고 v6 슬러그는 2~5단어입니다. 기존의 번호 없는 `PLAN_<slug>/` 폴더는 계속 읽을 수 있으며 절대 이름을 바꾸지 않습니다. 번호가 있는 계획이 있으면 `latest`는 숫자 ID가 가장 큰 계획을 가리킵니다.

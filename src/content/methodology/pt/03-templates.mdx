@@ -16,11 +16,15 @@ Um Deep Work Plan é um diretório de arquivos markdown. O formato desse diretó
 
 <PlanTree lang="pt" class="not-prose my-10" />
 
-Um plano é um diretório em `.dwp/plans/` chamado `PLAN_<slug>/`. Ele contém:
+Um plano é um diretório em `.dwp/plans/` chamado `PLAN_001_<slug>/`. Ele contém:
+
 
 - `README.md` — a visão geral do plano: objetivo, material de origem, tabela de tarefas e status.
 - Um arquivo por tarefa, chamado `<n>.task_<slug>.md`.
 - `PROGRESS.md` — um registro contínuo da execução.
+
+
+Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v6 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.
 
 ## Estrutura do arquivo de tarefa
 

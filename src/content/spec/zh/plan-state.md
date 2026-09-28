@@ -222,3 +222,19 @@ Markdown MUST 在每次分歧中获胜。若 `state.json` 显示任务 4 已 `co
 ## 模式版本控制
 
 两个模式均通过 URL 进行版本控制。版本内允许添加字段；重命名或重新定义字段类型需要新的模式版本以及规范变更日志中的迁移说明。本次修订为两个模式引入了 `/v2.json`：任务条目的 `file` 字段变为一个带类型的 `locator`（`{"kind": "file" | "inline", "value": ...}`），清单新增 `plan_format`，状态文件新增 `format`、`materialization`、`approval` 与 `promotion`——这些字段共同满足了 Lite 计划的需要（参见 [Lite 计划](/spec/lite-plans)）。`/v1.json` 的清单与状态文件仍然有效，绝不会被静默重写为 v2；一次 `refine` 会话 MAY 有意迁移它。清单中的 `spec_version` 字段固定了计划创建时所依据的 DWP 规范版本；遇到比其已安装规范更新的计划时，代理 SHOULD 明确说明，而非猜测。
+
+## v6 架构与兼容性
+
+v6 保留 v5 方法论，并为新计划增加更严格的工程结构。身份清单指向有版本的契约；只追加的日志记录授权和事件；任务上下文清单明确上下文选择；调度器只派发符合条件的工作；实时投影是由日志生成的快照 `state.json`。空能力允许列表会被拒绝。这些变化是架构决策，并非代理结果更好的证据：尚未测量代理结果的非劣效性。
+
+v6 清单与实时快照的架构地址：
+
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
+
+v6 实时投影是快照，而不是重命名的 v5 状态文件。`plan-state/v5.json` 仍为 v5 计划发布；不存在 `plan-state/v6.json`。现有 v1、v2 和 v5 计划保留记录的架构代际，不会被静默重写。
+
+新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v6 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。
