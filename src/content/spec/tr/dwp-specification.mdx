@@ -11,6 +11,8 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP spesifikasyonu
 
+**Güncel standart: v6.** Aşağıdaki belgeler korunan temeldir; v6 sözleşme, yalnızca eklemeli günlük, görev bağlamı, kaynak denetimleri ve yaşam döngüsü kuralları ekler. [v6 manifestosu](https://deepworkplan.com/schema/plan-manifest/v6.json) ve [v6 anlık görüntüsü](https://deepworkplan.com/schema/plan-snapshot/v6.json). Mevcut v5 planları kendi kurallarını korur. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Sürüm 4.0.0. Durum: Kararlı.** Bu belge, Deep Work Plan (DWP) metodolojisinin normatif spesifikasyonudur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 
 > **2.4.0'da eklemeli, kırıcı değişiklik yok.** (1) **Dokunulan Yüzey** bölümü — görevin neyi değiştirdiği ile neyin doğrulanması gerektiği arasındaki sözleşme, risk sınıfına göre kapı seçimiyle (izole / seam / paylaşılan-çekirdek / bilinmeyen); (2) eksiksiz doğrulama, planın tek zorunlu **Final Review**'inde, açık kanıt-yeniden-kullanım kurallarıyla çalıştırılan bir **son-durum gereksinimi** hâline gelir; (3) **görev-yerel skill kararları** sahipli göreve taşınır ve Executive Report **isteğe bağlı, talep üzerine** hâline gelir; (4) **mod-farkındalıklı bir create akışı** — trust modu, analiz ve kalite denetimlerini korurken planı doğrudan somutlaştırır; (5) bir **Lite-first plan somutlaştırması** — yönlendirilmiş create, yürütülemeyen bir taslak yerine doğrudan yürütülebilir bir Lite plan üretir; bu plan istenildiği an bir Full plana yükseltilebilir (bkz. [Lite planlar](/spec/lite-plans)); ve (6) açık bir **uyumluluk matrisi**: önceki sürümlerden planlar ve depolar uyumlu kalır.
@@ -34,7 +36,7 @@ Her iki mod da planın biçimini (Lite veya Full) aynı gereksinim analizinin bi
 
 ## Plan yapısı
 
-Bir plan, `.dwp/plans/` altında `PLAN_001_<slug>/` olarak adlandırılmış bir dizin OLMALIDIR; iki temsilden biri biçiminde:
+Yeni bir plan, `.dwp/plans/` altında `PLAN_001_<slug>/` gibi numaralı bir dizin kullanmak ZORUNDADIR. Mevcut numarasız `PLAN_<slug>/` dizinleri geçerliliğini korur ve asla yeniden adlandırılmaz; iki temsil biçimi vardır:
 
 
 - **Full.** Dizin, `README.md` (plan genel görünümü, hedef, görev tablosu ve durum), görev başına bir dosya (`<n>.task_<slug>.md` olarak adlandırılır) ve `PROGRESS.md` (yürütmenin çalışan bir günlüğü) İÇERMELİDİR.

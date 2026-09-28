@@ -11,6 +11,8 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Especificação do DWP
 
+**Padrão atual: v6.** Os documentos abaixo são a base preservada; v6 acrescenta contrato, diário somente de acréscimo, contexto por tarefa, controles de recursos e regras do ciclo de vida. [Manifesto v6](https://deepworkplan.com/schema/plan-manifest/v6.json) e [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Planos v5 existentes mantêm suas regras. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Versão 4.0.0. Status: Estável.** Este documento é a especificação normativa da metodologia Deep Work Plan (DWP). As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
 
 > **Aditivo em 2.4.0, sem alterações incompatíveis.** (1) A seção **Superfície tocada** — o contrato entre o que uma tarefa muda e o que deve ser validado, com seleção de gate por classe de risco (isolada / costura / compartilhada-núcleo / desconhecida); (2) a validação completa passa a ser um **requisito de estado final** executado no único **Final Review** obrigatório do plano, com regras explícitas de reutilização de evidência; (3) as **decisões de skills por tarefa** passam para a tarefa que as origina, e o Executive Report passa a ser **opcional, mediante solicitação**; (4) um **fluxo `create` consciente do modo** — o modo trust materializa diretamente preservando a análise e as verificações de qualidade; (5) **materialização de planos Lite em primeiro lugar** — o create guiado produz um plano Lite diretamente executável em vez de um rascunho não executável, promovível a um plano Full a qualquer momento (veja [Planos Lite](/spec/lite-plans)); e (6) uma **matriz de compatibilidade** explícita: os planos e repositórios de versões anteriores permanecem conformes.
@@ -34,7 +36,7 @@ Ambos os modos decidem o formato do plano (Lite ou Full) como parte da mesma an�
 
 ## Estrutura do plano
 
-Um plano DEVE (MUST) ser um diretório em `.dwp/plans/` chamado `PLAN_001_<slug>/`, em uma de duas representações:
+Um plano novo DEVE usar um diretório numerado em `.dwp/plans/`, como `PLAN_001_<slug>/`, em uma de duas representações. Diretórios existentes sem número `PLAN_<slug>/` continuam válidos e nunca são renomeados:
 
 
 - **Full.** O diretório DEVE (MUST) conter `README.md` (visão geral do plano, objetivo, tabela de tarefas e status), um arquivo por tarefa chamado `<n>.task_<slug>.md`, e `PROGRESS.md` (um registro contínuo da execução).

@@ -11,6 +11,8 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Specifica DWP
 
+**Standard attuale: v6.** I documenti seguenti sono la base conservata; v6 aggiunge contratto, journal append-only, contesto per task, controlli delle risorse e regole del ciclo di vita. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) e [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). I piani v5 esistenti mantengono le proprie regole. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Versione 4.0.0. Stato: Stabile.** Questo documento è la specifica normativa per la metodologia Deep Work Plan (DWP). Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
 
 > **Additivi in 2.4.0, nessuna modifica incompatibile.** (1) La sezione **Superficie toccata** — il contratto tra ciò che un'attività modifica e ciò che deve essere validato, con la selezione del gate per classe di rischio (isolata / giuntura / condivisa-core / sconosciuta); (2) la validazione completa diventa un **requisito di stato finale** eseguito nel singolo **Final Review** obbligatorio del piano, con regole esplicite di riutilizzo delle evidenze; (3) le **decisioni locali per attività sulle skill** si spostano nell'attività proprietaria e l'Executive Report diventa **facoltativo, su richiesta**; (4) un **flusso create consapevole della modalità** — la modalità trust materializza direttamente mantenendo analisi e controlli di qualità; (5) **materializzazione Lite-first del piano** — il create guidato produce direttamente un piano Lite eseguibile invece di una bozza non eseguibile, promuovibile a un piano Full in qualsiasi momento (vedi [Piani Lite](/spec/lite-plans)); e (6) una **matrice di compatibilità** esplicita: i piani e i repository di versioni precedenti restano conformi.
@@ -34,7 +36,7 @@ Entrambe le modalità decidono il formato del piano (Lite o Full) come parte del
 
 ## Struttura del piano
 
-Un piano DEVE essere una directory sotto `.dwp/plans/` denominata `PLAN_001_<slug>/`, in una di due rappresentazioni:
+Un nuovo piano DEVE usare una directory numerata sotto `.dwp/plans/`, come `PLAN_001_<slug>/`, in una delle due rappresentazioni. Le directory esistenti senza numero `PLAN_<slug>/` restano valide e non vengono mai rinominate:
 
 
 - **Full.** La directory DEVE contenere `README.md` (panoramica del piano, obiettivo, tabella delle attività e stato), un file per attività denominato `<n>.task_<slug>.md`, e `PROGRESS.md` (un log di esecuzione continuo).

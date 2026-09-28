@@ -1,11 +1,11 @@
 ---
 title: "DWP v6: วิธีการเดิม สัญญาเข้มงวดยิ่งขึ้น"
-description: "Deep Work Plan v6 คงวิธีการ v5 และเพิ่มโครงสร้างการทำงานที่เข้มงวดขึ้น ยังไม่ได้วัด non-inferiority ของผลลัพธ์ agent"
+description: "Deep Work Plan v6 คงวิธีการ v5 และเพิ่มโครงสร้างการทำงานที่เข้มงวดขึ้น ยังไม่ได้วัด non-inferiority ของผลลัพธ์ agent อย่างเป็นระบบในงานจริง"
 date: 2026-09-28
 version: "v6 · โครงสร้างเข้มงวดยิ่งขึ้น"
 kind: release
 lang: th
-order: 1
+order: 0
 featured: true
 sourceLabel: "ชุดสคีมา v6 ที่เผยแพร่"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"

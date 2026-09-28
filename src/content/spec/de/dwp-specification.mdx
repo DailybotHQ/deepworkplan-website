@@ -11,6 +11,8 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP-Spezifikation
 
+**Aktueller Standard: v6.** Die folgenden Dokumente bilden die beibehaltene Basis; v6 ergänzt Vertrag, nur anhängbares Journal, Aufgabenkontext, Ressourcenregeln und Lebenszyklus. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) und [Snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Bestehende v5-Pläne behalten ihre Regeln. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Version 4.0.0. Status: Stabil.** Dieses Dokument ist die normative Spezifikation für die Deep Work Plan (DWP) Methodik. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
 > **Additiv in 2.4.0, keine Breaking Changes.** (1) Der Abschnitt **Touched Surface** — der Vertrag zwischen dem, was eine Aufgabe ändert, und dem, was validiert werden muss, mit Gate-Auswahl nach Risikoklasse (isoliert / Nahtstelle / geteilt-zentral / unbekannt); (2) die vollständige Validierung wird zu einer **Endzustands-Anforderung**, die im einzigen verpflichtenden **Final Review** des Plans läuft, mit expliziten Regeln zur Beweiswiederverwendung; (3) **aufgaben-lokale Skills-Entscheidungen** wandern in die erzeugende Aufgabe, und der Executive Report wird **optional, auf Anfrage**; (4) ein **modus-bewusster create-Ablauf** — der Trust-Modus materialisiert direkt, behält aber Analyse und Qualitätsprüfungen; (5) eine **Lite-first-Plan-Materialisierung** — der geführte create-Ablauf erzeugt direkt einen ausführbaren Lite-Plan anstelle eines nicht ausführbaren Entwurfs, der jederzeit zu einem Full-Plan befördert werden kann (siehe [Lite-Pläne](/spec/lite-plans)); und (6) eine explizite **Kompatibilitätsmatrix**: Pläne und Repositorys aus früheren Versionen bleiben konform.
@@ -34,7 +36,7 @@ Beide Modi entscheiden das Format des Plans (Lite oder Full) als Teil derselben 
 
 ## Planstruktur
 
-Ein Plan MUSS ein Verzeichnis unter `.dwp/plans/` mit dem Namen `PLAN_001_<slug>/` sein, in einer von zwei Darstellungen:
+Ein neuer Plan MUSS ein nummeriertes Verzeichnis unter `.dwp/plans/` verwenden, etwa `PLAN_001_<slug>/`, in einer von zwei Darstellungen. Bestehende nicht nummerierte `PLAN_<slug>/`-Verzeichnisse bleiben gültig und werden nie umbenannt:
 
 
 - **Full.** Das Verzeichnis MUSS `README.md` (Planübersicht, Ziel, Aufgabentabelle und Status), eine Datei je Aufgabe, benannt `<n>.task_<slug>.md`, und `PROGRESS.md` (ein laufendes Protokoll der Ausführung) enthalten.

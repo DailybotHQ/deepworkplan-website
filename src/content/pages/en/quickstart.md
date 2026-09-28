@@ -152,6 +152,10 @@ https://deepworkplan.com/schema/plan-state/v5.json. New plans created with the c
 https://deepworkplan.com/schema/plan-manifest/v6.json for `manifest.json`; their live projection is a snapshot at
 https://deepworkplan.com/schema/plan-snapshot/v6.json. There is no
 `plan-state/v6.json`: v6 uses a snapshot, not a renamed v5 state schema.
+The other v6 schemas are the
+[contract](https://deepworkplan.com/schema/plan-contract/v6.json),
+[journal event](https://deepworkplan.com/schema/journal-event/v6.json), and
+[task context manifest](https://deepworkplan.com/schema/context-manifest/v6.json).
 Existing plans keep their recorded generation and are never rewritten. v6
 keeps the v5 methodology with stricter structure; agent outcome
 non-inferiority has not been measured.
@@ -290,4 +294,3 @@ methodology:
  verifiable work.
 
 Anyone can run this prompt on any repository — and end with a codebase any AI agent can pilot.
-

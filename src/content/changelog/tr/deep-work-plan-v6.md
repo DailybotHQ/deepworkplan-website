@@ -5,7 +5,7 @@ date: 2026-09-28
 version: "v6 · Daha sıkı yapı"
 kind: release
 lang: tr
-order: 1
+order: 0
 featured: true
 sourceLabel: "Yayımlanan v6 şema kümesi"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"

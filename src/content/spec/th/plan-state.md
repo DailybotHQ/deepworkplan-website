@@ -8,6 +8,8 @@ section: State
 
 # สถานะแผน
 
+**มาตรฐานปัจจุบัน: v6** เอกสารด้านล่างเป็นข้อกำหนดพื้นฐานที่คงไว้ ส่วน v6 เพิ่มสัญญา journal แบบเพิ่มข้อมูลอย่างเดียว บริบทต่อหนึ่งงาน การควบคุมทรัพยากร และกฎวงจรชีวิต [manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) และ [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json) แผน v5 เดิมยังคงใช้กฎที่บันทึกไว้ [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **เวอร์ชัน 5.0.0. สถานะ: เสถียร** เอกสารนี้ระบุชั้นสถานะแผนที่เครื่องอ่านได้ของระเบียบวิธี Deep Work Plan ซึ่งตอนนี้ปรับให้สอดคล้องกับเวอร์ชันของมาตรฐาน DWP เอง — ไม่มีข้อกำหนดเดิมใดถูกทำให้อ่อนลงจากการเปลี่ยนหมายเลขนี้ ฉบับแก้ไขนี้ยังบันทึกเรื่องตัวอัปเดตสถานะที่มีการป้องกัน การเผยแพร่แผนที่ผ่านการตรวจสอบ และกฎความจริงของหลักฐานที่แผนที่เสร็จสมบูรณ์ต้องปฏิบัติตาม (ดูด้านล่าง) คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
 
 สิ่งประดิษฐ์ JSON สองชิ้น — `manifest.json` (เอกลักษณ์คงที่ของแผน) และ `state.json` (สถานะการดำเนินงานต่อหนึ่งงานแบบสด รวมถึงผลลัพธ์ validation gate) — ที่ทุกแผน MAY พกไว้ร่วมกับไฟล์ markdown และที่การดำเนินงานแบบไม่มีผู้ดูแล (ดู [โปรโตคอลของเอเจนต์](/spec/agent-protocol#execution-profiles)) และ workspace ที่ไม่มี git (ดู [Archetype](/spec/archetypes) §3) MUST พก

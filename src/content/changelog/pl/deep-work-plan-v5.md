@@ -6,7 +6,7 @@ version: "v5 · Gwarantowane testami"
 kind: release
 lang: pl
 order: 1
-featured: true
+featured: false
 sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
 sourceLinks:

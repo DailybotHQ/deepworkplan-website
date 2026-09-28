@@ -1,11 +1,11 @@
 ---
 title: "DWP v6: ta sama metoda, ściślejszy kontrakt"
-description: "Deep Work Plan v6 zachowuje metodykę v5 i dodaje ściślejszą strukturę wykonania. Nie mierzono niegorszości wyników agentów."
+description: "Deep Work Plan v6 zachowuje metodykę v5 i dodaje ściślejszą strukturę wykonania. Nie mierzono dotąd niegorszości wyników agentów w praktyce."
 date: 2026-09-28
 version: "v6 · Ściślejsza struktura"
 kind: release
 lang: pl
-order: 1
+order: 0
 featured: true
 sourceLabel: "Opublikowany zestaw schematów v6"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"

@@ -11,6 +11,8 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Specyfikacja DWP
 
+**Aktualny standard: v6.** Poniższe dokumenty są zachowaną podstawą; v6 dodaje kontrakt, dziennik tylko do dopisywania, kontekst zadań, kontrolę zasobów i reguły cyklu życia. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) i [migawka v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Istniejące plany v5 zachowują swoje reguły. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Wersja 4.0.0. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 
 > **Addytywne w 2.4.0, bez zmian niekompatybilnych wstecz.** (1) Sekcja **Powierzchnia dotknięta** — kontrakt między tym, co zadanie zmienia, i tym, co musi zostać zwalidowane, z doborem bramki według klasy ryzyka (izolowana / szew / współdzielony-rdzeń / nieznana); (2) pełna walidacja staje się **wymogiem stanu końcowego** uruchamianym w jedynym obowiązkowym **Final Review** planu, z jawnymi regułami ponownego użycia dowodów; (3) **lokalne decyzje dotyczące skilli** przenoszą się do zadania będącego właścicielem, a raport wykonawczy staje się **opcjonalny, na życzenie**; (4) **przepływ create świadomy trybu** — tryb trust materializuje się bezpośrednio, zachowując analizę i kontrole jakości; (5) **materializacja Lite-first** — guided create tworzy bezpośrednio wykonywalny plan Lite zamiast niewykonywalnego szkicu, który można w każdej chwili podnieść do planu Full (zob. [Plany Lite](/spec/lite-plans)); oraz (6) jawna **macierz kompatybilności**: plany i repozytoria z wcześniejszych wersji pozostają zgodne.
@@ -34,7 +36,7 @@ Oba tryby decydują o formacie planu (Lite lub Full) w ramach tej samej analizy 
 
 ## Struktura planu
 
-Plan MUSI być katalogiem w `.dwp/plans/` o nazwie `PLAN_001_<slug>/`, w jednej z dwóch reprezentacji:
+Nowy plan MUSI używać numerowanego katalogu w `.dwp/plans/`, na przykład `PLAN_001_<slug>/`, w jednej z dwóch reprezentacji. Istniejące nienumerowane katalogi `PLAN_<slug>/` pozostają poprawne i nigdy nie są zmieniane:
 
 
 - **Full.** Katalog MUSI zawierać `README.md` (przegląd planu, cel, tabelę zadań i status), jeden plik na zadanie o nazwie `<n>.task_<slug>.md`, oraz `PROGRESS.md` (bieżący dziennik realizacji).

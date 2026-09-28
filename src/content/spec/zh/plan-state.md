@@ -8,6 +8,8 @@ section: State
 
 # Plan state
 
+**当前标准：v6。** 下列文档是保留的基础规范；v6 增加契约、仅追加日志、逐任务上下文、资源控制和生命周期规则。[v6 身份清单](https://deepworkplan.com/schema/plan-manifest/v6.json)与[v6 快照](https://deepworkplan.com/schema/plan-snapshot/v6.json)。现有 v5 计划保留其记录的规则。 [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **版本 5.0.0。状态：稳定。** 本文档规定了 Deep Work Plan 方法论的机器可读计划状态层，现已与 DWP 标准自身的版本号对齐——此次重新编号不削弱任何既有要求。本次修订还记录了受保护的状态更新器、经验证的计划发布，以及一份已完成计划必须满足的证据真实性规则（见下文）。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
 两个 JSON 产物——`manifest.json`（计划的静态标识）与 `state.json`（包含验证关卡结果的实时逐任务执行状态）——每份计划 MAY 将其与 Markdown 文件一并携带，而无人值守执行（参见 [代理协议](/spec/agent-protocol#execution-profiles)）与无 git 的工作区（参见 [原型](/spec/archetypes) §3）MUST 携带。

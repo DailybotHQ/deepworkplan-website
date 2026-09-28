@@ -193,14 +193,19 @@ https://deepworkplan.com/schema/plan-state/v5.json. New plans created with the c
 https://deepworkplan.com/schema/plan-manifest/v6.json for `manifest.json`; their live projection is a snapshot at
 https://deepworkplan.com/schema/plan-snapshot/v6.json. There is no
 `plan-state/v6.json`: v6 uses a snapshot, not a renamed v5 state schema.
+The other v6 schemas are the
+[contract](https://deepworkplan.com/schema/plan-contract/v6.json),
+[journal event](https://deepworkplan.com/schema/journal-event/v6.json), and
+[task context manifest](https://deepworkplan.com/schema/context-manifest/v6.json).
 Existing plans keep their recorded generation and are never rewritten. v6
 keeps the v5 methodology with stricter structure; agent outcome non-inferiority
 has not been measured.
 
 New plans receive monotonically increasing numeric IDs with at least three
 digits, starting at `PLAN_001_...`. Current v6 plans use 2–5-word slugs.
-The retained v5 flow uses 2–4 words to fit its frozen schemas. Existing
-unnumbered `PLAN_<slug>/` folders remain readable and are never renamed.
+The retained v5 flow uses 2–4 words: its allocator requires at least two
+slug words, and its frozen schema permits at most four after the numeric ID.
+Existing unnumbered `PLAN_<slug>/` folders remain readable and are never renamed.
 When numbered plans exist, `latest` resolves to the highest numeric ID.
 
 Every plan has one mandatory closing task: **Final Review**. It runs the
@@ -360,4 +365,3 @@ methodology:
    verifiable work.
 
 Anyone can run this prompt on any repository — and end with a codebase any AI agent can pilot.
-

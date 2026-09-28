@@ -5,7 +5,7 @@ date: 2026-09-28
 version: "v6 · より厳格な構造"
 kind: release
 lang: ja
-order: 1
+order: 0
 featured: true
 sourceLabel: "公開済み v6 スキーマ一式"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"

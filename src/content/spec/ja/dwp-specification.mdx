@@ -11,6 +11,8 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP 仕様
 
+**現在の標準: v6。** 以下の文書は保持された基礎仕様です。v6 は契約、追記専用ジャーナル、タスクごとのコンテキスト、リソース制御、ライフサイクル規則を追加します。[v6 manifest](https://deepworkplan.com/schema/plan-manifest/v6.json) と [v6 snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json)。既存の v5 計画は記録された規則を維持します。 [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **バージョン 4.0.0。状態: 安定。** この文書は Deep Work Plan（DWP）方法論の規範的な仕様です。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
 
 > **2.4.0 での追加、破壊的変更なし。** （1）**変更対象面（Touched Surface）** セクション — タスクが変更するものと検証されなければならないものとの契約であり、リスククラス（isolated / seam / shared-core / unknown）によるゲート選択を伴う。（2）完全な検証は計画唯一の必須 **Final Review** で実行される**最終状態要件**となり、明示的な証拠再利用ルールが伴う。（3）**タスク内スキル決定**は所有タスクへ移り、Executive Report は**オプションで要求に応じた**ものになる。（4）**モード対応の create フロー** — trust モードは分析と品質チェックを保ちながら直接マテリアライズする。（5）**Lite ファーストの計画マテリアライゼーション** — ガイド付き create は、非実行可能なドラフトの代わりに直接実行可能な **Lite 計画** を生成し、いつでも Full 計画へ昇格できる（[Lite 計画](/spec/lite-plans) を参照）。（6）明示的な**互換性マトリクス**：より前のバージョンの計画とリポジトリは適合したまま。
@@ -34,7 +36,7 @@ DWP は仕様駆動です。計画が仕様であり、エージェントは即�
 
 ## 計画の構造
 
-計画は `.dwp/plans/` 配下の `PLAN_001_<slug>/` という名前のディレクトリで、次の二つの表現形式のいずれかでなければなりません（MUST）。
+新しい計画は `.dwp/plans/` 配下で `PLAN_001_<slug>/` のような番号付きディレクトリを使用しなければなりません（MUST）。既存の番号なし `PLAN_<slug>/` は引き続き有効で、名前を変更しません。計画には次の二つの表現形式があります:
 
 
 - **Full。** ディレクトリは `README.md`（計画の概観、目標、タスク表、状態）、タスクごとに一つの `<n>.task_<slug>.md` という名前のファイル、そして `PROGRESS.md`（実行の進行ログ）を含まなければなりません（MUST）。

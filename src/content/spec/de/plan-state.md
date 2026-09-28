@@ -8,6 +8,8 @@ section: State
 
 # Plan-Zustand
 
+**Aktueller Standard: v6.** Die folgenden Dokumente bilden die beibehaltene Basis; v6 ergänzt Vertrag, nur anhängbares Journal, Aufgabenkontext, Ressourcenregeln und Lebenszyklus. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) und [Snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Bestehende v5-Pläne behalten ihre Regeln. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Version 5.0.0. Status: Stabil.** Dieses Dokument spezifiziert die maschinenlesbare Plan-Zustandsschicht der Deep Work Plan Methodik, nun an die eigene Version des DWP-Standards angeglichen — keine bestehende Anforderung wird durch die Neunummerierung abgeschwächt. Diese Revision dokumentiert außerdem den abgesicherten Zustands-Updater, die verifizierte Plan-Veröffentlichung und die Nachweis-Wahrheitsregeln, die ein abgeschlossener Plan erfüllen muss (siehe unten). Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
 Zwei JSON-Artefakte — `manifest.json` (die statische Identität des Plans) und `state.json` (der lebendige, aufgabenbezogene Ausführungszustand einschließlich Validierungs-Gate-Ergebnisse) — die jeder Plan gemeinsam mit seinen Markdown-Dateien führen KANN, und die unbeaufsichtigte Ausführung (siehe [Agentenprotokoll](/spec/agent-protocol#execution-profiles)) und Nicht-git-Arbeitsbereiche (siehe [Archetypen](/spec/archetypes) §3) führen MÜSSEN.

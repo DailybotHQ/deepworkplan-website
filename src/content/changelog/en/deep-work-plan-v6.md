@@ -5,7 +5,7 @@ date: 2026-09-28
 version: "v6 · Stricter structure"
 kind: release
 lang: en
-order: 1
+order: 0
 featured: true
 sourceLabel: "Published v6 schema set"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"

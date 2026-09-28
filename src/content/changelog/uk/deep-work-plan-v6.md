@@ -1,11 +1,11 @@
 ---
 title: "DWP v6: та сама методика, суворіший контракт"
-description: "Deep Work Plan v6 зберігає методологію v5 і додає суворішу структуру виконання. Не-гіршість результатів агентів не вимірювалася."
+description: "Deep Work Plan v6 зберігає методологію v5 і додає суворішу структуру виконання. Не-гіршість результатів агентів поки не вимірювалася."
 date: 2026-09-28
 version: "v6 · Суворіша структура"
 kind: release
 lang: uk
-order: 1
+order: 0
 featured: true
 sourceLabel: "Опублікований набір схем v6"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"

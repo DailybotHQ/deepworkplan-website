@@ -1,11 +1,11 @@
 ---
 title: "DWP v6: lo stesso metodo, un contratto più rigoroso"
-description: "Deep Work Plan v6 mantiene la metodologia v5 e aggiunge una struttura di esecuzione più rigorosa. La non inferiorità dei risultati degli agenti non è stata misurata."
+description: "Deep Work Plan v6 mantiene la metodologia v5 e aggiunge una struttura di esecuzione più rigorosa. La non inferiorità dei risultati non è stata misurata."
 date: 2026-09-28
 version: "v6 · Struttura più rigorosa"
 kind: release
 lang: it
-order: 1
+order: 0
 featured: true
 sourceLabel: "Set di schemi v6 pubblicato"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"

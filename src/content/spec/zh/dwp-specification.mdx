@@ -11,6 +11,8 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP 规范
 
+**当前标准：v6。** 下列文档是保留的基础规范；v6 增加契约、仅追加日志、逐任务上下文、资源控制和生命周期规则。[v6 身份清单](https://deepworkplan.com/schema/plan-manifest/v6.json)与[v6 快照](https://deepworkplan.com/schema/plan-snapshot/v6.json)。现有 v5 计划保留其记录的规则。 [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **版本 4.0.0。状态：稳定。** 本文档是 Deep Work Plan（DWP）方法论的规范性规范。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
 > **2.4.0 为增量式修订，无破坏性变更。** （1）**触及面（Touched Surface）**段落——该任务改动之物与必须验证之物之间的契约，并按风险级别（isolated / seam / shared-core / unknown）选择关卡；（2）完整验证成为一项**最终状态要求**，在计划唯一的强制 **Final Review** 中运行，并附带明确的证据复用规则；（3）**任务内的技能决策**移入所属任务，Executive Report 变为**可选、按需提供**；（4）**模式感知的 create 流程**——信任模式在保留分析与质量检查的同时直接物化；（5）**Lite 优先的计划物化**——引导式 create 直接产出一份可直接执行的 Lite 计划，而非不可执行的草案，并可在任意时刻晋升为 Full 计划（参见 [Lite 计划](/spec/lite-plans)）；以及（6）明确的**兼容性矩阵**：来自更早版本的计划与仓库仍然符合规范。
@@ -34,7 +36,7 @@ DWP 是规范驱动的：计划即规范，代理 MUST 依据其明确的验收�
 
 ## 计划结构
 
-一份计划 MUST 是 `.dwp/plans/` 下一个名为 `PLAN_001_<slug>/` 的目录，采用以下两种形态之一：
+新计划 MUST 使用 `.dwp/plans/` 下的编号目录，例如 `PLAN_001_<slug>/`。现有未编号的 `PLAN_<slug>/` 目录仍然有效，且不会被重命名。计划采用以下两种形态之一：
 
 
 - **Full。** 该目录 MUST 包含 `README.md`（计划概览、目标、任务表与状态）、每项任务一个、命名为 `<n>.task_<slug>.md` 的文件，以及 `PROGRESS.md`（一份持续的执行日志）。

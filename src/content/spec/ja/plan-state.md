@@ -8,6 +8,8 @@ section: State
 
 # 計画の状態
 
+**現在の標準: v6。** 以下の文書は保持された基礎仕様です。v6 は契約、追記専用ジャーナル、タスクごとのコンテキスト、リソース制御、ライフサイクル規則を追加します。[v6 manifest](https://deepworkplan.com/schema/plan-manifest/v6.json) と [v6 snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json)。既存の v5 計画は記録された規則を維持します。 [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **バージョン 5.0.0。状態: 安定。** この文書は Deep Work Plan 方法論の機械可読な計画状態レイヤーを規定するもので、いまや DWP 標準自身のバージョンと整合しています——この番号の付け替えによって既存の要件が弱められることはありません。この改訂はまた、ガードされた状態アップデーター、検証済みの計画公開、そして完了した計画が満たさなければならない証拠の真実性に関するルール(下記参照)を文書化します。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
 
 二つの JSON 成果物 — `manifest.json`（計画の静的な識別情報）と `state.json`（バリデーションゲートの結果を含む、タスクごとのライブ実行状態）— を、すべての計画は Markdown ファイルとあわせて MAY 携えることができます。無人実行（[エージェントプロトコル](/spec/agent-protocol#execution-profiles) を参照）および git を持たないワークスペース（[アーキタイプ](/spec/archetypes) §3 を参照）では MUST 携えなければなりません。

@@ -8,6 +8,8 @@ section: State
 
 # Status rencana
 
+**Standar saat ini: v6.** Dokumen di bawah adalah dasar yang dipertahankan; v6 menambahkan kontrak, jurnal khusus tambah, konteks per tugas, kontrol sumber daya, dan aturan siklus hidup. [Manifes v6](https://deepworkplan.com/schema/plan-manifest/v6.json) dan [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Rencana v5 yang ada tetap memakai aturan aslinya. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Versi 5.0.0. Status: Stabil.** Dokumen ini menetapkan lapisan status rencana yang dapat dibaca mesin dari metodologi Deep Work Plan, kini diselaraskan dengan versi standar DWP itu sendiri — tidak ada persyaratan yang ada dilemahkan oleh penomoran ulang ini. Revisi ini juga mendokumentasikan updater status yang dijaga, publikasi rencana yang terverifikasi, dan aturan kebenaran-bukti yang harus dipenuhi sebuah rencana yang selesai (lihat di bawah). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
 Dua artefak JSON — `manifest.json` (identitas statis rencana) dan `state.json` (status eksekusi per-tugas yang berjalan, termasuk hasil validasi gate) — yang setiap rencana MAY bawa bersama berkas markdown-nya, dan yang wajib dibawa oleh eksekusi tanpa pengawasan (lihat [Protokol agent](/spec/agent-protocol#execution-profiles)) serta ruang kerja tanpa git (lihat [Arketipe](/spec/archetypes) §3).

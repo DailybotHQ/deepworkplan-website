@@ -5,7 +5,7 @@ date: 2026-09-28
 version: "v6 · Более строгая структура"
 kind: release
 lang: ru
-order: 1
+order: 0
 featured: true
 sourceLabel: "Опубликованный набор схем v6"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"

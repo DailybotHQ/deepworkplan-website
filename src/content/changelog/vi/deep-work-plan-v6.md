@@ -5,7 +5,7 @@ date: 2026-09-28
 version: "v6 · Cấu trúc chặt chẽ hơn"
 kind: release
 lang: vi
-order: 1
+order: 0
 featured: true
 sourceLabel: "Bộ schema v6 đã công bố"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"

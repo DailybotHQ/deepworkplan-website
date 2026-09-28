@@ -11,6 +11,8 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP specification
 
+**Current standard: v6.** The documents below are the retained base; v6 adds the contract, append-only journal, task context, resource controls, and lifecycle rules. [Read the v6 manifest schema](https://deepworkplan.com/schema/plan-manifest/v6.json) and [live snapshot schema](https://deepworkplan.com/schema/plan-snapshot/v6.json). Existing v5 plans keep their recorded rules. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Version 4.0.0. Status: Stable.** This document is the normative specification for the Deep Work Plan (DWP) methodology. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
 > **Additive in 2.4.0, no breaking changes.** (1) The **Touched Surface** section — the contract between what a task changes and what must be validated, with gate selection by risk class (isolated / seam / shared-core / unknown); (2) full validation becomes a **final-state requirement** run in the plan's single mandatory **Final Review**, with explicit evidence-reuse rules; (3) **task-local skills decisions** move into the owning task, and the Executive Report becomes **optional, on request**; (4) a **mode-aware create flow** — trust mode materializes directly while keeping the analysis and quality checks; (5) **Lite-first plan materialization** — guided create produces a directly executable Lite plan instead of a non-executable draft, promotable to a Full plan at any point (see [Lite plans](/spec/lite-plans)); and (6) an explicit **compatibility matrix**: plans and repositories from earlier versions remain conformant.
@@ -34,7 +36,7 @@ Both modes decide the plan's format (Lite or Full) as part of the same requireme
 
 ## Plan structure
 
-A plan MUST be a directory under `.dwp/plans/` named `PLAN_001_<slug>/`, in one of two representations:
+A new plan MUST use a numbered directory under `.dwp/plans/`, such as `PLAN_001_<slug>/`, in one of two representations. Existing unnumbered `PLAN_<slug>/` directories remain valid and are never renamed:
 
 
 - **Full.** The directory MUST contain `README.md` (plan overview, goal, task table, and status), one file per task named `<n>.task_<slug>.md`, and `PROGRESS.md` (a running log of execution).

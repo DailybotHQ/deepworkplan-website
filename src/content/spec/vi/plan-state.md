@@ -8,6 +8,8 @@ section: State
 
 # Trạng thái kế hoạch
 
+**Tiêu chuẩn hiện tại: v6.** Các tài liệu bên dưới là nền tảng được giữ lại; v6 bổ sung hợp đồng, nhật ký chỉ ghi thêm, ngữ cảnh tác vụ, kiểm soát tài nguyên và quy tắc vòng đời. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) và [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Kế hoạch v5 hiện có vẫn giữ quy tắc đã ghi. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Phiên bản 5.0.0. Trạng thái: Ổn định.** Tài liệu này đặc tả lớp trạng thái kế hoạch có thể đọc bằng máy của phương pháp luận Deep Work Plan, nay đã được căn chỉnh với phiên bản riêng của chuẩn DWP — việc đánh số lại không làm suy yếu bất kỳ yêu cầu hiện có nào. Bản sửa đổi này cũng ghi lại bộ cập nhật trạng thái được bảo vệ, việc công bố kế hoạch đã kiểm chứng, và các quy tắc về tính trung thực của bằng chứng mà một kế hoạch đã hoàn tất phải thỏa mãn (xem bên dưới). Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
 Hai thành phần JSON — `manifest.json` (danh tính tĩnh của kế hoạch) và `state.json` (trạng thái thực thi trực tiếp theo tác vụ bao gồm kết quả cổng kiểm chứng) — mà mọi kế hoạch CÓ THỂ (MAY) mang theo bên cạnh các tệp markdown, và mà thực thi không có giám sát (xem [Giao thức agent](/spec/agent-protocol#execution-profiles)) và các không gian làm việc không có git (xem [Các kiểu hình](/spec/archetypes) §3) PHẢI (MUST) mang theo.

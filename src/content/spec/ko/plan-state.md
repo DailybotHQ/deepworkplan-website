@@ -8,6 +8,8 @@ section: State
 
 # 계획 상태
 
+**현재 표준: v6.** 아래 문서는 유지되는 기본 사양입니다. v6는 계약, 추가 전용 저널, 작업별 컨텍스트, 리소스 제어 및 수명 주기 규칙을 더합니다. [v6 manifest](https://deepworkplan.com/schema/plan-manifest/v6.json)와 [v6 snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json). 기존 v5 계획은 기록된 규칙을 유지합니다. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **버전 5.0.0. 상태: 안정(Stable).** 이 문서는 Deep Work Plan 방법론의 기계 가독 계획 상태 레이어를 명시하며, 이제 DWP 표준 자체의 버전과 맞춰져 있습니다 — 이 재번호 매기기로 인해 기존 요건이 약화되는 일은 없습니다. 이번 개정은 또한 보호된 상태 업데이터, 검증된 계획 발행, 그리고 완료된 계획이 충족해야 하는 증거-진실 규칙(아래 참고)을 문서화합니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
 
 두 JSON 산출물 — `manifest.json`(계획의 정적 식별 정보)과 `state.json`(검증 게이트 결과를 포함한 라이브 작업별 실행 상태) — 은 모든 계획이 Markdown 파일과 함께 MAY로 담을 수 있으며, 무인(unattended) 실행(참고: [에이전트 프로토콜](/spec/agent-protocol#execution-profiles))과 git이 없는 에이전트 작업 공간(참고: [아키타입](/spec/archetypes) §3)에서는 MUST로 담아야 합니다.

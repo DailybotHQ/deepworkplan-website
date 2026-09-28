@@ -5,7 +5,7 @@ date: 2026-09-28
 version: "v6 · अधिक सख्त संरचना"
 kind: release
 lang: hi
-order: 1
+order: 0
 featured: true
 sourceLabel: "प्रकाशित v6 स्कीमा सेट"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"

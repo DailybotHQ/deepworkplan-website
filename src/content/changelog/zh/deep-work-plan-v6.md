@@ -1,11 +1,11 @@
 ---
 title: "DWP v6：方法不变，契约更严格"
-description: "Deep Work Plan v6 保留 v5 方法论，并增加更严格的执行结构。尚未测量代理结果的非劣效性。"
+description: "Deep Work Plan v6 保留 v5 方法论，并增加更严格的执行结构。尚未在实际软件任务中测量代理结果的非劣效性。"
 date: 2026-09-28
 version: "v6 · 更严格的结构"
 kind: release
 lang: zh
-order: 1
+order: 0
 featured: true
 sourceLabel: "已发布的 v6 架构集合"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
