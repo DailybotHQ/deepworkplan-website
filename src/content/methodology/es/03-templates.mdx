@@ -24,7 +24,7 @@ Un plan es un directorio bajo `.dwp/plans/` llamado `PLAN_001_<slug>/`. Contiene
 - `PROGRESS.md`: un registro continuo de la ejecución.
 
 
-Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v6 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
+El paquete 6.x crea planes v6 de forma predeterminada. Los planes existentes conservan la generación registrada; la migración requiere una solicitud explícita. El paquete actual 6.x crea planes v6 de forma predeterminada, con slugs de 2–5 palabras. El flujo v5 conservado usa 2–4 palabras porque sus esquemas congelados cuentan el ID numérico como una palabra. Los planes existentes conservan la generación registrada y nunca se migran en silencio. Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v6 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
 
 ## Estructura del archivo de tarea
 

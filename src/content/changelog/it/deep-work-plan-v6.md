@@ -29,3 +29,5 @@ Il set di schemi v6 definisce il manifest di identità, il contratto di risultat
 La decisione architetturale è GO: v6 mantiene la stessa metodologia con una struttura ingegneristica più rigorosa. Non è un’affermazione di superiorità empirica. La non inferiorità dei risultati degli agenti non è stata misurata.
 
 I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v6 ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.
+
+Versione installata della skill: **6.0.1**. Il pacchetto 6.x crea per impostazione predefinita i nuovi piani in v6. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita con anteprima.

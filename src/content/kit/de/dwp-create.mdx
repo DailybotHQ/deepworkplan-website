@@ -45,7 +45,7 @@ Der Trust-Modus ist die Abkürzung für Power-User, sobald Sie dem Ablauf vertra
 4. In aufeinanderfolgende Aufgaben zerlegen und die README, die Aufgabendateien und PROGRESS schreiben.
 5. Mit dem Final Review enden (Sicherheitstest, Validierung des Endzustands, Abgleich der Skills-Entscheidungen).
 
-Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v6-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
+Das 6.x-Paket erstellt standardmäßig v6-Pläne. Bestehende Pläne behalten ihre aufgezeichnete Generation; eine Migration erfordert einen ausdrücklichen Auftrag. Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v6-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
 
 ## Aliase
 

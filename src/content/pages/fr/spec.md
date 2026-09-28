@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Spécification Deep Work Plan
 
-**Norme actuelle : v6.** Les documents ci-dessous forment la base conservée ; v6 ajoute le contrat, le journal à ajout seul, le contexte par tâche, les contrôles de ressources et les règles de cycle de vie. [Manifeste v6](https://deepworkplan.com/schema/plan-manifest/v6.json) et [instantané v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Les plans v5 existants gardent leurs règles.
+**Norme actuelle : v6.** Les documents ci-dessous forment la base conservée ; v6 ajoute le contrat, le journal à ajout seul, le contexte par tâche, les contrôles de ressources et les règles de cycle de vie. [Manifeste v6](https://deepworkplan.com/schema/plan-manifest/v6.json) et [instantané v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Les plans v5 existants gardent leurs règles. Le pack 6.x actuel crée les nouveaux plans en v6 par défaut. Les plans existants conservent leur génération enregistrée ; une migration exige une demande explicite.
 
 La spécification est la définition précise et lisible de la méthodologie — les structures et protocoles que les humains et les agents partagent. Elle énonce, en termes normatifs RFC 2119, comment un plan piloté par la spécification est structuré et comment un agent doit s'exécuter face à lui : le plan est la source de vérité, les portes de validation sont binaires, et le dépôt lui-même porte le harness dont un agent a besoin. Elle est organisée en documents ordonnés :
 

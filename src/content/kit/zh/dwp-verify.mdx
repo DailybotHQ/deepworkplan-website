@@ -38,3 +38,4 @@ import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
 ## 别名
 
 - `dwp:verify`
+**按代际验证计划。** 仓库来源检查器接受当前 DWP 标准 6.0.0，但计划检查按代际分别进行。v6 计划通过 contract 指针、`contract.json` 或 `contracts/` 修订链识别，并使用 v6 contract、journal 和 ledger 验证器检查。保留的 `plan_contract.py` 检查器仅支持 v5，绝不能用作 v6 计划验证器。在 v6 中，`state.json` 是生成的 snapshot 投影；与 journal 不一致会报告为问题。两种代际可以共存，验证过程不会迁移计划。

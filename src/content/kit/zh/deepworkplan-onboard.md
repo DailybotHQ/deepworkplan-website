@@ -45,4 +45,4 @@ v6 计划的机器可读架构目录发布在以下稳定 URL。v6 实时投影�
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
 - **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
 
-新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v6 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。
+当前 6.x 技能包默认使用 v6 创建新计划。现有计划保留记录的代际；迁移必须明确请求。 新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v6 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。

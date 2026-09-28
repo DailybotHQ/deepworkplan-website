@@ -8,6 +8,8 @@ section: Standard
 
 # Dokümantasyon standardı
 
+> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel v6 standardı, [şartname dizininde](/spec) listelenen geçerli `V6_*.md` uzantılarını da gerektirir. Mevcut v5 planları kayıtlı kurallarını korur.
+
 **Sürüm 5.0.0.** Bu standart, Deep Work Plan’lerin yapılarını, görevlerini ve ilerlemelerini nasıl belgelediğini ve bir deponun bir ajanın güvenle hareket edebilmesi için kendi kendini nasıl belgelediğini tanımlar. DWP metodolojisi altında oluşturulan her plan için geçerlidir. Bu sürüm, belgenin kendi sürüm numarasını eşlik ettiği DWP standardıyla hizalar — mevcut hiçbir gereksinim değişmez — ve aşağıda açıklanan sade-dizin bütçesi zorlamasını ve özellik katmanını ekler. MUST, SHOULD ve MAY anahtar kelimeleri, RFC 2119’da tanımlandığı şekilde kullanılır.
 
 ## Kompakt bir giriş noktası olarak AGENTS.md

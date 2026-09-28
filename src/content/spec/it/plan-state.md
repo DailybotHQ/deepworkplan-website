@@ -8,6 +8,8 @@ section: State
 
 # Stato del piano
 
+> **Ambito della versione:** questo è un documento base v5.0.0 mantenuto. Lo standard v6 attuale richiede anche le estensioni `V6_*.md` applicabili elencate nell’[indice delle specifiche](/spec). I piani v5 esistenti mantengono le regole registrate.
+
 **Standard attuale: v6.** I documenti seguenti sono la base conservata; v6 aggiunge contratto, journal append-only, contesto per task, controlli delle risorse e regole del ciclo di vita. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) e [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). I piani v5 esistenti mantengono le proprie regole. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
 
 **Versione 5.0.0. Stato: Stabile.** Questo documento specifica il livello di stato del piano leggibile dalle macchine della metodologia Deep Work Plan, ora allineato alla versione dello standard DWP stesso — nessun requisito esistente viene indebolito dalla rinumerazione. Questa revisione documenta anche l'aggiornatore di stato protetto, la pubblicazione verificata del piano e le regole di verità dell'evidenza che un piano completato deve soddisfare (vedi sotto). Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.

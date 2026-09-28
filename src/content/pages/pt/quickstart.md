@@ -1,7 +1,7 @@
 ---
 title: "Início rápido — Deep Work Plan"
 description: "O prompt executável de onboarding para agentes de IA: adote o Deep Work Plan em qualquer repositório — analise, documente, instale a skill e deixe-o pilotável por agentes."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 Você é um agente de código de IA. Leia este prompt inteiro primeiro e, então, torne o repositório atual
@@ -120,6 +120,8 @@ versão da skill Deep Work Plan instalada acima. O pacote atual da skill
 inclui o roteador e nove sub-skills: `create`, `execute`, `refine`,
 `resume`, `status`, `verify`, `onboard`, `author` e `upgrade`.
 
+Versão instalada da skill: **6.0.1**. O pacote 6.x atual cria novos planos com v6 por padrão. Os planos existentes mantêm a geração registrada; passar um plano v5 para v6 exige uma migração explícita com prévia.
+
 O padrão é deliberadamente proporcional, e transforma essa proporção em uma
 propriedade do plano, não da disciplina do desenvolvedor. Um plano é
 **Lite** — registros de tarefa em linha no README do plano, para trabalho
@@ -139,7 +141,7 @@ de validação selecionado do mapa de testes documentado do repositório. Na v6,
 
 A geração do esquema permanece vinculada a cada plano. Planos v5 mantêm
 `state.json` sob https://deepworkplan.com/schema/plan-state/v5.json. Planos
-criados explicitamente com v6 usam
+novos planos do pacote 6.x usam v6 por padrão e usam
 https://deepworkplan.com/schema/plan-manifest/v6.json para `manifest.json`;
 sua projeção ativa é um snapshot em
 https://deepworkplan.com/schema/plan-snapshot/v6.json. Não existe

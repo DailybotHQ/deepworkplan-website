@@ -29,3 +29,5 @@ El conjunto de esquemas v6 define el manifiesto de identidad, el contrato de res
 La decisión de arquitectura es GO: v6 conserva la misma metodología con una estructura de ingeniería más estricta. Esto no es una afirmación de superioridad empírica. No se ha medido la no inferioridad de los resultados de agentes.
 
 Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v6 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
+
+Versión del skill instalada: **6.0.1**. El paquete 6.x crea planes nuevos con v6 de forma predeterminada. Los planes existentes conservan su generación registrada; la migración requiere una solicitud explícita y con vista previa.

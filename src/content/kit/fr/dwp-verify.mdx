@@ -35,6 +35,8 @@ Vérifier objectivement la conformité du dépôt et des plans — en lecture se
 3. Rendre compte par **CONFORMANT** ou **NOT CONFORMANT**, avec chaque échec listé.
 4. Proposer de capturer les écarts sous forme de Deep Work Plan ; ne jamais corriger en silence.
 
+**Validation des plans par génération.** Le vérificateur de provenance du dépôt accepte la norme DWP actuelle 6.0.0, mais la validation des plans dépend de leur génération. Un plan v6 est identifié par son pointeur de contrat, `contract.json` ou une chaîne de révisions `contracts/`, puis contrôlé avec les validateurs v6 du contrat, du journal et du ledger. Le vérificateur conservé `plan_contract.py` ne prend en charge que v5 et NE DOIT PAS servir de validateur de plan v6. En v6, `state.json` est une projection snapshot générée ; tout écart avec le journal constitue un constat. Les deux générations coexistent et la vérification n’en migre aucune.
+
 ## Alias
 
 - `dwp:verify`

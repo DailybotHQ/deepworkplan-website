@@ -8,6 +8,8 @@ section: Addons
 
 # Add-on
 
+> **Cakupan versi:** Ini adalah dokumen dasar v5.0.0 yang dipertahankan. Standar v6 saat ini juga mewajibkan ekstensi `V6_*.md` yang berlaku dan tercantum dalam [indeks spesifikasi](/spec). Rencana v5 yang ada mempertahankan aturan yang tercatat.
+
 **Versi 2.1.0.** Add-on adalah ekstensi dari metodologi Deep Work Plan inti. Empat dari lima bersifat opsional dan **tidak pernah diperlukan untuk konformitas** — repositori tanpa addon opsional sepenuhnya AI-first dan konforman DWP. Setiap addon opsional ditawarkan saat onboarding, diterima atau ditolak secara eksplisit, dan — jika diterima — **merekonsiliasi** dengan setup yang ada alih-alih menimpanya. Satu komponen adalah pengecualian yang dinyatakan: sejak standar 2.3.0 **tinjauan lokal AI Diff Reviewer** adalah bagian dari baseline wajib — onboarding menginstalnya dan setiap Final Review menjalankannya — sementara permukaan CI-nya tetap opt-in.
 
 ## Kontrak addon

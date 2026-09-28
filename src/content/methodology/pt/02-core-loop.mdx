@@ -63,4 +63,7 @@ A validação faz parte da tarefa, não é um detalhe posterior: cada tarefa nom
 
 ## v6: a mesma metodologia, estrutura mais rigorosa
 
-v6 mantém a mesma metodologia de plano → tarefas → critérios de validação → conclusão, os comandos slash e o local `.dwp/plans/`. A estrutura de engenharia fica mais rigorosa com contrato, diário, manifestos de contexto por tarefa, agendador e recusa de uma lista de permissões vazia. A decisão de arquitetura é GO; a não inferioridade empírica dos resultados dos agentes não foi medida.
+O pacote 6.x cria planos v6 por padrão. Os planos existentes mantêm a geração registrada; a migração exige uma solicitação explícita.
+O padrão DWP atual é 6.0.0, implementado pela linha 6.x da skill. Esse pacote usa v6 por padrão para cada novo plano. Os planos v1, v2 e v5 existentes mantêm a geração registrada e nunca são migrados silenciosamente; passar um plano v5 para v6 exige uma solicitação explícita de migração.
+
+v6 mantém a mesma metodologia de plano → tarefa → gate de validação → conclusão, os comandos slash e o local `.dwp/plans/`. Torna a estrutura de engenharia mais rigorosa com um contrato, um journal somente de acréscimo, manifestos de contexto por tarefa, um scheduler e declarações explícitas das capacidades do runtime. A decisão de arquitetura é GO; não foi medida superioridade nem não inferioridade empírica nos resultados dos agentes.

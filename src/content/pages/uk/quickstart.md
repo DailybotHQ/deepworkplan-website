@@ -1,7 +1,7 @@
 ---
 title: "Швидкий старт — Deep Work Plan"
 description: "Виконуваний промт онбордингу для AI-агентів: прийняти Deep Work Plan у будь-якому репозиторії — проаналізувати, задокументувати, встановити скіл і лишити його пілотовним агентами."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 Ви — AI-агент програмування. Спершу прочитайте весь цей промт, потім зробіть поточний репозиторій
@@ -118,6 +118,8 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 роутер і дев'ять суб-скілів: `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author` та `upgrade`.
 
+Встановлений реліз скіла: **6.0.1**. Поточний пакет 6.x за замовчуванням створює нові плани у форматі v6. Наявні плани зберігають зафіксоване покоління; перенесення плану v5 на v6 потребує явної міграції з попереднім переглядом.
+
 Стандарт навмисно пропорційний, і ця пропорційність є властивістю плану, а не
 дисципліни розробника. План буває або **Lite** — записи завдань інлайн у README
 плану, для невеликої обмеженої роботи, — або **Full**, один файл на завдання, для
@@ -135,7 +137,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 Покоління схеми залишається прив’язаним до кожного плану. Плани v5 і далі
 використовують `state.json` за схемою
-https://deepworkplan.com/schema/plan-state/v5.json. Плани, явно створені у v6,
+https://deepworkplan.com/schema/plan-state/v5.json. Плани, що створюються за замовчуванням у v6 поточним пакетом 6.x,
 використовують https://deepworkplan.com/schema/plan-manifest/v6.json для
 `manifest.json`; їхня активна проєкція — знімок за схемою
 https://deepworkplan.com/schema/plan-snapshot/v6.json. `plan-state/v6.json` не

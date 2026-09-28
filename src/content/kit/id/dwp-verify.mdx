@@ -35,6 +35,8 @@ Periksa konformansi repositori dan rencana secara objektif — read-only.
 3. Laporkan **CONFORMANT** atau **NOT CONFORMANT** dengan setiap kegagalan tercantum.
 4. Tawarkan untuk menangkap kesenjangan sebagai Deep Work Plan; jangan pernah memperbaiki secara diam-diam.
 
+**Validasi rencana per generasi.** Pemeriksa provenance repositori menerima standar DWP 6.0.0 saat ini, tetapi pemeriksaan rencana tetap spesifik per generasi. Rencana v6 dikenali dari pointer contract, `contract.json`, atau rantai revisi `contracts/`, lalu diperiksa menggunakan validator contract, journal, dan ledger v6. Pemeriksa `plan_contract.py` yang dipertahankan hanya mendukung v5 dan TIDAK BOLEH dijalankan sebagai validator rencana v6. Pada v6, `state.json` adalah proyeksi snapshot yang dihasilkan; ketidaksesuaian dengan journal menjadi temuan. Kedua generasi dapat berdampingan dan verifikasi tidak memigrasikan keduanya.
+
 ## Alias
 
 - `dwp:verify`

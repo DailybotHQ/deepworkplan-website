@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Deep Work Plan spesifikasyonu
 
-**Güncel standart: v6.** Aşağıdaki belgeler korunan temeldir; v6 sözleşme, yalnızca eklemeli günlük, görev bağlamı, kaynak denetimleri ve yaşam döngüsü kuralları ekler. [v6 manifestosu](https://deepworkplan.com/schema/plan-manifest/v6.json) ve [v6 anlık görüntüsü](https://deepworkplan.com/schema/plan-snapshot/v6.json). Mevcut v5 planları kendi kurallarını korur.
+**Güncel standart: v6.** Aşağıdaki belgeler korunan temeldir; v6 sözleşme, yalnızca eklemeli günlük, görev bağlamı, kaynak denetimleri ve yaşam döngüsü kuralları ekler. [v6 manifestosu](https://deepworkplan.com/schema/plan-manifest/v6.json) ve [v6 anlık görüntüsü](https://deepworkplan.com/schema/plan-snapshot/v6.json). Mevcut v5 planları kendi kurallarını korur. Güncel 6.x paketi yeni planları varsayılan olarak v6 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek gerektirir.
 
 Spesifikasyon, metodolojinin kesin, okunabilir tanımıdır — insanların ve ajanların paylaştığı yapılar ve protokoller. Normatif RFC-2119 terimleriyle, spec odaklı bir planın nasıl yapılandırıldığını ve bir ajanın ona karşı nasıl çalışması gerektiğini belirtir: plan doğruluk kaynağıdır, doğrulama kapıları ikilidir ve depo, bir ajanın ihtiyaç duyduğu harness'ı kendisi taşır. Sıralı belgeler hâlinde düzenlenmiştir:
 

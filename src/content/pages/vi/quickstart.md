@@ -1,7 +1,7 @@
 ---
 title: "Bắt đầu nhanh — Deep Work Plan"
 description: "Lời nhắc khởi tạo thực thi được cho agent AI: áp dụng Deep Work Plan trong mọi repository — phân tích, lập tài liệu, cài skill, để repo điều khiển được bằng agent."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 Bạn là một agent lập trình AI. Hãy đọc toàn bộ lời nhắc này trước, rồi biến repository hiện tại thành
@@ -127,6 +127,8 @@ bản skill Deep Work Plan đã cài ở trên. Gói skill hiện tại bao gồ
 và chín sub-skill: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` và `upgrade`.
 
+Phiên bản skill đã cài: **6.0.1**. Gói 6.x hiện tại mặc định tạo kế hoạch mới bằng v6. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; chuyển kế hoạch v5 sang v6 cần yêu cầu di chuyển rõ ràng và xem trước.
+
 Tiêu chuẩn này được thiết kế có chủ đích theo tỷ lệ, và biến sự tỷ lệ đó thành
 một thuộc tính của kế hoạch chứ không phải kỷ luật của nhà phát triển. Một kế
 hoạch hoặc là **Lite** — các bản ghi tác vụ nằm trực tiếp trong README của kế
@@ -146,7 +148,7 @@ những người tiêu dùng nào bị ảnh hưởng, tiêu chí chấp nhận,
 
 Phiên bản schema luôn gắn với từng kế hoạch. Kế hoạch v5 tiếp tục dùng
 `state.json` theo schema https://deepworkplan.com/schema/plan-state/v5.json.
-Kế hoạch được tạo rõ ràng theo v6 dùng
+Kế hoạch mới được gói 6.x hiện tại tạo mặc định theo v6 dùng
 https://deepworkplan.com/schema/plan-manifest/v6.json cho `manifest.json`;
 projection trực tiếp là snapshot tại
 https://deepworkplan.com/schema/plan-snapshot/v6.json. Không có

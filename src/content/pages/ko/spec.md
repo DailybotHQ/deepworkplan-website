@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Deep Work Plan 스펙
 
-**현재 표준: v6.** 아래 문서는 유지되는 기본 사양입니다. v6는 계약, 추가 전용 저널, 작업별 컨텍스트, 리소스 제어 및 수명 주기 규칙을 더합니다. [v6 manifest](https://deepworkplan.com/schema/plan-manifest/v6.json)와 [v6 snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json). 기존 v5 계획은 기록된 규칙을 유지합니다.
+**현재 표준: v6.** 아래 문서는 유지되는 기본 사양입니다. v6는 계약, 추가 전용 저널, 작업별 컨텍스트, 리소스 제어 및 수명 주기 규칙을 더합니다. [v6 manifest](https://deepworkplan.com/schema/plan-manifest/v6.json)와 [v6 snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json). 기존 v5 계획은 기록된 규칙을 유지합니다. 현재 6.x 팩은 새 계획을 기본적으로 v6으로 생성합니다. 기존 계획은 기록된 세대를 유지하며, 마이그레이션에는 명시적 요청이 필요합니다.
 
 스펙은 방법론의 정밀하고 읽기 쉬운 정의입니다 — 사람과 에이전트가 공유하는 구조와 프로토콜입니다. 규범적 RFC-2119 용어로, 스펙 주도 계획이 어떻게 구조화되고 에이전트가 그것에 어떻게 맞춰 실행해야 하는지를 명시합니다: 계획이 진실 공급원이고, 검증 게이트는 이진(binary)이며, 리포지토리 자체가 에이전트에 필요한 하니스를 담습니다. 순서가 있는 문서들로 구성됩니다.
 

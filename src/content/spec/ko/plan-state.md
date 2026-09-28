@@ -8,6 +8,8 @@ section: State
 
 # 계획 상태
 
+> **버전 범위:** 이 문서는 보존된 v5.0.0 기반 문서입니다. 현재 v6 표준은 [사양 색인](/spec)에 나열된 해당 `V6_*.md` 확장도 요구합니다. 기존 v5 계획은 기록된 규칙을 유지합니다.
+
 **현재 표준: v6.** 아래 문서는 유지되는 기본 사양입니다. v6는 계약, 추가 전용 저널, 작업별 컨텍스트, 리소스 제어 및 수명 주기 규칙을 더합니다. [v6 manifest](https://deepworkplan.com/schema/plan-manifest/v6.json)와 [v6 snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json). 기존 v5 계획은 기록된 규칙을 유지합니다. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
 
 **버전 5.0.0. 상태: 안정(Stable).** 이 문서는 Deep Work Plan 방법론의 기계 가독 계획 상태 레이어를 명시하며, 이제 DWP 표준 자체의 버전과 맞춰져 있습니다 — 이 재번호 매기기로 인해 기존 요건이 약화되는 일은 없습니다. 이번 개정은 또한 보호된 상태 업데이터, 검증된 계획 발행, 그리고 완료된 계획이 충족해야 하는 증거-진실 규칙(아래 참고)을 문서화합니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.

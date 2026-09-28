@@ -8,6 +8,8 @@ section: Workflow
 
 # Lite 计划
 
+> **版本范围：** 本文档是保留的 v5.0.0 基础文档。当前 v6 标准还要求遵循[规范索引](/spec)中适用的 `V6_*.md` 扩展。现有 v5 计划保留其记录的规则。
+
 **版本 5.0.0。状态：稳定。** 本文档规定了与 [DWP 规范](/spec/dwp-specification) 一同引入的 Lite 计划形态：一种面向中小规模、边界清晰工作的计划格式，直接物化，不设不可执行的草案阶段。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
 ## 形态与生命周期

@@ -1,7 +1,7 @@
 ---
 title: "クイックスタート — Deep Work Plan"
 description: "AIエージェントのための実行可能なオンボーディングプロンプト。あらゆるリポジトリで Deep Work Plan を採用し、分析し、文書化し、スキルをインストールし、操縦できる状態に残す。"
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 あなたはAIコーディングエージェントです。まずこのプロンプト全体を読み、その後、Deep Work Plan（DWP）方法論を採用することで、現在のリポジトリを **AI-first**、**仕様駆動**、**エージェントが操縦できる**ものにしてください。これを手早い編集ではなく、構造化されたエンジニアリング作業、すなわち Deep Work Plan として扱ってください。
@@ -86,6 +86,8 @@ Work Plan スキルのリリースによって実装されています。現在�
 ルーターと九つのサブスキル — `create`、`execute`、`refine`、`resume`、
 `status`、`verify`、`onboard`、`author`、`upgrade` — が含まれます。
 
+インストール済みスキルのリリースは **6.0.1** です。現在の 6.x パックは新しい計画を既定で v6 として作成します。既存の計画は記録された世代を維持し、v5 計画の v6 への移行には明示的な依頼と事前確認が必要です。
+
 この標準は意図的に比例的であり、その比例性を開発者の規律ではなく計画の性質
 にしています。計画は **Lite**（小さく限定された作業向けに、計画の README
 内にインラインでタスク記録を持つ）か、**Full**（長期にわたる作業向けに、
@@ -102,7 +104,7 @@ Full 計画では、リポジトリが恒久的な実行面です。計画には
 択された検証ゲートが含まれます。v6 では、作成時に identity manifest、contract、承認イベントの順に記録します。追記専用ジャーナルが実行を記録し、`state.json` はそのジャーナルから生成されるスナップショットです。中断後も各段階から復旧できます。
 
 スキーマ世代は各計画に紐づきます。v5 計画は `state.json` に
-https://deepworkplan.com/schema/plan-state/v5.json を引き続き使用します。明示的に v6 で作成した計画は
+https://deepworkplan.com/schema/plan-state/v5.json を引き続き使用します。現在の 6.x パックが既定で作成する計画は
 `manifest.json` に https://deepworkplan.com/schema/plan-manifest/v6.json
 を使用し、ライブ投影には https://deepworkplan.com/schema/plan-snapshot/v6.json
 のスナップショットを使います。`plan-state/v6.json` はありません。v6 は v5 の state

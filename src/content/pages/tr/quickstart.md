@@ -1,7 +1,7 @@
 ---
 title: "Hızlı başlangıç — Deep Work Plan"
 description: "Yapay zeka ajanları için çalıştırılabilir onboarding istemi: herhangi bir depoda Deep Work Plan’i benimseyin — analiz edin, belgeleyin, skill’i kurun ve depoyu ajan-pilotlanabilir bırakın."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 Siz bir yapay zeka kodlama ajanısınız. Önce bu istemin tamamını okuyun, ardından Deep Work Plan (DWP)
@@ -126,6 +126,8 @@ uygulanan **DWP 6.0.0**'dır. Güncel skill paketi, yönlendirici ile dokuz alt 
 içerir: `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`,
 `author` ve `upgrade`.
 
+Yüklü skill sürümü: **6.0.1**. Güncel 6.x paketi yeni planları varsayılan olarak v6 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; bir v5 planını v6'ya geçirmek açık ve önizlemeli bir geçiş gerektirir.
+
 Standart kasıtlı olarak orantılıdır ve bu orantıyı geliştiricinin disiplininin değil,
 planın bir özelliği hâline getirir. Bir plan ya küçük, sınırlı iş için planın
 README'sinde satır içi görev kayıtları tutan **Lite**'tır ya da uzun soluklu iş için
@@ -143,7 +145,7 @@ içerir. v6’da oluşturma önce kimlik manifestosunu, ardından sözleşmeyi v
 
 Şema nesli her plana bağlı kalır. v5 planları `state.json` için
 https://deepworkplan.com/schema/plan-state/v5.json şemasını kullanmaya devam
-eder. Açıkça v6 ile oluşturulan planlarda `manifest.json` için
+eder. Güncel 6.x paketiyle varsayılan olarak v6 oluşturulan planlarda `manifest.json` için
 https://deepworkplan.com/schema/plan-manifest/v6.json kullanılır; canlı
 görünüm https://deepworkplan.com/schema/plan-snapshot/v6.json adresindeki bir
 anlık görüntüdür. `plan-state/v6.json` yoktur: v6, yeniden adlandırılmış v5

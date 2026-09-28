@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Đặc tả Deep Work Plan
 
-**Tiêu chuẩn hiện tại: v6.** Các tài liệu bên dưới là nền tảng được giữ lại; v6 bổ sung hợp đồng, nhật ký chỉ ghi thêm, ngữ cảnh tác vụ, kiểm soát tài nguyên và quy tắc vòng đời. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) và [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Kế hoạch v5 hiện có vẫn giữ quy tắc đã ghi.
+**Tiêu chuẩn hiện tại: v6.** Các tài liệu bên dưới là nền tảng được giữ lại; v6 bổ sung hợp đồng, nhật ký chỉ ghi thêm, ngữ cảnh tác vụ, kiểm soát tài nguyên và quy tắc vòng đời. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) và [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Kế hoạch v5 hiện có vẫn giữ quy tắc đã ghi. Gói 6.x hiện tại mặc định tạo kế hoạch mới bằng v6. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; di chuyển cần yêu cầu rõ ràng.
 
 Đặc tả là định nghĩa chính xác, rà soát được của phương pháp luận — các cấu trúc và giao thức mà con người và agent chia sẻ. Nó nêu rõ, bằng các thuật ngữ quy phạm RFC-2119, cách một kế hoạch dựa trên đặc tả được cấu trúc và cách một agent phải thực thi dựa trên nó: kế hoạch là nguồn chân lý, các cổng kiểm chứng có tính nhị phân, và chính repository mang theo harness mà một agent cần. Nó được tổ chức thành các tài liệu theo thứ tự:
 

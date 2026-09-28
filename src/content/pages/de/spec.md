@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Deep Work Plan Spezifikation
 
-**Aktueller Standard: v6.** Die folgenden Dokumente bilden die beibehaltene Basis; v6 ergänzt Vertrag, nur anhängbares Journal, Aufgabenkontext, Ressourcenregeln und Lebenszyklus. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) und [Snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Bestehende v5-Pläne behalten ihre Regeln.
+**Aktueller Standard: v6.** Die folgenden Dokumente bilden die beibehaltene Basis; v6 ergänzt Vertrag, nur anhängbares Journal, Aufgabenkontext, Ressourcenregeln und Lebenszyklus. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) und [Snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Bestehende v5-Pläne behalten ihre Regeln. Das aktuelle 6.x-Paket erstellt neue Pläne standardmäßig mit v6. Bestehende Pläne behalten ihre aufgezeichnete Generation; eine Migration erfordert einen ausdrücklichen Auftrag.
 
 Die Spezifikation ist die präzise, lesbare Definition der Methodik — die Strukturen und Protokolle, die Menschen und Agenten teilen. Sie legt in normativen RFC-2119-Begriffen fest, wie ein spec-driven Plan strukturiert ist und wie ein Agent gegen ihn ausführen muss: Der Plan ist die Quelle der Wahrheit, Validierungs-Gates sind binär, und das Repository selbst trägt das Harness, das ein Agent braucht. Sie ist in geordnete Dokumente gegliedert:
 

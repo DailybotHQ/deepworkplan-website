@@ -1,7 +1,7 @@
 ---
 title: "Quickstart — Deep Work Plan"
 description: "The executable onboarding prompt for AI agents: adopt Deep Work Plan in any repository — analyze, document, install the skill, and leave it agent-pilotable."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 You are an AI coding agent. Read this entire prompt first, then make the current repository
@@ -124,9 +124,11 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 ### Current standard and execution model
 
 The current repository-facing standard is **DWP 6.0.0**, implemented by the
-Deep Work Plan skill release installed above. The current skill pack includes
-the router and nine sub-skills: `create`, `execute`, `refine`, `resume`,
-`status`, `verify`, `onboard`, `author`, and `upgrade`.
+Deep Work Plan skill release **6.0.1** installed above. The current skill pack
+includes the router and nine sub-skills: `create`, `execute`, `refine`,
+`resume`, `status`, `verify`, `onboard`, `author`, and `upgrade`.
+
+The current 6.x pack creates new plans with v6 by default. Existing plans retain their recorded generation; moving a v5 plan to v6 requires an explicit, previewed migration.
 
 The standard is deliberately proportional, and it makes that proportion a
 property of the plan rather than of the developer's discipline. A plan is

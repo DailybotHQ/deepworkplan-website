@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Deep Work Plan の仕様
 
-**現在の標準: v6。** 以下の文書は保持された基礎仕様です。v6 は契約、追記専用ジャーナル、タスクごとのコンテキスト、リソース制御、ライフサイクル規則を追加します。[v6 manifest](https://deepworkplan.com/schema/plan-manifest/v6.json) と [v6 snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json)。既存の v5 計画は記録された規則を維持します。
+**現在の標準: v6。** 以下の文書は保持された基礎仕様です。v6 は契約、追記専用ジャーナル、タスクごとのコンテキスト、リソース制御、ライフサイクル規則を追加します。[v6 manifest](https://deepworkplan.com/schema/plan-manifest/v6.json) と [v6 snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json)。既存の v5 計画は記録された規則を維持します。 現在の 6.x パックは新しい計画を既定で v6 として作成します。既存の計画は記録された世代を維持し、移行には明示的な依頼が必要です。
 
 仕様は、この方法論の正確で読みやすい定義であり、人とエージェントが共有する構造とプロトコルです。規範的な RFC 2119 の用語で、仕様駆動の計画がどう構造化され、エージェントがそれに照らしてどう実行しなければならないかを述べます。すなわち、計画が信頼できる情報源であり、検証ゲートは二値であり、リポジトリそのものがエージェントの必要とするハーネスを携えます。順序づけられた文書として構成されています。
 

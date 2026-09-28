@@ -1,7 +1,7 @@
 ---
 title: "Quickstart — Deep Work Plan"
 description: "พรอมต์การออนบอร์ดที่ดำเนินการได้สำหรับเอเจนต์ AI: นำ Deep Work Plan มาใช้ในทุก repository — วิเคราะห์ จัดทำเอกสาร ติดตั้ง skill และทำให้เอเจนต์ขับเคลื่อนได้"
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 คุณคือเอเจนต์เขียนโค้ด AI อ่านพรอมต์นี้ทั้งหมดก่อน จากนั้นทำให้ repository ปัจจุบันเป็น
@@ -117,6 +117,8 @@ skill Deep Work Plan ที่ติดตั้งไว้ข้างต้�
 และ sub-skill เก้าตัว ได้แก่ `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author` และ `upgrade`
 
+รุ่น skill ที่ติดตั้งคือ **6.0.1** แพ็ก 6.x ปัจจุบันสร้างแผนใหม่ด้วย v6 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายแผน v5 ไป v6 ต้องมีคำขออย่างชัดเจนและดูตัวอย่างก่อน
+
 มาตรฐานนี้ถูกออกแบบให้ได้สัดส่วนโดยเจตนา และทำให้สัดส่วนนั้นเป็นคุณสมบัติของ
 แผน ไม่ใช่วินัยของผู้พัฒนา แผนหนึ่งเป็นได้ทั้ง **Lite** — บันทึกงานแบบ inline
 อยู่ใน README ของแผน สำหรับงานเล็กและมีขอบเขตจำกัด — หรือ **Full** หนึ่งไฟล์
@@ -133,8 +135,7 @@ promote` เมื่อบันทึกแบบกระชับไม่�
 ทดสอบที่บันทึกไว้ของ repository ใน v6 การสร้างแผนจะเขียน identity manifest ตามด้วยสัญญาและเหตุการณ์อนุมัติ journal แบบเพิ่มข้อมูลอย่างเดียวจะบันทึกการดำเนินงาน ส่วน `state.json` เป็น snapshot ที่สร้างจาก journal และแต่ละขั้นตอนสามารถกู้คืนได้หลังการขัดจังหวะ
 
 รุ่นสคีมายังคงผูกกับแต่ละแผน แผน v5 ใช้ `state.json` ตามสคีมา
-https://deepworkplan.com/schema/plan-state/v5.json ต่อไป แผนที่สร้างภายใต้ v6
-อย่างชัดเจนใช้ https://deepworkplan.com/schema/plan-manifest/v6.json สำหรับ
+https://deepworkplan.com/schema/plan-state/v5.json ต่อไป แผนใหม่ที่แพ็ก 6.x ปัจจุบันสร้างด้วย v6 เป็นค่าเริ่มต้นใช้ https://deepworkplan.com/schema/plan-manifest/v6.json สำหรับ
 `manifest.json`; live projection เป็น snapshot ตาม
 https://deepworkplan.com/schema/plan-snapshot/v6.json ไม่มี
 `plan-state/v6.json`: v6 ใช้ snapshot ไม่ใช่สคีมาสถานะ v5 ที่เปลี่ยนชื่อ

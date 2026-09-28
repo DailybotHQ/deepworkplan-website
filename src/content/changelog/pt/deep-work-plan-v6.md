@@ -29,3 +29,5 @@ O conjunto de esquemas v6 define o manifesto de identidade, o contrato de result
 A decisão de arquitetura é GO: v6 mantém a mesma metodologia com estrutura de engenharia mais rigorosa. Isso não é uma afirmação de superioridade empírica. A não inferioridade dos resultados dos agentes não foi medida.
 
 Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v6 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.
+
+Versão da skill instalada: **6.0.1**. O pacote 6.x cria novos planos com v6 por padrão. Os planos existentes mantêm a geração registrada; a migração exige uma solicitação explícita com prévia.

@@ -8,6 +8,8 @@ section: State
 
 # Plan durumu
 
+> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel v6 standardı, [şartname dizininde](/spec) listelenen geçerli `V6_*.md` uzantılarını da gerektirir. Mevcut v5 planları kayıtlı kurallarını korur.
+
 **Güncel standart: v6.** Aşağıdaki belgeler korunan temeldir; v6 sözleşme, yalnızca eklemeli günlük, görev bağlamı, kaynak denetimleri ve yaşam döngüsü kuralları ekler. [v6 manifestosu](https://deepworkplan.com/schema/plan-manifest/v6.json) ve [v6 anlık görüntüsü](https://deepworkplan.com/schema/plan-snapshot/v6.json). Mevcut v5 planları kendi kurallarını korur. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
 
 **Sürüm 5.0.0. Durum: Kararlı.** Bu belge, Deep Work Plan metodolojisinin makine tarafından okunabilir plan durum katmanını belirtir; artık DWP standardının kendi sürümüyle hizalıdır — yeniden numaralandırma mevcut hiçbir gereksinimi zayıflatmaz. Bu revizyon ayrıca korumalı durum güncelleyicisini, doğrulanmış plan yayınlamasını ve tamamlanmış bir planın karşılaması gereken kanıt-doğruluğu kurallarını belgeler (aşağıya bakın). MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.

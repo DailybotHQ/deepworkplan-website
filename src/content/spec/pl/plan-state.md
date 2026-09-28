@@ -8,6 +8,8 @@ section: State
 
 # Stan planu
 
+> **Zakres wersji:** To zachowany dokument bazowy v5.0.0. Aktualny standard v6 wymaga również odpowiednich rozszerzeń `V6_*.md` wymienionych w [indeksie specyfikacji](/spec). Istniejące plany v5 zachowują zapisane reguły.
+
 **Aktualny standard: v6.** Poniższe dokumenty są zachowaną podstawą; v6 dodaje kontrakt, dziennik tylko do dopisywania, kontekst zadań, kontrolę zasobów i reguły cyklu życia. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) i [migawka v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Istniejące plany v5 zachowują swoje reguły. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
 
 **Wersja 5.0.0. Status: stabilna.** Niniejszy dokument specyfikuje warstwę stanu planu odczytywalnego maszynowo metodyki Deep Work Plan, teraz dostosowaną do własnego numeru wersji standardu DWP — żadne istniejące wymaganie nie zostaje osłabione przez tę zmianę numeracji. Ta rewizja dokumentuje również strzeżony aktualizator stanu, zweryfikowaną publikację planu oraz zasady prawdziwości dowodów, które musi spełniać ukończony plan (zob. poniżej). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.

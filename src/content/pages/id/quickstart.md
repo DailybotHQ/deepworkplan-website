@@ -1,7 +1,7 @@
 ---
 title: "Mulai Cepat — Deep Work Plan"
 description: "Prompt onboarding yang dapat dieksekusi untuk AI agent: adopsi Deep Work Plan di repositori mana pun — analisis, dokumentasikan, pasang skill, dan jadikan dapat dikemudikan agent."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 Anda adalah sebuah AI coding agent. Baca seluruh prompt ini terlebih dahulu, lalu jadikan repositori saat ini
@@ -128,6 +128,8 @@ oleh rilis skill Deep Work Plan yang dipasang di atas. Paket skill saat ini menc
 router ditambah sembilan sub-skill: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, dan `upgrade`.
 
+Rilis skill yang dipasang: **6.0.1**. Paket 6.x saat ini membuat rencana baru menggunakan v6 secara default. Rencana yang ada mempertahankan generasi tercatat; pemindahan rencana v5 ke v6 memerlukan migrasi eksplisit yang ditinjau sebelumnya.
+
 Standar ini sengaja dibuat proporsional, dan menjadikan proporsi tersebut sebagai
 properti dari rencana, bukan disiplin pengembang. Sebuah rencana adalah **Lite** —
 catatan tugas inline di README rencana, untuk pekerjaan kecil dan terbatas — atau
@@ -146,7 +148,7 @@ yang dipilih dari peta pengujian repositori yang terdokumentasi. Pada v6, pembua
 
 Generasi skema tetap terkait dengan setiap rencana. Rencana v5 mempertahankan
 `state.json` dengan skema https://deepworkplan.com/schema/plan-state/v5.json.
-Rencana yang secara eksplisit dibuat dengan v6 menggunakan
+Rencana baru yang secara default dibuat oleh paket 6.x saat ini menggunakan
 https://deepworkplan.com/schema/plan-manifest/v6.json untuk `manifest.json`;
 proyeksi aktifnya adalah snapshot di
 https://deepworkplan.com/schema/plan-snapshot/v6.json. Tidak ada

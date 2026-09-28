@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Specifica Deep Work Plan
 
-**Standard attuale: v6.** I documenti seguenti sono la base conservata; v6 aggiunge contratto, journal append-only, contesto per task, controlli delle risorse e regole del ciclo di vita. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) e [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). I piani v5 esistenti mantengono le proprie regole.
+**Standard attuale: v6.** I documenti seguenti sono la base conservata; v6 aggiunge contratto, journal append-only, contesto per task, controlli delle risorse e regole del ciclo di vita. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) e [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). I piani v5 esistenti mantengono le proprie regole. Il pacchetto 6.x attuale crea per impostazione predefinita i nuovi piani in v6. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita.
 
 La specifica è la definizione precisa e leggibile della metodologia — le strutture e i protocolli condivisi da persone e agenti. Stabilisce, in termini normativi RFC-2119, come è strutturato un piano spec-driven e come un agente deve eseguire rispetto a esso: il piano è la fonte di verità, i validation gate sono binari e il repository stesso porta con sé la harness di cui un agente ha bisogno. È organizzata in documenti ordinati:
 

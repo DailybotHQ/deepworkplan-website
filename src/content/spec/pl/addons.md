@@ -8,6 +8,8 @@ section: Addons
 
 # Dodatki
 
+> **Zakres wersji:** To zachowany dokument bazowy v5.0.0. Aktualny standard v6 wymaga również odpowiednich rozszerzeń `V6_*.md` wymienionych w [indeksie specyfikacji](/spec). Istniejące plany v5 zachowują zapisane reguły.
+
 **Wersja 2.1.0.** Dodatki to rozszerzenia podstawowej metodyki Deep Work Plan. Cztery z pięciu są opcjonalne i **nigdy nie są wymagane do zgodności** — repozytorium bez opcjonalnych addonów jest w pełni AI-first i zgodne z DWP. Każdy opcjonalny addon jest proponowany podczas onboardingu, wyraźnie akceptowany lub odrzucany, a po akceptacji **uzgadnia** się z istniejącą konfiguracją zamiast ją nadpisywać. Jeden komponent jest zadeklarowanym wyjątkiem: od standardu 2.3.0 **lokalny przegląd AI Diff Reviewer** jest częścią wymaganej linii bazowej — onboarding go instaluje, a każde Final Review go uruchamia — podczas gdy jego powierzchnia CI pozostaje opcjonalna.
 
 ## Kontrakt addonu

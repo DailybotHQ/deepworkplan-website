@@ -1,7 +1,7 @@
 ---
 title: "Schnellstart — Deep Work Plan"
 description: "Der ausführbare Onboarding-Prompt für KI-Agenten: Deep Work Plan in jedem Repository übernehmen — analysieren, dokumentieren, die Skill installieren und es agenten-steuerbar hinterlassen."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 Sie sind ein KI-Coding-Agent. Lesen Sie diesen gesamten Prompt zuerst und machen Sie dann das aktuelle Repository
@@ -110,6 +110,8 @@ installierte Deep Work Plan Skill-Version. Das aktuelle Skill-Paket umfasst den 
 und neun Sub-Skills: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` und `upgrade`.
 
+Installierte Skill-Version: **6.0.1**. Das aktuelle 6.x-Paket erstellt neue Pläne standardmäßig mit v6. Bestehende Pläne behalten ihre aufgezeichnete Generation; die Migration eines v5-Plans zu v6 erfordert einen ausdrücklichen Auftrag mit Vorschau.
+
 Der Standard ist bewusst proportional und macht diese Proportionalität zu einer
 Eigenschaft des Plans, nicht der Disziplin des Entwicklers. Ein Plan ist entweder
 **Lite** — Task-Datensätze inline in der README des Plans, für kleine, abgegrenzte
@@ -128,8 +130,9 @@ das aus der dokumentierten Testkarte des Repositorys ausgewählt wird. In v6 sch
 
 Die Schema-Generation bleibt an den jeweiligen Plan gebunden. v5-Pläne
 behalten `state.json` unter
-https://deepworkplan.com/schema/plan-state/v5.json. Ausdrücklich mit v6
-erstellte Pläne verwenden
+https://deepworkplan.com/schema/plan-state/v5.json. Das aktuelle 6.x-Paket erstellt
+neue Pläne standardmäßig mit v6; bestehende Pläne behalten ihre aufgezeichnete
+Generation und werden nicht stillschweigend migriert. Diese Pläne verwenden
 https://deepworkplan.com/schema/plan-manifest/v6.json für `manifest.json`;
 ihre Live-Projektion ist ein Snapshot unter
 https://deepworkplan.com/schema/plan-snapshot/v6.json. `plan-state/v6.json`

@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Deep Work Plan Specification
 
-**Current standard: v6.** The documents below are the retained base; v6 adds the contract, append-only journal, task context, resource controls, and lifecycle rules. [Read the v6 manifest schema](https://deepworkplan.com/schema/plan-manifest/v6.json) and [live snapshot schema](https://deepworkplan.com/schema/plan-snapshot/v6.json). Existing v5 plans keep their recorded rules.
+**Current standard: v6.** The documents below are the retained base; v6 adds the contract, append-only journal, task context, resource controls, and lifecycle rules. [Read the v6 manifest schema](https://deepworkplan.com/schema/plan-manifest/v6.json) and [live snapshot schema](https://deepworkplan.com/schema/plan-snapshot/v6.json). Existing v5 plans keep their recorded rules. The current 6.x pack creates new plans with v6 by default. Existing plans retain their recorded generation; migration requires an explicit request.
 
 The specification is the precise, readable definition of the methodology — the structures and protocols that humans and agents share. It states, in normative RFC-2119 terms, how a spec-driven plan is structured and how an agent must execute against it: the plan is the source of truth, validation gates are binary, and the repository itself carries the harness an agent needs. It is organized into ordered documents:
 

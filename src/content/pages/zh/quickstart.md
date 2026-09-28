@@ -1,7 +1,7 @@
 ---
 title: "快速开始 — Deep Work Plan"
 description: "面向 AI 代理的可执行接入提示：在任意代码仓库中采纳 Deep Work Plan——分析、记录、安装技能，并让其变得可被代理驾驭。"
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 你是一个 AI 编码代理。请先完整阅读本提示，然后通过采纳 Deep Work Plan（DWP）方法论，让当前代码仓库变得
@@ -103,6 +103,8 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 当前技能包包含路由器和九个子技能：`create`、`execute`、`refine`、`resume`、
 `status`、`verify`、`onboard`、`author` 和 `upgrade`。
 
+已安装的技能版本：**6.0.1**。当前 6.x 技能包默认使用 v6 创建新计划。现有计划保留记录的代际；将 v5 计划迁移到 v6 需要明确请求并先行预览。
+
 该标准刻意保持比例性，并将这种比例性变成计划本身的属性，而不是开发者自律的
 结果。一份计划要么是 **Lite**——任务记录以内联形式存放在计划的 README
 中，适用于小型、有界的工作——要么是 **Full**，每个任务一个文件，适用于长期
@@ -116,7 +118,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 选出的验证关卡。在 v6 中，创建流程依次写入身份清单、契约和批准事件。仅追加的日志记录执行过程；`state.json` 是从日志生成的快照。每个步骤在中断后都可以恢复。
 
 架构代际与每个计划绑定。v5 计划继续使用 https://deepworkplan.com/schema/plan-state/v5.json 作为
-`state.json` 的架构。明确以 v6 创建的计划使用
+`state.json` 的架构。当前 6.x 技能包默认创建的新计划使用
 https://deepworkplan.com/schema/plan-manifest/v6.json 作为 `manifest.json`
 架构；其实时投影是 https://deepworkplan.com/schema/plan-snapshot/v6.json 中定义的快照。不存在
 `plan-state/v6.json`：v6 使用快照，而不是改名后的 v5 状态架构。现有计划保留记录的代际，绝不会被重写。v6 保留 v5

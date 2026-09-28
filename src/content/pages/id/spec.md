@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Spesifikasi Deep Work Plan
 
-**Standar saat ini: v6.** Dokumen di bawah adalah dasar yang dipertahankan; v6 menambahkan kontrak, jurnal khusus tambah, konteks per tugas, kontrol sumber daya, dan aturan siklus hidup. [Manifes v6](https://deepworkplan.com/schema/plan-manifest/v6.json) dan [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Rencana v5 yang ada tetap memakai aturan aslinya.
+**Standar saat ini: v6.** Dokumen di bawah adalah dasar yang dipertahankan; v6 menambahkan kontrak, jurnal khusus tambah, konteks per tugas, kontrol sumber daya, dan aturan siklus hidup. [Manifes v6](https://deepworkplan.com/schema/plan-manifest/v6.json) dan [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Rencana v5 yang ada tetap memakai aturan aslinya. Paket 6.x saat ini membuat rencana baru menggunakan v6 secara default. Rencana yang ada mempertahankan generasi tercatat; migrasi memerlukan permintaan eksplisit.
 
 Spesifikasi adalah definisi metodologi yang presisi dan mudah dibaca — struktur dan protokol yang dibagikan antara manusia dan agent. Ia menyatakan, dalam istilah normatif RFC-2119, bagaimana sebuah rencana spec-driven distrukturkan dan bagaimana agent harus mengeksekusi terhadapnya: rencana adalah sumber kebenaran, validation gate bersifat biner, dan repositori itu sendiri membawa harness yang dibutuhkan agent. Ia disusun ke dalam dokumen-dokumen berurutan:
 

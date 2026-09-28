@@ -8,6 +8,8 @@ section: Addons
 
 # Complementos
 
+> **Alcance de versión:** Este documento es una base v5.0.0 conservada. El estándar v6 actual también exige las extensiones `V6_*.md` aplicables que aparecen en el [índice de la especificación](/spec). Los planes v5 existentes conservan sus reglas registradas.
+
 **Versión 2.1.0.** Los complementos son extensiones de la metodología central de Deep Work Plan. Cuatro de los cinco son opcionales y **nunca obligatorios para el cumplimiento** — un repositorio sin addons opcionales es plenamente AI-first y conforme con DWP. Cada addon opcional se ofrece durante la incorporación, se acepta o rechaza explícitamente y — cuando se acepta — **reconcilia** con la configuración existente en lugar de sobrescribirla. Un componente es la excepción declarada: desde el estándar 2.3.0 la **revisión local de AI Diff Reviewer** es parte de la línea base requerida — el onboarding la instala y cada Final Review la ejecuta — mientras que su superficie de CI sigue siendo opcional.
 
 ## El contrato de addon

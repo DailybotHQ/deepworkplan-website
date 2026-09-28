@@ -1,7 +1,7 @@
 ---
 title: "Szybki start — Deep Work Plan"
 description: "Wykonywalny prompt onboardingowy dla agentów AI: przyjmij Deep Work Plan w dowolnym repozytorium — przeanalizuj, udokumentuj, zainstaluj skill i uczyń je sterowalnym."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 Jesteś agentem kodującym AI. Najpierw przeczytaj cały ten prompt, a następnie uczyń bieżące repozytorium
@@ -118,6 +118,8 @@ zainstalowaną powyżej wersję skilla Deep Work Plan. Aktualny pakiet skilla ob
 router oraz dziewięć pod-skilli: `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author` i `upgrade`.
 
+Zainstalowana wersja skilla: **6.0.1**. Aktualny pakiet 6.x domyślnie tworzy nowe plany w v6. Istniejące plany zachowują zapisaną generację; przeniesienie planu v5 do v6 wymaga jawnej migracji z podglądem.
+
 Standard jest celowo proporcjonalny i czyni tę proporcjonalność właściwością planu,
 a nie dyscypliny dewelopera. Plan jest albo **Lite** — rekordy zadań inline w README
 planu, dla małej, ograniczonej pracy — albo **Full**, jeden plik na zadanie, dla
@@ -135,8 +137,7 @@ udokumentowanej mapy testów repozytorium. W v6 tworzenie zapisuje manifest toż
 
 Generacja schematu pozostaje przypisana do każdego planu. Plany v5 nadal
 używają `state.json` zgodnie ze schematem
-https://deepworkplan.com/schema/plan-state/v5.json. Plany jawnie tworzone w v6
-używają https://deepworkplan.com/schema/plan-manifest/v6.json dla
+https://deepworkplan.com/schema/plan-state/v5.json. Plany tworzone domyślnie w v6 przez aktualny pakiet 6.x używają https://deepworkplan.com/schema/plan-manifest/v6.json dla
 `manifest.json`, a ich aktywną projekcją jest migawka ze schematu
 https://deepworkplan.com/schema/plan-snapshot/v6.json. `plan-state/v6.json`
 nie istnieje: v6 używa migawki, a nie przemianowanego schematu stanu v5.

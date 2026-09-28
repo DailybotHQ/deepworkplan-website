@@ -8,6 +8,8 @@ section: State
 
 # Plan-Zustand
 
+> **Versionsumfang:** Dies ist ein beibehaltenes v5.0.0-Basisdokument. Der aktuelle v6-Standard verlangt zusätzlich die zutreffenden `V6_*.md`-Erweiterungen aus dem [Spezifikationsindex](/spec). Bestehende v5-Pläne behalten ihre aufgezeichneten Regeln.
+
 **Aktueller Standard: v6.** Die folgenden Dokumente bilden die beibehaltene Basis; v6 ergänzt Vertrag, nur anhängbares Journal, Aufgabenkontext, Ressourcenregeln und Lebenszyklus. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) und [Snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Bestehende v5-Pläne behalten ihre Regeln. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
 
 **Version 5.0.0. Status: Stabil.** Dieses Dokument spezifiziert die maschinenlesbare Plan-Zustandsschicht der Deep Work Plan Methodik, nun an die eigene Version des DWP-Standards angeglichen — keine bestehende Anforderung wird durch die Neunummerierung abgeschwächt. Diese Revision dokumentiert außerdem den abgesicherten Zustands-Updater, die verifizierte Plan-Veröffentlichung und die Nachweis-Wahrheitsregeln, die ein abgeschlossener Plan erfüllen muss (siehe unten). Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.

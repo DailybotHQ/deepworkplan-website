@@ -1,7 +1,7 @@
 ---
 title: "빠른 시작 — Deep Work Plan"
 description: "AI 에이전트를 위한 실행 가능한 온보딩 프롬프트: 어떤 리포지토리에든 Deep Work Plan을 채택합니다 — 분석하고, 문서화하고, 스킬을 설치하고, 에이전트가 조종 가능하게 남깁니다."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 당신은 AI 코딩 에이전트입니다. 먼저 이 프롬프트 전체를 읽은 뒤, Deep Work Plan(DWP)
@@ -117,6 +117,8 @@ Plan 스킬 릴리스로 구현됩니다. 현재 스킬 팩에는 라우터와 �
 하위 스킬이 포함됩니다: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, `upgrade`.
 
+설치된 skill 릴리스: **6.0.1**. 현재 6.x 팩은 새 계획을 기본적으로 v6으로 생성합니다. 기존 계획은 기록된 세대를 유지하며, v5 계획을 v6으로 옮기려면 명시적 요청과 미리보기가 필요합니다.
+
 이 표준은 의도적으로 비례적이며, 그 비례성을 개발자의 규율이 아니라
 계획의 속성으로 만듭니다. 계획은 작고 한정된 작업을 위해 계획의
 README에 인라인으로 작업 기록을 두는 **Lite**이거나, 장기간의 작업을
@@ -133,8 +135,7 @@ Full 계획에서는 리포지토리가 지속적인 실행 표면이 됩니다.
 선택된 검증 게이트가 포함됩니다. v6에서는 계획 생성 시 identity manifest, 계약, 승인 이벤트 순서로 기록합니다. 추가 전용 저널이 실행을 기록하고 `state.json`은 그 저널에서 생성된 스냅샷입니다. 중단 후 각 단계를 복구할 수 있습니다.
 
 스키마 세대는 각 계획에 연결됩니다. v5 계획은 `state.json`에
-https://deepworkplan.com/schema/plan-state/v5.json 을 계속 사용합니다. 명시적으로 v6으로 생성된
-계획은 `manifest.json`에 https://deepworkplan.com/schema/plan-manifest/v6.json 을
+https://deepworkplan.com/schema/plan-state/v5.json 은 v5 계획에 계속 적용됩니다. 현재 6.x 팩은 새 계획을 기본적으로 v6으로 생성하며, 이때 `manifest.json`에 https://deepworkplan.com/schema/plan-manifest/v6.json 을
 사용하며, 라이브 프로젝션은 https://deepworkplan.com/schema/plan-snapshot/v6.json 의
 스냅샷입니다. `plan-state/v6.json`은 없습니다. v6은 이름만 바꾼 v5 상태 스키마가 아니라 스냅샷을 사용합니다. 기존
 계획은 기록된 세대를 유지하며 다시 작성되지 않습니다. v6은 v5 방법론을 더 엄격한 구조로 유지합니다. 에이전트 결과의 비열등성은

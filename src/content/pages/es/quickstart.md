@@ -1,7 +1,7 @@
 ---
 title: "Inicio rápido — Deep Work Plan"
 description: "El prompt de incorporación ejecutable: adopta Deep Work Plan en cualquier repositorio — analiza, documenta, instala el skill y déjalo pilotable por IA."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 Eres un agente de programación de IA. Lee primero todo este prompt y luego haz que el repositorio
@@ -124,6 +124,8 @@ la versión del skill de Deep Work Plan instalada arriba. El paquete actual del
 skill incluye el enrutador y nueve sub-skills: `create`, `execute`, `refine`,
 `resume`, `status`, `verify`, `onboard`, `author` y `upgrade`.
 
+Versión instalada del skill: **6.0.1**. El paquete 6.x actual crea planes nuevos con v6 de forma predeterminada. Los planes existentes conservan su generación registrada; pasar un plan v5 a v6 requiere una migración explícita y con vista previa.
+
 El estándar es deliberadamente proporcional, y convierte esa proporción en una
 propiedad del plan, no de la disciplina del desarrollador. Un plan es **Lite**
 — registros de tarea en línea en el README del plan — o **Full**, un archivo
@@ -143,7 +145,7 @@ repositorio. En v6, la creación escribe el manifiesto de identidad, luego el co
 
 La generación del esquema queda asociada a cada plan. Los planes v5 conservan
 `state.json` bajo https://deepworkplan.com/schema/plan-state/v5.json. Los
-planes creados explícitamente con v6 usan
+planes nuevos del paquete actual 6.x usan v6 de forma predeterminada y usan
 https://deepworkplan.com/schema/plan-manifest/v6.json para `manifest.json`; su
 proyección activa es un snapshot en
 https://deepworkplan.com/schema/plan-snapshot/v6.json. No existe
@@ -293,4 +295,3 @@ metodología:
 
 Cualquiera puede ejecutar este prompt en cualquier repositorio — y terminar con una base de código que
 cualquier agente de IA puede pilotar.
-
