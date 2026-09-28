@@ -42,17 +42,53 @@ Three layers, so the file is the single source of truth no matter how you get in
 
 The last layer is why "edit `.env`, then open a new shell" is enough in practice. SSH sessions get nothing from compose on their own: sshd starts from a clean environment and `PermitUserEnvironment` stays off, which is what the PAM mirror is for. Override the path with `DWP_ENV_FILE` if you keep the file elsewhere.
 
-## AI CLIs (installed in the image)
+## AI CLIs (default image vs opt-in)
 
-| CLI | Install method | Command |
-|-----|----------------|---------|
-| Claude Code | Official `curl` installer | `claude` / `claudex` |
-| Codex | pnpm global | `codex` / `codexx` / `codex-azure` / `codex-glm` |
-| Cursor agent | Official `curl` installer | `agent` / `cursorx` |
-| Cline | pnpm global (`corepack pnpm add -g cline`) | `cline` / `clinex` / `clinex-azure` |
-| OpenCode | Official [`curl` installer](https://opencode.ai/) | `opencodex` / `opencodex-azure` / `opencodex-glm` |
-| Pi | pnpm global (`--ignore-scripts @earendil-works/pi-coding-agent`) | `pi` / `pi-azure` / `pi-glm` |
-| Herdr | Official [`curl` installer](https://herdr.dev/) | `herdr` |
+**Always installed:** Herdr (`herdr`), Neovim 0.12.5 + mu-vim `v0.7.0` (`nvim`), Dailybot CLI, GitHub CLI, Z.AI coding-helper.
+
+**Opt-in** (build args, default `false` — only the string `true` installs). Persist them in `docker/local/.env` (gitignored; copied from `.env.example` by `bash dev.sh setup`) so `bash dev.sh rebuild` keeps the CLIs. Compose interpolates that file into the Dockerfile args:
+
+```bash
+# docker/local/.env
+INSTALL_CLAUDE_CLI=true
+INSTALL_CODEX_CLI=true
+```
+
+One-off (does not survive the next rebuild unless `.env` is set):
+
+```bash
+docker compose build \
+  --build-arg INSTALL_CLAUDE_CLI=true \
+  --build-arg INSTALL_CURSOR_CLI=true \
+  --build-arg INSTALL_CODEX_CLI=true \
+  --build-arg INSTALL_PI_CLI=true \
+  --build-arg INSTALL_OPENCODE_CLI=true \
+  --build-arg INSTALL_CLINE_CLI=true \
+  --build-arg INSTALL_GROK_CLI=true
+```
+
+| CLI | Install method | Command | Default |
+|-----|----------------|---------|---------|
+| Herdr | Official [`curl` installer](https://herdr.dev/) | `herdr` | always |
+| mu-vim / nvim | Neovim tarball 0.12.5 + [DailybotHQ/deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) `v0.7.0` | `nvim` | always |
+| Claude Code | Official `curl` installer | `claude` / `claudex` | opt-in |
+| Codex | pnpm global | `codex` / `codexx` | opt-in |
+| Cursor agent | Official `curl` installer | `agent` / `cursorx` | opt-in |
+| Cline | pnpm global | `cline` / `clinex` | opt-in |
+| OpenCode | Official installer | `opencodex` | opt-in |
+| Pi | pnpm global | `pi` / `pi-azure` | opt-in |
+| Grok | Official installer | `grok` | opt-in |
+
+### Herdr mesh (list / ask)
+
+SSH publishes **`127.0.0.1:22022→22`** (override `HERDR_SSH_HOST_PORT`). Peer includes use public names `herdr-peers` / `herdr-workspaces` (legacy `dailybot-peers` still accepted). Inside the container:
+
+```bash
+bash dev.sh agents
+bash dev.sh ask <#> "Prompt..."
+```
+
+Asks append a `[herdr-mesh]` reply grant. Host keys live on the `herdr_data` volume, not in the image.
 
 OpenCode binary: `~/.opencode/bin` (on `PATH`). Config persists via the `opencode_data` volume (`~/.config/opencode`, `~/.local/share/opencode`).
 Cline data, config, and session history persist via the `cline_data` volume mounted at `~/.cline`, with `CLINE_DATA_DIR` pinned to `~/.cline/data`.
@@ -77,15 +113,14 @@ Use [Z.AI GLM Coding Plan](https://docs.z.ai/devpack/quick-start) alongside the 
 
 | Command | Description |
 |---------|-------------|
-| `claude-glm` | Claude Code via Z.AI (`https://api.z.ai/api/anthropic`) |
-| `claudex-glm` | Same, with `--dangerously-skip-permissions` (mirrors `claudex`) |
+| `claude-glm` | Claude Code via Z.AI (`https://api.z.ai/api/anthropic`) with full permissions; `-c` / `-r` passthrough |
 | `opencodex` | OpenCode with full permissions |
 | `opencodex-azure` | OpenCode via Azure OpenAI / Foundry with full permissions |
 | `codex-azure` | Codex via Azure OpenAI / Foundry (`-p azure` profile) with full permissions |
 | `codex-glm` | Codex via Z.AI GLM Coding Plan (`-p glm` profile, Responses `https://api.z.ai/api/v1`) with full permissions |
-| `opencodex-glm` | OpenCode via Z.AI Coding Plan (`zai-coding-plan` / `https://api.z.ai/api/coding/paas/v4`) with the same GLM model env as `claudex-glm` |
+| `opencodex-glm` | OpenCode via Z.AI Coding Plan (`zai-coding-plan` / `https://api.z.ai/api/coding/paas/v4`) with the same GLM model env as `claude-glm` |
 | `pi-azure` | Pi via Azure Foundry (`azure-foundry` custom provider; only daily/reasoning deployments) |
-| `pi-glm` | Pi via Z.AI GLM (`zai-glm` custom provider; same GLM env as `claudex-glm`) |
+| `pi-glm` | Pi via Z.AI GLM (`zai-glm` custom provider; same GLM env as `claude-glm`) |
 | `opencodex-xai` | OpenCode via xAI Grok (`XAI_API_KEY` from console.x.ai) |
 | `cline-xai` | Cline via xAI Grok (openai-compatible `https://api.x.ai/v1`) |
 | `pi-xai` | Pi via xAI Grok (`xai-grok` custom provider) |
@@ -93,7 +128,7 @@ Use [Z.AI GLM Coding Plan](https://docs.z.ai/devpack/quick-start) alongside the 
 | (no `claudex-xai`) | xAI has no Anthropic-compatible endpoint (use `opencode-xai`, `cline-xai`, `codex-xai`, etc.) |
 | `chelper` | Z.AI Coding Tool Helper wizard |
 
-`opencodex-glm` writes the `zai-coding-plan` provider into `~/.config/opencode/opencode.json` from `ZAI_CODING_API_KEY` / `ZAI_DEFAULT_*_MODEL`, whitelists those GLM ids (default `glm-5.3` + `glm-5.3-flash`), declares image modalities for vision attachments, and launches with `--auto`.
+`opencodex-glm` writes the `zai-coding-plan` provider into `~/.config/opencode/opencode.json` from `ZAI_CODING_API_KEY` / `ZAI_DEFAULT_*_MODEL`, whitelists those GLM ids (default `glm-5.3`; set `ZAI_DEFAULT_HAIKU_MODEL=glm-5.3-flash` to add the flash alias), declares image modalities for vision attachments, and launches with `--auto`.
 
 `codex-glm` writes `~/.codex/glm.config.toml` + `~/.codex/glm-models.json` from the same Z.AI env and launches with `codex -p glm`. It uses Z.AI's Codex Responses endpoint (`https://api.z.ai/api/v1`, not the OpenCode Coding Plan URL) and restricts `/model` to the configured GLM ids. See [Z.AI Codex docs](https://docs.z.ai/devpack/tool/codex).
 
