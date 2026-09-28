@@ -6,7 +6,7 @@ version: "v5 · 由测试保证"
 kind: release
 lang: zh
 order: 1
-featured: true
+featured: false
 sourceLabel: "Skill release commit ab1337d"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/commit/ab1337d"
 sourceLinks:

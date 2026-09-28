@@ -33,7 +33,7 @@ Semua artefak DWP berada di bawah direktori `.dwp/` yang di-gitignore di akar re
 ```
 .dwp/
 ├── plans/
-│   └── PLAN_<slug>/
+│   └── PLAN_001_<slug>/
 │       ├── README.md
 │       ├── PROGRESS.md
 │       └── <n>.task_<slug>.md
@@ -60,3 +60,7 @@ Setiap berkas tugas berisi sepuluh bagian ini, secara berurutan. Strukturnya men
 ## Validasi, penyelesaian, dan pelanjutan
 
 Validasi adalah bagian dari tugas, bukan renungan belakangan: setiap tugas menyebutkan perintah atau test yang membuktikannya selesai, dan agent menjalankannya sebelum menandai penyelesaian. Test bersifat kelas satu di sini — sebuah tugas yang menambahkan fungsionalitas baru atau mengubah perilaku harus menambahkan atau memperbarui test otomatis untuk perilaku itu dan menjalankan pemeriksaan kualitas kode lengkap repositori (test ditambah lint dan type-check), bukan sekadar memastikan bahwa build berhasil; test yang ada harus tetap hijau, diperbarui ke perilaku yang dimaksudkan alih-alih dilewati. Keamanan bersifat kelas satu dengan cara yang sama — setiap tugas yang menyentuh autentikasi, penanganan input, secrets, permukaan jaringan, atau dependensi membawa ekspektasi keamanan dari perubahan itu dalam acceptance criteria-nya dan menjaga setiap commit bebas dari secrets, dan setiap rencana ditutup dengan Final Review — pemeriksaan keamanan atas seluruh kumpulan perubahan, validasi lengkap pada status akhir, dan rekonsiliasi keputusan skills. Penyelesaian dicatat dengan penanda status yang eksplisit (`[ ]` belum dimulai, `[~]` sedang berjalan, `[x]` selesai, `[!]` terhambat) di bagian Completion & Log. Pelanjutan bersandar pada penanda ini dan log kemajuan — sebuah agent dapat merekonstruksi persis di mana rencana berhenti dan melanjutkan dari tugas pertama yang belum selesai tanpa mengulang pekerjaan yang telah rampung.
+
+## v6: metodologi yang sama, struktur lebih ketat
+
+v6 mempertahankan metodologi rencana → tugas → gerbang validasi → penyelesaian, perintah slash, dan lokasi `.dwp/plans/` yang sama. Struktur rekayasanya diperketat dengan kontrak, jurnal, manifest konteks per tugas, penjadwal, dan penolakan daftar izin kosong. Keputusan arsitektur adalah GO; non-inferioritas empiris hasil agen belum diukur.

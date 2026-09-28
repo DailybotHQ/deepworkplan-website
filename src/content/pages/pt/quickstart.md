@@ -115,7 +115,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Padrão atual e modelo de execução
 
-O padrão atual voltado ao repositório é o **DWP 5.0.0**, implementado pela
+O padrão atual voltado ao repositório é o **DWP 6.0.0**, implementado pela
 versão da skill Deep Work Plan instalada acima. O pacote atual da skill
 inclui o roteador e nove sub-skills: `create`, `execute`, `refine`,
 `resume`, `status`, `verify`, `onboard`, `author` e `upgrade`.
@@ -135,13 +135,22 @@ compactos deixam de carregar um requisito ou um gate.
 Para um plano Full, o repositório é a superfície de execução duradoura. O
 plano contém tarefas atômicas, uma **Superfície tocada** que explica o que
 mudou e quais consumidores são afetados, critérios de aceitação e um gate
-de validação selecionado do mapa de testes documentado do repositório. Um
-plano novo escreve primeiro seu manifesto de identidade, registra sua
-análise, cria a lista de tarefas e só então ativa o estado ao vivo por
-último, de modo que uma criação interrompida possa ser recuperada em vez
-de adivinhada. Quando a camada de estado está presente, `manifest.json`
-descreve o plano e `state.json` registra checkpoints, status das tarefas,
-resultados dos gates e bloqueios.
+de validação selecionado do mapa de testes documentado do repositório. Na v6, a criação escreve o manifesto de identidade, depois o contrato e o evento de aprovação. O diário somente de acréscimo registra a execução; `state.json` é um snapshot derivado desse diário. Cada etapa pode ser recuperada após uma interrupção.
+
+A geração do esquema permanece vinculada a cada plano. Planos v5 mantêm
+`state.json` sob https://deepworkplan.com/schema/plan-state/v5.json. Planos
+criados explicitamente com v6 usam
+https://deepworkplan.com/schema/plan-manifest/v6.json para `manifest.json`;
+sua projeção ativa é um snapshot em
+https://deepworkplan.com/schema/plan-snapshot/v6.json. Não existe
+`plan-state/v6.json`: v6 usa um snapshot, não um esquema de estado v5
+renomeado. Planos existentes mantêm a geração registrada e nunca são
+reescritos. v6 mantém a metodologia v5 com uma estrutura mais rigorosa; a não
+inferioridade dos resultados dos agentes não foi medida.
+
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
 
 Todo plano tem uma tarefa de encerramento obrigatória: o **Final Review**.
 Ele executa o passo de segurança sobre o conjunto de mudanças acumulado,
@@ -190,7 +199,9 @@ metodologia) em vez de sobrescrever — e confirme com o usuário antes de subst
  (skills, agents, commands) deve ser **fundamentado para este repositório** — nunca um copia e cola do kit de outro
  repositório.
 6. **`.dwp/` + `tmp/`.** Estruture um `.dwp/` ignorado pelo git com `plans/`, além de um espaço de rascunho
- `tmp/` — ambos adicionados ao `.gitignore` de forma não destrutiva (acrescente, nunca reescreva). Não são intercambiáveis: tudo o que um fluxo produz **sobre um plano** — a análise, o registo de skills, a revisão de segurança, os logs das comportas, os relatórios de auditoria — deve viver no `.dwp/plans/PLAN_{name}/analysis_results/` desse plano, nunca na raiz do repositório nem em `tmp/`. `tmp/` é para trabalho que nenhum plano voltará a ler.
+ `tmp/` — ambos adicionados ao `.gitignore` de forma não destrutiva (acrescente, nunca reescreva). Não são intercambiáveis: tudo o que um fluxo produz **sobre um plano** — a análise, o registo de skills, a revisão de segurança, os logs das comportas, os relatórios de auditoria — deve viver no `.dwp/plans/PLAN_001_<slug>/analysis_results/` desse plano, nunca na raiz do repositório nem em `tmp/`. `tmp/` é para trabalho que nenhum plano voltará a ler.
+
+Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v6 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.
 
 ## 4. Instale a revisão local obrigatória e depois ofereça os addons opcionais
 

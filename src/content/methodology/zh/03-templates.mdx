@@ -16,11 +16,15 @@ import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
 
 <PlanTree lang="zh" class="not-prose my-10" />
 
-一份计划是 `.dwp/plans/` 下一个名为 `PLAN_<slug>/` 的目录。它包含：
+一份计划是 `.dwp/plans/` 下一个名为 `PLAN_001_<slug>/` 的目录。它包含：
+
 
 - `README.md` —— 计划概览：目标、源材料、任务表与状态。
 - 每项任务一个文件，命名为 `<n>.task_<slug>.md`。
 - `PROGRESS.md` —— 一份持续的执行日志。
+
+
+新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v6 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。
 
 ## 任务文件结构
 

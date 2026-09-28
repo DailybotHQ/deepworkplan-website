@@ -8,6 +8,8 @@ section: State
 
 # Stato del piano
 
+**Standard attuale: v6.** I documenti seguenti sono la base conservata; v6 aggiunge contratto, journal append-only, contesto per task, controlli delle risorse e regole del ciclo di vita. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) e [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). I piani v5 esistenti mantengono le proprie regole. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Versione 5.0.0. Stato: Stabile.** Questo documento specifica il livello di stato del piano leggibile dalle macchine della metodologia Deep Work Plan, ora allineato alla versione dello standard DWP stesso — nessun requisito esistente viene indebolito dalla rinumerazione. Questa revisione documenta anche l'aggiornatore di stato protetto, la pubblicazione verificata del piano e le regole di verità dell'evidenza che un piano completato deve soddisfare (vedi sotto). Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
 
 Due artefatti JSON — `manifest.json` (l'identità statica del piano) e `state.json` (lo stato di esecuzione live per attività, inclusi i risultati dei validation gate) — che ogni piano PUÒ portare insieme ai suoi file markdown, e che l'esecuzione non presidiata (vedi [Protocollo degli agenti](/spec/agent-protocol#profili-di-esecuzione)) e i workspace senza git (vedi [Archetipi](/spec/archetypes) §3) DEVONO portare.
@@ -222,3 +224,19 @@ L'applicazione è meccanica ovunque i record lo consentano. L'evidenza di gate m
 ## Versionamento degli schema
 
 Entrambi gli schema sono versionati tramite URL. I campi aggiuntivi sono consentiti all'interno di una versione; rinominare o cambiare il tipo di un campo richiede una nuova versione di schema e una nota di migrazione nel changelog della spec. Questa revisione introduce `/v2.json` per entrambi gli schema: il campo `file` della voce di attività diventa un `locator` tipizzato (`{"kind": "file" | "inline", "value": ...}`), il manifest guadagna `plan_format`, e il file di stato guadagna `format`, `materialization`, `approval` e `promotion` — insieme, i campi di cui i piani Lite hanno bisogno (vedi [Piani Lite](/spec/lite-plans)). I manifest e i file di stato `/v1.json` restano validi e non vengono mai riscritti silenziosamente a v2; una sessione di `refine` PUÒ migrarne uno deliberatamente. Il campo `spec_version` nel manifest fissa la versione della spec DWP con cui il piano è stato creato; un agente che incontra un piano più recente della propria spec installata DOVREBBE segnalarlo anziché tentare di indovinare.
+
+## Schemi v6 e compatibilità
+
+v6 mantiene la metodologia v5 e aggiunge una struttura ingegneristica più rigorosa per i nuovi piani. Il manifest di identità punta a un contratto versionato; un journal append-only registra autorità ed eventi; i manifest di contesto rendono esplicita la selezione del contesto per attività; lo scheduler avvia solo il lavoro idoneo; e la proiezione attiva `state.json` è uno snapshot generato dal journal. Una allowlist vuota viene rifiutata. Si tratta di decisioni architetturali, non di prove di risultati migliori degli agenti: la non inferiorità dei risultati non è stata misurata.
+
+Gli schemi v6 per manifest e snapshot attivo sono:
+
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
+
+La proiezione attiva v6 è uno snapshot, non un file di stato v5 rinominato. `plan-state/v5.json` resta pubblicato per i piani v5; `plan-state/v6.json` non esiste. I piani v1, v2 e v5 esistenti mantengono la generazione di schema registrata e non vengono mai riscritti silenziosamente.
+
+I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v6 ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.

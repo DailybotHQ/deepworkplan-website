@@ -34,3 +34,15 @@ O `deepworkplan-onboard` inspeciona o repositório **real** — linguagens, fram
 ## Notas
 
 Um repositório é totalmente conforme com zero addons opcionais; a revisão local do AI Diff Reviewer faz parte da linha de base desde o padrão 2.3.0. A realidade detectada sempre prevalece sobre as suposições do preset.
+
+## Referências de esquemas v6
+
+Para planos v6, o catálogo de esquemas legíveis por máquina é publicado nestas URLs estáveis. A projeção ativa do v6 é um snapshot; não existe `plan-state/v6.json`. Planos v5 existentes continuam usando o esquema de estado v5, e planos antigos nunca são reescritos silenciosamente.
+
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
+- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
+- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+
+Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v6 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.

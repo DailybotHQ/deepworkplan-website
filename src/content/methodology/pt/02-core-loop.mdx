@@ -33,7 +33,7 @@ Todos os artefatos do DWP vivem em um diretório `.dwp/` ignorado pelo git, na r
 ```
 .dwp/
 ├── plans/
-│   └── PLAN_<slug>/
+│   └── PLAN_001_<slug>/
 │       ├── README.md
 │       ├── PROGRESS.md
 │       └── <n>.task_<slug>.md
@@ -60,3 +60,7 @@ Todo arquivo de tarefa contém estas dez seções, em ordem. A estrutura garante
 ## Validação, conclusão e retomada
 
 A validação faz parte da tarefa, não é um detalhe posterior: cada tarefa nomeia os comandos ou testes que provam que ela está concluída, e o agente os executa antes de marcar a conclusão. Os testes são de primeira classe aqui — uma tarefa que adiciona nova funcionalidade ou altera o comportamento deve adicionar ou atualizar testes automatizados para esse comportamento e executar a verificação completa de qualidade de código do repositório (testes mais lint e type-check), não apenas confirmar que o build foi bem-sucedido; os testes existentes devem permanecer verdes, atualizados para o comportamento pretendido em vez de pulados. A segurança é de primeira classe da mesma forma — qualquer tarefa que toca autenticação, tratamento de entradas, secrets, superfície de rede ou dependências carrega as expectativas de segurança dessa mudança em seus critérios de aceitação e mantém todo commit livre de secrets, e todo plano se encerra com o Final Review — o passe de segurança sobre todo o conjunto de alterações, a validação completa sobre o estado final e a reconciliação das decisões de skills. A conclusão é registrada com um marcador de status explícito (`[ ]` não iniciada, `[~]` em andamento, `[x]` concluída, `[!]` bloqueada) na seção Completion & Log. A retomada depende desses marcadores e do registro de progresso — um agente pode reconstruir exatamente onde o plano parou e continuar a partir da primeira tarefa incompleta sem refazer o trabalho já concluído.
+
+## v6: a mesma metodologia, estrutura mais rigorosa
+
+v6 mantém a mesma metodologia de plano → tarefas → critérios de validação → conclusão, os comandos slash e o local `.dwp/plans/`. A estrutura de engenharia fica mais rigorosa com contrato, diário, manifestos de contexto por tarefa, agendador e recusa de uma lista de permissões vazia. A decisão de arquitetura é GO; a não inferioridade empírica dos resultados dos agentes não foi medida.

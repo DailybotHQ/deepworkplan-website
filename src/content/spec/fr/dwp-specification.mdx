@@ -11,6 +11,8 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Spécification DWP
 
+**Norme actuelle : v6.** Les documents ci-dessous forment la base conservée ; v6 ajoute le contrat, le journal à ajout seul, le contexte par tâche, les contrôles de ressources et les règles de cycle de vie. [Manifeste v6](https://deepworkplan.com/schema/plan-manifest/v6.json) et [instantané v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Les plans v5 existants gardent leurs règles. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Version 4.0.0. Statut : stable.** Ce document est la spécification normative de la méthodologie Deep Work Plan (DWP). Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 
 > **Additif en 2.4.0, sans changement de rupture.** (1) La section **Surface touchée** — le contrat entre ce qu'une tâche modifie et ce qui doit être validé, avec sélection de la porte par classe de risque (isolée / couture / partagée-cœur / inconnue) ; (2) la validation complète devient une **exigence d'état final** exécutée dans l'unique **Final Review** obligatoire du plan, avec des règles explicites de réutilisation des preuves ; (3) les **décisions de skills par tâche** rejoignent la tâche qui les motive, et l'Executive Report devient **optionnel, sur demande** ; (4) un **flux `create` conscient du mode** — le mode trust matérialise directement tout en conservant l'analyse et les contrôles de qualité ; (5) **matérialisation Lite-first des plans** — le create guidé produit directement un plan Lite exécutable au lieu d'une ébauche non exécutable, promouvable en plan Full à tout moment (voir [Plans Lite](/spec/lite-plans)) ; et (6) une **matrice de compatibilité** explicite : les plans et dépôts des versions antérieures restent conformes.
@@ -34,12 +36,16 @@ Les deux modes décident du format du plan (Lite ou Full) dans le cadre de la m�
 
 ## Structure du plan
 
-Un plan MUST être un répertoire sous `.dwp/plans/` nommé `PLAN_<slug>/`, selon l'une de deux représentations :
+Un nouveau plan MUST utiliser un répertoire numéroté sous `.dwp/plans/`, tel que `PLAN_001_<slug>/`, dans une des deux représentations. Les répertoires existants non numérotés `PLAN_<slug>/` restent valides et ne sont jamais renommés :
+
 
 - **Full.** Le répertoire MUST contenir `README.md` (vue d'ensemble du plan, objectif, tableau des tâches et statut), un fichier par tâche nommé `<n>.task_<slug>.md`, et `PROGRESS.md` (un journal d'exécution continu).
 - **Lite.** Des enregistrements de tâche compacts et totalement exécutables vivent en ligne dans `README.md` derrière des ancres stables `{#task-N}` au lieu de fichiers de tâche séparés — chaque enregistrement porte toujours un objectif, une Surface touchée, des critères d'acceptation, une validation et un Completion & Log. `PROGRESS.md` reste REQUIRED. Un plan Lite MAY être promu en Full à tout moment. Voir [Plans Lite](/spec/lite-plans) pour le cycle de vie complet plutôt que de le dupliquer ici.
 
-Un plan MAY également porter la couche d'état lisible par machine : `manifest.json` (identité statique, écrit une fois à la matérialisation) et `state.json` (état d'exécution en direct par tâche). La couche d'état est RECOMMENDED pour les nouveaux plans et REQUIRED pour l'exécution sans surveillance et pour les espaces de travail d'agents sans git. Voir [État du plan](/spec/plan-state).
+Un plan MAY également porter la couche d'état lisible par machine : `manifest.json` (identité statique, écrit une fois à la matérialisation) et `state.json` (état d'exécution en direct par tâche). La couche d'état est RECOMMENDED pour les plans v5 et REQUIRED pour l'exécution sans surveillance et pour les espaces de travail d'agents sans git. Voir [État du plan](/spec/plan-state).
+
+
+Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
 
 ## Anatomie d'une tâche
 
@@ -180,7 +186,7 @@ Tous les artefacts DWP MUST résider sous un répertoire `.dwp/` ignoré par git
 
 Un plan MAY porter la couche d'état lisible par machine — `manifest.json` (identité statique) et `state.json` (état en direct par tâche, enregistrements de portes de validation, enregistrements de résultats, point de reprise, état bloqué). Le plan markdown reste la source de vérité ; la couche JSON est une projection dérivée, régénérée aux points de protocole et réconciliée à la reprise.
 
-La couche d'état est RECOMMENDED pour les nouveaux plans, REQUIRED pour l'exécution sans surveillance, et REQUIRED pour les espaces de travail d'agents sans git. Voir la définition normative complète dans [État du plan](/spec/plan-state).
+La couche d'état est RECOMMENDED pour les plans v5, REQUIRED pour l'exécution sans surveillance, et REQUIRED pour les espaces de travail d'agents sans git. Voir la définition normative complète dans [État du plan](/spec/plan-state).
 
 ## Rigueur proportionnelle
 

@@ -33,7 +33,7 @@ Tutti gli artefatti DWP vivono in una directory `.dwp/` esclusa da git nella rad
 ```
 .dwp/
 ├── plans/
-│   └── PLAN_<slug>/
+│   └── PLAN_001_<slug>/
 │       ├── README.md
 │       ├── PROGRESS.md
 │       └── <n>.task_<slug>.md
@@ -60,3 +60,7 @@ Ogni file di attività contiene queste dieci sezioni, nell’ordine. La struttur
 ## Validazione, completamento e ripresa
 
 La validazione è parte dell’attività, non un ripensamento: ogni attività indica i comandi o i test che ne provano il completamento e l’agente li esegue prima di segnare il completamento. I test sono di prima classe qui — un’attività che aggiunge nuove funzionalità o modifica il comportamento deve aggiungere o aggiornare test automatizzati per quel comportamento ed eseguire il controllo completo di qualità del codice del repository (test più lint e type-check), non limitarsi a confermare che la build riesce; i test esistenti devono restare verdi, aggiornati al comportamento previsto anziché saltati. La sicurezza è di prima classe allo stesso modo — qualsiasi attività che tocchi l'autenticazione, la gestione dell'input, i segreti, la superficie di rete o le dipendenze porta con sé le aspettative di sicurezza di quella modifica nei propri criteri di accettazione e mantiene ogni commit privo di segreti, e ogni piano si chiude con il Final Review — il passaggio di sicurezza sull'intero insieme di modifiche, la validazione completa sullo stato finale e la riconciliazione delle decisioni sulle skill. Il completamento è registrato con un marcatore di stato esplicito (`[ ]` non iniziata, `[~]` in corso, `[x]` completata, `[!]` bloccata) nella sezione Completion & Log. La ripresa si basa su questi marcatori e sul log dei progressi — un agente può ricostruire esattamente dove il piano si è fermato e proseguire dalla prima attività incompleta senza rifare il lavoro già concluso.
+
+## v6: la stessa metodologia, una struttura più rigorosa
+
+v6 mantiene la stessa metodologia piano → attività → gate di validazione → completamento, i comandi slash e la posizione `.dwp/plans/`. Rende più rigorosa la struttura ingegneristica con un contratto, un journal, manifest di contesto per attività, uno scheduler e il rifiuto di una allowlist vuota. La decisione architetturale è GO; la non inferiorità empirica dei risultati degli agenti non è stata misurata.

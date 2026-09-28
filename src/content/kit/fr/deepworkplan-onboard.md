@@ -34,3 +34,15 @@ Transformer un dépôt en une base de code AI-first, pilotée par la spécificat
 ## Notes
 
 Un dépôt est pleinement conforme avec zéro addon optionnel ; la revue locale d’AI Diff Reviewer fait partie de la ligne de base depuis le standard 2.3.0. La réalité détectée l’emporte toujours sur les hypothèses des presets.
+
+## Références des schémas v6
+
+Pour les plans v6, le catalogue des schémas lisibles par machine est publié à ces URL stables. La projection active de v6 est un instantané ; `plan-state/v6.json` n’existe pas. Les plans v5 existants continuent d’utiliser le schéma d’état v5, et les anciens plans ne sont jamais réécrits silencieusement.
+
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
+- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
+- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+
+Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.

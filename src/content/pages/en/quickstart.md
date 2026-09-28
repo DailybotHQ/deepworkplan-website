@@ -123,7 +123,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Current standard and execution model
 
-The current repository-facing standard is **DWP 5.0.0**, implemented by the
+The current repository-facing standard is **DWP 6.0.0**, implemented by the
 Deep Work Plan skill release installed above. The current skill pack includes
 the router and nine sub-skills: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, and `upgrade`.
@@ -142,12 +142,23 @@ a requirement or a gate.
 For a full plan, the repository is the durable execution surface. The plan
 contains atomic tasks, a **Touched Surface** that explains what changed and
 which consumers are affected, acceptance criteria, and a validation gate
-selected from the repository's documented test map. A new plan writes its
-identity manifest first, records its analysis, creates the task list, and flips
-the live state last so an interrupted creation can be recovered instead of
-guessed at. When the state layer is present, `manifest.json` describes the
-plan and `state.json` records checkpoints, task status, gate results, and
-blockers.
+selected from the repository's documented test map. A new v6 plan writes its identity manifest, then its versioned
+contract, then its approval event. The append-only journal records execution, and
+`state.json` is a snapshot derived from that journal. Each step can be
+recovered after an interruption.
+
+Schema generation stays tied to each plan. v5 plans keep `state.json` under
+https://deepworkplan.com/schema/plan-state/v5.json. New plans created with the current 6.x pack use
+https://deepworkplan.com/schema/plan-manifest/v6.json for `manifest.json`; their live projection is a snapshot at
+https://deepworkplan.com/schema/plan-snapshot/v6.json. There is no
+`plan-state/v6.json`: v6 uses a snapshot, not a renamed v5 state schema.
+The other v6 schemas are the
+[contract](https://deepworkplan.com/schema/plan-contract/v6.json),
+[journal event](https://deepworkplan.com/schema/journal-event/v6.json), and
+[task context manifest](https://deepworkplan.com/schema/context-manifest/v6.json).
+Existing plans keep their recorded generation and are never rewritten. v6
+keeps the v5 methodology with stricter structure; agent outcome
+non-inferiority has not been measured.
 
 Every plan has one mandatory closing task: **Final Review**. It runs the
 security pass over the accumulated change set, including the required local
@@ -195,7 +206,14 @@ methodology) instead of overwriting — and confirm with the user before replaci
  (skills, agents, commands) must be **reasoned for this repo** — never a copy-paste of another
  repository's kit.
 6. **`.dwp/` + `tmp/`.** Scaffold a gitignored `.dwp/` with `plans/`, plus a `tmp/`
- scratch space — both added to `.gitignore` non-destructively (append, never rewrite). They are not interchangeable: everything a flow produces **about a plan** — the analysis, the skills ledger, the security review, gate logs, audit reports — must live in that plan's own `.dwp/plans/PLAN_{name}/analysis_results/`, never at the repository root and never in `tmp/`. `tmp/` is for work no plan will ever read back.
+ scratch space — both added to `.gitignore` non-destructively (append, never rewrite). They are not interchangeable: everything a flow produces **about a plan** — the analysis, the skills ledger, the security review, gate logs, audit reports — must live in that plan's own `.dwp/plans/PLAN_001_<slug>/analysis_results/`, never at the repository root and never in `tmp/`. `tmp/` is for work no plan will ever read back.
+
+New plans receive monotonically increasing numeric IDs with at least three
+digits (for example, `PLAN_001_add_payment_webhooks/`). Current v6 plans
+use 2–5-word slugs. The retained v5 flow uses 2–4 words: its allocator requires at least
+two slug words, and its frozen schema permits at most four after the numeric ID. Existing unnumbered `PLAN_<slug>/` folders remain readable and are
+never renamed. When numbered plans exist, `latest` resolves to the highest
+numeric ID.
 
 ## 4. Install the required local review, then offer the opt-in addons
 
@@ -276,4 +294,3 @@ methodology:
  verifiable work.
 
 Anyone can run this prompt on any repository — and end with a codebase any AI agent can pilot.
-

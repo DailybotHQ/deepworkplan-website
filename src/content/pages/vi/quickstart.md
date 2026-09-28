@@ -122,7 +122,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Tiêu chuẩn hiện tại và mô hình thực thi
 
-Tiêu chuẩn hướng-repository hiện tại là **DWP 5.0.0**, được triển khai bởi phiên
+Tiêu chuẩn hướng-repository hiện tại là **DWP 6.0.0**, được triển khai bởi phiên
 bản skill Deep Work Plan đã cài ở trên. Gói skill hiện tại bao gồm bộ định tuyến
 và chín sub-skill: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` và `upgrade`.
@@ -142,12 +142,22 @@ còn đủ để mang một yêu cầu hay một cổng.
 Đối với một kế hoạch Full, repository là bề mặt thực thi lâu dài. Kế hoạch chứa
 các tác vụ nguyên tử, một **Bề mặt bị chạm tới** giải thích điều gì đã thay đổi và
 những người tiêu dùng nào bị ảnh hưởng, tiêu chí chấp nhận, và một cổng kiểm
-định được chọn từ bản đồ kiểm thử đã được ghi lại của repository. Một kế hoạch
-mới trước tiên ghi manifest định danh của nó, ghi lại phân tích của nó, tạo
-danh sách tác vụ, và chỉ kích hoạt trạng thái trực tiếp sau cùng, để việc tạo
-bị gián đoạn có thể được khôi phục thay vì bị đoán mò. Khi lớp trạng thái hiện
-diện, `manifest.json` mô tả kế hoạch và `state.json` ghi lại các checkpoint,
-trạng thái tác vụ, kết quả cổng và các điểm chặn.
+định được chọn từ bản đồ kiểm thử đã được ghi lại của repository. Trong v6, quá trình tạo ghi manifest định danh, tiếp theo là hợp đồng và sự kiện phê duyệt. Nhật ký chỉ ghi thêm lưu quá trình thực thi; `state.json` là bản chụp được suy ra từ nhật ký. Có thể khôi phục từng bước sau gián đoạn.
+
+Phiên bản schema luôn gắn với từng kế hoạch. Kế hoạch v5 tiếp tục dùng
+`state.json` theo schema https://deepworkplan.com/schema/plan-state/v5.json.
+Kế hoạch được tạo rõ ràng theo v6 dùng
+https://deepworkplan.com/schema/plan-manifest/v6.json cho `manifest.json`;
+projection trực tiếp là snapshot tại
+https://deepworkplan.com/schema/plan-snapshot/v6.json. Không có
+`plan-state/v6.json`: v6 dùng snapshot, không phải schema trạng thái v5 được
+đổi tên. Kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận và không bao giờ bị
+viết lại. v6 giữ nguyên phương pháp v5 với cấu trúc chặt chẽ hơn; tính không
+kém hơn của kết quả agent chưa được đo lường.
+
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
 
 Mỗi kế hoạch có một tác vụ kết thúc bắt buộc: **Final Review**. Nó chạy bước
 kiểm tra bảo mật trên toàn bộ tập thay đổi đã tích lũy, bao gồm cả đánh giá cục
@@ -196,7 +206,9 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
    (skill, agent, command) phải **được suy luận cho repo này** — không bao giờ là một bản sao chép-dán bộ kit của repo
    khác.
 6. **`.dwp/` + `tmp/`.** Dựng một `.dwp/` được gitignore với `plans/`, cùng một không gian nháp
-   `tmp/` — cả hai đều được thêm vào `.gitignore` một cách không phá hủy (nối thêm, không bao giờ viết lại). Hai nơi này không thể thay cho nhau: mọi thứ một luồng tạo ra **về một kế hoạch** — bản phân tích, sổ ghi skills, bản rà soát bảo mật, nhật ký cổng kiểm, báo cáo kiểm toán — đều phải nằm trong `.dwp/plans/PLAN_{name}/analysis_results/` của chính kế hoạch đó, không đặt ở gốc kho và không đặt trong `tmp/`. `tmp/` dành cho phần việc mà không kế hoạch nào đọc lại.
+   `tmp/` — cả hai đều được thêm vào `.gitignore` một cách không phá hủy (nối thêm, không bao giờ viết lại). Hai nơi này không thể thay cho nhau: mọi thứ một luồng tạo ra **về một kế hoạch** — bản phân tích, sổ ghi skills, bản rà soát bảo mật, nhật ký cổng kiểm, báo cáo kiểm toán — đều phải nằm trong `.dwp/plans/PLAN_001_<slug>/analysis_results/` của chính kế hoạch đó, không đặt ở gốc kho và không đặt trong `tmp/`. `tmp/` dành cho phần việc mà không kế hoạch nào đọc lại.
+
+Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba chữ số (ví dụ `PLAN_001_add_payment_webhooks/`). Schema v5 đã cố định tính ID số là một từ, nên slug v5 có 2–4 từ; slug v6 có 2–5 từ. Các thư mục cũ không đánh số `PLAN_<slug>/` vẫn đọc được và không bao giờ bị đổi tên. Khi có kế hoạch được đánh số, `latest` trỏ đến kế hoạch có ID số cao nhất.
 
 ## 4. Cài đặt đánh giá cục bộ bắt buộc, rồi đề xuất các addon tùy chọn
 

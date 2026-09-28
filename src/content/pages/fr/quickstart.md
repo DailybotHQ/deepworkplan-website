@@ -118,7 +118,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Norme actuelle et modèle d'exécution
 
-La norme actuelle orientée dépôt est **DWP 5.0.0**, mise en œuvre par la
+La norme actuelle orientée dépôt est **DWP 6.0.0**, mise en œuvre par la
 version du skill Deep Work Plan installée ci-dessus. Le pack de skill actuel
 inclut le routeur et neuf sous-skills : `create`, `execute`, `refine`,
 `resume`, `status`, `verify`, `onboard`, `author` et `upgrade`.
@@ -141,12 +141,22 @@ Pour un plan Full, le dépôt est la surface d'exécution durable. Le plan
 contient des tâches atomiques, une **Surface touchée** qui explique ce qui
 a changé et quels consommateurs sont affectés, des critères d'acceptation,
 et une porte de validation sélectionnée dans la carte de tests documentée
-du dépôt. Un nouveau plan écrit d'abord son manifeste d'identité,
-enregistre son analyse, crée la liste des tâches, puis n'active l'état en
-direct qu'à la fin, afin qu'une création interrompue puisse être récupérée
-plutôt que devinée. Lorsque la couche d'état est présente, `manifest.json`
-décrit le plan et `state.json` enregistre les points de contrôle, l'état
-des tâches, les résultats des portes et les blocages.
+du dépôt. En v6, la création écrit le manifeste d’identité, puis le contrat et l’événement d’approbation. Le journal à ajout seul enregistre l’exécution ; `state.json` est un instantané dérivé de ce journal. Chaque étape peut être reprise après une interruption.
+
+La génération du schéma reste liée à chaque plan. Les plans v5 conservent
+`state.json` selon https://deepworkplan.com/schema/plan-state/v5.json. Les
+plans explicitement créés en v6 utilisent
+https://deepworkplan.com/schema/plan-manifest/v6.json pour `manifest.json` ;
+leur projection active est un instantané défini par
+https://deepworkplan.com/schema/plan-snapshot/v6.json. `plan-state/v6.json`
+n’existe pas : v6 utilise un instantané, pas un schéma d’état v5 renommé. Les
+plans existants gardent leur génération enregistrée et ne sont jamais
+réécrits. v6 conserve la méthodologie v5 avec une structure plus stricte ; la
+non-infériorité des résultats des agents n’a pas été mesurée.
+
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
 
 Chaque plan comporte une tâche de clôture obligatoire : le **Final
 Review**. Il exécute la passe de sécurité sur l'ensemble des changements
@@ -195,7 +205,9 @@ méthodologie) au lieu d’écraser — et confirmez avec l’utilisateur avant 
  (skills, agents, commandes) doit être **raisonné pour ce dépôt** — jamais un copier-coller du kit
  d’un autre dépôt.
 6. **`.dwp/` + `tmp/`.** Échafaudez un `.dwp/` ignoré par git avec `plans/`, ainsi qu’un espace de travail
- temporaire `tmp/` — tous deux ajoutés au `.gitignore` de manière non destructive (ajouter, jamais réécrire). Les deux ne sont pas interchangeables : tout ce qu'un flux produit **au sujet d'un plan** — l'analyse, le registre des skills, la revue de sécurité, les journaux de barrières, les rapports d'audit — doit se trouver dans le `.dwp/plans/PLAN_{name}/analysis_results/` de ce plan, jamais à la racine du dépôt ni dans `tmp/`. `tmp/` est réservé au travail qu'aucun plan ne relira.
+ temporaire `tmp/` — tous deux ajoutés au `.gitignore` de manière non destructive (ajouter, jamais réécrire). Les deux ne sont pas interchangeables : tout ce qu'un flux produit **au sujet d'un plan** — l'analyse, le registre des skills, la revue de sécurité, les journaux de barrières, les rapports d'audit — doit se trouver dans le `.dwp/plans/PLAN_001_<slug>/analysis_results/` de ce plan, jamais à la racine du dépôt ni dans `tmp/`. `tmp/` est réservé au travail qu'aucun plan ne relira.
+
+Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
 
 ## 4. Installer la revue locale requise, puis proposer les addons facultatifs
 

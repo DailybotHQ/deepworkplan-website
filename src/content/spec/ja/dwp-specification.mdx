@@ -11,6 +11,8 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP 仕様
 
+**現在の標準: v6。** 以下の文書は保持された基礎仕様です。v6 は契約、追記専用ジャーナル、タスクごとのコンテキスト、リソース制御、ライフサイクル規則を追加します。[v6 manifest](https://deepworkplan.com/schema/plan-manifest/v6.json) と [v6 snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json)。既存の v5 計画は記録された規則を維持します。 [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **バージョン 4.0.0。状態: 安定。** この文書は Deep Work Plan（DWP）方法論の規範的な仕様です。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
 
 > **2.4.0 での追加、破壊的変更なし。** （1）**変更対象面（Touched Surface）** セクション — タスクが変更するものと検証されなければならないものとの契約であり、リスククラス（isolated / seam / shared-core / unknown）によるゲート選択を伴う。（2）完全な検証は計画唯一の必須 **Final Review** で実行される**最終状態要件**となり、明示的な証拠再利用ルールが伴う。（3）**タスク内スキル決定**は所有タスクへ移り、Executive Report は**オプションで要求に応じた**ものになる。（4）**モード対応の create フロー** — trust モードは分析と品質チェックを保ちながら直接マテリアライズする。（5）**Lite ファーストの計画マテリアライゼーション** — ガイド付き create は、非実行可能なドラフトの代わりに直接実行可能な **Lite 計画** を生成し、いつでも Full 計画へ昇格できる（[Lite 計画](/spec/lite-plans) を参照）。（6）明示的な**互換性マトリクス**：より前のバージョンの計画とリポジトリは適合したまま。
@@ -34,12 +36,16 @@ DWP は仕様駆動です。計画が仕様であり、エージェントは即�
 
 ## 計画の構造
 
-計画は `.dwp/plans/` 配下の `PLAN_<slug>/` という名前のディレクトリで、次の二つの表現形式のいずれかでなければなりません（MUST）。
+新しい計画は `.dwp/plans/` 配下で `PLAN_001_<slug>/` のような番号付きディレクトリを使用しなければなりません（MUST）。既存の番号なし `PLAN_<slug>/` は引き続き有効で、名前を変更しません。計画には次の二つの表現形式があります:
+
 
 - **Full。** ディレクトリは `README.md`（計画の概観、目標、タスク表、状態）、タスクごとに一つの `<n>.task_<slug>.md` という名前のファイル、そして `PROGRESS.md`（実行の進行ログ）を含まなければなりません（MUST）。
 - **Lite。** コンパクトで完全に実行可能なタスクレコードが、別個のタスクファイルの代わりに、安定した `{#task-N}` アンカーの背後で `README.md` にインラインで存在します — 各レコードは、目標、変更対象面、受け入れ基準、検証、完了ログを引き続き持ちます。`PROGRESS.md` は引き続き REQUIRED です。Lite 計画はいつでも Full へ昇格しても(MAY)構いません。完全なライフサイクルはここで繰り返さず、[Lite 計画](/spec/lite-plans) を参照してください。
 
-計画は追加で機械可読な状態レイヤーを MAY 携えることができます。`manifest.json`（マテリアライゼーション時に一度書き込まれる静的な識別情報）と `state.json`（タスクごとのライブ実行状態）です。状態レイヤーは新しい計画に対して RECOMMENDED であり、無人実行および git のないエージェントワークスペースに対しては REQUIRED です。[計画の状態](/spec/plan-state) を参照してください。
+計画は追加で機械可読な状態レイヤーを MAY 携えることができます。`manifest.json`（マテリアライゼーション時に一度書き込まれる静的な識別情報）と `state.json`（タスクごとのライブ実行状態）です。状態レイヤーはv5 の計画に対して RECOMMENDED であり、無人実行および git のないエージェントワークスペースに対しては REQUIRED です。[計画の状態](/spec/plan-state) を参照してください。
+
+
+新しい計画には、3桁以上の単調増加する数値 ID を付けます（例：`PLAN_001_add_payment_webhooks/`）。凍結された v5 スキーマでは数値 ID も1語として数えるため、v5 の slug は2〜4語、v6 の slug は2〜5語です。既存の番号なし `PLAN_<slug>/` フォルダーは引き続き読み取り可能で、名前は変更しません。番号付き計画がある場合、`latest` は数値 ID が最も大きい計画を指します。
 
 ## タスク構造
 
@@ -180,7 +186,7 @@ DWP は五つの操作を定義します。
 
 計画は機械可読な状態レイヤーを MAY 携えることができます。`manifest.json`（静的な識別情報）と `state.json`（タスクごとのライブ状態、バリデーションゲートレコード、アウトカムレコード、チェックポイント、ブロック状態）です。Markdown の計画が信頼できる情報源であり続け、JSON レイヤーはプロトコルポイントで再生成され再開時に照合される導出された投影です。
 
-状態レイヤーは新しい計画に対して RECOMMENDED であり、無人実行に REQUIRED であり、git のないエージェントワークスペースに REQUIRED です。完全な規範的な定義は [計画の状態](/spec/plan-state) を参照してください。
+状態レイヤーはv5 の計画に対して RECOMMENDED であり、無人実行に REQUIRED であり、git のないエージェントワークスペースに REQUIRED です。完全な規範的な定義は [計画の状態](/spec/plan-state) を参照してください。
 
 ## 比例したリゴー
 

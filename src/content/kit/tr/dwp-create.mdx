@@ -39,12 +39,13 @@ Bu incelemeyi atlamak için son sözcük olarak **`trust`** (ya da `auto`) ekley
 Trust modu, akışa güvendiğinizde güçlü kullanıcılara yönelik bir kısayoldur; rehberli mod ise varsayılan olarak döngüde bir insan tutar.
 
 ## Davranış
-
 1. Hedefi ve depo bağlamını analiz edin.
 2. Belirsizse açıklayıcı sorular sorun.
-3. Planı doğrudan `.dwp/plans/PLAN_<name>/` altına somutlaştırın — varsayılan olarak bir Lite plan, daha büyük işler için Full plan (rehberli modda inceleyip Lite olarak tutmayı, Full’a yükseltmeyi, düzenlemeyi ya da durdurmayı seçin).
+3. Planı doğrudan `.dwp/plans/PLAN_001_<slug>/` altına somutlaştırın — varsayılan olarak bir Lite plan, daha büyük işler için Full plan (rehberli modda inceleyip Lite olarak tutmayı, Full’a yükseltmeyi, düzenlemeyi ya da durdurmayı seçin).
 4. Sıralı görevlere ayrıştırın ve README, görev dosyaları ile PROGRESS dosyasını yazın.
 5. Final Review ile tamamlayın (güvenlik incelemesi, son-durum doğrulaması, skill uzlaştırması).
+
+Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (örneğin `PLAN_001_add_payment_webhooks/`). Dondurulmuş v5 şemaları sayısal kimliği bir sözcük saydığı için v5 slug’ları 2–4, v6 slug’ları 2–5 sözcük içerir. Mevcut numarasız `PLAN_<slug>/` klasörleri okunabilir kalır ve hiçbir zaman yeniden adlandırılmaz. Numaralı planlar varsa `latest`, sayısal kimliği en yüksek olan planı gösterir.
 
 ## Takma adlar
 

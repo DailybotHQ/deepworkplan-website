@@ -123,7 +123,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Standar dan model eksekusi saat ini
 
-Standar yang berorientasi repositori saat ini adalah **DWP 5.0.0**, diimplementasikan
+Standar yang berorientasi repositori saat ini adalah **DWP 6.0.0**, diimplementasikan
 oleh rilis skill Deep Work Plan yang dipasang di atas. Paket skill saat ini mencakup
 router ditambah sembilan sub-skill: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, dan `upgrade`.
@@ -142,12 +142,22 @@ ringkas tidak lagi cukup untuk membawa sebuah persyaratan atau gate.
 Untuk rencana Full, repositori adalah permukaan eksekusi yang bertahan lama. Rencana
 berisi tugas-tugas atomik, sebuah **Permukaan tersentuh** yang menjelaskan apa yang
 berubah dan konsumen mana yang terdampak, kriteria penerimaan, dan gate validasi
-yang dipilih dari peta pengujian repositori yang terdokumentasi. Rencana baru
-pertama-tama menulis manifes identitasnya, mencatat analisisnya, membuat daftar
-tugas, dan baru mengaktifkan status live di akhir, sehingga pembuatan yang
-terinterupsi bisa dipulihkan, bukan ditebak. Ketika lapisan status ada,
-`manifest.json` menggambarkan rencana dan `state.json` mencatat checkpoint,
-status tugas, hasil gate, dan blocker.
+yang dipilih dari peta pengujian repositori yang terdokumentasi. Pada v6, pembuatan menulis manifes identitas, lalu kontrak dan peristiwa persetujuan. Jurnal yang hanya ditambah mencatat eksekusi; `state.json` adalah snapshot yang diturunkan dari jurnal tersebut. Setiap langkah dapat dipulihkan setelah gangguan.
+
+Generasi skema tetap terkait dengan setiap rencana. Rencana v5 mempertahankan
+`state.json` dengan skema https://deepworkplan.com/schema/plan-state/v5.json.
+Rencana yang secara eksplisit dibuat dengan v6 menggunakan
+https://deepworkplan.com/schema/plan-manifest/v6.json untuk `manifest.json`;
+proyeksi aktifnya adalah snapshot di
+https://deepworkplan.com/schema/plan-snapshot/v6.json. Tidak ada
+`plan-state/v6.json`: v6 menggunakan snapshot, bukan skema status v5 yang
+sekadar diganti nama. Rencana yang ada mempertahankan generasi tercatat dan
+tidak pernah ditulis ulang. v6 mempertahankan metodologi v5 dengan struktur
+lebih ketat; non-inferioritas hasil agen belum diukur.
+
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
 
 Setiap rencana memiliki satu tugas penutup wajib: **Final Review**. Ia menjalankan
 pemeriksaan keamanan atas seluruh kumpulan perubahan yang terakumulasi, termasuk
@@ -196,7 +206,9 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
    (skills, agents, commands) harus **dipikirkan untuk repo ini** — tidak pernah menyalin-tempel kit
    repositori lain.
 6. **`.dwp/` + `tmp/`.** Siapkan `.dwp/` yang di-gitignore dengan `plans/`, ditambah ruang
-   scratch `tmp/` — keduanya ditambahkan ke `.gitignore` secara non-destruktif (tambahkan, jangan pernah menulis ulang). Keduanya tidak dapat dipertukarkan: segala sesuatu yang dihasilkan sebuah alur **tentang sebuah rencana** — analisis, catatan skills, tinjauan keamanan, log gerbang, laporan audit — harus berada di `.dwp/plans/PLAN_{name}/analysis_results/` milik rencana itu sendiri, bukan di akar repositori dan bukan di `tmp/`. `tmp/` untuk pekerjaan yang tidak akan pernah dibaca ulang oleh rencana mana pun.
+   scratch `tmp/` — keduanya ditambahkan ke `.gitignore` secara non-destruktif (tambahkan, jangan pernah menulis ulang). Keduanya tidak dapat dipertukarkan: segala sesuatu yang dihasilkan sebuah alur **tentang sebuah rencana** — analisis, catatan skills, tinjauan keamanan, log gerbang, laporan audit — harus berada di `.dwp/plans/PLAN_001_<slug>/analysis_results/` milik rencana itu sendiri, bukan di akar repositori dan bukan di `tmp/`. `tmp/` untuk pekerjaan yang tidak akan pernah dibaca ulang oleh rencana mana pun.
+
+Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v6 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.
 
 ## 4. Pasang tinjauan lokal yang wajib, lalu tawarkan addon opt-in
 

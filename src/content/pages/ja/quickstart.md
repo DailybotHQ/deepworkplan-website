@@ -81,7 +81,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### 現在の標準と実行モデル
 
-現在のリポジトリ向け標準は**DWP 5.0.0**であり、上でインストールした Deep
+現在のリポジトリ向け標準は**DWP 6.0.0**であり、上でインストールした Deep
 Work Plan スキルのリリースによって実装されています。現在のスキルパックには、
 ルーターと九つのサブスキル — `create`、`execute`、`refine`、`resume`、
 `status`、`verify`、`onboard`、`author`、`upgrade` — が含まれます。
@@ -99,11 +99,19 @@ Lite 計画は `/dwp-refine promote` によって Full に昇格します。
 Full 計画では、リポジトリが恒久的な実行面です。計画には、原子的な
 タスク、何が変わりどの利用者が影響を受けるかを説明する **影響範囲**、
 受け入れ基準、そしてリポジトリの文書化されたテストマップから選
-択された検証ゲートが含まれます。新しい計画はまず identity manifest を書き、
-分析を記録し、タスクリストを作成し、最後にライブ状態を有効化するため、中断
-された作成は推測ではなく回復できます。状態レイヤーが存在する場合、
-`manifest.json` が計画を記述し、`state.json` がチェックポイント、タスクの
-状態、ゲートの結果、ブロッカーを記録します。
+択された検証ゲートが含まれます。v6 では、作成時に identity manifest、contract、承認イベントの順に記録します。追記専用ジャーナルが実行を記録し、`state.json` はそのジャーナルから生成されるスナップショットです。中断後も各段階から復旧できます。
+
+スキーマ世代は各計画に紐づきます。v5 計画は `state.json` に
+https://deepworkplan.com/schema/plan-state/v5.json を引き続き使用します。明示的に v6 で作成した計画は
+`manifest.json` に https://deepworkplan.com/schema/plan-manifest/v6.json
+を使用し、ライブ投影には https://deepworkplan.com/schema/plan-snapshot/v6.json
+のスナップショットを使います。`plan-state/v6.json` はありません。v6 は v5 の state
+スキーマを改名せず、スナップショットを使います。既存計画は記録済みの世代を保ち、書き換えられません。v6 は v5
+の方法論を維持しつつ構造を厳格化します。エージェント成果の非劣性は測定されていません。
+
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
 
 すべての計画には一つの必須の締めくくりタスクがあります: **Final
 Review** です。これは、必須のローカル AI Diff Reviewer レビューを含む、
@@ -132,7 +140,9 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 3. **モジュールごとのドキュメント。** 偵察で発見された主要なソースモジュールのそれぞれの中に、`README.md`（複雑なモジュールには `docs/` サブフォルダ）を追加します。
 4. **`.agents/` + `.claude → .agents` + `.cursor → .agents`。** 正規のエージェント横断の拠点を作成します。**推論にもとづく** `agents/` のカタログ、スタックに合った `skills/`、そしてインストールされたスキルへ委譲する薄い `dwp-*` の `commands/` です。各エントリは、別のものからコピーされたのではなく、*この*リポジトリのために正当化されます。ディスク上に存在するものと一致する `docs/` カタログ（`skills_agents_catalog.md` と `COMMANDS_REFERENCE.md`)、加えて `settings.json`、そして `.claude → .agents` と `.cursor → .agents` の両方のシンボリックリンクを追加します。既存のスキル／エージェントをカタログに織り込みます。
 5. **適応された DWP スキル。** インストールされたスキルはエンジンです。リポジトリ自身のキット（スキル、エージェント、コマンド）は、**このリポジトリのために推論された**ものでなければなりません。決して別のリポジトリのキットのコピー＆ペーストではありません。
-6. **`.dwp/` と `tmp/`。** `plans/` を備えた gitignore された `.dwp/`、加えて `tmp/` スクラッチ領域を整備します。両方とも非破壊的に `.gitignore` に追加します（追記し、決して書き換えない)。両者は交換可能ではありません。あるフローが**その計画について**生み出したもの——分析、skills の台帳、セキュリティレビュー、ゲートのログ、監査レポート——はすべて、その計画自身の `.dwp/plans/PLAN_{name}/analysis_results/` に置かれなければならず、リポジトリのルートにも `tmp/` にも置いてはいけません。`tmp/` は、どの計画も二度と読み返さない作業のための場所です。
+6. **`.dwp/` と `tmp/`。** `plans/` を備えた gitignore された `.dwp/`、加えて `tmp/` スクラッチ領域を整備します。両方とも非破壊的に `.gitignore` に追加します（追記し、決して書き換えない)。両者は交換可能ではありません。あるフローが**その計画について**生み出したもの——分析、skills の台帳、セキュリティレビュー、ゲートのログ、監査レポート——はすべて、その計画自身の `.dwp/plans/PLAN_001_<slug>/analysis_results/` に置かれなければならず、リポジトリのルートにも `tmp/` にも置いてはいけません。`tmp/` は、どの計画も二度と読み返さない作業のための場所です。
+
+新しい計画には、3桁以上の単調増加する数値 ID を付けます（例：`PLAN_001_add_payment_webhooks/`）。凍結された v5 スキーマでは数値 ID も1語として数えるため、v5 の slug は2〜4語、v6 の slug は2〜5語です。既存の番号なし `PLAN_<slug>/` フォルダーは引き続き読み取り可能で、名前は変更しません。番号付き計画がある場合、`latest` は数値 ID が最も大きい計画を指します。
 
 ## 4. 必須のローカルレビューをインストールし、その後オプトイン式のアドオンを提案する
 

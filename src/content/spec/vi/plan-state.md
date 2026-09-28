@@ -8,6 +8,8 @@ section: State
 
 # Trạng thái kế hoạch
 
+**Tiêu chuẩn hiện tại: v6.** Các tài liệu bên dưới là nền tảng được giữ lại; v6 bổ sung hợp đồng, nhật ký chỉ ghi thêm, ngữ cảnh tác vụ, kiểm soát tài nguyên và quy tắc vòng đời. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) và [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Kế hoạch v5 hiện có vẫn giữ quy tắc đã ghi. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Phiên bản 5.0.0. Trạng thái: Ổn định.** Tài liệu này đặc tả lớp trạng thái kế hoạch có thể đọc bằng máy của phương pháp luận Deep Work Plan, nay đã được căn chỉnh với phiên bản riêng của chuẩn DWP — việc đánh số lại không làm suy yếu bất kỳ yêu cầu hiện có nào. Bản sửa đổi này cũng ghi lại bộ cập nhật trạng thái được bảo vệ, việc công bố kế hoạch đã kiểm chứng, và các quy tắc về tính trung thực của bằng chứng mà một kế hoạch đã hoàn tất phải thỏa mãn (xem bên dưới). Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
 Hai thành phần JSON — `manifest.json` (danh tính tĩnh của kế hoạch) và `state.json` (trạng thái thực thi trực tiếp theo tác vụ bao gồm kết quả cổng kiểm chứng) — mà mọi kế hoạch CÓ THỂ (MAY) mang theo bên cạnh các tệp markdown, và mà thực thi không có giám sát (xem [Giao thức agent](/spec/agent-protocol#execution-profiles)) và các không gian làm việc không có git (xem [Các kiểu hình](/spec/archetypes) §3) PHẢI (MUST) mang theo.
@@ -222,3 +224,19 @@ Việc thực thi mang tính máy móc ở bất cứ nơi nào các bản ghi c
 ## Phiên bản hóa schema
 
 Cả hai schema đều được phiên bản hóa theo URL. Các trường bổ sung được phép trong một phiên bản; đổi tên hoặc thay đổi kiểu của một trường đòi hỏi một phiên bản schema mới và một ghi chú di chuyển trong changelog của spec. Bản sửa đổi này giới thiệu `/v2.json` cho cả hai schema: trường `file` của mục nhập tác vụ trở thành một `locator` có kiểu (`{"kind": "file" | "inline", "value": ...}`), manifest có thêm `plan_format`, và tệp trạng thái có thêm `format`, `materialization`, `approval` và `promotion` — cùng nhau là các trường mà kế hoạch Lite cần (xem [Kế hoạch Lite](/spec/lite-plans)). Các manifest và tệp trạng thái `/v1.json` vẫn hợp lệ và không bao giờ bị âm thầm ghi lại thành v2; một phiên `refine` CÓ THỂ (MAY) di chuyển một cái nào đó một cách có chủ đích. Trường `spec_version` trong manifest cố định phiên bản spec DWP mà kế hoạch được tạo dưới đó; một agent gặp phải một kế hoạch mới hơn spec đã cài đặt của nó NÊN (SHOULD) nói rõ điều đó thay vì đoán.
+
+## Schema v6 và khả năng tương thích
+
+v6 giữ nguyên phương pháp v5 và bổ sung cấu trúc kỹ thuật chặt chẽ hơn cho kế hoạch mới. Manifest nhận dạng trỏ đến hợp đồng có phiên bản; nhật ký chỉ ghi thêm lưu quyền hạn và sự kiện; manifest ngữ cảnh làm rõ việc chọn ngữ cảnh theo từng tác vụ; bộ lập lịch chỉ phân phối công việc đủ điều kiện; và projection trực tiếp `state.json` là snapshot được tạo từ nhật ký. Danh sách cho phép rỗng sẽ bị từ chối. Đây là quyết định kiến trúc, không phải bằng chứng về kết quả agent tốt hơn: tính không kém hơn của kết quả chưa được đo lường.
+
+Schema manifest và snapshot trực tiếp v6:
+
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
+
+Projection trực tiếp v6 là snapshot, không phải tệp trạng thái v5 được đổi tên. `plan-state/v5.json` vẫn được công bố cho kế hoạch v5; không có `plan-state/v6.json`. Kế hoạch v1, v2 và v5 hiện có giữ nguyên thế hệ schema đã ghi nhận và không bị viết lại âm thầm.
+
+Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba chữ số (ví dụ `PLAN_001_add_payment_webhooks/`). Schema v5 đã cố định tính ID số là một từ, nên slug v5 có 2–4 từ; slug v6 có 2–5 từ. Các thư mục cũ không đánh số `PLAN_<slug>/` vẫn đọc được và không bao giờ bị đổi tên. Khi có kế hoạch được đánh số, `latest` trỏ đến kế hoạch có ID số cao nhất.

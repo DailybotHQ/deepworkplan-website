@@ -1,6 +1,6 @@
 ---
 /**
- * PlanTree (ME-04) — the `.dwp/plans/PLAN_<slug>/` directory structure.
+ * PlanTree (ME-04) — the `.dwp/plans/PLAN_001_<slug>/` directory structure.
  * Spec: docs/visuals/prompts/02-methodology.md#me-04. HTML/CSS file tree; paths
  * are mono (technical, stay English), annotations localized. role="img"; dark
  * mode; zero JS. See docs/DIAGRAM_COMPONENTS.md.
@@ -17,7 +17,7 @@ const { lang = 'en', class: className = '' } = Astro.props;
 const i18n = {
   en: {
     ariaLabel:
-      'The .dwp/plans/PLAN_slug/ directory: a README, a PROGRESS log, and numbered task files.',
+      'The .dwp/plans/PLAN_001_slug/ directory: a README, a PROGRESS log, and numbered task files.',
     title: 'Plan directory',
     ann: {
       readme: 'goal · task table · status',
@@ -29,7 +29,7 @@ const i18n = {
   },
   es: {
     ariaLabel:
-      'El directorio .dwp/plans/PLAN_slug/: un README, un registro PROGRESS y archivos de tarea numerados.',
+      'El directorio .dwp/plans/PLAN_001_slug/: un README, un registro PROGRESS y archivos de tarea numerados.',
     title: 'Directorio del plan',
     ann: {
       readme: 'objetivo · tabla de tareas · estado',
@@ -41,7 +41,7 @@ const i18n = {
   },
   pt: {
     ariaLabel:
-      'O diretório .dwp/plans/PLAN_slug/: um README, um registro PROGRESS e arquivos de tarefa numerados.',
+      'O diretório .dwp/plans/PLAN_001_slug/: um README, um registro PROGRESS e arquivos de tarefa numerados.',
     title: 'Diretório do plano',
     ann: {
       readme: 'objetivo · tabela de tarefas · status',
@@ -53,7 +53,7 @@ const i18n = {
   },
   zh: {
     ariaLabel:
-      '.dwp/plans/PLAN_slug/ 目录：一个 README、一份 PROGRESS 日志，以及按编号排列的任务文件。',
+      '.dwp/plans/PLAN_001_slug/ 目录：一个 README、一份 PROGRESS 日志，以及按编号排列的任务文件。',
     title: '计划目录',
     ann: {
       readme: '目标 · 任务表 · 状态',
@@ -65,7 +65,7 @@ const i18n = {
   },
   ja: {
     ariaLabel:
-      '.dwp/plans/PLAN_slug/ ディレクトリです。README、PROGRESS ログ、番号付きのタスクファイルが含まれます。',
+      '.dwp/plans/PLAN_001_slug/ ディレクトリです。README、PROGRESS ログ、番号付きのタスクファイルが含まれます。',
     title: 'プランのディレクトリ',
     ann: {
       readme: '目的 ・ タスク表 ・ ステータス',
@@ -77,7 +77,7 @@ const i18n = {
   },
   de: {
     ariaLabel:
-      'Das Verzeichnis .dwp/plans/PLAN_slug/: eine README, ein PROGRESS-Protokoll und nummerierte Aufgabendateien.',
+      'Das Verzeichnis .dwp/plans/PLAN_001_slug/: eine README, ein PROGRESS-Protokoll und nummerierte Aufgabendateien.',
     title: 'Plan-Verzeichnis',
     ann: {
       readme: 'Ziel · Aufgabentabelle · Status',
@@ -89,7 +89,7 @@ const i18n = {
   },
   fr: {
     ariaLabel:
-      'Le répertoire .dwp/plans/PLAN_slug/ : un README, un journal PROGRESS et des fichiers de tâches numérotés.',
+      'Le répertoire .dwp/plans/PLAN_001_slug/ : un README, un journal PROGRESS et des fichiers de tâches numérotés.',
     title: 'Répertoire du plan',
     ann: {
       readme: 'objectif · table des tâches · statut',
@@ -101,7 +101,7 @@ const i18n = {
   },
   ko: {
     ariaLabel:
-      '.dwp/plans/PLAN_slug/ 디렉터리입니다. README 한 개, PROGRESS 로그 한 개, 번호가 매겨진 작업 파일들이 들어 있어요.',
+      '.dwp/plans/PLAN_001_slug/ 디렉터리입니다. README 한 개, PROGRESS 로그 한 개, 번호가 매겨진 작업 파일들이 들어 있어요.',
     title: '플랜 디렉터리',
     ann: {
       readme: '목표 · 작업 표 · 상태',
@@ -113,7 +113,7 @@ const i18n = {
   },
   ru: {
     ariaLabel:
-      'Каталог .dwp/plans/PLAN_slug/: README, журнал PROGRESS и пронумерованные файлы задач.',
+      'Каталог .dwp/plans/PLAN_001_slug/: README, журнал PROGRESS и пронумерованные файлы задач.',
     title: 'Каталог плана',
     ann: {
       readme: 'цель · таблица задач · статус',
@@ -125,7 +125,7 @@ const i18n = {
   },
   it: {
     ariaLabel:
-      'La directory .dwp/plans/PLAN_slug/: un README, un registro PROGRESS e file di attività numerati.',
+      'La directory .dwp/plans/PLAN_001_slug/: un README, un registro PROGRESS e file di attività numerati.',
     title: 'Directory del piano',
     ann: {
       readme: 'obiettivo · tabella delle attività · stato',
@@ -137,7 +137,7 @@ const i18n = {
   },
   tr: {
     ariaLabel:
-      '.dwp/plans/PLAN_slug/ dizini: bir README, bir PROGRESS günlüğü ve numaralandırılmış görev dosyaları.',
+      '.dwp/plans/PLAN_001_slug/ dizini: bir README, bir PROGRESS günlüğü ve numaralandırılmış görev dosyaları.',
     title: 'Plan dizini',
     ann: {
       readme: 'amaç · görev tablosu · durum',
@@ -149,7 +149,7 @@ const i18n = {
   },
   id: {
     ariaLabel:
-      'Direktori .dwp/plans/PLAN_slug/: sebuah README, log PROGRESS, dan berkas tugas bernomor.',
+      'Direktori .dwp/plans/PLAN_001_slug/: sebuah README, log PROGRESS, dan berkas tugas bernomor.',
     title: 'Direktori rencana',
     ann: {
       readme: 'tujuan · tabel tugas · status',
@@ -161,7 +161,7 @@ const i18n = {
   },
   vi: {
     ariaLabel:
-      'Thư mục .dwp/plans/PLAN_slug/: một README, một nhật ký PROGRESS và các tệp tác vụ được đánh số.',
+      'Thư mục .dwp/plans/PLAN_001_slug/: một README, một nhật ký PROGRESS và các tệp tác vụ được đánh số.',
     title: 'Thư mục kế hoạch',
     ann: {
       readme: 'mục tiêu · bảng tác vụ · trạng thái',
@@ -173,7 +173,7 @@ const i18n = {
   },
   hi: {
     ariaLabel:
-      '.dwp/plans/PLAN_slug/ निर्देशिका: एक README, एक PROGRESS लॉग और क्रमांकित कार्य फ़ाइलें।',
+      '.dwp/plans/PLAN_001_slug/ निर्देशिका: एक README, एक PROGRESS लॉग और क्रमांकित कार्य फ़ाइलें।',
     title: 'योजना निर्देशिका',
     ann: {
       readme: 'लक्ष्य · कार्य तालिका · स्थिति',
@@ -185,7 +185,7 @@ const i18n = {
   },
   pl: {
     ariaLabel:
-      'Katalog .dwp/plans/PLAN_slug/: plik README, dziennik PROGRESS oraz ponumerowane pliki zadań.',
+      'Katalog .dwp/plans/PLAN_001_slug/: plik README, dziennik PROGRESS oraz ponumerowane pliki zadań.',
     title: 'Katalog planu',
     ann: {
       readme: 'cel · tabela zadań · status',
@@ -197,7 +197,7 @@ const i18n = {
   },
   uk: {
     ariaLabel:
-      'Каталог .dwp/plans/PLAN_slug/: README, журнал PROGRESS та пронумеровані файли завдань.',
+      'Каталог .dwp/plans/PLAN_001_slug/: README, журнал PROGRESS та пронумеровані файли завдань.',
     title: 'Каталог плану',
     ann: {
       readme: 'мета · таблиця завдань · статус',
@@ -209,7 +209,7 @@ const i18n = {
   },
   th: {
     ariaLabel:
-      'ไดเรกทอรี .dwp/plans/PLAN_slug/ ประกอบด้วยไฟล์ README หนึ่งไฟล์ บันทึก PROGRESS หนึ่งไฟล์ และไฟล์งานที่มีหมายเลขกำกับ',
+      'ไดเรกทอรี .dwp/plans/PLAN_001_slug/ ประกอบด้วยไฟล์ README หนึ่งไฟล์ บันทึก PROGRESS หนึ่งไฟล์ และไฟล์งานที่มีหมายเลขกำกับ',
     title: 'ไดเรกทอรีของแผน',
     ann: {
       readme: 'เป้าหมาย · ตารางงาน · สถานะ',
@@ -227,7 +227,7 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
 const rows = [
   { depth: 0, path: '.dwp/', ann: '' },
   { depth: 1, path: 'plans/', ann: '' },
-  { depth: 2, path: 'PLAN_<slug>/', ann: '', accent: true },
+  { depth: 2, path: 'PLAN_001_<slug>/', ann: '', accent: true },
   { depth: 3, path: 'README.md', ann: t.ann.readme },
   { depth: 3, path: 'PROGRESS.md', ann: t.ann.progress },
   { depth: 3, path: '1.task_<slug>.md', ann: t.ann.task },
