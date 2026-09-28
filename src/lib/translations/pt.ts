@@ -128,7 +128,7 @@ export const pt: SiteTranslations = {
       answer:
         'O Deep Work Plan responde com desenvolvimento guiado por especificação: um plano duradouro, tarefas atômicas e validation gates que o agente precisa passar. Done deixa de ser uma sensação — vira evidência verificável e revisável.',
       efficiency:
-        'E como o contexto é o recurso mais escasso do seu agente, o harness é projetado para manter sua própria carga de instruções pequena e auditável: instruções carregam progressivamente, a validação toca apenas o que mudou e cada tarefa aprende localmente. A carga por fluxo é medida em bytes e publicada a cada lançamento — o último lançamento reduziu o fluxo de execução em 45,7% e o fluxo de retomada em 67,5%. O próprio plano escala da mesma forma: um plano Lite para uma correção delimitada, um plano Full para o trabalho que se estende por horas — o formato sempre segue o alcance do trabalho, e não o contrário.',
+        'O contexto é o recurso mais escasso do seu agente. Por isso, o harness mantém sua própria carga de instruções enxuta e auditável. As instruções são carregadas progressivamente, a validação se concentra no que mudou e cada tarefa recebe o contexto relevante. Publicamos em bytes a carga de instruções de cada fluxo para deixar esse volume visível. Os planos também se ajustam ao trabalho: Lite para uma correção delimitada e Full para tarefas que levam horas. O formato acompanha o escopo e mantém o processo focado e rastreável.',
       illustrationAlt:
         'Um díptico gravado: de um lado um navio à deriva na névoa junto a rochas escarpadas, do outro o mesmo navio firme em um rumo traçado em direção ao farol de um porto.',
     },

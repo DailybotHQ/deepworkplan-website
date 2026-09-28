@@ -25,7 +25,7 @@ Nei burst brevi, gli agenti di coding sono notevoli. Affidategli una missione di
 
 Deep Work Plan risponde con lo sviluppo guidato dalla specifica: un piano duraturo, task atomici e validation gate che l’agente deve superare. Il lavoro resta verificabile — e qualsiasi agente può riprenderlo tra le sessioni.
 
-E poiché il contesto è la risorsa più scarsa del vostro agente, l’harness è progettato per mantenere piccola e verificabile la propria carga di istruzioni: le istruzioni si caricano progressivamente, la validazione tocca solo ciò che è cambiato e ogni task impara in loco. Il carico di ogni flusso è misurato in byte e pubblicato a ogni rilascio — l’ultimo rilascio ha ridotto il flusso di esecuzione del 45,7% e il flusso di ripresa del 67,5%. Anche il piano stesso scala allo stesso modo: un piano Lite per una correzione delimitata, un piano Full per il lavoro che si estende su ore — il formato segue sempre l’ampiezza del lavoro, mai il contrario.
+Il contesto è la risorsa più scarsa del tuo agente. Per questo il harness mantiene le proprie istruzioni essenziali e verificabili. Le istruzioni si caricano gradualmente, la validazione si concentra sulle modifiche e ogni attività riceve il contesto pertinente. Pubblichiamo in byte la quantità di istruzioni di ogni flusso, così questo carico è visibile. Anche i piani si adattano al lavoro: Lite per una correzione circoscritta e Full per attività che durano ore. Il formato segue l’ambito del lavoro e mantiene il processo focalizzato e tracciabile.
 ---
 
 ## Gli umani governano. Gli agenti eseguono.

@@ -128,7 +128,7 @@ export const pl: SiteTranslations = {
       answer:
         'Deep Work Plan odpowiada programowaniem sterowanym specyfikacją: trwały plan, zadania atomowe i bramki walidacyjne, które agent musi przejść. „Skończone” przestaje być odczuciem — staje się dowodem: zweryfikowanym i możliwym do przejrzenia.',
       efficiency:
-        'A ponieważ kontekst to najrzadszy zasób Twojego agenta, harness zaprojektowano tak, aby jego własne obciążenie instrukcjami było małe i audytowalne: instrukcje ładują się progresywnie, walidacja dotyka tylko zmian, a każde zadanie uczy się lokalnie. Obciążenie każdego przepływu jest mierzone w bajtach i publikowane przy każdym wydaniu — ostatnie wydanie zmniejszyło przepływ execute o 45,7%, a przepływ resume o 67,5%. Sam plan skaluje się w ten sam sposób: plan Lite dla ograniczonej poprawki, plan Full dla pracy rozciągniętej na godziny — format zawsze podąża za zakresem pracy, nigdy odwrotnie.',
+        'Kontekst to najcenniejszy zasób agenta, dlatego harness utrzymuje własne instrukcje w niewielkim, audytowalnym zakresie. Instrukcje są ładowane stopniowo, walidacja skupia się na zmianach, a każde zadanie otrzymuje potrzebny kontekst. Publikujemy rozmiar instrukcji dla każdego przepływu w bajtach, aby ten narzut był widoczny. Plany również dopasowują się do pracy: Lite do ograniczonej poprawki, Full do zadań trwających wiele godzin. Format wynika z zakresu pracy, dzięki czemu proces pozostaje skupiony i możliwy do prześledzenia.',
       illustrationAlt:
         'Dyptyk: z jednej strony statek dryfujący we mgle wśród skał, z drugiej ten sam statek pewnie na wykreowanym kursie ku latarni portu.',
     },

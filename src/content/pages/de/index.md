@@ -25,7 +25,7 @@ In kurzen Spitzen sind Coding-Agenten beeindruckend. Übergeben Sie ihnen eine l
 
 Deep Work Plan antwortet mit spec-driven development: ein dauerhafter Plan, atomare Aufgaben und Validierungs-Gates, die der Agent bestehen muss. Die Arbeit bleibt überprüfbar — und jeder Agent kann sie über Sitzungen hinweg fortsetzen.
 
-Und weil der Kontext die knappste Ressource Ihres Agenten ist, ist das Harness darauf ausgelegt, seine eigene Instruktionslast klein und prüfbar zu halten: Anweisungen laden progressiv, Validierung berührt nur Geändertes, und jede Aufgabe lernt lokal. Die Last pro Flow wird in Bytes gemessen und mit jedem Release veröffentlicht — das letzte Release senkte den Execute-Flow um 45,7% und den Resume-Flow um 67,5%. Der Plan selbst skaliert nach demselben Prinzip: ein Lite-Plan für eine begrenzte Korrektur, ein Full-Plan für Arbeit, die sich über Stunden erstreckt — das Format folgt immer dem Umfang der Arbeit, nicht umgekehrt.
+Kontext ist die knappste Ressource Ihres Agenten. Deshalb hält das Harness seine eigenen Anweisungen bewusst schlank und nachvollziehbar. Anweisungen werden schrittweise geladen, die Validierung konzentriert sich auf Änderungen, und jede Aufgabe erhält den passenden Kontext. Wir veröffentlichen den Instruktionsumfang jedes Ablaufs in Bytes, damit dieser Aufwand sichtbar bleibt. Auch Pläne passen sich der Arbeit an: Lite für eine klar abgegrenzte Korrektur, Full für Aufgaben, die Stunden dauern. Das Format richtet sich nach dem Umfang und hält den Prozess fokussiert und nachvollziehbar.
 ---
 
 ## Menschen steuern. Agenten führen aus.
