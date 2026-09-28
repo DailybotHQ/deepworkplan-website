@@ -42,7 +42,7 @@ Un plan nuevo DEBE usar un directorio numerado bajo `.dwp/plans/`, como `PLAN_00
 - **Full.** El directorio DEBE contener `README.md` (resumen del plan, objetivo, tabla de tareas y estado), un archivo por tarea con el nombre `<n>.task_<slug>.md`, y `PROGRESS.md` (un registro continuo de la ejecución).
 - **Lite.** Los registros de tarea, compactos y totalmente ejecutables, viven en línea dentro de `README.md` tras anclas estables `{#task-N}` en lugar de archivos de tarea separados — cada registro sigue llevando un objetivo, una Superficie tocada, criterios de aceptación, validación y un registro de finalización. `PROGRESS.md` sigue siendo REQUERIDO. Un plan Lite PUEDE promoverse a Full en cualquier momento. Véase [Planes Lite](/spec/lite-plans) para el ciclo de vida completo, en lugar de duplicarlo aquí.
 
-Un plan PUEDE llevar adicionalmente la capa de estado legible por máquina: `manifest.json` (identidad estática, escrito una vez en la materialización) y `state.json` (estado de ejecución activo por tarea). La capa de estado es RECOMENDADA para planes nuevos y REQUERIDA para la ejecución desatendida y para espacios de trabajo de agente sin git. Véase [Estado del plan](/spec/plan-state).
+Un plan PUEDE llevar adicionalmente la capa de estado legible por máquina: `manifest.json` (identidad estática, escrito una vez en la materialización) y `state.json` (estado de ejecución activo por tarea). La capa de estado es RECOMENDADA para planes v5 y REQUERIDA para la ejecución desatendida y para espacios de trabajo de agente sin git. Véase [Estado del plan](/spec/plan-state).
 
 
 Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v6 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
@@ -186,7 +186,7 @@ Todos los artefactos de DWP DEBEN vivir bajo un directorio `.dwp/` ignorado por 
 
 Un plan PUEDE llevar la capa de estado legible por máquina — `manifest.json` (identidad estática) y `state.json` (estado activo por tarea, registros de puertas de validación, registros de resultados, punto de control, estado de bloqueo). El plan en Markdown sigue siendo la fuente de verdad; la capa JSON es una proyección derivada, regenerada en los puntos de protocolo y reconciliada en la reanudación.
 
-La capa de estado es RECOMENDADA para planes nuevos, REQUERIDA para la ejecución desatendida y REQUERIDA para espacios de trabajo de agente sin git. Véase la definición normativa completa en [Estado del plan](/spec/plan-state).
+La capa de estado es RECOMENDADA para planes v5, REQUERIDA para la ejecución desatendida y REQUERIDA para espacios de trabajo de agente sin git. Véase la definición normativa completa en [Estado del plan](/spec/plan-state).
 
 ## Rigor proporcional
 
