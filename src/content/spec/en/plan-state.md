@@ -12,8 +12,6 @@ section: State
 
 **Current standard: v6.** The documents below are the retained base; v6 adds the contract, append-only journal, task context, resource controls, and lifecycle rules. [Read the v6 manifest schema](https://deepworkplan.com/schema/plan-manifest/v6.json) and [live snapshot schema](https://deepworkplan.com/schema/plan-snapshot/v6.json). Existing v5 plans keep their recorded rules. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
 
-> **Version scope:** The sections below are the retained v5.0.0 state layer. The current v6 standard uses a contract, append-only journal, and snapshot projection; v5 plans continue to use this document's `manifest.json` and `state.json` rules.
-
 **Version 5.0.0. Status: Stable.** This document specifies the machine-readable plan state layer of the Deep Work Plan methodology, now aligned with the DWP standard's own version — no existing requirement is weakened by the renumbering. This revision also documents the guarded state updater, verified plan publication, and the evidence-truth rules a completed plan must satisfy (see below). The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
 Two JSON artifacts — `manifest.json` (the plan's static identity) and `state.json` (the live, per-task execution state including validation-gate results) — that every plan MAY carry alongside its markdown files, and that unattended execution (see [Agent protocol](/spec/agent-protocol#execution-profiles)) and non-git workspaces (see [Archetypes](/spec/archetypes) §3) MUST carry.
