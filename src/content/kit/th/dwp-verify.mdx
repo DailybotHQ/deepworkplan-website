@@ -35,7 +35,8 @@ import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
 3. รายงาน **CONFORMANT** หรือ **NOT CONFORMANT** พร้อมแจกแจงทุกข้อที่ไม่ผ่าน
 4. เสนอที่จะบันทึกช่องว่างที่พบเป็น Deep Work Plan โดยไม่แก้ไขแบบเงียบ ๆ
 
+**การตรวจสอบแผนตามรุ่น** ตัวตรวจสอบ provenance ของ repository รองรับมาตรฐาน DWP ปัจจุบัน 6.0.0 แต่การตรวจแผนจะแยกตามรุ่น แผน v6 ระบุได้จาก contract pointer, `contract.json` หรือ revision chain ใน `contracts/` และตรวจด้วย validator ของ v6 สำหรับ contract, journal และ ledger ตัวตรวจสอบ `plan_contract.py` ที่ยังคงไว้รองรับเฉพาะ v5 และห้ามใช้เป็นตัวตรวจแผน v6 ใน v6 `state.json` เป็น snapshot projection ที่สร้างขึ้น หากไม่ตรงกับ journal จะถือเป็นข้อค้นพบ ทั้งสองรุ่นอยู่ร่วมกันได้และการตรวจสอบจะไม่ย้ายแผน
+
 ## ชื่อแทน
 
 - `dwp:verify`
-**การตรวจสอบแผนตามรุ่น** ตัวตรวจสอบ provenance ของ repository รองรับมาตรฐาน DWP ปัจจุบัน 6.0.0 แต่การตรวจแผนจะแยกตามรุ่น แผน v6 ระบุได้จาก contract pointer, `contract.json` หรือ revision chain ใน `contracts/` และตรวจด้วย validator ของ v6 สำหรับ contract, journal และ ledger ตัวตรวจสอบ `plan_contract.py` ที่ยังคงไว้รองรับเฉพาะ v5 และห้ามใช้เป็นตัวตรวจแผน v6 ใน v6 `state.json` เป็น snapshot projection ที่สร้างขึ้น หากไม่ตรงกับ journal จะถือเป็นข้อค้นพบ ทั้งสองรุ่นอยู่ร่วมกันได้และการตรวจสอบจะไม่ย้ายแผน
