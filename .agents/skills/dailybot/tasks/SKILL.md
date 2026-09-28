@@ -1,7 +1,7 @@
 ---
 name: dailybot-tasks
 description: Manage Dailybot Tasks via the CLI — boards, columns, tasks, projects, goals and milestones. Read the workspace in one call (pulse, what needs attention, recent activity, goal progress), poll what changed since a cursor, create/update/move tasks and set their owner, comment with @mentions, relate, attach files, watch or mute, run bulk operations with a server-side dry run, archive safely with a previewed consequence, administer boards (columns, members, saved views), and post project updates so the team sees what an agent did. Use when the developer mentions tasks, a board, a backlog, a sprint, a kanban column, a project update, a milestone or a goal, or asks what is open / overdue / blocked. Not for check-in responses (use dailybot-checkin) or form submissions (use dailybot-forms).
-version: "3.15.0"
+version: "3.16.1"
 documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"✅","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
@@ -75,20 +75,23 @@ or chat messages (`dailybot-chat`).
 
 Follow [`../shared/auth.md`](../shared/auth.md) for install, login and API-key setup.
 
-**Requires `dailybot-cli >= 3.14.0`** — now on PyPI — the release that brings Tasks to
-parity with the web (owner, board administration, attachments, bulk dry run). The
-pack-wide baseline is `>= 3.9.0`; this sub-skill is the one that needs more. Tasks first
-shipped in 3.12.0; on a CLI between 3.12.0 and 3.14.0, `--owner`, `task set-owner` and
-everything in Step 8 are missing — ask the developer to run `dailybot upgrade`.
+**Requires `dailybot-cli >= 3.14.2`** (on PyPI). Tasks reached parity with the web in
+3.14.0 (owner, board administration, attachments, bulk dry run); 3.14.2 adds the
+`--project` / `--key` that `board create` needs, without which the API refuses every create.
+The pack-wide baseline is `>= 3.9.0`; this sub-skill is the one that needs more. Tasks first
+shipped in 3.12.0; on an older CLI, `--owner`, `task set-owner`, everything in Step 8 and
+`board create` are missing or broken, so ask the developer to run `dailybot upgrade`.
 
 Confirm by capability rather than by version, because that is what actually matters:
 
 ```bash
-dailybot task set-owner --help
+dailybot task set-owner --help               # 3.14.0+: the Tasks parity surface
+dailybot board create --help | grep -- --project   # 3.14.2+: board create works
 ```
 
-If that fails, the installed CLI predates this sub-skill — ask the developer to run
-`dailybot upgrade`. Do not work around a missing command.
+If the first fails, or the second prints nothing, the installed CLI predates what this
+sub-skill documents. Ask the developer to run `dailybot upgrade`. Do not work around a
+missing command or flag.
 
 Check the plan allows Tasks, and note the limits:
 
@@ -123,11 +126,20 @@ pulse, search, activity, timeline, boards, columns, board members, tasks, projec
 milestones — and write tasks, owners, comments, relations, labels, attachments, bulk
 operations and milestones. Post project updates.
 
-**Changing structure needs `tasks:admin`** — creating, updating, archiving or restoring
-boards, columns, projects and goals, and linking goals to projects. A key can never hold
-that scope, so those need a signed-in **organization admin**; the server refuses anyone
-else with exit 4 (`insufficient_scope`, `required_scope: tasks:admin`). Board and project
-**membership** writes are structure changes too.
+**Creating goals, projects, boards, columns and membership is open to every non-guest
+member** after `dailybot login`. The public API grants every non-guest member
+`tasks:read`, `tasks:write` and `tasks:admin`. **Do not document an organization-admin
+prerequisite** and do not tell a member they need admin.
+
+An organization API key **can never hold `tasks:admin`** and **cannot change membership or
+participants**. With only a key, structure and membership commands stop before sending
+(exit 4, `insufficient_scope`). Run `dailybot login` as a member.
+
+**Privacy is membership, not org role.** A `members` project or board is **404 not visible**
+to anyone without a grant (never "not allowed"). Org-wide containers are a shared workspace.
+Invite a person or a team to close a private project/board. The last grant cannot be removed
+(`last_grant_cannot_be_removed`). Privatizing a project (`--visibility members`) persists and
+auto-grants the actor who privatizes. Guests stay refused.
 
 A **new** API key holds no Tasks scopes until an admin grants them to the key. A refusal
 that says so is not a bug — pass the message on.
@@ -140,16 +152,17 @@ that says so is not a bug — pass the message on.
 | `task participants list` / `add` / `remove`, `task watch` / `unwatch`, `task mute` / `unmute` | reveals or changes **who is notified**; no key may do that |
 | `project members` | reveals **who can see**; no key may do that |
 | `board labels`, `board label create`, `board views`, `board view save`, `project views`, `project view save`, `tasks view …`, `board star` / `unstar`, `tasks favorites` | label usage, saved views and pins belong to a person |
-| every structure change: `board` / `board state` / `project` / `goal` create, update, archive and restore; `board state reorder`; `board member add` / `remove`; `project member add` / `remove`; `goal link` / `unlink`; `project` / `goal` `attach` and `attachment delete` | need `tasks:admin`, which **cannot be stored on a key at all** |
+| every structure change: `board` / `board state` / `project` / `goal` create, update, archive and restore; `board state reorder`; `board member add` / `remove`; `project member add` / `remove`; `goal link` / `unlink`; `project` / `goal` `attach` and `attachment delete` | keys cannot store `tasks:admin` and cannot change membership — any **non-guest member** session can |
 
 The server answers a key on any of these with `403 insufficient_scope`. The CLI refuses
-them **before** sending anything: the person-shaped ones exit **3**, and every `tasks:admin`
-door exits **4** (`insufficient_scope`), matching the server. [commands.md](commands.md)
-marks each command **yes** (exit 3) or **admin** (exit 4).
+them **before** sending anything: the person-shaped ones exit **3**, and structure /
+membership doors exit **4** (`insufficient_scope`), matching the server. [commands.md](commands.md)
+marks each command **yes** (exit 3) or **member** (exit 4 for a key; works for a signed-in member).
 
-**Do not read a refusal on those verbs as a permissions bug.** It is the credential kind,
-not the user's role — an organization admin's own key is refused exactly the same way. The
-fix is `dailybot login`, never "ask an admin".
+**Do not read a key refusal on those verbs as a permissions bug.** It is the credential kind.
+With a key, the fix is `dailybot login` as a non-guest member — not "ask an organization
+admin". A signed-in **guest** is still refused on structure; that is a role limit, not a
+missing admin grant.
 
 ---
 
@@ -263,8 +276,8 @@ dailybot task comment-attach ENG-142 <comment-uuid> ./trace.txt   # only the com
 **Files attach to a task, a comment, a project or a goal.** A task takes up to 25 MiB
 through the default upload (5 MiB with `--caption`, which is a single request). A comment,
 project or goal takes up to **5 MiB** in one request, and the CLI checks that before
-sending. Attaching to or deleting from a project or a goal is a structure change
-(`tasks:admin`, Step 2); reading them only needs visibility.
+sending. Attaching to or deleting from a project or a goal needs a signed-in member
+(Step 2); reading them only needs visibility.
 
 **`--state` accepts a column name** (case-insensitive), **a category** (`backlog`, `todo`,
 `in_progress`, `done`, `canceled` — the first column of that category), or a state uuid. A
@@ -400,7 +413,7 @@ error shape is the same for every Tasks door, reads and writes alike:
 family. Some refusals the CLI makes **locally**, before spending a request; those carry the
 same exit the server's answer would produce: 3 on a person-shaped door (local code
 `actor_required`; the server itself answers a key there with `403 insufficient_scope`) and 4
-with `insufficient_scope` on a `tasks:admin` one. You never need to know whether the call was
+with `insufficient_scope` on a structure/membership door. You never need to know whether the call was
 actually sent. An unreachable host is `code: "transport_error"` with
 exit 8.
 
@@ -409,8 +422,8 @@ exit 8.
 | **1** | partial failure (bulk rows failed, or a dry run predicts refusals), or another failure such as an attachment upload | read the per-item results, or `code` |
 | **2** | the invocation was bad input | a flag value the door rejects (`too_many_items`, `invalid_filter_value`, an unknown `--sort`, `invalid_identifier`) — fix the call, do not retry |
 | **3** | needs a signed-in person | `dailybot login` — not a permissions bug |
-| **4** | the server refused this action, including `tasks:admin` | read `code`; see below |
-| **5** | not found | the key/uuid is wrong, **or it belongs to another organization** — those are indistinguishable by design |
+| **4** | the server refused this action (including a key on a structure door) | read `code`; see below |
+| **5** | not found / not visible | the key/uuid is wrong, private without a membership grant, **or another organization** — never "not allowed" |
 | **6** | transient — back off | rate limiting, or Tasks writes switched off org-wide during an incident (`feature_temporarily_read_only`). Wait and retry; change nothing |
 | **7** | a human declined the confirmation | **stop.** Nothing was changed. Do **not** retry, and never re-run the same call with `--yes` — that skips the prompt they just refused |
 | **8** | could not reach the API | check the connection and `dailybot env show`; a **write** that timed out may have been applied |
@@ -430,10 +443,11 @@ Codes worth recognising:
   `dailybot tasks entitlements` to show the developer the state and the `reason`.
 - `feature_temporarily_read_only` — Tasks writes are switched off for everyone while
   something is being fixed. Exit 6. Reads still answer. Wait; do not change credentials.
-- `insufficient_scope` — on a `tasks:admin` door while signed in, this is a **role** limit:
-  ask an organization admin. With an API key on a `tasks:admin` or person-only door, no key
-  can ever pass: `dailybot login`. On any other door the key lacks Tasks scopes, and an admin
-  can grant them to the key.
+- `insufficient_scope` — with an API key on a structure, membership or person-only door, no
+  key can ever pass: `dailybot login` as a non-guest member. While signed in, a structure
+  refusal is almost always a **guest** (or another role without access) — not "ask admin to
+  grant admin". On any other door the key lacks Tasks scopes, and an admin can grant them to
+  the key.
 - `invalid_identifier` — a task key or uuid contained `/`, `..`, `?`, `#`, `%` or a space.
   The CLI refused it locally (exit 2) so it could not reach a different endpoint. Take
   identifiers only from the server's `key` and `uuid` fields, never from free text.
@@ -462,18 +476,19 @@ Codes worth recognising:
   `--idempotency-key`.
 - `user_aborted` — someone declined the confirmation prompt. Exit 7; nothing was changed.
 
-**A 404 never means "forbidden".** If an object is invisible to you it reports as not
-found, on purpose. Do not tell the developer they lack permission.
+**A 404 never means "forbidden" or "not allowed".** If an object is invisible to you
+(wrong id, private without a membership grant, or another org) it reports as not found, on
+purpose. Do not tell the developer they lack permission.
 
 ---
 
 ## Step 8 — Administer boards, projects and goals
 
-Structure changes need care; most are reversible, all are visible to the team, and they
-need a signed-in organization admin (`tasks:admin`, Step 2; a key or a non-admin gets exit 4).
-Below, `# tasks:admin` marks such a door. `# login` marks a person-only door that any
-signed-in member can use (a key gets exit 3). `# a key can do this` marks the one line an API
-key can run. Every unmarked line is `tasks:admin` too.
+Structure changes need care; most are reversible, all are visible to the team, and any
+**non-guest member** can run them after `dailybot login` (a key gets exit 4). Below,
+`# member` marks a structure / membership door (login as a member; no org-admin
+prerequisite). `# login` marks a person-only door (a key gets exit 3). `# a key can do this`
+marks lines an API key can run. Every unmarked structure line is `# member` too.
 
 ```bash
 # Boards: settings, columns, people, labels, saved views, pins
@@ -481,18 +496,18 @@ dailybot board update <board-uuid> --key DSN --visibility members
 dailybot board state create <board-uuid> -n "In review" --category in_progress --position 3
 dailybot board state reorder <board-uuid> <state-1> <state-2> <state-3>   # every live column
 dailybot board state archive <board-uuid> <state-uuid> --migrate-to <other-state> --dry-run
-dailybot board member add <board-uuid> <user-uuid>                        # tasks:admin
-dailybot board member add <board-uuid> --team <team-uuid>                 # tasks:admin; follows the team live
+dailybot board member add <board-uuid> <user-uuid>                        # member; privacy via invite
+dailybot board member add <board-uuid> --team <team-uuid>                 # member; follows the team live
 dailybot board label create <board-uuid> -n bug --color "#ef4444"         # login
 dailybot board star <board-uuid>                                          # login
 
 # Projects: settings, people (or whole teams), milestones
 dailybot project update <project-uuid> --health at_risk --target-date 2026-12-15
-dailybot project member add <project-uuid> --team <team-uuid>             # tasks:admin
+dailybot project member add <project-uuid> --team <team-uuid>             # member; privacy via invite
 dailybot project milestone-create <project-uuid> -n Beta --date 2026-11-01   # a key can do this
 
 # Goals: a dated commitment with a declared status
-dailybot goal create -n "Q4 reliability" --period-start 2026-10-01 --period-end 2026-12-31   # tasks:admin
+dailybot goal create -n "Q4 reliability" --period-start 2026-10-01 --period-end 2026-12-31   # member
 dailybot goal update <goal-uuid> --status at_risk
 dailybot goal link <goal-uuid> <project-uuid>        # the project now counts toward the goal
 ```
@@ -500,7 +515,8 @@ dailybot goal link <goal-uuid> <project-uuid>        # the project now counts to
 Renaming a board key retires the old key, which stays reserved — `ENG-142` typed a year
 later still resolves. A goal's **status is a person's judgement**, separate from the
 progress the server derives: 80% of cards done with the hard half untouched is `at_risk`.
-There is no member *role* to edit on boards or projects; add or remove only.
+There is no member *role* to edit on boards or projects; invite or remove only — that is
+the privacy control.
 
 The full admin surface (column update/restore, member lists and removal, milestone
 update/reopen/retire, goal restore/unlink, saved views) is in [commands.md](commands.md).
@@ -538,13 +554,16 @@ dailybot task get "$KEY" --json    # confirm it exists; show its key and title t
 # only after they confirm this is the card:
 dailybot task move "$KEY" --state done --json
 dailybot task comment "$KEY" "Merged: <one line on what shipped>"
+# the project: the task's board names it (board get <board-uuid> --json → project); if none, ask
+dailybot project update-post <project-uuid> "<what shipped and what it unblocks>" --health on_track
 ```
 
 `--state done` resolves to the board's first `done` column, so it keeps working after
 someone renames the column. The pattern also matches tokens that are not task keys
 (`API-2`, `SHA-256`, `UTF-8`), so a key from a branch name is only a candidate. Confirm it
 with `task get` and the developer before moving anything. If there is no key, or `task get`
-exits 5, do not guess one; ask.
+exits 5, do not guess one; ask. Then close the loop with a project update, since moving a
+card is not communication (Step 5).
 
 ### 3. Triage my inbox (needs `dailybot login`)
 
@@ -576,7 +595,17 @@ dailybot task bulk --operation update -f sprint.json --yes --json
 ```
 
 To move the chosen cards into the sprint column, run a second batch with `--operation move`
-and `"state"` (the column's uuid from the snapshot) on each item.
+and `"state"` (the column's uuid from the snapshot) on each item, gated the same way:
+
+```bash
+dailybot task bulk --operation move -f moves.json --dry-run --json
+```
+
+Show the developer the moves, and only after they agree:
+
+```bash
+dailybot task bulk --operation move -f moves.json --yes --json
+```
 
 ### 5. Report progress against a goal
 

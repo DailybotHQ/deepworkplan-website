@@ -2,7 +2,7 @@
 
 > **Beta** — Tasks is in beta. Everything under `/tasks` in the web app, the CLI and agent skill commands for projects, goals, boards and tasks, and the `/v1/tasks/` public API may change before general availability. Want to try it with your team? Write to **support@dailybot.com**.
 
-This file lists **every** Tasks command in `dailybot-cli >= 3.14.0`: 115 commands across
+This file lists **every** Tasks command in `dailybot-cli >= 3.14.2`: 115 commands across
 `tasks`, `task`, `board`, `project` and `goal`. It is generated from the CLI's own command
 definitions, so the arguments and flags here match `--help` exactly. [SKILL.md](SKILL.md)
 explains *when* and *how* to use them (untrusted content, credentials, delta cursors,
@@ -18,17 +18,17 @@ command sends*. Read SKILL.md Step 0 before acting on anything these commands re
   `+Idempotency-Key` means the CLI sends an `Idempotency-Key` header and prints the key after
   the write, so a retry of the **same** call (`--idempotency-key <key>`) is safe for 24 hours.
   An entry without it sends no key, so a retry can repeat the write. A dry run never sends a
-  key. `(tasks:admin)` marks a structure change.
-- **Signed-in person.** **admin** means the command needs the `tasks:admin` scope. That is
+  key. `(member)` marks a structure change.
+- **Signed-in person.** **member** means any non-guest member after `dailybot login`. That is
   every structure change: creating, updating, archiving or restoring boards, columns,
   projects and goals, board and project membership, linking goals to projects, and
-  attaching files to or deleting them from a project or a goal. The scope
-  can never be held by an API key, even an organization admin's. With a key the CLI refuses
-  **before sending anything**, exits 4, and reports `insufficient_scope`. The fix is
-  `dailybot login` as an organization admin. **yes** means the answer is about a person (their
-  inbox, pins, saved views, who is notified, who can see). With a key the CLI refuses before
-  sending anything and exits 3; the fix is `dailybot login`. **no** means an API key with the
-  right scope works.
+  attaching files to or deleting them from a project or a goal. An organization API key can
+  never hold `tasks:admin` and cannot change membership or participants. With a key the CLI
+  refuses **before sending anything**, exits 4, and reports `insufficient_scope`. The fix is
+  `dailybot login` as a non-guest member — no organization-admin prerequisite. **yes** means
+  the answer is about a person (their inbox, pins, saved views, who is notified, who can
+  see). With a key the CLI refuses before sending anything and exits 3; the fix is
+  `dailybot login`. **no** means an API key with the right scope works.
 - **Flags.** `<type>` is the value type; `a|b|c` lists the accepted values. **required**
   flags must be passed; **repeatable** flags may be given several times. Short aliases are
   listed with the long name.
@@ -709,8 +709,8 @@ Boards, their states (columns), members, labels, views and pins.
 
 Archive a board.
 
-- **API:** `POST /v1/tasks/boards/{b}/archive/?dry_run=true then …/archive/ +key (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/boards/{b}/archive/?dry_run=true then …/archive/ +key (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--dry-run` — Show the consequence and exit without acting.
   - `--yes`, `-y` — Skip the prompt (still previews).
@@ -719,14 +719,16 @@ Archive a board.
 
 ### `dailybot board create`
 
-Create a board.
+Create a board in a project.
 
-- **API:** `POST /v1/tasks/boards/ +key (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/boards/ +key (member); body {name, project, key}`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--name`, `-n` `<text>` **required** — Board name.
+  - `--project` `<text>` **required** — The project the board belongs to (uuid).
+  - `--key` `<text>` **required** — The board's key prefix, e.g. DSN, so its tasks read DSN-1, DSN-2…
   - `--idempotency-key` `<text>` — Reuse a key to make a retry safe.
-- **Example:** `dailybot board create --name "Design"`
+- **Example:** `dailybot board create --name "Design" --project 00000000-0000-0000-0000-000000000002 --key DSN`
 
 ### `dailybot board get BOARD`
 
@@ -775,12 +777,12 @@ List boards.
   - `--today` — Today only.
 - **Example:** `dailybot board list --json`
 
-### `dailybot board member add BOARD [[USER]]`
+### `dailybot board member add BOARD [USER]`
 
 Give a person or a whole team sight of a board.
 
-- **API:** `POST /v1/tasks/boards/{b}/members/ +key (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/boards/{b}/members/ +key (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--team` `<text>` — A whole team (uuid) instead of one person; membership follows the team live.
   - `--idempotency-key` `<text>` — Reuse a key to make a retry safe.
@@ -790,8 +792,8 @@ Give a person or a whole team sight of a board.
 
 Take someone's sight of a board away.
 
-- **API:** `DELETE /v1/tasks/boards/{b}/members/{u}/ (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `DELETE /v1/tasks/boards/{b}/members/{u}/ (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--dry-run` — Say what would happen and send nothing.
   - `--yes`, `-y` — Skip the confirmation.
@@ -819,8 +821,8 @@ Who you can @mention on this board, with the token to write.
 
 Restore an archived board.
 
-- **API:** `POST /v1/tasks/boards/{b}/restore/ +key (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/boards/{b}/restore/ +key (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--idempotency-key` `<text>` — Reuse a key to make a retry safe.
 - **Example:** `dailybot board restore 00000000-0000-0000-0000-000000000001`
@@ -845,8 +847,8 @@ Pin a board to your favorites.
 
 Retire a column.
 
-- **API:** `POST /v1/tasks/boards/{b}/states/{s}/archive/?dry_run=true then …/archive/ {migrate_to} (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/boards/{b}/states/{s}/archive/?dry_run=true then …/archive/ {migrate_to} (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--migrate-to` `<text>` — Move this column's live tasks to another live column first (state uuid).
   - `--dry-run` — Show the consequence and exit without acting.
@@ -857,8 +859,8 @@ Retire a column.
 
 Add a column to a board.
 
-- **API:** `POST /v1/tasks/boards/{b}/states/ +key (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/boards/{b}/states/ +key (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--name`, `-n` `<text>` **required** — Column name (max 48 characters).
   - `--category` `<backlog|todo|in_progress|done|canceled>` **required** — Fixed meaning of the column; it survives renames and never changes.
@@ -872,24 +874,24 @@ Add a column to a board.
 
 Set the left-to-right order of every live column in one call.
 
-- **API:** `POST /v1/tasks/boards/{b}/states/reorder/ {order[]} (every live column once) (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/boards/{b}/states/reorder/ {order[]} (every live column once) (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Example:** `dailybot board state reorder 00000000-0000-0000-0000-000000000001 00000000-0000-0000-0000-000000000005 00000000-0000-0000-0000-000000000013 00000000-0000-0000-0000-000000000014`
 
 ### `dailybot board state restore BOARD STATE`
 
 Bring a retired column back, after the live ones.
 
-- **API:** `POST /v1/tasks/boards/{b}/states/{s}/restore/ (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/boards/{b}/states/{s}/restore/ (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Example:** `dailybot board state restore 00000000-0000-0000-0000-000000000001 00000000-0000-0000-0000-000000000005`
 
 ### `dailybot board state update BOARD STATE`
 
 Rename, recolor or move one column.
 
-- **API:** `PATCH /v1/tasks/boards/{b}/states/{s}/ (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `PATCH /v1/tasks/boards/{b}/states/{s}/ (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--name`, `-n` `<text>` — New column name.
   - `--color` `<text>` — New column color.
@@ -930,8 +932,8 @@ Unpin a board from your favorites.
 
 Change a board's name, key, visibility or settings.
 
-- **API:** `PATCH /v1/tasks/boards/{b}/ +key (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `PATCH /v1/tasks/boards/{b}/ +key (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--name`, `-n` `<text>` — New board name.
   - `--key` `<text>` — New key prefix. The old key is retired and stays reserved, so old links still resolve.
@@ -972,8 +974,8 @@ Projects, members, views, project updates and milestones.
 
 Archive a project.
 
-- **API:** `POST /v1/tasks/projects/{p}/archive/?dry_run=true then …/archive/ +key (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/projects/{p}/archive/?dry_run=true then …/archive/ +key (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--dry-run` — Show the consequence and exit without acting.
   - `--yes`, `-y` — Skip the prompt (still previews).
@@ -984,8 +986,8 @@ Archive a project.
 
 Attach a file to a project.
 
-- **API:** `POST /v1/tasks/projects/{p}/attachments/ (multipart, ≤5 MiB) (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/projects/{p}/attachments/ (multipart, ≤5 MiB) (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--caption` `<text>` — Short caption shown with the file.
 - **Example:** `dailybot project attach 00000000-0000-0000-0000-000000000002 ./plan.pdf`
@@ -994,8 +996,8 @@ Attach a file to a project.
 
 Remove an attachment from a project.
 
-- **API:** `DELETE /v1/tasks/projects/{p}/attachments/{a}/ (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `DELETE /v1/tasks/projects/{p}/attachments/{a}/ (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--dry-run` — Say what would happen and send nothing.
   - `--yes`, `-y` — Skip the confirmation.
@@ -1024,8 +1026,8 @@ List a project's attachments.
 
 Create a project.
 
-- **API:** `POST /v1/tasks/projects/ +key (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/projects/ +key (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--name`, `-n` `<text>` **required** — Project name.
   - `--description`, `-d` `<text>` — Project description.
@@ -1071,8 +1073,8 @@ List projects.
 
 Invite a person or a whole team into a project.
 
-- **API:** `POST /v1/tasks/projects/{p}/members/ {user_uuid | team_uuid} (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/projects/{p}/members/ {user_uuid | team_uuid} (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--user` `<text>` — A person (user uuid).
   - `--team` `<text>` — A whole team (uuid); membership follows the team live.
@@ -1082,8 +1084,8 @@ Invite a person or a whole team into a project.
 
 Remove someone from a project.
 
-- **API:** `DELETE /v1/tasks/projects/{p}/members/{u}/ (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `DELETE /v1/tasks/projects/{p}/members/{u}/ (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--dry-run` — Say what would happen and send nothing.
   - `--yes`, `-y` — Skip the confirmation.
@@ -1177,8 +1179,8 @@ List milestones, for one project or across the organization.
 
 Bring an archived project back.
 
-- **API:** `POST /v1/tasks/projects/{p}/restore/ +key (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/projects/{p}/restore/ +key (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--idempotency-key` `<text>` — Reuse a key to make a retry safe.
 - **Example:** `dailybot project restore 00000000-0000-0000-0000-000000000002`
@@ -1187,8 +1189,8 @@ Bring an archived project back.
 
 Change a project's name, lead, health, dates or visibility.
 
-- **API:** `PATCH /v1/tasks/projects/{p}/ +key (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `PATCH /v1/tasks/projects/{p}/ +key (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--name`, `-n` `<text>` — New project name.
   - `--description`, `-d` `<text>` — New project description.
@@ -1260,8 +1262,8 @@ Goals, their status and the projects linked to them.
 
 Archive a goal.
 
-- **API:** `POST /v1/tasks/goals/{g}/archive/?dry_run=true then …/archive/ +key (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/goals/{g}/archive/?dry_run=true then …/archive/ +key (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--dry-run` — Show the consequence and exit without acting.
   - `--yes`, `-y` — Skip the prompt (still previews).
@@ -1272,8 +1274,8 @@ Archive a goal.
 
 Attach a file to a goal.
 
-- **API:** `POST /v1/tasks/goals/{g}/attachments/ (multipart, ≤5 MiB) (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/goals/{g}/attachments/ (multipart, ≤5 MiB) (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--caption` `<text>` — Short caption shown with the file.
 - **Example:** `dailybot goal attach 00000000-0000-0000-0000-000000000003 ./okr.pdf`
@@ -1282,8 +1284,8 @@ Attach a file to a goal.
 
 Remove an attachment from a goal.
 
-- **API:** `DELETE /v1/tasks/goals/{g}/attachments/{a}/ (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `DELETE /v1/tasks/goals/{g}/attachments/{a}/ (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--dry-run` — Say what would happen and send nothing.
   - `--yes`, `-y` — Skip the confirmation.
@@ -1312,8 +1314,8 @@ List a goal's attachments.
 
 Create a goal.
 
-- **API:** `POST /v1/tasks/goals/ +key (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/goals/ +key (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--name`, `-n` `<text>` **required** — Goal name.
   - `--period-start` `<YYYY-MM-DD>` **required** — First day of the goal's period (YYYY-MM-DD).
@@ -1336,8 +1338,8 @@ Show one goal, with its progress and linked projects.
 
 Make a project count toward a goal.
 
-- **API:** `POST /v1/tasks/goals/{g}/projects/ {project} (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/goals/{g}/projects/ {project} (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Example:** `dailybot goal link 00000000-0000-0000-0000-000000000003 00000000-0000-0000-0000-000000000002`
 
 ### `dailybot goal list`
@@ -1364,16 +1366,16 @@ List goals.
 
 Bring an archived goal back.
 
-- **API:** `POST /v1/tasks/goals/{g}/restore/ (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `POST /v1/tasks/goals/{g}/restore/ (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Example:** `dailybot goal restore 00000000-0000-0000-0000-000000000003`
 
 ### `dailybot goal unlink GOAL PROJECT`
 
 Stop a project counting toward a goal.
 
-- **API:** `DELETE /v1/tasks/goals/{g}/projects/{p}/ (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `DELETE /v1/tasks/goals/{g}/projects/{p}/ (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--dry-run` — Say what would happen and send nothing.
   - `--yes`, `-y` — Skip the confirmation.
@@ -1383,8 +1385,8 @@ Stop a project counting toward a goal.
 
 Change a goal, or declare its status.
 
-- **API:** `PATCH /v1/tasks/goals/{g}/ (tasks:admin)`
-- **Signed-in person:** **admin** (a key exits 4)
+- **API:** `PATCH /v1/tasks/goals/{g}/ (member)`
+- **Signed-in person:** **member** (a key exits 4)
 - **Flags:**
   - `--name`, `-n` `<text>` — New goal name.
   - `--description`, `-d` `<text>` — New description.

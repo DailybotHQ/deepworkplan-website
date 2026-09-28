@@ -29,6 +29,8 @@ tasks" is the sentence that changes someone's mind; "this will archive the board
 
 - **Archiving a board cascade-archives its live tasks**, and restoring the board does
   **not** bring them back. They are restored one by one.
+- **Archiving a project cascades to its boards and their tasks.** `project restore` walks
+  back up, never down: the boards and tasks stay archived until restored themselves.
 - **`task delete` is an alias of archive.** Nothing is destroyed; it is reversible and
   audited as `task.archived`. Do not tell a developer their data is gone.
 - **`--yes` skips the prompt, not the preview.** The record of what was about to happen is
@@ -60,6 +62,7 @@ and nothing is written. It sends no idempotency key.
 
 ```bash
 dailybot task bulk --operation archive -f batch.json --dry-run --json
+# stop here: show the developer the changes and refusals; run the next line only after yes
 dailybot task bulk --operation archive -f batch.json --yes --json
 ```
 
