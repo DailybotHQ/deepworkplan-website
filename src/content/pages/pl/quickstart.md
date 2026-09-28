@@ -144,6 +144,10 @@ Istniejące plany zachowują zapisaną generację i nigdy nie są przepisywane. 
 zachowuje metodykę v5 przy ściślejszej strukturze; nie mierzono niegorszości
 wyników agentów.
 
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+
 Każdy plan ma jedno obowiązkowe zadanie zamykające: **Final Review**. Wykonuje ono
 przejście bezpieczeństwa nad całym zakumulowanym zestawem zmian, w tym wymaganą
 lokalną recenzję AI Diff Reviewer, waliduje finalny stan repozytorium, uzgadnia

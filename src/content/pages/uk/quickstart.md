@@ -144,6 +144,10 @@ https://deepworkplan.com/schema/plan-snapshot/v6.json. `plan-state/v6.json` не
 методологію v5 із суворішою структурою; не-гіршість результатів агентів не
 вимірювалася.
 
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+
 Кожен план має одне обов'язкове завершальне завдання: **Final Review**. Воно
 виконує перевірку безпеки над усім накопиченим набором змін, включно з
 обов'язковою локальною перевіркою AI Diff Reviewer, валідує фінальний стан

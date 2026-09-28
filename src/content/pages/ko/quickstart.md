@@ -140,6 +140,10 @@ https://deepworkplan.com/schema/plan-state/v5.json 을 계속 사용합니다. �
 계획은 기록된 세대를 유지하며 다시 작성되지 않습니다. v6은 v5 방법론을 더 엄격한 구조로 유지합니다. 에이전트 결과의 비열등성은
 측정되지 않았습니다.
 
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+
 모든 계획에는 하나의 필수 마무리 작업이 있습니다: **Final Review**
 입니다. 이는 필수적인 로컬 AI Diff Reviewer 검토를 포함하여 누적된
 변경 사항 전체에 대한 보안 검사를 실행하고, 최종 리포지토리 상태를

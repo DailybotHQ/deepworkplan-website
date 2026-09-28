@@ -148,6 +148,10 @@ renomeado. Planos existentes mantêm a geração registrada e nunca são
 reescritos. v6 mantém a metodologia v5 com uma estrutura mais rigorosa; a não
 inferioridade dos resultados dos agentes não foi medida.
 
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+
 Todo plano tem uma tarefa de encerramento obrigatória: o **Final Review**.
 Ele executa o passo de segurança sobre o conjunto de mudanças acumulado,
 incluindo a revisão local obrigatória do AI Diff Reviewer, valida o estado

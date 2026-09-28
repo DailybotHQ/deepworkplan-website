@@ -122,6 +122,10 @@ https://deepworkplan.com/schema/plan-manifest/v6.json 作为 `manifest.json`
 `plan-state/v6.json`：v6 使用快照，而不是改名后的 v5 状态架构。现有计划保留记录的代际，绝不会被重写。v6 保留 v5
 方法论并采用更严格的结构；尚未测量代理结果的非劣效性。
 
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+
 每份计划都有一项强制性的收尾任务：**Final Review**。它对累积的整个变更集
 运行安全检查（包括必需的本地 AI Diff Reviewer 审查），验证仓库的最终状态，
 核对各任务所使用的技能，并记录证据与局限。本地审查技能安装在固定版本；

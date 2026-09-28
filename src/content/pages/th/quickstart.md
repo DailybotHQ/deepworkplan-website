@@ -141,6 +141,10 @@ https://deepworkplan.com/schema/plan-snapshot/v6.json ไม่มี
 แผนเดิมคงรุ่นที่บันทึกไว้และจะไม่ถูกเขียนใหม่ v6 คงวิธีการของ v5
 พร้อมโครงสร้างที่เข้มงวดขึ้น; ยังไม่ได้วัด non-inferiority ของผลลัพธ์ agent.
 
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+
 ทุกแผนมีงานปิดท้ายที่บังคับหนึ่งงาน: **Final Review** ซึ่งจะรัน security pass
 เหนือชุดการเปลี่ยนแปลงที่สะสมทั้งหมด รวมถึงการรีวิวเฉพาะที่ของ AI Diff
 Reviewer ที่จำเป็น ตรวจสอบสถานะสุดท้ายของ repository ให้ถูกต้อง ตรวจสอบความ

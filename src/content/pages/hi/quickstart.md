@@ -150,6 +150,10 @@ https://deepworkplan.com/schema/plan-manifest/v6.json और लाइव प्
 कभी फिर से नहीं लिखी जातीं। v6 अधिक सख्त संरचना के साथ v5 कार्यप्रणाली बनाए
 रखता है; एजेंट परिणामों की गैर-अवरता मापी नहीं गई है।
 
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+
 हर योजना में एक अनिवार्य समापन टास्क होता है: **Final Review**। यह संचित
 परिवर्तन सेट पर सुरक्षा जांच चलाता है, जिसमें आवश्यक स्थानीय AI Diff Reviewer
 समीक्षा शामिल है, अंतिम रिपॉज़िटरी स्थिति को सत्यापित करता है, टास्क द्वारा

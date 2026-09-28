@@ -155,6 +155,10 @@ https://deepworkplan.com/schema/plan-snapshot/v6.json. Không có
 viết lại. v6 giữ nguyên phương pháp v5 với cấu trúc chặt chẽ hơn; tính không
 kém hơn của kết quả agent chưa được đo lường.
 
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+
 Mỗi kế hoạch có một tác vụ kết thúc bắt buộc: **Final Review**. Nó chạy bước
 kiểm tra bảo mật trên toàn bộ tập thay đổi đã tích lũy, bao gồm cả đánh giá cục
 bộ AI Diff Reviewer bắt buộc, xác thực trạng thái cuối cùng của repository,

@@ -109,6 +109,10 @@ https://deepworkplan.com/schema/plan-state/v5.json を引き続き使用しま�
 スキーマを改名せず、スナップショットを使います。既存計画は記録済みの世代を保ち、書き換えられません。v6 は v5
 の方法論を維持しつつ構造を厳格化します。エージェント成果の非劣性は測定されていません。
 
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+
 すべての計画には一つの必須の締めくくりタスクがあります: **Final
 Review** です。これは、必須のローカル AI Diff Reviewer レビューを含む、
 蓄積された変更セット全体に対するセキュリティパスを実行し、最終的なリポジ

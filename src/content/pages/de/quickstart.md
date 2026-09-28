@@ -138,6 +138,10 @@ v5-State-Schemas. Bestehende Pläne behalten ihre aufgezeichnete Generation und
 werden nie umgeschrieben. v6 behält die v5-Methodik mit strengerer Struktur
 bei; die Nichtunterlegenheit der Agentenergebnisse wurde nicht gemessen.
 
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+
 Jeder Plan hat eine verpflichtende Abschlussaufgabe: das **Final Review**. Es führt den
 Sicherheitstest über den akkumulierten Änderungssatz aus, einschließlich der
 erforderlichen lokalen AI-Diff-Reviewer-Überprüfung, validiert den finalen

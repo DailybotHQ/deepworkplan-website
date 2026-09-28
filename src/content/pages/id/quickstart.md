@@ -155,6 +155,10 @@ sekadar diganti nama. Rencana yang ada mempertahankan generasi tercatat dan
 tidak pernah ditulis ulang. v6 mempertahankan metodologi v5 dengan struktur
 lebih ketat; non-inferioritas hasil agen belum diukur.
 
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+
 Setiap rencana memiliki satu tugas penutup wajib: **Final Review**. Ia menjalankan
 pemeriksaan keamanan atas seluruh kumpulan perubahan yang terakumulasi, termasuk
 review lokal AI Diff Reviewer yang wajib, memvalidasi status akhir repositori,

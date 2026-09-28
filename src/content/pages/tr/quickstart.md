@@ -151,6 +151,10 @@ durum şeması yerine anlık görüntü kullanır. Mevcut planlar kayıtlı nesi
 korur ve asla yeniden yazılmaz. v6, v5 metodolojisini daha sıkı bir yapıyla
 sürdürür; ajan sonuçlarının aşağı kalmaması ölçülmemiştir.
 
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+
 Her planın zorunlu bir kapanış görevi vardır: **Final Review**. Bu görev, gerekli
 yerel AI Diff Reviewer incelemesi dâhil olmak üzere birikmiş değişiklik kümesi
 üzerinde güvenlik taramasını çalıştırır, nihai depo durumunu doğrular, görevler

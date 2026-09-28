@@ -210,8 +210,8 @@ methodology) instead of overwriting — and confirm with the user before replaci
 
 New plans receive monotonically increasing numeric IDs with at least three
 digits (for example, `PLAN_001_add_payment_webhooks/`). Current v6 plans
-use 2–5-word slugs. The retained v5 flow uses 2–4 words to fit its frozen
-schemas. Existing unnumbered `PLAN_<slug>/` folders remain readable and are
+use 2–5-word slugs. The retained v5 flow uses 2–4 words: its allocator requires at least
+two slug words, and its frozen schema permits at most four after the numeric ID. Existing unnumbered `PLAN_<slug>/` folders remain readable and are
 never renamed. When numbered plans exist, `latest` resolves to the highest
 numeric ID.
 
