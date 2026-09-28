@@ -16,11 +16,15 @@ A Deep Work Plan is a directory of markdown files. The shape of that directory �
 
 <PlanTree lang="en" class="not-prose my-10" />
 
-A plan is a directory under `.dwp/plans/` named `PLAN_<slug>/`. It contains:
+A plan is a directory under `.dwp/plans/` named `PLAN_001_<slug>/`. It contains:
+
 
 - `README.md` — the plan overview: goal, source material, task table, and status.
 Each task file is named `<n>.task_<slug>.md` and follows the ten normative sections rendered above, in the order defined by the installed skill.
 - `PROGRESS.md` — a running log of execution.
+
+
+The current 6.x pack creates new v6 plans by default with slugs of 2–5 words. The retained v5 flow uses 2–4 words because its frozen schemas count the numeric ID as a word. New plans receive monotonically increasing numeric IDs of at least three digits (for example, `PLAN_001_add_payment_webhooks/`). Existing unnumbered `PLAN_<slug>/` folders remain readable and are never renamed; existing plans are never migrated implicitly. When numbered plans exist, `latest` resolves to the plan with the highest numeric ID.
 
 ## Task file structure
 

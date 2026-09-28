@@ -1,7 +1,7 @@
 ---
 title: "Schnellstart — Deep Work Plan"
 description: "Der ausführbare Onboarding-Prompt für KI-Agenten: Deep Work Plan in jedem Repository übernehmen — analysieren, dokumentieren, die Skill installieren und es agenten-steuerbar hinterlassen."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 Sie sind ein KI-Coding-Agent. Lesen Sie diesen gesamten Prompt zuerst und machen Sie dann das aktuelle Repository
@@ -105,10 +105,12 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Aktueller Standard und Ausführungsmodell
 
-Der aktuelle repository-seitige Standard ist **DWP 5.0.0**, umgesetzt durch die oben
+Der aktuelle repository-seitige Standard ist **DWP 6.0.0**, umgesetzt durch die oben
 installierte Deep Work Plan Skill-Version. Das aktuelle Skill-Paket umfasst den Router
 und neun Sub-Skills: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` und `upgrade`.
+
+Installierte Skill-Version: **6.0.1**. Das aktuelle 6.x-Paket erstellt neue Pläne standardmäßig mit v6. Bestehende Pläne behalten ihre aufgezeichnete Generation; die Migration eines v5-Plans zu v6 erfordert einen ausdrücklichen Auftrag mit Vorschau.
 
 Der Standard ist bewusst proportional und macht diese Proportionalität zu einer
 Eigenschaft des Plans, nicht der Disziplin des Entwicklers. Ein Plan ist entweder
@@ -124,12 +126,24 @@ Anforderung oder ein Gate nicht mehr tragen.
 Bei einem Full-Plan ist das Repository die dauerhafte Ausführungsoberfläche. Der Plan
 enthält atomare Aufgaben, eine **Berührte Oberfläche**, die erklärt, was sich geändert
 hat und welche Konsumenten betroffen sind, Akzeptanzkriterien und ein Validierungs-Gate,
-das aus der dokumentierten Testkarte des Repositorys ausgewählt wird. Ein neuer Plan
-schreibt zuerst sein Identitätsmanifest, zeichnet seine Analyse auf, erstellt die
-Aufgabenliste und schaltet erst zuletzt den Live-Zustand um, sodass eine unterbrochene
-Erstellung wiederhergestellt statt erraten werden kann. Wenn die Zustandsschicht
-vorhanden ist, beschreibt `manifest.json` den Plan, und `state.json` zeichnet
-Kontrollpunkte, Aufgabenstatus, Gate-Ergebnisse und Blocker auf.
+das aus der dokumentierten Testkarte des Repositorys ausgewählt wird. In v6 schreibt die Erstellung zuerst das Identitätsmanifest, dann den Vertrag und schließlich das Genehmigungsereignis. Das nur anhängbare Journal hält die Ausführung fest; `state.json` ist ein daraus abgeleiteter Snapshot. Jeder Schritt kann nach einer Unterbrechung fortgesetzt werden.
+
+Die Schema-Generation bleibt an den jeweiligen Plan gebunden. v5-Pläne
+behalten `state.json` unter
+https://deepworkplan.com/schema/plan-state/v5.json. Das aktuelle 6.x-Paket erstellt
+neue Pläne standardmäßig mit v6; bestehende Pläne behalten ihre aufgezeichnete
+Generation und werden nicht stillschweigend migriert. Diese Pläne verwenden
+https://deepworkplan.com/schema/plan-manifest/v6.json für `manifest.json`;
+ihre Live-Projektion ist ein Snapshot unter
+https://deepworkplan.com/schema/plan-snapshot/v6.json. `plan-state/v6.json`
+gibt es nicht: v6 verwendet einen Snapshot statt eines umbenannten
+v5-State-Schemas. Bestehende Pläne behalten ihre aufgezeichnete Generation und
+werden nie umgeschrieben. v6 behält die v5-Methodik mit strengerer Struktur
+bei; die Nichtunterlegenheit der Agentenergebnisse wurde nicht gemessen.
+
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
 
 Jeder Plan hat eine verpflichtende Abschlussaufgabe: das **Final Review**. Es führt den
 Sicherheitstest über den akkumulierten Änderungssatz aus, einschließlich der
@@ -178,7 +192,9 @@ Methodik angleichen), statt es zu überschreiben — und bestätigen Sie mit dem
  (Skills, Agenten, Befehle) muss **für dieses Repository durchdacht** sein — niemals eine Kopie des Kits eines anderen
  Repositorys.
 6. **`.dwp/` + `tmp/`.** Legen Sie ein per gitignore ausgeschlossenes `.dwp/` mit `plans/` an, plus einen `tmp/`-
- Scratch-Bereich — beide nicht-destruktiv zur `.gitignore` hinzugefügt (anhängen, niemals neu schreiben). Sie sind nicht austauschbar: alles, was ein Flow **über einen Plan** erzeugt — die Analyse, das Skills-Register, die Sicherheitsüberprüfung, Gate-Logs, Audit-Berichte — gehört in das `.dwp/plans/PLAN_{name}/analysis_results/` genau dieses Plans, nie ins Repository-Root und nie nach `tmp/`. `tmp/` ist für Arbeit, die kein Plan je wieder liest.
+ Scratch-Bereich — beide nicht-destruktiv zur `.gitignore` hinzugefügt (anhängen, niemals neu schreiben). Sie sind nicht austauschbar: alles, was ein Flow **über einen Plan** erzeugt — die Analyse, das Skills-Register, die Sicherheitsüberprüfung, Gate-Logs, Audit-Berichte — gehört in das `.dwp/plans/PLAN_001_<slug>/analysis_results/` genau dieses Plans, nie ins Repository-Root und nie nach `tmp/`. `tmp/` ist für Arbeit, die kein Plan je wieder liest.
+
+Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v6-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
 
 ## 4. Die erforderliche lokale Überprüfung installieren, dann die Opt-in-Addons anbieten
 

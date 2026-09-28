@@ -8,6 +8,8 @@ section: Workflow
 
 # Lite-Pläne
 
+> **Versionsumfang:** Dies ist ein beibehaltenes v5.0.0-Basisdokument. Der aktuelle v6-Standard verlangt zusätzlich die zutreffenden `V6_*.md`-Erweiterungen aus dem [Spezifikationsindex](/spec). Bestehende v5-Pläne behalten ihre aufgezeichneten Regeln.
+
 **Version 5.0.0. Status: Stabil.** Dieses Dokument spezifiziert die Lite-Plan-Darstellung, die zusammen mit der [DWP-Spezifikation](/spec/dwp-specification) eingeführt wird: ein Planformat für kleine bis mittlere, abgegrenzte Arbeiten, das direkt materialisiert wird, ohne eine nicht ausführbare Entwurfsstufe. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
 ## Darstellung und Lebenszyklus

@@ -35,6 +35,8 @@ Obiektywnie sprawdź zgodność repozytorium i planu — tylko do odczytu.
 3. Zgłoszenie **CONFORMANT** lub **NOT CONFORMANT** wraz z wymienieniem każdego niepowodzenia.
 4. Zaproponowanie ujęcia braków w postaci Deep Work Plan; nigdy nie naprawia po cichu.
 
+**Walidacja planów według generacji.** Kontroler pochodzenia repozytorium akceptuje aktualny standard DWP 6.0.0, ale plany sprawdza się zależnie od generacji. Plan v6 jest rozpoznawany po wskaźniku contract, pliku `contract.json` lub łańcuchu rewizji `contracts/` i sprawdzany walidatorami v6 dla contract, journal i ledger. Zachowany walidator `plan_contract.py` obsługuje wyłącznie v5 i NIE WOLNO używać go do walidacji planów v6. W v6 `state.json` jest generowaną projekcją snapshot; rozbieżność z journal to niezgodność. Obie generacje współistnieją, a weryfikacja nie migruje żadnej z nich.
+
 ## Aliasy
 
 - `dwp:verify`

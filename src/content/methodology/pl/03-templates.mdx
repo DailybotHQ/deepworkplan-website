@@ -16,11 +16,15 @@ Deep Work Plan to katalog plików Markdown. Kształt tego katalogu — i każdeg
 
 <PlanTree lang="pl" class="not-prose my-10" />
 
-Plan to katalog w `.dwp/plans/` o nazwie `PLAN_<slug>/`. Zawiera:
+Plan to katalog w `.dwp/plans/` o nazwie `PLAN_001_<slug>/`. Zawiera:
+
 
 - `README.md` — przegląd planu: cel, materiały źródłowe, tabelę zadań i status.
 - Jeden plik na zadanie, o nazwie `<n>.task_<slug>.md`.
 - `PROGRESS.md` — bieżący dziennik realizacji.
+
+
+Pakiet 6.x domyślnie tworzy plany v6. Istniejące plany zachowują zapisaną generację; migracja wymaga wyraźnego polecenia. Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slug v6 ma 2–5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.
 
 ## Struktura pliku zadania
 

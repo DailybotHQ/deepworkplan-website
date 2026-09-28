@@ -34,3 +34,15 @@ usage: /deepworkplan-onboard
 ## टिप्पणियाँ
 
 एक रिपॉज़िटरी शून्य वैकल्पिक ऐडऑन के साथ पूरी तरह अनुरूप होती है; AI Diff Reviewer स्थानीय समीक्षा संस्करण 2.3.0 से baseline का हिस्सा है। पता लगाई गई वास्तविकता हमेशा प्रीसेट धारणाओं पर भारी पड़ती है।
+
+## v6 स्कीमा संदर्भ
+
+v6 योजनाओं के लिए मशीन-पठनीय स्कीमा कैटलॉग इन स्थिर URL पर प्रकाशित है। v6 लाइव प्रोजेक्शन एक स्नैपशॉट है; `plan-state/v6.json` मौजूद नहीं है। मौजूदा v5 योजनाएँ v5 state स्कीमा का उपयोग करती रहेंगी और पुरानी योजनाएँ कभी चुपचाप फिर से नहीं लिखी जातीं।
+
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
+- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
+- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+
+वर्तमान 6.x पैक नए प्लान डिफ़ॉल्ट रूप से v6 में बनाता है। मौजूदा प्लान अपनी दर्ज पीढ़ी बनाए रखते हैं; माइग्रेशन के लिए स्पष्ट अनुरोध आवश्यक है। नई योजनाओं को कम-से-कम तीन अंकों वाली क्रमशः बढ़ती संख्यात्मक ID मिलती है (उदाहरण: `PLAN_001_add_payment_webhooks/`)। स्थिर v5 स्कीमा संख्यात्मक ID को एक शब्द गिनते हैं, इसलिए v5 slug में 2–4 शब्द और v6 slug में 2–5 शब्द होते हैं। मौजूदा बिना नंबर वाले `PLAN_<slug>/` फ़ोल्डर पढ़ने योग्य बने रहते हैं और उनका नाम कभी नहीं बदला जाता। नंबर वाली योजनाएँ मौजूद होने पर `latest` सबसे बड़ी संख्यात्मक ID वाली योजना को दर्शाता है।

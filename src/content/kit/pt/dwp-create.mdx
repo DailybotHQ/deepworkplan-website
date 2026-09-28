@@ -39,12 +39,13 @@ Acrescente **`trust`** (ou `auto`) como última palavra para pular essa revisão
 O modo trust é o atalho para usuários avançados, depois que você confia no fluxo; o modo guiado mantém um humano no circuito por padrão.
 
 ## Comportamento
-
 1. Analisar o objetivo e o contexto do repositório.
 2. Fazer perguntas de esclarecimento se houver ambiguidade.
-3. Materializar o plano diretamente em `.dwp/plans/PLAN_<name>/` — um plano Lite por padrão, ou Full para trabalhos maiores (no modo guiado, revisá-lo e escolher mantê-lo como Lite, promovê-lo a Full, editá-lo ou parar).
+3. Materializar o plano diretamente em `.dwp/plans/PLAN_001_<slug>/` — um plano Lite por padrão, ou Full para trabalhos maiores (no modo guiado, revisá-lo e escolher mantê-lo como Lite, promovê-lo a Full, editá-lo ou parar).
 4. Decompor em tarefas sequenciais e escrever o README, os arquivos de tarefa e o PROGRESS.
 5. Terminar com o Final Review (passe de segurança, validação do estado final, reconciliação de skills).
+
+O pacote 6.x cria planos v6 por padrão. Os planos existentes mantêm a geração registrada; a migração exige uma solicitação explícita. O pacote atual 6.x cria planos v6 por padrão, com slugs de 2–5 palavras. O fluxo v5 mantido usa 2–4 palavras porque seus esquemas congelados contam o ID numérico como uma palavra. Os planos existentes mantêm a geração registrada e nunca são migrados silenciosamente. Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v6 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.
 
 ## Aliases
 

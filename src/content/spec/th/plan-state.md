@@ -8,6 +8,10 @@ section: State
 
 # สถานะแผน
 
+> **ขอบเขตเวอร์ชัน:** นี่คือเอกสารพื้นฐาน v5.0.0 ที่ยังคงไว้ มาตรฐาน v6 ปัจจุบันยังกำหนดให้ใช้ส่วนขยาย `V6_*.md` ที่เกี่ยวข้องตามรายการใน[ดัชนีข้อกำหนด](/spec) แผน v5 ที่มีอยู่ยังคงใช้กฎที่บันทึกไว้
+
+**มาตรฐานปัจจุบัน: v6** เอกสารด้านล่างเป็นข้อกำหนดพื้นฐานที่คงไว้ ส่วน v6 เพิ่มสัญญา journal แบบเพิ่มข้อมูลอย่างเดียว บริบทต่อหนึ่งงาน การควบคุมทรัพยากร และกฎวงจรชีวิต [manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) และ [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json) แผน v5 เดิมยังคงใช้กฎที่บันทึกไว้ [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **เวอร์ชัน 5.0.0. สถานะ: เสถียร** เอกสารนี้ระบุชั้นสถานะแผนที่เครื่องอ่านได้ของระเบียบวิธี Deep Work Plan ซึ่งตอนนี้ปรับให้สอดคล้องกับเวอร์ชันของมาตรฐาน DWP เอง — ไม่มีข้อกำหนดเดิมใดถูกทำให้อ่อนลงจากการเปลี่ยนหมายเลขนี้ ฉบับแก้ไขนี้ยังบันทึกเรื่องตัวอัปเดตสถานะที่มีการป้องกัน การเผยแพร่แผนที่ผ่านการตรวจสอบ และกฎความจริงของหลักฐานที่แผนที่เสร็จสมบูรณ์ต้องปฏิบัติตาม (ดูด้านล่าง) คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
 
 สิ่งประดิษฐ์ JSON สองชิ้น — `manifest.json` (เอกลักษณ์คงที่ของแผน) และ `state.json` (สถานะการดำเนินงานต่อหนึ่งงานแบบสด รวมถึงผลลัพธ์ validation gate) — ที่ทุกแผน MAY พกไว้ร่วมกับไฟล์ markdown และที่การดำเนินงานแบบไม่มีผู้ดูแล (ดู [โปรโตคอลของเอเจนต์](/spec/agent-protocol#execution-profiles)) และ workspace ที่ไม่มี git (ดู [Archetype](/spec/archetypes) §3) MUST พก
@@ -222,3 +226,19 @@ sub-skill `verify` MUST ถือว่าการเบี่ยงเบน�
 ## การกำหนดเวอร์ชัน schema
 
 ทั้งสอง schema มีเวอร์ชันตาม URL ฟิลด์เพิ่มเติมได้รับอนุญาตภายในเวอร์ชัน การเปลี่ยนชื่อหรือเปลี่ยนประเภทฟิลด์ต้องใช้ schema เวอร์ชันใหม่และหมายเหตุการย้ายใน changelog ของ spec การแก้ไขฉบับนี้นำ `/v2.json` มาใช้กับทั้งสอง schema: ฟิลด์ `file` ของรายการงานกลายเป็น `locator` ที่มีชนิดข้อมูล (`{"kind": "file" | "inline", "value": ...}`) manifest ได้ `plan_format` เพิ่มมา และไฟล์สถานะได้ `format`, `materialization`, `approval` และ `promotion` เพิ่มมา — รวมกันแล้วคือฟิลด์ที่แผน Lite ต้องการ (ดู [แผน Lite](/spec/lite-plans)) manifest และไฟล์สถานะแบบ `/v1.json` ยังคงใช้งานได้และจะไม่ถูกเขียนทับเป็น v2 อย่างเงียบ ๆ เลย เซสชัน `refine` MAY ย้ายมันอย่างตั้งใจ ฟิลด์ `spec_version` ใน manifest ปักหมุดเวอร์ชัน DWP spec ที่แผนถูกสร้างขึ้น เอเจนต์ที่พบแผนที่ใหม่กว่า spec ที่ติดตั้งอยู่ SHOULD บอกเช่นนั้นแทนที่จะเดา
+
+## สคีมา v6 และความเข้ากันได้
+
+v6 คงวิธีการของ v5 และเพิ่มโครงสร้างวิศวกรรมที่เข้มงวดยิ่งขึ้นสำหรับแผนใหม่ manifest ระบุตัวตนชี้ไปยังสัญญาที่มีเวอร์ชัน; journal ที่เพิ่มข้อมูลได้อย่างเดียวบันทึกอำนาจและเหตุการณ์; context manifest ระบุการเลือกบริบทในแต่ละงาน; scheduler ส่งต่องานที่มีสิทธิ์เท่านั้น; และ projection สด `state.json` เป็น snapshot ที่สร้างจาก journal ระบบปฏิเสธ allowlist ความสามารถที่ว่างเปล่า สิ่งเหล่านี้เป็นการตัดสินใจทางสถาปัตยกรรม ไม่ใช่หลักฐานว่าผลลัพธ์ของ agent ดีขึ้น: ยังไม่ได้วัด non-inferiority ของผลลัพธ์
+
+สคีมา manifest และ live snapshot ของ v6:
+
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
+
+live projection ของ v6 เป็น snapshot ไม่ใช่ไฟล์สถานะ v5 ที่เปลี่ยนชื่อ `plan-state/v5.json` ยังคงเผยแพร่สำหรับแผน v5; ไม่มี `plan-state/v6.json` แผน v1, v2 และ v5 ที่มีอยู่คงรุ่นสคีมาที่บันทึกไว้และจะไม่ถูกเขียนทับโดยไม่มีการแจ้ง
+
+แผนใหม่จะได้รับ ID ตัวเลขที่เพิ่มขึ้นตามลำดับและมีอย่างน้อยสามหลัก (เช่น `PLAN_001_add_payment_webhooks/`) สคีมา v5 ที่ตรึงไว้จะนับ ID ตัวเลขเป็นหนึ่งคำ ดังนั้น slug ของ v5 จึงมี 2–4 คำ ส่วน slug ของ v6 มี 2–5 คำ โฟลเดอร์เดิมที่ไม่มีหมายเลข `PLAN_<slug>/` ยังคงอ่านได้และจะไม่มีการเปลี่ยนชื่อ หากมีแผนที่มีหมายเลข `latest` จะหมายถึงแผนที่มี ID ตัวเลขสูงสุด.

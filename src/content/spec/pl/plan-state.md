@@ -8,6 +8,10 @@ section: State
 
 # Stan planu
 
+> **Zakres wersji:** To zachowany dokument bazowy v5.0.0. Aktualny standard v6 wymaga również odpowiednich rozszerzeń `V6_*.md` wymienionych w [indeksie specyfikacji](/spec). Istniejące plany v5 zachowują zapisane reguły.
+
+**Aktualny standard: v6.** Poniższe dokumenty są zachowaną podstawą; v6 dodaje kontrakt, dziennik tylko do dopisywania, kontekst zadań, kontrolę zasobów i reguły cyklu życia. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) i [migawka v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Istniejące plany v5 zachowują swoje reguły. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Wersja 5.0.0. Status: stabilna.** Niniejszy dokument specyfikuje warstwę stanu planu odczytywalnego maszynowo metodyki Deep Work Plan, teraz dostosowaną do własnego numeru wersji standardu DWP — żadne istniejące wymaganie nie zostaje osłabione przez tę zmianę numeracji. Ta rewizja dokumentuje również strzeżony aktualizator stanu, zweryfikowaną publikację planu oraz zasady prawdziwości dowodów, które musi spełniać ukończony plan (zob. poniżej). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 
 Dwa artefakty JSON — `manifest.json` (statyczna tożsamość planu) i `state.json` (aktywny stan realizacji poszczególnych zadań, w tym wyniki bramek walidacyjnych) — które każdy plan MOŻE przechowywać obok swoich plików Markdown, a które wykonanie nieobsługiwane (zob. [Protokół agenta](/spec/agent-protocol#execution-profiles)) oraz przestrzenie robocze bez gita (zob. [Archetypy](/spec/archetypes) §3) MUSZĄ przechowywać.
@@ -222,3 +226,19 @@ Egzekwowanie jest mechaniczne wszędzie tam, gdzie pozwalają na to rekordy. Dow
 ## Wersjonowanie schematów
 
 Oba schematy są wersjonowane przez URL. Pola addytywne są dozwolone w ramach wersji; zmiana nazwy lub typu pola wymaga nowej wersji schematu i noty migracyjnej w dzienniku zmian specyfikacji. Ta rewizja wprowadza `/v2.json` dla obu schematów: pole `file` wpisu zadania staje się typizowanym `locator` (`{"kind": "file" | "inline", "value": ...}`), manifest zyskuje `plan_format`, a plik stanu zyskuje `format`, `materialization`, `approval` i `promotion` — razem pola, których potrzebują plany Lite (zob. [Plany Lite](/spec/lite-plans)). Manifesty i pliki stanu `/v1.json` pozostają ważne i nigdy nie są po cichu przepisywane na v2; sesja `refine` MOŻE świadomie zmigrować jeden z nich. Pole `spec_version` w manifeście wskazuje wersję specyfikacji DWP, pod którą plan został utworzony; agent napotykający plan nowszy niż jego zainstalowana specyfikacja POWINIEN to zgłosić, zamiast zgadywać.
+
+## Schematy v6 i zgodność
+
+v6 zachowuje metodykę v5 i dodaje ściślejszą strukturę inżynieryjną dla nowych planów. Manifest tożsamości wskazuje wersjonowany kontrakt; dziennik wyłącznie dopisywany zapisuje uprawnienia i zdarzenia; manifesty kontekstu jawnie określają wybór kontekstu dla zadania; harmonogram przydziela tylko kwalifikującą się pracę; a aktywna projekcja `state.json` to migawka utworzona z dziennika. Pusta lista dozwolonych możliwości jest odrzucana. To decyzje architektoniczne, a nie dowód lepszych wyników agentów: nie mierzono niegorszości tych wyników.
+
+Schematy manifestu i aktywnej migawki v6:
+
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
+
+Aktywna projekcja v6 to migawka, a nie przemianowany plik stanu v5. `plan-state/v5.json` pozostaje opublikowany dla planów v5; `plan-state/v6.json` nie istnieje. Istniejące plany v1, v2 i v5 zachowują zapisaną generację schematu i nigdy nie są po cichu przepisywane.
+
+Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slug v6 ma 2–5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.

@@ -8,6 +8,8 @@ section: Standard
 
 # Padrão de documentação
 
+> **Escopo da versão:** Este é um documento-base v5.0.0 mantido. O padrão v6 atual também exige as extensões `V6_*.md` aplicáveis listadas no [índice da especificação](/spec). Os planos v5 existentes mantêm as regras registradas.
+
 **Versão 5.0.0.** Este padrão define como os Deep Work Plans documentam sua estrutura, tarefas e progresso, e como um repositório documenta a si mesmo para que um agente possa atuar com segurança. Ele se aplica a todo plano criado sob a metodologia DWP. Esta versão alinha a versão própria do documento com o padrão DWP que acompanha — sem alterações nos requisitos existentes — e adiciona a aplicação do orçamento de índice enxuto e o nível de funcionalidade descritos abaixo. As palavras-chave MUST, SHOULD e MAY são usadas conforme definidas na RFC 2119.
 
 ## AGENTS.md como ponto de entrada compacto

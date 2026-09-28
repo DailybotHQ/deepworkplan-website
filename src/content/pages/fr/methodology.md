@@ -1,11 +1,12 @@
 ---
 title: "La méthodologie Deep Work Plan"
 description: "Cinq chapitres, du manifeste aux archétypes : les principes, la boucle centrale, les modèles, les skills et les adaptations derrière la méthodologie Deep Work Plan."
-lastUpdated: 2026-05-30
+lastUpdated: 2026-09-28
 ---
 
 ## La méthodologie Deep Work Plan
 
+Le pack 6.x actuel crée les nouveaux plans en v6 par défaut. Les plans existants conservent leur génération enregistrée ; une migration exige une demande explicite.
 Deep Work Plan (DWP) est une méthodologie ouverte et indépendante du framework pour mener un travail d’ingénierie structuré et autonome avec des agents de code IA. Elle transforme un objectif flou en un plan relisible qu’un agent peut exécuter, mettre en pause, reprendre et sur lequel il peut rendre compte — sans perdre le contexte.
 
 DWP repose sur trois piliers.

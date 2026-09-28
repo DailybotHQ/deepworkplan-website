@@ -34,3 +34,15 @@ Biến một repository thành codebase AI-first, hướng spec. Đây là sub-s
 ## Ghi chú
 
 Một repository hoàn toàn tuân thủ ngay cả khi không có addon tùy chọn nào; đánh giá cục bộ AI Diff Reviewer là một phần của chuẩn cơ sở kể từ chuẩn 2.3.0. Thực tế phát hiện được luôn thắng các giả định của preset.
+
+## Tham chiếu schema v6
+
+Danh mục schema máy đọc được cho kế hoạch v6 được công bố tại các URL ổn định sau. Projection trực tiếp v6 là snapshot; không có `plan-state/v6.json`. Kế hoạch v5 hiện có tiếp tục dùng schema trạng thái v5 và kế hoạch cũ không bao giờ bị viết lại âm thầm.
+
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
+- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
+- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+
+Gói 6.x hiện tại mặc định tạo kế hoạch mới bằng v6. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; di chuyển cần yêu cầu rõ ràng. Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba chữ số (ví dụ `PLAN_001_add_payment_webhooks/`). Schema v5 đã cố định tính ID số là một từ, nên slug v5 có 2–4 từ; slug v6 có 2–5 từ. Các thư mục cũ không đánh số `PLAN_<slug>/` vẫn đọc được và không bao giờ bị đổi tên. Khi có kế hoạch được đánh số, `latest` trỏ đến kế hoạch có ID số cao nhất.

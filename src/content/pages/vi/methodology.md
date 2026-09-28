@@ -1,11 +1,12 @@
 ---
 title: "Phương pháp luận Deep Work Plan"
 description: "Năm chương từ tuyên ngôn tới các kiểu hình: nguyên tắc, vòng lặp lõi, mẫu, skill và các thích ứng đứng sau phương pháp luận Deep Work Plan."
-lastUpdated: 2026-05-30
+lastUpdated: 2026-09-28
 ---
 
 ## Phương pháp luận Deep Work Plan
 
+Gói 6.x hiện tại mặc định tạo kế hoạch mới bằng v6. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; di chuyển cần yêu cầu rõ ràng.
 Deep Work Plan (DWP) là một phương pháp luận mở, độc lập với framework, để chạy công việc kỹ thuật tự chủ, có cấu trúc cùng các agent lập trình AI. Nó biến một mục tiêu mơ hồ thành một kế hoạch rà soát được mà agent có thể thực thi, tạm dừng, tiếp tục và báo cáo — mà không đánh mất ngữ cảnh.
 
 DWP đứng trên ba trụ cột.

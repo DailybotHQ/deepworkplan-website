@@ -8,6 +8,8 @@ section: Workflow
 
 # Planos Lite
 
+> **Escopo da versão:** Este é um documento-base v5.0.0 mantido. O padrão v6 atual também exige as extensões `V6_*.md` aplicáveis listadas no [índice da especificação](/spec). Os planos v5 existentes mantêm as regras registradas.
+
 **Versão 5.0.0. Status: Estável.** Este documento especifica a representação de plano Lite introduzida junto com a [Especificação do DWP](/spec/dwp-specification): um formato de plano para trabalho pequeno a médio e delimitado que é materializado diretamente, sem uma etapa de rascunho não executável. As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
 
 ## Representação e ciclo de vida

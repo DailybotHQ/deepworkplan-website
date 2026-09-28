@@ -39,12 +39,13 @@ Ajoutez **`trust`** (ou `auto`) comme dernier mot pour sauter cette relecture �
 Le mode trust est le raccourci pour utilisateurs avertis une fois que vous avez confiance dans le flux ; le mode guidé garde par défaut un humain dans la boucle.
 
 ## Comportement
-
 1. Analyser l’objectif et le contexte du dépôt.
 2. Poser des questions de clarification en cas d’ambiguïté.
-3. Matérialiser le plan directement sous `.dwp/plans/PLAN_<name>/` — un plan Lite par défaut, ou Full pour les travaux plus importants (en mode guidé, le relire et choisir de le conserver en Lite, de le promouvoir vers Full, de le modifier, ou d’arrêter).
+3. Matérialiser le plan directement sous `.dwp/plans/PLAN_001_<slug>/` — un plan Lite par défaut, ou Full pour les travaux plus importants (en mode guidé, le relire et choisir de le conserver en Lite, de le promouvoir vers Full, de le modifier, ou d’arrêter).
 4. Décomposer en tâches séquentielles et écrire le README, les fichiers de tâche et PROGRESS.
 5. Terminer par le Final Review (passe de sécurité, validation de l’état final, réconciliation des skills).
+
+Le pack 6.x crée les plans v6 par défaut. Les plans existants conservent leur génération enregistrée ; une migration nécessite une demande explicite. Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
 
 ## Alias
 

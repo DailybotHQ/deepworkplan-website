@@ -98,20 +98,20 @@
 - **Target surface:** `src/content/spec/en/dwp-specification.md` → "Output workspace" section, rendered at `/spec/dwp-specification`.
 - **Type:** diagram
 - **Priority:** medium
-- **Purpose / trust rationale:** Fixes the gitignored `.dwp/` workspace layout — `plans/PLAN_<name>/` with its analysis outputs. Distinct from the methodology plan-tree (ME-04), this view is the **workspace root**, showing where every artifact lives and that it is disposable/gitignored.
+- **Purpose / trust rationale:** Fixes the gitignored `.dwp/` workspace layout — `plans/PLAN_001_<slug>/` with its analysis outputs. Distinct from the methodology plan-tree (ME-04), this view is the **workspace root**, showing where every artifact lives and that it is disposable/gitignored.
 - **Aspect & dimensions:** 16:9 · 880 × 495 px displayed · generate @2x (1760 × 990 px)
 - **Light/dark strategy:** transparent (ink on alpha, invertible).
 - **Prompt:**
   > **HOUSE STYLE —** Restrained engraving plate, monochrome warm ink (`#1B1A17`) on a **transparent background**, a single **oxblood** (`#7A1F1F`) mark on the "gitignored" annotation only. Flat 2D, sober, engraved hairline tree branches (not rounded connectors). No gradients, no shadows, no 3D.
   >
-  > **Subject:** A 16:9 file-system tree, left-aligned, plate label **"OUTPUT WORKSPACE"** as a small-caps kicker. Root node **".dwp/"** with a small **oxblood** annotation in italics: *"gitignored · disposable"*, and a single child branch **"plans/"**. Under `plans/`, one node **"PLAN_<name>/"** with leaf children: **"README.md"**, **"PROGRESS.md"**, **"N.task_<slug>.md"**, and a sub-node **"analysis_results/"** containing **"EXECUTIVE_REPORT.md"**. Engraved hairline tree rules; generous right-side margin; outline only.
+  > **Subject:** A 16:9 file-system tree, left-aligned, plate label **"OUTPUT WORKSPACE"** as a small-caps kicker. Root node **".dwp/"** with a small **oxblood** annotation in italics: *"gitignored · disposable"*, and a single child branch **"plans/"**. Under `plans/`, one node **"PLAN_001_<slug>/"** with leaf children: **"README.md"**, **"PROGRESS.md"**, **"N.task_<slug>.md"**, and a sub-node **"analysis_results/"** containing **"EXECUTIVE_REPORT.md"**. Engraved hairline tree rules; generous right-side margin; outline only.
   >
   > **AVOID —** gradients, glossy/3D render, photographic realism, neon, drop shadows, busy backgrounds, watermark, signature, extra logos, garbled/misspelled text, lorem ipsum, corporate-memphis vector, clip-art, emoji.
-- **In-image text (EN):** OUTPUT WORKSPACE · .dwp/ · gitignored · disposable · plans/ · PLAN_<name>/ · README.md · PROGRESS.md · N.task_<slug>.md · analysis_results/ · EXECUTIVE_REPORT.md
-- **In-image text (ES):** ESPACIO DE TRABAJO DE SALIDA · .dwp/ · ignorado por git · desechable · plans/ · PLAN_<name>/ · README.md · PROGRESS.md · N.task_<slug>.md · analysis_results/ · EXECUTIVE_REPORT.md
+- **In-image text (EN):** OUTPUT WORKSPACE · .dwp/ · gitignored · disposable · plans/ · PLAN_001_<slug>/ · README.md · PROGRESS.md · N.task_<slug>.md · analysis_results/ · EXECUTIVE_REPORT.md
+- **In-image text (ES):** ESPACIO DE TRABAJO DE SALIDA · .dwp/ · ignorado por git · desechable · plans/ · PLAN_001_<slug>/ · README.md · PROGRESS.md · N.task_<slug>.md · analysis_results/ · EXECUTIVE_REPORT.md
 - **Suggested asset path:** `public/images/visuals/spec/output-workspace.webp` (EN) · `public/images/visuals/spec/output-workspace-es.webp` (ES)
-- **Alt text (EN):** File tree of the gitignored .dwp/ output workspace: a plans/ folder containing PLAN_name/ with README, PROGRESS, task files, and an analysis_results folder holding the executive report.
-- **Alt text (ES):** Árbol de archivos del espacio de trabajo de salida .dwp/ (ignorado por git): una carpeta plans/ que contiene PLAN_name/ con README, PROGRESS, archivos de tarea y una carpeta analysis_results con el informe ejecutivo.
+- **Alt text (EN):** File tree of the gitignored .dwp/ output workspace: a plans/ folder containing PLAN_001_slug/ with README, PROGRESS, task files, and an analysis_results folder holding the executive report.
+- **Alt text (ES):** Árbol de archivos del espacio de trabajo de salida .dwp/ (ignorado por git): una carpeta plans/ que contiene PLAN_001_slug/ con README, PROGRESS, archivos de tarea y una carpeta analysis_results con el informe ejecutivo.
 - **Caption (EN):** All plan output lives under a gitignored `.dwp/` workspace, kept separate from tracked source.
 - **Caption (ES):** Toda la salida de los planes reside en un espacio de trabajo `.dwp/` ignorado por git, separado del código versionado.
 - **Integration note:** `Figure` in the "Output workspace" section. EN/ES asset by page language. `width="880" height="495"`.

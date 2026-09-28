@@ -34,3 +34,15 @@ usage: /deepworkplan-onboard
 ## Примітки
 
 Репозиторій повністю відповідає вимогам і без жодного опційного доповнення; локальний огляд AI Diff Reviewer є частиною базового рівня починаючи зі стандарту 2.3.0. Виявлена реальність завжди важливіша за припущення пресета.
+
+## Посилання на схеми v6
+
+Для планів v6 каталог машиночитних схем опубліковано за такими стабільними URL. Активна проєкція v6 — це знімок; `plan-state/v6.json` не існує. Наявні плани v5 і далі використовують схему стану v5, а старі плани ніколи не переписуються непомітно.
+
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
+- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
+- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+
+Поточний пакет 6.x за замовчуванням створює нові плани у форматі v6. Наявні плани зберігають зафіксоване покоління; міграція потребує явного запиту. Нові плани отримують монотонно зростаючі числові ID завдовжки щонайменше три цифри (наприклад, `PLAN_001_add_payment_webhooks/`). Заморожені схеми v5 рахують числовий ID як одне слово, тому slug v5 містить 2–4 слова, а slug v6 — 2–5. Наявні папки без номера `PLAN_<slug>/` залишаються доступними для читання й ніколи не перейменовуються. Якщо є нумеровані плани, `latest` вказує на план із найбільшим числовим ID.

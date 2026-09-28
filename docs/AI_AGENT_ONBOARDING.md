@@ -109,6 +109,32 @@ Methodology/spec/kit docs live in multilingual content collections (17 active la
 - Do not add `PUBLIC_GOOGLE_SITE_VERIFICATION` or `google-site-verification` meta tags.
 - Keep Bing verification as optional env-based meta tag (`PUBLIC_BING_SITE_VERIFICATION`).
 
+## DWP v6 host and authority records
+
+The current DWP standard is 6.0.0, implemented by the installed 6.0.1 skill.
+The 6.x pack creates new plans with v6 by default; plans from earlier
+generations retain their recorded format and are never migrated implicitly.
+A v5-to-v6 migration requires an explicit request and preview.
+
+V6 plans may use only capabilities that the runtime explicitly declares. The
+website's minimal-host baseline is `stop_agent: false`, `meter_spend: false`,
+`meter_tokens: false`, `meter_wall_clock: false`, `cancel_children: false`,
+`model_routing: false`, `subagents: false`, and `telemetry: false`. A runtime
+adapter may declare a capability only when it verifies that support; telemetry
+also needs explicit consent. Unmetered limits are advisory, not enforced.
+
+Developers author and authorize requested plans and work. Agents may proceed
+within that scope and retain prior authorization across sessions; they stop
+before pushing to `main` (which deploys), publishing, sending external messages,
+or accessing secrets unless the request explicitly authorizes that action.
+Follow the approval and review rules in [AGENTS.md](../AGENTS.md). Dailybot
+reporting remains opt-in/configuration-dependent and best effort.
+
+For v6 plan outcomes, use only observable checks that this repository actually
+supports. [Testing Guide → Selecting a Gate](TESTING_GUIDE.md#selecting-a-gate-for-a-change)
+maps touched surfaces to real commands and documents coverage limits; rendered
+multilingual content uses the i18n, Markdown parity, and build gates there.
+
 ## Essential Commands
 
 ```bash
@@ -211,7 +237,7 @@ export const GET: APIRoute = async () => {
 ❌ Skip `pnpm run biome:check`
 ❌ Forget dark mode support
 ❌ Skip `client:load` on interactive Svelte
-❌ Expect `pnpm run test` to work (not configured)
+✅ Run `pnpm run test` for unit tests; use `docs/TESTING_GUIDE.md` to select a scoped or full gate.
 
 ## Documents to Read
 

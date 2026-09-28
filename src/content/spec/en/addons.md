@@ -8,6 +8,8 @@ section: Addons
 
 # Add-ons
 
+> **Version scope:** This is a retained v5.0.0 base document. The current v6 standard also requires the applicable `V6_*.md` extensions listed in the [specification index](/spec). Existing v5 plans keep their recorded rules.
+
 **Version 2.1.0.** Add-ons are extensions to the core Deep Work Plan methodology. Four of the five are optional and **never required for conformance** — a repository with zero optional addons is fully AI-first and DWP-conformant. Each optional addon is offered during onboarding, accepted or declined explicitly, and — when accepted — **reconciles** with existing setup instead of clobbering it. One component is the declared exception: since standard 2.3.0 the **AI Diff Reviewer local review** is part of the required baseline — onboarding installs it and every Final Review runs it — while its CI surface stays opt-in.
 
 ## The addon contract

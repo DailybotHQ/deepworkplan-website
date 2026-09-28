@@ -33,7 +33,7 @@ Alle DWP-Artefakte liegen unter einem per gitignore ausgeschlossenen `.dwp/`-Ver
 ```
 .dwp/
 ├── plans/
-│   └── PLAN_<slug>/
+│   └── PLAN_001_<slug>/
 │       ├── README.md
 │       ├── PROGRESS.md
 │       └── <n>.task_<slug>.md
@@ -60,3 +60,9 @@ Jede Aufgabendatei enthält diese zehn Abschnitte, in dieser Reihenfolge. Die St
 ## Validierung, Abschluss und Wiederaufnahme
 
 Validierung ist Teil der Aufgabe, kein nachträglicher Gedanke: Jede Aufgabe benennt die Befehle oder Tests, die belegen, dass sie erledigt ist, und der Agent führt sie aus, bevor er den Abschluss markiert. Tests sind hier erstklassig — eine Aufgabe, die neue Funktionalität hinzufügt oder Verhalten ändert, muss automatisierte Tests für dieses Verhalten hinzufügen oder aktualisieren und die vollständige Code-Qualitätsprüfung des Repositorys ausführen (Tests plus Lint und Typprüfung), nicht nur bestätigen, dass der Build gelingt; bestehende Tests müssen grün bleiben, an das beabsichtigte Verhalten angepasst statt übersprungen. Sicherheit ist auf dieselbe Weise erstklassig — jede Aufgabe, die Authentifizierung, Eingabeverarbeitung, Secrets, Netzwerk-Oberfläche oder Abhängigkeiten berührt, trägt die Sicherheitserwartungen dieser Änderung in ihren Akzeptanzkriterien und hält jeden Commit frei von Secrets, und jeder Plan schließt mit dem Final Review — dem Sicherheitstest über den gesamten Änderungssatz, der vollständigen Validierung auf dem Endzustand und dem Abgleich der Skills-Entscheidungen. Der Abschluss wird mit einer expliziten Statusmarkierung (`[ ]` nicht begonnen, `[~]` in Arbeit, `[x]` erledigt, `[!]` blockiert) im Abschnitt Completion & Log festgehalten. Die Wiederaufnahme stützt sich auf diese Markierungen und das Fortschrittsprotokoll — ein Agent kann genau rekonstruieren, wo der Plan stehengeblieben ist, und ab der ersten unvollständigen Aufgabe fortsetzen, ohne fertige Arbeit erneut zu erledigen.
+
+## v6: dieselbe Methodik, strengere Struktur
+
+Das 6.x-Paket erstellt standardmäßig v6-Pläne. Bestehende Pläne behalten ihre aufgezeichnete Generation; eine Migration erfordert einen ausdrücklichen Auftrag.
+
+v6 behält dieselbe Methodik aus Plan → Aufgaben → Validierungsschranken → Abschluss, dieselben Slash-Befehle und den Speicherort `.dwp/plans/` bei. Die technische Struktur wird durch Vertrag, Journal, Kontextmanifeste pro Aufgabe, Scheduler und die Ablehnung einer leeren Allowlist strenger. Die Architekturentscheidung lautet GO; eine empirische Nichtunterlegenheit der Agentenergebnisse wurde nicht gemessen.

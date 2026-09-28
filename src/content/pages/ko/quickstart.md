@@ -1,7 +1,7 @@
 ---
 title: "빠른 시작 — Deep Work Plan"
 description: "AI 에이전트를 위한 실행 가능한 온보딩 프롬프트: 어떤 리포지토리에든 Deep Work Plan을 채택합니다 — 분석하고, 문서화하고, 스킬을 설치하고, 에이전트가 조종 가능하게 남깁니다."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 당신은 AI 코딩 에이전트입니다. 먼저 이 프롬프트 전체를 읽은 뒤, Deep Work Plan(DWP)
@@ -112,10 +112,12 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### 현재 표준과 실행 모델
 
-현재 리포지토리 기준 표준은 **DWP 5.0.0**이며, 위에서 설치한 Deep Work
+현재 리포지토리 기준 표준은 **DWP 6.0.0**이며, 위에서 설치한 Deep Work
 Plan 스킬 릴리스로 구현됩니다. 현재 스킬 팩에는 라우터와 아홉 개의
 하위 스킬이 포함됩니다: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, `upgrade`.
+
+설치된 skill 릴리스: **6.0.1**. 현재 6.x 팩은 새 계획을 기본적으로 v6으로 생성합니다. 기존 계획은 기록된 세대를 유지하며, v5 계획을 v6으로 옮기려면 명시적 요청과 미리보기가 필요합니다.
 
 이 표준은 의도적으로 비례적이며, 그 비례성을 개발자의 규율이 아니라
 계획의 속성으로 만듭니다. 계획은 작고 한정된 작업을 위해 계획의
@@ -130,11 +132,18 @@ README에 인라인으로 작업 기록을 두는 **Lite**이거나, 장기간�
 Full 계획에서는 리포지토리가 지속적인 실행 표면이 됩니다. 계획에는
 원자적 작업, 무엇이 변경되었고 어떤 소비자가 영향을 받는지 설명하는
 **접촉 표면**, 승인 기준, 그리고 리포지토리의 문서화된 테스트 맵에서
-선택된 검증 게이트가 포함됩니다. 새 계획은 먼저 identity manifest를
-작성하고, 분석을 기록하고, 작업 목록을 만든 다음, 마지막에야 라이브
-상태를 활성화하므로 중단된 생성은 추측이 아니라 복구될 수 있습니다.
-상태 계층이 있는 경우 `manifest.json`이 계획을 설명하고 `state.json`이
-체크포인트, 작업 상태, 게이트 결과, 차단 사항을 기록합니다.
+선택된 검증 게이트가 포함됩니다. v6에서는 계획 생성 시 identity manifest, 계약, 승인 이벤트 순서로 기록합니다. 추가 전용 저널이 실행을 기록하고 `state.json`은 그 저널에서 생성된 스냅샷입니다. 중단 후 각 단계를 복구할 수 있습니다.
+
+스키마 세대는 각 계획에 연결됩니다. v5 계획은 `state.json`에
+https://deepworkplan.com/schema/plan-state/v5.json 은 v5 계획에 계속 적용됩니다. 현재 6.x 팩은 새 계획을 기본적으로 v6으로 생성하며, 이때 `manifest.json`에 https://deepworkplan.com/schema/plan-manifest/v6.json 을
+사용하며, 라이브 프로젝션은 https://deepworkplan.com/schema/plan-snapshot/v6.json 의
+스냅샷입니다. `plan-state/v6.json`은 없습니다. v6은 이름만 바꾼 v5 상태 스키마가 아니라 스냅샷을 사용합니다. 기존
+계획은 기록된 세대를 유지하며 다시 작성되지 않습니다. v6은 v5 방법론을 더 엄격한 구조로 유지합니다. 에이전트 결과의 비열등성은
+측정되지 않았습니다.
+
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
 
 모든 계획에는 하나의 필수 마무리 작업이 있습니다: **Final Review**
 입니다. 이는 필수적인 로컬 AI Diff Reviewer 검토를 포함하여 누적된
@@ -181,7 +190,9 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
    (스킬, 에이전트, 명령)는 **이 리포지토리를 위해 추론되어야** 합니다 — 결코 다른
    리포지토리 키트의 복사·붙여넣기여서는 안 됩니다.
 6. **`.dwp/` + `tmp/`.** `plans/`를 갖춘 gitignore된 `.dwp/`, 그리고 `tmp/`
-   스크래치 공간을 구성하세요 — 둘 다 `.gitignore`에 비파괴적으로 추가하세요(추가하되 결코 다시 쓰지 마세요).둘은 서로 대체할 수 없습니다. 어떤 플로우가 **특정 계획에 관해** 만들어 낸 모든 것 — 분석, skills 대장, 보안 검토, 게이트 로그, 감사 보고서 — 은 그 계획 자신의 `.dwp/plans/PLAN_{name}/analysis_results/` 안에 있어야 하며, 저장소 루트에도 `tmp/`에도 두어서는 안 됩니다. `tmp/`는 어떤 계획도 다시 읽지 않을 작업을 위한 자리입니다.
+   스크래치 공간을 구성하세요 — 둘 다 `.gitignore`에 비파괴적으로 추가하세요(추가하되 결코 다시 쓰지 마세요).둘은 서로 대체할 수 없습니다. 어떤 플로우가 **특정 계획에 관해** 만들어 낸 모든 것 — 분석, skills 대장, 보안 검토, 게이트 로그, 감사 보고서 — 은 그 계획 자신의 `.dwp/plans/PLAN_001_<slug>/analysis_results/` 안에 있어야 하며, 저장소 루트에도 `tmp/`에도 두어서는 안 됩니다. `tmp/`는 어떤 계획도 다시 읽지 않을 작업을 위한 자리입니다.
+
+새 계획에는 최소 세 자리 숫자로 된 단조 증가 ID를 부여합니다(예: `PLAN_001_add_payment_webhooks/`). 고정된 v5 스키마는 숫자 ID를 한 단어로 세므로 v5 슬러그는 2~4단어이고 v6 슬러그는 2~5단어입니다. 기존의 번호 없는 `PLAN_<slug>/` 폴더는 계속 읽을 수 있으며 절대 이름을 바꾸지 않습니다. 번호가 있는 계획이 있으면 `latest`는 숫자 ID가 가장 큰 계획을 가리킵니다.
 
 ## 4. 필수 로컬 리뷰를 설치한 뒤 선택형 애드온을 제안하세요
 

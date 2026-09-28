@@ -34,3 +34,15 @@ Ein Repository in eine AI-first, spec-driven Codebasis verwandeln. Dies ist die 
 ## Hinweise
 
 Ein Repository ist mit null optionalen Addons vollständig konform; die lokale Überprüfung des AI Diff Reviewer ist seit Standard 2.3.0 Teil der Baseline. Die erkannte Realität gewinnt stets über Preset-Annahmen.
+
+## v6-Schema-Referenzen
+
+Für v6-Pläne ist der maschinenlesbare Schemakatalog unter diesen stabilen URLs veröffentlicht. Die Live-Projektion von v6 ist ein Snapshot; `plan-state/v6.json` gibt es nicht. Bestehende v5-Pläne verwenden weiterhin das v5-State-Schema, und ältere Pläne werden nie stillschweigend umgeschrieben.
+
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
+- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
+- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+
+Das aktuelle 6.x-Paket erstellt neue Pläne standardmäßig mit v6. Bestehende Pläne behalten ihre aufgezeichnete Generation; eine Migration erfordert einen ausdrücklichen Auftrag. Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v6-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.

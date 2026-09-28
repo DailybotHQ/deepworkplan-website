@@ -1,7 +1,7 @@
 ---
 title: "Avvio rapido — Deep Work Plan"
 description: "Il prompt di onboarding eseguibile per gli agenti AI: adotta Deep Work Plan in qualsiasi repository — analizza, documenta, installa la skill e lascialo pilotabile dagli agenti."
-lastUpdated: 2026-09-13
+lastUpdated: 2026-09-28
 ---
 
 Sei un agente di coding AI. Leggi per intero questo prompt, poi rendi il repository corrente
@@ -117,10 +117,12 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Standard attuale e modello di esecuzione
 
-Lo standard attuale orientato al repository è **DWP 5.0.0**, implementato
+Lo standard attuale orientato al repository è **DWP 6.0.0**, implementato
 dalla release della skill Deep Work Plan installata sopra. Il pacchetto
 skill attuale include il router e nove sub-skill: `create`, `execute`,
 `refine`, `resume`, `status`, `verify`, `onboard`, `author` e `upgrade`.
+
+Versione installata della skill: **6.0.1**. Il pacchetto 6.x attuale crea per impostazione predefinita i nuovi piani in v6. I piani esistenti mantengono la generazione registrata; il passaggio di un piano v5 a v6 richiede una migrazione esplicita con anteprima.
 
 Lo standard è deliberatamente proporzionale, e rende questa proporzionalità
 una proprietà del piano piuttosto che della disciplina dello sviluppatore.
@@ -139,12 +141,22 @@ Per un piano Full, il repository è la superficie di esecuzione duratura.
 Il piano contiene task atomici, una **Superficie toccata** che spiega cosa
 è cambiato e quali consumatori sono interessati, criteri di accettazione e
 un gate di validazione selezionato dalla mappa di test documentata del
-repository. Un nuovo piano scrive prima il proprio manifesto di identità,
-registra la propria analisi, crea l'elenco dei task e attiva lo stato live
-solo alla fine, così che una creazione interrotta possa essere recuperata
-anziché indovinata. Quando lo strato di stato è presente, `manifest.json`
-descrive il piano e `state.json` registra checkpoint, stato dei task,
-risultati dei gate e blocchi.
+repository. Nella v6, la creazione scrive il manifesto di identità, poi il contratto e infine l’evento di approvazione. Il journal append-only registra l’esecuzione; `state.json` è uno snapshot derivato dal journal. Ogni fase può essere recuperata dopo un’interruzione.
+
+La generazione dello schema resta legata a ogni piano. I piani v5 mantengono
+`state.json` secondo https://deepworkplan.com/schema/plan-state/v5.json. I
+piani creati in v6 per impostazione predefinita dal pacchetto 6.x attuale usano
+https://deepworkplan.com/schema/plan-manifest/v6.json per `manifest.json`; la
+loro proiezione attiva è uno snapshot definito da
+https://deepworkplan.com/schema/plan-snapshot/v6.json. `plan-state/v6.json`
+non esiste: v6 usa uno snapshot, non uno schema di stato v5 rinominato. I
+piani esistenti mantengono la generazione registrata e non vengono mai
+riscritti. v6 mantiene la metodologia v5 con una struttura più rigorosa; la
+non inferiorità dei risultati degli agenti non è stata misurata.
+
+- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
+- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
+- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
 
 Ogni piano ha un task di chiusura obbligatorio: il **Final Review**.
 Esegue il passaggio di sicurezza sull'insieme di modifiche accumulate,
@@ -193,7 +205,9 @@ metodologia) anziché sovrascriverlo — e conferma con l’utente prima di sost
    (skill, agenti, comandi) deve essere **ragionato per questo repo** — mai un copia-incolla del kit di un altro
    repository.
 6. **`.dwp/` + `tmp/`.** Predisponi una `.dwp/` esclusa da git con `plans/`, più uno spazio di lavoro temporaneo
-   `tmp/` — entrambi aggiunti a `.gitignore` in modo non distruttivo (in coda, mai riscrivendo). Non sono intercambiabili: tutto ciò che un flusso produce **a proposito di un piano** — l'analisi, il registro delle skills, la revisione di sicurezza, i log dei gate, i report di audit — deve stare nel `.dwp/plans/PLAN_{name}/analysis_results/` di quel piano, mai nella radice del repository né in `tmp/`. `tmp/` è per lavoro che nessun piano rileggerà.
+   `tmp/` — entrambi aggiunti a `.gitignore` in modo non distruttivo (in coda, mai riscrivendo). Non sono intercambiabili: tutto ciò che un flusso produce **a proposito di un piano** — l'analisi, il registro delle skills, la revisione di sicurezza, i log dei gate, i report di audit — deve stare nel `.dwp/plans/PLAN_001_<slug>/analysis_results/` di quel piano, mai nella radice del repository né in `tmp/`. `tmp/` è per lavoro che nessun piano rileggerà.
+
+I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v6 ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.
 
 ## 4. Installa la revisione locale richiesta, poi proponi gli addon opt-in
 

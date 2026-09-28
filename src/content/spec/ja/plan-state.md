@@ -8,6 +8,10 @@ section: State
 
 # 計画の状態
 
+> **バージョンの適用範囲:** 本文書は保持されている v5.0.0 の基盤文書です。現在の v6 標準では、[仕様インデックス](/spec)に記載された該当する `V6_*.md` 拡張も適用されます。既存の v5 計画は記録済みの規則を維持します。
+
+**現在の標準: v6。** 以下の文書は保持された基礎仕様です。v6 は契約、追記専用ジャーナル、タスクごとのコンテキスト、リソース制御、ライフサイクル規則を追加します。[v6 manifest](https://deepworkplan.com/schema/plan-manifest/v6.json) と [v6 snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json)。既存の v5 計画は記録された規則を維持します。 [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **バージョン 5.0.0。状態: 安定。** この文書は Deep Work Plan 方法論の機械可読な計画状態レイヤーを規定するもので、いまや DWP 標準自身のバージョンと整合しています——この番号の付け替えによって既存の要件が弱められることはありません。この改訂はまた、ガードされた状態アップデーター、検証済みの計画公開、そして完了した計画が満たさなければならない証拠の真実性に関するルール(下記参照)を文書化します。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
 
 二つの JSON 成果物 — `manifest.json`（計画の静的な識別情報）と `state.json`（バリデーションゲートの結果を含む、タスクごとのライブ実行状態）— を、すべての計画は Markdown ファイルとあわせて MAY 携えることができます。無人実行（[エージェントプロトコル](/spec/agent-protocol#execution-profiles) を参照）および git を持たないワークスペース（[アーキタイプ](/spec/archetypes) §3 を参照）では MUST 携えなければなりません。
@@ -222,3 +226,19 @@ Markdown がすべての不一致に MUST 勝たなければなりません。`s
 ## スキーマのバージョニング
 
 両スキーマは URL でバージョン管理されます。バージョン内での追加フィールドは許可されます。フィールドの名前変更または型変更には新しいスキーマバージョンと仕様の変更ログへの移行メモが必要です。この改訂では両スキーマに `/v2.json` を導入します。タスクエントリーの `file` フィールドは型付きの `locator`（`{"kind": "file" | "inline", "value": ...}`）になり、マニフェストは `plan_format` を獲得し、状態ファイルは `format`、`materialization`、`approval`、`promotion` を獲得します — これらは合わせて Lite 計画が必要とするフィールドです（[Lite 計画](/spec/lite-plans) を参照）。`/v1.json` のマニフェストと状態ファイルは引き続き有効であり、静かに v2 へ書き換えられることは決してありません。`refine` セッションが意図的にそれを移行することは MAY あります。マニフェストの `spec_version` フィールドは、計画が作成された DWP 仕様のバージョンを固定します。インストール済みの仕様より新しい計画に遭遇したエージェントは、推測するのではなく、その旨を述べるべきです（SHOULD）。
+
+## v6 スキーマと互換性
+
+v6 は v5 の方法論を維持し、新しい計画により厳格なエンジニアリング構造を加えます。識別マニフェストはバージョン付き契約を指し、追記専用ジャーナルは権限とイベントを記録します。タスクごとのコンテキストマニフェストで選択を明示し、スケジューラは実行可能な作業だけを割り当てます。ライブ投影の `state.json` はジャーナルから生成されるスナップショットです。空の許可リストは拒否されます。これはアーキテクチャ上の判断であり、エージェントの成果向上を示す証拠ではありません。成果の非劣性は測定されていません。
+
+v6 のマニフェストとライブスナップショットのスキーマ：
+
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
+
+v6 のライブ投影はスナップショットであり、名前を変えた v5 の state ファイルではありません。`plan-state/v5.json` は v5 計画向けに引き続き公開され、`plan-state/v6.json` はありません。既存の v1、v2、v5 計画は記録済みのスキーマ世代を維持し、暗黙に書き換えられません。
+
+新しい計画には、3桁以上の単調増加する数値 ID を付けます（例：`PLAN_001_add_payment_webhooks/`）。凍結された v5 スキーマでは数値 ID も1語として数えるため、v5 の slug は2〜4語、v6 の slug は2〜5語です。既存の番号なし `PLAN_<slug>/` フォルダーは引き続き読み取り可能で、名前は変更しません。番号付き計画がある場合、`latest` は数値 ID が最も大きい計画を指します。

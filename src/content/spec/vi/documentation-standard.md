@@ -8,6 +8,8 @@ section: Standard
 
 # Chuẩn tài liệu
 
+> **Phạm vi phiên bản:** Đây là tài liệu nền v5.0.0 được giữ lại. Tiêu chuẩn v6 hiện tại cũng yêu cầu các phần mở rộng `V6_*.md` áp dụng được liệt kê trong [mục lục đặc tả](/spec). Các kế hoạch v5 hiện có giữ nguyên quy tắc đã ghi nhận.
+
 **Phiên bản 5.0.0.** Chuẩn này định nghĩa cách các Deep Work Plan ghi lại cấu trúc, tác vụ và tiến độ của chúng, và cách một kho lưu trữ tự ghi lại chính nó để một agent có thể hành động an toàn. Nó áp dụng cho mọi kế hoạch được tạo theo phương pháp luận DWP. Phiên bản này căn chỉnh số phiên bản riêng của tài liệu với chuẩn DWP mà nó đi kèm — không yêu cầu hiện có nào thay đổi — và bổ sung việc thực thi ngân sách chỉ mục gọn nhẹ cùng tầng tính năng được mô tả dưới đây. Các từ khóa MUST, SHOULD và MAY được dùng như định nghĩa trong RFC 2119.
 
 ## AGENTS.md như một điểm vào gọn nhẹ

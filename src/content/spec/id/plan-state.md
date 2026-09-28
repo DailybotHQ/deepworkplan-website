@@ -8,6 +8,10 @@ section: State
 
 # Status rencana
 
+> **Cakupan versi:** Ini adalah dokumen dasar v5.0.0 yang dipertahankan. Standar v6 saat ini juga mewajibkan ekstensi `V6_*.md` yang berlaku dan tercantum dalam [indeks spesifikasi](/spec). Rencana v5 yang ada mempertahankan aturan yang tercatat.
+
+**Standar saat ini: v6.** Dokumen di bawah adalah dasar yang dipertahankan; v6 menambahkan kontrak, jurnal khusus tambah, konteks per tugas, kontrol sumber daya, dan aturan siklus hidup. [Manifes v6](https://deepworkplan.com/schema/plan-manifest/v6.json) dan [snapshot v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Rencana v5 yang ada tetap memakai aturan aslinya. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+
 **Versi 5.0.0. Status: Stabil.** Dokumen ini menetapkan lapisan status rencana yang dapat dibaca mesin dari metodologi Deep Work Plan, kini diselaraskan dengan versi standar DWP itu sendiri — tidak ada persyaratan yang ada dilemahkan oleh penomoran ulang ini. Revisi ini juga mendokumentasikan updater status yang dijaga, publikasi rencana yang terverifikasi, dan aturan kebenaran-bukti yang harus dipenuhi sebuah rencana yang selesai (lihat di bawah). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
 Dua artefak JSON — `manifest.json` (identitas statis rencana) dan `state.json` (status eksekusi per-tugas yang berjalan, termasuk hasil validasi gate) — yang setiap rencana MAY bawa bersama berkas markdown-nya, dan yang wajib dibawa oleh eksekusi tanpa pengawasan (lihat [Protokol agent](/spec/agent-protocol#execution-profiles)) serta ruang kerja tanpa git (lihat [Arketipe](/spec/archetypes) §3).
@@ -222,3 +226,19 @@ Penegakan bersifat mekanis di mana pun catatan mengizinkannya. Bukti gate yang d
 ## Pemberian versi skema
 
 Kedua skema diberi versi berdasarkan URL. Bidang tambahan diperbolehkan dalam satu versi; mengganti nama atau mengubah tipe sebuah bidang memerlukan versi skema baru dan catatan migrasi di changelog spec. Revisi ini memperkenalkan `/v2.json` untuk kedua skema: bidang `file` pada entri tugas menjadi `locator` yang bertipe (`{"kind": "file" | "inline", "value": ...}`), manifest mendapatkan `plan_format`, dan berkas status mendapatkan `format`, `materialization`, `approval`, dan `promotion` — bersama-sama bidang yang dibutuhkan rencana Lite (lihat [Rencana Lite](/spec/lite-plans)). Manifest dan berkas status `/v1.json` tetap valid dan tidak pernah ditulis ulang secara diam-diam menjadi v2; sebuah sesi `refine` MAY memigrasikan satu secara sengaja. Bidang `spec_version` pada manifest menentukan versi spec DWP tempat rencana dibuat; sebuah agent yang menemukan rencana yang lebih baru dari spec yang terinstal SHOULD menyatakannya alih-alih menebak.
+
+## Skema v6 dan kompatibilitas
+
+v6 mempertahankan metodologi v5 dan menambahkan struktur rekayasa yang lebih ketat untuk rencana baru. Manifest identitas menunjuk ke kontrak berversi; jurnal append-only mencatat otoritas dan peristiwa; manifest konteks menjelaskan pemilihan konteks per tugas; penjadwal hanya mengirim pekerjaan yang memenuhi syarat; dan proyeksi aktif `state.json` adalah snapshot yang dibuat dari jurnal. Daftar izin kosong ditolak. Ini adalah keputusan arsitektur, bukan bukti hasil agen yang lebih baik: non-inferioritas hasil belum diukur.
+
+Skema manifest dan snapshot aktif v6:
+
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
+
+Proyeksi aktif v6 adalah snapshot, bukan file status v5 yang sekadar diganti nama. `plan-state/v5.json` tetap diterbitkan untuk rencana v5; `plan-state/v6.json` tidak ada. Rencana v1, v2, dan v5 yang ada mempertahankan generasi skema tercatat dan tidak pernah ditulis ulang diam-diam.
+
+Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v6 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.

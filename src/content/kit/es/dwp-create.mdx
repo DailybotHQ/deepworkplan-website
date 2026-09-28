@@ -39,12 +39,13 @@ Añade **`trust`** (o `auto`) como última palabra para omitir esa revisión —
 El modo trust es el atajo para usuarios avanzados una vez que confías en el flujo; el modo guiado mantiene a una persona en el bucle por defecto.
 
 ## Comportamiento
-
 1. Analiza el objetivo y el contexto del repositorio.
 2. Formula preguntas aclaratorias si es ambiguo.
-3. Materializa el plan directamente bajo `.dwp/plans/PLAN_<name>/` — un plan Lite por defecto, o Full para trabajos más grandes (en modo guiado, revísalo y elige conservarlo como Lite, promoverlo a Full, editarlo o detenerte).
+3. Materializa el plan directamente bajo `.dwp/plans/PLAN_001_<slug>/` — un plan Lite por defecto, o Full para trabajos más grandes (en modo guiado, revísalo y elige conservarlo como Lite, promoverlo a Full, editarlo o detenerte).
 4. Descompone en tareas secuenciales y escribe el README, los archivos de tarea y PROGRESS.
 5. Termina con el Final Review (pase de seguridad, validación de estado final, reconciliación de skills).
+
+El paquete 6.x crea planes v6 de forma predeterminada. Los planes existentes conservan la generación registrada; la migración requiere una solicitud explícita. El paquete actual 6.x crea planes v6 de forma predeterminada, con slugs de 2–5 palabras. El flujo v5 conservado usa 2–4 palabras porque sus esquemas congelados cuentan el ID numérico como una palabra. Los planes existentes conservan la generación registrada y nunca se migran en silencio. Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v6 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
 
 ## Alias
 

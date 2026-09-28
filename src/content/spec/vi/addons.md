@@ -8,6 +8,8 @@ section: Addons
 
 # Add-on
 
+> **Phạm vi phiên bản:** Đây là tài liệu nền v5.0.0 được giữ lại. Tiêu chuẩn v6 hiện tại cũng yêu cầu các phần mở rộng `V6_*.md` áp dụng được liệt kê trong [mục lục đặc tả](/spec). Các kế hoạch v5 hiện có giữ nguyên quy tắc đã ghi nhận.
+
 **Phiên bản 2.1.0.** Add-on là phần mở rộng của phương pháp Deep Work Plan cốt lõi. Bốn trong năm addon là tùy chọn và **không bao giờ bắt buộc để tuân thủ** — kho lưu trữ không có addon tùy chọn nào vẫn hoàn toàn AI-first và tuân thủ DWP. Mỗi addon tùy chọn được đề xuất trong onboarding, chấp nhận hoặc từ chối rõ ràng và — khi được chấp nhận — **đối chiếu** với thiết lập hiện có thay vì ghi đè. Một thành phần là ngoại lệ được khai báo: kể từ chuẩn 2.3.0, **đánh giá cục bộ AI Diff Reviewer** là một phần của chuẩn cơ sở bắt buộc — onboarding cài đặt nó và mọi Final Review chạy nó — trong khi bề mặt CI của nó vẫn là opt-in.
 
 ## Hợp đồng addon

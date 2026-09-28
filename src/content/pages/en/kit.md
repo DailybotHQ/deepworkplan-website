@@ -1,7 +1,7 @@
 ---
 title: "The Deep Work Plan Kit"
 description: "The skill and its nine sub-skills, commands, agent adapters, onboarding presets, opt-in add-ons, and examples that make Deep Work Plan runnable anywhere."
-lastUpdated: 2026-07-16
+lastUpdated: 2026-09-28
 ---
 
 ## The Deep Work Plan Kit
@@ -10,8 +10,10 @@ The kit is everything you need to run the methodology in practice. It is install
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill
+npx skills add DailybotHQ/deepworkplan-skill@v6.0.1 --skill deepworkplan
 ```
+
+The current 6.x pack creates new plans with v6 by default. Existing plans retain their recorded generation; migration requires an explicit request.
 
 ### The skill and its sub-skills
 
