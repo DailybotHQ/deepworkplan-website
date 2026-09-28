@@ -25,7 +25,7 @@ En ráfagas cortas, los agentes de programación son notables. Encomienda a uno 
 
 Deep Work Plan responde con desarrollo guiado por especificación: un plan duradero, tareas atómicas y puertas de validación que el agente debe pasar. El trabajo sigue siendo verificable — y cualquier agente puede reanudarlo entre sesiones.
 
-Y como el contexto es el recurso más escaso de tu agente, el harness está diseñado para mantener pequeña y auditable su propia carga de instrucciones: las instrucciones se cargan progresivamente, la validación solo toca lo que cambió y cada tarea aprende localmente. La carga de cada flujo se mide en bytes y se publica en cada lanzamiento — el último lanzamiento redujo el flujo de ejecución un 45,7% y el flujo de reanudación un 67,5%. El plan mismo escala igual: un plan Lite para una corrección acotada, un plan Full para el trabajo que se extiende por horas — el formato siempre sigue el alcance del trabajo, y no al revés.
+El contexto es el recurso más escaso de tu agente. Por eso, el harness mantiene su propia carga de instrucciones liviana y auditable. Las instrucciones se cargan progresivamente, la validación se concentra en los cambios y cada tarea recibe el contexto pertinente. Publicamos en bytes la carga de instrucciones de cada flujo para que ese esfuerzo sea visible. Los planes también se ajustan al trabajo: Lite para una corrección acotada y Full para tareas que se extienden durante horas. El formato sigue el alcance y mantiene el proceso enfocado y trazable.
 ---
 
 ## Los humanos dirigen. Los agentes ejecutan.

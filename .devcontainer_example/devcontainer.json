@@ -2,6 +2,7 @@
   "name": "DWP Website - Astro",
   "dockerComposeFile": "../docker/local/docker-compose.yaml",
   "service": "dwpwebsitevscode",
+  "shutdownAction": "none",
   "workspaceFolder": "/app",
   "runServices": ["dwpwebsitevscode"],
   "remoteUser": "node",

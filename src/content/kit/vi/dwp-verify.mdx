@@ -35,7 +35,8 @@ Kiểm tra khách quan sự tuân thủ của repository và kế hoạch — ch
 3. Báo cáo **CONFORMANT** hoặc **NOT CONFORMANT** kèm liệt kê từng lỗi.
 4. Đề nghị ghi nhận các thiếu sót thành một Deep Work Plan; không bao giờ tự ý sửa trong im lặng.
 
+**Xác thực kế hoạch theo thế hệ.** Bộ kiểm tra nguồn gốc repository chấp nhận tiêu chuẩn DWP hiện tại 6.0.0, nhưng việc kiểm tra kế hoạch vẫn phụ thuộc thế hệ. Kế hoạch v6 được nhận diện qua con trỏ contract, `contract.json` hoặc chuỗi revision trong `contracts/`, rồi được kiểm tra bằng validator contract, journal và ledger v6. Bộ kiểm tra `plan_contract.py` được giữ lại chỉ hỗ trợ v5 và KHÔNG ĐƯỢC dùng làm validator kế hoạch v6. Trong v6, `state.json` là projection snapshot được tạo tự động; sai khác với journal là một phát hiện. Hai thế hệ cùng tồn tại và quá trình xác thực không di chuyển kế hoạch.
+
 ## Bí danh
 
 - `dwp:verify`
-**Xác thực kế hoạch theo thế hệ.** Bộ kiểm tra nguồn gốc repository chấp nhận tiêu chuẩn DWP hiện tại 6.0.0, nhưng việc kiểm tra kế hoạch vẫn phụ thuộc thế hệ. Kế hoạch v6 được nhận diện qua con trỏ contract, `contract.json` hoặc chuỗi revision trong `contracts/`, rồi được kiểm tra bằng validator contract, journal và ledger v6. Bộ kiểm tra `plan_contract.py` được giữ lại chỉ hỗ trợ v5 và KHÔNG ĐƯỢC dùng làm validator kế hoạch v6. Trong v6, `state.json` là projection snapshot được tạo tự động; sai khác với journal là một phát hiện. Hai thế hệ cùng tồn tại và quá trình xác thực không di chuyển kế hoạch.

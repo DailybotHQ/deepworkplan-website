@@ -127,7 +127,7 @@ export const vi: SiteTranslations = {
       answer:
         'Deep Work Plan trả lời bằng phát triển theo đặc tả: một kế hoạch bền vững, các tác vụ nguyên tử và cổng kiểm chứng agent buộc phải qua. “Xong” không còn là cảm giác — trở thành bằng chứng kiểm chứng được và review được.',
       efficiency:
-        'Và vì ngữ cảnh là tài nguyên khan hiếm nhất của agent, harness được thiết kế để giữ chính tải lệnh hướng dẫn của nó nhỏ và có thể kiểm toán: hướng dẫn tải dần dần, kiểm chứng chỉ chạm vào phần thay đổi và mỗi tác vụ học tại chỗ. Tải của mỗi luồng được đo bằng byte và công bố ở mỗi bản phát hành — bản phát hành gần nhất đã cắt luồng thực thi 45,7% và luồng tiếp tục 67,5%. Bản thân kế hoạch cũng mở rộng theo cùng nguyên tắc: một kế hoạch Lite cho một bản sửa lỗi có giới hạn, một kế hoạch Full cho công việc kéo dài hàng giờ — định dạng luôn đi theo phạm vi công việc, chứ không phải ngược lại.',
+        'Ngữ cảnh là tài nguyên khan hiếm nhất của agent, vì vậy harness giữ phần hướng dẫn của chính nó gọn nhẹ và dễ kiểm tra. Hướng dẫn được tải dần, bước xác thực tập trung vào phần đã thay đổi, và mỗi tác vụ nhận đúng ngữ cảnh liên quan. Chúng tôi công bố dung lượng hướng dẫn của từng luồng bằng byte để phần tải này luôn minh bạch. Kế hoạch cũng tùy theo công việc: Lite cho một sửa đổi có phạm vi rõ ràng, Full cho công việc kéo dài nhiều giờ. Định dạng theo sát phạm vi công việc, giúp quy trình tập trung và dễ theo dõi.',
       illustrationAlt:
         'Một bản khắc hai tầng: một bên là con tàu trôi dạt trong sương mù cạnh đá ngầm, bên kia là chính con tàu vững vàng theo lộ trình đã vẽ về ngọn hải đăng cảng.',
     },

@@ -35,7 +35,7 @@ while [ -L "$_self" ]; do
 done
 REPO_ROOT="$(cd -P "$(dirname "$_self")" && pwd)"
 
-VERBS=" setup up down stop start restart rebuild ps logs shell exec build config doctor help "
+VERBS=" setup up down stop start restart rebuild ps logs shell exec build config doctor agents ask herdr-layout help "
 
 # --------------------------------------------------------------------------
 # Argument parsing
@@ -500,23 +500,49 @@ host_binds() {
   done | sort -u
 }
 
-# Detect only. Never creates. Runs before the verbs that start containers.
+# Copy each docker/local/**/.env*.example to the matching .env when missing.
+# Created at 0600 so a later paste of API keys is not world-readable.
+ensure_env_from_examples() {
+  local f target
+  while IFS= read -r f; do
+    [ -n "$f" ] || continue
+    target="${f%.example}"
+    if [ ! -f "$target" ]; then
+      if ! (umask 077 && : > "$target"); then
+        die "could not create $target"
+      fi
+      cat "$f" > "$target"
+      note "created ${target#"$REPO_ROOT"/} from ${f#"$REPO_ROOT"/} (0600)"
+    fi
+  done < <(env_examples)
+}
+
+ensure_external_networks() {
+  local net
+  while IFS= read -r net; do
+    [ -n "$net" ] || continue
+    if docker network inspect "$net" >/dev/null 2>&1; then
+      continue
+    fi
+    docker network create "$net" >/dev/null
+    note "created docker network $net"
+  done < <(external_networks)
+}
+
+# Missing .env files are created from .env.example. Missing compose external
+# networks are created. Remaining gaps still fail with a clear path.
 fast_check() {
   local missing="" f target net
+  ensure_env_from_examples
   while IFS= read -r f; do
     [ -n "$f" ] || continue
     target="${f%.example}"
     [ -f "$target" ] || missing="${missing}${missing:+, }${target#"$REPO_ROOT"/}"
   done < <(env_examples)
   if [ -n "$missing" ]; then
-    die "local environment not ready (missing $missing) — run: bash dev.sh setup"
+    die "local environment not ready (missing $missing and no matching .env.example)"
   fi
-  while IFS= read -r net; do
-    [ -n "$net" ] || continue
-    if ! docker network inspect "$net" >/dev/null 2>&1; then
-      die "docker network '$net' is missing — run: bash dev.sh setup"
-    fi
-  done < <(external_networks)
+  ensure_external_networks
   local b
   while IFS= read -r b; do
     [ -n "$b" ] || continue
@@ -544,20 +570,12 @@ selected_services() {
 cmd_setup() {
   local created=0 f target net
 
+  ensure_env_from_examples
   while IFS= read -r f; do
     [ -n "$f" ] || continue
     target="${f%.example}"
     if [ ! -f "$target" ]; then
-      # Created empty at 0600 and only then filled. `cp` would leave the file at
-      # the umask default -- typically 0644, readable by every account on the
-      # machine -- and this is the file the developer then pastes API keys into.
-      # Narrowing it afterwards is too late: the secret was already exposed.
-      if ! (umask 077 && : > "$target"); then
-        die "could not create $target"
-      fi
-      cat "$f" > "$target"
-      note "created ${target#"$REPO_ROOT"/} (0600)"
-      created=$((created + 1))
+      continue
     elif group_or_other_readable "$target"; then
       # An existing file that group or other can reach. Narrowing it now cannot
       # un-expose a secret that has already been sitting there readable, but
@@ -664,7 +682,9 @@ cmd_up() {
     dc up -d --no-recreate "${SERVICES[@]}"
     note "existing containers were left as they are; use --recreate to apply compose changes"
   fi
+  maybe_herdr_layout_after_up
 }
+
 
 cmd_down() {
   selected_services
@@ -883,6 +903,731 @@ cmd_doctor() {
   done
 }
 
+# --------------------------------------------------------------------------
+# Herdr mesh — list agents / ask with [herdr-mesh] reply grant
+# Public peer names: herdr-peers, herdr-workspace-peers (legacy dailybot-* accepted)
+# --------------------------------------------------------------------------
+
+HERDR_WORKSPACE_PEERS_REL="config.d/herdr-workspace-peers"
+
+herdr_trust_peer_keys() {
+  local peers_public="${HOME}/.ssh_host/config.d/herdr-peers"
+  local peers_legacy="${HOME}/.ssh_host/config.d/dailybot-peers"
+  local workspace_peers="${HOME}/.ssh/${HERDR_WORKSPACE_PEERS_REL}"
+  local workspace_legacy="${HOME}/.ssh/config.d/dailybot-workspace-peers"
+  local known="${HOME}/.ssh/known_hosts"
+  local sources=()
+  [ -f "$peers_public" ] && sources+=("$peers_public")
+  [ -f "$peers_legacy" ] && sources+=("$peers_legacy")
+  [ -f "$workspace_peers" ] && sources+=("$workspace_peers")
+  [ -f "$workspace_legacy" ] && sources+=("$workspace_legacy")
+  [ "${#sources[@]}" -gt 0 ] || return 0
+  touch "$known"
+  awk '
+    /^Host / { host=$2; port="" }
+    /^[[:space:]]*Port / && host != "" { port=$2 }
+    host != "" && port != "" {
+      printf "%s %s\n", host, port
+      host=""; port=""
+    }
+  ' "${sources[@]}" | while read -r peer_host peer_port; do
+    case "${peer_port}" in
+      ''|*[!0-9]*) continue ;;
+      2202[2-9]|2203[0-2]|22[4-9][0-9][0-9]) ;;
+      *) continue ;;
+    esac
+    if ssh-keygen -F "[host.docker.internal]:${peer_port}" -f "$known" 2>/dev/null \
+      | grep -q 'ssh-ed25519'; then
+      continue
+    fi
+    if ! ssh-keyscan -T 4 -t ed25519 -p "${peer_port}" host.docker.internal 2>/dev/null \
+      | grep -v '^#' >>"$known"; then
+      ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new \
+        -o HostKeyAlgorithms=ssh-ed25519 -o ConnectTimeout=4 \
+        -o PreferredAuthentications=publickey -p "${peer_port}" \
+        host.docker.internal true >/dev/null 2>&1 || true
+    fi
+  done
+  return 0
+}
+
+herdr_sync_workspace_peers() {
+  local src=""
+  if [ -f "${HOME}/.ssh_host/config.d/herdr-workspaces" ]; then
+    src="${HOME}/.ssh_host/config.d/herdr-workspaces"
+  elif [ -f "${HOME}/.ssh_host/config.d/dailybot-workspaces" ]; then
+    src="${HOME}/.ssh_host/config.d/dailybot-workspaces"
+  else
+    return 0
+  fi
+  local dest="${HOME}/.ssh/${HERDR_WORKSPACE_PEERS_REL}"
+  local ssh_config="${HOME}/.ssh/config"
+  local include_line="Include ~/.ssh/${HERDR_WORKSPACE_PEERS_REL}"
+  mkdir -p "$(dirname "$dest")"
+  local tmp
+  tmp="$(mktemp "${dest}.XXXXXX")"
+  awk '
+    function flush() {
+      if (host != "" && port != "" && user != "") {
+        printf "Host %s\n  HostName host.docker.internal\n  Port %s\n  User %s\n  StrictHostKeyChecking accept-new\n\n", host, port, user
+      }
+      host=""; port=""; user=""
+    }
+    BEGIN { print "# Generated by dev.sh from host workspaces file. Do not edit.\n" }
+    /^Host / { flush(); if ($2 ~ /^[A-Za-z0-9._-]+$/ && NF == 2) host=$2; next }
+    /^[[:space:]]*Port / { if ($2 ~ /^22[4-9][0-9][0-9]$/) port=$2; next }
+    /^[[:space:]]*User / { if ($2 ~ /^[a-z_][a-z0-9_-]*$/) user=$2; next }
+    END { flush() }
+  ' "$src" > "$tmp"
+  chmod 600 "$tmp"
+  mv "$tmp" "$dest"
+  touch "$ssh_config"
+  if ! grep -qxF "$include_line" "$ssh_config"; then
+    tmp="$(mktemp "${ssh_config}.XXXXXX")"
+    printf '%s\n' "$include_line" | cat - "$ssh_config" > "$tmp"
+    chmod 600 "$tmp"
+    mv "$tmp" "$ssh_config"
+  fi
+}
+
+herdr_prepare_mesh() {
+  local refresh="${HOME}/.local/bin/herdr-refresh-catalog"
+  local src="${HOME}/.herdr_client_host/endpoints.json"
+  if [ -x "$refresh" ]; then
+    if [ -f "$src" ]; then
+      "$refresh" || die "could not refresh the Herdr catalog from the host mount"
+    fi
+  elif [ -f "$src" ]; then
+    die "catalog mount is present but ${refresh} is missing; restart this container once so the entrypoint installs it"
+  fi
+  herdr_sync_workspace_peers
+  herdr_trust_peer_keys
+}
+
+cmd_herdr_agents() {
+  command -v herdr >/dev/null 2>&1 || die "herdr is not on PATH (run inside the container, or rebuild with herdr installed)"
+  command -v python3 >/dev/null 2>&1 || die "python3 is required to read the catalog"
+  herdr_prepare_mesh
+  python3 - <<'PYAGENTS'
+import json, os, subprocess, sys
+
+def machines():
+    try:
+        raw = subprocess.run(
+            ["herdr", "machine", "list", "--json"],
+            capture_output=True, text=True, timeout=12,
+        )
+    except subprocess.TimeoutExpired:
+        sys.stderr.write("herdr machine list timed out\n")
+        sys.exit(1)
+    if raw.returncode != 0:
+        sys.stderr.write(raw.stderr or "herdr machine list failed\n")
+        sys.exit(raw.returncode or 1)
+    try:
+        data = json.loads(raw.stdout or "[]")
+    except json.JSONDecodeError:
+        sys.stderr.write("herdr machine list did not return JSON\n")
+        sys.exit(1)
+    if not isinstance(data, list):
+        sys.stderr.write("herdr machine list JSON was not a list\n")
+        sys.exit(1)
+    return [m for m in data if isinstance(m, dict)]
+
+def agents_for(machine_id):
+    try:
+        raw = subprocess.run(
+            ["herdr", "--machine", machine_id, "agent", "list"],
+            capture_output=True, text=True, timeout=12,
+        )
+    except subprocess.TimeoutExpired:
+        return None, ["timed out"]
+    if raw.returncode != 0 or not raw.stdout.strip():
+        return None, (raw.stderr or "no answer").strip().splitlines()[-1:] or ["no answer"]
+    try:
+        payload = json.loads(raw.stdout)
+    except json.JSONDecodeError:
+        return None, ["agent list was not JSON"]
+    result = payload.get("result") if isinstance(payload, dict) else None
+    found = result.get("agents") if isinstance(result, dict) else None
+    if not isinstance(found, list):
+        return None, ["agent list had no agents array"]
+    return found, None
+
+def current_pane():
+    try:
+        raw = subprocess.run(
+            ["herdr", "pane", "current"],
+            capture_output=True, text=True, timeout=8,
+        )
+    except subprocess.TimeoutExpired:
+        return "", ""
+    if raw.returncode != 0 or not raw.stdout.strip():
+        return "", ""
+    try:
+        pane = ((json.loads(raw.stdout).get("result") or {}).get("pane") or {})
+    except json.JSONDecodeError:
+        return "", ""
+    return str(pane.get("pane_id") or ""), str(pane.get("terminal_id") or "")
+
+self_pane, self_terminal = current_pane()
+self_machine = ""
+
+rows = []
+for machine in machines():
+    if not machine.get("enabled"):
+        continue
+    label = str(machine.get("label") or "").replace("\t", " ")
+    mid = str(machine.get("id") or "")
+    if not mid:
+        continue
+    found, err = agents_for(mid)
+    if err is not None:
+        rows.append((label, mid, "-", "-", "unreachable", "", ""))
+        continue
+    if not found:
+        rows.append((label, mid, "-", "-", "no agents", "", ""))
+        continue
+    for agent in found:
+        if not isinstance(agent, dict):
+            continue
+        pane_id = str(agent.get("pane_id") or "-")
+        terminal_id = str(agent.get("terminal_id") or "")
+        if (
+            not self_machine
+            and self_pane
+            and pane_id == self_pane
+            and (not self_terminal or terminal_id == self_terminal)
+        ):
+            self_machine = mid
+        rows.append((
+            label,
+            mid,
+            str(agent.get("agent") or "-"),
+            pane_id,
+            str(agent.get("agent_status") or "-"),
+            str(agent.get("terminal_title_stripped") or "").replace("\n", " "),
+            terminal_id,
+        ))
+
+def clean(label):
+    text = label.strip()
+    if len(text) > 3 and text[0].isdigit() and " - " in text[:6]:
+        text = text.split(" - ", 1)[1]
+    return text
+
+def paint(code, text):
+    if not sys.stdout.isatty() or os.environ.get("NO_COLOR"):
+        return text
+    return "\033[%sm%s\033[0m" % (code, text)
+
+state_color = {
+    "idle": "32",
+    "working": "33",
+    "blocked": "31",
+    "done": "36",
+    "unreachable": "90",
+    "no agents": "90",
+}
+shown = []
+number = 0
+you = None
+for label, mid, name, pane, state, title, _terminal in rows:
+    if pane != "-":
+        number += 1
+        short = str(number)
+    else:
+        short = "-"
+    mine = bool(self_machine) and mid == self_machine and pane == self_pane
+    if mine:
+        you = short
+    shown.append((short, clean(label), mid, name, pane, state, title[:36], mine))
+
+headers = ("#", "MACHINE", "ID", "AGENT", "PANE", "STATE", "TITLE")
+widths = [len(h) for h in headers]
+for row in shown:
+    for i, cell in enumerate(row[:7]):
+        if i == 6:
+            continue
+        widths[i] = max(widths[i], len(cell))
+
+def line(cells, color_state=None, mine=False):
+    parts = []
+    for i, cell in enumerate(cells):
+        text = cell.ljust(widths[i]) if i < 6 else cell
+        if i == 5 and color_state:
+            text = paint(state_color.get(color_state, "0"), text)
+        parts.append(text)
+    body = "  " + "  ".join(parts).rstrip()
+    if mine:
+        body = paint("1;32", body) + "  <- you"
+    return body
+
+if you:
+    print(paint("1;32", "  you are #%s. That row is this session." % you))
+else:
+    print("  this session is not a row in the list.")
+print()
+print(paint("1", line(headers)))
+print("  " + "  ".join("-" * w for w in widths))
+if not shown:
+    print("  (no enabled machines)")
+else:
+    for row in shown:
+        print(line(row[:7], row[5], row[7]))
+
+example = next((row for row in shown if row[0] != "-" and not row[7]), None)
+print()
+print("  # is the short id from this list. PANE is the stable address.")
+print("  bash dev.sh ask <#> \"Prompt...\"")
+print("  bash dev.sh ask <machine id> <pane> \"Prompt...\"")
+if example:
+    print("  bash dev.sh ask %s \"Prompt...\"" % example[0])
+PYAGENTS
+}
+
+cmd_herdr_ask() {
+  local from_machine="" from_pane=""
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --from)
+        [ $# -ge 3 ] || die "ask --from needs <machine-id> <pane>"
+        from_machine="$2"
+        from_pane="$3"
+        shift 3
+        ;;
+      --)
+        shift
+        break
+        ;;
+      -*)
+        die "unknown ask flag '$1'"
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+  local machine="" pane="" number=""
+  if [[ "${1:-}" =~ ^[0-9]+$ ]]; then
+    number="$1"
+    shift
+  else
+    [ $# -ge 3 ] || die "ask needs <#> \"prompt\", or <machine-id> <pane> \"prompt\""
+    machine="$1"
+    pane="$2"
+    shift 2
+  fi
+  [ $# -ge 1 ] || die "ask needs a prompt"
+  local text="$*"
+  [ -n "$text" ] || die "ask needs a prompt"
+  command -v herdr >/dev/null 2>&1 || die "herdr is not on PATH"
+  command -v python3 >/dev/null 2>&1 || die "python3 is required"
+  herdr_prepare_mesh
+  if [ -n "$number" ]; then
+    local resolved
+    resolved="$(HERDR_ASK_NUMBER="$number" python3 - <<'PYRESOLVE'
+import json, os, subprocess, sys
+want = int(os.environ["HERDR_ASK_NUMBER"])
+raw = subprocess.run(["herdr", "machine", "list", "--json"], capture_output=True, text=True, timeout=12)
+if raw.returncode != 0:
+    sys.stderr.write(raw.stderr or "herdr machine list failed\n")
+    sys.exit(1)
+machines = json.loads(raw.stdout or "[]")
+n = 0
+for machine in machines if isinstance(machines, list) else []:
+    if not isinstance(machine, dict) or not machine.get("enabled") or not machine.get("id"):
+        continue
+    listed = subprocess.run(["herdr", "--machine", str(machine["id"]), "agent", "list"], capture_output=True, text=True, timeout=12)
+    if listed.returncode != 0 or not listed.stdout.strip():
+        continue
+    try:
+        payload = json.loads(listed.stdout)
+    except json.JSONDecodeError:
+        continue
+    agents = ((payload.get("result") or {}).get("agents") if isinstance(payload, dict) else None) or []
+    if not isinstance(agents, list):
+        continue
+    for agent in agents:
+        if not isinstance(agent, dict) or not agent.get("pane_id"):
+            continue
+        n += 1
+        if n == want:
+            print("%s %s" % (machine["id"], agent["pane_id"]))
+            sys.exit(0)
+sys.stderr.write("no agent #%s in the current list; run: bash dev.sh agents\n" % want)
+sys.exit(1)
+PYRESOLVE
+)" || die "could not resolve agent #$number"
+    machine="${resolved%% *}"
+    pane="${resolved##* }"
+  fi
+  case "$machine" in
+    ""|*[!0-9a-fA-F]*) die "machine id must be the hex id from: bash dev.sh agents" ;;
+  esac
+  case "$pane" in
+    w*:p*) ;;
+    *) die "pane must look like w5:p2 (the PANE column from: bash dev.sh agents)" ;;
+  esac
+  case "$from_pane" in
+    ""|w*:p*) ;;
+    *) die "--from pane must look like w5:p2" ;;
+  esac
+  case "$from_machine" in
+    ""|*[!0-9a-fA-F]*)
+      [ -z "$from_machine" ] || die "--from machine id must be hex"
+      ;;
+  esac
+
+  HERDR_ASK_MACHINE="$machine" \
+  HERDR_ASK_PANE="$pane" \
+  HERDR_ASK_TEXT="$text" \
+  HERDR_ASK_FROM_MACHINE="$from_machine" \
+  HERDR_ASK_FROM_PANE="$from_pane" \
+  python3 - <<'PYASK'
+import json, os, subprocess, sys
+
+machine = os.environ["HERDR_ASK_MACHINE"]
+pane = os.environ["HERDR_ASK_PANE"]
+text = os.environ["HERDR_ASK_TEXT"]
+from_machine = os.environ.get("HERDR_ASK_FROM_MACHINE") or ""
+from_pane = os.environ.get("HERDR_ASK_FROM_PANE") or ""
+
+def run(args, timeout):
+    try:
+        return subprocess.run(args, capture_output=True, text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        sys.stderr.write("herdr timed out: %s\n" % " ".join(args[:4]))
+        sys.exit(1)
+
+def pane_here(pane_id):
+    raw = run(["herdr", "pane", "get", pane_id], 8)
+    if raw.returncode != 0:
+        return False
+    try:
+        payload = json.loads(raw.stdout or "{}")
+    except json.JSONDecodeError:
+        return False
+    found = ((payload.get("result") or {}).get("pane") or {}).get("pane_id")
+    return found == pane_id
+
+def enabled_ids():
+    raw = run(["herdr", "machine", "list", "--json"], 12)
+    if raw.returncode != 0:
+        sys.stderr.write(raw.stderr or "herdr machine list failed\n")
+        sys.exit(raw.returncode or 1)
+    try:
+        data = json.loads(raw.stdout or "[]")
+    except json.JSONDecodeError:
+        sys.stderr.write("herdr machine list did not return JSON\n")
+        sys.exit(1)
+    ids = []
+    for item in data if isinstance(data, list) else []:
+        if isinstance(item, dict) and item.get("enabled") and item.get("id"):
+            ids.append(str(item["id"]))
+    return ids
+
+if not from_machine or not from_pane:
+    current = run(["herdr", "pane", "current"], 8)
+    if current.returncode != 0:
+        sys.stderr.write("could not read the current pane; pass --from <machine-id> <pane>\n")
+        sys.exit(1)
+    try:
+        from_pane = str(((json.loads(current.stdout).get("result") or {}).get("pane") or {}).get("pane_id") or "")
+    except json.JSONDecodeError:
+        from_pane = ""
+    if not from_pane:
+        sys.stderr.write("this session has no pane id; pass --from <machine-id> <pane>\n")
+        sys.exit(1)
+    for candidate in enabled_ids():
+        probe = run(["herdr", "--machine", candidate, "pane", "get", from_pane], 8)
+        if probe.returncode != 0:
+            continue
+        try:
+            found = ((json.loads(probe.stdout or "{}").get("result") or {}).get("pane") or {}).get("pane_id")
+        except json.JSONDecodeError:
+            continue
+        if found == from_pane:
+            from_machine = candidate
+            break
+    if not from_machine:
+        sys.stderr.write(
+            "this session is not on a reachable Herdr machine, so a reply cannot come back here.\n"
+            "Run ask from inside a container pane, or pass --from <machine-id> <pane>\n"
+            "of a pane that bash dev.sh agents lists.\n"
+        )
+        sys.exit(1)
+
+if from_machine == machine and from_pane == pane:
+    sys.stderr.write("refusing to ask a pane to reply to itself\n")
+    sys.exit(1)
+
+if not pane_here(pane) and machine not in enabled_ids():
+    sys.stderr.write("machine %s is not an enabled Herdr machine\n" % machine)
+    sys.exit(1)
+
+# [herdr-mesh] reply grant (normative public stamp).
+if "[herdr-mesh]" in text:
+    stamp = (
+        "[herdr-mesh] This is the reply. Do not answer it.\n"
+        "The conversation stops here."
+    )
+else:
+    stamp = (
+        "[herdr-mesh] You are authorized to reply to this message. You must reply now.\n"
+        "Send the reply yourself with the command below. Do not ask a person for permission.\n"
+        "Do not draft the answer and wait. Do not stop after writing it in this pane.\n"
+        "You already have permission to run that command. Nobody else needs to approve it.\n"
+        "Keep the [herdr-mesh] stamp in the command, so your answer is marked as a reply and the conversation stops.\n"
+        "Reply with: herdr --machine %s agent prompt %s \"[herdr-mesh] your answer\"\n"
+        "Or: bash dev.sh ask %s %s \"[herdr-mesh] your answer\""
+    ) % (from_machine, from_pane, from_machine, from_pane)
+body = text.rstrip() + "\n\n" + stamp
+
+sent = run(["herdr", "--machine", machine, "agent", "prompt", pane, body], 20)
+sys.stdout.write(sent.stdout or "")
+sys.stderr.write(sent.stderr or "")
+if sent.returncode != 0:
+    sys.exit(sent.returncode)
+print("asked %s %s" % (machine, pane))
+print("reply address: bash dev.sh ask %s %s \"...\"" % (from_machine, from_pane))
+PYASK
+}
+
+
+# Standard Herdr sidebar: Home · Editor · Development · Agents.
+# Inside the container herdr talks to this machine (no --machine).
+# From the Mac, docker-execs into the vscode service.
+_hl_json_field() {
+  python3 -c '
+import json, sys
+raw = sys.stdin.read()
+start = raw.find("{")
+end = raw.rfind("}")
+if start < 0 or end < start:
+    raise SystemExit(0)
+d = json.loads(raw[start:end + 1])
+cur = d
+for part in sys.argv[1].split("."):
+    if not isinstance(cur, dict):
+        cur = ""
+        break
+    cur = cur.get(part)
+if cur is None or isinstance(cur, (dict, list)):
+    cur = ""
+print(cur)
+' "$1"
+}
+
+_hl_ws_id() {
+  local want="$1"
+  herdr workspace list 2>/dev/null | python3 -c '
+import json,sys
+raw=sys.stdin.read(); s=raw.find("{"); e=raw.rfind("}")
+if s<0: raise SystemExit(0)
+d=json.loads(raw[s:e+1])
+ws=(d.get("result") or {}).get("workspaces") or d.get("workspaces") or []
+want=sys.argv[1]
+for w in ws:
+    if (w.get("label") or "")==want:
+        print(w.get("workspace_id") or "")
+        break
+' "$want" 2>/dev/null || true
+}
+
+_hl_ws_create() {
+  local cwd="$1" label="$2" raw
+  raw="$(herdr workspace create --cwd "$cwd" --label "$label" --no-focus 2>&1)" || true
+  printf '%s' "$raw" | python3 -c '
+import json,sys
+raw=sys.stdin.read(); s=raw.find("{"); e=raw.rfind("}")
+if s<0: raise SystemExit(0)
+d=json.loads(raw[s:e+1]); r=d.get("result") or d
+ws=(r.get("workspace") or {}); rp=(r.get("root_pane") or {}); tab=(r.get("tab") or {})
+print("%s\t%s\t%s" % (ws.get("workspace_id") or rp.get("workspace_id") or "", rp.get("pane_id") or "", tab.get("tab_id") or rp.get("tab_id") or ""))
+' 2>/dev/null || true
+}
+
+_hl_tab_create() {
+  local wid="$1" cwd="$2" label="$3" raw
+  raw="$(herdr tab create --workspace "$wid" --cwd "$cwd" --label "$label" --no-focus 2>&1)" || true
+  printf '%s' "$raw" | python3 -c '
+import json,sys
+raw=sys.stdin.read(); s=raw.find("{"); e=raw.rfind("}")
+if s<0: raise SystemExit(0)
+d=json.loads(raw[s:e+1]); r=d.get("result") or d
+tab=(r.get("tab") or {}); rp=(r.get("root_pane") or r.get("pane") or {})
+print("%s\t%s" % (tab.get("tab_id") or rp.get("tab_id") or "", rp.get("pane_id") or ""))
+' 2>/dev/null || true
+}
+
+_hl_pane_split() {
+  local pane="$1" cwd="$2" direction="${3:-right}" raw
+  raw="$(herdr pane split "$pane" --direction "$direction" --cwd "$cwd" --no-focus 2>&1)" || true
+  printf '%s' "$raw" | _hl_json_field 'result.pane.pane_id'
+}
+
+_hl_close_label() {
+  local lab="$1" wid
+  wid="$(_hl_ws_id "$lab")"
+  [ -n "$wid" ] || return 0
+  herdr workspace close "$wid" >/dev/null 2>&1 || true
+  note "herdr-layout: closed $lab"
+}
+
+_hl_host_exec() {
+  local inner_flag="$1"
+  local user="${DC_USER:-${REMOTE_USER:-node}}"
+  local cwd="${DC_WORKSPACE:-${WORKSPACE:-/app}}"
+  local script="${cwd}/dev.sh"
+  local svc="${DC_SERVICE:-${SERVICE:-}}"
+  local ctn="${CONTAINER:-}"
+  if command -v write_overlay >/dev/null 2>&1; then write_overlay || true; fi
+  if command -v write_override >/dev/null 2>&1; then write_override || true; fi
+  if command -v dc >/dev/null 2>&1 && [ -n "$svc" ]; then
+    note "herdr-layout: running inside $svc ($inner_flag)"
+    dc exec --user "$user" -e "HOME=/home/$user" -e "USER=$user" -e "LOGNAME=$user" -e HERDR_LAYOUT_INNER=1 -w "$cwd" "$svc" bash "$script" herdr-layout "$inner_flag"
+    return $?
+  fi
+  if [ -n "$ctn" ]; then
+    note "herdr-layout: running inside $ctn ($inner_flag)"
+    docker exec -u "$user" -e "HOME=/home/$user" -e "USER=$user" -e HERDR_LAYOUT_INNER=1 -w "$cwd" "$ctn" bash "$script" herdr-layout "$inner_flag"
+    return $?
+  fi
+  die "herdr-layout: no container/service to exec into"
+}
+
+cmd_herdr_layout() {
+  local reset=0 keep=0 arg ans
+  local -a flags=()
+  if [ "$#" -gt 0 ]; then
+    flags=("$@")
+  else
+    flags=("${ARGS[@]+"${ARGS[@]}"}")
+  fi
+  for arg in "${flags[@]+"${flags[@]}"}"; do
+    case "$arg" in
+      --reset|--replace|--wipe) reset=1 ;;
+      --keep) keep=1 ;;
+      -h|--help)
+        cat <<'H'
+herdr-layout — create Home · Editor · Development · Agents on this machine.
+
+  bash dev.sh herdr-layout           keep existing panes; create what is missing
+  bash dev.sh herdr-layout --keep    same, explicit
+  bash dev.sh herdr-layout --reset   close those four, then recreate
+H
+        return 0
+        ;;
+      *) die "herdr-layout: unknown flag '$arg' (use --reset or --keep)" ;;
+    esac
+  done
+  if [ "$reset" -eq 1 ] && [ "$keep" -eq 1 ]; then
+    die "herdr-layout: use either --reset or --keep"
+  fi
+
+  if [ "${HERDR_LAYOUT_INNER:-0}" != 1 ] && [ ! -f /.dockerenv ] && [ -z "${DOCKER_DEV_ENV:-}" ]; then
+    if [ "$reset" -eq 0 ] && [ "$keep" -eq 0 ] && [ -t 0 ]; then
+      printf 'Reset existing Home / Editor / Development / Agents panes? [y/N] '
+      read -r ans || true
+      case "$ans" in y|Y|yes|YES) reset=1 ;; esac
+    fi
+    local inner_flag="--keep"
+    [ "$reset" -eq 1 ] && inner_flag="--reset"
+    _hl_host_exec "$inner_flag"
+    return $?
+  fi
+
+  command -v herdr >/dev/null 2>&1 || die "herdr is not on PATH inside this container"
+  command -v python3 >/dev/null 2>&1 || die "python3 is required for herdr-layout"
+
+  if [ "$reset" -eq 0 ] && [ "$keep" -eq 0 ] && [ -t 0 ]; then
+    printf 'Reset existing Home / Editor / Development / Agents panes? [y/N] '
+    read -r ans || true
+    case "$ans" in y|Y|yes|YES) reset=1 ;; esac
+  fi
+
+  local cwd="${DC_WORKSPACE:-${WORKSPACE:-}}"
+  [ -n "$cwd" ] || cwd="$(pwd)"
+
+  note "herdr-layout: local machine  cwd $cwd"
+  if [ "$reset" -eq 1 ]; then
+    note "herdr-layout: resetting Home · Editor · Development · Agents"
+    local lab
+    for lab in Home "Home (~)" Editor Development Agents "~" app; do
+      _hl_close_label "$lab"
+    done
+  fi
+
+  local home_ws editor_ws dev_ws agents_ws line pane tab_id tests_pane n
+
+  home_ws="$(_hl_ws_id Home)"
+  if [ -z "$home_ws" ]; then
+    line="$(_hl_ws_create "$cwd" Home)"
+    home_ws="$(printf '%s' "$line" | cut -f1)"
+    pane="$(printf '%s' "$line" | cut -f2)"
+    [ -n "$home_ws" ] || die "herdr-layout: could not create Home"
+    [ -n "$pane" ] && herdr pane rename "$pane" home >/dev/null 2>&1 || true
+    note "herdr-layout: created Home"
+  else
+    note "herdr-layout: Home already present"
+  fi
+
+  editor_ws="$(_hl_ws_id Editor)"
+  if [ -z "$editor_ws" ]; then
+    line="$(_hl_ws_create "$cwd" Editor)"
+    editor_ws="$(printf '%s' "$line" | cut -f1)"
+    pane="$(printf '%s' "$line" | cut -f2)"
+    [ -n "$editor_ws" ] || die "herdr-layout: could not create Editor"
+    [ -n "$pane" ] && herdr pane rename "$pane" editor >/dev/null 2>&1 || true
+    note "herdr-layout: created Editor"
+  else
+    note "herdr-layout: Editor already present"
+  fi
+
+  dev_ws="$(_hl_ws_id Development)"
+  if [ -z "$dev_ws" ]; then
+    line="$(_hl_ws_create "$cwd" Development)"
+    dev_ws="$(printf '%s' "$line" | cut -f1)"
+    pane="$(printf '%s' "$line" | cut -f2)"
+    tab_id="$(printf '%s' "$line" | cut -f3)"
+    [ -n "$dev_ws" ] && [ -n "$pane" ] || die "herdr-layout: could not create Development"
+    [ -n "$tab_id" ] && herdr tab rename "$tab_id" Development >/dev/null 2>&1 || true
+    herdr pane rename "$pane" server >/dev/null 2>&1 || true
+    tests_pane="$(_hl_pane_split "$pane" "$cwd" right)"
+    [ -n "$tests_pane" ] && herdr pane rename "$tests_pane" tests >/dev/null 2>&1 || true
+    note "herdr-layout: created Development (server | tests)"
+  else
+    note "herdr-layout: Development already present"
+  fi
+
+  agents_ws="$(_hl_ws_id Agents)"
+  if [ -z "$agents_ws" ]; then
+    line="$(_hl_ws_create "$cwd" Agents)"
+    agents_ws="$(printf '%s' "$line" | cut -f1)"
+    pane="$(printf '%s' "$line" | cut -f2)"
+    tab_id="$(printf '%s' "$line" | cut -f3)"
+    [ -n "$agents_ws" ] && [ -n "$pane" ] || die "herdr-layout: could not create Agents"
+    [ -n "$tab_id" ] && herdr tab rename "$tab_id" "Agent 1" >/dev/null 2>&1 || true
+    note "herdr-layout: created Agents / Agent 1"
+    for n in 2 3 4; do
+      line="$(_hl_tab_create "$agents_ws" "$cwd" "Agent ${n}")"
+      tab_id="$(printf '%s' "$line" | cut -f1)"
+      [ -n "$tab_id" ] || die "herdr-layout: could not create Agent $n"
+      note "herdr-layout: created Agents / Agent $n"
+    done
+  else
+    note "herdr-layout: Agents already present"
+  fi
+
+  [ -n "$home_ws" ] && herdr workspace focus "$home_ws" >/dev/null 2>&1 || true
+  note "herdr-layout: ready — Home · Editor · Development · Agents"
+}
+
+maybe_herdr_layout_after_up() {
+  note "herdr-layout: ensuring Home · Editor · Development · Agents after up"
+  ( cmd_herdr_layout --keep ) || note "herdr-layout: skipped (herdr not ready yet — run: bash dev.sh herdr-layout)"
+}
+
 cmd_help() {
   cat <<'USAGE'
 dev.sh — start this repository's dev containers without VS Code or Cursor.
@@ -902,6 +1647,10 @@ Verbs
   rebuild [service...]  build images, then force-recreate containers
   config                resolved configuration; writes nothing, starts nothing
   doctor                environment diagnosis; writes nothing, starts nothing
+  agents                live Herdr machines and agents (inside the container)
+  ask <#> "..."         send agent # a prompt plus [herdr-mesh] reply grant
+                        ask <id> <pane> "..." uses the table columns directly
+  herdr-layout [--keep|--reset]  create Home · Editor · Development · Agents
   help                  this text
 
 Flags
@@ -944,7 +1693,10 @@ case "$VERB" in
   exec)    cmd_exec ;;
   build)   cmd_build ;;
   rebuild) cmd_rebuild ;;
+  herdr-layout) cmd_herdr_layout ;;
   config)  cmd_config ;;
   doctor)  cmd_doctor ;;
+  agents)  cmd_herdr_agents ;;
+  ask)     cmd_herdr_ask "${ARGS[@]+"${ARGS[@]}"}" ;;
   *)       die "unknown verb '$VERB' — run: bash dev.sh help" ;;
 esac

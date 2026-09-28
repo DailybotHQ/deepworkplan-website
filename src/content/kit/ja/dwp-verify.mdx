@@ -35,7 +35,8 @@ import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
 3. **CONFORMANT** または **NOT CONFORMANT** を、各失敗を列挙して報告する。
 4. 不足を Deep Work Plan として捕捉することを提案する。決して黙って修正しない。
 
+**世代ごとの計画検証。** リポジトリの来歴チェッカーは現在の DWP 標準 6.0.0 を受け入れますが、計画の検証は世代ごとに行います。v6 計画は contract ポインター、`contract.json`、または `contracts/` のリビジョンチェーンで識別し、v6 の contract、journal、ledger バリデーターで検査します。保持されている `plan_contract.py` チェッカーは v5 専用で、v6 計画の検証器として実行してはなりません。v6 の `state.json` は生成される snapshot 投影であり、journal との不一致は指摘事項です。両世代は共存し、検証時に移行されません。
+
 ## エイリアス
 
 - `dwp:verify`
-**世代ごとの計画検証。** リポジトリの来歴チェッカーは現在の DWP 標準 6.0.0 を受け入れますが、計画の検証は世代ごとに行います。v6 計画は contract ポインター、`contract.json`、または `contracts/` のリビジョンチェーンで識別し、v6 の contract、journal、ledger バリデーターで検査します。保持されている `plan_contract.py` チェッカーは v5 専用で、v6 計画の検証器として実行してはなりません。v6 の `state.json` は生成される snapshot 投影であり、journal との不一致は指摘事項です。両世代は共存し、検証時に移行されません。
