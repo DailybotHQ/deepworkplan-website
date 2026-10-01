@@ -99,10 +99,10 @@ Payload походять із шару стану плану (`state.json`), я�
 | **Chat** | Надсилання або редагування в Slack, Microsoft Teams, Discord чи Google Chat — канали, DM, команди, потоки у стилі звіту, send-as-user (Slack, admin) |
 | **Conversations** | Відкриття або повторне використання групового DM Slack з ботом і названими колегами; публікація звіту в тому ж виклику |
 | **Health and status** | Оголошення агента online/offline для довгих сесій |
-| **Check-ins** | Завершення standup; **авторство** check-in (розклад, учасники, питання, нагадування, налаштування AI) |
+| **Check-ins** | Завершення standup; **створення** check-in (розклад, учасники, питання, нагадування, налаштування AI) |
 | **Kudos** | Визнання колег або цілих команд; перегляд recognition feed, org feed, wall of fame |
 | **Teams** | Список команд, перегляд учасників, resolve імен у UUID; `me`, `org`, профілі користувачів |
-| **Forms** | Список (тепер **org-scoped** за замовчуванням, з `--mine` і `--owner` для звуження), submit, update, transition форм; **авторство** форм (стани workflow, дозволи, ChatOps); пагінація, пошук і фільтри за датою |
+| **Forms** | Список (тепер **org-scoped** за замовчуванням, з `--mine` і `--owner` для звуження), submit, update, transition форм; **створення** форм (стани workflow, дозволи, ChatOps); пагінація, пошук і фільтри за датою |
 | **Workflows** | Читання та запуск org workflows (`workflow list` / `workflow get` / `workflow trigger`); створення й редагування workflows залишається у веб-застосунку |
 | **Report channels** | Виявлення UUID каналів для форм або check-in |
 | **Per-repo API keys** | Керування `.dailybot/env.json` — опційним, доданим до gitignore файлом API keys + URL на кожне середовище, з профілями `live` і `testing` (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.9.0`) |

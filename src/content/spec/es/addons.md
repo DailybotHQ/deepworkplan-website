@@ -44,7 +44,7 @@ Una conexión opcional al **equipo de Dailybot** del desarrollador para visibili
 
 - **Página del kit:** [Dailybot](/kit/dailybot) — referencia completa de capacidades
 - **Qué conecta el addon de DWP:** cuatro reportes del ciclo de vida del plan (inicio, tarea significativa, bloqueado, finalización) vía la sub-skill `report` de dailybot; refuerzo determinístico opcional mediante hooks (`dailybot hook`, CLI `>= 3.9.0`)
-- **Skill emparejada:** instalar [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (actualmente **3.23.2**) expone **17 capacidades** — chat en Slack/Teams/Discord/Google Chat, check-ins, autoría de formularios, ask AI, kudos, tableros y tareas de Plan, etiquetas de la organización, claves API por repo (`.dailybot/env.json`), correo y más. El addon de DWP solo conecta **report**; el resto de capacidades se invocan directamente mediante la skill de Dailybot
+- **Skill emparejada:** instalar [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (actualmente **3.23.2**) expone **17 capacidades** — chat en Slack/Teams/Discord/Google Chat, check-ins, creación de formularios, ask AI, kudos, tableros y tareas de Plan, etiquetas de la organización, claves API por repo (`.dailybot/env.json`), correo y más. El addon de DWP solo conecta **report**; el resto de capacidades se invocan directamente mediante la skill de Dailybot
 - **Auth:** totalmente delegada a la skill de Dailybot (`dailybot login` o `DAILYBOT_API_KEY`); este addon nunca almacena credenciales
 - **Salvaguarda neutral respecto al proveedor:** el DWP central tiene **cero** dependencia de Dailybot; nunca instalar automáticamente para todos
 - **Cuándo se ofrece:** el desarrollador o el equipo ya usan Dailybot, o piden explícitamente reportes al equipo
