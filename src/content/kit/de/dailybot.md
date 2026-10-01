@@ -99,10 +99,10 @@ Die Installation der Dailybot-Agent-Skill bringt weit mehr als das DWP-Addon ver
 | **Chat** | Senden oder Bearbeiten in Slack, Microsoft Teams, Discord oder Google Chat — Kanäle, DMs, Teams, Report-Threads, send-as-user (Slack, Admin) |
 | **Konversationen** | Slack-Gruppen-DM mit Bot und benannten Teamkollegen öffnen oder wiederverwenden; Report im selben Aufruf posten |
 | **Health und Status** | Agent online/offline für lange Sessions ankündigen |
-| **Check-ins** | Standups abschließen; Check-ins **autorisieren** (Zeitplan, Teilnehmer, Fragen, Erinnerungen, KI-Einstellungen) |
+| **Check-ins** | Standups abschließen; Check-ins **erstellen** (Zeitplan, Teilnehmer, Fragen, Erinnerungen, KI-Einstellungen) |
 | **Kudos** | Teamkollegen oder ganze Teams anerkennen; Anerkennungs-Feed, Org-Feed, Wall of Fame durchsuchen |
 | **Teams** | Teams listen, Mitglieder inspizieren, Namen zu UUIDs auflösen; `me`, `org`, Benutzerprofile |
-| **Formulare** | Formulare listen (jetzt standardmäßig **org-weit**, mit `--mine` und `--owner` zum Eingrenzen), einreichen, aktualisieren, transitionieren; Formulare **autorisieren** (Workflow-States, Berechtigungen, ChatOps); Pagination, Suche und Datumsfilter |
+| **Formulare** | Formulare listen (jetzt standardmäßig **org-weit**, mit `--mine` und `--owner` zum Eingrenzen), einreichen, aktualisieren, transitionieren; Formulare **erstellen** (Workflow-States, Berechtigungen, ChatOps); Pagination, Suche und Datumsfilter |
 | **Workflows** | Org-Workflows lesen und auslösen (`workflow list` / `workflow get` / `workflow trigger`); Workflows erstellen oder bearbeiten bleibt der Web-App vorbehalten |
 | **Report-Kanäle** | Kanal-UUIDs für Formulare oder Check-ins entdecken |
 | **Per-Repo-API-Keys** | `.dailybot/env.json` verwalten — eine optionale, gitignorierte Datei mit API-Keys + URLs pro Umgebung, mit Profilen `live` und `testing` (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.9.0`) |

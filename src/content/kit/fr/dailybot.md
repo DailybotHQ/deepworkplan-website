@@ -99,10 +99,10 @@ Installer la skill agent Dailybot apporte bien plus que ce que l'addon DWP conne
 | **Chat** | Envoyer ou modifier sur Slack, Microsoft Teams, Discord ou Google Chat — canaux, MD, équipes, fils type rapport, envoyer-en-tant-qu'utilisateur (Slack, admin) |
 | **Conversations** | Ouvrir ou réutiliser un MD de groupe Slack avec le bot et des coéquipiers nommés ; publier un rapport dans le même appel |
 | **Santé et statut** | Annoncer agent en ligne/hors ligne pour les sessions longues |
-| **Check-ins** | Compléter les standups ; **autoriser** les check-ins (planification, participants, questions, rappels, paramètres IA) |
+| **Check-ins** | Compléter les standups ; **créer** les check-ins (planification, participants, questions, rappels, paramètres IA) |
 | **Kudos** | Reconnaître des coéquipiers ou des équipes entières ; parcourir le fil de reconnaissance, fil org, mur de la renommée |
 | **Équipes** | Lister les équipes, inspecter les membres, résoudre les noms en UUIDs ; `me`, `org`, profils utilisateur |
-| **Formulaires** | Lister (désormais **à portée org** par défaut, avec `--mine` et `--owner` pour restreindre), soumettre, mettre à jour, faire transitionner les formulaires ; **autoriser** les formulaires (états de workflow, permissions, ChatOps) ; pagination, recherche et filtres de date |
+| **Formulaires** | Lister (désormais **à portée org** par défaut, avec `--mine` et `--owner` pour restreindre), soumettre, mettre à jour, faire transitionner les formulaires ; **créer** les formulaires (états de workflow, permissions, ChatOps) ; pagination, recherche et filtres de date |
 | **Workflows** | Lire et déclencher les workflows org (`workflow list` / `workflow get` / `workflow trigger`) ; la création et l'édition de workflows restent dans l'application web |
 | **Canaux de rapport** | Découvrir les UUIDs de canal pour formulaires ou check-ins |
 | **Clés API par dépôt** | Gérer `.dailybot/env.json` — un fichier optionnel et gitignoré de clés API + URLs par environnement, avec des profils `live` et `testing` (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.9.0`) |

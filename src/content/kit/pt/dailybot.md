@@ -99,10 +99,10 @@ Instalar a skill de agente Dailybot traz muito mais do que o addon DWP liga. O p
 | **Chat** | Enviar ou editar no Slack, Microsoft Teams, Discord ou Google Chat — canais, MDs, equipas, threads tipo relatório, enviar-como-utilizador (Slack, admin) |
 | **Conversas** | Abrir ou reutilizar um MD de grupo Slack com o bot e colegas nomeados; publicar um relatório na mesma chamada |
 | **Saúde e estado** | Anunciar agente online/offline para sessões de longa duração |
-| **Check-ins** | Completar standups; **autorar** check-ins (agendamento, participantes, perguntas, lembretes, definições de IA) |
+| **Check-ins** | Completar standups; **criar** check-ins (agendamento, participantes, perguntas, lembretes, definições de IA) |
 | **Kudos** | Reconhecer colegas ou equipas inteiras; explorar feed de reconhecimento, feed da org, mural da fama |
 | **Equipas** | Listar equipas, inspecionar membros, resolver nomes para UUIDs; `me`, `org`, perfis de utilizador |
-| **Formulários** | Listar (agora **com âmbito de org** por omissão, com `--mine` e `--owner` para restringir), submeter, atualizar, transicionar formulários; **autorar** formulários (estados de workflow, permissões, ChatOps); paginação, pesquisa e filtros por data |
+| **Formulários** | Listar (agora **com âmbito de org** por omissão, com `--mine` e `--owner` para restringir), submeter, atualizar, transicionar formulários; **criar** formulários (estados de workflow, permissões, ChatOps); paginação, pesquisa e filtros por data |
 | **Workflows** | Ler e acionar workflows da org (`workflow list` / `workflow get` / `workflow trigger`); criar ou editar workflows continua a ser feito na app web |
 | **Canais de relatório** | Descobrir UUIDs de canal para formulários ou check-ins |
 | **Chaves API por repositório** | Gerir `.dailybot/env.json` — um ficheiro opcional, ignorado pelo git, de chaves API + URLs por ambiente, com perfis `live` e `testing` (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.9.0`) |
