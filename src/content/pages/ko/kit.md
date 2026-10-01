@@ -10,7 +10,7 @@ lastUpdated: 2026-05-31
 `DailybotHQ/deepworkplan-skill`에서 설치됩니다.
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.1 --skill deepworkplan
+npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
 ```
 
 현재 6.x 팩은 새 계획을 기본적으로 v6으로 생성합니다. 기존 계획은 기록된 세대를 유지하며, 마이그레이션에는 명시적 요청이 필요합니다.

@@ -10,7 +10,7 @@ kit คือทุกอย่างที่คุณต้องใช้เ�
 `DailybotHQ/deepworkplan-skill`
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.1 --skill deepworkplan
+npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
 ```
 
 แพ็ก 6.x ปัจจุบันสร้างแผนใหม่ด้วย v6 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายต้องมีคำขออย่างชัดเจน

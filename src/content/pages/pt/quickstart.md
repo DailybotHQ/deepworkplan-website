@@ -120,7 +120,7 @@ versão da skill Deep Work Plan instalada acima. O pacote atual da skill
 inclui o roteador e nove sub-skills: `create`, `execute`, `refine`,
 `resume`, `status`, `verify`, `onboard`, `author` e `upgrade`.
 
-Versão instalada da skill: **6.0.1**. O pacote 6.x atual cria novos planos com v6 por padrão. Os planos existentes mantêm a geração registrada; passar um plano v5 para v6 exige uma migração explícita com prévia.
+Versão instalada da skill: **6.0.2**. O pacote 6.x atual cria novos planos com v6 por padrão. Os planos existentes mantêm a geração registrada; passar um plano v5 para v6 exige uma migração explícita com prévia.
 
 O padrão é deliberadamente proporcional, e transforma essa proporção em uma
 propriedade do plano, não da disciplina do desenvolvedor. Um plano é

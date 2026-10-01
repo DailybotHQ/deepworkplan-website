@@ -30,4 +30,4 @@ Mimari kararı GO’dur: v6 aynı metodolojiyi daha sıkı mühendislik yapısı
 
 Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (örneğin `PLAN_001_add_payment_webhooks/`). Dondurulmuş v5 şemaları sayısal kimliği bir sözcük saydığı için v5 slug’ları 2–4, v6 slug’ları 2–5 sözcük içerir. Mevcut numarasız `PLAN_<slug>/` klasörleri okunabilir kalır ve hiçbir zaman yeniden adlandırılmaz. Numaralı planlar varsa `latest`, sayısal kimliği en yüksek olan planı gösterir.
 
-Yüklü skill sürümü: **6.0.1**. 6.x paketi yeni planları varsayılan olarak v6 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek ve önizleme gerektirir.
+Yüklü skill sürümü: **6.0.2**. 6.x paketi yeni planları varsayılan olarak v6 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek ve önizleme gerektirir.

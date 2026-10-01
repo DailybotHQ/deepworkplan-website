@@ -10,7 +10,7 @@ lastUpdated: 2026-05-31
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.1 --skill deepworkplan
+npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
 ```
 
 Поточний пакет 6.x за замовчуванням створює нові плани у форматі v6. Наявні плани зберігають зафіксоване покоління; міграція потребує явного запиту.

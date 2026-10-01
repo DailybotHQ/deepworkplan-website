@@ -9,7 +9,7 @@ lastUpdated: 2026-06-05
 キットは、この方法論を実際に実行するために必要なものすべてです。`DailybotHQ/deepworkplan-skill` からインストールします。
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.1 --skill deepworkplan
+npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
 ```
 
 現在の 6.x パックは新しい計画を既定で v6 として作成します。既存の計画は記録された世代を維持し、移行には明示的な依頼が必要です。

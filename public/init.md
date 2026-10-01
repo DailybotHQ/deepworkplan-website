@@ -147,7 +147,7 @@ your host. Branch on what you find:
 Fresh-install commands (skip these if the skill is already installed — see above):
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.1 --skill deepworkplan
+npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
 ```
 
 Or install via OpenClaw:
@@ -165,7 +165,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 ### Current standard and execution model
 
 The current repository-facing standard is **DWP 6.0.0**, implemented by the
-Deep Work Plan skill release **6.0.1** installed above. The current skill pack includes
+Deep Work Plan skill release **6.0.2** installed above. The current skill pack includes
 the router and nine sub-skills: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, and `upgrade`.
 

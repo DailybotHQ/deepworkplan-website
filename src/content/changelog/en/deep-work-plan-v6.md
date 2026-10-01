@@ -30,4 +30,4 @@ The architecture decision is GO: v6 keeps the same methodology with stricter eng
 
 New plans receive monotonically increasing numeric IDs with at least three digits (for example, `PLAN_001_add_payment_webhooks/`). Because the frozen v5 schemas count the numeric ID as a word, v5 slugs contain 2–4 words; v6 slugs contain 2–5 words. Existing unnumbered `PLAN_<slug>/` folders remain readable and are never renamed. When numbered plans exist, `latest` resolves to the plan with the highest numeric ID.
 
-Installed skill release: **6.0.1**. The current 6.x pack creates new plans with v6 by default; existing plans keep their recorded generation and are never migrated implicitly.
+Installed skill release: **6.0.2**. The current 6.x pack creates new plans with v6 by default; existing plans keep their recorded generation and are never migrated implicitly.
