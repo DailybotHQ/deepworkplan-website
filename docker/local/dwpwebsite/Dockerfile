@@ -189,7 +189,7 @@ RUN if [ "$INSTALL_GROK_CLI" = "true" ]; then \
     else echo "INSTALL_GROK_CLI is not true; skipping grok"; fi
 
 # Dailybot CLI — official installer (pipx under the hood). Auth persists via volume.
-RUN curl -fsSL https://cli.dailybot.com/install.sh | DAILYBOT_VERSION='>=3.15.0' bash || \
+RUN curl -fsSL https://cli.dailybot.com/install.sh | DAILYBOT_VERSION='>=3.25.2' bash || \
     echo "dailybot CLI install skipped or failed (non-fatal at build)"
 
 # Herdr — terminal runtime for coding agents (unconditional mesh runtime).
