@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Opt-in DWP eklentisi: plan yaşam döngüsünü bir Dailybot ekibine bağlar, isteğe bağlı hook zorlaması ve tam Dailybot agent skill 3.10.3 (sohbet, check-in'ler, formlar, ask AI ve daha fazlası)."
+description: "Opt-in DWP eklentisi: plan yaşam döngüsünü Dailybot ekibine raporlar; isteğe bağlı hook ve tam Dailybot agent skill 3.23.2 (sohbet, form, Plan, daha fazlası)."
 kind: addon
 lang: tr
 order: 2
@@ -23,7 +23,7 @@ Temel Deep Work Plan metodolojisinin Dailybot'a **sıfır** bağımlılığı va
 
 ## Bu eklentinin bağladıkları (kasıtlı olarak dar)
 
-DWP Dailybot eklentisi Dailybot'u **yeniden icat etmez**. Plan yürütmesini dailybot **`report`** alt-skill'ine bağlar ve isteğe bağlı olarak harness hook'larını commit'ler. Geri kalan her şey — kurulum, onay, kimlik doğrulama, yazım stili — resmi [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill)'e (şu an **3.10.3**) **ertelenir**.
+DWP Dailybot eklentisi Dailybot'u **yeniden icat etmez**. Plan yürütmesini dailybot **`report`** alt-skill'ine bağlar ve isteğe bağlı olarak harness hook'larını commit'ler. Geri kalan her şey — kurulum, onay, kimlik doğrulama, yazım stili — resmi [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill)'e (şu an **3.23.2**) **ertelenir**.
 
 ### Dört yaşam döngüsü olayı
 
@@ -40,7 +40,7 @@ Payload'lar mevcut olduğunda planın durum katmanından (`state.json`) türetil
 
 ### İsteğe bağlı hook zorlaması
 
-`dailybot-cli >= 3.7.0` ile eklenti depo düzeyinde harness hook'larını (`dailybot hook session-start | activity | post-commit | stop | dismiss`) yerel depo başına ledger ile destekleyerek **commit edebilir**. Harness, bir yaşam döngüsü olayı kaçırıldığında tur sonunda agent'ı hatırlatır — prompt talimatlarının zayıfladığı uzun gözetimsiz oturumlar için kritik.
+`dailybot-cli >= 3.9.0` ile eklenti depo düzeyinde harness hook'larını (`dailybot hook session-start | activity | post-commit | stop | dismiss`) yerel depo başına ledger ile destekleyerek **commit edebilir**. Harness, bir yaşam döngüsü olayı kaçırıldığında tur sonunda agent'ı hatırlatır — prompt talimatlarının zayıfladığı uzun gözetimsiz oturumlar için kritik.
 
 Başarılı bir yaşam döngüsü raporu hook ledger'ını **sıfırlar**, böylece iki katman asla çift rapor vermez. Hook komutları yalnızca yerel durumu okur ve her zaman `0` ile çıkar.
 
@@ -69,10 +69,10 @@ Eklenti kurulum yollarını **sunar**; Dailybot skill onay ve doğrulamayı yön
 
 | Bileşen | Komut / yol |
 |-----------|----------------|
-| **Dailybot agent skill** (önerilen) | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Dailybot agent skill** (önerilen) | `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot -y` |
 | **Mevcut skill'i güncelle** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Dailybot CLI** (minimum `>= 3.7.0`) | İlk kullanımda skill tarafından doğrulanmış `shared/auth.md` ile kurulur; veya `pip install 'dailybot-cli>=3.7.0'`, Homebrew veya [cli.dailybot.com](https://cli.dailybot.com)'daki checksum doğrulanmış yükleyici |
+| **Dailybot CLI** (paket baseline'ı `>= 3.9.0`; Plan için `>= 3.25.0`) | İlk kullanımda skill tarafından doğrulanmış `shared/auth.md` ile kurulur; veya `pip install 'dailybot-cli>=3.9.0'`, Homebrew veya [cli.dailybot.com](https://cli.dailybot.com)'daki checksum doğrulanmış yükleyici |
 
 Sürümleri kontrol et: `dailybot --version` ve `dailybot version --check`. Yükseltme: `dailybot upgrade`.
 
@@ -82,13 +82,13 @@ Bu eklenti **asla** e-posta, OTP veya API anahtarı istemez ve kimlik bilgilerin
 
 - `dailybot login` (e-posta OTP) veya
 - `DAILYBOT_API_KEY` / `dailybot config key=...` veya
-- opt-in, gitignore'lanmış bir `.dailybot/env.json` depo başına anahtar dosyası (`dailybot env add/use`, CLI `>= 3.7.0`); böylece bir geliştirici farklı depolarda farklı org'larda oturum açmış olabilir.
+- opt-in, gitignore'lanmış bir `.dailybot/env.json` depo başına anahtar dosyası (`dailybot env add/use`, CLI `>= 3.9.0`); böylece bir geliştirici farklı depolarda farklı org'larda oturum açmış olabilir.
 
 Kimlik doğrulama çözümü **Bearer-first**'tür: bir oturum token'ı önceliklidir ve `401`/`403` durumunda şeffaf bir Bearer→API-anahtarı yeniden denemesiyle eski bir token asla geçerli bir anahtarı engellemez. Kimlik doğrulama reddedilirse veya kullanılamazsa raporlama sessizce atlanır — çalışma devam eder.
 
-## Eşleşen Dailybot skill — 14 yetenek (3.10.3)
+## Eşleşen Dailybot skill — 17 yetenek (3.23.2)
 
-Dailybot agent skill kurmak, DWP eklentisinin bağladığından çok daha fazlasını getirir. Resmi skill paketi (skill **3.10.3**, CLI baseline **>= 3.7.0**, güncel yayın **3.7.3**) **14 koordineli alt-skill** sunar:
+Dailybot agent skill kurmak, DWP eklentisinin bağladığından çok daha fazlasını getirir. Resmi skill paketi (skill **3.23.2**, CLI baseline **>= 3.9.0**, Plan **>= 3.25.0**, güncel CLI yayını **3.25.2**) **17 koordineli alt-skill** sunar:
 
 | Alt-skill | Ne yapar |
 |-----------|--------------|
@@ -103,9 +103,12 @@ Dailybot agent skill kurmak, DWP eklentisinin bağladığından çok daha fazlas
 | **Kudos** | Ekip arkadaşlarını veya tüm ekipleri tanı; tanınma akışı, org akışı, wall of fame'e göz at |
 | **Teams** | Ekipleri listele, üyeleri incele, adları UUID'lere çöz; `me`, `org`, kullanıcı profilleri |
 | **Forms** | Listele (artık varsayılan olarak **org kapsamlı**, daraltmak için `--mine` ve `--owner`), gönder, güncelle, geçiş yap; formları **author** et (workflow durumları, izinler, ChatOps); sayfalama, arama ve tarih filtreleri |
-| **Workflows** | Org workflow'larını oku (`workflow list` / `workflow get`; salt okunur) |
+| **Workflows** | Org workflow'larını oku ve tetikle (`workflow list` / `workflow get` / `workflow trigger`); workflow oluşturma ve düzenleme web uygulamasında kalır |
 | **Report channels** | Formlar veya check-in'ler için kanal UUID'lerini keşfet |
-| **Per-repo API keys** | `.dailybot/env.json`'ı yönet — ortam başına API anahtarları + URL'lerden oluşan opt-in, gitignore'lanmış bir dosya (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.7.0`) |
+| **Per-repo API keys** | `.dailybot/env.json`'ı yönet — ortam başına API anahtarları + URL'lerden oluşan opt-in, gitignore'lanmış bir dosya; `live` ve `testing` profilleriyle (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.9.0`) |
+| **Organizasyon etiketleri** | Org etiketlerinin tam yaşam döngüsü (`dailybot label list / create / update / archive / delete / assign / batch`) — formlar, check-in'ler ve workflow'lar için ortak bir taksonomi (CLI `>= 3.9.0`) |
+| **Featured stars** | Formlar, otomasyonlar ve check-in'ler üzerinde kullanıcıya özel yıldızlar (`dailybot featured`) |
+| **Plan** (Beta) | `dailybot plan` altında panolar, görevler, projeler, hedefler ve kilometre taşları: çalışma alanını oku, iş oluştur ve taşı, sahip ata, yorum yaz, proje güncellemesi paylaş ve agent'a devredilen bir görev üzerinde çalış (`task brief`). CLI `>= 3.25.0` gerekir |
 
 **DWP eklentisi yalnızca `report`'u plan yürütmesine bağlar.** Geri kalan her şey için Dailybot skill'i doğrudan çağırın — örneğin `#releases`'e deploy özeti gönderin, standup tamamlayın veya Dailybot AI'dan check-in trendlerini özetlemesini isteyin.
 

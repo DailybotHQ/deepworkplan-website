@@ -10,7 +10,7 @@ order: 5
 
 Todo Deep Work Plan termina igual: un **Final Review** obligatorio que lee el conjunto completo de cambios acumulados del plan antes de poder darlo por concluido. Su pase de seguridad es el último punto en el que algo puede detectarse. Sin ayuda, el único lector en ese momento es el mismo agente que escribió el código.
 
-Este addon pone un segundo lector sobre ese diff. Conecta el **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** —publicado en el marketplace como "AI Diff Reviewer", versión actual **v3.1.1**— al pase de seguridad, donde devuelve algo estructurado en lugar de prosa: un veredicto, una tabla de hallazgos y una severidad para cada uno. Desde v3, un hallazgo `critical` significa que el verificador del addon lo confirmó con una segunda llamada al modelo basada en el código; solo los críticos verificados bloquean la finalización hasta que se corrijan o se acepten de forma explícita. La revisión es una compuerta, no un comentario.
+Este addon pone un segundo lector sobre ese diff. Conecta el **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** —publicado en el marketplace como "AI Diff Reviewer", versión actual **v3.2.2**— al pase de seguridad, donde devuelve algo estructurado en lugar de prosa: un veredicto, una tabla de hallazgos y una severidad para cada uno. Desde v3, un hallazgo `critical` significa que el verificador del addon lo confirmó con una segunda llamada al modelo basada en el código; solo los críticos verificados bloquean la finalización hasta que se corrijan o se acepten de forma explícita. La revisión es una compuerta, no un comentario.
 
 Desde el estándar 2.3.0 esa revisión local **forma parte de la línea base, no es un extra**. El onboarding la instala; cada Final Review la ejecuta. Lo que sigue siendo opcional es la superficie de CI: el Flujo B, donde la misma revisión controla los pull requests a través de la GitHub Action.
 
@@ -60,7 +60,7 @@ Dos sub-skills invocables por el desarrollador cierran el bucle tras publicar CI
 
 ## Qué cambió en v3
 
-Tres versiones llegaron el 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) y v3.1.1 siguió con la sub-skill `address-review`. Ninguna cambia cómo este addon conecta el revisor — el Flujo A, las tres rutas de detección y la escalera de nunca bloquear siguen iguales —, pero sí cambian lo que recibe quien lo adopta.
+Tres versiones llegaron el 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) y v3.1.1 siguió con la sub-skill `address-review`; v3.2.0 y v3.2.2 (2026-09-26) hicieron después que ese bucle tenga en cuenta el CI y pueda armar un PR en el que el revisor nunca se ejecutó. Ninguna cambia cómo este addon conecta el revisor — el Flujo A, las tres rutas de detección y la escalera de nunca bloquear siguen iguales —, pero sí cambian lo que recibe quien lo adopta.
 
 | Cambio | Qué significa para un repositorio DWP |
 |--------|----------------------------------------|
@@ -69,6 +69,7 @@ Tres versiones llegaron el 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) y v3.1.1 siguió 
 | **Una revisión sin terminar es roja** (v3.0.0) | `incomplete` (tope de turnos) y `timeout` (reloj) publican hallazgos parciales y fallan bajo rigor bloqueante — «sin hallazgos» ahora significa siempre que el revisor miró y no encontró nada. |
 | **La salida estructurada es la vía para máquinas** (v3.0.0) | El documento `review-output/3.0` lleva el registro de ejecución, el inventario de cambios, los hallazgos con evidencia tipada y verificación, los refutados y la compuerta. Lee el documento en lugar de raspar cuerpos de revisión. |
 | **Seis sub-skills** (v3.1.1) | `address-review` se suma al router: una invocación aplica, hace commit, hace push y rearma el revisor. |
+| **El bucle tiene en cuenta el CI** (v3.2.0, v3.2.2) | `address-review` también lee los logs de los workflows que fallan y los corrige en la misma pasada consentida, actualiza una rama que va por detrás de su base y arma un PR en el que el revisor nunca se ejecutó (un «loop the review» sin más apunta al PR abierto de la rama actual). |
 | **Ensemble opcional** (v3.0.0) | Patas `mode: emit` de solo lectura más un trabajo `aggregate` verifican una vez los hallazgos consolidados y publican una única revisión. |
 | **`@v2` sigue funcionando** | La línea v2 está congelada en `release/v2` con seis meses de mantenimiento de seguridad y catálogo. v3 es la recomendación, nunca una migración forzada. |
 

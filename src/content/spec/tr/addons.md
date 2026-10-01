@@ -43,8 +43,8 @@ Tespit edilen stack'ten akıl yürütülmüş compose tabanlı `.devcontainer/` 
 Agent ilerleme görünürlüğü için geliştiricinin **Dailybot ekibine** opt-in bağlantı.
 
 - **Kit sayfası:** [Dailybot](/kit/dailybot) — tam yetenek referansı
-- **DWP eklentisinin bağladıkları:** dailybot `report` alt-skill'i ile dört plan yaşam döngüsü raporu (kickoff, significant task, blocked, completion); isteğe bağlı deterministik hook zorlaması (`dailybot hook`, CLI `>= 3.7.0`)
-- **Eşleşen skill:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) kurulumu (şu an **3.10.3**) **14 yetenek** sunar — Slack/Teams/Discord/Google Chat sohbeti, check-in'ler, form authoring, ask AI, kudos, depo başına API anahtarları (`.dailybot/env.json`), e-posta ve daha fazlası. DWP eklentisi yalnızca **report**'u bağlar; diğer yetenekler doğrudan Dailybot skill üzerinden çağrılır
+- **DWP eklentisinin bağladıkları:** dailybot `report` alt-skill'i ile dört plan yaşam döngüsü raporu (kickoff, significant task, blocked, completion); isteğe bağlı deterministik hook zorlaması (`dailybot hook`, CLI `>= 3.9.0`)
+- **Eşleşen skill:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) kurulumu (şu an **3.23.2**) **17 yetenek** sunar — Slack/Teams/Discord/Google Chat sohbeti, check-in'ler, form authoring, ask AI, kudos, Plan panoları ve görevleri, organizasyon etiketleri, depo başına API anahtarları (`.dailybot/env.json`), e-posta ve daha fazlası. DWP eklentisi yalnızca **report**'u bağlar; diğer yetenekler doğrudan Dailybot skill üzerinden çağrılır
 - **Auth:** tamamen Dailybot skill'e ertelenmiş (`dailybot login` veya `DAILYBOT_API_KEY`); bu eklenti asla kimlik bilgisi saklamaz
 - **Vendor-neutral koruma:** temel DWP'nin Dailybot'a **sıfır** bağımlılığı vardır; herkes için otomatik kurmayın
 - **Ne zaman sunulur:** geliştirici veya ekip zaten Dailybot kullanıyor veya açıkça ekip raporlaması istiyor

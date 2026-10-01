@@ -30,4 +30,4 @@ Quyết định kiến trúc là GO: v6 giữ nguyên phương pháp với cấu
 
 Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba chữ số (ví dụ `PLAN_001_add_payment_webhooks/`). Schema v5 đã cố định tính ID số là một từ, nên slug v5 có 2–4 từ; slug v6 có 2–5 từ. Các thư mục cũ không đánh số `PLAN_<slug>/` vẫn đọc được và không bao giờ bị đổi tên. Khi có kế hoạch được đánh số, `latest` trỏ đến kế hoạch có ID số cao nhất.
 
-Phiên bản skill đã cài: **6.0.1**. Gói 6.x mặc định tạo kế hoạch mới bằng v6. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; việc di chuyển cần yêu cầu rõ ràng và xem trước.
+Phiên bản skill đã cài: **6.0.2**. Gói 6.x mặc định tạo kế hoạch mới bằng v6. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; việc di chuyển cần yêu cầu rõ ràng và xem trước.

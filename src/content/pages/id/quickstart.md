@@ -128,7 +128,7 @@ oleh rilis skill Deep Work Plan yang dipasang di atas. Paket skill saat ini menc
 router ditambah sembilan sub-skill: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, dan `upgrade`.
 
-Rilis skill yang dipasang: **6.0.1**. Paket 6.x saat ini membuat rencana baru menggunakan v6 secara default. Rencana yang ada mempertahankan generasi tercatat; pemindahan rencana v5 ke v6 memerlukan migrasi eksplisit yang ditinjau sebelumnya.
+Rilis skill yang dipasang: **6.0.2**. Paket 6.x saat ini membuat rencana baru menggunakan v6 secara default. Rencana yang ada mempertahankan generasi tercatat; pemindahan rencana v5 ke v6 memerlukan migrasi eksplisit yang ditinjau sebelumnya.
 
 Standar ini sengaja dibuat proporsional, dan menjadikan proporsi tersebut sebagai
 properti dari rencana, bukan disiplin pengembang. Sebuah rencana adalah **Lite** —
@@ -166,7 +166,7 @@ pemeriksaan keamanan atas seluruh kumpulan perubahan yang terakumulasi, termasuk
 review lokal AI Diff Reviewer yang wajib, memvalidasi status akhir repositori,
 merekonsiliasi skill yang digunakan oleh tugas-tugas, dan mencatat bukti serta
 keterbatasan. Skill review lokal dipasang pada rilis yang dipatok; perintah yang
-saat ini didokumentasikan menggunakan `DailybotHQ/ai-diff-reviewer@v3.1.1`. GitHub
+saat ini didokumentasikan menggunakan `DailybotHQ/ai-diff-reviewer@v3.2.2`. GitHub
 Action adalah permukaan CI terpisah yang opsional, dan tidak pernah wajib untuk
 metodologi inti.
 
@@ -216,14 +216,14 @@ Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga d
 
 Setelah onboarding dasar, pasang **tinjauan lokal AI Diff Reviewer** (Fase 7a — wajib sejak
 standar 2.3.0): skill vendored yang dipatok pada tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) ditambah
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`) ditambah
 `.review/extension.md` yang disesuaikan dengan repo melalui `generate-extension`, di bawah persetujuan
 onboarding. Lalu sebutkan keempat addon opsional (devcontainer, Dailybot, dependency-upgrade,
 design-system) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori sepenuhnya
 konforman dengan **nol** addon opsional — jangan pernah memasang yang itu secara otomatis.
 
 - **Dukungan devcontainer** — kontainer pengembangan yang terisolasi dan dapat direproduksi dengan autentikasi AI-CLI yang persisten.
-- **Integrasi Dailybot** — empat peristiwa siklus hidup (kickoff, tugas signifikan, terblokir, penyelesaian) sebagai pelaporan kemajuan secara best-effort untuk tim yang sudah memakai Dailybot, dengan penegakan hook otonom opsional (`dailybot-cli >= 3.7.0`). Memasang skill agent Dailybot yang dipasangkan (3.10.3) juga membuka chat, check-in, penulisan form, tanya AI, API key per repo, dan lainnya — addon ini hanya menghubungkan pelaporan ke eksekusi DWP. Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
+- **Integrasi Dailybot** — empat peristiwa siklus hidup (kickoff, tugas signifikan, terblokir, penyelesaian) sebagai pelaporan kemajuan secara best-effort untuk tim yang sudah memakai Dailybot, dengan penegakan hook otonom opsional (`dailybot-cli >= 3.9.0`). Memasang skill agent Dailybot yang dipasangkan (3.23.2) juga membuka chat, check-in, penulisan form, tanya AI, board dan tugas Plan, API key per repo, dan lainnya — addon ini hanya menghubungkan pelaporan ke eksekusi DWP. Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan. Ketika
   diterima, ia memasang command `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` opsional hanya untuk repositori dengan permukaan antarmuka yang

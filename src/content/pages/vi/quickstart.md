@@ -127,7 +127,7 @@ bản skill Deep Work Plan đã cài ở trên. Gói skill hiện tại bao gồ
 và chín sub-skill: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` và `upgrade`.
 
-Phiên bản skill đã cài: **6.0.1**. Gói 6.x hiện tại mặc định tạo kế hoạch mới bằng v6. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; chuyển kế hoạch v5 sang v6 cần yêu cầu di chuyển rõ ràng và xem trước.
+Phiên bản skill đã cài: **6.0.2**. Gói 6.x hiện tại mặc định tạo kế hoạch mới bằng v6. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; chuyển kế hoạch v5 sang v6 cần yêu cầu di chuyển rõ ràng và xem trước.
 
 Tiêu chuẩn này được thiết kế có chủ đích theo tỷ lệ, và biến sự tỷ lệ đó thành
 một thuộc tính của kế hoạch chứ không phải kỷ luật của nhà phát triển. Một kế
@@ -166,7 +166,7 @@ kiểm tra bảo mật trên toàn bộ tập thay đổi đã tích lũy, bao g
 bộ AI Diff Reviewer bắt buộc, xác thực trạng thái cuối cùng của repository,
 đối chiếu các skill mà các tác vụ đã sử dụng, và ghi lại bằng chứng cùng các
 giới hạn. Skill đánh giá cục bộ được cài đặt ở một phiên bản cố định; lệnh
-được ghi lại hiện tại sử dụng `DailybotHQ/ai-diff-reviewer@v3.1.1`. GitHub
+được ghi lại hiện tại sử dụng `DailybotHQ/ai-diff-reviewer@v3.2.2`. GitHub
 Action là một bề mặt CI riêng biệt, tùy chọn, và không bao giờ là bắt buộc đối
 với phương pháp luận cốt lõi.
 
@@ -216,14 +216,14 @@ Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba ch
 
 Sau khi khởi tạo nền tảng, hãy cài **đánh giá cục bộ AI Diff Reviewer** (Giai đoạn 7a — bắt buộc kể từ
 chuẩn 2.3.0): skill vendored được ghim theo tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) cùng một
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`) cùng một
 `.review/extension.md` được điều chỉnh riêng cho repo qua `generate-extension`, dưới sự chấp thuận của
 quá trình khởi tạo. Sau đó liệt kê bốn addon tùy chọn (devcontainer, Dailybot, dependency-upgrade,
 design-system) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository hoàn toàn tuân thủ
 với **không** addon tùy chọn nào — đừng bao giờ tự động cài chúng.
 
 - **Hỗ trợ devcontainer** — một dev container tái lập được, cô lập, với xác thực AI-CLI bền vững.
-- **Tích hợp Dailybot** — bốn sự kiện vòng đời (kickoff, tác vụ quan trọng, bị chặn, hoàn tất) dưới dạng báo cáo tiến độ theo nỗ lực tối đa cho các đội đã dùng Dailybot, với lớp hook tự hành tùy chọn (`dailybot-cli >= 3.7.0`). Cài skill agent Dailybot đi kèm (3.10.3) cũng mở ra chat, check-in, tạo biểu mẫu, hỏi AI, API key theo repo và nhiều hơn — addon chỉ đấu nối phần báo cáo vào quá trình thực thi DWP. Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
+- **Tích hợp Dailybot** — bốn sự kiện vòng đời (kickoff, tác vụ quan trọng, bị chặn, hoàn tất) dưới dạng báo cáo tiến độ theo nỗ lực tối đa cho các đội đã dùng Dailybot, với lớp hook tự hành tùy chọn (`dailybot-cli >= 3.9.0`). Cài skill agent Dailybot đi kèm (3.23.2) cũng mở ra chat, check-in, tạo biểu mẫu, hỏi AI, board và tác vụ Plan, API key theo repo và nhiều hơn — addon chỉ đấu nối phần báo cáo vào quá trình thực thi DWP. Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
 - **Nâng cấp phụ thuộc** — nâng cấp độc lập với trình quản lý gói, theo lô, được kiểm chứng, hoàn nguyên được. Khi
   được chấp nhận, nó cài command `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` tự nguyện dành cho các repo có bề mặt giao diện được phát hiện

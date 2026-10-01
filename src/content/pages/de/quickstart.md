@@ -110,7 +110,7 @@ installierte Deep Work Plan Skill-Version. Das aktuelle Skill-Paket umfasst den 
 und neun Sub-Skills: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` und `upgrade`.
 
-Installierte Skill-Version: **6.0.1**. Das aktuelle 6.x-Paket erstellt neue Pläne standardmäßig mit v6. Bestehende Pläne behalten ihre aufgezeichnete Generation; die Migration eines v5-Plans zu v6 erfordert einen ausdrücklichen Auftrag mit Vorschau.
+Installierte Skill-Version: **6.0.2**. Das aktuelle 6.x-Paket erstellt neue Pläne standardmäßig mit v6. Bestehende Pläne behalten ihre aufgezeichnete Generation; die Migration eines v5-Plans zu v6 erfordert einen ausdrücklichen Auftrag mit Vorschau.
 
 Der Standard ist bewusst proportional und macht diese Proportionalität zu einer
 Eigenschaft des Plans, nicht der Disziplin des Entwicklers. Ein Plan ist entweder
@@ -151,7 +151,7 @@ erforderlichen lokalen AI-Diff-Reviewer-Überprüfung, validiert den finalen
 Repository-Zustand, gleicht die von den Aufgaben verwendeten Skills ab und zeichnet die
 Nachweise und Einschränkungen auf. Die lokale Review-Skill wird in einer festgelegten
 Version installiert; der aktuell dokumentierte Befehl verwendet
-`DailybotHQ/ai-diff-reviewer@v3.1.1`. Die GitHub Action ist eine separate, optionale
+`DailybotHQ/ai-diff-reviewer@v3.2.2`. Die GitHub Action ist eine separate, optionale
 CI-Oberfläche und für die Kernmethodik nie erforderlich.
 
 Eine Überprüfung, die lief und nichts meldete, ist nicht dasselbe wie eine, die überhaupt keine Befunde hervorgebracht hat. Der zweite Fall ist eine **unvollständige Überprüfung**: sie wird als solche festgehalten, zählt nie als Beleg dafür, dass der Änderungssatz sauber ist, und ist nie ein Grund, das Final Review zu schließen — dieselbe rote Behandlung, die ein `timeout`-Review unter blockierender Strenge erhält (BC-04). Zusammen mit einem fehlenden Reviewer und einem fehlgeschlagenen Aufruf sind das drei verschiedene Zustände — und keiner davon heißt, das Diff sei geprüft und sauber befunden worden. Ein Text, der `Recommendation: approve` sagt, ebenfalls kein Beleg dafür, dass der Check bestanden hat. Lesen Sie zuerst den Block Highest severity / Strictness gate / Check status des Tracking-Markers — die Runtime schreibt ein Modell-`approve` um, wenn das Gate fehlschlägt.
@@ -199,13 +199,13 @@ Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stelle
 ## 4. Die erforderliche lokale Überprüfung installieren, dann die Opt-in-Addons anbieten
 
 Installieren Sie nach dem Baseline-Onboarding die **lokale Überprüfung des AI Diff Reviewer** (Phase 7a — seit Standard 2.3.0 erforderlich): die tag-gepinnte vendorte Skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) plus eine
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`) plus eine
 repo-zugeschnittene `.review/extension.md` via `generate-extension`, unter der Onboarding-Zustimmung. Zählen Sie dann die vier optionalen Addons auf (devcontainer, Dailybot, dependency-upgrade,
 design-system) und bieten Sie jedes als explizites Opt-in an. Ein Repository ist
 mit **null** optionalen Addons vollständig konform — installieren Sie diese niemals automatisch.
 
 - **Devcontainer-Unterstützung** — ein reproduzierbarer, isolierter Dev-Container mit persistenter AI-CLI-Authentifizierung.
-- **Dailybot-Integration** — vier Lifecycle-Events (Kickoff, bedeutende Aufgabe, Blockiert, Abschluss) als Best-Effort-Fortschrittsberichte für Teams, die Dailybot bereits nutzen, mit optionaler autonomer Hook-Durchsetzung (`dailybot-cli >= 3.7.0`). Die Installation der gepaarten Dailybot-Agenten-Skill (3.10.3) bietet zusätzlich Chat, Check-ins, Formular-Erstellung, KI-Abfrage, Per-Repo-API-Keys und mehr — das Addon verbindet lediglich die Berichterstattung mit der DWP-Ausführung. Die zentrale Methodik hat keine Dailybot-Abhängigkeit.
+- **Dailybot-Integration** — vier Lifecycle-Events (Kickoff, bedeutende Aufgabe, Blockiert, Abschluss) als Best-Effort-Fortschrittsberichte für Teams, die Dailybot bereits nutzen, mit optionaler autonomer Hook-Durchsetzung (`dailybot-cli >= 3.9.0`). Die Installation der gepaarten Dailybot-Agenten-Skill (3.23.2) bietet zusätzlich Chat, Check-ins, Formular-Erstellung, KI-Abfrage, Plan-Boards und -Aufgaben, Per-Repo-API-Keys und mehr — das Addon verbindet lediglich die Berichterstattung mit der DWP-Ausführung. Die zentrale Methodik hat keine Dailybot-Abhängigkeit.
 - **Dependency-Upgrade** — paketmanager-agnostische, chargenweise, validierte, rücknehmbare Upgrades. Wenn
  angenommen, installiert es den `/lib-upgrade`-Befehl.
 - **Design System** — optionale `docs/DESIGN.md` nur für Repositories mit einer erkannten Interface-Oberfläche

@@ -10,7 +10,7 @@ The kit is everything you need to run the methodology in practice. It is install
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.1 --skill deepworkplan
+npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
 ```
 
 The current 6.x pack creates new plans with v6 by default. Existing plans retain their recorded generation; migration requires an explicit request.
@@ -52,7 +52,7 @@ and a generic fallback.
 Capabilities the onboard flow layers onto a repo. Four are optional and never part of the AI-first baseline; the AI Diff Reviewer local review is required since standard 2.3.0:
 
 - **Devcontainer** — a reproducible, isolated dev container with persistent AI-CLI auth.
-- **Dailybot** — plan-lifecycle reporting (kickoff, significant task, blocked, completion) for teams using Dailybot, plus access to the full Dailybot agent skill (3.10.3: chat, check-ins, forms, ask AI, per-repo API keys, and more).
+- **Dailybot** — plan-lifecycle reporting (kickoff, significant task, blocked, completion) for teams using Dailybot, plus access to the full Dailybot agent skill (3.23.2: chat, check-ins, forms, ask AI, Plan, per-repo API keys, and more).
 - **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades.
 - **Design system** — an interface-scoped `DESIGN.md` (at `docs/DESIGN.md`, referenced from `AGENTS.md`) reasoned from the repo's real design source, with profiles for visual UI, styled CLI output, and conversational messaging, so agents generate on-brand interface output; a detected design system makes the offer mandatory while installation stays acceptance-gated — the visual profile is strongly recommended when detected, the CLI and conversational profiles are recommended when detected and always asked about.
 - **AI Diff Reviewer** — the required local review: onboarding installs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, and every Final Review's security pass runs it; optional Flow B adds a CI PR merge gate sharing the same extension, offered explicitly and never installed unrequested.

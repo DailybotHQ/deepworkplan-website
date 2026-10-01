@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Optionales DWP-Addon: verbindet den Plan mit einem Dailybot-Team, optionale Hooks und die Agent-Skill 3.10.3 (Chat, Check-ins, Formulare, Ask AI und mehr)."
+description: "Optionales DWP-Addon: meldet den Plan-Lifecycle an ein Dailybot-Team, optionale Hook-Durchsetzung und die Agent-Skill 3.23.2 (Chat, Formulare, Plan und mehr)."
 kind: addon
 lang: de
 order: 2
@@ -23,7 +23,7 @@ Die zentrale Deep Work Plan-Methodik hat **null** Dailybot-Abhängigkeit. Ein Re
 
 ## Was dieses Addon verbindet (bewusst eng gefasst)
 
-Das DWP-Dailybot-Addon **erfindet** Dailybot nicht neu. Es verbindet die Planausführung mit der dailybot-**`report`**-Sub-Skill und committet optional Harness-Hooks. Alles andere — Installation, Einwilligung, Authentifizierung, Schreibstil — wird an die offizielle [Dailybot-Agent-Skill](https://github.com/DailybotHQ/agent-skill) (aktuell **3.10.3**) **delegiert**.
+Das DWP-Dailybot-Addon **erfindet** Dailybot nicht neu. Es verbindet die Planausführung mit der dailybot-**`report`**-Sub-Skill und committet optional Harness-Hooks. Alles andere — Installation, Einwilligung, Authentifizierung, Schreibstil — wird an die offizielle [Dailybot-Agent-Skill](https://github.com/DailybotHQ/agent-skill) (aktuell **3.23.2**) **delegiert**.
 
 ### Vier Lifecycle-Ereignisse
 
@@ -40,7 +40,7 @@ Payloads leiten sich von der State-Schicht des Plans (`state.json`) ab, wenn vor
 
 ### Optionale Hook-Durchsetzung
 
-Mit `dailybot-cli >= 3.7.0` **kann** das Addon Repo-Level-Harness-Hooks committen (`dailybot hook session-start | activity | post-commit | stop | dismiss`), gestützt durch ein lokales Repo-Ledger. Der Harness erinnert den Agenten am Ende des Turns, wenn ein Lifecycle-Ereignis verpasst wurde — kritisch für lange unbeaufsichtigte Sessions, in denen Prompt-Anweisungen verblassen.
+Mit `dailybot-cli >= 3.9.0` **kann** das Addon Repo-Level-Harness-Hooks committen (`dailybot hook session-start | activity | post-commit | stop | dismiss`), gestützt durch ein lokales Repo-Ledger. Der Harness erinnert den Agenten am Ende des Turns, wenn ein Lifecycle-Ereignis verpasst wurde — kritisch für lange unbeaufsichtigte Sessions, in denen Prompt-Anweisungen verblassen.
 
 Ein erfolgreicher Lifecycle-Report **setzt** das Hook-Ledger zurück, sodass die beiden Schichten nie doppelt berichten. Hook-Befehle lesen nur lokalen State und beenden immer mit `0`.
 
@@ -69,10 +69,10 @@ Das Addon **bietet** Installationspfade; die Dailybot-Skill besitzt Einwilligung
 
 | Komponente | Befehl / Pfad |
 |-----------|----------------|
-| **Dailybot-Agent-Skill** (empfohlen) | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Dailybot-Agent-Skill** (empfohlen) | `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot -y` |
 | **Bestehende Skill aktualisieren** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Dailybot CLI** (Minimum `>= 3.7.0`) | Von der Skill bei erster Nutzung via verifiziertem `shared/auth.md` installiert; oder `pip install 'dailybot-cli>=3.7.0'`, Homebrew oder Installer mit Prüfsumme unter [cli.dailybot.com](https://cli.dailybot.com) |
+| **Dailybot CLI** (Pack-Baseline `>= 3.9.0`; Plan benötigt `>= 3.25.0`) | Von der Skill bei erster Nutzung via verifiziertem `shared/auth.md` installiert; oder `pip install 'dailybot-cli>=3.9.0'`, Homebrew oder Installer mit Prüfsumme unter [cli.dailybot.com](https://cli.dailybot.com) |
 
 Versionen prüfen: `dailybot --version` und `dailybot version --check`. Upgrade: `dailybot upgrade`.
 
@@ -82,13 +82,13 @@ Dieses Addon **fordert niemals** E-Mail, OTP oder API-Keys an und **speichert ni
 
 - `dailybot login` (E-Mail-OTP), oder
 - `DAILYBOT_API_KEY` / `dailybot config key=...`, oder
-- eine optionale, gitignorierte `.dailybot/env.json`-Datei mit Per-Repo-Keys (`dailybot env add/use`, CLI `>= 3.7.0`), damit ein Entwickler in verschiedenen Repos bei verschiedenen Organisationen angemeldet sein kann.
+- eine optionale, gitignorierte `.dailybot/env.json`-Datei mit Per-Repo-Keys (`dailybot env add/use`, CLI `>= 3.9.0`), damit ein Entwickler in verschiedenen Repos bei verschiedenen Organisationen angemeldet sein kann.
 
 Die Auth-Auflösung ist **Bearer-first**: ein Session-Token hat Vorrang, mit einem transparenten Bearer→API-Key-Retry bei `401`/`403`, sodass ein veraltetes Token niemals einen gültigen Key blockiert. Wird Auth abgelehnt oder ist nicht verfügbar, wird Reporting still übersprungen — die Arbeit geht weiter.
 
-## Die gepaarte Dailybot-Skill — 14 Fähigkeiten (3.10.3)
+## Die gepaarte Dailybot-Skill — 17 Fähigkeiten (3.23.2)
 
-Die Installation der Dailybot-Agent-Skill bringt weit mehr als das DWP-Addon verbindet. Das offizielle Skill-Paket (Skill **3.10.3**, CLI-Baseline **>= 3.7.0**, aktuelle Veröffentlichung **3.7.3**) exponiert **14 koordinierte Sub-Skills**:
+Die Installation der Dailybot-Agent-Skill bringt weit mehr als das DWP-Addon verbindet. Das offizielle Skill-Paket (Skill **3.23.2**, CLI-Baseline **>= 3.9.0**, Plan **>= 3.25.0**, aktuelle CLI-Veröffentlichung **3.25.2**) exponiert **17 koordinierte Sub-Skills**:
 
 | Sub-Skill | Was sie tut |
 |-----------|--------------|
@@ -99,13 +99,16 @@ Die Installation der Dailybot-Agent-Skill bringt weit mehr als das DWP-Addon ver
 | **Chat** | Senden oder Bearbeiten in Slack, Microsoft Teams, Discord oder Google Chat — Kanäle, DMs, Teams, Report-Threads, send-as-user (Slack, Admin) |
 | **Konversationen** | Slack-Gruppen-DM mit Bot und benannten Teamkollegen öffnen oder wiederverwenden; Report im selben Aufruf posten |
 | **Health und Status** | Agent online/offline für lange Sessions ankündigen |
-| **Check-ins** | Standups abschließen; Check-ins **autorisieren** (Zeitplan, Teilnehmer, Fragen, Erinnerungen, KI-Einstellungen) |
+| **Check-ins** | Standups abschließen; Check-ins **erstellen** (Zeitplan, Teilnehmer, Fragen, Erinnerungen, KI-Einstellungen) |
 | **Kudos** | Teamkollegen oder ganze Teams anerkennen; Anerkennungs-Feed, Org-Feed, Wall of Fame durchsuchen |
 | **Teams** | Teams listen, Mitglieder inspizieren, Namen zu UUIDs auflösen; `me`, `org`, Benutzerprofile |
-| **Formulare** | Formulare listen (jetzt standardmäßig **org-weit**, mit `--mine` und `--owner` zum Eingrenzen), einreichen, aktualisieren, transitionieren; Formulare **autorisieren** (Workflow-States, Berechtigungen, ChatOps); Pagination, Suche und Datumsfilter |
-| **Workflows** | Org-Workflows lesen (`workflow list` / `workflow get`; nur lesen) |
+| **Formulare** | Formulare listen (jetzt standardmäßig **org-weit**, mit `--mine` und `--owner` zum Eingrenzen), einreichen, aktualisieren, transitionieren; Formulare **erstellen** (Workflow-States, Berechtigungen, ChatOps); Pagination, Suche und Datumsfilter |
+| **Workflows** | Org-Workflows lesen und auslösen (`workflow list` / `workflow get` / `workflow trigger`); Workflows erstellen oder bearbeiten bleibt der Web-App vorbehalten |
 | **Report-Kanäle** | Kanal-UUIDs für Formulare oder Check-ins entdecken |
-| **Per-Repo-API-Keys** | `.dailybot/env.json` verwalten — eine optionale, gitignorierte Datei mit API-Keys + URLs pro Umgebung (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.7.0`) |
+| **Per-Repo-API-Keys** | `.dailybot/env.json` verwalten — eine optionale, gitignorierte Datei mit API-Keys + URLs pro Umgebung, mit Profilen `live` und `testing` (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.9.0`) |
+| **Organisations-Labels** | Vollständiger Lifecycle von Org-Labels (`dailybot label list / create / update / archive / delete / assign / batch`) — eine gemeinsame Taxonomie für Formulare, Check-ins und Workflows (CLI `>= 3.9.0`) |
+| **Featured-Sterne** | Private Sterne pro Nutzer für Formulare, Automatisierungen und Check-ins (`dailybot featured`) |
+| **Plan** (Beta) | Boards, Aufgaben, Projekte, Ziele und Meilensteine unter `dailybot plan`: den Workspace lesen, Arbeit anlegen und verschieben, Verantwortliche zuweisen, kommentieren, Projekt-Updates posten und eine an den Agenten übergebene Aufgabe bearbeiten (`task brief`). Benötigt CLI `>= 3.25.0` |
 
 **Das DWP-Addon verbindet nur `report` mit der Planausführung.** Rufen Sie die Dailybot-Skill direkt für alles andere auf — z. B. Deploy-Zusammenfassung in `#releases` posten, Standup abschließen oder die Dailybot-KI bitten, Check-in-Trends zusammenzufassen.
 

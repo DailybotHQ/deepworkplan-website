@@ -103,7 +103,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 当前技能包包含路由器和九个子技能：`create`、`execute`、`refine`、`resume`、
 `status`、`verify`、`onboard`、`author` 和 `upgrade`。
 
-已安装的技能版本：**6.0.1**。当前 6.x 技能包默认使用 v6 创建新计划。现有计划保留记录的代际；将 v5 计划迁移到 v6 需要明确请求并先行预览。
+已安装的技能版本：**6.0.2**。当前 6.x 技能包默认使用 v6 创建新计划。现有计划保留记录的代际；将 v5 计划迁移到 v6 需要明确请求并先行预览。
 
 该标准刻意保持比例性，并将这种比例性变成计划本身的属性，而不是开发者自律的
 结果。一份计划要么是 **Lite**——任务记录以内联形式存放在计划的 README
@@ -131,7 +131,7 @@ https://deepworkplan.com/schema/plan-manifest/v6.json 作为 `manifest.json`
 每份计划都有一项强制性的收尾任务：**Final Review**。它对累积的整个变更集
 运行安全检查（包括必需的本地 AI Diff Reviewer 审查），验证仓库的最终状态，
 核对各任务所使用的技能，并记录证据与局限。本地审查技能安装在固定版本；
-当前文档记录的命令使用 `DailybotHQ/ai-diff-reviewer@v3.1.1`。GitHub Action
+当前文档记录的命令使用 `DailybotHQ/ai-diff-reviewer@v3.2.2`。GitHub Action
 是一个独立的、可选的 CI 层面，核心方法论从不要求使用它。
 
 一次执行了却没有报告任何问题的审查，与一次根本没能产出结果的审查并不相同。后者属于**不完整的审查**：它会被如实记录，绝不被当作变更集干净的凭据，也绝不构成关闭 Final Review 的理由——与 `timeout` 审查在阻断性严格度下得到的红色处理相同（BC-04）。连同审查器缺失与调用出错，这是三种彼此不同的状态——而它们当中没有任何一种意味着这份 diff 被审查过且是干净的。写着 `Recommendation: approve` 的正文也不能证明检查已通过。请先阅读跟踪标记中的 Highest severity / Strictness gate / Check status 块——当门控失败时，运行时会改写模型的 `approve`。
@@ -175,11 +175,11 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 
 ## 4. 安装必备的本地审查，然后提供可选的附加组件
 
-在基线接入完成之后，安装 **AI Diff Reviewer 本地审查**（第 7a 阶段——自标准 2.3.0 起必备）：在接入授权之下，安装标签锁定的 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`），并通过 `generate-extension` 生成按仓库定制的 `.review/extension.md`。然后列举四个可选附加组件（devcontainer、Dailybot、dependency-upgrade、design-system），并把每一个作为一项明确的可选项来提供。一个仓库
+在基线接入完成之后，安装 **AI Diff Reviewer 本地审查**（第 7a 阶段——自标准 2.3.0 起必备）：在接入授权之下，安装标签锁定的 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`），并通过 `generate-extension` 生成按仓库定制的 `.review/extension.md`。然后列举四个可选附加组件（devcontainer、Dailybot、dependency-upgrade、design-system），并把每一个作为一项明确的可选项来提供。一个仓库
 在不带**任何**可选附加组件时即完全符合规范——绝不自动安装它们。
 
 - **Devcontainer 支持** —— 一个可复现、隔离的开发容器，具备持久的 AI-CLI 认证。
-- **Dailybot 集成** —— 四个生命周期事件（启动、重要任务、阻塞、完成）作为面向已在使用 Dailybot 的团队的尽力而为式进展报告，并可选启用自主的钩子强制层（`dailybot-cli >= 3.7.0`）。安装配套的 Dailybot 代理技能（3.10.3）还会暴露聊天、签到、表单创建、AI 询问、每仓库 API 密钥等功能——该附加组件仅将报告接入 DWP 执行。核心方法论对 Dailybot 零依赖。
+- **Dailybot 集成** —— 四个生命周期事件（启动、重要任务、阻塞、完成）作为面向已在使用 Dailybot 的团队的尽力而为式进展报告，并可选启用自主的钩子强制层（`dailybot-cli >= 3.9.0`）。安装配套的 Dailybot 代理技能（3.23.2）还会暴露聊天、签到、表单创建、AI 询问、Plan 看板与任务、每仓库 API 密钥等功能——该附加组件仅将报告接入 DWP 执行。核心方法论对 Dailybot 零依赖。
 - **Dependency upgrade** —— 包管理器无关、分批次、经验证、可回退的升级。被
  采纳时，它会安装 `/lib-upgrade` 命令。
 - **Design system** —— 可选的 `docs/DESIGN.md`，仅面向具备被检测到的界面表面的仓库

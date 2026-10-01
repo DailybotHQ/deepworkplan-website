@@ -10,7 +10,7 @@ lastUpdated: 2026-05-31
 `DailybotHQ/deepworkplan-skill` 安装：
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.1 --skill deepworkplan
+npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
 ```
 
 当前 6.x 技能包默认使用 v6 创建新计划。现有计划保留记录的代际；迁移必须明确请求。

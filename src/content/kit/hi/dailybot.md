@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "ऑप्ट-इन DWP ऐडऑन: योजना जीवनचक्र को Dailybot टीम से जोड़ें, वैकल्पिक हुक प्रवर्तन, और पूर्ण Dailybot एजेंट स्किल 3.10.3 (चैट, चेक-इन, फ़ॉर्म, Ask AI, और अधिक)।"
+description: "ऑप्ट-इन DWP ऐडऑन: योजना जीवनचक्र की रिपोर्ट Dailybot टीम को, वैकल्पिक हुक प्रवर्तन, और पूर्ण Dailybot एजेंट स्किल 3.23.2 (चैट, फ़ॉर्म, Plan और अधिक)।"
 kind: addon
 lang: hi
 order: 2
@@ -23,7 +23,7 @@ Deep Work Plan निष्पादन को एक **Dailybot टीम** स
 
 ## यह ऐडऑन क्या जोड़ता है (जानबूझकर संकीर्ण)
 
-DWP Dailybot ऐडऑन Dailybot को **दोबारा नहीं बनाता**। यह योजना निष्पादन को dailybot **`report`** sub-skill से जोड़ता है और वैकल्पिक रूप से harness हुक कमिट करता है। बाकी सब — इंस्टॉल, सहमति, authentication, लेखन शैली — आधिकारिक [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) (वर्तमान में **3.10.3**) को **सौंपा** जाता है।
+DWP Dailybot ऐडऑन Dailybot को **दोबारा नहीं बनाता**। यह योजना निष्पादन को dailybot **`report`** sub-skill से जोड़ता है और वैकल्पिक रूप से harness हुक कमिट करता है। बाकी सब — इंस्टॉल, सहमति, authentication, लेखन शैली — आधिकारिक [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) (वर्तमान में **3.23.2**) को **सौंपा** जाता है।
 
 ### चार जीवनचक्र घटनाएँ
 
@@ -40,7 +40,7 @@ Payload योजना की state परत (`state.json`) से निक�
 
 ### वैकल्पिक हुक प्रवर्तन
 
-`dailybot-cli >= 3.7.0` के साथ, ऐडऑन **रिपॉज़िटरी-स्तर harness हुक** (`dailybot hook session-start | activity | post-commit | stop | dismiss`) कमिट **कर सकता** है, जो स्थानीय per-repo बहीखाते द्वारा समर्थित हैं। Harness टर्न के अंत में याद दिलाता है जब कोई जीवनचक्र घटना छूट गई — लंबे unattended सत्रों के लिए महत्वपूर्ण जहाँ प्रॉम्प्ट निर्देश कमज़ोर पड़ जाते हैं।
+`dailybot-cli >= 3.9.0` के साथ, ऐडऑन **रिपॉज़िटरी-स्तर harness हुक** (`dailybot hook session-start | activity | post-commit | stop | dismiss`) कमिट **कर सकता** है, जो स्थानीय per-repo बहीखाते द्वारा समर्थित हैं। Harness टर्न के अंत में याद दिलाता है जब कोई जीवनचक्र घटना छूट गई — लंबे unattended सत्रों के लिए महत्वपूर्ण जहाँ प्रॉम्प्ट निर्देश कमज़ोर पड़ जाते हैं।
 
 सफल जीवनचक्र रिपोर्ट हुक बहीखाते को **रीसेट** करती है, इसलिए दो परतें कभी दोहरी रिपोर्ट नहीं करतीं। हुक कमांड केवल स्थानीय स्थिति पढ़ते हैं और हमेशा `0` से समाप्त होते हैं।
 
@@ -69,10 +69,10 @@ Payload योजना की state परत (`state.json`) से निक�
 
 | घटक | कमांड / पथ |
 |-----------|----------------|
-| **Dailybot agent skill** (अनुशंसित) | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Dailybot agent skill** (अनुशंसित) | `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot -y` |
 | **मौजूदा स्किल अपडेट** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Dailybot CLI** (न्यूनतम `>= 3.7.0`) | स्किल द्वारा पहले उपयोग पर `shared/auth.md` के माध्यम से; या `pip install 'dailybot-cli>=3.7.0'`, Homebrew, या [cli.dailybot.com](https://cli.dailybot.com) पर checksum-verified installer |
+| **Dailybot CLI** (पैक बेसलाइन `>= 3.9.0`; Plan के लिए `>= 3.25.0`) | स्किल द्वारा पहले उपयोग पर `shared/auth.md` के माध्यम से; या `pip install 'dailybot-cli>=3.9.0'`, Homebrew, या [cli.dailybot.com](https://cli.dailybot.com) पर checksum-verified installer |
 
 संस्करण जाँचें: `dailybot --version` और `dailybot version --check`। अपग्रेड: `dailybot upgrade`।
 
@@ -82,13 +82,13 @@ Payload योजना की state परत (`state.json`) से निक�
 
 - `dailybot login` (email OTP), या
 - `DAILYBOT_API_KEY` / `dailybot config key=...`, या
-- एक ऑप्ट-इन, gitignored `.dailybot/env.json` per-repo key फ़ाइल (`dailybot env add/use`, CLI `>= 3.7.0`) ताकि एक डेवलपर अलग-अलग रिपॉज़िटरी में अलग-अलग orgs में साइन-इन रह सके।
+- एक ऑप्ट-इन, gitignored `.dailybot/env.json` per-repo key फ़ाइल (`dailybot env add/use`, CLI `>= 3.9.0`) ताकि एक डेवलपर अलग-अलग रिपॉज़िटरी में अलग-अलग orgs में साइन-इन रह सके।
 
 Auth resolution **Bearer-first** है: session token को प्राथमिकता मिलती है, `401`/`403` पर पारदर्शी Bearer→API-key retry के साथ, ताकि कोई बासी token किसी वैध key को कभी अवरुद्ध न करे। यदि auth अस्वीकृत या अनुपलब्ध हो, रिपोर्टिंग चुपचाप छोड़ दी जाती है — कार्य जारी रहता है।
 
-## जोड़ी गई Dailybot स्किल — 14 क्षमताएँ (3.10.3)
+## जोड़ी गई Dailybot स्किल — 17 क्षमताएँ (3.23.2)
 
-Dailybot agent skill इंस्टॉल करने से DWP ऐडऑन से कहीं अधिक मिलता है। आधिकारिक स्किल पैक (स्किल **3.10.3**, CLI बेसलाइन **>= 3.7.0**, वर्तमान publish **3.7.3**) **14 समन्वित sub-skills** प्रदान करता है:
+Dailybot agent skill इंस्टॉल करने से DWP ऐडऑन से कहीं अधिक मिलता है। आधिकारिक स्किल पैक (स्किल **3.23.2**, CLI बेसलाइन **>= 3.9.0**, Plan **>= 3.25.0**, वर्तमान CLI publish **3.25.2**) **17 समन्वित sub-skills** प्रदान करता है:
 
 | Sub-skill | क्या करता है |
 |-----------|--------------|
@@ -103,9 +103,12 @@ Dailybot agent skill इंस्टॉल करने से DWP ऐडऑन 
 | **Kudos** | साथियों या पूरे टीमों को पहचानें; recognition feed, org feed, wall of fame ब्राउज़ करें |
 | **Teams** | टीमें सूचीबद्ध करें, सदस्यों का निरीक्षण करें, नामों को UUID में resolve करें; `me`, `org`, user profiles |
 | **Forms** | फ़ॉर्म सूचीबद्ध करें (अब डिफ़ॉल्ट रूप से **org-scoped**, संकीर्ण करने के लिए `--mine` और `--owner` के साथ), submit, update, transition करें; फ़ॉर्म **लेखन** (workflow states, permissions, ChatOps); pagination, search, और date filters |
-| **Workflows** | org workflows पढ़ें (`workflow list` / `workflow get`; read-only) |
+| **Workflows** | org workflows पढ़ें और trigger करें (`workflow list` / `workflow get` / `workflow trigger`); workflows बनाना या संपादित करना वेब ऐप में ही रहता है |
 | **Report channels** | फ़ॉर्म या चेक-इन के लिए channel UUID खोजें |
-| **Per-repo API keys** | `.dailybot/env.json` प्रबंधित करें — प्रति environment API keys + URLs की एक ऑप्ट-इन, gitignored फ़ाइल (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.7.0`) |
+| **Per-repo API keys** | `.dailybot/env.json` प्रबंधित करें — प्रति environment API keys + URLs की एक ऑप्ट-इन, gitignored फ़ाइल, `live` और `testing` profiles के साथ (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.9.0`) |
+| **Organization labels** | संगठन लेबल का पूरा जीवनचक्र (`dailybot label list / create / update / archive / delete / assign / batch`) — फ़ॉर्म, चेक-इन और workflows के लिए साझा वर्गीकरण (CLI `>= 3.9.0`) |
+| **Featured stars** | फ़ॉर्म, automations और चेक-इन पर प्रति-उपयोगकर्ता निजी स्टार (`dailybot featured`) |
+| **Plan** (Beta) | `dailybot plan` के अंतर्गत boards, tasks, projects, goals और milestones: workspace पढ़ें, कार्य बनाएँ और स्थानांतरित करें, owners असाइन करें, टिप्पणी करें, project updates पोस्ट करें, और एजेंट को सौंपे गए कार्य पर काम करें (`task brief`)। CLI `>= 3.25.0` आवश्यक |
 
 **DWP ऐडऑन केवल `report` को योजना निष्पादन में जोड़ता है।** बाकी सब के लिए Dailybot स्किल सीधे invoke करें — उदाहरण: `#releases` पर deploy सारांश पोस्ट करें, standup पूरा करें, या Dailybot AI से चेक-इन ट्रेंड सारांश माँगें।
 

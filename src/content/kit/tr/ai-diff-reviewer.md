@@ -10,7 +10,7 @@ order: 5
 
 Her Deep Work Plan aynı şekilde kapanır: işin tamamlandı sayılabilmesinden önce planın biriktirdiği değişiklik kümesinin tamamını okuyan, zorunlu bir **Final Review** ile. İçindeki güvenlik incelemesi, bir şeyin hâlâ yakalanabileceği son noktadır. Yardım olmadan o noktadaki tek okuyucu, kodu yazan agent'ın ta kendisidir.
 
-Bu eklenti o diff'in başına ikinci bir okuyucu oturtur. **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**'ı — markette "AI Diff Reviewer" adıyla yer alır, şu anda **v3.1.1** — güvenlik incelemesine bağlar; orada düzyazı yerine yapılandırılmış bir çıktı döndürür: bir karar, bir bulgu tablosu ve her bulgu için bir önem derecesi. v3'ten itibaren `critical` bir bulgu, eklentinin doğrulayıcısının onu ikinci bir koda dayalı model çağrısıyla doğruladığı anlamına gelir; yalnızca doğrulanmış kritik bulgular, düzeltilene ya da açıkça kabul edilene kadar tamamlanmayı engeller. Bu inceleme bir kapıdır, bir yorum değil.
+Bu eklenti o diff'in başına ikinci bir okuyucu oturtur. **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**'ı — markette "AI Diff Reviewer" adıyla yer alır, şu anda **v3.2.2** — güvenlik incelemesine bağlar; orada düzyazı yerine yapılandırılmış bir çıktı döndürür: bir karar, bir bulgu tablosu ve her bulgu için bir önem derecesi. v3'ten itibaren `critical` bir bulgu, eklentinin doğrulayıcısının onu ikinci bir koda dayalı model çağrısıyla doğruladığı anlamına gelir; yalnızca doğrulanmış kritik bulgular, düzeltilene ya da açıkça kabul edilene kadar tamamlanmayı engeller. Bu inceleme bir kapıdır, bir yorum değil.
 
 2.3.0 standardından itibaren bu yerel inceleme **bir ek değil, temelin parçasıdır**. Kuruluma alma onu kurar; her Final Review onu çalıştırır. İsteğe bağlı kalan şey CI yüzeyidir — Flow B, yani aynı incelemenin GitHub Action üzerinden çekme isteklerini kapı altına aldığı yer.
 
@@ -60,7 +60,7 @@ CI bir inceleme yayınladıktan sonra geliştirici tarafından çağrılan iki a
 
 ## v3'te neler değişti
 
-2026-09-24'te üç sürüm yayımlandı (v3.0.0, v3.0.1, v3.1.0) ve ardından `address-review` alt becerisiyle v3.1.1 geldi. Hiçbiri bu eklentinin inceleyiciyi nasıl bağladığını değiştirmiyor — Flow A, üç algılama yolu ve asla engellememe merdiveni aynı kaldı — ancak benimseyenin eline geçeni değiştiriyorlar.
+2026-09-24'te üç sürüm yayımlandı (v3.0.0, v3.0.1, v3.1.0) ve ardından `address-review` alt becerisiyle v3.1.1 geldi; v3.2.0 ve v3.2.2 (2026-09-26) sonra bu döngüyü CI farkındalıklı yaptı ve inceleyicinin hiç çalışmadığı bir PR'ı kurabilir hale getirdi. Hiçbiri bu eklentinin inceleyiciyi nasıl bağladığını değiştirmiyor — Flow A, üç algılama yolu ve asla engellememe merdiveni aynı kaldı — ancak benimseyenin eline geçeni değiştiriyorlar.
 
 | Değişiklik | Bir DWP deposu için anlamı |
 |------------|-----------------------------|
@@ -69,6 +69,7 @@ CI bir inceleme yayınladıktan sonra geliştirici tarafından çağrılan iki a
 | **Tamamlanmamış bir inceleme kırmızıdır** (v3.0.0) | `incomplete` (tur sınırı) ve `timeout` (süre sınırı) kısmi bulgular yayımlar ve engelleyici katılıkta başarısız olur — «bulgu yok» artık her zaman inceleyicinin baktığı ve bir şey bulamadığı anlamına gelir. |
 | **Yapılandırılmış çıktı makine yoludur** (v3.0.0) | `review-output/3.0` belgesi çalışma kaydını, değişiklik envanterini, kanıtlı ve doğrulanmış bulguları, çürütülen bulguları ve kapıyı taşır. İnceleme gövdelerini kazımak yerine belgeyi okuyun. |
 | **Altı alt beceri** (v3.1.1) | `address-review` yönlendiriciye katılır: tek çağrı uygular, commit yapar, push eder ve inceleyiciyi yeniden kurar. |
+| **Döngü CI'ı bilir** (v3.2.0, v3.2.2) | `address-review` başarısız iş akışlarının günlüklerini de okur ve aynı onaylı geçişte düzeltir, tabanının gerisinde kalan bir dalı günceller ve inceleyicinin hiç çalışmadığı bir PR'ı kurar (yalın bir "loop the review" geçerli dalın açık PR'ını hedefler). |
 | **İsteğe bağlı topluluk** (v3.0.0) | Salt okunur `mode: emit` bacakları artı tek bir `aggregate` işi, birleştirilmiş bulguları bir kez doğrular ve tek bir inceleme yayımlar. |
 | **`@v2` çalışmaya devam eder** | v2 hattı, altı ay süreyle güvenlik ve katalog bakımıyla birlikte `release/v2` üzerinde donduruldu. v3 öneridir, asla zorunlu bir geçiş değil. |
 

@@ -9,7 +9,7 @@ lastUpdated: 2026-06-05
 キットは、この方法論を実際に実行するために必要なものすべてです。`DailybotHQ/deepworkplan-skill` からインストールします。
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.1 --skill deepworkplan
+npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
 ```
 
 現在の 6.x パックは新しい計画を既定で v6 として作成します。既存の計画は記録された世代を維持し、移行には明示的な依頼が必要です。
@@ -49,7 +49,7 @@ onboard フローがドキュメント、スキル、検証コマンドを適応
 onboard フローがリポジトリに重ねる各機能です。四つはオプションであり、AI-first の基本構成には決して含まれません。AI Diff Reviewer のローカルレビューは標準 2.3.0 以降、必須です。
 
 - **Devcontainer** — 永続的な AI CLI 認証を備えた、再現可能で隔離された開発コンテナ。
-- **Dailybot** — Dailybot を使うチームのための計画ライフサイクルの報告（kickoff、重要タスク、ブロック、完了）と、Dailybot エージェントスキル全体（3.10.3: チャット、チェックイン、フォーム、AI への質問、リポジトリごとの API キーなど）へのアクセス。
+- **Dailybot** — Dailybot を使うチームのための計画ライフサイクルの報告（kickoff、重要タスク、ブロック、完了）と、Dailybot エージェントスキル全体（3.23.2: チャット、チェックイン、フォーム、AI への質問、Plan、リポジトリごとの API キーなど）へのアクセス。
 - **Dependency upgrade** — パッケージマネージャー非依存で、バッチ化され、検証され、取り消し可能な更新。
 - **Design system** — インターフェイスに限定された `DESIGN.md`（`docs/DESIGN.md` に置かれ、`AGENTS.md` から参照される）で、リポジトリの実際のデザインソースから推論され、ビジュアル UI、スタイルづけされた CLI 出力、会話のメッセージングのプロファイルを備え、エージェントがオンブランドのインターフェイス出力を生成できるようにします。デザインシステムが検出されたときは提供が必須ですが、インストールは受け入れによってゲートされます：ビジュアルのプロファイルは検出されたとき強く推奨され、CLI と会話のプロファイルは検出されたとき推奨され、必ず尋ねられます。
 - **AI Diff Reviewer** — 必須のローカルレビューです。オンボーディングが [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 と `.review/extension.md` をインストールし、すべての Final Review のセキュリティパスがこれを実行します。オプションの Flow B は同じ extension を共有する CI PR マージゲートを追加し、明示的に提案され、要求なしにインストールされることは決してありません。

@@ -10,7 +10,7 @@ order: 5
 
 Every Deep Work Plan closes the same way: a mandatory **Final Review** that reads the plan's entire accumulated change set before the work can be called done. Its security pass is the last point at which anything gets caught. Without help, the only reader at that point is the same agent that wrote the code.
 
-This addon puts a second reader on that diff. It wires the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — listed on the marketplace as "AI Diff Reviewer", current release **v3.1.1** — into the security pass, where it returns something structured rather than prose: a verdict, a findings table, and a severity on each finding. Since v3, a `critical` finding means the addon's verifier confirmed it with a second, code-grounded model call; only verified criticals block completion until fixed or explicitly accepted. The review is a gate, not a comment.
+This addon puts a second reader on that diff. It wires the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — listed on the marketplace as "AI Diff Reviewer", current release **v3.2.2** — into the security pass, where it returns something structured rather than prose: a verdict, a findings table, and a severity on each finding. Since v3, a `critical` finding means the addon's verifier confirmed it with a second, code-grounded model call; only verified criticals block completion until fixed or explicitly accepted. The review is a gate, not a comment.
 
 Since standard 2.3.0 that local review is **part of the baseline, not an extra**. Onboarding installs it; every Final Review runs it. What stays optional is the CI surface — Flow B, where the same review gates pull requests through the GitHub Action.
 
@@ -60,7 +60,7 @@ Two developer-invoked sub-skills close the loop after CI posts a review; neither
 
 ## What changed in v3
 
-Three releases landed on 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) and v3.1.1 followed with the `address-review` sub-skill. None of them changes how this addon wires the reviewer — Flow A, the three detection paths and the never-block ladder are unchanged — but they change what an adopter gets.
+Three releases landed on 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) and v3.1.1 followed with the `address-review` sub-skill; v3.2.0 and v3.2.2 (2026-09-26) then made that loop CI-aware and able to arm a PR the reviewer never ran on. None of them changes how this addon wires the reviewer — Flow A, the three detection paths and the never-block ladder are unchanged — but they change what an adopter gets.
 
 | Change | What it means for a DWP repository |
 |--------|------------------------------------|
@@ -69,6 +69,7 @@ Three releases landed on 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) and v3.1.1 followed
 | **An unfinished review is red** (v3.0.0) | `incomplete` (turn cap) and `timeout` (wall clock) post partial findings and fail blocking strictness — "no findings" now always means the reviewer looked and found nothing. |
 | **The structured output is the machine path** (v3.0.0) | The `review-output/3.0` document carries the run record, the change inventory, findings with typed evidence and verification, refuted findings, and the gate. Read the document instead of scraping review bodies. |
 | **Six sub-skills** (v3.1.1) | `address-review` joins the router: one invocation applies, commits, pushes, and re-arms the reviewer. |
+| **The loop is CI-aware** (v3.2.0, v3.2.2) | `address-review` also reads failing workflow logs and fixes them in the same consented pass, updates a branch that is behind its base, and arms a PR the reviewer never ran on (a bare "loop the review" targets the current branch's open PR). |
 | **Optional ensemble** (v3.0.0) | `mode: emit` read-only legs plus one `aggregate` job verify the consolidated findings once and publish a single review. |
 | **`@v2` keeps working** | The v2 line is frozen on `release/v2` with six months of security and catalog maintenance. v3 is the recommendation, never a forced migration. |
 

@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "옵트인 DWP 애드온: 플랜 라이프사이클을 Dailybot 팀에 연결하고, 선택적 훅 강제 및 전체 Dailybot 에이전트 스킬 3.10.3(채팅, 체크인, 폼, Ask AI 등)을 제공합니다."
+description: "옵트인 DWP 애드온: 플랜 라이프사이클을 Dailybot 팀에 보고하고, 훅 강제와 에이전트 스킬 3.23.2(채팅, 폼, Plan 등)를 제공합니다."
 kind: addon
 lang: ko
 order: 2
@@ -23,7 +23,7 @@ Deep Work Plan 실행을 **Dailybot 팀**에 연결하여 사람들이 에이전
 
 ## 이 애드온이 연결하는 것(의도적으로 좁은 설계)
 
-DWP Dailybot 애드온은 Dailybot을 **재발명하지 않습니다**. 플랜 실행을 dailybot **`report`** 서브스킬에 연결하고 선택적으로 harness 훅을 커밋합니다. 나머지 — 설치, 동의, 인증, 작성 스타일 — 는 모두 공식 [Dailybot 에이전트 스킬](https://github.com/DailybotHQ/agent-skill)(현재 **3.10.3**)에 **위임**됩니다.
+DWP Dailybot 애드온은 Dailybot을 **재발명하지 않습니다**. 플랜 실행을 dailybot **`report`** 서브스킬에 연결하고 선택적으로 harness 훅을 커밋합니다. 나머지 — 설치, 동의, 인증, 작성 스타일 — 는 모두 공식 [Dailybot 에이전트 스킬](https://github.com/DailybotHQ/agent-skill)(현재 **3.23.2**)에 **위임**됩니다.
 
 ### 네 가지 라이프사이클 이벤트
 
@@ -40,7 +40,7 @@ DWP `create` / `execute` 중 애드온은 **네 가지 최선 노력 에이전�
 
 ### 선택적 훅 강제
 
-`dailybot-cli >= 3.7.0`에서 애드온은 저장소 수준 harness 훅(`dailybot hook session-start | activity | post-commit | stop | dismiss`)을 **커밋할 수 있음**. 로컬 저장소별 원장으로 지원. 라이프사이클 이벤트를 놓쳤을 때 harness가 턴 종료 시 에이전트에게 알림 — 프롬프트 지시가 약해지는 긴 무인 세션에 중요.
+`dailybot-cli >= 3.9.0`에서 애드온은 저장소 수준 harness 훅(`dailybot hook session-start | activity | post-commit | stop | dismiss`)을 **커밋할 수 있음**. 로컬 저장소별 원장으로 지원. 라이프사이클 이벤트를 놓쳤을 때 harness가 턴 종료 시 에이전트에게 알림 — 프롬프트 지시가 약해지는 긴 무인 세션에 중요.
 
 성공한 라이프사이클 보고는 훅 원장을 **재설정**하므로 두 계층이 이중 보고하지 않음. 훅 명령은 로컬 상태만 읽고 항상 `0`으로 종료.
 
@@ -69,10 +69,10 @@ DWP `create` / `execute` 중 애드온은 **네 가지 최선 노력 에이전�
 
 | 구성 요소 | 명령 / 경로 |
 |-----------|-------------|
-| **Dailybot 에이전트 스킬**(권장) | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Dailybot 에이전트 스킬**(권장) | `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot -y` |
 | **기존 스킬 업데이트** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Dailybot CLI**(최소 `>= 3.7.0`) | 첫 사용 시 스킬이 검증된 `shared/auth.md`를 통해 설치; 또는 `pip install 'dailybot-cli>=3.7.0'`, Homebrew, 또는 [cli.dailybot.com](https://cli.dailybot.com)의 체크섬 검증 설치 프로그램 |
+| **Dailybot CLI**(팩 기준 `>= 3.9.0`; Plan은 `>= 3.25.0` 필요) | 첫 사용 시 스킬이 검증된 `shared/auth.md`를 통해 설치; 또는 `pip install 'dailybot-cli>=3.9.0'`, Homebrew, 또는 [cli.dailybot.com](https://cli.dailybot.com)의 체크섬 검증 설치 프로그램 |
 
 버전 확인: `dailybot --version` 및 `dailybot version --check`. 업그레이드: `dailybot upgrade`.
 
@@ -82,13 +82,13 @@ DWP `create` / `execute` 중 애드온은 **네 가지 최선 노력 에이전�
 
 - `dailybot login`(이메일 OTP), 또는
 - `DAILYBOT_API_KEY` / `dailybot config key=...`, 또는
-- 옵트인, gitignore된 `.dailybot/env.json` 저장소별 키 파일(`dailybot env add/use`, CLI `>= 3.7.0`) — 개발자가 서로 다른 저장소에서 서로 다른 조직에 로그인할 수 있게 함.
+- 옵트인, gitignore된 `.dailybot/env.json` 저장소별 키 파일(`dailybot env add/use`, CLI `>= 3.9.0`) — 개발자가 서로 다른 저장소에서 서로 다른 조직에 로그인할 수 있게 함.
 
 인증 해석은 **Bearer 우선**입니다: 세션 토큰이 우선하며, `401`/`403` 시 투명한 Bearer→API 키 재시도로 오래된 토큰이 유효한 키를 절대 차단하지 않습니다. 인증이 거부되거나 사용 불가하면 보고는 조용히 건너뜀 — 작업은 계속됨.
 
-## 페어링된 Dailybot 스킬 — 14가지 기능(3.10.3)
+## 페어링된 Dailybot 스킬 — 17가지 기능(3.23.2)
 
-Dailybot 에이전트 스킬 설치는 DWP 애드온이 연결하는 것 이상을 제공합니다. 공식 스킬 팩(스킬 **3.10.3**, CLI 기준 **>= 3.7.0**, 현재 게시 **3.7.3**)은 **14개의 조율된 서브스킬**을 노출:
+Dailybot 에이전트 스킬 설치는 DWP 애드온이 연결하는 것 이상을 제공합니다. 공식 스킬 팩(스킬 **3.23.2**, CLI 기준 **>= 3.9.0**, Plan **>= 3.25.0**, 현재 CLI 게시 **3.25.2**)은 **17개의 조율된 서브스킬**을 노출:
 
 | 서브스킬 | 기능 |
 |----------|------|
@@ -103,9 +103,12 @@ Dailybot 에이전트 스킬 설치는 DWP 애드온이 연결하는 것 이상�
 | **Kudos** | 팀원 또는 전체 팀 인정; 인정 피드, 조직 피드, 명예의 전당 탐색 |
 | **Teams** | 팀 목록, 멤버 조회, 이름을 UUID로 해석; `me`, `org`, 사용자 프로필 |
 | **Forms** | 폼 목록(이제 기본적으로 **조직 범위**, `--mine` 및 `--owner`로 범위 좁히기), 제출, 업데이트, 전환; 폼 **작성**(워크플로 상태, 권한, ChatOps); 페이지네이션, 검색, 날짜 필터 |
-| **Workflows** | 조직 워크플로 읽기(`workflow list` / `workflow get`; 읽기 전용) |
+| **Workflows** | 조직 워크플로 읽기 및 실행(`workflow list` / `workflow get` / `workflow trigger`); 워크플로 생성·편집은 웹 앱에서만 가능 |
 | **Report channels** | 폼 또는 체크인용 채널 UUID 발견 |
-| **Per-repo API keys** | `.dailybot/env.json` 관리 — 환경별 API 키 + URL의 옵트인, gitignore된 파일(`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.7.0`) |
+| **Per-repo API keys** | `.dailybot/env.json` 관리 — 환경별 API 키 + URL의 옵트인, gitignore된 파일이며 `live`·`testing` 프로필 지원(`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.9.0`) |
+| **Organization labels** | 조직 라벨 전체 수명주기(`dailybot label list / create / update / archive / delete / assign / batch`) — 폼, 체크인, 워크플로가 공유하는 분류 체계(CLI `>= 3.9.0`) |
+| **Featured stars** | 폼, 자동화, 체크인에 대한 사용자별 비공개 별표(`dailybot featured`) |
+| **Plan** (Beta) | `dailybot plan` 아래의 보드, 작업, 프로젝트, 목표, 마일스톤: 워크스페이스 읽기, 작업 생성·이동, 담당자 지정, 댓글, 프로젝트 업데이트 게시, 에이전트에 맡겨진 작업 수행(`task brief`). CLI `>= 3.25.0` 필요 |
 
 **DWP 애드온은 `report`만 플랜 실행에 연결합니다.** 나머지는 Dailybot 스킬을 직접 호출 — 예: `#releases`에 배포 요약 게시, 스탠드업 완료, Dailybot AI에 체크인 트렌드 요약 요청.
 

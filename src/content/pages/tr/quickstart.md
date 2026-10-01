@@ -126,7 +126,7 @@ uygulanan **DWP 6.0.0**'dır. Güncel skill paketi, yönlendirici ile dokuz alt 
 içerir: `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`,
 `author` ve `upgrade`.
 
-Yüklü skill sürümü: **6.0.1**. Güncel 6.x paketi yeni planları varsayılan olarak v6 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; bir v5 planını v6'ya geçirmek açık ve önizlemeli bir geçiş gerektirir.
+Yüklü skill sürümü: **6.0.2**. Güncel 6.x paketi yeni planları varsayılan olarak v6 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; bir v5 planını v6'ya geçirmek açık ve önizlemeli bir geçiş gerektirir.
 
 Standart kasıtlı olarak orantılıdır ve bu orantıyı geliştiricinin disiplininin değil,
 planın bir özelliği hâline getirir. Bir plan ya küçük, sınırlı iş için planın
@@ -162,7 +162,7 @@ yerel AI Diff Reviewer incelemesi dâhil olmak üzere birikmiş değişiklik kü
 üzerinde güvenlik taramasını çalıştırır, nihai depo durumunu doğrular, görevler
 tarafından kullanılan skill'leri uzlaştırır ve kanıtları ile sınırlamaları kaydeder.
 Yerel inceleme skill'i sabitlenmiş bir sürümde kurulur; şu anda belgelenen komut
-`DailybotHQ/ai-diff-reviewer@v3.1.1`'i kullanır. GitHub Action, ayrı ve isteğe bağlı
+`DailybotHQ/ai-diff-reviewer@v3.2.2`'i kullanır. GitHub Action, ayrı ve isteğe bağlı
 bir CI yüzeyidir ve temel metodoloji için asla zorunlu değildir.
 
 Çalışıp hiçbir şey bildirmeyen bir inceleme ile hiç bulgu üretemeyen bir inceleme aynı şey değildir. İkincisi **tamamlanmamış bir incelemedir**: öyle kaydedilir, değişiklik kümesinin temiz olduğunun kanıtı olarak asla sayılmaz ve Final Review'i kapatmak için asla gerekçe olmaz — engelleyici katılık altında bir `timeout` incelemesinin aldığı ile aynı kırmızı muamele (BC-04). Eksik bir inceleyici ve hata veren bir çağrıyla birlikte bunlar üç ayrı durumdur — ve hiçbiri diff'in incelenip temiz bulunduğu anlamına gelmez. `Recommendation: approve` diyen bir gövde de check’in geçtiğinin kanıtı değildir. Önce izleme işaretinin Highest severity / Strictness gate / Check status bloğunu okuyun — kapı başarısızken çalışma zamanı modelin `approve` satırını yeniden yazar.
@@ -212,7 +212,7 @@ Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (�
 
 Temel onboarding sonrasında, **AI Diff Reviewer yerel incelemesini** kurun (Faz 7a — 2.3.0
 standardından itibaren gereklidir): etikete sabitlenmiş vendored skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) artı
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`) artı
 `generate-extension` aracılığıyla depoya uyarlanmış bir `.review/extension.md`, onboarding onayı
 altında. Ardından dört isteğe bağlı eklentiyi (devcontainer, Dailybot, dependency-upgrade,
 design-system) sıralayın ve her birini açık bir tercih olarak sunun. Bir depo, **sıfır** isteğe bağlı
@@ -220,7 +220,7 @@ eklentiyle tümüyle uyumludur — onları asla otomatik kurmayın.
 
 - **Devcontainer desteği** — kalıcı AI-CLI kimlik doğrulaması içeren, yeniden üretilebilir, yalıtılmış
   bir geliştirme konteyneri.
-- **Dailybot entegrasyonu** — dört yaşam döngüsü olayı (kickoff, önemli görev, engellendi, tamamlandı) olarak zaten Dailybot kullanan ekipler için en iyi çabayla ilerleme raporlaması; isteğe bağlı otonom kanca zorlama (`dailybot-cli >= 3.7.0`). Eşleştirilmiş Dailybot ajan skill’inin (3.10.3) kurulması ayrıca sohbet, check-in’ler, form yazarlığı, AI’ye sorma, depo başına API anahtarları ve daha fazlasını açar — eklenti yalnızca raporlamayı DWP yürütmesine bağlar. Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
+- **Dailybot entegrasyonu** — dört yaşam döngüsü olayı (kickoff, önemli görev, engellendi, tamamlandı) olarak zaten Dailybot kullanan ekipler için en iyi çabayla ilerleme raporlaması; isteğe bağlı otonom kanca zorlama (`dailybot-cli >= 3.9.0`). Eşleştirilmiş Dailybot ajan skill’inin (3.23.2) kurulması ayrıca sohbet, check-in’ler, form yazarlığı, AI’ye sorma, Plan panoları ve görevleri, depo başına API anahtarları ve daha fazlasını açar — eklenti yalnızca raporlamayı DWP yürütmesine bağlar. Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
 - **Dependency upgrade** — paket yöneticisinden bağımsız, gruplanmış, doğrulanmış, geri alınabilir
   yükseltmeler. Kabul edildiğinde, `/lib-upgrade` komutunu kurar.
 - **Design system** — yalnızca saptanan arayüz yüzeyi olan depolar için isteğe bağlı `docs/DESIGN.md`

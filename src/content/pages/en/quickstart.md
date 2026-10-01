@@ -124,7 +124,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 ### Current standard and execution model
 
 The current repository-facing standard is **DWP 6.0.0**, implemented by the
-Deep Work Plan skill release **6.0.1** installed above. The current skill pack
+Deep Work Plan skill release **6.0.2** installed above. The current skill pack
 includes the router and nine sub-skills: `create`, `execute`, `refine`,
 `resume`, `status`, `verify`, `onboard`, `author`, and `upgrade`.
 
@@ -167,7 +167,7 @@ security pass over the accumulated change set, including the required local
 AI Diff Reviewer review, validates the final repository state, reconciles the
 skills used by the tasks, and records the evidence and limitations. The local
 review skill is installed at a pinned release; the current documented command
-uses `DailybotHQ/ai-diff-reviewer@v3.1.1`. The GitHub Action is a separate,
+uses `DailybotHQ/ai-diff-reviewer@v3.2.2`. The GitHub Action is a separate,
 optional CI surface and is never required for the core methodology.
 
 A review that ran and reported nothing is not the same as a review that never produced findings at all. The second case is an **incomplete review**: it is recorded as such, never counted as evidence that the change set is clean, and never a reason to close the Final Review — the same red treatment a `timeout` review gets under blocking strictness (BC-04). Together with a missing reviewer and an invocation that errored, that is three distinct states — and none of them means the diff was reviewed and found clean. A body that says `Recommendation: approve` is not evidence the check passed either. Read the tracking marker's Highest severity / Strictness gate / Check status block first — the runtime rewrites a model `approve` whenever the gate is failing.
@@ -221,14 +221,14 @@ numeric ID.
 
 After the baseline onboarding, install the **AI Diff Reviewer local review** (Phase 7a — required
 since standard 2.3.0): the tag-pinned vendored skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) plus a
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`) plus a
 repo-tailored `.review/extension.md` via `generate-extension`, under the onboarding consent. Then
 enumerate the four optional addons (devcontainer, Dailybot, dependency-upgrade, design-system) and
 offer each as an explicit opt-in. A repository is fully conformant with **zero** optional addons —
 never auto-install those.
 
 - **Devcontainer support** — a reproducible, isolated dev container with persistent AI-CLI auth.
-- **Dailybot integration** — four lifecycle events (kickoff, significant task, blocked, completion) as best-effort progress reports for teams already using Dailybot, with optional autonomous hook enforcement (`dailybot-cli >= 3.7.0`). Installing the paired Dailybot agent skill (3.10.3) also exposes chat, check-ins, forms authoring, ask AI, per-repo API keys, and more — the addon wires only reporting into DWP execution. The core methodology has zero Dailybot dependency.
+- **Dailybot integration** — four lifecycle events (kickoff, significant task, blocked, completion) as best-effort progress reports for teams already using Dailybot, with optional autonomous hook enforcement (`dailybot-cli >= 3.9.0`). Installing the paired Dailybot agent skill (3.23.2) also exposes chat, check-ins, forms authoring, ask AI, Plan boards and tasks, per-repo API keys, and more — the addon wires only reporting into DWP execution. The core methodology has zero Dailybot dependency.
 - **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades. When
  accepted, it installs the `/lib-upgrade` command.
 - **Design system** — opt-in `docs/DESIGN.md` for repos with a detected interface surface only

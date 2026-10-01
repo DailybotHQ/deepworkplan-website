@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "オプトインの DWP アドオン：プランライフサイクルを Dailybot チームに接続し、オプションのフック強制と、完全な Dailybot エージェントスキル 3.10.3（チャット、チェックイン、フォーム、Ask AI など）を提供します。"
+description: "DWP の任意アドオン：計画のライフサイクルを Dailybot に報告し、Dailybot スキル 3.23.2（チャット、フォーム、Plan）も利用できます。"
 kind: addon
 lang: ja
 order: 2
@@ -23,7 +23,7 @@ Deep Work Plan の実行を **Dailybot チーム**に接続し、エージェン
 
 ## このアドオンが接続するもの（意図的に狭い設計）
 
-DWP Dailybot アドオンは Dailybot を**再発明しません**。プラン実行を dailybot **`report`** サブスキルに接続し、オプションで harness フックをコミットします。それ以外——インストール、同意、認証、文体——はすべて公式 [Dailybot エージェントスキル](https://github.com/DailybotHQ/agent-skill)（現在 **3.10.3**）に**委譲**されます。
+DWP Dailybot アドオンは Dailybot を**再発明しません**。プラン実行を dailybot **`report`** サブスキルに接続し、オプションで harness フックをコミットします。それ以外——インストール、同意、認証、文体——はすべて公式 [Dailybot エージェントスキル](https://github.com/DailybotHQ/agent-skill)（現在 **3.23.2**）に**委譲**されます。
 
 ### 4 つのライフサイクルイベント
 
@@ -40,7 +40,7 @@ DWP `create` / `execute` 中、アドオンは**4 つのベストエフォート
 
 ### オプションのフック強制
 
-`dailybot-cli >= 3.7.0` で、アドオンはリポジトリレベルの harness フック（`dailybot hook session-start | activity | post-commit | stop | dismiss`）を**コミットしてもよい**。ローカルのリポジトリごとの台帳で支えられる。ライフサイクルイベントを見逃したとき、harness がターン終了時にエージェントにリマインド——プロンプト指示が薄れる長時間の無人セッションで重要。
+`dailybot-cli >= 3.9.0` で、アドオンはリポジトリレベルの harness フック（`dailybot hook session-start | activity | post-commit | stop | dismiss`）を**コミットしてもよい**。ローカルのリポジトリごとの台帳で支えられる。ライフサイクルイベントを見逃したとき、harness がターン終了時にエージェントにリマインド——プロンプト指示が薄れる長時間の無人セッションで重要。
 
 成功したライフサイクルレポートはフック台帳を**リセット**するため、二重レポートは起きない。フックコマンドはローカル状態のみを読み、常に `0` で終了。
 
@@ -69,10 +69,10 @@ DWP `create` / `execute` 中、アドオンは**4 つのベストエフォート
 
 | コンポーネント | コマンド / パス |
 |----------------|-----------------|
-| **Dailybot エージェントスキル**（推奨） | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Dailybot エージェントスキル**（推奨） | `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot -y` |
 | **既存スキルの更新** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Dailybot CLI**（最低 `>= 3.7.0`） | 初回利用時にスキルが検証済み `shared/auth.md` 経由でインストール；または `pip install 'dailybot-cli>=3.7.0'`、Homebrew、または [cli.dailybot.com](https://cli.dailybot.com) のチェックサム検証インストーラー |
+| **Dailybot CLI**（パックのベースライン `>= 3.9.0`；Plan は `>= 3.25.0` が必要） | 初回利用時にスキルが検証済み `shared/auth.md` 経由でインストール；または `pip install 'dailybot-cli>=3.9.0'`、Homebrew、または [cli.dailybot.com](https://cli.dailybot.com) のチェックサム検証インストーラー |
 
 バージョン確認：`dailybot --version` と `dailybot version --check`。アップグレード：`dailybot upgrade`。
 
@@ -82,13 +82,13 @@ DWP `create` / `execute` 中、アドオンは**4 つのベストエフォート
 
 - `dailybot login`（メール OTP）、
 - `DAILYBOT_API_KEY` / `dailybot config key=...`、または
-- オプトインで gitignore された `.dailybot/env.json` のリポジトリごとのキーファイル（`dailybot env add/use`、CLI `>= 3.7.0`）——開発者はリポジトリごとに異なる組織にサインインできる。
+- オプトインで gitignore された `.dailybot/env.json` のリポジトリごとのキーファイル（`dailybot env add/use`、CLI `>= 3.9.0`）——開発者はリポジトリごとに異なる組織にサインインできる。
 
 認証解決は **Bearer 優先**：セッショントークンが優先され、`401`/`403` 時に透過的な Bearer→API キーのリトライを行うため、古いトークンが有効なキーをブロックすることはない。認証が拒否または利用不可の場合、レポートは静かにスキップ——作業は継続。
 
-## ペアの Dailybot スキル——14 の能力（3.10.3）
+## ペアの Dailybot スキル——17 の能力（3.23.2）
 
-Dailybot エージェントスキルのインストールは、DWP アドオンが接続する以上のものをもたらす。公式スキルパック（スキル **3.10.3**、CLI ベースライン **>= 3.7.0**、現在の公開 **3.7.3**）は**14 の協調サブスキル**を公開：
+Dailybot エージェントスキルのインストールは、DWP アドオンが接続する以上のものをもたらす。公式スキルパック（スキル **3.23.2**、CLI ベースライン **>= 3.9.0**、Plan **>= 3.25.0**、CLI の現在の公開 **3.25.2**）は**17 の協調サブスキル**を公開：
 
 | サブスキル | 機能 |
 |------------|------|
@@ -103,9 +103,12 @@ Dailybot エージェントスキルのインストールは、DWP アドオン�
 | **Kudos** | チームメイトまたはチーム全体を表彰；認識フィード、組織フィード、殿堂を閲覧 |
 | **Teams** | チーム一覧、メンバー確認、名前から UUID 解決；`me`、`org`、ユーザープロフィール |
 | **Forms** | フォームの一覧（デフォルトで**組織スコープ**、`--mine` と `--owner` で絞り込み）、送信、更新、遷移；フォームの**作成**（ワークフロー状態、権限、ChatOps）；ページネーション、検索、日付フィルター |
-| **Workflows** | 組織ワークフローの読み取り（`workflow list` / `workflow get`；読み取り専用） |
+| **Workflows** | 組織ワークフローの読み取りとトリガー（`workflow list` / `workflow get` / `workflow trigger`）；ワークフローの作成・編集は引き続き Web アプリで行う |
 | **Report channels** | フォームやチェックイン用のチャンネル UUID を発見 |
-| **Per-repo API keys** | `.dailybot/env.json` を管理——環境ごとの API キー + URL のオプトインで gitignore されたファイル（`dailybot env add / use / show / list / remove / off / on`、CLI `>= 3.7.0`） |
+| **Per-repo API keys** | `.dailybot/env.json` を管理——環境ごとの API キー + URL のオプトインで gitignore されたファイル。`live` と `testing` のプロファイルを持てる（`dailybot env add / use / show / list / remove / off / on`、CLI `>= 3.9.0`） |
+| **Organization labels** | 組織ラベルのライフサイクル全体（`dailybot label list / create / update / archive / delete / assign / batch`）——フォーム、チェックイン、ワークフローで共有する分類（CLI `>= 3.9.0`） |
+| **Featured stars** | フォーム、オートメーション、チェックインへのユーザーごとの非公開スター（`dailybot featured`） |
+| **Plan**（Beta） | `dailybot plan` 配下のボード、タスク、プロジェクト、ゴール、マイルストーン：ワークスペースの読み取り、作業の作成と移動、担当者の設定、コメント、プロジェクト更新の投稿、エージェントに渡されたタスクの作業（`task brief`）。CLI `>= 3.25.0` が必要 |
 
 **DWP アドオンは `report` のみをプラン実行に接続。** それ以外は Dailybot スキルを直接呼び出す——例：`#releases` にデプロイ概要を投稿、スタンドアップ完了、Dailybot AI にチェックイントレンドの要約を依頼。
 

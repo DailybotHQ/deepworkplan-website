@@ -122,7 +122,7 @@ dalla release della skill Deep Work Plan installata sopra. Il pacchetto
 skill attuale include il router e nove sub-skill: `create`, `execute`,
 `refine`, `resume`, `status`, `verify`, `onboard`, `author` e `upgrade`.
 
-Versione installata della skill: **6.0.1**. Il pacchetto 6.x attuale crea per impostazione predefinita i nuovi piani in v6. I piani esistenti mantengono la generazione registrata; il passaggio di un piano v5 a v6 richiede una migrazione esplicita con anteprima.
+Versione installata della skill: **6.0.2**. Il pacchetto 6.x attuale crea per impostazione predefinita i nuovi piani in v6. I piani esistenti mantengono la generazione registrata; il passaggio di un piano v5 a v6 richiede una migrazione esplicita con anteprima.
 
 Lo standard è deliberatamente proporzionale, e rende questa proporzionalità
 una proprietà del piano piuttosto che della disciplina dello sviluppatore.
@@ -164,7 +164,7 @@ inclusa la revisione locale richiesta di AI Diff Reviewer, valida lo stato
 finale del repository, riconcilia le skill usate dai task e registra
 evidenze e limitazioni. La skill di revisione locale è installata a una
 release fissata; il comando attualmente documentato usa
-`DailybotHQ/ai-diff-reviewer@v3.1.1`. La GitHub Action è una superficie CI
+`DailybotHQ/ai-diff-reviewer@v3.2.2`. La GitHub Action è una superficie CI
 separata e opzionale, mai richiesta per la metodologia core.
 
 Una revisione che è stata eseguita e non ha segnalato nulla non è la stessa cosa di una revisione che non ha mai prodotto alcun rilievo. Il secondo caso è una **revisione incompleta**: viene registrata come tale, non conta mai come prova che l'insieme di modifiche sia pulito, e non è mai un motivo per chiudere il Final Review — lo stesso trattamento in rosso che riceve una revisione `timeout` sotto severità bloccante (BC-04). Insieme a un revisore assente e a un'invocazione fallita, sono tre stati distinti — e nessuno di essi significa che il diff sia stato revisionato e trovato pulito. Un corpo che dice `Recommendation: approve` non è prova che il controllo sia passato. Leggi prima il blocco Highest severity / Strictness gate / Check status del marcatore di tracciamento — il runtime riscrive un `approve` del modello quando il gate sta fallendo.
@@ -213,14 +213,14 @@ I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLA
 
 Dopo l’onboarding di base, installa la **revisione locale AI Diff Reviewer** (Fase 7a — richiesta
 dallo standard 2.3.0): la skill vendorizzata fissata al tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) più un
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`) più un
 `.review/extension.md` su misura per il repository via `generate-extension`, sotto il consenso
 dell’onboarding. Poi elenca i quattro addon opzionali (devcontainer, Dailybot, dependency-upgrade,
 design-system) e proponi ciascuno come opt-in esplicito. Un repository è pienamente conforme con
 **zero** addon opzionali — non installarli mai automaticamente.
 
 - **Supporto devcontainer** — un dev container riproducibile e isolato con autenticazione AI-CLI persistente.
-- **Integrazione Dailybot** — quattro eventi del ciclo di vita (kickoff, attività significativa, bloccato, completamento) come report best-effort di progressi per i team che già usano Dailybot, con livello opzionale di enforcement autonomo degli hook (`dailybot-cli >= 3.7.0`). L'installazione della skill agente Dailybot abbinata (3.10.3) espone anche chat, check-in, authoring di form, domande all'AI, API key per repository e altro — l'addon collega solo il reporting all'esecuzione DWP. La metodologia di base ha zero dipendenze da Dailybot.
+- **Integrazione Dailybot** — quattro eventi del ciclo di vita (kickoff, attività significativa, bloccato, completamento) come report best-effort di progressi per i team che già usano Dailybot, con livello opzionale di enforcement autonomo degli hook (`dailybot-cli >= 3.9.0`). L'installazione della skill agente Dailybot abbinata (3.23.2) espone anche chat, check-in, authoring di form, domande all'AI, board e task di Plan, API key per repository e altro — l'addon collega solo il reporting all'esecuzione DWP. La metodologia di base ha zero dipendenze da Dailybot.
 - **Dependency upgrade** — aggiornamenti indipendenti dal package manager, a lotti, validati e annullabili. Quando
   accettato, installa il comando `/lib-upgrade`.
 - **Design system** — un `docs/DESIGN.md` opt-in solo per i repository con una superficie di interfaccia

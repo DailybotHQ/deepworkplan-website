@@ -30,4 +30,4 @@ La décision d’architecture est GO : v6 conserve la même méthodologie avec u
 
 Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
 
-Version installée du skill : **6.0.1**. Le pack 6.x crée les nouveaux plans en v6 par défaut. Les plans existants conservent leur génération enregistrée ; la migration nécessite une demande explicite avec aperçu.
+Version installée du skill : **6.0.2**. Le pack 6.x crée les nouveaux plans en v6 par défaut. Les plans existants conservent leur génération enregistrée ; la migration nécessite une demande explicite avec aperçu.
