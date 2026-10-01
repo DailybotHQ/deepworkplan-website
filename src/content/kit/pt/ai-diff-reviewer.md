@@ -10,7 +10,7 @@ order: 5
 
 Todo Deep Work Plan termina da mesma forma: um **Final Review** obrigatório que lê o conjunto completo de alterações acumuladas do plano antes de o trabalho poder ser dado como concluído. O seu passe de segurança é o último ponto em que algo pode ser apanhado. Sem ajuda, o único leitor nesse momento é o mesmo agente que escreveu o código.
 
-Este addon coloca um segundo leitor sobre esse diff. Liga o **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — listado no marketplace como "AI Diff Reviewer", versão atual **v3.1.1** — ao passe de segurança, onde devolve algo estruturado em vez de prosa: um veredicto, uma tabela de resultados e uma severidade para cada um. Desde a v3, um resultado `critical` significa que o verificador do addon o confirmou com uma segunda chamada ao modelo ancorada no código; apenas os críticos verificados bloqueiam a conclusão até serem corrigidos ou explicitamente aceites. A revisão é uma comporta, não um comentário.
+Este addon coloca um segundo leitor sobre esse diff. Liga o **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — listado no marketplace como "AI Diff Reviewer", versão atual **v3.2.2** — ao passe de segurança, onde devolve algo estruturado em vez de prosa: um veredicto, uma tabela de resultados e uma severidade para cada um. Desde a v3, um resultado `critical` significa que o verificador do addon o confirmou com uma segunda chamada ao modelo ancorada no código; apenas os críticos verificados bloqueiam a conclusão até serem corrigidos ou explicitamente aceites. A revisão é uma comporta, não um comentário.
 
 Desde o padrão 2.3.0 essa revisão local **faz parte da linha de base, não é um extra**. A integração instala-a; cada Final Review executa-a. O que continua opcional é a superfície de CI — o Fluxo B, onde a mesma revisão controla os pull requests através da GitHub Action.
 
@@ -60,7 +60,7 @@ Duas sub-skills invocáveis pelo programador fecham o ciclo depois de CI publica
 
 ## O que mudou na v3
 
-Três versões chegaram a 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) e a v3.1.1 seguiu-se com a sub-skill `address-review`. Nenhuma altera a forma como este addon liga o revisor — o Fluxo A, os três caminhos de deteção e a escada de nunca bloquear mantêm-se —, mas mudam aquilo que quem adota recebe.
+Três versões chegaram a 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) e a v3.1.1 seguiu-se com a sub-skill `address-review`; as v3.2.0 e v3.2.2 (2026-09-26) tornaram depois esse ciclo consciente do CI e capaz de armar um PR em que o revisor nunca correu. Nenhuma altera a forma como este addon liga o revisor — o Fluxo A, os três caminhos de deteção e a escada de nunca bloquear mantêm-se —, mas mudam aquilo que quem adota recebe.
 
 | Mudança | O que significa para um repositório DWP |
 |---------|------------------------------------------|
@@ -69,6 +69,7 @@ Três versões chegaram a 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) e a v3.1.1 seguiu-
 | **Uma revisão inacabada é vermelha** (v3.0.0) | `incomplete` (teto de turnos) e `timeout` (relógio) publicam resultados parciais e falham sob rigor bloqueante — «sem resultados» agora significa sempre que o revisor olhou e não encontrou nada. |
 | **A saída estruturada é o caminho para máquinas** (v3.0.0) | O documento `review-output/3.0` transporta o registo de execução, o inventário de alterações, resultados com evidência tipada e verificação, os refutados e a comporta. Leia o documento em vez de raspar corpos de revisão. |
 | **Seis sub-skills** (v3.1.1) | `address-review` junta-se ao router: uma invocação aplica, faz commit, faz push e rearma o revisor. |
+| **O ciclo conhece o CI** (v3.2.0, v3.2.2) | `address-review` também lê os registos dos workflows que falham e corrige-os na mesma passagem consentida, atualiza um ramo que está atrás da base e arma um PR em que o revisor nunca correu (um «loop the review» simples aponta para o PR aberto do ramo atual). |
 | **Ensemble opcional** (v3.0.0) | Pernas `mode: emit` de apenas leitura mais um trabalho `aggregate` verificam uma vez os resultados consolidados e publicam uma única revisão. |
 | **`@v2` continua a funcionar** | A linha v2 está congelada em `release/v2` com seis meses de manutenção de segurança e catálogo. A v3 é a recomendação, nunca uma migração forçada. |
 

@@ -10,7 +10,7 @@ order: 5
 
 Każdy Deep Work Plan kończy się tak samo: obowiązkowym **Final Review**, który czyta cały zgromadzony przez plan zestaw zmian, zanim pracę wolno uznać za wykonaną. Przegląd bezpieczeństwa w jego wnętrzu to ostatni moment, w którym cokolwiek da się jeszcze wychwycić. Bez pomocy jedynym czytelnikiem w tym momencie jest ten sam agent, który napisał ten kod.
 
-Ten dodatek sadza nad owym diffem drugiego czytelnika. Podłącza **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — w marketplace figurujący jako "AI Diff Reviewer", obecnie **v3.1.1** — do przeglądu bezpieczeństwa, gdzie zwraca on coś ustrukturyzowanego zamiast prozy: werdykt, tabelę ustaleń oraz wagę każdego z nich. Od v3 ustalenie `critical` oznacza, że weryfikator dodatku potwierdził je drugim, zakotwiczonym w kodzie wywołaniem modelu; ukończenie blokują dopiero zweryfikowane ustalenia krytyczne — do czasu naprawy albo wyraźnej akceptacji. Ten przegląd jest bramką, a nie komentarzem.
+Ten dodatek sadza nad owym diffem drugiego czytelnika. Podłącza **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — w marketplace figurujący jako "AI Diff Reviewer", obecnie **v3.2.2** — do przeglądu bezpieczeństwa, gdzie zwraca on coś ustrukturyzowanego zamiast prozy: werdykt, tabelę ustaleń oraz wagę każdego z nich. Od v3 ustalenie `critical` oznacza, że weryfikator dodatku potwierdził je drugim, zakotwiczonym w kodzie wywołaniem modelu; ukończenie blokują dopiero zweryfikowane ustalenia krytyczne — do czasu naprawy albo wyraźnej akceptacji. Ten przegląd jest bramką, a nie komentarzem.
 
 Od standardu 2.3.0 ów lokalny przegląd **należy do linii bazowej, nie jest dodatkiem**. Onboarding go instaluje; każde Final Review go uruchamia. Opcjonalna pozostaje powierzchnia CI — Flow B, gdzie ten sam przegląd pilnuje pull requestów poprzez GitHub Action.
 
@@ -60,7 +60,7 @@ Dwa wywoływane przez dewelopera sub-skille zamykają pętlę po opublikowaniu p
 
 ## Co się zmieniło w v3
 
-Trzy wydania ukazały się 2026-09-24 (v3.0.0, v3.0.1, v3.1.0), a v3.1.1 przyszedł niedługo potem, dodając sub-skill `address-review`. Żadne z nich nie zmienia sposobu, w jaki ten dodatek podłącza recenzenta — Flow A, trzy ścieżki wykrywania i drabina „nigdy nie blokuj" pozostają bez zmian — ale zmieniają to, co dostaje osoba wdrażająca.
+Trzy wydania ukazały się 2026-09-24 (v3.0.0, v3.0.1, v3.1.0), a v3.1.1 przyszedł niedługo potem, dodając sub-skill `address-review`; v3.2.0 i v3.2.2 (2026-09-26) sprawiły następnie, że ta pętla uwzględnia CI i potrafi uzbroić PR, na którym recenzent nigdy nie działał. Żadne z nich nie zmienia sposobu, w jaki ten dodatek podłącza recenzenta — Flow A, trzy ścieżki wykrywania i drabina „nigdy nie blokuj" pozostają bez zmian — ale zmieniają to, co dostaje osoba wdrażająca.
 
 | Zmiana | Co to znaczy dla repozytorium DWP |
 |--------|------------------------------------|
@@ -69,6 +69,7 @@ Trzy wydania ukazały się 2026-09-24 (v3.0.0, v3.0.1, v3.1.0), a v3.1.1 przysze
 | **Niedokończony przegląd jest czerwony** (v3.0.0) | `incomplete` (limit rund) i `timeout` (limit czasu) publikują częściowe wyniki i obalają blokującą surowość — „brak ustaleń" znaczy teraz zawsze, że recenzent spojrzał i nic nie znalazł. |
 | **Ustrukturyzowane wyjście to ścieżka maszynowa** (v3.0.0) | Dokument `review-output/3.0` niesie zapis uruchomienia, inwentarz zmian, wyniki z typowanymi dowodami i weryfikacją, odparte wyniki i bramkę. Czytaj dokument zamiast skrobać treści przeglądów. |
 | **Sześć sub-skills** (v3.1.1) | `address-review` dołącza do routera: jedno wywołanie stosuje, robi commity, wykonuje push i ponownie uzbraja recenzenta. |
+| **Pętla uwzględnia CI** (v3.2.0, v3.2.2) | `address-review` czyta też logi nieudanych workflowów i naprawia je w tym samym, zatwierdzonym przebiegu, aktualizuje gałąź pozostającą w tyle za bazą i uzbraja PR, na którym recenzent nigdy nie działał (samo „loop the review" wskazuje otwarty PR bieżącej gałęzi). |
 | **Opcjonalny ansambl** (v3.0.0) | Gałęzie tylko do odczytu `mode: emit` plus jedno zadanie `aggregate` raz weryfikują skonsolidowane wyniki i publikują jeden przegląd. |
 | **`@v2` nadal działa** | Linia v2 jest zamrożona na `release/v2` z sześcioma miesiącami utrzymania bezpieczeństwa i katalogu. v3 to rekomendacja, nigdy przymusowa migracja. |
 

@@ -10,7 +10,7 @@ order: 5
 
 Setiap Deep Work Plan berakhir dengan cara yang sama: sebuah **Final Review** wajib yang membaca seluruh himpunan perubahan yang dikumpulkan rencana itu sebelum pekerjaan boleh disebut selesai. Pemeriksaan keamanan di dalamnya adalah titik terakhir di mana sesuatu masih bisa tertangkap. Tanpa bantuan, satu-satunya pembaca pada titik itu adalah agent yang sama yang menulis kodenya.
 
-Add-on ini menempatkan pembaca kedua pada diff tersebut. Ia menghubungkan **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — terdaftar di marketplace sebagai "AI Diff Reviewer", rilis saat ini **v3.1.1** — ke pemeriksaan keamanan, tempat ia mengembalikan sesuatu yang terstruktur alih-alih prosa: sebuah putusan, tabel temuan, dan tingkat keparahan untuk setiap temuan. Sejak v3, temuan `critical` berarti verifikator add-on telah mengonfirmasinya dengan panggilan model kedua yang berbasis kode; hanya kritis terverifikasi yang memblokir penyelesaian sampai diperbaiki atau diterima secara eksplisit. Tinjauan ini adalah gerbang, bukan komentar.
+Add-on ini menempatkan pembaca kedua pada diff tersebut. Ia menghubungkan **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — terdaftar di marketplace sebagai "AI Diff Reviewer", rilis saat ini **v3.2.2** — ke pemeriksaan keamanan, tempat ia mengembalikan sesuatu yang terstruktur alih-alih prosa: sebuah putusan, tabel temuan, dan tingkat keparahan untuk setiap temuan. Sejak v3, temuan `critical` berarti verifikator add-on telah mengonfirmasinya dengan panggilan model kedua yang berbasis kode; hanya kritis terverifikasi yang memblokir penyelesaian sampai diperbaiki atau diterima secara eksplisit. Tinjauan ini adalah gerbang, bukan komentar.
 
 Sejak standar 2.3.0 tinjauan lokal itu **bagian dari baseline, bukan tambahan**. Onboarding memasangnya; setiap Final Review menjalankannya. Yang tetap opsional adalah permukaan CI — Flow B, tempat tinjauan yang sama mengawal pull request melalui GitHub Action.
 
@@ -60,7 +60,7 @@ Dua sub-skill yang dapat dipanggil pengembang menutup loop setelah CI memposting
 
 ## Apa yang berubah di v3
 
-Tiga rilis tiba pada 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) dan v3.1.1 menyusul dengan sub-skill `address-review`. Tidak satu pun mengubah cara add-on ini menghubungkan peninjau — Flow A, ketiga jalur deteksi, dan tangga tidak-pernah-memblokir tetap sama — tetapi semuanya mengubah apa yang diperoleh penggunanya.
+Tiga rilis tiba pada 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) dan v3.1.1 menyusul dengan sub-skill `address-review`; v3.2.0 dan v3.2.2 (2026-09-26) kemudian membuat siklus itu sadar-CI dan mampu melengkapi PR yang belum pernah dijalankan peninjau. Tidak satu pun mengubah cara add-on ini menghubungkan peninjau — Flow A, ketiga jalur deteksi, dan tangga tidak-pernah-memblokir tetap sama — tetapi semuanya mengubah apa yang diperoleh penggunanya.
 
 | Perubahan | Artinya bagi repositori DWP |
 |-----------|------------------------------|
@@ -69,6 +69,7 @@ Tiga rilis tiba pada 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) dan v3.1.1 menyusul den
 | **Tinjauan yang belum selesai berwarna merah** (v3.0.0) | `incomplete` (batas putaran) dan `timeout` (jam dinding) memposting temuan parsial dan gagal di bawah ketatan yang memblokir — "tanpa temuan" kini selalu berarti peninjau sudah melihat dan tidak menemukan apa pun. |
 | **Output terstruktur adalah jalur untuk mesin** (v3.0.0) | Dokumen `review-output/3.0` membawa catatan eksekusi, inventaris perubahan, temuan dengan bukti bertipe dan verifikasi, yang dibantah, dan gerbang. Baca dokumennya, bukan menggores isi tinjauan. |
 | **Enam sub-skill** (v3.1.1) | `address-review` bergabung ke router: satu pemanggilan menerapkan, commit, push, dan melengkapi kembali peninjau. |
+| **Siklus sadar CI** (v3.2.0, v3.2.2) | `address-review` juga membaca log workflow yang gagal dan memperbaikinya dalam satu putaran yang disetujui, memperbarui cabang yang tertinggal dari basisnya, dan melengkapi PR yang belum pernah dijalankan peninjau (perintah "loop the review" saja menargetkan PR terbuka pada cabang saat ini). |
 | **Ensemble opsional** (v3.0.0) | Kaki `mode: emit` hanya-baca plus satu pekerjaan `aggregate` memverifikasi temuan gabungan sekali dan menerbitkan satu tinjauan tunggal. |
 | **`@v2` tetap berfungsi** | Jalur v2 dibekukan di `release/v2` dengan enam bulan pemeliharaan keamanan dan katalog. v3 adalah rekomendasi, bukan migrasi paksa. |
 

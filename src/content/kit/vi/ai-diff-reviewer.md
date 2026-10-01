@@ -10,7 +10,7 @@ order: 5
 
 Mọi Deep Work Plan đều khép lại theo cùng một cách: một **Final Review** bắt buộc, đọc toàn bộ tập thay đổi mà kế hoạch đã tích lũy trước khi công việc được coi là xong. Bước rà soát bảo mật bên trong nó là điểm cuối cùng còn có thể phát hiện ra điều gì đó. Nếu không có trợ giúp, người đọc duy nhất ở thời điểm ấy chính là agent đã viết đoạn mã đó.
 
-Tiện ích này đặt thêm một người đọc thứ hai lên bản diff ấy. Nó nối **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — được liệt kê trên marketplace là "AI Diff Reviewer", bản phát hành hiện tại **v3.1.1** — vào bước rà soát bảo mật, nơi nó trả về thứ có cấu trúc thay vì văn xuôi: một phán quyết, một bảng phát hiện, và mức độ nghiêm trọng cho từng phát hiện. Kể từ v3, một phát hiện `critical` có nghĩa là trình xác minh của tiện ích đã xác nhận nó bằng một lần gọi mô hình thứ hai dựa trên mã; chỉ những phát hiện nghiêm trọng đã xác minh mới chặn việc hoàn tất cho tới khi được sửa hoặc được chấp nhận một cách tường minh. Bản đánh giá này là một cánh cổng, không phải một lời bình.
+Tiện ích này đặt thêm một người đọc thứ hai lên bản diff ấy. Nó nối **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — được liệt kê trên marketplace là "AI Diff Reviewer", bản phát hành hiện tại **v3.2.2** — vào bước rà soát bảo mật, nơi nó trả về thứ có cấu trúc thay vì văn xuôi: một phán quyết, một bảng phát hiện, và mức độ nghiêm trọng cho từng phát hiện. Kể từ v3, một phát hiện `critical` có nghĩa là trình xác minh của tiện ích đã xác nhận nó bằng một lần gọi mô hình thứ hai dựa trên mã; chỉ những phát hiện nghiêm trọng đã xác minh mới chặn việc hoàn tất cho tới khi được sửa hoặc được chấp nhận một cách tường minh. Bản đánh giá này là một cánh cổng, không phải một lời bình.
 
 Kể từ chuẩn 2.3.0, bản đánh giá cục bộ đó **là một phần của chuẩn cơ sở, không phải thứ thêm vào**. Onboarding cài đặt nó; mọi Final Review đều chạy nó. Thứ vẫn còn tùy chọn là bề mặt CI — Flow B, nơi cùng bản đánh giá ấy kiểm soát các pull request thông qua GitHub Action.
 
@@ -60,7 +60,7 @@ Hai kỹ năng con do nhà phát triển gọi sẽ khép vòng lặp sau khi CI
 
 ## Những gì v3 thay đổi
 
-Ba bản phát hành ra mắt ngày 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) và v3.1.1 theo sau với kỹ năng con `address-review`. Không bản nào thay đổi cách tiện ích này kết nối trình đánh giá — Flow A, ba đường phát hiện và chiếc thang "không bao giờ chặn" vẫn giữ nguyên — nhưng chúng thay đổi những gì người áp dụng nhận được.
+Ba bản phát hành ra mắt ngày 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) và v3.1.1 theo sau với kỹ năng con `address-review`; v3.2.0 và v3.2.2 (2026-09-26) sau đó giúp vòng lặp ấy nhận biết CI và có thể kích hoạt một PR mà trình đánh giá chưa từng chạy. Không bản nào thay đổi cách tiện ích này kết nối trình đánh giá — Flow A, ba đường phát hiện và chiếc thang "không bao giờ chặn" vẫn giữ nguyên — nhưng chúng thay đổi những gì người áp dụng nhận được.
 
 | Thay đổi | Ý nghĩa đối với một kho DWP |
 |----------|------------------------------|
@@ -69,6 +69,7 @@ Ba bản phát hành ra mắt ngày 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) và v3.1
 | **Lượt đánh giá dở dang là màu đỏ** (v3.0.0) | `incomplete` (giới hạn vòng) và `timeout` (đồng hồ treo tường) đăng các phát hiện một phần và đánh trượt dưới mức nghiêm ngặt có tính chặn — "không có phát hiện" giờ luôn nghĩa là trình đánh giá đã xem và không thấy gì. |
 | **Đầu ra có cấu trúc là đường dành cho máy** (v3.0.0) | Tài liệu `review-output/3.0` mang theo hồ sơ chạy, danh mục thay đổi, các phát hiện kèm bằng chứng có kiểu và xác minh, các phát hiện bị bác bỏ, và cổng. Hãy đọc tài liệu đó, thay vì cào nội dung đánh giá. |
 | **Sáu kỹ năng con** (v3.1.1) | `address-review` gia nhập bộ định tuyến: một lần gọi là áp dụng, commit, push và kích hoạt lại trình đánh giá. |
+| **Vòng lặp nhận biết CI** (v3.2.0, v3.2.2) | `address-review` còn đọc nhật ký của workflow bị lỗi và sửa trong cùng một lượt đã được đồng ý, cập nhật nhánh tụt lại so với nhánh gốc, và kích hoạt PR mà trình đánh giá chưa từng chạy (câu "loop the review" đơn thuần nhắm tới PR đang mở của nhánh hiện tại). |
 | **Ensemble tùy chọn** (v3.0.0) | Các chân `mode: emit` chỉ đọc cộng một công việc `aggregate` xác minh các phát hiện hợp nhất một lần và đăng một đánh giá duy nhất. |
 | **`@v2` vẫn hoạt động** | Dòng v2 bị đóng băng tại `release/v2` với sáu tháng bảo trì bảo mật và danh mục. v3 là khuyến nghị, không bao giờ là việc di chuyển bắt buộc. |
 

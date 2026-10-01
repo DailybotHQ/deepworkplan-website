@@ -10,7 +10,7 @@ order: 5
 
 Chaque Deep Work Plan se referme de la même manière : par un **Final Review** obligatoire qui relit l'ensemble des modifications accumulées par le plan avant que le travail puisse être déclaré terminé. Sa passe de sécurité est le dernier endroit où quelque chose peut encore être repéré. Sans aide, le seul lecteur à ce moment-là est l'agent qui a écrit le code.
 
-Cet addon place un second lecteur devant ce diff. Il branche l'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — référencé sur le marketplace sous le nom "AI Diff Reviewer", actuellement en **v3.1.1** — sur la passe de sécurité, où il renvoie non pas de la prose mais quelque chose de structuré : un verdict, un tableau de constatations et une sévérité pour chacune. Depuis la v3, une constatation `critical` signifie que le vérificateur de l'addon l'a confirmée par un second appel de modèle ancré dans le code ; seuls les critiques vérifiés bloquent la clôture jusqu'à correction ou acceptation explicite. La revue est une barrière, pas un commentaire.
+Cet addon place un second lecteur devant ce diff. Il branche l'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — référencé sur le marketplace sous le nom "AI Diff Reviewer", actuellement en **v3.2.2** — sur la passe de sécurité, où il renvoie non pas de la prose mais quelque chose de structuré : un verdict, un tableau de constatations et une sévérité pour chacune. Depuis la v3, une constatation `critical` signifie que le vérificateur de l'addon l'a confirmée par un second appel de modèle ancré dans le code ; seuls les critiques vérifiés bloquent la clôture jusqu'à correction ou acceptation explicite. La revue est une barrière, pas un commentaire.
 
 Depuis le standard 2.3.0, cette revue locale **fait partie du socle, ce n'est pas un supplément**. L'intégration l'installe ; chaque Final Review l'exécute. Ce qui demeure optionnel, c'est la surface CI — le Flow B, où la même revue contrôle les pull requests via la GitHub Action.
 
@@ -60,7 +60,7 @@ Deux sous-skills invoquées par le développeur bouclent la boucle après que CI
 
 ## Ce qui a changé en v3
 
-Trois versions sont parues le 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) et la v3.1.1 a suivi avec la sous-skill `address-review`. Aucune ne modifie la façon dont cet addon branche le relecteur — le Flow A, les trois chemins de détection et l'échelle de non-blocage restent inchangés —, mais elles changent ce que reçoit celui qui l'adopte.
+Trois versions sont parues le 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) et la v3.1.1 a suivi avec la sous-skill `address-review` ; les v3.2.0 et v3.2.2 (2026-09-26) ont ensuite rendu cette boucle sensible au CI et capable d'armer une PR sur laquelle le relecteur n'a jamais tourné. Aucune ne modifie la façon dont cet addon branche le relecteur — le Flow A, les trois chemins de détection et l'échelle de non-blocage restent inchangés —, mais elles changent ce que reçoit celui qui l'adopte.
 
 | Changement | Ce que cela signifie pour un dépôt DWP |
 |------------|-----------------------------------------|
@@ -69,6 +69,7 @@ Trois versions sont parues le 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) et la v3.1.1 a
 | **Une revue inachevée est rouge** (v3.0.0) | `incomplete` (plafond de tours) et `timeout` (limite de temps) publient des constatations partielles et échouent toute rigueur bloquante — « aucune constatation » signifie désormais toujours que le relecteur a regardé et n'a rien trouvé. |
 | **La sortie structurée est le chemin machine** (v3.0.0) | Le document `review-output/3.0` porte le relevé d'exécution, l'inventaire des changements, les constatations avec preuves typées et vérification, les constatations réfutées et la barrière. Lire le document au lieu de scraper les corps de revue. |
 | **Six sous-skills** (v3.1.1) | `address-review` rejoint le routeur : une seule invocation applique, fait le commit, pousse et réarme le relecteur. |
+| **La boucle tient compte du CI** (v3.2.0, v3.2.2) | `address-review` lit aussi les journaux des workflows en échec et les corrige dans la même passe consentie, met à jour une branche en retard sur sa base et arme une PR sur laquelle le relecteur n'a jamais tourné (un simple « loop the review » vise la PR ouverte de la branche courante). |
 | **Ensemble optionnel** (v3.0.0) | Des jambes en lecture seule `mode: emit` plus un job `aggregate` vérifient une fois les constatations consolidées et publient une seule revue. |
 | **`@v2` continue de fonctionner** | La ligne v2 est gelée sur `release/v2` avec six mois de maintenance de sécurité et de catalogue. v3 est la recommandation, jamais une migration forcée. |
 

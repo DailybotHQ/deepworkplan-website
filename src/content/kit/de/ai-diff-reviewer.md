@@ -10,7 +10,7 @@ order: 5
 
 Jeder Deep Work Plan endet auf dieselbe Weise: mit einem verpflichtenden **Final Review**, der den gesamten angesammelten Änderungssatz des Plans liest, bevor die Arbeit als erledigt gelten darf. Sein Sicherheitsdurchgang ist der letzte Punkt, an dem überhaupt noch etwas auffallen kann. Ohne Hilfe ist der einzige Leser an dieser Stelle derselbe Agent, der den Code geschrieben hat.
 
-Dieses Addon setzt einen zweiten Leser auf dieses Diff an. Es bindet den **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — im Marketplace gelistet als "AI Diff Reviewer", aktuelle Release **v3.1.1** — in den Sicherheitsdurchgang ein, wo er statt Prosa etwas Strukturiertes zurückgibt: ein Urteil, eine Tabelle der Findings und einen Schweregrad je Finding. Seit v3 bedeutet ein `critical`-Finding, dass der Verifizierer des Addons es mit einem zweiten, codegestützten Modellaufruf bestätigt hat; nur verifizierte kritische Findings blockieren den Abschluss, bis sie behoben oder ausdrücklich akzeptiert sind. Die Überprüfung ist ein Gate, kein Kommentar.
+Dieses Addon setzt einen zweiten Leser auf dieses Diff an. Es bindet den **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — im Marketplace gelistet als "AI Diff Reviewer", aktuelle Release **v3.2.2** — in den Sicherheitsdurchgang ein, wo er statt Prosa etwas Strukturiertes zurückgibt: ein Urteil, eine Tabelle der Findings und einen Schweregrad je Finding. Seit v3 bedeutet ein `critical`-Finding, dass der Verifizierer des Addons es mit einem zweiten, codegestützten Modellaufruf bestätigt hat; nur verifizierte kritische Findings blockieren den Abschluss, bis sie behoben oder ausdrücklich akzeptiert sind. Die Überprüfung ist ein Gate, kein Kommentar.
 
 Seit Standard 2.3.0 ist diese lokale Überprüfung **Teil der Baseline, kein Zusatz**. Das Onboarding installiert sie; jedes Final Review führt sie aus. Optional bleibt die CI-Oberfläche — Flow B, wo dieselbe Überprüfung Pull Requests über die GitHub Action absichert.
 
@@ -60,7 +60,7 @@ Zwei vom Entwickler aufgerufene Sub-Skills schließen die Schleife, nachdem CI e
 
 ## Was sich in v3 geändert hat
 
-Drei Releases erschienen am 2026-09-24 (v3.0.0, v3.0.1, v3.1.0), und v3.1.1 folgte mit dem Sub-Skill `address-review`. Keines davon ändert, wie dieses Addon den Reviewer einbindet — Flow A, die drei Erkennungspfade und die Stufenfolge des Nie-Blockierens bleiben unverändert —, aber sie ändern, was Anwendende bekommen.
+Drei Releases erschienen am 2026-09-24 (v3.0.0, v3.0.1, v3.1.0), und v3.1.1 folgte mit dem Sub-Skill `address-review`; v3.2.0 und v3.2.2 (2026-09-26) machten diese Schleife anschließend CI-bewusst und fähig, einen PR scharf zu schalten, auf dem der Reviewer nie gelaufen ist. Keines davon ändert, wie dieses Addon den Reviewer einbindet — Flow A, die drei Erkennungspfade und die Stufenfolge des Nie-Blockierens bleiben unverändert —, aber sie ändern, was Anwendende bekommen.
 
 | Änderung | Was das für ein DWP-Repository bedeutet |
 |----------|------------------------------------------|
@@ -69,6 +69,7 @@ Drei Releases erschienen am 2026-09-24 (v3.0.0, v3.0.1, v3.1.0), und v3.1.1 folg
 | **Eine unvollendete Überprüfung ist rot** (v3.0.0) | `incomplete` (Rundenlimit) und `timeout` (Laufzeitgrenze) veröffentlichen Teilfindings und scheitern an jeder blockierenden Strenge — „keine Findings“ heißt jetzt immer, dass der Reviewer hingesehen und nichts gefunden hat. |
 | **Die strukturierte Ausgabe ist der Maschinenpfad** (v3.0.0) | Das Dokument `review-output/3.0` trägt den Laufbericht, das Änderungsinventar, Findings mit typisierten Belegen und Verifizierung, widerlegte Findings und das Gate. Das Dokument lesen, statt Review-Texte zu scrapen. |
 | **Sechs Sub-Skills** (v3.1.1) | `address-review` kommt zum Router hinzu: ein einziger Aufruf wendet an, committet, pusht und schaltet den Reviewer erneut scharf. |
+| **Die Schleife kennt das CI** (v3.2.0, v3.2.2) | `address-review` liest auch die Logs fehlgeschlagener Workflows und behebt sie im selben bestätigten Durchgang, aktualisiert einen Branch, der hinter seiner Basis liegt, und schaltet einen PR scharf, auf dem der Reviewer nie gelaufen ist (ein bloßes „loop the review“ zielt auf den offenen PR des aktuellen Branches). |
 | **Optionales Ensemble** (v3.0.0) | Schreibgeschützte `mode: emit`-Beine plus ein `aggregate`-Job verifizieren die konsolidierten Findings einmal und veröffentlichen eine einzige Überprüfung. |
 | **`@v2` funktioniert weiter** | Die v2-Linie ist auf `release/v2` eingefroren, mit sechs Monaten Sicherheits- und Katalogwartung. v3 ist die Empfehlung, nie eine erzwungene Migration. |
 

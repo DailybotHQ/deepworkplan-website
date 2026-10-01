@@ -167,7 +167,7 @@ security pass over the accumulated change set, including the required local
 AI Diff Reviewer review, validates the final repository state, reconciles the
 skills used by the tasks, and records the evidence and limitations. The local
 review skill is installed at a pinned release; the current documented command
-uses `DailybotHQ/ai-diff-reviewer@v3.1.1`. The GitHub Action is a separate,
+uses `DailybotHQ/ai-diff-reviewer@v3.2.2`. The GitHub Action is a separate,
 optional CI surface and is never required for the core methodology.
 
 A review that ran and reported nothing is not the same as a review that never produced findings at all. The second case is an **incomplete review**: it is recorded as such, never counted as evidence that the change set is clean, and never a reason to close the Final Review — the same red treatment a `timeout` review gets under blocking strictness (BC-04). Together with a missing reviewer and an invocation that errored, that is three distinct states — and none of them means the diff was reviewed and found clean. A body that says `Recommendation: approve` is not evidence the check passed either. Read the tracking marker's Highest severity / Strictness gate / Check status block first — the runtime rewrites a model `approve` whenever the gate is failing.
@@ -221,7 +221,7 @@ numeric ID.
 
 After the baseline onboarding, install the **AI Diff Reviewer local review** (Phase 7a — required
 since standard 2.3.0): the tag-pinned vendored skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) plus a
+(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`) plus a
 repo-tailored `.review/extension.md` via `generate-extension`, under the onboarding consent. Then
 enumerate the four optional addons (devcontainer, Dailybot, dependency-upgrade, design-system) and
 offer each as an explicit opt-in. A repository is fully conformant with **zero** optional addons —

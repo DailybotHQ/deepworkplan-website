@@ -10,7 +10,7 @@ order: 5
 
 Ogni Deep Work Plan si chiude allo stesso modo: con un **Final Review** obbligatorio che rilegge l'intero insieme di modifiche accumulate dal piano prima che il lavoro possa dirsi concluso. Il suo passaggio di sicurezza è l'ultimo punto in cui qualcosa può ancora essere intercettato. Senza aiuto, l'unico lettore in quel momento è lo stesso agente che ha scritto il codice.
 
-Questo addon mette un secondo lettore davanti a quel diff. Collega l'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — presente nel marketplace come "AI Diff Reviewer", attualmente **v3.1.1** — al passaggio di sicurezza, dove restituisce qualcosa di strutturato anziché prosa: un verdetto, una tabella delle risultanze e una gravità per ciascuna. Dalla v3, una risultanza `critical` significa che il verificatore dell'addon l'ha confermata con una seconda chiamata di modello ancorata al codice; solo i critici verificati bloccano la chiusura finché non vengono risolti o esplicitamente accettati. La revisione è un cancello, non un commento.
+Questo addon mette un secondo lettore davanti a quel diff. Collega l'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — presente nel marketplace come "AI Diff Reviewer", attualmente **v3.2.2** — al passaggio di sicurezza, dove restituisce qualcosa di strutturato anziché prosa: un verdetto, una tabella delle risultanze e una gravità per ciascuna. Dalla v3, una risultanza `critical` significa che il verificatore dell'addon l'ha confermata con una seconda chiamata di modello ancorata al codice; solo i critici verificati bloccano la chiusura finché non vengono risolti o esplicitamente accettati. La revisione è un cancello, non un commento.
 
 Dallo standard 2.3.0 quella revisione locale **fa parte della baseline, non è un extra**. L'onboarding la installa; ogni Final Review la esegue. A restare opzionale è la superficie CI — il Flow B, dove la stessa revisione presidia le pull request tramite la GitHub Action.
 
@@ -60,7 +60,7 @@ Due sub-skill invocate dallo sviluppatore chiudono il ciclo dopo che CI pubblica
 
 ## Cosa è cambiato nella v3
 
-Tre rilasci sono usciti il 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) e la v3.1.1 è seguita con la sub-skill `address-review`. Nessuno di essi cambia il modo in cui questo addon collega il revisore — il Flow A, i tre percorsi di rilevamento e la scala di non-blocco restano invariati — ma cambiano ciò che ottiene chi lo adotta.
+Tre rilasci sono usciti il 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) e la v3.1.1 è seguita con la sub-skill `address-review`; le v3.2.0 e v3.2.2 (2026-09-26) hanno poi reso quel ciclo consapevole della CI e capace di armare una PR su cui il revisore non è mai stato eseguito. Nessuno di essi cambia il modo in cui questo addon collega il revisore — il Flow A, i tre percorsi di rilevamento e la scala di non-blocco restano invariati — ma cambiano ciò che ottiene chi lo adotta.
 
 | Cambiamento | Cosa significa per un repository DWP |
 |-------------|---------------------------------------|
@@ -69,6 +69,7 @@ Tre rilasci sono usciti il 2026-09-24 (v3.0.0, v3.0.1, v3.1.0) e la v3.1.1 è se
 | **Una revisione incompleta è rossa** (v3.0.0) | `incomplete` (limite di round) e `timeout` (tempo massimo) pubblicano risultanze parziali e falliscono sotto ogni rigidità bloccante — «nessuna risultanza» ora significa sempre che il revisore ha guardato e non ha trovato nulla. |
 | **L'output strutturato è il percorso macchina** (v3.0.0) | Il documento `review-output/3.0` porta il record dell'esecuzione, l'inventario delle modifiche, le risultanze con evidenza tipizzata e verifica, le risultanze confutate e il gate. Leggere il documento invece di fare scraping dei corpi di revisione. |
 | **Sei sub-skill** (v3.1.1) | `address-review` si aggiunge al router: una sola invocazione applica, fa commit, pusha e riarma il revisore. |
+| **Il ciclo conosce la CI** (v3.2.0, v3.2.2) | `address-review` legge anche i log dei workflow falliti e li corregge nello stesso passaggio consentito, aggiorna un branch rimasto indietro rispetto alla base e arma una PR su cui il revisore non è mai stato eseguito (un semplice «loop the review» punta alla PR aperta del branch corrente). |
 | **Ensemble opzionale** (v3.0.0) | Le gambe read-only `mode: emit` più un job `aggregate` verificano una volta le risultanze consolidate e pubblicano una sola revisione. |
 | **`@v2` continua a funzionare** | La linea v2 è congelata su `release/v2` con sei mesi di manutenzione di sicurezza e catalogo. v3 è la raccomandazione, mai una migrazione forzata. |
 
