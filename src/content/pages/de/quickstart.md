@@ -205,7 +205,7 @@ design-system) und bieten Sie jedes als explizites Opt-in an. Ein Repository ist
 mit **null** optionalen Addons vollständig konform — installieren Sie diese niemals automatisch.
 
 - **Devcontainer-Unterstützung** — ein reproduzierbarer, isolierter Dev-Container mit persistenter AI-CLI-Authentifizierung.
-- **Dailybot-Integration** — vier Lifecycle-Events (Kickoff, bedeutende Aufgabe, Blockiert, Abschluss) als Best-Effort-Fortschrittsberichte für Teams, die Dailybot bereits nutzen, mit optionaler autonomer Hook-Durchsetzung (`dailybot-cli >= 3.7.0`). Die Installation der gepaarten Dailybot-Agenten-Skill (3.10.3) bietet zusätzlich Chat, Check-ins, Formular-Erstellung, KI-Abfrage, Per-Repo-API-Keys und mehr — das Addon verbindet lediglich die Berichterstattung mit der DWP-Ausführung. Die zentrale Methodik hat keine Dailybot-Abhängigkeit.
+- **Dailybot-Integration** — vier Lifecycle-Events (Kickoff, bedeutende Aufgabe, Blockiert, Abschluss) als Best-Effort-Fortschrittsberichte für Teams, die Dailybot bereits nutzen, mit optionaler autonomer Hook-Durchsetzung (`dailybot-cli >= 3.9.0`). Die Installation der gepaarten Dailybot-Agenten-Skill (3.23.2) bietet zusätzlich Chat, Check-ins, Formular-Erstellung, KI-Abfrage, Plan-Boards und -Aufgaben, Per-Repo-API-Keys und mehr — das Addon verbindet lediglich die Berichterstattung mit der DWP-Ausführung. Die zentrale Methodik hat keine Dailybot-Abhängigkeit.
 - **Dependency-Upgrade** — paketmanager-agnostische, chargenweise, validierte, rücknehmbare Upgrades. Wenn
  angenommen, installiert es den `/lib-upgrade`-Befehl.
 - **Design System** — optionale `docs/DESIGN.md` nur für Repositories mit einer erkannten Interface-Oberfläche

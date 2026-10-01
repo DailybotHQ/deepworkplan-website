@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Addon DWP opt-in: kết nối vòng đời kế hoạch với nhóm Dailybot, thực thi hook tùy chọn và skill agent Dailybot đầy đủ 3.10.3 (chat, check-in, biểu mẫu, ask AI và hơn thế nữa)."
+description: "Addon DWP opt-in: báo cáo vòng đời kế hoạch tới nhóm Dailybot, hook tùy chọn và skill agent Dailybot đầy đủ 3.23.2 (chat, biểu mẫu, Plan và hơn thế nữa)."
 kind: addon
 lang: vi
 order: 2
@@ -23,7 +23,7 @@ Phương pháp Deep Work Plan cốt lõi có **không** phụ thuộc Dailybot. 
 
 ## Addon này kết nối gì (cố ý hẹp)
 
-Addon DWP Dailybot **không** tái phát minh Dailybot. Nó kết nối thực thi kế hoạch với sub-skill dailybot **`report`** và tùy chọn commit hook harness. Mọi thứ khác — cài đặt, đồng ý, xác thực, phong cách viết — được **hoãn** sang [skill agent Dailybot](https://github.com/DailybotHQ/agent-skill) chính thức (hiện tại **3.10.3**).
+Addon DWP Dailybot **không** tái phát minh Dailybot. Nó kết nối thực thi kế hoạch với sub-skill dailybot **`report`** và tùy chọn commit hook harness. Mọi thứ khác — cài đặt, đồng ý, xác thực, phong cách viết — được **hoãn** sang [skill agent Dailybot](https://github.com/DailybotHQ/agent-skill) chính thức (hiện tại **3.23.2**).
 
 ### Bốn sự kiện vòng đời
 
@@ -40,7 +40,7 @@ Payload lấy từ lớp trạng thái kế hoạch (`state.json`) khi có: `com
 
 ### Thực thi hook tùy chọn
 
-Với `dailybot-cli >= 3.7.0`, addon **có thể** commit hook harness cấp repo (`dailybot hook session-start | activity | post-commit | stop | dismiss`) được hỗ trợ bởi sổ cái cục bộ theo repo. Harness nhắc agent ở cuối lượt khi sự kiện vòng đời bị bỏ lỡ — quan trọng cho phiên dài không giám sát mà hướng dẫn prompt suy yếu.
+Với `dailybot-cli >= 3.9.0`, addon **có thể** commit hook harness cấp repo (`dailybot hook session-start | activity | post-commit | stop | dismiss`) được hỗ trợ bởi sổ cái cục bộ theo repo. Harness nhắc agent ở cuối lượt khi sự kiện vòng đời bị bỏ lỡ — quan trọng cho phiên dài không giám sát mà hướng dẫn prompt suy yếu.
 
 Báo cáo vòng đời thành công **đặt lại** sổ cái hook, nên hai lớp không bao giờ báo cáo trùng. Lệnh hook chỉ đọc trạng thái cục bộ và luôn thoát `0`.
 
@@ -69,10 +69,10 @@ Addon **đề xuất** đường cài đặt; skill Dailybot sở hữu đồng 
 
 | Thành phần | Lệnh / đường dẫn |
 |-----------|----------------|
-| **Skill agent Dailybot** (khuyến nghị) | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Skill agent Dailybot** (khuyến nghị) | `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot -y` |
 | **Cập nhật skill hiện có** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Dailybot CLI** (tối thiểu `>= 3.7.0`) | Skill cài ở lần dùng đầu qua `shared/auth.md` đã xác minh; hoặc `pip install 'dailybot-cli>=3.7.0'`, Homebrew hoặc trình cài đã xác minh checksum tại [cli.dailybot.com](https://cli.dailybot.com) |
+| **Dailybot CLI** (cơ sở của gói `>= 3.9.0`; Plan cần `>= 3.25.0`) | Skill cài ở lần dùng đầu qua `shared/auth.md` đã xác minh; hoặc `pip install 'dailybot-cli>=3.9.0'`, Homebrew hoặc trình cài đã xác minh checksum tại [cli.dailybot.com](https://cli.dailybot.com) |
 
 Kiểm tra phiên bản: `dailybot --version` và `dailybot version --check`. Nâng cấp: `dailybot upgrade`.
 
@@ -82,13 +82,13 @@ Addon này **không bao giờ** nhắc email, OTP hay API key và **không bao g
 
 - `dailybot login` (email OTP), hoặc
 - `DAILYBOT_API_KEY` / `dailybot config key=...`, hoặc
-- một file khóa theo repo `.dailybot/env.json` opt-in, được gitignore (`dailybot env add/use`, CLI `>= 3.7.0`) để một nhà phát triển có thể đăng nhập vào các tổ chức khác nhau trong các repo khác nhau.
+- một file khóa theo repo `.dailybot/env.json` opt-in, được gitignore (`dailybot env add/use`, CLI `>= 3.9.0`) để một nhà phát triển có thể đăng nhập vào các tổ chức khác nhau trong các repo khác nhau.
 
 Phân giải xác thực theo **Bearer-first**: token phiên được ưu tiên, với việc thử lại Bearer→API-key minh bạch khi gặp `401`/`403` nên token cũ không bao giờ chặn một khóa hợp lệ. Nếu xác thực bị từ chối hoặc không có, báo cáo bị bỏ qua im lặng — công việc tiếp tục.
 
-## Skill Dailybot đi kèm — 14 khả năng (3.10.3)
+## Skill Dailybot đi kèm — 17 khả năng (3.23.2)
 
-Cài skill agent Dailybot mang lại nhiều hơn nhiều so với addon DWP kết nối. Gói skill chính thức (skill **3.10.3**, CLI cơ sở **>= 3.7.0**, bản publish hiện tại **3.7.3**) mở **14 sub-skill phối hợp**:
+Cài skill agent Dailybot mang lại nhiều hơn nhiều so với addon DWP kết nối. Gói skill chính thức (skill **3.23.2**, CLI cơ sở **>= 3.9.0**, Plan **>= 3.25.0**, bản publish CLI hiện tại **3.25.2**) mở **17 sub-skill phối hợp**:
 
 | Sub-skill | Chức năng |
 |-----------|--------------|
@@ -103,9 +103,12 @@ Cài skill agent Dailybot mang lại nhiều hơn nhiều so với addon DWP k�
 | **Kudos** | Ghi nhận đồng đội hoặc cả nhóm; duyệt feed ghi nhận, feed org, wall of fame |
 | **Teams** | Liệt kê nhóm, xem thành viên, phân giải tên thành UUID; `me`, `org`, hồ sơ người dùng |
 | **Forms** | Liệt kê (nay **theo phạm vi org** mặc định, với `--mine` và `--owner` để thu hẹp), gửi, cập nhật, chuyển trạng thái biểu mẫu; **author** biểu mẫu (trạng thái workflow, quyền, ChatOps); phân trang, tìm kiếm và lọc theo ngày |
-| **Workflows** | Đọc workflow org (`workflow list` / `workflow get`; chỉ đọc) |
+| **Workflows** | Đọc và kích hoạt workflow org (`workflow list` / `workflow get` / `workflow trigger`); tạo hoặc sửa workflow vẫn thực hiện trên ứng dụng web |
 | **Report channels** | Khám phá UUID kênh cho biểu mẫu hoặc check-in |
-| **Per-repo API keys** | Quản lý `.dailybot/env.json` — một file opt-in, được gitignore chứa API key + URL theo môi trường (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.7.0`) |
+| **Per-repo API keys** | Quản lý `.dailybot/env.json` — một file opt-in, được gitignore chứa API key + URL theo môi trường, với profile `live` và `testing` (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.9.0`) |
+| **Nhãn tổ chức** | Vòng đời đầy đủ của nhãn org (`dailybot label list / create / update / archive / delete / assign / batch`) — hệ phân loại dùng chung cho biểu mẫu, check-in và workflow (CLI `>= 3.9.0`) |
+| **Featured stars** | Sao riêng của từng người dùng trên biểu mẫu, tự động hóa và check-in (`dailybot featured`) |
+| **Plan** (Beta) | Board, tác vụ, dự án, mục tiêu và cột mốc dưới `dailybot plan`: đọc workspace, tạo và chuyển công việc, gán người phụ trách, bình luận, đăng cập nhật dự án và làm việc trên tác vụ được giao cho agent (`task brief`). Cần CLI `>= 3.25.0` |
 
 **Addon DWP chỉ kết nối `report` vào thực thi kế hoạch.** Gọi skill Dailybot trực tiếp cho mọi thứ khác — ví dụ đăng tóm tắt deploy lên `#releases`, hoàn thành standup hoặc nhờ AI Dailybot tóm tắt xu hướng check-in.
 

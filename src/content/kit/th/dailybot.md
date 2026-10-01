@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "DWP addon แบบ opt-in: เชื่อม lifecycle ของแผนกับทีม Dailybot การบังคับใช้ hook แบบเลือกได้ และ Dailybot agent skill 3.10.3 ครบชุด (แชท check-in ฟอร์ม Ask AI และอื่นๆ)"
+description: "DWP addon แบบ opt-in: รายงาน lifecycle ของแผนไปยังทีม Dailybot การบังคับใช้ hook แบบเลือกได้ และ Dailybot agent skill 3.23.2 ครบชุด (แชท ฟอร์ม Plan และอื่นๆ)"
 kind: addon
 lang: th
 order: 2
@@ -23,7 +23,7 @@ order: 2
 
 ## สิ่งที่ addon นี้เชื่อม (ออกแบบให้แคบโดยเจตนา)
 
-DWP Dailybot addon **ไม่สร้าง** Dailybot ใหม่ มันเชื่อมการดำเนินแผนกับ sub-skill dailybot **`report`** และอาจ commit hook ของ harness ส่วนอื่น — การติดตั้ง ความยินยอม authentication สไตล์การเขียน — **มอบหมาย** ให้ [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) อย่างเป็นทางการ (ปัจจุบัน **3.10.3**)
+DWP Dailybot addon **ไม่สร้าง** Dailybot ใหม่ มันเชื่อมการดำเนินแผนกับ sub-skill dailybot **`report`** และอาจ commit hook ของ harness ส่วนอื่น — การติดตั้ง ความยินยอม authentication สไตล์การเขียน — **มอบหมาย** ให้ [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) อย่างเป็นทางการ (ปัจจุบัน **3.23.2**)
 
 ### สี่เหตุการณ์ lifecycle
 
@@ -40,7 +40,7 @@ Payload มาจากชั้น state ของแผน (`state.json`) เ�
 
 ### การบังคับใช้ hook แบบเลือกได้
 
-ด้วย `dailybot-cli >= 3.7.0` addon **อาจ** commit hook ของ harness ระดับรีโพ (`dailybot hook session-start | activity | post-commit | stop | dismiss`) สนับสนุนโดย ledger ต่อรีโพในเครื่อง Harness เตือนเอเจนต์ปลายเทิร์นเมื่อพลาดเหตุการณ์ lifecycle — สำคัญสำหรับเซสชันยาวที่ไม่มีคนดูแล ซึ่งคำสั่งใน prompt จางลง
+ด้วย `dailybot-cli >= 3.9.0` addon **อาจ** commit hook ของ harness ระดับรีโพ (`dailybot hook session-start | activity | post-commit | stop | dismiss`) สนับสนุนโดย ledger ต่อรีโพในเครื่อง Harness เตือนเอเจนต์ปลายเทิร์นเมื่อพลาดเหตุการณ์ lifecycle — สำคัญสำหรับเซสชันยาวที่ไม่มีคนดูแล ซึ่งคำสั่งใน prompt จางลง
 
 รายงาน lifecycle สำเร็จ **รีเซ็ต** ledger ของ hook ดังนั้นสองชั้นไม่รายงานซ้ำ คำสั่ง hook อ่านเฉพาะ state ในเครื่องและจบด้วย `0` เสมอ
 
@@ -69,10 +69,10 @@ Addon **เสนอ** เส้นทางติดตั้ง skill Dailybot
 
 | ส่วนประกอบ | คำสั่ง / path |
 |-----------|----------------|
-| **Dailybot agent skill** (แนะนำ) | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Dailybot agent skill** (แนะนำ) | `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot -y` |
 | **อัปเดต skill ที่มี** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Dailybot CLI** (ขั้นต่ำ `>= 3.7.0`) | ติดตั้งโดย skill ครั้งแรกผ่าน `shared/auth.md`; หรือ `pip install 'dailybot-cli>=3.7.0'` Homebrew หรือ installer ที่ตรวจ checksum ที่ [cli.dailybot.com](https://cli.dailybot.com) |
+| **Dailybot CLI** (baseline ของชุด `>= 3.9.0`; Plan ต้องใช้ `>= 3.25.0`) | ติดตั้งโดย skill ครั้งแรกผ่าน `shared/auth.md`; หรือ `pip install 'dailybot-cli>=3.9.0'` Homebrew หรือ installer ที่ตรวจ checksum ที่ [cli.dailybot.com](https://cli.dailybot.com) |
 
 ตรวจเวอร์ชัน: `dailybot --version` และ `dailybot version --check` อัปเกรด: `dailybot upgrade`
 
@@ -82,13 +82,13 @@ Addon นี้ **ไม่** ถาม email OTP หรือ API keys แล�
 
 - `dailybot login` (email OTP) หรือ
 - `DAILYBOT_API_KEY` / `dailybot config key=...` หรือ
-- ไฟล์คีย์ต่อรีโพ `.dailybot/env.json` แบบ opt-in ที่ถูก gitignore (`dailybot env add/use`, CLI `>= 3.7.0`) เพื่อให้นักพัฒนาลงชื่อเข้าใช้ org ต่างกันในรีโพต่างกันได้
+- ไฟล์คีย์ต่อรีโพ `.dailybot/env.json` แบบ opt-in ที่ถูก gitignore (`dailybot env add/use`, CLI `>= 3.9.0`) เพื่อให้นักพัฒนาลงชื่อเข้าใช้ org ต่างกันในรีโพต่างกันได้
 
 การแก้ปัญหา auth เป็นแบบ **Bearer-first**: session token มีความสำคัญก่อน พร้อม retry แบบโปร่งใสจาก Bearer→API-key เมื่อเจอ `401`/`403` เพื่อไม่ให้ token ที่หมดอายุบล็อกคีย์ที่ใช้ได้ หาก auth ถูกปฏิเสธหรือไม่พร้อม การรายงานจะข้ามเงียบๆ — งานดำเนินต่อ
 
-## Dailybot skill คู่กัน — 14 ความสามารถ (3.10.3)
+## Dailybot skill คู่กัน — 17 ความสามารถ (3.23.2)
 
-การติดตั้ง Dailybot agent skill ได้มากกว่าที่ DWP addon เชื่อม ชุด skill อย่างเป็นทางการ (skill **3.10.3** CLI baseline **>= 3.7.0** publish ปัจจุบัน **3.7.3**) เปิด **14 sub-skill ที่ประสานกัน**:
+การติดตั้ง Dailybot agent skill ได้มากกว่าที่ DWP addon เชื่อม ชุด skill อย่างเป็นทางการ (skill **3.23.2** CLI baseline **>= 3.9.0** Plan **>= 3.25.0** publish CLI ปัจจุบัน **3.25.2**) เปิด **17 sub-skill ที่ประสานกัน**:
 
 | Sub-skill | ทำอะไร |
 |-----------|--------------|
@@ -103,9 +103,12 @@ Addon นี้ **ไม่** ถาม email OTP หรือ API keys แล�
 | **Kudos** | ยกย่องเพื่อนร่วมทีมหรือทั้งทีม; เรียกดู recognition feed org feed wall of fame |
 | **Teams** | แสดงรายการทีม ตรวจสมาชิก แปลงชื่อเป็น UUID; `me`, `org`, โปรไฟล์ผู้ใช้ |
 | **Forms** | แสดงรายการ (ตอนนี้ **org-scoped** โดยค่าเริ่มต้น พร้อม `--mine` และ `--owner` เพื่อจำกัด) submit อัปเดต transition ฟอร์ม; **เขียน** ฟอร์ม (สถานะ workflow สิทธิ์ ChatOps); pagination การค้นหา และตัวกรองวันที่ |
-| **Workflows** | อ่าน org workflows (`workflow list` / `workflow get`; read-only) |
+| **Workflows** | อ่านและ trigger org workflows (`workflow list` / `workflow get` / `workflow trigger`); การสร้างหรือแก้ไข workflow ยังทำในเว็บแอป |
 | **Report channels** | ค้นหา UUID ช่องสำหรับฟอร์มหรือ check-in |
-| **Per-repo API keys** | จัดการ `.dailybot/env.json` — ไฟล์ opt-in ที่ถูก gitignore ของ API key + URL ต่อ environment (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.7.0`) |
+| **Per-repo API keys** | จัดการ `.dailybot/env.json` — ไฟล์ opt-in ที่ถูก gitignore ของ API key + URL ต่อ environment พร้อมโปรไฟล์ `live` และ `testing` (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.9.0`) |
+| **Organization labels** | วงจรชีวิตเต็มรูปแบบของ label ระดับองค์กร (`dailybot label list / create / update / archive / delete / assign / batch`) — taxonomy ที่ใช้ร่วมกันสำหรับฟอร์ม check-in และ workflow (CLI `>= 3.9.0`) |
+| **Featured stars** | ดาวส่วนตัวต่อผู้ใช้บนฟอร์ม automation และ check-in (`dailybot featured`) |
+| **Plan** (Beta) | บอร์ด งาน โปรเจกต์ เป้าหมาย และ milestone ภายใต้ `dailybot plan`: อ่าน workspace สร้างและย้ายงาน กำหนดผู้รับผิดชอบ คอมเมนต์ โพสต์อัปเดตโปรเจกต์ และทำงานที่มอบหมายให้เอเจนต์ (`task brief`) ต้องใช้ CLI `>= 3.25.0` |
 
 **DWP addon เชื่อมเฉพาะ `report` เข้ากับการดำเนินแผน** เรียก skill Dailybot โดยตรงสำหรับอย่างอื่น — เช่น โพสต์สรุป deploy ไป `#releases` ทำ standup หรือขอให้ AI Dailybot สรุปแนวโน้ม check-in
 

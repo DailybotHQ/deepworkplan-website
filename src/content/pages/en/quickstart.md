@@ -228,7 +228,7 @@ offer each as an explicit opt-in. A repository is fully conformant with **zero**
 never auto-install those.
 
 - **Devcontainer support** — a reproducible, isolated dev container with persistent AI-CLI auth.
-- **Dailybot integration** — four lifecycle events (kickoff, significant task, blocked, completion) as best-effort progress reports for teams already using Dailybot, with optional autonomous hook enforcement (`dailybot-cli >= 3.7.0`). Installing the paired Dailybot agent skill (3.10.3) also exposes chat, check-ins, forms authoring, ask AI, per-repo API keys, and more — the addon wires only reporting into DWP execution. The core methodology has zero Dailybot dependency.
+- **Dailybot integration** — four lifecycle events (kickoff, significant task, blocked, completion) as best-effort progress reports for teams already using Dailybot, with optional autonomous hook enforcement (`dailybot-cli >= 3.9.0`). Installing the paired Dailybot agent skill (3.23.2) also exposes chat, check-ins, forms authoring, ask AI, Plan boards and tasks, per-repo API keys, and more — the addon wires only reporting into DWP execution. The core methodology has zero Dailybot dependency.
 - **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades. When
  accepted, it installs the `/lib-upgrade` command.
 - **Design system** — opt-in `docs/DESIGN.md` for repos with a detected interface surface only

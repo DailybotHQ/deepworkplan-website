@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Опційний DWP-аддон: підключення життєвого циклу плану до команди Dailybot, опційне примусове виконання хуків і повний агентський скіл Dailybot 3.10.3 (чат, чек-іни, форми, Ask AI тощо)."
+description: "Опційний DWP-аддон: звітування про цикл плану команді Dailybot, примусові хуки й повний агентський скіл Dailybot 3.23.2 (чат, форми, Plan тощо)."
 kind: addon
 lang: uk
 order: 2
@@ -23,7 +23,7 @@ order: 2
 
 ## Що підключає цей аддон (навмисно вузько)
 
-DWP-аддон Dailybot **не перевинаходжує** Dailybot. Він підключає виконання плану до sub-skill dailybot **`report`** і опційно комітить хуки harness. Усе інше — встановлення, згода, автентифікація, стиль написання — **делегується** офіційному [агентському скілу Dailybot](https://github.com/DailybotHQ/agent-skill) (зараз **3.10.3**).
+DWP-аддон Dailybot **не перевинаходжує** Dailybot. Він підключає виконання плану до sub-skill dailybot **`report`** і опційно комітить хуки harness. Усе інше — встановлення, згода, автентифікація, стиль написання — **делегується** офіційному [агентському скілу Dailybot](https://github.com/DailybotHQ/agent-skill) (зараз **3.23.2**).
 
 ### Чотири події життєвого циклу
 
@@ -40,7 +40,7 @@ Payload походять із шару стану плану (`state.json`), я�
 
 ### Опційне примусове виконання хуків
 
-З `dailybot-cli >= 3.7.0` аддон **може** закомітити хуки harness на рівні репозиторію (`dailybot hook session-start | activity | post-commit | stop | dismiss`), підтримані локальним реєстром per-repo. Harness нагадує агенту в кінці ходу, коли подію життєвого циклу пропущено — критично для довгих незахищених сесій, де інструкції промпту слабшають.
+З `dailybot-cli >= 3.9.0` аддон **може** закомітити хуки harness на рівні репозиторію (`dailybot hook session-start | activity | post-commit | stop | dismiss`), підтримані локальним реєстром per-repo. Harness нагадує агенту в кінці ходу, коли подію життєвого циклу пропущено — критично для довгих незахищених сесій, де інструкції промпту слабшають.
 
 Успішний звіт життєвого циклу **скидає** реєстр хуків, тож два шари ніколи не дублюють звіти. Команди хуків читають лише локальний стан і завжди завершуються кодом `0`.
 
@@ -69,10 +69,10 @@ Payload походять із шару стану плану (`state.json`), я�
 
 | Компонент | Команда / шлях |
 |-----------|----------------|
-| **Агентський скіл Dailybot** (рекомендовано) | `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y` |
+| **Агентський скіл Dailybot** (рекомендовано) | `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot -y` |
 | **Оновлення наявного скілу** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
-| **Dailybot CLI** (мінімум `>= 3.7.0`) | Встановлюється скілом при першому використанні через `shared/auth.md`; або `pip install 'dailybot-cli>=3.7.0'`, Homebrew чи installer з перевіркою checksum на [cli.dailybot.com](https://cli.dailybot.com) |
+| **Dailybot CLI** (базова версія пакета `>= 3.9.0`; Plan потребує `>= 3.25.0`) | Встановлюється скілом при першому використанні через `shared/auth.md`; або `pip install 'dailybot-cli>=3.9.0'`, Homebrew чи installer з перевіркою checksum на [cli.dailybot.com](https://cli.dailybot.com) |
 
 Перевірка версій: `dailybot --version` і `dailybot version --check`. Оновлення: `dailybot upgrade`.
 
@@ -82,13 +82,13 @@ Payload походять із шару стану плану (`state.json`), я�
 
 - `dailybot login` (email OTP), або
 - `DAILYBOT_API_KEY` / `dailybot config key=...`, або
-- опційний, доданий до gitignore файл ключів per-repo `.dailybot/env.json` (`dailybot env add/use`, CLI `>= 3.7.0`), щоб розробник міг бути залогінений у різні організації в різних репозиторіях.
+- опційний, доданий до gitignore файл ключів per-repo `.dailybot/env.json` (`dailybot env add/use`, CLI `>= 3.9.0`), щоб розробник міг бути залогінений у різні організації в різних репозиторіях.
 
 Розвʼязання auth — **Bearer-first**: токен сесії має пріоритет, із прозорим повтором Bearer→API-key на `401`/`403`, тож застарілий токен ніколи не блокує дійсний ключ. Якщо auth відхилено або недоступно, звітування тихо пропускається — робота триває.
 
-## Парний скіл Dailybot — 14 можливостей (3.10.3)
+## Парний скіл Dailybot — 17 можливостей (3.23.2)
 
-Встановлення агентського скілу Dailybot дає набагато більше, ніж підключає DWP-аддон. Офіційний пакет скілів (скіл **3.10.3**, базовий CLI **>= 3.7.0**, поточна публікація **3.7.3**) надає **14 координованих sub-skill**:
+Встановлення агентського скілу Dailybot дає набагато більше, ніж підключає DWP-аддон. Офіційний пакет скілів (скіл **3.23.2**, базовий CLI **>= 3.9.0**, Plan **>= 3.25.0**, поточна публікація CLI **3.25.2**) надає **17 координованих sub-skill**:
 
 | Sub-skill | Що робить |
 |-----------|--------------|
@@ -103,9 +103,12 @@ Payload походять із шару стану плану (`state.json`), я�
 | **Kudos** | Визнання колег або цілих команд; перегляд recognition feed, org feed, wall of fame |
 | **Teams** | Список команд, перегляд учасників, resolve імен у UUID; `me`, `org`, профілі користувачів |
 | **Forms** | Список (тепер **org-scoped** за замовчуванням, з `--mine` і `--owner` для звуження), submit, update, transition форм; **авторство** форм (стани workflow, дозволи, ChatOps); пагінація, пошук і фільтри за датою |
-| **Workflows** | Читання org workflows (`workflow list` / `workflow get`; лише read-only) |
+| **Workflows** | Читання та запуск org workflows (`workflow list` / `workflow get` / `workflow trigger`); створення й редагування workflows залишається у веб-застосунку |
 | **Report channels** | Виявлення UUID каналів для форм або check-in |
-| **Per-repo API keys** | Керування `.dailybot/env.json` — опційним, доданим до gitignore файлом API keys + URL на кожне середовище (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.7.0`) |
+| **Per-repo API keys** | Керування `.dailybot/env.json` — опційним, доданим до gitignore файлом API keys + URL на кожне середовище, з профілями `live` і `testing` (`dailybot env add / use / show / list / remove / off / on`, CLI `>= 3.9.0`) |
+| **Мітки організації** | Повний життєвий цикл міток організації (`dailybot label list / create / update / archive / delete / assign / batch`) — спільна таксономія для форм, check-in і workflows (CLI `>= 3.9.0`) |
+| **Featured stars** | Приватні зірки користувача на формах, automations і check-in (`dailybot featured`) |
+| **Plan** (Beta) | Дошки, завдання, проєкти, цілі та віхи під `dailybot plan`: читання workspace, створення й переміщення роботи, призначення власників, коментарі, публікація оновлень проєктів і робота над завданням, переданим агенту (`task brief`). Потрібен CLI `>= 3.25.0` |
 
 **DWP-аддон підключає лише `report` до виконання плану.** Викликайте скіл Dailybot безпосередньо для всього іншого — наприклад, опублікуйте підсумок деплою в `#releases`, завершіть standup або попросіть AI Dailybot підсумувати тренди check-in.
 
