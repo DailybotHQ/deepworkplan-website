@@ -7,6 +7,16 @@ services:
     build:
       context: .
       dockerfile: ./dwpwebsite/Dockerfile
+      # Coding CLIs are opt-in. Example:
+      #   docker compose build --build-arg INSTALL_CLAUDE_CLI=true --build-arg INSTALL_CODEX_CLI=true
+      args:
+        INSTALL_CLAUDE_CLI: ${INSTALL_CLAUDE_CLI:-false}
+        INSTALL_CURSOR_CLI: ${INSTALL_CURSOR_CLI:-false}
+        INSTALL_CODEX_CLI: ${INSTALL_CODEX_CLI:-false}
+        INSTALL_PI_CLI: ${INSTALL_PI_CLI:-false}
+        INSTALL_OPENCODE_CLI: ${INSTALL_OPENCODE_CLI:-false}
+        INSTALL_CLINE_CLI: ${INSTALL_CLINE_CLI:-false}
+        INSTALL_GROK_CLI: ${INSTALL_GROK_CLI:-false}
     working_dir: /app
     volumes:
       - ../..:/app
@@ -22,21 +32,28 @@ services:
       - pi_data:/home/node/.pi_data
       - herdr_data:/home/node/.herdr_data
       - grok_data:/home/node/.grok_data
+      # Host SSH (read-only) — peers live under config.d/herdr-peers when present
       - ${HOME}/.ssh:/home/node/.ssh_host:ro
+      # Optional Herdr catalog from the host (read-only). Absent mount is fine.
+      - ${HOME}/.local/state/herdr/client:/home/node/.herdr_client_host:ro
       - ${HOME}/.gitconfig:/home/node/.gitconfig:ro
     ports:
-      # Use 5555 on host to avoid conflict with macOS AirPlay Receiver (port 5555)
+      # Use 5555 on host to avoid conflict with macOS AirPlay Receiver on 5000
       - '5555:5555'
-      # SSH for herdr --remote (avoid host:2222 — Cursor often binds 127.0.0.1:2222)
-      - '22022:22'
+      # SSH for herdr --remote. 22022 is this repo's primary.
+      # Avoid host:2222 — Cursor often binds 127.0.0.1:2222 on macOS.
+      # Override with HERDR_SSH_HOST_PORT if 22022 is busy.
+      - '127.0.0.1:${HERDR_SSH_HOST_PORT:-22022}:22'
     env_file:
       - dwpwebsite/.env
     environment:
       - DOCKER_DEV_ENV=vscode
       # Herdr, SSH, and agent CLIs spawn $SHELL (or /bin/sh if unset). Wrappers
-      # like claudex-glm live in docker/custom_commands.sh as bash functions,
+      # like claude-glm live in docker/custom_commands.sh as bash functions,
       # so the default shell must be bash or those commands are "not found".
       - SHELL=/bin/bash
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command:
       - /bin/sh
       - -c
@@ -53,5 +70,5 @@ volumes:
   cline_data: {}         # Cline CLI session/auth/config (persisted at ~/.cline)
   opencode_data: {}      # OpenCode config + share (symlinked to ~/.config/opencode, ~/.local/share/opencode)
   pi_data: {}            # Pi coding agent config/sessions (symlinked to ~/.pi)
-  herdr_data: {}         # Herdr config/logs (symlinked to ~/.config/herdr)
+  herdr_data: {}         # Herdr config/logs + SSH host keys (symlinked to ~/.config/herdr)
   grok_data: {}          # Grok/xAI CLI config + binary (symlinked to ~/.grok, ~/.local/bin/grok)

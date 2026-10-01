@@ -25,7 +25,7 @@ Dalam ledakan singkat, agen coding mengesankan. Serahkan misi jangka panjang —
 
 Deep Work Plan menjawabnya dengan pengembangan berbasis spesifikasi: rencana yang tahan lama, tugas atomik, dan gerbang verifikasi yang harus dilalui agen. Pekerjaan tetap dapat diverifikasi — dan agen mana pun dapat melanjutkannya lintas sesi.
 
-Dan karena konteks adalah sumber daya paling langka bagi agen Anda, harness dirancang untuk menjaga beban instruksinya sendiri tetap kecil dan dapat diaudit: instruksi dimuat progresif, verifikasi hanya menyentuh yang berubah, dan setiap tugas belajar secara lokal. Beban per alur diukur dalam byte dan dipublikasikan pada setiap rilis — rilis terbaru memangkas alur eksekusi 45,7% dan alur lanjut 67,5%. Rencana itu sendiri berskala dengan cara yang sama: rencana Lite untuk perbaikan berbatas, rencana Full untuk pekerjaan yang berlangsung berjam-jam — format selalu mengikuti cakupan pekerjaan, bukan sebaliknya.
+Konteks adalah sumber daya agen Anda yang paling langka. Karena itu, harness menjaga instruksinya sendiri tetap ringkas dan dapat diaudit. Instruksi dimuat secara bertahap, validasi berfokus pada perubahan, dan setiap tugas menerima konteks yang relevan. Kami menerbitkan ukuran instruksi tiap alur dalam byte agar bebannya terlihat. Rencana juga menyesuaikan bentuk dengan pekerjaan: Lite untuk perbaikan terbatas dan Full untuk pekerjaan yang berlangsung berjam-jam. Format mengikuti cakupan pekerjaan sehingga proses tetap fokus dan mudah ditelusuri.
 ---
 
 ## Manusia memegang kemudi. Agent mengeksekusi.

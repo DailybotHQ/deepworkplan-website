@@ -24,7 +24,7 @@ Um plano é um diretório em `.dwp/plans/` chamado `PLAN_001_<slug>/`. Ele cont�
 - `PROGRESS.md` — um registro contínuo da execução.
 
 
-O pacote 6.x cria planos v6 por padrão. Os planos existentes mantêm a geração registrada; a migração exige uma solicitação explícita. O pacote atual 6.x cria planos v6 por padrão, com slugs de 2–5 palavras. O fluxo v5 mantido usa 2–4 palavras porque seus esquemas congelados contam o ID numérico como uma palavra. Os planos existentes mantêm a geração registrada e nunca são migrados silenciosamente. Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v6 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.
+O pacote atual 6.x cria planos v6 por padrão, com slugs de 2–5 palavras. O fluxo v5 mantido usa 2–4 palavras porque seus esquemas congelados contam o ID numérico como uma palavra. Os planos existentes mantêm a geração registrada e nunca são migrados silenciosamente. Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v6 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.
 
 ## Estrutura do arquivo de tarefa
 

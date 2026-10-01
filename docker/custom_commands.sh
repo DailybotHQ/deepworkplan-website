@@ -114,7 +114,11 @@ function fix() {
 	corepack pnpm run biome:fix
 }
 
-function test() {
+# Named run_tests — never `test`. A function named test shadows the bash
+# builtin, so every new login pane (herdr workspace) that later runs
+# `test -f` / `test -n` actually launches `pnpm run test`.
+unset -f test 2>/dev/null || true
+function run_tests() {
   print.success "Running tests..."
 	corepack pnpm run test
 }
@@ -192,7 +196,7 @@ function codecheck() {
 		print.error "⚠️ WebP generation failed..."
 		return 1
 	fi
-	test
+	run_tests
 	if [ $? != 0 ]; then
 		print.error "⚠️ Tests failed..."
 		return 1
@@ -219,12 +223,12 @@ function codexx() {
 		-c|--continue)
 			print.success "Continuing most recent Codex session..."
 			shift
-			command codex resume --last --dangerously-bypass-approvals-and-sandbox "$@"
+			command codex resume --last --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			;;
 		-l|--last)
 			print.success "Resuming last Codex session..."
 			shift
-			command codex resume --last --dangerously-bypass-approvals-and-sandbox "$@"
+			command codex resume --last --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			;;
 		-r|--resume)
 			shift
@@ -233,16 +237,16 @@ function codexx() {
 				local session_id="$1"
 				shift
 				print.success "Resuming Codex session: $session_id..."
-				command codex resume "$session_id" --dangerously-bypass-approvals-and-sandbox "$@"
+				command codex resume "$session_id" --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			else
 				# Interactive session selection
 				print.success "Selecting Codex session to resume..."
-				command codex resume --all --dangerously-bypass-approvals-and-sandbox "$@"
+				command codex resume --all --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			fi
 			;;
 		*)
 			print.success "Starting new Codex session with full permissions..."
-			command codex --dangerously-bypass-approvals-and-sandbox "$@"
+			command codex --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			;;
 	esac
 }
@@ -416,7 +420,7 @@ function codex-azure() {
 		-l|--last)
 			print.success "Resuming last Codex session (Azure Foundry: ${default_model})..."
 			shift
-			codex -p azure resume --last --dangerously-bypass-approvals-and-sandbox "$@"
+			codex -p azure resume --last --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			;;
 		-r|--resume)
 			shift
@@ -424,15 +428,15 @@ function codex-azure() {
 				local session_id="$1"
 				shift
 				print.success "Resuming Codex session (Azure Foundry): $session_id..."
-				codex -p azure resume "$session_id" --dangerously-bypass-approvals-and-sandbox "$@"
+				codex -p azure resume "$session_id" --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			else
 				print.success "Selecting Codex session to resume (Azure Foundry)..."
-				codex -p azure resume --all --dangerously-bypass-approvals-and-sandbox "$@"
+				codex -p azure resume --all --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			fi
 			;;
 		*)
 			print.success "Starting Codex with Azure Foundry (${daily} / ${reasoning}, default ${default_model}) in full-permissions mode..."
-			codex -p azure --dangerously-bypass-approvals-and-sandbox "$@"
+			codex -p azure --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			;;
 	esac
 }
@@ -463,7 +467,7 @@ function _codex_sync_glm_config() {
 	local catalog_file="${codex_home}/glm-models.json"
 	local model_opus="${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3}"
 	local model_sonnet="${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3}"
-	local model_haiku="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3-flash}"
+	local model_haiku="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3}"
 	local default_model="${ZAI_CODEX_DEFAULT_MODEL:-${model_sonnet}}"
 	# Official Codex Responses endpoint (not the OpenAI-compatible Coding Plan URL).
 	local base_url="${ZAI_CODEX_BASE_URL:-https://api.z.ai/api/v1}"
@@ -561,7 +565,7 @@ function codex-glm() {
 	_codex_sync_glm_config || return 1
 	local opus="${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3}"
 	local sonnet="${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3}"
-	local haiku="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3-flash}"
+	local haiku="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3}"
 	local default_model="${ZAI_CODEX_DEFAULT_MODEL:-${sonnet}}"
 
 	# Ensure the env_key referenced by glm.config.toml is present in this process.
@@ -571,7 +575,7 @@ function codex-glm() {
 		-l|--last)
 			print.success "Resuming last Codex session (Z.AI GLM: ${default_model})..."
 			shift
-			codex -p glm resume --last --dangerously-bypass-approvals-and-sandbox "$@"
+			codex -p glm resume --last --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			;;
 		-r|--resume)
 			shift
@@ -579,15 +583,15 @@ function codex-glm() {
 				local session_id="$1"
 				shift
 				print.success "Resuming Codex session (Z.AI GLM): $session_id..."
-				codex -p glm resume "$session_id" --dangerously-bypass-approvals-and-sandbox "$@"
+				codex -p glm resume "$session_id" --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			else
 				print.success "Selecting Codex session to resume (Z.AI GLM)..."
-				codex -p glm resume --all --dangerously-bypass-approvals-and-sandbox "$@"
+				codex -p glm resume --all --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			fi
 			;;
 		*)
 			print.success "Starting Codex with Z.AI GLM (${opus} / ${sonnet} / ${haiku}, default ${default_model}) in full-permissions mode..."
-			codex -p glm --dangerously-bypass-approvals-and-sandbox "$@"
+			codex -p glm --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			;;
 	esac
 }
@@ -633,6 +637,8 @@ function claudex() {
 # Claude Code via Z.AI GLM Coding Plan (does not change default `claude` / Anthropic auth).
 # Requires ZAI_CODING_API_KEY in docker/local/dwpwebsite/.env (survives rebuilds).
 # Model aliases (Opus/Sonnet/Haiku) are remapped to GLM only for this process — not in settings.json.
+# Z.AI always wins: a preset ANTHROPIC_API_KEY is unset for the wrapped process,
+# so /status shows the Z.AI endpoint (ANTHROPIC_BASE_URL) and auth token.
 # Docs: https://docs.z.ai/devpack/quick-start · https://docs.z.ai/devpack/latest-model
 # ================================
 function _zai_coding_env_or_die() {
@@ -647,33 +653,40 @@ function _zai_coding_env_or_die() {
 }
 
 # Build env for a single Claude Code invocation against Z.AI (process-scoped only).
+# ANTHROPIC_API_KEY (exported container-wide from the compose env_file) would take
+# precedence over ANTHROPIC_AUTH_TOKEN in Claude Code, sending the Anthropic key to
+# the Z.AI endpoint and making /status report API-key auth. A subshell unsets it so
+# the Z.AI auth token is the only credential the claude process sees.
 function _zai_claude_run() {
 	local -a claude_args=("$@")
 	local opus_model="${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3}"
 	local sonnet_model="${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3}"
-	local haiku_model="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3-flash}"
+	local haiku_model="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3}"
 	local timeout_ms="${ZAI_CODING_API_TIMEOUT_MS:-3000000}"
 	# Optional 1M context: set models to e.g. glm-5.3[1m] and ZAI_CODING_AUTO_COMPACT_WINDOW=1000000
 	local compact_window="${ZAI_CODING_AUTO_COMPACT_WINDOW:-}"
 
-	if [[ -n "${compact_window}" ]]; then
-		ANTHROPIC_AUTH_TOKEN="${ZAI_CODING_API_KEY}" \
-			ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
-			API_TIMEOUT_MS="${timeout_ms}" \
-			ANTHROPIC_DEFAULT_OPUS_MODEL="${opus_model}" \
-			ANTHROPIC_DEFAULT_SONNET_MODEL="${sonnet_model}" \
-			ANTHROPIC_DEFAULT_HAIKU_MODEL="${haiku_model}" \
-			CLAUDE_CODE_AUTO_COMPACT_WINDOW="${compact_window}" \
-			claude "${claude_args[@]}"
-	else
-		ANTHROPIC_AUTH_TOKEN="${ZAI_CODING_API_KEY}" \
-			ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
-			API_TIMEOUT_MS="${timeout_ms}" \
-			ANTHROPIC_DEFAULT_OPUS_MODEL="${opus_model}" \
-			ANTHROPIC_DEFAULT_SONNET_MODEL="${sonnet_model}" \
-			ANTHROPIC_DEFAULT_HAIKU_MODEL="${haiku_model}" \
-			claude "${claude_args[@]}"
-	fi
+	(
+		unset ANTHROPIC_API_KEY
+		if [[ -n "${compact_window}" ]]; then
+			ANTHROPIC_AUTH_TOKEN="${ZAI_CODING_API_KEY}" \
+				ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
+				API_TIMEOUT_MS="${timeout_ms}" \
+				ANTHROPIC_DEFAULT_OPUS_MODEL="${opus_model}" \
+				ANTHROPIC_DEFAULT_SONNET_MODEL="${sonnet_model}" \
+				ANTHROPIC_DEFAULT_HAIKU_MODEL="${haiku_model}" \
+				CLAUDE_CODE_AUTO_COMPACT_WINDOW="${compact_window}" \
+				claude "${claude_args[@]}"
+		else
+			ANTHROPIC_AUTH_TOKEN="${ZAI_CODING_API_KEY}" \
+				ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
+				API_TIMEOUT_MS="${timeout_ms}" \
+				ANTHROPIC_DEFAULT_OPUS_MODEL="${opus_model}" \
+				ANTHROPIC_DEFAULT_SONNET_MODEL="${sonnet_model}" \
+				ANTHROPIC_DEFAULT_HAIKU_MODEL="${haiku_model}" \
+				claude "${claude_args[@]}"
+		fi
+	)
 }
 
 function claude-glm() {
@@ -684,34 +697,8 @@ function claude-glm() {
 	_zai_claude_run --dangerously-skip-permissions "$@"
 }
 
-# Resume/continue a Claude Code session against Z.AI GLM (full permissions).
-# Usage mirrors claudex; session state is shared with plain claude / claudex.
-function claudex-glm() {
-	_zai_coding_env_or_die || return 1
-	case "${1:-}" in
-		-c|--continue)
-			print.success "Continuing most recent Claude Code session (Z.AI GLM: ${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3})..."
-			shift
-			_zai_claude_run --continue --dangerously-skip-permissions "$@"
-			;;
-		-r|--resume)
-			shift
-			if [[ -n "${1:-}" && "${1:0:1}" != "-" ]]; then
-				local session_id="$1"
-				shift
-				print.success "Resuming Claude Code session (Z.AI GLM): $session_id..."
-				_zai_claude_run --resume "$session_id" --dangerously-skip-permissions "$@"
-			else
-				print.success "Selecting Claude Code session to resume (Z.AI GLM)..."
-				_zai_claude_run --resume --dangerously-skip-permissions "$@"
-			fi
-			;;
-		*)
-			print.success "Starting Claude Code (Z.AI GLM) with full permissions (${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3} / ${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3})..."
-			_zai_claude_run --dangerously-skip-permissions "$@"
-			;;
-	esac
-}
+# Resume flags (-c/--continue, -r/--resume [id]) pass straight through to
+# claude, sharing session state with plain claude / claudex.
 
 # ================================
 # OpenCode via Azure OpenAI / Microsoft Foundry (GPT deployments).
@@ -853,7 +840,7 @@ function _opencode_sync_zai_config() {
 	local api_key="${ZAI_CODING_API_KEY}"
 	local model_opus="${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3}"
 	local model_sonnet="${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3}"
-	local model_haiku="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3-flash}"
+	local model_haiku="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3}"
 	local default_model="${ZAI_OPENCODE_DEFAULT_MODEL:-${model_sonnet}}"
 	# Coding Plan OpenAI-compatible endpoint (not /api/anthropic, not /api/paas/v4).
 	local base_url="${ZAI_CODING_BASE_URL:-https://api.z.ai/api/coding/paas/v4}"
@@ -934,7 +921,7 @@ function opencode-glm() {
 	_opencode_sync_zai_config || return 1
 	local opus="${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3}"
 	local sonnet="${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3}"
-	local haiku="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3-flash}"
+	local haiku="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3}"
 	print.success "Starting OpenCode with Z.AI GLM Coding Plan (${opus} / ${sonnet} / ${haiku}) in full-permissions mode (--auto)..."
 	# Built-in provider also reads ZHIPU_API_KEY; keep it in sync with our .env key name.
 	ZHIPU_API_KEY="${ZAI_CODING_API_KEY}" \
@@ -1347,7 +1334,7 @@ function codex-xai() {
 		-l|--last)
 			print.success "Resuming last Codex session (xAI Grok: ${default_model})..."
 			shift
-			codex -p xai resume --last --dangerously-bypass-approvals-and-sandbox "$@"
+			codex -p xai resume --last --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			;;
 		-r|--resume)
 			shift
@@ -1355,15 +1342,15 @@ function codex-xai() {
 				local session_id="$1"
 				shift
 				print.success "Resuming Codex session (xAI Grok): $session_id..."
-				codex -p xai resume "$session_id" --dangerously-bypass-approvals-and-sandbox "$@"
+				codex -p xai resume "$session_id" --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			else
 				print.success "Selecting Codex session to resume (xAI Grok)..."
-				codex -p xai resume --all --dangerously-bypass-approvals-and-sandbox "$@"
+				codex -p xai resume --all --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			fi
 			;;
 		*)
 			print.success "Starting Codex with xAI Grok (${daily} / ${reasoning}, default ${default_model}) in full-permissions mode..."
-			codex -p xai --dangerously-bypass-approvals-and-sandbox "$@"
+			codex -p xai --dangerously-bypass-approvals-and-sandbox --no-daemon "$@"
 			;;
 	esac
 }
@@ -1460,7 +1447,7 @@ function _pi_sync_glm_config() {
 	local base_url="${ZAI_CODING_BASE_URL:-https://api.z.ai/api/coding/paas/v4}"
 	local model_opus="${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3}"
 	local model_sonnet="${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3}"
-	local model_haiku="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3-flash}"
+	local model_haiku="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3}"
 
 	local provider_json
 	provider_json="$(python3 - "${base_url}" "${model_opus}" "${model_sonnet}" "${model_haiku}" <<'PY'
@@ -1546,7 +1533,7 @@ function pi-glm() {
 	_pi_sync_glm_config || return 1
 	local opus="${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3}"
 	local sonnet="${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3}"
-	local haiku="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3-flash}"
+	local haiku="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3}"
 	local default_model="${ZAI_PI_DEFAULT_MODEL:-${sonnet}}"
 	local models_cycle=""
 	local id
@@ -1799,13 +1786,13 @@ function check_devcontainer() {
 		print.success "✅ Running inside Docker container"
 		echo ""
 		echo "All development commands are available:"
-		echo "  • check, fix, test, lighthouse, codecheck, install"
+		echo "  • check, fix, run_tests, lighthouse, codecheck, install"
 		return 0
 	else
 		print.error "❌ NOT running inside Docker container"
 		echo ""
 		echo "⚠️  WARNING: This project requires a Docker container environment."
-		echo "   Commands like 'check', 'fix', 'test', etc."
+		echo "   Commands like 'check', 'fix', 'run_tests', etc."
 		echo "   only work inside the Docker container."
 		echo ""
 		echo "   To work with this project:"
@@ -1953,7 +1940,7 @@ function show_welcome() {
     echo "  • help                 - Show this message"
     echo "  • check                - Run astro and biome checks"
     echo "  • fix                  - Run checks and apply automatic fixes"
-    echo "  • test                 - Run tests"
+    echo "  • run_tests            - Run tests"
     echo "  • lighthouse           - Build site + run Lighthouse audit"
     echo "  • codecheck            - Run all checks (fix + md:check + images:webp + test + lighthouse)"
     echo "  • install              - Run pnpm install"
@@ -1982,7 +1969,6 @@ function show_welcome() {
     echo "  • codex-xai         - Codex via xAI Grok (Responses API) with full permissions"
   echo ""
   echo "  • claude-glm        - Claude Code via Z.AI GLM with full permissions (recommended)"
-  echo "  • claudex-glm       - Claude Code via Z.AI GLM with full permissions"
     echo "      -c, --continue  Continue most recent session"
     echo "      -r, --resume    Interactive session selection"
     echo "      -r <id>         Resume specific session by ID"
@@ -2028,7 +2014,11 @@ function show_welcome() {
     echo ""
 }
 
-# Show welcome message only for interactive shells
-if [[ $- == *i* ]]; then
+# Welcome banner: once per shell, never inside Herdr panes.
+# Login herdr panes source this file twice (profile.d + ~/.bashrc) and every
+# new workspace is an interactive login shell — dumping the banner there looks
+# like a command launched on its own.
+if [[ $- == *i* && -z "${HERDR_ENV:-}" && -z "${DWP_WELCOME_SHOWN:-}" ]]; then
     show_welcome
 fi
+export DWP_WELCOME_SHOWN=1
