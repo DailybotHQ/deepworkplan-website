@@ -25,6 +25,7 @@ export const uk: SiteTranslations = {
     methodology: 'Методологія',
     spec: 'Специфікація',
     kit: 'Набір',
+    vim: 'DeepWorkPlan Vim',
     examples: 'Приклади',
     init: 'Init',
     quickstart: 'Швидкий старт',

@@ -25,6 +25,7 @@ export const vi: SiteTranslations = {
     methodology: 'Phương pháp luận',
     spec: 'Đặc tả',
     kit: 'Kit',
+    vim: 'DeepWorkPlan Vim',
     examples: 'Ví dụ',
     init: 'Init',
     quickstart: 'Khởi động nhanh',

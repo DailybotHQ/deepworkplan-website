@@ -24,6 +24,7 @@ export const hi: SiteTranslations = {
     methodology: 'पद्धति',
     spec: 'विनिर्देश',
     kit: 'किट',
+    vim: 'DeepWorkPlan Vim',
     examples: 'उदाहरण',
     init: 'Init',
     quickstart: 'त्वरित शुरुआत',

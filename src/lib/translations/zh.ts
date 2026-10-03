@@ -24,6 +24,7 @@ export const zh: SiteTranslations = {
     methodology: '方法论',
     spec: '规范',
     kit: '套件',
+    vim: 'DeepWorkPlan Vim',
     examples: '示例',
     init: 'Init',
     quickstart: '快速开始',

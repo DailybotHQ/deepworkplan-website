@@ -24,6 +24,7 @@ export const th: SiteTranslations = {
     methodology: 'ระเบียบวิธี',
     spec: 'ข้อกำหนด',
     kit: 'ชุดเครื่องมือ',
+    vim: 'DeepWorkPlan Vim',
     examples: 'ตัวอย่าง',
     init: 'เริ่มต้น',
     quickstart: 'เริ่มใช้งานเร็ว',

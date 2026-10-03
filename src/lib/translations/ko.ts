@@ -24,6 +24,7 @@ export const ko: SiteTranslations = {
     methodology: '방법론',
     spec: '스펙',
     kit: '키트',
+    vim: 'DeepWorkPlan Vim',
     examples: '예시',
     init: 'Init',
     quickstart: '빠른 시작',

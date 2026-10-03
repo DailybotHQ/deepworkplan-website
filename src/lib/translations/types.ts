@@ -72,6 +72,7 @@ export interface SiteTranslations {
     methodology: string;
     spec: string;
     kit: string;
+    vim: string;
     examples: string;
     init: string;
     quickstart: string;

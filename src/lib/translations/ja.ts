@@ -25,6 +25,7 @@ export const ja: SiteTranslations = {
     methodology: '方法論',
     spec: '仕様',
     kit: 'キット',
+    vim: 'DeepWorkPlan Vim',
     examples: '事例',
     init: 'Init',
     quickstart: 'クイックスタート',

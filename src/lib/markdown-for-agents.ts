@@ -73,6 +73,7 @@ function generateSiteNavigation(lang: string): string {
       links: [
         { label: t.nav.quickstart, path: '/quickstart' },
         { label: t.nav.examples, path: '/examples' },
+        { label: t.nav.vim, path: '/vim' },
         // The standalone, English-only agent prompt (never a /{lang}/init.md
         // variant) — mark external so it is never prefixed with the page's
         // language, matching CANONICAL_INIT_MD_PATH's contract elsewhere.

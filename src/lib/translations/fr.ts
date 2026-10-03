@@ -25,6 +25,7 @@ export const fr: SiteTranslations = {
     methodology: 'Méthodologie',
     spec: 'Spécification',
     kit: 'Kit',
+    vim: 'DeepWorkPlan Vim',
     examples: 'Exemples',
     init: 'Init',
     quickstart: 'Démarrage rapide',

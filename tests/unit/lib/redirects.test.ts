@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import { DEFAULT_LANGUAGE_CODE, LANGUAGE_CODES } from '@/lib/language-codes';
-import { REDIRECT_PAIRS } from '@/lib/redirect-map';
+import { REDIRECT_PAIRS, ROOT_ONLY_REDIRECT_PAIRS } from '@/lib/redirect-map';
 
 /**
  * public/_redirects is generated (scripts/generate-redirects.mjs, run in
@@ -27,12 +27,18 @@ const ruleLines = redirectsFile
   .filter((line) => line.length > 0 && !line.startsWith('#'));
 
 describe('public/_redirects', () => {
-  it('has one rule per language per redirect pair, in `source destination status` form', () => {
+  it('has one rule per language per redirect pair plus the root-only pairs, in `source destination status` form', () => {
     expect(ruleLines).toHaveLength(
-      LANGUAGE_CODES.length * REDIRECT_PAIRS.length
+      LANGUAGE_CODES.length * REDIRECT_PAIRS.length +
+        ROOT_ONLY_REDIRECT_PAIRS.length
     );
     for (const line of ruleLines) {
       expect(line).toMatch(/^\/\S+ \/\S+ \d{3}$/);
+    }
+    // Root-only pairs are apex asset aliases (e.g. /install.sh →
+    // /vim/install.sh) — emitted once, never expanded across languages.
+    for (const { from, to, status } of ROOT_ONLY_REDIRECT_PAIRS) {
+      expect(ruleLines).toContain(`/${from} /${to} ${status}`);
     }
   });
 
@@ -55,7 +61,7 @@ describe('public/_redirects', () => {
   });
 
   it('only uses permanent (301) redirects for these aliases', () => {
-    for (const { status } of REDIRECT_PAIRS) {
+    for (const { status } of [...REDIRECT_PAIRS, ...ROOT_ONLY_REDIRECT_PAIRS]) {
       expect(status).toBe(301);
     }
   });

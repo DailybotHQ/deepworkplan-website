@@ -25,6 +25,7 @@ export const tr: SiteTranslations = {
     methodology: 'Metodoloji',
     spec: 'Spesifikasyon',
     kit: 'Kit',
+    vim: 'DeepWorkPlan Vim',
     examples: 'Örnekler',
     init: 'Init',
     quickstart: 'Hızlı başlangıç',

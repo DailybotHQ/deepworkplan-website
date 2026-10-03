@@ -24,6 +24,7 @@ export const id: SiteTranslations = {
     methodology: 'Metodologi',
     spec: 'Spesifikasi',
     kit: 'Kit',
+    vim: 'DeepWorkPlan Vim',
     examples: 'Contoh',
     init: 'Init',
     quickstart: 'Mulai Cepat',
