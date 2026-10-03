@@ -124,6 +124,9 @@ RUN git config --global init.defaultBranch main \
     && git config --global safe.directory '*' \
     && git config --global core.editor nvim
 USER root
+# System-level safe.directory: applies to every user (root included) and survives
+# the host ~/.gitconfig bind mount, which replaces the node user's global config.
+RUN git config --system safe.directory '*'
 
 # Restore tool dirs that Debian /etc/profile drops from PATH on login shells.
 # Appended, never prepended: 00-container-node-first.sh keeps node/nvim order.

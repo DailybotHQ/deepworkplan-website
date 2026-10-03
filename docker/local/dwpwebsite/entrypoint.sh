@@ -732,6 +732,11 @@ setup_nodejs() {
 }
 
 setup_git() {
+    # Enforce at every start (not only at image build) so repos under the bind
+    # mount, e.g. /app/tmp/repositories/*, never hit "dubious ownership" for any user.
+    if ! git config --system --get-all safe.directory 2>/dev/null | grep -qx '\*'; then
+        git config --system --add safe.directory '*' 2>/dev/null || true
+    fi
     if [ -f "/home/node/.gitconfig" ]; then
         echo "Git configuration found and mounted from host"
     else

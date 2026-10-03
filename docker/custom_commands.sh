@@ -637,6 +637,7 @@ function claudex() {
 # Claude Code via Z.AI GLM Coding Plan (does not change default `claude` / Anthropic auth).
 # Requires ZAI_CODING_API_KEY in docker/local/dwpwebsite/.env (survives rebuilds).
 # Model aliases (Opus/Sonnet/Haiku) are remapped to GLM only for this process — not in settings.json.
+# /model therefore lists glm-5.3 (opus/sonnet) and glm-5.3-flash (haiku = fast tier).
 # Z.AI always wins: a preset ANTHROPIC_API_KEY is unset for the wrapped process,
 # so /status shows the Z.AI endpoint (ANTHROPIC_BASE_URL) and auth token.
 # Docs: https://docs.z.ai/devpack/quick-start · https://docs.z.ai/devpack/latest-model
@@ -657,11 +658,15 @@ function _zai_coding_env_or_die() {
 # precedence over ANTHROPIC_AUTH_TOKEN in Claude Code, sending the Anthropic key to
 # the Z.AI endpoint and making /status report API-key auth. A subshell unsets it so
 # the Z.AI auth token is the only credential the claude process sees.
+# The haiku slot defaults to glm-5.3-flash (Z.AI's fast tier) so /model lists BOTH
+# glm-5.3 (opus/sonnet) and glm-5.3-flash — with every slot at glm-5.3 the picker
+# collapses to a single entry and the fast model is unreachable. Background
+# (small-fast) tasks follow the same slot, per https://docs.z.ai/devpack/tool/claude.
 function _zai_claude_run() {
 	local -a claude_args=("$@")
 	local opus_model="${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3}"
 	local sonnet_model="${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3}"
-	local haiku_model="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3}"
+	local haiku_model="${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3-flash}"
 	local timeout_ms="${ZAI_CODING_API_TIMEOUT_MS:-3000000}"
 	# Optional 1M context: set models to e.g. glm-5.3[1m] and ZAI_CODING_AUTO_COMPACT_WINDOW=1000000
 	local compact_window="${ZAI_CODING_AUTO_COMPACT_WINDOW:-}"
@@ -691,7 +696,8 @@ function _zai_claude_run() {
 
 function claude-glm() {
 	_zai_coding_env_or_die || return 1
-	print.success "Starting Claude Code with Z.AI GLM (${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3} / ${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3}) with full permissions..."
+	print.success "Starting Claude Code with Z.AI GLM (${ZAI_DEFAULT_OPUS_MODEL:-glm-5.3} / ${ZAI_DEFAULT_SONNET_MODEL:-glm-5.3} / ${ZAI_DEFAULT_HAIKU_MODEL:-glm-5.3-flash}) with full permissions..."
+	echo "  /model lists both glm-5.3 and the fast glm-5.3-flash (haiku slot)."
 
 	# Always run with full permissions (--dangerously-skip-permissions)
 	_zai_claude_run --dangerously-skip-permissions "$@"
