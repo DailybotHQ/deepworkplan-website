@@ -13,6 +13,13 @@
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=300, must-revalidate
 
+# DeepWorkPlan Vim installer — the canonical one-liner target
+# (curl -fsSL https://deepworkplan.com/vim/install.sh | bash). Served verbatim
+# from public/vim/install.sh; the apex /install.sh 301s here (public/_redirects).
+/vim/install.sh
+  Content-Type: text/x-shellscript
+  Cache-Control: public, max-age=300, must-revalidate
+
 # Agent-readiness .well-known endpoints (RFC 9727, RFC 8414, RFC 9728, SEP-1649, agent-skills v0.2.0, ARD ai-catalog)
 /.well-known/api-catalog
   Content-Type: application/linkset+json;profile="https://www.rfc-editor.org/info/rfc9727"
