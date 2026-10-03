@@ -99,6 +99,7 @@ src/
 │   ├── pages/              # Shared page components (*Page.astro, QuickstartPage, readers)
 │   │   ├── ComparePage.astro       # Objective comparison and source notes
 │   │   ├── CompareMatrix.astro     # Responsive capability matrix
+│   │   ├── VimPage.astro           # DeepWorkPlan Vim showcase (SoftwareApplication JSON-LD)
 │   │   └── FaqPage.astro           # Grouped FAQ with FAQPage JSON-LD
 │   │
 │   └── layout/
@@ -136,6 +137,7 @@ src/
 │   ├── about.astro          # ~3-line wrapper passing lang="en"
 │   ├── contact.astro
 │   ├── developers.astro     # Agent & developer portal (+ [lang]/developers.astro)
+│   ├── vim.astro            # DeepWorkPlan Vim showcase (+ [lang]/vim.astro)
 │   ├── privacy.astro        # Privacy policy (+ [lang]/privacy.astro)
 │   ├── examples/            # Reader index + [slug] + .md endpoint
 │   ├── kit/                 # Reader index + [slug] + .md endpoint
@@ -401,6 +403,7 @@ src/pages/
 ├── examples.astro       → /examples
 ├── compare.astro        → /compare
 ├── faq.astro            → /faq
+├── vim.astro            → /vim (DeepWorkPlan Vim showcase; /vim/install.sh is a static file)
 ├── quickstart/           → /quickstart (canonical adoption page; /init, /setup, /onboarding 301 here)
 ├── methodology/
 │   ├── index.astro      → /methodology
@@ -445,7 +448,7 @@ const { Content } = await render(doc);
 
 `src/middleware.ts` enforces an **allowlist** of single-segment top-level paths. Any single-segment URL not in the set is rewritten to `/404` — **even if the file exists at `src/pages/<name>/index.astro`**. The allowlist is **derived** from one hand-edited set plus the language registry, so adding a new language requires no middleware edit at all:
 
-- `KNOWN_BASE_PATHS` — per-language page slugs (e.g. `about`, `contact`, `compare`, `faq`, `methodology`, `spec`, `kit`, `examples`, `quickstart`, `init`, `trust`, `developers`, `privacy`, `setup`, `onboarding`, `docs`). These exist for **every** language: at the root for the default language and under `/<lang>/<slug>` for every other active language. ONE place, covers all languages. (`init`/`setup`/`onboarding` redirect to `/quickstart`, the single canonical adoption page; `docs` redirects to `/developers`. `/init.md` itself is a standalone static file — `public/init.md` — never redirected, no HTML sibling, English-only.)
+- `KNOWN_BASE_PATHS` — per-language page slugs (e.g. `about`, `contact`, `compare`, `faq`, `methodology`, `spec`, `kit`, `examples`, `quickstart`, `init`, `trust`, `developers`, `vim`, `privacy`, `setup`, `onboarding`, `docs`). These exist for **every** language: at the root for the default language and under `/<lang>/<slug>` for every other active language. ONE place, covers all languages. (`init`/`setup`/`onboarding` redirect to `/quickstart`, the single canonical adoption page; `docs` redirects to `/developers`. `/init.md` itself is a standalone static file — `public/init.md` — never redirected, no HTML sibling, English-only.)
 - `ROOT_ONLY_PATHS` — non-per-language paths (`api`, `internal`, `404`, `favicon.ico`, `favicon.svg`, `sitemap-index.xml`).
 - `PREFIXED_LANGUAGES` — active non-default language codes (`es`, `pt`, `zh`, …), derived from `getActiveNonDefaultLanguages()` in `src/lib/i18n.ts`. These are the valid single-segment language roots (`/es`, `/pt`, …).
 - `KNOWN_ROOT_PATHS` — derived union of the three sets above (`KNOWN_BASE_PATHS` ∪ `ROOT_ONLY_PATHS` ∪ `PREFIXED_LANGUAGES`).

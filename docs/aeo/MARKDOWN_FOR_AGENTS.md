@@ -27,14 +27,14 @@ Cloudflare offers [Markdown for Agents](https://blog.cloudflare.com/markdown-for
 
 | Pattern | Example |
 |---------|---------|
-| `/{page}.md` (EN) | `/about.md`, `/contact.md`, `/compare.md`, `/faq.md`, `/quickstart.md` |
-| `/{lang}/{page}.md` | `/es/about.md`, `/es/compare.md`, `/es/faq.md`, `/es/quickstart.md` |
+| `/{page}.md` (EN) | `/about.md`, `/contact.md`, `/compare.md`, `/faq.md`, `/quickstart.md`, `/vim.md` |
+| `/{lang}/{page}.md` | `/es/about.md`, `/es/compare.md`, `/es/faq.md`, `/es/quickstart.md`, `/es/vim.md` |
 
 Source: `src/content/pages/{en,es}/` content collection. `/init.md` is a separate case — see below.
 
 ### Standalone agent artifacts (not content-collection pages)
 
-A handful of top-level agent-facing files are hand-maintained static files under `public/`, served verbatim with no per-language variant and no HTML sibling: `/llms.txt`, `/llms-full.txt`, `/openapi.json`, `/init.md`. `/init.md` in particular is the canonical, English-only, self-contained onboarding prompt — the human-readable equivalent lives at `/quickstart` (all 17 languages), but the two are maintained independently and are not required to be byte-identical.
+A handful of top-level agent-facing files are hand-maintained static files under `public/`, served verbatim with no per-language variant and no HTML sibling: `/llms.txt`, `/llms-full.txt`, `/openapi.json`, `/init.md`, `/vim/install.sh` (the DeepWorkPlan Vim installer — a byte-identical copy of the vim repository's source of truth, pinned `Content-Type: text/x-shellscript`; the apex `/install.sh` 301-redirects to it). `/init.md` in particular is the canonical, English-only, self-contained onboarding prompt — the human-readable equivalent lives at `/quickstart` (all 17 languages), but the two are maintained independently and are not required to be byte-identical.
 
 ## Response Format
 
