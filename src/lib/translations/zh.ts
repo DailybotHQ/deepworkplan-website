@@ -1573,4 +1573,68 @@ export const zh: SiteTranslations = {
     contactBody:
       '隐私问题请致信 security@dailybot.com。要报告安全漏洞，请优先使用 GitHub 面向网站与技能仓库的私密漏洞报告——确切地址见 /.well-known/security.txt。',
   },
+
+  // DeepWorkPlan Vim — 终端编辑器展示页（/vim）
+  vimPage: {
+    meta: {
+      title: 'DeepWorkPlan Vim — Deep Work Plan',
+      description:
+        'DeepWorkPlan Vim 是 Deep Work Plan 的终端编辑器：Neovim 0.12+ 配置，内置生成的命令索引、计划浏览器与 Markdown 查看器。',
+    },
+    heroKicker: '终端编辑器',
+    heroTitle: 'DeepWorkPlan Vim',
+    heroTagline: 'Deep Work Plan 的终端编辑器',
+    heroDescription:
+      '为人类和长驻终端的编程代理准备的 Neovim 配置——你的 Deep Work Plans、文档和命令索引，一键即达。',
+    installTitle: '一行命令完成安装',
+    installIntro:
+      '一行命令即可将 DeepWorkPlan Vim 安装为你的 Neovim 配置。安装程序会说明它将做什么，并在改动现有配置之前征得同意。',
+    installCommand: 'curl -fsSL https://deepworkplan.com/vim/install.sh | bash',
+    installCopyLabel: '复制命令',
+    installCopiedLabel: '已复制',
+    installConsent:
+      '先征得同意：现有的 Neovim 配置绝不未经你的明确批准而被覆盖。安装程序会停下来，并给出手动安装路径。',
+    installKitLink: '阅读 addon 文档',
+    installWindowsNote:
+      '在 Windows 上不适用这一行命令；仓库 README 记录了手动安装路径。',
+    installWindowsLinkLabel: 'Windows 安装路径',
+    featuresTitle: '它做什么',
+    featuresIntro:
+      '五项功能，范围经过克制的设计。每一项都对应一个可在生成的命令索引中查到的按键绑定。',
+    tableFeature: '功能',
+    tableDescription: '说明',
+    tableMapping: '按键映射',
+    featureF1Title: '生成的命令索引',
+    featureF1Description:
+      '命令索引由当前配置实时生成，按键绑定的列表始终是最新的。',
+    featureF1Mapping: 'SPC h h',
+    featureF2Title: '类 VS Code 的操作习惯',
+    featureF2Description:
+      '来自图形编辑器的编辑手势：全选，以及复制到系统剪贴板。',
+    featureF2Mapping: '<C-a>, y, <leader>y',
+    featureF3Title: 'Deep Work Plan 浏览器',
+    featureF3Description:
+      '一个浏览仓库中计划的面板——不离开编辑器即可阅读计划、任务及其验证关卡。',
+    featureF3Mapping: 'SPC P',
+    featureF4Title: 'Markdown 查看器',
+    featureF4Description:
+      '在浏览器中预览 Markdown，或在缓冲区内直接渲染——文档与计划就在工作发生的地方。',
+    featureF4Mapping: 'SPC m p, SPC m r',
+    featureF5Title: '一行安装器',
+    featureF5Description:
+      '面向 macOS 与 Linux 的自包含安装器，并为 Windows 提供文档化的手动路径。',
+    featureF5Mapping: '—',
+    requirementsTitle: '系统要求',
+    requirements: [
+      'Neovim 0.12 或更高版本，且 Lua（lua、lua5.4 或 luajit）可用',
+      'macOS 与 Linux；Windows 通过文档化的手动路径提供支持',
+      '采用 GPL-3.0 许可——可自由使用、研究与修改',
+    ],
+    ctaTitle: '在工作发生的地方工作',
+    ctaDescription:
+      '安装 DeepWorkPlan Vim，打开 Neovim，在与代理相同的终端里阅读你的 Deep Work Plans。',
+    ctaPrimaryLabel: '安装 DeepWorkPlan Vim',
+    ctaKitLabel: '阅读 kit 中的 addon 文档',
+    ctaRepoLabel: '查看源码仓库',
+  },
 };

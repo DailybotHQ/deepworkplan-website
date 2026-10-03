@@ -627,4 +627,62 @@ export interface SiteTranslations {
     ctaPrimary: string;
     ctaSecondary: string;
   };
+
+  // DeepWorkPlan Vim — terminal editor showcase (/vim + /{lang}/vim)
+  vimPage: {
+    meta: { title: string; description: string };
+    heroKicker: string;
+    heroTitle: string;
+    /**
+     * Contract tagline (frozen product contract, 2026-10-03). TRANSLATORS:
+     * localize the prose per language; the English value is normative.
+     */
+    heroTagline: string;
+    heroDescription: string;
+    installTitle: string;
+    installIntro: string;
+    /**
+     * The canonical install one-liner. TRANSLATORS: keep byte-identical in
+     * every locale — it is code, not prose.
+     */
+    installCommand: string;
+    installCopyLabel: string;
+    installCopiedLabel: string;
+    installConsent: string;
+    installKitLink: string;
+    installWindowsNote: string;
+    installWindowsLinkLabel: string;
+    featuresTitle: string;
+    featuresIntro: string;
+    tableFeature: string;
+    tableDescription: string;
+    tableMapping: string;
+    featureF1Title: string;
+    featureF1Description: string;
+    /** Keybinding — code, keep as-is in every locale. */
+    featureF1Mapping: string;
+    featureF2Title: string;
+    featureF2Description: string;
+    /** Keybindings — code, keep as-is in every locale. */
+    featureF2Mapping: string;
+    featureF3Title: string;
+    featureF3Description: string;
+    /** Keybinding — code, keep as-is in every locale. */
+    featureF3Mapping: string;
+    featureF4Title: string;
+    featureF4Description: string;
+    /** Keybindings — code, keep as-is in every locale. */
+    featureF4Mapping: string;
+    featureF5Title: string;
+    featureF5Description: string;
+    /** The installer has no keybinding — an em dash in every locale. */
+    featureF5Mapping: string;
+    requirementsTitle: string;
+    requirements: string[];
+    ctaTitle: string;
+    ctaDescription: string;
+    ctaPrimaryLabel: string;
+    ctaKitLabel: string;
+    ctaRepoLabel: string;
+  };
 }

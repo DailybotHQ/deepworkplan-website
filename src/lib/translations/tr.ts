@@ -1615,4 +1615,68 @@ export const tr: SiteTranslations = {
     contactBody:
       "Gizlilik soruları için security@dailybot.com adresine yazın. Bir güvenlik açığını bildirmek isterseniz, web sitesi ve skill depoları için GitHub'ın özel güvenlik açığı bildirme özelliğini tercih edin — kesin adresler için /.well-known/security.txt dosyasına bakın.",
   },
+
+  // DeepWorkPlan Vim — terminal düzenleyici vitrin sayfası (/vim)
+  vimPage: {
+    meta: {
+      title: 'DeepWorkPlan Vim — Deep Work Plan',
+      description:
+        "DeepWorkPlan Vim, Deep Work Plan'ın terminal düzenleyicisidir: komut dizini, plan tarayıcısı ve Markdown görüntüleyicisi içeren Neovim 0.12+ yapılandırması.",
+    },
+    heroKicker: 'Terminal düzenleyici',
+    heroTitle: 'DeepWorkPlan Vim',
+    heroTagline: 'Deep Work Plan için terminal düzenleyici',
+    heroDescription:
+      'Terminalde yaşayan insanlar ve kodlama ajanları için bir Neovim yapılandırması — planlarınız, belgeleriniz ve komut dizininiz tek tuş uzağınızda.',
+    installTitle: 'Tek satırda kurulum',
+    installIntro:
+      "Tek satır, DeepWorkPlan Vim'i Neovim yapılandırmanız olarak kurar. Kurulum programı ne yapacağını açıklar ve mevcut bir kuruluma dokunmadan önce sorar.",
+    installCommand: 'curl -fsSL https://deepworkplan.com/vim/install.sh | bash',
+    installCopyLabel: 'Komutu kopyala',
+    installCopiedLabel: 'Kopyalandı',
+    installConsent:
+      'Önce onay: mevcut bir Neovim yapılandırması, açık onayınız olmadan asla üzerine yazılmaz. Kurulum programı durur ve manuel yolu gösterir.',
+    installKitLink: 'Addon belgelerini okuyun',
+    installWindowsNote:
+      "Windows'ta tek satırlık komut uygulanmaz; manuel yol depo README'sinde belgelenmiştir.",
+    installWindowsLinkLabel: 'Windows kurulum yolu',
+    featuresTitle: 'Ne yapar',
+    featuresIntro:
+      'Beş özellik, bilinçli olarak dar kapsamlı. Her biri, üretilen komut dizininde inceleyebileceğiniz bir tuş atamasına karşılık gelir.',
+    tableFeature: 'Özellik',
+    tableDescription: 'Nedir',
+    tableMapping: 'Atama',
+    featureF1Title: 'Üretilen komut dizini',
+    featureF1Description:
+      'Komut dizini etkin yapılandırmadan üretilir; böylece tuş atamaları listesi her zaman günceldir.',
+    featureF1Mapping: 'SPC h h',
+    featureF2Title: 'VS Code tarzı hareketler',
+    featureF2Description:
+      'Grafik düzenleyicilerin şekillendirdiği düzenleme hareketleri: tümünü seç ve sistem panosuna kopyala.',
+    featureF2Mapping: '<C-a>, y, <leader>y',
+    featureF3Title: 'Deep Work Plan tarayıcısı',
+    featureF3Description:
+      'Depodaki planları gezen bir panel — düzenleyiciden çıkmadan bir planı, görevlerini ve doğrulama kapılarını okuyun.',
+    featureF3Mapping: 'SPC P',
+    featureF4Title: 'Markdown görüntüleyici',
+    featureF4Description:
+      "Markdown'ı tarayıcıda önizleyin veya tampon içinde işleyin — belgeler ve planlar, işin yapıldığı yerde kalır.",
+    featureF4Mapping: 'SPC m p, SPC m r',
+    featureF5Title: 'Tek satırlık kurulum programı',
+    featureF5Description:
+      'macOS ve Linux için kendi kendine yeten bir kurulum programı; Windows için belgelenmiş manuel bir yol sunar.',
+    featureF5Mapping: '—',
+    requirementsTitle: 'Gereksinimler',
+    requirements: [
+      'Neovim 0.12 veya daha yenisi; Lua (lua, lua5.4 veya luajit) erişilebilir olsun',
+      'macOS ve Linux; Windows, belgelenmiş manuel bir yol ile desteklenir',
+      'GPL-3.0 lisanslı — kullanmak, incelemek ve değiştirmek özgürce',
+    ],
+    ctaTitle: 'İşin yaşadığı yerde çalışın',
+    ctaDescription:
+      "DeepWorkPlan Vim'i kurun, Neovim'i açın ve planlarınızı ajanlarınızın kullandığı aynı terminalde okuyun.",
+    ctaPrimaryLabel: "DeepWorkPlan Vim'i kur",
+    ctaKitLabel: 'Kitteki addon belgesini okuyun',
+    ctaRepoLabel: 'Kaynak depoyu görüntüle',
+  },
 };

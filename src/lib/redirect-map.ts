@@ -36,3 +36,17 @@ export const REDIRECT_PAIRS: readonly RedirectPair[] = [
   { from: 'onboarding', to: 'quickstart', status: 301 },
   { from: 'docs', to: 'developers', status: 301 },
 ];
+
+/**
+ * Apex-only redirects — emitted once, with no language prefixes. These serve
+ * asset paths (they contain a dot or a slash), so expanding them across
+ * languages would point at paths that do not exist.
+ *
+ * `/install.sh` is the legacy apex alias of the DeepWorkPlan Vim installer;
+ * the canonical byte-identical artifact lives at `/vim/install.sh`
+ * (`public/vim/install.sh`). `curl -fsSL` follows redirects (`-L`), so both
+ * one-liners work, while authored copy everywhere uses the canonical form.
+ */
+export const ROOT_ONLY_REDIRECT_PAIRS: readonly RedirectPair[] = [
+  { from: 'install.sh', to: 'vim/install.sh', status: 301 },
+];

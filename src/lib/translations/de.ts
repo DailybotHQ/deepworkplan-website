@@ -1612,4 +1612,68 @@ export const de: SiteTranslations = {
     contactBody:
       'Bei Datenschutzfragen schreiben Sie an security@dailybot.com. Um eine Sicherheitslücke zu melden, nutzen Sie bevorzugt GitHubs private Schwachstellenmeldungen für die Website- und Skill-Repositories — die genauen Adressen stehen in /.well-known/security.txt.',
   },
+
+  // DeepWorkPlan Vim — Schaufenster des Terminal-Editors (/vim)
+  vimPage: {
+    meta: {
+      title: 'DeepWorkPlan Vim — Deep Work Plan',
+      description:
+        'DeepWorkPlan Vim ist der Terminal-Editor für Deep Work Plan: eine Neovim-0.12+-Konfiguration mit generiertem Befehlsindex, Plan-Browser und Markdown-Viewer.',
+    },
+    heroKicker: 'Terminal-Editor',
+    heroTitle: 'DeepWorkPlan Vim',
+    heroTagline: 'Der Terminal-Editor für Deep Work Plan',
+    heroDescription:
+      'Eine Neovim-Konfiguration für Menschen und Coding-Agents, die im Terminal leben — Ihre Deep Work Plans, die Dokumentation und der Befehlsindex sind einen Tastendruck entfernt.',
+    installTitle: 'In einer Zeile installieren',
+    installIntro:
+      'Eine Zeile installiert DeepWorkPlan Vim als Ihre Neovim-Konfiguration. Der Installer erklärt, was er tut, und fragt nach, bevor er eine bestehende Einrichtung anfasst.',
+    installCommand: 'curl -fsSL https://deepworkplan.com/vim/install.sh | bash',
+    installCopyLabel: 'Befehl kopieren',
+    installCopiedLabel: 'Kopiert',
+    installConsent:
+      'Zustimmung zuerst: Eine bestehende Neovim-Konfiguration wird nie ohne Ihre ausdrückliche Zustimmung überschrieben. Der Installer bricht ab und zeigt den manuellen Weg.',
+    installKitLink: 'Addon-Dokumentation lesen',
+    installWindowsNote:
+      'Unter Windows gilt der Einzeiler nicht; die README des Repositorys dokumentiert den manuellen Weg.',
+    installWindowsLinkLabel: 'Windows-Installationsweg',
+    featuresTitle: 'Was es tut',
+    featuresIntro:
+      'Fünf Funktionen, bewusst abgegrenzt. Jede ist einem Tastenkürzel zugeordnet, das Sie im generierten Befehlsindex nachlesen können.',
+    tableFeature: 'Funktion',
+    tableDescription: 'Was es ist',
+    tableMapping: 'Belegung',
+    featureF1Title: 'Generierter Befehlsindex',
+    featureF1Description:
+      'Ein Befehlsindex, der aus der aktiven Konfiguration generiert wird — die Liste der Tastenkürzel ist damit immer aktuell.',
+    featureF1Mapping: 'SPC h h',
+    featureF2Title: 'Gesten im Stil von VS Code',
+    featureF2Description:
+      'Bearbeitungsgesten, wie grafische Editoren sie prägen: alles auswählen und in die System-Zwischenablage kopieren.',
+    featureF2Mapping: '<C-a>, y, <leader>y',
+    featureF3Title: 'Deep-Work-Plan-Browser',
+    featureF3Description:
+      'Ein Panel, das die Pläne im Repository durchgeht — lesen Sie einen Plan, seine Aufgaben und seine Gates, ohne den Editor zu verlassen.',
+    featureF3Mapping: 'SPC P',
+    featureF4Title: 'Markdown-Viewer',
+    featureF4Description:
+      'Markdown im Browser voranschauen oder im Buffer rendern — Dokumentation und Pläne bleiben dort, wo die Arbeit passiert.',
+    featureF4Mapping: 'SPC m p, SPC m r',
+    featureF5Title: 'Einzeilen-Installer',
+    featureF5Description:
+      'Ein in sich geschlossener Installer für macOS und Linux, mit dokumentiertem manuellem Weg für Windows.',
+    featureF5Mapping: '—',
+    requirementsTitle: 'Voraussetzungen',
+    requirements: [
+      'Neovim 0.12 oder neuer, mit Lua (lua, lua5.4 oder luajit) verfügbar',
+      'macOS und Linux; Windows wird über einen dokumentierten manuellen Weg unterstützt',
+      'GPL-3.0-lizenziert — frei zum Verwenden, Untersuchen und Ändern',
+    ],
+    ctaTitle: 'Arbeiten Sie, wo die Arbeit liegt',
+    ctaDescription:
+      'Installieren Sie DeepWorkPlan Vim, öffnen Sie Neovim und lesen Sie Ihre Deep Work Plans im selben Terminal wie Ihre Agenten.',
+    ctaPrimaryLabel: 'DeepWorkPlan Vim installieren',
+    ctaKitLabel: 'Kit-Addon-Dokument lesen',
+    ctaRepoLabel: 'Quellrepository ansehen',
+  },
 };

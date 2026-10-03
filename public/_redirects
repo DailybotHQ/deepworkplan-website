@@ -7,6 +7,8 @@
 # server-side redirect (not the HTML meta-refresh page Astro also
 # renders for these same routes as a client-side fallback).
 
+/install.sh /vim/install.sh 301
+
 /init /quickstart 301
 /setup /quickstart 301
 /onboarding /quickstart 301

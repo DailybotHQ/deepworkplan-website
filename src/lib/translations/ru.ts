@@ -1612,4 +1612,68 @@ export const ru: SiteTranslations = {
     contactBody:
       'По вопросам конфиденциальности пишите на security@dailybot.com. Чтобы сообщить об уязвимости, используйте предпочтительно приватное сообщение об уязвимости GitHub для репозиториев сайта и навыка — точные адреса см. в /.well-known/security.txt.',
   },
+
+  // DeepWorkPlan Vim — страница терминального редактора (/vim)
+  vimPage: {
+    meta: {
+      title: 'DeepWorkPlan Vim — Deep Work Plan',
+      description:
+        'DeepWorkPlan Vim — терминальный редактор Deep Work Plan: конфигурация Neovim 0.12+ с генерируемым индексом команд и просмотрщиком Markdown.',
+    },
+    heroKicker: 'Терминальный редактор',
+    heroTitle: 'DeepWorkPlan Vim',
+    heroTagline: 'Терминальный редактор для Deep Work Plan',
+    heroDescription:
+      'Конфигурация Neovim для людей и программистских агентов, живущих в терминале — ваши Deep Work Plans, документация и индекс команд на расстоянии одного нажатия клавиши.',
+    installTitle: 'Установка одной строкой',
+    installIntro:
+      'Одна строка устанавливает DeepWorkPlan Vim как вашу конфигурацию Neovim. Установщик объясняет, что сделает, и спрашивает, прежде чем трогать существующую настройку.',
+    installCommand: 'curl -fsSL https://deepworkplan.com/vim/install.sh | bash',
+    installCopyLabel: 'Скопировать команду',
+    installCopiedLabel: 'Скопировано',
+    installConsent:
+      'Сначала согласие: существующая конфигурация Neovim никогда не перезаписывается без вашего явного одобрения. Установщик останавливается и показывает ручной путь.',
+    installKitLink: 'Читать документацию аддона',
+    installWindowsNote:
+      'В Windows однострочник не применяется; ручной путь описан в README репозитория.',
+    installWindowsLinkLabel: 'Путь установки для Windows',
+    featuresTitle: 'Что он делает',
+    featuresIntro:
+      'Пять возможностей, сознательно ограниченных по охвату. Каждая соответствует сочетанию клавиш, которое можно посмотреть в генерируемом индексе команд.',
+    tableFeature: 'Возможность',
+    tableDescription: 'Что это',
+    tableMapping: 'Привязка',
+    featureF1Title: 'Генерируемый индекс команд',
+    featureF1Description:
+      'Индекс команд генерируется из действующей конфигурации, поэтому список привязок клавиш всегда актуален.',
+    featureF1Mapping: 'SPC h h',
+    featureF2Title: 'Жесты в духе VS Code',
+    featureF2Description:
+      'Жесты редактирования, знакомые по графическим редакторам: выделить всё и скопировать в системный буфер обмена.',
+    featureF2Mapping: '<C-a>, y, <leader>y',
+    featureF3Title: 'Обозреватель Deep Work Plan',
+    featureF3Description:
+      'Панель для просмотра планов репозитория — читайте план, его задачи и его ворота валидации, не покидая редактор.',
+    featureF3Mapping: 'SPC P',
+    featureF4Title: 'Просмотрщик Markdown',
+    featureF4Description:
+      'Предпросмотр Markdown в браузере или рендер в буфере — документация и планы остаются там, где идёт работа.',
+    featureF4Mapping: 'SPC m p, SPC m r',
+    featureF5Title: 'Установщик одной строкой',
+    featureF5Description:
+      'Самодостаточный установщик для macOS и Linux с документированным ручным путём для Windows.',
+    featureF5Mapping: '—',
+    requirementsTitle: 'Требования',
+    requirements: [
+      'Neovim 0.12 или новее, с доступной Lua (lua, lua5.4 или luajit)',
+      'macOS и Linux; Windows поддерживается через документированный ручной путь',
+      'Лицензия GPL-3.0 — свободно использовать, изучать и изменять',
+    ],
+    ctaTitle: 'Работайте там, где живёт работа',
+    ctaDescription:
+      'Установите DeepWorkPlan Vim, откройте Neovim и читайте свои Deep Work Plans в том же терминале, что и ваши агенты.',
+    ctaPrimaryLabel: 'Установить DeepWorkPlan Vim',
+    ctaKitLabel: 'Читать документ аддона в наборе',
+    ctaRepoLabel: 'Открыть исходный репозиторий',
+  },
 };

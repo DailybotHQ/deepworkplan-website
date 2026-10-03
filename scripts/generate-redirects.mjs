@@ -53,14 +53,16 @@ async function readLanguageCodes() {
 
 async function readRedirectPairs() {
   const src = await readFile(resolve(ROOT, 'src/lib/redirect-map.ts'), 'utf8');
+  // from/to may contain dots or slashes (asset paths such as install.sh),
+  // so the character classes are broader than the per-language pairs.
+  const entryPattern =
+    /\{\s*from:\s*'([^']+)',\s*to:\s*'([^']+)',\s*status:\s*(\d+)\s*\}/g;
   const listMatch = src.match(/REDIRECT_PAIRS[^=]*=\s*\[([\s\S]*?)\n\];/);
   if (!listMatch) {
     throw new Error(
       'REDIRECT_PAIRS array not found in src/lib/redirect-map.ts'
     );
   }
-  const entryPattern =
-    /\{\s*from:\s*'([a-z-]+)',\s*to:\s*'([a-z-]+)',\s*status:\s*(\d+)\s*\}/g;
   const pairs = [...listMatch[1].matchAll(entryPattern)].map((m) => ({
     from: m[1],
     to: m[2],
@@ -69,11 +71,22 @@ async function readRedirectPairs() {
   if (pairs.length === 0) {
     throw new Error('No redirect pairs parsed from src/lib/redirect-map.ts');
   }
-  return pairs;
+
+  const rootOnlyMatch = src.match(
+    /ROOT_ONLY_REDIRECT_PAIRS[^=]*=\s*\[([\s\S]*?)\n\];/
+  );
+  const rootOnlyPairs = rootOnlyMatch
+    ? [...rootOnlyMatch[1].matchAll(entryPattern)].map((m) => ({
+        from: m[1],
+        to: m[2],
+        status: Number(m[3]),
+      }))
+    : [];
+  return { pairs, rootOnlyPairs };
 }
 
 async function main() {
-  const [{ codes, defaultCode }, pairs] = await Promise.all([
+  const [{ codes, defaultCode }, { pairs, rootOnlyPairs }] = await Promise.all([
     readLanguageCodes(),
     readRedirectPairs(),
   ]);
@@ -89,6 +102,14 @@ async function main() {
     '# renders for these same routes as a client-side fallback).',
     '',
   ];
+
+  // Apex-only rules first (asset paths — never expanded across languages).
+  for (const { from, to, status } of rootOnlyPairs) {
+    lines.push(`/${from} /${to} ${status}`);
+  }
+  if (rootOnlyPairs.length > 0) {
+    lines.push('');
+  }
 
   for (const code of codes) {
     const prefix = code === defaultCode ? '' : `/${code}`;
@@ -106,7 +127,7 @@ async function main() {
   }
   await writeFile(OUT_PATH, content, 'utf8');
   console.log(
-    `[generate-redirects] wrote public/_redirects (${codes.length} languages × ${pairs.length} rules = ${codes.length * pairs.length} redirects)`
+    `[generate-redirects] wrote public/_redirects (${codes.length} languages × ${pairs.length} rules + ${rootOnlyPairs.length} apex-only)`
   );
 }
 
