@@ -1,0 +1,50 @@
+---
+title: DeepWorkPlan Vim
+description: "Addon DWP opcional: DeepWorkPlan Vim, editor de terminal de Deep Work Plan — índice de comandos gerado, navegador de planos e leitura de Markdown no Neovim."
+kind: addon
+lang: pt
+order: 6
+---
+
+# Addon DeepWorkPlan Vim
+
+O **DeepWorkPlan Vim** é o editor de terminal para Deep Work Plan: uma configuração de Neovim (é o próprio editor, não um arquivo de repositório) que coloca as superfícies de trabalho da metodologia a um pressionar de tecla de distância. Enquanto as demais entradas do kit instalam harness em um repositório, este addon fornece à pessoa — e a qualquer agente que opere o Neovim em modo headless — um editor que fala DWP nativamente.
+
+Requer **Neovim 0.12 ou superior**, funciona em **macOS e Linux** (o Windows é suportado por um caminho manual documentado) e é distribuído sob licença **GPL-3.0** — livre para usar, estudiar e modificar.
+
+## O que ele adiciona
+
+| # | Recurso | O que faz | Mapeamento |
+|---|---------|--------------|---------|
+| F1 | **Índice de comandos gerado** | O editor inteiro, listado: cada comando com seu mapeamento e uma descrição de uma linha, gerado a partir da configuração viva para que o índice não diverja do editor. | `SPC h h` |
+| F2 | **Gestos no estilo VS Code** | Selecionar tudo, copiar e yank para a área de transferência sob os acordes que a memória muscular já conhece. | `<C-a>`, `y`, `<leader>y` |
+| F3 | **Navegador de Deep Work Plan** | Abre o plano que dirige o repositório — tarefas, portões de validação e estado de conclusão — sem sair do editor. | `SPC P` |
+| F4 | **Visualizador de Markdown** | Lê Markdown como os agentes leem: pré-visualização renderizada, ou a fonte crua para fidelidade de copiar e colar. | `SPC m p`, `SPC m r` |
+| F5 | **Instalador de uma linha** | Um `install.sh` consent-first para macOS e Linux; o caminho manual documentado cobre o Windows. | `curl -fsSL https://deepworkplan.com/vim/install.sh \| bash` |
+
+## Instalação
+
+```bash
+curl -fsSL https://deepworkplan.com/vim/install.sh | bash
+```
+
+O instalador é **consent-first**: uma configuração de Neovim existente e alheia nunca é sobrescrita. Sem terminal, ele aborta com instruções em vez de tocar em qualquer coisa; interativamente, pergunta antes de mover uma configuração existente para o lado. Os plugins instalam em modo headless no primeiro uso — sem dança de fechar e reabrir.
+
+O Windows não é um destino de `curl | bash`. O caminho manual documentado (winget mais Git Bash, ou WSL) vive no README do repositório.
+
+Superfície completa, sem capturas de tela e limitada ao contrato: a [página /vim](/vim).
+
+## Quando recorrer a ele
+
+| Sinal | Ação |
+|--------|--------|
+| A pessoa desenvolvedora vive no terminal e opera o repositório por plano | **Oferecer** o addon |
+| Execução DWP de horizonte longo em que o navegador de planos (`SPC P`) mantém o estado visível | **Recomendar** |
+| O editor da pessoa desenvolvedora já está configurado e não está em negociação | **Pular** — o addon é opcional por design |
+| Equipe somente Windows sem WSL | **Pular**, ou apontar para o caminho manual documentado |
+
+## Entradas relacionadas do kit
+
+- [Devcontainer](/kit/devcontainer) — ambiente de desenvolvimento reproduzível (primeiro addon)
+- [Dailybot](/kit/dailybot) — relatórios do ciclo de vida do plano visíveis para a equipa (segundo addon)
+- [AI Diff Reviewer](/kit/ai-diff-reviewer) — revisão local durante as revisões finais do plano (quinto addon)

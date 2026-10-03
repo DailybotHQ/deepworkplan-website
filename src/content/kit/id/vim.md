@@ -1,0 +1,50 @@
+---
+title: DeepWorkPlan Vim
+description: "Addon DWP opt-in: DeepWorkPlan Vim, editor terminal untuk Deep Work Plan — indeks perintah yang dihasilkan, peramban rencana, dan baca Markdown di Neovim."
+kind: addon
+lang: id
+order: 6
+---
+
+# Addon DeepWorkPlan Vim
+
+**DeepWorkPlan Vim** adalah editor terminal untuk Deep Work Plan: sebuah konfigurasi Neovim (ini adalah editornya sendiri, bukan berkas repositori) yang menaruh permukaan kerja metodologi sejauh satu ketukan tombol. Di mana entri kit lain memasang harness ke dalam repositori, addon ini membekali manusia — dan agen apa pun yang menjalankan Neovim secara headless — dengan editor yang berbicara DWP secara native.
+
+Ia memerlukan **Neovim 0.12 atau lebih baru**, berjalan di **macOS dan Linux** (Windows didukung melalui jalur manual yang terdokumentasi), dan berlisensi **GPL-3.0** — bebas untuk digunakan, dipelajari, dan dimodifikasi.
+
+## Apa yang ditambahkannya
+
+| # | Fitur | Yang dilakukan | Pemetaan |
+|---|---------|--------------|---------|
+| F1 | **Indeks perintah otomatis** | Seluruh editor, didaftarkan: setiap perintah dengan pemetaannya dan deskripsi satu baris, dihasilkan dari konfigurasi hidup sehingga indeks tidak menyimpang dari editor. | `SPC h h` |
+| F2 | **Gaya gerakan VS Code** | Pilih semua, salin, dan yank ke papan klip di bawah akor yang sudah dikenali ingatan otot. | `<C-a>`, `y`, `<leader>y` |
+| F3 | **Peramban Deep Work Plan** | Membuka rencana yang menggerakkan repositori — tugas, gate, dan status penyelesaian — tanpa meninggalkan editor. | `SPC P` |
+| F4 | **Penampil Markdown** | Membaca Markdown seperti yang dilakukan agen: pratinjau yang dirender, atau sumber mentah untuk kesetiaan salin-tempel. | `SPC m p`, `SPC m r` |
+| F5 | **Penginstal satu baris** | Sebuah `install.sh` consent-first untuk macOS dan Linux; jalur manual terdokumentasi mencakup Windows. | `curl -fsSL https://deepworkplan.com/vim/install.sh \| bash` |
+
+## Instalasi
+
+```bash
+curl -fsSL https://deepworkplan.com/vim/install.sh | bash
+```
+
+Penginstalnya **consent-first**: konfigurasi Neovim yang sudah ada milik pihak lain tidak pernah ditimpa. Disalurkan tanpa terminal, ia berhenti dengan petunjuk alih-alih menyentuh apa pun; secara interaktif, ia bertanya sebelum menggeser konfigurasi yang ada. Plugin terpasang secara headless pada peluncuran pertama — tanpa koreografi keluar-dan-buka lagi.
+
+Windows bukan target `curl | bash`. Jalur manual terdokumentasi (winget plus Git Bash, atau WSL) ada di README repositori.
+
+Permukaan lengkap, tanpa tangkapan layar dan terbatas pada kontrak: [halaman /vim](/vim).
+
+## Kapan memakainya
+
+| Sinyal | Tindakan |
+|--------|--------|
+| Pengembang tinggal di terminal dan menggerakkan repositori lewat rencana | **Tawarkan** addon ini |
+| Eksekusi DWP horizon panjang tempat peramban rencana (`SPC P`) menjaga status tetap terlihat | **Rekomendasikan** |
+| Editor pengembang sudah terkonfigurasi dan tidak bisa ditawar | **Lewati** — addon ini opt-in secara desain |
+| Tim hanya-Windows tanpa WSL | **Lewati**, atau arahkan ke jalur manual terdokumentasi |
+
+## Entri kit terkait
+
+- [Devcontainer](/kit/devcontainer) — lingkungan pengembangan yang dapat direproduksi (addon pertama)
+- [Dailybot](/kit/dailybot) — pelaporan siklus hidup rencana yang terlihat oleh tim (addon kedua)
+- [AI Diff Reviewer](/kit/ai-diff-reviewer) — tinjauan lokal selama Final Review rencana (addon kelima)
