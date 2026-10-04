@@ -24,7 +24,6 @@ export const hi: SiteTranslations = {
     methodology: 'पद्धति',
     spec: 'विनिर्देश',
     kit: 'किट',
-    vim: 'DeepWorkPlan Vim',
     examples: 'उदाहरण',
     init: 'Init',
     quickstart: 'त्वरित शुरुआत',
@@ -1599,69 +1598,5 @@ export const hi: SiteTranslations = {
     contactTitle: 'संपर्क और सुरक्षा',
     contactBody:
       'गोपनीयता प्रश्नों के लिए security@dailybot.com पर लिखें। किसी सुरक्षा भेद्यता की रिपोर्ट के लिए, वेबसाइट और स्किल रिपॉज़िटरी के लिए GitHub की निजी भेद्यता रिपोर्टिंग को प्राथमिकता दें — सटीक पतों के लिए /.well-known/security.txt देखें।',
-  },
-
-  // DeepWorkPlan Vim — टर्मिनल एडिटर प्रदर्शनी पृष्ठ (/vim)
-  vimPage: {
-    meta: {
-      title: 'DeepWorkPlan Vim — Deep Work Plan',
-      description:
-        'DeepWorkPlan Vim, Deep Work Plan का टर्मिनल एडिटर है: जनरेट कमांड इंडेक्स, प्लान ब्राउज़र और Markdown व्यूअर के साथ Neovim 0.12+ कॉन्फ़िगरेशन।',
-    },
-    heroKicker: 'टर्मिनल एडिटर',
-    heroTitle: 'DeepWorkPlan Vim',
-    heroTagline: 'Deep Work Plan के लिए टर्मिनल एडिटर',
-    heroDescription:
-      'टर्मिनल में काम करने वाले लोगों और कोडिंग एजेंटों के लिए Neovim कॉन्फ़िगरेशन — आपके Deep Work Plans, दस्तावेज़ और कमांड इंडेक्स एक कीस्ट्रोक की दूरी पर।',
-    installTitle: 'एक पंक्ति में इंस्टॉल करें',
-    installIntro:
-      'एक पंक्ति DeepWorkPlan Vim को आपके Neovim कॉन्फ़िगरेशन के रूप में इंस्टॉल करती है। इंस्टॉलर बताता है कि वह क्या करेगा, और मौजूदा सेटअप को छूने से पहले पूछता है।',
-    installCommand: 'curl -fsSL https://deepworkplan.com/vim/install.sh | bash',
-    installCopyLabel: 'कमांड कॉपी करें',
-    installCopiedLabel: 'कॉपी हो गया',
-    installConsent:
-      'पहले सहमति: मौजूदा Neovim कॉन्फ़िगरेशन को आपकी स्पष्ट स्वीकृति के बिना कभी ओवरराइट नहीं किया जाता। इंस्टॉलर रुक जाता है और मैन्युअल मार्ग दिखाता है।',
-    installKitLink: 'ऐड-ऑन दस्तावेज़ पढ़ें',
-    installWindowsNote:
-      'Windows पर एक-पंक्ति वाला कमांड लागू नहीं होता; मैन्युअल मार्ग रिपॉज़िटरी के README में प्रलेखित है।',
-    installWindowsLinkLabel: 'Windows इंस्टॉलेशन मार्ग',
-    featuresTitle: 'यह क्या करता है',
-    featuresIntro:
-      'पाँच सुविधाएँ, जानबूझकर सीमित दायरे में। हर सुविधा एक कीबाइंडिंग से जुड़ी है, जिसे आप जनरेट किए गए कमांड इंडेक्स में देख सकते हैं।',
-    tableFeature: 'सुविधा',
-    tableDescription: 'यह क्या है',
-    tableMapping: 'मैपिंग',
-    featureF1Title: 'जनरेट किया गया कमांड इंडेक्स',
-    featureF1Description:
-      'कमांड इंडेक्स सक्रिय कॉन्फ़िगरेशन से जनरेट होता है, इसलिए कीबाइंडिंग की सूची हमेशा अद्यतित रहती है।',
-    featureF1Mapping: 'SPC h h',
-    featureF2Title: 'VS Code शैली के जेस्चर',
-    featureF2Description:
-      'ग्राफ़िकल एडिटरों से आकार लिए एडिटिंग जेस्चर: सब चुनें, और सिस्टम क्लिपबोर्ड पर कॉपी करें।',
-    featureF2Mapping: '<C-a>, y, <leader>y',
-    featureF3Title: 'Deep Work Plan ब्राउज़र',
-    featureF3Description:
-      'रिपॉज़िटरी के प्लान ब्राउज़ करने वाला पैनल — एडिटर छोड़े बिना प्लान, उसके कार्य और उनके वैलिडेशन गेट पढ़ें।',
-    featureF3Mapping: 'SPC P',
-    featureF4Title: 'Markdown व्यूअर',
-    featureF4Description:
-      'Markdown का ब्राउज़र में प्रीव्यू लें या बफ़र में रेंडर करें — दस्तावेज़ और प्लान वहीं रहते हैं जहाँ काम होता है।',
-    featureF4Mapping: 'SPC m p, SPC m r',
-    featureF5Title: 'एक-पंक्ति इंस्टॉलर',
-    featureF5Description:
-      'macOS और Linux के लिए आत्मनिर्भर इंस्टॉलर, Windows के लिए प्रलेखित मैन्युअल मार्ग के साथ।',
-    featureF5Mapping: '—',
-    requirementsTitle: 'आवश्यकताएँ',
-    requirements: [
-      'Neovim 0.12 या नया, और Lua (lua, lua5.4 या luajit) उपलब्ध',
-      'macOS और Linux; Windows प्रलेखित मैन्युअल मार्ग से समर्थित है',
-      'GPL-3.0 लाइसेंस — उपयोग, अध्ययन और संशोधन के लिए स्वतंत्र',
-    ],
-    ctaTitle: 'वहीं काम करें जहाँ काम रहता है',
-    ctaDescription:
-      'DeepWorkPlan Vim इंस्टॉल करें, Neovim खोलें, और अपने एजेंटों वाले उसी टर्मिनल में अपने Deep Work Plans पढ़ें।',
-    ctaPrimaryLabel: 'DeepWorkPlan Vim इंस्टॉल करें',
-    ctaKitLabel: 'किट का ऐड-ऑन दस्तावेज़ पढ़ें',
-    ctaRepoLabel: 'सोर्स रिपॉज़िटरी देखें',
   },
 };

@@ -99,7 +99,6 @@ src/
 │   ├── pages/              # Shared page components (*Page.astro, QuickstartPage, readers)
 │   │   ├── ComparePage.astro       # Objective comparison and source notes
 │   │   ├── CompareMatrix.astro     # Responsive capability matrix
-│   │   ├── VimPage.astro           # DeepWorkPlan Vim showcase (SoftwareApplication JSON-LD)
 │   │   └── FaqPage.astro           # Grouped FAQ with FAQPage JSON-LD
 │   │
 │   └── layout/
@@ -137,7 +136,6 @@ src/
 │   ├── about.astro          # ~3-line wrapper passing lang="en"
 │   ├── contact.astro
 │   ├── developers.astro     # Agent & developer portal (+ [lang]/developers.astro)
-│   ├── vim.astro            # DeepWorkPlan Vim showcase (+ [lang]/vim.astro)
 │   ├── privacy.astro        # Privacy policy (+ [lang]/privacy.astro)
 │   ├── examples/            # Reader index + [slug] + .md endpoint
 │   ├── kit/                 # Reader index + [slug] + .md endpoint
@@ -403,7 +401,7 @@ src/pages/
 ├── examples.astro       → /examples
 ├── compare.astro        → /compare
 ├── faq.astro            → /faq
-├── vim.astro            → /vim (DeepWorkPlan Vim showcase; /vim/install.sh is a static file)
+├── (no vim.astro)        /vim and /vim.md 301 to /kit/vim (REDIRECT_PAIRS); DeepWorkPlan Vim is documented once, at /kit/vim; /vim/install.sh is a static file
 ├── quickstart/           → /quickstart (canonical adoption page; /init, /setup, /onboarding 301 here)
 ├── methodology/
 │   ├── index.astro      → /methodology

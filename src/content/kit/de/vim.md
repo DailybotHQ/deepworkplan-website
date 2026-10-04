@@ -32,8 +32,6 @@ Der Installer ist **consent-first**: eine bestehende, fremde Neovim-Konfiguratio
 
 Windows ist kein `curl | bash`-Ziel. Der dokumentierte manuelle Weg (winget plus Git Bash, oder WSL) steht im Repository-README.
 
-Die ganze Oberfläche, ohne Screenshots und auf den Vertrag begrenzt: die [/vim-Seite](/vim).
-
 ## Wann man es einsetzt
 
 | Signal | Aktion |

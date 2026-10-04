@@ -65,4 +65,15 @@ describe('public/_redirects', () => {
       expect(status).toBe(301);
     }
   });
+
+  it('keeps DeepWorkPlan Vim documented once: /vim and /vim.md redirect to the kit page', () => {
+    const vim = REDIRECT_PAIRS.find((pair) => pair.from === 'vim');
+    const vimMd = REDIRECT_PAIRS.find((pair) => pair.from === 'vim.md');
+    expect(vim).toEqual({ from: 'vim', to: 'kit/vim', status: 301 });
+    expect(vimMd).toEqual({ from: 'vim.md', to: 'kit/vim.md', status: 301 });
+    // The installer is a static file under /vim/ and must never be a source.
+    expect(REDIRECT_PAIRS.some((pair) => pair.from.startsWith('vim/'))).toBe(
+      false
+    );
+  });
 });

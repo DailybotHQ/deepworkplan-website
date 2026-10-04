@@ -24,7 +24,6 @@ export const id: SiteTranslations = {
     methodology: 'Metodologi',
     spec: 'Spesifikasi',
     kit: 'Kit',
-    vim: 'DeepWorkPlan Vim',
     examples: 'Contoh',
     init: 'Init',
     quickstart: 'Mulai Cepat',
@@ -1616,69 +1615,5 @@ export const id: SiteTranslations = {
     contactTitle: 'Kontak dan keamanan',
     contactBody:
       'Untuk pertanyaan privasi, tulis ke security@dailybot.com. Untuk melaporkan kerentanan keamanan, gunakan pelaporan kerentanan privat GitHub untuk repositori situs web dan skill — lihat /.well-known/security.txt untuk alamat persisnya.',
-  },
-
-  // DeepWorkPlan Vim — halaman sorotan editor terminal (/vim)
-  vimPage: {
-    meta: {
-      title: 'DeepWorkPlan Vim — Deep Work Plan',
-      description:
-        'DeepWorkPlan Vim adalah editor terminal Deep Work Plan: konfigurasi Neovim 0.12+ dengan indeks perintah otomatis, peramban rencana, dan penampil Markdown.',
-    },
-    heroKicker: 'Editor terminal',
-    heroTitle: 'DeepWorkPlan Vim',
-    heroTagline: 'Editor terminal untuk Deep Work Plan',
-    heroDescription:
-      'Konfigurasi Neovim untuk manusia dan agen coding yang hidup di terminal — Deep Work Plans, dokumentasi, dan indeks perintah Anda hanya satu ketukan jauhnya.',
-    installTitle: 'Instal dalam satu baris',
-    installIntro:
-      'Satu baris memasang DeepWorkPlan Vim sebagai konfigurasi Neovim Anda. Penginstal menjelaskan apa yang akan dilakukannya dan bertanya sebelum menyentuh penataan yang sudah ada.',
-    installCommand: 'curl -fsSL https://deepworkplan.com/vim/install.sh | bash',
-    installCopyLabel: 'Salin perintah',
-    installCopiedLabel: 'Tersalin',
-    installConsent:
-      'Persetujuan lebih dulu: konfigurasi Neovim yang sudah ada tidak pernah ditimpa tanpa persetujuan tegas Anda. Penginstal berhenti dan menunjukkan jalur manual.',
-    installKitLink: 'Baca dokumentasi addon',
-    installWindowsNote:
-      'Di Windows perintah satu baris tidak berlaku; jalur manual didokumentasikan di README repositori.',
-    installWindowsLinkLabel: 'Jalur instalasi Windows',
-    featuresTitle: 'Apa yang dilakukannya',
-    featuresIntro:
-      'Lima fitur, sengaja dibatasi cakupannya. Masing-masing dipetakan ke pintasan papan tombol yang bisa Anda periksa di indeks perintah yang dibuat otomatis.',
-    tableFeature: 'Fitur',
-    tableDescription: 'Apa itu',
-    tableMapping: 'Pemetaan',
-    featureF1Title: 'Indeks perintah otomatis',
-    featureF1Description:
-      'Indeks perintah dibuat dari konfigurasi yang aktif, sehingga daftar pintasan selalu mutakhir.',
-    featureF1Mapping: 'SPC h h',
-    featureF2Title: 'Gaya gerakan VS Code',
-    featureF2Description:
-      'Gestur penyuntingan yang dibentuk editor grafis: pilih semua, dan salin ke papan klip sistem.',
-    featureF2Mapping: '<C-a>, y, <leader>y',
-    featureF3Title: 'Peramban Deep Work Plan',
-    featureF3Description:
-      'Panel untuk menelusuri rencana di repositori — baca sebuah rencana, tugas-tugasnya, dan gerbang validasinya tanpa meninggalkan editor.',
-    featureF3Mapping: 'SPC P',
-    featureF4Title: 'Penampil Markdown',
-    featureF4Description:
-      'Pratinjau Markdown di peramban atau render di buffer — dokumentasi dan rencana tetap di tempat kerja terjadi.',
-    featureF4Mapping: 'SPC m p, SPC m r',
-    featureF5Title: 'Penginstal satu baris',
-    featureF5Description:
-      'Penginstal mandiri untuk macOS dan Linux, dengan jalur manual terdokumentasi untuk Windows.',
-    featureF5Mapping: '—',
-    requirementsTitle: 'Persyaratan',
-    requirements: [
-      'Neovim 0.12 atau lebih baru, dengan Lua (lua, lua5.4, atau luajit) tersedia',
-      'macOS dan Linux; Windows didukung melalui jalur manual terdokumentasi',
-      'Berlisensi GPL-3.0 — bebas digunakan, dipelajari, dan dimodifikasi',
-    ],
-    ctaTitle: 'Bekerja tempat pekerjaan berada',
-    ctaDescription:
-      'Pasang DeepWorkPlan Vim, buka Neovim, dan baca Deep Work Plans Anda di terminal yang sama dengan agen Anda.',
-    ctaPrimaryLabel: 'Instal DeepWorkPlan Vim',
-    ctaKitLabel: 'Baca dokumen addon di kit',
-    ctaRepoLabel: 'Lihat repositori sumber',
   },
 };

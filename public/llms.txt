@@ -25,7 +25,7 @@ How an agent should engage: fetch the [adoption prompt](https://deepworkplan.com
 - [Methodology](https://deepworkplan.com/methodology): what DWP is, its principles, and how to adopt it
 - [Specification](https://deepworkplan.com/spec): the normative DWP standard — task anatomy, validation gates, completion protocol, archetypes, addons
 - [Kit](https://deepworkplan.com/kit): presets, adapters, and commands for installing DWP into a repository
-- [Vim](https://deepworkplan.com/vim): DeepWorkPlan Vim — the terminal editor for Deep Work Plan (Neovim 0.12+, macOS/Linux, GPL-3.0); install consent-first with [install.sh](https://deepworkplan.com/vim/install.sh): `curl -fsSL https://deepworkplan.com/vim/install.sh | bash`
+- [Vim](https://deepworkplan.com/kit/vim): DeepWorkPlan Vim — the terminal editor for Deep Work Plan (Neovim 0.12+, macOS/Linux, GPL-3.0); install consent-first with [install.sh](https://deepworkplan.com/vim/install.sh): `curl -fsSL https://deepworkplan.com/vim/install.sh | bash`
 - [Changelog](https://deepworkplan.com/changelog): a source-backed timeline of DWP releases and design decisions
 - [Examples](https://deepworkplan.com/examples): worked examples of the methodology in practice
 - [Quickstart](https://deepworkplan.com/quickstart): get DWP running in a repo quickly

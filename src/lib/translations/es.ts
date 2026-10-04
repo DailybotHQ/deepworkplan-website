@@ -20,7 +20,6 @@ export const es: SiteTranslations = {
     methodology: 'Metodología',
     spec: 'Especificación',
     kit: 'Kit',
-    vim: 'DeepWorkPlan Vim',
     examples: 'Ejemplos',
     init: 'Init',
     quickstart: 'Inicio rápido',
@@ -1608,69 +1607,5 @@ export const es: SiteTranslations = {
     contactTitle: 'Contacto y seguridad',
     contactBody:
       'Para preguntas de privacidad escribe a security@dailybot.com. Para reportar una vulnerabilidad de seguridad, prefiere el reporte privado de vulnerabilidades de GitHub para los repositorios del sitio web y de la skill — consulta /.well-known/security.txt para las direcciones exactas.',
-  },
-
-  // DeepWorkPlan Vim — vitrina del editor de terminal (/vim)
-  vimPage: {
-    meta: {
-      title: 'DeepWorkPlan Vim — Deep Work Plan',
-      description:
-        'DeepWorkPlan Vim es el editor de terminal de Deep Work Plan: configuración de Neovim 0.12+ con índice de comandos, navegador de planes y visor de Markdown.',
-    },
-    heroKicker: 'Editor de terminal',
-    heroTitle: 'DeepWorkPlan Vim',
-    heroTagline: 'El editor de terminal para Deep Work Plan',
-    heroDescription:
-      'Una configuración de Neovim para personas y agentes de programación que viven en la terminal: tus Deep Work Plans, la documentación y el índice de comandos a una tecla de distancia.',
-    installTitle: 'Instala en una línea',
-    installIntro:
-      'Una línea instala DeepWorkPlan Vim como tu configuración de Neovim. El instalador explica qué hará y pregunta antes de tocar una configuración existente.',
-    installCommand: 'curl -fsSL https://deepworkplan.com/vim/install.sh | bash',
-    installCopyLabel: 'Copiar comando',
-    installCopiedLabel: 'Copiado',
-    installConsent:
-      'Primero el consentimiento: una configuración de Neovim existente nunca se sobrescribe sin tu aprobación explícita. El instalador se detiene y muestra la ruta manual.',
-    installKitLink: 'Lee la documentación del addon',
-    installWindowsNote:
-      'En Windows la línea única no aplica; el README del repositorio documenta la ruta manual.',
-    installWindowsLinkLabel: 'Ruta de instalación en Windows',
-    featuresTitle: 'Qué hace',
-    featuresIntro:
-      'Cinco características, acotadas a propósito. Cada una corresponde a una combinación de teclas que puedes inspeccionar en el índice de comandos generado.',
-    tableFeature: 'Característica',
-    tableDescription: 'Qué es',
-    tableMapping: 'Mapeo',
-    featureF1Title: 'Índice de comandos generado',
-    featureF1Description:
-      'Un índice de comandos generado desde la configuración activa, para que la lista de atajos siempre esté al día.',
-    featureF1Mapping: 'SPC h h',
-    featureF2Title: 'Gestos estilo VS Code',
-    featureF2Description:
-      'Gestos de edición heredados de los editores gráficos: seleccionar todo y copiar al portapapeles del sistema.',
-    featureF2Mapping: '<C-a>, y, <leader>y',
-    featureF3Title: 'Navegador de Deep Work Plan',
-    featureF3Description:
-      'Un panel que recorre los planes del repositorio: lee un plan, sus tareas y sus puertas de validación sin salir del editor.',
-    featureF3Mapping: 'SPC P',
-    featureF4Title: 'Visor de Markdown',
-    featureF4Description:
-      'Vista previa de Markdown en el navegador o renderizado en el búfer, para que la documentación y los planes queden donde ocurre el trabajo.',
-    featureF4Mapping: 'SPC m p, SPC m r',
-    featureF5Title: 'Instalador de una línea',
-    featureF5Description:
-      'Un instalador autónomo para macOS y Linux, con una ruta manual documentada para Windows.',
-    featureF5Mapping: '—',
-    requirementsTitle: 'Requisitos',
-    requirements: [
-      'Neovim 0.12 o más reciente, con Lua (lua, lua5.4 o luajit) disponible',
-      'macOS y Linux; Windows cuenta con una ruta manual documentada',
-      'Licencia GPL-3.0 — libre de usar, estudiar y modificar',
-    ],
-    ctaTitle: 'Trabaja donde vive el trabajo',
-    ctaDescription:
-      'Instala DeepWorkPlan Vim, abre Neovim y lee tus Deep Work Plans en la misma terminal que usan tus agentes.',
-    ctaPrimaryLabel: 'Instalar DeepWorkPlan Vim',
-    ctaKitLabel: 'Lee el doc del addon en el kit',
-    ctaRepoLabel: 'Consulta el repositorio fuente',
   },
 };

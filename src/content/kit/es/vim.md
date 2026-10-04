@@ -32,8 +32,6 @@ El instalador es **consent-first**: una configuración de Neovim existente y aje
 
 Windows no es un destino de `curl | bash`. La ruta manual documentada (winget más Git Bash, o WSL) vive en el README del repositorio.
 
-Superficie completa, sin capturas y acotada al contrato: la [página /vim](/vim).
-
 ## Cuándo recurrir a él
 
 | Señal | Acción |

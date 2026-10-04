@@ -32,8 +32,6 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 
 Windows는 `curl | bash` 대상이 아닙니다. 문서화된 수동 경로(winget 더하기 Git Bash, 또는 WSL)는 저장소 README에 있습니다.
 
-전체 모습, 스크린샷 없이 계약 범위로 한정: [/vim 페이지](/vim).
-
 ## 언제 손을 뻗나
 
 | 신호 | 행동 |

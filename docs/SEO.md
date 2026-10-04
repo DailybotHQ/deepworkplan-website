@@ -106,7 +106,7 @@ For custom OG images, pass `image` prop:
 | ContactPage | `ContactPage.astro` | Contact page |
 | WebPage | `TrustPage.astro`, `DevelopersPage.astro`, `PrivacyPage.astro`, `ComparePage.astro` | Trust/developers/privacy/compare pages |
 | FAQPage | `FaqPage.astro` | FAQ question and accepted-answer structured data |
-| SoftwareApplication | `VimPage.astro` | `/vim` showcase — DeepWorkPlan Vim (applicationCategory `DeveloperApplication`, GPL-3.0 license link, macOS/Linux) |
+| SoftwareApplication | `KitReader.astro` (via the kit `software` frontmatter) | `/kit/vim` — DeepWorkPlan Vim, the single official page (`/vim` only redirects to it) |
 
 ### Adding a New Schema
 

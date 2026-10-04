@@ -32,8 +32,6 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 
 Windows は `curl | bash` の対象ではありません。ドキュメント化された手動パス（winget + Git Bash、または WSL）はリポジトリの README にあります。
 
-全容（スクリーンショットなし、契約の範囲のみ）：[/vim ページ](/vim)。
-
 ## いつ選ぶか
 
 | 信号 | アクション |

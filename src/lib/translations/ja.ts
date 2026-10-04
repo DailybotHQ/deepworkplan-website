@@ -25,7 +25,6 @@ export const ja: SiteTranslations = {
     methodology: '方法論',
     spec: '仕様',
     kit: 'キット',
-    vim: 'DeepWorkPlan Vim',
     examples: '事例',
     init: 'Init',
     quickstart: 'クイックスタート',
@@ -1608,69 +1607,5 @@ export const ja: SiteTranslations = {
     contactTitle: '連絡先とセキュリティ',
     contactBody:
       'プライバシーに関する質問は security@dailybot.com までご連絡ください。セキュリティの脆弱性を報告する場合は、ウェブサイトとスキルのリポジトリに対して GitHub のプライベート脆弱性レポートを優先してください——正確な宛先は /.well-known/security.txt に記載されています。',
-  },
-
-  // DeepWorkPlan Vim — ターミナルエディタの紹介ページ（/vim）
-  vimPage: {
-    meta: {
-      title: 'DeepWorkPlan Vim — Deep Work Plan',
-      description:
-        'Deep Work Plan のターミナルエディタ。生成されるコマンド索引、プランブラウザ、Markdown ビューアを備えた Neovim 0.12+ 設定。',
-    },
-    heroKicker: 'ターミナルエディタ',
-    heroTitle: 'DeepWorkPlan Vim',
-    heroTagline: 'Deep Work Plan のターミナルエディタ',
-    heroDescription:
-      'ターミナルで暮らす人間とコーディングエージェントのための Neovim 設定——Deep Work Plans も、ドキュメントも、コマンド索引も、キーひとつで届く距離に。',
-    installTitle: '一行でインストール',
-    installIntro:
-      '一行のコマンドで DeepWorkPlan Vim を Neovim 設定としてインストールします。インストーラは何をするかを説明し、既存の設定に触れる前に確認します。',
-    installCommand: 'curl -fsSL https://deepworkplan.com/vim/install.sh | bash',
-    installCopyLabel: 'コマンドをコピー',
-    installCopiedLabel: 'コピーしました',
-    installConsent:
-      '同意が先：既存の Neovim 設定を、明示的な承認なしに上書きすることは決してありません。インストーラは停止して手動の手順を示します。',
-    installKitLink: 'アドオンのドキュメントを読む',
-    installWindowsNote:
-      'Windows ではこの一行コマンドは使えません。リポジトリの README に手動の手順が記載されています。',
-    installWindowsLinkLabel: 'Windows のインストール手順',
-    featuresTitle: 'できること',
-    featuresIntro:
-      '五つの機能、意図的に小さく限定しています。それぞれが、生成されたコマンド索引で確認できるキーバインドに対応します。',
-    tableFeature: '機能',
-    tableDescription: '内容',
-    tableMapping: 'マッピング',
-    featureF1Title: '生成されるコマンド索引',
-    featureF1Description:
-      'コマンド索引は実際の設定から生成されるため、キーバインドの一覧は常に最新です。',
-    featureF1Mapping: 'SPC h h',
-    featureF2Title: 'VS Code 風の操作',
-    featureF2Description:
-      'グラフィカルエディタに倣った編集操作：すべて選択と、システムクリップボードへのコピー。',
-    featureF2Mapping: '<C-a>, y, <leader>y',
-    featureF3Title: 'Deep Work Plan ブラウザ',
-    featureF3Description:
-      'リポジトリ内のプランを閲覧するパネル——エディタを出ずに、プランとタスクと検証ゲートを読めます。',
-    featureF3Mapping: 'SPC P',
-    featureF4Title: 'Markdown ビューア',
-    featureF4Description:
-      'Markdown をブラウザでプレビュー、またはバッファ内で描画——ドキュメントとプランは、仕事が行われる場所にとどまります。',
-    featureF4Mapping: 'SPC m p, SPC m r',
-    featureF5Title: '一行インストーラ',
-    featureF5Description:
-      'macOS と Linux 向けの自己完結的なインストーラ。Windows は文書化された手動の手順を用意しています。',
-    featureF5Mapping: '—',
-    requirementsTitle: '必要要件',
-    requirements: [
-      'Neovim 0.12 以上。Lua（lua、lua5.4、luajit のいずれか）が利用可能なこと',
-      'macOS と Linux。Windows は文書化された手動の手順でサポート',
-      'GPL-3.0 ライセンス——利用、研究、改変は自由',
-    ],
-    ctaTitle: '仕事がある場所で働く',
-    ctaDescription:
-      'DeepWorkPlan Vim をインストールし、Neovim を開けば、エージェントと同じターミナルで Deep Work Plans を読めます。',
-    ctaPrimaryLabel: 'DeepWorkPlan Vim をインストール',
-    ctaKitLabel: 'キットのアドオン文書を読む',
-    ctaRepoLabel: 'ソースリポジトリを見る',
   },
 };

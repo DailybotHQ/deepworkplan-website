@@ -25,7 +25,6 @@ export const vi: SiteTranslations = {
     methodology: 'Phương pháp luận',
     spec: 'Đặc tả',
     kit: 'Kit',
-    vim: 'DeepWorkPlan Vim',
     examples: 'Ví dụ',
     init: 'Init',
     quickstart: 'Khởi động nhanh',
@@ -1610,69 +1609,5 @@ export const vi: SiteTranslations = {
     contactTitle: 'Liên hệ và bảo mật',
     contactBody:
       'Về câu hỏi quyền riêng tư, hãy viết đến security@dailybot.com. Để báo cáo lỗ hổng bảo mật, hãy ưu tiên tính năng báo cáo lỗ hổng riêng tư của GitHub cho các repository trang web và skill — xem /.well-known/security.txt để biết địa chỉ chính xác.',
-  },
-
-  // DeepWorkPlan Vim — trang giới thiệu trình soạn thảo terminal (/vim)
-  vimPage: {
-    meta: {
-      title: 'DeepWorkPlan Vim — Deep Work Plan',
-      description:
-        'DeepWorkPlan Vim là trình soạn thảo terminal của Deep Work Plan: cấu hình Neovim 0.12+ với mục lục lệnh, trình duyệt kế hoạch và trình xem Markdown.',
-    },
-    heroKicker: 'Trình soạn thảo terminal',
-    heroTitle: 'DeepWorkPlan Vim',
-    heroTagline: 'Trình soạn thảo terminal dành cho Deep Work Plan',
-    heroDescription:
-      'Một cấu hình Neovim dành cho con người và các agent lập trình sống trong terminal — Deep Work Plans, tài liệu và mục lục lệnh của bạn chỉ cách một phím bấm.',
-    installTitle: 'Cài đặt trong một dòng',
-    installIntro:
-      'Một dòng lệnh cài đặt DeepWorkPlan Vim làm cấu hình Neovim của bạn. Trình cài đặt giải thích nó sẽ làm gì và hỏi trước khi chạm vào thiết lập hiện có.',
-    installCommand: 'curl -fsSL https://deepworkplan.com/vim/install.sh | bash',
-    installCopyLabel: 'Sao chép lệnh',
-    installCopiedLabel: 'Đã sao chép',
-    installConsent:
-      'Lấy sự đồng ý trước: cấu hình Neovim hiện có không bao giờ bị ghi đè nếu thiếu sự chấp thuận rõ ràng của bạn. Trình cài đặt dừng lại và chỉ ra đường dẫn thủ công.',
-    installKitLink: 'Đọc tài liệu addon',
-    installWindowsNote:
-      'Trên Windows, lệnh một dòng không áp dụng; đường dẫn thủ công được ghi trong README của repository.',
-    installWindowsLinkLabel: 'Đường dẫn cài đặt Windows',
-    featuresTitle: 'Nó làm gì',
-    featuresIntro:
-      'Năm tính năng, cố tình giới hạn phạm vi. Mỗi tính năng ứng với một tổ hợp phím bạn có thể tra trong mục lục lệnh được tạo tự động.',
-    tableFeature: 'Tính năng',
-    tableDescription: 'Là gì',
-    tableMapping: 'Gán phím',
-    featureF1Title: 'Mục lục lệnh được tạo tự động',
-    featureF1Description:
-      'Mục lục lệnh được tạo từ cấu hình đang chạy, nên danh sách tổ hợp phím luôn cập nhật.',
-    featureF1Mapping: 'SPC h h',
-    featureF2Title: 'Thao tác kiểu VS Code',
-    featureF2Description:
-      'Những thao tác chỉnh sửa mang dáng dấp trình soạn thảo đồ họa: chọn tất cả và sao chép vào clipboard của hệ thống.',
-    featureF2Mapping: '<C-a>, y, <leader>y',
-    featureF3Title: 'Trình duyệt Deep Work Plan',
-    featureF3Description:
-      'Một panel duyệt các kế hoạch trong repository — đọc một kế hoạch, các task và cổng xác thực của nó mà không rời khỏi trình soạn thảo.',
-    featureF3Mapping: 'SPC P',
-    featureF4Title: 'Trình xem Markdown',
-    featureF4Description:
-      'Xem trước Markdown trong trình duyệt hoặc kết xuất ngay trong buffer — tài liệu và kế hoạch ở ngay nơi công việc diễn ra.',
-    featureF4Mapping: 'SPC m p, SPC m r',
-    featureF5Title: 'Trình cài đặt một dòng',
-    featureF5Description:
-      'Trình cài đặt tự chứa cho macOS và Linux, kèm đường dẫn thủ công đã được ghi chép cho Windows.',
-    featureF5Mapping: '—',
-    requirementsTitle: 'Yêu cầu',
-    requirements: [
-      'Neovim 0.12 trở lên, có Lua (lua, lua5.4 hoặc luajit) khả dụng',
-      'macOS và Linux; Windows được hỗ trợ qua đường dẫn thủ công đã ghi chép',
-      'Giấy phép GPL-3.0 — tự do sử dụng, nghiên cứu và sửa đổi',
-    ],
-    ctaTitle: 'Làm việc nơi công việc đang sống',
-    ctaDescription:
-      'Cài đặt DeepWorkPlan Vim, mở Neovim và đọc các Deep Work Plans của bạn trong cùng terminal mà các agent của bạn dùng.',
-    ctaPrimaryLabel: 'Cài đặt DeepWorkPlan Vim',
-    ctaKitLabel: 'Đọc tài liệu addon trong kit',
-    ctaRepoLabel: 'Xem repository nguồn',
   },
 };

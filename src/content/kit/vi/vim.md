@@ -32,8 +32,6 @@ Trình cài đặt **lấy sự đồng ý trước**: một cấu hình Neovim 
 
 Windows không phải đích của `curl | bash`. Đường dẫn thủ công có tài liệu (winget cộng Git Bash, hoặc WSL) nằm trong README của kho.
 
-Toàn bộ mặt bằng, không ảnh chụp màn hình và bó trong phạm vi hợp đồng: [trang /vim](/vim).
-
 ## Khi nào dùng đến nó
 
 | Tín hiệu | Hành động |

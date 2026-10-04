@@ -32,8 +32,6 @@ Kurulum programı **rıza-önceliklidir**: mevcut, başka birine ait Neovim yap�
 
 Windows bir `curl | bash` hedefi değildir. Belgelenmiş manuel yol (winget artı Git Bash ya da WSL) depo README'sinde bulunur.
 
-Tam yüzey, ekran görüntüsü olmadan ve sözleşmeyle sınırlı: [/vim sayfası](/vim).
-
 ## Ne zaman tercih edilir
 
 | Sinyal | Eylem |

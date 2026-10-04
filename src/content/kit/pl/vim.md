@@ -32,8 +32,6 @@ Instalator jest **zgodny z zasadą zgody**: istniejąca, obca konfiguracja Neovi
 
 Windows nie jest celem `curl | bash`. Udokumentowana ścieżka ręczna (winget plus Git Bash, albo WSL) mieszka w README repozytorium.
 
-Pełna powierzchnia, bez zrzutów ekranu i ograniczona do kontraktu: [strona /vim](/vim).
-
 ## Kiedy sięgać
 
 | Sygnał | Działanie |

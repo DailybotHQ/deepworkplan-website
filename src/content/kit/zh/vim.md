@@ -32,8 +32,6 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 
 Windows 不是 `curl | bash` 的目标。有文档说明的手动路径（winget 配合 Git Bash，或 WSL）见仓库 README。
 
-完整界面，无截图、以合同为界：[/vim 页面](/vim)。
-
 ## 何时选用它
 
 | 信号 | 动作 |

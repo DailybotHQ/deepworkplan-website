@@ -32,8 +32,6 @@ The installer is **consent-first**: an existing, foreign Neovim config is never 
 
 Windows is not a `curl | bash` target. The documented manual path (winget plus Git Bash, or WSL) lives in the repository README.
 
-Full surface, screenshots-free and contract-scoped: the [/vim page](/vim).
-
 ## When to reach for it
 
 | Signal | Action |

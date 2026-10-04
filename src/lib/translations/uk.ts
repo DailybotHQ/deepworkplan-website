@@ -25,7 +25,6 @@ export const uk: SiteTranslations = {
     methodology: 'Методологія',
     spec: 'Специфікація',
     kit: 'Набір',
-    vim: 'DeepWorkPlan Vim',
     examples: 'Приклади',
     init: 'Init',
     quickstart: 'Швидкий старт',
@@ -1613,69 +1612,5 @@ export const uk: SiteTranslations = {
     contactTitle: 'Контакт і безпека',
     contactBody:
       'З питань приватності пишіть на security@dailybot.com. Щоб повідомити про вразливість, віддайте перевагу приватному звіту про вразливості GitHub для репозиторіїв сайту та навички — точні адреси див. у /.well-known/security.txt.',
-  },
-
-  // DeepWorkPlan Vim — сторінка термінального редактора (/vim)
-  vimPage: {
-    meta: {
-      title: 'DeepWorkPlan Vim — Deep Work Plan',
-      description:
-        'DeepWorkPlan Vim — термінальний редактор для Deep Work Plan: конфігурація Neovim 0.12+ з генерованим індексом команд, оглядачем планів і переглядачем Markdown.',
-    },
-    heroKicker: 'Термінальний редактор',
-    heroTitle: 'DeepWorkPlan Vim',
-    heroTagline: 'Термінальний редактор для Deep Work Plan',
-    heroDescription:
-      'Конфігурація Neovim для людей і програмістських агентів, які живуть у терміналі — ваші Deep Work Plans, документація та індекс команд на відстані одного натискання клавіші.',
-    installTitle: 'Встановлення одним рядком',
-    installIntro:
-      'Один рядок встановлює DeepWorkPlan Vim як вашу конфігурацію Neovim. Інсталятор пояснює, що зробить, і питає, перш ніж торкатися наявного налаштування.',
-    installCommand: 'curl -fsSL https://deepworkplan.com/vim/install.sh | bash',
-    installCopyLabel: 'Скопіювати команду',
-    installCopiedLabel: 'Скопійовано',
-    installConsent:
-      'Спочатку згода: наявну конфігурацію Neovim ніколи не перезаписують без вашого явного схвалення. Інсталятор зупиняється і показує ручний шлях.',
-    installKitLink: 'Читати документацію аддона',
-    installWindowsNote:
-      'У Windows однорядковик не застосовується; ручний шлях описано в README репозиторію.',
-    installWindowsLinkLabel: 'Шлях встановлення для Windows',
-    featuresTitle: 'Що він робить',
-    featuresIntro:
-      'Пʼять можливостей, свідомо обмежених за охопленням. Кожна відповідає поєднанню клавіш, яке можна переглянути в генерованому індексі команд.',
-    tableFeature: 'Можливість',
-    tableDescription: 'Що це',
-    tableMapping: 'Привʼязка',
-    featureF1Title: 'Генерований індекс команд',
-    featureF1Description:
-      'Індекс команд генерується з чинної конфігурації, тож список привʼязок клавіш завжди актуальний.',
-    featureF1Mapping: 'SPC h h',
-    featureF2Title: 'Жести в дусі VS Code',
-    featureF2Description:
-      'Жести редагування, знайомі за графічними редакторами: виділити все та скопіювати в системний буфер обміну.',
-    featureF2Mapping: '<C-a>, y, <leader>y',
-    featureF3Title: 'Оглядач Deep Work Plan',
-    featureF3Description:
-      'Панель для перегляду планів репозиторію — читайте план, його завдання та його ворота валідації, не виходячи з редактора.',
-    featureF3Mapping: 'SPC P',
-    featureF4Title: 'Переглядач Markdown',
-    featureF4Description:
-      'Попередній перегляд Markdown у браузері чи рендер у буфері — документація та плани лишаються там, де триває робота.',
-    featureF4Mapping: 'SPC m p, SPC m r',
-    featureF5Title: 'Інсталятор одним рядком',
-    featureF5Description:
-      'Самодостатній інсталятор для macOS і Linux з документованим ручним шляхом для Windows.',
-    featureF5Mapping: '—',
-    requirementsTitle: 'Вимоги',
-    requirements: [
-      'Neovim 0.12 або новіший, з доступною Lua (lua, lua5.4 або luajit)',
-      'macOS і Linux; Windows підтримується через документований ручний шлях',
-      'Ліцензія GPL-3.0 — вільно використовувати, вивчати та змінювати',
-    ],
-    ctaTitle: 'Працюйте там, де живе робота',
-    ctaDescription:
-      'Встановіть DeepWorkPlan Vim, відкрийте Neovim і читайте свої Deep Work Plans у тому самому терміналі, що й ваші агенти.',
-    ctaPrimaryLabel: 'Встановити DeepWorkPlan Vim',
-    ctaKitLabel: 'Читати документ аддона в наборі',
-    ctaRepoLabel: 'Відкрити вихідний репозиторій',
   },
 };

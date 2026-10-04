@@ -165,8 +165,8 @@ function extractNavPaths(markdown: string, prefix: string): string[] {
 }
 
 /** Every real top-level route the "Site Navigation" block must list —
- * home, methodology, spec, kit, quickstart, examples, vim, compare, faq,
- * changelog, developers, trust, about, contact, privacy (15 real HTML
+ * home, methodology, spec, kit, quickstart, examples, compare, faq,
+ * changelog, developers, trust, about, contact, privacy (14 real HTML
  * routes; /404 and /internal/* are correctly never nav targets) — plus
  * the one standalone, non-page agent artifact, /init.md (English-only,
  * never a /{lang}/init.md variant; /init itself now redirects to
@@ -178,7 +178,6 @@ const EXPECTED_NAV_PATHS = [
   '/kit',
   '/quickstart',
   '/examples',
-  '/vim',
   '/compare',
   '/faq',
   '/changelog',
@@ -191,7 +190,7 @@ const EXPECTED_NAV_PATHS = [
 ];
 
 describe('Site Navigation block (generateSiteNavigation via serializePageToAgentMarkdown)', () => {
-  it('lists every one of the 16 real public routes for English', () => {
+  it('lists every one of the 15 real public routes for English', () => {
     const result = serializePageToAgentMarkdown(mockPage as any, {
       slug: 'about',
       lang: 'en',
@@ -200,7 +199,7 @@ describe('Site Navigation block (generateSiteNavigation via serializePageToAgent
     expect(new Set(paths)).toEqual(new Set(EXPECTED_NAV_PATHS));
   });
 
-  it('lists every one of the 16 real public routes for a non-English language (es), with localized labels', () => {
+  it('lists every one of the 15 real public routes for a non-English language (es), with localized labels', () => {
     const result = serializePageToAgentMarkdown(mockPageNoLastUpdated as any, {
       slug: 'contact',
       lang: 'es',

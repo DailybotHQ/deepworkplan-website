@@ -32,8 +32,6 @@ Penginstalnya **consent-first**: konfigurasi Neovim yang sudah ada milik pihak l
 
 Windows bukan target `curl | bash`. Jalur manual terdokumentasi (winget plus Git Bash, atau WSL) ada di README repositori.
 
-Permukaan lengkap, tanpa tangkapan layar dan terbatas pada kontrak: [halaman /vim](/vim).
-
 ## Kapan memakainya
 
 | Sinyal | Tindakan |

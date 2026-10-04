@@ -24,7 +24,6 @@ export const th: SiteTranslations = {
     methodology: 'ระเบียบวิธี',
     spec: 'ข้อกำหนด',
     kit: 'ชุดเครื่องมือ',
-    vim: 'DeepWorkPlan Vim',
     examples: 'ตัวอย่าง',
     init: 'เริ่มต้น',
     quickstart: 'เริ่มใช้งานเร็ว',
@@ -1589,69 +1588,5 @@ export const th: SiteTranslations = {
     contactTitle: 'ติดต่อและความปลอดภัย',
     contactBody:
       'สำหรับคำถามด้านความเป็นส่วนตัว เขียนไปที่ security@dailybot.com หากต้องการรายงานช่องโหว่ด้านความปลอดภัย แนะนำให้ใช้การรายงานช่องโหว่แบบส่วนตัวของ GitHub สำหรับ repository เว็บไซต์และสกิล — ดูที่อยู่ที่แน่นอนได้ใน /.well-known/security.txt',
-  },
-
-  // DeepWorkPlan Vim — หน้าแนะนำเทอร์มินัลเอดิเตอร์ (/vim)
-  vimPage: {
-    meta: {
-      title: 'DeepWorkPlan Vim — Deep Work Plan',
-      description:
-        'DeepWorkPlan Vim คือเทอร์มินัลเอดิเตอร์ของ Deep Work Plan: คอนฟิกูเรชัน Neovim 0.12+ ที่มีดัชนีคำสั่งแบบสร้างอัตโนมัติ ตัวเรียกดูแผน และตัวดู Markdown',
-    },
-    heroKicker: 'เทอร์มินัลเอดิเตอร์',
-    heroTitle: 'DeepWorkPlan Vim',
-    heroTagline: 'เทอร์มินัลเอดิเตอร์สำหรับ Deep Work Plan',
-    heroDescription:
-      'คอนฟิกูเรชัน Neovim สำหรับมนุษย์และเอเจนต์เขียนโค้ดที่อาศัยอยู่ในเทอร์มินัล — Deep Work Plans เอกสาร และดัชนีคำสั่งของคุณ อยู่ห่างเพียงการกดคีย์เดียว',
-    installTitle: 'ติดตั้งในหนึ่งบรรทัด',
-    installIntro:
-      'หนึ่งบรรทัดติดตั้ง DeepWorkPlan Vim เป็นคอนฟิกูเรชัน Neovim ของคุณ ตัวติดตั้งจะอธิบายว่าจะทำอะไร และถามก่อนแตะต้องการตั้งค่าที่มีอยู่',
-    installCommand: 'curl -fsSL https://deepworkplan.com/vim/install.sh | bash',
-    installCopyLabel: 'คัดลอกคำสั่ง',
-    installCopiedLabel: 'คัดลอกแล้ว',
-    installConsent:
-      'ขอความยินยอมก่อน: คอนฟิกูเรชัน Neovim ที่มีอยู่จะไม่ถูกเขียนทับเด็ดขาดหากไม่ได้รับอนุมัติอย่างชัดเจนจากคุณ ตัวติดตั้งจะหยุดและแสดงวิธีแบบแมนนวลแทน',
-    installKitLink: 'อ่านเอกสารแอดออน',
-    installWindowsNote:
-      'บน Windows คำสั่งบรรทัดเดียวใช้ไม่ได้ วิธีแบบแมนนวลมีอธิบายไว้ใน README ของ repository',
-    installWindowsLinkLabel: 'วิธีติดตั้งบน Windows',
-    featuresTitle: 'มันทำอะไร',
-    featuresIntro:
-      'ห้าฟีเจอร์ ที่จงใจจำกัดขอบเขต แต่ละฟีเจอร์มีคีย์ไบน์ดิงกำกับ ซึ่งคุณตรวจสอบได้ในดัชนีคำสั่งแบบสร้างอัตโนมัติ',
-    tableFeature: 'ฟีเจอร์',
-    tableDescription: 'คืออะไร',
-    tableMapping: 'การผูกคีย์',
-    featureF1Title: 'ดัชนีคำสั่งแบบสร้างอัตโนมัติ',
-    featureF1Description:
-      'ดัชนีคำสั่งสร้างจากคอนฟิกูเรชันที่ใช้งานจริง รายการคีย์ไบน์ดิงจึงเป็นปัจจุบันเสมอ',
-    featureF1Mapping: 'SPC h h',
-    featureF2Title: 'ท่าทางแบบ VS Code',
-    featureF2Description:
-      'ท่าทางการแก้ไขที่เลียนแบบเอดิเตอร์กราฟิกกาล: เลือกทั้งหมด และคัดลอกไปยังคลิปบอร์ดของระบบ',
-    featureF2Mapping: '<C-a>, y, <leader>y',
-    featureF3Title: 'ตัวเรียกดู Deep Work Plan',
-    featureF3Description:
-      'แผงสำหรับเรียกดูแผนใน repository — อ่านแผน งานต่าง ๆ และเกตตรวจสอบความถูกต้อง โดยไม่ต้องออกจากเอดิเตอร์',
-    featureF3Mapping: 'SPC P',
-    featureF4Title: 'ตัวดู Markdown',
-    featureF4Description:
-      'ดูตัวอย่าง Markdown ในเบราว์เซอร์ หรือเรนเดอร์ในบัฟเฟอร์ — เอกสารและแผนอยู่ที่ซึ่งงานเกิดขึ้น',
-    featureF4Mapping: 'SPC m p, SPC m r',
-    featureF5Title: 'ตัวติดตั้งหนึ่งบรรทัด',
-    featureF5Description:
-      'ตัวติดตั้งที่สมบูรณ์ในตัวสำหรับ macOS และ Linux พร้อมวิธีแบบแมนนวลที่บันทึกไว้สำหรับ Windows',
-    featureF5Mapping: '—',
-    requirementsTitle: 'ข้อกำหนด',
-    requirements: [
-      'Neovim 0.12 หรือใหม่กว่า พร้อม Lua (lua, lua5.4 หรือ luajit) ที่พร้อมใช้',
-      'macOS และ Linux; Windows รองรับผ่านวิธีแบบแมนนวลที่บันทึกไว้',
-      'สัญญาอนุญาต GPL-3.0 — ใช้งาน ศึกษา และแก้ไขได้อย่างเสรี',
-    ],
-    ctaTitle: 'ทำงานที่ที่งานอยู่',
-    ctaDescription:
-      'ติดตั้ง DeepWorkPlan Vim เปิด Neovim แล้วอ่าน Deep Work Plans ของคุณในเทอร์มินัลเดียวกับที่เอเจนต์ของคุณใช้',
-    ctaPrimaryLabel: 'ติดตั้ง DeepWorkPlan Vim',
-    ctaKitLabel: 'อ่านเอกสารแอดออนในคิต',
-    ctaRepoLabel: 'ดูซอร์ส repository',
   },
 };
