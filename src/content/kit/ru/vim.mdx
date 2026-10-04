@@ -5,12 +5,19 @@ kind: addon
 lang: ru
 order: 6
 ---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 # Аддон DeepWorkPlan Vim
 
 **DeepWorkPlan Vim** — терминальный редактор Deep Work Plan: конфигурация Neovim (это сам редактор, а не файл репозитория), которая ставит рабочие поверхности методологии на расстоянии одного нажатия клавиши. Пока остальные записи набора устанавливают harness в репозиторий, этот аддон оснащает человека — и любого агента, управляющего Neovim в headless-режиме, — редактором, который говорит на DWP изначально.
 
 Требуется **Neovim 0.12 или новее**, работает на **macOS и Linux** (для Windows есть документированный ручной путь), лицензия — **GPL-3.0**: свободно использовать, изучать и изменять.
+
+<VimInDwpLoop lang="ru" class="not-prose my-10" />
+
+<VimCommandIndex lang="ru" class="not-prose my-10" />
 
 ## Что он добавляет
 
@@ -27,6 +34,8 @@ order: 6
 ```bash
 curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 ```
+
+<VimInstall lang="ru" />
 
 Установщик **consent-first**: существующий чужой конфиг Neovim никогда не перезаписывается. При запуске через канал без терминала он прерывается с инструкциями, ничего не трогая; в интерактивном режиме спрашивает, прежде чем отодвинуть существующий конфиг. Плагины устанавливаются headless при первом запуске — без танцев с выходом и повторным открытием.
 

@@ -5,12 +5,19 @@ kind: addon
 lang: th
 order: 6
 ---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 # ส่วนเสริม DeepWorkPlan Vim
 
 **DeepWorkPlan Vim** คือตัวแก้ไขเทอร์มินัลของ Deep Work Plan: การตั้งค่า Neovim ชุดหนึ่ง (นี่คือตัวแก้ไขเอง ไม่ใช่ไฟล์ของที่เก็บ) ที่วางพื้นผิวการทำงานของวิธีการไว้ห่างเพียงการกดปุ่มเดียว ขณะที่รายการอื่นใน kit ติดตั้ง harness ลงในที่เก็บ ส่วนเสริมนี้ติดอาวุธให้มนุษย์ — และเอเจนต์ใดก็ตามที่ขับเคลื่อน Neovim แบบ headless — ด้วยตัวแก้ไขที่พูด DWP ได้ดั้งเดิม
 
 ต้องการ **Neovim 0.12 หรือใหม่กว่า** ทำงานบน **macOS และ Linux** (Windows รองรับผ่านเส้นทางแมนนวลที่มีเอกสารกำกับ) และเผยแพร่ภายใต้สัญญาอนุญาต **GPL-3.0** — ใช้ ศึกษา และแก้ไขได้อย่างเสรี
+
+<VimInDwpLoop lang="th" class="not-prose my-10" />
+
+<VimCommandIndex lang="th" class="not-prose my-10" />
 
 ## มันเพิ่มอะไร
 
@@ -27,6 +34,8 @@ order: 6
 ```bash
 curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 ```
+
+<VimInstall lang="th" />
 
 ตัวติดตั้งเป็นแบบ **ขอความยินยอมก่อน**: การตั้งค่า Neovim ที่มีอยู่แล้วซึ่งเป็นของผู้อื่นจะไม่ถูกเขียนทับเด็ดขาด ถ้าถูกส่งผ่านไปป์โดยไม่มีเทอร์มินัล มันจะหยุดพร้อมคำแนะนำโดยไม่แตะต้องสิ่งใด ในโหมดโต้ตอบ มันจะถามก่อนย้ายการตั้งค่าที่มีอยู่ออกไปด้านข้าง ปลั๊กอินติดตั้งแบบ headless ตั้งแต่การเปิดครั้งแรก — ไม่มีพิธีปิดแล้วเปิดใหม่
 

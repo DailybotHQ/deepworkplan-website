@@ -5,12 +5,19 @@ kind: addon
 lang: es
 order: 6
 ---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 # Addon DeepWorkPlan Vim
 
 **DeepWorkPlan Vim** es el editor de terminal para Deep Work Plan: una configuración de Neovim (es el propio editor, no un archivo de repositorio) que pone las superficies de trabajo de la metodología a una pulsación de distancia. Mientras que las demás entradas del kit instalan harness en un repositorio, este addon equipa a la persona — y a cualquier agente que maneje Neovim en modo headless — con un editor que habla DWP de forma nativa.
 
 Requiere **Neovim 0.12 o superior**, funciona en **macOS y Linux** (Windows cuenta con una ruta manual documentada) y se distribuye bajo licencia **GPL-3.0** — libre para usar, estudiar y modificar.
+
+<VimInDwpLoop lang="es" class="not-prose my-10" />
+
+<VimCommandIndex lang="es" class="not-prose my-10" />
 
 ## Qué añade
 
@@ -27,6 +34,8 @@ Requiere **Neovim 0.12 o superior**, funciona en **macOS y Linux** (Windows cuen
 ```bash
 curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 ```
+
+<VimInstall lang="es" />
 
 El instalador es **consent-first**: una configuración de Neovim existente y ajena nunca se sobrescribe. Sin terminal, aborta con instrucciones en lugar de tocar nada; de forma interactiva, pregunta antes de apartar una configuración existente. Los plugins se instalan en modo headless en el primer arranque — sin baile de cerrar y reabrir.
 

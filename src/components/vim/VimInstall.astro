@@ -465,7 +465,9 @@ const stepCommands = [
         {t.copy}
       </button>
     </div>
-    <pre class="vim-install__pre"><code>{VIM_INSTALL_COMMAND}</code></pre>
+    <slot>
+      <pre class="vim-install__pre"><code>{VIM_INSTALL_COMMAND}</code></pre>
+    </slot>
   </div>
   <p class="vim-install__status" role="status" aria-live="polite" data-copy-status></p>
 
@@ -542,6 +544,12 @@ const stepCommands = [
   .vim-install__inspect summary:focus-visible {
     outline: 2px solid var(--color-secondary);
     outline-offset: 2px;
+  }
+  .vim-install__frame :global(pre) {
+    margin: 0;
+    border-radius: 0;
+    font-size: 0.8125rem;
+    line-height: 1.6;
   }
   .vim-install__pre {
     margin: 0;

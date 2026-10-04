@@ -5,12 +5,19 @@ kind: addon
 lang: zh
 order: 6
 ---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 # DeepWorkPlan Vim 附加组件
 
 **DeepWorkPlan Vim** 是 Deep Work Plan 的终端编辑器：一套 Neovim 配置（它本身就是编辑器，不是仓库文件），让方法论的作业面只需一次按键即可到达。kit 中的其他条目把 harness 安装进仓库，而这个附加组件装备的是人——以及任何以 headless 方式驱动 Neovim 的代理——得到一个原生支持 DWP 的编辑器。
 
 它要求 **Neovim 0.12 或更高版本**，运行于 **macOS 与 Linux**（Windows 通过有文档说明的手动路径支持），并采用 **GPL-3.0** 许可证——可自由使用、学习和修改。
+
+<VimInDwpLoop lang="zh" class="not-prose my-10" />
+
+<VimCommandIndex lang="zh" class="not-prose my-10" />
 
 ## 它带来什么
 
@@ -27,6 +34,8 @@ order: 6
 ```bash
 curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 ```
+
+<VimInstall lang="zh" />
 
 安装器是 **consent-first** 的：既有的、属于他人的 Neovim 配置绝不会被覆盖。在无终端的管道环境下，它会中止并给出说明，而不动任何东西；在交互环境下，它会在挪动既有配置之前先征求同意。插件在首次启动时以 headless 方式安装，无需退出后重新打开。
 

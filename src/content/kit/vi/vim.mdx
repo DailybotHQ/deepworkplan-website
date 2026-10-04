@@ -5,12 +5,19 @@ kind: addon
 lang: vi
 order: 6
 ---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 # Addon DeepWorkPlan Vim
 
 **DeepWorkPlan Vim** là trình soạn thảo terminal của Deep Work Plan: một cấu hình Neovim (đây là chính trình soạn thảo, không phải tệp của kho) đặt các mặt làm việc của phương pháp cách một phím. Trong khi các mục kit khác cài harness vào kho, addon này trang bị cho con người — và bất kỳ agent nào điều khiển Neovim ở chế độ headless — một trình soạn thảo nói DWP một cách tự nhiên.
 
 Nó yêu cầu **Neovim 0.12 trở lên**, chạy trên **macOS và Linux** (Windows được hỗ trợ qua đường dẫn thủ công có tài liệu) và được phát hành theo giấy phép **GPL-3.0** — tự do sử dụng, nghiên cứu và sửa đổi.
+
+<VimInDwpLoop lang="vi" class="not-prose my-10" />
+
+<VimCommandIndex lang="vi" class="not-prose my-10" />
 
 ## Nó thêm gì
 
@@ -27,6 +34,8 @@ Nó yêu cầu **Neovim 0.12 trở lên**, chạy trên **macOS và Linux** (Win
 ```bash
 curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 ```
+
+<VimInstall lang="vi" />
 
 Trình cài đặt **lấy sự đồng ý trước**: một cấu hình Neovim có sẵn, không thuộc về nó, không bao giờ bị ghi đè. Khi được bơm qua pipeline không có terminal, nó dừng lại kèm hướng dẫn thay vì đụng vào bất cứ thứ gì; ở chế độ tương tác, nó hỏi trước khi dời cấu hình có sẵn sang bên. Plugin được cài headless ngay lần khởi động đầu — không vũ điệu thoát ra rồi mở lại.
 

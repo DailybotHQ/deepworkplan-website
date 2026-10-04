@@ -5,12 +5,19 @@ kind: addon
 lang: hi
 order: 6
 ---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 # DeepWorkPlan Vim ऐडऑन
 
 **DeepWorkPlan Vim** Deep Work Plan का टर्मिनल एडिटर है: Neovim का एक कॉन्फ़िगरेशन (यह स्वयं एडिटर है, रिपॉज़िटरी फ़ाइल नहीं) जो मेथडोलॉजी की कार्य-सतहों को एक कीस्ट्रोक की दूरी पर रख देता है। जहाँ kit की बाकी प्रविष्टियाँ रिपॉज़िटरी में harness इंस्टॉल करती हैं, यह ऐडऑन इंसान को — और headless रूप से Neovim चलाने वाले किसी भी एजेंट को — ऐसा एडिटर देता है जो DWP को मूल रूप से बोलता है।
 
 इसे **Neovim 0.12 या नया** चाहिए, यह **macOS और Linux** पर चलता है (Windows के लिए दस्तावेज़ित मैनुअल रास्ता है) और **GPL-3.0** लाइसेंस के अंतर्गत है — उपयोग, अध्ययन और संशोधन के लिए स्वतंत्र।
+
+<VimInDwpLoop lang="hi" class="not-prose my-10" />
+
+<VimCommandIndex lang="hi" class="not-prose my-10" />
 
 ## यह क्या जोड़ता है
 
@@ -27,6 +34,8 @@ order: 6
 ```bash
 curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 ```
+
+<VimInstall lang="hi" />
 
 इंस्टॉलर **consent-first** है: मौजूदा, पराया Neovim कॉन्फ़िगरेशन कभी ओवरराइट नहीं होता। बिना टर्मिनल पाइप किए यह निर्देशों के साथ रुक जाता है, कुछ छेड़े बिना; इंटरैक्टिव रूप से यह मौजूदा कॉन्फ़िगरेशन को अलग करने से पहले पूछता है। प्लगइन पहली लॉन्च पर headless इंस्टॉल होते हैं — बंद करके दोबारा खोलने का नाटक नहीं।
 

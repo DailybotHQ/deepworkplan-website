@@ -5,12 +5,19 @@ kind: addon
 lang: id
 order: 6
 ---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 # Addon DeepWorkPlan Vim
 
 **DeepWorkPlan Vim** adalah editor terminal untuk Deep Work Plan: sebuah konfigurasi Neovim (ini adalah editornya sendiri, bukan berkas repositori) yang menaruh permukaan kerja metodologi sejauh satu ketukan tombol. Di mana entri kit lain memasang harness ke dalam repositori, addon ini membekali manusia — dan agen apa pun yang menjalankan Neovim secara headless — dengan editor yang berbicara DWP secara native.
 
 Ia memerlukan **Neovim 0.12 atau lebih baru**, berjalan di **macOS dan Linux** (Windows didukung melalui jalur manual yang terdokumentasi), dan berlisensi **GPL-3.0** — bebas untuk digunakan, dipelajari, dan dimodifikasi.
+
+<VimInDwpLoop lang="id" class="not-prose my-10" />
+
+<VimCommandIndex lang="id" class="not-prose my-10" />
 
 ## Apa yang ditambahkannya
 
@@ -27,6 +34,8 @@ Ia memerlukan **Neovim 0.12 atau lebih baru**, berjalan di **macOS dan Linux** (
 ```bash
 curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 ```
+
+<VimInstall lang="id" />
 
 Penginstalnya **consent-first**: konfigurasi Neovim yang sudah ada milik pihak lain tidak pernah ditimpa. Disalurkan tanpa terminal, ia berhenti dengan petunjuk alih-alih menyentuh apa pun; secara interaktif, ia bertanya sebelum menggeser konfigurasi yang ada. Plugin terpasang secara headless pada peluncuran pertama — tanpa koreografi keluar-dan-buka lagi.
 

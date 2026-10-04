@@ -5,12 +5,19 @@ kind: addon
 lang: tr
 order: 6
 ---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 # DeepWorkPlan Vim eklentisi
 
 **DeepWorkPlan Vim**, Deep Work Plan'ın terminal düzenleyicisidir: bir Neovim yapılandırması (bu, depo dosyası değil düzenleyicinin kendisidir) ve metodolojinin çalışma yüzeylerini tek tuş mesafesine koyar. Kit'in diğer girdileri bir depoya harness kurarken, bu eklenti kişiye — ve Neovim'i headless kullanan herhangi bir ajana — DWP'yi doğal biçimde konuşan bir düzenleyici kazandırır.
 
 **Neovim 0.12 veya daha yenisi** gerekir; **macOS ve Linux** üzerinde çalışır (Windows belgelenmiş manuel yol ile desteklenir) ve **GPL-3.0** lisanslıdır — kullanmak, incelemek ve değiştirmek özgürdür.
+
+<VimInDwpLoop lang="tr" class="not-prose my-10" />
+
+<VimCommandIndex lang="tr" class="not-prose my-10" />
 
 ## Neyi ekler
 
@@ -27,6 +34,8 @@ order: 6
 ```bash
 curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 ```
+
+<VimInstall lang="tr" />
 
 Kurulum programı **rıza-önceliklidir**: mevcut, başka birine ait Neovim yapılandırması asla üzerine yazılmaz. Terminalsiz bir boru hattında hiçbir şeye dokunmadan yönergelerle durur; etkileşimli çalıştırmada mevcut yapılandırmayı kenara almadan önce sorar. Eklentiler ilk açılışta headless kurulur — kapanıp yeniden açma oyunu yok.
 

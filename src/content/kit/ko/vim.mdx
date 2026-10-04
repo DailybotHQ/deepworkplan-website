@@ -5,12 +5,19 @@ kind: addon
 lang: ko
 order: 6
 ---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 # DeepWorkPlan Vim 애드온
 
 **DeepWorkPlan Vim**은 Deep Work Plan의 터미널 에디터입니다: Neovim 설정 그 자체(저장소 파일이 아니라 에디터 본체)로, 방법론의 작업 면을 키 입력 한 번 거리에 둡니다. kit의 다른 항목이 저장소에 harness를 설치하는 동안, 이 애드온은 사람에게 — 그리고 headless로 Neovim을 구동하는 모든 에이전트에게 — DWP를 기본 언어로 말하는 에디터를 쥐여 줍니다.
 
 **Neovim 0.12 이상**이 필요하고, **macOS와 Linux**에서 동작하며(Windows는 문서화된 수동 경로로 지원), **GPL-3.0**으로 라이선스됩니다 — 사용하고, 연구하고, 수정할 자유가 있습니다.
+
+<VimInDwpLoop lang="ko" class="not-prose my-10" />
+
+<VimCommandIndex lang="ko" class="not-prose my-10" />
 
 ## 무엇을 더하나
 
@@ -27,6 +34,8 @@ order: 6
 ```bash
 curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 ```
+
+<VimInstall lang="ko" />
 
 설치 프로그램은 **consent-first**입니다: 이미 있는 남의 Neovim 설정은 결코 덮어쓰지 않습니다. 터미널 없는 파이프로 흘려보내면 아무것도 건드리지 않고 안내와 함께 중단하고, 대화형으로는 기존 설정을 치우기 전에 묻습니다. 플러그인은 첫 실행 때 headless로 설치됩니다 — 껐다 다시 켜는 수작은 없습니다.
 
