@@ -1,0 +1,698 @@
+---
+/**
+ * VimInstall — the install block of the DeepWorkPlan Vim page: the canonical
+ * one-liner with a copy button, the consent-first promise, and an "inspect
+ * before you run" recipe that shows the SHA-256 of the installer exactly as
+ * the site serves it (computed at build time from public/vim/install.sh, so it
+ * cannot drift). Embedded in src/content/kit/<lang>/vim.mdx.
+ *
+ * Static HTML/CSS; the only script is a small progressive-enhancement copy
+ * button (no framework, no hydration directive). Language-keyed i18n with an
+ * `en` fallback, per docs/DIAGRAM_COMPONENTS.md §4. Brand and technical terms
+ * (Neovim, SHA-256, DWP_VIM_REF, shell commands) stay in English.
+ */
+import type { Language } from '@/lib/i18n';
+import {
+  getInstallerFacts,
+  VIM_INSTALL_COMMAND,
+  VIM_INSTALL_URL,
+  VIM_REPO_INSTALL_URL,
+} from '@/lib/vim-installer';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    copy: 'Copy command',
+    copied: 'Copied',
+    consent:
+      'Consent first: an existing Neovim configuration is never overwritten without your approval. The installer asks, and when it cannot ask it stops and changes nothing.',
+    inspectTitle: 'Inspect before you run',
+    inspectIntro:
+      'Prefer to read it first? Download the script, check its fingerprint, read it, then run it.',
+    steps: [
+      'Download the script',
+      'Print its SHA-256 and compare it with the value below',
+      'Read the script',
+      'Run the script',
+    ],
+    digestLabel: 'SHA-256 of the script served now',
+    bytesLabel: 'bytes',
+    linesLabel: 'lines',
+    macNote: 'On macOS, use shasum -a 256 install.sh for the second step.',
+    windowsNote:
+      'On Windows the one-liner does not apply; the repository README documents the manual path.',
+    windowsLink: 'Windows install path',
+    pinNote:
+      'To install a specific branch, tag or commit, set DWP_VIM_REF. Older tags may not include every feature described on this page.',
+  },
+  es: {
+    copy: 'Copiar comando',
+    copied: 'Copiado',
+    consent:
+      'Primero el consentimiento: una configuración de Neovim existente nunca se sobrescribe sin tu aprobación. El instalador pregunta y, cuando no puede preguntar, se detiene sin cambiar nada.',
+    inspectTitle: 'Inspecciona antes de ejecutar',
+    inspectIntro:
+      '¿Prefieres leerlo antes? Descarga el script, comprueba su huella, léelo y luego ejecútalo.',
+    steps: [
+      'Descarga el script',
+      'Muestra su SHA-256 y compáralo con el valor de abajo',
+      'Lee el script',
+      'Ejecuta el script',
+    ],
+    digestLabel: 'SHA-256 del script que se sirve ahora',
+    bytesLabel: 'bytes',
+    linesLabel: 'líneas',
+    macNote: 'En macOS, usa shasum -a 256 install.sh en el segundo paso.',
+    windowsNote:
+      'En Windows la línea única no aplica; el README del repositorio documenta la ruta manual.',
+    windowsLink: 'Ruta de instalación en Windows',
+    pinNote:
+      'Para instalar una rama, etiqueta o commit concretos, define DWP_VIM_REF. Las etiquetas antiguas pueden no incluir todas las funciones descritas en esta página.',
+  },
+  pt: {
+    copy: 'Copiar comando',
+    copied: 'Copiado',
+    consent:
+      'Primeiro, o consentimento: uma configuração do Neovim existente nunca é substituída sem a sua aprovação. O instalador pergunta e, quando não consegue perguntar, para sem alterar nada.',
+    inspectTitle: 'Inspecione antes de executar',
+    inspectIntro:
+      'Prefere ler primeiro? Obtenha o script, verifique a sua impressão digital, leia o conteúdo e só depois execute.',
+    steps: [
+      'Obtenha o script',
+      'Mostre o SHA-256 e compare com o valor abaixo',
+      'Leia o script',
+      'Execute o script',
+    ],
+    digestLabel: 'SHA-256 do script servido agora',
+    bytesLabel: 'bytes',
+    linesLabel: 'linhas',
+    macNote: 'No macOS, use shasum -a 256 install.sh no segundo passo.',
+    windowsNote:
+      'No Windows, o comando de uma linha não se aplica; o README do repositório documenta o caminho manual.',
+    windowsLink: 'Caminho de instalação no Windows',
+    pinNote:
+      'Para instalar um ramo, etiqueta ou commit específico, defina DWP_VIM_REF. As etiquetas antigas podem não incluir todas as funcionalidades descritas nesta página.',
+  },
+  zh: {
+    copy: '复制命令',
+    copied: '已复制',
+    consent:
+      '先征得同意：已有的 Neovim 配置不会在未经你批准时被覆盖。安装程序会先询问；无法询问时，它会停止且不做任何更改。',
+    inspectTitle: '运行前先检查',
+    inspectIntro: '想先看一遍？先下载脚本，核对它的指纹，阅读后再运行。',
+    steps: [
+      '下载脚本',
+      '输出其 SHA-256，并与下方的值比对',
+      '阅读脚本',
+      '运行脚本',
+    ],
+    digestLabel: '当前提供的脚本的 SHA-256',
+    bytesLabel: '字节',
+    linesLabel: '行',
+    macNote: '在 macOS 上，第二步请使用 shasum -a 256 install.sh。',
+    windowsNote:
+      '在 Windows 上，这条单行命令不适用；仓库 README 记录了手动安装路径。',
+    windowsLink: 'Windows 安装路径',
+    pinNote:
+      '如需安装指定的分支、标签或提交，请设置 DWP_VIM_REF。较旧的标签可能不包含本页描述的全部功能。',
+  },
+  ja: {
+    copy: 'コマンドをコピー',
+    copied: 'コピーしました',
+    consent:
+      '同意が先：既存の Neovim 設定は、あなたの承認なしに上書きされることはありません。インストーラは確認を求め、確認できない場合は何も変更せずに停止します。',
+    inspectTitle: '実行する前に確認する',
+    inspectIntro:
+      '先に中身を読みたい場合は、スクリプトをダウンロードし、フィンガープリントを確認し、読んでから実行してください。',
+    steps: [
+      'スクリプトをダウンロードする',
+      'SHA-256 を表示し、下の値と照合する',
+      'スクリプトを読む',
+      'スクリプトを実行する',
+    ],
+    digestLabel: '現在配信中のスクリプトの SHA-256',
+    bytesLabel: 'バイト',
+    linesLabel: '行',
+    macNote:
+      'macOS では、2 番目の手順に shasum -a 256 install.sh を使ってください。',
+    windowsNote:
+      'Windows ではこの一行コマンドは使えません。手動の手順はリポジトリの README に記載されています。',
+    windowsLink: 'Windows のインストール手順',
+    pinNote:
+      '特定のブランチ、タグ、コミットをインストールするには DWP_VIM_REF を設定します。古いタグには、このページで説明している機能がすべて含まれているとは限りません。',
+  },
+  de: {
+    copy: 'Befehl kopieren',
+    copied: 'Kopiert',
+    consent:
+      'Zuerst die Zustimmung: Eine vorhandene Neovim-Konfiguration wird nie ohne Ihre Zustimmung überschrieben. Das Installationsprogramm fragt nach und bricht ab, ohne etwas zu ändern, wenn es nicht fragen kann.',
+    inspectTitle: 'Vor der Ausführung prüfen',
+    inspectIntro:
+      'Möchten Sie es zuerst lesen? Laden Sie das Skript herunter, prüfen Sie seinen Fingerabdruck, lesen Sie es und führen Sie es dann aus.',
+    steps: [
+      'Skript herunterladen',
+      'SHA-256 ausgeben und mit dem Wert unten vergleichen',
+      'Skript lesen',
+      'Skript ausführen',
+    ],
+    digestLabel: 'SHA-256 des aktuell ausgelieferten Skripts',
+    bytesLabel: 'Bytes',
+    linesLabel: 'Zeilen',
+    macNote:
+      'Unter macOS verwenden Sie für den zweiten Schritt shasum -a 256 install.sh.',
+    windowsNote:
+      'Unter Windows gilt der Einzeiler nicht; die README des Repositorys beschreibt den manuellen Weg.',
+    windowsLink: 'Installationsweg für Windows',
+    pinNote:
+      'Um einen bestimmten Branch, Tag oder Commit zu installieren, setzen Sie DWP_VIM_REF. Ältere Tags enthalten möglicherweise nicht alle auf dieser Seite beschriebenen Funktionen.',
+  },
+  fr: {
+    copy: 'Copier la commande',
+    copied: 'Copié',
+    consent:
+      'Le consentement d’abord : une configuration Neovim existante n’est jamais écrasée sans votre accord. Le programme d’installation demande et, quand il ne peut pas le faire, s’arrête sans rien modifier.',
+    inspectTitle: 'Inspecter avant d’exécuter',
+    inspectIntro:
+      'Vous préférez lire d’abord ? Téléchargez le script, vérifiez son empreinte, lisez-le, puis exécutez-le.',
+    steps: [
+      'Télécharger le script',
+      'Afficher son SHA-256 et le comparer à la valeur ci-dessous',
+      'Lire le script',
+      'Exécuter le script',
+    ],
+    digestLabel: 'SHA-256 du script servi actuellement',
+    bytesLabel: 'octets',
+    linesLabel: 'lignes',
+    macNote:
+      'Sous macOS, utilisez shasum -a 256 install.sh pour la deuxième étape.',
+    windowsNote:
+      'Sous Windows, la commande en une ligne ne s’applique pas ; le README du dépôt décrit la procédure manuelle.',
+    windowsLink: 'Procédure d’installation sous Windows',
+    pinNote:
+      'Pour installer une branche, une étiquette ou un commit précis, définissez DWP_VIM_REF. Les anciennes étiquettes peuvent ne pas inclure toutes les fonctions décrites sur cette page.',
+  },
+  ko: {
+    copy: '명령 복사',
+    copied: '복사했어요',
+    consent:
+      '동의가 먼저예요. 기존 Neovim 설정은 승인 없이 절대 덮어쓰지 않아요. 설치 프로그램이 먼저 묻고, 물을 수 없으면 아무것도 바꾸지 않고 멈춰요.',
+    inspectTitle: '실행하기 전에 확인하기',
+    inspectIntro:
+      '먼저 읽어 보고 싶으신가요? 스크립트를 내려받아 지문을 확인하고, 내용을 읽은 다음 실행하세요.',
+    steps: [
+      '스크립트 내려받기',
+      'SHA-256을 출력해 아래 값과 비교하기',
+      '스크립트 읽기',
+      '스크립트 실행하기',
+    ],
+    digestLabel: '지금 제공 중인 스크립트의 SHA-256',
+    bytesLabel: '바이트',
+    linesLabel: '줄',
+    macNote:
+      'macOS에서는 두 번째 단계에 shasum -a 256 install.sh를 사용하세요.',
+    windowsNote:
+      'Windows에서는 한 줄 명령을 쓸 수 없어요. 수동 설치 방법은 저장소 README에 있어요.',
+    windowsLink: 'Windows 설치 방법',
+    pinNote:
+      '특정 브랜치, 태그, 커밋을 설치하려면 DWP_VIM_REF를 설정하세요. 오래된 태그에는 이 페이지에서 설명하는 기능이 모두 들어 있지 않을 수 있어요.',
+  },
+  ru: {
+    copy: 'Копировать команду',
+    copied: 'Скопировано',
+    consent:
+      'Сначала согласие: существующая конфигурация Neovim никогда не перезаписывается без вашего одобрения. Установщик спрашивает, а если спросить не может, останавливается и ничего не меняет.',
+    inspectTitle: 'Проверьте перед запуском',
+    inspectIntro:
+      'Хотите сначала прочитать? Скачайте скрипт, проверьте его отпечаток, прочитайте и только потом запускайте.',
+    steps: [
+      'Скачайте скрипт',
+      'Выведите его SHA-256 и сравните со значением ниже',
+      'Прочитайте скрипт',
+      'Запустите скрипт',
+    ],
+    digestLabel: 'SHA-256 скрипта, который отдаётся сейчас',
+    bytesLabel: 'байт',
+    linesLabel: 'строк',
+    macNote: 'В macOS на втором шаге используйте shasum -a 256 install.sh.',
+    windowsNote:
+      'В Windows однострочная команда не применяется; ручной путь описан в README репозитория.',
+    windowsLink: 'Путь установки для Windows',
+    pinNote:
+      'Чтобы установить конкретную ветку, тег или коммит, задайте DWP_VIM_REF. Старые теги могут не содержать всех возможностей, описанных на этой странице.',
+  },
+  it: {
+    copy: 'Copia comando',
+    copied: 'Copiato',
+    consent:
+      'Prima il consenso: una configurazione Neovim esistente non viene mai sovrascritta senza la Sua approvazione. Il programma di installazione chiede e, quando non può chiedere, si ferma senza modificare nulla.',
+    inspectTitle: 'Controlli prima di eseguire',
+    inspectIntro:
+      'Preferisce leggerlo prima? Scarichi lo script, verifichi la sua impronta, lo legga e poi lo esegua.',
+    steps: [
+      'Scaricare lo script',
+      'Stampare lo SHA-256 e confrontarlo con il valore qui sotto',
+      'Leggere lo script',
+      'Eseguire lo script',
+    ],
+    digestLabel: 'SHA-256 dello script servito ora',
+    bytesLabel: 'byte',
+    linesLabel: 'righe',
+    macNote: 'Su macOS, per il secondo passaggio usi shasum -a 256 install.sh.',
+    windowsNote:
+      'Su Windows il comando su una riga non si applica; il README del repository descrive il percorso manuale.',
+    windowsLink: 'Percorso di installazione su Windows',
+    pinNote:
+      'Per installare un ramo, un tag o un commit specifico, imposti DWP_VIM_REF. I tag meno recenti potrebbero non includere tutte le funzioni descritte in questa pagina.',
+  },
+  tr: {
+    copy: 'Komutu kopyala',
+    copied: 'Kopyalandı',
+    consent:
+      'Önce onay: mevcut bir Neovim yapılandırması onayınız olmadan asla üzerine yazılmaz. Kurulum programı sorar; soramadığında hiçbir şeyi değiştirmeden durur.',
+    inspectTitle: 'Çalıştırmadan önce inceleyin',
+    inspectIntro:
+      'Önce okumak mı istersiniz? Betiği indirin, parmak izini doğrulayın, okuyun ve ardından çalıştırın.',
+    steps: [
+      'Betiği indirin',
+      'SHA-256 değerini yazdırıp aşağıdaki değerle karşılaştırın',
+      'Betiği okuyun',
+      'Betiği çalıştırın',
+    ],
+    digestLabel: 'Şu anda sunulan betiğin SHA-256 değeri',
+    bytesLabel: 'bayt',
+    linesLabel: 'satır',
+    macNote: 'macOS’ta ikinci adım için shasum -a 256 install.sh kullanın.',
+    windowsNote:
+      'Windows’ta tek satırlık komut geçerli değildir; elle kurulum yolu deponun README dosyasında anlatılır.',
+    windowsLink: 'Windows kurulum yolu',
+    pinNote:
+      'Belirli bir dal, etiket veya commit kurmak için DWP_VIM_REF değerini ayarlayın. Eski etiketler bu sayfada anlatılan tüm özellikleri içermeyebilir.',
+  },
+  id: {
+    copy: 'Salin perintah',
+    copied: 'Tersalin',
+    consent:
+      'Persetujuan lebih dulu: konfigurasi Neovim yang sudah ada tidak pernah ditimpa tanpa persetujuan Anda. Pemasang akan bertanya, dan jika tidak bisa bertanya, ia berhenti tanpa mengubah apa pun.',
+    inspectTitle: 'Periksa sebelum menjalankan',
+    inspectIntro:
+      'Ingin membacanya dulu? Unduh skrip, periksa sidik jarinya, baca, lalu jalankan.',
+    steps: [
+      'Unduh skrip',
+      'Tampilkan SHA-256 dan bandingkan dengan nilai di bawah',
+      'Baca skrip',
+      'Jalankan skrip',
+    ],
+    digestLabel: 'SHA-256 skrip yang disajikan sekarang',
+    bytesLabel: 'byte',
+    linesLabel: 'baris',
+    macNote: 'Di macOS, gunakan shasum -a 256 install.sh untuk langkah kedua.',
+    windowsNote:
+      'Di Windows, perintah satu baris tidak berlaku; README repositori mendokumentasikan jalur manual.',
+    windowsLink: 'Jalur instalasi Windows',
+    pinNote:
+      'Untuk memasang cabang, tag, atau commit tertentu, setel DWP_VIM_REF. Tag lama mungkin tidak memuat semua fitur yang dijelaskan di halaman ini.',
+  },
+  vi: {
+    copy: 'Sao chép lệnh',
+    copied: 'Đã sao chép',
+    consent:
+      'Đồng ý trước: cấu hình Neovim sẵn có không bao giờ bị ghi đè nếu bạn chưa chấp thuận. Trình cài đặt sẽ hỏi, và khi không thể hỏi thì dừng lại mà không thay đổi gì.',
+    inspectTitle: 'Kiểm tra trước khi chạy',
+    inspectIntro:
+      'Muốn đọc trước? Hãy tải tập lệnh, kiểm tra dấu vân tay của nó, đọc rồi mới chạy.',
+    steps: [
+      'Tải tập lệnh',
+      'In SHA-256 và so với giá trị bên dưới',
+      'Đọc tập lệnh',
+      'Chạy tập lệnh',
+    ],
+    digestLabel: 'SHA-256 của tập lệnh đang được phân phát',
+    bytesLabel: 'byte',
+    linesLabel: 'dòng',
+    macNote: 'Trên macOS, hãy dùng shasum -a 256 install.sh cho bước thứ hai.',
+    windowsNote:
+      'Trên Windows, lệnh một dòng không áp dụng; README của kho mã mô tả cách cài thủ công.',
+    windowsLink: 'Cách cài trên Windows',
+    pinNote:
+      'Để cài một nhánh, thẻ hoặc commit cụ thể, hãy đặt DWP_VIM_REF. Các thẻ cũ có thể không có đủ mọi tính năng được mô tả trên trang này.',
+  },
+  hi: {
+    copy: 'कमांड कॉपी करें',
+    copied: 'कॉपी हो गया',
+    consent:
+      'पहले सहमति: मौजूदा Neovim कॉन्फ़िगरेशन आपकी स्वीकृति के बिना कभी ओवरराइट नहीं होता। इंस्टॉलर पूछता है, और पूछ न सके तो कुछ बदले बिना रुक जाता है।',
+    inspectTitle: 'चलाने से पहले जाँचें',
+    inspectIntro:
+      'पहले पढ़ना चाहते हैं? स्क्रिप्ट डाउनलोड करें, उसका फ़िंगरप्रिंट जाँचें, उसे पढ़ें और फिर चलाएँ।',
+    steps: [
+      'स्क्रिप्ट डाउनलोड करें',
+      'उसका SHA-256 दिखाएँ और नीचे दिए मान से मिलाएँ',
+      'स्क्रिप्ट पढ़ें',
+      'स्क्रिप्ट चलाएँ',
+    ],
+    digestLabel: 'अभी परोसी जा रही स्क्रिप्ट का SHA-256',
+    bytesLabel: 'बाइट',
+    linesLabel: 'पंक्तियाँ',
+    macNote: 'macOS पर दूसरे चरण के लिए shasum -a 256 install.sh का उपयोग करें।',
+    windowsNote:
+      'Windows पर एक-पंक्ति वाला कमांड लागू नहीं होता; मैन्युअल तरीका रिपॉज़िटरी के README में दिया है।',
+    windowsLink: 'Windows इंस्टॉलेशन मार्ग',
+    pinNote:
+      'किसी विशेष ब्रांच, टैग या कमिट को इंस्टॉल करने के लिए DWP_VIM_REF सेट करें। पुराने टैग में इस पृष्ठ पर बताई गई सभी सुविधाएँ नहीं हो सकतीं।',
+  },
+  pl: {
+    copy: 'Kopiuj polecenie',
+    copied: 'Skopiowano',
+    consent:
+      'Najpierw zgoda: istniejąca konfiguracja Neovima nigdy nie jest nadpisywana bez Twojej zgody. Instalator pyta, a gdy nie może zapytać, zatrzymuje się, niczego nie zmieniając.',
+    inspectTitle: 'Sprawdź przed uruchomieniem',
+    inspectIntro:
+      'Wolisz najpierw przeczytać? Pobierz skrypt, sprawdź jego odcisk, przeczytaj go, a potem uruchom.',
+    steps: [
+      'Pobierz skrypt',
+      'Wypisz jego SHA-256 i porównaj z wartością poniżej',
+      'Przeczytaj skrypt',
+      'Uruchom skrypt',
+    ],
+    digestLabel: 'SHA-256 skryptu udostępnianego teraz',
+    bytesLabel: 'bajtów',
+    linesLabel: 'linii',
+    macNote: 'W macOS w drugim kroku użyj shasum -a 256 install.sh.',
+    windowsNote:
+      'W systemie Windows polecenie w jednej linii nie działa; ręczną ścieżkę opisuje README repozytorium.',
+    windowsLink: 'Instalacja w systemie Windows',
+    pinNote:
+      'Aby zainstalować konkretną gałąź, tag lub commit, ustaw DWP_VIM_REF. Starsze tagi mogą nie zawierać wszystkich funkcji opisanych na tej stronie.',
+  },
+  uk: {
+    copy: 'Копіювати команду',
+    copied: 'Скопійовано',
+    consent:
+      'Спершу згода: наявна конфігурація Neovim ніколи не перезаписується без вашого схвалення. Інсталятор питає, а якщо не може спитати, зупиняється й нічого не змінює.',
+    inspectTitle: 'Перевірте перед запуском',
+    inspectIntro:
+      'Хочете спершу прочитати? Завантажте скрипт, перевірте його відбиток, прочитайте та лише потім запускайте.',
+    steps: [
+      'Завантажте скрипт',
+      'Виведіть його SHA-256 і порівняйте зі значенням нижче',
+      'Прочитайте скрипт',
+      'Запустіть скрипт',
+    ],
+    digestLabel: 'SHA-256 скрипта, який віддається зараз',
+    bytesLabel: 'байтів',
+    linesLabel: 'рядків',
+    macNote:
+      'У macOS на другому кроці використовуйте shasum -a 256 install.sh.',
+    windowsNote:
+      'У Windows однорядкова команда не застосовується; ручний шлях описано в README репозиторію.',
+    windowsLink: 'Шлях встановлення для Windows',
+    pinNote:
+      'Щоб встановити певну гілку, тег або коміт, задайте DWP_VIM_REF. Старі теги можуть не містити всіх можливостей, описаних на цій сторінці.',
+  },
+  th: {
+    copy: 'คัดลอกคำสั่ง',
+    copied: 'คัดลอกแล้ว',
+    consent:
+      'ขอความยินยอมก่อน: การตั้งค่า Neovim ที่มีอยู่จะไม่ถูกเขียนทับโดยที่คุณไม่อนุมัติ ตัวติดตั้งจะถามก่อน และหากถามไม่ได้ก็จะหยุดโดยไม่เปลี่ยนแปลงอะไร',
+    inspectTitle: 'ตรวจสอบก่อนรัน',
+    inspectIntro:
+      'ต้องการอ่านก่อนหรือไม่ ดาวน์โหลดสคริปต์ ตรวจสอบลายนิ้วมือ อ่านเนื้อหา แล้วจึงรัน',
+    steps: [
+      'ดาวน์โหลดสคริปต์',
+      'แสดงค่า SHA-256 แล้วเทียบกับค่าด้านล่าง',
+      'อ่านสคริปต์',
+      'รันสคริปต์',
+    ],
+    digestLabel: 'SHA-256 ของสคริปต์ที่ให้บริการอยู่ตอนนี้',
+    bytesLabel: 'ไบต์',
+    linesLabel: 'บรรทัด',
+    macNote: 'บน macOS ให้ใช้ shasum -a 256 install.sh ในขั้นตอนที่สอง',
+    windowsNote:
+      'บน Windows คำสั่งบรรทัดเดียวใช้ไม่ได้ ขั้นตอนแบบแมนนวลอยู่ใน README ของที่เก็บโค้ด',
+    windowsLink: 'วิธีติดตั้งบน Windows',
+    pinNote:
+      'หากต้องการติดตั้งแบรนช์ แท็ก หรือคอมมิตที่ระบุ ให้ตั้งค่า DWP_VIM_REF แท็กรุ่นเก่าอาจไม่มีฟีเจอร์ทั้งหมดที่อธิบายในหน้านี้',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+
+const facts = getInstallerFacts();
+const stepCommands = [
+  `curl -fsSL ${VIM_INSTALL_URL} -o install.sh`,
+  'sha256sum install.sh',
+  'less install.sh',
+  'bash install.sh',
+];
+---
+
+<div class={`vim-install not-prose ${className}`}>
+  <div class="vim-install__frame">
+    <div class="vim-install__bar">
+      <span class="kicker">bash</span>
+      <button
+        type="button"
+        class="vim-install__copy kicker"
+        data-copy={VIM_INSTALL_COMMAND}
+        data-label={t.copy}
+        data-copied={t.copied}
+        aria-label={t.copy}
+      >
+        {t.copy}
+      </button>
+    </div>
+    <pre class="vim-install__pre"><code>{VIM_INSTALL_COMMAND}</code></pre>
+  </div>
+  <p class="vim-install__status" role="status" aria-live="polite" data-copy-status></p>
+
+  <p class="vim-install__consent">{t.consent}</p>
+
+  <details class="vim-install__inspect" id="inspect-before-you-run">
+    <summary>{t.inspectTitle}</summary>
+    <p class="vim-install__intro">{t.inspectIntro}</p>
+    <ol class="vim-install__steps">
+      {
+        t.steps.map((label, index) => (
+          <li>
+            <span class="vim-install__step-label">{label}</span>
+            <pre class="vim-install__pre vim-install__pre--step"><code>{stepCommands[index]}</code></pre>
+          </li>
+        ))
+      }
+    </ol>
+    <dl class="vim-install__facts">
+      <div>
+        <dt>{t.digestLabel}</dt>
+        <dd><code class="vim-install__digest">{facts.sha256}</code></dd>
+      </div>
+      <div>
+        <dd>{facts.bytes} {t.bytesLabel} · {facts.lines} {t.linesLabel}</dd>
+      </div>
+    </dl>
+    <p class="vim-install__note">{t.macNote}</p>
+  </details>
+
+  <p class="vim-install__note">{t.pinNote}</p>
+  <p class="vim-install__note">
+    {t.windowsNote}
+    <a href={VIM_REPO_INSTALL_URL}>{t.windowsLink}</a>
+  </p>
+</div>
+
+<style>
+  .vim-install {
+    margin-block: 1.5rem;
+    color: var(--color-ink);
+    min-width: 0;
+  }
+  .vim-install__frame {
+    border: 1px solid var(--color-line);
+    overflow: hidden;
+    min-width: 0;
+  }
+  .vim-install__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    border-bottom: 1px solid var(--color-line);
+    background-color: var(--color-gray-100);
+  }
+  .vim-install__copy {
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    color: var(--color-secondary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 2px;
+  }
+  .vim-install__copy:hover:not(:disabled) {
+    opacity: 0.8;
+  }
+  .vim-install__copy:disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
+  .vim-install__copy:focus-visible,
+  .vim-install__inspect summary:focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+  }
+  .vim-install__pre {
+    margin: 0;
+    padding: 0.75rem;
+    overflow-x: auto;
+    background-color: var(--color-gray-100);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+  }
+  .vim-install__pre code {
+    font-family: inherit;
+    background: none;
+    padding: 0;
+  }
+  .vim-install__status {
+    margin: 0;
+    min-height: 0;
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+  }
+  .vim-install__consent {
+    margin: 1rem 0 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--color-secondary);
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+  .vim-install__inspect {
+    margin-top: 1.25rem;
+    border: 1px solid var(--color-line);
+    padding: 0 1rem;
+    min-width: 0;
+  }
+  .vim-install__inspect summary {
+    cursor: pointer;
+    padding: 0.75rem 0;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .vim-install__inspect[open] summary {
+    border-bottom: 1px solid var(--color-line);
+  }
+  .vim-install__intro {
+    margin: 0.75rem 0;
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+  .vim-install__steps {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .vim-install__steps li {
+    min-width: 0;
+  }
+  .vim-install__step-label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-serif);
+  }
+  .vim-install__pre--step {
+    border: 1px solid var(--color-line);
+  }
+  .vim-install__facts {
+    margin: 1rem 0 0;
+    display: grid;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+  .vim-install__facts dt {
+    font-family: var(--font-serif);
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+  }
+  .vim-install__facts dd {
+    margin: 0;
+    min-width: 0;
+    font-size: 0.8125rem;
+  }
+  .vim-install__digest {
+    display: block;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+    background: none;
+    padding: 0;
+  }
+  .vim-install__note {
+    margin: 0.75rem 0 0;
+    color: var(--color-muted);
+    line-height: 1.7;
+    font-size: 0.9375rem;
+  }
+  .vim-install__inspect > .vim-install__note {
+    padding-bottom: 0.75rem;
+  }
+  .vim-install__note a {
+    color: var(--color-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>
+
+<script>
+  // Progressive enhancement: copy the one-liner, and open the "inspect before
+  // you run" disclosure when the page is opened on its anchor.
+  const FEEDBACK_MS = 2000;
+
+  document.querySelectorAll<HTMLButtonElement>('.vim-install__copy').forEach((btn) => {
+    let busy = false;
+    const status = btn
+      .closest('.vim-install')
+      ?.querySelector<HTMLElement>('[data-copy-status]');
+
+    btn.addEventListener('click', async () => {
+      if (busy || btn.disabled) return;
+      const text = btn.dataset.copy ?? '';
+      const label = btn.dataset.label ?? '';
+      const copied = btn.dataset.copied ?? '';
+      busy = true;
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.disabled = true;
+        btn.textContent = copied;
+        btn.setAttribute('aria-label', copied);
+        if (status) status.textContent = copied;
+        window.setTimeout(() => {
+          btn.disabled = false;
+          btn.textContent = label;
+          btn.setAttribute('aria-label', label);
+          if (status) status.textContent = '';
+          busy = false;
+        }, FEEDBACK_MS);
+      } catch {
+        busy = false;
+      }
+    });
+  });
+
+  const openOnHash = () => {
+    if (window.location.hash !== '#inspect-before-you-run') return;
+    const details = document.getElementById('inspect-before-you-run');
+    if (details instanceof HTMLDetailsElement) details.open = true;
+  };
+  openOnHash();
+  window.addEventListener('hashchange', openOnHash);
+</script>
