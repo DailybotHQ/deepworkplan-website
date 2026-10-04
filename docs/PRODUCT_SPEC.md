@@ -80,6 +80,7 @@ Build a fast, accessible, multilingual site that:
 - Presets, adapters, and commands (`/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`)
 - Guidance for installing DWP into an existing repo
 - Cross-links to the companion skill repo [`DailybotHQ/deepworkplan-skill`](https://github.com/DailybotHQ/deepworkplan-skill)
+- **DeepWorkPlan Vim** — the terminal editor for Deep Work Plan, a separate optional product — has exactly **one official page: `/kit/vim`** (flagship MDX in 17 languages, with a verifiable installer section and two editorial figures). `/vim` is only a redirect alias to it. The page states what the product repository can back (generated command index, VS Code-shaped gestures, plan browser, Markdown viewer, one-line consent-first installer), says plainly that it is not part of the DWP v6 onboarding, and never ties a feature to a version number or claims `vim.deepworkplan.com` is live. Linked from `/trust` (installer verification) and `/quickstart` (optional next step).
 
 ### 5. Adoption Page (`/quickstart`) and Adoption Prompt (`/init.md`)
 

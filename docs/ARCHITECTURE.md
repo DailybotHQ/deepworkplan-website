@@ -96,14 +96,20 @@ src/
 │   │
 │   ├── editorial/          # Editorial primitives (Kicker, Rule, Lead, Figure, Reference)
 │   │
+│   ├── vim/                # DeepWorkPlan Vim page building blocks, embedded in the kit MDX
+│   │   └── VimInstall.astro        # One-liner + copy button, consent callout, "inspect before you run" with the live installer SHA-256
+│   │
+│   ├── diagrams/           # Editorial Interactive Assets (see docs/DIAGRAM_COMPONENTS.md)
+│   │   └── kit/                    # incl. VimCommandIndex.astro (SPC h h plate) and VimInDwpLoop.astro (plan browser + Markdown viewer beside the DWP loop)
+│   │
 │   ├── pages/              # Shared page components (*Page.astro, QuickstartPage, readers)
 │   │   ├── ComparePage.astro       # Objective comparison and source notes
 │   │   ├── CompareMatrix.astro     # Responsive capability matrix
 │   │   └── FaqPage.astro           # Grouped FAQ with FAQPage JSON-LD
 │   │
 │   └── layout/
-│       ├── Header.svelte        # Masthead navigation + inline hurricane-lamp theme toggle
-│       └── MobileMenu.svelte    # Mobile nav menu
+│       ├── Header.svelte        # Masthead navigation + inline hurricane-lamp theme toggle (desktop nav from the lg breakpoint, hamburger below)
+│       └── MobileMenu.svelte    # Mobile nav menu (shown below lg)
 │
 ├── content/                 # Content Collections (one folder per active language)
 │   ├── methodology/         # Methodology docs (primary content)
@@ -112,7 +118,7 @@ src/
 │   ├── kit/                 # Kit catalog (same 17 language folders)
 │   └── pages/               # Agent-friendly Markdown endpoints (same 17 language folders)
 │
-├── content.config.ts        # Collection schemas (methodology, spec, kit, pages)
+├── content.config.ts        # Collection schemas (methodology, spec, kit, pages); kit accepts an optional `software` block
 ├── env.d.ts                 # TypeScript environment
 │
 ├── layouts/
@@ -124,6 +130,9 @@ src/
 │   ├── i18n.ts              # Centralized i18n config; getActiveLanguages() derived from translations/*.ts
 │   ├── language-codes.ts    # Dependency-free LANGUAGE_CODES tuple (imported by i18n + astro.config)
 │   ├── markdown-for-agents.ts  # Helpers for the agent-friendly .md endpoints
+│   ├── vim-installer.ts     # Build-time facts about /vim/install.sh (SHA-256, size, lines) read via Vite ?raw; canonical one-liner and URLs
+│   ├── software-schema.ts   # Optional kit `software` frontmatter (Zod) + buildSoftwareSchema() / combineJsonLd() for SoftwareApplication JSON-LD
+│   ├── redirect-map.ts      # REDIRECT_PAIRS (per-language aliases, incl. vim -> kit/vim and vim.md -> kit/vim.md) + ROOT_ONLY_REDIRECT_PAIRS
 │   ├── analytics.ts         # Analytics helpers
 │   ├── constances.ts        # Site constants
 │   └── translations/        # Modular translation system (one file per active language)
@@ -446,7 +455,7 @@ const { Content } = await render(doc);
 
 `src/middleware.ts` enforces an **allowlist** of single-segment top-level paths. Any single-segment URL not in the set is rewritten to `/404` — **even if the file exists at `src/pages/<name>/index.astro`**. The allowlist is **derived** from one hand-edited set plus the language registry, so adding a new language requires no middleware edit at all:
 
-- `KNOWN_BASE_PATHS` — per-language page slugs (e.g. `about`, `contact`, `compare`, `faq`, `methodology`, `spec`, `kit`, `examples`, `quickstart`, `init`, `trust`, `developers`, `vim`, `privacy`, `setup`, `onboarding`, `docs`). These exist for **every** language: at the root for the default language and under `/<lang>/<slug>` for every other active language. ONE place, covers all languages. (`init`/`setup`/`onboarding` redirect to `/quickstart`, the single canonical adoption page; `docs` redirects to `/developers`. `/init.md` itself is a standalone static file — `public/init.md` — never redirected, no HTML sibling, English-only.)
+- `KNOWN_BASE_PATHS` — per-language page slugs (e.g. `about`, `contact`, `compare`, `faq`, `methodology`, `spec`, `kit`, `examples`, `quickstart`, `init`, `trust`, `developers`, `vim`, `privacy`, `setup`, `onboarding`, `docs`). These exist for **every** language: at the root for the default language and under `/<lang>/<slug>` for every other active language. ONE place, covers all languages. (`init`/`setup`/`onboarding` redirect to `/quickstart`, the single canonical adoption page; `docs` redirects to `/developers`; `vim` redirects to `/kit/vim`. `/init.md` itself is a standalone static file — `public/init.md` — never redirected, no HTML sibling, English-only.)
 - `ROOT_ONLY_PATHS` — non-per-language paths (`api`, `internal`, `404`, `favicon.ico`, `favicon.svg`, `sitemap-index.xml`).
 - `PREFIXED_LANGUAGES` — active non-default language codes (`es`, `pt`, `zh`, …), derived from `getActiveNonDefaultLanguages()` in `src/lib/i18n.ts`. These are the valid single-segment language roots (`/es`, `/pt`, …).
 - `KNOWN_ROOT_PATHS` — derived union of the three sets above (`KNOWN_BASE_PATHS` ∪ `ROOT_ONLY_PATHS` ∪ `PREFIXED_LANGUAGES`).
@@ -469,6 +478,8 @@ When you add a new top-level page (e.g. `/guides`, `/foo`), you only edit ONE pl
 The bypass conditions (path contains `.` or starts with `/_astro/`, `/__vite`, `/@`) exist to let assets, HMR, and build artifacts through.
 
 **Adoption page `/quickstart` and adoption prompt `/init.md`.** The canonical adoption surface lives at `/quickstart` (default language) and `/<lang>/quickstart` for every other active language (`/es/quickstart`, `/pt/quickstart`, `/zh/quickstart`, …), served by `QuickstartPage.astro` + the page-wrapper pattern. `quickstart` is present in `KNOWN_BASE_PATHS`, so it works in every language without a per-language allowlist edit. Its companion agent prompt is published at the **canonical English-only, standalone** URL `/init.md` (regardless of which locale a user is browsing) — a plain static file at `public/init.md`, not a content-collection page: it has no HTML sibling and is never redirected. See `CANONICAL_INIT_MD_PATH` and `getCanonicalInitMarkdown()` in `src/lib/i18n.ts` / `src/lib/init-prompt.ts`. `/init`, `/setup`, and `/onboarding` (plus their `/<lang>/` variants) are permanent 301 redirects to `/quickstart`, configured in `astro.config.mjs`; the redirect source paths are also in `KNOWN_BASE_PATHS`.
+
+**DeepWorkPlan Vim: one official page per addon.** Vim is documented **once**, as a kit addon at `/kit/vim` (and `/<lang>/kit/vim`): `src/content/kit/<lang>/vim.mdx` ×17, embedding `VimInstall` (`src/components/vim/`) and the two figures `VimCommandIndex` and `VimInDwpLoop` (`src/components/diagrams/kit/`). There is no standalone `/vim` page: `/vim` and `/vim.md` (and the language-prefixed forms) are 301 aliases to `/kit/vim` and `/kit/vim.md` through `REDIRECT_PAIRS`, and `vim` stays in `KNOWN_BASE_PATHS` as a redirect source. The installer is the static file `public/vim/install.sh`, served at `/vim/install.sh` with a pinned `Content-Type` (`public/_headers`) and aliased from the apex `/install.sh` by `ROOT_ONLY_REDIRECT_PAIRS`; it is a byte-identical copy of the product repository's file and is never edited here. Its SHA-256, size and line count shown on the page are computed at build time from those exact bytes (`src/lib/vim-installer.ts`). The page's `SoftwareApplication` structured data comes from the kit `software` frontmatter (`src/lib/software-schema.ts`) and is merged with the page's `TechArticle` in one JSON-LD `@graph`. Every statement about the product must trace to the product repository (the Vim claims ledger of PLAN_002_vim_flagship_official_page): the editor is a separate, optional product that is not part of the DWP v6 onboarding, and no copy ties a feature to a version number or claims `vim.deepworkplan.com` is live.
 
 ## Agent API
 

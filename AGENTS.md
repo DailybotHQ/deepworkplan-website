@@ -60,6 +60,7 @@ src/
 ├── components/          # UI components (Astro + Svelte)
 │   ├── home/            # Homepage sections (Hero, Pitch, Outcomes, ...)
 │   ├── editorial/       # Editorial primitives (Broadsheet design system)
+│   ├── vim/             # DeepWorkPlan Vim page blocks embedded in the kit MDX (VimInstall)
 │   ├── layout/          # Header.svelte, MobileMenu.svelte
 │   └── pages/           # Shared page components (*Page.astro)
 ├── content/             # Content Collections (methodology, spec, kit, pages — 17 lang folders each)
@@ -415,6 +416,7 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 17. **Use non-English slugs for content collections** — all slugs (methodology/spec/kit filenames) MUST be in English, even for non-English content
 18. **Re-introduce removed surfaces** — the blog engine, slides/tech-talks, and the personal pages (cv, portfolio, dailybot, foodie, hobbies, trading, entrepreneur) have been removed from this site. Do not add them back or reference them.
 19. **Add a new top-level page without updating `src/middleware.ts`** — the middleware allowlist is derived from one set: `KNOWN_BASE_PATHS` (per-language page slugs). Adding `'foo'` to that set covers every language — `/foo`, `/es/foo`, `/pt/foo`, `/zh/foo`, etc. — at once; the prefixed-language list comes from the registry (`getActiveNonDefaultLanguages()`), so new languages need no edit. New top-level routes return 404 until their slug is added. Symptom: dev log shows `[404] (rewrite) /foo` (the `(rewrite)` is the smoking gun — it comes from `context.rewrite()` in the middleware, not from Astro routing). Multi-segment paths like `/foo/bar` and any path containing `.` bypass the rule. The canonical adoption page `/quickstart` (plus its `/init`, `/setup`, and `/onboarding` redirects — all three 301 to `/quickstart`) is already in `KNOWN_BASE_PATHS`; keep it there. See [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
+20. **Create a standalone top-level page for a kit addon** — addons are documented **once**, at `/kit/<slug>` (and `/<lang>/kit/<slug>`), never as a second page. DeepWorkPlan Vim had both `/vim` and `/kit/vim`; that duplicate was retired, `/kit/vim` is the single official page and `/vim` + `/vim.md` are 301 aliases in `REDIRECT_PAIRS` (`src/lib/redirect-map.ts`; keep the slug in `KNOWN_BASE_PATHS` as a redirect source). Give an addon a richer page by making its kit doc MDX and embedding purpose-built components (`src/components/vim/`, `src/components/diagrams/kit/`), not by adding a route. See the DeepWorkPlan Vim paragraph in [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
 
 ### DO:
 

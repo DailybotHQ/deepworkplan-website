@@ -131,6 +131,8 @@ The Cloudflare Pages middleware (`functions/_middleware.ts`) supports automatic 
 
 **Fallback:** If no `.md` file exists for the requested path, the middleware falls back to serving HTML normally.
 
+**Redirect aliases have no `.md` twin.** A path that is only a redirect source — `/init`, `/setup`, `/onboarding`, `/docs`, `/vim` — has no Markdown endpoint of its own, so `Accept: text/markdown` on it falls through to the normal redirect and the client then receives the Markdown of the destination (`/quickstart`, `/developers`, `/kit/vim`). The MCP `read_page` tool behaves the same way: it resolves `/kit/vim` (and `/<lang>/kit/vim`) to the kit page's Markdown and returns a not-found with recovery hints for `/vim`. DeepWorkPlan Vim's single official page is `/kit/vim`; its Markdown endpoint is `/kit/vim.md`.
+
 **Testing with curl:**
 ```bash
 # Get Markdown
