@@ -742,6 +742,10 @@ export const vi: SiteTranslations = {
       { label: 'Đặc tả', href: '/spec' },
       { label: 'Duyệt bộ kit', href: '/kit' },
       { label: 'Xem ví dụ', href: '/examples' },
+      {
+        label: 'Tùy chọn: trình soạn thảo terminal DeepWorkPlan Vim',
+        href: '/kit/vim',
+      },
     ],
   },
 
@@ -1290,6 +1294,9 @@ export const vi: SiteTranslations = {
     codeLabel: 'shell',
     verifyNote:
       'Các bản phát hành có checksum, không có chữ ký — ký (cosign hoặc GPG của người duy trì) là bước tiếp theo được ghi lại, không phải tuyên bố hiện tại. Vì mọi thứ đều mở, bạn cũng có thể so sánh bất kỳ file nào với repository tại tag của nó.',
+    vimNote:
+      'Quy tắc tương tự áp dụng cho trình cài đặt DeepWorkPlan Vim: trang của nó hiển thị SHA-256 của tập lệnh đang được phân phát, kèm các bước tải, kiểm tra, xác minh và chạy.',
+    vimLinkLabel: 'Kiểm tra trình cài đặt DeepWorkPlan Vim',
     disclosureTitle: 'Báo cáo lỗ hổng',
     disclosureBody:
       'Tìm thấy vấn đề bảo mật? Báo cáo riêng tư qua tính năng báo cáo lỗ hổng bảo mật riêng tư của GitHub trên repository liên quan — skill hoặc trang web (xem các liên kết chính sách bảo mật bên dưới) — thay vì mở một issue công khai, vì điều đó sẽ phơi bày vấn đề trước khi có bản vá.',

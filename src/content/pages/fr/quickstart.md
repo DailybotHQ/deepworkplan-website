@@ -293,3 +293,11 @@ méthodologie :
  vérifiable.
 
 N’importe qui peut exécuter ce prompt sur n’importe quel dépôt — et terminer avec une base de code que tout agent IA peut piloter.
+
+## Étapes suivantes
+
+- [Lire la méthodologie](/methodology)
+- [Spécification](/spec)
+- [Parcourir le kit](/kit)
+- [Voir les exemples](/examples)
+- [Facultatif : l’éditeur de terminal DeepWorkPlan Vim](/kit/vim)

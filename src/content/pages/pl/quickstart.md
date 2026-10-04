@@ -271,3 +271,11 @@ metodyki:
    weryfikowalnej pracy.
 
 Każdy może uruchomić ten prompt na dowolnym repozytorium — i zakończyć z bazą kodu, którą może sterować dowolny agent AI.
+
+## Kolejne kroki
+
+- [Przeczytaj metodykę](/methodology)
+- [Specyfikacja](/spec)
+- [Przejrzyj zestaw](/kit)
+- [Zobacz przykłady](/examples)
+- [Opcjonalnie: edytor terminalowy DeepWorkPlan Vim](/kit/vim)

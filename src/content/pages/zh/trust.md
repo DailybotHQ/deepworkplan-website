@@ -31,6 +31,8 @@ curl -fsSL -o SHA256SUMS \
 
 发布版本有**校验和，但未经签名**——签名（cosign 或维护者 GPG）是已记录的下一步计划，而非当前的承诺。由于一切都是公开的，你也可以将任意文件与仓库在其 tag 处的内容进行比对。
 
+同样的规则也适用于 DeepWorkPlan Vim 的安装程序：其页面会显示当前提供的脚本的 SHA-256，并给出下载、检查、验证、运行的步骤。 [检查 DeepWorkPlan Vim 安装程序](/kit/vim#inspect-before-you-run)
+
 ---
 
 ## 报告漏洞

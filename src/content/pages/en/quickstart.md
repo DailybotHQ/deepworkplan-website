@@ -296,3 +296,11 @@ methodology:
  verifiable work.
 
 Anyone can run this prompt on any repository — and end with a codebase any AI agent can pilot.
+
+## Next steps
+
+- [Read the methodology](/methodology)
+- [Browse the spec](/spec)
+- [Browse the kit](/kit)
+- [See examples](/examples)
+- [Optional: the DeepWorkPlan Vim terminal editor](/kit/vim)

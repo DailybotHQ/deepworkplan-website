@@ -31,6 +31,8 @@ curl -fsSL -o SHA256SUMS \
 
 Các bản phát hành **có checksum, không có chữ ký** — ký (cosign hoặc GPG của người duy trì) là bước tiếp theo được ghi lại, không phải tuyên bố hiện tại. Vì mọi thứ đều mở, bạn cũng có thể so sánh bất kỳ file nào với repository tại tag của nó.
 
+Quy tắc tương tự áp dụng cho trình cài đặt DeepWorkPlan Vim: trang của nó hiển thị SHA-256 của tập lệnh đang được phân phát, kèm các bước tải, kiểm tra, xác minh và chạy. [Kiểm tra trình cài đặt DeepWorkPlan Vim](/kit/vim#inspect-before-you-run)
+
 ---
 
 ## Báo cáo lỗ hổng

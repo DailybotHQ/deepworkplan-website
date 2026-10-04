@@ -285,3 +285,11 @@ metodologia:
  verificável.
 
 Qualquer pessoa pode executar este prompt em qualquer repositório — e terminar com uma base de código que qualquer agente de IA pode pilotar.
+
+## Próximos passos
+
+- [Leia a metodologia](/methodology)
+- [Especificação](/spec)
+- [Explore o kit](/kit)
+- [Veja exemplos](/examples)
+- [Opcional: o editor de terminal DeepWorkPlan Vim](/kit/vim)

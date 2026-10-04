@@ -613,6 +613,9 @@ export interface SiteTranslations {
     verifyIntro: string;
     codeLabel: string;
     verifyNote: string;
+    /** Pointer from the verify section to the DeepWorkPlan Vim installer page. */
+    vimNote: string;
+    vimLinkLabel: string;
     disclosureTitle: string;
     disclosureBody: string;
     resourcesTitle: string;

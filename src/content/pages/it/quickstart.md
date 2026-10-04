@@ -291,3 +291,11 @@ metodologia:
    verificabile.
 
 Chiunque può eseguire questo prompt su qualsiasi repository — e ottenere un codebase che qualsiasi agente AI può pilotare.
+
+## Prossimi passi
+
+- [Leggi la metodologia](/methodology)
+- [Specifica](/spec)
+- [Esplora il kit](/kit)
+- [Guarda gli esempi](/examples)
+- [Facoltativo: l’editor da terminale DeepWorkPlan Vim](/kit/vim)

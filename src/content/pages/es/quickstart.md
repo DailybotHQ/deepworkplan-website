@@ -295,3 +295,11 @@ metodología:
 
 Cualquiera puede ejecutar este prompt en cualquier repositorio — y terminar con una base de código que
 cualquier agente de IA puede pilotar.
+
+## Próximos pasos
+
+- [Leer la metodología](/methodology)
+- [Especificación](/spec)
+- [Explorar el kit](/kit)
+- [Ver ejemplos](/examples)
+- [Opcional: el editor de terminal DeepWorkPlan Vim](/kit/vim)

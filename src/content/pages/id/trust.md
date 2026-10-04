@@ -31,6 +31,8 @@ curl -fsSL -o SHA256SUMS \
 
 Rilis **ber-checksum, bukan ditandatangani** — penandatanganan (cosign atau GPG pengelola) adalah langkah berikutnya yang terdokumentasi, bukan klaim saat ini. Karena semuanya terbuka, Anda juga dapat membandingkan file mana pun terhadap repositori pada tag-nya.
 
+Aturan yang sama berlaku untuk pemasang DeepWorkPlan Vim: halamannya menampilkan SHA-256 skrip yang disajikan sekarang, beserta langkah unduh, periksa, verifikasi, dan jalankan. [Periksa pemasang DeepWorkPlan Vim](/kit/vim#inspect-before-you-run)
+
 ---
 
 ## Laporkan kerentanan

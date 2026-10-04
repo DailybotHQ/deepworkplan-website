@@ -739,6 +739,10 @@ export const es: SiteTranslations = {
       { label: 'Especificación', href: '/spec' },
       { label: 'Explorar el kit', href: '/kit' },
       { label: 'Ver ejemplos', href: '/examples' },
+      {
+        label: 'Opcional: el editor de terminal DeepWorkPlan Vim',
+        href: '/kit/vim',
+      },
     ],
   },
 
@@ -1284,6 +1288,9 @@ export const es: SiteTranslations = {
     codeLabel: 'shell',
     verifyNote:
       'Las versiones tienen checksums, no firmas criptográficas — las firmas (cosign o GPG del mantenedor) son el próximo paso documentado, no una garantía actual. Dado que todo es abierto, también puedes comparar cualquier archivo con el repositorio en su etiqueta.',
+    vimNote:
+      'La misma regla vale para el instalador de DeepWorkPlan Vim: su página muestra el SHA-256 del script tal como se sirve, con una receta para descargar, inspeccionar, verificar y ejecutar.',
+    vimLinkLabel: 'Inspeccionar el instalador de DeepWorkPlan Vim',
     disclosureTitle: 'Reportar una vulnerabilidad',
     disclosureBody:
       '¿Encontraste un problema de seguridad? Repórtalo de forma privada a través del sistema de reporte privado de vulnerabilidades de GitHub en el repositorio correspondiente — la skill o el sitio web (consulta las políticas de seguridad enlazadas abajo) — en lugar de abrir un issue público, lo cual expondría el problema antes de que exista una corrección.',

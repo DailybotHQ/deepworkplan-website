@@ -746,6 +746,10 @@ export const tr: SiteTranslations = {
       { label: 'Spesifikasyon', href: '/spec' },
       { label: 'Kite göz atın', href: '/kit' },
       { label: 'Örnekleri görün', href: '/examples' },
+      {
+        label: 'İsteğe bağlı: DeepWorkPlan Vim terminal düzenleyicisi',
+        href: '/kit/vim',
+      },
     ],
   },
 
@@ -1290,6 +1294,9 @@ export const tr: SiteTranslations = {
     codeLabel: 'shell',
     verifyNote:
       "Sürümler sağlama toplamlarına sahiptir, imzalı değildir — imzalama (cosign veya yetkili kişi GPG'si) belgelenmiş bir sonraki adımdır, mevcut bir iddia değildir. Her şey açık olduğundan, herhangi bir dosyayı etiketindeki depoya göre de karşılaştırabilirsiniz.",
+    vimNote:
+      'Aynı kural DeepWorkPlan Vim kurulum programı için de geçerlidir: sayfası, şu anda sunulan betiğin SHA-256 değerini ve indirme, inceleme, doğrulama ve çalıştırma adımlarını gösterir.',
+    vimLinkLabel: 'DeepWorkPlan Vim kurulum programını inceleyin',
     disclosureTitle: 'Güvenlik açığı bildirin',
     disclosureBody:
       "Bir güvenlik sorunu mu buldunuz? İlgili depoda — skill'de veya web sitesinde (aşağıda bağlantısı verilen güvenlik politikalarına bakın) — GitHub'ın özel güvenlik açığı bildirme özelliği aracılığıyla özel olarak bildirin; kamuya açık bir issue açmak yerine, zira bu durum düzeltme gelmeden önce sorunu ifşa eder.",

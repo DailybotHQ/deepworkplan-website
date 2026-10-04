@@ -31,6 +31,8 @@ curl -fsSL -o SHA256SUMS \
 
 Releases sind mit **Prüfsummen versehen, aber nicht signiert** — Signierung (cosign oder Betreuer-GPG) ist ein dokumentierter nächster Schritt, keine aktuelle Aussage. Da alles offen ist, können Sie auch jede Datei gegen das Repository bei seinem Tag vergleichen.
 
+Dieselbe Regel gilt für den Installer von DeepWorkPlan Vim: Seine Seite zeigt das SHA-256 des aktuell ausgelieferten Skripts samt Anleitung zum Herunterladen, Prüfen, Verifizieren und Ausführen. [Den Installer von DeepWorkPlan Vim prüfen](/kit/vim#inspect-before-you-run)
+
 ---
 
 ## Eine Schwachstelle melden

@@ -738,6 +738,10 @@ export const en: SiteTranslations = {
       { label: 'Browse the spec', href: '/spec' },
       { label: 'Browse the kit', href: '/kit' },
       { label: 'See examples', href: '/examples' },
+      {
+        label: 'Optional: the DeepWorkPlan Vim terminal editor',
+        href: '/kit/vim',
+      },
     ],
   },
   faqPage: {
@@ -1279,6 +1283,9 @@ export const en: SiteTranslations = {
     codeLabel: 'shell',
     verifyNote:
       'Releases are checksummed, not signed — signing (cosign or maintainer GPG) is a documented next step, not a current claim. Because everything is open, you can also diff any file against the repository at its tag.',
+    vimNote:
+      'The same rule applies to the DeepWorkPlan Vim installer: its page shows the SHA-256 of the script as served, with a download, inspect, verify and run recipe.',
+    vimLinkLabel: 'Inspect the DeepWorkPlan Vim installer',
     disclosureTitle: 'Report a vulnerability',
     disclosureBody:
       "Found a security issue? Report it privately through GitHub's private vulnerability reporting on the relevant repository — the skill or the website (see the security policies linked below) — rather than opening a public issue, which would expose the problem before a fix exists.",

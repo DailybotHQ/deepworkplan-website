@@ -31,6 +31,8 @@ curl -fsSL -o SHA256SUMS \
 
 Las versiones tienen **checksums, no firmas criptográficas** — las firmas (cosign o GPG del mantenedor) son el próximo paso documentado, no una garantía actual. Dado que todo es abierto, también puedes comparar cualquier archivo con el repositorio en su etiqueta.
 
+La misma regla vale para el instalador de DeepWorkPlan Vim: su página muestra el SHA-256 del script tal como se sirve, con una receta para descargar, inspeccionar, verificar y ejecutar. [Inspeccionar el instalador de DeepWorkPlan Vim](/kit/vim#inspect-before-you-run)
+
 ---
 
 ## Reportar una vulnerabilidad

@@ -151,6 +151,14 @@ const breadcrumbSchema = {
       <p class="mt-4 leading-relaxed" style="color: var(--color-gray-600);">
         {p.verifyNote}
       </p>
+      <p class="mt-4 leading-relaxed" style="color: var(--color-gray-600);">
+        {p.vimNote}
+        <a
+          href={`${prefix}/kit/vim#inspect-before-you-run`}
+          class="underline underline-offset-4 hover:opacity-80"
+          style="color: var(--color-secondary);">{p.vimLinkLabel}</a
+        >
+      </p>
     </section>
 
     <Rule class="my-12" />

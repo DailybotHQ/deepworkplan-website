@@ -31,6 +31,8 @@ curl -fsSL -o SHA256SUMS \
 
 Releases are **checksummed, not signed** — signing (cosign or maintainer GPG) is a documented next step, not a current claim. Because everything is open, you can also diff any file against the repository at its tag.
 
+The same rule applies to the DeepWorkPlan Vim installer: its page shows the SHA-256 of the script as served, with a download, inspect, verify and run recipe. [Inspect the DeepWorkPlan Vim installer](/kit/vim#inspect-before-you-run)
+
 ---
 
 ## Report a vulnerability

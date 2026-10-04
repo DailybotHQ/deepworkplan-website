@@ -742,6 +742,7 @@ export const ko: SiteTranslations = {
       { label: '스펙', href: '/spec' },
       { label: '키트 둘러보기', href: '/kit' },
       { label: '예시 보기', href: '/examples' },
+      { label: '선택 사항: 터미널 에디터 DeepWorkPlan Vim', href: '/kit/vim' },
     ],
   },
 
@@ -1283,6 +1284,9 @@ export const ko: SiteTranslations = {
     codeLabel: 'shell',
     verifyNote:
       '릴리스는 체크섬으로 검증되며, 서명되지는 않았습니다 — 서명(cosign 또는 관리자 GPG)은 문서화된 다음 단계이지 현재의 주장이 아닙니다. 모든 것이 공개되어 있으므로, 임의의 파일을 해당 태그의 리포지토리와 diff로 비교할 수도 있습니다.',
+    vimNote:
+      '같은 원칙이 DeepWorkPlan Vim 설치 프로그램에도 적용돼요. 해당 페이지에는 지금 제공 중인 스크립트의 SHA-256과 내려받기, 확인, 검증, 실행 순서가 나와 있어요.',
+    vimLinkLabel: 'DeepWorkPlan Vim 설치 프로그램 확인하기',
     disclosureTitle: '취약점 신고',
     disclosureBody:
       '보안 문제를 발견하셨나요? 공개 이슈를 열지 말고, 해당 리포지토리(스킬 또는 웹사이트 — 아래에 링크된 보안 정책 참조)에서 GitHub의 비공개 취약점 신고 기능을 통해 비공개로 신고해 주세요. 공개 이슈를 열면 수정이 완료되기 전에 문제가 노출됩니다.',

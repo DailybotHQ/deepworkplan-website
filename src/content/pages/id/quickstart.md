@@ -295,3 +295,11 @@ metodologi:
    dan dapat diverifikasi.
 
 Siapa pun dapat menjalankan prompt ini di repositori mana pun — dan berakhir dengan basis kode yang dapat dikemudikan AI agent mana pun.
+
+## Langkah berikutnya
+
+- [Baca metodologinya](/methodology)
+- [Spesifikasi](/spec)
+- [Telusuri kit](/kit)
+- [Lihat contoh](/examples)
+- [Opsional: editor terminal DeepWorkPlan Vim](/kit/vim)

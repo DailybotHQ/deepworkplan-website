@@ -31,6 +31,8 @@ curl -fsSL -o SHA256SUMS \
 
 Sürümler **sağlama toplamlarına sahiptir, imzalı değildir** — imzalama (cosign veya yetkili kişi GPG'si) belgelenmiş bir sonraki adımdır, mevcut bir iddia değildir. Her şey açık olduğundan, herhangi bir dosyayı etiketindeki depoya göre de karşılaştırabilirsiniz.
 
+Aynı kural DeepWorkPlan Vim kurulum programı için de geçerlidir: sayfası, şu anda sunulan betiğin SHA-256 değerini ve indirme, inceleme, doğrulama ve çalıştırma adımlarını gösterir. [DeepWorkPlan Vim kurulum programını inceleyin](/kit/vim#inspect-before-you-run)
+
 ---
 
 ## Güvenlik açığı bildirin
