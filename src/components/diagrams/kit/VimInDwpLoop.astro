@@ -34,8 +34,8 @@ const i18n = {
       'The editor sits beside the loop: it shows where each plan stands and lets you read its files. It never writes under .dwp/.',
   },
   es: {
-    aria: 'El bucle de Deep Work Plan (plan, tareas, verificaciones, hecho) con dos puntos donde participa el editor: el navegador de planes, que lee los planes de .dwp/plans/, y el visor de Markdown para los archivos de un plan.',
-    steps: ['Plan', 'Tareas', 'Verificaciones', 'Hecho'],
+    aria: 'El bucle de Deep Work Plan (plan, tareas, validación, hecho) con dos puntos donde participa el editor: el navegador de planes, que lee los planes de .dwp/plans/, y el visor de Markdown para los archivos de un plan.',
+    steps: ['Plan', 'Tareas', 'Validación', 'Hecho'],
     editor: 'En el editor',
     browserTitle: 'Navegador de planes',
     browserBody:
@@ -47,8 +47,8 @@ const i18n = {
       'El editor está junto al bucle: muestra en qué punto está cada plan y te deja leer sus archivos. Nunca escribe en .dwp/.',
   },
   pt: {
-    aria: 'O ciclo do Deep Work Plan (plano, tarefas, verificações, concluído) com dois pontos em que o editor participa: o navegador de planos, que lê os planos em .dwp/plans/, e o visualizador de Markdown para os ficheiros de um plano.',
-    steps: ['Plano', 'Tarefas', 'Verificações', 'Concluído'],
+    aria: 'O ciclo do Deep Work Plan (plano, tarefas, gates, concluído) com dois pontos em que o editor participa: o navegador de planos, que lê os planos em .dwp/plans/, e o visualizador de Markdown para os ficheiros de um plano.',
+    steps: ['Plano', 'Tarefas', 'Gates', 'Concluído'],
     editor: 'No editor',
     browserTitle: 'Navegador de planos',
     browserBody:
@@ -71,17 +71,17 @@ const i18n = {
       '编辑器位于循环旁：显示每个计划进行到哪一步，并让你阅读其文件。它从不写入 .dwp/。',
   },
   ja: {
-    aria: 'Deep Work Plan のループ（プラン、タスク、ゲート、完了）と、エディタが関わる 2 つの場面。.dwp/plans/ 以下のプランを読み取るプランブラウザと、プランのファイルを見る Markdown ビューアです。',
-    steps: ['プラン', 'タスク', 'ゲート', '完了'],
+    aria: 'Deep Work Plan のループ（計画、タスク、ゲート、完了）と、エディタが関わる 2 つの場面。.dwp/plans/ 以下の計画を読み取る計画ブラウザと、計画のファイルを見る Markdown ビューアです。',
+    steps: ['計画', 'タスク', 'ゲート', '完了'],
     editor: 'エディタ内',
-    browserTitle: 'プランブラウザ',
+    browserTitle: '計画ブラウザ',
     browserBody:
-      '.dwp/plans/ 以下のすべてのプランを、状態別にまとめ、進捗とともに表示します。読み取り専用です。',
+      '.dwp/plans/ 以下のすべての計画を、状態別にまとめ、進捗とともに表示します。読み取り専用です。',
     viewerTitle: 'Markdown ビューア',
     viewerBody:
-      'Neovim を離れずに、プランの Markdown ファイルをプレビューまたは描画します。',
+      'Neovim を離れずに、計画の Markdown ファイルをプレビューまたは描画します。',
     caption:
-      'エディタはループの傍らにあり、各プランの現在地を示し、そのファイルを読めるようにします。.dwp/ には書き込みません。',
+      'エディタはループの傍らにあり、各計画の現在地を示し、そのファイルを読めるようにします。.dwp/ には書き込みません。',
   },
   de: {
     aria: 'Der Deep-Work-Plan-Kreislauf (Plan, Aufgaben, Gates, erledigt) mit zwei Stellen, an denen der Editor mitwirkt: der Plan-Browser, der Pläne unter .dwp/plans/ liest, und der Markdown-Viewer für die Dateien eines Plans.',
@@ -98,7 +98,7 @@ const i18n = {
   },
   fr: {
     aria: 'La boucle Deep Work Plan (plan, tâches, portes de validation, terminé) avec deux endroits où l’éditeur intervient : le navigateur de plans, qui lit les plans sous .dwp/plans/, et la visionneuse Markdown pour les fichiers d’un plan.',
-    steps: ['Plan', 'Tâches', 'Portes', 'Terminé'],
+    steps: ['Plan', 'Tâches', 'Validation', 'Terminé'],
     editor: 'Dans l’éditeur',
     browserTitle: 'Navigateur de plans',
     browserBody:
@@ -110,21 +110,21 @@ const i18n = {
       'L’éditeur se place à côté de la boucle : il montre où en est chaque plan et vous laisse lire ses fichiers. Il n’écrit jamais sous .dwp/.',
   },
   ko: {
-    aria: 'Deep Work Plan 루프(플랜, 작업, 게이트, 완료)와 에디터가 함께하는 두 곳이에요. .dwp/plans/ 아래의 플랜을 읽는 플랜 브라우저와 플랜 파일을 보는 Markdown 뷰어예요.',
-    steps: ['플랜', '작업', '게이트', '완료'],
+    aria: 'Deep Work Plan 루프(계획, 작업, 게이트, 완료)와 에디터가 함께하는 두 곳이에요. .dwp/plans/ 아래의 계획을 읽는 계획 브라우저와 계획 파일을 보는 Markdown 뷰어예요.',
+    steps: ['계획', '작업', '게이트', '완료'],
     editor: '에디터에서',
-    browserTitle: '플랜 브라우저',
+    browserTitle: '계획 브라우저',
     browserBody:
-      '.dwp/plans/ 아래의 모든 플랜을 상태별로 묶어 진행률과 함께 보여 줘요. 읽기 전용이에요.',
+      '.dwp/plans/ 아래의 모든 계획을 상태별로 묶어 진행률과 함께 보여 줘요. 읽기 전용이에요.',
     viewerTitle: 'Markdown 뷰어',
     viewerBody:
-      'Neovim을 떠나지 않고 플랜의 Markdown 파일을 미리 보거나 렌더링해요.',
+      'Neovim을 떠나지 않고 계획의 Markdown 파일을 미리 보거나 렌더링해요.',
     caption:
-      '에디터는 루프 옆에 있어요. 각 플랜이 어디까지 왔는지 보여 주고 파일을 읽게 해 주지만, .dwp/에는 절대 쓰지 않아요.',
+      '에디터는 루프 옆에 있어요. 각 계획이 어디까지 왔는지 보여 주고 파일을 읽게 해 주지만, .dwp/에는 절대 쓰지 않아요.',
   },
   ru: {
-    aria: 'Цикл Deep Work Plan (план, задачи, шлюзы проверки, готово) и два места, где участвует редактор: браузер планов, который читает планы в .dwp/plans/, и просмотрщик Markdown для файлов плана.',
-    steps: ['План', 'Задачи', 'Проверки', 'Готово'],
+    aria: 'Цикл Deep Work Plan (план, задачи, validation gates, готово) и два места, где участвует редактор: браузер планов, который читает планы в .dwp/plans/, и просмотрщик Markdown для файлов плана.',
+    steps: ['План', 'Задачи', 'Gates', 'Готово'],
     editor: 'В редакторе',
     browserTitle: 'Браузер планов',
     browserBody:
@@ -136,8 +136,8 @@ const i18n = {
       'Редактор стоит рядом с циклом: он показывает, на каком этапе каждый план, и позволяет читать его файлы. Он никогда ничего не записывает в .dwp/.',
   },
   it: {
-    aria: 'Il ciclo di Deep Work Plan (piano, attività, verifiche, completato) con due punti in cui interviene l’editor: il browser dei piani, che legge i piani in .dwp/plans/, e il visualizzatore Markdown per i file di un piano.',
-    steps: ['Piano', 'Attività', 'Verifiche', 'Completato'],
+    aria: 'Il ciclo di Deep Work Plan (piano, task, validation gate, completato) con due punti in cui interviene l’editor: il browser dei piani, che legge i piani in .dwp/plans/, e il visualizzatore Markdown per i file di un piano.',
+    steps: ['Piano', 'Task', 'Gate', 'Completato'],
     editor: 'Nell’editor',
     browserTitle: 'Browser dei piani',
     browserBody:
@@ -162,8 +162,8 @@ const i18n = {
       'Düzenleyici döngünün yanında durur: her planın nerede olduğunu gösterir ve dosyalarını okumanızı sağlar. .dwp/ altına asla yazmaz.',
   },
   id: {
-    aria: 'Siklus Deep Work Plan (rencana, tugas, gerbang, selesai) dengan dua tempat keterlibatan editor: penjelajah rencana yang membaca rencana di .dwp/plans/, dan penampil Markdown untuk berkas sebuah rencana.',
-    steps: ['Rencana', 'Tugas', 'Gerbang', 'Selesai'],
+    aria: 'Siklus Deep Work Plan (rencana, tugas, gerbang verifikasi, selesai) dengan dua tempat keterlibatan editor: penjelajah rencana yang membaca rencana di .dwp/plans/, dan penampil Markdown untuk berkas sebuah rencana.',
+    steps: ['Rencana', 'Tugas', 'Gerbang verifikasi', 'Selesai'],
     editor: 'Di editor',
     browserTitle: 'Penjelajah rencana',
     browserBody:
@@ -175,8 +175,8 @@ const i18n = {
       'Editor berada di samping siklus: menunjukkan posisi setiap rencana dan memungkinkan Anda membaca berkasnya. Ia tidak pernah menulis ke .dwp/.',
   },
   vi: {
-    aria: 'Vòng lặp Deep Work Plan (kế hoạch, tác vụ, cổng kiểm, hoàn tất) cùng hai điểm trình soạn thảo tham gia: trình duyệt kế hoạch đọc các kế hoạch trong .dwp/plans/ và trình xem Markdown cho các tệp của một kế hoạch.',
-    steps: ['Kế hoạch', 'Tác vụ', 'Cổng kiểm', 'Hoàn tất'],
+    aria: 'Vòng lặp Deep Work Plan (kế hoạch, tác vụ, cổng kiểm chứng, hoàn tất) cùng hai điểm trình soạn thảo tham gia: trình duyệt kế hoạch đọc các kế hoạch trong .dwp/plans/ và trình xem Markdown cho các tệp của một kế hoạch.',
+    steps: ['Kế hoạch', 'Tác vụ', 'Cổng kiểm chứng', 'Hoàn tất'],
     editor: 'Trong trình soạn thảo',
     browserTitle: 'Trình duyệt kế hoạch',
     browserBody:
@@ -188,17 +188,17 @@ const i18n = {
       'Trình soạn thảo nằm cạnh vòng lặp: cho biết mỗi kế hoạch đang ở đâu và cho phép bạn đọc các tệp của nó. Nó không bao giờ ghi vào .dwp/.',
   },
   hi: {
-    aria: 'Deep Work Plan का लूप (प्लान, कार्य, गेट, पूर्ण) और दो जगहें जहाँ एडिटर शामिल होता है: .dwp/plans/ के प्लान पढ़ने वाला प्लान ब्राउज़र, और किसी प्लान की फ़ाइलों के लिए Markdown व्यूअर।',
-    steps: ['प्लान', 'कार्य', 'गेट', 'पूर्ण'],
+    aria: 'Deep Work Plan का लूप (योजना, कार्य, सत्यापन द्वार, पूर्ण) और दो जगहें जहाँ एडिटर शामिल होता है: .dwp/plans/ की योजनाएँ पढ़ने वाला योजना ब्राउज़र, और किसी योजना की फ़ाइलों के लिए Markdown व्यूअर।',
+    steps: ['योजना', 'कार्य', 'सत्यापन द्वार', 'पूर्ण'],
     editor: 'एडिटर में',
-    browserTitle: 'प्लान ब्राउज़र',
+    browserTitle: 'योजना ब्राउज़र',
     browserBody:
-      '.dwp/plans/ के सभी प्लान, स्थिति के अनुसार समूहित और प्रगति के साथ। केवल पढ़ने के लिए।',
+      '.dwp/plans/ की सभी योजनाएँ, स्थिति के अनुसार समूहित और प्रगति के साथ। केवल पढ़ने के लिए।',
     viewerTitle: 'Markdown व्यूअर',
     viewerBody:
-      'Neovim छोड़े बिना किसी प्लान की Markdown फ़ाइलों का प्रीव्यू या रेंडर करें।',
+      'Neovim छोड़े बिना किसी योजना की Markdown फ़ाइलों का प्रीव्यू या रेंडर करें।',
     caption:
-      'एडिटर लूप के बगल में रहता है: वह दिखाता है कि हर प्लान कहाँ पहुँचा है और उसकी फ़ाइलें पढ़ने देता है। वह .dwp/ में कभी कुछ नहीं लिखता।',
+      'एडिटर लूप के बगल में रहता है: वह दिखाता है कि हर योजना कहाँ पहुँची है और उसकी फ़ाइलें पढ़ने देता है। वह .dwp/ में कभी कुछ नहीं लिखता।',
   },
   pl: {
     aria: 'Pętla Deep Work Plan (plan, zadania, bramki, gotowe) z dwoma miejscami, w których uczestniczy edytor: przeglądarka planów, która czyta plany w .dwp/plans/, oraz podgląd Markdown dla plików planu.',
@@ -214,8 +214,8 @@ const i18n = {
       'Edytor stoi obok pętli: pokazuje, na jakim etapie jest każdy plan, i pozwala czytać jego pliki. Nigdy nie zapisuje niczego w .dwp/.',
   },
   uk: {
-    aria: 'Цикл Deep Work Plan (план, завдання, шлюзи, готово) і два місця, де бере участь редактор: оглядач планів, що читає плани в .dwp/plans/, і переглядач Markdown для файлів плану.',
-    steps: ['План', 'Завдання', 'Шлюзи', 'Готово'],
+    aria: 'Цикл Deep Work Plan (план, завдання, validation gates, готово) і два місця, де бере участь редактор: оглядач планів, що читає плани в .dwp/plans/, і переглядач Markdown для файлів плану.',
+    steps: ['План', 'Завдання', 'Gates', 'Готово'],
     editor: 'У редакторі',
     browserTitle: 'Оглядач планів',
     browserBody:
