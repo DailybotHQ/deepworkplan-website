@@ -9,6 +9,7 @@ import {
   type Language,
   stripEntryLangPrefix as slugOf,
 } from '@/lib/i18n';
+import { buildSoftwareSchema } from '@/lib/software-schema';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -86,6 +87,18 @@ const techArticleSchema = {
   url: `${siteUrl}${prefix}/${baseSegment}/${slugOf(entry.id)}`,
 };
 
+// Optional SoftwareApplication JSON-LD for kit entries that declare product
+// facts in their `software` frontmatter (DeepWorkPlan Vim); null otherwise.
+const softwareSchema = buildSoftwareSchema({
+  name: entry.data.title,
+  description: entry.data.description,
+  siteUrl,
+  prefix,
+  slug: slugOf(entry.id),
+  lang,
+  software: data.software,
+});
+
 const sectionName =
   variant === 'examples' ? t.examplesPage.title : t.kitPage.title;
 const breadcrumbSchema = {
@@ -116,6 +129,7 @@ const breadcrumbSchema = {
 
 <MainLayout lang={lang} title={entry.data.title} description={entry.data.description}>
   <JsonLd slot="head" data={techArticleSchema} />
+  {softwareSchema && <JsonLd slot="head" data={softwareSchema} />}
   <JsonLd slot="head" data={breadcrumbSchema} />
   <div class="main-container py-16 md:py-20">
     <article class="max-w-3xl">

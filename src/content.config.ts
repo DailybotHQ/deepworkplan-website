@@ -2,6 +2,7 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { LANGUAGE_CODES } from './lib/i18n';
+import { softwareFrontmatterSchema } from './lib/software-schema';
 
 /** Zod enum of all target language codes, derived from the i18n registry. */
 const langEnum = z.enum(LANGUAGE_CODES as unknown as [string, ...string[]]);
@@ -50,6 +51,9 @@ const kit = defineCollection({
       kind: z.enum(['command', 'adapter', 'preset', 'example', 'addon']),
       lang: langEnum,
       order: z.number().optional(),
+      // Optional product facts; the kit reader emits SoftwareApplication JSON-LD
+      // for entries that declare it (see src/lib/software-schema.ts).
+      software: softwareFrontmatterSchema.optional(),
     })
     .loose(),
 });
