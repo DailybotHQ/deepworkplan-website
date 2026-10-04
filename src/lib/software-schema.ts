@@ -73,3 +73,21 @@ export function buildSoftwareSchema(
       : {}),
   };
 }
+
+/**
+ * Combine JSON-LD nodes into one `@graph` document so a page that describes
+ * more than one entity (an article about a software product) still ships a
+ * single structured-data script. Each node's own `@context` is dropped in
+ * favor of the shared one.
+ */
+export function combineJsonLd(
+  ...nodes: Record<string, unknown>[]
+): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': nodes.map((node) => {
+      const { '@context': _context, ...rest } = node;
+      return rest;
+    }),
+  };
+}

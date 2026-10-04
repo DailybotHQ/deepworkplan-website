@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   buildSoftwareSchema,
+  combineJsonLd,
   softwareFrontmatterSchema,
 } from '@/lib/software-schema';
 
@@ -106,5 +107,42 @@ describe('softwareFrontmatterSchema', () => {
   it('rejects unknown-quality input: missing install URL', () => {
     const { installUrl: _omit, ...rest } = software;
     expect(softwareFrontmatterSchema.safeParse(rest).success).toBe(false);
+  });
+});
+
+describe('combineJsonLd', () => {
+  it('wraps the nodes in one @graph with a single shared @context', () => {
+    const graph = combineJsonLd(
+      {
+        '@context': 'https://schema.org',
+        '@type': 'TechArticle',
+        headline: 'A',
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: 'B',
+      }
+    );
+    expect(graph['@context']).toBe('https://schema.org');
+    expect(graph['@graph']).toEqual([
+      { '@type': 'TechArticle', headline: 'A' },
+      { '@type': 'SoftwareApplication', name: 'B' },
+    ]);
+  });
+
+  it('keeps the SoftwareApplication node of a built schema intact', () => {
+    const built = buildSoftwareSchema({ ...base, software });
+    const graph = combineJsonLd(
+      { '@type': 'TechArticle' },
+      built as Record<string, unknown>
+    );
+    const nodes = graph['@graph'] as Record<string, unknown>[];
+    expect(nodes[1]).toMatchObject({
+      '@type': 'SoftwareApplication',
+      name: 'DeepWorkPlan Vim',
+      installUrl: 'https://deepworkplan.com/vim/install.sh',
+    });
+    expect(nodes[1]).not.toHaveProperty('@context');
   });
 });

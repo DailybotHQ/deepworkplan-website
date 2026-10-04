@@ -106,7 +106,7 @@ onDestroy(() => {
 </script>
 
 {#if open}
-  <div class="fixed inset-0 z-50 bg-main text-white flex flex-col items-center justify-start pt-20 gap-6 overflow-y-auto overscroll-contain transition-all duration-300 md:hidden">
+  <div class="fixed inset-0 z-50 bg-main text-white flex flex-col items-center justify-start pt-20 gap-6 overflow-y-auto overscroll-contain transition-all duration-300 lg:hidden">
     <button
       class="absolute top-6 right-6 p-2"
       aria-label={nav.closeMenu}
