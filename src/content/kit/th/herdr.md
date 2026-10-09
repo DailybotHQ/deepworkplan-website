@@ -29,8 +29,8 @@ order: 7
 ติดตั้ง herdr-peers และ skill ทางการของ Herdr ที่มันต้องพึ่งพา ทุกเครื่องที่ต้องการให้เอเจนต์ของตนตอบได้ก็ต้องมี skill นี้ด้วย
 
 ```bash
-npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g
-npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g
+npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g -y
 ```
 
 ข้อกำหนด: Herdr 0.9.1 ขึ้นไป `bash` และ `python3` 3.9 ขึ้นไป (ใช้เฉพาะไลบรารีมาตรฐาน) ขั้นตอน onboarding จะเสนอแอดออนนี้และบันทึกคำตอบของคุณไว้ใน registry ของแอดออน โดยจะไม่มีการเปิดใช้งานเลยหากไม่ได้รับความยินยอม

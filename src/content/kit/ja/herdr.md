@@ -29,8 +29,8 @@ order: 7
 herdr-peers と、それが依存する Herdr 公式のスキル をインストールします。エージェントに回答させたいすべてのマシンにも、このスキル が必要です。
 
 ```bash
-npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g
-npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g
+npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g -y
 ```
 
 要件：Herdr 0.9.1 以降、`bash`、および `python3` 3.9 以降（標準ライブラリのみ）。オンボーディングがこのアドオンを提案し、あなたの回答をアドオンレジストリに記録します。同意なしに有効化されることはありません。

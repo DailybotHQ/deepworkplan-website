@@ -29,8 +29,8 @@ order: 7
 herdr-peers와, 그것이 의존하는 Herdr 공식 skill을 설치합니다. 에이전트가 응답해야 하는 모든 머신에도 이 skill이 필요합니다.
 
 ```bash
-npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g
-npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g
+npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g -y
 ```
 
 요구 사항: Herdr 0.9.1 이상, `bash`, 그리고 `python3` 3.9 이상(표준 라이브러리만 사용). 온보딩이 이 애드온을 제안하고 여러분의 답을 애드온 레지스트리에 기록합니다. 동의 없이 활성화되는 일은 결코 없습니다.

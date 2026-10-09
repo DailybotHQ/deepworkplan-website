@@ -29,8 +29,8 @@ Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-pee
 Instal herdr-peers dan skill resmi Herdr yang menjadi dependensinya. Setiap mesin yang agennya perlu menjawab juga membutuhkan skill tersebut.
 
 ```bash
-npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g
-npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g
+npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g -y
 ```
 
 Persyaratan: Herdr 0.9.1 atau lebih baru, `bash`, dan `python3` 3.9 atau lebih baru (hanya pustaka standar). Onboarding menawarkan addon ini dan mencatat jawaban Anda di registri addon; addon ini tidak pernah diaktifkan tanpa persetujuan.
