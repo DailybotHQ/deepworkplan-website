@@ -21,7 +21,7 @@ Zapewnij repozytorium powtarzalny, odizolowany kontener deweloperski — taki, z
 ## Instalacja
 
 ```bash
-git clone --branch v0.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.1.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init
 ```
 
@@ -29,7 +29,7 @@ Wymagania: `bash` 3.2 lub nowszy oraz `python3` 3.11 lub nowszy na hoście z Lin
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, tag `v0.1.2`, interfejs 1 |
+| Produkt | `DailybotHQ/devcontainer-kit`, tag `v0.1.4`, interfejs 1 |
 | Klucz rejestru | `devcontainer` w `.dwp/config.json` |
 | Konfiguracja repozytorium | `.devcontainer/dck.toml` |
 | Wykrywanie | `dck doctor --json` |

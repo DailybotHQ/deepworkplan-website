@@ -21,7 +21,7 @@ Dai al repository un container di sviluppo riproducibile e isolato — utilizzab
 ## Installazione
 
 ```bash
-git clone --branch v0.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.1.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init
 ```
 
@@ -29,7 +29,7 @@ Requisiti: `bash` 3.2 o successivo e `python3` 3.11 o successivo su un host Linu
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/devcontainer-kit`, tag `v0.1.2`, interfaccia 1 |
+| Prodotto | `DailybotHQ/devcontainer-kit`, tag `v0.1.4`, interfaccia 1 |
 | Chiave di registro | `devcontainer` in `.dwp/config.json` |
 | Configurazione per repository | `.devcontainer/dck.toml` |
 | Rilevamento | `dck doctor --json` |

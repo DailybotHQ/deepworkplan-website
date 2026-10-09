@@ -61,8 +61,8 @@ onboard フローがリポジトリに重ねる各機能です。四つはオプ
 - **Deep Work Plan スキル** — 計画の作成、実行、検証、再開、改善を行います。アドオンは不要です。
 - **[herdr](/ja/kit/herdr)** — 任意のマシン上の Herdr ペインにいるピア：認可された返信を一つだけ受け取る対話型委任。固定バージョン：`herdr-peers@v0.1.0`。
 - **[agentkit](/ja/kit/agentkit)** — あらゆるターミナル型コーディングエージェントに使える一つの ak コマンド：worktree 内でのヘッドレス委任。固定バージョン：`coding-agents-kit@v0.1.1`。
-- **[devcontainer](/ja/kit/devcontainer)** — コーディングエージェントを含まずに提供される Dev Containers テンプレートとベースイメージ。固定バージョン：`devcontainer-kit@v0.1.2`。
-- **[vim](/ja/kit/vim)** — 読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。固定バージョン：`deepworkplan-vim@v0.4.1`。
+- **[devcontainer](/ja/kit/devcontainer)** — コーディングエージェントを含まずに提供される Dev Containers テンプレートとベースイメージ。固定バージョン：`devcontainer-kit@v0.1.4`。
+- **[vim](/ja/kit/vim)** — 読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。固定バージョン：`deepworkplan-vim@v0.4.2`。
 
 アドオンのレジストリと記述子は、プレリリースである v7 ベータに含まれています： `v7.0.0-beta.1`
 

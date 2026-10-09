@@ -21,7 +21,7 @@ order: 1
 ## 安装
 
 ```bash
-git clone --branch v0.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.1.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init
 ```
 
@@ -29,7 +29,7 @@ cd your-repo && dck init
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/devcontainer-kit`，标签 `v0.1.2`，接口 1 |
+| 产品 | `DailybotHQ/devcontainer-kit`，标签 `v0.1.4`，接口 1 |
 | 注册表键 | `.dwp/config.json` 中的 `devcontainer` |
 | 每仓库配置 | `.devcontainer/dck.toml` |
 | 检测 | `dck doctor --json` |

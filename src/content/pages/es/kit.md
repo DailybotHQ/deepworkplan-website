@@ -69,8 +69,8 @@ AI-first; la revisión local de AI Diff Reviewer es requerida desde el estándar
 - **Skill de Deep Work Plan** — Crea, ejecuta, verifica, reanuda y refina planes. No necesita ningún addon.
 - **[herdr](/es/kit/herdr)** — Pares en paneles de Herdr, en cualquier máquina: delegación interactiva con una única respuesta autorizada. Fijado en `herdr-peers@v0.1.0`.
 - **[agentkit](/es/kit/agentkit)** — Un solo comando ak para cada agente de programación en terminal: delegación sin interfaz en un worktree. Fijado en `coding-agents-kit@v0.1.1`.
-- **[devcontainer](/es/kit/devcontainer)** — Una plantilla de Dev Containers e imágenes base que se distribuyen sin agentes de programación. Fijado en `devcontainer-kit@v0.1.2`.
-- **[vim](/es/kit/vim)** — El editor de terminal, con un explorador de planes de solo lectura y un visor de Markdown. Fijado en `deepworkplan-vim@v0.4.1`.
+- **[devcontainer](/es/kit/devcontainer)** — Una plantilla de Dev Containers e imágenes base que se distribuyen sin agentes de programación. Fijado en `devcontainer-kit@v0.1.4`.
+- **[vim](/es/kit/vim)** — El editor de terminal, con un explorador de planes de solo lectura y un visor de Markdown. Fijado en `deepworkplan-vim@v0.4.2`.
 
 El registro de addons y los descriptores se distribuyen en la beta de v7, una versión preliminar: `v7.0.0-beta.1`
 

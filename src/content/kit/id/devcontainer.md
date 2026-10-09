@@ -21,7 +21,7 @@ Berikan repositori sebuah dev container yang reproducible dan terisolasi — yan
 ## Instalasi
 
 ```bash
-git clone --branch v0.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.1.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init
 ```
 
@@ -29,7 +29,7 @@ Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di ho
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/devcontainer-kit`, tag `v0.1.2`, antarmuka 1 |
+| Produk | `DailybotHQ/devcontainer-kit`, tag `v0.1.4`, antarmuka 1 |
 | Kunci registri | `devcontainer` di `.dwp/config.json` |
 | Konfigurasi per repositori | `.devcontainer/dck.toml` |
 | Deteksi | `dck doctor --json` |

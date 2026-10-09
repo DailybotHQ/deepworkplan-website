@@ -21,7 +21,7 @@ Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin �
 ## Kurulum
 
 ```bash
-git clone --branch v0.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.1.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init
 ```
 
@@ -29,7 +29,7 @@ Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/devcontainer-kit`, `v0.1.2` etiketi, arayüz 1 |
+| Ürün | `DailybotHQ/devcontainer-kit`, `v0.1.4` etiketi, arayüz 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `devcontainer` |
 | Depo başına yapılandırma | `.devcontainer/dck.toml` |
 | Algılama | `dck doctor --json` |

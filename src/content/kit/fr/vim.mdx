@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** est l’éditeur de terminal de Deep Work Plan : une configuration Neovim pour les personnes, et pour les agents de programmation, qui travaillent dans un terminal. Vos plans, votre documentation et un index de toutes les commandes sont à une touche de distance.
 
-C’est un produit distinct, proposé comme l’addon optionnel `vim` de la bêta de Deep Work Plan v7 (`v7.0.0-beta.1`, une préversion). Deep Work Plan fonctionne avec n’importe quel éditeur ou sans éditeur, et l’éditeur n’exige pas Deep Work Plan : vous l’ajoutez à une machine séparément, et il fonctionne comme éditeur qu’un plan existe ou non. Cette page décrit la version **v0.4.1**.
+C’est un produit distinct, proposé comme l’addon optionnel `vim` de la bêta de Deep Work Plan v7 (`v7.0.0-beta.1`, une préversion). Deep Work Plan fonctionne avec n’importe quel éditeur ou sans éditeur, et l’éditeur n’exige pas Deep Work Plan : vous l’ajoutez à une machine séparément, et il fonctionne comme éditeur qu’un plan existe ou non. Cette page décrit la version **v0.4.2**.
 
 ## Pourquoi un éditeur de terminal pour Deep Work Plan
 
@@ -60,7 +60,7 @@ Pour lire sur place les fichiers Markdown d’un plan, `SPC m p` prévisualise l
 
 ## Installation
 
-L’installation tient en trois commandes : téléchargez le script, vérifiez-le avec le SHA-256 du fichier que sert ce site, puis exécutez-le. L’installateur fige sa propre version : il installe donc exactement `v0.4.1`, la version que décrit cette page ; `DWP_VIM_REF=main bash install.sh` suit plutôt la branche mouvante `main`.
+L’installation tient en trois commandes : téléchargez le script, vérifiez-le avec le SHA-256 du fichier que sert ce site, puis exécutez-le. L’installateur fige sa propre version : il installe donc exactement `v0.4.2`, la version que décrit cette page ; `DWP_VIM_REF=main bash install.sh` suit plutôt la branche mouvante `main`.
 
 <VimInstall lang="fr" />
 
@@ -72,7 +72,7 @@ Dans l’ordre, l’installateur :
 4. Exécute le propre `lua install.lua` du dépôt.
 5. Installe les extensions en mode headless, donc sans étape de fermeture et de réouverture.
 
-Le script servi ici est une copie identique octet pour octet de `install.sh` à l’étiquette `v0.4.1`. Pour le lire d’abord, téléchargez-le avec `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, comparez son SHA-256 à la valeur affichée ci-dessus, lisez-le, puis exécutez `bash install.sh`.
+Le script servi ici est une copie identique octet pour octet de `install.sh` à l’étiquette `v0.4.2`. Pour le lire d’abord, téléchargez-le avec `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, comparez son SHA-256 à la valeur affichée ci-dessus, lisez-le, puis exécutez `bash install.sh`.
 
 ## Prérequis et plateformes
 
@@ -123,7 +123,7 @@ Il est conçu pour les personnes et pour les agents de programmation qui vivent 
 
 ### Quelle version obtiens-je ?
 
-L’installateur installe la version à laquelle il appartient — `v0.4.1` aujourd’hui — sauf si vous définissez `DWP_VIM_REF` ; `DWP_VIM_REF=main` suit `main`. Cette page décrit la version `v0.4.1`, qui inclut toutes les fonctions listées ici.
+L’installateur installe la version à laquelle il appartient — `v0.4.2` aujourd’hui — sauf si vous définissez `DWP_VIM_REF` ; `DWP_VIM_REF=main` suit `main`. Cette page décrit la version `v0.4.2`, qui inclut toutes les fonctions listées ici.
 
 ### Sous quelle licence est-il et d’où vient-il ?
 

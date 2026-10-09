@@ -21,7 +21,7 @@ Mang đến cho repository một dev container có thể tái lập và được
 ## Cài đặt
 
 ```bash
-git clone --branch v0.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.1.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init
 ```
 
@@ -29,7 +29,7 @@ Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host 
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v0.1.2`, giao diện 1 |
+| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v0.1.4`, giao diện 1 |
 | Khóa registry | `devcontainer` trong `.dwp/config.json` |
 | Cấu hình theo từng repository | `.devcontainer/dck.toml` |
 | Phát hiện | `dck doctor --json` |

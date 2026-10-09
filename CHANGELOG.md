@@ -17,13 +17,19 @@ existing GitHub release notes.
 
 ### Changed
 
-- `/kit/devcontainer` rewritten for devcontainer-kit; `/kit/vim` refreshed for DeepWorkPlan Vim v0.4.1 (installer served byte-identical with its `install.sh.sha256`) and the optional v7 `vim` addon.
+- `/kit/devcontainer` rewritten for devcontainer-kit; `/kit/vim` refreshed for DeepWorkPlan Vim v0.4.2 (installer served byte-identical with its `install.sh.sha256`) and the optional v7 `vim` addon.
 - The site vendors the Deep Work Plan skill `7.0.0-beta.1` (a pre-release) to field-test it; `/trust` explains how to verify a pre-release.
 
 ### Security
 
 - No page shows a fetch-piped-to-shell install line any more: the DeepWorkPlan Vim install is download, verify the SHA-256, run.
 - Private context removed from the container tooling; the public-hygiene check runs on every pull request.
+
+## [5.0.30] - 2026-10-09
+
+### Fixed
+
+- fix(vim): serve the v0.4.2 installer and its sha256 at /vim/ (#97)
 
 ## [5.0.29] - 2026-10-09
 
@@ -1047,7 +1053,8 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.29...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.30...HEAD
+[5.0.30]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.30
 [5.0.29]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.29
 [5.0.28]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.28
 [5.0.27]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.27

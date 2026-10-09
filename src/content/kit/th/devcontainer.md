@@ -21,7 +21,7 @@ order: 1
 ## การติดตั้ง
 
 ```bash
-git clone --branch v0.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.1.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init
 ```
 
@@ -29,7 +29,7 @@ cd your-repo && dck init
 
 | รายการ | ค่า |
 |---|---|
-| ผลิตภัณฑ์ | `DailybotHQ/devcontainer-kit` แท็ก `v0.1.2` อินเทอร์เฟซ 1 |
+| ผลิตภัณฑ์ | `DailybotHQ/devcontainer-kit` แท็ก `v0.1.4` อินเทอร์เฟซ 1 |
 | คีย์ใน registry | `devcontainer` ใน `.dwp/config.json` |
 | config ต่อ repository | `.devcontainer/dck.toml` |
 | การตรวจจับ | `dck doctor --json` |

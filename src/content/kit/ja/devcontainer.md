@@ -21,7 +21,7 @@ order: 1
 ## インストール
 
 ```bash
-git clone --branch v0.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.1.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init
 ```
 
@@ -29,7 +29,7 @@ cd your-repo && dck init
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v0.1.2`、インターフェース 1 |
+| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v0.1.4`、インターフェース 1 |
 | レジストリキー | `.dwp/config.json` 内の `devcontainer` |
 | リポジトリごとの設定 | `.devcontainer/dck.toml` |
 | 検出 | `dck doctor --json` |

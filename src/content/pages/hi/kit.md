@@ -61,8 +61,8 @@ Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Wind
 - **Deep Work Plan स्किल** — योजनाएँ बनाएँ, निष्पादित करें, सत्यापित करें, फिर से शुरू करें और परिष्कृत करें। किसी ऐडऑन की आवश्यकता नहीं।
 - **[herdr](/hi/kit/herdr)** — किसी भी मशीन पर Herdr पेन में पीयर: एक अधिकृत उत्तर के साथ इंटरैक्टिव डेलिगेशन। पिन किया गया `herdr-peers@v0.1.0`।
 - **[agentkit](/hi/kit/agentkit)** — हर टर्मिनल कोडिंग एजेंट के लिए एक ak कमांड: worktree में हेडलेस डेलिगेशन। पिन किया गया `coding-agents-kit@v0.1.1`।
-- **[devcontainer](/hi/kit/devcontainer)** — एक Dev Containers टेम्पलेट और बेस इमेज, जो कोडिंग एजेंट के बिना आते हैं। पिन किया गया `devcontainer-kit@v0.1.2`।
-- **[vim](/hi/kit/vim)** — टर्मिनल एडिटर, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर के साथ। पिन किया गया `deepworkplan-vim@v0.4.1`।
+- **[devcontainer](/hi/kit/devcontainer)** — एक Dev Containers टेम्पलेट और बेस इमेज, जो कोडिंग एजेंट के बिना आते हैं। पिन किया गया `devcontainer-kit@v0.1.4`।
+- **[vim](/hi/kit/vim)** — टर्मिनल एडिटर, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर के साथ। पिन किया गया `deepworkplan-vim@v0.4.2`।
 
 ऐडऑन रजिस्ट्री और डिस्क्रिप्टर v7 बीटा में आते हैं, जो एक प्री-रिलीज़ है: `v7.0.0-beta.1`
 

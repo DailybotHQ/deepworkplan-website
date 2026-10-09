@@ -42,7 +42,7 @@ The site explains and positions the DWP methodology, hosts the readable specific
 
 **Content model:** methodology documentation is primary, paired with the specification reader and kit catalog. The blog engine, slides/tech-talks, and personal pages have been removed — this is a focused methodology-and-marketing site.
 
-**Kit addons:** eight addon pages at `/kit/<slug>` (`kind: addon`, one page each — rule 20): devcontainer, dailybot, dependency-upgrade, design-system, ai-diff-reviewer, vim, herdr, agentkit. herdr, agentkit, devcontainer and vim document the **v7 ecosystem**: thin integrators pinned by tag to products with their own repositories (herdr-peers `v0.1.0`, coding-agents-kit `v0.1.1`, devcontainer-kit `v0.1.2`, deepworkplan-vim `v0.4.1`), shipped by the `v7.0.0-beta.1` pre-release — never presented as stable, never as required. The kit index carries the ecosystem plate (`src/components/diagrams/kit/KitEcosystem.astro`). Every product claim traces to a tagged artifact (claims-ledger method).
+**Kit addons:** eight addon pages at `/kit/<slug>` (`kind: addon`, one page each — rule 20): devcontainer, dailybot, dependency-upgrade, design-system, ai-diff-reviewer, vim, herdr, agentkit. herdr, agentkit, devcontainer and vim document the **v7 ecosystem**: thin integrators pinned by tag to products with their own repositories (herdr-peers `v0.1.0`, coding-agents-kit `v0.1.1`, devcontainer-kit `v0.1.4`, deepworkplan-vim `v0.4.2`), shipped by the `v7.0.0-beta.1` pre-release — never presented as stable, never as required. The kit index carries the ecosystem plate (`src/components/diagrams/kit/KitEcosystem.astro`). Every product claim traces to a tagged artifact (claims-ledger method).
 
 **Technology Stack:**
 

@@ -64,8 +64,8 @@ Các năng lực mà luồng onboard bổ sung vào một repo. Bốn addon là 
 - **Skill Deep Work Plan** — Tạo, thực thi, xác minh, tiếp tục và tinh chỉnh kế hoạch. Không cần addon nào.
 - **[herdr](/vi/kit/herdr)** — Các agent ngang hàng trong các pane của Herdr, trên bất kỳ máy nào: ủy thác tương tác với đúng một phản hồi được ủy quyền. Ghim tại `herdr-peers@v0.1.0`.
 - **[agentkit](/vi/kit/agentkit)** — Một lệnh ak duy nhất cho mọi agent lập trình trên terminal: ủy thác headless trong một worktree. Ghim tại `coding-agents-kit@v0.1.1`.
-- **[devcontainer](/vi/kit/devcontainer)** — Một template Dev Containers và các image cơ sở được phân phối không kèm agent lập trình. Ghim tại `devcontainer-kit@v0.1.2`.
-- **[vim](/vi/kit/vim)** — Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown. Ghim tại `deepworkplan-vim@v0.4.1`.
+- **[devcontainer](/vi/kit/devcontainer)** — Một template Dev Containers và các image cơ sở được phân phối không kèm agent lập trình. Ghim tại `devcontainer-kit@v0.1.4`.
+- **[vim](/vi/kit/vim)** — Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown. Ghim tại `deepworkplan-vim@v0.4.2`.
 
 Registry addon và các descriptor được phân phối trong bản beta v7, một bản phát hành trước: `v7.0.0-beta.1`
 

@@ -21,7 +21,7 @@ order: 1
 ## Встановлення
 
 ```bash
-git clone --branch v0.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.1.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init
 ```
 
@@ -29,7 +29,7 @@ cd your-repo && dck init
 
 | Елемент | Значення |
 |---|---|
-| Продукт | `DailybotHQ/devcontainer-kit`, тег `v0.1.2`, інтерфейс 1 |
+| Продукт | `DailybotHQ/devcontainer-kit`, тег `v0.1.4`, інтерфейс 1 |
 | Ключ реєстру | `devcontainer` у `.dwp/config.json` |
 | Конфігурація репозиторію | `.devcontainer/dck.toml` |
 | Виявлення | `dck doctor --json` |
