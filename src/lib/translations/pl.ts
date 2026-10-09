@@ -1286,7 +1286,7 @@ export const pl: SiteTranslations = {
       },
       {
         title: 'Weryfikowalne pochodzenie',
-        body: 'Każde wydanie publikuje sumy kontrolne dla dostarczonego skilla, dzięki czemu możesz potwierdzić, że pobrана kopia odpowiada temu, co zostało opublikowane, zanim jej zaufasz.',
+        body: 'Każde wydanie publikuje sumy kontrolne dla dostarczonego skilla, dzięki czemu możesz potwierdzić, że pobrana kopia odpowiada temu, co zostało opublikowane, zanim jej zaufasz.',
       },
     ],
     verifyTitle: 'Zweryfikuj przed uruchomieniem',

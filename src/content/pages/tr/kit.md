@@ -61,7 +61,7 @@ Onboarding akışının bir depoya katmanladığı yetenekler. Dördü isteğe b
 
 - **Deep Work Plan skill'i** — Planları oluşturur, yürütür, doğrular, sürdürür ve iyileştirir. Hiçbir eklenti gerektirmez.
 - **[herdr](/tr/kit/herdr)** — Herhangi bir makinede Herdr panellerindeki eşler: tek bir yetkili yanıtla etkileşimli devretme. Sabitlenen sürüm `herdr-peers@v0.1.0`.
-- **[agentkit](/tr/kit/agentkit)** — Her terminal kodlama ajanı için tek bir ak komutu: bir worktree içinde arayüzsüz devretme. Sabitlenen sürüm `coding-agents-kit@v0.1.1`.
+- **[agentkit](/tr/kit/agentkit)** — Her terminal kodlama ajanı için tek bir ak komutu: bir worktree içinde başsız devretme. Sabitlenen sürüm `coding-agents-kit@v0.1.1`.
 - **[devcontainer](/tr/kit/devcontainer)** — Kodlama ajanları olmadan sunulan bir Dev Containers şablonu ve temel imajlar. Sabitlenen sürüm `devcontainer-kit@v0.1.2`.
 - **[vim](/tr/kit/vim)** — Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi. Sabitlenen sürüm `deepworkplan-vim@v0.4.0`.
 

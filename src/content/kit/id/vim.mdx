@@ -91,7 +91,7 @@ Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install
 
 Jalankan pemasang lagi untuk memperbarui. Pemasang bersifat idempoten: checkout DeepWorkPlan Vim yang sudah ada diperbarui dengan fast-forward, dan perubahan lokal tidak pernah di-reset.
 
-Untuk memasang tag tertentu, setel `DWP_VIM_REF`. Sematkan tag, bukan cabang: rilis sebelum `v0.4.0` tidak memuat gestur, penjelajah rencana, penampil Markdown, maupun pemasang ini.
+Untuk memasang tag tertentu, setel `DWP_VIM_REF`. Patok tag, bukan cabang: rilis sebelum `v0.4.0` tidak memuat gestur, penjelajah rencana, penampil Markdown, maupun pemasang ini.
 
 ```bash
 curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
@@ -119,7 +119,7 @@ Tidak. Ia adalah editor lebih dulu. Ia tidak memasang atau mensyaratkan skill De
 
 ### Bagaimana addon vim v7 menggunakannya?
 
-Deep Work Plan v7 beta menawarkan editor ini sebagai addon `vim` opsional selama onboarding. Addon tersebut mendeteksi instalasi yang sudah ada secara hanya-baca, melalui `addon/surface.json` milik editor, dan menawarkan instalasi yang disematkan serta terverifikasi checksum hanya dengan persetujuan Anda. Ia tidak pernah menimpa konfigurasi Neovim yang sudah ada tanpa persetujuan eksplisit, dan tidak pernah diwajibkan.
+Deep Work Plan v7 beta menawarkan editor ini sebagai addon `vim` opsional selama onboarding. Addon tersebut mendeteksi instalasi yang sudah ada secara hanya-baca, melalui `addon/surface.json` milik editor, dan menawarkan instalasi yang dipatok serta terverifikasi checksum hanya dengan persetujuan Anda. Ia tidak pernah menimpa konfigurasi Neovim yang sudah ada tanpa persetujuan eksplisit, dan tidak pernah diwajibkan.
 
 ### Bagaimana agen pemrograman menggunakannya?
 

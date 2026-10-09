@@ -62,7 +62,7 @@ Des capacités que le flux onboard superpose à un dépôt. Quatre sont facultat
 **La méthodologie fonctionne seule. Les addons l’amplifient.** Chaque addon est un intégrateur léger au sein de la skill Deep Work Plan, épinglé par tag à un produit doté de son propre dépôt, de sa propre version et de sa propre version d’interface. Chaque produit fonctionne sans Deep Work Plan, et aucun addon n’est requis.
 
 - **Skill Deep Work Plan** — Créer, exécuter, vérifier, reprendre et affiner des plans. Ne nécessite aucun addon.
-- **[herdr](/fr/kit/herdr)** — Des pairs dans des volets Herdr, sur n’importe quelle machine : délégation interactive avec une seule réponse autorisée. Épinglé à `herdr-peers@v0.1.0`.
+- **[herdr](/fr/kit/herdr)** — Des pairs dans des panneaux Herdr, sur n’importe quelle machine : délégation interactive avec une seule réponse autorisée. Épinglé à `herdr-peers@v0.1.0`.
 - **[agentkit](/fr/kit/agentkit)** — Une seule commande ak pour chaque agent de code en terminal : délégation sans interface dans un worktree. Épinglé à `coding-agents-kit@v0.1.1`.
 - **[devcontainer](/fr/kit/devcontainer)** — Un modèle Dev Containers et des images de base distribués sans agents de code. Épinglé à `devcontainer-kit@v0.1.2`.
 - **[vim](/fr/kit/vim)** — L’éditeur de terminal, avec un navigateur de plans en lecture seule et une visionneuse Markdown. Épinglé à `deepworkplan-vim@v0.4.0`.

@@ -8,13 +8,13 @@ order: 1
 
 # Addon devcontainer
 
-Dê ao repositório um contêiner de desenvolvimento reproduzível e isolado — que pessoas, editores e agentes de código possam usar igualmente. No **beta do DWP v7** (`v7.0.0-beta.1`, uma versão de pré-lançamento) este addon integra o **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, um produto MIT que funciona sem o Deep Work Plan, e substitui o template que o pacote trazia antes. É opcional: um repositório é totalmente conforme sem ele.
+Dê ao repositório um contêiner de desenvolvimento reproduzível e isolado — que pessoas, editores e agentes de programação possam usar igualmente. No **beta do DWP v7** (`v7.0.0-beta.1`, uma versão de pré-lançamento) este addon integra o **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, um produto MIT que funciona sem o Deep Work Plan, e substitui o template que o pacote trazia antes. É opcional: um repositório é totalmente conforme sem ele.
 
 ## O que o devcontainer-kit fornece
 
 - **Um template**, baseado na especificação [Dev Containers](https://containers.dev), que `dck init` gera no repositório: `devcontainer.json`, um arquivo compose e `docker/local/`. Executado novamente mais tarde, ele reconcilia e nunca sobrescreve suas edições; qualquer alteração em um arquivo existente é mostrada primeiro e exige consentimento.
 - **`dck`**, um launcher que executa o contêiner a partir de um terminal comum — `setup`, `up`, `shell`, `ssh`, `rebuild`, `doctor` — com ou sem VS Code ou Cursor.
-- **Imagens base** em três variantes, `python-3.13`, `node-24` e `debian`, distribuídas **sem** agentes de código.
+- **Imagens base** em três variantes, `python-3.13`, `node-24` e `debian`, distribuídas **sem** agentes de programação.
 - **Uma biblioteca de entrypoint** para volumes persistentes, SSH e o ambiente das sessões SSH, em vez de um entrypoint copiado à mão em cada repositório.
 - **Máquinas Herdr.** Cada contêiner pode se juntar ao [Herdr](https://herdr.dev) por meio de um servidor SSH restrito a loopback, de modo que os agentes nele se tornam pares alcançáveis.
 

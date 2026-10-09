@@ -60,15 +60,15 @@ Kemampuan yang ditambahkan alur onboard ke sebuah repo. Empat bersifat opsional 
 
 ### Ekosistem
 
-**Metodologi bekerja sendiri. Add-on memperkuatnya.** Setiap add-on adalah integrator tipis di dalam skill Deep Work Plan, dipatok berdasarkan tag ke sebuah produk dengan repositori, rilis, dan versi antarmukanya sendiri. Setiap produk berfungsi tanpa Deep Work Plan, dan tidak ada add-on yang wajib.
+**Metodologi bekerja sendiri. Addon memperkuatnya.** Setiap addon adalah integrator tipis di dalam skill Deep Work Plan, dipatok berdasarkan tag ke sebuah produk dengan repositori, rilis, dan versi antarmukanya sendiri. Setiap produk berfungsi tanpa Deep Work Plan, dan tidak ada addon yang wajib.
 
-- **Skill Deep Work Plan** — Membuat, menjalankan, memverifikasi, melanjutkan, dan menyempurnakan rencana. Tidak memerlukan add-on.
+- **Skill Deep Work Plan** — Membuat, menjalankan, memverifikasi, melanjutkan, dan menyempurnakan rencana. Tidak memerlukan addon.
 - **[herdr](/id/kit/herdr)** — Rekan di panel Herdr, di mesin mana pun: delegasi interaktif dengan satu balasan yang diotorisasi. Dipatok pada `herdr-peers@v0.1.0`.
-- **[agentkit](/id/kit/agentkit)** — Satu perintah ak untuk setiap agen coding di terminal: delegasi headless di dalam worktree. Dipatok pada `coding-agents-kit@v0.1.1`.
-- **[devcontainer](/id/kit/devcontainer)** — Template Dev Containers dan image dasar yang dikirimkan tanpa agen coding. Dipatok pada `devcontainer-kit@v0.1.2`.
+- **[agentkit](/id/kit/agentkit)** — Satu perintah ak untuk setiap coding agent di terminal: delegasi headless di dalam worktree. Dipatok pada `coding-agents-kit@v0.1.1`.
+- **[devcontainer](/id/kit/devcontainer)** — Template Dev Containers dan image dasar yang dikirimkan tanpa coding agent. Dipatok pada `devcontainer-kit@v0.1.2`.
 - **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v0.4.0`.
 
-Registri add-on dan deskriptor dikirimkan dalam beta v7, sebuah pra-rilis: `v7.0.0-beta.1`
+Registri addon dan deskriptor dikirimkan dalam beta v7, sebuah pra-rilis: `v7.0.0-beta.1`
 
 ### Contoh
 

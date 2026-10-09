@@ -8,13 +8,13 @@ order: 1
 
 # Addon de devcontainer
 
-Dale al repositorio un contenedor de desarrollo reproducible y aislado, que puedan usar por igual las personas, los editores y los agentes de código. En la **beta de DWP v7** (`v7.0.0-beta.1`, una versión preliminar) este addon integra **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un producto MIT que funciona sin Deep Work Plan, y reemplaza la plantilla que el pack incluía antes. Es opcional: un repositorio es plenamente conforme sin él.
+Dale al repositorio un contenedor de desarrollo reproducible y aislado, que puedan usar por igual las personas, los editores y los agentes de programación. En la **beta de DWP v7** (`v7.0.0-beta.1`, una versión preliminar) este addon integra **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un producto MIT que funciona sin Deep Work Plan, y reemplaza la plantilla que el pack incluía antes. Es opcional: un repositorio es plenamente conforme sin él.
 
 ## Qué proporciona devcontainer-kit
 
 - **Una plantilla**, basada en la especificación de [Dev Containers](https://containers.dev), que `dck init` genera en el repositorio: `devcontainer.json`, un archivo de compose y `docker/local/`. Si se vuelve a ejecutar más adelante, reconcilia y nunca sobrescribe tus ediciones; cualquier cambio en un archivo existente se muestra primero y requiere consentimiento.
 - **`dck`**, un lanzador que ejecuta el contenedor desde una terminal normal —`setup`, `up`, `shell`, `ssh`, `rebuild`, `doctor`— con o sin VS Code o Cursor.
-- **Imágenes base** en tres variantes, `python-3.13`, `node-24` y `debian`, que se distribuyen **sin** agentes de código.
+- **Imágenes base** en tres variantes, `python-3.13`, `node-24` y `debian`, que se distribuyen **sin** agentes de programación.
 - **Una biblioteca de entrypoint** para volúmenes persistentes, SSH y el entorno de las sesiones SSH, en lugar de un entrypoint copiado a mano en cada repositorio.
 - **Máquinas Herdr.** Cada contenedor puede unirse a [Herdr](https://herdr.dev) mediante un servidor SSH limitado a loopback, de modo que sus agentes se convierten en pares alcanzables.
 

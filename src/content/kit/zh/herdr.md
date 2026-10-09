@@ -14,7 +14,7 @@ order: 7
 
 ## 它集成了什么
 
-该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT skill，固定在 **`v0.1.0`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
+该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v0.1.0`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
 
 | 项目 | 值 |
 |---|---|
@@ -26,7 +26,7 @@ order: 7
 
 ## 安装
 
-安装 herdr-peers 及其所依赖的 Herdr 官方 skill。凡是其代理需要作答的机器，也都需要安装该 skill。
+安装 herdr-peers 及其所依赖的 Herdr 官方技能。凡是其代理需要作答的机器，也都需要安装该技能。
 
 ```bash
 npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g

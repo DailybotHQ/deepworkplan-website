@@ -62,7 +62,7 @@ onboard 流程向仓库叠加的各项能力。其中四个是可选的，绝非
 **方法论可以独立运作。附加组件让它更强。** 每个附加组件都是 Deep Work Plan 技能中的一个轻量集成层，按 tag 固定到一个拥有独立仓库、发布版本和接口版本的产品。每个产品都可以脱离 Deep Work Plan 独立运行，且不需要任何附加组件。
 
 - **Deep Work Plan 技能** — 创建、执行、验证、恢复和完善计划。无需任何附加组件。
-- **[herdr](/zh/kit/herdr)** — 在任意机器上的 Herdr 窗格中协作的对等代理：交互式委派，仅允许一次经授权的回复。固定于：`herdr-peers@v0.1.0`。
+- **[herdr](/zh/kit/herdr)** — 在任意机器上的 Herdr 窗格中协作的对等方：交互式委派，仅允许一次经授权的回复。固定于：`herdr-peers@v0.1.0`。
 - **[agentkit](/zh/kit/agentkit)** — 一个 ak 命令适用于所有终端编码代理：在 worktree 中进行无界面委派。固定于：`coding-agents-kit@v0.1.1`。
 - **[devcontainer](/zh/kit/devcontainer)** — 一个 Dev Containers 模板及基础镜像，不附带任何编码代理。固定于：`devcontainer-kit@v0.1.2`。
 - **[vim](/zh/kit/vim)** — 终端编辑器，带有只读的计划浏览器和 Markdown 查看器。固定于：`deepworkplan-vim@v0.4.0`。

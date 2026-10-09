@@ -14,11 +14,11 @@ Bu eklenti, kiti **DWP v7 beta**'ya (`v7.0.0-beta.1`, bir ön sürüm) **başsı
 
 ## Kitin size sundukları
 
-- **Her CLI için tek bir dil bilgisi.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline` ve `ak grok`, ayrıca sağlayıcı varyantları (GLM, Azure, xAI), aynı oturum bayraklarıyla: `-c` sürdürür, `-r <id>` devam ettirir.
+- **Her CLI için tek bir söz dizimi.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline` ve `ak grok`, ayrıca sağlayıcı varyantları (GLM, Azure, xAI), aynı oturum bayraklarıyla: `-c` sürdürür, `-r <id>` devam ettirir.
 - **Profiller.** `ak claude @work`, ikinci bir hesabı birincisinden ayrı tutulan kendi ana dizininde çalıştırır.
 - **Başsız çalıştırmalar.** `ak run <kind> -- "<prompt>"` tek bir istemi etkileşimsiz olarak çalıştırır ve belgelenmiş bir çıkış kodu döndürür; isteğe bağlı olarak tek bir JSON nesnesi biçiminde.
 - **Bir doktor.** `ak doctor --json`, hangi CLI'ların kurulu olduğunu, profilleri ve ayarlanmış anahtarların adlarını raporlar — değerlerini asla.
-- **Kurulumlar.** `ak install <cli>`, eksik bir CLI'ı satıcısının resmî kanalından kurar.
+- **Kurulumlar.** `ak install <cli>`, eksik bir CLI'ı sağlayıcısının resmî kanalından kurar.
 
 ## Kurulum
 
@@ -58,4 +58,4 @@ Sözleşmesi `agent_delegation` yetkisi veren bir v7 planında `execute`, `paral
 
 ## Notlar
 
-İsteğe bağlıdır ve hiçbir zaman zorunlu değildir. API anahtarı değerleri asla yazdırılmaz, günlüğe kaydedilmez ya da bir yapılandırma dosyasına yazılmaz; belgelenmiş istisna, anahtarını komut satırında alan Cline'dır. OpenCode, Pi, Cline ve Grok için sonuç çıkarma, satıcı belgelerinden oluşturulmuştur ve henüz canlı hesaplara karşı denenmemiştir; bilinmeyen çıktı ham metne geri döner.
+İsteğe bağlıdır ve hiçbir zaman zorunlu değildir. API anahtarı değerleri asla yazdırılmaz, günlüğe kaydedilmez ya da bir yapılandırma dosyasına yazılmaz; belgelenmiş istisna, anahtarını komut satırında alan Cline'dır. OpenCode, Pi, Cline ve Grok için sonuç çıkarma, sağlayıcı belgelerinden oluşturulmuştur ve henüz canlı hesaplara karşı denenmemiştir; bilinmeyen çıktı ham metne geri döner.
