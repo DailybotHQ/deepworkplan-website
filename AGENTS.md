@@ -25,12 +25,15 @@
 | AI Agents | [Agent Onboarding](docs/AI_AGENT_ONBOARDING.md), [Agent Collaboration](docs/AI_AGENT_COLLAB.md) | Setup, handoff, coordination |
 | Skills/Agents | [Skills & Agents Catalog](.agents/docs/skills_agents_catalog.md) | Available skills and agents |
 | Commands | [Commands Reference](.agents/docs/COMMANDS_REFERENCE.md) | All slash commands with procedure files |
+| Ecosystem hub | [Ecosystem Context](docs/ECOSYSTEM_CONTEXT.md), [Cross-Project Standards](docs/CROSS_PROJECT_STANDARDS.md), [Repositories index](repositories/README.md) | Hub role: posture, release order, boundaries, per-repo gates, orchestrator plans |
 
 ## Project Overview
 
 **Deep Work Plan** ([deepworkplan.com](https://deepworkplan.com)) — The official website for the Deep Work Plan (DWP) methodology: the methodology that turns any repository into an **AI-first, agent-pilotable** codebase. DWP documents a repo (AGENTS.md, docs, `.agents/` skills, the DWP skill), enables **long-horizon plans**, and lets **any agent pilot the repo** against explicit acceptance criteria and validation gates. A serious, neutral, fast documentation-and-marketing site built with Astro, in the **"Broadsheet" editorial design system** (warm paper, ink serif display, hairline rules, restrained oxblood accent), with dark mode, multilingual content in 17 languages (en, es, pt, zh, ja, de, fr, ko, ru, it, tr, id, vi, hi, pl, uk, th), static site architecture deployed to Cloudflare Pages.
 
 The site explains and positions the DWP methodology, hosts the readable specification and kit catalog, ships agent-friendly Markdown endpoints, and exposes a canonical adoption endpoint at **`/quickstart`** (human-readable page, 17 languages) backed by the standalone, English-only, machine-executable **`/init.md`** (a static file, not a content-collection page — never redirected; `/init`, `/setup`, and `/onboarding` all 301-redirect to `/quickstart`). The repository **dogfoods** the methodology it documents.
+
+**Second role — the DeepWorkPlan ecosystem hub.** The repository also coordinates the public ecosystem repositories (the `deepworkplan-skill` pack and its addons), cloned under the git-ignored `repositories/` by `scripts/repositories.sh`. It plans cross-repository work as orchestrator plans and never commits another repository's code — see **[Ecosystem Hub — Repository Boundaries](#ecosystem-hub--repository-boundaries-mandatory)** and **[Ecosystem Context](docs/ECOSYSTEM_CONTEXT.md)**.
 
 **Positioning — three narrative pillars** (weave through all copy):
 
@@ -79,12 +82,13 @@ src/
 
 functions/               # Cloudflare Pages Functions (edge): api/mcp.ts (MCP server) + _middleware.ts
 public/api/              # Static agent API artifacts (health.json); spec at public/openapi.json
-scripts/                 # Build utilities (image optimization, version stamping)
+scripts/                 # Build utilities (image optimization, version stamping) + repositories.sh (hub sync)
 docs/                    # Project documentation
 .agents/                 # Cross-agent skills, commands, agents, settings (canonical)
 .claude → .agents        # Backward-compat symlink for Claude Code
 .cursor → .agents        # Backward-compat symlink for Cursor
 .dwp/                    # Deep Work Plan output (plans) — git-ignored working state
+repositories/            # Ecosystem hub clones — git-ignored except README.md (index) + manifest.json
 tmp/                     # Temporary workspace (git-ignored, see below)
 ```
 
@@ -120,41 +124,35 @@ the remaining invocations: [Development Commands → Audit scripts](docs/DEVELOP
 > Mirrors the normative rule in
 > `.agents/skills/deepworkplan/spec/DWP_SPECIFICATION.md` §5.
 
+## Ecosystem Hub — Repository Boundaries (MANDATORY)
+
+This repository is also the **DeepWorkPlan ecosystem hub**. `repositories/` holds local clones of the public ecosystem repositories, managed by `bash scripts/repositories.sh clone|status|pull|ls` from the tracked `repositories/manifest.json` (index: [`repositories/README.md`](repositories/README.md)). Everything under `repositories/` is git-ignored except `README.md` (the navigation index) and `manifest.json`, and no site tool reads it (`tests/unit/lib/hub-isolation.test.ts`).
+
+**Where work lands:** a change to the site, its docs, tooling or hub coordination files is committed here. A change to an ecosystem repository is made **inside** `repositories/<name>`: `cd` into it, read its own `AGENTS.md`, pull its default branch, then branch, commit, gate, push and open the PR **there**. Decision tree: [Cross-Project Standards](docs/CROSS_PROJECT_STANDARDS.md#where-work-lands).
+
+- **NEVER commit sub-repository code from the hub root** — no `git add -f repositories/…`, no submodules, no copying a repository's files into this tree. Inside a clone, that repository's rules, gates and reviews apply.
+- **agent-skill is owned by the Dailybot hub too:** pull before editing and never leave unpushed work in its clone, so nobody double-edits.
+- **The sync script never deletes**, never touches a dirty tree or a feature-branch checkout, and never rewrites a remote. Removing a clone is the developer's manual, literal-path decision.
+
+**Orchestrator pattern:** cross-repository work is a parent plan in this repository's `.dwp/plans/PLAN_{name}/` (with `ORCHESTRATOR_MANIFEST.md` and a child tracking table) that spawns one child plan per repository in `repositories/<name>/.dwp/plans/`, each using that repository's plan IDs and gate, followed by an integration checkpoint (DWP spec §8).
+
+| Repository | Role | Gate (run inside the clone) |
+|------------|------|------------------------------|
+| deepworkplan-website (hub) | Site + hub | Six site gates (Quick Commands), `bash tests/scripts/repositories.test.sh`, `bash scripts/check-public-hygiene.sh` |
+| deepworkplan-skill | Pack | `bats tests/` |
+| herdr-peers, coding-agents-kit, devcontainer-kit | Addons | `bash tests/run.sh` |
+| deepworkplan-vim | Addon | `bash tests/smoke/run.sh` |
+| ai-diff-reviewer | Addon | `python3 -m unittest discover -s tests` |
+| agent-skill | Addon (shared with the Dailybot hub) | `bats tests/` |
+
+**PR conventions (every repository):** conventional commits in English; one branch and one PR per repository per change; add the **`Ready` label as soon as the PR opens — it triggers the AI Diff Reviewer** self-review (run-once; remove and re-add the label to re-run) and wait for it before asking for a merge; no force-push, no admin merge — the owner merges. Cross-repository changes release pack → addons → site ([Ecosystem Context → Release order](docs/ECOSYSTEM_CONTEXT.md#release-order)).
+
 ## Skills, Commands, and Agents (`.agents/`)
 
-The `.agents/` directory is the **canonical, cross-agent home** for everything that defines how AI assistants behave in this repo: skills, slash commands, agent definitions, internal documentation, and settings. The same content is consumed by Claude Code, Cursor AI, OpenAI Codex, Gemini, and any other coding agent that picks up local skills/commands.
+`.agents/` is the **canonical, cross-agent home** for skills, slash commands, agent definitions, catalogs (`.agents/docs/`) and Claude Code settings. `.claude` and `.cursor` are **symlinks to `.agents`** for backward compatibility.
 
-```
-.agents/
-├── agents/        # Agent definitions (architect, executor, reviewer, ...)
-├── commands/      # Slash commands (commit, pr, branch, dwp-*, ...)
-├── skills/        # Skill procedures (fix-lint, translate-sync, ...)
-├── docs/          # Catalogs and references (skills_agents_catalog.md, COMMANDS_REFERENCE.md)
-├── README.md      # Conventions for authoring skills, agents, and commands
-├── settings.json           # Claude Code env (env vars, experimental flags)
-└── settings.local.json     # Claude Code local permissions (git-tracked)
-```
-
-**Backward compatibility — `.claude/` and `.cursor/` symlinks:**
-
-Claude Code historically reads from `.claude/` and Cursor from `.cursor/` at the repo root. To keep both working without duplicating files, **both are symlinks to `.agents`**:
-
-```bash
-ls -la .claude .cursor
-# .claude -> .agents
-# .cursor -> .agents
-```
-
-This means every `.claude/...` or `.cursor/...` path (e.g., `.claude/skills/foo/SKILL.md`, `.cursor/hooks.json`) resolves transparently to `.agents/`. No tool, hook, or settings file needs to change for either agent to keep working.
-
-**Authoring rules (all agents):**
-
-- Use `.agents/...` as the canonical path in **all new documentation, prompts, and skill/command files**. Do not write `.claude/...` or `.cursor/...` in new content.
-- Do not edit files via the `.claude/` or `.cursor/` symlinks — edit the real files under `.agents/`.
-- Settings files (`settings.json`, `settings.local.json`) are Claude Code-specific but live in `.agents/` for symmetry. They're a no-op for other agents.
-- The `.agents/README.md` documents how to add new skills, commands, and agents.
-
-**Why the rename?** The `.agents/` name signals that the folder is shared across agents, matching the project-level `AGENTS.md` convention (which is itself the canonical file that `CLAUDE.md` symlinks to). It avoids implying that the contents are Claude-only.
+- Write `.agents/...` (never `.claude/...` or `.cursor/...`) in all new documentation, prompts and skill/command files, and edit the real files under `.agents/`, never through a symlink.
+- `.agents/README.md` documents how to add skills, commands and agents. Layout, symlink rationale and settings: [Architecture → The `.agents/` directory](docs/ARCHITECTURE.md#the-agents-directory).
 
 ## Working principles
 
@@ -300,23 +298,13 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 
 ### Vendored agent skills — addons auto-refresh; deepworkplan is repo-adapted
 
-`.agents/skills/deepworkplan/`, `.agents/skills/dailybot/`, and `.agents/skills/ai-diff-reviewer/` are **vendored copies** tracked in git and pinned via `skills-lock.json`. They are managed differently on purpose:
+`.agents/skills/deepworkplan/`, `.agents/skills/dailybot/` and `.agents/skills/ai-diff-reviewer/` are **vendored copies** tracked in git and pinned via `skills-lock.json`.
 
-| Skill | Upstream | Release auto-refresh | Why |
-|-------|----------|----------------------|-----|
-| `deepworkplan` | `DailybotHQ/deepworkplan-skill` | **No** | Repo-adapted DWP kit — blind reinstall would overwrite local adaptation. Update only via an explicit, reviewed change that re-adapts the skill to this repository. |
-| `dailybot` | `DailybotHQ/agent-skill` | **Yes** | Addon — safe to pin to latest upstream on every website release. |
-| `ai-diff-reviewer` | `DailybotHQ/ai-diff-reviewer` | **Yes** | Addon — safe to pin to latest upstream on every website release. |
+- **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the release workflow refreshes them to the latest upstream tag on every merge to `main` and overwrites local edits. Contribute upstream.
+- **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: update it only through an explicit, reviewed change (released tag, tree-URL install, `SHA256SUMS` verified), contributed upstream first.
+- **Current provenance (2026-10-09):** `deepworkplan` **v7.0.1**, `ai-diff-reviewer` **v3.3.0**, `dailybot` **v3.23.3**; `.dwp/config.json` (the addon registry) is the only tracked file under `.dwp/`.
 
-**How refresh works, in one paragraph.** [`release_and_publish.yml`](.github/workflows/release_and_publish.yml) Step 1a fires on every merge to `main`, resolves the latest upstream tag of the two addon skills, installs only those that moved with `npx --yes skills add <repo>@<tag> --skill <name> --force -y` (both flags are required in a non-TTY runner), asserts that the installed version equals the requested tag, and commits the result alongside the version bump. A failed install or a version mismatch **fails the release**; a transient `gh` blip skips only that skill. Refresh is release-driven, never scheduled.
-
-**Editing policy.**
-- **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the next release overwrites those edits. Contribute upstream instead.
-- **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: changes there must be intentional and reviewed, contributed upstream first, then re-adapted deliberately.
-
-**Current vendored provenance (2026-10-09):** the `deepworkplan` copy is the stable upstream release **`v7.0.1`** (`latest`; a patch over `v7.0.0`, which superseded the field-tested `v7.0.0-beta.1`), installed with the tree-URL form the skills CLI honours — `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan --force -y` (the `@tag` form is not honoured) — the installed `version:` asserted equal to the tag, and all 171 files verified against the release `SHA256SUMS` (the tree is exactly that file set); `skills-lock.json` records `ref: v7.0.1` (added by hand — the skills CLI does not record the ref). The addon registry `.dwp/config.json` is tracked (the only tracked file under `.dwp/`): ai-diff-reviewer, dailybot, dependency-upgrade and design-system are enabled. `ai-diff-reviewer` is at **v3.3.0** and `dailybot` at **v3.23.3** (both refreshed by the release workflow's dogfood step on 2026-10-09, installed `version:` asserted equal to the tag; pack baseline `dailybot-cli >= 3.9.0`, the Plan sub-skill needs `>= 3.25.0`). Local adaptation remains the command delegators, refreshed from the skill's own `onboard/command-templates/`.
-
-> Full mechanics — the refresh sequence step by step, failure semantics, the official CLI publishing step and its namespace strategy, and the provenance history including this repository's own upstream contribution — live in [Architecture → Dogfooding DWP](docs/ARCHITECTURE.md#addon-refresh--the-full-sequence).
+> Upstream table, install commands, refresh sequence, failure semantics and provenance history: [Architecture → Vendored agent skills](docs/ARCHITECTURE.md#vendored-agent-skills).
 
 ### Local AI Diff Reviewer
 
@@ -350,6 +338,8 @@ pnpm run md:content-check   # Verify the .md actually carries equivalent content
 pnpm run i18n:check         # Verify translation parity across all 17 active languages
 pnpm run i18n:scaffold <code>  # Scaffold strings + content for a new language code
 bash scripts/check-public-hygiene.sh  # Public-hygiene check (no private context or secrets; runs in CI)
+bash scripts/repositories.sh clone|status|pull|ls  # Ecosystem hub: sync repositories/ (host; git + python3)
+bash tests/scripts/repositories.test.sh  # Sync-script tests (host, offline; runs in CI)
 pnpm run lighthouse         # Lighthouse CI audit (mobile)
 pnpm run lighthouse:desktop # Lighthouse CI audit (desktop)
 pnpm run release            # Bump version and release commit
@@ -475,27 +465,9 @@ See [Team Agents Reference](docs/technical/TEAM_AGENTS_REFERENCE.md) for details
 
 ## ⚡ Slash Commands (All Agents)
 
-**This section applies to ALL agents** — Claude Code, OpenAI Codex, Cursor AI, Gemini, and any other assistant.
+Claude Code invokes commands with `/` (`/translate-sync`); Codex, Cursor, Gemini and other agents use `#` (`#translate-sync`) or the plain command name, because most CLIs intercept `/`. A prompt that starts with `#` is a command invocation.
 
-### How to Invoke Commands
-
-| Agent | Prefix | Example |
-|-------|--------|---------|
-| **Claude Code** | `/` (native) | `/translate-sync` |
-| **OpenAI Codex** | `#` | `#translate-sync` |
-| **Cursor AI** | `#` | `#translate-sync` |
-| **Gemini / others** | `#` | `#translate-sync` |
-
-> **Why `#` for non-Claude agents?** Most AI CLIs (Codex, Cursor) intercept `/` as their own system commands. Using `#` avoids interception. You can also write the command name in plain text: "run translate-sync".
-
-When a command is invoked (via `/`, `#`, or by name), the agent MUST:
-
-1. **Look up** the command in **[Commands Reference](.agents/docs/COMMANDS_REFERENCE.md)** to find its procedure file
-2. **READ** the linked procedure file completely
-3. **FOLLOW** its step-by-step instructions exactly
-4. **DO NOT** improvise or skip steps — the procedure file IS the spec
-
-> **If a user prompt starts with `#`** (e.g., `#translate-sync`, `#quick-fix`), treat it as a command invocation — look up the command name (without `#`) in the [Commands Reference](.agents/docs/COMMANDS_REFERENCE.md) and execute its procedure.
+When a command is invoked, the agent MUST look it up in the **[Commands Reference](.agents/docs/COMMANDS_REFERENCE.md)**, READ the linked procedure file completely and FOLLOW it step by step — the procedure file IS the spec; do not improvise or skip steps.
 
 ## Conventional Commits
 

@@ -14,7 +14,11 @@ Beyond turning a repository AI-first, DWP lets that repository **evolve its own 
 
 ### This repository dogfoods DWP
 
-The website repository practices the methodology it documents. The official DeepWorkPlan skill is **vendored and repo-adapted** under `.agents/skills/deepworkplan/` (tracked in git; not auto-overwritten on release). Addon skills (`dailybot`, `ai-diff-reviewer`) are also vendored and **are** refreshed to latest upstream on every website release. A committed `skills-lock.json` pins install provenance. Also committed: the thin `dwp-*` command delegators (`/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`), the `/skill-create` and `/agent-create` delegators that route to the author sub-skill, the `/lib-upgrade` delegator for the dependency-upgrade add-on, the `/quickstart` adoption flow, and the docs. All Deep Work Plan output lives in the gitignored `.dwp/` directory (`.dwp/plans/`) — Lite and Full plans alike, with no separate draft artifact. See [Architecture → Dogfooding DWP](ARCHITECTURE.md#dogfooding-dwp) and [AGENTS.md → Vendored agent skills](../AGENTS.md) for details.
+The website repository practices the methodology it documents. The official DeepWorkPlan skill is **vendored and repo-adapted** under `.agents/skills/deepworkplan/` (tracked in git; not auto-overwritten on release). Addon skills (`dailybot`, `ai-diff-reviewer`) are also vendored and **are** refreshed to latest upstream on every website release. A committed `skills-lock.json` pins install provenance. Also committed: the thin `dwp-*` command delegators (`/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`), the `/skill-create` and `/agent-create` delegators that route to the author sub-skill, the `/lib-upgrade` delegator for the dependency-upgrade add-on, the `/quickstart` adoption flow, and the docs. All Deep Work Plan output lives in the gitignored `.dwp/` directory (`.dwp/plans/`) — Lite and Full plans alike, with no separate draft artifact. See [Architecture → Dogfooding DWP](ARCHITECTURE.md#dogfooding-dwp) and [Architecture → Vendored agent skills](ARCHITECTURE.md#vendored-agent-skills) for details.
+
+### This repository is also the ecosystem hub
+
+The same repository is the coordination point for the public DeepWorkPlan ecosystem: the `deepworkplan-skill` pack and its addons (ai-diff-reviewer, the Dailybot agent skill, devcontainer-kit, coding-agents-kit, deepworkplan-vim, herdr-peers). For the people who maintain that ecosystem it offers one place to clone every repository, see each one's role and validation gate, and plan a change that spans several of them — while each repository keeps its own history, reviews and releases. Its promise to site readers is consistency: every version and install line the site shows points at something an ecosystem repository has actually released. See [Ecosystem Context](ECOSYSTEM_CONTEXT.md) and [Cross-Project Standards](CROSS_PROJECT_STANDARDS.md).
 
 ## Positioning
 
@@ -250,6 +254,7 @@ See **[Brand Guide](BRAND_GUIDE.md)** for the complete "Broadsheet" palette (war
 ## Related Documentation
 
 - [Architecture](ARCHITECTURE.md) — Technical implementation
+- [Ecosystem Context](ECOSYSTEM_CONTEXT.md) — The hub role: repositories, posture, release order
 - [Development Commands](DEVELOPMENT_COMMANDS.md) — Build scripts
 - [Standards](STANDARDS.md) — Coding conventions
 - [Brand Guide](BRAND_GUIDE.md) — Visual identity
