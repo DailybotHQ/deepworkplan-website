@@ -7,7 +7,8 @@ import { describe, expect, it } from 'vitest';
 // vendors (or a newer one) — never an older tag — and every pinned
 // `npx skills add` line must use the tree-URL form
 // (`https://github.com/<owner>/<repo>/tree/<tag>`): the skills CLI does not
-// honour `owner/repo@tag`, so that form silently installs the default branch
+// honour `owner/repo@<ref>` (a tag, `latest` or a branch), so that form
+// silently installs the default branch
 // (vendored deepworkplan shared/install-verification.md). The vendored version
 // comes from .agents/skills/deepworkplan/SKILL.md, so a pack upgrade that
 // forgets a surface fails here. Historical release notes (the changelog
@@ -22,6 +23,8 @@ const SURFACES = [
   'public/llms.txt',
   'public/llms-full.txt',
   'public/.well-known/dwp-trust.json',
+  'public/.well-known/dwp.json',
+  'public/openapi.json',
   'src/content/pages',
   'src/content/kit',
   'src/content/spec',
@@ -86,7 +89,8 @@ describe('public install surfaces', () => {
 
   it('pin every skills install with the tree-URL form the CLI honours', () => {
     const ignored: string[] = [];
-    const atForm = /skills add [A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+@v\d/g;
+    // Any `owner/repo@<ref>` (a tag, `latest`, a branch): the CLI does not honour it.
+    const atForm = /skills add [A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+@[A-Za-z0-9]/g;
     for (const file of files) {
       const text = readFileSync(file, 'utf8');
       for (const match of text.matchAll(atForm)) {
