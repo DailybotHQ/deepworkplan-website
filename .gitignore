@@ -24,12 +24,15 @@ coverage/
 # Lighthouse CI local results
 .lighthouseci/
 
-# environment variables
+# environment variables (examples stay tracked)
 .env
-.env.production
+.env.*
+!.env.example
 
-# macOS-specific files
+# OS-specific files
 .DS_Store
+Thumbs.db
+desktop.ini
 
 # jetbrains setting folder
 .idea/

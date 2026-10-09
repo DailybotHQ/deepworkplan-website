@@ -451,6 +451,7 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 - [ ] Meta descriptions: 130-160 characters — 60-90 for CJK (`zh`, `ja`, `ko`), whose characters render about twice as wide (pages in translations, collection docs in frontmatter; see [SEO](docs/SEO.md#meta-description-standards-mandatory))
 - [ ] Accessibility: approved text contrast, image dimensions, heading hierarchy
 - [ ] Performance: lightest hydration, minimal JS
+- [ ] `bash scripts/check-public-hygiene.sh` passes (no private context or secret-shaped literals; public repository standard — see CONTRIBUTING.md)
 - [ ] Commit message in English (conventional format)
 
 ## Skills & Agents

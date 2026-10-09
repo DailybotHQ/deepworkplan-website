@@ -9,6 +9,8 @@
 
 **The methodology site for planning and executing complex software work with AI coding agents.**
 
+[![CI](https://github.com/DailybotHQ/deepworkplan-website/actions/workflows/ci.yml/badge.svg)](https://github.com/DailybotHQ/deepworkplan-website/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/DailybotHQ/deepworkplan-website)](https://github.com/DailybotHQ/deepworkplan-website/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Astro](https://img.shields.io/badge/Astro-7.x-FF5D01?logo=astro)](https://astro.build)
 [![Svelte](https://img.shields.io/badge/Svelte-5.x-FF3E00?logo=svelte)](https://svelte.dev)
@@ -20,7 +22,7 @@
 
 ---
 
-## ✨ Overview
+## ✨ What it is
 
 [deepworkplan.com](https://deepworkplan.com) is the official website for the **Deep Work Plan (DWP)** methodology — a structured, agent-agnostic approach to executing complex, multi-step software work reliably with AI coding agents.
 
@@ -61,23 +63,26 @@ The repository practices the methodology it documents. The official DeepWorkPlan
 
 ---
 
-## 🛠 Tech Stack
+## 📦 Install
 
-| Layer | Technology |
-| :---- | :--------- |
-| Framework | [Astro](https://astro.build) 7.x |
-| UI | [Svelte](https://svelte.dev) 5.x |
-| Styling | [Tailwind CSS](https://tailwindcss.com) 4.x |
-| Language | [TypeScript](https://www.typescriptlang.org) 6.x |
-| Linting | [Biome](https://biomejs.dev) 2.x |
-| Testing | [Vitest](https://vitest.dev) + Testing Library |
-| Content | Markdown, MDX |
-| Edge | Cloudflare Pages Functions (bot analytics middleware) |
-| Hosting | [Cloudflare Pages](https://pages.cloudflare.com) |
+To use the methodology in your own repository, install the Deep Work Plan skill pinned to a release tag:
+
+```bash
+npx --yes skills add DailybotHQ/deepworkplan-skill@v6.1.0 --skill deepworkplan -y
+```
+
+Verify it against the release `SHA256SUMS` first — the recipe is on [deepworkplan.com/trust](https://deepworkplan.com/trust).
+
+To work on this site, clone it at a release tag (see [Releases](https://github.com/DailybotHQ/deepworkplan-website/releases)) or at `main`:
+
+```bash
+git clone --branch <release-tag> https://github.com/DailybotHQ/deepworkplan-website
+cd deepworkplan-website
+```
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quickstart
 
 > Requires **Node.js 24+** (CI runs on 24.20.0). The package manager is
 > **pnpm**, pinned via Corepack in `package.json#packageManager`. Enable it
@@ -115,6 +120,22 @@ Visit **http://localhost:5555** to preview.
 | `pnpm run lighthouse:desktop` | Run Lighthouse CI audit (desktop) |
 | `pnpm run ncu:check` | Check for dependency updates |
 | `pnpm run release` | Bump version and create release commit |
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+| :---- | :--------- |
+| Framework | [Astro](https://astro.build) 7.x |
+| UI | [Svelte](https://svelte.dev) 5.x |
+| Styling | [Tailwind CSS](https://tailwindcss.com) 4.x |
+| Language | [TypeScript](https://www.typescriptlang.org) 6.x |
+| Linting | [Biome](https://biomejs.dev) 2.x |
+| Testing | [Vitest](https://vitest.dev) + Testing Library |
+| Content | Markdown, MDX |
+| Edge | Cloudflare Pages Functions (bot analytics middleware) |
+| Hosting | [Cloudflare Pages](https://pages.cloudflare.com) |
 
 ---
 
@@ -177,6 +198,18 @@ Live at **[deepworkplan.com](https://deepworkplan.com)**.
 
 ---
 
+## 🔒 Security
+
+Report vulnerabilities privately — never in a public issue. See [SECURITY.md](SECURITY.md) (GitHub private vulnerability reporting, supported versions, response targets).
+
+---
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the development setup, the gate and the pull-request flow. Everyone taking part follows the [Code of Conduct](CODE_OF_CONDUCT.md). Coding agents start at [AGENTS.md](AGENTS.md).
+
+---
+
 ## 📄 License
 
 [MIT](LICENSE) — Dailybot, Inc.
@@ -196,3 +229,5 @@ Live at **[deepworkplan.com](https://deepworkplan.com)**.
 <div align="center">
   <sub>Built with Astro · Hosted on Cloudflare Pages</sub>
 </div>
+
+Part of the [DeepWorkPlan](https://deepworkplan.com) ecosystem — works on its own.

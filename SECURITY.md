@@ -12,6 +12,16 @@ handling — a deliberately minimal attack surface.
 > That policy is the **single source of truth** for the skill's threat model and
 > guarantees; this one covers the website.
 
+## Supported versions
+
+The website is continuously deployed from `main`; only the live site and the
+latest release tag receive fixes.
+
+| Version | Supported |
+| --- | --- |
+| `main` / deepworkplan.com (latest release) | yes |
+| Older release tags | no — fixes land on `main` and the next release |
+
 ## Reporting a vulnerability
 
 Please report security issues **privately through GitHub's private vulnerability reporting** — do not
@@ -19,6 +29,8 @@ open a public issue (that would disclose the problem before a fix exists). Use t
 
 - **Website:** <https://github.com/DailybotHQ/deepworkplan-website/security>
 - **Skill:** <https://github.com/DailybotHQ/deepworkplan-skill/security>
+
+Or email **security@dailybot.com** with "deepworkplan-website" in the subject.
 
 (If a repository's private reporting is ever unavailable, open a minimal issue asking us to enable it —
 do **not** post exploit details publicly.)
@@ -29,6 +41,18 @@ Include:
 - Steps to reproduce (a minimal proof of concept is ideal)
 - The affected URL(s) or commit, if known
 - Your name or handle if you would like credit
+
+## What to expect
+
+| Step | Target |
+| --- | --- |
+| Acknowledgement | within 3 business days |
+| Triage and severity assessment | within 7 days |
+| Fix deployed — critical / high | within 30 days |
+| Fix deployed — medium / low | in the next release |
+
+We coordinate disclosure with you, publish a GitHub security advisory for
+fixed issues, and credit reporters who want to be credited.
 
 A machine-readable pointer is published at
 [`/.well-known/security.txt`](https://deepworkplan.com/.well-known/security.txt)
