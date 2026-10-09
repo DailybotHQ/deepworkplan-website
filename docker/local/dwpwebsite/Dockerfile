@@ -237,7 +237,7 @@ RUN ln -sfn /home/node/.local/bin/herdr /usr/local/bin/herdr
 # installer's Neovim checksum lookup (GitHub API rate limit); it never lands in
 # a layer.
 USER node
-ARG DWP_VIM_VERSION=0.5.0
+ARG DWP_VIM_VERSION=0.5.1
 ARG NVIM_VERSION=0.12.5
 RUN --mount=type=secret,id=github_token,uid=1000 \
     set -eu; \

@@ -44,7 +44,7 @@ The last layer is why "edit `.env`, then open a new shell" is enough in practice
 
 ## AI CLIs (default image vs opt-in)
 
-**Always installed:** Herdr (`herdr`), Neovim 0.12.5 + DeepWorkPlan Vim `v0.5.0` (`nvim`), Dailybot CLI, GitHub CLI, Z.AI coding-helper.
+**Always installed:** Herdr (`herdr`), Neovim 0.12.5 + DeepWorkPlan Vim `v0.5.1` (`nvim`), Dailybot CLI, GitHub CLI, Z.AI coding-helper.
 
 **Opt-in** (build args, default `false` — only the string `true` installs). Persist them in `docker/local/.env` (gitignored; copied from `.env.example` by `bash dev.sh setup`) so `bash dev.sh rebuild` keeps the CLIs. Compose interpolates that file into the Dockerfile args:
 
@@ -67,12 +67,12 @@ docker compose build \
   --build-arg INSTALL_GROK_CLI=true
 ```
 
-**Editor pins** (build args, like the CLI flags): `DWP_VIM_VERSION` (default `0.5.0`) and `NVIM_VERSION` (default `0.12.5`). If a build fails on the GitHub API rate limit during the Neovim checksum lookup, put a token in a file outside the repository and point `DWP_GITHUB_TOKEN_FILE` at it (in `docker/local/.env` or the shell). Compose passes it as the BuildKit secret `github_token`, which never lands in an image layer. Without it, the lookup is unauthenticated.
+**Editor pins** (build args, like the CLI flags): `DWP_VIM_VERSION` (default `0.5.1`) and `NVIM_VERSION` (default `0.12.5`). If a build fails on the GitHub API rate limit during the Neovim checksum lookup, put a token in a file outside the repository and point `DWP_GITHUB_TOKEN_FILE` at it (in `docker/local/.env` or the shell). Compose passes it as the BuildKit secret `github_token`, which never lands in an image layer. Without it, the lookup is unauthenticated.
 
 | CLI | Install method | Command | Default |
 |-----|----------------|---------|---------|
 | Herdr | Official [`curl` installer](https://herdr.dev/) | `herdr` | always |
-| DeepWorkPlan Vim / nvim | Hosted installer `https://vim.deepworkplan.com/install.sh` (downloaded, verified against the release `install.sh.sha256`, then run with `--version 0.5.0 --nvim 0.12.5 --skip-packages --strict`) — [DailybotHQ/deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) `v0.5.0` + Neovim 0.12.5 | `nvim` | always |
+| DeepWorkPlan Vim / nvim | Hosted installer `https://vim.deepworkplan.com/install.sh` (downloaded, verified against the release `install.sh.sha256`, then run with `--version 0.5.1 --nvim 0.12.5 --skip-packages --strict`) — [DailybotHQ/deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) `v0.5.1` + Neovim 0.12.5 | `nvim` | always |
 | Claude Code | Official `curl` installer | `claude` / `claudex` | opt-in |
 | Codex | pnpm global | `codex` / `codexx` | opt-in |
 | Cursor agent | Official `curl` installer | `agent` / `cursorx` | opt-in |

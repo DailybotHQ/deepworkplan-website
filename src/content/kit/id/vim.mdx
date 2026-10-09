@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** adalah editor terminal untuk Deep Work Plan: konfigurasi Neovim untuk manusia, dan untuk agen pemrograman, yang bekerja di terminal. Rencana Anda, dokumentasi Anda, dan indeks semua perintah hanya sejauh satu tombol.
 
-Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v7 (`v7.0.0`). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v0.5.0**.
+Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v7 (`v7.0.0`). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v0.5.1**.
 
 ## Mengapa editor terminal untuk Deep Work Plan
 
@@ -60,7 +60,7 @@ Untuk membaca berkas Markdown sebuah rencana di tempat, `SPC m p` mempratinjau b
 
 ## Instalasi
 
-Instalasi terdiri dari tiga perintah: unduh skrip, periksa terhadap SHA-256 berkas yang disajikan situs ini, lalu jalankan. Pemasang mematok rilisnya sendiri, sehingga ia memasang tepat `v0.5.0`, rilis yang dijelaskan halaman ini, kecuali Anda [memilih versi lain](#choose-a-version).
+Instalasi terdiri dari tiga perintah: unduh skrip, periksa terhadap SHA-256 berkas yang disajikan situs ini, lalu jalankan. Pemasang mematok rilisnya sendiri, sehingga ia memasang tepat `v0.5.1`, rilis yang dijelaskan halaman ini, kecuali Anda [memilih versi lain](#choose-a-version).
 
 <VimInstall lang="id" />
 
@@ -74,17 +74,17 @@ Secara berurutan, pemasang:
 6. Menjalankan `lua install.lua` milik repositori itu sendiri.
 7. Memasang plugin secara headless lalu memeriksanya, sehingga tidak ada langkah keluar lalu membuka ulang. Dengan `--strict`, pemasangan plugin yang gagal atau tidak lengkap dianggap sebagai galat.
 
-Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install.sh` pada tag `v0.5.0`. Checksum-nya disajikan di sebelahnya, di `https://deepworkplan.com/vim/install.sh.sha256`, sehingga Anda dapat memverifikasi unduhan dengan `shasum -a 256 -c install.sh.sha256` (di Linux, `sha256sum -c install.sh.sha256`). Untuk pemeriksaan dari sumber kedua, bandingkan dengan baris `install.sh` di `SHA256SUMS` pada rilis GitHub. Jalankan `bash install.sh --help` untuk menampilkan semua opsi.
+Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install.sh` pada tag `v0.5.1`. Checksum-nya disajikan di sebelahnya, di `https://deepworkplan.com/vim/install.sh.sha256`, sehingga Anda dapat memverifikasi unduhan dengan `shasum -a 256 -c install.sh.sha256` (di Linux, `sha256sum -c install.sh.sha256`). Untuk pemeriksaan dari sumber kedua, bandingkan dengan baris `install.sh` di `SHA256SUMS` pada rilis GitHub. Jalankan `bash install.sh --help` untuk menampilkan semua opsi.
 
 <a id="choose-a-version" class="scroll-mt-24"></a>
 
 ## Memilih versi
 
-Secara bawaan, pemasang memasang rilisnya sendiri, `v0.5.0`. Untuk memilih versi lain, setel `DWP_VIM_VERSION` atau berikan `--version`: keduanya melakukan hal yang sama, jadi gunakan yang lebih mudah dibaca, dan flag lebih diutamakan daripada variabel lingkungan. Masing-masing menerima:
+Secara bawaan, pemasang memasang rilisnya sendiri, `v0.5.1`. Untuk memilih versi lain, setel `DWP_VIM_VERSION` atau berikan `--version`: keduanya melakukan hal yang sama, jadi gunakan yang lebih mudah dibaca, dan flag lebih diutamakan daripada variabel lingkungan. Masing-masing menerima:
 
 | Bentuk | Contoh | Yang dipasang |
 |---|---|---|
-| Versi persis | `0.5.0` atau `v0.5.0` | Rilis tersebut |
+| Versi persis | `0.5.1` atau `v0.5.1` | Rilis tersebut |
 | Batas minimum | `'>=0.4.2'` | Rilis stabil terbaru yang sama dengan atau di atas batas tersebut |
 | Terbaru | `latest` | Rilis stabil terbaru |
 
@@ -92,8 +92,8 @@ Setelah unduhan dan pemeriksaan checksum di atas:
 
 ```bash
 # exact version
-DWP_VIM_VERSION=0.5.0 bash install.sh
-bash install.sh --version 0.5.0
+DWP_VIM_VERSION=0.5.1 bash install.sh
+bash install.sh --version 0.5.1
 
 # minimum floor: the newest stable release at or above 0.4.2
 DWP_VIM_VERSION='>=0.4.2' bash install.sh
@@ -112,13 +112,13 @@ Di dalam image atau job CI, tempat tidak ada terminal dan sering kali tidak ada 
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 sha256sum -c install.sh.sha256 && \
-bash install.sh --version 0.5.0 --nvim 0.12.5 --skip-packages --strict
+bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
 ```
 
-- `--version 0.5.0` mematok rilis editor.
+- `--version 0.5.1` mematok rilis editor.
 - `--nvim 0.12.5` memasang rilis Neovim tersebut ke `~/.local/opt/nvim-v0.12.5`, ditautkan sebagai `~/.local/bin/nvim` dan diverifikasi terhadap SHA-256 yang diterbitkan Neovim (Linux dan macOS).
 - `--skip-packages` tidak memasang paket sistem apa pun: image harus sudah menyediakan git, curl, dan Lua.
-- `--strict` keluar dengan kode bukan nol jika pemasangan plugin secara headless gagal atau menyisakan plugin yang belum terpasang.
+- `--strict` keluar dengan kode bukan nol jika pemasangan plugin secara headless gagal atau menyisakan plugin yang belum terpasang. Opsi ini juga memeriksa bahwa setiap plugin, dan pckr, berada di commit yang dipatok rilis di `pckr/lockfile.lua`.
 
 Setiap flag memiliki padanan variabel lingkungan (`DWP_VIM_VERSION`, `DWP_VIM_NVIM`, `DWP_VIM_SKIP_PACKAGES=1`, `DWP_VIM_STRICT=1`). Tambahkan `--yes` hanya jika image mungkin sudah berisi konfigurasi Neovim yang perlu dipindahkan ke samping.
 
@@ -126,7 +126,7 @@ Setiap flag memiliki padanan variabel lingkungan (`DWP_VIM_VERSION`, `DWP_VIM_NV
 
 - Neovim 0.12 atau lebih baru. Pasang sendiri, atau biarkan pemasang menambahkan rilis terverifikasi dengan `--nvim X.Y.Z` (Linux dan macOS).
 - Lua: `lua`, `lua5.4`, atau `luajit`. Pemasang menambahkannya jika belum ada.
-- macOS, Linux, dan WSL menjalankan pemasang. Windows memiliki jalur manual yang terdokumentasi di README repositori: pasang Neovim dengan winget, clone tag `v0.5.0` ke `%LOCALAPPDATA%\nvim`, dan jalankan `lua install.lua` dari Git Bash.
+- macOS, Linux, dan WSL menjalankan pemasang. Windows memiliki jalur manual yang terdokumentasi di README repositori: pasang Neovim dengan winget, clone tag `v0.5.1` ke `%LOCALAPPDATA%\nvim`, dan jalankan `lua install.lua` dari Git Bash.
 - Berlisensi GPL-3.0: bebas digunakan, dipelajari, dan dimodifikasi.
 
 ## Memperbarui, mengunci versi, dan mencopot
@@ -140,7 +140,7 @@ Untuk mengunci sebuah rilis, gunakan `--version` (lihat [Memilih versi](#choose-
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 shasum -a 256 -c install.sh.sha256 && \
-bash install.sh --version 0.4.2
+bash install.sh --version 0.5.0
 ```
 
 Untuk mencopot, jalankan `lua delete.lua` dari direktori konfigurasi. Perintah ini menghapus konfigurasi, plugin, data Mason, cache dan status, serta salinan font yang dibuat pemasang, dan membiarkan biner Neovim serta paket sistem Anda.
@@ -173,7 +173,7 @@ Ia dibuat untuk manusia dan untuk agen pemrograman yang hidup di terminal. Pemet
 
 ### Versi mana yang saya dapatkan?
 
-Pemasang memasang rilis tempat ia berasal — `v0.5.0` saat ini — kecuali Anda memilih versi lain dengan `--version` atau `DWP_VIM_VERSION`: versi persis, batas `>=`, atau `latest`. `DWP_VIM_REF` menerima cabang atau commit; `DWP_VIM_REF=main` mengikuti `main`. Halaman ini menjelaskan rilis `v0.5.0`, yang memuat setiap fitur yang tercantum di sini.
+Pemasang memasang rilis tempat ia berasal — `v0.5.1` saat ini — kecuali Anda memilih versi lain dengan `--version` atau `DWP_VIM_VERSION`: versi persis, batas `>=`, atau `latest`. `DWP_VIM_REF` menerima cabang atau commit; `DWP_VIM_REF=main` mengikuti `main`. Halaman ini menjelaskan rilis `v0.5.1`, yang memuat setiap fitur yang tercantum di sini.
 
 ### Di bawah lisensi apa dan dari mana asalnya?
 

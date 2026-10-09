@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# DeepWorkPlan Vim — self-contained installer for release v0.5.0.
+# DeepWorkPlan Vim — self-contained installer for release v0.5.1.
 #
 # Published at  : https://deepworkplan.com/vim/install.sh
 #                 and as the install.sh asset (with SHA256SUMS) of each
@@ -18,7 +18,7 @@
 # line of SHA256SUMS on the GitHub release (release tags are immutable).
 #
 # Images and CI (non-root, no terminal) — one step after the download:
-#   bash install.sh --version 0.5.0 --nvim 0.12.5 --skip-packages --strict
+#   bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
 #
 # What it does, in order:
 #   1. Preflight — detects OS and package manager; installs git, curl, and
@@ -35,9 +35,11 @@
 #   5. Clones (or updates, on re-run) the repository into ~/.config/nvim.
 #   6. Runs the repository's own `lua install.lua` (system packages,
 #      pckr.nvim, font — it owns every step, this wrapper owns none).
-#   7. Bootstraps plugins headlessly and checks them — empty clones are
-#      moved aside and installed again (--strict: any failure or missing
-#      plugin is an error).
+#   7. Bootstraps plugins headlessly and checks them — every plugin and
+#      pckr at the commit the release pins in pckr/lockfile.lua (v0.5.1+);
+#      empty clones are moved aside and installed again (--strict: any
+#      failure, missing or empty plugin, or plugin away from its pin is an
+#      error).
 #
 # Options (each with an environment twin; a flag beats every env value):
 #   --version <v>    DWP_VIM_VERSION   X.Y.Z, vX.Y.Z, latest or '>=X.Y.Z'
@@ -45,7 +47,8 @@
 #   --dir <path>     DWP_VIM_DIR       destination (default ~/.config/nvim)
 #   --skip-packages  DWP_VIM_SKIP_PACKAGES=1  install no system package
 #   --nvim <X.Y.Z>   DWP_VIM_NVIM      install that Neovim release, verified
-#   --strict         DWP_VIM_STRICT=1  fail on a failed or incomplete bootstrap
+#   --strict         DWP_VIM_STRICT=1  fail on a failed or incomplete bootstrap,
+#                                      or a plugin away from its locked commit
 #   --yes            DWP_VIM_YES=1     move a foreign config aside unattended
 #   -h, --help
 # Other environment:
@@ -57,7 +60,7 @@
 # Windows: use winget plus Git Bash, or run the steps above inside WSL,
 # where they work as-is:
 #   winget install -e --id Neovim.Neovim --accept-package-agreements --accept-source-agreements
-#   git clone --branch v0.5.0 https://github.com/DailybotHQ/deepworkplan-vim.git "$LOCALAPPDATA/nvim"
+#   git clone --branch v0.5.1 https://github.com/DailybotHQ/deepworkplan-vim.git "$LOCALAPPDATA/nvim"
 #   cd "$LOCALAPPDATA/nvim" && lua install.lua
 #
 set -euo pipefail
@@ -71,7 +74,7 @@ main() {
 REPO_URL="https://github.com/DailybotHQ/deepworkplan-vim.git"
 # The release this script belongs to: with no version or ref requested it
 # installs exactly that tag.
-RELEASE_REF="v0.5.0"
+RELEASE_REF="v0.5.1"
 
 say() { printf '%s\n' "$*"; }
 die() { printf 'install.sh: %s\n' "$*" >&2; exit 1; }
@@ -94,8 +97,9 @@ Install:
   --nvim <X.Y.Z>    install that Neovim release into ~/.local/opt/nvim-vX.Y.Z,
                     linked as ~/.local/bin/nvim, sha256-verified
                                                                  env: DWP_VIM_NVIM
-  --strict          fail (non-zero) when the headless plugin install fails or
-                    leaves required plugins missing              env: DWP_VIM_STRICT=1
+  --strict          fail (non-zero) when the headless plugin install fails,
+                    leaves required plugins missing or empty, or any plugin
+                    HEAD differs from pckr/lockfile.lua          env: DWP_VIM_STRICT=1
   --yes             move an existing foreign config aside without asking
                     (backup: ~/.config/previous-deepworkplan-vim) env: DWP_VIM_YES=1
   -h, --help        show this help
@@ -107,7 +111,7 @@ Switch values: 1/true/yes/on or 0/false/no/off (any case); anything else
 is an error.
 
 Images and CI (download, verify, then run):
-  bash install.sh --version 0.5.0 --nvim 0.12.5 --skip-packages --strict
+  bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
 USAGE
 }
 
@@ -907,6 +911,77 @@ verify_plugins() {
   fi
   return 0
 }
+# Commit pins (v0.5.1+): pckr/lockfile.lua in the destination pins every
+# plugin and pckr itself (pckr's own lockfile format, one entry per line);
+# lua/plugins.lua installs and updates each one at its pin. verify_lock
+# compares every checkout's HEAD with its pin: a plugin at another commit,
+# a pinned plugin that is missing and an installed plugin the lock does
+# not name are all problems (--strict fails on them). A release without
+# the file (before v0.5.1) has nothing to compare: LOCK_COUNT stays 0.
+LOCKFILE="$DEST/pckr/lockfile.lua"
+PCKR_DIR="$DATA_HOME/$BOOTSTRAP_APPNAME/pckr/pckr.nvim"
+PCKR_START="$DATA_HOME/$BOOTSTRAP_APPNAME/site/pack/pckr/start"
+verify_lock() {
+  local line re entries="" bad="" repo sha name dir head problems="" locked=" " d
+  LOCK_COUNT=0
+  LOCK_PROBLEMS=""
+  [ -f "$LOCKFILE" ] || return 0
+  # Every line is `return {`, `}` or one entry in pckr's format; anything
+  # else is refused rather than half-read. Plain bash: no sed/awk needed.
+  re='^  \["https://github\.com/([A-Za-z0-9._-]+/[A-Za-z0-9._-]+)"\] = \{ commit = "([0-9a-f]{40})" \},$'
+  while IFS= read -r line || [ -n "$line" ]; do
+    line="${line%$'\r'}" # a CRLF checkout (core.autocrlf) reads the same
+    case "$line" in
+      'return {' | '}') continue ;;
+    esac
+    if [[ "$line" =~ $re ]]; then
+      entries="$entries${BASH_REMATCH[1]} ${BASH_REMATCH[2]}
+"
+    else
+      bad=1
+    fi
+  done <"$LOCKFILE"
+  if [ -n "$bad" ] || [ -z "$entries" ]; then
+    LOCK_PROBLEMS="unreadable lockfile $LOCKFILE"
+    return 1
+  fi
+  while read -r repo sha; do
+    name="${repo##*/}"
+    if [ "$repo" = "lewis6991/pckr.nvim" ]; then
+      dir="$PCKR_DIR"
+    elif [ -d "$PCKR_START/$name" ]; then
+      dir="$PCKR_START/$name"
+    else
+      dir="$PCKR_OPT/$name"
+    fi
+    locked="$locked$name "
+    LOCK_COUNT=$((LOCK_COUNT + 1))
+    if [ ! -e "$dir/.git" ]; then
+      problems="$problems; missing $name"
+      continue
+    fi
+    # The ceiling keeps git inside the plugin dir: an invalid .git must not
+    # make it answer for a repository further up.
+    head="$(GIT_CEILING_DIRECTORIES="$(dirname "$dir")" git -C "$dir" rev-parse -q --verify HEAD 2>/dev/null || true)"
+    if [ "$head" != "$sha" ]; then
+      problems="$problems; $name at $(printf '%.12s' "${head:-none}") (lock $(printf '%.12s' "$sha"))"
+    fi
+  done <<EOF
+${entries%
+}
+EOF
+  for d in "$PCKR_OPT"/*/ "$PCKR_START"/*/; do
+    [ -d "$d" ] || continue
+    d="${d%/}"
+    d="${d##*/}"
+    case "$locked" in
+      *" $d "*) ;;
+      *) problems="$problems; unlocked $d" ;;
+    esac
+  done
+  LOCK_PROBLEMS="${problems#; }"
+  [ -z "$problems" ]
+}
 # Empty clones (only .git) are moved aside — never deleted — so the sync
 # clones them again; pckr would otherwise take them for installed.
 repair_empty_clones() {
@@ -945,9 +1020,11 @@ if ! command -v nvim >/dev/null 2>&1; then
   fi
   say "NOTE: nvim is not on PATH in this shell yet (a new shell should find it)."
   say "      On first launch plugins install themselves; quit when that finishes, then reopen."
-elif VERIFY_PROBLEMS="" && verify_plugins; then
+elif VERIFY_PROBLEMS="" && verify_plugins && verify_lock; then
   # Decided by the plugins themselves, not a marker or one directory: an
-  # empty clone (left by the pre-0.5.0 headless race) is not "installed".
+  # empty clone (left by the pre-0.5.0 headless race) is not "installed",
+  # and neither is a plugin away from its pin (an install made by an older
+  # release): the sync below moves it to the pinned commit.
   say "==> Plugins already installed"
 else
   repair_empty_clones
@@ -959,12 +1036,12 @@ else
   # Quoted operands (review round-2 finding 4): an unquoted word list
   # would split a destination containing spaces into extra argv.
   if command -v timeout >/dev/null 2>&1; then
-    timeout "$BOOTSTRAP_TIMEOUT" env \
+    timeout "$BOOTSTRAP_TIMEOUT" env -u DWP_VIM_LOCK_UPDATE \
       XDG_CONFIG_HOME="$(dirname "$DEST")" \
       NVIM_APPNAME="$BOOTSTRAP_APPNAME" DWP_VIM_BOOTSTRAP=1 \
       nvim --headless </dev/null >"$BOOTSTRAP_LOG" 2>&1 || bootstrap_rc=$?
   else
-    env \
+    env -u DWP_VIM_LOCK_UPDATE \
       XDG_CONFIG_HOME="$(dirname "$DEST")" \
       NVIM_APPNAME="$BOOTSTRAP_APPNAME" DWP_VIM_BOOTSTRAP=1 \
       nvim --headless </dev/null >"$BOOTSTRAP_LOG" 2>&1 || bootstrap_rc=$?
@@ -996,6 +1073,21 @@ if command -v nvim >/dev/null 2>&1; then
   else
     say "WARNING: plugins incomplete under $PCKR_OPT — $VERIFY_PROBLEMS"
     say "         Launch nvim once to finish the install."
+  fi
+  # Each plugin at the commit the release pins: what makes two installs
+  # (or two image builds) of one release the same code.
+  if [ ! -f "$LOCKFILE" ] && [ "$STRICT" = 1 ] && [[ "$REF" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] \
+    && ! version_gt 0.5.1 "${REF#v}"; then
+    strict_fail "$REF ships pckr/lockfile.lua (v0.5.1+), but $LOCKFILE is missing — plugin commits cannot be verified"
+  elif [ ! -f "$LOCKFILE" ]; then
+    say "NOTE: $REF has no plugin lock (pckr/lockfile.lua, v0.5.1+): plugin commits are not verified"
+  elif verify_lock; then
+    say "==> Plugin commits verified ($LOCK_COUNT pinned in pckr/lockfile.lua)"
+  elif [ "$STRICT" = 1 ]; then
+    strict_fail "plugins differ from pckr/lockfile.lua — $LOCK_PROBLEMS"
+  else
+    say "WARNING: plugins differ from pckr/lockfile.lua — $LOCK_PROBLEMS"
+    say "         Rerun this installer to move them to their pinned commits."
   fi
 fi
 
