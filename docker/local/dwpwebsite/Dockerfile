@@ -230,10 +230,12 @@ RUN ln -sfn /home/node/.local/bin/herdr /usr/local/bin/herdr
 # or a missing/empty plugin fails the build); --skip-packages relies on the apt
 # layer above. The hosted script is downloaded and verified against the
 # v${DWP_VIM_VERSION} release's install.sh.sha256 (a second origin); when the
-# website already serves a newer release, the release asset itself is used
-# (same checksum), so the build always runs the pinned bytes. Never a pipe into
-# a shell. Optional BuildKit secret `github_token` authenticates the installer's
-# Neovim checksum lookup (GitHub API rate limit); it never lands in a layer.
+# website is unreachable or already serves a newer release, the release asset
+# itself is used (same checksum), so the build always runs the pinned bytes.
+# Never a pipe into a shell. Optional BuildKit secret `github_token` (compose:
+# DWP_GITHUB_TOKEN_FILE, see docker/local/README.md) authenticates the
+# installer's Neovim checksum lookup (GitHub API rate limit); it never lands in
+# a layer.
 USER node
 ARG DWP_VIM_VERSION=0.5.0
 ARG NVIM_VERSION=0.12.5
@@ -243,9 +245,9 @@ RUN --mount=type=secret,id=github_token,uid=1000 \
     mkdir /tmp/dwp-vim-installer; \
     cd /tmp/dwp-vim-installer; \
     curl -fsSL -o install.sh.sha256 "$release/install.sh.sha256"; \
-    curl -fsSL -o install.sh https://vim.deepworkplan.com/install.sh; \
-    if ! sha256sum -c --status install.sh.sha256; then \
-      echo "hosted installer is not v${DWP_VIM_VERSION}; using the release asset"; \
+    if ! curl -fsSL -o install.sh https://vim.deepworkplan.com/install.sh \
+      || ! sha256sum -c --status install.sh.sha256; then \
+      echo "hosted installer unavailable or not v${DWP_VIM_VERSION}; using the release asset"; \
       curl -fsSL -o install.sh "$release/install.sh"; \
     fi; \
     sha256sum -c install.sh.sha256; \

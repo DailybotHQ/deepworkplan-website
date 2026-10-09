@@ -67,6 +67,8 @@ docker compose build \
   --build-arg INSTALL_GROK_CLI=true
 ```
 
+**Editor pins** (build args, like the CLI flags): `DWP_VIM_VERSION` (default `0.5.0`) and `NVIM_VERSION` (default `0.12.5`). If a build fails on the GitHub API rate limit during the Neovim checksum lookup, put a token in a file outside the repository and point `DWP_GITHUB_TOKEN_FILE` at it (in `docker/local/.env` or the shell). Compose passes it as the BuildKit secret `github_token`, which never lands in an image layer. Without it, the lookup is unauthenticated.
+
 | CLI | Install method | Command | Default |
 |-----|----------------|---------|---------|
 | Herdr | Official [`curl` installer](https://herdr.dev/) | `herdr` | always |
