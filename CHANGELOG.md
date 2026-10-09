@@ -9,6 +9,13 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.34] - 2026-10-09
+
+### Changed
+
+- fix(vim): keep in-page links on the vim host and catch context-menu opens
+- feat(vim): send home links on vim.deepworkplan.com to the main site
+
 ## [5.0.33] - 2026-10-09
 
 ### Changed
@@ -1076,7 +1083,8 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.33...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.34...HEAD
+[5.0.34]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.34
 [5.0.33]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.33
 [5.0.32]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.32
 [5.0.31]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.31
