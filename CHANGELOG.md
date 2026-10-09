@@ -9,6 +9,17 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.33] - 2026-10-09
+
+### Changed
+
+- fix(site): pin every deepworkplan-skill install to v7.0.1
+- fix(developers): give the pinned install the /init endpoint gives
+- test: fail when a public install surface pins an older or ignored skill tag
+- docs(kit): use tree-URL pins and the vendored addon versions
+- docs(site): point the quickstart and kit install surfaces at v7.0.1
+- docs(init): rewrite the adoption prompt for DeepWorkPlan v7.0.1
+
 ## [5.0.32] - 2026-10-09
 
 ### Changed
@@ -1065,7 +1076,8 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.32...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.33...HEAD
+[5.0.33]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.33
 [5.0.32]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.32
 [5.0.31]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.31
 [5.0.30]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.30
