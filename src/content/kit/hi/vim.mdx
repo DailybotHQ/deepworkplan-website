@@ -60,7 +60,7 @@ DeepWorkPlan Vim वही एडिटर है। यह एक चुना-
 
 ## इंस्टॉलेशन
 
-इंस्टॉलेशन तीन कमांड का है: स्क्रिप्ट डाउनलोड करें, उसे इस साइट द्वारा दी गई फ़ाइल के SHA-256 से मिलाएँ, फिर उसे चलाएँ। इंस्टॉलर अपनी ही रिलीज़ पर पिन रहता है, इसलिए यह ठीक `v0.5.0` इंस्टॉल करता है, यानी वही रिलीज़ जिसका यह पृष्ठ वर्णन करता है, जब तक आप [कोई दूसरा संस्करण नहीं चुनते](#choose-a-version)।
+इंस्टॉलेशन तीन कमांड का है: स्क्रिप्ट डाउनलोड करें, उसे इस साइट द्वारा दी गई फ़ाइल के SHA-256 से मिलाएँ, फिर उसे चलाएँ। इंस्टॉलर अपनी ही रिलीज़ पर पिन रहता है, इसलिए यह ठीक `v0.5.0` इंस्टॉल करता है, यानी वही रिलीज़ जिसका यह पृष्ठ वर्णन करता है। चाहें तो [दूसरा संस्करण चुनें](#choose-a-version)।
 
 <VimInstall lang="hi" />
 
@@ -139,6 +139,7 @@ bash install.sh --version 0.5.0 --nvim 0.12.5 --skip-packages --strict
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256
 shasum -a 256 -c install.sh.sha256
+# pin a specific release, here the previous one
 bash install.sh --version 0.4.2
 ```
 

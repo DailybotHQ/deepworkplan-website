@@ -30,7 +30,7 @@ const i18n = {
     copy: 'Copy command',
     copied: 'Copied',
     consent:
-      'Consent first: an existing Neovim configuration is never overwritten without your approval. The installer asks, and when it cannot ask it stops and changes nothing.',
+      'Consent first: an existing Neovim configuration is never overwritten without your approval. The installer asks, and when it cannot ask it stops and changes nothing, unless you pass --yes to move it aside unattended.',
     inspectTitle: 'Inspect before you run',
     inspectIntro:
       'Prefer to read it first? Download the script, check its fingerprint, read it, then run it.',
@@ -54,7 +54,7 @@ const i18n = {
     copy: 'Copiar comando',
     copied: 'Copiado',
     consent:
-      'Primero el consentimiento: una configuración de Neovim existente nunca se sobrescribe sin tu aprobación. El instalador pregunta y, cuando no puede preguntar, se detiene sin cambiar nada.',
+      'Primero el consentimiento: una configuración de Neovim existente nunca se sobrescribe sin tu aprobación. El instalador pregunta y, cuando no puede preguntar, se detiene sin cambiar nada, salvo que pases --yes para apartarla sin preguntar.',
     inspectTitle: 'Inspecciona antes de ejecutar',
     inspectIntro:
       '¿Prefieres leerlo antes? Descarga el script, comprueba su huella, léelo y luego ejecútalo.',
@@ -78,7 +78,7 @@ const i18n = {
     copy: 'Copiar comando',
     copied: 'Copiado',
     consent:
-      'Primeiro, o consentimento: uma configuração do Neovim existente nunca é substituída sem a sua aprovação. O instalador pergunta e, quando não consegue perguntar, para sem alterar nada.',
+      'Primeiro, o consentimento: uma configuração do Neovim existente nunca é substituída sem a sua aprovação. O instalador pergunta e, quando não consegue perguntar, para sem alterar nada, a menos que passe --yes para a pôr de lado sem perguntar.',
     inspectTitle: 'Inspecione antes de executar',
     inspectIntro:
       'Prefere ler primeiro? Obtenha o script, verifique a sua impressão digital, leia o conteúdo e só depois execute.',
@@ -102,7 +102,7 @@ const i18n = {
     copy: '复制命令',
     copied: '已复制',
     consent:
-      '先征得同意：已有的 Neovim 配置不会在未经你批准时被覆盖。安装程序会先询问；无法询问时，它会停止且不做任何更改。',
+      '先征得同意：已有的 Neovim 配置不会在未经你批准时被覆盖。安装程序会先询问；无法询问时，它会停止且不做任何更改，除非你传入 --yes 让它在无人值守时把配置移到一旁。',
     inspectTitle: '运行前先检查',
     inspectIntro: '想先看一遍？先下载脚本，核对它的指纹，阅读后再运行。',
     steps: [
@@ -125,7 +125,7 @@ const i18n = {
     copy: 'コマンドをコピー',
     copied: 'コピーしました',
     consent:
-      '同意が先：既存の Neovim 設定は、あなたの承認なしに上書きされることはありません。インストーラは確認を求め、確認できない場合は何も変更せずに停止します。',
+      '同意が先：既存の Neovim 設定は、あなたの承認なしに上書きされることはありません。インストーラは確認を求め、確認できない場合は何も変更せずに停止します。--yes を渡した場合は、確認なしで設定を退避します。',
     inspectTitle: '実行する前に確認する',
     inspectIntro:
       '先に中身を読みたい場合は、スクリプトをダウンロードし、フィンガープリントを確認し、読んでから実行してください。',
@@ -150,7 +150,7 @@ const i18n = {
     copy: 'Befehl kopieren',
     copied: 'Kopiert',
     consent:
-      'Zuerst die Zustimmung: Eine vorhandene Neovim-Konfiguration wird nie ohne Ihre Zustimmung überschrieben. Das Installationsprogramm fragt nach und bricht ab, ohne etwas zu ändern, wenn es nicht fragen kann.',
+      'Zuerst die Zustimmung: Eine vorhandene Neovim-Konfiguration wird nie ohne Ihre Zustimmung überschrieben. Das Installationsprogramm fragt nach und bricht ab, ohne etwas zu ändern, wenn es nicht fragen kann, es sei denn, Sie übergeben --yes, damit es die Konfiguration unbeaufsichtigt beiseitelegt.',
     inspectTitle: 'Vor der Ausführung prüfen',
     inspectIntro:
       'Möchten Sie es zuerst lesen? Laden Sie das Skript herunter, prüfen Sie seinen Fingerabdruck, lesen Sie es und führen Sie es dann aus.',
@@ -175,7 +175,7 @@ const i18n = {
     copy: 'Copier la commande',
     copied: 'Copié',
     consent:
-      'Le consentement d’abord : une configuration Neovim existante n’est jamais écrasée sans votre accord. Le programme d’installation demande et, quand il ne peut pas le faire, s’arrête sans rien modifier.',
+      'Le consentement d’abord : une configuration Neovim existante n’est jamais écrasée sans votre accord. Le programme d’installation demande et, quand il ne peut pas le faire, s’arrête sans rien modifier, sauf si vous passez --yes pour la mettre de côté sans surveillance.',
     inspectTitle: 'Inspecter avant d’exécuter',
     inspectIntro:
       'Vous préférez lire d’abord ? Téléchargez le script, vérifiez son empreinte, lisez-le, puis exécutez-le.',
@@ -200,7 +200,7 @@ const i18n = {
     copy: '명령 복사',
     copied: '복사했어요',
     consent:
-      '동의가 먼저예요. 기존 Neovim 설정은 승인 없이 절대 덮어쓰지 않아요. 설치 프로그램이 먼저 묻고, 물을 수 없으면 아무것도 바꾸지 않고 멈춰요.',
+      '동의가 먼저예요. 기존 Neovim 설정은 승인 없이 절대 덮어쓰지 않아요. 설치 프로그램이 먼저 묻고, 물을 수 없으면 아무것도 바꾸지 않고 멈춰요. --yes를 넘기면 묻지 않고 설정을 옆으로 옮겨요.',
     inspectTitle: '실행하기 전에 확인하기',
     inspectIntro:
       '먼저 읽어 보고 싶으신가요? 스크립트를 내려받아 지문을 확인하고, 내용을 읽은 다음 실행하세요.',
@@ -225,7 +225,7 @@ const i18n = {
     copy: 'Копировать команду',
     copied: 'Скопировано',
     consent:
-      'Сначала согласие: существующая конфигурация Neovim никогда не перезаписывается без вашего одобрения. Установщик спрашивает, а если спросить не может, останавливается и ничего не меняет.',
+      'Сначала согласие: существующая конфигурация Neovim никогда не перезаписывается без вашего одобрения. Установщик спрашивает, а если спросить не может, останавливается и ничего не меняет, если только вы не передадите --yes, чтобы переместить её в сторону без вопросов.',
     inspectTitle: 'Проверьте перед запуском',
     inspectIntro:
       'Хотите сначала прочитать? Скачайте скрипт, проверьте его отпечаток, прочитайте и только потом запускайте.',
@@ -249,7 +249,7 @@ const i18n = {
     copy: 'Copia comando',
     copied: 'Copiato',
     consent:
-      'Prima il consenso: una configurazione Neovim esistente non viene mai sovrascritta senza la Sua approvazione. Il programma di installazione chiede e, quando non può chiedere, si ferma senza modificare nulla.',
+      'Prima il consenso: una configurazione Neovim esistente non viene mai sovrascritta senza la Sua approvazione. Il programma di installazione chiede e, quando non può chiedere, si ferma senza modificare nulla, a meno che non passi --yes per spostarla da parte senza chiedere.',
     inspectTitle: 'Controlli prima di eseguire',
     inspectIntro:
       'Preferisce leggerlo prima? Scarichi lo script, verifichi la sua impronta, lo legga e poi lo esegua.',
@@ -273,7 +273,7 @@ const i18n = {
     copy: 'Komutu kopyala',
     copied: 'Kopyalandı',
     consent:
-      'Önce onay: mevcut bir Neovim yapılandırması onayınız olmadan asla üzerine yazılmaz. Kurulum programı sorar; soramadığında hiçbir şeyi değiştirmeden durur.',
+      'Önce onay: mevcut bir Neovim yapılandırması onayınız olmadan asla üzerine yazılmaz. Kurulum programı sorar; soramadığında hiçbir şeyi değiştirmeden durur; --yes verirseniz yapılandırmayı sormadan kenara taşır.',
     inspectTitle: 'Çalıştırmadan önce inceleyin',
     inspectIntro:
       'Önce okumak mı istersiniz? Betiği indirin, parmak izini doğrulayın, okuyun ve ardından çalıştırın.',
@@ -297,7 +297,7 @@ const i18n = {
     copy: 'Salin perintah',
     copied: 'Tersalin',
     consent:
-      'Persetujuan lebih dulu: konfigurasi Neovim yang sudah ada tidak pernah ditimpa tanpa persetujuan Anda. Pemasang akan bertanya, dan jika tidak bisa bertanya, ia berhenti tanpa mengubah apa pun.',
+      'Persetujuan lebih dulu: konfigurasi Neovim yang sudah ada tidak pernah ditimpa tanpa persetujuan Anda. Pemasang akan bertanya, dan jika tidak bisa bertanya, ia berhenti tanpa mengubah apa pun, kecuali Anda memberikan --yes untuk menyisihkannya tanpa bertanya.',
     inspectTitle: 'Periksa sebelum menjalankan',
     inspectIntro:
       'Ingin membacanya dulu? Unduh skrip, periksa sidik jarinya, baca, lalu jalankan.',
@@ -321,7 +321,7 @@ const i18n = {
     copy: 'Sao chép lệnh',
     copied: 'Đã sao chép',
     consent:
-      'Đồng ý trước: cấu hình Neovim sẵn có không bao giờ bị ghi đè nếu bạn chưa chấp thuận. Trình cài đặt sẽ hỏi, và khi không thể hỏi thì dừng lại mà không thay đổi gì.',
+      'Đồng ý trước: cấu hình Neovim sẵn có không bao giờ bị ghi đè nếu bạn chưa chấp thuận. Trình cài đặt sẽ hỏi, và khi không thể hỏi thì dừng lại mà không thay đổi gì, trừ khi bạn truyền --yes để chuyển cấu hình sang một bên mà không cần hỏi.',
     inspectTitle: 'Kiểm tra trước khi chạy',
     inspectIntro:
       'Muốn đọc trước? Hãy tải tập lệnh, kiểm tra dấu vân tay của nó, đọc rồi mới chạy.',
@@ -345,7 +345,7 @@ const i18n = {
     copy: 'कमांड कॉपी करें',
     copied: 'कॉपी हो गया',
     consent:
-      'पहले सहमति: मौजूदा Neovim कॉन्फ़िगरेशन आपकी स्वीकृति के बिना कभी ओवरराइट नहीं होता। इंस्टॉलर पूछता है, और पूछ न सके तो कुछ बदले बिना रुक जाता है।',
+      'पहले सहमति: मौजूदा Neovim कॉन्फ़िगरेशन आपकी स्वीकृति के बिना कभी ओवरराइट नहीं होता। इंस्टॉलर पूछता है, और पूछ न सके तो कुछ बदले बिना रुक जाता है, जब तक आप --yes न दें, जिससे वह बिना पूछे उसे एक तरफ़ हटा देता है।',
     inspectTitle: 'चलाने से पहले जाँचें',
     inspectIntro:
       'पहले पढ़ना चाहते हैं? स्क्रिप्ट डाउनलोड करें, उसका फ़िंगरप्रिंट जाँचें, उसे पढ़ें और फिर चलाएँ।',
@@ -369,7 +369,7 @@ const i18n = {
     copy: 'Kopiuj polecenie',
     copied: 'Skopiowano',
     consent:
-      'Najpierw zgoda: istniejąca konfiguracja Neovima nigdy nie jest nadpisywana bez Twojej zgody. Instalator pyta, a gdy nie może zapytać, zatrzymuje się, niczego nie zmieniając.',
+      'Najpierw zgoda: istniejąca konfiguracja Neovima nigdy nie jest nadpisywana bez Twojej zgody. Instalator pyta, a gdy nie może zapytać, zatrzymuje się, niczego nie zmieniając, chyba że przekażesz --yes, aby bez pytania przeniósł ją na bok.',
     inspectTitle: 'Sprawdź przed uruchomieniem',
     inspectIntro:
       'Wolisz najpierw przeczytać? Pobierz skrypt, sprawdź jego odcisk, przeczytaj go, a potem uruchom.',
@@ -393,7 +393,7 @@ const i18n = {
     copy: 'Копіювати команду',
     copied: 'Скопійовано',
     consent:
-      'Спершу згода: наявна конфігурація Neovim ніколи не перезаписується без вашого схвалення. Інсталятор питає, а якщо не може спитати, зупиняється й нічого не змінює.',
+      'Спершу згода: наявна конфігурація Neovim ніколи не перезаписується без вашого схвалення. Інсталятор питає, а якщо не може спитати, зупиняється й нічого не змінює, якщо тільки ви не передасте --yes, щоб перемістити її вбік без запитань.',
     inspectTitle: 'Перевірте перед запуском',
     inspectIntro:
       'Хочете спершу прочитати? Завантажте скрипт, перевірте його відбиток, прочитайте та лише потім запускайте.',
@@ -418,7 +418,7 @@ const i18n = {
     copy: 'คัดลอกคำสั่ง',
     copied: 'คัดลอกแล้ว',
     consent:
-      'ขอความยินยอมก่อน: การตั้งค่า Neovim ที่มีอยู่จะไม่ถูกเขียนทับโดยที่คุณไม่อนุมัติ ตัวติดตั้งจะถามก่อน และหากถามไม่ได้ก็จะหยุดโดยไม่เปลี่ยนแปลงอะไร',
+      'ขอความยินยอมก่อน: การตั้งค่า Neovim ที่มีอยู่จะไม่ถูกเขียนทับโดยที่คุณไม่อนุมัติ ตัวติดตั้งจะถามก่อน และหากถามไม่ได้ก็จะหยุดโดยไม่เปลี่ยนแปลงอะไร เว้นแต่คุณส่ง --yes เพื่อย้ายการตั้งค่าออกไปโดยไม่ต้องถาม',
     inspectTitle: 'ตรวจสอบก่อนรัน',
     inspectIntro:
       'ต้องการอ่านก่อนหรือไม่ ดาวน์โหลดสคริปต์ ตรวจสอบลายนิ้วมือ อ่านเนื้อหา แล้วจึงรัน',
