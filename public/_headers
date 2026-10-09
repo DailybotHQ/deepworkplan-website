@@ -83,3 +83,8 @@
 
 /site.webmanifest
   Cache-Control: public, max-age=86400, must-revalidate
+
+# DeepWorkPlan Vim installer (curl -fsSL https://deepworkplan.com/vim/install.sh | bash)
+/vim/install.sh
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=300, must-revalidate
