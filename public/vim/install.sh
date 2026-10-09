@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
 #
-# DeepWorkPlan Vim — self-contained installer.
+# DeepWorkPlan Vim — self-contained installer for release v0.4.1.
 #
-# Canonical URL : https://deepworkplan.com/vim/install.sh
-#                 (https://deepworkplan.com/install.sh 301-redirects there)
+# Published at  : https://deepworkplan.com/vim/install.sh
+#                 and as the install.sh asset (with SHA256SUMS) of each
+#                 release: https://github.com/DailybotHQ/deepworkplan-vim/releases
 # Repository    : https://github.com/DailybotHQ/deepworkplan-vim
 # License       : GPL-3.0 (the configuration it installs is GPL-3.0)
 #
-# Usage:
-#   curl -fsSL https://deepworkplan.com/vim/install.sh | bash
+# Usage — download, verify, then run:
+#   curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+#   curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256
+#   shasum -a 256 -c install.sh.sha256      # Linux: sha256sum -c install.sh.sha256
+#   bash install.sh
+# Run it from a terminal: it asks before touching an existing config.
+# For a check from a second origin, compare the hash with the install.sh
+# line of SHA256SUMS on the GitHub release (release tags are immutable).
 #
 # What it does, in order:
 #   1. Preflight — detects OS and package manager; installs git, curl, and
@@ -23,31 +30,56 @@
 #   5. Bootstraps plugins headlessly — no quit-and-reopen dance.
 #
 # Environment overrides:
-#   DWP_VIM_REF             branch, tag, or commit to install (default: main)
+#   DWP_VIM_REF             tag, branch, or commit to install (default: this
+#                           script's release, v0.4.1; "main" follows main)
 #   DWP_VIM_SOURCE          repository URL or a local path (offline installs)
 #   DWP_VIM_DIR             destination directory (default: ~/.config/nvim)
-#   DWP_VIM_SKIP_PACKAGES   set to 1 to skip system packages — the image
-#                           already has them (containers, CI)
+#   DWP_VIM_SKIP_PACKAGES   set to 1 to install no system package — the
+#                           image already has them (containers, CI): a
+#                           missing git, curl or Lua stops the run, and
+#                           install.lua skips its package step too
 #   DWP_VIM_BOOTSTRAP_TIMEOUT  seconds allowed for the headless plugin
 #                           install (default: 900)
 #
-# Windows: `curl | bash` is not the Windows gesture. Use winget plus Git
-# Bash, or run this script inside WSL where it works as-is:
+# Windows: use winget plus Git Bash, or run the steps above inside WSL,
+# where they work as-is:
 #   winget install -e --id Neovim.Neovim --accept-package-agreements --accept-source-agreements
-#   git clone https://github.com/DailybotHQ/deepworkplan-vim.git "$LOCALAPPDATA/nvim"
+#   git clone --branch v0.4.1 https://github.com/DailybotHQ/deepworkplan-vim.git "$LOCALAPPDATA/nvim"
 #   cd "$LOCALAPPDATA/nvim" && lua install.lua
 #
 set -euo pipefail
 
+# The whole script is one function, called on the last line: bash parses
+# all of it before running anything. When the download is piped into bash
+# the script arrives on stdin, so nothing it runs may read stdin — and no
+# half-downloaded script can run partially.
+main() {
+
 REPO_URL="https://github.com/DailybotHQ/deepworkplan-vim.git"
-REF="${DWP_VIM_REF:-main}"
+# The release this script belongs to: it installs exactly that tag unless
+# DWP_VIM_REF names another tag, branch or commit (DWP_VIM_REF=main follows
+# the moving main branch — only when asked for).
+RELEASE_REF="v0.4.1"
+REF="${DWP_VIM_REF:-$RELEASE_REF}"
 SOURCE="${DWP_VIM_SOURCE:-$REPO_URL}"
 DEST="${DWP_VIM_DIR:-$HOME/.config/nvim}"
 BACKUP_DIR="$HOME/.config/previous-deepworkplan-vim"
 BOOTSTRAP_TIMEOUT="${DWP_VIM_BOOTSTRAP_TIMEOUT:-900}"
+# Images and CI that already carry every dependency: install no system
+# package here, and install.lua skips its package step too. Off when unset,
+# empty or 0.
+SKIP_PACKAGES=0
+case "${DWP_VIM_SKIP_PACKAGES:-}" in
+  '' | 0) ;;
+  *) SKIP_PACKAGES=1 ;;
+esac
 
 say() { printf '%s\n' "$*"; }
 die() { printf 'install.sh: %s\n' "$*" >&2; exit 1; }
+
+# Refs and sources reach git as arguments: never as options.
+case "$REF" in -*) die "DWP_VIM_REF must not start with '-' (got '$REF')" ;; esac
+case "$SOURCE" in -*) die "DWP_VIM_SOURCE must not start with '-' (got '$SOURCE')" ;; esac
 
 # --- 1. Preflight -----------------------------------------------------------
 
@@ -57,7 +89,7 @@ case "$(uname -s)" in
     say "Windows shell detected (Git Bash / MSYS). This script targets macOS, Linux, and WSL."
     say "On Windows use winget plus Git Bash, or WSL:"
     say "  winget install -e --id Neovim.Neovim --accept-package-agreements --accept-source-agreements"
-    say "  git clone $REPO_URL \"\$LOCALAPPDATA/nvim\""
+    say "  git clone --branch $REF $REPO_URL \"\$LOCALAPPDATA/nvim\""
     say "  cd \"\$LOCALAPPDATA/nvim\" && lua install.lua"
     exit 1
     ;;
@@ -104,6 +136,13 @@ command -v curl >/dev/null 2>&1 || tools_missing+=(curl)
 LUA="$(find_lua || true)"
 if [ -z "$LUA" ]; then
   tools_missing+=(lua)
+fi
+
+if [ "$SKIP_PACKAGES" = 1 ]; then
+  if [ "${#tools_missing[@]}" -gt 0 ]; then
+    die "missing: ${tools_missing[*]} — DWP_VIM_SKIP_PACKAGES is set, so no system package is installed. Add them to the image (or unset DWP_VIM_SKIP_PACKAGES) and rerun."
+  fi
+  say "==> DWP_VIM_SKIP_PACKAGES is set: no system packages will be installed"
 fi
 
 if [ "${#tools_missing[@]}" -gt 0 ]; then
@@ -194,9 +233,10 @@ if [ -d "$DEST" ] && dir_has_content "$DEST" && ! is_ours "$DEST"; then
     say "An existing Neovim config was found at $DEST. Nothing was changed."
     say "This script ran without a terminal, so it cannot ask what to do."
     say "Either:"
-    say "  1. run it interactively:"
+    say "  1. run it interactively — download it, then run it in a terminal:"
+    say "       curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh"
     say "       bash install.sh"
-    say "  2. or move the config aside first, then rerun the one-liner:"
+    say "  2. or move the config aside first, then run the installer again:"
     say "       mv '$DEST' '$BACKUP_DIR'"
     die "refusing to touch an existing config unattended"
   fi
@@ -213,37 +253,72 @@ if is_ours "$DEST"; then
   # DWP_VIM_SOURCE redirects the update too (offline installs, local
   # mirrors); unset, the update pulls from the clone's own origin.
   FETCH_SOURCE="${DWP_VIM_SOURCE:-origin}"
-  git -C "$DEST" fetch "$FETCH_SOURCE" "$REF" ||
-    die "git fetch failed from $FETCH_SOURCE in $DEST (offline? set DWP_VIM_SOURCE to a local path)"
-  git -C "$DEST" checkout "$REF" >/dev/null ||
-    die "git checkout '$REF' failed in $DEST (ref missing, or local changes block it — see the error above)"
-  # Fast-forward to the fetched tip when it is ahead. merge --ff-only
-  # refuses a dirty tree, so local edits are never reset. A HEAD that
-  # DIVERGED from the source is not silently skipped either: the run
-  # dies loudly so "installed" never masks "still on the old commit"
-  # (final-review finding R2).
-  if [ "$(git -C "$DEST" rev-parse HEAD)" != "$(git -C "$DEST" rev-parse FETCH_HEAD)" ]; then
-    if git -C "$DEST" merge-base --is-ancestor HEAD FETCH_HEAD; then
-      git -C "$DEST" merge --ff-only FETCH_HEAD ||
-        die "could not fast-forward $DEST (local changes?). Resolve manually and rerun"
-    else
-      die "update skipped: $DEST has local commits that diverge from '$REF' — nothing was changed. Reconcile them (git -C '$DEST' pull --rebase) or ask your agent, then rerun."
+  # The tag is fetched into a private ref, never over refs/tags: a local
+  # tag of the same name (the user's own) is left exactly as it is.
+  if git -C "$DEST" fetch -q "$FETCH_SOURCE" "+refs/tags/$REF:refs/dwp-vim/release" 2>/dev/null; then
+    # A release tag (the default): pin the checkout to it, detached. Local
+    # work is never left behind silently: a HEAD carrying commits that no
+    # remote branch or tag holds stops the run, like the branch path below
+    # (final-review finding R2). An older or newer upstream commit simply
+    # moves to the tag.
+    TARGET="$(git -C "$DEST" rev-parse "refs/dwp-vim/release^{commit}")"
+    if [ "$(git -C "$DEST" rev-parse HEAD)" != "$TARGET" ]; then
+      if ! git -C "$DEST" merge-base --is-ancestor HEAD "$TARGET" &&
+        [ -n "$(git -C "$DEST" rev-list -n 1 HEAD --not --remotes --tags)" ]; then
+        die "update skipped: $DEST has local commits that are not in '$REF' — nothing was changed. Keep them on a branch of your own (they stay there), or ask your agent, then rerun."
+      fi
+      if git -C "$DEST" merge-base --is-ancestor "$TARGET" HEAD; then
+        say "==> Moving from $(git -C "$DEST" rev-parse --short HEAD) back to release $REF (your branches are kept; DWP_VIM_REF=main follows main)"
+      fi
+      git -C "$DEST" -c advice.detachedHead=false checkout -q "$TARGET" ||
+        die "git checkout '$REF' failed in $DEST (local changes block it — see the error above)"
+    fi
+  else
+    git -C "$DEST" fetch "$FETCH_SOURCE" "$REF" ||
+      die "could not fetch '$REF' from $FETCH_SOURCE in $DEST — not a tag, branch or commit there, or the source is unreachable (offline? set DWP_VIM_SOURCE to a local path)"
+    git -C "$DEST" checkout "$REF" >/dev/null ||
+      die "git checkout '$REF' failed in $DEST (ref missing, or local changes block it — see the error above)"
+    # A branch: fast-forward to the fetched tip when it is ahead. merge
+    # --ff-only refuses a dirty tree, so local edits are never reset. A HEAD
+    # that DIVERGED from the source is not silently skipped either: the run
+    # dies loudly so "installed" never masks "still on the old commit"
+    # (final-review finding R2).
+    if [ "$(git -C "$DEST" rev-parse HEAD)" != "$(git -C "$DEST" rev-parse 'FETCH_HEAD^{commit}')" ]; then
+      if git -C "$DEST" merge-base --is-ancestor HEAD FETCH_HEAD; then
+        git -C "$DEST" merge --ff-only FETCH_HEAD ||
+          die "could not fast-forward $DEST (local changes?). Resolve manually and rerun"
+      else
+        die "update skipped: $DEST has local commits that diverge from '$REF' — nothing was changed. Reconcile them (git -C '$DEST' pull --rebase) or ask your agent, then rerun."
+      fi
     fi
   fi
 else
   say "==> Cloning DeepWorkPlan Vim ('$REF') into $DEST"
   mkdir -p "$(dirname "$DEST")"
-  git clone "$SOURCE" "$DEST" || die "clone from $SOURCE failed"
-  git -C "$DEST" checkout "$REF" >/dev/null ||
+  git clone -- "$SOURCE" "$DEST" || die "clone from $SOURCE failed"
+  git -C "$DEST" -c advice.detachedHead=false checkout -q "$REF" ||
     die "git checkout '$REF' failed in the clone from $SOURCE (ref missing, or local changes block it — see the error above)"
 fi
 
 [ -f "$DEST/install.lua" ] || die "$DEST has no install.lua — not a DeepWorkPlan Vim checkout"
 
+# install.lua reads the same switch (it skips its system-package step).
+if [ "$SKIP_PACKAGES" = 1 ]; then
+  export DWP_VIM_SKIP_PACKAGES=1
+else
+  unset DWP_VIM_SKIP_PACKAGES
+fi
+
 # --- 3. The repository's own installer ---------------------------------------
 
 say "==> Running the system setup ($LUA install.lua)"
-if (cd "$DEST" && "$LUA" install.lua); then
+# install.lua may ask questions: it reads the terminal when there is one,
+# never the pipe that may be carrying this script.
+LUA_STDIN=/dev/null
+if : </dev/tty 2>/dev/null; then
+  LUA_STDIN=/dev/tty
+fi
+if (cd "$DEST" && "$LUA" install.lua) <"$LUA_STDIN"; then
   say "==> System setup finished"
 else
   # The handoff line comes first so it sits directly under the failure
@@ -288,12 +363,12 @@ else
     timeout "$BOOTSTRAP_TIMEOUT" env \
       XDG_CONFIG_HOME="$(dirname "$DEST")" \
       NVIM_APPNAME="$BOOTSTRAP_APPNAME" \
-      nvim --headless >"$BOOTSTRAP_LOG" 2>&1 || bootstrap_rc=$?
+      nvim --headless </dev/null >"$BOOTSTRAP_LOG" 2>&1 || bootstrap_rc=$?
   else
     env \
       XDG_CONFIG_HOME="$(dirname "$DEST")" \
       NVIM_APPNAME="$BOOTSTRAP_APPNAME" \
-      nvim --headless >"$BOOTSTRAP_LOG" 2>&1 || bootstrap_rc=$?
+      nvim --headless </dev/null >"$BOOTSTRAP_LOG" 2>&1 || bootstrap_rc=$?
   fi
   if [ "$bootstrap_rc" -eq 0 ]; then
     # mkdir -p first: touch cannot create the parent dir, and a silently
@@ -316,5 +391,9 @@ say "DeepWorkPlan Vim is installed at $DEST"
 say "  Launch        nvim"
 say "  Command index Space h h   (the whole editor, listed)"
 say "  Plan browser  Space P"
-say "  Update        rerun this installer (idempotent) or: git -C '$DEST' pull"
+say "  Version       $REF"
+say "  Update        run a newer release's install.sh (each one pins its release; DWP_VIM_REF=main follows main)"
 say "  Remove        lua '$DEST/delete.lua'  (lists every path first, asks, keeps Neovim)"
+}
+
+main "$@"
