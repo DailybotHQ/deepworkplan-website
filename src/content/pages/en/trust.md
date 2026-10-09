@@ -33,12 +33,6 @@ Releases are **checksummed, not signed** — signing (cosign or maintainer GPG) 
 
 The same rule applies to the DeepWorkPlan Vim installer: its page shows the SHA-256 of the script as served, with a download, inspect, verify and run recipe. [Inspect the DeepWorkPlan Vim installer](/kit/vim#inspect-before-you-run)
 
-Pre-releases verify the same way. The v7 beta, v7.0.0-beta.1, is a GitHub pre-release with its own SHA256SUMS, and it is not the stable release. This site vendors it to field-test it: installed by its pinned tag and checked against those checksums.
-
-```bash
-npx --yes skills add DailybotHQ/deepworkplan-skill@v7.0.0-beta.1 --skill deepworkplan -y
-```
-
 ---
 
 ## Report a vulnerability

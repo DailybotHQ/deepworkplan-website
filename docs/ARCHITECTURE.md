@@ -894,12 +894,12 @@ Dev-only portal at `/internal/`. Uses `InternalLayout` or `ShowcaseLayout` (neve
   **Vendored provenance recorded on 2026-09-17:** this copy was the released upstream tag **`v5.5.1`** (`3117819`), superseding `v5.5.0`, installed via the documented command `npx --yes skills add DailybotHQ/deepworkplan-skill@v5.5.1 --skill deepworkplan --force -y`. The recorded `diff -rq` was **byte-identical** against the tag's canonical `skills/deepworkplan/` tree — empty output — with `skills-lock.json` updated by the CLI itself (hash `f38b4f5c…`, superseding `019aecad…`).
 
 **Current website dogfood:** `.agents/skills/deepworkplan/SKILL.md` declares
-version **7.0.0-beta.1**, the upstream GitHub **pre-release** (not the stable
-release), installed by its pinned tag and verified against the release
-`SHA256SUMS` (170 files, exact file set) on 2026-10-09 so this site field-tests
-the v7 beta. The beta declares DWP standard **7.0.0**; this repository's
-declaration stays **6.0.0** (still valid) until the field-test upgrade. The
-beta creates new plans with the v7 contract by default (v6 under 6.x). Existing plans keep their recorded
+version **7.0.0** (stable, `latest`), installed by its pinned tag and verified
+against the release `SHA256SUMS` (171 files, exact file set) on 2026-10-09; it
+supersedes the field-tested `7.0.0-beta.1`. The implemented DWP standard is
+**7.0.0**; new plans use the v7 contract by default, and existing plans keep
+their recorded generation. The addon registry `.dwp/config.json` is tracked
+(`.gitignore`: `.dwp/*` + `!.dwp/config.json`). Existing plans keep their recorded
 generation and are never migrated implicitly.
 
 **`v5.4.0` is the release that absorbed this repository's own contribution.** Between 2026-09-13 and 2026-09-17 this copy deliberately ran **ahead of** upstream, carrying a reviewed re-adaptation that pinned the AI Diff Reviewer addon to v2.3.0, named the **incomplete review** as a state distinct from a clean pass, added the normative rule that a plan's temporary and analysis output belongs in that plan's own `analysis_results/`, and resolved a `tmp/`-versus-plan-output contradiction between two spec surfaces. That work was contributed upstream as `DailybotHQ/deepworkplan-skill` PR #45, merged 2026-09-17, and released as `v5.4.0` one minute later. **Installing the tag therefore closed the divergence rather than destroying it** — the only delta between the previous re-adapted tree and `v5.4.0` was the `version:` stamp in fifteen `SKILL.md` files, which is the strongest available evidence that the re-adaptation matched what shipped. Standard remains aligned to **5.0.0** (no schema-line change; `v5.4.0` is a documentation and addon-contract release).

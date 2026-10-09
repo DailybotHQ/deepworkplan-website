@@ -33,12 +33,6 @@ Các bản phát hành **có checksum, không có chữ ký** — ký (cosign ho
 
 Quy tắc tương tự áp dụng cho trình cài đặt DeepWorkPlan Vim: trang của nó hiển thị SHA-256 của tập lệnh đang được phân phát, kèm các bước tải, kiểm tra, xác minh và chạy. [Kiểm tra trình cài đặt DeepWorkPlan Vim](/kit/vim#inspect-before-you-run)
 
-Các bản phát hành trước được xác minh theo cùng cách. Bản beta v7, v7.0.0-beta.1, là một bản phát hành trước trên GitHub với SHA256SUMS riêng, và không phải bản phát hành ổn định. Trang web này tích hợp nó để thử nghiệm thực tế: cài đặt theo tag đã ghim và đối chiếu với các checksum đó.
-
-```bash
-npx --yes skills add DailybotHQ/deepworkplan-skill@v7.0.0-beta.1 --skill deepworkplan -y
-```
-
 ---
 
 ## Báo cáo lỗ hổng
