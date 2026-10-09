@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan 키트"
 description: "Deep Work Plan을 어디서든 실행 가능하게 만드는 스킬과 아홉 개의 하위 스킬, 명령, 에이전트 어댑터, 온보딩 프리셋, 선택형 애드온, 예시."
-lastUpdated: 2026-05-31
+lastUpdated: 2026-10-09
 ---
 
 ## Deep Work Plan 키트
@@ -56,6 +56,18 @@ onboard 흐름이 리포지토리에 얹는 기능들입니다. 네 가지는 �
 - **Dependency upgrade** — 패키지 관리자 비종속, 배치 단위, 검증되고 되돌릴 수 있는 업그레이드.
 - **Design system** — 리포지토리의 실제 디자인 소스에서 추론된 인터페이스 범위의 `DESIGN.md`(`docs/DESIGN.md`에 위치하며 `AGENTS.md`에서 참조됨)로, 비주얼 UI, 스타일이 입혀진 CLI 출력, 대화형 메시징을 위한 프로필을 갖추어 에이전트가 브랜드에 맞는 인터페이스 출력을 생성합니다. 디자인 시스템이 감지되면 제안은 필수이지만 설치는 수락으로 제어됩니다: 비주얼 프로필은 감지 시 강력히 권장되고, CLI와 대화형 프로필은 감지 시 권장되며 언제나 먼저 물어봅니다.
 - **AI Diff Reviewer** — 필수 로컬 리뷰입니다: 온보딩이 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`를 설치하고, 모든 Final Review의 보안 점검이 이를 실행합니다; 선택적인 Flow B는 동일한 extension을 공유하는 CI PR 병합 게이트를 추가하며, 명시적으로 제안되고 요청 없이 설치되지 않습니다.
+
+### 생태계
+
+**방법론은 단독으로 작동합니다. 애드온은 이를 강화합니다.** 각 애드온은 Deep Work Plan 스킬 내부의 얇은 통합 계층으로, 자체 리포지토리, 릴리스, 인터페이스 버전을 갖춘 제품에 태그로 고정됩니다. 모든 제품은 Deep Work Plan 없이도 작동하며, 필수 애드온은 없습니다.
+
+- **Deep Work Plan 스킬** — 계획을 생성, 실행, 검증, 재개, 개선합니다. 애드온이 필요하지 않습니다.
+- **[herdr](/ko/kit/herdr)** — 어떤 머신에서든 Herdr 창에 있는 피어: 승인된 응답 한 번으로 이루어지는 대화형 위임. 고정 버전 `herdr-peers@v0.1.0`.
+- **[agentkit](/ko/kit/agentkit)** — 모든 터미널 코딩 에이전트를 위한 하나의 ak 명령: worktree에서의 헤드리스 위임. 고정 버전 `coding-agents-kit@v0.1.1`.
+- **[devcontainer](/ko/kit/devcontainer)** — 코딩 에이전트 없이 제공되는 Dev Containers 템플릿과 기본 이미지. 고정 버전 `devcontainer-kit@v0.1.2`.
+- **[vim](/ko/kit/vim)** — 읽기 전용 계획 브라우저와 Markdown 뷰어를 갖춘 터미널 편집기. 고정 버전 `deepworkplan-vim@v0.4.0`.
+
+애드온 레지스트리와 디스크립터는 프리릴리스인 v7 베타에 포함되어 있습니다: `v7.0.0-beta.1`
 
 ### 예시
 

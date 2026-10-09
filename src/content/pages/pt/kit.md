@@ -1,7 +1,7 @@
 ---
 title: "O Kit do Deep Work Plan"
 description: "A skill e suas nove sub-skills, commands, adaptadores de agente, presets de onboarding, addons opcionais e exemplos que tornam o Deep Work Plan executável em qualquer lugar."
-lastUpdated: 2026-05-31
+lastUpdated: 2026-10-09
 ---
 
 ## O Kit do Deep Work Plan
@@ -56,6 +56,18 @@ Capacidades que o fluxo de onboarding adiciona a um repositório. Quatro são op
 - **Atualização de dependências** — atualizações independentes do gerenciador de pacotes, em lotes, validadas e reversíveis.
 - **Design system** — um `DESIGN.md` com escopo de interface (em `docs/DESIGN.md`, referenciado a partir do `AGENTS.md`) derivado da fonte real de design do repositório, com perfis para UI visual, saída de CLI estilizada e mensagens conversacionais, para que os agentes gerem saída de interface fiel à marca; quando um design system é detectado a oferta é obrigatória enquanto a instalação fica protegida por aceitação — o perfil visual é recomendado com força quando detectado, e os perfis de CLI e conversacional são recomendados quando detectados e sempre perguntados.
 - **AI Diff Reviewer** — a revisão local obrigatória: o onboarding instala o [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, e o passe de segurança de cada Final Review a executa; o Flow B opcional adiciona uma barreira de merge de PR em CI que compartilha a mesma extensão, oferecida explicitamente e nunca instalada sem ser pedida.
+
+### Ecossistema
+
+**A metodologia funciona sozinha. Os addons a amplificam.** Cada addon é um integrador leve dentro da skill do Deep Work Plan, fixado por tag a um produto com o seu próprio repositório, versão e versão de interface. Cada produto funciona sem o Deep Work Plan, e nenhum addon é obrigatório.
+
+- **Skill do Deep Work Plan** — Cria, executa, verifica, retoma e refina planos. Não precisa de nenhum addon.
+- **[herdr](/pt/kit/herdr)** — Pares em painéis do Herdr, em qualquer máquina: delegação interativa com uma única resposta autorizada. Fixado em `herdr-peers@v0.1.0`.
+- **[agentkit](/pt/kit/agentkit)** — Um único comando ak para cada agente de código no terminal: delegação sem interface em uma worktree. Fixado em `coding-agents-kit@v0.1.1`.
+- **[devcontainer](/pt/kit/devcontainer)** — Um template de Dev Containers e imagens base distribuídos sem agentes de código. Fixado em `devcontainer-kit@v0.1.2`.
+- **[vim](/pt/kit/vim)** — O editor de terminal, com um navegador de planos somente leitura e um visualizador de Markdown. Fixado em `deepworkplan-vim@v0.4.0`.
+
+O registro de addons e os descritores são distribuídos na beta da v7, uma pré-release: `v7.0.0-beta.1`
 
 ### Exemplos
 

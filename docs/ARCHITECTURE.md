@@ -100,7 +100,7 @@ src/
 │   │   └── VimInstall.astro        # One-liner + copy button, consent callout, "inspect before you run" with the live installer SHA-256
 │   │
 │   ├── diagrams/           # Editorial Interactive Assets (see docs/DIAGRAM_COMPONENTS.md)
-│   │   └── kit/                    # incl. VimCommandIndex.astro (SPC h h plate) and VimInDwpLoop.astro (plan browser + Markdown viewer beside the DWP loop)
+│   │   └── kit/                    # incl. VimCommandIndex.astro (SPC h h plate), VimInDwpLoop.astro (plan browser + Markdown viewer beside the DWP loop) and KitEcosystem.astro (v7 ecosystem plate on the kit index: methodology works alone, addons pinned to products)
 │   │
 │   ├── pages/              # Shared page components (*Page.astro, QuickstartPage, readers)
 │   │   ├── ComparePage.astro       # Objective comparison and source notes
