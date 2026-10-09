@@ -9,6 +9,8 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.31] - 2026-10-09
+
 ### Added
 
 - Kit pages for the optional v7 addons: `/kit/herdr` (herdr-peers) and `/kit/agentkit` (coding-agents-kit), in 17 languages.
@@ -1053,7 +1055,8 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.30...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.31...HEAD
+[5.0.31]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.31
 [5.0.30]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.30
 [5.0.29]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.29
 [5.0.28]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.28
