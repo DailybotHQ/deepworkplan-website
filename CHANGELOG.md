@@ -9,6 +9,16 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.35] - 2026-10-09
+
+### Changed
+
+- fix(hub): address the self-review on the ecosystem hub
+- fix(hub): validate the manifest and harden the sync script edge cases
+- docs(hub): document the ecosystem hub role and repository boundaries
+- build(hub): keep repositories/ out of every site tool
+- feat(hub): add the repositories manifest and sync script
+
 ## [5.0.34] - 2026-10-09
 
 ### Changed
@@ -1083,7 +1093,8 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.34...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.35...HEAD
+[5.0.35]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.35
 [5.0.34]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.34
 [5.0.33]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.33
 [5.0.32]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.32
