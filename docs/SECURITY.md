@@ -313,8 +313,9 @@ how to verify, the disclosure contact, and a `lastUpdated` date. Keep every valu
 
 The vendored `.agents/skills/deepworkplan/SKILL.md` version is stamped at build
 time (`scripts/stamp-versions.mjs`). A **stable** vendored version becomes
-`skill.version` (the release the unpinned `skill.install` line and the
-`releases/latest` checksums resolve to) and retires any `prerelease` block. A
+`skill.version`, and `skill.install` becomes the install line pinned to that
+release (the tree-URL form the skills CLI honours; the untagged form would
+install the default branch); the stamp retires any `prerelease` block. A
 **pre-release** (as `7.0.0-beta.1` was on 2026-10-09, vendored to field-test
 the v7 beta; retired the same day when stable `7.0.0` was vendored) is stamped only into the `prerelease` block — version, status
 "pre-release (not the stable release)", the pinned install line and that

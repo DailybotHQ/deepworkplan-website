@@ -34,6 +34,9 @@ describe('trust manifest', () => {
     if (!vendored?.includes('-')) {
       expect(manifest.prerelease).toBeUndefined();
       expect(manifest.skill.version).toBe(vendored);
+      expect(manifest.skill.install).toBe(
+        `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v${vendored} --skill deepworkplan -y`
+      );
       return;
     }
     const tag = `v${vendored}`;
