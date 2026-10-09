@@ -1,0 +1,142 @@
+---
+title: DeepWorkPlan Vim
+description: "DeepWorkPlan Vim adalah editor terminal untuk Deep Work Plan: konfigurasi Neovim 0.12+ dengan indeks perintah, penjelajah rencana, dan penampil Markdown."
+kind: addon
+lang: id
+order: 6
+software:
+  applicationCategory: DeveloperApplication
+  operatingSystem: [macOS, Linux, WSL]
+  license: https://www.gnu.org/licenses/gpl-3.0.html
+  installUrl: https://deepworkplan.com/vim/install.sh
+  sameAs:
+    - https://github.com/DailybotHQ/deepworkplan-vim
+---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
+
+# DeepWorkPlan Vim
+
+**DeepWorkPlan Vim** adalah editor terminal untuk Deep Work Plan: konfigurasi Neovim untuk manusia, dan untuk agen pemrograman, yang bekerja di terminal. Rencana Anda, dokumentasi Anda, dan indeks semua perintah hanya sejauh satu tombol.
+
+Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v7 beta (`v7.0.0-beta.1`, sebuah pra-rilis). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v0.4.2**.
+
+## Mengapa editor terminal untuk Deep Work Plan
+
+Deep Work Plan adalah folder Markdown di bawah `.dwp/plans/`: sebuah tujuan, tugas atomik, gerbang verifikasi, dan log yang terus berjalan. Manusia meninjaunya, agen menjalankannya, dan keduanya sering melakukannya dari terminal. Editor yang dibuat untuk pekerjaan itu menjaga tiga hal tetap dekat: rencana itu sendiri, dokumentasi di sekitarnya, dan tombol yang memindahkan Anda di antara keduanya.
+
+DeepWorkPlan Vim adalah editor itu. Ia adalah konfigurasi Neovim pilihan — server bahasa, pelengkapan otomatis, linting, pemformatan, pencarian kabur, pohon berkas, dan tema warna pilihan, dimuat secara malas — ditambah beberapa permukaan yang menjadikannya editor untuk Deep Work Plan.
+
+<VimInDwpLoop lang="id" class="not-prose my-10" />
+
+## Tur: indeks perintah yang tidak bisa ketinggalan zaman
+
+Tekan `SPC h h` (Spasi adalah tombol leader), atau jalankan `:DwpCommands`, dan editor mencantumkan setiap pemetaan yang dimilikinya dengan deskripsi satu baris. Daftar ini dihasilkan dari pemetaan tombol yang aktif, sehingga pemetaan yang didefinisikan di mana pun muncul di indeks tanpa perlu didaftarkan, dan indeks tidak bisa ketinggalan zaman.
+
+Itulah seluruh tur: jalankan `nvim`, lalu tekan Spasi, `h`, `h`.
+
+<VimCommandIndex lang="id" class="not-prose my-10" />
+
+## Yang Anda dapatkan
+
+Lima fitur, masing-masing hanya sejauh satu tombol.
+
+| Fitur | Tombol | Fungsinya |
+|---|---|---|
+| Indeks perintah yang dihasilkan | `SPC h h` | Setiap pemetaan dalam konfigurasi, dihasilkan dari pemetaan tombol yang aktif. |
+| Gestur ala VS Code | `<C-a>`, `SPC y` | Pilih seluruh berkas dengan satu tombol, lalu salin ke papan klip sistem. `y` biasa juga menyalin ke sana, karena papan klipnya berlaku di seluruh sistem. |
+| Penjelajah rencana Deep Work Plan | `SPC P` | Bilah samping untuk rencana di repositori Anda, dikelompokkan menurut status dengan bilah progres, dan pembaca untuk satu rencana. |
+| Penampil Markdown | `SPC m p`, `SPC m r` | Pratinjau Markdown di peramban, atau render di buffer. |
+| Pemasang terverifikasi | — | Pemasang mandiri untuk macOS, Linux, dan WSL, dengan jalur manual yang terdokumentasi untuk Windows. |
+
+## Rencana tanpa meninggalkan editor
+
+`SPC P`, `:DwpPlans`, atau satu klik pada segmen baris status membuka bilah samping rencana. Ia mencakup setiap folder `.dwp/plans/` di direktori saat ini dan direktori konfigurasi Neovim Anda, dan mengelompokkan rencana mulai dari yang paling butuh perhatian. Di editor, labelnya adalah `Working`, `Needs attention`, `Ready`, `Not started`, dan `Done`. Setiap rencana menampilkan bilah progres.
+
+Tekan Enter pada sebuah rencana untuk membuka pembaca: tujuan dalam satu kalimat, status dan progres, daftar tugas dengan tugas saat ini ditandai, dan lompatan berbahasa sederhana ke berkas milik rencana itu sendiri. Baris status menampilkan rencana aktif secara langsung, dan layar awal mencantumkan tiga teratas. Permukaan-permukaan ini menjelaskan rencana; mereka tidak pernah menulis ke `.dwp/`.
+
+Untuk membaca berkas Markdown sebuah rencana di tempat, `SPC m p` mempratinjau buffer saat ini di peramban dan `SPC m r` merendernya di dalam buffer. Keduanya hanya berfungsi di buffer Markdown.
+
+## Instalasi
+
+Instalasi terdiri dari tiga perintah: unduh skrip, periksa terhadap SHA-256 berkas yang disajikan situs ini, lalu jalankan. Pemasang mematok rilisnya sendiri, sehingga ia memasang tepat `v0.4.2`, rilis yang dijelaskan halaman ini; `DWP_VIM_REF=main bash install.sh` justru mengikuti cabang `main` yang terus bergerak.
+
+<VimInstall lang="id" />
+
+Secara berurutan, pemasang:
+
+1. Memeriksa OS dan manajer paket Anda, lalu memasang git, curl, dan interpreter Lua jika ada yang belum ada.
+2. Bertanya sebelum menyentuh konfigurasi Neovim yang sudah ada. Jika dijalankan lewat pipa tanpa terminal, ia berhenti dan tidak mengubah apa pun.
+3. Meng-clone repositori ke `~/.config/nvim`, atau memperbaruinya jika sudah ada di sana.
+4. Menjalankan `lua install.lua` milik repositori itu sendiri.
+5. Memasang plugin secara headless, sehingga tidak ada langkah keluar lalu membuka ulang.
+
+Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install.sh` pada tag `v0.4.2`. Untuk membacanya lebih dulu, unduh dengan `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, bandingkan SHA-256-nya dengan nilai yang ditampilkan di atas, baca, lalu jalankan `bash install.sh`.
+
+## Persyaratan dan platform
+
+- Neovim 0.12 atau lebih baru. Pasang Neovim lebih dulu; pemasang tidak memasangnya.
+- Lua: `lua`, `lua5.4`, atau `luajit`. Pemasang menambahkannya jika belum ada.
+- macOS, Linux, dan WSL menjalankan pemasang. Windows memiliki jalur manual yang terdokumentasi di README repositori: pasang Neovim dengan winget, clone repositori ke `%LOCALAPPDATA%\nvim`, dan jalankan `lua install.lua` dari Git Bash.
+- Berlisensi GPL-3.0: bebas digunakan, dipelajari, dan dimodifikasi.
+
+## Memperbarui, mengunci versi, dan mencopot
+
+Untuk memperbarui, jalankan pemasang dari rilis yang lebih baru. Menjalankannya ulang memindahkan checkout DeepWorkPlan Vim yang sudah ada ke rilis pemasang tersebut, mempertahankan cabang Anda, dan tidak pernah me-reset perubahan lokal: jika perubahan atau commit lokal akan hilang, ia berhenti dan tidak mengubah apa pun.
+
+Untuk memasang tag lain, cabang, atau commit, setel `DWP_VIM_REF`. Utamakan tag: rilis sebelum `v0.4.0` tidak memuat gestur, penjelajah rencana, penampil Markdown, maupun pemasang ini.
+
+```bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
+```
+
+Untuk mencopot, jalankan `lua delete.lua` dari direktori konfigurasi. Perintah ini menghapus konfigurasi, plugin, data Mason, cache dan status, serta salinan font yang dibuat pemasang, dan membiarkan biner Neovim serta paket sistem Anda.
+
+```bash
+cd ~/.config/nvim && lua delete.lua
+```
+
+## Pertanyaan
+
+### Apakah ini akan menimpa konfigurasi Neovim saya?
+
+Tidak, bukan tanpa persetujuan Anda. Saat menemukan konfigurasi yang bukan DeepWorkPlan Vim, eksekusi interaktif bertanya dulu sebelum memindahkannya ke `~/.config/previous-deepworkplan-vim`. Tanpa terminal, atau jika jalur cadangan itu sudah ada, ia berhenti dan tidak mengubah apa pun.
+
+### Apakah berfungsi di Windows?
+
+Pemasang tidak berjalan di Windows. Gunakan jalur manual di README repositori, atau jalankan pemasang di dalam WSL.
+
+### Apakah saya butuh Deep Work Plan untuk menggunakannya?
+
+Tidak. Ia adalah editor lebih dulu. Ia tidak memasang atau mensyaratkan skill Deep Work Plan; penjelajah rencana hanya tidak punya apa pun untuk dicantumkan sampai folder `.dwp/plans/` ada.
+
+### Bagaimana addon vim v7 menggunakannya?
+
+Deep Work Plan v7 beta menawarkan editor ini sebagai addon `vim` opsional selama onboarding. Addon tersebut mendeteksi instalasi yang sudah ada secara hanya-baca, melalui `addon/surface.json` milik editor, dan menawarkan instalasi yang dipatok serta terverifikasi checksum hanya dengan persetujuan Anda. Ia tidak pernah menimpa konfigurasi Neovim yang sudah ada tanpa persetujuan eksplisit, dan tidak pernah diwajibkan.
+
+### Bagaimana agen pemrograman menggunakannya?
+
+Ia dibuat untuk manusia dan untuk agen pemrograman yang hidup di terminal. Pemetaan tombolnya dikunci oleh pengujian kontrak, sehingga ingatan otot, dan ekspektasi agen, bertahan melewati pembaruan.
+
+### Versi mana yang saya dapatkan?
+
+Pemasang memasang rilis tempat ia berasal — `v0.4.2` saat ini — kecuali Anda menyetel `DWP_VIM_REF`; `DWP_VIM_REF=main` mengikuti `main`. Halaman ini menjelaskan rilis `v0.4.2`, yang memuat setiap fitur yang tercantum di sini.
+
+### Di bawah lisensi apa dan dari mana asalnya?
+
+GPL-3.0. Ia diturunkan dari mu-vim karya Andrés M Prieto, dan kreditnya tetap ada di repositori.
+
+## Kode sumber dan lisensi
+
+Kode sumbernya ada di [repositori DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim). Repositori ini publik dan berlisensi GPL-3.0, diturunkan dari [mu-vim](https://github.com/AndresMpa/mu-vim).
+
+## Entri kit terkait
+
+- [Devcontainer](/kit/devcontainer) — lingkungan pengembangan yang dapat direproduksi (addon pertama)
+- [Dailybot](/kit/dailybot) — pelaporan siklus hidup rencana yang terlihat oleh tim (addon kedua)
+- [AI Diff Reviewer](/kit/ai-diff-reviewer) — tinjauan lokal selama Final Review rencana (addon kelima)
+- [Herdr](/kit/herdr) — mendelegasikan tugas ke agen rekan di panel Herdr (v7 beta)
+- [Agentkit](/kit/agentkit) — satu perintah untuk setiap agen pemrograman terminal, dan delegasi headless (v7 beta)

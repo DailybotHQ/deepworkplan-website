@@ -21,6 +21,13 @@ Açık kaynak kodlama ajanı Cline, DWP'yi markdown kuralları ve komut prosedü
 
 DWP komutları, ajanın Cline'ın kuralları aracılığıyla okuduğu markdown prosedürleri olarak bulunur.
 
+İsteğe bağlı: [coding-agents-kit](/kit/agentkit) bu CLI’yi kurabilir ve `ak cline` ile başlatabilir. Sağlayıcının kendi resmi kurulum aracı da aynı şekilde çalışır.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install cline
+```
+
 ## Çağırma
 
 `#` önekini kullanın:

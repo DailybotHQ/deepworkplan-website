@@ -1,7 +1,7 @@
 ---
 title: "Kit Deep Work Plan"
 description: "Skill i jego dziewięć sub-skilli, komendy, adaptery agentów, presety onboardingu, opcjonalne dodatki i przykłady, dzięki którym Deep Work Plan działa wszędzie."
-lastUpdated: 2026-05-31
+lastUpdated: 2026-10-09
 ---
 
 ## Kit Deep Work Plan
@@ -56,6 +56,18 @@ Możliwości, które przepływ onboardingu nakłada na repozytorium. Cztery są 
 - **Dependency upgrade** — aktualizacje niezależne od menedżera pakietów: partiami, zwalidowane i odwracalne.
 - **System projektowy** — plik `DESIGN.md` o zakresie interfejsowym (w `docs/DESIGN.md`, przywoływany z `AGENTS.md`) wywiedziony z rzeczywistego źródła projektowego repozytorium, z profilami dla wizualnego UI, stylizowanego wyjścia CLI i komunikacji konwersacyjnej, dzięki czemu agenci generują wyjście interfejsu zgodne z marką; gdy wykryto system projektowy, propozycja jest obowiązkowa, ale instalacja jest uzależniona od akceptacji — profil wizualny jest zdecydowanie zalecany po wykryciu, a profile CLI i konwersacyjny są zalecane po wykryciu i zawsze poprzedzone pytaniem.
 - **AI Diff Reviewer** — wymagany lokalny przegląd: onboarding instaluje [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, a przegląd bezpieczeństwa każdego Final Review go uruchamia; opcjonalny Flow B dodaje bramę merge PR w CI współdzielącą to samo rozszerzenie, proponowaną wyraźnie i nigdy nieinstalowaną bez prośby.
+
+### Ekosystem
+
+**Metodyka działa samodzielnie. Dodatki ją wzmacniają.** Każdy dodatek to cienki integrator wewnątrz skilla Deep Work Plan, przypięty tagiem do produktu z własnym repozytorium, wydaniem i wersją interfejsu. Każdy produkt działa bez Deep Work Plan i żaden dodatek nie jest wymagany.
+
+- **Skill Deep Work Plan** — Tworzy, wykonuje, weryfikuje, wznawia i dopracowuje plany. Nie potrzebuje żadnego dodatku.
+- **[herdr](/pl/kit/herdr)** — Równorzędni agenci w panelach Herdr, na dowolnej maszynie: interaktywne delegowanie z jedną autoryzowaną odpowiedzią. Przypięty do `herdr-peers@v0.1.0`.
+- **[agentkit](/pl/kit/agentkit)** — Jedno polecenie ak dla każdego terminalowego agenta kodującego: delegowanie bez interfejsu w worktree. Przypięty do `coding-agents-kit@v0.1.1`.
+- **[devcontainer](/pl/kit/devcontainer)** — Szablon Dev Containers i obrazy bazowe dostarczane bez agentów kodujących. Przypięty do `devcontainer-kit@v0.1.4`.
+- **[vim](/pl/kit/vim)** — Edytor terminalowy z przeglądarką planów tylko do odczytu i podglądem Markdown. Przypięty do `deepworkplan-vim@v0.4.2`.
+
+Rejestr dodatków i deskryptory są dostarczane w becie v7, wydaniu przedpremierowym: `v7.0.0-beta.1`
 
 ### Przykłady
 

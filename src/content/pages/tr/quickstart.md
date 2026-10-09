@@ -285,3 +285,11 @@ Onboarding tamamlandığında depo, metodolojinin temel direkleri olan iki kalı
 
 Herhangi biri bu istemi herhangi bir depoda çalıştırabilir — ve herhangi bir yapay zeka ajanının
 pilotlayabileceği bir kod tabanıyla bitirebilir.
+
+## Sonraki adımlar
+
+- [Metodolojiyi okuyun](/methodology)
+- [Spesifikasyon](/spec)
+- [Kite göz atın](/kit)
+- [Örnekleri görün](/examples)
+- [İsteğe bağlı: DeepWorkPlan Vim terminal düzenleyicisi](/kit/vim)

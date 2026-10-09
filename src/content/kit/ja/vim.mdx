@@ -1,0 +1,142 @@
+---
+title: DeepWorkPlan Vim
+description: "Deep Work Plan のターミナルエディタ。コマンド索引、計画ブラウザ、Markdown ビューアを備えた Neovim 0.12+ 設定。"
+kind: addon
+lang: ja
+order: 6
+software:
+  applicationCategory: DeveloperApplication
+  operatingSystem: [macOS, Linux, WSL]
+  license: https://www.gnu.org/licenses/gpl-3.0.html
+  installUrl: https://deepworkplan.com/vim/install.sh
+  sameAs:
+    - https://github.com/DailybotHQ/deepworkplan-vim
+---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
+
+# DeepWorkPlan Vim
+
+**DeepWorkPlan Vim** は Deep Work Plan のターミナルエディタです。ターミナルで作業する人とコーディングエージェントのための Neovim 設定で、計画もドキュメントもすべてのコマンドの索引も、キー操作ひとつで手の届く場所にあります。
+
+これは独立した製品で、Deep Work Plan v7 ベータ（`v7.0.0-beta.1`、プレリリース）の任意の `vim` アドオンとして提供されています。Deep Work Plan はどのエディタとも、エディタなしでも動作し、このエディタも Deep Work Plan を必要としません。マシンには単独で追加でき、計画があってもなくてもエディタとして動作します。このページはリリース **v0.4.2** を説明しています。
+
+## なぜ Deep Work Plan にターミナルエディタなのか
+
+Deep Work Plan は `.dwp/plans/` 以下の Markdown のフォルダです。ゴール、アトミックなタスク、検証ゲート、継続的なログで構成されます。人がレビューし、エージェントが実行し、どちらもターミナルで行うことが多くあります。この作業のために作られたエディタは、計画自体、その周りのドキュメント、そして両者の間を移動するキー操作という 3 つを手元に置きます。
+
+DeepWorkPlan Vim はそのエディタです。言語サーバー、補完、リンティング、フォーマット、あいまい検索、ファイルツリー、厳選したカラーテーマを遅延読み込みで備えた、整えられた Neovim 設定に、Deep Work Plan のエディタたらしめるいくつかの画面が加わります。
+
+<VimInDwpLoop lang="ja" class="not-prose my-10" />
+
+## ツアー：古くならないコマンド索引
+
+`SPC h h`（Space がリーダーキー）を押すか `:DwpCommands` を実行すると、エディタが持つすべてのマッピングが 1 行の説明付きで一覧表示されます。一覧は実際のキーマップから生成されるため、どこで定義したマッピングも登録なしで索引に現れ、索引が古くなることはありません。
+
+ツアーはこれだけです。`nvim` を起動し、Space、`h`、`h` と押してください。
+
+<VimCommandIndex lang="ja" class="not-prose my-10" />
+
+## 得られるもの
+
+5 つの機能が、それぞれキー操作ひとつで使えます。
+
+| 機能 | キー | 内容 |
+|---|---|---|
+| 生成されるコマンド索引 | `SPC h h` | 設定内のすべてのマッピングを、実際のキーマップから生成して一覧にします。 |
+| VS Code 風の操作 | `<C-a>`, `SPC y` | 1 キーでファイル全体を選択し、システムクリップボードへコピーします。クリップボードはシステム共通なので、単独の `y` もそこにコピーされます。 |
+| Deep Work Plan ブラウザ | `SPC P` | リポジトリ内の計画を状態別にまとめて進捗バーとともに表示するサイドバーと、1 つの計画を読むリーダー。 |
+| Markdown ビューア | `SPC m p`, `SPC m r` | ブラウザで Markdown をプレビューするか、バッファ内で描画します。 |
+| 検証付きインストーラ | — | macOS、Linux、WSL 向けの自己完結的なインストーラ。Windows には文書化された手動の手順があります。 |
+
+## エディタを離れずに計画を読む
+
+`SPC P`、`:DwpPlans`、またはステータスラインのセグメントのクリックで、計画のサイドバーが開きます。現在のディレクトリと Neovim の設定ディレクトリにあるすべての `.dwp/plans/` フォルダが対象で、注意が最も必要なものから順に並びます。エディタ上のラベルは `Working`、`Needs attention`、`Ready`、`Not started`、`Done` です。各計画には進捗バーが表示されます。
+
+計画で Enter を押すとリーダーが開きます。1 文のゴール、状態と進捗、現在のタスクに印を付けたタスクチェックリスト、そして計画自身のファイルへの分かりやすい移動先が表示されます。ステータスラインには現在アクティブな計画が表示され、スタート画面には上位 3 件が並びます。これらの画面は計画を説明するだけで、`.dwp/` には書き込みません。
+
+計画の Markdown ファイルをその場で読むには、`SPC m p` で現在のバッファをブラウザでプレビューし、`SPC m r` でバッファ内に描画します。どちらも Markdown バッファでのみ動作します。
+
+## インストール
+
+インストールは 3 つのコマンドです。スクリプトをダウンロードし、このサイトが配布するファイルの SHA-256 と照合してから実行します。インストーラは自身のリリースに固定されているため、このページが説明するリリースである `v0.4.2` を正確にインストールします。代わりに変化し続ける `main` ブランチに追従するには、`DWP_VIM_REF=main bash install.sh` を使います。
+
+<VimInstall lang="ja" />
+
+インストーラは次の順に実行します。
+
+1. OS とパッケージマネージャを確認し、git、curl、Lua インタプリタが足りなければインストールします。
+2. 既存の Neovim 設定に手を付ける前に確認します。端末なしでパイプ実行された場合は、何も変更せずに停止します。
+3. リポジトリを `~/.config/nvim` にクローンします。すでにある場合は更新します。
+4. リポジトリ自身の `lua install.lua` を実行します。
+5. プラグインをヘッドレスでインストールするため、終了して開き直す手順はありません。
+
+ここで配布しているスクリプトは、`v0.4.2` タグの `install.sh` とバイト単位で同一のコピーです。先に読むには、`curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` でダウンロードし、上に表示された値と SHA-256 を照合し、読んでから `bash install.sh` を実行してください。
+
+## 要件とプラットフォーム
+
+- Neovim 0.12 以降。先に Neovim をインストールしてください。インストーラは Neovim をインストールしません。
+- Lua：`lua`、`lua5.4`、`luajit` のいずれか。足りなければインストーラが追加します。
+- macOS、Linux、WSL ではインストーラを実行できます。Windows にはリポジトリ README に手動の手順があります。winget で Neovim をインストールし、リポジトリを `%LOCALAPPDATA%\nvim` にクローンして、Git Bash から `lua install.lua` を実行します。
+- GPL-3.0 ライセンス：自由に利用、研究、改変できます。
+
+## 更新、バージョン固定、アンインストール
+
+更新するには、より新しいリリースのインストーラを実行します。再実行すると、既存の DeepWorkPlan Vim のチェックアウトをそのインストーラのリリースへ移動し、ブランチはそのまま保持し、ローカルの変更をリセットすることはありません。ローカルの変更やコミットが失われる場合は、停止して何も変更しません。
+
+別のタグ、ブランチ、コミットをインストールするには `DWP_VIM_REF` を設定します。タグをおすすめします。`v0.4.0` より前のリリースには、VS Code 風の操作、計画ブラウザ、Markdown ビューア、このインストーラが含まれていません。
+
+```bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
+```
+
+アンインストールするには、設定ディレクトリで `lua delete.lua` を実行します。設定、プラグイン、Mason のデータ、キャッシュと状態、インストーラがコピーしたフォントを削除し、Neovim 本体とシステムのパッケージはそのまま残します。
+
+```bash
+cd ~/.config/nvim && lua delete.lua
+```
+
+## よくある質問
+
+### Neovim の設定は上書きされますか？
+
+いいえ、あなたの承認なしには上書きされません。DeepWorkPlan Vim ではない設定が見つかると、対話実行では `~/.config/previous-deepworkplan-vim` に移す前に確認します。端末がない場合や、そのバックアップ先がすでに存在する場合は、何も変更せずに停止します。
+
+### Windows で動きますか？
+
+インストーラは Windows では動作しません。リポジトリ README の手動の手順を使うか、WSL の中でインストーラを実行してください。
+
+### 使うのに Deep Work Plan は必要ですか？
+
+いいえ。まずはエディタです。Deep Work Plan のスキルをインストールすることも必要とすることもありません。`.dwp/plans/` フォルダが存在するまで、計画ブラウザに一覧するものがないだけです。
+
+### v7 の vim アドオンはどう使いますか？
+
+Deep Work Plan v7 ベータは、オンボーディング中にこのエディタを任意の `vim` アドオンとして提示します。アドオンはエディタの `addon/surface.json` を通じて既存のインストールを読み取り専用で検出し、固定されたチェックサム検証済みのインストールは、あなたの同意がある場合にのみ提示します。明示的な承認なしに既存の Neovim 設定を上書きすることはなく、必須になることもありません。
+
+### コーディングエージェントはどう使いますか？
+
+ターミナルで動く人とコーディングエージェントのために作られています。キーバインドはコントラクトテストで固定されているため、筋肉記憶もエージェントの期待もアップデート後に保たれます。
+
+### どのバージョンが入りますか？
+
+インストーラは、`DWP_VIM_REF` を設定しない限り、自身が属するリリース（現在は `v0.4.2`）をインストールします。`DWP_VIM_REF=main` を設定すると `main` に追従します。このページはリリース `v0.4.2` を説明しており、ここに挙げたすべての機能を含んでいます。
+
+### ライセンスと由来は？
+
+GPL-3.0 です。Andrés M Prieto による mu-vim から派生しており、クレジットはリポジトリに残されています。
+
+## ソースとライセンス
+
+ソースは [DeepWorkPlan Vim リポジトリ](https://github.com/DailybotHQ/deepworkplan-vim) にあります。公開されており GPL-3.0 ライセンスで、[mu-vim](https://github.com/AndresMpa/mu-vim) から派生しています。
+
+## 関連するキットのエントリ
+
+- [Devcontainer](/kit/devcontainer) — 再現可能な開発環境（最初のアドオン）
+- [Dailybot](/kit/dailybot) — チームに見える計画ライフサイクル報告（2 番目のアドオン）
+- [AI Diff Reviewer](/kit/ai-diff-reviewer) — 計画の最終レビューでのローカルレビュー（5 番目のアドオン）
+- [Herdr](/kit/herdr) — Herdr のペインでピアエージェントにタスクを委任（v7 ベータ）
+- [Agentkit](/kit/agentkit) — あらゆるターミナルのコーディングエージェントを 1 つのコマンドで扱い、ヘッドレス委任も可能（v7 ベータ）

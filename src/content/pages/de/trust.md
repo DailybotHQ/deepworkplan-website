@@ -31,6 +31,14 @@ curl -fsSL -o SHA256SUMS \
 
 Releases sind mit **Prüfsummen versehen, aber nicht signiert** — Signierung (cosign oder Betreuer-GPG) ist ein dokumentierter nächster Schritt, keine aktuelle Aussage. Da alles offen ist, können Sie auch jede Datei gegen das Repository bei seinem Tag vergleichen.
 
+Dieselbe Regel gilt für den Installer von DeepWorkPlan Vim: Seine Seite zeigt das SHA-256 des aktuell ausgelieferten Skripts samt Anleitung zum Herunterladen, Prüfen, Verifizieren und Ausführen. [Den Installer von DeepWorkPlan Vim prüfen](/kit/vim#inspect-before-you-run)
+
+Pre-Releases werden auf dieselbe Weise verifiziert. Die v7-Beta, v7.0.0-beta.1, ist ein GitHub-Pre-Release mit eigener SHA256SUMS-Datei und nicht das stabile Release. Diese Website bindet sie ein, um sie im Einsatz zu testen: installiert über ihren fixierten Tag und gegen diese Prüfsummen geprüft.
+
+```bash
+npx --yes skills add DailybotHQ/deepworkplan-skill@v7.0.0-beta.1 --skill deepworkplan -y
+```
+
 ---
 
 ## Eine Schwachstelle melden

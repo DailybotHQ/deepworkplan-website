@@ -745,6 +745,7 @@ export const id: SiteTranslations = {
       { label: 'Spesifikasi', href: '/spec' },
       { label: 'Telusuri kit', href: '/kit' },
       { label: 'Lihat contoh', href: '/examples' },
+      { label: 'Opsional: editor terminal DeepWorkPlan Vim', href: '/kit/vim' },
     ],
   },
 
@@ -1290,6 +1291,11 @@ export const id: SiteTranslations = {
     codeLabel: 'shell',
     verifyNote:
       'Rilis ber-checksum, bukan ditandatangani — penandatanganan (cosign atau GPG pengelola) adalah langkah berikutnya yang terdokumentasi, bukan klaim saat ini. Karena semuanya terbuka, Anda juga dapat membandingkan file mana pun terhadap repositori pada tag-nya.',
+    vimNote:
+      'Aturan yang sama berlaku untuk pemasang DeepWorkPlan Vim: halamannya menampilkan SHA-256 skrip yang disajikan sekarang, beserta langkah unduh, periksa, verifikasi, dan jalankan.',
+    vimLinkLabel: 'Periksa pemasang DeepWorkPlan Vim',
+    betaNote:
+      'Pra-rilis diverifikasi dengan cara yang sama. Beta v7, v7.0.0-beta.1, adalah pra-rilis GitHub dengan SHA256SUMS-nya sendiri, dan bukan rilis stabil. Situs ini menyertakannya untuk mengujinya di lapangan: dipasang melalui tag yang dipatok dan diperiksa terhadap checksum tersebut.',
     disclosureTitle: 'Laporkan kerentanan',
     disclosureBody:
       'Menemukan masalah keamanan? Laporkan secara pribadi melalui pelaporan kerentanan privat GitHub di repositori yang relevan — skill atau situs web (lihat tautan kebijakan keamanan di bawah) — daripada membuka issue publik yang akan mengekspos masalah sebelum ada perbaikan.',

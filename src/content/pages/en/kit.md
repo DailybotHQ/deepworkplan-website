@@ -1,7 +1,7 @@
 ---
 title: "The Deep Work Plan Kit"
 description: "The skill and its nine sub-skills, commands, agent adapters, onboarding presets, opt-in add-ons, and examples that make Deep Work Plan runnable anywhere."
-lastUpdated: 2026-09-28
+lastUpdated: 2026-10-09
 ---
 
 ## The Deep Work Plan Kit
@@ -56,6 +56,18 @@ Capabilities the onboard flow layers onto a repo. Four are optional and never pa
 - **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades.
 - **Design system** — an interface-scoped `DESIGN.md` (at `docs/DESIGN.md`, referenced from `AGENTS.md`) reasoned from the repo's real design source, with profiles for visual UI, styled CLI output, and conversational messaging, so agents generate on-brand interface output; a detected design system makes the offer mandatory while installation stays acceptance-gated — the visual profile is strongly recommended when detected, the CLI and conversational profiles are recommended when detected and always asked about.
 - **AI Diff Reviewer** — the required local review: onboarding installs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, and every Final Review's security pass runs it; optional Flow B adds a CI PR merge gate sharing the same extension, offered explicitly and never installed unrequested.
+
+### Ecosystem
+
+**The methodology works alone. Addons amplify it.** Each addon is a thin integrator inside the Deep Work Plan skill, pinned by tag to a product with its own repository, release and interface version. Every product works without Deep Work Plan, and no addon is required.
+
+- **Deep Work Plan skill** — Create, execute, verify, resume and refine plans. Needs no addon.
+- **[herdr](/kit/herdr)** — Peers in Herdr panes, on any machine: interactive delegation with one authorized reply. Pinned at `herdr-peers@v0.1.0`.
+- **[agentkit](/kit/agentkit)** — One ak command for every terminal coding agent: headless delegation in a worktree. Pinned at `coding-agents-kit@v0.1.1`.
+- **[devcontainer](/kit/devcontainer)** — A Dev Containers template and base images that ship without coding agents. Pinned at `devcontainer-kit@v0.1.4`.
+- **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v0.4.2`.
+
+The addon registry and descriptors ship in the v7 beta, a pre-release: `v7.0.0-beta.1`
 
 ### Examples
 

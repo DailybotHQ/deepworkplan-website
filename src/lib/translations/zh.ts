@@ -736,6 +736,7 @@ export const zh: SiteTranslations = {
       { label: '规范', href: '/spec' },
       { label: '浏览套件', href: '/kit' },
       { label: '查看示例', href: '/examples' },
+      { label: '可选：DeepWorkPlan Vim 终端编辑器', href: '/kit/vim' },
     ],
   },
 
@@ -1265,6 +1266,11 @@ export const zh: SiteTranslations = {
     codeLabel: 'shell',
     verifyNote:
       '发布版本有校验和，但未经签名——签名（cosign 或维护者 GPG）是已记录的下一步计划，而非当前的承诺。由于一切都是公开的，你也可以将任意文件与仓库在其 tag 处的内容进行比对。',
+    vimNote:
+      '同样的规则也适用于 DeepWorkPlan Vim 的安装程序：其页面会显示当前提供的脚本的 SHA-256，并给出下载、检查、验证、运行的步骤。',
+    vimLinkLabel: '检查 DeepWorkPlan Vim 安装程序',
+    betaNote:
+      '预发布版本的验证方式相同。v7 beta 版本 v7.0.0-beta.1 是 GitHub 上的预发布版本，带有自己的 SHA256SUMS，它不是稳定版本。本站内置它以进行实地测试：按其固定的 tag 安装，并依据这些校验和进行核对。',
     disclosureTitle: '报告漏洞',
     disclosureBody:
       '发现了安全问题？请通过 GitHub 的私密漏洞报告功能，在相关仓库——技能或网站（详见下方链接的安全政策）——上私密报告，而非公开提交 issue，因为公开提交会在修复完成前暴露问题。',

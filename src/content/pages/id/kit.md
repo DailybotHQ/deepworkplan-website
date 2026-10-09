@@ -1,7 +1,7 @@
 ---
 title: "Kit Deep Work Plan"
 description: "Skill dan sembilan sub-skill-nya, command, adapter agent, preset onboarding, addon opt-in, dan contoh yang membuat Deep Work Plan dapat dijalankan di mana saja."
-lastUpdated: 2026-05-31
+lastUpdated: 2026-10-09
 ---
 
 ## Kit Deep Work Plan
@@ -57,6 +57,18 @@ Kemampuan yang ditambahkan alur onboard ke sebuah repo. Empat bersifat opsional 
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan.
 - **Sistem desain** — sebuah `DESIGN.md` bercakupan antarmuka (di `docs/DESIGN.md`, dirujuk dari `AGENTS.md`) yang dinalar dari sumber desain nyata repo, dengan profil untuk UI visual, output CLI yang bergaya, dan perpesanan percakapan, sehingga agent menghasilkan keluaran antarmuka yang sesuai brand; ketika sebuah sistem desain terdeteksi, penawarannya wajib tetapi instalasinya dijaga oleh penerimaan — profil visual sangat direkomendasikan saat terdeteksi, profil CLI dan percakapan direkomendasikan ketika terdeteksi dan selalu ditanyakan.
 - **AI Diff Reviewer** — tinjauan lokal yang wajib: onboarding memasang [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, dan pemeriksaan keamanan setiap Final Review menjalankannya; Flow B opsional menambahkan gerbang merge PR CI yang berbagi ekstensi yang sama, ditawarkan secara eksplisit dan tidak pernah dipasang tanpa diminta.
+
+### Ekosistem
+
+**Metodologi bekerja sendiri. Addon memperkuatnya.** Setiap addon adalah integrator tipis di dalam skill Deep Work Plan, dipatok berdasarkan tag ke sebuah produk dengan repositori, rilis, dan versi antarmukanya sendiri. Setiap produk berfungsi tanpa Deep Work Plan, dan tidak ada addon yang wajib.
+
+- **Skill Deep Work Plan** — Membuat, menjalankan, memverifikasi, melanjutkan, dan menyempurnakan rencana. Tidak memerlukan addon.
+- **[herdr](/id/kit/herdr)** — Rekan di panel Herdr, di mesin mana pun: delegasi interaktif dengan satu balasan yang diotorisasi. Dipatok pada `herdr-peers@v0.1.0`.
+- **[agentkit](/id/kit/agentkit)** — Satu perintah ak untuk setiap coding agent di terminal: delegasi headless di dalam worktree. Dipatok pada `coding-agents-kit@v0.1.1`.
+- **[devcontainer](/id/kit/devcontainer)** — Template Dev Containers dan image dasar yang dikirimkan tanpa coding agent. Dipatok pada `devcontainer-kit@v0.1.4`.
+- **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v0.4.2`.
+
+Registri addon dan deskriptor dikirimkan dalam beta v7, sebuah pra-rilis: `v7.0.0-beta.1`
 
 ### Contoh
 

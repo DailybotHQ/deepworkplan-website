@@ -311,6 +311,20 @@ how to verify, the disclosure contact, and a `lastUpdated` date. Keep every valu
 `"planned"` until a real signature ships). Refresh `lastUpdated` and the skill
 `version` when they change.
 
+The vendored `.agents/skills/deepworkplan/SKILL.md` version is stamped at build
+time (`scripts/stamp-versions.mjs`). A **stable** vendored version becomes
+`skill.version` (the release the unpinned `skill.install` line and the
+`releases/latest` checksums resolve to) and retires any `prerelease` block. A
+**pre-release** (since 2026-10-09: `7.0.0-beta.1`, vendored to field-test the
+v7 beta) is stamped only into the `prerelease` block — version, status
+"pre-release (not the stable release)", the pinned install line and that
+release's `SHA256SUMS` URL — while `skill.version` keeps naming the stable
+release (`6.1.0`). The stamp derives the block's install line and `SHA256SUMS`
+URL from the version, `/trust` renders its install line from the manifest, and
+`tests/unit/lib/trust-manifest.test.ts` pins all of it to the vendored
+`SKILL.md`. `/trust` says the same in every language. Never describe a
+pre-release as stable.
+
 ### Verifiable install (provenance)
 
 The skill is Markdown-first — no network calls, no telemetry — so the realistic

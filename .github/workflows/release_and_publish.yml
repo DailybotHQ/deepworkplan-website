@@ -269,12 +269,15 @@ jobs:
           echo "::set-env name=GITHUB_RELEASE_TAG::$GITHUB_RELEASE_TAG"
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+      - name: Step 4a - 🔐 Release notes from CHANGELOG.md + SHA256SUMS
+        run: bash .github/scripts/release_assets.sh "$GITHUB_RELEASE_TAG"
       - name: Step 5 - 🚀 Publish GitHub release
         uses: ncipollo/release-action@v1
         with:
           name: Release ${{ env.GITHUB_RELEASE_TAG }}
           tag: ${{ env.GITHUB_RELEASE_TAG }}
-          bodyFile: git_logs_output.txt
+          bodyFile: release_notes.md
+          artifacts: SHA256SUMS
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
       - name: Step 6 - 📦 Publish the official deepworkplan CLI to npm
         id: publish_npm_package

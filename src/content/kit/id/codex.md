@@ -21,6 +21,13 @@ Codex mendukung DWP melalui prosedur command markdown.
 
 Command DWP tersimpan sebagai prosedur markdown yang dibaca agent saat dipanggil; aturan dipasang di bawah `.codex/`.
 
+Opsional: [coding-agents-kit](/kit/agentkit) dapat memasang CLI ini dan menjalankannya dengan `ak codex`. Penginstal resmi dari vendor juga sama baiknya.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install codex
+```
+
 ## Pemanggilan
 
 Gunakan prefix `#`:

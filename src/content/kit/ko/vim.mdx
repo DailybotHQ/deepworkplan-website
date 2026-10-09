@@ -1,0 +1,142 @@
+---
+title: DeepWorkPlan Vim
+description: "Deep Work Plan의 터미널 에디터. 명령 색인, 계획 브라우저, Markdown 뷰어를 갖춘 Neovim 0.12+ 설정."
+kind: addon
+lang: ko
+order: 6
+software:
+  applicationCategory: DeveloperApplication
+  operatingSystem: [macOS, Linux, WSL]
+  license: https://www.gnu.org/licenses/gpl-3.0.html
+  installUrl: https://deepworkplan.com/vim/install.sh
+  sameAs:
+    - https://github.com/DailybotHQ/deepworkplan-vim
+---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
+
+# DeepWorkPlan Vim
+
+**DeepWorkPlan Vim**은 Deep Work Plan의 터미널 에디터예요. 터미널에서 일하는 사람과 코딩 에이전트를 위한 Neovim 설정으로, 계획과 문서, 모든 명령의 색인이 키 하나 거리에 있어요.
+
+이것은 독립된 제품으로, Deep Work Plan v7 베타(`v7.0.0-beta.1`, 사전 출시 버전)의 선택 `vim` 애드온으로 제공돼요. Deep Work Plan은 어떤 에디터와도, 에디터 없이도 동작하며, 이 에디터도 Deep Work Plan을 요구하지 않아요. 컴퓨터에 따로 추가하면 되고, 계획이 있든 없든 에디터로 동작해요. 이 페이지는 릴리스 **v0.4.2**을 설명해요.
+
+## Deep Work Plan에 터미널 에디터가 필요한 이유
+
+Deep Work Plan은 `.dwp/plans/` 아래의 Markdown 폴더예요. 목표, 원자적 작업, 검증 게이트, 계속 쌓이는 로그로 이뤄져요. 사람은 검토하고 에이전트는 실행하며, 둘 다 터미널에서 하는 경우가 많아요. 이 일에 맞춰 만든 에디터는 세 가지를 가까이 둬요. 계획 자체, 그 주변의 문서, 그리고 둘 사이를 오가는 키예요.
+
+DeepWorkPlan Vim이 바로 그런 에디터예요. 언어 서버, 자동 완성, 린팅, 포매팅, 퍼지 검색, 파일 트리, 엄선한 색상 테마를 지연 로딩으로 갖춘 잘 다듬은 Neovim 설정에, Deep Work Plan 에디터답게 만드는 몇 가지 화면이 더해져요.
+
+<VimInDwpLoop lang="ko" class="not-prose my-10" />
+
+## 둘러보기: 낡을 수 없는 명령 색인
+
+`SPC h h`(Space가 리더 키예요)를 누르거나 `:DwpCommands`를 실행하면, 에디터가 가진 모든 매핑을 한 줄 설명과 함께 보여 줘요. 목록은 실제 키맵에서 생성되므로 어디에서 정의한 매핑이든 등록 없이 색인에 나타나고, 색인이 낡을 수도 없어요.
+
+둘러보기는 이게 전부예요. `nvim`을 실행하고 Space, `h`, `h`를 차례로 누르세요.
+
+<VimCommandIndex lang="ko" class="not-prose my-10" />
+
+## 얻을 수 있는 것
+
+다섯 가지 기능이 있고, 모두 키 하나 거리에 있어요.
+
+| 기능 | 키 | 하는 일 |
+|---|---|---|
+| 생성되는 명령 색인 | `SPC h h` | 설정의 모든 매핑을 실제 키맵에서 생성해 보여 줘요. |
+| VS Code 스타일 제스처 | `<C-a>`, `SPC y` | 키 하나로 파일 전체를 선택하고 시스템 클립보드로 복사해요. 클립보드가 시스템 전체에서 공유되므로 단독 `y`도 그곳에 복사돼요. |
+| Deep Work Plan 브라우저 | `SPC P` | 저장소의 계획을 상태별로 묶고 진행 막대와 함께 보여 주는 사이드바와, 계획 하나를 읽는 리더예요. |
+| Markdown 뷰어 | `SPC m p`, `SPC m r` | 브라우저에서 Markdown을 미리 보거나 버퍼 안에서 렌더링해요. |
+| 검증된 설치 프로그램 | — | macOS, Linux, WSL용 자체 완결형 설치 프로그램이고, Windows에는 문서화된 수동 방법이 있어요. |
+
+## 에디터를 떠나지 않고 계획 보기
+
+`SPC P`, `:DwpPlans`, 또는 상태 표시줄 구간을 클릭하면 계획 사이드바가 열려요. 현재 디렉터리와 Neovim 설정 디렉터리 아래의 모든 `.dwp/plans/` 폴더를 다루고, 주의가 가장 필요한 계획부터 묶어 보여 줘요. 에디터에서 쓰는 라벨은 `Working`, `Needs attention`, `Ready`, `Not started`, `Done`이에요. 각 계획에는 진행 막대가 표시돼요.
+
+계획에서 Enter를 누르면 리더가 열려요. 한 문장짜리 목표, 상태와 진행률, 현재 작업을 표시한 작업 체크리스트, 그리고 계획 자체 파일로 이동하는 쉬운 말 링크가 보여요. 상태 표시줄에는 지금 활성인 계획이 나오고, 시작 화면에는 상위 세 개가 나열돼요. 이 화면들은 계획을 설명할 뿐 `.dwp/`에는 절대 쓰지 않아요.
+
+계획의 Markdown 파일을 그 자리에서 읽으려면, `SPC m p`로 현재 버퍼를 브라우저에서 미리 보고 `SPC m r`로 버퍼 안에서 렌더링하세요. 둘 다 Markdown 버퍼에서만 동작해요.
+
+## 설치
+
+설치는 세 가지 명령이에요. 스크립트를 내려받고, 이 사이트가 제공하는 파일의 SHA-256과 대조한 다음 실행해요. 설치 프로그램은 자신의 릴리스로 고정되어 있어서, 이 페이지가 설명하는 릴리스인 `v0.4.2`을 정확히 설치해요. 대신 계속 바뀌는 `main` 브랜치를 따르려면 `DWP_VIM_REF=main bash install.sh`를 사용하세요.
+
+<VimInstall lang="ko" />
+
+설치 프로그램은 다음 순서로 진행해요.
+
+1. 운영체제와 패키지 관리자를 확인하고, git, curl, Lua 인터프리터가 없으면 설치해요.
+2. 기존 Neovim 설정을 건드리기 전에 먼저 물어봐요. 터미널 없이 파이프로 실행되면 아무것도 바꾸지 않고 멈춰요.
+3. 저장소를 `~/.config/nvim`에 클론하고, 이미 있으면 업데이트해요.
+4. 저장소 자체의 `lua install.lua`를 실행해요.
+5. 플러그인을 헤드리스로 설치하므로 종료했다가 다시 여는 단계가 없어요.
+
+여기서 제공하는 스크립트는 `v0.4.2` 태그의 `install.sh`와 바이트 단위로 동일한 사본이에요. 먼저 읽고 싶다면 `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`로 내려받고, 위에 표시된 값과 SHA-256을 비교한 다음, 읽어 본 뒤 `bash install.sh`를 실행하세요.
+
+## 요구 사항과 플랫폼
+
+- Neovim 0.12 이상. Neovim을 먼저 설치하세요. 설치 프로그램은 Neovim을 설치하지 않아요.
+- Lua: `lua`, `lua5.4`, `luajit` 중 하나. 없으면 설치 프로그램이 하나 추가해요.
+- macOS, Linux, WSL에서는 설치 프로그램을 실행해요. Windows에는 저장소 README에 수동 방법이 있어요. winget으로 Neovim을 설치하고, 저장소를 `%LOCALAPPDATA%\nvim`에 클론한 다음, Git Bash에서 `lua install.lua`를 실행하세요.
+- GPL-3.0 라이선스: 자유롭게 사용하고 연구하고 수정할 수 있어요.
+
+## 업데이트, 버전 고정, 제거
+
+업데이트하려면 더 새로운 릴리스의 설치 프로그램을 실행하세요. 다시 실행하면 기존 DeepWorkPlan Vim 체크아웃을 그 설치 프로그램의 릴리스로 옮기고, 브랜치는 그대로 두며, 로컬 변경은 절대 초기화하지 않아요. 로컬 변경이나 커밋이 사라질 상황이면 멈추고 아무것도 바꾸지 않아요.
+
+다른 태그, 브랜치 또는 커밋을 설치하려면 `DWP_VIM_REF`를 설정하세요. 태그를 권장해요. `v0.4.0` 이전 릴리스에는 제스처, 계획 브라우저, Markdown 뷰어, 이 설치 프로그램이 들어 있지 않아요.
+
+```bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
+```
+
+제거하려면 설정 디렉터리에서 `lua delete.lua`를 실행하세요. 설정, 플러그인, Mason 데이터, 캐시와 상태, 설치 프로그램이 복사한 글꼴을 지우고, Neovim 실행 파일과 시스템 패키지는 그대로 둬요.
+
+```bash
+cd ~/.config/nvim && lua delete.lua
+```
+
+## 자주 묻는 질문
+
+### 제 Neovim 설정을 덮어쓰나요?
+
+아니요, 승인 없이는 덮어쓰지 않아요. DeepWorkPlan Vim이 아닌 설정을 발견하면, 대화형 실행에서는 `~/.config/previous-deepworkplan-vim`으로 옮기기 전에 먼저 물어봐요. 터미널이 없거나 그 백업 경로가 이미 있으면 아무것도 바꾸지 않고 멈춰요.
+
+### Windows에서도 동작하나요?
+
+설치 프로그램은 Windows에서 실행되지 않아요. 저장소 README의 수동 방법을 쓰거나 WSL 안에서 설치 프로그램을 실행하세요.
+
+### 쓰려면 Deep Work Plan이 필요한가요?
+
+아니요. 무엇보다 에디터예요. Deep Work Plan 스킬을 설치하지도 요구하지도 않아요. `.dwp/plans/` 폴더가 생기기 전까지 계획 브라우저가 보여 줄 것이 없을 뿐이에요.
+
+### v7 vim 애드온은 이것을 어떻게 쓰나요?
+
+Deep Work Plan v7 베타는 온보딩 중에 이 에디터를 선택 `vim` 애드온으로 제안해요. 애드온은 에디터의 `addon/surface.json`을 통해 기존 설치를 읽기 전용으로 감지하고, 버전이 고정되고 체크섬이 검증된 설치는 동의할 때만 제안해요. 명시적인 승인 없이 기존 Neovim 설정을 덮어쓰지 않으며, 결코 필수가 아니에요.
+
+### 코딩 에이전트는 어떻게 쓰나요?
+
+터미널에서 일하는 사람과 코딩 에이전트를 위해 만들었어요. 키바인딩은 계약 테스트로 고정되어 있어서, 손에 익은 감각과 에이전트의 기대가 업데이트 후에도 유지돼요.
+
+### 어떤 버전을 받나요?
+
+`DWP_VIM_REF`를 설정하지 않으면 설치 프로그램은 자신이 속한 릴리스(현재는 `v0.4.2`)를 설치해요. `DWP_VIM_REF=main`은 `main`을 따라가요. 이 페이지는 여기 나열된 모든 기능을 담은 릴리스 `v0.4.2`을 설명해요.
+
+### 라이선스는 무엇이고 어디서 왔나요?
+
+GPL-3.0이에요. Andrés M Prieto의 mu-vim에서 파생되었고, 크레딧은 저장소에 남아 있어요.
+
+## 소스와 라이선스
+
+소스는 [DeepWorkPlan Vim 저장소](https://github.com/DailybotHQ/deepworkplan-vim)에 있어요. 공개되어 있고 GPL-3.0 라이선스이며, [mu-vim](https://github.com/AndresMpa/mu-vim)에서 파생되었어요.
+
+## 관련 키트 항목
+
+- [Devcontainer](/kit/devcontainer) — 재현 가능한 개발 환경(첫 번째 애드온)
+- [Dailybot](/kit/dailybot) — 팀에 보이는 계획 수명 주기 보고(두 번째 애드온)
+- [AI Diff Reviewer](/kit/ai-diff-reviewer) — 계획 Final Review 동안의 로컬 리뷰(다섯 번째 애드온)
+- [Herdr](/kit/herdr) — Herdr 페인의 피어 에이전트에게 작업 위임(v7 베타)
+- [Agentkit](/kit/agentkit) — 모든 터미널 코딩 에이전트를 위한 하나의 명령과 헤드리스 위임(v7 베타)

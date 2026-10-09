@@ -905,22 +905,18 @@ cmd_doctor() {
 
 # --------------------------------------------------------------------------
 # Herdr mesh — list agents / ask with [herdr-mesh] reply grant
-# Public peer names: herdr-peers, herdr-workspace-peers (legacy dailybot-* accepted)
+# Public peer names: herdr-peers, herdr-workspace-peers
 # --------------------------------------------------------------------------
 
 HERDR_WORKSPACE_PEERS_REL="config.d/herdr-workspace-peers"
 
 herdr_trust_peer_keys() {
   local peers_public="${HOME}/.ssh_host/config.d/herdr-peers"
-  local peers_legacy="${HOME}/.ssh_host/config.d/dailybot-peers"
   local workspace_peers="${HOME}/.ssh/${HERDR_WORKSPACE_PEERS_REL}"
-  local workspace_legacy="${HOME}/.ssh/config.d/dailybot-workspace-peers"
   local known="${HOME}/.ssh/known_hosts"
   local sources=()
   [ -f "$peers_public" ] && sources+=("$peers_public")
-  [ -f "$peers_legacy" ] && sources+=("$peers_legacy")
   [ -f "$workspace_peers" ] && sources+=("$workspace_peers")
-  [ -f "$workspace_legacy" ] && sources+=("$workspace_legacy")
   [ "${#sources[@]}" -gt 0 ] || return 0
   touch "$known"
   awk '
@@ -955,8 +951,6 @@ herdr_sync_workspace_peers() {
   local src=""
   if [ -f "${HOME}/.ssh_host/config.d/herdr-workspaces" ]; then
     src="${HOME}/.ssh_host/config.d/herdr-workspaces"
-  elif [ -f "${HOME}/.ssh_host/config.d/dailybot-workspaces" ]; then
-    src="${HOME}/.ssh_host/config.d/dailybot-workspaces"
   else
     return 0
   fi

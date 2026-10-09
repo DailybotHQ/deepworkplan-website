@@ -21,6 +21,13 @@ Claude Code имеет **полную** поддержку DWP через нат
 
 DWP поставляется как навыки в `.agents/skills/` (разрешаются через символьную ссылку `.claude/`). Claude Code обнаруживает их автоматически.
 
+Необязательно: [coding-agents-kit](/kit/agentkit) может установить этот CLI и запускать его командой `ak claude`. Официальный установщик поставщика работает так же хорошо.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install claude
+```
+
 ## Вызов
 
 Используйте префикс `/`:

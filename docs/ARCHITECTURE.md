@@ -96,14 +96,20 @@ src/
 │   │
 │   ├── editorial/          # Editorial primitives (Kicker, Rule, Lead, Figure, Reference)
 │   │
+│   ├── vim/                # DeepWorkPlan Vim page building blocks, embedded in the kit MDX
+│   │   └── VimInstall.astro        # Download → verify → run commands (no pipe into a shell) + copy button, consent callout, "inspect before you run" with the live installer SHA-256
+│   │
+│   ├── diagrams/           # Editorial Interactive Assets (see docs/DIAGRAM_COMPONENTS.md)
+│   │   └── kit/                    # incl. VimCommandIndex.astro (SPC h h plate), VimInDwpLoop.astro (plan browser + Markdown viewer beside the DWP loop) and KitEcosystem.astro (v7 ecosystem plate on the kit index: methodology works alone, addons pinned to products)
+│   │
 │   ├── pages/              # Shared page components (*Page.astro, QuickstartPage, readers)
 │   │   ├── ComparePage.astro       # Objective comparison and source notes
 │   │   ├── CompareMatrix.astro     # Responsive capability matrix
 │   │   └── FaqPage.astro           # Grouped FAQ with FAQPage JSON-LD
 │   │
 │   └── layout/
-│       ├── Header.svelte        # Masthead navigation + inline hurricane-lamp theme toggle
-│       └── MobileMenu.svelte    # Mobile nav menu
+│       ├── Header.svelte        # Masthead navigation + inline hurricane-lamp theme toggle (desktop nav from the lg breakpoint, hamburger below)
+│       └── MobileMenu.svelte    # Mobile nav menu (shown below lg)
 │
 ├── content/                 # Content Collections (one folder per active language)
 │   ├── methodology/         # Methodology docs (primary content)
@@ -112,7 +118,7 @@ src/
 │   ├── kit/                 # Kit catalog (same 17 language folders)
 │   └── pages/               # Agent-friendly Markdown endpoints (same 17 language folders)
 │
-├── content.config.ts        # Collection schemas (methodology, spec, kit, pages)
+├── content.config.ts        # Collection schemas (methodology, spec, kit, pages); kit accepts an optional `software` block
 ├── env.d.ts                 # TypeScript environment
 │
 ├── layouts/
@@ -124,6 +130,9 @@ src/
 │   ├── i18n.ts              # Centralized i18n config; getActiveLanguages() derived from translations/*.ts
 │   ├── language-codes.ts    # Dependency-free LANGUAGE_CODES tuple (imported by i18n + astro.config)
 │   ├── markdown-for-agents.ts  # Helpers for the agent-friendly .md endpoints
+│   ├── vim-installer.ts     # Build-time facts about /vim/install.sh (SHA-256, size, lines) read via Vite ?raw; the download → verify → run install commands bound to that digest, and URLs
+│   ├── software-schema.ts   # Optional kit `software` frontmatter (Zod) + buildSoftwareSchema() / combineJsonLd() for SoftwareApplication JSON-LD
+│   ├── redirect-map.ts      # REDIRECT_PAIRS (per-language aliases, incl. vim -> kit/vim and vim.md -> kit/vim.md) + ROOT_ONLY_REDIRECT_PAIRS
 │   ├── analytics.ts         # Analytics helpers
 │   ├── constances.ts        # Site constants
 │   └── translations/        # Modular translation system (one file per active language)
@@ -401,6 +410,7 @@ src/pages/
 ├── examples.astro       → /examples
 ├── compare.astro        → /compare
 ├── faq.astro            → /faq
+├── (no vim.astro)        /vim and /vim.md 301 to /kit/vim (REDIRECT_PAIRS); DeepWorkPlan Vim is documented once, at /kit/vim; /vim/install.sh is a static file
 ├── quickstart/           → /quickstart (canonical adoption page; /init, /setup, /onboarding 301 here)
 ├── methodology/
 │   ├── index.astro      → /methodology
@@ -445,7 +455,7 @@ const { Content } = await render(doc);
 
 `src/middleware.ts` enforces an **allowlist** of single-segment top-level paths. Any single-segment URL not in the set is rewritten to `/404` — **even if the file exists at `src/pages/<name>/index.astro`**. The allowlist is **derived** from one hand-edited set plus the language registry, so adding a new language requires no middleware edit at all:
 
-- `KNOWN_BASE_PATHS` — per-language page slugs (e.g. `about`, `contact`, `compare`, `faq`, `methodology`, `spec`, `kit`, `examples`, `quickstart`, `init`, `trust`, `developers`, `privacy`, `setup`, `onboarding`, `docs`). These exist for **every** language: at the root for the default language and under `/<lang>/<slug>` for every other active language. ONE place, covers all languages. (`init`/`setup`/`onboarding` redirect to `/quickstart`, the single canonical adoption page; `docs` redirects to `/developers`. `/init.md` itself is a standalone static file — `public/init.md` — never redirected, no HTML sibling, English-only.)
+- `KNOWN_BASE_PATHS` — per-language page slugs (e.g. `about`, `contact`, `compare`, `faq`, `methodology`, `spec`, `kit`, `examples`, `quickstart`, `init`, `trust`, `developers`, `vim`, `privacy`, `setup`, `onboarding`, `docs`). These exist for **every** language: at the root for the default language and under `/<lang>/<slug>` for every other active language. ONE place, covers all languages. (`init`/`setup`/`onboarding` redirect to `/quickstart`, the single canonical adoption page; `docs` redirects to `/developers`; `vim` redirects to `/kit/vim`. `/init.md` itself is a standalone static file — `public/init.md` — never redirected, no HTML sibling, English-only.)
 - `ROOT_ONLY_PATHS` — non-per-language paths (`api`, `internal`, `404`, `favicon.ico`, `favicon.svg`, `sitemap-index.xml`).
 - `PREFIXED_LANGUAGES` — active non-default language codes (`es`, `pt`, `zh`, …), derived from `getActiveNonDefaultLanguages()` in `src/lib/i18n.ts`. These are the valid single-segment language roots (`/es`, `/pt`, …).
 - `KNOWN_ROOT_PATHS` — derived union of the three sets above (`KNOWN_BASE_PATHS` ∪ `ROOT_ONLY_PATHS` ∪ `PREFIXED_LANGUAGES`).
@@ -468,6 +478,8 @@ When you add a new top-level page (e.g. `/guides`, `/foo`), you only edit ONE pl
 The bypass conditions (path contains `.` or starts with `/_astro/`, `/__vite`, `/@`) exist to let assets, HMR, and build artifacts through.
 
 **Adoption page `/quickstart` and adoption prompt `/init.md`.** The canonical adoption surface lives at `/quickstart` (default language) and `/<lang>/quickstart` for every other active language (`/es/quickstart`, `/pt/quickstart`, `/zh/quickstart`, …), served by `QuickstartPage.astro` + the page-wrapper pattern. `quickstart` is present in `KNOWN_BASE_PATHS`, so it works in every language without a per-language allowlist edit. Its companion agent prompt is published at the **canonical English-only, standalone** URL `/init.md` (regardless of which locale a user is browsing) — a plain static file at `public/init.md`, not a content-collection page: it has no HTML sibling and is never redirected. See `CANONICAL_INIT_MD_PATH` and `getCanonicalInitMarkdown()` in `src/lib/i18n.ts` / `src/lib/init-prompt.ts`. `/init`, `/setup`, and `/onboarding` (plus their `/<lang>/` variants) are permanent 301 redirects to `/quickstart`, configured in `astro.config.mjs`; the redirect source paths are also in `KNOWN_BASE_PATHS`.
+
+**DeepWorkPlan Vim: one official page per addon.** Vim is documented **once**, as a kit addon at `/kit/vim` (and `/<lang>/kit/vim`): `src/content/kit/<lang>/vim.mdx` ×17, embedding `VimInstall` (`src/components/vim/`) and the two figures `VimCommandIndex` and `VimInDwpLoop` (`src/components/diagrams/kit/`). There is no standalone `/vim` page: `/vim` and `/vim.md` (and the language-prefixed forms) are 301 aliases to `/kit/vim` and `/kit/vim.md` through `REDIRECT_PAIRS`, and `vim` stays in `KNOWN_BASE_PATHS` as a redirect source. The installer is the static file `public/vim/install.sh`, served at `/vim/install.sh` with a pinned `Content-Type` (`public/_headers`) and aliased from the apex `/install.sh` by `ROOT_ONLY_REDIRECT_PAIRS`; it is a byte-identical copy of `install.sh` at the product release named by `VIM_INSTALLER_TAG` (`v0.4.2`, served with its `install.sh.sha256`, SHA-256 `VIM_INSTALLER_TAG_SHA256` in `src/lib/vim-installer.ts`, pinned by `tests/unit/lib/vim-installer.test.ts`) and is never edited here — a new release is re-copied and both constants move together. Its SHA-256, size and line count shown on the page are computed at build time from those exact bytes (`src/lib/vim-installer.ts`). The page's `SoftwareApplication` structured data comes from the kit `software` frontmatter (`src/lib/software-schema.ts`) and is merged with the page's `TechArticle` in one JSON-LD `@graph`. Every statement about the product must trace to the product repository (the Vim claims ledger of PLAN_002_vim_flagship_official_page): the editor is a separate product, offered as the optional `vim` addon of the DWP v7 beta (a pre-release; never required), the page describes release `v0.4.2` (whose installer pins its own release; `DWP_VIM_REF` overrides it) and shows the install as download, verify, run — never a pipe into a shell, and no copy claims `vim.deepworkplan.com` is live. Claims for the v7 refresh trace to `PLAN_004_v7_kit_pages_and_vendor`'s `V7_CLAIMS_LEDGER.md` (rows C-39–C-50).
 
 ## Agent API
 
@@ -882,16 +894,19 @@ Dev-only portal at `/internal/`. Uses `InternalLayout` or `ShowcaseLayout` (neve
   **Vendored provenance recorded on 2026-09-17:** this copy was the released upstream tag **`v5.5.1`** (`3117819`), superseding `v5.5.0`, installed via the documented command `npx --yes skills add DailybotHQ/deepworkplan-skill@v5.5.1 --skill deepworkplan --force -y`. The recorded `diff -rq` was **byte-identical** against the tag's canonical `skills/deepworkplan/` tree — empty output — with `skills-lock.json` updated by the CLI itself (hash `f38b4f5c…`, superseding `019aecad…`).
 
 **Current website dogfood:** `.agents/skills/deepworkplan/SKILL.md` declares
-version **6.0.2**, installed from the released upstream tag and matched against
-its exact tree. The implemented DWP standard is **6.0.0**; the 6.x pack creates
-new plans with the v6 lifecycle by default. Existing plans keep their recorded
+version **7.0.0-beta.1**, the upstream GitHub **pre-release** (not the stable
+release), installed by its pinned tag and verified against the release
+`SHA256SUMS` (170 files, exact file set) on 2026-10-09 so this site field-tests
+the v7 beta. The beta declares DWP standard **7.0.0**; this repository's
+declaration stays **6.0.0** (still valid) until the field-test upgrade. The
+beta creates new plans with the v7 contract by default (v6 under 6.x). Existing plans keep their recorded
 generation and are never migrated implicitly.
 
 **`v5.4.0` is the release that absorbed this repository's own contribution.** Between 2026-09-13 and 2026-09-17 this copy deliberately ran **ahead of** upstream, carrying a reviewed re-adaptation that pinned the AI Diff Reviewer addon to v2.3.0, named the **incomplete review** as a state distinct from a clean pass, added the normative rule that a plan's temporary and analysis output belongs in that plan's own `analysis_results/`, and resolved a `tmp/`-versus-plan-output contradiction between two spec surfaces. That work was contributed upstream as `DailybotHQ/deepworkplan-skill` PR #45, merged 2026-09-17, and released as `v5.4.0` one minute later. **Installing the tag therefore closed the divergence rather than destroying it** — the only delta between the previous re-adapted tree and `v5.4.0` was the `version:` stamp in fifteen `SKILL.md` files, which is the strongest available evidence that the re-adaptation matched what shipped. Standard remains aligned to **5.0.0** (no schema-line change; `v5.4.0` is a documentation and addon-contract release).
 
-**Current v6.0.2 copy:** the vendored tree is byte-identical to the released upstream tag at commit `dd1e10e` (verified with `diff -rq` against `git archive` of the tag on 2026-10-01); `skills-lock.json` records hash `3a421e59ddcdd5593ce2f7cd1c7d6b836c9b8fb225fab2ee67ea7fc842d2d162`. v6.0.2 only repins the Dailybot addon docs to agent-skill v3.23.2, so this supersedes the historical v5.5.1, v6.0.0 and v6.0.1 provenance above. The plain released tag install overwrites nothing that is not already upstream. If a divergence is ever reintroduced — the repo-adapted path this section authorizes — re-stamp this paragraph to say what it carries and that a tag install will overwrite it, exactly as the 2026-09-13 entry did. Local adaptation remains the command kit (nine delegators: seven `dwp-*` plus `/skill-create` and `/agent-create`, refreshed from the skill's own `onboard/command-templates/` on 2026-09-17) and this provenance protocol. This repository keeps the AI Diff Reviewer local review as the baseline and, since 2026-09-25, also runs a CI self-review (`.github/workflows/self-review.yml`): a single grok leg label-gated on `ready` (remove and re-add the label to re-run). The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed — `ai-diff-reviewer` was refreshed to **v2.3.1** on 2026-09-17 and to **v3.1.1** on 2026-09-25 (PR #87 dogfood; installed `version:` asserted against the tag).
+**Previous v6.0.2 copy (2026-10-01 → 2026-10-09):** the vendored tree was byte-identical to the released upstream tag at commit `dd1e10e` (verified with `diff -rq` against `git archive` of the tag on 2026-10-01); `skills-lock.json` records hash `3a421e59ddcdd5593ce2f7cd1c7d6b836c9b8fb225fab2ee67ea7fc842d2d162`. v6.0.2 only repins the Dailybot addon docs to agent-skill v3.23.2, so this supersedes the historical v5.5.1, v6.0.0 and v6.0.1 provenance above. The plain released tag install overwrites nothing that is not already upstream. If a divergence is ever reintroduced — the repo-adapted path this section authorizes — re-stamp this paragraph to say what it carries and that a tag install will overwrite it, exactly as the 2026-09-13 entry did. Local adaptation remains the command kit (nine delegators: seven `dwp-*` plus `/skill-create` and `/agent-create`, refreshed from the skill's own `onboard/command-templates/` on 2026-09-17) and this provenance protocol. This repository keeps the AI Diff Reviewer local review as the baseline and, since 2026-09-25, also runs a CI self-review (`.github/workflows/self-review.yml`): a single grok leg label-gated on `ready` (remove and re-add the label to re-run). The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed — `ai-diff-reviewer` was refreshed to **v2.3.1** on 2026-09-17 and to **v3.1.1** on 2026-09-25 (PR #87 dogfood; installed `version:` asserted against the tag).
 
-**Current dailybot addon copy (2026-10-01):** `.agents/skills/dailybot/SKILL.md` declares version **3.23.2**, installed from the released upstream tag `v3.23.2` with `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot --force -y`; `skills-lock.json` records the content hash. The pack exposes 17 capabilities (the former Tasks sub-skill is now **Plan**, under `dailybot plan`), requires `dailybot-cli >= 3.9.0` as its baseline and `>= 3.25.0` for Plan. The vendored `deepworkplan` v6.0.2 addon text pins the same 3.23.2, so the two vendored copies and the website's public pages agree.
+**Current dailybot addon copy (2026-10-09):** `.agents/skills/dailybot/SKILL.md` declares version **3.23.3** (and `ai-diff-reviewer` **3.3.0**), refreshed by the release workflow's dogfood step for `v5.0.29` (previously `v3.23.2`, installed with `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot --force -y` on 2026-10-01); `skills-lock.json` records the content hash. The pack exposes 17 capabilities (the former Tasks sub-skill is now **Plan**, under `dailybot plan`), requires `dailybot-cli >= 3.9.0` as its baseline and `>= 3.25.0` for Plan. The vendored `deepworkplan` v6.0.2 addon text pins the same 3.23.2, so the two vendored copies and the website's public pages agree.
 
 ### Official CLI publishing (same release workflow)
 

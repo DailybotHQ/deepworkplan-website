@@ -21,6 +21,13 @@ OpenCode, l'agent de code open source, prend en charge DWP via AGENTS.md natif e
 
 DWP fournit AGENTS.md et les procédures de commande dans le dépôt ; OpenCode les découvre comme contexte du projet.
 
+Facultatif : [coding-agents-kit](/kit/agentkit) peut installer cette CLI et la lancer avec `ak opencode`. L’installateur officiel de l’éditeur fonctionne tout aussi bien.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install opencode
+```
+
 ## Invocation
 
 Utilisez le préfixe `#` :

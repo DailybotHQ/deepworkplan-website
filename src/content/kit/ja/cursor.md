@@ -21,6 +21,13 @@ Cursor は、プロジェクトルールとコマンドファイルを通じて 
 
 DWP コマンドはプロジェクトの配下に Markdown として存在します。Cursor はそのルールの仕組みを通じてそれらを読みます。
 
+任意：[coding-agents-kit](/kit/agentkit) はこの CLI をインストールし、`ak cursor` で起動できます。ベンダー公式のインストーラーでも同様に使えます。
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install cursor
+```
+
 ## 呼び出し
 
 `#` プレフィックスを使います（Cursor が `/` を横取りするため）。

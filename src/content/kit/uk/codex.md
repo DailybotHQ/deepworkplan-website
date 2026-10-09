@@ -21,6 +21,13 @@ Codex підтримує DWP через процедури команд у фо�
 
 Команди DWP існують як процедури markdown, які агент читає під час виклику; правила встановлюються в `.codex/`.
 
+Необов’язково: [coding-agents-kit](/kit/agentkit) може встановити цей CLI і запускати його командою `ak codex`. Офіційний інсталятор постачальника працює так само добре.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install codex
+```
+
 ## Виклик
 
 Використовуйте префікс `#`:

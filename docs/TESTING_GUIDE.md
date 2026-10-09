@@ -23,7 +23,20 @@ pnpm run test:watch
 
 # Run with coverage report
 pnpm run test:coverage
+
+# Public-hygiene check over tracked files (bash + grep, no network)
+bash scripts/check-public-hygiene.sh
 ```
+
+`scripts/check-public-hygiene.sh` enforces the public repository standard
+(ecosystem amendment A3 S3): no personal absolute paths, private
+organization/repository/tooling names, non-public `@dailybot.com` addresses or
+secret-shaped literals in tracked files (the vendored `.agents/skills/` copies
+are skipped). It prints `path:line: rule`, never the matched text. A fixture
+that needs a secret-shaped string says it is fake and is listed in
+`.public-hygiene-allow` with a reason. It runs in `.github/workflows/ci.yml`
+on every pull request and push to `main`; run it before every commit that
+touches docs, scripts or container files.
 
 ## Selecting a Gate for a Change
 
@@ -39,7 +52,7 @@ All commands run from the **repository root**. Toolchain: `vitest` 5.x,
 
 | Scope | Command | Evidence of a correct run |
 | :---- | :------ | :------------------------ |
-| Full test suite | `pnpm run test` | `Test Files 24 passed (24)` · `Tests 332 passed (332)` |
+| Full test suite | `pnpm run test` | `Test Files 27 passed (27)` · `Tests 369 passed (369)` |
 | One test file | `pnpm run test tests/unit/lib/i18n.test.ts` | `Test Files 1 passed (1)` · `Tests 49 passed (49)` |
 | One test file (equivalent) | `pnpm exec vitest run tests/unit/lib/i18n.test.ts` | same as above |
 | By test name | `pnpm exec vitest run -t "<name fragment>"` | the selected count, not `229` |
@@ -49,7 +62,7 @@ All commands run from the **repository root**. Toolchain: `vitest` 5.x,
 > **Trap — never pass `--` to the test script.** `pnpm run test -- <path>` does
 > **not** scope: pnpm swallows the separator and vitest receives no filter, so it
 > runs the whole suite while appearing to target one file. It prints
-> `Test Files 24 passed (24)`, not `1 passed (1)`. A gate recorded as scoped that
+> `Test Files 27 passed (27)`, not `1 passed (1)`. A gate recorded as scoped that
 > prints the full count was never scoped. Drop the `--`.
 
 ### Commands that have no scoped form
@@ -64,14 +77,15 @@ and a project-wide run here is the honest gate:
 - **`pnpm run md:check`** / **`pnpm run md:content-check`** — both compare the
   built `dist/` against the Markdown endpoints and require a completed build.
 - **`pnpm run build`** — the real gate for anything that renders. Note it emits
-  1709 pages and occasionally fails on a `dist/.prerender` directory race; the
+  1743 pages and occasionally fails on a `dist/.prerender` directory race; the
   fix is `rm -rf dist` and re-run, not a code change.
 
 ### Source-to-test mapping
 
 The tree is **mirrored**, not co-located:
 
-- `src/lib/<name>.ts` → `tests/unit/lib/<name>.test.ts`
+- `src/lib/<name>.ts` → `tests/unit/lib/<name>.test.ts` (e.g. `vim-installer.ts` → `vim-installer.test.ts`, `software-schema.ts` → `software-schema.test.ts`)
+- Diagram figures with a 17-language inline map → one source-contract test per family under `tests/unit/components/` (`vim-diagrams-parity.test.ts` pins key parity, the `en` fallback, `role="img"` and the verified keybindings; `kit-ecosystem-parity.test.ts` pins the `KitEcosystem` plate's map parity, no hydration, the product pins of the v7 claims ledger and that every row links an existing kit page in all 17 languages)
 - Editorial/home components → `tests/unit/components/<topic>.test.ts`, which
   assert narrative and parity across plates rather than one component each
 
@@ -81,7 +95,7 @@ A changed file is not always covered by the test that shares its name:
 
 - **`src/lib/i18n.ts` and `src/lib/translations/*.ts` fan out to every page.**
   Touching them means `pnpm run i18n:check` **and** a build, not just
-  `translations.test.ts` — 1709 pages render from them.
+  `translations.test.ts` — 1743 pages render from them.
 - **Content collections (`src/content/**`) have no unit tests.** Their gates are
   `pnpm run i18n:check`, `pnpm run md:check` and the build.
 - **`.astro` pages and most components are not unit-tested.** The build plus the
@@ -90,6 +104,10 @@ A changed file is not always covered by the test that shares its name:
 - **Mobile Lighthouse performance is CPU-throttle sensitive** and flakes in
   shared-tenancy CI. See [PERFORMANCE.md](./PERFORMANCE.md) before treating a
   single failure as a regression.
+
+### Load-sensitive tests
+
+`tests/unit/lib/schema-urls.test.ts` scans every file under `.agents/skills`, `docs` and `src` synchronously. It takes 2–3 s on an idle machine and over 6 s on a busy shared one, so its first case carries an explicit 30 s timeout; a timeout there under load is not a regression — rerun it alone before investigating.
 
 ### Escalation
 

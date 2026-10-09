@@ -1,0 +1,502 @@
+---
+/**
+ * VimCommandIndex — a printed-figure rendering of the DeepWorkPlan Vim command
+ * index (opened with SPC h h). The real index is generated from the live
+ * keymaps; this plate shows a few real rows. Chords and descriptions are
+ * limited to rows verified in the product repository (see the plan's claims
+ * ledger, C-01 to C-07 and C-27). HTML/CSS; language-keyed i18n (en fallback);
+ * role="img"; dark mode; zero JS. Spec: docs/DIAGRAM_COMPONENTS.md.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+// Keybindings are code: identical in every language. Order matches `rows`.
+const chords = [
+  'SPC h h',
+  'SPC P',
+  'SPC m p',
+  'SPC m r',
+  '<C-a>',
+  'SPC y',
+  'SPC t f',
+  'SPC t t',
+  'SPC x',
+  'SPC n',
+  'SPC t h',
+] as const;
+
+const i18n = {
+  en: {
+    aria: 'The DeepWorkPlan Vim command index, opened with SPC h h: a list of mappings such as the plan browser, Markdown preview, select all, copy to the system clipboard and find files.',
+    heading: 'Command index',
+    hint: 'Generated from the live keymaps',
+    rows: [
+      'Open this command index',
+      'Plan browser',
+      'Preview Markdown in the browser',
+      'Render Markdown in the buffer',
+      'Select the whole file',
+      'Copy to the system clipboard',
+      'Find files',
+      'Live search in the project',
+      'Run or preview the current file',
+      'File tree',
+      'Pick a color theme',
+    ],
+    more: 'and every other mapping, always current',
+    caption:
+      'The index lists every mapping the editor has, because it is generated from the live keymaps. A few of the rows are shown here.',
+  },
+  es: {
+    aria: 'El índice de comandos de DeepWorkPlan Vim, que se abre con SPC h h: una lista de atajos como el navegador de planes, la vista previa de Markdown, seleccionar todo, copiar al portapapeles del sistema y buscar archivos.',
+    heading: 'Índice de comandos',
+    hint: 'Generado a partir de los atajos activos',
+    rows: [
+      'Abrir este índice de comandos',
+      'Navegador de planes',
+      'Vista previa de Markdown en el navegador',
+      'Renderizar Markdown en el búfer',
+      'Seleccionar todo el archivo',
+      'Copiar al portapapeles del sistema',
+      'Buscar archivos',
+      'Búsqueda en vivo en el proyecto',
+      'Ejecutar o previsualizar el archivo actual',
+      'Árbol de archivos',
+      'Elegir un tema de color',
+    ],
+    more: 'y todos los demás atajos, siempre al día',
+    caption:
+      'El índice lista todos los atajos del editor porque se genera a partir de los atajos activos. Aquí se muestran algunas filas.',
+  },
+  pt: {
+    aria: 'O índice de comandos do DeepWorkPlan Vim, aberto com SPC h h: uma lista de atalhos como o navegador de planos, a pré-visualização de Markdown, selecionar tudo, copiar para a área de transferência do sistema e procurar ficheiros.',
+    heading: 'Índice de comandos',
+    hint: 'Gerado a partir dos atalhos ativos',
+    rows: [
+      'Abrir este índice de comandos',
+      'Navegador de planos',
+      'Pré-visualizar o Markdown no navegador',
+      'Renderizar o Markdown no buffer',
+      'Selecionar o ficheiro inteiro',
+      'Copiar para a área de transferência do sistema',
+      'Procurar ficheiros',
+      'Pesquisa em direto no projeto',
+      'Executar ou pré-visualizar o ficheiro atual',
+      'Árvore de ficheiros',
+      'Escolher um tema de cores',
+    ],
+    more: 'e todos os outros atalhos, sempre atualizados',
+    caption:
+      'O índice lista todos os atalhos do editor porque é gerado a partir dos atalhos ativos. Aqui mostram-se algumas das linhas.',
+  },
+  zh: {
+    aria: '用 SPC h h 打开的 DeepWorkPlan Vim 命令索引：列出计划浏览器、Markdown 预览、全选、复制到系统剪贴板和查找文件等映射。',
+    heading: '命令索引',
+    hint: '由实时键位映射生成',
+    rows: [
+      '打开此命令索引',
+      '计划浏览器',
+      '在浏览器中预览 Markdown',
+      '在缓冲区中渲染 Markdown',
+      '选中整个文件',
+      '复制到系统剪贴板',
+      '查找文件',
+      '在项目中实时搜索',
+      '运行或预览当前文件',
+      '文件树',
+      '选择颜色主题',
+    ],
+    more: '以及其他所有映射，始终保持最新',
+    caption:
+      '该索引列出编辑器的每一个映射，因为它由实时键位映射生成。这里只展示其中几行。',
+  },
+  ja: {
+    aria: 'SPC h h で開く DeepWorkPlan Vim のコマンド索引。計画ブラウザ、Markdown プレビュー、すべて選択、システムクリップボードへのコピー、ファイル検索などのマッピングを一覧にします。',
+    heading: 'コマンド索引',
+    hint: '実際のキーマップから生成',
+    rows: [
+      'このコマンド索引を開く',
+      '計画ブラウザ',
+      'ブラウザで Markdown をプレビュー',
+      'バッファ内で Markdown を描画',
+      'ファイル全体を選択',
+      'システムクリップボードへコピー',
+      'ファイルを検索',
+      'プロジェクト内をライブ検索',
+      '現在のファイルを実行またはプレビュー',
+      'ファイルツリー',
+      'カラーテーマを選ぶ',
+    ],
+    more: 'そのほかすべてのマッピングも、常に最新の状態で',
+    caption:
+      'この索引は実際のキーマップから生成されるため、エディタのすべてのマッピングを一覧にします。ここではその一部の行を示します。',
+  },
+  de: {
+    aria: 'Der Befehlsindex von DeepWorkPlan Vim, geöffnet mit SPC h h: eine Liste von Belegungen wie Plan-Browser, Markdown-Vorschau, Alles auswählen, Kopieren in die System-Zwischenablage und Dateisuche.',
+    heading: 'Befehlsindex',
+    hint: 'Aus den aktuellen Tastenbelegungen erzeugt',
+    rows: [
+      'Diesen Befehlsindex öffnen',
+      'Plan-Browser',
+      'Markdown im Browser anzeigen',
+      'Markdown im Puffer rendern',
+      'Ganze Datei auswählen',
+      'In die System-Zwischenablage kopieren',
+      'Dateien suchen',
+      'Live-Suche im Projekt',
+      'Aktuelle Datei ausführen oder anzeigen',
+      'Dateibaum',
+      'Farbschema wählen',
+    ],
+    more: 'und jede andere Belegung, immer aktuell',
+    caption:
+      'Der Index listet jede Belegung des Editors auf, weil er aus den aktuellen Tastenbelegungen erzeugt wird. Hier sind einige Zeilen zu sehen.',
+  },
+  fr: {
+    aria: 'L’index des commandes de DeepWorkPlan Vim, ouvert avec SPC h h : une liste de raccourcis comme le navigateur de plans, l’aperçu Markdown, tout sélectionner, copier dans le presse-papiers du système et rechercher des fichiers.',
+    heading: 'Index des commandes',
+    hint: 'Généré à partir des raccourcis actifs',
+    rows: [
+      'Ouvrir cet index des commandes',
+      'Navigateur de plans',
+      'Aperçu Markdown dans le navigateur',
+      'Rendu Markdown dans le tampon',
+      'Sélectionner tout le fichier',
+      'Copier dans le presse-papiers du système',
+      'Rechercher des fichiers',
+      'Recherche en direct dans le projet',
+      'Exécuter ou prévisualiser le fichier courant',
+      'Arborescence des fichiers',
+      'Choisir un thème de couleurs',
+    ],
+    more: 'et tous les autres raccourcis, toujours à jour',
+    caption:
+      'L’index liste tous les raccourcis de l’éditeur, car il est généré à partir des raccourcis actifs. Quelques lignes sont montrées ici.',
+  },
+  ko: {
+    aria: 'SPC h h로 여는 DeepWorkPlan Vim 명령 색인이에요. 계획 브라우저, Markdown 미리보기, 전체 선택, 시스템 클립보드로 복사, 파일 찾기 같은 매핑을 보여 줘요.',
+    heading: '명령 색인',
+    hint: '실제 키맵에서 생성',
+    rows: [
+      '이 명령 색인 열기',
+      '계획 브라우저',
+      '브라우저에서 Markdown 미리보기',
+      '버퍼에서 Markdown 렌더링',
+      '파일 전체 선택',
+      '시스템 클립보드로 복사',
+      '파일 찾기',
+      '프로젝트에서 실시간 검색',
+      '현재 파일 실행 또는 미리보기',
+      '파일 트리',
+      '색상 테마 고르기',
+    ],
+    more: '그 밖의 모든 매핑도 항상 최신 상태로',
+    caption:
+      '이 색인은 실제 키맵에서 생성되므로 에디터의 모든 매핑을 보여 줘요. 여기서는 일부 행만 보여 드려요.',
+  },
+  ru: {
+    aria: 'Индекс команд DeepWorkPlan Vim, который открывается по SPC h h: список сочетаний, например браузер планов, предпросмотр Markdown, выделение всего, копирование в системный буфер обмена и поиск файлов.',
+    heading: 'Индекс команд',
+    hint: 'Создаётся из актуальных раскладок клавиш',
+    rows: [
+      'Открыть этот индекс команд',
+      'Браузер планов',
+      'Предпросмотр Markdown в браузере',
+      'Отрисовка Markdown в буфере',
+      'Выделить весь файл',
+      'Копировать в системный буфер обмена',
+      'Найти файлы',
+      'Живой поиск по проекту',
+      'Запустить или просмотреть текущий файл',
+      'Дерево файлов',
+      'Выбрать цветовую тему',
+    ],
+    more: 'и все остальные сочетания, всегда актуальные',
+    caption:
+      'Индекс перечисляет все сочетания редактора, потому что создаётся из актуальных раскладок клавиш. Здесь показаны лишь некоторые строки.',
+  },
+  it: {
+    aria: 'L’indice dei comandi di DeepWorkPlan Vim, aperto con SPC h h: un elenco di mappature come il browser dei piani, l’anteprima Markdown, seleziona tutto, copia negli appunti di sistema e cerca file.',
+    heading: 'Indice dei comandi',
+    hint: 'Generato dalle mappature attive',
+    rows: [
+      'Aprire questo indice dei comandi',
+      'Browser dei piani',
+      'Anteprima Markdown nel browser',
+      'Rendering Markdown nel buffer',
+      'Selezionare l’intero file',
+      'Copiare negli appunti di sistema',
+      'Cercare file',
+      'Ricerca dal vivo nel progetto',
+      'Eseguire o visualizzare il file corrente',
+      'Albero dei file',
+      'Scegliere un tema di colori',
+    ],
+    more: 'e ogni altra mappatura, sempre aggiornata',
+    caption:
+      'L’indice elenca ogni mappatura dell’editor, perché è generato dalle mappature attive. Qui se ne mostrano alcune righe.',
+  },
+  tr: {
+    aria: 'DeepWorkPlan Vim komut dizini, SPC h h ile açılır: plan tarayıcısı, Markdown önizlemesi, tümünü seç, sistem panosuna kopyala ve dosya bul gibi eşlemelerin listesi.',
+    heading: 'Komut dizini',
+    hint: 'Canlı tuş eşlemelerinden üretilir',
+    rows: [
+      'Bu komut dizinini aç',
+      'Plan tarayıcısı',
+      'Markdown’ı tarayıcıda önizle',
+      'Markdown’ı arabellekte işle',
+      'Dosyanın tamamını seç',
+      'Sistem panosuna kopyala',
+      'Dosya bul',
+      'Projede canlı arama',
+      'Geçerli dosyayı çalıştır veya önizle',
+      'Dosya ağacı',
+      'Renk teması seç',
+    ],
+    more: 've diğer tüm eşlemeler, her zaman güncel',
+    caption:
+      'Dizin, canlı tuş eşlemelerinden üretildiği için düzenleyicinin tüm eşlemelerini listeler. Burada yalnızca birkaç satır gösterilir.',
+  },
+  id: {
+    aria: 'Indeks perintah DeepWorkPlan Vim, dibuka dengan SPC h h: daftar pemetaan seperti penjelajah rencana, pratinjau Markdown, pilih semua, salin ke papan klip sistem, dan cari berkas.',
+    heading: 'Indeks perintah',
+    hint: 'Dibuat dari pemetaan tombol yang aktif',
+    rows: [
+      'Buka indeks perintah ini',
+      'Penjelajah rencana',
+      'Pratinjau Markdown di peramban',
+      'Render Markdown di buffer',
+      'Pilih seluruh berkas',
+      'Salin ke papan klip sistem',
+      'Cari berkas',
+      'Pencarian langsung di proyek',
+      'Jalankan atau pratinjau berkas saat ini',
+      'Pohon berkas',
+      'Pilih tema warna',
+    ],
+    more: 'dan semua pemetaan lainnya, selalu terbaru',
+    caption:
+      'Indeks ini mencantumkan setiap pemetaan editor karena dibuat dari pemetaan tombol yang aktif. Di sini hanya beberapa baris yang ditampilkan.',
+  },
+  vi: {
+    aria: 'Chỉ mục lệnh của DeepWorkPlan Vim, mở bằng SPC h h: danh sách các phím tắt như trình duyệt kế hoạch, xem trước Markdown, chọn tất cả, sao chép vào bộ nhớ tạm của hệ thống và tìm tệp.',
+    heading: 'Chỉ mục lệnh',
+    hint: 'Được tạo từ các phím tắt đang hoạt động',
+    rows: [
+      'Mở chỉ mục lệnh này',
+      'Trình duyệt kế hoạch',
+      'Xem trước Markdown trong trình duyệt',
+      'Kết xuất Markdown trong bộ đệm',
+      'Chọn toàn bộ tệp',
+      'Sao chép vào bộ nhớ tạm của hệ thống',
+      'Tìm tệp',
+      'Tìm kiếm trực tiếp trong dự án',
+      'Chạy hoặc xem trước tệp hiện tại',
+      'Cây tệp',
+      'Chọn giao diện màu',
+    ],
+    more: 'và mọi phím tắt khác, luôn cập nhật',
+    caption:
+      'Chỉ mục liệt kê mọi phím tắt của trình soạn thảo vì nó được tạo từ các phím tắt đang hoạt động. Ở đây chỉ hiển thị một vài hàng.',
+  },
+  hi: {
+    aria: 'SPC h h से खुलने वाला DeepWorkPlan Vim का कमांड इंडेक्स: योजना ब्राउज़र, Markdown प्रीव्यू, सब चुनें, सिस्टम क्लिपबोर्ड पर कॉपी और फ़ाइल खोजें जैसे मैपिंग की सूची।',
+    heading: 'कमांड इंडेक्स',
+    hint: 'सक्रिय कीमैप से जनरेट किया गया',
+    rows: [
+      'यह कमांड इंडेक्स खोलें',
+      'योजना ब्राउज़र',
+      'ब्राउज़र में Markdown प्रीव्यू',
+      'बफ़र में Markdown रेंडर करें',
+      'पूरी फ़ाइल चुनें',
+      'सिस्टम क्लिपबोर्ड पर कॉपी करें',
+      'फ़ाइलें खोजें',
+      'प्रोजेक्ट में लाइव खोज',
+      'मौजूदा फ़ाइल चलाएँ या प्रीव्यू करें',
+      'फ़ाइल ट्री',
+      'रंग थीम चुनें',
+    ],
+    more: 'और बाकी सभी मैपिंग, हमेशा अद्यतित',
+    caption:
+      'यह इंडेक्स एडिटर की हर मैपिंग सूचीबद्ध करता है, क्योंकि यह सक्रिय कीमैप से जनरेट होता है। यहाँ कुछ ही पंक्तियाँ दिखाई गई हैं।',
+  },
+  pl: {
+    aria: 'Indeks poleceń DeepWorkPlan Vim, otwierany przez SPC h h: lista skrótów, takich jak przeglądarka planów, podgląd Markdown, zaznacz wszystko, kopiuj do schowka systemowego i szukaj plików.',
+    heading: 'Indeks poleceń',
+    hint: 'Generowany z aktywnych mapowań klawiszy',
+    rows: [
+      'Otwórz ten indeks poleceń',
+      'Przeglądarka planów',
+      'Podgląd Markdown w przeglądarce',
+      'Renderuj Markdown w buforze',
+      'Zaznacz cały plik',
+      'Kopiuj do schowka systemowego',
+      'Szukaj plików',
+      'Wyszukiwanie na żywo w projekcie',
+      'Uruchom lub podejrzyj bieżący plik',
+      'Drzewo plików',
+      'Wybierz motyw kolorów',
+    ],
+    more: 'i każde inne mapowanie, zawsze aktualne',
+    caption:
+      'Indeks wymienia każde mapowanie edytora, bo jest generowany z aktywnych mapowań klawiszy. Tutaj widać tylko kilka wierszy.',
+  },
+  uk: {
+    aria: 'Індекс команд DeepWorkPlan Vim, що відкривається за SPC h h: список прив’язок, як-от оглядач планів, попередній перегляд Markdown, виділити все, копіювати до системного буфера обміну та пошук файлів.',
+    heading: 'Індекс команд',
+    hint: 'Створюється з актуальних розкладок клавіш',
+    rows: [
+      'Відкрити цей індекс команд',
+      'Оглядач планів',
+      'Попередній перегляд Markdown у браузері',
+      'Відтворення Markdown у буфері',
+      'Виділити весь файл',
+      'Копіювати до системного буфера обміну',
+      'Знайти файли',
+      'Живий пошук у проєкті',
+      'Запустити або переглянути поточний файл',
+      'Дерево файлів',
+      'Вибрати кольорову тему',
+    ],
+    more: 'і всі інші прив’язки, завжди актуальні',
+    caption:
+      'Індекс перелічує всі прив’язки редактора, бо створюється з актуальних розкладок клавіш. Тут показано лише кілька рядків.',
+  },
+  th: {
+    aria: 'ดัชนีคำสั่งของ DeepWorkPlan Vim ที่เปิดด้วย SPC h h: รายการการแมปคีย์ เช่น ตัวเรียกดูแผน การดูตัวอย่าง Markdown เลือกทั้งหมด คัดลอกไปยังคลิปบอร์ดของระบบ และค้นหาไฟล์',
+    heading: 'ดัชนีคำสั่ง',
+    hint: 'สร้างจากการแมปคีย์ที่ใช้งานอยู่',
+    rows: [
+      'เปิดดัชนีคำสั่งนี้',
+      'ตัวเรียกดูแผน',
+      'ดูตัวอย่าง Markdown ในเบราว์เซอร์',
+      'แสดงผล Markdown ในบัฟเฟอร์',
+      'เลือกทั้งไฟล์',
+      'คัดลอกไปยังคลิปบอร์ดของระบบ',
+      'ค้นหาไฟล์',
+      'ค้นหาแบบสดในโปรเจกต์',
+      'รันหรือดูตัวอย่างไฟล์ปัจจุบัน',
+      'ต้นไม้ไฟล์',
+      'เลือกธีมสี',
+    ],
+    more: 'และการแมปอื่นทั้งหมด ซึ่งทันสมัยอยู่เสมอ',
+    caption:
+      'ดัชนีนี้แสดงการแมปทุกรายการของตัวแก้ไข เพราะสร้างจากการแมปคีย์ที่ใช้งานอยู่ ที่นี่แสดงเพียงบางแถว',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<figure class={`editorial-asset vimidx ${className}`} role="img" aria-label={t.aria}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <div class="vimidx-plate">
+      <div class="vimidx-head">
+        <kbd class="vimidx-key ea-accent">{chords[0]}</kbd>
+        <span class="vimidx-title">{t.heading}</span>
+        <span class="vimidx-hint">{t.hint}</span>
+      </div>
+      <ul class="vimidx-rows">
+        {
+          chords.map((chord, index) => (
+            <li class="vimidx-row">
+              <kbd class="vimidx-chord">{chord}</kbd>
+              <span class="vimidx-label">{t.rows[index]}</span>
+            </li>
+          ))
+        }
+        <li class="vimidx-row vimidx-more">
+          <span class="vimidx-chord" aria-hidden="true">…</span>
+          <span class="vimidx-label">{t.more}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .vimidx {
+    color: var(--color-ink);
+  }
+  .vimidx-plate {
+    border: 1px solid var(--color-ink);
+    background-color: var(--color-paper);
+    min-width: 0;
+  }
+  .vimidx-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.9rem;
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--color-ink);
+  }
+  .vimidx-key {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 1.5px solid var(--color-secondary);
+    border-radius: 3px;
+    padding: 0.1rem 0.45rem;
+    white-space: nowrap;
+  }
+  .vimidx-title {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .vimidx-hint {
+    margin-inline-start: auto;
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--color-muted);
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .vimidx-rows {
+    list-style: none;
+    margin: 0;
+    padding: 0.35rem 0.9rem 0.6rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 2rem;
+  }
+  @media (min-width: 720px) {
+    .vimidx-rows {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .vimidx-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid var(--color-line);
+    min-width: 0;
+  }
+  .vimidx-chord {
+    flex: 0 0 5.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    white-space: nowrap;
+    color: var(--color-ink);
+  }
+  .vimidx-label {
+    min-width: 0;
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+    overflow-wrap: anywhere;
+  }
+  .vimidx-more .vimidx-label {
+    font-style: italic;
+    color: var(--color-muted);
+  }
+</style>

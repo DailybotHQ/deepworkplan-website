@@ -264,3 +264,11 @@ CI 호환 기계적 계층인 `bash {skill_dir}/verify/conformance.sh`; 이 계�
    제공합니다.
 
 누구든 어떤 리포지토리에서든 이 프롬프트를 실행할 수 있으며 — 어떤 AI 에이전트든 조종할 수 있는 코드베이스로 끝맺습니다.
+
+## 다음 단계
+
+- [방법론 읽기](/methodology)
+- [스펙](/spec)
+- [키트 둘러보기](/kit)
+- [예시 보기](/examples)
+- [선택 사항: 터미널 에디터 DeepWorkPlan Vim](/kit/vim)

@@ -1,0 +1,28 @@
+name: Feature or content request
+description: Propose a page, a section, a translation fix or a site feature.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Changes to the methodology itself (the skill, the spec) belong in DailybotHQ/deepworkplan-skill.
+        Content ships in 17 languages; say whether the request is for one language or all.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is missing, unclear or wrong today, and for whom.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What you would like the site to say or do.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: For a claim about a product or a release, the tagged file or release note that supports it.

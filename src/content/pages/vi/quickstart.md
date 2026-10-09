@@ -293,3 +293,11 @@ phương pháp luận:
    kiểm chứng được.
 
 Bất cứ ai cũng có thể chạy lời nhắc này trên bất kỳ repository nào — và kết thúc với một codebase mà mọi agent AI đều có thể điều khiển.
+
+## Bước tiếp theo
+
+- [Đọc phương pháp luận](/methodology)
+- [Đặc tả](/spec)
+- [Duyệt bộ kit](/kit)
+- [Xem ví dụ](/examples)
+- [Tùy chọn: trình soạn thảo terminal DeepWorkPlan Vim](/kit/vim)

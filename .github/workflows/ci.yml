@@ -1,0 +1,50 @@
+name: ci
+
+# Public repository standard (ecosystem amendment A3): on every pull request
+# and every push to main, the public-hygiene check plus lint and the full unit
+# test gate. The heavier PR-only checks (build, Lighthouse) stay in
+# code_check.yml.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  hygiene:
+    name: public hygiene
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Public-hygiene check (tracked files, no network)
+        run: bash scripts/check-public-hygiene.sh
+
+  lint-test:
+    name: lint and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '24.20.0'
+      - name: Install dependencies
+        run: corepack pnpm install --frozen-lockfile
+      - name: Biome
+        run: corepack pnpm run biome:check
+      - name: Astro check
+        run: corepack pnpm run astro:check
+      - name: Unit tests
+        run: corepack pnpm run test

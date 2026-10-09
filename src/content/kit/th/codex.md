@@ -21,6 +21,13 @@ OpenAI Codex รองรับ DWP ผ่านขั้นตอนคำส�
 
 คำสั่ง DWP อยู่ในรูปขั้นตอนแบบ markdown ที่ agent อ่านเมื่อมีการเรียกใช้ กฎถูกติดตั้งไว้ใต้ `.codex/`
 
+ไม่บังคับ: [coding-agents-kit](/kit/agentkit) สามารถติดตั้ง CLI นี้และเรียกใช้ด้วย `ak codex` ได้ ตัวติดตั้งทางการของผู้พัฒนาก็ใช้ได้เช่นกัน
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install codex
+```
+
 ## การเรียกใช้
 
 ใช้คำนำหน้า `#`

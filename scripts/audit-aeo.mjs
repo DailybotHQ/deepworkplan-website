@@ -105,7 +105,7 @@ function checkCoreSectionsCurrency() {
     ? [...setMatch[1].matchAll(/'([^']*)'/g)].map((m) => m[1])
     : [];
   // Exclude '' (home, always covered) and known redirect-only aliases.
-  const REDIRECT_ALIASES = new Set(['setup', 'onboarding', 'docs']);
+  const REDIRECT_ALIASES = new Set(['setup', 'onboarding', 'docs', 'vim']);
   const contentSlugs = allPaths.filter(
     (p) => p !== '' && !REDIRECT_ALIASES.has(p)
   );

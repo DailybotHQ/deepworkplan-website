@@ -4,6 +4,7 @@
 # Report privately via GitHub's private vulnerability reporting (not public issues).
 Contact: https://github.com/DailybotHQ/deepworkplan-website/security
 Contact: https://github.com/DailybotHQ/deepworkplan-skill/security
+Contact: mailto:security@dailybot.com
 Expires: 2027-06-04T00:00:00.000Z
 Canonical: https://deepworkplan.com/.well-known/security.txt
 Policy: https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md

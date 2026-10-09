@@ -21,6 +21,13 @@ Claude Code は、ネイティブのスラッシュコマンドとスキルを�
 
 DWP は `.agents/skills/` 配下のスキルとして配布されます（`.claude/` シンボリックリンクを通じて解決されます）。Claude Code はそれらを自動的に発見します。
 
+任意：[coding-agents-kit](/kit/agentkit) はこの CLI をインストールし、`ak claude` で起動できます。ベンダー公式のインストーラーでも同様に使えます。
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install claude
+```
+
 ## 呼び出し
 
 `/` プレフィックスを使います。

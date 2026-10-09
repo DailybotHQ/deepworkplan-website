@@ -31,6 +31,14 @@ curl -fsSL -o SHA256SUMS \
 
 Sürümler **sağlama toplamlarına sahiptir, imzalı değildir** — imzalama (cosign veya yetkili kişi GPG'si) belgelenmiş bir sonraki adımdır, mevcut bir iddia değildir. Her şey açık olduğundan, herhangi bir dosyayı etiketindeki depoya göre de karşılaştırabilirsiniz.
 
+Aynı kural DeepWorkPlan Vim kurulum programı için de geçerlidir: sayfası, şu anda sunulan betiğin SHA-256 değerini ve indirme, inceleme, doğrulama ve çalıştırma adımlarını gösterir. [DeepWorkPlan Vim kurulum programını inceleyin](/kit/vim#inspect-before-you-run)
+
+Ön sürümler de aynı şekilde doğrulanır. v7 betası olan v7.0.0-beta.1, kendi SHA256SUMS dosyasına sahip bir GitHub ön sürümüdür ve kararlı sürüm değildir. Bu site onu sahada denemek için içerir: sabitlenmiş etiketiyle kurulur ve bu sağlama toplamlarına göre kontrol edilir.
+
+```bash
+npx --yes skills add DailybotHQ/deepworkplan-skill@v7.0.0-beta.1 --skill deepworkplan -y
+```
+
 ---
 
 ## Güvenlik açığı bildirin

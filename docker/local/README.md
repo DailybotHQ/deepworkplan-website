@@ -81,7 +81,7 @@ docker compose build \
 
 ### Herdr mesh (list / ask)
 
-SSH publishes **`127.0.0.1:22022→22`** (override `HERDR_SSH_HOST_PORT`). Peer includes use public names `herdr-peers` / `herdr-workspaces` (legacy `dailybot-peers` still accepted). Inside the container:
+SSH publishes **`127.0.0.1:22022→22`** (override `HERDR_SSH_HOST_PORT`). Peer includes use public names `herdr-peers` / `herdr-workspaces`. Inside the container:
 
 ```bash
 bash dev.sh agents
@@ -286,7 +286,7 @@ ssh-sync
   ✓ SSH synced from host: 4 private key(s), 4 public key(s), config, known_hosts
 Host SSH material is in sync. Keys available:
   • id_rsa
-  • id_rsa_xergioalex
+  • id_ed25519_work
 ```
 
 ### Troubleshooting

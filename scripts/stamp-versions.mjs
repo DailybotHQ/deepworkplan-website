@@ -16,7 +16,8 @@
  * One artifact tracks a different version line: the vendored DeepWorkPlan
  * *skill*, not the website package —
  *
- *   - public/.well-known/dwp-trust.json → skill.version (+ lastUpdated)
+ *   - public/.well-known/dwp-trust.json → skill.version (+ lastUpdated);
+ *     a pre-release vendored version goes to prerelease.version instead
  *
  * sourced from `.agents/skills/deepworkplan/SKILL.md`'s `version:` frontmatter
  * so it never drifts from what is actually vendored, and only rewritten (with
@@ -93,10 +94,33 @@ async function stampTrustManifest(skillVersion) {
     return false;
   }
   const doc = JSON.parse(raw);
-  if (doc.skill?.version === skillVersion) {
-    return false;
+  // A SemVer pre-release (e.g. 7.0.0-beta.1) is never the manifest's skill
+  // version: `skill.install` and `integrity.checksums` resolve to the stable
+  // `latest` release, so the pre-release is stamped into the `prerelease`
+  // block only. A stable vendored version is stamped as `skill.version` and
+  // retires any `prerelease` block (docs/SECURITY.md → trust manifest).
+  if (skillVersion.includes('-')) {
+    if (!doc.prerelease) {
+      return false;
+    }
+    const tag = `v${skillVersion}`;
+    const next = {
+      ...doc.prerelease,
+      version: skillVersion,
+      install: `npx --yes skills add DailybotHQ/deepworkplan-skill@${tag} --skill deepworkplan -y`,
+      checksums: `https://github.com/DailybotHQ/deepworkplan-skill/releases/download/${tag}/SHA256SUMS`,
+    };
+    if (JSON.stringify(next) === JSON.stringify(doc.prerelease)) {
+      return false;
+    }
+    doc.prerelease = next;
+  } else {
+    if (doc.skill?.version === skillVersion && !doc.prerelease) {
+      return false;
+    }
+    doc.skill.version = skillVersion;
+    delete doc.prerelease;
   }
-  doc.skill.version = skillVersion;
   doc.lastUpdated = new Date().toISOString().slice(0, 10);
   await writeFile(abs, `${JSON.stringify(doc, null, 2)}\n`, 'utf8');
   return true;

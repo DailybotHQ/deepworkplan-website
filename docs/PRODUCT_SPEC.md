@@ -10,6 +10,7 @@ Beyond turning a repository AI-first, DWP lets that repository **evolve its own 
 
 - **The author sub-skill** — invoked through `/skill-create` and `/agent-create`, it reasons about the repository's existing `.agents/` layout and conventions and authors new skills, agents, or thin command delegators that match them, keeping the catalog in sync. The repository grows its own kit instead of inheriting a generic one. The same sub-skill backs the mandatory Skills & Agents Discovery task.
 - **Maintenance add-ons** — opt-in extensions, never required for conformance (the AI Diff Reviewer local review is the one required component since standard 2.3.0; its CI surface stays optional). The **dependency-upgrade** add-on reasons about the repository's actual package manager (not assuming npm) and upgrades dependencies in small, validated, revertible batches, running the repository's real gate after each batch.
+- **The v7 ecosystem (beta)** — the methodology works alone; optional addons are thin integrators pinned by tag to products that work without DWP: Herdr peers (`/kit/herdr`, herdr-peers), headless delegation and one command for every coding CLI (`/kit/agentkit`, coding-agents-kit), the dev container (`/kit/devcontainer`, devcontainer-kit) and the editor (`/kit/vim`, deepworkplan-vim). The kit index shows them on one plate. The pack that ships them is the `v7.0.0-beta.1` pre-release; the site never presents it as stable.
 
 ### This repository dogfoods DWP
 
@@ -80,6 +81,7 @@ Build a fast, accessible, multilingual site that:
 - Presets, adapters, and commands (`/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`)
 - Guidance for installing DWP into an existing repo
 - Cross-links to the companion skill repo [`DailybotHQ/deepworkplan-skill`](https://github.com/DailybotHQ/deepworkplan-skill)
+- **DeepWorkPlan Vim** — the terminal editor for Deep Work Plan, a separate optional product — has exactly **one official page: `/kit/vim`** (flagship MDX in 17 languages, with a verifiable installer section and two editorial figures). `/vim` is only a redirect alias to it. The page states what the product repository can back (generated command index, VS Code-shaped gestures, plan browser, Markdown viewer, consent-first installer shown as download, verify, run — never a pipe into a shell), says plainly that it is offered as the optional `vim` addon of the DWP v7 beta (never required), describes release `v0.4.2` (whose installer pins its own release), and never claims `vim.deepworkplan.com` is live. Linked from `/trust` (installer verification) and `/quickstart` (optional next step).
 
 ### 5. Adoption Page (`/quickstart`) and Adoption Prompt (`/init.md`)
 

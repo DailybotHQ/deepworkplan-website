@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan 套件"
 description: "让 Deep Work Plan 可在任何地方运行的技能及其九个子技能、命令、代理适配器、接入预设、可选附加组件与示例。"
-lastUpdated: 2026-05-31
+lastUpdated: 2026-10-09
 ---
 
 ## Deep Work Plan 套件
@@ -56,6 +56,18 @@ onboard 流程向仓库叠加的各项能力。其中四个是可选的，绝非
 - **Dependency upgrade** —— 包管理器无关、分批次、经验证、可回退的升级。
 - **Design system** —— 一份限定于界面范围的 `DESIGN.md`（位于 `docs/DESIGN.md`，从 `AGENTS.md` 引用），从仓库真实的设计来源推理而来，并为可视化 UI、带样式的 CLI 输出与会话式消息提供配置档，使代理生成契合品牌的界面输出；检测到设计系统时提供该提案是必须的，而安装以明确接受为前提——可视化配置档在检测到时受到强烈推荐，CLI 与会话式配置档在检测到时被推荐且始终先询问。
 - **AI Diff Reviewer** —— 必备的本地审查：接入时安装 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 与 `.review/extension.md`，且每份 Final Review 的安全审查环节都会运行它；可选的 Flow B 添加一个共享同一扩展的 CI PR 合并门控——明确提供，绝不未经请求安装。
+
+### 生态系统
+
+**方法论可以独立运作。附加组件让它更强。** 每个附加组件都是 Deep Work Plan 技能中的一个轻量集成层，按 tag 固定到一个拥有独立仓库、发布版本和接口版本的产品。每个产品都可以脱离 Deep Work Plan 独立运行，且不需要任何附加组件。
+
+- **Deep Work Plan 技能** — 创建、执行、验证、恢复和完善计划。无需任何附加组件。
+- **[herdr](/zh/kit/herdr)** — 在任意机器上的 Herdr 窗格中协作的对等方：交互式委派，仅允许一次经授权的回复。固定于：`herdr-peers@v0.1.0`。
+- **[agentkit](/zh/kit/agentkit)** — 一个 ak 命令适用于所有终端编码代理：在 worktree 中进行无界面委派。固定于：`coding-agents-kit@v0.1.1`。
+- **[devcontainer](/zh/kit/devcontainer)** — 一个 Dev Containers 模板及基础镜像，不附带任何编码代理。固定于：`devcontainer-kit@v0.1.4`。
+- **[vim](/zh/kit/vim)** — 终端编辑器，带有只读的计划浏览器和 Markdown 查看器。固定于：`deepworkplan-vim@v0.4.2`。
+
+附加组件注册表和描述文件随 v7 beta 发布，这是一个预发布版本： `v7.0.0-beta.1`
 
 ### 示例
 

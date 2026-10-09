@@ -101,7 +101,8 @@ Build only from the design tokens in `src/styles/global.css`:
 - **Naming:** descriptive PascalCase by concept (`CoreLoop`, `RepoAsHarness`,
   `TaskAnatomy`, `PlanTree`, `SkillsAgents`, `ArchetypesTree`, `AgentLifecycle`,
   `OutputWorkspace`, `CmdCreate`…`CmdStatus`, `MigrationBeforeAfter`,
-  `UnguidedVsDwp`, `OnboardFlow`, `KitComposition`, `QuickstartFlow`,
+  `UnguidedVsDwp`, `OnboardFlow`, `KitComposition`, `VimCommandIndex`,
+  `VimInDwpLoop`, `KitEcosystem`, `QuickstartFlow`,
   `OnboardingSequence`, `ArchetypesCompare`).
 - **Props:** `interface Props { lang?: Language; class?: string }` (default
   `lang = 'en'`).
@@ -243,6 +244,9 @@ Status: `todo` → `built`. Spec column → entry in `docs/visuals/prompts/`.
 | KT-08 | `CmdVerify` | kit | 04-kit#kt-08 | built |
 | KT-09 | `CmdStatus` | kit | 04-kit#kt-09 | built |
 | KT-10 | `KitComposition` | kit | 04-kit#kt-10 | built |
+| KT-11 | `VimCommandIndex` | kit | 04-kit#kt-11 | built |
+| KT-12 | `VimInDwpLoop` | kit | 04-kit#kt-12 | built |
+| KT-13 | `KitEcosystem` | kit | — (PLAN_004 claims ledger; a real `<section>` with links, not a `role="img"` figure) | built |
 | HP-03 | `QuickstartFlow` | home | 01-homepage#hp-03 | built |
 | HP-04 | `OnboardingSequence` | home | 01-homepage#hp-04 | built |
 | HP-05 | `ArchetypesCompare` | home | 01-homepage#hp-05 | built |

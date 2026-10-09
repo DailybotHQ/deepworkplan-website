@@ -1,0 +1,45 @@
+name: Bug report
+description: Something on deepworkplan.com or in this repository does not behave as documented.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Security issues go through SECURITY.md (private reporting), never here.
+        Do not paste API keys, tokens or private hostnames — name variables instead.
+        Problems with the installable skill belong in DailybotHQ/deepworkplan-skill.
+  - type: input
+    id: url
+    attributes:
+      label: Page or file
+      description: The URL (with its language prefix, e.g. /es/kit/herdr) or the repository path.
+      placeholder: https://deepworkplan.com/kit/vim
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser and OS for a page problem; Node/pnpm version or dev container for a build problem.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What you saw, with the command output or a screenshot.
+    validations:
+      required: true

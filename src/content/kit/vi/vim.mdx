@@ -1,0 +1,142 @@
+---
+title: DeepWorkPlan Vim
+description: "DeepWorkPlan Vim là trình soạn thảo terminal cho Deep Work Plan: cấu hình Neovim 0.12+ với chỉ mục lệnh, trình duyệt kế hoạch và trình xem Markdown."
+kind: addon
+lang: vi
+order: 6
+software:
+  applicationCategory: DeveloperApplication
+  operatingSystem: [macOS, Linux, WSL]
+  license: https://www.gnu.org/licenses/gpl-3.0.html
+  installUrl: https://deepworkplan.com/vim/install.sh
+  sameAs:
+    - https://github.com/DailybotHQ/deepworkplan-vim
+---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
+
+# DeepWorkPlan Vim
+
+**DeepWorkPlan Vim** là trình soạn thảo trên terminal cho Deep Work Plan: một cấu hình Neovim dành cho con người, và cho các agent lập trình, làm việc trong terminal. Kế hoạch, tài liệu và chỉ mục của mọi lệnh chỉ cách bạn một phím bấm.
+
+Đây là một sản phẩm riêng, được cung cấp dưới dạng addon `vim` tùy chọn của Deep Work Plan v7 beta (`v7.0.0-beta.1`, một bản phát hành trước). Deep Work Plan hoạt động với bất kỳ trình soạn thảo nào hoặc không cần trình soạn thảo, và trình soạn thảo này cũng không yêu cầu Deep Work Plan: bạn thêm nó vào máy một cách độc lập, và nó hoạt động như một trình soạn thảo dù có kế hoạch hay không. Trang này mô tả bản phát hành **v0.4.2**.
+
+## Vì sao cần trình soạn thảo trên terminal cho Deep Work Plan
+
+Một Deep Work Plan là một thư mục Markdown dưới `.dwp/plans/`: một mục tiêu, các tác vụ nguyên tử, các cổng kiểm chứng và một nhật ký liên tục. Con người xem xét nó, agent thực thi nó, và cả hai thường làm việc đó từ terminal. Một trình soạn thảo được xây dựng cho công việc này giữ ba thứ ở gần: chính kế hoạch, tài liệu xung quanh nó, và các phím giúp bạn di chuyển giữa hai thứ đó.
+
+DeepWorkPlan Vim chính là trình soạn thảo đó. Nó là một cấu hình Neovim được chọn lọc — máy chủ ngôn ngữ, tự động hoàn thành, linting, định dạng, tìm kiếm mờ, cây tệp và các giao diện màu được chọn lọc, tải theo nhu cầu — cùng vài giao diện giúp nó trở thành trình soạn thảo cho Deep Work Plan.
+
+<VimInDwpLoop lang="vi" class="not-prose my-10" />
+
+## Tham quan: một chỉ mục lệnh không thể lỗi thời
+
+Nhấn `SPC h h` (Space là phím leader), hoặc chạy `:DwpCommands`, và trình soạn thảo liệt kê mọi phím tắt nó có kèm mô tả một dòng. Danh sách được tạo từ các phím tắt đang hoạt động, nên một phím tắt được định nghĩa ở bất cứ đâu đều xuất hiện trong chỉ mục mà không cần đăng ký, và chỉ mục không thể lỗi thời.
+
+Đó là toàn bộ chuyến tham quan: khởi chạy `nvim`, rồi nhấn Space, `h`, `h`.
+
+<VimCommandIndex lang="vi" class="not-prose my-10" />
+
+## Bạn nhận được gì
+
+Năm tính năng, mỗi tính năng chỉ cách một phím bấm.
+
+| Tính năng | Phím | Chức năng |
+|---|---|---|
+| Chỉ mục lệnh được tạo tự động | `SPC h h` | Mọi phím tắt trong cấu hình, được tạo từ các phím tắt đang hoạt động. |
+| Thao tác kiểu VS Code | `<C-a>`, `SPC y` | Chọn toàn bộ tệp bằng một phím và sao chép vào bộ nhớ tạm của hệ thống. `y` thường cũng sao chép vào đó, vì bộ nhớ tạm dùng chung toàn hệ thống. |
+| Trình duyệt kế hoạch Deep Work Plan | `SPC P` | Một thanh bên trên các kế hoạch trong kho mã của bạn, nhóm theo trạng thái và có thanh tiến độ, cùng một trình đọc cho từng kế hoạch. |
+| Trình xem Markdown | `SPC m p`, `SPC m r` | Xem trước Markdown trong trình duyệt, hoặc kết xuất trong bộ đệm. |
+| Trình cài đặt có xác minh | — | Trình cài đặt độc lập cho macOS, Linux và WSL, với cách cài thủ công được ghi tài liệu cho Windows. |
+
+## Kế hoạch mà không cần rời trình soạn thảo
+
+`SPC P`, `:DwpPlans`, hoặc một cú nhấp vào đoạn trên thanh trạng thái sẽ mở thanh bên kế hoạch. Nó bao quát mọi thư mục `.dwp/plans/` trong thư mục hiện tại và thư mục cấu hình Neovim của bạn, và nhóm các kế hoạch bắt đầu từ những kế hoạch cần chú ý nhất. Trong trình soạn thảo, các nhãn là `Working`, `Needs attention`, `Ready`, `Not started` và `Done`. Mỗi kế hoạch có một thanh tiến độ.
+
+Nhấn Enter trên một kế hoạch để mở trình đọc: mục tiêu trong một câu, trạng thái và tiến độ, danh sách tác vụ với tác vụ hiện tại được đánh dấu, và các liên kết nhảy bằng ngôn ngữ dễ hiểu tới các tệp của chính kế hoạch. Thanh trạng thái hiển thị kế hoạch đang hoạt động theo thời gian thực, còn màn hình khởi động liệt kê ba kế hoạch đầu. Các giao diện này chỉ giải thích kế hoạch; chúng không bao giờ ghi vào `.dwp/`.
+
+Để đọc ngay tại chỗ các tệp Markdown của một kế hoạch, `SPC m p` xem trước bộ đệm hiện tại trong trình duyệt và `SPC m r` kết xuất nó ngay trong bộ đệm. Cả hai chỉ hoạt động trong bộ đệm Markdown.
+
+## Cài đặt
+
+Việc cài đặt gồm ba lệnh: tải tập lệnh về, đối chiếu nó với SHA-256 của tệp mà trang này cung cấp, rồi chạy nó. Trình cài đặt ghim chính bản phát hành của nó, nên nó cài chính xác `v0.4.2`, bản phát hành mà trang này mô tả; còn `DWP_VIM_REF=main bash install.sh` thì đi theo nhánh `main` luôn thay đổi.
+
+<VimInstall lang="vi" />
+
+Theo thứ tự, trình cài đặt:
+
+1. Kiểm tra hệ điều hành và trình quản lý gói của bạn, và cài git, curl và một trình thông dịch Lua nếu thiếu.
+2. Hỏi trước khi chạm vào cấu hình Neovim hiện có. Nếu chạy qua đường ống mà không có terminal, nó dừng lại và không thay đổi gì.
+3. Sao chép (clone) kho mã vào `~/.config/nvim`, hoặc cập nhật nếu nó đã ở đó.
+4. Chạy `lua install.lua` của chính kho mã.
+5. Cài các plugin ở chế độ headless, nên không cần thoát rồi mở lại.
+
+Tập lệnh được cung cấp ở đây là bản sao giống hệt từng byte của `install.sh` tại thẻ `v0.4.2`. Để đọc nó trước, hãy tải bằng `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, so sánh SHA-256 của nó với giá trị hiển thị ở trên, đọc rồi mới chạy `bash install.sh`.
+
+## Yêu cầu và nền tảng
+
+- Neovim 0.12 trở lên. Hãy cài Neovim trước; trình cài đặt không cài nó.
+- Lua: `lua`, `lua5.4` hoặc `luajit`. Trình cài đặt sẽ thêm một cái nếu thiếu.
+- macOS, Linux và WSL chạy trình cài đặt. Windows có cách cài thủ công được ghi trong README của kho mã: cài Neovim bằng winget, clone kho mã vào `%LOCALAPPDATA%\nvim`, rồi chạy `lua install.lua` từ Git Bash.
+- Cấp phép GPL-3.0: tự do sử dụng, nghiên cứu và sửa đổi.
+
+## Cập nhật, cố định phiên bản và gỡ cài đặt
+
+Để cập nhật, hãy chạy trình cài đặt của một bản phát hành mới hơn. Chạy lại sẽ chuyển bản checkout DeepWorkPlan Vim hiện có sang bản phát hành của trình cài đặt đó, giữ nguyên các nhánh của bạn và không bao giờ đặt lại các chỉnh sửa cục bộ: khi các thay đổi hoặc commit cục bộ có thể bị mất, nó dừng lại và không thay đổi gì.
+
+Để cài một thẻ khác, một nhánh hoặc một commit, hãy đặt `DWP_VIM_REF`. Nên ưu tiên dùng thẻ: các bản phát hành trước `v0.4.0` không có các thao tác kiểu VS Code, trình duyệt kế hoạch, trình xem Markdown hay trình cài đặt này.
+
+```bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
+```
+
+Để gỡ cài đặt, chạy `lua delete.lua` từ thư mục cấu hình. Nó xóa cấu hình, plugin, dữ liệu Mason, bộ nhớ đệm và trạng thái, cùng bản sao phông chữ mà trình cài đặt đã tạo, và giữ nguyên tệp thực thi Neovim cùng các gói hệ thống của bạn.
+
+```bash
+cd ~/.config/nvim && lua delete.lua
+```
+
+## Câu hỏi
+
+### Nó có ghi đè cấu hình Neovim của tôi không?
+
+Không, nếu bạn chưa chấp thuận. Khi gặp một cấu hình không phải DeepWorkPlan Vim, lần chạy tương tác sẽ hỏi trước khi chuyển nó tới `~/.config/previous-deepworkplan-vim`. Không có terminal, hoặc khi đường dẫn sao lưu đó đã tồn tại, nó dừng lại và không thay đổi gì.
+
+### Nó có chạy trên Windows không?
+
+Trình cài đặt không chạy trên Windows. Hãy dùng cách thủ công trong README của kho mã, hoặc chạy trình cài đặt bên trong WSL.
+
+### Tôi có cần Deep Work Plan để dùng nó không?
+
+Không. Trước hết nó là một trình soạn thảo. Nó không cài đặt cũng không yêu cầu skill Deep Work Plan; trình duyệt kế hoạch chỉ đơn giản là chưa có gì để liệt kê cho tới khi có thư mục `.dwp/plans/`.
+
+### Addon vim của v7 dùng nó như thế nào?
+
+Deep Work Plan v7 beta đề xuất trình soạn thảo này dưới dạng addon `vim` tùy chọn trong quá trình onboarding. Addon phát hiện bản cài đặt hiện có ở chế độ chỉ đọc, thông qua tệp `addon/surface.json` của trình soạn thảo, và chỉ đề xuất bản cài đặt được ghim phiên bản, đã xác minh checksum khi có sự đồng ý của bạn. Nó không bao giờ ghi đè cấu hình Neovim hiện có khi chưa được phê duyệt rõ ràng, và không bao giờ là bắt buộc.
+
+### Các agent lập trình dùng nó như thế nào?
+
+Nó được xây dựng cho con người và cho các agent lập trình sống trong terminal. Các phím tắt của nó được cố định bằng kiểm thử hợp đồng, nên trí nhớ cơ bắp, và kỳ vọng của agent, vẫn còn qua các lần cập nhật.
+
+### Tôi nhận được phiên bản nào?
+
+Trình cài đặt cài bản phát hành mà nó thuộc về — hiện là `v0.4.2` — trừ khi bạn đặt `DWP_VIM_REF`; `DWP_VIM_REF=main` đi theo `main`. Trang này mô tả bản phát hành `v0.4.2`, bản có đủ mọi tính năng được liệt kê ở đây.
+
+### Nó theo giấy phép nào và đến từ đâu?
+
+GPL-3.0. Nó được phát triển từ mu-vim của Andrés M Prieto, và phần ghi công được giữ trong kho mã.
+
+## Mã nguồn và giấy phép
+
+Mã nguồn nằm trong [kho mã DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim). Kho này công khai và theo giấy phép GPL-3.0, được phát triển từ [mu-vim](https://github.com/AndresMpa/mu-vim).
+
+## Các mục kit liên quan
+
+- [Devcontainer](/kit/devcontainer) — môi trường phát triển tái lập được (addon đầu tiên)
+- [Dailybot](/kit/dailybot) — báo cáo vòng đời kế hoạch nhìn thấy được cho cả nhóm (addon thứ hai)
+- [AI Diff Reviewer](/kit/ai-diff-reviewer) — đánh giá cục bộ trong các Final Review của kế hoạch (addon thứ năm)
+- [Herdr](/kit/herdr) — giao một tác vụ cho một agent ngang hàng trong một pane Herdr (v7 beta)
+- [Agentkit](/kit/agentkit) — một lệnh cho mọi agent lập trình trên terminal, và ủy thác headless (v7 beta)

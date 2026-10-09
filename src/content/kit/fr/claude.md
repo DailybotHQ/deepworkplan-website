@@ -21,6 +21,13 @@ Claude Code dispose d’une prise en charge **complète** de DWP via les command
 
 DWP est livré sous forme de skills sous `.agents/skills/` (résolus via le lien symbolique `.claude/`). Claude Code les découvre automatiquement.
 
+Facultatif : [coding-agents-kit](/kit/agentkit) peut installer cette CLI et la lancer avec `ak claude`. L’installateur officiel de l’éditeur fonctionne tout aussi bien.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install claude
+```
+
 ## Invocation
 
 Utilisez le préfixe `/` :

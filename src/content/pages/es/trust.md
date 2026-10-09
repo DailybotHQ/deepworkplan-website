@@ -31,6 +31,14 @@ curl -fsSL -o SHA256SUMS \
 
 Las versiones tienen **checksums, no firmas criptográficas** — las firmas (cosign o GPG del mantenedor) son el próximo paso documentado, no una garantía actual. Dado que todo es abierto, también puedes comparar cualquier archivo con el repositorio en su etiqueta.
 
+La misma regla vale para el instalador de DeepWorkPlan Vim: su página muestra el SHA-256 del script tal como se sirve, con una receta para descargar, inspeccionar, verificar y ejecutar. [Inspeccionar el instalador de DeepWorkPlan Vim](/kit/vim#inspect-before-you-run)
+
+Las versiones preliminares se verifican de la misma forma. La beta de v7, v7.0.0-beta.1, es una versión preliminar (pre-release) de GitHub con su propio SHA256SUMS, y no es la versión estable. Este sitio la incorpora para probarla en uso real: instalada por su etiqueta fijada y comprobada contra esos checksums.
+
+```bash
+npx --yes skills add DailybotHQ/deepworkplan-skill@v7.0.0-beta.1 --skill deepworkplan -y
+```
+
 ---
 
 ## Reportar una vulnerabilidad

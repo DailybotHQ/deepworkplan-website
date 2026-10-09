@@ -1,0 +1,390 @@
+---
+/**
+ * VimInDwpLoop — where DeepWorkPlan Vim sits in the Deep Work Plan loop: the
+ * plan browser (SPC P) reads plans under .dwp/plans/ and the Markdown viewer
+ * (SPC m p / SPC m r) previews a plan's files. Read-only: the editor never
+ * writes under .dwp/. Claims limited to the plan's claims ledger (C-04, C-05,
+ * C-07). HTML/CSS; language-keyed i18n (en fallback); role="img"; dark mode;
+ * zero JS. Spec: docs/DIAGRAM_COMPONENTS.md.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+// Keybindings are code: identical in every language.
+const browserChord = 'SPC P';
+const viewerChords = 'SPC m p · SPC m r';
+
+const i18n = {
+  en: {
+    aria: 'The Deep Work Plan loop (plan, tasks, gates, done) with two places where the editor takes part: the plan browser, which reads plans under .dwp/plans/, and the Markdown viewer for a plan’s files.',
+    steps: ['Plan', 'Tasks', 'Gates', 'Done'],
+    editor: 'In the editor',
+    browserTitle: 'Plan browser',
+    browserBody:
+      'Every plan under .dwp/plans/, grouped by status, with progress. Read-only.',
+    viewerTitle: 'Markdown viewer',
+    viewerBody:
+      'Preview or render a plan’s Markdown files without leaving Neovim.',
+    caption:
+      'The editor sits beside the loop: it shows where each plan stands and lets you read its files. It never writes under .dwp/.',
+  },
+  es: {
+    aria: 'El bucle de Deep Work Plan (plan, tareas, validación, hecho) con dos puntos donde participa el editor: el navegador de planes, que lee los planes de .dwp/plans/, y el visor de Markdown para los archivos de un plan.',
+    steps: ['Plan', 'Tareas', 'Validación', 'Hecho'],
+    editor: 'En el editor',
+    browserTitle: 'Navegador de planes',
+    browserBody:
+      'Todos los planes de .dwp/plans/, agrupados por estado y con su progreso. Solo lectura.',
+    viewerTitle: 'Visor de Markdown',
+    viewerBody:
+      'Previsualiza o renderiza los archivos Markdown de un plan sin salir de Neovim.',
+    caption:
+      'El editor está junto al bucle: muestra en qué punto está cada plan y te deja leer sus archivos. Nunca escribe en .dwp/.',
+  },
+  pt: {
+    aria: 'O ciclo do Deep Work Plan (plano, tarefas, gates, concluído) com dois pontos em que o editor participa: o navegador de planos, que lê os planos em .dwp/plans/, e o visualizador de Markdown para os ficheiros de um plano.',
+    steps: ['Plano', 'Tarefas', 'Gates', 'Concluído'],
+    editor: 'No editor',
+    browserTitle: 'Navegador de planos',
+    browserBody:
+      'Todos os planos em .dwp/plans/, agrupados por estado e com o progresso. Só de leitura.',
+    viewerTitle: 'Visualizador de Markdown',
+    viewerBody:
+      'Pré-visualize ou renderize os ficheiros Markdown de um plano sem sair do Neovim.',
+    caption:
+      'O editor fica ao lado do ciclo: mostra em que ponto está cada plano e permite ler os respetivos ficheiros. Nunca escreve em .dwp/.',
+  },
+  zh: {
+    aria: 'Deep Work Plan 循环（计划、任务、关卡、完成），以及编辑器参与的两个位置：读取 .dwp/plans/ 下计划的计划浏览器，和查看计划文件的 Markdown 查看器。',
+    steps: ['计划', '任务', '关卡', '完成'],
+    editor: '在编辑器中',
+    browserTitle: '计划浏览器',
+    browserBody: '浏览 .dwp/plans/ 下的所有计划，按状态分组并显示进度。只读。',
+    viewerTitle: 'Markdown 查看器',
+    viewerBody: '无需离开 Neovim，即可预览或渲染计划的 Markdown 文件。',
+    caption:
+      '编辑器位于循环旁：显示每个计划进行到哪一步，并让你阅读其文件。它从不写入 .dwp/。',
+  },
+  ja: {
+    aria: 'Deep Work Plan のループ（計画、タスク、ゲート、完了）と、エディタが関わる 2 つの場面。.dwp/plans/ 以下の計画を読み取る計画ブラウザと、計画のファイルを見る Markdown ビューアです。',
+    steps: ['計画', 'タスク', 'ゲート', '完了'],
+    editor: 'エディタ内',
+    browserTitle: '計画ブラウザ',
+    browserBody:
+      '.dwp/plans/ 以下のすべての計画を、状態別にまとめ、進捗とともに表示します。読み取り専用です。',
+    viewerTitle: 'Markdown ビューア',
+    viewerBody:
+      'Neovim を離れずに、計画の Markdown ファイルをプレビューまたは描画します。',
+    caption:
+      'エディタはループの傍らにあり、各計画の現在地を示し、そのファイルを読めるようにします。.dwp/ には書き込みません。',
+  },
+  de: {
+    aria: 'Der Deep-Work-Plan-Kreislauf (Plan, Aufgaben, Gates, erledigt) mit zwei Stellen, an denen der Editor mitwirkt: der Plan-Browser, der Pläne unter .dwp/plans/ liest, und der Markdown-Viewer für die Dateien eines Plans.',
+    steps: ['Plan', 'Aufgaben', 'Gates', 'Erledigt'],
+    editor: 'Im Editor',
+    browserTitle: 'Plan-Browser',
+    browserBody:
+      'Jeder Plan unter .dwp/plans/, nach Status gruppiert und mit Fortschritt. Nur lesend.',
+    viewerTitle: 'Markdown-Viewer',
+    viewerBody:
+      'Markdown-Dateien eines Plans anzeigen oder rendern, ohne Neovim zu verlassen.',
+    caption:
+      'Der Editor steht neben dem Kreislauf: Er zeigt, wo jeder Plan steht, und lässt Sie seine Dateien lesen. Er schreibt nie unter .dwp/.',
+  },
+  fr: {
+    aria: 'La boucle Deep Work Plan (plan, tâches, portes de validation, terminé) avec deux endroits où l’éditeur intervient : le navigateur de plans, qui lit les plans sous .dwp/plans/, et la visionneuse Markdown pour les fichiers d’un plan.',
+    steps: ['Plan', 'Tâches', 'Validation', 'Terminé'],
+    editor: 'Dans l’éditeur',
+    browserTitle: 'Navigateur de plans',
+    browserBody:
+      'Tous les plans sous .dwp/plans/, regroupés par statut, avec leur progression. Lecture seule.',
+    viewerTitle: 'Visionneuse Markdown',
+    viewerBody:
+      'Prévisualisez ou affichez les fichiers Markdown d’un plan sans quitter Neovim.',
+    caption:
+      'L’éditeur se place à côté de la boucle : il montre où en est chaque plan et vous laisse lire ses fichiers. Il n’écrit jamais sous .dwp/.',
+  },
+  ko: {
+    aria: 'Deep Work Plan 루프(계획, 작업, 게이트, 완료)와 에디터가 함께하는 두 곳이에요. .dwp/plans/ 아래의 계획을 읽는 계획 브라우저와 계획 파일을 보는 Markdown 뷰어예요.',
+    steps: ['계획', '작업', '게이트', '완료'],
+    editor: '에디터에서',
+    browserTitle: '계획 브라우저',
+    browserBody:
+      '.dwp/plans/ 아래의 모든 계획을 상태별로 묶어 진행률과 함께 보여 줘요. 읽기 전용이에요.',
+    viewerTitle: 'Markdown 뷰어',
+    viewerBody:
+      'Neovim을 떠나지 않고 계획의 Markdown 파일을 미리 보거나 렌더링해요.',
+    caption:
+      '에디터는 루프 옆에 있어요. 각 계획이 어디까지 왔는지 보여 주고 파일을 읽게 해 주지만, .dwp/에는 절대 쓰지 않아요.',
+  },
+  ru: {
+    aria: 'Цикл Deep Work Plan (план, задачи, validation gates, готово) и два места, где участвует редактор: браузер планов, который читает планы в .dwp/plans/, и просмотрщик Markdown для файлов плана.',
+    steps: ['План', 'Задачи', 'Gates', 'Готово'],
+    editor: 'В редакторе',
+    browserTitle: 'Браузер планов',
+    browserBody:
+      'Все планы в .dwp/plans/, сгруппированные по статусу, с прогрессом. Только чтение.',
+    viewerTitle: 'Просмотрщик Markdown',
+    viewerBody:
+      'Просматривайте или отображайте Markdown-файлы плана, не выходя из Neovim.',
+    caption:
+      'Редактор стоит рядом с циклом: он показывает, на каком этапе каждый план, и позволяет читать его файлы. Он никогда ничего не записывает в .dwp/.',
+  },
+  it: {
+    aria: 'Il ciclo di Deep Work Plan (piano, task, validation gate, completato) con due punti in cui interviene l’editor: il browser dei piani, che legge i piani in .dwp/plans/, e il visualizzatore Markdown per i file di un piano.',
+    steps: ['Piano', 'Task', 'Gate', 'Completato'],
+    editor: 'Nell’editor',
+    browserTitle: 'Browser dei piani',
+    browserBody:
+      'Tutti i piani in .dwp/plans/, raggruppati per stato e con l’avanzamento. Sola lettura.',
+    viewerTitle: 'Visualizzatore Markdown',
+    viewerBody:
+      'Anteprima o rendering dei file Markdown di un piano senza uscire da Neovim.',
+    caption:
+      'L’editor sta accanto al ciclo: mostra a che punto è ogni piano e permette di leggerne i file. Non scrive mai in .dwp/.',
+  },
+  tr: {
+    aria: 'Deep Work Plan döngüsü (plan, görevler, kapılar, tamamlandı) ve düzenleyicinin yer aldığı iki nokta: .dwp/plans/ altındaki planları okuyan plan tarayıcısı ve bir planın dosyaları için Markdown görüntüleyici.',
+    steps: ['Plan', 'Görevler', 'Kapılar', 'Tamamlandı'],
+    editor: 'Düzenleyicide',
+    browserTitle: 'Plan tarayıcısı',
+    browserBody:
+      '.dwp/plans/ altındaki tüm planlar, duruma göre gruplanmış ve ilerlemesiyle. Salt okunur.',
+    viewerTitle: 'Markdown görüntüleyici',
+    viewerBody:
+      'Neovim’den ayrılmadan bir planın Markdown dosyalarını önizleyin veya işleyin.',
+    caption:
+      'Düzenleyici döngünün yanında durur: her planın nerede olduğunu gösterir ve dosyalarını okumanızı sağlar. .dwp/ altına asla yazmaz.',
+  },
+  id: {
+    aria: 'Siklus Deep Work Plan (rencana, tugas, gerbang verifikasi, selesai) dengan dua tempat keterlibatan editor: penjelajah rencana yang membaca rencana di .dwp/plans/, dan penampil Markdown untuk berkas sebuah rencana.',
+    steps: ['Rencana', 'Tugas', 'Gerbang verifikasi', 'Selesai'],
+    editor: 'Di editor',
+    browserTitle: 'Penjelajah rencana',
+    browserBody:
+      'Semua rencana di .dwp/plans/, dikelompokkan menurut status, beserta progresnya. Hanya baca.',
+    viewerTitle: 'Penampil Markdown',
+    viewerBody:
+      'Pratinjau atau render berkas Markdown sebuah rencana tanpa keluar dari Neovim.',
+    caption:
+      'Editor berada di samping siklus: menunjukkan posisi setiap rencana dan memungkinkan Anda membaca berkasnya. Ia tidak pernah menulis ke .dwp/.',
+  },
+  vi: {
+    aria: 'Vòng lặp Deep Work Plan (kế hoạch, tác vụ, cổng kiểm chứng, hoàn tất) cùng hai điểm trình soạn thảo tham gia: trình duyệt kế hoạch đọc các kế hoạch trong .dwp/plans/ và trình xem Markdown cho các tệp của một kế hoạch.',
+    steps: ['Kế hoạch', 'Tác vụ', 'Cổng kiểm chứng', 'Hoàn tất'],
+    editor: 'Trong trình soạn thảo',
+    browserTitle: 'Trình duyệt kế hoạch',
+    browserBody:
+      'Mọi kế hoạch trong .dwp/plans/, nhóm theo trạng thái và kèm tiến độ. Chỉ đọc.',
+    viewerTitle: 'Trình xem Markdown',
+    viewerBody:
+      'Xem trước hoặc kết xuất các tệp Markdown của một kế hoạch mà không rời Neovim.',
+    caption:
+      'Trình soạn thảo nằm cạnh vòng lặp: cho biết mỗi kế hoạch đang ở đâu và cho phép bạn đọc các tệp của nó. Nó không bao giờ ghi vào .dwp/.',
+  },
+  hi: {
+    aria: 'Deep Work Plan का लूप (योजना, कार्य, सत्यापन द्वार, पूर्ण) और दो जगहें जहाँ एडिटर शामिल होता है: .dwp/plans/ की योजनाएँ पढ़ने वाला योजना ब्राउज़र, और किसी योजना की फ़ाइलों के लिए Markdown व्यूअर।',
+    steps: ['योजना', 'कार्य', 'सत्यापन द्वार', 'पूर्ण'],
+    editor: 'एडिटर में',
+    browserTitle: 'योजना ब्राउज़र',
+    browserBody:
+      '.dwp/plans/ की सभी योजनाएँ, स्थिति के अनुसार समूहित और प्रगति के साथ। केवल पढ़ने के लिए।',
+    viewerTitle: 'Markdown व्यूअर',
+    viewerBody:
+      'Neovim छोड़े बिना किसी योजना की Markdown फ़ाइलों का प्रीव्यू या रेंडर करें।',
+    caption:
+      'एडिटर लूप के बगल में रहता है: वह दिखाता है कि हर योजना कहाँ पहुँची है और उसकी फ़ाइलें पढ़ने देता है। वह .dwp/ में कभी कुछ नहीं लिखता।',
+  },
+  pl: {
+    aria: 'Pętla Deep Work Plan (plan, zadania, bramki, gotowe) z dwoma miejscami, w których uczestniczy edytor: przeglądarka planów, która czyta plany w .dwp/plans/, oraz podgląd Markdown dla plików planu.',
+    steps: ['Plan', 'Zadania', 'Bramki', 'Gotowe'],
+    editor: 'W edytorze',
+    browserTitle: 'Przeglądarka planów',
+    browserBody:
+      'Wszystkie plany w .dwp/plans/, pogrupowane według statusu i z postępem. Tylko do odczytu.',
+    viewerTitle: 'Podgląd Markdown',
+    viewerBody:
+      'Podglądaj lub renderuj pliki Markdown planu bez opuszczania Neovima.',
+    caption:
+      'Edytor stoi obok pętli: pokazuje, na jakim etapie jest każdy plan, i pozwala czytać jego pliki. Nigdy nie zapisuje niczego w .dwp/.',
+  },
+  uk: {
+    aria: 'Цикл Deep Work Plan (план, завдання, validation gates, готово) і два місця, де бере участь редактор: оглядач планів, що читає плани в .dwp/plans/, і переглядач Markdown для файлів плану.',
+    steps: ['План', 'Завдання', 'Gates', 'Готово'],
+    editor: 'У редакторі',
+    browserTitle: 'Оглядач планів',
+    browserBody:
+      'Усі плани в .dwp/plans/, згруповані за станом, із прогресом. Лише читання.',
+    viewerTitle: 'Переглядач Markdown',
+    viewerBody:
+      'Переглядайте або відтворюйте Markdown-файли плану, не виходячи з Neovim.',
+    caption:
+      'Редактор стоїть поруч із циклом: він показує, на якому етапі кожен план, і дає читати його файли. Він ніколи нічого не записує в .dwp/.',
+  },
+  th: {
+    aria: 'วงจรของ Deep Work Plan (แผน งาน ประตูตรวจสอบ เสร็จสิ้น) กับสองจุดที่ตัวแก้ไขเข้ามามีส่วน: ตัวเรียกดูแผนที่อ่านแผนใน .dwp/plans/ และตัวดู Markdown สำหรับไฟล์ของแผน',
+    steps: ['แผน', 'งาน', 'ประตูตรวจสอบ', 'เสร็จสิ้น'],
+    editor: 'ในตัวแก้ไข',
+    browserTitle: 'ตัวเรียกดูแผน',
+    browserBody: 'ทุกแผนใน .dwp/plans/ จัดกลุ่มตามสถานะพร้อมความคืบหน้า อ่านได้อย่างเดียว',
+    viewerTitle: 'ตัวดู Markdown',
+    viewerBody: 'ดูตัวอย่างหรือแสดงผลไฟล์ Markdown ของแผนโดยไม่ต้องออกจาก Neovim',
+    caption:
+      'ตัวแก้ไขอยู่เคียงข้างวงจร: แสดงว่าแต่ละแผนอยู่ที่ขั้นไหนและให้คุณอ่านไฟล์ของแผน โดยไม่เขียนอะไรลงใน .dwp/ เลย',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+---
+
+<figure class={`editorial-asset vimloop ${className}`} role="img" aria-label={t.aria}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <ol class="vimloop-flow">
+      {
+        t.steps.map((step, index) => (
+          <li class="vimloop-item">
+            <span class={`vimloop-step${index === t.steps.length - 1 ? ' ea-accent' : ''}`}>{step}</span>
+            {index < t.steps.length - 1 && (
+              <span class="vimloop-arrow" aria-hidden="true">→</span>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+    <div class="vimloop-editor">
+      <span class="kicker vimloop-editor-title">{t.editor}</span>
+      <div class="vimloop-cards">
+        <div class="vimloop-card">
+          <span class="vimloop-card-title">{t.browserTitle}</span>
+          <kbd class="vimloop-chord">{browserChord}</kbd>
+          <span class="vimloop-card-body">{t.browserBody}</span>
+        </div>
+        <div class="vimloop-card">
+          <span class="vimloop-card-title">{t.viewerTitle}</span>
+          <kbd class="vimloop-chord">{viewerChords}</kbd>
+          <span class="vimloop-card-body">{t.viewerBody}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <figcaption class="fig-caption">{t.caption}</figcaption>
+</figure>
+
+<style>
+  .vimloop {
+    color: var(--color-ink);
+  }
+  .vimloop-flow {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+  }
+  @media (min-width: 720px) {
+    .vimloop-flow {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+  }
+  .vimloop-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+  @media (min-width: 720px) {
+    .vimloop-item {
+      flex-direction: row;
+      gap: 0.6rem;
+    }
+  }
+  .vimloop-step {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--color-ink);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    background-color: var(--color-paper);
+    overflow-wrap: anywhere;
+  }
+  @media (min-width: 720px) {
+    .vimloop-step {
+      width: auto;
+    }
+  }
+  .vimloop-step.ea-accent {
+    border-color: var(--color-secondary);
+    border-width: 1.5px;
+  }
+  .vimloop-arrow {
+    font-size: 1.1rem;
+    transform: rotate(90deg);
+  }
+  @media (min-width: 720px) {
+    .vimloop-arrow {
+      transform: none;
+    }
+  }
+  .vimloop-editor {
+    margin-top: 1.1rem;
+    border-top: 1px solid var(--color-ink);
+    padding-top: 0.7rem;
+    min-width: 0;
+  }
+  .vimloop-cards {
+    margin-top: 0.6rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+  @media (min-width: 720px) {
+    .vimloop-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .vimloop-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.7rem 0.9rem;
+    background-color: var(--color-paper);
+    min-width: 0;
+  }
+  .vimloop-card-title {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+  .vimloop-chord {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    border: 1px solid var(--color-secondary);
+    border-radius: 3px;
+    padding: 0.05rem 0.4rem;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  .vimloop-card-body {
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    overflow-wrap: anywhere;
+  }
+</style>

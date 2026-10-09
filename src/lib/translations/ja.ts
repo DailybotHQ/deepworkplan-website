@@ -747,6 +747,7 @@ export const ja: SiteTranslations = {
       { label: '仕様', href: '/spec' },
       { label: 'キットを見る', href: '/kit' },
       { label: '事例を見る', href: '/examples' },
+      { label: '任意：ターミナルエディタ DeepWorkPlan Vim', href: '/kit/vim' },
     ],
   },
 
@@ -1290,6 +1291,11 @@ export const ja: SiteTranslations = {
     codeLabel: 'shell',
     verifyNote:
       'リリースはチェックサム付きですが、署名はされていません — 署名（cosign またはメンテナー GPG）は文書化された次のステップであり、現在の主張ではありません。すべてが公開されているため、任意のファイルをそのタグのリポジトリと diff で比較することもできます。',
+    vimNote:
+      '同じ原則は DeepWorkPlan Vim のインストーラにも当てはまります。そのページには、現在配信しているスクリプトの SHA-256 と、ダウンロード、確認、検証、実行の手順が示されています。',
+    vimLinkLabel: 'DeepWorkPlan Vim のインストーラを確認する',
+    betaNote:
+      'プレリリースも同じ方法で検証できます。v7 ベータの v7.0.0-beta.1 は独自の SHA256SUMS を持つ GitHub のプレリリースであり、安定版リリースではありません。このサイトは実地テストのためにこれを取り込んでおり、固定したタグでインストールし、そのチェックサムと照合しています。',
     disclosureTitle: '脆弱性を報告する',
     disclosureBody:
       'セキュリティ上の問題を見つけましたか？公開 Issue を立てるのではなく、該当リポジトリ（スキルまたはウェブサイト。下記にリンクされたセキュリティポリシーを参照）で GitHub のプライベート脆弱性報告を通じてプライベートに報告してください。公開 Issue を立てると修正が存在する前に問題が露出します。',

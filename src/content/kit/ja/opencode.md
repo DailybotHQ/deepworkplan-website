@@ -21,6 +21,13 @@ prefix: '#'
 
 DWP は AGENTS.md とコマンド手順をリポジトリに配置します。OpenCode はそれらをプロジェクトのコンテキストとして発見します。
 
+任意：[coding-agents-kit](/kit/agentkit) はこの CLI をインストールし、`ak opencode` で起動できます。ベンダー公式のインストーラーでも同様に使えます。
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install opencode
+```
+
 ## 呼び出し
 
 `#` プレフィックスを使います。

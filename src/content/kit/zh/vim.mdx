@@ -1,0 +1,142 @@
+---
+title: DeepWorkPlan Vim
+description: "DeepWorkPlan Vim 是 Deep Work Plan 的终端编辑器：Neovim 0.12+ 配置，内置生成式命令索引、计划浏览器与 Markdown 查看器。"
+kind: addon
+lang: zh
+order: 6
+software:
+  applicationCategory: DeveloperApplication
+  operatingSystem: [macOS, Linux, WSL]
+  license: https://www.gnu.org/licenses/gpl-3.0.html
+  installUrl: https://deepworkplan.com/vim/install.sh
+  sameAs:
+    - https://github.com/DailybotHQ/deepworkplan-vim
+---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
+
+# DeepWorkPlan Vim
+
+**DeepWorkPlan Vim** 是 Deep Work Plan 的终端编辑器：一套面向在终端中工作的人以及编程代理的 Neovim 配置。你的计划、文档和所有命令的索引，都只需一个按键。
+
+它是一个独立的产品，作为 Deep Work Plan v7 beta（`v7.0.0-beta.1`，预发布版本）的可选 `vim` 附加组件提供。Deep Work Plan 可以搭配任何编辑器使用，也可以不用编辑器；该编辑器同样不依赖 Deep Work Plan：你可以单独把它加到一台机器上，无论是否存在计划，它都能作为编辑器使用。本页描述的是 **v0.4.2** 版本。
+
+## 为什么要为 Deep Work Plan 准备终端编辑器
+
+Deep Work Plan 是 `.dwp/plans/` 下的一个 Markdown 文件夹：包含目标、原子任务、验证关卡和持续更新的日志。人来审阅，代理来执行，两者往往都在终端里完成。为这项工作设计的编辑器，会把三样东西放在身边：计划本身、围绕它的文档，以及在二者之间切换的按键。
+
+DeepWorkPlan Vim 就是这样的编辑器。它是一套精心整理的 Neovim 配置——语言服务器、补全、代码检查、格式化、模糊查找、文件树和精选配色主题，均按需加载——外加少数几个让它成为 Deep Work Plan 编辑器的功能界面。
+
+<VimInDwpLoop lang="zh" class="not-prose my-10" />
+
+## 导览：不会过时的命令索引
+
+按下 `SPC h h`（空格键是 leader 键），或运行 `:DwpCommands`，编辑器就会列出它拥有的每一个键位映射，并附一行说明。这份列表由实时键位映射生成，因此在任何地方定义的映射都会出现在索引中，无需另行登记，索引也不可能过时。
+
+导览到此为止：启动 `nvim`，然后依次按空格、`h`、`h`。
+
+<VimCommandIndex lang="zh" class="not-prose my-10" />
+
+## 你会得到什么
+
+五项功能，每一项都只需一个按键。
+
+| 功能 | 按键 | 作用 |
+|---|---|---|
+| 生成式命令索引 | `SPC h h` | 配置中的每一个键位映射，由实时键位映射生成。 |
+| VS Code 风格手势 | `<C-a>`, `SPC y` | 一个键选中整个文件，并复制到系统剪贴板。单独的 `y` 也会复制到那里，因为剪贴板是系统级共享的。 |
+| Deep Work Plan 浏览器 | `SPC P` | 覆盖你仓库中计划的侧边栏，按状态分组并带进度条，还有用于查看单个计划的阅读视图。 |
+| Markdown 查看器 | `SPC m p`, `SPC m r` | 在浏览器中预览 Markdown，或在缓冲区中渲染。 |
+| 经过校验的安装程序 | — | 面向 macOS、Linux 和 WSL 的自包含安装程序，并为 Windows 提供有文档的手动路径。 |
+
+## 无需离开编辑器即可查看计划
+
+`SPC P`、`:DwpPlans`，或点击状态栏中的对应区段，即可打开计划侧边栏。它覆盖当前目录和 Neovim 配置目录下的每一个 `.dwp/plans/` 文件夹，并按最需要关注的优先排列。在编辑器中，这些分组标签是 `Working`、`Needs attention`、`Ready`、`Not started` 和 `Done`。每个计划都显示进度条。
+
+在某个计划上按回车即可打开阅读视图：一句话概括的目标、状态与进度、标出当前任务的任务清单，以及通往该计划自身文件的通俗跳转。状态栏显示当前活动的计划，起始屏幕列出前三个计划。这些界面只负责说明计划，从不写入 `.dwp/`。
+
+要就地阅读计划的 Markdown 文件，`SPC m p` 在浏览器中预览当前缓冲区，`SPC m r` 则在缓冲区内渲染。两者都只在 Markdown 缓冲区中有效。
+
+## 安装
+
+安装分为三条命令：下载脚本，将其与本站所提供文件的 SHA-256 进行核对，然后运行。安装程序固定了它自身所属的版本，因此会精确安装 `v0.4.2`，即本页所描述的版本；`DWP_VIM_REF=main bash install.sh` 则会改为跟随不断变化的 `main` 分支。
+
+<VimInstall lang="zh" />
+
+安装程序会依次：
+
+1. 检查你的操作系统和包管理器，并在缺少 git、curl 或 Lua 解释器时安装它们。
+2. 在改动已有的 Neovim 配置之前先询问。若通过管道运行且没有终端，它会停止，不做任何更改。
+3. 把仓库克隆到 `~/.config/nvim`，若已存在则更新。
+4. 运行仓库自带的 `lua install.lua`。
+5. 以无界面方式安装插件，因此无需退出再重新打开。
+
+此处提供的脚本与 `v0.4.2` 标签下的 `install.sh` 逐字节相同。想先阅读它，可用 `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` 下载，将其 SHA-256 与上方显示的值比对，阅读之后再运行 `bash install.sh`。
+
+## 要求与平台
+
+- Neovim 0.12 或更高版本。请先安装 Neovim；安装程序不会安装它。
+- Lua：`lua`、`lua5.4` 或 `luajit`。缺少时安装程序会补上一个。
+- macOS、Linux 和 WSL 运行此安装程序。Windows 在仓库 README 中有手动路径：用 winget 安装 Neovim，把仓库克隆到 `%LOCALAPPDATA%\nvim`，再在 Git Bash 中运行 `lua install.lua`。
+- 采用 GPL-3.0 许可：可自由使用、研究和修改。
+
+## 更新、固定版本与卸载
+
+要更新，请运行较新版本的安装程序。重新运行会把已有的 DeepWorkPlan Vim 检出切换到该安装程序所属的版本，保留你的分支，并且永远不会重置本地修改：当本地更改或提交可能丢失时，它会停止，不做任何更改。
+
+要安装其他标签、分支或提交，请设置 `DWP_VIM_REF`。建议使用标签：`v0.4.0` 之前的版本不包含手势、计划浏览器、Markdown 查看器以及此安装程序。
+
+```bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
+```
+
+要卸载，请在配置目录中运行 `lua delete.lua`。它会移除配置、插件、Mason 数据、缓存与状态，以及安装程序复制的字体，但保留 Neovim 可执行文件和你的系统软件包。
+
+```bash
+cd ~/.config/nvim && lua delete.lua
+```
+
+## 常见问题
+
+### 它会覆盖我的 Neovim 配置吗？
+
+不会，未经你批准不会。当它发现一份不是 DeepWorkPlan Vim 的配置时，交互式运行会先询问，再把它移到 `~/.config/previous-deepworkplan-vim`。没有终端，或该备份路径已存在时，它会停止，不做任何更改。
+
+### 它能在 Windows 上使用吗？
+
+此安装程序无法在 Windows 上运行。请使用仓库 README 中的手动路径，或在 WSL 中运行此安装程序。
+
+### 使用它需要 Deep Work Plan 吗？
+
+不需要。它首先是一个编辑器。它不会安装也不依赖 Deep Work Plan 技能；在存在 `.dwp/plans/` 文件夹之前，计划浏览器只是没有内容可列。
+
+### v7 的 vim 附加组件如何使用它？
+
+Deep Work Plan v7 beta 在引导流程中将该编辑器作为可选的 `vim` 附加组件提供。该附加组件通过编辑器的 `addon/surface.json` 以只读方式检测已有安装，并且只有在征得你同意后，才会提供固定版本、经校验和验证的安装。未经明确批准，它绝不会覆盖已有的 Neovim 配置，而且它从来不是必需的。
+
+### 编程代理如何使用它？
+
+它为在终端中工作的人和编程代理而构建。它的键位映射由契约测试固定，因此肌肉记忆以及代理的预期都能在更新后保持不变。
+
+### 我得到的是哪个版本？
+
+安装程序安装的是它所属的版本（目前为 `v0.4.2`），除非你设置 `DWP_VIM_REF`；`DWP_VIM_REF=main` 会跟随 `main`。本页描述的是 `v0.4.2` 版本，它包含此处列出的全部功能。
+
+### 它采用什么许可证，源自哪里？
+
+GPL-3.0。它派生自 Andrés M Prieto 的 mu-vim，署名保留在仓库中。
+
+## 源码与许可证
+
+源码位于 [DeepWorkPlan Vim 仓库](https://github.com/DailybotHQ/deepworkplan-vim)。它是公开的，采用 GPL-3.0 许可，派生自 [mu-vim](https://github.com/AndresMpa/mu-vim)。
+
+## 相关套件条目
+
+- [Devcontainer](/kit/devcontainer) — 可复现的开发环境（第一个附加组件）
+- [Dailybot](/kit/dailybot) — 团队可见的计划生命周期报告（第二个附加组件）
+- [AI Diff Reviewer](/kit/ai-diff-reviewer) — 计划最终评审期间的本地评审（第五个附加组件）
+- [Herdr](/kit/herdr) — 在 Herdr 窗格中将任务委派给对等方（v7 beta）
+- [Agentkit](/kit/agentkit) — 一条命令覆盖所有终端编程代理，并支持无头委派（v7 beta）

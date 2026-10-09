@@ -1,7 +1,7 @@
 ---
 title: "Il kit Deep Work Plan"
 description: "La skill e le sue nove sub-skill, i comandi, gli adapter per gli agenti, i preset di onboarding, gli addon opt-in e gli esempi che rendono Deep Work Plan eseguibile ovunque."
-lastUpdated: 2026-05-31
+lastUpdated: 2026-10-09
 ---
 
 ## Il kit Deep Work Plan
@@ -56,6 +56,18 @@ Capacità che il flusso di onboard aggiunge a un repo. Quattro sono opzionali e 
 - **Dependency upgrade** — aggiornamenti indipendenti dal package manager, a lotti, validati e annullabili.
 - **Design system** — un `DESIGN.md` con ambito di interfaccia (in `docs/DESIGN.md`, referenziato da `AGENTS.md`) ragionato dalla fonte di design reale del repo, con profili per UI visuale, output CLI stilizzato e messaggistica conversazionale, così che gli agenti generino output di interfaccia on-brand; quando un design system viene rilevato l'offerta è obbligatoria ma l'installazione è subordinata a un'accettazione — il profilo visuale è fortemente raccomandato quando rilevato, mentre i profili CLI e conversazionale sono raccomandati quando rilevati e sempre proposti con una domanda.
 - **AI Diff Reviewer** — la revisione locale richiesta: l'onboarding installa [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, e il passaggio di sicurezza di ogni Final Review la esegue; il Flow B opzionale aggiunge un gate di merge PR in CI che condivide la stessa estensione, offerto esplicitamente e mai installato senza richiesta.
+
+### Ecosistema
+
+**La metodologia funziona da sola. Gli addon la amplificano.** Ogni addon è un integratore leggero all’interno della skill Deep Work Plan, fissato tramite tag a un prodotto con il proprio repository, la propria release e la propria versione di interfaccia. Ogni prodotto funziona senza Deep Work Plan, e nessun addon è obbligatorio.
+
+- **Skill Deep Work Plan** — Crea, esegue, verifica, riprende e affina i piani. Non richiede alcun addon.
+- **[herdr](/it/kit/herdr)** — Peer in pannelli Herdr, su qualsiasi macchina: delega interattiva con una sola risposta autorizzata. Fissato a `herdr-peers@v0.1.0`.
+- **[agentkit](/it/kit/agentkit)** — Un solo comando ak per ogni agente di codice da terminale: delega headless in un worktree. Fissato a `coding-agents-kit@v0.1.1`.
+- **[devcontainer](/it/kit/devcontainer)** — Un template Dev Containers e immagini di base distribuiti senza agenti di codice. Fissato a `devcontainer-kit@v0.1.4`.
+- **[vim](/it/kit/vim)** — L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown. Fissato a `deepworkplan-vim@v0.4.2`.
+
+Il registro degli addon e i descrittori sono distribuiti nella beta v7, una pre-release: `v7.0.0-beta.1`
 
 ### Esempi
 

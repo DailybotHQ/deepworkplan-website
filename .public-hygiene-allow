@@ -1,0 +1,5 @@
+# Allow-list for scripts/check-public-hygiene.sh.
+# Format: <path> <secret-rule> <reason>. Only secret-* rules can be listed,
+# and every allowed hit line must say it is fake (fake, test, planted or
+# example). Private names, personal paths and addresses can never be allowed.
+# (No entries: the tree has no secret-shaped fixture today.)

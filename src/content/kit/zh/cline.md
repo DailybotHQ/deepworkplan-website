@@ -21,6 +21,13 @@ Cline 是一款开源编码代理，通过 Markdown 规则与命令过程支持 
 
 DWP 命令以代理通过 Cline 规则读取的 Markdown 过程的形式存在。
 
+可选：[coding-agents-kit](/kit/agentkit) 可以安装此 CLI，并用 `ak cline` 启动它。使用供应商自己的官方安装程序同样可行。
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install cline
+```
+
 ## 调用
 
 使用 `#` 前缀：

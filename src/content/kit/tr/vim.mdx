@@ -1,0 +1,142 @@
+---
+title: DeepWorkPlan Vim
+description: "DeepWorkPlan Vim, Deep Work Plan için terminal düzenleyicisidir: komut dizini, plan tarayıcısı ve Markdown görüntüleyicisiyle gelen Neovim 0.12+ yapılandırması."
+kind: addon
+lang: tr
+order: 6
+software:
+  applicationCategory: DeveloperApplication
+  operatingSystem: [macOS, Linux, WSL]
+  license: https://www.gnu.org/licenses/gpl-3.0.html
+  installUrl: https://deepworkplan.com/vim/install.sh
+  sameAs:
+    - https://github.com/DailybotHQ/deepworkplan-vim
+---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
+
+# DeepWorkPlan Vim
+
+**DeepWorkPlan Vim**, Deep Work Plan için terminal düzenleyicisidir: terminalde çalışan insanlar ve kodlama ajanları için bir Neovim yapılandırması. Planlarınız, belgeleriniz ve tüm komutların dizini tek bir tuş uzağınızda.
+
+Ayrı bir üründür ve Deep Work Plan v7 beta sürümünün (`v7.0.0-beta.1`, bir ön sürüm) isteğe bağlı `vim` eklentisi olarak sunulur. Deep Work Plan herhangi bir düzenleyiciyle ya da hiçbiriyle çalışır; düzenleyici de Deep Work Plan gerektirmez: bir makineye tek başına eklersiniz ve plan olsun ya da olmasın düzenleyici olarak çalışır. Bu sayfa **v0.4.2** sürümünü anlatır.
+
+## Deep Work Plan için neden terminal düzenleyicisi
+
+Deep Work Plan, `.dwp/plans/` altında bir Markdown klasörüdür: bir hedef, atomik görevler, doğrulama kapıları ve sürekli bir günlük. İnsanlar gözden geçirir, ajanlar yürütür ve ikisi de çoğu zaman bunu terminalde yapar. Bu iş için yapılmış bir düzenleyici üç şeyi yakın tutar: planın kendisini, çevresindeki belgeleri ve sizi ikisi arasında gezdiren tuşları.
+
+DeepWorkPlan Vim işte bu düzenleyicidir. Dil sunucuları, tamamlama, lint, biçimlendirme, bulanık arama, bir dosya ağacı ve seçilmiş renk temalarını tembel yükleme ile sunan özenle hazırlanmış bir Neovim yapılandırması; üstüne onu Deep Work Plan düzenleyicisi yapan birkaç yüzey eklenir.
+
+<VimInDwpLoop lang="tr" class="not-prose my-10" />
+
+## Tur: eskimeyen bir komut dizini
+
+`SPC h h` tuşlarına (Boşluk, leader tuşudur) basın ya da `:DwpCommands` komutunu çalıştırın; düzenleyici sahip olduğu her eşlemeyi tek satırlık bir açıklamayla listeler. Liste canlı tuş eşlemelerinden üretilir; bu yüzden herhangi bir yerde tanımlanan bir eşleme kayıt gerekmeden dizinde görünür ve dizin eskiyemez.
+
+Turun tamamı bu: `nvim` başlatın, ardından Boşluk, `h`, `h` tuşlarına basın.
+
+<VimCommandIndex lang="tr" class="not-prose my-10" />
+
+## Neler elde edersiniz
+
+Beş özellik, her biri tek bir tuş uzağınızda.
+
+| Özellik | Tuşlar | Ne yapar |
+|---|---|---|
+| Oluşturulan komut dizini | `SPC h h` | Yapılandırmadaki her eşleme, canlı tuş eşlemelerinden üretilir. |
+| VS Code tarzı hareketler | `<C-a>`, `SPC y` | Tek tuşla tüm dosyayı seçin ve sistem panosuna kopyalayın. Düz `y` de oraya kopyalar, çünkü pano sistem geneline açıktır. |
+| Deep Work Plan tarayıcısı | `SPC P` | Deponuzdaki planların durumlarına göre gruplanıp ilerleme çubuklarıyla gösterildiği bir kenar çubuğu ve tek bir plan için bir okuyucu. |
+| Markdown görüntüleyici | `SPC m p`, `SPC m r` | Markdown'ı tarayıcıda önizleyin ya da arabellekte işleyin. |
+| Doğrulanmış kurulum | — | macOS, Linux ve WSL için kendi kendine yeten bir kurulum programı; Windows için belgelenmiş elle kurulum yolu. |
+
+## Düzenleyiciden çıkmadan planlar
+
+`SPC P`, `:DwpPlans` ya da durum satırı bölümüne bir tıklama plan kenar çubuğunu açar. Geçerli dizindeki ve Neovim yapılandırma dizinindeki her `.dwp/plans/` klasörünü kapsar ve planları en çok dikkat isteyenden başlayarak gruplar. Düzenleyicide etiketler `Working`, `Needs attention`, `Ready`, `Not started` ve `Done` biçimindedir. Her plan bir ilerleme çubuğu gösterir.
+
+Okuyucuyu açmak için bir plan üzerinde Enter'a basın: tek cümlelik hedef, durum ve ilerleme, geçerli görevin işaretlendiği görev listesi ve planın kendi dosyalarına sade bir dille atlamalar. Durum satırı canlı etkin planı gösterir, başlangıç ekranı ise ilk üçü listeler. Bu yüzeyler planları açıklar; `.dwp/` altına asla yazmaz.
+
+Bir planın Markdown dosyalarını yerinde okumak için `SPC m p` geçerli arabelleği tarayıcıda önizler, `SPC m r` ise arabellek içinde işler. İkisi de yalnızca Markdown arabelleklerinde çalışır.
+
+## Kurulum
+
+Kurulum üç komuttan oluşur: betiği indirin, bu sitenin sunduğu dosyanın SHA-256 değeriyle karşılaştırın, ardından çalıştırın. Kurulum programı kendi sürümüne sabitlenmiştir; bu nedenle tam olarak bu sayfanın anlattığı sürüm olan `v0.4.2` sürümünü kurar. `DWP_VIM_REF=main bash install.sh` ise bunun yerine sürekli ilerleyen `main` dalını izler.
+
+<VimInstall lang="tr" />
+
+Kurulum programı sırayla şunları yapar:
+
+1. İşletim sisteminizi ve paket yöneticinizi denetler; git, curl ve bir Lua yorumlayıcısı eksikse kurar.
+2. Mevcut bir Neovim yapılandırmasına dokunmadan önce sorar. Terminal olmadan boru ile çalıştırılırsa durur ve hiçbir şeyi değiştirmez.
+3. Depoyu `~/.config/nvim` içine klonlar ya da zaten oradaysa günceller.
+4. Deponun kendi `lua install.lua` komutunu çalıştırır.
+5. Eklentileri başsız modda kurar; kapatıp yeniden açma adımı yoktur.
+
+Burada sunulan betik, `v0.4.2` etiketindeki `install.sh` dosyasının bayt bayt aynı bir kopyasıdır. Önce okumak için `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` ile indirin, SHA-256 değerini yukarıda gösterilen değerle karşılaştırın, okuyun ve ardından `bash install.sh` çalıştırın.
+
+## Gereksinimler ve platformlar
+
+- Neovim 0.12 veya daha yenisi. Önce Neovim'i kurun; kurulum programı onu kurmaz.
+- Lua: `lua`, `lua5.4` veya `luajit`. Eksikse kurulum programı bir tane ekler.
+- macOS, Linux ve WSL kurulum programını çalıştırır. Windows için deponun README dosyasında belgelenmiş elle kurulum yolu vardır: Neovim'i winget ile kurun, depoyu `%LOCALAPPDATA%\nvim` içine klonlayın ve Git Bash'ten `lua install.lua` çalıştırın.
+- GPL-3.0 lisanslıdır: kullanması, incelemesi ve değiştirmesi serbesttir.
+
+## Güncelleme, sürüm sabitleme ve kaldırma
+
+Güncellemek için daha yeni bir sürümün kurulum programını çalıştırın. Yeniden çalıştırmak, mevcut bir DeepWorkPlan Vim klonunu o kurulum programının sürümüne taşır, dallarınızı korur ve yerel değişiklikleri asla sıfırlamaz: yerel değişiklikler ya da commit'ler kaybolacaksa durur ve hiçbir şeyi değiştirmez.
+
+Başka bir etiketi, dalı ya da commit'i kurmak için `DWP_VIM_REF` değerini ayarlayın. Etiket tercih edin: `v0.4.0` öncesindeki sürümler hareketleri, plan tarayıcısını, Markdown görüntüleyiciyi ya da bu kurulum programını içermez.
+
+```bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
+```
+
+Kaldırmak için yapılandırma dizininde `lua delete.lua` çalıştırın. Yapılandırmayı, eklentileri, Mason verilerini, önbelleği ve durumu ve kurulum programının yaptığı yazı tipi kopyasını kaldırır; Neovim ikili dosyasına ve sistem paketlerinize dokunmaz.
+
+```bash
+cd ~/.config/nvim && lua delete.lua
+```
+
+## Sorular
+
+### Neovim yapılandırmamın üzerine yazar mı?
+
+Hayır, onayınız olmadan yazmaz. DeepWorkPlan Vim olmayan bir yapılandırma bulduğunda, etkileşimli çalıştırma onu `~/.config/previous-deepworkplan-vim` konumuna taşımadan önce sorar. Terminal yoksa ya da bu yedek yolu zaten varsa durur ve hiçbir şeyi değiştirmez.
+
+### Windows'ta çalışır mı?
+
+Kurulum programı Windows'ta çalışmaz. Deponun README dosyasındaki elle kurulum yolunu kullanın ya da kurulum programını WSL içinde çalıştırın.
+
+### Kullanmak için Deep Work Plan gerekir mi?
+
+Hayır. Önce bir düzenleyicidir. Deep Work Plan becerisini kurmaz ve gerektirmez; plan tarayıcısının, bir `.dwp/plans/` klasörü olana kadar listeleyecek bir şeyi olmaz.
+
+### v7 vim eklentisi bunu nasıl kullanır?
+
+Deep Work Plan v7 beta, onboarding sırasında düzenleyiciyi isteğe bağlı `vim` eklentisi olarak sunar. Eklenti, mevcut bir kurulumu düzenleyicinin `addon/surface.json` dosyası üzerinden salt okunur biçimde algılar ve sabitlenmiş, sağlama toplamı doğrulanmış kurulumu yalnızca onayınızla önerir. Açık onay olmadan mevcut bir Neovim yapılandırmasının üzerine asla yazmaz ve hiçbir zaman zorunlu değildir.
+
+### Kodlama ajanları bunu nasıl kullanır?
+
+Terminalde yaşayan insanlar ve kodlama ajanları için yapılmıştır. Tuş atamaları sözleşme testleriyle sabitlenmiştir; böylece kas hafızası ve bir ajanın beklentileri güncellemelerden sağ çıkar.
+
+### Hangi sürümü alırım?
+
+`DWP_VIM_REF` ayarlamadıkça kurulum programı ait olduğu sürümü (bugün için `v0.4.2`) kurar; `DWP_VIM_REF=main` ise `main` dalını izler. Bu sayfa, burada listelenen tüm özellikleri içeren `v0.4.2` sürümünü anlatır.
+
+### Hangi lisansla sunuluyor ve nereden geliyor?
+
+GPL-3.0. Andrés M Prieto'nun mu-vim projesinden türetilmiştir ve atıf depoda kalır.
+
+## Kaynak kod ve lisans
+
+Kaynak kod [DeepWorkPlan Vim deposunda](https://github.com/DailybotHQ/deepworkplan-vim) bulunur. Herkese açıktır ve GPL-3.0 lisanslıdır; [mu-vim](https://github.com/AndresMpa/mu-vim) projesinden türetilmiştir.
+
+## İlgili kit girdileri
+
+- [Devcontainer](/kit/devcontainer) — yeniden üretilebilir geliştirme ortamı (birinci eklenti)
+- [Dailybot](/kit/dailybot) — ekibe görünür plan yaşam döngüsü raporları (ikinci eklenti)
+- [AI Diff Reviewer](/kit/ai-diff-reviewer) — plan Final Review'ları sırasında yerel inceleme (beşinci eklenti)
+- [Herdr](/kit/herdr) — bir görevi Herdr bölmesindeki eş bir ajana devretme (v7 beta)
+- [Agentkit](/kit/agentkit) — her terminal kodlama ajanı için tek komut ve başsız (headless) devretme (v7 beta)

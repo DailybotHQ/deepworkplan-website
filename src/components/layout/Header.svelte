@@ -195,7 +195,7 @@ function closeOnEscape(event: KeyboardEvent) {
       </button>
     </div>
     <!-- Desktop menu -->
-    <div class="hidden md:flex items-center gap-8">
+    <div class="hidden lg:flex items-center gap-8">
       <div class="flex gap-6">
         <a href="{prefix}/methodology" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'methodology' })}>{nav.methodology}</a>
         <a href="{prefix}/spec" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'spec' })}>{nav.spec}</a>
@@ -360,7 +360,7 @@ function closeOnEscape(event: KeyboardEvent) {
     </div>
     <!-- Mobile menu button -->
     <button
-      class="block md:hidden p-2"
+      class="block lg:hidden p-2"
       aria-label={nav.menu}
       on:click={toggleMenu}
       type="button"

@@ -274,3 +274,11 @@ Methodik:
 
 Jeder kann diesen Prompt auf jedem Repository ausführen — und mit einer Codebasis enden, die jeder KI-Agent steuern kann.
 </content>
+
+## Nächste Schritte
+
+- [Methodik lesen](/methodology)
+- [Spezifikation](/spec)
+- [Das Kit durchstöbern](/kit)
+- [Beispiele ansehen](/examples)
+- [Optional: der Terminal-Editor DeepWorkPlan Vim](/kit/vim)

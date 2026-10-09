@@ -34,7 +34,7 @@ Source: `src/content/pages/{en,es}/` content collection. `/init.md` is a separat
 
 ### Standalone agent artifacts (not content-collection pages)
 
-A handful of top-level agent-facing files are hand-maintained static files under `public/`, served verbatim with no per-language variant and no HTML sibling: `/llms.txt`, `/llms-full.txt`, `/openapi.json`, `/init.md`. `/init.md` in particular is the canonical, English-only, self-contained onboarding prompt — the human-readable equivalent lives at `/quickstart` (all 17 languages), but the two are maintained independently and are not required to be byte-identical.
+A handful of top-level agent-facing files are hand-maintained static files under `public/`, served verbatim with no per-language variant and no HTML sibling: `/llms.txt`, `/llms-full.txt`, `/openapi.json`, `/init.md`, `/vim/install.sh` (the DeepWorkPlan Vim installer — a byte-identical copy of the vim repository's source of truth, pinned `Content-Type: text/x-shellscript`; the apex `/install.sh` 301-redirects to it). `/init.md` in particular is the canonical, English-only, self-contained onboarding prompt — the human-readable equivalent lives at `/quickstart` (all 17 languages), but the two are maintained independently and are not required to be byte-identical.
 
 ## Response Format
 
@@ -130,6 +130,8 @@ The Cloudflare Pages middleware (`functions/_middleware.ts`) supports automatic 
 **Excluded paths:** `/api/*`, `/internal/*`, `/_*`, and any path with a file extension (`.js`, `.css`, `.png`, etc.).
 
 **Fallback:** If no `.md` file exists for the requested path, the middleware falls back to serving HTML normally.
+
+**Redirect aliases have no `.md` twin.** A path that is only a redirect source — `/init`, `/setup`, `/onboarding`, `/docs`, `/vim` — has no Markdown endpoint of its own, so `Accept: text/markdown` on it falls through to the normal redirect and the client then receives the Markdown of the destination (`/quickstart`, `/developers`, `/kit/vim`). The MCP `read_page` tool behaves the same way: it resolves `/kit/vim` (and `/<lang>/kit/vim`) to the kit page's Markdown and returns a not-found with recovery hints for `/vim`. DeepWorkPlan Vim's single official page is `/kit/vim`; its Markdown endpoint is `/kit/vim.md`.
 
 **Testing with curl:**
 ```bash

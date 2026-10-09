@@ -21,6 +21,13 @@ Claude Code के पास नेटिव slash commands और skills के
 
 DWP `.agents/skills/` के अंतर्गत skills के रूप में आता है (`.claude/` symlink के माध्यम से हल किया गया)। Claude Code उन्हें स्वतः खोज लेता है।
 
+वैकल्पिक: [coding-agents-kit](/kit/agentkit) इस CLI को इंस्टॉल कर सकता है और `ak claude` से चला सकता है। विक्रेता का अपना आधिकारिक इंस्टॉलर भी उतना ही अच्छा काम करता है।
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install claude
+```
+
 ## आह्वान
 
 `/` प्रीफ़िक्स का उपयोग करें:

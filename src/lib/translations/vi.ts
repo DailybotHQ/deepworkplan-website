@@ -742,6 +742,10 @@ export const vi: SiteTranslations = {
       { label: 'Đặc tả', href: '/spec' },
       { label: 'Duyệt bộ kit', href: '/kit' },
       { label: 'Xem ví dụ', href: '/examples' },
+      {
+        label: 'Tùy chọn: trình soạn thảo terminal DeepWorkPlan Vim',
+        href: '/kit/vim',
+      },
     ],
   },
 
@@ -1245,7 +1249,7 @@ export const vi: SiteTranslations = {
     },
     correction: {
       title: 'Giúp chúng tôi giữ trang này chính xác',
-      body: 'Trang này được rà soát vào ngày hiển thị và sửa theo yêu cầu. Nếu mô tả về công cụ của bạn đã lỗi thời hoặc chưa đầy đủ, hãy mở một issue và chúng tôi sẽ sửa.',
+      body: 'Trang web này được rà soát vào ngày hiển thị và sửa theo yêu cầu. Nếu mô tả về công cụ của bạn đã lỗi thời hoặc chưa đầy đủ, hãy mở một issue và chúng tôi sẽ sửa.',
       ctaLabel: 'Mở một issue',
     },
     sourcesTitle: 'Nguồn',
@@ -1260,7 +1264,7 @@ export const vi: SiteTranslations = {
     eyebrow: 'Tin tưởng & bảo mật',
     title: 'Tin tưởng và bảo mật',
     intro:
-      'Không ai nên cài một skill mà họ không thể tin tưởng. Deep Work Plan được xây dựng để xác minh, không phải để tin một cách mù quáng: mã nguồn mở, Markdown-first, không phá hủy và có thể kiểm tra trước khi chạy. Trang này nêu rõ những gì nó làm, những gì nó không làm, và cách xác nhận cả hai.',
+      'Không ai nên cài một skill mà họ không thể tin tưởng. Deep Work Plan được xây dựng để xác minh, không phải để tin một cách mù quáng: mã nguồn mở, Markdown-first, không phá hủy và có thể kiểm tra trước khi chạy. Trang web này nêu rõ những gì nó làm, những gì nó không làm, và cách xác nhận cả hai.',
     pillarsTitle: 'Bạn đang tin tưởng điều gì',
     pillars: [
       {
@@ -1290,6 +1294,11 @@ export const vi: SiteTranslations = {
     codeLabel: 'shell',
     verifyNote:
       'Các bản phát hành có checksum, không có chữ ký — ký (cosign hoặc GPG của người duy trì) là bước tiếp theo được ghi lại, không phải tuyên bố hiện tại. Vì mọi thứ đều mở, bạn cũng có thể so sánh bất kỳ file nào với repository tại tag của nó.',
+    vimNote:
+      'Quy tắc tương tự áp dụng cho trình cài đặt DeepWorkPlan Vim: trang của nó hiển thị SHA-256 của tập lệnh đang được phân phát, kèm các bước tải, kiểm tra, xác minh và chạy.',
+    vimLinkLabel: 'Kiểm tra trình cài đặt DeepWorkPlan Vim',
+    betaNote:
+      'Các bản phát hành trước được xác minh theo cùng cách. Bản beta v7, v7.0.0-beta.1, là một bản phát hành trước trên GitHub với SHA256SUMS riêng, và không phải bản phát hành ổn định. Trang web này tích hợp nó để thử nghiệm thực tế: cài đặt theo tag đã ghim và đối chiếu với các checksum đó.',
     disclosureTitle: 'Báo cáo lỗ hổng',
     disclosureBody:
       'Tìm thấy vấn đề bảo mật? Báo cáo riêng tư qua tính năng báo cáo lỗ hổng bảo mật riêng tư của GitHub trên repository liên quan — skill hoặc trang web (xem các liên kết chính sách bảo mật bên dưới) — thay vì mở một issue công khai, vì điều đó sẽ phơi bày vấn đề trước khi có bản vá.',
@@ -1574,7 +1583,7 @@ export const vi: SiteTranslations = {
     eyebrow: 'Chính sách quyền riêng tư',
     title: 'Quyền riêng tư trên deepworkplan.com',
     intro:
-      'Deep Work Plan là một trang web tài liệu và phương pháp luận tĩnh. Trang này giải thích, một cách thẳng thắn và đầy đủ, dữ liệu nào trang web chạm đến khi bạn ghé thăm: không có hệ thống tài khoản, không quảng cáo, và không có theo dõi xuyên trang nào trong toàn bộ trang web.',
+      'Deep Work Plan là một trang web tài liệu và phương pháp luận tĩnh. Trang web này giải thích, một cách thẳng thắn và đầy đủ, dữ liệu nào trang web chạm đến khi bạn ghé thăm: không có hệ thống tài khoản, không quảng cáo, và không có theo dõi xuyên trang nào trong toàn bộ trang web.',
     lastUpdated: 'Ngày 8 tháng 9 năm 2026',
     sections: [
       {

@@ -42,6 +42,8 @@ The site explains and positions the DWP methodology, hosts the readable specific
 
 **Content model:** methodology documentation is primary, paired with the specification reader and kit catalog. The blog engine, slides/tech-talks, and personal pages have been removed — this is a focused methodology-and-marketing site.
 
+**Kit addons:** eight addon pages at `/kit/<slug>` (`kind: addon`, one page each — rule 20): devcontainer, dailybot, dependency-upgrade, design-system, ai-diff-reviewer, vim, herdr, agentkit. herdr, agentkit, devcontainer and vim document the **v7 ecosystem**: thin integrators pinned by tag to products with their own repositories (herdr-peers `v0.1.0`, coding-agents-kit `v0.1.1`, devcontainer-kit `v0.1.4`, deepworkplan-vim `v0.4.2`), shipped by the `v7.0.0-beta.1` pre-release — never presented as stable, never as required. The kit index carries the ecosystem plate (`src/components/diagrams/kit/KitEcosystem.astro`). Every product claim traces to a tagged artifact (claims-ledger method).
+
 **Technology Stack:**
 
 - **Astro 7.0.8** — Static site generator (islands architecture; Rust compiler + Sätteri Markdown)
@@ -60,6 +62,7 @@ src/
 ├── components/          # UI components (Astro + Svelte)
 │   ├── home/            # Homepage sections (Hero, Pitch, Outcomes, ...)
 │   ├── editorial/       # Editorial primitives (Broadsheet design system)
+│   ├── vim/             # DeepWorkPlan Vim page blocks embedded in the kit MDX (VimInstall)
 │   ├── layout/          # Header.svelte, MobileMenu.svelte
 │   └── pages/           # Shared page components (*Page.astro)
 ├── content/             # Content Collections (methodology, spec, kit, pages — 17 lang folders each)
@@ -311,7 +314,7 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 - **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the next release overwrites those edits. Contribute upstream instead.
 - **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: changes there must be intentional and reviewed, contributed upstream first, then re-adapted deliberately.
 
-**Current vendored provenance (2026-10-01):** the `deepworkplan` copy is the released upstream tag **`v6.0.2`** (`dd1e10e`), installed via `npx --yes skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan --force -y`, with the installed `version:` asserted equal to the tag and the tree byte-identical to the release. `ai-diff-reviewer` is at **v3.2.2** (refreshed by the release workflow) and `dailybot` is the released upstream tag **`v3.23.2`** (installed via `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot --force -y`, installed `version:` asserted equal to the tag; pack baseline `dailybot-cli >= 3.9.0`, the Plan sub-skill needs `>= 3.25.0`). Local adaptation remains the command delegators, refreshed from the skill's own `onboard/command-templates/`.
+**Current vendored provenance (2026-10-09):** the `deepworkplan` copy is the upstream **pre-release `v7.0.0-beta.1`** (`45b8e87`; not the stable release — `latest` upstream is still `v6.1.0`), vendored so this site field-tests the v7 beta. It was installed via `npx --yes skills add DailybotHQ/deepworkplan-skill@v7.0.0-beta.1 --skill deepworkplan --force -y`, the installed `version:` asserted equal to the tag, and all 170 files verified against the release `SHA256SUMS` (the tree is exactly that file set); `skills-lock.json` records `ref: v7.0.0-beta.1` (added by hand — the skills CLI does not record the ref). `ai-diff-reviewer` is at **v3.3.0** and `dailybot` at **v3.23.3** (both refreshed by the release workflow's dogfood step on 2026-10-09, installed `version:` asserted equal to the tag; pack baseline `dailybot-cli >= 3.9.0`, the Plan sub-skill needs `>= 3.25.0`). Local adaptation remains the command delegators, refreshed from the skill's own `onboard/command-templates/`.
 
 > Full mechanics — the refresh sequence step by step, failure semantics, the official CLI publishing step and its namespace strategy, and the provenance history including this repository's own upstream contribution — live in [Architecture → Dogfooding DWP](docs/ARCHITECTURE.md#addon-refresh--the-full-sequence).
 
@@ -327,7 +330,7 @@ is required only for the CI leg; the local review never needs it. The shared
 [`.review/extension.md`](.review/extension.md) configures both the local and
 the CI review.
 
-DWP standard: 6.0.0 (onboarded 2026-09-11; upgraded 2026-09-13, 2026-09-17, 2026-09-25, 2026-09-28 and 2026-10-01; skill 6.0.2). New plans use v6 by default; existing plans retain their recorded generation and require an explicit request for migration. V6 host baseline: all eight capabilities (`stop_agent`, `meter_spend`, `meter_tokens`, `meter_wall_clock`, `cancel_children`, `model_routing`, `subagents`, `telemetry`) are `false` unless runtime support is verified; telemetry also requires consent. Developers authorize plans and work. Stop before a `main` push/deployment, publication, external messages or secret access unless authorized; prior authorization persists. See [v6 host and authority records](docs/AI_AGENT_ONBOARDING.md#dwp-v6-host-and-authority-records) and the [outcome/test map](docs/TESTING_GUIDE.md#selecting-a-gate-for-a-change).
+DWP standard: 6.0.0 (onboarded 2026-09-11; upgraded 2026-09-13, 2026-09-17, 2026-09-25, 2026-09-28 and 2026-10-01; skill 7.0.0-beta.1 vendored 2026-10-09 for the v7 field test — the beta declares standard 7.0.0, and this repository's 6.0.0 declaration stays valid until the field-test upgrade). New plans use v7 by default under the beta (v6 under 6.x); existing plans retain their recorded generation and require an explicit request for migration. V6 host baseline: all eight capabilities (`stop_agent`, `meter_spend`, `meter_tokens`, `meter_wall_clock`, `cancel_children`, `model_routing`, `subagents`, `telemetry`) are `false` unless runtime support is verified; telemetry also requires consent. Developers authorize plans and work. Stop before a `main` push/deployment, publication, external messages or secret access unless authorized; prior authorization persists. See [v6 host and authority records](docs/AI_AGENT_ONBOARDING.md#dwp-v6-host-and-authority-records) and the [outcome/test map](docs/TESTING_GUIDE.md#selecting-a-gate-for-a-change).
 
 ## Quick Commands
 
@@ -346,6 +349,7 @@ pnpm run md:check:strict    # Same as above; exits 1 on missing (for CI)
 pnpm run md:content-check   # Verify the .md actually carries equivalent content (not just exists)
 pnpm run i18n:check         # Verify translation parity across all 17 active languages
 pnpm run i18n:scaffold <code>  # Scaffold strings + content for a new language code
+bash scripts/check-public-hygiene.sh  # Public-hygiene check (no private context or secrets; runs in CI)
 pnpm run lighthouse         # Lighthouse CI audit (mobile)
 pnpm run lighthouse:desktop # Lighthouse CI audit (desktop)
 pnpm run release            # Bump version and release commit
@@ -415,6 +419,7 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 17. **Use non-English slugs for content collections** — all slugs (methodology/spec/kit filenames) MUST be in English, even for non-English content
 18. **Re-introduce removed surfaces** — the blog engine, slides/tech-talks, and the personal pages (cv, portfolio, dailybot, foodie, hobbies, trading, entrepreneur) have been removed from this site. Do not add them back or reference them.
 19. **Add a new top-level page without updating `src/middleware.ts`** — the middleware allowlist is derived from one set: `KNOWN_BASE_PATHS` (per-language page slugs). Adding `'foo'` to that set covers every language — `/foo`, `/es/foo`, `/pt/foo`, `/zh/foo`, etc. — at once; the prefixed-language list comes from the registry (`getActiveNonDefaultLanguages()`), so new languages need no edit. New top-level routes return 404 until their slug is added. Symptom: dev log shows `[404] (rewrite) /foo` (the `(rewrite)` is the smoking gun — it comes from `context.rewrite()` in the middleware, not from Astro routing). Multi-segment paths like `/foo/bar` and any path containing `.` bypass the rule. The canonical adoption page `/quickstart` (plus its `/init`, `/setup`, and `/onboarding` redirects — all three 301 to `/quickstart`) is already in `KNOWN_BASE_PATHS`; keep it there. See [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
+20. **Create a standalone top-level page for a kit addon** — addons are documented **once**, at `/kit/<slug>` (and `/<lang>/kit/<slug>`), never as a second page. DeepWorkPlan Vim had both `/vim` and `/kit/vim`; that duplicate was retired, `/kit/vim` is the single official page and `/vim` + `/vim.md` are 301 aliases in `REDIRECT_PAIRS` (`src/lib/redirect-map.ts`; keep the slug in `KNOWN_BASE_PATHS` as a redirect source). Give an addon a richer page by making its kit doc MDX and embedding purpose-built components (`src/components/vim/`, `src/components/diagrams/kit/`), not by adding a route. See the DeepWorkPlan Vim paragraph in [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
 
 ### DO:
 
@@ -446,6 +451,7 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 - [ ] Meta descriptions: 130-160 characters — 60-90 for CJK (`zh`, `ja`, `ko`), whose characters render about twice as wide (pages in translations, collection docs in frontmatter; see [SEO](docs/SEO.md#meta-description-standards-mandatory))
 - [ ] Accessibility: approved text contrast, image dimensions, heading hierarchy
 - [ ] Performance: lightest hydration, minimal JS
+- [ ] `bash scripts/check-public-hygiene.sh` passes (no private context or secret-shaped literals; public repository standard — see CONTRIBUTING.md)
 - [ ] Commit message in English (conventional format)
 
 ## Skills & Agents

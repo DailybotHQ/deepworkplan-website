@@ -21,6 +21,13 @@ Cursor hỗ trợ DWP thông qua project rules và các file lệnh.
 
 Các lệnh DWP tồn tại dưới dạng markdown trong dự án. Cursor đọc chúng qua hệ thống rules của mình.
 
+Tùy chọn: [coding-agents-kit](/kit/agentkit) có thể cài đặt CLI này và khởi chạy nó bằng `ak cursor`. Trình cài đặt chính thức của nhà cung cấp cũng hoạt động tốt như vậy.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install cursor
+```
+
 ## Cách gọi
 
 Dùng tiền tố `#` (Cursor chặn `/`):

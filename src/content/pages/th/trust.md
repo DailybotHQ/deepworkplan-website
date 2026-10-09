@@ -31,6 +31,14 @@ curl -fsSL -o SHA256SUMS \
 
 Release ถูก**ตรวจสอบด้วย checksum ไม่ใช่ลงนาม** — การลงนาม (cosign หรือ maintainer GPG) เป็นขั้นตอนถัดไปที่ได้รับการจัดทำเป็นเอกสาร ไม่ใช่สิ่งที่อ้างในปัจจุบัน เนื่องจากทุกอย่างเปิดเผย คุณยังสามารถ diff ไฟล์ใดก็ได้กับ repository ที่ tag ของมัน
 
+กฎเดียวกันนี้ใช้กับตัวติดตั้งของ DeepWorkPlan Vim: หน้าของมันแสดง SHA-256 ของสคริปต์ที่ให้บริการอยู่ตอนนี้ พร้อมขั้นตอนดาวน์โหลด ตรวจสอบ ยืนยัน และรัน [ตรวจสอบตัวติดตั้งของ DeepWorkPlan Vim](/kit/vim#inspect-before-you-run)
+
+Pre-release ตรวจสอบได้ด้วยวิธีเดียวกัน เบต้าของ v7 (v7.0.0-beta.1) เป็น pre-release บน GitHub ที่มี SHA256SUMS ของตัวเอง และไม่ใช่ release เวอร์ชันเสถียร เว็บไซต์นี้นำมาใช้เพื่อทดสอบในการใช้งานจริง โดยติดตั้งตาม tag ที่ปักหมุดไว้และตรวจสอบกับ checksum เหล่านั้น
+
+```bash
+npx --yes skills add DailybotHQ/deepworkplan-skill@v7.0.0-beta.1 --skill deepworkplan -y
+```
+
 ---
 
 ## รายงานช่องโหว่

@@ -30,9 +30,31 @@ export interface RedirectPair {
 //
 // /developers is the agent & developer portal; /docs is a predictable alias
 // agents and humans try first.
+//
+// DeepWorkPlan Vim is documented ONCE, as a kit addon at /kit/vim (one
+// official page per addon). /vim and /vim.md stay as short, shareable aliases
+// so earlier links (llms.txt, the product README, agent footers) keep working;
+// the installer itself lives at /vim/install.sh, a static file these exact-path
+// rules never touch.
 export const REDIRECT_PAIRS: readonly RedirectPair[] = [
   { from: 'init', to: 'quickstart', status: 301 },
   { from: 'setup', to: 'quickstart', status: 301 },
   { from: 'onboarding', to: 'quickstart', status: 301 },
   { from: 'docs', to: 'developers', status: 301 },
+  { from: 'vim', to: 'kit/vim', status: 301 },
+  { from: 'vim.md', to: 'kit/vim.md', status: 301 },
+];
+
+/**
+ * Apex-only redirects — emitted once, with no language prefixes. These serve
+ * asset paths (they contain a dot or a slash), so expanding them across
+ * languages would point at paths that do not exist.
+ *
+ * `/install.sh` is the legacy apex alias of the DeepWorkPlan Vim installer;
+ * the canonical byte-identical artifact lives at `/vim/install.sh`
+ * (`public/vim/install.sh`). `curl -fsSL` follows redirects (`-L`), so both
+ * one-liners work, while authored copy everywhere uses the canonical form.
+ */
+export const ROOT_ONLY_REDIRECT_PAIRS: readonly RedirectPair[] = [
+  { from: 'install.sh', to: 'vim/install.sh', status: 301 },
 ];

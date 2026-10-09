@@ -85,6 +85,8 @@
 | KT-08 | `dwp-verify` → sequence | ▦ | M | 16:9 · 880×495 | transparent | `kit/cmd-verify.webp` | done |
 | KT-09 | `dwp-status` → sequence | ▦ | M | 16:9 · 880×495 | transparent | `kit/cmd-status.webp` | done |
 | KT-10 | kit index → kit composition overview (presets/adapters/commands/addons) | ▦ | H | 16:9 · 880×495 | transparent | `kit/kit-composition.webp` | done |
+| KT-11 | `kit/vim` → the DeepWorkPlan Vim command index (`SPC h h`), a plate of real mapping rows | ▦ | H | 16:9 · fluid | transparent | component only (`diagrams/kit/VimCommandIndex.astro`) | done |
+| KT-12 | `kit/vim` → Vim in the Deep Work Plan loop (plan browser + Markdown viewer beside plan → tasks → gates → done) | ▦ | H | 16:9 · fluid | transparent | component only (`diagrams/kit/VimInDwpLoop.astro`) | done |
 
 > KT-04…KT-09 (the six `dwp-*` commands) must share ONE visual language so they
 > read as a family. Task 5 may template them.

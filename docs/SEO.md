@@ -106,6 +106,7 @@ For custom OG images, pass `image` prop:
 | ContactPage | `ContactPage.astro` | Contact page |
 | WebPage | `TrustPage.astro`, `DevelopersPage.astro`, `PrivacyPage.astro`, `ComparePage.astro` | Trust/developers/privacy/compare pages |
 | FAQPage | `FaqPage.astro` | FAQ question and accepted-answer structured data |
+| SoftwareApplication | `KitReader.astro` via `buildSoftwareSchema()` (`src/lib/software-schema.ts`), driven by the optional kit `software` frontmatter | `/kit/vim` — DeepWorkPlan Vim, the single official page (`/vim` only redirects to it). Carries `applicationCategory`, `operatingSystem`, `license`, `installUrl`, `isPartOf` (Deep Work Plan) and `sameAs` (the repository); never a version or release date. Distinct from the global Deep Work Plan block in `BaseHead.astro`, so the page has exactly one more `SoftwareApplication` than a sibling kit page. |
 
 ### Adding a New Schema
 

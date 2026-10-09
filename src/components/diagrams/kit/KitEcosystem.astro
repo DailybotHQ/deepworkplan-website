@@ -1,0 +1,477 @@
+---
+/**
+ * KitEcosystem — the v7 ecosystem plate on the kit index: the methodology
+ * works alone, and each optional addon is a thin integrator pinned by tag to a
+ * product with its own repository. A real section (heading, list, links), not
+ * a role="img" figure, because its rows are navigation. Language-keyed i18n
+ * (en fallback); dark mode through the Broadsheet tokens; zero JS.
+ *
+ * Every pin and statement traces to the PLAN_004_v7_kit_pages_and_vendor
+ * claims ledger (C-01, C-03, C-04, C-11, C-21, C-31, C-39, C-46, C-47). The
+ * pack itself is a pre-release beta and is never presented as stable.
+ */
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+// Product facts are data, not copy: identical in every language.
+const products = [
+  {
+    key: 'herdr',
+    product: 'herdr-peers',
+    repo: 'https://github.com/DailybotHQ/herdr-peers',
+    tag: 'v0.1.0',
+  },
+  {
+    key: 'agentkit',
+    product: 'coding-agents-kit',
+    repo: 'https://github.com/DailybotHQ/coding-agents-kit',
+    tag: 'v0.1.1',
+  },
+  {
+    key: 'devcontainer',
+    product: 'devcontainer-kit',
+    repo: 'https://github.com/DailybotHQ/devcontainer-kit',
+    tag: 'v0.1.4',
+  },
+  {
+    key: 'vim',
+    product: 'deepworkplan-vim',
+    repo: 'https://github.com/DailybotHQ/deepworkplan-vim',
+    tag: 'v0.4.2',
+  },
+] as const;
+const packTag = 'v7.0.0-beta.1';
+
+const i18n = {
+  en: {
+    kicker: 'Ecosystem',
+    title: 'The methodology works alone. Addons amplify it.',
+    intro:
+      'Each addon is a thin integrator inside the Deep Work Plan skill, pinned by tag to a product with its own repository, release and interface version. Every product works without Deep Work Plan, and no addon is required.',
+    methodologyTitle: 'Deep Work Plan skill',
+    methodologyBody:
+      'Create, execute, verify, resume and refine plans. Needs no addon.',
+    pinLabel: 'Pinned at',
+    roles: [
+      'Peers in Herdr panes, on any machine: interactive delegation with one authorized reply.',
+      'One ak command for every terminal coding agent: headless delegation in a worktree.',
+      'A Dev Containers template and base images that ship without coding agents.',
+      'The terminal editor, with a read-only plan browser and a Markdown viewer.',
+    ],
+    betaNote:
+      'The addon registry and descriptors ship in the v7 beta, a pre-release:',
+  },
+  es: {
+    kicker: 'Ecosistema',
+    title: 'La metodología funciona sola. Los addons la amplifican.',
+    intro:
+      'Cada addon es un integrador ligero dentro de la skill de Deep Work Plan, fijado por etiqueta a un producto con su propio repositorio, versión y versión de interfaz. Cada producto funciona sin Deep Work Plan, y ningún addon es obligatorio.',
+    methodologyTitle: 'Skill de Deep Work Plan',
+    methodologyBody:
+      'Crea, ejecuta, verifica, reanuda y refina planes. No necesita ningún addon.',
+    pinLabel: 'Fijado en',
+    roles: [
+      'Pares en paneles de Herdr, en cualquier máquina: delegación interactiva con una única respuesta autorizada.',
+      'Un solo comando ak para cada agente de programación en terminal: delegación sin interfaz en un worktree.',
+      'Una plantilla de Dev Containers e imágenes base que se distribuyen sin agentes de programación.',
+      'El editor de terminal, con un explorador de planes de solo lectura y un visor de Markdown.',
+    ],
+    betaNote:
+      'El registro de addons y los descriptores se distribuyen en la beta de v7, una versión preliminar:',
+  },
+  pt: {
+    kicker: 'Ecossistema',
+    title: 'A metodologia funciona sozinha. Os addons a amplificam.',
+    intro:
+      'Cada addon é um integrador leve dentro da skill do Deep Work Plan, fixado por tag a um produto com o seu próprio repositório, versão e versão de interface. Cada produto funciona sem o Deep Work Plan, e nenhum addon é obrigatório.',
+    methodologyTitle: 'Skill do Deep Work Plan',
+    methodologyBody:
+      'Cria, executa, verifica, retoma e refina planos. Não precisa de nenhum addon.',
+    pinLabel: 'Fixado em',
+    roles: [
+      'Pares em painéis do Herdr, em qualquer máquina: delegação interativa com uma única resposta autorizada.',
+      'Um único comando ak para cada agente de programação no terminal: delegação sem interface em uma worktree.',
+      'Um template de Dev Containers e imagens base distribuídos sem agentes de programação.',
+      'O editor de terminal, com um navegador de planos somente leitura e um visualizador de Markdown.',
+    ],
+    betaNote:
+      'O registro de addons e os descritores são distribuídos na beta da v7, uma pré-release:',
+  },
+  zh: {
+    kicker: '生态系统',
+    title: '方法论可以独立运作。附加组件让它更强。',
+    intro:
+      '每个附加组件都是 Deep Work Plan 技能中的一个轻量集成层，按 tag 固定到一个拥有独立仓库、发布版本和接口版本的产品。每个产品都可以脱离 Deep Work Plan 独立运行，且不需要任何附加组件。',
+    methodologyTitle: 'Deep Work Plan 技能',
+    methodologyBody: '创建、执行、验证、恢复和完善计划。无需任何附加组件。',
+    pinLabel: '固定于',
+    roles: [
+      '在任意机器上的 Herdr 窗格中协作的对等方：交互式委派，仅允许一次经授权的回复。',
+      '一个 ak 命令适用于所有终端编码代理：在 worktree 中进行无界面委派。',
+      '一个 Dev Containers 模板及基础镜像，不附带任何编码代理。',
+      '终端编辑器，带有只读的计划浏览器和 Markdown 查看器。',
+    ],
+    betaNote: '附加组件注册表和描述文件随 v7 beta 发布，这是一个预发布版本：',
+  },
+  ja: {
+    kicker: 'エコシステム',
+    title: '方法論は単独で機能します。アドオンはそれを強化します。',
+    intro:
+      '各アドオンは Deep Work Plan スキル内の薄いインテグレーターであり、独自のリポジトリ、リリース、インターフェースバージョンを持つ製品にタグで固定されています。どの製品も Deep Work Plan なしで動作し、必須のアドオンはありません。',
+    methodologyTitle: 'Deep Work Plan スキル',
+    methodologyBody:
+      '計画の作成、実行、検証、再開、改善を行います。アドオンは不要です。',
+    pinLabel: '固定バージョン',
+    roles: [
+      '任意のマシン上の Herdr ペインにいるピア：認可された返信を一つだけ受け取る対話型委任。',
+      'あらゆるターミナル型コーディングエージェントに使える一つの ak コマンド：worktree 内でのヘッドレス委任。',
+      'コーディングエージェントを含まずに提供される Dev Containers テンプレートとベースイメージ。',
+      '読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。',
+    ],
+    betaNote:
+      'アドオンのレジストリと記述子は、プレリリースである v7 ベータに含まれています：',
+  },
+  de: {
+    kicker: 'Ökosystem',
+    title: 'Die Methodik funktioniert allein. Addons verstärken sie.',
+    intro:
+      'Jedes Addon ist ein schlanker Integrator innerhalb des Deep Work Plan Skills, per Tag an ein Produkt mit eigenem Repository, eigenem Release und eigener Schnittstellenversion fixiert. Jedes Produkt funktioniert ohne Deep Work Plan, und kein Addon ist erforderlich.',
+    methodologyTitle: 'Deep Work Plan Skill',
+    methodologyBody:
+      'Pläne erstellen, ausführen, verifizieren, fortsetzen und verfeinern. Benötigt kein Addon.',
+    pinLabel: 'Fixiert auf',
+    roles: [
+      'Peers in Herdr-Panes, auf jeder Maschine: interaktive Delegation mit genau einer autorisierten Antwort.',
+      'Ein einziger Befehl ak für jeden Terminal-Coding-Agenten: Headless-Delegation in einem Worktree.',
+      'Eine Vorlage für Dev Containers und Basis-Images, die ohne Coding-Agenten ausgeliefert werden.',
+      'Der Terminal-Editor, mit einem schreibgeschützten Plan-Browser und einem Markdown-Viewer.',
+    ],
+    betaNote:
+      'Die Addon-Registry und die Deskriptoren werden in der v7-Beta ausgeliefert, einem Pre-Release:',
+  },
+  fr: {
+    kicker: 'Écosystème',
+    title: 'La méthodologie fonctionne seule. Les addons l’amplifient.',
+    intro:
+      'Chaque addon est un intégrateur léger au sein de la skill Deep Work Plan, épinglé par tag à un produit doté de son propre dépôt, de sa propre version et de sa propre version d’interface. Chaque produit fonctionne sans Deep Work Plan, et aucun addon n’est requis.',
+    methodologyTitle: 'Skill Deep Work Plan',
+    methodologyBody:
+      'Créer, exécuter, vérifier, reprendre et affiner des plans. Ne nécessite aucun addon.',
+    pinLabel: 'Épinglé à',
+    roles: [
+      'Des pairs dans des panneaux Herdr, sur n’importe quelle machine : délégation interactive avec une seule réponse autorisée.',
+      'Une seule commande ak pour chaque agent de code en terminal : délégation sans interface dans un worktree.',
+      'Un modèle Dev Containers et des images de base distribués sans agents de code.',
+      'L’éditeur de terminal, avec un navigateur de plans en lecture seule et une visionneuse Markdown.',
+    ],
+    betaNote:
+      'Le registre des addons et les descripteurs sont livrés dans la bêta v7, une préversion :',
+  },
+  ko: {
+    kicker: '생태계',
+    title: '방법론은 단독으로 작동합니다. 애드온은 이를 강화합니다.',
+    intro:
+      '각 애드온은 Deep Work Plan 스킬 내부의 얇은 통합 계층으로, 자체 리포지토리, 릴리스, 인터페이스 버전을 갖춘 제품에 태그로 고정됩니다. 모든 제품은 Deep Work Plan 없이도 작동하며, 필수 애드온은 없습니다.',
+    methodologyTitle: 'Deep Work Plan 스킬',
+    methodologyBody:
+      '계획을 생성, 실행, 검증, 재개, 개선합니다. 애드온이 필요하지 않습니다.',
+    pinLabel: '고정 버전',
+    roles: [
+      '어떤 머신에서든 Herdr 페인에 있는 피어: 승인된 응답 한 번으로 이루어지는 대화형 위임.',
+      '모든 터미널 코딩 에이전트를 위한 하나의 ak 명령: worktree에서의 헤드리스 위임.',
+      '코딩 에이전트 없이 제공되는 Dev Containers 템플릿과 베이스 이미지.',
+      '읽기 전용 계획 브라우저와 Markdown 뷰어를 갖춘 터미널 편집기.',
+    ],
+    betaNote:
+      '애드온 레지스트리와 디스크립터는 프리릴리스인 v7 베타에 포함되어 있습니다:',
+  },
+  ru: {
+    kicker: 'Экосистема',
+    title: 'Методология работает сама по себе. Дополнения её усиливают.',
+    intro:
+      'Каждое дополнение — это тонкий интегратор внутри навыка Deep Work Plan, закреплённый по тегу за продуктом с собственным репозиторием, релизом и версией интерфейса. Каждый продукт работает без Deep Work Plan, и ни одно дополнение не обязательно.',
+    methodologyTitle: 'Навык Deep Work Plan',
+    methodologyBody:
+      'Создаёт, выполняет, проверяет, возобновляет и уточняет планы. Не требует дополнений.',
+    pinLabel: 'Закреплено на',
+    roles: [
+      'Peer-агенты в панелях Herdr на любой машине: интерактивное делегирование с одним авторизованным ответом.',
+      'Одна команда ak для любого терминального агента для кода: делегирование без интерфейса в worktree.',
+      'Шаблон Dev Containers и базовые образы, поставляемые без агентов для программирования.',
+      'Терминальный редактор с браузером планов только для чтения и просмотрщиком Markdown.',
+    ],
+    betaNote:
+      'Реестр дополнений и дескрипторы поставляются в бета-версии v7, это пре-релиз:',
+  },
+  it: {
+    kicker: 'Ecosistema',
+    title: 'La metodologia funziona da sola. Gli addon la amplificano.',
+    intro:
+      'Ogni addon è un integratore leggero all’interno della skill Deep Work Plan, fissato tramite tag a un prodotto con il proprio repository, la propria release e la propria versione di interfaccia. Ogni prodotto funziona senza Deep Work Plan, e nessun addon è obbligatorio.',
+    methodologyTitle: 'Skill Deep Work Plan',
+    methodologyBody:
+      'Crea, esegue, verifica, riprende e affina i piani. Non richiede alcun addon.',
+    pinLabel: 'Fissato a',
+    roles: [
+      'Peer in pannelli Herdr, su qualsiasi macchina: delega interattiva con una sola risposta autorizzata.',
+      'Un solo comando ak per ogni agente di codice da terminale: delega headless in un worktree.',
+      'Un template Dev Containers e immagini di base distribuiti senza agenti di codice.',
+      'L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown.',
+    ],
+    betaNote:
+      'Il registro degli addon e i descrittori sono distribuiti nella beta v7, una pre-release:',
+  },
+  tr: {
+    kicker: 'Ekosistem',
+    title: 'Metodoloji tek başına çalışır. Eklentiler onu güçlendirir.',
+    intro:
+      "Her eklenti, Deep Work Plan skill'i içinde ince bir entegrasyon katmanıdır; kendi deposu, sürümü ve arayüz sürümü olan bir ürüne etiketle sabitlenir. Her ürün Deep Work Plan olmadan çalışır ve hiçbir eklenti zorunlu değildir.",
+    methodologyTitle: "Deep Work Plan skill'i",
+    methodologyBody:
+      'Planları oluşturur, yürütür, doğrular, sürdürür ve iyileştirir. Hiçbir eklenti gerektirmez.',
+    pinLabel: 'Sabitlenen sürüm',
+    roles: [
+      'Herhangi bir makinede Herdr panellerindeki eşler: tek bir yetkili yanıtla etkileşimli devretme.',
+      'Her terminal kodlama ajanı için tek bir ak komutu: bir worktree içinde başsız devretme.',
+      'Kodlama ajanları olmadan sunulan bir Dev Containers şablonu ve temel imajlar.',
+      'Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi.',
+    ],
+    betaNote:
+      'Eklenti kayıt defteri ve tanımlayıcılar, bir ön sürüm olan v7 betasında sunulur:',
+  },
+  id: {
+    kicker: 'Ekosistem',
+    title: 'Metodologi bekerja sendiri. Addon memperkuatnya.',
+    intro:
+      'Setiap addon adalah integrator tipis di dalam skill Deep Work Plan, dipatok berdasarkan tag ke sebuah produk dengan repositori, rilis, dan versi antarmukanya sendiri. Setiap produk berfungsi tanpa Deep Work Plan, dan tidak ada addon yang wajib.',
+    methodologyTitle: 'Skill Deep Work Plan',
+    methodologyBody:
+      'Membuat, menjalankan, memverifikasi, melanjutkan, dan menyempurnakan rencana. Tidak memerlukan addon.',
+    pinLabel: 'Dipatok pada',
+    roles: [
+      'Rekan di panel Herdr, di mesin mana pun: delegasi interaktif dengan satu balasan yang diotorisasi.',
+      'Satu perintah ak untuk setiap coding agent di terminal: delegasi headless di dalam worktree.',
+      'Template Dev Containers dan image dasar yang dikirimkan tanpa coding agent.',
+      'Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown.',
+    ],
+    betaNote:
+      'Registri addon dan deskriptor dikirimkan dalam beta v7, sebuah pra-rilis:',
+  },
+  vi: {
+    kicker: 'Hệ sinh thái',
+    title: 'Phương pháp hoạt động độc lập. Tiện ích bổ sung khuếch đại nó.',
+    intro:
+      'Mỗi addon là một lớp tích hợp mỏng bên trong skill Deep Work Plan, được ghim theo tag vào một sản phẩm có repository, bản phát hành và phiên bản giao diện riêng. Mọi sản phẩm đều hoạt động mà không cần Deep Work Plan, và không addon nào là bắt buộc.',
+    methodologyTitle: 'Skill Deep Work Plan',
+    methodologyBody:
+      'Tạo, thực thi, xác minh, tiếp tục và tinh chỉnh kế hoạch. Không cần addon nào.',
+    pinLabel: 'Ghim tại',
+    roles: [
+      'Các agent ngang hàng trong các pane của Herdr, trên bất kỳ máy nào: ủy thác tương tác với đúng một phản hồi được ủy quyền.',
+      'Một lệnh ak duy nhất cho mọi agent lập trình trên terminal: ủy thác headless trong một worktree.',
+      'Một template Dev Containers và các image cơ sở được phân phối không kèm agent lập trình.',
+      'Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown.',
+    ],
+    betaNote:
+      'Registry addon và các descriptor được phân phối trong bản beta v7, một bản phát hành trước:',
+  },
+  hi: {
+    kicker: 'इकोसिस्टम',
+    title: 'पद्धति अकेले काम करती है। ऐडऑन इसे और सशक्त बनाते हैं।',
+    intro:
+      'प्रत्येक ऐडऑन Deep Work Plan स्किल के भीतर एक हल्का इंटीग्रेटर है, जो tag द्वारा ऐसे उत्पाद पर पिन किया गया है जिसकी अपनी रिपॉज़िटरी, रिलीज़ और इंटरफ़ेस संस्करण है। हर उत्पाद Deep Work Plan के बिना काम करता है, और कोई भी ऐडऑन आवश्यक नहीं है।',
+    methodologyTitle: 'Deep Work Plan स्किल',
+    methodologyBody:
+      'योजनाएँ बनाएँ, निष्पादित करें, सत्यापित करें, फिर से शुरू करें और परिष्कृत करें। किसी ऐडऑन की आवश्यकता नहीं।',
+    pinLabel: 'पिन किया गया',
+    roles: [
+      'किसी भी मशीन पर Herdr पेन में पीयर: एक अधिकृत उत्तर के साथ इंटरैक्टिव डेलिगेशन।',
+      'हर टर्मिनल कोडिंग एजेंट के लिए एक ak कमांड: worktree में हेडलेस डेलिगेशन।',
+      'एक Dev Containers टेम्पलेट और बेस इमेज, जो कोडिंग एजेंट के बिना आते हैं।',
+      'टर्मिनल एडिटर, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर के साथ।',
+    ],
+    betaNote: 'ऐडऑन रजिस्ट्री और डिस्क्रिप्टर v7 बीटा में आते हैं, जो एक प्री-रिलीज़ है:',
+  },
+  pl: {
+    kicker: 'Ekosystem',
+    title: 'Metodyka działa samodzielnie. Dodatki ją wzmacniają.',
+    intro:
+      'Każdy dodatek to cienki integrator wewnątrz skilla Deep Work Plan, przypięty tagiem do produktu z własnym repozytorium, wydaniem i wersją interfejsu. Każdy produkt działa bez Deep Work Plan i żaden dodatek nie jest wymagany.',
+    methodologyTitle: 'Skill Deep Work Plan',
+    methodologyBody:
+      'Tworzy, wykonuje, weryfikuje, wznawia i dopracowuje plany. Nie potrzebuje żadnego dodatku.',
+    pinLabel: 'Przypięty do',
+    roles: [
+      'Równorzędni agenci w panelach Herdr, na dowolnej maszynie: interaktywne delegowanie z jedną autoryzowaną odpowiedzią.',
+      'Jedno polecenie ak dla każdego terminalowego agenta kodującego: delegowanie bez interfejsu w worktree.',
+      'Szablon Dev Containers i obrazy bazowe dostarczane bez agentów kodujących.',
+      'Edytor terminalowy z przeglądarką planów tylko do odczytu i podglądem Markdown.',
+    ],
+    betaNote:
+      'Rejestr dodatków i deskryptory są dostarczane w becie v7, wydaniu przedpremierowym:',
+  },
+  uk: {
+    kicker: 'Екосистема',
+    title: 'Методологія працює сама по собі. Аддони її посилюють.',
+    intro:
+      'Кожен аддон — це тонкий інтегратор усередині скілу Deep Work Plan, закріплений за тегом до продукту з власним репозиторієм, релізом і версією інтерфейсу. Кожен продукт працює без Deep Work Plan, і жоден аддон не є обовʼязковим.',
+    methodologyTitle: 'Скіл Deep Work Plan',
+    methodologyBody:
+      'Створює, виконує, перевіряє, відновлює та уточнює плани. Не потребує аддонів.',
+    pinLabel: 'Закріплено на',
+    roles: [
+      'Peer-агенти в панелях Herdr на будь-якій машині: інтерактивне делегування з однією авторизованою відповіддю.',
+      'Одна команда ak для кожного термінального агента для програмування: делегування без інтерфейсу у worktree.',
+      'Шаблон Dev Containers і базові образи, що постачаються без агентів для коду.',
+      'Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown.',
+    ],
+    betaNote:
+      'Реєстр аддонів і дескриптори постачаються в бета-версії v7, це пре-реліз:',
+  },
+  th: {
+    kicker: 'ระบบนิเวศ',
+    title: 'ระเบียบวิธีทำงานได้ด้วยตัวเอง ส่วนเสริมช่วยขยายพลังของมัน',
+    intro:
+      'ส่วนเสริมแต่ละตัวเป็นตัวเชื่อมต่อแบบบางภายในสกิล Deep Work Plan ซึ่งปักหมุดด้วย tag ไปยังผลิตภัณฑ์ที่มี repository, release และเวอร์ชันอินเทอร์เฟซเป็นของตัวเอง ทุกผลิตภัณฑ์ทำงานได้โดยไม่ต้องใช้ Deep Work Plan และไม่มีส่วนเสริมใดที่จำเป็น',
+    methodologyTitle: 'สกิล Deep Work Plan',
+    methodologyBody: 'สร้าง ดำเนินการ ตรวจสอบ ทำต่อ และปรับปรุงแผน ไม่ต้องใช้ส่วนเสริมใด',
+    pinLabel: 'ปักหมุดที่',
+    roles: [
+      'peer ใน pane ของ Herdr บนเครื่องใดก็ได้: การมอบหมายงานแบบโต้ตอบที่มีการตอบกลับที่ได้รับอนุญาตเพียงครั้งเดียว',
+      'คำสั่ง ak เดียวสำหรับเอเจนต์เขียนโค้ดบนเทอร์มินัลทุกตัว: การมอบหมายงานแบบ headless ใน worktree',
+      'เทมเพลต Dev Containers และอิมเมจพื้นฐานที่จัดส่งโดยไม่มีเอเจนต์เขียนโค้ด',
+      'ตัวแก้ไขบนเทอร์มินัล พร้อมตัวเรียกดูแผนแบบอ่านอย่างเดียวและตัวแสดงผล Markdown',
+    ],
+    betaNote:
+      'รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาในเบต้าของ v7 ซึ่งเป็น pre-release:',
+  },
+} as const;
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+const prefix = getUrlPrefix(lang);
+---
+
+<section class={`kiteco ${className}`} aria-labelledby="kit-ecosystem-title">
+  <p class="kicker kiteco-kicker">{t.kicker}</p>
+  <h2 id="kit-ecosystem-title" class="font-display kiteco-title">{t.title}</h2>
+  <p class="kiteco-intro">{t.intro}</p>
+
+  <div class="kiteco-core">
+    <span class="kiteco-core-title">{t.methodologyTitle}</span>
+    <span class="kiteco-core-body">{t.methodologyBody}</span>
+  </div>
+
+  <ul class="kiteco-list">
+    {
+      products.map((item, index) => (
+        <li class="kiteco-card">
+          <a class="kiteco-link" href={`${prefix}/kit/${item.key}`}>
+            <span class="kicker kiteco-key">{item.key}</span>
+            <span class="kiteco-role">{t.roles[index]}</span>
+          </a>
+          <span class="kiteco-pin">
+            {t.pinLabel}{' '}
+            <a class="kiteco-repo" href={item.repo}>
+              <code>{item.product}@{item.tag}</code>
+            </a>
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="kiteco-note">
+    {t.betaNote} <code>{packTag}</code>
+  </p>
+</section>
+
+<style>
+  .kiteco {
+    color: var(--color-ink);
+  }
+  .kiteco-kicker {
+    color: var(--color-secondary);
+  }
+  .kiteco-title {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .kiteco-intro {
+    margin-top: 0.75rem;
+    line-height: 1.65;
+    color: var(--color-muted);
+  }
+  .kiteco-core {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border: 1px solid var(--color-ink);
+    padding: 1rem 1.25rem;
+    background-color: var(--color-paper);
+  }
+  .kiteco-core-title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+  }
+  .kiteco-core-body {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+  }
+  .kiteco-list {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+  @media (min-width: 768px) {
+    .kiteco-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .kiteco-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+    border: 1px solid var(--color-line);
+    padding: 1rem 1.25rem;
+  }
+  .kiteco-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    color: inherit;
+    text-decoration: none;
+  }
+  .kiteco-link:hover .kiteco-role,
+  .kiteco-link:focus-visible .kiteco-role {
+    text-decoration: underline;
+  }
+  .kiteco-key {
+    color: var(--color-secondary);
+  }
+  .kiteco-role {
+    line-height: 1.55;
+  }
+  .kiteco-pin,
+  .kiteco-note {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    overflow-wrap: anywhere;
+  }
+  .kiteco-repo {
+    color: inherit;
+  }
+  .kiteco-note {
+    margin-top: 1rem;
+  }
+</style>

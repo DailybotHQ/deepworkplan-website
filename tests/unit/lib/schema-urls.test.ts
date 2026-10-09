@@ -76,7 +76,10 @@ describe('canonical schema URL publication', () => {
     expect(missing, `unpublished schema URLs:\n${missing.join('\n')}`).toEqual(
       []
     );
-  });
+    // Synchronous scan of every file under .agents/skills, docs and src: it
+    // takes 2-3s idle and over 6s when the machine is busy (observed on a
+    // shared box with a load average above 7), so the 5s default is a flake.
+  }, 30_000);
 
   it('publishes the v2 and v5 plan schemas the v5 line depends on', () => {
     // v5-authored plans cite these URLs; before their publication every v5

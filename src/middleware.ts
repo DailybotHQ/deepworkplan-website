@@ -54,6 +54,7 @@ const KNOWN_BASE_PATHS = new Set([
   'compare',
   'changelog',
   'trust',
+  'vim',
   'developers',
   'privacy',
   'setup',

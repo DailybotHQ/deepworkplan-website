@@ -18,6 +18,8 @@ const FAKE_ASSETS: Record<string, string> = {
   '/index.md': '# Home\n\nDeep Work Plan overview.',
   '/about.md': '# About\n\nWho maintains DWP.',
   '/es/methodology/01-manifesto.md': '# Manifiesto\n\nContenido.',
+  '/kit/vim.md': '# DeepWorkPlan Vim\n\nThe single official page.',
+  '/es/kit/vim.md': '# DeepWorkPlan Vim\n\nLa página oficial única.',
 };
 
 const fetchAssetText = async (path: string): Promise<string | null> =>
@@ -85,6 +87,8 @@ describe('resolveMarkdownAssetPath', () => {
   it('maps page paths to their markdown assets like the edge middleware', () => {
     expect(resolveMarkdownAssetPath('/')).toBe('/index.md');
     expect(resolveMarkdownAssetPath('/about')).toBe('/about.md');
+    expect(resolveMarkdownAssetPath('/kit/vim')).toBe('/kit/vim.md');
+    expect(resolveMarkdownAssetPath('/es/kit/vim')).toBe('/es/kit/vim.md');
     expect(resolveMarkdownAssetPath('/about/')).toBe('/about.md');
     expect(resolveMarkdownAssetPath('/methodology/x')).toBe(
       '/methodology/x.md'
@@ -217,6 +221,47 @@ describe('handleMcpRequest — tools/call', () => {
     const { result } = parseBody(out);
     expect(result.isError).toBe(false);
     expect(result.content[0].text).toContain('Manifiesto');
+  });
+
+  it('read_page reads the single official DeepWorkPlan Vim page, in every language prefix', async () => {
+    for (const [path, expected] of [
+      ['/kit/vim', 'single official page'],
+      ['/es/kit/vim', 'oficial única'],
+    ] as const) {
+      const out = await rpc({
+        jsonrpc: '2.0',
+        id: 11,
+        method: 'tools/call',
+        params: { name: 'read_page', arguments: { path } },
+      });
+      const { result } = parseBody(out);
+      expect(result.isError, path).toBe(false);
+      expect(result.content[0].text, path).toContain(expected);
+    }
+  });
+
+  it('read_page no longer serves a standalone /vim page (it is a redirect to /kit/vim)', async () => {
+    const out = await rpc({
+      jsonrpc: '2.0',
+      id: 12,
+      method: 'tools/call',
+      params: { name: 'read_page', arguments: { path: '/vim' } },
+    });
+    const { result } = parseBody(out);
+    expect(result.isError).toBe(true);
+    expect(result.content[0].text).toContain('list_site_sections');
+  });
+
+  it('list_site_sections points agents at the kit, where DeepWorkPlan Vim lives', async () => {
+    const out = await rpc({
+      jsonrpc: '2.0',
+      id: 13,
+      method: 'tools/call',
+      params: { name: 'list_site_sections', arguments: {} },
+    });
+    const text = parseBody(out).result.content[0].text as string;
+    expect(text).toContain('(/kit)');
+    expect(text).not.toContain('(/vim)');
   });
 
   it('read_page returns isError with recovery hints for unknown pages', async () => {

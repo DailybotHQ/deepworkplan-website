@@ -21,6 +21,13 @@ OpenCode, ओपन-सोर्स कोडिंग एजेंट, ने�
 
 DWP, AGENTS.md और कमांड प्रक्रियाएँ रिपॉज़िटरी में भेजता है; OpenCode उन्हें प्रोजेक्ट कॉन्टेक्स्ट के रूप में खोजता है।
 
+वैकल्पिक: [coding-agents-kit](/kit/agentkit) इस CLI को इंस्टॉल कर सकता है और `ak opencode` से चला सकता है। विक्रेता का अपना आधिकारिक इंस्टॉलर भी उतना ही अच्छा काम करता है।
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install opencode
+```
+
 ## आह्वान
 
 `#` प्रीफ़िक्स का उपयोग करें:

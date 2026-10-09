@@ -21,6 +21,13 @@ prefix: '#'
 
 DWP コマンドは、エージェントが Cline のルールを通じて読む Markdown の手順として存在します。
 
+任意：[coding-agents-kit](/kit/agentkit) はこの CLI をインストールし、`ak cline` で起動できます。ベンダー公式のインストーラーでも同様に使えます。
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install cline
+```
+
 ## 呼び出し
 
 `#` プレフィックスを使います。

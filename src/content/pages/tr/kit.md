@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan kiti"
 description: "Skill ve dokuz alt skill'i, komutlar, ajan adaptörleri, onboarding hazır ayarları, tercihe dayalı eklentiler ve örnekler — Deep Work Plan'i her yerde çalıştırılabilir kılan her şey."
-lastUpdated: 2026-05-31
+lastUpdated: 2026-10-09
 ---
 
 ## Deep Work Plan kiti
@@ -54,6 +54,18 @@ Onboarding akışının bir depoya katmanladığı yetenekler. Dördü isteğe b
 - **Dependency upgrade** — paket yöneticisinden bağımsız, gruplanmış, doğrulanmış, geri alınabilir yükseltmeler.
 - **Design system** — deponun gerçek tasarım kaynağından akıl yürütülen, arayüz kapsamlı bir `DESIGN.md` (`docs/DESIGN.md` konumunda, `AGENTS.md`'den başvurulan); görsel UI, stilize CLI çıktısı ve konuşma tabanlı mesajlaşma için profillerle; böylece ajanlar markaya uygun arayüz çıktısı üretir; bir tasarım sistemi saptandığında teklif zorunludur ama kurulum kabul ile sınırlıdır — görsel profil saptandığında güçlü biçimde önerilir, CLI ve konuşma profilleri saptandığında önerilir ve her zaman sorulur.
 - **AI Diff Reviewer** — gerekli yerel inceleme: onboarding, [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md` kurar ve her Final Review'in güvenlik incelemesi onu çalıştırır; isteğe bağlı Flow B, aynı uzantıyı paylaşan bir CI PR birleştirme kapısı ekler — açıkça sunulur, istenmeden asla kurulmaz.
+
+### Ekosistem
+
+**Metodoloji tek başına çalışır. Eklentiler onu güçlendirir.** Her eklenti, Deep Work Plan skill'i içinde ince bir entegrasyon katmanıdır; kendi deposu, sürümü ve arayüz sürümü olan bir ürüne etiketle sabitlenir. Her ürün Deep Work Plan olmadan çalışır ve hiçbir eklenti zorunlu değildir.
+
+- **Deep Work Plan skill'i** — Planları oluşturur, yürütür, doğrular, sürdürür ve iyileştirir. Hiçbir eklenti gerektirmez.
+- **[herdr](/tr/kit/herdr)** — Herhangi bir makinede Herdr panellerindeki eşler: tek bir yetkili yanıtla etkileşimli devretme. Sabitlenen sürüm `herdr-peers@v0.1.0`.
+- **[agentkit](/tr/kit/agentkit)** — Her terminal kodlama ajanı için tek bir ak komutu: bir worktree içinde başsız devretme. Sabitlenen sürüm `coding-agents-kit@v0.1.1`.
+- **[devcontainer](/tr/kit/devcontainer)** — Kodlama ajanları olmadan sunulan bir Dev Containers şablonu ve temel imajlar. Sabitlenen sürüm `devcontainer-kit@v0.1.4`.
+- **[vim](/tr/kit/vim)** — Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi. Sabitlenen sürüm `deepworkplan-vim@v0.4.2`.
+
+Eklenti kayıt defteri ve tanımlayıcılar, bir ön sürüm olan v7 betasında sunulur: `v7.0.0-beta.1`
 
 ### Örnekler
 

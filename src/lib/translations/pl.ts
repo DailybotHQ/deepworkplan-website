@@ -747,6 +747,10 @@ export const pl: SiteTranslations = {
       { label: 'Specyfikacja', href: '/spec' },
       { label: 'Przejrzyj zestaw', href: '/kit' },
       { label: 'Zobacz przykłady', href: '/examples' },
+      {
+        label: 'Opcjonalnie: edytor terminalowy DeepWorkPlan Vim',
+        href: '/kit/vim',
+      },
     ],
   },
 
@@ -1282,7 +1286,7 @@ export const pl: SiteTranslations = {
       },
       {
         title: 'Weryfikowalne pochodzenie',
-        body: 'Każde wydanie publikuje sumy kontrolne dla dostarczonego skilla, dzięki czemu możesz potwierdzić, że pobrана kopia odpowiada temu, co zostało opublikowane, zanim jej zaufasz.',
+        body: 'Każde wydanie publikuje sumy kontrolne dla dostarczonego skilla, dzięki czemu możesz potwierdzić, że pobrana kopia odpowiada temu, co zostało opublikowane, zanim jej zaufasz.',
       },
     ],
     verifyTitle: 'Zweryfikuj przed uruchomieniem',
@@ -1291,6 +1295,11 @@ export const pl: SiteTranslations = {
     codeLabel: 'shell',
     verifyNote:
       'Wydania są sumowane kontrolnie, nie podpisywane — podpisywanie (cosign lub GPG opiekuna) to udokumentowany kolejny krok, a nie bieżące twierdzenie. Ponieważ wszystko jest otwarte, możesz też diffować dowolny plik względem repozytorium przy jego tagu.',
+    vimNote:
+      'Ta sama zasada dotyczy instalatora DeepWorkPlan Vim: jego strona pokazuje SHA-256 skryptu udostępnianego teraz oraz kroki: pobierz, sprawdź, zweryfikuj, uruchom.',
+    vimLinkLabel: 'Sprawdź instalator DeepWorkPlan Vim',
+    betaNote:
+      'Wydania przedpremierowe weryfikuje się w ten sam sposób. Beta v7, v7.0.0-beta.1, to wydanie przedpremierowe (pre-release) na GitHubie z własnym plikiem SHA256SUMS i nie jest to wydanie stabilne. Ta strona dołącza je, aby przetestować je w praktyce: zainstalowane według przypiętego tagu i sprawdzone względem tych sum kontrolnych.',
     disclosureTitle: 'Zgłoś podatność',
     disclosureBody:
       'Znalazłeś problem z bezpieczeństwem? Zgłoś go prywatnie przez prywatne raportowanie podatności GitHub we właściwym repozytorium — skill lub stronie (patrz poniżej linkowane polityki bezpieczeństwa) — zamiast otwierać publiczne zgłoszenie, które ujawniłoby problem przed powstaniem poprawki.',

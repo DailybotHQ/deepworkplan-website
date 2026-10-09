@@ -1,0 +1,142 @@
+---
+title: DeepWorkPlan Vim
+description: "DeepWorkPlan Vim ist der Terminal-Editor für Deep Work Plan: eine Neovim-0.12+-Konfiguration mit generiertem Befehlsindex, Plan-Browser und Markdown-Viewer."
+kind: addon
+lang: de
+order: 6
+software:
+  applicationCategory: DeveloperApplication
+  operatingSystem: [macOS, Linux, WSL]
+  license: https://www.gnu.org/licenses/gpl-3.0.html
+  installUrl: https://deepworkplan.com/vim/install.sh
+  sameAs:
+    - https://github.com/DailybotHQ/deepworkplan-vim
+---
+import VimInstall from '@/components/vim/VimInstall.astro';
+import VimCommandIndex from '@/components/diagrams/kit/VimCommandIndex.astro';
+import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
+
+# DeepWorkPlan Vim
+
+**DeepWorkPlan Vim** ist der Terminal-Editor für Deep Work Plan: eine Neovim-Konfiguration für Menschen und für Coding-Agenten, die im Terminal arbeiten. Ihre Pläne, Ihre Dokumentation und ein Index aller Befehle sind einen Tastendruck entfernt.
+
+Es ist ein eigenständiges Produkt, angeboten als optionales `vim`-Addon der Deep-Work-Plan-v7-Beta (`v7.0.0-beta.1`, eine Vorabversion). Deep Work Plan funktioniert mit jedem Editor oder ganz ohne, und der Editor setzt Deep Work Plan nicht voraus: Sie fügen ihn einer Maschine separat hinzu, und er funktioniert als Editor, ob ein Plan existiert oder nicht. Diese Seite beschreibt Release **v0.4.2**.
+
+## Warum ein Terminal-Editor für Deep Work Plan
+
+Ein Deep Work Plan ist ein Ordner mit Markdown unter `.dwp/plans/`: ein Ziel, atomare Aufgaben, Validierungs-Gates und ein laufendes Protokoll. Menschen prüfen ihn, Agenten führen ihn aus, und beide tun das oft im Terminal. Ein Editor für diese Arbeit hält drei Dinge nah beieinander: den Plan selbst, die Dokumentation drumherum und die Tasten, die Sie zwischen beiden bewegen.
+
+DeepWorkPlan Vim ist dieser Editor. Er ist eine kuratierte Neovim-Konfiguration — Language Server, Vervollständigung, Linting, Formatierung, Fuzzy-Suche, ein Dateibaum und ausgewählte Farbschemata, lazy geladen — plus die wenigen Oberflächen, die ihn zum Editor für Deep Work Plan machen.
+
+<VimInDwpLoop lang="de" class="not-prose my-10" />
+
+## Die Tour: ein Befehlsindex, der nicht veralten kann
+
+Drücken Sie `SPC h h` (Leertaste ist die Leader-Taste) oder führen Sie `:DwpCommands` aus, und der Editor listet jede Belegung mit einer einzeiligen Beschreibung auf. Die Liste wird aus den aktuellen Tastenbelegungen erzeugt, sodass eine irgendwo definierte Belegung ohne Registrierung im Index erscheint und der Index nicht veralten kann.
+
+Das ist die ganze Tour: `nvim` starten, dann Leertaste, `h`, `h` drücken.
+
+<VimCommandIndex lang="de" class="not-prose my-10" />
+
+## Was Sie bekommen
+
+Fünf Funktionen, jede einen Tastendruck entfernt.
+
+| Funktion | Tasten | Was sie tut |
+|---|---|---|
+| Generierter Befehlsindex | `SPC h h` | Jede Belegung der Konfiguration, erzeugt aus den aktuellen Tastenbelegungen. |
+| VS-Code-artige Gesten | `<C-a>`, `SPC y` | Die ganze Datei mit einer Taste auswählen und in die System-Zwischenablage kopieren. Auch ein einfaches `y` landet dort, weil die Zwischenablage systemweit ist. |
+| Deep-Work-Plan-Browser | `SPC P` | Eine Seitenleiste über die Pläne Ihres Repositorys, nach Status gruppiert und mit Fortschrittsbalken, sowie ein Reader für einen einzelnen Plan. |
+| Markdown-Viewer | `SPC m p`, `SPC m r` | Markdown im Browser anzeigen oder im Puffer rendern. |
+| Verifizierter Installer | — | Ein eigenständiger Installer für macOS, Linux und WSL, mit dokumentiertem manuellem Weg für Windows. |
+
+## Pläne, ohne den Editor zu verlassen
+
+`SPC P`, `:DwpPlans` oder ein Klick auf das Statuszeilen-Segment öffnet die Plan-Seitenleiste. Sie deckt jeden `.dwp/plans/`-Ordner im aktuellen Verzeichnis und in Ihrem Neovim-Konfigurationsverzeichnis ab und gruppiert die Pläne nach dem größten Aufmerksamkeitsbedarf zuerst. Im Editor lauten die Bezeichnungen `Working`, `Needs attention`, `Ready`, `Not started` und `Done`. Jeder Plan zeigt einen Fortschrittsbalken.
+
+Drücken Sie die Eingabetaste auf einem Plan, um den Reader zu öffnen: das Ziel in einem Satz, Status und Fortschritt, die Aufgabenliste mit markierter aktueller Aufgabe und Sprünge in verständlicher Sprache zu den Dateien des Plans. Die Statuszeile zeigt den aktuell aktiven Plan, und der Startbildschirm listet die obersten drei. Diese Oberflächen erklären Pläne; sie schreiben nie unter `.dwp/`.
+
+Um die Markdown-Dateien eines Plans an Ort und Stelle zu lesen, zeigt `SPC m p` den aktuellen Puffer im Browser an und `SPC m r` rendert ihn im Puffer. Beides funktioniert nur in Markdown-Puffern.
+
+## Installation
+
+Die Installation besteht aus drei Befehlen: Laden Sie das Skript herunter, prüfen Sie es gegen das SHA-256 der Datei, die diese Website ausliefert, und führen Sie es dann aus. Der Installer legt sein eigenes Release fest und installiert daher genau `v0.4.2`, das Release, das diese Seite beschreibt; `DWP_VIM_REF=main bash install.sh` folgt stattdessen dem beweglichen `main`-Branch.
+
+<VimInstall lang="de" />
+
+Der Installer erledigt der Reihe nach:
+
+1. Er prüft Betriebssystem und Paketmanager und installiert git, curl und einen Lua-Interpreter, falls einer fehlt.
+2. Er fragt nach, bevor er eine vorhandene Neovim-Konfiguration anfasst. Ohne Terminal per Pipe aufgerufen, bricht er ab und ändert nichts.
+3. Er klont das Repository nach `~/.config/nvim` oder aktualisiert es, wenn es schon dort liegt.
+4. Er führt das eigene `lua install.lua` des Repositorys aus.
+5. Er installiert die Plugins headless, sodass kein Beenden und erneutes Öffnen nötig ist.
+
+Das hier ausgelieferte Skript ist eine byte-identische Kopie von `install.sh` beim Tag `v0.4.2`. Um es zuerst zu lesen, laden Sie es mit `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` herunter, vergleichen Sie sein SHA-256 mit dem oben angezeigten Wert, lesen Sie es und führen Sie dann `bash install.sh` aus.
+
+## Voraussetzungen und Plattformen
+
+- Neovim 0.12 oder neuer. Installieren Sie Neovim zuerst; der Installer installiert es nicht.
+- Lua: `lua`, `lua5.4` oder `luajit`. Der Installer ergänzt eines, falls es fehlt.
+- macOS, Linux und WSL führen den Installer aus. Für Windows gibt es einen dokumentierten manuellen Weg in der README des Repositorys: Neovim mit winget installieren, das Repository nach `%LOCALAPPDATA%\nvim` klonen und `lua install.lua` aus Git Bash ausführen.
+- GPL-3.0-lizenziert: frei nutzbar, studierbar und veränderbar.
+
+## Aktualisieren, festlegen und deinstallieren
+
+Um zu aktualisieren, führen Sie den Installer eines neueren Releases aus. Ein erneuter Lauf bringt einen vorhandenen DeepWorkPlan-Vim-Checkout auf das Release dieses Installers, behält Ihre Branches und setzt lokale Änderungen nie zurück: Wenn lokale Änderungen oder Commits verloren gingen, hält er an und ändert nichts.
+
+Um einen anderen Tag, einen Branch oder einen Commit zu installieren, setzen Sie `DWP_VIM_REF`. Bevorzugen Sie einen Tag: Releases vor `v0.4.0` enthalten weder die Gesten noch den Plan-Browser, den Markdown-Viewer oder diesen Installer.
+
+```bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
+```
+
+Zum Deinstallieren führen Sie `lua delete.lua` im Konfigurationsverzeichnis aus. Es entfernt die Konfiguration, die Plugins, die Mason-Daten, Cache und Zustand sowie die vom Installer angelegte Schriftkopie und lässt die Neovim-Binärdatei und Ihre Systempakete unberührt.
+
+```bash
+cd ~/.config/nvim && lua delete.lua
+```
+
+## Fragen
+
+### Überschreibt es meine Neovim-Konfiguration?
+
+Nein, nicht ohne Ihre Zustimmung. Findet es eine Konfiguration, die nicht DeepWorkPlan Vim ist, fragt ein interaktiver Lauf nach, bevor er sie nach `~/.config/previous-deepworkplan-vim` verschiebt. Ohne Terminal oder wenn dieser Sicherungspfad bereits existiert, bricht es ab und ändert nichts.
+
+### Funktioniert es unter Windows?
+
+Der Installer läuft nicht unter Windows. Nutzen Sie den manuellen Weg aus der README des Repositorys oder führen Sie den Installer in WSL aus.
+
+### Brauche ich Deep Work Plan, um es zu nutzen?
+
+Nein. Es ist zuerst ein Editor. Es installiert die Deep-Work-Plan-Skill nicht und setzt sie nicht voraus; der Plan-Browser hat nur nichts aufzulisten, solange kein `.dwp/plans/`-Ordner existiert.
+
+### Wie nutzt das vim-Addon von v7 den Editor?
+
+Die Deep-Work-Plan-v7-Beta bietet den Editor beim Onboarding als optionales `vim`-Addon an. Das Addon erkennt eine vorhandene Installation schreibgeschützt über die Datei `addon/surface.json` des Editors und bietet die festgelegte, per Prüfsumme verifizierte Installation nur mit Ihrer Zustimmung an. Es überschreibt eine vorhandene Neovim-Konfiguration nie ohne ausdrückliche Freigabe und ist nie erforderlich.
+
+### Wie nutzen Coding-Agenten es?
+
+Es ist für Menschen und für Coding-Agenten gebaut, die im Terminal leben. Seine Tastenbelegungen sind durch Vertragstests festgelegt, sodass Muskelgedächtnis und die Erwartungen eines Agenten Updates überstehen.
+
+### Welche Version bekomme ich?
+
+Der Installer installiert das Release, zu dem er gehört – derzeit `v0.4.2` –, sofern Sie nicht `DWP_VIM_REF` setzen; `DWP_VIM_REF=main` folgt `main`. Diese Seite beschreibt Release `v0.4.2`, das jede hier aufgeführte Funktion enthält.
+
+### Unter welcher Lizenz steht es und woher stammt es?
+
+GPL-3.0. Es leitet sich von mu-vim von Andrés M Prieto ab, und die Namensnennung bleibt im Repository erhalten.
+
+## Quellcode und Lizenz
+
+Der Quellcode liegt im [DeepWorkPlan-Vim-Repository](https://github.com/DailybotHQ/deepworkplan-vim). Es ist öffentlich und GPL-3.0-lizenziert, abgeleitet von [mu-vim](https://github.com/AndresMpa/mu-vim).
+
+## Verwandte Kit-Einträge
+
+- [Devcontainer](/kit/devcontainer) — reproduzierbare Entwicklungsumgebung (erstes Addon)
+- [Dailybot](/kit/dailybot) — team-sichtbare Plan-Lifecycle-Berichte (zweites Addon)
+- [AI Diff Reviewer](/kit/ai-diff-reviewer) — lokale Prüfung in den Final Reviews des Plans (fünftes Addon)
+- [Herdr](/kit/herdr) — eine Aufgabe an einen Peer-Agenten in einem Herdr-Pane delegieren (v7-Beta)
+- [Agentkit](/kit/agentkit) — ein Befehl für jeden Coding-Agenten im Terminal und Headless-Delegation (v7-Beta)

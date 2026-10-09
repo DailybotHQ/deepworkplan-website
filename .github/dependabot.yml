@@ -1,0 +1,22 @@
+# GitHub Actions weekly, plus the npm ecosystem (pnpm lockfile). pnpm's own
+# minimumReleaseAge (pnpm-workspace.yaml) still gates what installs.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: ci
+    labels: [dependencies]
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+    commit-message:
+      prefix: chore
+    labels: [dependencies]
