@@ -31,10 +31,6 @@ ak doctor
 
 | รายการ | ค่า |
 |---|---|
-| ผลิตภัณฑ์ | `DailybotHQ/devcontainer-kit` แท็ก `v0.
-
-| รายการ | ค่า |
-|---|---|
 | ผลิตภัณฑ์ | `DailybotHQ/coding-agents-kit` แท็ก `v0.1.1` อินเทอร์เฟซ 1 |
 | คีย์ใน registry | `agentkit` ใน `.dwp/config.json` |
 | ช่องทางการส่ง | headless: `ak run` หนึ่งครั้งต่อผู้รับมอบหมายหนึ่งราย ใน git worktree เฉพาะ |
