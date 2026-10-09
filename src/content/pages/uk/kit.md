@@ -67,7 +67,7 @@ npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
 - **[devcontainer](/uk/kit/devcontainer)** — Шаблон Dev Containers і базові образи, що постачаються без агентів для коду. Закріплено на `devcontainer-kit@v0.1.4`.
 - **[vim](/uk/kit/vim)** — Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown. Закріплено на `deepworkplan-vim@v0.4.2`.
 
-Реєстр аддонів і дескриптори постачаються в бета-версії v7, це пре-реліз: `v7.0.0-beta.1`
+Реєстр аддонів і дескриптори постачаються в Deep Work Plan v7: `v7.0.0`
 
 ### Приклади
 

@@ -119,7 +119,7 @@ describe('KitEcosystem facts', () => {
     }
   });
 
-  it('labels the pack as a pre-release beta', () => {
-    expect(source).toContain("const packTag = 'v7.0.0-beta.1';");
+  it('names the stable pack release', () => {
+    expect(source).toContain("const packTag = 'v7.0.0';");
   });
 });

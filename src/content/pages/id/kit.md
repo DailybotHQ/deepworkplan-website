@@ -68,7 +68,7 @@ Kemampuan yang ditambahkan alur onboard ke sebuah repo. Empat bersifat opsional 
 - **[devcontainer](/id/kit/devcontainer)** — Template Dev Containers dan image dasar yang dikirimkan tanpa coding agent. Dipatok pada `devcontainer-kit@v0.1.4`.
 - **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v0.4.2`.
 
-Registri addon dan deskriptor dikirimkan dalam beta v7, sebuah pra-rilis: `v7.0.0-beta.1`
+Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v7: `v7.0.0`
 
 ### Contoh
 

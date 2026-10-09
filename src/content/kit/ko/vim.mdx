@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim**은 Deep Work Plan의 터미널 에디터예요. 터미널에서 일하는 사람과 코딩 에이전트를 위한 Neovim 설정으로, 계획과 문서, 모든 명령의 색인이 키 하나 거리에 있어요.
 
-이것은 독립된 제품으로, Deep Work Plan v7 베타(`v7.0.0-beta.1`, 사전 출시 버전)의 선택 `vim` 애드온으로 제공돼요. Deep Work Plan은 어떤 에디터와도, 에디터 없이도 동작하며, 이 에디터도 Deep Work Plan을 요구하지 않아요. 컴퓨터에 따로 추가하면 되고, 계획이 있든 없든 에디터로 동작해요. 이 페이지는 릴리스 **v0.4.2**을 설명해요.
+이것은 독립된 제품으로, Deep Work Plan v7(`v7.0.0`)의 선택 `vim` 애드온으로 제공돼요. Deep Work Plan은 어떤 에디터와도, 에디터 없이도 동작하며, 이 에디터도 Deep Work Plan을 요구하지 않아요. 컴퓨터에 따로 추가하면 되고, 계획이 있든 없든 에디터로 동작해요. 이 페이지는 릴리스 **v0.4.2**을 설명해요.
 
 ## Deep Work Plan에 터미널 에디터가 필요한 이유
 
@@ -115,7 +115,7 @@ cd ~/.config/nvim && lua delete.lua
 
 ### v7 vim 애드온은 이것을 어떻게 쓰나요?
 
-Deep Work Plan v7 베타는 온보딩 중에 이 에디터를 선택 `vim` 애드온으로 제안해요. 애드온은 에디터의 `addon/surface.json`을 통해 기존 설치를 읽기 전용으로 감지하고, 버전이 고정되고 체크섬이 검증된 설치는 동의할 때만 제안해요. 명시적인 승인 없이 기존 Neovim 설정을 덮어쓰지 않으며, 결코 필수가 아니에요.
+Deep Work Plan v7은 온보딩 중에 이 에디터를 선택 `vim` 애드온으로 제안해요. 애드온은 에디터의 `addon/surface.json`을 통해 기존 설치를 읽기 전용으로 감지하고, 버전이 고정되고 체크섬이 검증된 설치는 동의할 때만 제안해요. 명시적인 승인 없이 기존 Neovim 설정을 덮어쓰지 않으며, 결코 필수가 아니에요.
 
 ### 코딩 에이전트는 어떻게 쓰나요?
 
@@ -138,5 +138,5 @@ GPL-3.0이에요. Andrés M Prieto의 mu-vim에서 파생되었고, 크레딧은
 - [Devcontainer](/kit/devcontainer) — 재현 가능한 개발 환경(첫 번째 애드온)
 - [Dailybot](/kit/dailybot) — 팀에 보이는 계획 수명 주기 보고(두 번째 애드온)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — 계획 Final Review 동안의 로컬 리뷰(다섯 번째 애드온)
-- [Herdr](/kit/herdr) — Herdr 페인의 피어 에이전트에게 작업 위임(v7 베타)
-- [Agentkit](/kit/agentkit) — 모든 터미널 코딩 에이전트를 위한 하나의 명령과 헤드리스 위임(v7 베타)
+- [Herdr](/kit/herdr) — Herdr 페인의 피어 에이전트에게 작업 위임(v7)
+- [Agentkit](/kit/agentkit) — 모든 터미널 코딩 에이전트를 위한 하나의 명령과 헤드리스 위임(v7)

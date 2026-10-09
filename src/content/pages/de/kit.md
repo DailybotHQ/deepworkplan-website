@@ -67,7 +67,7 @@ Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügt. Vier sind opti
 - **[devcontainer](/de/kit/devcontainer)** — Eine Vorlage für Dev Containers und Basis-Images, die ohne Coding-Agenten ausgeliefert werden. Fixiert auf `devcontainer-kit@v0.1.4`.
 - **[vim](/de/kit/vim)** — Der Terminal-Editor, mit einem schreibgeschützten Plan-Browser und einem Markdown-Viewer. Fixiert auf `deepworkplan-vim@v0.4.2`.
 
-Die Addon-Registry und die Deskriptoren werden in der v7-Beta ausgeliefert, einem Pre-Release: `v7.0.0-beta.1`
+Die Addon-Registry und die Deskriptoren werden in Deep Work Plan v7 ausgeliefert: `v7.0.0`
 
 ### Beispiele
 

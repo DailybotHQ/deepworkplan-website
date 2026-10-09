@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer アドオン
 
-リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7 beta**（`v7.0.0-beta.1`、プレリリース）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトで、パックが以前同梱していたテンプレートを置き換えます。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
+リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7**（`v7.0.0`）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトで、パックが以前同梱していたテンプレートを置き換えます。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
 
 ## devcontainer-kit が提供するもの
 

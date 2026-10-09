@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** est l’éditeur de terminal de Deep Work Plan : une configuration Neovim pour les personnes, et pour les agents de programmation, qui travaillent dans un terminal. Vos plans, votre documentation et un index de toutes les commandes sont à une touche de distance.
 
-C’est un produit distinct, proposé comme l’addon optionnel `vim` de la bêta de Deep Work Plan v7 (`v7.0.0-beta.1`, une préversion). Deep Work Plan fonctionne avec n’importe quel éditeur ou sans éditeur, et l’éditeur n’exige pas Deep Work Plan : vous l’ajoutez à une machine séparément, et il fonctionne comme éditeur qu’un plan existe ou non. Cette page décrit la version **v0.4.2**.
+C’est un produit distinct, proposé comme l’addon optionnel `vim` de Deep Work Plan v7 (`v7.0.0`). Deep Work Plan fonctionne avec n’importe quel éditeur ou sans éditeur, et l’éditeur n’exige pas Deep Work Plan : vous l’ajoutez à une machine séparément, et il fonctionne comme éditeur qu’un plan existe ou non. Cette page décrit la version **v0.4.2**.
 
 ## Pourquoi un éditeur de terminal pour Deep Work Plan
 
@@ -115,7 +115,7 @@ Non. C’est d’abord un éditeur. Il n’installe pas la skill Deep Work Plan 
 
 ### Comment l’addon vim de la v7 l’utilise-t-il ?
 
-La bêta de Deep Work Plan v7 propose l’éditeur comme l’addon optionnel `vim` pendant l’onboarding. L’addon détecte une installation existante en lecture seule, via le fichier `addon/surface.json` de l’éditeur, et ne propose l’installation figée et vérifiée par somme de contrôle qu’avec votre consentement. Il n’écrase jamais une configuration Neovim existante sans approbation explicite, et il n’est jamais requis.
+Deep Work Plan v7 propose l’éditeur comme l’addon optionnel `vim` pendant l’onboarding. L’addon détecte une installation existante en lecture seule, via le fichier `addon/surface.json` de l’éditeur, et ne propose l’installation figée et vérifiée par somme de contrôle qu’avec votre consentement. Il n’écrase jamais une configuration Neovim existante sans approbation explicite, et il n’est jamais requis.
 
 ### Comment les agents de programmation l’utilisent-ils ?
 
@@ -138,5 +138,5 @@ Le code source se trouve dans le [dépôt DeepWorkPlan Vim](https://github.com/D
 - [Devcontainer](/kit/devcontainer) — environnement de développement reproductible (premier addon)
 - [Dailybot](/kit/dailybot) — rapports de cycle de vie du plan visibles par l'équipe (deuxième addon)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — revue locale pendant les Final Reviews du plan (cinquième addon)
-- [Herdr](/kit/herdr) — déléguer une tâche à un agent pair dans un panneau Herdr (bêta v7)
-- [Agentkit](/kit/agentkit) — une seule commande pour chaque agent de programmation en terminal, et la délégation headless (bêta v7)
+- [Herdr](/kit/herdr) — déléguer une tâche à un agent pair dans un panneau Herdr (v7)
+- [Agentkit](/kit/agentkit) — une seule commande pour chaque agent de programmation en terminal, et la délégation headless (v7)

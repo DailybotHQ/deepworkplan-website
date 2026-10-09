@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer 애드온
 
-사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v7 beta**(`v7.0.0-beta.1`, 사전 릴리스)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합하며, 팩이 예전에 담고 있던 템플릿을 대체합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
+사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v7**(`v7.0.0`)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합하며, 팩이 예전에 담고 있던 템플릿을 대체합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
 
 ## devcontainer-kit이 제공하는 것
 

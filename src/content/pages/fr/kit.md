@@ -67,7 +67,7 @@ Des capacités que le flux onboard superpose à un dépôt. Quatre sont facultat
 - **[devcontainer](/fr/kit/devcontainer)** — Un modèle Dev Containers et des images de base distribués sans agents de code. Épinglé à `devcontainer-kit@v0.1.4`.
 - **[vim](/fr/kit/vim)** — L’éditeur de terminal, avec un navigateur de plans en lecture seule et une visionneuse Markdown. Épinglé à `deepworkplan-vim@v0.4.2`.
 
-Le registre des addons et les descripteurs sont livrés dans la bêta v7, une préversion : `v7.0.0-beta.1`
+Le registre des addons et les descripteurs sont livrés dans Deep Work Plan v7 : `v7.0.0`
 
 ### Exemples
 

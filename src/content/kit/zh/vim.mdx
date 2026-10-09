@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** 是 Deep Work Plan 的终端编辑器：一套面向在终端中工作的人以及编程代理的 Neovim 配置。你的计划、文档和所有命令的索引，都只需一个按键。
 
-它是一个独立的产品，作为 Deep Work Plan v7 beta（`v7.0.0-beta.1`，预发布版本）的可选 `vim` 附加组件提供。Deep Work Plan 可以搭配任何编辑器使用，也可以不用编辑器；该编辑器同样不依赖 Deep Work Plan：你可以单独把它加到一台机器上，无论是否存在计划，它都能作为编辑器使用。本页描述的是 **v0.4.2** 版本。
+它是一个独立的产品，作为 Deep Work Plan v7（`v7.0.0`）的可选 `vim` 附加组件提供。Deep Work Plan 可以搭配任何编辑器使用，也可以不用编辑器；该编辑器同样不依赖 Deep Work Plan：你可以单独把它加到一台机器上，无论是否存在计划，它都能作为编辑器使用。本页描述的是 **v0.4.2** 版本。
 
 ## 为什么要为 Deep Work Plan 准备终端编辑器
 
@@ -115,7 +115,7 @@ cd ~/.config/nvim && lua delete.lua
 
 ### v7 的 vim 附加组件如何使用它？
 
-Deep Work Plan v7 beta 在引导流程中将该编辑器作为可选的 `vim` 附加组件提供。该附加组件通过编辑器的 `addon/surface.json` 以只读方式检测已有安装，并且只有在征得你同意后，才会提供固定版本、经校验和验证的安装。未经明确批准，它绝不会覆盖已有的 Neovim 配置，而且它从来不是必需的。
+Deep Work Plan v7 在引导流程中将该编辑器作为可选的 `vim` 附加组件提供。该附加组件通过编辑器的 `addon/surface.json` 以只读方式检测已有安装，并且只有在征得你同意后，才会提供固定版本、经校验和验证的安装。未经明确批准，它绝不会覆盖已有的 Neovim 配置，而且它从来不是必需的。
 
 ### 编程代理如何使用它？
 
@@ -138,5 +138,5 @@ GPL-3.0。它派生自 Andrés M Prieto 的 mu-vim，署名保留在仓库中。
 - [Devcontainer](/kit/devcontainer) — 可复现的开发环境（第一个附加组件）
 - [Dailybot](/kit/dailybot) — 团队可见的计划生命周期报告（第二个附加组件）
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — 计划最终评审期间的本地评审（第五个附加组件）
-- [Herdr](/kit/herdr) — 在 Herdr 窗格中将任务委派给对等方（v7 beta）
-- [Agentkit](/kit/agentkit) — 一条命令覆盖所有终端编程代理，并支持无头委派（v7 beta）
+- [Herdr](/kit/herdr) — 在 Herdr 窗格中将任务委派给对等方（v7）
+- [Agentkit](/kit/agentkit) — 一条命令覆盖所有终端编程代理，并支持无头委派（v7）

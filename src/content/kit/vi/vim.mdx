@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** là trình soạn thảo trên terminal cho Deep Work Plan: một cấu hình Neovim dành cho con người, và cho các agent lập trình, làm việc trong terminal. Kế hoạch, tài liệu và chỉ mục của mọi lệnh chỉ cách bạn một phím bấm.
 
-Đây là một sản phẩm riêng, được cung cấp dưới dạng addon `vim` tùy chọn của Deep Work Plan v7 beta (`v7.0.0-beta.1`, một bản phát hành trước). Deep Work Plan hoạt động với bất kỳ trình soạn thảo nào hoặc không cần trình soạn thảo, và trình soạn thảo này cũng không yêu cầu Deep Work Plan: bạn thêm nó vào máy một cách độc lập, và nó hoạt động như một trình soạn thảo dù có kế hoạch hay không. Trang này mô tả bản phát hành **v0.4.2**.
+Đây là một sản phẩm riêng, được cung cấp dưới dạng addon `vim` tùy chọn của Deep Work Plan v7 (`v7.0.0`). Deep Work Plan hoạt động với bất kỳ trình soạn thảo nào hoặc không cần trình soạn thảo, và trình soạn thảo này cũng không yêu cầu Deep Work Plan: bạn thêm nó vào máy một cách độc lập, và nó hoạt động như một trình soạn thảo dù có kế hoạch hay không. Trang này mô tả bản phát hành **v0.4.2**.
 
 ## Vì sao cần trình soạn thảo trên terminal cho Deep Work Plan
 
@@ -115,7 +115,7 @@ Không. Trước hết nó là một trình soạn thảo. Nó không cài đặ
 
 ### Addon vim của v7 dùng nó như thế nào?
 
-Deep Work Plan v7 beta đề xuất trình soạn thảo này dưới dạng addon `vim` tùy chọn trong quá trình onboarding. Addon phát hiện bản cài đặt hiện có ở chế độ chỉ đọc, thông qua tệp `addon/surface.json` của trình soạn thảo, và chỉ đề xuất bản cài đặt được ghim phiên bản, đã xác minh checksum khi có sự đồng ý của bạn. Nó không bao giờ ghi đè cấu hình Neovim hiện có khi chưa được phê duyệt rõ ràng, và không bao giờ là bắt buộc.
+Deep Work Plan v7 đề xuất trình soạn thảo này dưới dạng addon `vim` tùy chọn trong quá trình onboarding. Addon phát hiện bản cài đặt hiện có ở chế độ chỉ đọc, thông qua tệp `addon/surface.json` của trình soạn thảo, và chỉ đề xuất bản cài đặt được ghim phiên bản, đã xác minh checksum khi có sự đồng ý của bạn. Nó không bao giờ ghi đè cấu hình Neovim hiện có khi chưa được phê duyệt rõ ràng, và không bao giờ là bắt buộc.
 
 ### Các agent lập trình dùng nó như thế nào?
 
@@ -138,5 +138,5 @@ Mã nguồn nằm trong [kho mã DeepWorkPlan Vim](https://github.com/DailybotHQ
 - [Devcontainer](/kit/devcontainer) — môi trường phát triển tái lập được (addon đầu tiên)
 - [Dailybot](/kit/dailybot) — báo cáo vòng đời kế hoạch nhìn thấy được cho cả nhóm (addon thứ hai)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — đánh giá cục bộ trong các Final Review của kế hoạch (addon thứ năm)
-- [Herdr](/kit/herdr) — giao một tác vụ cho một agent ngang hàng trong một pane Herdr (v7 beta)
-- [Agentkit](/kit/agentkit) — một lệnh cho mọi agent lập trình trên terminal, và ủy thác headless (v7 beta)
+- [Herdr](/kit/herdr) — giao một tác vụ cho một agent ngang hàng trong một pane Herdr (v7)
+- [Agentkit](/kit/agentkit) — một lệnh cho mọi agent lập trình trên terminal, và ủy thác headless (v7)

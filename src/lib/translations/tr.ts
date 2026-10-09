@@ -1298,7 +1298,7 @@ export const tr: SiteTranslations = {
       'Aynı kural DeepWorkPlan Vim kurulum programı için de geçerlidir: sayfası, şu anda sunulan betiğin SHA-256 değerini ve indirme, inceleme, doğrulama ve çalıştırma adımlarını gösterir.',
     vimLinkLabel: 'DeepWorkPlan Vim kurulum programını inceleyin',
     betaNote:
-      'Ön sürümler de aynı şekilde doğrulanır. v7 betası olan v7.0.0-beta.1, kendi SHA256SUMS dosyasına sahip bir GitHub ön sürümüdür ve kararlı sürüm değildir. Bu site onu sahada denemek için içerir: sabitlenmiş etiketiyle kurulur ve bu sağlama toplamlarına göre kontrol edilir.',
+      'Ön sürümler de aynı şekilde doğrulanır: her GitHub ön sürümü kendi SHA256SUMS dosyasını taşır ve asla kararlı sürüm değildir. Bu site bir ön sürümü sahada denemek için içerdiği sürece, onun sabitlenmiş kurulum satırı aşağıda görünür.',
     disclosureTitle: 'Güvenlik açığı bildirin',
     disclosureBody:
       "Bir güvenlik sorunu mu buldunuz? İlgili depoda — skill'de veya web sitesinde (aşağıda bağlantısı verilen güvenlik politikalarına bakın) — GitHub'ın özel güvenlik açığı bildirme özelliği aracılığıyla özel olarak bildirin; kamuya açık bir issue açmak yerine, zira bu durum düzeltme gelmeden önce sorunu ifşa eder.",

@@ -9,6 +9,14 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+### Changed
+
+- The site vendors the stable Deep Work Plan skill `7.0.0` (verified against its release `SHA256SUMS`); the addon registry `.dwp/config.json` is tracked; pages that described the v7 addons as part of a beta now name the stable `v7.0.0` release.
+
+### Security
+
+- The DeepWorkPlan Vim install chains download, checksum and run with `&&`, so a mismatched SHA-256 stops a pasted install before the script runs.
+
 ## [5.0.31] - 2026-10-09
 
 ### Added
