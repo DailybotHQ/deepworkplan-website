@@ -338,7 +338,7 @@ pnpm run md:content-check   # Verify the .md actually carries equivalent content
 pnpm run i18n:check         # Verify translation parity across all 17 active languages
 pnpm run i18n:scaffold <code>  # Scaffold strings + content for a new language code
 bash scripts/check-public-hygiene.sh  # Public-hygiene check (no private context or secrets; runs in CI)
-bash scripts/repositories.sh clone|status|pull|ls  # Ecosystem hub: sync repositories/ (host; git + python3)
+bash scripts/repositories.sh clone|status|pull|ls  # Ecosystem hub: sync repositories/ (host or container; git + python3)
 bash tests/scripts/repositories.test.sh  # Sync-script tests (host, offline; runs in CI)
 pnpm run lighthouse         # Lighthouse CI audit (mobile)
 pnpm run lighthouse:desktop # Lighthouse CI audit (desktop)

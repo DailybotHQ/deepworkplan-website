@@ -209,7 +209,7 @@ pnpm run release
 
 ## Ecosystem Hub Repositories
 
-This repository is also the ecosystem hub ([Ecosystem Context](ECOSYSTEM_CONTEXT.md)). The sync script runs on the **host** (bash 3.2+, git, python3 — no Node, no container) and only touches the git-ignored `repositories/`:
+This repository is also the ecosystem hub ([Ecosystem Context](ECOSYSTEM_CONTEXT.md)). The sync script needs only bash 3.2+, git and python3 (no Node), so it runs on the host or inside the development container alike — the workspace is mounted, so both write the same git-ignored `repositories/`:
 
 ```bash
 bash scripts/repositories.sh ls              # manifest: name, role, visibility, gate

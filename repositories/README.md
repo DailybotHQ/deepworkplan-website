@@ -43,6 +43,9 @@ never double-edit.
 ## Adding a repository
 
 Add an entry to [`manifest.json`](manifest.json) (name, HTTPS URL, default
-branch, role, visibility, gate, summary), add its row above, and run
-`bash tests/scripts/repositories.test.sh`. Only public repositories belong in
+branch, role, visibility, gate, summary) and its row above, then update the
+tables that repeat it: the gates table in `AGENTS.md` (Ecosystem Hub section),
+the gates table in [`docs/CROSS_PROJECT_STANDARDS.md`](../docs/CROSS_PROJECT_STANDARDS.md)
+and the posture table in [`docs/ECOSYSTEM_CONTEXT.md`](../docs/ECOSYSTEM_CONTEXT.md).
+Run `bash tests/scripts/repositories.test.sh`. Only public repositories belong in
 this hub.

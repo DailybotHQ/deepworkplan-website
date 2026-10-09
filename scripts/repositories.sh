@@ -10,7 +10,8 @@
 # Safety rules (pinned by tests/scripts/repositories.test.sh):
 #   - never deletes anything, never rewrites a remote, never resets or stashes;
 #   - `clone` skips any path that already exists (directory, file or
-#     symlink, dangling or not);
+#     symlink, dangling or not) and fails (exit 1) when that path is not a
+#     git checkout, so a leftover from an interrupted clone stays visible;
 #   - `pull` and `status` never follow a symlinked checkout; `pull` skips a
 #     dirty tree, a detached HEAD, any branch other than the manifest's
 #     default branch, an unborn branch, and local commits (ahead/diverged);
@@ -121,8 +122,18 @@ cmd_clone() {
 	mkdir -p "$REPOS_DIR"
 	while IFS="$SEP" read -r name url branch role visibility gate; do
 		dest="$REPOS_DIR/$name"
-		if [ -e "$dest" ] || [ -L "$dest" ]; then
-			echo "$name: present, skipped"
+		if [ -L "$dest" ]; then
+			echo "$name: symlink, not followed, skipped"
+			continue
+		fi
+		if [ -e "$dest" ]; then
+			if is_checkout "$dest"; then
+				echo "$name: present, skipped"
+			else
+				# A leftover (e.g. an interrupted clone) is reported, never removed.
+				echo "$name: present but not a git checkout, skipped" >&2
+				failed=1
+			fi
 			continue
 		fi
 		if GIT_ALLOW_PROTOCOL="$CLONE_PROTOCOLS" git clone --quiet --branch "$branch" -- "$url" "$dest" </dev/null; then

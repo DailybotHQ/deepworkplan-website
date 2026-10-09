@@ -19,6 +19,8 @@ Tracking documentation coverage for deepworkplan.com.
 | [README.md](README.md) | ✅ Current | Documentation index |
 | [PRODUCT_SPEC.md](PRODUCT_SPEC.md) | ✅ Current | Product vision and features |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | ✅ Current | Technical architecture |
+| [ECOSYSTEM_CONTEXT.md](ECOSYSTEM_CONTEXT.md) | ✅ Current | Ecosystem hub: posture, claims, release order, boundaries |
+| [CROSS_PROJECT_STANDARDS.md](CROSS_PROJECT_STANDARDS.md) | ✅ Current | Hub rules: where work lands, orchestrator plans, gates, PRs |
 | [STANDARDS.md](STANDARDS.md) | ✅ Current | Coding conventions |
 | [DEVELOPMENT_COMMANDS.md](DEVELOPMENT_COMMANDS.md) | ✅ Current | npm scripts reference |
 | [TESTING_GUIDE.md](TESTING_GUIDE.md) | ✅ Current | Testing setup (future) |

@@ -82,7 +82,7 @@ describe('ecosystem hub isolation', () => {
     }
   });
 
-  it('never imports site code from repositories/', () => {
+  it('never imports site or edge code from repositories/', () => {
     const offenders: string[] = [];
     const walk = (dir: string): void => {
       for (const entry of readdirSync(dir)) {
@@ -102,6 +102,7 @@ describe('ecosystem hub isolation', () => {
       }
     };
     walk(resolve(root, 'src'));
+    walk(resolve(root, 'functions'));
     expect(offenders).toEqual([]);
   });
 
