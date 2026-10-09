@@ -31,11 +31,11 @@ section: Addons
 
 ### Devcontainer(첫 번째 애드온)
 
-감지된 스택에서 추론한 compose 기반 `.devcontainer/` + `docker/` 설정.
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)(`dck`, `v0.1.4`로 고정)의 얇은 통합 계층: `dck init`이 저장소에 렌더링하는 Dev Containers 템플릿.
 
 - **키트 페이지:** [Devcontainer](/kit/devcontainer)
-- **추가 내용:** 영구 AI-CLI 인증 볼륨(Claude, Codex, Cursor, gh, Dailybot), `dailybot-project-network`, `DOCKER_DEV_ENV=vscode`, 검증 별칭(`codecheck`, `check`, `fix`, `test`), 공개 OSS 시크릿 위생
-- **동작:** 약 85% 안정 스켈레톤; 약 15% 스택별 추론. 기존 devcontainer는 조정되며 절대 덮어쓰지 않음
+- **추가 내용:** `dck` 런처(`setup`, `up`, `shell`, `ssh`, `doctor`), 코딩 에이전트 없이 제공되는 `python-3.13`, `node-24`, `debian` 변형의 베이스 이미지(에이전트는 옵트인 레이어), 루프백 전용 포트, SSH 에이전트 포워딩, 컨테이너별 선택적 Herdr 머신
+- **동작:** `dck doctor --json`(인터페이스 1)으로 감지; `dck init`은 diff가 승인된 후에만 기존 devcontainer를 조정하며 먼저 파일을 백업함 — 절대 덮어쓰지 않음
 - **제안 시점:** Docker 또는 격리 개발 컨테이너가 유익한 서비스가 있는 대부분의 저장소
 
 ### Dailybot(두 번째 애드온)
@@ -44,7 +44,7 @@ section: Addons
 
 - **키트 페이지:** [Dailybot](/kit/dailybot) — 전체 기능 참조
 - **DWP 애드온이 연결하는 것:** dailybot `report` 서브스킬을 통한 네 가지 플랜 라이프사이클 보고(kickoff, significant task, blocked, completion); 선택적 결정론적 훅 강제(`dailybot hook`, CLI `>= 3.9.0`)
-- **페어링 스킬:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)(현재 **3.23.2**) 설치 시 **17가지 기능** — Slack/Teams/Discord/Google Chat 채팅, 체크인, 폼 작성, Ask AI, kudos, Plan 보드와 작업, 조직 라벨, 저장소별 API 키(`.dailybot/env.json`), 이메일 등. DWP 애드온은 **report**만 연결; 다른 기능은 Dailybot 스킬을 직접 호출
+- **페어링 스킬:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)(현재 **3.23.3**) 설치 시 **17가지 기능** — Slack/Teams/Discord/Google Chat 채팅, 체크인, 폼 작성, Ask AI, kudos, Plan 보드와 작업, 조직 라벨, 저장소별 API 키(`.dailybot/env.json`), 이메일 등. DWP 애드온은 **report**만 연결; 다른 기능은 Dailybot 스킬을 직접 호출
 - **인증:** Dailybot 스킬에 완전 위임(`dailybot login` 또는 `DAILYBOT_API_KEY`); 이 애드온은 자격 증명을 저장하지 않음
 - **벤더 중립 가드레일:** 핵심 DWP는 Dailybot 의존성 **제로**; 모든 사람에게 자동 설치하지 않음
 - **제안 시점:** 개발자나 팀이 이미 Dailybot을 사용하거나 팀 보고를 명시적으로 요청
@@ -72,7 +72,7 @@ section: Addons
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**(marketplace **"AI Diff Reviewer"**)는 필수 Final Review 보안 점검에 구조화된 로컬 리뷰를 부여하고, 선택적으로 CI에서 pull request를 게이트합니다. 이 애드온은 릴리스마다 자동으로 갱신되므로, 아래에 표시된 태그는 작성 시점의 것이며 실제 벤더링된 사본보다 뒤처질 수 있습니다 — 실제로 설치된 태그는 애드온 자체의 `SKILL.md`와 GitHub 릴리스가 기준입니다. 설치는 항상 공개된 태그에 고정되며, 움직이는 브랜치를 가리키지 않습니다. 표준 2.3.0부터 **로컬 리뷰는 기준선의 일부**입니다; 옵트인인 것은 CI 표면뿐입니다.
 
 - **키트 페이지:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 전체 기능 참조
-- **온보딩 시 필수(7a 단계):** 온보딩 동의 아래 벤더 스킬의 태그 고정 설치(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) 더하기 저장소 맞춤 `.review/extension.md`(`generate-extension` 경유); 표적 하니스 업그레이드는 둘 중 무엇이 누락되었는지 조정; 거부는 선언된 예외로 기록되며 설치될 때까지 `verify`가 보고
+- **온보딩 시 필수(7a 단계):** 온보딩 동의 아래 벤더 스킬의 태그 고정 설치(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) 더하기 저장소 맞춤 `.review/extension.md`(`generate-extension` 경유); 표적 하니스 업그레이드는 둘 중 무엇이 누락되었는지 조정; 거부는 선언된 예외로 기록되며 설치될 때까지 `verify`가 보고
 - **모든 Final Review에서 필수:** 보안 점검은 누적 변경 집합에 대해 upstream 부모 기본 플로우를 실행하고 그 출력을 플랜 로컬 `analysis_results/SECURITY_REVIEW.md`(플랜 자체 폴더 안에 있으며 저장소 루트가 아님)에 덧붙임; 누락된 스킬 또는 확장은 기록된 `local reviewer not installed` 발견 사항 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아님: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속함; 완료된 패스의 **검증된 `critical` 발견**은 수정되거나 명시적으로 수락될 때까지 완료를 차단함(v3, BC-07 — 검증되지 않은 크리티컬 주장은 주석 달린 경고로 표시되며, `incomplete`/`timeout` 검토는 깨끗한 패스가 아님, BC-04)
 - **선택적 CI 표면(Flow B):** upstream `setup` 서브스킬을 통한 `pr-review.yml`(`DailybotHQ/ai-diff-reviewer@v3`), 더해서 개발자 호출 컴패니언으로 `apply-review`(읽기 전용)와 `address-review`(커밋·푸시를 수행하고 리뷰어를 재무장하는, v3.1.1의 신규) — 명시적으로 제안되며 요청하지 않으면 설치하지 않고, 절대 기본값이 아니며, 절대 플랜 작업이 아님
 - **차단 없음(호출만):** 시작할 수 있었지만 오류가 난 로컬 리뷰는 한 번 경고하고 기록한 뒤 계속; 그 작업을 실패시키지 않음

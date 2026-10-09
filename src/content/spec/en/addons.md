@@ -31,11 +31,11 @@ Five addons ship today — four opt-in plus the required local review. Each has 
 
 ### Devcontainer (first addon)
 
-A compose-based `.devcontainer/` + `docker/` setup reasoned from the detected stack.
+A thin integrator of [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, pinned `v0.1.4`): a Dev Containers template that `dck init` renders into the repository.
 
 - **Kit page:** [Devcontainer](/kit/devcontainer)
-- **What it adds:** persistent AI-CLI auth volumes (Claude, Codex, Cursor, gh, Dailybot), `dailybot-project-network`, `DOCKER_DEV_ENV=vscode`, validation aliases (`codecheck`, `check`, `fix`, `test`), public-OSS secret hygiene
-- **Behavior:** ~85% stable skeleton; ~15% reasoned per stack. Existing devcontainers are reconciled, never clobbered
+- **What it adds:** the `dck` launcher (`setup`, `up`, `shell`, `ssh`, `doctor`), base images in `python-3.13`, `node-24` and `debian` flavours that ship without coding agents (agents are an opt-in layer), loopback-only ports, SSH agent forwarding, and optional Herdr machines per container
+- **Behavior:** detected through `dck doctor --json` (interface 1); `dck init` reconciles an existing devcontainer only after its diff is accepted, and backs the file up first — never clobbered
 - **When offered:** most repos with Docker or services that benefit from an isolated dev container
 
 ### Dailybot (second addon)
@@ -44,7 +44,7 @@ An opt-in connection to the developer's **Dailybot team** for agent progress vis
 
 - **Kit page:** [Dailybot](/kit/dailybot) — full capability reference
 - **What the DWP addon wires:** four plan-lifecycle reports (kickoff, significant task, blocked, completion) via the dailybot `report` sub-skill; optional deterministic hook enforcement (`dailybot hook`, CLI `>= 3.9.0`)
-- **Paired skill:** installing [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (currently **3.23.2**) exposes **17 capabilities** — chat on Slack/Teams/Discord/Google Chat, check-ins, forms authoring, ask AI, kudos, Plan boards and tasks, organization labels, per-repo API keys (`.dailybot/env.json`), email, and more. The DWP addon wires only **report**; other capabilities are invoked through the Dailybot skill directly
+- **Paired skill:** installing [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (currently **3.23.3**) exposes **17 capabilities** — chat on Slack/Teams/Discord/Google Chat, check-ins, forms authoring, ask AI, kudos, Plan boards and tasks, organization labels, per-repo API keys (`.dailybot/env.json`), email, and more. The DWP addon wires only **report**; other capabilities are invoked through the Dailybot skill directly
 - **Auth:** fully deferred to the Dailybot skill (`dailybot login` or `DAILYBOT_API_KEY`); this addon never stores credentials
 - **Vendor-neutral guardrail:** core DWP has **zero** Dailybot dependency; never auto-install for everyone
 - **When offered:** developer or team already uses Dailybot, or explicitly asks for team reporting
@@ -72,7 +72,7 @@ An interface-surface-scoped `DESIGN.md` any coding agent reads for consistent UI
 The **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) gives the mandatory Final Review security pass a structured local review, and optionally gates pull requests in CI. Since standard 2.3.0 the **local review is part of the baseline**; only the CI surface is opt-in. This addon is release-auto-refreshed, so the tag shown below is the one current at the time of writing and may lag the vendored copy — the addon's own `SKILL.md` and its GitHub releases are authoritative for the tag actually installed. The install is always pinned to a published tag, never to a moving branch.
 
 - **Kit page:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — full capability reference
-- **Required at onboarding (Phase 7a):** tag-pinned install of the vendored skill (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) plus a repo-tailored `.review/extension.md` (via `generate-extension`), under the onboarding consent; a targeted harness upgrade reconciles both when missing; a decline is recorded as a declared exception and reported by `verify` until installed
+- **Required at onboarding (Phase 7a):** tag-pinned install of the vendored skill (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) plus a repo-tailored `.review/extension.md` (via `generate-extension`), under the onboarding consent; a targeted harness upgrade reconciles both when missing; a decline is recorded as a declared exception and reported by `verify` until installed
 - **Required in every Final Review:** the security pass runs the upstream parent default flow over the accumulated change set and appends its output to the plan-local `analysis_results/SECURITY_REVIEW.md` (inside the plan's own folder, never the repository root); a missing skill or extension is a recorded `local reviewer not installed` finding — never a silent skip, and never a surprise bootstrap: installation belongs to the onboarding consent or an explicit addon invocation; **verified** `critical` findings from a completed pass block completion until fixed or explicitly accepted (v3, BC-07 — unverified critical claims arrive as annotated warnings, and an `incomplete`/`timeout` review is not a clean pass, BC-04)
 - **Optional CI surface (Flow B):** the review workflow (`DailybotHQ/ai-diff-reviewer@v3`) via the upstream `setup` sub-skill, plus the `apply-review` (read-only) and `address-review` (commits, pushes, and re-arms; new in v3.1.1) companions as developer-invoked conveniences — offered explicitly, never installed unrequested, never the default, never a plan task
 - **Never-block (invocation only):** a local review that could start but errors is warn-once-record-and-continue; it never fails the task

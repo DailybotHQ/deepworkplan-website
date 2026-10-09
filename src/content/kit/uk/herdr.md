@@ -29,8 +29,8 @@ order: 7
 Встановіть herdr-peers та офіційний скіл Herdr, від якого він залежить. Кожна машина, агенти якої мають відповідати, також потребує цього скілу.
 
 ```bash
-npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g -y
-npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
 Вимоги: Herdr 0.9.1 або новіший, `bash` і `python3` 3.9 або новіший (лише стандартна бібліотека). Онбординг пропонує аддон і фіксує вашу відповідь у реєстрі аддонів; без згоди він ніколи не вмикається.

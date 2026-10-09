@@ -31,11 +31,11 @@ Lima addon tersedia hari ini — empat opt-in ditambah tinjauan lokal yang wajib
 
 ### Devcontainer (addon pertama)
 
-Setup `.devcontainer/` + `docker/` berbasis compose yang dirasionalkan dari stack yang terdeteksi.
+Integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.1.4`): template Dev Containers yang dirender `dck init` ke dalam repositori.
 
 - **Halaman kit:** [Devcontainer](/kit/devcontainer)
-- **Yang ditambahkan:** volume auth AI-CLI persisten (Claude, Codex, Cursor, gh, Dailybot), `dailybot-project-network`, `DOCKER_DEV_ENV=vscode`, alias validasi (`codecheck`, `check`, `fix`, `test`), kebersihan rahasia OSS publik
-- **Perilaku:** ~85% kerangka stabil; ~15% dirasionalkan per stack. Devcontainer yang ada direkonsiliasi, tidak pernah ditimpa
+- **Yang ditambahkan:** launcher `dck` (`setup`, `up`, `shell`, `ssh`, `doctor`), image dasar dalam varian `python-3.13`, `node-24`, dan `debian` yang dikirim tanpa agen coding (agen adalah lapisan opt-in), port khusus loopback, penerusan agen SSH, dan mesin Herdr opsional per container
+- **Perilaku:** dideteksi melalui `dck doctor --json` (antarmuka 1); `dck init` merekonsiliasi devcontainer yang ada hanya setelah diff-nya diterima, dan mencadangkan file terlebih dahulu — tidak pernah ditimpa
 - **Kapan ditawarkan:** sebagian besar repo dengan Docker atau layanan yang mendapat manfaat dari dev container terisolasi
 
 ### Dailybot (addon kedua)
@@ -44,7 +44,7 @@ Koneksi opt-in ke **tim Dailybot** pengembang untuk visibilitas progres agen.
 
 - **Halaman kit:** [Dailybot](/kit/dailybot) — referensi kemampuan lengkap
 - **Yang dihubungkan addon DWP:** empat laporan siklus hidup rencana (kickoff, significant task, blocked, completion) melalui sub-skill dailybot `report`; penegakan hook deterministik opsional (`dailybot hook`, CLI `>= 3.9.0`)
-- **Skill yang dipasangkan:** menginstal [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (saat ini **3.23.2**) mengekspos **17 kemampuan** — chat di Slack/Teams/Discord/Google Chat, check-in, authoring formulir, ask AI, kudos, board dan tugas Plan, label organisasi, API key per repo (`.dailybot/env.json`), email, dan lainnya. Addon DWP hanya menghubungkan **report**; kemampuan lain dipanggil melalui skill Dailybot secara langsung
+- **Skill yang dipasangkan:** menginstal [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (saat ini **3.23.3**) mengekspos **17 kemampuan** — chat di Slack/Teams/Discord/Google Chat, check-in, authoring formulir, ask AI, kudos, board dan tugas Plan, label organisasi, API key per repo (`.dailybot/env.json`), email, dan lainnya. Addon DWP hanya menghubungkan **report**; kemampuan lain dipanggil melalui skill Dailybot secara langsung
 - **Auth:** sepenuhnya ditunda ke skill Dailybot (`dailybot login` atau `DAILYBOT_API_KEY`); addon ini tidak pernah menyimpan kredensial
 - **Pagar vendor-neutral:** DWP inti memiliki **nol** ketergantungan Dailybot; jangan pernah menginstal otomatis untuk semua orang
 - **Kapan ditawarkan:** pengembang atau tim sudah menggunakan Dailybot, atau secara eksplisit meminta pelaporan tim
@@ -72,7 +72,7 @@ Upgrade dependensi agnostik package manager, bertahap, tervalidasi, dan dapat di
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) memberi pemeriksaan keamanan Final Review wajib sebuah tinjauan lokal terstruktur, dan secara opsional mengontrol pull request di CI. Sejak standar 2.3.0 **tinjauan lokal adalah bagian dari baseline**; hanya permukaan CI yang opt-in. Addon ini diperbarui otomatis setiap rilis, sehingga tag yang ditampilkan di bawah adalah tag yang berlaku saat tulisan ini dibuat dan dapat tertinggal dari salinan yang di-vendor — `SKILL.md` milik addon itu sendiri dan rilis GitHub-nya adalah acuan resmi untuk tag yang benar-benar terpasang. Pemasangan selalu dipatok ke tag yang sudah dirilis, tidak pernah ke branch yang bergerak.
 
 - **Halaman kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — referensi kemampuan lengkap
-- **Wajib saat onboarding (Fase 7a):** instalasi skill vendored yang dipatok pada tag (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) plus `.review/extension.md` yang disesuaikan dengan repo (melalui `generate-extension`), di bawah persetujuan onboarding; upgrade harness tertarget merekonsiliasi keduanya bila hilang; penolakan dicatat sebagai pengecualian yang dinyatakan dan dilaporkan oleh `verify` hingga terinstal
+- **Wajib saat onboarding (Fase 7a):** instalasi skill vendored yang dipatok pada tag (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) plus `.review/extension.md` yang disesuaikan dengan repo (melalui `generate-extension`), di bawah persetujuan onboarding; upgrade harness tertarget merekonsiliasi keduanya bila hilang; penolakan dicatat sebagai pengecualian yang dinyatakan dan dilaporkan oleh `verify` hingga terinstal
 - **Wajib di setiap Final Review:** pemeriksaan keamanan menjalankan alur default induk upstream atas kumpulan perubahan yang terakumulasi dan menambahkan outputnya ke `analysis_results/SECURITY_REVIEW.md` milik plan tersebut (di dalam folder plan itu sendiri, bukan di root repo); skill atau ekstensi yang hilang menjadi temuan `local reviewer not installed` yang tercatat — tidak pernah dilewati diam-diam, dan tidak pernah menjadi bootstrap kejutan: instalasi milik persetujuan onboarding atau invokasi addon yang eksplisit; **temuan kritis terverifikasi** dari penerusan yang selesai memblokir penyelesaian hingga diperbaiki atau diterima secara eksplisit (v3, BC-07 — klaim kritis yang belum terverifikasi muncul sebagai peringatan beranotasi, dan tinjauan `incomplete`/`timeout` bukan kelulusan yang bersih, BC-04)
 - **Permukaan CI opsional (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v3`) melalui sub-skill `setup` upstream, plus pendamping `apply-review` (hanya baca) dan `address-review` (commit, push, dan mengarmkan kembali; baru di v3.1.1) sebagai kenyamanan yang dipanggil pengembang — ditawarkan secara eksplisit, tidak pernah diinstal tanpa diminta, tidak pernah menjadi default, tidak pernah menjadi tugas rencana
 - **Tidak pernah memblokir (hanya pemanggilan):** tinjauan lokal yang bisa dimulai tetapi gagal bersifat peringat-sekali-catat-dan-lanjut; itu tidak pernah menggagalkan tugas

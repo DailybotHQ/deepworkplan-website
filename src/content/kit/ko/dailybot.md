@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "옵트인 DWP 애드온: 플랜 라이프사이클을 Dailybot 팀에 보고하고, 훅 강제와 에이전트 스킬 3.23.2(채팅, 폼, Plan 등)를 제공합니다."
+description: "옵트인 DWP 애드온: 플랜 라이프사이클을 Dailybot 팀에 보고하고, 훅 강제와 에이전트 스킬 3.23.3(채팅, 폼, Plan 등)를 제공합니다."
 kind: addon
 lang: ko
 order: 2
@@ -23,7 +23,7 @@ Deep Work Plan 실행을 **Dailybot 팀**에 연결하여 사람들이 에이전
 
 ## 이 애드온이 연결하는 것(의도적으로 좁은 설계)
 
-DWP Dailybot 애드온은 Dailybot을 **재발명하지 않습니다**. 플랜 실행을 dailybot **`report`** 서브스킬에 연결하고 선택적으로 harness 훅을 커밋합니다. 나머지 — 설치, 동의, 인증, 작성 스타일 — 는 모두 공식 [Dailybot 에이전트 스킬](https://github.com/DailybotHQ/agent-skill)(현재 **3.23.2**)에 **위임**됩니다.
+DWP Dailybot 애드온은 Dailybot을 **재발명하지 않습니다**. 플랜 실행을 dailybot **`report`** 서브스킬에 연결하고 선택적으로 harness 훅을 커밋합니다. 나머지 — 설치, 동의, 인증, 작성 스타일 — 는 모두 공식 [Dailybot 에이전트 스킬](https://github.com/DailybotHQ/agent-skill)(현재 **3.23.3**)에 **위임**됩니다.
 
 ### 네 가지 라이프사이클 이벤트
 
@@ -69,7 +69,7 @@ DWP `create` / `execute` 중 애드온은 **네 가지 최선 노력 에이전�
 
 | 구성 요소 | 명령 / 경로 |
 |-----------|-------------|
-| **Dailybot 에이전트 스킬**(권장) | `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot -y` |
+| **Dailybot 에이전트 스킬**(권장) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.3 --skill dailybot -y` |
 | **기존 스킬 업데이트** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI**(팩 기준 `>= 3.9.0`; Plan은 `>= 3.25.0` 필요) | 첫 사용 시 스킬이 검증된 `shared/auth.md`를 통해 설치; 또는 `pip install 'dailybot-cli>=3.9.0'`, Homebrew, 또는 [cli.dailybot.com](https://cli.dailybot.com)의 체크섬 검증 설치 프로그램 |
@@ -86,9 +86,9 @@ DWP `create` / `execute` 중 애드온은 **네 가지 최선 노력 에이전�
 
 인증 해석은 **Bearer 우선**입니다: 세션 토큰이 우선하며, `401`/`403` 시 투명한 Bearer→API 키 재시도로 오래된 토큰이 유효한 키를 절대 차단하지 않습니다. 인증이 거부되거나 사용 불가하면 보고는 조용히 건너뜀 — 작업은 계속됨.
 
-## 페어링된 Dailybot 스킬 — 17가지 기능(3.23.2)
+## 페어링된 Dailybot 스킬 — 17가지 기능(3.23.3)
 
-Dailybot 에이전트 스킬 설치는 DWP 애드온이 연결하는 것 이상을 제공합니다. 공식 스킬 팩(스킬 **3.23.2**, CLI 기준 **>= 3.9.0**, Plan **>= 3.25.0**, 현재 CLI 게시 **3.25.2**)은 **17개의 조율된 서브스킬**을 노출:
+Dailybot 에이전트 스킬 설치는 DWP 애드온이 연결하는 것 이상을 제공합니다. 공식 스킬 팩(스킬 **3.23.3**, CLI 기준 **>= 3.9.0**, Plan **>= 3.25.0**, 현재 CLI 게시 **3.25.2**)은 **17개의 조율된 서브스킬**을 노출:
 
 | 서브스킬 | 기능 |
 |----------|------|

@@ -31,11 +31,11 @@ section: Addons
 
 ### Devcontainer (addon แรก)
 
-การตั้งค่า `.devcontainer/` + `docker/` แบบ compose ที่ให้เหตุผลจาก stack ที่ตรวจพบ
+ตัวผสานรวมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงไว้ที่ `v0.1.4`): เทมเพลต Dev Containers ที่ `dck init` เรนเดอร์ลงในรีโพ
 
 - **หน้า kit:** [Devcontainer](/kit/devcontainer)
-- **สิ่งที่เพิ่ม:** volume auth AI-CLI ถาวร (Claude, Codex, Cursor, gh, Dailybot) `dailybot-project-network` `DOCKER_DEV_ENV=vscode` alias การตรวจสอบ (`codecheck`, `check`, `fix`, `test`) สุขอนามัย secret แบบ public-OSS
-- **พฤติกรรม:** ~85% โครงคงที่ ~15% ให้เหตุผลต่อ stack devcontainer ที่มีอยู่ถูกกระทบกัน ไม่ทับล้าง
+- **สิ่งที่เพิ่ม:** ตัวเรียกใช้ `dck` (`setup`, `up`, `shell`, `ssh`, `doctor`) อิมเมจพื้นฐานในรุ่น `python-3.13` `node-24` และ `debian` ที่มาโดยไม่มีเอเจนต์เขียนโค้ด (เอเจนต์เป็นเลเยอร์แบบ opt-in) พอร์ตเฉพาะ loopback การส่งต่อ SSH agent และเครื่อง Herdr แบบเลือกได้ต่อคอนเทนเนอร์
+- **พฤติกรรม:** ตรวจพบผ่าน `dck doctor --json` (อินเทอร์เฟซ 1) `dck init` กระทบยอด devcontainer ที่มีอยู่เฉพาะหลังจากยอมรับ diff แล้ว และสำรองไฟล์ก่อน — ไม่ทับล้าง
 - **เมื่อเสนอ:** รีโพส่วนใหญ่ที่มี Docker หรือบริการที่ได้ประโยชน์จาก dev container แยก
 
 ### Dailybot (addon ที่สอง)
@@ -44,7 +44,7 @@ section: Addons
 
 - **หน้า kit:** [Dailybot](/kit/dailybot) — อ้างอิงความสามารถครบ
 - **สิ่งที่ DWP addon เชื่อม:** รายงาน lifecycle แผนสี่แบบ (kickoff, significant task, blocked, completion) ผ่าน sub-skill dailybot `report`; การบังคับใช้ hook แบบ deterministic แบบเลือกได้ (`dailybot hook`, CLI `>= 3.9.0`)
-- **Skill คู่กัน:** ติดตั้ง [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (ปัจจุบัน **3.23.2**) เปิด **17 ความสามารถ** — แชทบน Slack/Teams/Discord/Google Chat check-in การเขียนฟอร์ม ask AI kudos บอร์ดและงาน Plan label ขององค์กร per-repo API keys (`.dailybot/env.json`) อีเมล และอื่นๆ DWP addon เชื่อมเฉพาะ **report** ความสามารถอื่นเรียกผ่าน skill Dailybot โดยตรง
+- **Skill คู่กัน:** ติดตั้ง [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (ปัจจุบัน **3.23.3**) เปิด **17 ความสามารถ** — แชทบน Slack/Teams/Discord/Google Chat check-in การเขียนฟอร์ม ask AI kudos บอร์ดและงาน Plan label ขององค์กร per-repo API keys (`.dailybot/env.json`) อีเมล และอื่นๆ DWP addon เชื่อมเฉพาะ **report** ความสามารถอื่นเรียกผ่าน skill Dailybot โดยตรง
 - **Auth:** มอบหมายทั้งหมดให้ skill Dailybot (`dailybot login` หรือ `DAILYBOT_API_KEY`) addon นี้ไม่เก็บ credentials
 - **Guardrail แบบ vendor-neutral:** DWP หลัก **ไม่พึ่งพา** Dailybot เลย อย่าติดตั้งอัตโนมัติให้ทุกคน
 - **เมื่อเสนอ:** นักพัฒนาหรือทีมใช้ Dailybot อยู่แล้ว หรือขอการรายงานทีมอย่างชัดเจน
@@ -72,7 +72,7 @@ section: Addons
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) ทำให้การตรวจสอบความปลอดภัยบังคับของ Final Review มีการตรวจสอบในเครื่องแบบมีโครงสร้าง และเลือกที่จะควบคุม pull request ใน CI ตั้งแต่มาตรฐาน 2.3.0 **การตรวจสอบในเครื่องเป็นส่วนหนึ่งของพื้นฐาน** สิ่งที่เป็นแบบเลือกใช้คือพื้นผิว CI เท่านั้น addon นี้รีเฟรชอัตโนมัติตามรีลีส (release-auto-refreshed) ดังนั้นแท็กที่แสดงด้านล่างคือแท็กที่เป็นปัจจุบัน ณ เวลาที่เขียน และอาจตามหลังสำเนาที่ถูก vendor ไว้ — `SKILL.md` ของ addon เองและ GitHub releases ของมันคือแหล่งอ้างอิงที่ถูกต้องสำหรับแท็กที่ติดตั้งจริง การติดตั้งจะถูกตรึงไว้กับแท็กที่เผยแพร่แล้วเสมอ ไม่เคยตรึงกับ branch ที่เคลื่อนที่
 
 - **หน้า kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — ข้อมูลอ้างอิงความสามารถเต็มรูปแบบ
-- **จำเป็นตั้งแต่ onboarding (Phase 7a):** ติดตั้ง vendored skill แบบตรึงแท็ก (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) พร้อม `.review/extension.md` ที่ปรับให้เข้ากับรีโพ (ผ่าน `generate-extension`) ภายใต้ความยินยอมของ onboarding; การอัปเกรด harness แบบเจาะจงกระทบทั้งสองเมื่อขาดหายไป; การปฏิเสธถูกบันทึกเป็นข้อยกเว้นที่ประกาศไว้และ `verify` รายงานจนกว่าจะถูกติดตั้ง
+- **จำเป็นตั้งแต่ onboarding (Phase 7a):** ติดตั้ง vendored skill แบบตรึงแท็ก (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) พร้อม `.review/extension.md` ที่ปรับให้เข้ากับรีโพ (ผ่าน `generate-extension`) ภายใต้ความยินยอมของ onboarding; การอัปเกรด harness แบบเจาะจงกระทบทั้งสองเมื่อขาดหายไป; การปฏิเสธถูกบันทึกเป็นข้อยกเว้นที่ประกาศไว้และ `verify` รายงานจนกว่าจะถูกติดตั้ง
 - **จำเป็นในทุก Final Review:** การตรวจสอบความปลอดภัยรันโฟลว์หลักเริ่มต้นของ upstream บนชุดการเปลี่ยนแปลงสะสมและผนวกผลลัพธ์เข้า `analysis_results/SECURITY_REVIEW.md` ท้องถิ่นของแผน (ภายในโฟลเดอร์ของแผนเอง ไม่ใช่ที่รูทของ repo); skill หรือส่วนขยายที่หายไปเป็นข้อค้นพบ `local reviewer not installed` ที่ถูกบันทึก — ไม่เคยข้ามอย่างเงียบ ๆ และไม่เคยเป็นการบูตสแตรปโดยไม่แจ้งล่วงหน้า: การติดตั้งเป็นของความยินยอมของ onboarding หรือการเรียกใช้ addon อย่างชัดเจน; **ข้อค้นพบ `critical` ที่ผ่านการตรวจสอบแล้ว** จากการรันที่เสร็จสิ้นบล็อกการเสร็จสิ้นจนกว่าจะแก้ไขหรือได้รับการยอมรับอย่างชัดเจน (v3, BC-07 — การอ้างสิทธิ์ระดับ critical ที่ยังไม่ผ่านการตรวจสอบจะปรากฏเป็นคำเตือนพร้อมหมายเหตุ และการตรวจสอบ `incomplete`/`timeout` ไม่ถือเป็นการรันที่สะอาด BC-04)
 - **พื้นผิว CI แบบเลือกใช้ (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v3`) ผ่าน sub-skill `setup` ต้นทาง พร้อมผู้ช่วย `apply-review` (อ่านอย่างเดียว) และ `address-review` (ทำ commit, push และติดอาวุธใหม่; ใหม่ใน v3.1.1) เป็นเครื่องมือที่นักพัฒนาเรียกใช้ — เสนออย่างชัดเจน ไม่ติดตั้งเมื่อไม่ถูกขอ ไม่เคยเป็นค่าเริ่มต้น ไม่เคยเป็นไฟล์งานของแผน
 - **ไม่บล็อก (เฉพาะการเรียก):** การตรวจสอบในเครื่องที่เริ่มได้แต่เกิดข้อผิดพลาดคือ เตือนครั้งเดียว-บันทึก-ดำเนินต่อ; มันไม่เคยทำให้งานล้มเหลว
