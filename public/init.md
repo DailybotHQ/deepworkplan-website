@@ -141,7 +141,7 @@ your host. Branch on what you find:
   the `upgrade` sub-skill did not exist yet, so there is no in-place
   check-and-diff path available). Tell the user what you found, then run a
   fresh install with the force flag to replace it outright — e.g.
-  `npx skills add DailybotHQ/deepworkplan-skill --force` — and continue to
+  `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan --force -y` — and continue to
   section 3, which detects and reconciles the outdated harness content.
 
 Fresh-install commands (skip these if the skill is already installed — see above):

@@ -707,7 +707,7 @@ export const it: SiteTranslations = {
         description:
           'Aggiunga la skill Deep Work Plan così che qualsiasi agente possa pianificare ed eseguire lavoro strutturato. La skill include un router più nove sub-skill — create, execute, refine, resume, status, verify, onboard, author e upgrade.',
         commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -812,7 +812,7 @@ export const it: SiteTranslations = {
             id: 'how-to-use',
             question: 'Come si usa?',
             answer:
-              'Tre passaggi. Per prima cosa, installa la skill Deep Work Plan nel tuo agente di coding — la via più rapida è `npx skills add DailybotHQ/deepworkplan-skill` (oppure clona il repository della skill ed esegui `./setup.sh`). In secondo luogo, fai l’onboarding del repository una volta, così l’agente adatta `AGENTS.md`, `docs/`, il kit `.agents/` e un’area `.dwp/` ignorata da git al tuo stack: punta a https://deepworkplan.com/init.md, oppure esegui `/deepworkplan-onboard`. In terzo luogo, pianifica ed esegui il lavoro con i comandi leggeri: `/dwp-create <goal>` costruisce un piano; `/dwp-execute` lo esegue task per task contro ogni gate; `/dwp-refine` modifica un piano in corso (ambito, task, o la promozione di un piano Lite a Full); `/dwp-resume` continua dopo un’interruzione; `/dwp-status` riporta l’avanzamento senza eseguire; `/dwp-verify` produce un rapporto oggettivo di conformità; `/dwp-upgrade` sposta una skill installata a una versione più recente senza toccare i piani esistenti. Gli agenti che intercettano `/` usano spesso `#` invece (per esempio `#dwp-execute`). Il punto di adozione e l’avvio rapido percorrono lo stesso cammino con più dettaglio.',
+              'Tre passaggi. Per prima cosa, installa la skill Deep Work Plan nel tuo agente di coding — la via più rapida è `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y` (oppure clona il repository della skill ed esegui `./setup.sh`). In secondo luogo, fai l’onboarding del repository una volta, così l’agente adatta `AGENTS.md`, `docs/`, il kit `.agents/` e un’area `.dwp/` ignorata da git al tuo stack: punta a https://deepworkplan.com/init.md, oppure esegui `/deepworkplan-onboard`. In terzo luogo, pianifica ed esegui il lavoro con i comandi leggeri: `/dwp-create <goal>` costruisce un piano; `/dwp-execute` lo esegue task per task contro ogni gate; `/dwp-refine` modifica un piano in corso (ambito, task, o la promozione di un piano Lite a Full); `/dwp-resume` continua dopo un’interruzione; `/dwp-status` riporta l’avanzamento senza eseguire; `/dwp-verify` produce un rapporto oggettivo di conformità; `/dwp-upgrade` sposta una skill installata a una versione più recente senza toccare i piani esistenti. Gli agenti che intercettano `/` usano spesso `#` invece (per esempio `#dwp-execute`). Il punto di adozione e l’avvio rapido percorrono lo stesso cammino con più dettaglio.',
             linkLabel: 'Avvio rapido',
             linkPath: '/quickstart',
           },

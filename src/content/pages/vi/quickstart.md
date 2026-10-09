@@ -107,8 +107,6 @@ cùng chín sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `ve
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
 npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
-# or the latest published release:
-npx skills add DailybotHQ/deepworkplan-skill
 ```
 
 Hoặc cài đặt qua OpenClaw:

@@ -87,6 +87,24 @@ describe('public install surfaces', () => {
     ).toEqual([]);
   });
 
+  it('never install the Deep Work Plan skill unpinned', () => {
+    // `skills add [owner/]deepworkplan-skill` (or its GitHub URL without
+    // `/tree/<tag>`) installs the default branch, not a release.
+    const unpinned: string[] = [];
+    const bare =
+      /skills add (?:https:\/\/github\.com\/)?(?:DailybotHQ\/)?deepworkplan-skill(?![\w/@.-])/g;
+    for (const file of files) {
+      const text = readFileSync(file, 'utf8');
+      for (const match of text.matchAll(bare)) {
+        unpinned.push(`${relative(ROOT, file)}: ${match[0]}`);
+      }
+    }
+    expect(
+      unpinned,
+      `unpinned deepworkplan-skill installs:\n${unpinned.join('\n')}`
+    ).toEqual([]);
+  });
+
   it('pin every skills install with the tree-URL form the CLI honours', () => {
     const ignored: string[] = [];
     // Any `owner/repo@<ref>` (a tag, `latest`, a branch): the CLI does not honour it.
