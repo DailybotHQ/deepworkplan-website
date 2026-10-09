@@ -894,9 +894,9 @@ Dev-only portal at `/internal/`. Uses `InternalLayout` or `ShowcaseLayout` (neve
   **Vendored provenance recorded on 2026-09-17:** this copy was the released upstream tag **`v5.5.1`** (`3117819`), superseding `v5.5.0`, installed via the documented command `npx --yes skills add DailybotHQ/deepworkplan-skill@v5.5.1 --skill deepworkplan --force -y`. The recorded `diff -rq` was **byte-identical** against the tag's canonical `skills/deepworkplan/` tree — empty output — with `skills-lock.json` updated by the CLI itself (hash `f38b4f5c…`, superseding `019aecad…`).
 
 **Current website dogfood:** `.agents/skills/deepworkplan/SKILL.md` declares
-version **7.0.0** (stable, `latest`), installed by its pinned tag and verified
-against the release `SHA256SUMS` (171 files, exact file set) on 2026-10-09; it
-supersedes the field-tested `7.0.0-beta.1`. The implemented DWP standard is
+version **7.0.1** (stable, `latest`), installed by its pinned tag (tree-URL
+form) and verified against the release `SHA256SUMS` (171 files, exact file set)
+on 2026-10-09; it supersedes `7.0.0` and the field-tested `7.0.0-beta.1`. The implemented DWP standard is
 **7.0.0**; new plans use the v7 contract by default, and existing plans keep
 their recorded generation. The addon registry `.dwp/config.json` is tracked
 (`.gitignore`: `.dwp/*` + `!.dwp/config.json`). Existing plans keep their recorded

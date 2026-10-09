@@ -39,7 +39,7 @@ describe('trust manifest', () => {
     const tag = `v${vendored}`;
     expect(manifest.prerelease?.version).toBe(vendored);
     expect(manifest.prerelease?.install).toBe(
-      `npx --yes skills add DailybotHQ/deepworkplan-skill@${tag} --skill deepworkplan -y`
+      `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/${tag} --skill deepworkplan -y`
     );
     expect(manifest.prerelease?.checksums).toBe(
       `https://github.com/DailybotHQ/deepworkplan-skill/releases/download/${tag}/SHA256SUMS`
