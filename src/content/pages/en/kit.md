@@ -65,7 +65,7 @@ Capabilities the onboard flow layers onto a repo. Four are optional and never pa
 - **[herdr](/kit/herdr)** — Peers in Herdr panes, on any machine: interactive delegation with one authorized reply. Pinned at `herdr-peers@v0.1.0`.
 - **[agentkit](/kit/agentkit)** — One ak command for every terminal coding agent: headless delegation in a worktree. Pinned at `coding-agents-kit@v0.1.1`.
 - **[devcontainer](/kit/devcontainer)** — A Dev Containers template and base images that ship without coding agents. Pinned at `devcontainer-kit@v0.1.2`.
-- **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v0.4.0`.
+- **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v0.4.1`.
 
 The addon registry and descriptors ship in the v7 beta, a pre-release: `v7.0.0-beta.1`
 

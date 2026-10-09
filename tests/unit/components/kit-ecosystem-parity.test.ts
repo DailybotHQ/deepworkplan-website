@@ -8,8 +8,8 @@ import { getSupportedLanguages } from '@/lib/i18n';
 // sets and array lengths in every language, an `en` fallback, no blank values,
 // no eager hydration), plus its facts: every row links an existing kit page in
 // every language and pins exactly the tags of the v7 claims ledger
-// (PLAN_004_v7_kit_pages_and_vendor, rows C-11/C-21/C-31/C-39; amendments A2
-// and A4). Changing a pin here is a claims decision, not a formatting choice.
+// (PLAN_004_v7_kit_pages_and_vendor, rows C-11/C-21/C-31/C-39; amendments A2,
+// A4 and A6). Changing a pin here is a claims decision, not a formatting choice.
 
 const SOURCE_PATH = resolve(
   process.cwd(),
@@ -22,7 +22,7 @@ const PINS: Record<string, string> = {
   herdr: 'herdr-peers@v0.1.0',
   agentkit: 'coding-agents-kit@v0.1.1',
   devcontainer: 'devcontainer-kit@v0.1.2',
-  vim: 'deepworkplan-vim@v0.4.0',
+  vim: 'deepworkplan-vim@v0.4.1',
 };
 
 type Entry = Record<string, string | string[]>;

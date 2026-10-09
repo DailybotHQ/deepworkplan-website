@@ -65,7 +65,7 @@ Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügt. Vier sind opti
 - **[herdr](/de/kit/herdr)** — Peers in Herdr-Panes, auf jeder Maschine: interaktive Delegation mit genau einer autorisierten Antwort. Fixiert auf `herdr-peers@v0.1.0`.
 - **[agentkit](/de/kit/agentkit)** — Ein einziger Befehl ak für jeden Terminal-Coding-Agenten: Headless-Delegation in einem Worktree. Fixiert auf `coding-agents-kit@v0.1.1`.
 - **[devcontainer](/de/kit/devcontainer)** — Eine Vorlage für Dev Containers und Basis-Images, die ohne Coding-Agenten ausgeliefert werden. Fixiert auf `devcontainer-kit@v0.1.2`.
-- **[vim](/de/kit/vim)** — Der Terminal-Editor, mit einem schreibgeschützten Plan-Browser und einem Markdown-Viewer. Fixiert auf `deepworkplan-vim@v0.4.0`.
+- **[vim](/de/kit/vim)** — Der Terminal-Editor, mit einem schreibgeschützten Plan-Browser und einem Markdown-Viewer. Fixiert auf `deepworkplan-vim@v0.4.1`.
 
 Die Addon-Registry und die Deskriptoren werden in der v7-Beta ausgeliefert, einem Pre-Release: `v7.0.0-beta.1`
 

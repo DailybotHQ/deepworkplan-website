@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** adalah editor terminal untuk Deep Work Plan: konfigurasi Neovim untuk manusia, dan untuk agen pemrograman, yang bekerja di terminal. Rencana Anda, dokumentasi Anda, dan indeks semua perintah hanya sejauh satu tombol.
 
-Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v7 beta (`v7.0.0-beta.1`, sebuah pra-rilis). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v0.4.0**.
+Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v7 beta (`v7.0.0-beta.1`, sebuah pra-rilis). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v0.4.1**.
 
 ## Mengapa editor terminal untuk Deep Work Plan
 
@@ -60,7 +60,7 @@ Untuk membaca berkas Markdown sebuah rencana di tempat, `SPC m p` mempratinjau b
 
 ## Instalasi
 
-Instalasi terdiri dari tiga perintah: unduh skrip, periksa terhadap SHA-256 berkas yang disajikan situs ini, lalu jalankan. Jika dijalankan apa adanya, ia memasang cabang `main` repositori; jalankan sebagai `DWP_VIM_REF=v0.4.0 bash install.sh` untuk memasang tepat rilis yang dijelaskan halaman ini.
+Instalasi terdiri dari tiga perintah: unduh skrip, periksa terhadap SHA-256 berkas yang disajikan situs ini, lalu jalankan. Pemasang mematok rilisnya sendiri, sehingga ia memasang tepat `v0.4.1`, rilis yang dijelaskan halaman ini; `DWP_VIM_REF=main bash install.sh` justru mengikuti cabang `main` yang terus bergerak.
 
 <VimInstall lang="id" />
 
@@ -72,7 +72,7 @@ Secara berurutan, pemasang:
 4. Menjalankan `lua install.lua` milik repositori itu sendiri.
 5. Memasang plugin secara headless, sehingga tidak ada langkah keluar lalu membuka ulang.
 
-Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install.sh` pada tag `v0.4.0`. Untuk membacanya lebih dulu, unduh dengan `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, bandingkan SHA-256-nya dengan nilai yang ditampilkan di atas, baca, lalu jalankan `DWP_VIM_REF=v0.4.0 bash install.sh`.
+Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install.sh` pada tag `v0.4.1`. Untuk membacanya lebih dulu, unduh dengan `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, bandingkan SHA-256-nya dengan nilai yang ditampilkan di atas, baca, lalu jalankan `bash install.sh`.
 
 ## Persyaratan dan platform
 
@@ -83,9 +83,9 @@ Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install
 
 ## Memperbarui, mengunci versi, dan mencopot
 
-Jalankan pemasang lagi untuk memperbarui. Pemasang bersifat idempoten: checkout DeepWorkPlan Vim yang sudah ada diperbarui dengan fast-forward, dan perubahan lokal tidak pernah di-reset.
+Untuk memperbarui, jalankan pemasang dari rilis yang lebih baru. Menjalankannya ulang memindahkan checkout DeepWorkPlan Vim yang sudah ada ke rilis pemasang tersebut, mempertahankan cabang Anda, dan tidak pernah me-reset perubahan lokal: jika perubahan atau commit lokal akan hilang, ia berhenti dan tidak mengubah apa pun.
 
-Untuk memasang tag tertentu, setel `DWP_VIM_REF`. Patok tag, bukan cabang: rilis sebelum `v0.4.0` tidak memuat gestur, penjelajah rencana, penampil Markdown, maupun pemasang ini.
+Untuk memasang tag lain, cabang, atau commit, setel `DWP_VIM_REF`. Utamakan tag: rilis sebelum `v0.4.0` tidak memuat gestur, penjelajah rencana, penampil Markdown, maupun pemasang ini.
 
 ```bash
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
@@ -123,7 +123,7 @@ Ia dibuat untuk manusia dan untuk agen pemrograman yang hidup di terminal. Pemet
 
 ### Versi mana yang saya dapatkan?
 
-Pemasang memasang `main` kecuali Anda menyetel `DWP_VIM_REF`. Halaman ini menjelaskan rilis `v0.4.0`, yang memuat setiap fitur yang tercantum di sini; setel `DWP_VIM_REF=v0.4.0` untuk mendapatkan tepat rilis tersebut.
+Pemasang memasang rilis tempat ia berasal — `v0.4.1` saat ini — kecuali Anda menyetel `DWP_VIM_REF`; `DWP_VIM_REF=main` mengikuti `main`. Halaman ini menjelaskan rilis `v0.4.1`, yang memuat setiap fitur yang tercantum di sini.
 
 ### Di bawah lisensi apa dan dari mana asalnya?
 

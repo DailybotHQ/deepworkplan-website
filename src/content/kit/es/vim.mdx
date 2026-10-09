@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** es el editor de terminal de Deep Work Plan: una configuración de Neovim para personas, y para agentes de programación, que trabajan en una terminal. Tus planes, tu documentación y un índice de todos los comandos quedan a una tecla de distancia.
 
-Es un producto aparte, ofrecido como el addon opcional `vim` de la beta de Deep Work Plan v7 (`v7.0.0-beta.1`, una versión preliminar). Deep Work Plan funciona con cualquier editor o con ninguno, y el editor no requiere Deep Work Plan: lo añades a una máquina por separado y funciona como editor haya o no un plan. Esta página describe la versión **v0.4.0**.
+Es un producto aparte, ofrecido como el addon opcional `vim` de la beta de Deep Work Plan v7 (`v7.0.0-beta.1`, una versión preliminar). Deep Work Plan funciona con cualquier editor o con ninguno, y el editor no requiere Deep Work Plan: lo añades a una máquina por separado y funciona como editor haya o no un plan. Esta página describe la versión **v0.4.1**.
 
 ## Por qué un editor de terminal para Deep Work Plan
 
@@ -60,7 +60,7 @@ Para leer en el sitio los archivos Markdown de un plan, `SPC m p` previsualiza e
 
 ## Instalación
 
-La instalación son tres comandos: descarga el script, compruébalo con el SHA-256 del archivo que sirve este sitio y luego ejecútalo. Por sí solo instala la rama `main` del repositorio; ejecútalo como `DWP_VIM_REF=v0.4.0 bash install.sh` para instalar exactamente la versión que describe esta página.
+La instalación son tres comandos: descarga el script, compruébalo con el SHA-256 del archivo que sirve este sitio y luego ejecútalo. El instalador fija su propia versión, así que instala exactamente `v0.4.1`, la versión que describe esta página; `DWP_VIM_REF=main bash install.sh` sigue en su lugar la rama móvil `main`.
 
 <VimInstall lang="es" />
 
@@ -72,7 +72,7 @@ En orden, el instalador:
 4. Ejecuta el propio `lua install.lua` del repositorio.
 5. Instala los plugins sin interfaz, así que no hace falta salir y volver a abrir.
 
-El script que se sirve aquí es una copia idéntica byte a byte de `install.sh` en la etiqueta `v0.4.0`. Para leerlo primero, descárgalo con `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, compara su SHA-256 con el valor mostrado arriba, léelo y ejecuta `DWP_VIM_REF=v0.4.0 bash install.sh`.
+El script que se sirve aquí es una copia idéntica byte a byte de `install.sh` en la etiqueta `v0.4.1`. Para leerlo primero, descárgalo con `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, compara su SHA-256 con el valor mostrado arriba, léelo y ejecuta `bash install.sh`.
 
 ## Requisitos y plataformas
 
@@ -83,9 +83,9 @@ El script que se sirve aquí es una copia idéntica byte a byte de `install.sh` 
 
 ## Actualizar, fijar versión y desinstalar
 
-Vuelve a ejecutar el instalador para actualizar. Es idempotente: una instalación existente de DeepWorkPlan Vim se actualiza con un fast-forward y los cambios locales nunca se descartan.
+Para actualizar, ejecuta el instalador de una versión más reciente. Volver a ejecutarlo mueve una instalación existente de DeepWorkPlan Vim a la versión de ese instalador, conserva tus ramas y nunca descarta los cambios locales: cuando se perderían cambios o commits locales, se detiene y no cambia nada.
 
-Para instalar una etiqueta concreta, define `DWP_VIM_REF`. Fija una etiqueta en lugar de una rama: las versiones anteriores a `v0.4.0` no incluyen los gestos, el navegador de planes, el visor de Markdown ni este instalador.
+Para instalar otra etiqueta, una rama o un commit, define `DWP_VIM_REF`. Prefiere una etiqueta: las versiones anteriores a `v0.4.0` no incluyen los gestos, el navegador de planes, el visor de Markdown ni este instalador.
 
 ```bash
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
@@ -123,7 +123,7 @@ Está pensado para personas y para agentes de programación que viven en una ter
 
 ### ¿Qué versión obtengo?
 
-El instalador instala `main` salvo que definas `DWP_VIM_REF`. Esta página describe la versión `v0.4.0`, que incluye todas las funciones enumeradas aquí; define `DWP_VIM_REF=v0.4.0` para obtener exactamente esa versión.
+El instalador instala la versión a la que pertenece —hoy, `v0.4.1`— salvo que definas `DWP_VIM_REF`; `DWP_VIM_REF=main` sigue `main`. Esta página describe la versión `v0.4.1`, que incluye todas las funciones enumeradas aquí.
 
 ### ¿Bajo qué licencia está y de dónde viene?
 

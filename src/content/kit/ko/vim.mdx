@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim**은 Deep Work Plan의 터미널 에디터예요. 터미널에서 일하는 사람과 코딩 에이전트를 위한 Neovim 설정으로, 계획과 문서, 모든 명령의 색인이 키 하나 거리에 있어요.
 
-이것은 독립된 제품으로, Deep Work Plan v7 베타(`v7.0.0-beta.1`, 사전 출시 버전)의 선택 `vim` 애드온으로 제공돼요. Deep Work Plan은 어떤 에디터와도, 에디터 없이도 동작하며, 이 에디터도 Deep Work Plan을 요구하지 않아요. 컴퓨터에 따로 추가하면 되고, 계획이 있든 없든 에디터로 동작해요. 이 페이지는 릴리스 **v0.4.0**을 설명해요.
+이것은 독립된 제품으로, Deep Work Plan v7 베타(`v7.0.0-beta.1`, 사전 출시 버전)의 선택 `vim` 애드온으로 제공돼요. Deep Work Plan은 어떤 에디터와도, 에디터 없이도 동작하며, 이 에디터도 Deep Work Plan을 요구하지 않아요. 컴퓨터에 따로 추가하면 되고, 계획이 있든 없든 에디터로 동작해요. 이 페이지는 릴리스 **v0.4.1**을 설명해요.
 
 ## Deep Work Plan에 터미널 에디터가 필요한 이유
 
@@ -60,7 +60,7 @@ DeepWorkPlan Vim이 바로 그런 에디터예요. 언어 서버, 자동 완성,
 
 ## 설치
 
-설치는 세 가지 명령이에요. 스크립트를 내려받고, 이 사이트가 제공하는 파일의 SHA-256과 대조한 다음 실행해요. 그대로 실행하면 저장소의 `main` 브랜치가 설치돼요. 이 페이지가 설명하는 릴리스를 정확히 설치하려면 `DWP_VIM_REF=v0.4.0 bash install.sh`로 실행하세요.
+설치는 세 가지 명령이에요. 스크립트를 내려받고, 이 사이트가 제공하는 파일의 SHA-256과 대조한 다음 실행해요. 설치 프로그램은 자신의 릴리스로 고정되어 있어서, 이 페이지가 설명하는 릴리스인 `v0.4.1`을 정확히 설치해요. 대신 계속 바뀌는 `main` 브랜치를 따르려면 `DWP_VIM_REF=main bash install.sh`를 사용하세요.
 
 <VimInstall lang="ko" />
 
@@ -72,7 +72,7 @@ DeepWorkPlan Vim이 바로 그런 에디터예요. 언어 서버, 자동 완성,
 4. 저장소 자체의 `lua install.lua`를 실행해요.
 5. 플러그인을 헤드리스로 설치하므로 종료했다가 다시 여는 단계가 없어요.
 
-여기서 제공하는 스크립트는 `v0.4.0` 태그의 `install.sh`와 바이트 단위로 동일한 사본이에요. 먼저 읽고 싶다면 `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`로 내려받고, 위에 표시된 값과 SHA-256을 비교한 다음, 읽어 본 뒤 `DWP_VIM_REF=v0.4.0 bash install.sh`를 실행하세요.
+여기서 제공하는 스크립트는 `v0.4.1` 태그의 `install.sh`와 바이트 단위로 동일한 사본이에요. 먼저 읽고 싶다면 `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`로 내려받고, 위에 표시된 값과 SHA-256을 비교한 다음, 읽어 본 뒤 `bash install.sh`를 실행하세요.
 
 ## 요구 사항과 플랫폼
 
@@ -83,9 +83,9 @@ DeepWorkPlan Vim이 바로 그런 에디터예요. 언어 서버, 자동 완성,
 
 ## 업데이트, 버전 고정, 제거
 
-업데이트하려면 설치 프로그램을 다시 실행하세요. 멱등이라서 기존 DeepWorkPlan Vim 체크아웃은 fast-forward로 업데이트되고, 로컬 변경은 절대 초기화되지 않아요.
+업데이트하려면 더 새로운 릴리스의 설치 프로그램을 실행하세요. 다시 실행하면 기존 DeepWorkPlan Vim 체크아웃을 그 설치 프로그램의 릴리스로 옮기고, 브랜치는 그대로 두며, 로컬 변경은 절대 초기화하지 않아요. 로컬 변경이나 커밋이 사라질 상황이면 멈추고 아무것도 바꾸지 않아요.
 
-특정 태그를 설치하려면 `DWP_VIM_REF`를 설정하세요. 브랜치가 아니라 태그로 고정하세요. `v0.4.0` 이전 릴리스에는 제스처, 계획 브라우저, Markdown 뷰어, 이 설치 프로그램이 들어 있지 않아요.
+다른 태그, 브랜치 또는 커밋을 설치하려면 `DWP_VIM_REF`를 설정하세요. 태그를 권장해요. `v0.4.0` 이전 릴리스에는 제스처, 계획 브라우저, Markdown 뷰어, 이 설치 프로그램이 들어 있지 않아요.
 
 ```bash
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
@@ -123,7 +123,7 @@ Deep Work Plan v7 베타는 온보딩 중에 이 에디터를 선택 `vim` 애�
 
 ### 어떤 버전을 받나요?
 
-`DWP_VIM_REF`를 설정하지 않으면 설치 프로그램은 `main`을 설치해요. 이 페이지는 여기 나열된 모든 기능을 담은 릴리스 `v0.4.0`을 설명해요. 정확히 그 릴리스를 받으려면 `DWP_VIM_REF=v0.4.0`을 설정하세요.
+`DWP_VIM_REF`를 설정하지 않으면 설치 프로그램은 자신이 속한 릴리스(현재는 `v0.4.1`)를 설치해요. `DWP_VIM_REF=main`은 `main`을 따라가요. 이 페이지는 여기 나열된 모든 기능을 담은 릴리스 `v0.4.1`을 설명해요.
 
 ### 라이선스는 무엇이고 어디서 왔나요?
 

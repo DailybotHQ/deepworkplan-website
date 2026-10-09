@@ -65,7 +65,7 @@ onboard 流程向仓库叠加的各项能力。其中四个是可选的，绝非
 - **[herdr](/zh/kit/herdr)** — 在任意机器上的 Herdr 窗格中协作的对等方：交互式委派，仅允许一次经授权的回复。固定于：`herdr-peers@v0.1.0`。
 - **[agentkit](/zh/kit/agentkit)** — 一个 ak 命令适用于所有终端编码代理：在 worktree 中进行无界面委派。固定于：`coding-agents-kit@v0.1.1`。
 - **[devcontainer](/zh/kit/devcontainer)** — 一个 Dev Containers 模板及基础镜像，不附带任何编码代理。固定于：`devcontainer-kit@v0.1.2`。
-- **[vim](/zh/kit/vim)** — 终端编辑器，带有只读的计划浏览器和 Markdown 查看器。固定于：`deepworkplan-vim@v0.4.0`。
+- **[vim](/zh/kit/vim)** — 终端编辑器，带有只读的计划浏览器和 Markdown 查看器。固定于：`deepworkplan-vim@v0.4.1`。
 
 附加组件注册表和描述文件随 v7 beta 发布，这是一个预发布版本： `v7.0.0-beta.1`
 

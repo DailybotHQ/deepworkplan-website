@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** 是 Deep Work Plan 的终端编辑器：一套面向在终端中工作的人以及编程代理的 Neovim 配置。你的计划、文档和所有命令的索引，都只需一个按键。
 
-它是一个独立的产品，作为 Deep Work Plan v7 beta（`v7.0.0-beta.1`，预发布版本）的可选 `vim` 附加组件提供。Deep Work Plan 可以搭配任何编辑器使用，也可以不用编辑器；该编辑器同样不依赖 Deep Work Plan：你可以单独把它加到一台机器上，无论是否存在计划，它都能作为编辑器使用。本页描述的是 **v0.4.0** 版本。
+它是一个独立的产品，作为 Deep Work Plan v7 beta（`v7.0.0-beta.1`，预发布版本）的可选 `vim` 附加组件提供。Deep Work Plan 可以搭配任何编辑器使用，也可以不用编辑器；该编辑器同样不依赖 Deep Work Plan：你可以单独把它加到一台机器上，无论是否存在计划，它都能作为编辑器使用。本页描述的是 **v0.4.1** 版本。
 
 ## 为什么要为 Deep Work Plan 准备终端编辑器
 
@@ -60,7 +60,7 @@ DeepWorkPlan Vim 就是这样的编辑器。它是一套精心整理的 Neovim �
 
 ## 安装
 
-安装分为三条命令：下载脚本，将其与本站所提供文件的 SHA-256 进行核对，然后运行。单独运行时，它会安装仓库的 `main` 分支；以 `DWP_VIM_REF=v0.4.0 bash install.sh` 的方式运行，即可精确安装本页所描述的版本。
+安装分为三条命令：下载脚本，将其与本站所提供文件的 SHA-256 进行核对，然后运行。安装程序固定了它自身所属的版本，因此会精确安装 `v0.4.1`，即本页所描述的版本；`DWP_VIM_REF=main bash install.sh` 则会改为跟随不断变化的 `main` 分支。
 
 <VimInstall lang="zh" />
 
@@ -72,7 +72,7 @@ DeepWorkPlan Vim 就是这样的编辑器。它是一套精心整理的 Neovim �
 4. 运行仓库自带的 `lua install.lua`。
 5. 以无界面方式安装插件，因此无需退出再重新打开。
 
-此处提供的脚本与 `v0.4.0` 标签下的 `install.sh` 逐字节相同。想先阅读它，可用 `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` 下载，将其 SHA-256 与上方显示的值比对，阅读之后再运行 `DWP_VIM_REF=v0.4.0 bash install.sh`。
+此处提供的脚本与 `v0.4.1` 标签下的 `install.sh` 逐字节相同。想先阅读它，可用 `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` 下载，将其 SHA-256 与上方显示的值比对，阅读之后再运行 `bash install.sh`。
 
 ## 要求与平台
 
@@ -83,9 +83,9 @@ DeepWorkPlan Vim 就是这样的编辑器。它是一套精心整理的 Neovim �
 
 ## 更新、固定版本与卸载
 
-再次运行安装程序即可更新。它是幂等的：已有的 DeepWorkPlan Vim 检出会通过 fast-forward 更新，本地修改永远不会被重置。
+要更新，请运行较新版本的安装程序。重新运行会把已有的 DeepWorkPlan Vim 检出切换到该安装程序所属的版本，保留你的分支，并且永远不会重置本地修改：当本地更改或提交可能丢失时，它会停止，不做任何更改。
 
-要安装指定的标签，请设置 `DWP_VIM_REF`。请固定到标签而不是分支：`v0.4.0` 之前的版本不包含手势、计划浏览器、Markdown 查看器以及此安装程序。
+要安装其他标签、分支或提交，请设置 `DWP_VIM_REF`。建议使用标签：`v0.4.0` 之前的版本不包含手势、计划浏览器、Markdown 查看器以及此安装程序。
 
 ```bash
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
@@ -123,7 +123,7 @@ Deep Work Plan v7 beta 在引导流程中将该编辑器作为可选的 `vim` �
 
 ### 我得到的是哪个版本？
 
-除非设置 `DWP_VIM_REF`，安装程序安装的是 `main`。本页描述的是 `v0.4.0` 版本，它包含此处列出的全部功能；设置 `DWP_VIM_REF=v0.4.0` 即可精确获得该版本。
+安装程序安装的是它所属的版本（目前为 `v0.4.1`），除非你设置 `DWP_VIM_REF`；`DWP_VIM_REF=main` 会跟随 `main`。本页描述的是 `v0.4.1` 版本，它包含此处列出的全部功能。
 
 ### 它采用什么许可证，源自哪里？
 

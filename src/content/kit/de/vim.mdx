@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** ist der Terminal-Editor für Deep Work Plan: eine Neovim-Konfiguration für Menschen und für Coding-Agenten, die im Terminal arbeiten. Ihre Pläne, Ihre Dokumentation und ein Index aller Befehle sind einen Tastendruck entfernt.
 
-Es ist ein eigenständiges Produkt, angeboten als optionales `vim`-Addon der Deep-Work-Plan-v7-Beta (`v7.0.0-beta.1`, eine Vorabversion). Deep Work Plan funktioniert mit jedem Editor oder ganz ohne, und der Editor setzt Deep Work Plan nicht voraus: Sie fügen ihn einer Maschine separat hinzu, und er funktioniert als Editor, ob ein Plan existiert oder nicht. Diese Seite beschreibt Release **v0.4.0**.
+Es ist ein eigenständiges Produkt, angeboten als optionales `vim`-Addon der Deep-Work-Plan-v7-Beta (`v7.0.0-beta.1`, eine Vorabversion). Deep Work Plan funktioniert mit jedem Editor oder ganz ohne, und der Editor setzt Deep Work Plan nicht voraus: Sie fügen ihn einer Maschine separat hinzu, und er funktioniert als Editor, ob ein Plan existiert oder nicht. Diese Seite beschreibt Release **v0.4.1**.
 
 ## Warum ein Terminal-Editor für Deep Work Plan
 
@@ -60,7 +60,7 @@ Um die Markdown-Dateien eines Plans an Ort und Stelle zu lesen, zeigt `SPC m p` 
 
 ## Installation
 
-Die Installation besteht aus drei Befehlen: Laden Sie das Skript herunter, prüfen Sie es gegen das SHA-256 der Datei, die diese Website ausliefert, und führen Sie es dann aus. Für sich allein installiert es den `main`-Branch des Repositorys; führen Sie es als `DWP_VIM_REF=v0.4.0 bash install.sh` aus, um genau das Release zu installieren, das diese Seite beschreibt.
+Die Installation besteht aus drei Befehlen: Laden Sie das Skript herunter, prüfen Sie es gegen das SHA-256 der Datei, die diese Website ausliefert, und führen Sie es dann aus. Der Installer legt sein eigenes Release fest und installiert daher genau `v0.4.1`, das Release, das diese Seite beschreibt; `DWP_VIM_REF=main bash install.sh` folgt stattdessen dem beweglichen `main`-Branch.
 
 <VimInstall lang="de" />
 
@@ -72,7 +72,7 @@ Der Installer erledigt der Reihe nach:
 4. Er führt das eigene `lua install.lua` des Repositorys aus.
 5. Er installiert die Plugins headless, sodass kein Beenden und erneutes Öffnen nötig ist.
 
-Das hier ausgelieferte Skript ist eine byte-identische Kopie von `install.sh` beim Tag `v0.4.0`. Um es zuerst zu lesen, laden Sie es mit `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` herunter, vergleichen Sie sein SHA-256 mit dem oben angezeigten Wert, lesen Sie es und führen Sie dann `DWP_VIM_REF=v0.4.0 bash install.sh` aus.
+Das hier ausgelieferte Skript ist eine byte-identische Kopie von `install.sh` beim Tag `v0.4.1`. Um es zuerst zu lesen, laden Sie es mit `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` herunter, vergleichen Sie sein SHA-256 mit dem oben angezeigten Wert, lesen Sie es und führen Sie dann `bash install.sh` aus.
 
 ## Voraussetzungen und Plattformen
 
@@ -83,9 +83,9 @@ Das hier ausgelieferte Skript ist eine byte-identische Kopie von `install.sh` be
 
 ## Aktualisieren, festlegen und deinstallieren
 
-Führen Sie den Installer erneut aus, um zu aktualisieren. Er ist idempotent: Ein vorhandener DeepWorkPlan-Vim-Checkout wird per Fast-Forward aktualisiert, lokale Änderungen werden nie zurückgesetzt.
+Um zu aktualisieren, führen Sie den Installer eines neueren Releases aus. Ein erneuter Lauf bringt einen vorhandenen DeepWorkPlan-Vim-Checkout auf das Release dieses Installers, behält Ihre Branches und setzt lokale Änderungen nie zurück: Wenn lokale Änderungen oder Commits verloren gingen, hält er an und ändert nichts.
 
-Um einen bestimmten Tag zu installieren, setzen Sie `DWP_VIM_REF`. Legen Sie einen Tag statt eines Branches fest: Releases vor `v0.4.0` enthalten weder die Gesten noch den Plan-Browser, den Markdown-Viewer oder diesen Installer.
+Um einen anderen Tag, einen Branch oder einen Commit zu installieren, setzen Sie `DWP_VIM_REF`. Bevorzugen Sie einen Tag: Releases vor `v0.4.0` enthalten weder die Gesten noch den Plan-Browser, den Markdown-Viewer oder diesen Installer.
 
 ```bash
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
@@ -123,7 +123,7 @@ Es ist für Menschen und für Coding-Agenten gebaut, die im Terminal leben. Sein
 
 ### Welche Version bekomme ich?
 
-Der Installer installiert `main`, sofern Sie nicht `DWP_VIM_REF` setzen. Diese Seite beschreibt Release `v0.4.0`, das jede hier aufgeführte Funktion enthält; setzen Sie `DWP_VIM_REF=v0.4.0`, um genau dieses Release zu erhalten.
+Der Installer installiert das Release, zu dem er gehört – derzeit `v0.4.1` –, sofern Sie nicht `DWP_VIM_REF` setzen; `DWP_VIM_REF=main` folgt `main`. Diese Seite beschreibt Release `v0.4.1`, das jede hier aufgeführte Funktion enthält.
 
 ### Unter welcher Lizenz steht es und woher stammt es?
 

@@ -65,7 +65,7 @@ Capacità che il flusso di onboard aggiunge a un repo. Quattro sono opzionali e 
 - **[herdr](/it/kit/herdr)** — Peer in pannelli Herdr, su qualsiasi macchina: delega interattiva con una sola risposta autorizzata. Fissato a `herdr-peers@v0.1.0`.
 - **[agentkit](/it/kit/agentkit)** — Un solo comando ak per ogni agente di codice da terminale: delega headless in un worktree. Fissato a `coding-agents-kit@v0.1.1`.
 - **[devcontainer](/it/kit/devcontainer)** — Un template Dev Containers e immagini di base distribuiti senza agenti di codice. Fissato a `devcontainer-kit@v0.1.2`.
-- **[vim](/it/kit/vim)** — L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown. Fissato a `deepworkplan-vim@v0.4.0`.
+- **[vim](/it/kit/vim)** — L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown. Fissato a `deepworkplan-vim@v0.4.1`.
 
 Il registro degli addon e i descrittori sono distribuiti nella beta v7, una pre-release: `v7.0.0-beta.1`
 

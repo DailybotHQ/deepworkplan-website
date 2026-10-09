@@ -65,7 +65,7 @@ npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
 - **[herdr](/uk/kit/herdr)** — Peer-агенти в панелях Herdr на будь-якій машині: інтерактивне делегування з однією авторизованою відповіддю. Закріплено на `herdr-peers@v0.1.0`.
 - **[agentkit](/uk/kit/agentkit)** — Одна команда ak для кожного термінального агента для програмування: делегування без інтерфейсу у worktree. Закріплено на `coding-agents-kit@v0.1.1`.
 - **[devcontainer](/uk/kit/devcontainer)** — Шаблон Dev Containers і базові образи, що постачаються без агентів для коду. Закріплено на `devcontainer-kit@v0.1.2`.
-- **[vim](/uk/kit/vim)** — Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown. Закріплено на `deepworkplan-vim@v0.4.0`.
+- **[vim](/uk/kit/vim)** — Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown. Закріплено на `deepworkplan-vim@v0.4.1`.
 
 Реєстр аддонів і дескриптори постачаються в бета-версії v7, це пре-реліз: `v7.0.0-beta.1`
 

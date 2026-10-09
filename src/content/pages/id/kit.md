@@ -66,7 +66,7 @@ Kemampuan yang ditambahkan alur onboard ke sebuah repo. Empat bersifat opsional 
 - **[herdr](/id/kit/herdr)** — Rekan di panel Herdr, di mesin mana pun: delegasi interaktif dengan satu balasan yang diotorisasi. Dipatok pada `herdr-peers@v0.1.0`.
 - **[agentkit](/id/kit/agentkit)** — Satu perintah ak untuk setiap coding agent di terminal: delegasi headless di dalam worktree. Dipatok pada `coding-agents-kit@v0.1.1`.
 - **[devcontainer](/id/kit/devcontainer)** — Template Dev Containers dan image dasar yang dikirimkan tanpa coding agent. Dipatok pada `devcontainer-kit@v0.1.2`.
-- **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v0.4.0`.
+- **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v0.4.1`.
 
 Registri addon dan deskriptor dikirimkan dalam beta v7, sebuah pra-rilis: `v7.0.0-beta.1`
 

@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** is the terminal editor for Deep Work Plan: a Neovim configuration for people, and for coding agents, that work in a terminal. Your plans, your documentation and an index of every command are one keystroke away.
 
-It is a separate product, offered as the optional `vim` addon of the Deep Work Plan v7 beta (`v7.0.0-beta.1`, a pre-release). Deep Work Plan works with any editor or none, and the editor does not require Deep Work Plan: you add it to a machine on its own, and it works as an editor whether or not a plan exists. This page describes release **v0.4.0**.
+It is a separate product, offered as the optional `vim` addon of the Deep Work Plan v7 beta (`v7.0.0-beta.1`, a pre-release). Deep Work Plan works with any editor or none, and the editor does not require Deep Work Plan: you add it to a machine on its own, and it works as an editor whether or not a plan exists. This page describes release **v0.4.1**.
 
 ## Why a terminal editor for Deep Work Plan
 
@@ -60,7 +60,7 @@ To read a plan's Markdown files in place, `SPC m p` previews the current buffer 
 
 ## Install
 
-The install is three commands: download the script, check it against the SHA-256 of the file this site serves, then run it. On its own it installs the repository's `main` branch; run it as `DWP_VIM_REF=v0.4.0 bash install.sh` to install exactly the release this page describes.
+The install is three commands: download the script, check it against the SHA-256 of the file this site serves, then run it. The installer pins its own release, so it installs exactly `v0.4.1`, the release this page describes; `DWP_VIM_REF=main bash install.sh` follows the moving `main` branch instead.
 
 <VimInstall lang="en" />
 
@@ -72,7 +72,7 @@ In order, the installer:
 4. Runs the repository's own `lua install.lua`.
 5. Installs the plugins headlessly, so there is no quit-and-reopen step.
 
-The script served here is a byte-identical copy of `install.sh` at the `v0.4.0` tag. To read it first, download it with `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, compare its SHA-256 with the value shown above, read it, then run `DWP_VIM_REF=v0.4.0 bash install.sh`.
+The script served here is a byte-identical copy of `install.sh` at the `v0.4.1` tag. To read it first, download it with `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, compare its SHA-256 with the value shown above, read it, then run `bash install.sh`.
 
 ## Requirements and platforms
 
@@ -83,9 +83,9 @@ The script served here is a byte-identical copy of `install.sh` at the `v0.4.0` 
 
 ## Update, pin and uninstall
 
-Run the installer again to update. It is idempotent: an existing DeepWorkPlan Vim checkout is updated with a fast-forward pull, and local edits are never reset.
+To update, run a newer release's installer. Re-running moves an existing DeepWorkPlan Vim checkout to that installer's release, keeps your branches, and never resets local edits: when local changes or commits would be lost, it stops and changes nothing.
 
-To install a specific tag, set `DWP_VIM_REF`. Pin a tag rather than a branch: releases before `v0.4.0` do not include the gestures, the plan browser, the Markdown viewer or this installer.
+To install another tag, a branch or a commit, set `DWP_VIM_REF`. Prefer a tag: releases before `v0.4.0` do not include the gestures, the plan browser, the Markdown viewer or this installer.
 
 ```bash
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
@@ -123,7 +123,7 @@ It is built for people and for coding agents that live in a terminal. Its keybin
 
 ### Which version do I get?
 
-The installer installs `main` unless you set `DWP_VIM_REF`. This page describes release `v0.4.0`, which ships every feature listed here; set `DWP_VIM_REF=v0.4.0` to get exactly that release.
+The installer installs the release it belongs to — `v0.4.1` today — unless you set `DWP_VIM_REF`; `DWP_VIM_REF=main` follows `main`. This page describes release `v0.4.1`, which ships every feature listed here.
 
 ### What license is it under, and where does it come from?
 
