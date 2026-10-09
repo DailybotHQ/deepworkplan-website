@@ -9,6 +9,18 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.36] - 2026-10-09
+
+### Changed
+
+- fix(vim): chain the pin example so a failed checksum stops it
+- fix(styles): generate scroll-mt-24 for the translated vim anchor
+- fix(vim): offset the choose-a-version anchor, pin RELEASE_REF to the tag in tests
+- fix(hygiene): treat an empty-default variable reference as non-literal
+- fix(vim): address review wording on the v0.5.0 vim page
+- fix(vim): drop the redundant anchor on the English heading, whose slug already is choose-a-version
+- feat(vim): serve the v0.5.0 installer and document version selection
+
 ## [5.0.35] - 2026-10-09
 
 ### Changed
@@ -1093,7 +1105,8 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.35...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.36...HEAD
+[5.0.36]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.36
 [5.0.35]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.35
 [5.0.34]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.34
 [5.0.33]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.33
