@@ -1,6 +1,6 @@
 ---
 title: Add-ons
-description: "DWP addons: four opt-in extensions, the required AI Diff Reviewer local review with its optional CI surface, the addon contract, and kit concepts."
+description: "DWP addons: seven opt-in extensions, the required AI Diff Reviewer local review with its optional CI surface, the addon contract, and kit concepts."
 order: 5
 lang: en
 section: Addons
@@ -8,9 +8,9 @@ section: Addons
 
 # Add-ons
 
-> **Version scope:** This is a retained v5.0.0 base document. The current v6 standard also requires the applicable `V6_*.md` extensions listed in the [specification index](/spec). Existing v5 plans keep their recorded rules.
+> **Version scope:** This is a retained v5.0.0 base document. The current standard, DWP 7.0.0, also requires the applicable `V6_*.md` and `V7_*.md` extensions listed in the [specification index](/spec). Existing v5 and v6 plans keep their recorded rules.
 
-**Version 2.1.0.** Add-ons are extensions to the core Deep Work Plan methodology. Four of the five are optional and **never required for conformance** — a repository with zero optional addons is fully AI-first and DWP-conformant. Each optional addon is offered during onboarding, accepted or declined explicitly, and — when accepted — **reconciles** with existing setup instead of clobbering it. One component is the declared exception: since standard 2.3.0 the **AI Diff Reviewer local review** is part of the required baseline — onboarding installs it and every Final Review runs it — while its CI surface stays opt-in.
+**Version 2.1.0.** Add-ons are extensions to the core Deep Work Plan methodology. Seven of the eight are optional and **never required for conformance** — a repository with zero optional addons is fully AI-first and DWP-conformant. Each optional addon is offered during onboarding, accepted or declined explicitly, and — when accepted — **reconciles** with existing setup instead of clobbering it. One component is the declared exception: since standard 2.3.0 the **AI Diff Reviewer local review** is part of the required baseline — onboarding installs it and every Final Review runs it — while its CI surface stays opt-in.
 
 ## The addon contract
 
@@ -25,9 +25,9 @@ Every shipping addon ships four mandatory components:
 
 Discovery: the `onboard` flow enumerates `skills/deepworkplan/addons/` and presents each addon as an opt-in step in **Phase 7b**, after core scaffolding.
 
-## Shipping addons (five)
+## Shipping addons (eight)
 
-Five addons ship today — four opt-in plus the required local review. Each has a **kit catalog page** with user-facing detail and a **normative spec** inside the Deep Work Plan skill.
+Eight addons ship today — seven opt-in plus the required local review. Each has a **kit catalog page** with user-facing detail and a **normative spec** inside the Deep Work Plan skill. Four of them — devcontainer, Herdr, DeepWorkPlan Vim, and Agentkit — are thin integrators pinned by tag to a product with its own repository and release cycle; every product works without Deep Work Plan. An accepted addon is recorded in the `.dwp/config.json` addon registry (DWP 7.0.0), which can only offer or amplify — it never gates conformance or a plan.
 
 ### Devcontainer (first addon)
 
@@ -79,6 +79,33 @@ The **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (mark
 - **Parity (Flow B):** shared `prompt.md` + extension align methodology/severity; CI Iteration-Aware Review may shorten round 2+ while local stays a full pass
 - **Vendor-neutral guardrail:** no Deep Work Plan flow requires a commercial service, CI provider or secret — the reviewer is an MIT, tag-pinned skill run by the developer's own coding agent
 - **Conformance:** `verify` reports a missing local reviewer as a failure for repositories declaring standard 2.3.0 or newer and as a harness-version finding for legacy repositories
+
+### Herdr (sixth addon)
+
+A thin integrator of [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (pinned `v0.1.0`, protocol `1`), the **interactive** delegation transport of v7 plans.
+
+- **Kit page:** [Herdr](/kit/herdr)
+- **What it adds:** a plan can hand a bounded task to a coding agent in another [Herdr](https://herdr.dev) pane, on the same machine or one Herdr reaches over SSH, and record its single authorized reply in the journal
+- **Behavior:** the peer protocol (stamp, grant, reply, loop guard, depth and fan-out limits) lives in herdr-peers, never in the pack; any use needs the contract grant `agent_delegation`, and a delegate's result stays asserted until the plan's own runner observes it
+- **When offered:** explicit opt-in during Phase 7b; read-only detection of `herdr` and `herdr-peers`; the transport is usable only inside a Herdr session
+
+### DeepWorkPlan Vim (seventh addon)
+
+A thin integrator of [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (pinned `v0.4.2`, interface `1`), the terminal editor for Deep Work Plan (Neovim 0.12+).
+
+- **Kit page:** [DeepWorkPlan Vim](/kit/vim)
+- **What it adds:** an optional, machine-level editor surface for agents and humans — a generated command index, a read-only plan browser, and a Markdown viewer; every claim is read from the product's pinned machine-readable surface
+- **Behavior:** an existing Neovim configuration is never overwritten without explicit consent; detection is read-only
+- **When offered:** explicit opt-in during Phase 7b; informational only when Neovim 0.12+ is missing
+
+### Agentkit (eighth addon)
+
+A thin integrator of [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, pinned `v0.1.1`, interface `1`), the **headless** delegation transport of v7 plans.
+
+- **Kit page:** [Agentkit](/kit/agentkit)
+- **What it adds:** one `ak` command surface over terminal coding agents, used to run a bounded plan task headlessly; it contributes the `subagents`, `cancel_children`, and `model_routing` abilities only at runtime, when enabled, detected, and on a compatible interface
+- **Behavior:** any use needs the contract grant `agent_delegation`; the addon never installs coding-agent CLIs on its own and never reads provider key values
+- **When offered:** explicit opt-in during Phase 7b; read-only detection through `ak doctor --json`
 
 ## Skills
 

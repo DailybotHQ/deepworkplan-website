@@ -42,4 +42,4 @@ section: Conformance
 
 一个仓库 SHOULD 在接入之后、以及每份计划完成之后重新验证，使符合性得以持续维护，而非只声称一次。
 
-**按代际验证计划。** 仓库来源检查器接受当前 DWP 标准 6.0.0，但计划检查按代际分别进行。v6 计划通过 contract 指针、`contract.json` 或 `contracts/` 修订链识别，并使用 v6 contract、journal 和 ledger 验证器检查。保留的 `plan_contract.py` 检查器仅支持 v5，绝不能用作 v6 计划验证器。在 v6 中，`state.json` 是生成的 snapshot 投影；与 journal 不一致会报告为问题。两种代际可以共存，验证过程不会迁移计划。
+**按代际验证计划。** 仓库来源检查器接受当前 DWP 标准 7.0.0，但计划检查按代际分别进行。v6 或 v7 计划通过其 manifest 中的 contract 指针、`contract.json` 或 `contracts/` 修订链识别，并由 `conformance.sh --plan` 以只读方式对照其自身记录进行评判：每个 contract 修订均通过验证，manifest 与 contract 的代际相匹配，journal 完整未截断且有效，批准引用当前生效的 contract，且 `state.json` 与 journal 投影一致（过期的 snapshot 仅为提示，会被重新生成，绝不手动编辑）。v5 生命周期检查仅适用于 v5 及更早的计划，v5 收尾流程会拒绝 v6 或 v7 计划。各代际可以共存，验证过程不会迁移任何计划。

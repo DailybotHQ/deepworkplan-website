@@ -1,6 +1,6 @@
 ---
 title: Dodatki
-description: "Dodatki DWP: cztery opcjonalne rozszerzenia, wymagany lokalny przegląd AI Diff Reviewer z opcjonalną powierzchnią CI, kontrakt i pojęcia kitu."
+description: "Dodatki DWP: siedem opcjonalnych rozszerzeń, wymagany lokalny przegląd AI Diff Reviewer z opcjonalną powierzchnią CI, kontrakt i pojęcia kitu."
 order: 6
 lang: pl
 section: Addons
@@ -8,9 +8,9 @@ section: Addons
 
 # Dodatki
 
-> **Zakres wersji:** To zachowany dokument bazowy v5.0.0. Aktualny standard v6 wymaga również odpowiednich rozszerzeń `V6_*.md` wymienionych w [indeksie specyfikacji](/spec). Istniejące plany v5 zachowują zapisane reguły.
+> **Zakres wersji:** To zachowany dokument bazowy v5.0.0. Aktualny standard, DWP 7.0.0, wymaga również odpowiednich rozszerzeń `V6_*.md` i `V7_*.md` wymienionych w [indeksie specyfikacji](/spec). Istniejące plany v5 i v6 zachowują zapisane reguły.
 
-**Wersja 2.1.0.** Dodatki to rozszerzenia podstawowej metodyki Deep Work Plan. Cztery z pięciu są opcjonalne i **nigdy nie są wymagane do zgodności** — repozytorium bez opcjonalnych addonów jest w pełni AI-first i zgodne z DWP. Każdy opcjonalny addon jest proponowany podczas onboardingu, wyraźnie akceptowany lub odrzucany, a po akceptacji **uzgadnia** się z istniejącą konfiguracją zamiast ją nadpisywać. Jeden komponent jest zadeklarowanym wyjątkiem: od standardu 2.3.0 **lokalny przegląd AI Diff Reviewer** jest częścią wymaganej linii bazowej — onboarding go instaluje, a każde Final Review go uruchamia — podczas gdy jego powierzchnia CI pozostaje opcjonalna.
+**Wersja 2.1.0.** Dodatki to rozszerzenia podstawowej metodyki Deep Work Plan. Siedem z ośmiu jest opcjonalnych i **nigdy nie są wymagane do zgodności** — repozytorium bez opcjonalnych addonów jest w pełni AI-first i zgodne z DWP. Każdy opcjonalny addon jest proponowany podczas onboardingu, wyraźnie akceptowany lub odrzucany, a po akceptacji **uzgadnia** się z istniejącą konfiguracją zamiast ją nadpisywać. Jeden komponent jest zadeklarowanym wyjątkiem: od standardu 2.3.0 **lokalny przegląd AI Diff Reviewer** jest częścią wymaganej linii bazowej — onboarding go instaluje, a każde Final Review go uruchamia — podczas gdy jego powierzchnia CI pozostaje opcjonalna.
 
 ## Kontrakt addonu
 
@@ -25,9 +25,9 @@ Każdy dostępny addon dostarcza cztery obowiązkowe komponenty:
 
 Odkrywanie: przepływ `onboard` enumeruje `skills/deepworkplan/addons/` i prezentuje każdy addon jako opcjonalny krok w **Phase 7b**, po podstawowym scaffoldingu.
 
-## Dostępne addony (pięć)
+## Dostępne addony (osiem)
 
-Dziś dostępne są pięć addonów — cztery opcjonalne plus wymagany lokalny przegląd. Każdy ma **stronę katalogu kit** ze szczegółami dla użytkownika oraz **normatywną specyfikację** w skillu Deep Work Plan.
+Dziś dostępnych jest osiem addonów — siedem opcjonalnych plus wymagany lokalny przegląd. Każdy ma **stronę katalogu kit** ze szczegółami dla użytkownika oraz **normatywną specyfikację** w skillu Deep Work Plan. Cztery z nich — devcontainer, Herdr, DeepWorkPlan Vim i Agentkit — to cienkie integratory przypięte tagiem do produktu z własnym repozytorium i cyklem wydań; każdy produkt działa bez Deep Work Plan. Zaakceptowany addon jest zapisywany w rejestrze addonów `.dwp/config.json` (DWP 7.0.0), który może jedynie proponować lub wzmacniać — nigdy nie warunkuje zgodności ani planu.
 
 ### Devcontainer (pierwszy addon)
 
@@ -79,6 +79,33 @@ Aktualizacje zależności niezależne od menedżera pakietów, partiami, zwalido
 - **Parytety (Flow B):** wspólny `prompt.md` + rozszerzenie wyrównuje metodologię/ważność; CI Iteration-Aware Review może skrócić rundy 2+ podczas gdy lokalny przebieg pozostaje pełny
 - **Ochrona neutralna wobec dostawcy:** żaden przepływ Deep Work Plan nie wymaga komercyjnej usługi, dostawcy CI ani sekretu — reviewer to skill na licencji MIT przypięty do tagu, uruchamiany przez własnego agenta kodującego dewelopera
 - **Zgodność:** `verify` zgłasza brakujący lokalny reviewer jako niepowodzenie dla repozytoriów deklarujących standard 2.3.0 lub nowszy oraz jako znalezisko wersji harnessu dla starszych repozytoriów
+
+### Herdr (szósty addon)
+
+Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przypięty `v0.1.0`, protokół `1`), **interaktywny** transport delegowania planów v7.
+
+- **Strona kit:** [Herdr](/kit/herdr)
+- **Co dodaje:** plan może przekazać ograniczone zadanie agentowi kodującemu w innym panelu [Herdr](https://herdr.dev), na tej samej maszynie lub na takiej, do której Herdr sięga przez SSH, i zapisać jego jedną autoryzowaną odpowiedź w dzienniku
+- **Zachowanie:** protokół peerów (stempel, uprawnienie, odpowiedź, ochrona przed pętlą, limity głębokości i rozgałęzienia) znajduje się w herdr-peers, nigdy w pakiecie; każde użycie wymaga uprawnienia kontraktu `agent_delegation`, a wynik delegata pozostaje jedynie deklarowany, dopóki nie zaobserwuje go własny wykonawca planu
+- **Kiedy proponowany:** wyraźna zgoda w Phase 7b; wykrywanie `herdr` i `herdr-peers` tylko do odczytu; transport działa wyłącznie wewnątrz sesji Herdr
+
+### DeepWorkPlan Vim (siódmy addon)
+
+Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (przypięty `v0.4.2`, interfejs `1`), edytora terminalowego dla Deep Work Plan (Neovim 0.12+).
+
+- **Strona kit:** [DeepWorkPlan Vim](/kit/vim)
+- **Co dodaje:** opcjonalną powierzchnię edytora na poziomie maszyny dla agentów i ludzi — generowany indeks poleceń, przeglądarkę planów tylko do odczytu i przeglądarkę Markdown; każde twierdzenie jest odczytywane z przypiętej, czytelnej maszynowo powierzchni produktu
+- **Zachowanie:** istniejąca konfiguracja Neovim nigdy nie jest nadpisywana bez wyraźnej zgody; wykrywanie odbywa się tylko do odczytu
+- **Kiedy proponowany:** wyraźna zgoda w Phase 7b; wyłącznie informacyjnie, gdy brakuje Neovim 0.12+
+
+### Agentkit (ósmy addon)
+
+Cienki integrator [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty `v0.1.1`, interfejs `1`), **bezgłowego** (headless) transportu delegowania planów v7.
+
+- **Strona kit:** [Agentkit](/kit/agentkit)
+- **Co dodaje:** jedną powierzchnię poleceń `ak` nad terminalowymi agentami kodującymi, używaną do bezgłowego wykonania ograniczonego zadania planu; wnosi możliwości `subagents`, `cancel_children` i `model_routing` wyłącznie w czasie działania, gdy jest włączony, wykryty i na zgodnym interfejsie
+- **Zachowanie:** każde użycie wymaga uprawnienia kontraktu `agent_delegation`; addon nigdy sam nie instaluje CLI agentów kodujących i nigdy nie odczytuje wartości kluczy dostawców
+- **Kiedy proponowany:** wyraźna zgoda w Phase 7b; wykrywanie tylko do odczytu przez `ak doctor --json`
 
 ## Skille
 

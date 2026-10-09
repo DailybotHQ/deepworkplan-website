@@ -1,6 +1,6 @@
 ---
 title: 附加组件
-description: "DWP 附加组件：四个可选扩展、必备的 AI Diff Reviewer 本地审查及其可选 CI 层面、附加组件合约与套件概念。"
+description: "DWP 附加组件：七个可选扩展、必备的 AI Diff Reviewer 本地审查及其可选 CI 层面、附加组件合约与套件概念。"
 order: 6
 lang: zh
 section: Addons
@@ -8,9 +8,9 @@ section: Addons
 
 # 附加组件
 
-> **版本范围：** 本文档是保留的 v5.0.0 基础文档。当前 v6 标准还要求遵循[规范索引](/spec)中适用的 `V6_*.md` 扩展。现有 v5 计划保留其记录的规则。
+> **版本范围：** 本文档是保留的 v5.0.0 基础文档。当前标准 DWP 7.0.0 还要求遵循[规范索引](/spec)中适用的 `V6_*.md` 与 `V7_*.md` 扩展。现有 v5 与 v6 计划保留其记录的规则。
 
-**版本 2.1.0。** 附加组件是对核心 Deep Work Plan 方法论的扩展。五个之中有四个是可选的，且**绝非符合性所必需**——零可选附加组件的仓库完全符合 AI-first 与 DWP 规范。每个可选附加组件在接入期间提供，由开发者明确接受或拒绝，且——接受后——**调和**现有设置而非覆盖。一个组件是声明的例外：自标准 2.3.0 起，**AI Diff Reviewer 本地审查**属于必备基线——接入时安装它，每份 Final Review 都运行它——而其 CI 层面保持可选。
+**版本 2.1.0。** 附加组件是对核心 Deep Work Plan 方法论的扩展。八个之中有七个是可选的，且**绝非符合性所必需**——零可选附加组件的仓库完全符合 AI-first 与 DWP 规范。每个可选附加组件在接入期间提供，由开发者明确接受或拒绝，且——接受后——**调和**现有设置而非覆盖。一个组件是声明的例外：自标准 2.3.0 起，**AI Diff Reviewer 本地审查**属于必备基线——接入时安装它，每份 Final Review 都运行它——而其 CI 层面保持可选。
 
 ## 附加组件合约
 
@@ -25,9 +25,9 @@ section: Addons
 
 发现机制：`onboard` 流程枚举 `skills/deepworkplan/addons/`，并在核心脚手架完成后的 **第 7b 阶段**将每个附加组件作为可选步骤呈现。
 
-## 已发布的附加组件（五个）
+## 已发布的附加组件（八个）
 
-当前发布五个附加组件——四个可选，外加必备的本地审查。每个都有**套件目录页**（面向用户的详情）以及 Deep Work Plan 技能内的**规范性规格**。
+当前发布八个附加组件——七个可选，外加必备的本地审查。每个都有**套件目录页**（面向用户的详情）以及 Deep Work Plan 技能内的**规范性规格**。其中四个——devcontainer、Herdr、DeepWorkPlan Vim 与 Agentkit——是按 tag 固定到某个产品的轻量集成器，该产品拥有自己的仓库与发布周期；每个产品都能脱离 Deep Work Plan 独立运行。被接受的附加组件会记录在 `.dwp/config.json` 附加组件注册表中（DWP 7.0.0），该注册表只能提供或增强能力——绝不为符合性或计划设置门控。
 
 ### Devcontainer（第一个附加组件）
 
@@ -79,6 +79,33 @@ section: Addons
 - **奇偶性（Flow B）：** 共享 `prompt.md` + 扩展对齐方法论/严重程度；CI 迭代感知审查可缩短第 2+ 轮，而本地通道保持完整
 - **供应商中立护栏：** 没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密——该审查器是一个由开发者自己的编码代理运行的 MIT 授权、标签锁定的 skill
 - **符合性：** 对声明标准 2.3.0 或更新版本的仓库，`verify` 将缺失的本地审查器报告为一项失败；对旧版仓库则报告为一项 harness 版本发现
+
+### Herdr（第六个附加组件）
+
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（固定为 `v0.1.0`，协议 `1`）的轻量集成器，是 v7 计划的**交互式**委托传输。
+
+- **套件页：** [Herdr](/kit/herdr)
+- **新增内容：** 计划可以把一项有界任务交给另一个 [Herdr](https://herdr.dev) 窗格中的编码代理——位于同一台机器，或 Herdr 通过 SSH 可达的机器——并在日志中记录其唯一一次获授权的回复
+- **行为：** 对等协议（stamp、grant、reply、循环防护、深度与扇出上限）位于 herdr-peers 中，绝不在技能包中；任何使用都需要契约授权 `agent_delegation`，且受托代理的结果在计划自己的运行器观察到之前始终只是断言
+- **何时提供：** 第 7b 阶段中明确的可选项；对 `herdr` 与 `herdr-peers` 进行只读检测；该传输仅能在 Herdr 会话内使用
+
+### DeepWorkPlan Vim（第七个附加组件）
+
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（固定为 `v0.4.2`，接口 `1`）的轻量集成器，是 Deep Work Plan 的终端编辑器（Neovim 0.12+）。
+
+- **套件页：** [DeepWorkPlan Vim](/kit/vim)
+- **新增内容：** 一个可选的、机器级的编辑器层面，供代理与人类使用——生成的命令索引、只读计划浏览器和 Markdown 查看器；每一项说明都读取自该产品固定版本的机器可读层面
+- **行为：** 未经明确同意，绝不覆盖现有的 Neovim 配置；检测是只读的
+- **何时提供：** 第 7b 阶段中明确的可选项；缺少 Neovim 0.12+ 时仅作提示
+
+### Agentkit（第八个附加组件）
+
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`，固定为 `v0.1.1`，接口 `1`）的轻量集成器，是 v7 计划的**无头**委托传输。
+
+- **套件页：** [Agentkit](/kit/agentkit)
+- **新增内容：** 一个覆盖各终端编码代理的 `ak` 命令层面，用于以无头方式运行有界的计划任务；仅在运行时、且已启用、已检测到并处于兼容接口时，才提供 `subagents`、`cancel_children` 与 `model_routing` 能力
+- **行为：** 任何使用都需要契约授权 `agent_delegation`；该附加组件绝不自行安装编码代理 CLI，也绝不读取提供商密钥的值
+- **何时提供：** 第 7b 阶段中明确的可选项；通过 `ak doctor --json` 进行只读检测
 
 ## 技能
 

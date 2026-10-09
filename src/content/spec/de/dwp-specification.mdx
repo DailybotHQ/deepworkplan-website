@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP-Spezifikation
 
-> **Aktueller Standard: v6.** Dies ist die beibehaltene v5-Spezifikationsbasis mit den aktuellen v6-Lebenszyklus-Erweiterungen. Das 6.x-Paket erstellt neue Pläne standardmäßig mit v6; bestehende Pläne behalten ihre aufgezeichnete Generation. Das v6-Manifest und der Live-Snapshot sind unter [plan-manifest/v6.json](https://deepworkplan.com/schema/plan-manifest/v6.json) und [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json) veröffentlicht.
+> **Aktueller Standard: v7 (DWP 7.0.0).** Dies ist die beibehaltene v5-Spezifikationsbasis mit den v6-Lebenszyklus-Erweiterungen und der v7-Vertragsgeneration. Das 7.x-Paket erstellt neue Pläne standardmäßig mit v7; eine ausdrückliche `v6`-Anforderung materialisiert weiterhin einen v6-Plan, und bestehende Pläne behalten ihre aufgezeichnete Generation. Das v7-Manifest und der v7-Vertrag sind unter [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) und [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json) veröffentlicht; der Live-Snapshot bleibt unter [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 
 **Version 5.0.0. Status: Stabil.** Dieses Dokument ist die normative Spezifikation für die Deep Work Plan (DWP) Methodik. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
@@ -43,7 +43,7 @@ Ein neuer Plan MUSS ein nummeriertes Verzeichnis unter `.dwp/plans/` verwenden, 
 
 Ein Plan KANN zusätzlich die maschinenlesbare Zustandsschicht tragen: `manifest.json` (statische Identität, einmal bei der Materialisierung geschrieben) und `state.json` (lebendiger aufgabenbezogener Ausführungszustand). Die Zustandsschicht ist für v5-Pläne EMPFOHLEN und für unbeaufsichtigte Ausführung sowie für Agenten-Arbeitsbereiche ohne git ERFORDERLICH. Siehe [Plan-Zustand](/spec/plan-state).
 
-Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v6-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
+Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v6- und v7-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
 
 ## Aufgaben-Anatomie
 

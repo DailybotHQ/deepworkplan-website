@@ -644,7 +644,7 @@ export const pl: SiteTranslations = {
       addon: {
         title: 'Dodatki (dobrowolne)',
         description:
-          'Możliwości, które proces onboardingu dokłada do repo: wymagana lokalna recenzja AI Diff Reviewer oraz cztery opcjonalne dodatki, które nigdy nie są częścią bazowego standardu AI-first.',
+          'Możliwości, które proces onboardingu dokłada do repo: wymagana lokalna recenzja AI Diff Reviewer oraz siedem opcjonalnych dodatków, które nigdy nie są częścią bazowego standardu AI-first.',
       },
     },
     viewDetail: 'Zobacz szczegóły',
@@ -723,7 +723,7 @@ export const pl: SiteTranslations = {
       {
         title: 'Lokalna recenzja i dobrowolne dodatki',
         description:
-          'Onboarding instaluje wymaganą lokalną recenzję AI Diff Reviewer (jej bramka CI pozostaje opcjonalna) i oferuje cztery opcjonalne dodatki — devcontainer, Dailybot, dependency-upgrade i design-system — które przyjmujesz tylko, gdy pasują. Repo jest w pełni zgodne z zerową liczbą opcjonalnych dodatków. Użyj /skill-create i /agent-create (sub-skill author), by rozwijać skille, agentów i polecenia wykraczające poza bazowy zestaw.',
+          'Onboarding instaluje wymaganą lokalną recenzję AI Diff Reviewer (jej bramka CI pozostaje opcjonalna) i oferuje siedem opcjonalnych dodatków — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim i Agentkit — które przyjmujesz tylko, gdy pasują. Repo jest w pełni zgodne z zerową liczbą opcjonalnych dodatków. Użyj /skill-create i /agent-create (sub-skill author), by rozwijać skille, agentów i polecenia wykraczające poza bazowy zestaw.',
       },
       {
         title: 'Planuj i realizuj',

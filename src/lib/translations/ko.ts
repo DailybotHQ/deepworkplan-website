@@ -639,7 +639,7 @@ export const ko: SiteTranslations = {
       addon: {
         title: '애드온(선택형)',
         description:
-          'onboard 흐름이 리포지토리에 얹는 기능: 필수인 AI Diff Reviewer 로컬 리뷰와, AI-first 기준선의 일부가 결코 아닌 네 가지 선택형 애드온.',
+          'onboard 흐름이 리포지토리에 얹는 기능: 필수인 AI Diff Reviewer 로컬 리뷰와, AI-first 기준선의 일부가 결코 아닌 일곱 가지 선택형 애드온.',
       },
     },
     viewDetail: '상세 보기',
@@ -718,7 +718,7 @@ export const ko: SiteTranslations = {
       {
         title: '로컬 리뷰와 선택형 애드온',
         description:
-          '온보딩은 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고(그 CI 게이트는 선택으로 남습니다), 네 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system — 을 제안하며, 맞을 때만 채택하면 됩니다. 선택형 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다. /skill-create와 /agent-create(author 하위 스킬)로 기본 구성을 넘어 스택에 맞는 스킬, 에이전트, 명령을 키우세요.',
+          '온보딩은 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고(그 CI 게이트는 선택으로 남습니다), 일곱 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, Agentkit — 을 제안하며, 맞을 때만 채택하면 됩니다. 선택형 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다. /skill-create와 /agent-create(author 하위 스킬)로 기본 구성을 넘어 스택에 맞는 스킬, 에이전트, 명령을 키우세요.',
       },
       {
         title: '계획하고 실행',

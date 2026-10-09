@@ -35,14 +35,16 @@ O `deepworkplan-onboard` inspeciona o repositório **real** — linguagens, fram
 
 Um repositório é totalmente conforme com zero addons opcionais; a revisão local do AI Diff Reviewer faz parte da linha de base desde o padrão 2.3.0. A realidade detectada sempre prevalece sobre as suposições do preset.
 
-## Referências de esquemas v6
+## Referências de esquemas v7
 
-Para planos v6, o catálogo de esquemas legíveis por máquina é publicado nestas URLs estáveis. A projeção ativa do v6 é um snapshot; não existe `plan-state/v6.json`. Planos v5 existentes continuam usando o esquema de estado v5, e planos antigos nunca são reescritos silenciosamente.
+Para planos v7 — o padrão do pacote 7.x atual — o catálogo de esquemas legíveis por máquina é publicado nestas URLs estáveis. A projeção ativa é um snapshot compartilhado com o v6; não existe `plan-state/v6.json` nem `plan-state/v7.json`.
 
-- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
-- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
-- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
-- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
-- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Manifesto do plano:** https://deepworkplan.com/schema/plan-manifest/v7.json
+- **Contrato do plano:** https://deepworkplan.com/schema/plan-contract/v7.json (o contrato v6 mais um marcador de tarefa opcional `parallel_safe`)
+- **Evento do diário:** https://deepworkplan.com/schema/journal-event/v7.json (acrescenta o evento `delegation`)
+- **Snapshot do plano (projeção ativa, compartilhada com o v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Manifesto de contexto (compartilhado com o v6):** https://deepworkplan.com/schema/context-manifest/v6.json
+
+Planos v6 mantêm seus esquemas v6 ([manifesto](https://deepworkplan.com/schema/plan-manifest/v6.json), [contrato](https://deepworkplan.com/schema/plan-contract/v6.json), [evento do diário](https://deepworkplan.com/schema/journal-event/v6.json)); planos v5 existentes continuam usando o esquema de estado v5, e planos antigos nunca são reescritos silenciosamente.
 
 O pacote 7.x atual cria novos planos com v7 por padrão. Os planos existentes mantêm a geração registrada; a migração exige uma solicitação explícita. Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v7 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.

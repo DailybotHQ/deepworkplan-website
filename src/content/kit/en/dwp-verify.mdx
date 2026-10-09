@@ -35,7 +35,7 @@ Objectively check repository and plan conformance — read-only.
 3. Report **CONFORMANT** or **NOT CONFORMANT** with each failure listed.
 4. Offer to capture gaps as a Deep Work Plan; never fix silently.
 
-**Generation-specific plan validation.** The repository provenance checker accepts the current DWP standard 6.0.0, but plan checks remain generation-specific. A v6 plan is identified from its contract pointer, `contract.json`, or a `contracts/` revision chain and is checked with the v6 contract, journal, and ledger validators. The retained `plan_contract.py` checker is v5-only and MUST NOT be run as the v6 plan validator. In v6, `state.json` is a generated snapshot projection; a mismatch with the journal is a finding. Both generations coexist and neither is migrated during verification.
+**Generation-specific plan validation.** The repository provenance checker accepts the current DWP standard 7.0.0, but plan checks remain generation-specific. A v6 or v7 plan is identified from its manifest's contract pointer, `contract.json`, or a `contracts/` revision chain and is judged read-only against its own records by `conformance.sh --plan`: every contract revision validates, the manifest pairs with the contract's generation, the journal is untorn and valid, an approval cites the live contract, and `state.json` agrees with the journal projection (a stale snapshot is advisory and is regenerated, never hand-edited). The v5 lifecycle checks apply to v5 and older plans only, and the v5 finalization refuses a v6 or v7 plan. Generations coexist and none is migrated during verification.
 
 ## Aliases
 

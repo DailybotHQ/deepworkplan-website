@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Specyfikacja Deep Work Plan
 
-**Aktualny standard: v6.** Poniższe dokumenty są zachowaną podstawą; v6 dodaje kontrakt, dziennik tylko do dopisywania, kontekst zadań, kontrolę zasobów i reguły cyklu życia. [Manifest v6](https://deepworkplan.com/schema/plan-manifest/v6.json) i [migawka v6](https://deepworkplan.com/schema/plan-snapshot/v6.json). Istniejące plany v5 zachowują swoje reguły. Aktualny pakiet 6.x domyślnie tworzy nowe plany w v6. Istniejące plany zachowują zapisaną generację; migracja wymaga wyraźnego polecenia.
+**Aktualny standard: v7 (DWP 7.0.0).** Poniższe dokumenty są zachowaną podstawą; v6 dodał kontrakt, dziennik tylko do dopisywania, kontekst zadań, kontrolę zasobów i reguły cyklu życia, a v7 zachowuje tę warstwę zapisów, dodając opcjonalny znacznik zadania `parallel_safe`, zdarzenie dziennika `delegation`, rejestr addonów `.dwp/config.json` oraz możliwości dostarczane przez addony. [Manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [kontrakt v7](https://deepworkplan.com/schema/plan-contract/v7.json) i [migawka](https://deepworkplan.com/schema/plan-snapshot/v6.json) (współdzielona z v6). Istniejące plany v5 i v6 zachowują swoje reguły. Aktualny pakiet 7.x domyślnie tworzy nowe plany w v7. Istniejące plany zachowują zapisaną generację; migracja wymaga wyraźnego polecenia.
 
 Specyfikacja to precyzyjna, czytelna definicja metodyki — struktury i protokoły, które łączą ludzi i agentów. Określa, w normatywnych terminach RFC-2119, jak zbudowany jest plan oparty na specyfikacji i jak agent musi go wykonywać: plan jest źródłem prawdy, bramki walidacyjne są binarne, a samo repozytorium niesie harness, którego potrzebuje agent. Jest podzielona na uporządkowane dokumenty:
 

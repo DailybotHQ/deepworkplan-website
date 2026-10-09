@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP 스펙
 
-> **현재 표준: v6.** 이 문서는 보존된 v5 사양 기반에 현재 v6 수명 주기 확장을 더한 것입니다. 6.x 팩은 새 계획을 기본적으로 v6으로 생성하며 기존 계획은 기록된 세대를 유지합니다. v6 manifest와 live snapshot은 [plan-manifest/v6.json](https://deepworkplan.com/schema/plan-manifest/v6.json), [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json)에 게시됩니다.
+> **현재 표준: v7(DWP 7.0.0).** 이 문서는 보존된 v5 사양 기반에 v6 수명 주기 확장과 v7 contract 세대를 더한 것입니다. 7.x 팩은 새 계획을 기본적으로 v7로 생성합니다. 명시적으로 `v6`을 요청하면 여전히 v6 계획이 생성되며, 기존 계획은 기록된 세대를 유지합니다. v7 manifest와 contract는 [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json), [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json)에 게시되며, live snapshot은 [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json)에 그대로 남습니다.
 
 **버전 5.0.0. 상태: 안정(Stable).** 이 문서는 Deep Work Plan(DWP) 방법론의 규범적 스펙입니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
 
@@ -43,7 +43,7 @@ DWP는 스펙 주도입니다. 계획이 곧 스펙이고, 에이전트는 즉�
 
 계획은 기계 가독 상태 레이어를 추가로 담아도(MAY) 됩니다: `manifest.json`(정적 식별 정보, 구체화 시 한 번 작성)과 `state.json`(라이브 작업별 실행 상태). 상태 레이어는 v5 계획에 RECOMMENDED이며 무인 실행 및 git이 없는 에이전트 작업 공간에는 REQUIRED입니다. 참고: [계획 상태](/spec/plan-state).
 
-새 계획에는 최소 세 자리 숫자로 된 단조 증가 ID를 부여합니다(예: `PLAN_001_add_payment_webhooks/`). 고정된 v5 스키마는 숫자 ID를 한 단어로 세므로 v5 슬러그는 2~4단어이고 v6 슬러그는 2~5단어입니다. 기존의 번호 없는 `PLAN_<slug>/` 폴더는 계속 읽을 수 있으며 절대 이름을 바꾸지 않습니다. 번호가 있는 계획이 있으면 `latest`는 숫자 ID가 가장 큰 계획을 가리킵니다.
+새 계획에는 최소 세 자리 숫자로 된 단조 증가 ID를 부여합니다(예: `PLAN_001_add_payment_webhooks/`). 고정된 v5 스키마는 숫자 ID를 한 단어로 세므로 v5 슬러그는 2~4단어이고 v6 및 v7 슬러그는 2~5단어입니다. 기존의 번호 없는 `PLAN_<slug>/` 폴더는 계속 읽을 수 있으며 절대 이름을 바꾸지 않습니다. 번호가 있는 계획이 있으면 `latest`는 숫자 ID가 가장 큰 계획을 가리킵니다.
 
 ## 작업 구조
 

@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Spécification DWP
 
-> **Norme actuelle : v6.** Il s’agit de la base de spécification v5 conservée, complétée par les extensions actuelles du cycle de vie v6. Le pack 6.x crée les nouveaux plans en v6 par défaut ; les plans existants gardent leur génération enregistrée. Le manifeste et l’instantané actif v6 sont publiés à [plan-manifest/v6.json](https://deepworkplan.com/schema/plan-manifest/v6.json) et [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
+> **Norme actuelle : v7 (DWP 7.0.0).** Il s’agit de la base de spécification v5 conservée, complétée par les extensions du cycle de vie v6 et la génération de contrat v7. Le pack 7.x crée les nouveaux plans en v7 par défaut ; une demande explicite de `v6` matérialise toujours un plan v6, et les plans existants gardent leur génération enregistrée. Le manifeste et le contrat v7 sont publiés à [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) et [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json) ; l’instantané actif reste à [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 
 **Version 5.0.0. Statut : stable.** Ce document est la spécification normative de la méthodologie Deep Work Plan (DWP). Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 
@@ -43,7 +43,7 @@ Un nouveau plan MUST utiliser un répertoire numéroté sous `.dwp/plans/`, tel 
 
 Un plan MAY également porter la couche d'état lisible par machine : `manifest.json` (identité statique, écrit une fois à la matérialisation) et `state.json` (état d'exécution en direct par tâche). La couche d'état est RECOMMENDED pour les plans v5 et REQUIRED pour l'exécution sans surveillance et pour les espaces de travail d'agents sans git. Voir [État du plan](/spec/plan-state).
 
-Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
+Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6 et v7, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
 
 ## Anatomie d'une tâche
 

@@ -126,7 +126,7 @@ Public reference: [dailybot.com/skill.md](https://www.dailybot.com/skill.md). So
 
 ## Onboarding flow
 
-During DWP `onboard` **Phase 7b**, after core AI-first scaffolding, the flow offers the four opt-in addons (the AI Diff Reviewer local review was already installed in Phase 7a). If the developer accepts Dailybot:
+During DWP `onboard` **Phase 7b**, after core AI-first scaffolding, the flow offers the seven opt-in addons (the AI Diff Reviewer local review was already installed in Phase 7a). If the developer accepts Dailybot:
 
 1. Detect existing setup (skill, CLI, `.dailybot/profile.json`, hooks, report step).
 2. Offer skill/CLI install through Dailybot's consent flows.

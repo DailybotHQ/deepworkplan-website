@@ -193,7 +193,7 @@ metodologia) em vez de sobrescrever — e confirme com o usuário antes de subst
 6. **`.dwp/` + `tmp/`.** Estruture um `.dwp/` ignorado pelo git com `plans/`, além de um espaço de rascunho
  `tmp/` — ambos adicionados ao `.gitignore` de forma não destrutiva (acrescente, nunca reescreva). Não são intercambiáveis: tudo o que um fluxo produz **sobre um plano** — a análise, o registo de skills, a revisão de segurança, os logs das comportas, os relatórios de auditoria — deve viver no `.dwp/plans/PLAN_001_<slug>/analysis_results/` desse plano, nunca na raiz do repositório nem em `tmp/`. `tmp/` é para trabalho que nenhum plano voltará a ler.
 
-Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v6 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.
+Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v6 e v7 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.
 
 ## 4. Instale a revisão local obrigatória e depois ofereça os addons opcionais
 

@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Deep Work Plan 规范
 
-**当前标准：v6。** 下列文档是保留的基础规范；v6 增加契约、仅追加日志、逐任务上下文、资源控制和生命周期规则。[v6 身份清单](https://deepworkplan.com/schema/plan-manifest/v6.json)与[v6 快照](https://deepworkplan.com/schema/plan-snapshot/v6.json)。现有 v5 计划保留其记录的规则。 当前 6.x 技能包默认使用 v6 创建新计划。现有计划保留记录的代际；迁移必须明确请求。
+**当前标准：v7（DWP 7.0.0）。** 下列文档是保留的基础规范；v6 增加了契约、仅追加日志、逐任务上下文、资源控制和生命周期规则，v7 保留这一记录层，并新增可选的 `parallel_safe` 任务标记、`delegation` 日志事件、`.dwp/config.json` 附加组件注册表以及由附加组件提供的能力。参见 [v7 身份清单架构](https://deepworkplan.com/schema/plan-manifest/v7.json)、[契约架构](https://deepworkplan.com/schema/plan-contract/v7.json)与[实时快照架构](https://deepworkplan.com/schema/plan-snapshot/v6.json)（与 v6 共用）。现有 v5 与 v6 计划保留其记录的规则。 当前 7.x 技能包默认使用 v7 创建新计划。现有计划保留记录的代际；迁移必须明确请求。
 
 规范是这套方法论精确、可读的定义——人类与代理共享的结构与协议。它以规范性的 RFC-2119 措辞陈述了一份规范驱动的计划如何组织，以及代理必须如何依据它执行：计划是事实来源，验证关卡是二元的，而代码仓库本身携带着代理所需的 harness。它被组织为一系列有序的文档：
 

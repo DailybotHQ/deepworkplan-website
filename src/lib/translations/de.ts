@@ -642,7 +642,7 @@ export const de: SiteTranslations = {
       addon: {
         title: 'Addons (Opt-in)',
         description:
-          'Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügt: das verpflichtende lokale AI Diff Reviewer-Review sowie vier optionale Addons, die nie Teil der AI-first-Baseline sind.',
+          'Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügt: das verpflichtende lokale AI Diff Reviewer-Review sowie sieben optionale Addons, die nie Teil der AI-first-Baseline sind.',
       },
     },
     viewDetail: 'Details ansehen',
@@ -721,7 +721,7 @@ export const de: SiteTranslations = {
       {
         title: 'Lokales Review und Opt-in-Addons',
         description:
-          'Das Onboarding installiert das verpflichtende lokale AI Diff Reviewer-Review (sein CI-Gate bleibt optional) und bietet vier Opt-in-Addons — devcontainer, Dailybot, dependency-upgrade und design-system —, die Sie nur annehmen, wenn sie passen. Ein Repository ist mit null optionalen Addons vollständig konform. Nutzen Sie /skill-create und /agent-create (die author-Sub-Skill), um stack-passende Skills, Agenten und Befehle über die Basislinie hinaus aufzubauen.',
+          'Das Onboarding installiert das verpflichtende lokale AI Diff Reviewer-Review (sein CI-Gate bleibt optional) und bietet sieben Opt-in-Addons — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim und Agentkit —, die Sie nur annehmen, wenn sie passen. Ein Repository ist mit null optionalen Addons vollständig konform. Nutzen Sie /skill-create und /agent-create (die author-Sub-Skill), um stack-passende Skills, Agenten und Befehle über die Basislinie hinaus aufzubauen.',
       },
       {
         title: 'Planen und ausführen',

@@ -35,14 +35,16 @@ Bir depoyu AI-first, spec-driven bir kod tabanına dönüştürün. Bu, Deep Wor
 
 Bir depo, sıfır isteğe bağlı eklentiyle tümüyle uyumludur; AI Diff Reviewer yerel incelemesi 2.3.0 standardından itibaren temelin bir parçasıdır. Saptanan gerçeklik her zaman ön ayar varsayımlarına üstün gelir.
 
-## v6 şema başvuruları
+## v7 şema başvuruları
 
-v6 planları için makine tarafından okunabilir şema kataloğu bu sabit URL’lerde yayımlanır. v6 canlı görünümü bir anlık görüntüdür; `plan-state/v6.json` yoktur. Mevcut v5 planları v5 durum şemasını kullanmaya devam eder ve eski planlar sessizce yeniden yazılmaz.
+v7 planları için — güncel 7.x paketinin varsayılanı — makine tarafından okunabilir şema kataloğu bu sabit URL’lerde yayımlanır. Canlı görünüm, v6 ile ortak bir anlık görüntüdür; `plan-state/v6.json` veya `plan-state/v7.json` yoktur.
 
-- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
-- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
-- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
-- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
-- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v7.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v7.json (v6 sözleşmesi artı isteğe bağlı bir `parallel_safe` görev işaretçisi)
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (`delegation` olayını ekler)
+- **Plan snapshot (canlı görünüm, v6 ile ortak):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Context manifest (v6 ile ortak):** https://deepworkplan.com/schema/context-manifest/v6.json
+
+v6 planları kendi v6 şemalarını korur ([manifesto](https://deepworkplan.com/schema/plan-manifest/v6.json), [sözleşme](https://deepworkplan.com/schema/plan-contract/v6.json), [günlük olayı](https://deepworkplan.com/schema/journal-event/v6.json)); mevcut v5 planları v5 durum şemasını kullanmaya devam eder ve eski planlar sessizce yeniden yazılmaz.
 
 Güncel 7.x paketi yeni planları varsayılan olarak v7 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek gerektirir. Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (örneğin `PLAN_001_add_payment_webhooks/`). Dondurulmuş v5 şemaları sayısal kimliği bir sözcük saydığı için v5 slug’ları 2–4, v7 slug’ları 2–5 sözcük içerir. Mevcut numarasız `PLAN_<slug>/` klasörleri okunabilir kalır ve hiçbir zaman yeniden adlandırılmaz. Numaralı planlar varsa `latest`, sayısal kimliği en yüksek olan planı gösterir.

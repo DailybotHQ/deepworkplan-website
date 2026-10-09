@@ -50,13 +50,16 @@ dan sebuah fallback generik.
 
 ### Addon (opt-in)
 
-Kemampuan yang ditambahkan alur onboard ke sebuah repo. Empat bersifat opsional dan tidak pernah menjadi bagian dari baseline AI-first; tinjauan lokal AI Diff Reviewer wajib sejak standar 2.3.0:
+Kemampuan yang ditambahkan alur onboard ke sebuah repo. Tujuh bersifat opsional dan tidak pernah menjadi bagian dari baseline AI-first; tinjauan lokal AI Diff Reviewer wajib sejak standar 2.3.0:
 
 - **Devcontainer** — kontainer pengembangan yang terisolasi dan dapat direproduksi dengan autentikasi AI-CLI yang persisten.
 - **Dailybot** — pelaporan kemajuan dan milestone secara best-effort untuk tim yang memakai Dailybot.
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan.
 - **Sistem desain** — sebuah `DESIGN.md` bercakupan antarmuka (di `docs/DESIGN.md`, dirujuk dari `AGENTS.md`) yang dinalar dari sumber desain nyata repo, dengan profil untuk UI visual, output CLI yang bergaya, dan perpesanan percakapan, sehingga agent menghasilkan keluaran antarmuka yang sesuai brand; ketika sebuah sistem desain terdeteksi, penawarannya wajib tetapi instalasinya dijaga oleh penerimaan — profil visual sangat direkomendasikan saat terdeteksi, profil CLI dan percakapan direkomendasikan ketika terdeteksi dan selalu ditanyakan.
 - **AI Diff Reviewer** — tinjauan lokal yang wajib: onboarding memasang [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, dan pemeriksaan keamanan setiap Final Review menjalankannya; Flow B opsional menambahkan gerbang merge PR CI yang berbagi ekstensi yang sama, ditawarkan secara eksplisit dan tidak pernah dipasang tanpa diminta.
+- **[Herdr](/id/kit/herdr)** — delegasi interaktif: sebuah rencana menyerahkan tugas terbatas kepada coding agent di pane Herdr lain dan mencatat satu-satunya balasan yang diizinkan.
+- **[DeepWorkPlan Vim](/id/kit/vim)** — editor terminal untuk Deep Work Plan, dengan indeks perintah, penjelajah rencana hanya-baca, dan penampil Markdown.
+- **[Agentkit](/id/kit/agentkit)** — satu perintah `ak` untuk setiap coding agent terminal, dan delegasi headless untuk tugas rencana yang terbatas.
 
 ### Ekosistem
 

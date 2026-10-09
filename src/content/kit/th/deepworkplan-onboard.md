@@ -35,14 +35,16 @@ usage: /deepworkplan-onboard
 
 repository หนึ่งสอดคล้องกับมาตรฐานได้อย่างสมบูรณ์แม้ไม่มีแอดออนแบบเลือกใช้ใดเลย การตรวจสอบในเครื่องของ AI Diff Reviewer เป็นส่วนหนึ่งของพื้นฐานตั้งแต่มาตรฐาน 2.3.0 สภาพจริงที่ตรวจพบมีน้ำหนักเหนือสมมติฐานของพรีเซ็ตเสมอ
 
-## อ้างอิงสคีมา v6
+## อ้างอิงสคีมา v7
 
-แค็ตตาล็อกสคีมาที่เครื่องอ่านได้สำหรับแผน v6 เผยแพร่ที่ URL คงที่เหล่านี้ live projection ของ v6 เป็น snapshot; ไม่มี `plan-state/v6.json` แผน v5 ที่มีอยู่ยังคงใช้สคีมาสถานะ v5 และแผนเก่าจะไม่ถูกเขียนทับโดยไม่มีการแจ้ง
+แค็ตตาล็อกสคีมาที่เครื่องอ่านได้สำหรับแผน v7 — ค่าเริ่มต้นของแพ็ก 7.x ปัจจุบัน — เผยแพร่ที่ URL คงที่เหล่านี้ live projection เป็น snapshot ที่ใช้ร่วมกับ v6; ไม่มี `plan-state/v6.json` หรือ `plan-state/v7.json`
 
-- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
-- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
-- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
-- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
-- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v7.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v7.json (สัญญา v6 บวกตัวระบุงาน `parallel_safe` แบบเลือกได้)
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (เพิ่มเหตุการณ์ `delegation`)
+- **Plan snapshot (live projection ที่ใช้ร่วมกับ v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Context manifest (ใช้ร่วมกับ v6):** https://deepworkplan.com/schema/context-manifest/v6.json
+
+แผน v6 ยังคงใช้สคีมา v6 ของตน ([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [contract](https://deepworkplan.com/schema/plan-contract/v6.json), [journal event](https://deepworkplan.com/schema/journal-event/v6.json)); แผน v5 ที่มีอยู่ยังคงใช้สคีมาสถานะ v5 และแผนเก่าจะไม่ถูกเขียนทับโดยไม่มีการแจ้ง
 
 แพ็ก 7.x ปัจจุบันสร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายต้องมีคำขออย่างชัดเจน แผนใหม่จะได้รับ ID ตัวเลขที่เพิ่มขึ้นตามลำดับและมีอย่างน้อยสามหลัก (เช่น `PLAN_001_add_payment_webhooks/`) สคีมา v5 ที่ตรึงไว้จะนับ ID ตัวเลขเป็นหนึ่งคำ ดังนั้น slug ของ v5 จึงมี 2–4 คำ ส่วน slug ของ v7 มี 2–5 คำ โฟลเดอร์เดิมที่ไม่มีหมายเลข `PLAN_<slug>/` ยังคงอ่านได้และจะไม่มีการเปลี่ยนชื่อ หากมีแผนที่มีหมายเลข `latest` จะหมายถึงแผนที่มี ID ตัวเลขสูงสุด.

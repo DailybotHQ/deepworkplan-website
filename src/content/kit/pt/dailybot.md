@@ -126,7 +126,7 @@ Referência pública: [dailybot.com/skill.md](https://www.dailybot.com/skill.md)
 
 ## Fluxo de integração
 
-Durante a **Fase 7b** do `onboard` DWP, após o scaffolding AI-first central, o fluxo oferece os quatro addons opcionais (a revisão local do AI Diff Reviewer já foi instalada na Fase 7a). Se o programador aceitar Dailybot:
+Durante a **Fase 7b** do `onboard` DWP, após o scaffolding AI-first central, o fluxo oferece os sete addons opcionais (a revisão local do AI Diff Reviewer já foi instalada na Fase 7a). Se o programador aceitar Dailybot:
 
 1. Detetar configuração existente (skill, CLI, `.dailybot/profile.json`, hooks, passo de relatório).
 2. Oferecer instalação de skill/CLI através dos fluxos de consentimento do Dailybot.

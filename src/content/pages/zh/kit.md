@@ -49,13 +49,16 @@ onboard 流程所使用的逐技术栈推理指南，用于适配文档、技能
 
 ### 附加组件（可选）
 
-onboard 流程向仓库叠加的各项能力。其中四个是可选的，绝非 AI-first 基线的一部分；自标准 2.3.0 起，AI Diff Reviewer 本地审查为必备：
+onboard 流程向仓库叠加的各项能力。其中七个是可选的，绝非 AI-first 基线的一部分；自标准 2.3.0 起，AI Diff Reviewer 本地审查为必备：
 
 - **Devcontainer** —— 一个可复现、隔离的开发容器，具备持久的 AI-CLI 认证。
 - **Dailybot** —— 面向使用 Dailybot 的团队的尽力而为式进展与里程碑报告。
 - **Dependency upgrade** —— 包管理器无关、分批次、经验证、可回退的升级。
 - **Design system** —— 一份限定于界面范围的 `DESIGN.md`（位于 `docs/DESIGN.md`，从 `AGENTS.md` 引用），从仓库真实的设计来源推理而来，并为可视化 UI、带样式的 CLI 输出与会话式消息提供配置档，使代理生成契合品牌的界面输出；检测到设计系统时提供该提案是必须的，而安装以明确接受为前提——可视化配置档在检测到时受到强烈推荐，CLI 与会话式配置档在检测到时被推荐且始终先询问。
 - **AI Diff Reviewer** —— 必备的本地审查：接入时安装 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 与 `.review/extension.md`，且每份 Final Review 的安全审查环节都会运行它；可选的 Flow B 添加一个共享同一扩展的 CI PR 合并门控——明确提供，绝不未经请求安装。
+- **[Herdr](/zh/kit/herdr)** —— 交互式委托：计划把一项有界任务交给另一个 Herdr 窗格中的编码代理，并记录其唯一一次获授权的回复。
+- **[DeepWorkPlan Vim](/zh/kit/vim)** —— Deep Work Plan 的终端编辑器，提供命令索引、只读计划浏览器和 Markdown 查看器。
+- **[Agentkit](/zh/kit/agentkit)** —— 一个 `ak` 命令覆盖所有终端编码代理，并以无头方式委托有界的计划任务。
 
 ### 生态系统
 

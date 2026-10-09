@@ -187,7 +187,7 @@ metodyki), zamiast nadpisywać — i potwierdź z użytkownikiem przed zastąpie
 6. **`.dwp/` + `tmp/`.** Utwórz szkielet `.dwp/` objętego gitignore z `plans/`, a także przestrzeń roboczą `tmp/`
    — obie dodane do `.gitignore` w sposób nieniszczący (dopisz, nigdy nie przepisuj). Nie są wymienne: wszystko, co przepływ wytwarza **na temat planu** — analiza, rejestr skills, przegląd bezpieczeństwa, logi bramek, raporty audytu — musi znaleźć się w `.dwp/plans/PLAN_001_<slug>/analysis_results/` tego właśnie planu, nigdy w katalogu głównym repozytorium ani w `tmp/`. `tmp/` jest dla pracy, której żaden plan już nie odczyta.
 
-Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slug v6 ma 2–5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.
+Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slugi v6 i v7 mają 2–5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.
 
 ## 4. Zainstaluj wymagany przegląd lokalny, potem zaproponuj opcjonalne dodatki
 

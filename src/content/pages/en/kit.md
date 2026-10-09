@@ -49,13 +49,16 @@ and a generic fallback.
 
 ### Addons (opt-in)
 
-Capabilities the onboard flow layers onto a repo. Four are optional and never part of the AI-first baseline; the AI Diff Reviewer local review is required since standard 2.3.0:
+Capabilities the onboard flow layers onto a repo. Seven are optional and never part of the AI-first baseline; the AI Diff Reviewer local review is required since standard 2.3.0:
 
 - **Devcontainer** — a reproducible, isolated dev container with persistent AI-CLI auth.
 - **Dailybot** — plan-lifecycle reporting (kickoff, significant task, blocked, completion) for teams using Dailybot, plus access to the full Dailybot agent skill (3.23.3: chat, check-ins, forms, ask AI, Plan, per-repo API keys, and more).
 - **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades.
 - **Design system** — an interface-scoped `DESIGN.md` (at `docs/DESIGN.md`, referenced from `AGENTS.md`) reasoned from the repo's real design source, with profiles for visual UI, styled CLI output, and conversational messaging, so agents generate on-brand interface output; a detected design system makes the offer mandatory while installation stays acceptance-gated — the visual profile is strongly recommended when detected, the CLI and conversational profiles are recommended when detected and always asked about.
 - **AI Diff Reviewer** — the required local review: onboarding installs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, and every Final Review's security pass runs it; optional Flow B adds a CI PR merge gate sharing the same extension, offered explicitly and never installed unrequested.
+- **[Herdr](/kit/herdr)** — interactive delegation: a plan hands a bounded task to a coding agent in another Herdr pane and records its single authorized reply.
+- **[DeepWorkPlan Vim](/kit/vim)** — the terminal editor for Deep Work Plan, with a command index, a read-only plan browser, and a Markdown viewer.
+- **[Agentkit](/kit/agentkit)** — one `ak` command for every terminal coding agent, and headless delegation of bounded plan tasks.
 
 ### Ecosystem
 

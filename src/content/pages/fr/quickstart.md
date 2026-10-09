@@ -199,7 +199,7 @@ méthodologie) au lieu d’écraser — et confirmez avec l’utilisateur avant 
 6. **`.dwp/` + `tmp/`.** Échafaudez un `.dwp/` ignoré par git avec `plans/`, ainsi qu’un espace de travail
  temporaire `tmp/` — tous deux ajoutés au `.gitignore` de manière non destructive (ajouter, jamais réécrire). Les deux ne sont pas interchangeables : tout ce qu'un flux produit **au sujet d'un plan** — l'analyse, le registre des skills, la revue de sécurité, les journaux de barrières, les rapports d'audit — doit se trouver dans le `.dwp/plans/PLAN_001_<slug>/analysis_results/` de ce plan, jamais à la racine du dépôt ni dans `tmp/`. `tmp/` est réservé au travail qu'aucun plan ne relira.
 
-Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
+Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6 et v7, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
 
 ## 4. Installer la revue locale requise, puis proposer les addons facultatifs
 

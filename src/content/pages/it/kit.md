@@ -49,13 +49,16 @@ e un fallback generico.
 
 ### Addon (opt-in)
 
-Capacità che il flusso di onboard aggiunge a un repo. Quattro sono opzionali e mai parte della baseline AI-first; la revisione locale AI Diff Reviewer è richiesta dallo standard 2.3.0:
+Capacità che il flusso di onboard aggiunge a un repo. Sette sono opzionali e mai parte della baseline AI-first; la revisione locale AI Diff Reviewer è richiesta dallo standard 2.3.0:
 
 - **Devcontainer** — un dev container riproducibile e isolato con autenticazione AI-CLI persistente.
 - **Dailybot** — report del ciclo di vita del piano (kickoff, attività significativa, bloccato, completamento) per i team che usano Dailybot, più accesso alla skill agente Dailybot completa (3.23.3: chat, check-in, form, ask AI, Plan, API key per repository e altro).
 - **Dependency upgrade** — aggiornamenti indipendenti dal package manager, a lotti, validati e annullabili.
 - **Design system** — un `DESIGN.md` con ambito di interfaccia (in `docs/DESIGN.md`, referenziato da `AGENTS.md`) ragionato dalla fonte di design reale del repo, con profili per UI visuale, output CLI stilizzato e messaggistica conversazionale, così che gli agenti generino output di interfaccia on-brand; quando un design system viene rilevato l'offerta è obbligatoria ma l'installazione è subordinata a un'accettazione — il profilo visuale è fortemente raccomandato quando rilevato, mentre i profili CLI e conversazionale sono raccomandati quando rilevati e sempre proposti con una domanda.
 - **AI Diff Reviewer** — la revisione locale richiesta: l'onboarding installa [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, e il passaggio di sicurezza di ogni Final Review la esegue; il Flow B opzionale aggiunge un gate di merge PR in CI che condivide la stessa estensione, offerto esplicitamente e mai installato senza richiesta.
+- **[Herdr](/it/kit/herdr)** — delega interattiva: un piano affida un’attività delimitata a un agente di coding in un altro pannello Herdr e registra la sua unica risposta autorizzata.
+- **[DeepWorkPlan Vim](/it/kit/vim)** — l’editor da terminale per Deep Work Plan, con un indice dei comandi, un browser dei piani in sola lettura e un visualizzatore Markdown.
+- **[Agentkit](/it/kit/agentkit)** — un unico comando `ak` per ogni agente di coding da terminale e la delega headless di attività delimitate del piano.
 
 ### Ecosistema
 

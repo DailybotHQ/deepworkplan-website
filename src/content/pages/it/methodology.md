@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## La metodologia Deep Work Plan
 
-Il pacchetto 6.x attuale crea per impostazione predefinita i nuovi piani in v6. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita.
+Il pacchetto 7.x attuale crea per impostazione predefinita i nuovi piani in v7. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita.
 Deep Work Plan (DWP) è una metodologia aperta e indipendente dal framework per condurre lavoro di ingegneria strutturato e autonomo con agenti di coding AI. Trasforma un obiettivo vago in un piano revisionabile che un agente può eseguire, mettere in pausa, riprendere e su cui riferire — senza perdere il contesto.
 
 DWP poggia su tre pilastri.

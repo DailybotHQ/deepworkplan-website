@@ -1,6 +1,6 @@
 ---
 title: Eklentiler
-description: "DWP eklentileri: dört isteğe bağlı uzantı, gerekli AI Diff Reviewer yerel incelemesi ve isteğe bağlı CI yüzeyi, eklenti sözleşmesi ve kit kavramları."
+description: "DWP eklentileri: yedi isteğe bağlı uzantı, gerekli AI Diff Reviewer yerel incelemesi ve isteğe bağlı CI yüzeyi, eklenti sözleşmesi ve kit kavramları."
 order: 6
 lang: tr
 section: Addons
@@ -8,9 +8,9 @@ section: Addons
 
 # Eklentiler
 
-> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel v6 standardı, [şartname dizininde](/spec) listelenen geçerli `V6_*.md` uzantılarını da gerektirir. Mevcut v5 planları kayıtlı kurallarını korur.
+> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel standart DWP 7.0.0, [şartname dizininde](/spec) listelenen geçerli `V6_*.md` ve `V7_*.md` uzantılarını da gerektirir. Mevcut v5 ve v6 planları kayıtlı kurallarını korur.
 
-**Sürüm 2.1.0.** Eklentiler, temel Deep Work Plan metodolojisine uzantılardır. Beşin dördü isteğe bağlıdır ve **uyumluluk için asla gerekli değildir** — sıfır isteğe bağlı eklentili bir depo tamamen AI-first ve DWP uyumludur. Her isteğe bağlı eklenti onboarding sırasında sunulur, açıkça kabul veya reddedilir ve — kabul edildiğinde — mevcut kurulumu ezmek yerine **uzlaştırır**. Bir bileşen beyan edilen istisnadır: 2.3.0 standardından itibaren **AI Diff Reviewer yerel incelemesi** gerekli temelin bir parçasıdır — onboarding onu kurar ve her Final Review onu çalıştırır — CI yüzeyi ise isteğe bağlı kalır.
+**Sürüm 2.1.0.** Eklentiler, temel Deep Work Plan metodolojisine uzantılardır. Sekizin yedisi isteğe bağlıdır ve **uyumluluk için asla gerekli değildir** — sıfır isteğe bağlı eklentili bir depo tamamen AI-first ve DWP uyumludur. Her isteğe bağlı eklenti onboarding sırasında sunulur, açıkça kabul veya reddedilir ve — kabul edildiğinde — mevcut kurulumu ezmek yerine **uzlaştırır**. Bir bileşen beyan edilen istisnadır: 2.3.0 standardından itibaren **AI Diff Reviewer yerel incelemesi** gerekli temelin bir parçasıdır — onboarding onu kurar ve her Final Review onu çalıştırır — CI yüzeyi ise isteğe bağlı kalır.
 
 ## Eklenti sözleşmesi
 
@@ -25,9 +25,9 @@ Her üretim eklentisi dört zorunlu bileşen sunar:
 
 Keşif: `onboard` akışı `skills/deepworkplan/addons/` dizinini numaralandırır ve her eklentiyi temel iskeletten sonra **Faz 7b**'de opt-in adım olarak sunar.
 
-## Üretim eklentileri (beş)
+## Üretim eklentileri (sekiz)
 
-Bugün beş eklenti sunulmaktadır — dört opt-in artı gerekli yerel inceleme. Her birinin kullanıcıya yönelik ayrıntılı bir **kit katalog sayfası** ve Deep Work Plan skill'i içinde **normatif spec**'i vardır.
+Bugün sekiz eklenti sunulmaktadır — yedi opt-in artı gerekli yerel inceleme. Her birinin kullanıcıya yönelik ayrıntılı bir **kit katalog sayfası** ve Deep Work Plan skill'i içinde **normatif spec**'i vardır. Bunlardan dördü — devcontainer, Herdr, DeepWorkPlan Vim ve Agentkit — kendi deposu ve sürüm döngüsü olan bir ürüne etiketle sabitlenmiş ince entegrasyon katmanlarıdır; her ürün Deep Work Plan olmadan çalışır. Kabul edilen bir eklenti `.dwp/config.json` eklenti kaydına (DWP 7.0.0) yazılır; bu kayıt yalnızca sunabilir veya güçlendirebilir — uyumluluğu ya da bir planı asla koşula bağlamaz.
 
 ### Devcontainer (birinci eklenti)
 
@@ -79,6 +79,33 @@ Tutarlı UI, CLI veya konuşma çıktısı için herhangi bir kodlama agent'ın�
 - **Eşlik (Flow B):** paylaşılan `prompt.md` + uzantı metodoloji/önem derecesini hizalar; CI Yineleme Farkındalıklı İnceleme, yerel geçiş tam kalırken 2.+ turları kısaltabilir
 - **Sağlayıcıdan bağımsız güvence:** hiçbir Deep Work Plan akışı ticari bir servis, CI sağlayıcısı veya sır gerektirmez — inceleyici, geliştiricinin kendi kodlama agent'ı tarafından çalıştırılan MIT lisanslı, etikete sabitlenmiş bir skill'dir
 - **Uyumluluk:** `verify`, eksik bir yerel inceleyiciyi 2.3.0 veya daha yeni bir standart beyan eden depolar için bir başarısızlık olarak, eski depolar için ise bir harness-sürüm bulgusu olarak raporlar
+
+### Herdr (altıncı eklenti)
+
+v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (sabitlenmiş `v0.1.0`, protokol `1`) için ince bir entegrasyon katmanı.
+
+- **Kit sayfası:** [Herdr](/kit/herdr)
+- **Ne ekler:** bir plan, sınırlı bir görevi aynı makinede veya Herdr'ın SSH üzerinden ulaştığı bir makinede, başka bir [Herdr](https://herdr.dev) panelindeki bir kodlama agent'ına devredebilir ve onun tek yetkili yanıtını journal'a kaydedebilir
+- **Davranış:** eşler arası protokol (damga, yetki, yanıt, döngü koruması, derinlik ve yayılım sınırları) pakette değil, herdr-peers içinde yaşar; her kullanım `agent_delegation` sözleşme yetkisini gerektirir ve bir delegenin sonucu, planın kendi çalıştırıcısı onu gözlemleyene kadar bir iddia olarak kalır
+- **Ne zaman sunulur:** Faz 7b sırasında açık opt-in; `herdr` ve `herdr-peers` için salt okunur tespit; taşıyıcı yalnızca bir Herdr oturumu içinde kullanılabilir
+
+### DeepWorkPlan Vim (yedinci eklenti)
+
+Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v0.4.2`, arayüz `1`) için ince bir entegrasyon katmanı.
+
+- **Kit sayfası:** [DeepWorkPlan Vim](/kit/vim)
+- **Ne ekler:** agent'lar ve insanlar için isteğe bağlı, makine düzeyinde bir düzenleyici yüzeyi — üretilmiş bir komut dizini, salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi; her iddia ürünün sabitlenmiş, makine tarafından okunabilir yüzeyinden okunur
+- **Davranış:** mevcut bir Neovim yapılandırmasının üzerine açık onay olmadan asla yazılmaz; tespit salt okunurdur
+- **Ne zaman sunulur:** Faz 7b sırasında açık opt-in; Neovim 0.12+ eksik olduğunda yalnızca bilgilendirme amaçlı
+
+### Agentkit (sekizinci eklenti)
+
+v7 planlarının **arayüzsüz (headless)** devretme taşıyıcısı: [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, sabitlenmiş `v0.1.1`, arayüz `1`) için ince bir entegrasyon katmanı.
+
+- **Kit sayfası:** [Agentkit](/kit/agentkit)
+- **Ne ekler:** terminal kodlama agent'ları üzerinde tek bir `ak` komut yüzeyi; sınırlı bir plan görevini arayüzsüz çalıştırmak için kullanılır; `subagents`, `cancel_children` ve `model_routing` yeteneklerini yalnızca çalışma zamanında, etkinleştirildiğinde, tespit edildiğinde ve uyumlu bir arayüz üzerinde olduğunda sağlar
+- **Davranış:** her kullanım `agent_delegation` sözleşme yetkisini gerektirir; eklenti kodlama agent'ı CLI'larını asla kendi başına kurmaz ve sağlayıcı anahtar değerlerini asla okumaz
+- **Ne zaman sunulur:** Faz 7b sırasında açık opt-in; `ak doctor --json` ile salt okunur tespit
 
 ## Skill'ler
 

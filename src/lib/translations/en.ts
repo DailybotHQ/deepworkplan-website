@@ -634,7 +634,7 @@ export const en: SiteTranslations = {
       addon: {
         title: 'Addons (opt-in)',
         description:
-          'Capabilities the onboard flow layers onto a repo: the required AI Diff Reviewer local review plus four optional addons that are never part of the AI-first baseline.',
+          'Capabilities the onboard flow layers onto a repo: the required AI Diff Reviewer local review plus seven optional addons that are never part of the AI-first baseline.',
       },
     },
     viewDetail: 'View details',
@@ -714,7 +714,7 @@ export const en: SiteTranslations = {
       {
         title: 'Local review and opt-in addons',
         description:
-          'Onboarding installs the required AI Diff Reviewer local review (its CI gate stays optional) and offers four opt-in addons — devcontainer, Dailybot, dependency-upgrade, and design-system — that you accept only when they fit. A repo is fully conformant with zero optional addons. Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands beyond the baseline.',
+          'Onboarding installs the required AI Diff Reviewer local review (its CI gate stays optional) and offers seven opt-in addons — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, and Agentkit — that you accept only when they fit. A repo is fully conformant with zero optional addons. Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands beyond the baseline.',
       },
       {
         title: 'Plan and execute',

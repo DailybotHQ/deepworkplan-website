@@ -126,7 +126,7 @@ Dailybot 에이전트 스킬 설치는 DWP 애드온이 연결하는 것 이상�
 
 ## 온보딩 흐름
 
-DWP `onboard` **7b 단계**에서 핵심 AI-first 스캐폴딩 후 네 가지 선택적 애드온을 제안합니다(AI Diff Reviewer 로컬 리뷰는 이미 7a 단계에서 설치됨). 개발자가 Dailybot을 수락하면:
+DWP `onboard` **7b 단계**에서 핵심 AI-first 스캐폴딩 후 일곱 가지 선택적 애드온을 제안합니다(AI Diff Reviewer 로컬 리뷰는 이미 7a 단계에서 설치됨). 개발자가 Dailybot을 수락하면:
 
 1. 기존 설정 감지(스킬, CLI, `.dailybot/profile.json`, 훅, 보고 단계).
 2. Dailybot 동의 흐름을 통해 스킬/CLI 설치 제안.

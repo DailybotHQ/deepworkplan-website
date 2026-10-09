@@ -642,7 +642,7 @@ export const it: SiteTranslations = {
       addon: {
         title: 'Addon (opt-in)',
         description:
-          'Capacità che il flusso di onboard aggiunge a un repo: la revisione locale obbligatoria di AI Diff Reviewer più quattro addon opzionali che non fanno mai parte della baseline AI-first.',
+          'Capacità che il flusso di onboard aggiunge a un repo: la revisione locale obbligatoria di AI Diff Reviewer più sette addon opzionali che non fanno mai parte della baseline AI-first.',
       },
     },
     viewDetail: 'Visualizza i dettagli',
@@ -721,7 +721,7 @@ export const it: SiteTranslations = {
       {
         title: 'Revisione locale e addon opt-in',
         description:
-          'L’onboarding installa la revisione locale obbligatoria di AI Diff Reviewer (il suo gate CI resta opzionale) e offre quattro addon opt-in — devcontainer, Dailybot, dependency-upgrade e design-system — che accetta solo quando sono pertinenti. Un repo è pienamente conforme anche con zero addon opzionali. Usi /skill-create e /agent-create (la sub-skill author) per far crescere skill, agenti e comandi oltre la configurazione di base.',
+          'L’onboarding installa la revisione locale obbligatoria di AI Diff Reviewer (il suo gate CI resta opzionale) e offre sette addon opt-in — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim e Agentkit — che accetta solo quando sono pertinenti. Un repo è pienamente conforme anche con zero addon opzionali. Usi /skill-create e /agent-create (la sub-skill author) per far crescere skill, agenti e comandi oltre la configurazione di base.',
       },
       {
         title: 'Pianifichi ed esegua',

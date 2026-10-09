@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP specification
 
-> **Current standard: v6.** This is the retained v5 specification base with the current v6 lifecycle extensions. The 6.x pack creates new plans with v6 by default; existing plans keep their recorded generation. The v6 manifest and live snapshot are published at [plan-manifest/v6.json](https://deepworkplan.com/schema/plan-manifest/v6.json) and [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
+> **Current standard: v7 (DWP 7.0.0).** This is the retained v5 specification base with the v6 lifecycle extensions and the v7 contract generation. The 7.x pack creates new plans with v7 by default; an explicit `v6` request still materializes a v6 plan, and existing plans keep their recorded generation. The v7 manifest and contract are published at [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) and [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json); the live snapshot stays at [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 
 **Version 5.0.0. Status: Stable.** This document is the normative specification for the Deep Work Plan (DWP) methodology. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
@@ -43,7 +43,7 @@ A new plan MUST use a numbered directory under `.dwp/plans/`, such as `PLAN_001_
 
 For retained v5 plans, a plan MAY additionally carry the machine-readable state layer: `manifest.json` (static identity, written once at materialization) and `state.json` (live per-task execution state). The retained v5 state layer is RECOMMENDED for v5 plans and REQUIRED for their unattended execution and for agent workspaces without git. See [Plan state](/spec/plan-state).
 
-New plans receive monotonically increasing numeric IDs with at least three digits (for example, `PLAN_001_add_payment_webhooks/`). Because the frozen v5 schemas count the numeric ID as a word, v5 slugs contain 2–4 words; v6 slugs contain 2–5 words. Existing unnumbered `PLAN_<slug>/` folders remain readable and are never renamed. When numbered plans exist, `latest` resolves to the plan with the highest numeric ID.
+New plans receive monotonically increasing numeric IDs with at least three digits (for example, `PLAN_001_add_payment_webhooks/`). Because the frozen v5 schemas count the numeric ID as a word, v5 slugs contain 2–4 words; v6 and v7 slugs contain 2–5 words. Existing unnumbered `PLAN_<slug>/` folders remain readable and are never renamed. When numbered plans exist, `latest` resolves to the plan with the highest numeric ID.
 
 ## Task anatomy
 
