@@ -80,8 +80,10 @@ const nav = getTranslations(lang as Language).nav;
     <Footer lang={lang} />
     <script>
       import { setupOutboundTracking, trackScrollDepth } from '@/lib/analytics';
+      import { installVimHostHomeLinks } from '@/lib/vim-host';
       setupOutboundTracking();
       trackScrollDepth();
+      installVimHostHomeLinks();
     </script>
     <WebMcp />
   </body>
