@@ -44,8 +44,16 @@ describe('getInstallerFacts', () => {
 
 describe('installer provenance', () => {
   it('serves the byte-identical installer of the pinned product release', () => {
-    expect(VIM_INSTALLER_TAG).toBe('v0.4.2');
+    expect(VIM_INSTALLER_TAG).toBe('v0.5.0');
     expect(getInstallerFacts().sha256).toBe(VIM_INSTALLER_TAG_SHA256);
+  });
+
+  it('serves a sha256sum-format checksum of the served installer', () => {
+    const checksum = readFileSync(
+      resolve(process.cwd(), 'public/vim/install.sh.sha256'),
+      'utf8'
+    );
+    expect(checksum).toBe(`${VIM_INSTALLER_TAG_SHA256}  install.sh\n`);
   });
 });
 

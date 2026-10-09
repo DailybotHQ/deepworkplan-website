@@ -48,7 +48,7 @@ const i18n = {
       'On Windows these commands do not apply; the repository README documents the manual path.',
     windowsLink: 'Windows install path',
     pinNote:
-      'To install a specific branch, tag or commit, set DWP_VIM_REF. Older tags may not include every feature described on this page.',
+      "To choose a release, pass --version or set DWP_VIM_VERSION: an exact version, a '>=' floor or latest. DWP_VIM_REF takes a branch or a commit. Older releases may not include every feature described on this page.",
   },
   es: {
     copy: 'Copiar comando',
@@ -72,7 +72,7 @@ const i18n = {
       'En Windows estos comandos no aplican; el README del repositorio documenta la ruta manual.',
     windowsLink: 'Ruta de instalación en Windows',
     pinNote:
-      'Para instalar una rama, etiqueta o commit concretos, define DWP_VIM_REF. Las etiquetas antiguas pueden no incluir todas las funciones descritas en esta página.',
+      "Para elegir una versión, pasa --version o define DWP_VIM_VERSION: una versión exacta, un mínimo '>=' o latest. DWP_VIM_REF acepta una rama o un commit. Las versiones antiguas pueden no incluir todas las funciones descritas en esta página.",
   },
   pt: {
     copy: 'Copiar comando',
@@ -96,7 +96,7 @@ const i18n = {
       'No Windows, estes comandos não se aplicam; o README do repositório documenta o caminho manual.',
     windowsLink: 'Caminho de instalação no Windows',
     pinNote:
-      'Para instalar um ramo, etiqueta ou commit específico, defina DWP_VIM_REF. As etiquetas antigas podem não incluir todas as funcionalidades descritas nesta página.',
+      "Para escolher uma versão, passe --version ou defina DWP_VIM_VERSION: uma versão exata, um mínimo '>=' ou latest. DWP_VIM_REF aceita um ramo ou um commit. As versões antigas podem não incluir todas as funcionalidades descritas nesta página.",
   },
   zh: {
     copy: '复制命令',
@@ -119,7 +119,7 @@ const i18n = {
       '在 Windows 上，这些命令不适用；仓库 README 记录了手动安装路径。',
     windowsLink: 'Windows 安装路径',
     pinNote:
-      '如需安装指定的分支、标签或提交，请设置 DWP_VIM_REF。较旧的标签可能不包含本页描述的全部功能。',
+      "如需选择版本，请传入 --version 或设置 DWP_VIM_VERSION：精确版本、'>=' 最低版本或 latest。DWP_VIM_REF 用于指定分支或提交。较旧的版本可能不包含本页描述的全部功能。",
   },
   ja: {
     copy: 'コマンドをコピー',
@@ -144,7 +144,7 @@ const i18n = {
       'Windows ではこれらのコマンドは使えません。手動の手順はリポジトリの README に記載されています。',
     windowsLink: 'Windows のインストール手順',
     pinNote:
-      '特定のブランチ、タグ、コミットをインストールするには DWP_VIM_REF を設定します。古いタグには、このページで説明している機能がすべて含まれているとは限りません。',
+      "バージョンを選ぶには --version を渡すか DWP_VIM_VERSION を設定します。指定できるのは正確なバージョン、'>=' による下限、latest です。ブランチやコミットは DWP_VIM_REF で指定します。古いリリースには、このページで説明している機能がすべて含まれているとは限りません。",
   },
   de: {
     copy: 'Befehl kopieren',
@@ -169,7 +169,7 @@ const i18n = {
       'Unter Windows gelten diese Befehle nicht; die README des Repositorys beschreibt den manuellen Weg.',
     windowsLink: 'Installationsweg für Windows',
     pinNote:
-      'Um einen bestimmten Branch, Tag oder Commit zu installieren, setzen Sie DWP_VIM_REF. Ältere Tags enthalten möglicherweise nicht alle auf dieser Seite beschriebenen Funktionen.',
+      "Um eine Version zu wählen, übergeben Sie --version oder setzen Sie DWP_VIM_VERSION: eine exakte Version, eine Untergrenze mit '>=' oder latest. DWP_VIM_REF nimmt einen Branch oder Commit. Ältere Releases enthalten möglicherweise nicht alle auf dieser Seite beschriebenen Funktionen.",
   },
   fr: {
     copy: 'Copier la commande',
@@ -194,7 +194,7 @@ const i18n = {
       'Sous Windows, ces commandes ne s’appliquent pas ; le README du dépôt décrit la procédure manuelle.',
     windowsLink: 'Procédure d’installation sous Windows',
     pinNote:
-      'Pour installer une branche, une étiquette ou un commit précis, définissez DWP_VIM_REF. Les anciennes étiquettes peuvent ne pas inclure toutes les fonctions décrites sur cette page.',
+      "Pour choisir une version, passez --version ou définissez DWP_VIM_VERSION : une version exacte, un minimum '>=' ou latest. DWP_VIM_REF accepte une branche ou un commit. Les anciennes versions peuvent ne pas inclure toutes les fonctions décrites sur cette page.",
   },
   ko: {
     copy: '명령 복사',
@@ -219,7 +219,7 @@ const i18n = {
       'Windows에서는 이 명령들을 쓸 수 없어요. 수동 설치 방법은 저장소 README에 있어요.',
     windowsLink: 'Windows 설치 방법',
     pinNote:
-      '특정 브랜치, 태그, 커밋을 설치하려면 DWP_VIM_REF를 설정하세요. 오래된 태그에는 이 페이지에서 설명하는 기능이 모두 들어 있지 않을 수 있어요.',
+      "버전을 고르려면 --version을 넘기거나 DWP_VIM_VERSION을 설정하세요. 정확한 버전, '>=' 최소 버전, latest를 쓸 수 있어요. 브랜치나 커밋은 DWP_VIM_REF로 지정해요. 오래된 릴리스에는 이 페이지에서 설명하는 기능이 모두 들어 있지 않을 수 있어요.",
   },
   ru: {
     copy: 'Копировать команду',
@@ -243,7 +243,7 @@ const i18n = {
       'В Windows эти команды не применяются; ручной путь описан в README репозитория.',
     windowsLink: 'Путь установки для Windows',
     pinNote:
-      'Чтобы установить конкретную ветку, тег или коммит, задайте DWP_VIM_REF. Старые теги могут не содержать всех возможностей, описанных на этой странице.',
+      "Чтобы выбрать версию, передайте --version или задайте DWP_VIM_VERSION: точную версию, нижнюю границу '>=' или latest. DWP_VIM_REF принимает ветку или коммит. Старые релизы могут не содержать всех возможностей, описанных на этой странице.",
   },
   it: {
     copy: 'Copia comando',
@@ -267,7 +267,7 @@ const i18n = {
       'Su Windows questi comandi non si applicano; il README del repository descrive il percorso manuale.',
     windowsLink: 'Percorso di installazione su Windows',
     pinNote:
-      'Per installare un ramo, un tag o un commit specifico, imposti DWP_VIM_REF. I tag meno recenti potrebbero non includere tutte le funzioni descritte in questa pagina.',
+      "Per scegliere una versione, passi --version o imposti DWP_VIM_VERSION: una versione esatta, un minimo '>=' o latest. DWP_VIM_REF accetta un ramo o un commit. Le versioni meno recenti potrebbero non includere tutte le funzioni descritte in questa pagina.",
   },
   tr: {
     copy: 'Komutu kopyala',
@@ -291,7 +291,7 @@ const i18n = {
       'Windows’ta bu komutlar geçerli değildir; elle kurulum yolu deponun README dosyasında anlatılır.',
     windowsLink: 'Windows kurulum yolu',
     pinNote:
-      'Belirli bir dal, etiket veya commit kurmak için DWP_VIM_REF değerini ayarlayın. Eski etiketler bu sayfada anlatılan tüm özellikleri içermeyebilir.',
+      "Bir sürüm seçmek için --version verin veya DWP_VIM_VERSION değerini ayarlayın: tam bir sürüm, '>=' ile bir alt sınır ya da latest. DWP_VIM_REF bir dal veya commit alır. Eski sürümler bu sayfada anlatılan tüm özellikleri içermeyebilir.",
   },
   id: {
     copy: 'Salin perintah',
@@ -315,7 +315,7 @@ const i18n = {
       'Di Windows, perintah-perintah ini tidak berlaku; README repositori mendokumentasikan jalur manual.',
     windowsLink: 'Jalur instalasi Windows',
     pinNote:
-      'Untuk memasang cabang, tag, atau commit tertentu, setel DWP_VIM_REF. Tag lama mungkin tidak memuat semua fitur yang dijelaskan di halaman ini.',
+      "Untuk memilih versi, berikan --version atau setel DWP_VIM_VERSION: versi persis, batas minimum '>=', atau latest. DWP_VIM_REF menerima cabang atau commit. Rilis lama mungkin tidak memuat semua fitur yang dijelaskan di halaman ini.",
   },
   vi: {
     copy: 'Sao chép lệnh',
@@ -339,7 +339,7 @@ const i18n = {
       'Trên Windows, các lệnh này không áp dụng; README của kho mã mô tả cách cài thủ công.',
     windowsLink: 'Cách cài trên Windows',
     pinNote:
-      'Để cài một nhánh, thẻ hoặc commit cụ thể, hãy đặt DWP_VIM_REF. Các thẻ cũ có thể không có đủ mọi tính năng được mô tả trên trang này.',
+      "Để chọn phiên bản, hãy truyền --version hoặc đặt DWP_VIM_VERSION: một phiên bản chính xác, mức tối thiểu '>=' hoặc latest. DWP_VIM_REF nhận một nhánh hoặc một commit. Các bản phát hành cũ có thể không có đủ mọi tính năng được mô tả trên trang này.",
   },
   hi: {
     copy: 'कमांड कॉपी करें',
@@ -363,7 +363,7 @@ const i18n = {
       'Windows पर ये कमांड लागू नहीं होते; मैन्युअल तरीका रिपॉज़िटरी के README में दिया है।',
     windowsLink: 'Windows इंस्टॉलेशन मार्ग',
     pinNote:
-      'किसी विशेष ब्रांच, टैग या कमिट को इंस्टॉल करने के लिए DWP_VIM_REF सेट करें। पुराने टैग में इस पृष्ठ पर बताई गई सभी सुविधाएँ नहीं हो सकतीं।',
+      "कोई संस्करण चुनने के लिए --version दें या DWP_VIM_VERSION सेट करें: सटीक संस्करण, '>=' न्यूनतम सीमा या latest। ब्रांच या कमिट के लिए DWP_VIM_REF का उपयोग करें। पुराने रिलीज़ में इस पृष्ठ पर बताई गई सभी सुविधाएँ नहीं हो सकतीं।",
   },
   pl: {
     copy: 'Kopiuj polecenie',
@@ -387,7 +387,7 @@ const i18n = {
       'W systemie Windows te polecenia nie działają; ręczną ścieżkę opisuje README repozytorium.',
     windowsLink: 'Instalacja w systemie Windows',
     pinNote:
-      'Aby zainstalować konkretną gałąź, tag lub commit, ustaw DWP_VIM_REF. Starsze tagi mogą nie zawierać wszystkich funkcji opisanych na tej stronie.',
+      "Aby wybrać wersję, przekaż --version lub ustaw DWP_VIM_VERSION: dokładną wersję, dolną granicę '>=' albo latest. DWP_VIM_REF przyjmuje gałąź lub commit. Starsze wydania mogą nie zawierać wszystkich funkcji opisanych na tej stronie.",
   },
   uk: {
     copy: 'Копіювати команду',
@@ -412,7 +412,7 @@ const i18n = {
       'У Windows ці команди не застосовуються; ручний шлях описано в README репозиторію.',
     windowsLink: 'Шлях встановлення для Windows',
     pinNote:
-      'Щоб встановити певну гілку, тег або коміт, задайте DWP_VIM_REF. Старі теги можуть не містити всіх можливостей, описаних на цій сторінці.',
+      "Щоб вибрати версію, передайте --version або задайте DWP_VIM_VERSION: точну версію, нижню межу '>=' або latest. DWP_VIM_REF приймає гілку або коміт. Старі релізи можуть не містити всіх можливостей, описаних на цій сторінці.",
   },
   th: {
     copy: 'คัดลอกคำสั่ง',
@@ -436,7 +436,7 @@ const i18n = {
       'บน Windows คำสั่งเหล่านี้ใช้ไม่ได้ ขั้นตอนแบบแมนนวลอยู่ใน README ของที่เก็บโค้ด',
     windowsLink: 'วิธีติดตั้งบน Windows',
     pinNote:
-      'หากต้องการติดตั้งแบรนช์ แท็ก หรือคอมมิตที่ระบุ ให้ตั้งค่า DWP_VIM_REF แท็กรุ่นเก่าอาจไม่มีฟีเจอร์ทั้งหมดที่อธิบายในหน้านี้',
+      "หากต้องการเลือกเวอร์ชัน ให้ส่ง --version หรือตั้งค่า DWP_VIM_VERSION เป็นเวอร์ชันที่ระบุแน่นอน ขั้นต่ำแบบ '>=' หรือ latest ส่วนแบรนช์หรือคอมมิตให้ใช้ DWP_VIM_REF รุ่นเก่าอาจไม่มีฟีเจอร์ทั้งหมดที่อธิบายในหน้านี้",
   },
 } as const;
 const t = i18n[lang as keyof typeof i18n] ?? i18n.en;

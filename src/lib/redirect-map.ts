@@ -54,7 +54,11 @@ export const REDIRECT_PAIRS: readonly RedirectPair[] = [
  * the canonical byte-identical artifact lives at `/vim/install.sh`
  * (`public/vim/install.sh`). `curl -fsSL` follows redirects (`-L`), so both
  * one-liners work, while authored copy everywhere uses the canonical form.
+ * `/install.sh.sha256` aliases the installer's checksum the same way, so the
+ * download → verify → run steps also work against the apex (and against
+ * vim.deepworkplan.com, which serves this same project).
  */
 export const ROOT_ONLY_REDIRECT_PAIRS: readonly RedirectPair[] = [
   { from: 'install.sh', to: 'vim/install.sh', status: 301 },
+  { from: 'install.sh.sha256', to: 'vim/install.sh.sha256', status: 301 },
 ];

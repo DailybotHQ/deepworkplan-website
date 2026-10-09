@@ -76,4 +76,17 @@ describe('public/_redirects', () => {
       false
     );
   });
+
+  it('aliases the apex installer and its checksum to /vim/', () => {
+    expect(ROOT_ONLY_REDIRECT_PAIRS).toContainEqual({
+      from: 'install.sh',
+      to: 'vim/install.sh',
+      status: 301,
+    });
+    expect(ROOT_ONLY_REDIRECT_PAIRS).toContainEqual({
+      from: 'install.sh.sha256',
+      to: 'vim/install.sh.sha256',
+      status: 301,
+    });
+  });
 });

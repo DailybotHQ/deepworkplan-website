@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** es el editor de terminal de Deep Work Plan: una configuración de Neovim para personas, y para agentes de programación, que trabajan en una terminal. Tus planes, tu documentación y un índice de todos los comandos quedan a una tecla de distancia.
 
-Es un producto aparte, ofrecido como el addon opcional `vim` de Deep Work Plan v7 (`v7.0.0`). Deep Work Plan funciona con cualquier editor o con ninguno, y el editor no requiere Deep Work Plan: lo añades a una máquina por separado y funciona como editor haya o no un plan. Esta página describe la versión **v0.4.2**.
+Es un producto aparte, ofrecido como el addon opcional `vim` de Deep Work Plan v7 (`v7.0.0`). Deep Work Plan funciona con cualquier editor o con ninguno, y el editor no requiere Deep Work Plan: lo añades a una máquina por separado y funciona como editor haya o no un plan. Esta página describe la versión **v0.5.0**.
 
 ## Por qué un editor de terminal para Deep Work Plan
 
@@ -60,37 +60,86 @@ Para leer en el sitio los archivos Markdown de un plan, `SPC m p` previsualiza e
 
 ## Instalación
 
-La instalación son tres comandos: descarga el script, compruébalo con el SHA-256 del archivo que sirve este sitio y luego ejecútalo. El instalador fija su propia versión, así que instala exactamente `v0.4.2`, la versión que describe esta página; `DWP_VIM_REF=main bash install.sh` sigue en su lugar la rama móvil `main`.
+La instalación son tres comandos: descarga el script, compruébalo con el SHA-256 del archivo que sirve este sitio y luego ejecútalo. El instalador fija su propia versión, así que instala exactamente `v0.5.0`, la versión que describe esta página, salvo que [elijas otra versión](#choose-a-version).
 
 <VimInstall lang="es" />
 
 En orden, el instalador:
 
-1. Comprueba tu sistema operativo y tu gestor de paquetes, e instala git, curl y un intérprete de Lua si falta alguno.
-2. Pregunta antes de tocar una configuración de Neovim existente. Si se canaliza sin terminal, se detiene y no cambia nada.
-3. Clona el repositorio en `~/.config/nvim`, o lo actualiza si ya está ahí.
-4. Ejecuta el propio `lua install.lua` del repositorio.
-5. Instala los plugins sin interfaz, así que no hace falta salir y volver a abrir.
+1. Comprueba tu sistema operativo y tu gestor de paquetes, e instala git, curl y un intérprete de Lua si falta alguno (ninguno con `--skip-packages`).
+2. Resuelve la versión: su propia versión, o la que pida `--version`.
+3. Con `--nvim X.Y.Z`, instala esa versión de Neovim en `~/.local/opt`, verificada con el SHA-256 que publica Neovim.
+4. Pregunta antes de tocar una configuración de Neovim existente. Sin terminal, se detiene y no cambia nada, salvo que `--yes` le indique que aparte esa configuración.
+5. Clona el repositorio en `~/.config/nvim`, o lo actualiza si ya está ahí.
+6. Ejecuta el propio `lua install.lua` del repositorio.
+7. Instala los plugins sin interfaz y los comprueba, así que no hace falta salir y volver a abrir. Con `--strict`, una instalación de plugins fallida o incompleta es un error.
 
-El script que se sirve aquí es una copia idéntica byte a byte de `install.sh` en la etiqueta `v0.4.2`. Para leerlo primero, descárgalo con `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, compara su SHA-256 con el valor mostrado arriba, léelo y ejecuta `bash install.sh`.
+El script que se sirve aquí es una copia idéntica byte a byte de `install.sh` en la etiqueta `v0.5.0`. Su suma de comprobación se sirve a su lado, en `https://deepworkplan.com/vim/install.sh.sha256`, así que puedes verificar la descarga con `shasum -a 256 -c install.sh.sha256` (en Linux, `sha256sum -c install.sh.sha256`). Para una comprobación desde un segundo origen, compárala con la línea de `install.sh` de `SHA256SUMS` en la versión publicada en GitHub. Ejecuta `bash install.sh --help` para ver todas las opciones.
+
+<a id="choose-a-version"></a>
+
+## Elegir una versión
+
+Por defecto, el instalador instala su propia versión, `v0.5.0`. Para elegir otra, define `DWP_VIM_VERSION` o pasa `--version`: ambos hacen lo mismo, así que usa el que se lea mejor; una opción tiene prioridad sobre el entorno. Cada uno acepta:
+
+| Forma | Ejemplo | Instala |
+|---|---|---|
+| Versión exacta | `0.5.0` o `v0.5.0` | Esa versión |
+| Versión mínima | `'>=0.4.2'` | La versión estable más reciente igual o superior al mínimo |
+| Más reciente | `latest` | La versión estable más reciente |
+
+Después de la descarga y de la comprobación de la suma anteriores:
+
+```bash
+# exact version
+DWP_VIM_VERSION=0.5.0 bash install.sh
+bash install.sh --version 0.5.0
+
+# minimum floor: the newest stable release at or above 0.4.2
+DWP_VIM_VERSION='>=0.4.2' bash install.sh
+
+# latest stable release
+bash install.sh --version latest
+```
+
+Pon el mínimo entre comillas, para que el shell no interprete `>` como una redirección. Las versiones solo se resuelven a etiquetas de versiones estables. Para una rama o un commit, define en su lugar `DWP_VIM_REF` (`DWP_VIM_REF=main` sigue `main`); una versión y una referencia que no coinciden son un error.
+
+### Contenedores y CI
+
+En una imagen o un trabajo de CI, donde no hay terminal y a menudo tampoco root, descarga y verifica el script, y luego ejecútalo en un solo paso con opciones que hacen reproducible el resultado:
+
+```bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
+curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
+sha256sum -c install.sh.sha256 && \
+bash install.sh --version 0.5.0 --nvim 0.12.5 --skip-packages --strict
+```
+
+- `--version 0.5.0` fija la versión del editor.
+- `--nvim 0.12.5` instala esa versión de Neovim en `~/.local/opt/nvim-v0.12.5`, enlazada como `~/.local/bin/nvim` y verificada con el SHA-256 que publica Neovim (Linux y macOS).
+- `--skip-packages` no instala ningún paquete del sistema: la imagen ya debe proporcionar git, curl y Lua.
+- `--strict` termina con un código distinto de cero cuando la instalación de plugins sin interfaz falla o deja plugins sin instalar.
+
+Cada opción tiene una variable de entorno equivalente (`DWP_VIM_VERSION`, `DWP_VIM_NVIM`, `DWP_VIM_SKIP_PACKAGES=1`, `DWP_VIM_STRICT=1`). Añade `--yes` solo cuando la imagen pueda contener ya una configuración de Neovim que deba apartarse.
 
 ## Requisitos y plataformas
 
-- Neovim 0.12 o más reciente. Instala Neovim primero; el instalador no lo instala.
+- Neovim 0.12 o más reciente. Instálalo tú mismo, o deja que el instalador añada una versión verificada con `--nvim X.Y.Z` (Linux y macOS).
 - Lua: `lua`, `lua5.4` o `luajit`. El instalador añade uno si falta.
-- macOS, Linux y WSL ejecutan el instalador. Windows tiene una ruta manual documentada en el README del repositorio: instala Neovim con winget, clona el repositorio en `%LOCALAPPDATA%\nvim` y ejecuta `lua install.lua` desde Git Bash.
+- macOS, Linux y WSL ejecutan el instalador. Windows tiene una ruta manual documentada en el README del repositorio: instala Neovim con winget, clona la etiqueta `v0.5.0` en `%LOCALAPPDATA%\nvim` y ejecuta `lua install.lua` desde Git Bash.
 - Licencia GPL-3.0: libre de usar, estudiar y modificar.
 
 ## Actualizar, fijar versión y desinstalar
 
-Para actualizar, ejecuta el instalador de una versión más reciente. Volver a ejecutarlo mueve una instalación existente de DeepWorkPlan Vim a la versión de ese instalador, conserva tus ramas y nunca descarta los cambios locales: cuando se perderían cambios o commits locales, se detiene y no cambia nada.
+Para actualizar, ejecuta el instalador de una versión más reciente, o ejecuta `bash install.sh --version latest`. Volver a ejecutarlo mueve una instalación existente de DeepWorkPlan Vim a la versión elegida, conserva tus ramas y nunca descarta los cambios locales: cuando se perderían cambios o commits locales, se detiene y no cambia nada.
 
-Para instalar otra etiqueta, una rama o un commit, define `DWP_VIM_REF`. Prefiere una etiqueta: las versiones anteriores a `v0.4.0` no incluyen los gestos, el navegador de planes, el visor de Markdown ni este instalador.
+Para fijar una versión, usa `--version` (consulta [Elegir una versión](#choose-a-version)); para una rama o un commit, define `DWP_VIM_REF`. Prefiere una versión publicada: las versiones anteriores a `v0.4.0` no incluyen los gestos, el navegador de planes, el visor de Markdown ni este instalador.
 
 ```bash
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
-shasum -a 256 install.sh
-DWP_VIM_REF=v0.4.0 bash install.sh
+curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256
+shasum -a 256 -c install.sh.sha256
+bash install.sh --version 0.4.2
 ```
 
 Para desinstalar, ejecuta `lua delete.lua` desde el directorio de configuración. Elimina la configuración, los plugins, los datos de Mason, la caché y el estado, y la copia de la fuente que hizo el instalador, y deja intactos el binario de Neovim y tus paquetes del sistema.
@@ -103,7 +152,7 @@ cd ~/.config/nvim && lua delete.lua
 
 ### ¿Sobrescribirá mi configuración de Neovim?
 
-No, no sin tu aprobación. Cuando encuentra una configuración que no es DeepWorkPlan Vim, una ejecución interactiva pregunta antes de moverla a `~/.config/previous-deepworkplan-vim`. Sin terminal, o si esa ruta de copia ya existe, se detiene y no cambia nada.
+No, no sin tu aprobación. Cuando encuentra una configuración que no es DeepWorkPlan Vim, una ejecución interactiva pregunta antes de moverla a `~/.config/previous-deepworkplan-vim`. Sin terminal, se detiene y no cambia nada, salvo que pases `--yes` para apartarla sin intervención. Si esa ruta de copia ya existe, siempre se detiene y no cambia nada.
 
 ### ¿Funciona en Windows?
 
@@ -123,7 +172,7 @@ Está pensado para personas y para agentes de programación que viven en una ter
 
 ### ¿Qué versión obtengo?
 
-El instalador instala la versión a la que pertenece —hoy, `v0.4.2`— salvo que definas `DWP_VIM_REF`; `DWP_VIM_REF=main` sigue `main`. Esta página describe la versión `v0.4.2`, que incluye todas las funciones enumeradas aquí.
+El instalador instala la versión a la que pertenece —hoy, `v0.5.0`— salvo que elijas otra con `--version` o `DWP_VIM_VERSION`: una versión exacta, un mínimo `>=` o `latest`. `DWP_VIM_REF` acepta una rama o un commit; `DWP_VIM_REF=main` sigue `main`. Esta página describe la versión `v0.5.0`, que incluye todas las funciones enumeradas aquí.
 
 ### ¿Bajo qué licencia está y de dónde viene?
 

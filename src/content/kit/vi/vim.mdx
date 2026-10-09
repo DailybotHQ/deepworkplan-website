@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** là trình soạn thảo trên terminal cho Deep Work Plan: một cấu hình Neovim dành cho con người, và cho các agent lập trình, làm việc trong terminal. Kế hoạch, tài liệu và chỉ mục của mọi lệnh chỉ cách bạn một phím bấm.
 
-Đây là một sản phẩm riêng, được cung cấp dưới dạng addon `vim` tùy chọn của Deep Work Plan v7 (`v7.0.0`). Deep Work Plan hoạt động với bất kỳ trình soạn thảo nào hoặc không cần trình soạn thảo, và trình soạn thảo này cũng không yêu cầu Deep Work Plan: bạn thêm nó vào máy một cách độc lập, và nó hoạt động như một trình soạn thảo dù có kế hoạch hay không. Trang này mô tả bản phát hành **v0.4.2**.
+Đây là một sản phẩm riêng, được cung cấp dưới dạng addon `vim` tùy chọn của Deep Work Plan v7 (`v7.0.0`). Deep Work Plan hoạt động với bất kỳ trình soạn thảo nào hoặc không cần trình soạn thảo, và trình soạn thảo này cũng không yêu cầu Deep Work Plan: bạn thêm nó vào máy một cách độc lập, và nó hoạt động như một trình soạn thảo dù có kế hoạch hay không. Trang này mô tả bản phát hành **v0.5.0**.
 
 ## Vì sao cần trình soạn thảo trên terminal cho Deep Work Plan
 
@@ -60,37 +60,86 @@ Nhấn Enter trên một kế hoạch để mở trình đọc: mục tiêu tron
 
 ## Cài đặt
 
-Việc cài đặt gồm ba lệnh: tải tập lệnh về, đối chiếu nó với SHA-256 của tệp mà trang này cung cấp, rồi chạy nó. Trình cài đặt ghim chính bản phát hành của nó, nên nó cài chính xác `v0.4.2`, bản phát hành mà trang này mô tả; còn `DWP_VIM_REF=main bash install.sh` thì đi theo nhánh `main` luôn thay đổi.
+Việc cài đặt gồm ba lệnh: tải tập lệnh về, đối chiếu nó với SHA-256 của tệp mà trang này cung cấp, rồi chạy nó. Trình cài đặt ghim chính bản phát hành của nó, nên nó cài chính xác `v0.5.0`, bản phát hành mà trang này mô tả, trừ khi bạn [chọn một phiên bản khác](#choose-a-version).
 
 <VimInstall lang="vi" />
 
 Theo thứ tự, trình cài đặt:
 
-1. Kiểm tra hệ điều hành và trình quản lý gói của bạn, và cài git, curl và một trình thông dịch Lua nếu thiếu.
-2. Hỏi trước khi chạm vào cấu hình Neovim hiện có. Nếu chạy qua đường ống mà không có terminal, nó dừng lại và không thay đổi gì.
-3. Sao chép (clone) kho mã vào `~/.config/nvim`, hoặc cập nhật nếu nó đã ở đó.
-4. Chạy `lua install.lua` của chính kho mã.
-5. Cài các plugin ở chế độ headless, nên không cần thoát rồi mở lại.
+1. Kiểm tra hệ điều hành và trình quản lý gói của bạn, và cài git, curl và một trình thông dịch Lua nếu thiếu (không cài gì khi dùng `--skip-packages`).
+2. Xác định phiên bản: bản phát hành của chính nó, hoặc bản mà `--version` yêu cầu.
+3. Với `--nvim X.Y.Z`, cài bản phát hành Neovim đó vào `~/.local/opt`, được xác minh theo SHA-256 mà Neovim công bố.
+4. Hỏi trước khi chạm vào cấu hình Neovim hiện có. Khi không có terminal, nó dừng lại và không thay đổi gì, trừ khi `--yes` yêu cầu nó chuyển cấu hình đó sang một bên.
+5. Sao chép (clone) kho mã vào `~/.config/nvim`, hoặc cập nhật nếu nó đã ở đó.
+6. Chạy `lua install.lua` của chính kho mã.
+7. Cài các plugin ở chế độ headless rồi kiểm tra chúng, nên không cần thoát rồi mở lại. Với `--strict`, việc cài plugin thất bại hoặc không đầy đủ được coi là lỗi.
 
-Tập lệnh được cung cấp ở đây là bản sao giống hệt từng byte của `install.sh` tại thẻ `v0.4.2`. Để đọc nó trước, hãy tải bằng `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, so sánh SHA-256 của nó với giá trị hiển thị ở trên, đọc rồi mới chạy `bash install.sh`.
+Tập lệnh được cung cấp ở đây là bản sao giống hệt từng byte của `install.sh` tại thẻ `v0.5.0`. Checksum của nó được cung cấp ngay bên cạnh, tại `https://deepworkplan.com/vim/install.sh.sha256`, nên bạn có thể xác minh tệp tải về bằng `shasum -a 256 -c install.sh.sha256` (trên Linux, `sha256sum -c install.sh.sha256`). Để kiểm tra từ một nguồn thứ hai, hãy so sánh nó với dòng `install.sh` trong `SHA256SUMS` trên bản phát hành GitHub. Chạy `bash install.sh --help` để liệt kê mọi tùy chọn.
+
+<a id="choose-a-version"></a>
+
+## Chọn phiên bản
+
+Theo mặc định, trình cài đặt cài bản phát hành của chính nó, `v0.5.0`. Để chọn phiên bản khác, hãy đặt `DWP_VIM_VERSION` hoặc truyền `--version`: cả hai đều làm cùng một việc, nên hãy dùng cách nào dễ đọc hơn, và cờ được ưu tiên hơn biến môi trường. Mỗi cách đều chấp nhận:
+
+| Dạng | Ví dụ | Cài đặt |
+|---|---|---|
+| Phiên bản chính xác | `0.5.0` hoặc `v0.5.0` | Đúng bản phát hành đó |
+| Mức tối thiểu | `'>=0.4.2'` | Bản phát hành ổn định mới nhất bằng hoặc cao hơn mức tối thiểu |
+| Mới nhất | `latest` | Bản phát hành ổn định mới nhất |
+
+Sau khi tải về và kiểm tra checksum như trên:
+
+```bash
+# exact version
+DWP_VIM_VERSION=0.5.0 bash install.sh
+bash install.sh --version 0.5.0
+
+# minimum floor: the newest stable release at or above 0.4.2
+DWP_VIM_VERSION='>=0.4.2' bash install.sh
+
+# latest stable release
+bash install.sh --version latest
+```
+
+Hãy đặt mức tối thiểu trong dấu nháy, để shell không hiểu `>` là chuyển hướng. Phiên bản chỉ được phân giải thành các thẻ bản phát hành ổn định. Với một nhánh hoặc một commit, hãy đặt `DWP_VIM_REF` thay thế (`DWP_VIM_REF=main` đi theo `main`); một phiên bản và một ref mâu thuẫn nhau sẽ gây lỗi.
+
+### Container và CI
+
+Trong một image hoặc một job CI, nơi không có terminal và thường không có quyền root, hãy tải về và xác minh tập lệnh, rồi chạy nó trong một bước với các cờ giúp kết quả có thể tái lập:
+
+```bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
+curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
+sha256sum -c install.sh.sha256 && \
+bash install.sh --version 0.5.0 --nvim 0.12.5 --skip-packages --strict
+```
+
+- `--version 0.5.0` ghim bản phát hành của trình soạn thảo.
+- `--nvim 0.12.5` cài bản phát hành Neovim đó vào `~/.local/opt/nvim-v0.12.5`, liên kết thành `~/.local/bin/nvim` và được xác minh theo SHA-256 mà Neovim công bố (Linux và macOS).
+- `--skip-packages` không cài gói hệ thống nào: image phải có sẵn git, curl và Lua.
+- `--strict` thoát với mã khác 0 khi việc cài plugin ở chế độ headless thất bại hoặc để thiếu plugin.
+
+Mỗi cờ đều có một biến môi trường tương ứng (`DWP_VIM_VERSION`, `DWP_VIM_NVIM`, `DWP_VIM_SKIP_PACKAGES=1`, `DWP_VIM_STRICT=1`). Chỉ thêm `--yes` khi image có thể đã chứa một cấu hình Neovim cần được chuyển sang một bên.
 
 ## Yêu cầu và nền tảng
 
-- Neovim 0.12 trở lên. Hãy cài Neovim trước; trình cài đặt không cài nó.
+- Neovim 0.12 trở lên. Hãy tự cài, hoặc để trình cài đặt thêm một bản phát hành đã được xác minh bằng `--nvim X.Y.Z` (Linux và macOS).
 - Lua: `lua`, `lua5.4` hoặc `luajit`. Trình cài đặt sẽ thêm một cái nếu thiếu.
-- macOS, Linux và WSL chạy trình cài đặt. Windows có cách cài thủ công được ghi trong README của kho mã: cài Neovim bằng winget, clone kho mã vào `%LOCALAPPDATA%\nvim`, rồi chạy `lua install.lua` từ Git Bash.
+- macOS, Linux và WSL chạy trình cài đặt. Windows có cách cài thủ công được ghi trong README của kho mã: cài Neovim bằng winget, clone thẻ `v0.5.0` vào `%LOCALAPPDATA%\nvim`, rồi chạy `lua install.lua` từ Git Bash.
 - Cấp phép GPL-3.0: tự do sử dụng, nghiên cứu và sửa đổi.
 
 ## Cập nhật, cố định phiên bản và gỡ cài đặt
 
-Để cập nhật, hãy chạy trình cài đặt của một bản phát hành mới hơn. Chạy lại sẽ chuyển bản checkout DeepWorkPlan Vim hiện có sang bản phát hành của trình cài đặt đó, giữ nguyên các nhánh của bạn và không bao giờ đặt lại các chỉnh sửa cục bộ: khi các thay đổi hoặc commit cục bộ có thể bị mất, nó dừng lại và không thay đổi gì.
+Để cập nhật, hãy chạy trình cài đặt của một bản phát hành mới hơn, hoặc chạy `bash install.sh --version latest`. Chạy lại sẽ chuyển bản checkout DeepWorkPlan Vim hiện có sang bản phát hành được chọn, giữ nguyên các nhánh của bạn và không bao giờ đặt lại các chỉnh sửa cục bộ: khi các thay đổi hoặc commit cục bộ có thể bị mất, nó dừng lại và không thay đổi gì.
 
-Để cài một thẻ khác, một nhánh hoặc một commit, hãy đặt `DWP_VIM_REF`. Nên ưu tiên dùng thẻ: các bản phát hành trước `v0.4.0` không có các thao tác kiểu VS Code, trình duyệt kế hoạch, trình xem Markdown hay trình cài đặt này.
+Để ghim một bản phát hành, hãy dùng `--version` (xem [Chọn phiên bản](#choose-a-version)); với một nhánh hoặc một commit, hãy đặt `DWP_VIM_REF`. Nên ưu tiên dùng bản phát hành: các bản phát hành trước `v0.4.0` không có các thao tác kiểu VS Code, trình duyệt kế hoạch, trình xem Markdown hay trình cài đặt này.
 
 ```bash
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
-shasum -a 256 install.sh
-DWP_VIM_REF=v0.4.0 bash install.sh
+curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256
+shasum -a 256 -c install.sh.sha256
+bash install.sh --version 0.4.2
 ```
 
 Để gỡ cài đặt, chạy `lua delete.lua` từ thư mục cấu hình. Nó xóa cấu hình, plugin, dữ liệu Mason, bộ nhớ đệm và trạng thái, cùng bản sao phông chữ mà trình cài đặt đã tạo, và giữ nguyên tệp thực thi Neovim cùng các gói hệ thống của bạn.
@@ -103,7 +152,7 @@ cd ~/.config/nvim && lua delete.lua
 
 ### Nó có ghi đè cấu hình Neovim của tôi không?
 
-Không, nếu bạn chưa chấp thuận. Khi gặp một cấu hình không phải DeepWorkPlan Vim, lần chạy tương tác sẽ hỏi trước khi chuyển nó tới `~/.config/previous-deepworkplan-vim`. Không có terminal, hoặc khi đường dẫn sao lưu đó đã tồn tại, nó dừng lại và không thay đổi gì.
+Không, nếu bạn chưa chấp thuận. Khi gặp một cấu hình không phải DeepWorkPlan Vim, lần chạy tương tác sẽ hỏi trước khi chuyển nó tới `~/.config/previous-deepworkplan-vim`. Khi không có terminal, nó dừng lại và không thay đổi gì, trừ khi bạn truyền `--yes` để chuyển nó sang một bên mà không cần giám sát. Khi đường dẫn sao lưu đó đã tồn tại, nó luôn dừng lại và không thay đổi gì.
 
 ### Nó có chạy trên Windows không?
 
@@ -123,7 +172,7 @@ Nó được xây dựng cho con người và cho các agent lập trình sống
 
 ### Tôi nhận được phiên bản nào?
 
-Trình cài đặt cài bản phát hành mà nó thuộc về — hiện là `v0.4.2` — trừ khi bạn đặt `DWP_VIM_REF`; `DWP_VIM_REF=main` đi theo `main`. Trang này mô tả bản phát hành `v0.4.2`, bản có đủ mọi tính năng được liệt kê ở đây.
+Trình cài đặt cài bản phát hành mà nó thuộc về — hiện là `v0.5.0` — trừ khi bạn chọn phiên bản khác bằng `--version` hoặc `DWP_VIM_VERSION`: một phiên bản chính xác, một mức tối thiểu `>=` hoặc `latest`. `DWP_VIM_REF` nhận một nhánh hoặc một commit; `DWP_VIM_REF=main` đi theo `main`. Trang này mô tả bản phát hành `v0.5.0`, bản có đủ mọi tính năng được liệt kê ở đây.
 
 ### Nó theo giấy phép nào và đến từ đâu?
 
