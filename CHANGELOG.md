@@ -9,6 +9,8 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.32] - 2026-10-09
+
 ### Changed
 
 - The site vendors the stable Deep Work Plan skill `7.0.0` (verified against its release `SHA256SUMS`); the addon registry `.dwp/config.json` is tracked; pages that described the v7 addons as part of a beta now name the stable `v7.0.0` release.
@@ -1063,7 +1065,8 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.31...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.32...HEAD
+[5.0.32]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.32
 [5.0.31]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.31
 [5.0.30]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.30
 [5.0.29]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.29
