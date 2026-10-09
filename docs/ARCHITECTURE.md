@@ -131,6 +131,7 @@ src/
 │   ├── language-codes.ts    # Dependency-free LANGUAGE_CODES tuple (imported by i18n + astro.config)
 │   ├── markdown-for-agents.ts  # Helpers for the agent-friendly .md endpoints
 │   ├── vim-installer.ts     # Build-time facts about /vim/install.sh (SHA-256, size, lines) read via Vite ?raw; the download → verify → run install commands bound to that digest, and URLs
+│   ├── vim-host.ts          # On vim.deepworkplan.com only: sends home and language-root links to https://deepworkplan.com (bundled into MainLayout's module script)
 │   ├── software-schema.ts   # Optional kit `software` frontmatter (Zod) + buildSoftwareSchema() / combineJsonLd() for SoftwareApplication JSON-LD
 │   ├── redirect-map.ts      # REDIRECT_PAIRS (per-language aliases, incl. vim -> kit/vim and vim.md -> kit/vim.md) + ROOT_ONLY_REDIRECT_PAIRS
 │   ├── analytics.ts         # Analytics helpers
