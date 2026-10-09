@@ -8,6 +8,7 @@
 # renders for these same routes as a client-side fallback).
 
 /install.sh /vim/install.sh 301
+/install.sh.sha256 /vim/install.sh.sha256 301
 
 /init /quickstart 301
 /setup /quickstart 301

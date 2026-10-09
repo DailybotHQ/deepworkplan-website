@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** は Deep Work Plan のターミナルエディタです。ターミナルで作業する人とコーディングエージェントのための Neovim 設定で、計画もドキュメントもすべてのコマンドの索引も、キー操作ひとつで手の届く場所にあります。
 
-これは独立した製品で、Deep Work Plan v7（`v7.0.0`）の任意の `vim` アドオンとして提供されています。Deep Work Plan はどのエディタとも、エディタなしでも動作し、このエディタも Deep Work Plan を必要としません。マシンには単独で追加でき、計画があってもなくてもエディタとして動作します。このページはリリース **v0.4.2** を説明しています。
+これは独立した製品で、Deep Work Plan v7（`v7.0.0`）の任意の `vim` アドオンとして提供されています。Deep Work Plan はどのエディタとも、エディタなしでも動作し、このエディタも Deep Work Plan を必要としません。マシンには単独で追加でき、計画があってもなくてもエディタとして動作します。このページはリリース **v0.5.0** を説明しています。
 
 ## なぜ Deep Work Plan にターミナルエディタなのか
 
@@ -60,37 +60,87 @@ DeepWorkPlan Vim はそのエディタです。言語サーバー、補完、リ
 
 ## インストール
 
-インストールは 3 つのコマンドです。スクリプトをダウンロードし、このサイトが配布するファイルの SHA-256 と照合してから実行します。インストーラは自身のリリースに固定されているため、このページが説明するリリースである `v0.4.2` を正確にインストールします。代わりに変化し続ける `main` ブランチに追従するには、`DWP_VIM_REF=main bash install.sh` を使います。
+インストールは 3 つのコマンドです。スクリプトをダウンロードし、このサイトが配布するファイルの SHA-256 と照合してから実行します。インストーラは自身のリリースに固定されているため、[別のバージョンを選ぶ](#choose-a-version)場合を除き、このページが説明するリリースである `v0.5.0` を正確にインストールします。
 
 <VimInstall lang="ja" />
 
 インストーラは次の順に実行します。
 
-1. OS とパッケージマネージャを確認し、git、curl、Lua インタプリタが足りなければインストールします。
-2. 既存の Neovim 設定に手を付ける前に確認します。端末なしでパイプ実行された場合は、何も変更せずに停止します。
-3. リポジトリを `~/.config/nvim` にクローンします。すでにある場合は更新します。
-4. リポジトリ自身の `lua install.lua` を実行します。
-5. プラグインをヘッドレスでインストールするため、終了して開き直す手順はありません。
+1. OS とパッケージマネージャを確認し、git、curl、Lua インタプリタが足りなければインストールします（`--skip-packages` を指定した場合は何もインストールしません）。
+2. バージョンを解決します。自身のリリースか、`--version` で指定されたリリースです。
+3. `--nvim X.Y.Z` を指定すると、その Neovim リリースを `~/.local/opt` にインストールし、Neovim が公開している SHA-256 で検証します。
+4. 既存の Neovim 設定に手を付ける前に確認します。端末がない場合は、`--yes` でその設定を退避するよう指示しない限り、何も変更せずに停止します。
+5. リポジトリを `~/.config/nvim` にクローンします。すでにある場合は更新します。
+6. リポジトリ自身の `lua install.lua` を実行します。
+7. プラグインをヘッドレスでインストールして確認するため、終了して開き直す手順はありません。`--strict` を指定すると、プラグインのインストールの失敗や不完全なインストールはエラーになります。
 
-ここで配布しているスクリプトは、`v0.4.2` タグの `install.sh` とバイト単位で同一のコピーです。先に読むには、`curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` でダウンロードし、上に表示された値と SHA-256 を照合し、読んでから `bash install.sh` を実行してください。
+ここで配布しているスクリプトは、`v0.5.0` タグの `install.sh` とバイト単位で同一のコピーです。チェックサムはその隣の `https://deepworkplan.com/vim/install.sh.sha256` で配布しているため、`shasum -a 256 -c install.sh.sha256`（Linux では `sha256sum -c install.sh.sha256`）でダウンロードを検証できます。別の配布元でも確認するには、GitHub リリースの `SHA256SUMS` にある `install.sh` の行と比較してください。すべてのオプションを一覧するには `bash install.sh --help` を実行します。
+
+<a id="choose-a-version" class="scroll-mt-24"></a>
+
+## バージョンを選ぶ
+
+デフォルトでは、インストーラは自身のリリースである `v0.5.0` をインストールします。別のバージョンを選ぶには、`DWP_VIM_VERSION` を設定するか `--version` を渡します。どちらも同じ働きをするので読みやすい方を使ってください。フラグは環境変数より優先されます。どちらも次の形式を受け付けます。
+
+| 形式 | 例 | インストールされるもの |
+|---|---|---|
+| 正確なバージョン | `0.5.0` または `v0.5.0` | そのリリース |
+| 最低バージョン | `'>=0.4.2'` | 最低バージョン以上の最新の安定版リリース |
+| 最新 | `latest` | 最新の安定版リリース |
+
+上記のダウンロードとチェックサムの確認を終えたら、次のように実行します。
+
+```bash
+# exact version
+DWP_VIM_VERSION=0.5.0 bash install.sh
+bash install.sh --version 0.5.0
+
+# minimum floor: the newest stable release at or above 0.4.2
+DWP_VIM_VERSION='>=0.4.2' bash install.sh
+
+# latest stable release
+bash install.sh --version latest
+```
+
+シェルが `>` をリダイレクトとして解釈しないよう、最低バージョンは引用符で囲んでください。バージョンは安定版のリリースタグにのみ解決されます。ブランチやコミットを使うには、代わりに `DWP_VIM_REF` を設定します（`DWP_VIM_REF=main` は `main` に追従します）。バージョンと ref が食い違う場合はエラーになります。
+
+### コンテナと CI
+
+端末がなく、多くの場合 root 権限もないイメージや CI ジョブでは、スクリプトをダウンロードして検証し、結果を再現可能にするフラグを付けて 1 ステップで実行します。
+
+```bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
+curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
+sha256sum -c install.sh.sha256 && \
+bash install.sh --version 0.5.0 --nvim 0.12.5 --skip-packages --strict
+```
+
+- `--version 0.5.0` はエディタのリリースを固定します。
+- `--nvim 0.12.5` はその Neovim リリースを `~/.local/opt/nvim-v0.12.5` にインストールし、`~/.local/bin/nvim` としてリンクして、Neovim が公開している SHA-256 で検証します（Linux と macOS）。
+- `--skip-packages` はシステムパッケージを一切インストールしません。イメージに git、curl、Lua があらかじめ含まれている必要があります。
+- `--strict` は、ヘッドレスでのプラグインのインストールが失敗した場合や、プラグインが欠けている場合に 0 以外のコードで終了します。
+
+すべてのフラグには対応する環境変数があります（`DWP_VIM_VERSION`、`DWP_VIM_NVIM`、`DWP_VIM_SKIP_PACKAGES=1`、`DWP_VIM_STRICT=1`）。`--yes` は、退避すべき Neovim 設定がイメージにすでに含まれている可能性がある場合にのみ追加してください。
 
 ## 要件とプラットフォーム
 
-- Neovim 0.12 以降。先に Neovim をインストールしてください。インストーラは Neovim をインストールしません。
+- Neovim 0.12 以降。自分でインストールするか、`--nvim X.Y.Z` でインストーラに検証済みのリリースを追加させます（Linux と macOS）。
 - Lua：`lua`、`lua5.4`、`luajit` のいずれか。足りなければインストーラが追加します。
-- macOS、Linux、WSL ではインストーラを実行できます。Windows にはリポジトリ README に手動の手順があります。winget で Neovim をインストールし、リポジトリを `%LOCALAPPDATA%\nvim` にクローンして、Git Bash から `lua install.lua` を実行します。
+- macOS、Linux、WSL ではインストーラを実行できます。Windows にはリポジトリ README に手動の手順があります。winget で Neovim をインストールし、`v0.5.0` タグを `%LOCALAPPDATA%\nvim` にクローンして、Git Bash から `lua install.lua` を実行します。
 - GPL-3.0 ライセンス：自由に利用、研究、改変できます。
 
 ## 更新、バージョン固定、アンインストール
 
-更新するには、より新しいリリースのインストーラを実行します。再実行すると、既存の DeepWorkPlan Vim のチェックアウトをそのインストーラのリリースへ移動し、ブランチはそのまま保持し、ローカルの変更をリセットすることはありません。ローカルの変更やコミットが失われる場合は、停止して何も変更しません。
+更新するには、より新しいリリースのインストーラを実行するか、`bash install.sh --version latest` を実行します。再実行すると、既存の DeepWorkPlan Vim のチェックアウトを選択したリリースへ移動し、ブランチはそのまま保持し、ローカルの変更をリセットすることはありません。ローカルの変更やコミットが失われる場合は、停止して何も変更しません。
 
-別のタグ、ブランチ、コミットをインストールするには `DWP_VIM_REF` を設定します。タグをおすすめします。`v0.4.0` より前のリリースには、VS Code 風の操作、計画ブラウザ、Markdown ビューア、このインストーラが含まれていません。
+リリースを固定するには `--version` を使います（[バージョンを選ぶ](#choose-a-version)を参照）。ブランチやコミットには `DWP_VIM_REF` を設定します。リリースをおすすめします。`v0.4.0` より前のリリースには、VS Code 風の操作、計画ブラウザ、Markdown ビューア、このインストーラが含まれていません。
 
 ```bash
-curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
-shasum -a 256 install.sh
-DWP_VIM_REF=v0.4.0 bash install.sh
+# pin a specific release, here the previous one
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
+curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
+shasum -a 256 -c install.sh.sha256 && \
+bash install.sh --version 0.4.2
 ```
 
 アンインストールするには、設定ディレクトリで `lua delete.lua` を実行します。設定、プラグイン、Mason のデータ、キャッシュと状態、インストーラがコピーしたフォントを削除し、Neovim 本体とシステムのパッケージはそのまま残します。
@@ -103,7 +153,7 @@ cd ~/.config/nvim && lua delete.lua
 
 ### Neovim の設定は上書きされますか？
 
-いいえ、あなたの承認なしには上書きされません。DeepWorkPlan Vim ではない設定が見つかると、対話実行では `~/.config/previous-deepworkplan-vim` に移す前に確認します。端末がない場合や、そのバックアップ先がすでに存在する場合は、何も変更せずに停止します。
+いいえ、あなたの承認なしには上書きされません。DeepWorkPlan Vim ではない設定が見つかると、対話実行では `~/.config/previous-deepworkplan-vim` に移す前に確認します。端末がない場合は、`--yes` を渡して無人で退避させない限り、何も変更せずに停止します。そのバックアップ先がすでに存在する場合は、常に何も変更せずに停止します。
 
 ### Windows で動きますか？
 
@@ -123,7 +173,7 @@ Deep Work Plan v7 は、オンボーディング中にこのエディタを任�
 
 ### どのバージョンが入りますか？
 
-インストーラは、`DWP_VIM_REF` を設定しない限り、自身が属するリリース（現在は `v0.4.2`）をインストールします。`DWP_VIM_REF=main` を設定すると `main` に追従します。このページはリリース `v0.4.2` を説明しており、ここに挙げたすべての機能を含んでいます。
+インストーラは、自身が属するリリース（現在は `v0.5.0`）をインストールします。別のバージョンを選ぶには、`--version` または `DWP_VIM_VERSION` で、正確なバージョン、`>=` による最低バージョン、または `latest` を指定します。`DWP_VIM_REF` はブランチまたはコミットを受け付け、`DWP_VIM_REF=main` を設定すると `main` に追従します。このページはリリース `v0.5.0` を説明しており、ここに挙げたすべての機能を含んでいます。
 
 ### ライセンスと由来は？
 

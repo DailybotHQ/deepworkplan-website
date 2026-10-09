@@ -53,6 +53,9 @@ body {
 @source not "../content/**/pl/**";
 @source not "../content/**/uk/**";
 @source not "../content/**/th/**";
+/* Used only by translated content: the #choose-a-version anchor in
+ * src/content/kit/<lang>/vim.mdx (English uses its heading id instead). */
+@source inline("scroll-mt-24");
 
 @font-face {
   font-family: "Atkinson";

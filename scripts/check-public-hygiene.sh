@@ -22,7 +22,8 @@
 #   secret-*        credential shapes (AWS, GitHub, OpenAI/Anthropic, Slack,
 #                   Google, private-key headers, quoted assignments >= 16;
 #                   a quoted value that is a variable reference such as
-#                   "${API_KEY}" or "$API_KEY" (upper-case), or a URL without embedded
+#                   "${API_KEY}" or "$API_KEY" (upper-case), the same with an empty
+#                   default ("${API_KEY:-}", "${API_KEY-}"), or a URL without embedded
 #                   credentials, is not a literal secret; secret-env catches
 #                   unquoted KEY=value lines such as a filled-in .env file)
 #
@@ -39,7 +40,7 @@ ROOT=.
 while [ $# -gt 0 ]; do
   case "$1" in
     --root) [ $# -ge 2 ] || { echo "usage: $0 [--root DIR]" >&2; exit 2; }; ROOT=$2; shift 2 ;;
-    -h | --help) sed -n '2,27p' "$0"; exit 0 ;;
+    -h | --help) sed -n '2,28p' "$0"; exit 0 ;;
     *) echo "usage: $0 [--root DIR]" >&2; exit 2 ;;
   esac
 done
@@ -143,7 +144,7 @@ while IFS='	' read -r rule pattern flag; do
         ;;
       secret-assignment)
         literal=$(printf '%s\n' "$text" | grep -oiE "$pattern" |
-          grep -vE "[:=][[:space:]]*[\"'](\\\$\\{?[A-Z_][A-Z0-9_]*\\}?|https?://[^@\"'[:space:]]*)[\"']\$" || true)
+          grep -vE "[:=][[:space:]]*[\"'](\\\$\\{?[A-Z_][A-Z0-9_]*\\}?|\\\$\\{[A-Z_][A-Z0-9_]*:?-\\}|https?://[^@\"'[:space:]]*)[\"']\$" || true)
         if [ -z "$literal" ]; then
           :
         elif is_allowed "$path" "$rule"; then
