@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit(여덟 번째 애드온)
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`)의 얇은 통합 계층으로, v7 계획의 **헤드리스** 위임 전송 수단입니다.
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, 고정 버전 `v0.1.1`, 인터페이스 `1`)의 얇은 통합 계층으로, v7 계획의 **헤드리스** 위임 전송 수단입니다.
 
 - **키트 페이지:** [Agentkit](/kit/agentkit)
 - **추가하는 것:** 터미널 코딩 에이전트 위에 놓인 하나의 `ak` 명령 표면으로, 경계가 정해진 계획 작업을 헤드리스로 실행하는 데 사용됨; `subagents`, `cancel_children`, `model_routing` 능력은 런타임에, 활성화되고 감지되었으며 호환되는 인터페이스일 때만 제공함

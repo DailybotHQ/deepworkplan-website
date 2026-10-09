@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit (восьмий аддон)
 
-Тонкий інтегратор [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`), **headless**-транспорт делегування для планів v7.
+Тонкий інтегратор [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, закріплено на `v0.1.1`, інтерфейс `1`), **headless**-транспорт делегування для планів v7.
 
 - **Сторінка kit:** [Agentkit](/kit/agentkit)
 - **Що додає:** єдину поверхню команд `ak` над термінальними агентами для програмування, через яку обмежене завдання плану виконується в режимі headless; можливості `subagents`, `cancel_children` і `model_routing` він надає лише під час виконання — коли його ввімкнено, виявлено й інтерфейс сумісний

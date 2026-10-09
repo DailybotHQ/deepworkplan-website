@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit (addon ที่แปด)
 
-ตัวผสานรวมแบบบางของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **headless** ของแผน v7
+ตัวผสานรวมแบบบางของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ปักหมุดที่ `v0.1.1`, interface `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **headless** ของแผน v7
 
 - **หน้า kit:** [Agentkit](/kit/agentkit)
 - **สิ่งที่เพิ่ม:** พื้นผิวคำสั่ง `ak` เดียวครอบ coding agent บนเทอร์มินัล ใช้รันงานในแผนที่มีขอบเขตแบบ headless โดยมอบความสามารถ `subagents`, `cancel_children` และ `model_routing` เฉพาะในขณะรันเมื่อเปิดใช้ ตรวจพบ และ interface เข้ากันได้เท่านั้น

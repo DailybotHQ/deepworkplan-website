@@ -100,7 +100,7 @@ Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/d
 
 ### Agentkit (addon thứ tám)
 
-Bộ tích hợp mỏng của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`), phương thức truyền ủy quyền **headless** của các kế hoạch v7.
+Bộ tích hợp mỏng của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim `v0.1.1`, giao diện `1`), phương thức truyền ủy quyền **headless** của các kế hoạch v7.
 
 - **Trang kit:** [Agentkit](/kit/agentkit)
 - **Bổ sung:** một bề mặt lệnh `ak` duy nhất cho các coding agent trên terminal, dùng để chạy headless một tác vụ kế hoạch có giới hạn; nó chỉ đóng góp các khả năng `subagents`, `cancel_children` và `model_routing` khi chạy, lúc được bật, được phát hiện và ở trên một giao diện tương thích

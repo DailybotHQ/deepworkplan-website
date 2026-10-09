@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit（第 8 アドオン）
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`）の薄いインテグレーターで、v7 計画の**ヘッドレス**委任トランスポートです。
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v0.1.1` に固定、インターフェース `1`）の薄いインテグレーターで、v7 計画の**ヘッドレス**委任トランスポートです。
 
 - **キットページ：** [Agentkit](/kit/agentkit)
 - **追加内容：** ターミナル型コーディングエージェント全体にわたる一つの `ak` コマンドサーフェスで、範囲の限られた計画タスクをヘッドレスで実行するために使う；`subagents`、`cancel_children`、`model_routing` の能力は、有効化され、検出され、互換性のあるインターフェース上にある場合にのみ、実行時に提供される

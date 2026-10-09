@@ -100,7 +100,7 @@ Un integratore leggero di [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepw
 
 ### Agentkit (ottavo addon)
 
-Un integratore leggero di [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`), il trasporto di delega **headless** dei piani v7.
+Un integratore leggero di [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fissato a `v0.1.1`, interfaccia `1`), il trasporto di delega **headless** dei piani v7.
 
 - **Pagina kit:** [Agentkit](/kit/agentkit)
 - **Cosa aggiunge:** un'unica superficie di comando `ak` sugli agenti di coding da terminale, usata per eseguire in modalità headless un'attività delimitata del piano; contribuisce le capacità `subagents`, `cancel_children` e `model_routing` solo a runtime, quando è abilitato, rilevato e su un'interfaccia compatibile

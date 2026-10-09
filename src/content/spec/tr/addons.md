@@ -100,7 +100,7 @@ Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](
 
 ### Agentkit (sekizinci eklenti)
 
-v7 planlarının **arayüzsüz (headless)** devretme taşıyıcısı: [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`) için ince bir entegrasyon katmanı.
+v7 planlarının **arayüzsüz (headless)** devretme taşıyıcısı: [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, sabitlenmiş `v0.1.1`, arayüz `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [Agentkit](/kit/agentkit)
 - **Ne ekler:** terminal kodlama agent'ları üzerinde tek bir `ak` komut yüzeyi; sınırlı bir plan görevini arayüzsüz çalıştırmak için kullanılır; `subagents`, `cancel_children` ve `model_routing` yeteneklerini yalnızca çalışma zamanında, etkinleştirildiğinde, tespit edildiğinde ve uyumlu bir arayüz üzerinde olduğunda sağlar

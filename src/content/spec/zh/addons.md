@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit（第八个附加组件）
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`）的轻量集成器，是 v7 计划的**无头**委托传输。
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`，固定为 `v0.1.1`，接口 `1`）的轻量集成器，是 v7 计划的**无头**委托传输。
 
 - **套件页：** [Agentkit](/kit/agentkit)
 - **新增内容：** 一个覆盖各终端编码代理的 `ak` 命令层面，用于以无头方式运行有界的计划任务；仅在运行时、且已启用、已检测到并处于兼容接口时，才提供 `subagents`、`cancel_children` 与 `model_routing` 能力

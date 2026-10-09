@@ -100,7 +100,7 @@ Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkp
 
 ### Agentkit (addon kedelapan)
 
-Integrator tipis dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`), transport delegasi **headless** untuk rencana v7.
+Integrator tipis dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok `v0.1.1`, antarmuka `1`), transport delegasi **headless** untuk rencana v7.
 
 - **Halaman kit:** [Agentkit](/kit/agentkit)
 - **Yang ditambahkan:** satu permukaan perintah `ak` di atas coding agent terminal, digunakan untuk menjalankan tugas rencana terbatas secara headless; addon ini menyumbangkan kemampuan `subagents`, `cancel_children`, dan `model_routing` hanya saat runtime, ketika diaktifkan, terdeteksi, dan berada pada antarmuka yang kompatibel

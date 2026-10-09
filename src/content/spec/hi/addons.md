@@ -100,7 +100,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 ### Agentkit (आठवाँ ऐडऑन)
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **हेडलेस** डेलिगेशन ट्रांसपोर्ट।
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, पिन `v0.1.1`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **हेडलेस** डेलिगेशन ट्रांसपोर्ट।
 
 - **Kit पृष्ठ:** [Agentkit](/kit/agentkit)
 - **क्या जोड़ता है:** टर्मिनल कोडिंग एजेंटों पर एक `ak` कमांड सतह, जिसका उपयोग किसी सीमित योजना कार्य को हेडलेस चलाने के लिए होता है; यह `subagents`, `cancel_children` और `model_routing` क्षमताएँ केवल रनटाइम पर देता है, जब यह सक्षम हो, पहचाना गया हो और संगत इंटरफ़ेस पर हो

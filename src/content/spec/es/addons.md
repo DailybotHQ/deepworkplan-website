@@ -100,7 +100,7 @@ Un integrador ligero de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepwor
 
 ### Agentkit (octavo addon)
 
-Un integrador ligero de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`), el transporte de delegación **sin interfaz** (headless) de los planes v7.
+Un integrador ligero de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fijado en `v0.1.1`, interfaz `1`), el transporte de delegación **sin interfaz** (headless) de los planes v7.
 
 - **Página del kit:** [Agentkit](/kit/agentkit)
 - **Qué añade:** una única superficie de comandos `ak` sobre los agentes de codificación de terminal, usada para ejecutar sin interfaz una tarea acotada del plan; aporta las capacidades `subagents`, `cancel_children` y `model_routing` solo en tiempo de ejecución, cuando está habilitado, detectado y sobre una interfaz compatible
