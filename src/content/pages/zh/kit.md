@@ -67,7 +67,7 @@ onboard 流程向仓库叠加的各项能力。其中四个是可选的，绝非
 - **[devcontainer](/zh/kit/devcontainer)** — 一个 Dev Containers 模板及基础镜像，不附带任何编码代理。固定于：`devcontainer-kit@v0.1.4`。
 - **[vim](/zh/kit/vim)** — 终端编辑器，带有只读的计划浏览器和 Markdown 查看器。固定于：`deepworkplan-vim@v0.4.2`。
 
-附加组件注册表和描述文件随 v7 beta 发布，这是一个预发布版本： `v7.0.0-beta.1`
+附加组件注册表和描述文件随 Deep Work Plan v7 发布： `v7.0.0`
 
 ### 示例
 

@@ -33,12 +33,6 @@ Rilis **ber-checksum, bukan ditandatangani** — penandatanganan (cosign atau GP
 
 Aturan yang sama berlaku untuk pemasang DeepWorkPlan Vim: halamannya menampilkan SHA-256 skrip yang disajikan sekarang, beserta langkah unduh, periksa, verifikasi, dan jalankan. [Periksa pemasang DeepWorkPlan Vim](/kit/vim#inspect-before-you-run)
 
-Pra-rilis diverifikasi dengan cara yang sama. Beta v7, v7.0.0-beta.1, adalah pra-rilis GitHub dengan SHA256SUMS-nya sendiri, dan bukan rilis stabil. Situs ini menyertakannya untuk mengujinya di lapangan: dipasang melalui tag yang dipatok dan diperiksa terhadap checksum tersebut.
-
-```bash
-npx --yes skills add DailybotHQ/deepworkplan-skill@v7.0.0-beta.1 --skill deepworkplan -y
-```
-
 ---
 
 ## Laporkan kerentanan

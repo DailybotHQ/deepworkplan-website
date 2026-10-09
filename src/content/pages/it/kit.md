@@ -67,7 +67,7 @@ Capacità che il flusso di onboard aggiunge a un repo. Quattro sono opzionali e 
 - **[devcontainer](/it/kit/devcontainer)** — Un template Dev Containers e immagini di base distribuiti senza agenti di codice. Fissato a `devcontainer-kit@v0.1.4`.
 - **[vim](/it/kit/vim)** — L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown. Fissato a `deepworkplan-vim@v0.4.2`.
 
-Il registro degli addon e i descrittori sono distribuiti nella beta v7, una pre-release: `v7.0.0-beta.1`
+Il registro degli addon e i descrittori sono distribuiti in Deep Work Plan v7: `v7.0.0`
 
 ### Esempi
 

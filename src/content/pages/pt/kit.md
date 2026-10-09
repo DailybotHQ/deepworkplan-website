@@ -67,7 +67,7 @@ Capacidades que o fluxo de onboarding adiciona a um repositório. Quatro são op
 - **[devcontainer](/pt/kit/devcontainer)** — Um template de Dev Containers e imagens base distribuídos sem agentes de programação. Fixado em `devcontainer-kit@v0.1.4`.
 - **[vim](/pt/kit/vim)** — O editor de terminal, com um navegador de planos somente leitura e um visualizador de Markdown. Fixado em `deepworkplan-vim@v0.4.2`.
 
-O registro de addons e os descritores são distribuídos na beta da v7, uma pré-release: `v7.0.0-beta.1`
+O registro de addons e os descritores são distribuídos no Deep Work Plan v7: `v7.0.0`
 
 ### Exemplos
 

@@ -107,7 +107,7 @@ async function stampTrustManifest(skillVersion) {
     const next = {
       ...doc.prerelease,
       version: skillVersion,
-      install: `npx --yes skills add DailybotHQ/deepworkplan-skill@${tag} --skill deepworkplan -y`,
+      install: `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/${tag} --skill deepworkplan -y`,
       checksums: `https://github.com/DailybotHQ/deepworkplan-skill/releases/download/${tag}/SHA256SUMS`,
     };
     if (JSON.stringify(next) === JSON.stringify(doc.prerelease)) {
@@ -115,10 +115,19 @@ async function stampTrustManifest(skillVersion) {
     }
     doc.prerelease = next;
   } else {
-    if (doc.skill?.version === skillVersion && !doc.prerelease) {
+    // Pin the install line to the vendored release: the untagged form installs
+    // the default branch, and the skills CLI honours only the tree-URL form
+    // for a tag (vendored shared/install-verification.md).
+    const install = `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v${skillVersion} --skill deepworkplan -y`;
+    if (
+      doc.skill?.version === skillVersion &&
+      doc.skill?.install === install &&
+      !doc.prerelease
+    ) {
       return false;
     }
     doc.skill.version = skillVersion;
+    doc.skill.install = install;
     delete doc.prerelease;
   }
   doc.lastUpdated = new Date().toISOString().slice(0, 10);

@@ -8,18 +8,11 @@
     "skill": "https://github.com/DailybotHQ/deepworkplan-skill"
   },
   "skill": {
-    "version": "6.1.0",
-    "install": "npx skills add DailybotHQ/deepworkplan-skill",
+    "version": "7.0.1",
+    "install": "npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y",
     "markdownFirst": true,
     "networkCalls": false,
     "telemetry": false
-  },
-  "prerelease": {
-    "version": "7.0.0-beta.1",
-    "status": "pre-release (not the stable release)",
-    "install": "npx --yes skills add DailybotHQ/deepworkplan-skill@v7.0.0-beta.1 --skill deepworkplan -y",
-    "checksums": "https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.0.0-beta.1/SHA256SUMS",
-    "vendoredBy": "https://github.com/DailybotHQ/deepworkplan-website (field test)"
   },
   "integrity": {
     "checksums": "https://github.com/DailybotHQ/deepworkplan-skill/releases/latest/download/SHA256SUMS",

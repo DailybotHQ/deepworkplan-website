@@ -65,7 +65,7 @@ Onboarding akışının bir depoya katmanladığı yetenekler. Dördü isteğe b
 - **[devcontainer](/tr/kit/devcontainer)** — Kodlama ajanları olmadan sunulan bir Dev Containers şablonu ve temel imajlar. Sabitlenen sürüm `devcontainer-kit@v0.1.4`.
 - **[vim](/tr/kit/vim)** — Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi. Sabitlenen sürüm `deepworkplan-vim@v0.4.2`.
 
-Eklenti kayıt defteri ve tanımlayıcılar, bir ön sürüm olan v7 betasında sunulur: `v7.0.0-beta.1`
+Eklenti kayıt defteri ve tanımlayıcılar Deep Work Plan v7 ile sunulur: `v7.0.0`
 
 ### Örnekler
 

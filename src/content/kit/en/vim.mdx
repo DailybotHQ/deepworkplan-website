@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** is the terminal editor for Deep Work Plan: a Neovim configuration for people, and for coding agents, that work in a terminal. Your plans, your documentation and an index of every command are one keystroke away.
 
-It is a separate product, offered as the optional `vim` addon of the Deep Work Plan v7 beta (`v7.0.0-beta.1`, a pre-release). Deep Work Plan works with any editor or none, and the editor does not require Deep Work Plan: you add it to a machine on its own, and it works as an editor whether or not a plan exists. This page describes release **v0.4.2**.
+It is a separate product, offered as the optional `vim` addon of Deep Work Plan v7 (`v7.0.0`). Deep Work Plan works with any editor or none, and the editor does not require Deep Work Plan: you add it to a machine on its own, and it works as an editor whether or not a plan exists. This page describes release **v0.4.2**.
 
 ## Why a terminal editor for Deep Work Plan
 
@@ -115,7 +115,7 @@ No. It is an editor first. It does not install or require the Deep Work Plan ski
 
 ### How does the v7 vim addon use it?
 
-The Deep Work Plan v7 beta offers the editor as the optional `vim` addon during onboarding. The addon detects an existing install read-only, through the editor's `addon/surface.json`, and offers the pinned, checksum-verified install only with your consent. It never overwrites an existing Neovim configuration without explicit approval, and it is never required.
+Deep Work Plan v7 offers the editor as the optional `vim` addon during onboarding. The addon detects an existing install read-only, through the editor's `addon/surface.json`, and offers the pinned, checksum-verified install only with your consent. It never overwrites an existing Neovim configuration without explicit approval, and it is never required.
 
 ### How do coding agents use it?
 
@@ -138,5 +138,5 @@ The source is the [DeepWorkPlan Vim repository](https://github.com/DailybotHQ/de
 - [Devcontainer](/kit/devcontainer) — reproducible dev environment (first addon)
 - [Dailybot](/kit/dailybot) — team-visible plan lifecycle reporting (second addon)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — local review during plan Final Reviews (fifth addon)
-- [Herdr](/kit/herdr) — delegate a task to a peer agent in a Herdr pane (v7 beta)
-- [Agentkit](/kit/agentkit) — one command for every terminal coding agent, and headless delegation (v7 beta)
+- [Herdr](/kit/herdr) — delegate a task to a peer agent in a Herdr pane (v7)
+- [Agentkit](/kit/agentkit) — one command for every terminal coding agent, and headless delegation (v7)

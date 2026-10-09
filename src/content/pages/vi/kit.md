@@ -67,7 +67,7 @@ Các năng lực mà luồng onboard bổ sung vào một repo. Bốn addon là 
 - **[devcontainer](/vi/kit/devcontainer)** — Một template Dev Containers và các image cơ sở được phân phối không kèm agent lập trình. Ghim tại `devcontainer-kit@v0.1.4`.
 - **[vim](/vi/kit/vim)** — Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown. Ghim tại `deepworkplan-vim@v0.4.2`.
 
-Registry addon và các descriptor được phân phối trong bản beta v7, một bản phát hành trước: `v7.0.0-beta.1`
+Registry addon và các descriptor được phân phối trong Deep Work Plan v7: `v7.0.0`
 
 ### Ví dụ
 

@@ -67,7 +67,7 @@ Capabilities the onboard flow layers onto a repo. Four are optional and never pa
 - **[devcontainer](/kit/devcontainer)** — A Dev Containers template and base images that ship without coding agents. Pinned at `devcontainer-kit@v0.1.4`.
 - **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v0.4.2`.
 
-The addon registry and descriptors ship in the v7 beta, a pre-release: `v7.0.0-beta.1`
+The addon registry and descriptors ship in Deep Work Plan v7: `v7.0.0`
 
 ### Examples
 

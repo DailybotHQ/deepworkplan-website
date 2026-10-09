@@ -7,8 +7,8 @@
  * (en fallback); dark mode through the Broadsheet tokens; zero JS.
  *
  * Every pin and statement traces to the PLAN_004_v7_kit_pages_and_vendor
- * claims ledger (C-01, C-03, C-04, C-11, C-21, C-31, C-39, C-46, C-47). The
- * pack itself is a pre-release beta and is never presented as stable.
+ * claims ledger (C-01, C-03, C-04, C-11, C-21, C-31, C-39, C-46, C-47) and the
+ * stable DWP v7.0.0 release (ecosystem amendment A9).
  */
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 
@@ -45,7 +45,7 @@ const products = [
     tag: 'v0.4.2',
   },
 ] as const;
-const packTag = 'v7.0.0-beta.1';
+const packTag = 'v7.0.0';
 
 const i18n = {
   en: {
@@ -63,8 +63,7 @@ const i18n = {
       'A Dev Containers template and base images that ship without coding agents.',
       'The terminal editor, with a read-only plan browser and a Markdown viewer.',
     ],
-    betaNote:
-      'The addon registry and descriptors ship in the v7 beta, a pre-release:',
+    packNote: 'The addon registry and descriptors ship in Deep Work Plan v7:',
   },
   es: {
     kicker: 'Ecosistema',
@@ -81,8 +80,8 @@ const i18n = {
       'Una plantilla de Dev Containers e imágenes base que se distribuyen sin agentes de programación.',
       'El editor de terminal, con un explorador de planes de solo lectura y un visor de Markdown.',
     ],
-    betaNote:
-      'El registro de addons y los descriptores se distribuyen en la beta de v7, una versión preliminar:',
+    packNote:
+      'El registro de addons y los descriptores se distribuyen en Deep Work Plan v7:',
   },
   pt: {
     kicker: 'Ecossistema',
@@ -99,8 +98,8 @@ const i18n = {
       'Um template de Dev Containers e imagens base distribuídos sem agentes de programação.',
       'O editor de terminal, com um navegador de planos somente leitura e um visualizador de Markdown.',
     ],
-    betaNote:
-      'O registro de addons e os descritores são distribuídos na beta da v7, uma pré-release:',
+    packNote:
+      'O registro de addons e os descritores são distribuídos no Deep Work Plan v7:',
   },
   zh: {
     kicker: '生态系统',
@@ -116,7 +115,7 @@ const i18n = {
       '一个 Dev Containers 模板及基础镜像，不附带任何编码代理。',
       '终端编辑器，带有只读的计划浏览器和 Markdown 查看器。',
     ],
-    betaNote: '附加组件注册表和描述文件随 v7 beta 发布，这是一个预发布版本：',
+    packNote: '附加组件注册表和描述文件随 Deep Work Plan v7 发布：',
   },
   ja: {
     kicker: 'エコシステム',
@@ -133,8 +132,8 @@ const i18n = {
       'コーディングエージェントを含まずに提供される Dev Containers テンプレートとベースイメージ。',
       '読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。',
     ],
-    betaNote:
-      'アドオンのレジストリと記述子は、プレリリースである v7 ベータに含まれています：',
+    packNote:
+      'アドオンのレジストリと記述子は Deep Work Plan v7 に含まれています：',
   },
   de: {
     kicker: 'Ökosystem',
@@ -151,8 +150,8 @@ const i18n = {
       'Eine Vorlage für Dev Containers und Basis-Images, die ohne Coding-Agenten ausgeliefert werden.',
       'Der Terminal-Editor, mit einem schreibgeschützten Plan-Browser und einem Markdown-Viewer.',
     ],
-    betaNote:
-      'Die Addon-Registry und die Deskriptoren werden in der v7-Beta ausgeliefert, einem Pre-Release:',
+    packNote:
+      'Die Addon-Registry und die Deskriptoren werden in Deep Work Plan v7 ausgeliefert:',
   },
   fr: {
     kicker: 'Écosystème',
@@ -169,8 +168,8 @@ const i18n = {
       'Un modèle Dev Containers et des images de base distribués sans agents de code.',
       'L’éditeur de terminal, avec un navigateur de plans en lecture seule et une visionneuse Markdown.',
     ],
-    betaNote:
-      'Le registre des addons et les descripteurs sont livrés dans la bêta v7, une préversion :',
+    packNote:
+      'Le registre des addons et les descripteurs sont livrés dans Deep Work Plan v7 :',
   },
   ko: {
     kicker: '생태계',
@@ -187,8 +186,8 @@ const i18n = {
       '코딩 에이전트 없이 제공되는 Dev Containers 템플릿과 베이스 이미지.',
       '읽기 전용 계획 브라우저와 Markdown 뷰어를 갖춘 터미널 편집기.',
     ],
-    betaNote:
-      '애드온 레지스트리와 디스크립터는 프리릴리스인 v7 베타에 포함되어 있습니다:',
+    packNote:
+      '애드온 레지스트리와 디스크립터는 Deep Work Plan v7에 포함되어 있습니다:',
   },
   ru: {
     kicker: 'Экосистема',
@@ -205,8 +204,8 @@ const i18n = {
       'Шаблон Dev Containers и базовые образы, поставляемые без агентов для программирования.',
       'Терминальный редактор с браузером планов только для чтения и просмотрщиком Markdown.',
     ],
-    betaNote:
-      'Реестр дополнений и дескрипторы поставляются в бета-версии v7, это пре-релиз:',
+    packNote:
+      'Реестр дополнений и дескрипторы поставляются в Deep Work Plan v7:',
   },
   it: {
     kicker: 'Ecosistema',
@@ -223,8 +222,8 @@ const i18n = {
       'Un template Dev Containers e immagini di base distribuiti senza agenti di codice.',
       'L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown.',
     ],
-    betaNote:
-      'Il registro degli addon e i descrittori sono distribuiti nella beta v7, una pre-release:',
+    packNote:
+      'Il registro degli addon e i descrittori sono distribuiti in Deep Work Plan v7:',
   },
   tr: {
     kicker: 'Ekosistem',
@@ -241,8 +240,8 @@ const i18n = {
       'Kodlama ajanları olmadan sunulan bir Dev Containers şablonu ve temel imajlar.',
       'Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi.',
     ],
-    betaNote:
-      'Eklenti kayıt defteri ve tanımlayıcılar, bir ön sürüm olan v7 betasında sunulur:',
+    packNote:
+      'Eklenti kayıt defteri ve tanımlayıcılar Deep Work Plan v7 ile sunulur:',
   },
   id: {
     kicker: 'Ekosistem',
@@ -259,8 +258,8 @@ const i18n = {
       'Template Dev Containers dan image dasar yang dikirimkan tanpa coding agent.',
       'Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown.',
     ],
-    betaNote:
-      'Registri addon dan deskriptor dikirimkan dalam beta v7, sebuah pra-rilis:',
+    packNote:
+      'Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v7:',
   },
   vi: {
     kicker: 'Hệ sinh thái',
@@ -277,8 +276,8 @@ const i18n = {
       'Một template Dev Containers và các image cơ sở được phân phối không kèm agent lập trình.',
       'Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown.',
     ],
-    betaNote:
-      'Registry addon và các descriptor được phân phối trong bản beta v7, một bản phát hành trước:',
+    packNote:
+      'Registry addon và các descriptor được phân phối trong Deep Work Plan v7:',
   },
   hi: {
     kicker: 'इकोसिस्टम',
@@ -295,7 +294,7 @@ const i18n = {
       'एक Dev Containers टेम्पलेट और बेस इमेज, जो कोडिंग एजेंट के बिना आते हैं।',
       'टर्मिनल एडिटर, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर के साथ।',
     ],
-    betaNote: 'ऐडऑन रजिस्ट्री और डिस्क्रिप्टर v7 बीटा में आते हैं, जो एक प्री-रिलीज़ है:',
+    packNote: 'ऐडऑन रजिस्ट्री और डिस्क्रिप्टर Deep Work Plan v7 में आते हैं:',
   },
   pl: {
     kicker: 'Ekosystem',
@@ -312,8 +311,8 @@ const i18n = {
       'Szablon Dev Containers i obrazy bazowe dostarczane bez agentów kodujących.',
       'Edytor terminalowy z przeglądarką planów tylko do odczytu i podglądem Markdown.',
     ],
-    betaNote:
-      'Rejestr dodatków i deskryptory są dostarczane w becie v7, wydaniu przedpremierowym:',
+    packNote:
+      'Rejestr dodatków i deskryptory są dostarczane w Deep Work Plan v7:',
   },
   uk: {
     kicker: 'Екосистема',
@@ -330,8 +329,7 @@ const i18n = {
       'Шаблон Dev Containers і базові образи, що постачаються без агентів для коду.',
       'Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown.',
     ],
-    betaNote:
-      'Реєстр аддонів і дескриптори постачаються в бета-версії v7, це пре-реліз:',
+    packNote: 'Реєстр аддонів і дескриптори постачаються в Deep Work Plan v7:',
   },
   th: {
     kicker: 'ระบบนิเวศ',
@@ -347,8 +345,7 @@ const i18n = {
       'เทมเพลต Dev Containers และอิมเมจพื้นฐานที่จัดส่งโดยไม่มีเอเจนต์เขียนโค้ด',
       'ตัวแก้ไขบนเทอร์มินัล พร้อมตัวเรียกดูแผนแบบอ่านอย่างเดียวและตัวแสดงผล Markdown',
     ],
-    betaNote:
-      'รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาในเบต้าของ v7 ซึ่งเป็น pre-release:',
+    packNote: 'รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาใน Deep Work Plan v7:',
   },
 } as const;
 const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
@@ -385,7 +382,7 @@ const prefix = getUrlPrefix(lang);
   </ul>
 
   <p class="kiteco-note">
-    {t.betaNote} <code>{packTag}</code>
+    {t.packNote} <code>{packTag}</code>
   </p>
 </section>
 

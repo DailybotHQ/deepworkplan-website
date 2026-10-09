@@ -68,7 +68,7 @@ The repository practices the methodology it documents. The official DeepWorkPlan
 To use the methodology in your own repository, install the Deep Work Plan skill pinned to a release tag:
 
 ```bash
-npx --yes skills add DailybotHQ/deepworkplan-skill@v6.1.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
 Verify it against the release `SHA256SUMS` first — the recipe is on [deepworkplan.com/trust](https://deepworkplan.com/trust).

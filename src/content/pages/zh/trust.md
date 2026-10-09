@@ -33,12 +33,6 @@ curl -fsSL -o SHA256SUMS \
 
 同样的规则也适用于 DeepWorkPlan Vim 的安装程序：其页面会显示当前提供的脚本的 SHA-256，并给出下载、检查、验证、运行的步骤。 [检查 DeepWorkPlan Vim 安装程序](/kit/vim#inspect-before-you-run)
 
-预发布版本的验证方式相同。v7 beta 版本 v7.0.0-beta.1 是 GitHub 上的预发布版本，带有自己的 SHA256SUMS，它不是稳定版本。本站内置它以进行实地测试：按其固定的 tag 安装，并依据这些校验和进行核对。
-
-```bash
-npx --yes skills add DailybotHQ/deepworkplan-skill@v7.0.0-beta.1 --skill deepworkplan -y
-```
-
 ---
 
 ## 报告漏洞

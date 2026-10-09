@@ -67,7 +67,7 @@ Możliwości, które przepływ onboardingu nakłada na repozytorium. Cztery są 
 - **[devcontainer](/pl/kit/devcontainer)** — Szablon Dev Containers i obrazy bazowe dostarczane bez agentów kodujących. Przypięty do `devcontainer-kit@v0.1.4`.
 - **[vim](/pl/kit/vim)** — Edytor terminalowy z przeglądarką planów tylko do odczytu i podglądem Markdown. Przypięty do `deepworkplan-vim@v0.4.2`.
 
-Rejestr dodatków i deskryptory są dostarczane w becie v7, wydaniu przedpremierowym: `v7.0.0-beta.1`
+Rejestr dodatków i deskryptory są dostarczane w Deep Work Plan v7: `v7.0.0`
 
 ### Przykłady
 

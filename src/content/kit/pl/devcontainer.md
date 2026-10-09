@@ -8,7 +8,7 @@ order: 1
 
 # Addon Devcontainer
 
-Zapewnij repozytorium powtarzalny, odizolowany kontener deweloperski — taki, z którego mogą korzystać ludzie, edytory i agenci kodujący. W **wersji beta DWP v7** (`v7.0.0-beta.1`, wydanie przedpremierowe) ten addon integruje **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produkt na licencji MIT działający bez Deep Work Plan, i zastępuje szablon, który dotąd zawierał pakiet. Jest opcjonalny: repozytorium bez niego jest w pełni zgodne.
+Zapewnij repozytorium powtarzalny, odizolowany kontener deweloperski — taki, z którego mogą korzystać ludzie, edytory i agenci kodujący. W **DWP v7** (`v7.0.0`) ten addon integruje **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produkt na licencji MIT działający bez Deep Work Plan, i zastępuje szablon, który dotąd zawierał pakiet. Jest opcjonalny: repozytorium bez niego jest w pełni zgodne.
 
 ## Co zapewnia devcontainer-kit
 

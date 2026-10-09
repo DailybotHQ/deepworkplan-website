@@ -64,7 +64,7 @@ Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Wind
 - **[devcontainer](/hi/kit/devcontainer)** — एक Dev Containers टेम्पलेट और बेस इमेज, जो कोडिंग एजेंट के बिना आते हैं। पिन किया गया `devcontainer-kit@v0.1.4`।
 - **[vim](/hi/kit/vim)** — टर्मिनल एडिटर, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर के साथ। पिन किया गया `deepworkplan-vim@v0.4.2`।
 
-ऐडऑन रजिस्ट्री और डिस्क्रिप्टर v7 बीटा में आते हैं, जो एक प्री-रिलीज़ है: `v7.0.0-beta.1`
+ऐडऑन रजिस्ट्री और डिस्क्रिप्टर Deep Work Plan v7 में आते हैं: `v7.0.0`
 
 ### उदाहरण
 

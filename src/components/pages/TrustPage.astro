@@ -32,8 +32,11 @@ curl -fsSL -o SHA256SUMS \\
 // The vendored pre-release's pinned install line — code, never localized. Read
 // from the trust manifest, which scripts/stamp-versions.mjs derives from the
 // vendored SKILL.md, so the page and the manifest cannot drift apart.
-const betaInstallCommand: string | undefined =
-  trustManifest.prerelease?.install;
+// The block exists only while a pre-release is vendored, so it is typed as
+// optional rather than inferred from today's file.
+const betaInstallCommand: string | undefined = (
+  trustManifest as { prerelease?: { install?: string } }
+).prerelease?.install;
 
 // Direct "report a vulnerability" links → GitHub private vulnerability reporting.
 const reportLinks: { label: string; href: string }[] = [

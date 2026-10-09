@@ -1,0 +1,22 @@
+{
+  "addons": {
+    "ai-diff-reviewer": {
+      "enabled": true,
+      "note": "back-filled on upgrade: already installed (detected v3.3.0)",
+      "version": "v3.3.0"
+    },
+    "dailybot": {
+      "enabled": true,
+      "note": "repo-level: vendored skill + lifecycle hooks in .agents/settings.json (AGENTS.md)",
+      "version": "v3.23.3"
+    },
+    "dependency-upgrade": {
+      "enabled": true,
+      "note": "back-filled on upgrade: already installed (detected present)"
+    },
+    "design-system": {
+      "enabled": true,
+      "note": "back-filled on upgrade: already installed (detected present)"
+    }
+  }
+}

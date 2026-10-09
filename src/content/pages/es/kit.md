@@ -72,7 +72,7 @@ AI-first; la revisión local de AI Diff Reviewer es requerida desde el estándar
 - **[devcontainer](/es/kit/devcontainer)** — Una plantilla de Dev Containers e imágenes base que se distribuyen sin agentes de programación. Fijado en `devcontainer-kit@v0.1.4`.
 - **[vim](/es/kit/vim)** — El editor de terminal, con un explorador de planes de solo lectura y un visor de Markdown. Fijado en `deepworkplan-vim@v0.4.2`.
 
-El registro de addons y los descriptores se distribuyen en la beta de v7, una versión preliminar: `v7.0.0-beta.1`
+El registro de addons y los descriptores se distribuyen en Deep Work Plan v7: `v7.0.0`
 
 ### Ejemplos
 
