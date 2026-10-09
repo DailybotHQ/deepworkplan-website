@@ -48,6 +48,11 @@ describe('installer provenance', () => {
     expect(getInstallerFacts().sha256).toBe(VIM_INSTALLER_TAG_SHA256);
   });
 
+  it('serves a script that installs the pinned release by default', () => {
+    const source = readFileSync(installerPath, 'utf8');
+    expect(source).toContain(`RELEASE_REF="${VIM_INSTALLER_TAG}"`);
+  });
+
   it('serves a sha256sum-format checksum of the served installer', () => {
     const checksum = readFileSync(
       resolve(process.cwd(), 'public/vim/install.sh.sha256'),
