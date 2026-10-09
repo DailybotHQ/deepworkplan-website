@@ -9,6 +9,13 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.38] - 2026-10-09
+
+### Changed
+
+- docs(hub): keep the pack's vim addon pin apart from the product page pin
+- chore(vim): serve the v0.5.1 installer and pin images to it
+
 ## [5.0.37] - 2026-10-09
 
 ### Changed
@@ -1112,7 +1119,8 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.37...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.38...HEAD
+[5.0.38]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.38
 [5.0.37]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.37
 [5.0.36]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.36
 [5.0.35]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.35
