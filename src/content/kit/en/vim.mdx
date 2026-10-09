@@ -76,8 +76,6 @@ In order, the installer:
 
 The script served here is a byte-identical copy of `install.sh` at the `v0.5.0` tag. Its checksum is served next to it, at `https://deepworkplan.com/vim/install.sh.sha256`, so you can verify the download with `shasum -a 256 -c install.sh.sha256` (on Linux, `sha256sum -c install.sh.sha256`). For a check from a second origin, compare it with the `install.sh` line of `SHA256SUMS` on the GitHub release. Run `bash install.sh --help` to list every option.
 
-<a id="choose-a-version"></a>
-
 ## Choose a version
 
 By default the installer installs its own release, `v0.5.0`. To choose another, set `DWP_VIM_VERSION` or pass `--version`: both do the same thing, so use whichever reads better, and a flag wins over the environment. Each accepts:
