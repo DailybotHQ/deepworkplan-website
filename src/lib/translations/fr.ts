@@ -1304,6 +1304,8 @@ export const fr: SiteTranslations = {
     vimNote:
       'La même règle vaut pour l’installateur de DeepWorkPlan Vim : sa page affiche le SHA-256 du script tel qu’il est servi, avec une marche à suivre pour télécharger, inspecter, vérifier et exécuter.',
     vimLinkLabel: 'Inspecter l’installateur de DeepWorkPlan Vim',
+    betaNote:
+      'Les préversions se vérifient de la même manière. La bêta v7, v7.0.0-beta.1, est une préversion GitHub avec son propre SHA256SUMS, et ce n’est pas la version stable. Ce site l’intègre pour la tester en conditions réelles : installée par son tag épinglé et vérifiée avec ces sommes de contrôle.',
     disclosureTitle: 'Signaler une vulnérabilité',
     disclosureBody:
       "Vous avez découvert un problème de sécurité ? Signalez-le en privé via le système de signalement privé de vulnérabilités de GitHub sur le dépôt concerné — la skill ou le site web (voir les politiques de sécurité liées ci-dessous) — plutôt que d'ouvrir un ticket public, ce qui exposerait le problème avant qu'un correctif n'existe.",

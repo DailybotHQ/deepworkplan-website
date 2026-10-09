@@ -111,8 +111,9 @@ Methodology/spec/kit docs live in multilingual content collections (17 active la
 
 ## DWP v6 host and authority records
 
-The current DWP standard is 6.0.0, implemented by the installed 6.0.2 skill.
-The 6.x pack creates new plans with v6 by default; plans from earlier
+The current DWP standard is 6.0.0. The installed skill is the 7.0.0-beta.1
+pre-release (vendored for the v7 field test; it declares standard 7.0.0 and
+keeps 6.0.0 declarations valid). The beta creates new plans with v7 by default; plans from earlier
 generations retain their recorded format and are never migrated implicitly.
 A v5-to-v6 migration requires an explicit request and preview.
 

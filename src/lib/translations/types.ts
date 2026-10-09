@@ -616,6 +616,8 @@ export interface SiteTranslations {
     /** Pointer from the verify section to the DeepWorkPlan Vim installer page. */
     vimNote: string;
     vimLinkLabel: string;
+    /** Pre-release note in the verify section: the vendored v7 beta. */
+    betaNote: string;
     disclosureTitle: string;
     disclosureBody: string;
     resourcesTitle: string;

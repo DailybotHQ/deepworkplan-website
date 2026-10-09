@@ -28,6 +28,11 @@ curl -fsSL -o SHA256SUMS \\
   ${REPO_URLS.skill}/releases/download/vX.Y.Z/SHA256SUMS
 ./setup.sh --verify        # non-zero exit means a file does not match — stop`;
 
+// The vendored v7 beta (pre-release), installed by its pinned tag — code, never
+// localized; the same line the AGENTS.md provenance and /trust.md record.
+const betaInstallCommand =
+  'npx --yes skills add DailybotHQ/deepworkplan-skill@v7.0.0-beta.1 --skill deepworkplan -y';
+
 // Direct "report a vulnerability" links → GitHub private vulnerability reporting.
 const reportLinks: { label: string; href: string }[] = [
   {
@@ -159,6 +164,12 @@ const breadcrumbSchema = {
           style="color: var(--color-secondary);">{p.vimLinkLabel}</a
         >
       </p>
+      <p class="mt-4 leading-relaxed" style="color: var(--color-gray-600);">
+        {p.betaNote}
+      </p>
+      <div class="mt-3 overflow-hidden border" style="border-color: var(--color-line);">
+        <pre class="overflow-x-auto px-3 py-3" style="background-color: var(--color-gray-100);"><code class="font-mono text-xs leading-relaxed" style="color: var(--color-ink);">{betaInstallCommand}</code></pre>
+      </div>
     </section>
 
     <Rule class="my-12" />

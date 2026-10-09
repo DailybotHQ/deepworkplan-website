@@ -33,6 +33,12 @@ As versões têm **checksums, não assinaturas criptográficas** — a assinatur
 
 A mesma regra aplica-se ao instalador do DeepWorkPlan Vim: a sua página mostra o SHA-256 do script tal como é servido, com uma receita para obter, inspecionar, verificar e executar. [Inspecionar o instalador do DeepWorkPlan Vim](/kit/vim#inspect-before-you-run)
 
+As pré-releases são verificadas da mesma forma. A beta da v7, v7.0.0-beta.1, é uma pré-release do GitHub com o seu próprio SHA256SUMS, e não é a versão estável. Este site a incorpora para testá-la em uso real: instalada pela sua tag fixada e conferida com esses checksums.
+
+```bash
+npx --yes skills add DailybotHQ/deepworkplan-skill@v7.0.0-beta.1 --skill deepworkplan -y
+```
+
 ---
 
 ## Reportar uma vulnerabilidade
