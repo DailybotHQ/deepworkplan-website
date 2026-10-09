@@ -28,6 +28,8 @@ jobs:
           persist-credentials: false
       - name: Public-hygiene check (tracked files, no network)
         run: bash scripts/check-public-hygiene.sh
+      - name: Ecosystem hub sync script tests (offline fixtures)
+        run: bash tests/scripts/repositories.test.sh
 
   lint-test:
     name: lint and test

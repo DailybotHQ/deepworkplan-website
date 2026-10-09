@@ -207,6 +207,20 @@ pnpm run release
   carries `SHA256SUMS` over `public/` and `cli/` (`.github/scripts/release_assets.sh`)
 - Format: `[🤖 the Deep Work Plan team] New release to v{version} launched 🚀`
 
+## Ecosystem Hub Repositories
+
+This repository is also the ecosystem hub ([Ecosystem Context](ECOSYSTEM_CONTEXT.md)). The sync script needs only bash 3.2+, git and python3 (no Node), so it runs on the host or inside the development container alike — the workspace is mounted, so both write the same git-ignored `repositories/`:
+
+```bash
+bash scripts/repositories.sh ls              # manifest: name, role, visibility, gate
+bash scripts/repositories.sh clone [name...] # clone what is missing (HTTPS)
+bash scripts/repositories.sh status [name...]# branch, clean/dirty, ahead/behind
+bash scripts/repositories.sh pull [name...]  # fast-forward clean default-branch checkouts only
+bash tests/scripts/repositories.test.sh      # offline fixture tests (also: pnpm run test:scripts)
+```
+
+It never deletes, never touches a dirty tree, a detached HEAD or a feature-branch checkout, never follows a symlinked checkout, and never rewrites a remote. It validates the manifest first (plain directory names, `https://` URLs only, sane branch names), clones over HTTPS only and never waits on a credential prompt. Exit status: `0` when every repository is fine or skipped by a safety rule, `1` when a clone, fetch or fast-forward failed, `2` on a usage or manifest error or an unknown repository name. Work inside a clone follows that repository's own `AGENTS.md` ([Cross-Project Standards](CROSS_PROJECT_STANDARDS.md)).
+
 ## Astro CLI
 
 The Astro CLI is available via `pnpm run astro`:
@@ -349,7 +363,9 @@ Full `package.json` scripts:
     "biome:fix:unsafe": "biome check --write --unsafe",
     "ncu:check": "ncu",
     "ncu:upgrade": "ncu -u",
-    "test": "echo 'Running tests...'",
+    "test": "vitest run",
+    "test:scripts": "bash tests/scripts/repositories.test.sh",
+    "repositories": "bash scripts/repositories.sh",
     "release": "bash .github/scripts/prepare_release.sh"
   }
 }

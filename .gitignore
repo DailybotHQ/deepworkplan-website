@@ -71,3 +71,10 @@ spanish.png
 
 # Wrangler local cache (Cloudflare Pages dev)
 .wrangler/
+
+# Ecosystem hub: repositories/<name> are independent clones managed by
+# scripts/repositories.sh (each commits, branches and opens PRs in its own
+# repository). Only the navigation index and the manifest are tracked here.
+repositories/*
+!repositories/README.md
+!repositories/manifest.json
