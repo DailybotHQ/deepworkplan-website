@@ -33,7 +33,14 @@ RELEASE_MESSAGE="[🤖 Deep Work Plan] New release to ${TAG} launched 🚀"
 # vX.Y.Z (tests/unit/lib/openapi.test.ts enforces the parity).
 node scripts/stamp-versions.mjs
 
-git add package.json
+# Roll CHANGELOG.md's [Unreleased] entries into this version (Keep a
+# Changelog). An empty [Unreleased] falls back to the commit subjects since
+# the previous release, so every tag has a section; the GitHub release body is
+# that section (.github/scripts/release_assets.sh).
+bash .github/scripts/get_github_release_log.sh
+python3 .github/scripts/release_changelog.py "${VERSION}" < git_logs_output.txt
+
+git add package.json CHANGELOG.md
 git add public/openapi.json public/api/health.json public/.well-known/mcp.json public/.well-known/mcp/server-card.json src/lib/mcp/server-info.ts 2>/dev/null || true
 if [[ -f "pnpm-lock.yaml" ]]; then
   git add pnpm-lock.yaml

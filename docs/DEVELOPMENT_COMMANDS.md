@@ -201,7 +201,10 @@ pnpm run release
 ```
 
 - Bumps patch version
-- Creates commit with release message
+- Rolls `CHANGELOG.md` `[Unreleased]` into the new version (Keep a Changelog)
+- Creates commit with release message and an annotated `vX.Y.Z` tag
+- In CI, the GitHub release body is that CHANGELOG section and the release
+  carries `SHA256SUMS` over `public/` and `cli/` (`.github/scripts/release_assets.sh`)
 - Format: `[🤖 the Deep Work Plan team] New release to v{version} launched 🚀`
 
 ## Astro CLI

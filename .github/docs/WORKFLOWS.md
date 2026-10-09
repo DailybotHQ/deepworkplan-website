@@ -159,9 +159,10 @@ Extracts the PR's size label and maps to emoji for the workflow summary.
 | 1 | Setup GitHub Config | Git config |
 | 1a | **Dogfood — refresh addon skills** | Resolves the latest tag of `DailybotHQ/agent-skill` and `DailybotHQ/ai-diff-reviewer` via `gh release view`, and if either is newer than the vendored copy under `.agents/skills/`, runs `npx --yes skills add <repo>@<tag> --skill <name> --force -y`, asserts the version invariant, and commits `chore: dogfood vendored skills to (…)`. **Does not touch `deepworkplan`** (repo-adapted). **Runs before Step 2** so the dogfood commit lands in the release notes. See "Dogfood step" below for details. |
 | 2 | Release notes | Runs `scripts/get_github_release_log.sh` — includes the dogfood commit from Step 1a if it exists |
-| 3 | Prepare release | `corepack pnpm install --frozen-lockfile && corepack pnpm run release` + push tags to main (pushes the dogfood commit alongside the version-bump commit + tag in one atomic push) |
+| 3 | Prepare release | `corepack pnpm install --frozen-lockfile && corepack pnpm run release` + push tags to main (pushes the dogfood commit alongside the version-bump commit + tag in one atomic push). `prepare_release.sh` also rolls `CHANGELOG.md`'s `[Unreleased]` into the new version (`.github/scripts/release_changelog.py`; empty → the commit subjects) inside the same release commit |
 | 4 | Get release tag | Extract latest tag |
-| 5 | Publish release | `ncipollo/release-action@v1` |
+| 4a | Release assets | `.github/scripts/release_assets.sh <tag>`: `release_notes.md` = the tag's `CHANGELOG.md` section; `SHA256SUMS` = sha256 of every tracked file under `public/` and `cli/` (ecosystem amendment A3 S4) |
+| 5 | Publish release | `ncipollo/release-action@v1` with `bodyFile: release_notes.md` and `artifacts: SHA256SUMS` (annotated tag from Step 3) |
 
 **Helper script:** `scripts/get_github_release_log.sh`
 - Reads `git log --pretty=oneline`
