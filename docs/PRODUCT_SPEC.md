@@ -10,6 +10,7 @@ Beyond turning a repository AI-first, DWP lets that repository **evolve its own 
 
 - **The author sub-skill** — invoked through `/skill-create` and `/agent-create`, it reasons about the repository's existing `.agents/` layout and conventions and authors new skills, agents, or thin command delegators that match them, keeping the catalog in sync. The repository grows its own kit instead of inheriting a generic one. The same sub-skill backs the mandatory Skills & Agents Discovery task.
 - **Maintenance add-ons** — opt-in extensions, never required for conformance (the AI Diff Reviewer local review is the one required component since standard 2.3.0; its CI surface stays optional). The **dependency-upgrade** add-on reasons about the repository's actual package manager (not assuming npm) and upgrades dependencies in small, validated, revertible batches, running the repository's real gate after each batch.
+- **The v7 ecosystem (beta)** — the methodology works alone; optional addons are thin integrators pinned by tag to products that work without DWP: Herdr peers (`/kit/herdr`, herdr-peers), headless delegation and one command for every coding CLI (`/kit/agentkit`, coding-agents-kit), the dev container (`/kit/devcontainer`, devcontainer-kit) and the editor (`/kit/vim`, deepworkplan-vim). The kit index shows them on one plate. The pack that ships them is the `v7.0.0-beta.1` pre-release; the site never presents it as stable.
 
 ### This repository dogfoods DWP
 
