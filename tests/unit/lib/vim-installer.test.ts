@@ -44,7 +44,7 @@ describe('getInstallerFacts', () => {
 
 describe('installer provenance', () => {
   it('serves the byte-identical installer of the pinned product release', () => {
-    expect(VIM_INSTALLER_TAG).toBe('v0.5.0');
+    expect(VIM_INSTALLER_TAG).toBe('v0.5.1');
     expect(getInstallerFacts().sha256).toBe(VIM_INSTALLER_TAG_SHA256);
   });
 

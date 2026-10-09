@@ -84,7 +84,7 @@
 /site.webmanifest
   Cache-Control: public, max-age=86400, must-revalidate
 
-# DeepWorkPlan Vim installer (deepworkplan-vim@v0.5.0 install.sh) and its
+# DeepWorkPlan Vim installer (deepworkplan-vim@v0.5.1 install.sh) and its
 # sha256sum-format checksum, served as plain text. Shown on /kit/vim as
 # download, verify, run; the apex /install.sh and /install.sh.sha256 301
 # here (public/_redirects).
