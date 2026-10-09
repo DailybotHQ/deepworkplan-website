@@ -27,7 +27,7 @@ git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./c
 ak doctor
 ```
 
-Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v0.1.1`: bản này thay thế `v0.1.0` và mang một bản sửa lỗi bảo mật.
+Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v0.1.1`: bản này thay thế `v0.1.0` và mang một bản sửa lỗi bảo mật. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
 
 | Mục | Giá trị |
 |---|---|

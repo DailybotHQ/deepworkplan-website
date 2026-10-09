@@ -27,7 +27,7 @@ git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./c
 ak doctor
 ```
 
-Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v0.1.1`: ela substitui a `v0.1.0` e traz uma correção de segurança.
+Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v0.1.1`: ela substitui a `v0.1.0` e traz uma correção de segurança. Verifique uma versão com o asset `SHA256SUMS` dela.
 
 | Item | Valor |
 |---|---|

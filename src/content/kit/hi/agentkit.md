@@ -27,7 +27,7 @@ git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./c
 ak doctor
 ```
 
-आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v0.1.1` पिन करें: यह `v0.1.0` का स्थान लेता है और इसमें एक सुरक्षा सुधार है।
+आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v0.1.1` पिन करें: यह `v0.1.0` का स्थान लेता है और इसमें एक सुरक्षा सुधार है। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
 
 | मद | मान |
 |---|---|
