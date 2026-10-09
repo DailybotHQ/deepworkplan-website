@@ -21,6 +21,13 @@ Claude Code có hỗ trợ DWP **đầy đủ** thông qua các slash command v�
 
 DWP được phân phối dưới dạng skill nằm trong `.agents/skills/` (được phân giải qua symlink `.claude/`). Claude Code tự động phát hiện chúng.
 
+Tùy chọn: [coding-agents-kit](/kit/agentkit) có thể cài đặt CLI này và khởi chạy nó bằng `ak claude`. Trình cài đặt chính thức của nhà cung cấp cũng hoạt động tốt như vậy.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install claude
+```
+
 ## Cách gọi
 
 Dùng tiền tố `/`:

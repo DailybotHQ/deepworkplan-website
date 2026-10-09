@@ -21,6 +21,13 @@ Açık kaynak kodlama ajanı OpenCode, DWP'yi yerel AGENTS.md ve markdown komut 
 
 DWP, AGENTS.md ve komut prosedürlerini depoda sunar; OpenCode bunları proje bağlamı olarak keşfeder.
 
+İsteğe bağlı: [coding-agents-kit](/kit/agentkit) bu CLI’yi kurabilir ve `ak opencode` ile başlatabilir. Sağlayıcının kendi resmi kurulum aracı da aynı şekilde çalışır.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install opencode
+```
+
 ## Çağırma
 
 `#` önekini kullanın:

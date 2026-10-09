@@ -21,6 +21,13 @@ Claude Code รองรับ DWP **เต็มรูปแบบ** ผ่า�
 
 DWP มาในรูป skill ภายใต้ `.agents/skills/` (เข้าถึงผ่าน symlink `.claude/`) Claude Code ค้นพบ skill เหล่านี้โดยอัตโนมัติ
 
+ไม่บังคับ: [coding-agents-kit](/kit/agentkit) สามารถติดตั้ง CLI นี้และเรียกใช้ด้วย `ak claude` ได้ ตัวติดตั้งทางการของผู้พัฒนาก็ใช้ได้เช่นกัน
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install claude
+```
+
 ## การเรียกใช้
 
 ใช้คำนำหน้า `/`

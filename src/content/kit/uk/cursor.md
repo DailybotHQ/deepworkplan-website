@@ -21,6 +21,13 @@ Cursor підтримує DWP через правила проєкту й фай
 
 Команди DWP існують як markdown у проєкті. Cursor читає їх через свою систему правил.
 
+Необов’язково: [coding-agents-kit](/kit/agentkit) може встановити цей CLI і запускати його командою `ak cursor`. Офіційний інсталятор постачальника працює так само добре.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install cursor
+```
+
 ## Виклик
 
 Використовуйте префікс `#` (Cursor перехоплює `/`):

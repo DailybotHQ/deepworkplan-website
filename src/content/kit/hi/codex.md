@@ -21,6 +21,13 @@ OpenAI Codex markdown कमांड प्रक्रियाओं के �
 
 DWP कमांड markdown प्रक्रियाओं के रूप में रहते हैं जिन्हें एजेंट आह्वान पर पढ़ता है; नियम `.codex/` के अंतर्गत स्थापित होते हैं।
 
+वैकल्पिक: [coding-agents-kit](/kit/agentkit) इस CLI को इंस्टॉल कर सकता है और `ak codex` से चला सकता है। विक्रेता का अपना आधिकारिक इंस्टॉलर भी उतना ही अच्छा काम करता है।
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install codex
+```
+
 ## आह्वान
 
 `#` प्रीफ़िक्स का उपयोग करें:

@@ -21,6 +21,13 @@ Cline, agent lập trình mã nguồn mở, hỗ trợ DWP thông qua các quy t
 
 Các lệnh DWP tồn tại dưới dạng quy trình markdown mà agent đọc qua các quy tắc của Cline.
 
+Tùy chọn: [coding-agents-kit](/kit/agentkit) có thể cài đặt CLI này và khởi chạy nó bằng `ak cline`. Trình cài đặt chính thức của nhà cung cấp cũng hoạt động tốt như vậy.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install cline
+```
+
 ## Cách gọi
 
 Dùng tiền tố `#`:

@@ -21,6 +21,13 @@ OpenCode, coding agent sumber terbuka, mendukung DWP melalui AGENTS.md native da
 
 DWP mengirimkan AGENTS.md dan prosedur command di dalam repositori; OpenCode menemukannya sebagai konteks proyek.
 
+Opsional: [coding-agents-kit](/kit/agentkit) dapat memasang CLI ini dan menjalankannya dengan `ak opencode`. Penginstal resmi dari vendor juga sama baiknya.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install opencode
+```
+
 ## Pemanggilan
 
 Gunakan prefix `#`:

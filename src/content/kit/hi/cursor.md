@@ -21,6 +21,13 @@ Cursor प्रोजेक्ट rules और कमांड फ़ाइल�
 
 DWP कमांड प्रोजेक्ट के अंतर्गत markdown के रूप में रहते हैं। Cursor उन्हें अपने rules सिस्टम के माध्यम से पढ़ता है।
 
+वैकल्पिक: [coding-agents-kit](/kit/agentkit) इस CLI को इंस्टॉल कर सकता है और `ak cursor` से चला सकता है। विक्रेता का अपना आधिकारिक इंस्टॉलर भी उतना ही अच्छा काम करता है।
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install cursor
+```
+
 ## आह्वान
 
 `#` प्रीफ़िक्स का उपयोग करें (Cursor `/` को अवरोधित करता है):

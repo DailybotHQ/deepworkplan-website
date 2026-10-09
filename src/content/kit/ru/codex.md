@@ -21,6 +21,13 @@ OpenAI Codex поддерживает DWP через командные проц
 
 Команды DWP живут как процедуры в Markdown, которые агент читает при вызове; правила устанавливаются в `.codex/`.
 
+Необязательно: [coding-agents-kit](/kit/agentkit) может установить этот CLI и запускать его командой `ak codex`. Официальный установщик поставщика работает так же хорошо.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install codex
+```
+
 ## Вызов
 
 Используйте префикс `#`:

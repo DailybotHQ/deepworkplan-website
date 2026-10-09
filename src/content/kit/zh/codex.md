@@ -21,6 +21,13 @@ Codex 通过 Markdown 命令过程支持 DWP。
 
 DWP 命令以代理在调用时读取的 Markdown 过程的形式存在；规则安装于 `.codex/` 之下。
 
+可选：[coding-agents-kit](/kit/agentkit) 可以安装此 CLI，并用 `ak codex` 启动它。使用供应商自己的官方安装程序同样可行。
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install codex
+```
+
 ## 调用
 
 使用 `#` 前缀：

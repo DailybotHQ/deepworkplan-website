@@ -21,6 +21,13 @@ Cline, el agente de programación de código abierto, admite DWP mediante reglas
 
 Los comandos de DWP viven como procedimientos en Markdown que el agente lee a través de las reglas de Cline.
 
+Opcional: [coding-agents-kit](/kit/agentkit) puede instalar esta CLI y lanzarla con `ak cline`. El instalador oficial del proveedor funciona igual de bien.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install cline
+```
+
 ## Invocación
 
 Usa el prefijo `#`:

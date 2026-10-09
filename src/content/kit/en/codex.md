@@ -21,6 +21,13 @@ Codex supports DWP through markdown command procedures.
 
 DWP commands live as markdown procedures the agent reads on invocation; rules are installed under `.codex/`.
 
+Optional: [coding-agents-kit](/kit/agentkit) can install this CLI and launch it with `ak codex`. The vendor’s own installer works just as well.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install codex
+```
+
 ## Invocation
 
 Use the `#` prefix:

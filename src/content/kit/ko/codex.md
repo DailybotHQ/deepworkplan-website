@@ -21,6 +21,13 @@ Codex는 Markdown 명령 절차를 통해 DWP를 지원합니다.
 
 DWP 명령은 에이전트가 호출 시 읽는 Markdown 절차로 존재합니다. 규칙은 `.codex/` 아래에 설치됩니다.
 
+선택 사항: [coding-agents-kit](/kit/agentkit)로 이 CLI를 설치하고 `ak codex`로 실행할 수 있습니다. 공급업체의 공식 설치 프로그램도 똑같이 사용할 수 있습니다.
+
+```bash
+git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+ak install codex
+```
+
 ## 호출
 
 `#` 접두어를 사용하세요.
