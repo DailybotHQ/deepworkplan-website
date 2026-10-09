@@ -38,7 +38,8 @@
       "!**/node_modules",
       "!**/public",
       "!**/.github",
-      "!**/tmp"
+      "!**/tmp",
+      "!**/repositories"
     ]
   },
   "formatter": {
