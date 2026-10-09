@@ -44,7 +44,7 @@ The last layer is why "edit `.env`, then open a new shell" is enough in practice
 
 ## AI CLIs (default image vs opt-in)
 
-**Always installed:** Herdr (`herdr`), Neovim 0.12.5 + mu-vim `v0.7.0` (`nvim`), Dailybot CLI, GitHub CLI, Z.AI coding-helper.
+**Always installed:** Herdr (`herdr`), Neovim 0.12.5 + DeepWorkPlan Vim `v0.5.0` (`nvim`), Dailybot CLI, GitHub CLI, Z.AI coding-helper.
 
 **Opt-in** (build args, default `false` — only the string `true` installs). Persist them in `docker/local/.env` (gitignored; copied from `.env.example` by `bash dev.sh setup`) so `bash dev.sh rebuild` keeps the CLIs. Compose interpolates that file into the Dockerfile args:
 
@@ -70,7 +70,7 @@ docker compose build \
 | CLI | Install method | Command | Default |
 |-----|----------------|---------|---------|
 | Herdr | Official [`curl` installer](https://herdr.dev/) | `herdr` | always |
-| mu-vim / nvim | Neovim tarball 0.12.5 + [DailybotHQ/deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) `v0.7.0` | `nvim` | always |
+| DeepWorkPlan Vim / nvim | Hosted installer `https://vim.deepworkplan.com/install.sh` (downloaded, verified against the release `install.sh.sha256`, then run with `--version 0.5.0 --nvim 0.12.5 --skip-packages --strict`) — [DailybotHQ/deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) `v0.5.0` + Neovim 0.12.5 | `nvim` | always |
 | Claude Code | Official `curl` installer | `claude` / `claudex` | opt-in |
 | Codex | pnpm global | `codex` / `codexx` | opt-in |
 | Cursor agent | Official `curl` installer | `agent` / `cursorx` | opt-in |
