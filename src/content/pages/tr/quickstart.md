@@ -104,7 +104,8 @@ Bu deponun ajanlarının yapılandırılmış işi planlayıp yürütebilmesi i�
 ile dokuz alt skill içerir — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` ve `upgrade`.
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill
+# pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
 Veya OpenClaw ile yükleyin:
@@ -122,11 +123,11 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 ### Güncel standart ve yürütme modeli
 
 Güncel depo odaklı standart, yukarıda kurulan Deep Work Plan skill sürümü tarafından
-uygulanan **DWP 6.0.0**'dır. Güncel skill paketi, yönlendirici ile dokuz alt skill'i
+uygulanan **DWP 7.0.0**'dır. Güncel skill paketi, yönlendirici ile dokuz alt skill'i
 içerir: `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`,
 `author` ve `upgrade`.
 
-Yüklü skill sürümü: **6.0.2**. Güncel 6.x paketi yeni planları varsayılan olarak v6 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; bir v5 planını v6'ya geçirmek açık ve önizlemeli bir geçiş gerektirir.
+Yüklü skill sürümü: **7.0.1**. Güncel 7.x paketi yeni planları varsayılan olarak v7 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; bir v5 planını v6'ya geçirmek açık ve önizlemeli bir geçiş gerektirir.
 
 Standart kasıtlı olarak orantılıdır ve bu orantıyı geliştiricinin disiplininin değil,
 planın bir özelliği hâline getirir. Bir plan ya küçük, sınırlı iş için planın
@@ -141,28 +142,41 @@ Lite plan `/dwp-refine promote` ile Full'a yükseltilir.
 Full bir plan için depo, kalıcı yürütme yüzeyidir. Plan; nelerin değiştiğini ve hangi
 tüketicilerin etkilendiğini açıklayan atomik görevler, bir **Dokunulan Yüzey**, kabul
 kriterleri ve deponun belgelenmiş test haritasından seçilen bir doğrulama kapısı
-içerir. v6’da oluşturma önce kimlik manifestosunu, ardından sözleşmeyi ve onay olayını yazar. Yalnızca eklemeli günlük yürütmeyi kaydeder; `state.json` bu günlükten türetilen bir anlık görüntüdür. Her adım kesintiden sonra kurtarılabilir.
+içerir. Yeni bir plan önce kimlik manifestosunu, ardından sürümlü sözleşmesini, sonra da onay olayını yazar. Yalnızca eklemeli günlük yürütmeyi kaydeder; `state.json` bu günlükten türetilen bir anlık görüntüdür. Her adım kesintiden sonra kurtarılabilir.
 
-Şema nesli her plana bağlı kalır. v5 planları `state.json` için
-https://deepworkplan.com/schema/plan-state/v5.json şemasını kullanmaya devam
-eder. Güncel 6.x paketiyle varsayılan olarak v6 oluşturulan planlarda `manifest.json` için
-https://deepworkplan.com/schema/plan-manifest/v6.json kullanılır; canlı
-görünüm https://deepworkplan.com/schema/plan-snapshot/v6.json adresindeki bir
-anlık görüntüdür. `plan-state/v6.json` yoktur: v6, yeniden adlandırılmış v5
-durum şeması yerine anlık görüntü kullanır. Mevcut planlar kayıtlı nesillerini
-korur ve asla yeniden yazılmaz. v6, v5 metodolojisini daha sıkı bir yapıyla
-sürdürür; ajan sonuçlarının aşağı kalmaması ölçülmemiştir.
+Şema nesli her plana bağlı kalır. Güncel 7.x paketi varsayılan olarak **v7**
+planları oluşturur: `manifest.json`,
+https://deepworkplan.com/schema/plan-manifest/v7.json şemasını izler;
+[sözleşme](https://deepworkplan.com/schema/plan-contract/v7.json), v6 sözleşmesine
+isteğe bağlı bir `parallel_safe` görev işaretçisi ekler; her
+[günlük olayı](https://deepworkplan.com/schema/journal-event/v7.json) ayrıca bir
+`delegation` da kaydedebilir. Canlı görünüm, değişmeden kalan
+https://deepworkplan.com/schema/plan-snapshot/v6.json anlık görüntüsünü korur ve
+[görev bağlam manifestosu](https://deepworkplan.com/schema/context-manifest/v6.json)
+v6 ile ortaktır. Açık bir `v6` isteği yine bir v6 planı oluşturur.
+Bir plan neslini asla değiştirmez: v6 planları kendi v6 şemalarını
+([manifesto](https://deepworkplan.com/schema/plan-manifest/v6.json),
+[sözleşme](https://deepworkplan.com/schema/plan-contract/v6.json),
+[günlük olayı](https://deepworkplan.com/schema/journal-event/v6.json)) korur ve
+değişmeden çalışır; v5 planları `state.json` için
+https://deepworkplan.com/schema/plan-state/v5.json şemasını kullanmaya devam eder;
+mevcut v1, v2 ve v5 planları asla yeniden yazılmaz ya da örtük olarak taşınmaz ve
+bir v5 planını v6'ya geçirmek açık, önizlemeli bir geçiş gerektirir.
 
-- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
-- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
-- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+İsteğe bağlı eklentiler, depo başına izlenen eklenti kaydı `.dwp/config.json`
+(https://deepworkplan.com/schema/dwp-config/v1.json) içinde kaydedilir: kaydın
+olmaması etkin olmadığı anlamına gelir ve metodoloji tüm eklentiler devre dışıyken de
+çalışır. Bir v7 planı, `parallel_safe` bir görevi başka bir kodlama ajanına yalnızca
+sözleşmesi `agent_delegation` yetkisi veriyorsa ve bir devretme eklentisi (agentkit
+veya Herdr) etkin ve algılanmışsa devredebilir; devredilen ajanın sonucu, planın
+kendi kapı çalıştırıcısı onu gözlemleyene kadar bir iddia olarak kalır.
 
 Her planın zorunlu bir kapanış görevi vardır: **Final Review**. Bu görev, gerekli
 yerel AI Diff Reviewer incelemesi dâhil olmak üzere birikmiş değişiklik kümesi
 üzerinde güvenlik taramasını çalıştırır, nihai depo durumunu doğrular, görevler
 tarafından kullanılan skill'leri uzlaştırır ve kanıtları ile sınırlamaları kaydeder.
 Yerel inceleme skill'i sabitlenmiş bir sürümde kurulur; şu anda belgelenen komut
-`DailybotHQ/ai-diff-reviewer@v3.2.2`'i kullanır. GitHub Action, ayrı ve isteğe bağlı
+`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0` sürümünü kurar. GitHub Action, ayrı ve isteğe bağlı
 bir CI yüzeyidir ve temel metodoloji için asla zorunlu değildir.
 
 Çalışıp hiçbir şey bildirmeyen bir inceleme ile hiç bulgu üretemeyen bir inceleme aynı şey değildir. İkincisi **tamamlanmamış bir incelemedir**: öyle kaydedilir, değişiklik kümesinin temiz olduğunun kanıtı olarak asla sayılmaz ve Final Review'i kapatmak için asla gerekçe olmaz — engelleyici katılık altında bir `timeout` incelemesinin aldığı ile aynı kırmızı muamele (BC-04). Eksik bir inceleyici ve hata veren bir çağrıyla birlikte bunlar üç ayrı durumdur — ve hiçbiri diff'in incelenip temiz bulunduğu anlamına gelmez. `Recommendation: approve` diyen bir gövde de check’in geçtiğinin kanıtı değildir. Önce izleme işaretinin Highest severity / Strictness gate / Check status bloğunu okuyun — kapı başarısızken çalışma zamanı modelin `approve` satırını yeniden yazar.
@@ -212,21 +226,24 @@ Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (�
 
 Temel onboarding sonrasında, **AI Diff Reviewer yerel incelemesini** kurun (Faz 7a — 2.3.0
 standardından itibaren gereklidir): etikete sabitlenmiş vendored skill
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`) artı
+(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) artı
 `generate-extension` aracılığıyla depoya uyarlanmış bir `.review/extension.md`, onboarding onayı
-altında. Ardından dört isteğe bağlı eklentiyi (devcontainer, Dailybot, dependency-upgrade,
-design-system) sıralayın ve her birini açık bir tercih olarak sunun. Bir depo, **sıfır** isteğe bağlı
+altında. Ardından yedi isteğe bağlı eklentiyi (devcontainer, Dailybot, dependency upgrade,
+design system, agentkit, Herdr, DeepWorkPlan Vim) sıralayın, her birini açık bir tercih olarak
+sunun ve her kabulü `.dwp/config.json` içine kaydedin. Bir depo, **sıfır** isteğe bağlı
 eklentiyle tümüyle uyumludur — onları asla otomatik kurmayın.
 
-- **Devcontainer desteği** — kalıcı AI-CLI kimlik doğrulaması içeren, yeniden üretilebilir, yalıtılmış
-  bir geliştirme konteyneri.
-- **Dailybot entegrasyonu** — dört yaşam döngüsü olayı (kickoff, önemli görev, engellendi, tamamlandı) olarak zaten Dailybot kullanan ekipler için en iyi çabayla ilerleme raporlaması; isteğe bağlı otonom kanca zorlama (`dailybot-cli >= 3.9.0`). Eşleştirilmiş Dailybot ajan skill’inin (3.23.2) kurulması ayrıca sohbet, check-in’ler, form yazarlığı, AI’ye sorma, Plan panoları ve görevleri, depo başına API anahtarları ve daha fazlasını açar — eklenti yalnızca raporlamayı DWP yürütmesine bağlar. Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
+- **Devcontainer desteği** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) için ince bir entegrasyon katmanı (`dck`, `v0.1.4` sürümüne sabitlenmiş): `dck init` bir Dev Containers şablonu oluşturur ve mevcut bir devcontainer’ı yalnızca farkı (diff) kabul edildikten sonra uzlaştırır; temel imajlar kodlama agent’ı içermez.
+- **Dailybot entegrasyonu** — dört yaşam döngüsü olayı (kickoff, önemli görev, engellendi, tamamlandı) olarak zaten Dailybot kullanan ekipler için en iyi çabayla ilerleme raporlaması; isteğe bağlı otonom kanca zorlama (`dailybot-cli >= 3.9.0`). Eşleştirilmiş Dailybot ajan skill’inin (3.23.3) kurulması ayrıca sohbet, check-in’ler, form yazarlığı, AI’ye sorma, Plan panoları ve görevleri, depo başına API anahtarları ve daha fazlasını açar — eklenti yalnızca raporlamayı DWP yürütmesine bağlar. Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
 - **Dependency upgrade** — paket yöneticisinden bağımsız, gruplanmış, doğrulanmış, geri alınabilir
   yükseltmeler. Kabul edildiğinde, `/lib-upgrade` komutunu kurar.
 - **Design system** — yalnızca saptanan arayüz yüzeyi olan depolar için isteğe bağlı `docs/DESIGN.md`
   (saf kütüphanelere, headless servislere veya yalnızca altyapı depolarına sunulmaz). Üç profil tek bir
   dosyada katmanlanır: visual-ui (saptandığında güçlü biçimde önerilir; kurulum kabul ile sınırlı), cli-output ve conversational —
   son ikisi her zaman sorulur, asla otomatik uygulanmaz.
+- **agentkit** — sınırlı `parallel_safe` görevleri başka kodlama agent’larına devreden planlar için [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, `v0.1.1` sürümüne sabitlenmiş) aracının makine düzeyinde kurulumu (başsız; her delege için kendi worktree’sinde bir `ak run`); özerklik bayrakları varsayılan olarak asla eklenmez.
+- **Herdr** — herhangi bir makinedeki Herdr bölmesinde bulunan eş bir agent’tan tek bir yetkili yanıt isteyen planlar için [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (`v0.1.0` sürümüne sabitlenmiş, artı Herdr’ın resmî skill’i) aracının makine düzeyinde kurulumu.
+- **DeepWorkPlan Vim** — terminal düzenleyicisi ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), `v0.4.2` sürümüne sabitlenmiş); mevcut bir Neovim yapılandırmasının üzerine açık onay olmadan asla yazmayan, makine düzeyinde bir kurulum.
 - **AI Diff Reviewer** — gerekli yerel inceleme (bir opt-in değil): her Final Review’in güvenlik
   incelemesi, planın birikmiş değişiklik kümesi üzerinde [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**’yi (skill + gerekli
   `.review/extension.md`) çalıştırır. Eksik bir skill veya uzantı, kaydedilmiş bir `local reviewer not installed` bulgusudur — asla sessiz bir atlama değildir ve asla sürpriz bir önyükleme değil: kurulum, onboarding onayına veya açık bir addon çağrısına aittir; çağrı hataları yumuşak başarısızlıkla geçer; tamamlanmış bir geçişten gelen **doğrulanmış kritik bulgular** hâlâ tamamlanmayı bloke eder (v3, BC-07 — doğrulanmamış kritik iddialar ek açıklamalı uyarı olarak gelir ve bir `incomplete`/`timeout` incelemesi temiz bir geçiş değildir, BC-04). **Flow B** (`pr-review.yml` ile CI kapısı) açık bir tercih olarak sunulur ve

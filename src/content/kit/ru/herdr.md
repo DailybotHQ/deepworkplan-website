@@ -29,8 +29,8 @@ order: 7
 Установите herdr-peers и официальный навык Herdr, от которого он зависит. Каждой машине, агенты которой должны отвечать, этот навык тоже нужен.
 
 ```bash
-npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g -y
-npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
 Требования: Herdr 0.9.1 или новее, `bash` и `python3` 3.9 или новее (только стандартная библиотека). Онбординг предлагает аддон и фиксирует ваш ответ в реестре аддонов; без согласия он никогда не включается.

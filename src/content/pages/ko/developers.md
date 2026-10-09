@@ -129,7 +129,7 @@ Deep Work Plan 스킬의 공식 설치 경로입니다 — /init 엔드포인트
 
 ```bash
 # 1. Install the DWP skill — same command the /init endpoint gives agents
-npx skills add DailybotHQ/deepworkplan-skill@latest
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 
 # 2. Official CLI — zero-dependency client over this API (Node >= 18),
 #    prepared in the site repo's cli/ directory pending npm publication

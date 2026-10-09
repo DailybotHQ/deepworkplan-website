@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Opt-in DWP addon: report plan lifecycle to a Dailybot team, optional hook enforcement, and the full Dailybot agent skill 3.23.2 (chat, forms, Plan, and more)."
+description: "Opt-in DWP addon: report plan lifecycle to a Dailybot team, optional hook enforcement, and the full Dailybot agent skill 3.23.3 (chat, forms, Plan, and more)."
 kind: addon
 lang: en
 order: 2
@@ -23,7 +23,7 @@ The core Deep Work Plan methodology has **zero** Dailybot dependency. A reposito
 
 ## What this addon wires (narrow by design)
 
-The DWP Dailybot addon does **not** reinvent Dailybot. It connects plan execution to the dailybot **`report`** sub-skill and optionally commits harness hooks. Everything else — install, consent, authentication, writing style — is **deferred** to the official [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) (currently **3.23.2**).
+The DWP Dailybot addon does **not** reinvent Dailybot. It connects plan execution to the dailybot **`report`** sub-skill and optionally commits harness hooks. Everything else — install, consent, authentication, writing style — is **deferred** to the official [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) (currently **3.23.3**).
 
 ### Four lifecycle events
 
@@ -69,7 +69,7 @@ The addon **offers** install paths; the Dailybot skill owns consent and verifica
 
 | Component | Command / path |
 |-----------|----------------|
-| **Dailybot agent skill** (recommended) | `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot -y` |
+| **Dailybot agent skill** (recommended) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.3 --skill dailybot -y` |
 | **Update existing skill** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI** (pack baseline `>= 3.9.0`; Plan needs `>= 3.25.0`) | Installed by the skill on first use via verified `shared/auth.md`; or `pip install 'dailybot-cli>=3.9.0'`, Homebrew, or the checksum-verified installer at [cli.dailybot.com](https://cli.dailybot.com) |
@@ -86,9 +86,9 @@ This addon **never** prompts for email, OTP, or API keys, and **never** stores c
 
 Auth resolution is **Bearer-first**: a session token takes priority, with a transparent Bearer→API-key retry on `401`/`403` so a stale token never blocks a valid key. If auth is declined or unavailable, reporting is skipped silently — work continues.
 
-## The paired Dailybot skill — 17 capabilities (3.23.2)
+## The paired Dailybot skill — 17 capabilities (3.23.3)
 
-Installing the Dailybot agent skill brings far more than the DWP addon wires. The official skill pack (skill **3.23.2**, CLI baseline **>= 3.9.0**, Plan **>= 3.25.0**, current CLI publish **3.25.2**) exposes **17 coordinated sub-skills**:
+Installing the Dailybot agent skill brings far more than the DWP addon wires. The official skill pack (skill **3.23.3**, CLI baseline **>= 3.9.0**, Plan **>= 3.25.0**, current CLI publish **3.25.2**) exposes **17 coordinated sub-skills**:
 
 | Sub-skill | What it does |
 |-----------|--------------|

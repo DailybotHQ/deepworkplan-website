@@ -31,11 +31,11 @@ Cinco addons são distribuídos hoje — quatro opcionais mais a revisão local 
 
 ### Devcontainer (primeiro addon)
 
-Uma configuração `.devcontainer/` + `docker/` baseada em compose, raciocinada a partir do stack detetado.
+Um integrador leve do [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixado em `v0.1.4`): um modelo de Dev Containers que `dck init` gera no repositório.
 
 - **Página do kit:** [Devcontainer](/kit/devcontainer)
-- **O que adiciona:** volumes persistentes de auth de CLI de IA (Claude, Codex, Cursor, gh, Dailybot), `dailybot-project-network`, `DOCKER_DEV_ENV=vscode`, aliases de validação (`codecheck`, `check`, `fix`, `test`), higiene de segredos em OSS público
-- **Comportamento:** ~85 % esqueleto estável; ~15 % raciocinado por stack. Devcontainers existentes são reconciliados, nunca sobrescritos
+- **O que adiciona:** o lançador `dck` (`setup`, `up`, `shell`, `ssh`, `doctor`), imagens base nas variantes `python-3.13`, `node-24` e `debian` que são distribuídas sem agentes de programação (os agentes são uma camada opcional), portas apenas de loopback, reencaminhamento do agente SSH e máquinas Herdr opcionais por contentor
+- **Comportamento:** detetado através de `dck doctor --json` (interface 1); `dck init` reconcilia um devcontainer existente apenas depois de o seu diff ser aceite, e faz primeiro uma cópia de segurança do ficheiro — nunca sobrescrito
 - **Quando oferecido:** a maioria dos repositórios com Docker ou serviços que beneficiam de um contentor de desenvolvimento isolado
 
 ### Dailybot (segundo addon)
@@ -44,7 +44,7 @@ Uma ligação opcional à **equipa Dailybot** do programador para visibilidade d
 
 - **Página do kit:** [Dailybot](/kit/dailybot) — referência completa de capacidades
 - **O que o addon DWP liga:** quatro relatórios do ciclo de vida do plano (kickoff, tarefa significativa, bloqueado, conclusão) via sub-skill `report` do dailybot; reforço determinístico opcional por hooks (`dailybot hook`, CLI `>= 3.9.0`)
-- **Skill emparelhada:** instalar [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (atualmente **3.23.2**) expõe **17 capacidades** — chat no Slack/Teams/Discord/Google Chat, check-ins, criação de formulários, ask AI, kudos, quadros e tarefas do Plan, etiquetas da organização, chaves API por repositório (`.dailybot/env.json`), email e mais. O addon DWP liga apenas **report**; outras capacidades são invocadas diretamente pela skill Dailybot
+- **Skill emparelhada:** instalar [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (atualmente **3.23.3**) expõe **17 capacidades** — chat no Slack/Teams/Discord/Google Chat, check-ins, criação de formulários, ask AI, kudos, quadros e tarefas do Plan, etiquetas da organização, chaves API por repositório (`.dailybot/env.json`), email e mais. O addon DWP liga apenas **report**; outras capacidades são invocadas diretamente pela skill Dailybot
 - **Auth:** totalmente adiada para a skill Dailybot (`dailybot login` ou `DAILYBOT_API_KEY`); este addon nunca armazena credenciais
 - **Salvaguarda neutra em relação ao fornecedor:** o DWP central tem **zero** dependência do Dailybot; nunca instalar automaticamente para todos
 - **Quando oferecido:** programador ou equipa já usa Dailybot, ou pede explicitamente relatórios à equipa
@@ -72,7 +72,7 @@ Um `DESIGN.md` com âmbito de superfície de interface que qualquer agente de co
 O **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) dá ao passe de segurança do Final Review obrigatório uma revisão local estruturada e, opcionalmente, controla os pull requests em CI. Desde o padrão 2.3.0 a **revisão local faz parte da linha de base**; apenas a superfície de CI é opcional. Este addon é atualizado automaticamente a cada lançamento, pelo que a tag mostrada abaixo é a vigente no momento da escrita e pode ficar atrás da cópia distribuída — o `SKILL.md` próprio do addon e os seus lançamentos no GitHub são a fonte autorizada da tag realmente instalada. A instalação é sempre fixada numa tag publicada, nunca num ramo móvel.
 
 - **Página do kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — referência completa de capacidades
-- **Obrigatório no onboarding (Fase 7a):** instalação fixada por tag da skill vendorizada (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) mais um `.review/extension.md` à medida do repositório (via `generate-extension`), sob o consentimento do onboarding; uma atualização dirigida do harness reconcilia ambos quando faltam; uma recusa é registada como exceção declarada e o `verify` reporta-a até que seja instalado
+- **Obrigatório no onboarding (Fase 7a):** instalação fixada por tag da skill vendorizada (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) mais um `.review/extension.md` à medida do repositório (via `generate-extension`), sob o consentimento do onboarding; uma atualização dirigida do harness reconcilia ambos quando faltam; uma recusa é registada como exceção declarada e o `verify` reporta-a até que seja instalado
 - **Obrigatório em cada Final Review:** o passe de segurança executa o fluxo pai predefinido da skill upstream sobre o conjunto acumulado de mudanças e acrescenta a sua saída ao `analysis_results/SECURITY_REVIEW.md` local do plano (dentro da pasta própria do plano, nunca na raiz do repositório); uma skill ou extensão ausente é um achado registado `local reviewer not installed` — nunca uma omissão silenciosa, e nunca um arranque surpresa: a instalação pertence ao consentimento do onboarding ou a uma invocação explícita do addon; os **críticos verificados** de uma passagem concluída bloqueiam a conclusão até que sejam corrigidos ou explicitamente aceites (v3, BC-07 — afirmativas críticas não verificadas chegam como avisos anotados, e uma revisão `incomplete` ou `timeout` não é uma passagem limpa, BC-04)
 - **Superfície de CI opcional (Fluxo B):** `DailybotHQ/ai-diff-reviewer@v3` via a sub-skill `setup` da skill upstream, mais os companheiros `apply-review` (apenas leitura) e `address-review` (faz commits, push e rearma; novo na v3.1.1) como comodidades invocáveis pelo programador — oferecido explicitamente, nunca instalado sem pedido, nunca o predefinido, nunca uma tarefa do plano
 - **Nunca bloqueia (apenas invocação):** uma revisão local que pôde começar mas termina com erro é avisar-uma-vez-registrar-e-continuar; nunca falha a tarefa por isso

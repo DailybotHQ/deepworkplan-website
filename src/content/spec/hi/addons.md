@@ -31,11 +31,11 @@ section: Addons
 
 ### Devcontainer (पहला ऐडऑन)
 
-पहचाने गए stack से तर्कित compose-आधारित `.devcontainer/` + `docker/` सेटअप।
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.1.4` पर पिन किया गया) का एक हल्का इंटीग्रेटर: एक Dev Containers टेम्पलेट जिसे `dck init` रिपॉज़िटरी में रेंडर करता है।
 
 - **Kit पृष्ठ:** [Devcontainer](/kit/devcontainer)
-- **क्या जोड़ता है:** persistent AI-CLI auth volumes (Claude, Codex, Cursor, gh, Dailybot), `dailybot-project-network`, `DOCKER_DEV_ENV=vscode`, validation aliases (`codecheck`, `check`, `fix`, `test`), public-OSS secret hygiene
-- **व्यवहार:** ~85% स्थिर skeleton; ~15% stack के अनुसार तर्कित। मौजूदा devcontainers समाधान होते हैं, कभी मिटाए नहीं जाते
+- **क्या जोड़ता है:** `dck` लॉन्चर (`setup`, `up`, `shell`, `ssh`, `doctor`), `python-3.13`, `node-24` और `debian` फ़्लेवर में बेस इमेज जो कोडिंग एजेंटों के बिना आती हैं (एजेंट एक ऑप्ट-इन परत हैं), केवल loopback पोर्ट, SSH एजेंट फ़ॉरवर्डिंग, और प्रति कंटेनर वैकल्पिक Herdr मशीनें
+- **व्यवहार:** `dck doctor --json` (इंटरफ़ेस 1) के माध्यम से पहचाना जाता है; `dck init` किसी मौजूदा devcontainer का समाधान केवल उसका diff स्वीकार होने के बाद करता है, और पहले फ़ाइल का बैकअप लेता है — कभी ओवरराइट नहीं किया जाता
 - **कब प्रस्तावित:** अधिकांश रिपॉज़िटरी जहाँ Docker या isolated dev container लाभकारी सेवाएँ हों
 
 ### Dailybot (दूसरा ऐडऑन)
@@ -44,7 +44,7 @@ section: Addons
 
 - **Kit पृष्ठ:** [Dailybot](/kit/dailybot) — पूर्ण क्षमता संदर्भ
 - **DWP ऐडऑन क्या जोड़ता है:** dailybot `report` sub-skill के माध्यम से चार योजना-जीवनचक्र रिपोर्ट (kickoff, significant task, blocked, completion); वैकल्पिक deterministic हुक प्रवर्तन (`dailybot hook`, CLI `>= 3.9.0`)
-- **जोड़ी गई स्किल:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (वर्तमान में **3.23.2**) इंस्टॉल करने से **17 क्षमताएँ** — Slack/Teams/Discord/Google Chat पर chat, check-ins, forms authoring, ask AI, kudos, Plan boards और tasks, organization labels, per-repo API keys (`.dailybot/env.json`), email, और अधिक। DWP ऐडऑन केवल **report** जोड़ता है; अन्य क्षमताएँ Dailybot स्किल के माध्यम से सीधे invoke होती हैं
+- **जोड़ी गई स्किल:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (वर्तमान में **3.23.3**) इंस्टॉल करने से **17 क्षमताएँ** — Slack/Teams/Discord/Google Chat पर chat, check-ins, forms authoring, ask AI, kudos, Plan boards और tasks, organization labels, per-repo API keys (`.dailybot/env.json`), email, और अधिक। DWP ऐडऑन केवल **report** जोड़ता है; अन्य क्षमताएँ Dailybot स्किल के माध्यम से सीधे invoke होती हैं
 - **Auth:** पूर्णतः Dailybot स्किल को सौंपा (`dailybot login` या `DAILYBOT_API_KEY`); यह ऐडऑन कभी credentials संग्रहीत नहीं करता
 - **Vendor-neutral guardrail:** कोर DWP की Dailybot पर **शून्य** निर्भरता; कभी सभी के लिए स्वतः इंस्टॉल न करें
 - **कब प्रस्तावित:** डेवलपर या टीम पहले से Dailybot उपयोग करती हो, या स्पष्ट रूप से टीम रिपोर्टिंग माँगे
@@ -72,7 +72,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) अनिवार्य Final Review सुरक्षा-जाँच को एक संरचित स्थानीय समीक्षा देता है, और वैकल्पिक रूप से CI में pull requests को गेट करता है। संस्करण 2.3.0 से **स्थानीय समीक्षा baseline का हिस्सा है**; केवल CI सतह ऑप्ट-इन है। यह ऐडऑन हर release पर स्वतः अपडेट होता है, इसलिए नीचे दिखाया गया tag लिखे जाने के समय का वर्तमान tag है और vendored प्रति से पीछे रह सकता है — वास्तव में इंस्टॉल किए गए tag के लिए ऐडऑन का अपना `SKILL.md` और उसकी GitHub releases ही प्रामाणिक हैं। इंस्टॉल हमेशा एक प्रकाशित tag पर स्थिर किया जाता है, कभी किसी चलती हुई branch पर नहीं।
 
 - **Kit पृष्ठ:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — पूर्ण क्षमता संदर्भ
-- **ऑनबोर्डिंग पर आवश्यक (Phase 7a):** vendored skill का tag-pinned इंस्टॉल (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) साथ ही repo के लिए ढाला गया `.review/extension.md` (`generate-extension` के माध्यम से), ऑनबोर्डिंग की सहमति के अंतर्गत; अनुपस्थित होने पर एक targeted harness upgrade दोनों को समाधान करता है; अस्वीकृति एक घोषित अपवाद के रूप में दर्ज होती है और इंस्टॉल होने तक `verify` उसकी रिपोर्ट करता है
+- **ऑनबोर्डिंग पर आवश्यक (Phase 7a):** vendored skill का tag-pinned इंस्टॉल (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) साथ ही repo के लिए ढाला गया `.review/extension.md` (`generate-extension` के माध्यम से), ऑनबोर्डिंग की सहमति के अंतर्गत; अनुपस्थित होने पर एक targeted harness upgrade दोनों को समाधान करता है; अस्वीकृति एक घोषित अपवाद के रूप में दर्ज होती है और इंस्टॉल होने तक `verify` उसकी रिपोर्ट करता है
 - **हर Final Review में आवश्यक:** सुरक्षा-जाँच संचित change set पर upstream parent डिफ़ॉल्ट प्रवाह चलाती है और अपना आउटपुट plan-local `analysis_results/SECURITY_REVIEW.md` (plan के अपने folder के अंदर, repo root में कभी नहीं) में जोड़ती है; अनुपस्थित skill या एक्सटेंशन एक दर्ज `local reviewer not installed` निष्कर्ष है — कभी चुपचाप नहीं छोड़ा जाता, और कभी अचानक बूटस्ट्रैप नहीं: इंस्टॉल onboarding की सहमति या addon की स्पष्ट invocation से संबंधित है; एक पूर्ण पास के **सत्यापित `critical` निष्कर्ष** ठीक या स्पष्ट रूप से स्वीकृत होने तक पूर्णता को रोकते हैं (v3, BC-07 — असत्यापित गंभीर दावे एनोटेटेड चेतावनी के रूप में आते हैं, और `incomplete`/`timeout` समीक्षा एक स्वच्छ पास नहीं है, BC-04)
 - **वैकल्पिक CI सतह (Flow B):** upstream `setup` sub-skill के माध्यम से `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v3`), साथ ही `apply-review` (केवल पढ़ने योग्य) और `address-review` (कमिट, पुश और पुनः सक्रिय; v3.1.1 में नया) डेवलपर द्वारा इनवोक किए जाने वाले सुविधाओं के रूप में — स्पष्ट रूप से प्रस्तावित, बिना अनुरोध कभी इंस्टॉल नहीं, कभी डिफ़ॉल्ट नहीं, कभी प्लान टास्क नहीं
 - **कभी अवरोधित नहीं (केवल इनवोकेशन):** एक स्थानीय समीक्षा जो शुरू हो सकती हो पर त्रुटि दे दे, तो एक बार चेतावनी दें, दर्ज करें, जारी रखें; वह उस कार्य को कभी विफल नहीं करती

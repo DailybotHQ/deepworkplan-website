@@ -95,7 +95,8 @@ lastUpdated: 2026-09-28
 พร้อม sub-skill เก้าตัว — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` และ `upgrade`
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill
+# pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
 หรือติดตั้งผ่าน OpenClaw:
@@ -112,12 +113,12 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### มาตรฐานปัจจุบันและโมเดลการดำเนินการ
 
-มาตรฐานปัจจุบันที่มุ่งเน้น repository คือ **DWP 6.0.0** ซึ่งนำไปใช้โดยรุ่นของ
+มาตรฐานปัจจุบันที่มุ่งเน้น repository คือ **DWP 7.0.0** ซึ่งนำไปใช้โดยรุ่นของ
 skill Deep Work Plan ที่ติดตั้งไว้ข้างต้น ชุด skill ปัจจุบันประกอบด้วย router
 และ sub-skill เก้าตัว ได้แก่ `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author` และ `upgrade`
 
-รุ่น skill ที่ติดตั้งคือ **6.0.2** แพ็ก 6.x ปัจจุบันสร้างแผนใหม่ด้วย v6 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายแผน v5 ไป v6 ต้องมีคำขออย่างชัดเจนและดูตัวอย่างก่อน
+รุ่น skill ที่ติดตั้งคือ **7.0.1** แพ็ก 7.x ปัจจุบันสร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายแผน v5 ไป v6 ต้องมีคำขออย่างชัดเจนและดูตัวอย่างก่อน
 
 มาตรฐานนี้ถูกออกแบบให้ได้สัดส่วนโดยเจตนา และทำให้สัดส่วนนั้นเป็นคุณสมบัติของ
 แผน ไม่ใช่วินัยของผู้พัฒนา แผนหนึ่งเป็นได้ทั้ง **Lite** — บันทึกงานแบบ inline
@@ -132,26 +133,40 @@ promote` เมื่อบันทึกแบบกระชับไม่�
 สำหรับแผน Full repository คือพื้นผิวการดำเนินการที่ยั่งยืน แผนประกอบด้วยงาน
 ที่เป็นอะตอม, **พื้นผิวที่ถูกแตะต้อง** ที่อธิบายว่าอะไรเปลี่ยนไปและผู้บริโภครายใด
 ได้รับผลกระทบ, เกณฑ์การยอมรับ และ validation gate ที่ถูกเลือกจากแผนผังการ
-ทดสอบที่บันทึกไว้ของ repository ใน v6 การสร้างแผนจะเขียน identity manifest ตามด้วยสัญญาและเหตุการณ์อนุมัติ journal แบบเพิ่มข้อมูลอย่างเดียวจะบันทึกการดำเนินงาน ส่วน `state.json` เป็น snapshot ที่สร้างจาก journal และแต่ละขั้นตอนสามารถกู้คืนได้หลังการขัดจังหวะ
+ทดสอบที่บันทึกไว้ของ repository แผนใหม่จะเขียน identity manifest ตามด้วยสัญญาที่มีเวอร์ชัน แล้วจึงเหตุการณ์อนุมัติ journal แบบเพิ่มข้อมูลอย่างเดียวจะบันทึกการดำเนินงาน ส่วน `state.json` เป็น snapshot ที่สร้างจาก journal และแต่ละขั้นตอนสามารถกู้คืนได้หลังการขัดจังหวะ
 
-รุ่นสคีมายังคงผูกกับแต่ละแผน แผน v5 ใช้ `state.json` ตามสคีมา
-https://deepworkplan.com/schema/plan-state/v5.json ต่อไป แผนใหม่ที่แพ็ก 6.x ปัจจุบันสร้างด้วย v6 เป็นค่าเริ่มต้นใช้ https://deepworkplan.com/schema/plan-manifest/v6.json สำหรับ
-`manifest.json`; live projection เป็น snapshot ตาม
-https://deepworkplan.com/schema/plan-snapshot/v6.json ไม่มี
-`plan-state/v6.json`: v6 ใช้ snapshot ไม่ใช่สคีมาสถานะ v5 ที่เปลี่ยนชื่อ
-แผนเดิมคงรุ่นที่บันทึกไว้และจะไม่ถูกเขียนใหม่ v6 คงวิธีการของ v5
-พร้อมโครงสร้างที่เข้มงวดขึ้น; ยังไม่ได้วัด non-inferiority ของผลลัพธ์ agent.
+รุ่นสคีมายังคงผูกกับแต่ละแผน แพ็ก 7.x ปัจจุบันสร้างแผน **v7** เป็นค่าเริ่มต้น:
+`manifest.json` เป็นไปตาม https://deepworkplan.com/schema/plan-manifest/v7.json
+[สัญญา](https://deepworkplan.com/schema/plan-contract/v7.json) เพิ่มตัวบ่งชี้งาน
+`parallel_safe` แบบไม่บังคับเข้าไปในสัญญาของ v6 และ
+[เหตุการณ์ journal](https://deepworkplan.com/schema/journal-event/v7.json) ทุกรายการ
+สามารถบันทึก `delegation` ได้ด้วย live projection ยังคงใช้ snapshot เดิมที่ไม่เปลี่ยนแปลงที่
+https://deepworkplan.com/schema/plan-snapshot/v6.json และ
+[task context manifest](https://deepworkplan.com/schema/context-manifest/v6.json)
+ใช้ร่วมกับ v6 คำขอ `v6` อย่างชัดเจนยังคงสร้างแผน v6 ได้
+แผนจะไม่เปลี่ยนรุ่นเลย: แผน v6 คงสคีมา v6 ของตน
+([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json),
+[สัญญา](https://deepworkplan.com/schema/plan-contract/v6.json),
+[เหตุการณ์ journal](https://deepworkplan.com/schema/journal-event/v6.json)) และทำงาน
+ได้โดยไม่เปลี่ยนแปลง แผน v5 ใช้ `state.json` ตามสคีมา
+https://deepworkplan.com/schema/plan-state/v5.json ต่อไป แผน v1, v2 และ v5
+ที่มีอยู่จะไม่ถูกเขียนใหม่หรือย้ายโดยปริยาย และการย้ายแผน v5 ไป v6 ต้องใช้
+การย้ายที่ชัดเจนและดูตัวอย่างก่อน
 
-- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
-- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
-- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+addon ที่เป็นทางเลือกจะถูกบันทึกแยกตาม repository ใน addon registry ที่ติดตามด้วย
+git คือ `.dwp/config.json` (https://deepworkplan.com/schema/dwp-config/v1.json):
+หากไม่มีบันทึกแปลว่าไม่ได้เปิดใช้ และระเบียบวิธียังทำงานได้แม้ปิด addon ทั้งหมด
+แผน v7 จะส่งงาน `parallel_safe` ให้ coding agent อื่นได้ก็ต่อเมื่อสัญญาของแผนให้สิทธิ์
+`agent_delegation` และ addon สำหรับการมอบหมายงาน (agentkit หรือ Herdr) ถูกเปิดใช้
+และตรวจพบแล้วเท่านั้น ผลลัพธ์ของผู้รับมอบหมายยังคงเป็นเพียงข้อกล่าวอ้าง
+จนกว่าตัวรัน gate ของแผนเองจะสังเกตเห็นผลนั้น
 
 ทุกแผนมีงานปิดท้ายที่บังคับหนึ่งงาน: **Final Review** ซึ่งจะรัน security pass
 เหนือชุดการเปลี่ยนแปลงที่สะสมทั้งหมด รวมถึงการรีวิวเฉพาะที่ของ AI Diff
 Reviewer ที่จำเป็น ตรวจสอบสถานะสุดท้ายของ repository ให้ถูกต้อง ตรวจสอบความ
 สอดคล้องของ skill ที่งานต่างๆ ใช้ และบันทึกหลักฐานกับข้อจำกัด skill สำหรับ
-รีวิวเฉพาะที่ถูกติดตั้งที่รุ่นที่ตรึงไว้ คำสั่งที่บันทึกไว้ในปัจจุบันใช้
-`DailybotHQ/ai-diff-reviewer@v3.2.2` GitHub Action เป็นพื้นผิว CI แยกต่างหาก
+รีวิวเฉพาะที่ถูกติดตั้งที่รุ่นที่ตรึงไว้ คำสั่งที่บันทึกไว้ในปัจจุบันติดตั้ง
+`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0` GitHub Action เป็นพื้นผิว CI แยกต่างหาก
 ที่เป็นทางเลือก และไม่เคยจำเป็นสำหรับระเบียบวิธีหลัก
 
 การตรวจสอบที่ทำงานแล้วไม่รายงานอะไรเลย ไม่เหมือนกับการตรวจสอบที่ไม่เคยผลิตข้อค้นพบใด ๆ ออกมาได้เลย กรณีหลังคือ**การตรวจสอบที่ไม่สมบูรณ์** ซึ่งจะถูกบันทึกไว้ตามนั้น ไม่เคยถูกนับเป็นหลักฐานว่าชุดการเปลี่ยนแปลงสะอาด และไม่เคยเป็นเหตุผลให้ปิด Final Review ได้ — การถูกทำเครื่องหมายสีแดงเช่นเดียวกับที่การตรวจสอบ `timeout` ได้รับภายใต้ความเข้มงวดแบบบล็อก (BC-04) เมื่อรวมกับการไม่มีตัวตรวจทานและการเรียกใช้ที่ผิดพลาด นี่คือสามสถานะที่ต่างกัน และไม่มีสถานะใดเลยที่หมายความว่า diff ได้รับการตรวจแล้วและสะอาด เนื้อหาที่ว่า `Recommendation: approve` ก็ไม่ใช่หลักฐานว่า check ผ่านเช่นกัน อ่านบล็อก Highest severity / Strictness gate / Check status บนตัวทำเครื่องหมายติดตามก่อน — เมื่อเกตกำลังล้มเหลว รันไทม์จะเขียน `approve` ของโมเดลใหม่
@@ -199,20 +214,24 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
 
 หลังจากการออนบอร์ดพื้นฐาน ให้ติดตั้ง **การตรวจสอบในเครื่องของ AI Diff Reviewer** (Phase 7a — จำเป็น
 ตั้งแต่มาตรฐาน 2.3.0) ได้แก่ skill ที่ฝังมาพร้อมและตรึงด้วยแท็ก
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`) บวกกับ
+(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) บวกกับ
 `.review/extension.md` ที่ปรับให้เข้ากับ repo ผ่าน `generate-extension` ภายใต้ความยินยอมของการออนบอร์ด จากนั้น
-ให้แจกแจงส่วนเสริมแบบเลือกได้สี่อย่าง (devcontainer, Dailybot, dependency-upgrade, design-system) และเสนอแต่ละอย่าง
-เป็นการเลือกเข้าร่วมอย่างชัดแจ้ง repository สอดคล้องอย่างสมบูรณ์โดยมีส่วนเสริมแบบเลือกได้ **ศูนย์** อย่าง —
+ให้แจกแจงส่วนเสริมแบบเลือกได้เจ็ดอย่าง (devcontainer, Dailybot, dependency upgrade, design system,
+agentkit, Herdr, DeepWorkPlan Vim) และเสนอแต่ละอย่างเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง โดยบันทึกทุกการยอมรับ
+ไว้ใน `.dwp/config.json` repository สอดคล้องอย่างสมบูรณ์โดยมีส่วนเสริมแบบเลือกได้ **ศูนย์** อย่าง —
 อย่าติดตั้งส่วนเสริมเหล่านั้นอัตโนมัติ
 
-- **Devcontainer support** — dev container ที่ทำซ้ำได้และแยกตัว พร้อม auth ของ AI-CLI ที่คงอยู่
-- **Dailybot integration** — สี่เหตุการณ์วงจรชีวิต (kickoff, งานสำคัญ, ถูกบล็อก, เสร็จสิ้น) เป็นรายงานความคืบหน้าแบบเต็มความสามารถสำหรับทีมที่ใช้ Dailybot อยู่แล้ว พร้อมการบังคับใช้ hook อัตโนมัติแบบเลือกได้ (`dailybot-cli >= 3.9.0`) การติดตั้ง skill เอเจนต์ Dailybot ที่จับคู่มา (3.23.2) ยังเปิดให้ใช้แชท เช็คอิน สร้างฟอร์ม ถาม AI บอร์ดและงาน Plan per-repo API keys และอื่น ๆ — ส่วนเสริมเชื่อมเฉพาะการรายงานเข้ากับการดำเนินการ DWP ระเบียบวิธีหลักไม่มีการพึ่งพิง Dailybot ใด ๆ
+- **Devcontainer support** — ตัวเชื่อมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงที่ `v0.1.4`): `dck init` สร้างเทมเพลต Dev Containers และปรับประสาน devcontainer ที่มีอยู่แล้วก็ต่อเมื่อ diff ของมันได้รับการยอมรับแล้วเท่านั้น base image มาโดยไม่มี coding agent
+- **Dailybot integration** — สี่เหตุการณ์วงจรชีวิต (kickoff, งานสำคัญ, ถูกบล็อก, เสร็จสิ้น) เป็นรายงานความคืบหน้าแบบเต็มความสามารถสำหรับทีมที่ใช้ Dailybot อยู่แล้ว พร้อมการบังคับใช้ hook อัตโนมัติแบบเลือกได้ (`dailybot-cli >= 3.9.0`) การติดตั้ง skill เอเจนต์ Dailybot ที่จับคู่มา (3.23.3) ยังเปิดให้ใช้แชท เช็คอิน สร้างฟอร์ม ถาม AI บอร์ดและงาน Plan per-repo API keys และอื่น ๆ — ส่วนเสริมเชื่อมเฉพาะการรายงานเข้ากับการดำเนินการ DWP ระเบียบวิธีหลักไม่มีการพึ่งพิง Dailybot ใด ๆ
 - **Dependency upgrade** — การอัปเกรดที่เป็นกลางต่อตัวจัดการแพ็กเกจ ทำเป็นชุด ตรวจสอบแล้ว และย้อนกลับได้ เมื่อ
   ยอมรับ มันจะติดตั้งคำสั่ง `/lib-upgrade`
 - **Design system** — `docs/DESIGN.md` แบบเลือกเข้าร่วมสำหรับ repo ที่ตรวจพบว่ามีพื้นผิวอินเทอร์เฟซเท่านั้น
   (ไม่เสนอสำหรับไลบรารีบริสุทธิ์ บริการ headless หรือ repo ที่มีแต่โครงสร้างพื้นฐาน) สามโปรไฟล์ซ้อนกัน
   ในไฟล์เดียว ได้แก่ visual-ui (แนะนำอย่างหนักแน่นเมื่อตรวจพบ; การติดตั้งควบคุมด้วยการยอมรับ), cli-output และสนทนา — สองโปรไฟล์หลัง
   จะถูกถามเสมอ ไม่เคยถูกใช้โดยอัตโนมัติ
+- **agentkit** — การติดตั้งระดับเครื่องของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak` ตรึงที่ `v0.1.1`) สำหรับแผนที่ส่งงาน `parallel_safe` ที่มีขอบเขตต่อให้ coding agent อื่น (แบบ headless รัน `ak run` หนึ่งครั้งต่อผู้รับมอบหมายแต่ละรายใน worktree ของตัวเอง) ไม่มีการเพิ่ม flag ด้านความเป็นอิสระโดยค่าเริ่มต้นเลย
+- **Herdr** — การติดตั้งระดับเครื่องของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ตรึงที่ `v0.1.0` พร้อม skill ทางการของ Herdr) สำหรับแผนที่ขอคำตอบที่ได้รับอนุญาตหนึ่งรายการจาก peer agent ใน pane ของ Herdr บนเครื่องใดก็ได้
+- **DeepWorkPlan Vim** — ตัวแก้ไขบนเทอร์มินัล ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) ตรึงที่ `v0.4.2`) เป็นการติดตั้งระดับเครื่องที่ไม่มีวันเขียนทับคอนฟิก Neovim ที่มีอยู่แล้วโดยไม่ได้รับความยินยอมอย่างชัดแจ้ง
 - **AI Diff Reviewer** — การตรวจสอบในเครื่องที่จำเป็น (ไม่ใช่แบบเลือกเข้าร่วม): การตรวจความปลอดภัยของทุก Final Review รัน [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md` ที่ต้องการ) บนชุดการเปลี่ยนแปลงสะสมของแผน skill หรือส่วนขยายที่ขาดหายเป็นข้อค้นพบ `local reviewer not installed` ที่ถูกบันทึกไว้ — ไม่เคยข้ามอย่างเงียบ ๆ และไม่เคยเป็นการบูตสแตรปโดยไม่แจ้งล่วงหน้า: การติดตั้งเป็นของความยินยอมของ onboarding หรือการเรียกใช้ addon อย่างชัดเจน ข้อผิดพลาดในการเรียกใช้เป็น soft-fail และผลลัพธ์ `critical` **ที่ผ่านการตรวจสอบแล้ว** จากการรันที่เสร็จสมบูรณ์ยังคงบล็อกการเสร็จสิ้น  (v3, BC-07 — การอ้างสิทธิ์ระดับ critical ที่ยังไม่ผ่านการตรวจสอบจะปรากฏเป็นคำเตือนพร้อมหมายเหตุ และการตรวจสอบ `incomplete`/`timeout` ไม่ถือเป็นการรันที่สะอาด, BC-04) **Flow B** (CI gate กับ `pr-review.yml`) ถูกเสนอเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง และไม่เคยถูกติดตั้งโดยไม่ได้ร้องขอ ไม่มีโฟลว์ใดของ Deep Work Plan ที่ต้องการบริการเชิงพาณิชย์ ผู้ให้บริการ CI หรือ secret
 
 ## 5. พัฒนา kit (sub-skill ชื่อ author)

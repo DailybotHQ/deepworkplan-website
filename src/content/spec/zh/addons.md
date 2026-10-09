@@ -31,11 +31,11 @@ section: Addons
 
 ### Devcontainer（第一个附加组件）
 
-基于 compose 的 `.devcontainer/` + `docker/` 设置，根据检测到的技术栈推理生成。
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`，固定为 `v0.1.4`）的轻量集成器：一个由 `dck init` 渲染到仓库中的 Dev Containers 模板。
 
 - **套件页：** [Devcontainer](/kit/devcontainer)
-- **新增内容：** 持久化 AI-CLI 认证卷（Claude、Codex、Cursor、gh、Dailybot）、`dailybot-project-network`、`DOCKER_DEV_ENV=vscode`、验证别名（`codecheck`、`check`、`fix`、`test`）、公开 OSS 密钥卫生
-- **行为：** 约 85% 稳定骨架；约 15% 按技术栈推理。现有 devcontainer 被调和，绝不覆盖
+- **新增内容：** `dck` 启动器（`setup`、`up`、`shell`、`ssh`、`doctor`）、提供 `python-3.13`、`node-24` 和 `debian` 变体且不含编码代理的基础镜像（代理是可选启用的一层）、仅限回环地址的端口、SSH agent 转发，以及每个容器可选的 Herdr 机器
+- **行为：** 通过 `dck doctor --json`（接口 1）检测；`dck init` 仅在其 diff 被接受后才调和现有 devcontainer，并先备份该文件——绝不覆盖
 - **何时提供：** 大多数使用 Docker 或受益于隔离开发容器的服务的仓库
 
 ### Dailybot（第二个附加组件）
@@ -44,7 +44,7 @@ section: Addons
 
 - **套件页：** [Dailybot](/kit/dailybot)——完整能力参考
 - **DWP 附加组件接入的内容：** 通过 dailybot `report` 子技能的四个计划生命周期报告（kickoff、significant task、blocked、completion）；可选确定性钩子强制层（`dailybot hook`，CLI `>= 3.9.0`）
-- **配套技能：** 安装 [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（当前 **3.23.2**）暴露 **17 项能力**——在 Slack/Teams/Discord/Google Chat 上聊天、签到、表单编写、Ask AI、kudos、Plan 看板与任务、组织标签、每仓库 API 密钥（`.dailybot/env.json`）、电子邮件等。DWP 附加组件仅接入 **report**；其他能力通过 Dailybot 技能直接调用
+- **配套技能：** 安装 [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（当前 **3.23.3**）暴露 **17 项能力**——在 Slack/Teams/Discord/Google Chat 上聊天、签到、表单编写、Ask AI、kudos、Plan 看板与任务、组织标签、每仓库 API 密钥（`.dailybot/env.json`）、电子邮件等。DWP 附加组件仅接入 **report**；其他能力通过 Dailybot 技能直接调用
 - **认证：** 完全延后至 Dailybot 技能（`dailybot login` 或 `DAILYBOT_API_KEY`）；此附加组件从不存储凭据
 - **供应商中立护栏：** 核心 DWP 对 Dailybot **零**依赖；切勿为所有人自动安装
 - **何时提供：** 开发者或团队已在使用 Dailybot，或明确要求团队报告
@@ -72,7 +72,7 @@ section: Addons
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**）为强制的 Final Review 安全审查环节提供结构化的本地审查，并可选地在 CI 中对拉取请求设置门控。自标准 2.3.0 起，**本地审查属于基线的一部分**；只有 CI 层面是可选的。此附加组件会随每次发布自动刷新，因此下方展示的标签是撰写本文时的当前标签，可能落后于实际 vendored 的副本——该附加组件自身的 `SKILL.md` 及其 GitHub 发布记录才是实际所装标签的权威来源。安装始终固定到已发布的标签，绝不指向移动的分支。
 
 - **套件页：** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 完整能力参考
-- **接入时必备（第 7a 阶段）：** 在接入授权之下，标签锁定安装 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`），外加按仓库定制的 `.review/extension.md`（通过 `generate-extension`）；缺失时由定向 harness 升级调和二者；拒绝会被记录为一项声明的例外，并由 `verify` 持续报告，直至安装完成
+- **接入时必备（第 7a 阶段）：** 在接入授权之下，标签锁定安装 vendored skill（`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`），外加按仓库定制的 `.review/extension.md`（通过 `generate-extension`）；缺失时由定向 harness 升级调和二者；拒绝会被记录为一项声明的例外，并由 `verify` 持续报告，直至安装完成
 - **每份 Final Review 中必备：** 安全审查环节在累计变更集上运行上游父级默认流，并将输出追加到计划本地的 `analysis_results/SECURITY_REVIEW.md`（位于计划自身的文件夹内，绝不在仓库根目录）；缺少 skill 或扩展会作为一项 `local reviewer not installed` 发现被记录——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；已完成通道中的**经验证的 `critical` 发现**在修复或被明确接受之前会阻止完成（v3，BC-07——未经验证的关键发现断言会以带注解的警告出现，而 `incomplete`/`timeout` 的审查不算干净的通过，BC-04）
 - **可选 CI 层面（Flow B）：** 通过上游 `setup` 子技能提供 `pr-review.yml`（`DailybotHQ/ai-diff-reviewer@v3`），并将 `apply-review`（只读）与 `address-review`（执行提交、推送并重新武装审查器；v3.1.1 新增）作为开发者调用的便利工具——明确提供、绝不未经请求安装、绝不作为默认、绝不作为计划任务
 - **绝不阻塞（仅限调用）：** 能够启动但出错的本地审查按「警告一次、记录后继续」处理；它绝不使任务失败

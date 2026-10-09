@@ -29,8 +29,8 @@ Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[he
 Cài đặt herdr-peers và skill chính thức của Herdr mà nó phụ thuộc vào. Mọi máy có agent cần trả lời cũng phải có skill này.
 
 ```bash
-npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g -y
-npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
 Yêu cầu: Herdr 0.9.1 trở lên, `bash` và `python3` 3.9 trở lên (chỉ dùng thư viện chuẩn). Onboarding đề xuất addon này và ghi lại câu trả lời của bạn vào registry addon; addon không bao giờ được bật khi chưa có sự đồng ý.

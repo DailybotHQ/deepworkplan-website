@@ -10,10 +10,10 @@ Il kit è tutto ciò che serve per eseguire la metodologia nella pratica. Si ins
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
-Il pacchetto 6.x attuale crea per impostazione predefinita i nuovi piani in v6. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita.
+Il pacchetto 7.x attuale crea per impostazione predefinita i nuovi piani in v7. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita.
 
 ### La skill e le sue sub-skill
 
@@ -52,7 +52,7 @@ e un fallback generico.
 Capacità che il flusso di onboard aggiunge a un repo. Quattro sono opzionali e mai parte della baseline AI-first; la revisione locale AI Diff Reviewer è richiesta dallo standard 2.3.0:
 
 - **Devcontainer** — un dev container riproducibile e isolato con autenticazione AI-CLI persistente.
-- **Dailybot** — report del ciclo di vita del piano (kickoff, attività significativa, bloccato, completamento) per i team che usano Dailybot, più accesso alla skill agente Dailybot completa (3.23.2: chat, check-in, form, ask AI, Plan, API key per repository e altro).
+- **Dailybot** — report del ciclo di vita del piano (kickoff, attività significativa, bloccato, completamento) per i team che usano Dailybot, più accesso alla skill agente Dailybot completa (3.23.3: chat, check-in, form, ask AI, Plan, API key per repository e altro).
 - **Dependency upgrade** — aggiornamenti indipendenti dal package manager, a lotti, validati e annullabili.
 - **Design system** — un `DESIGN.md` con ambito di interfaccia (in `docs/DESIGN.md`, referenziato da `AGENTS.md`) ragionato dalla fonte di design reale del repo, con profili per UI visuale, output CLI stilizzato e messaggistica conversazionale, così che gli agenti generino output di interfaccia on-brand; quando un design system viene rilevato l'offerta è obbligatoria ma l'installazione è subordinata a un'accettazione — il profilo visuale è fortemente raccomandato quando rilevato, mentre i profili CLI e conversazionale sono raccomandati quando rilevati e sempre proposti con una domanda.
 - **AI Diff Reviewer** — la revisione locale richiesta: l'onboarding installa [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, e il passaggio di sicurezza di ogni Final Review la esegue; il Flow B opzionale aggiunge un gate di merge PR in CI che condivide la stessa estensione, offerto esplicitamente e mai installato senza richiesta.

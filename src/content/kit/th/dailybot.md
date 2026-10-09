@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "DWP addon แบบ opt-in: รายงาน lifecycle ของแผนไปยังทีม Dailybot การบังคับใช้ hook แบบเลือกได้ และ Dailybot agent skill 3.23.2 ครบชุด (แชท ฟอร์ม Plan และอื่นๆ)"
+description: "DWP addon แบบ opt-in: รายงาน lifecycle ของแผนไปยังทีม Dailybot การบังคับใช้ hook แบบเลือกได้ และ Dailybot agent skill 3.23.3 ครบชุด (แชท ฟอร์ม Plan และอื่นๆ)"
 kind: addon
 lang: th
 order: 2
@@ -23,7 +23,7 @@ order: 2
 
 ## สิ่งที่ addon นี้เชื่อม (ออกแบบให้แคบโดยเจตนา)
 
-DWP Dailybot addon **ไม่สร้าง** Dailybot ใหม่ มันเชื่อมการดำเนินแผนกับ sub-skill dailybot **`report`** และอาจ commit hook ของ harness ส่วนอื่น — การติดตั้ง ความยินยอม authentication สไตล์การเขียน — **มอบหมาย** ให้ [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) อย่างเป็นทางการ (ปัจจุบัน **3.23.2**)
+DWP Dailybot addon **ไม่สร้าง** Dailybot ใหม่ มันเชื่อมการดำเนินแผนกับ sub-skill dailybot **`report`** และอาจ commit hook ของ harness ส่วนอื่น — การติดตั้ง ความยินยอม authentication สไตล์การเขียน — **มอบหมาย** ให้ [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) อย่างเป็นทางการ (ปัจจุบัน **3.23.3**)
 
 ### สี่เหตุการณ์ lifecycle
 
@@ -69,7 +69,7 @@ Addon **เสนอ** เส้นทางติดตั้ง skill Dailybot
 
 | ส่วนประกอบ | คำสั่ง / path |
 |-----------|----------------|
-| **Dailybot agent skill** (แนะนำ) | `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot -y` |
+| **Dailybot agent skill** (แนะนำ) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.3 --skill dailybot -y` |
 | **อัปเดต skill ที่มี** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI** (baseline ของชุด `>= 3.9.0`; Plan ต้องใช้ `>= 3.25.0`) | ติดตั้งโดย skill ครั้งแรกผ่าน `shared/auth.md`; หรือ `pip install 'dailybot-cli>=3.9.0'` Homebrew หรือ installer ที่ตรวจ checksum ที่ [cli.dailybot.com](https://cli.dailybot.com) |
@@ -86,9 +86,9 @@ Addon นี้ **ไม่** ถาม email OTP หรือ API keys แล�
 
 การแก้ปัญหา auth เป็นแบบ **Bearer-first**: session token มีความสำคัญก่อน พร้อม retry แบบโปร่งใสจาก Bearer→API-key เมื่อเจอ `401`/`403` เพื่อไม่ให้ token ที่หมดอายุบล็อกคีย์ที่ใช้ได้ หาก auth ถูกปฏิเสธหรือไม่พร้อม การรายงานจะข้ามเงียบๆ — งานดำเนินต่อ
 
-## Dailybot skill คู่กัน — 17 ความสามารถ (3.23.2)
+## Dailybot skill คู่กัน — 17 ความสามารถ (3.23.3)
 
-การติดตั้ง Dailybot agent skill ได้มากกว่าที่ DWP addon เชื่อม ชุด skill อย่างเป็นทางการ (skill **3.23.2** CLI baseline **>= 3.9.0** Plan **>= 3.25.0** publish CLI ปัจจุบัน **3.25.2**) เปิด **17 sub-skill ที่ประสานกัน**:
+การติดตั้ง Dailybot agent skill ได้มากกว่าที่ DWP addon เชื่อม ชุด skill อย่างเป็นทางการ (skill **3.23.3** CLI baseline **>= 3.9.0** Plan **>= 3.25.0** publish CLI ปัจจุบัน **3.25.2**) เปิด **17 sub-skill ที่ประสานกัน**:
 
 | Sub-skill | ทำอะไร |
 |-----------|--------------|

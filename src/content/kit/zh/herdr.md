@@ -29,8 +29,8 @@ order: 7
 安装 herdr-peers 及其所依赖的 Herdr 官方技能。凡是其代理需要作答的机器，也都需要安装该技能。
 
 ```bash
-npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g -y
-npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
 要求：Herdr 0.9.1 或更新版本、`bash`，以及 `python3` 3.9 或更新版本（仅使用标准库）。接入流程会提供该附加组件，并把你的回答记录在附加组件注册表中；未经同意，它绝不会被启用。

@@ -31,11 +31,11 @@ Bugün beş eklenti sunulmaktadır — dört opt-in artı gerekli yerel inceleme
 
 ### Devcontainer (birinci eklenti)
 
-Tespit edilen stack'ten akıl yürütülmüş compose tabanlı `.devcontainer/` + `docker/` kurulumu.
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.1.4` sürümüne sabitlenmiş) için ince bir entegratör: `dck init` komutunun depoya oluşturduğu bir Dev Containers şablonu.
 
 - **Kit sayfası:** [Devcontainer](/kit/devcontainer)
-- **Ne ekler:** kalıcı AI-CLI auth volume'leri (Claude, Codex, Cursor, gh, Dailybot), `dailybot-project-network`, `DOCKER_DEV_ENV=vscode`, doğrulama alias'ları (`codecheck`, `check`, `fix`, `test`), halka açık OSS gizli bilgi hijyeni
-- **Davranış:** ~%85 sabit iskelet; ~%15 stack'e göre akıl yürütülür. Mevcut devcontainer'lar uzlaştırılır, asla ezilmez
+- **Ne ekler:** `dck` başlatıcısı (`setup`, `up`, `shell`, `ssh`, `doctor`), kodlama agent'ları olmadan gelen `python-3.13`, `node-24` ve `debian` varyantlarında temel imajlar (agent'lar opt-in bir katmandır), yalnızca loopback portları, SSH agent yönlendirmesi ve container başına isteğe bağlı Herdr makineleri
+- **Davranış:** `dck doctor --json` (arayüz 1) ile tespit edilir; `dck init` mevcut bir devcontainer'ı yalnızca diff'i kabul edildikten sonra uzlaştırır ve önce dosyanın yedeğini alır — asla ezilmez
 - **Ne zaman sunulur:** izole dev container'dan faydalanan Docker veya servisli çoğu depo
 
 ### Dailybot (ikinci eklenti)
@@ -44,7 +44,7 @@ Agent ilerleme görünürlüğü için geliştiricinin **Dailybot ekibine** opt-
 
 - **Kit sayfası:** [Dailybot](/kit/dailybot) — tam yetenek referansı
 - **DWP eklentisinin bağladıkları:** dailybot `report` alt-skill'i ile dört plan yaşam döngüsü raporu (kickoff, significant task, blocked, completion); isteğe bağlı deterministik hook zorlaması (`dailybot hook`, CLI `>= 3.9.0`)
-- **Eşleşen skill:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) kurulumu (şu an **3.23.2**) **17 yetenek** sunar — Slack/Teams/Discord/Google Chat sohbeti, check-in'ler, form authoring, ask AI, kudos, Plan panoları ve görevleri, organizasyon etiketleri, depo başına API anahtarları (`.dailybot/env.json`), e-posta ve daha fazlası. DWP eklentisi yalnızca **report**'u bağlar; diğer yetenekler doğrudan Dailybot skill üzerinden çağrılır
+- **Eşleşen skill:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) kurulumu (şu an **3.23.3**) **17 yetenek** sunar — Slack/Teams/Discord/Google Chat sohbeti, check-in'ler, form authoring, ask AI, kudos, Plan panoları ve görevleri, organizasyon etiketleri, depo başına API anahtarları (`.dailybot/env.json`), e-posta ve daha fazlası. DWP eklentisi yalnızca **report**'u bağlar; diğer yetenekler doğrudan Dailybot skill üzerinden çağrılır
 - **Auth:** tamamen Dailybot skill'e ertelenmiş (`dailybot login` veya `DAILYBOT_API_KEY`); bu eklenti asla kimlik bilgisi saklamaz
 - **Vendor-neutral koruma:** temel DWP'nin Dailybot'a **sıfır** bağımlılığı vardır; herkes için otomatik kurmayın
 - **Ne zaman sunulur:** geliştirici veya ekip zaten Dailybot kullanıyor veya açıkça ekip raporlaması istiyor
@@ -72,7 +72,7 @@ Tutarlı UI, CLI veya konuşma çıktısı için herhangi bir kodlama agent'ın�
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**), zorunlu Final Review güvenlik incelemesine yapılandırılmış bir yerel inceleme kazandırır ve isteğe bağlı olarak CI'da pull request'leri kapı altına alır. 2.3.0 standardından itibaren **yerel inceleme temelin bir parçasıdır**; yalnızca CI yüzeyi isteğe bağlıdır. Bu eklenti her yayında otomatik olarak güncellenir; bu yüzden aşağıda gösterilen etiket yazım anındaki geçerli etikettir ve vendored edilmiş kopyanın gerisinde kalabilir — gerçekte kurulu olan etiket için eklentinin kendi `SKILL.md`'si ve GitHub sürümleri esastır. Kurulum her zaman yayımlanmış bir etikete sabitlenir, asla hareketli bir dala değil.
 
 - **Kit sayfası:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — tam yetenek referansı
-- **Onboarding'de gerekli (Faz 7a):** vendored skill'in etikete sabitlenmiş kurulumu (`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.1.1 --skill ai-diff-reviewer -y`) artı depoya uyarlanmış bir `.review/extension.md` (`generate-extension` aracılığıyla), onboarding onayı altında; hedeflenmiş bir harness yükseltmesi her ikisini de eksik olduğunda uzlaştırır; bir reddediş, beyan edilmiş bir istisna olarak kaydedilir ve kurulana kadar `verify` tarafından raporlanır
+- **Onboarding'de gerekli (Faz 7a):** vendored skill'in etikete sabitlenmiş kurulumu (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) artı depoya uyarlanmış bir `.review/extension.md` (`generate-extension` aracılığıyla), onboarding onayı altında; hedeflenmiş bir harness yükseltmesi her ikisini de eksik olduğunda uzlaştırır; bir reddediş, beyan edilmiş bir istisna olarak kaydedilir ve kurulana kadar `verify` tarafından raporlanır
 - **Her Final Review'da gerekli:** güvenlik incelemesi, upstream üst varsayılan akışını birikmiş değişiklik kümesi üzerinde çalıştırır ve çıktısını plana yerel `analysis_results/SECURITY_REVIEW.md` dosyasına (planın kendi klasörü içinde, asla depo kökünde değil) ekler; eksik bir skill veya uzantı, kaydedilmiş bir `local reviewer not installed` bulgusudur — asla sessiz bir atlama değildir ve asla sürpriz bir önyükleme değil: kurulum, onboarding onayına veya açık bir addon çağrısına aittir; tamamlanmış bir geçişten gelen **doğrulanmış kritik bulgular**, düzeltilene veya açıkça kabul edilene kadar tamamlanmayı bloke eder (v3, BC-07 — doğrulanmamış kritik iddialar ek açıklamalı uyarı olarak gelir ve bir `incomplete`/`timeout` incelemesi temiz bir geçiş değildir, BC-04)
 - **İsteğe bağlı CI yüzeyi (Flow B):** upstream `setup` alt-skill'i aracılığıyla `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v3`), artı geliştirici tarafından çağrılabilir kolaylıklar olarak `apply-review` (salt okunur) ve `address-review` (commit yapar, push eder ve yeniden kurar; v3.1.1'de yeni) — açıkça sunulur, istenmeden asla kurulmaz, asla varsayılan değildir, asla bir plan görevi değildir
 - **Asla bloke etmeme (yalnızca çağrı):** başlayabilen ama hata veren bir yerel inceleme bir kez uyarır, kaydedilir ve devam edilir; görevi asla başarısız kılmaz

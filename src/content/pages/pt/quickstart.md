@@ -98,7 +98,8 @@ Instale a skill para que os agentes deste repositório possam planejar e executa
 mais nove sub-skills — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` e `upgrade`.
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill
+# pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
 Ou instale via OpenClaw:
@@ -115,12 +116,12 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Padrão atual e modelo de execução
 
-O padrão atual voltado ao repositório é o **DWP 6.0.0**, implementado pela
+O padrão atual voltado ao repositório é o **DWP 7.0.0**, implementado pela
 versão da skill Deep Work Plan instalada acima. O pacote atual da skill
 inclui o roteador e nove sub-skills: `create`, `execute`, `refine`,
 `resume`, `status`, `verify`, `onboard`, `author` e `upgrade`.
 
-Versão instalada da skill: **6.0.2**. O pacote 6.x atual cria novos planos com v6 por padrão. Os planos existentes mantêm a geração registrada; passar um plano v5 para v6 exige uma migração explícita com prévia.
+Versão instalada da skill: **7.0.1**. O pacote 7.x atual cria novos planos com v7 por padrão. Os planos existentes mantêm a geração registrada; passar um plano v5 para v6 exige uma migração explícita com prévia.
 
 O padrão é deliberadamente proporcional, e transforma essa proporção em uma
 propriedade do plano, não da disciplina do desenvolvedor. Um plano é
@@ -137,30 +138,19 @@ compactos deixam de carregar um requisito ou um gate.
 Para um plano Full, o repositório é a superfície de execução duradoura. O
 plano contém tarefas atômicas, uma **Superfície tocada** que explica o que
 mudou e quais consumidores são afetados, critérios de aceitação e um gate
-de validação selecionado do mapa de testes documentado do repositório. Na v6, a criação escreve o manifesto de identidade, depois o contrato e o evento de aprovação. O diário somente de acréscimo registra a execução; `state.json` é um snapshot derivado desse diário. Cada etapa pode ser recuperada após uma interrupção.
+de validação selecionado do mapa de testes documentado do repositório. Um novo plano escreve o manifesto de identidade, depois o contrato e o evento de aprovação. O diário somente de acréscimo registra a execução; `state.json` é um snapshot derivado desse diário. Cada etapa pode ser recuperada após uma interrupção.
 
-A geração do esquema permanece vinculada a cada plano. Planos v5 mantêm
-`state.json` sob https://deepworkplan.com/schema/plan-state/v5.json. Planos
-novos planos do pacote 6.x usam v6 por padrão e usam
-https://deepworkplan.com/schema/plan-manifest/v6.json para `manifest.json`;
-sua projeção ativa é um snapshot em
-https://deepworkplan.com/schema/plan-snapshot/v6.json. Não existe
-`plan-state/v6.json`: v6 usa um snapshot, não um esquema de estado v5
-renomeado. Planos existentes mantêm a geração registrada e nunca são
-reescritos. v6 mantém a metodologia v5 com uma estrutura mais rigorosa; a não
-inferioridade dos resultados dos agentes não foi medida.
+A geração do esquema permanece vinculada a cada plano. O pacote 7.x atual cria planos **v7** por padrão: `manifest.json` segue https://deepworkplan.com/schema/plan-manifest/v7.json, o [contrato](https://deepworkplan.com/schema/plan-contract/v7.json) adiciona ao contrato v6 um marcador de tarefa opcional `parallel_safe`, e cada [evento do diário](https://deepworkplan.com/schema/journal-event/v7.json) também pode registrar uma `delegation`. A projeção ativa mantém inalterado o snapshot em https://deepworkplan.com/schema/plan-snapshot/v6.json, e o [manifesto de contexto da tarefa](https://deepworkplan.com/schema/context-manifest/v6.json) é compartilhado com a v6. Uma solicitação explícita de `v6` ainda materializa um plano v6. Um plano nunca muda de geração: planos v6 mantêm seus esquemas v6 ([manifesto](https://deepworkplan.com/schema/plan-manifest/v6.json), [contrato](https://deepworkplan.com/schema/plan-contract/v6.json), [evento do diário](https://deepworkplan.com/schema/journal-event/v6.json)) e são executados sem alterações; planos v5 mantêm `state.json` sob https://deepworkplan.com/schema/plan-state/v5.json; planos v1, v2 e v5 existentes nunca são reescritos nem migrados implicitamente, e passar um plano v5 para v6 exige uma migração explícita com prévia.
 
-- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
-- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
-- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+Os addons opcionais são registrados por repositório no registro de addons versionado `.dwp/config.json` (https://deepworkplan.com/schema/dwp-config/v1.json): ausente significa não habilitado, e a metodologia funciona com todos os addons desabilitados. Um plano v7 pode entregar uma tarefa `parallel_safe` a outro agente de programação somente quando seu contrato concede `agent_delegation` e um addon de delegação (agentkit ou Herdr) está habilitado e detectado; o resultado de um delegado continua sendo uma alegação até que o próprio executor de gates do plano o observe.
 
 Todo plano tem uma tarefa de encerramento obrigatória: o **Final Review**.
 Ele executa o passo de segurança sobre o conjunto de mudanças acumulado,
 incluindo a revisão local obrigatória do AI Diff Reviewer, valida o estado
 final do repositório, reconcilia as skills usadas pelas tarefas e registra
 as evidências e limitações. A skill de revisão local é instalada em uma
-versão fixada; o comando atualmente documentado usa
-`DailybotHQ/ai-diff-reviewer@v3.2.2`. A GitHub Action é uma superfície de
+versão fixada; o comando atualmente documentado instala
+`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0`. A GitHub Action é uma superfície de
 CI separada e opcional, nunca obrigatória para a metodologia central.
 
 Uma revisão que correu e não reportou nada não é o mesmo que uma revisão que nunca chegou a produzir resultados. O segundo caso é uma **revisão incompleta**: fica registada como tal, nunca conta como prova de que o conjunto de alterações está limpo, e nunca é motivo para fechar o Final Review — o mesmo tratamento vermelho que recebe uma revisão `timeout` sob rigor bloqueante (BC-04). Juntamente com um revisor ausente e uma invocação que falhou, são três estados distintos — e nenhum significa que o diff foi revisto e saiu limpo. Um corpo que diz `Recommendation: approve` também não é prova de que a verificação tenha passado. Leia primeiro o bloco Highest severity / Strictness gate / Check status do marcador de acompanhamento — o runtime reescreve um `approve` do modelo quando a comporta está a falhar.
@@ -209,20 +199,24 @@ Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígito
 
 Após o onboarding de base, instale a **revisão local do AI Diff Reviewer** (Fase 7a — obrigatória
 desde o padrão 2.3.0): a skill vendorizada fixada por tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`) mais um
+(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) mais um
 `.review/extension.md` sob medida para o repositório via `generate-extension`, sob o consentimento do
-onboarding. Depois enumere os quatro addons opcionais (devcontainer, Dailybot, dependency-upgrade,
-design-system) e ofereça cada um como uma escolha explícita. Um repositório é totalmente conforme com
+onboarding. Depois enumere os sete addons opcionais (devcontainer, Dailybot, atualização de dependências,
+design system, agentkit, Herdr, DeepWorkPlan Vim) e ofereça cada um como uma escolha explícita,
+registrando cada aceitação em `.dwp/config.json`. Um repositório é totalmente conforme com
 **zero** addons opcionais — nunca instale esses automaticamente.
 
-- **Suporte a devcontainer** — um dev container reproduzível e isolado com auth de CLI de IA persistente.
-- **Integração com a Dailybot** — quatro eventos do ciclo de vida (kickoff, tarefa significativa, bloqueado, conclusão) como relatórios de progresso best-effort para equipes que já usam a Dailybot, com reforço autônomo opcional via hooks (`dailybot-cli >= 3.9.0`). A instalação da skill de agente Dailybot emparelhada (3.23.2) também expõe chat, check-ins, criação de formulários, consulta à IA, quadros e tarefas do Plan, chaves API por repositório e mais — o addon conecta apenas os relatórios à execução DWP. A metodologia central tem zero dependência da Dailybot.
+- **Suporte a devcontainer** — um integrador enxuto do [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixado em `v0.1.4`): `dck init` renderiza um template de Dev Containers e reconcilia um devcontainer existente somente depois que seu diff é aceito; as imagens base são distribuídas sem agentes de código.
+- **Integração com a Dailybot** — quatro eventos do ciclo de vida (kickoff, tarefa significativa, bloqueado, conclusão) como relatórios de progresso best-effort para equipes que já usam a Dailybot, com reforço autônomo opcional via hooks (`dailybot-cli >= 3.9.0`). A instalação da skill de agente Dailybot emparelhada (3.23.3) também expõe chat, check-ins, criação de formulários, consulta à IA, quadros e tarefas do Plan, chaves API por repositório e mais — o addon conecta apenas os relatórios à execução DWP. A metodologia central tem zero dependência da Dailybot.
 - **Atualização de dependências** — atualizações independentes do gerenciador de pacotes, em lotes, validadas e reversíveis. Quando
  aceita, ela instala o comando `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` opcional para repos com uma superfície de interface detectada
  (não oferecido para bibliotecas puras, serviços headless ou repos exclusivamente de infra). Três perfis se
  empilham em um único arquivo: visual-ui (recomendado com força quando detectado; instalação protegida por aceitação), cli-output e
  conversational — estes dois últimos são sempre perguntados, nunca aplicados automaticamente.
+- **agentkit** — uma instalação no nível da máquina do [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fixado em `v0.1.1`) para planos que entregam tarefas `parallel_safe` delimitadas a outros agentes de código (headless, um `ak run` por delegado em sua própria worktree); flags de autonomia nunca são adicionadas por padrão.
+- **Herdr** — uma instalação no nível da máquina do [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fixado em `v0.1.0`, mais a skill oficial do Herdr) para planos que pedem a um agente par num painel do Herdr, em qualquer máquina, uma única resposta autorizada.
+- **DeepWorkPlan Vim** — o editor de terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), fixado em `v0.4.2`), uma instalação no nível da máquina que nunca sobrescreve uma configuração existente do Neovim sem consentimento explícito.
 - **AI Diff Reviewer** — a revisão local obrigatória (não uma opção): o passe de segurança de cada Final Review
  executa o [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md`
  obrigatório) sobre o conjunto acumulado de mudanças do plano. Uma skill ou extensão ausente é um achado

@@ -105,7 +105,8 @@ Cài skill để các agent của repository này có thể lập kế hoạch v
 cùng chín sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author` và `upgrade`.
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill
+# pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
 Hoặc cài đặt qua OpenClaw:
@@ -122,12 +123,12 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Tiêu chuẩn hiện tại và mô hình thực thi
 
-Tiêu chuẩn hướng-repository hiện tại là **DWP 6.0.0**, được triển khai bởi phiên
+Tiêu chuẩn hướng-repository hiện tại là **DWP 7.0.0**, được triển khai bởi phiên
 bản skill Deep Work Plan đã cài ở trên. Gói skill hiện tại bao gồm bộ định tuyến
 và chín sub-skill: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` và `upgrade`.
 
-Phiên bản skill đã cài: **6.0.2**. Gói 6.x hiện tại mặc định tạo kế hoạch mới bằng v6. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; chuyển kế hoạch v5 sang v6 cần yêu cầu di chuyển rõ ràng và xem trước.
+Phiên bản skill đã cài: **7.0.1**. Gói 7.x hiện tại mặc định tạo kế hoạch mới bằng v7. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; chuyển kế hoạch v5 sang v6 cần yêu cầu di chuyển rõ ràng và xem trước.
 
 Tiêu chuẩn này được thiết kế có chủ đích theo tỷ lệ, và biến sự tỷ lệ đó thành
 một thuộc tính của kế hoạch chứ không phải kỷ luật của nhà phát triển. Một kế
@@ -144,29 +145,41 @@ còn đủ để mang một yêu cầu hay một cổng.
 Đối với một kế hoạch Full, repository là bề mặt thực thi lâu dài. Kế hoạch chứa
 các tác vụ nguyên tử, một **Bề mặt bị chạm tới** giải thích điều gì đã thay đổi và
 những người tiêu dùng nào bị ảnh hưởng, tiêu chí chấp nhận, và một cổng kiểm
-định được chọn từ bản đồ kiểm thử đã được ghi lại của repository. Trong v6, quá trình tạo ghi manifest định danh, tiếp theo là hợp đồng và sự kiện phê duyệt. Nhật ký chỉ ghi thêm lưu quá trình thực thi; `state.json` là bản chụp được suy ra từ nhật ký. Có thể khôi phục từng bước sau gián đoạn.
+định được chọn từ bản đồ kiểm thử đã được ghi lại của repository. Một kế hoạch mới ghi manifest định danh của nó, tiếp theo là hợp đồng có phiên bản, rồi đến sự kiện phê duyệt. Nhật ký chỉ ghi thêm lưu quá trình thực thi; `state.json` là bản chụp được suy ra từ nhật ký. Có thể khôi phục từng bước sau gián đoạn.
 
-Phiên bản schema luôn gắn với từng kế hoạch. Kế hoạch v5 tiếp tục dùng
-`state.json` theo schema https://deepworkplan.com/schema/plan-state/v5.json.
-Kế hoạch mới được gói 6.x hiện tại tạo mặc định theo v6 dùng
-https://deepworkplan.com/schema/plan-manifest/v6.json cho `manifest.json`;
-projection trực tiếp là snapshot tại
-https://deepworkplan.com/schema/plan-snapshot/v6.json. Không có
-`plan-state/v6.json`: v6 dùng snapshot, không phải schema trạng thái v5 được
-đổi tên. Kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận và không bao giờ bị
-viết lại. v6 giữ nguyên phương pháp v5 với cấu trúc chặt chẽ hơn; tính không
-kém hơn của kết quả agent chưa được đo lường.
+Phiên bản schema luôn gắn với từng kế hoạch. Gói 7.x hiện tại mặc định tạo kế
+hoạch **v7**: `manifest.json` tuân theo
+https://deepworkplan.com/schema/plan-manifest/v7.json,
+[hợp đồng](https://deepworkplan.com/schema/plan-contract/v7.json) bổ sung một dấu
+đánh tác vụ `parallel_safe` tùy chọn vào hợp đồng v6, và mọi
+[sự kiện nhật ký](https://deepworkplan.com/schema/journal-event/v7.json) cũng có thể
+ghi lại một `delegation`. Projection trực tiếp vẫn giữ snapshot không thay đổi tại
+https://deepworkplan.com/schema/plan-snapshot/v6.json, và
+[manifest ngữ cảnh tác vụ](https://deepworkplan.com/schema/context-manifest/v6.json)
+được dùng chung với v6. Một yêu cầu `v6` rõ ràng vẫn tạo ra kế hoạch v6.
+Một kế hoạch không bao giờ đổi thế hệ: kế hoạch v6 giữ các schema v6 của nó
+([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json),
+[hợp đồng](https://deepworkplan.com/schema/plan-contract/v6.json),
+[sự kiện nhật ký](https://deepworkplan.com/schema/journal-event/v6.json)) và chạy
+không thay đổi; kế hoạch v5 tiếp tục dùng `state.json` theo schema
+https://deepworkplan.com/schema/plan-state/v5.json; các kế hoạch v1, v2 và v5 hiện có
+không bao giờ bị viết lại hay di chuyển ngầm định, và chuyển kế hoạch v5 sang v6 cần
+một lần di chuyển rõ ràng, có xem trước.
 
-- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
-- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
-- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+Các addon tùy chọn được ghi lại theo từng repository trong sổ đăng ký addon được theo
+dõi `.dwp/config.json` (https://deepworkplan.com/schema/dwp-config/v1.json): không có
+nghĩa là chưa được bật, và phương pháp vẫn hoạt động khi tắt mọi addon. Một kế hoạch v7
+chỉ được giao một tác vụ `parallel_safe` cho một agent lập trình khác khi hợp đồng của
+nó cấp `agent_delegation` và một addon ủy quyền (agentkit hoặc Herdr) đã được bật và
+phát hiện; kết quả của bên được ủy quyền vẫn chỉ là một tuyên bố cho đến khi trình chạy
+cổng của chính kế hoạch quan sát được nó.
 
 Mỗi kế hoạch có một tác vụ kết thúc bắt buộc: **Final Review**. Nó chạy bước
 kiểm tra bảo mật trên toàn bộ tập thay đổi đã tích lũy, bao gồm cả đánh giá cục
 bộ AI Diff Reviewer bắt buộc, xác thực trạng thái cuối cùng của repository,
 đối chiếu các skill mà các tác vụ đã sử dụng, và ghi lại bằng chứng cùng các
 giới hạn. Skill đánh giá cục bộ được cài đặt ở một phiên bản cố định; lệnh
-được ghi lại hiện tại sử dụng `DailybotHQ/ai-diff-reviewer@v3.2.2`. GitHub
+được ghi lại hiện tại cài đặt `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0`. GitHub
 Action là một bề mặt CI riêng biệt, tùy chọn, và không bao giờ là bắt buộc đối
 với phương pháp luận cốt lõi.
 
@@ -216,20 +229,24 @@ Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba ch
 
 Sau khi khởi tạo nền tảng, hãy cài **đánh giá cục bộ AI Diff Reviewer** (Giai đoạn 7a — bắt buộc kể từ
 chuẩn 2.3.0): skill vendored được ghim theo tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`) cùng một
+(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) cùng một
 `.review/extension.md` được điều chỉnh riêng cho repo qua `generate-extension`, dưới sự chấp thuận của
-quá trình khởi tạo. Sau đó liệt kê bốn addon tùy chọn (devcontainer, Dailybot, dependency-upgrade,
-design-system) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một repository hoàn toàn tuân thủ
+quá trình khởi tạo. Sau đó liệt kê bảy addon tùy chọn (devcontainer, Dailybot, dependency upgrade,
+design system, agentkit, Herdr, DeepWorkPlan Vim) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng,
+ghi lại mọi lần chấp nhận trong `.dwp/config.json`. Một repository hoàn toàn tuân thủ
 với **không** addon tùy chọn nào — đừng bao giờ tự động cài chúng.
 
-- **Hỗ trợ devcontainer** — một dev container tái lập được, cô lập, với xác thực AI-CLI bền vững.
-- **Tích hợp Dailybot** — bốn sự kiện vòng đời (kickoff, tác vụ quan trọng, bị chặn, hoàn tất) dưới dạng báo cáo tiến độ theo nỗ lực tối đa cho các đội đã dùng Dailybot, với lớp hook tự hành tùy chọn (`dailybot-cli >= 3.9.0`). Cài skill agent Dailybot đi kèm (3.23.2) cũng mở ra chat, check-in, tạo biểu mẫu, hỏi AI, board và tác vụ Plan, API key theo repo và nhiều hơn — addon chỉ đấu nối phần báo cáo vào quá trình thực thi DWP. Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
+- **Hỗ trợ devcontainer** — một lớp tích hợp mỏng cho [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.1.4`): `dck init` tạo một template Dev Containers và chỉ đối chiếu một devcontainer có sẵn sau khi diff của nó được chấp nhận; base image không kèm coding agent.
+- **Tích hợp Dailybot** — bốn sự kiện vòng đời (kickoff, tác vụ quan trọng, bị chặn, hoàn tất) dưới dạng báo cáo tiến độ theo nỗ lực tối đa cho các đội đã dùng Dailybot, với lớp hook tự hành tùy chọn (`dailybot-cli >= 3.9.0`). Cài skill agent Dailybot đi kèm (3.23.3) cũng mở ra chat, check-in, tạo biểu mẫu, hỏi AI, board và tác vụ Plan, API key theo repo và nhiều hơn — addon chỉ đấu nối phần báo cáo vào quá trình thực thi DWP. Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
 - **Nâng cấp phụ thuộc** — nâng cấp độc lập với trình quản lý gói, theo lô, được kiểm chứng, hoàn nguyên được. Khi
   được chấp nhận, nó cài command `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` tự nguyện dành cho các repo có bề mặt giao diện được phát hiện
   (không đề xuất cho thư viện thuần, dịch vụ headless hay repo chỉ hạ tầng). Ba profile xếp chồng trong
   một tệp: visual-ui (được khuyến nghị mạnh mẽ khi phát hiện; cài đặt kiểm soát bằng sự chấp nhận), cli-output và hội thoại — hai profile sau
   luôn được hỏi, không bao giờ tự động áp dụng.
+- **agentkit** — bản cài đặt cấp máy của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim ở `v0.1.1`) cho các kế hoạch giao những tác vụ `parallel_safe` có giới hạn cho coding agent khác (headless, mỗi bên được ủy thác chạy một `ak run` trong worktree riêng); cờ tự chủ không bao giờ được thêm theo mặc định.
+- **Herdr** — bản cài đặt cấp máy của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim ở `v0.1.0`, cùng skill chính thức của Herdr) cho các kế hoạch yêu cầu một agent ngang hàng trong một pane Herdr, trên bất kỳ máy nào, gửi một phản hồi được ủy quyền.
+- **DeepWorkPlan Vim** — trình soạn thảo terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), ghim ở `v0.4.2`), một bản cài đặt cấp máy không bao giờ ghi đè cấu hình Neovim có sẵn khi chưa có sự đồng ý rõ ràng.
 - **AI Diff Reviewer** — đánh giá cục bộ bắt buộc (không phải tùy chọn): bước rà soát bảo mật của mọi
   Final Review chạy [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill +
   `.review/extension.md` bắt buộc) trên toàn bộ tập thay đổi đã tích lũy của kế hoạch. Một skill hoặc

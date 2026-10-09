@@ -29,8 +29,8 @@ El addon es un integrador delgado. El trabajo lo hace **[herdr-peers](https://gi
 Instala herdr-peers y la skill oficial de Herdr, de la que depende. Toda máquina cuyos agentes deban responder también necesita la skill.
 
 ```bash
-npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g -y
-npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
 Requisitos: Herdr 0.9.1 o posterior, `bash` y `python3` 3.9 o posterior (solo biblioteca estándar). El onboarding ofrece el addon y registra tu respuesta en el registro de addons; nunca se habilita sin consentimiento.

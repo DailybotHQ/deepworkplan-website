@@ -10,7 +10,7 @@ order: 5
 
 Every Deep Work Plan closes the same way: a mandatory **Final Review** that reads the plan's entire accumulated change set before the work can be called done. Its security pass is the last point at which anything gets caught. Without help, the only reader at that point is the same agent that wrote the code.
 
-This addon puts a second reader on that diff. It wires the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — listed on the marketplace as "AI Diff Reviewer", current release **v3.2.2** — into the security pass, where it returns something structured rather than prose: a verdict, a findings table, and a severity on each finding. Since v3, a `critical` finding means the addon's verifier confirmed it with a second, code-grounded model call; only verified criticals block completion until fixed or explicitly accepted. The review is a gate, not a comment.
+This addon puts a second reader on that diff. It wires the **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** — listed on the marketplace as "AI Diff Reviewer", current release **v3.3.0** — into the security pass, where it returns something structured rather than prose: a verdict, a findings table, and a severity on each finding. Since v3, a `critical` finding means the addon's verifier confirmed it with a second, code-grounded model call; only verified criticals block completion until fixed or explicitly accepted. The review is a gate, not a comment.
 
 Since standard 2.3.0 that local review is **part of the baseline, not an extra**. Onboarding installs it; every Final Review runs it. What stays optional is the CI surface — Flow B, where the same review gates pull requests through the GitHub Action.
 

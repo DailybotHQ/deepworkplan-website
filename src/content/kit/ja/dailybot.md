@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "DWP の任意アドオン：計画のライフサイクルを Dailybot に報告し、Dailybot スキル 3.23.2（チャット、フォーム、Plan）も利用できます。"
+description: "DWP の任意アドオン：計画のライフサイクルを Dailybot に報告し、Dailybot スキル 3.23.3（チャット、フォーム、Plan）も利用できます。"
 kind: addon
 lang: ja
 order: 2
@@ -23,7 +23,7 @@ Deep Work Plan の実行を **Dailybot チーム**に接続し、エージェン
 
 ## このアドオンが接続するもの（意図的に狭い設計）
 
-DWP Dailybot アドオンは Dailybot を**再発明しません**。プラン実行を dailybot **`report`** サブスキルに接続し、オプションで harness フックをコミットします。それ以外——インストール、同意、認証、文体——はすべて公式 [Dailybot エージェントスキル](https://github.com/DailybotHQ/agent-skill)（現在 **3.23.2**）に**委譲**されます。
+DWP Dailybot アドオンは Dailybot を**再発明しません**。プラン実行を dailybot **`report`** サブスキルに接続し、オプションで harness フックをコミットします。それ以外——インストール、同意、認証、文体——はすべて公式 [Dailybot エージェントスキル](https://github.com/DailybotHQ/agent-skill)（現在 **3.23.3**）に**委譲**されます。
 
 ### 4 つのライフサイクルイベント
 
@@ -69,7 +69,7 @@ DWP `create` / `execute` 中、アドオンは**4 つのベストエフォート
 
 | コンポーネント | コマンド / パス |
 |----------------|-----------------|
-| **Dailybot エージェントスキル**（推奨） | `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot -y` |
+| **Dailybot エージェントスキル**（推奨） | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.3 --skill dailybot -y` |
 | **既存スキルの更新** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI**（パックのベースライン `>= 3.9.0`；Plan は `>= 3.25.0` が必要） | 初回利用時にスキルが検証済み `shared/auth.md` 経由でインストール；または `pip install 'dailybot-cli>=3.9.0'`、Homebrew、または [cli.dailybot.com](https://cli.dailybot.com) のチェックサム検証インストーラー |
@@ -86,9 +86,9 @@ DWP `create` / `execute` 中、アドオンは**4 つのベストエフォート
 
 認証解決は **Bearer 優先**：セッショントークンが優先され、`401`/`403` 時に透過的な Bearer→API キーのリトライを行うため、古いトークンが有効なキーをブロックすることはない。認証が拒否または利用不可の場合、レポートは静かにスキップ——作業は継続。
 
-## ペアの Dailybot スキル——17 の能力（3.23.2）
+## ペアの Dailybot スキル——17 の能力（3.23.3）
 
-Dailybot エージェントスキルのインストールは、DWP アドオンが接続する以上のものをもたらす。公式スキルパック（スキル **3.23.2**、CLI ベースライン **>= 3.9.0**、Plan **>= 3.25.0**、CLI の現在の公開 **3.25.2**）は**17 の協調サブスキル**を公開：
+Dailybot エージェントスキルのインストールは、DWP アドオンが接続する以上のものをもたらす。公式スキルパック（スキル **3.23.3**、CLI ベースライン **>= 3.9.0**、Plan **>= 3.25.0**、CLI の現在の公開 **3.25.2**）は**17 の協調サブスキル**を公開：
 
 | サブスキル | 機能 |
 |------------|------|

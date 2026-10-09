@@ -700,7 +700,7 @@ export const th: SiteTranslations = {
         description:
           'เพิ่มสกิล Deep Work Plan เพื่อให้ agent ใดก็ได้สามารถวางแผนและดำเนินงานที่มีโครงสร้าง สกิลประกอบด้วย router และสกิลย่อยเก้าตัว ได้แก่ create, execute, refine, resume, status, verify, onboard, author และ upgrade',
         commands: [
-          'npx skills add DailybotHQ/deepworkplan-skill',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -803,7 +803,7 @@ export const th: SiteTranslations = {
             id: 'how-to-use',
             question: 'ใช้งานอย่างไร?',
             answer:
-              'สามขั้นตอน ขั้นแรก ติดตั้ง Deep Work Plan skill ลงใน coding agent ของคุณ——เส้นทางที่เร็วที่สุดคือ `npx skills add DailybotHQ/deepworkplan-skill` (หรือ clone skill repo แล้วรัน `./setup.sh`) ขั้นที่สอง onboard repository ครั้งเดียว เพื่อให้ agent ปรับ `AGENTS.md`, `docs/`, ชุด `.agents/` และพื้นที่ `.dwp/` ที่ถูก gitignore ให้เข้ากับสแต็กของคุณ: ชี้ไปที่ https://deepworkplan.com/init.md หรือรัน `/deepworkplan-onboard` ขั้นที่สาม วางแผนและรันงานด้วยคำสั่งบาง ๆ: `/dwp-create <goal>` สร้างแผน; `/dwp-execute` รันทีละงานผ่านแต่ละ gate; `/dwp-refine` แก้ไขแผนที่กำลังดำเนินอยู่ (ขอบเขต งาน หรือการยกระดับแผน Lite เป็น Full); `/dwp-resume` ทำต่อหลังการหยุดชะงัก; `/dwp-status` รายงานความคืบหน้าโดยไม่รัน; `/dwp-verify` สร้างรายงานการสอดคล้องที่เป็นกลาง ส่วน `/dwp-upgrade` ย้ายสกิลที่ติดตั้งไว้ไปยังรีลีสใหม่โดยไม่แตะแผนที่มีอยู่ agent ที่ intercept `/` มักใช้ `#` แทน (เช่น `#dwp-execute`) adoption endpoint และเริ่มใช้งานเร็วอธิบายเส้นทางเดียวกันอย่างละเอียดยิ่งขึ้น',
+              'สามขั้นตอน ขั้นแรก ติดตั้ง Deep Work Plan skill ลงใน coding agent ของคุณ——เส้นทางที่เร็วที่สุดคือ `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y` (หรือ clone skill repo แล้วรัน `./setup.sh`) ขั้นที่สอง onboard repository ครั้งเดียว เพื่อให้ agent ปรับ `AGENTS.md`, `docs/`, ชุด `.agents/` และพื้นที่ `.dwp/` ที่ถูก gitignore ให้เข้ากับสแต็กของคุณ: ชี้ไปที่ https://deepworkplan.com/init.md หรือรัน `/deepworkplan-onboard` ขั้นที่สาม วางแผนและรันงานด้วยคำสั่งบาง ๆ: `/dwp-create <goal>` สร้างแผน; `/dwp-execute` รันทีละงานผ่านแต่ละ gate; `/dwp-refine` แก้ไขแผนที่กำลังดำเนินอยู่ (ขอบเขต งาน หรือการยกระดับแผน Lite เป็น Full); `/dwp-resume` ทำต่อหลังการหยุดชะงัก; `/dwp-status` รายงานความคืบหน้าโดยไม่รัน; `/dwp-verify` สร้างรายงานการสอดคล้องที่เป็นกลาง ส่วน `/dwp-upgrade` ย้ายสกิลที่ติดตั้งไว้ไปยังรีลีสใหม่โดยไม่แตะแผนที่มีอยู่ agent ที่ intercept `/` มักใช้ `#` แทน (เช่น `#dwp-execute`) adoption endpoint และเริ่มใช้งานเร็วอธิบายเส้นทางเดียวกันอย่างละเอียดยิ่งขึ้น',
             linkLabel: 'เริ่มใช้งานเร็ว',
             linkPath: '/quickstart',
           },

@@ -9,10 +9,10 @@ lastUpdated: 2026-10-09
 किट वह सब कुछ है जिसकी आपको पद्धति को व्यवहार में चलाने के लिए आवश्यकता है। इसे `DailybotHQ/deepworkplan-skill` से स्थापित किया जाता है:
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
-वर्तमान 6.x पैक नए प्लान डिफ़ॉल्ट रूप से v6 में बनाता है। मौजूदा प्लान अपनी दर्ज पीढ़ी बनाए रखते हैं; माइग्रेशन के लिए स्पष्ट अनुरोध आवश्यक है।
+वर्तमान 7.x पैक नए प्लान डिफ़ॉल्ट रूप से v7 में बनाता है। मौजूदा प्लान अपनी दर्ज पीढ़ी बनाए रखते हैं; माइग्रेशन के लिए स्पष्ट अनुरोध आवश्यक है।
 
 ### स्किल और उसकी सब-स्किल्स
 

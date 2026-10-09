@@ -870,7 +870,7 @@
                   },
                   "skill": {
                     "name": "deepworkplan",
-                    "install": "npx skills add DailybotHQ/deepworkplan-skill"
+                    "install": "npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y"
                   },
                   "endpoints": {
                     "init": "https://deepworkplan.com/init.md"

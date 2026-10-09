@@ -29,8 +29,8 @@ order: 7
 herdr-peers और Herdr की आधिकारिक skill इंस्टॉल करें, जिस पर यह निर्भर है। जिस भी मशीन के एजेंटों को उत्तर देना है, उस पर भी यह skill होनी चाहिए।
 
 ```bash
-npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g -y
-npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
 आवश्यकताएँ: Herdr 0.9.1 या नया, `bash`, और `python3` 3.9 या नया (केवल मानक लाइब्रेरी)। ऑनबोर्डिंग यह ऐडऑन प्रस्तावित करती है और आपका उत्तर ऐडऑन रजिस्ट्री में दर्ज करती है; सहमति के बिना इसे कभी सक्षम नहीं किया जाता।

@@ -82,7 +82,8 @@ lastUpdated: 2026-09-28
 外加九个子技能——`create`、`execute`、`refine`、`resume`、`status`、`verify`、`onboard`、`author` 与 `upgrade`。
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill
+# pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
 或通过 OpenClaw 安装：
@@ -99,11 +100,11 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### 当前标准与执行模型
 
-当前面向仓库的标准是 **DWP 6.0.0**，由上面安装的 Deep Work Plan 技能版本实现。
+当前面向仓库的标准是 **DWP 7.0.0**，由上面安装的 Deep Work Plan 技能版本实现。
 当前技能包包含路由器和九个子技能：`create`、`execute`、`refine`、`resume`、
 `status`、`verify`、`onboard`、`author` 和 `upgrade`。
 
-已安装的技能版本：**6.0.2**。当前 6.x 技能包默认使用 v6 创建新计划。现有计划保留记录的代际；将 v5 计划迁移到 v6 需要明确请求并先行预览。
+已安装的技能版本：**7.0.1**。当前 7.x 技能包默认使用 v7 创建新计划。现有计划保留记录的代际；将 v5 计划迁移到 v6 需要明确请求并先行预览。
 
 该标准刻意保持比例性，并将这种比例性变成计划本身的属性，而不是开发者自律的
 结果。一份计划要么是 **Lite**——任务记录以内联形式存放在计划的 README
@@ -115,23 +116,34 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 对于 Full 计划，仓库就是持久的执行面。计划包含原子任务、说明发生了什么变化
 以及哪些消费者受到影响的**触及面**、验收标准，以及从仓库文档化的测试映射中
-选出的验证关卡。在 v6 中，创建流程依次写入身份清单、契约和批准事件。仅追加的日志记录执行过程；`state.json` 是从日志生成的快照。每个步骤在中断后都可以恢复。
+选出的验证关卡。新计划依次写入身份清单、版本化契约和批准事件。仅追加的日志记录执行过程；`state.json` 是从日志生成的快照。每个步骤在中断后都可以恢复。
 
-架构代际与每个计划绑定。v5 计划继续使用 https://deepworkplan.com/schema/plan-state/v5.json 作为
-`state.json` 的架构。当前 6.x 技能包默认创建的新计划使用
-https://deepworkplan.com/schema/plan-manifest/v6.json 作为 `manifest.json`
-架构；其实时投影是 https://deepworkplan.com/schema/plan-snapshot/v6.json 中定义的快照。不存在
-`plan-state/v6.json`：v6 使用快照，而不是改名后的 v5 状态架构。现有计划保留记录的代际，绝不会被重写。v6 保留 v5
-方法论并采用更严格的结构；尚未测量代理结果的非劣效性。
+架构代际与每个计划绑定。当前 7.x 技能包默认创建 **v7** 计划：`manifest.json` 遵循
+<https://deepworkplan.com/schema/plan-manifest/v7.json>；
+[契约](https://deepworkplan.com/schema/plan-contract/v7.json)在 v6 契约的基础上增加了可选的
+`parallel_safe` 任务标记；每个[日志事件](https://deepworkplan.com/schema/journal-event/v7.json)
+还可以记录一次 `delegation`。实时投影沿用未变的快照
+<https://deepworkplan.com/schema/plan-snapshot/v6.json>，
+[任务上下文清单](https://deepworkplan.com/schema/context-manifest/v6.json)与 v6 共用。
+明确的 `v6` 请求仍会生成 v6 计划。计划永远不会改变代际：v6 计划保留其 v6 架构
+（[清单](https://deepworkplan.com/schema/plan-manifest/v6.json)、
+[契约](https://deepworkplan.com/schema/plan-contract/v6.json)、
+[日志事件](https://deepworkplan.com/schema/journal-event/v6.json)）并照常运行；
+v5 计划继续使用 https://deepworkplan.com/schema/plan-state/v5.json 作为 `state.json` 的架构；
+现有的 v1、v2 和 v5 计划绝不会被重写，也不会被隐式迁移；将 v5 计划迁移到 v6
+需要明确的、经过预览的迁移。
 
-- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
-- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
-- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+可选附加组件按仓库记录在受版本跟踪的附加组件注册表 `.dwp/config.json`
+（<https://deepworkplan.com/schema/dwp-config/v1.json>）中：未记录即表示未启用，
+且在所有附加组件都停用时方法论依然可用。只有当 v7 计划的契约授予
+`agent_delegation`，并且某个委派附加组件（agentkit 或 Herdr）已启用且被检测到时，
+该计划才可以把 `parallel_safe` 任务交给另一个编码代理；在计划自身的关卡运行器
+观察到委派方的结果之前，该结果始终只是一项声明。
 
 每份计划都有一项强制性的收尾任务：**Final Review**。它对累积的整个变更集
 运行安全检查（包括必需的本地 AI Diff Reviewer 审查），验证仓库的最终状态，
 核对各任务所使用的技能，并记录证据与局限。本地审查技能安装在固定版本；
-当前文档记录的命令使用 `DailybotHQ/ai-diff-reviewer@v3.2.2`。GitHub Action
+当前文档记录的命令安装 `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0`。GitHub Action
 是一个独立的、可选的 CI 层面，核心方法论从不要求使用它。
 
 一次执行了却没有报告任何问题的审查，与一次根本没能产出结果的审查并不相同。后者属于**不完整的审查**：它会被如实记录，绝不被当作变更集干净的凭据，也绝不构成关闭 Final Review 的理由——与 `timeout` 审查在阻断性严格度下得到的红色处理相同（BC-04）。连同审查器缺失与调用出错，这是三种彼此不同的状态——而它们当中没有任何一种意味着这份 diff 被审查过且是干净的。写着 `Recommendation: approve` 的正文也不能证明检查已通过。请先阅读跟踪标记中的 Highest severity / Strictness gate / Check status 块——当门控失败时，运行时会改写模型的 `approve`。
@@ -175,16 +187,19 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 
 ## 4. 安装必备的本地审查，然后提供可选的附加组件
 
-在基线接入完成之后，安装 **AI Diff Reviewer 本地审查**（第 7a 阶段——自标准 2.3.0 起必备）：在接入授权之下，安装标签锁定的 vendored skill（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`），并通过 `generate-extension` 生成按仓库定制的 `.review/extension.md`。然后列举四个可选附加组件（devcontainer、Dailybot、dependency-upgrade、design-system），并把每一个作为一项明确的可选项来提供。一个仓库
+在基线接入完成之后，安装 **AI Diff Reviewer 本地审查**（第 7a 阶段——自标准 2.3.0 起必备）：在接入授权之下，安装标签锁定的 vendored skill（`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`），并通过 `generate-extension` 生成按仓库定制的 `.review/extension.md`。然后列举七个可选附加组件（devcontainer、Dailybot、dependency upgrade、design system、agentkit、Herdr、DeepWorkPlan Vim），把每一个作为一项明确的可选项来提供，并将每一次接受记录在 `.dwp/config.json` 中。一个仓库
 在不带**任何**可选附加组件时即完全符合规范——绝不自动安装它们。
 
-- **Devcontainer 支持** —— 一个可复现、隔离的开发容器，具备持久的 AI-CLI 认证。
-- **Dailybot 集成** —— 四个生命周期事件（启动、重要任务、阻塞、完成）作为面向已在使用 Dailybot 的团队的尽力而为式进展报告，并可选启用自主的钩子强制层（`dailybot-cli >= 3.9.0`）。安装配套的 Dailybot 代理技能（3.23.2）还会暴露聊天、签到、表单创建、AI 询问、Plan 看板与任务、每仓库 API 密钥等功能——该附加组件仅将报告接入 DWP 执行。核心方法论对 Dailybot 零依赖。
+- **Devcontainer 支持** —— [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) 的轻量集成层（`dck`，锁定 `v0.1.4`）：`dck init` 渲染一个 Dev Containers 模板，并且仅在差异被接受之后才协调现有的 devcontainer；基础镜像不附带编码代理。
+- **Dailybot 集成** —— 四个生命周期事件（启动、重要任务、阻塞、完成）作为面向已在使用 Dailybot 的团队的尽力而为式进展报告，并可选启用自主的钩子强制层（`dailybot-cli >= 3.9.0`）。安装配套的 Dailybot 代理技能（3.23.3）还会暴露聊天、签到、表单创建、AI 询问、Plan 看板与任务、每仓库 API 密钥等功能——该附加组件仅将报告接入 DWP 执行。核心方法论对 Dailybot 零依赖。
 - **Dependency upgrade** —— 包管理器无关、分批次、经验证、可回退的升级。被
  采纳时，它会安装 `/lib-upgrade` 命令。
 - **Design system** —— 可选的 `docs/DESIGN.md`，仅面向具备被检测到的界面表面的仓库
  （不会向纯库、无头服务或纯基础设施仓库提供）。三个配置档堆叠在一个文件中：visual-ui
  （检测到时受到强烈推荐；安装以明确接受为前提）、cli-output 与 conversational——后两者始终会被询问，绝不会被自动应用。
+- **agentkit** —— [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`，锁定 `v0.1.1`）的机器级安装，面向把有边界的 `parallel_safe` 任务交给其他编码代理的计划（以无头方式，每个受托代理在各自的 worktree 中执行一次 `ak run`）；默认绝不添加自主权标志。
+- **Herdr** —— [herdr-peers](https://github.com/DailybotHQ/herdr-peers)（锁定 `v0.1.0`，外加 Herdr 的官方技能）的机器级安装，面向在任意机器上向 Herdr 窗格中的对等代理请求一条获授权回复的计划。
+- **DeepWorkPlan Vim** —— 终端编辑器（[deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim)，锁定 `v0.4.2`），属于机器级安装，未经明确同意绝不覆盖现有的 Neovim 配置。
 - **AI Diff Reviewer** —— 必备的本地审查（并非可选项）：每份 Final Review 的安全审查环节都会在计划累计的变更集上运行 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**（skill + 必需的 `.review/extension.md`）。缺失的 skill 或扩展会成为一项被记录的 `local reviewer not installed` 发现——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；调用错误软失败；已完成通道中的 **经验证的 `critical` 发现**在修复或被明确接受之前仍会阻止完成（v3，BC-07——未经验证的关键发现断言会以带注解的警告出现，而 `incomplete`/`timeout` 的审查不算干净的通过，BC-04）。**Flow B**（带 `pr-review.yml` 的 CI 门控）作为一项明确的可选项提供，绝不未经请求安装。没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密。
 
 ## 5. 演化套件（author 子技能）

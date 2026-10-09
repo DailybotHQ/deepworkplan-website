@@ -10,10 +10,10 @@ Kit adalah semua yang Anda perlukan untuk menjalankan metodologi dalam praktik. 
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
-Paket 6.x saat ini membuat rencana baru menggunakan v6 secara default. Rencana yang ada mempertahankan generasi tercatat; migrasi memerlukan permintaan eksplisit.
+Paket 7.x saat ini membuat rencana baru menggunakan v7 secara default. Rencana yang ada mempertahankan generasi tercatat; migrasi memerlukan permintaan eksplisit.
 
 ### Skill dan sub-skill-nya
 

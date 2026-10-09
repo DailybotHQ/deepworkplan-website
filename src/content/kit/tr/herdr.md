@@ -29,8 +29,8 @@ Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/Dail
 herdr-peers'ı ve onun bağımlı olduğu Herdr'ın resmî skill'ini kurun. Agent'larının yanıt vermesi gereken her makinede de bu skill bulunmalıdır.
 
 ```bash
-npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g -y
-npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
 Gereksinimler: Herdr 0.9.1 veya daha yenisi, `bash` ve `python3` 3.9 veya daha yenisi (yalnızca standart kütüphane). Onboarding eklentiyi önerir ve yanıtınızı eklenti kayıt defterine kaydeder; eklenti onay olmadan asla etkinleştirilmez.

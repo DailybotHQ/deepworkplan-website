@@ -95,7 +95,8 @@ lastUpdated: 2026-09-28
 아홉 개의 하위 스킬 — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author`, `upgrade` — 을 제공합니다.
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill
+# pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
 또는 OpenClaw를 통해 설치:
@@ -112,12 +113,12 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### 현재 표준과 실행 모델
 
-현재 리포지토리 기준 표준은 **DWP 6.0.0**이며, 위에서 설치한 Deep Work
+현재 리포지토리 기준 표준은 **DWP 7.0.0**이며, 위에서 설치한 Deep Work
 Plan 스킬 릴리스로 구현됩니다. 현재 스킬 팩에는 라우터와 아홉 개의
 하위 스킬이 포함됩니다: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, `upgrade`.
 
-설치된 skill 릴리스: **6.0.2**. 현재 6.x 팩은 새 계획을 기본적으로 v6으로 생성합니다. 기존 계획은 기록된 세대를 유지하며, v5 계획을 v6으로 옮기려면 명시적 요청과 미리보기가 필요합니다.
+설치된 skill 릴리스: **7.0.1**. 현재 7.x 팩은 새 계획을 기본적으로 v7로 생성합니다. 기존 계획은 기록된 세대를 유지하며, v5 계획을 v6으로 옮기려면 명시적 요청과 미리보기가 필요합니다.
 
 이 표준은 의도적으로 비례적이며, 그 비례성을 개발자의 규율이 아니라
 계획의 속성으로 만듭니다. 계획은 작고 한정된 작업을 위해 계획의
@@ -132,25 +133,40 @@ README에 인라인으로 작업 기록을 두는 **Lite**이거나, 장기간�
 Full 계획에서는 리포지토리가 지속적인 실행 표면이 됩니다. 계획에는
 원자적 작업, 무엇이 변경되었고 어떤 소비자가 영향을 받는지 설명하는
 **접촉 표면**, 승인 기준, 그리고 리포지토리의 문서화된 테스트 맵에서
-선택된 검증 게이트가 포함됩니다. v6에서는 계획 생성 시 identity manifest, 계약, 승인 이벤트 순서로 기록합니다. 추가 전용 저널이 실행을 기록하고 `state.json`은 그 저널에서 생성된 스냅샷입니다. 중단 후 각 단계를 복구할 수 있습니다.
+선택된 검증 게이트가 포함됩니다. 새 계획은 identity manifest, 버전이 지정된 계약, 승인 이벤트 순서로 기록합니다. 추가 전용 저널이 실행을 기록하고 `state.json`은 그 저널에서 생성된 스냅샷입니다. 중단 후 각 단계를 복구할 수 있습니다.
 
-스키마 세대는 각 계획에 연결됩니다. v5 계획은 `state.json`에
-https://deepworkplan.com/schema/plan-state/v5.json 은 v5 계획에 계속 적용됩니다. 현재 6.x 팩은 새 계획을 기본적으로 v6으로 생성하며, 이때 `manifest.json`에 https://deepworkplan.com/schema/plan-manifest/v6.json 을
-사용하며, 라이브 프로젝션은 https://deepworkplan.com/schema/plan-snapshot/v6.json 의
-스냅샷입니다. `plan-state/v6.json`은 없습니다. v6은 이름만 바꾼 v5 상태 스키마가 아니라 스냅샷을 사용합니다. 기존
-계획은 기록된 세대를 유지하며 다시 작성되지 않습니다. v6은 v5 방법론을 더 엄격한 구조로 유지합니다. 에이전트 결과의 비열등성은
-측정되지 않았습니다.
+스키마 세대는 각 계획에 연결됩니다. 현재 7.x 팩은 기본적으로 **v7** 계획을
+생성합니다. `manifest.json`은 https://deepworkplan.com/schema/plan-manifest/v7.json 을
+따르고, [계약](https://deepworkplan.com/schema/plan-contract/v7.json)은 v6 계약에
+선택적 `parallel_safe` 작업 표시를 추가하며, 모든
+[저널 이벤트](https://deepworkplan.com/schema/journal-event/v7.json)는 `delegation`도
+기록할 수 있습니다. 라이브 프로젝션은 변경되지 않은 스냅샷
+https://deepworkplan.com/schema/plan-snapshot/v6.json 을 그대로 유지하며,
+[작업 컨텍스트 매니페스트](https://deepworkplan.com/schema/context-manifest/v6.json)는
+v6과 공유됩니다. 명시적으로 `v6`을 요청하면 여전히 v6 계획이 생성됩니다.
+계획의 세대는 결코 바뀌지 않습니다. v6 계획은 v6 스키마
+([매니페스트](https://deepworkplan.com/schema/plan-manifest/v6.json),
+[계약](https://deepworkplan.com/schema/plan-contract/v6.json),
+[저널 이벤트](https://deepworkplan.com/schema/journal-event/v6.json))를 유지하고
+변경 없이 실행됩니다. v5 계획은 `state.json`에
+https://deepworkplan.com/schema/plan-state/v5.json 을 계속 사용합니다. 기존 v1,
+v2, v5 계획은 다시 작성되거나 암묵적으로 마이그레이션되지 않으며, v5 계획을
+v6으로 옮기려면 명시적이고 미리보기를 거친 마이그레이션이 필요합니다.
 
-- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
-- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
-- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+선택적 애드온은 리포지토리별로 추적되는 애드온 레지스트리 `.dwp/config.json`
+(https://deepworkplan.com/schema/dwp-config/v1.json)에 기록됩니다. 기록이 없으면
+활성화되지 않은 것이며, 방법론은 모든 애드온이 비활성화된 상태에서도 작동합니다.
+v7 계획은 계약이 `agent_delegation`을 부여하고 위임 애드온(agentkit 또는 Herdr)이
+활성화되어 감지된 경우에만 `parallel_safe` 작업을 다른 코딩 에이전트에게 넘길 수
+있습니다. 위임받은 에이전트의 결과는 계획 자체의 게이트 실행기가 이를 관찰하기
+전까지 주장으로 남습니다.
 
 모든 계획에는 하나의 필수 마무리 작업이 있습니다: **Final Review**
 입니다. 이는 필수적인 로컬 AI Diff Reviewer 검토를 포함하여 누적된
 변경 사항 전체에 대한 보안 검사를 실행하고, 최종 리포지토리 상태를
 검증하고, 작업들이 사용한 스킬을 정합화하고, 증거와 한계를 기록합니다.
 로컬 리뷰 스킬은 고정된 릴리스로 설치되며, 현재 문서화된 명령은
-`DailybotHQ/ai-diff-reviewer@v3.2.2`을 사용합니다. GitHub Action은
+`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0`을 설치합니다. GitHub Action은
 별개의 선택적 CI 표면이며 핵심 방법론에는 결코 필수가 아닙니다.
 
 실행되었지만 아무것도 보고하지 않은 리뷰와, 애초에 지적을 하나도 만들어 내지 못한 리뷰는 같지 않습니다. 후자는 **불완전한 리뷰**입니다. 그대로 기록되며, 변경 사항이 깨끗하다는 근거로 결코 계산되지 않고, Final Review를 닫을 이유도 되지 않습니다 — 차단 엄격도에서 `timeout` 검토가 받는 것과 같은 빨간 처리(BC-04). 리뷰어 부재, 호출 오류와 함께 서로 다른 세 가지 상태이며, 그 어느 것도 "diff를 검토했고 문제가 없었다"를 뜻하지 않습니다. `Recommendation: approve`라고 적힌 본문도 체크가 통과했다는 증거가 아닙니다. 추적 마커의 Highest severity / Strictness gate / Check status 블록을 먼저 읽으세요. 게이트가 실패 중이면 런타임이 모델의 `approve`를 다시 씁니다.
@@ -197,20 +213,23 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 ## 4. 필수 로컬 리뷰를 설치한 뒤 선택형 애드온을 제안하세요
 
 기준선 온보딩 이후, **AI Diff Reviewer 로컬 리뷰**를 설치하세요(7a 단계 — 표준 2.3.0부터 필수):
-태그 고정 벤더 스킬(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`)과
+태그 고정 벤더 스킬(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`)과
 `generate-extension`을 통한 저장소 맞춤 `.review/extension.md`을, 온보딩 동의 아래 설치합니다. 그런 다음
-네 가지 선택적 애드온(devcontainer, Dailybot, dependency-upgrade, design-system)을 열거하고
-각각을 명시적 선택형으로 제안하세요. 리포지토리는 선택적 애드온이 **하나도** 없어도 완전히
+일곱 가지 선택적 애드온(devcontainer, Dailybot, dependency upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim)을 열거하고
+각각을 명시적 선택형으로 제안하며, 수락된 항목은 모두 `.dwp/config.json`에 기록하세요. 리포지토리는 선택적 애드온이 **하나도** 없어도 완전히
 적합합니다 — 그것들은 결코 자동 설치하지 마세요.
 
-- **Devcontainer 지원** — 영속적 AI-CLI 인증을 갖춘 재현 가능하고 격리된 개발 컨테이너.
-- **Dailybot 연동** — 네 가지 라이프사이클 이벤트(kickoff, 중요 작업, 블로킹, 완료)를 이미 Dailybot을 사용하는 팀을 위한 최선 노력 기반의 진행 보고로 제공하며, 선택적 자율 훅 강제(`dailybot-cli >= 3.9.0`). 페어링된 Dailybot 에이전트 스킬(3.23.2)을 설치하면 채팅, 체크인, 폼 작성, AI 질의, Plan 보드와 작업, 저장소별 API 키 등도 노출됩니다 — 이 애드온은 DWP 실행에 보고만 연결합니다. 핵심 방법론은 Dailybot 의존성이 전혀 없습니다.
+- **Devcontainer 지원** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)(`dck`, `v0.1.4`로 고정)의 얇은 통합 계층: `dck init`이 Dev Containers 템플릿을 렌더링하고, 기존 devcontainer는 그 diff가 수락된 뒤에만 조정합니다. 기본 이미지에는 코딩 에이전트가 포함되지 않습니다.
+- **Dailybot 연동** — 네 가지 라이프사이클 이벤트(kickoff, 중요 작업, 블로킹, 완료)를 이미 Dailybot을 사용하는 팀을 위한 최선 노력 기반의 진행 보고로 제공하며, 선택적 자율 훅 강제(`dailybot-cli >= 3.9.0`). 페어링된 Dailybot 에이전트 스킬(3.23.3)을 설치하면 채팅, 체크인, 폼 작성, AI 질의, Plan 보드와 작업, 저장소별 API 키 등도 노출됩니다 — 이 애드온은 DWP 실행에 보고만 연결합니다. 핵심 방법론은 Dailybot 의존성이 전혀 없습니다.
 - **Dependency upgrade** — 패키지 관리자 비종속, 배치 단위, 검증되고 되돌릴 수 있는 업그레이드.
   채택되면 `/lib-upgrade` 명령을 설치합니다.
 - **Design system** — 감지된 인터페이스 표면이 있는 리포지토리에만 제공되는 선택형 `docs/DESIGN.md`
   (순수 라이브러리, 헤드리스 서비스, 인프라 전용 리포지토리에는 제공하지 않음). 세 가지 프로필이
   하나의 파일에 쌓입니다: visual-ui(감지되면 강력히 권장; 설치는 수락으로 제어), cli-output, conversational — 후자 두 개는
   항상 질문하며 자동 적용하지 않습니다.
+- **agentkit** — 범위가 정해진 `parallel_safe` 작업을 다른 코딩 에이전트에 넘기는 계획을 위한 [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, `v0.1.1`로 고정)의 머신 수준 설치(헤드리스, 위임 대상마다 자체 worktree에서 `ak run` 한 번 실행). 자율성 플래그는 기본적으로 절대 추가되지 않습니다.
+- **Herdr** — 어느 머신에서든 Herdr 페인의 피어 에이전트에게 승인된 응답 하나를 요청하는 계획을 위한 [herdr-peers](https://github.com/DailybotHQ/herdr-peers)(`v0.1.0`으로 고정, Herdr 공식 스킬 포함)의 머신 수준 설치.
+- **DeepWorkPlan Vim** — 터미널 에디터([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), `v0.4.2`로 고정)로, 명시적 동의 없이 기존 Neovim 설정을 절대 덮어쓰지 않는 머신 수준 설치입니다.
 - **AI Diff Reviewer** — 필수 로컬 리뷰입니다(선택형 아님): 모든 Final Review의 보안 점검이 계획의 누적 변경 집합에 대해 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**(skill + 필수 `.review/extension.md`)를 실행합니다. 누락된 스킬이나 확장은 기록된 `local reviewer not installed` 발견 사항입니다 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아닙니다: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속합니다. 호출 오류는 소프트 실패하며, 완료된 패스의 **검증된 `critical` 결과**는 여전히 완료를 차단합니다 (v3, BC-07 — 검증되지 않은 크리티컬 주장은 주석 달린 경고로 표시되며, `incomplete`/`timeout` 검토는 깨끗한 패스가 아님, BC-04). **Flow B**(`pr-review.yml`을 갖춘 CI 게이트)는 명시적 선택형으로 제안되며 요청 없이 설치되는 일이 결코 없습니다. 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않습니다.
 
 ## 5. 키트를 발전시키세요 (author 하위 스킬)

@@ -45,4 +45,4 @@ v6 계획의 기계 판독 가능 스키마 카탈로그는 다음의 고정 URL
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
 - **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
 
-현재 6.x 팩은 새 계획을 기본적으로 v6으로 생성합니다. 기존 계획은 기록된 세대를 유지하며, 마이그레이션에는 명시적 요청이 필요합니다. 새 계획에는 최소 세 자리 숫자로 된 단조 증가 ID를 부여합니다(예: `PLAN_001_add_payment_webhooks/`). 고정된 v5 스키마는 숫자 ID를 한 단어로 세므로 v5 슬러그는 2~4단어이고 v6 슬러그는 2~5단어입니다. 기존의 번호 없는 `PLAN_<slug>/` 폴더는 계속 읽을 수 있으며 절대 이름을 바꾸지 않습니다. 번호가 있는 계획이 있으면 `latest`는 숫자 ID가 가장 큰 계획을 가리킵니다.
+현재 7.x 팩은 새 계획을 기본적으로 v7로 생성합니다. 기존 계획은 기록된 세대를 유지하며, 마이그레이션에는 명시적 요청이 필요합니다. 새 계획에는 최소 세 자리 숫자로 된 단조 증가 ID를 부여합니다(예: `PLAN_001_add_payment_webhooks/`). 고정된 v5 스키마는 숫자 ID를 한 단어로 세므로 v5 슬러그는 2~4단어이고 v7 슬러그는 2~5단어입니다. 기존의 번호 없는 `PLAN_<slug>/` 폴더는 계속 읽을 수 있으며 절대 이름을 바꾸지 않습니다. 번호가 있는 계획이 있으면 `latest`는 숫자 ID가 가장 큰 계획을 가리킵니다.

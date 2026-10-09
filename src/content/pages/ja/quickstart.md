@@ -64,7 +64,8 @@ lastUpdated: 2026-09-28
 このリポジトリのエージェントが構造化された作業を計画し実行できるよう、スキルをインストールします。ルーターと九つのサブスキル、すなわち `create`、`execute`、`refine`、`resume`、`status`、`verify`、`onboard`、`author`、`upgrade` を備えます。
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill
+# pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
 または OpenClaw 経由でインストール：
@@ -81,12 +82,12 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### 現在の標準と実行モデル
 
-現在のリポジトリ向け標準は**DWP 6.0.0**であり、上でインストールした Deep
+現在のリポジトリ向け標準は**DWP 7.0.0**であり、上でインストールした Deep
 Work Plan スキルのリリースによって実装されています。現在のスキルパックには、
 ルーターと九つのサブスキル — `create`、`execute`、`refine`、`resume`、
 `status`、`verify`、`onboard`、`author`、`upgrade` — が含まれます。
 
-インストール済みスキルのリリースは **6.0.2** です。現在の 6.x パックは新しい計画を既定で v6 として作成します。既存の計画は記録された世代を維持し、v5 計画の v6 への移行には明示的な依頼と事前確認が必要です。
+インストール済みスキルのリリースは **7.0.1** です。現在の 7.x パックは新しい計画を既定で v7 として作成します。既存の計画は記録された世代を維持し、v5 計画の v6 への移行には明示的な依頼と事前確認が必要です。
 
 この標準は意図的に比例的であり、その比例性を開発者の規律ではなく計画の性質
 にしています。計画は **Lite**（小さく限定された作業向けに、計画の README
@@ -101,26 +102,40 @@ Lite 計画は `/dwp-refine promote` によって Full に昇格します。
 Full 計画では、リポジトリが恒久的な実行面です。計画には、原子的な
 タスク、何が変わりどの利用者が影響を受けるかを説明する **影響範囲**、
 受け入れ基準、そしてリポジトリの文書化されたテストマップから選
-択された検証ゲートが含まれます。v6 では、作成時に identity manifest、contract、承認イベントの順に記録します。追記専用ジャーナルが実行を記録し、`state.json` はそのジャーナルから生成されるスナップショットです。中断後も各段階から復旧できます。
+択された検証ゲートが含まれます。新しい計画は、identity manifest、バージョン付きの contract、承認イベントの順に記録します。追記専用ジャーナルが実行を記録し、`state.json` はそのジャーナルから生成されるスナップショットです。中断後も各段階から復旧できます。
 
-スキーマ世代は各計画に紐づきます。v5 計画は `state.json` に
-https://deepworkplan.com/schema/plan-state/v5.json を引き続き使用します。現在の 6.x パックが既定で作成する計画は
-`manifest.json` に https://deepworkplan.com/schema/plan-manifest/v6.json
-を使用し、ライブ投影には https://deepworkplan.com/schema/plan-snapshot/v6.json
-のスナップショットを使います。`plan-state/v6.json` はありません。v6 は v5 の state
-スキーマを改名せず、スナップショットを使います。既存計画は記録済みの世代を保ち、書き換えられません。v6 は v5
-の方法論を維持しつつ構造を厳格化します。エージェント成果の非劣性は測定されていません。
+スキーマ世代は各計画に紐づきます。現在の 7.x パックは既定で **v7** 計画を作成します。
+`manifest.json` は https://deepworkplan.com/schema/plan-manifest/v7.json に従い、
+[contract](https://deepworkplan.com/schema/plan-contract/v7.json) は v6 の contract に
+任意の `parallel_safe` タスクマーカーを追加し、すべての
+[journal event](https://deepworkplan.com/schema/journal-event/v7.json) は `delegation`
+も記録できます。ライブ投影は変更のないスナップショット
+https://deepworkplan.com/schema/plan-snapshot/v6.json をそのまま使い、
+[task context manifest](https://deepworkplan.com/schema/context-manifest/v6.json)
+は v6 と共有されます。明示的に `v6` を指定すれば、引き続き v6 計画が作成されます。
+計画の世代が変わることはありません。v6 計画は v6 のスキーマ
+（[manifest](https://deepworkplan.com/schema/plan-manifest/v6.json)、
+[contract](https://deepworkplan.com/schema/plan-contract/v6.json)、
+[journal event](https://deepworkplan.com/schema/journal-event/v6.json)）を保ち、
+変更なしで実行されます。v5 計画は `state.json` に
+https://deepworkplan.com/schema/plan-state/v5.json を引き続き使用します。既存の
+v1、v2、v5 計画が書き換えられたり暗黙的に移行されたりすることはなく、v5 計画を
+v6 へ移すには、明示的で事前確認済みの移行が必要です。
 
-- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
-- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
-- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+任意のアドオンは、リポジトリごとに追跡対象のアドオンレジストリ `.dwp/config.json`
+（<https://deepworkplan.com/schema/dwp-config/v1.json>）に記録されます。記録がなければ
+有効ではないことを意味し、方法論はすべてのアドオンを無効にしても機能します。v7
+計画が `parallel_safe` タスクを別のコーディングエージェントに委ねられるのは、その
+contract が `agent_delegation` を付与し、かつ委任アドオン（agentkit または Herdr）が
+有効で検出されている場合に限られます。委任先の結果は、計画自身のゲートランナーが
+それを確認するまで、主張にとどまります。
 
 すべての計画には一つの必須の締めくくりタスクがあります: **Final
 Review** です。これは、必須のローカル AI Diff Reviewer レビューを含む、
 蓄積された変更セット全体に対するセキュリティパスを実行し、最終的なリポジ
 トリの状態を検証し、タスクが使用したスキルを整合させ、証跡と制限事項を記録
 します。ローカルレビュースキルは固定されたリリースにインストールされ、現在
-文書化されているコマンドは `DailybotHQ/ai-diff-reviewer@v3.2.2` を使用しま
+文書化されているコマンドは `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0` をインストールしま
 す。GitHub Action は別個のオプションの CI surface であり、コアの方法論に
 は決して必須ではありません。
 
@@ -148,12 +163,15 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 
 ## 4. 必須のローカルレビューをインストールし、その後オプトイン式のアドオンを提案する
 
-ベースラインのオンボーディング後、**AI Diff Reviewer ローカルレビュー**をインストールします（フェーズ 7a — 標準 2.3.0 以降は必須）。タグで固定されたベンダースキル（`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`）に加えて、`generate-extension` によるリポジトリ向けに調整された `.review/extension.md` を、オンボーディングの同意のもとでインストールします。次に、四つのオプションのアドオン（devcontainer、Dailybot、dependency-upgrade、design-system）を列挙し、それぞれを明示的なオプトインとして提案します。リポジトリはオプションのアドオンが**ゼロ**でも完全に適合します。それらを決して自動でインストールしないでください。
+ベースラインのオンボーディング後、**AI Diff Reviewer ローカルレビュー**をインストールします（フェーズ 7a — 標準 2.3.0 以降は必須）。タグで固定されたベンダースキル（`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`）に加えて、`generate-extension` によるリポジトリ向けに調整された `.review/extension.md` を、オンボーディングの同意のもとでインストールします。次に、七つのオプションのアドオン（devcontainer、Dailybot、dependency upgrade、design system、agentkit、Herdr、DeepWorkPlan Vim）を列挙し、それぞれを明示的なオプトインとして提案し、受け入れられたものはすべて `.dwp/config.json` に記録します。リポジトリはオプションのアドオンが**ゼロ**でも完全に適合します。それらを決して自動でインストールしないでください。
 
-- **Devcontainer サポート** — 永続的な AI CLI 認証を備えた、再現可能で隔離された開発コンテナ。
-- **Dailybot 連携** — 四つのライフサイクルイベント（キックオフ、重要なタスク、ブロック、完了）を、すでに Dailybot を使っているチームのための最善努力での進捗報告として、任意で自律的なフック強制層（`dailybot-cli >= 3.9.0`）付きで提供します。ペアの Dailybot エージェントスキル（3.23.2）をインストールすると、チャット、チェックイン、フォーム作成、AI への質問、Plan のボードとタスク、リポジトリごとの API キーなども利用可能になります。このアドオンは DWP 実行へのレポーティングの接続のみを行います。中核となる方法論は Dailybot への依存がゼロです。
+- **Devcontainer サポート** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v0.1.4` に固定）の薄い統合レイヤー。`dck init` が Dev Containers テンプレートをレンダリングし、既存の devcontainer はその差分が受け入れられた後にのみ調整します。ベースイメージにはコーディングエージェントは含まれません。
+- **Dailybot 連携** — 四つのライフサイクルイベント（キックオフ、重要なタスク、ブロック、完了）を、すでに Dailybot を使っているチームのための最善努力での進捗報告として、任意で自律的なフック強制層（`dailybot-cli >= 3.9.0`）付きで提供します。ペアの Dailybot エージェントスキル（3.23.3）をインストールすると、チャット、チェックイン、フォーム作成、AI への質問、Plan のボードとタスク、リポジトリごとの API キーなども利用可能になります。このアドオンは DWP 実行へのレポーティングの接続のみを行います。中核となる方法論は Dailybot への依存がゼロです。
 - **Dependency upgrade** — パッケージマネージャー非依存で、バッチ化され、検証され、取り消し可能な更新。受け入れられると、`/lib-upgrade` コマンドをインストールします。
 - **Design system** — 検出されたインターフェイス面を持つリポジトリのみを対象とした、オプトインの `docs/DESIGN.md`（純粋なライブラリ、ヘッドレスサービス、インフラ専用リポジトリには提案されません）。三つのプロファイルが一つのファイルに重ねられます：visual-ui（検出時に強く推奨；インストールは受け入れでゲート）、cli-output、conversational — 後者二つは常に尋ねられ、自動適用されることはありません。
+- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v0.1.1` に固定）のマシンレベルのインストール。範囲の限られた `parallel_safe` タスクを他のコーディングエージェントに渡す計画向けです（ヘッドレスで、委任先ごとに専用の worktree で `ak run` を一回実行）。自律性フラグがデフォルトで追加されることは決してありません。
+- **Herdr** — [herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v0.1.0` に固定、Herdr の公式スキルも併せて）のマシンレベルのインストール。任意のマシン上の Herdr ペインにいるピアエージェントに、認可された返信を一つ求める計画向けです。
+- **DeepWorkPlan Vim** — ターミナルエディタ（[deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim)、`v0.4.2` に固定）。マシンレベルのインストールであり、明示的な同意なしに既存の Neovim 設定を上書きすることは決してありません。
 - **AI Diff Reviewer** — 必須のローカルレビューです（オプトインではありません）。すべての Final Review のセキュリティパスが、計画の累積した変更セットに対して [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**（skill + 必須の `.review/extension.md`）を実行します。スキルまたは拡張機能の欠落は `local reviewer not installed` の発見として記録されます。黙ってスキップされることは決してなく、決してサプライズブートストラップでもありません：インストールはオンボーディングの同意または明示的なアドオン呼び出しに属します。呼び出しのエラーはソフト失敗となり、完了したパスの **検証済み `critical` 結果**は引き続き完了をブロックします（v3、BC-07 —— 未検証のクリティカル主張は注釈付き警告として現れ、`incomplete`/`timeout` のレビューはクリーンなパスではない、BC-04）。**Flow B**（`pr-review.yml` を使った CI ゲート）は明示的なオプトインとして提案され、要求なしにインストールされることは決してありません。Deep Work Plan のどのフローも、商用サービス、CI プロバイダー、シークレットを必要としません。
 
 ## 5. キットを進化させる（author サブスキル)
