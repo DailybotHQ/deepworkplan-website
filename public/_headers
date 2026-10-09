@@ -83,3 +83,13 @@
 
 /site.webmanifest
   Cache-Control: public, max-age=86400, must-revalidate
+
+# DeepWorkPlan Vim installer (deepworkplan-vim@v0.4.1 install.sh) and its
+# sha256sum-format checksum, served as plain text
+/vim/install.sh
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=300, must-revalidate
+
+/vim/install.sh.sha256
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=300, must-revalidate
