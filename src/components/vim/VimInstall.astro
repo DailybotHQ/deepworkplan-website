@@ -1,7 +1,7 @@
 ---
 /**
- * VimInstall — the install block of the DeepWorkPlan Vim page: the canonical
- * one-liner with a copy button, the consent-first promise, and an "inspect
+ * VimInstall — the install block of the DeepWorkPlan Vim page: download,
+ * verify and run commands (no pipe into a shell) with a copy button, the consent-first promise, and an "inspect
  * before you run" recipe that shows the SHA-256 of the installer exactly as
  * the site serves it (computed at build time from public/vim/install.sh, so it
  * cannot drift). Embedded in src/content/kit/<lang>/vim.mdx.
@@ -45,7 +45,7 @@ const i18n = {
     linesLabel: 'lines',
     macNote: 'On macOS, use shasum -a 256 install.sh for the second step.',
     windowsNote:
-      'On Windows the one-liner does not apply; the repository README documents the manual path.',
+      'On Windows these commands do not apply; the repository README documents the manual path.',
     windowsLink: 'Windows install path',
     pinNote:
       'To install a specific branch, tag or commit, set DWP_VIM_REF. Older tags may not include every feature described on this page.',
@@ -69,7 +69,7 @@ const i18n = {
     linesLabel: 'líneas',
     macNote: 'En macOS, usa shasum -a 256 install.sh en el segundo paso.',
     windowsNote:
-      'En Windows la línea única no aplica; el README del repositorio documenta la ruta manual.',
+      'En Windows estos comandos no aplican; el README del repositorio documenta la ruta manual.',
     windowsLink: 'Ruta de instalación en Windows',
     pinNote:
       'Para instalar una rama, etiqueta o commit concretos, define DWP_VIM_REF. Las etiquetas antiguas pueden no incluir todas las funciones descritas en esta página.',
@@ -93,7 +93,7 @@ const i18n = {
     linesLabel: 'linhas',
     macNote: 'No macOS, use shasum -a 256 install.sh no segundo passo.',
     windowsNote:
-      'No Windows, o comando de uma linha não se aplica; o README do repositório documenta o caminho manual.',
+      'No Windows, estes comandos não se aplicam; o README do repositório documenta o caminho manual.',
     windowsLink: 'Caminho de instalação no Windows',
     pinNote:
       'Para instalar um ramo, etiqueta ou commit específico, defina DWP_VIM_REF. As etiquetas antigas podem não incluir todas as funcionalidades descritas nesta página.',
@@ -116,7 +116,7 @@ const i18n = {
     linesLabel: '行',
     macNote: '在 macOS 上，第二步请使用 shasum -a 256 install.sh。',
     windowsNote:
-      '在 Windows 上，这条单行命令不适用；仓库 README 记录了手动安装路径。',
+      '在 Windows 上，这些命令不适用；仓库 README 记录了手动安装路径。',
     windowsLink: 'Windows 安装路径',
     pinNote:
       '如需安装指定的分支、标签或提交，请设置 DWP_VIM_REF。较旧的标签可能不包含本页描述的全部功能。',
@@ -141,7 +141,7 @@ const i18n = {
     macNote:
       'macOS では、2 番目の手順に shasum -a 256 install.sh を使ってください。',
     windowsNote:
-      'Windows ではこの一行コマンドは使えません。手動の手順はリポジトリの README に記載されています。',
+      'Windows ではこれらのコマンドは使えません。手動の手順はリポジトリの README に記載されています。',
     windowsLink: 'Windows のインストール手順',
     pinNote:
       '特定のブランチ、タグ、コミットをインストールするには DWP_VIM_REF を設定します。古いタグには、このページで説明している機能がすべて含まれているとは限りません。',
@@ -166,7 +166,7 @@ const i18n = {
     macNote:
       'Unter macOS verwenden Sie für den zweiten Schritt shasum -a 256 install.sh.',
     windowsNote:
-      'Unter Windows gilt der Einzeiler nicht; die README des Repositorys beschreibt den manuellen Weg.',
+      'Unter Windows gelten diese Befehle nicht; die README des Repositorys beschreibt den manuellen Weg.',
     windowsLink: 'Installationsweg für Windows',
     pinNote:
       'Um einen bestimmten Branch, Tag oder Commit zu installieren, setzen Sie DWP_VIM_REF. Ältere Tags enthalten möglicherweise nicht alle auf dieser Seite beschriebenen Funktionen.',
@@ -191,7 +191,7 @@ const i18n = {
     macNote:
       'Sous macOS, utilisez shasum -a 256 install.sh pour la deuxième étape.',
     windowsNote:
-      'Sous Windows, la commande en une ligne ne s’applique pas ; le README du dépôt décrit la procédure manuelle.',
+      'Sous Windows, ces commandes ne s’appliquent pas ; le README du dépôt décrit la procédure manuelle.',
     windowsLink: 'Procédure d’installation sous Windows',
     pinNote:
       'Pour installer une branche, une étiquette ou un commit précis, définissez DWP_VIM_REF. Les anciennes étiquettes peuvent ne pas inclure toutes les fonctions décrites sur cette page.',
@@ -216,7 +216,7 @@ const i18n = {
     macNote:
       'macOS에서는 두 번째 단계에 shasum -a 256 install.sh를 사용하세요.',
     windowsNote:
-      'Windows에서는 한 줄 명령을 쓸 수 없어요. 수동 설치 방법은 저장소 README에 있어요.',
+      'Windows에서는 이 명령들을 쓸 수 없어요. 수동 설치 방법은 저장소 README에 있어요.',
     windowsLink: 'Windows 설치 방법',
     pinNote:
       '특정 브랜치, 태그, 커밋을 설치하려면 DWP_VIM_REF를 설정하세요. 오래된 태그에는 이 페이지에서 설명하는 기능이 모두 들어 있지 않을 수 있어요.',
@@ -240,7 +240,7 @@ const i18n = {
     linesLabel: 'строк',
     macNote: 'В macOS на втором шаге используйте shasum -a 256 install.sh.',
     windowsNote:
-      'В Windows однострочная команда не применяется; ручной путь описан в README репозитория.',
+      'В Windows эти команды не применяются; ручной путь описан в README репозитория.',
     windowsLink: 'Путь установки для Windows',
     pinNote:
       'Чтобы установить конкретную ветку, тег или коммит, задайте DWP_VIM_REF. Старые теги могут не содержать всех возможностей, описанных на этой странице.',
@@ -264,7 +264,7 @@ const i18n = {
     linesLabel: 'righe',
     macNote: 'Su macOS, per il secondo passaggio usi shasum -a 256 install.sh.',
     windowsNote:
-      'Su Windows il comando su una riga non si applica; il README del repository descrive il percorso manuale.',
+      'Su Windows questi comandi non si applicano; il README del repository descrive il percorso manuale.',
     windowsLink: 'Percorso di installazione su Windows',
     pinNote:
       'Per installare un ramo, un tag o un commit specifico, imposti DWP_VIM_REF. I tag meno recenti potrebbero non includere tutte le funzioni descritte in questa pagina.',
@@ -288,7 +288,7 @@ const i18n = {
     linesLabel: 'satır',
     macNote: 'macOS’ta ikinci adım için shasum -a 256 install.sh kullanın.',
     windowsNote:
-      'Windows’ta tek satırlık komut geçerli değildir; elle kurulum yolu deponun README dosyasında anlatılır.',
+      'Windows’ta bu komutlar geçerli değildir; elle kurulum yolu deponun README dosyasında anlatılır.',
     windowsLink: 'Windows kurulum yolu',
     pinNote:
       'Belirli bir dal, etiket veya commit kurmak için DWP_VIM_REF değerini ayarlayın. Eski etiketler bu sayfada anlatılan tüm özellikleri içermeyebilir.',
@@ -312,7 +312,7 @@ const i18n = {
     linesLabel: 'baris',
     macNote: 'Di macOS, gunakan shasum -a 256 install.sh untuk langkah kedua.',
     windowsNote:
-      'Di Windows, perintah satu baris tidak berlaku; README repositori mendokumentasikan jalur manual.',
+      'Di Windows, perintah-perintah ini tidak berlaku; README repositori mendokumentasikan jalur manual.',
     windowsLink: 'Jalur instalasi Windows',
     pinNote:
       'Untuk memasang cabang, tag, atau commit tertentu, setel DWP_VIM_REF. Tag lama mungkin tidak memuat semua fitur yang dijelaskan di halaman ini.',
@@ -336,7 +336,7 @@ const i18n = {
     linesLabel: 'dòng',
     macNote: 'Trên macOS, hãy dùng shasum -a 256 install.sh cho bước thứ hai.',
     windowsNote:
-      'Trên Windows, lệnh một dòng không áp dụng; README của kho mã mô tả cách cài thủ công.',
+      'Trên Windows, các lệnh này không áp dụng; README của kho mã mô tả cách cài thủ công.',
     windowsLink: 'Cách cài trên Windows',
     pinNote:
       'Để cài một nhánh, thẻ hoặc commit cụ thể, hãy đặt DWP_VIM_REF. Các thẻ cũ có thể không có đủ mọi tính năng được mô tả trên trang này.',
@@ -360,7 +360,7 @@ const i18n = {
     linesLabel: 'पंक्तियाँ',
     macNote: 'macOS पर दूसरे चरण के लिए shasum -a 256 install.sh का उपयोग करें।',
     windowsNote:
-      'Windows पर एक-पंक्ति वाला कमांड लागू नहीं होता; मैन्युअल तरीका रिपॉज़िटरी के README में दिया है।',
+      'Windows पर ये कमांड लागू नहीं होते; मैन्युअल तरीका रिपॉज़िटरी के README में दिया है।',
     windowsLink: 'Windows इंस्टॉलेशन मार्ग',
     pinNote:
       'किसी विशेष ब्रांच, टैग या कमिट को इंस्टॉल करने के लिए DWP_VIM_REF सेट करें। पुराने टैग में इस पृष्ठ पर बताई गई सभी सुविधाएँ नहीं हो सकतीं।',
@@ -384,7 +384,7 @@ const i18n = {
     linesLabel: 'linii',
     macNote: 'W macOS w drugim kroku użyj shasum -a 256 install.sh.',
     windowsNote:
-      'W systemie Windows polecenie w jednej linii nie działa; ręczną ścieżkę opisuje README repozytorium.',
+      'W systemie Windows te polecenia nie działają; ręczną ścieżkę opisuje README repozytorium.',
     windowsLink: 'Instalacja w systemie Windows',
     pinNote:
       'Aby zainstalować konkretną gałąź, tag lub commit, ustaw DWP_VIM_REF. Starsze tagi mogą nie zawierać wszystkich funkcji opisanych na tej stronie.',
@@ -409,7 +409,7 @@ const i18n = {
     macNote:
       'У macOS на другому кроці використовуйте shasum -a 256 install.sh.',
     windowsNote:
-      'У Windows однорядкова команда не застосовується; ручний шлях описано в README репозиторію.',
+      'У Windows ці команди не застосовуються; ручний шлях описано в README репозиторію.',
     windowsLink: 'Шлях встановлення для Windows',
     pinNote:
       'Щоб встановити певну гілку, тег або коміт, задайте DWP_VIM_REF. Старі теги можуть не містити всіх можливостей, описаних на цій сторінці.',
@@ -433,7 +433,7 @@ const i18n = {
     linesLabel: 'บรรทัด',
     macNote: 'บน macOS ให้ใช้ shasum -a 256 install.sh ในขั้นตอนที่สอง',
     windowsNote:
-      'บน Windows คำสั่งบรรทัดเดียวใช้ไม่ได้ ขั้นตอนแบบแมนนวลอยู่ใน README ของที่เก็บโค้ด',
+      'บน Windows คำสั่งเหล่านี้ใช้ไม่ได้ ขั้นตอนแบบแมนนวลอยู่ใน README ของที่เก็บโค้ด',
     windowsLink: 'วิธีติดตั้งบน Windows',
     pinNote:
       'หากต้องการติดตั้งแบรนช์ แท็ก หรือคอมมิตที่ระบุ ให้ตั้งค่า DWP_VIM_REF แท็กรุ่นเก่าอาจไม่มีฟีเจอร์ทั้งหมดที่อธิบายในหน้านี้',
@@ -661,7 +661,7 @@ const stepCommands = [
 </style>
 
 <script>
-  // Progressive enhancement: copy the one-liner, and open the "inspect before
+  // Progressive enhancement: copy the install commands, and open the "inspect before
   // you run" disclosure when the page is opened on its anchor.
   const FEEDBACK_MS = 2000;
 

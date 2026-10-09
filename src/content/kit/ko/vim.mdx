@@ -48,7 +48,7 @@ DeepWorkPlan Vim이 바로 그런 에디터예요. 언어 서버, 자동 완성,
 | VS Code 스타일 제스처 | `<C-a>`, `SPC y` | 키 하나로 파일 전체를 선택하고 시스템 클립보드로 복사해요. 클립보드가 시스템 전체에서 공유되므로 단독 `y`도 그곳에 복사돼요. |
 | Deep Work Plan 브라우저 | `SPC P` | 저장소의 계획을 상태별로 묶고 진행 막대와 함께 보여 주는 사이드바와, 계획 하나를 읽는 리더예요. |
 | Markdown 뷰어 | `SPC m p`, `SPC m r` | 브라우저에서 Markdown을 미리 보거나 버퍼 안에서 렌더링해요. |
-| 한 줄 설치 프로그램 | — | macOS, Linux, WSL용 자체 완결형 설치 프로그램이고, Windows에는 문서화된 수동 방법이 있어요. |
+| 검증된 설치 프로그램 | — | macOS, Linux, WSL용 자체 완결형 설치 프로그램이고, Windows에는 문서화된 수동 방법이 있어요. |
 
 ## 에디터를 떠나지 않고 계획 보기
 
@@ -60,15 +60,9 @@ DeepWorkPlan Vim이 바로 그런 에디터예요. 언어 서버, 자동 완성,
 
 ## 설치
 
-설치는 한 줄이 전부예요. 그대로 실행하면 저장소의 `main` 브랜치가 설치돼요. 이 페이지가 설명하는 릴리스를 정확히 설치하려면 `DWP_VIM_REF=v0.4.0`을 설정하세요.
+설치는 세 가지 명령이에요. 스크립트를 내려받고, 이 사이트가 제공하는 파일의 SHA-256과 대조한 다음 실행해요. 그대로 실행하면 저장소의 `main` 브랜치가 설치돼요. 이 페이지가 설명하는 릴리스를 정확히 설치하려면 `DWP_VIM_REF=v0.4.0 bash install.sh`로 실행하세요.
 
-<VimInstall lang="ko">
-
-```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | bash
-```
-
-</VimInstall>
+<VimInstall lang="ko" />
 
 설치 프로그램은 다음 순서로 진행해요.
 
@@ -84,7 +78,7 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 
 - Neovim 0.12 이상. Neovim을 먼저 설치하세요. 설치 프로그램은 Neovim을 설치하지 않아요.
 - Lua: `lua`, `lua5.4`, `luajit` 중 하나. 없으면 설치 프로그램이 하나 추가해요.
-- macOS, Linux, WSL에서는 한 줄 명령을 실행해요. Windows에는 저장소 README에 수동 방법이 있어요. winget으로 Neovim을 설치하고, 저장소를 `%LOCALAPPDATA%\nvim`에 클론한 다음, Git Bash에서 `lua install.lua`를 실행하세요.
+- macOS, Linux, WSL에서는 설치 프로그램을 실행해요. Windows에는 저장소 README에 수동 방법이 있어요. winget으로 Neovim을 설치하고, 저장소를 `%LOCALAPPDATA%\nvim`에 클론한 다음, Git Bash에서 `lua install.lua`를 실행하세요.
 - GPL-3.0 라이선스: 자유롭게 사용하고 연구하고 수정할 수 있어요.
 
 ## 업데이트, 버전 고정, 제거
@@ -113,7 +107,7 @@ cd ~/.config/nvim && lua delete.lua
 
 ### Windows에서도 동작하나요?
 
-한 줄 명령은 Windows에 적용되지 않아요. 저장소 README의 수동 방법을 쓰거나 WSL 안에서 한 줄 명령을 실행하세요.
+설치 프로그램은 Windows에서 실행되지 않아요. 저장소 README의 수동 방법을 쓰거나 WSL 안에서 설치 프로그램을 실행하세요.
 
 ### 쓰려면 Deep Work Plan이 필요한가요?
 

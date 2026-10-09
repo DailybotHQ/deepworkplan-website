@@ -48,7 +48,7 @@ Fünf Funktionen, jede einen Tastendruck entfernt.
 | VS-Code-artige Gesten | `<C-a>`, `SPC y` | Die ganze Datei mit einer Taste auswählen und in die System-Zwischenablage kopieren. Auch ein einfaches `y` landet dort, weil die Zwischenablage systemweit ist. |
 | Deep-Work-Plan-Browser | `SPC P` | Eine Seitenleiste über die Pläne Ihres Repositorys, nach Status gruppiert und mit Fortschrittsbalken, sowie ein Reader für einen einzelnen Plan. |
 | Markdown-Viewer | `SPC m p`, `SPC m r` | Markdown im Browser anzeigen oder im Puffer rendern. |
-| Einzeiliger Installer | — | Ein eigenständiger Installer für macOS, Linux und WSL, mit dokumentiertem manuellem Weg für Windows. |
+| Verifizierter Installer | — | Ein eigenständiger Installer für macOS, Linux und WSL, mit dokumentiertem manuellem Weg für Windows. |
 
 ## Pläne, ohne den Editor zu verlassen
 
@@ -60,15 +60,9 @@ Um die Markdown-Dateien eines Plans an Ort und Stelle zu lesen, zeigt `SPC m p` 
 
 ## Installation
 
-Die ganze Installation ist eine Zeile. Für sich allein installiert sie den `main`-Branch des Repositorys; setzen Sie `DWP_VIM_REF=v0.4.0`, um genau das Release zu installieren, das diese Seite beschreibt.
+Die Installation besteht aus drei Befehlen: Laden Sie das Skript herunter, prüfen Sie es gegen das SHA-256 der Datei, die diese Website ausliefert, und führen Sie es dann aus. Für sich allein installiert es den `main`-Branch des Repositorys; führen Sie es als `DWP_VIM_REF=v0.4.0 bash install.sh` aus, um genau das Release zu installieren, das diese Seite beschreibt.
 
-<VimInstall lang="de">
-
-```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | bash
-```
-
-</VimInstall>
+<VimInstall lang="de" />
 
 Der Installer erledigt der Reihe nach:
 
@@ -84,7 +78,7 @@ Das hier ausgelieferte Skript ist eine byte-identische Kopie von `install.sh` be
 
 - Neovim 0.12 oder neuer. Installieren Sie Neovim zuerst; der Installer installiert es nicht.
 - Lua: `lua`, `lua5.4` oder `luajit`. Der Installer ergänzt eines, falls es fehlt.
-- macOS, Linux und WSL führen den Einzeiler aus. Für Windows gibt es einen dokumentierten manuellen Weg in der README des Repositorys: Neovim mit winget installieren, das Repository nach `%LOCALAPPDATA%\nvim` klonen und `lua install.lua` aus Git Bash ausführen.
+- macOS, Linux und WSL führen den Installer aus. Für Windows gibt es einen dokumentierten manuellen Weg in der README des Repositorys: Neovim mit winget installieren, das Repository nach `%LOCALAPPDATA%\nvim` klonen und `lua install.lua` aus Git Bash ausführen.
 - GPL-3.0-lizenziert: frei nutzbar, studierbar und veränderbar.
 
 ## Aktualisieren, festlegen und deinstallieren
@@ -113,7 +107,7 @@ Nein, nicht ohne Ihre Zustimmung. Findet es eine Konfiguration, die nicht DeepWo
 
 ### Funktioniert es unter Windows?
 
-Der Einzeiler gilt unter Windows nicht. Nutzen Sie den manuellen Weg aus der README des Repositorys oder führen Sie den Einzeiler in WSL aus.
+Der Installer läuft nicht unter Windows. Nutzen Sie den manuellen Weg aus der README des Repositorys oder führen Sie den Installer in WSL aus.
 
 ### Brauche ich Deep Work Plan, um es zu nutzen?
 

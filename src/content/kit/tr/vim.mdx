@@ -48,7 +48,7 @@ Beş özellik, her biri tek bir tuş uzağınızda.
 | VS Code tarzı hareketler | `<C-a>`, `SPC y` | Tek tuşla tüm dosyayı seçin ve sistem panosuna kopyalayın. Düz `y` de oraya kopyalar, çünkü pano sistem geneline açıktır. |
 | Deep Work Plan tarayıcısı | `SPC P` | Deponuzdaki planların durumlarına göre gruplanıp ilerleme çubuklarıyla gösterildiği bir kenar çubuğu ve tek bir plan için bir okuyucu. |
 | Markdown görüntüleyici | `SPC m p`, `SPC m r` | Markdown'ı tarayıcıda önizleyin ya da arabellekte işleyin. |
-| Tek satırlık kurulum | — | macOS, Linux ve WSL için kendi kendine yeten bir kurulum programı; Windows için belgelenmiş elle kurulum yolu. |
+| Doğrulanmış kurulum | — | macOS, Linux ve WSL için kendi kendine yeten bir kurulum programı; Windows için belgelenmiş elle kurulum yolu. |
 
 ## Düzenleyiciden çıkmadan planlar
 
@@ -60,15 +60,9 @@ Bir planın Markdown dosyalarını yerinde okumak için `SPC m p` geçerli arabe
 
 ## Kurulum
 
-Kurulumun tamamı tek satırdır. Tek başına çalıştırıldığında deponun `main` dalını kurar; bu sayfanın anlattığı sürümü tam olarak kurmak için `DWP_VIM_REF=v0.4.0` değerini ayarlayın.
+Kurulum üç komuttan oluşur: betiği indirin, bu sitenin sunduğu dosyanın SHA-256 değeriyle karşılaştırın, ardından çalıştırın. Tek başına çalıştırıldığında deponun `main` dalını kurar; bu sayfanın anlattığı sürümü tam olarak kurmak için `DWP_VIM_REF=v0.4.0 bash install.sh` biçiminde çalıştırın.
 
-<VimInstall lang="tr">
-
-```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | bash
-```
-
-</VimInstall>
+<VimInstall lang="tr" />
 
 Kurulum programı sırayla şunları yapar:
 
@@ -84,7 +78,7 @@ Burada sunulan betik, `v0.4.0` etiketindeki `install.sh` dosyasının bayt bayt 
 
 - Neovim 0.12 veya daha yenisi. Önce Neovim'i kurun; kurulum programı onu kurmaz.
 - Lua: `lua`, `lua5.4` veya `luajit`. Eksikse kurulum programı bir tane ekler.
-- macOS, Linux ve WSL tek satırlık komutu çalıştırır. Windows için deponun README dosyasında belgelenmiş elle kurulum yolu vardır: Neovim'i winget ile kurun, depoyu `%LOCALAPPDATA%\nvim` içine klonlayın ve Git Bash'ten `lua install.lua` çalıştırın.
+- macOS, Linux ve WSL kurulum programını çalıştırır. Windows için deponun README dosyasında belgelenmiş elle kurulum yolu vardır: Neovim'i winget ile kurun, depoyu `%LOCALAPPDATA%\nvim` içine klonlayın ve Git Bash'ten `lua install.lua` çalıştırın.
 - GPL-3.0 lisanslıdır: kullanması, incelemesi ve değiştirmesi serbesttir.
 
 ## Güncelleme, sürüm sabitleme ve kaldırma
@@ -113,7 +107,7 @@ Hayır, onayınız olmadan yazmaz. DeepWorkPlan Vim olmayan bir yapılandırma b
 
 ### Windows'ta çalışır mı?
 
-Tek satırlık komut Windows'ta geçerli değildir. Deponun README dosyasındaki elle kurulum yolunu kullanın ya da tek satırlık komutu WSL içinde çalıştırın.
+Kurulum programı Windows'ta çalışmaz. Deponun README dosyasındaki elle kurulum yolunu kullanın ya da kurulum programını WSL içinde çalıştırın.
 
 ### Kullanmak için Deep Work Plan gerekir mi?
 

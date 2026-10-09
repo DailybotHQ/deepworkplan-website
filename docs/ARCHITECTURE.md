@@ -97,7 +97,7 @@ src/
 │   ├── editorial/          # Editorial primitives (Kicker, Rule, Lead, Figure, Reference)
 │   │
 │   ├── vim/                # DeepWorkPlan Vim page building blocks, embedded in the kit MDX
-│   │   └── VimInstall.astro        # One-liner + copy button, consent callout, "inspect before you run" with the live installer SHA-256
+│   │   └── VimInstall.astro        # Download → verify → run commands (no pipe into a shell) + copy button, consent callout, "inspect before you run" with the live installer SHA-256
 │   │
 │   ├── diagrams/           # Editorial Interactive Assets (see docs/DIAGRAM_COMPONENTS.md)
 │   │   └── kit/                    # incl. VimCommandIndex.astro (SPC h h plate), VimInDwpLoop.astro (plan browser + Markdown viewer beside the DWP loop) and KitEcosystem.astro (v7 ecosystem plate on the kit index: methodology works alone, addons pinned to products)
@@ -130,7 +130,7 @@ src/
 │   ├── i18n.ts              # Centralized i18n config; getActiveLanguages() derived from translations/*.ts
 │   ├── language-codes.ts    # Dependency-free LANGUAGE_CODES tuple (imported by i18n + astro.config)
 │   ├── markdown-for-agents.ts  # Helpers for the agent-friendly .md endpoints
-│   ├── vim-installer.ts     # Build-time facts about /vim/install.sh (SHA-256, size, lines) read via Vite ?raw; canonical one-liner and URLs
+│   ├── vim-installer.ts     # Build-time facts about /vim/install.sh (SHA-256, size, lines) read via Vite ?raw; the download → verify → run install commands bound to that digest, and URLs
 │   ├── software-schema.ts   # Optional kit `software` frontmatter (Zod) + buildSoftwareSchema() / combineJsonLd() for SoftwareApplication JSON-LD
 │   ├── redirect-map.ts      # REDIRECT_PAIRS (per-language aliases, incl. vim -> kit/vim and vim.md -> kit/vim.md) + ROOT_ONLY_REDIRECT_PAIRS
 │   ├── analytics.ts         # Analytics helpers

@@ -48,7 +48,7 @@ DeepWorkPlan Vim 就是这样的编辑器。它是一套精心整理的 Neovim �
 | VS Code 风格手势 | `<C-a>`, `SPC y` | 一个键选中整个文件，并复制到系统剪贴板。单独的 `y` 也会复制到那里，因为剪贴板是系统级共享的。 |
 | Deep Work Plan 浏览器 | `SPC P` | 覆盖你仓库中计划的侧边栏，按状态分组并带进度条，还有用于查看单个计划的阅读视图。 |
 | Markdown 查看器 | `SPC m p`, `SPC m r` | 在浏览器中预览 Markdown，或在缓冲区中渲染。 |
-| 一行安装程序 | — | 面向 macOS、Linux 和 WSL 的自包含安装程序，并为 Windows 提供有文档的手动路径。 |
+| 经过校验的安装程序 | — | 面向 macOS、Linux 和 WSL 的自包含安装程序，并为 Windows 提供有文档的手动路径。 |
 
 ## 无需离开编辑器即可查看计划
 
@@ -60,15 +60,9 @@ DeepWorkPlan Vim 就是这样的编辑器。它是一套精心整理的 Neovim �
 
 ## 安装
 
-整个安装只需一行。单独运行时，它会安装仓库的 `main` 分支；设置 `DWP_VIM_REF=v0.4.0` 即可精确安装本页所描述的版本。
+安装分为三条命令：下载脚本，将其与本站所提供文件的 SHA-256 进行核对，然后运行。单独运行时，它会安装仓库的 `main` 分支；以 `DWP_VIM_REF=v0.4.0 bash install.sh` 的方式运行，即可精确安装本页所描述的版本。
 
-<VimInstall lang="zh">
-
-```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | bash
-```
-
-</VimInstall>
+<VimInstall lang="zh" />
 
 安装程序会依次：
 
@@ -84,7 +78,7 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 
 - Neovim 0.12 或更高版本。请先安装 Neovim；安装程序不会安装它。
 - Lua：`lua`、`lua5.4` 或 `luajit`。缺少时安装程序会补上一个。
-- macOS、Linux 和 WSL 运行这条单行命令。Windows 在仓库 README 中有手动路径：用 winget 安装 Neovim，把仓库克隆到 `%LOCALAPPDATA%\nvim`，再在 Git Bash 中运行 `lua install.lua`。
+- macOS、Linux 和 WSL 运行此安装程序。Windows 在仓库 README 中有手动路径：用 winget 安装 Neovim，把仓库克隆到 `%LOCALAPPDATA%\nvim`，再在 Git Bash 中运行 `lua install.lua`。
 - 采用 GPL-3.0 许可：可自由使用、研究和修改。
 
 ## 更新、固定版本与卸载
@@ -113,7 +107,7 @@ cd ~/.config/nvim && lua delete.lua
 
 ### 它能在 Windows 上使用吗？
 
-这条单行命令不适用于 Windows。请使用仓库 README 中的手动路径，或在 WSL 中运行这条单行命令。
+此安装程序无法在 Windows 上运行。请使用仓库 README 中的手动路径，或在 WSL 中运行此安装程序。
 
 ### 使用它需要 Deep Work Plan 吗？
 

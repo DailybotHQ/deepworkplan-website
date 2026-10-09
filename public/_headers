@@ -14,7 +14,7 @@
   Cache-Control: public, max-age=300, must-revalidate
 
 # DeepWorkPlan Vim installer — the canonical one-liner target
-# (curl -fsSL https://deepworkplan.com/vim/install.sh | bash). Served verbatim
+# (downloaded, verified against its SHA-256, then run). Served verbatim
 # from public/vim/install.sh; the apex /install.sh 301s here (public/_redirects).
 /vim/install.sh
   Content-Type: text/x-shellscript

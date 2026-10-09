@@ -48,7 +48,7 @@ Lima fitur, masing-masing hanya sejauh satu tombol.
 | Gestur ala VS Code | `<C-a>`, `SPC y` | Pilih seluruh berkas dengan satu tombol, lalu salin ke papan klip sistem. `y` biasa juga menyalin ke sana, karena papan klipnya berlaku di seluruh sistem. |
 | Penjelajah rencana Deep Work Plan | `SPC P` | Bilah samping untuk rencana di repositori Anda, dikelompokkan menurut status dengan bilah progres, dan pembaca untuk satu rencana. |
 | Penampil Markdown | `SPC m p`, `SPC m r` | Pratinjau Markdown di peramban, atau render di buffer. |
-| Pemasang satu baris | — | Pemasang mandiri untuk macOS, Linux, dan WSL, dengan jalur manual yang terdokumentasi untuk Windows. |
+| Pemasang terverifikasi | — | Pemasang mandiri untuk macOS, Linux, dan WSL, dengan jalur manual yang terdokumentasi untuk Windows. |
 
 ## Rencana tanpa meninggalkan editor
 
@@ -60,15 +60,9 @@ Untuk membaca berkas Markdown sebuah rencana di tempat, `SPC m p` mempratinjau b
 
 ## Instalasi
 
-Seluruh instalasi hanya satu baris. Jika dijalankan apa adanya, ia memasang cabang `main` repositori; setel `DWP_VIM_REF=v0.4.0` untuk memasang tepat rilis yang dijelaskan halaman ini.
+Instalasi terdiri dari tiga perintah: unduh skrip, periksa terhadap SHA-256 berkas yang disajikan situs ini, lalu jalankan. Jika dijalankan apa adanya, ia memasang cabang `main` repositori; jalankan sebagai `DWP_VIM_REF=v0.4.0 bash install.sh` untuk memasang tepat rilis yang dijelaskan halaman ini.
 
-<VimInstall lang="id">
-
-```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | bash
-```
-
-</VimInstall>
+<VimInstall lang="id" />
 
 Secara berurutan, pemasang:
 
@@ -84,7 +78,7 @@ Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install
 
 - Neovim 0.12 atau lebih baru. Pasang Neovim lebih dulu; pemasang tidak memasangnya.
 - Lua: `lua`, `lua5.4`, atau `luajit`. Pemasang menambahkannya jika belum ada.
-- macOS, Linux, dan WSL menjalankan perintah satu baris. Windows memiliki jalur manual yang terdokumentasi di README repositori: pasang Neovim dengan winget, clone repositori ke `%LOCALAPPDATA%\nvim`, dan jalankan `lua install.lua` dari Git Bash.
+- macOS, Linux, dan WSL menjalankan pemasang. Windows memiliki jalur manual yang terdokumentasi di README repositori: pasang Neovim dengan winget, clone repositori ke `%LOCALAPPDATA%\nvim`, dan jalankan `lua install.lua` dari Git Bash.
 - Berlisensi GPL-3.0: bebas digunakan, dipelajari, dan dimodifikasi.
 
 ## Memperbarui, mengunci versi, dan mencopot
@@ -113,7 +107,7 @@ Tidak, bukan tanpa persetujuan Anda. Saat menemukan konfigurasi yang bukan DeepW
 
 ### Apakah berfungsi di Windows?
 
-Perintah satu baris tidak berlaku di Windows. Gunakan jalur manual di README repositori, atau jalankan perintah satu baris itu di dalam WSL.
+Pemasang tidak berjalan di Windows. Gunakan jalur manual di README repositori, atau jalankan pemasang di dalam WSL.
 
 ### Apakah saya butuh Deep Work Plan untuk menggunakannya?
 

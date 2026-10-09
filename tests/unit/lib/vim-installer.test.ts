@@ -5,6 +5,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import {
+  buildInstallCommand,
   getInstallerFacts,
   VIM_INSTALL_COMMAND,
   VIM_INSTALL_URL,
@@ -49,10 +50,18 @@ describe('installer provenance', () => {
 });
 
 describe('installer constants', () => {
-  it('keeps the canonical one-liner verbatim', () => {
-    expect(VIM_INSTALL_COMMAND).toBe(
-      'curl -fsSL https://deepworkplan.com/vim/install.sh | bash'
-    );
+  it('shows download, verify, run bound to the served digest', () => {
+    const lines = VIM_INSTALL_COMMAND.split('\n');
+    expect(lines).toEqual([
+      'curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh',
+      `echo "${getInstallerFacts().sha256}  install.sh" | shasum -a 256 -c`,
+      'bash install.sh',
+    ]);
+  });
+
+  it('never pipes a download into a shell', () => {
+    expect(VIM_INSTALL_COMMAND).not.toMatch(/\|\s*(ba)?sh\b/);
+    expect(buildInstallCommand('0'.repeat(64))).not.toMatch(/\|\s*(ba)?sh\b/);
   });
 
   it('serves the installer from the /vim/ path on the apex domain', () => {

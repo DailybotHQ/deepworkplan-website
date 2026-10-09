@@ -48,7 +48,7 @@ Năm tính năng, mỗi tính năng chỉ cách một phím bấm.
 | Thao tác kiểu VS Code | `<C-a>`, `SPC y` | Chọn toàn bộ tệp bằng một phím và sao chép vào bộ nhớ tạm của hệ thống. `y` thường cũng sao chép vào đó, vì bộ nhớ tạm dùng chung toàn hệ thống. |
 | Trình duyệt kế hoạch Deep Work Plan | `SPC P` | Một thanh bên trên các kế hoạch trong kho mã của bạn, nhóm theo trạng thái và có thanh tiến độ, cùng một trình đọc cho từng kế hoạch. |
 | Trình xem Markdown | `SPC m p`, `SPC m r` | Xem trước Markdown trong trình duyệt, hoặc kết xuất trong bộ đệm. |
-| Trình cài đặt một dòng | — | Trình cài đặt độc lập cho macOS, Linux và WSL, với cách cài thủ công được ghi tài liệu cho Windows. |
+| Trình cài đặt có xác minh | — | Trình cài đặt độc lập cho macOS, Linux và WSL, với cách cài thủ công được ghi tài liệu cho Windows. |
 
 ## Kế hoạch mà không cần rời trình soạn thảo
 
@@ -60,15 +60,9 @@ Nhấn Enter trên một kế hoạch để mở trình đọc: mục tiêu tron
 
 ## Cài đặt
 
-Toàn bộ việc cài đặt chỉ là một dòng. Khi chạy riêng, nó cài nhánh `main` của kho mã; hãy đặt `DWP_VIM_REF=v0.4.0` để cài chính xác bản phát hành mà trang này mô tả.
+Việc cài đặt gồm ba lệnh: tải tập lệnh về, đối chiếu nó với SHA-256 của tệp mà trang này cung cấp, rồi chạy nó. Khi chạy riêng, nó cài nhánh `main` của kho mã; hãy chạy dưới dạng `DWP_VIM_REF=v0.4.0 bash install.sh` để cài chính xác bản phát hành mà trang này mô tả.
 
-<VimInstall lang="vi">
-
-```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | bash
-```
-
-</VimInstall>
+<VimInstall lang="vi" />
 
 Theo thứ tự, trình cài đặt:
 
@@ -84,7 +78,7 @@ Tập lệnh được cung cấp ở đây là bản sao giống hệt từng by
 
 - Neovim 0.12 trở lên. Hãy cài Neovim trước; trình cài đặt không cài nó.
 - Lua: `lua`, `lua5.4` hoặc `luajit`. Trình cài đặt sẽ thêm một cái nếu thiếu.
-- macOS, Linux và WSL chạy lệnh một dòng. Windows có cách cài thủ công được ghi trong README của kho mã: cài Neovim bằng winget, clone kho mã vào `%LOCALAPPDATA%\nvim`, rồi chạy `lua install.lua` từ Git Bash.
+- macOS, Linux và WSL chạy trình cài đặt. Windows có cách cài thủ công được ghi trong README của kho mã: cài Neovim bằng winget, clone kho mã vào `%LOCALAPPDATA%\nvim`, rồi chạy `lua install.lua` từ Git Bash.
 - Cấp phép GPL-3.0: tự do sử dụng, nghiên cứu và sửa đổi.
 
 ## Cập nhật, cố định phiên bản và gỡ cài đặt
@@ -113,7 +107,7 @@ Không, nếu bạn chưa chấp thuận. Khi gặp một cấu hình không ph�
 
 ### Nó có chạy trên Windows không?
 
-Lệnh một dòng không áp dụng trên Windows. Hãy dùng cách thủ công trong README của kho mã, hoặc chạy lệnh một dòng bên trong WSL.
+Trình cài đặt không chạy trên Windows. Hãy dùng cách thủ công trong README của kho mã, hoặc chạy trình cài đặt bên trong WSL.
 
 ### Tôi có cần Deep Work Plan để dùng nó không?
 

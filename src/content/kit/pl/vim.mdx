@@ -48,7 +48,7 @@ Pięć funkcji, każda o jedno naciśnięcie klawisza.
 | Gesty w stylu VS Code | `<C-a>`, `SPC y` | Zaznacz cały plik jednym klawiszem i skopiuj do schowka systemowego. Zwykłe `y` także tam trafia, bo schowek jest wspólny dla całego systemu. |
 | Przeglądarka planów Deep Work Plan | `SPC P` | Panel boczny z planami w Twoim repozytorium, pogrupowanymi według statusu i z paskami postępu, oraz czytnik pojedynczego planu. |
 | Podgląd Markdown | `SPC m p`, `SPC m r` | Podglądaj Markdown w przeglądarce albo renderuj go w buforze. |
-| Instalator w jednej linii | — | Samodzielny instalator dla macOS, Linuksa i WSL, z udokumentowaną ścieżką ręczną dla Windows. |
+| Weryfikowany instalator | — | Samodzielny instalator dla macOS, Linuksa i WSL, z udokumentowaną ścieżką ręczną dla Windows. |
 
 ## Plany bez opuszczania edytora
 
@@ -60,15 +60,9 @@ Aby czytać pliki Markdown planu na miejscu, `SPC m p` pokazuje podgląd bieżą
 
 ## Instalacja
 
-Cała instalacja to jedna linia. Sama w sobie instaluje gałąź `main` repozytorium; ustaw `DWP_VIM_REF=v0.4.0`, aby zainstalować dokładnie to wydanie, które opisuje ta strona.
+Instalacja to trzy polecenia: pobierz skrypt, sprawdź go z SHA-256 pliku serwowanego przez tę witrynę, a potem go uruchom. Sam w sobie instaluje gałąź `main` repozytorium; uruchom go jako `DWP_VIM_REF=v0.4.0 bash install.sh`, aby zainstalować dokładnie to wydanie, które opisuje ta strona.
 
-<VimInstall lang="pl">
-
-```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | bash
-```
-
-</VimInstall>
+<VimInstall lang="pl" />
 
 Po kolei instalator:
 
@@ -84,7 +78,7 @@ Skrypt serwowany tutaj jest identyczną bajt w bajt kopią `install.sh` z tagu `
 
 - Neovim 0.12 lub nowszy. Najpierw zainstaluj Neovima; instalator go nie instaluje.
 - Lua: `lua`, `lua5.4` lub `luajit`. Instalator dodaje jedną, jeśli jej brakuje.
-- macOS, Linux i WSL uruchamiają polecenie w jednej linii. Windows ma udokumentowaną ścieżkę ręczną w README repozytorium: zainstaluj Neovima przez winget, sklonuj repozytorium do `%LOCALAPPDATA%\nvim` i uruchom `lua install.lua` z Git Bash.
+- macOS, Linux i WSL uruchamiają instalator. Windows ma udokumentowaną ścieżkę ręczną w README repozytorium: zainstaluj Neovima przez winget, sklonuj repozytorium do `%LOCALAPPDATA%\nvim` i uruchom `lua install.lua` z Git Bash.
 - Licencja GPL-3.0: wolno używać, badać i modyfikować.
 
 ## Aktualizacja, przypinanie wersji i odinstalowanie
@@ -113,7 +107,7 @@ Nie, nie bez Twojej zgody. Gdy znajdzie konfigurację, która nie jest DeepWorkP
 
 ### Czy działa w systemie Windows?
 
-Polecenie w jednej linii nie działa w systemie Windows. Skorzystaj z ręcznej ścieżki z README repozytorium albo uruchom to polecenie w WSL.
+Instalator nie działa w systemie Windows. Skorzystaj z ręcznej ścieżki z README repozytorium albo uruchom instalator w WSL.
 
 ### Czy potrzebuję Deep Work Plan, żeby z niego korzystać?
 

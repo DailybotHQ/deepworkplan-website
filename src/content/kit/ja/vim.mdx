@@ -48,7 +48,7 @@ DeepWorkPlan Vim はそのエディタです。言語サーバー、補完、リ
 | VS Code 風の操作 | `<C-a>`, `SPC y` | 1 キーでファイル全体を選択し、システムクリップボードへコピーします。クリップボードはシステム共通なので、単独の `y` もそこにコピーされます。 |
 | Deep Work Plan ブラウザ | `SPC P` | リポジトリ内の計画を状態別にまとめて進捗バーとともに表示するサイドバーと、1 つの計画を読むリーダー。 |
 | Markdown ビューア | `SPC m p`, `SPC m r` | ブラウザで Markdown をプレビューするか、バッファ内で描画します。 |
-| 1 行インストーラ | — | macOS、Linux、WSL 向けの自己完結的なインストーラ。Windows には文書化された手動の手順があります。 |
+| 検証付きインストーラ | — | macOS、Linux、WSL 向けの自己完結的なインストーラ。Windows には文書化された手動の手順があります。 |
 
 ## エディタを離れずに計画を読む
 
@@ -60,15 +60,9 @@ DeepWorkPlan Vim はそのエディタです。言語サーバー、補完、リ
 
 ## インストール
 
-インストールは 1 行です。そのまま実行するとリポジトリの `main` ブランチがインストールされます。このページが説明するリリースを正確にインストールするには `DWP_VIM_REF=v0.4.0` を設定してください。
+インストールは 3 つのコマンドです。スクリプトをダウンロードし、このサイトが配布するファイルの SHA-256 と照合してから実行します。そのまま実行するとリポジトリの `main` ブランチがインストールされます。このページが説明するリリースを正確にインストールするには、`DWP_VIM_REF=v0.4.0 bash install.sh` として実行してください。
 
-<VimInstall lang="ja">
-
-```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | bash
-```
-
-</VimInstall>
+<VimInstall lang="ja" />
 
 インストーラは次の順に実行します。
 
@@ -84,7 +78,7 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 
 - Neovim 0.12 以降。先に Neovim をインストールしてください。インストーラは Neovim をインストールしません。
 - Lua：`lua`、`lua5.4`、`luajit` のいずれか。足りなければインストーラが追加します。
-- macOS、Linux、WSL では 1 行コマンドを実行できます。Windows にはリポジトリ README に手動の手順があります。winget で Neovim をインストールし、リポジトリを `%LOCALAPPDATA%\nvim` にクローンして、Git Bash から `lua install.lua` を実行します。
+- macOS、Linux、WSL ではインストーラを実行できます。Windows にはリポジトリ README に手動の手順があります。winget で Neovim をインストールし、リポジトリを `%LOCALAPPDATA%\nvim` にクローンして、Git Bash から `lua install.lua` を実行します。
 - GPL-3.0 ライセンス：自由に利用、研究、改変できます。
 
 ## 更新、バージョン固定、アンインストール
@@ -113,7 +107,7 @@ cd ~/.config/nvim && lua delete.lua
 
 ### Windows で動きますか？
 
-1 行コマンドは Windows には適用できません。リポジトリ README の手動の手順を使うか、WSL の中で 1 行コマンドを実行してください。
+インストーラは Windows では動作しません。リポジトリ README の手動の手順を使うか、WSL の中でインストーラを実行してください。
 
 ### 使うのに Deep Work Plan は必要ですか？
 

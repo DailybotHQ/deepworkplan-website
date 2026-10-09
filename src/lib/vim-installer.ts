@@ -10,12 +10,6 @@ import installerSource from '../../public/vim/install.sh?raw';
 export const VIM_INSTALL_URL = 'https://deepworkplan.com/vim/install.sh';
 
 /**
- * The canonical install one-liner, verbatim from the product contract. It is
- * code, not prose: never translate or reflow it.
- */
-export const VIM_INSTALL_COMMAND = `curl -fsSL ${VIM_INSTALL_URL} | bash`;
-
-/**
  * The product release the served installer is copied from, byte-identical,
  * and that file's SHA-256 as published at
  * raw.githubusercontent.com/DailybotHQ/deepworkplan-vim/<tag>/install.sh.
@@ -61,3 +55,24 @@ export function getInstallerFacts(): InstallerFacts {
     url: VIM_INSTALL_URL,
   };
 }
+
+/**
+ * The install as download -> verify -> run, for a given installer digest. It
+ * never pipes a download into a shell (the site's review rule and the skills
+ * scanners treat any fetch-and-execute pipe as critical): the script lands on
+ * disk, `shasum -a 256 -c` checks it against the digest of the bytes the site
+ * serves, and only then does `bash` run it. Code, not prose: never translate
+ * or reflow it.
+ */
+export function buildInstallCommand(sha256: string): string {
+  return [
+    `curl -fsSL -o install.sh ${VIM_INSTALL_URL}`,
+    `echo "${sha256}  install.sh" | shasum -a 256 -c`,
+    'bash install.sh',
+  ].join('\n');
+}
+
+/** The install commands shown on the page, bound to the served installer. */
+export const VIM_INSTALL_COMMAND = buildInstallCommand(
+  getInstallerFacts().sha256
+);
