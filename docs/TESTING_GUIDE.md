@@ -88,7 +88,7 @@ The tree is **mirrored**, not co-located:
 - Diagram figures with a 17-language inline map → one source-contract test per family under `tests/unit/components/` (`vim-diagrams-parity.test.ts` pins key parity, the `en` fallback, `role="img"` and the verified keybindings; `kit-ecosystem-parity.test.ts` pins the `KitEcosystem` plate's map parity, no hydration, the product pins of the v7 claims ledger and that every row links an existing kit page in all 17 languages)
 - Editorial/home components → `tests/unit/components/<topic>.test.ts`, which
   assert narrative and parity across plates rather than one component each
-- `scripts/repositories.sh` (ecosystem hub sync) → `tests/scripts/repositories.test.sh`, a bash test against offline fixture repositories run under `/bin/bash` (bash 3.2 on macOS) — `bash tests/scripts/repositories.test.sh`; it runs in CI's `public hygiene` job
+- `scripts/repositories.sh` (ecosystem hub sync) → `tests/scripts/repositories.test.sh`, a bash test against offline fixture repositories run under `/bin/bash` — bash 3.2 on macOS pins 3.2 compatibility there, Linux CI runs bash 5 plus a check for bash 4+ constructs — `bash tests/scripts/repositories.test.sh`; it runs in the `public hygiene` job of `.github/workflows/ci.yml`
 - Hub isolation (`tsconfig.json`, `astro.config.mjs` watch, `biome.json`, `vitest.config.ts`, `.gitignore`) → `tests/unit/lib/hub-isolation.test.ts`; touching any of those configs means running it
 
 ### Consumers and blind spots

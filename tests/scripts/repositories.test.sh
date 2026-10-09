@@ -7,7 +7,8 @@
 # directory, so nothing touches the network or the real repositories/ tree.
 # The mktemp directory is left in place (it is harmless and removing a
 # variable path is not worth the risk). Runs the script under /bin/bash when
-# that is present (bash 3.2 on macOS) to pin bash 3.2 compatibility.
+# that is present: on macOS that is bash 3.2, which pins 3.2 compatibility
+# there; Linux CI runs bash 5 and relies on the construct check at the end.
 
 set -u
 
@@ -24,6 +25,7 @@ export GIT_COMMITTER_NAME=fixture GIT_COMMITTER_EMAIL=fixture@example.com
 WORK="$(mktemp -d "${TMPDIR:-/tmp}/repositories-test.XXXXXX")"
 export REPOS_DIR="$WORK/checkouts"
 export REPOS_MANIFEST="$WORK/manifest.json"
+export REPOS_ALLOW_LOCAL=1 # fixtures are local paths; the https rule is tested below
 
 passed=0
 failed=0
@@ -126,6 +128,8 @@ check "status names the branch and the default" sh -c "'$SHELL_UNDER_TEST' '$SCR
 echo "local commit" >>"$REPOS_DIR/alpha/README.md"
 git -C "$REPOS_DIR/alpha" commit --quiet -am "local work"
 local_head="$(head_of alpha)"
+out="$(run pull alpha)"
+check "pull skips a checkout that is only ahead" test "$out" = "alpha: ahead of origin/main (local commits), skipped"
 upstream_commit alpha "alpha v3"
 out="$(run pull alpha)"
 check "pull skips a branch that cannot fast-forward" test "$out" = "alpha: cannot fast-forward (local commits), skipped"
@@ -143,7 +147,64 @@ for name in alpha beta gamma; do
 	check "$name keeps its remote URL" test "$(git -C "$REPOS_DIR/$name" remote get-url origin)" = "$WORK/upstream/$name"
 done
 
-# --- a failed clone is reported, not hidden ---------------------------------------
+# --- detached HEAD, unborn branch and symlinks ------------------------------------
+make_upstream epsilon
+upstream_commit epsilon "epsilon v2"
+cat >"$WORK/edge.json" <<EOF
+{"repositories": [
+  {"name": "epsilon", "url": "$WORK/upstream/epsilon", "default_branch": "main"},
+  {"name": "zeta", "url": "$WORK/upstream/zeta", "default_branch": "main"},
+  {"name": "eta", "url": "$WORK/upstream/eta", "default_branch": "main"},
+  {"name": "theta", "url": "$WORK/upstream/theta", "default_branch": "main"}
+]}
+EOF
+edge() { REPOS_MANIFEST="$WORK/edge.json" "$SHELL_UNDER_TEST" "$SCRIPT" "$@"; }
+edge clone epsilon >/dev/null
+git -C "$REPOS_DIR/epsilon" checkout --quiet --detach HEAD~1
+detached="$(head_of epsilon)"
+check "pull skips a detached HEAD" sh -c "REPOS_MANIFEST='$WORK/edge.json' '$SHELL_UNDER_TEST' '$SCRIPT' pull epsilon | grep -qx 'epsilon: on (detached), not main, skipped'"
+check "detached HEAD is not moved" test "$(head_of epsilon)" = "$detached"
+git init --quiet -b main "$REPOS_DIR/zeta"
+git -C "$REPOS_DIR/zeta" remote add origin "$WORK/upstream/epsilon"
+check "pull skips an unborn branch" sh -c "REPOS_MANIFEST='$WORK/edge.json' '$SHELL_UNDER_TEST' '$SCRIPT' pull zeta | grep -qx 'zeta: no commits on main, skipped'"
+ln -s "$WORK/nowhere" "$REPOS_DIR/eta"
+check "clone skips a dangling symlink" sh -c "REPOS_MANIFEST='$WORK/edge.json' '$SHELL_UNDER_TEST' '$SCRIPT' clone eta | grep -qx 'eta: present, skipped'"
+check "clone never writes through a dangling symlink" test ! -e "$WORK/nowhere"
+ln -s "$REPOS_DIR/alpha" "$REPOS_DIR/theta"
+check "pull never follows a symlinked checkout" sh -c "REPOS_MANIFEST='$WORK/edge.json' '$SHELL_UNDER_TEST' '$SCRIPT' pull theta | grep -qx 'theta: symlink, not followed, skipped'"
+check "status never follows a symlinked checkout" sh -c "REPOS_MANIFEST='$WORK/edge.json' '$SHELL_UNDER_TEST' '$SCRIPT' status theta | grep -qx 'theta: symlink, not followed'"
+
+# --- manifest validation: nothing escapes REPOS_DIR, https only -------------------
+reject() { # reject "description" 'json entry' [env...]
+	local description="$1" entry="$2"
+	printf '{"repositories": [%s]}\n' "$entry" >"$WORK/bad.json"
+	REPOS_MANIFEST="$WORK/bad.json" REPOS_ALLOW_LOCAL="${3:-}" "$SHELL_UNDER_TEST" "$SCRIPT" clone >/dev/null 2>&1
+	check "$description" test $? -eq 2
+}
+reject "rejects a path-traversal name" '{"name": "../escape", "url": "https://github.com/DailybotHQ/escape.git"}'
+reject "rejects a name with a slash" '{"name": "a/b", "url": "https://github.com/DailybotHQ/b.git"}'
+reject "rejects the name .." '{"name": "..", "url": "https://github.com/DailybotHQ/x.git"}'
+reject "rejects an empty name" '{"name": "", "url": "https://github.com/DailybotHQ/x.git"}'
+reject "rejects duplicate names" '{"name": "x", "url": "https://github.com/DailybotHQ/x.git"}, {"name": "x", "url": "https://github.com/DailybotHQ/x.git"}'
+reject "rejects a local path without the fixture override" "{\"name\": \"x\", \"url\": \"$WORK/upstream/alpha\"}"
+reject "rejects an ext:: URL" '{"name": "x", "url": "ext::sh -c touch% /tmp/pwned"}' 1
+reject "rejects an ssh URL" '{"name": "x", "url": "ssh://git@example.com/x.git"}' 1
+reject "rejects a URL that looks like an option" '{"name": "x", "url": "--upload-pack=touch"}' 1
+reject "rejects a branch that looks like an option" '{"name": "x", "url": "https://github.com/DailybotHQ/x.git", "default_branch": "--orphan"}'
+reject "rejects an empty default branch" '{"name": "x", "url": "https://github.com/DailybotHQ/x.git", "default_branch": ""}'
+reject "rejects an entry without a url" '{"name": "x"}'
+printf 'not json' >"$WORK/bad.json"
+REPOS_MANIFEST="$WORK/bad.json" "$SHELL_UNDER_TEST" "$SCRIPT" ls >"$WORK/bad.out" 2>&1
+check "invalid JSON exits 2 with a message, not a traceback" sh -c "grep -q 'invalid manifest' '$WORK/bad.out' && ! grep -q Traceback '$WORK/bad.out'"
+check "no rejected entry created anything" test ! -e "$WORK/escape" -a ! -e "$REPOS_DIR/x" -a ! -e /tmp/pwned
+printf '{"repositories": [{"name": "x", "url": "https://github.com/DailybotHQ/x.git", "role": "", "visibility": "", "gate": "true"}]}\n' >"$WORK/empty-fields.json"
+check "empty fields never shift the columns" sh -c "REPOS_MANIFEST='$WORK/empty-fields.json' '$SHELL_UNDER_TEST' '$SCRIPT' ls | grep -qE '^x +true\$'"
+
+# --- a failed clone is reported, not hidden, and never prompts --------------------
+printf '{"repositories": [{"name": "unreachable", "url": "https://127.0.0.1:9/none.git"}]}\n' >"$WORK/unreachable.json"
+REPOS_MANIFEST="$WORK/unreachable.json" REPOS_ALLOW_LOCAL= "$SHELL_UNDER_TEST" "$SCRIPT" clone >/dev/null 2>&1 </dev/null
+check "an unreachable https clone exits 1 without prompting" test $? -eq 1
+check "a failed clone leaves no directory behind" test ! -e "$REPOS_DIR/unreachable"
 cat >"$WORK/broken.json" <<EOF
 {"repositories": [{"name": "ghost", "url": "$WORK/upstream/does-not-exist", "default_branch": "main"}]}
 EOF

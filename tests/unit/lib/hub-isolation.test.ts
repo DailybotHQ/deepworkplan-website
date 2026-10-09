@@ -91,7 +91,11 @@ describe('ecosystem hub isolation', () => {
           walk(path);
         } else if (/\.(astro|svelte|ts|mjs|js|css|mdx?)$/.test(entry)) {
           const text = readFileSync(path, 'utf8');
-          if (/from\s+['"][^'"]*repositories\//.test(text)) {
+          if (
+            /(from\s+|import\s*\(\s*|glob\s*\(\s*)['"`][^'"`]*repositories\//.test(
+              text
+            )
+          ) {
             offenders.push(path);
           }
         }

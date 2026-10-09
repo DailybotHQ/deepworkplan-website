@@ -219,7 +219,7 @@ bash scripts/repositories.sh pull [name...]  # fast-forward clean default-branch
 bash tests/scripts/repositories.test.sh      # offline fixture tests (also: pnpm run test:scripts)
 ```
 
-It never deletes, never touches a dirty tree or a feature-branch checkout, and never rewrites a remote. Exit status: `0` when every repository is fine or skipped by a safety rule, `1` when a clone or fetch failed, `2` on a usage error or an unknown repository name. Work inside a clone follows that repository's own `AGENTS.md` ([Cross-Project Standards](CROSS_PROJECT_STANDARDS.md)).
+It never deletes, never touches a dirty tree, a detached HEAD or a feature-branch checkout, never follows a symlinked checkout, and never rewrites a remote. It validates the manifest first (plain directory names, `https://` URLs only, sane branch names), clones over HTTPS only and never waits on a credential prompt. Exit status: `0` when every repository is fine or skipped by a safety rule, `1` when a clone, fetch or fast-forward failed, `2` on a usage or manifest error or an unknown repository name. Work inside a clone follows that repository's own `AGENTS.md` ([Cross-Project Standards](CROSS_PROJECT_STANDARDS.md)).
 
 ## Astro CLI
 

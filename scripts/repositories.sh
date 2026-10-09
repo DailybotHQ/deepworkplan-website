@@ -9,49 +9,94 @@
 #
 # Safety rules (pinned by tests/scripts/repositories.test.sh):
 #   - never deletes anything, never rewrites a remote, never resets or stashes;
-#   - `clone` skips a directory that already exists (whatever it holds);
-#   - `pull` skips a dirty tree, a checkout on any branch other than the
-#     manifest's default branch, and a branch that cannot fast-forward;
+#   - `clone` skips any path that already exists (directory, file or
+#     symlink, dangling or not);
+#   - `pull` and `status` never follow a symlinked checkout; `pull` skips a
+#     dirty tree, a detached HEAD, any branch other than the manifest's
+#     default branch, an unborn branch, and local commits (ahead/diverged);
+#   - the manifest is validated first: names are plain directory names (no
+#     `/`, no `..`), URLs are https:// only, branches cannot start with `-`;
+#     `clone` allows the HTTPS protocol only, and git never prompts;
 #   - idempotent: running any command twice changes nothing the second time.
 #
 # Requires bash 3.2+, git and python3 (stdlib only). Overrides for tests:
-#   REPOS_MANIFEST  manifest path (default: repositories/manifest.json)
-#   REPOS_DIR       checkout root (default: repositories/)
+#   REPOS_MANIFEST     manifest path (default: repositories/manifest.json)
+#   REPOS_DIR          checkout root (default: repositories/)
+#   REPOS_ALLOW_LOCAL  1 = also accept absolute local paths as URLs (fixtures)
 # Exit status: 0 when every selected repository is fine or skipped by a
-# safety rule, 1 when a clone or fast-forward failed, 2 on usage errors.
+# safety rule, 1 when a clone, fetch or fast-forward failed, 2 on usage or
+# manifest errors.
 
 set -u
 
 HUB_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 MANIFEST="${REPOS_MANIFEST:-$HUB_ROOT/repositories/manifest.json}"
 REPOS_DIR="${REPOS_DIR:-$HUB_ROOT/repositories}"
+SEP="$(printf '\037')"
+
+# Never block on a credential prompt: a renamed or private repository would
+# otherwise wait on /dev/tty.
+export GIT_TERMINAL_PROMPT=0
+# `clone` allows HTTPS only (plus local paths for test fixtures); `pull`
+# fetches with whatever remote the developer configured in the clone.
+CLONE_PROTOCOLS=https
+[ "${REPOS_ALLOW_LOCAL:-}" = 1 ] && CLONE_PROTOCOLS=https:file
 
 usage() {
 	sed -n '4,8p' "$0" | sed 's/^# \{0,1\}//'
 }
 
-# Print one tab-separated line per selected repository:
-# name, url, default_branch, role, visibility, gate.
+# Validate the manifest, then print one line per selected repository with
+# fields separated by the unit separator (\037, not whitespace, so an empty
+# field never shifts the others): name, url, default_branch, role,
+# visibility, gate.
 manifest_rows() {
-	python3 - "$MANIFEST" "$@" <<'PY'
-import json, sys
+	REPOS_ALLOW_LOCAL="${REPOS_ALLOW_LOCAL:-}" python3 - "$MANIFEST" "$@" <<'PY'
+import json, os, re, sys
+
+def die(message):
+    sys.stderr.write('invalid manifest: %s\n' % message)
+    sys.exit(2)
+
 path, wanted = sys.argv[1], sys.argv[2:]
-with open(path) as handle:
-    repos = json.load(handle)['repositories']
-names = [r['name'] for r in repos]
-unknown = [w for w in wanted if w not in names]
+allow_local = os.environ.get('REPOS_ALLOW_LOCAL') == '1'
+try:
+    with open(path) as handle:
+        repos = json.load(handle)['repositories']
+except (OSError, ValueError, KeyError, TypeError) as error:
+    die('%s: %s' % (path, error))
+if not isinstance(repos, list):
+    die('"repositories" must be a list')
+NAME = re.compile(r'[A-Za-z0-9][A-Za-z0-9._-]*')
+BRANCH = re.compile(r'[A-Za-z0-9][A-Za-z0-9._/-]*')
+rows, seen = [], set()
+for index, r in enumerate(repos):
+    if not isinstance(r, dict):
+        die('entry %d is not an object' % index)
+    name, url = r.get('name'), r.get('url')
+    branch = r.get('default_branch', 'main')
+    if not isinstance(name, str) or not NAME.fullmatch(name) or name in ('.', '..'):
+        die('entry %d: name %r must be a plain directory name' % (index, name))
+    if name in seen:
+        die('duplicate name %r' % name)
+    seen.add(name)
+    local = allow_local and isinstance(url, str) and url.startswith('/')
+    if not isinstance(url, str) or not (url.startswith('https://') or local):
+        die('%s: url %r must start with https://' % (name, url))
+    if not isinstance(branch, str) or not BRANCH.fullmatch(branch) or '..' in branch:
+        die('%s: default_branch %r is not a valid branch name' % (name, branch))
+    fields = [name, url, branch, str(r.get('role', '')),
+              str(r.get('visibility', '')), str(r.get('gate', ''))]
+    if any(c in f for f in fields for c in '\x1f\n\r'):
+        die('%s: control characters in a field' % name)
+    rows.append(fields)
+unknown = [w for w in wanted if w not in seen]
 if unknown:
     sys.stderr.write('unknown repository: %s\n' % ', '.join(unknown))
     sys.exit(2)
-for r in repos:
-    if wanted and r['name'] not in wanted:
-        continue
-    fields = [r['name'], r['url'], r.get('default_branch', 'main'),
-              r.get('role', ''), r.get('visibility', ''), r.get('gate', '')]
-    if any('\t' in f or '\n' in f for f in fields):
-        sys.stderr.write('invalid manifest entry: %s\n' % r['name'])
-        sys.exit(2)
-    print('\t'.join(fields))
+for fields in rows:
+    if not wanted or fields[0] in wanted:
+        print('\x1f'.join(fields))
 PY
 }
 
@@ -66,7 +111,7 @@ is_dirty() {
 
 cmd_ls() {
 	printf '%-20s %-7s %-10s %s\n' NAME ROLE VISIBILITY GATE
-	while IFS="$(printf '\t')" read -r name url branch role visibility gate; do
+	while IFS="$SEP" read -r name url branch role visibility gate; do
 		printf '%-20s %-7s %-10s %s\n' "$name" "$role" "$visibility" "$gate"
 	done
 }
@@ -74,13 +119,13 @@ cmd_ls() {
 cmd_clone() {
 	local failed=0
 	mkdir -p "$REPOS_DIR"
-	while IFS="$(printf '\t')" read -r name url branch role visibility gate; do
+	while IFS="$SEP" read -r name url branch role visibility gate; do
 		dest="$REPOS_DIR/$name"
-		if [ -e "$dest" ]; then
+		if [ -e "$dest" ] || [ -L "$dest" ]; then
 			echo "$name: present, skipped"
 			continue
 		fi
-		if git clone --quiet --branch "$branch" "$url" "$dest" </dev/null; then
+		if GIT_ALLOW_PROTOCOL="$CLONE_PROTOCOLS" git clone --quiet --branch "$branch" -- "$url" "$dest" </dev/null; then
 			echo "$name: cloned ($branch)"
 		else
 			echo "$name: clone FAILED" >&2
@@ -91,8 +136,12 @@ cmd_clone() {
 }
 
 cmd_status() {
-	while IFS="$(printf '\t')" read -r name url branch role visibility gate; do
+	while IFS="$SEP" read -r name url branch role visibility gate; do
 		dest="$REPOS_DIR/$name"
+		if [ -L "$dest" ]; then
+			echo "$name: symlink, not followed"
+			continue
+		fi
 		if [ ! -e "$dest" ]; then
 			echo "$name: missing (run: bash scripts/repositories.sh clone $name)"
 			continue
@@ -118,8 +167,12 @@ cmd_status() {
 
 cmd_pull() {
 	local failed=0
-	while IFS="$(printf '\t')" read -r name url branch role visibility gate; do
+	while IFS="$SEP" read -r name url branch role visibility gate; do
 		dest="$REPOS_DIR/$name"
+		if [ -L "$dest" ]; then
+			echo "$name: symlink, not followed, skipped"
+			continue
+		fi
 		if [ ! -e "$dest" ]; then
 			echo "$name: missing, skipped"
 			continue
@@ -137,21 +190,27 @@ cmd_pull() {
 			echo "$name: dirty tree, skipped"
 			continue
 		fi
+		if ! before="$(git -C "$dest" rev-parse --verify --quiet HEAD)"; then
+			echo "$name: no commits on $branch, skipped"
+			continue
+		fi
 		if ! git -C "$dest" fetch --quiet origin "$branch" </dev/null; then
 			echo "$name: fetch FAILED" >&2
 			failed=1
 			continue
 		fi
-		before="$(git -C "$dest" rev-parse HEAD)"
-		if git -C "$dest" merge --quiet --ff-only FETCH_HEAD >/dev/null 2>&1; then
-			after="$(git -C "$dest" rev-parse HEAD)"
-			if [ "$before" = "$after" ]; then
-				echo "$name: up to date"
-			else
-				echo "$name: fast-forwarded ${before:0:7}..${after:0:7}"
-			fi
-		else
+		remote="$(git -C "$dest" rev-parse FETCH_HEAD)"
+		if [ "$before" = "$remote" ]; then
+			echo "$name: up to date"
+		elif git -C "$dest" merge-base --is-ancestor "$remote" "$before"; then
+			echo "$name: ahead of origin/$branch (local commits), skipped"
+		elif ! git -C "$dest" merge-base --is-ancestor "$before" "$remote"; then
 			echo "$name: cannot fast-forward (local commits), skipped"
+		elif git -C "$dest" merge --quiet --ff-only "$remote" >/dev/null 2>&1; then
+			echo "$name: fast-forwarded ${before:0:7}..${remote:0:7}"
+		else
+			echo "$name: fast-forward FAILED" >&2
+			failed=1
 		fi
 	done
 	return $failed
@@ -175,6 +234,10 @@ main() {
 		exit 2
 		;;
 	esac
+	command -v python3 >/dev/null 2>&1 || {
+		echo "python3 is required (reads the manifest)" >&2
+		exit 2
+	}
 	[ -f "$MANIFEST" ] || {
 		echo "manifest not found: $MANIFEST" >&2
 		exit 2

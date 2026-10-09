@@ -35,9 +35,9 @@ Once cloned, each guide is also at `repositories/<name>/AGENTS.md`; read it
 before working in that repository, because its own rules win inside it.
 
 **agent-skill is shared.** Another hub also clones and edits it. Before any
-change there, run `bash scripts/repositories.sh pull agent-skill` (or
-`git -C repositories/agent-skill pull --ff-only`), work on a branch, and push
-it before stopping: never leave unpushed work in this clone, so the two hubs
+change there, run `bash scripts/repositories.sh pull agent-skill` (it refuses a
+dirty tree or a feature branch, so start from a clean `main`), work on a
+branch, and push it before stopping: never leave unpushed work in this clone, so the two hubs
 never double-edit.
 
 ## Adding a repository
