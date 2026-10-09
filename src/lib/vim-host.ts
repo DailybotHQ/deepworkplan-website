@@ -7,9 +7,9 @@
  * helpers point those links at the main site instead.
  *
  * Bundled into the layout's existing module script (no new inline script), it
- * rewrites the links present at load and, through capture-phase click and
- * auxclick listeners, any home link rendered later (the Svelte masthead and
- * mobile menu) right before the browser follows it.
+ * rewrites the links present at load and, through capture-phase click,
+ * auxclick and contextmenu listeners, any home link rendered or reset later
+ * (the Svelte masthead and mobile menu) right before the browser uses it.
  */
 
 /** The host that serves the editor's page as its root. */
@@ -22,13 +22,20 @@ export const MAIN_ORIGIN = 'https://deepworkplan.com';
 const HOME_PATH = /^\/(?:[a-z]{2}\/?)?$/;
 
 /**
- * The main-site URL for a link that resolves (against `base`) to a home path
- * on the same host, or `null` when the link is anything else.
+ * The main-site URL for a link that points at a home path on the same host,
+ * or `null` when the link is anything else. Only links written as an absolute
+ * path (`/`, `/es/`) or as an absolute URL count: on the custom domain the
+ * zone rewrite keeps the document URL at `https://vim.deepworkplan.com/`, so a
+ * fragment (`#install`), a query (`?a=b`) or a relative href would otherwise
+ * resolve to `/` and be sent away from the page it belongs to.
  */
 export function mainSiteHref(href: string, base: string): string | null {
+  const raw = href.trim();
+  const absolutePath = raw.startsWith('/') && !raw.startsWith('//');
+  if (!absolutePath && !/^https?:\/\//i.test(raw)) return null;
   let url: URL;
   try {
-    url = new URL(href, base);
+    url = new URL(raw, base);
   } catch {
     return null;
   }
@@ -70,7 +77,11 @@ export function installVimHostHomeLinks(win: Window = window): number {
     const anchor = target?.closest?.('a[href]') as HTMLAnchorElement | null;
     if (anchor) rewriteAnchor(anchor, win.location.href);
   };
-  win.document.addEventListener('click', onActivate, true);
-  win.document.addEventListener('auxclick', onActivate, true);
+  // click covers left-click and Enter, auxclick the middle button, and
+  // contextmenu the "open in new tab / copy link" menu — together they also
+  // catch an href the Svelte masthead resets while hydrating after this pass.
+  for (const type of ['click', 'auxclick', 'contextmenu']) {
+    win.document.addEventListener(type, onActivate, true);
+  }
   return rewritten;
 }

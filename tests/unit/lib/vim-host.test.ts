@@ -42,6 +42,14 @@ describe('mainSiteHref', () => {
       mainSiteHref('#install', VIM_BASE.replace(/\/$/, '/kit/vim/'))
     ).toBeNull();
     expect(mainSiteHref('https://github.com/', VIM_BASE)).toBeNull();
+    // The custom domain keeps the document at `/`: in-page and relative links
+    // must stay on the vim page.
+    expect(mainSiteHref('#main-content', VIM_BASE)).toBeNull();
+    expect(mainSiteHref('#install', VIM_BASE)).toBeNull();
+    expect(mainSiteHref('?lang=es', VIM_BASE)).toBeNull();
+    expect(mainSiteHref('es/', VIM_BASE)).toBeNull();
+    expect(mainSiteHref('', VIM_BASE)).toBeNull();
+    expect(mainSiteHref('//vim.deepworkplan.com/', VIM_BASE)).toBeNull();
     expect(mainSiteHref('/vim/install.sh', VIM_BASE)).toBeNull();
   });
 });
@@ -69,6 +77,33 @@ describe('installVimHostHomeLinks', () => {
       `${MAIN_ORIGIN}/es`
     );
     expect(document.getElementById('kit')?.getAttribute('href')).toBe('/kit');
+  });
+
+  it('keeps the skip link and in-page anchors on the vim page', () => {
+    document.body.innerHTML = [
+      '<a id="skip" href="#main-content">Skip</a>',
+      '<a id="anchor" href="#install">Install</a>',
+    ].join('');
+    expect(installVimHostHomeLinks(fakeWindow(VIM_BASE))).toBe(0);
+    expect(document.getElementById('skip')?.getAttribute('href')).toBe(
+      '#main-content'
+    );
+    expect(document.getElementById('anchor')?.getAttribute('href')).toBe(
+      '#install'
+    );
+  });
+
+  it('rewrites a home link reset after load when its context menu opens', () => {
+    installVimHostHomeLinks(fakeWindow(VIM_BASE));
+    document.body.innerHTML = '<a id="logo" href="/">Deep Work Plan</a>';
+    document
+      .getElementById('logo')
+      ?.dispatchEvent(
+        new MouseEvent('contextmenu', { bubbles: true, cancelable: true })
+      );
+    expect(document.getElementById('logo')?.getAttribute('href')).toBe(
+      `${MAIN_ORIGIN}/`
+    );
   });
 
   it('rewrites a home link rendered after load when it is activated', () => {
