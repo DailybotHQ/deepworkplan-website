@@ -286,7 +286,7 @@ ssh-sync
   ✓ SSH synced from host: 4 private key(s), 4 public key(s), config, known_hosts
 Host SSH material is in sync. Keys available:
   • id_rsa
-  • id_rsa_xergioalex
+  • id_ed25519_work
 ```
 
 ### Troubleshooting

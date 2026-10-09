@@ -5,8 +5,9 @@
 #   bash scripts/check-public-hygiene.sh [--root DIR]
 #
 # Scans every file `git ls-files` lists (regular files only, binary files
-# skipped), except the vendored DeepWorkPlan pack under .agents/skills/ and
-# .claude/skills/. Prints `path:line: <rule>` for each hit and never prints
+# skipped), except the vendored upstream packs under .agents/skills/
+# (deepworkplan, dailybot, ai-diff-reviewer — refreshed from their releases;
+# the repository's own skills there ARE scanned) and the .claude/ symlink. Prints `path:line: <rule>` for each hit and never prints
 # the matched text, so a real secret is not echoed into a CI log.
 #
 # Rules:
@@ -21,8 +22,9 @@
 #   secret-*        credential shapes (AWS, GitHub, OpenAI/Anthropic, Slack,
 #                   Google, private-key headers, quoted assignments >= 16;
 #                   a quoted value that is a variable reference such as
-#                   "${API_KEY}" or "$API_KEY", or a URL, is not a literal
-#                   secret)
+#                   "${API_KEY}" or "$API_KEY" (upper-case), or a URL without embedded
+#                   credentials, is not a literal secret; secret-env catches
+#                   unquoted KEY=value lines such as a filled-in .env file)
 #
 # A test fixture that needs a secret-shaped string lists it in
 # .public-hygiene-allow as `<path> <secret-rule> <reason>`. Only secret-*
@@ -66,11 +68,12 @@ private-name	dailybot-ws-|\[dailybot-mesh\]	i
 private-email	[A-Za-z0-9._%+-]+@dailybot\.com	i
 secret-aws	(AKIA|ASIA)[0-9A-Z]{16}	-
 secret-github	(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{22,}	-
-secret-ai	sk-ant-[A-Za-z0-9_-]{20,}|sk-(proj-)?[A-Za-z0-9]{32,}	-
+secret-ai	sk-ant-[A-Za-z0-9_-]{20,}|sk-(proj|svcacct|admin)-[A-Za-z0-9_-]{20,}|sk-[A-Za-z0-9]{32,}	-
 secret-slack	xox[abposr]-[A-Za-z0-9-]{10,}	-
 secret-google	AIza[0-9A-Za-z_-]{35}	-
 secret-private-key	-----BEGIN ([A-Z0-9]+ )*PRIVATE KEY-----	-
 secret-assignment	(api[_-]?key|secret|token|passw(or)?d|access[_-]?key)[A-Za-z0-9_]*["']?[[:space:]]*[:=][[:space:]]*["'][^"'[:space:]]{16,}["']	i
+secret-env	^[[:space:]]*(export[[:space:]]+)?[A-Z0-9_]*(API_?KEY|SECRET|TOKEN|PASSWORD|PASSWD|ACCESS_KEY)[A-Z0-9_]*=[^"'[:space:]$]{16,}	-
 EOF
 }
 
@@ -101,7 +104,7 @@ is_allowed() { # path rule
 }
 
 # Tracked regular files outside the vendored pack.
-files=$(git ls-files | grep -vE '^\.(agents|claude)/skills/' | while IFS= read -r f; do
+files=$(git ls-files | grep -vE '^\.(agents|claude)/skills/(deepworkplan|dailybot|ai-diff-reviewer)/' | while IFS= read -r f; do
   if [ -f "$f" ] && [ ! -L "$f" ]; then printf '%s\n' "$f"; fi
 done)
 
@@ -140,8 +143,21 @@ while IFS='	' read -r rule pattern flag; do
         ;;
       secret-assignment)
         literal=$(printf '%s\n' "$text" | grep -oiE "$pattern" |
-          grep -vE "[:=][[:space:]]*[\"'](\\\$|https?://)" || true)
+          grep -vE "[:=][[:space:]]*[\"'](\\\$\\{?[A-Z_][A-Z0-9_]*\\}?|https?://[^@\"'[:space:]]*)[\"']\$" || true)
         if [ -z "$literal" ]; then
+          :
+        elif is_allowed "$path" "$rule"; then
+          printf '%s\n' "$text" | grep -qiE "$FAKE_MARKER" ||
+            report "$path" "$lineno" "$rule" "allow-listed, but the line does not say it is fake"
+        else
+          report "$path" "$lineno" "$rule"
+        fi
+        ;;
+      secret-env)
+        # A documentation placeholder (your-key, <key>, …example…) is not a
+        # secret; anything else is.
+        value=${text#*=}
+        if printf '%s\n' "$value" | grep -qiE '^(your|<)|example|placeholder|changeme|xxxx'; then
           :
         elif is_allowed "$path" "$rule"; then
           printf '%s\n' "$text" | grep -qiE "$FAKE_MARKER" ||

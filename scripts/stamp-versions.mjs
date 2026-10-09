@@ -100,10 +100,20 @@ async function stampTrustManifest(skillVersion) {
   // block only. A stable vendored version is stamped as `skill.version` and
   // retires any `prerelease` block (docs/SECURITY.md → trust manifest).
   if (skillVersion.includes('-')) {
-    if (!doc.prerelease || doc.prerelease.version === skillVersion) {
+    if (!doc.prerelease) {
       return false;
     }
-    doc.prerelease.version = skillVersion;
+    const tag = `v${skillVersion}`;
+    const next = {
+      ...doc.prerelease,
+      version: skillVersion,
+      install: `npx --yes skills add DailybotHQ/deepworkplan-skill@${tag} --skill deepworkplan -y`,
+      checksums: `https://github.com/DailybotHQ/deepworkplan-skill/releases/download/${tag}/SHA256SUMS`,
+    };
+    if (JSON.stringify(next) === JSON.stringify(doc.prerelease)) {
+      return false;
+    }
+    doc.prerelease = next;
   } else {
     if (doc.skill?.version === skillVersion && !doc.prerelease) {
       return false;

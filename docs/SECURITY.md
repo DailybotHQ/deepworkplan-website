@@ -319,7 +319,10 @@ time (`scripts/stamp-versions.mjs`). A **stable** vendored version becomes
 v7 beta) is stamped only into the `prerelease` block — version, status
 "pre-release (not the stable release)", the pinned install line and that
 release's `SHA256SUMS` URL — while `skill.version` keeps naming the stable
-release (`6.1.0`). `/trust` says the same in every language. Never describe a
+release (`6.1.0`). The stamp derives the block's install line and `SHA256SUMS`
+URL from the version, `/trust` renders its install line from the manifest, and
+`tests/unit/lib/trust-manifest.test.ts` pins all of it to the vendored
+`SKILL.md`. `/trust` says the same in every language. Never describe a
 pre-release as stable.
 
 ### Verifiable install (provenance)
