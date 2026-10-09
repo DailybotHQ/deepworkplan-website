@@ -136,10 +136,10 @@ Mỗi cờ đều có một biến môi trường tương ứng (`DWP_VIM_VERSIO
 Để ghim một bản phát hành, hãy dùng `--version` (xem [Chọn phiên bản](#choose-a-version)); với một nhánh hoặc một commit, hãy đặt `DWP_VIM_REF`. Nên ưu tiên dùng bản phát hành: các bản phát hành trước `v0.4.0` không có các thao tác kiểu VS Code, trình duyệt kế hoạch, trình xem Markdown hay trình cài đặt này.
 
 ```bash
-curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
-curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256
-shasum -a 256 -c install.sh.sha256
 # pin a specific release, here the previous one
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
+curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
+shasum -a 256 -c install.sh.sha256 && \
 bash install.sh --version 0.4.2
 ```
 

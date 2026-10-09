@@ -134,10 +134,10 @@ To update, run a newer release's installer, or run `bash install.sh --version la
 To pin a release, use `--version` (see [Choose a version](#choose-a-version)); for a branch or a commit, set `DWP_VIM_REF`. Prefer a release: releases before `v0.4.0` do not include the gestures, the plan browser, the Markdown viewer or this installer.
 
 ```bash
-curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
-curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256
-shasum -a 256 -c install.sh.sha256
 # pin a specific release, here the previous one
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
+curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
+shasum -a 256 -c install.sh.sha256 && \
 bash install.sh --version 0.4.2
 ```
 

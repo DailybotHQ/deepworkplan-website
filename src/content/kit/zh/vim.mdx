@@ -136,10 +136,10 @@ bash install.sh --version 0.5.0 --nvim 0.12.5 --skip-packages --strict
 要固定某个版本，请使用 `--version`（参见[选择版本](#choose-a-version)）；如需分支或提交，请设置 `DWP_VIM_REF`。建议使用正式版本：`v0.4.0` 之前的版本不包含手势、计划浏览器、Markdown 查看器以及此安装程序。
 
 ```bash
-curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
-curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256
-shasum -a 256 -c install.sh.sha256
 # pin a specific release, here the previous one
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
+curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
+shasum -a 256 -c install.sh.sha256 && \
 bash install.sh --version 0.4.2
 ```
 

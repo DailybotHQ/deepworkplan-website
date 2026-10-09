@@ -136,10 +136,10 @@ Untuk memperbarui, jalankan pemasang dari rilis yang lebih baru, atau jalankan `
 Untuk mengunci sebuah rilis, gunakan `--version` (lihat [Memilih versi](#choose-a-version)); untuk cabang atau commit, setel `DWP_VIM_REF`. Utamakan rilis: rilis sebelum `v0.4.0` tidak memuat gestur, penjelajah rencana, penampil Markdown, maupun pemasang ini.
 
 ```bash
-curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
-curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256
-shasum -a 256 -c install.sh.sha256
 # pin a specific release, here the previous one
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
+curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
+shasum -a 256 -c install.sh.sha256 && \
 bash install.sh --version 0.4.2
 ```
 

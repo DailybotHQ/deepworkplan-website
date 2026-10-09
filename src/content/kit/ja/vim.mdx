@@ -136,10 +136,10 @@ bash install.sh --version 0.5.0 --nvim 0.12.5 --skip-packages --strict
 リリースを固定するには `--version` を使います（[バージョンを選ぶ](#choose-a-version)を参照）。ブランチやコミットには `DWP_VIM_REF` を設定します。リリースをおすすめします。`v0.4.0` より前のリリースには、VS Code 風の操作、計画ブラウザ、Markdown ビューア、このインストーラが含まれていません。
 
 ```bash
-curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
-curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256
-shasum -a 256 -c install.sh.sha256
 # pin a specific release, here the previous one
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
+curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
+shasum -a 256 -c install.sh.sha256 && \
 bash install.sh --version 0.4.2
 ```
 
