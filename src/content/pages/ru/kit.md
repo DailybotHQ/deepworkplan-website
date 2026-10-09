@@ -10,10 +10,10 @@ lastUpdated: 2026-10-09
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
-Текущий пакет 6.x по умолчанию создает новые планы в формате v6. Существующие планы сохраняют записанное поколение; для миграции требуется явный запрос.
+Текущий пакет 7.x по умолчанию создает новые планы в формате v7. Существующие планы сохраняют записанное поколение; для миграции требуется явный запрос.
 
 ### Навык и его под-навыки
 

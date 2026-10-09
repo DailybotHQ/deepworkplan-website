@@ -106,6 +106,9 @@ Pasang skill agar agent repositori ini dapat merencanakan dan mengeksekusi peker
 ditambah sembilan sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`, `author`, dan `upgrade`.
 
 ```bash
+# pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
+# or the latest published release:
 npx skills add DailybotHQ/deepworkplan-skill
 ```
 
@@ -123,12 +126,12 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Standar dan model eksekusi saat ini
 
-Standar yang berorientasi repositori saat ini adalah **DWP 6.0.0**, diimplementasikan
+Standar yang berorientasi repositori saat ini adalah **DWP 7.0.0**, diimplementasikan
 oleh rilis skill Deep Work Plan yang dipasang di atas. Paket skill saat ini mencakup
 router ditambah sembilan sub-skill: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, dan `upgrade`.
 
-Rilis skill yang dipasang: **6.0.2**. Paket 6.x saat ini membuat rencana baru menggunakan v6 secara default. Rencana yang ada mempertahankan generasi tercatat; pemindahan rencana v5 ke v6 memerlukan migrasi eksplisit yang ditinjau sebelumnya.
+Rilis skill yang dipasang: **7.0.1**. Paket 7.x saat ini membuat rencana baru menggunakan v7 secara default. Rencana yang ada mempertahankan generasi tercatat; pemindahan rencana v5 ke v6 memerlukan migrasi eksplisit yang ditinjau sebelumnya.
 
 Standar ini sengaja dibuat proporsional, dan menjadikan proporsi tersebut sebagai
 properti dari rencana, bukan disiplin pengembang. Sebuah rencana adalah **Lite** —
@@ -144,29 +147,41 @@ ringkas tidak lagi cukup untuk membawa sebuah persyaratan atau gate.
 Untuk rencana Full, repositori adalah permukaan eksekusi yang bertahan lama. Rencana
 berisi tugas-tugas atomik, sebuah **Permukaan tersentuh** yang menjelaskan apa yang
 berubah dan konsumen mana yang terdampak, kriteria penerimaan, dan gate validasi
-yang dipilih dari peta pengujian repositori yang terdokumentasi. Pada v6, pembuatan menulis manifes identitas, lalu kontrak dan peristiwa persetujuan. Jurnal yang hanya ditambah mencatat eksekusi; `state.json` adalah snapshot yang diturunkan dari jurnal tersebut. Setiap langkah dapat dipulihkan setelah gangguan.
+yang dipilih dari peta pengujian repositori yang terdokumentasi. Rencana baru menulis manifes identitasnya, lalu kontrak berversinya, lalu peristiwa persetujuannya. Jurnal yang hanya ditambah mencatat eksekusi; `state.json` adalah snapshot yang diturunkan dari jurnal tersebut. Setiap langkah dapat dipulihkan setelah gangguan.
 
-Generasi skema tetap terkait dengan setiap rencana. Rencana v5 mempertahankan
-`state.json` dengan skema https://deepworkplan.com/schema/plan-state/v5.json.
-Rencana baru yang secara default dibuat oleh paket 6.x saat ini menggunakan
-https://deepworkplan.com/schema/plan-manifest/v6.json untuk `manifest.json`;
-proyeksi aktifnya adalah snapshot di
-https://deepworkplan.com/schema/plan-snapshot/v6.json. Tidak ada
-`plan-state/v6.json`: v6 menggunakan snapshot, bukan skema status v5 yang
-sekadar diganti nama. Rencana yang ada mempertahankan generasi tercatat dan
-tidak pernah ditulis ulang. v6 mempertahankan metodologi v5 dengan struktur
-lebih ketat; non-inferioritas hasil agen belum diukur.
+Generasi skema tetap terkait dengan setiap rencana. Paket 7.x saat ini membuat
+rencana **v7** secara default: `manifest.json` mengikuti
+https://deepworkplan.com/schema/plan-manifest/v7.json,
+[kontrak](https://deepworkplan.com/schema/plan-contract/v7.json) menambahkan penanda
+tugas `parallel_safe` opsional ke kontrak v6, dan setiap
+[peristiwa jurnal](https://deepworkplan.com/schema/journal-event/v7.json) juga dapat
+mencatat sebuah `delegation`. Proyeksi aktif tetap memakai snapshot yang tidak berubah di
+https://deepworkplan.com/schema/plan-snapshot/v6.json, dan
+[manifes konteks tugas](https://deepworkplan.com/schema/context-manifest/v6.json)
+digunakan bersama dengan v6. Permintaan `v6` yang eksplisit tetap menghasilkan rencana v6.
+Sebuah rencana tidak pernah berganti generasi: rencana v6 mempertahankan skema v6-nya
+([manifes](https://deepworkplan.com/schema/plan-manifest/v6.json),
+[kontrak](https://deepworkplan.com/schema/plan-contract/v6.json),
+[peristiwa jurnal](https://deepworkplan.com/schema/journal-event/v6.json)) dan
+berjalan tanpa perubahan; rencana v5 mempertahankan `state.json` dengan skema
+https://deepworkplan.com/schema/plan-state/v5.json; rencana v1, v2, dan v5 yang ada
+tidak pernah ditulis ulang atau dimigrasikan secara implisit, dan pemindahan rencana
+v5 ke v6 memerlukan migrasi eksplisit yang ditinjau sebelumnya.
 
-- `contract.json`: https://deepworkplan.com/schema/plan-contract/v6.json
-- `journal event`: https://deepworkplan.com/schema/journal-event/v6.json
-- `context manifest`: https://deepworkplan.com/schema/context-manifest/v6.json
+Addon opsional dicatat per repositori di registri addon yang dilacak,
+`.dwp/config.json` (https://deepworkplan.com/schema/dwp-config/v1.json): jika tidak
+ada, artinya tidak diaktifkan, dan metodologi tetap berfungsi dengan semua addon
+dinonaktifkan. Rencana v7 boleh menyerahkan tugas `parallel_safe` ke agen pengodean
+lain hanya jika kontraknya memberikan `agent_delegation` dan addon delegasi (agentkit
+atau Herdr) diaktifkan serta terdeteksi; hasil dari delegasi tetap berupa klaim
+sampai runner gate milik rencana itu sendiri mengamatinya.
 
 Setiap rencana memiliki satu tugas penutup wajib: **Final Review**. Ia menjalankan
 pemeriksaan keamanan atas seluruh kumpulan perubahan yang terakumulasi, termasuk
 review lokal AI Diff Reviewer yang wajib, memvalidasi status akhir repositori,
 merekonsiliasi skill yang digunakan oleh tugas-tugas, dan mencatat bukti serta
 keterbatasan. Skill review lokal dipasang pada rilis yang dipatok; perintah yang
-saat ini didokumentasikan menggunakan `DailybotHQ/ai-diff-reviewer@v3.2.2`. GitHub
+saat ini didokumentasikan memasang `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0`. GitHub
 Action adalah permukaan CI terpisah yang opsional, dan tidak pernah wajib untuk
 metodologi inti.
 
@@ -216,14 +231,15 @@ Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga d
 
 Setelah onboarding dasar, pasang **tinjauan lokal AI Diff Reviewer** (Fase 7a — wajib sejak
 standar 2.3.0): skill vendored yang dipatok pada tag
-(`npx --yes skills add DailybotHQ/ai-diff-reviewer@v3.2.2 --skill ai-diff-reviewer -y`) ditambah
+(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) ditambah
 `.review/extension.md` yang disesuaikan dengan repo melalui `generate-extension`, di bawah persetujuan
-onboarding. Lalu sebutkan keempat addon opsional (devcontainer, Dailybot, dependency-upgrade,
-design-system) dan tawarkan masing-masing sebagai opt-in eksplisit. Sebuah repositori sepenuhnya
+onboarding. Lalu sebutkan ketujuh addon opsional (devcontainer, Dailybot, dependency upgrade,
+design system, agentkit, Herdr, DeepWorkPlan Vim) dan tawarkan masing-masing sebagai opt-in eksplisit,
+serta catat setiap penerimaan di `.dwp/config.json`. Sebuah repositori sepenuhnya
 konforman dengan **nol** addon opsional — jangan pernah memasang yang itu secara otomatis.
 
-- **Dukungan devcontainer** — kontainer pengembangan yang terisolasi dan dapat direproduksi dengan autentikasi AI-CLI yang persisten.
-- **Integrasi Dailybot** — empat peristiwa siklus hidup (kickoff, tugas signifikan, terblokir, penyelesaian) sebagai pelaporan kemajuan secara best-effort untuk tim yang sudah memakai Dailybot, dengan penegakan hook otonom opsional (`dailybot-cli >= 3.9.0`). Memasang skill agent Dailybot yang dipasangkan (3.23.2) juga membuka chat, check-in, penulisan form, tanya AI, board dan tugas Plan, API key per repo, dan lainnya — addon ini hanya menghubungkan pelaporan ke eksekusi DWP. Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
+- **Dukungan devcontainer** — integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.1.4`): `dck init` merender template Dev Containers dan merekonsiliasi devcontainer yang sudah ada hanya setelah diff-nya diterima; base image dikirim tanpa coding agent.
+- **Integrasi Dailybot** — empat peristiwa siklus hidup (kickoff, tugas signifikan, terblokir, penyelesaian) sebagai pelaporan kemajuan secara best-effort untuk tim yang sudah memakai Dailybot, dengan penegakan hook otonom opsional (`dailybot-cli >= 3.9.0`). Memasang skill agent Dailybot yang dipasangkan (3.23.3) juga membuka chat, check-in, penulisan form, tanya AI, board dan tugas Plan, API key per repo, dan lainnya — addon ini hanya menghubungkan pelaporan ke eksekusi DWP. Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan. Ketika
   diterima, ia memasang command `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` opsional hanya untuk repositori dengan permukaan antarmuka yang
@@ -231,6 +247,9 @@ konforman dengan **nol** addon opsional — jangan pernah memasang yang itu seca
   infrastruktur). Tiga profil ditumpuk dalam satu berkas: visual-ui (sangat direkomendasikan saat
   terdeteksi; instalasi dijaga oleh penerimaan), cli-output, dan conversational — dua yang terakhir selalu ditanyakan, tidak pernah
   diterapkan secara otomatis.
+- **agentkit** — instalasi tingkat mesin dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok pada `v0.1.1`) untuk rencana yang menyerahkan tugas `parallel_safe` yang terbatas ke coding agent lain (headless, satu `ak run` per delegasi di worktree-nya sendiri); flag otonomi tidak pernah ditambahkan secara default.
+- **Herdr** — instalasi tingkat mesin dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok pada `v0.1.0`, ditambah skill resmi Herdr) untuk rencana yang meminta satu balasan yang diotorisasi dari agent rekan di panel Herdr, di mesin mana pun.
+- **DeepWorkPlan Vim** — editor terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), dipatok pada `v0.4.2`), instalasi tingkat mesin yang tidak pernah menimpa konfigurasi Neovim yang sudah ada tanpa persetujuan eksplisit.
 - **AI Diff Reviewer** — tinjauan lokal yang wajib (bukan opt-in): pemeriksaan keamanan setiap Final
   Review menjalankan [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill +
   `.review/extension.md` wajib) atas kumpulan perubahan rencana yang terakumulasi. Skill atau ekstensi

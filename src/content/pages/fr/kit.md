@@ -10,10 +10,10 @@ Le kit est tout ce dont vous avez besoin pour exécuter la méthodologie en prat
 `DailybotHQ/deepworkplan-skill` :
 
 ```bash
-npx skills add DailybotHQ/deepworkplan-skill@v6.0.2 --skill deepworkplan
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
 ```
 
-Le pack 6.x actuel crée les nouveaux plans en v6 par défaut. Les plans existants conservent leur génération enregistrée ; une migration exige une demande explicite.
+Le pack 7.x actuel crée les nouveaux plans en v7 par défaut. Les plans existants conservent leur génération enregistrée ; une migration exige une demande explicite.
 
 ### Le skill et ses sous-skills
 
