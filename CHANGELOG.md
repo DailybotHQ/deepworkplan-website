@@ -9,6 +9,13 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.37] - 2026-10-09
+
+### Changed
+
+- fix(docker): fall back to the release installer and wire the token secret
+- chore(docker): install DeepWorkPlan Vim with the hosted v0.5.0 installer
+
 ## [5.0.36] - 2026-10-09
 
 ### Changed
@@ -1105,7 +1112,8 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.36...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.37...HEAD
+[5.0.37]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.37
 [5.0.36]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.36
 [5.0.35]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.35
 [5.0.34]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.34
