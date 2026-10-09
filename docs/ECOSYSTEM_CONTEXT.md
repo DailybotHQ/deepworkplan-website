@@ -29,7 +29,7 @@ deepworkplan-skill pins).
 | agent-skill | Addon: Dailybot reporting | Public | `v3.23.3` | `/kit/dailybot` | Vendored `dailybot` skill (auto-refreshed on every site release); **also owned by the Dailybot hub** |
 | devcontainer-kit | Addon: development containers | Public | `v0.1.4` | `/kit/devcontainer`, `/init.md` | Documented only |
 | coding-agents-kit | Addon: coding-agent installer | Public | `v0.1.1` | `/kit/agentkit`, `/init.md` | Documented only |
-| deepworkplan-vim | Addon: DeepWorkPlan Vim | Public | `v0.5.1` | `/kit/vim` (and `vim.deepworkplan.com`), `/init.md`, `public/vim/install.sh` | Documented and served (installer mirror) |
+| deepworkplan-vim | Addon: DeepWorkPlan Vim | Public | `v0.4.2` (the pack's addon pin) and `v0.5.1` (the product page and installer mirror) | `/init.md` and the kit plate (`v0.4.2`); `/kit/vim` (and `vim.deepworkplan.com`) and `public/vim/install.sh` (`v0.5.1`) | Documented and served (installer mirror) |
 | herdr-peers | Addon: peer coordination | Public | `v0.1.0` | `/kit/herdr`, `/init.md` | Documented only |
 
 ## Pack, addons and site claims
