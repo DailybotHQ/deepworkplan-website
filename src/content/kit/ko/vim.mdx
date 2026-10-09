@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim**은 Deep Work Plan의 터미널 에디터예요. 터미널에서 일하는 사람과 코딩 에이전트를 위한 Neovim 설정으로, 계획과 문서, 모든 명령의 색인이 키 하나 거리에 있어요.
 
-이것은 독립된 선택 제품이에요. Deep Work Plan 스킬을 설치하지도 요구하지도 않으며, DWP v6 온보딩에 포함되지도 않아요. 컴퓨터에 따로 추가하면 되고, 계획이 있든 없든 에디터로 동작해요.
+이것은 독립된 제품으로, Deep Work Plan v7 베타(`v7.0.0-beta.1`, 사전 출시 버전)의 선택 `vim` 애드온으로 제공돼요. Deep Work Plan은 어떤 에디터와도, 에디터 없이도 동작하며, 이 에디터도 Deep Work Plan을 요구하지 않아요. 컴퓨터에 따로 추가하면 되고, 계획이 있든 없든 에디터로 동작해요. 이 페이지는 릴리스 **v0.4.0**을 설명해요.
 
 ## Deep Work Plan에 터미널 에디터가 필요한 이유
 
@@ -60,7 +60,7 @@ DeepWorkPlan Vim이 바로 그런 에디터예요. 언어 서버, 자동 완성,
 
 ## 설치
 
-설치는 한 줄이 전부예요. 실행하면 저장소가 현재 `main`에서 제공하는 내용이 설치돼요.
+설치는 한 줄이 전부예요. 그대로 실행하면 저장소의 `main` 브랜치가 설치돼요. 이 페이지가 설명하는 릴리스를 정확히 설치하려면 `DWP_VIM_REF=v0.4.0`을 설정하세요.
 
 <VimInstall lang="ko">
 
@@ -78,7 +78,7 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 4. 저장소 자체의 `lua install.lua`를 실행해요.
 5. 플러그인을 헤드리스로 설치하므로 종료했다가 다시 여는 단계가 없어요.
 
-스크립트를 먼저 읽고 싶다면 `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`로 내려받고, 위에 표시된 값과 SHA-256을 비교한 다음, 읽어 본 뒤 `bash install.sh`를 실행하세요.
+여기서 제공하는 스크립트는 `v0.4.0` 태그의 `install.sh`와 바이트 단위로 동일한 사본이에요. 먼저 읽고 싶다면 `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`로 내려받고, 위에 표시된 값과 SHA-256을 비교한 다음, 읽어 본 뒤 `DWP_VIM_REF=v0.4.0 bash install.sh`를 실행하세요.
 
 ## 요구 사항과 플랫폼
 
@@ -91,10 +91,10 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 
 업데이트하려면 설치 프로그램을 다시 실행하세요. 멱등이라서 기존 DeepWorkPlan Vim 체크아웃은 fast-forward로 업데이트되고, 로컬 변경은 절대 초기화되지 않아요.
 
-특정 브랜치, 태그, 커밋을 설치하려면 `DWP_VIM_REF`를 설정하세요. 오래된 태그에는 이 페이지에서 설명하는 기능이 모두 들어 있지 않을 수 있어요.
+특정 태그를 설치하려면 `DWP_VIM_REF`를 설정하세요. 브랜치가 아니라 태그로 고정하세요. `v0.4.0` 이전 릴리스에는 제스처, 계획 브라우저, Markdown 뷰어, 이 설치 프로그램이 들어 있지 않아요.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=<branch-tag-or-commit> bash
+curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
 ```
 
 제거하려면 설정 디렉터리에서 `lua delete.lua`를 실행하세요. 설정, 플러그인, Mason 데이터, 캐시와 상태, 설치 프로그램이 복사한 글꼴을 지우고, Neovim 실행 파일과 시스템 패키지는 그대로 둬요.
@@ -117,13 +117,17 @@ cd ~/.config/nvim && lua delete.lua
 
 아니요. 무엇보다 에디터예요. Deep Work Plan 스킬을 설치하지도 요구하지도 않아요. `.dwp/plans/` 폴더가 생기기 전까지 계획 브라우저가 보여 줄 것이 없을 뿐이에요.
 
+### v7 vim 애드온은 이것을 어떻게 쓰나요?
+
+Deep Work Plan v7 베타는 온보딩 중에 이 에디터를 선택 `vim` 애드온으로 제안해요. 애드온은 에디터의 `addon/surface.json`을 통해 기존 설치를 읽기 전용으로 감지하고, 버전이 고정되고 체크섬이 검증된 설치는 동의할 때만 제안해요. 명시적인 승인 없이 기존 Neovim 설정을 덮어쓰지 않으며, 결코 필수가 아니에요.
+
 ### 코딩 에이전트는 어떻게 쓰나요?
 
 터미널에서 일하는 사람과 코딩 에이전트를 위해 만들었어요. 키바인딩은 계약 테스트로 고정되어 있어서, 손에 익은 감각과 에이전트의 기대가 업데이트 후에도 유지돼요.
 
 ### 어떤 버전을 받나요?
 
-`DWP_VIM_REF`를 설정하지 않으면 설치 프로그램은 `main`을 설치해요. 이 페이지는 그것이 설치하는 내용을 설명하며, 기능을 버전 번호에 묶지 않아요.
+`DWP_VIM_REF`를 설정하지 않으면 설치 프로그램은 `main`을 설치해요. 이 페이지는 여기 나열된 모든 기능을 담은 릴리스 `v0.4.0`을 설명해요. 정확히 그 릴리스를 받으려면 `DWP_VIM_REF=v0.4.0`을 설정하세요.
 
 ### 라이선스는 무엇이고 어디서 왔나요?
 
@@ -138,3 +142,5 @@ GPL-3.0이에요. Andrés M Prieto의 mu-vim에서 파생되었고, 크레딧은
 - [Devcontainer](/kit/devcontainer) — 재현 가능한 개발 환경(첫 번째 애드온)
 - [Dailybot](/kit/dailybot) — 팀에 보이는 계획 수명 주기 보고(두 번째 애드온)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — 계획 Final Review 동안의 로컬 리뷰(다섯 번째 애드온)
+- [Herdr](/kit/herdr) — Herdr 창에서 동료 에이전트에게 작업 위임(v7 베타)
+- [Agentkit](/kit/agentkit) — 모든 터미널 코딩 에이전트를 위한 하나의 명령과 헤드리스 위임(v7 베타)

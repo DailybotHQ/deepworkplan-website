@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** 是 Deep Work Plan 的终端编辑器：一套面向在终端中工作的人以及编程代理的 Neovim 配置。你的计划、文档和所有命令的索引，都只需一个按键。
 
-它是一个独立、可选的产品。它不会安装也不依赖 Deep Work Plan 技能，也不属于 DWP v6 的引导流程。你可以单独把它加到一台机器上，无论是否存在计划，它都能作为编辑器使用。
+它是一个独立的产品，作为 Deep Work Plan v7 beta（`v7.0.0-beta.1`，预发布版本）的可选 `vim` 附加组件提供。Deep Work Plan 可以搭配任何编辑器使用，也可以不用编辑器；该编辑器同样不依赖 Deep Work Plan：你可以单独把它加到一台机器上，无论是否存在计划，它都能作为编辑器使用。本页描述的是 **v0.4.0** 版本。
 
 ## 为什么要为 Deep Work Plan 准备终端编辑器
 
@@ -60,7 +60,7 @@ DeepWorkPlan Vim 就是这样的编辑器。它是一套精心整理的 Neovim �
 
 ## 安装
 
-整个安装只需一行。运行它会安装仓库当前在 `main` 上提供的内容。
+整个安装只需一行。单独运行时，它会安装仓库的 `main` 分支；设置 `DWP_VIM_REF=v0.4.0` 即可精确安装本页所描述的版本。
 
 <VimInstall lang="zh">
 
@@ -78,7 +78,7 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 4. 运行仓库自带的 `lua install.lua`。
 5. 以无界面方式安装插件，因此无需退出再重新打开。
 
-想先阅读脚本，可用 `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` 下载，将其 SHA-256 与上方显示的值比对，阅读之后再运行 `bash install.sh`。
+此处提供的脚本与 `v0.4.0` 标签下的 `install.sh` 逐字节相同。想先阅读它，可用 `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` 下载，将其 SHA-256 与上方显示的值比对，阅读之后再运行 `DWP_VIM_REF=v0.4.0 bash install.sh`。
 
 ## 要求与平台
 
@@ -91,10 +91,10 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 
 再次运行安装程序即可更新。它是幂等的：已有的 DeepWorkPlan Vim 检出会通过 fast-forward 更新，本地修改永远不会被重置。
 
-要安装指定的分支、标签或提交，请设置 `DWP_VIM_REF`。较旧的标签可能不包含本页描述的全部功能。
+要安装指定的标签，请设置 `DWP_VIM_REF`。请固定到标签而不是分支：`v0.4.0` 之前的版本不包含手势、计划浏览器、Markdown 查看器以及此安装程序。
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=<branch-tag-or-commit> bash
+curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
 ```
 
 要卸载，请在配置目录中运行 `lua delete.lua`。它会移除配置、插件、Mason 数据、缓存与状态，以及安装程序复制的字体，但保留 Neovim 可执行文件和你的系统软件包。
@@ -117,13 +117,17 @@ cd ~/.config/nvim && lua delete.lua
 
 不需要。它首先是一个编辑器。它不会安装也不依赖 Deep Work Plan 技能；在存在 `.dwp/plans/` 文件夹之前，计划浏览器只是没有内容可列。
 
+### v7 的 vim 附加组件如何使用它？
+
+Deep Work Plan v7 beta 在引导流程中将该编辑器作为可选的 `vim` 附加组件提供。该附加组件通过编辑器的 `addon/surface.json` 以只读方式检测已有安装，并且只有在征得你同意后，才会提供固定版本、经校验和验证的安装。未经明确批准，它绝不会覆盖已有的 Neovim 配置，而且它从来不是必需的。
+
 ### 编程代理如何使用它？
 
 它为在终端中工作的人和编程代理而构建。它的键位映射由契约测试固定，因此肌肉记忆以及代理的预期都能在更新后保持不变。
 
 ### 我得到的是哪个版本？
 
-除非设置 `DWP_VIM_REF`，安装程序安装的是 `main`。本页描述的是它所安装的内容，不把任何功能与版本号绑定。
+除非设置 `DWP_VIM_REF`，安装程序安装的是 `main`。本页描述的是 `v0.4.0` 版本，它包含此处列出的全部功能；设置 `DWP_VIM_REF=v0.4.0` 即可精确获得该版本。
 
 ### 它采用什么许可证，源自哪里？
 
@@ -138,3 +142,5 @@ GPL-3.0。它派生自 Andrés M Prieto 的 mu-vim，署名保留在仓库中。
 - [Devcontainer](/kit/devcontainer) — 可复现的开发环境（第一个附加组件）
 - [Dailybot](/kit/dailybot) — 团队可见的计划生命周期报告（第二个附加组件）
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — 计划最终评审期间的本地评审（第五个附加组件）
+- [Herdr](/kit/herdr) — 在 Herdr 窗格中将任务委派给对等代理（v7 beta）
+- [Agentkit](/kit/agentkit) — 一条命令覆盖所有终端编程代理，并支持无头委派（v7 beta）

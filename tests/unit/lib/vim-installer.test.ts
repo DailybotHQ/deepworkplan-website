@@ -8,6 +8,8 @@ import {
   getInstallerFacts,
   VIM_INSTALL_COMMAND,
   VIM_INSTALL_URL,
+  VIM_INSTALLER_TAG,
+  VIM_INSTALLER_TAG_SHA256,
   VIM_REPO_INSTALL_URL,
 } from '@/lib/vim-installer';
 
@@ -36,6 +38,13 @@ describe('getInstallerFacts', () => {
 
   it('points at the canonical installer URL', () => {
     expect(getInstallerFacts().url).toBe(VIM_INSTALL_URL);
+  });
+});
+
+describe('installer provenance', () => {
+  it('serves the byte-identical installer of the pinned product release', () => {
+    expect(VIM_INSTALLER_TAG).toBe('v0.4.0');
+    expect(getInstallerFacts().sha256).toBe(VIM_INSTALLER_TAG_SHA256);
   });
 });
 

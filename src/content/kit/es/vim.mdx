@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** es el editor de terminal de Deep Work Plan: una configuración de Neovim para personas, y para agentes de programación, que trabajan en una terminal. Tus planes, tu documentación y un índice de todos los comandos quedan a una tecla de distancia.
 
-Es un producto aparte y opcional. No instala ni requiere la skill de Deep Work Plan, y no forma parte del onboarding de DWP v6. Lo añades a una máquina por separado y funciona como editor haya o no un plan.
+Es un producto aparte, ofrecido como el addon opcional `vim` de la beta de Deep Work Plan v7 (`v7.0.0-beta.1`, una versión preliminar). Deep Work Plan funciona con cualquier editor o con ninguno, y el editor no requiere Deep Work Plan: lo añades a una máquina por separado y funciona como editor haya o no un plan. Esta página describe la versión **v0.4.0**.
 
 ## Por qué un editor de terminal para Deep Work Plan
 
@@ -60,7 +60,7 @@ Para leer en el sitio los archivos Markdown de un plan, `SPC m p` previsualiza e
 
 ## Instalación
 
-Toda la instalación es una línea. Al ejecutarla se instala lo que el repositorio publica ahora mismo en `main`.
+Toda la instalación es una línea. Por sí sola instala la rama `main` del repositorio; define `DWP_VIM_REF=v0.4.0` para instalar exactamente la versión que describe esta página.
 
 <VimInstall lang="es">
 
@@ -78,7 +78,7 @@ En orden, el instalador:
 4. Ejecuta el propio `lua install.lua` del repositorio.
 5. Instala los plugins sin interfaz, así que no hace falta salir y volver a abrir.
 
-Para leer primero el script, descárgalo con `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, compara su SHA-256 con el valor mostrado arriba, léelo y ejecuta `bash install.sh`.
+El script que se sirve aquí es una copia idéntica byte a byte de `install.sh` en la etiqueta `v0.4.0`. Para leerlo primero, descárgalo con `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, compara su SHA-256 con el valor mostrado arriba, léelo y ejecuta `DWP_VIM_REF=v0.4.0 bash install.sh`.
 
 ## Requisitos y plataformas
 
@@ -91,10 +91,10 @@ Para leer primero el script, descárgalo con `curl -fsSL https://deepworkplan.co
 
 Vuelve a ejecutar el instalador para actualizar. Es idempotente: una instalación existente de DeepWorkPlan Vim se actualiza con un fast-forward y los cambios locales nunca se descartan.
 
-Para instalar una rama, etiqueta o commit concretos, define `DWP_VIM_REF`. Las etiquetas antiguas pueden no incluir todas las funciones descritas en esta página.
+Para instalar una etiqueta concreta, define `DWP_VIM_REF`. Fija una etiqueta en lugar de una rama: las versiones anteriores a `v0.4.0` no incluyen los gestos, el navegador de planes, el visor de Markdown ni este instalador.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=<branch-tag-or-commit> bash
+curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
 ```
 
 Para desinstalar, ejecuta `lua delete.lua` desde el directorio de configuración. Elimina la configuración, los plugins, los datos de Mason, la caché y el estado, y la copia de la fuente que hizo el instalador, y deja intactos el binario de Neovim y tus paquetes del sistema.
@@ -117,13 +117,17 @@ La línea única no aplica en Windows. Usa la ruta manual del README del reposit
 
 No. Es un editor ante todo. No instala ni requiere la skill de Deep Work Plan; el navegador de planes simplemente no tiene nada que listar hasta que existe una carpeta `.dwp/plans/`.
 
+### ¿Cómo lo usa el addon vim de v7?
+
+La beta de Deep Work Plan v7 ofrece el editor como el addon opcional `vim` durante el onboarding. El addon detecta una instalación existente en modo de solo lectura, a través del `addon/surface.json` del editor, y ofrece la instalación fijada y verificada con suma de comprobación solo con tu consentimiento. Nunca sobrescribe una configuración de Neovim existente sin aprobación explícita, y nunca es obligatorio.
+
 ### ¿Cómo lo usan los agentes de programación?
 
 Está pensado para personas y para agentes de programación que viven en una terminal. Sus atajos están fijados por pruebas de contrato, así que la memoria muscular, y lo que espera un agente, sobreviven a las actualizaciones.
 
 ### ¿Qué versión obtengo?
 
-El instalador instala `main` salvo que definas `DWP_VIM_REF`. Esta página describe lo que eso instala; no vincula ninguna función a un número de versión.
+El instalador instala `main` salvo que definas `DWP_VIM_REF`. Esta página describe la versión `v0.4.0`, que incluye todas las funciones enumeradas aquí; define `DWP_VIM_REF=v0.4.0` para obtener exactamente esa versión.
 
 ### ¿Bajo qué licencia está y de dónde viene?
 
@@ -138,3 +142,5 @@ El código está en el [repositorio de DeepWorkPlan Vim](https://github.com/Dail
 - [Devcontainer](/kit/devcontainer) — entorno de desarrollo reproducible (primer addon)
 - [Dailybot](/kit/dailybot) — reportes del ciclo de vida del plan visibles para el equipo (segundo addon)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — revisión local durante las revisiones finales del plan (quinto addon)
+- [Herdr](/kit/herdr) — delegar una tarea a un agente par en un panel de Herdr (beta de v7)
+- [Agentkit](/kit/agentkit) — un solo comando para cada agente de programación de terminal, y delegación headless (beta de v7)

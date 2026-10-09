@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** adalah editor terminal untuk Deep Work Plan: konfigurasi Neovim untuk manusia, dan untuk agen pemrograman, yang bekerja di terminal. Rencana Anda, dokumentasi Anda, dan indeks semua perintah hanya sejauh satu tombol.
 
-Ini adalah produk terpisah dan opsional. Ia tidak memasang atau mensyaratkan skill Deep Work Plan, dan bukan bagian dari onboarding DWP v6. Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana.
+Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v7 beta (`v7.0.0-beta.1`, sebuah pra-rilis). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v0.4.0**.
 
 ## Mengapa editor terminal untuk Deep Work Plan
 
@@ -60,7 +60,7 @@ Untuk membaca berkas Markdown sebuah rencana di tempat, `SPC m p` mempratinjau b
 
 ## Instalasi
 
-Seluruh instalasi hanya satu baris. Menjalankannya memasang apa yang saat ini disediakan repositori di `main`.
+Seluruh instalasi hanya satu baris. Jika dijalankan apa adanya, ia memasang cabang `main` repositori; setel `DWP_VIM_REF=v0.4.0` untuk memasang tepat rilis yang dijelaskan halaman ini.
 
 <VimInstall lang="id">
 
@@ -78,7 +78,7 @@ Secara berurutan, pemasang:
 4. Menjalankan `lua install.lua` milik repositori itu sendiri.
 5. Memasang plugin secara headless, sehingga tidak ada langkah keluar lalu membuka ulang.
 
-Untuk membaca skrip lebih dulu, unduh dengan `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, bandingkan SHA-256-nya dengan nilai yang ditampilkan di atas, baca, lalu jalankan `bash install.sh`.
+Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install.sh` pada tag `v0.4.0`. Untuk membacanya lebih dulu, unduh dengan `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, bandingkan SHA-256-nya dengan nilai yang ditampilkan di atas, baca, lalu jalankan `DWP_VIM_REF=v0.4.0 bash install.sh`.
 
 ## Persyaratan dan platform
 
@@ -91,10 +91,10 @@ Untuk membaca skrip lebih dulu, unduh dengan `curl -fsSL https://deepworkplan.co
 
 Jalankan pemasang lagi untuk memperbarui. Pemasang bersifat idempoten: checkout DeepWorkPlan Vim yang sudah ada diperbarui dengan fast-forward, dan perubahan lokal tidak pernah di-reset.
 
-Untuk memasang cabang, tag, atau commit tertentu, setel `DWP_VIM_REF`. Tag lama mungkin tidak memuat semua fitur yang dijelaskan di halaman ini.
+Untuk memasang tag tertentu, setel `DWP_VIM_REF`. Sematkan tag, bukan cabang: rilis sebelum `v0.4.0` tidak memuat gestur, penjelajah rencana, penampil Markdown, maupun pemasang ini.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=<branch-tag-or-commit> bash
+curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
 ```
 
 Untuk mencopot, jalankan `lua delete.lua` dari direktori konfigurasi. Perintah ini menghapus konfigurasi, plugin, data Mason, cache dan status, serta salinan font yang dibuat pemasang, dan membiarkan biner Neovim serta paket sistem Anda.
@@ -117,13 +117,17 @@ Perintah satu baris tidak berlaku di Windows. Gunakan jalur manual di README rep
 
 Tidak. Ia adalah editor lebih dulu. Ia tidak memasang atau mensyaratkan skill Deep Work Plan; penjelajah rencana hanya tidak punya apa pun untuk dicantumkan sampai folder `.dwp/plans/` ada.
 
+### Bagaimana addon vim v7 menggunakannya?
+
+Deep Work Plan v7 beta menawarkan editor ini sebagai addon `vim` opsional selama onboarding. Addon tersebut mendeteksi instalasi yang sudah ada secara hanya-baca, melalui `addon/surface.json` milik editor, dan menawarkan instalasi yang disematkan serta terverifikasi checksum hanya dengan persetujuan Anda. Ia tidak pernah menimpa konfigurasi Neovim yang sudah ada tanpa persetujuan eksplisit, dan tidak pernah diwajibkan.
+
 ### Bagaimana agen pemrograman menggunakannya?
 
 Ia dibuat untuk manusia dan untuk agen pemrograman yang hidup di terminal. Pemetaan tombolnya dikunci oleh pengujian kontrak, sehingga ingatan otot, dan ekspektasi agen, bertahan melewati pembaruan.
 
 ### Versi mana yang saya dapatkan?
 
-Pemasang memasang `main` kecuali Anda menyetel `DWP_VIM_REF`. Halaman ini menjelaskan apa yang dipasangnya; ia tidak mengaitkan fitur mana pun dengan nomor versi.
+Pemasang memasang `main` kecuali Anda menyetel `DWP_VIM_REF`. Halaman ini menjelaskan rilis `v0.4.0`, yang memuat setiap fitur yang tercantum di sini; setel `DWP_VIM_REF=v0.4.0` untuk mendapatkan tepat rilis tersebut.
 
 ### Di bawah lisensi apa dan dari mana asalnya?
 
@@ -138,3 +142,5 @@ Kode sumbernya ada di [repositori DeepWorkPlan Vim](https://github.com/DailybotH
 - [Devcontainer](/kit/devcontainer) — lingkungan pengembangan yang dapat direproduksi (addon pertama)
 - [Dailybot](/kit/dailybot) — pelaporan siklus hidup rencana yang terlihat oleh tim (addon kedua)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — tinjauan lokal selama Final Review rencana (addon kelima)
+- [Herdr](/kit/herdr) — mendelegasikan tugas ke agen rekan di panel Herdr (v7 beta)
+- [Agentkit](/kit/agentkit) — satu perintah untuk setiap agen pemrograman terminal, dan delegasi headless (v7 beta)

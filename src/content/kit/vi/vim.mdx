@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** là trình soạn thảo trên terminal cho Deep Work Plan: một cấu hình Neovim dành cho con người, và cho các agent lập trình, làm việc trong terminal. Kế hoạch, tài liệu và chỉ mục của mọi lệnh chỉ cách bạn một phím bấm.
 
-Đây là một sản phẩm riêng và tùy chọn. Nó không cài đặt cũng không yêu cầu skill Deep Work Plan, và không thuộc quy trình onboarding của DWP v6. Bạn thêm nó vào máy một cách độc lập, và nó hoạt động như một trình soạn thảo dù có kế hoạch hay không.
+Đây là một sản phẩm riêng, được cung cấp dưới dạng addon `vim` tùy chọn của Deep Work Plan v7 beta (`v7.0.0-beta.1`, một bản phát hành trước). Deep Work Plan hoạt động với bất kỳ trình soạn thảo nào hoặc không cần trình soạn thảo, và trình soạn thảo này cũng không yêu cầu Deep Work Plan: bạn thêm nó vào máy một cách độc lập, và nó hoạt động như một trình soạn thảo dù có kế hoạch hay không. Trang này mô tả bản phát hành **v0.4.0**.
 
 ## Vì sao cần trình soạn thảo trên terminal cho Deep Work Plan
 
@@ -60,7 +60,7 @@ Nhấn Enter trên một kế hoạch để mở trình đọc: mục tiêu tron
 
 ## Cài đặt
 
-Toàn bộ việc cài đặt chỉ là một dòng. Chạy nó sẽ cài những gì kho mã hiện cung cấp trên `main`.
+Toàn bộ việc cài đặt chỉ là một dòng. Khi chạy riêng, nó cài nhánh `main` của kho mã; hãy đặt `DWP_VIM_REF=v0.4.0` để cài chính xác bản phát hành mà trang này mô tả.
 
 <VimInstall lang="vi">
 
@@ -78,7 +78,7 @@ Theo thứ tự, trình cài đặt:
 4. Chạy `lua install.lua` của chính kho mã.
 5. Cài các plugin ở chế độ headless, nên không cần thoát rồi mở lại.
 
-Để đọc tập lệnh trước, hãy tải nó bằng `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, so sánh SHA-256 của nó với giá trị hiển thị ở trên, đọc rồi mới chạy `bash install.sh`.
+Tập lệnh được cung cấp ở đây là bản sao giống hệt từng byte của `install.sh` tại thẻ `v0.4.0`. Để đọc nó trước, hãy tải bằng `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh`, so sánh SHA-256 của nó với giá trị hiển thị ở trên, đọc rồi mới chạy `DWP_VIM_REF=v0.4.0 bash install.sh`.
 
 ## Yêu cầu và nền tảng
 
@@ -91,10 +91,10 @@ Theo thứ tự, trình cài đặt:
 
 Chạy lại trình cài đặt để cập nhật. Nó có tính lũy đẳng: bản checkout DeepWorkPlan Vim hiện có được cập nhật bằng fast-forward, và các thay đổi cục bộ không bao giờ bị đặt lại.
 
-Để cài một nhánh, thẻ hoặc commit cụ thể, hãy đặt `DWP_VIM_REF`. Các thẻ cũ có thể không có đủ mọi tính năng được mô tả trên trang này.
+Để cài một thẻ cụ thể, hãy đặt `DWP_VIM_REF`. Hãy ghim một thẻ thay vì một nhánh: các bản phát hành trước `v0.4.0` không có các thao tác kiểu VS Code, trình duyệt kế hoạch, trình xem Markdown hay trình cài đặt này.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=<branch-tag-or-commit> bash
+curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
 ```
 
 Để gỡ cài đặt, chạy `lua delete.lua` từ thư mục cấu hình. Nó xóa cấu hình, plugin, dữ liệu Mason, bộ nhớ đệm và trạng thái, cùng bản sao phông chữ mà trình cài đặt đã tạo, và giữ nguyên tệp thực thi Neovim cùng các gói hệ thống của bạn.
@@ -117,13 +117,17 @@ Lệnh một dòng không áp dụng trên Windows. Hãy dùng cách thủ công
 
 Không. Trước hết nó là một trình soạn thảo. Nó không cài đặt cũng không yêu cầu skill Deep Work Plan; trình duyệt kế hoạch chỉ đơn giản là chưa có gì để liệt kê cho tới khi có thư mục `.dwp/plans/`.
 
+### Addon vim của v7 dùng nó như thế nào?
+
+Deep Work Plan v7 beta đề xuất trình soạn thảo này dưới dạng addon `vim` tùy chọn trong quá trình onboarding. Addon phát hiện bản cài đặt hiện có ở chế độ chỉ đọc, thông qua tệp `addon/surface.json` của trình soạn thảo, và chỉ đề xuất bản cài đặt được ghim phiên bản, đã xác minh checksum khi có sự đồng ý của bạn. Nó không bao giờ ghi đè cấu hình Neovim hiện có khi chưa được phê duyệt rõ ràng, và không bao giờ là bắt buộc.
+
 ### Các agent lập trình dùng nó như thế nào?
 
 Nó được xây dựng cho con người và cho các agent lập trình sống trong terminal. Các phím tắt của nó được cố định bằng kiểm thử hợp đồng, nên trí nhớ cơ bắp, và kỳ vọng của agent, vẫn còn qua các lần cập nhật.
 
 ### Tôi nhận được phiên bản nào?
 
-Trình cài đặt cài `main` trừ khi bạn đặt `DWP_VIM_REF`. Trang này mô tả những gì nó cài; nó không gắn tính năng nào với một số phiên bản.
+Trình cài đặt cài `main` trừ khi bạn đặt `DWP_VIM_REF`. Trang này mô tả bản phát hành `v0.4.0`, bản có đủ mọi tính năng được liệt kê ở đây; hãy đặt `DWP_VIM_REF=v0.4.0` để nhận chính xác bản phát hành đó.
 
 ### Nó theo giấy phép nào và đến từ đâu?
 
@@ -138,3 +142,5 @@ Mã nguồn nằm trong [kho mã DeepWorkPlan Vim](https://github.com/DailybotHQ
 - [Devcontainer](/kit/devcontainer) — môi trường phát triển tái lập được (addon đầu tiên)
 - [Dailybot](/kit/dailybot) — báo cáo vòng đời kế hoạch nhìn thấy được cho cả nhóm (addon thứ hai)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — đánh giá cục bộ trong các Final Review của kế hoạch (addon thứ năm)
+- [Herdr](/kit/herdr) — giao một tác vụ cho một agent ngang hàng trong một ô Herdr (v7 beta)
+- [Agentkit](/kit/agentkit) — một lệnh cho mọi agent lập trình trên terminal, và ủy quyền headless (v7 beta)

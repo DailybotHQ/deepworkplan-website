@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** は Deep Work Plan のターミナルエディタです。ターミナルで作業する人とコーディングエージェントのための Neovim 設定で、計画もドキュメントもすべてのコマンドの索引も、キー操作ひとつで手の届く場所にあります。
 
-これは独立した任意の製品です。Deep Work Plan のスキルをインストールすることも必要とすることもなく、DWP v6 のオンボーディングの一部でもありません。マシンには単独で追加でき、計画があってもなくてもエディタとして動作します。
+これは独立した製品で、Deep Work Plan v7 ベータ（`v7.0.0-beta.1`、プレリリース）の任意の `vim` アドオンとして提供されています。Deep Work Plan はどのエディタとも、エディタなしでも動作し、このエディタも Deep Work Plan を必要としません。マシンには単独で追加でき、計画があってもなくてもエディタとして動作します。このページはリリース **v0.4.0** を説明しています。
 
 ## なぜ Deep Work Plan にターミナルエディタなのか
 
@@ -60,7 +60,7 @@ DeepWorkPlan Vim はそのエディタです。言語サーバー、補完、リ
 
 ## インストール
 
-インストールは 1 行です。実行すると、リポジトリが現在 `main` で提供している内容がインストールされます。
+インストールは 1 行です。そのまま実行するとリポジトリの `main` ブランチがインストールされます。このページが説明するリリースを正確にインストールするには `DWP_VIM_REF=v0.4.0` を設定してください。
 
 <VimInstall lang="ja">
 
@@ -78,7 +78,7 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 4. リポジトリ自身の `lua install.lua` を実行します。
 5. プラグインをヘッドレスでインストールするため、終了して開き直す手順はありません。
 
-先にスクリプトを読むには、`curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` でダウンロードし、上に表示された値と SHA-256 を照合し、読んでから `bash install.sh` を実行してください。
+ここで配布しているスクリプトは、`v0.4.0` タグの `install.sh` とバイト単位で同一のコピーです。先に読むには、`curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` でダウンロードし、上に表示された値と SHA-256 を照合し、読んでから `DWP_VIM_REF=v0.4.0 bash install.sh` を実行してください。
 
 ## 要件とプラットフォーム
 
@@ -91,10 +91,10 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 
 更新するには、インストーラをもう一度実行します。冪等なので、既存の DeepWorkPlan Vim のチェックアウトは fast-forward で更新され、ローカルの変更がリセットされることはありません。
 
-特定のブランチ、タグ、コミットをインストールするには `DWP_VIM_REF` を設定します。古いタグには、このページで説明している機能がすべて含まれているとは限りません。
+特定のタグをインストールするには `DWP_VIM_REF` を設定します。ブランチではなくタグに固定してください。`v0.4.0` より前のリリースには、VS Code 風の操作、計画ブラウザ、Markdown ビューア、このインストーラが含まれていません。
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=<branch-tag-or-commit> bash
+curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
 ```
 
 アンインストールするには、設定ディレクトリで `lua delete.lua` を実行します。設定、プラグイン、Mason のデータ、キャッシュと状態、インストーラがコピーしたフォントを削除し、Neovim 本体とシステムのパッケージはそのまま残します。
@@ -117,13 +117,17 @@ cd ~/.config/nvim && lua delete.lua
 
 いいえ。まずはエディタです。Deep Work Plan のスキルをインストールすることも必要とすることもありません。`.dwp/plans/` フォルダが存在するまで、計画ブラウザに一覧するものがないだけです。
 
+### v7 の vim アドオンはどう使いますか？
+
+Deep Work Plan v7 ベータは、オンボーディング中にこのエディタを任意の `vim` アドオンとして提示します。アドオンはエディタの `addon/surface.json` を通じて既存のインストールを読み取り専用で検出し、固定されたチェックサム検証済みのインストールは、あなたの同意がある場合にのみ提示します。明示的な承認なしに既存の Neovim 設定を上書きすることはなく、必須になることもありません。
+
 ### コーディングエージェントはどう使いますか？
 
 ターミナルで動く人とコーディングエージェントのために作られています。キーバインドはコントラクトテストで固定されているため、筋肉記憶もエージェントの期待もアップデート後に保たれます。
 
 ### どのバージョンが入りますか？
 
-`DWP_VIM_REF` を設定しない限り、インストーラは `main` をインストールします。このページはそれがインストールする内容を説明するもので、機能をバージョン番号に結び付けてはいません。
+`DWP_VIM_REF` を設定しない限り、インストーラは `main` をインストールします。このページはリリース `v0.4.0` を説明しており、ここに挙げたすべての機能を含んでいます。そのリリースを正確に入手するには `DWP_VIM_REF=v0.4.0` を設定してください。
 
 ### ライセンスと由来は？
 
@@ -138,3 +142,5 @@ GPL-3.0 です。Andrés M Prieto による mu-vim から派生しており、�
 - [Devcontainer](/kit/devcontainer) — 再現可能な開発環境（最初のアドオン）
 - [Dailybot](/kit/dailybot) — チームに見える計画ライフサイクル報告（2 番目のアドオン）
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — 計画の最終レビューでのローカルレビュー（5 番目のアドオン）
+- [Herdr](/kit/herdr) — Herdr のペインでピアエージェントにタスクを委任（v7 ベータ）
+- [Agentkit](/kit/agentkit) — あらゆるターミナルのコーディングエージェントを 1 つのコマンドで扱い、ヘッドレス委任も可能（v7 ベータ）

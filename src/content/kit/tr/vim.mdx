@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim**, Deep Work Plan için terminal düzenleyicisidir: terminalde çalışan insanlar ve kodlama ajanları için bir Neovim yapılandırması. Planlarınız, belgeleriniz ve tüm komutların dizini tek bir tuş uzağınızda.
 
-Ayrı ve isteğe bağlı bir üründür. Deep Work Plan becerisini kurmaz ve gerektirmez, DWP v6 onboarding sürecinin de parçası değildir. Bir makineye tek başına eklersiniz ve plan olsun ya da olmasın düzenleyici olarak çalışır.
+Ayrı bir üründür ve Deep Work Plan v7 beta sürümünün (`v7.0.0-beta.1`, bir ön sürüm) isteğe bağlı `vim` eklentisi olarak sunulur. Deep Work Plan herhangi bir düzenleyiciyle ya da hiçbiriyle çalışır; düzenleyici de Deep Work Plan gerektirmez: bir makineye tek başına eklersiniz ve plan olsun ya da olmasın düzenleyici olarak çalışır. Bu sayfa **v0.4.0** sürümünü anlatır.
 
 ## Deep Work Plan için neden terminal düzenleyicisi
 
@@ -60,7 +60,7 @@ Bir planın Markdown dosyalarını yerinde okumak için `SPC m p` geçerli arabe
 
 ## Kurulum
 
-Kurulumun tamamı tek satırdır. Çalıştırdığınızda deponun şu anda `main` dalında sunduğu şey kurulur.
+Kurulumun tamamı tek satırdır. Tek başına çalıştırıldığında deponun `main` dalını kurar; bu sayfanın anlattığı sürümü tam olarak kurmak için `DWP_VIM_REF=v0.4.0` değerini ayarlayın.
 
 <VimInstall lang="tr">
 
@@ -78,7 +78,7 @@ Kurulum programı sırayla şunları yapar:
 4. Deponun kendi `lua install.lua` komutunu çalıştırır.
 5. Eklentileri başsız modda kurar; kapatıp yeniden açma adımı yoktur.
 
-Betiği önce okumak için `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` ile indirin, SHA-256 değerini yukarıda gösterilen değerle karşılaştırın, okuyun ve ardından `bash install.sh` çalıştırın.
+Burada sunulan betik, `v0.4.0` etiketindeki `install.sh` dosyasının bayt bayt aynı bir kopyasıdır. Önce okumak için `curl -fsSL https://deepworkplan.com/vim/install.sh -o install.sh` ile indirin, SHA-256 değerini yukarıda gösterilen değerle karşılaştırın, okuyun ve ardından `DWP_VIM_REF=v0.4.0 bash install.sh` çalıştırın.
 
 ## Gereksinimler ve platformlar
 
@@ -91,10 +91,10 @@ Betiği önce okumak için `curl -fsSL https://deepworkplan.com/vim/install.sh -
 
 Güncellemek için kurulum programını yeniden çalıştırın. Bu işlem idempotenttir: mevcut bir DeepWorkPlan Vim klonu fast-forward ile güncellenir ve yerel değişiklikler asla sıfırlanmaz.
 
-Belirli bir dal, etiket veya commit kurmak için `DWP_VIM_REF` değerini ayarlayın. Eski etiketler bu sayfada anlatılan tüm özellikleri içermeyebilir.
+Belirli bir etiketi kurmak için `DWP_VIM_REF` değerini ayarlayın. Dal yerine bir etiket sabitleyin: `v0.4.0` öncesindeki sürümler hareketleri, plan tarayıcısını, Markdown görüntüleyiciyi ya da bu kurulum programını içermez.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=<branch-tag-or-commit> bash
+curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
 ```
 
 Kaldırmak için yapılandırma dizininde `lua delete.lua` çalıştırın. Yapılandırmayı, eklentileri, Mason verilerini, önbelleği ve durumu ve kurulum programının yaptığı yazı tipi kopyasını kaldırır; Neovim ikili dosyasına ve sistem paketlerinize dokunmaz.
@@ -117,13 +117,17 @@ Tek satırlık komut Windows'ta geçerli değildir. Deponun README dosyasındaki
 
 Hayır. Önce bir düzenleyicidir. Deep Work Plan becerisini kurmaz ve gerektirmez; plan tarayıcısının, bir `.dwp/plans/` klasörü olana kadar listeleyecek bir şeyi olmaz.
 
+### v7 vim eklentisi bunu nasıl kullanır?
+
+Deep Work Plan v7 beta, onboarding sırasında düzenleyiciyi isteğe bağlı `vim` eklentisi olarak sunar. Eklenti, mevcut bir kurulumu düzenleyicinin `addon/surface.json` dosyası üzerinden salt okunur biçimde algılar ve sabitlenmiş, sağlama toplamı doğrulanmış kurulumu yalnızca onayınızla önerir. Açık onay olmadan mevcut bir Neovim yapılandırmasının üzerine asla yazmaz ve hiçbir zaman zorunlu değildir.
+
 ### Kodlama ajanları bunu nasıl kullanır?
 
 Terminalde yaşayan insanlar ve kodlama ajanları için yapılmıştır. Tuş atamaları sözleşme testleriyle sabitlenmiştir; böylece kas hafızası ve bir ajanın beklentileri güncellemelerden sağ çıkar.
 
 ### Hangi sürümü alırım?
 
-`DWP_VIM_REF` ayarlamadıkça kurulum programı `main` dalını kurar. Bu sayfa onun kurduğu şeyi anlatır; hiçbir özelliği bir sürüm numarasına bağlamaz.
+`DWP_VIM_REF` ayarlamadıkça kurulum programı `main` dalını kurar. Bu sayfa, burada listelenen tüm özellikleri içeren `v0.4.0` sürümünü anlatır; tam olarak o sürümü almak için `DWP_VIM_REF=v0.4.0` değerini ayarlayın.
 
 ### Hangi lisansla sunuluyor ve nereden geliyor?
 
@@ -138,3 +142,5 @@ Kaynak kod [DeepWorkPlan Vim deposunda](https://github.com/DailybotHQ/deepworkpl
 - [Devcontainer](/kit/devcontainer) — yeniden üretilebilir geliştirme ortamı (birinci eklenti)
 - [Dailybot](/kit/dailybot) — ekibe görünür plan yaşam döngüsü raporları (ikinci eklenti)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — plan Final Review'ları sırasında yerel inceleme (beşinci eklenti)
+- [Herdr](/kit/herdr) — bir görevi Herdr bölmesindeki eş bir ajana devretme (v7 beta)
+- [Agentkit](/kit/agentkit) — her terminal kodlama ajanı için tek komut ve arayüzsüz (headless) devretme (v7 beta)
