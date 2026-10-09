@@ -21,6 +21,8 @@ Welcome to the **deepworkplan.com** documentation. This guide helps developers a
 | [DESIGN.md](DESIGN.md) | Agent-facing design-system spec (Broadsheet tokens, components, WCAG do's & don'ts) — read before generating UI |
 | [Architecture](ARCHITECTURE.md) | Technical architecture, patterns, and decisions |
 | [Performance](PERFORMANCE.md) | SSG optimization, images, caching strategies |
+| [Ecosystem Context](ECOSYSTEM_CONTEXT.md) | The ecosystem hub role: repositories, posture, pack/addon/site claims, release order, boundaries |
+| [Cross-Project Standards](CROSS_PROJECT_STANDARDS.md) | Where work lands, repository boundaries, orchestrator plans, per-repo gates, PR conventions |
 
 ### Development Guides
 

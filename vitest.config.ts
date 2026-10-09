@@ -1,5 +1,5 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { defineConfig } from 'vitest/config';
+import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [svelte()],
@@ -16,6 +16,8 @@ export default defineConfig({
   test: {
     environment: 'happy-dom',
     include: ['tests/**/*.test.ts'],
+    // Ecosystem hub clones carry their own test suites; never collect them.
+    exclude: [...configDefaults.exclude, '**/repositories/**'],
     globals: true,
     setupFiles: ['tests/helpers/setup.ts'],
     coverage: {

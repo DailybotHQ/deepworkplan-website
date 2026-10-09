@@ -158,6 +158,8 @@ export default defineConfig({
           '**/.claude/**',
           '**/.dwp/**',
           '**/tmp/**',
+          // Ecosystem hub clones (scripts/repositories.sh) — separate repos
+          '**/repositories/**',
           // Tooling output
           '**/.lighthouseci/**',
           '**/.github/**',

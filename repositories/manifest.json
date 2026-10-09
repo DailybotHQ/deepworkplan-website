@@ -1,0 +1,69 @@
+{
+  "description": "DeepWorkPlan ecosystem hub: the public repositories scripts/repositories.sh clones into repositories/<name>. Every clone is git-ignored; only this manifest and README.md are tracked.",
+  "repositories": [
+    {
+      "name": "deepworkplan-skill",
+      "url": "https://github.com/DailybotHQ/deepworkplan-skill.git",
+      "default_branch": "main",
+      "role": "pack",
+      "visibility": "public",
+      "gate": "bats tests/",
+      "summary": "The DeepWorkPlan methodology packaged as an installable agent skill (the source of truth for the spec and kit)."
+    },
+    {
+      "name": "herdr-peers",
+      "url": "https://github.com/DailybotHQ/herdr-peers.git",
+      "default_branch": "main",
+      "role": "addon",
+      "visibility": "public",
+      "gate": "bash tests/run.sh",
+      "summary": "Peer-to-peer coordination for agents running side by side."
+    },
+    {
+      "name": "coding-agents-kit",
+      "url": "https://github.com/DailybotHQ/coding-agents-kit.git",
+      "default_branch": "main",
+      "role": "addon",
+      "visibility": "public",
+      "gate": "bash tests/run.sh",
+      "summary": "Installer and configuration kit for coding agents."
+    },
+    {
+      "name": "devcontainer-kit",
+      "url": "https://github.com/DailybotHQ/devcontainer-kit.git",
+      "default_branch": "main",
+      "role": "addon",
+      "visibility": "public",
+      "gate": "bash tests/run.sh",
+      "summary": "Development-container images and installer for agent-ready repositories."
+    },
+    {
+      "name": "deepworkplan-vim",
+      "url": "https://github.com/DailybotHQ/deepworkplan-vim.git",
+      "default_branch": "main",
+      "role": "addon",
+      "visibility": "public",
+      "gate": "bash tests/smoke/run.sh",
+      "summary": "DeepWorkPlan Vim: a Neovim distribution with a DWP plan reader and sidebar."
+    },
+    {
+      "name": "ai-diff-reviewer",
+      "url": "https://github.com/DailybotHQ/ai-diff-reviewer.git",
+      "default_branch": "main",
+      "role": "addon",
+      "visibility": "public",
+      "gate": "python3 -m unittest discover -s tests",
+      "summary": "AI Diff Reviewer: the local and CI pull-request reviewer behind the Ready label."
+    },
+    {
+      "name": "agent-skill",
+      "url": "https://github.com/DailybotHQ/agent-skill.git",
+      "default_branch": "main",
+      "role": "addon",
+      "visibility": "public",
+      "gate": "bats tests/",
+      "summary": "The Dailybot agent skill (reporting addon).",
+      "shared_with": "Also owned by the Dailybot hub: pull before editing and never keep unpushed work here, so the two hubs never double-edit."
+    }
+  ]
+}

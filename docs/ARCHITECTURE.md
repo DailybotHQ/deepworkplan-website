@@ -1,6 +1,6 @@
 # Architecture Guide
 
-This document describes the technical architecture of deepworkplan.com, the methodology-and-marketing site for the Deep Work Plan (DWP) methodology, built with Astro.
+This document describes the technical architecture of deepworkplan.com, the methodology-and-marketing site for the Deep Work Plan (DWP) methodology, built with Astro. The repository has a second role — the **DeepWorkPlan ecosystem hub** — described in [Ecosystem hub](#ecosystem-hub); the site architecture below never depends on it.
 
 ## High-Level Architecture
 
@@ -166,6 +166,24 @@ src/
 └── styles/
     └── global.css           # Global styles, Tailwind 4 @theme tokens, base browser-compat reset
 ```
+
+## Ecosystem hub
+
+Besides building the site, this repository is the **orchestrator hub** for the public DeepWorkPlan ecosystem (DWP archetype §3). The hub layer is deliberately separate from the site:
+
+```
+repositories/                 # git-ignored clones, one per ecosystem repository
+├── README.md                 # tracked: navigation index (role, visibility, gate, AGENTS.md link)
+├── manifest.json             # tracked: name, HTTPS URL, default branch, role, visibility, gate
+└── <name>/                   # e.g. deepworkplan-skill/, deepworkplan-vim/ — never committed here
+scripts/repositories.sh       # clone | status | pull | ls (bash 3.2, git, python3 stdlib)
+tests/scripts/repositories.test.sh   # offline fixture tests for the sync script (CI: `public hygiene` job)
+tests/unit/lib/hub-isolation.test.ts # pins that no site tool reads repositories/
+```
+
+- **Sync.** `scripts/repositories.sh` reads `repositories/manifest.json`; `clone` adds missing checkouts over HTTPS, `pull` fast-forwards only clean checkouts on their default branch, `status` reports branch, cleanliness and upstream distance. It never deletes, never touches a dirty or feature-branch checkout and never rewrites a remote.
+- **Toolchain isolation.** `tsconfig.json` (`exclude`), the Vite dev watcher (`server.watch.ignored` in `astro.config.mjs`), Biome (`files.includes`) and Vitest (`test.exclude`) name `repositories/` explicitly; Tailwind's source scan and every repository script skip it through `.gitignore` and their `src/`-scoped walks; Cloudflare Pages publishes `dist/` only. `tests/unit/lib/hub-isolation.test.ts` fails if any of that regresses.
+- **Boundaries and process.** Work for an ecosystem repository is committed inside its clone, never from the hub root; cross-repository work runs as an orchestrator plan whose children live in `repositories/<name>/.dwp/plans/`. See [Ecosystem Context](ECOSYSTEM_CONTEXT.md) and [Cross-Project Standards](CROSS_PROJECT_STANDARDS.md).
 
 ## Component Architecture
 
@@ -773,11 +791,69 @@ src/content/methodology/
 This repository runs on the methodology it documents.
 
 - **Vendored, repo-adapted `deepworkplan` skill.** The official DeepWorkPlan skill lives under `.agents/skills/deepworkplan/` and is **tracked in git**. It is adapted to this repository (kit wiring, onboarded conventions) and is **not** overwritten by the release dogfood step — update it only via an explicit, reviewed change that re-adapts it. A committed `skills-lock.json` records the install provenance.
-- **Auto-refreshed addon skills.** `.agents/skills/dailybot/` and `.agents/skills/ai-diff-reviewer/` are also vendored and tracked. [`release_and_publish.yml`](../.github/workflows/release_and_publish.yml) Step 1a refreshes **only those two** to their latest upstream tags on every website release. See [AGENTS.md → Vendored agent skills](../AGENTS.md).
+- **Auto-refreshed addon skills.** `.agents/skills/dailybot/` and `.agents/skills/ai-diff-reviewer/` are also vendored and tracked. [`release_and_publish.yml`](../.github/workflows/release_and_publish.yml) Step 1a refreshes **only those two** to their latest upstream tags on every website release. See [Vendored agent skills](#vendored-agent-skills).
 - **Thin command delegators.** The committed `dwp-*` commands (`/dwp-create`, `/dwp-execute`, `/dwp-refine`, `/dwp-resume`, `/dwp-status`) are ~20-line delegators that read the installed skill's sub-skills and follow them — no embedded logic in the command files themselves.
 - **The author sub-skill.** `/skill-create` and `/agent-create` are thin delegators to the skill's **author** sub-skill, which grows the repository's own skills, agents, and commands and keeps the `.agents/docs/` catalog in sync.
 - **The dependency-upgrade add-on.** `/lib-upgrade` delegates to the opt-in **dependency-upgrade** add-on, which reasons about the actual package manager (pnpm here) and upgrades in validated, revertible batches.
 - **`.dwp/` output.** All Deep Work Plan working state (plans) lives in the gitignored `.dwp/` directory (`.dwp/plans/`) — Lite and Full plans alike; there is no separate draft artifact. The legacy homegrown command engine has been retired in favor of the installed skill.
+
+### The `.agents/` directory
+
+The `.agents/` directory is the **canonical, cross-agent home** for everything that defines how AI assistants behave in this repo: skills, slash commands, agent definitions, internal documentation, and settings. The same content is consumed by Claude Code, Cursor AI, OpenAI Codex, Gemini, and any other coding agent that picks up local skills/commands.
+
+```
+.agents/
+├── agents/        # Agent definitions (architect, executor, reviewer, ...)
+├── commands/      # Slash commands (commit, pr, branch, dwp-*, ...)
+├── skills/        # Skill procedures (fix-lint, translate-sync, ...)
+├── docs/          # Catalogs and references (skills_agents_catalog.md, COMMANDS_REFERENCE.md)
+├── README.md      # Conventions for authoring skills, agents, and commands
+├── settings.json           # Claude Code env (env vars, experimental flags)
+└── settings.local.json     # Claude Code local permissions (git-tracked)
+```
+
+**Backward compatibility — `.claude/` and `.cursor/` symlinks:**
+
+Claude Code historically reads from `.claude/` and Cursor from `.cursor/` at the repo root. To keep both working without duplicating files, **both are symlinks to `.agents`**:
+
+```bash
+ls -la .claude .cursor
+# .claude -> .agents
+# .cursor -> .agents
+```
+
+This means every `.claude/...` or `.cursor/...` path (e.g., `.claude/skills/foo/SKILL.md`, `.cursor/hooks.json`) resolves transparently to `.agents/`. No tool, hook, or settings file needs to change for either agent to keep working.
+
+**Authoring rules (all agents):**
+
+- Use `.agents/...` as the canonical path in **all new documentation, prompts, and skill/command files**. Do not write `.claude/...` or `.cursor/...` in new content.
+- Do not edit files via the `.claude/` or `.cursor/` symlinks — edit the real files under `.agents/`.
+- Settings files (`settings.json`, `settings.local.json`) are Claude Code-specific but live in `.agents/` for symmetry. They're a no-op for other agents.
+- The `.agents/README.md` documents how to add new skills, commands, and agents.
+
+**Why the rename?** The `.agents/` name signals that the folder is shared across agents, matching the project-level `AGENTS.md` convention (which is itself the canonical file that `CLAUDE.md` symlinks to). It avoids implying that the contents are Claude-only.
+
+### Vendored agent skills
+
+Addons auto-refresh; `deepworkplan` is repo-adapted.
+
+`.agents/skills/deepworkplan/`, `.agents/skills/dailybot/`, and `.agents/skills/ai-diff-reviewer/` are **vendored copies** tracked in git and pinned via `skills-lock.json`. They are managed differently on purpose:
+
+| Skill | Upstream | Release auto-refresh | Why |
+|-------|----------|----------------------|-----|
+| `deepworkplan` | `DailybotHQ/deepworkplan-skill` | **No** | Repo-adapted DWP kit — blind reinstall would overwrite local adaptation. Update only via an explicit, reviewed change that re-adapts the skill to this repository. |
+| `dailybot` | `DailybotHQ/agent-skill` | **Yes** | Addon — safe to pin to latest upstream on every website release. |
+| `ai-diff-reviewer` | `DailybotHQ/ai-diff-reviewer` | **Yes** | Addon — safe to pin to latest upstream on every website release. |
+
+**How refresh works, in one paragraph.** [`release_and_publish.yml`](../.github/workflows/release_and_publish.yml) Step 1a fires on every merge to `main`, resolves the latest upstream tag of the two addon skills, installs only those that moved with `npx --yes skills add <repo>@<tag> --skill <name> --force -y` (both flags are required in a non-TTY runner), asserts that the installed version equals the requested tag, and commits the result alongside the version bump. A failed install or a version mismatch **fails the release**; a transient `gh` blip skips only that skill. Refresh is release-driven, never scheduled.
+
+**Editing policy.**
+- **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the next release overwrites those edits. Contribute upstream instead.
+- **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: changes there must be intentional and reviewed, contributed upstream first, then re-adapted deliberately.
+
+**Current vendored provenance (2026-10-09):** the `deepworkplan` copy is the stable upstream release **`v7.0.1`** (`latest`; a patch over `v7.0.0`, which superseded the field-tested `v7.0.0-beta.1`), installed with the tree-URL form the skills CLI honours — `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan --force -y` (the `@tag` form is not honoured) — the installed `version:` asserted equal to the tag, and all 171 files verified against the release `SHA256SUMS` (the tree is exactly that file set); `skills-lock.json` records `ref: v7.0.1` (added by hand — the skills CLI does not record the ref). The addon registry `.dwp/config.json` is tracked (the only tracked file under `.dwp/`): ai-diff-reviewer, dailybot, dependency-upgrade and design-system are enabled. `ai-diff-reviewer` is at **v3.3.0** and `dailybot` at **v3.23.3** (both refreshed by the release workflow's dogfood step on 2026-10-09, installed `version:` asserted equal to the tag; pack baseline `dailybot-cli >= 3.9.0`, the Plan sub-skill needs `>= 3.25.0`). Local adaptation remains the command delegators, refreshed from the skill's own `onboard/command-templates/`.
+
+> Full mechanics — the refresh sequence step by step, failure semantics, the official CLI publishing step and its namespace strategy, and the provenance history including this repository's own upstream contribution — live in [Addon refresh — the full sequence](#addon-refresh--the-full-sequence).
 
 ## Architecture Patterns
 

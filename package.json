@@ -9,7 +9,7 @@
     "url": "https://github.com/DailybotHQ/deepworkplan-website"
   },
   "type": "module",
-  "version": "5.0.34",
+  "version": "5.0.35",
   "packageManager": "pnpm@11.1.2",
   "engines": {
     "node": ">=24.20.0"
@@ -30,6 +30,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:scripts": "bash tests/scripts/repositories.test.sh",
+    "repositories": "bash scripts/repositories.sh",
     "images:optimize": "node scripts/optimize-images.mjs",
     "images:optimize:og": "node scripts/optimize-og-images.mjs",
     "images:webp": "echo 'All images are natively WebP — no generation needed'",
