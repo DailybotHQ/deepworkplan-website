@@ -13,13 +13,17 @@ ARG INSTALL_GROK_CLI=false
 
 # One apt-get update layer: packages, sshd drop-in, lua/rg/fd links, clean.
 # Host keys are NOT generated here (private keys must not bake into layers).
-# Do not apt-install neovim — nvim is the 0.12.5 tarball under ~/.local.
-# lua5.4, ripgrep, fd-find are required by mu-vim's installer.
+# Do not apt-install neovim — the DeepWorkPlan Vim installer (--nvim) puts the
+# sha256-verified Neovim release under ~/.local. It runs with --skip-packages,
+# so this layer provides everything the editor and its plugins build with:
+# git, curl, ca-certificates, lua5.4, ripgrep, fd-find, unzip, python3-venv,
+# tar, gzip, gcc, make, libc6-dev, fontconfig (nodejs comes from the base image).
 RUN apt-get update -y && \
     apt-get install --no-install-recommends -y \
       less git curl gnupg ca-certificates openssh-client openssh-server \
-      sudo nano lua5.4 ripgrep fd-find \
-      pipx python3 python3-pip python-is-python3 python3-neovim luarocks \
+      sudo nano lua5.4 ripgrep fd-find unzip tar gzip \
+      gcc make libc6-dev fontconfig \
+      pipx python3 python3-pip python3-venv python-is-python3 python3-neovim luarocks \
       chromium && \
     mkdir -p /var/run/sshd /etc/ssh/sshd_config.d && \
     rm -f /etc/ssh/ssh_host_* && \
@@ -46,7 +50,7 @@ RUN GH_ARCH="$(dpkg --print-architecture)" \
     && rm -rf /tmp/gh.tar.gz "/tmp/gh_${GH_VERSION}_linux_${GH_ARCH}" \
     && gh --version
 
-# mu-vim is the terminal editor. ~/.local/bin stays first on PATH for the nvim tarball.
+# DeepWorkPlan Vim is the terminal editor. ~/.local/bin stays first on PATH for nvim.
 ENV EDITOR=nvim
 ENV VISUAL=nvim
 ENV GIT_EDITOR=nvim
@@ -70,13 +74,13 @@ RUN mkdir -p "${PNPM_HOME}/bin" \
 # Keep Cline's session/settings store on a persistent path inside ~/.cline.
 ENV CLINE_DATA_DIR=/home/node/.cline/data
 
-# PATH: ~/.local/bin first (nvim tarball), then pnpm globals and optional CLIs.
+# PATH: ~/.local/bin first (nvim), then pnpm globals and optional CLIs.
 ENV PATH=/home/node/.local/bin:${PNPM_HOME}/bin:${PNPM_HOME}:/home/node/.cursor/bin:/home/node/.opencode/bin:/home/node/.grok/bin:$PATH
 
 # Container Node wins over IDE-bundled Node; ~/.local/bin stays first for nvim.
 RUN printf '%s\n' \
     '# Container-installed Node must win over IDE-bundled Node (Cursor Server, etc.).' \
-    '# ~/.local/bin stays first so the Neovim tarball wins over any apt nvim.' \
+    '# ~/.local/bin stays first so the installer'"'"'s Neovim wins over any apt nvim.' \
     'if [ -x /usr/local/bin/node ]; then' \
     '  case ":${PATH}:" in' \
     '    ":/usr/local/bin:"*) : ;;' \
@@ -219,41 +223,43 @@ USER root
 # Non-login SSH only sees /usr/local/bin. node cannot write there.
 RUN ln -sfn /home/node/.local/bin/herdr /usr/local/bin/herdr
 
-# Neovim 0.12.5 tarball into ~/.local (wins over any apt nvim).
+# DeepWorkPlan Vim from its hosted installer, pinned to a release. The
+# installer owns Neovim (--nvim: the official tarball, sha256-verified, in
+# ~/.local/opt and linked as ~/.local/bin/nvim), the config at the release tag
+# in ~/.config/nvim, pckr, the headless plugin sync and --strict (a failed sync
+# or a missing/empty plugin fails the build); --skip-packages relies on the apt
+# layer above. The hosted script is downloaded and verified against the
+# v${DWP_VIM_VERSION} release's install.sh.sha256 (a second origin); when the
+# website is unreachable or already serves a newer release, the release asset
+# itself is used (same checksum), so the build always runs the pinned bytes.
+# Never a pipe into a shell. Optional BuildKit secret `github_token` (compose:
+# DWP_GITHUB_TOKEN_FILE, see docker/local/README.md) authenticates the
+# installer's Neovim checksum lookup (GitHub API rate limit); it never lands in
+# a layer.
 USER node
+ARG DWP_VIM_VERSION=0.5.0
 ARG NVIM_VERSION=0.12.5
-RUN set -eu; \
-    arch="$(dpkg --print-architecture)"; \
-    case "$arch" in \
-      amd64) nvim_arch=linux-x86_64 ;; \
-      arm64) nvim_arch=linux-arm64 ;; \
-      *) echo "unsupported arch for neovim tarball: $arch" >&2; exit 1 ;; \
-    esac; \
-    tmp="$(mktemp)"; \
-    curl -fsSL "https://github.com/neovim/neovim/releases/download/v${NVIM_VERSION}/nvim-${nvim_arch}.tar.gz" -o "$tmp"; \
-    mkdir -p /home/node/.local; \
-    tar -xzf "$tmp" -C /home/node/.local --strip-components=1; \
-    rm -f "$tmp"; \
-    test -x /home/node/.local/bin/nvim
-
-# Pin DailybotHQ/deepworkplan-vim release tag. install.lua answers: custom dir No, extras blank.
-ARG DWP_VIM_REF=main
-RUN GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
-    git clone https://github.com/DailybotHQ/deepworkplan-vim.git /home/node/.config/nvim \
-    && cd /home/node/.config/nvim \
-    && git checkout --detach "${DWP_VIM_REF}" \
-    && printf 'n\n\n' | lua install.lua \
-    && test -f /home/node/.config/nvim/init.lua \
-    && { { test -f /home/node/.local/share/nvim/deepworkplan-vim-installed || test -f /home/node/.local/share/nvim/mu-vim-installed; } || test -f /home/node/.local/share/nvim/deepworkplan-vim-installed; } \
-    && test -d /home/node/.local/share/nvim/pckr/pckr.nvim \
-    && test -x /home/node/.local/bin/nvim \
-    && GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
-       /home/node/.local/bin/nvim --headless "+lua require('pckr.actions').sync()" "+sleep 120" "+qa!" \
-    && python3 -c 'import os,sys; pack=os.path.expanduser("~/.local/share/nvim/site/pack/pckr/opt"); required=("alpha-nvim","nvim-cmp","mason.nvim"); missing=[]; \
-assert os.path.isdir(pack), "pckr opt dir missing: "+pack; \
-[(missing.append(name) if not [e for e in os.listdir(os.path.join(pack,name)) if e!=".git"] else None) for name in sorted(os.listdir(pack)) if os.path.isdir(os.path.join(pack,name))]; \
-[missing.append(name+" (absent)") for name in required if not os.path.isdir(os.path.join(pack,name))]; \
-sys.exit("plugin sync left empty clones: "+", ".join(missing)) if missing else print("plugin sync complete")'
+RUN --mount=type=secret,id=github_token,uid=1000 \
+    set -eu; \
+    release="https://github.com/DailybotHQ/deepworkplan-vim/releases/download/v${DWP_VIM_VERSION}"; \
+    mkdir /tmp/dwp-vim-installer; \
+    cd /tmp/dwp-vim-installer; \
+    curl -fsSL -o install.sh.sha256 "$release/install.sh.sha256"; \
+    if ! curl -fsSL -o install.sh https://vim.deepworkplan.com/install.sh \
+      || ! sha256sum -c --status install.sh.sha256; then \
+      echo "hosted installer unavailable or not v${DWP_VIM_VERSION}; using the release asset"; \
+      curl -fsSL -o install.sh "$release/install.sh"; \
+    fi; \
+    sha256sum -c install.sh.sha256; \
+    token=""; \
+    if [ -r /run/secrets/github_token ]; then token="$(cat /run/secrets/github_token)"; fi; \
+    GITHUB_TOKEN="$token" bash install.sh \
+      --version "${DWP_VIM_VERSION}" --nvim "${NVIM_VERSION}" --skip-packages --strict; \
+    cd /; \
+    rm -f /tmp/dwp-vim-installer/install.sh /tmp/dwp-vim-installer/install.sh.sha256; \
+    rmdir /tmp/dwp-vim-installer; \
+    test "$(git -C /home/node/.config/nvim describe --tags --exact-match)" = "v${DWP_VIM_VERSION}"; \
+    /home/node/.local/bin/nvim --version | head -1 | grep -qx "NVIM v${NVIM_VERSION}"
 USER root
 
 # Copy and setup entrypoint + host SSH mirror helper
