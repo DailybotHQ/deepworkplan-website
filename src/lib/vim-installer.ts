@@ -61,13 +61,15 @@ export function getInstallerFacts(): InstallerFacts {
  * never pipes a download into a shell (the site's review rule and the skills
  * scanners treat any fetch-and-execute pipe as critical): the script lands on
  * disk, `shasum -a 256 -c` checks it against the digest of the bytes the site
- * serves, and only then does `bash` run it. Code, not prose: never translate
- * or reflow it.
+ * serves, and `bash` runs it only if that check passed — the three steps are
+ * chained with `&&` (one line per step, continued with ` \`), so a failed
+ * download or a mismatched checksum stops the paste before anything runs.
+ * Code, not prose: never translate or reflow it.
  */
 export function buildInstallCommand(sha256: string): string {
   return [
-    `curl -fsSL -o install.sh ${VIM_INSTALL_URL}`,
-    `echo "${sha256}  install.sh" | shasum -a 256 -c`,
+    `curl -fsSL -o install.sh ${VIM_INSTALL_URL} && \\`,
+    `echo "${sha256}  install.sh" | shasum -a 256 -c && \\`,
     'bash install.sh',
   ].join('\n');
 }
