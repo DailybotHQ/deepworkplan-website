@@ -1,5 +1,5 @@
 FROM node:24.20.0-trixie-slim
-LABEL maintainer="developers@dailybot.com"
+LABEL org.opencontainers.image.source="https://github.com/DailybotHQ/deepworkplan-website"
 
 # Coding CLIs are opt-in. Only the exact string "true" installs. Flipping one
 # flag rebuilds that CLI layer, not this apt layer. herdr stays unconditional.

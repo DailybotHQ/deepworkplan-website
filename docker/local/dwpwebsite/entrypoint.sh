@@ -531,14 +531,12 @@ chown -R node:node /home/node/.herdr_data 2>/dev/null || true
 
 # ---------------------------------------------------------------------------
 # Herdr peer mesh (public names: herdr-peers / herdr-workspaces)
-# Host kits may still publish dailybot-peers; accept both.
 # ---------------------------------------------------------------------------
 install_herdr_peer_mesh() {
   local home="$1"
   local user="$2"
   local ssh_config="${home}/.ssh/config"
   local peers_public="${home}/.ssh_host/config.d/herdr-peers"
-  local peers_legacy="${home}/.ssh_host/config.d/dailybot-peers"
   local peers_file=""
   local include_line=""
   local src="${home}/.herdr_client_host/endpoints.json"
@@ -548,13 +546,10 @@ install_herdr_peer_mesh() {
   if [ -f "${peers_public}" ]; then
     peers_file="${peers_public}"
     include_line='Include ~/.ssh_host/config.d/herdr-peers'
-  elif [ -f "${peers_legacy}" ]; then
-    peers_file="${peers_legacy}"
-    include_line='Include ~/.ssh_host/config.d/dailybot-peers'
   fi
 
   if [ -z "${peers_file}" ]; then
-    echo "herdr peers: no herdr-peers/dailybot-peers under ~/.ssh_host/config.d; skip include"
+    echo "herdr peers: no herdr-peers under ~/.ssh_host/config.d; skip include"
   elif [ -f "${ssh_config}" ]; then
     if ! grep -qxF "${include_line}" "${ssh_config}"; then
       local tmp
@@ -572,14 +567,11 @@ install_herdr_peer_mesh() {
     chmod 600 "${ssh_config}" 2>/dev/null || true
   fi
 
-  # Optional workspaces include (public name, then legacy).
+  # Optional workspaces include.
   local ws_public="${home}/.ssh_host/config.d/herdr-workspaces"
-  local ws_legacy="${home}/.ssh_host/config.d/dailybot-workspaces"
   local ws_include=""
   if [ -f "${ws_public}" ]; then
     ws_include='Include ~/.ssh_host/config.d/herdr-workspaces'
-  elif [ -f "${ws_legacy}" ]; then
-    ws_include='Include ~/.ssh_host/config.d/dailybot-workspaces'
   fi
   if [ -n "${ws_include}" ]; then
     touch "${ssh_config}"

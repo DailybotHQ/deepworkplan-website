@@ -349,6 +349,7 @@ pnpm run md:check:strict    # Same as above; exits 1 on missing (for CI)
 pnpm run md:content-check   # Verify the .md actually carries equivalent content (not just exists)
 pnpm run i18n:check         # Verify translation parity across all 17 active languages
 pnpm run i18n:scaffold <code>  # Scaffold strings + content for a new language code
+bash scripts/check-public-hygiene.sh  # Public-hygiene check (no private context or secrets; runs in CI)
 pnpm run lighthouse         # Lighthouse CI audit (mobile)
 pnpm run lighthouse:desktop # Lighthouse CI audit (desktop)
 pnpm run release            # Bump version and release commit

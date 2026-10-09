@@ -23,7 +23,20 @@ pnpm run test:watch
 
 # Run with coverage report
 pnpm run test:coverage
+
+# Public-hygiene check over tracked files (bash + grep, no network)
+bash scripts/check-public-hygiene.sh
 ```
+
+`scripts/check-public-hygiene.sh` enforces the public repository standard
+(ecosystem amendment A3 S3): no personal absolute paths, private
+organization/repository/tooling names, non-public `@dailybot.com` addresses or
+secret-shaped literals in tracked files (the vendored `.agents/skills/` copies
+are skipped). It prints `path:line: rule`, never the matched text. A fixture
+that needs a secret-shaped string says it is fake and is listed in
+`.public-hygiene-allow` with a reason. It runs in `.github/workflows/ci.yml`
+on every pull request and push to `main`; run it before every commit that
+touches docs, scripts or container files.
 
 ## Selecting a Gate for a Change
 

@@ -6,6 +6,19 @@ Complete reference for all GitHub Actions workflows in this repository.
 
 ---
 
+## 0. ci.yml — Public hygiene, lint and tests
+
+**Trigger:** every pull request and every push to `main`.
+
+| Job | What it runs |
+| --- | --- |
+| `hygiene` (`public hygiene`) | `bash scripts/check-public-hygiene.sh` — no personal paths, private names, non-public addresses or secret-shaped literals in tracked files (ecosystem amendment A3 S3) |
+| `lint-test` (`lint and test`) | `biome:check`, `astro:check`, `test` on Node 24.20.0 |
+
+Read-only (`permissions: contents: read`); `actions/checkout` pinned by SHA.
+
+---
+
 ## 1. code_check.yml — Code Quality Validation
 
 | Property | Value |
