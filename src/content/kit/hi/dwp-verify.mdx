@@ -35,7 +35,7 @@ import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
 3. प्रत्येक विफलता को सूचीबद्ध करते हुए **CONFORMANT** या **NOT CONFORMANT** की रिपोर्ट दें।
 4. कमियों को एक Deep Work Plan के रूप में दर्ज करने का प्रस्ताव दें; कभी चुपचाप ठीक न करें।
 
-**पीढ़ी के अनुसार प्लान सत्यापन।** रिपॉज़िटरी provenance checker वर्तमान DWP standard 6.0.0 स्वीकार करता है, लेकिन प्लान की जाँच उसकी पीढ़ी के अनुसार होती है। v6 प्लान को contract pointer, `contract.json`, या `contracts/` revision chain से पहचाना जाता है और v6 contract, journal तथा ledger validators से जाँचा जाता है। रखा गया `plan_contract.py` checker केवल v5 के लिए है और इसे v6 प्लान validator के रूप में चलाना MUST NOT है। v6 में `state.json` एक generated snapshot projection है; journal से अंतर मिलने पर उसे finding माना जाता है। दोनों पीढ़ियाँ साथ रह सकती हैं और verification उन्हें migrate नहीं करता।
+**पीढ़ी के अनुसार प्लान सत्यापन।** रिपॉज़िटरी provenance checker वर्तमान DWP standard 7.0.0 स्वीकार करता है, लेकिन प्लान की जाँच उसकी पीढ़ी के अनुसार होती है। v6 या v7 प्लान को contract pointer, `contract.json`, या `contracts/` revision chain से पहचाना जाता है और v6 contract, journal तथा ledger validators से जाँचा जाता है। रखा गया `plan_contract.py` checker केवल v5 के लिए है और इसे v6 प्लान validator के रूप में चलाना MUST NOT है। v6 में `state.json` एक generated snapshot projection है; journal से अंतर मिलने पर उसे finding माना जाता है। दोनों पीढ़ियाँ साथ रह सकती हैं और verification उन्हें migrate नहीं करता।
 
 ## उपनाम
 

@@ -35,14 +35,16 @@ usage: /deepworkplan-onboard
 
 리포지토리는 선택적 애드온이 하나도 없어도 완전히 적합합니다; AI Diff Reviewer 로컬 리뷰는 표준 2.3.0부터 기준선의 일부입니다. 감지된 현실이 언제나 프리셋 가정보다 우선합니다.
 
-## v6 스키마 참조
+## v7 스키마 참조
 
-v6 계획의 기계 판독 가능 스키마 카탈로그는 다음의 고정 URL에 게시되어 있습니다. v6 라이브 프로젝션은 스냅샷이며 `plan-state/v6.json`은 없습니다. 기존 v5 계획은 계속 v5 상태 스키마를 사용하며, 이전 계획은 조용히 다시 작성되지 않습니다.
+v7 계획(현재 7.x 팩의 기본값)의 기계 판독 가능 스키마 카탈로그는 다음의 고정 URL에 게시되어 있습니다. 라이브 프로젝션은 v6과 공유하는 스냅샷이며 `plan-state/v6.json`이나 `plan-state/v7.json`은 없습니다.
 
-- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
-- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
-- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
-- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
-- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v7.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v7.json (v6 contract에 선택적 `parallel_safe` 작업 표시를 더한 것)
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (`delegation` 이벤트 추가)
+- **Plan snapshot (라이브 프로젝션, v6과 공유):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Context manifest (v6과 공유):** https://deepworkplan.com/schema/context-manifest/v6.json
+
+v6 계획은 v6 스키마([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [contract](https://deepworkplan.com/schema/plan-contract/v6.json), [journal event](https://deepworkplan.com/schema/journal-event/v6.json))를 유지합니다. 기존 v5 계획은 계속 v5 상태 스키마를 사용하며, 이전 계획은 조용히 다시 작성되지 않습니다.
 
 현재 7.x 팩은 새 계획을 기본적으로 v7로 생성합니다. 기존 계획은 기록된 세대를 유지하며, 마이그레이션에는 명시적 요청이 필요합니다. 새 계획에는 최소 세 자리 숫자로 된 단조 증가 ID를 부여합니다(예: `PLAN_001_add_payment_webhooks/`). 고정된 v5 스키마는 숫자 ID를 한 단어로 세므로 v5 슬러그는 2~4단어이고 v7 슬러그는 2~5단어입니다. 기존의 번호 없는 `PLAN_<slug>/` 폴더는 계속 읽을 수 있으며 절대 이름을 바꾸지 않습니다. 번호가 있는 계획이 있으면 `latest`는 숫자 ID가 가장 큰 계획을 가리킵니다.

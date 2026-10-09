@@ -220,7 +220,7 @@ teyit edin.
    alanı iskeletleyin — ikisi de `.gitignore`’a tahrip edici olmadan eklenir (ekleyin, asla yeniden
    yazmayın). İkisi birbirinin yerine geçmez: bir akışın **bir plan hakkında** ürettiği her şey — analiz, skills defteri, güvenlik incelemesi, kapı kayıtları, denetim raporları — o planın kendi `.dwp/plans/PLAN_001_<slug>/analysis_results/` dizininde durmalıdır; deponun kökünde de `tmp/` içinde de değil. `tmp/`, hiçbir planın bir daha okumayacağı işler içindir.
 
-Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (örneğin `PLAN_001_add_payment_webhooks/`). Dondurulmuş v5 şemaları sayısal kimliği bir sözcük saydığı için v5 slug’ları 2–4, v6 slug’ları 2–5 sözcük içerir. Mevcut numarasız `PLAN_<slug>/` klasörleri okunabilir kalır ve hiçbir zaman yeniden adlandırılmaz. Numaralı planlar varsa `latest`, sayısal kimliği en yüksek olan planı gösterir.
+Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (örneğin `PLAN_001_add_payment_webhooks/`). Dondurulmuş v5 şemaları sayısal kimliği bir sözcük saydığı için v5 slug’ları 2–4, v6 ve v7 slug’ları 2–5 sözcük içerir. Mevcut numarasız `PLAN_<slug>/` klasörleri okunabilir kalır ve hiçbir zaman yeniden adlandırılmaz. Numaralı planlar varsa `latest`, sayısal kimliği en yüksek olan planı gösterir.
 
 ## 4. Gerekli yerel incelemeyi kurun, ardından tercihe dayalı eklentileri sunun
 

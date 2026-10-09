@@ -226,7 +226,7 @@ methodology) instead of overwriting — and confirm with the user before replaci
  scratch space — both added to `.gitignore` non-destructively (append, never rewrite). They are not interchangeable: everything a flow produces **about a plan** — the analysis, the skills ledger, the security review, gate logs, audit reports — must live in that plan's own `.dwp/plans/PLAN_001_<slug>/analysis_results/`, never at the repository root and never in `tmp/`. `tmp/` is for work no plan will ever read back.
 
 New plans receive monotonically increasing numeric IDs with at least three
-digits (for example, `PLAN_001_add_payment_webhooks/`). Current v6 plans
+digits (for example, `PLAN_001_add_payment_webhooks/`). Current v6 and v7 plans
 use 2–5-word slugs. The retained v5 flow uses 2–4 words: its allocator requires at least
 two slug words, and its frozen schema permits at most four after the numeric ID. Existing unnumbered `PLAN_<slug>/` folders remain readable and are
 never renamed. When numbered plans exist, `latest` resolves to the highest

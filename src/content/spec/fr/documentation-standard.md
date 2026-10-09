@@ -8,7 +8,7 @@ section: Standard
 
 # Standard de documentation
 
-> **Portée de version :** ce document est une base v5.0.0 conservée. La norme v6 actuelle exige également les extensions `V6_*.md` applicables, répertoriées dans l’[index de spécification](/spec). Les plans v5 existants conservent leurs règles enregistrées.
+> **Portée de version :** ce document est une base v5.0.0 conservée. La norme actuelle, DWP 7.0.0, exige également les extensions `V6_*.md` et `V7_*.md` applicables, répertoriées dans l’[index de spécification](/spec). Les plans v5 et v6 existants conservent leurs règles enregistrées.
 
 **Version 5.0.0.** Ce standard définit comment les Deep Work Plans documentent leur structure, leurs tâches et leur progression, et comment un dépôt se documente lui-même afin qu’un agent puisse y agir en toute sécurité. Il s’applique à tout plan créé sous la méthodologie DWP. Cette version aligne le numéro de version du document sur celui du standard DWP qu’il accompagne — aucune exigence existante ne change — et ajoute l’application du budget d’index compact et le palier de fonctionnalité décrits ci-dessous. Les mots-clés MUST, SHOULD et MAY sont employés tels que définis dans la RFC 2119.
 

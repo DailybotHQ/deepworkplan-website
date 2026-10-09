@@ -8,7 +8,7 @@ section: Standard
 
 # Documentation standard
 
-> **Cakupan versi:** Ini adalah dokumen dasar v5.0.0 yang dipertahankan. Standar v6 saat ini juga mewajibkan ekstensi `V6_*.md` yang berlaku dan tercantum dalam [indeks spesifikasi](/spec). Rencana v5 yang ada mempertahankan aturan yang tercatat.
+> **Cakupan versi:** Ini adalah dokumen dasar v5.0.0 yang dipertahankan. Standar saat ini, DWP 7.0.0, juga mewajibkan ekstensi `V6_*.md` dan `V7_*.md` yang berlaku dan tercantum dalam [indeks spesifikasi](/spec). Rencana v5 dan v6 yang ada mempertahankan aturan yang tercatat.
 
 **Versi 5.0.0.** Standar ini mendefinisikan bagaimana Deep Work Plan mendokumentasikan struktur, tugas, dan kemajuannya, serta bagaimana sebuah repositori mendokumentasikan dirinya sendiri agar sebuah agent dapat bertindak dengan aman di dalamnya. Ia berlaku untuk setiap rencana yang dibuat di bawah metodologi DWP. Versi ini menyelaraskan nomor versi dokumen ini dengan standar DWP yang menyertainya — tidak ada persyaratan yang ada berubah — dan menambahkan penegakan anggaran indeks-ramping serta tier fitur yang dijelaskan di bawah. Kata kunci MUST, SHOULD, dan MAY digunakan sebagaimana didefinisikan dalam RFC 2119.
 

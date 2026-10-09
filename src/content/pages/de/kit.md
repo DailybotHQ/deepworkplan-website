@@ -49,13 +49,16 @@ und ein generischer Fallback.
 
 ### Addons (Opt-in)
 
-Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügt. Vier sind optional und nie Teil der AI-first-Baseline; die lokale Überprüfung des AI Diff Reviewer ist seit Standard 2.3.0 erforderlich:
+Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügt. Sieben sind optional und nie Teil der AI-first-Baseline; die lokale Überprüfung des AI Diff Reviewer ist seit Standard 2.3.0 erforderlich:
 
 - **Devcontainer** — ein reproduzierbarer, isolierter Dev-Container mit persistenter AI-CLI-Authentifizierung.
 - **Dailybot** — Best-Effort-Berichterstattung über Fortschritte und Meilensteine für Teams, die Dailybot nutzen.
 - **Dependency-Upgrade** — paketmanager-agnostische, chargenweise, validierte, rücknehmbare Upgrades.
 - **Design system** — eine interface-bezogene `DESIGN.md` (unter `docs/DESIGN.md`, von `AGENTS.md` referenziert), die aus der echten Designquelle des Repos abgeleitet wird, mit Profilen für visuelle UI, gestylte CLI-Ausgabe und konversationales Messaging, damit Agenten markenkonforme Interface-Ausgaben erzeugen; wird ein Designsystem erkannt, ist das Angebot verpflichtend, die Installation aber zustimmungsgesteuert — das visuelle Profil ist bei Erkennung dringend empfohlen, die CLI- und konversationalen Profile werden bei Erkennung empfohlen und stets erfragt.
 - **AI Diff Reviewer** — die erforderliche lokale Überprüfung: Das Onboarding installiert [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, und der Sicherheitstest jedes Final Review führt sie aus; das optionale Flow B fügt ein CI-PR-Merge-Gate hinzu, das dieselbe Extension teilt, explizit angeboten und niemals ungefragt installiert.
+- **[Herdr](/de/kit/herdr)** — interaktive Delegation: Ein Plan übergibt eine begrenzte Aufgabe an einen Coding-Agenten in einem anderen Herdr-Pane und zeichnet dessen einzige autorisierte Antwort auf.
+- **[DeepWorkPlan Vim](/de/kit/vim)** — der Terminal-Editor für Deep Work Plan, mit Befehlsindex, schreibgeschütztem Plan-Browser und Markdown-Viewer.
+- **[Agentkit](/de/kit/agentkit)** — ein einziger `ak`-Befehl für jeden Terminal-Coding-Agenten und Headless-Delegation begrenzter Planaufgaben.
 
 ### Ökosystem
 

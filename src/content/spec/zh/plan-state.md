@@ -8,9 +8,9 @@ section: State
 
 # Plan state
 
-> **版本范围：** 本文档是保留的 v5.0.0 基础文档。当前 v6 标准还要求遵循[规范索引](/spec)中适用的 `V6_*.md` 扩展。现有 v5 计划保留其记录的规则。
+> **版本范围：** 以下各节是保留的 v5.0.0 状态层。当前标准 DWP 7.0.0 使用 v7 契约、仅追加日志和快照投影；v5 计划继续使用本文档中的 `manifest.json` 与 `state.json` 规则。
 
-**当前标准：v6。** 下列文档是保留的基础规范；v6 增加契约、仅追加日志、逐任务上下文、资源控制和生命周期规则。[v6 身份清单](https://deepworkplan.com/schema/plan-manifest/v6.json)与[v6 快照](https://deepworkplan.com/schema/plan-snapshot/v6.json)。现有 v5 计划保留其记录的规则。 [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+**当前标准：v7（DWP 7.0.0）。** 下列文档是保留的基础规范；v6 增加了契约、仅追加日志、逐任务上下文、资源控制和生命周期规则，v7 保留这一记录层，并新增可选的 `parallel_safe` 任务标记、`delegation` 日志事件、`.dwp/config.json` 附加组件注册表以及由附加组件提供的能力。参见 [v7 身份清单架构](https://deepworkplan.com/schema/plan-manifest/v7.json)、[契约架构](https://deepworkplan.com/schema/plan-contract/v7.json)与[实时快照架构](https://deepworkplan.com/schema/plan-snapshot/v6.json)（与 v6 共用）。现有 v5 与 v6 计划保留其记录的规则。 [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
 
 **版本 5.0.0。状态：稳定。** 本文档规定了 Deep Work Plan 方法论的机器可读计划状态层，现已与 DWP 标准自身的版本号对齐——此次重新编号不削弱任何既有要求。本次修订还记录了受保护的状态更新器、经验证的计划发布，以及一份已完成计划必须满足的证据真实性规则（见下文）。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
@@ -227,7 +227,9 @@ Markdown MUST 在每次分歧中获胜。若 `state.json` 显示任务 4 已 `co
 
 两个模式均通过 URL 进行版本控制。版本内允许添加字段；重命名或重新定义字段类型需要新的模式版本以及规范变更日志中的迁移说明。本次修订为两个模式引入了 `/v2.json`：任务条目的 `file` 字段变为一个带类型的 `locator`（`{"kind": "file" | "inline", "value": ...}`），清单新增 `plan_format`，状态文件新增 `format`、`materialization`、`approval` 与 `promotion`——这些字段共同满足了 Lite 计划的需要（参见 [Lite 计划](/spec/lite-plans)）。`/v1.json` 的清单与状态文件仍然有效，绝不会被静默重写为 v2；一次 `refine` 会话 MAY 有意迁移它。清单中的 `spec_version` 字段固定了计划创建时所依据的 DWP 规范版本；遇到比其已安装规范更新的计划时，代理 SHOULD 明确说明，而非猜测。
 
-## v6 架构与兼容性
+## v7 与 v6 架构与兼容性
+
+当前 7.x 技能包默认创建 **v7** 计划。v7 是 v6 记录层的一个契约代际：[v7 清单](https://deepworkplan.com/schema/plan-manifest/v7.json)指向 [v7 契约](https://deepworkplan.com/schema/plan-contract/v7.json)——即 v6 契约加上可选的 `parallel_safe` 任务标记——并且每个 [v7 日志事件](https://deepworkplan.com/schema/journal-event/v7.json)还可以记录一次 `delegation`（launched、completed、failed、cancelled）；它本身绝不构成证据：受托代理的结果在计划自己的运行器观察到之前始终只是断言。实时快照与任务上下文清单与 v6 共用。一个计划绝不混用代际，明确的 `v6` 请求仍会生成 v6 计划。
 
 v6 保留 v5 方法论，并为新计划增加更严格的工程结构。身份清单指向有版本的契约；只追加的日志记录授权和事件；任务上下文清单明确上下文选择；调度器只派发符合条件的工作；实时投影是由日志生成的快照 `state.json`。空能力允许列表会被拒绝。这些变化是架构决策，并非代理结果更好的证据：尚未测量代理结果的非劣效性。
 
@@ -241,4 +243,4 @@ v6 清单与实时快照的架构地址：
 
 v6 实时投影是快照，而不是重命名的 v5 状态文件。`plan-state/v5.json` 仍为 v5 计划发布；不存在 `plan-state/v6.json`。现有 v1、v2 和 v5 计划保留记录的架构代际，不会被静默重写。
 
-新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v6 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。
+新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v6 与 v7 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。

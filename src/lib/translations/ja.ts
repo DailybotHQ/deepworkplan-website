@@ -644,7 +644,7 @@ export const ja: SiteTranslations = {
       addon: {
         title: 'アドオン（オプトイン）',
         description:
-          'onboard フローがリポジトリに重ねる機能。必須の AI Diff Reviewer ローカルレビューと、AI-first の基本構成には決して含まれない四つの任意アドオンです。',
+          'onboard フローがリポジトリに重ねる機能。必須の AI Diff Reviewer ローカルレビューと、AI-first の基本構成には決して含まれない七つの任意アドオンです。',
       },
     },
     viewDetail: '詳細を見る',
@@ -723,7 +723,7 @@ export const ja: SiteTranslations = {
       {
         title: 'ローカルレビューとオプトインのアドオン',
         description:
-          'オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、四つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system）を提案します。適合する場合にのみ受け入れてください。任意アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
+          'オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、七つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim、Agentkit）を提案します。適合する場合にのみ受け入れてください。任意アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
       },
       {
         title: '計画して実行する',

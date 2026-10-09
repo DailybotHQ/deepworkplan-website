@@ -223,7 +223,7 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
 6. **`.dwp/` + `tmp/`.** Siapkan `.dwp/` yang di-gitignore dengan `plans/`, ditambah ruang
    scratch `tmp/` — keduanya ditambahkan ke `.gitignore` secara non-destruktif (tambahkan, jangan pernah menulis ulang). Keduanya tidak dapat dipertukarkan: segala sesuatu yang dihasilkan sebuah alur **tentang sebuah rencana** — analisis, catatan skills, tinjauan keamanan, log gerbang, laporan audit — harus berada di `.dwp/plans/PLAN_001_<slug>/analysis_results/` milik rencana itu sendiri, bukan di akar repositori dan bukan di `tmp/`. `tmp/` untuk pekerjaan yang tidak akan pernah dibaca ulang oleh rencana mana pun.
 
-Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v6 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.
+Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v6 dan v7 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.
 
 ## 4. Pasang tinjauan lokal yang wajib, lalu tawarkan addon opt-in
 

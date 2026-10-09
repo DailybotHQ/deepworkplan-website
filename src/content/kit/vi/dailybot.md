@@ -126,7 +126,7 @@ Tham chiếu công khai: [dailybot.com/skill.md](https://www.dailybot.com/skill.
 
 ## Luồng onboarding
 
-Trong DWP `onboard` **Giai đoạn 7b**, sau scaffolding AI-first cốt lõi, luồng đề xuất bốn addon opt-in (đánh giá cục bộ AI Diff Reviewer đã được cài ở Giai đoạn 7a). Nếu nhà phát triển chấp nhận Dailybot:
+Trong DWP `onboard` **Giai đoạn 7b**, sau scaffolding AI-first cốt lõi, luồng đề xuất bảy addon opt-in (đánh giá cục bộ AI Diff Reviewer đã được cài ở Giai đoạn 7a). Nếu nhà phát triển chấp nhận Dailybot:
 
 1. Phát hiện thiết lập hiện có (skill, CLI, `.dailybot/profile.json`, hook, bước báo cáo).
 2. Đề xuất cài skill/CLI qua luồng đồng ý của Dailybot.

@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Specyfikacja DWP
 
-> **Aktualny standard: v6.** To zachowana baza specyfikacji v5 wraz z aktualnymi rozszerzeniami cyklu życia v6. Pakiet 6.x domyślnie tworzy nowe plany w v6; istniejące plany zachowują zapisaną generację. Manifest i bieżący snapshot v6 są opublikowane pod adresami [plan-manifest/v6.json](https://deepworkplan.com/schema/plan-manifest/v6.json) oraz [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
+> **Aktualny standard: v7 (DWP 7.0.0).** To zachowana baza specyfikacji v5 wraz z rozszerzeniami cyklu życia v6 i generacją kontraktu v7. Pakiet 7.x domyślnie tworzy nowe plany w v7; jawne żądanie `v6` nadal materializuje plan v6, a istniejące plany zachowują zapisaną generację. Manifest i kontrakt v7 są opublikowane pod adresami [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) oraz [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json); bieżący snapshot pozostaje pod adresem [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 
 **Wersja 5.0.0. Status: stabilna.** Ten dokument jest normatywną specyfikacją metodyki Deep Work Plan (DWP). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 
@@ -43,7 +43,7 @@ Nowy plan MUSI używać numerowanego katalogu w `.dwp/plans/`, na przykład `PLA
 
 Plan MOŻE dodatkowo zawierać warstwę stanu odczytywalnego maszynowo: `manifest.json` (statyczna tożsamość, zapisywana raz podczas materializacji) i `state.json` (aktywny stan realizacji poszczególnych zadań). Warstwa stanu jest ZALECANA dla planów v5 i WYMAGANA przy wykonaniu nieobsługiwanym oraz w przestrzeniach roboczych agenta bez gita. Zob. [Stan planu](/spec/plan-state).
 
-Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slug v6 ma 2–5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.
+Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slugi v6 i v7 mają 2–5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.
 
 ## Anatomia zadania
 

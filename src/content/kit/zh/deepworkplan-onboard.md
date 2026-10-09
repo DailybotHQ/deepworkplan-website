@@ -35,14 +35,16 @@ usage: /deepworkplan-onboard
 
 一个仓库在不带任何可选附加组件时即完全符合规范；自标准 2.3.0 起，AI Diff Reviewer 本地审查属于基线的一部分。检测到的现实始终优先于预设的假设。
 
-## v6 架构引用
+## v7 架构引用
 
-v6 计划的机器可读架构目录发布在以下稳定 URL。v6 实时投影是快照；不存在 `plan-state/v6.json`。现有 v5 计划继续使用 v5 状态架构，旧计划不会被静默重写。
+v7 计划（当前 7.x 技能包的默认代际）的机器可读架构目录发布在以下稳定 URL。实时投影是与 v6 共用的快照；不存在 `plan-state/v6.json` 或 `plan-state/v7.json`。
 
-- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
-- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
-- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
-- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
-- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v7.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v7.json（v6 契约加上可选的 `parallel_safe` 任务标记）
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json（新增 `delegation` 事件）
+- **Plan snapshot（实时投影，与 v6 共用）:** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Context manifest（与 v6 共用）:** https://deepworkplan.com/schema/context-manifest/v6.json
+
+v6 计划保留其 v6 架构（[清单](https://deepworkplan.com/schema/plan-manifest/v6.json)、[契约](https://deepworkplan.com/schema/plan-contract/v6.json)、[日志事件](https://deepworkplan.com/schema/journal-event/v6.json)）；现有 v5 计划继续使用 v5 状态架构，旧计划不会被静默重写。
 
 当前 7.x 技能包默认使用 v7 创建新计划。现有计划保留记录的代际；迁移必须明确请求。 新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v7 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。

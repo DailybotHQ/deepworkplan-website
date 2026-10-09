@@ -197,7 +197,7 @@ metodologia) anziché sovrascriverlo — e conferma con l’utente prima di sost
 6. **`.dwp/` + `tmp/`.** Predisponi una `.dwp/` esclusa da git con `plans/`, più uno spazio di lavoro temporaneo
    `tmp/` — entrambi aggiunti a `.gitignore` in modo non distruttivo (in coda, mai riscrivendo). Non sono intercambiabili: tutto ciò che un flusso produce **a proposito di un piano** — l'analisi, il registro delle skills, la revisione di sicurezza, i log dei gate, i report di audit — deve stare nel `.dwp/plans/PLAN_001_<slug>/analysis_results/` di quel piano, mai nella radice del repository né in `tmp/`. `tmp/` è per lavoro che nessun piano rileggerà.
 
-I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v6 ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.
+I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v6 e v7 ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.
 
 ## 4. Installa la revisione locale richiesta, poi proponi gli addon opt-in
 

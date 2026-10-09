@@ -1,6 +1,6 @@
 ---
 title: Add-on
-description: "Addon DWP: empat ekstensi opsional, tinjauan lokal AI Diff Reviewer yang wajib dengan permukaan CI opsional, kontrak addon, dan konsep kit."
+description: "Addon DWP: tujuh ekstensi opsional, tinjauan lokal AI Diff Reviewer yang wajib dengan permukaan CI opsional, kontrak addon, dan konsep kit."
 order: 6
 lang: id
 section: Addons
@@ -8,9 +8,9 @@ section: Addons
 
 # Add-on
 
-> **Cakupan versi:** Ini adalah dokumen dasar v5.0.0 yang dipertahankan. Standar v6 saat ini juga mewajibkan ekstensi `V6_*.md` yang berlaku dan tercantum dalam [indeks spesifikasi](/spec). Rencana v5 yang ada mempertahankan aturan yang tercatat.
+> **Cakupan versi:** Ini adalah dokumen dasar v5.0.0 yang dipertahankan. Standar saat ini, DWP 7.0.0, juga mewajibkan ekstensi `V6_*.md` dan `V7_*.md` yang berlaku dan tercantum dalam [indeks spesifikasi](/spec). Rencana v5 dan v6 yang ada mempertahankan aturan yang tercatat.
 
-**Versi 2.1.0.** Add-on adalah ekstensi dari metodologi Deep Work Plan inti. Empat dari lima bersifat opsional dan **tidak pernah diperlukan untuk konformitas** — repositori tanpa addon opsional sepenuhnya AI-first dan konforman DWP. Setiap addon opsional ditawarkan saat onboarding, diterima atau ditolak secara eksplisit, dan — jika diterima — **merekonsiliasi** dengan setup yang ada alih-alih menimpanya. Satu komponen adalah pengecualian yang dinyatakan: sejak standar 2.3.0 **tinjauan lokal AI Diff Reviewer** adalah bagian dari baseline wajib — onboarding menginstalnya dan setiap Final Review menjalankannya — sementara permukaan CI-nya tetap opt-in.
+**Versi 2.1.0.** Add-on adalah ekstensi dari metodologi Deep Work Plan inti. Tujuh dari delapan bersifat opsional dan **tidak pernah diperlukan untuk konformitas** — repositori tanpa addon opsional sepenuhnya AI-first dan konforman DWP. Setiap addon opsional ditawarkan saat onboarding, diterima atau ditolak secara eksplisit, dan — jika diterima — **merekonsiliasi** dengan setup yang ada alih-alih menimpanya. Satu komponen adalah pengecualian yang dinyatakan: sejak standar 2.3.0 **tinjauan lokal AI Diff Reviewer** adalah bagian dari baseline wajib — onboarding menginstalnya dan setiap Final Review menjalankannya — sementara permukaan CI-nya tetap opt-in.
 
 ## Kontrak addon
 
@@ -25,9 +25,9 @@ Setiap addon yang dikirim menyediakan empat komponen wajib:
 
 Penemuan: alur `onboard` mengekstrak `skills/deepworkplan/addons/` dan menyajikan setiap addon sebagai langkah opt-in di **Fase 7b**, setelah scaffolding inti.
 
-## Addon yang dikirim (lima)
+## Addon yang dikirim (delapan)
 
-Lima addon tersedia hari ini — empat opt-in ditambah tinjauan lokal yang wajib. Masing-masing memiliki **halaman katalog kit** dengan detail untuk pengguna dan **spec normatif** di dalam skill Deep Work Plan.
+Delapan addon tersedia hari ini — tujuh opt-in ditambah tinjauan lokal yang wajib. Masing-masing memiliki **halaman katalog kit** dengan detail untuk pengguna dan **spec normatif** di dalam skill Deep Work Plan. Empat di antaranya — devcontainer, Herdr, DeepWorkPlan Vim, dan Agentkit — adalah integrator tipis yang dipatok pada tag ke sebuah produk dengan repositori dan siklus rilisnya sendiri; setiap produk berfungsi tanpa Deep Work Plan. Addon yang diterima dicatat dalam registri addon `.dwp/config.json` (DWP 7.0.0), yang hanya dapat menawarkan atau memperkuat — tidak pernah menghalangi konformitas maupun sebuah rencana.
 
 ### Devcontainer (addon pertama)
 
@@ -79,6 +79,33 @@ Upgrade dependensi agnostik package manager, bertahap, tervalidasi, dan dapat di
 - **Paritas (Flow B):** `prompt.md` bersama + ekstensi menyelaraskan metodologi/tingkat keparahan; Tinjauan Sadar Iterasi CI dapat mempersingkat putaran 2+ sementara penerusan lokal tetap penuh
 - **Pengamanan netral vendor:** tidak ada alur Deep Work Plan yang memerlukan layanan komersial, penyedia CI, atau rahasia — reviewer adalah skill MIT yang dipatok pada tag dan dijalankan oleh coding agent pengembang sendiri
 - **Konformitas:** `verify` melaporkan reviewer lokal yang hilang sebagai kegagalan untuk repositori yang menyatakan standar 2.3.0 atau lebih baru, dan sebagai temuan versi-harness untuk repositori lama
+
+### Herdr (addon keenam)
+
+Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok `v0.1.0`, protokol `1`), transport delegasi **interaktif** untuk rencana v7.
+
+- **Halaman kit:** [Herdr](/kit/herdr)
+- **Yang ditambahkan:** sebuah rencana dapat menyerahkan tugas terbatas kepada coding agent di pane [Herdr](https://herdr.dev) lain, di mesin yang sama atau mesin yang dijangkau Herdr melalui SSH, dan mencatat satu-satunya balasan yang diizinkan di jurnal
+- **Perilaku:** protokol peer (stamp, grant, reply, loop guard, batas kedalaman dan fan-out) berada di herdr-peers, tidak pernah di dalam paket; setiap penggunaan memerlukan grant kontrak `agent_delegation`, dan hasil delegasi tetap berstatus klaim sampai runner milik rencana itu sendiri mengamatinya
+- **Kapan ditawarkan:** opt-in eksplisit selama Fase 7b; deteksi hanya-baca atas `herdr` dan `herdr-peers`; transport hanya dapat digunakan di dalam sesi Herdr
+
+### DeepWorkPlan Vim (addon ketujuh)
+
+Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (dipatok `v0.4.2`, antarmuka `1`), editor terminal untuk Deep Work Plan (Neovim 0.12+).
+
+- **Halaman kit:** [DeepWorkPlan Vim](/kit/vim)
+- **Yang ditambahkan:** permukaan editor opsional tingkat mesin untuk agen dan manusia — indeks perintah yang dihasilkan, penjelajah rencana hanya-baca, dan penampil Markdown; setiap klaim dibaca dari permukaan produk yang dapat dibaca mesin dan telah dipatok
+- **Perilaku:** konfigurasi Neovim yang ada tidak pernah ditimpa tanpa persetujuan eksplisit; deteksi bersifat hanya-baca
+- **Kapan ditawarkan:** opt-in eksplisit selama Fase 7b; hanya bersifat informatif ketika Neovim 0.12+ tidak tersedia
+
+### Agentkit (addon kedelapan)
+
+Integrator tipis dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`), transport delegasi **headless** untuk rencana v7.
+
+- **Halaman kit:** [Agentkit](/kit/agentkit)
+- **Yang ditambahkan:** satu permukaan perintah `ak` di atas coding agent terminal, digunakan untuk menjalankan tugas rencana terbatas secara headless; addon ini menyumbangkan kemampuan `subagents`, `cancel_children`, dan `model_routing` hanya saat runtime, ketika diaktifkan, terdeteksi, dan berada pada antarmuka yang kompatibel
+- **Perilaku:** setiap penggunaan memerlukan grant kontrak `agent_delegation`; addon ini tidak pernah memasang CLI coding agent dengan sendirinya dan tidak pernah membaca nilai kunci penyedia
+- **Kapan ditawarkan:** opt-in eksplisit selama Fase 7b; deteksi hanya-baca melalui `ak doctor --json`
 
 ## Skill
 

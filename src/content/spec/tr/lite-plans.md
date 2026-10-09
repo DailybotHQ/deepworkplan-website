@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite planlar
 
-> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel v6 standardı, [şartname dizininde](/spec) listelenen geçerli `V6_*.md` uzantılarını da gerektirir. Mevcut v5 planları kayıtlı kurallarını korur.
+> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel standart DWP 7.0.0, [şartname dizininde](/spec) listelenen geçerli `V6_*.md` ve `V7_*.md` uzantılarını da gerektirir. Mevcut v5 ve v6 planları kayıtlı kurallarını korur.
 
 **Sürüm 5.0.0. Durum: Kararlı.** Bu belge, [DWP spesifikasyonu](/spec/dwp-specification) ile birlikte tanıtılan Lite plan temsilini belirtir: yürütülemeyen bir taslak aşaması olmadan doğrudan somutlaştırılan, küçük ila orta ölçekli, sınırlı işler için bir plan biçimi. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 

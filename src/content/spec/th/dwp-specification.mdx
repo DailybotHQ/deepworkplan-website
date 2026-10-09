@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # ข้อกำหนด DWP
 
-> **มาตรฐานปัจจุบัน: v6** นี่คือพื้นฐานข้อกำหนด v5 ที่ยังคงไว้พร้อมส่วนขยายวงจรชีวิต v6 ปัจจุบัน แพ็ก 6.x สร้างแผนใหม่ด้วย v6 เป็นค่าเริ่มต้น ส่วนแผนเดิมยังคงรุ่นที่บันทึกไว้ manifest และ snapshot ปัจจุบันของ v6 เผยแพร่ที่ [plan-manifest/v6.json](https://deepworkplan.com/schema/plan-manifest/v6.json) และ [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json)
+> **มาตรฐานปัจจุบัน: v7 (DWP 7.0.0)** นี่คือพื้นฐานข้อกำหนด v5 ที่ยังคงไว้พร้อมส่วนขยายวงจรชีวิต v6 และรุ่นสัญญา v7 แพ็ก 7.x สร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น คำขอ `v6` อย่างชัดเจนยังคงสร้างแผน v6 และแผนเดิมยังคงรุ่นที่บันทึกไว้ manifest และสัญญาของ v7 เผยแพร่ที่ [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) และ [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json) ส่วน live snapshot ยังคงอยู่ที่ [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json)
 
 **เวอร์ชัน 5.0.0. สถานะ: เสถียร** เอกสารนี้คือข้อกำหนดเชิงบรรทัดฐานสำหรับระเบียบวิธี Deep Work Plan (DWP) คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
 
@@ -43,7 +43,7 @@ DWP ขับเคลื่อนด้วยข้อกำหนด แผน
 
 แผน MAY พกชั้นสถานะที่เครื่องอ่านได้เพิ่มเติม: `manifest.json` (เอกลักษณ์คงที่ เขียนหนึ่งครั้งตอน materialization) และ `state.json` (สถานะการดำเนินงานต่อหนึ่งงานแบบสด) ชั้นสถานะ RECOMMENDED สำหรับแผน v5และ REQUIRED สำหรับการดำเนินงานแบบไม่มีผู้ดูแลและสำหรับ agent workspace ที่ไม่มี git ดู [สถานะแผน](/spec/plan-state)
 
-แผนใหม่จะได้รับ ID ตัวเลขที่เพิ่มขึ้นตามลำดับและมีอย่างน้อยสามหลัก (เช่น `PLAN_001_add_payment_webhooks/`) สคีมา v5 ที่ตรึงไว้จะนับ ID ตัวเลขเป็นหนึ่งคำ ดังนั้น slug ของ v5 จึงมี 2–4 คำ ส่วน slug ของ v6 มี 2–5 คำ โฟลเดอร์เดิมที่ไม่มีหมายเลข `PLAN_<slug>/` ยังคงอ่านได้และจะไม่มีการเปลี่ยนชื่อ หากมีแผนที่มีหมายเลข `latest` จะหมายถึงแผนที่มี ID ตัวเลขสูงสุด.
+แผนใหม่จะได้รับ ID ตัวเลขที่เพิ่มขึ้นตามลำดับและมีอย่างน้อยสามหลัก (เช่น `PLAN_001_add_payment_webhooks/`) สคีมา v5 ที่ตรึงไว้จะนับ ID ตัวเลขเป็นหนึ่งคำ ดังนั้น slug ของ v5 จึงมี 2–4 คำ ส่วน slug ของ v6 และ v7 มี 2–5 คำ โฟลเดอร์เดิมที่ไม่มีหมายเลข `PLAN_<slug>/` ยังคงอ่านได้และจะไม่มีการเปลี่ยนชื่อ หากมีแผนที่มีหมายเลข `latest` จะหมายถึงแผนที่มี ID ตัวเลขสูงสุด.
 
 ## โครงสร้างงาน
 

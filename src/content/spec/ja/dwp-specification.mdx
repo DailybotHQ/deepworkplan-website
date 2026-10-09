@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP 仕様
 
-> **現在の標準: v6。** 本文書は保持された v5 仕様の基盤に、現行 v6 ライフサイクル拡張を加えたものです。6.x パックは新しい計画を既定で v6 として作成し、既存の計画は記録された世代を維持します。v6 の manifest とライブ snapshot は [plan-manifest/v6.json](https://deepworkplan.com/schema/plan-manifest/v6.json) と [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json) で公開されています。
+> **現在の標準: v7（DWP 7.0.0）。** 本文書は保持された v5 仕様の基盤に、v6 ライフサイクル拡張と v7 の contract 世代を加えたものです。7.x パックは新しい計画を既定で v7 として作成します。明示的に `v6` を指定すれば引き続き v6 計画が作成され、既存の計画は記録された世代を維持します。v7 の manifest と contract は [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) と [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json) で公開されており、ライブ snapshot は引き続き [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json) にあります。
 
 **バージョン 5.0.0。状態: 安定。** この文書は Deep Work Plan（DWP）方法論の規範的な仕様です。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
 
@@ -43,7 +43,7 @@ DWP は仕様駆動です。計画が仕様であり、エージェントは即�
 
 計画は追加で機械可読な状態レイヤーを MAY 携えることができます。`manifest.json`（マテリアライゼーション時に一度書き込まれる静的な識別情報）と `state.json`（タスクごとのライブ実行状態）です。状態レイヤーはv5 の計画に対して RECOMMENDED であり、無人実行および git のないエージェントワークスペースに対しては REQUIRED です。[計画の状態](/spec/plan-state) を参照してください。
 
-新しい計画には、3桁以上の単調増加する数値 ID を付けます（例：`PLAN_001_add_payment_webhooks/`）。凍結された v5 スキーマでは数値 ID も1語として数えるため、v5 の slug は2〜4語、v6 の slug は2〜5語です。既存の番号なし `PLAN_<slug>/` フォルダーは引き続き読み取り可能で、名前は変更しません。番号付き計画がある場合、`latest` は数値 ID が最も大きい計画を指します。
+新しい計画には、3桁以上の単調増加する数値 ID を付けます（例：`PLAN_001_add_payment_webhooks/`）。凍結された v5 スキーマでは数値 ID も1語として数えるため、v5 の slug は2〜4語、v6 と v7 の slug は2〜5語です。既存の番号なし `PLAN_<slug>/` フォルダーは引き続き読み取り可能で、名前は変更しません。番号付き計画がある場合、`latest` は数値 ID が最も大きい計画を指します。
 
 ## タスク構造
 

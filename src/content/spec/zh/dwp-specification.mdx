@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP 规范
 
-> **当前标准：v6。** 本文是保留的 v5 规范基础，并配合当前 v6 生命周期扩展。6.x 技能包默认使用 v6 创建新计划；现有计划保留记录的代际。v6 manifest 和实时 snapshot 发布于 [plan-manifest/v6.json](https://deepworkplan.com/schema/plan-manifest/v6.json) 和 [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json)。
+> **当前标准：v7（DWP 7.0.0）。** 本文是保留的 v5 规范基础，并配合 v6 生命周期扩展与 v7 契约代际。7.x 技能包默认使用 v7 创建新计划；明确的 `v6` 请求仍会生成 v6 计划，现有计划保留记录的代际。v7 manifest 和 contract 发布于 [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) 和 [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json)；实时 snapshot 仍位于 [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json)。
 
 **版本 5.0.0。状态：稳定。** 本文档是 Deep Work Plan（DWP）方法论的规范性规范。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
@@ -43,7 +43,7 @@ DWP 是规范驱动的：计划即规范，代理 MUST 依据其明确的验收�
 
 计划 MAY 额外携带机器可读状态层：`manifest.json`（静态标识，在物化时写入一次）与 `state.json`（实时逐任务执行状态）。状态层对 v5 计划 RECOMMENDED，对无人值守执行与无 git 的代理工作区 REQUIRED。参见 [Plan state](/spec/plan-state)。
 
-新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v6 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。
+新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v6 与 v7 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。
 
 ## 任务结构
 

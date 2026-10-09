@@ -182,7 +182,7 @@ Methodik angleichen), statt es zu überschreiben — und bestätigen Sie mit dem
 6. **`.dwp/` + `tmp/`.** Legen Sie ein per gitignore ausgeschlossenes `.dwp/` mit `plans/` an, plus einen `tmp/`-
  Scratch-Bereich — beide nicht-destruktiv zur `.gitignore` hinzugefügt (anhängen, niemals neu schreiben). Sie sind nicht austauschbar: alles, was ein Flow **über einen Plan** erzeugt — die Analyse, das Skills-Register, die Sicherheitsüberprüfung, Gate-Logs, Audit-Berichte — gehört in das `.dwp/plans/PLAN_001_<slug>/analysis_results/` genau dieses Plans, nie ins Repository-Root und nie nach `tmp/`. `tmp/` ist für Arbeit, die kein Plan je wieder liest.
 
-Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v6-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
+Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v6- und v7-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
 
 ## 4. Die erforderliche lokale Überprüfung installieren, dann die Opt-in-Addons anbieten
 

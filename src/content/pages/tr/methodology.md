@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Deep Work Plan metodolojisi
 
-Güncel 6.x paketi yeni planları varsayılan olarak v6 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek gerektirir.
+Güncel 7.x paketi yeni planları varsayılan olarak v7 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek gerektirir.
 Deep Work Plan (DWP), yapay zeka kodlama ajanlarıyla yapılandırılmış, otonom mühendislik işi yürütmek için açık, çerçeveden bağımsız bir metodolojidir. Belirsiz bir hedefi, bir ajanın bağlamını kaybetmeden yürütebileceği, duraklatabileceği, sürdürebileceği ve hakkında rapor verebileceği gözden geçirilebilir bir plana dönüştürür.
 
 DWP üç temel direğe dayanır.

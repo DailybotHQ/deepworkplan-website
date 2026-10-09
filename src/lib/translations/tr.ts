@@ -643,7 +643,7 @@ export const tr: SiteTranslations = {
       addon: {
         title: 'Eklentiler (tercihe dayalı)',
         description:
-          'onboard akışının bir depoya katmanladığı yetenekler: zorunlu AI Diff Reviewer yerel incelemesi ve asla AI-first temel hattının parçası olmayan dört isteğe bağlı eklenti.',
+          'onboard akışının bir depoya katmanladığı yetenekler: zorunlu AI Diff Reviewer yerel incelemesi ve asla AI-first temel hattının parçası olmayan yedi isteğe bağlı eklenti.',
       },
     },
     viewDetail: 'Ayrıntıları görüntüle',
@@ -722,7 +722,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Yerel inceleme ve tercihe dayalı eklentiler',
         description:
-          'Kuruluma alma, zorunlu AI Diff Reviewer yerel incelemesini kurar (CI kapısı isteğe bağlı kalır) ve dört tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade ve design-system — yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır isteğe bağlı eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
+          'Kuruluma alma, zorunlu AI Diff Reviewer yerel incelemesini kurar (CI kapısı isteğe bağlı kalır) ve yedi tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim ve Agentkit — yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır isteğe bağlı eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
       },
       {
         title: 'Planlayın ve yürütün',

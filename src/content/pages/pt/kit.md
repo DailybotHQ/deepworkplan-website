@@ -49,13 +49,16 @@ e um fallback genérico.
 
 ### Addons (opcionais)
 
-Capacidades que o fluxo de onboarding adiciona a um repositório. Quatro são opcionais e nunca fazem parte da base AI-first; a revisão local do AI Diff Reviewer é obrigatória desde o padrão 2.3.0:
+Capacidades que o fluxo de onboarding adiciona a um repositório. Sete são opcionais e nunca fazem parte da base AI-first; a revisão local do AI Diff Reviewer é obrigatória desde o padrão 2.3.0:
 
 - **Devcontainer** — um dev container reproduzível e isolado com auth de CLI de IA persistente.
 - **Dailybot** — relatórios de progresso e marcos em modo best-effort para equipes que usam a Dailybot.
 - **Atualização de dependências** — atualizações independentes do gerenciador de pacotes, em lotes, validadas e reversíveis.
 - **Design system** — um `DESIGN.md` com escopo de interface (em `docs/DESIGN.md`, referenciado a partir do `AGENTS.md`) derivado da fonte real de design do repositório, com perfis para UI visual, saída de CLI estilizada e mensagens conversacionais, para que os agentes gerem saída de interface fiel à marca; quando um design system é detectado a oferta é obrigatória enquanto a instalação fica protegida por aceitação — o perfil visual é recomendado com força quando detectado, e os perfis de CLI e conversacional são recomendados quando detectados e sempre perguntados.
 - **AI Diff Reviewer** — a revisão local obrigatória: o onboarding instala o [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, e o passe de segurança de cada Final Review a executa; o Flow B opcional adiciona uma barreira de merge de PR em CI que compartilha a mesma extensão, oferecida explicitamente e nunca instalada sem ser pedida.
+- **[Herdr](/pt/kit/herdr)** — delegação interativa: um plano entrega uma tarefa delimitada a um agente de programação em outro painel do Herdr e registra sua única resposta autorizada.
+- **[DeepWorkPlan Vim](/pt/kit/vim)** — o editor de terminal para o Deep Work Plan, com um índice de comandos, um navegador de planos somente leitura e um visualizador de Markdown.
+- **[Agentkit](/pt/kit/agentkit)** — um único comando `ak` para todo agente de programação no terminal, e delegação sem interface (headless) de tarefas delimitadas do plano.
 
 ### Ecossistema
 

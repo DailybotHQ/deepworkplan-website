@@ -53,7 +53,7 @@ paquete/CLI de Python y una reserva genérica.
 
 ### Addons (opcionales)
 
-Capacidades que el flujo de onboard suma a un repo. Cuatro son opcionales y nunca forman parte de la base
+Capacidades que el flujo de onboard suma a un repo. Siete son opcionales y nunca forman parte de la base
 AI-first; la revisión local de AI Diff Reviewer es requerida desde el estándar 2.3.0:
 
 - **Devcontainer** — un contenedor de desarrollo reproducible y aislado con autenticación de CLI de IA persistente.
@@ -61,6 +61,9 @@ AI-first; la revisión local de AI Diff Reviewer es requerida desde el estándar
 - **Actualización de dependencias** — actualizaciones agnósticas del gestor de paquetes, por lotes, validadas y reversibles.
 - **Sistema de diseño** — un `DESIGN.md` con alcance de interfaz (en `docs/DESIGN.md`, referenciado desde `AGENTS.md`) razonado a partir de la fuente de diseño real del repo, con perfiles para UI visual, salida de CLI con estilo y mensajería conversacional, para que los agentes generen salida de interfaz fiel a la marca; cuando se detecta un sistema de diseño la oferta es obligatoria mientras la instalación está protegida por aceptación — el perfil visual es recomendado con fuerza cuando se detecta, y los perfiles de CLI y conversacional se recomiendan cuando se detectan y siempre se preguntan.
 - **AI Diff Reviewer** — la revisión local requerida: el onboarding instala [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, y el pase de seguridad de cada Final Review la ejecuta; el Flujo B opcional añade una compuerta de fusión de PR en CI que comparte la misma extensión, ofrecida explícitamente y nunca instalada sin pedirlo.
+- **[Herdr](/es/kit/herdr)** — delegación interactiva: un plan entrega una tarea acotada a un agente de codificación en otro panel de Herdr y registra su única respuesta autorizada.
+- **[DeepWorkPlan Vim](/es/kit/vim)** — el editor de terminal para Deep Work Plan, con un índice de comandos, un explorador de planes de solo lectura y un visor de Markdown.
+- **[Agentkit](/es/kit/agentkit)** — un único comando `ak` para todos los agentes de codificación de terminal, y delegación sin interfaz (headless) de tareas acotadas del plan.
 
 ### Ecosistema
 

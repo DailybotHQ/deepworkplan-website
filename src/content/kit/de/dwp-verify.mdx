@@ -35,7 +35,7 @@ Repository- und Plankonformität objektiv prüfen — nur lesend.
 3. **KONFORM** oder **NICHT KONFORM** berichten, mit jedem aufgeführten Fehlschlag.
 4. Anbieten, Lücken als Deep Work Plan zu erfassen; niemals stillschweigend beheben.
 
-**Versionsspezifische Planprüfung.** Der Herkunftsprüfer des Repositorys akzeptiert den aktuellen DWP-Standard 6.0.0; Planprüfungen bleiben jedoch generationsspezifisch. Ein v6-Plan wird anhand seines Contract-Verweises, von `contract.json` oder einer Revisionskette unter `contracts/` erkannt und mit den v6-Prüfern für Contract, Journal und Ledger geprüft. Der beibehaltene Prüfer `plan_contract.py` unterstützt nur v5 und DARF NICHT als v6-Planprüfer ausgeführt werden. Bei v6 ist `state.json` eine erzeugte Snapshot-Projektion; eine Abweichung vom Journal ist ein Befund. Beide Generationen bestehen nebeneinander und werden bei der Prüfung nicht migriert.
+**Versionsspezifische Planprüfung.** Der Herkunftsprüfer des Repositorys akzeptiert den aktuellen DWP-Standard 7.0.0; Planprüfungen bleiben jedoch generationsspezifisch. Ein v6- oder v7-Plan wird anhand seines Contract-Verweises, von `contract.json` oder einer Revisionskette unter `contracts/` erkannt und mit den v6-Prüfern für Contract, Journal und Ledger geprüft. Der beibehaltene Prüfer `plan_contract.py` unterstützt nur v5 und DARF NICHT als v6-Planprüfer ausgeführt werden. Bei v6 ist `state.json` eine erzeugte Snapshot-Projektion; eine Abweichung vom Journal ist ein Befund. Beide Generationen bestehen nebeneinander und werden bei der Prüfung nicht migriert.
 
 ## Aliase
 

@@ -635,7 +635,7 @@ export const th: SiteTranslations = {
       addon: {
         title: 'Addon (สมัครใจ)',
         description:
-          'ความสามารถที่กระบวนการ onboard วางทับลงบน repo ได้แก่ การรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer และ addon เสริมอีกสี่ตัวซึ่งไม่ใช่ส่วนหนึ่งของพื้นฐาน AI-first',
+          'ความสามารถที่กระบวนการ onboard วางทับลงบน repo ได้แก่ การรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer และ addon เสริมอีกเจ็ดตัวซึ่งไม่ใช่ส่วนหนึ่งของพื้นฐาน AI-first',
       },
     },
     viewDetail: 'ดูรายละเอียด',
@@ -714,7 +714,7 @@ export const th: SiteTranslations = {
       {
         title: 'การรีวิวในเครื่องและ addon แบบสมัครใจ',
         description:
-          'การ onboarding จะติดตั้งการรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer (เกต CI ยังคงเป็นทางเลือก) และเสนอ addon แบบสมัครใจสี่ตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade และ design-system ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม repo สอดคล้องอย่างสมบูรณ์โดยมี addon เสริมศูนย์ตัว ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตกเกินกว่าชุดพื้นฐาน',
+          'การ onboarding จะติดตั้งการรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer (เกต CI ยังคงเป็นทางเลือก) และเสนอ addon แบบสมัครใจเจ็ดตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim และ Agentkit ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม repo สอดคล้องอย่างสมบูรณ์โดยมี addon เสริมศูนย์ตัว ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตกเกินกว่าชุดพื้นฐาน',
       },
       {
         title: 'วางแผนและดำเนินการ',

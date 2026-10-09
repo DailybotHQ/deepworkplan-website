@@ -197,7 +197,7 @@ metodología) en vez de sobrescribir — y confirma con el usuario antes de reem
 6. **`.dwp/` + `tmp/`.** Crea un `.dwp/` ignorado por git con `plans/`, más un espacio de
  trabajo `tmp/` — ambos añadidos a `.gitignore` de forma no destructiva (añadir, nunca reescribir). No son intercambiables: todo lo que un flujo produce **sobre un plan** —el análisis, el registro de skills, la revisión de seguridad, los logs de las compuertas, los informes de auditoría— debe vivir en el `.dwp/plans/PLAN_001_<slug>/analysis_results/` de ese plan, nunca en la raíz del repositorio ni en `tmp/`. `tmp/` es para trabajo que ningún plan volverá a leer.
 
-Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v6 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
+Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v6 y v7 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
 
 ## 4. Instala la revisión local requerida y luego ofrece los addons opcionales
 

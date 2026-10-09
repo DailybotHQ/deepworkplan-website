@@ -35,7 +35,7 @@ O `dwp-verify` verifica, de forma mecânica, se um repositório é AI-first (con
 3. Relatar **CONFORMANT** ou **NOT CONFORMANT** com cada falha listada.
 4. Oferecer-se para capturar as lacunas como um Deep Work Plan; nunca corrigir silenciosamente.
 
-**Validação de planos por geração.** O verificador de procedência do repositório aceita o padrão DWP atual 6.0.0, mas a validação de planos depende da geração. Um plano v6 é identificado pelo ponteiro para o contrato, por `contract.json` ou por uma cadeia de revisões em `contracts/`, e é verificado com os validadores v6 de contrato, journal e ledger. O verificador mantido `plan_contract.py` valida apenas v5 e NÃO DEVE ser usado para validar planos v6. Em v6, `state.json` é uma projeção snapshot gerada; divergência em relação ao journal é um apontamento. As duas gerações coexistem e a verificação não migra nenhuma delas.
+**Validação de planos por geração.** O verificador de procedência do repositório aceita o padrão DWP atual 7.0.0, mas a validação de planos depende da geração. Um plano v6 ou v7 é identificado pelo ponteiro para o contrato, por `contract.json` ou por uma cadeia de revisões em `contracts/`, e é verificado com os validadores v6 de contrato, journal e ledger. O verificador mantido `plan_contract.py` valida apenas v5 e NÃO DEVE ser usado para validar planos v6. Em v6, `state.json` é uma projeção snapshot gerada; divergência em relação ao journal é um apontamento. As duas gerações coexistem e a verificação não migra nenhuma delas.
 
 ## Aliases
 

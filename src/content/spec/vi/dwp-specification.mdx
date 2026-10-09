@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Đặc tả DWP
 
-> **Tiêu chuẩn hiện tại: v6.** Đây là nền tảng đặc tả v5 được giữ lại cùng các phần mở rộng vòng đời v6 hiện tại. Gói 6.x mặc định tạo kế hoạch mới bằng v6; các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận. Manifest và snapshot trực tiếp của v6 được công bố tại [plan-manifest/v6.json](https://deepworkplan.com/schema/plan-manifest/v6.json) và [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
+> **Tiêu chuẩn hiện tại: v7 (DWP 7.0.0).** Đây là nền tảng đặc tả v5 được giữ lại cùng các phần mở rộng vòng đời v6 và thế hệ hợp đồng v7. Gói 7.x mặc định tạo kế hoạch mới bằng v7; một yêu cầu `v6` rõ ràng vẫn tạo ra kế hoạch v6, và các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận. Manifest và hợp đồng v7 được công bố tại [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) và [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json); snapshot trực tiếp vẫn ở [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 
 **Phiên bản 5.0.0. Trạng thái: Ổn định.** Tài liệu này là đặc tả quy phạm cho phương pháp luận Deep Work Plan (DWP). Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
@@ -43,7 +43,7 @@ Kế hoạch mới PHẢI dùng thư mục có số thứ tự dưới `.dwp/pla
 
 Một kế hoạch CÓ THỂ (MAY) bổ sung mang lớp trạng thái có thể đọc bằng máy: `manifest.json` (danh tính tĩnh, được ghi một lần khi vật liệu hóa) và `state.json` (trạng thái thực thi trực tiếp theo tác vụ). Lớp trạng thái ĐƯỢC KHUYẾN NGHỊ (RECOMMENDED) cho các kế hoạch v5 và BẮT BUỘC (REQUIRED) cho thực thi không có giám sát và cho các không gian làm việc agent không có git. Xem [Trạng thái kế hoạch](/spec/plan-state).
 
-Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba chữ số (ví dụ `PLAN_001_add_payment_webhooks/`). Schema v5 đã cố định tính ID số là một từ, nên slug v5 có 2–4 từ; slug v6 có 2–5 từ. Các thư mục cũ không đánh số `PLAN_<slug>/` vẫn đọc được và không bao giờ bị đổi tên. Khi có kế hoạch được đánh số, `latest` trỏ đến kế hoạch có ID số cao nhất.
+Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba chữ số (ví dụ `PLAN_001_add_payment_webhooks/`). Schema v5 đã cố định tính ID số là một từ, nên slug v5 có 2–4 từ; slug v6 và v7 có 2–5 từ. Các thư mục cũ không đánh số `PLAN_<slug>/` vẫn đọc được và không bao giờ bị đổi tên. Khi có kế hoạch được đánh số, `latest` trỏ đến kế hoạch có ID số cao nhất.
 
 ## Cấu trúc tác vụ
 

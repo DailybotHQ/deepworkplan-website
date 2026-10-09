@@ -1,6 +1,6 @@
 ---
 title: Add-on
-description: "Addon DWP: bốn phần mở rộng tùy chọn, đánh giá cục bộ AI Diff Reviewer bắt buộc kèm bề mặt CI tùy chọn, hợp đồng addon và khái niệm kit."
+description: "Addon DWP: bảy phần mở rộng tùy chọn, đánh giá cục bộ AI Diff Reviewer bắt buộc kèm bề mặt CI tùy chọn, hợp đồng addon và khái niệm kit."
 order: 6
 lang: vi
 section: Addons
@@ -8,9 +8,9 @@ section: Addons
 
 # Add-on
 
-> **Phạm vi phiên bản:** Đây là tài liệu nền v5.0.0 được giữ lại. Tiêu chuẩn v6 hiện tại cũng yêu cầu các phần mở rộng `V6_*.md` áp dụng được liệt kê trong [mục lục đặc tả](/spec). Các kế hoạch v5 hiện có giữ nguyên quy tắc đã ghi nhận.
+> **Phạm vi phiên bản:** Đây là tài liệu nền v5.0.0 được giữ lại. Tiêu chuẩn hiện tại, DWP 7.0.0, cũng yêu cầu các phần mở rộng `V6_*.md` và `V7_*.md` áp dụng được liệt kê trong [mục lục đặc tả](/spec). Các kế hoạch v5 và v6 hiện có giữ nguyên quy tắc đã ghi nhận.
 
-**Phiên bản 2.1.0.** Add-on là phần mở rộng của phương pháp Deep Work Plan cốt lõi. Bốn trong năm addon là tùy chọn và **không bao giờ bắt buộc để tuân thủ** — kho lưu trữ không có addon tùy chọn nào vẫn hoàn toàn AI-first và tuân thủ DWP. Mỗi addon tùy chọn được đề xuất trong onboarding, chấp nhận hoặc từ chối rõ ràng và — khi được chấp nhận — **đối chiếu** với thiết lập hiện có thay vì ghi đè. Một thành phần là ngoại lệ được khai báo: kể từ chuẩn 2.3.0, **đánh giá cục bộ AI Diff Reviewer** là một phần của chuẩn cơ sở bắt buộc — onboarding cài đặt nó và mọi Final Review chạy nó — trong khi bề mặt CI của nó vẫn là opt-in.
+**Phiên bản 2.1.0.** Add-on là phần mở rộng của phương pháp Deep Work Plan cốt lõi. Bảy trong tám addon là tùy chọn và **không bao giờ bắt buộc để tuân thủ** — kho lưu trữ không có addon tùy chọn nào vẫn hoàn toàn AI-first và tuân thủ DWP. Mỗi addon tùy chọn được đề xuất trong onboarding, chấp nhận hoặc từ chối rõ ràng và — khi được chấp nhận — **đối chiếu** với thiết lập hiện có thay vì ghi đè. Một thành phần là ngoại lệ được khai báo: kể từ chuẩn 2.3.0, **đánh giá cục bộ AI Diff Reviewer** là một phần của chuẩn cơ sở bắt buộc — onboarding cài đặt nó và mọi Final Review chạy nó — trong khi bề mặt CI của nó vẫn là opt-in.
 
 ## Hợp đồng addon
 
@@ -25,9 +25,9 @@ Mỗi addon đang phát hành cung cấp bốn thành phần bắt buộc:
 
 Khám phá: luồng `onboard` liệt kê `skills/deepworkplan/addons/` và trình bày mỗi addon như bước opt-in trong **Giai đoạn 7b**, sau scaffolding cốt lõi.
 
-## Addon đang phát hành (năm)
+## Addon đang phát hành (tám)
 
-Hôm nay có năm addon — bốn addon opt-in cộng với đánh giá cục bộ bắt buộc. Mỗi addon có **trang danh mục kit** với chi tiết hướng người dùng và **spec chuẩn** bên trong skill Deep Work Plan.
+Hôm nay có tám addon — bảy addon opt-in cộng với đánh giá cục bộ bắt buộc. Mỗi addon có **trang danh mục kit** với chi tiết hướng người dùng và **spec chuẩn** bên trong skill Deep Work Plan. Bốn trong số đó — devcontainer, Herdr, DeepWorkPlan Vim và Agentkit — là các bộ tích hợp mỏng được ghim theo tag vào một sản phẩm có repository và chu kỳ phát hành riêng; mọi sản phẩm đều hoạt động mà không cần Deep Work Plan. Một addon được chấp nhận sẽ được ghi vào sổ đăng ký addon `.dwp/config.json` (DWP 7.0.0), vốn chỉ có thể đề xuất hoặc khuếch đại — không bao giờ chặn sự tuân thủ hay một kế hoạch.
 
 ### Devcontainer (addon đầu tiên)
 
@@ -79,6 +79,33 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 - **Tương đồng (Flow B):** `prompt.md` dùng chung + tiện ích mở rộng căn chỉnh phương pháp luận/mức độ nghiêm trọng; Đánh giá Nhận thức Lặp lại CI có thể rút ngắn vòng 2+ trong khi lượt kiểm tra cục bộ vẫn đầy đủ
 - **Rào trung lập với nhà cung cấp:** không luồng Deep Work Plan nào yêu cầu một dịch vụ thương mại, nhà cung cấp CI hay bí mật — reviewer là một skill MIT được ghim theo tag, chạy bởi chính agent lập trình của nhà phát triển
 - **Tuân thủ:** `verify` báo cáo một local reviewer bị thiếu như một thất bại đối với các repository khai báo chuẩn 2.3.0 hoặc mới hơn, và như một phát hiện phiên bản harness đối với các repository cũ
+
+### Herdr (addon thứ sáu)
+
+Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim `v0.1.0`, giao thức `1`), phương thức truyền ủy quyền **tương tác** của các kế hoạch v7.
+
+- **Trang kit:** [Herdr](/kit/herdr)
+- **Bổ sung:** một kế hoạch có thể giao một tác vụ có giới hạn cho một coding agent trong một pane [Herdr](https://herdr.dev) khác, trên cùng máy hoặc trên một máy mà Herdr kết nối tới qua SSH, và ghi lại phản hồi được ủy quyền duy nhất của nó vào nhật ký
+- **Hành vi:** giao thức peer (stamp, grant, reply, loop guard, giới hạn độ sâu và fan-out) nằm trong herdr-peers, không bao giờ nằm trong gói; mọi lần sử dụng đều cần grant hợp đồng `agent_delegation`, và kết quả của agent được ủy quyền vẫn chỉ là khẳng định cho đến khi runner của chính kế hoạch quan sát được nó
+- **Khi đề xuất:** opt-in rõ ràng trong Giai đoạn 7b; phát hiện chỉ đọc `herdr` và `herdr-peers`; phương thức truyền chỉ dùng được bên trong một phiên Herdr
+
+### DeepWorkPlan Vim (addon thứ bảy)
+
+Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v0.4.2`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
+
+- **Trang kit:** [DeepWorkPlan Vim](/kit/vim)
+- **Bổ sung:** một bề mặt trình soạn thảo tùy chọn ở cấp máy cho agent và con người — chỉ mục lệnh được sinh tự động, trình duyệt kế hoạch chỉ đọc và trình xem Markdown; mọi tuyên bố đều được đọc từ bề mặt máy đọc được đã ghim của sản phẩm
+- **Hành vi:** cấu hình Neovim hiện có không bao giờ bị ghi đè khi chưa có sự đồng ý rõ ràng; việc phát hiện là chỉ đọc
+- **Khi đề xuất:** opt-in rõ ràng trong Giai đoạn 7b; chỉ mang tính thông tin khi thiếu Neovim 0.12+
+
+### Agentkit (addon thứ tám)
+
+Bộ tích hợp mỏng của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`), phương thức truyền ủy quyền **headless** của các kế hoạch v7.
+
+- **Trang kit:** [Agentkit](/kit/agentkit)
+- **Bổ sung:** một bề mặt lệnh `ak` duy nhất cho các coding agent trên terminal, dùng để chạy headless một tác vụ kế hoạch có giới hạn; nó chỉ đóng góp các khả năng `subagents`, `cancel_children` và `model_routing` khi chạy, lúc được bật, được phát hiện và ở trên một giao diện tương thích
+- **Hành vi:** mọi lần sử dụng đều cần grant hợp đồng `agent_delegation`; addon không bao giờ tự cài CLI của coding agent và không bao giờ đọc giá trị khóa của nhà cung cấp
+- **Khi đề xuất:** opt-in rõ ràng trong Giai đoạn 7b; phát hiện chỉ đọc qua `ak doctor --json`
 
 ## Skill
 

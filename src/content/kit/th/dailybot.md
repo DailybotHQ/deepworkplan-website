@@ -126,7 +126,7 @@ Addon นี้ **ไม่** ถาม email OTP หรือ API keys แล�
 
 ## ขั้นตอน onboarding
 
-ระหว่าง DWP `onboard` ใน **Phase 7b** หลัง scaffolding AI-first หลัก ขั้นตอนเสนอสี่ addon แบบ opt-in (การตรวจสอบในเครื่องของ AI Diff Reviewer ถูกติดตั้งไปแล้วใน Phase 7a) หากนักพัฒนายอมรับ Dailybot:
+ระหว่าง DWP `onboard` ใน **Phase 7b** หลัง scaffolding AI-first หลัก ขั้นตอนเสนอเจ็ด addon แบบ opt-in (การตรวจสอบในเครื่องของ AI Diff Reviewer ถูกติดตั้งไปแล้วใน Phase 7a) หากนักพัฒนายอมรับ Dailybot:
 
 1. ตรวจการตั้งค่าที่มี (skill, CLI, `.dailybot/profile.json`, hook, ขั้นตอนรายงาน)
 2. เสนอติดตั้ง skill/CLI ผ่านขั้นตอนความยินยอมของ Dailybot

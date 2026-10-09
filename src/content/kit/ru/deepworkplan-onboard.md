@@ -35,14 +35,16 @@ usage: /deepworkplan-onboard
 
 Репозиторий полностью соответствует стандарту и с нулём опциональных дополнений; локальный обзор AI Diff Reviewer входит в базовый уровень начиная со стандарта 2.3.0. Обнаруженная реальность всегда побеждает предположения пресета.
 
-## Ссылки на схемы v6
+## Ссылки на схемы v7
 
-Для планов v6 каталог машиночитаемых схем опубликован по следующим постоянным URL. Активная проекция v6 — это снимок; `plan-state/v6.json` не существует. Существующие планы v5 продолжают использовать схему состояния v5, а старые планы никогда не переписываются незаметно.
+Для планов v7 — поколения по умолчанию в текущем пакете 7.x — каталог машиночитаемых схем опубликован по следующим постоянным URL. Активная проекция — это снимок, общий с v6; ни `plan-state/v6.json`, ни `plan-state/v7.json` не существует.
 
-- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v6.json
-- **Plan snapshot (v6 live projection):** https://deepworkplan.com/schema/plan-snapshot/v6.json
-- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v6.json
-- **Journal event:** https://deepworkplan.com/schema/journal-event/v6.json
-- **Context manifest:** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v7.json
+- **Plan contract:** https://deepworkplan.com/schema/plan-contract/v7.json (контракт v6 плюс необязательный маркер задачи `parallel_safe`)
+- **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (добавляет событие `delegation`)
+- **Plan snapshot (активная проекция, общая с v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
+- **Context manifest (общий с v6):** https://deepworkplan.com/schema/context-manifest/v6.json
+
+Планы v6 сохраняют свои схемы v6 ([манифест](https://deepworkplan.com/schema/plan-manifest/v6.json), [контракт](https://deepworkplan.com/schema/plan-contract/v6.json), [событие журнала](https://deepworkplan.com/schema/journal-event/v6.json)); существующие планы v5 продолжают использовать схему состояния v5, а старые планы никогда не переписываются незаметно.
 
 Текущий пакет 7.x по умолчанию создает новые планы в формате v7. Существующие планы сохраняют записанное поколение; для миграции требуется явный запрос. Новые планы получают монотонно возрастающие числовые ID длиной не менее трёх цифр (например, `PLAN_001_add_payment_webhooks/`). Замороженные схемы v5 считают числовую ID одним словом, поэтому slug v5 содержит 2–4 слова, а slug v7 — 2–5. Существующие папки без номера `PLAN_<slug>/` остаются доступными для чтения и никогда не переименовываются. Если есть нумерованные планы, `latest` указывает на план с наибольшим числовым ID.

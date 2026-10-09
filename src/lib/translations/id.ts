@@ -642,7 +642,7 @@ export const id: SiteTranslations = {
       addon: {
         title: 'Addon (opt-in)',
         description:
-          'Kemampuan yang ditambahkan alur onboard ke sebuah repo: review lokal AI Diff Reviewer yang wajib ditambah empat addon opsional yang tidak pernah menjadi bagian dari baseline AI-first.',
+          'Kemampuan yang ditambahkan alur onboard ke sebuah repo: review lokal AI Diff Reviewer yang wajib ditambah tujuh addon opsional yang tidak pernah menjadi bagian dari baseline AI-first.',
       },
     },
     viewDetail: 'Lihat detail',
@@ -721,7 +721,7 @@ export const id: SiteTranslations = {
       {
         title: 'Review lokal dan addon opt-in',
         description:
-          'Onboarding memasang review lokal AI Diff Reviewer yang wajib (gerbang CI-nya tetap opsional) dan menawarkan empat addon opt-in — devcontainer, Dailybot, dependency-upgrade, dan design-system — yang Anda terima hanya ketika cocok. Sebuah repo sepenuhnya konforman dengan nol addon opsional. Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack di luar baseline.',
+          'Onboarding memasang review lokal AI Diff Reviewer yang wajib (gerbang CI-nya tetap opsional) dan menawarkan tujuh addon opt-in — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, dan Agentkit — yang Anda terima hanya ketika cocok. Sebuah repo sepenuhnya konforman dengan nol addon opsional. Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack di luar baseline.',
       },
       {
         title: 'Rencanakan dan eksekusi',

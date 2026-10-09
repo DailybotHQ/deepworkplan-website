@@ -646,7 +646,7 @@ export const pt: SiteTranslations = {
       addon: {
         title: 'Addons (opcionais)',
         description:
-          'Capacidades que o fluxo de onboarding adiciona a um repositório: a revisão local obrigatória do AI Diff Reviewer mais quatro addons opcionais que nunca fazem parte da base AI-first.',
+          'Capacidades que o fluxo de onboarding adiciona a um repositório: a revisão local obrigatória do AI Diff Reviewer mais sete addons opcionais que nunca fazem parte da base AI-first.',
       },
     },
     viewDetail: 'Ver detalhes',
@@ -725,7 +725,7 @@ export const pt: SiteTranslations = {
       {
         title: 'Revisão local e addons opcionais',
         description:
-          'O onboarding instala a revisão local obrigatória do AI Diff Reviewer (seu gate de CI permanece opcional) e oferece quatro addons opcionais — devcontainer, Dailybot, dependency-upgrade e design-system — que você aceita apenas quando fizerem sentido. Um repositório é totalmente conforme com zero addons opcionais. Use /skill-create e /agent-create (a sub-skill author) para desenvolver skills, agents e commands além do conjunto base.',
+          'O onboarding instala a revisão local obrigatória do AI Diff Reviewer (seu gate de CI permanece opcional) e oferece sete addons opcionais — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim e Agentkit — que você aceita apenas quando fizerem sentido. Um repositório é totalmente conforme com zero addons opcionais. Use /skill-create e /agent-create (a sub-skill author) para desenvolver skills, agents e commands além do conjunto base.',
       },
       {
         title: 'Planeje e execute',

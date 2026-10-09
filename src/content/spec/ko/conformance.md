@@ -42,4 +42,4 @@ DWP 적합 리포지토리는 다음을 모두 충족해야(MUST) 합니다. 모
 
 리포지토리는 온보딩 후 그리고 완료된 각 계획 후 다시 검증되어야(SHOULD) 합니다. 그래야 적합성이 한 번 단언되는 것이 아니라 유지됩니다.
 
-**세대별 계획 검증.** 저장소 출처 검증기는 현재 DWP 표준 6.0.0을 허용하지만 계획 검사는 세대별로 수행됩니다. v6 계획은 contract 포인터, `contract.json` 또는 `contracts/` 개정 체인으로 식별하며 v6 contract, journal, ledger 검증기로 확인합니다. 유지되는 `plan_contract.py` 검사기는 v5 전용이므로 v6 계획 검증기로 실행해서는 안 됩니다. v6의 `state.json`은 생성된 snapshot projection이며 journal과 불일치하면 문제로 보고됩니다. 두 세대는 함께 존재하며 검증 중 마이그레이션되지 않습니다.
+**세대별 계획 검증.** 저장소 출처 검증기는 현재 DWP 표준 7.0.0을 허용하지만 계획 검사는 세대별로 수행됩니다. v6 또는 v7 계획은 contract 포인터, `contract.json` 또는 `contracts/` 개정 체인으로 식별하며 v6 contract, journal, ledger 검증기로 확인합니다. 유지되는 `plan_contract.py` 검사기는 v5 전용이므로 v6 계획 검증기로 실행해서는 안 됩니다. v6의 `state.json`은 생성된 snapshot projection이며 journal과 불일치하면 문제로 보고됩니다. 두 세대는 함께 존재하며 검증 중 마이그레이션되지 않습니다.

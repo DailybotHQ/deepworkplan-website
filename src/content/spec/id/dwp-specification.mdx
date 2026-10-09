@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP specification
 
-> **Standar saat ini: v6.** Ini adalah dasar spesifikasi v5 yang dipertahankan dengan ekstensi siklus hidup v6 saat ini. Paket 6.x membuat rencana baru menggunakan v6 secara default; rencana yang ada mempertahankan generasi tercatat. Manifest dan snapshot live v6 diterbitkan di [plan-manifest/v6.json](https://deepworkplan.com/schema/plan-manifest/v6.json) dan [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
+> **Standar saat ini: v7 (DWP 7.0.0).** Ini adalah dasar spesifikasi v5 yang dipertahankan dengan ekstensi siklus hidup v6 dan generasi kontrak v7. Paket 7.x membuat rencana baru menggunakan v7 secara default; permintaan `v6` yang eksplisit tetap menghasilkan rencana v6, dan rencana yang ada mempertahankan generasi tercatat. Manifest dan kontrak v7 diterbitkan di [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) dan [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json); snapshot live tetap di [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 
 **Versi 5.0.0. Status: Stabil.** Dokumen ini adalah spesifikasi normatif untuk metodologi Deep Work Plan (DWP). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
@@ -43,7 +43,7 @@ Rencana baru MUST memakai direktori bernomor di bawah `.dwp/plans/`, seperti `PL
 
 Sebuah rencana MAY juga membawa lapisan status yang dapat dibaca mesin: `manifest.json` (identitas statis, ditulis sekali saat materialisasi) dan `state.json` (status eksekusi per-tugas yang berjalan). Lapisan status RECOMMENDED untuk rencana v5 dan REQUIRED untuk eksekusi tanpa pengawasan dan untuk ruang kerja agent tanpa git. Lihat [Status rencana](/spec/plan-state).
 
-Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v6 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.
+Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v6 dan v7 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.
 
 ## Anatomi tugas
 

@@ -639,7 +639,7 @@ export const vi: SiteTranslations = {
       addon: {
         title: 'Addon (tự nguyện)',
         description:
-          'Các năng lực mà luồng onboard bổ sung lên một repo: bản đánh giá cục bộ bắt buộc của AI Diff Reviewer cùng bốn addon tùy chọn không bao giờ là một phần của nền tảng AI-first cơ bản.',
+          'Các năng lực mà luồng onboard bổ sung lên một repo: bản đánh giá cục bộ bắt buộc của AI Diff Reviewer cùng bảy addon tùy chọn không bao giờ là một phần của nền tảng AI-first cơ bản.',
       },
     },
     viewDetail: 'Xem chi tiết',
@@ -718,7 +718,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Đánh giá cục bộ và addon tự nguyện',
         description:
-          'Khởi tạo cài đặt bản đánh giá cục bộ bắt buộc của AI Diff Reviewer (cổng CI của nó vẫn là tùy chọn) và đề xuất bốn addon tự nguyện — devcontainer, Dailybot, dependency-upgrade và design-system — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không cần addon tùy chọn nào. Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack vượt ra ngoài cơ sở.',
+          'Khởi tạo cài đặt bản đánh giá cục bộ bắt buộc của AI Diff Reviewer (cổng CI của nó vẫn là tùy chọn) và đề xuất bảy addon tự nguyện — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim và Agentkit — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không cần addon tùy chọn nào. Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack vượt ra ngoài cơ sở.',
       },
       {
         title: 'Lập kế hoạch và thực thi',

@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Specifica DWP
 
-> **Standard attuale: v6.** Questa è la base della specifica v5 mantenuta con le attuali estensioni del ciclo di vita v6. Il pacchetto 6.x crea per impostazione predefinita i nuovi piani in v6; i piani esistenti mantengono la generazione registrata. Il manifest e lo snapshot live di v6 sono pubblicati in [plan-manifest/v6.json](https://deepworkplan.com/schema/plan-manifest/v6.json) e [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
+> **Standard attuale: v7 (DWP 7.0.0).** Questa è la base della specifica v5 mantenuta con le estensioni del ciclo di vita v6 e la generazione di contratto v7. Il pacchetto 7.x crea per impostazione predefinita i nuovi piani in v7; una richiesta esplicita di `v6` materializza comunque un piano v6, e i piani esistenti mantengono la generazione registrata. Il manifest e il contratto v7 sono pubblicati in [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) e [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json); lo snapshot live resta in [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 
 **Versione 5.0.0. Stato: Stabile.** Questo documento è la specifica normativa per la metodologia Deep Work Plan (DWP). Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
 
@@ -43,7 +43,7 @@ Un nuovo piano DEVE usare una directory numerata sotto `.dwp/plans/`, come `PLAN
 
 Un piano PUÒ portare in aggiunta il livello di stato leggibile dalle macchine: `manifest.json` (identità statica, scritto una volta alla materializzazione) e `state.json` (stato di esecuzione live per attività). Il livello di stato è RACCOMANDATO per i piani v5 e OBBLIGATORIO per l'esecuzione non presidiata e per i workspace agente senza git. Vedi [Stato del piano](/spec/plan-state).
 
-I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v6 ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.
+I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v6 e v7 ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.
 
 ## Anatomia dell'attività
 

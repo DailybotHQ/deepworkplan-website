@@ -35,7 +35,7 @@ Comprueba de forma objetiva la conformidad del repositorio y de los planes — s
 3. Informa **CONFORME** o **NO CONFORME** con cada fallo listado.
 4. Ofrece capturar las brechas como un Deep Work Plan; nunca corrige en silencio.
 
-**Validación de planes por generación.** El comprobador de procedencia del repositorio acepta el estándar DWP actual 6.0.0, pero la validación de planes depende de su generación. Un plan v6 se identifica por el puntero al contrato, `contract.json` o una cadena de revisiones en `contracts/`, y se comprueba con los validadores v6 de contrato, diario y ledger. El comprobador conservado `plan_contract.py` solo valida v5 y NO DEBE usarse para validar planes v6. En v6, `state.json` es una proyección generada como snapshot; cualquier diferencia con el diario es un hallazgo. Ambas generaciones conviven y la verificación no migra ninguna.
+**Validación de planes por generación.** El comprobador de procedencia del repositorio acepta el estándar DWP actual 7.0.0, pero la validación de planes depende de su generación. Un plan v6 o v7 se identifica por el puntero al contrato, `contract.json` o una cadena de revisiones en `contracts/`, y se comprueba con los validadores v6 de contrato, diario y ledger. El comprobador conservado `plan_contract.py` solo valida v5 y NO DEBE usarse para validar planes v6. En v6, `state.json` es una proyección generada como snapshot; cualquier diferencia con el diario es un hallazgo. Ambas generaciones conviven y la verificación no migra ninguna.
 
 ## Alias
 

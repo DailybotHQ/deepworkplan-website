@@ -223,7 +223,7 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
 6. **`.dwp/` + `tmp/`.** Dựng một `.dwp/` được gitignore với `plans/`, cùng một không gian nháp
    `tmp/` — cả hai đều được thêm vào `.gitignore` một cách không phá hủy (nối thêm, không bao giờ viết lại). Hai nơi này không thể thay cho nhau: mọi thứ một luồng tạo ra **về một kế hoạch** — bản phân tích, sổ ghi skills, bản rà soát bảo mật, nhật ký cổng kiểm, báo cáo kiểm toán — đều phải nằm trong `.dwp/plans/PLAN_001_<slug>/analysis_results/` của chính kế hoạch đó, không đặt ở gốc kho và không đặt trong `tmp/`. `tmp/` dành cho phần việc mà không kế hoạch nào đọc lại.
 
-Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba chữ số (ví dụ `PLAN_001_add_payment_webhooks/`). Schema v5 đã cố định tính ID số là một từ, nên slug v5 có 2–4 từ; slug v6 có 2–5 từ. Các thư mục cũ không đánh số `PLAN_<slug>/` vẫn đọc được và không bao giờ bị đổi tên. Khi có kế hoạch được đánh số, `latest` trỏ đến kế hoạch có ID số cao nhất.
+Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba chữ số (ví dụ `PLAN_001_add_payment_webhooks/`). Schema v5 đã cố định tính ID số là một từ, nên slug v5 có 2–4 từ; slug v6 và v7 có 2–5 từ. Các thư mục cũ không đánh số `PLAN_<slug>/` vẫn đọc được và không bao giờ bị đổi tên. Khi có kế hoạch được đánh số, `latest` trỏ đến kế hoạch có ID số cao nhất.
 
 ## 4. Cài đặt đánh giá cục bộ bắt buộc, rồi đề xuất các addon tùy chọn
 

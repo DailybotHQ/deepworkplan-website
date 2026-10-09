@@ -8,7 +8,7 @@ section: Workflow
 
 # Kế hoạch Lite
 
-> **Phạm vi phiên bản:** Đây là tài liệu nền v5.0.0 được giữ lại. Tiêu chuẩn v6 hiện tại cũng yêu cầu các phần mở rộng `V6_*.md` áp dụng được liệt kê trong [mục lục đặc tả](/spec). Các kế hoạch v5 hiện có giữ nguyên quy tắc đã ghi nhận.
+> **Phạm vi phiên bản:** Đây là tài liệu nền v5.0.0 được giữ lại. Tiêu chuẩn hiện tại, DWP 7.0.0, cũng yêu cầu các phần mở rộng `V6_*.md` và `V7_*.md` áp dụng được liệt kê trong [mục lục đặc tả](/spec). Các kế hoạch v5 và v6 hiện có giữ nguyên quy tắc đã ghi nhận.
 
 **Phiên bản 5.0.0. Trạng thái: Ổn định.** Tài liệu này đặc tả biểu diễn kế hoạch Lite được giới thiệu cùng với [Đặc tả DWP](/spec/dwp-specification): một định dạng kế hoạch cho công việc có giới hạn, quy mô nhỏ đến vừa, được vật liệu hóa trực tiếp, không qua giai đoạn bản nháp không thể thực thi. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 

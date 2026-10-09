@@ -126,7 +126,7 @@ Dailybot エージェントスキルのインストールは、DWP アドオン�
 
 ## オンボーディングフロー
 
-DWP `onboard` **フェーズ 7b** で、コア AI-first スキャフォールディングの後、4 つのオプトインアドオンを提供（AI Diff Reviewer ローカルレビューはフェーズ 7a で既にインストール済み）。開発者が Dailybot を受け入れた場合：
+DWP `onboard` **フェーズ 7b** で、コア AI-first スキャフォールディングの後、7 つのオプトインアドオンを提供（AI Diff Reviewer ローカルレビューはフェーズ 7a で既にインストール済み）。開発者が Dailybot を受け入れた場合：
 
 1. 既存セットアップを検出（スキル、CLI、`.dailybot/profile.json`、フック、レポートステップ）。
 2. Dailybot の同意フロー経由でスキル/CLI インストールを提供。
