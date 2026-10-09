@@ -94,7 +94,9 @@ Run the installer again to update. It is idempotent: an existing DeepWorkPlan Vi
 To install a specific tag, set `DWP_VIM_REF`. Pin a tag rather than a branch: releases before `v0.4.0` do not include the gestures, the plan browser, the Markdown viewer or this installer.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 To uninstall, run `lua delete.lua` from the configuration directory. It removes the configuration, plugins, Mason data, cache and state, and the font copy the installer made, and it leaves the Neovim binary and your system packages alone.

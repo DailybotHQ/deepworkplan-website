@@ -94,7 +94,9 @@ Execute o instalador de novo para atualizar. É idempotente: uma instalação ex
 Para instalar uma etiqueta específica, defina `DWP_VIM_REF`. Fixe uma etiqueta em vez de um ramo: as versões anteriores a `v0.4.0` não incluem os gestos, o navegador de planos, o visualizador de Markdown nem este instalador.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 Para desinstalar, execute `lua delete.lua` a partir do diretório de configuração. Remove a configuração, os plugins, os dados do Mason, a cache e o estado, e a cópia da fonte que o instalador fez, e deixa intactos o binário do Neovim e os pacotes do sistema.

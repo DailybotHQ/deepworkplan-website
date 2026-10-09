@@ -94,7 +94,9 @@ Jalankan pemasang lagi untuk memperbarui. Pemasang bersifat idempoten: checkout 
 Untuk memasang tag tertentu, setel `DWP_VIM_REF`. Patok tag, bukan cabang: rilis sebelum `v0.4.0` tidak memuat gestur, penjelajah rencana, penampil Markdown, maupun pemasang ini.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 Untuk mencopot, jalankan `lua delete.lua` dari direktori konfigurasi. Perintah ini menghapus konfigurasi, plugin, data Mason, cache dan status, serta salinan font yang dibuat pemasang, dan membiarkan biner Neovim serta paket sistem Anda.

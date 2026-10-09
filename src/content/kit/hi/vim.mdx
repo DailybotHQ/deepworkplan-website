@@ -94,7 +94,9 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 किसी विशेष टैग को इंस्टॉल करने के लिए `DWP_VIM_REF` सेट करें। ब्रांच के बजाय टैग पिन करें: `v0.4.0` से पहले की रिलीज़ में जेस्चर, योजना ब्राउज़र, Markdown व्यूअर या यह इंस्टॉलर शामिल नहीं हैं।
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 अनइंस्टॉल करने के लिए कॉन्फ़िगरेशन डायरेक्टरी से `lua delete.lua` चलाएँ। यह कॉन्फ़िगरेशन, प्लगइन, Mason डेटा, कैश और स्टेट, और इंस्टॉलर द्वारा बनाई फ़ॉन्ट की प्रति हटा देता है, और Neovim बाइनरी तथा आपके सिस्टम पैकेज को जस का तस छोड़ देता है।

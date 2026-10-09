@@ -94,7 +94,9 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 要安装指定的标签，请设置 `DWP_VIM_REF`。请固定到标签而不是分支：`v0.4.0` 之前的版本不包含手势、计划浏览器、Markdown 查看器以及此安装程序。
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 要卸载，请在配置目录中运行 `lua delete.lua`。它会移除配置、插件、Mason 数据、缓存与状态，以及安装程序复制的字体，但保留 Neovim 可执行文件和你的系统软件包。

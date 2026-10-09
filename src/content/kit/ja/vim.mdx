@@ -94,7 +94,9 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 特定のタグをインストールするには `DWP_VIM_REF` を設定します。ブランチではなくタグに固定してください。`v0.4.0` より前のリリースには、VS Code 風の操作、計画ブラウザ、Markdown ビューア、このインストーラが含まれていません。
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 アンインストールするには、設定ディレクトリで `lua delete.lua` を実行します。設定、プラグイン、Mason のデータ、キャッシュと状態、インストーラがコピーしたフォントを削除し、Neovim 本体とシステムのパッケージはそのまま残します。

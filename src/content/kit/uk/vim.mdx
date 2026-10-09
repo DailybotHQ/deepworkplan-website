@@ -94,7 +94,9 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 Щоб встановити певний тег, задайте `DWP_VIM_REF`. Фіксуйте тег, а не гілку: релізи до `v0.4.0` не містять жестів, оглядача планів, переглядача Markdown і цього інсталятора.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 Щоб видалити, виконайте `lua delete.lua` у каталозі конфігурації. Він видаляє конфігурацію, плагіни, дані Mason, кеш і стан, а також копію шрифту, зроблену інсталятором, і не чіпає виконуваний файл Neovim та ваші системні пакети.

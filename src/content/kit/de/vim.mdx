@@ -94,7 +94,9 @@ Führen Sie den Installer erneut aus, um zu aktualisieren. Er ist idempotent: Ei
 Um einen bestimmten Tag zu installieren, setzen Sie `DWP_VIM_REF`. Legen Sie einen Tag statt eines Branches fest: Releases vor `v0.4.0` enthalten weder die Gesten noch den Plan-Browser, den Markdown-Viewer oder diesen Installer.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 Zum Deinstallieren führen Sie `lua delete.lua` im Konfigurationsverzeichnis aus. Es entfernt die Konfiguration, die Plugins, die Mason-Daten, Cache und Zustand sowie die vom Installer angelegte Schriftkopie und lässt die Neovim-Binärdatei und Ihre Systempakete unberührt.

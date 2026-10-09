@@ -94,7 +94,9 @@ Esegua di nuovo l’installer per aggiornare. È idempotente: un checkout esiste
 Per installare un tag specifico, imposti `DWP_VIM_REF`. Fissi un tag anziché un ramo: le release precedenti a `v0.4.0` non includono i gesti, il browser dei piani, il visualizzatore Markdown né questo installer.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 Per disinstallare, esegua `lua delete.lua` dalla directory di configurazione. Rimuove la configurazione, i plugin, i dati di Mason, la cache e lo stato e la copia del font fatta dall’installer, e lascia intatti il binario di Neovim e i pacchetti di sistema.

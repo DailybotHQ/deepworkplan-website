@@ -72,7 +72,7 @@ and a project-wide run here is the honest gate:
 The tree is **mirrored**, not co-located:
 
 - `src/lib/<name>.ts` → `tests/unit/lib/<name>.test.ts` (e.g. `vim-installer.ts` → `vim-installer.test.ts`, `software-schema.ts` → `software-schema.test.ts`)
-- Diagram figures with a 17-language inline map → one source-contract test per family under `tests/unit/components/` (`vim-diagrams-parity.test.ts` pins key parity, the `en` fallback, `role="img"` and the verified keybindings)
+- Diagram figures with a 17-language inline map → one source-contract test per family under `tests/unit/components/` (`vim-diagrams-parity.test.ts` pins key parity, the `en` fallback, `role="img"` and the verified keybindings; `kit-ecosystem-parity.test.ts` pins the `KitEcosystem` plate's map parity, no hydration, the product pins of the v7 claims ledger and that every row links an existing kit page in all 17 languages)
 - Editorial/home components → `tests/unit/components/<topic>.test.ts`, which
   assert narrative and parity across plates rather than one component each
 

@@ -94,7 +94,9 @@ Uruchom instalator ponownie, aby zaktualizować. Jest idempotentny: istniejący 
 Aby zainstalować konkretny tag, ustaw `DWP_VIM_REF`. Przypinaj tag, a nie gałąź: wydania sprzed `v0.4.0` nie zawierają gestów, przeglądarki planów, podglądu Markdown ani tego instalatora.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 Aby odinstalować, uruchom `lua delete.lua` z katalogu konfiguracji. Usuwa konfigurację, wtyczki, dane Mason, pamięć podręczną i stan oraz kopię czcionki wykonaną przez instalator, a plik binarny Neovima i Twoje pakiety systemowe zostawia w spokoju.

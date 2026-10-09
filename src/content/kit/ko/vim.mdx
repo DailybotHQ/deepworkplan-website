@@ -94,7 +94,9 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 특정 태그를 설치하려면 `DWP_VIM_REF`를 설정하세요. 브랜치가 아니라 태그로 고정하세요. `v0.4.0` 이전 릴리스에는 제스처, 계획 브라우저, Markdown 뷰어, 이 설치 프로그램이 들어 있지 않아요.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 제거하려면 설정 디렉터리에서 `lua delete.lua`를 실행하세요. 설정, 플러그인, Mason 데이터, 캐시와 상태, 설치 프로그램이 복사한 글꼴을 지우고, Neovim 실행 파일과 시스템 패키지는 그대로 둬요.

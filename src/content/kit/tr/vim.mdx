@@ -94,7 +94,9 @@ Güncellemek için kurulum programını yeniden çalıştırın. Bu işlem idemp
 Belirli bir etiketi kurmak için `DWP_VIM_REF` değerini ayarlayın. Dal yerine bir etiket sabitleyin: `v0.4.0` öncesindeki sürümler hareketleri, plan tarayıcısını, Markdown görüntüleyiciyi ya da bu kurulum programını içermez.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 Kaldırmak için yapılandırma dizininde `lua delete.lua` çalıştırın. Yapılandırmayı, eklentileri, Mason verilerini, önbelleği ve durumu ve kurulum programının yaptığı yazı tipi kopyasını kaldırır; Neovim ikili dosyasına ve sistem paketlerinize dokunmaz.

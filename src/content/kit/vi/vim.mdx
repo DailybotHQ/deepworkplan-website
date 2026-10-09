@@ -94,7 +94,9 @@ Chạy lại trình cài đặt để cập nhật. Nó có tính lũy đẳng: 
 Để cài một thẻ cụ thể, hãy đặt `DWP_VIM_REF`. Hãy ghim một thẻ thay vì một nhánh: các bản phát hành trước `v0.4.0` không có các thao tác kiểu VS Code, trình duyệt kế hoạch, trình xem Markdown hay trình cài đặt này.
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 Để gỡ cài đặt, chạy `lua delete.lua` từ thư mục cấu hình. Nó xóa cấu hình, plugin, dữ liệu Mason, bộ nhớ đệm và trạng thái, cùng bản sao phông chữ mà trình cài đặt đã tạo, và giữ nguyên tệp thực thi Neovim cùng các gói hệ thống của bạn.

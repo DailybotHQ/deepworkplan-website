@@ -94,7 +94,9 @@ curl -fsSL https://deepworkplan.com/vim/install.sh | bash
 หากต้องการติดตั้งแท็กที่ระบุ ให้ตั้งค่า `DWP_VIM_REF` ควรปักหมุดแท็กแทนแบรนช์ เพราะรุ่นก่อน `v0.4.0` ไม่มีท่าทาง ตัวเรียกดูแผน ตัวดู Markdown หรือตัวติดตั้งนี้
 
 ```bash
-curl -fsSL https://deepworkplan.com/vim/install.sh | DWP_VIM_REF=v0.4.0 bash
+curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh
+shasum -a 256 install.sh
+DWP_VIM_REF=v0.4.0 bash install.sh
 ```
 
 หากต้องการถอนการติดตั้ง ให้รัน `lua delete.lua` จากไดเรกทอรีคอนฟิก มันจะลบคอนฟิก ปลั๊กอิน ข้อมูล Mason แคชและสถานะ และสำเนาฟอนต์ที่ตัวติดตั้งทำไว้ และปล่อยไบนารี Neovim กับแพ็กเกจระบบของคุณไว้ตามเดิม
