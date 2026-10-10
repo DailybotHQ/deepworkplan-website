@@ -236,7 +236,7 @@ design system, agentkit, Herdr, DeepWorkPlan Vim) và đề xuất mỗi cái nh
 ghi lại mọi lần chấp nhận trong `.dwp/config.json`. Một repository hoàn toàn tuân thủ
 với **không** addon tùy chọn nào — đừng bao giờ tự động cài chúng.
 
-- **Hỗ trợ devcontainer** — một lớp tích hợp mỏng cho [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.2.1`, cùng skill `dck-dockerfile` của nó): `dck init` tạo container riêng của repository — image chính thức ghim theo digest, không có base image dùng chung, `bash dev.sh up` — và chỉ đối chiếu một devcontainer có sẵn sau khi diff của nó được chấp nhận; coding agent là một lớp opt-in.
+- **Hỗ trợ devcontainer** — một lớp tích hợp mỏng cho [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.2.2`, cùng skill `dck-dockerfile` của nó): `dck init` tạo container riêng của repository — image chính thức ghim theo digest, không có base image dùng chung, `bash dev.sh up` — và chỉ đối chiếu một devcontainer có sẵn sau khi diff của nó được chấp nhận; coding agent là một lớp opt-in.
 - **Tích hợp Dailybot** — bốn sự kiện vòng đời (kickoff, tác vụ quan trọng, bị chặn, hoàn tất) dưới dạng báo cáo tiến độ theo nỗ lực tối đa cho các đội đã dùng Dailybot, với lớp hook tự hành tùy chọn (`dailybot-cli >= 3.9.0`). Cài skill agent Dailybot đi kèm (3.23.3) cũng mở ra chat, check-in, tạo biểu mẫu, hỏi AI, board và tác vụ Plan, API key theo repo và nhiều hơn — addon chỉ đấu nối phần báo cáo vào quá trình thực thi DWP. Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
 - **Nâng cấp phụ thuộc** — nâng cấp độc lập với trình quản lý gói, theo lô, được kiểm chứng, hoàn nguyên được. Khi
   được chấp nhận, nó cài command `/lib-upgrade`.

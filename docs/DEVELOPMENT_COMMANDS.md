@@ -43,7 +43,7 @@ bash dev.sh shell     # login shell inside the container (as node, in /app)
 bash dev.sh down      # stop and remove the container (named volumes kept)
 ```
 
-`dev.sh` (repo root) is a thin launcher over [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, v0.2.1, installed once on the host). It runs the container declared in `.devcontainer/dck.toml` without VS Code or Cursor, and the editor's "Reopen in Container" opens the same one. Verbs: `up`, `down`, `shell`, `exec`, `build`, `rebuild`, `logs`, `ps`, `doctor`, `ssh`, `herdr`, `herdr-layout`, `agents`, `ask`, `help`. See [docker/local/README.md](../docker/local/README.md) for the full workflow.
+`dev.sh` (repo root) is a thin launcher over [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, v0.2.2, installed once on the host). It runs the container declared in `.devcontainer/dck.toml` without VS Code or Cursor, and the editor's "Reopen in Container" opens the same one. Verbs: `up`, `down`, `shell`, `exec`, `build`, `rebuild`, `logs`, `ps`, `doctor`, `ssh`, `herdr`, `herdr-layout`, `agents`, `ask`, `help`. See [docker/local/README.md](../docker/local/README.md) for the full workflow.
 
 API keys live in `docker/local/dwpwebsite/.env`. Compose injects it at create time, dck's entrypoint writes an environment profile for ssh and Herdr sessions, and every new bash re-reads it via `custom_commands.sh`, so after editing the file, opening a new shell is enough. Details: [How `.env` reaches your shell](../docker/local/README.md#how-dockerlocaldwpwebsiteenv-reaches-your-shell). Coding agents launched through `ak` (`claudex`, `codex-glm`, …) run in autonomy by default; set `AGENTKIT_PERMISSIONS=ask` in that file to have them ask first.
 

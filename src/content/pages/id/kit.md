@@ -68,7 +68,7 @@ Kemampuan yang ditambahkan alur onboard ke sebuah repo. Tujuh bersifat opsional 
 - **Skill Deep Work Plan** — Membuat, menjalankan, memverifikasi, melanjutkan, dan menyempurnakan rencana. Tidak memerlukan addon.
 - **[herdr](/id/kit/herdr)** — Rekan di panel Herdr, di mesin mana pun: delegasi interaktif dengan satu balasan yang diotorisasi. Dipatok pada `herdr-peers@v0.1.0`.
 - **[agentkit](/id/kit/agentkit)** — Satu perintah ak untuk setiap coding agent di terminal: otonomi secara default dengan opt-out, dan delegasi headless di dalam worktree. Dipatok pada `coding-agents-kit@v0.3.0`.
-- **[devcontainer](/id/kit/devcontainer)** — Dev container milik setiap repositori dari satu template: agen melalui ak, Herdr dua arah, tanpa kunci SSH di dalamnya. Dipatok pada `devcontainer-kit@v0.2.1`.
+- **[devcontainer](/id/kit/devcontainer)** — Dev container milik setiap repositori dari satu template: agen melalui ak, Herdr dua arah, tanpa kunci SSH di dalamnya. Dipatok pada `devcontainer-kit@v0.2.2`.
 - **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v0.5.1`.
 
 Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v7: `v7.0.0`

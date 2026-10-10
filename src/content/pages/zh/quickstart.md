@@ -190,7 +190,7 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 在基线接入完成之后，安装 **AI Diff Reviewer 本地审查**（第 7a 阶段——自标准 2.3.0 起必备）：在接入授权之下，安装标签锁定的 vendored skill（`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`），并通过 `generate-extension` 生成按仓库定制的 `.review/extension.md`。然后列举七个可选附加组件（devcontainer、Dailybot、dependency upgrade、design system、agentkit、Herdr、DeepWorkPlan Vim），把每一个作为一项明确的可选项来提供，并将每一次接受记录在 `.dwp/config.json` 中。一个仓库
 在不带**任何**可选附加组件时即完全符合规范——绝不自动安装它们。
 
-- **Devcontainer 支持** —— [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) 的轻量集成层（`dck`，锁定 `v0.2.1`，附带其 `dck-dockerfile` 技能）：`dck init` 渲染仓库自己的容器——官方镜像按摘要固定、不使用共享基础镜像、`bash dev.sh up`——并且仅在差异被接受之后才协调现有的 devcontainer；编码代理是一个需选择启用的层。
+- **Devcontainer 支持** —— [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) 的轻量集成层（`dck`，锁定 `v0.2.2`，附带其 `dck-dockerfile` 技能）：`dck init` 渲染仓库自己的容器——官方镜像按摘要固定、不使用共享基础镜像、`bash dev.sh up`——并且仅在差异被接受之后才协调现有的 devcontainer；编码代理是一个需选择启用的层。
 - **Dailybot 集成** —— 四个生命周期事件（启动、重要任务、阻塞、完成）作为面向已在使用 Dailybot 的团队的尽力而为式进展报告，并可选启用自主的钩子强制层（`dailybot-cli >= 3.9.0`）。安装配套的 Dailybot 代理技能（3.23.3）还会暴露聊天、签到、表单创建、AI 询问、Plan 看板与任务、每仓库 API 密钥等功能——该附加组件仅将报告接入 DWP 执行。核心方法论对 Dailybot 零依赖。
 - **Dependency upgrade** —— 包管理器无关、分批次、经验证、可回退的升级。被
  采纳时，它会安装 `/lib-upgrade` 命令。

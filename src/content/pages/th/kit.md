@@ -67,7 +67,7 @@ skill ของ Deep Work Plan คือตัวกำหนดเส้นท�
 - **สกิล Deep Work Plan** — สร้าง ดำเนินการ ตรวจสอบ ทำต่อ และปรับปรุงแผน ไม่ต้องใช้ส่วนเสริมใด
 - **[herdr](/th/kit/herdr)** — peer ใน pane ของ Herdr บนเครื่องใดก็ได้: การมอบหมายงานแบบโต้ตอบที่มีการตอบกลับที่ได้รับอนุญาตเพียงครั้งเดียว ปักหมุดที่ `herdr-peers@v0.1.0`
 - **[agentkit](/th/kit/agentkit)** — คำสั่ง ak เดียวสำหรับเอเจนต์เขียนโค้ดบนเทอร์มินัลทุกตัว: ทำงานอัตโนมัติโดยค่าเริ่มต้นพร้อมทางเลือกปิด และการมอบหมายงานแบบ headless ใน worktree ปักหมุดที่ `coding-agents-kit@v0.3.0`
-- **[devcontainer](/th/kit/devcontainer)** — dev container ของแต่ละ repository จากเทมเพลตเดียว: เอเจนต์ผ่าน ak, Herdr สองทาง และไม่มี SSH key อยู่ข้างใน ปักหมุดที่ `devcontainer-kit@v0.2.1`
+- **[devcontainer](/th/kit/devcontainer)** — dev container ของแต่ละ repository จากเทมเพลตเดียว: เอเจนต์ผ่าน ak, Herdr สองทาง และไม่มี SSH key อยู่ข้างใน ปักหมุดที่ `devcontainer-kit@v0.2.2`
 - **[vim](/th/kit/vim)** — ตัวแก้ไขบนเทอร์มินัล พร้อมตัวเรียกดูแผนแบบอ่านอย่างเดียวและตัวแสดงผล Markdown ปักหมุดที่ `deepworkplan-vim@v0.5.1`
 
 รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาใน Deep Work Plan v7: `v7.0.0`

@@ -21,15 +21,15 @@ order: 1
 ## การติดตั้ง
 
 ```bash
-git clone --branch v0.2.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-ข้อกำหนด: `bash` 3.2 ขึ้นไปและ `python3` 3.11 ขึ้นไปบนโฮสต์ Linux หรือ macOS รวมถึง Docker พร้อม Compose v2 สำหรับคำสั่งเกี่ยวกับคอนเทนเนอร์ ตรวจสอบรีลีสด้วย asset `SHA256SUMS` ของรีลีสนั้น ให้ตรึงไว้ที่ `v0.2.1` เนื่องจาก `v0.2.0` ไม่ได้รับการสนับสนุน
+ข้อกำหนด: `bash` 3.2 ขึ้นไปและ `python3` 3.11 ขึ้นไปบนโฮสต์ Linux หรือ macOS รวมถึง Docker พร้อม Compose v2 สำหรับคำสั่งเกี่ยวกับคอนเทนเนอร์ ตรวจสอบรีลีสด้วย asset `SHA256SUMS` ของรีลีสนั้น ให้ตรึงไว้ที่ `v0.2.2` เนื่องจาก `v0.2.0` ไม่ได้รับการสนับสนุน
 
 | รายการ | ค่า |
 |---|---|
-| ผลิตภัณฑ์ | `DailybotHQ/devcontainer-kit` แท็ก `v0.2.1` อินเทอร์เฟซ 2 |
+| ผลิตภัณฑ์ | `DailybotHQ/devcontainer-kit` แท็ก `v0.2.2` อินเทอร์เฟซ 2 |
 | คีย์ใน registry | `devcontainer` ใน `.dwp/config.json` |
 | config ต่อ repository | `.devcontainer/dck.toml` |
 | การตรวจจับ | `dck doctor --json` |

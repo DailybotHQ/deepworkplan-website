@@ -21,15 +21,15 @@ order: 1
 ## Встановлення
 
 ```bash
-git clone --branch v0.2.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Вимоги: `bash` 3.2 або новіший і `python3` 3.11 або новіший на хості з Linux чи macOS, а також Docker з Compose v2 для команд контейнера. Перевірте реліз за його ресурсом `SHA256SUMS`. Закріпіть `v0.2.1`: `v0.2.0` не підтримується.
+Вимоги: `bash` 3.2 або новіший і `python3` 3.11 або новіший на хості з Linux чи macOS, а також Docker з Compose v2 для команд контейнера. Перевірте реліз за його ресурсом `SHA256SUMS`. Закріпіть `v0.2.2`: `v0.2.0` не підтримується.
 
 | Елемент | Значення |
 |---|---|
-| Продукт | `DailybotHQ/devcontainer-kit`, тег `v0.2.1`, інтерфейс 2 |
+| Продукт | `DailybotHQ/devcontainer-kit`, тег `v0.2.2`, інтерфейс 2 |
 | Ключ реєстру | `devcontainer` у `.dwp/config.json` |
 | Конфігурація репозиторію | `.devcontainer/dck.toml` |
 | Виявлення | `dck doctor --json` |

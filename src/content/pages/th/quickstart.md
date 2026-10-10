@@ -221,7 +221,7 @@ agentkit, Herdr, DeepWorkPlan Vim) และเสนอแต่ละอย่
 ไว้ใน `.dwp/config.json` repository สอดคล้องอย่างสมบูรณ์โดยมีส่วนเสริมแบบเลือกได้ **ศูนย์** อย่าง —
 อย่าติดตั้งส่วนเสริมเหล่านั้นอัตโนมัติ
 
-- **Devcontainer support** — ตัวเชื่อมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงที่ `v0.2.1` พร้อมสกิล `dck-dockerfile`): `dck init` สร้างคอนเทนเนอร์ของ repository เอง ได้แก่ image ทางการที่ตรึงด้วย digest ไม่มี base image ที่ใช้ร่วมกัน และ `bash dev.sh up` และปรับประสาน devcontainer ที่มีอยู่แล้วก็ต่อเมื่อ diff ของมันได้รับการยอมรับแล้วเท่านั้น coding agent เป็นเลเยอร์ที่ต้องเลือกเปิดเอง
+- **Devcontainer support** — ตัวเชื่อมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงที่ `v0.2.2` พร้อมสกิล `dck-dockerfile`): `dck init` สร้างคอนเทนเนอร์ของ repository เอง ได้แก่ image ทางการที่ตรึงด้วย digest ไม่มี base image ที่ใช้ร่วมกัน และ `bash dev.sh up` และปรับประสาน devcontainer ที่มีอยู่แล้วก็ต่อเมื่อ diff ของมันได้รับการยอมรับแล้วเท่านั้น coding agent เป็นเลเยอร์ที่ต้องเลือกเปิดเอง
 - **Dailybot integration** — สี่เหตุการณ์วงจรชีวิต (kickoff, งานสำคัญ, ถูกบล็อก, เสร็จสิ้น) เป็นรายงานความคืบหน้าแบบเต็มความสามารถสำหรับทีมที่ใช้ Dailybot อยู่แล้ว พร้อมการบังคับใช้ hook อัตโนมัติแบบเลือกได้ (`dailybot-cli >= 3.9.0`) การติดตั้ง skill เอเจนต์ Dailybot ที่จับคู่มา (3.23.3) ยังเปิดให้ใช้แชท เช็คอิน สร้างฟอร์ม ถาม AI บอร์ดและงาน Plan per-repo API keys และอื่น ๆ — ส่วนเสริมเชื่อมเฉพาะการรายงานเข้ากับการดำเนินการ DWP ระเบียบวิธีหลักไม่มีการพึ่งพิง Dailybot ใด ๆ
 - **Dependency upgrade** — การอัปเกรดที่เป็นกลางต่อตัวจัดการแพ็กเกจ ทำเป็นชุด ตรวจสอบแล้ว และย้อนกลับได้ เมื่อ
   ยอมรับ มันจะติดตั้งคำสั่ง `/lib-upgrade`

@@ -1,7 +1,7 @@
 # Local Docker development stack
 
 The site's development container is rendered by
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.2.1 from
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.2.2 from
 `.devcontainer/dck.toml`. The same container serves a plain terminal (`bash dev.sh …`) and
 VS Code / Cursor ("Reopen in Container").
 
@@ -23,7 +23,7 @@ Blocks between `>>> dck:` and `<<< dck:` markers belong to dck: to change them, 
 devcontainer-kit is a one-time install on the host, pinned:
 
 ```bash
-git clone --branch v0.2.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 ```
 
 Then, from the repository root:
