@@ -1,6 +1,6 @@
 ---
 title: Herdr
-description: "선택형 v7 애드온으로, 계획이 어느 머신에서든 Herdr 페인의 다른 코딩 에이전트에 작업을 넘기고 승인된 단 하나의 응답을 기록합니다."
+description: "어떤 머신에서든 Herdr 패널의 다른 코딩 에이전트에게 작업을 넘기고, 승인된 응답 하나만 받습니다. 위임하는 계획, 모든 교환을 기록합니다."
 kind: addon
 lang: ko
 order: 7

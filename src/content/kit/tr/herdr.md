@@ -1,6 +1,6 @@
 ---
 title: Herdr
-description: "Planın görevi herhangi bir makinedeki Herdr bölmesinde başka bir kodlama agent'ına devredip tek yetkili yanıtı kaydetmesini sağlayan isteğe bağlı v7 eklentisi."
+description: "İşi herhangi bir makinedeki Herdr panelinde çalışan başka bir kodlama ajanına devredin, yetkilendirilmiş tek bir yanıt alın. Devreden planlar, kayıt altında."
 kind: addon
 lang: tr
 order: 7

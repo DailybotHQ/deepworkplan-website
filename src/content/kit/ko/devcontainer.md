@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "devcontainer-kit 기반 선택형 애드온: 템플릿 하나로 리포지토리별 개발 컨테이너, 에이전트는 ak로, Herdr 양방향, SSH 키 없음."
+description: "모든 저장소에 재현 가능한 개발 컨테이너를 하나의 템플릿으로. ak로 바로 쓰는 에이전트, 양방향으로 연결된 Herdr, 컨테이너 안에는 SSH 키가 없습니다."
 kind: addon
 lang: ko
 order: 1

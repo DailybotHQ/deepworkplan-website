@@ -8,7 +8,7 @@ section: Addons
 
 # Add-on
 
-> **Ambito della versione:** questo è un documento base v5.0.0 mantenuto. Lo standard attuale, DWP 7.0.0, richiede anche le estensioni `V6_*.md` e `V7_*.md` applicabili elencate nell’[indice delle specifiche](/spec). I piani v5 e v6 esistenti mantengono le regole registrate.
+> **Ambito della versione:** questo è un documento base v5.0.0 mantenuto. Lo standard attuale, DWP 7.0.0, richiede anche le estensioni `V6_*.md` e `V7_*.md` applicabili elencate nell’[indice delle specifiche](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). I piani v5 e v6 esistenti mantengono le regole registrate.
 
 **Versione 2.1.0.** Gli add-on sono estensioni della metodologia Deep Work Plan di base. Sette degli otto sono opzionali e **mai richiesti per la conformità** — un repository senza addon opzionali è pienamente AI-first e conforme a DWP. Ogni addon opzionale viene offerto durante l'onboarding, accettato o rifiutato esplicitamente e — se accettato — **riconcilia** con il setup esistente invece di sovrascriverlo. Un componente è l'eccezione dichiarata: dallo standard 2.3.0 la **revisione locale AI Diff Reviewer** fa parte della baseline richiesta — l'onboarding la installa e ogni Final Review la esegue — mentre la sua superficie CI resta opt-in.
 

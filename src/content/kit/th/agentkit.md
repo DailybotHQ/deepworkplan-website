@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "แอดออน v7 แบบเลือกใช้บน coding-agents-kit คำสั่ง ak เดียวสำหรับ coding agent บนเทอร์มินัลทุกตัว ทำงานอัตโนมัติโดยค่าเริ่มต้นแต่ปิดได้ และมอบหมายงานแบบ headless"
+description: "คำสั่งเดียวสำหรับเอเจนต์เขียนโค้ดบนเทอร์มินัลทุกตัว อัตโนมัติเต็มรูปแบบโดยค่าเริ่มต้นและปิดได้ รันแบบ headless ใน git worktree ใช้บัญชีที่สองได้"
 kind: addon
 lang: th
 order: 8

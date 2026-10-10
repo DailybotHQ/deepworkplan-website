@@ -10,7 +10,7 @@ section: State
 
 > **バージョンの適用範囲:** 以下の各節は保持されている v5.0.0 の状態層です。現在の標準である DWP 7.0.0 は v7 の contract、追記専用ジャーナル、スナップショット投影を使用します。v5 計画は引き続き本文書の `manifest.json` と `state.json` の規則を使用します。
 
-**現在の標準: v7（DWP 7.0.0）。** 以下の文書は保持された基礎仕様です。v6 は契約、追記専用ジャーナル、タスクごとのコンテキスト、リソース制御、ライフサイクル規則を追加しました。v7 はその記録層を維持したまま、任意の `parallel_safe` タスクマーカー、`delegation` ジャーナルイベント、`.dwp/config.json` アドオンレジストリ、アドオンが提供する能力を追加します。[v7 manifest スキーマ](https://deepworkplan.com/schema/plan-manifest/v7.json)、[contract スキーマ](https://deepworkplan.com/schema/plan-contract/v7.json)、[ライブ snapshot スキーマ](https://deepworkplan.com/schema/plan-snapshot/v6.json)（v6 と共有）を参照してください。既存の v5 計画と v6 計画は記録された規則を維持します。 [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+**現在の標準: v7（DWP 7.0.0）。** 以下の文書は保持された基礎仕様です。v6 は契約、追記専用ジャーナル、タスクごとのコンテキスト、リソース制御、ライフサイクル規則を追加しました。v7 はその記録層を維持したまま、任意の `parallel_safe` タスクマーカー、`delegation` ジャーナルイベント、`.dwp/config.json` アドオンレジストリ、アドオンが提供する能力を追加します。[v7 manifest スキーマ](https://deepworkplan.com/schema/plan-manifest/v7.json)、[contract スキーマ](https://deepworkplan.com/schema/plan-contract/v7.json)、[ライブ snapshot スキーマ](https://deepworkplan.com/schema/plan-snapshot/v6.json)（v6 と共有）を参照してください。既存の v5 計画と v6 計画は記録された規則を維持します。 [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **バージョン 5.0.0。状態: 安定。** この文書は Deep Work Plan 方法論の機械可読な計画状態レイヤーを規定するもので、いまや DWP 標準自身のバージョンと整合しています——この番号の付け替えによって既存の要件が弱められることはありません。この改訂はまた、ガードされた状態アップデーター、検証済みの計画公開、そして完了した計画が満たさなければならない証拠の真実性に関するルール(下記参照)を文書化します。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
 
@@ -235,10 +235,10 @@ v6 は v5 の方法論を維持し、新しい計画により厳格なエンジ�
 
 v6 のマニフェストとライブスナップショットのスキーマ：
 
-- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json (v7: https://deepworkplan.com/schema/plan-manifest/v7.json)
 - `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
-- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
-- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json (v7: https://deepworkplan.com/schema/plan-contract/v7.json)
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json (v7: https://deepworkplan.com/schema/journal-event/v7.json)
 - Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
 
 v6 のライブ投影はスナップショットであり、名前を変えた v5 の state ファイルではありません。`plan-state/v5.json` は v5 計画向けに引き続き公開され、`plan-state/v6.json` はありません。既存の v1、v2、v5 計画は記録済みのスキーマ世代を維持し、暗黙に書き換えられません。

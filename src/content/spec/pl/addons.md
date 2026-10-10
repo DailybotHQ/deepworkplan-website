@@ -8,7 +8,7 @@ section: Addons
 
 # Dodatki
 
-> **Zakres wersji:** To zachowany dokument bazowy v5.0.0. Aktualny standard, DWP 7.0.0, wymaga również odpowiednich rozszerzeń `V6_*.md` i `V7_*.md` wymienionych w [indeksie specyfikacji](/spec). Istniejące plany v5 i v6 zachowują zapisane reguły.
+> **Zakres wersji:** To zachowany dokument bazowy v5.0.0. Aktualny standard, DWP 7.0.0, wymaga również odpowiednich rozszerzeń `V6_*.md` i `V7_*.md` wymienionych w [indeksie specyfikacji](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Istniejące plany v5 i v6 zachowują zapisane reguły.
 
 **Wersja 2.1.0.** Dodatki to rozszerzenia podstawowej metodyki Deep Work Plan. Siedem z ośmiu jest opcjonalnych i **nigdy nie są wymagane do zgodności** — repozytorium bez opcjonalnych addonów jest w pełni AI-first i zgodne z DWP. Każdy opcjonalny addon jest proponowany podczas onboardingu, wyraźnie akceptowany lub odrzucany, a po akceptacji **uzgadnia** się z istniejącą konfiguracją zamiast ją nadpisywać. Jeden komponent jest zadeklarowanym wyjątkiem: od standardu 2.3.0 **lokalny przegląd AI Diff Reviewer** jest częścią wymaganej linii bazowej — onboarding go instaluje, a każde Final Review go uruchamia — podczas gdy jego powierzchnia CI pozostaje opcjonalna.
 

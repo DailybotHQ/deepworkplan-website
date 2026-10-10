@@ -8,7 +8,7 @@ section: Addons
 
 # Eklentiler
 
-> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel standart DWP 7.0.0, [şartname dizininde](/spec) listelenen geçerli `V6_*.md` ve `V7_*.md` uzantılarını da gerektirir. Mevcut v5 ve v6 planları kayıtlı kurallarını korur.
+> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel standart DWP 7.0.0, [şartname dizininde](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md) listelenen geçerli `V6_*.md` ve `V7_*.md` uzantılarını da gerektirir. Mevcut v5 ve v6 planları kayıtlı kurallarını korur.
 
 **Sürüm 2.1.0.** Eklentiler, temel Deep Work Plan metodolojisine uzantılardır. Sekizin yedisi isteğe bağlıdır ve **uyumluluk için asla gerekli değildir** — sıfır isteğe bağlı eklentili bir depo tamamen AI-first ve DWP uyumludur. Her isteğe bağlı eklenti onboarding sırasında sunulur, açıkça kabul veya reddedilir ve — kabul edildiğinde — mevcut kurulumu ezmek yerine **uzlaştırır**. Bir bileşen beyan edilen istisnadır: 2.3.0 standardından itibaren **AI Diff Reviewer yerel incelemesi** gerekli temelin bir parçasıdır — onboarding onu kurar ve her Final Review onu çalıştırır — CI yüzeyi ise isteğe bağlı kalır.
 

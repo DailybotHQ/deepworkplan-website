@@ -1,6 +1,6 @@
 ---
 title: Herdr
-description: "Opcjonalny addon v7: plan przekazuje zadanie innemu agentowi w panelu Herdr, na dowolnej maszynie, i zapisuje jego jedyną autoryzowaną odpowiedź."
+description: "Przekaż pracę innemu agentowi kodującemu w panelu Herdr, na dowolnej maszynie, i odbierz jedną autoryzowaną odpowiedź. Plany, które delegują, z zapisem."
 kind: addon
 lang: pl
 order: 7

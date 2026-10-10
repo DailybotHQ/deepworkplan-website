@@ -10,7 +10,7 @@ section: State
 
 > **Alcance de versión:** Las secciones siguientes son la capa de estado v5.0.0 conservada. El estándar actual, DWP 7.0.0, usa el contrato v7, un diario de solo anexado y una proyección snapshot; los planes v5 siguen usando las reglas de `manifest.json` y `state.json` de este documento.
 
-**Estándar actual: v7 (DWP 7.0.0).** Los documentos siguientes son la base conservada; v6 añadió contrato, diario de solo anexado, contexto por tarea, controles de recursos y reglas de ciclo de vida, y v7 conserva esa capa de registros a la vez que añade un marcador de tarea opcional `parallel_safe`, un evento de diario `delegation`, el registro de addons `.dwp/config.json` y capacidades aportadas por addons. [Manifiesto v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [esquema del contrato](https://deepworkplan.com/schema/plan-contract/v7.json) y [snapshot activo](https://deepworkplan.com/schema/plan-snapshot/v6.json) (compartido con v6). Los planes v5 y v6 existentes conservan sus reglas. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+**Estándar actual: v7 (DWP 7.0.0).** Los documentos siguientes son la base conservada; v6 añadió contrato, diario de solo anexado, contexto por tarea, controles de recursos y reglas de ciclo de vida, y v7 conserva esa capa de registros a la vez que añade un marcador de tarea opcional `parallel_safe`, un evento de diario `delegation`, el registro de addons `.dwp/config.json` y capacidades aportadas por addons. [Manifiesto v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [esquema del contrato](https://deepworkplan.com/schema/plan-contract/v7.json) y [snapshot activo](https://deepworkplan.com/schema/plan-snapshot/v6.json) (compartido con v6). Los planes v5 y v6 existentes conservan sus reglas. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Versión 5.0.0. Estado: estable.** Este documento especifica la capa de estado del plan legible por máquina de la metodología Deep Work Plan, ahora alineada con la versión propia del estándar DWP — ningún requisito existente se debilita con la renumeración. Esta revisión también documenta el actualizador de estado protegido, la publicación verificada de planes y las reglas de veracidad de la evidencia que un plan completado debe cumplir (véase más abajo). Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
 
@@ -235,10 +235,10 @@ v6 conserva la metodología de v5 y añade una estructura de ingeniería más es
 
 Los esquemas v6 del manifiesto y del snapshot activo son:
 
-- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json (v7: https://deepworkplan.com/schema/plan-manifest/v7.json)
 - `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
-- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
-- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json (v7: https://deepworkplan.com/schema/plan-contract/v7.json)
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json (v7: https://deepworkplan.com/schema/journal-event/v7.json)
 - Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
 
 La proyección activa de v6 es un snapshot, no un archivo de estado v5 renombrado. `plan-state/v5.json` sigue publicado para los planes v5; no existe `plan-state/v6.json`. Los planes existentes v1, v2 y v5 conservan la generación de esquema registrada y nunca se reescriben silenciosamente.

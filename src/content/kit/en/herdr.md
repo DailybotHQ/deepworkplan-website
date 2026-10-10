@@ -1,6 +1,6 @@
 ---
 title: Herdr
-description: "An optional v7 addon that lets a plan hand a task to another coding agent in a Herdr pane, on any machine, and record its single authorized reply."
+description: "Hand work to another coding agent in a Herdr pane, on any machine, and take back one authorized reply. Plans that delegate, with a record of every exchange."
 kind: addon
 lang: en
 order: 7

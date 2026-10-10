@@ -16,7 +16,7 @@ Tracking documentation coverage for deepworkplan.com.
 
 | File | Status | Description |
 |------|--------|-------------|
-| [README.md](README.md) | ✅ Current | Documentation index |
+| [README.md](./README.md) | ✅ Current | Documentation index |
 | [PRODUCT_SPEC.md](PRODUCT_SPEC.md) | ✅ Current | Product vision and features |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | ✅ Current | Technical architecture |
 | [ECOSYSTEM_CONTEXT.md](ECOSYSTEM_CONTEXT.md) | ✅ Current | Ecosystem hub: posture, claims, release order, boundaries |
@@ -24,7 +24,7 @@ Tracking documentation coverage for deepworkplan.com.
 | [STANDARDS.md](STANDARDS.md) | ✅ Current | Coding conventions |
 | [DEVELOPMENT_COMMANDS.md](DEVELOPMENT_COMMANDS.md) | ✅ Current | npm scripts reference |
 | [TESTING_GUIDE.md](TESTING_GUIDE.md) | ✅ Current | Testing setup (future) |
-| [SECURITY.md](SECURITY.md) | ✅ Current | Security best practices |
+| [SECURITY.md](./SECURITY.md) | ✅ Current | Security best practices |
 | [PERFORMANCE.md](PERFORMANCE.md) | ✅ Current | Performance optimization |
 | [I18N_GUIDE.md](I18N_GUIDE.md) | ✅ Current | Internationalization |
 | [API_REFERENCE.md](API_REFERENCE.md) | ✅ Current | API endpoints |

@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "devcontainer-kit tabanlı isteğe bağlı eklenti: tek şablondan her deponun kendi konteyneri, ak ile agent'lar, iki yönlü Herdr, içeride SSH anahtarı yok."
+description: "Her depo için tek şablondan yeniden üretilebilir geliştirme konteyneri: ak ile hazır ajanlar, iki yönlü Herdr ve konteynerin içinde hiç SSH anahtarı yok."
 kind: addon
 lang: tr
 order: 1

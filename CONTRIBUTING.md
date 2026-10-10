@@ -69,7 +69,7 @@ Certificate of Origin sign-off is **not** required.
 4. User-visible changes add a line under `[Unreleased]` in
    [CHANGELOG.md](CHANGELOG.md).
 
-Report vulnerabilities privately — see [SECURITY.md](SECURITY.md), never a
+Report vulnerabilities privately — see [SECURITY.md](./SECURITY.md), never a
 public issue. Everyone taking part follows the
 [Code of Conduct](CODE_OF_CONDUCT.md).
 

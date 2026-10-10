@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "coding-agents-kit 基盤の任意 v7 アドオン。全ターミナルエージェントを一つの ak コマンドで扱い、デフォルトで自律実行（オプトアウト可）とヘッドレス委任。"
+description: "全ターミナルエージェントを一つのコマンドで。既定で完全自律（オプトアウト可）、git worktree でのヘッドレス実行、接頭辞一つで別アカウントへ。"
 kind: addon
 lang: ja
 order: 8

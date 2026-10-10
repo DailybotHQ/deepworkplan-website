@@ -10,7 +10,7 @@ section: State
 
 > **ขอบเขตเวอร์ชัน:** ส่วนด้านล่างคือชั้นสถานะ v5.0.0 ที่ยังคงไว้ มาตรฐานปัจจุบัน DWP 7.0.0 ใช้สัญญา v7, journal แบบเพิ่มข้อมูลอย่างเดียว และ snapshot projection ส่วนแผน v5 ยังคงใช้กฎ `manifest.json` และ `state.json` ของเอกสารนี้
 
-**มาตรฐานปัจจุบัน: v7 (DWP 7.0.0)** เอกสารด้านล่างเป็นข้อกำหนดพื้นฐานที่คงไว้ v6 ได้เพิ่มสัญญา journal แบบเพิ่มข้อมูลอย่างเดียว บริบทต่อหนึ่งงาน การควบคุมทรัพยากร และกฎวงจรชีวิต ส่วน v7 คงชั้นบันทึกนั้นไว้และเพิ่มตัวระบุงาน `parallel_safe` แบบเลือกได้ เหตุการณ์ journal `delegation` ทะเบียน addon `.dwp/config.json` และความสามารถที่ addon มอบให้ [สคีมา manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json) [สคีมาสัญญา](https://deepworkplan.com/schema/plan-contract/v7.json) และ [สคีมา live snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json) (ใช้ร่วมกับ v6) แผน v5 และ v6 เดิมยังคงใช้กฎที่บันทึกไว้ [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+**มาตรฐานปัจจุบัน: v7 (DWP 7.0.0)** เอกสารด้านล่างเป็นข้อกำหนดพื้นฐานที่คงไว้ v6 ได้เพิ่มสัญญา journal แบบเพิ่มข้อมูลอย่างเดียว บริบทต่อหนึ่งงาน การควบคุมทรัพยากร และกฎวงจรชีวิต ส่วน v7 คงชั้นบันทึกนั้นไว้และเพิ่มตัวระบุงาน `parallel_safe` แบบเลือกได้ เหตุการณ์ journal `delegation` ทะเบียน addon `.dwp/config.json` และความสามารถที่ addon มอบให้ [สคีมา manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json) [สคีมาสัญญา](https://deepworkplan.com/schema/plan-contract/v7.json) และ [สคีมา live snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json) (ใช้ร่วมกับ v6) แผน v5 และ v6 เดิมยังคงใช้กฎที่บันทึกไว้ [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **เวอร์ชัน 5.0.0. สถานะ: เสถียร** เอกสารนี้ระบุชั้นสถานะแผนที่เครื่องอ่านได้ของระเบียบวิธี Deep Work Plan ซึ่งตอนนี้ปรับให้สอดคล้องกับเวอร์ชันของมาตรฐาน DWP เอง — ไม่มีข้อกำหนดเดิมใดถูกทำให้อ่อนลงจากการเปลี่ยนหมายเลขนี้ ฉบับแก้ไขนี้ยังบันทึกเรื่องตัวอัปเดตสถานะที่มีการป้องกัน การเผยแพร่แผนที่ผ่านการตรวจสอบ และกฎความจริงของหลักฐานที่แผนที่เสร็จสมบูรณ์ต้องปฏิบัติตาม (ดูด้านล่าง) คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
 
@@ -235,10 +235,10 @@ v6 คงวิธีการของ v5 และเพิ่มโครง�
 
 สคีมา manifest และ live snapshot ของ v6:
 
-- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json (v7: https://deepworkplan.com/schema/plan-manifest/v7.json)
 - `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
-- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
-- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json (v7: https://deepworkplan.com/schema/plan-contract/v7.json)
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json (v7: https://deepworkplan.com/schema/journal-event/v7.json)
 - Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
 
 live projection ของ v6 เป็น snapshot ไม่ใช่ไฟล์สถานะ v5 ที่เปลี่ยนชื่อ `plan-state/v5.json` ยังคงเผยแพร่สำหรับแผน v5; ไม่มี `plan-state/v6.json` แผน v1, v2 และ v5 ที่มีอยู่คงรุ่นสคีมาที่บันทึกไว้และจะไม่ถูกเขียนทับโดยไม่มีการแจ้ง

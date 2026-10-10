@@ -1,6 +1,6 @@
 ---
 title: Herdr
-description: "可选的 v7 附加组件：让计划把一项任务交给任意机器上 Herdr 窗格中的另一个编码代理，并记录其唯一一条获授权的回复。"
+description: "把任务交给任意机器上 Herdr 面板里的另一个编码代理，只取回一条经授权的回复。会委派的计划，每次交换都有完整的记录。"
 kind: addon
 lang: zh
 order: 7

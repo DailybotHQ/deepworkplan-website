@@ -30,7 +30,7 @@ Welcome to the **deepworkplan.com** documentation. This guide helps developers a
 |----------|-------------|
 | [Testing Guide](TESTING_GUIDE.md) | Test setup and conventions (future) |
 | [I18N Guide](I18N_GUIDE.md) | Internationalization and language support |
-| [Security](SECURITY.md) | Static site security best practices |
+| [Security](./SECURITY.md) | Static site security best practices |
 
 ### AI & Collaboration
 
