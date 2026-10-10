@@ -6,7 +6,7 @@ version: "v6 · Estrutura mais rigorosa"
 kind: release
 lang: pt
 order: 0
-featured: true
+featured: false
 sourceLabel: "Conjunto de esquemas v6 publicado"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:

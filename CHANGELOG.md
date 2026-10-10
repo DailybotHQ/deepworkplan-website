@@ -9,6 +9,10 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+### Added
+
+- Changelog page: the "DWP v7: plans that delegate, with a record of everything" entry, in 17 languages, and it replaces v6 as the featured release.
+
 ## [5.0.44] - 2026-10-10
 
 ### Changed

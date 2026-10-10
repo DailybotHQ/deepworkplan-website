@@ -6,7 +6,7 @@ version: "v6 · より厳格な構造"
 kind: release
 lang: ja
 order: 0
-featured: true
+featured: false
 sourceLabel: "公開済み v6 スキーマ一式"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:

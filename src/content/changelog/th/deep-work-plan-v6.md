@@ -6,7 +6,7 @@ version: "v6 · โครงสร้างเข้มงวดยิ่งข�
 kind: release
 lang: th
 order: 0
-featured: true
+featured: false
 sourceLabel: "ชุดสคีมา v6 ที่เผยแพร่"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:
