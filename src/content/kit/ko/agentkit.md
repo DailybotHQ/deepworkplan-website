@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "coding-agents-kit 기반 선택형 v7 애드온: 모든 터미널 코딩 에이전트에 ak 명령 하나, 기본 자율 실행(옵트아웃 가능), 헤드리스 위임."
+description: "모든 터미널 코딩 에이전트를 하나의 명령으로. 기본값은 완전 자율(옵트아웃 가능), git worktree에서 헤드리스 실행, 접두사 하나로 두 번째 계정까지."
 kind: addon
 lang: ko
 order: 8

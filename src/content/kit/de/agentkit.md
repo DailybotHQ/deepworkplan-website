@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "Ein optionales v7-Addon auf Basis von coding-agents-kit: ein ak-Befehl für jeden Terminal-Coding-Agenten, Autonomie mit Opt-out und headless Delegation."
+description: "Ein Befehl für jeden Terminal-Coding-Agenten. Standardmäßig volle Autonomie mit Opt-out, headless Läufe in einem Git-Worktree und ein zweites Konto per Präfix."
 kind: addon
 lang: de
 order: 8

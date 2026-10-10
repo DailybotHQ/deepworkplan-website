@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "基于 devcontainer-kit 的可选附加组件：用一个模板生成每个仓库自己的开发容器，代理经由 ak 运行，Herdr 双向互通，容器内不存放 SSH 密钥。"
+description: "每个仓库一个可复现的开发容器，源自同一模板：代理通过 ak 即开即用，Herdr 双向连通，容器内绝不存放 SSH 密钥。"
 kind: addon
 lang: zh
 order: 1

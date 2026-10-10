@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "Addon v7 opsional berbasis coding-agents-kit: satu perintah ak untuk setiap coding agent terminal, otonomi secara default dengan opt-out, dan delegasi headless."
+description: "Satu perintah untuk setiap agen coding terminal. Otonomi penuh secara bawaan dengan opsi keluar, eksekusi headless di git worktree, dan akun kedua."
 kind: addon
 lang: id
 order: 8

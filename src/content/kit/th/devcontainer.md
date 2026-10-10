@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "แอดออนแบบเลือกใช้ที่สร้างบน devcontainer-kit ได้ dev container ของแต่ละ repository จากเทมเพลตเดียว เอเจนต์ผ่าน ak, Herdr สองทาง และไม่มี SSH key อยู่ข้างใน"
+description: "dev container ที่ทำซ้ำได้สำหรับทุกที่เก็บจากเทมเพลตเดียว เอเจนต์พร้อมใช้ผ่าน ak, Herdr เชื่อมสองทิศทาง และไม่มีกุญแจ SSH อยู่ในคอนเทนเนอร์เลย"
 kind: addon
 lang: th
 order: 1

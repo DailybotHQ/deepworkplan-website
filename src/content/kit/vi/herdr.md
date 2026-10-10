@@ -1,6 +1,6 @@
 ---
 title: Herdr
-description: "Addon v7 tùy chọn cho phép kế hoạch giao một tác vụ cho coding agent khác trong một pane Herdr, trên bất kỳ máy nào, và ghi lại một phản hồi được ủy quyền."
+description: "Giao việc cho một agent lập trình khác trong ngăn Herdr, trên bất kỳ máy nào, và nhận đúng một phản hồi đã ủy quyền. Kế hoạch biết ủy thác, có ghi lại."
 kind: addon
 lang: vi
 order: 7

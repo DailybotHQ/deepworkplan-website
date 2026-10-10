@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "Addon v7 tùy chọn dựa trên coding-agents-kit: một lệnh ak cho mọi coding agent trên terminal, tự chủ theo mặc định với lựa chọn opt-out, và ủy thác headless."
+description: "Một lệnh cho mọi agent lập trình trên terminal. Mặc định tự chủ hoàn toàn nhưng tắt được, chạy headless trong git worktree, và có tài khoản thứ hai."
 kind: addon
 lang: vi
 order: 8

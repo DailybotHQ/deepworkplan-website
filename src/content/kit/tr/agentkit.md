@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "coding-agents-kit üzerine kurulu isteğe bağlı v7 eklentisi: her terminal kodlama agent'ı için tek ak komutu, kapatılabilir varsayılan özerklik ve başsız devir."
+description: "Her terminal kodlama ajanı için tek komut. Varsayılan tam özerklik ve devre dışı bırakma, git worktree içinde başsız çalıştırma, bir önekle ikinci hesap."
 kind: addon
 lang: tr
 order: 8

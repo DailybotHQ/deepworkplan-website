@@ -1,6 +1,6 @@
 ---
 title: Herdr
-description: "Addon v7 opsional agar rencana dapat menyerahkan tugas ke coding agent lain di panel Herdr, di mesin mana pun, dan mencatat satu balasan yang diotorisasi."
+description: "Serahkan pekerjaan ke agen coding lain di panel Herdr, di mesin mana pun, dan terima satu balasan yang diotorisasi. Rencana yang mendelegasikan, tercatat."
 kind: addon
 lang: id
 order: 7

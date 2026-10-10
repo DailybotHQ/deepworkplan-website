@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "devcontainer-kit 基盤の任意アドオン。一つのテンプレートでリポジトリ専用の開発コンテナ。エージェントは ak 経由、Herdr は双方向、SSH 鍵なし。"
+description: "全リポジトリに再現可能な開発コンテナを一つのテンプレートから。エージェントは ak ですぐ使え、Herdr は双方向に連携、コンテナ内に SSH 鍵は置きません。"
 kind: addon
 lang: ja
 order: 1

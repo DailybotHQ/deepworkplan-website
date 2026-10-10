@@ -1,6 +1,6 @@
 ---
 title: Herdr
-description: "Optionales v7-Addon: Ein Plan übergibt eine Aufgabe an einen anderen Agenten im Herdr-Pane auf jedem Rechner und hält seine einzige autorisierte Antwort fest."
+description: "Übergib Arbeit an einen anderen Coding-Agenten im Herdr-Pane, auf jedem Rechner, und erhalte eine autorisierte Antwort. Pläne, die delegieren, protokolliert."
 kind: addon
 lang: de
 order: 7
