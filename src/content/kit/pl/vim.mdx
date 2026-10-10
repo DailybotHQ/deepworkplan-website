@@ -20,13 +20,13 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** to edytor terminalowy dla Deep Work Plan: konfiguracja Neovima dla ludzi i dla agentów programistycznych pracujących w terminalu. Twoje plany, dokumentacja i indeks wszystkich poleceń są o jedno naciśnięcie klawisza.
 
-To osobny produkt, oferowany jako opcjonalny addon `vim` w Deep Work Plan v7 (`v7.0.0`). Deep Work Plan działa z dowolnym edytorem lub bez żadnego, a edytor nie wymaga Deep Work Plan: dodajesz go do maszyny osobno, a działa jako edytor niezależnie od tego, czy istnieje jakiś plan. Ta strona opisuje wydanie **v0.5.1**.
+To osobny produkt, oferowany jako opcjonalny addon `vim` w Deep Work Plan v7 (`v7.0.0`). Deep Work Plan działa z dowolnym edytorem lub bez żadnego, a edytor nie wymaga Deep Work Plan: dodajesz go do maszyny osobno, a działa jako edytor niezależnie od tego, czy istnieje jakiś plan. Ta strona opisuje wydanie **v0.6.0**.
 
 ## Po co edytor terminalowy dla Deep Work Plan
 
 Deep Work Plan to folder z Markdownem w `.dwp/plans/`: cel, atomowe zadania, bramki walidacji i bieżący dziennik. Ludzie go przeglądają, agenci wykonują, a jedni i drudzy często robią to z terminala. Edytor stworzony do tej pracy trzyma blisko trzy rzeczy: sam plan, dokumentację wokół niego oraz klawisze, które przenoszą Cię między jednym a drugim.
 
-DeepWorkPlan Vim jest takim edytorem. To dopracowana konfiguracja Neovima — serwery języków, uzupełnianie, linting, formatowanie, wyszukiwanie rozmyte, drzewo plików i wyselekcjonowane motywy kolorów, ładowane leniwie — oraz kilka powierzchni, które czynią z niej edytor dla Deep Work Plan.
+DeepWorkPlan Vim jest takim edytorem. Celem jest mały VS Code w terminalu: nawigacja po plikach, podgląd zmienionych plików, przegląd diffa oraz zatwierdzanie lub odrzucanie zmian, w sposób przyjazny i lekki, z agentem na pierwszym miejscu i stale widocznym statusem planu. To dopracowana konfiguracja Neovima — serwery języków, uzupełnianie, formatowanie, wyszukiwanie rozmyte, drzewo plików i wyselekcjonowane motywy kolorów, ładowane leniwie — oraz kilka powierzchni, które czynią z niej edytor dla Deep Work Plan.
 
 <VimInDwpLoop lang="pl" class="not-prose my-10" />
 
@@ -46,7 +46,7 @@ Pięć funkcji, każda o jedno naciśnięcie klawisza.
 |---|---|---|
 | Generowany indeks poleceń | `SPC h h` | Każde mapowanie w konfiguracji, wygenerowane z aktywnych mapowań klawiszy. |
 | Gesty w stylu VS Code | `<C-a>`, `SPC y` | Zaznacz cały plik jednym klawiszem i skopiuj do schowka systemowego. Zwykłe `y` także tam trafia, bo schowek jest wspólny dla całego systemu. |
-| Przeglądarka planów Deep Work Plan | `SPC P` | Panel boczny z planami w Twoim repozytorium, pogrupowanymi według statusu i z paskami postępu, oraz czytnik pojedynczego planu. |
+| Przeglądarka planów Deep Work Plan | `SPC P` | Panel boczny z planami w Twoim repozytorium, pogrupowanymi według statusu i z paskami postępu; kliknij plan, aby otworzyć jego czytnik. |
 | Podgląd Markdown | `SPC m p`, `SPC m r` | Podglądaj Markdown w przeglądarce albo renderuj go w buforze. |
 | Weryfikowany instalator | — | Samodzielny instalator dla macOS, Linuksa i WSL, z udokumentowaną ścieżką ręczną dla Windows. |
 
@@ -54,13 +54,56 @@ Pięć funkcji, każda o jedno naciśnięcie klawisza.
 
 `SPC P`, `:DwpPlans` albo kliknięcie segmentu linii statusu otwiera panel boczny planów. Obejmuje każdy folder `.dwp/plans/` w bieżącym katalogu i w katalogu konfiguracji Neovima oraz grupuje plany, zaczynając od tych, które wymagają największej uwagi. W edytorze etykiety to `Working`, `Needs attention`, `Ready`, `Not started` i `Done`. Każdy plan ma pasek postępu.
 
-Naciśnij Enter na planie, aby otworzyć czytnik: cel w jednym zdaniu, status i postęp, listę zadań z zaznaczonym bieżącym zadaniem oraz skoki prostym językiem do plików samego planu. Linia statusu pokazuje na żywo aktywny plan, a ekran startowy wymienia trzy pierwsze. Te powierzchnie objaśniają plany; nigdy nic nie zapisują w `.dwp/`.
+Kliknij plan albo naciśnij na nim Enter, aby otworzyć czytnik: cel w jednym zdaniu, status i postęp, listę zadań z zaznaczonym bieżącym zadaniem oraz skoki prostym językiem do plików samego planu. Linia statusu pokazuje na żywo aktywny plan, a ekran startowy wymienia trzy pierwsze. Te powierzchnie objaśniają plany; nigdy nic nie zapisują w `.dwp/`.
+
+Panel boczny reaguje na mysz i na klawiaturę. Mała strzałka obok planu pokazuje lub ukrywa jego zadania i pliki, a kliknięcie zadania lub pliku otwiera go. `j`, `k`, klawisze strzałek, `Ctrl-n` i `Ctrl-p` przeskakują od planu do planu, pomijając puste wiersze i ozdobniki. Każda sekcja pokazuje swoją liczbę pozycji, kolory statusu oznaczają ikonę i pasek postępu, plany aktywne mają wyraźne tytuły, a zakończone przygaszone, a grupa Done z więcej niż sześcioma planami otwiera się zwinięta. Okno jest tylko do odczytu i ciche: klawisze edycji nic nie robią zamiast wypisywać błąd.
+
+Plany i drzewo plików działają na zmianę: otwarcie jednego panelu bocznego zamyka drugi, dzięki czemu patrzysz na jedną rzecz naraz. Czytnik zamyka się razem z panelem planów. To, czy otwarcie jednego panelu bocznego zamyka drugi, ustawia klucz `sidebars.exclusive` w `dwpvim.json`.
 
 Aby czytać pliki Markdown planu na miejscu, `SPC m p` pokazuje podgląd bieżącego bufora w przeglądarce, a `SPC m r` renderuje go wewnątrz bufora. Oba działają tylko w buforach Markdown.
 
+## Dashboard
+
+Ekran startowy jest własny dla DeepWorkPlan Vim. Pokazuje logo Deep Work Plan wygrawerowane znakami brajla z maleńkim napisem VIM pod literą P, poniżej podpis „powered by Dailybot”, a po prawej wygrawerowaną scenę: latarnię morską Deep Work Plan i statek płynący po jej morzu. Promień powoli pulsuje, dopóki dashboard jest na ekranie; ustaw `vim.g.dwp_greeter_pulse = false`, aby to wyłączyć.
+
+Scena występuje w sześciu wysokościach, dobieranych do liczby wierszy, które zostawia okno. W węższym oknie logotyp układa się nad sceną albo stoi sam. Szerokie okna pokazują skróty i „Your plans” obok siebie, a wąskie układają je jedno pod drugim. Naciśnij Enter, aby uaktywnić wiersz pod kursorem, albo `e`, aby otworzyć panel planów.
+
+## Konfiguracja paneli bocznych
+
+Plik `dwpvim.json` określa, po której stronie leżą oba panele boczne i jak są szerokie. Plik w katalogu edytora (`~/.config/nvim`) obowiązuje we wszystkich projektach, a `.dwpvim.json` w katalogu, w którym uruchamiasz Neovima, nadpisuje go dla danego projektu. Ustawienia są odczytywane przy starcie, więc po edycji pliku uruchom Neovima ponownie.
+
+```json
+{
+  "tree":  { "side": "left", "width": 40 },
+  "plans": { "side": "left", "width": 48 },
+  "sidebars": { "exclusive": true }
+}
+```
+
+| Klucz | Wartości | Domyślnie | Co robi |
+|---|---|---|---|
+| `tree.side` | `"left"` lub `"right"` | `"left"` | Strona drzewa plików (`SPC n`) |
+| `tree.width` | liczba całkowita od 20 do 120 | `40` | Maksymalna szerokość drzewa; nadal zwęża się do swojej zawartości |
+| `plans.side` | `"left"` lub `"right"` | `"left"` | Strona panelu planów (`SPC P`) |
+| `plans.width` | liczba całkowita od 20 do 120 | `48` | Maksymalna szerokość panelu planów |
+| `sidebars.exclusive` | `true` lub `false` | `true` | Jeden panel naraz; `false` pozwala zostawić otwarte oba |
+
+Brak pliku nie jest problemem. Plik, który nie jest poprawnym JSON-em, nieznany klucz lub nieprawidłowa wartość są ignorowane i zgłaszane, nigdy nie powodują awarii. Uruchom `:DwpConfig`, aby zobaczyć każdą obowiązującą wartość, plik, z którego pochodzi, oraz wszelkie znalezione problemy.
+
+## Lżejszy edytor
+
+Wersja 0.6.0 usuwa to, czego nikt nie używał, więc jest mniej wtyczek do przypinania i mniej pakietów do zainstalowania i zaktualizowania przy pierwszym uruchomieniu:
+
+- Jedenaście serwerów języków z Mason zostaje wycofanych: efm, diagnosticls, tailwindcss, grammarly, bashls oraz serwery dla astro, svelte, Vue 2, Angulara, SQL i Vim script.
+- nvim-lint zostaje usunięty, ponieważ nigdy nie skonfigurowano żadnego lintera.
+- Wpisy formatera prettier zostają usunięte, ponieważ nic nie instalowało prettiera. `:Format` zachowuje biome, black, shfmt i stylua.
+- marksman zostaje do podążania za odnośnikami, uzupełniania odnośników i nagłówków oraz konspektu, z wyciszonymi diagnostykami. Markdown celowo pozostaje bez formatera.
+
+Włączone są tylko serwery wymienione w konfiguracji, nawet jeśli Mason nadal przechowuje inne z wcześniejszej konfiguracji. Każda wtyczka, serwer i narzędzie, wraz z powodem, dla którego się tu znajduje, jest wymieniona w [PLUGINS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/v0.6.0/docs/PLUGINS.md).
+
 ## Instalacja
 
-Instalacja to trzy polecenia: pobierz skrypt, sprawdź go z SHA-256 pliku serwowanego przez tę witrynę, a potem go uruchom. Instalator przypina własne wydanie, więc instaluje dokładnie `v0.5.1`, wydanie opisane na tej stronie, chyba że [wybierzesz inną wersję](#choose-a-version).
+Instalacja to trzy polecenia: pobierz skrypt, sprawdź go z SHA-256 pliku serwowanego przez tę witrynę, a potem go uruchom. Instalator przypina własne wydanie, więc instaluje dokładnie `v0.6.0`, wydanie opisane na tej stronie, chyba że [wybierzesz inną wersję](#choose-a-version).
 
 <VimInstall lang="pl" />
 
@@ -74,17 +117,17 @@ Po kolei instalator:
 6. Uruchamia własne `lua install.lua` repozytorium.
 7. Instaluje wtyczki bez interfejsu i je sprawdza, więc nie trzeba zamykać i otwierać ponownie. Z `--strict` nieudana lub niepełna instalacja wtyczek jest błędem.
 
-Skrypt serwowany tutaj jest identyczną bajt w bajt kopią `install.sh` z tagu `v0.5.1`. Jego suma kontrolna jest serwowana obok, pod adresem `https://deepworkplan.com/vim/install.sh.sha256`, więc pobrany plik możesz zweryfikować poleceniem `shasum -a 256 -c install.sh.sha256` (w Linuksie `sha256sum -c install.sh.sha256`). Aby sprawdzić go względem drugiego źródła, porównaj ją z wierszem `install.sh` w pliku `SHA256SUMS` wydania na GitHubie. Uruchom `bash install.sh --help`, aby wyświetlić wszystkie opcje.
+Skrypt serwowany tutaj jest identyczną bajt w bajt kopią `install.sh` z tagu `v0.6.0`. Jego suma kontrolna jest serwowana obok, pod adresem `https://deepworkplan.com/vim/install.sh.sha256`, więc pobrany plik możesz zweryfikować poleceniem `shasum -a 256 -c install.sh.sha256` (w Linuksie `sha256sum -c install.sh.sha256`). Aby sprawdzić go względem drugiego źródła, porównaj ją z wierszem `install.sh` w pliku `SHA256SUMS` wydania na GitHubie. Uruchom `bash install.sh --help`, aby wyświetlić wszystkie opcje.
 
 <a id="choose-a-version" class="scroll-mt-24"></a>
 
 ## Wybór wersji
 
-Domyślnie instalator instaluje własne wydanie, `v0.5.1`. Aby wybrać inne, ustaw `DWP_VIM_VERSION` albo przekaż `--version`: oba robią to samo, więc użyj tego, które czyta się lepiej; flaga ma pierwszeństwo przed zmienną środowiskową. Każde z nich przyjmuje:
+Domyślnie instalator instaluje własne wydanie, `v0.6.0`. Aby wybrać inne, ustaw `DWP_VIM_VERSION` albo przekaż `--version`: oba robią to samo, więc użyj tego, które czyta się lepiej; flaga ma pierwszeństwo przed zmienną środowiskową. Każde z nich przyjmuje:
 
 | Forma | Przykład | Instaluje |
 |---|---|---|
-| Dokładna wersja | `0.5.1` lub `v0.5.1` | To wydanie |
+| Dokładna wersja | `0.6.0` lub `v0.6.0` | To wydanie |
 | Minimalny próg | `'>=0.4.2'` | Najnowsze stabilne wydanie równe progowi lub wyższe |
 | Najnowsza | `latest` | Najnowsze stabilne wydanie |
 
@@ -92,8 +135,8 @@ Po pobraniu i sprawdzeniu sumy kontrolnej opisanym wyżej:
 
 ```bash
 # exact version
-DWP_VIM_VERSION=0.5.1 bash install.sh
-bash install.sh --version 0.5.1
+DWP_VIM_VERSION=0.6.0 bash install.sh
+bash install.sh --version 0.6.0
 
 # minimum floor: the newest stable release at or above 0.4.2
 DWP_VIM_VERSION='>=0.4.2' bash install.sh
@@ -112,10 +155,10 @@ W obrazie lub zadaniu CI, gdzie nie ma terminala i często nie ma roota, pobierz
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 sha256sum -c install.sh.sha256 && \
-bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
+bash install.sh --version 0.6.0 --nvim 0.12.5 --skip-packages --strict
 ```
 
-- `--version 0.5.1` przypina wydanie edytora.
+- `--version 0.6.0` przypina wydanie edytora.
 - `--nvim 0.12.5` instaluje to wydanie Neovima do `~/.local/opt/nvim-v0.12.5`, podlinkowane jako `~/.local/bin/nvim` i zweryfikowane względem SHA-256 publikowanego przez Neovim (Linux i macOS).
 - `--skip-packages` nie instaluje żadnego pakietu systemowego: obraz musi już zawierać git, curl i Lua.
 - `--strict` kończy działanie z niezerowym kodem, gdy instalacja wtyczek bez interfejsu się nie powiedzie lub pozostawi brakujące wtyczki. Sprawdza też, czy każda wtyczka, a także pckr, jest na commicie przypiętym przez wydanie w `pckr/lockfile.lua`.
@@ -126,7 +169,7 @@ Każda flaga ma odpowiednik w postaci zmiennej środowiskowej (`DWP_VIM_VERSION`
 
 - Neovim 0.12 lub nowszy. Zainstaluj go samodzielnie albo pozwól instalatorowi dodać zweryfikowane wydanie za pomocą `--nvim X.Y.Z` (Linux i macOS).
 - Lua: `lua`, `lua5.4` lub `luajit`. Instalator dodaje jedną, jeśli jej brakuje.
-- macOS, Linux i WSL uruchamiają instalator. Windows ma udokumentowaną ścieżkę ręczną w README repozytorium: zainstaluj Neovima przez winget, sklonuj tag `v0.5.1` do `%LOCALAPPDATA%\nvim` i uruchom `lua install.lua` z Git Bash.
+- macOS, Linux i WSL uruchamiają instalator. Windows ma udokumentowaną ścieżkę ręczną w README repozytorium: zainstaluj Neovima przez winget, sklonuj tag `v0.6.0` do `%LOCALAPPDATA%\nvim` i uruchom `lua install.lua` z Git Bash.
 - Licencja GPL-3.0: wolno używać, badać i modyfikować.
 
 ## Aktualizacja, przypinanie wersji i odinstalowanie
@@ -140,7 +183,7 @@ Aby przypiąć wydanie, użyj `--version` (zobacz [Wybór wersji](#choose-a-vers
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 shasum -a 256 -c install.sh.sha256 && \
-bash install.sh --version 0.5.0
+bash install.sh --version 0.5.1
 ```
 
 Aby odinstalować, uruchom `lua delete.lua` z katalogu konfiguracji. Usuwa konfigurację, wtyczki, dane Mason, pamięć podręczną i stan oraz kopię czcionki wykonaną przez instalator, a plik binarny Neovima i Twoje pakiety systemowe zostawia w spokoju.
@@ -173,7 +216,7 @@ Jest zbudowany dla ludzi i dla agentów programistycznych, którzy żyją w term
 
 ### Którą wersję dostanę?
 
-Instalator instaluje wydanie, do którego należy — obecnie `v0.5.1` — chyba że wybierzesz inne za pomocą `--version` lub `DWP_VIM_VERSION`: dokładną wersję, próg `>=` albo `latest`. `DWP_VIM_REF` przyjmuje gałąź lub commit; `DWP_VIM_REF=main` śledzi `main`. Ta strona opisuje wydanie `v0.5.1`, które zawiera wszystkie wymienione tu funkcje.
+Instalator instaluje wydanie, do którego należy — obecnie `v0.6.0` — chyba że wybierzesz inne za pomocą `--version` lub `DWP_VIM_VERSION`: dokładną wersję, próg `>=` albo `latest`. `DWP_VIM_REF` przyjmuje gałąź lub commit; `DWP_VIM_REF=main` śledzi `main`. Ta strona opisuje wydanie `v0.6.0`, które zawiera wszystkie wymienione tu funkcje.
 
 ### Na jakiej licencji jest i skąd pochodzi?
 

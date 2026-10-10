@@ -20,13 +20,13 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** 是 Deep Work Plan 的终端编辑器：一套面向在终端中工作的人以及编程代理的 Neovim 配置。你的计划、文档和所有命令的索引，都只需一个按键。
 
-它是一个独立的产品，作为 Deep Work Plan v7（`v7.0.0`）的可选 `vim` 附加组件提供。Deep Work Plan 可以搭配任何编辑器使用，也可以不用编辑器；该编辑器同样不依赖 Deep Work Plan：你可以单独把它加到一台机器上，无论是否存在计划，它都能作为编辑器使用。本页描述的是 **v0.5.1** 版本。
+它是一个独立的产品，作为 Deep Work Plan v7（`v7.0.0`）的可选 `vim` 附加组件提供。Deep Work Plan 可以搭配任何编辑器使用，也可以不用编辑器；该编辑器同样不依赖 Deep Work Plan：你可以单独把它加到一台机器上，无论是否存在计划，它都能作为编辑器使用。本页描述的是 **v0.6.0** 版本。
 
 ## 为什么要为 Deep Work Plan 准备终端编辑器
 
 Deep Work Plan 是 `.dwp/plans/` 下的一个 Markdown 文件夹：包含目标、原子任务、验证关卡和持续更新的日志。人来审阅，代理来执行，两者往往都在终端里完成。为这项工作设计的编辑器，会把三样东西放在身边：计划本身、围绕它的文档，以及在二者之间切换的按键。
 
-DeepWorkPlan Vim 就是这样的编辑器。它是一套精心整理的 Neovim 配置——语言服务器、补全、代码检查、格式化、模糊查找、文件树和精选配色主题，均按需加载——外加少数几个让它成为 Deep Work Plan 编辑器的功能界面。
+DeepWorkPlan Vim 就是这样的编辑器。目标是终端里的迷你 VS Code：浏览文件，查看哪些文件发生了变化，审阅差异并批准或丢弃更改，友好而轻量，以代理优先，并且计划状态始终在视野之内。它是一套精心整理的 Neovim 配置——语言服务器、补全、格式化、模糊查找、文件树和精选配色主题，均按需加载——外加少数几个让它成为 Deep Work Plan 编辑器的功能界面。
 
 <VimInDwpLoop lang="zh" class="not-prose my-10" />
 
@@ -46,7 +46,7 @@ DeepWorkPlan Vim 就是这样的编辑器。它是一套精心整理的 Neovim �
 |---|---|---|
 | 生成式命令索引 | `SPC h h` | 配置中的每一个键位映射，由实时键位映射生成。 |
 | VS Code 风格手势 | `<C-a>`, `SPC y` | 一个键选中整个文件，并复制到系统剪贴板。单独的 `y` 也会复制到那里，因为剪贴板是系统级共享的。 |
-| Deep Work Plan 浏览器 | `SPC P` | 覆盖你仓库中计划的侧边栏，按状态分组并带进度条，还有用于查看单个计划的阅读视图。 |
+| Deep Work Plan 浏览器 | `SPC P` | 覆盖你仓库中计划的侧边栏，按状态分组并带进度条；点击某个计划即可打开其阅读视图。 |
 | Markdown 查看器 | `SPC m p`, `SPC m r` | 在浏览器中预览 Markdown，或在缓冲区中渲染。 |
 | 经过校验的安装程序 | — | 面向 macOS、Linux 和 WSL 的自包含安装程序，并为 Windows 提供有文档的手动路径。 |
 
@@ -54,13 +54,56 @@ DeepWorkPlan Vim 就是这样的编辑器。它是一套精心整理的 Neovim �
 
 `SPC P`、`:DwpPlans`，或点击状态栏中的对应区段，即可打开计划侧边栏。它覆盖当前目录和 Neovim 配置目录下的每一个 `.dwp/plans/` 文件夹，并按最需要关注的优先排列。在编辑器中，这些分组标签是 `Working`、`Needs attention`、`Ready`、`Not started` 和 `Done`。每个计划都显示进度条。
 
-在某个计划上按回车即可打开阅读视图：一句话概括的目标、状态与进度、标出当前任务的任务清单，以及通往该计划自身文件的通俗跳转。状态栏显示当前活动的计划，起始屏幕列出前三个计划。这些界面只负责说明计划，从不写入 `.dwp/`。
+点击某个计划，或在其上按回车，即可打开阅读视图：一句话概括的目标、状态与进度、标出当前任务的任务清单，以及通往该计划自身文件的通俗跳转。状态栏显示当前活动的计划，起始屏幕列出前三个计划。这些界面只负责说明计划，从不写入 `.dwp/`。
+
+侧边栏同时支持鼠标和键盘。计划旁的小箭头用于显示或隐藏其任务和文件，点击某个任务或文件即可打开它。`j`、`k`、方向键、`Ctrl-n` 和 `Ctrl-p` 在计划之间跳转，并跳过空行和装饰行。每个分组都显示数量，状态颜色标记图标和进度条，进行中的计划标题醒目，已结束的计划标题则调暗，超过六个计划的 Done 分组默认折叠。该窗口为只读且安静：编辑按键不会起作用，也不会打印错误。
+
+计划与文件树轮流显示：打开其中一个侧边栏会关闭另一个，让你一次只看一件事。阅读视图会随计划侧边栏一同关闭。打开一个侧边栏是否关闭另一个，由 `dwpvim.json` 中的 `sidebars.exclusive` 键设置。
 
 要就地阅读计划的 Markdown 文件，`SPC m p` 在浏览器中预览当前缓冲区，`SPC m r` 则在缓冲区内渲染。两者都只在 Markdown 缓冲区中有效。
 
+## 仪表盘
+
+起始屏幕是 DeepWorkPlan Vim 自己的。它展示用盲文字符刻出的 Deep Work Plan 标志，P 字下方嵌着一个小小的 VIM，其下是“powered by Dailybot”的署名，右侧是一幅雕版风格的场景：Deep Work Plan 灯塔，以及在海面上航行的船。仪表盘显示期间，光束会缓慢脉动；设置 `vim.g.dwp_greeter_pulse = false` 可将其关闭。
+
+场景有六种高度，由窗口剩余的行数决定。窗口较窄时，字标会叠放在场景之上，或单独显示。宽窗口并排显示快捷键和“Your plans”，窄窗口则上下堆叠。按回车激活光标所在的行，或按 `e` 打开计划侧边栏。
+
+## 配置侧边栏
+
+`dwpvim.json` 文件用于设置两个侧边栏的位置和宽度。编辑器目录（`~/.config/nvim`）中的文件对所有项目生效，而启动 Neovim 的目录中的 `.dwpvim.json` 会为该项目覆盖它。设置在启动时读取，因此编辑文件后请重启 Neovim。
+
+```json
+{
+  "tree":  { "side": "left", "width": 40 },
+  "plans": { "side": "left", "width": 48 },
+  "sidebars": { "exclusive": true }
+}
+```
+
+| 键 | 取值 | 默认值 | 作用 |
+|---|---|---|---|
+| `tree.side` | `"left"` 或 `"right"` | `"left"` | 文件树所在的一侧（`SPC n`） |
+| `tree.width` | 整数，20 到 120 | `40` | 文件树的最大宽度；仍会缩小到内容宽度 |
+| `plans.side` | `"left"` 或 `"right"` | `"left"` | 计划侧边栏所在的一侧（`SPC P`） |
+| `plans.width` | 整数，20 到 120 | `48` | 计划侧边栏的最大宽度 |
+| `sidebars.exclusive` | `true` 或 `false` | `true` | 一次只显示一个侧边栏；`false` 则允许两者同时打开 |
+
+文件不存在没有问题。不是有效 JSON 的文件、未知的键或无效的值会被忽略并报告，绝不会导致致命错误。运行 `:DwpConfig` 可查看当前生效的每个值、它来自哪个文件，以及发现的任何问题。
+
+## 更轻量的编辑器
+
+0.6.0 版本移除了无人使用的部分，因此需要固定的插件更少，首次启动时需要安装和更新的软件包也更少：
+
+- 停用十一个 Mason 语言服务器：efm、diagnosticls、tailwindcss、grammarly、bashls，以及 astro、svelte、Vue 2、Angular、SQL 和 Vim script 的服务器。
+- 移除 nvim-lint，因为从未配置过任何 linter。
+- 移除 prettier 格式化条目，因为没有任何东西安装过 prettier。`:Format` 保留 biome、black、shfmt 和 stylua。
+- marksman 继续保留，用于跟随链接、补全链接和标题以及大纲，其诊断已被静音。Markdown 有意不配置格式化工具。
+
+即使 Mason 中仍保留着早期配置遗留的其他服务器，也只会启用配置中列出的服务器。每个插件、服务器和工具及其存在的理由，都列在 [PLUGINS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/v0.6.0/docs/PLUGINS.md) 中。
+
 ## 安装
 
-安装分为三条命令：下载脚本，将其与本站所提供文件的 SHA-256 进行核对，然后运行。安装程序固定了它自身所属的版本，因此会精确安装 `v0.5.1`，即本页所描述的版本，除非你[选择其他版本](#choose-a-version)。
+安装分为三条命令：下载脚本，将其与本站所提供文件的 SHA-256 进行核对，然后运行。安装程序固定了它自身所属的版本，因此会精确安装 `v0.6.0`，即本页所描述的版本，除非你[选择其他版本](#choose-a-version)。
 
 <VimInstall lang="zh" />
 
@@ -74,17 +117,17 @@ DeepWorkPlan Vim 就是这样的编辑器。它是一套精心整理的 Neovim �
 6. 运行仓库自带的 `lua install.lua`。
 7. 以无界面方式安装插件并加以检查，因此无需退出再重新打开。使用 `--strict` 时，插件安装失败或不完整会被视为错误。
 
-此处提供的脚本与 `v0.5.1` 标签下的 `install.sh` 逐字节相同。它的校验和就放在旁边，位于 `https://deepworkplan.com/vim/install.sh.sha256`，因此你可以用 `shasum -a 256 -c install.sh.sha256` 校验下载的文件（在 Linux 上用 `sha256sum -c install.sh.sha256`）。如需从第二个来源核对，可将其与 GitHub 发布页上 `SHA256SUMS` 中 `install.sh` 那一行比对。运行 `bash install.sh --help` 可列出所有选项。
+此处提供的脚本与 `v0.6.0` 标签下的 `install.sh` 逐字节相同。它的校验和就放在旁边，位于 `https://deepworkplan.com/vim/install.sh.sha256`，因此你可以用 `shasum -a 256 -c install.sh.sha256` 校验下载的文件（在 Linux 上用 `sha256sum -c install.sh.sha256`）。如需从第二个来源核对，可将其与 GitHub 发布页上 `SHA256SUMS` 中 `install.sh` 那一行比对。运行 `bash install.sh --help` 可列出所有选项。
 
 <a id="choose-a-version" class="scroll-mt-24"></a>
 
 ## 选择版本
 
-默认情况下，安装程序安装它自身所属的版本 `v0.5.1`。要选择其他版本，请设置 `DWP_VIM_VERSION` 或传入 `--version`：两者作用相同，哪个读起来更清楚就用哪个，且标志优先于环境变量。两者都接受：
+默认情况下，安装程序安装它自身所属的版本 `v0.6.0`。要选择其他版本，请设置 `DWP_VIM_VERSION` 或传入 `--version`：两者作用相同，哪个读起来更清楚就用哪个，且标志优先于环境变量。两者都接受：
 
 | 形式 | 示例 | 安装内容 |
 |---|---|---|
-| 精确版本 | `0.5.1` 或 `v0.5.1` | 该版本 |
+| 精确版本 | `0.6.0` 或 `v0.6.0` | 该版本 |
 | 最低版本 | `'>=0.4.2'` | 不低于该最低版本的最新稳定版本 |
 | 最新版本 | `latest` | 最新的稳定版本 |
 
@@ -92,8 +135,8 @@ DeepWorkPlan Vim 就是这样的编辑器。它是一套精心整理的 Neovim �
 
 ```bash
 # exact version
-DWP_VIM_VERSION=0.5.1 bash install.sh
-bash install.sh --version 0.5.1
+DWP_VIM_VERSION=0.6.0 bash install.sh
+bash install.sh --version 0.6.0
 
 # minimum floor: the newest stable release at or above 0.4.2
 DWP_VIM_VERSION='>=0.4.2' bash install.sh
@@ -112,10 +155,10 @@ bash install.sh --version latest
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 sha256sum -c install.sh.sha256 && \
-bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
+bash install.sh --version 0.6.0 --nvim 0.12.5 --skip-packages --strict
 ```
 
-- `--version 0.5.1` 固定编辑器版本。
+- `--version 0.6.0` 固定编辑器版本。
 - `--nvim 0.12.5` 把该 Neovim 版本安装到 `~/.local/opt/nvim-v0.12.5`，链接为 `~/.local/bin/nvim`，并用 Neovim 发布的 SHA-256 进行校验（Linux 和 macOS）。
 - `--skip-packages` 不安装任何系统软件包：镜像中必须已经提供 git、curl 和 Lua。
 - `--strict` 在无界面插件安装失败或遗漏插件时以非零状态退出。它还会检查每个插件以及 pckr 是否都检出在该版本于 `pckr/lockfile.lua` 中固定的提交上。
@@ -126,7 +169,7 @@ bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
 
 - Neovim 0.12 或更高版本。可以自行安装，也可以让安装程序通过 `--nvim X.Y.Z` 添加一个经过校验的版本（Linux 和 macOS）。
 - Lua：`lua`、`lua5.4` 或 `luajit`。缺少时安装程序会补上一个。
-- macOS、Linux 和 WSL 运行此安装程序。Windows 在仓库 README 中有手动路径：用 winget 安装 Neovim，把 `v0.5.1` 标签克隆到 `%LOCALAPPDATA%\nvim`，再在 Git Bash 中运行 `lua install.lua`。
+- macOS、Linux 和 WSL 运行此安装程序。Windows 在仓库 README 中有手动路径：用 winget 安装 Neovim，把 `v0.6.0` 标签克隆到 `%LOCALAPPDATA%\nvim`，再在 Git Bash 中运行 `lua install.lua`。
 - 采用 GPL-3.0 许可：可自由使用、研究和修改。
 
 ## 更新、固定版本与卸载
@@ -140,7 +183,7 @@ bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 shasum -a 256 -c install.sh.sha256 && \
-bash install.sh --version 0.5.0
+bash install.sh --version 0.5.1
 ```
 
 要卸载，请在配置目录中运行 `lua delete.lua`。它会移除配置、插件、Mason 数据、缓存与状态，以及安装程序复制的字体，但保留 Neovim 可执行文件和你的系统软件包。
@@ -173,7 +216,7 @@ Deep Work Plan v7 在引导流程中将该编辑器作为可选的 `vim` 附加�
 
 ### 我得到的是哪个版本？
 
-安装程序安装的是它所属的版本（目前为 `v0.5.1`），除非你通过 `--version` 或 `DWP_VIM_VERSION` 选择其他版本：精确版本、`>=` 最低版本或 `latest`。`DWP_VIM_REF` 接受分支或提交；`DWP_VIM_REF=main` 会跟随 `main`。本页描述的是 `v0.5.1` 版本，它包含此处列出的全部功能。
+安装程序安装的是它所属的版本（目前为 `v0.6.0`），除非你通过 `--version` 或 `DWP_VIM_VERSION` 选择其他版本：精确版本、`>=` 最低版本或 `latest`。`DWP_VIM_REF` 接受分支或提交；`DWP_VIM_REF=main` 会跟随 `main`。本页描述的是 `v0.6.0` 版本，它包含此处列出的全部功能。
 
 ### 它采用什么许可证，源自哪里？
 

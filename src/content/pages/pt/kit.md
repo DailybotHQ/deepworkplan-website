@@ -68,7 +68,7 @@ Capacidades que o fluxo de onboarding adiciona a um repositório. Sete são opci
 - **[herdr](/pt/kit/herdr)** — Pares em painéis do Herdr, em qualquer máquina: delegação interativa com uma única resposta autorizada. Fixado em `herdr-peers@v0.1.0`.
 - **[agentkit](/pt/kit/agentkit)** — Um único comando ak para cada agente de programação no terminal: autonomia por padrão com opt-out, e delegação sem interface em uma worktree. Fixado em `coding-agents-kit@v0.3.0`.
 - **[devcontainer](/pt/kit/devcontainer)** — O contêiner de desenvolvimento próprio de cada repositório a partir de um único template: agentes via ak, Herdr nos dois sentidos, nenhuma chave SSH dentro. Fixado em `devcontainer-kit@v0.2.2`.
-- **[vim](/pt/kit/vim)** — O editor de terminal, com um navegador de planos somente leitura e um visualizador de Markdown. Fixado em `deepworkplan-vim@v0.5.1`.
+- **[vim](/pt/kit/vim)** — O editor de terminal, com um navegador de planos somente leitura e um visualizador de Markdown. Fixado em `deepworkplan-vim@v0.6.0`.
 
 O registro de addons e os descritores são distribuídos no Deep Work Plan v7: `v7.1.4`
 

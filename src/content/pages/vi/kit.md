@@ -68,7 +68,7 @@ Các năng lực mà luồng onboard bổ sung vào một repo. Bảy addon là 
 - **[herdr](/vi/kit/herdr)** — Các agent ngang hàng trong các pane của Herdr, trên bất kỳ máy nào: ủy thác tương tác với đúng một phản hồi được ủy quyền. Ghim tại `herdr-peers@v0.1.0`.
 - **[agentkit](/vi/kit/agentkit)** — Một lệnh ak duy nhất cho mọi agent lập trình trên terminal: tự chủ theo mặc định với lựa chọn opt-out, và ủy thác headless trong một worktree. Ghim tại `coding-agents-kit@v0.3.0`.
 - **[devcontainer](/vi/kit/devcontainer)** — Dev container riêng của mỗi repository từ một template: agent qua ak, Herdr hai chiều, không có khóa SSH bên trong. Ghim tại `devcontainer-kit@v0.2.2`.
-- **[vim](/vi/kit/vim)** — Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown. Ghim tại `deepworkplan-vim@v0.5.1`.
+- **[vim](/vi/kit/vim)** — Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown. Ghim tại `deepworkplan-vim@v0.6.0`.
 
 Registry addon và các descriptor được phân phối trong Deep Work Plan v7: `v7.1.4`
 

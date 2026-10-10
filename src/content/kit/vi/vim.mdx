@@ -20,13 +20,13 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** là trình soạn thảo trên terminal cho Deep Work Plan: một cấu hình Neovim dành cho con người, và cho các agent lập trình, làm việc trong terminal. Kế hoạch, tài liệu và chỉ mục của mọi lệnh chỉ cách bạn một phím bấm.
 
-Đây là một sản phẩm riêng, được cung cấp dưới dạng addon `vim` tùy chọn của Deep Work Plan v7 (`v7.0.0`). Deep Work Plan hoạt động với bất kỳ trình soạn thảo nào hoặc không cần trình soạn thảo, và trình soạn thảo này cũng không yêu cầu Deep Work Plan: bạn thêm nó vào máy một cách độc lập, và nó hoạt động như một trình soạn thảo dù có kế hoạch hay không. Trang này mô tả bản phát hành **v0.5.1**.
+Đây là một sản phẩm riêng, được cung cấp dưới dạng addon `vim` tùy chọn của Deep Work Plan v7 (`v7.0.0`). Deep Work Plan hoạt động với bất kỳ trình soạn thảo nào hoặc không cần trình soạn thảo, và trình soạn thảo này cũng không yêu cầu Deep Work Plan: bạn thêm nó vào máy một cách độc lập, và nó hoạt động như một trình soạn thảo dù có kế hoạch hay không. Trang này mô tả bản phát hành **v0.6.0**.
 
 ## Vì sao cần trình soạn thảo trên terminal cho Deep Work Plan
 
 Một Deep Work Plan là một thư mục Markdown dưới `.dwp/plans/`: một mục tiêu, các tác vụ nguyên tử, các cổng kiểm chứng và một nhật ký liên tục. Con người xem xét nó, agent thực thi nó, và cả hai thường làm việc đó từ terminal. Một trình soạn thảo được xây dựng cho công việc này giữ ba thứ ở gần: chính kế hoạch, tài liệu xung quanh nó, và các phím giúp bạn di chuyển giữa hai thứ đó.
 
-DeepWorkPlan Vim chính là trình soạn thảo đó. Nó là một cấu hình Neovim được chọn lọc — máy chủ ngôn ngữ, tự động hoàn thành, linting, định dạng, tìm kiếm mờ, cây tệp và các giao diện màu được chọn lọc, tải theo nhu cầu — cùng vài giao diện giúp nó trở thành trình soạn thảo cho Deep Work Plan.
+DeepWorkPlan Vim chính là trình soạn thảo đó. Mục tiêu là một VS Code thu nhỏ ngay trong terminal: di chuyển giữa các tệp, thấy tệp nào đã thay đổi, xem diff rồi chấp thuận hoặc loại bỏ thay đổi, thân thiện và nhẹ, ưu tiên agent, với trạng thái kế hoạch luôn trong tầm mắt. Nó là một cấu hình Neovim được chọn lọc — máy chủ ngôn ngữ, tự động hoàn thành, định dạng, tìm kiếm mờ, cây tệp và các giao diện màu được chọn lọc, tải theo nhu cầu — cùng vài giao diện giúp nó trở thành trình soạn thảo cho Deep Work Plan.
 
 <VimInDwpLoop lang="vi" class="not-prose my-10" />
 
@@ -46,7 +46,7 @@ Năm tính năng, mỗi tính năng chỉ cách một phím bấm.
 |---|---|---|
 | Chỉ mục lệnh được tạo tự động | `SPC h h` | Mọi phím tắt trong cấu hình, được tạo từ các phím tắt đang hoạt động. |
 | Thao tác kiểu VS Code | `<C-a>`, `SPC y` | Chọn toàn bộ tệp bằng một phím và sao chép vào bộ nhớ tạm của hệ thống. `y` thường cũng sao chép vào đó, vì bộ nhớ tạm dùng chung toàn hệ thống. |
-| Trình duyệt kế hoạch Deep Work Plan | `SPC P` | Một thanh bên trên các kế hoạch trong kho mã của bạn, nhóm theo trạng thái và có thanh tiến độ, cùng một trình đọc cho từng kế hoạch. |
+| Trình duyệt kế hoạch Deep Work Plan | `SPC P` | Một thanh bên trên các kế hoạch trong kho mã của bạn, nhóm theo trạng thái và có thanh tiến độ; nhấp vào một kế hoạch để mở trình đọc của nó. |
 | Trình xem Markdown | `SPC m p`, `SPC m r` | Xem trước Markdown trong trình duyệt, hoặc kết xuất trong bộ đệm. |
 | Trình cài đặt có xác minh | — | Trình cài đặt độc lập cho macOS, Linux và WSL, với cách cài thủ công được ghi tài liệu cho Windows. |
 
@@ -54,13 +54,56 @@ Năm tính năng, mỗi tính năng chỉ cách một phím bấm.
 
 `SPC P`, `:DwpPlans`, hoặc một cú nhấp vào đoạn trên thanh trạng thái sẽ mở thanh bên kế hoạch. Nó bao quát mọi thư mục `.dwp/plans/` trong thư mục hiện tại và thư mục cấu hình Neovim của bạn, và nhóm các kế hoạch bắt đầu từ những kế hoạch cần chú ý nhất. Trong trình soạn thảo, các nhãn là `Working`, `Needs attention`, `Ready`, `Not started` và `Done`. Mỗi kế hoạch có một thanh tiến độ.
 
-Nhấn Enter trên một kế hoạch để mở trình đọc: mục tiêu trong một câu, trạng thái và tiến độ, danh sách tác vụ với tác vụ hiện tại được đánh dấu, và các liên kết nhảy bằng ngôn ngữ dễ hiểu tới các tệp của chính kế hoạch. Thanh trạng thái hiển thị kế hoạch đang hoạt động theo thời gian thực, còn màn hình khởi động liệt kê ba kế hoạch đầu. Các giao diện này chỉ giải thích kế hoạch; chúng không bao giờ ghi vào `.dwp/`.
+Nhấp vào một kế hoạch, hoặc nhấn Enter trên nó, để mở trình đọc: mục tiêu trong một câu, trạng thái và tiến độ, danh sách tác vụ với tác vụ hiện tại được đánh dấu, và các liên kết nhảy bằng ngôn ngữ dễ hiểu tới các tệp của chính kế hoạch. Thanh trạng thái hiển thị kế hoạch đang hoạt động theo thời gian thực, còn màn hình khởi động liệt kê ba kế hoạch đầu. Các giao diện này chỉ giải thích kế hoạch; chúng không bao giờ ghi vào `.dwp/`.
+
+Thanh bên đáp ứng cả chuột lẫn bàn phím. Mũi tên nhỏ bên cạnh một kế hoạch hiện hoặc ẩn các tác vụ và tệp của nó, và một cú nhấp vào tác vụ hay tệp sẽ mở nó. `j`, `k`, các phím mũi tên, `Ctrl-n` và `Ctrl-p` nhảy từ kế hoạch này sang kế hoạch khác, bỏ qua các dòng trống và phần trang trí. Mỗi nhóm hiển thị số lượng của nó, màu trạng thái đánh dấu biểu tượng và thanh tiến độ, kế hoạch đang hoạt động có tiêu đề đậm còn kế hoạch đã ổn định có tiêu đề mờ, và nhóm Done có hơn sáu kế hoạch sẽ mở ở trạng thái thu gọn. Cửa sổ này chỉ đọc và yên lặng: các phím chỉnh sửa không làm gì thay vì in ra lỗi.
+
+Kế hoạch và cây tệp thay phiên nhau: mở thanh bên này sẽ đóng thanh bên kia, nên bạn chỉ nhìn một thứ tại một thời điểm. Trình đọc đóng cùng lúc với thanh bên kế hoạch. Việc mở thanh bên này có đóng thanh bên kia hay không được đặt bằng khóa `sidebars.exclusive` trong `dwpvim.json`.
 
 Để đọc ngay tại chỗ các tệp Markdown của một kế hoạch, `SPC m p` xem trước bộ đệm hiện tại trong trình duyệt và `SPC m r` kết xuất nó ngay trong bộ đệm. Cả hai chỉ hoạt động trong bộ đệm Markdown.
 
+## Màn hình khởi động
+
+Màn hình khởi động là của riêng DeepWorkPlan Vim. Nó hiển thị logo Deep Work Plan khắc bằng các ký tự braille với một chữ VIM nhỏ nằm dưới chữ P, dòng ghi công "powered by Dailybot" bên dưới, và một cảnh khắc ở bên phải: ngọn hải đăng Deep Work Plan cùng một con tàu đang đi trên biển của nó. Chùm sáng đập chậm trong khi màn hình khởi động hiển thị; đặt `vim.g.dwp_greeter_pulse = false` để tắt điều đó.
+
+Cảnh có sáu mức chiều cao, được chọn theo số hàng mà cửa sổ còn trống. Trong cửa sổ hẹp hơn, chữ biểu tượng xếp chồng lên cảnh hoặc đứng một mình. Cửa sổ rộng hiển thị các phím tắt và "Your plans" cạnh nhau, còn cửa sổ hẹp xếp chồng chúng. Nhấn Enter để kích hoạt dòng dưới con trỏ, hoặc `e` để mở thanh bên kế hoạch.
+
+## Cấu hình các thanh bên
+
+Một tệp `dwpvim.json` đặt vị trí của hai thanh bên và độ rộng của chúng. Tệp nằm trong thư mục của trình soạn thảo (`~/.config/nvim`) áp dụng cho mọi dự án, và một tệp `.dwpvim.json` trong thư mục nơi bạn khởi chạy Neovim sẽ ghi đè nó cho dự án đó. Các thiết lập được đọc khi khởi động, nên hãy khởi động lại Neovim sau khi sửa tệp.
+
+```json
+{
+  "tree":  { "side": "left", "width": 40 },
+  "plans": { "side": "left", "width": 48 },
+  "sidebars": { "exclusive": true }
+}
+```
+
+| Khóa | Giá trị | Mặc định | Chức năng |
+|---|---|---|---|
+| `tree.side` | `"left"` hoặc `"right"` | `"left"` | Phía của cây tệp (`SPC n`) |
+| `tree.width` | số nguyên, từ 20 đến 120 | `40` | Độ rộng tối đa của cây tệp; nó vẫn co lại theo nội dung |
+| `plans.side` | `"left"` hoặc `"right"` | `"left"` | Phía của thanh bên kế hoạch (`SPC P`) |
+| `plans.width` | số nguyên, từ 20 đến 120 | `48` | Độ rộng tối đa của thanh bên kế hoạch |
+| `sidebars.exclusive` | `true` hoặc `false` | `true` | Mỗi lần một thanh bên; `false` cho phép cả hai cùng mở |
+
+Thiếu tệp cũng không sao. Một tệp không phải JSON hợp lệ, một khóa không xác định hoặc một giá trị không hợp lệ sẽ bị bỏ qua và được báo cáo, không bao giờ gây lỗi nghiêm trọng. Chạy `:DwpConfig` để xem mọi giá trị đang có hiệu lực, tệp mà chúng đến từ đó và mọi vấn đề được phát hiện.
+
+## Một trình soạn thảo nhẹ hơn
+
+Phiên bản 0.6.0 loại bỏ những gì không ai dùng, nên có ít plugin cần ghim hơn và ít gói cần cài đặt và cập nhật hơn ở lần khởi động đầu tiên:
+
+- Mười một máy chủ ngôn ngữ Mason bị loại bỏ: efm, diagnosticls, tailwindcss, grammarly, bashls, và các máy chủ cho astro, svelte, Vue 2, Angular, SQL và Vim script.
+- nvim-lint bị gỡ bỏ, vì chưa từng có linter nào được cấu hình.
+- Các mục định dạng prettier bị gỡ bỏ, vì không có gì cài prettier. `:Format` vẫn giữ biome, black, shfmt và stylua.
+- marksman vẫn được giữ cho việc đi theo liên kết, hoàn thành liên kết và tiêu đề, cùng dàn ý, với chẩn đoán được tắt tiếng. Markdown cố ý vẫn không có trình định dạng.
+
+Chỉ các máy chủ mà cấu hình liệt kê mới được bật, kể cả khi Mason vẫn còn giữ những máy chủ khác từ một thiết lập trước đó. Mọi plugin, máy chủ và công cụ, kèm lý do có mặt, được liệt kê trong [PLUGINS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/v0.6.0/docs/PLUGINS.md).
+
 ## Cài đặt
 
-Việc cài đặt gồm ba lệnh: tải tập lệnh về, đối chiếu nó với SHA-256 của tệp mà trang này cung cấp, rồi chạy nó. Trình cài đặt ghim chính bản phát hành của nó, nên nó cài chính xác `v0.5.1`, bản phát hành mà trang này mô tả, trừ khi bạn [chọn một phiên bản khác](#choose-a-version).
+Việc cài đặt gồm ba lệnh: tải tập lệnh về, đối chiếu nó với SHA-256 của tệp mà trang này cung cấp, rồi chạy nó. Trình cài đặt ghim chính bản phát hành của nó, nên nó cài chính xác `v0.6.0`, bản phát hành mà trang này mô tả, trừ khi bạn [chọn một phiên bản khác](#choose-a-version).
 
 <VimInstall lang="vi" />
 
@@ -74,17 +117,17 @@ Theo thứ tự, trình cài đặt:
 6. Chạy `lua install.lua` của chính kho mã.
 7. Cài các plugin ở chế độ headless rồi kiểm tra chúng, nên không cần thoát rồi mở lại. Với `--strict`, việc cài plugin thất bại hoặc không đầy đủ được coi là lỗi.
 
-Tập lệnh được cung cấp ở đây là bản sao giống hệt từng byte của `install.sh` tại thẻ `v0.5.1`. Checksum của nó được cung cấp ngay bên cạnh, tại `https://deepworkplan.com/vim/install.sh.sha256`, nên bạn có thể xác minh tệp tải về bằng `shasum -a 256 -c install.sh.sha256` (trên Linux, `sha256sum -c install.sh.sha256`). Để kiểm tra từ một nguồn thứ hai, hãy so sánh nó với dòng `install.sh` trong `SHA256SUMS` trên bản phát hành GitHub. Chạy `bash install.sh --help` để liệt kê mọi tùy chọn.
+Tập lệnh được cung cấp ở đây là bản sao giống hệt từng byte của `install.sh` tại thẻ `v0.6.0`. Checksum của nó được cung cấp ngay bên cạnh, tại `https://deepworkplan.com/vim/install.sh.sha256`, nên bạn có thể xác minh tệp tải về bằng `shasum -a 256 -c install.sh.sha256` (trên Linux, `sha256sum -c install.sh.sha256`). Để kiểm tra từ một nguồn thứ hai, hãy so sánh nó với dòng `install.sh` trong `SHA256SUMS` trên bản phát hành GitHub. Chạy `bash install.sh --help` để liệt kê mọi tùy chọn.
 
 <a id="choose-a-version" class="scroll-mt-24"></a>
 
 ## Chọn phiên bản
 
-Theo mặc định, trình cài đặt cài bản phát hành của chính nó, `v0.5.1`. Để chọn phiên bản khác, hãy đặt `DWP_VIM_VERSION` hoặc truyền `--version`: cả hai đều làm cùng một việc, nên hãy dùng cách nào dễ đọc hơn, và cờ được ưu tiên hơn biến môi trường. Mỗi cách đều chấp nhận:
+Theo mặc định, trình cài đặt cài bản phát hành của chính nó, `v0.6.0`. Để chọn phiên bản khác, hãy đặt `DWP_VIM_VERSION` hoặc truyền `--version`: cả hai đều làm cùng một việc, nên hãy dùng cách nào dễ đọc hơn, và cờ được ưu tiên hơn biến môi trường. Mỗi cách đều chấp nhận:
 
 | Dạng | Ví dụ | Cài đặt |
 |---|---|---|
-| Phiên bản chính xác | `0.5.1` hoặc `v0.5.1` | Đúng bản phát hành đó |
+| Phiên bản chính xác | `0.6.0` hoặc `v0.6.0` | Đúng bản phát hành đó |
 | Mức tối thiểu | `'>=0.4.2'` | Bản phát hành ổn định mới nhất bằng hoặc cao hơn mức tối thiểu |
 | Mới nhất | `latest` | Bản phát hành ổn định mới nhất |
 
@@ -92,8 +135,8 @@ Sau khi tải về và kiểm tra checksum như trên:
 
 ```bash
 # exact version
-DWP_VIM_VERSION=0.5.1 bash install.sh
-bash install.sh --version 0.5.1
+DWP_VIM_VERSION=0.6.0 bash install.sh
+bash install.sh --version 0.6.0
 
 # minimum floor: the newest stable release at or above 0.4.2
 DWP_VIM_VERSION='>=0.4.2' bash install.sh
@@ -112,10 +155,10 @@ Trong một image hoặc một job CI, nơi không có terminal và thường kh
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 sha256sum -c install.sh.sha256 && \
-bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
+bash install.sh --version 0.6.0 --nvim 0.12.5 --skip-packages --strict
 ```
 
-- `--version 0.5.1` ghim bản phát hành của trình soạn thảo.
+- `--version 0.6.0` ghim bản phát hành của trình soạn thảo.
 - `--nvim 0.12.5` cài bản phát hành Neovim đó vào `~/.local/opt/nvim-v0.12.5`, liên kết thành `~/.local/bin/nvim` và được xác minh theo SHA-256 mà Neovim công bố (Linux và macOS).
 - `--skip-packages` không cài gói hệ thống nào: image phải có sẵn git, curl và Lua.
 - `--strict` thoát với mã khác 0 khi việc cài plugin ở chế độ headless thất bại hoặc để thiếu plugin. Nó cũng kiểm tra rằng mọi plugin, và pckr, đều ở đúng commit mà bản phát hành ghim trong `pckr/lockfile.lua`.
@@ -126,7 +169,7 @@ Mỗi cờ đều có một biến môi trường tương ứng (`DWP_VIM_VERSIO
 
 - Neovim 0.12 trở lên. Hãy tự cài, hoặc để trình cài đặt thêm một bản phát hành đã được xác minh bằng `--nvim X.Y.Z` (Linux và macOS).
 - Lua: `lua`, `lua5.4` hoặc `luajit`. Trình cài đặt sẽ thêm một cái nếu thiếu.
-- macOS, Linux và WSL chạy trình cài đặt. Windows có cách cài thủ công được ghi trong README của kho mã: cài Neovim bằng winget, clone thẻ `v0.5.1` vào `%LOCALAPPDATA%\nvim`, rồi chạy `lua install.lua` từ Git Bash.
+- macOS, Linux và WSL chạy trình cài đặt. Windows có cách cài thủ công được ghi trong README của kho mã: cài Neovim bằng winget, clone thẻ `v0.6.0` vào `%LOCALAPPDATA%\nvim`, rồi chạy `lua install.lua` từ Git Bash.
 - Cấp phép GPL-3.0: tự do sử dụng, nghiên cứu và sửa đổi.
 
 ## Cập nhật, cố định phiên bản và gỡ cài đặt
@@ -140,7 +183,7 @@ Mỗi cờ đều có một biến môi trường tương ứng (`DWP_VIM_VERSIO
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 shasum -a 256 -c install.sh.sha256 && \
-bash install.sh --version 0.5.0
+bash install.sh --version 0.5.1
 ```
 
 Để gỡ cài đặt, chạy `lua delete.lua` từ thư mục cấu hình. Nó xóa cấu hình, plugin, dữ liệu Mason, bộ nhớ đệm và trạng thái, cùng bản sao phông chữ mà trình cài đặt đã tạo, và giữ nguyên tệp thực thi Neovim cùng các gói hệ thống của bạn.
@@ -173,7 +216,7 @@ Nó được xây dựng cho con người và cho các agent lập trình sống
 
 ### Tôi nhận được phiên bản nào?
 
-Trình cài đặt cài bản phát hành mà nó thuộc về — hiện là `v0.5.1` — trừ khi bạn chọn phiên bản khác bằng `--version` hoặc `DWP_VIM_VERSION`: một phiên bản chính xác, một mức tối thiểu `>=` hoặc `latest`. `DWP_VIM_REF` nhận một nhánh hoặc một commit; `DWP_VIM_REF=main` đi theo `main`. Trang này mô tả bản phát hành `v0.5.1`, bản có đủ mọi tính năng được liệt kê ở đây.
+Trình cài đặt cài bản phát hành mà nó thuộc về — hiện là `v0.6.0` — trừ khi bạn chọn phiên bản khác bằng `--version` hoặc `DWP_VIM_VERSION`: một phiên bản chính xác, một mức tối thiểu `>=` hoặc `latest`. `DWP_VIM_REF` nhận một nhánh hoặc một commit; `DWP_VIM_REF=main` đi theo `main`. Trang này mô tả bản phát hành `v0.6.0`, bản có đủ mọi tính năng được liệt kê ở đây.
 
 ### Nó theo giấy phép nào và đến từ đâu?
 
