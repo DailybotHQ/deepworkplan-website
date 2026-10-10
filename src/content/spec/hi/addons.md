@@ -91,7 +91,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 ### DeepWorkPlan Vim (सातवाँ ऐडऑन)
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (पिन `v0.5.1`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, Deep Work Plan के लिए टर्मिनल एडिटर (Neovim 0.12+)।
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (पिन `v0.6.0`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, Deep Work Plan के लिए टर्मिनल एडिटर (Neovim 0.12+)।
 
 - **Kit पृष्ठ:** [DeepWorkPlan Vim](/kit/vim)
 - **क्या जोड़ता है:** एजेंटों और मनुष्यों के लिए एक वैकल्पिक, मशीन-स्तरीय एडिटर सतह — एक जनरेट किया गया कमांड इंडेक्स, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर; हर दावा उत्पाद की पिन की गई मशीन-पठनीय सतह से पढ़ा जाता है

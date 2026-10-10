@@ -91,7 +91,7 @@ Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (
 
 ### DeepWorkPlan Vim (addon ketujuh)
 
-Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (dipatok `v0.5.1`, antarmuka `1`), editor terminal untuk Deep Work Plan (Neovim 0.12+).
+Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (dipatok `v0.6.0`, antarmuka `1`), editor terminal untuk Deep Work Plan (Neovim 0.12+).
 
 - **Halaman kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Yang ditambahkan:** permukaan editor opsional tingkat mesin untuk agen dan manusia — indeks perintah yang dihasilkan, penjelajah rencana hanya-baca, dan penampil Markdown; setiap klaim dibaca dari permukaan produk yang dapat dibaca mesin dan telah dipatok

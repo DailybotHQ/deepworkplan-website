@@ -220,7 +220,7 @@ registrando cada aceptación en `.dwp/config.json`. Un repositorio es totalmente
  estos dos últimos siempre se preguntan, nunca se aplican automáticamente.
 - **agentkit** — una instalación a nivel de máquina de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fijado en `v0.3.0`) para planes que entregan tareas `parallel_safe` acotadas a otros agentes de código (sin interfaz, un `ak run` por delegado en su propio worktree); el kit lanza los agentes en autonomía por defecto y su exclusión (`--ask` o `AGENTKIT_PERMISSIONS=ask`) siempre prevalece.
 - **Herdr** — una instalación a nivel de máquina de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fijado en `v0.1.0`, más la skill oficial de Herdr) para planes que piden a un agente par en un panel de Herdr, en cualquier máquina, una única respuesta autorizada.
-- **DeepWorkPlan Vim** — el editor de terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), fijado en `v0.5.1`), una instalación a nivel de máquina que nunca sobrescribe una configuración de Neovim existente sin consentimiento explícito.
+- **DeepWorkPlan Vim** — el editor de terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), fijado en `v0.6.0`), una instalación a nivel de máquina que nunca sobrescribe una configuración de Neovim existente sin consentimiento explícito.
 - **AI Diff Reviewer** — la revisión local requerida (no una opción): el pase de seguridad de cada Final Review
  ejecuta [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md`
  requerido) sobre el conjunto acumulado de cambios del plan. Una skill o extensión ausente es un hallazgo

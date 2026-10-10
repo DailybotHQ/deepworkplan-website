@@ -247,7 +247,7 @@ konforman dengan **nol** addon opsional — jangan pernah memasang yang itu seca
   diterapkan secara otomatis.
 - **agentkit** — instalasi tingkat mesin dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok pada `v0.3.0`) untuk rencana yang menyerahkan tugas `parallel_safe` yang terbatas ke coding agent lain (headless, satu `ak run` per delegasi di worktree-nya sendiri); kit meluncurkan agen dalam mode otonom secara default dan opt-out-nya (`--ask` atau `AGENTKIT_PERMISSIONS=ask`) selalu menang.
 - **Herdr** — instalasi tingkat mesin dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok pada `v0.1.0`, ditambah skill resmi Herdr) untuk rencana yang meminta satu balasan yang diotorisasi dari agent rekan di panel Herdr, di mesin mana pun.
-- **DeepWorkPlan Vim** — editor terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), dipatok pada `v0.5.1`), instalasi tingkat mesin yang tidak pernah menimpa konfigurasi Neovim yang sudah ada tanpa persetujuan eksplisit.
+- **DeepWorkPlan Vim** — editor terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), dipatok pada `v0.6.0`), instalasi tingkat mesin yang tidak pernah menimpa konfigurasi Neovim yang sudah ada tanpa persetujuan eksplisit.
 - **AI Diff Reviewer** — tinjauan lokal yang wajib (bukan opt-in): pemeriksaan keamanan setiap Final
   Review menjalankan [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill +
   `.review/extension.md` wajib) atas kumpulan perubahan rencana yang terakumulasi. Skill atau ekstensi

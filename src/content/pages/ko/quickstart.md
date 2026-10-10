@@ -229,7 +229,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
   항상 질문하며 자동 적용하지 않습니다.
 - **agentkit** — 범위가 정해진 `parallel_safe` 작업을 다른 코딩 에이전트에 넘기는 계획을 위한 [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, `v0.3.0`로 고정)의 머신 수준 설치(헤드리스, 위임 대상마다 자체 worktree에서 `ak run` 한 번 실행). 키트는 기본적으로 에이전트를 자율 모드로 실행하며, 그 옵트아웃(`--ask` 또는 `AGENTKIT_PERMISSIONS=ask`)이 항상 우선합니다.
 - **Herdr** — 어느 머신에서든 Herdr 페인의 피어 에이전트에게 승인된 응답 하나를 요청하는 계획을 위한 [herdr-peers](https://github.com/DailybotHQ/herdr-peers)(`v0.1.0`으로 고정, Herdr 공식 스킬 포함)의 머신 수준 설치.
-- **DeepWorkPlan Vim** — 터미널 에디터([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), `v0.5.1`로 고정)로, 명시적 동의 없이 기존 Neovim 설정을 절대 덮어쓰지 않는 머신 수준 설치입니다.
+- **DeepWorkPlan Vim** — 터미널 에디터([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), `v0.6.0`로 고정)로, 명시적 동의 없이 기존 Neovim 설정을 절대 덮어쓰지 않는 머신 수준 설치입니다.
 - **AI Diff Reviewer** — 필수 로컬 리뷰입니다(선택형 아님): 모든 Final Review의 보안 점검이 계획의 누적 변경 집합에 대해 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**(skill + 필수 `.review/extension.md`)를 실행합니다. 누락된 스킬이나 확장은 기록된 `local reviewer not installed` 발견 사항입니다 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아닙니다: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속합니다. 호출 오류는 소프트 실패하며, 완료된 패스의 **검증된 `critical` 결과**는 여전히 완료를 차단합니다 (v3, BC-07 — 검증되지 않은 크리티컬 주장은 주석 달린 경고로 표시되며, `incomplete`/`timeout` 검토는 깨끗한 패스가 아님, BC-04). **Flow B**(`pr-review.yml`을 갖춘 CI 게이트)는 명시적 선택형으로 제안되며 요청 없이 설치되는 일이 결코 없습니다. 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않습니다.
 
 ## 5. 키트를 발전시키세요 (author 하위 스킬)

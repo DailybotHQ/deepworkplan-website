@@ -65,7 +65,7 @@ onboard フローがリポジトリに重ねる各機能です。七つはオプ
 - **[herdr](/ja/kit/herdr)** — 任意のマシン上の Herdr ペインにいるピア：認可された返信を一つだけ受け取る対話型委任。固定バージョン：`herdr-peers@v0.1.0`。
 - **[agentkit](/ja/kit/agentkit)** — あらゆるターミナル型コーディングエージェントに使える一つの ak コマンド：デフォルトで自律実行（オプトアウト可）、そして worktree 内でのヘッドレス委任。固定バージョン：`coding-agents-kit@v0.3.0`。
 - **[devcontainer](/ja/kit/devcontainer)** — 一つのテンプレートから作る、リポジトリごとの開発コンテナ：エージェントは ak 経由、Herdr は双方向、内部に SSH 鍵なし。固定バージョン：`devcontainer-kit@v0.2.2`。
-- **[vim](/ja/kit/vim)** — 読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。固定バージョン：`deepworkplan-vim@v0.5.1`。
+- **[vim](/ja/kit/vim)** — 読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。固定バージョン：`deepworkplan-vim@v0.6.0`。
 
 アドオンのレジストリと記述子は Deep Work Plan v7 に含まれています： `v7.1.4`
 

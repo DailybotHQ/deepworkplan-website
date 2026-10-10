@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim(일곱 번째 애드온)
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)(고정 버전 `v0.5.1`, 인터페이스 `1`)의 얇은 통합 계층으로, Deep Work Plan을 위한 터미널 편집기입니다(Neovim 0.12+).
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)(고정 버전 `v0.6.0`, 인터페이스 `1`)의 얇은 통합 계층으로, Deep Work Plan을 위한 터미널 편집기입니다(Neovim 0.12+).
 
 - **키트 페이지:** [DeepWorkPlan Vim](/kit/vim)
 - **추가하는 것:** 에이전트와 사람을 위한 선택적인 머신 수준 편집기 표면 — 생성된 명령 색인, 읽기 전용 계획 브라우저, Markdown 뷰어; 모든 주장은 제품의 고정된 기계 판독 가능 표면에서 읽음

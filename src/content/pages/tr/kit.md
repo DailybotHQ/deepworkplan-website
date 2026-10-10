@@ -66,7 +66,7 @@ Onboarding akışının bir depoya katmanladığı yetenekler. Yedisi isteğe ba
 - **[herdr](/tr/kit/herdr)** — Herhangi bir makinede Herdr panellerindeki eşler: tek bir yetkili yanıtla etkileşimli devretme. Sabitlenen sürüm `herdr-peers@v0.1.0`.
 - **[agentkit](/tr/kit/agentkit)** — Her terminal kodlama ajanı için tek bir ak komutu: devre dışı bırakılabilen varsayılan özerklik ve bir worktree içinde başsız devretme. Sabitlenen sürüm `coding-agents-kit@v0.3.0`.
 - **[devcontainer](/tr/kit/devcontainer)** — Tek bir şablondan her deponun kendi geliştirme konteyneri: ajanlar ak üzerinden, iki yönlü Herdr, içeride SSH anahtarı yok. Sabitlenen sürüm `devcontainer-kit@v0.2.2`.
-- **[vim](/tr/kit/vim)** — Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi. Sabitlenen sürüm `deepworkplan-vim@v0.5.1`.
+- **[vim](/tr/kit/vim)** — Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi. Sabitlenen sürüm `deepworkplan-vim@v0.6.0`.
 
 Eklenti kayıt defteri ve tanımlayıcılar Deep Work Plan v7 ile sunulur: `v7.1.4`
 

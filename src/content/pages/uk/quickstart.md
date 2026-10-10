@@ -210,7 +210,7 @@ agentkit, Herdr, DeepWorkPlan Vim) і запропонуйте кожен як �
   останні два завжди запитуються, ніколи не застосовуються автоматично.
 - **agentkit** — встановлення на рівні машини [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, закріплено на `v0.3.0`) для планів, що передають обмежені завдання `parallel_safe` іншим агентам для програмування (headless, один `ak run` на делегата у власному worktree); kit за замовчуванням запускає агентів в автономії, а його відмова (`--ask` або `AGENTKIT_PERMISSIONS=ask`) завжди перемагає.
 - **Herdr** — встановлення на рівні машини [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (закріплено на `v0.1.0`, плюс офіційний скіл Herdr) для планів, що просять агента-напарника в панелі Herdr, на будь-якій машині, про одну авторизовану відповідь.
-- **DeepWorkPlan Vim** — термінальний редактор ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), закріплено на `v0.5.1`), встановлення на рівні машини, яке ніколи не перезаписує наявну конфігурацію Neovim без явної згоди.
+- **DeepWorkPlan Vim** — термінальний редактор ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), закріплено на `v0.6.0`), встановлення на рівні машини, яке ніколи не перезаписує наявну конфігурацію Neovim без явної згоди.
 - **AI Diff Reviewer** — обовʼязковий локальний огляд (не опційний): перевірка безпеки кожного Final Review проганяє [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + обовʼязковий
   `.review/extension.md`) над накопиченим набором змін плану. Відсутній скіл чи розширення — це зафіксована знахідка
   `local reviewer not installed`, — ніколи не мовчазний пропуск і

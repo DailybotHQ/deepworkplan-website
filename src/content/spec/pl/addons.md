@@ -91,7 +91,7 @@ Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przy
 
 ### DeepWorkPlan Vim (siódmy addon)
 
-Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (przypięty `v0.5.1`, interfejs `1`), edytora terminalowego dla Deep Work Plan (Neovim 0.12+).
+Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (przypięty `v0.6.0`, interfejs `1`), edytora terminalowego dla Deep Work Plan (Neovim 0.12+).
 
 - **Strona kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Co dodaje:** opcjonalną powierzchnię edytora na poziomie maszyny dla agentów i ludzi — generowany indeks poleceń, przeglądarkę planów tylko do odczytu i przeglądarkę Markdown; każde twierdzenie jest odczytywane z przypiętej, czytelnej maszynowo powierzchni produktu
