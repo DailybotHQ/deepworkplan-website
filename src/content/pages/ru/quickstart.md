@@ -100,7 +100,7 @@ lastUpdated: 2026-09-28
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
 ```
 
 Или установите через OpenClaw:
@@ -122,7 +122,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 и девять под-навыков: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` и `upgrade`.
 
-Установленная версия навыка: **7.1.0**. Текущий пакет 7.x по умолчанию создает новые планы в формате v7. Существующие планы сохраняют записанное поколение; перенос плана v5 на v6 требует явного запроса с предварительным просмотром.
+Установленная версия навыка: **7.1.4**. Текущий пакет 7.x по умолчанию создает новые планы в формате v7. Существующие планы сохраняют записанное поколение; перенос плана v5 на v6 требует явного запроса с предварительным просмотром.
 
 Стандарт намеренно пропорционален и делает эту пропорциональность свойством плана, а не
 дисциплины разработчика. План бывает либо **Lite** — записи задач находятся прямо в README

@@ -9,7 +9,7 @@ import { getSupportedLanguages } from '@/lib/i18n';
 // no eager hydration), plus its facts: every row links an existing kit page in
 // every language and pins exactly the tags of the v7 claims ledger
 // (PLAN_004_v7_kit_pages_and_vendor, rows C-11/C-21/C-31/C-39; amendments A2,
-// A4, A7 and A8; moved to the pack v7.1.0 pins by PLAN_009_dwpwebsite_dockerfile_pilot). Changing a pin here is a claims decision, not a formatting choice.
+// A4, A7 and A8; moved to the pack v7.1.4 pins by PLAN_009_dwpwebsite_dockerfile_pilot). Changing a pin here is a claims decision, not a formatting choice.
 
 const SOURCE_PATH = resolve(
   process.cwd(),
@@ -120,6 +120,6 @@ describe('KitEcosystem facts', () => {
   });
 
   it('names the stable pack release', () => {
-    expect(source).toContain("const packTag = 'v7.1.0';");
+    expect(source).toContain("const packTag = 'v7.1.4';");
   });
 });
