@@ -200,7 +200,7 @@ Live at **[deepworkplan.com](https://deepworkplan.com)**.
 
 ## 🔒 Security
 
-Report vulnerabilities privately — never in a public issue. See [SECURITY.md](SECURITY.md) (GitHub private vulnerability reporting, supported versions, response targets).
+Report vulnerabilities privately — never in a public issue. See [SECURITY.md](./SECURITY.md) (GitHub private vulnerability reporting, supported versions, response targets).
 
 ---
 

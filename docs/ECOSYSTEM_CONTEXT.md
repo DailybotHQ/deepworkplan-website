@@ -7,8 +7,8 @@ This repository has two roles:
    `/quickstart` page and the machine-executable `/init.md`.
 2. **The ecosystem hub.** It coordinates work across the public DeepWorkPlan
    repositories, cloned under `repositories/` by `scripts/repositories.sh`
-   (index: [`repositories/README.md`](../repositories/README.md), data:
-   [`repositories/manifest.json`](../repositories/manifest.json)). It plans
+   (index: `repositories/README.md`, data:
+   `repositories/manifest.json`). It plans
    cross-repository work as orchestrator Deep Work Plans and verifies that what
    the site says matches what each repository released.
 
