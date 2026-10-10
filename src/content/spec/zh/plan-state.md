@@ -10,7 +10,7 @@ section: State
 
 > **版本范围：** 以下各节是保留的 v5.0.0 状态层。当前标准 DWP 7.0.0 使用 v7 契约、仅追加日志和快照投影；v5 计划继续使用本文档中的 `manifest.json` 与 `state.json` 规则。
 
-**当前标准：v7（DWP 7.0.0）。** 下列文档是保留的基础规范；v6 增加了契约、仅追加日志、逐任务上下文、资源控制和生命周期规则，v7 保留这一记录层，并新增可选的 `parallel_safe` 任务标记、`delegation` 日志事件、`.dwp/config.json` 附加组件注册表以及由附加组件提供的能力。参见 [v7 身份清单架构](https://deepworkplan.com/schema/plan-manifest/v7.json)、[契约架构](https://deepworkplan.com/schema/plan-contract/v7.json)与[实时快照架构](https://deepworkplan.com/schema/plan-snapshot/v6.json)（与 v6 共用）。现有 v5 与 v6 计划保留其记录的规则。 [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+**当前标准：v7（DWP 7.0.0）。** 下列文档是保留的基础规范；v6 增加了契约、仅追加日志、逐任务上下文、资源控制和生命周期规则，v7 保留这一记录层，并新增可选的 `parallel_safe` 任务标记、`delegation` 日志事件、`.dwp/config.json` 附加组件注册表以及由附加组件提供的能力。参见 [v7 身份清单架构](https://deepworkplan.com/schema/plan-manifest/v7.json)、[契约架构](https://deepworkplan.com/schema/plan-contract/v7.json)与[实时快照架构](https://deepworkplan.com/schema/plan-snapshot/v6.json)（与 v6 共用）。现有 v5 与 v6 计划保留其记录的规则。 [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **版本 5.0.0。状态：稳定。** 本文档规定了 Deep Work Plan 方法论的机器可读计划状态层，现已与 DWP 标准自身的版本号对齐——此次重新编号不削弱任何既有要求。本次修订还记录了受保护的状态更新器、经验证的计划发布，以及一份已完成计划必须满足的证据真实性规则（见下文）。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
@@ -235,10 +235,10 @@ v6 保留 v5 方法论，并为新计划增加更严格的工程结构。身份�
 
 v6 清单与实时快照的架构地址：
 
-- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json (v7: https://deepworkplan.com/schema/plan-manifest/v7.json)
 - `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
-- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
-- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json (v7: https://deepworkplan.com/schema/plan-contract/v7.json)
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json (v7: https://deepworkplan.com/schema/journal-event/v7.json)
 - Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
 
 v6 实时投影是快照，而不是重命名的 v5 状态文件。`plan-state/v5.json` 仍为 v5 计划发布；不存在 `plan-state/v6.json`。现有 v1、v2 和 v5 计划保留记录的架构代际，不会被静默重写。

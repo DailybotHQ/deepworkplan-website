@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Addon tùy chọn dựa trên devcontainer-kit: dev container riêng của mỗi repository từ một template, agent qua ak, Herdr hai chiều, không có khóa SSH bên trong."
+description: "Một dev container có thể tái tạo cho mỗi kho mã, từ một mẫu duy nhất: agent sẵn sàng qua ak, Herdr nối hai chiều và không có khóa SSH nào bên trong container."
 kind: addon
 lang: vi
 order: 1

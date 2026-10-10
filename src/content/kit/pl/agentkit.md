@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "Opcjonalny addon v7 oparty na coding-agents-kit: jedno polecenie ak dla każdego agenta w terminalu, autonomia z opcją rezygnacji i delegowanie headless."
+description: "Jedno polecenie dla każdego terminalowego agenta kodującego. Domyślnie pełna autonomia z opcją rezygnacji, uruchomienia headless w git worktree, drugie konto."
 kind: addon
 lang: pl
 order: 8

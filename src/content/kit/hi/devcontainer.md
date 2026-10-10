@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "devcontainer-kit पर आधारित एक वैकल्पिक ऐडऑन: एक टेम्पलेट से हर रिपॉज़िटरी का अपना dev container, ak से एजेंट, दोतरफ़ा Herdr, भीतर कोई SSH कुंजी नहीं।"
+description: "हर रिपॉज़िटरी के लिए एक ही टेम्पलेट से दोहराने योग्य डेव कंटेनर: ak से तैयार एजेंट, दोनों दिशाओं में जुड़ा Herdr, और कंटेनर के अंदर कोई SSH कुंजी नहीं।"
 kind: addon
 lang: hi
 order: 1

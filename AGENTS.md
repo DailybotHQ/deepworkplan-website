@@ -25,7 +25,7 @@
 | AI Agents | [Agent Onboarding](docs/AI_AGENT_ONBOARDING.md), [Agent Collaboration](docs/AI_AGENT_COLLAB.md) | Setup, handoff, coordination |
 | Skills/Agents | [Skills & Agents Catalog](.agents/docs/skills_agents_catalog.md) | Available skills and agents |
 | Commands | [Commands Reference](.agents/docs/COMMANDS_REFERENCE.md) | All slash commands with procedure files |
-| Ecosystem hub | [Ecosystem Context](docs/ECOSYSTEM_CONTEXT.md), [Cross-Project Standards](docs/CROSS_PROJECT_STANDARDS.md), [Repositories index](repositories/README.md) | Hub role: posture, release order, boundaries, per-repo gates, orchestrator plans |
+| Ecosystem hub | [Ecosystem Context](docs/ECOSYSTEM_CONTEXT.md), [Cross-Project Standards](docs/CROSS_PROJECT_STANDARDS.md), Repositories index (`repositories/README.md`) | Hub role: posture, release order, boundaries, per-repo gates, orchestrator plans |
 
 ## Project Overview
 
@@ -49,11 +49,11 @@ The site explains and positions the DWP methodology, hosts the readable specific
 
 **Technology Stack:**
 
-- **Astro 7.0.8** — Static site generator (islands architecture; Rust compiler + Sätteri Markdown)
-- **Svelte 5.56.4** — Interactive components
+- **Astro 7.3.6** — Static site generator (islands architecture; Rust compiler + Sätteri Markdown)
+- **Svelte 5.57.2** — Interactive components
 - **TypeScript 6.0.3** — Type-safe development
-- **Tailwind CSS 4.3.2** — Utility-first styling with dark mode
-- **Biome 2.5.3** — Linter and formatter (replaces ESLint + Prettier)
+- **Tailwind CSS 4.3.3** — Utility-first styling with dark mode
+- **Biome 2.5.15** — Linter and formatter (replaces ESLint + Prettier)
 - **MDX** — Enhanced Markdown for content collections (via `@astrojs/markdown-satteri` / Sätteri)
 
 ## Project Structure
@@ -126,7 +126,7 @@ the remaining invocations: [Development Commands → Audit scripts](docs/DEVELOP
 
 ## Ecosystem Hub — Repository Boundaries (MANDATORY)
 
-This repository is also the **DeepWorkPlan ecosystem hub**. `repositories/` holds local clones of the public ecosystem repositories, managed by `bash scripts/repositories.sh clone|status|pull|ls` from the tracked `repositories/manifest.json` (index: [`repositories/README.md`](repositories/README.md)). Everything under `repositories/` is git-ignored except `README.md` (the navigation index) and `manifest.json`, and no site tool reads it (`tests/unit/lib/hub-isolation.test.ts`).
+This repository is also the **DeepWorkPlan ecosystem hub**. `repositories/` holds local clones of the public ecosystem repositories, managed by `bash scripts/repositories.sh clone|status|pull|ls` from the tracked `repositories/manifest.json` (index: `repositories/README.md`). Everything under `repositories/` is git-ignored except `README.md` (the navigation index) and `manifest.json`, and no site tool reads it (`tests/unit/lib/hub-isolation.test.ts`).
 
 **Where work lands:** a change to the site, its docs, tooling or hub coordination files is committed here. A change to an ecosystem repository is made **inside** `repositories/<name>`: `cd` into it, read its own `AGENTS.md`, pull its default branch, then branch, commit, gate, push and open the PR **there**. Decision tree: [Cross-Project Standards](docs/CROSS_PROJECT_STANDARDS.md#where-work-lands).
 

@@ -1,6 +1,6 @@
 ---
 title: Herdr
-description: "Addon v7 opzionale: un piano affida un task a un altro agente di codice in un pannello Herdr, su qualsiasi macchina, e ne registra l’unica risposta autorizzata."
+description: "Affida il lavoro a un altro agente di codice in un pannello Herdr, su qualsiasi macchina, e ricevi una sola risposta autorizzata. Piani che delegano, tracciati."
 kind: addon
 lang: it
 order: 7

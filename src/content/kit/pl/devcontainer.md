@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Opcjonalny addon oparty na devcontainer-kit: własny kontener deweloperski każdego repozytorium z jednego szablonu, agenci przez ak, Herdr w obie strony."
+description: "Powtarzalny kontener deweloperski dla każdego repozytorium z jednego szablonu: agenci gotowi przez ak, Herdr w obie strony i żadnego klucza SSH w środku."
 kind: addon
 lang: pl
 order: 1

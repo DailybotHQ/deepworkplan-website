@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "基于 coding-agents-kit 的可选 v7 附加组件：一个 ak 命令覆盖所有终端编码代理，默认自主运行并可选择退出，另支持无头委派。"
+description: "一条命令驱动所有终端编码代理。默认完全自主，可随时退出；在 git worktree 中无界面运行，加个前缀即可切换第二个账号。"
 kind: addon
 lang: zh
 order: 8

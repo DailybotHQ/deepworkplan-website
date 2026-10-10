@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Addon facultatif fondé sur devcontainer-kit : le conteneur propre à chaque dépôt depuis un modèle, agents via ak, Herdr dans les deux sens, aucune clé SSH."
+description: "Un conteneur de développement reproductible par dépôt, depuis un modèle : agents prêts via ak, Herdr relié dans les deux sens et aucune clé SSH à l'intérieur."
 kind: addon
 lang: fr
 order: 1

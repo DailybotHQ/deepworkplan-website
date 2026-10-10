@@ -8,7 +8,7 @@ section: Addons
 
 # Complementos
 
-> **Escopo da versão:** Este é um documento-base v5.0.0 mantido. O padrão atual, DWP 7.0.0, também exige as extensões `V6_*.md` e `V7_*.md` aplicáveis listadas no [índice da especificação](/spec). Os planos v5 e v6 existentes mantêm as regras registradas.
+> **Escopo da versão:** Este é um documento-base v5.0.0 mantido. O padrão atual, DWP 7.0.0, também exige as extensões `V6_*.md` e `V7_*.md` aplicáveis listadas no [índice da especificação](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Os planos v5 e v6 existentes mantêm as regras registradas.
 
 **Versão 2.1.0.** Os complementos são extensões da metodologia central do Deep Work Plan. Sete dos oito são opcionais e **nunca obrigatórios para conformidade** — um repositório sem addons opcionais é totalmente AI-first e conforme com o DWP. Cada addon opcional é oferecido durante a integração, aceite ou recusado explicitamente e — quando aceite — **reconcilia** com a configuração existente em vez de a sobrescrever. Um componente é a exceção declarada: desde o padrão 2.3.0 a **revisão local do AI Diff Reviewer** faz parte da linha de base obrigatória — o onboarding instala-a e cada Final Review executa-a — enquanto a sua superfície de CI continua opcional.
 

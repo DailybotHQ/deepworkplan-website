@@ -1,6 +1,6 @@
 ---
 title: Herdr
-description: "Addon v7 facultatif : un plan confie une tâche à un autre agent de code dans un panneau Herdr, sur toute machine, et consigne son unique réponse autorisée."
+description: "Confiez une tâche à un autre agent de code dans un panneau Herdr, sur toute machine, et récupérez une seule réponse autorisée. Des plans qui délèguent, tracés."
 kind: addon
 lang: fr
 order: 7

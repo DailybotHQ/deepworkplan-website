@@ -1,6 +1,6 @@
 ---
 title: Herdr
-description: "Addon opcional da v7: um plano passa uma tarefa a outro agente de código num painel do Herdr, em qualquer máquina, e registra sua única resposta autorizada."
+description: "Passe trabalho a outro agente de código em um painel do Herdr, em qualquer máquina, e receba uma única resposta autorizada. Planos que delegam, com registro."
 kind: addon
 lang: pt
 order: 7

@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Addon opzionale basato su devcontainer-kit: il container proprio di ogni repository da un template, agenti via ak, Herdr nei due sensi, nessuna chiave SSH."
+description: "Un dev container riproducibile per ogni repository, da un unico template: agenti pronti con ak, Herdr collegato nei due sensi e nessuna chiave SSH all'interno."
 kind: addon
 lang: it
 order: 1

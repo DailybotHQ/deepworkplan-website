@@ -8,7 +8,7 @@ section: Workflow
 
 # Plans Lite
 
-> **Portée de version :** ce document est une base v5.0.0 conservée. La norme actuelle, DWP 7.0.0, exige également les extensions `V6_*.md` et `V7_*.md` applicables, répertoriées dans l’[index de spécification](/spec). Les plans v5 et v6 existants conservent leurs règles enregistrées.
+> **Portée de version :** ce document est une base v5.0.0 conservée. La norme actuelle, DWP 7.0.0, exige également les extensions `V6_*.md` et `V7_*.md` applicables, répertoriées dans l’[index de spécification](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Les plans v5 et v6 existants conservent leurs règles enregistrées.
 
 **Version 5.0.0. Statut : stable.** Ce document spécifie la représentation de plan Lite introduite aux côtés de la [Spécification DWP](/spec/dwp-specification) : un format de plan pour un travail borné de petite à moyenne taille qui est matérialisé directement, sans étape d'ébauche non exécutable. Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 

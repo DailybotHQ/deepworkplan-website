@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Addon opsional berbasis devcontainer-kit: dev container milik setiap repositori dari satu template, agen lewat ak, Herdr dua arah, tanpa kunci SSH di dalamnya."
+description: "Dev container yang dapat direproduksi per repositori dari satu templat: agen siap lewat ak, Herdr terhubung dua arah, dan tanpa kunci SSH di dalamnya."
 kind: addon
 lang: id
 order: 1

@@ -9,6 +9,34 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.43] - 2026-10-10
+
+### Deep Work Plan v7 — what this release covers
+
+This release brings the site fully up to date with the v7 generation of Deep Work Plan (pack `v7.1.4`, vendored here). The methodology is unchanged at its core: the plan is the source of truth, and a repository is fully conformant with zero addons.
+
+- **Records over narrative.** A v7 plan carries a contract, an append-only journal and a deterministic scheduler. Gate evidence is minted only by the gate runner, and a task completes only when its criteria and invariants are satisfied by recorded evidence.
+- **Delegation under a grant.** A `parallel_safe` task can be handed to another agent when the plan grants `agent_delegation`; the single reply is recorded as data and is verified before the task closes.
+- **Autonomy through the addons.** Herdr (a plan hands work to another agent in a pane, on any machine), Agentkit (`ak`, one command for every terminal coding agent, autonomy by default with an opt-out), Devcontainer (a reproducible container per repository, no SSH key inside) and DeepWorkPlan Vim (plan browser, Markdown viewer, command index) are described as a single ecosystem on the kit index.
+- **Benchmark and learnings.** The hub now runs with benchmark and learnings enabled, so each plan leaves curated findings to analyse afterwards.
+- **No degradation, measured.** A cross-repository audit of the whole ecosystem found no behavioural regression against v6: the pack suite passes 807 of 807 on a clean environment, and instruction load grew 0.1% to 3.9% per flow (4.6% for the whole pack), measured in bytes on both tags, not as token estimates.
+
+### Added
+
+- The hub addon registry enables all eight addons with their versions (`agentkit`, `ai-diff-reviewer`, `dailybot`, `dependency-upgrade`, `design-system`, `devcontainer`, `herdr`, `vim`) and turns benchmark and learnings on.
+- `V7_CONTRACT.md` is linked from the plan-state specification page in every language, and the v6 plan-state schema cites the matching v7 schema URLs.
+
+### Changed
+
+- Kit index: the Herdr, Agentkit, Devcontainer and Vim cards now lead with what each one gives you (delegation with a record, one command for every agent, a container with no key inside, an editor built for plans) instead of labelling them optional v7 addons, in all 17 languages. The pages still state inside that the addons are optional.
+- Version-scope banners in the addons, lite-plans, archetypes, agent-protocol and documentation-standard specification pages point to the upstream specification index instead of listing documents the site does not publish.
+- Documentation no longer links to git-ignored paths, and same-named documents are disambiguated.
+- `AGENTS.md` stack versions match the installed toolchain (Astro 7.3.6, Svelte 5.57.2, Tailwind CSS 4.3.3, Biome 2.5.15).
+
+### Fixed
+
+- Dev container: when Herdr's agent link dangles, the container falls back to the mounted host SSH agent, so `git`, `gh`, signing and pushes work after a rebuild exactly as outside the container.
+
 ## [5.0.42] - 2026-10-10
 
 ### Changed
@@ -1157,7 +1185,8 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.42...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.43...HEAD
+[5.0.43]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.43
 [5.0.42]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.42
 [5.0.41]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.41
 [5.0.40]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.40
