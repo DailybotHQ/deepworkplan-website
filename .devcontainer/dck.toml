@@ -38,7 +38,7 @@ clis = ["claude", "codex", "cursor", "opencode", "pi", "cline", "grok"]
 [herdr]
 # Register the container as a Herdr machine on `dck up` (needs ssh_port).
 machine = true
-label = "{repo}"
+label = "DWP website"
 # The sidebar `dck up` creates inside the container: "standard" (Home · Editor ·
 # Development · Agents) or "none".
 layout = "standard"

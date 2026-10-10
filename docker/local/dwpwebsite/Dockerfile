@@ -2,9 +2,9 @@
 # The blocks between the dck markers are reconciled by `dck init`; add your
 # project's own layers BELOW them — they are never touched. The scripts the
 # base block copies live next to this file in dck/ (vendored by `dck init`,
-# devcontainer-kit v0.2.1); no shared base image is involved.
+# devcontainer-kit v0.2.2); no shared base image is involved.
 # >>> dck:base >>>
-# dck:managed v0.2.1 base
+# dck:managed v0.2.2 base
 # Both ARGs come before any FROM, so they are global (an ARG after a FROM is
 # scoped to that stage).
 ARG BASE_IMAGE=node:24.21.0-trixie-slim@sha256:173f125896c3b47ddf056734c7ea789d04595a6a08769a8f78e0df642781fb66
@@ -49,7 +49,7 @@ ENV LANG=en_US.UTF-8 \
     VISUAL=nvim \
     GIT_EDITOR=nvim \
     DCK_IMAGE_FLAVOUR=node-24 \
-    DCK_IMAGE_VERSION=0.2.1
+    DCK_IMAGE_VERSION=0.2.2
 WORKDIR /app
 ENTRYPOINT ["/usr/local/bin/dck-entrypoint"]
 CMD ["sleep", "infinity"]
@@ -99,3 +99,7 @@ RUN printf '%s\n' \
     && chmod 0644 /etc/profile.d/99-dwp-custom-commands.sh \
     && echo '[ -f /app/docker/custom_commands.sh ] && . /app/docker/custom_commands.sh' >> /home/node/.bashrc \
     && chown node:node /home/node/.bashrc
+
+# The git defaults the previous container set (identity comes from DCK_GIT_*).
+RUN git config --system init.defaultBranch main \
+    && git config --system pull.rebase false
