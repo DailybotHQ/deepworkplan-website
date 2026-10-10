@@ -24,7 +24,7 @@ DWP, AGENTS.md और कमांड प्रक्रियाएँ रि�
 वैकल्पिक: [coding-agents-kit](/kit/agentkit) इस CLI को इंस्टॉल कर सकता है और `ak opencode` से चला सकता है। विक्रेता का अपना आधिकारिक इंस्टॉलर भी उतना ही अच्छा काम करता है।
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install opencode
 ```
 

@@ -24,7 +24,7 @@ DWP 命令以代理在调用时读取的 Markdown 过程的形式存在；规则
 可选：[coding-agents-kit](/kit/agentkit) 可以安装此 CLI，并用 `ak codex` 启动它。使用供应商自己的官方安装程序同样可行。
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install codex
 ```
 

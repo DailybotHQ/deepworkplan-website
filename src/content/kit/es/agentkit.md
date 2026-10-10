@@ -23,7 +23,7 @@ Este addon integra el kit en **DWP v7** (`v7.0.0`) como transporte de delegació
 ## Instalación
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 

@@ -23,7 +23,7 @@ Bu eklenti, kiti **DWP v7**'ye (`v7.0.0`) **başsız** devretme taşıması olar
 ## Kurulum
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 

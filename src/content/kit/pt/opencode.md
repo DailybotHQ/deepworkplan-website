@@ -24,7 +24,7 @@ O DWP fornece o AGENTS.md e os procedimentos de comando no repositório; o OpenC
 Opcional: o [coding-agents-kit](/kit/agentkit) pode instalar esta CLI e iniciá-la com `ak opencode`. O instalador oficial do fornecedor funciona igualmente bem.
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install opencode
 ```
 
