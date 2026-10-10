@@ -22,7 +22,7 @@ const PINS: Record<string, string> = {
   herdr: 'herdr-peers@v0.1.0',
   agentkit: 'coding-agents-kit@v0.3.0',
   devcontainer: 'devcontainer-kit@v0.2.2',
-  vim: 'deepworkplan-vim@v0.5.1',
+  vim: 'deepworkplan-vim@v0.6.0',
 };
 
 type Entry = Record<string, string | string[]>;

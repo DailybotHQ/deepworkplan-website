@@ -14,7 +14,7 @@
 # --skip-packages: the system packages it needs are installed by install.sh.
 # --strict: the build fails if the headless plugin install fails, leaves a
 # required plugin missing or empty, or leaves a plugin (or pckr) away from the
-# commit the release pins in pckr/lockfile.lua (deepworkplan-vim v0.5.1+).
+# commit the release pins in pckr/lockfile.lua (deepworkplan-vim v0.6.0+).
 # --nvim is not used: the image already provides the pinned, checksum-verified
 # Neovim at /usr/local/bin/nvim for every user (install.sh); --nvim would put a
 # second copy in the dev user's ~/.local/bin, which non-login SSH sessions and

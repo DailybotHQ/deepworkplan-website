@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# DeepWorkPlan Vim — self-contained installer for release v0.5.1.
+# DeepWorkPlan Vim — self-contained installer for release v0.6.0.
 #
 # Published at  : https://deepworkplan.com/vim/install.sh
 #                 and as the install.sh asset (with SHA256SUMS) of each
@@ -18,7 +18,7 @@
 # line of SHA256SUMS on the GitHub release (release tags are immutable).
 #
 # Images and CI (non-root, no terminal) — one step after the download:
-#   bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
+#   bash install.sh --version 0.6.0 --nvim 0.12.5 --skip-packages --strict
 #
 # What it does, in order:
 #   1. Preflight — detects OS and package manager; installs git, curl, and
@@ -36,7 +36,7 @@
 #   6. Runs the repository's own `lua install.lua` (system packages,
 #      pckr.nvim, font — it owns every step, this wrapper owns none).
 #   7. Bootstraps plugins headlessly and checks them — every plugin and
-#      pckr at the commit the release pins in pckr/lockfile.lua (v0.5.1+);
+#      pckr at the commit the release pins in pckr/lockfile.lua (0.5.1+);
 #      empty clones are moved aside and installed again (--strict: any
 #      failure, missing or empty plugin, or plugin away from its pin is an
 #      error).
@@ -60,7 +60,7 @@
 # Windows: use winget plus Git Bash, or run the steps above inside WSL,
 # where they work as-is:
 #   winget install -e --id Neovim.Neovim --accept-package-agreements --accept-source-agreements
-#   git clone --branch v0.5.1 https://github.com/DailybotHQ/deepworkplan-vim.git "$LOCALAPPDATA/nvim"
+#   git clone --branch v0.6.0 https://github.com/DailybotHQ/deepworkplan-vim.git "$LOCALAPPDATA/nvim"
 #   cd "$LOCALAPPDATA/nvim" && lua install.lua
 #
 set -euo pipefail
@@ -74,7 +74,7 @@ main() {
 REPO_URL="https://github.com/DailybotHQ/deepworkplan-vim.git"
 # The release this script belongs to: with no version or ref requested it
 # installs exactly that tag.
-RELEASE_REF="v0.5.1"
+RELEASE_REF="v0.6.0"
 
 say() { printf '%s\n' "$*"; }
 die() { printf 'install.sh: %s\n' "$*" >&2; exit 1; }
@@ -111,7 +111,7 @@ Switch values: 1/true/yes/on or 0/false/no/off (any case); anything else
 is an error.
 
 Images and CI (download, verify, then run):
-  bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
+  bash install.sh --version 0.6.0 --nvim 0.12.5 --skip-packages --strict
 USAGE
 }
 
@@ -911,13 +911,13 @@ verify_plugins() {
   fi
   return 0
 }
-# Commit pins (v0.5.1+): pckr/lockfile.lua in the destination pins every
+# Commit pins (0.5.1+): pckr/lockfile.lua in the destination pins every
 # plugin and pckr itself (pckr's own lockfile format, one entry per line);
 # lua/plugins.lua installs and updates each one at its pin. verify_lock
 # compares every checkout's HEAD with its pin: a plugin at another commit,
 # a pinned plugin that is missing and an installed plugin the lock does
 # not name are all problems (--strict fails on them). A release without
-# the file (before v0.5.1) has nothing to compare: LOCK_COUNT stays 0.
+# the file (before 0.5.1) has nothing to compare: LOCK_COUNT stays 0.
 LOCKFILE="$DEST/pckr/lockfile.lua"
 PCKR_DIR="$DATA_HOME/$BOOTSTRAP_APPNAME/pckr/pckr.nvim"
 PCKR_START="$DATA_HOME/$BOOTSTRAP_APPNAME/site/pack/pckr/start"
@@ -1078,9 +1078,9 @@ if command -v nvim >/dev/null 2>&1; then
   # (or two image builds) of one release the same code.
   if [ ! -f "$LOCKFILE" ] && [ "$STRICT" = 1 ] && [[ "$REF" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] \
     && ! version_gt 0.5.1 "${REF#v}"; then
-    strict_fail "$REF ships pckr/lockfile.lua (v0.5.1+), but $LOCKFILE is missing — plugin commits cannot be verified"
+    strict_fail "$REF ships pckr/lockfile.lua (0.5.1+), but $LOCKFILE is missing — plugin commits cannot be verified"
   elif [ ! -f "$LOCKFILE" ]; then
-    say "NOTE: $REF has no plugin lock (pckr/lockfile.lua, v0.5.1+): plugin commits are not verified"
+    say "NOTE: $REF has no plugin lock (pckr/lockfile.lua, 0.5.1+): plugin commits are not verified"
   elif verify_lock; then
     say "==> Plugin commits verified ($LOCK_COUNT pinned in pckr/lockfile.lua)"
   elif [ "$STRICT" = 1 ]; then
