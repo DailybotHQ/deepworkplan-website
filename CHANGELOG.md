@@ -9,6 +9,8 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.45] - 2026-10-10
+
 ### Added
 
 - Changelog page: the "DWP v7: plans that delegate, with a record of everything" entry, in 17 languages, and it replaces v6 as the featured release.
@@ -1198,7 +1200,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.44...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.45...HEAD
+[5.0.45]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.45
 [5.0.44]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.44
 [5.0.43]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.43
 [5.0.42]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.42
