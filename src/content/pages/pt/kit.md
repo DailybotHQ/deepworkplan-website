@@ -70,7 +70,7 @@ Capacidades que o fluxo de onboarding adiciona a um repositório. Sete são opci
 - **[devcontainer](/pt/kit/devcontainer)** — O contêiner de desenvolvimento próprio de cada repositório a partir de um único template: agentes via ak, Herdr nos dois sentidos, nenhuma chave SSH dentro. Fixado em `devcontainer-kit@v0.2.2`.
 - **[vim](/pt/kit/vim)** — O editor de terminal, com um navegador de planos somente leitura e um visualizador de Markdown. Fixado em `deepworkplan-vim@v0.5.1`.
 
-O registro de addons e os descritores são distribuídos no Deep Work Plan v7: `v7.0.0`
+O registro de addons e os descritores são distribuídos no Deep Work Plan v7: `v7.1.4`
 
 ### Exemplos
 

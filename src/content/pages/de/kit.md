@@ -70,7 +70,7 @@ Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügt. Sieben sind op
 - **[devcontainer](/de/kit/devcontainer)** — Der eigene Dev-Container jedes Repositorys aus einer einzigen Vorlage: Agenten über ak, Herdr in beide Richtungen, kein SSH-Schlüssel im Container. Fixiert auf `devcontainer-kit@v0.2.2`.
 - **[vim](/de/kit/vim)** — Der Terminal-Editor, mit einem schreibgeschützten Plan-Browser und einem Markdown-Viewer. Fixiert auf `deepworkplan-vim@v0.5.1`.
 
-Die Addon-Registry und die Deskriptoren werden in Deep Work Plan v7 ausgeliefert: `v7.0.0`
+Die Addon-Registry und die Deskriptoren werden in Deep Work Plan v7 ausgeliefert: `v7.1.4`
 
 ### Beispiele
 

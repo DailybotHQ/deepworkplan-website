@@ -67,7 +67,7 @@ onboard フローがリポジトリに重ねる各機能です。七つはオプ
 - **[devcontainer](/ja/kit/devcontainer)** — 一つのテンプレートから作る、リポジトリごとの開発コンテナ：エージェントは ak 経由、Herdr は双方向、内部に SSH 鍵なし。固定バージョン：`devcontainer-kit@v0.2.2`。
 - **[vim](/ja/kit/vim)** — 読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。固定バージョン：`deepworkplan-vim@v0.5.1`。
 
-アドオンのレジストリと記述子は Deep Work Plan v7 に含まれています： `v7.0.0`
+アドオンのレジストリと記述子は Deep Work Plan v7 に含まれています： `v7.1.4`
 
 ### 事例
 

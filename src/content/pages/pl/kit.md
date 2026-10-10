@@ -70,7 +70,7 @@ Możliwości, które przepływ onboardingu nakłada na repozytorium. Siedem jest
 - **[devcontainer](/pl/kit/devcontainer)** — Własny kontener deweloperski każdego repozytorium z jednego szablonu: agenci przez ak, Herdr w obie strony, bez klucza SSH w środku. Przypięty do `devcontainer-kit@v0.2.2`.
 - **[vim](/pl/kit/vim)** — Edytor terminalowy z przeglądarką planów tylko do odczytu i podglądem Markdown. Przypięty do `deepworkplan-vim@v0.5.1`.
 
-Rejestr dodatków i deskryptory są dostarczane w Deep Work Plan v7: `v7.0.0`
+Rejestr dodatków i deskryptory są dostarczane w Deep Work Plan v7: `v7.1.4`
 
 ### Przykłady
 

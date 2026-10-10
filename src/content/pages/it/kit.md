@@ -70,7 +70,7 @@ Capacità che il flusso di onboard aggiunge a un repo. Sette sono opzionali e ma
 - **[devcontainer](/it/kit/devcontainer)** — Il container di sviluppo proprio di ogni repository da un unico template: agenti tramite ak, Herdr in entrambi i sensi, nessuna chiave SSH all’interno. Fissato a `devcontainer-kit@v0.2.2`.
 - **[vim](/it/kit/vim)** — L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown. Fissato a `deepworkplan-vim@v0.5.1`.
 
-Il registro degli addon e i descrittori sono distribuiti in Deep Work Plan v7: `v7.0.0`
+Il registro degli addon e i descrittori sono distribuiti in Deep Work Plan v7: `v7.1.4`
 
 ### Esempi
 

@@ -70,7 +70,7 @@ onboard 흐름이 리포지토리에 얹는 기능들입니다. 일곱 가지는
 - **[devcontainer](/ko/kit/devcontainer)** — 하나의 템플릿으로 만드는 리포지토리별 개발 컨테이너: 에이전트는 ak로, Herdr는 양방향, 내부에 SSH 키 없음. 고정 버전 `devcontainer-kit@v0.2.2`.
 - **[vim](/ko/kit/vim)** — 읽기 전용 계획 브라우저와 Markdown 뷰어를 갖춘 터미널 편집기. 고정 버전 `deepworkplan-vim@v0.5.1`.
 
-애드온 레지스트리와 디스크립터는 Deep Work Plan v7에 포함되어 있습니다: `v7.0.0`
+애드온 레지스트리와 디스크립터는 Deep Work Plan v7에 포함되어 있습니다: `v7.1.4`
 
 ### 예시
 

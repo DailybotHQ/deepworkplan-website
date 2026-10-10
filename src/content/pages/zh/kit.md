@@ -70,7 +70,7 @@ onboard 流程向仓库叠加的各项能力。其中七个是可选的，绝非
 - **[devcontainer](/zh/kit/devcontainer)** — 用一个模板生成每个仓库自己的开发容器：代理经由 ak 运行，Herdr 双向互通，容器内不存放 SSH 密钥。固定于：`devcontainer-kit@v0.2.2`。
 - **[vim](/zh/kit/vim)** — 终端编辑器，带有只读的计划浏览器和 Markdown 查看器。固定于：`deepworkplan-vim@v0.5.1`。
 
-附加组件注册表和描述文件随 Deep Work Plan v7 发布： `v7.0.0`
+附加组件注册表和描述文件随 Deep Work Plan v7 发布： `v7.1.4`
 
 ### 示例
 

@@ -70,7 +70,7 @@ Des capacités que le flux onboard superpose à un dépôt. Sept sont facultativ
 - **[devcontainer](/fr/kit/devcontainer)** — Le conteneur de développement propre à chaque dépôt, issu d’un seul modèle : agents via ak, Herdr dans les deux sens, aucune clé SSH à l’intérieur. Épinglé à `devcontainer-kit@v0.2.2`.
 - **[vim](/fr/kit/vim)** — L’éditeur de terminal, avec un navigateur de plans en lecture seule et une visionneuse Markdown. Épinglé à `deepworkplan-vim@v0.5.1`.
 
-Le registre des addons et les descripteurs sont livrés dans Deep Work Plan v7 : `v7.0.0`
+Le registre des addons et les descripteurs sont livrés dans Deep Work Plan v7 : `v7.1.4`
 
 ### Exemples
 
