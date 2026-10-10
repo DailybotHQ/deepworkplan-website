@@ -58,7 +58,7 @@ Cliquez sur un plan, ou appuyez sur Entrée dessus, pour ouvrir le lecteur : l�
 
 La barre latérale répond à la souris comme au clavier. La petite flèche à côté d’un plan affiche ou masque ses tâches et ses fichiers, et un clic sur une tâche ou un fichier l’ouvre. `j`, `k`, les flèches, `Ctrl-n` et `Ctrl-p` passent d’un plan à l’autre en sautant les lignes vides et la décoration. Chaque section affiche son nombre de plans, des couleurs de statut marquent l’icône et la barre de progression, les plans en cours ont des titres marqués et les plans réglés des titres atténués, et un groupe Done de plus de six plans s’ouvre replié. La fenêtre est en lecture seule et silencieuse : les touches d’édition ne font rien au lieu d’afficher une erreur.
 
-Les plans et l’arborescence de fichiers se relaient : ouvrir une barre latérale ferme l’autre, afin de ne regarder qu’une chose à la fois. Le lecteur se ferme en même temps que la barre latérale des plans. Les deux comportements se règlent dans `dwpvim.json`.
+Les plans et l’arborescence de fichiers se relaient : ouvrir une barre latérale ferme l’autre, afin de ne regarder qu’une chose à la fois. Le lecteur se ferme en même temps que la barre latérale des plans. Le fait qu’ouvrir une barre latérale ferme l’autre se règle avec la clé `sidebars.exclusive` de `dwpvim.json`.
 
 Pour lire sur place les fichiers Markdown d’un plan, `SPC m p` prévisualise le tampon courant dans le navigateur et `SPC m r` l’affiche dans le tampon. Les deux ne fonctionnent que dans les tampons Markdown.
 

@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim（第七个附加组件）
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（固定为 `v0.6.0`，接口 `1`）的轻量集成器，是 Deep Work Plan 的终端编辑器（Neovim 0.12+）。
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（固定为 `v0.5.1`，接口 `1`）的轻量集成器，是 Deep Work Plan 的终端编辑器（Neovim 0.12+）。
 
 - **套件页：** [DeepWorkPlan Vim](/kit/vim)
 - **新增内容：** 一个可选的、机器级的编辑器层面，供代理与人类使用——生成的命令索引、只读计划浏览器和 Markdown 查看器；每一项说明都读取自该产品固定版本的机器可读层面

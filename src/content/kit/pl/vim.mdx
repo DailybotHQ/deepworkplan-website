@@ -58,7 +58,7 @@ Kliknij plan albo naciśnij na nim Enter, aby otworzyć czytnik: cel w jednym zd
 
 Panel boczny reaguje na mysz i na klawiaturę. Mała strzałka obok planu pokazuje lub ukrywa jego zadania i pliki, a kliknięcie zadania lub pliku otwiera go. `j`, `k`, klawisze strzałek, `Ctrl-n` i `Ctrl-p` przeskakują od planu do planu, pomijając puste wiersze i ozdobniki. Każda sekcja pokazuje swoją liczbę pozycji, kolory statusu oznaczają ikonę i pasek postępu, plany aktywne mają wyraźne tytuły, a zakończone przygaszone, a grupa Done z więcej niż sześcioma planami otwiera się zwinięta. Okno jest tylko do odczytu i ciche: klawisze edycji nic nie robią zamiast wypisywać błąd.
 
-Plany i drzewo plików działają na zmianę: otwarcie jednego panelu bocznego zamyka drugi, dzięki czemu patrzysz na jedną rzecz naraz. Czytnik zamyka się razem z panelem planów. Oba zachowania ustawia się w `dwpvim.json`.
+Plany i drzewo plików działają na zmianę: otwarcie jednego panelu bocznego zamyka drugi, dzięki czemu patrzysz na jedną rzecz naraz. Czytnik zamyka się razem z panelem planów. To, czy otwarcie jednego panelu bocznego zamyka drugi, ustawia klucz `sidebars.exclusive` w `dwpvim.json`.
 
 Aby czytać pliki Markdown planu na miejscu, `SPC m p` pokazuje podgląd bieżącego bufora w przeglądarce, a `SPC m r` renderuje go wewnątrz bufora. Oba działają tylko w buforach Markdown.
 

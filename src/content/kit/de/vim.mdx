@@ -58,7 +58,7 @@ Klicken Sie auf einen Plan oder drücken Sie die Eingabetaste darauf, um den Rea
 
 Die Seitenleiste reagiert auf Maus und Tastatur. Der kleine Pfeil neben einem Plan blendet seine Aufgaben und Dateien ein oder aus, und ein Klick auf eine Aufgabe oder Datei öffnet sie. `j`, `k`, die Pfeiltasten, `Ctrl-n` und `Ctrl-p` springen von Plan zu Plan und überspringen leere Zeilen und Dekoration. Jeder Abschnitt zeigt seine Anzahl, Statusfarben markieren das Symbol und den Fortschrittsbalken, aktive Pläne haben kräftige Titel und abgeschlossene gedämpfte, und eine Done-Gruppe mit mehr als sechs Plänen öffnet sich eingeklappt. Das Fenster ist schreibgeschützt und ruhig: Bearbeitungstasten tun nichts, statt eine Fehlermeldung auszugeben.
 
-Pläne und Dateibaum wechseln sich ab: Das Öffnen der einen Seitenleiste schließt die andere, sodass Sie jeweils nur eines betrachten. Der Reader schließt sich zusammen mit der Plan-Seitenleiste. Beide Verhaltensweisen legen Sie in `dwpvim.json` fest.
+Pläne und Dateibaum wechseln sich ab: Das Öffnen der einen Seitenleiste schließt die andere, sodass Sie jeweils nur eines betrachten. Der Reader schließt sich zusammen mit der Plan-Seitenleiste. Ob das Öffnen der einen Seitenleiste die andere schließt, legt der Schlüssel `sidebars.exclusive` in `dwpvim.json` fest.
 
 Um die Markdown-Dateien eines Plans an Ort und Stelle zu lesen, zeigt `SPC m p` den aktuellen Puffer im Browser an und `SPC m r` rendert ihn im Puffer. Beides funktioniert nur in Markdown-Puffern.
 

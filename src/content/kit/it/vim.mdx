@@ -58,7 +58,7 @@ Faccia clic su un piano, oppure prema Invio su di esso, per aprire il lettore: l
 
 La barra laterale risponde al mouse e alla tastiera. La piccola freccia accanto a un piano mostra o nasconde i suoi task e i suoi file, e un clic su un task o su un file lo apre. `j`, `k`, i tasti freccia, `Ctrl-n` e `Ctrl-p` saltano da un piano all’altro, ignorando righe vuote e decorazioni. Ogni sezione mostra il proprio conteggio, i colori di stato segnano l’icona e la barra di avanzamento, i piani attivi hanno titoli in evidenza e quelli conclusi titoli attenuati, e un gruppo Done con più di sei piani si apre compresso. La finestra è di sola lettura e silenziosa: i tasti di modifica non fanno nulla invece di stampare un errore.
 
-Piani e albero dei file si alternano: aprire una barra laterale chiude l’altra, così si guarda una cosa alla volta. Il lettore si chiude insieme alla barra laterale dei piani. Entrambi i comportamenti si impostano in `dwpvim.json`.
+Piani e albero dei file si alternano: aprire una barra laterale chiude l’altra, così si guarda una cosa alla volta. Il lettore si chiude insieme alla barra laterale dei piani. Se aprire una barra laterale chiuda l’altra lo decide la chiave `sidebars.exclusive` in `dwpvim.json`.
 
 Per leggere sul posto i file Markdown di un piano, `SPC m p` mostra l’anteprima del buffer corrente nel browser e `SPC m r` lo renderizza nel buffer. Entrambi funzionano solo nei buffer Markdown.
 

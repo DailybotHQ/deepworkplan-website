@@ -58,7 +58,7 @@ Clique num plano, ou prima Enter sobre ele, para abrir o leitor: o objetivo numa
 
 A barra lateral responde ao rato e ao teclado. A pequena seta ao lado de um plano mostra ou oculta as suas tarefas e ficheiros, e um clique numa tarefa ou num ficheiro abre-o. `j`, `k`, as setas, `Ctrl-n` e `Ctrl-p` saltam de plano em plano, ignorando as linhas em branco e a decoração. Cada secção mostra a sua contagem, as cores de estado marcam o ícone e a barra de progresso, os planos em curso têm títulos em destaque e os planos concluídos têm títulos esbatidos, e um grupo Done com mais de seis planos abre recolhido. A janela é só de leitura e silenciosa: as teclas de edição não fazem nada, em vez de mostrarem um erro.
 
-Os planos e a árvore de ficheiros alternam: abrir uma barra lateral fecha a outra, para olhar para uma coisa de cada vez. O leitor fecha juntamente com a barra lateral de planos. Ambos os comportamentos são definidos em `dwpvim.json`.
+Os planos e a árvore de ficheiros alternam: abrir uma barra lateral fecha a outra, para olhar para uma coisa de cada vez. O leitor fecha juntamente com a barra lateral de planos. Se abrir uma barra lateral fecha a outra é definido pela chave `sidebars.exclusive` em `dwpvim.json`.
 
 Para ler no local os ficheiros Markdown de um plano, `SPC m p` pré-visualiza o buffer atual no navegador e `SPC m r` renderiza-o dentro do buffer. Ambos funcionam apenas em buffers de Markdown.
 

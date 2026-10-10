@@ -91,7 +91,7 @@ v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https:
 
 ### DeepWorkPlan Vim (yedinci eklenti)
 
-Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v0.6.0`, arayüz `1`) için ince bir entegrasyon katmanı.
+Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v0.5.1`, arayüz `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [DeepWorkPlan Vim](/kit/vim)
 - **Ne ekler:** agent'lar ve insanlar için isteğe bağlı, makine düzeyinde bir düzenleyici yüzeyi — üretilmiş bir komut dizini, salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi; her iddia ürünün sabitlenmiş, makine tarafından okunabilir yüzeyinden okunur

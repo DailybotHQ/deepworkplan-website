@@ -91,7 +91,7 @@ Un integratore leggero di [herdr-peers](https://github.com/DailybotHQ/herdr-peer
 
 ### DeepWorkPlan Vim (settimo addon)
 
-Un integratore leggero di [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (fissato a `v0.6.0`, interfaccia `1`), l'editor da terminale per Deep Work Plan (Neovim 0.12+).
+Un integratore leggero di [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (fissato a `v0.5.1`, interfaccia `1`), l'editor da terminale per Deep Work Plan (Neovim 0.12+).
 
 - **Pagina kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Cosa aggiunge:** una superficie di editor opzionale, a livello di macchina, per agenti e persone — un indice dei comandi generato, un browser dei piani in sola lettura e un visualizzatore Markdown; ogni affermazione è letta dalla superficie leggibile dalle macchine fissata del prodotto

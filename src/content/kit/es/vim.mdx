@@ -58,7 +58,7 @@ Haz clic en un plan, o pulsa Intro sobre él, para abrir el lector: el objetivo 
 
 La barra lateral responde al ratón y al teclado. La pequeña flecha junto a un plan muestra u oculta sus tareas y archivos, y un clic en una tarea o en un archivo lo abre. `j`, `k`, las flechas, `Ctrl-n` y `Ctrl-p` saltan de plan en plan, omitiendo las filas en blanco y la decoración. Cada sección muestra su recuento, los colores de estado marcan el icono y la barra de progreso, los planes activos tienen títulos destacados y los planes terminados los tienen atenuados, y un grupo Done de más de seis planes se abre contraído. La ventana es de solo lectura y silenciosa: las teclas de edición no hacen nada en lugar de mostrar un error.
 
-Los planes y el árbol de archivos se turnan: abrir una barra lateral cierra la otra, para que mires una sola cosa a la vez. El lector se cierra junto con la barra lateral de planes. Ambos comportamientos se configuran en `dwpvim.json`.
+Los planes y el árbol de archivos se turnan: abrir una barra lateral cierra la otra, para que mires una sola cosa a la vez. El lector se cierra junto con la barra lateral de planes. Que abrir una barra lateral cierre la otra lo controla la clave `sidebars.exclusive` de `dwpvim.json`.
 
 Para leer en el sitio los archivos Markdown de un plan, `SPC m p` previsualiza el búfer actual en el navegador y `SPC m r` lo renderiza dentro del búfer. Ambos funcionan solo en búferes de Markdown.
 

@@ -58,7 +58,7 @@ Click a plan, or press Enter on it, to open the reader: the goal in one sentence
 
 The sidebar answers the mouse and the keyboard. The small arrow beside a plan shows or hides its tasks and files, and a click on a task or file opens it. `j`, `k`, the arrow keys, `Ctrl-n` and `Ctrl-p` jump from plan to plan, skipping blank rows and decoration. Each section shows its count, status colors mark the icon and the progress bar, live plans have strong titles and settled plans dim ones, and a Done group of more than six plans opens collapsed. The window is read-only and quiet: editing keys do nothing instead of printing an error.
 
-Plans and the file tree take turns: opening one sidebar closes the other, so you look at one thing at a time. The reader closes together with the plans sidebar. Both behaviors are set in `dwpvim.json`.
+Plans and the file tree take turns: opening one sidebar closes the other, so you look at one thing at a time. The reader closes together with the plans sidebar. Whether opening one sidebar closes the other is the `sidebars.exclusive` key in `dwpvim.json`.
 
 To read a plan's Markdown files in place, `SPC m p` previews the current buffer in the browser and `SPC m r` renders it inside the buffer. Both work in Markdown buffers only.
 

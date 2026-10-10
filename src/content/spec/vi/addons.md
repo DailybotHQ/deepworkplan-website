@@ -91,7 +91,7 @@ Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-
 
 ### DeepWorkPlan Vim (addon thứ bảy)
 
-Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v0.6.0`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
+Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v0.5.1`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
 
 - **Trang kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Bổ sung:** một bề mặt trình soạn thảo tùy chọn ở cấp máy cho agent và con người — chỉ mục lệnh được sinh tự động, trình duyệt kế hoạch chỉ đọc và trình xem Markdown; mọi tuyên bố đều được đọc từ bề mặt máy đọc được đã ghim của sản phẩm
