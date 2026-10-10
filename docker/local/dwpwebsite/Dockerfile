@@ -82,9 +82,12 @@ RUN apt-get update \
 ENV CHROME_PATH=/usr/bin/chromium \
     CHROMIUM_FLAGS=--no-sandbox
 
-# This repository uses pnpm only: `npm` says so and runs pnpm instead.
+# This repository uses pnpm only: `npm` says so and runs pnpm instead. Global
+# installs (`npm install -g`, which `ak install <cli>` uses) still reach the real
+# npm, so agent CLIs land where the agents layer put them.
 RUN rm -f /usr/local/bin/npm \
     && printf '%s\n' '#!/bin/bash' \
+      'case " $* " in *" -g "*|*" --global "*|*" --location=global "*|*" --prefix "*|*" --prefix="*) exec /usr/local/lib/node_modules/npm/bin/npm-cli.js "$@" ;; esac' \
       'echo "[npm→pnpm] Redirecting \"npm $*\" to pnpm (this repo uses pnpm)." >&2' \
       'exec corepack pnpm "$@"' > /usr/local/bin/npm \
     && chmod 0755 /usr/local/bin/npm

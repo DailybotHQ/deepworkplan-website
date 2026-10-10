@@ -31,11 +31,11 @@ Bugün sekiz eklenti sunulmaktadır — yedi opt-in artı gerekli yerel inceleme
 
 ### Devcontainer (birinci eklenti)
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.1.4` sürümüne sabitlenmiş) için ince bir entegratör: `dck init` komutunun depoya oluşturduğu bir Dev Containers şablonu.
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.2.2` sürümüne sabitlenmiş, arayüz `2`) için ince bir entegratör: `dck init` komutunun depoya, deponun kendi container'ı olarak oluşturduğu bir Dev Containers şablonu ve `dck-dockerfile` skill'i.
 
 - **Kit sayfası:** [Devcontainer](/kit/devcontainer)
-- **Ne ekler:** `dck` başlatıcısı (`setup`, `up`, `shell`, `ssh`, `doctor`), kodlama agent'ları olmadan gelen `python-3.13`, `node-24` ve `debian` varyantlarında temel imajlar (agent'lar opt-in bir katmandır), yalnızca loopback portları, SSH agent yönlendirmesi ve container başına isteğe bağlı Herdr makineleri
-- **Davranış:** `dck doctor --json` (arayüz 1) ile tespit edilir; `dck init` mevcut bir devcontainer'ı yalnızca diff'i kabul edildikten sonra uzlaştırır ve önce dosyanın yedeğini alır — asla ezilmez
+- **Ne ekler:** çalışma zamanının digest ile sabitlenmiş resmi imajından üretilen `docker/local/<service>/Dockerfile` (`python-3.13`, `node-24` veya `debian`, paylaşılan temel imaj yok), `dck` başlatıcısı (`up`, `shell`, `rebuild`, `doctor`) üzerine kurulu `dev.sh`, opt-in bir katman olarak kodlama agent'ları, yalnızca loopback portları, içeride hiçbir anahtar olmadan host'un agent'ı üzerinden SSH ile git ve standart düzene sahip container başına Herdr makineleri
+- **Davranış:** `dck doctor --json` (arayüz 2) ile tespit edilir; `dck init` mevcut bir devcontainer'ı yalnızca diff'i kabul edildikten sonra uzlaştırır ve önce dosyanın yedeğini alır — asla ezilmez
 - **Ne zaman sunulur:** izole dev container'dan faydalanan Docker veya servisli çoğu depo
 
 ### Dailybot (ikinci eklenti)
@@ -91,7 +91,7 @@ v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https:
 
 ### DeepWorkPlan Vim (yedinci eklenti)
 
-Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v0.4.2`, arayüz `1`) için ince bir entegrasyon katmanı.
+Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v0.5.1`, arayüz `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [DeepWorkPlan Vim](/kit/vim)
 - **Ne ekler:** agent'lar ve insanlar için isteğe bağlı, makine düzeyinde bir düzenleyici yüzeyi — üretilmiş bir komut dizini, salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi; her iddia ürünün sabitlenmiş, makine tarafından okunabilir yüzeyinden okunur
@@ -100,11 +100,11 @@ Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](
 
 ### Agentkit (sekizinci eklenti)
 
-v7 planlarının **arayüzsüz (headless)** devretme taşıyıcısı: [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, sabitlenmiş `v0.1.1`, arayüz `1`) için ince bir entegrasyon katmanı.
+v7 planlarının **arayüzsüz (headless)** devretme taşıyıcısı: [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, sabitlenmiş `v0.3.0`, arayüz `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [Agentkit](/kit/agentkit)
 - **Ne ekler:** terminal kodlama agent'ları üzerinde tek bir `ak` komut yüzeyi; sınırlı bir plan görevini arayüzsüz çalıştırmak için kullanılır; `subagents`, `cancel_children` ve `model_routing` yeteneklerini yalnızca çalışma zamanında, etkinleştirildiğinde, tespit edildiğinde ve uyumlu bir arayüz üzerinde olduğunda sağlar
-- **Davranış:** her kullanım `agent_delegation` sözleşme yetkisini gerektirir; eklenti kodlama agent'ı CLI'larını asla kendi başına kurmaz ve sağlayıcı anahtar değerlerini asla okumaz
+- **Davranış:** her kullanım `agent_delegation` sözleşme yetkisini gerektirir; kit agent'ları varsayılan olarak otonom modda başlatır ve vazgeçme seçeneği (`--ask` veya `AGENTKIT_PERMISSIONS=ask`) her zaman önceliklidir — eklenti hiçbir otonomi bayrağı yazmaz, plan vazgeçmeyi kaydettiğinde ve salt okunur delegeler için her zaman `--ask` iletir; kodlama agent'ı CLI'larını asla kendi başına kurmaz ve sağlayıcı anahtar değerlerini asla okumaz
 - **Ne zaman sunulur:** Faz 7b sırasında açık opt-in; `ak doctor --json` ile salt okunur tespit
 
 ## Skill'ler

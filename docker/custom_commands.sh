@@ -30,7 +30,7 @@ export PATH
 
 # Container-installed Node must win over IDE-bundled Node (Cursor Server's
 # ~/.cursor-server/bin/<commit>/node, VS Code Server's equivalent, etc.).
-# /etc/profile.d/00-container-node-first.sh covers login shells; this guard
+# Login shells start from Debian's /etc/profile PATH (/usr/local/bin first); this guard
 # covers non-login interactive shells that only source ~/.bashrc (editor
 # terminals, `bash -i`, Herdr panes, the agent shell tool, …). Idempotent.
 if [ -x /usr/local/bin/node ]; then

@@ -14,6 +14,7 @@ VS Code / Cursor ("Reopen in Container").
 | `docker/local/dwpwebsite/dck/` | the build steps dck vendors (pinned and verified downloads); reconciled by `dck init` |
 | `docker/local/dwpwebsite/.env` | your keys (copied from `.env.example` on the first `up`, mode 0600, gitignored) |
 | `dev.sh` | the entry point, a thin launcher over `dck` |
+| `docker/local/dev-setup-hook.sh` | the site's start hook (run by dck at every start): recreates `/tmp/ov/{astro,dist}` for a checkout whose `.astro` / `dist` are symlinks there (build output off the bind mount) |
 
 Blocks between `>>> dck:` and `<<< dck:` markers belong to dck: to change them, edit
 `dck.toml` and run `dck init`. Everything outside the markers is ours.

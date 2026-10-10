@@ -31,11 +31,11 @@ section: Addons
 
 ### Devcontainer（第一个附加组件）
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`，固定为 `v0.1.4`）的轻量集成器：一个由 `dck init` 渲染到仓库中的 Dev Containers 模板。
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`，固定为 `v0.2.2`，接口 `2`）的轻量集成器：一个由 `dck init` 渲染到仓库中、作为仓库自有容器的 Dev Containers 模板，外加 `dck-dockerfile` 技能。
 
 - **套件页：** [Devcontainer](/kit/devcontainer)
-- **新增内容：** `dck` 启动器（`setup`、`up`、`shell`、`ssh`、`doctor`）、提供 `python-3.13`、`node-24` 和 `debian` 变体且不含编码代理的基础镜像（代理是可选启用的一层）、仅限回环地址的端口、SSH agent 转发，以及每个容器可选的 Herdr 机器
-- **行为：** 通过 `dck doctor --json`（接口 1）检测；`dck init` 仅在其 diff 被接受后才调和现有 devcontainer，并先备份该文件——绝不覆盖
+- **新增内容：** 基于按 digest 固定的运行时官方镜像生成的 `docker/local/<service>/Dockerfile`（`python-3.13`、`node-24` 或 `debian`，无共享基础镜像）、构建在 `dck` 启动器（`up`、`shell`、`rebuild`、`doctor`）之上的 `dev.sh`、作为可选启用层的编码代理、仅限回环地址的端口、经由宿主机 agent 通过 SSH 使用的 git（容器内不放任何密钥），以及每个容器采用标准布局的 Herdr 机器
+- **行为：** 通过 `dck doctor --json`（接口 2）检测；`dck init` 仅在其 diff 被接受后才调和现有 devcontainer，并先备份该文件——绝不覆盖
 - **何时提供：** 大多数使用 Docker 或受益于隔离开发容器的服务的仓库
 
 ### Dailybot（第二个附加组件）
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim（第七个附加组件）
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（固定为 `v0.4.2`，接口 `1`）的轻量集成器，是 Deep Work Plan 的终端编辑器（Neovim 0.12+）。
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（固定为 `v0.5.1`，接口 `1`）的轻量集成器，是 Deep Work Plan 的终端编辑器（Neovim 0.12+）。
 
 - **套件页：** [DeepWorkPlan Vim](/kit/vim)
 - **新增内容：** 一个可选的、机器级的编辑器层面，供代理与人类使用——生成的命令索引、只读计划浏览器和 Markdown 查看器；每一项说明都读取自该产品固定版本的机器可读层面
@@ -100,11 +100,11 @@ section: Addons
 
 ### Agentkit（第八个附加组件）
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`，固定为 `v0.1.1`，接口 `1`）的轻量集成器，是 v7 计划的**无头**委托传输。
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`，固定为 `v0.3.0`，接口 `1`）的轻量集成器，是 v7 计划的**无头**委托传输。
 
 - **套件页：** [Agentkit](/kit/agentkit)
 - **新增内容：** 一个覆盖各终端编码代理的 `ak` 命令层面，用于以无头方式运行有界的计划任务；仅在运行时、且已启用、已检测到并处于兼容接口时，才提供 `subagents`、`cancel_children` 与 `model_routing` 能力
-- **行为：** 任何使用都需要契约授权 `agent_delegation`；该附加组件绝不自行安装编码代理 CLI，也绝不读取提供商密钥的值
+- **行为：** 任何使用都需要契约授权 `agent_delegation`；该 kit 默认以自主模式启动代理，其退出选项（`--ask` 或 `AGENTKIT_PERMISSIONS=ask`）始终优先——该附加组件不写入任何自主标志，在计划记录了退出选项时传递 `--ask`，对只读委托方则始终传递；它绝不自行安装编码代理 CLI，也绝不读取提供商密钥的值
 - **何时提供：** 第 7b 阶段中明确的可选项；通过 `ak doctor --json` 进行只读检测
 
 ## 技能
