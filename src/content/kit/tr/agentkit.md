@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "coding-agents-kit üzerine kurulu isteğe bağlı v7 eklentisi: her terminal kodlama agent'ı için tek bir ak komutu ve sınırlı plan görevlerinin başsız devri."
+description: "coding-agents-kit üzerine kurulu isteğe bağlı v7 eklentisi: her terminal kodlama agent'ı için tek ak komutu, kapatılabilir varsayılan özerklik ve başsız devir."
 kind: addon
 lang: tr
 order: 8
@@ -10,7 +10,7 @@ order: 8
 
 Her terminal kodlama agent'ının bir oturumu sürdürmek için kendi bayrakları, ikinci bir hesabı ayrı tutmak için kendi yolu, kendi başsız (headless) modu ve izin istemlerini atlamak için kendi anahtarı vardır. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)**, hepsinin üzerine tek bir komut yüzeyi koyar: `ak <kind> [@profile]`.
 
-Bu eklenti, kiti **DWP v7**'ye (`v7.0.0`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
+Bu eklenti, kiti **DWP v7**'ye (paket `v7.1.0`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
 
 ## Kitin size sundukları
 
@@ -18,7 +18,8 @@ Bu eklenti, kiti **DWP v7**'ye (`v7.0.0`) **başsız** devretme taşıması olar
 - **Profiller.** `ak claude @work`, ikinci bir hesabı birincisinden ayrı tutulan kendi ana dizininde çalıştırır.
 - **Başsız çalıştırmalar.** `ak run <kind> -- "<prompt>"` tek bir istemi etkileşimsiz olarak çalıştırır ve belgelenmiş bir çıkış kodu döndürür; isteğe bağlı olarak tek bir JSON nesnesi biçiminde.
 - **Bir doktor.** `ak doctor --json`, hangi CLI'ların kurulu olduğunu, profilleri ve ayarlanmış anahtarların adlarını raporlar — değerlerini asla.
-- **Kurulumlar.** `ak install <cli>`, eksik bir CLI'ı sağlayıcısının resmî kanalından kurar.
+- **Doğrulanmış kurulumlar.** `ak install <cli>`, eksik bir CLI'ı sağlayıcısının resmî kanalından sabitlenmiş bir sürümde kurar ve sabitlenmiş bir sha256 değerine ya da npm kayıt defterinin bütünlük bilgisine karşı doğrular.
+- **Tanıdık adlar.** Siz açana kadar kapalı kalan iki takma ad ön ayarı: `classic` (`claudex`, `codexx`, `cursorx`, `opencodex`, `pix`, `clinex`, `grokx`) ve `providers` (`claude-glm`, `codex-azure`, `codex-xai`, `pi-glm`, …); her biri bir `ak <kind>` komutudur.
 
 ## Kurulum
 
@@ -27,21 +28,23 @@ git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./c
 ak doctor
 ```
 
-Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v0.1.1` sürümüne sabitleyin: bir güvenlik düzeltmesi içerir ve `v0.1.0` sürümünün yerini alır. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
+Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v0.3.0` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/coding-agents-kit`, `v0.1.1` etiketi, arayüz 1 |
+| Ürün | `DailybotHQ/coding-agents-kit`, `v0.3.0` etiketi, arayüz 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `agentkit` |
 | Taşıma | başsız: her delege için ayrılmış bir git worktree'de bir `ak run` |
 | Sağladıkları | `subagents`, `cancel_children`, `model_routing` |
 | Gerektirdiği | plan sözleşmesinin `agent_delegation` yetkisi |
 
-## İzinler olduğu gibi aktarılır
+## Varsayılan olarak özerklik, her zaman üstün gelen bir devre dışı bırakma seçeneğiyle
 
-`ak <kind>` **hiçbir** izin atlama bayrağı eklemez. Özerklik açık bir tercihtir (opt-in): tek bir komutta `--auto` ya da ortamda `AGENTKIT_PERMISSIONS=auto`, o başlatma için CLI'ın kendi özerklik bayrağını ekler. `claudex` gibi kısayolları yeniden oluşturan `classic` takma ad ön ayarı kapalı olarak gelir.
+`v0.2.0` sürümünden bu yana `ak <kind>`, her agent'ı **özerk** olarak başlatır: CLI'ın yalnızca kitin `providers.toml` dosyasında tutulan kendi özerklik bayrağını ekler. Özerklik, bir geliştirme konteyneri gibi atılabilir ya da korumalı (sandbox) ortamlar için tasarlanmıştır.
 
-Eklenti kendiliğinden asla bir özerklik bayrağı eklemez. Bir plan `--auto` bayrağını yalnızca geliştiricinin açık ve kayıt altına alınmış tercihiyle ve yalnızca yalıtılmış bir worktree ya da konteyner içinde kullanır.
+**Devre dışı bırakma her zaman üstün gelir**: tek bir komutta `--ask` ya da ortamda veya kitin env dosyasında `AGENTKIT_PERMISSIONS=ask`, aynı komut `--auto` dese bile bayrağı bastırır. Devre dışı bırakılmış bir oturum, bu tercihi başlattığı agent'lara da aktarır. Bir ana makinede devre dışı bırakmayı ayarlayın.
+
+Eklenti hiçbir özerklik bayrağı yazmaz ve asla `--auto` geçirmez. Bir plan devre dışı bırakmayı kaydettiğinde `--ask` geçirir. Bir ana makinede `agent_delegation` yetkisi veren bir plan, kendi worktree'leriyle sınırlı özerk delegeleri kabul eder; worktree bir korumalı alan değildir.
 
 ## Plana neler ekler
 

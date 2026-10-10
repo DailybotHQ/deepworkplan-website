@@ -66,9 +66,9 @@ Możliwości, które przepływ onboardingu nakłada na repozytorium. Siedem jest
 
 - **Skill Deep Work Plan** — Tworzy, wykonuje, weryfikuje, wznawia i dopracowuje plany. Nie potrzebuje żadnego dodatku.
 - **[herdr](/pl/kit/herdr)** — Równorzędni agenci w panelach Herdr, na dowolnej maszynie: interaktywne delegowanie z jedną autoryzowaną odpowiedzią. Przypięty do `herdr-peers@v0.1.0`.
-- **[agentkit](/pl/kit/agentkit)** — Jedno polecenie ak dla każdego terminalowego agenta kodującego: delegowanie bez interfejsu w worktree. Przypięty do `coding-agents-kit@v0.1.1`.
-- **[devcontainer](/pl/kit/devcontainer)** — Szablon Dev Containers i obrazy bazowe dostarczane bez agentów kodujących. Przypięty do `devcontainer-kit@v0.1.4`.
-- **[vim](/pl/kit/vim)** — Edytor terminalowy z przeglądarką planów tylko do odczytu i podglądem Markdown. Przypięty do `deepworkplan-vim@v0.4.2`.
+- **[agentkit](/pl/kit/agentkit)** — Jedno polecenie ak dla każdego terminalowego agenta kodującego: autonomia domyślnie z możliwością rezygnacji i delegowanie bez interfejsu w worktree. Przypięty do `coding-agents-kit@v0.3.0`.
+- **[devcontainer](/pl/kit/devcontainer)** — Własny kontener deweloperski każdego repozytorium z jednego szablonu: agenci przez ak, Herdr w obie strony, bez klucza SSH w środku. Przypięty do `devcontainer-kit@v0.2.1`.
+- **[vim](/pl/kit/vim)** — Edytor terminalowy z przeglądarką planów tylko do odczytu i podglądem Markdown. Przypięty do `deepworkplan-vim@v0.5.1`.
 
 Rejestr dodatków i deskryptory są dostarczane w Deep Work Plan v7: `v7.0.0`
 
