@@ -9,6 +9,23 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.42] - 2026-10-10
+
+### Changed
+
+- fix: llms-full.txt names the vendored pack v7.1.4
+- fix: the pack pin in the kit Markdown mirrors and llms files is v7.1.4
+- chore(skills): vendor deepworkplan v7.1.4 and move the public pins
+- fix: review of the pilot — spec and llms pins, npm shim for global installs, build overlay hook
+- docs: devcontainer-kit v0.2.2 across the kit, /init.md, the plate and the docs
+- fix(docker): set core.untrackedcache once, quietly, instead of in every new shell
+- feat(docker): devcontainer-kit v0.2.2 and dck's dev.sh
+- docs(kit): agentkit v0.3.0 and devcontainer-kit v0.2.1 in every language
+- docs(kit): agentkit v0.3.0, devcontainer-kit v0.2.1 and vim v0.5.1 across the kit (en) and the container docs
+- refactor(docker): agent wrappers give way to ak presets; site helpers stay
+- feat(docker): render the dwpwebsite container with devcontainer-kit v0.2.1
+- chore(skills): vendor deepworkplan v7.1.0 and move the public install pins
+
 ## [5.0.41] - 2026-10-10
 
 ### Changed
@@ -1140,7 +1157,8 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.41...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.42...HEAD
+[5.0.42]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.42
 [5.0.41]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.41
 [5.0.40]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.40
 [5.0.39]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.39
