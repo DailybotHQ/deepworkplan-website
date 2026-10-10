@@ -10,7 +10,7 @@ section: State
 
 > **Phạm vi phiên bản:** Các phần bên dưới là lớp trạng thái v5.0.0 được giữ lại. Tiêu chuẩn hiện tại, DWP 7.0.0, dùng hợp đồng v7, nhật ký chỉ ghi thêm và projection snapshot; kế hoạch v5 tiếp tục dùng các quy tắc `manifest.json` và `state.json` của tài liệu này.
 
-**Tiêu chuẩn hiện tại: v7 (DWP 7.0.0).** Các tài liệu bên dưới là nền tảng được giữ lại; v6 đã bổ sung hợp đồng, nhật ký chỉ ghi thêm, ngữ cảnh tác vụ, kiểm soát tài nguyên và quy tắc vòng đời, còn v7 giữ nguyên lớp bản ghi đó đồng thời bổ sung dấu đánh tác vụ `parallel_safe` tùy chọn, sự kiện nhật ký `delegation`, sổ đăng ký addon `.dwp/config.json` và các khả năng do addon cung cấp. Đọc [schema manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [schema hợp đồng](https://deepworkplan.com/schema/plan-contract/v7.json) và [schema snapshot trực tiếp](https://deepworkplan.com/schema/plan-snapshot/v6.json) (dùng chung với v6). Các kế hoạch v5 và v6 hiện có vẫn giữ quy tắc đã ghi. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+**Tiêu chuẩn hiện tại: v7 (DWP 7.0.0).** Các tài liệu bên dưới là nền tảng được giữ lại; v6 đã bổ sung hợp đồng, nhật ký chỉ ghi thêm, ngữ cảnh tác vụ, kiểm soát tài nguyên và quy tắc vòng đời, còn v7 giữ nguyên lớp bản ghi đó đồng thời bổ sung dấu đánh tác vụ `parallel_safe` tùy chọn, sự kiện nhật ký `delegation`, sổ đăng ký addon `.dwp/config.json` và các khả năng do addon cung cấp. Đọc [schema manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [schema hợp đồng](https://deepworkplan.com/schema/plan-contract/v7.json) và [schema snapshot trực tiếp](https://deepworkplan.com/schema/plan-snapshot/v6.json) (dùng chung với v6). Các kế hoạch v5 và v6 hiện có vẫn giữ quy tắc đã ghi. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Phiên bản 5.0.0. Trạng thái: Ổn định.** Tài liệu này đặc tả lớp trạng thái kế hoạch có thể đọc bằng máy của phương pháp luận Deep Work Plan, nay đã được căn chỉnh với phiên bản riêng của chuẩn DWP — việc đánh số lại không làm suy yếu bất kỳ yêu cầu hiện có nào. Bản sửa đổi này cũng ghi lại bộ cập nhật trạng thái được bảo vệ, việc công bố kế hoạch đã kiểm chứng, và các quy tắc về tính trung thực của bằng chứng mà một kế hoạch đã hoàn tất phải thỏa mãn (xem bên dưới). Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
@@ -235,10 +235,10 @@ v6 giữ nguyên phương pháp v5 và bổ sung cấu trúc kỹ thuật chặt
 
 Schema manifest và snapshot trực tiếp v6:
 
-- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json (v7: https://deepworkplan.com/schema/plan-manifest/v7.json)
 - `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
-- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
-- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json (v7: https://deepworkplan.com/schema/plan-contract/v7.json)
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json (v7: https://deepworkplan.com/schema/journal-event/v7.json)
 - Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
 
 Projection trực tiếp v6 là snapshot, không phải tệp trạng thái v5 được đổi tên. `plan-state/v5.json` vẫn được công bố cho kế hoạch v5; không có `plan-state/v6.json`. Kế hoạch v1, v2 và v5 hiện có giữ nguyên thế hệ schema đã ghi nhận và không bị viết lại âm thầm.

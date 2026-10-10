@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite plans
 
-> **Version scope:** This is a retained v5.0.0 base document. The current standard, DWP 7.0.0, also requires the applicable `V6_*.md` and `V7_*.md` extensions listed in the [specification index](/spec). Existing v5 and v6 plans keep their recorded rules.
+> **Version scope:** This is a retained v5.0.0 base document. The current standard, DWP 7.0.0, also requires the applicable `V6_*.md` and `V7_*.md` extensions listed in the [specification index](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Existing v5 and v6 plans keep their recorded rules.
 
 **Version 5.0.0. Status: Stable.** This document specifies the Lite plan representation introduced alongside the [DWP specification](/spec/dwp-specification): a plan format for small-to-medium bounded work that is materialized directly, with no non-executable draft stage. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 

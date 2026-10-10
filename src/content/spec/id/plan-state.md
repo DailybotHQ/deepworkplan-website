@@ -10,7 +10,7 @@ section: State
 
 > **Cakupan versi:** Bagian-bagian di bawah adalah lapisan status v5.0.0 yang dipertahankan. Standar saat ini, DWP 7.0.0, menggunakan kontrak v7, jurnal append-only, dan proyeksi snapshot; rencana v5 tetap menggunakan aturan `manifest.json` dan `state.json` dari dokumen ini.
 
-**Standar saat ini: v7 (DWP 7.0.0).** Dokumen di bawah adalah dasar yang dipertahankan; v6 menambahkan kontrak, jurnal khusus tambah, konteks per tugas, kontrol sumber daya, dan aturan siklus hidup, dan v7 mempertahankan lapisan catatan tersebut sambil menambahkan penanda tugas `parallel_safe` opsional, peristiwa jurnal `delegation`, registri addon `.dwp/config.json`, dan kemampuan yang disediakan addon. Baca [skema manifes v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [skema kontrak](https://deepworkplan.com/schema/plan-contract/v7.json), dan [skema snapshot aktif](https://deepworkplan.com/schema/plan-snapshot/v6.json) (digunakan bersama dengan v6). Rencana v5 dan v6 yang ada tetap memakai aturan aslinya. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+**Standar saat ini: v7 (DWP 7.0.0).** Dokumen di bawah adalah dasar yang dipertahankan; v6 menambahkan kontrak, jurnal khusus tambah, konteks per tugas, kontrol sumber daya, dan aturan siklus hidup, dan v7 mempertahankan lapisan catatan tersebut sambil menambahkan penanda tugas `parallel_safe` opsional, peristiwa jurnal `delegation`, registri addon `.dwp/config.json`, dan kemampuan yang disediakan addon. Baca [skema manifes v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [skema kontrak](https://deepworkplan.com/schema/plan-contract/v7.json), dan [skema snapshot aktif](https://deepworkplan.com/schema/plan-snapshot/v6.json) (digunakan bersama dengan v6). Rencana v5 dan v6 yang ada tetap memakai aturan aslinya. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Versi 5.0.0. Status: Stabil.** Dokumen ini menetapkan lapisan status rencana yang dapat dibaca mesin dari metodologi Deep Work Plan, kini diselaraskan dengan versi standar DWP itu sendiri — tidak ada persyaratan yang ada dilemahkan oleh penomoran ulang ini. Revisi ini juga mendokumentasikan updater status yang dijaga, publikasi rencana yang terverifikasi, dan aturan kebenaran-bukti yang harus dipenuhi sebuah rencana yang selesai (lihat di bawah). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
@@ -235,10 +235,10 @@ v6 mempertahankan metodologi v5 dan menambahkan struktur rekayasa yang lebih ket
 
 Skema manifest dan snapshot aktif v6:
 
-- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json (v7: https://deepworkplan.com/schema/plan-manifest/v7.json)
 - `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
-- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
-- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json (v7: https://deepworkplan.com/schema/plan-contract/v7.json)
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json (v7: https://deepworkplan.com/schema/journal-event/v7.json)
 - Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
 
 Proyeksi aktif v6 adalah snapshot, bukan file status v5 yang sekadar diganti nama. `plan-state/v5.json` tetap diterbitkan untuk rencana v5; `plan-state/v6.json` tidak ada. Rencana v1, v2, dan v5 yang ada mempertahankan generasi skema tercatat dan tidak pernah ditulis ulang diam-diam.

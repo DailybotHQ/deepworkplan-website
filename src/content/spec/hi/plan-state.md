@@ -10,7 +10,7 @@ section: State
 
 > **संस्करण दायरा:** नीचे के खंड संरक्षित v5.0.0 state परत हैं। वर्तमान मानक, DWP 7.0.0, v7 अनुबंध, केवल-जोड़ जर्नल और स्नैपशॉट प्रोजेक्शन का उपयोग करता है; v5 योजनाएँ इस दस्तावेज़ के `manifest.json` और `state.json` नियमों का उपयोग करती रहती हैं।
 
-**वर्तमान मानक: v7 (DWP 7.0.0)।** नीचे दिए गए दस्तावेज़ संरक्षित आधार हैं; v6 ने अनुबंध, केवल-जोड़ जर्नल, प्रति-कार्य संदर्भ, संसाधन नियंत्रण और जीवनचक्र नियम जोड़े, और v7 वही रिकॉर्ड परत बनाए रखते हुए एक वैकल्पिक `parallel_safe` कार्य मार्कर, एक `delegation` जर्नल घटना, `.dwp/config.json` ऐडऑन रजिस्ट्री और ऐडऑन द्वारा प्रदान की गई क्षमताएँ जोड़ता है। [v7 मेनिफेस्ट स्कीमा](https://deepworkplan.com/schema/plan-manifest/v7.json), [अनुबंध स्कीमा](https://deepworkplan.com/schema/plan-contract/v7.json) और [लाइव स्नैपशॉट स्कीमा](https://deepworkplan.com/schema/plan-snapshot/v6.json) (v6 के साथ साझा) पढ़ें। मौजूदा v5 और v6 योजनाएँ अपने दर्ज नियम बनाए रखती हैं। [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+**वर्तमान मानक: v7 (DWP 7.0.0)।** नीचे दिए गए दस्तावेज़ संरक्षित आधार हैं; v6 ने अनुबंध, केवल-जोड़ जर्नल, प्रति-कार्य संदर्भ, संसाधन नियंत्रण और जीवनचक्र नियम जोड़े, और v7 वही रिकॉर्ड परत बनाए रखते हुए एक वैकल्पिक `parallel_safe` कार्य मार्कर, एक `delegation` जर्नल घटना, `.dwp/config.json` ऐडऑन रजिस्ट्री और ऐडऑन द्वारा प्रदान की गई क्षमताएँ जोड़ता है। [v7 मेनिफेस्ट स्कीमा](https://deepworkplan.com/schema/plan-manifest/v7.json), [अनुबंध स्कीमा](https://deepworkplan.com/schema/plan-contract/v7.json) और [लाइव स्नैपशॉट स्कीमा](https://deepworkplan.com/schema/plan-snapshot/v6.json) (v6 के साथ साझा) पढ़ें। मौजूदा v5 और v6 योजनाएँ अपने दर्ज नियम बनाए रखती हैं। [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **संस्करण 5.0.0. स्थिति: स्थिर।** यह दस्तावेज़ Deep Work Plan पद्धति की मशीन-पठनीय योजना-स्थिति परत का विनिर्देश करता है, जो अब DWP मानक के अपने संस्करण के साथ संरेखित है — इस पुनःक्रमांकन से कोई मौजूदा आवश्यकता कमज़ोर नहीं होती। यह संशोधन गार्डेड स्टेट अपडेटर, सत्यापित योजना-प्रकाशन, और किसी पूर्ण योजना को जिन साक्ष्य-सत्यता नियमों को पूरा करना चाहिए (नीचे देखें), उन्हें भी दस्तावेज़ित करता है। कीवर्ड MUST, MUST NOT, SHOULD, SHOULD NOT और MAY की व्याख्या RFC 2119 में वर्णित अनुसार की जानी है।
 
@@ -235,10 +235,10 @@ v6, v5 कार्यप्रणाली को बनाए रखता ह
 
 v6 मैनिफेस्ट और लाइव स्नैपशॉट स्कीमा:
 
-- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json (v7: https://deepworkplan.com/schema/plan-manifest/v7.json)
 - `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
-- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
-- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json (v7: https://deepworkplan.com/schema/plan-contract/v7.json)
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json (v7: https://deepworkplan.com/schema/journal-event/v7.json)
 - Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
 
 v6 लाइव प्रोजेक्शन स्नैपशॉट है, v5 state फ़ाइल का नया नाम नहीं। `plan-state/v5.json` v5 योजनाओं के लिए प्रकाशित रहता है; `plan-state/v6.json` मौजूद नहीं है। मौजूदा v1, v2 और v5 योजनाएँ दर्ज स्कीमा पीढ़ी बनाए रखती हैं और चुपचाप फिर से नहीं लिखी जातीं।

@@ -10,7 +10,7 @@ section: State
 
 > **Sürüm kapsamı:** Aşağıdaki bölümler korunan v5.0.0 durum katmanıdır. Güncel standart DWP 7.0.0; v7 sözleşmesini, yalnızca eklemeli bir günlüğü ve bir anlık görüntü projeksiyonunu kullanır; v5 planları bu belgedeki `manifest.json` ve `state.json` kurallarını kullanmaya devam eder.
 
-**Güncel standart: v7 (DWP 7.0.0).** Aşağıdaki belgeler korunan temeldir; v6 sözleşme, yalnızca eklemeli günlük, görev bağlamı, kaynak denetimleri ve yaşam döngüsü kurallarını ekledi; v7 ise bu kayıt katmanını korurken isteğe bağlı bir `parallel_safe` görev işaretçisi, bir `delegation` günlük olayı, `.dwp/config.json` eklenti kaydı ve eklentilerin sağladığı yetenekler ekler. [v7 manifesto şemasını](https://deepworkplan.com/schema/plan-manifest/v7.json), [sözleşme şemasını](https://deepworkplan.com/schema/plan-contract/v7.json) ve [canlı anlık görüntü şemasını](https://deepworkplan.com/schema/plan-snapshot/v6.json) (v6 ile ortak) okuyun. Mevcut v5 ve v6 planları kendi kurallarını korur. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md).
+**Güncel standart: v7 (DWP 7.0.0).** Aşağıdaki belgeler korunan temeldir; v6 sözleşme, yalnızca eklemeli günlük, görev bağlamı, kaynak denetimleri ve yaşam döngüsü kurallarını ekledi; v7 ise bu kayıt katmanını korurken isteğe bağlı bir `parallel_safe` görev işaretçisi, bir `delegation` günlük olayı, `.dwp/config.json` eklenti kaydı ve eklentilerin sağladığı yetenekler ekler. [v7 manifesto şemasını](https://deepworkplan.com/schema/plan-manifest/v7.json), [sözleşme şemasını](https://deepworkplan.com/schema/plan-contract/v7.json) ve [canlı anlık görüntü şemasını](https://deepworkplan.com/schema/plan-snapshot/v6.json) (v6 ile ortak) okuyun. Mevcut v5 ve v6 planları kendi kurallarını korur. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Sürüm 5.0.0. Durum: Kararlı.** Bu belge, Deep Work Plan metodolojisinin makine tarafından okunabilir plan durum katmanını belirtir; artık DWP standardının kendi sürümüyle hizalıdır — yeniden numaralandırma mevcut hiçbir gereksinimi zayıflatmaz. Bu revizyon ayrıca korumalı durum güncelleyicisini, doğrulanmış plan yayınlamasını ve tamamlanmış bir planın karşılaması gereken kanıt-doğruluğu kurallarını belgeler (aşağıya bakın). MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 
@@ -235,10 +235,10 @@ v6, v5 metodolojisini korur ve yeni planlara daha sıkı bir mühendislik yapıs
 
 v6 bildirim ve canlı anlık görüntü şemaları:
 
-- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json
+- `manifest.json` — https://deepworkplan.com/schema/plan-manifest/v6.json (v7: https://deepworkplan.com/schema/plan-manifest/v7.json)
 - `state.json` live projection — https://deepworkplan.com/schema/plan-snapshot/v6.json
-- Contract — https://deepworkplan.com/schema/plan-contract/v6.json
-- Journal events — https://deepworkplan.com/schema/journal-event/v6.json
+- Contract — https://deepworkplan.com/schema/plan-contract/v6.json (v7: https://deepworkplan.com/schema/plan-contract/v7.json)
+- Journal events — https://deepworkplan.com/schema/journal-event/v6.json (v7: https://deepworkplan.com/schema/journal-event/v7.json)
 - Task context manifest — https://deepworkplan.com/schema/context-manifest/v6.json
 
 v6 canlı görünümü, yeniden adlandırılmış bir v5 durum dosyası değil, anlık görüntüdür. `plan-state/v5.json` v5 planları için yayımlanmaya devam eder; `plan-state/v6.json` yoktur. Mevcut v1, v2 ve v5 planları kayıtlı şema nesillerini korur ve sessizce yeniden yazılmaz.
