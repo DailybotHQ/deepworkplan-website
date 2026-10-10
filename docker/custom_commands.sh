@@ -260,8 +260,10 @@ function git_status_indicator() {
 
 # Speed up `git status` on macOS bind mounts (caches the untracked-files walk).
 # Repo-local; do not enable core.fsmonitor — unreliable through this mount.
-if git rev-parse --git-dir >/dev/null 2>&1; then
-    git config core.untrackedcache true
+# Written once: every new shell sources this file, and concurrent writers would
+# race for .git/config.lock.
+if git rev-parse --git-dir >/dev/null 2>&1 && [ "$(git config --get core.untrackedcache 2>/dev/null)" != "true" ]; then
+    git config core.untrackedcache true 2>/dev/null || true
 fi
 
 # Cached git dirty state for the prompt. `git status` costs ~0.4s on the
