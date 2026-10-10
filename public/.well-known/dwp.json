@@ -10,7 +10,7 @@
   "agents_md": "https://github.com/DailybotHQ/deepworkplan-website/blob/main/AGENTS.md",
   "skill": {
     "name": "deepworkplan",
-    "install": "npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y",
+    "install": "npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.0 --skill deepworkplan -y",
     "repository": "https://github.com/DailybotHQ/deepworkplan-skill"
   },
   "endpoints": {

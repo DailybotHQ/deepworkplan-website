@@ -113,7 +113,7 @@ Methodology/spec/kit docs live in multilingual content collections (17 active la
 
 ## DWP v6 host and authority records
 
-The current DWP standard is 7.0.0, implemented by the installed 7.0.1 skill.
+The current DWP standard is 7.0.0, implemented by the installed 7.1.0 skill.
 New plans use the v7 contract by default; the addon registry is the tracked
 `.dwp/config.json`; plans from earlier
 generations retain their recorded format and are never migrated implicitly.

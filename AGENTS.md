@@ -302,7 +302,7 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 
 - **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the release workflow refreshes them to the latest upstream tag on every merge to `main` and overwrites local edits. Contribute upstream.
 - **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: update it only through an explicit, reviewed change (released tag, tree-URL install, `SHA256SUMS` verified), contributed upstream first.
-- **Current provenance (2026-10-09):** `deepworkplan` **v7.0.1**, `ai-diff-reviewer` **v3.3.0**, `dailybot` **v3.23.3**; `.dwp/config.json` (the addon registry) is the only tracked file under `.dwp/`.
+- **Current provenance (2026-10-10):** `deepworkplan` **v7.1.0**, `ai-diff-reviewer` **v3.3.0**, `dailybot` **v3.23.3**; `.dwp/config.json` (the addon registry) is the only tracked file under `.dwp/`.
 
 > Upstream table, install commands, refresh sequence, failure semantics and provenance history: [Architecture → Vendored agent skills](docs/ARCHITECTURE.md#vendored-agent-skills).
 
@@ -318,7 +318,7 @@ is required only for the CI leg; the local review never needs it. The shared
 [`.review/extension.md`](.review/extension.md) configures both the local and
 the CI review.
 
-DWP standard: 7.0.0 (onboarded 2026-09-11; upgraded 2026-09-13, 2026-09-17, 2026-09-25, 2026-09-28, 2026-10-01 and 2026-10-09; skill 7.0.1). New plans use the v7 contract by default; existing plans retain their recorded generation and require an explicit request for migration. V6 host baseline: all eight capabilities (`stop_agent`, `meter_spend`, `meter_tokens`, `meter_wall_clock`, `cancel_children`, `model_routing`, `subagents`, `telemetry`) are `false` unless runtime support is verified; telemetry also requires consent. Developers authorize plans and work. Stop before a `main` push/deployment, publication, external messages or secret access unless authorized; prior authorization persists. See [v6 host and authority records](docs/AI_AGENT_ONBOARDING.md#dwp-v6-host-and-authority-records) and the [outcome/test map](docs/TESTING_GUIDE.md#selecting-a-gate-for-a-change).
+DWP standard: 7.0.0 (onboarded 2026-09-11; upgraded 2026-09-13, 2026-09-17, 2026-09-25, 2026-09-28, 2026-10-01 and 2026-10-09; skill 7.1.0, vendored 2026-10-10). New plans use the v7 contract by default; existing plans retain their recorded generation and require an explicit request for migration. V6 host baseline: all eight capabilities (`stop_agent`, `meter_spend`, `meter_tokens`, `meter_wall_clock`, `cancel_children`, `model_routing`, `subagents`, `telemetry`) are `false` unless runtime support is verified; telemetry also requires consent. Developers authorize plans and work. Stop before a `main` push/deployment, publication, external messages or secret access unless authorized; prior authorization persists. See [v6 host and authority records](docs/AI_AGENT_ONBOARDING.md#dwp-v6-host-and-authority-records) and the [outcome/test map](docs/TESTING_GUIDE.md#selecting-a-gate-for-a-change).
 
 ## Quick Commands
 
