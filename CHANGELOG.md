@@ -9,6 +9,12 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.41] - 2026-10-10
+
+### Changed
+
+- ci: bump actions/checkout from 4 to 7
+
 ## [5.0.40] - 2026-10-10
 
 ### Changed
@@ -1134,7 +1140,8 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.40...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.41...HEAD
+[5.0.41]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.41
 [5.0.40]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.40
 [5.0.39]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.39
 [5.0.38]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.38
