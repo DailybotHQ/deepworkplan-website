@@ -30,22 +30,22 @@ const products = [
     key: 'agentkit',
     product: 'coding-agents-kit',
     repo: 'https://github.com/DailybotHQ/coding-agents-kit',
-    tag: 'v0.1.1',
+    tag: 'v0.3.0',
   },
   {
     key: 'devcontainer',
     product: 'devcontainer-kit',
     repo: 'https://github.com/DailybotHQ/devcontainer-kit',
-    tag: 'v0.1.4',
+    tag: 'v0.2.2',
   },
   {
     key: 'vim',
     product: 'deepworkplan-vim',
     repo: 'https://github.com/DailybotHQ/deepworkplan-vim',
-    tag: 'v0.4.2',
+    tag: 'v0.5.1',
   },
 ] as const;
-const packTag = 'v7.0.0';
+const packTag = 'v7.1.4';
 
 const i18n = {
   en: {
@@ -59,8 +59,8 @@ const i18n = {
     pinLabel: 'Pinned at',
     roles: [
       'Peers in Herdr panes, on any machine: interactive delegation with one authorized reply.',
-      'One ak command for every terminal coding agent: headless delegation in a worktree.',
-      'A Dev Containers template and base images that ship without coding agents.',
+      'One ak command for every terminal coding agent: autonomy by default with an opt-out, and headless delegation in a worktree.',
+      "Each repository's own dev container from one template: agents through ak, Herdr both ways, no SSH key inside.",
       'The terminal editor, with a read-only plan browser and a Markdown viewer.',
     ],
     packNote: 'The addon registry and descriptors ship in Deep Work Plan v7:',
@@ -76,8 +76,8 @@ const i18n = {
     pinLabel: 'Fijado en',
     roles: [
       'Pares en paneles de Herdr, en cualquier máquina: delegación interactiva con una única respuesta autorizada.',
-      'Un solo comando ak para cada agente de programación en terminal: delegación sin interfaz en un worktree.',
-      'Una plantilla de Dev Containers e imágenes base que se distribuyen sin agentes de programación.',
+      'Un solo comando ak para cada agente de programación en terminal: autonomía por defecto con una exclusión, y delegación sin interfaz en un worktree.',
+      'El contenedor de desarrollo propio de cada repositorio desde una sola plantilla: agentes a través de ak, Herdr en ambos sentidos, ninguna clave SSH dentro.',
       'El editor de terminal, con un explorador de planes de solo lectura y un visor de Markdown.',
     ],
     packNote:
@@ -94,8 +94,8 @@ const i18n = {
     pinLabel: 'Fixado em',
     roles: [
       'Pares em painéis do Herdr, em qualquer máquina: delegação interativa com uma única resposta autorizada.',
-      'Um único comando ak para cada agente de programação no terminal: delegação sem interface em uma worktree.',
-      'Um template de Dev Containers e imagens base distribuídos sem agentes de programação.',
+      'Um único comando ak para cada agente de programação no terminal: autonomia por padrão com opt-out, e delegação sem interface em uma worktree.',
+      'O contêiner de desenvolvimento próprio de cada repositório a partir de um único template: agentes via ak, Herdr nos dois sentidos, nenhuma chave SSH dentro.',
       'O editor de terminal, com um navegador de planos somente leitura e um visualizador de Markdown.',
     ],
     packNote:
@@ -111,8 +111,8 @@ const i18n = {
     pinLabel: '固定于',
     roles: [
       '在任意机器上的 Herdr 窗格中协作的对等方：交互式委派，仅允许一次经授权的回复。',
-      '一个 ak 命令适用于所有终端编码代理：在 worktree 中进行无界面委派。',
-      '一个 Dev Containers 模板及基础镜像，不附带任何编码代理。',
+      '一个 ak 命令适用于所有终端编码代理：默认自主运行并可选择退出，并在 worktree 中进行无界面委派。',
+      '用一个模板生成每个仓库自己的开发容器：代理经由 ak 运行，Herdr 双向互通，容器内不存放 SSH 密钥。',
       '终端编辑器，带有只读的计划浏览器和 Markdown 查看器。',
     ],
     packNote: '附加组件注册表和描述文件随 Deep Work Plan v7 发布：',
@@ -128,8 +128,8 @@ const i18n = {
     pinLabel: '固定バージョン',
     roles: [
       '任意のマシン上の Herdr ペインにいるピア：認可された返信を一つだけ受け取る対話型委任。',
-      'あらゆるターミナル型コーディングエージェントに使える一つの ak コマンド：worktree 内でのヘッドレス委任。',
-      'コーディングエージェントを含まずに提供される Dev Containers テンプレートとベースイメージ。',
+      'あらゆるターミナル型コーディングエージェントに使える一つの ak コマンド：デフォルトで自律実行（オプトアウト可）、そして worktree 内でのヘッドレス委任。',
+      '一つのテンプレートから作る、リポジトリごとの開発コンテナ：エージェントは ak 経由、Herdr は双方向、内部に SSH 鍵なし。',
       '読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。',
     ],
     packNote:
@@ -146,8 +146,8 @@ const i18n = {
     pinLabel: 'Fixiert auf',
     roles: [
       'Peers in Herdr-Panes, auf jeder Maschine: interaktive Delegation mit genau einer autorisierten Antwort.',
-      'Ein einziger Befehl ak für jeden Terminal-Coding-Agenten: Headless-Delegation in einem Worktree.',
-      'Eine Vorlage für Dev Containers und Basis-Images, die ohne Coding-Agenten ausgeliefert werden.',
+      'Ein einziger Befehl ak für jeden Terminal-Coding-Agenten: Autonomie standardmäßig mit einem Opt-out und Headless-Delegation in einem Worktree.',
+      'Der eigene Dev-Container jedes Repositorys aus einer einzigen Vorlage: Agenten über ak, Herdr in beide Richtungen, kein SSH-Schlüssel im Container.',
       'Der Terminal-Editor, mit einem schreibgeschützten Plan-Browser und einem Markdown-Viewer.',
     ],
     packNote:
@@ -164,8 +164,8 @@ const i18n = {
     pinLabel: 'Épinglé à',
     roles: [
       'Des pairs dans des panneaux Herdr, sur n’importe quelle machine : délégation interactive avec une seule réponse autorisée.',
-      'Une seule commande ak pour chaque agent de code en terminal : délégation sans interface dans un worktree.',
-      'Un modèle Dev Containers et des images de base distribués sans agents de code.',
+      'Une seule commande ak pour chaque agent de code en terminal : autonomie par défaut avec possibilité de retrait, et délégation sans interface dans un worktree.',
+      'Le conteneur de développement propre à chaque dépôt, issu d’un seul modèle : agents via ak, Herdr dans les deux sens, aucune clé SSH à l’intérieur.',
       'L’éditeur de terminal, avec un navigateur de plans en lecture seule et une visionneuse Markdown.',
     ],
     packNote:
@@ -182,8 +182,8 @@ const i18n = {
     pinLabel: '고정 버전',
     roles: [
       '어떤 머신에서든 Herdr 페인에 있는 피어: 승인된 응답 한 번으로 이루어지는 대화형 위임.',
-      '모든 터미널 코딩 에이전트를 위한 하나의 ak 명령: worktree에서의 헤드리스 위임.',
-      '코딩 에이전트 없이 제공되는 Dev Containers 템플릿과 베이스 이미지.',
+      '모든 터미널 코딩 에이전트를 위한 하나의 ak 명령: 기본은 자율 실행(옵트아웃 가능), 그리고 worktree에서의 헤드리스 위임.',
+      '하나의 템플릿으로 만드는 리포지토리별 개발 컨테이너: 에이전트는 ak로, Herdr는 양방향, 내부에 SSH 키 없음.',
       '읽기 전용 계획 브라우저와 Markdown 뷰어를 갖춘 터미널 편집기.',
     ],
     packNote:
@@ -200,8 +200,8 @@ const i18n = {
     pinLabel: 'Закреплено на',
     roles: [
       'Peer-агенты в панелях Herdr на любой машине: интерактивное делегирование с одним авторизованным ответом.',
-      'Одна команда ak для любого терминального агента для кода: делегирование без интерфейса в worktree.',
-      'Шаблон Dev Containers и базовые образы, поставляемые без агентов для программирования.',
+      'Одна команда ak для любого терминального агента для кода: автономия по умолчанию с возможностью отказа и делегирование без интерфейса в worktree.',
+      'Собственный dev-контейнер каждого репозитория из одного шаблона: агенты через ak, Herdr в обе стороны, без SSH-ключа внутри.',
       'Терминальный редактор с браузером планов только для чтения и просмотрщиком Markdown.',
     ],
     packNote:
@@ -218,8 +218,8 @@ const i18n = {
     pinLabel: 'Fissato a',
     roles: [
       'Peer in pannelli Herdr, su qualsiasi macchina: delega interattiva con una sola risposta autorizzata.',
-      'Un solo comando ak per ogni agente di codice da terminale: delega headless in un worktree.',
-      'Un template Dev Containers e immagini di base distribuiti senza agenti di codice.',
+      'Un solo comando ak per ogni agente di codice da terminale: autonomia predefinita con opt-out, e delega headless in un worktree.',
+      'Il container di sviluppo proprio di ogni repository da un unico template: agenti tramite ak, Herdr in entrambi i sensi, nessuna chiave SSH all’interno.',
       'L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown.',
     ],
     packNote:
@@ -236,8 +236,8 @@ const i18n = {
     pinLabel: 'Sabitlenen sürüm',
     roles: [
       'Herhangi bir makinede Herdr panellerindeki eşler: tek bir yetkili yanıtla etkileşimli devretme.',
-      'Her terminal kodlama ajanı için tek bir ak komutu: bir worktree içinde başsız devretme.',
-      'Kodlama ajanları olmadan sunulan bir Dev Containers şablonu ve temel imajlar.',
+      'Her terminal kodlama ajanı için tek bir ak komutu: devre dışı bırakılabilen varsayılan özerklik ve bir worktree içinde başsız devretme.',
+      'Tek bir şablondan her deponun kendi geliştirme konteyneri: ajanlar ak üzerinden, iki yönlü Herdr, içeride SSH anahtarı yok.',
       'Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi.',
     ],
     packNote:
@@ -254,8 +254,8 @@ const i18n = {
     pinLabel: 'Dipatok pada',
     roles: [
       'Rekan di panel Herdr, di mesin mana pun: delegasi interaktif dengan satu balasan yang diotorisasi.',
-      'Satu perintah ak untuk setiap coding agent di terminal: delegasi headless di dalam worktree.',
-      'Template Dev Containers dan image dasar yang dikirimkan tanpa coding agent.',
+      'Satu perintah ak untuk setiap coding agent di terminal: otonomi secara default dengan opt-out, dan delegasi headless di dalam worktree.',
+      'Dev container milik setiap repositori dari satu template: agen melalui ak, Herdr dua arah, tanpa kunci SSH di dalamnya.',
       'Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown.',
     ],
     packNote:
@@ -272,8 +272,8 @@ const i18n = {
     pinLabel: 'Ghim tại',
     roles: [
       'Các agent ngang hàng trong các pane của Herdr, trên bất kỳ máy nào: ủy thác tương tác với đúng một phản hồi được ủy quyền.',
-      'Một lệnh ak duy nhất cho mọi agent lập trình trên terminal: ủy thác headless trong một worktree.',
-      'Một template Dev Containers và các image cơ sở được phân phối không kèm agent lập trình.',
+      'Một lệnh ak duy nhất cho mọi agent lập trình trên terminal: tự chủ theo mặc định với lựa chọn opt-out, và ủy thác headless trong một worktree.',
+      'Dev container riêng của mỗi repository từ một template: agent qua ak, Herdr hai chiều, không có khóa SSH bên trong.',
       'Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown.',
     ],
     packNote:
@@ -290,8 +290,8 @@ const i18n = {
     pinLabel: 'पिन किया गया',
     roles: [
       'किसी भी मशीन पर Herdr पेन में पीयर: एक अधिकृत उत्तर के साथ इंटरैक्टिव डेलिगेशन।',
-      'हर टर्मिनल कोडिंग एजेंट के लिए एक ak कमांड: worktree में हेडलेस डेलिगेशन।',
-      'एक Dev Containers टेम्पलेट और बेस इमेज, जो कोडिंग एजेंट के बिना आते हैं।',
+      'हर टर्मिनल कोडिंग एजेंट के लिए एक ak कमांड: opt-out के साथ डिफ़ॉल्ट स्वायत्तता, और worktree में हेडलेस डेलिगेशन।',
+      'एक टेम्पलेट से हर रिपॉज़िटरी का अपना dev container: ak के ज़रिए एजेंट, दोनों दिशाओं में Herdr, भीतर कोई SSH कुंजी नहीं।',
       'टर्मिनल एडिटर, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर के साथ।',
     ],
     packNote: 'ऐडऑन रजिस्ट्री और डिस्क्रिप्टर Deep Work Plan v7 में आते हैं:',
@@ -307,8 +307,8 @@ const i18n = {
     pinLabel: 'Przypięty do',
     roles: [
       'Równorzędni agenci w panelach Herdr, na dowolnej maszynie: interaktywne delegowanie z jedną autoryzowaną odpowiedzią.',
-      'Jedno polecenie ak dla każdego terminalowego agenta kodującego: delegowanie bez interfejsu w worktree.',
-      'Szablon Dev Containers i obrazy bazowe dostarczane bez agentów kodujących.',
+      'Jedno polecenie ak dla każdego terminalowego agenta kodującego: autonomia domyślnie z możliwością rezygnacji i delegowanie bez interfejsu w worktree.',
+      'Własny kontener deweloperski każdego repozytorium z jednego szablonu: agenci przez ak, Herdr w obie strony, bez klucza SSH w środku.',
       'Edytor terminalowy z przeglądarką planów tylko do odczytu i podglądem Markdown.',
     ],
     packNote:
@@ -325,8 +325,8 @@ const i18n = {
     pinLabel: 'Закріплено на',
     roles: [
       'Peer-агенти в панелях Herdr на будь-якій машині: інтерактивне делегування з однією авторизованою відповіддю.',
-      'Одна команда ak для кожного термінального агента для програмування: делегування без інтерфейсу у worktree.',
-      'Шаблон Dev Containers і базові образи, що постачаються без агентів для коду.',
+      'Одна команда ak для кожного термінального агента для програмування: автономія за замовчуванням із можливістю відмови та делегування без інтерфейсу у worktree.',
+      'Власний dev-контейнер кожного репозиторію з одного шаблону: агенти через ak, Herdr в обидва боки, без SSH-ключа всередині.',
       'Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown.',
     ],
     packNote: 'Реєстр аддонів і дескриптори постачаються в Deep Work Plan v7:',
@@ -341,8 +341,8 @@ const i18n = {
     pinLabel: 'ปักหมุดที่',
     roles: [
       'peer ใน pane ของ Herdr บนเครื่องใดก็ได้: การมอบหมายงานแบบโต้ตอบที่มีการตอบกลับที่ได้รับอนุญาตเพียงครั้งเดียว',
-      'คำสั่ง ak เดียวสำหรับเอเจนต์เขียนโค้ดบนเทอร์มินัลทุกตัว: การมอบหมายงานแบบ headless ใน worktree',
-      'เทมเพลต Dev Containers และอิมเมจพื้นฐานที่จัดส่งโดยไม่มีเอเจนต์เขียนโค้ด',
+      'คำสั่ง ak เดียวสำหรับเอเจนต์เขียนโค้ดบนเทอร์มินัลทุกตัว: ทำงานอัตโนมัติโดยค่าเริ่มต้นพร้อมทางเลือกปิด และการมอบหมายงานแบบ headless ใน worktree',
+      'dev container ของแต่ละ repository จากเทมเพลตเดียว: เอเจนต์ผ่าน ak, Herdr สองทาง และไม่มี SSH key อยู่ข้างใน',
       'ตัวแก้ไขบนเทอร์มินัล พร้อมตัวเรียกดูแผนแบบอ่านอย่างเดียวและตัวแสดงผล Markdown',
     ],
     packNote: 'รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาใน Deep Work Plan v7:',

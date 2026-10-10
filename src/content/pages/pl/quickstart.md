@@ -97,7 +97,7 @@ oraz dziewięć sub-skilli — `create`, `execute`, `refine`, `resume`, `status`
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
 ```
 
 Lub zainstaluj przez OpenClaw:
@@ -119,7 +119,7 @@ zainstalowaną powyżej wersję skilla Deep Work Plan. Aktualny pakiet skilla ob
 router oraz dziewięć pod-skilli: `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author` i `upgrade`.
 
-Zainstalowana wersja skilla: **7.0.1**. Aktualny pakiet 7.x domyślnie tworzy nowe plany w v7. Istniejące plany zachowują zapisaną generację; przeniesienie planu v5 do v6 wymaga jawnej migracji z podglądem.
+Zainstalowana wersja skilla: **7.1.4**. Aktualny pakiet 7.x domyślnie tworzy nowe plany w v7. Istniejące plany zachowują zapisaną generację; przeniesienie planu v5 do v6 wymaga jawnej migracji z podglądem.
 
 Standard jest celowo proporcjonalny i czyni tę proporcjonalność właściwością planu,
 a nie dyscypliny dewelopera. Plan jest albo **Lite** — rekordy zadań inline w README
@@ -200,7 +200,7 @@ agentkit, Herdr, DeepWorkPlan Vim) i zaproponuj każdy jako wyraźną opcję do 
 akceptację w `.dwp/config.json`. Repozytorium jest w pełni zgodne przy **zerowej** liczbie opcjonalnych
 dodatków — nigdy nie instaluj ich automatycznie.
 
-- **Wsparcie devcontainera** — lekki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty do `v0.1.4`): `dck init` renderuje szablon Dev Containers i uzgadnia istniejący devcontainer dopiero po zaakceptowaniu jego diffu; obrazy bazowe są dostarczane bez agentów kodujących.
+- **Wsparcie devcontainera** — lekki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty do `v0.2.2`, wraz z jego skillem `dck-dockerfile`): `dck init` renderuje własny kontener repozytorium — oficjalny obraz przypięty przez digest, bez wspólnego obrazu bazowego, `bash dev.sh up` — i uzgadnia istniejący devcontainer dopiero po zaakceptowaniu jego diffu; agenci kodujący to warstwa opt-in.
 - **Integracja z Dailybot** — cztery zdarzenia cyklu życia (kickoff, istotne zadanie, blokada, zakończenie) jako raporty postępu w trybie najlepszego wysiłku dla zespołów już korzystających z Dailybot, z opcjonalnym autonomicznym wymuszaniem hooków (`dailybot-cli >= 3.9.0`). Instalacja sparowanego skilla agenta Dailybot (3.23.3) udostępnia również czat, check-iny, tworzenie formularzy, pytanie AI, tablice i zadania Plan, klucze API per-repo i więcej — dodatek łączy jedynie raportowanie z wykonywaniem DWP. Podstawowa metodyka nie ma żadnej zależności od Dailybot.
 - **Dependency upgrade** — aktualizacje niezależne od menedżera pakietów: partiami, zwalidowane i odwracalne. Po
   zaakceptowaniu instaluje komendę `/lib-upgrade`.
@@ -208,9 +208,9 @@ dodatków — nigdy nie instaluj ich automatycznie.
   (nie jest oferowany dla czystych bibliotek, usług headless ani repozytoriów wyłącznie infrastrukturalnych). Trzy
   profile nakładają się w jednym pliku: visual-ui (zdecydowanie zalecany po wykryciu; instalacja uzależniona od akceptacji), cli-output i konwersacyjny —
   dwa ostatnie zawsze są pytane, nigdy auto-stosowane.
-- **agentkit** — instalacja na poziomie maszyny [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty do `v0.1.1`) dla planów, które przekazują ograniczone zadania `parallel_safe` innym agentom kodującym (headless, jedno `ak run` na delegata w jego własnym worktree); flagi autonomii nigdy nie są dodawane domyślnie.
+- **agentkit** — instalacja na poziomie maszyny [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty do `v0.3.0`) dla planów, które przekazują ograniczone zadania `parallel_safe` innym agentom kodującym (headless, jedno `ak run` na delegata w jego własnym worktree); kit domyślnie uruchamia agentów w trybie autonomii, a jego rezygnacja (`--ask` lub `AGENTKIT_PERMISSIONS=ask`) zawsze wygrywa.
 - **Herdr** — instalacja na poziomie maszyny [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przypięty do `v0.1.0`, plus oficjalna skill Herdr) dla planów, które proszą agenta równorzędnego w panelu Herdr, na dowolnej maszynie, o jedną autoryzowaną odpowiedź.
-- **DeepWorkPlan Vim** — edytor terminalowy ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), przypięty do `v0.4.2`), instalacja na poziomie maszyny, która nigdy nie nadpisuje istniejącej konfiguracji Neovima bez wyraźnej zgody.
+- **DeepWorkPlan Vim** — edytor terminalowy ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), przypięty do `v0.5.1`), instalacja na poziomie maszyny, która nigdy nie nadpisuje istniejącej konfiguracji Neovima bez wyraźnej zgody.
 - **AI Diff Reviewer** — wymagany przegląd lokalny (nie opcja do wyboru): przegląd bezpieczeństwa każdego Final Review uruchamia [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + wymagany `.review/extension.md`) na skumulowanym zestawie zmian planu. Brakująca skill lub rozszerzenie to zapisane znalezisko `local reviewer not installed` — nigdy ciche pominięcie i nigdy zaskakujący bootstrap: instalacja należy do zgody onboardingu albo jawnego wywołania addonu; błędy wywołania kończą się soft-failem; wyniki **krytyczne zweryfikowane** z zakończonego przebiegu nadal blokują ukończenie (v3, BC-07 — niezweryfikowane twierdzenia krytyczne pojawiają się jako adnotowane ostrzeżenia, a przegląd `incomplete`/`timeout` nie jest czystym przebiegiem, BC-04). **Flow B** (bramka CI z `pr-review.yml`) jest proponowany jako wyraźna opcja do wyboru i nigdy nie jest instalowany bez prośby. Żaden przepływ Deep Work Plan nie wymaga komercyjnej usługi, dostawcy CI ani sekretu.
 
 ## 5. Rozwijaj kit (sub-skill author)

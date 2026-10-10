@@ -10,7 +10,7 @@ O kit é tudo o que você precisa para executar a metodologia na prática. Ele �
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
 ```
 
 O pacote 7.x atual cria novos planos com v7 por padrão. Os planos existentes mantêm a geração registrada; a migração exige uma solicitação explícita.
@@ -66,11 +66,11 @@ Capacidades que o fluxo de onboarding adiciona a um repositório. Sete são opci
 
 - **Skill do Deep Work Plan** — Cria, executa, verifica, retoma e refina planos. Não precisa de nenhum addon.
 - **[herdr](/pt/kit/herdr)** — Pares em painéis do Herdr, em qualquer máquina: delegação interativa com uma única resposta autorizada. Fixado em `herdr-peers@v0.1.0`.
-- **[agentkit](/pt/kit/agentkit)** — Um único comando ak para cada agente de programação no terminal: delegação sem interface em uma worktree. Fixado em `coding-agents-kit@v0.1.1`.
-- **[devcontainer](/pt/kit/devcontainer)** — Um template de Dev Containers e imagens base distribuídos sem agentes de programação. Fixado em `devcontainer-kit@v0.1.4`.
-- **[vim](/pt/kit/vim)** — O editor de terminal, com um navegador de planos somente leitura e um visualizador de Markdown. Fixado em `deepworkplan-vim@v0.4.2`.
+- **[agentkit](/pt/kit/agentkit)** — Um único comando ak para cada agente de programação no terminal: autonomia por padrão com opt-out, e delegação sem interface em uma worktree. Fixado em `coding-agents-kit@v0.3.0`.
+- **[devcontainer](/pt/kit/devcontainer)** — O contêiner de desenvolvimento próprio de cada repositório a partir de um único template: agentes via ak, Herdr nos dois sentidos, nenhuma chave SSH dentro. Fixado em `devcontainer-kit@v0.2.2`.
+- **[vim](/pt/kit/vim)** — O editor de terminal, com um navegador de planos somente leitura e um visualizador de Markdown. Fixado em `deepworkplan-vim@v0.5.1`.
 
-O registro de addons e os descritores são distribuídos no Deep Work Plan v7: `v7.0.0`
+O registro de addons e os descritores são distribuídos no Deep Work Plan v7: `v7.1.4`
 
 ### Exemplos
 

@@ -31,11 +31,11 @@ Eight addons ship today — seven opt-in plus the required local review. Each ha
 
 ### Devcontainer (first addon)
 
-A thin integrator of [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, pinned `v0.1.4`): a Dev Containers template that `dck init` renders into the repository.
+A thin integrator of [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, pinned `v0.2.2`, interface `2`): a Dev Containers template that `dck init` renders into the repository as its own container, plus the `dck-dockerfile` skill.
 
 - **Kit page:** [Devcontainer](/kit/devcontainer)
-- **What it adds:** the `dck` launcher (`setup`, `up`, `shell`, `ssh`, `doctor`), base images in `python-3.13`, `node-24` and `debian` flavours that ship without coding agents (agents are an opt-in layer), loopback-only ports, SSH agent forwarding, and optional Herdr machines per container
-- **Behavior:** detected through `dck doctor --json` (interface 1); `dck init` reconciles an existing devcontainer only after its diff is accepted, and backs the file up first — never clobbered
+- **What it adds:** `docker/local/<service>/Dockerfile` from the runtime's official image pinned by digest (`python-3.13`, `node-24` or `debian`, no shared base image), `dev.sh` over the `dck` launcher (`up`, `shell`, `rebuild`, `doctor`), coding agents as an opt-in layer, loopback-only ports, git over SSH through the host's agent with no key inside, and Herdr machines per container with the standard layout
+- **Behavior:** detected through `dck doctor --json` (interface 2); `dck init` reconciles an existing devcontainer only after its diff is accepted, and backs the file up first — never clobbered
 - **When offered:** most repos with Docker or services that benefit from an isolated dev container
 
 ### Dailybot (second addon)
@@ -91,7 +91,7 @@ A thin integrator of [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (p
 
 ### DeepWorkPlan Vim (seventh addon)
 
-A thin integrator of [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (pinned `v0.4.2`, interface `1`), the terminal editor for Deep Work Plan (Neovim 0.12+).
+A thin integrator of [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (pinned `v0.5.1`, interface `1`), the terminal editor for Deep Work Plan (Neovim 0.12+).
 
 - **Kit page:** [DeepWorkPlan Vim](/kit/vim)
 - **What it adds:** an optional, machine-level editor surface for agents and humans — a generated command index, a read-only plan browser, and a Markdown viewer; every claim is read from the product's pinned machine-readable surface
@@ -100,11 +100,11 @@ A thin integrator of [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkpl
 
 ### Agentkit (eighth addon)
 
-A thin integrator of [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, pinned `v0.1.1`, interface `1`), the **headless** delegation transport of v7 plans.
+A thin integrator of [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, pinned `v0.3.0`, interface `1`), the **headless** delegation transport of v7 plans.
 
 - **Kit page:** [Agentkit](/kit/agentkit)
 - **What it adds:** one `ak` command surface over terminal coding agents, used to run a bounded plan task headlessly; it contributes the `subagents`, `cancel_children`, and `model_routing` abilities only at runtime, when enabled, detected, and on a compatible interface
-- **Behavior:** any use needs the contract grant `agent_delegation`; the addon never installs coding-agent CLIs on its own and never reads provider key values
+- **Behavior:** any use needs the contract grant `agent_delegation`; the kit launches agents in autonomy by default and its opt-out (`--ask` or `AGENTKIT_PERMISSIONS=ask`) always wins — the addon spells no autonomy flag, passes `--ask` when the plan records the opt-out and always for read-only delegates; it never installs coding-agent CLIs on its own and never reads provider key values
 - **When offered:** explicit opt-in during Phase 7b; read-only detection through `ak doctor --json`
 
 ## Skills

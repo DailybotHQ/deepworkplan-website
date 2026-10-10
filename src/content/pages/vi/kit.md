@@ -10,7 +10,7 @@ Bộ kit là mọi thứ bạn cần để chạy phương pháp luận trong th
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
 ```
 
 Gói 7.x hiện tại mặc định tạo kế hoạch mới bằng v7. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; di chuyển cần yêu cầu rõ ràng.
@@ -66,11 +66,11 @@ Các năng lực mà luồng onboard bổ sung vào một repo. Bảy addon là 
 
 - **Skill Deep Work Plan** — Tạo, thực thi, xác minh, tiếp tục và tinh chỉnh kế hoạch. Không cần addon nào.
 - **[herdr](/vi/kit/herdr)** — Các agent ngang hàng trong các pane của Herdr, trên bất kỳ máy nào: ủy thác tương tác với đúng một phản hồi được ủy quyền. Ghim tại `herdr-peers@v0.1.0`.
-- **[agentkit](/vi/kit/agentkit)** — Một lệnh ak duy nhất cho mọi agent lập trình trên terminal: ủy thác headless trong một worktree. Ghim tại `coding-agents-kit@v0.1.1`.
-- **[devcontainer](/vi/kit/devcontainer)** — Một template Dev Containers và các image cơ sở được phân phối không kèm agent lập trình. Ghim tại `devcontainer-kit@v0.1.4`.
-- **[vim](/vi/kit/vim)** — Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown. Ghim tại `deepworkplan-vim@v0.4.2`.
+- **[agentkit](/vi/kit/agentkit)** — Một lệnh ak duy nhất cho mọi agent lập trình trên terminal: tự chủ theo mặc định với lựa chọn opt-out, và ủy thác headless trong một worktree. Ghim tại `coding-agents-kit@v0.3.0`.
+- **[devcontainer](/vi/kit/devcontainer)** — Dev container riêng của mỗi repository từ một template: agent qua ak, Herdr hai chiều, không có khóa SSH bên trong. Ghim tại `devcontainer-kit@v0.2.2`.
+- **[vim](/vi/kit/vim)** — Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown. Ghim tại `deepworkplan-vim@v0.5.1`.
 
-Registry addon và các descriptor được phân phối trong Deep Work Plan v7: `v7.0.0`
+Registry addon và các descriptor được phân phối trong Deep Work Plan v7: `v7.1.4`
 
 ### Ví dụ
 

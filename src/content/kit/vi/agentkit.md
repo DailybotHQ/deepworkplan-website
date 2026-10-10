@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "Addon v7 tùy chọn dựa trên coding-agents-kit: một lệnh ak cho mọi coding agent trên terminal, và ủy thác headless các tác vụ có giới hạn trong kế hoạch."
+description: "Addon v7 tùy chọn dựa trên coding-agents-kit: một lệnh ak cho mọi coding agent trên terminal, tự chủ theo mặc định với lựa chọn opt-out, và ủy thác headless."
 kind: addon
 lang: vi
 order: 8
@@ -10,7 +10,7 @@ order: 8
 
 Mỗi coding agent trên terminal đều có các cờ riêng để tiếp tục một phiên, cách riêng để tách biệt tài khoản thứ hai, chế độ headless riêng và công tắc riêng để bỏ qua các lời nhắc cấp quyền. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** đặt một bề mặt lệnh duy nhất lên tất cả chúng: `ak <kind> [@profile]`.
 
-Addon này tích hợp bộ kit vào **DWP v7** (`v7.0.0`) làm phương thức truyền ủy thác **headless**. Addon là tùy chọn: khi không có nó, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây. Bản thân bộ kit là một sản phẩm MIT hoạt động được mà không cần Deep Work Plan.
+Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.1.4`) làm phương thức truyền ủy thác **headless**. Addon là tùy chọn: khi không có nó, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây. Bản thân bộ kit là một sản phẩm MIT hoạt động được mà không cần Deep Work Plan.
 
 ## Bộ kit mang lại cho bạn những gì
 
@@ -18,30 +18,33 @@ Addon này tích hợp bộ kit vào **DWP v7** (`v7.0.0`) làm phương thức 
 - **Hồ sơ.** `ak claude @work` chạy một tài khoản thứ hai trong thư mục home riêng, tách biệt với tài khoản thứ nhất.
 - **Chạy headless.** `ak run <kind> -- "<prompt>"` chạy một prompt ở chế độ không tương tác và trả về một mã thoát đã được tài liệu hóa, tùy chọn dưới dạng một đối tượng JSON duy nhất.
 - **Công cụ chẩn đoán.** `ak doctor --json` báo cáo những CLI nào đã được cài, các hồ sơ, và tên của các khóa đã được thiết lập — không bao giờ là giá trị của chúng.
-- **Cài đặt.** `ak install <cli>` cài một CLI còn thiếu từ kênh chính thức của nhà cung cấp.
+- **Cài đặt có xác minh.** `ak install <cli>` cài một CLI còn thiếu từ kênh chính thức của nhà cung cấp ở một phiên bản được ghim, đối chiếu với một sha256 được ghim hoặc thông tin integrity của npm registry.
+- **Những cái tên quen thuộc.** Hai preset bí danh, ở trạng thái tắt cho đến khi bạn bật: `classic` (`claudex`, `codexx`, `cursorx`, `opencodex`, `pix`, `clinex`, `grokx`) và `providers` (`claude-glm`, `codex-azure`, `codex-xai`, `pi-glm`, …), mỗi bí danh là một lệnh `ak <kind>`.
 
 ## Cài đặt
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v0.1.1`: bản này thay thế `v0.1.0` và mang một bản sửa lỗi bảo mật. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
+Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v0.3.0`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v0.1.1`, giao diện 1 |
+| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v0.3.0`, giao diện 1 |
 | Khóa registry | `agentkit` trong `.dwp/config.json` |
 | Phương thức truyền | headless: một `ak run` cho mỗi agent được ủy thác, trong một git worktree riêng |
 | Cung cấp | `subagents`, `cancel_children`, `model_routing` |
 | Yêu cầu | quyền `agent_delegation` trong hợp đồng của kế hoạch |
 
-## Quyền hạn được chuyển nguyên trạng
+## Tự chủ theo mặc định, với lựa chọn opt-out luôn được ưu tiên
 
-`ak <kind>` **không** thêm cờ bỏ qua quyền nào. Quyền tự chủ là một lựa chọn opt-in tường minh: `--auto` trên một lệnh, hoặc `AGENTKIT_PERMISSIONS=auto` trong môi trường, sẽ thêm cờ tự chủ của chính CLI đó cho lần khởi chạy ấy. Preset bí danh `classic`, vốn tạo lại các lối tắt như `claudex`, được phát hành ở trạng thái tắt.
+Kể từ `v0.2.0`, `ak <kind>` khởi chạy mọi agent ở chế độ **tự chủ**: nó thêm cờ tự chủ của chính CLI đó, chỉ được lưu trong tệp `providers.toml` của bộ kit. Chế độ tự chủ dành cho các môi trường dùng một lần hoặc có sandbox, chẳng hạn một dev container.
 
-Addon không bao giờ tự ý thêm cờ tự chủ. Một kế hoạch chỉ dùng `--auto` khi nhà phát triển opt-in một cách tường minh và có ghi nhận, và chỉ bên trong một worktree hoặc container cô lập.
+**Opt-out luôn được ưu tiên**: `--ask` trên một lệnh, hoặc `AGENTKIT_PERMISSIONS=ask` trong môi trường hay trong tệp env của bộ kit, sẽ chặn cờ đó ngay cả khi cùng lệnh có `--auto`. Một phiên đã opt-out sẽ truyền opt-out đó sang các agent mà nó khởi chạy. Trên máy host, hãy thiết lập opt-out.
+
+Addon không tự viết ra cờ tự chủ nào và không bao giờ truyền `--auto`. Nó truyền `--ask` khi một kế hoạch ghi nhận opt-out. Một kế hoạch cấp quyền `agent_delegation` trên máy host chấp nhận các agent được ủy thác chạy tự chủ, bị giới hạn trong worktree riêng của chúng — vốn không phải là một sandbox.
 
 ## Addon bổ sung gì cho một kế hoạch
 

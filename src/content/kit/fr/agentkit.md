@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "Un addon v7 facultatif fondé sur coding-agents-kit : une seule commande ak pour chaque agent de code en terminal et la délégation headless de tâches délimitées."
+description: "Addon v7 facultatif fondé sur coding-agents-kit : une commande ak pour chaque agent de code en terminal, autonomie par défaut avec retrait, délégation headless."
 kind: addon
 lang: fr
 order: 8
@@ -10,7 +10,7 @@ order: 8
 
 Chaque agent de code en terminal a ses propres options pour reprendre une session, sa propre manière d’isoler un second compte, son propre mode headless et son propre interrupteur pour ignorer les demandes d’autorisation. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** place une seule surface de commandes au-dessus de tous : `ak <kind> [@profile]`.
 
-Cet addon intègre le kit dans **DWP v7** (`v7.0.0`) comme transport de délégation **headless**. Il est facultatif : sans lui, chaque tâche s’exécute dans la session courante, exactement comme avant. Le kit lui-même est un produit MIT qui fonctionne sans Deep Work Plan.
+Cet addon intègre le kit dans **DWP v7** (pack `v7.1.4`) comme transport de délégation **headless**. Il est facultatif : sans lui, chaque tâche s’exécute dans la session courante, exactement comme avant. Le kit lui-même est un produit MIT qui fonctionne sans Deep Work Plan.
 
 ## Ce que vous apporte le kit
 
@@ -18,30 +18,33 @@ Cet addon intègre le kit dans **DWP v7** (`v7.0.0`) comme transport de déléga
 - **Des profils.** `ak claude @work` exécute un second compte dans son propre répertoire personnel, séparé du premier.
 - **Des exécutions headless.** `ak run <kind> -- "<prompt>"` exécute un prompt de manière non interactive et renvoie un code de sortie documenté, éventuellement sous la forme d’un unique objet JSON.
 - **Un diagnostic.** `ak doctor --json` indique quelles CLI sont installées, les profils, et les noms des clés définies — jamais leurs valeurs.
-- **Des installations.** `ak install <cli>` installe une CLI manquante depuis le canal officiel de son éditeur.
+- **Des installations vérifiées.** `ak install <cli>` installe une CLI manquante depuis le canal officiel de son éditeur, dans une version épinglée, contrôlée par un sha256 épinglé ou par l’intégrité du registre npm.
+- **Des noms familiers.** Deux presets d’alias, désactivés tant que vous ne les activez pas : `classic` (`claudex`, `codexx`, `cursorx`, `opencodex`, `pix`, `clinex`, `grokx`) et `providers` (`claude-glm`, `codex-azure`, `codex-xai`, `pi-glm`, …), chacun équivalant à `ak <kind>`.
 
 ## Installation
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Prérequis : `bash` sous macOS ou Linux, et `python3` 3.9 ou ultérieur ; rien d’autre. Windows utilise `install.ps1`. Épinglez `v0.1.1` : elle remplace `v0.1.0` et apporte un correctif de sécurité. Vérifiez une version à l’aide de son asset `SHA256SUMS`.
+Prérequis : `bash` sous macOS ou Linux, et `python3` 3.9 ou ultérieur ; rien d’autre. Windows utilise `install.ps1`. Épinglez `v0.3.0` : `v0.2.0` et `v0.2.1` ne sont pas prises en charge. Vérifiez une version à l’aide de son asset `SHA256SUMS`.
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/coding-agents-kit`, tag `v0.1.1`, interface 1 |
+| Produit | `DailybotHQ/coding-agents-kit`, tag `v0.3.0`, interface 1 |
 | Clé de registre | `agentkit` dans `.dwp/config.json` |
 | Transport | headless : un `ak run` par délégué dans un worktree git dédié |
 | Fournit | `subagents`, `cancel_children`, `model_routing` |
 | Requiert | l’octroi `agent_delegation` du contrat du plan |
 
-## Les autorisations sont transmises telles quelles
+## L’autonomie par défaut, avec un retrait qui l’emporte toujours
 
-`ak <kind>` n’ajoute **aucune** option de contournement des autorisations. L’autonomie est un choix explicite : `--auto` sur une commande, ou `AGENTKIT_PERMISSIONS=auto` dans l’environnement, ajoute l’option d’autonomie propre à la CLI pour ce lancement. Le preset d’alias `classic`, qui recrée des raccourcis tels que `claudex`, est livré désactivé.
+Depuis `v0.2.0`, `ak <kind>` lance chaque agent en **autonomie** : il ajoute l’option d’autonomie propre à la CLI, conservée uniquement dans le `providers.toml` du kit. L’autonomie est destinée aux environnements jetables ou isolés, comme un conteneur de développement.
 
-L’addon n’ajoute jamais d’option d’autonomie de lui-même. Un plan n’utilise `--auto` qu’avec le choix explicite et consigné du développeur, et uniquement dans un worktree ou un conteneur isolé.
+Le **retrait l’emporte toujours** : `--ask` sur une commande, ou `AGENTKIT_PERMISSIONS=ask` dans l’environnement ou dans le fichier env du kit, supprime l’option même lorsque la même commande indique `--auto`. Une session en retrait transmet le retrait aux agents qu’elle lance. Sur un hôte, activez le retrait.
+
+L’addon n’écrit aucune option d’autonomie et ne passe jamais `--auto`. Il passe `--ask` lorsqu’un plan consigne le retrait. Un plan qui octroie `agent_delegation` sur un hôte accepte des délégués autonomes confinés à leur propre worktree, qui n’est pas un sandbox.
 
 ## Ce qu’il ajoute à un plan
 

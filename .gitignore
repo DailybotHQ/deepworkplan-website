@@ -40,8 +40,6 @@ desktop.ini
 # VSCode (local editor settings)
 .vscode/
 
-# devcontainer (local dev setup)
-.devcontainer/
 
 # Temporary workspace (agent outputs, scratch files, ephemeral content)
 tmp/*
@@ -78,3 +76,11 @@ spanish.png
 repositories/*
 !repositories/README.md
 !repositories/manifest.json
+
+# >>> dck:gitignore >>>
+# devcontainer-kit: runtime env files hold secrets; backups from `dck init`.
+docker/local/**/.env
+docker/local/**/.env.*
+!docker/local/**/.env.example
+*.dck-bak-*
+# <<< dck:gitignore <<<

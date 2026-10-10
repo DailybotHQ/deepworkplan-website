@@ -96,7 +96,7 @@ lastUpdated: 2026-09-28
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
 ```
 
 หรือติดตั้งผ่าน OpenClaw:
@@ -118,7 +118,7 @@ skill Deep Work Plan ที่ติดตั้งไว้ข้างต้�
 และ sub-skill เก้าตัว ได้แก่ `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author` และ `upgrade`
 
-รุ่น skill ที่ติดตั้งคือ **7.0.1** แพ็ก 7.x ปัจจุบันสร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายแผน v5 ไป v6 ต้องมีคำขออย่างชัดเจนและดูตัวอย่างก่อน
+รุ่น skill ที่ติดตั้งคือ **7.1.4** แพ็ก 7.x ปัจจุบันสร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายแผน v5 ไป v6 ต้องมีคำขออย่างชัดเจนและดูตัวอย่างก่อน
 
 มาตรฐานนี้ถูกออกแบบให้ได้สัดส่วนโดยเจตนา และทำให้สัดส่วนนั้นเป็นคุณสมบัติของ
 แผน ไม่ใช่วินัยของผู้พัฒนา แผนหนึ่งเป็นได้ทั้ง **Lite** — บันทึกงานแบบ inline
@@ -221,7 +221,7 @@ agentkit, Herdr, DeepWorkPlan Vim) และเสนอแต่ละอย่
 ไว้ใน `.dwp/config.json` repository สอดคล้องอย่างสมบูรณ์โดยมีส่วนเสริมแบบเลือกได้ **ศูนย์** อย่าง —
 อย่าติดตั้งส่วนเสริมเหล่านั้นอัตโนมัติ
 
-- **Devcontainer support** — ตัวเชื่อมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงที่ `v0.1.4`): `dck init` สร้างเทมเพลต Dev Containers และปรับประสาน devcontainer ที่มีอยู่แล้วก็ต่อเมื่อ diff ของมันได้รับการยอมรับแล้วเท่านั้น base image มาโดยไม่มี coding agent
+- **Devcontainer support** — ตัวเชื่อมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงที่ `v0.2.2` พร้อมสกิล `dck-dockerfile`): `dck init` สร้างคอนเทนเนอร์ของ repository เอง ได้แก่ image ทางการที่ตรึงด้วย digest ไม่มี base image ที่ใช้ร่วมกัน และ `bash dev.sh up` และปรับประสาน devcontainer ที่มีอยู่แล้วก็ต่อเมื่อ diff ของมันได้รับการยอมรับแล้วเท่านั้น coding agent เป็นเลเยอร์ที่ต้องเลือกเปิดเอง
 - **Dailybot integration** — สี่เหตุการณ์วงจรชีวิต (kickoff, งานสำคัญ, ถูกบล็อก, เสร็จสิ้น) เป็นรายงานความคืบหน้าแบบเต็มความสามารถสำหรับทีมที่ใช้ Dailybot อยู่แล้ว พร้อมการบังคับใช้ hook อัตโนมัติแบบเลือกได้ (`dailybot-cli >= 3.9.0`) การติดตั้ง skill เอเจนต์ Dailybot ที่จับคู่มา (3.23.3) ยังเปิดให้ใช้แชท เช็คอิน สร้างฟอร์ม ถาม AI บอร์ดและงาน Plan per-repo API keys และอื่น ๆ — ส่วนเสริมเชื่อมเฉพาะการรายงานเข้ากับการดำเนินการ DWP ระเบียบวิธีหลักไม่มีการพึ่งพิง Dailybot ใด ๆ
 - **Dependency upgrade** — การอัปเกรดที่เป็นกลางต่อตัวจัดการแพ็กเกจ ทำเป็นชุด ตรวจสอบแล้ว และย้อนกลับได้ เมื่อ
   ยอมรับ มันจะติดตั้งคำสั่ง `/lib-upgrade`
@@ -229,9 +229,9 @@ agentkit, Herdr, DeepWorkPlan Vim) และเสนอแต่ละอย่
   (ไม่เสนอสำหรับไลบรารีบริสุทธิ์ บริการ headless หรือ repo ที่มีแต่โครงสร้างพื้นฐาน) สามโปรไฟล์ซ้อนกัน
   ในไฟล์เดียว ได้แก่ visual-ui (แนะนำอย่างหนักแน่นเมื่อตรวจพบ; การติดตั้งควบคุมด้วยการยอมรับ), cli-output และสนทนา — สองโปรไฟล์หลัง
   จะถูกถามเสมอ ไม่เคยถูกใช้โดยอัตโนมัติ
-- **agentkit** — การติดตั้งระดับเครื่องของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak` ตรึงที่ `v0.1.1`) สำหรับแผนที่ส่งงาน `parallel_safe` ที่มีขอบเขตต่อให้ coding agent อื่น (แบบ headless รัน `ak run` หนึ่งครั้งต่อผู้รับมอบหมายแต่ละรายใน worktree ของตัวเอง) ไม่มีการเพิ่ม flag ด้านความเป็นอิสระโดยค่าเริ่มต้นเลย
+- **agentkit** — การติดตั้งระดับเครื่องของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak` ตรึงที่ `v0.3.0`) สำหรับแผนที่ส่งงาน `parallel_safe` ที่มีขอบเขตต่อให้ coding agent อื่น (แบบ headless รัน `ak run` หนึ่งครั้งต่อผู้รับมอบหมายแต่ละรายใน worktree ของตัวเอง) ชุดเครื่องมือเปิดเอเจนต์ในโหมดอัตโนมัติโดยค่าเริ่มต้น และการเลือกไม่ใช้ (`--ask` หรือ `AGENTKIT_PERMISSIONS=ask`) มีผลเหนือกว่าเสมอ
 - **Herdr** — การติดตั้งระดับเครื่องของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ตรึงที่ `v0.1.0` พร้อม skill ทางการของ Herdr) สำหรับแผนที่ขอคำตอบที่ได้รับอนุญาตหนึ่งรายการจาก peer agent ใน pane ของ Herdr บนเครื่องใดก็ได้
-- **DeepWorkPlan Vim** — ตัวแก้ไขบนเทอร์มินัล ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) ตรึงที่ `v0.4.2`) เป็นการติดตั้งระดับเครื่องที่ไม่มีวันเขียนทับคอนฟิก Neovim ที่มีอยู่แล้วโดยไม่ได้รับความยินยอมอย่างชัดแจ้ง
+- **DeepWorkPlan Vim** — ตัวแก้ไขบนเทอร์มินัล ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) ตรึงที่ `v0.5.1`) เป็นการติดตั้งระดับเครื่องที่ไม่มีวันเขียนทับคอนฟิก Neovim ที่มีอยู่แล้วโดยไม่ได้รับความยินยอมอย่างชัดแจ้ง
 - **AI Diff Reviewer** — การตรวจสอบในเครื่องที่จำเป็น (ไม่ใช่แบบเลือกเข้าร่วม): การตรวจความปลอดภัยของทุก Final Review รัน [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md` ที่ต้องการ) บนชุดการเปลี่ยนแปลงสะสมของแผน skill หรือส่วนขยายที่ขาดหายเป็นข้อค้นพบ `local reviewer not installed` ที่ถูกบันทึกไว้ — ไม่เคยข้ามอย่างเงียบ ๆ และไม่เคยเป็นการบูตสแตรปโดยไม่แจ้งล่วงหน้า: การติดตั้งเป็นของความยินยอมของ onboarding หรือการเรียกใช้ addon อย่างชัดเจน ข้อผิดพลาดในการเรียกใช้เป็น soft-fail และผลลัพธ์ `critical` **ที่ผ่านการตรวจสอบแล้ว** จากการรันที่เสร็จสมบูรณ์ยังคงบล็อกการเสร็จสิ้น  (v3, BC-07 — การอ้างสิทธิ์ระดับ critical ที่ยังไม่ผ่านการตรวจสอบจะปรากฏเป็นคำเตือนพร้อมหมายเหตุ และการตรวจสอบ `incomplete`/`timeout` ไม่ถือเป็นการรันที่สะอาด, BC-04) **Flow B** (CI gate กับ `pr-review.yml`) ถูกเสนอเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง และไม่เคยถูกติดตั้งโดยไม่ได้ร้องขอ ไม่มีโฟลว์ใดของ Deep Work Plan ที่ต้องการบริการเชิงพาณิชย์ ผู้ให้บริการ CI หรือ secret
 
 ## 5. พัฒนา kit (sub-skill ชื่อ author)

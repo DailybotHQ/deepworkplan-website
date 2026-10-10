@@ -24,7 +24,7 @@ Los comandos de DWP viven como Markdown dentro del proyecto. Cursor los lee medi
 Opcional: [coding-agents-kit](/kit/agentkit) puede instalar esta CLI y lanzarla con `ak cursor`. El instalador oficial del proveedor funciona igual de bien.
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

@@ -10,7 +10,7 @@ The kit is everything you need to run the methodology in practice. It is install
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
 ```
 
 The current 7.x pack creates new plans with v7 by default. Existing plans retain their recorded generation; migration requires an explicit request.
@@ -66,11 +66,11 @@ Capabilities the onboard flow layers onto a repo. Seven are optional and never p
 
 - **Deep Work Plan skill** — Create, execute, verify, resume and refine plans. Needs no addon.
 - **[herdr](/kit/herdr)** — Peers in Herdr panes, on any machine: interactive delegation with one authorized reply. Pinned at `herdr-peers@v0.1.0`.
-- **[agentkit](/kit/agentkit)** — One ak command for every terminal coding agent: headless delegation in a worktree. Pinned at `coding-agents-kit@v0.1.1`.
-- **[devcontainer](/kit/devcontainer)** — A Dev Containers template and base images that ship without coding agents. Pinned at `devcontainer-kit@v0.1.4`.
-- **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v0.4.2`.
+- **[agentkit](/kit/agentkit)** — One ak command for every terminal coding agent: autonomy by default with an opt-out, and headless delegation in a worktree. Pinned at `coding-agents-kit@v0.3.0`.
+- **[devcontainer](/kit/devcontainer)** — Each repository's own dev container from one template: agents through ak, Herdr both ways, no SSH key inside. Pinned at `devcontainer-kit@v0.2.2`.
+- **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v0.5.1`.
 
-The addon registry and descriptors ship in Deep Work Plan v7: `v7.0.0`
+The addon registry and descriptors ship in Deep Work Plan v7: `v7.1.4`
 
 ### Examples
 

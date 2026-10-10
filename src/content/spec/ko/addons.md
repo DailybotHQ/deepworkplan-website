@@ -31,11 +31,11 @@ section: Addons
 
 ### Devcontainer(첫 번째 애드온)
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)(`dck`, `v0.1.4`로 고정)의 얇은 통합 계층: `dck init`이 저장소에 렌더링하는 Dev Containers 템플릿.
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)(`dck`, `v0.2.2`로 고정, 인터페이스 `2`)의 얇은 통합 계층: `dck init`이 저장소 자체의 컨테이너로 저장소에 렌더링하는 Dev Containers 템플릿과 `dck-dockerfile` 스킬.
 
 - **키트 페이지:** [Devcontainer](/kit/devcontainer)
-- **추가 내용:** `dck` 런처(`setup`, `up`, `shell`, `ssh`, `doctor`), 코딩 에이전트 없이 제공되는 `python-3.13`, `node-24`, `debian` 변형의 베이스 이미지(에이전트는 옵트인 레이어), 루프백 전용 포트, SSH 에이전트 포워딩, 컨테이너별 선택적 Herdr 머신
-- **동작:** `dck doctor --json`(인터페이스 1)으로 감지; `dck init`은 diff가 승인된 후에만 기존 devcontainer를 조정하며 먼저 파일을 백업함 — 절대 덮어쓰지 않음
+- **추가 내용:** digest로 고정된 런타임 공식 이미지 기반의 `docker/local/<service>/Dockerfile`(`python-3.13`, `node-24` 또는 `debian`, 공유 베이스 이미지 없음), `dck` 런처(`up`, `shell`, `rebuild`, `doctor`) 위에서 동작하는 `dev.sh`, 옵트인 레이어로서의 코딩 에이전트, 루프백 전용 포트, 컨테이너 안에 키 없이 호스트의 에이전트를 통해 SSH로 사용하는 git, 표준 레이아웃을 갖춘 컨테이너별 Herdr 머신
+- **동작:** `dck doctor --json`(인터페이스 2)으로 감지; `dck init`은 diff가 승인된 후에만 기존 devcontainer를 조정하며 먼저 파일을 백업함 — 절대 덮어쓰지 않음
 - **제안 시점:** Docker 또는 격리 개발 컨테이너가 유익한 서비스가 있는 대부분의 저장소
 
 ### Dailybot(두 번째 애드온)
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim(일곱 번째 애드온)
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)(고정 버전 `v0.4.2`, 인터페이스 `1`)의 얇은 통합 계층으로, Deep Work Plan을 위한 터미널 편집기입니다(Neovim 0.12+).
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)(고정 버전 `v0.5.1`, 인터페이스 `1`)의 얇은 통합 계층으로, Deep Work Plan을 위한 터미널 편집기입니다(Neovim 0.12+).
 
 - **키트 페이지:** [DeepWorkPlan Vim](/kit/vim)
 - **추가하는 것:** 에이전트와 사람을 위한 선택적인 머신 수준 편집기 표면 — 생성된 명령 색인, 읽기 전용 계획 브라우저, Markdown 뷰어; 모든 주장은 제품의 고정된 기계 판독 가능 표면에서 읽음
@@ -100,11 +100,11 @@ section: Addons
 
 ### Agentkit(여덟 번째 애드온)
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, 고정 버전 `v0.1.1`, 인터페이스 `1`)의 얇은 통합 계층으로, v7 계획의 **헤드리스** 위임 전송 수단입니다.
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, 고정 버전 `v0.3.0`, 인터페이스 `1`)의 얇은 통합 계층으로, v7 계획의 **헤드리스** 위임 전송 수단입니다.
 
 - **키트 페이지:** [Agentkit](/kit/agentkit)
 - **추가하는 것:** 터미널 코딩 에이전트 위에 놓인 하나의 `ak` 명령 표면으로, 경계가 정해진 계획 작업을 헤드리스로 실행하는 데 사용됨; `subagents`, `cancel_children`, `model_routing` 능력은 런타임에, 활성화되고 감지되었으며 호환되는 인터페이스일 때만 제공함
-- **동작:** 모든 사용에는 contract 권한 `agent_delegation`이 필요함; 이 애드온은 코딩 에이전트 CLI를 스스로 설치하지 않으며 제공자 키 값을 결코 읽지 않음
+- **동작:** 모든 사용에는 contract 권한 `agent_delegation`이 필요함; kit은 기본적으로 에이전트를 자율 모드로 실행하며 그 옵트아웃(`--ask` 또는 `AGENTKIT_PERMISSIONS=ask`)이 항상 우선함 — 애드온은 자율 플래그를 지정하지 않고, 계획이 옵트아웃을 기록한 경우와 읽기 전용 위임 대상에는 항상 `--ask`를 전달함; 코딩 에이전트 CLI를 스스로 설치하지 않으며 제공자 키 값을 결코 읽지 않음
 - **제안 시점:** 7b 단계에서 명시적 옵트인; `ak doctor --json`을 통한 읽기 전용 감지
 
 ## 스킬

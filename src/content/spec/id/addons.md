@@ -31,11 +31,11 @@ Delapan addon tersedia hari ini — tujuh opt-in ditambah tinjauan lokal yang wa
 
 ### Devcontainer (addon pertama)
 
-Integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.1.4`): template Dev Containers yang dirender `dck init` ke dalam repositori.
+Integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.2.2`, antarmuka `2`): template Dev Containers yang dirender `dck init` ke dalam repositori sebagai container miliknya sendiri, ditambah skill `dck-dockerfile`.
 
 - **Halaman kit:** [Devcontainer](/kit/devcontainer)
-- **Yang ditambahkan:** launcher `dck` (`setup`, `up`, `shell`, `ssh`, `doctor`), image dasar dalam varian `python-3.13`, `node-24`, dan `debian` yang dikirim tanpa agen coding (agen adalah lapisan opt-in), port khusus loopback, penerusan agen SSH, dan mesin Herdr opsional per container
-- **Perilaku:** dideteksi melalui `dck doctor --json` (antarmuka 1); `dck init` merekonsiliasi devcontainer yang ada hanya setelah diff-nya diterima, dan mencadangkan file terlebih dahulu — tidak pernah ditimpa
+- **Yang ditambahkan:** `docker/local/<service>/Dockerfile` dari image resmi runtime yang dipatok dengan digest (`python-3.13`, `node-24`, atau `debian`, tanpa image dasar bersama), `dev.sh` di atas launcher `dck` (`up`, `shell`, `rebuild`, `doctor`), agen coding sebagai lapisan opt-in, port khusus loopback, git melalui SSH lewat agen milik host tanpa kunci di dalamnya, dan mesin Herdr per container dengan tata letak standar
+- **Perilaku:** dideteksi melalui `dck doctor --json` (antarmuka 2); `dck init` merekonsiliasi devcontainer yang ada hanya setelah diff-nya diterima, dan mencadangkan file terlebih dahulu — tidak pernah ditimpa
 - **Kapan ditawarkan:** sebagian besar repo dengan Docker atau layanan yang mendapat manfaat dari dev container terisolasi
 
 ### Dailybot (addon kedua)
@@ -91,7 +91,7 @@ Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (
 
 ### DeepWorkPlan Vim (addon ketujuh)
 
-Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (dipatok `v0.4.2`, antarmuka `1`), editor terminal untuk Deep Work Plan (Neovim 0.12+).
+Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (dipatok `v0.5.1`, antarmuka `1`), editor terminal untuk Deep Work Plan (Neovim 0.12+).
 
 - **Halaman kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Yang ditambahkan:** permukaan editor opsional tingkat mesin untuk agen dan manusia — indeks perintah yang dihasilkan, penjelajah rencana hanya-baca, dan penampil Markdown; setiap klaim dibaca dari permukaan produk yang dapat dibaca mesin dan telah dipatok
@@ -100,11 +100,11 @@ Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkp
 
 ### Agentkit (addon kedelapan)
 
-Integrator tipis dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok `v0.1.1`, antarmuka `1`), transport delegasi **headless** untuk rencana v7.
+Integrator tipis dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok `v0.3.0`, antarmuka `1`), transport delegasi **headless** untuk rencana v7.
 
 - **Halaman kit:** [Agentkit](/kit/agentkit)
 - **Yang ditambahkan:** satu permukaan perintah `ak` di atas coding agent terminal, digunakan untuk menjalankan tugas rencana terbatas secara headless; addon ini menyumbangkan kemampuan `subagents`, `cancel_children`, dan `model_routing` hanya saat runtime, ketika diaktifkan, terdeteksi, dan berada pada antarmuka yang kompatibel
-- **Perilaku:** setiap penggunaan memerlukan grant kontrak `agent_delegation`; addon ini tidak pernah memasang CLI coding agent dengan sendirinya dan tidak pernah membaca nilai kunci penyedia
+- **Perilaku:** setiap penggunaan memerlukan grant kontrak `agent_delegation`; kit menjalankan agen dalam mode otonom secara default dan opt-out-nya (`--ask` atau `AGENTKIT_PERMISSIONS=ask`) selalu menang — addon tidak menuliskan flag otonomi apa pun, meneruskan `--ask` saat rencana mencatat opt-out dan selalu untuk delegasi baca-saja; addon ini tidak pernah memasang CLI coding agent dengan sendirinya dan tidak pernah membaca nilai kunci penyedia
 - **Kapan ditawarkan:** opt-in eksplisit selama Fase 7b; deteksi hanya-baca melalui `ak doctor --json`
 
 ## Skill

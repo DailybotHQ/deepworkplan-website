@@ -24,7 +24,7 @@ DWP 명령은 Cline의 규칙을 통해 에이전트가 읽는 Markdown 절차�
 선택 사항: [coding-agents-kit](/kit/agentkit)로 이 CLI를 설치하고 `ak cline`으로 실행할 수 있습니다. 공급업체의 공식 설치 프로그램도 똑같이 사용할 수 있습니다.
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cline
 ```
 

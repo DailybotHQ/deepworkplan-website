@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "Addon opcional da v7 baseado no coding-agents-kit: um único comando ak para todo agente de código de terminal e delegação headless de tarefas delimitadas."
+description: "Addon opcional da v7 baseado no coding-agents-kit: um comando ak para todo agente de código de terminal, autonomia por padrão com opt-out e delegação headless."
 kind: addon
 lang: pt
 order: 8
@@ -10,7 +10,7 @@ order: 8
 
 Cada agente de código de terminal tem suas próprias flags para continuar uma sessão, sua própria forma de manter separada uma segunda conta, seu próprio modo headless e sua própria opção para pular os pedidos de permissão. O **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** coloca uma única superfície de comandos sobre todos eles: `ak <kind> [@profile]`.
 
-Este addon integra o kit ao **DWP v7** (`v7.0.0`) como transporte de delegação **headless**. É opcional: sem ele, cada tarefa é executada na sessão atual, exatamente como antes. O kit em si é um produto MIT que funciona sem o Deep Work Plan.
+Este addon integra o kit ao **DWP v7** (pack `v7.1.4`) como transporte de delegação **headless**. É opcional: sem ele, cada tarefa é executada na sessão atual, exatamente como antes. O kit em si é um produto MIT que funciona sem o Deep Work Plan.
 
 ## O que o kit oferece
 
@@ -18,30 +18,33 @@ Este addon integra o kit ao **DWP v7** (`v7.0.0`) como transporte de delegação
 - **Perfis.** `ak claude @work` executa uma segunda conta em seu próprio diretório home, separada da primeira.
 - **Execuções headless.** `ak run <kind> -- "<prompt>"` executa um prompt de forma não interativa e retorna um código de saída documentado, opcionalmente como um único objeto JSON.
 - **Um diagnóstico.** `ak doctor --json` informa quais CLIs estão instaladas, os perfis e os nomes das chaves definidas — nunca seus valores.
-- **Instalações.** `ak install <cli>` instala uma CLI ausente pelo canal oficial do seu fornecedor.
+- **Instalações verificadas.** `ak install <cli>` instala uma CLI ausente pelo canal oficial do seu fornecedor em uma versão fixada, conferida contra um sha256 fixado ou contra a integridade do registro npm.
+- **Nomes conhecidos.** Dois presets de aliases, desativados até você ativá-los: `classic` (`claudex`, `codexx`, `cursorx`, `opencodex`, `pix`, `clinex`, `grokx`) e `providers` (`claude-glm`, `codex-azure`, `codex-xai`, `pi-glm`, …), cada um equivalente a `ak <kind>`.
 
 ## Instalação
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v0.1.1`: ela substitui a `v0.1.0` e traz uma correção de segurança. Verifique uma versão com o asset `SHA256SUMS` dela.
+Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v0.3.0`: a `v0.2.0` e a `v0.2.1` não têm suporte. Verifique uma versão com o asset `SHA256SUMS` dela.
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/coding-agents-kit`, tag `v0.1.1`, interface 1 |
+| Produto | `DailybotHQ/coding-agents-kit`, tag `v0.3.0`, interface 1 |
 | Chave de registro | `agentkit` em `.dwp/config.json` |
 | Transporte | headless: um `ak run` por delegado em uma worktree git dedicada |
 | Fornece | `subagents`, `cancel_children`, `model_routing` |
 | Requer | a concessão `agent_delegation` do contrato do plano |
 
-## As permissões são repassadas sem alteração
+## Autonomia por padrão, com um opt-out que sempre prevalece
 
-`ak <kind>` **não** adiciona nenhuma flag para contornar permissões. A autonomia é uma adesão explícita: `--auto` em um comando, ou `AGENTKIT_PERMISSIONS=auto` no ambiente, adiciona a flag de autonomia própria da CLI para aquela execução. O preset de aliases `classic`, que recria atalhos como `claudex`, vem desativado.
+Desde a `v0.2.0`, `ak <kind>` inicia todo agente em **autonomia**: adiciona a flag de autonomia própria da CLI, mantida apenas no `providers.toml` do kit. A autonomia se destina a ambientes descartáveis ou isolados, como um contêiner de desenvolvimento.
 
-O addon nunca adiciona uma flag de autonomia por conta própria. Um plano usa `--auto` somente com a adesão explícita e registrada de quem desenvolve, e somente dentro de uma worktree ou de um contêiner isolado.
+O **opt-out sempre prevalece**: `--ask` em um comando, ou `AGENTKIT_PERMISSIONS=ask` no ambiente ou no arquivo env do kit, suprime a flag mesmo quando o mesmo comando diz `--auto`. Uma sessão com opt-out repassa o opt-out aos agentes que inicia. Em um host, defina o opt-out.
+
+O addon não escreve nenhuma flag de autonomia e nunca passa `--auto`. Ele passa `--ask` quando um plano registra o opt-out. Um plano que concede `agent_delegation` em um host aceita delegados autônomos confinados à sua própria worktree, que não é um sandbox.
 
 ## O que ele adiciona a um plano
 

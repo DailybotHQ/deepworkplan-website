@@ -31,11 +31,11 @@ Hôm nay có tám addon — bảy addon opt-in cộng với đánh giá cục b�
 
 ### Devcontainer (addon đầu tiên)
 
-Một bộ tích hợp mỏng của [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.1.4`): một template Dev Containers mà `dck init` tạo vào repository.
+Một bộ tích hợp mỏng của [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.2.2`, giao diện `2`): một template Dev Containers mà `dck init` tạo vào repository như container riêng của repository, kèm skill `dck-dockerfile`.
 
 - **Trang kit:** [Devcontainer](/kit/devcontainer)
-- **Bổ sung:** trình khởi chạy `dck` (`setup`, `up`, `shell`, `ssh`, `doctor`), image cơ sở ở các biến thể `python-3.13`, `node-24` và `debian` được phân phối không kèm coding agent (agent là một lớp opt-in), cổng chỉ dùng loopback, chuyển tiếp SSH agent và máy Herdr tùy chọn cho mỗi container
-- **Hành vi:** được phát hiện qua `dck doctor --json` (giao diện 1); `dck init` chỉ đối chiếu một devcontainer hiện có sau khi diff của nó được chấp nhận, và sao lưu tệp trước — không bao giờ ghi đè
+- **Bổ sung:** `docker/local/<service>/Dockerfile` từ image chính thức của runtime được ghim theo digest (`python-3.13`, `node-24` hoặc `debian`, không có image cơ sở dùng chung), `dev.sh` chạy trên trình khởi chạy `dck` (`up`, `shell`, `rebuild`, `doctor`), coding agent như một lớp opt-in, cổng chỉ dùng loopback, git qua SSH thông qua agent của máy host mà không có khóa nào bên trong, và máy Herdr cho mỗi container với bố cục tiêu chuẩn
+- **Hành vi:** được phát hiện qua `dck doctor --json` (giao diện 2); `dck init` chỉ đối chiếu một devcontainer hiện có sau khi diff của nó được chấp nhận, và sao lưu tệp trước — không bao giờ ghi đè
 - **Khi đề xuất:** hầu hết repo có Docker hoặc dịch vụ hưởng lợi từ dev container cô lập
 
 ### Dailybot (addon thứ hai)
@@ -91,7 +91,7 @@ Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-
 
 ### DeepWorkPlan Vim (addon thứ bảy)
 
-Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v0.4.2`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
+Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v0.5.1`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
 
 - **Trang kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Bổ sung:** một bề mặt trình soạn thảo tùy chọn ở cấp máy cho agent và con người — chỉ mục lệnh được sinh tự động, trình duyệt kế hoạch chỉ đọc và trình xem Markdown; mọi tuyên bố đều được đọc từ bề mặt máy đọc được đã ghim của sản phẩm
@@ -100,11 +100,11 @@ Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/d
 
 ### Agentkit (addon thứ tám)
 
-Bộ tích hợp mỏng của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim `v0.1.1`, giao diện `1`), phương thức truyền ủy quyền **headless** của các kế hoạch v7.
+Bộ tích hợp mỏng của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim `v0.3.0`, giao diện `1`), phương thức truyền ủy quyền **headless** của các kế hoạch v7.
 
 - **Trang kit:** [Agentkit](/kit/agentkit)
 - **Bổ sung:** một bề mặt lệnh `ak` duy nhất cho các coding agent trên terminal, dùng để chạy headless một tác vụ kế hoạch có giới hạn; nó chỉ đóng góp các khả năng `subagents`, `cancel_children` và `model_routing` khi chạy, lúc được bật, được phát hiện và ở trên một giao diện tương thích
-- **Hành vi:** mọi lần sử dụng đều cần grant hợp đồng `agent_delegation`; addon không bao giờ tự cài CLI của coding agent và không bao giờ đọc giá trị khóa của nhà cung cấp
+- **Hành vi:** mọi lần sử dụng đều cần grant hợp đồng `agent_delegation`; kit mặc định khởi chạy agent ở chế độ tự chủ và tùy chọn từ chối của nó (`--ask` hoặc `AGENTKIT_PERMISSIONS=ask`) luôn được ưu tiên — addon không chỉ định cờ tự chủ nào, truyền `--ask` khi kế hoạch ghi nhận tùy chọn từ chối và luôn truyền cho các delegate chỉ đọc; addon không bao giờ tự cài CLI của coding agent và không bao giờ đọc giá trị khóa của nhà cung cấp
 - **Khi đề xuất:** opt-in rõ ràng trong Giai đoạn 7b; phát hiện chỉ đọc qua `ak doctor --json`
 
 ## Skill

@@ -10,7 +10,7 @@ Le kit est tout ce dont vous avez besoin pour exécuter la méthodologie en prat
 `DailybotHQ/deepworkplan-skill` :
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
 ```
 
 Le pack 7.x actuel crée les nouveaux plans en v7 par défaut. Les plans existants conservent leur génération enregistrée ; une migration exige une demande explicite.
@@ -66,11 +66,11 @@ Des capacités que le flux onboard superpose à un dépôt. Sept sont facultativ
 
 - **Skill Deep Work Plan** — Créer, exécuter, vérifier, reprendre et affiner des plans. Ne nécessite aucun addon.
 - **[herdr](/fr/kit/herdr)** — Des pairs dans des panneaux Herdr, sur n’importe quelle machine : délégation interactive avec une seule réponse autorisée. Épinglé à `herdr-peers@v0.1.0`.
-- **[agentkit](/fr/kit/agentkit)** — Une seule commande ak pour chaque agent de code en terminal : délégation sans interface dans un worktree. Épinglé à `coding-agents-kit@v0.1.1`.
-- **[devcontainer](/fr/kit/devcontainer)** — Un modèle Dev Containers et des images de base distribués sans agents de code. Épinglé à `devcontainer-kit@v0.1.4`.
-- **[vim](/fr/kit/vim)** — L’éditeur de terminal, avec un navigateur de plans en lecture seule et une visionneuse Markdown. Épinglé à `deepworkplan-vim@v0.4.2`.
+- **[agentkit](/fr/kit/agentkit)** — Une seule commande ak pour chaque agent de code en terminal : autonomie par défaut avec possibilité de retrait, et délégation sans interface dans un worktree. Épinglé à `coding-agents-kit@v0.3.0`.
+- **[devcontainer](/fr/kit/devcontainer)** — Le conteneur de développement propre à chaque dépôt, issu d’un seul modèle : agents via ak, Herdr dans les deux sens, aucune clé SSH à l’intérieur. Épinglé à `devcontainer-kit@v0.2.2`.
+- **[vim](/fr/kit/vim)** — L’éditeur de terminal, avec un navigateur de plans en lecture seule et une visionneuse Markdown. Épinglé à `deepworkplan-vim@v0.5.1`.
 
-Le registre des addons et les descripteurs sont livrés dans Deep Work Plan v7 : `v7.0.0`
+Le registre des addons et les descripteurs sont livrés dans Deep Work Plan v7 : `v7.1.4`
 
 ### Exemples
 

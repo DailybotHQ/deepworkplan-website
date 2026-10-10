@@ -31,11 +31,11 @@ Otto addon sono disponibili oggi — sette opt-in più la revisione locale richi
 
 ### Devcontainer (primo addon)
 
-Un integratore leggero di [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fissato a `v0.1.4`): un template Dev Containers che `dck init` genera nel repository.
+Un integratore leggero di [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fissato a `v0.2.2`, interfaccia `2`): un template Dev Containers che `dck init` genera nel repository come suo container, più la skill `dck-dockerfile`.
 
 - **Pagina kit:** [Devcontainer](/kit/devcontainer)
-- **Cosa aggiunge:** il launcher `dck` (`setup`, `up`, `shell`, `ssh`, `doctor`), immagini base nelle varianti `python-3.13`, `node-24` e `debian` distribuite senza agenti di coding (gli agenti sono un livello opt-in), porte solo su loopback, inoltro dell'agente SSH e macchine Herdr opzionali per container
-- **Comportamento:** rilevato tramite `dck doctor --json` (interfaccia 1); `dck init` riconcilia un devcontainer esistente solo dopo che il suo diff è stato accettato, e prima esegue un backup del file — mai sovrascritto
+- **Cosa aggiunge:** `docker/local/<service>/Dockerfile` dall'immagine ufficiale del runtime fissata per digest (`python-3.13`, `node-24` o `debian`, nessuna immagine base condivisa), `dev.sh` sopra il launcher `dck` (`up`, `shell`, `rebuild`, `doctor`), agenti di coding come livello opt-in, porte solo su loopback, git via SSH tramite l'agente dell'host senza alcuna chiave all'interno, e macchine Herdr per container con il layout standard
+- **Comportamento:** rilevato tramite `dck doctor --json` (interfaccia 2); `dck init` riconcilia un devcontainer esistente solo dopo che il suo diff è stato accettato, e prima esegue un backup del file — mai sovrascritto
 - **Quando offerto:** la maggior parte dei repo con Docker o servizi che beneficiano di un dev container isolato
 
 ### Dailybot (secondo addon)
@@ -91,7 +91,7 @@ Un integratore leggero di [herdr-peers](https://github.com/DailybotHQ/herdr-peer
 
 ### DeepWorkPlan Vim (settimo addon)
 
-Un integratore leggero di [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (fissato a `v0.4.2`, interfaccia `1`), l'editor da terminale per Deep Work Plan (Neovim 0.12+).
+Un integratore leggero di [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (fissato a `v0.5.1`, interfaccia `1`), l'editor da terminale per Deep Work Plan (Neovim 0.12+).
 
 - **Pagina kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Cosa aggiunge:** una superficie di editor opzionale, a livello di macchina, per agenti e persone — un indice dei comandi generato, un browser dei piani in sola lettura e un visualizzatore Markdown; ogni affermazione è letta dalla superficie leggibile dalle macchine fissata del prodotto
@@ -100,11 +100,11 @@ Un integratore leggero di [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepw
 
 ### Agentkit (ottavo addon)
 
-Un integratore leggero di [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fissato a `v0.1.1`, interfaccia `1`), il trasporto di delega **headless** dei piani v7.
+Un integratore leggero di [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fissato a `v0.3.0`, interfaccia `1`), il trasporto di delega **headless** dei piani v7.
 
 - **Pagina kit:** [Agentkit](/kit/agentkit)
 - **Cosa aggiunge:** un'unica superficie di comando `ak` sugli agenti di coding da terminale, usata per eseguire in modalità headless un'attività delimitata del piano; contribuisce le capacità `subagents`, `cancel_children` e `model_routing` solo a runtime, quando è abilitato, rilevato e su un'interfaccia compatibile
-- **Comportamento:** qualsiasi uso richiede la concessione del contratto `agent_delegation`; l'addon non installa mai da solo le CLI degli agenti di coding e non legge mai i valori delle chiavi dei provider
+- **Comportamento:** qualsiasi uso richiede la concessione del contratto `agent_delegation`; il kit avvia gli agenti in autonomia per impostazione predefinita e il suo opt-out (`--ask` o `AGENTKIT_PERMISSIONS=ask`) prevale sempre — l'addon non specifica alcun flag di autonomia, passa `--ask` quando il piano registra l'opt-out e sempre per i delegati in sola lettura; non installa mai da solo le CLI degli agenti di coding e non legge mai i valori delle chiavi dei provider
 - **Quando offerto:** opt-in esplicito durante la Fase 7b; rilevamento in sola lettura tramite `ak doctor --json`
 
 ## Skill

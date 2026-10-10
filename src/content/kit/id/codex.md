@@ -24,7 +24,7 @@ Command DWP tersimpan sebagai prosedur markdown yang dibaca agent saat dipanggil
 Opsional: [coding-agents-kit](/kit/agentkit) dapat memasang CLI ini dan menjalankannya dengan `ak codex`. Penginstal resmi dari vendor juga sama baiknya.
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install codex
 ```
 

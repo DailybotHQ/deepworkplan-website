@@ -31,11 +31,11 @@ Dziś dostępnych jest osiem addonów — siedem opcjonalnych plus wymagany loka
 
 ### Devcontainer (pierwszy addon)
 
-Cienki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty do `v0.1.4`): szablon Dev Containers, który `dck init` renderuje do repozytorium.
+Cienki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty do `v0.2.2`, interfejs `2`): szablon Dev Containers, który `dck init` renderuje do repozytorium jako jego własny kontener, plus skill `dck-dockerfile`.
 
 - **Strona kit:** [Devcontainer](/kit/devcontainer)
-- **Co dodaje:** launcher `dck` (`setup`, `up`, `shell`, `ssh`, `doctor`), obrazy bazowe w wariantach `python-3.13`, `node-24` i `debian` dostarczane bez agentów kodujących (agenci są warstwą opt-in), porty tylko na loopbacku, przekierowanie agenta SSH oraz opcjonalne maszyny Herdr dla każdego kontenera
-- **Zachowanie:** wykrywany przez `dck doctor --json` (interfejs 1); `dck init` uzgadnia istniejący devcontainer dopiero po zaakceptowaniu jego diffu i najpierw tworzy kopię zapasową pliku — nigdy nie nadpisuje
+- **Co dodaje:** `docker/local/<service>/Dockerfile` z oficjalnego obrazu środowiska uruchomieniowego przypiętego przez digest (`python-3.13`, `node-24` lub `debian`, bez współdzielonego obrazu bazowego), `dev.sh` nad launcherem `dck` (`up`, `shell`, `rebuild`, `doctor`), agentów kodujących jako warstwę opt-in, porty tylko na loopbacku, git przez SSH za pośrednictwem agenta hosta bez żadnego klucza w środku oraz maszyny Herdr dla każdego kontenera ze standardowym układem
+- **Zachowanie:** wykrywany przez `dck doctor --json` (interfejs 2); `dck init` uzgadnia istniejący devcontainer dopiero po zaakceptowaniu jego diffu i najpierw tworzy kopię zapasową pliku — nigdy nie nadpisuje
 - **Kiedy proponować:** większość repo z Dockerem lub usługami korzystającymi z izolowanego kontenera dev
 
 ### Dailybot (drugi addon)
@@ -91,7 +91,7 @@ Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przy
 
 ### DeepWorkPlan Vim (siódmy addon)
 
-Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (przypięty `v0.4.2`, interfejs `1`), edytora terminalowego dla Deep Work Plan (Neovim 0.12+).
+Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (przypięty `v0.5.1`, interfejs `1`), edytora terminalowego dla Deep Work Plan (Neovim 0.12+).
 
 - **Strona kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Co dodaje:** opcjonalną powierzchnię edytora na poziomie maszyny dla agentów i ludzi — generowany indeks poleceń, przeglądarkę planów tylko do odczytu i przeglądarkę Markdown; każde twierdzenie jest odczytywane z przypiętej, czytelnej maszynowo powierzchni produktu
@@ -100,11 +100,11 @@ Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-
 
 ### Agentkit (ósmy addon)
 
-Cienki integrator [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty `v0.1.1`, interfejs `1`), **bezgłowego** (headless) transportu delegowania planów v7.
+Cienki integrator [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty `v0.3.0`, interfejs `1`), **bezgłowego** (headless) transportu delegowania planów v7.
 
 - **Strona kit:** [Agentkit](/kit/agentkit)
 - **Co dodaje:** jedną powierzchnię poleceń `ak` nad terminalowymi agentami kodującymi, używaną do bezgłowego wykonania ograniczonego zadania planu; wnosi możliwości `subagents`, `cancel_children` i `model_routing` wyłącznie w czasie działania, gdy jest włączony, wykryty i na zgodnym interfejsie
-- **Zachowanie:** każde użycie wymaga uprawnienia kontraktu `agent_delegation`; addon nigdy sam nie instaluje CLI agentów kodujących i nigdy nie odczytuje wartości kluczy dostawców
+- **Zachowanie:** każde użycie wymaga uprawnienia kontraktu `agent_delegation`; kit domyślnie uruchamia agentów w trybie autonomicznym, a jego opt-out (`--ask` lub `AGENTKIT_PERMISSIONS=ask`) zawsze wygrywa — addon nie podaje żadnej flagi autonomii, przekazuje `--ask`, gdy plan odnotowuje opt-out, i zawsze dla delegatów tylko do odczytu; nigdy sam nie instaluje CLI agentów kodujących i nigdy nie odczytuje wartości kluczy dostawców
 - **Kiedy proponowany:** wyraźna zgoda w Phase 7b; wykrywanie tylko do odczytu przez `ak doctor --json`
 
 ## Skille

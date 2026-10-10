@@ -24,7 +24,7 @@ DWP は `.agents/skills/` 配下のスキルとして配布されます（`.clau
 任意：[coding-agents-kit](/kit/agentkit) はこの CLI をインストールし、`ak claude` で起動できます。ベンダー公式のインストーラーでも同様に使えます。
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install claude
 ```
 
