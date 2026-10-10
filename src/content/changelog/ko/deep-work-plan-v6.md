@@ -6,7 +6,7 @@ version: "v6 · 더 엄격한 구조"
 kind: release
 lang: ko
 order: 0
-featured: true
+featured: false
 sourceLabel: "게시된 v6 스키마 세트"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:
