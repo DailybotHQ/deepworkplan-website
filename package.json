@@ -9,7 +9,7 @@
     "url": "https://github.com/DailybotHQ/deepworkplan-website"
   },
   "type": "module",
-  "version": "5.0.39",
+  "version": "5.0.41",
   "packageManager": "pnpm@11.1.2",
   "engines": {
     "node": ">=24.20.0"
@@ -52,31 +52,31 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.10",
-    "@astrojs/compiler-rs": "0.4.0",
-    "@astrojs/markdown-satteri": "0.4.0",
-    "@astrojs/mdx": "8.0.0",
+    "@astrojs/compiler-rs": "0.5.1",
+    "@astrojs/markdown-satteri": "0.4.3",
+    "@astrojs/mdx": "8.0.3",
     "@astrojs/sitemap": "3.7.4",
     "@astrojs/svelte": "9.0.1",
-    "astro": "7.3.1",
-    "reveal.js": "^6.0.1",
+    "astro": "7.3.6",
+    "reveal.js": "^6.0.2",
     "satteri": "0.10.5",
-    "svelte": "5.57.0",
+    "svelte": "5.57.2",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.12",
+    "@biomejs/biome": "2.5.15",
     "@bruits/satteri-wasm32-wasi": "0.10.5",
     "@lhci/cli": "0.15.1",
-    "@sveltejs/vite-plugin-svelte": "7.3.0",
+    "@sveltejs/vite-plugin-svelte": "7.3.1",
     "@tailwindcss/typography": "0.5.20",
     "@tailwindcss/vite": "4.3.3",
     "@testing-library/jest-dom": "7.0.1",
     "@testing-library/svelte": "5.4.2",
-    "@vitest/coverage-v8": "5.0.0",
-    "happy-dom": "20.14.0",
+    "@vitest/coverage-v8": "5.0.3",
+    "happy-dom": "20.14.5",
     "npm-check-updates": "23.1.0",
-    "sharp": "0.35.4",
-    "vitest": "5.0.0"
+    "sharp": "0.35.5",
+    "vitest": "5.0.3"
   }
 }
