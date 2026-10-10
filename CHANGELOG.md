@@ -9,6 +9,8 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.43] - 2026-10-10
+
 ### Deep Work Plan v7 — what this release covers
 
 This release brings the site fully up to date with the v7 generation of Deep Work Plan (pack `v7.1.4`, vendored here). The methodology is unchanged at its core: the plan is the source of truth, and a repository is fully conformant with zero addons.
@@ -1183,7 +1185,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.42...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.43...HEAD
+[5.0.43]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.43
 [5.0.42]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.42
 [5.0.41]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.41
 [5.0.40]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.40
