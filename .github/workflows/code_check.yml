@@ -29,7 +29,7 @@ jobs:
           STORE_PATH=$(corepack pnpm store path --silent)
           echo "STORE_PATH=${STORE_PATH}" >> "$GITHUB_OUTPUT"
       - name: Step 0a - 📁 Cache pnpm store
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ${{ steps.pnpm-store.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
