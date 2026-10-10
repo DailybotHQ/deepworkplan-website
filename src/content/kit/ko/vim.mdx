@@ -1,6 +1,6 @@
 ---
 title: DeepWorkPlan Vim
-description: "Deep Work Plan의 터미널 에디터. 명령 색인, 계획 브라우저, Markdown 뷰어를 갖춘 Neovim 0.12+ 설정."
+description: "Deep Work Plan을 위한 터미널 에디터. 계획 브라우저, Markdown 뷰어, 생성된 명령 색인을 갖춘 Neovim 0.12+ 설정을 한 번에 설치."
 kind: addon
 lang: ko
 order: 6
@@ -20,13 +20,13 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim**은 Deep Work Plan의 터미널 에디터예요. 터미널에서 일하는 사람과 코딩 에이전트를 위한 Neovim 설정으로, 계획과 문서, 모든 명령의 색인이 키 하나 거리에 있어요.
 
-이것은 독립된 제품으로, Deep Work Plan v7(`v7.0.0`)의 선택 `vim` 애드온으로 제공돼요. Deep Work Plan은 어떤 에디터와도, 에디터 없이도 동작하며, 이 에디터도 Deep Work Plan을 요구하지 않아요. 컴퓨터에 따로 추가하면 되고, 계획이 있든 없든 에디터로 동작해요. 이 페이지는 릴리스 **v0.5.1**을 설명해요.
+이것은 독립된 제품으로, Deep Work Plan v7(`v7.0.0`)의 선택 `vim` 애드온으로 제공돼요. Deep Work Plan은 어떤 에디터와도, 에디터 없이도 동작하며, 이 에디터도 Deep Work Plan을 요구하지 않아요. 컴퓨터에 따로 추가하면 되고, 계획이 있든 없든 에디터로 동작해요. 이 페이지는 릴리스 **v0.6.0**을 설명해요.
 
 ## Deep Work Plan에 터미널 에디터가 필요한 이유
 
 Deep Work Plan은 `.dwp/plans/` 아래의 Markdown 폴더예요. 목표, 원자적 작업, 검증 게이트, 계속 쌓이는 로그로 이뤄져요. 사람은 검토하고 에이전트는 실행하며, 둘 다 터미널에서 하는 경우가 많아요. 이 일에 맞춰 만든 에디터는 세 가지를 가까이 둬요. 계획 자체, 그 주변의 문서, 그리고 둘 사이를 오가는 키예요.
 
-DeepWorkPlan Vim이 바로 그런 에디터예요. 언어 서버, 자동 완성, 린팅, 포매팅, 퍼지 검색, 파일 트리, 엄선한 색상 테마를 지연 로딩으로 갖춘 잘 다듬은 Neovim 설정에, Deep Work Plan 에디터답게 만드는 몇 가지 화면이 더해져요.
+DeepWorkPlan Vim이 바로 그런 에디터예요. 목표는 터미널 안의 작은 VS Code예요. 파일을 탐색하고, 어떤 파일이 바뀌었는지 확인하고, diff를 검토해 변경을 승인하거나 버릴 수 있으며, 친근하고 가볍고 에이전트 우선이고 계획 상태가 늘 눈에 보여요. 언어 서버, 자동 완성, 포매팅, 퍼지 검색, 파일 트리, 엄선한 색상 테마를 지연 로딩으로 갖춘 잘 다듬은 Neovim 설정에, Deep Work Plan 에디터답게 만드는 몇 가지 화면이 더해져요.
 
 <VimInDwpLoop lang="ko" class="not-prose my-10" />
 
@@ -46,7 +46,7 @@ DeepWorkPlan Vim이 바로 그런 에디터예요. 언어 서버, 자동 완성,
 |---|---|---|
 | 생성되는 명령 색인 | `SPC h h` | 설정의 모든 매핑을 실제 키맵에서 생성해 보여 줘요. |
 | VS Code 스타일 제스처 | `<C-a>`, `SPC y` | 키 하나로 파일 전체를 선택하고 시스템 클립보드로 복사해요. 클립보드가 시스템 전체에서 공유되므로 단독 `y`도 그곳에 복사돼요. |
-| Deep Work Plan 브라우저 | `SPC P` | 저장소의 계획을 상태별로 묶고 진행 막대와 함께 보여 주는 사이드바와, 계획 하나를 읽는 리더예요. |
+| Deep Work Plan 브라우저 | `SPC P` | 저장소의 계획을 상태별로 묶고 진행 막대와 함께 보여 주는 사이드바예요. 계획을 클릭하면 리더가 열려요. |
 | Markdown 뷰어 | `SPC m p`, `SPC m r` | 브라우저에서 Markdown을 미리 보거나 버퍼 안에서 렌더링해요. |
 | 검증된 설치 프로그램 | — | macOS, Linux, WSL용 자체 완결형 설치 프로그램이고, Windows에는 문서화된 수동 방법이 있어요. |
 
@@ -54,13 +54,56 @@ DeepWorkPlan Vim이 바로 그런 에디터예요. 언어 서버, 자동 완성,
 
 `SPC P`, `:DwpPlans`, 또는 상태 표시줄 구간을 클릭하면 계획 사이드바가 열려요. 현재 디렉터리와 Neovim 설정 디렉터리 아래의 모든 `.dwp/plans/` 폴더를 다루고, 주의가 가장 필요한 계획부터 묶어 보여 줘요. 에디터에서 쓰는 라벨은 `Working`, `Needs attention`, `Ready`, `Not started`, `Done`이에요. 각 계획에는 진행 막대가 표시돼요.
 
-계획에서 Enter를 누르면 리더가 열려요. 한 문장짜리 목표, 상태와 진행률, 현재 작업을 표시한 작업 체크리스트, 그리고 계획 자체 파일로 이동하는 쉬운 말 링크가 보여요. 상태 표시줄에는 지금 활성인 계획이 나오고, 시작 화면에는 상위 세 개가 나열돼요. 이 화면들은 계획을 설명할 뿐 `.dwp/`에는 절대 쓰지 않아요.
+계획을 클릭하거나 계획에서 Enter를 누르면 리더가 열려요. 한 문장짜리 목표, 상태와 진행률, 현재 작업을 표시한 작업 체크리스트, 그리고 계획 자체 파일로 이동하는 쉬운 말 링크가 보여요. 상태 표시줄에는 지금 활성인 계획이 나오고, 시작 화면에는 상위 세 개가 나열돼요. 이 화면들은 계획을 설명할 뿐 `.dwp/`에는 절대 쓰지 않아요.
+
+사이드바는 마우스와 키보드에 모두 반응해요. 계획 옆의 작은 화살표는 그 계획의 작업과 파일을 보이거나 숨기고, 작업이나 파일을 클릭하면 열려요. `j`, `k`, 방향키, `Ctrl-n`, `Ctrl-p`는 빈 줄과 장식을 건너뛰며 계획에서 계획으로 이동해요. 각 구역에는 개수가 표시되고, 아이콘과 진행 막대는 상태 색으로 구분돼요. 진행 중인 계획은 제목이 진하게, 정리된 계획은 흐리게 보이며, 계획이 여섯 개를 넘는 Done 그룹은 접힌 채로 열려요. 이 창은 읽기 전용이고 조용해요. 편집 키를 눌러도 오류를 출력하지 않고 아무 일도 일어나지 않아요.
+
+계획과 파일 트리는 번갈아 열려요. 한쪽 사이드바를 열면 다른 쪽이 닫히므로 한 번에 하나만 보게 돼요. 리더는 계획 사이드바와 함께 닫혀요. 한쪽 사이드바를 열 때 다른 쪽을 닫을지는 `dwpvim.json`의 `sidebars.exclusive` 키로 설정해요.
 
 계획의 Markdown 파일을 그 자리에서 읽으려면, `SPC m p`로 현재 버퍼를 브라우저에서 미리 보고 `SPC m r`로 버퍼 안에서 렌더링하세요. 둘 다 Markdown 버퍼에서만 동작해요.
 
+## 대시보드
+
+시작 화면은 DeepWorkPlan Vim 고유의 화면이에요. 점자 문자로 새긴 Deep Work Plan 로고의 P 아래에 작은 VIM이 들어가 있고, 그 밑에 "powered by Dailybot" 크레딧이 있으며, 오른쪽에는 새긴 장면이 펼쳐져요. Deep Work Plan 등대와 그 바다를 항해하는 배예요. 대시보드가 화면에 있는 동안 빛줄기가 천천히 깜박여요. 끄려면 `vim.g.dwp_greeter_pulse = false`를 설정하세요.
+
+장면은 여섯 가지 높이가 있고, 창에 남은 행 수에 따라 선택돼요. 창이 좁으면 워드마크가 장면 위에 쌓이거나 단독으로 표시돼요. 넓은 창에서는 단축키와 "Your plans"가 나란히 보이고, 좁은 창에서는 위아래로 쌓여요. 커서가 놓인 행을 실행하려면 Enter를, 계획 사이드바를 열려면 `e`를 누르세요.
+
+## 사이드바 설정
+
+`dwpvim.json` 파일로 두 사이드바의 위치와 너비를 정해요. 에디터 디렉터리(`~/.config/nvim`)의 파일은 모든 프로젝트에 적용되고, Neovim을 시작한 디렉터리의 `.dwpvim.json`은 해당 프로젝트에서 그 설정을 덮어써요. 설정은 시작할 때 읽으므로 파일을 고친 뒤에는 Neovim을 다시 시작하세요.
+
+```json
+{
+  "tree":  { "side": "left", "width": 40 },
+  "plans": { "side": "left", "width": 48 },
+  "sidebars": { "exclusive": true }
+}
+```
+
+| 키 | 값 | 기본값 | 하는 일 |
+|---|---|---|---|
+| `tree.side` | `"left"` 또는 `"right"` | `"left"` | 파일 트리(`SPC n`)의 위치 |
+| `tree.width` | 20에서 120 사이의 정수 | `40` | 트리의 최대 너비. 내용에 맞춰 더 줄어들 수 있어요 |
+| `plans.side` | `"left"` 또는 `"right"` | `"left"` | 계획 사이드바(`SPC P`)의 위치 |
+| `plans.width` | 20에서 120 사이의 정수 | `48` | 계획 사이드바의 최대 너비 |
+| `sidebars.exclusive` | `true` 또는 `false` | `true` | 한 번에 사이드바 하나만 열어요. `false`면 둘 다 열어 둘 수 있어요 |
+
+파일이 없어도 괜찮아요. 올바른 JSON이 아닌 파일, 알 수 없는 키, 잘못된 값은 무시하고 알려 주며 치명적인 오류가 되지 않아요. `:DwpConfig`를 실행하면 적용 중인 모든 값, 값을 읽어 온 파일, 발견된 문제를 볼 수 있어요.
+
+## 더 가벼운 에디터
+
+버전 0.6.0은 아무도 쓰지 않던 것을 제거해서, 고정할 플러그인과 처음 시작할 때 설치하고 업데이트할 패키지를 줄였어요.
+
+- Mason 언어 서버 11개를 없앴어요. efm, diagnosticls, tailwindcss, grammarly, bashls, 그리고 astro, svelte, Vue 2, Angular, SQL, Vim script용 서버예요.
+- nvim-lint를 제거했어요. 린터를 설정한 적이 없기 때문이에요.
+- prettier 포매터 항목을 제거했어요. prettier를 설치하는 것이 없었기 때문이에요. `:Format`은 biome, black, shfmt, stylua를 유지해요.
+- marksman은 링크 따라가기, 링크와 제목 자동 완성, 개요를 위해 남기고 진단은 조용히 해 뒀어요. Markdown은 의도적으로 포매터 없이 둬요.
+
+이전 설정의 Mason에 다른 서버가 남아 있더라도, 설정에 나열된 서버만 활성화돼요. 모든 플러그인, 서버, 도구와 그것이 있는 이유는 [PLUGINS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/v0.6.0/docs/PLUGINS.md)에 있어요.
+
 ## 설치
 
-설치는 세 가지 명령이에요. 스크립트를 내려받고, 이 사이트가 제공하는 파일의 SHA-256과 대조한 다음 실행해요. 설치 프로그램은 자신의 릴리스로 고정되어 있어서, [다른 버전을 선택](#choose-a-version)하지 않는 한 이 페이지가 설명하는 릴리스인 `v0.5.1`을 정확히 설치해요.
+설치는 세 가지 명령이에요. 스크립트를 내려받고, 이 사이트가 제공하는 파일의 SHA-256과 대조한 다음 실행해요. 설치 프로그램은 자신의 릴리스로 고정되어 있어서, [다른 버전을 선택](#choose-a-version)하지 않는 한 이 페이지가 설명하는 릴리스인 `v0.6.0`을 정확히 설치해요.
 
 <VimInstall lang="ko" />
 
@@ -74,17 +117,17 @@ DeepWorkPlan Vim이 바로 그런 에디터예요. 언어 서버, 자동 완성,
 6. 저장소 자체의 `lua install.lua`를 실행해요.
 7. 플러그인을 헤드리스로 설치하고 확인하므로 종료했다가 다시 여는 단계가 없어요. `--strict`를 쓰면 플러그인 설치가 실패하거나 불완전할 때 오류로 처리해요.
 
-여기서 제공하는 스크립트는 `v0.5.1` 태그의 `install.sh`와 바이트 단위로 동일한 사본이에요. 체크섬은 그 옆의 `https://deepworkplan.com/vim/install.sh.sha256`에서 제공하므로, `shasum -a 256 -c install.sh.sha256`(Linux에서는 `sha256sum -c install.sh.sha256`)로 내려받은 파일을 검증할 수 있어요. 두 번째 출처로도 확인하려면 GitHub 릴리스에 있는 `SHA256SUMS`의 `install.sh` 줄과 비교하세요. 모든 옵션을 보려면 `bash install.sh --help`를 실행하세요.
+여기서 제공하는 스크립트는 `v0.6.0` 태그의 `install.sh`와 바이트 단위로 동일한 사본이에요. 체크섬은 그 옆의 `https://deepworkplan.com/vim/install.sh.sha256`에서 제공하므로, `shasum -a 256 -c install.sh.sha256`(Linux에서는 `sha256sum -c install.sh.sha256`)로 내려받은 파일을 검증할 수 있어요. 두 번째 출처로도 확인하려면 GitHub 릴리스에 있는 `SHA256SUMS`의 `install.sh` 줄과 비교하세요. 모든 옵션을 보려면 `bash install.sh --help`를 실행하세요.
 
 <a id="choose-a-version" class="scroll-mt-24"></a>
 
 ## 버전 선택
 
-기본적으로 설치 프로그램은 자신의 릴리스인 `v0.5.1`을 설치해요. 다른 버전을 선택하려면 `DWP_VIM_VERSION`을 설정하거나 `--version`을 전달하세요. 둘은 같은 일을 하므로 더 읽기 쉬운 쪽을 쓰면 되고, 플래그가 환경 변수보다 우선해요. 둘 다 다음 형식을 받아요.
+기본적으로 설치 프로그램은 자신의 릴리스인 `v0.6.0`을 설치해요. 다른 버전을 선택하려면 `DWP_VIM_VERSION`을 설정하거나 `--version`을 전달하세요. 둘은 같은 일을 하므로 더 읽기 쉬운 쪽을 쓰면 되고, 플래그가 환경 변수보다 우선해요. 둘 다 다음 형식을 받아요.
 
 | 형식 | 예시 | 설치되는 것 |
 |---|---|---|
-| 정확한 버전 | `0.5.1` 또는 `v0.5.1` | 해당 릴리스 |
+| 정확한 버전 | `0.6.0` 또는 `v0.6.0` | 해당 릴리스 |
 | 최소 버전 | `'>=0.4.2'` | 최소 버전 이상인 가장 새로운 안정 릴리스 |
 | 최신 | `latest` | 가장 새로운 안정 릴리스 |
 
@@ -92,8 +135,8 @@ DeepWorkPlan Vim이 바로 그런 에디터예요. 언어 서버, 자동 완성,
 
 ```bash
 # exact version
-DWP_VIM_VERSION=0.5.1 bash install.sh
-bash install.sh --version 0.5.1
+DWP_VIM_VERSION=0.6.0 bash install.sh
+bash install.sh --version 0.6.0
 
 # minimum floor: the newest stable release at or above 0.4.2
 DWP_VIM_VERSION='>=0.4.2' bash install.sh
@@ -112,10 +155,10 @@ bash install.sh --version latest
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 sha256sum -c install.sh.sha256 && \
-bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
+bash install.sh --version 0.6.0 --nvim 0.12.5 --skip-packages --strict
 ```
 
-- `--version 0.5.1`은 에디터 릴리스를 고정해요.
+- `--version 0.6.0`은 에디터 릴리스를 고정해요.
 - `--nvim 0.12.5`는 해당 Neovim 릴리스를 `~/.local/opt/nvim-v0.12.5`에 설치하고 `~/.local/bin/nvim`으로 링크하며, Neovim이 게시한 SHA-256으로 검증해요(Linux와 macOS).
 - `--skip-packages`는 시스템 패키지를 설치하지 않아요. 이미지에 git, curl, Lua가 이미 있어야 해요.
 - `--strict`는 헤드리스 플러그인 설치가 실패하거나 플러그인이 빠져 있으면 0이 아닌 코드로 종료해요. 또한 모든 플러그인과 pckr가 릴리스의 `pckr/lockfile.lua`에 고정된 커밋으로 체크아웃되어 있는지 확인해요.
@@ -126,7 +169,7 @@ bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
 
 - Neovim 0.12 이상. 직접 설치하거나, `--nvim X.Y.Z`로 설치 프로그램이 검증된 릴리스를 추가하게 하세요(Linux와 macOS).
 - Lua: `lua`, `lua5.4`, `luajit` 중 하나. 없으면 설치 프로그램이 하나 추가해요.
-- macOS, Linux, WSL에서는 설치 프로그램을 실행해요. Windows에는 저장소 README에 수동 방법이 있어요. winget으로 Neovim을 설치하고, `v0.5.1` 태그를 `%LOCALAPPDATA%\nvim`에 클론한 다음, Git Bash에서 `lua install.lua`를 실행하세요.
+- macOS, Linux, WSL에서는 설치 프로그램을 실행해요. Windows에는 저장소 README에 수동 방법이 있어요. winget으로 Neovim을 설치하고, `v0.6.0` 태그를 `%LOCALAPPDATA%\nvim`에 클론한 다음, Git Bash에서 `lua install.lua`를 실행하세요.
 - GPL-3.0 라이선스: 자유롭게 사용하고 연구하고 수정할 수 있어요.
 
 ## 업데이트, 버전 고정, 제거
@@ -140,7 +183,7 @@ bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 shasum -a 256 -c install.sh.sha256 && \
-bash install.sh --version 0.5.0
+bash install.sh --version 0.5.1
 ```
 
 제거하려면 설정 디렉터리에서 `lua delete.lua`를 실행하세요. 설정, 플러그인, Mason 데이터, 캐시와 상태, 설치 프로그램이 복사한 글꼴을 지우고, Neovim 실행 파일과 시스템 패키지는 그대로 둬요.
@@ -173,7 +216,7 @@ Deep Work Plan v7은 온보딩 중에 이 에디터를 선택 `vim` 애드온으
 
 ### 어떤 버전을 받나요?
 
-설치 프로그램은 자신이 속한 릴리스(현재는 `v0.5.1`)를 설치해요. 다른 버전을 원하면 `--version`이나 `DWP_VIM_VERSION`으로 정확한 버전, `>=` 최소 버전 또는 `latest`를 선택하세요. `DWP_VIM_REF`는 브랜치나 커밋을 받아요. `DWP_VIM_REF=main`은 `main`을 따라가요. 이 페이지는 여기 나열된 모든 기능을 담은 릴리스 `v0.5.1`을 설명해요.
+설치 프로그램은 자신이 속한 릴리스(현재는 `v0.6.0`)를 설치해요. 다른 버전을 원하면 `--version`이나 `DWP_VIM_VERSION`으로 정확한 버전, `>=` 최소 버전 또는 `latest`를 선택하세요. `DWP_VIM_REF`는 브랜치나 커밋을 받아요. `DWP_VIM_REF=main`은 `main`을 따라가요. 이 페이지는 여기 나열된 모든 기능을 담은 릴리스 `v0.6.0`을 설명해요.
 
 ### 라이선스는 무엇이고 어디서 왔나요?
 

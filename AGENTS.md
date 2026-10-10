@@ -25,7 +25,7 @@
 | AI Agents | [Agent Onboarding](docs/AI_AGENT_ONBOARDING.md), [Agent Collaboration](docs/AI_AGENT_COLLAB.md) | Setup, handoff, coordination |
 | Skills/Agents | [Skills & Agents Catalog](.agents/docs/skills_agents_catalog.md) | Available skills and agents |
 | Commands | [Commands Reference](.agents/docs/COMMANDS_REFERENCE.md) | All slash commands with procedure files |
-| Ecosystem hub | [Ecosystem Context](docs/ECOSYSTEM_CONTEXT.md), [Cross-Project Standards](docs/CROSS_PROJECT_STANDARDS.md), [Repositories index](repositories/README.md) | Hub role: posture, release order, boundaries, per-repo gates, orchestrator plans |
+| Ecosystem hub | [Ecosystem Context](docs/ECOSYSTEM_CONTEXT.md), [Cross-Project Standards](docs/CROSS_PROJECT_STANDARDS.md), Repositories index (`repositories/README.md`) | Hub role: posture, release order, boundaries, per-repo gates, orchestrator plans |
 
 ## Project Overview
 
@@ -45,15 +45,15 @@ The site explains and positions the DWP methodology, hosts the readable specific
 
 **Content model:** methodology documentation is primary, paired with the specification reader and kit catalog. The blog engine, slides/tech-talks, and personal pages have been removed — this is a focused methodology-and-marketing site.
 
-**Kit addons:** eight addon pages at `/kit/<slug>` (`kind: addon`, one page each — rule 20): devcontainer, dailybot, dependency-upgrade, design-system, ai-diff-reviewer, vim, herdr, agentkit. herdr, agentkit, devcontainer and vim document the **v7 ecosystem**: thin integrators pinned by tag to products with their own repositories (herdr-peers `v0.1.0`, coding-agents-kit `v0.1.1`, devcontainer-kit `v0.1.4`, deepworkplan-vim `v0.4.2`), shipped as optional addons of DWP `v7.0.0` (vendored here) — never presented as required. These are the pack's addon pins (`/init.md`, the kit plate); `/kit/vim` and the served `/vim/install.sh` track the newer product release `v0.5.1`, as the product page may (its installer pins its own release). The kit index carries the ecosystem plate (`src/components/diagrams/kit/KitEcosystem.astro`). Every product claim traces to a tagged artifact (claims-ledger method).
+**Kit addons:** eight addon pages at `/kit/<slug>` (`kind: addon`, one page each — rule 20): devcontainer, dailybot, dependency-upgrade, design-system, ai-diff-reviewer, vim, herdr, agentkit. herdr, agentkit, devcontainer and vim document the **v7 ecosystem**: thin integrators pinned by tag to products with their own repositories (herdr-peers `v0.1.0`, coding-agents-kit `v0.3.0`, devcontainer-kit `v0.2.2`, deepworkplan-vim `v0.6.0`), shipped as optional addons of DWP `v7.1.4` (vendored here) — never presented as required. The site's pins (`/init.md`, the kit plate), and `/kit/vim` with the served `/vim/install.sh` track the same `v0.6.0` (the vendored pack's own vim pin is still `v0.5.1` until upstream moves it). The kit index carries the ecosystem plate (`src/components/diagrams/kit/KitEcosystem.astro`). Every product claim traces to a tagged artifact (claims-ledger method).
 
 **Technology Stack:**
 
-- **Astro 7.0.8** — Static site generator (islands architecture; Rust compiler + Sätteri Markdown)
-- **Svelte 5.56.4** — Interactive components
+- **Astro 7.3.6** — Static site generator (islands architecture; Rust compiler + Sätteri Markdown)
+- **Svelte 5.57.2** — Interactive components
 - **TypeScript 6.0.3** — Type-safe development
-- **Tailwind CSS 4.3.2** — Utility-first styling with dark mode
-- **Biome 2.5.3** — Linter and formatter (replaces ESLint + Prettier)
+- **Tailwind CSS 4.3.3** — Utility-first styling with dark mode
+- **Biome 2.5.15** — Linter and formatter (replaces ESLint + Prettier)
 - **MDX** — Enhanced Markdown for content collections (via `@astrojs/markdown-satteri` / Sätteri)
 
 ## Project Structure
@@ -126,7 +126,7 @@ the remaining invocations: [Development Commands → Audit scripts](docs/DEVELOP
 
 ## Ecosystem Hub — Repository Boundaries (MANDATORY)
 
-This repository is also the **DeepWorkPlan ecosystem hub**. `repositories/` holds local clones of the public ecosystem repositories, managed by `bash scripts/repositories.sh clone|status|pull|ls` from the tracked `repositories/manifest.json` (index: [`repositories/README.md`](repositories/README.md)). Everything under `repositories/` is git-ignored except `README.md` (the navigation index) and `manifest.json`, and no site tool reads it (`tests/unit/lib/hub-isolation.test.ts`).
+This repository is also the **DeepWorkPlan ecosystem hub**. `repositories/` holds local clones of the public ecosystem repositories, managed by `bash scripts/repositories.sh clone|status|pull|ls` from the tracked `repositories/manifest.json` (index: `repositories/README.md`). Everything under `repositories/` is git-ignored except `README.md` (the navigation index) and `manifest.json`, and no site tool reads it (`tests/unit/lib/hub-isolation.test.ts`).
 
 **Where work lands:** a change to the site, its docs, tooling or hub coordination files is committed here. A change to an ecosystem repository is made **inside** `repositories/<name>`: `cd` into it, read its own `AGENTS.md`, pull its default branch, then branch, commit, gate, push and open the PR **there**. Decision tree: [Cross-Project Standards](docs/CROSS_PROJECT_STANDARDS.md#where-work-lands).
 
@@ -302,7 +302,7 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 
 - **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the release workflow refreshes them to the latest upstream tag on every merge to `main` and overwrites local edits. Contribute upstream.
 - **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: update it only through an explicit, reviewed change (released tag, tree-URL install, `SHA256SUMS` verified), contributed upstream first.
-- **Current provenance (2026-10-09):** `deepworkplan` **v7.0.1**, `ai-diff-reviewer` **v3.3.0**, `dailybot` **v3.23.3**; `.dwp/config.json` (the addon registry) is the only tracked file under `.dwp/`.
+- **Current provenance (2026-10-10):** `deepworkplan` **v7.1.4**, `ai-diff-reviewer` **v3.3.0**, `dailybot` **v3.23.3**; `.dwp/config.json` (the addon registry) is the only tracked file under `.dwp/`.
 
 > Upstream table, install commands, refresh sequence, failure semantics and provenance history: [Architecture → Vendored agent skills](docs/ARCHITECTURE.md#vendored-agent-skills).
 
@@ -318,7 +318,7 @@ is required only for the CI leg; the local review never needs it. The shared
 [`.review/extension.md`](.review/extension.md) configures both the local and
 the CI review.
 
-DWP standard: 7.0.0 (onboarded 2026-09-11; upgraded 2026-09-13, 2026-09-17, 2026-09-25, 2026-09-28, 2026-10-01 and 2026-10-09; skill 7.0.1). New plans use the v7 contract by default; existing plans retain their recorded generation and require an explicit request for migration. V6 host baseline: all eight capabilities (`stop_agent`, `meter_spend`, `meter_tokens`, `meter_wall_clock`, `cancel_children`, `model_routing`, `subagents`, `telemetry`) are `false` unless runtime support is verified; telemetry also requires consent. Developers authorize plans and work. Stop before a `main` push/deployment, publication, external messages or secret access unless authorized; prior authorization persists. See [v6 host and authority records](docs/AI_AGENT_ONBOARDING.md#dwp-v6-host-and-authority-records) and the [outcome/test map](docs/TESTING_GUIDE.md#selecting-a-gate-for-a-change).
+DWP standard: 7.0.0 (onboarded 2026-09-11; upgraded 2026-09-13, 2026-09-17, 2026-09-25, 2026-09-28, 2026-10-01 and 2026-10-09; skill 7.1.4, vendored 2026-10-10). New plans use the v7 contract by default; existing plans retain their recorded generation and require an explicit request for migration. V6 host baseline: all eight capabilities (`stop_agent`, `meter_spend`, `meter_tokens`, `meter_wall_clock`, `cancel_children`, `model_routing`, `subagents`, `telemetry`) are `false` unless runtime support is verified; telemetry also requires consent. Developers authorize plans and work. Stop before a `main` push/deployment, publication, external messages or secret access unless authorized; prior authorization persists. See [v6 host and authority records](docs/AI_AGENT_ONBOARDING.md#dwp-v6-host-and-authority-records) and the [outcome/test map](docs/TESTING_GUIDE.md#selecting-a-gate-for-a-change).
 
 ## Quick Commands
 

@@ -8,7 +8,7 @@ section: Addons
 
 # アドオン
 
-> **バージョンの適用範囲:** 本文書は保持されている v5.0.0 の基盤文書です。現在の標準である DWP 7.0.0 では、[仕様インデックス](/spec)に記載された該当する `V6_*.md` と `V7_*.md` の拡張も適用されます。既存の v5 計画と v6 計画は記録済みの規則を維持します。
+> **バージョンの適用範囲:** 本文書は保持されている v5.0.0 の基盤文書です。現在の標準である DWP 7.0.0 では、[仕様インデックス](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)に記載された該当する `V6_*.md` と `V7_*.md` の拡張も適用されます。既存の v5 計画と v6 計画は記録済みの規則を維持します。
 
 **バージョン 2.1.0。** アドオンはコア Deep Work Plan 方法論への拡張機能です。8 つのうち 7 つはオプションであり、**適合に決して不要**——オプションアドオンがゼロのリポジトリも完全に AI-first で DWP 適合です。各オプションアドオンはオンボーディング中に提供され、明示的に受け入れまたは拒否され、——受け入れた場合——既存セットアップを上書きせず**調和**します。1 つのコンポーネントだけが明言された例外です：標準 2.3.0 以降、**AI Diff Reviewer ローカルレビュー**は必須ベースラインの一部であり——オンボーディングがそれをインストールし、すべての Final Review がそれを実行します——CI サーフェスのみがオプトインのままです。
 
@@ -31,11 +31,11 @@ section: Addons
 
 ### Devcontainer（第 1 アドオン）
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v0.1.4` に固定）の薄いインテグレーター：`dck init` がリポジトリにレンダリングする Dev Containers テンプレート。
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v0.2.2` に固定、インターフェース `2`）の薄いインテグレーター：`dck init` がリポジトリ自身のコンテナとしてリポジトリにレンダリングする Dev Containers テンプレートと、`dck-dockerfile` スキル。
 
 - **キットページ：** [Devcontainer](/kit/devcontainer)
-- **追加内容：** `dck` ランチャー（`setup`、`up`、`shell`、`ssh`、`doctor`）、コーディングエージェントを含まずに提供される `python-3.13`、`node-24`、`debian` フレーバーのベースイメージ（エージェントはオプトインのレイヤー）、ループバック限定のポート、SSH エージェント転送、コンテナごとのオプションの Herdr マシン
-- **動作：** `dck doctor --json`（インターフェース 1）で検出；`dck init` は diff が承認された後にのみ既存 devcontainer を調和し、先にファイルをバックアップする——上書きされない
+- **追加内容：** digest で固定したランタイム公式イメージから作る `docker/local/<service>/Dockerfile`（`python-3.13`、`node-24` または `debian`、共有ベースイメージなし）、`dck` ランチャー（`up`、`shell`、`rebuild`、`doctor`）の上に立つ `dev.sh`、オプトインのレイヤーとしてのコーディングエージェント、ループバック限定のポート、コンテナ内に鍵を置かずホストのエージェント経由で SSH を使う git、標準レイアウトによるコンテナごとの Herdr マシン
+- **動作：** `dck doctor --json`（インターフェース 2）で検出；`dck init` は diff が承認された後にのみ既存 devcontainer を調和し、先にファイルをバックアップする——上書きされない
 - **提供タイミング：** Docker または分離開発コンテナが有益なサービスを持つほとんどのリポジトリ
 
 ### Dailybot（第 2 アドオン）
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim（第 7 アドオン）
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（`v0.4.2` に固定、インターフェース `1`）の薄いインテグレーターで、Deep Work Plan のためのターミナルエディター（Neovim 0.12+）です。
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（`v0.5.1` に固定、インターフェース `1`）の薄いインテグレーターで、Deep Work Plan のためのターミナルエディター（Neovim 0.12+）です。
 
 - **キットページ：** [DeepWorkPlan Vim](/kit/vim)
 - **追加内容：** エージェントと人間のための任意のマシンレベルのエディターサーフェス——生成されるコマンドインデックス、読み取り専用の計画ブラウザー、Markdown ビューア；すべての記述は製品の固定された機械可読サーフェスから読み取られる
@@ -100,11 +100,11 @@ section: Addons
 
 ### Agentkit（第 8 アドオン）
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v0.1.1` に固定、インターフェース `1`）の薄いインテグレーターで、v7 計画の**ヘッドレス**委任トランスポートです。
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v0.3.0` に固定、インターフェース `1`）の薄いインテグレーターで、v7 計画の**ヘッドレス**委任トランスポートです。
 
 - **キットページ：** [Agentkit](/kit/agentkit)
 - **追加内容：** ターミナル型コーディングエージェント全体にわたる一つの `ak` コマンドサーフェスで、範囲の限られた計画タスクをヘッドレスで実行するために使う；`subagents`、`cancel_children`、`model_routing` の能力は、有効化され、検出され、互換性のあるインターフェース上にある場合にのみ、実行時に提供される
-- **動作：** どの利用にも contract の権限付与 `agent_delegation` が必要；このアドオンがコーディングエージェントの CLI を独自にインストールすることはなく、プロバイダーキーの値を読み取ることもない
+- **動作：** どの利用にも contract の権限付与 `agent_delegation` が必要；kit はデフォルトでエージェントを自律モードで起動し、そのオプトアウト（`--ask` または `AGENTKIT_PERMISSIONS=ask`）が常に優先される——アドオンは自律フラグを一切指定せず、計画がオプトアウトを記録している場合と、読み取り専用の委任先には常に `--ask` を渡す；コーディングエージェントの CLI を独自にインストールすることはなく、プロバイダーキーの値を読み取ることもない
 - **提供タイミング：** フェーズ 7b での明示的なオプトイン；`ak doctor --json` による読み取り専用の検出
 
 ## スキル

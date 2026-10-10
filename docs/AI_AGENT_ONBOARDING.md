@@ -19,7 +19,7 @@ Quick start guide for AI coding assistants (Cursor AI, Claude Code, ChatGPT, Gem
 - **Static Site Generation (SSG)** - builds to static HTML
 - **Multilingual** - English (default) plus 16 other active languages (es, pt, zh, ja, de, fr, ko, ru, it, tr, id, vi, hi, pl, uk, th)
 - **Deployed to** Cloudflare Pages
-- **Also the DeepWorkPlan ecosystem hub** — public ecosystem repositories are cloned under the git-ignored `repositories/` (`bash scripts/repositories.sh clone`). Work for one of them is committed **inside** its clone under its own `AGENTS.md`, never from this root. Start with [`repositories/README.md`](../repositories/README.md) and [Cross-Project Standards](CROSS_PROJECT_STANDARDS.md).
+- **Also the DeepWorkPlan ecosystem hub** — public ecosystem repositories are cloned under the git-ignored `repositories/` (`bash scripts/repositories.sh clone`). Work for one of them is committed **inside** its clone under its own `AGENTS.md`, never from this root. Start with `repositories/README.md` and [Cross-Project Standards](CROSS_PROJECT_STANDARDS.md).
 
 ## Repository Structure
 
@@ -113,7 +113,7 @@ Methodology/spec/kit docs live in multilingual content collections (17 active la
 
 ## DWP v6 host and authority records
 
-The current DWP standard is 7.0.0, implemented by the installed 7.0.1 skill.
+The current DWP standard is 7.0.0, implemented by the installed 7.1.4 skill.
 New plans use the v7 contract by default; the addon registry is the tracked
 `.dwp/config.json`; plans from earlier
 generations retain their recorded format and are never migrated implicitly.

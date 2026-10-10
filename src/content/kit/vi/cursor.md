@@ -24,7 +24,7 @@ Các lệnh DWP tồn tại dưới dạng markdown trong dự án. Cursor đọ
 Tùy chọn: [coding-agents-kit](/kit/agentkit) có thể cài đặt CLI này và khởi chạy nó bằng `ak cursor`. Trình cài đặt chính thức của nhà cung cấp cũng hoạt động tốt như vậy.
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

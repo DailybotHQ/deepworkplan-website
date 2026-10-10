@@ -10,7 +10,7 @@ lastUpdated: 2026-10-09
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
 ```
 
 Поточний пакет 7.x за замовчуванням створює нові плани у форматі v7. Наявні плани зберігають зафіксоване покоління; міграція потребує явного запиту.
@@ -66,11 +66,11 @@ npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.
 
 - **Скіл Deep Work Plan** — Створює, виконує, перевіряє, відновлює та уточнює плани. Не потребує аддонів.
 - **[herdr](/uk/kit/herdr)** — Peer-агенти в панелях Herdr на будь-якій машині: інтерактивне делегування з однією авторизованою відповіддю. Закріплено на `herdr-peers@v0.1.0`.
-- **[agentkit](/uk/kit/agentkit)** — Одна команда ak для кожного термінального агента для програмування: делегування без інтерфейсу у worktree. Закріплено на `coding-agents-kit@v0.1.1`.
-- **[devcontainer](/uk/kit/devcontainer)** — Шаблон Dev Containers і базові образи, що постачаються без агентів для коду. Закріплено на `devcontainer-kit@v0.1.4`.
-- **[vim](/uk/kit/vim)** — Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown. Закріплено на `deepworkplan-vim@v0.4.2`.
+- **[agentkit](/uk/kit/agentkit)** — Одна команда ak для кожного термінального агента для програмування: автономія за замовчуванням із можливістю відмови та делегування без інтерфейсу у worktree. Закріплено на `coding-agents-kit@v0.3.0`.
+- **[devcontainer](/uk/kit/devcontainer)** — Власний dev-контейнер кожного репозиторію з одного шаблону: агенти через ak, Herdr в обидва боки, без SSH-ключа всередині. Закріплено на `devcontainer-kit@v0.2.2`.
+- **[vim](/uk/kit/vim)** — Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown. Закріплено на `deepworkplan-vim@v0.6.0`.
 
-Реєстр аддонів і дескриптори постачаються в Deep Work Plan v7: `v7.0.0`
+Реєстр аддонів і дескриптори постачаються в Deep Work Plan v7: `v7.1.4`
 
 ### Приклади
 

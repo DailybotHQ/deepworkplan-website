@@ -10,7 +10,7 @@ Das Kit ist alles, was Sie brauchen, um die Methodik in der Praxis auszuführen.
 `DailybotHQ/deepworkplan-skill` installiert:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
 ```
 
 Das aktuelle 7.x-Paket erstellt neue Pläne standardmäßig mit v7. Bestehende Pläne behalten ihre aufgezeichnete Generation; eine Migration erfordert einen ausdrücklichen Auftrag.
@@ -66,11 +66,11 @@ Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügt. Sieben sind op
 
 - **Deep Work Plan Skill** — Pläne erstellen, ausführen, verifizieren, fortsetzen und verfeinern. Benötigt kein Addon.
 - **[herdr](/de/kit/herdr)** — Peers in Herdr-Panes, auf jeder Maschine: interaktive Delegation mit genau einer autorisierten Antwort. Fixiert auf `herdr-peers@v0.1.0`.
-- **[agentkit](/de/kit/agentkit)** — Ein einziger Befehl ak für jeden Terminal-Coding-Agenten: Headless-Delegation in einem Worktree. Fixiert auf `coding-agents-kit@v0.1.1`.
-- **[devcontainer](/de/kit/devcontainer)** — Eine Vorlage für Dev Containers und Basis-Images, die ohne Coding-Agenten ausgeliefert werden. Fixiert auf `devcontainer-kit@v0.1.4`.
-- **[vim](/de/kit/vim)** — Der Terminal-Editor, mit einem schreibgeschützten Plan-Browser und einem Markdown-Viewer. Fixiert auf `deepworkplan-vim@v0.4.2`.
+- **[agentkit](/de/kit/agentkit)** — Ein einziger Befehl ak für jeden Terminal-Coding-Agenten: Autonomie standardmäßig mit einem Opt-out und Headless-Delegation in einem Worktree. Fixiert auf `coding-agents-kit@v0.3.0`.
+- **[devcontainer](/de/kit/devcontainer)** — Der eigene Dev-Container jedes Repositorys aus einer einzigen Vorlage: Agenten über ak, Herdr in beide Richtungen, kein SSH-Schlüssel im Container. Fixiert auf `devcontainer-kit@v0.2.2`.
+- **[vim](/de/kit/vim)** — Der Terminal-Editor, mit einem schreibgeschützten Plan-Browser und einem Markdown-Viewer. Fixiert auf `deepworkplan-vim@v0.6.0`.
 
-Die Addon-Registry und die Deskriptoren werden in Deep Work Plan v7 ausgeliefert: `v7.0.0`
+Die Addon-Registry und die Deskriptoren werden in Deep Work Plan v7 ausgeliefert: `v7.1.4`
 
 ### Beispiele
 

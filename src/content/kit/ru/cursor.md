@@ -24,7 +24,7 @@ Cursor поддерживает DWP через правила проекта и 
 Необязательно: [coding-agents-kit](/kit/agentkit) может установить этот CLI и запускать его командой `ak cursor`. Официальный установщик поставщика работает так же хорошо.
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

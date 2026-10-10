@@ -42,7 +42,7 @@ Deep Work Plan はリポジトリを、コーディングエージェントが�
 
 ### どう使いますか？
 
-三つのステップです。まず、コーディングエージェントに Deep Work Plan スキルをインストールします——最も速い方法は `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y`（またはスキルリポジトリをクローンして `./setup.sh` を実行）です。次に、リポジトリに一度オンボーディングし、エージェントに `AGENTS.md`、`docs/`、`.agents/` キット、gitignore された `.dwp/` 領域をあなたのスタックに適応させます：https://deepworkplan.com/init.md を指すか、`/deepworkplan-onboard` を実行します。第三に、薄いコマンドで計画と実行を行います：`/dwp-create <goal>` が計画を構築し、`/dwp-execute` が各ゲートに対してタスク単位で実行し、`/dwp-refine` が進行中の計画（スコープ、タスク、または Lite プランから Full への昇格）を編集し、`/dwp-resume` が中断後に続行し、`/dwp-status` が実行せずに進捗を報告し、`/dwp-verify` が客観的な適合性レポートを生成し、`/dwp-upgrade` がインストール済みのスキルを、既存のプランに触れることなく新しいリリースへ移動します。`/` をインターセプトするエージェントは `#` を使うことが多いです（例：`#dwp-execute`）。アダプションエンドポイントとクイックスタートが、同じ経路をより詳しく説明します。
+三つのステップです。まず、コーディングエージェントに Deep Work Plan スキルをインストールします——最も速い方法は `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y`（またはスキルリポジトリをクローンして `./setup.sh` を実行）です。次に、リポジトリに一度オンボーディングし、エージェントに `AGENTS.md`、`docs/`、`.agents/` キット、gitignore された `.dwp/` 領域をあなたのスタックに適応させます：https://deepworkplan.com/init.md を指すか、`/deepworkplan-onboard` を実行します。第三に、薄いコマンドで計画と実行を行います：`/dwp-create <goal>` が計画を構築し、`/dwp-execute` が各ゲートに対してタスク単位で実行し、`/dwp-refine` が進行中の計画（スコープ、タスク、または Lite プランから Full への昇格）を編集し、`/dwp-resume` が中断後に続行し、`/dwp-status` が実行せずに進捗を報告し、`/dwp-verify` が客観的な適合性レポートを生成し、`/dwp-upgrade` がインストール済みのスキルを、既存のプランに触れることなく新しいリリースへ移動します。`/` をインターセプトするエージェントは `#` を使うことが多いです（例：`#dwp-execute`）。アダプションエンドポイントとクイックスタートが、同じ経路をより詳しく説明します。
 
 [クイックスタート](https://deepworkplan.com/ja/quickstart)
 

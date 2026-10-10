@@ -10,7 +10,7 @@ Kit, metodolojiyi uygulamada çalıştırmak için ihtiyacınız olan her şeydi
 `DailybotHQ/deepworkplan-skill` üzerinden kurulur:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
 ```
 
 Güncel 7.x paketi yeni planları varsayılan olarak v7 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek gerektirir.
@@ -64,11 +64,11 @@ Onboarding akışının bir depoya katmanladığı yetenekler. Yedisi isteğe ba
 
 - **Deep Work Plan skill'i** — Planları oluşturur, yürütür, doğrular, sürdürür ve iyileştirir. Hiçbir eklenti gerektirmez.
 - **[herdr](/tr/kit/herdr)** — Herhangi bir makinede Herdr panellerindeki eşler: tek bir yetkili yanıtla etkileşimli devretme. Sabitlenen sürüm `herdr-peers@v0.1.0`.
-- **[agentkit](/tr/kit/agentkit)** — Her terminal kodlama ajanı için tek bir ak komutu: bir worktree içinde başsız devretme. Sabitlenen sürüm `coding-agents-kit@v0.1.1`.
-- **[devcontainer](/tr/kit/devcontainer)** — Kodlama ajanları olmadan sunulan bir Dev Containers şablonu ve temel imajlar. Sabitlenen sürüm `devcontainer-kit@v0.1.4`.
-- **[vim](/tr/kit/vim)** — Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi. Sabitlenen sürüm `deepworkplan-vim@v0.4.2`.
+- **[agentkit](/tr/kit/agentkit)** — Her terminal kodlama ajanı için tek bir ak komutu: devre dışı bırakılabilen varsayılan özerklik ve bir worktree içinde başsız devretme. Sabitlenen sürüm `coding-agents-kit@v0.3.0`.
+- **[devcontainer](/tr/kit/devcontainer)** — Tek bir şablondan her deponun kendi geliştirme konteyneri: ajanlar ak üzerinden, iki yönlü Herdr, içeride SSH anahtarı yok. Sabitlenen sürüm `devcontainer-kit@v0.2.2`.
+- **[vim](/tr/kit/vim)** — Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi. Sabitlenen sürüm `deepworkplan-vim@v0.6.0`.
 
-Eklenti kayıt defteri ve tanımlayıcılar Deep Work Plan v7 ile sunulur: `v7.0.0`
+Eklenti kayıt defteri ve tanımlayıcılar Deep Work Plan v7 ile sunulur: `v7.1.4`
 
 ### Örnekler
 

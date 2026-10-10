@@ -72,11 +72,11 @@ jobs:
     name: 'Release and Publish'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: '30'
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '24.20.0'
           registry-url: https://registry.npmjs.org/
@@ -86,7 +86,7 @@ jobs:
           STORE_PATH=$(corepack pnpm store path --silent)
           echo "STORE_PATH=${STORE_PATH}" >> "$GITHUB_OUTPUT"
       - name: Step 0a - 📁 Cache pnpm store
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ${{ steps.pnpm-store.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}

@@ -9,6 +9,81 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.44] - 2026-10-10
+
+### Changed
+
+- fix(vim): pin the v0.6.0 commit, keep the pack pin apart from the product pin, describe sidebars.exclusive accurately
+- docs(vim): move the vim pin to v0.6.0 across the site, docs and llms files
+- chore(vim): serve the v0.6.0 installer and pin tests and images to it
+- docs(kit): document the v0.6.0 vim focus, dwpvim.json, plans sidebar, dashboard and lighter plugin set in 17 languages
+
+## [5.0.43] - 2026-10-10
+
+### Deep Work Plan v7 — what this release covers
+
+This release brings the site fully up to date with the v7 generation of Deep Work Plan (pack `v7.1.4`, vendored here). The methodology is unchanged at its core: the plan is the source of truth, and a repository is fully conformant with zero addons.
+
+- **Records over narrative.** A v7 plan carries a contract, an append-only journal and a deterministic scheduler. Gate evidence is minted only by the gate runner, and a task completes only when its criteria and invariants are satisfied by recorded evidence.
+- **Delegation under a grant.** A `parallel_safe` task can be handed to another agent when the plan grants `agent_delegation`; the single reply is recorded as data and is verified before the task closes.
+- **Autonomy through the addons.** Herdr (a plan hands work to another agent in a pane, on any machine), Agentkit (`ak`, one command for every terminal coding agent, autonomy by default with an opt-out), Devcontainer (a reproducible container per repository, no SSH key inside) and DeepWorkPlan Vim (plan browser, Markdown viewer, command index) are described as a single ecosystem on the kit index.
+- **Benchmark and learnings.** The hub now runs with benchmark and learnings enabled, so each plan leaves curated findings to analyse afterwards.
+- **No degradation, measured.** A cross-repository audit of the whole ecosystem found no behavioural regression against v6: the pack suite passes 807 of 807 on a clean environment, and instruction load grew 0.1% to 3.9% per flow (4.6% for the whole pack), measured in bytes on both tags, not as token estimates.
+
+### Added
+
+- The hub addon registry enables all eight addons with their versions (`agentkit`, `ai-diff-reviewer`, `dailybot`, `dependency-upgrade`, `design-system`, `devcontainer`, `herdr`, `vim`) and turns benchmark and learnings on.
+- `V7_CONTRACT.md` is linked from the plan-state specification page in every language, and the v6 plan-state schema cites the matching v7 schema URLs.
+
+### Changed
+
+- Kit index: the Herdr, Agentkit, Devcontainer and Vim cards now lead with what each one gives you (delegation with a record, one command for every agent, a container with no key inside, an editor built for plans) instead of labelling them optional v7 addons, in all 17 languages. The pages still state inside that the addons are optional.
+- Version-scope banners in the addons, lite-plans, archetypes, agent-protocol and documentation-standard specification pages point to the upstream specification index instead of listing documents the site does not publish.
+- Documentation no longer links to git-ignored paths, and same-named documents are disambiguated.
+- `AGENTS.md` stack versions match the installed toolchain (Astro 7.3.6, Svelte 5.57.2, Tailwind CSS 4.3.3, Biome 2.5.15).
+
+### Fixed
+
+- Dev container: when Herdr's agent link dangles, the container falls back to the mounted host SSH agent, so `git`, `gh`, signing and pushes work after a rebuild exactly as outside the container.
+
+## [5.0.42] - 2026-10-10
+
+### Changed
+
+- fix: llms-full.txt names the vendored pack v7.1.4
+- fix: the pack pin in the kit Markdown mirrors and llms files is v7.1.4
+- chore(skills): vendor deepworkplan v7.1.4 and move the public pins
+- fix: review of the pilot — spec and llms pins, npm shim for global installs, build overlay hook
+- docs: devcontainer-kit v0.2.2 across the kit, /init.md, the plate and the docs
+- fix(docker): set core.untrackedcache once, quietly, instead of in every new shell
+- feat(docker): devcontainer-kit v0.2.2 and dck's dev.sh
+- docs(kit): agentkit v0.3.0 and devcontainer-kit v0.2.1 in every language
+- docs(kit): agentkit v0.3.0, devcontainer-kit v0.2.1 and vim v0.5.1 across the kit (en) and the container docs
+- refactor(docker): agent wrappers give way to ak presets; site helpers stay
+- feat(docker): render the dwpwebsite container with devcontainer-kit v0.2.1
+- chore(skills): vendor deepworkplan v7.1.0 and move the public install pins
+
+## [5.0.41] - 2026-10-10
+
+### Changed
+
+- ci: bump actions/checkout from 4 to 7
+
+## [5.0.40] - 2026-10-10
+
+### Changed
+
+- chore: bump the minor-and-patch group across 1 directory with 12 updates
+- ci: bump actions/setup-node from 4 to 6
+- ci: bump actions/cache from 4 to 6
+
+## [5.0.39] - 2026-10-09
+
+### Changed
+
+- docs(site): describe v6/v7 plan verification by conformance.sh and pin agentkit in the addons spec
+- docs(site): describe DWP 7.0.0 as the current standard and the real addon set
+
 ## [5.0.38] - 2026-10-09
 
 ### Changed
@@ -1119,7 +1194,13 @@ existing GitHub release notes.
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.38...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.44...HEAD
+[5.0.44]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.44
+[5.0.43]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.43
+[5.0.42]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.42
+[5.0.41]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.41
+[5.0.40]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.40
+[5.0.39]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.39
 [5.0.38]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.38
 [5.0.37]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.37
 [5.0.36]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.36

@@ -1,6 +1,6 @@
 ---
 title: DeepWorkPlan Vim
-description: "DeepWorkPlan Vim adalah editor terminal untuk Deep Work Plan: konfigurasi Neovim 0.12+ dengan indeks perintah, penjelajah rencana, dan penampil Markdown."
+description: "Editor terminal untuk Deep Work Plan: Neovim 0.12+ dengan penjelajah rencana, penampil Markdown, dan indeks perintah yang dihasilkan, cukup satu instalasi."
 kind: addon
 lang: id
 order: 6
@@ -20,13 +20,13 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** adalah editor terminal untuk Deep Work Plan: konfigurasi Neovim untuk manusia, dan untuk agen pemrograman, yang bekerja di terminal. Rencana Anda, dokumentasi Anda, dan indeks semua perintah hanya sejauh satu tombol.
 
-Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v7 (`v7.0.0`). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v0.5.1**.
+Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v7 (`v7.0.0`). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v0.6.0**.
 
 ## Mengapa editor terminal untuk Deep Work Plan
 
 Deep Work Plan adalah folder Markdown di bawah `.dwp/plans/`: sebuah tujuan, tugas atomik, gerbang verifikasi, dan log yang terus berjalan. Manusia meninjaunya, agen menjalankannya, dan keduanya sering melakukannya dari terminal. Editor yang dibuat untuk pekerjaan itu menjaga tiga hal tetap dekat: rencana itu sendiri, dokumentasi di sekitarnya, dan tombol yang memindahkan Anda di antara keduanya.
 
-DeepWorkPlan Vim adalah editor itu. Ia adalah konfigurasi Neovim pilihan — server bahasa, pelengkapan otomatis, linting, pemformatan, pencarian kabur, pohon berkas, dan tema warna pilihan, dimuat secara malas — ditambah beberapa permukaan yang menjadikannya editor untuk Deep Work Plan.
+DeepWorkPlan Vim adalah editor itu. Tujuannya adalah mini VS Code di terminal: menjelajahi berkas, melihat berkas mana yang berubah, meninjau diff lalu menyetujui atau membuang perubahan, ramah dan ringan, mengutamakan agen, dengan status rencana selalu terlihat. Ia adalah konfigurasi Neovim pilihan — server bahasa, pelengkapan otomatis, pemformatan, pencarian kabur, pohon berkas, dan tema warna pilihan, dimuat secara malas — ditambah beberapa permukaan yang menjadikannya editor untuk Deep Work Plan.
 
 <VimInDwpLoop lang="id" class="not-prose my-10" />
 
@@ -46,7 +46,7 @@ Lima fitur, masing-masing hanya sejauh satu tombol.
 |---|---|---|
 | Indeks perintah yang dihasilkan | `SPC h h` | Setiap pemetaan dalam konfigurasi, dihasilkan dari pemetaan tombol yang aktif. |
 | Gestur ala VS Code | `<C-a>`, `SPC y` | Pilih seluruh berkas dengan satu tombol, lalu salin ke papan klip sistem. `y` biasa juga menyalin ke sana, karena papan klipnya berlaku di seluruh sistem. |
-| Penjelajah rencana Deep Work Plan | `SPC P` | Bilah samping untuk rencana di repositori Anda, dikelompokkan menurut status dengan bilah progres, dan pembaca untuk satu rencana. |
+| Penjelajah rencana Deep Work Plan | `SPC P` | Bilah samping untuk rencana di repositori Anda, dikelompokkan menurut status dengan bilah progres; klik sebuah rencana untuk membuka pembacanya. |
 | Penampil Markdown | `SPC m p`, `SPC m r` | Pratinjau Markdown di peramban, atau render di buffer. |
 | Pemasang terverifikasi | — | Pemasang mandiri untuk macOS, Linux, dan WSL, dengan jalur manual yang terdokumentasi untuk Windows. |
 
@@ -54,13 +54,56 @@ Lima fitur, masing-masing hanya sejauh satu tombol.
 
 `SPC P`, `:DwpPlans`, atau satu klik pada segmen baris status membuka bilah samping rencana. Ia mencakup setiap folder `.dwp/plans/` di direktori saat ini dan direktori konfigurasi Neovim Anda, dan mengelompokkan rencana mulai dari yang paling butuh perhatian. Di editor, labelnya adalah `Working`, `Needs attention`, `Ready`, `Not started`, dan `Done`. Setiap rencana menampilkan bilah progres.
 
-Tekan Enter pada sebuah rencana untuk membuka pembaca: tujuan dalam satu kalimat, status dan progres, daftar tugas dengan tugas saat ini ditandai, dan lompatan berbahasa sederhana ke berkas milik rencana itu sendiri. Baris status menampilkan rencana aktif secara langsung, dan layar awal mencantumkan tiga teratas. Permukaan-permukaan ini menjelaskan rencana; mereka tidak pernah menulis ke `.dwp/`.
+Klik sebuah rencana, atau tekan Enter padanya, untuk membuka pembaca: tujuan dalam satu kalimat, status dan progres, daftar tugas dengan tugas saat ini ditandai, dan lompatan berbahasa sederhana ke berkas milik rencana itu sendiri. Baris status menampilkan rencana aktif secara langsung, dan layar awal mencantumkan tiga teratas. Permukaan-permukaan ini menjelaskan rencana; mereka tidak pernah menulis ke `.dwp/`.
+
+Bilah samping ini merespons mouse dan keyboard. Panah kecil di samping sebuah rencana menampilkan atau menyembunyikan tugas dan berkasnya, dan klik pada sebuah tugas atau berkas membukanya. `j`, `k`, tombol panah, `Ctrl-n`, dan `Ctrl-p` berpindah dari rencana ke rencana, melewati baris kosong dan hiasan. Setiap bagian menampilkan jumlahnya, warna status menandai ikon dan bilah progres, rencana yang aktif memiliki judul tebal sedangkan rencana yang sudah selesai berjudul redup, dan grup Done yang berisi lebih dari enam rencana terbuka dalam keadaan tertutup. Jendelanya hanya-baca dan tenang: tombol penyuntingan tidak melakukan apa pun alih-alih menampilkan galat.
+
+Rencana dan pohon berkas bergantian: membuka satu bilah samping menutup yang lain, sehingga Anda melihat satu hal pada satu waktu. Pembaca ditutup bersama bilah samping rencana. Apakah membuka satu bilah samping menutup yang lain diatur oleh kunci `sidebars.exclusive` di `dwpvim.json`.
 
 Untuk membaca berkas Markdown sebuah rencana di tempat, `SPC m p` mempratinjau buffer saat ini di peramban dan `SPC m r` merendernya di dalam buffer. Keduanya hanya berfungsi di buffer Markdown.
 
+## Dasbor
+
+Layar awal adalah milik DeepWorkPlan Vim sendiri. Ia menampilkan logo Deep Work Plan yang diukir dengan karakter braille dengan VIM mungil terselip di bawah huruf P-nya, kredit "powered by Dailybot" di bawahnya, dan sebuah pemandangan terukir di sisi kanan: mercusuar Deep Work Plan dan sebuah kapal yang berlayar di lautnya. Cahayanya berdenyut perlahan selama dasbor tampil; setel `vim.g.dwp_greeter_pulse = false` untuk mematikannya.
+
+Pemandangan tersedia dalam enam ukuran tinggi, dipilih menurut jumlah baris yang tersisa di jendela. Pada jendela yang lebih sempit, logo teks ditumpuk di atas pemandangan atau tampil sendiri. Jendela lebar menampilkan pintasan dan "Your plans" berdampingan, sedangkan jendela sempit menumpuknya. Tekan Enter untuk mengaktifkan baris di bawah kursor, atau `e` untuk membuka bilah samping rencana.
+
+## Mengonfigurasi bilah samping
+
+Sebuah berkas `dwpvim.json` menentukan di sisi mana kedua bilah samping berada dan seberapa lebar keduanya. Berkas di direktori editor (`~/.config/nvim`) berlaku untuk semua proyek, dan `.dwpvim.json` di direktori tempat Anda memulai Neovim menimpanya untuk proyek tersebut. Pengaturan dibaca saat startup, jadi mulai ulang Neovim setelah menyunting berkas.
+
+```json
+{
+  "tree":  { "side": "left", "width": 40 },
+  "plans": { "side": "left", "width": 48 },
+  "sidebars": { "exclusive": true }
+}
+```
+
+| Kunci | Nilai | Bawaan | Fungsinya |
+|---|---|---|---|
+| `tree.side` | `"left"` atau `"right"` | `"left"` | Sisi pohon berkas (`SPC n`) |
+| `tree.width` | bilangan bulat, 20 sampai 120 | `40` | Lebar maksimum pohon; ia tetap menyusut sesuai isinya |
+| `plans.side` | `"left"` atau `"right"` | `"left"` | Sisi bilah samping rencana (`SPC P`) |
+| `plans.width` | bilangan bulat, 20 sampai 120 | `48` | Lebar maksimum bilah samping rencana |
+| `sidebars.exclusive` | `true` atau `false` | `true` | Satu bilah samping pada satu waktu; `false` membiarkan keduanya tetap terbuka |
+
+Berkas yang tidak ada tidak masalah. Berkas yang bukan JSON valid, kunci yang tidak dikenal, atau nilai yang tidak valid diabaikan dan dilaporkan, tidak pernah fatal. Jalankan `:DwpConfig` untuk melihat setiap nilai yang berlaku, berkas asalnya, dan masalah yang ditemukan.
+
+## Editor yang lebih ringan
+
+Versi 0.6.0 menghapus apa yang tidak dipakai siapa pun, sehingga ada lebih sedikit plugin untuk dipatok dan lebih sedikit paket untuk dipasang serta diperbarui saat pertama kali dijalankan:
+
+- Sebelas server bahasa Mason dihentikan: efm, diagnosticls, tailwindcss, grammarly, bashls, serta server untuk astro, svelte, Vue 2, Angular, SQL, dan skrip Vim.
+- nvim-lint dihapus, karena tidak pernah ada linter yang dikonfigurasi.
+- Entri pemformat prettier dihapus, karena tidak ada yang memasang prettier. `:Format` tetap memakai biome, black, shfmt, dan stylua.
+- marksman tetap ada untuk mengikuti tautan, melengkapi tautan dan judul, serta kerangka dokumen, dengan diagnostiknya dibungkam. Markdown sengaja tetap tanpa pemformat.
+
+Hanya server yang tercantum dalam konfigurasi yang diaktifkan, bahkan ketika Mason masih menyimpan server lain dari penyiapan sebelumnya. Setiap plugin, server, dan alat, beserta alasan keberadaannya, tercantum di [PLUGINS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/v0.6.0/docs/PLUGINS.md).
+
 ## Instalasi
 
-Instalasi terdiri dari tiga perintah: unduh skrip, periksa terhadap SHA-256 berkas yang disajikan situs ini, lalu jalankan. Pemasang mematok rilisnya sendiri, sehingga ia memasang tepat `v0.5.1`, rilis yang dijelaskan halaman ini, kecuali Anda [memilih versi lain](#choose-a-version).
+Instalasi terdiri dari tiga perintah: unduh skrip, periksa terhadap SHA-256 berkas yang disajikan situs ini, lalu jalankan. Pemasang mematok rilisnya sendiri, sehingga ia memasang tepat `v0.6.0`, rilis yang dijelaskan halaman ini, kecuali Anda [memilih versi lain](#choose-a-version).
 
 <VimInstall lang="id" />
 
@@ -74,17 +117,17 @@ Secara berurutan, pemasang:
 6. Menjalankan `lua install.lua` milik repositori itu sendiri.
 7. Memasang plugin secara headless lalu memeriksanya, sehingga tidak ada langkah keluar lalu membuka ulang. Dengan `--strict`, pemasangan plugin yang gagal atau tidak lengkap dianggap sebagai galat.
 
-Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install.sh` pada tag `v0.5.1`. Checksum-nya disajikan di sebelahnya, di `https://deepworkplan.com/vim/install.sh.sha256`, sehingga Anda dapat memverifikasi unduhan dengan `shasum -a 256 -c install.sh.sha256` (di Linux, `sha256sum -c install.sh.sha256`). Untuk pemeriksaan dari sumber kedua, bandingkan dengan baris `install.sh` di `SHA256SUMS` pada rilis GitHub. Jalankan `bash install.sh --help` untuk menampilkan semua opsi.
+Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install.sh` pada tag `v0.6.0`. Checksum-nya disajikan di sebelahnya, di `https://deepworkplan.com/vim/install.sh.sha256`, sehingga Anda dapat memverifikasi unduhan dengan `shasum -a 256 -c install.sh.sha256` (di Linux, `sha256sum -c install.sh.sha256`). Untuk pemeriksaan dari sumber kedua, bandingkan dengan baris `install.sh` di `SHA256SUMS` pada rilis GitHub. Jalankan `bash install.sh --help` untuk menampilkan semua opsi.
 
 <a id="choose-a-version" class="scroll-mt-24"></a>
 
 ## Memilih versi
 
-Secara bawaan, pemasang memasang rilisnya sendiri, `v0.5.1`. Untuk memilih versi lain, setel `DWP_VIM_VERSION` atau berikan `--version`: keduanya melakukan hal yang sama, jadi gunakan yang lebih mudah dibaca, dan flag lebih diutamakan daripada variabel lingkungan. Masing-masing menerima:
+Secara bawaan, pemasang memasang rilisnya sendiri, `v0.6.0`. Untuk memilih versi lain, setel `DWP_VIM_VERSION` atau berikan `--version`: keduanya melakukan hal yang sama, jadi gunakan yang lebih mudah dibaca, dan flag lebih diutamakan daripada variabel lingkungan. Masing-masing menerima:
 
 | Bentuk | Contoh | Yang dipasang |
 |---|---|---|
-| Versi persis | `0.5.1` atau `v0.5.1` | Rilis tersebut |
+| Versi persis | `0.6.0` atau `v0.6.0` | Rilis tersebut |
 | Batas minimum | `'>=0.4.2'` | Rilis stabil terbaru yang sama dengan atau di atas batas tersebut |
 | Terbaru | `latest` | Rilis stabil terbaru |
 
@@ -92,8 +135,8 @@ Setelah unduhan dan pemeriksaan checksum di atas:
 
 ```bash
 # exact version
-DWP_VIM_VERSION=0.5.1 bash install.sh
-bash install.sh --version 0.5.1
+DWP_VIM_VERSION=0.6.0 bash install.sh
+bash install.sh --version 0.6.0
 
 # minimum floor: the newest stable release at or above 0.4.2
 DWP_VIM_VERSION='>=0.4.2' bash install.sh
@@ -112,10 +155,10 @@ Di dalam image atau job CI, tempat tidak ada terminal dan sering kali tidak ada 
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 sha256sum -c install.sh.sha256 && \
-bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
+bash install.sh --version 0.6.0 --nvim 0.12.5 --skip-packages --strict
 ```
 
-- `--version 0.5.1` mematok rilis editor.
+- `--version 0.6.0` mematok rilis editor.
 - `--nvim 0.12.5` memasang rilis Neovim tersebut ke `~/.local/opt/nvim-v0.12.5`, ditautkan sebagai `~/.local/bin/nvim` dan diverifikasi terhadap SHA-256 yang diterbitkan Neovim (Linux dan macOS).
 - `--skip-packages` tidak memasang paket sistem apa pun: image harus sudah menyediakan git, curl, dan Lua.
 - `--strict` keluar dengan kode bukan nol jika pemasangan plugin secara headless gagal atau menyisakan plugin yang belum terpasang. Opsi ini juga memeriksa bahwa setiap plugin, dan pckr, berada di commit yang dipatok rilis di `pckr/lockfile.lua`.
@@ -126,7 +169,7 @@ Setiap flag memiliki padanan variabel lingkungan (`DWP_VIM_VERSION`, `DWP_VIM_NV
 
 - Neovim 0.12 atau lebih baru. Pasang sendiri, atau biarkan pemasang menambahkan rilis terverifikasi dengan `--nvim X.Y.Z` (Linux dan macOS).
 - Lua: `lua`, `lua5.4`, atau `luajit`. Pemasang menambahkannya jika belum ada.
-- macOS, Linux, dan WSL menjalankan pemasang. Windows memiliki jalur manual yang terdokumentasi di README repositori: pasang Neovim dengan winget, clone tag `v0.5.1` ke `%LOCALAPPDATA%\nvim`, dan jalankan `lua install.lua` dari Git Bash.
+- macOS, Linux, dan WSL menjalankan pemasang. Windows memiliki jalur manual yang terdokumentasi di README repositori: pasang Neovim dengan winget, clone tag `v0.6.0` ke `%LOCALAPPDATA%\nvim`, dan jalankan `lua install.lua` dari Git Bash.
 - Berlisensi GPL-3.0: bebas digunakan, dipelajari, dan dimodifikasi.
 
 ## Memperbarui, mengunci versi, dan mencopot
@@ -140,7 +183,7 @@ Untuk mengunci sebuah rilis, gunakan `--version` (lihat [Memilih versi](#choose-
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 shasum -a 256 -c install.sh.sha256 && \
-bash install.sh --version 0.5.0
+bash install.sh --version 0.5.1
 ```
 
 Untuk mencopot, jalankan `lua delete.lua` dari direktori konfigurasi. Perintah ini menghapus konfigurasi, plugin, data Mason, cache dan status, serta salinan font yang dibuat pemasang, dan membiarkan biner Neovim serta paket sistem Anda.
@@ -173,7 +216,7 @@ Ia dibuat untuk manusia dan untuk agen pemrograman yang hidup di terminal. Pemet
 
 ### Versi mana yang saya dapatkan?
 
-Pemasang memasang rilis tempat ia berasal — `v0.5.1` saat ini — kecuali Anda memilih versi lain dengan `--version` atau `DWP_VIM_VERSION`: versi persis, batas `>=`, atau `latest`. `DWP_VIM_REF` menerima cabang atau commit; `DWP_VIM_REF=main` mengikuti `main`. Halaman ini menjelaskan rilis `v0.5.1`, yang memuat setiap fitur yang tercantum di sini.
+Pemasang memasang rilis tempat ia berasal — `v0.6.0` saat ini — kecuali Anda memilih versi lain dengan `--version` atau `DWP_VIM_VERSION`: versi persis, batas `>=`, atau `latest`. `DWP_VIM_REF` menerima cabang atau commit; `DWP_VIM_REF=main` mengikuti `main`. Halaman ini menjelaskan rilis `v0.6.0`, yang memuat setiap fitur yang tercantum di sini.
 
 ### Di bawah lisensi apa dan dari mana asalnya?
 

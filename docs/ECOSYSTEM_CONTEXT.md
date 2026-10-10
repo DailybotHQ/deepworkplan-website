@@ -7,8 +7,8 @@ This repository has two roles:
    `/quickstart` page and the machine-executable `/init.md`.
 2. **The ecosystem hub.** It coordinates work across the public DeepWorkPlan
    repositories, cloned under `repositories/` by `scripts/repositories.sh`
-   (index: [`repositories/README.md`](../repositories/README.md), data:
-   [`repositories/manifest.json`](../repositories/manifest.json)). It plans
+   (index: `repositories/README.md`, data:
+   `repositories/manifest.json`). It plans
    cross-repository work as orchestrator Deep Work Plans and verifies that what
    the site says matches what each repository released.
 
@@ -24,12 +24,12 @@ deepworkplan-skill pins).
 
 | Repository | Role | Visibility | Released tag the site pins | Where the site makes the claim | Consumed by this repo as |
 |------------|------|------------|----------------------------|--------------------------------|--------------------------|
-| deepworkplan-skill | Pack (source of truth for the methodology, spec and kit) | Public | `v7.0.1` | `/init.md`, `/quickstart`, kit pages, spec reader | Vendored skill `.agents/skills/deepworkplan/` (repo-adapted, refreshed only by a reviewed change) |
+| deepworkplan-skill | Pack (source of truth for the methodology, spec and kit) | Public | `v7.1.4` | `/init.md`, `/quickstart`, kit pages, spec reader | Vendored skill `.agents/skills/deepworkplan/` (repo-adapted, refreshed only by a reviewed change) |
 | ai-diff-reviewer | Addon: pull-request review | Public | `v3.3.0` | `/kit/ai-diff-reviewer`, `/init.md` | Vendored skill (auto-refreshed on every site release) and the CI self-review action |
 | agent-skill | Addon: Dailybot reporting | Public | `v3.23.3` | `/kit/dailybot` | Vendored `dailybot` skill (auto-refreshed on every site release); **also owned by the Dailybot hub** |
-| devcontainer-kit | Addon: development containers | Public | `v0.1.4` | `/kit/devcontainer`, `/init.md` | Documented only |
-| coding-agents-kit | Addon: coding-agent installer | Public | `v0.1.1` | `/kit/agentkit`, `/init.md` | Documented only |
-| deepworkplan-vim | Addon: DeepWorkPlan Vim | Public | `v0.4.2` (the pack's addon pin) and `v0.5.1` (the product page and installer mirror) | `/init.md` and the kit plate (`v0.4.2`); `/kit/vim` (and `vim.deepworkplan.com`) and `public/vim/install.sh` (`v0.5.1`) | Documented and served (installer mirror) |
+| devcontainer-kit | Addon: development containers | Public | `v0.2.2` | `/kit/devcontainer`, `/init.md` | Documented only |
+| coding-agents-kit | Addon: coding-agent installer | Public | `v0.3.0` | `/kit/agentkit`, `/init.md` | Documented only |
+| deepworkplan-vim | Addon: DeepWorkPlan Vim | Public | `v0.6.0` (the product page, the kit plate, `/init.md` and the installer mirror; the vendored pack still pins `v0.5.1` until upstream moves it) | `/init.md`, the kit plate and `/kit/vim` | Documented and served (installer mirror) |
 | herdr-peers | Addon: peer coordination | Public | `v0.1.0` | `/kit/herdr`, `/init.md` | Documented only |
 
 ## Pack, addons and site claims

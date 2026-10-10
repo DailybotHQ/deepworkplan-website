@@ -24,7 +24,7 @@ Os comandos do DWP vivem como procedimentos em markdown que o agente lê ao sere
 Opcional: o [coding-agents-kit](/kit/agentkit) pode instalar esta CLI e iniciá-la com `ak codex`. O instalador oficial do fornecedor funciona igualmente bem.
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install codex
 ```
 

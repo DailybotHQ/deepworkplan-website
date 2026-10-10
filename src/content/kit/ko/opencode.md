@@ -24,7 +24,7 @@ DWP는 리포지토리에 AGENTS.md와 명령 절차를 제공합니다. OpenCod
 선택 사항: [coding-agents-kit](/kit/agentkit)로 이 CLI를 설치하고 `ak opencode`로 실행할 수 있습니다. 공급업체의 공식 설치 프로그램도 똑같이 사용할 수 있습니다.
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install opencode
 ```
 

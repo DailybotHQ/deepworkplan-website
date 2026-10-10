@@ -1,6 +1,6 @@
 ---
 title: DeepWorkPlan Vim
-description: "DeepWorkPlan Vim es el editor de terminal de Deep Work Plan: configuración de Neovim 0.12+ con índice de comandos, navegador de planes y visor de Markdown."
+description: "El editor de terminal hecho para Deep Work Plan: Neovim 0.12+ con navegador de planes, visor de Markdown e índice de comandos, a una instalación de distancia."
 kind: addon
 lang: es
 order: 6
@@ -20,13 +20,13 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** es el editor de terminal de Deep Work Plan: una configuración de Neovim para personas, y para agentes de programación, que trabajan en una terminal. Tus planes, tu documentación y un índice de todos los comandos quedan a una tecla de distancia.
 
-Es un producto aparte, ofrecido como el addon opcional `vim` de Deep Work Plan v7 (`v7.0.0`). Deep Work Plan funciona con cualquier editor o con ninguno, y el editor no requiere Deep Work Plan: lo añades a una máquina por separado y funciona como editor haya o no un plan. Esta página describe la versión **v0.5.1**.
+Es un producto aparte, ofrecido como el addon opcional `vim` de Deep Work Plan v7 (`v7.0.0`). Deep Work Plan funciona con cualquier editor o con ninguno, y el editor no requiere Deep Work Plan: lo añades a una máquina por separado y funciona como editor haya o no un plan. Esta página describe la versión **v0.6.0**.
 
 ## Por qué un editor de terminal para Deep Work Plan
 
 Un Deep Work Plan es una carpeta de Markdown bajo `.dwp/plans/`: un objetivo, tareas atómicas, puertas de validación y un registro continuo. Las personas lo revisan, los agentes lo ejecutan, y unos y otros suelen hacerlo desde una terminal. Un editor pensado para ese trabajo mantiene cerca tres cosas: el plan, la documentación que lo rodea y las teclas que te mueven entre ambos.
 
-DeepWorkPlan Vim es ese editor. Es una configuración de Neovim cuidada —servidores de lenguaje, autocompletado, linting, formateo, búsqueda difusa, un árbol de archivos y temas de color curados, con carga diferida— más las pocas superficies que lo convierten en el editor de Deep Work Plan.
+DeepWorkPlan Vim es ese editor. El objetivo es un mini VS Code en la terminal: navegar por los archivos, ver cuáles cambiaron, revisar el diff y aprobar o descartar los cambios, de forma amigable y ligera, pensado primero para agentes, con el estado del plan siempre a la vista. Es una configuración de Neovim cuidada —servidores de lenguaje, autocompletado, formateo, búsqueda difusa, un árbol de archivos y temas de color curados, con carga diferida— más las pocas superficies que lo convierten en el editor de Deep Work Plan.
 
 <VimInDwpLoop lang="es" class="not-prose my-10" />
 
@@ -46,7 +46,7 @@ Cinco funciones, cada una a una tecla de distancia.
 |---|---|---|
 | Índice de comandos generado | `SPC h h` | Todos los atajos de la configuración, generados a partir de los atajos activos. |
 | Gestos al estilo VS Code | `<C-a>`, `SPC y` | Selecciona todo el archivo con una tecla y copia al portapapeles del sistema. La `y` simple también copia ahí, porque el portapapeles es el del sistema. |
-| Navegador de planes de Deep Work Plan | `SPC P` | Una barra lateral sobre los planes de tu repositorio, agrupados por estado y con barras de progreso, y un lector para un plan. |
+| Navegador de planes de Deep Work Plan | `SPC P` | Una barra lateral sobre los planes de tu repositorio, agrupados por estado y con barras de progreso; haz clic en un plan para abrir su lector. |
 | Visor de Markdown | `SPC m p`, `SPC m r` | Previsualiza Markdown en el navegador o renderízalo en el búfer. |
 | Instalador verificado | — | Un instalador autónomo para macOS, Linux y WSL, con una ruta manual documentada para Windows. |
 
@@ -54,13 +54,56 @@ Cinco funciones, cada una a una tecla de distancia.
 
 `SPC P`, `:DwpPlans` o un clic en el segmento de la línea de estado abre la barra lateral de planes. Cubre cada carpeta `.dwp/plans/` del directorio actual y del directorio de configuración de Neovim, y agrupa los planes empezando por los que más atención piden. En el editor las etiquetas son `Working`, `Needs attention`, `Ready`, `Not started` y `Done`. Cada plan muestra una barra de progreso.
 
-Pulsa Intro sobre un plan para abrir el lector: el objetivo en una frase, el estado y el progreso, la lista de tareas con la tarea actual marcada y saltos en lenguaje claro a los archivos del propio plan. La línea de estado muestra el plan activo en vivo y la pantalla de inicio lista los tres primeros. Estas superficies explican los planes; nunca escriben en `.dwp/`.
+Haz clic en un plan, o pulsa Intro sobre él, para abrir el lector: el objetivo en una frase, el estado y el progreso, la lista de tareas con la tarea actual marcada y saltos en lenguaje claro a los archivos del propio plan. La línea de estado muestra el plan activo en vivo y la pantalla de inicio lista los tres primeros. Estas superficies explican los planes; nunca escriben en `.dwp/`.
+
+La barra lateral responde al ratón y al teclado. La pequeña flecha junto a un plan muestra u oculta sus tareas y archivos, y un clic en una tarea o en un archivo lo abre. `j`, `k`, las flechas, `Ctrl-n` y `Ctrl-p` saltan de plan en plan, omitiendo las filas en blanco y la decoración. Cada sección muestra su recuento, los colores de estado marcan el icono y la barra de progreso, los planes activos tienen títulos destacados y los planes terminados los tienen atenuados, y un grupo Done de más de seis planes se abre contraído. La ventana es de solo lectura y silenciosa: las teclas de edición no hacen nada en lugar de mostrar un error.
+
+Los planes y el árbol de archivos se turnan: abrir una barra lateral cierra la otra, para que mires una sola cosa a la vez. El lector se cierra junto con la barra lateral de planes. Que abrir una barra lateral cierre la otra lo controla la clave `sidebars.exclusive` de `dwpvim.json`.
 
 Para leer en el sitio los archivos Markdown de un plan, `SPC m p` previsualiza el búfer actual en el navegador y `SPC m r` lo renderiza dentro del búfer. Ambos funcionan solo en búferes de Markdown.
 
+## El panel de inicio
+
+La pantalla de inicio es propia de DeepWorkPlan Vim. Muestra el logotipo de Deep Work Plan grabado con caracteres braille, con un pequeño VIM bajo su P, un crédito "powered by Dailybot" debajo y una escena grabada a la derecha: el faro de Deep Work Plan y un barco que navega en su mar. El haz de luz pulsa lentamente mientras el panel está en pantalla; define `vim.g.dwp_greeter_pulse = false` para desactivarlo.
+
+La escena tiene seis alturas, elegidas según las filas que deja libres la ventana. En una ventana más estrecha, el logotipo se apila sobre la escena o aparece solo. Las ventanas anchas muestran los atajos y "Your plans" lado a lado, y las estrechas los apilan. Pulsa Intro para activar la fila bajo el cursor, o `e` para abrir la barra lateral de planes.
+
+## Configurar las barras laterales
+
+Un archivo `dwpvim.json` define en qué lado está cada una de las dos barras laterales y qué ancho tiene. El archivo del directorio del editor (`~/.config/nvim`) se aplica a todos los proyectos, y un `.dwpvim.json` en el directorio donde inicias Neovim lo reemplaza para ese proyecto. Los ajustes se leen al arrancar, así que reinicia Neovim después de editar un archivo.
+
+```json
+{
+  "tree":  { "side": "left", "width": 40 },
+  "plans": { "side": "left", "width": 48 },
+  "sidebars": { "exclusive": true }
+}
+```
+
+| Clave | Valores | Predeterminado | Qué hace |
+|---|---|---|---|
+| `tree.side` | `"left"` o `"right"` | `"left"` | Lado del árbol de archivos (`SPC n`) |
+| `tree.width` | número entero, de 20 a 120 | `40` | Ancho máximo del árbol; aun así se reduce a su contenido |
+| `plans.side` | `"left"` o `"right"` | `"left"` | Lado de la barra lateral de planes (`SPC P`) |
+| `plans.width` | número entero, de 20 a 120 | `48` | Ancho máximo de la barra lateral de planes |
+| `sidebars.exclusive` | `true` o `false` | `true` | Una barra lateral a la vez; `false` permite que ambas sigan abiertas |
+
+Que falte el archivo no es un problema. Un archivo que no sea JSON válido, una clave desconocida o un valor no válido se ignora y se informa, nunca es fatal. Ejecuta `:DwpConfig` para ver cada valor en vigor, el archivo del que proviene y cualquier problema detectado.
+
+## Un editor más ligero
+
+La versión 0.6.0 elimina lo que nadie usaba, así que hay menos plugins que fijar y menos paquetes que instalar y actualizar en el primer arranque:
+
+- Se retiran once servidores de lenguaje de Mason: efm, diagnosticls, tailwindcss, grammarly, bashls y los servidores de astro, svelte, Vue 2, Angular, SQL y Vim script.
+- Se elimina nvim-lint, porque nunca se configuró ningún linter.
+- Se eliminan las entradas del formateador prettier, porque nada instalaba prettier. `:Format` conserva biome, black, shfmt y stylua.
+- marksman se queda para seguir enlaces, completar enlaces y encabezados, y el esquema del documento, con sus diagnósticos silenciados. Markdown se queda sin formateador a propósito.
+
+Solo se activan los servidores que la configuración enumera, aunque Mason conserve otros de una instalación anterior. Cada plugin, servidor y herramienta, con el motivo por el que está, se enumera en [PLUGINS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/v0.6.0/docs/PLUGINS.md).
+
 ## Instalación
 
-La instalación son tres comandos: descarga el script, compruébalo con el SHA-256 del archivo que sirve este sitio y luego ejecútalo. El instalador fija su propia versión, así que instala exactamente `v0.5.1`, la versión que describe esta página, salvo que [elijas otra versión](#choose-a-version).
+La instalación son tres comandos: descarga el script, compruébalo con el SHA-256 del archivo que sirve este sitio y luego ejecútalo. El instalador fija su propia versión, así que instala exactamente `v0.6.0`, la versión que describe esta página, salvo que [elijas otra versión](#choose-a-version).
 
 <VimInstall lang="es" />
 
@@ -74,17 +117,17 @@ En orden, el instalador:
 6. Ejecuta el propio `lua install.lua` del repositorio.
 7. Instala los plugins sin interfaz y los comprueba, así que no hace falta salir y volver a abrir. Con `--strict`, una instalación de plugins fallida o incompleta es un error.
 
-El script que se sirve aquí es una copia idéntica byte a byte de `install.sh` en la etiqueta `v0.5.1`. Su suma de comprobación se sirve a su lado, en `https://deepworkplan.com/vim/install.sh.sha256`, así que puedes verificar la descarga con `shasum -a 256 -c install.sh.sha256` (en Linux, `sha256sum -c install.sh.sha256`). Para una comprobación desde un segundo origen, compárala con la línea de `install.sh` de `SHA256SUMS` en la versión publicada en GitHub. Ejecuta `bash install.sh --help` para ver todas las opciones.
+El script que se sirve aquí es una copia idéntica byte a byte de `install.sh` en la etiqueta `v0.6.0`. Su suma de comprobación se sirve a su lado, en `https://deepworkplan.com/vim/install.sh.sha256`, así que puedes verificar la descarga con `shasum -a 256 -c install.sh.sha256` (en Linux, `sha256sum -c install.sh.sha256`). Para una comprobación desde un segundo origen, compárala con la línea de `install.sh` de `SHA256SUMS` en la versión publicada en GitHub. Ejecuta `bash install.sh --help` para ver todas las opciones.
 
 <a id="choose-a-version" class="scroll-mt-24"></a>
 
 ## Elegir una versión
 
-Por defecto, el instalador instala su propia versión, `v0.5.1`. Para elegir otra, define `DWP_VIM_VERSION` o pasa `--version`: ambos hacen lo mismo, así que usa el que se lea mejor; una opción tiene prioridad sobre el entorno. Cada uno acepta:
+Por defecto, el instalador instala su propia versión, `v0.6.0`. Para elegir otra, define `DWP_VIM_VERSION` o pasa `--version`: ambos hacen lo mismo, así que usa el que se lea mejor; una opción tiene prioridad sobre el entorno. Cada uno acepta:
 
 | Forma | Ejemplo | Instala |
 |---|---|---|
-| Versión exacta | `0.5.1` o `v0.5.1` | Esa versión |
+| Versión exacta | `0.6.0` o `v0.6.0` | Esa versión |
 | Versión mínima | `'>=0.4.2'` | La versión estable más reciente igual o superior al mínimo |
 | Más reciente | `latest` | La versión estable más reciente |
 
@@ -92,8 +135,8 @@ Después de la descarga y de la comprobación de la suma anteriores:
 
 ```bash
 # exact version
-DWP_VIM_VERSION=0.5.1 bash install.sh
-bash install.sh --version 0.5.1
+DWP_VIM_VERSION=0.6.0 bash install.sh
+bash install.sh --version 0.6.0
 
 # minimum floor: the newest stable release at or above 0.4.2
 DWP_VIM_VERSION='>=0.4.2' bash install.sh
@@ -112,10 +155,10 @@ En una imagen o un trabajo de CI, donde no hay terminal y a menudo tampoco root,
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 sha256sum -c install.sh.sha256 && \
-bash install.sh --version 0.5.1 --nvim 0.12.5 --skip-packages --strict
+bash install.sh --version 0.6.0 --nvim 0.12.5 --skip-packages --strict
 ```
 
-- `--version 0.5.1` fija la versión del editor.
+- `--version 0.6.0` fija la versión del editor.
 - `--nvim 0.12.5` instala esa versión de Neovim en `~/.local/opt/nvim-v0.12.5`, enlazada como `~/.local/bin/nvim` y verificada con el SHA-256 que publica Neovim (Linux y macOS).
 - `--skip-packages` no instala ningún paquete del sistema: la imagen ya debe proporcionar git, curl y Lua.
 - `--strict` termina con un código distinto de cero cuando la instalación de plugins sin interfaz falla o deja plugins sin instalar. También comprueba que cada plugin, y pckr, esté en el commit que la versión fija en `pckr/lockfile.lua`.
@@ -126,7 +169,7 @@ Cada opción tiene una variable de entorno equivalente (`DWP_VIM_VERSION`, `DWP_
 
 - Neovim 0.12 o más reciente. Instálalo tú mismo, o deja que el instalador añada una versión verificada con `--nvim X.Y.Z` (Linux y macOS).
 - Lua: `lua`, `lua5.4` o `luajit`. El instalador añade uno si falta.
-- macOS, Linux y WSL ejecutan el instalador. Windows tiene una ruta manual documentada en el README del repositorio: instala Neovim con winget, clona la etiqueta `v0.5.1` en `%LOCALAPPDATA%\nvim` y ejecuta `lua install.lua` desde Git Bash.
+- macOS, Linux y WSL ejecutan el instalador. Windows tiene una ruta manual documentada en el README del repositorio: instala Neovim con winget, clona la etiqueta `v0.6.0` en `%LOCALAPPDATA%\nvim` y ejecuta `lua install.lua` desde Git Bash.
 - Licencia GPL-3.0: libre de usar, estudiar y modificar.
 
 ## Actualizar, fijar versión y desinstalar
@@ -140,7 +183,7 @@ Para fijar una versión, usa `--version` (consulta [Elegir una versión](#choose
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \
 shasum -a 256 -c install.sh.sha256 && \
-bash install.sh --version 0.5.0
+bash install.sh --version 0.5.1
 ```
 
 Para desinstalar, ejecuta `lua delete.lua` desde el directorio de configuración. Elimina la configuración, los plugins, los datos de Mason, la caché y el estado, y la copia de la fuente que hizo el instalador, y deja intactos el binario de Neovim y tus paquetes del sistema.
@@ -173,7 +216,7 @@ Está pensado para personas y para agentes de programación que viven en una ter
 
 ### ¿Qué versión obtengo?
 
-El instalador instala la versión a la que pertenece —hoy, `v0.5.1`— salvo que elijas otra con `--version` o `DWP_VIM_VERSION`: una versión exacta, un mínimo `>=` o `latest`. `DWP_VIM_REF` acepta una rama o un commit; `DWP_VIM_REF=main` sigue `main`. Esta página describe la versión `v0.5.1`, que incluye todas las funciones enumeradas aquí.
+El instalador instala la versión a la que pertenece —hoy, `v0.6.0`— salvo que elijas otra con `--version` o `DWP_VIM_VERSION`: una versión exacta, un mínimo `>=` o `latest`. `DWP_VIM_REF` acepta una rama o un commit; `DWP_VIM_REF=main` sigue `main`. Esta página describe la versión `v0.6.0`, que incluye todas las funciones enumeradas aquí.
 
 ### ¿Bajo qué licencia está y de dónde viene?
 

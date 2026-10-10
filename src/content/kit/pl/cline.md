@@ -24,7 +24,7 @@ Komendy DWP istnieją jako procedury w markdown, które agent odczytuje przez re
 Opcjonalnie: [coding-agents-kit](/kit/agentkit) może zainstalować to CLI i uruchamiać je poleceniem `ak cline`. Oficjalny instalator dostawcy działa równie dobrze.
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cline
 ```
 

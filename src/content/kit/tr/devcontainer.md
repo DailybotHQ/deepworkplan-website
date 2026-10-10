@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "devcontainer-kit tabanlı isteğe bağlı eklenti: dck init ile oluşturulan Dev Containers şablonu, agent'sız temel imajlar ve konteyner başına Herdr makineleri."
+description: "Her depo için tek şablondan yeniden üretilebilir geliştirme konteyneri: ak ile hazır ajanlar, iki yönlü Herdr ve konteynerin içinde hiç SSH anahtarı yok."
 kind: addon
 lang: tr
 order: 1
@@ -8,49 +8,53 @@ order: 1
 
 # Devcontainer eklentisi
 
-Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (`v7.0.0`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder ve paketin daha önce taşıdığı şablonun yerini alır. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
+Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.1.4`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
 
 ## devcontainer-kit'in sağladıkları
 
-- [Dev Containers](https://containers.dev) spesifikasyonu üzerine kurulu, `dck init` komutunun depoya oluşturduğu **bir şablon**: `devcontainer.json`, bir compose dosyası ve `docker/local/`. Daha sonra yeniden çalıştırıldığında uzlaştırır ve düzenlemelerinizin üzerine asla yazmaz; var olan bir dosyadaki her değişiklik önce gösterilir ve onay gerektirir.
-- Konteyneri düz bir terminalden çalıştıran bir başlatıcı olan **`dck`** — `setup`, `up`, `shell`, `ssh`, `rebuild`, `doctor` — VS Code veya Cursor ile ya da onlar olmadan.
-- Kodlama agent'ları **olmadan** gelen üç çeşit **temel imaj**: `python-3.13`, `node-24` ve `debian`.
-- Her depo için elle kopyalanan bir entrypoint yerine, kalıcı birimler, SSH ve SSH oturumlarının ortamı için **bir entrypoint kütüphanesi**.
-- **Herdr makineleri.** Her konteyner yalnızca loopback üzerinde dinleyen bir SSH sunucusu aracılığıyla [Herdr](https://herdr.dev)'a katılabilir; böylece içindeki agent'lar erişilebilir eşler hâline gelir.
+- [Dev Containers](https://containers.dev) spesifikasyonu üzerine kurulu, `dck init` komutunun depoya tek bir sabit düzende oluşturduğu **bir şablon**: `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`, `docker/local/docker-compose.yaml` ve `dev.sh`. Daha sonra yeniden çalıştırıldığında uzlaştırır ve düzenlemelerinizin üzerine asla yazmaz; var olan bir dosyadaki her değişiklik önce gösterilir ve onay gerektirir.
+- **Deponun kendi konteyneri.** Dockerfile, çalışma ortamının özetle (digest) sabitlenmiş resmî imajından başlar — `node-24`, `python-3.13` ya da `debian` — ve kitin derleme adımlarını `docker/local/<service>/dck/` dizinine kopyalar. Ortak bir temel imaj kullanılmaz.
+- **`dev.sh` ve `dck`.** `bash dev.sh up`, konteyneri düz bir terminalden derler, başlatır ve ona bağlanır; `shell`, `rebuild`, `doctor` ve diğerleri VS Code veya Cursor ile ya da onlar olmadan çalışır.
+- **İki yönlü Herdr.** Ana makinedeki [Herdr](https://herdr.dev), her konteyneri yalnızca loopback üzerinde dinleyen bir SSH sunucusu aracılığıyla bir makine olarak bağlar; konteyner de standart kenar çubuğuyla açılır: Home, Editor, Development ve Agents. İçeride [herdr-peers](/kit/herdr), agent'ların ana makinedeki ve diğer konteynerlerdeki agent'lara soru sormasını sağlar.
+- **`dck-dockerfile` becerisi.** Bir agent, istek üzerine bir deponun konteynerini oluşturur ya da yeniden üretir ve bunu gerçek bir derlemeyle kanıtlar.
 
 ## Kurulum
 
 ```bash
-git clone --branch v0.1.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
-cd your-repo && dck init
+git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+cd your-repo && dck init && bash dev.sh up
 ```
 
-Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
+Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v0.2.2` sürümüne sabitleyin: `v0.2.0` desteklenmez.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/devcontainer-kit`, `v0.1.4` etiketi, arayüz 1 |
+| Ürün | `DailybotHQ/devcontainer-kit`, `v0.2.2` etiketi, arayüz 2 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `devcontainer` |
 | Depo başına yapılandırma | `.devcontainer/dck.toml` |
 | Algılama | `dck doctor --json` |
 
-## Katmanlar isteğe bağlıdır
+## Katmanlar
 
-Temel imajlar geliştirme araçlarını taşır — git, gh, ripgrep, bir SSH sunucusu, Herdr ve etikete sabitlenmiş DeepWorkPlan Vim ile Neovim — ve hiçbir kodlama agent'ı, hiçbir raporlama CLI'ı ve hiçbir gizli bilgi içermez. Geri kalan her şey, `dck.toml` içinde açtığınız bir katmandır:
+Her konteyner geliştirme araçlarını taşır — git, gh, ripgrep, bir SSH sunucusu, Herdr ve herdr-peers — ve hiçbir gizli bilgi içermez. Geri kalanı, `dck.toml` içinde seçtiğiniz bir katmandır:
 
 | Katman | Varsayılan | Ne ekler |
 |---|---|---|
-| `agents` | kapalı | [coding-agents-kit](/kit/agentkit)'i ve listelediğiniz CLI'ları, her biri kendi kalıcı birimiyle kurar. Hiçbir izin atlama bayrağı ayarlanmaz. |
-| `editor` | açık | DeepWorkPlan Vim ile Neovim; kapalıyken düz bir editör sunar. |
+| `agents` | kapalı | Doğrulanmış sürümünden [coding-agents-kit](/kit/agentkit) ve listelediğiniz CLI'lar, her biri kendi kalıcı birimiyle; ayrıca `classic` (`claudex`, `codexx`, …) ve `providers` (`claude-glm`, `codex-azure`, …) ön ayarları. Agent'lar varsayılan olarak özerk çalışır — korumalı alan (sandbox) konteynerin kendisidir. Devre dışı bırakma: servis `.env` dosyasında `AGENTKIT_PERMISSIONS=ask`. |
+| `editor` | açık | Etikete sabitlenmiş [DeepWorkPlan Vim](/kit/vim) ile Neovim; kapalıyken düz bir editör sunar. |
+| `dailybot` | kapalı | dailybot eklentisi için Dailybot CLI. |
+
+Oturum açma bilgileri, `gh`, Herdr yapılandırması ve git kimliği `bash dev.sh rebuild` sonrasında korunur.
 
 ## Güvenlik varsayılanları
 
 - `dck.toml` içinde `bind` ayarlanmadıkça her yayımlanan port `127.0.0.1` adresine bağlanır.
-- SSH agent yönlendirmesi ana makineden yapılır; ana makinenin özel anahtarları asla bir konteynere kopyalanmaz.
+- SSH üzerinden git, ana makinenin SSH agent'ı aracılığıyla çalışır — onun soketi; asla bir anahtar dosyası, asla bağlanmış bir `~/.ssh` ya da `~/.gitconfig` değil. Git kimliği, `dck setup` komutunun doldurduğu `DCK_GIT_*` değerlerinden gelir.
 - SSH ana makine anahtarları çalışma zamanında proje başına bir birime üretilir, asla bir imajın içine gömülmez; sunucu yalnızca açık anahtarları kabul eder, root girişi ve parola yoktur.
 - Şablon hiçbir `cap_add`, hiçbir `privileged` modu ve hiçbir Docker soketi eklemez.
-- Temel imajlar ve araçlar sürüme sabitlenir ve sağlama toplamıyla doğrulanır; özet çözümlenebildiği her durumda compose, temel imaja özet (digest) ile başvurur.
+- Her indirme sürüme sabitlenir ve sağlama toplamıyla doğrulanır; temel imaj özetle (digest) sabitlenir.
+- Bir konteynerdeki agent'ların diğerlerine ulaşmasını sağlayan Herdr ağı varsayılan olarak açıktır ve kapatma anahtarlarıyla birlikte kitin tehdit modelinde belgelenmiştir.
 
 ## Notlar
 
-İsteğe bağlıdır ve hiçbir zaman zorunlu değildir. Bir depo, sıfır isteğe bağlı eklentiyle tümüyle uyumludur. v0.1, Linux ve macOS ana makinelerini destekler.
+İsteğe bağlıdır ve hiçbir zaman zorunlu değildir. Bir depo, sıfır isteğe bağlı eklentiyle tümüyle uyumludur. v0.2, Linux ve macOS ana makinelerini destekler; konteynerler arasındaki ağ Docker Desktop gerektirir.

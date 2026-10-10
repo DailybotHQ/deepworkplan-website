@@ -24,7 +24,7 @@ Les commandes DWP existent sous forme de procédures en Markdown que l’agent l
 Facultatif : [coding-agents-kit](/kit/agentkit) peut installer cette CLI et la lancer avec `ak codex`. L’installateur officiel de l’éditeur fonctionne tout aussi bien.
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install codex
 ```
 

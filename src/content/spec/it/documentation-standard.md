@@ -8,7 +8,7 @@ section: Standard
 
 # Standard di documentazione
 
-> **Ambito della versione:** questo è un documento base v5.0.0 mantenuto. Lo standard attuale, DWP 7.0.0, richiede anche le estensioni `V6_*.md` e `V7_*.md` applicabili elencate nell’[indice delle specifiche](/spec). I piani v5 e v6 esistenti mantengono le regole registrate.
+> **Ambito della versione:** questo è un documento base v5.0.0 mantenuto. Lo standard attuale, DWP 7.0.0, richiede anche le estensioni `V6_*.md` e `V7_*.md` applicabili elencate nell’[indice delle specifiche](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). I piani v5 e v6 esistenti mantengono le regole registrate.
 
 **Versione 5.0.0.** Questo standard definisce come i Deep Work Plan documentano struttura, attività e progressi, e come un repository documenta se stesso affinché un agente possa agire in modo sicuro. Si applica a ogni piano creato secondo la metodologia DWP. Questa versione allinea il numero di versione del documento allo standard DWP che accompagna — nessun requisito esistente cambia — e aggiunge l'applicazione del budget dell'indice snello e il livello feature descritti di seguito. Le parole chiave MUST, SHOULD e MAY sono usate come definito nella RFC 2119.
 

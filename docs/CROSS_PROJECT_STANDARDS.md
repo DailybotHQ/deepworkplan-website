@@ -4,7 +4,7 @@ Rules for work that spans this hub and the ecosystem repositories under
 `repositories/`. Each repository's own `AGENTS.md` governs work inside it; these
 rules govern how the hub and the repositories meet. Context:
 [Ecosystem context](ECOSYSTEM_CONTEXT.md). Index:
-[`repositories/README.md`](../repositories/README.md).
+`repositories/README.md`.
 
 ## Where work lands
 

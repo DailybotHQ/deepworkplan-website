@@ -10,7 +10,7 @@ Kit adalah semua yang Anda perlukan untuk menjalankan metodologi dalam praktik. 
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
 ```
 
 Paket 7.x saat ini membuat rencana baru menggunakan v7 secara default. Rencana yang ada mempertahankan generasi tercatat; migrasi memerlukan permintaan eksplisit.
@@ -67,11 +67,11 @@ Kemampuan yang ditambahkan alur onboard ke sebuah repo. Tujuh bersifat opsional 
 
 - **Skill Deep Work Plan** — Membuat, menjalankan, memverifikasi, melanjutkan, dan menyempurnakan rencana. Tidak memerlukan addon.
 - **[herdr](/id/kit/herdr)** — Rekan di panel Herdr, di mesin mana pun: delegasi interaktif dengan satu balasan yang diotorisasi. Dipatok pada `herdr-peers@v0.1.0`.
-- **[agentkit](/id/kit/agentkit)** — Satu perintah ak untuk setiap coding agent di terminal: delegasi headless di dalam worktree. Dipatok pada `coding-agents-kit@v0.1.1`.
-- **[devcontainer](/id/kit/devcontainer)** — Template Dev Containers dan image dasar yang dikirimkan tanpa coding agent. Dipatok pada `devcontainer-kit@v0.1.4`.
-- **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v0.4.2`.
+- **[agentkit](/id/kit/agentkit)** — Satu perintah ak untuk setiap coding agent di terminal: otonomi secara default dengan opt-out, dan delegasi headless di dalam worktree. Dipatok pada `coding-agents-kit@v0.3.0`.
+- **[devcontainer](/id/kit/devcontainer)** — Dev container milik setiap repositori dari satu template: agen melalui ak, Herdr dua arah, tanpa kunci SSH di dalamnya. Dipatok pada `devcontainer-kit@v0.2.2`.
+- **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v0.6.0`.
 
-Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v7: `v7.0.0`
+Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v7: `v7.1.4`
 
 ### Contoh
 

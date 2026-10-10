@@ -24,7 +24,7 @@ DWP ส่ง AGENTS.md และขั้นตอนคำสั่งมา�
 ไม่บังคับ: [coding-agents-kit](/kit/agentkit) สามารถติดตั้ง CLI นี้และเรียกใช้ด้วย `ak opencode` ได้ ตัวติดตั้งทางการของผู้พัฒนาก็ใช้ได้เช่นกัน
 
 ```bash
-git clone --branch v0.1.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install opencode
 ```
 
