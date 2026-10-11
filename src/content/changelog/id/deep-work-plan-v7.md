@@ -28,4 +28,4 @@ Mode benchmark dan pembelajaran mencatat apa yang diajarkan setiap rencana, sehi
 
 v7 adalah lompatan dalam orkestrasi dan kemampuan audit, tetapi belum merupakan otonomi tanpa pengawasan sepenuhnya. Rilis 7.2.0 menutup celah yang ditemukan audit tersebut: benchmark dan pembelajaran kini mengukur rencana v7, memulai tugas sebelum prasyaratnya selesai ditolak, dan rangkaian pengujian berjalan secara hermetis (815 dari 815 pada lingkungan bersih). Non-inferioritas hasil agen belum diukur. Rencana yang ada mempertahankan generasi yang tercatat dan tidak pernah dimigrasikan secara implisit; rencana baru menggunakan kontrak v7 secara default.
 
-Rilis skill yang dipasang: **7.5.0**, stabil sejak 7.0.0.
+Rilis skill yang dipasang: **7.5.1**, stabil sejak 7.0.0.

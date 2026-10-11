@@ -56,7 +56,7 @@ herdr-peers प्रेषक को प्रमाणित नहीं क�
 
 ## Container और होस्ट
 
-devcontainer-kit `v0.2.10` पर [devcontainer](/kit/devcontainer) ऐडऑन के साथ, हर dck container में herdr-peers शामिल होता है और वह `dck up` पर mesh से जुड़ जाता है: उसके एजेंट होस्ट पर, अन्य containers में और होस्ट के अन्य loopback containers में मौजूद एजेंटों से पूछ सकते हैं और उत्तर वापस पा सकते हैं। `dck setup` होस्ट पर एक सत्यापित herdr-peers इंस्टॉल करता है, इसलिए होस्ट के एजेंट भी उत्तर देते हैं। होस्ट listener और वे अतिरिक्त कुंजियाँ जो अन्य containers को भीतर आने देती हैं, kit की होस्ट प्रोफ़ाइल में आपके निर्णय हैं; यह ऐडऑन उन्हें कभी सेट नहीं करता।
+devcontainer-kit `v0.2.11` पर [devcontainer](/kit/devcontainer) ऐडऑन के साथ, हर dck container में herdr-peers शामिल होता है और वह `dck up` पर mesh से जुड़ जाता है: उसके एजेंट होस्ट पर, अन्य containers में और होस्ट के अन्य loopback containers में मौजूद एजेंटों से पूछ सकते हैं और उत्तर वापस पा सकते हैं। `dck setup` होस्ट पर एक सत्यापित herdr-peers इंस्टॉल करता है, इसलिए होस्ट के एजेंट भी उत्तर देते हैं। होस्ट listener और वे अतिरिक्त कुंजियाँ जो अन्य containers को भीतर आने देती हैं, kit की होस्ट प्रोफ़ाइल में आपके निर्णय हैं; यह ऐडऑन उन्हें कभी सेट नहीं करता।
 
 ## Herdr या agentkit
 

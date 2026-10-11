@@ -28,4 +28,4 @@ Chế độ benchmark và bài học ghi lại điều mà mỗi kế hoạch ma
 
 v7 là một bước tiến về điều phối và khả năng kiểm toán, nhưng chưa phải là khả năng tự chủ hoàn toàn không cần can thiệp. Bản phát hành 7.2.0 khắc phục các khoảng trống mà cuộc kiểm toán đó phát hiện: benchmark và bài học nay đo được các kế hoạch v7, việc bắt đầu một tác vụ trước khi các điều kiện tiên quyết hoàn tất sẽ bị từ chối, và bộ kiểm thử chạy theo cách hermetic (815 trên 815 trong môi trường sạch). Tính không kém hơn của kết quả agent chưa được đo. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận và không bao giờ bị di chuyển ngầm; kế hoạch mới mặc định dùng hợp đồng v7.
 
-Phiên bản skill đã cài: **7.5.0**, ổn định từ 7.0.0.
+Phiên bản skill đã cài: **7.5.1**, ổn định từ 7.0.0.

@@ -103,7 +103,7 @@ lastUpdated: 2026-09-28
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y
 ```
 
 या OpenClaw के माध्यम से इंस्टॉल करें:
@@ -125,7 +125,7 @@ Plan स्किल रिलीज़ द्वारा लागू कि�
 नौ सब-स्किल शामिल हैं: `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author`, और `upgrade`।
 
-इंस्टॉल किया गया skill रिलीज़: **7.5.0**। वर्तमान 7.x पैक नए प्लान डिफ़ॉल्ट रूप से v7 में बनाता है। मौजूदा प्लान अपनी दर्ज पीढ़ी बनाए रखते हैं; v5 प्लान को v6 में ले जाने के लिए स्पष्ट, पूर्वावलोकित माइग्रेशन आवश्यक है।
+इंस्टॉल किया गया skill रिलीज़: **7.5.1**। वर्तमान 7.x पैक नए प्लान डिफ़ॉल्ट रूप से v7 में बनाता है। मौजूदा प्लान अपनी दर्ज पीढ़ी बनाए रखते हैं; v5 प्लान को v6 में ले जाने के लिए स्पष्ट, पूर्वावलोकित माइग्रेशन आवश्यक है।
 
 यह मानक जानबूझकर आनुपातिक है, और यह उस अनुपात को डेवलपर के अनुशासन के बजाय
 योजना की एक विशेषता बनाता है। एक योजना या तो **Lite** है — छोटे, सीमित काम के
@@ -229,7 +229,7 @@ DeepWorkPlan Vim) गिनाएँ, हर एक को एक स्पष�
 `.dwp/config.json` में दर्ज करें। एक रिपॉज़िटरी **शून्य** वैकल्पिक ऐडऑन
 के साथ पूर्णतः अनुरूप होती है — उन्हें कभी स्वतः-स्थापित न करें।
 
-- **Devcontainer समर्थन** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.2.10` पर पिन, अपनी `dck-dockerfile` skill के साथ) का एक पतला एकीकरणकर्ता: `dck init` रिपॉज़िटरी का अपना container रेंडर करता है — digest पर पिन की गई आधिकारिक image, कोई साझा base image नहीं, `bash dev.sh up` — और किसी मौजूदा devcontainer का मिलान केवल उसके diff के स्वीकार होने के बाद करता है; कोडिंग एजेंट एक opt-in परत हैं।
+- **Devcontainer समर्थन** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.2.11` पर पिन, अपनी `dck-dockerfile` skill के साथ) का एक पतला एकीकरणकर्ता: `dck init` रिपॉज़िटरी का अपना container रेंडर करता है — digest पर पिन की गई आधिकारिक image, कोई साझा base image नहीं, `bash dev.sh up` — और किसी मौजूदा devcontainer का मिलान केवल उसके diff के स्वीकार होने के बाद करता है; कोडिंग एजेंट एक opt-in परत हैं।
 - **Dailybot एकीकरण** — चार जीवनचक्र ईवेंट (किकऑफ़, महत्वपूर्ण कार्य, अवरुद्ध, पूर्णता) पहले से Dailybot का उपयोग करने वाली टीमों के लिए सर्वोत्तम-प्रयास प्रगति रिपोर्ट के रूप में, वैकल्पिक स्वायत्त हुक प्रवर्तन (`dailybot-cli >= 3.9.0`) के साथ। जोड़ी गई Dailybot एजेंट स्किल (3.23.3) स्थापित करने से चैट, चेक-इन, फ़ॉर्म ऑथरिंग, AI से पूछना, Plan बोर्ड और कार्य, per-repo API keys और अन्य सुविधाएँ भी उपलब्ध होती हैं — ऐडऑन केवल रिपोर्टिंग को DWP निष्पादन से जोड़ता है। मूल पद्धति की Dailybot पर शून्य निर्भरता है।
 - **Dependency upgrade** — पैकेज-मैनेजर-निरपेक्ष, बैच-आधारित, सत्यापित, वापस लेने योग्य अपग्रेड। स्वीकार किए जाने पर,
   यह `/lib-upgrade` कमांड स्थापित करता है।

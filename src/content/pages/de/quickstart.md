@@ -89,7 +89,7 @@ plus neun Sub-Skills — `create`, `execute`, `refine`, `resume`, `status`, `ver
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y
 ```
 
 Oder installiere über OpenClaw:
@@ -111,7 +111,7 @@ installierte Deep Work Plan Skill-Version. Das aktuelle Skill-Paket umfasst den 
 und neun Sub-Skills: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` und `upgrade`.
 
-Installierte Skill-Version: **7.5.0**. Das aktuelle 7.x-Paket erstellt neue Pläne standardmäßig mit v7. Bestehende Pläne behalten ihre aufgezeichnete Generation; die Migration eines v5-Plans zu v6 erfordert einen ausdrücklichen Auftrag mit Vorschau.
+Installierte Skill-Version: **7.5.1**. Das aktuelle 7.x-Paket erstellt neue Pläne standardmäßig mit v7. Bestehende Pläne behalten ihre aufgezeichnete Generation; die Migration eines v5-Plans zu v6 erfordert einen ausdrücklichen Auftrag mit Vorschau.
 
 Der Standard ist bewusst proportional und macht diese Proportionalität zu einer
 Eigenschaft des Plans, nicht der Disziplin des Entwicklers. Ein Plan ist entweder
@@ -193,7 +193,7 @@ Design System, agentkit, Herdr, DeepWorkPlan Vim), bieten Sie jedes als explizit
 halten Sie jede Annahme in `.dwp/config.json` fest. Ein Repository ist
 mit **null** optionalen Addons vollständig konform — installieren Sie diese niemals automatisch.
 
-- **Devcontainer-Unterstützung** — ein schlanker Integrator von [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, gepinnt auf `v0.2.10`, mit seinem Skill `dck-dockerfile`): `dck init` rendert den eigenen Container des Repositorys — offizielles Image per Digest gepinnt, kein gemeinsames Basis-Image, `bash dev.sh up` — und gleicht einen bestehenden Devcontainer erst ab, nachdem dessen Diff angenommen wurde; Coding-Agenten sind ein Opt-in-Layer.
+- **Devcontainer-Unterstützung** — ein schlanker Integrator von [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, gepinnt auf `v0.2.11`, mit seinem Skill `dck-dockerfile`): `dck init` rendert den eigenen Container des Repositorys — offizielles Image per Digest gepinnt, kein gemeinsames Basis-Image, `bash dev.sh up` — und gleicht einen bestehenden Devcontainer erst ab, nachdem dessen Diff angenommen wurde; Coding-Agenten sind ein Opt-in-Layer.
 - **Dailybot-Integration** — vier Lifecycle-Events (Kickoff, bedeutende Aufgabe, Blockiert, Abschluss) als Best-Effort-Fortschrittsberichte für Teams, die Dailybot bereits nutzen, mit optionaler autonomer Hook-Durchsetzung (`dailybot-cli >= 3.9.0`). Die Installation der gepaarten Dailybot-Agenten-Skill (3.23.3) bietet zusätzlich Chat, Check-ins, Formular-Erstellung, KI-Abfrage, Plan-Boards und -Aufgaben, Per-Repo-API-Keys und mehr — das Addon verbindet lediglich die Berichterstattung mit der DWP-Ausführung. Die zentrale Methodik hat keine Dailybot-Abhängigkeit.
 - **Dependency-Upgrade** — paketmanager-agnostische, chargenweise, validierte, rücknehmbare Upgrades. Wenn
  angenommen, installiert es den `/lib-upgrade`-Befehl.
